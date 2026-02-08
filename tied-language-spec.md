@@ -1,4 +1,4 @@
-# STDD Language Specification
+# TIED Language Specification
 
 **Version**: 0.3.0  
 **Status**: Draft Specification  
@@ -6,11 +6,11 @@
 
 ## Overview
 
-The STDD Language is a programming language designed from the ground up to support Semantic Token-Driven Development (STDD). It makes semantic tokens (`[REQ-*]`, `[ARCH-*]`, `[IMPL-*]`) first-class language constructs, enabling requirements to be embedded directly in source code with compile-time and runtime traceability.
+The TIED Language is a programming language designed from the ground up to support Token-Integrated Engineering & Development (TIED). It makes semantic tokens (`[REQ-*]`, `[ARCH-*]`, `[IMPL-*]`) first-class language constructs, enabling requirements to be embedded directly in source code with compile-time and runtime traceability.
 
-### STDD Requirements Compliance
+### TIED Requirements Compliance
 
-This language specification ensures full compliance with STDD methodology requirements:
+This language specification ensures full compliance with TIED methodology requirements:
 
 1. **Intent Preservation**: Semantic tokens preserve the "why" behind decisions throughout the development lifecycle
 2. **Traceability Chain**: Complete traceability from Requirements → Architecture → Implementation → Tests → Code
@@ -566,13 +566,13 @@ trace.enable(REQ:USER_LOGIN)
 
 ### Documentation Generation
 
-Auto-generate STDD-compliant documentation from tokens:
+Auto-generate TIED-compliant documentation from tokens:
 
 ```stdd
 // Generate documentation (compile-time and runtime)
 docs = generate_docs()
 
-// Output includes STDD-compliant structure:
+// Output includes TIED-compliant structure:
 // - requirements.md: All [REQ-*] tokens with descriptions, rationale, priority
 // - architecture-decisions.md: All [ARCH-*] tokens with cross-references to [REQ-*]
 // - implementation-decisions.md: All [IMPL-*] tokens with cross-references to [ARCH-*] and [REQ-*]
@@ -726,9 +726,9 @@ test "user login" [REQ-USER_LOGIN] {
 }
 ```
 
-## Example: Complete STDD-Compliant Program
+## Example: Complete TIED-Compliant Program
 
-This example demonstrates a complete program following STDD methodology:
+This example demonstrates a complete program following TIED methodology:
 
 ```stdd
 // ============================================
@@ -876,17 +876,17 @@ test "file monitoring" [REQ-FILE_MONITORING] {
 
 ### vs. Documentation Comments
 
-**STDD Language**: Tokens are first-class, validated, queryable  
+*TIED Language*: Tokens are first-class, validated, queryable  
 **Comments**: Tokens are text, not validated, not queryable
 
 ### vs. Annotations/Attributes
 
-**STDD Language**: Tokens have semantics, dependencies, traceability  
+*TIED Language*: Tokens have semantics, dependencies, traceability  
 **Annotations**: Just metadata, no relationships
 
 ### vs. Type Systems
 
-**STDD Language**: Tokens track intent, not just types  
+*TIED Language*: Tokens track intent, not just types  
 **Types**: Track data structure, not purpose
 
 ## Syntax Philosophy
@@ -900,9 +900,9 @@ The language uses a single, unified syntax that adapts to different needs:
 
 This approach avoids the complexity of multiple syntax variants while maintaining the flexibility to express both high-level business logic and low-level optimizations.
 
-## Pseudo-Code as Templates: STDD Phase 1 Support
+## Pseudo-Code as Templates: TIED Phase 1 Support
 
-The language bridges STDD Phase 1 (Requirements → Pseudo-Code) and Phase 3 (Implementation) by using the same syntax for both:
+The language bridges TIED Phase 1 (Requirements → Pseudo-Code) and Phase 3 (Implementation) by using the same syntax for both:
 
 ### Template-Driven Development
 
@@ -942,49 +942,49 @@ The language bridges STDD Phase 1 (Requirements → Pseudo-Code) and Phase 3 (Im
 - **Token Preservation**: Semantic tokens maintain intent throughout refinement
 - **Progressive Refinement**: Templates naturally evolve into implementations
 - **Completion Tracking**: Compiler tracks which templates are complete
-- **STDD Alignment**: Supports STDD Phase 1 (pseudo-code) → Phase 3 (implementation)
+- **TIED Alignment**: Supports TIED Phase 1 (pseudo-code) → Phase 3 (implementation)
 
-## STDD Methodology Compliance
+## TIED Methodology Compliance
 
-This language specification ensures complete compliance with STDD methodology:
+This language specification ensures complete compliance with TIED methodology:
 
-### Core STDD Principles Satisfied
+### Core TIED Principles Satisfied
 
 1. ✅ **Intent Preservation**: Semantic tokens preserve the "why" (rationale) alongside "what" (description) and "how" (implementation)
    - **Language Feature**: Required `rationale` field in all token declarations
-   - **STDD Requirement**: Preserve intent throughout development lifecycle
+   - **TIED Requirement**: Preserve intent throughout development lifecycle
 
 2. ✅ **Traceability Chain**: Complete REQ → ARCH → IMPL → Code → Tests chain with bidirectional navigation
    - **Language Feature**: Token dependency system with `depends` field, token annotations on code
-   - **STDD Requirement**: Requirements → Architecture → Implementation → Tests → Code
+   - **TIED Requirement**: Requirements → Architecture → Implementation → Tests → Code
 
 3. ✅ **Token Dependency Validation**: Compile-time validation ensures all token dependencies are valid
    - **Language Feature**: Compile-time validation of token dependency chains
-   - **STDD Requirement**: Explicit traceability with validated cross-references
+   - **TIED Requirement**: Explicit traceability with validated cross-references
 
 4. ✅ **Module Validation Support**: Built-in `validate` blocks support independent module validation before integration
    - **Language Feature**: `validate` blocks for modules, compile-time enforcement
-   - **STDD Requirement**: [REQ-MODULE_VALIDATION] - Independent module validation before integration
+   - **TIED Requirement**: [REQ-MODULE_VALIDATION] - Independent module validation before integration
 
 5. ✅ **Test Coverage Enforcement**: Compile-time requirement that every [REQ-*] has at least one test
    - **Language Feature**: Compile-time validation that all REQ have tests
-   - **STDD Requirement**: Tests validate requirements are met
+   - **TIED Requirement**: Tests validate requirements are met
 
-6. ✅ **Documentation Generation**: Auto-generate STDD-compliant documentation (requirements.md, architecture-decisions.md, etc.)
-   - **Language Feature**: `generate_docs()` with STDD-compliant output formats
-   - **STDD Requirement**: Living documentation connected to code via tokens
+6. ✅ **Documentation Generation**: Auto-generate TIED-compliant documentation (requirements.md, architecture-decisions.md, etc.)
+   - **Language Feature**: `generate_docs()` with TIED-compliant output formats
+   - **TIED Requirement**: Living documentation connected to code via tokens
 
 7. ✅ **Token Registry**: Central, queryable registry with complete traceability information
    - **Language Feature**: Runtime `TokenRegistry` with complete token metadata
-   - **STDD Requirement**: Central registry of all tokens (semantic-tokens.yaml YAML index)
+   - **TIED Requirement**: Central registry of all tokens (semantic-tokens.yaml YAML index)
 
 8. ✅ **Cross-Reference Completeness**: All token references validated at compile-time
    - **Language Feature**: Compile-time validation of all token references
-   - **STDD Requirement**: All cross-references must be valid and complete
+   - **TIED Requirement**: All cross-references must be valid and complete
 
-### STDD Workflow Support
+### TIED Workflow Support
 
-The language supports the complete STDD workflow:
+The language supports the complete TIED workflow:
 
 1. **Requirements Phase**: `req` declarations with description, rationale, priority
 2. **Architecture Phase**: `arch` declarations that must reference `req`
@@ -992,15 +992,15 @@ The language supports the complete STDD workflow:
 4. **Module Validation Phase**: `validate` blocks for independent module testing
 5. **Integration Phase**: Modules can only be imported after validation passes
 6. **Test Phase**: `test` declarations that must reference `req`
-7. **Documentation Phase**: Auto-generation of STDD documentation files
+7. **Documentation Phase**: Auto-generation of TIED documentation files
 
 ## Conclusion
 
-The STDD Language makes semantic tokens first-class language constructs, enabling requirements to be embedded directly in source code with compile-time validation and runtime traceability. It uses a unified, flexible syntax that preserves intent throughout the development lifecycle without requiring paradigm switches, while ensuring full compliance with STDD methodology requirements.
+The TIED Language makes semantic tokens first-class language constructs, enabling requirements to be embedded directly in source code with compile-time validation and runtime traceability. It uses a unified, flexible syntax that preserves intent throughout the development lifecycle without requiring paradigm switches, while ensuring full compliance with TIED methodology requirements.
 
 ### Key Innovation: Pseudo-Code Templates
 
-The language uniquely supports pseudo-code templates with semantic tokens that serve as implementation templates. This bridges STDD Phase 1 (Requirements → Pseudo-Code) and Phase 3 (Implementation) seamlessly:
+The language uniquely supports pseudo-code templates with semantic tokens that serve as implementation templates. This bridges TIED Phase 1 (Requirements → Pseudo-Code) and Phase 3 (Implementation) seamlessly:
 
 - **Same Syntax**: Pseudo-code and implementation use identical syntax - no translation needed
 - **Token-Driven Structure**: Semantic tokens define the template structure and maintain intent

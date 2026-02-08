@@ -1,6 +1,6 @@
 # Migration Guide: Semantic Token Format (Colon to Hyphen)
 
-**STDD Methodology Version**: 1.3.0  
+**TIED Methodology Version**: 1.3.0  
 **Audience**: AI Agents and Contributors
 
 This document provides step-by-step instructions for migrating a project from the **old colon-based token format** (`[TYPE:IDENTIFIER]`) to the **new hyphen-based format** (`[TYPE-IDENTIFIER]`).
@@ -170,7 +170,7 @@ Update the STDD methodology version in your documentation:
 
 ```bash
 # Update version references
-sed -i '' 's/STDD Methodology Version.*: 1.2.0/STDD Methodology Version**: 1.3.0/g' stdd/*.md
+sed -i '' 's/STDD Methodology Version.*: 1.2.0/STDD Methodology Version**: 1.3.0/g' tied/*.md
 ```
 
 ### Step 6: Verify Migration
@@ -204,7 +204,7 @@ grep -rE '\[(REQ|ARCH|IMPL|TEST|PROC):' .
 grep -rcE '\[(REQ|ARCH|IMPL|TEST|PROC)-' . | grep -v ':0$'
 
 # Verify token registry is consistent
-yq 'keys' stdd/semantic-tokens.yaml | sort -u
+yq 'keys' tied/semantic-tokens.yaml | sort -u
 
 # Check for any broken references
 # (Compare tokens in code vs. tokens in registry)

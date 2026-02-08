@@ -1,4 +1,4 @@
-# [REQ-STDD_SETUP] STDD Methodology Setup
+# [REQ-TIED_SETUP] STDD Methodology Setup
 
 **Category**: Functional  
 **Priority**: P0 (Critical)  
@@ -10,7 +10,7 @@
 
 ## Description
 
-The project must follow the Semantic Token-Driven Development (STDD) methodology, including a specific directory structure (`stdd/`) and documentation files (`requirements.md`, `architecture-decisions.md`, etc.).
+The project must follow the Token-Integrated Engineering & Development (TIED) methodology, including a specific directory structure (`tied/`) and documentation files (`requirements.md`, `architecture-decisions.md`, etc.).
 
 ## Rationale
 
@@ -18,7 +18,7 @@ To ensure traceability of intent from requirements to code and to maintain a con
 
 ## Satisfaction Criteria
 
-- `stdd/` directory exists
+- `tied/` directory exists
 - All required documentation files exist and are populated from templates:
   - `requirements.md` (index) with `requirements/` directory for detail files
   - `architecture-decisions.md` (index) with `architecture-decisions/` directory for detail files
@@ -39,10 +39,10 @@ To ensure traceability of intent from requirements to code and to maintain a con
 
 ## Traceability
 
-- **Architecture**: `ARCH-STDD_STRUCTURE` (see `architecture-decisions.yaml`)
-- **Implementation**: `IMPL-STDD_FILES` (see `implementation-decisions.yaml`)
+- **Architecture**: `ARCH-TIED_STRUCTURE` (see `architecture-decisions.yaml`)
+- **Implementation**: `IMPL-TIED_FILES` (see `implementation-decisions.yaml`)
 - **Tests**: Manual verification checklists
-- **Code**: Bootstrap scripts with `// [IMPL-STDD_FILES] [ARCH-STDD_STRUCTURE] [REQ-STDD_SETUP]`
+- **Code**: Bootstrap scripts with `// [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]`
 
 _Note: In `requirements.yaml`, traceability is stored as structured YAML lists for programmatic querying._
 

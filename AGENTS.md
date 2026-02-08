@@ -2,9 +2,9 @@
 
 **Scope**: Entire repository (root unless overridden by nested `AGENTS.md` files)
 
-**STDD Methodology Version**: 1.5.0
+**TIED Methodology Version**: 2.0.0
 
-This document centralizes every instruction AI coding assistants must follow while working in STDD repositories. It supersedes reminders in `.ai-agent-instructions`, `.cursorrules`, and README snippets. Treat it as the canonical reference when configuring prompts, IDE rules, or agent workflows.
+This document centralizes every instruction AI coding assistants must follow while working in TIED repositories. It supersedes reminders in `.ai-agent-instructions`, `.cursorrules`, and README snippets. Treat it as the canonical reference when configuring prompts, IDE rules, or agent workflows.
 
 ---
 
@@ -22,10 +22,10 @@ This document centralizes every instruction AI coding assistants must follow whi
 
 ---
 
-## 2. Core STDD Obligations
+## 2. Core TIED Obligations
 
 - **Semantic Token Discipline**
-  - Use `[REQ-*]`, `[ARCH-*]`, `[IMPL-*]`, and other STDD tokens everywhere (requirements, docs, code, tests).
+  - Use `[REQ-*]`, `[ARCH-*]`, `[IMPL-*]`, and other TIED tokens everywhere (requirements, docs, code, tests).
   - Maintain traceability: Requirements → Architecture → Implementation → Tests → Code.
   - Update `semantic-tokens.yaml` immediately when introducing new tokens.
 - **Documentation-First Flow**
@@ -74,6 +74,8 @@ This document centralizes every instruction AI coding assistants must follow whi
 - [ ] `tasks.md` marks completed work, removes finished subtasks, and leaves no stale entries
 - [ ] Module validation status is documented
 - [ ] All documentation matches the implemented state (no drift)
+- [ ] Verify all code and tests are consistently linked to requirements and decisions; update code and documentation where necessary
+- [ ] Do not create a stand-alone summary document for the session (e.g. no SESSION_SUMMARY.md or similar)
 
 ---
 
@@ -94,7 +96,7 @@ This document centralizes every instruction AI coding assistants must follow whi
 | `semantic-tokens.md` | Semantic tokens guide with format, naming conventions, and usage examples |
 | `requirements.md` | Requirements guide with documentation (copy from template per project) |
 | `requirements.yaml` | Requirements YAML index/database with all requirement records |
-| `requirements/` | Individual requirement detail files (e.g., `REQ-STDD_SETUP.md`) |
+| `requirements/` | Individual requirement detail files (e.g., `REQ-TIED_SETUP.md`) |
 | `architecture-decisions.md` | Architecture decisions guide with documentation (copy from template per project) |
 | `architecture-decisions.yaml` | Architecture decisions YAML index/database with `[ARCH-*]` records tied to requirements |
 | `architecture-decisions/` | Individual architecture decision detail files |

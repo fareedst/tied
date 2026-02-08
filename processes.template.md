@@ -47,9 +47,9 @@ Use the structure below for every process you document. Each entry should be kep
 - **Success Metrics** — Name how you know the process satisfied the requirement (e.g., updated token table, green builds, automated audits).
 
 ### Example: `[PROC-PROJECT_SURVEY_AND_SETUP]`
-- **Purpose** — Capture the context for `[REQ-STDD_SETUP]` before any new feature work.
+- **Purpose** — Capture the context for `[REQ-TIED_SETUP]` before any new feature work.
 - **Scope** — Applied to every new module or team onboarding cycle.
-- **Token references** — `[REQ-STDD_SETUP]`, `[ARCH-STDD_STRUCTURE]`, `[IMPL-STDD_FILES]`.
+- **Token references** — `[REQ-TIED_SETUP]`, `[ARCH-TIED_STRUCTURE]`, `[IMPL-TIED_FILES]`.
 - **Status** — Active.
 
 #### Core Activities
@@ -80,11 +80,11 @@ Use the structure below for every process you document. Each entry should be kep
 Provides succinct guidance for reading, writing, querying, and validating the YAML index files (`requirements.yaml`, `architecture-decisions.yaml`, `implementation-decisions.yaml`, `semantic-tokens.yaml`).
 
 ### Scope
-Applies to all STDD YAML index files in the `stdd/` directory.
+Applies to all STDD YAML index files in the `tied/` directory.
 
 ### Token references
-- `[REQ-STDD_SETUP]` — YAML indexes are part of STDD methodology setup
-- `[ARCH-STDD_STRUCTURE]` — YAML indexes are part of project structure
+- `[REQ-TIED_SETUP]` — YAML indexes are part of STDD methodology setup
+- `[ARCH-TIED_STRUCTURE]` — YAML indexes are part of project structure
 
 ### Status
 Active
@@ -94,7 +94,7 @@ Active
 #### 1. Appending a New Record
 
 **Manual Append:**
-1. Open the YAML file (e.g., `stdd/requirements.yaml`)
+1. Open the YAML file (e.g., `tied/requirements.yaml`)
 2. Scroll to the bottom and find the commented template block
 3. Copy the template block
 4. Paste it at the end with a blank line before it
@@ -106,7 +106,7 @@ Active
 **Scripted Append:**
 ```bash
 # Append a new requirement (v1.5.0 schema)
-cat >> stdd/requirements.yaml << 'EOF'
+cat >> tied/requirements.yaml << 'EOF'
 
 REQ-NEW_FEATURE:
   name: New Feature Name
@@ -158,30 +158,30 @@ EOF
 
 **Read Entire File:**
 ```bash
-cat stdd/requirements.yaml
+cat tied/requirements.yaml
 ```
 
 **Read Specific Record (with yq):**
 ```bash
 # Install yq if not already: https://github.com/mikefarah/yq
-yq '.REQ-STDD_SETUP' stdd/requirements.yaml
-yq '.["ARCH-STDD_STRUCTURE"]' stdd/architecture-decisions.yaml
+yq '.REQ-TIED_SETUP' tied/requirements.yaml
+yq '.["ARCH-TIED_STRUCTURE"]' tied/architecture-decisions.yaml
 ```
 
 **Read Specific Record (with grep):**
 ```bash
 # Quick lookup for humans
-grep -A 30 '^REQ-STDD_SETUP:' stdd/requirements.yaml
-grep -A 30 '^ARCH-STDD_STRUCTURE:' stdd/architecture-decisions.yaml
+grep -A 30 '^REQ-TIED_SETUP:' tied/requirements.yaml
+grep -A 30 '^ARCH-TIED_STRUCTURE:' tied/architecture-decisions.yaml
 ```
 
 **Filter by Status:**
 ```bash
 # List all active architecture decisions
-yq 'to_entries | map(select(.value.status == "Active")) | from_entries' stdd/architecture-decisions.yaml
+yq 'to_entries | map(select(.value.status == "Active")) | from_entries' tied/architecture-decisions.yaml
 
 # List all implemented requirements
-yq 'to_entries | map(select(.value.status == "Implemented")) | from_entries' stdd/requirements.yaml
+yq 'to_entries | map(select(.value.status == "Implemented")) | from_entries' tied/requirements.yaml
 ```
 
 **Query with Python:**
@@ -189,11 +189,11 @@ yq 'to_entries | map(select(.value.status == "Implemented")) | from_entries' std
 import yaml
 
 # Read YAML file
-with open('stdd/requirements.yaml', 'r') as f:
+with open('tied/requirements.yaml', 'r') as f:
     requirements = yaml.safe_load(f)
 
 # Access specific requirement
-req = requirements['REQ-STDD_SETUP']
+req = requirements['REQ-TIED_SETUP']
 print(f"Name: {req['name']}")
 print(f"Status: {req['status']}")
 print(f"Priority: {req['priority']}")
@@ -206,7 +206,7 @@ implemented = {k: v for k, v in requirements.items()
 **Query with jq (alternative to yq):**
 ```bash
 # Convert YAML to JSON first, then use jq
-yq -o=json '.' stdd/requirements.yaml | jq '.["REQ-STDD_SETUP"]'
+yq -o=json '.' tied/requirements.yaml | jq '.["REQ-TIED_SETUP"]'
 ```
 
 #### 3. Updating an Existing Record
@@ -218,15 +218,15 @@ yq -o=json '.' stdd/requirements.yaml | jq '.["REQ-STDD_SETUP"]'
 import yaml
 
 # Read
-with open('stdd/requirements.yaml', 'r') as f:
+with open('tied/requirements.yaml', 'r') as f:
     data = yaml.safe_load(f)
 
 # Update
-data['REQ-STDD_SETUP']['last_updated'] = '2026-02-06'
-data['REQ-STDD_SETUP']['last_validator'] = 'New Validator'
+data['REQ-TIED_SETUP']['last_updated'] = '2026-02-06'
+data['REQ-TIED_SETUP']['last_validator'] = 'New Validator'
 
 # Write back
-with open('stdd/requirements.yaml', 'w') as f:
+with open('tied/requirements.yaml', 'w') as f:
     yaml.dump(data, f, default_flow_style=False, sort_keys=False)
 ```
 
@@ -236,113 +236,113 @@ with open('stdd/requirements.yaml', 'w') as f:
 
 **Validate with yq:**
 ```bash
-yq '.' stdd/requirements.yaml > /dev/null && echo "✅ Valid YAML" || echo "❌ Invalid YAML"
-yq '.' stdd/architecture-decisions.yaml > /dev/null && echo "✅ Valid YAML" || echo "❌ Invalid YAML"
-yq '.' stdd/implementation-decisions.yaml > /dev/null && echo "✅ Valid YAML" || echo "❌ Invalid YAML"
+yq '.' tied/requirements.yaml > /dev/null && echo "✅ Valid YAML" || echo "❌ Invalid YAML"
+yq '.' tied/architecture-decisions.yaml > /dev/null && echo "✅ Valid YAML" || echo "❌ Invalid YAML"
+yq '.' tied/implementation-decisions.yaml > /dev/null && echo "✅ Valid YAML" || echo "❌ Invalid YAML"
 ```
 
 **Validate with Python:**
 ```bash
-python3 -c "import yaml, sys; yaml.safe_load(open('stdd/requirements.yaml'))" && echo "✅ Valid" || echo "❌ Invalid"
+python3 -c "import yaml, sys; yaml.safe_load(open('tied/requirements.yaml'))" && echo "✅ Valid" || echo "❌ Invalid"
 ```
 
 **Validate with yamllint (if installed):**
 ```bash
-yamllint stdd/requirements.yaml
-yamllint stdd/architecture-decisions.yaml
-yamllint stdd/implementation-decisions.yaml
+yamllint tied/requirements.yaml
+yamllint tied/architecture-decisions.yaml
+yamllint tied/implementation-decisions.yaml
 ```
 
 #### 5. Listing All Tokens
 
 **List all requirement tokens:**
 ```bash
-yq 'keys' stdd/requirements.yaml
+yq 'keys' tied/requirements.yaml
 # or with grep:
-grep '^[A-Z].*:$' stdd/requirements.yaml | sed 's/:$//'
+grep '^[A-Z].*:$' tied/requirements.yaml | sed 's/:$//'
 ```
 
 **List all architecture decision tokens:**
 ```bash
-yq 'keys' stdd/architecture-decisions.yaml
+yq 'keys' tied/architecture-decisions.yaml
 ```
 
 **List all implementation decision tokens:**
 ```bash
-yq 'keys' stdd/implementation-decisions.yaml
+yq 'keys' tied/implementation-decisions.yaml
 ```
 
 **List all semantic tokens:**
 ```bash
-yq 'keys' stdd/semantic-tokens.yaml
+yq 'keys' tied/semantic-tokens.yaml
 ```
 
 **Filter semantic tokens by type:**
 ```bash
 # List all REQ tokens
-yq 'to_entries | map(select(.value.type == "REQ")) | from_entries' stdd/semantic-tokens.yaml
+yq 'to_entries | map(select(.value.type == "REQ")) | from_entries' tied/semantic-tokens.yaml
 
 # List all ARCH tokens
-yq 'to_entries | map(select(.value.type == "ARCH")) | from_entries' stdd/semantic-tokens.yaml
+yq 'to_entries | map(select(.value.type == "ARCH")) | from_entries' tied/semantic-tokens.yaml
 
 # List all PROC tokens
-yq 'to_entries | map(select(.value.type == "PROC")) | from_entries' stdd/semantic-tokens.yaml
+yq 'to_entries | map(select(.value.type == "PROC")) | from_entries' tied/semantic-tokens.yaml
 ```
 
 **Check if a token exists:**
 ```bash
-yq '.["REQ-STDD_SETUP"]' stdd/semantic-tokens.yaml
+yq '.["REQ-TIED_SETUP"]' tied/semantic-tokens.yaml
 ```
 
 **Get token metadata:**
 ```bash
 # Get token type and status
-yq '.REQ-STDD_SETUP | {type: .type, status: .status}' stdd/semantic-tokens.yaml
+yq '.REQ-TIED_SETUP | {type: .type, status: .status}' tied/semantic-tokens.yaml
 
 # Get source index for full details
-yq '.REQ-STDD_SETUP.source_index' stdd/semantic-tokens.yaml
+yq '.REQ-TIED_SETUP.source_index' tied/semantic-tokens.yaml
 ```
 
 #### 6. Checking Cross-References (v1.5.0 Schema)
 
 **Find all requirements referenced by an architecture decision:**
 ```bash
-yq '.ARCH-STDD_STRUCTURE.cross_references[]' stdd/architecture-decisions.yaml
+yq '.ARCH-TIED_STRUCTURE.cross_references[]' tied/architecture-decisions.yaml
 ```
 
 **Find all architecture/requirement tokens referenced by an implementation:**
 ```bash
-yq '.IMPL-MODULE_VALIDATION.cross_references[]' stdd/implementation-decisions.yaml
+yq '.IMPL-MODULE_VALIDATION.cross_references[]' tied/implementation-decisions.yaml
 ```
 
 **Query structured traceability (v1.5.0):**
 ```bash
 # Get architecture dependencies for a requirement
-yq '.REQ-STDD_SETUP.traceability.architecture[]' stdd/requirements.yaml
+yq '.REQ-TIED_SETUP.traceability.architecture[]' tied/requirements.yaml
 
 # Get tests for a requirement
-yq '.REQ-STDD_SETUP.traceability.tests[]' stdd/requirements.yaml
+yq '.REQ-TIED_SETUP.traceability.tests[]' tied/requirements.yaml
 
 # Get implementation dependencies for an architecture decision
-yq '.ARCH-STDD_STRUCTURE.traceability.implementation[]' stdd/architecture-decisions.yaml
+yq '.ARCH-TIED_STRUCTURE.traceability.implementation[]' tied/architecture-decisions.yaml
 
 # Get code locations for an implementation
-yq '.IMPL-STDD_FILES.code_locations.files[].path' stdd/implementation-decisions.yaml
+yq '.IMPL-TIED_FILES.code_locations.files[].path' tied/implementation-decisions.yaml
 ```
 
 **Query structured content (v1.5.0):**
 ```bash
 # Get satisfaction criteria for a requirement
-yq '.REQ-STDD_SETUP.satisfaction_criteria[].criterion' stdd/requirements.yaml
+yq '.REQ-TIED_SETUP.satisfaction_criteria[].criterion' tied/requirements.yaml
 
 # Get alternatives considered for an architecture decision
-yq '.ARCH-STDD_STRUCTURE.alternatives_considered[].name' stdd/architecture-decisions.yaml
+yq '.ARCH-TIED_STRUCTURE.alternatives_considered[].name' tied/architecture-decisions.yaml
 
 # Get implementation approach summary
-yq '.IMPL-MODULE_VALIDATION.implementation_approach.summary' stdd/implementation-decisions.yaml
+yq '.IMPL-MODULE_VALIDATION.implementation_approach.summary' tied/implementation-decisions.yaml
 
 # Get metadata
-yq '.REQ-STDD_SETUP.metadata.last_validated.result' stdd/requirements.yaml
+yq '.REQ-TIED_SETUP.metadata.last_validated.result' tied/requirements.yaml
 ```
 
 ### Artifacts & Metrics

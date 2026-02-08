@@ -180,7 +180,7 @@ STDD v1.0.1 is ready for production use. We're excited to see how teams adopt an
 
 **STDD Methodology Version**: 1.0.1  
 **Release Date**: November 8, 2025  
-**Repository**: [https://github.com/fareedst/stdd](https://github.com/fareedst/stdd)
+**Repository**: [https://github.com/fareedst/tied](https://github.com/fareedst/tied)
 
-For questions, feedback, or contributions, please visit the [STDD repository on GitHub](https://github.com/fareedst/stdd).
+For questions, feedback, or contributions, please visit the [STDD repository on GitHub](https://github.com/fareedst/tied).
 

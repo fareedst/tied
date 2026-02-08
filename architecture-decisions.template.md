@@ -11,11 +11,11 @@ All decisions are cross-referenced with requirements using `[REQ-*]` tokens for 
 ## Directory Structure
 
 ```
-stdd/
+tied/
 ├── architecture-decisions.md              # This guide file (you are here)
 ├── architecture-decisions.yaml            # YAML index/database of all architecture decisions
 ├── architecture-decisions/                # Detail files directory
-│   ├── ARCH-STDD_STRUCTURE.md
+│   ├── ARCH-TIED_STRUCTURE.md
 │   ├── ARCH-MODULE_VALIDATION.md
 │   ├── ARCH-LANGUAGE_SELECTION.md
 │   └── ...
@@ -59,28 +59,28 @@ To view the index:
 
 ```bash
 # View entire index
-cat stdd/architecture-decisions.yaml
+cat tied/architecture-decisions.yaml
 
 # View specific decision
-yq '.ARCH-STDD_STRUCTURE' stdd/architecture-decisions.yaml
+yq '.ARCH-TIED_STRUCTURE' tied/architecture-decisions.yaml
 
 # Get rationale for a decision
-yq '.ARCH-STDD_STRUCTURE.rationale.why' stdd/architecture-decisions.yaml
+yq '.ARCH-TIED_STRUCTURE.rationale.why' tied/architecture-decisions.yaml
 
 # Get alternatives considered
-yq '.ARCH-STDD_STRUCTURE.alternatives_considered[].name' stdd/architecture-decisions.yaml
+yq '.ARCH-TIED_STRUCTURE.alternatives_considered[].name' tied/architecture-decisions.yaml
 
 # Get implementation approach summary
-yq '.ARCH-STDD_STRUCTURE.implementation_approach.summary' stdd/architecture-decisions.yaml
+yq '.ARCH-TIED_STRUCTURE.implementation_approach.summary' tied/architecture-decisions.yaml
 
 # Get requirement dependencies
-yq '.ARCH-STDD_STRUCTURE.traceability.requirements[]' stdd/architecture-decisions.yaml
+yq '.ARCH-TIED_STRUCTURE.traceability.requirements[]' tied/architecture-decisions.yaml
 
 # List all active decisions
-yq 'to_entries | map(select(.value.status == "Active")) | from_entries' stdd/architecture-decisions.yaml
+yq 'to_entries | map(select(.value.status == "Active")) | from_entries' tied/architecture-decisions.yaml
 
 # Quick grep search
-grep -A 30 '^ARCH-STDD_STRUCTURE:' stdd/architecture-decisions.yaml
+grep -A 30 '^ARCH-TIED_STRUCTURE:' tied/architecture-decisions.yaml
 ```
 
 ### How to Append a New Architecture Decision
@@ -96,7 +96,7 @@ grep -A 30 '^ARCH-STDD_STRUCTURE:' stdd/architecture-decisions.yaml
 Example append operation:
 
 ```bash
-cat >> stdd/architecture-decisions.yaml << 'EOF'
+cat >> tied/architecture-decisions.yaml << 'EOF'
 
 ARCH-NEW_DECISION:
   name: New Architecture Decision
@@ -236,7 +236,7 @@ Tests expected to reference `[REQ-*]` / `[TEST-*]` tokens:
 
 ```bash
 # 1. Create the detail file
-touch stdd/architecture-decisions/ARCH-YOUR_TOKEN.md
+touch tied/architecture-decisions/ARCH-YOUR_TOKEN.md
 
 # 2. Copy the template above into the new file
 
@@ -256,7 +256,7 @@ For very large projects, organize detail files by domain:
 ```
 architecture-decisions/
 ├── core/
-│   ├── ARCH-STDD_STRUCTURE.md
+│   ├── ARCH-TIED_STRUCTURE.md
 │   └── ARCH-MODULE_VALIDATION.md
 ├── auth/
 │   ├── ARCH-AUTH_FLOW.md

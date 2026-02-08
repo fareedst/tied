@@ -24,14 +24,14 @@
 
 ---
 
-IMPL-STDD_FILES:
+IMPL-TIED_FILES:
   name: STDD File Creation
   status: Active
   cross_references:
-    - ARCH-STDD_STRUCTURE
-    - REQ-STDD_SETUP
+    - ARCH-TIED_STRUCTURE
+    - REQ-TIED_SETUP
   rationale:
-    why: "Implements ARCH-STDD_STRUCTURE and realizes REQ-STDD_SETUP by creating the foundational STDD directory structure and files"
+    why: "Implements ARCH-TIED_STRUCTURE and realizes REQ-TIED_SETUP by creating the foundational STDD directory structure and files"
     problems_solved:
       - "Manual setup of STDD structure is error-prone"
       - "Inconsistent project structure across implementations"
@@ -41,9 +41,9 @@ IMPL-STDD_FILES:
       - "All required files and directories created correctly"
       - "Easy project bootstrapping with single command"
   implementation_approach:
-    summary: "Bootstrap script that creates stdd/ directory, copies template files, and sets up base files"
+    summary: "Bootstrap script that creates tied/ directory, copies template files, and sets up base files"
     details:
-      - "Create stdd/ directory at project root"
+      - "Create tied/ directory at project root"
       - "Copy YAML index files from templates (requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml)"
       - "Copy guide files from templates (semantic-tokens.md, tasks.md, processes.md)"
       - "Create detail subdirectories (requirements/, architecture-decisions/, implementation-decisions/)"
@@ -59,22 +59,22 @@ IMPL-STDD_FILES:
         description: "Creates directories and copies template files (if implemented as function)"
   traceability:
     architecture:
-      - ARCH-STDD_STRUCTURE
+      - ARCH-TIED_STRUCTURE
     requirements:
-      - REQ-STDD_SETUP
+      - REQ-TIED_SETUP
     tests:
       - Manual verification checklists
     code_annotations:
-      - IMPL-STDD_FILES
-      - ARCH-STDD_STRUCTURE
-      - REQ-STDD_SETUP
+      - IMPL-TIED_FILES
+      - ARCH-TIED_STRUCTURE
+      - REQ-TIED_SETUP
   related_decisions:
     depends_on: []
     supersedes: []
     see_also:
-      - ARCH-STDD_STRUCTURE
-      - REQ-STDD_SETUP
-  detail_file: implementation-decisions/IMPL-STDD_FILES.md
+      - ARCH-TIED_STRUCTURE
+      - REQ-TIED_SETUP
+  detail_file: implementation-decisions/IMPL-TIED_FILES.md
   metadata:
     created:
       date: 2025-12-18

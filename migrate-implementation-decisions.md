@@ -1,6 +1,6 @@
 # Migration Guide: Implementation Decisions File Structure
 
-**STDD Methodology Version**: 1.4.0  
+**TIED Methodology Version**: 1.4.0  
 **Audience**: AI Agents and Contributors
 
 This document provides step-by-step instructions for migrating a project from a **monolithic** `implementation-decisions.md` file to the **scalable index + detail files** structure.
@@ -34,7 +34,7 @@ Before starting migration:
 ### Step 1: Create the Detail Files Directory
 
 ```bash
-mkdir -p stdd/implementation-decisions
+mkdir -p tied/implementation-decisions
 ```
 
 ### Step 2: Identify All Implementation Decision Sections
@@ -48,7 +48,7 @@ Scan the monolithic file for sections. Each section typically follows this patte
 Create a list of all `[IMPL-*]` tokens found:
 
 ```bash
-grep -oE '\[IMPL-[A-Z_]+\]' stdd/implementation-decisions.md | sort -u
+grep -oE '\[IMPL-[A-Z_]+\]' tied/implementation-decisions.md | sort -u
 ```
 
 ### Step 3: Extract Each Section to a Detail File
@@ -108,7 +108,7 @@ For each `[IMPL-TOKEN_NAME]` found:
 3. **Write the file**:
    ```bash
    # Example for each token
-   touch stdd/implementation-decisions/IMPL-CONFIG_STRUCT.md
+   touch tied/implementation-decisions/IMPL-CONFIG_STRUCT.md
    # Then populate with content
    ```
 
@@ -196,11 +196,11 @@ Check that all detail file links in the index are valid:
 
 ```bash
 # List all detail files
-ls stdd/implementation-decisions/
+ls tied/implementation-decisions/
 
 # Verify each link in the index resolves
-grep -oE 'implementation-decisions/IMPL-[A-Z_]+\.md' stdd/implementation-decisions.md | while read f; do
-  if [ ! -f "stdd/$f" ]; then
+grep -oE 'implementation-decisions/IMPL-[A-Z_]+\.md' tied/implementation-decisions.md | while read f; do
+  if [ ! -f "tied/$f" ]; then
     echo "MISSING: $f"
   fi
 done
@@ -224,10 +224,10 @@ done
 
 ```bash
 # Count tokens in original (if backup exists)
-grep -c '\[IMPL-' stdd/implementation-decisions.md.bak
+grep -c '\[IMPL-' tied/implementation-decisions.md.bak
 
 # Count detail files created
-ls stdd/implementation-decisions/IMPL-*.md | wc -l
+ls tied/implementation-decisions/IMPL-*.md | wc -l
 
 # These counts should match (or detail files >= tokens if some tokens appeared multiple times)
 ```
@@ -278,17 +278,17 @@ If migration needs to be reverted:
 
 1. Restore the backup:
    ```bash
-   cp stdd/implementation-decisions.md.bak stdd/implementation-decisions.md
+   cp tied/implementation-decisions.md.bak tied/implementation-decisions.md
    ```
 
 2. Remove the detail files directory:
    ```bash
-   rm -rf stdd/implementation-decisions/
+   rm -rf tied/implementation-decisions/
    ```
 
 3. Revert `semantic-tokens.yaml` changes:
    ```bash
-   git checkout stdd/semantic-tokens.yaml
+   git checkout tied/semantic-tokens.yaml
    ```
 
 ---

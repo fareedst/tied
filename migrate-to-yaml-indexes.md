@@ -1,6 +1,6 @@
 # Migration Guide: Markdown Table Indexes to YAML Indexes
 
-**STDD Methodology Version**: 1.4.0  
+**TIED Methodology Version**: 1.4.0  
 **Audience**: AI Agents and Contributors
 
 This document provides step-by-step instructions for migrating a project from **Markdown table-based index files** to **YAML database index files** for requirements, architecture decisions, and implementation decisions.
@@ -10,7 +10,7 @@ This document provides step-by-step instructions for migrating a project from **
 ## When to Migrate
 
 Consider migration when:
-- Your STDD project uses Markdown tables in index files (from STDD v1.3.0 or earlier)
+- Your TIED project uses Markdown tables in index files (from STDD v1.3.0 or earlier)
 - You want easier programmatic access to index data (filtering, querying, validation)
 - You want to avoid Markdown table formatting issues and merge conflicts
 - You want append-only semantics for adding new records
@@ -19,7 +19,7 @@ Consider migration when:
 
 ## What Changes
 
-### Before (STDD v1.3.0 and earlier)
+### Before (TIED v1.3.0 and earlier)
 
 Index files contained Markdown tables:
 
@@ -48,7 +48,7 @@ REQ-STDD_SETUP:
     benefits:
       - "Complete traceability"
   satisfaction_criteria:
-    - criterion: "stdd/ directory exists with proper structure"
+    - criterion: "tied/ directory exists with proper structure"
   validation_criteria:
     - method: "Manual verification"
       coverage: "File existence checks"
@@ -96,14 +96,14 @@ From the STDD repository, copy these new files to your project:
 
 ```bash
 # From STDD repository root
-cp requirements.template.yaml /path/to/your/project/stdd/requirements.yaml
-cp architecture-decisions.template.yaml /path/to/your/project/stdd/architecture-decisions.yaml
-cp implementation-decisions.template.yaml /path/to/your/project/stdd/implementation-decisions.yaml
+cp requirements.template.yaml /path/to/your/project/tied/requirements.yaml
+cp architecture-decisions.template.yaml /path/to/your/project/tied/architecture-decisions.yaml
+cp implementation-decisions.template.yaml /path/to/your/project/tied/implementation-decisions.yaml
 
 # Also update the guide files
-cp requirements.template.md /path/to/your/project/stdd/requirements.md
-cp architecture-decisions.template.md /path/to/your/project/stdd/architecture-decisions.md
-cp implementation-decisions.template.md /path/to/your/project/stdd/implementation-decisions.md
+cp requirements.template.md /path/to/your/project/tied/requirements.md
+cp architecture-decisions.template.md /path/to/your/project/tied/architecture-decisions.md
+cp implementation-decisions.template.md /path/to/your/project/tied/implementation-decisions.md
 ```
 
 ### Step 2: Migrate Requirements Index
@@ -178,7 +178,7 @@ for req in old_requirements:
     token = req['token'].strip('[]')  # Remove brackets
     
     # Read detail file for full information
-    detail_path = f"stdd/{req['detail_file']}"
+    detail_path = f"tied/{req['detail_file']}"
     # Parse detail file sections (Description, Rationale, etc.)
     
     requirements[token] = {
@@ -199,7 +199,7 @@ for req in old_requirements:
     }
 
 # Write to requirements.yaml
-with open('stdd/requirements.yaml', 'w') as f:
+with open('tied/requirements.yaml', 'w') as f:
     # Write header comments first
     f.write("# Requirements Index (YAML Database)\n")
     f.write("# ...\n---\n\n")
@@ -311,14 +311,14 @@ After migration, validate all YAML files:
 
 ```bash
 # Using yq
-yq '.' stdd/requirements.yaml > /dev/null && echo "✅ Valid" || echo "❌ Invalid"
-yq '.' stdd/architecture-decisions.yaml > /dev/null && echo "✅ Valid" || echo "❌ Invalid"
-yq '.' stdd/implementation-decisions.yaml > /dev/null && echo "✅ Valid" || echo "❌ Invalid"
+yq '.' tied/requirements.yaml > /dev/null && echo "✅ Valid" || echo "❌ Invalid"
+yq '.' tied/architecture-decisions.yaml > /dev/null && echo "✅ Valid" || echo "❌ Invalid"
+yq '.' tied/implementation-decisions.yaml > /dev/null && echo "✅ Valid" || echo "❌ Invalid"
 
 # Using Python
-python3 -c "import yaml; yaml.safe_load(open('stdd/requirements.yaml'))" && echo "✅ Valid"
-python3 -c "import yaml; yaml.safe_load(open('stdd/architecture-decisions.yaml'))" && echo "✅ Valid"
-python3 -c "import yaml; yaml.safe_load(open('stdd/implementation-decisions.yaml'))" && echo "✅ Valid"
+python3 -c "import yaml; yaml.safe_load(open('tied/requirements.yaml'))" && echo "✅ Valid"
+python3 -c "import yaml; yaml.safe_load(open('tied/architecture-decisions.yaml'))" && echo "✅ Valid"
+python3 -c "import yaml; yaml.safe_load(open('tied/implementation-decisions.yaml'))" && echo "✅ Valid"
 ```
 
 ### Step 7: Verify Traceability
@@ -327,19 +327,19 @@ Check that all cross-references are correct:
 
 ```bash
 # List all REQ tokens in requirements.yaml
-yq 'keys' stdd/requirements.yaml
+yq 'keys' tied/requirements.yaml
 
 # List all ARCH tokens in architecture-decisions.yaml
-yq 'keys' stdd/architecture-decisions.yaml
+yq 'keys' tied/architecture-decisions.yaml
 
 # List all IMPL tokens in implementation-decisions.yaml
-yq 'keys' stdd/implementation-decisions.yaml
+yq 'keys' tied/implementation-decisions.yaml
 
 # Check that ARCH cross-references point to valid REQ tokens
-yq '.[] | select(.cross_references) | .cross_references[]' stdd/architecture-decisions.yaml | sort -u
+yq '.[] | select(.cross_references) | .cross_references[]' tied/architecture-decisions.yaml | sort -u
 
 # Check that IMPL cross-references point to valid ARCH and REQ tokens
-yq '.[] | select(.cross_references) | .cross_references[]' stdd/implementation-decisions.yaml | sort -u
+yq '.[] | select(.cross_references) | .cross_references[]' tied/implementation-decisions.yaml | sort -u
 ```
 
 ### Step 8: Update AGENTS.md and ai-principles.md
@@ -348,9 +348,9 @@ If you maintain custom versions of these files, update them to reference the new
 
 ```bash
 # Find references to old index files
-grep -n "requirements\.md" stdd/AGENTS.md stdd/ai-principles.md
-grep -n "architecture-decisions\.md" stdd/AGENTS.md stdd/ai-principles.md
-grep -n "implementation-decisions\.md" stdd/AGENTS.md stdd/ai-principles.md
+grep -n "requirements\.md" tied/AGENTS.md tied/ai-principles.md
+grep -n "architecture-decisions\.md" tied/AGENTS.md tied/ai-principles.md
+grep -n "implementation-decisions\.md" tied/AGENTS.md tied/ai-principles.md
 
 # Replace with .yaml references where appropriate
 ```
@@ -380,16 +380,16 @@ If migration fails or needs to be reverted:
 
 1. **Restore from backup or git**:
    ```bash
-   git checkout HEAD~1 -- stdd/requirements.md
-   git checkout HEAD~1 -- stdd/architecture-decisions.md
-   git checkout HEAD~1 -- stdd/implementation-decisions.md
+   git checkout HEAD~1 -- tied/requirements.md
+   git checkout HEAD~1 -- tied/architecture-decisions.md
+   git checkout HEAD~1 -- tied/implementation-decisions.md
    ```
 
 2. **Remove YAML files**:
    ```bash
-   rm stdd/requirements.yaml
-   rm stdd/architecture-decisions.yaml
-   rm stdd/implementation-decisions.yaml
+   rm tied/requirements.yaml
+   rm tied/architecture-decisions.yaml
+   rm tied/implementation-decisions.yaml
    ```
 
 3. **Update cross-references** back to `.md` files
@@ -416,13 +416,13 @@ See `processes.md` § `[PROC-YAML_DB_OPERATIONS]` for comprehensive examples:
 
 ```bash
 # List all P0 requirements
-yq 'to_entries | map(select(.value.priority == "P0")) | from_entries' stdd/requirements.yaml
+yq 'to_entries | map(select(.value.priority == "P0")) | from_entries' tied/requirements.yaml
 
 # Find all architecture decisions for a specific requirement
-yq '.[] | select(.cross_references[] == "REQ-USER_AUTH")' stdd/architecture-decisions.yaml
+yq '.[] | select(.cross_references[] == "REQ-USER_AUTH")' tied/architecture-decisions.yaml
 
 # List all active implementation decisions
-yq 'to_entries | map(select(.value.status == "Active")) | from_entries' stdd/implementation-decisions.yaml
+yq 'to_entries | map(select(.value.status == "Active")) | from_entries' tied/implementation-decisions.yaml
 ```
 
 ---
@@ -461,10 +461,10 @@ rationale: |
 
 ```bash
 # Extract all REQ tokens referenced in architecture decisions
-yq '.[] | select(.cross_references) | .cross_references[]' stdd/architecture-decisions.yaml | sort -u > arch_refs.txt
+yq '.[] | select(.cross_references) | .cross_references[]' tied/architecture-decisions.yaml | sort -u > arch_refs.txt
 
 # Extract all REQ tokens that exist
-yq 'keys | .[]' stdd/requirements.yaml | sort -u > req_tokens.txt
+yq 'keys | .[]' tied/requirements.yaml | sort -u > req_tokens.txt
 
 # Find references that don't have corresponding tokens
 comm -23 arch_refs.txt req_tokens.txt
@@ -505,9 +505,9 @@ Download the new v1.5.0 templates:
 
 ```bash
 # From STDD repository
-cp requirements.template.yaml /path/to/your/project/stdd/
-cp architecture-decisions.template.yaml /path/to/your/project/stdd/
-cp implementation-decisions.template.yaml /path/to/your/project/stdd/
+cp requirements.template.yaml /path/to/your/project/tied/
+cp architecture-decisions.template.yaml /path/to/your/project/tied/
+cp implementation-decisions.template.yaml /path/to/your/project/tied/
 ```
 
 #### Step 3: Migrate Each YAML File
@@ -649,7 +649,7 @@ def extract_tests(text):
     return re.findall(pattern, text)
 
 # Main migration
-with open('stdd/requirements.yaml', 'r') as f:
+with open('tied/requirements.yaml', 'r') as f:
     requirements = yaml.safe_load(f)
 
 migrated_requirements = {}
@@ -659,7 +659,7 @@ for token, data in requirements.items():
     else:
         migrated_requirements[token] = data
 
-with open('stdd/requirements.yaml', 'w') as f:
+with open('tied/requirements.yaml', 'w') as f:
     yaml.dump(migrated_requirements, f, default_flow_style=False, sort_keys=False, allow_unicode=True)
 ```
 
@@ -676,23 +676,23 @@ After automated migration:
 #### Step 6: Update Guide Files
 
 ```bash
-cp requirements.template.md /path/to/your/project/stdd/requirements.md
-cp architecture-decisions.template.md /path/to/your/project/stdd/architecture-decisions.md
-cp implementation-decisions.template.md /path/to/your/project/stdd/implementation-decisions.md
-cp processes.template.md /path/to/your/project/stdd/processes.md
+cp requirements.template.md /path/to/your/project/tied/requirements.md
+cp architecture-decisions.template.md /path/to/your/project/tied/architecture-decisions.md
+cp implementation-decisions.template.md /path/to/your/project/tied/implementation-decisions.md
+cp processes.template.md /path/to/your/project/tied/processes.md
 ```
 
 #### Step 7: Validate
 
 ```bash
 # Validate YAML syntax
-yq '.' stdd/requirements.yaml > /dev/null && echo "✅ Valid"
-yq '.' stdd/architecture-decisions.yaml > /dev/null && echo "✅ Valid"
-yq '.' stdd/implementation-decisions.yaml > /dev/null && echo "✅ Valid"
+yq '.' tied/requirements.yaml > /dev/null && echo "✅ Valid"
+yq '.' tied/architecture-decisions.yaml > /dev/null && echo "✅ Valid"
+yq '.' tied/implementation-decisions.yaml > /dev/null && echo "✅ Valid"
 
 # Test new queries
-yq '.REQ-STDD_SETUP.traceability.architecture[]' stdd/requirements.yaml
-yq '.REQ-STDD_SETUP.satisfaction_criteria[].criterion' stdd/requirements.yaml
+yq '.REQ-STDD_SETUP.traceability.architecture[]' tied/requirements.yaml
+yq '.REQ-STDD_SETUP.satisfaction_criteria[].criterion' tied/requirements.yaml
 ```
 
 ### Benefits of v1.5.0

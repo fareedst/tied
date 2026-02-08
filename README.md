@@ -1,12 +1,14 @@
-# STDD Methodology Template
+# TIED Methodology Template
 
-**STDD Methodology Version**: 1.5.0
+**TIED Methodology Version**: 2.0.0
 
-This repository ([https://github.com/fareedst/stdd](https://github.com/fareedst/stdd)) contains the **Semantic Token-Driven Development (STDD)** methodology template that can be used as a base for development projects in any language.
+> **Note**: This methodology was previously known as STDD (Semantic Token-Driven Development). It has been renamed to TIED (Token-Integrated Engineering & Development) to better reflect its core value proposition: semantic tokens "tie" code to intent, making it impossible to modify code without confronting related context.
 
-## What is STDD?
+This repository ([https://github.com/fareedst/tied](https://github.com/fareedst/tied)) contains the **Token-Integrated Engineering & Development (TIED)** methodology template that can be used as a base for development projects in any language.
 
-**Semantic Token-Driven Development (STDD)** uses semantic tokens to create a traceable chain from requirements through architecture and implementation to tests and code.
+## What is TIED?
+
+**Token-Integrated Engineering & Development (TIED)** uses semantic tokens to create a traceable chain from requirements through architecture and implementation to tests and code.
 
 ### Key Benefits
 
@@ -20,39 +22,39 @@ This repository ([https://github.com/fareedst/stdd](https://github.com/fareedst/
 
 ### Step 1: Copy Templates to Your Project
 
-**Recommended:** Download or clone the STDD repository somewhere convenient, then run `./copy_files.sh /path/to/project` (or `./copy_files.sh` if you are already in the project directory). The script copies every `.template` file into the target project's `stdd/` directory, removes the `.template` suffix for you, and will never overwrite an existing `AGENTS.md` or `.cursorrules` file that may already be present in the destination.
+**Recommended:** Download or clone the TIED repository somewhere convenient, then run `./copy_files.sh /path/to/project` (or `./copy_files.sh` if you are already in the project directory). The script copies every `.template` file into the target project's `tied/` directory, removes the `.template` suffix for you, and will never overwrite an existing `AGENTS.md` or `.cursorrules` file that may already be present in the destination.
 
 ```bash
-# From the STDD repo root—adjust the target path as needed
+# From the TIED repo root—adjust the target path as needed
 ./copy_files.sh /path/to/your/project
 ```
 
 **Alternative (manual):**
 
 ```bash
-# In your project directory (after cloning/downloading the STDD repository)
-mkdir -p stdd
-cp requirements.template.md stdd/requirements.md
-cp requirements.template.yaml stdd/requirements.yaml
-mkdir -p stdd/requirements
-cp requirements.template/*.md stdd/requirements/
-cp architecture-decisions.template.md stdd/architecture-decisions.md
-cp architecture-decisions.template.yaml stdd/architecture-decisions.yaml
-mkdir -p stdd/architecture-decisions
-cp architecture-decisions.template/*.md stdd/architecture-decisions/
-cp implementation-decisions.template.md stdd/implementation-decisions.md
-cp implementation-decisions.template.yaml stdd/implementation-decisions.yaml
-mkdir -p stdd/implementation-decisions
-cp implementation-decisions.template/*.md stdd/implementation-decisions/
-cp processes.template.md stdd/processes.md
-cp semantic-tokens.template.md stdd/semantic-tokens.md
-cp semantic-tokens.template.yaml stdd/semantic-tokens.yaml
-cp tasks.template.md stdd/tasks.md
+# In your project directory (after cloning/downloading the TIED repository)
+mkdir -p tied
+cp requirements.template.md tied/requirements.md
+cp requirements.template.yaml tied/requirements.yaml
+mkdir -p tied/requirements
+cp requirements.template/*.md tied/requirements/
+cp architecture-decisions.template.md tied/architecture-decisions.md
+cp architecture-decisions.template.yaml tied/architecture-decisions.yaml
+mkdir -p tied/architecture-decisions
+cp architecture-decisions.template/*.md tied/architecture-decisions/
+cp implementation-decisions.template.md tied/implementation-decisions.md
+cp implementation-decisions.template.yaml tied/implementation-decisions.yaml
+mkdir -p tied/implementation-decisions
+cp implementation-decisions.template/*.md tied/implementation-decisions/
+cp processes.template.md tied/processes.md
+cp semantic-tokens.template.md tied/semantic-tokens.md
+cp semantic-tokens.template.yaml tied/semantic-tokens.yaml
+cp tasks.template.md tied/tasks.md
 cp AGENTS.md AGENTS.md              # Copy canonical AI agent guide
 cp .cursorrules .cursorrules        # Copy Cursor loader if using Cursor
 ```
 
-**Important**: Each project should have its own copies of these files. The template files remain in the [STDD repository](https://github.com/fareedst/stdd) as reference templates.
+**Important**: Each project should have its own copies of these files. The template files remain in the [TIED repository](https://github.com/fareedst/tied) as reference templates.
 
 
 ## Example Workflow
@@ -77,7 +79,7 @@ cp .cursorrules .cursorrules        # Copy Cursor loader if using Cursor
    - Remove completed subtasks
    - Ensure the semantic tokens registered in `semantic-tokens.yaml` match the tokens used across code, tests, and documentation for these changes
 
-See [LLM Response Guide](llm-response-guide.md) for detailed information about how AI assistants should respond when working with STDD.
+See [LLM Response Guide](llm-response-guide.md) for detailed information about how AI assistants should respond when working with TIED.
 
 ### Phase Flow Shortcut
 ```mermaid
@@ -98,13 +100,13 @@ flowchart LR
 This repository contains:
 
 ### Methodology Documentation (Reference Only)
-- `STDD.md` - STDD methodology overview (for beginners, intermediate, and experts)
-- `ai-principles.md` - Complete STDD principles and process guide
-- `stdd-language-spec.md` - STDD language specification (pseudo-code templates with semantic tokens)
-- `conversation.template.md` - Template conversation demonstrating STDD workflow
+- `TIED.md` - TIED methodology overview (for beginners, intermediate, and experts)
+- `ai-principles.md` - Complete TIED principles and process guide
+- `tied-language-spec.md` - TIED language specification (pseudo-code templates with semantic tokens)
+- `conversation.template.md` - Template conversation demonstrating TIED workflow
 - `AGENTS.md` - Canonical AI agent operating guide
 - `.cursorrules` - Cursor IDE loader that points to `AGENTS.md`
-- `CHANGELOG.md` - Version history of the STDD methodology
+- `CHANGELOG.md` - Version history of the TIED methodology
 - `VERSION` - Current methodology version
 
 ### Project Template Files (Copy to Your Project)
@@ -129,17 +131,17 @@ After copying templates, your project should have:
 your-project/
 ├── AGENTS.md                 # Canonical AI agent instructions
 ├── .cursorrules              # Cursor IDE loader (optional, if using Cursor)
-├── stdd/
+├── tied/
 │   ├── requirements.md       # Requirements guide/documentation
 │   ├── requirements.yaml     # Requirements YAML index/database with [REQ-*] records
 │   ├── requirements/         # Individual requirement detail files
-│   │   ├── REQ-STDD_SETUP.md
+│   │   ├── REQ-TIED_SETUP.md
 │   │   ├── REQ-MODULE_VALIDATION.md
 │   │   └── ...
 │   ├── architecture-decisions.md  # Architecture decisions guide/documentation
 │   ├── architecture-decisions.yaml # Architecture decisions YAML index/database with [ARCH-*] records
 │   ├── architecture-decisions/    # Individual architecture decision detail files
-│   │   ├── ARCH-STDD_STRUCTURE.md
+│   │   ├── ARCH-TIED_STRUCTURE.md
 │   │   ├── ARCH-MODULE_VALIDATION.md
 │   │   └── ...
 │   ├── implementation-decisions.md # Implementation decisions guide/documentation
@@ -154,7 +156,7 @@ your-project/
 └── [your source code]        # Your actual project code
 ```
 
-**Note**: The methodology documentation files (`STDD.md`, `ai-principles.md`) remain in the [STDD repository](https://github.com/fareedst/stdd) as reference. You don't need to copy them to your project unless you want local copies.
+**Note**: The methodology documentation files (`TIED.md`, `ai-principles.md`) remain in the [TIED repository](https://github.com/fareedst/tied) as reference. You don't need to copy them to your project unless you want local copies.
 
 ## Key Principles
 
@@ -170,16 +172,16 @@ The YAML index files use **structured, machine-parseable fields** instead of mar
 **Query Examples**:
 ```bash
 # Get architecture dependencies
-yq '.REQ-STDD_SETUP.traceability.architecture[]' stdd/requirements.yaml
+yq '.REQ-TIED_SETUP.traceability.architecture[]' tied/requirements.yaml
 
 # Get satisfaction criteria
-yq '.REQ-STDD_SETUP.satisfaction_criteria[].criterion' stdd/requirements.yaml
+yq '.REQ-TIED_SETUP.satisfaction_criteria[].criterion' tied/requirements.yaml
 
 # Get alternatives considered
-yq '.ARCH-STDD_STRUCTURE.alternatives_considered[].name' stdd/architecture-decisions.yaml
+yq '.ARCH-TIED_STRUCTURE.alternatives_considered[].name' tied/architecture-decisions.yaml
 
 # Get code file locations
-yq '.IMPL-STDD_FILES.code_locations.files[].path' stdd/implementation-decisions.yaml
+yq '.IMPL-TIED_FILES.code_locations.files[].path' tied/implementation-decisions.yaml
 ```
 
 This enables **direct field access**, **structured queries**, **easy filtering**, and **better tool integration** compared to parsing markdown-formatted strings.
@@ -228,14 +230,14 @@ This enables **direct field access**, **structured queries**, **easy filtering**
 | --- | --- | --- | ---
 | Implement Parser Pipeline `[REQ-CFG_005]` | P0 | `[ARCH-FORMAT_PIPELINE] → [IMPL-PLACEHOLDER_ENGINE]` | Token audit + formatter unit test bundle
 | Validate Formatter Module | P1 | `[ARCH-MODULE_VALIDATION] → [IMPL-VALIDATION_SUITE]` | Contract test suite + `[PROC-TOKEN_VALIDATION]` run
-| Update Docs for New Feature | P2 | `[REQ-STDD_SETUP] → [ARCH-STDD_STRUCTURE] → [IMPL-STDD_FILES]` | Documentation review checklist
+| Update Docs for New Feature | P2 | `[REQ-TIED_SETUP] → [ARCH-TIED_STRUCTURE] → [IMPL-TIED_FILES]` | Documentation review checklist
 
 *Hypothetical task descriptions showing how `tasks.md` should carry semantic tokens and validation artifacts.*
 
 
 ## Language-Specific Notes
 
-The STDD methodology is language-agnostic. When customizing templates for your project:
+The TIED methodology is language-agnostic. When customizing templates for your project:
 
 - **Language‑specific projects**: Update code examples in templates to match your chosen language
 - **Other languages**: Adapt the templates to your language's conventions
@@ -245,10 +247,10 @@ The semantic token system and development process remain the same regardless of 
 ## Resources
 
 ### Methodology Documentation (Reference)
-- `STDD.md` - STDD methodology overview (for beginners, intermediate, and experts)
-- `ai-principles.md` - Complete STDD principles and process guide
-- `stdd-language-spec.md` - STDD language specification (pseudo-code templates with semantic tokens)
-- `conversation.template.md` - Template conversation demonstrating STDD workflow
+- `TIED.md` - TIED methodology overview (for beginners, intermediate, and experts)
+- `ai-principles.md` - Complete TIED principles and process guide
+- `tied-language-spec.md` - TIED language specification (pseudo-code templates with semantic tokens)
+- `conversation.template.md` - Template conversation demonstrating TIED workflow
 - `CHANGELOG.md` - Version history
 
 ### Template Files (Copy to Your Project)
@@ -269,7 +271,7 @@ The semantic token system and development process remain the same regardless of 
 
 ## Repository
 
-**STDD Methodology Repository**: [https://github.com/fareedst/stdd](https://github.com/fareedst/stdd)
+**TIED Methodology Repository**: [https://github.com/fareedst/tied](https://github.com/fareedst/tied)
 
 # License
 

@@ -1,6 +1,6 @@
 # Migration Guide: Requirements File Structure
 
-**STDD Methodology Version**: 1.4.0  
+**TIED Methodology Version**: 1.4.0  
 **Audience**: AI Agents and Contributors
 
 This document provides step-by-step instructions for migrating a project from a **monolithic** `requirements.md` file to the **scalable index + detail files** structure.
@@ -34,7 +34,7 @@ Before starting migration:
 ### Step 1: Create the Detail Files Directory
 
 ```bash
-mkdir -p stdd/requirements
+mkdir -p tied/requirements
 ```
 
 ### Step 2: Identify All Requirement Sections
@@ -54,7 +54,7 @@ Scan the monolithic file for sections. Each section typically follows this patte
 Create a list of all `[REQ-*]` tokens found:
 
 ```bash
-grep -oE '\[REQ-[A-Z_]+\]' stdd/requirements.md | sort -u
+grep -oE '\[REQ-[A-Z_]+\]' tied/requirements.md | sort -u
 ```
 
 ### Step 3: Extract Each Section to a Detail File
@@ -115,7 +115,7 @@ For each `[REQ-TOKEN_NAME]` found:
 3. **Write the file**:
    ```bash
    # Example for each token
-   touch stdd/requirements/REQ-USER_AUTH.md
+   touch tied/requirements/REQ-USER_AUTH.md
    # Then populate with content
    ```
 
@@ -207,11 +207,11 @@ Check that all detail file links in the index are valid:
 
 ```bash
 # List all detail files
-ls stdd/requirements/
+ls tied/requirements/
 
 # Verify each link in the index resolves
-grep -oE 'requirements/REQ-[A-Z_]+\.md' stdd/requirements.md | while read f; do
-  if [ ! -f "stdd/$f" ]; then
+grep -oE 'requirements/REQ-[A-Z_]+\.md' tied/requirements.md | while read f; do
+  if [ ! -f "tied/$f" ]; then
     echo "MISSING: $f"
   fi
 done
@@ -235,10 +235,10 @@ done
 
 ```bash
 # Count tokens in original (if backup exists)
-grep -c '\[REQ-' stdd/requirements.md.bak
+grep -c '\[REQ-' tied/requirements.md.bak
 
 # Count detail files created
-ls stdd/requirements/REQ-*.md | wc -l
+ls tied/requirements/REQ-*.md | wc -l
 
 # These counts should match (or detail files >= tokens if some tokens appeared multiple times)
 ```
@@ -290,17 +290,17 @@ If migration needs to be reverted:
 
 1. Restore the backup:
    ```bash
-   cp stdd/requirements.md.bak stdd/requirements.md
+   cp tied/requirements.md.bak tied/requirements.md
    ```
 
 2. Remove the detail files directory:
    ```bash
-   rm -rf stdd/requirements/
+   rm -rf tied/requirements/
    ```
 
 3. Revert `semantic-tokens.yaml` changes:
    ```bash
-   git checkout stdd/semantic-tokens.yaml
+   git checkout tied/semantic-tokens.yaml
    ```
 
 ---

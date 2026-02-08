@@ -46,7 +46,7 @@ _Note: In `requirements.yaml`, traceability is stored as structured YAML lists f
 
 ## Related Requirements
 
-- **Depends on**: [REQ-STDD_SETUP] (needs STDD methodology in place)
+- **Depends on**: [REQ-TIED_SETUP] (needs STDD methodology in place)
 - **Related to**: All feature requirements that involve modular design
 - **Supersedes**: None
 

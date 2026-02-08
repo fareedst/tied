@@ -2,15 +2,15 @@
 #
 # copy_files.sh
 #
-# Copies the STDD template files from the directory containing this script
-# into a target project's `stdd/` directory.
+# Copies the TIED template files from the directory containing this script
+# into a target project's `tied/` directory.
 #
 # Creates:
 #   - Base files (.cursorrules, AGENTS.md, ai-principles.md) in project root
-#   - Template files (requirements.md, etc.) in stdd/
-#   - implementation-decisions/ directory in stdd/ with example detail files
-#   - architecture-decisions/ directory in stdd/ with example detail files
-#   - requirements/ directory in stdd/ with example detail files
+#   - Template files (requirements.md, etc.) in tied/
+#   - implementation-decisions/ directory in tied/ with example detail files
+#   - architecture-decisions/ directory in tied/ with example detail files
+#   - requirements/ directory in tied/ with example detail files
 #   - Migration guides for converting monolithic decision files and token formats
 #
 # Designed for macOS (Bash 3.2+) and Ubuntu (Bash 5.x+).
@@ -29,11 +29,11 @@ if [[ ! -d "${TARGET_PROJECT_DIR}" ]]; then
   exit 1
 fi
 
-STDD_DIR="${TARGET_PROJECT_DIR}/stdd"
-IMPL_DECISIONS_DIR="${STDD_DIR}/implementation-decisions"
-ARCH_DECISIONS_DIR="${STDD_DIR}/architecture-decisions"
-REQ_DIR="${STDD_DIR}/requirements"
-mkdir -p "${STDD_DIR}"
+TIED_DIR="${TARGET_PROJECT_DIR}/tied"
+IMPL_DECISIONS_DIR="${TIED_DIR}/implementation-decisions"
+ARCH_DECISIONS_DIR="${TIED_DIR}/architecture-decisions"
+REQ_DIR="${TIED_DIR}/requirements"
+mkdir -p "${TIED_DIR}"
 mkdir -p "${IMPL_DECISIONS_DIR}"
 mkdir -p "${ARCH_DECISIONS_DIR}"
 mkdir -p "${REQ_DIR}"
@@ -79,7 +79,7 @@ for template in "${TEMPLATE_FILES[@]}"; do
   # Strip .template from the filename, preserving the actual extension
   base="${template%.template.*}"
   ext="${template##*.}"
-  dest="${STDD_DIR}/${base}.${ext}"
+  dest="${TIED_DIR}/${base}.${ext}"
 
   if [[ ! -f "${src}" ]]; then
     echo "Missing template file: ${src}" >&2
@@ -91,7 +91,7 @@ for template in "${TEMPLATE_FILES[@]}"; do
   fi
 done
 
-echo "Copied ${#TEMPLATE_FILES[@]} template files into ${STDD_DIR}."
+echo "Copied ${#TEMPLATE_FILES[@]} template files into ${TIED_DIR}."
 
 # Copy implementation decision detail file examples
 IMPL_TEMPLATE_DIR="${SCRIPT_DIR}/implementation-decisions.template"
@@ -160,9 +160,9 @@ MIGRATION_GUIDES=(
 
 for guide in "${MIGRATION_GUIDES[@]}"; do
   src="${SCRIPT_DIR}/${guide}"
-  dest="${STDD_DIR}/${guide}"
+  dest="${TIED_DIR}/${guide}"
   if [[ -f "${src}" && ! -f "${dest}" ]]; then
     cp -p "${src}" "${dest}"
   fi
 done
-echo "Copied migration guides into ${STDD_DIR}."
+echo "Copied migration guides into ${TIED_DIR}."

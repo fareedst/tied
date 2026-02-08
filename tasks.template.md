@@ -1,6 +1,7 @@
 # Tasks and Incomplete Subtasks
 
-**STDD Methodology Version**: 1.4.0
+**TIED Methodology Version**: 2.0.0
+
 
 ## Overview
 This document tracks all tasks and subtasks for implementing this project. Tasks are organized by priority and implementation phase.
@@ -70,7 +71,7 @@ This document tracks all tasks and subtasks for implementing this project. Tasks
 
 ## Active Tasks
 
-## P0: Setup STDD Methodology [REQ-STDD_SETUP] [ARCH-STDD_STRUCTURE] [IMPL-STDD_FILES]
+## P0: Setup STDD Methodology [REQ-TIED_SETUP] [ARCH-TIED_STRUCTURE] [IMPL-TIED_FILES]
 
 **Status**: ✅ Complete
 
@@ -79,7 +80,7 @@ This document tracks all tasks and subtasks for implementing this project. Tasks
 **Dependencies**: None
 
 **Subtasks**:
-- [x] Create `stdd/` directory
+- [x] Create `tied/` directory
 - [x] Instantiate documentation files from templates
 - [x] Update `.cursorrules`
 - [x] Register semantic tokens
@@ -91,7 +92,7 @@ This document tracks all tasks and subtasks for implementing this project. Tasks
 
 **Priority Rationale**: P0 because this is the foundation for all future work.
 
-## P0: Promote Processes into Core Methodology [REQ-STDD_SETUP] [ARCH-STDD_STRUCTURE] [IMPL-STDD_FILES]
+## P0: Promote Processes into Core Methodology [REQ-TIED_SETUP] [ARCH-TIED_STRUCTURE] [IMPL-TIED_FILES]
 
 **Status**: ✅ Complete
 

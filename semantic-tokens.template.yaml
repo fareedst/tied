@@ -1,7 +1,7 @@
 # Semantic Tokens Index (YAML Database)
 #
 # This YAML file serves as the central registry for all semantic tokens in the project.
-# Each top-level key is a semantic token (e.g., REQ-STDD_SETUP, ARCH-STDD_STRUCTURE, IMPL-MODULE_VALIDATION).
+# Each top-level key is a semantic token (e.g., REQ-TIED_SETUP, ARCH-TIED_STRUCTURE, IMPL-MODULE_VALIDATION).
 #
 # To append a new token:
 # 1. Copy the template block at the bottom of this file (TOKEN-IDENTIFIER)
@@ -23,17 +23,17 @@
 
 ---
 
-REQ-STDD_SETUP:
+REQ-TIED_SETUP:
   type: REQ
   name: STDD Methodology Setup
   category: Core Functional
   status: Active
   description: "STDD methodology setup requirement"
   cross_references:
-    - ARCH-STDD_STRUCTURE
-    - IMPL-STDD_FILES
+    - ARCH-TIED_STRUCTURE
+    - IMPL-TIED_FILES
   source_index: requirements.yaml
-  detail_file: requirements/REQ-STDD_SETUP.md
+  detail_file: requirements/REQ-TIED_SETUP.md
   metadata:
     registered: 2025-11-08
     last_updated: 2026-02-08
@@ -144,16 +144,16 @@ ARCH-PROJECT_STRUCTURE:
     registered: 2025-11-08
     last_updated: 2026-02-08
 
-ARCH-STDD_STRUCTURE:
+ARCH-TIED_STRUCTURE:
   type: ARCH
   name: STDD Project Structure
   status: Active
   description: "STDD project structure decision"
   cross_references:
-    - REQ-STDD_SETUP
-    - IMPL-STDD_FILES
+    - REQ-TIED_SETUP
+    - IMPL-TIED_FILES
   source_index: architecture-decisions.yaml
-  detail_file: architecture-decisions/ARCH-STDD_STRUCTURE.md
+  detail_file: architecture-decisions/ARCH-TIED_STRUCTURE.md
   metadata:
     registered: 2025-12-18
     last_updated: 2026-02-08
@@ -200,16 +200,16 @@ IMPL-CONFIG_STRUCT:
     registered: 2025-11-08
     last_updated: 2026-02-08
 
-IMPL-STDD_FILES:
+IMPL-TIED_FILES:
   type: IMPL
   name: STDD File Creation
   status: Active
   description: "STDD file creation implementation"
   cross_references:
-    - ARCH-STDD_STRUCTURE
-    - REQ-STDD_SETUP
+    - ARCH-TIED_STRUCTURE
+    - REQ-TIED_SETUP
   source_index: implementation-decisions.yaml
-  detail_file: implementation-decisions/IMPL-STDD_FILES.md
+  detail_file: implementation-decisions/IMPL-TIED_FILES.md
   metadata:
     registered: 2025-12-18
     last_updated: 2026-02-08
@@ -246,10 +246,10 @@ PROC-PROJECT_SURVEY_AND_SETUP:
   type: PROC
   name: Project Survey and Setup Process
   status: Active
-  description: "Survey and readiness process supporting REQ-STDD_SETUP and ARCH-STDD_STRUCTURE"
+  description: "Survey and readiness process supporting REQ-TIED_SETUP and ARCH-TIED_STRUCTURE"
   cross_references:
-    - REQ-STDD_SETUP
-    - ARCH-STDD_STRUCTURE
+    - REQ-TIED_SETUP
+    - ARCH-TIED_STRUCTURE
   source_index: processes.md
   detail_file: null
   metadata:
@@ -299,8 +299,8 @@ PROC-YAML_DB_OPERATIONS:
   status: Active
   description: "YAML database operations for reading, writing, querying, and validating YAML index files"
   cross_references:
-    - REQ-STDD_SETUP
-    - ARCH-STDD_STRUCTURE
+    - REQ-TIED_SETUP
+    - ARCH-TIED_STRUCTURE
   source_index: processes.md
   detail_file: null
   metadata:

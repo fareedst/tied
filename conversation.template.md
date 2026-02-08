@@ -1,8 +1,8 @@
 # STDD Conversation Template: Adding a Feature to an Existing Complex Application
 
-**STDD Methodology Version**: 1.0.1
+**TIED Methodology Version**: 2.0.0
 
-This template demonstrates a realistic conversation between a developer and an AI-coder following the STDD methodology when adding a feature to an existing, complex application.
+This template demonstrates a realistic conversation between a developer and an AI-coder following the TIED methodology when adding a feature to an existing, complex application.
 
 ---
 
@@ -592,7 +592,7 @@ When working with AI following STDD:
 
 ## Notes for AI Agents
 
-When following STDD:
+When following TIED:
 
 1. **Always Acknowledge**: Start every response with "Observing AI principles!"
 2. **No Code in Phase 1**: Planning phase is documentation only

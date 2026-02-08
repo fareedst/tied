@@ -2,9 +2,9 @@
 
 **Purpose**: This document defines the principles, processes, and conventions that AI agents must follow when working on this project. It should be referenced at the start of every AI agent interaction.
 
-## 🎯 Semantic Token-Driven Development (STDD)
+## 🎯 Token-Integrated Engineering & Development (TIED)
 
-This project follows **Semantic Token-Driven Development (STDD)**, a methodology where semantic tokens (`[REQ-*]`, `[ARCH-*]`, `[IMPL-*]`) are the central mechanism for preserving intent throughout the entire development lifecycle.
+This project follows **Token-Integrated Engineering & Development (TIED)**, a methodology where semantic tokens (`[REQ-*]`, `[ARCH-*]`, `[IMPL-*]`) are the central mechanism for preserving intent throughout the entire development lifecycle.
 
 ### How Semantic Tokens Preserve Intent
 
@@ -41,11 +41,11 @@ This acknowledgment confirms that the AI agent has:
 
 ## 📋 Table of Contents
 
-1. [Semantic Token-Driven Development (STDD)](#-semantic-token-driven-development-stdd)
+1. [Token-Integrated Engineering & Development (TIED)](#-token-integrated-engineering--development-tied)
 2. [AI-First Principles](#ai-first-principles)
 3. [Documentation Structure](#documentation-structure)
 4. [Semantic Token System](#semantic-token-system)
-5. [Bugs vs Requirements: Proper STDD Handling](#-bugs-vs-requirements-proper-stdd-handling)
+5. [Bugs vs Requirements: Proper TIED Handling](#-bugs-vs-requirements-proper-tied-handling)
 6. [Development Process](#development-process)
 7. [Task Tracking System](#task-tracking-system)
 8. [How to Present This to AI Agents](#how-to-present-this-to-ai-agents)
@@ -206,7 +206,7 @@ All project documentation MUST include these sections with semantic token cross-
 
 ## 🏷️ Semantic Token System
 
-**Semantic tokens are the foundation of STDD** - they are the mechanism that preserves intent throughout the development lifecycle.
+**Semantic tokens are the foundation of TIED** - they are the mechanism that preserves intent throughout the development lifecycle.
 
 ### Token Format
 
@@ -299,13 +299,13 @@ Each document should contain:
 
 This ensures traceability in both directions and helps AI assistants understand relationships.
 
-## 🐛 Bugs vs Requirements: Proper STDD Handling
+## 🐛 Bugs vs Requirements: Proper TIED Handling
 
 ### Critical Distinction
 
 **Requirements describe desired behavior. Bugs describe implementation failures.**
 
-This distinction is fundamental to STDD:
+This distinction is fundamental to TIED:
 
 - **Requirements (`[REQ-*]`)**: Describe WHAT the system should do and WHY
 - **Bugs**: Describe WHERE the implementation fails to meet a requirement
@@ -853,28 +853,30 @@ This project follows AI-First Principles. Before making changes:
 - [ ] **MANDATORY**: Post-change validation checklist completed (see Change Impact Tracking section)
 - [ ] **MANDATORY**: Behavioral contracts documented for critical features
 - [ ] **MANDATORY**: Dependencies mapped and documented
+- [ ] **MANDATORY**: Verify all code and tests are consistently linked to requirements and decisions; update code and documentation where necessary
+- [ ] **MANDATORY**: Do not create a stand-alone summary document for the session (e.g. no SESSION_SUMMARY.md or similar)
 
 ---
 
 ## 📚 Related Documents
 
-- `stdd/requirements.md` - Requirements guide document (copy from `requirements.template.md` in STDD repository)
-  - `stdd/requirements.yaml` - Requirements YAML index/database with all `[REQ-*]` records (copy from `requirements.template.yaml`)
-  - `stdd/requirements/` - Individual requirement detail files (e.g., `REQ-STDD_SETUP.md`, `REQ-MODULE_VALIDATION.md`)
-- `stdd/architecture-decisions.md` - Architecture decisions guide document (copy from `architecture-decisions.template.md`)
-  - `stdd/architecture-decisions.yaml` - Architecture decisions YAML index/database with all `[ARCH-*]` records dependent on requirements (copy from `architecture-decisions.template.yaml`)
+- `tied/requirements.md` - Requirements guide document (copy from `requirements.template.md` in STDD repository)
+  - `tied/requirements.yaml` - Requirements YAML index/database with all `[REQ-*]` records (copy from `requirements.template.yaml`)
+  - `tied/requirements/` - Individual requirement detail files (e.g., `REQ-STDD_SETUP.md`, `REQ-MODULE_VALIDATION.md`)
+- `tied/architecture-decisions.md` - Architecture decisions guide document (copy from `architecture-decisions.template.md`)
+  - `tied/architecture-decisions.yaml` - Architecture decisions YAML index/database with all `[ARCH-*]` records dependent on requirements (copy from `architecture-decisions.template.yaml`)
   - All `[ARCH-*]` tokens must be documented in the YAML index
   - Must cross-reference `[REQ-*]` tokens from requirements
-  - `stdd/architecture-decisions/` - Individual architecture decision detail files
-- `stdd/implementation-decisions.md` - Implementation decisions guide document (copy from `implementation-decisions.template.md`)
-  - `stdd/implementation-decisions.yaml` - Implementation decisions YAML index/database with all `[IMPL-*]` records dependent on architecture and requirements (copy from `implementation-decisions.template.yaml`)
+  - `tied/architecture-decisions/` - Individual architecture decision detail files
+- `tied/implementation-decisions.md` - Implementation decisions guide document (copy from `implementation-decisions.template.md`)
+  - `tied/implementation-decisions.yaml` - Implementation decisions YAML index/database with all `[IMPL-*]` records dependent on architecture and requirements (copy from `implementation-decisions.template.yaml`)
   - All `[IMPL-*]` tokens must be documented in the YAML index
   - Must cross-reference both `[ARCH-*]` and `[REQ-*]` tokens
-  - `stdd/implementation-decisions/` - Individual implementation decision detail files
-- `stdd/semantic-tokens.yaml` - YAML index/database of all semantic tokens (canonical token registry)
-- `stdd/semantic-tokens.md` - Semantic tokens guide with format, naming conventions, and usage examples (copy from `semantic-tokens.template.md`)
-- `stdd/tasks.md` - Active task tracking document (copy from `tasks.template.md`)
-- `stdd/processes.md` - Active process tracking document (copy from `processes.template.md`)
+  - `tied/implementation-decisions/` - Individual implementation decision detail files
+- `tied/semantic-tokens.yaml` - YAML index/database of all semantic tokens (canonical token registry)
+- `tied/semantic-tokens.md` - Semantic tokens guide with format, naming conventions, and usage examples (copy from `semantic-tokens.template.md`)
+- `tied/tasks.md` - Active task tracking document (copy from `tasks.template.md`)
+- `tied/processes.md` - Active process tracking document (copy from `processes.template.md`)
 - `README.md` - Project overview and getting started guide
 
 ---
@@ -905,5 +907,5 @@ This document should be:
 
 **Last Updated**: 2026-02-06
 **Version**: 1.2.0
-**STDD Methodology Version**: 1.5.0
+**TIED Methodology Version**: 1.5.0
 

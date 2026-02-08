@@ -1,6 +1,6 @@
-# [ARCH-STDD_STRUCTURE] STDD Project Structure
+# [ARCH-TIED_STRUCTURE] TIED Project Structure
 
-**Cross-References**: [REQ-STDD_SETUP]  
+**Cross-References**: [REQ-TIED_SETUP]  
 **Status**: Active  
 **Created**: 2025-12-18  
 **Last Updated**: 2025-12-18
@@ -9,7 +9,7 @@
 
 ## Decision
 
-Centralized `stdd/` directory for all STDD methodology documentation.
+Centralized `tied/` directory for all TIED methodology documentation.
 
 ## Rationale
 
@@ -27,7 +27,7 @@ Centralized `stdd/` directory for all STDD methodology documentation.
 
 ## Implementation Approach
 
-- Create `stdd/` directory at project root
+- Create `tied/` directory at project root
 - Populate with template files:
   - `requirements.md`
   - `architecture-decisions.md` (index)
@@ -42,10 +42,10 @@ Centralized `stdd/` directory for all STDD methodology documentation.
 ## Token Coverage `[PROC-TOKEN_AUDIT]`
 
 Code files expected to carry `[IMPL-*] [ARCH-*] [REQ-*]` comments:
-- [ ] Bootstrap scripts with `// [IMPL-STDD_FILES] [ARCH-STDD_STRUCTURE] [REQ-STDD_SETUP]`
+- [ ] Bootstrap scripts with `// [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]`
 
 Tests expected to reference `[REQ-*]` / `[TEST-*]` tokens:
-- [ ] `TestSTDDSetup_REQ_STDD_SETUP` ensures docs + registry exist
+- [ ] `TestTIEDSetup_REQ_TIED_SETUP` ensures docs + registry exist
 
 ## Validation Evidence `[PROC-TOKEN_VALIDATION]`
 
@@ -55,8 +55,8 @@ Tests expected to reference `[REQ-*]` / `[TEST-*]` tokens:
 
 ## Related Decisions
 
-- Depends on: [REQ-STDD_SETUP]
-- Informs: [IMPL-STDD_FILES]
+- Depends on: [REQ-TIED_SETUP]
+- Informs: [IMPL-TIED_FILES]
 - See also: —
 
 ---

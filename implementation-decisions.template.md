@@ -11,12 +11,12 @@ All decisions are cross-referenced with architecture decisions using `[ARCH-*]` 
 ## Directory Structure
 
 ```
-stdd/
+tied/
 ├── implementation-decisions.md              # This guide file (you are here)
 ├── implementation-decisions.yaml            # YAML index/database of all implementation decisions
 ├── implementation-decisions/                # Detail files directory
 │   ├── IMPL-CONFIG_STRUCT.md
-│   ├── IMPL-STDD_FILES.md
+│   ├── IMPL-TIED_FILES.md
 │   ├── IMPL-MODULE_VALIDATION.md
 │   └── ...
 ```
@@ -59,28 +59,28 @@ To view the index:
 
 ```bash
 # View entire index
-cat stdd/implementation-decisions.yaml
+cat tied/implementation-decisions.yaml
 
 # View specific decision
-yq '.IMPL-MODULE_VALIDATION' stdd/implementation-decisions.yaml
+yq '.IMPL-MODULE_VALIDATION' tied/implementation-decisions.yaml
 
 # Get implementation approach summary
-yq '.IMPL-MODULE_VALIDATION.implementation_approach.summary' stdd/implementation-decisions.yaml
+yq '.IMPL-MODULE_VALIDATION.implementation_approach.summary' tied/implementation-decisions.yaml
 
 # Get code file locations
-yq '.IMPL-STDD_FILES.code_locations.files[].path' stdd/implementation-decisions.yaml
+yq '.IMPL-TIED_FILES.code_locations.files[].path' tied/implementation-decisions.yaml
 
 # Get function locations
-yq '.IMPL-MODULE_VALIDATION.code_locations.functions[].name' stdd/implementation-decisions.yaml
+yq '.IMPL-MODULE_VALIDATION.code_locations.functions[].name' tied/implementation-decisions.yaml
 
 # Get architecture dependencies
-yq '.IMPL-MODULE_VALIDATION.traceability.architecture[]' stdd/implementation-decisions.yaml
+yq '.IMPL-MODULE_VALIDATION.traceability.architecture[]' tied/implementation-decisions.yaml
 
 # List all active decisions
-yq 'to_entries | map(select(.value.status == "Active")) | from_entries' stdd/implementation-decisions.yaml
+yq 'to_entries | map(select(.value.status == "Active")) | from_entries' tied/implementation-decisions.yaml
 
 # Quick grep search
-grep -A 30 '^IMPL-MODULE_VALIDATION:' stdd/implementation-decisions.yaml
+grep -A 30 '^IMPL-MODULE_VALIDATION:' tied/implementation-decisions.yaml
 ```
 
 ### How to Append a New Implementation Decision
@@ -96,7 +96,7 @@ grep -A 30 '^IMPL-MODULE_VALIDATION:' stdd/implementation-decisions.yaml
 Example append operation:
 
 ```bash
-cat >> stdd/implementation-decisions.yaml << 'EOF'
+cat >> tied/implementation-decisions.yaml << 'EOF'
 
 IMPL-NEW_IMPLEMENTATION:
   name: New Implementation
@@ -260,7 +260,7 @@ Latest `./scripts/validate_tokens.sh` output summary:
 
 ```bash
 # 1. Create the detail file
-touch stdd/implementation-decisions/IMPL-YOUR_TOKEN.md
+touch tied/implementation-decisions/IMPL-YOUR_TOKEN.md
 
 # 2. Copy the template above into the new file
 

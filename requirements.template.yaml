@@ -1,7 +1,7 @@
 # Requirements Index (YAML Database)
 #
 # This YAML file serves as the central index/registry for all requirements in the project.
-# Each top-level key is a semantic token (e.g., REQ-STDD_SETUP).
+# Each top-level key is a semantic token (e.g., REQ-TIED_SETUP).
 #
 # To append a new requirement:
 # 1. Copy the template block at the bottom of this file (REQ-IDENTIFIER)
@@ -25,7 +25,7 @@
 
 ---
 
-REQ-STDD_SETUP:
+REQ-TIED_SETUP:
   name: STDD Methodology Setup
   category: Functional
   priority: P0
@@ -41,7 +41,7 @@ REQ-STDD_SETUP:
       - "Consistent development methodology"
       - "AI-friendly documentation structure"
   satisfaction_criteria:
-    - criterion: "stdd/ directory exists with proper structure"
+    - criterion: "tied/ directory exists with proper structure"
     - criterion: "All required documentation files exist and are populated from templates"
       metric: "requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml, semantic-tokens.md, tasks.md, processes.md all present"
     - criterion: "Base files properly configured"
@@ -57,20 +57,20 @@ REQ-STDD_SETUP:
       coverage: "All index files have corresponding detail directories with proper naming"
   traceability:
     architecture:
-      - ARCH-STDD_STRUCTURE
+      - ARCH-TIED_STRUCTURE
     implementation:
-      - IMPL-STDD_FILES
+      - IMPL-TIED_FILES
     tests:
       - Manual verification checklists
     code_annotations:
-      - IMPL-STDD_FILES
-      - ARCH-STDD_STRUCTURE
-      - REQ-STDD_SETUP
+      - IMPL-TIED_FILES
+      - ARCH-TIED_STRUCTURE
+      - REQ-TIED_SETUP
   related_requirements:
     depends_on: []
     related_to: []
     supersedes: []
-  detail_file: requirements/REQ-STDD_SETUP.md
+  detail_file: requirements/REQ-TIED_SETUP.md
   metadata:
     created:
       date: 2025-11-08
@@ -134,7 +134,7 @@ REQ-MODULE_VALIDATION:
       - IMPL-MODULE_VALIDATION
   related_requirements:
     depends_on:
-      - REQ-STDD_SETUP
+      - REQ-TIED_SETUP
     related_to: []
     supersedes: []
   detail_file: requirements/REQ-MODULE_VALIDATION.md

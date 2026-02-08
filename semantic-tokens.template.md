@@ -103,10 +103,10 @@ When referencing other tokens:
 This YAML index serves as the single source of truth for "does this token exist?" and provides structured metadata for all semantic tokens across all types (REQ, ARCH, IMPL, TEST, PROC).
 
 **Quick lookup commands:**
-- List all tokens: `yq 'keys' stdd/semantic-tokens.yaml`
-- Filter by type: `yq 'to_entries | map(select(.value.type == "REQ")) | from_entries' stdd/semantic-tokens.yaml`
-- Check existence: `yq '.["REQ-STDD_SETUP"]' stdd/semantic-tokens.yaml`
-- Get token details: `yq '.REQ-STDD_SETUP' stdd/semantic-tokens.yaml`
+- List all tokens: `yq 'keys' tied/semantic-tokens.yaml`
+- Filter by type: `yq 'to_entries | map(select(.value.type == "REQ")) | from_entries' tied/semantic-tokens.yaml`
+- Check existence: `yq '.["REQ-TIED_SETUP"]' tied/semantic-tokens.yaml`
+- Get token details: `yq '.REQ-TIED_SETUP' tied/semantic-tokens.yaml`
 
 **For full details on each token:**
 - **Requirements tokens**: See `requirements.yaml` (YAML index) and `requirements/` (detail files)

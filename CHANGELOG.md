@@ -1,9 +1,34 @@
-# STDD Methodology Changelog
+# TIED Methodology Changelog
 
-All notable changes to the STDD (Semantic Token-Driven Development) methodology will be documented in this file.
+All notable changes to the TIED (Token-Integrated Engineering & Development) methodology will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [2.0.0] - 2026-02-08
+
+### Changed
+
+- **Methodology Rename**: Renamed from STDD (Semantic Token-Driven Development) to TIED (Token-Integrated Engineering & Development)
+  - **Rationale**: The new name better captures the methodology's core value proposition: semantic tokens "tie" code to intent, making it impossible to modify code without confronting related context. The term "integrated" emphasizes how tokens are woven throughout the development lifecycle, while "engineering & development" broadens the scope beyond just "development" to include the full engineering process.
+  - **Breaking Changes**:
+    - Methodology name changed throughout all documentation
+    - Repository recommended directory structure changed from `stdd/` to `tied/`
+    - GitHub repository URL changed from `github.com/fareedst/stdd` to `github.com/fareedst/tied`
+    - File renames: `STDD.md` → `TIED.md`, `stdd-language-spec.md` → `tied-language-spec.md`
+    - Token identifiers updated: `REQ-STDD_SETUP` → `REQ-TIED_SETUP`, `ARCH-STDD_STRUCTURE` → `ARCH-TIED_STRUCTURE`
+  - **Preserved**:
+    - All semantic token types remain unchanged: `[REQ-*]`, `[ARCH-*]`, `[IMPL-*]`, `[TEST-*]`, `[PROC-*]`
+    - The semantic token mechanism and traceability system remain unchanged
+    - All methodology principles, processes, and workflows remain unchanged
+    - Version history preserved (this is v2.0.0, building on v1.5.0)
+  - **Migration**: Existing TIED projects should update their documentation references from "STDD" to "TIED" and rename their `stdd/` directory to `tied/`. The methodology itself remains functionally identical.
+
+### Note
+
+- This release represents a major version bump (1.5.0 → 2.0.0) due to the breaking changes in terminology and directory structure. However, the core methodology, semantic token system, and all technical features remain unchanged from v1.5.0.
+
+---
 
 ## [1.5.0] - 2026-02-07
 
@@ -359,5 +384,5 @@ This enhancement addresses the need to eliminate bugs related to code complexity
 - AI agent integration (Cursor IDE)
 - Template-based structure for easy adoption
 
-[1.0.0]: https://github.com/fareedst/stdd/releases/tag/v1.0.0
+[1.0.0]: https://github.com/fareedst/tied/releases/tag/v1.0.0
 
