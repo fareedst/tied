@@ -54,9 +54,9 @@
   <!-- Step 3 -->
   <rect x="50" y="320" width="500" height="120" rx="12" ry="12" fill="#fae8ff" stroke="#c026d3" stroke-width="2"></rect>
   <text x="66" y="344" class="step-num" fill="#c026d3">3</text>
-  <text x="66" y="364" class="step-title" fill="#c026d3">TIED process adds tasks and subtasks to tasks.md</text>
-  <text x="66" y="388" class="desc">Tasks are created and organized with priorities</text>
-  <text x="66" y="408" class="file">→ tasks.md</text>
+  <text x="66" y="364" class="step-title" fill="#c026d3">Plan implementation steps (optional: tasks.md or in-session)</text>
+  <text x="66" y="388" class="desc">Work is broken down and organized with priorities</text>
+  <text x="66" y="408" class="file">→ tasks.md (optional) or in-session planning</text>
 
   <!-- Arrow 3-4 -->
   <line x1="300" y1="440" x2="300" y2="460" class="arrow"></line>

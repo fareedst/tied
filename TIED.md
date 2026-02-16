@@ -1,6 +1,6 @@
 # Token-Integrated Engineering & Development (TIED)
 
-**TIED Methodology Version**: 2.0.0
+**TIED Methodology Version**: 2.1.0
 
 **Token-Integrated Engineering & Development (TIED)** is a software development methodology where semantic tokens (`[REQ-*]`, `[ARCH-*]`, `[IMPL-*]`) are the central mechanism for preserving intent throughout the entire development lifecycle. TIED requires independent validation of logical modules before integration to eliminate bugs related to code complexity.
 

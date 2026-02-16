@@ -61,7 +61,7 @@ ARCH-TIED_STRUCTURE:
       - "Create tied/ directory at project root"
       - "Populate with YAML index files: requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml"
       - "Create detail subdirectories: requirements/, architecture-decisions/, implementation-decisions/"
-      - "Add guide files: semantic-tokens.md, tasks.md, processes.md"
+      - "Add guide files: semantic-tokens.md, processes.md"
   traceability:
     requirements:
       - REQ-TIED_SETUP

@@ -296,7 +296,7 @@ After migrating all three index files, update cross-references throughout your d
 **Files to update:**
 - `semantic-tokens.yaml` - Update token registry with new tokens or changes
 - `semantic-tokens.md` - Guide remains unchanged (token format and conventions)
-- `tasks.md` - Update any references to index files
+- `tasks.md` - (Optional) Update any references to index files if your project uses task tracking
 - `processes.md` - Should already have `[PROC-YAML_DB_OPERATIONS]` if using new templates
 - Any custom documentation that references index files
 

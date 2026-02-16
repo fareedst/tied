@@ -43,7 +43,7 @@ REQ-TIED_SETUP:
   satisfaction_criteria:
     - criterion: "tied/ directory exists with proper structure"
     - criterion: "All required documentation files exist and are populated from templates"
-      metric: "requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml, semantic-tokens.md, tasks.md, processes.md all present"
+      metric: "requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml, semantic-tokens.md, processes.md all present"
     - criterion: "Base files properly configured"
       metric: ".cursorrules contains STDD rules, AGENTS.md contains canonical AI agent instructions"
     - criterion: "Detail directories exist"

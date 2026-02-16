@@ -1,8 +1,10 @@
 # TIED Methodology Template
 
-**TIED Methodology Version**: 2.0.0
+**TIED Methodology Version**: 2.1.0
 
 > **Note**: This methodology was previously known as STDD (Semantic Token-Driven Development). It has been renamed to TIED (Token-Integrated Engineering & Development) to better reflect its core value proposition: semantic tokens "tie" code to intent, making it impossible to modify code without confronting related context.
+
+> **v2.1.0 Update**: Task tracking via `tasks.md` is now **optional**. The core TIED value is in the **traceability chain** (requirements → architecture → implementation → tests → code) maintained through semantic tokens, not in task tracking artifacts. Agents may maintain planning state in-session or document work breakdown in `implementation-decisions`. Use `tasks.template.md` only if your project benefits from a shared task list.
 
 This repository ([https://github.com/fareedst/tied](https://github.com/fareedst/tied)) contains the **Token-Integrated Engineering & Development (TIED)** methodology template that can be used as a base for development projects in any language.
 
@@ -49,7 +51,7 @@ cp implementation-decisions.template/*.md tied/implementation-decisions/
 cp processes.template.md tied/processes.md
 cp semantic-tokens.template.md tied/semantic-tokens.md
 cp semantic-tokens.template.yaml tied/semantic-tokens.yaml
-cp tasks.template.md tied/tasks.md
+# Optional: cp tasks.template.md tied/tasks.md  # Task tracking is optional
 cp AGENTS.md AGENTS.md              # Copy canonical AI agent guide
 cp .cursorrules .cursorrules        # Copy Cursor loader if using Cursor
 ```
@@ -66,17 +68,14 @@ cp .cursorrules .cursorrules        # Copy Cursor loader if using Cursor
    - **IMMEDIATELY** documents architecture decisions in `architecture-decisions.yaml` with `[ARCH-*]` tokens
    - **IMMEDIATELY** documents implementation decisions in `implementation-decisions.yaml` with `[IMPL-*]` tokens
    - **IMMEDIATELY** updates `semantic-tokens.yaml` with all new tokens
-   - **IMMEDIATELY** creates tasks in `tasks.md` with priorities and semantic token references
+   - Plans implementation steps (optionally in `tasks.md`, or via in-session planning)
    - **NO code changes yet**
 3. **User Approval**: User reviews and approves planning documents
 4. **Implementation Phase**: 
-   - Implement tasks, starting with highest priority
+   - Implement work, starting with highest priority
    - **DURING implementation**: Update documentation as decisions are made or refined
-   - **DURING implementation**: Update `tasks.md` as subtasks are completed
 5. **Completion Phase**: 
    - Verify all documentation is up-to-date and mirrors the semantic tokens referenced by the finished code and tests
-   - Mark tasks complete in `tasks.md`
-   - Remove completed subtasks
    - Ensure the semantic tokens registered in `semantic-tokens.yaml` match the tokens used across code, tests, and documentation for these changes
 
 See [LLM Response Guide](llm-response-guide.md) for detailed information about how AI assistants should respond when working with TIED.
@@ -85,12 +84,12 @@ See [LLM Response Guide](llm-response-guide.md) for detailed information about h
 ```mermaid
 flowchart LR
     phase1([Phase 1<br/>Requirements & Decisions])
-    phase2([Phase 2<br/>Task Planning])
+    phase2([Phase 2<br/>Plan Implementation])
     phase3([Phase 3<br/>Implementation])
     phase1 --> phase2 --> phase3
     phase1 -- "Document first" --> Arch["architecture-decisions.yaml"]
     phase1 -- "Refine intent" --> Impl["implementation-decisions.yaml"]
-    phase2 -- "Plan with tokens" --> TasksDoc["tasks.md"]
+    phase2 -- "Plan steps" --> Planning["In-session or optional tasks.md"]
     phase3 -- "Validate and code" --> Semantic["semantic-tokens.md"]
 ```
 *Mermaid flowchart showing the documentation-first cadence before code begins.*
@@ -121,7 +120,7 @@ This repository contains:
 - `implementation-decisions.template/` - Individual implementation decision detail file examples
 - `processes.template.md` - Template for process tracking including `[PROC-YAML_DB_OPERATIONS]`
 - `semantic-tokens.template.md` - Template for semantic token registry
-- `tasks.template.md` - Template for task tracking
+- `tasks.template.md` - **Optional** template for task tracking (not required by methodology)
 
 ## Project File Structure
 
@@ -151,7 +150,7 @@ your-project/
 │   │   └── ...
 │   ├── semantic-tokens.yaml   # Semantic tokens YAML index/database (canonical token registry)
 │   ├── semantic-tokens.md     # Semantic tokens guide with format and conventions
-│   ├── tasks.md              # Your project's active task tracking
+│   ├── tasks.md              # (Optional) Your project's active task tracking
 │   └── processes.md          # Your project's process tracking (includes [PROC-YAML_DB_OPERATIONS])
 └── [your source code]        # Your actual project code
 ```
@@ -206,13 +205,9 @@ This enables **direct field access**, **structured queries**, **easy filtering**
    - Tests MUST reference the requirements they validate using semantic tokens
    - Test names should include semantic tokens
 
-5. **Incremental Task Tracking**
-   - Every requirement implementation MUST be broken down into trackable tasks
-   - Tasks have explicit priorities: P0 > P1 > P2 > P3
-
-6. **Complete Task Completion**
-   - When all subtasks for a task are complete, remove subtasks and mark the parent task complete
-   - Maintain a clean task list showing only active work
+5. **Priority-Based Implementation**
+   - Work should be prioritized: P0 (Critical) > P1 (Important) > P2 (Nice-to-have) > P3 (Future)
+   - Focus on Tests > Code > Basic Functions > Infrastructure
 
 ## Visual Guides
 
@@ -226,13 +221,13 @@ This enables **direct field access**, **structured queries**, **easy filtering**
 ### Task & Token Alignment
 ![Task & Token Alignment](docs/visuals/task-token-alignment.svg)
 
-| Task | Priority | Token Trail | Validation Evidence
+| Work Item | Priority | Token Trail | Validation Evidence
 | --- | --- | --- | ---
 | Implement Parser Pipeline `[REQ-CFG_005]` | P0 | `[ARCH-FORMAT_PIPELINE] → [IMPL-PLACEHOLDER_ENGINE]` | Token audit + formatter unit test bundle
 | Validate Formatter Module | P1 | `[ARCH-MODULE_VALIDATION] → [IMPL-VALIDATION_SUITE]` | Contract test suite + `[PROC-TOKEN_VALIDATION]` run
 | Update Docs for New Feature | P2 | `[REQ-TIED_SETUP] → [ARCH-TIED_STRUCTURE] → [IMPL-TIED_FILES]` | Documentation review checklist
 
-*Hypothetical task descriptions showing how `tasks.md` should carry semantic tokens and validation artifacts.*
+*Hypothetical work items showing how planning (whether in `tasks.md`, `implementation-decisions`, or in-session) should carry semantic tokens and validation artifacts.*
 
 
 ## Language-Specific Notes
@@ -243,31 +238,6 @@ The TIED methodology is language-agnostic. When customizing templates for your p
 - **Other languages**: Adapt the templates to your language's conventions
 
 The semantic token system and development process remain the same regardless of language.
-
-## Resources
-
-### Methodology Documentation (Reference)
-- `TIED.md` - TIED methodology overview (for beginners, intermediate, and experts)
-- `ai-principles.md` - Complete TIED principles and process guide
-- `tied-language-spec.md` - TIED language specification (pseudo-code templates with semantic tokens)
-- `conversation.template.md` - Template conversation demonstrating TIED workflow
-- `CHANGELOG.md` - Version history
-
-### Template Files (Copy to Your Project)
-- `requirements.template.md` - Template guide for requirements documentation
-- `requirements.template.yaml` - YAML database template for requirements with `[REQ-*]` tokens **(v1.5.0: structured fields)**
-- `requirements.template/` - Individual requirement detail file examples
-- `architecture-decisions.template.md` - Template guide for architecture decisions documentation
-- `architecture-decisions.template.yaml` - YAML database template for architecture decisions with `[ARCH-*]` tokens **(v1.5.0: structured fields)**
-- `architecture-decisions.template/` - Individual architecture decision detail file examples
-- `implementation-decisions.template.md` - Template guide for implementation decisions documentation
-- `implementation-decisions.template.yaml` - YAML database template for implementation decisions with `[IMPL-*]` tokens **(v1.5.0: structured fields)**
-- `implementation-decisions.template/` - Individual implementation decision detail file examples
-- `processes.template.md` - Template for process tracking including `[PROC-YAML_DB_OPERATIONS]`
-- `semantic-tokens.template.md` - Template for semantic token registry
-- `tasks.template.md` - Template for task tracking
-- `AGENTS.md` - Canonical AI agent operating guide (copy as-is)
-- `.cursorrules` - Template for Cursor IDE loader (optional)
 
 ## Repository
 

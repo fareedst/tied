@@ -1,8 +1,10 @@
 # STDD Conversation Template: Adding a Feature to an Existing Complex Application
 
-**TIED Methodology Version**: 2.0.0
+**TIED Methodology Version**: 2.1.0
 
 This template demonstrates a realistic conversation between a developer and an AI-coder following the TIED methodology when adding a feature to an existing, complex application.
+
+**Note**: This conversation example shows task planning in `tasks.md`. As of TIED 2.0.0, task tracking via `tasks.md` is **optional**. Agents may maintain planning state in-session (e.g., conversation-based todo lists) or document work breakdown in `implementation-decisions`. The core TIED value is in the **traceability chain** (requirements → architecture → implementation → tests → code), not in task tracking artifacts.
 
 ---
 
@@ -88,7 +90,7 @@ I'll now:
 2. Document architecture decisions in `architecture-decisions.md`
 3. Document implementation decisions in `implementation-decisions.md`
 4. Update `semantic-tokens.yaml` with new tokens
-5. Create tasks in `tasks.md`
+5. Plan implementation steps (this example uses `tasks.md`, but in-session planning is also valid)
 
 Let me start:
 
@@ -599,11 +601,10 @@ When following TIED:
 3. **Document Immediately**: Don't defer documentation - do it as decisions are made
 4. **Ask Questions**: Clarify requirements before documenting
 5. **Show Pseudo-Code**: Help developer visualize the approach
-6. **Update Tasks Continuously**: Keep tasks.md current as work progresses
-7. **Remove Subtasks**: Clean up completed subtasks
-8. **Maintain Tokens**: Keep semantic-tokens.yaml updated
-9. **Cross-Reference**: Always link tokens: IMPL → ARCH → REQ
-10. **Test References**: Include semantic tokens in test names
+6. **Plan Work**: Break work into clear steps (via tasks.md, in-session planning, or implementation-decisions)
+7. **Maintain Tokens**: Keep semantic-tokens.yaml updated
+8. **Cross-Reference**: Always link tokens: IMPL → ARCH → REQ
+9. **Test References**: Include semantic tokens in test names
 
 ---
 

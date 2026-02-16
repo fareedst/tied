@@ -36,7 +36,6 @@ Centralized `tied/` directory for all TIED methodology documentation.
   - `implementation-decisions/` (detail files)
   - `semantic-tokens.yaml` (YAML index)
   - `semantic-tokens.md` (guide)
-  - `tasks.md`
   - `processes.md`
 
 ## Token Coverage `[PROC-TOKEN_AUDIT]`

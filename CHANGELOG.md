@@ -5,6 +5,46 @@ All notable changes to the TIED (Token-Integrated Engineering & Development) met
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2026-02-09
+
+### Changed
+
+- **Task Tracking Now Optional**: Task tracking via `tasks.md` is no longer mandatory in the TIED methodology
+  - **Rationale**: The core value of TIED is in the **traceability chain** (requirements → architecture → implementation → tests → code) maintained through semantic tokens and YAML indexes, not in task tracking artifacts. Agents can naturally maintain planning state in-session (e.g., conversation-based todo lists) or document work breakdown directly in `implementation-decisions`, making a separate task file redundant.
+  - **Benefits**:
+    - Less ceremony: No need to "plan in tasks.md before implementation," update subtasks, or remove completed subtasks
+    - Single source of truth: Traceability stays in the token chain and decision logs
+    - Agent-native workflow: Agents already break work into steps and track progress in-conversation
+    - Simpler bootstrap: Session start no longer requires reviewing tasks.md
+    - Fewer artifacts: One less template and one less file to create per project
+  - **What Changed**:
+    - `AGENTS.md`: Removed "Review tasks.md" from session bootstrap, removed Task Management section, removed tasks.md from all checklists and Key Files table
+    - `ai-principles.md`: Renamed Phase 2 from "Pseudo-Code → Tasks" to "Planning Implementation", removed Task Tracking System section, updated all checklists to remove tasks.md references
+    - Template files: Removed tasks.md from `REQ-TIED_SETUP`, architecture structure, and all YAML indexes
+    - `tasks.template.md`: Added prominent note that it's optional as of TIED 2.1.0
+    - Token audit/validation results: Now logged only in `implementation-decisions` (previously logged in both tasks.md and implementation-decisions)
+  - **What Stayed the Same**:
+    - All semantic token types: `[REQ-*]`, `[ARCH-*]`, `[IMPL-*]`, `[TEST-*]`, `[PROC-*]`
+    - Documentation-first flow: expand requirements, record ARCH/IMPL decisions immediately, then implement
+    - Module validation mandate: validate modules independently before integration
+    - Priority order: Tests > Code > Basic Functions > Infrastructure
+    - Token audit and validation processes (only logging location changed)
+  - **Migration**: Projects currently using `tasks.md` can continue using it - it's simply no longer required. Projects can also switch to in-session planning or document work breakdown in `implementation-decisions.yaml`. No breaking changes to existing workflows.
+  - **Optional Use**: Projects that benefit from a shared task list for human visibility can continue using `tasks.template.md`
+
+### Removed
+
+- Mandatory task tracking from methodology requirements
+- `tasks.md` references from AGENTS.md session bootstrap and all operational checklists
+- Task Tracking System section from ai-principles.md (replaced with optional work planning note)
+- `tasks.md` from required file lists in templates (REQ-TIED_SETUP, ARCH-TIED_STRUCTURE, implementation setup)
+
+### Note
+
+- This release represents a minor version bump (2.0.0 → 2.1.0) because while task tracking was previously positioned as mandatory, the methodology's core value proposition - semantic token traceability - remains unchanged. Making task tracking optional simplifies the methodology without removing functionality, as agents and teams can still choose to use `tasks.md` if desired.
+
+---
+
 ## [2.0.0] - 2026-02-08
 
 ### Changed
