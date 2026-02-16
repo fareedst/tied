@@ -84,7 +84,7 @@ Add the server to Cursor MCP settings (e.g. in Cursor Settings → MCP, or your 
   "mcpServers": {
     "tied-yaml": {
       "command": "node",
-      "args": ["/path/to/stdd/mcp-server/dist/index.js"],
+      "args": ["/path/to/tied/mcp-server/dist/index.js"],
       "env": {
         "TIED_BASE_PATH": "/path/to/your/project/tied"
       }
@@ -99,11 +99,11 @@ For this template repo (YAML at repo root), use:
 
 ```json
 "env": {
-  "TIED_BASE_PATH": "/path/to/stdd"
+  "TIED_BASE_PATH": "/path/to/tied"
 }
 ```
 
-Replace `/path/to/stdd` and `/path/to/your/project/tied` with your actual paths.
+Replace `/path/to/tied` and `/path/to/your/project/tied` with your actual paths.
 
 ## Run locally
 
