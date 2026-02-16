@@ -5,6 +5,16 @@ All notable changes to the TIED (Token-Integrated Engineering & Development) met
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- **TIED YAML MCP Server** (`mcp-server/`): Model Context Protocol server for programmatic access to TIED YAML indexes
+  - **Tools**: Read, list tokens, filter by field, validate YAML; traceability tools `get_decisions_for_requirement` and `get_requirements_for_decision`; write tools `yaml_index_insert`, `yaml_index_update`
+  - **Resources**: Read-only URIs for full indexes (`tied://requirements`, `tied://architecture-decisions`, `tied://implementation-decisions`, `tied://semantic-tokens`) and single records (`tied://requirement/{token}`, `tied://decision/{token}`)
+  - **Configuration**: `TIED_BASE_PATH` environment variable for index location; supports `tied/` layout and template-only repos
+  - **Cursor**: Documented MCP config for Cursor IDE in `mcp-server/README.md`
+
 ## [2.1.0] - 2026-02-09
 
 ### Changed

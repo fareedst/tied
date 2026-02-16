@@ -157,6 +157,17 @@ your-project/
 
 **Note**: The methodology documentation files (`TIED.md`, `ai-principles.md`) remain in the [TIED repository](https://github.com/fareedst/tied) as reference. You don't need to copy them to your project unless you want local copies.
 
+## TIED YAML MCP Server
+
+This repository includes an **MCP (Model Context Protocol) server** that exposes the YAML indexes as tools and resources for AI assistants and editors (e.g. Cursor).
+
+- **Location**: `mcp-server/`
+- **Capabilities**: Read, list, filter, and validate index files; traceability queries (requirements ↔ architecture/implementation decisions); insert, update, and upsert records.
+- **Resources**: `tied://requirements`, `tied://architecture-decisions`, `tied://implementation-decisions`, `tied://semantic-tokens`, plus per-token URIs for single records.
+- **Setup**: Install with `cd mcp-server && npm install && npm run build`. Configure your MCP client (e.g. Cursor) to run `node /path/to/mcp-server/dist/index.js` and set `TIED_BASE_PATH` to your project's `tied/` directory.
+
+See [mcp-server/README.md](mcp-server/README.md) for full tool list, Cursor integration, and usage.
+
 ## Key Principles
 
 ### v1.5.0 Structured YAML Schema
