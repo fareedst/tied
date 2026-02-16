@@ -167,6 +167,37 @@ export function registerResources(server: McpServer): void {
       return { contents: [{ uri: uri.href, text }] };
     }
   );
+
+  const detailsByTypeResources: Array<{
+    name: string;
+    uri: string;
+    type: "requirement" | "architecture" | "implementation";
+  }> = [
+    { name: "details-requirements", uri: `${TIED_PREFIX}details/requirements`, type: "requirement" },
+    { name: "details-architecture", uri: `${TIED_PREFIX}details/architecture`, type: "architecture" },
+    { name: "details-implementation", uri: `${TIED_PREFIX}details/implementation`, type: "implementation" },
+  ];
+
+  for (const { name, uri, type } of detailsByTypeResources) {
+    server.registerResource(
+      name,
+      uri,
+      {
+        description: `All detail YAML records for ${type} (token -> detail object)`,
+        mimeType: "application/json",
+      },
+      async (url) => {
+        const tokens = listDetailTokens(type);
+        const result: Record<string, unknown> = {};
+        for (const token of tokens) {
+          const record = loadDetail(token);
+          if (record != null) result[token] = record;
+        }
+        const text = toYamlLike(result);
+        return { contents: [{ uri: url.href, text }] };
+      }
+    );
+  }
 }
 
 function asString(v: string | string[] | undefined): string {

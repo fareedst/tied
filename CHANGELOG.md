@@ -23,6 +23,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Configuration**: `TIED_BASE_PATH` environment variable for index location; supports `tied/` layout and template-only repos
   - **Cursor**: Documented MCP config for Cursor IDE in `mcp-server/README.md`
 
+- **MCP Server: REQ/ARCH/IMPL detail access and create-with-detail**
+  - **Batch detail read**: New tool `yaml_detail_read_many` — request details by token list and/or by type (requirement | architecture | implementation); returns a map of token → detail record or `{ error }`.
+  - **Create token with details**: New tool `tied_token_create_with_detail` — create a new REQ, ARCH, or IMPL in one call: writes index record (with `detail_file`) and detail YAML file; optional `upsert_index` to merge into existing index.
+  - **Resources**: New read-only URIs for all details by type: `tied://details/requirements`, `tied://details/architecture`, `tied://details/implementation` (each returns token → detail object).
+  - **Docs**: `mcp-server/README.md` updated with new tools and resources; conversion section now refers to detail YAML (not markdown).
+
 ### Changed
 
 - **Monolithic-to-TIED conversion (REQ, ARCH, IMPL)** – improved migration in `mcp-server/src/convert/` for lossless conversion from STDD-style monolithic markdown to TIED YAML indexes and detail files:

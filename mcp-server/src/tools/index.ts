@@ -15,6 +15,7 @@ import {
   getRequirementsForDecision,
   insertRecord,
   updateRecord,
+  upsertRecord,
   type IndexName,
 } from "../yaml-loader.js";
 import {
@@ -283,6 +284,55 @@ export const allTools = [
     },
   },
   {
+    name: "yaml_detail_read_many",
+    config: {
+      description:
+        "Read detail YAML for multiple tokens or all tokens of a type. Pass tokens (array of REQ-*, ARCH-*, IMPL-*) and/or type (requirement | architecture | implementation). If only type is passed, returns details for all tokens that have a detail file for that type. Output is keyed by token: each value is either the detail record or { error: string }.",
+      inputSchema: z.object({
+        tokens: z
+          .array(z.string())
+          .optional()
+          .describe("Optional list of token IDs to load. If omitted, type must be provided."),
+        type: DETAIL_TYPE_ENUM.optional().describe(
+          "If tokens omitted, load all detail files for this type (requirement, architecture, or implementation)."
+        ),
+      }),
+    },
+    handler: async ({
+      tokens: tokensParam,
+      type,
+    }: {
+      tokens?: string[];
+      type?: string;
+    }) => {
+      let tokens: string[];
+      if (tokensParam != null && tokensParam.length > 0) {
+        tokens = tokensParam;
+      } else if (type) {
+        tokens = listDetailTokens(type as "requirement" | "architecture" | "implementation");
+      } else {
+        return textContent(
+          JSON.stringify({ error: "Provide tokens (array) or type (requirement | architecture | implementation)." }, null, 2)
+        );
+      }
+      const result: Record<string, Record<string, unknown> | { error: string }> = {};
+      for (const token of tokens) {
+        const record = loadDetail(token);
+        if (record != null) {
+          result[token] = record;
+        } else {
+          const path = getDetailPath(token);
+          if (path === null) {
+            result[token] = { error: `Invalid token: ${token}. Must be REQ-*, ARCH-*, or IMPL-*` };
+          } else {
+            result[token] = { error: `No detail file found for token: ${token}` };
+          }
+        }
+      }
+      return textContent(JSON.stringify(result, null, 2));
+    },
+  },
+  {
     name: "yaml_detail_list",
     config: {
       description:
@@ -378,6 +428,80 @@ export const allTools = [
     }) => {
       const result = deleteDetail(token, { syncIndex: sync_index !== false });
       return textContent(JSON.stringify(result, null, 2));
+    },
+  },
+  {
+    name: "tied_token_create_with_detail",
+    config: {
+      description:
+        "Create a new REQ, ARCH, or IMPL token with both index record and detail YAML in one step. Writes the index (requirements, architecture-decisions, or implementation-decisions) and the corresponding detail file. Fails if detail file already exists. Set upsert_index true to merge into existing index record.",
+      inputSchema: z.object({
+        token: z.string().min(1).describe("Token ID (REQ-*, ARCH-*, or IMPL-*)"),
+        index_record: z.string().describe("JSON string of the index record (e.g. name, status, cross_references). detail_file is set automatically."),
+        detail_record: z.string().describe("JSON string of the detail record body per detail-files-schema.md"),
+        upsert_index: z.boolean().optional().describe("If true, merge index_record into existing index entry; if false, fail when token already exists (default: false)"),
+      }),
+    },
+    handler: async ({
+      token,
+      index_record: indexRecordJson,
+      detail_record: detailRecordJson,
+      upsert_index,
+    }: {
+      token: string;
+      index_record: string;
+      detail_record: string;
+      upsert_index?: boolean;
+    }) => {
+      const indexName: IndexName | null =
+        token.startsWith("REQ-") ? "requirements"
+        : token.startsWith("ARCH-") ? "architecture"
+        : token.startsWith("IMPL-") ? "implementation"
+        : null;
+      if (indexName === null) {
+        return textContent(
+          JSON.stringify({ ok: false, error: `Invalid token: ${token}. Must be REQ-*, ARCH-*, or IMPL-*` }, null, 2)
+        );
+      }
+      const detailFile =
+        indexName === "requirements" ? `requirements/${token}.yaml`
+        : indexName === "architecture" ? `architecture-decisions/${token}.yaml`
+        : `implementation-decisions/${token}.yaml`;
+
+      let indexRecord: Record<string, unknown>;
+      try {
+        const parsed = JSON.parse(indexRecordJson) as unknown;
+        if (typeof parsed !== "object" || parsed === null || Array.isArray(parsed))
+          return textContent(JSON.stringify({ ok: false, error: "index_record must be a JSON object" }, null, 2));
+        indexRecord = { ...(parsed as Record<string, unknown>), detail_file: detailFile };
+      } catch {
+        return textContent(JSON.stringify({ ok: false, error: "Invalid JSON in index_record" }, null, 2));
+      }
+
+      let detailRecord: Record<string, unknown>;
+      try {
+        const parsed = JSON.parse(detailRecordJson) as unknown;
+        if (typeof parsed !== "object" || parsed === null || Array.isArray(parsed))
+          return textContent(JSON.stringify({ ok: false, error: "detail_record must be a JSON object" }, null, 2));
+        detailRecord = parsed as Record<string, unknown>;
+      } catch {
+        return textContent(JSON.stringify({ ok: false, error: "Invalid JSON in detail_record" }, null, 2));
+      }
+
+      if (upsert_index) {
+        const res = upsertRecord(indexName, token, indexRecord);
+        if (!res.ok) return textContent(JSON.stringify(res, null, 2));
+      } else {
+        const res = insertRecord(indexName, token, indexRecord);
+        if (!res.ok) return textContent(JSON.stringify(res, null, 2));
+      }
+
+      const writeRes = writeDetail(token, detailRecord, { syncIndex: false });
+      if (!writeRes.ok) return textContent(JSON.stringify(writeRes, null, 2));
+
+      return textContent(
+        JSON.stringify({ ok: true, index: indexName, token, detail_path: detailFile }, null, 2)
+      );
     },
   },
   {

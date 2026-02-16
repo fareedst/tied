@@ -162,14 +162,80 @@ your-project/
 
 ## TIED YAML MCP Server
 
-This repository includes an **MCP (Model Context Protocol) server** that exposes the YAML indexes as tools and resources for AI assistants and editors (e.g. Cursor).
+This repository includes an **MCP (Model Context Protocol) server** that exposes the TIED YAML indexes and detail files as **tools** and **resources** for AI assistants and editors (e.g. Cursor).
 
 - **Location**: `mcp-server/`
-- **Capabilities**: Read, list, filter, and validate index files; traceability queries (requirements ↔ architecture/implementation decisions); insert, update, and upsert records.
-- **Resources**: `tied://requirements`, `tied://architecture-decisions`, `tied://implementation-decisions`, `tied://semantic-tokens`, plus per-token URIs for single records.
 - **Setup**: Install with `cd mcp-server && npm install && npm run build`. Configure your MCP client (e.g. Cursor) to run `node /path/to/mcp-server/dist/index.js` and set `TIED_BASE_PATH` to your project's `tied/` directory.
 
-See [mcp-server/README.md](mcp-server/README.md) for full tool list, Cursor integration, and usage.
+See [mcp-server/README.md](mcp-server/README.md) for the full tool and resource list, Cursor integration, and usage.
+
+### Value of MCP for managing REQ/ARCH/IMPL
+
+MCP gives AI assistants and tools a single, consistent way to read and write requirements, architecture, and implementation decisions without editing YAML by hand. Benefits:
+
+- **Discoverability**: List tokens by index or type; run traceability queries (which ARCH/IMPL satisfy a REQ; which REQs does a decision reference).
+- **Bulk and single-token detail access**: Read one detail file by token or request details for many tokens (or all tokens of a type) in one call.
+- **One-shot creation**: Create a new REQ, ARCH, or IMPL token with both index record and full detail YAML in a single tool call (`tied_token_create_with_detail`).
+- **Migration**: Convert monolithic requirements/architecture/implementation markdown into TIED YAML indexes and detail files via conversion tools.
+
+This works for **any language or stack**: TIED is methodology-level; the server only needs a `tied/` (or `TIED_BASE_PATH`) layout with YAML indexes and optional detail directories.
+
+### MCP API
+
+**Tools**: Index read, list tokens, filter by field, validate YAML; traceability (`get_decisions_for_requirement`, `get_requirements_for_decision`); index insert/update; detail read (single and batch `yaml_detail_read_many`), detail list/create/update/delete; create-with-detail (`tied_token_create_with_detail`); monolithic-to-TIED conversion (per-doc or all at once).
+
+**Resources**: Full indexes (`tied://requirements`, `tied://architecture-decisions`, `tied://implementation-decisions`, `tied://semantic-tokens`); single record by token (`tied://requirement/{token}`, `tied://decision/{token}`); single-token detail (`tied://requirement/{token}/detail`, `tied://decision/{token}/detail`); all details by type (`tied://details/requirements`, `tied://details/architecture`, `tied://details/implementation`).
+
+```mermaid
+flowchart LR
+  Client["Client e.g. Cursor"]
+  Client --> toolsGroup
+  Client --> resourcesGroup
+  subgraph toolsGroup [Tools]
+    IndexOps["Index read list filter validate"]
+    TraceOps["Traceability queries"]
+    DetailOps["Detail single batch create update delete"]
+    CreateWithDetail["tied_token_create_with_detail"]
+    Convert["Monolithic to TIED conversion"]
+  end
+  subgraph resourcesGroup [Resources]
+    IndexURIs["tied:// index URIs"]
+    PerToken["Per-token record and detail"]
+    DetailsByType["tied://details/ by type"]
+  end
+```
+
+*MCP API: tools (index, traceability, detail, create-with-detail, conversion) and resources (index URIs, per-token, details-by-type).*
+
+### Data flow
+
+REQ, ARCH, and IMPL live as YAML indexes plus per-token detail files. Traceability links connect them; `semantic-tokens.yaml` is the registry.
+
+```mermaid
+flowchart LR
+  subgraph req [Requirements]
+    ReqIndex[requirements.yaml]
+    ReqDetails[requirements/*.yaml]
+  end
+  subgraph arch [Architecture]
+    ArchIndex[architecture-decisions.yaml]
+    ArchDetails[architecture-decisions/*.yaml]
+  end
+  subgraph impl [Implementation]
+    ImplIndex[implementation-decisions.yaml]
+    ImplDetails[implementation-decisions/*.yaml]
+  end
+  Registry[semantic-tokens.yaml]
+  ReqIndex --> ArchIndex
+  ArchIndex --> ImplIndex
+  ReqDetails --> ArchDetails
+  ArchDetails --> ImplDetails
+  ReqIndex --> Registry
+  ArchIndex --> Registry
+  ImplIndex --> Registry
+```
+
+*REQ index and detail dir feed ARCH, then IMPL; all reference the semantic-tokens registry. MCP tools and resources read/write these files under TIED_BASE_PATH.*
 
 ## Key Principles
 

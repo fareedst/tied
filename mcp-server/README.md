@@ -38,10 +38,12 @@ All path parameters (`requirements_path`, `architecture_path`, `implementation_p
 | `yaml_index_insert` | Insert a new record; params: `index`, `token`, `record` (JSON string). Writes to the index file (e.g. `tied/requirements.yaml`). Fails if token already exists. |
 | `yaml_index_update` | Update an existing record by merging top-level fields; params: `index`, `token`, `updates` (JSON string). Fails if token does not exist. |
 | `yaml_detail_read` | Read a single detail YAML file by token (REQ-*, ARCH-*, or IMPL-*). Params: `token`. Returns the detail record. Fails if token invalid or file missing. |
+| `yaml_detail_read_many` | Read details for multiple tokens or all tokens of a type. Params: `tokens` (array, optional) and/or `type` (requirement \| architecture \| implementation). If only `type` is passed, returns all details for that type. Output: object keyed by token, value is detail record or `{ error: string }`. |
 | `yaml_detail_list` | List tokens that have a detail YAML file. Params: `type` (requirement \| architecture \| implementation). |
 | `yaml_detail_create` | Create a new detail YAML file. Params: `token`, `record` (JSON string), optional `sync_index` (default true). Fails if file exists or token invalid. |
 | `yaml_detail_update` | Update an existing detail file by merging top-level fields. Params: `token`, `updates` (JSON string). Fails if no file. |
 | `yaml_detail_delete` | Delete a detail YAML file. Params: `token`, optional `sync_index` (default true to clear detail_file in index). |
+| `tied_token_create_with_detail` | Create a new REQ, ARCH, or IMPL token with both index record and detail YAML in one step. Params: `token`, `index_record` (JSON string), `detail_record` (JSON string), optional `upsert_index` (default false). Sets `detail_file` on the index automatically. Fails if detail file already exists. |
 | `convert_monolithic_requirements` | Convert STDD 1.0.0 monolithic `requirements.md` to TIED v1.5.0+ `requirements.yaml` + `requirements/REQ-*.yaml`. Params: `file_path` or `content`, optional `output_base_path`, `dry_run`, `overwrite`. |
 | `convert_monolithic_architecture` | Convert monolithic `architecture-decisions.md` to `architecture-decisions.yaml` + `architecture-decisions/ARCH-*.yaml`. Same params. |
 | `convert_monolithic_implementation` | Convert monolithic `implementation-decisions.md` to `implementation-decisions.yaml` + `implementation-decisions/IMPL-*.yaml`. Same params. |
@@ -52,7 +54,7 @@ All path parameters (`requirements_path`, `architecture_path`, `implementation_p
 These tools parse **monolithic** requirements and decisions files (single markdown files with all sections inline) and produce:
 
 - A **YAML index** file (e.g. `requirements.yaml`) with one record per token
-- **Detail markdown files** (e.g. `requirements/REQ-TIED_SETUP.md`) with standardized headers and migration footnote
+- **Detail YAML files** (e.g. `requirements/REQ-TIED_SETUP.yaml`) per token; schema in `detail-files-schema.md`
 
 **Input**: Either a `file_path` to the monolithic file or raw `content` (markdown string). For `convert_monolithic_all`, you can pass paths and/or raw content per document; when both are set for the same document, content overrides path. Colon-style tokens (`[REQ:*]`, `[ARCH:*]`, `[IMPL:*]`) are accepted by default and normalized to hyphen for output; pass `token_format: "hyphen"` to disable normalization and treat only hyphen-style tokens as valid.
 
@@ -64,7 +66,7 @@ These tools parse **monolithic** requirements and decisions files (single markdo
 
 ## Resources
 
-Read-only resources (e.g. for LLM context):
+Read-only resources (e.g. for LLM context). Detail files are YAML under `requirements/`, `architecture-decisions/`, and `implementation-decisions/`; these tools and resources operate on that YAML.
 
 - `tied://requirements` — full requirements.yaml
 - `tied://architecture-decisions` — full architecture-decisions.yaml
@@ -74,6 +76,9 @@ Read-only resources (e.g. for LLM context):
 - `tied://decision/{token}` — single ARCH or IMPL record
 - `tied://requirement/{token}/detail` — full detail YAML content for a requirement (REQ-*)
 - `tied://decision/{token}/detail` — full detail YAML content for an architecture or implementation decision (ARCH-* or IMPL-*)
+- `tied://details/requirements` — all requirement detail records (token → detail object)
+- `tied://details/architecture` — all architecture decision detail records
+- `tied://details/implementation` — all implementation decision detail records
 
 ## Cursor Integration
 
