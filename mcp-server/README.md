@@ -11,11 +11,15 @@ MCP server that exposes **tools** and **resources** for TIED YAML index files: r
 
 ## Install
 
+Run the install and build **from the TIED repository** (not from inside your project):
+
 ```bash
 cd mcp-server
 npm install
 npm run build
 ```
+
+The MCP server remains in the TIED repo; your project only references it via MCP configuration.
 
 ## Configuration
 
@@ -82,7 +86,10 @@ Read-only resources (e.g. for LLM context). Detail files are YAML under `require
 
 ## Cursor Integration
 
-Add the server to Cursor MCP settings (e.g. in Cursor Settings → MCP, or your MCP config file):
+Configure MCP in your **development project** (the project where you ran `copy_files.sh` and have a `tied/` directory). Use your project's MCP config (e.g. `.cursor/mcp.json` in the project, or Cursor Settings → MCP with that project as the workspace).
+
+- **args**: Must be the **absolute path to the TIED repo's** `mcp-server/dist/index.js` (e.g. `/path/to/tied/mcp-server/dist/index.js`), not a path inside your project.
+- **TIED_BASE_PATH**: Must be your **project's** tied directory — absolute path (e.g. `/path/to/your/project/tied`) or relative to the workspace root (e.g. `tied` or `./tied` when your project root is the workspace).
 
 ```json
 {
@@ -98,17 +105,11 @@ Add the server to Cursor MCP settings (e.g. in Cursor Settings → MCP, or your 
 }
 ```
 
-For a project that uses a `tied/` directory: set `TIED_BASE_PATH` to that directory (or leave unset to use default `tied` relative to the workspace). The server is typically run with the workspace root as the current working directory.
-
-For this template repo (YAML at repo root), use:
-
-```json
-"env": {
-  "TIED_BASE_PATH": "/path/to/tied"
-}
-```
+**Example:** TIED repo at `~/repos/tied`, development project at `~/projects/myapp`. Use `args`: `["/Users/you/repos/tied/mcp-server/dist/index.js"]` and `TIED_BASE_PATH`: `/Users/you/projects/myapp/tied` (or `tied` if the workspace is `myapp` and you use a relative path).
 
 Replace `/path/to/tied` and `/path/to/your/project/tied` with your actual paths.
+
+For a full example process of adding the TIED MCP to a project and invoking it in several passes (setup, bootstrap, establish REQ/ARCH/IMPL, maintain), see [docs/adding-tied-mcp-and-invoking-passes.md](../docs/adding-tied-mcp-and-invoking-passes.md).
 
 ## Run locally
 

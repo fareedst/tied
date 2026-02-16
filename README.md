@@ -22,6 +22,8 @@ This repository ([https://github.com/fareedst/tied](https://github.com/fareedst/
 
 ## Getting Started with a New Project
 
+The primary way to work with TIED is via the MCP server; a standalone bootstrap and workflow for non-MCP users is also available.
+
 ### Step 1: Copy Templates to Your Project
 
 **Recommended:** Download or clone the TIED repository somewhere convenient, then run `./copy_files.sh /path/to/project` (or `./copy_files.sh` if you are already in the project directory). The script copies every `.template` file into the target project's `tied/` directory, removes the `.template` suffix for you, and will never overwrite an existing `AGENTS.md` or `.cursorrules` file that may already be present in the destination.
@@ -58,6 +60,18 @@ cp .cursorrules .cursorrules        # Copy Cursor loader if using Cursor
 
 **Important**: Each project should have its own copies of these files. The template files remain in the [TIED repository](https://github.com/fareedst/tied) as reference templates.
 
+### Step 2 (optional): Use the MCP server
+
+The MCP server is **not** copied into your project; it stays in the TIED repository.
+
+1. **Build once** (in the TIED repo): From the TIED repo root, run `cd mcp-server && npm install && npm run build`.
+2. **In your development project**, configure your MCP client (e.g. Cursor) so that the server **command/args** point to the **TIED repo's** built server (e.g. `node /path/to/tied-repo/mcp-server/dist/index.js`) and **env** `TIED_BASE_PATH` points to your **project's** `tied/` directory (e.g. `./tied` if your project root is the workspace, or an absolute path).
+
+See [TIED YAML MCP Server](#tied-yaml-mcp-server) and [mcp-server/README.md](mcp-server/README.md) for the exact JSON and paths. For a full example process of adding the TIED MCP to a project and invoking it in several passes (bootstrap, establish REQ/ARCH/IMPL, maintain), see [docs/adding-tied-mcp-and-invoking-passes.md](docs/adding-tied-mcp-and-invoking-passes.md).
+
+### Using TIED without MCP
+
+If you do not use MCP, run `./bootstrap_without_mcp.sh /path/to/project` to get the same `tied/` layout; then manage YAML by hand or with tools (e.g. `yq`). See [docs/using-tied-without-mcp.md](docs/using-tied-without-mcp.md) for the workflow.
 
 ## Example Workflow
 
@@ -97,6 +111,10 @@ flowchart LR
 ## Repository Structure
 
 This repository contains:
+
+### Scripts
+- `copy_files.sh` — Bootstrap a project with TIED templates (used by both MCP and non-MCP users; MCP users then configure the server).
+- `bootstrap_without_mcp.sh` — Same bootstrap as `copy_files.sh`, then prints next steps for non-MCP users.
 
 ### Methodology Documentation (Reference Only)
 - `TIED.md` - TIED methodology overview (for beginners, intermediate, and experts)
@@ -164,10 +182,11 @@ your-project/
 
 This repository includes an **MCP (Model Context Protocol) server** that exposes the TIED YAML indexes and detail files as **tools** and **resources** for AI assistants and editors (e.g. Cursor).
 
-- **Location**: `mcp-server/`
-- **Setup**: Install with `cd mcp-server && npm install && npm run build`. Configure your MCP client (e.g. Cursor) to run `node /path/to/mcp-server/dist/index.js` and set `TIED_BASE_PATH` to your project's `tied/` directory.
+- **Location**: `mcp-server/` (in this TIED repo; the server is not copied into your project).
+- **Build**: In the **TIED repository**, run `cd mcp-server && npm install && npm run build` (the server is not copied into your project).
+- **Configure**: In your **development project**, add or edit your MCP config (e.g. `.cursor/mcp.json`) so the server runs from the **TIED repo's** `mcp-server/dist/index.js` and `TIED_BASE_PATH` is set to your **project's** `tied/` directory.
 
-See [mcp-server/README.md](mcp-server/README.md) for the full tool and resource list, Cursor integration, and usage.
+See [mcp-server/README.md](mcp-server/README.md) for the full tool and resource list, example JSON, and usage.
 
 ### Value of MCP for managing REQ/ARCH/IMPL
 
