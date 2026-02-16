@@ -1,7 +1,8 @@
 /**
- * MCP tool handlers for TIED YAML index operations.
+ * MCP tool handlers for TIED YAML index operations and monolithic conversion.
  */
 
+import fs from "node:fs";
 import { z } from "zod";
 import { textContent } from "../types.js";
 import {
@@ -16,6 +17,12 @@ import {
   updateRecord,
   type IndexName,
 } from "../yaml-loader.js";
+import {
+  convertMonolithicRequirements,
+  convertMonolithicArchitecture,
+  convertMonolithicImplementation,
+  convertMonolithicAll,
+} from "../convert/index.js";
 
 const INDEX_ENUM = z.enum([
   "requirements",
@@ -243,6 +250,207 @@ export const allTools = [
         return textContent(JSON.stringify({ ok: false, error: "Invalid JSON in updates" }));
       }
       const result = updateRecord(index as IndexName, token, updates);
+      return textContent(JSON.stringify(result, null, 2));
+    },
+  },
+  {
+    name: "convert_monolithic_requirements",
+    config: {
+      description:
+        "Convert markdown to YAML: parses monolithic requirements.md and writes requirements.yaml (primary output) plus requirements/REQ-*.md detail files. Every heading (##/###) or text label (**Label**:) that immediately contains text or a list becomes a key in the YAML structure. Provide file_path or content. Paths are cwd-relative unless absolute. Use dry_run to get paths without writing.",
+      inputSchema: z.object({
+        file_path: z
+          .string()
+          .optional()
+          .describe("Path to monolithic requirements.md file (cwd-relative unless absolute)"),
+        content: z
+          .string()
+          .optional()
+          .describe("Raw markdown content (use if file_path not provided)"),
+        output_base_path: z
+          .string()
+          .optional()
+          .describe("Output directory (default: tied or TIED_BASE_PATH). Cwd-relative unless absolute."),
+        dry_run: z
+          .boolean()
+          .optional()
+          .describe("If true, return summary and paths without writing"),
+        overwrite: z
+          .boolean()
+          .optional()
+          .describe("If false, skip writing detail files that already exist (default: true)"),
+        token_format: z
+          .enum(["hyphen", "colon", "both"])
+          .optional()
+          .describe("Input token format: hyphen [REQ-*], colon [REQ:*], or both (normalize colon to hyphen before parsing)"),
+      }),
+    },
+    handler: async (args: {
+      file_path?: string;
+      content?: string;
+      output_base_path?: string;
+      dry_run?: boolean;
+      overwrite?: boolean;
+      token_format?: "hyphen" | "colon" | "both";
+    }) => {
+      let content = args.content;
+      if (content == null && args.file_path) {
+        try {
+          content = fs.readFileSync(args.file_path, "utf8");
+        } catch (e) {
+          const msg = e instanceof Error ? e.message : String(e);
+          return textContent(JSON.stringify({ ok: false, error: `Read failed: ${msg}` }, null, 2));
+        }
+      }
+      if (content == null || content === "")
+        return textContent(
+          JSON.stringify({ ok: false, error: "Provide file_path or content" }, null, 2)
+        );
+      const result = convertMonolithicRequirements(content, args.output_base_path, {
+        dry_run: args.dry_run,
+        overwrite: args.overwrite,
+        token_format: args.token_format,
+      });
+      return textContent(JSON.stringify(result, null, 2));
+    },
+  },
+  {
+    name: "convert_monolithic_architecture",
+    config: {
+      description:
+        "Convert markdown to YAML: parses monolithic architecture-decisions.md and writes architecture-decisions.yaml (primary output) plus architecture-decisions/ARCH-*.md detail files. Every heading or text label that immediately contains text or a list becomes a key in the YAML structure. Paths are cwd-relative unless absolute. Use dry_run to get paths without writing.",
+      inputSchema: z.object({
+        file_path: z.string().optional().describe("Path to monolithic architecture-decisions.md (cwd-relative unless absolute)"),
+        content: z.string().optional().describe("Raw markdown content"),
+        output_base_path: z.string().optional().describe("Output directory (cwd-relative unless absolute)"),
+        dry_run: z.boolean().optional().describe("If true, no writes"),
+        overwrite: z.boolean().optional().describe("If false, skip existing detail files"),
+        token_format: z
+          .enum(["hyphen", "colon", "both"])
+          .optional()
+          .describe("Input token format: hyphen, colon [ARCH:*], or both (normalize to hyphen before parsing)"),
+      }),
+    },
+    handler: async (args: {
+      file_path?: string;
+      content?: string;
+      output_base_path?: string;
+      dry_run?: boolean;
+      overwrite?: boolean;
+      token_format?: "hyphen" | "colon" | "both";
+    }) => {
+      let content = args.content;
+      if (content == null && args.file_path) {
+        try {
+          content = fs.readFileSync(args.file_path, "utf8");
+        } catch (e) {
+          const msg = e instanceof Error ? e.message : String(e);
+          return textContent(JSON.stringify({ ok: false, error: `Read failed: ${msg}` }, null, 2));
+        }
+      }
+      if (content == null || content === "")
+        return textContent(
+          JSON.stringify({ ok: false, error: "Provide file_path or content" }, null, 2)
+        );
+      const result = convertMonolithicArchitecture(content, args.output_base_path, {
+        dry_run: args.dry_run,
+        overwrite: args.overwrite,
+        token_format: args.token_format,
+      });
+      return textContent(JSON.stringify(result, null, 2));
+    },
+  },
+  {
+    name: "convert_monolithic_implementation",
+    config: {
+      description:
+        "Convert markdown to YAML: parses monolithic implementation-decisions.md and writes implementation-decisions.yaml (primary output) plus implementation-decisions/IMPL-*.md detail files. Every heading or text label that immediately contains text or a list becomes a key in the YAML structure. Paths are cwd-relative unless absolute. Use dry_run to get paths without writing.",
+      inputSchema: z.object({
+        file_path: z.string().optional().describe("Path to monolithic implementation-decisions.md (cwd-relative unless absolute)"),
+        content: z.string().optional().describe("Raw markdown content"),
+        output_base_path: z.string().optional().describe("Output directory (cwd-relative unless absolute)"),
+        dry_run: z.boolean().optional().describe("If true, no writes"),
+        overwrite: z.boolean().optional().describe("If false, skip existing detail files"),
+        token_format: z
+          .enum(["hyphen", "colon", "both"])
+          .optional()
+          .describe("Input token format: hyphen, colon [IMPL:*], or both (normalize to hyphen before parsing)"),
+      }),
+    },
+    handler: async (args: {
+      file_path?: string;
+      content?: string;
+      output_base_path?: string;
+      dry_run?: boolean;
+      overwrite?: boolean;
+      token_format?: "hyphen" | "colon" | "both";
+    }) => {
+      let content = args.content;
+      if (content == null && args.file_path) {
+        try {
+          content = fs.readFileSync(args.file_path, "utf8");
+        } catch (e) {
+          const msg = e instanceof Error ? e.message : String(e);
+          return textContent(JSON.stringify({ ok: false, error: `Read failed: ${msg}` }, null, 2));
+        }
+      }
+      if (content == null || content === "")
+        return textContent(
+          JSON.stringify({ ok: false, error: "Provide file_path or content" }, null, 2)
+        );
+      const result = convertMonolithicImplementation(content, args.output_base_path, {
+        dry_run: args.dry_run,
+        overwrite: args.overwrite,
+        token_format: args.token_format,
+      });
+      return textContent(JSON.stringify(result, null, 2));
+    },
+  },
+  {
+    name: "convert_monolithic_all",
+    config: {
+      description:
+        "Convert markdown to YAML for all three monolithic files (requirements, architecture, implementation) in one call. Primary output is YAML index files; detail markdown files are also written unless dry_run. Every heading or text label that immediately contains text or a list becomes a key in the YAML structure. Pass paths and/or raw content for any of the three; content overrides path when both provided. Paths are cwd-relative unless absolute.",
+      inputSchema: z.object({
+        requirements_path: z.string().optional().describe("Path to requirements.md (cwd-relative unless absolute)"),
+        architecture_path: z.string().optional().describe("Path to architecture-decisions.md (cwd-relative unless absolute)"),
+        implementation_path: z.string().optional().describe("Path to implementation-decisions.md (cwd-relative unless absolute)"),
+        requirements_content: z.string().optional().describe("Raw markdown for requirements (overrides requirements_path when set)"),
+        architecture_content: z.string().optional().describe("Raw markdown for architecture (overrides architecture_path when set)"),
+        implementation_content: z.string().optional().describe("Raw markdown for implementation (overrides implementation_path when set)"),
+        output_base_path: z.string().optional().describe("Output directory (cwd-relative unless absolute)"),
+        dry_run: z.boolean().optional().describe("If true, no writes"),
+        overwrite: z.boolean().optional().describe("If false, skip existing detail files"),
+        token_format: z
+          .enum(["hyphen", "colon", "both"])
+          .optional()
+          .describe("Input token format: hyphen, colon [REQ:*] etc., or both (normalize to hyphen before parsing)"),
+      }),
+    },
+    handler: async (args: {
+      requirements_path?: string;
+      architecture_path?: string;
+      implementation_path?: string;
+      requirements_content?: string;
+      architecture_content?: string;
+      implementation_content?: string;
+      output_base_path?: string;
+      dry_run?: boolean;
+      overwrite?: boolean;
+      token_format?: "hyphen" | "colon" | "both";
+    }) => {
+      const result = convertMonolithicAll({
+        requirements_path: args.requirements_path,
+        architecture_path: args.architecture_path,
+        implementation_path: args.implementation_path,
+        requirements_content: args.requirements_content,
+        architecture_content: args.architecture_content,
+        implementation_content: args.implementation_content,
+        output_base_path: args.output_base_path,
+        dry_run: args.dry_run,
+        overwrite: args.overwrite,
+        token_format: args.token_format,
+      });
       return textContent(JSON.stringify(result, null, 2));
     },
   },

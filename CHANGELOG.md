@@ -15,6 +15,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Configuration**: `TIED_BASE_PATH` environment variable for index location; supports `tied/` layout and template-only repos
   - **Cursor**: Documented MCP config for Cursor IDE in `mcp-server/README.md`
 
+### Changed
+
+- **Monolithic-to-TIED conversion (REQ, ARCH, IMPL)** – improved migration in `mcp-server/src/convert/` for lossless conversion from STDD-style monolithic markdown to TIED YAML indexes and detail files:
+  - **Requirements**
+    - Section regex allows optional numbering (e.g. `### 2. [REQ-...]`); end-of-string lookahead fixed so section bodies are no longer truncated at newlines.
+    - "Next bold label" parsing: each labeled field’s value runs until the next `**Label**`/`**Label**:`, preserving multi-line Satisfaction Criteria, Validation Criteria, and Implementation Notes.
+    - Same-line values (e.g. `**Priority: P0 (Critical)**`) and rest-of-line values (e.g. `**Description**: text`) both captured; backtick-only lines (e.g. `` `[PROC:TOKEN_AUDIT]`: ``) not treated as field values.
+    - Trailing colon stripped from normalized keys so `**Rationale:**` maps to `rationale`.
+    - Detail files: Implementation Notes section when present; "Original section (from monolithic source)" collapsible block with full body for fidelity.
+    - YAML records: optional `implementation_notes` when present.
+  - **Architecture**
+    - Section regex allows decimal numbering (e.g. `## 4.1`, `## 14.1.`); optional `[REQ-*]`/`[IMPL-*]` after `[ARCH-*]`.
+    - `### Decision: ...` block extracted; then "next bold label" parsing for Rationale, Alternatives Considered, Implementation (and Implementation Plan), Token Coverage, Implementation Status.
+    - Detail files: Status from parsed content; Token Coverage section from source when present; "Original section" block; Alternatives Considered shows "—" when empty.
+    - Fallback regex uses `(?![\s\S])` for end-of-string.
+    - YAML records: `token_coverage` and status from source when present.
+  - **Implementation**
+    - Section regex allows `N.`, `2a.`, `8.1.`-style numbering; header may contain `[ARCH-*]` `[REQ-*]` `[IMPL-*]` refs.
+    - `### Decision: ...` and `### Implementation Approach: ...` blocks extracted; "next bold label" parsing for Rationale, Code Markers, Token Coverage, Validation Evidence, Implementation Details.
+    - Detail files: Decision, Rationale, Implementation Approach, Implementation Details, Code Markers, Token Coverage, Validation Evidence; Status from source; "Original section" block.
+    - YAML records: `token_coverage`, `code_markers`, `validation_evidence`; `implementation_approach.details` from Implementation Details; status and decision used when present.
+  - **Shared**
+    - Colon-style tokens (`[REQ:*]`, `[ARCH:*]`, `[IMPL:*]`) normalized to hyphen before parsing when `token_format` is `"both"` or `"colon"`.
+    - REQ, ARCH, and IMPL conversions now use the same parsing and fidelity patterns so all captured info is preserved in both detail markdown and YAML.
+
 ## [2.1.0] - 2026-02-09
 
 ### Changed
