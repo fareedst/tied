@@ -145,7 +145,7 @@ ARCH-NEW_DECISION:
     informs:
       - IMPL-NEW_DECISION
     see_also: []
-  detail_file: architecture-decisions/ARCH-NEW_DECISION.md
+  detail_file: architecture-decisions/ARCH-NEW_DECISION.yaml
   metadata:
     created:
       date: 2026-02-06

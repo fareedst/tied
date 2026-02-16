@@ -120,7 +120,10 @@ This repository contains:
 - `implementation-decisions.template/` - Individual implementation decision detail file examples
 - `processes.template.md` - Template for process tracking including `[PROC-YAML_DB_OPERATIONS]`
 - `semantic-tokens.template.md` - Template for semantic token registry
+- `semantic-tokens.template.yaml` - YAML registry of REQ/ARCH/IMPL/PROC tokens (minimal, foundational for bootstrap)
 - `tasks.template.md` - **Optional** template for task tracking (not required by methodology)
+
+The YAML index templates (`*.template.yaml`) contain only methodology-relevant records; new REQ/ARCH/IMPL can be added via the MCP server tools or by copying the template block at the bottom of each index file (or a template detail file such as `requirements.template/REQ-IDENTIFIER.yaml`).
 
 ## Project File Structure
 

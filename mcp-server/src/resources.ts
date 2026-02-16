@@ -10,6 +10,7 @@ import {
   listTokens,
   type IndexName,
 } from "./yaml-loader.js";
+import { loadDetail, listDetailTokens } from "./detail-loader.js";
 
 const TIED_PREFIX = "tied://";
 
@@ -103,6 +104,66 @@ export function registerResources(server: McpServer): void {
       const index: IndexName = token.startsWith("ARCH-") ? "architecture" : "implementation";
       const record = getRecord(index, token);
       const text = record != null ? toYamlLike(record) : `No decision found for: ${token}`;
+      return { contents: [{ uri: uri.href, text }] };
+    }
+  );
+
+  server.registerResource(
+    "requirement-detail",
+    new ResourceTemplate(`${TIED_PREFIX}requirement/{token}/detail`, {
+      list: undefined,
+      complete: {
+        token: async (value) => {
+          const tokens = listDetailTokens("requirement");
+          const v = asString(value);
+          if (!v) return tokens;
+          const lower = v.toLowerCase();
+          return tokens.filter((t) => t.toLowerCase().startsWith(lower));
+        },
+      },
+    }),
+    {
+      description: "Full detail YAML content for a requirement (REQ-*) by token",
+      mimeType: "application/json",
+    },
+    async (uri, variables) => {
+      const token = asString(variables.token);
+      if (!token.startsWith("REQ-")) {
+        return { contents: [{ uri: uri.href, text: `Invalid token for requirement detail: ${token}. Must start with REQ-` }] };
+      }
+      const record = loadDetail(token);
+      const text = record != null ? toYamlLike(record) : `No detail file found for: ${token}`;
+      return { contents: [{ uri: uri.href, text }] };
+    }
+  );
+
+  server.registerResource(
+    "decision-detail",
+    new ResourceTemplate(`${TIED_PREFIX}decision/{token}/detail`, {
+      list: undefined,
+      complete: {
+        token: async (value) => {
+          const arch = listDetailTokens("architecture");
+          const impl = listDetailTokens("implementation");
+          const tokens = [...arch, ...impl];
+          const v = asString(value);
+          if (!v) return tokens;
+          const lower = v.toLowerCase();
+          return tokens.filter((t) => t.toLowerCase().startsWith(lower));
+        },
+      },
+    }),
+    {
+      description: "Full detail YAML content for an architecture or implementation decision (ARCH-* or IMPL-*) by token",
+      mimeType: "application/json",
+    },
+    async (uri, variables) => {
+      const token = asString(variables.token);
+      if (!token.startsWith("ARCH-") && !token.startsWith("IMPL-")) {
+        return { contents: [{ uri: uri.href, text: `Invalid token for decision detail: ${token}. Must start with ARCH- or IMPL-` }] };
+      }
+      const record = loadDetail(token);
+      const text = record != null ? toYamlLike(record) : `No detail file found for: ${token}`;
       return { contents: [{ uri: uri.href, text }] };
     }
   );

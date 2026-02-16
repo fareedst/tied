@@ -16,11 +16,6 @@ import {
   architectureToYamlRecord,
   implementationToYamlRecord,
 } from "./yaml-generator.js";
-import {
-  requirementDetailMarkdown,
-  architectureDetailMarkdown,
-  implementationDetailMarkdown,
-} from "./detail-generator.js";
 import { getBasePath } from "../yaml-loader.js";
 
 /** Token format for monolithic input: hyphen [REQ-*], colon [REQ:*], or both (normalize colon to hyphen). */
@@ -68,10 +63,6 @@ export interface ConversionSummary {
   dry_run?: boolean;
 }
 
-const SOURCE_REQUIREMENTS = "requirements.md";
-const SOURCE_ARCHITECTURE = "architecture-decisions.md";
-const SOURCE_IMPLEMENTATION = "implementation-decisions.md";
-
 export interface ConversionOptions {
   dry_run?: boolean;
   overwrite?: boolean;
@@ -100,9 +91,9 @@ export function convertMonolithicRequirements(
   const detailPaths: string[] = [];
 
   for (const p of deduped) {
-    const detailFile = `requirements/${p.token}.md`;
+    const detailFile = `requirements/${p.token}.yaml`;
     indexRecord[p.token] = requirementToYamlRecord(p, detailFile);
-    detailPaths.push(path.join(detailDir, `${p.token}.md`));
+    detailPaths.push(path.join(detailDir, `${p.token}.yaml`));
   }
 
   if (options.dry_run) {
@@ -124,11 +115,15 @@ export function convertMonolithicRequirements(
       "utf8"
     );
     for (let i = 0; i < deduped.length; i++) {
-      const p = deduped[i];
+      const token = deduped[i].token;
       const detailPath = detailPaths[i];
       if (options.overwrite === false && fs.existsSync(detailPath)) continue;
-      const md = requirementDetailMarkdown(p, SOURCE_REQUIREMENTS);
-      fs.writeFileSync(detailPath, md, "utf8");
+      const content = { [token]: indexRecord[token] };
+      fs.writeFileSync(
+        detailPath,
+        yaml.dump(content, { sortKeys: false, lineWidth: -1 }),
+        "utf8"
+      );
     }
     return { ok: true, tokens, index_path: indexPath, detail_paths: detailPaths };
   } catch (e) {
@@ -158,9 +153,9 @@ export function convertMonolithicArchitecture(
   const detailPaths: string[] = [];
 
   for (const p of deduped) {
-    const detailFile = `architecture-decisions/${p.token}.md`;
+    const detailFile = `architecture-decisions/${p.token}.yaml`;
     indexRecord[p.token] = architectureToYamlRecord(p, detailFile);
-    detailPaths.push(path.join(detailDir, `${p.token}.md`));
+    detailPaths.push(path.join(detailDir, `${p.token}.yaml`));
   }
 
   if (options.dry_run) {
@@ -182,11 +177,15 @@ export function convertMonolithicArchitecture(
       "utf8"
     );
     for (let i = 0; i < deduped.length; i++) {
-      const p = deduped[i];
+      const token = deduped[i].token;
       const detailPath = detailPaths[i];
       if (options.overwrite === false && fs.existsSync(detailPath)) continue;
-      const md = architectureDetailMarkdown(p, SOURCE_ARCHITECTURE);
-      fs.writeFileSync(detailPath, md, "utf8");
+      const content = { [token]: indexRecord[token] };
+      fs.writeFileSync(
+        detailPath,
+        yaml.dump(content, { sortKeys: false, lineWidth: -1 }),
+        "utf8"
+      );
     }
     return { ok: true, tokens, index_path: indexPath, detail_paths: detailPaths };
   } catch (e) {
@@ -216,9 +215,9 @@ export function convertMonolithicImplementation(
   const detailPaths: string[] = [];
 
   for (const p of deduped) {
-    const detailFile = `implementation-decisions/${p.token}.md`;
+    const detailFile = `implementation-decisions/${p.token}.yaml`;
     indexRecord[p.token] = implementationToYamlRecord(p, detailFile);
-    detailPaths.push(path.join(detailDir, `${p.token}.md`));
+    detailPaths.push(path.join(detailDir, `${p.token}.yaml`));
   }
 
   if (options.dry_run) {
@@ -240,11 +239,15 @@ export function convertMonolithicImplementation(
       "utf8"
     );
     for (let i = 0; i < deduped.length; i++) {
-      const p = deduped[i];
+      const token = deduped[i].token;
       const detailPath = detailPaths[i];
       if (options.overwrite === false && fs.existsSync(detailPath)) continue;
-      const md = implementationDetailMarkdown(p, SOURCE_IMPLEMENTATION);
-      fs.writeFileSync(detailPath, md, "utf8");
+      const content = { [token]: indexRecord[token] };
+      fs.writeFileSync(
+        detailPath,
+        yaml.dump(content, { sortKeys: false, lineWidth: -1 }),
+        "utf8"
+      );
     }
     return { ok: true, tokens, index_path: indexPath, detail_paths: detailPaths };
   } catch (e) {

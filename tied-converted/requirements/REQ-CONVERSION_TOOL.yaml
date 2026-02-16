@@ -1,0 +1,40 @@
+REQ-CONVERSION_TOOL:
+  name: MCP Monolithic-to-TIED Conversion
+  category: Functional
+  priority: P1
+  status: Implemented
+  rationale:
+    why: Enables migration of existing STDD projects to TIED without manual extraction.
+    problems_solved: []
+    benefits: []
+  satisfaction_criteria:
+    - criterion: convert_monolithic_requirements, convert_monolithic_architecture, convert_monolithic_implementation available
+    - criterion: convert_monolithic_all runs all three
+    - criterion: 'Output: YAML index + detail .md per token'
+  validation_criteria:
+    - method: Dry run returns tokens and paths; real run writes files
+  traceability:
+    architecture:
+      - ARCH-TIED_STRUCTURE
+    implementation: []
+    tests: []
+    code_annotations:
+      - REQ-CONVERSION_TOOL
+  related_requirements:
+    depends_on: []
+    related_to: []
+    supersedes: []
+  detail_file: requirements/REQ-CONVERSION_TOOL.yaml
+  metadata:
+    created:
+      date: '2026-02-16'
+      author: MCP converter
+    last_updated:
+      date: '2026-02-16'
+      author: MCP converter
+      reason: Converted from monolithic
+    last_validated:
+      date: '2026-02-16'
+      validator: MCP converter
+      result: pass
+  description: Provide MCP tools to convert STDD 1.0.0 monolithic requirements.md, architecture-decisions.md, and implementation-decisions.md to TIED v1.5.0+ YAML indexes and detail markdown files.

@@ -1,0 +1,56 @@
+# [REQ-IDENTIFIER] Requirement Name - Template (YAML)
+# Schema: see detail-files-schema.md
+# Copy this file and rename to REQ-YOUR_TOKEN.yaml when creating a new requirement.
+
+REQ-IDENTIFIER:
+  name: Requirement Name
+  category: Functional
+  priority: P1
+  status: Template
+  description: |
+    What the requirement specifies (WHAT)
+  rationale:
+    why: "Why the requirement exists (WHY)"
+    problems_solved:
+      - "Problem 1"
+      - "Problem 2"
+    benefits:
+      - "Benefit 1"
+      - "Benefit 2"
+  satisfaction_criteria:
+    - criterion: "How we know the requirement is satisfied"
+    - criterion: "Acceptance criteria"
+      metric: "Optional measurable target"
+    - criterion: "Success conditions"
+  validation_criteria:
+    - method: "Unit tests"
+      coverage: "All core functions"
+    - method: "Integration tests"
+      coverage: "End-to-end flows"
+    - method: "Manual testing"
+      coverage: "QA checklist"
+  traceability:
+    architecture:
+      - ARCH-IDENTIFIER
+    implementation:
+      - IMPL-IDENTIFIER
+    tests:
+      - testFeatureName_REQ_IDENTIFIER
+    code_annotations:
+      - REQ-IDENTIFIER
+  related_requirements:
+    depends_on: []
+    related_to: []
+    supersedes: []
+  metadata:
+    created:
+      date: "YYYY-MM-DD"
+      author: "agent/contributor"
+    last_updated:
+      date: "YYYY-MM-DD"
+      author: "agent/contributor"
+      reason: "Initial creation"
+    last_validated:
+      date: "YYYY-MM-DD"
+      validator: "agent/contributor"
+      result: "pass"

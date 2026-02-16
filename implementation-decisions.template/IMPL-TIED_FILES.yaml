@@ -1,0 +1,72 @@
+# [IMPL-TIED_FILES] STDD File Creation - Detail (YAML)
+# Schema: see detail-files-schema.md
+
+IMPL-TIED_FILES:
+  name: STDD File Creation
+  status: Active
+  cross_references:
+    - ARCH-TIED_STRUCTURE
+    - REQ-TIED_SETUP
+  decision: "Bootstrap script that creates tied/ directory, copies template files, and sets up base files."
+  rationale:
+    why: "Implements ARCH-TIED_STRUCTURE and realizes REQ-TIED_SETUP by creating the foundational STDD directory structure and files"
+    problems_solved:
+      - "Manual setup of STDD structure is error-prone"
+      - "Inconsistent project structure across implementations"
+      - "Missing required STDD files and directories"
+    benefits:
+      - "Automated, consistent STDD setup"
+      - "All required files and directories created correctly"
+      - "Easy project bootstrapping with single command"
+  implementation_approach:
+    summary: "Bootstrap script that creates tied/ directory, copies template files, and sets up base files"
+    details:
+      - "Create tied/ directory at project root"
+      - "Copy YAML index files from templates (requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml)"
+      - "Copy guide files from templates (semantic-tokens.md, processes.md)"
+      - "Create detail subdirectories (requirements/, architecture-decisions/, implementation-decisions/)"
+      - "Copy base files to project root (.cursorrules, AGENTS.md, ai-principles.md)"
+  code_locations:
+    files:
+      - path: "copy_files.sh"
+        description: "Bootstrap script that sets up STDD structure"
+        lines: [1, 163]
+    functions:
+      - name: "setup_stdd_structure"
+        file: "copy_files.sh"
+        description: "Creates directories and copies template files (if implemented as function)"
+  traceability:
+    architecture:
+      - ARCH-TIED_STRUCTURE
+    requirements:
+      - REQ-TIED_SETUP
+    tests:
+      - Manual verification checklists
+    code_annotations:
+      - IMPL-TIED_FILES
+      - ARCH-TIED_STRUCTURE
+      - REQ-TIED_SETUP
+  related_decisions:
+    depends_on: []
+    supersedes: []
+    see_also:
+      - ARCH-TIED_STRUCTURE
+      - REQ-TIED_SETUP
+  token_coverage:
+    code_files:
+      - "Bootstrap scripts with // [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]"
+    tests:
+      - "TestTIEDSetup_REQ_TIED_SETUP ensures docs + registry exist"
+  validation_evidence: []
+  metadata:
+    created:
+      date: "2025-12-18"
+      author: "AI Agent"
+    last_updated:
+      date: "2026-02-06"
+      author: "AI Agent"
+      reason: "Restructured to v1.5.0 schema with machine-parseable fields"
+    last_validated:
+      date: "2026-02-06"
+      validator: "AI Agent"
+      result: "pass"

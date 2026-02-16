@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **YAML detail files for REQ, ARCH, and IMPL** [TIED spec update]: Individual token detail files are now YAML (replacing Markdown) so transformations (validation, merge, report generation, MCP tools) can operate on them.
+  - **Schema**: New `detail-files-schema.md` describes the YAML structure for `requirements/REQ-*.yaml`, `architecture-decisions/ARCH-*.yaml`, and `implementation-decisions/IMPL-*.yaml` (one token per file, top-level key = token id; fields aligned with index for merge/validation).
+  - **Templates**: Added YAML detail files in `requirements.template/` (REQ-TIED_SETUP, REQ-MODULE_VALIDATION, REQ-IDENTIFIER), `architecture-decisions.template/` (ARCH-TIED_STRUCTURE, ARCH-MODULE_VALIDATION, ARCH-EXAMPLE_DECISION), `implementation-decisions.template/` (IMPL-TIED_FILES, IMPL-MODULE_VALIDATION).
+  - **Indexes**: All `detail_file` paths in `requirements.template.yaml`, `architecture-decisions.template.yaml`, `implementation-decisions.template.yaml`, and `semantic-tokens.template.yaml` now reference `.yaml` (e.g. `requirements/REQ-TIED_SETUP.yaml`).
+  - **Docs**: AGENTS.md Key Files table and ai-principles.md Related Documents updated to describe detail files as YAML and to reference `detail-files-schema.md`; processes.template.md and guide templates (requirements, architecture-decisions, implementation-decisions) use `.yaml` in examples.
+  - **Bootstrap**: `copy_files.sh` copies `*.yaml` detail files from template directories into `tied/` and copies `detail-files-schema.md` into `tied/` when present.
+  - **Legacy**: Existing `.md` detail files in template directories are unchanged and can remain for reference; indexes and scripts now treat YAML as the canonical detail format.
+
 - **TIED YAML MCP Server** (`mcp-server/`): Model Context Protocol server for programmatic access to TIED YAML indexes
   - **Tools**: Read, list tokens, filter by field, validate YAML; traceability tools `get_decisions_for_requirement` and `get_requirements_for_decision`; write tools `yaml_index_insert`, `yaml_index_update`
   - **Resources**: Read-only URIs for full indexes (`tied://requirements`, `tied://architecture-decisions`, `tied://implementation-decisions`, `tied://semantic-tokens`) and single records (`tied://requirement/{token}`, `tied://decision/{token}`)
@@ -38,7 +46,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - YAML records: `token_coverage`, `code_markers`, `validation_evidence`; `implementation_approach.details` from Implementation Details; status and decision used when present.
   - **Shared**
     - Colon-style tokens (`[REQ:*]`, `[ARCH:*]`, `[IMPL:*]`) normalized to hyphen before parsing when `token_format` is `"both"` or `"colon"`.
-    - REQ, ARCH, and IMPL conversions now use the same parsing and fidelity patterns so all captured info is preserved in both detail markdown and YAML.
+    - REQ, ARCH, and IMPL conversions now use the same parsing and fidelity patterns so all captured info is preserved in both detail YAML and index.
+    - Detail output is now YAML only (REQ-*.yaml, ARCH-*.yaml, IMPL-*.yaml); index `detail_file` paths reference .yaml.
 
 ## [2.1.0] - 2026-02-09
 

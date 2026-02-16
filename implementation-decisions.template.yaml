@@ -8,7 +8,7 @@
 # 2. Paste it at the end with a blank line before it
 # 3. Replace IMPL-IDENTIFIER with your new token
 # 4. Fill in all fields
-# 5. Update the detail_file path to match your new .md file in implementation-decisions/ directory
+# 5. Update the detail_file path to match your new .yaml file in implementation-decisions/ directory
 #
 # Field descriptions:
 #   name: Short descriptive name of the decision
@@ -19,7 +19,7 @@
 #   code_locations: Structured code locations with files and functions
 #   traceability: Structured links to architecture, requirements, tests, code_annotations
 #   related_decisions: Lists of depends_on, supersedes, see_also (YAML lists or [])
-#   detail_file: Path to the detailed .md file in implementation-decisions/ directory
+#   detail_file: Path to the detailed .yaml file in implementation-decisions/ directory
 #   metadata: Structured metadata with created, last_updated, last_validated info
 
 ---
@@ -74,7 +74,7 @@ IMPL-TIED_FILES:
     see_also:
       - ARCH-TIED_STRUCTURE
       - REQ-TIED_SETUP
-  detail_file: implementation-decisions/IMPL-TIED_FILES.md
+  detail_file: implementation-decisions/IMPL-TIED_FILES.yaml
   metadata:
     created:
       date: 2025-12-18
@@ -141,7 +141,7 @@ IMPL-MODULE_VALIDATION:
     see_also:
       - ARCH-MODULE_VALIDATION
       - REQ-MODULE_VALIDATION
-  detail_file: implementation-decisions/IMPL-MODULE_VALIDATION.md
+  detail_file: implementation-decisions/IMPL-MODULE_VALIDATION.yaml
   metadata:
     created:
       date: 2025-12-18
@@ -153,269 +153,6 @@ IMPL-MODULE_VALIDATION:
     last_validated:
       date: 2026-02-06
       validator: "AI Agent"
-      result: "pass"
-
-IMPL-CONFIG_STRUCT:
-  name: Configuration Structure
-  status: Template
-  cross_references:
-    - ARCH-CONFIG_STRUCTURE
-    - REQ-CONFIGURATION
-  rationale:
-    why: "Why this configuration structure was chosen"
-    problems_solved:
-      - "Problem 1"
-    benefits:
-      - "Benefit 1"
-  implementation_approach:
-    summary: "Configuration structure implementation approach"
-    details:
-      - "Specific technical detail 1"
-      - "Code structure or pattern"
-      - "API design decision"
-  code_locations:
-    files:
-      - path: "path/to/config.ext"
-        description: "Configuration implementation"
-    functions:
-      - name: "loadConfig"
-        file: "path/to/config.ext"
-        description: "Configuration loading logic"
-  traceability:
-    architecture:
-      - ARCH-CONFIG_STRUCTURE
-    requirements:
-      - REQ-CONFIGURATION
-    tests:
-      - testConfiguration_IMPL_CONFIG_STRUCT
-    code_annotations:
-      - IMPL-CONFIG_STRUCT
-  related_decisions:
-    depends_on: []
-    supersedes: []
-    see_also: []
-  detail_file: implementation-decisions/IMPL-CONFIG_STRUCT.md
-  metadata:
-    created:
-      date: YYYY-MM-DD
-      author: "agent/contributor"
-    last_updated:
-      date: YYYY-MM-DD
-      author: "agent/contributor"
-      reason: "Initial creation"
-    last_validated:
-      date: YYYY-MM-DD
-      validator: "agent/contributor"
-      result: "pass"
-
-IMPL-EXAMPLE_IMPLEMENTATION:
-  name: Core Implementation Example
-  status: Template
-  cross_references:
-    - ARCH-EXAMPLE_DECISION
-    - REQ-EXAMPLE_FEATURE
-  rationale:
-    why: "Why this implementation approach was chosen"
-    problems_solved:
-      - "Problem 1 that implementation solves"
-    benefits:
-      - "Benefit 1 of implementation"
-  implementation_approach:
-    summary: "Main implementation approach"
-    details:
-      - "Specific technical detail 1"
-      - "Code structure or pattern"
-      - "API design decision"
-  code_locations:
-    files:
-      - path: "path/to/implementation.ext"
-        description: "Main implementation"
-        lines: [10, 50]
-    functions:
-      - name: "exampleFunction"
-        file: "path/to/implementation.ext"
-        description: "What it does"
-  traceability:
-    architecture:
-      - ARCH-EXAMPLE_DECISION
-    requirements:
-      - REQ-EXAMPLE_FEATURE
-    tests:
-      - testFeatureName_REQ_EXAMPLE_FEATURE
-    code_annotations:
-      - IMPL-EXAMPLE_IMPLEMENTATION
-  related_decisions:
-    depends_on: []
-    supersedes: []
-    see_also: []
-  detail_file: implementation-decisions/IMPL-EXAMPLE_IMPLEMENTATION.md
-  metadata:
-    created:
-      date: YYYY-MM-DD
-      author: "agent/contributor"
-    last_updated:
-      date: YYYY-MM-DD
-      author: "agent/contributor"
-      reason: "Initial creation"
-    last_validated:
-      date: YYYY-MM-DD
-      validator: "agent/contributor"
-      result: "pass"
-
-IMPL-ERROR_HANDLING:
-  name: Error Handling Implementation
-  status: Template
-  cross_references:
-    - ARCH-ERROR_HANDLING
-    - REQ-ERROR_HANDLING
-  rationale:
-    why: "Why this error handling implementation was chosen"
-    problems_solved:
-      - "Problem 1"
-    benefits:
-      - "Benefit 1"
-  implementation_approach:
-    summary: "Error handling implementation approach"
-    details:
-      - "Specific error handling pattern"
-      - "Error propagation strategy"
-      - "Error logging and reporting"
-  code_locations:
-    files:
-      - path: "path/to/error_handler.ext"
-        description: "Error handling implementation"
-    functions:
-      - name: "handleError"
-        file: "path/to/error_handler.ext"
-        description: "Error handling logic"
-  traceability:
-    architecture:
-      - ARCH-ERROR_HANDLING
-    requirements:
-      - REQ-ERROR_HANDLING
-    tests:
-      - testErrorHandling_IMPL_ERROR_HANDLING
-    code_annotations:
-      - IMPL-ERROR_HANDLING
-  related_decisions:
-    depends_on: []
-    supersedes: []
-    see_also: []
-  detail_file: implementation-decisions/IMPL-ERROR_HANDLING.md
-  metadata:
-    created:
-      date: YYYY-MM-DD
-      author: "agent/contributor"
-    last_updated:
-      date: YYYY-MM-DD
-      author: "agent/contributor"
-      reason: "Initial creation"
-    last_validated:
-      date: YYYY-MM-DD
-      validator: "agent/contributor"
-      result: "pass"
-
-IMPL-TESTING:
-  name: Testing Implementation
-  status: Template
-  cross_references:
-    - ARCH-TESTING_STRATEGY
-  rationale:
-    why: "Why this testing implementation was chosen"
-    problems_solved:
-      - "Problem 1"
-    benefits:
-      - "Benefit 1"
-  implementation_approach:
-    summary: "Testing implementation approach"
-    details:
-      - "Unit testing implementation details"
-      - "Integration testing implementation details"
-      - "Test utilities and helpers"
-      - "Test coverage tools"
-  code_locations:
-    files:
-      - path: "*_test.ext"
-        description: "Test files"
-    functions:
-      - name: "setupTestEnvironment"
-        file: "test_helpers.ext"
-        description: "Test setup logic"
-  traceability:
-    architecture:
-      - ARCH-TESTING_STRATEGY
-    requirements:
-      - REQ-*
-    tests:
-      - All test files implement this strategy
-    code_annotations:
-      - IMPL-TESTING
-  related_decisions:
-    depends_on: []
-    supersedes: []
-    see_also: []
-  detail_file: implementation-decisions/IMPL-TESTING.md
-  metadata:
-    created:
-      date: YYYY-MM-DD
-      author: "agent/contributor"
-    last_updated:
-      date: YYYY-MM-DD
-      author: "agent/contributor"
-      reason: "Initial creation"
-    last_validated:
-      date: YYYY-MM-DD
-      validator: "agent/contributor"
-      result: "pass"
-
-IMPL-CODE_STYLE:
-  name: Code Style and Conventions
-  status: Template
-  cross_references: []
-  rationale:
-    why: "Why these code style conventions were chosen"
-    problems_solved:
-      - "Problem 1"
-    benefits:
-      - "Benefit 1 - improved maintainability"
-  implementation_approach:
-    summary: "Code style and conventions implementation"
-    details:
-      - "Naming conventions"
-      - "Code formatting rules"
-      - "Documentation standards"
-      - "Code organization patterns"
-  code_locations:
-    files:
-      - path: ".editorconfig"
-        description: "Editor configuration"
-      - path: ".prettierrc"
-        description: "Code formatter configuration (or similar)"
-  traceability:
-    architecture:
-      - ARCH-*
-    requirements:
-      - REQ-MAINTAINABILITY
-    tests:
-      - Code style tests or linter checks
-    code_annotations:
-      - All source files follow these conventions
-  related_decisions:
-    depends_on: []
-    supersedes: []
-    see_also: []
-  detail_file: implementation-decisions/IMPL-CODE_STYLE.md
-  metadata:
-    created:
-      date: YYYY-MM-DD
-      author: "agent/contributor"
-    last_updated:
-      date: YYYY-MM-DD
-      author: "agent/contributor"
-      reason: "Initial creation"
-    last_validated:
-      date: YYYY-MM-DD
-      validator: "agent/contributor"
       result: "pass"
 
 # ---
@@ -464,7 +201,7 @@ IMPL-CODE_STYLE:
 #     depends_on: []
 #     supersedes: []
 #     see_also: []
-#   detail_file: implementation-decisions/IMPL-IDENTIFIER.md
+#   detail_file: implementation-decisions/IMPL-IDENTIFIER.yaml
 #   metadata:
 #     created:
 #       date: YYYY-MM-DD

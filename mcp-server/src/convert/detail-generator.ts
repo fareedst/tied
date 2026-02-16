@@ -2,6 +2,9 @@
  * Generate detail markdown files from parsed monolithic sections.
  * Preserves original content and adds standard headers/footers plus migration footnote.
  * [IMPL] Optionally renders extra keys from parsed.fields in an "Other fields" section.
+ *
+ * Note: The conversion runner (runner.ts) now writes YAML detail files only; these
+ * Markdown helpers are unused by the converter and kept for reference or alternate use.
  */
 
 import type {

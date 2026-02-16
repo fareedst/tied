@@ -1,0 +1,124 @@
+REQ-TIED_SETUP:
+  name: STDD Methodology Setup
+  category: Functional
+  priority: P0
+  status: Implemented
+  rationale:
+    why: To ensure traceability of intent from requirements to code and to maintain a consistent development process.
+    problems_solved: []
+    benefits: []
+  satisfaction_criteria:
+    - criterion: tied/ directory exists with proper structure
+    - criterion: All required documentation files exist and are populated from templates
+    - criterion: Base files properly configured (.cursorrules, AGENTS.md)
+  validation_criteria:
+    - method: Manual verification of file existence
+    - method: AI agent acknowledgment of rules
+  traceability:
+    architecture:
+      - ARCH-TIED_STRUCTURE
+    implementation:
+      - IMPL-TIED_FILES
+    tests: []
+    code_annotations:
+      - REQ-TIED_SETUP
+  related_requirements:
+    depends_on: []
+    related_to: []
+    supersedes: []
+  detail_file: requirements/REQ-TIED_SETUP.yaml
+  metadata:
+    created:
+      date: '2026-02-16'
+      author: MCP converter
+    last_updated:
+      date: '2026-02-16'
+      author: MCP converter
+      reason: Converted from monolithic
+    last_validated:
+      date: '2026-02-16'
+      validator: MCP converter
+      result: pass
+  description: The project must follow the Token-Integrated Engineering & Development (TIED) methodology, including a specific directory structure (tied/) and documentation files (requirements.yaml, architecture-decisions.yaml, etc.).
+REQ-MODULE_VALIDATION:
+  name: Independent Module Validation Before Integration
+  category: Core Functional
+  priority: P0
+  status: Planned
+  rationale:
+    why: Ensures each module is correct in isolation and reduces integration failures.
+    problems_solved: []
+    benefits: []
+  satisfaction_criteria:
+    - criterion: Modules identified and boundaries documented
+    - criterion: Each module has unit tests and passes before integration
+    - criterion: Integration only after validation passes
+  validation_criteria:
+    - method: Unit test coverage per module
+    - method: Documented validation results
+  traceability:
+    architecture:
+      - ARCH-MODULE_VALIDATION
+    implementation:
+      - IMPL-MODULE_VALIDATION
+    tests: []
+    code_annotations:
+      - REQ-MODULE_VALIDATION
+  related_requirements:
+    depends_on: []
+    related_to: []
+    supersedes: []
+  detail_file: requirements/REQ-MODULE_VALIDATION.yaml
+  metadata:
+    created:
+      date: '2026-02-16'
+      author: MCP converter
+    last_updated:
+      date: '2026-02-16'
+      author: MCP converter
+      reason: Converted from monolithic
+    last_validated:
+      date: '2026-02-16'
+      validator: MCP converter
+      result: pass
+  description: Identify logical modules and their boundaries before implementation. Develop and validate each module independently (unit tests with mocks, contract tests, edge cases, error handling) before integration.
+REQ-CONVERSION_TOOL:
+  name: MCP Monolithic-to-TIED Conversion
+  category: Functional
+  priority: P1
+  status: Implemented
+  rationale:
+    why: Enables migration of existing STDD projects to TIED without manual extraction.
+    problems_solved: []
+    benefits: []
+  satisfaction_criteria:
+    - criterion: convert_monolithic_requirements, convert_monolithic_architecture, convert_monolithic_implementation available
+    - criterion: convert_monolithic_all runs all three
+    - criterion: 'Output: YAML index + detail .md per token'
+  validation_criteria:
+    - method: Dry run returns tokens and paths; real run writes files
+  traceability:
+    architecture:
+      - ARCH-TIED_STRUCTURE
+    implementation: []
+    tests: []
+    code_annotations:
+      - REQ-CONVERSION_TOOL
+  related_requirements:
+    depends_on: []
+    related_to: []
+    supersedes: []
+  detail_file: requirements/REQ-CONVERSION_TOOL.yaml
+  metadata:
+    created:
+      date: '2026-02-16'
+      author: MCP converter
+    last_updated:
+      date: '2026-02-16'
+      author: MCP converter
+      reason: Converted from monolithic
+    last_validated:
+      date: '2026-02-16'
+      validator: MCP converter
+      result: pass
+  description: Provide MCP tools to convert STDD 1.0.0 monolithic requirements.md, architecture-decisions.md, and implementation-decisions.md to TIED v1.5.0+ YAML indexes and detail markdown files.

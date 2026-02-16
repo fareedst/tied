@@ -93,11 +93,17 @@ done
 
 echo "Copied ${#TEMPLATE_FILES[@]} template files into ${TIED_DIR}."
 
-# Copy implementation decision detail file examples
+# Copy detail-files schema (YAML detail file structure reference)
+if [[ -f "${SCRIPT_DIR}/detail-files-schema.md" && ! -f "${TIED_DIR}/detail-files-schema.md" ]]; then
+  cp -p "${SCRIPT_DIR}/detail-files-schema.md" "${TIED_DIR}/detail-files-schema.md"
+  echo "Copied detail-files-schema.md into ${TIED_DIR}."
+fi
+
+# Copy implementation decision detail file examples (YAML)
 IMPL_TEMPLATE_DIR="${SCRIPT_DIR}/implementation-decisions.template"
 if [[ -d "${IMPL_TEMPLATE_DIR}" ]]; then
   impl_count=0
-  for detail_file in "${IMPL_TEMPLATE_DIR}"/*.md; do
+  for detail_file in "${IMPL_TEMPLATE_DIR}"/*.yaml; do
     if [[ -f "${detail_file}" ]]; then
       filename="$(basename "${detail_file}")"
       dest="${IMPL_DECISIONS_DIR}/${filename}"
@@ -112,11 +118,11 @@ if [[ -d "${IMPL_TEMPLATE_DIR}" ]]; then
   fi
 fi
 
-# Copy architecture decision detail file examples
+# Copy architecture decision detail file examples (YAML)
 ARCH_TEMPLATE_DIR="${SCRIPT_DIR}/architecture-decisions.template"
 if [[ -d "${ARCH_TEMPLATE_DIR}" ]]; then
   arch_count=0
-  for detail_file in "${ARCH_TEMPLATE_DIR}"/*.md; do
+  for detail_file in "${ARCH_TEMPLATE_DIR}"/*.yaml; do
     if [[ -f "${detail_file}" ]]; then
       filename="$(basename "${detail_file}")"
       dest="${ARCH_DECISIONS_DIR}/${filename}"
@@ -131,11 +137,11 @@ if [[ -d "${ARCH_TEMPLATE_DIR}" ]]; then
   fi
 fi
 
-# Copy requirements detail file examples
+# Copy requirements detail file examples (YAML)
 REQ_TEMPLATE_DIR="${SCRIPT_DIR}/requirements.template"
 if [[ -d "${REQ_TEMPLATE_DIR}" ]]; then
   req_count=0
-  for detail_file in "${REQ_TEMPLATE_DIR}"/*.md; do
+  for detail_file in "${REQ_TEMPLATE_DIR}"/*.yaml; do
     if [[ -f "${detail_file}" ]]; then
       filename="$(basename "${detail_file}")"
       dest="${REQ_DIR}/${filename}"

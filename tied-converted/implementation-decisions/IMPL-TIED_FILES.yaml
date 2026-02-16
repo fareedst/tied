@@ -1,0 +1,47 @@
+IMPL-TIED_FILES:
+  name: TIED File Layout and Indexes
+  status: Implemented
+  cross_references:
+    - ARCH-TIED_STRUCTURE
+    - REQ-TIED_SETUP
+  rationale:
+    why: Matches [ARCH-TIED_STRUCTURE]; enables tooling and traceability.
+    problems_solved: []
+    benefits: []
+  implementation_approach:
+    summary: Use getBasePath() from TIED_BASE_PATH or default "tied"; resolve index and detail paths relative to base.
+    details: []
+  code_locations:
+    files: []
+    functions: []
+  traceability:
+    architecture:
+      - ARCH-TIED_STRUCTURE
+    requirements:
+      - REQ-TIED_SETUP
+    tests: []
+    code_annotations:
+      - IMPL-TIED_FILES
+      - ARCH-TIED_STRUCTURE
+      - REQ-TIED_SETUP
+  related_decisions:
+    depends_on: []
+    supersedes: []
+    see_also:
+      - ARCH-TIED_STRUCTURE
+      - REQ-TIED_SETUP
+  detail_file: implementation-decisions/IMPL-TIED_FILES.yaml
+  metadata:
+    created:
+      date: '2026-02-16'
+      author: MCP converter
+    last_updated:
+      date: '2026-02-16'
+      author: MCP converter
+      reason: Converted from monolithic
+    last_validated:
+      date: '2026-02-16'
+      validator: MCP converter
+      result: pass
+  token_coverage: REQ-TIED_SETUP, ARCH-TIED_STRUCTURE, IMPL-TIED_FILES in code and docs.
+  decision: Implement TIED structure with YAML index files at base path (requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml) and detail markdown under requirements/, architecture-decisions/, implementation-decisions/.

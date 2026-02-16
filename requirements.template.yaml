@@ -8,7 +8,7 @@
 # 2. Paste it at the end with a blank line before it
 # 3. Replace REQ-IDENTIFIER with your new token
 # 4. Fill in all fields
-# 5. Update the detail_file path to match your new .md file in requirements/ directory
+# 5. Update the detail_file path to match your new .yaml file in requirements/ directory
 #
 # Field descriptions:
 #   name: Short descriptive name of the requirement
@@ -20,7 +20,7 @@
 #   validation_criteria: List of validation method items with coverage details
 #   traceability: Structured links to architecture, implementation, tests, code_annotations
 #   related_requirements: Lists of depends_on, related_to, supersedes (YAML lists or [])
-#   detail_file: Path to the detailed .md file in requirements/ directory
+#   detail_file: Path to the detailed .yaml file in requirements/ directory
 #   metadata: Structured metadata with created, last_updated, last_validated info
 
 ---
@@ -70,7 +70,7 @@ REQ-TIED_SETUP:
     depends_on: []
     related_to: []
     supersedes: []
-  detail_file: requirements/REQ-TIED_SETUP.md
+  detail_file: requirements/REQ-TIED_SETUP.yaml
   metadata:
     created:
       date: 2025-11-08
@@ -137,7 +137,7 @@ REQ-MODULE_VALIDATION:
       - REQ-TIED_SETUP
     related_to: []
     supersedes: []
-  detail_file: requirements/REQ-MODULE_VALIDATION.md
+  detail_file: requirements/REQ-MODULE_VALIDATION.yaml
   metadata:
     created:
       date: 2025-01-27
@@ -192,7 +192,7 @@ REQ-MODULE_VALIDATION:
 #     depends_on: []
 #     related_to: []
 #     supersedes: []
-#   detail_file: requirements/REQ-IDENTIFIER.md
+#   detail_file: requirements/REQ-IDENTIFIER.yaml
 #   metadata:
 #     created:
 #       date: YYYY-MM-DD

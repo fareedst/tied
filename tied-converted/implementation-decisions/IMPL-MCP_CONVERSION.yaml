@@ -1,0 +1,47 @@
+IMPL-MCP_CONVERSION:
+  name: Monolithic-to-TIED Conversion Tools
+  status: Implemented
+  cross_references:
+    - ARCH-MCP_CONVERSION
+    - REQ-CONVERSION_TOOL
+  rationale:
+    why: Single code path for CLI and MCP; supports both path and inline content.
+    problems_solved: []
+    benefits: []
+  implementation_approach:
+    summary: Tools read file or content, call convertMonolithicRequirements/Architecture/Implementation or convertMonolithicAll; write YAML index and detail .md under output_base_path.
+    details: []
+  code_locations:
+    files: []
+    functions: []
+  traceability:
+    architecture:
+      - ARCH-MCP_CONVERSION
+    requirements:
+      - REQ-CONVERSION_TOOL
+    tests: []
+    code_annotations:
+      - IMPL-MCP_CONVERSION
+      - ARCH-MCP_CONVERSION
+      - REQ-CONVERSION_TOOL
+  related_decisions:
+    depends_on: []
+    supersedes: []
+    see_also:
+      - ARCH-MCP_CONVERSION
+      - REQ-CONVERSION_TOOL
+  detail_file: implementation-decisions/IMPL-MCP_CONVERSION.yaml
+  metadata:
+    created:
+      date: '2026-02-16'
+      author: MCP converter
+    last_updated:
+      date: '2026-02-16'
+      author: MCP converter
+      reason: Converted from monolithic
+    last_validated:
+      date: '2026-02-16'
+      validator: MCP converter
+      result: pass
+  token_coverage: REQ-CONVERSION_TOOL, ARCH-MCP_CONVERSION, IMPL-MCP_CONVERSION.
+  decision: Implement conversion in mcp-server using parser (parser.ts), YAML generator (yaml-generator.ts), detail markdown generator (detail-generator.ts), and runner (runner.ts). Expose as MCP tools with file_path or content, output_base_path, dry_run, overwrite, token_format.

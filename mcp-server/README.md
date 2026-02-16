@@ -7,6 +7,8 @@ MCP server that exposes **tools** and **resources** for TIED YAML index files: r
 - Node.js 18+
 - TIED project with YAML indexes (e.g. `tied/requirements.yaml`) or template repo with `*.template.yaml` at root
 
+**Template vs MCP:** The root `*.template.yaml` files are minimal and foundational for non-MCP bootstrap (e.g. `copy_files.sh`). New REQ/ARCH/IMPL records can be added via MCP tools (`yaml_index_insert`, `yaml_detail_create`, conversion tools) or by copying the template block at the bottom of each index file or the template detail file (e.g. `requirements.template/REQ-IDENTIFIER.yaml`).
+
 ## Install
 
 ```bash
@@ -35,9 +37,14 @@ All path parameters (`requirements_path`, `architecture_path`, `implementation_p
 | `get_requirements_for_decision` | Given a decision token (ARCH-X or IMPL-X), return all REQ it references (and full requirement records) |
 | `yaml_index_insert` | Insert a new record; params: `index`, `token`, `record` (JSON string). Writes to the index file (e.g. `tied/requirements.yaml`). Fails if token already exists. |
 | `yaml_index_update` | Update an existing record by merging top-level fields; params: `index`, `token`, `updates` (JSON string). Fails if token does not exist. |
-| `convert_monolithic_requirements` | Convert STDD 1.0.0 monolithic `requirements.md` to TIED v1.5.0+ `requirements.yaml` + `requirements/REQ-*.md`. Params: `file_path` or `content`, optional `output_base_path`, `dry_run`, `overwrite`. |
-| `convert_monolithic_architecture` | Convert monolithic `architecture-decisions.md` to `architecture-decisions.yaml` + `architecture-decisions/ARCH-*.md`. Same params. |
-| `convert_monolithic_implementation` | Convert monolithic `implementation-decisions.md` to `implementation-decisions.yaml` + `implementation-decisions/IMPL-*.md`. Same params. |
+| `yaml_detail_read` | Read a single detail YAML file by token (REQ-*, ARCH-*, or IMPL-*). Params: `token`. Returns the detail record. Fails if token invalid or file missing. |
+| `yaml_detail_list` | List tokens that have a detail YAML file. Params: `type` (requirement \| architecture \| implementation). |
+| `yaml_detail_create` | Create a new detail YAML file. Params: `token`, `record` (JSON string), optional `sync_index` (default true). Fails if file exists or token invalid. |
+| `yaml_detail_update` | Update an existing detail file by merging top-level fields. Params: `token`, `updates` (JSON string). Fails if no file. |
+| `yaml_detail_delete` | Delete a detail YAML file. Params: `token`, optional `sync_index` (default true to clear detail_file in index). |
+| `convert_monolithic_requirements` | Convert STDD 1.0.0 monolithic `requirements.md` to TIED v1.5.0+ `requirements.yaml` + `requirements/REQ-*.yaml`. Params: `file_path` or `content`, optional `output_base_path`, `dry_run`, `overwrite`. |
+| `convert_monolithic_architecture` | Convert monolithic `architecture-decisions.md` to `architecture-decisions.yaml` + `architecture-decisions/ARCH-*.yaml`. Same params. |
+| `convert_monolithic_implementation` | Convert monolithic `implementation-decisions.md` to `implementation-decisions.yaml` + `implementation-decisions/IMPL-*.yaml`. Same params. |
 | `convert_monolithic_all` | Run all three conversions; params: `requirements_path` / `architecture_path` / `implementation_path` and/or `requirements_content` / `architecture_content` / `implementation_content` (content overrides path), `output_base_path`, `dry_run`, `overwrite`, `token_format`. |
 
 ### Conversion tools (STDD 1.0.0 → TIED v1.5.0+)
@@ -53,6 +60,8 @@ These tools parse **monolithic** requirements and decisions files (single markdo
 
 **Example** (dry run): Call `convert_monolithic_requirements` with `content` set to your monolithic requirements markdown and `dry_run: true` to see `tokens`, `index_path`, and `detail_paths`.
 
+**Run conversion from CLI** (without MCP): This repo includes sample monolithic files in `monolithic-samples/` and a script to run the same conversion logic from the command line. From repo root: `node scripts/run-convert-stdd-to-tied.mjs` (optional `--dry-run`). Output is written to `tied-converted/`. After conversion, update `semantic-tokens.yaml` (or `semantic-tokens.template.yaml`) with any new tokens and keep guide docs in sync with the templates.
+
 ## Resources
 
 Read-only resources (e.g. for LLM context):
@@ -63,6 +72,8 @@ Read-only resources (e.g. for LLM context):
 - `tied://semantic-tokens` — full semantic-tokens.yaml
 - `tied://requirement/{token}` — single requirement record (e.g. REQ-TIED_SETUP)
 - `tied://decision/{token}` — single ARCH or IMPL record
+- `tied://requirement/{token}/detail` — full detail YAML content for a requirement (REQ-*)
+- `tied://decision/{token}/detail` — full detail YAML content for an architecture or implementation decision (ARCH-* or IMPL-*)
 
 ## Cursor Integration
 

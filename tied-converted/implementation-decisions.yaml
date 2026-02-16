@@ -1,0 +1,141 @@
+IMPL-TIED_FILES:
+  name: TIED File Layout and Indexes
+  status: Implemented
+  cross_references:
+    - ARCH-TIED_STRUCTURE
+    - REQ-TIED_SETUP
+  rationale:
+    why: Matches [ARCH-TIED_STRUCTURE]; enables tooling and traceability.
+    problems_solved: []
+    benefits: []
+  implementation_approach:
+    summary: Use getBasePath() from TIED_BASE_PATH or default "tied"; resolve index and detail paths relative to base.
+    details: []
+  code_locations:
+    files: []
+    functions: []
+  traceability:
+    architecture:
+      - ARCH-TIED_STRUCTURE
+    requirements:
+      - REQ-TIED_SETUP
+    tests: []
+    code_annotations:
+      - IMPL-TIED_FILES
+      - ARCH-TIED_STRUCTURE
+      - REQ-TIED_SETUP
+  related_decisions:
+    depends_on: []
+    supersedes: []
+    see_also:
+      - ARCH-TIED_STRUCTURE
+      - REQ-TIED_SETUP
+  detail_file: implementation-decisions/IMPL-TIED_FILES.yaml
+  metadata:
+    created:
+      date: '2026-02-16'
+      author: MCP converter
+    last_updated:
+      date: '2026-02-16'
+      author: MCP converter
+      reason: Converted from monolithic
+    last_validated:
+      date: '2026-02-16'
+      validator: MCP converter
+      result: pass
+  token_coverage: REQ-TIED_SETUP, ARCH-TIED_STRUCTURE, IMPL-TIED_FILES in code and docs.
+  decision: Implement TIED structure with YAML index files at base path (requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml) and detail markdown under requirements/, architecture-decisions/, implementation-decisions/.
+IMPL-MODULE_VALIDATION:
+  name: Module Validation Implementation
+  status: Active
+  cross_references:
+    - ARCH-MODULE_VALIDATION
+    - REQ-MODULE_VALIDATION
+  rationale:
+    why: Fulfills [REQ-MODULE_VALIDATION] and [ARCH-MODULE_VALIDATION].
+    problems_solved: []
+    benefits: []
+  implementation_approach:
+    summary: Per-module test directory or suite; mock external deps; validation checklist in implementation-decisions or processes.
+    details: []
+  code_locations:
+    files: []
+    functions: []
+  traceability:
+    architecture:
+      - ARCH-MODULE_VALIDATION
+    requirements:
+      - REQ-MODULE_VALIDATION
+    tests: []
+    code_annotations:
+      - IMPL-MODULE_VALIDATION
+      - ARCH-MODULE_VALIDATION
+      - REQ-MODULE_VALIDATION
+  related_decisions:
+    depends_on: []
+    supersedes: []
+    see_also:
+      - ARCH-MODULE_VALIDATION
+      - REQ-MODULE_VALIDATION
+  detail_file: implementation-decisions/IMPL-MODULE_VALIDATION.yaml
+  metadata:
+    created:
+      date: '2026-02-16'
+      author: MCP converter
+    last_updated:
+      date: '2026-02-16'
+      author: MCP converter
+      reason: Converted from monolithic
+    last_validated:
+      date: '2026-02-16'
+      validator: MCP converter
+      result: pass
+  token_coverage: REQ-MODULE_VALIDATION, ARCH-MODULE_VALIDATION, IMPL-MODULE_VALIDATION.
+  decision: For each logical module, implement unit tests with mocks for dependencies; add contract tests at module boundaries; run validation and document results before integration.
+IMPL-MCP_CONVERSION:
+  name: Monolithic-to-TIED Conversion Tools
+  status: Implemented
+  cross_references:
+    - ARCH-MCP_CONVERSION
+    - REQ-CONVERSION_TOOL
+  rationale:
+    why: Single code path for CLI and MCP; supports both path and inline content.
+    problems_solved: []
+    benefits: []
+  implementation_approach:
+    summary: Tools read file or content, call convertMonolithicRequirements/Architecture/Implementation or convertMonolithicAll; write YAML index and detail .md under output_base_path.
+    details: []
+  code_locations:
+    files: []
+    functions: []
+  traceability:
+    architecture:
+      - ARCH-MCP_CONVERSION
+    requirements:
+      - REQ-CONVERSION_TOOL
+    tests: []
+    code_annotations:
+      - IMPL-MCP_CONVERSION
+      - ARCH-MCP_CONVERSION
+      - REQ-CONVERSION_TOOL
+  related_decisions:
+    depends_on: []
+    supersedes: []
+    see_also:
+      - ARCH-MCP_CONVERSION
+      - REQ-CONVERSION_TOOL
+  detail_file: implementation-decisions/IMPL-MCP_CONVERSION.yaml
+  metadata:
+    created:
+      date: '2026-02-16'
+      author: MCP converter
+    last_updated:
+      date: '2026-02-16'
+      author: MCP converter
+      reason: Converted from monolithic
+    last_validated:
+      date: '2026-02-16'
+      validator: MCP converter
+      result: pass
+  token_coverage: REQ-CONVERSION_TOOL, ARCH-MCP_CONVERSION, IMPL-MCP_CONVERSION.
+  decision: Implement conversion in mcp-server using parser (parser.ts), YAML generator (yaml-generator.ts), detail markdown generator (detail-generator.ts), and runner (runner.ts). Expose as MCP tools with file_path or content, output_base_path, dry_run, overwrite, token_format.

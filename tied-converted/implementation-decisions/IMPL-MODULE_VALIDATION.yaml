@@ -1,0 +1,47 @@
+IMPL-MODULE_VALIDATION:
+  name: Module Validation Implementation
+  status: Active
+  cross_references:
+    - ARCH-MODULE_VALIDATION
+    - REQ-MODULE_VALIDATION
+  rationale:
+    why: Fulfills [REQ-MODULE_VALIDATION] and [ARCH-MODULE_VALIDATION].
+    problems_solved: []
+    benefits: []
+  implementation_approach:
+    summary: Per-module test directory or suite; mock external deps; validation checklist in implementation-decisions or processes.
+    details: []
+  code_locations:
+    files: []
+    functions: []
+  traceability:
+    architecture:
+      - ARCH-MODULE_VALIDATION
+    requirements:
+      - REQ-MODULE_VALIDATION
+    tests: []
+    code_annotations:
+      - IMPL-MODULE_VALIDATION
+      - ARCH-MODULE_VALIDATION
+      - REQ-MODULE_VALIDATION
+  related_decisions:
+    depends_on: []
+    supersedes: []
+    see_also:
+      - ARCH-MODULE_VALIDATION
+      - REQ-MODULE_VALIDATION
+  detail_file: implementation-decisions/IMPL-MODULE_VALIDATION.yaml
+  metadata:
+    created:
+      date: '2026-02-16'
+      author: MCP converter
+    last_updated:
+      date: '2026-02-16'
+      author: MCP converter
+      reason: Converted from monolithic
+    last_validated:
+      date: '2026-02-16'
+      validator: MCP converter
+      result: pass
+  token_coverage: REQ-MODULE_VALIDATION, ARCH-MODULE_VALIDATION, IMPL-MODULE_VALIDATION.
+  decision: For each logical module, implement unit tests with mocks for dependencies; add contract tests at module boundaries; run validation and document results before integration.

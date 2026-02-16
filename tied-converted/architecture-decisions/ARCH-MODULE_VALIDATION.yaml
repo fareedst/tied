@@ -1,0 +1,44 @@
+ARCH-MODULE_VALIDATION:
+  name: Module Validation Before Integration
+  status: Implemented
+  cross_references: &ref_0
+    - REQ-MODULE_VALIDATION
+    - REQ-CONVERSION_TOOL
+  rationale:
+    why: Enables migration without manual section extraction; Cursor and other MCP clients can invoke conversion.
+    problems_solved: []
+    benefits: []
+  alternatives_considered:
+    - name: See detail file
+      pros: []
+      cons: []
+      rejected_reason: Big-bang integration (rejected).
+  implementation_approach:
+    summary: Node.js MCP server using existing parser and YAML/detail generators; file_path or content input; output_base_path configurable.
+    details: []
+  traceability:
+    requirements: *ref_0
+    implementation: []
+    tests: []
+    code_annotations:
+      - ARCH-MODULE_VALIDATION
+      - REQ-MODULE_VALIDATION
+      - REQ-CONVERSION_TOOL
+  related_decisions:
+    depends_on: *ref_0
+    informs: []
+    see_also: []
+  detail_file: architecture-decisions/ARCH-MODULE_VALIDATION.yaml
+  metadata:
+    created:
+      date: '2026-02-16'
+      author: MCP converter
+    last_updated:
+      date: '2026-02-16'
+      author: MCP converter
+      reason: Converted from monolithic
+    last_validated:
+      date: '2026-02-16'
+      validator: MCP converter
+      result: pass
+  decision: 'Expose STDD-to-TIED conversion via an MCP server (tied-yaml) with tools: convert_monolithic_requirements, convert_monolithic_architecture, convert_monolithic_implementation, convert_monolithic_all.'

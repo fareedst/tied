@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "tied-yaml": {
+      "command": "node",
+      "args": ["mcp-server/dist/index.js"],
+      "env": {
+        "TIED_BASE_PATH": "."
+      }
+    }
+  }
+}

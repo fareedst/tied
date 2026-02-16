@@ -18,6 +18,14 @@ import {
   type IndexName,
 } from "../yaml-loader.js";
 import {
+  getDetailPath,
+  loadDetail,
+  listDetailTokens,
+  writeDetail,
+  updateDetail,
+  deleteDetail,
+} from "../detail-loader.js";
+import {
   convertMonolithicRequirements,
   convertMonolithicArchitecture,
   convertMonolithicImplementation,
@@ -31,6 +39,7 @@ const INDEX_ENUM = z.enum([
   "semantic-tokens",
 ]);
 const TOKEN_TYPE_ENUM = z.enum(["REQ", "ARCH", "IMPL", "PROC"]);
+const DETAIL_TYPE_ENUM = z.enum(["requirement", "architecture", "implementation"]);
 
 export const allTools = [
   {
@@ -254,10 +263,128 @@ export const allTools = [
     },
   },
   {
+    name: "yaml_detail_read",
+    config: {
+      description:
+        "Read a single detail YAML file by token (REQ-*, ARCH-*, or IMPL-*). Returns the detail record (the content under the token key). Fails if token format is invalid or no detail file exists.",
+      inputSchema: z.object({
+        token: z.string().min(1).describe("Token ID (e.g. REQ-TIED_SETUP, ARCH-MODULE_VALIDATION, IMPL-MODULE_VALIDATION)"),
+      }),
+    },
+    handler: async ({ token }: { token: string }) => {
+      const record = loadDetail(token);
+      if (record == null) {
+        const path = getDetailPath(token);
+        if (path === null)
+          return textContent(JSON.stringify({ error: `Invalid token: ${token}. Must be REQ-*, ARCH-*, or IMPL-*` }, null, 2));
+        return textContent(JSON.stringify({ error: `No detail file found for token: ${token}` }, null, 2));
+      }
+      return textContent(JSON.stringify(record, null, 2));
+    },
+  },
+  {
+    name: "yaml_detail_list",
+    config: {
+      description:
+        "List tokens that have a detail YAML file for the given type (requirement, architecture, or implementation).",
+      inputSchema: z.object({
+        type: DETAIL_TYPE_ENUM.describe("Which detail type: requirement (REQ-*), architecture (ARCH-*), or implementation (IMPL-*)"),
+      }),
+    },
+    handler: async ({ type }: { type: string }) => {
+      const tokens = listDetailTokens(type as "requirement" | "architecture" | "implementation");
+      return textContent(JSON.stringify(tokens, null, 2));
+    },
+  },
+  {
+    name: "yaml_detail_create",
+    config: {
+      description:
+        "Create a new detail YAML file. Token must be REQ-*, ARCH-*, or IMPL-*. Record is the JSON object for the single top-level key. Fails if file already exists or token invalid. Optionally syncs index detail_file (sync_index: true).",
+      inputSchema: z.object({
+        token: z.string().min(1).describe("Token ID (e.g. REQ-NEW_FEATURE)"),
+        record: z.string().describe("JSON string of the detail record object"),
+        sync_index: z.boolean().optional().describe("If true, set detail_file on the corresponding index record (default: true)"),
+      }),
+    },
+    handler: async ({
+      token,
+      record: recordJson,
+      sync_index,
+    }: {
+      token: string;
+      record: string;
+      sync_index?: boolean;
+    }) => {
+      let record: Record<string, unknown>;
+      try {
+        const parsed = JSON.parse(recordJson) as unknown;
+        if (typeof parsed !== "object" || parsed === null || Array.isArray(parsed))
+          return textContent(JSON.stringify({ ok: false, error: "record must be a JSON object" }));
+        record = parsed as Record<string, unknown>;
+      } catch {
+        return textContent(JSON.stringify({ ok: false, error: "Invalid JSON in record" }));
+      }
+      const result = writeDetail(token, record, { syncIndex: sync_index !== false });
+      return textContent(JSON.stringify(result, null, 2));
+    },
+  },
+  {
+    name: "yaml_detail_update",
+    config: {
+      description:
+        "Update an existing detail YAML file by merging the given object at the top level. Fails if no detail file exists.",
+      inputSchema: z.object({
+        token: z.string().min(1).describe("Token ID of the detail file to update"),
+        updates: z.string().describe("JSON string of key-value pairs to merge into the detail record"),
+      }),
+    },
+    handler: async ({
+      token,
+      updates: updatesJson,
+    }: {
+      token: string;
+      updates: string;
+    }) => {
+      let updates: Record<string, unknown>;
+      try {
+        const parsed = JSON.parse(updatesJson) as unknown;
+        if (typeof parsed !== "object" || parsed === null || Array.isArray(parsed))
+          return textContent(JSON.stringify({ ok: false, error: "updates must be a JSON object" }));
+        updates = parsed as Record<string, unknown>;
+      } catch {
+        return textContent(JSON.stringify({ ok: false, error: "Invalid JSON in updates" }));
+      }
+      const result = updateDetail(token, updates);
+      return textContent(JSON.stringify(result, null, 2));
+    },
+  },
+  {
+    name: "yaml_detail_delete",
+    config: {
+      description:
+        "Delete a detail YAML file. Optionally clear detail_file on the corresponding index record (sync_index: true).",
+      inputSchema: z.object({
+        token: z.string().min(1).describe("Token ID of the detail file to delete"),
+        sync_index: z.boolean().optional().describe("If true, set detail_file to null in the index (default: true)"),
+      }),
+    },
+    handler: async ({
+      token,
+      sync_index,
+    }: {
+      token: string;
+      sync_index?: boolean;
+    }) => {
+      const result = deleteDetail(token, { syncIndex: sync_index !== false });
+      return textContent(JSON.stringify(result, null, 2));
+    },
+  },
+  {
     name: "convert_monolithic_requirements",
     config: {
       description:
-        "Convert markdown to YAML: parses monolithic requirements.md and writes requirements.yaml (primary output) plus requirements/REQ-*.md detail files. Every heading (##/###) or text label (**Label**:) that immediately contains text or a list becomes a key in the YAML structure. Provide file_path or content. Paths are cwd-relative unless absolute. Use dry_run to get paths without writing.",
+        "Convert markdown to YAML: parses monolithic requirements.md and writes requirements.yaml (primary output) plus requirements/REQ-*.yaml detail files. Every heading (##/###) or text label (**Label**:) that immediately contains text or a list becomes a key in the YAML structure. Provide file_path or content. Paths are cwd-relative unless absolute. Use dry_run to get paths without writing.",
       inputSchema: z.object({
         file_path: z
           .string()
@@ -318,7 +445,7 @@ export const allTools = [
     name: "convert_monolithic_architecture",
     config: {
       description:
-        "Convert markdown to YAML: parses monolithic architecture-decisions.md and writes architecture-decisions.yaml (primary output) plus architecture-decisions/ARCH-*.md detail files. Every heading or text label that immediately contains text or a list becomes a key in the YAML structure. Paths are cwd-relative unless absolute. Use dry_run to get paths without writing.",
+        "Convert markdown to YAML: parses monolithic architecture-decisions.md and writes architecture-decisions.yaml (primary output) plus architecture-decisions/ARCH-*.yaml detail files. Every heading or text label that immediately contains text or a list becomes a key in the YAML structure. Paths are cwd-relative unless absolute. Use dry_run to get paths without writing.",
       inputSchema: z.object({
         file_path: z.string().optional().describe("Path to monolithic architecture-decisions.md (cwd-relative unless absolute)"),
         content: z.string().optional().describe("Raw markdown content"),
@@ -364,7 +491,7 @@ export const allTools = [
     name: "convert_monolithic_implementation",
     config: {
       description:
-        "Convert markdown to YAML: parses monolithic implementation-decisions.md and writes implementation-decisions.yaml (primary output) plus implementation-decisions/IMPL-*.md detail files. Every heading or text label that immediately contains text or a list becomes a key in the YAML structure. Paths are cwd-relative unless absolute. Use dry_run to get paths without writing.",
+        "Convert markdown to YAML: parses monolithic implementation-decisions.md and writes implementation-decisions.yaml (primary output) plus implementation-decisions/IMPL-*.yaml detail files. Every heading or text label that immediately contains text or a list becomes a key in the YAML structure. Paths are cwd-relative unless absolute. Use dry_run to get paths without writing.",
       inputSchema: z.object({
         file_path: z.string().optional().describe("Path to monolithic implementation-decisions.md (cwd-relative unless absolute)"),
         content: z.string().optional().describe("Raw markdown content"),
@@ -410,7 +537,7 @@ export const allTools = [
     name: "convert_monolithic_all",
     config: {
       description:
-        "Convert markdown to YAML for all three monolithic files (requirements, architecture, implementation) in one call. Primary output is YAML index files; detail markdown files are also written unless dry_run. Every heading or text label that immediately contains text or a list becomes a key in the YAML structure. Pass paths and/or raw content for any of the three; content overrides path when both provided. Paths are cwd-relative unless absolute.",
+        "Convert markdown to YAML for all three monolithic files (requirements, architecture, implementation) in one call. Primary output is YAML index files; detail YAML files (REQ-*.yaml, ARCH-*.yaml, IMPL-*.yaml) are also written unless dry_run. Every heading or text label that immediately contains text or a list becomes a key in the YAML structure. Pass paths and/or raw content for any of the three; content overrides path when both provided. Paths are cwd-relative unless absolute.",
       inputSchema: z.object({
         requirements_path: z.string().optional().describe("Path to requirements.md (cwd-relative unless absolute)"),
         architecture_path: z.string().optional().describe("Path to architecture-decisions.md (cwd-relative unless absolute)"),

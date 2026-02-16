@@ -140,7 +140,7 @@ IMPL-NEW_IMPLEMENTATION:
     depends_on: []
     supersedes: []
     see_also: []
-  detail_file: implementation-decisions/IMPL-NEW_IMPLEMENTATION.md
+  detail_file: implementation-decisions/IMPL-NEW_IMPLEMENTATION.yaml
   metadata:
     created:
       date: 2026-02-06
