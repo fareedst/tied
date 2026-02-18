@@ -41,9 +41,9 @@ All path parameters (`requirements_path`, `architecture_path`, `implementation_p
 | `get_requirements_for_decision` | Given a decision token (ARCH-X or IMPL-X), return all REQ it references (and full requirement records) |
 | `yaml_index_insert` | Insert a new record; params: `index`, `token`, `record` (JSON string). Writes to the index file (e.g. `tied/requirements.yaml`). Fails if token already exists. |
 | `yaml_index_update` | Update an existing record by merging top-level fields; params: `index`, `token`, `updates` (JSON string). Fails if token does not exist. |
-| `yaml_detail_read` | Read a single detail YAML file by token (REQ-*, ARCH-*, or IMPL-*). Params: `token`. Returns the detail record. Fails if token invalid or file missing. |
+| `yaml_detail_read` | Read a single detail file by token (REQ-*, ARCH-*, or IMPL-*). Resolves path from index `detail_file` when present (hybrid .md/.yaml). Params: `token`. Returns the detail record; for .md returns `{ _raw_markdown, _format: "markdown" }`. Fails if token invalid or file missing. |
 | `yaml_detail_read_many` | Read details for multiple tokens or all tokens of a type. Params: `tokens` (array, optional) and/or `type` (requirement \| architecture \| implementation). If only `type` is passed, returns all details for that type. Output: object keyed by token, value is detail record or `{ error: string }`. |
-| `yaml_detail_list` | List tokens that have a detail YAML file. Params: `type` (requirement \| architecture \| implementation). |
+| `yaml_detail_list` | List tokens that have a detail file (from index `detail_file` and from .yaml/.md in the detail directory). Params: `type` (requirement \| architecture \| implementation). |
 | `yaml_detail_create` | Create a new detail YAML file. Params: `token`, `record` (JSON string), optional `sync_index` (default true). Fails if file exists or token invalid. |
 | `yaml_detail_update` | Update an existing detail file by merging top-level fields. Params: `token`, `updates` (JSON string). Fails if no file. |
 | `yaml_detail_delete` | Delete a detail YAML file. Params: `token`, optional `sync_index` (default true to clear detail_file in index). |
@@ -52,6 +52,12 @@ All path parameters (`requirements_path`, `architecture_path`, `implementation_p
 | `convert_monolithic_architecture` | Convert monolithic `architecture-decisions.md` to `architecture-decisions.yaml` + `architecture-decisions/ARCH-*.yaml`. Same params. |
 | `convert_monolithic_implementation` | Convert monolithic `implementation-decisions.md` to `implementation-decisions.yaml` + `implementation-decisions/IMPL-*.yaml`. Same params. |
 | `convert_monolithic_all` | Run all three conversions; params: `requirements_path` / `architecture_path` / `implementation_path` and/or `requirements_content` / `architecture_content` / `implementation_content` (content overrides path), `output_base_path`, `dry_run`, `overwrite`, `token_format`. |
+| `convert_detail_markdown_to_yaml` | Convert a single REQ/ARCH/IMPL detail from markdown to YAML (per detail-files-schema). Params: `file_path` or `content`, optional `type`, `token`, `output_base_path`, `dry_run`, `overwrite`, `write_file`, `sync_index`, `remove_md_after`. Use to migrate existing .md detail files to .yaml. |
+| `tied_import_summary` | Import/inspect an existing TIED directory: read YAML indexes and report tokens plus detail file presence (hybrid .md and .yaml). Params: optional `base_path`. Use to validate a reference TIED layout. |
+
+### Hybrid layout (detail .md and .yaml)
+
+When an index record has `detail_file` set (e.g. `requirements/REQ-URL_TAGS_DISPLAY.md` or `requirements/REQ-CODE_QUALITY.yaml`), the detail loader resolves that path first. If the file is **.md**, `yaml_detail_read` and detail resources return `{ _raw_markdown, _format: "markdown" }`. Listing includes tokens from the index and from the filesystem (both `.yaml` and `.md` in the detail directories). `yaml_detail_update` does not overwrite markdown files; edit those directly. To migrate an existing .md detail to YAML (long-term expression), use the **`convert_detail_markdown_to_yaml`** tool.
 
 ### Conversion tools (STDD 1.0.0 → TIED v1.5.0+)
 
@@ -70,7 +76,7 @@ These tools parse **monolithic** requirements and decisions files (single markdo
 
 ## Resources
 
-Read-only resources (e.g. for LLM context). Detail files are YAML under `requirements/`, `architecture-decisions/`, and `implementation-decisions/`; these tools and resources operate on that YAML.
+Read-only resources (e.g. for LLM context). Detail files may be YAML or Markdown (hybrid layout); the loader uses the index `detail_file` when present and returns `_raw_markdown` for .md files.
 
 - `tied://requirements` — full requirements.yaml
 - `tied://architecture-decisions` — full architecture-decisions.yaml

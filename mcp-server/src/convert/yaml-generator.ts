@@ -21,7 +21,7 @@ const REQUIREMENT_TOP_KEYS = new Set([
 ]);
 const ARCHITECTURE_TOP_KEYS = new Set([
   "name", "status", "cross_references", "rationale", "alternatives_considered", "implementation_approach",
-  "traceability", "related_decisions", "detail_file", "metadata", "token_coverage",
+  "traceability", "related_decisions", "detail_file", "metadata", "token_coverage", "validation_evidence", "decision",
 ]);
 const IMPLEMENTATION_TOP_KEYS = new Set([
   "name", "status", "cross_references", "rationale", "implementation_approach", "code_locations",
@@ -57,6 +57,27 @@ function parseValidationLines(text: string): Array<{ method: string; coverage?: 
   if (!text || !text.trim()) return [];
   const lines = text.split(/\n/).map((s) => s.replace(/^[-*]\s*/, "").trim()).filter(Boolean);
   return lines.map((m) => ({ method: m, coverage: undefined }));
+}
+
+/** Convert a field value (string or string[]) to an array of non-empty strings (e.g. bullet lines). */
+function fieldToLines(value: string | string[] | undefined): string[] {
+  if (value == null) return [];
+  if (Array.isArray(value)) return value.map((s) => String(s).trim()).filter(Boolean);
+  const s = String(value).trim();
+  if (!s) return [];
+  const lines = s.split(/\n/).map((l) => l.replace(/^[-*]\s*/, "").trim()).filter(Boolean);
+  return lines.length > 0 ? lines : [s];
+}
+
+/** Extract REQ-*, ARCH-*, IMPL-* tokens from text (without brackets). Returns unique list. */
+function extractTokensFromText(text: string | string[] | undefined): string[] {
+  if (text == null) return [];
+  const str = Array.isArray(text) ? text.join(" ") : String(text);
+  const re = /\[(REQ-[A-Z0-9_]+|ARCH-[A-Z0-9_]+|IMPL-[A-Z0-9_]+)\]/g;
+  const seen = new Set<string>();
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(str)) !== null) seen.add(m[1]);
+  return [...seen];
 }
 
 /**
@@ -117,13 +138,35 @@ export function requirementToYamlRecord(
   return record;
 }
 
+/** Implementation-approach subsection keys (normalized) to include in details[]. */
+const ARCH_IMPL_APPROACH_SUBSECTION_KEYS = [
+  "high_level_strategy", "key_components", "data_flow_diagram", "filtering_rules", "frequency_ranking",
+  "case_preservation", "sanitization", "deduplication_vs_current_tags", "display", "numeric_limits",
+  "url_path_filtering", "noise_word_list", "title_attribute_priority", "case_preservation_rules",
+  "deduplication_strategy", "module_identification_requirements", "validation_approach",
+  "integration_requirements", "extraction_sources", "tokenization", "key_modifiable_decisions",
+];
+
+function fieldString(
+  fields: Record<string, string | string[]> | undefined,
+  key: string
+): string | undefined {
+  if (!fields || !(key in fields)) return undefined;
+  const v = fields[key];
+  if (v == null) return undefined;
+  if (typeof v === "string") return v.trim() || undefined;
+  return Array.isArray(v) && v.length > 0 ? v.join("\n").trim() || undefined : undefined;
+}
+
 /**
  * Build a single architecture-decisions.yaml record from a parsed section.
+ * [IMPL] Full transform: rationale (why, problems_solved, benefits), implementation_approach (summary, details, key_components, integration_points), related_decisions (depends_on, informs, see_also), decision, validation_evidence.
  */
 export function architectureToYamlRecord(
   parsed: ParsedArchitectureDecision,
   detailFile: string
 ): Record<string, unknown> {
+  const fields = parsed.fields;
   const status =
     parsed.status != null && parsed.status.trim() !== ""
       ? parsed.status.toLowerCase().includes("implemented")
@@ -132,33 +175,73 @@ export function architectureToYamlRecord(
           ? "Deprecated"
           : "Active"
       : "Active";
+
+  const why =
+    fieldString(fields, "why") ??
+    fieldString(fields, "why_this_architecture") ??
+    parsed.rationale ??
+    parsed.decision ??
+    "See detail file";
+  const problemsSolved = fieldToLines(fields?.problems_solved);
+  const benefits = fieldToLines(fields?.benefits);
+
+  const implSummary =
+    parsed.implementation_approach ??
+    fieldString(fields, "summary") ??
+    parsed.decision ??
+    "See detail file";
+  const details: string[] = [];
+  for (const key of ARCH_IMPL_APPROACH_SUBSECTION_KEYS) {
+    const val = fieldString(fields, key);
+    if (val) details.push(val);
+  }
+  const implementation_approach: Record<string, unknown> = {
+    summary: implSummary,
+    details,
+  };
+  const keyComponents = fields?.key_components;
+  if (keyComponents !== undefined && keyComponents !== "" && (typeof keyComponents !== "object" || (Array.isArray(keyComponents) && keyComponents.length > 0))) {
+    implementation_approach.key_components = keyComponents;
+  }
+  const integrationPoints = fields?.integration_points;
+  if (integrationPoints !== undefined && integrationPoints !== "" && (typeof integrationPoints !== "object" || (Array.isArray(integrationPoints) && integrationPoints.length > 0))) {
+    implementation_approach.integration_points = integrationPoints;
+  }
+
+  const dependsOn = extractTokensFromText(fields?.depends_on);
+  const informs = extractTokensFromText(fields?.informs);
+  const seeAlso = extractTokensFromText(fields?.see_also);
+  const related_decisions = {
+    depends_on: dependsOn.length > 0 ? dependsOn : parsed.req_refs,
+    informs,
+    see_also: seeAlso,
+  };
+
+  const decision =
+    parsed.decision ??
+    fieldString(fields, "decision") ??
+    fieldString(fields, "summary");
+
   const record: Record<string, unknown> = {
     name: parsed.title,
     status,
     cross_references: parsed.req_refs,
     rationale: {
-      why: parsed.rationale || parsed.decision || "See detail file",
-      problems_solved: [],
-      benefits: [],
+      why,
+      problems_solved: problemsSolved,
+      benefits,
     },
     alternatives_considered: parsed.alternatives_considered
       ? [{ name: "See detail file", pros: [], cons: [], rejected_reason: parsed.alternatives_considered }]
       : [],
-    implementation_approach: {
-      summary: parsed.implementation_approach || parsed.decision || "See detail file",
-      details: [],
-    },
+    implementation_approach,
     traceability: {
       requirements: parsed.req_refs,
       implementation: [],
       tests: [],
       code_annotations: [parsed.token, ...parsed.req_refs],
     },
-    related_decisions: {
-      depends_on: parsed.req_refs,
-      informs: [],
-      see_also: [],
-    },
+    related_decisions,
     detail_file: detailFile,
     metadata: {
       created: { date: today(), author: "MCP converter" },
@@ -166,8 +249,13 @@ export function architectureToYamlRecord(
       last_validated: { date: today(), validator: "MCP converter", result: "pass" },
     },
   };
+  if (decision) record.decision = decision;
   if (parsed.token_coverage != null && parsed.token_coverage.trim() !== "") {
     record.token_coverage = parsed.token_coverage;
+  }
+  const validationEvidence = fields?.validation_evidence;
+  if (validationEvidence !== undefined && validationEvidence !== "" && (typeof validationEvidence !== "object" || (Array.isArray(validationEvidence) && validationEvidence.length > 0))) {
+    record.validation_evidence = validationEvidence;
   }
   mergeFieldsIntoRecord(record, parsed.fields, ARCHITECTURE_TOP_KEYS);
   return record;

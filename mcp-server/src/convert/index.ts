@@ -40,3 +40,10 @@ export {
   type ConvertAllOptions,
   type ConvertAllSummary,
 } from "./runner.js";
+
+export {
+  convertDetailMarkdownToYaml,
+  type DetailType,
+  type ConvertDetailMarkdownOptions,
+  type ConvertDetailMarkdownResult,
+} from "./detail-markdown-to-yaml.js";

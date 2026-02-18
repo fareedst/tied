@@ -1,12 +1,13 @@
 /**
- * Detail YAML file loader for TIED REQ/ARCH/IMPL detail files.
- * One file per token: {base}/{subdir}/{token}.yaml with single top-level key = token.
+ * Detail file loader for TIED REQ/ARCH/IMPL.
+ * Resolves path from index detail_file when present (supports .md and .yaml); otherwise
+ * {base}/{subdir}/{token}.yaml. Hybrid layout: index may point to .md or .yaml per token.
  */
 
 import fs from "node:fs";
 import path from "node:path";
 import yaml from "js-yaml";
-import { getBasePath, updateRecord, type IndexName } from "./yaml-loader.js";
+import { getBasePath, getRecord, loadIndex, updateRecord, type IndexName } from "./yaml-loader.js";
 
 export type DetailType = "requirement" | "architecture" | "implementation";
 
@@ -31,24 +32,46 @@ function getDetailType(token: string): DetailType | null {
 }
 
 /**
- * Resolve filesystem path for a detail file. Returns null if token is not REQ-*, ARCH-*, or IMPL-*.
+ * Resolve filesystem path for a detail file. Uses index detail_file when present (hybrid .md/.yaml);
+ * otherwise falls back to {subdir}/{token}.yaml then {subdir}/{token}.md. Returns null if token invalid.
  */
 export function getDetailPath(token: string): string | null {
   const type = getDetailType(token);
   if (!type) return null;
   const base = getBasePath();
   const subdir = SUBDIRS[type];
-  return path.join(base, subdir, `${token}.yaml`);
+  const indexName = getIndexName(token);
+  if (indexName) {
+    const record = getRecord(indexName, token) as Record<string, unknown> | null;
+    const detailFile = record?.detail_file;
+    if (typeof detailFile === "string" && detailFile.trim()) {
+      const fromIndex = path.join(base, detailFile);
+      if (fs.existsSync(fromIndex)) return fromIndex;
+    }
+  }
+  const yamlPath = path.join(base, subdir, `${token}.yaml`);
+  if (fs.existsSync(yamlPath)) return yamlPath;
+  const mdPath = path.join(base, subdir, `${token}.md`);
+  if (fs.existsSync(mdPath)) return mdPath;
+  return yamlPath;
 }
 
+/** Sentinel keys for markdown detail content (hybrid layout). */
+export const DETAIL_MARKDOWN_RAW = "_raw_markdown";
+export const DETAIL_FORMAT = "_format";
+
 /**
- * Load a detail file and return the record (value of the single top-level key). Returns null if missing or invalid.
+ * Load a detail file. For .yaml returns the record (value of the single top-level key).
+ * For .md returns { _raw_markdown, _format: "markdown" }. Returns null if missing or invalid.
  */
 export function loadDetail(token: string): Record<string, unknown> | null {
   const filePath = getDetailPath(token);
   if (!filePath || !fs.existsSync(filePath)) return null;
   try {
     const raw = fs.readFileSync(filePath, "utf8");
+    if (filePath.endsWith(".md")) {
+      return { [DETAIL_MARKDOWN_RAW]: raw, [DETAIL_FORMAT]: "markdown" };
+    }
     const data = yaml.load(raw) as unknown;
     if (data === null || typeof data !== "object" || Array.isArray(data)) return null;
     const record = (data as Record<string, unknown>)[token];
@@ -59,22 +82,39 @@ export function loadDetail(token: string): Record<string, unknown> | null {
   }
 }
 
+const INDEX_BY_TYPE: Record<DetailType, IndexName> = {
+  requirement: "requirements",
+  architecture: "architecture",
+  implementation: "implementation",
+};
+
 /**
- * List tokens that have a detail file in the given type's directory.
+ * List tokens that have a detail file: from index (detail_file set) plus filesystem (.yaml and .md in subdir).
  */
 export function listDetailTokens(type: DetailType): string[] {
   const base = getBasePath();
   const subdir = SUBDIRS[type];
-  const dir = path.join(base, subdir);
-  if (!fs.existsSync(dir)) return [];
-  try {
-    const names = fs.readdirSync(dir);
-    return names
-      .filter((n) => n.endsWith(".yaml"))
-      .map((n) => n.slice(0, -5));
-  } catch {
-    return [];
+  const seen = new Set<string>();
+  const indexName = INDEX_BY_TYPE[type];
+  const indexData = loadIndex(indexName);
+  if (indexData) {
+    for (const [token, record] of Object.entries(indexData)) {
+      if (typeof record === "object" && record !== null && (record as Record<string, unknown>).detail_file) seen.add(token);
+    }
   }
+  const dir = path.join(base, subdir);
+  if (fs.existsSync(dir)) {
+    try {
+      const names = fs.readdirSync(dir);
+      for (const n of names) {
+        if (n.endsWith(".yaml")) seen.add(n.slice(0, -5));
+        else if (n.endsWith(".md")) seen.add(n.slice(0, -3));
+      }
+    } catch {
+      // ignore
+    }
+  }
+  return [...seen].sort();
 }
 
 /**
@@ -112,6 +152,7 @@ export function writeDetail(
 
 /**
  * Update an existing detail file by merging the given object at the top level. Fails if file does not exist.
+ * Fails if the detail file is markdown (hybrid layout); use a text editor to edit .md.
  */
 export function updateDetail(token: string, updates: Record<string, unknown>): { ok: true } | { ok: false; error: string } {
   const existing = loadDetail(token);
@@ -119,6 +160,9 @@ export function updateDetail(token: string, updates: Record<string, unknown>): {
     const filePath = getDetailPath(token);
     if (!filePath) return { ok: false, error: `Invalid token: ${token}. Must be REQ-*, ARCH-*, or IMPL-*` };
     return { ok: false, error: `No detail file found for token: ${token}` };
+  }
+  if (existing[DETAIL_FORMAT] === "markdown") {
+    return { ok: false, error: `Detail file for ${token} is markdown; edit the .md file directly` };
   }
   const merged = { ...existing, ...updates };
   const filePath = getDetailPath(token)!;

@@ -3,7 +3,9 @@
  */
 
 import fs from "node:fs";
+import path from "node:path";
 import { z } from "zod";
+import yaml from "js-yaml";
 import { textContent } from "../types.js";
 import {
   loadIndex,
@@ -16,6 +18,7 @@ import {
   insertRecord,
   updateRecord,
   upsertRecord,
+  getBasePath,
   type IndexName,
 } from "../yaml-loader.js";
 import {
@@ -31,6 +34,7 @@ import {
   convertMonolithicArchitecture,
   convertMonolithicImplementation,
   convertMonolithicAll,
+  convertDetailMarkdownToYaml,
 } from "../convert/index.js";
 
 const INDEX_ENUM = z.enum([
@@ -703,6 +707,118 @@ export const allTools = [
         token_format: args.token_format,
       });
       return textContent(JSON.stringify(result, null, 2));
+    },
+  },
+  {
+    name: "convert_detail_markdown_to_yaml",
+    config: {
+      description:
+        "Convert a single REQ/ARCH/IMPL detail from markdown to YAML (per detail-files-schema). Use for existing .md detail files or pasted content. Optionally write the .yaml file, update the index detail_file, and remove the .md. When sync_index is true, the index at getBasePath() is updated; use the same output_base_path (or default) so the written file and index refer to the same tree.",
+      inputSchema: z.object({
+        file_path: z
+          .string()
+          .optional()
+          .describe("Path to existing .md detail file (cwd-relative unless absolute)"),
+        content: z
+          .string()
+          .optional()
+          .describe("Raw markdown content (use if file_path not provided)"),
+        type: z
+          .enum(["requirement", "architecture", "implementation"])
+          .optional()
+          .describe("Detail type; inferred from token or path if omitted"),
+        token: z
+          .string()
+          .optional()
+          .describe("Token override (e.g. REQ-TIED_SETUP); inferred from content or path if omitted"),
+        output_base_path: z
+          .string()
+          .optional()
+          .describe("Output directory for written .yaml (default: tied or TIED_BASE_PATH)"),
+        dry_run: z.boolean().optional().describe("If true, return summary and paths without writing"),
+        overwrite: z.boolean().optional().describe("If false, skip writing when detail .yaml already exists"),
+        write_file: z.boolean().optional().describe("If true, write the .yaml detail file (default: true)"),
+        sync_index: z.boolean().optional().describe("If true, set index record detail_file to the new .yaml path (default: true)"),
+        remove_md_after: z.boolean().optional().describe("If true and source was file_path to .md, remove the .md after successful write (default: false)"),
+      }),
+    },
+    handler: async (args: {
+      file_path?: string;
+      content?: string;
+      type?: "requirement" | "architecture" | "implementation";
+      token?: string;
+      output_base_path?: string;
+      dry_run?: boolean;
+      overwrite?: boolean;
+      write_file?: boolean;
+      sync_index?: boolean;
+      remove_md_after?: boolean;
+    }) => {
+      const result = convertDetailMarkdownToYaml({
+        content: args.content,
+        file_path: args.file_path,
+        type: args.type,
+        token: args.token,
+        output_base_path: args.output_base_path,
+        dry_run: args.dry_run,
+        overwrite: args.overwrite,
+        write_file: args.write_file,
+        sync_index: args.sync_index,
+        remove_md_after: args.remove_md_after,
+      });
+      return textContent(JSON.stringify(result, null, 2));
+    },
+  },
+  {
+    name: "tied_import_summary",
+    config: {
+      description:
+        "Import/inspect an existing TIED directory: read YAML indexes and report tokens plus detail file presence (hybrid .md and .yaml). Use to validate a reference TIED layout or list what would be loaded from base_path.",
+      inputSchema: z.object({
+        base_path: z
+          .string()
+          .optional()
+          .describe("Path to tied/ directory (cwd-relative unless absolute). Default: TIED_BASE_PATH or tied"),
+      }),
+    },
+    handler: async (args: { base_path?: string }) => {
+      const base = args.base_path
+        ? path.isAbsolute(args.base_path)
+          ? args.base_path
+          : path.resolve(process.cwd(), args.base_path)
+        : getBasePath();
+      const indexFiles: Array<{ name: IndexName; file: string }> = [
+        { name: "requirements", file: "requirements.yaml" },
+        { name: "architecture", file: "architecture-decisions.yaml" },
+        { name: "implementation", file: "implementation-decisions.yaml" },
+      ];
+      const summary: Record<string, unknown> = { base_path: base, indexes: {} as Record<string, unknown> };
+      for (const { name, file } of indexFiles) {
+        const indexPath = path.join(base, file);
+        let tokenCount = 0;
+        const details: Array<{ token: string; detail_file: string; exists: boolean }> = [];
+        if (fs.existsSync(indexPath)) {
+          try {
+            const raw = fs.readFileSync(indexPath, "utf8");
+            const data = yaml.load(raw) as Record<string, unknown> | null;
+            if (data && typeof data === "object" && !Array.isArray(data)) {
+              for (const [token, record] of Object.entries(data)) {
+                if (token.startsWith("#") || typeof record !== "object" || record === null) continue;
+                tokenCount++;
+                const detailFile = (record as Record<string, unknown>).detail_file;
+                if (typeof detailFile === "string" && detailFile.trim()) {
+                  const resolved = path.join(base, detailFile);
+                  details.push({ token, detail_file: detailFile, exists: fs.existsSync(resolved) });
+                }
+              }
+            }
+          } catch {
+            // ignore parse errors
+          }
+        }
+        (summary.indexes as Record<string, unknown>)[name] = { token_count: tokenCount, details };
+      }
+      return textContent(JSON.stringify(summary, null, 2));
     },
   },
 ];

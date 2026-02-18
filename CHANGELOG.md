@@ -29,6 +29,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Resources**: New read-only URIs for all details by type: `tied://details/requirements`, `tied://details/architecture`, `tied://details/implementation` (each returns token → detail object).
   - **Docs**: `mcp-server/README.md` updated with new tools and resources; conversion section now refers to detail YAML (not markdown).
 
+- **MCP Server: Hybrid layout (detail .md and .yaml)** — support for reference-style TIED projects where index `detail_file` points to either `.md` or `.yaml` per token
+  - **Detail path resolution**: Loader resolves path from index `detail_file` when present; falls back to `{subdir}/{token}.yaml` then `{subdir}/{token}.md` so hybrid layouts work without changing indexes.
+  - **Markdown detail reading**: For `.md` detail files, `loadDetail()` returns `{ _raw_markdown, _format: "markdown" }`; tools and resources expose this so MCP can read reference projects that keep some tokens in Markdown.
+  - **Listing**: `listDetailTokens(type)` now includes tokens from the index (where `detail_file` is set) and from the filesystem (both `.yaml` and `.md` in the detail directory).
+  - **Update guard**: `yaml_detail_update` returns an error when the detail file is Markdown (edit `.md` files directly).
+  - **Import/inspect tool**: New tool `tied_import_summary` — optional `base_path`; reads requirements/architecture/implementation YAML indexes and reports token counts and which `detail_file` paths exist (for validating or inspecting an existing TIED directory).
+  - **Docs**: `mcp-server/README.md` updated with “Hybrid layout” section and `tied_import_summary`; detail read/list descriptions updated.
+
 ### Changed
 
 - **Monolithic-to-TIED conversion (REQ, ARCH, IMPL)** – improved migration in `mcp-server/src/convert/` for lossless conversion from STDD-style monolithic markdown to TIED YAML indexes and detail files:
