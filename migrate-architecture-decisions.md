@@ -1,6 +1,6 @@
 # Migration Guide: Architecture Decisions File Structure
 
-**STDD Methodology Version**: 1.4.0  
+**TIED Methodology Version**: 1.4.0  
 **Audience**: AI Agents and Contributors
 
 This document provides step-by-step instructions for migrating a project from a **monolithic** `architecture-decisions.md` file to the **scalable index + detail files** structure.
@@ -34,7 +34,7 @@ Before starting migration:
 ### Step 1: Create the Detail Files Directory
 
 ```bash
-mkdir -p stdd/architecture-decisions
+mkdir -p tied/architecture-decisions
 ```
 
 ### Step 2: Identify All Architecture Decision Sections
@@ -48,7 +48,7 @@ Scan the monolithic file for sections. Each section typically follows this patte
 Create a list of all `[ARCH-*]` tokens found:
 
 ```bash
-grep -oE '\[ARCH-[A-Z_]+\]' stdd/architecture-decisions.md | sort -u
+grep -oE '\[ARCH-[A-Z_]+\]' tied/architecture-decisions.md | sort -u
 ```
 
 ### Step 3: Extract Each Section to a Detail File
@@ -109,7 +109,7 @@ For each `[ARCH-TOKEN_NAME]` found:
 3. **Write the file**:
    ```bash
    # Example for each token
-   touch stdd/architecture-decisions/ARCH-CONFIG_STRUCTURE.md
+   touch tied/architecture-decisions/ARCH-CONFIG_STRUCTURE.md
    # Then populate with content
    ```
 
@@ -139,7 +139,7 @@ Transform `architecture-decisions.md`:
 
 ---
 
-## 1. STDD Structure [ARCH-STDD_STRUCTURE] [REQ-STDD_SETUP]
+## 1. TIED Structure [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
 (50+ lines of content)
 
 ## 2. Module Validation [ARCH-MODULE_VALIDATION] [REQ-MODULE_VALIDATION]
@@ -174,7 +174,7 @@ This document serves as the **index** for all architecture decisions...
 
 | Token | Title | Status | Cross-References | Detail File |
 |-------|-------|--------|------------------|-------------|
-| `[ARCH-STDD_STRUCTURE]` | STDD Structure | Active | [REQ-STDD_SETUP] | [Detail](architecture-decisions/ARCH-STDD_STRUCTURE.md) |
+| `[ARCH-TIED_STRUCTURE]` | TIED Structure | Active | [REQ-TIED_SETUP] | [Detail](architecture-decisions/ARCH-TIED_STRUCTURE.md) |
 | `[ARCH-MODULE_VALIDATION]` | Module Validation | Active | [REQ-MODULE_VALIDATION] | [Detail](architecture-decisions/ARCH-MODULE_VALIDATION.md) |
 | `[ARCH-ERROR_HANDLING]` | Error Handling | Active | [REQ-ERROR_HANDLING] | [Detail](architecture-decisions/ARCH-ERROR_HANDLING.md) |
 
@@ -197,11 +197,11 @@ Check that all detail file links in the index are valid:
 
 ```bash
 # List all detail files
-ls stdd/architecture-decisions/
+ls tied/architecture-decisions/
 
 # Verify each link in the index resolves
-grep -oE 'architecture-decisions/ARCH-[A-Z_]+\.md' stdd/architecture-decisions.md | while read f; do
-  if [ ! -f "stdd/$f" ]; then
+grep -oE 'architecture-decisions/ARCH-[A-Z_]+\.md' tied/architecture-decisions.md | while read f; do
+  if [ ! -f "tied/$f" ]; then
     echo "MISSING: $f"
   fi
 done
@@ -225,10 +225,10 @@ done
 
 ```bash
 # Count tokens in original (if backup exists)
-grep -c '\[ARCH-' stdd/architecture-decisions.md.bak
+grep -c '\[ARCH-' tied/architecture-decisions.md.bak
 
 # Count detail files created
-ls stdd/architecture-decisions/ARCH-*.md | wc -l
+ls tied/architecture-decisions/ARCH-*.md | wc -l
 
 # These counts should match (or detail files >= tokens if some tokens appeared multiple times)
 ```
@@ -280,17 +280,17 @@ If migration needs to be reverted:
 
 1. Restore the backup:
    ```bash
-   cp stdd/architecture-decisions.md.bak stdd/architecture-decisions.md
+   cp tied/architecture-decisions.md.bak tied/architecture-decisions.md
    ```
 
 2. Remove the detail files directory:
    ```bash
-   rm -rf stdd/architecture-decisions/
+   rm -rf tied/architecture-decisions/
    ```
 
 3. Revert `semantic-tokens.yaml` changes:
    ```bash
-   git checkout stdd/semantic-tokens.yaml
+   git checkout tied/semantic-tokens.yaml
    ```
 
 ---

@@ -1,6 +1,8 @@
 # Tasks and Incomplete Subtasks
 
-**STDD Methodology Version**: 1.4.0
+**TIED Methodology Version**: 2.2.0
+
+**⚠️ OPTIONAL TEMPLATE**: As of TIED 2.2.0, task tracking via `tasks.md` is **optional**. The core TIED value is in the **traceability chain** (requirements → architecture → implementation → tests → code) maintained through semantic tokens and decision documentation, not in task tracking artifacts. Agents may maintain planning state in-session (e.g., conversation-based todo lists) or document work breakdown in `implementation-decisions`. Use this template only if your project benefits from a shared task list for human visibility.
 
 ## Overview
 This document tracks all tasks and subtasks for implementing this project. Tasks are organized by priority and implementation phase.
@@ -70,16 +72,16 @@ This document tracks all tasks and subtasks for implementing this project. Tasks
 
 ## Active Tasks
 
-## P0: Setup STDD Methodology [REQ-STDD_SETUP] [ARCH-STDD_STRUCTURE] [IMPL-STDD_FILES]
+## P0: Setup TIED Methodology [REQ-TIED_SETUP] [ARCH-TIED_STRUCTURE] [IMPL-TIED_FILES]
 
 **Status**: ✅ Complete
 
-**Description**: Initialize the project with the STDD directory structure and documentation files.
+**Description**: Initialize the project with the TIED directory structure and documentation files.
 
 **Dependencies**: None
 
 **Subtasks**:
-- [x] Create `stdd/` directory
+- [x] Create `tied/` directory
 - [x] Instantiate documentation files from templates
 - [x] Update `.cursorrules`
 - [x] Register semantic tokens
@@ -91,25 +93,25 @@ This document tracks all tasks and subtasks for implementing this project. Tasks
 
 **Priority Rationale**: P0 because this is the foundation for all future work.
 
-## P0: Promote Processes into Core Methodology [REQ-STDD_SETUP] [ARCH-STDD_STRUCTURE] [IMPL-STDD_FILES]
+## P0: Promote Processes into Core Methodology [REQ-TIED_SETUP] [ARCH-TIED_STRUCTURE] [IMPL-TIED_FILES]
 
 **Status**: ✅ Complete
 
-**Description**: Align every methodology reference (docs, templates, registry files) to STDD v1.1.0 after elevating Processes into the primary STDD workflow.
+**Description**: Align every methodology reference (docs, templates, registry files) to TIED v1.1.0 after elevating Processes into the primary TIED workflow.
 
 **Dependencies**: None
 
 **Subtasks**:
-- [x] Update STDD version references across methodology docs and guides
+- [x] Update TIED version references across methodology docs and guides
 - [x] Update all template files and project copies with the new version marker
 - [x] Refresh `VERSION`, `CHANGELOG.md`, and supporting metadata to announce v1.1.0
 
 **Completion Criteria**:
-- [x] All semantic references cite STDD v1.1.0
+- [x] All semantic references cite TIED v1.1.0
 - [x] VERSION file, changelog, and documentation agree on the new version
 - [x] Tasks and supporting docs reflect completion of this work
 
-**Priority Rationale**: Processes are now a primary STDD concern; all consumers must see the v1.1.0 upgrade immediately to maintain alignment.
+**Priority Rationale**: Processes are now a primary TIED concern; all consumers must see the v1.1.0 upgrade immediately to maintain alignment.
 
 ## Phase 2: Core Components
 

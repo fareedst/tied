@@ -1,6 +1,8 @@
 # Migration Guide: Semantic Token Format (Colon to Hyphen)
 
-**STDD Methodology Version**: 1.3.0  
+**Note:** Current TIED methodology version is 2.2.0; this guide describes an older migration (1.3.0).
+
+**TIED Methodology Version**: 1.3.0  
 **Audience**: AI Agents and Contributors
 
 This document provides step-by-step instructions for migrating a project from the **old colon-based token format** (`[TYPE:IDENTIFIER]`) to the **new hyphen-based format** (`[TYPE-IDENTIFIER]`).
@@ -28,7 +30,7 @@ The colon (`:`) character is **invalid in filenames** on many operating systems 
 
 Before starting migration:
 
-- [ ] Confirm project uses STDD methodology
+- [ ] Confirm project uses TIED methodology
 - [ ] Create a backup or ensure git history is clean
 - [ ] Identify all files containing semantic tokens
 - [ ] Review the scope of changes (documentation, code, tests)
@@ -164,13 +166,13 @@ else
 fi
 ```
 
-### Step 5: Update STDD Version Reference
+### Step 5: Update TIED Version Reference
 
-Update the STDD methodology version in your documentation:
+Update the TIED methodology version in your documentation:
 
 ```bash
 # Update version references
-sed -i '' 's/STDD Methodology Version.*: 1.2.0/STDD Methodology Version**: 1.3.0/g' stdd/*.md
+sed -i '' 's/TIED Methodology Version.*: 1.2.0/TIED Methodology Version**: 1.3.0/g' tied/*.md
 ```
 
 ### Step 6: Verify Migration
@@ -195,7 +197,7 @@ grep -rE '\[(REQ|ARCH|IMPL|TEST|PROC):' .
 - [ ] Token cross-references are still valid
 - [ ] Tests pass
 - [ ] Documentation renders correctly
-- [ ] STDD version updated to 1.3.0
+- [ ] TIED version updated to 1.3.0
 
 ### Validation Commands
 
@@ -204,7 +206,7 @@ grep -rE '\[(REQ|ARCH|IMPL|TEST|PROC):' .
 grep -rcE '\[(REQ|ARCH|IMPL|TEST|PROC)-' . | grep -v ':0$'
 
 # Verify token registry is consistent
-yq 'keys' stdd/semantic-tokens.yaml | sort -u
+yq 'keys' tied/semantic-tokens.yaml | sort -u
 
 # Check for any broken references
 # (Compare tokens in code vs. tokens in registry)
@@ -273,7 +275,7 @@ When asked to migrate semantic token format:
 2. **Backup** the current state (ensure clean git history)
 3. **Run** the migration script or manual sed commands
 4. **Verify** no old-format tokens remain
-5. **Update** STDD version to 1.3.0
+5. **Update** TIED version to 1.3.0
 6. **Test** that all references still work
 7. **Report** migration summary to user
 
@@ -281,7 +283,7 @@ When asked to migrate semantic token format:
 
 ## Token Format Reference
 
-### Old Format (STDD v1.2.0 and earlier)
+### Old Format (TIED v1.2.0 and earlier)
 ```
 [TYPE:IDENTIFIER]
 
@@ -293,7 +295,7 @@ Examples:
 [PROC:TOKEN_AUDIT]
 ```
 
-### New Format (STDD v1.3.0+)
+### New Format (TIED v1.3.0+)
 ```
 [TYPE-IDENTIFIER]
 

@@ -1,14 +1,14 @@
 # Architecture Decisions Index (YAML Database)
 #
 # This YAML file serves as the central index/registry for all architecture decisions in the project.
-# Each top-level key is a semantic token (e.g., ARCH-STDD_STRUCTURE).
+# Each top-level key is a semantic token (e.g., ARCH-TIED_STRUCTURE).
 #
 # To append a new architecture decision:
 # 1. Copy the template block at the bottom of this file (ARCH-IDENTIFIER)
 # 2. Paste it at the end with a blank line before it
 # 3. Replace ARCH-IDENTIFIER with your new token
 # 4. Fill in all fields
-# 5. Update the detail_file path to match your new .md file in architecture-decisions/ directory
+# 5. Update the detail_file path to match your new .yaml file in architecture-decisions/ directory
 #
 # Field descriptions:
 #   name: Short descriptive name of the decision
@@ -19,16 +19,16 @@
 #   implementation_approach: Structured approach with summary and details
 #   traceability: Structured links to requirements, implementation, tests, code_annotations
 #   related_decisions: Lists of depends_on, informs, see_also (YAML lists or [])
-#   detail_file: Path to the detailed .md file in architecture-decisions/ directory
+#   detail_file: Path to the detailed .yaml file in architecture-decisions/ directory
 #   metadata: Structured metadata with created, last_updated, last_validated info
 
 ---
 
-ARCH-STDD_STRUCTURE:
-  name: STDD Project Structure
+ARCH-TIED_STRUCTURE:
+  name: TIED Project Structure
   status: Active
   cross_references:
-    - REQ-STDD_SETUP
+    - REQ-TIED_SETUP
   rationale:
     why: "Keeps documentation close to code but organized in a dedicated namespace"
     problems_solved:
@@ -38,7 +38,7 @@ ARCH-STDD_STRUCTURE:
     benefits:
       - "Clear separation of concerns"
       - "Standard project layout for AI agents"
-      - "Easy discovery of all STDD documentation"
+      - "Easy discovery of all TIED documentation"
       - "Testable and maintainable structure"
   alternatives_considered:
     - name: "Root-level files"
@@ -54,32 +54,32 @@ ARCH-STDD_STRUCTURE:
       cons:
         - "Too generic for methodology-specific files"
         - ".github is typically for GitHub workflows"
-      rejected_reason: "stdd/ is more specific to the methodology"
+      rejected_reason: "tied/ is more specific to the methodology"
   implementation_approach:
-    summary: "Create dedicated stdd/ directory with YAML indexes and detail subdirectories"
+    summary: "Create dedicated tied/ directory with YAML indexes and detail subdirectories"
     details:
-      - "Create stdd/ directory at project root"
+      - "Create tied/ directory at project root"
       - "Populate with YAML index files: requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml"
       - "Create detail subdirectories: requirements/, architecture-decisions/, implementation-decisions/"
-      - "Add guide files: semantic-tokens.md, tasks.md, processes.md"
+      - "Add guide files: semantic-tokens.md, processes.md"
   traceability:
     requirements:
-      - REQ-STDD_SETUP
+      - REQ-TIED_SETUP
     implementation:
-      - IMPL-STDD_FILES
+      - IMPL-TIED_FILES
     tests:
-      - TestSTDDSetup_REQ_STDD_SETUP
+      - TestTIEDSetup_REQ_TIED_SETUP
     code_annotations:
-      - IMPL-STDD_FILES
-      - ARCH-STDD_STRUCTURE
-      - REQ-STDD_SETUP
+      - IMPL-TIED_FILES
+      - ARCH-TIED_STRUCTURE
+      - REQ-TIED_SETUP
   related_decisions:
     depends_on:
-      - REQ-STDD_SETUP
+      - REQ-TIED_SETUP
     informs:
-      - IMPL-STDD_FILES
+      - IMPL-TIED_FILES
     see_also: []
-  detail_file: architecture-decisions/ARCH-STDD_STRUCTURE.md
+  detail_file: architecture-decisions/ARCH-TIED_STRUCTURE.yaml
   metadata:
     created:
       date: 2025-12-18
@@ -161,7 +161,7 @@ ARCH-MODULE_VALIDATION:
     informs:
       - IMPL-MODULE_VALIDATION
     see_also: []
-  detail_file: architecture-decisions/ARCH-MODULE_VALIDATION.md
+  detail_file: architecture-decisions/ARCH-MODULE_VALIDATION.yaml
   metadata:
     created:
       date: 2025-12-18
@@ -173,245 +173,6 @@ ARCH-MODULE_VALIDATION:
     last_validated:
       date: 2026-02-06
       validator: "AI Agent"
-      result: "pass"
-
-ARCH-LANGUAGE_SELECTION:
-  name: Language and Runtime Selection
-  status: Template
-  cross_references: []
-  rationale:
-    why: "Why this language/runtime was chosen for the project"
-    problems_solved:
-      - "Problem 1 that language solves"
-    benefits:
-      - "Benefit 1 of chosen language"
-  alternatives_considered:
-    - name: "Language A"
-      pros:
-        - "Pro 1"
-      cons:
-        - "Con 1"
-      rejected_reason: "Why it was rejected"
-    - name: "Language B"
-      pros:
-        - "Pro 1"
-      cons:
-        - "Con 1"
-      rejected_reason: "Why it was rejected"
-  implementation_approach:
-    summary: "How the selected language/runtime will be used in the project"
-    details:
-      - "Detail 1"
-      - "Detail 2"
-  traceability:
-    requirements:
-      - REQ-*
-    implementation:
-      - IMPL-*
-    tests:
-      - testFeatureName_ARCH_LANGUAGE_SELECTION
-    code_annotations:
-      - ARCH-LANGUAGE_SELECTION
-  related_decisions:
-    depends_on: []
-    informs: []
-    see_also: []
-  detail_file: architecture-decisions/ARCH-LANGUAGE_SELECTION.md
-  metadata:
-    created:
-      date: YYYY-MM-DD
-      author: "agent/contributor"
-    last_updated:
-      date: YYYY-MM-DD
-      author: "agent/contributor"
-      reason: "Initial creation"
-    last_validated:
-      date: YYYY-MM-DD
-      validator: "agent/contributor"
-      result: "pass"
-
-ARCH-EXAMPLE_DECISION:
-  name: Core Architecture Example
-  status: Template
-  cross_references:
-    - REQ-EXAMPLE_FEATURE
-  rationale:
-    why: "Why this architectural decision was made"
-    problems_solved:
-      - "Problem 1 that this decision solves"
-      - "Problem 2"
-    benefits:
-      - "Benefit 1 of this decision"
-      - "Benefit 2"
-  alternatives_considered:
-    - name: "Alternative 1"
-      pros:
-        - "Pro 1"
-      cons:
-        - "Con 1"
-      rejected_reason: "Why it was rejected"
-    - name: "Alternative 2"
-      pros:
-        - "Pro 1"
-      cons:
-        - "Con 1"
-      rejected_reason: "Why it was rejected"
-  implementation_approach:
-    summary: "High-level description of the architectural approach"
-    details:
-      - "Key component 1"
-      - "Key component 2"
-      - "Integration point 1"
-  traceability:
-    requirements:
-      - REQ-EXAMPLE_FEATURE
-    implementation:
-      - IMPL-EXAMPLE_IMPLEMENTATION
-    tests:
-      - testFeatureName_ARCH_EXAMPLE_DECISION
-    code_annotations:
-      - ARCH-EXAMPLE_DECISION
-  related_decisions:
-    depends_on:
-      - REQ-EXAMPLE_FEATURE
-    informs:
-      - IMPL-EXAMPLE_IMPLEMENTATION
-    see_also: []
-  detail_file: architecture-decisions/ARCH-EXAMPLE_DECISION.md
-  metadata:
-    created:
-      date: YYYY-MM-DD
-      author: "agent/contributor"
-    last_updated:
-      date: YYYY-MM-DD
-      author: "agent/contributor"
-      reason: "Initial creation"
-    last_validated:
-      date: YYYY-MM-DD
-      validator: "agent/contributor"
-      result: "pass"
-
-ARCH-ERROR_HANDLING:
-  name: Error Handling Strategy
-  status: Template
-  cross_references:
-    - REQ-ERROR_HANDLING
-  rationale:
-    why: "Why this error handling approach was chosen"
-    problems_solved:
-      - "Problem 1 with error handling"
-    benefits:
-      - "Benefit 1 of this approach"
-  alternatives_considered:
-    - name: "Exceptions"
-      pros:
-        - "Pro 1"
-      cons:
-        - "Con 1"
-      rejected_reason: "Why rejected or why chosen"
-    - name: "Error codes"
-      pros:
-        - "Pro 1"
-      cons:
-        - "Con 1"
-      rejected_reason: "Why rejected or why chosen"
-    - name: "Result types"
-      pros:
-        - "Pro 1"
-      cons:
-        - "Con 1"
-      rejected_reason: "Why rejected or why chosen"
-  implementation_approach:
-    summary: "How errors will be handled throughout the application"
-    details:
-      - "Error propagation strategy"
-      - "Error logging approach"
-      - "User-facing error messages"
-  traceability:
-    requirements:
-      - REQ-ERROR_HANDLING
-    implementation:
-      - IMPL-ERROR_HANDLING
-    tests:
-      - testErrorHandling_ARCH_ERROR_HANDLING
-    code_annotations:
-      - ARCH-ERROR_HANDLING
-  related_decisions:
-    depends_on:
-      - REQ-ERROR_HANDLING
-    informs:
-      - IMPL-ERROR_HANDLING
-    see_also: []
-  detail_file: architecture-decisions/ARCH-ERROR_HANDLING.md
-  metadata:
-    created:
-      date: YYYY-MM-DD
-      author: "agent/contributor"
-    last_updated:
-      date: YYYY-MM-DD
-      author: "agent/contributor"
-      reason: "Initial creation"
-    last_validated:
-      date: YYYY-MM-DD
-      validator: "agent/contributor"
-      result: "pass"
-
-ARCH-TESTING_STRATEGY:
-  name: Testing Strategy
-  status: Template
-  cross_references: []
-  rationale:
-    why: "Why this testing strategy was chosen"
-    problems_solved:
-      - "Problem 1 with testing"
-    benefits:
-      - "Benefit 1 of this strategy"
-  alternatives_considered:
-    - name: "Test Approach 1"
-      pros:
-        - "Pro 1"
-      cons:
-        - "Con 1"
-      rejected_reason: "Why rejected or why chosen"
-    - name: "Test Approach 2"
-      pros:
-        - "Pro 1"
-      cons:
-        - "Con 1"
-      rejected_reason: "Why rejected or why chosen"
-  implementation_approach:
-    summary: "Overall testing strategy for the project"
-    details:
-      - "Unit testing approach"
-      - "Integration testing approach"
-      - "End-to-end testing approach"
-      - "Test coverage goals"
-  traceability:
-    requirements:
-      - REQ-*
-    implementation:
-      - IMPL-TESTING
-    tests:
-      - All test files follow this strategy
-    code_annotations:
-      - ARCH-TESTING_STRATEGY
-  related_decisions:
-    depends_on: []
-    informs:
-      - IMPL-TESTING
-    see_also: []
-  detail_file: architecture-decisions/ARCH-TESTING_STRATEGY.md
-  metadata:
-    created:
-      date: YYYY-MM-DD
-      author: "agent/contributor"
-    last_updated:
-      date: YYYY-MM-DD
-      author: "agent/contributor"
-      reason: "Initial creation"
-    last_validated:
-      date: YYYY-MM-DD
-      validator: "agent/contributor"
       result: "pass"
 
 # ---
@@ -463,7 +224,7 @@ ARCH-TESTING_STRATEGY:
 #     depends_on: []
 #     informs: []
 #     see_also: []
-#   detail_file: architecture-decisions/ARCH-IDENTIFIER.md
+#   detail_file: architecture-decisions/ARCH-IDENTIFIER.yaml
 #   metadata:
 #     created:
 #       date: YYYY-MM-DD

@@ -44,8 +44,8 @@
   <!-- Step 2 -->
   <rect x="50" y="180" width="500" height="120" rx="12" ry="12" fill="#dbeafe" stroke="#2563eb" stroke-width="2"></rect>
   <text x="66" y="204" class="step-num" fill="#2563eb">2</text>
-  <text x="66" y="224" class="step-title" fill="#2563eb">Agent adds details to requirements.md per STDD</text>
-  <text x="66" y="248" class="desc">Agent documents the requirement following STDD methodology</text>
+  <text x="66" y="224" class="step-title" fill="#2563eb">Agent adds details to requirements.md per TIED</text>
+  <text x="66" y="248" class="desc">Agent documents the requirement following TIED methodology</text>
   <text x="66" y="268" class="file">→ requirements.md</text>
 
   <!-- Arrow 2-3 -->
@@ -54,9 +54,9 @@
   <!-- Step 3 -->
   <rect x="50" y="320" width="500" height="120" rx="12" ry="12" fill="#fae8ff" stroke="#c026d3" stroke-width="2"></rect>
   <text x="66" y="344" class="step-num" fill="#c026d3">3</text>
-  <text x="66" y="364" class="step-title" fill="#c026d3">STDD process adds tasks and subtasks to tasks.md</text>
-  <text x="66" y="388" class="desc">Tasks are created and organized with priorities</text>
-  <text x="66" y="408" class="file">→ tasks.md</text>
+  <text x="66" y="364" class="step-title" fill="#c026d3">Plan implementation steps (optional: tasks.md or in-session)</text>
+  <text x="66" y="388" class="desc">Work is broken down and organized with priorities</text>
+  <text x="66" y="408" class="file">→ tasks.md (optional) or in-session planning</text>
 
   <!-- Arrow 3-4 -->
   <line x1="300" y1="440" x2="300" y2="460" class="arrow"></line>
@@ -68,7 +68,7 @@
   </linearGradient>
   <rect x="50" y="460" width="500" height="120" rx="12" ry="12" fill="url(#archimpl)" stroke="#0891b2" stroke-width="2"></rect>
   <text x="66" y="484" class="step-num" fill="#0891b2">4</text>
-  <text x="66" y="504" class="step-title" fill="#0891b2">STDD process adds semantic tokens, architectural, and implementation decisions</text>
+  <text x="66" y="504" class="step-title" fill="#0891b2">TIED process adds semantic tokens, architectural, and implementation decisions</text>
   <text x="66" y="528" class="desc">Decisions are documented across architecture and implementation layers</text>
   <text x="66" y="548" class="file">→ semantic-tokens.md, architecture-decisions.md, implementation-decisions.md</text>
 
@@ -101,7 +101,7 @@
   <!-- Multi-color top border -->
   <rect x="50" y="880" width="500" height="6" fill="url(#multicolor)"></rect>
   <text x="66" y="904" class="step-num" fill="#111827">7</text>
-  <text x="66" y="924" class="step-title" fill="#111827">Code, tests and STDD documents updated to link</text>
+  <text x="66" y="924" class="step-title" fill="#111827">Code, tests and TIED documents updated to link</text>
   <text x="66" y="944" class="desc">all content with semantic tokens</text>
   <text x="66" y="964" class="file">→ All documents, Code, Tests</text>
 

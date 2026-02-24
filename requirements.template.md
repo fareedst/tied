@@ -1,6 +1,6 @@
 # Requirements Directory
 
-**STDD Methodology Version**: 1.5.0
+**TIED Methodology Version**: 1.5.0
 
 ## Overview
 This document serves as the **central listing/registry** for all requirements in this project. Each requirement is stored in its own file within the `requirements/` directory for scalability. Each requirement has a unique semantic token `[REQ-IDENTIFIER]` for traceability.
@@ -13,12 +13,12 @@ This document serves as the **central listing/registry** for all requirements in
 ## Directory Structure
 
 ```
-stdd/
+tied/
 ├── requirements.md              # This guide file (you are here)
 ├── requirements.yaml            # YAML index/database of all requirements
-├── requirements/                # Detail files directory
-│   ├── REQ-STDD_SETUP.md
-│   ├── REQ-MODULE_VALIDATION.md
+├── requirements/                # Detail files directory (YAML)
+│   ├── REQ-TIED_SETUP.yaml
+│   ├── REQ-MODULE_VALIDATION.yaml
 │   └── ...
 ```
 
@@ -28,10 +28,10 @@ Token names use the same format in text and filenames:
 
 | Token Format | Filename Format |
 |--------------|-----------------|
-| `[REQ-USER_AUTH]` | `REQ-USER_AUTH.md` |
-| `[REQ-MODULE_VALIDATION]` | `REQ-MODULE_VALIDATION.md` |
+| `[REQ-USER_AUTH]` | `REQ-USER_AUTH.yaml` |
+| `[REQ-MODULE_VALIDATION]` | `REQ-MODULE_VALIDATION.yaml` |
 
-**Rule**: Remove brackets, keep hyphen, append `.md`
+**Rule**: Remove brackets, keep hyphen, append `.yaml`
 
 ## Notes
 
@@ -55,25 +55,25 @@ To view the index:
 
 ```bash
 # View entire index
-cat stdd/requirements.yaml
+cat tied/requirements.yaml
 
 # View specific requirement
-yq '.REQ-STDD_SETUP' stdd/requirements.yaml
+yq '.REQ-TIED_SETUP' tied/requirements.yaml
 
 # Get satisfaction criteria for a requirement
-yq '.REQ-STDD_SETUP.satisfaction_criteria[].criterion' stdd/requirements.yaml
+yq '.REQ-TIED_SETUP.satisfaction_criteria[].criterion' tied/requirements.yaml
 
 # Get validation methods for a requirement
-yq '.REQ-STDD_SETUP.validation_criteria[].method' stdd/requirements.yaml
+yq '.REQ-TIED_SETUP.validation_criteria[].method' tied/requirements.yaml
 
 # Get architecture dependencies for a requirement
-yq '.REQ-STDD_SETUP.traceability.architecture[]' stdd/requirements.yaml
+yq '.REQ-TIED_SETUP.traceability.architecture[]' tied/requirements.yaml
 
 # List all requirements by status
-yq 'to_entries | map(select(.value.status == "Implemented")) | from_entries' stdd/requirements.yaml
+yq 'to_entries | map(select(.value.status == "Implemented")) | from_entries' tied/requirements.yaml
 
 # Quick grep search
-grep -A 30 '^REQ-STDD_SETUP:' stdd/requirements.yaml
+grep -A 30 '^REQ-TIED_SETUP:' tied/requirements.yaml
 ```
 
 ### How to Append a New Requirement
@@ -83,13 +83,13 @@ grep -A 30 '^REQ-STDD_SETUP:' stdd/requirements.yaml
 3. Paste it at the end with a blank line before it
 4. Replace `REQ-IDENTIFIER` with your new semantic token
 5. Fill in all fields (name, category, priority, status, rationale, etc.)
-6. Update the `detail_file` path to match your new `.md` file in `requirements/` directory
+6. Update the `detail_file` path to match your new `.yaml` file in `requirements/` directory
 7. Save the file
 
 Example append operation:
 
 ```bash
-cat >> stdd/requirements.yaml << 'EOF'
+cat >> tied/requirements.yaml << 'EOF'
 
 REQ-NEW_FEATURE:
   name: New Feature Name
@@ -126,7 +126,7 @@ REQ-NEW_FEATURE:
     depends_on: []
     related_to: []
     supersedes: []
-  detail_file: requirements/REQ-NEW_FEATURE.md
+  detail_file: requirements/REQ-NEW_FEATURE.yaml
   metadata:
     created:
       date: 2026-02-06
@@ -210,7 +210,7 @@ Why the requirement exists (WHY)
 
 ```bash
 # 1. Create the detail file
-touch stdd/requirements/REQ-YOUR_TOKEN.md
+touch tied/requirements/REQ-YOUR_TOKEN.yaml
 
 # 2. Copy the template above into the new file
 
@@ -230,18 +230,18 @@ For very large projects, organize detail files by domain:
 ```
 requirements/
 ├── core/
-│   ├── REQ-STDD_SETUP.md
-│   └── REQ-MODULE_VALIDATION.md
+│   ├── REQ-TIED_SETUP.yaml
+│   └── REQ-MODULE_VALIDATION.yaml
 ├── auth/
-│   ├── REQ-USER_LOGIN.md
-│   └── REQ-SESSION_MGMT.md
+│   ├── REQ-USER_LOGIN.yaml
+│   └── REQ-SESSION_MGMT.yaml
 └── api/
-    └── REQ-REST_ENDPOINTS.md
+    └── REQ-REST_ENDPOINTS.yaml
 ```
 
 When using subdirectories, update the Detail File column in the index:
 ```markdown
-| `[REQ-USER_LOGIN]` | User Login | P0 | ✅ Implemented | Auth | ... | [Detail](requirements/auth/REQ-USER_LOGIN.md) |
+| `[REQ-USER_LOGIN]` | User Login | P0 | ✅ Implemented | Auth | ... | [Detail](requirements/auth/REQ-USER_LOGIN.yaml) |
 ```
 
 ---

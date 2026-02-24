@@ -1,8 +1,10 @@
-# STDD Conversation Template: Adding a Feature to an Existing Complex Application
+# TIED Conversation Template: Adding a Feature to an Existing Complex Application
 
-**STDD Methodology Version**: 1.0.1
+**TIED Methodology Version**: 2.2.0
 
-This template demonstrates a realistic conversation between a developer and an AI-coder following the STDD methodology when adding a feature to an existing, complex application.
+This template demonstrates a realistic conversation between a developer and an AI-coder following the TIED methodology when adding a feature to an existing, complex application.
+
+**Note**: This conversation example shows task planning in `tasks.md`. As of TIED 2.1.0, task tracking via `tasks.md` is **optional**. Agents may maintain planning state in-session (e.g., conversation-based todo lists) or document work breakdown in `implementation-decisions`. The core TIED value is in the **traceability chain** (requirements → architecture → implementation → tests → code), not in task tracking artifacts.
 
 ---
 
@@ -29,7 +31,7 @@ This template demonstrates a realistic conversation between a developer and an A
 
 **AI**: "Observing AI principles!"
 
-I'll help you add rate limiting to your API endpoints. Following STDD methodology, let me first understand the requirements and document the approach before writing any code.
+I'll help you add rate limiting to your API endpoints. Following TIED methodology, let me first understand the requirements and document the approach before writing any code.
 
 **Questions to clarify requirements:**
 
@@ -88,7 +90,7 @@ I'll now:
 2. Document architecture decisions in `architecture-decisions.md`
 3. Document implementation decisions in `implementation-decisions.md`
 4. Update `semantic-tokens.yaml` with new tokens
-5. Create tasks in `tasks.md`
+5. Plan implementation steps (this example uses `tasks.md`, but in-session planning is also valid)
 
 Let me start:
 
@@ -270,7 +272,7 @@ function checkTokenBucket(redis, key, path, limit, window):
 
 **Planning Phase Complete - Ready for Review**
 
-I've completed Phase 1 of STDD:
+I've completed Phase 1 of TIED:
 
 ✅ **Requirements documented** in `requirements.md` with satisfaction and validation criteria  
 ✅ **Architecture decisions** documented in `architecture-decisions.md` with `[ARCH-*]` tokens  
@@ -279,7 +281,7 @@ I've completed Phase 1 of STDD:
 ✅ **Tasks created** in `tasks.md` with priorities  
 ✅ **Pseudo-code** provided showing the approach
 
-**No code has been written yet** - this follows STDD's documentation-first approach.
+**No code has been written yet** - this follows TIED's documentation-first approach.
 
 Please review the documentation and let me know if you'd like any changes before I proceed to Phase 2 (task breakdown) and Phase 3 (implementation).
 
@@ -580,7 +582,7 @@ The rate limiting feature is implemented and tested. P2 tasks (metrics and per-e
 
 ## Notes for Developers
 
-When working with AI following STDD:
+When working with AI following TIED:
 
 1. **Be Specific**: Provide clear requirements and answer clarifying questions
 2. **Review Planning**: Take time to review Phase 1 documentation before approving
@@ -592,18 +594,17 @@ When working with AI following STDD:
 
 ## Notes for AI Agents
 
-When following STDD:
+When following TIED:
 
 1. **Always Acknowledge**: Start every response with "Observing AI principles!"
 2. **No Code in Phase 1**: Planning phase is documentation only
 3. **Document Immediately**: Don't defer documentation - do it as decisions are made
 4. **Ask Questions**: Clarify requirements before documenting
 5. **Show Pseudo-Code**: Help developer visualize the approach
-6. **Update Tasks Continuously**: Keep tasks.md current as work progresses
-7. **Remove Subtasks**: Clean up completed subtasks
-8. **Maintain Tokens**: Keep semantic-tokens.yaml updated
-9. **Cross-Reference**: Always link tokens: IMPL → ARCH → REQ
-10. **Test References**: Include semantic tokens in test names
+6. **Plan Work**: Break work into clear steps (via tasks.md, in-session planning, or implementation-decisions)
+7. **Maintain Tokens**: Keep semantic-tokens.yaml updated
+8. **Cross-Reference**: Always link tokens: IMPL → ARCH → REQ
+9. **Test References**: Include semantic tokens in test names
 
 ---
 

@@ -1,14 +1,14 @@
 # Requirements Index (YAML Database)
 #
 # This YAML file serves as the central index/registry for all requirements in the project.
-# Each top-level key is a semantic token (e.g., REQ-STDD_SETUP).
+# Each top-level key is a semantic token (e.g., REQ-TIED_SETUP).
 #
 # To append a new requirement:
 # 1. Copy the template block at the bottom of this file (REQ-IDENTIFIER)
 # 2. Paste it at the end with a blank line before it
 # 3. Replace REQ-IDENTIFIER with your new token
 # 4. Fill in all fields
-# 5. Update the detail_file path to match your new .md file in requirements/ directory
+# 5. Update the detail_file path to match your new .yaml file in requirements/ directory
 #
 # Field descriptions:
 #   name: Short descriptive name of the requirement
@@ -20,13 +20,13 @@
 #   validation_criteria: List of validation method items with coverage details
 #   traceability: Structured links to architecture, implementation, tests, code_annotations
 #   related_requirements: Lists of depends_on, related_to, supersedes (YAML lists or [])
-#   detail_file: Path to the detailed .md file in requirements/ directory
+#   detail_file: Path to the detailed .yaml file in requirements/ directory
 #   metadata: Structured metadata with created, last_updated, last_validated info
 
 ---
 
-REQ-STDD_SETUP:
-  name: STDD Methodology Setup
+REQ-TIED_SETUP:
+  name: TIED Methodology Setup
   category: Functional
   priority: P0
   status: "Implemented"
@@ -41,11 +41,11 @@ REQ-STDD_SETUP:
       - "Consistent development methodology"
       - "AI-friendly documentation structure"
   satisfaction_criteria:
-    - criterion: "stdd/ directory exists with proper structure"
+    - criterion: "tied/ directory exists with proper structure"
     - criterion: "All required documentation files exist and are populated from templates"
-      metric: "requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml, semantic-tokens.md, tasks.md, processes.md all present"
+      metric: "requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml, semantic-tokens.md, processes.md all present"
     - criterion: "Base files properly configured"
-      metric: ".cursorrules contains STDD rules, AGENTS.md contains canonical AI agent instructions"
+      metric: ".cursorrules contains TIED rules, AGENTS.md contains canonical AI agent instructions"
     - criterion: "Detail directories exist"
       metric: "requirements/, architecture-decisions/, implementation-decisions/ directories present"
   validation_criteria:
@@ -57,20 +57,20 @@ REQ-STDD_SETUP:
       coverage: "All index files have corresponding detail directories with proper naming"
   traceability:
     architecture:
-      - ARCH-STDD_STRUCTURE
+      - ARCH-TIED_STRUCTURE
     implementation:
-      - IMPL-STDD_FILES
+      - IMPL-TIED_FILES
     tests:
       - Manual verification checklists
     code_annotations:
-      - IMPL-STDD_FILES
-      - ARCH-STDD_STRUCTURE
-      - REQ-STDD_SETUP
+      - IMPL-TIED_FILES
+      - ARCH-TIED_STRUCTURE
+      - REQ-TIED_SETUP
   related_requirements:
     depends_on: []
     related_to: []
     supersedes: []
-  detail_file: requirements/REQ-STDD_SETUP.md
+  detail_file: requirements/REQ-TIED_SETUP.yaml
   metadata:
     created:
       date: 2025-11-08
@@ -134,10 +134,10 @@ REQ-MODULE_VALIDATION:
       - IMPL-MODULE_VALIDATION
   related_requirements:
     depends_on:
-      - REQ-STDD_SETUP
+      - REQ-TIED_SETUP
     related_to: []
     supersedes: []
-  detail_file: requirements/REQ-MODULE_VALIDATION.md
+  detail_file: requirements/REQ-MODULE_VALIDATION.yaml
   metadata:
     created:
       date: 2025-01-27
@@ -192,7 +192,7 @@ REQ-MODULE_VALIDATION:
 #     depends_on: []
 #     related_to: []
 #     supersedes: []
-#   detail_file: requirements/REQ-IDENTIFIER.md
+#   detail_file: requirements/REQ-IDENTIFIER.yaml
 #   metadata:
 #     created:
 #       date: YYYY-MM-DD

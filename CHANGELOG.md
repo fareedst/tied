@@ -1,9 +1,138 @@
-# STDD Methodology Changelog
+# TIED Methodology Changelog
 
-All notable changes to the STDD (Semantic Token-Driven Development) methodology will be documented in this file.
+All notable changes to the TIED (Token-Integrated Engineering & Development) methodology will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+### Added
+
+- **YAML detail files for REQ, ARCH, and IMPL** [TIED spec update]: Individual token detail files are now YAML (replacing Markdown) so transformations (validation, merge, report generation, MCP tools) can operate on them.
+  - **Schema**: New `detail-files-schema.md` describes the YAML structure for `requirements/REQ-*.yaml`, `architecture-decisions/ARCH-*.yaml`, and `implementation-decisions/IMPL-*.yaml` (one token per file, top-level key = token id; fields aligned with index for merge/validation).
+  - **Templates**: Added YAML detail files in `requirements.template/` (REQ-TIED_SETUP, REQ-MODULE_VALIDATION, REQ-IDENTIFIER), `architecture-decisions.template/` (ARCH-TIED_STRUCTURE, ARCH-MODULE_VALIDATION, ARCH-EXAMPLE_DECISION), `implementation-decisions.template/` (IMPL-TIED_FILES, IMPL-MODULE_VALIDATION).
+  - **Indexes**: All `detail_file` paths in `requirements.template.yaml`, `architecture-decisions.template.yaml`, `implementation-decisions.template.yaml`, and `semantic-tokens.template.yaml` now reference `.yaml` (e.g. `requirements/REQ-TIED_SETUP.yaml`).
+  - **Docs**: AGENTS.md Key Files table and ai-principles.md Related Documents updated to describe detail files as YAML and to reference `detail-files-schema.md`; processes.template.md and guide templates (requirements, architecture-decisions, implementation-decisions) use `.yaml` in examples.
+  - **Bootstrap**: `copy_files.sh` copies `*.yaml` detail files from template directories into `tied/` and copies `detail-files-schema.md` into `tied/` when present.
+  - **Legacy**: Existing `.md` detail files in template directories are unchanged and can remain for reference; indexes and scripts now treat YAML as the canonical detail format.
+
+- **TIED YAML MCP Server** (`mcp-server/`): Model Context Protocol server for programmatic access to TIED YAML indexes
+  - **Tools**: Read, list tokens, filter by field, validate YAML; traceability tools `get_decisions_for_requirement` and `get_requirements_for_decision`; write tools `yaml_index_insert`, `yaml_index_update`
+  - **Resources**: Read-only URIs for full indexes (`tied://requirements`, `tied://architecture-decisions`, `tied://implementation-decisions`, `tied://semantic-tokens`) and single records (`tied://requirement/{token}`, `tied://decision/{token}`)
+  - **Configuration**: `TIED_BASE_PATH` environment variable for index location; supports `tied/` layout and template-only repos
+  - **Cursor**: Documented MCP config for Cursor IDE in `mcp-server/README.md`
+
+- **MCP Server: REQ/ARCH/IMPL detail access and create-with-detail**
+  - **Batch detail read**: New tool `yaml_detail_read_many` — request details by token list and/or by type (requirement | architecture | implementation); returns a map of token → detail record or `{ error }`.
+  - **Create token with details**: New tool `tied_token_create_with_detail` — create a new REQ, ARCH, or IMPL in one call: writes index record (with `detail_file`) and detail YAML file; optional `upsert_index` to merge into existing index.
+  - **Resources**: New read-only URIs for all details by type: `tied://details/requirements`, `tied://details/architecture`, `tied://details/implementation` (each returns token → detail object).
+  - **Docs**: `mcp-server/README.md` updated with new tools and resources; conversion section now refers to detail YAML (not markdown).
+
+- **MCP Server: Hybrid layout (detail .md and .yaml)** — support for reference-style TIED projects where index `detail_file` points to either `.md` or `.yaml` per token
+  - **Detail path resolution**: Loader resolves path from index `detail_file` when present; falls back to `{subdir}/{token}.yaml` then `{subdir}/{token}.md` so hybrid layouts work without changing indexes.
+  - **Markdown detail reading**: For `.md` detail files, `loadDetail()` returns `{ _raw_markdown, _format: "markdown" }`; tools and resources expose this so MCP can read reference projects that keep some tokens in Markdown.
+  - **Listing**: `listDetailTokens(type)` now includes tokens from the index (where `detail_file` is set) and from the filesystem (both `.yaml` and `.md` in the detail directory).
+  - **Update guard**: `yaml_detail_update` returns an error when the detail file is Markdown (edit `.md` files directly).
+  - **Import/inspect tool**: New tool `tied_import_summary` — optional `base_path`; reads requirements/architecture/implementation YAML indexes and reports token counts and which `detail_file` paths exist (for validating or inspecting an existing TIED directory).
+  - **Docs**: `mcp-server/README.md` updated with “Hybrid layout” section and `tied_import_summary`; detail read/list descriptions updated.
+
+### Changed
+
+- **Monolithic-to-TIED conversion (REQ, ARCH, IMPL)** – improved migration in `mcp-server/src/convert/` for lossless conversion from STDD-style monolithic markdown to TIED YAML indexes and detail files:
+  - **Requirements**
+    - Section regex allows optional numbering (e.g. `### 2. [REQ-...]`); end-of-string lookahead fixed so section bodies are no longer truncated at newlines.
+    - "Next bold label" parsing: each labeled field’s value runs until the next `**Label**`/`**Label**:`, preserving multi-line Satisfaction Criteria, Validation Criteria, and Implementation Notes.
+    - Same-line values (e.g. `**Priority: P0 (Critical)**`) and rest-of-line values (e.g. `**Description**: text`) both captured; backtick-only lines (e.g. `` `[PROC:TOKEN_AUDIT]`: ``) not treated as field values.
+    - Trailing colon stripped from normalized keys so `**Rationale:**` maps to `rationale`.
+    - Detail files: Implementation Notes section when present; "Original section (from monolithic source)" collapsible block with full body for fidelity.
+    - YAML records: optional `implementation_notes` when present.
+  - **Architecture**
+    - Section regex allows decimal numbering (e.g. `## 4.1`, `## 14.1.`); optional `[REQ-*]`/`[IMPL-*]` after `[ARCH-*]`.
+    - `### Decision: ...` block extracted; then "next bold label" parsing for Rationale, Alternatives Considered, Implementation (and Implementation Plan), Token Coverage, Implementation Status.
+    - Detail files: Status from parsed content; Token Coverage section from source when present; "Original section" block; Alternatives Considered shows "—" when empty.
+    - Fallback regex uses `(?![\s\S])` for end-of-string.
+    - YAML records: `token_coverage` and status from source when present.
+  - **Implementation**
+    - Section regex allows `N.`, `2a.`, `8.1.`-style numbering; header may contain `[ARCH-*]` `[REQ-*]` `[IMPL-*]` refs.
+    - `### Decision: ...` and `### Implementation Approach: ...` blocks extracted; "next bold label" parsing for Rationale, Code Markers, Token Coverage, Validation Evidence, Implementation Details.
+    - Detail files: Decision, Rationale, Implementation Approach, Implementation Details, Code Markers, Token Coverage, Validation Evidence; Status from source; "Original section" block.
+    - YAML records: `token_coverage`, `code_markers`, `validation_evidence`; `implementation_approach.details` from Implementation Details; status and decision used when present.
+  - **Shared**
+    - Colon-style tokens (`[REQ:*]`, `[ARCH:*]`, `[IMPL:*]`) normalized to hyphen before parsing when `token_format` is `"both"` or `"colon"`.
+    - REQ, ARCH, and IMPL conversions now use the same parsing and fidelity patterns so all captured info is preserved in both detail YAML and index.
+    - Detail output is now YAML only (REQ-*.yaml, ARCH-*.yaml, IMPL-*.yaml); index `detail_file` paths reference .yaml.
+
+## [2.2.0] - 2026-02-23
+
+### Changed
+
+- **Documentation and version alignment**: All methodology version references updated to TIED 2.2.0 (README.md, conversation.template.md, tasks.template.md). Removed redundant document version line from ai-principles.md. mcp-server/README.md: fixed broken CLI/samples paragraph (CLI script and sample files not yet in repo; use MCP conversion tools); conversion tools description now references TIED 2.x output format.
+
+## [2.1.0] - 2026-02-09
+
+### Changed
+
+- **Task Tracking Now Optional**: Task tracking via `tasks.md` is no longer mandatory in the TIED methodology
+  - **Rationale**: The core value of TIED is in the **traceability chain** (requirements → architecture → implementation → tests → code) maintained through semantic tokens and YAML indexes, not in task tracking artifacts. Agents can naturally maintain planning state in-session (e.g., conversation-based todo lists) or document work breakdown directly in `implementation-decisions`, making a separate task file redundant.
+  - **Benefits**:
+    - Less ceremony: No need to "plan in tasks.md before implementation," update subtasks, or remove completed subtasks
+    - Single source of truth: Traceability stays in the token chain and decision logs
+    - Agent-native workflow: Agents already break work into steps and track progress in-conversation
+    - Simpler bootstrap: Session start no longer requires reviewing tasks.md
+    - Fewer artifacts: One less template and one less file to create per project
+  - **What Changed**:
+    - `AGENTS.md`: Removed "Review tasks.md" from session bootstrap, removed Task Management section, removed tasks.md from all checklists and Key Files table
+    - `ai-principles.md`: Renamed Phase 2 from "Pseudo-Code → Tasks" to "Planning Implementation", removed Task Tracking System section, updated all checklists to remove tasks.md references
+    - Template files: Removed tasks.md from `REQ-TIED_SETUP`, architecture structure, and all YAML indexes
+    - `tasks.template.md`: Added prominent note that it's optional as of TIED 2.1.0
+    - Token audit/validation results: Now logged only in `implementation-decisions` (previously logged in both tasks.md and implementation-decisions)
+  - **What Stayed the Same**:
+    - All semantic token types: `[REQ-*]`, `[ARCH-*]`, `[IMPL-*]`, `[TEST-*]`, `[PROC-*]`
+    - Documentation-first flow: expand requirements, record ARCH/IMPL decisions immediately, then implement
+    - Module validation mandate: validate modules independently before integration
+    - Priority order: Tests > Code > Basic Functions > Infrastructure
+    - Token audit and validation processes (only logging location changed)
+  - **Migration**: Projects currently using `tasks.md` can continue using it - it's simply no longer required. Projects can also switch to in-session planning or document work breakdown in `implementation-decisions.yaml`. No breaking changes to existing workflows.
+  - **Optional Use**: Projects that benefit from a shared task list for human visibility can continue using `tasks.template.md`
+
+### Removed
+
+- Mandatory task tracking from methodology requirements
+- `tasks.md` references from AGENTS.md session bootstrap and all operational checklists
+- Task Tracking System section from ai-principles.md (replaced with optional work planning note)
+- `tasks.md` from required file lists in templates (REQ-TIED_SETUP, ARCH-TIED_STRUCTURE, implementation setup)
+
+### Note
+
+- This release represents a minor version bump (2.0.0 → 2.1.0) because while task tracking was previously positioned as mandatory, the methodology's core value proposition - semantic token traceability - remains unchanged. Making task tracking optional simplifies the methodology without removing functionality, as agents and teams can still choose to use `tasks.md` if desired.
+
+---
+
+## [2.0.0] - 2026-02-08
+
+### Changed
+
+- **Methodology Rename**: Renamed from STDD (Semantic Token-Driven Development) to TIED (Token-Integrated Engineering & Development)
+  - **Rationale**: The new name better captures the methodology's core value proposition: semantic tokens "tie" code to intent, making it impossible to modify code without confronting related context. The term "integrated" emphasizes how tokens are woven throughout the development lifecycle, while "engineering & development" broadens the scope beyond just "development" to include the full engineering process.
+  - **Breaking Changes**:
+    - Methodology name changed throughout all documentation
+    - Repository recommended directory structure changed from `stdd/` to `tied/`
+    - GitHub repository URL changed from `github.com/fareedst/stdd` to `github.com/fareedst/tied`
+    - File renames: `STDD.md` → `TIED.md`, `stdd-language-spec.md` → `tied-language-spec.md`
+    - Token identifiers updated: `REQ-STDD_SETUP` → `REQ-TIED_SETUP`, `ARCH-STDD_STRUCTURE` → `ARCH-TIED_STRUCTURE`
+  - **Preserved**:
+    - All semantic token types remain unchanged: `[REQ-*]`, `[ARCH-*]`, `[IMPL-*]`, `[TEST-*]`, `[PROC-*]`
+    - The semantic token mechanism and traceability system remain unchanged
+    - All methodology principles, processes, and workflows remain unchanged
+    - Version history preserved (this is v2.0.0, building on v1.5.0)
+  - **Migration**: Existing TIED projects should update their documentation references from "STDD" to "TIED" and rename their `stdd/` directory to `tied/`. The methodology itself remains functionally identical.
+
+### Note
+
+- This release represents a major version bump (1.5.0 → 2.0.0) due to the breaking changes in terminology and directory structure. However, the core methodology, semantic token system, and all technical features remain unchanged from v1.5.0.
+
+---
 
 ## [1.5.0] - 2026-02-07
 
@@ -359,5 +488,7 @@ This enhancement addresses the need to eliminate bugs related to code complexity
 - AI agent integration (Cursor IDE)
 - Template-based structure for easy adoption
 
-[1.0.0]: https://github.com/fareedst/stdd/releases/tag/v1.0.0
+[2.2.0]: https://github.com/fareedst/tied/releases/tag/v2.2.0
+[2.1.0]: https://github.com/fareedst/tied/releases/tag/v2.1.0
+[1.0.0]: https://github.com/fareedst/tied/releases/tag/v1.0.0
 

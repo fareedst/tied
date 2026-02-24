@@ -1,22 +1,22 @@
-# Semantic Token-Driven Development (STDD)
+# Token-Integrated Engineering & Development (TIED)
 
-**STDD Methodology Version**: 1.4.0
+**TIED Methodology Version**: 2.2.0
 
-**Semantic Token-Driven Development (STDD)** is a software development methodology where semantic tokens (`[REQ-*]`, `[ARCH-*]`, `[IMPL-*]`) are the central mechanism for preserving intent throughout the entire development lifecycle. STDD requires independent validation of logical modules before integration to eliminate bugs related to code complexity.
+**Token-Integrated Engineering & Development (TIED)** is a software development methodology where semantic tokens (`[REQ-*]`, `[ARCH-*]`, `[IMPL-*]`) are the central mechanism for preserving intent throughout the entire development lifecycle. TIED requires independent validation of logical modules before integration to eliminate bugs related to code complexity.
 
 ---
 
-## 📚 For Beginners: Understanding STDD Without Programming Experience
+## 📚 For Beginners: Understanding TIED Without Programming Experience
 
-### What is STDD?
+### What is TIED?
 
 Imagine you're building a house. You start with a **blueprint** (requirements) that says "what" you want to build and "why" you need it. Then you create an **architectural plan** (architecture) that shows "how" the house will be structured. Finally, you have **construction details** (implementation) that explain exactly how to build each part.
 
-**STDD is like using a special labeling system** that connects all these documents together, so you can always trace back from a nail in the wall to the original blueprint requirement.
+*TIED is like using a special labeling system** that connects all these documents together, so you can always trace back from a nail in the wall to the original blueprint requirement.
 
-### The Problem STDD Solves
+### The Problem TIED Solves
 
-When building software, it's easy to lose track of **why** something was built a certain way. Over time, people forget the original reasons for decisions. STDD solves this by creating a **traceable chain** that connects everything back to the original intent.
+When building software, it's easy to lose track of **why** something was built a certain way. Over time, people forget the original reasons for decisions. TIED solves this by creating a **traceable chain** that connects everything back to the original intent.
 
 ### How It Works
 
@@ -42,7 +42,7 @@ When building software, it's easy to lose track of **why** something was built a
 
 ### The Benefit
 
-Just like you can look at a door and trace it back to the blueprint requirement, with STDD you can look at any piece of code and trace it back to the original requirement. This means:
+Just like you can look at a door and trace it back to the blueprint requirement, with TIED you can look at any piece of code and trace it back to the original requirement. This means:
 - **New team members** can understand why things were built
 - **Future changes** can be made with confidence
 - **Documentation** stays connected to the actual code
@@ -50,7 +50,7 @@ Just like you can look at a door and trace it back to the blueprint requirement,
 
 ### Real-World Analogy
 
-Think of STDD like a **family tree** for software:
+Think of TIED like a **family tree** for software:
 - Requirements are the **ancestors** (the original intent)
 - Architecture is the **parents** (how the intent was structured)
 - Implementation is the **children** (how it was actually built)
@@ -61,11 +61,11 @@ The semantic tokens are like **DNA markers** that let you trace any feature back
 
 ---
 
-## 💻 For Intermediate Developers: STDD in Practice
+## 💻 For Intermediate Developers: TIED in Practice
 
-### What is STDD?
+### What is TIED?
 
-**Semantic Token-Driven Development (STDD)** is a methodology that uses semantic tokens to create a traceable chain from requirements through architecture and implementation to tests and code. Unlike TDD (Test-Driven Development) which focuses on tests first, STDD focuses on **preserving intent** through explicit token-based cross-referencing.
+**Token-Integrated Engineering & Development (TIED)** is a methodology that uses semantic tokens to create a traceable chain from requirements through architecture and implementation to tests and code. Unlike TDD (Test-Driven Development) which focuses on tests first, TIED focuses on **preserving intent** through explicit token-based cross-referencing.
 
 ### The Core Concept
 
@@ -114,7 +114,7 @@ function checkFile(fileState) {
 }
 ```
 
-**Note**: The STDD language (see `stdd-language-spec.md`) allows pseudo-code templates to use the same syntax as implementations, enabling seamless progression from planning to code.
+**Note**: The TIED language (see `tied-language-spec.md`) allows pseudo-code templates to use the same syntax as implementations, enabling seamless progression from planning to code.
 
 ### Key Benefits
 
@@ -126,16 +126,16 @@ function checkFile(fileState) {
 
 ### Comparison to Other Methodologies
 
-| Aspect | TDD | STDD | Combined |
+| Aspect | TDD | TIED | Combined |
 |--------|-----|------|----------|
 | **Focus** | Tests first | Intent preservation | Both |
 | **Mechanism** | Test cases | Semantic tokens | Tests + Tokens |
 | **Granularity** | Fine-grained (test → code) | Hierarchical (req → arch → impl) | Both levels |
 | **Documentation** | Tests as docs | Explicit multi-level docs | Comprehensive |
 
-**STDD complements TDD**: Use STDD for planning and design, TDD for implementation.
+**TIED complements TDD**: Use TIED for planning and design, TDD for implementation.
 
-**Note**: The STDD language (see `stdd-language-spec.md`) provides a way to write pseudo-code templates with semantic tokens that can progressively refine into implementations, using the same syntax for both planning and code.
+**Note**: The TIED language (see `tied-language-spec.md`) provides a way to write pseudo-code templates with semantic tokens that can progressively refine into implementations, using the same syntax for both planning and code.
 
 ### Workflow Example
 
@@ -148,7 +148,7 @@ function checkFile(fileState) {
 7. **Test Integration**: `TestDuplicatePrevention_REQ_DUPLICATE_PREVENTION`
 8. **Code**: `// [REQ-DUPLICATE_PREVENTION] Skip if text matches lastText`
 
-### When to Use STDD
+### When to Use TIED
 
 - **Complex projects** where intent can be lost over time
 - **Long-lived codebases** that evolve significantly
@@ -164,19 +164,19 @@ function checkFile(fileState) {
 4. Document implementation decisions with `[IMPL-*]` tokens, cross-referencing both `[ARCH-*]` and `[REQ-*]`
 5. Develop and validate each module independently before integration [REQ-MODULE_VALIDATION]
 6. Reference tokens in test names and code comments
-7. Maintain token registry in `semantic-tokens.md` (copy from `semantic-tokens.template.md` in STDD repository)
+7. Maintain token registry in `semantic-tokens.md` (copy from `semantic-tokens.template.md` in TIED repository)
 
 ---
 
-## 🎓 For Expert Developers: STDD Deep Dive
+## 🎓 For Expert Developers: TIED Deep Dive
 
 ### Methodology Overview
 
-**Semantic Token-Driven Development (STDD)** is a documentation-first, intent-preserving methodology that uses semantic tokens as the primary mechanism for maintaining traceability and context throughout the software development lifecycle. It addresses the fundamental problem of **intent decay** in long-lived codebases.
+**Token-Integrated Engineering & Development (TIED)** is a documentation-first, intent-preserving methodology that uses semantic tokens as the primary mechanism for maintaining traceability and context throughout the software development lifecycle. It addresses the fundamental problem of **intent decay** in long-lived codebases.
 
 ### Theoretical Foundation
 
-STDD is based on several key principles:
+TIED is based on several key principles:
 
 1. **Intent Preservation**: The original "why" behind decisions must be preserved alongside the "what" and "how"
 2. **Explicit Traceability**: Every implementation decision must be explicitly linked to its architectural and requirement origins
@@ -186,7 +186,7 @@ STDD is based on several key principles:
 
 ### Architecture
 
-STDD creates a **directed acyclic graph (DAG)** of dependencies:
+TIED creates a **directed acyclic graph (DAG)** of dependencies:
 
 ```
 [REQ-FEATURE] (source of intent)
@@ -206,34 +206,34 @@ This structure enables:
 
 ### Comparison to Established Methodologies
 
-#### STDD vs. TDD (Test-Driven Development)
+#### TIED vs. TDD (Test-Driven Development)
 
-| Aspect | TDD | STDD |
+| Aspect | TDD | TIED |
 |--------|-----|------|
 | **Primary Driver** | Tests | Requirements |
 | **Granularity** | Unit-level (test → code) | System-level (req → arch → impl → code) |
 | **Focus** | Behavior validation | Intent preservation |
 | **Documentation** | Tests as executable specs | Multi-level explicit documentation |
 | **Traceability** | Implicit (test name → behavior) | Explicit (token → token → token) |
-| **Complementary** | Yes - STDD for design, TDD for implementation | Yes - TDD validates STDD requirements |
+| **Complementary** | Yes - TIED for design, TDD for implementation | Yes - TDD validates TIED requirements |
 
-#### STDD vs. BDD (Behavior-Driven Development)
+#### TIED vs. BDD (Behavior-Driven Development)
 
-| Aspect | BDD | STDD |
+| Aspect | BDD | TIED |
 |--------|-----|------|
 | **Language** | Natural language (Given/When/Then) | Structured tokens |
 | **Scope** | Behavior specification | Full lifecycle (req → code) |
 | **Traceability** | Story → Test | Requirement → Architecture → Implementation → Test |
 | **Automation** | Test execution | Documentation + traceability |
 
-#### STDD vs. DDD (Domain-Driven Design)
+#### TIED vs. DDD (Domain-Driven Design)
 
-| Aspect | DDD | STDD |
+| Aspect | DDD | TIED |
 |--------|-----|------|
 | **Focus** | Domain modeling | Intent preservation |
 | **Mechanism** | Ubiquitous language | Semantic tokens |
 | **Scope** | Domain concepts | All design decisions |
-| **Complementary** | Yes - DDD for domain, STDD for traceability | Yes - STDD can trace DDD concepts |
+| **Complementary** | Yes - DDD for domain, TIED for traceability | Yes - TIED can trace DDD concepts |
 
 ### Implementation Patterns
 
@@ -273,7 +273,7 @@ function testImplementation_IMPL_IMPLEMENTATION_ARCH_DESIGN_REQ_REQUIREMENT() { 
 
 ### Tooling and Automation
 
-STDD enables several automation opportunities:
+TIED enables several automation opportunities:
 
 1. **Token Registry Validation**: Verify all tokens are defined
 2. **Cross-Reference Validation**: Ensure all references are valid
@@ -298,7 +298,7 @@ git checkout -b feature/REQ_USER_AUTH
 
 ```yaml
 # Validate token references in CI
-- name: Validate STDD tokens
+- name: Validate TIED tokens
   run: |
     ./scripts/validate-tokens.sh
     ./scripts/check-traceability.sh
@@ -343,13 +343,13 @@ git checkout -b feature/REQ_USER_AUTH
 
 This pattern ensures each module is validated independently before integration, reducing complexity-related bugs.
 
-### STDD Language: Pseudo-Code Templates with Semantic Tokens
+### TIED Language: Pseudo-Code Templates with Semantic Tokens
 
-The STDD methodology includes a language specification that makes semantic tokens first-class constructs, enabling requirements to be embedded directly in source code. The STDD language uniquely supports **pseudo-code templates** that progressively refine into implementations, bridging the gap between planning (Phase 1) and implementation (Phase 3).
+The TIED methodology includes a language specification that makes semantic tokens first-class constructs, enabling requirements to be embedded directly in source code. The TIED language uniquely supports **pseudo-code templates** that progressively refine into implementations, bridging the gap between planning (Phase 1) and implementation (Phase 3).
 
 #### Key Innovation: Pseudo-Code as Templates
 
-The STDD language uses the same syntax for both pseudo-code (planning) and implementation (code), allowing functions to start as templates with semantic tokens and progressively refine into complete implementations:
+The TIED language uses the same syntax for both pseudo-code (planning) and implementation (code), allowing functions to start as templates with semantic tokens and progressively refine into complete implementations:
 
 ```stdd
 // PHASE 1: Pseudo-Code Template (Planning)
@@ -422,7 +422,7 @@ def authenticate(user: String, password: String): Bool {
 
 2. **Compile-Time Validation**: Token dependencies validated at compile time
    
-   The compiler enforces STDD dependency rules:
+   The compiler enforces TIED dependency rules:
    
    ```stdd
    // Valid: ARCH references REQ
@@ -522,12 +522,12 @@ def authenticate(user: String, password: String): Bool {
    - Warns about incomplete implementations
    - Tracks progress from template → partial → complete
 
-5. **STDD-Compliant Documentation Generation**: Auto-generates STDD documentation files
+5. **TIED-Compliant Documentation Generation**: Auto-generates TIED documentation files
    
-   The language can auto-generate complete STDD documentation from token metadata:
+   The language can auto-generate complete TIED documentation from token metadata:
    
    ```stdd
-   // Generate all STDD documentation
+   // Generate all TIED documentation
    generate_docs()
    
    // Outputs:
@@ -552,12 +552,12 @@ def authenticate(user: String, password: String): Bool {
 - **Same Syntax**: No translation needed from pseudo-code to code
 - **Token Preservation**: Semantic tokens maintain intent throughout refinement
 - **Progressive Refinement**: Templates naturally evolve into implementations
-- **STDD Alignment**: Supports complete STDD workflow from Phase 1 to Phase 3
+- **TIED Alignment**: Supports complete TIED workflow from Phase 1 to Phase 3
 - **Intent Preservation**: Tokens preserve "why" (rationale) alongside "what" (description) and "how" (implementation)
 
 #### Complete Example: From Template to Implementation
 
-Here's a complete example showing how the STDD language features work together:
+Here's a complete example showing how the TIED language features work together:
 
 ```stdd
 // ============================================
@@ -666,9 +666,9 @@ generate_docs()
 // - semantic-tokens.md with all tokens and relationships
 ```
 
-#### Integration with STDD Workflow
+#### Integration with TIED Workflow
 
-The STDD language seamlessly integrates with the STDD methodology:
+The TIED language seamlessly integrates with the TIED methodology:
 
 1. **Phase 1 (Requirements → Pseudo-Code)**: Write templates with semantic tokens
    - Declare `req`, `arch`, `impl` tokens
@@ -692,7 +692,7 @@ The STDD language seamlessly integrates with the STDD methodology:
 
 #### Language Specification
 
-For complete language specification, see `stdd-language-spec.md` in the STDD repository. The specification includes:
+For complete language specification, see `tied-language-spec.md` in the TIED repository. The specification includes:
 
 - Complete syntax definition
 - Token declaration and annotation syntax
@@ -702,7 +702,7 @@ For complete language specification, see `stdd-language-spec.md` in the STDD rep
 - IDE integration capabilities
 - Complete examples
 
-**Note**: The STDD language is a specification for a language that makes semantic tokens first-class. It can be:
+**Note**: The TIED language is a specification for a language that makes semantic tokens first-class. It can be:
 - Implemented as a new programming language
 - Used as a template/pseudo-code notation for any language
 - Integrated into existing languages via tooling/annotations
@@ -710,7 +710,7 @@ For complete language specification, see `stdd-language-spec.md` in the STDD rep
 
 ### Metrics and Measurement
 
-STDD enables several metrics:
+TIED enables several metrics:
 
 - **Traceability Coverage**: % of code with requirement references
 - **Documentation Completeness**: % of requirements with architecture/implementation docs
@@ -730,7 +730,7 @@ STDD enables several metrics:
 1. **Token Governance**: Establish token naming and usage guidelines
 2. **Regular Audits**: Periodically validate token references
 3. **Automation**: Use tools to validate and maintain tokens
-4. **Training**: Ensure team understands STDD principles
+4. **Training**: Ensure team understands TIED principles
 5. **Incremental Adoption**: Start with critical features, expand gradually
 
 ### Future Directions
@@ -739,26 +739,26 @@ STDD enables several metrics:
 - **AI-Assisted**: LLM-based token suggestion and validation
 - **Visualization**: Graph-based traceability visualization
 - **Standards**: Industry-standard token formats
-- **Frameworks**: STDD frameworks for different languages/domains
-- **STDD Language Implementation**: Full implementation of the STDD language specification
-- **Language Tooling**: Compilers, interpreters, and tooling for STDD language
-- **Cross-Language Support**: STDD language templates for popular languages (Python, JavaScript, Go, etc.)
+- **Frameworks**: TIED frameworks for different languages/domains
+- **TIED Language Implementation**: Full implementation of the TIED language specification
+- **Language Tooling**: Compilers, interpreters, and tooling for TIED language
+- **Cross-Language Support**: TIED language templates for popular languages (Python, JavaScript, Go, etc.)
 
 ---
 
 ## 📖 Summary
 
-**Semantic Token-Driven Development (STDD)** is a methodology that uses semantic tokens to preserve intent throughout the software development lifecycle. Whether you're new to programming, have intermediate experience, or are an expert developer, STDD provides a systematic approach to maintaining traceability and context in software projects.
+**Token-Integrated Engineering & Development (TIED)** is a methodology that uses semantic tokens to preserve intent throughout the software development lifecycle. Whether you're new to programming, have intermediate experience, or are an expert developer, TIED provides a systematic approach to maintaining traceability and context in software projects.
 
 **Key Takeaway**: Semantic tokens are not just labels—they are the mechanism that preserves intent from requirements through architecture, implementation, tests, and code, ensuring that the original purpose and reasoning are never lost.
 
-**STDD Language**: The methodology includes a language specification (`stdd-language-spec.md`) that makes semantic tokens first-class constructs, enabling pseudo-code templates that progressively refine into implementations. This bridges the gap between planning (Phase 1) and implementation (Phase 3) using the same syntax throughout.
+**TIED Language**: The methodology includes a language specification (`tied-language-spec.md`) that makes semantic tokens first-class constructs, enabling pseudo-code templates that progressively refine into implementations. This bridges the gap between planning (Phase 1) and implementation (Phase 3) using the same syntax throughout.
 
 ---
 
 **For more information**, see:
-- `ai-principles.md` - Complete STDD principles and process guide
-- `stdd-language-spec.md` - STDD language specification (pseudo-code templates with semantic tokens)
+- `ai-principles.md` - Complete TIED principles and process guide
+- `tied-language-spec.md` - TIED language specification (pseudo-code templates with semantic tokens)
 - `requirements.template.md` - Template guide for requirements documentation (copy to your project as `requirements.md`)
 - `requirements.template.yaml` - YAML index template for requirements with `[REQ-*]` tokens (copy to your project as `requirements.yaml`)
 - `requirements.template/` - Individual requirement detail file examples (copy to your project's `requirements/` directory)

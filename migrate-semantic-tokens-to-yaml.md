@@ -1,6 +1,6 @@
 # Migration Guide: Semantic Tokens to YAML Index
 
-**STDD Methodology Version**: 1.6.0  
+**TIED Methodology Version**: 1.6.0  
 **Audience**: AI Agents and Contributors
 
 This document provides step-by-step instructions for migrating a project from the **Markdown-based semantic tokens registry** (v1.5.0 and earlier) to the **YAML index format** (v1.6.0+).
@@ -10,7 +10,7 @@ This document provides step-by-step instructions for migrating a project from th
 ## When to Migrate
 
 Consider migration when:
-- Your STDD project uses inline token registries in `semantic-tokens.md` (from STDD v1.5.0 or earlier)
+- Your TIED project uses inline token registries in `semantic-tokens.md` (from STDD v1.5.0 or earlier)
 - The `semantic-tokens.md` file has become large with many token entries
 - You want easier programmatic access to token data (filtering, querying, validation)
 - You want consistency with how requirements, architecture decisions, and implementation decisions are indexed
@@ -19,20 +19,20 @@ Consider migration when:
 
 ## What Changes
 
-### Before (STDD v1.5.0 and earlier)
+### Before (TIED v1.5.0 and earlier)
 
 `semantic-tokens.md` contained both the guide content AND inline token registries:
 
 ```markdown
 ## Requirements Tokens Registry
 
-- `[REQ-STDD_SETUP]` - STDD methodology setup
+- `[REQ-STDD_SETUP]` - TIED methodology setup
 - `[REQ-MODULE_VALIDATION]` - Independent module validation
 ...
 
 ## Architecture Tokens Registry
 
-- `[ARCH-STDD_STRUCTURE]` - STDD project structure
+- `[ARCH-STDD_STRUCTURE]` - TIED project structure
 ...
 ```
 
@@ -50,7 +50,7 @@ REQ-STDD_SETUP:
   name: STDD Methodology Setup
   category: Core Functional
   status: Active
-  description: "STDD methodology setup requirement"
+  description: "TIED methodology setup requirement"
   cross_references:
     - ARCH-STDD_STRUCTURE
     - IMPL-STDD_FILES
@@ -83,12 +83,12 @@ From the STDD repository, copy the new template files to your project:
 
 ```bash
 # From STDD repository root
-cp semantic-tokens.template.yaml /path/to/your/project/stdd/semantic-tokens.yaml
-cp semantic-tokens.template.md /path/to/your/project/stdd/semantic-tokens.md.new
+cp semantic-tokens.template.yaml /path/to/your/project/tied/semantic-tokens.yaml
+cp semantic-tokens.template.md /path/to/your/project/tied/semantic-tokens.md.new
 
 # Back up your current semantic-tokens.md
-mv /path/to/your/project/stdd/semantic-tokens.md /path/to/your/project/stdd/semantic-tokens.md.backup
-mv /path/to/your/project/stdd/semantic-tokens.md.new /path/to/your/project/stdd/semantic-tokens.md
+mv /path/to/your/project/tied/semantic-tokens.md /path/to/your/project/tied/semantic-tokens.md.backup
+mv /path/to/your/project/tied/semantic-tokens.md.new /path/to/your/project/tied/semantic-tokens.md
 ```
 
 ### Step 2: Extract Tokens from Current Registry
@@ -149,7 +149,7 @@ import re
 from datetime import date
 
 # Read old semantic-tokens.md
-with open('stdd/semantic-tokens.md.backup', 'r') as f:
+with open('tied/semantic-tokens.md.backup', 'r') as f:
     content = f.read()
 
 # Parse token entries (adjust regex as needed)
@@ -197,7 +197,7 @@ for pattern, token_type in [
         }
 
 # Write to semantic-tokens.yaml
-with open('stdd/semantic-tokens.yaml', 'w') as f:
+with open('tied/semantic-tokens.yaml', 'w') as f:
     # Write header
     f.write("# Semantic Tokens Index (YAML Database)\n")
     f.write("#\n# Migrated from semantic-tokens.md\n")
@@ -213,10 +213,10 @@ After migration, validate the YAML file:
 
 ```bash
 # Using yq
-yq '.' stdd/semantic-tokens.yaml > /dev/null && echo "✅ Valid YAML" || echo "❌ Invalid YAML"
+yq '.' tied/semantic-tokens.yaml > /dev/null && echo "✅ Valid YAML" || echo "❌ Invalid YAML"
 
 # Using Python
-python3 -c "import yaml; yaml.safe_load(open('stdd/semantic-tokens.yaml'))" && echo "✅ Valid" || echo "❌ Invalid"
+python3 -c "import yaml; yaml.safe_load(open('tied/semantic-tokens.yaml'))" && echo "✅ Valid" || echo "❌ Invalid"
 ```
 
 ### Step 6: Verify Token Coverage
@@ -225,13 +225,13 @@ Check that all tokens were migrated:
 
 ```bash
 # Count tokens in old file
-grep -c '^\- `\[' stdd/semantic-tokens.md.backup
+grep -c '^\- `\[' tied/semantic-tokens.md.backup
 
 # Count tokens in new file
-yq 'keys | length' stdd/semantic-tokens.yaml
+yq 'keys | length' tied/semantic-tokens.yaml
 
 # List all tokens
-yq 'keys' stdd/semantic-tokens.yaml
+yq 'keys' tied/semantic-tokens.yaml
 ```
 
 ### Step 7: Update Cross-References
@@ -240,11 +240,11 @@ Review cross-references to ensure they point to valid tokens:
 
 ```bash
 # Get all cross-references
-yq '.[] | select(.cross_references) | .cross_references[]' stdd/semantic-tokens.yaml | sort -u
+yq '.[] | select(.cross_references) | .cross_references[]' tied/semantic-tokens.yaml | sort -u
 
 # Verify each referenced token exists
-for token in $(yq '.[] | select(.cross_references) | .cross_references[]' stdd/semantic-tokens.yaml | sort -u); do
-  if yq ".[\"$token\"]" stdd/semantic-tokens.yaml > /dev/null 2>&1; then
+for token in $(yq '.[] | select(.cross_references) | .cross_references[]' tied/semantic-tokens.yaml | sort -u); do
+  if yq ".[\"$token\"]" tied/semantic-tokens.yaml > /dev/null 2>&1; then
     echo "✅ $token exists"
   else
     echo "❌ $token NOT FOUND"
@@ -258,16 +258,16 @@ Test that you can query the new YAML index:
 
 ```bash
 # List all REQ tokens
-yq 'to_entries | map(select(.value.type == "REQ")) | from_entries | keys' stdd/semantic-tokens.yaml
+yq 'to_entries | map(select(.value.type == "REQ")) | from_entries | keys' tied/semantic-tokens.yaml
 
 # Get details for a specific token
-yq '.REQ-STDD_SETUP' stdd/semantic-tokens.yaml
+yq '.REQ-STDD_SETUP' tied/semantic-tokens.yaml
 
 # Find tokens by status
-yq 'to_entries | map(select(.value.status == "Active")) | from_entries | keys' stdd/semantic-tokens.yaml
+yq 'to_entries | map(select(.value.status == "Active")) | from_entries | keys' tied/semantic-tokens.yaml
 
 # Find all tokens cross-referencing a specific token
-yq "to_entries | map(select(.value.cross_references[] == \"REQ-STDD_SETUP\")) | from_entries | keys" stdd/semantic-tokens.yaml
+yq "to_entries | map(select(.value.cross_references[] == \"REQ-STDD_SETUP\")) | from_entries | keys" tied/semantic-tokens.yaml
 ```
 
 ---
@@ -293,14 +293,14 @@ If migration fails or needs to be reverted:
 
 1. **Restore from backup**:
    ```bash
-   mv stdd/semantic-tokens.md.backup stdd/semantic-tokens.md
-   rm stdd/semantic-tokens.yaml
+   mv tied/semantic-tokens.md.backup tied/semantic-tokens.md
+   rm tied/semantic-tokens.yaml
    ```
 
 2. **Or restore from git**:
    ```bash
-   git checkout HEAD~1 -- stdd/semantic-tokens.md
-   rm stdd/semantic-tokens.yaml
+   git checkout HEAD~1 -- tied/semantic-tokens.md
+   rm tied/semantic-tokens.yaml
    ```
 
 ---
@@ -322,22 +322,22 @@ After migration, you can:
 
 ```bash
 # List all tokens
-yq 'keys' stdd/semantic-tokens.yaml
+yq 'keys' tied/semantic-tokens.yaml
 
 # List all active tokens
-yq 'to_entries | map(select(.value.status == "Active")) | from_entries | keys' stdd/semantic-tokens.yaml
+yq 'to_entries | map(select(.value.status == "Active")) | from_entries | keys' tied/semantic-tokens.yaml
 
 # List all REQ tokens
-yq 'to_entries | map(select(.value.type == "REQ")) | from_entries | keys' stdd/semantic-tokens.yaml
+yq 'to_entries | map(select(.value.type == "REQ")) | from_entries | keys' tied/semantic-tokens.yaml
 
 # Get source index for a token (where to find full details)
-yq '.REQ-STDD_SETUP.source_index' stdd/semantic-tokens.yaml
+yq '.REQ-STDD_SETUP.source_index' tied/semantic-tokens.yaml
 
 # Find all tokens that cross-reference ARCH-STDD_STRUCTURE
-yq 'to_entries | map(select(.value.cross_references[] == "ARCH-STDD_STRUCTURE")) | from_entries | keys' stdd/semantic-tokens.yaml
+yq 'to_entries | map(select(.value.cross_references[] == "ARCH-STDD_STRUCTURE")) | from_entries | keys' tied/semantic-tokens.yaml
 
 # Get metadata for a token
-yq '.REQ-STDD_SETUP.metadata' stdd/semantic-tokens.yaml
+yq '.REQ-STDD_SETUP.metadata' tied/semantic-tokens.yaml
 ```
 
 ---

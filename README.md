@@ -1,12 +1,16 @@
-# STDD Methodology Template
+# TIED Methodology Template
 
-**STDD Methodology Version**: 1.5.0
+**TIED Methodology Version**: 2.2.0
 
-This repository ([https://github.com/fareedst/stdd](https://github.com/fareedst/stdd)) contains the **Semantic Token-Driven Development (STDD)** methodology template that can be used as a base for development projects in any language.
+> **Note**: This methodology was previously known as STDD (Semantic Token-Driven Development). It has been renamed to TIED (Token-Integrated Engineering & Development) to better reflect its core value proposition: semantic tokens "tie" code to intent, making it impossible to modify code without confronting related context.
 
-## What is STDD?
+> **v2.2.0**: Task tracking via `tasks.md` is **optional**. The core TIED value is in the **traceability chain** (requirements → architecture → implementation → tests → code) maintained through semantic tokens, not in task tracking artifacts. Agents may maintain planning state in-session or document work breakdown in `implementation-decisions`. Use `tasks.template.md` only if your project benefits from a shared task list.
 
-**Semantic Token-Driven Development (STDD)** uses semantic tokens to create a traceable chain from requirements through architecture and implementation to tests and code.
+This repository ([https://github.com/fareedst/tied](https://github.com/fareedst/tied)) contains the **Token-Integrated Engineering & Development (TIED)** methodology template that can be used as a base for development projects in any language.
+
+## What is TIED?
+
+**Token-Integrated Engineering & Development (TIED)** uses semantic tokens to create a traceable chain from requirements through architecture and implementation to tests and code.
 
 ### Key Benefits
 
@@ -18,42 +22,56 @@ This repository ([https://github.com/fareedst/stdd](https://github.com/fareedst/
 
 ## Getting Started with a New Project
 
+The primary way to work with TIED is via the MCP server; a standalone bootstrap and workflow for non-MCP users is also available.
+
 ### Step 1: Copy Templates to Your Project
 
-**Recommended:** Download or clone the STDD repository somewhere convenient, then run `./copy_files.sh /path/to/project` (or `./copy_files.sh` if you are already in the project directory). The script copies every `.template` file into the target project's `stdd/` directory, removes the `.template` suffix for you, and will never overwrite an existing `AGENTS.md` or `.cursorrules` file that may already be present in the destination.
+**Recommended:** Download or clone the TIED repository somewhere convenient, then run `./copy_files.sh /path/to/project` (or `./copy_files.sh` if you are already in the project directory). The script copies every `.template` file into the target project's `tied/` directory, removes the `.template` suffix for you, and will never overwrite an existing `AGENTS.md` or `.cursorrules` file that may already be present in the destination.
 
 ```bash
-# From the STDD repo root—adjust the target path as needed
+# From the TIED repo root—adjust the target path as needed
 ./copy_files.sh /path/to/your/project
 ```
 
 **Alternative (manual):**
 
 ```bash
-# In your project directory (after cloning/downloading the STDD repository)
-mkdir -p stdd
-cp requirements.template.md stdd/requirements.md
-cp requirements.template.yaml stdd/requirements.yaml
-mkdir -p stdd/requirements
-cp requirements.template/*.md stdd/requirements/
-cp architecture-decisions.template.md stdd/architecture-decisions.md
-cp architecture-decisions.template.yaml stdd/architecture-decisions.yaml
-mkdir -p stdd/architecture-decisions
-cp architecture-decisions.template/*.md stdd/architecture-decisions/
-cp implementation-decisions.template.md stdd/implementation-decisions.md
-cp implementation-decisions.template.yaml stdd/implementation-decisions.yaml
-mkdir -p stdd/implementation-decisions
-cp implementation-decisions.template/*.md stdd/implementation-decisions/
-cp processes.template.md stdd/processes.md
-cp semantic-tokens.template.md stdd/semantic-tokens.md
-cp semantic-tokens.template.yaml stdd/semantic-tokens.yaml
-cp tasks.template.md stdd/tasks.md
+# In your project directory (after cloning/downloading the TIED repository)
+mkdir -p tied
+cp requirements.template.md tied/requirements.md
+cp requirements.template.yaml tied/requirements.yaml
+mkdir -p tied/requirements
+cp requirements.template/*.md tied/requirements/
+cp architecture-decisions.template.md tied/architecture-decisions.md
+cp architecture-decisions.template.yaml tied/architecture-decisions.yaml
+mkdir -p tied/architecture-decisions
+cp architecture-decisions.template/*.md tied/architecture-decisions/
+cp implementation-decisions.template.md tied/implementation-decisions.md
+cp implementation-decisions.template.yaml tied/implementation-decisions.yaml
+mkdir -p tied/implementation-decisions
+cp implementation-decisions.template/*.md tied/implementation-decisions/
+cp processes.template.md tied/processes.md
+cp semantic-tokens.template.md tied/semantic-tokens.md
+cp semantic-tokens.template.yaml tied/semantic-tokens.yaml
+# Optional: cp tasks.template.md tied/tasks.md  # Task tracking is optional
 cp AGENTS.md AGENTS.md              # Copy canonical AI agent guide
 cp .cursorrules .cursorrules        # Copy Cursor loader if using Cursor
 ```
 
-**Important**: Each project should have its own copies of these files. The template files remain in the [STDD repository](https://github.com/fareedst/stdd) as reference templates.
+**Important**: Each project should have its own copies of these files. The template files remain in the [TIED repository](https://github.com/fareedst/tied) as reference templates.
 
+### Step 2 (optional): Use the MCP server
+
+The MCP server is **not** copied into your project; it stays in the TIED repository.
+
+1. **Build once** (in the TIED repo): From the TIED repo root, run `cd mcp-server && npm install && npm run build`.
+2. **In your development project**, configure your MCP client (e.g. Cursor) so that the server **command/args** point to the **TIED repo's** built server (e.g. `node /path/to/tied-repo/mcp-server/dist/index.js`) and **env** `TIED_BASE_PATH` points to your **project's** `tied/` directory (e.g. `./tied` if your project root is the workspace, or an absolute path).
+
+See [TIED YAML MCP Server](#tied-yaml-mcp-server) and [mcp-server/README.md](mcp-server/README.md) for the exact JSON and paths. For a full example process of adding the TIED MCP to a project and invoking it in several passes (bootstrap, establish REQ/ARCH/IMPL, maintain), see [docs/adding-tied-mcp-and-invoking-passes.md](docs/adding-tied-mcp-and-invoking-passes.md).
+
+### Using TIED without MCP
+
+If you do not use MCP, run `./bootstrap_without_mcp.sh /path/to/project` to get the same `tied/` layout; then manage YAML by hand or with tools (e.g. `yq`). See [docs/using-tied-without-mcp.md](docs/using-tied-without-mcp.md) for the workflow.
 
 ## Example Workflow
 
@@ -64,31 +82,28 @@ cp .cursorrules .cursorrules        # Copy Cursor loader if using Cursor
    - **IMMEDIATELY** documents architecture decisions in `architecture-decisions.yaml` with `[ARCH-*]` tokens
    - **IMMEDIATELY** documents implementation decisions in `implementation-decisions.yaml` with `[IMPL-*]` tokens
    - **IMMEDIATELY** updates `semantic-tokens.yaml` with all new tokens
-   - **IMMEDIATELY** creates tasks in `tasks.md` with priorities and semantic token references
+   - Plans implementation steps (optionally in `tasks.md`, or via in-session planning)
    - **NO code changes yet**
 3. **User Approval**: User reviews and approves planning documents
 4. **Implementation Phase**: 
-   - Implement tasks, starting with highest priority
+   - Implement work, starting with highest priority
    - **DURING implementation**: Update documentation as decisions are made or refined
-   - **DURING implementation**: Update `tasks.md` as subtasks are completed
 5. **Completion Phase**: 
    - Verify all documentation is up-to-date and mirrors the semantic tokens referenced by the finished code and tests
-   - Mark tasks complete in `tasks.md`
-   - Remove completed subtasks
    - Ensure the semantic tokens registered in `semantic-tokens.yaml` match the tokens used across code, tests, and documentation for these changes
 
-See [LLM Response Guide](llm-response-guide.md) for detailed information about how AI assistants should respond when working with STDD.
+See [LLM Response Guide](llm-response-guide.md) for detailed information about how AI assistants should respond when working with TIED.
 
 ### Phase Flow Shortcut
 ```mermaid
 flowchart LR
     phase1([Phase 1<br/>Requirements & Decisions])
-    phase2([Phase 2<br/>Task Planning])
+    phase2([Phase 2<br/>Plan Implementation])
     phase3([Phase 3<br/>Implementation])
     phase1 --> phase2 --> phase3
     phase1 -- "Document first" --> Arch["architecture-decisions.yaml"]
     phase1 -- "Refine intent" --> Impl["implementation-decisions.yaml"]
-    phase2 -- "Plan with tokens" --> TasksDoc["tasks.md"]
+    phase2 -- "Plan steps" --> Planning["In-session or optional tasks.md"]
     phase3 -- "Validate and code" --> Semantic["semantic-tokens.md"]
 ```
 *Mermaid flowchart showing the documentation-first cadence before code begins.*
@@ -97,14 +112,18 @@ flowchart LR
 
 This repository contains:
 
+### Scripts
+- `copy_files.sh` — Bootstrap a project with TIED templates (used by both MCP and non-MCP users; MCP users then configure the server).
+- `bootstrap_without_mcp.sh` — Same bootstrap as `copy_files.sh`, then prints next steps for non-MCP users.
+
 ### Methodology Documentation (Reference Only)
-- `STDD.md` - STDD methodology overview (for beginners, intermediate, and experts)
-- `ai-principles.md` - Complete STDD principles and process guide
-- `stdd-language-spec.md` - STDD language specification (pseudo-code templates with semantic tokens)
-- `conversation.template.md` - Template conversation demonstrating STDD workflow
+- `TIED.md` - TIED methodology overview (for beginners, intermediate, and experts)
+- `ai-principles.md` - Complete TIED principles and process guide
+- `tied-language-spec.md` - TIED language specification (pseudo-code templates with semantic tokens)
+- `conversation.template.md` - Template conversation demonstrating TIED workflow
 - `AGENTS.md` - Canonical AI agent operating guide
 - `.cursorrules` - Cursor IDE loader that points to `AGENTS.md`
-- `CHANGELOG.md` - Version history of the STDD methodology
+- `CHANGELOG.md` - Version history of the TIED methodology
 - `VERSION` - Current methodology version
 
 ### Project Template Files (Copy to Your Project)
@@ -119,7 +138,10 @@ This repository contains:
 - `implementation-decisions.template/` - Individual implementation decision detail file examples
 - `processes.template.md` - Template for process tracking including `[PROC-YAML_DB_OPERATIONS]`
 - `semantic-tokens.template.md` - Template for semantic token registry
-- `tasks.template.md` - Template for task tracking
+- `semantic-tokens.template.yaml` - YAML registry of REQ/ARCH/IMPL/PROC tokens (minimal, foundational for bootstrap)
+- `tasks.template.md` - **Optional** template for task tracking (not required by methodology)
+
+The YAML index templates (`*.template.yaml`) contain only methodology-relevant records; new REQ/ARCH/IMPL can be added via the MCP server tools or by copying the template block at the bottom of each index file (or a template detail file such as `requirements.template/REQ-IDENTIFIER.yaml`).
 
 ## Project File Structure
 
@@ -129,17 +151,17 @@ After copying templates, your project should have:
 your-project/
 ├── AGENTS.md                 # Canonical AI agent instructions
 ├── .cursorrules              # Cursor IDE loader (optional, if using Cursor)
-├── stdd/
+├── tied/
 │   ├── requirements.md       # Requirements guide/documentation
 │   ├── requirements.yaml     # Requirements YAML index/database with [REQ-*] records
 │   ├── requirements/         # Individual requirement detail files
-│   │   ├── REQ-STDD_SETUP.md
+│   │   ├── REQ-TIED_SETUP.md
 │   │   ├── REQ-MODULE_VALIDATION.md
 │   │   └── ...
 │   ├── architecture-decisions.md  # Architecture decisions guide/documentation
 │   ├── architecture-decisions.yaml # Architecture decisions YAML index/database with [ARCH-*] records
 │   ├── architecture-decisions/    # Individual architecture decision detail files
-│   │   ├── ARCH-STDD_STRUCTURE.md
+│   │   ├── ARCH-TIED_STRUCTURE.md
 │   │   ├── ARCH-MODULE_VALIDATION.md
 │   │   └── ...
 │   ├── implementation-decisions.md # Implementation decisions guide/documentation
@@ -149,12 +171,90 @@ your-project/
 │   │   └── ...
 │   ├── semantic-tokens.yaml   # Semantic tokens YAML index/database (canonical token registry)
 │   ├── semantic-tokens.md     # Semantic tokens guide with format and conventions
-│   ├── tasks.md              # Your project's active task tracking
+│   ├── tasks.md              # (Optional) Your project's active task tracking
 │   └── processes.md          # Your project's process tracking (includes [PROC-YAML_DB_OPERATIONS])
 └── [your source code]        # Your actual project code
 ```
 
-**Note**: The methodology documentation files (`STDD.md`, `ai-principles.md`) remain in the [STDD repository](https://github.com/fareedst/stdd) as reference. You don't need to copy them to your project unless you want local copies.
+**Note**: The methodology documentation files (`TIED.md`, `ai-principles.md`) remain in the [TIED repository](https://github.com/fareedst/tied) as reference. You don't need to copy them to your project unless you want local copies.
+
+## TIED YAML MCP Server
+
+This repository includes an **MCP (Model Context Protocol) server** that exposes the TIED YAML indexes and detail files as **tools** and **resources** for AI assistants and editors (e.g. Cursor).
+
+- **Location**: `mcp-server/` (in this TIED repo; the server is not copied into your project).
+- **Build**: In the **TIED repository**, run `cd mcp-server && npm install && npm run build` (the server is not copied into your project).
+- **Configure**: In your **development project**, add or edit your MCP config (e.g. `.cursor/mcp.json`) so the server runs from the **TIED repo's** `mcp-server/dist/index.js` and `TIED_BASE_PATH` is set to your **project's** `tied/` directory.
+
+See [mcp-server/README.md](mcp-server/README.md) for the full tool and resource list, example JSON, and usage.
+
+### Value of MCP for managing REQ/ARCH/IMPL
+
+MCP gives AI assistants and tools a single, consistent way to read and write requirements, architecture, and implementation decisions without editing YAML by hand. Benefits:
+
+- **Discoverability**: List tokens by index or type; run traceability queries (which ARCH/IMPL satisfy a REQ; which REQs does a decision reference).
+- **Bulk and single-token detail access**: Read one detail file by token or request details for many tokens (or all tokens of a type) in one call.
+- **One-shot creation**: Create a new REQ, ARCH, or IMPL token with both index record and full detail YAML in a single tool call (`tied_token_create_with_detail`).
+- **Migration**: Convert monolithic requirements/architecture/implementation markdown into TIED YAML indexes and detail files via conversion tools.
+
+This works for **any language or stack**: TIED is methodology-level; the server only needs a `tied/` (or `TIED_BASE_PATH`) layout with YAML indexes and optional detail directories.
+
+### MCP API
+
+**Tools**: Index read, list tokens, filter by field, validate YAML; traceability (`get_decisions_for_requirement`, `get_requirements_for_decision`); index insert/update; detail read (single and batch `yaml_detail_read_many`), detail list/create/update/delete; create-with-detail (`tied_token_create_with_detail`); monolithic-to-TIED conversion (per-doc or all at once).
+
+**Resources**: Full indexes (`tied://requirements`, `tied://architecture-decisions`, `tied://implementation-decisions`, `tied://semantic-tokens`); single record by token (`tied://requirement/{token}`, `tied://decision/{token}`); single-token detail (`tied://requirement/{token}/detail`, `tied://decision/{token}/detail`); all details by type (`tied://details/requirements`, `tied://details/architecture`, `tied://details/implementation`).
+
+```mermaid
+flowchart LR
+  Client["Client e.g. Cursor"]
+  Client --> toolsGroup
+  Client --> resourcesGroup
+  subgraph toolsGroup [Tools]
+    IndexOps["Index read list filter validate"]
+    TraceOps["Traceability queries"]
+    DetailOps["Detail single batch create update delete"]
+    CreateWithDetail["tied_token_create_with_detail"]
+    Convert["Monolithic to TIED conversion"]
+  end
+  subgraph resourcesGroup [Resources]
+    IndexURIs["tied:// index URIs"]
+    PerToken["Per-token record and detail"]
+    DetailsByType["tied://details/ by type"]
+  end
+```
+
+*MCP API: tools (index, traceability, detail, create-with-detail, conversion) and resources (index URIs, per-token, details-by-type).*
+
+### Data flow
+
+REQ, ARCH, and IMPL live as YAML indexes plus per-token detail files. Traceability links connect them; `semantic-tokens.yaml` is the registry.
+
+```mermaid
+flowchart LR
+  subgraph req [Requirements]
+    ReqIndex[requirements.yaml]
+    ReqDetails[requirements/*.yaml]
+  end
+  subgraph arch [Architecture]
+    ArchIndex[architecture-decisions.yaml]
+    ArchDetails[architecture-decisions/*.yaml]
+  end
+  subgraph impl [Implementation]
+    ImplIndex[implementation-decisions.yaml]
+    ImplDetails[implementation-decisions/*.yaml]
+  end
+  Registry[semantic-tokens.yaml]
+  ReqIndex --> ArchIndex
+  ArchIndex --> ImplIndex
+  ReqDetails --> ArchDetails
+  ArchDetails --> ImplDetails
+  ReqIndex --> Registry
+  ArchIndex --> Registry
+  ImplIndex --> Registry
+```
+
+*REQ index and detail dir feed ARCH, then IMPL; all reference the semantic-tokens registry. MCP tools and resources read/write these files under TIED_BASE_PATH.*
 
 ## Key Principles
 
@@ -170,16 +270,16 @@ The YAML index files use **structured, machine-parseable fields** instead of mar
 **Query Examples**:
 ```bash
 # Get architecture dependencies
-yq '.REQ-STDD_SETUP.traceability.architecture[]' stdd/requirements.yaml
+yq '.REQ-TIED_SETUP.traceability.architecture[]' tied/requirements.yaml
 
 # Get satisfaction criteria
-yq '.REQ-STDD_SETUP.satisfaction_criteria[].criterion' stdd/requirements.yaml
+yq '.REQ-TIED_SETUP.satisfaction_criteria[].criterion' tied/requirements.yaml
 
 # Get alternatives considered
-yq '.ARCH-STDD_STRUCTURE.alternatives_considered[].name' stdd/architecture-decisions.yaml
+yq '.ARCH-TIED_STRUCTURE.alternatives_considered[].name' tied/architecture-decisions.yaml
 
 # Get code file locations
-yq '.IMPL-STDD_FILES.code_locations.files[].path' stdd/implementation-decisions.yaml
+yq '.IMPL-TIED_FILES.code_locations.files[].path' tied/implementation-decisions.yaml
 ```
 
 This enables **direct field access**, **structured queries**, **easy filtering**, and **better tool integration** compared to parsing markdown-formatted strings.
@@ -204,13 +304,9 @@ This enables **direct field access**, **structured queries**, **easy filtering**
    - Tests MUST reference the requirements they validate using semantic tokens
    - Test names should include semantic tokens
 
-5. **Incremental Task Tracking**
-   - Every requirement implementation MUST be broken down into trackable tasks
-   - Tasks have explicit priorities: P0 > P1 > P2 > P3
-
-6. **Complete Task Completion**
-   - When all subtasks for a task are complete, remove subtasks and mark the parent task complete
-   - Maintain a clean task list showing only active work
+5. **Priority-Based Implementation**
+   - Work should be prioritized: P0 (Critical) > P1 (Important) > P2 (Nice-to-have) > P3 (Future)
+   - Focus on Tests > Code > Basic Functions > Infrastructure
 
 ## Visual Guides
 
@@ -224,52 +320,27 @@ This enables **direct field access**, **structured queries**, **easy filtering**
 ### Task & Token Alignment
 ![Task & Token Alignment](docs/visuals/task-token-alignment.svg)
 
-| Task | Priority | Token Trail | Validation Evidence
+| Work Item | Priority | Token Trail | Validation Evidence
 | --- | --- | --- | ---
 | Implement Parser Pipeline `[REQ-CFG_005]` | P0 | `[ARCH-FORMAT_PIPELINE] → [IMPL-PLACEHOLDER_ENGINE]` | Token audit + formatter unit test bundle
 | Validate Formatter Module | P1 | `[ARCH-MODULE_VALIDATION] → [IMPL-VALIDATION_SUITE]` | Contract test suite + `[PROC-TOKEN_VALIDATION]` run
-| Update Docs for New Feature | P2 | `[REQ-STDD_SETUP] → [ARCH-STDD_STRUCTURE] → [IMPL-STDD_FILES]` | Documentation review checklist
+| Update Docs for New Feature | P2 | `[REQ-TIED_SETUP] → [ARCH-TIED_STRUCTURE] → [IMPL-TIED_FILES]` | Documentation review checklist
 
-*Hypothetical task descriptions showing how `tasks.md` should carry semantic tokens and validation artifacts.*
+*Hypothetical work items showing how planning (whether in `tasks.md`, `implementation-decisions`, or in-session) should carry semantic tokens and validation artifacts.*
 
 
 ## Language-Specific Notes
 
-The STDD methodology is language-agnostic. When customizing templates for your project:
+The TIED methodology is language-agnostic. When customizing templates for your project:
 
 - **Language‑specific projects**: Update code examples in templates to match your chosen language
 - **Other languages**: Adapt the templates to your language's conventions
 
 The semantic token system and development process remain the same regardless of language.
 
-## Resources
-
-### Methodology Documentation (Reference)
-- `STDD.md` - STDD methodology overview (for beginners, intermediate, and experts)
-- `ai-principles.md` - Complete STDD principles and process guide
-- `stdd-language-spec.md` - STDD language specification (pseudo-code templates with semantic tokens)
-- `conversation.template.md` - Template conversation demonstrating STDD workflow
-- `CHANGELOG.md` - Version history
-
-### Template Files (Copy to Your Project)
-- `requirements.template.md` - Template guide for requirements documentation
-- `requirements.template.yaml` - YAML database template for requirements with `[REQ-*]` tokens **(v1.5.0: structured fields)**
-- `requirements.template/` - Individual requirement detail file examples
-- `architecture-decisions.template.md` - Template guide for architecture decisions documentation
-- `architecture-decisions.template.yaml` - YAML database template for architecture decisions with `[ARCH-*]` tokens **(v1.5.0: structured fields)**
-- `architecture-decisions.template/` - Individual architecture decision detail file examples
-- `implementation-decisions.template.md` - Template guide for implementation decisions documentation
-- `implementation-decisions.template.yaml` - YAML database template for implementation decisions with `[IMPL-*]` tokens **(v1.5.0: structured fields)**
-- `implementation-decisions.template/` - Individual implementation decision detail file examples
-- `processes.template.md` - Template for process tracking including `[PROC-YAML_DB_OPERATIONS]`
-- `semantic-tokens.template.md` - Template for semantic token registry
-- `tasks.template.md` - Template for task tracking
-- `AGENTS.md` - Canonical AI agent operating guide (copy as-is)
-- `.cursorrules` - Template for Cursor IDE loader (optional)
-
 ## Repository
 
-**STDD Methodology Repository**: [https://github.com/fareedst/stdd](https://github.com/fareedst/stdd)
+**TIED Methodology Repository**: [https://github.com/fareedst/tied](https://github.com/fareedst/tied)
 
 # License
 

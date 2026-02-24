@@ -92,7 +92,7 @@
   <text x="110" y="366" class="badge">[REQ-DOC_016]</text>
 
   <rect x="270" y="350" width="180" height="24" rx="4" ry="4" class="arch"></rect>
-  <text x="280" y="366" class="badge">[ARCH-STDD_STRUCTURE]</text>
+  <text x="280" y="366" class="badge">[ARCH-TIED_STRUCTURE]</text>
 
   <text x="100" y="390" class="evidence">Review pending</text>
 

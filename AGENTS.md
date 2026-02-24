@@ -2,9 +2,9 @@
 
 **Scope**: Entire repository (root unless overridden by nested `AGENTS.md` files)
 
-**STDD Methodology Version**: 1.5.0
+**TIED Methodology Version**: 2.2.0
 
-This document centralizes every instruction AI coding assistants must follow while working in STDD repositories. It supersedes reminders in `.ai-agent-instructions`, `.cursorrules`, and README snippets. Treat it as the canonical reference when configuring prompts, IDE rules, or agent workflows.
+This document centralizes every instruction AI coding assistants must follow while working in TIED repositories. It supersedes reminders in `.ai-agent-instructions`, `.cursorrules`, and README snippets. Treat it as the canonical reference when configuring prompts, IDE rules, or agent workflows.
 
 ---
 
@@ -15,17 +15,16 @@ This document centralizes every instruction AI coding assistants must follow whi
 2. At session start (or when instructions may have changed), immediately:
    - Read `ai-principles.md` completely
    - Review `semantic-tokens.yaml` (token registry YAML index) and `semantic-tokens.md` (token guide)
-   - Review `tasks.md` (active work + priorities)
    - Review `architecture-decisions.yaml` and `implementation-decisions.yaml` (YAML indexes)
-   - Understand task priority order: Tests > Code > Basic Functions > Infrastructure
+   - Understand priority order: Tests > Code > Basic Functions > Infrastructure
 3. Confirm access to the documents above before continuing.
 
 ---
 
-## 2. Core STDD Obligations
+## 2. Core TIED Obligations
 
 - **Semantic Token Discipline**
-  - Use `[REQ-*]`, `[ARCH-*]`, `[IMPL-*]`, and other STDD tokens everywhere (requirements, docs, code, tests).
+  - Use `[REQ-*]`, `[ARCH-*]`, `[IMPL-*]`, and other TIED tokens everywhere (requirements, docs, code, tests).
   - Maintain traceability: Requirements → Architecture → Implementation → Tests → Code.
   - Update `semantic-tokens.yaml` immediately when introducing new tokens.
 - **Documentation-First Flow**
@@ -33,10 +32,6 @@ This document centralizes every instruction AI coding assistants must follow whi
   - Record architecture decisions (`architecture-decisions.md`) with `[ARCH-*]` tokens cross-referencing requirements.
   - Record implementation decisions (`implementation-decisions.md`) with `[IMPL-*]` tokens cross-referencing `[ARCH-*]` and `[REQ-*]` tokens.
   - Never defer documentation; update as you think, design, and implement.
-- **Task Management**
-  - Plan work in `tasks.md` before implementing.
-  - Break work into trackable tasks and subtasks, each referencing at least one semantic token.
-  - Assign priorities: P0 > P1 > P2 > P3. Remove subtasks when parents complete.
 - **Module Validation Mandate `[REQ-MODULE_VALIDATION]`**
   - Identify logical modules and their boundaries before implementation.
   - Develop and validate each module independently (unit tests with mocks, contract tests, edge cases, error handling) before integration.
@@ -51,19 +46,17 @@ This document centralizes every instruction AI coding assistants must follow whi
 ### 3.1 Start-of-Response Checklist (repeat every turn)
 - `"Observing AI principles!"` acknowledgment
 - Confirm `ai-principles.md` has been read this session
-- Reference current semantic tokens, tasks, architecture, and implementation decisions
+- Reference current semantic tokens, architecture, and implementation decisions
 
 ### 3.2 Before Starting Work
 - [ ] Verify all documents in Section 1 have been reviewed
-- [ ] Understand current tasks, priorities, and dependencies
-- [ ] Ensure new work is represented in `tasks.md` (with priorities + tokens)
+- [ ] Understand current priorities and dependencies
 - [ ] Review existing semantic tokens, architecture decisions, and implementation decisions related to the work
 
 ### 3.3 During Work
 - [ ] Use semantic tokens in code comments and test names
 - [ ] Keep documentation synced as decisions change
 - [ ] Maintain module boundaries and validate independently before integration
-- [ ] Update `tasks.md` as subtasks progress or complete
 - [ ] Keep descriptive debug output (e.g., `DEBUG:`, `TRACE:`, `DIAGNOSTIC:`) to document decision points and execution flow; retain unless explicitly asked to remove
 - [ ] Record new `[ARCH-*]` and `[IMPL-*]` entries immediately with cross-references
 
@@ -71,9 +64,10 @@ This document centralizes every instruction AI coding assistants must follow whi
 - [ ] `semantic-tokens.yaml` reflects every token referenced in code/tests/docs
 - [ ] Architecture and implementation decision logs are current and cross-referenced
 - [ ] Tests reference their corresponding semantic tokens
-- [ ] `tasks.md` marks completed work, removes finished subtasks, and leaves no stale entries
 - [ ] Module validation status is documented
 - [ ] All documentation matches the implemented state (no drift)
+- [ ] Verify all code and tests are consistently linked to requirements and decisions; update code and documentation where necessary
+- [ ] Do not create a stand-alone summary document for the session (e.g. no SESSION_SUMMARY.md or similar)
 
 ---
 
@@ -94,14 +88,14 @@ This document centralizes every instruction AI coding assistants must follow whi
 | `semantic-tokens.md` | Semantic tokens guide with format, naming conventions, and usage examples |
 | `requirements.md` | Requirements guide with documentation (copy from template per project) |
 | `requirements.yaml` | Requirements YAML index/database with all requirement records |
-| `requirements/` | Individual requirement detail files (e.g., `REQ-STDD_SETUP.md`) |
+| `requirements/` | Individual requirement detail files (YAML, e.g., `REQ-TIED_SETUP.yaml`); schema: `detail-files-schema.md` |
 | `architecture-decisions.md` | Architecture decisions guide with documentation (copy from template per project) |
 | `architecture-decisions.yaml` | Architecture decisions YAML index/database with `[ARCH-*]` records tied to requirements |
-| `architecture-decisions/` | Individual architecture decision detail files |
+| `architecture-decisions/` | Individual architecture decision detail files (YAML, e.g., `ARCH-TIED_STRUCTURE.yaml`) |
 | `implementation-decisions.md` | Implementation decisions guide with documentation (copy from template per project) |
 | `implementation-decisions.yaml` | Implementation decisions YAML index/database with `[IMPL-*]` records tied to requirements + architecture |
-| `implementation-decisions/` | Individual implementation decision detail files |
-| `tasks.md` | Task tracking with priorities and semantic token references |
+| `implementation-decisions/` | Individual implementation decision detail files (YAML, e.g., `IMPL-MODULE_VALIDATION.yaml`) |
+| `detail-files-schema.md` | Schema for REQ/ARCH/IMPL detail YAML files (in TIED repo or tied/) |
 | `processes.md` | Process tracking including `[PROC-YAML_DB_OPERATIONS]` for YAML operations |
 | `.cursorrules` | IDE loader that points back to this document |
 | `.ai-agent-instructions` | Quick reminder pointing to this document |
@@ -115,7 +109,7 @@ You can apply these rules in several ways:
 1. **System Prompt Snippet**
    ```
    MANDATORY: Preface every response with "Observing AI principles!"
-   Then follow the AGENTS.md checklists (read ai-principles.md, review semantic tokens, tasks, architecture, implementation decisions, maintain semantic traceability, module validation, documentation, and priority order).
+   Then follow the AGENTS.md checklists (read ai-principles.md, review semantic tokens, architecture, implementation decisions, maintain semantic traceability, module validation, documentation, and priority order).
    ```
 2. **IDE Integration (`.cursorrules`)** – keep a lightweight loader that links directly to `AGENTS.md` so Cursor automatically enforces the rules.
 3. **README / Onboarding** – reference `AGENTS.md` in project READMEs or onboarding docs to remind contributors where the canonical rules live.
@@ -128,4 +122,4 @@ You can apply these rules in several ways:
 - Mirror changes into `ai-principles.md` and related docs as needed.
 - Nested directories may introduce their own `AGENTS.md` to extend or override these rules within their subtree; the most specific file wins.
 
-**Last Updated**: 2025-12-18
+**Last Updated**: 2026-02-23

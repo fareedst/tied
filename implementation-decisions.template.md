@@ -1,6 +1,6 @@
 # Implementation Decisions
 
-**STDD Methodology Version**: 1.5.0
+**TIED Methodology Version**: 2.2.0
 
 ## Overview
 
@@ -11,13 +11,13 @@ All decisions are cross-referenced with architecture decisions using `[ARCH-*]` 
 ## Directory Structure
 
 ```
-stdd/
+tied/
 ├── implementation-decisions.md              # This guide file (you are here)
 ├── implementation-decisions.yaml            # YAML index/database of all implementation decisions
-├── implementation-decisions/                # Detail files directory
-│   ├── IMPL-CONFIG_STRUCT.md
-│   ├── IMPL-STDD_FILES.md
-│   ├── IMPL-MODULE_VALIDATION.md
+├── implementation-decisions/                # Detail files directory (YAML)
+│   ├── IMPL-CONFIG_STRUCT.yaml
+│   ├── IMPL-TIED_FILES.yaml
+│   ├── IMPL-MODULE_VALIDATION.yaml
 │   └── ...
 ```
 
@@ -27,10 +27,10 @@ Token names contain `:` which is invalid in filenames on many operating systems.
 
 | Token Format | Filename Format |
 |--------------|-----------------|
-| `[IMPL-CONFIG_STRUCT]` | `IMPL-CONFIG_STRUCT.md` |
-| `[IMPL-MODULE_VALIDATION]` | `IMPL-MODULE_VALIDATION.md` |
+| `[IMPL-CONFIG_STRUCT]` | `IMPL-CONFIG_STRUCT.yaml` |
+| `[IMPL-MODULE_VALIDATION]` | `IMPL-MODULE_VALIDATION.yaml` |
 
-**Rule**: Replace `[`, `]`, and `:` → Remove brackets, replace `:` with `-`, append `.md`
+**Rule**: Replace `[`, `]`, and `:` → Remove brackets, replace `:` with `-`, append `.yaml`
 
 ## Notes
 
@@ -41,6 +41,87 @@ Token names contain `:` which is invalid in filenames on many operating systems.
 - Record where code/tests are annotated so `[PROC-TOKEN_AUDIT]` can succeed later
 - Include the most recent `[PROC-TOKEN_VALIDATION]` run information so future contributors know the last verified state
 - **Language-Specific Implementation**: Language-specific implementation details (APIs, libraries, syntax patterns, idioms) belong in implementation decisions. Code examples in documentation should use `[your-language]` placeholders or be language-agnostic pseudo-code unless demonstrating a specific language requirement. Requirements and architecture decisions should remain language-agnostic.
+
+---
+
+## Core data object (IMPL detail YAML)
+
+Every IMPL **detail** file in `implementation-decisions/` must use a single **root key** equal to the IMPL token (e.g. `IMPL-STORAGE_INDEX`). All content is nested under that key. This keeps each file self-identifying and machine-parseable and matches the index structure. This section is the **canonical schema** for validation and tooling.
+
+### Core (required) fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `name` | string | Short human-readable title for the implementation decision. |
+| `status` | string | One of: `Active`, `Deprecated`, `Template`, `Superseded`. |
+| `cross_references` | list of strings | Tokens this IMPL links to (REQ-\*, ARCH-\*, other IMPL-\*). May be empty `[]`. |
+| `rationale` | object | `why` (string), `problems_solved` (list of strings), `benefits` (list of strings). Lists may be empty. |
+| `implementation_approach` | object | `summary` (string), `details` (list of strings). `details` may be empty. |
+| `code_locations` | object | `files` (list of objects with `path`, optional `description`, optional `lines`), `functions` (list of objects with `name`, `file`, optional `description`). Either list may be empty. |
+| `traceability` | object | `architecture` (list of ARCH-\* tokens), `requirements` (list of REQ-\* tokens), `tests` (list of test names or paths), `code_annotations` (list of tokens to appear in code). Lists may be empty. |
+| `related_decisions` | object | `depends_on` (list), `supersedes` (list), `see_also` (list). All lists of decision tokens. |
+| `detail_file` | string | Path to this detail file relative to `tied/` (e.g. `implementation-decisions/IMPL-STORAGE_INDEX.yaml`). |
+| `metadata` | object | `created` (`date`, `author`), `last_updated` (`date`, `author`, `reason`), optional `last_validated` (`date`, `validator`, `result`). |
+| `essence_pseudocode` | string (multiline) | **Mandatory.** Language-agnostic step-wise pseudo-code (main steps, data flow, control flow). Required for identifying collisions between implementation decisions (overlapping logic, data flow, ordering). See **Mandatory essence_pseudocode** below. |
+
+### Optional but standard fields
+
+Same shape in all files that use them:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `related_decisions.composed_with` | list of strings | IMPL tokens routinely composed with this one in a single algorithm. |
+
+See **Optional fields for composition and workflow** below for usage.
+
+### Extra fields
+
+Any other **top-level keys** under the IMPL root (e.g. domain-specific prose or format keys) are allowed and need not be shared across files. Naming should avoid clashing with the core and optional-but-standard field names above.
+
+### Canonical YAML shape
+
+```yaml
+IMPL-TOKEN:           # root key = IMPL token; required
+  name: string
+  status: Active | Deprecated | Template | Superseded
+  cross_references: [ string ]
+  rationale:
+    why: string
+    problems_solved: [ string ]
+    benefits: [ string ]
+  implementation_approach:
+    summary: string
+    details: [ string ]
+  code_locations:
+    files:
+      - path: string
+        description: string   # optional
+        lines: [ number ]    # optional
+    functions:
+      - name: string
+        file: string
+        description: string   # optional
+  traceability:
+    architecture: [ string ]
+    requirements: [ string ]
+    tests: [ string ]
+    code_annotations: [ string ]
+  related_decisions:
+    depends_on: [ string ]
+    supersedes: [ string ]
+    see_also: [ string ]
+    composed_with: [ string ]   # optional
+  essence_pseudocode: |         # required (collision detection)
+    ...
+  detail_file: string
+  metadata:
+    created: { date: string, author: string }
+    last_updated: { date: string, author: string, reason: string }
+    last_validated: { date: string, validator: string, result: string }  # optional
+  # extra fields allowed below
+```
+
+---
 
 ## How to Add a New Implementation Decision
 
@@ -59,28 +140,28 @@ To view the index:
 
 ```bash
 # View entire index
-cat stdd/implementation-decisions.yaml
+cat tied/implementation-decisions.yaml
 
 # View specific decision
-yq '.IMPL-MODULE_VALIDATION' stdd/implementation-decisions.yaml
+yq '.IMPL-MODULE_VALIDATION' tied/implementation-decisions.yaml
 
 # Get implementation approach summary
-yq '.IMPL-MODULE_VALIDATION.implementation_approach.summary' stdd/implementation-decisions.yaml
+yq '.IMPL-MODULE_VALIDATION.implementation_approach.summary' tied/implementation-decisions.yaml
 
 # Get code file locations
-yq '.IMPL-STDD_FILES.code_locations.files[].path' stdd/implementation-decisions.yaml
+yq '.IMPL-TIED_FILES.code_locations.files[].path' tied/implementation-decisions.yaml
 
 # Get function locations
-yq '.IMPL-MODULE_VALIDATION.code_locations.functions[].name' stdd/implementation-decisions.yaml
+yq '.IMPL-MODULE_VALIDATION.code_locations.functions[].name' tied/implementation-decisions.yaml
 
 # Get architecture dependencies
-yq '.IMPL-MODULE_VALIDATION.traceability.architecture[]' stdd/implementation-decisions.yaml
+yq '.IMPL-MODULE_VALIDATION.traceability.architecture[]' tied/implementation-decisions.yaml
 
 # List all active decisions
-yq 'to_entries | map(select(.value.status == "Active")) | from_entries' stdd/implementation-decisions.yaml
+yq 'to_entries | map(select(.value.status == "Active")) | from_entries' tied/implementation-decisions.yaml
 
 # Quick grep search
-grep -A 30 '^IMPL-MODULE_VALIDATION:' stdd/implementation-decisions.yaml
+grep -A 30 '^IMPL-MODULE_VALIDATION:' tied/implementation-decisions.yaml
 ```
 
 ### How to Append a New Implementation Decision
@@ -90,13 +171,13 @@ grep -A 30 '^IMPL-MODULE_VALIDATION:' stdd/implementation-decisions.yaml
 3. Paste it at the end with a blank line before it
 4. Replace `IMPL-IDENTIFIER` with your new semantic token
 5. Fill in all fields (name, status, cross_references, rationale, implementation_approach, etc.)
-6. Update the `detail_file` path to match your new `.md` file in `implementation-decisions/` directory
+6. Update the `detail_file` path to match your new `.yaml` file in `implementation-decisions/` directory
 7. Save the file
 
 Example append operation:
 
 ```bash
-cat >> stdd/implementation-decisions.yaml << 'EOF'
+cat >> tied/implementation-decisions.yaml << 'EOF'
 
 IMPL-NEW_IMPLEMENTATION:
   name: New Implementation
@@ -140,7 +221,8 @@ IMPL-NEW_IMPLEMENTATION:
     depends_on: []
     supersedes: []
     see_also: []
-  detail_file: implementation-decisions/IMPL-NEW_IMPLEMENTATION.md
+    composed_with: []   # optional: list of IMPL tokens routinely composed with this one
+  detail_file: implementation-decisions/IMPL-NEW_IMPLEMENTATION.yaml
   metadata:
     created:
       date: 2026-02-06
@@ -254,13 +336,21 @@ Latest `./scripts/validate_tokens.sh` output summary:
 *Last validated: YYYY-MM-DD by [agent/contributor]*
 ```
 
+### Optional fields for composition and workflow
+
+Detail YAML files may include the following to support composing multiple IMPLs in one algorithm and to guide combined workflow description and test design:
+
+- **`essence_pseudocode`** (**mandatory**, see Core data object): Language-agnostic, step-wise pseudo-code that captures the IMPL’s core algorithm: main steps, data flow (inputs, outputs, key structures), and control flow (branches, loops, ordering). Use a multi-line YAML string (e.g. `\|-`) for readability. When multiple IMPLs are combined in the same workflow, this pseudo-code is the primary artifact for deducing how IMPLs affect each other (ordering, shared data, dependencies), for producing a combined algorithm or workflow description, for guiding the design of tests and the structure of code, and for **collision detection** between implementation decisions.
+
+- **`related_decisions.composed_with`** (optional): A list of IMPL tokens (e.g. `[IMPL-BOOKMARK_ROUTER, IMPL-STORAGE_INDEX]`) that record which IMPLs are routinely composed with this one in a single algorithm or workflow. Use this to document composition relationships alongside `depends_on`, `supersedes`, and `see_also`.
+
 ---
 
 ## Quick Reference: Creating a New Implementation Decision
 
 ```bash
 # 1. Create the detail file
-touch stdd/implementation-decisions/IMPL-YOUR_TOKEN.md
+touch tied/implementation-decisions/IMPL-YOUR_TOKEN.yaml
 
 # 2. Copy the template above into the new file
 
@@ -280,18 +370,18 @@ For very large projects, organize detail files by domain:
 ```
 implementation-decisions/
 ├── core/
-│   ├── IMPL-CONFIG_STRUCT.md
-│   └── IMPL-ERROR_HANDLING.md
+│   ├── IMPL-CONFIG_STRUCT.yaml
+│   └── IMPL-ERROR_HANDLING.yaml
 ├── auth/
-│   ├── IMPL-AUTH_FLOW.md
-│   └── IMPL-SESSION_MGMT.md
+│   ├── IMPL-AUTH_FLOW.yaml
+│   └── IMPL-SESSION_MGMT.yaml
 └── api/
-    └── IMPL-REST_ENDPOINTS.md
+    └── IMPL-REST_ENDPOINTS.yaml
 ```
 
 When using subdirectories, update the Detail File column in the index:
 ```markdown
-| `[IMPL-AUTH_FLOW]` | Auth Flow | Active | ... | [Detail](implementation-decisions/auth/IMPL-AUTH_FLOW.md) |
+| `[IMPL-AUTH_FLOW]` | Auth Flow | Active | ... | [Detail](implementation-decisions/auth/IMPL-AUTH_FLOW.yaml) |
 ```
 
 ---
@@ -302,7 +392,7 @@ If migrating from a single `implementation-decisions.md` file:
 
 1. Create the `implementation-decisions/` directory
 2. For each numbered section in the old file:
-   - Create `IMPL-{TOKEN_NAME}.md` using the detail template
+   - Create `IMPL-{TOKEN_NAME}.yaml` using the detail template
    - Copy content into the new file
    - Add metadata (Status, Created, Last Updated)
 3. Replace section content in this file with an index row

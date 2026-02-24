@@ -49,7 +49,7 @@ cp implementation-decisions.template.md implementation-decisions.md
 cp processes.template.md processes.md
 cp semantic-tokens.template.md semantic-tokens.md
 cp semantic-tokens.template.yaml semantic-tokens.yaml
-cp tasks.template.md tasks.md
+# Optional: cp tasks.template.md tasks.md  # Task tracking is optional
 cp AGENTS.md AGENTS.md              # Canonical AI agent guide
 cp .cursorrules .cursorrules        # Cursor loader (optional)
 ```
@@ -108,7 +108,7 @@ The STDD v1.0.1 release includes:
 - **`architecture-decisions.template.md`** - Template for architecture decisions
 - **`implementation-decisions.template.md`** - Template for implementation decisions
 - **`semantic-tokens.template.md`** - Template for semantic token registry
-- **`tasks.template.md`** - Template for priority-based task tracking
+- **`tasks.template.md`** - **Optional** template for task tracking (not required by methodology)
 
 ### AI Agent Integration
 - **`AGENTS.md`** - Canonical AI agent operating guide
@@ -180,7 +180,7 @@ STDD v1.0.1 is ready for production use. We're excited to see how teams adopt an
 
 **STDD Methodology Version**: 1.0.1  
 **Release Date**: November 8, 2025  
-**Repository**: [https://github.com/fareedst/stdd](https://github.com/fareedst/stdd)
+**Repository**: [https://github.com/fareedst/tied](https://github.com/fareedst/tied)
 
-For questions, feedback, or contributions, please visit the [STDD repository on GitHub](https://github.com/fareedst/stdd).
+For questions, feedback, or contributions, please visit the [STDD repository on GitHub](https://github.com/fareedst/tied).
 
