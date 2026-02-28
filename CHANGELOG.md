@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **IMPL pseudo-code as source of consistent logic** — Documentation and implementation-decision template now treat IMPL `essence_pseudocode` as the **authoritative source of consistent logic** for implementation; logical and flow issues must be resolved there before writing tests or code.
+  - **AGENTS.md**: Under Documentation-First Flow, added that all implementation issues (logical and flow) are addressed in IMPL pseudo-code before tests or code; `essence_pseudocode` is the source of consistent logic.
+  - **ai-principles.md**: Stated that IMPL pseudo-code is where logical/flow issues are resolved before tests or code; added to session acknowledgment and Pseudo-Code section that issues must be resolved in IMPL pseudo-code first.
+  - **implementation-decisions.template.md**:
+    - Intro and **Mandatory essence_pseudocode** section: every IMPL detail file must include `essence_pseudocode`; use for collision detection, Algol-style notation, one action per step, traceability to tests.
+    - **Preferred vocabulary for essence_pseudocode**: INPUT, OUTPUT, DATA, CONTROL, ON/WHEN, SEND/BROADCAST/RETURN, IF/ELSE, UPPER_SNAKE procedure names, FOR/WHILE, error/failure patterns, AWAIT/Promise for async.
+    - **Expressing sequence and structure**: numbered steps, contract block (Contract:, INPUT/OUTPUT/DATA/CONTROL).
+    - **Template and stub pseudo-code**: when status is Template use a stub; when Active, pseudo-code must be complete.
+    - **Managed code and block token rules**: REQ/ARCH/IMPL token comments in blocks of managed code (including pseudo-code in TIED detail YAML); block and nested-block rules, selective token naming.
+    - **Minimal example** of `essence_pseudocode` with token comment, contract, procedure, and preferred keywords.
+    - **Collision detection using essence_pseudocode**: process for comparing IMPL pseudo-code when IMPLs are composed or share code paths; checklist table for key composition pairs (e.g. IMPL-STORAGE_INDEX, IMPL-BOOKMARK_ROUTER, IMPL-MESSAGE_HANDLING, IMPL-BADGE_REFRESH, IMPL-FILE_STORAGE_*, IMPL-CONFIG_*).
+  - Schema reference for `essence_pseudocode` updated to point to the new mandatory and vocabulary sections.
+
 - **MCP tool `tied_config_get_base_path`**: Reports the effective TIED base path (resolved from `TIED_BASE_PATH` or default `tied`) and the raw env value. Use to verify server configuration or debug path resolution. Documented in `mcp-server/README.md` and MCP setup docs.
 
 - **AI agent directive for TIED data access** (`docs/ai-agent-tied-mcp-usage.md`): Instructs AI agents to use the TIED MCP server as the **primary** interface for reading and writing TIED data; direct file access is permitted only when no MCP tool supports the operation (such cases are candidates for new tools). Document also states that TIED is the db that controls/directs the build—significant code is created in TIED first, then implemented with TDD. Referenced from `AGENTS.md` (Core TIED Obligations and Key Files).
