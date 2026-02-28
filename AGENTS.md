@@ -69,6 +69,7 @@ This document centralizes every instruction AI coding assistants must follow whi
 - [ ] Module validation status is documented
 - [ ] All documentation matches the implemented state (no drift)
 - [ ] Verify all code and tests are consistently linked to requirements and decisions; update code and documentation where necessary
+- [ ] Run **`tied_validate_consistency`** (TIED MCP tool) and fix any reported issues so REQ→ARCH→IMPL indexes, detail files, and token references remain consistent; align with `[PROC-TOKEN_VALIDATION]` and any project `validate_tokens.sh`.
 - [ ] Do not create a stand-alone summary document for the session (e.g. no SESSION_SUMMARY.md or similar)
 
 ---

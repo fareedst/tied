@@ -36,6 +36,7 @@ import {
   convertMonolithicAll,
   convertDetailMarkdownToYaml,
 } from "../convert/index.js";
+import { validateConsistency } from "../consistency-validator.js";
 
 const INDEX_ENUM = z.enum([
   "requirements",
@@ -155,6 +156,46 @@ export const allTools = [
         results[name] = validateIndex(name);
       }
       return textContent(JSON.stringify(results, null, 2));
+    },
+  },
+  {
+    name: "tied_validate_consistency",
+    config: {
+      description:
+        "Validate TIED index and detail YAML consistency: token existence, REQ→ARCH→IMPL traceability, detail file content, and IMPL essence_pseudocode token refs. Returns a structured report with index syntax, index_tokens, token_references, traceability, detail_files, and pseudocode sections. Use before marking work complete to ensure every referenced token has an existing record.",
+      inputSchema: z.object({
+        include_detail_files: z
+          .boolean()
+          .optional()
+          .default(true)
+          .describe("Validate detail YAML existence and content (token refs)"),
+        include_pseudocode: z
+          .boolean()
+          .optional()
+          .default(true)
+          .describe("Validate IMPL essence_pseudocode presence and token refs inside it"),
+        require_detail_record: z
+          .boolean()
+          .optional()
+          .default(true)
+          .describe("Treat referenced tokens as invalid when they lack an index record (and optionally a detail file)"),
+      }),
+    },
+    handler: async ({
+      include_detail_files,
+      include_pseudocode,
+      require_detail_record,
+    }: {
+      include_detail_files?: boolean;
+      include_pseudocode?: boolean;
+      require_detail_record?: boolean;
+    }) => {
+      const report = validateConsistency({
+        include_detail_files,
+        include_pseudocode,
+        require_detail_record,
+      });
+      return textContent(JSON.stringify(report, null, 2));
     },
   },
   {

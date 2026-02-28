@@ -37,6 +37,7 @@ All path parameters (`requirements_path`, `architecture_path`, `implementation_p
 | `yaml_index_list_tokens` | List all tokens in an index; optional `type` filter (REQ \| ARCH \| IMPL \| PROC) for semantic-tokens |
 | `yaml_index_filter` | Filter records by field value; params: `index`, `field`, `value` |
 | `yaml_index_validate` | Validate YAML syntax of all index files |
+| `tied_validate_consistency` | Validate TIED index and detail consistency: token existence, REQ→ARCH→IMPL traceability, detail file content, IMPL `essence_pseudocode` token refs. Params: optional `include_detail_files` (default true), `include_pseudocode` (default true), `require_detail_record` (default true). Returns structured report: `index`, `index_tokens`, `token_references`, `traceability`, `detail_files`, `pseudocode`, `ok`. Run before marking work complete. |
 | `tied_config_get_base_path` | Return the effective TIED base path (resolved from TIED_BASE_PATH env or default `tied`) and the raw env value |
 | `get_decisions_for_requirement` | Given a requirement token (e.g. REQ-TIED_SETUP), return all ARCH and IMPL that reference it |
 | `get_requirements_for_decision` | Given a decision token (ARCH-X or IMPL-X), return all REQ it references (and full requirement records) |

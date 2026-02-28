@@ -166,8 +166,16 @@ Use these to load full context for the LLM or tooling.
 ### Updates
 
 - **`yaml_index_update`** and **`yaml_detail_update`** — Refine existing records or detail files.
-- **`yaml_index_validate`** — Validate YAML syntax of all index files under `TIED_BASE_PATH`. Run this (and any project-specific token validation script, e.g. `./scripts/validate_tokens.sh`) before considering the pass complete.
+- **`yaml_index_validate`** — Validate YAML syntax of all index files under `TIED_BASE_PATH`.
+- **`tied_validate_consistency`** — Validate TIED index and detail consistency: token existence, REQ→ARCH→IMPL traceability, detail file content, and IMPL `essence_pseudocode` token refs. Returns a structured report (`index`, `index_tokens`, `token_references`, `traceability`, `detail_files`, `pseudocode`, `ok`). Run this (and any project-specific token validation script, e.g. `./scripts/validate_tokens.sh`) before considering the pass complete.
 - **`tied_config_get_base_path`** — Report the effective TIED base path and raw `TIED_BASE_PATH` env value; use to confirm configuration or debug path issues.
+
+### Other validation (CI, pre-commit, report)
+
+- **CI**: Run `tied_validate_consistency` (or a CLI that uses the same logic) in CI; fail the build when the report has errors so REQ/ARCH/IMPL consistency is enforced.
+- **Pre-commit**: Optional hook that runs the validator (e.g. via the MCP server or an exported Node script) and blocks commit when there are consistency errors.
+- **Report**: Use `get_decisions_for_requirement` and `get_requirements_for_decision` to generate a traceability matrix; embed the result of `tied_validate_consistency` in the report so missing links are visible.
+- **Script**: If the project has or adds `./scripts/validate_tokens.sh`, have it call the same validation logic (e.g. export a small Node script from the MCP server that runs the consistency validator) so one implementation serves both MCP and CLI.
 
 ### Token audit
 

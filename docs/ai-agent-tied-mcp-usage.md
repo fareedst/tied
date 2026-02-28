@@ -21,7 +21,7 @@
   - Reading indexes and records: `yaml_index_read`, `yaml_index_list_tokens`, `yaml_index_filter`, `get_decisions_for_requirement`, `get_requirements_for_decision`
   - Reading/writing detail files: `yaml_detail_read`, `yaml_detail_read_many`, `yaml_detail_list`, `yaml_detail_create`, `yaml_detail_update`, `yaml_detail_delete`
   - Creating or updating index records: `yaml_index_insert`, `yaml_index_update`, `tied_token_create_with_detail`
-  - Validation: `yaml_index_validate`, `tied_config_get_base_path`
+  - Validation: `yaml_index_validate`, `tied_validate_consistency`, `tied_config_get_base_path`
   - Conversion and inspection: `convert_monolithic_*`, `convert_detail_markdown_to_yaml`, `tied_import_summary`
 - Prefer **MCP resources** (e.g. `tied://requirements`, `tied://requirement/{token}/detail`) when loading TIED context for reasoning or tool input.
 - Before changing TIED content, **read** the current state via MCP (tools or resources); after changing it, use the appropriate **write** or **update** tool so the on-disk TIED db stays consistent.
@@ -49,6 +49,7 @@
 | Traceability (REQ ↔ ARCH/IMPL) | `get_decisions_for_requirement`, `get_requirements_for_decision` |
 | Create new token with index + detail | `tied_token_create_with_detail` |
 | Validate index YAML | `yaml_index_validate` |
+| Validate REQ/ARCH/IMPL consistency (tokens, traceability, detail files, pseudo-code) | `tied_validate_consistency` |
 | Migrate monolithic docs or detail markdown | `convert_monolithic_*`, `convert_detail_markdown_to_yaml` |
 | Operation not covered by any tool | Direct file access; document the gap for future tooling |
 

@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **MCP tool `tied_config_get_base_path`**: Reports the effective TIED base path (resolved from `TIED_BASE_PATH` or default `tied`) and the raw env value. Use to verify server configuration or debug path resolution. Documented in `mcp-server/README.md` and MCP setup docs.
+
+- **AI agent directive for TIED data access** (`docs/ai-agent-tied-mcp-usage.md`): Instructs AI agents to use the TIED MCP server as the **primary** interface for reading and writing TIED data; direct file access is permitted only when no MCP tool supports the operation (such cases are candidates for new tools). Document also states that TIED is the db that controls/directs the build—significant code is created in TIED first, then implemented with TDD. Referenced from `AGENTS.md` (Core TIED Obligations and Key Files).
+
+- **Validation for TIED data**: Documented for both AI agents and users:
+  - **`yaml_index_validate`** (MCP): Validates YAML syntax of all index files under `TIED_BASE_PATH`; run after index edits to ensure parseability.
+  - **Token validation**: Use project scripts (e.g. `./scripts/validate_tokens.sh`) together with `yaml_index_validate` for full data validation (syntax + token registry and traceability) before considering a pass complete. README and [docs/adding-tied-mcp-and-invoking-passes.md](docs/adding-tied-mcp-and-invoking-passes.md) updated to describe this workflow.
+
 - **YAML detail files for REQ, ARCH, and IMPL** [TIED spec update]: Individual token detail files are now YAML (replacing Markdown) so transformations (validation, merge, report generation, MCP tools) can operate on them.
   - **Schema**: New `detail-files-schema.md` describes the YAML structure for `requirements/REQ-*.yaml`, `architecture-decisions/ARCH-*.yaml`, and `implementation-decisions/IMPL-*.yaml` (one token per file, top-level key = token id; fields aligned with index for merge/validation).
   - **Templates**: Added YAML detail files in `requirements.template/` (REQ-TIED_SETUP, REQ-MODULE_VALIDATION, REQ-IDENTIFIER), `architecture-decisions.template/` (ARCH-TIED_STRUCTURE, ARCH-MODULE_VALIDATION, ARCH-EXAMPLE_DECISION), `implementation-decisions.template/` (IMPL-TIED_FILES, IMPL-MODULE_VALIDATION).
