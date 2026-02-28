@@ -158,6 +158,21 @@ export const allTools = [
     },
   },
   {
+    name: "tied_config_get_base_path",
+    config: {
+      description:
+        "Return the effective TIED base path used by the server (resolved from TIED_BASE_PATH env or default 'tied'). Use to inspect current configuration.",
+      inputSchema: z.object({}),
+    },
+    handler: async () => {
+      const base_path = getBasePath();
+      const env_TIED_BASE_PATH = process.env.TIED_BASE_PATH ?? null;
+      return textContent(
+        JSON.stringify({ base_path, env_TIED_BASE_PATH }, null, 2)
+      );
+    },
+  },
+  {
     name: "get_decisions_for_requirement",
     config: {
       description:

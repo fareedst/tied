@@ -66,6 +66,7 @@ Path resolution: All path parameters (`output_base_path`, `file_path`, etc.) are
 ### 3.3 Verify
 
 - List MCP tools (e.g. `yaml_index_read`, `convert_monolithic_requirements`) to confirm the server is loaded.
+- Call **`tied_config_get_base_path`** to see the effective TIED base path (and raw `TIED_BASE_PATH` env value) the server is using.
 - Read a resource such as `tied://requirements` (or attempt a read) to confirm the server sees your project’s `tied/` — you may get empty or missing-file behavior before bootstrap, which is expected.
 
 ---
@@ -166,6 +167,7 @@ Use these to load full context for the LLM or tooling.
 
 - **`yaml_index_update`** and **`yaml_detail_update`** — Refine existing records or detail files.
 - **`yaml_index_validate`** — Validate YAML syntax of all index files under `TIED_BASE_PATH`. Run this (and any project-specific token validation script, e.g. `./scripts/validate_tokens.sh`) before considering the pass complete.
+- **`tied_config_get_base_path`** — Report the effective TIED base path and raw `TIED_BASE_PATH` env value; use to confirm configuration or debug path issues.
 
 ### Token audit
 

@@ -30,6 +30,7 @@ if [[ ! -d "${TARGET_PROJECT_DIR}" ]]; then
   exit 1
 fi
 
+CURSOR_DIR="${TARGET_PROJECT_DIR}/.cursor"
 TIED_DIR="${TARGET_PROJECT_DIR}/tied"
 IMPL_DECISIONS_DIR="${TIED_DIR}/implementation-decisions"
 ARCH_DECISIONS_DIR="${TIED_DIR}/architecture-decisions"
@@ -38,7 +39,7 @@ mkdir -p "${TIED_DIR}"
 mkdir -p "${IMPL_DECISIONS_DIR}"
 mkdir -p "${ARCH_DECISIONS_DIR}"
 mkdir -p "${REQ_DIR}"
-mkdir -p "${TARGET_PROJECT_DIR}/.cursor"
+mkdir -p "${CURSOR_DIR}/logs"
 
 # Portable real path (macOS has no realpath by default)
 _realpath() {
@@ -51,6 +52,12 @@ if [[ ! -f "${SCRIPT_DIR}/mcp-server/dist/index.js" ]]; then
 fi
 
 MCP_JSON="${TARGET_PROJECT_DIR}/.cursor/mcp.json"
+HOOKS_JSON="${TARGET_PROJECT_DIR}/.cursor/hooks.json"
+
+if true; then # [[ ! -f "$HOOKS_JSON" ]]; then
+  cp "${SCRIPT_DIR}/.cursor/hooks.json" "$HOOKS_JSON"
+  sed -i '' "s|${SCRIPT_DIR}/.cursor/logs|${TARGET_PROJECT_DIR}/.cursor/logs|g" "$HOOKS_JSON"
+fi
 
 _write_mcp_json() {
   local dest="$1"

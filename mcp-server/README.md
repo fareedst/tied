@@ -37,6 +37,7 @@ All path parameters (`requirements_path`, `architecture_path`, `implementation_p
 | `yaml_index_list_tokens` | List all tokens in an index; optional `type` filter (REQ \| ARCH \| IMPL \| PROC) for semantic-tokens |
 | `yaml_index_filter` | Filter records by field value; params: `index`, `field`, `value` |
 | `yaml_index_validate` | Validate YAML syntax of all index files |
+| `tied_config_get_base_path` | Return the effective TIED base path (resolved from TIED_BASE_PATH env or default `tied`) and the raw env value |
 | `get_decisions_for_requirement` | Given a requirement token (e.g. REQ-TIED_SETUP), return all ARCH and IMPL that reference it |
 | `get_requirements_for_decision` | Given a decision token (ARCH-X or IMPL-X), return all REQ it references (and full requirement records) |
 | `yaml_index_insert` | Insert a new record; params: `index`, `token`, `record` (JSON string). Writes to the index file (e.g. `tied/requirements.yaml`). Fails if token already exists. |
