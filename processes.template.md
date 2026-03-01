@@ -74,6 +74,42 @@ Use the structure below for every process you document. Each entry should be kep
 
 ---
 
+## `[PROC-TEST_STRATEGY]` Test strategy and coverage (minimize untested code)
+
+### Purpose
+Minimize the amount of code not covered by tests so that IMPL/ARCH/REQ logic is validated by unit and integration tests; E2E remains expensive and is reserved for critical user journeys.
+
+### Scope
+Chrome extension `src/` only (Safari-only code excluded). Applies to unit tests (`tests/unit/**/*.test.js`), integration tests (`**/*.integration.test.js`), and Playwright E2E (`tests/playwright/`).
+
+### Token references
+- `[IMPL-TESTING]` — testing implementation decisions
+- `[REQ-MODULE_VALIDATION]` — module validation before integration; testability and minimize E2E-only (satisfaction/validation criteria)
+- `[ARCH-UI_TESTABILITY]` — thin entry points; logic in testable modules
+- All `[REQ-*]` / `[ARCH-*]` / `[IMPL-*]` reflected in code under test
+
+### Status
+Active
+
+### Principles
+1. **E2E is expensive** — Reserve E2E for critical user journeys. Do not rely on E2E as the primary way to find untested pathways.
+2. **Unit + integration tests cover logic** — Unit and integration tests should cover IMPL/ARCH/REQ logic so that untested pathways are found and fixed before or alongside E2E.
+3. **IMPL–test alignment** — Every Active IMPL should have at least one test reference in `traceability.tests`, or be explicitly documented as "tested only via E2E" / "no unit tests" with a reason.
+4. **Coverage gates** — Jest `coverageThreshold` and the coverage gap report (`scripts/coverage-gap-report.js`) help prevent regressions and surface files/IMPLs with no tests.
+5. **Minimize E2E-only code** — Treat E2E and manual verification as the exception. Every IMPL should have unit or integration tests for its logic, or an explicit E2E-only reason in the IMPL detail.
+
+### Activities
+- Run `npm run test:coverage` before merging; fix or document any new code that lowers coverage below threshold.
+- Run `node scripts/coverage-gap-report.js [threshold]` to list src files below threshold and IMPLs with empty `traceability.tests`; use the report in MRs or docs.
+- For IMPLs that are intentionally not unit-tested (e.g. platform-specific glue or debug tooling), record in the IMPL detail that coverage is via E2E or manual testing so the "no tests" is explicit and reviewable.
+- When adding or changing IMPLs, classify code as unit-testable, integration-testable, or E2E-only. If E2E-only, set `traceability.tests` to [] and document in the IMPL (e.g. `test_coverage_note` or `e2e_only_reason`) why unit/integration are not used. Use the coverage gap report to catch IMPLs with empty tests and no justification.
+
+### Artifacts & Metrics
+- **Artifacts** — Coverage report (`coverage/`), coverage gap report output, TIED `traceability.tests` in IMPL detail files.
+- **Success Metrics** — Coverage at or above threshold; IMPL traceability.tests populated or explicitly documented; E2E used for critical flows only.
+
+---
+
 ## `[PROC-YAML_DB_OPERATIONS]` YAML Database Operations
 
 ### Purpose
@@ -348,3 +384,70 @@ yq '.REQ-TIED_SETUP.metadata.last_validated.result' tied/requirements.yaml
 ### Artifacts & Metrics
 - **Artifacts**: YAML index files (requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml)
 - **Success Metrics**: YAML files are valid, all records have required fields, cross-references are consistent
+
+---
+
+## `[PROC-TIED_DEV_CYCLE]` TIED development cycle (session workflow)
+
+### Purpose
+Run a single development session so that REQ/ARCH/IMPL and pseudo-code stay primary: test-driven development produces testable code and infrastructure; TIED docs are updated to reflect the final code and tests. Supports traceability and `[PROC-TOKEN_AUDIT]` / `[PROC-TOKEN_VALIDATION]`.
+
+### Scope
+Applies to any feature or change that touches managed code, tests, or TIED documentation (requirements, architecture decisions, implementation decisions). Use per session or per feature slice.
+
+### Token references
+- `[REQ-TIED_SETUP]` — TIED methodology and doc-first flow
+- `[REQ-MODULE_VALIDATION]` — validate modules before integration
+- `[PROC-TOKEN_AUDIT]` — code/test token parity
+- `[PROC-TOKEN_VALIDATION]` — token registry and traceability checks
+- All REQ/ARCH/IMPL tokens touched by the session
+
+### Status
+Active
+
+### Core Activities
+
+1. **Plan from TIED**
+   - Read existing REQ, ARCH, and IMPL for the scope of work.
+   - Use each IMPL’s `essence_pseudocode` as the full prescription for what to implement; it is the **source of consistent logic**. Resolve all logical and flow issues in IMPL pseudo-code before adding tests or code.
+   - Identify required updates (new or changed requirements and decisions) before writing code or tests.
+
+2. **Author TIED docs (pseudo-code + tokens)**
+   - Update REQ, ARCH, and IMPL (new and existing) as needed.
+   - Resolve all logical and flow issues in IMPL pseudo-code so that it is complete and authoritative before proceeding to “Add and align tests.”
+   - In every IMPL, ensure `essence_pseudocode` is complete. Every **block** in `essence_pseudocode` must have a comment that (1) names all REQ, ARCH, and IMPL reflected in that block and (2) states how that block implements those requirements.
+   - Use the project block definition: a block is a contiguous logical unit implementing the same set of REQ/ARCH/IMPL; nested blocks implementing a different set get their own token comment.
+
+3. **Add and align tests**
+   - Add or update tests so they match the IMPL.
+   - Every test **block** must carry the same REQ/ARCH/IMPL comments as the corresponding IMPL block (in the appropriate place in the test).
+   - If a comment would help tests but is not yet in the IMPL, add it to the IMPL for permanence; treat test code as transient.
+   - Ensure testable logic is not implemented in entry points; plan extraction to a module so unit/integration tests can run.
+
+4. **Implement to tests (TDD)**
+   - Implement logic in testable modules (with dependency injection or pure functions). Entry points should only call into these modules.
+   - Implement managed code to satisfy the tests.
+   - Every **block** in managed sources must carry the same REQ/ARCH/IMPL comments as in the IMPL. For nested blocks with the **same** set, do not repeat token names; comment only how that sub-block implements the requirements. For a nested block with a **different** set, add a comment at the start naming that set and how the block implements it.
+   - Iterate until all tests pass.
+
+5. **Implement minimal glue**
+   - Implement **minimal** glue (entry points, manifest wiring, platform hooks). Any non-trivial logic that remains in glue must be justified in the IMPL (`e2e_only_reason` or `test_coverage_note`). Prefer extracting logic to a testable module and keeping glue thin.
+   - Annotate with the same token/block rules where the code is still “managed” and traceable.
+
+6. **Validate and close test gaps**
+   - Run the full test suite and add any missing tests.
+   - Run `[PROC-TOKEN_VALIDATION]` (e.g. `./scripts/validate_tokens.sh`) and fix gaps so coverage and token traceability are complete.
+
+7. **Sync TIED to code and tests**
+   - Update REQ/ARCH/IMPL so they match the final code and tests. Ensure IMPLs modified this session reflect the implemented code and tests, including block-level comments with semantic tokens.
+   - Sync `semantic-tokens.yaml`, `requirements.yaml`, `architecture-decisions.yaml`, and `implementation-decisions.yaml` (and detail files) so TIED docs remain the single source of truth for intent.
+
+8. **Update README and CHANGELOG**
+   - Update README.md and CHANGELOG.md for user- and release-facing changes made in this session.
+
+9. **Write commit message**
+   - Write the commit message summarizing the session’s changes; where useful, reference the main REQ/ARCH/IMPL tokens touched.
+
+### Artifacts & Metrics
+- **Artifacts**: Updated REQ/ARCH/IMPL (including `essence_pseudocode` and block comments), tests, managed source code, README.md, CHANGELOG.md, commit.
+- **Success Metrics**: All tests pass; `[PROC-TOKEN_VALIDATION]` passes; TIED docs match final code and tests; `[PROC-TOKEN_AUDIT]` can succeed.

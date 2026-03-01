@@ -174,6 +174,36 @@ PROC-YAML_DB_OPERATIONS:
     registered: 2025-11-08
     last_updated: 2026-02-08
 
+PROC-TEST_STRATEGY:
+  type: PROC
+  name: Test Strategy and Coverage (minimize untested code)
+  status: Active
+  description: "Minimize code not covered by tests; unit/integration cover IMPL/ARCH/REQ logic; E2E reserved for critical journeys"
+  cross_references:
+    - REQ-MODULE_VALIDATION
+    - IMPL-MODULE_VALIDATION
+  source_index: processes.md
+  detail_file: null
+  metadata:
+    registered: 2026-03-01
+    last_updated: 2026-03-01
+
+PROC-TIED_DEV_CYCLE:
+  type: PROC
+  name: TIED Development Cycle (session workflow)
+  status: Active
+  description: "Session workflow: plan from TIED, author pseudo-code and tokens, add/align tests, implement (TDD), minimal glue, validate, sync TIED to code"
+  cross_references:
+    - REQ-TIED_SETUP
+    - REQ-MODULE_VALIDATION
+    - PROC-TOKEN_AUDIT
+    - PROC-TOKEN_VALIDATION
+  source_index: processes.md
+  detail_file: null
+  metadata:
+    registered: 2026-03-01
+    last_updated: 2026-03-01
+
 # ---
 # Template Record - Copy this block to create new tokens
 # ---

@@ -136,7 +136,7 @@ This repository contains:
 - `implementation-decisions.template.md` - Template guide for implementation decisions documentation
 - `implementation-decisions.template.yaml` - YAML database template for implementation decisions with `[IMPL-*]` tokens **(v1.5.0: structured fields for traceability, rationale, code_locations, metadata)**
 - `implementation-decisions.template/` - Individual implementation decision detail file examples
-- `processes.template.md` - Template for process tracking including `[PROC-YAML_DB_OPERATIONS]`
+- `processes.template.md` - Template for process tracking including `[PROC-YAML_DB_OPERATIONS]`, `[PROC-TEST_STRATEGY]` (test strategy and E2E-only minimization), and `[PROC-TIED_DEV_CYCLE]` (session workflow)
 - `semantic-tokens.template.md` - Template for semantic token registry
 - `semantic-tokens.template.yaml` - YAML registry of REQ/ARCH/IMPL/PROC tokens (minimal, foundational for bootstrap)
 - `tasks.template.md` - **Optional** template for task tracking (not required by methodology)
@@ -314,6 +314,11 @@ This enables **direct field access**, **structured queries**, **easy filtering**
 5. **Priority-Based Implementation**
    - Work should be prioritized: P0 (Critical) > P1 (Important) > P2 (Nice-to-have) > P3 (Future)
    - Focus on Tests > Code > Basic Functions > Infrastructure
+
+6. **Test strategy and E2E-only minimization** ([PROC-TEST_STRATEGY], [REQ-MODULE_VALIDATION])
+   - Minimize code that is only measurable via E2E or manual testing; logic should live in testable modules unless justified.
+   - IMPL details can classify testability (`unit` | `integration` | `e2e_only`) and, when `e2e_only`, document the reason (`e2e_only_reason`).
+   - Use the TIED development cycle ([PROC-TIED_DEV_CYCLE]) per session: plan from REQ/ARCH/IMPL, author pseudo-code and tokens, add and align tests, implement (TDD), minimal glue, validate, then sync TIED to code and update README/CHANGELOG.
 
 ## Visual Guides
 

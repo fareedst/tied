@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Test strategy and E2E-only minimization** ([PROC-TEST_STRATEGY], [REQ-MODULE_VALIDATION])
+  - **processes.template.md**: New process `[PROC-TEST_STRATEGY]` — Test strategy and coverage (minimize untested code). Principles: E2E is expensive; unit + integration cover logic; IMPL–test alignment; coverage gates; minimize E2E-only code. Activities: run coverage and coverage-gap report; document E2E-only IMPLs with `e2e_only_reason` or `test_coverage_note`.
+  - **processes.template.md**: New process `[PROC-TIED_DEV_CYCLE]` — TIED development cycle (session workflow). Nine steps: Plan from TIED; Author TIED docs (pseudo-code + tokens); Add and align tests; Implement to tests (TDD); Implement minimal glue; Validate and close test gaps; Sync TIED to code and tests; Update README and CHANGELOG; Write commit message. Supports traceability and token audit/validation.
+  - **implementation-decisions.template.md**: Optional IMPL schema fields `testability` (`unit` | `integration` | `e2e_only`) and `e2e_only_reason` (required when `testability` is `e2e_only`). New section **Testability classification and E2E-only code**: classify code paths, document E2E-only reasons, entry-point logic must be extracted or justified. Traceability-to-tests bullet: optional block comments for test level (e.g. `# unit-testable:`, `# E2E-only:`).
+  - **requirements.template.md**: New principle **Testability and E2E-only minimization** — minimize code only measurable from E2E/manual testing; logic in testable modules unless justified; references [REQ-MODULE_VALIDATION] and [PROC-TEST_STRATEGY].
+  - **semantic-tokens.template.yaml**: Registered `PROC-TEST_STRATEGY` and `PROC-TIED_DEV_CYCLE`.
+  - **README.md**: Key Principles §6 for test strategy and E2E minimization; processes.template.md description updated to list new process tokens.
+
 - **IMPL pseudo-code as source of consistent logic** — Documentation and implementation-decision template now treat IMPL `essence_pseudocode` as the **authoritative source of consistent logic** for implementation; logical and flow issues must be resolved there before writing tests or code.
   - **AGENTS.md**: Under Documentation-First Flow, added that all implementation issues (logical and flow) are addressed in IMPL pseudo-code before tests or code; `essence_pseudocode` is the source of consistent logic.
   - **ai-principles.md**: Stated that IMPL pseudo-code is where logical/flow issues are resolved before tests or code; added to session acknowledgment and Pseudo-Code section that issues must be resolved in IMPL pseudo-code first.
