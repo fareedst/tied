@@ -56,6 +56,12 @@ All path parameters (`requirements_path`, `architecture_path`, `implementation_p
 | `convert_monolithic_all` | Run all three conversions; params: `requirements_path` / `architecture_path` / `implementation_path` and/or `requirements_content` / `architecture_content` / `implementation_content` (content overrides path), `output_base_path`, `dry_run`, `overwrite`, `token_format`. |
 | `convert_detail_markdown_to_yaml` | Convert a single REQ/ARCH/IMPL detail from markdown to YAML (per detail-files-schema). Params: `file_path` or `content`, optional `type`, `token`, `output_base_path`, `dry_run`, `overwrite`, `write_file`, `sync_index`, `remove_md_after`. Use to migrate existing .md detail files to .yaml. |
 | `tied_import_summary` | Import/inspect an existing TIED directory: read YAML indexes and report tokens plus detail file presence (hybrid .md and .yaml). Params: optional `base_path`. Use to validate a reference TIED layout. |
+| `tied_feedback_add` | Add a feedback entry (feature request, bug report, or methodology improvement). Creates or appends to `tied/feedback.yaml`. Params: `type` (feature_request \| bug_report \| methodology_improvement), `title`, `description`, optional `context` (JSON string), `include_report_snippet` (default true), optional `base_path`. Returns `ok`, `id`, `created_at`, and optionally `report_snippet` (markdown for pasting into a TIED issue). |
+| `tied_feedback_export` | Export all feedback entries for reporting to the TIED project. Params: `format` (markdown \| json), optional `base_path`. Returns a string suitable for copy-paste into an issue or report. |
+
+### Feedback (report to TIED)
+
+Projects and users can submit **feature requests**, **bug reports**, and **methodology improvement** suggestions via the feedback tools. Feedback is stored in `tied/feedback.yaml` under your project's TIED base path (versioned with the project). Use **`tied_feedback_add`** to add an entry and **`tied_feedback_export`** to produce markdown or JSON you can paste into a GitHub issue (or send to the TIED project) to report what would improve the TIED methodology. Each entry has an `id`, `type`, `title`, `description`, optional `context`, and `created_at`. See [REQ-FEEDBACK_TO_TIED], [ARCH-FEEDBACK_STORAGE], [IMPL-MCP_FEEDBACK_TOOLS].
 
 ### Hybrid layout (detail .md and .yaml)
 

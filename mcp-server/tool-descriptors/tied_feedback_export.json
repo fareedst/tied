@@ -1,0 +1,21 @@
+{
+  "name": "tied_feedback_export",
+  "description": "Export all feedback entries in a format suitable for reporting to the TIED project. Returns markdown or JSON string for copy-paste into an issue or report.",
+  "arguments": {
+    "type": "object",
+    "properties": {
+      "format": {
+        "type": "string",
+        "enum": ["markdown", "json"],
+        "description": "Output format: markdown or json"
+      },
+      "base_path": {
+        "type": "string",
+        "description": "Override TIED base path (default: TIED_BASE_PATH or tied)"
+      }
+    },
+    "required": ["format"],
+    "additionalProperties": false,
+    "$schema": "http://json-schema.org/draft-07/schema#"
+  }
+}

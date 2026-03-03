@@ -37,6 +37,14 @@ import {
   convertDetailMarkdownToYaml,
 } from "../convert/index.js";
 import { validateConsistency } from "../consistency-validator.js";
+import {
+  loadFeedback,
+  appendEntry,
+  exportMarkdown,
+  exportJson,
+  buildReportSnippet,
+  type FeedbackType,
+} from "../feedback.js";
 
 const INDEX_ENUM = z.enum([
   "requirements",
@@ -875,6 +883,88 @@ export const allTools = [
         (summary.indexes as Record<string, unknown>)[name] = { token_count: tokenCount, details };
       }
       return textContent(JSON.stringify(summary, null, 2));
+    },
+  },
+  {
+    name: "tied_feedback_add",
+    config: {
+      description:
+        "Add a feedback entry (feature request, bug report, or methodology improvement). Creates or appends to tied/feedback.yaml. Returns ok, id, created_at, and optionally a copy-paste-ready markdown snippet for reporting to the TIED project.",
+      inputSchema: z.object({
+        type: z
+          .enum(["feature_request", "bug_report", "methodology_improvement"])
+          .describe("Type of feedback"),
+        title: z.string().min(1).describe("Short title for the feedback"),
+        description: z.string().min(1).describe("Description or body of the feedback"),
+        context: z
+          .string()
+          .optional()
+          .describe("Optional JSON string of context (e.g. project_id, tied_version)"),
+        include_report_snippet: z
+          .boolean()
+          .optional()
+          .default(true)
+          .describe("If true, include report_snippet (markdown) for pasting into TIED issue"),
+        base_path: z.string().optional().describe("Override TIED base path (default: TIED_BASE_PATH or tied)"),
+      }),
+    },
+    handler: async (args: {
+      type: FeedbackType;
+      title: string;
+      description: string;
+      context?: string;
+      include_report_snippet?: boolean;
+      base_path?: string;
+    }) => {
+      let contextObj: Record<string, unknown> | undefined;
+      if (args.context) {
+        try {
+          const parsed = JSON.parse(args.context) as unknown;
+          if (typeof parsed === "object" && parsed !== null && !Array.isArray(parsed)) {
+            contextObj = parsed as Record<string, unknown>;
+          }
+        } catch {
+          return textContent(
+            JSON.stringify({ ok: false, error: "context must be valid JSON object" }, null, 2)
+          );
+        }
+      }
+      const result = appendEntry(
+        {
+          type: args.type,
+          title: args.title,
+          description: args.description,
+          context: contextObj,
+        },
+        args.base_path
+      );
+      if (!result.ok) {
+        return textContent(JSON.stringify(result, null, 2));
+      }
+      const out: Record<string, unknown> = { ok: true, id: result.id, created_at: result.created_at };
+      if (args.include_report_snippet !== false) {
+        const data = loadFeedback(args.base_path);
+        const entry = data.entries.find((e) => e.id === result.id);
+        if (entry) out.report_snippet = buildReportSnippet(entry);
+      }
+      return textContent(JSON.stringify(out, null, 2));
+    },
+  },
+  {
+    name: "tied_feedback_export",
+    config: {
+      description:
+        "Export all feedback entries in a format suitable for reporting to the TIED project. Returns markdown or JSON string for copy-paste into an issue or report.",
+      inputSchema: z.object({
+        format: z.enum(["markdown", "json"]).describe("Output format: markdown or json"),
+        base_path: z.string().optional().describe("Override TIED base path (default: TIED_BASE_PATH or tied)"),
+      }),
+    },
+    handler: async (args: { format: "markdown" | "json"; base_path?: string }) => {
+      const data = loadFeedback(args.base_path);
+      const output =
+        args.format === "json" ? exportJson(data.entries) : exportMarkdown(data.entries);
+      return textContent(output);
     },
   },
 ];

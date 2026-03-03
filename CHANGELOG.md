@@ -9,6 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **MCP feedback tools** ([REQ-FEEDBACK_TO_TIED], [ARCH-FEEDBACK_STORAGE], [IMPL-MCP_FEEDBACK_TOOLS]) — Projects and users can submit feature requests, bug reports, and methodology improvement suggestions and export them for reporting to the TIED project.
+  - **`tied_feedback_add`**: Add a feedback entry (type: feature_request | bug_report | methodology_improvement) with title, description, optional context. Creates or appends to `tied/feedback.yaml`. Returns ok, id, created_at, and optionally a copy-paste-ready markdown snippet for a TIED issue.
+  - **`tied_feedback_export`**: Export all feedback entries as markdown or JSON for copy-paste into an issue or report.
+  - **Storage**: Single file `{TIED_BASE_PATH}/feedback.yaml` with top-level `entries` array; each entry has id, type, title, description, optional context, created_at (ISO 8601).
+  - **TIED docs**: New requirement REQ-FEEDBACK_TO_TIED, architecture decision ARCH-FEEDBACK_STORAGE, implementation decision IMPL-MCP_FEEDBACK_TOOLS with detail files and essence_pseudocode; tokens registered in semantic-tokens.template.yaml and index templates.
+  - **mcp-server**: New module `src/feedback.ts` (load/append/export) and unit tests `src/feedback.test.ts`; tool descriptors in `mcp-server/tool-descriptors/`.
+  - **Docs**: mcp-server/README.md updated with feedback tools table and "Feedback (report to TIED)" subsection; main README MCP API line updated.
+
+- **New feature process (`[PROC-NEW_FEATURE]`)** — Top-level procedure for implementing a new feature from a user prompt.
+  - **docs/new-feature-process.md**: Flow diagram (user prompt → commit), governing process and tied-yaml MCP usage, step-by-step procedure aligned with PROC-TIED_DEV_CYCLE, and post-implementation steps (sync REQ/ARCH/IMPL, unit/e2e tests, README/CHANGELOG, commit). Direct YAML edits must be documented and validated with `yq -i -P`.
+  - **tied/processes.md**: New section `[PROC-NEW_FEATURE]` referencing the full procedure and diagram.
+  - **tied/semantic-tokens.yaml**: Registered `PROC-NEW_FEATURE`.
+  - **CONTRIBUTING.md**: Commit message guidelines (one session commit; reference main REQ/ARCH/IMPL tokens).
+
 - **Test strategy and E2E-only minimization** ([PROC-TEST_STRATEGY], [REQ-MODULE_VALIDATION])
   - **processes.template.md**: New process `[PROC-TEST_STRATEGY]` — Test strategy and coverage (minimize untested code). Principles: E2E is expensive; unit + integration cover logic; IMPL–test alignment; coverage gates; minimize E2E-only code. Activities: run coverage and coverage-gap report; document E2E-only IMPLs with `e2e_only_reason` or `test_coverage_note`.
   - **processes.template.md**: New process `[PROC-TIED_DEV_CYCLE]` — TIED development cycle (session workflow). Nine steps: Plan from TIED; Author TIED docs (pseudo-code + tokens); Add and align tests; Implement to tests (TDD); Implement minimal glue; Validate and close test gaps; Sync TIED to code and tests; Update README and CHANGELOG; Write commit message. Supports traceability and token audit/validation.

@@ -204,6 +204,49 @@ PROC-TIED_DEV_CYCLE:
     registered: 2026-03-01
     last_updated: 2026-03-01
 
+REQ-FEEDBACK_TO_TIED:
+  type: REQ
+  name: Feedback to TIED (Feature Requests, Bug Reports, Methodology)
+  category: Functional
+  status: Active
+  description: "Projects and users can submit feature requests, bug reports, and methodology improvement suggestions; store under TIED tree and export for reporting to TIED project"
+  cross_references:
+    - ARCH-FEEDBACK_STORAGE
+    - IMPL-MCP_FEEDBACK_TOOLS
+  source_index: requirements.yaml
+  detail_file: requirements/REQ-FEEDBACK_TO_TIED.yaml
+  metadata:
+    registered: 2026-03-03
+    last_updated: 2026-03-03
+
+ARCH-FEEDBACK_STORAGE:
+  type: ARCH
+  name: Feedback Storage for TIED Reporting
+  status: Active
+  description: "Feedback stored in single file tied/feedback.yaml; MCP tools read/write via base path resolution"
+  cross_references:
+    - REQ-FEEDBACK_TO_TIED
+    - IMPL-MCP_FEEDBACK_TOOLS
+  source_index: architecture-decisions.yaml
+  detail_file: architecture-decisions/ARCH-FEEDBACK_STORAGE.yaml
+  metadata:
+    registered: 2026-03-03
+    last_updated: 2026-03-03
+
+IMPL-MCP_FEEDBACK_TOOLS:
+  type: IMPL
+  name: MCP Feedback Tools
+  status: Active
+  description: "Two MCP tools (tied_feedback_add, tied_feedback_export) and feedback module for load/append/export"
+  cross_references:
+    - ARCH-FEEDBACK_STORAGE
+    - REQ-FEEDBACK_TO_TIED
+  source_index: implementation-decisions.yaml
+  detail_file: implementation-decisions/IMPL-MCP_FEEDBACK_TOOLS.yaml
+  metadata:
+    registered: 2026-03-03
+    last_updated: 2026-03-03
+
 # ---
 # Template Record - Copy this block to create new tokens
 # ---

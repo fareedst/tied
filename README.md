@@ -92,7 +92,7 @@ If you do not use MCP, run `./bootstrap_without_mcp.sh /path/to/project` to get 
    - Verify all documentation is up-to-date and mirrors the semantic tokens referenced by the finished code and tests
    - Ensure the semantic tokens registered in `semantic-tokens.yaml` match the tokens used across code, tests, and documentation for these changes
 
-See [LLM Response Guide](llm-response-guide.md) for detailed information about how AI assistants should respond when working with TIED.
+See [LLM Response Guide](llm-response-guide.md) for detailed information about how AI assistants should respond when working with TIED. For the full step-by-step procedure from user prompt to commit (including diagram), see **[docs/new-feature-process.md](docs/new-feature-process.md)** (`[PROC-NEW_FEATURE]`). Commit messages per session: see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ### Phase Flow Shortcut
 ```mermaid
@@ -136,7 +136,7 @@ This repository contains:
 - `implementation-decisions.template.md` - Template guide for implementation decisions documentation
 - `implementation-decisions.template.yaml` - YAML database template for implementation decisions with `[IMPL-*]` tokens **(v1.5.0: structured fields for traceability, rationale, code_locations, metadata)**
 - `implementation-decisions.template/` - Individual implementation decision detail file examples
-- `processes.template.md` - Template for process tracking including `[PROC-YAML_DB_OPERATIONS]`, `[PROC-TEST_STRATEGY]` (test strategy and E2E-only minimization), and `[PROC-TIED_DEV_CYCLE]` (session workflow)
+- `processes.template.md` - Template for process tracking including `[PROC-YAML_DB_OPERATIONS]`, `[PROC-TEST_STRATEGY]`, `[PROC-TIED_DEV_CYCLE]`, and `[PROC-NEW_FEATURE]` (new feature implementation; full procedure in [docs/new-feature-process.md](docs/new-feature-process.md))
 - `semantic-tokens.template.md` - Template for semantic token registry
 - `semantic-tokens.template.yaml` - YAML registry of REQ/ARCH/IMPL/PROC tokens (minimal, foundational for bootstrap)
 - `tasks.template.md` - **Optional** template for task tracking (not required by methodology)
@@ -201,7 +201,7 @@ This works for **any language or stack**: TIED is methodology-level; the server 
 
 ### MCP API
 
-**Tools**: Index read, list tokens, filter by field, validate YAML; config (`tied_config_get_base_path`); traceability (`get_decisions_for_requirement`, `get_requirements_for_decision`); index insert/update; detail read (single and batch `yaml_detail_read_many`), detail list/create/update/delete; create-with-detail (`tied_token_create_with_detail`); monolithic-to-TIED conversion (per-doc or all at once).
+**Tools**: Index read, list tokens, filter by field, validate YAML; config (`tied_config_get_base_path`); traceability (`get_decisions_for_requirement`, `get_requirements_for_decision`); index insert/update; detail read (single and batch `yaml_detail_read_many`), detail list/create/update/delete; create-with-detail (`tied_token_create_with_detail`); feedback (`tied_feedback_add`, `tied_feedback_export`) for feature requests, bug reports, and methodology reporting to the TIED project; monolithic-to-TIED conversion (per-doc or all at once).
 
 **Resources**: Full indexes (`tied://requirements`, `tied://architecture-decisions`, `tied://implementation-decisions`, `tied://semantic-tokens`); single record by token (`tied://requirement/{token}`, `tied://decision/{token}`); single-token detail (`tied://requirement/{token}/detail`, `tied://decision/{token}/detail`); all details by type (`tied://details/requirements`, `tied://details/architecture`, `tied://details/implementation`).
 
