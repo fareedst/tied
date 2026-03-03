@@ -57,7 +57,7 @@ flowchart TB
     subgraph release [8–9. Release and commit]
         UpdateReadme["Update README.md for changes"]
         UpdateChangelog["Update CHANGELOG.md for changes"]
-        CommitMsg["Write commit message per CONTRIBUTING.md"]
+        CommitMsg["Write commit message per PROC-COMMIT_MESSAGES (processes.md)"]
     end
 
     UserPrompt --> ReadREQ
@@ -97,7 +97,7 @@ flowchart TB
 | **Validate** | Full test suite; fill unit test gaps; run token/consistency validation. |
 | **Sync** | REQ/ARCH/IMPL and pseudo-code match final code/tests; sync indexes. |
 | **E2E** | Recommend e2e; implement after approval. |
-| **Release** | README, CHANGELOG, commit per CONTRIBUTING. |
+| **Release** | README, CHANGELOG, commit per [PROC-COMMIT_MESSAGES](../processes.md). |
 
 ---
 
@@ -135,4 +135,4 @@ flowchart TB
 8. **Unit tests** — If any unit tests are missing, add them and ensure they reference the appropriate REQ/ARCH/IMPL tokens.
 9. **E2E tests** — Recommend e2e tests where appropriate (critical user journeys). After approval, implement them.
 10. **README and CHANGELOG** — Update [README.md](../README.md) and [CHANGELOG.md](../CHANGELOG.md) for all changes in the session.
-11. **Commit** — Write a single commit message for the entire session **per [CONTRIBUTING.md](../CONTRIBUTING.md)**. If the project has no CONTRIBUTING.md, follow project convention for commit message format (e.g. conventional commits, scope, reference to main REQ/ARCH/IMPL tokens).
+11. **Commit** — Write a single commit message for the entire session **per [PROC-COMMIT_MESSAGES](../processes.md)**. In projects set up with TIED, use **tied/commit-guidelines.md** as the quick reference (see also [CONTRIBUTING.md](../CONTRIBUTING.md) for the TIED repo). Use the format and types defined in processes.md; reference main REQ/ARCH/IMPL tokens in the body or footer when relevant.

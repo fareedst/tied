@@ -7,13 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **Template file naming** — Removed `.template` infix from TIED template files; same filename is used at repo root (template) and in `tied/` (project index). Location distinguishes use.
+  - Renamed: `requirements.template.md` → `requirements.md`, `requirements.template.yaml` → `requirements.yaml`, and similarly for `architecture-decisions`, `implementation-decisions`, `processes`, `semantic-tokens`, `tasks` (`.md` and `.yaml` where applicable).
+  - **copy_files.sh**: Copies root files into `tied/` with the same filename (no suffix stripping).
+  - **mcp-server/src/yaml-loader.ts**: Resolves index path as `{basePath}/{index}.yaml` then `cwd/{index}.yaml`; removed `TEMPLATE_FILES` fallbacks.
+  - **Docs**: README, AGENTS.md, ai-principles.md, TIED.md, ANNOUNCEMENT.md, migrate-*.md, and mcp-server references updated to the new names and location semantics.
+  - **mcp-server**: Added `yaml-loader.test.ts` (unit tests for `getBasePath` and `resolveIndexPath` preferring base then cwd); exported `clearBasePathCache()` for tests. `copy_files.sh`: hooks copy is conditional on source existing so bootstrap works without `.cursor/hooks.json`.
+  - **mcp-server**: E2E tests in `src/e2e/bootstrap-and-load.test.ts` — run `copy_files.sh` into a temp dir, set `TIED_BASE_PATH` to `tied/`, then assert the loader reads `requirements` and `semantic-tokens` indexes from the copied files. Included in `npm test`.
+
 ### Added
 
 - **MCP feedback tools** ([REQ-FEEDBACK_TO_TIED], [ARCH-FEEDBACK_STORAGE], [IMPL-MCP_FEEDBACK_TOOLS]) — Projects and users can submit feature requests, bug reports, and methodology improvement suggestions and export them for reporting to the TIED project.
   - **`tied_feedback_add`**: Add a feedback entry (type: feature_request | bug_report | methodology_improvement) with title, description, optional context. Creates or appends to `tied/feedback.yaml`. Returns ok, id, created_at, and optionally a copy-paste-ready markdown snippet for a TIED issue.
   - **`tied_feedback_export`**: Export all feedback entries as markdown or JSON for copy-paste into an issue or report.
   - **Storage**: Single file `{TIED_BASE_PATH}/feedback.yaml` with top-level `entries` array; each entry has id, type, title, description, optional context, created_at (ISO 8601).
-  - **TIED docs**: New requirement REQ-FEEDBACK_TO_TIED, architecture decision ARCH-FEEDBACK_STORAGE, implementation decision IMPL-MCP_FEEDBACK_TOOLS with detail files and essence_pseudocode; tokens registered in semantic-tokens.template.yaml and index templates.
+  - **TIED docs**: New requirement REQ-FEEDBACK_TO_TIED, architecture decision ARCH-FEEDBACK_STORAGE, implementation decision IMPL-MCP_FEEDBACK_TOOLS with detail files and essence_pseudocode; tokens registered in semantic-tokens.yaml and index files.
   - **mcp-server**: New module `src/feedback.ts` (load/append/export) and unit tests `src/feedback.test.ts`; tool descriptors in `mcp-server/tool-descriptors/`.
   - **Docs**: mcp-server/README.md updated with feedback tools table and "Feedback (report to TIED)" subsection; main README MCP API line updated.
 

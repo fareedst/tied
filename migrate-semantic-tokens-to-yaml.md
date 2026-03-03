@@ -70,7 +70,7 @@ Before starting migration:
 - [ ] Confirm you're using STDD v1.5.0 or earlier (with inline token registries in `semantic-tokens.md`)
 - [ ] Back up your project (or ensure git history is clean)
 - [ ] Identify all token types in use: REQ, ARCH, IMPL, TEST, PROC
-- [ ] Review the new template: `semantic-tokens.template.yaml`
+- [ ] Review the new template: `semantic-tokens.yaml`
 - [ ] Ensure you have a YAML parser available (`yq`, Python's `pyyaml`, etc.)
 
 ---
@@ -83,8 +83,8 @@ From the STDD repository, copy the new template files to your project:
 
 ```bash
 # From STDD repository root
-cp semantic-tokens.template.yaml /path/to/your/project/tied/semantic-tokens.yaml
-cp semantic-tokens.template.md /path/to/your/project/tied/semantic-tokens.md.new
+cp semantic-tokens.yaml /path/to/your/project/tied/semantic-tokens.yaml
+cp semantic-tokens.md /path/to/your/project/tied/semantic-tokens.md.new
 
 # Back up your current semantic-tokens.md
 mv /path/to/your/project/tied/semantic-tokens.md /path/to/your/project/tied/semantic-tokens.md.backup

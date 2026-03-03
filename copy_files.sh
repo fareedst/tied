@@ -54,7 +54,8 @@ fi
 MCP_JSON="${TARGET_PROJECT_DIR}/.cursor/mcp.json"
 HOOKS_JSON="${TARGET_PROJECT_DIR}/.cursor/hooks.json"
 
-if true; then # [[ ! -f "$HOOKS_JSON" ]]; then
+if [[ -f "${SCRIPT_DIR}/.cursor/hooks.json" ]]; then
+  mkdir -p "${CURSOR_DIR}"
   cp "${SCRIPT_DIR}/.cursor/hooks.json" "$HOOKS_JSON"
   sed -i '' "s|${SCRIPT_DIR}/.cursor/logs|${TARGET_PROJECT_DIR}/.cursor/logs|g" "$HOOKS_JSON"
 fi
@@ -141,26 +142,24 @@ done
 
 echo "Copied ${#BASE_FILES[@]} base files into ${TARGET_PROJECT_DIR}."
 
+# At repo root these files are templates; in tied/ they are the project indexes (same filename).
 TEMPLATE_FILES=(
-  "requirements.template.md"
-  "requirements.template.yaml"
-  "architecture-decisions.template.md"
-  "architecture-decisions.template.yaml"
-  "implementation-decisions.template.md"
-  "implementation-decisions.template.yaml"
-  "processes.template.md"
-  "semantic-tokens.template.md"
-  "semantic-tokens.template.yaml"
-  "tasks.template.md"
+  "requirements.md"
+  "requirements.yaml"
+  "architecture-decisions.md"
+  "architecture-decisions.yaml"
+  "implementation-decisions.md"
+  "implementation-decisions.yaml"
+  "processes.md"
+  "semantic-tokens.md"
+  "semantic-tokens.yaml"
+  "tasks.md"
+  "commit-guidelines.md"
 )
 
-for template in "${TEMPLATE_FILES[@]}"; do
-  src="${SCRIPT_DIR}/${template}"
-  
-  # Strip .template from the filename, preserving the actual extension
-  base="${template%.template.*}"
-  ext="${template##*.}"
-  dest="${TIED_DIR}/${base}.${ext}"
+for f in "${TEMPLATE_FILES[@]}"; do
+  src="${SCRIPT_DIR}/${f}"
+  dest="${TIED_DIR}/${f}"
 
   if [[ ! -f "${src}" ]]; then
     echo "Missing template file: ${src}" >&2

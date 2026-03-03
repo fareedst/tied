@@ -1,6 +1,6 @@
 /**
  * Unit tests for IMPL YAML record shape (TIED v2.2.0).
- * [IMPL] Validates implementationToYamlRecord output against canonical schema from implementation-decisions.template.md.
+ * [IMPL] Validates implementationToYamlRecord output against canonical schema from implementation-decisions.md.
  */
 
 import { describe, it } from "node:test";

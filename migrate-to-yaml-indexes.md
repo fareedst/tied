@@ -83,7 +83,7 @@ Before starting migration:
 - [ ] Confirm you're using STDD v1.3.0 or earlier (with Markdown table indexes)
 - [ ] Back up your project (or ensure git history is clean)
 - [ ] Identify all three index files: `requirements.md`, `architecture-decisions.md`, `implementation-decisions.md`
-- [ ] Review the new templates: `requirements.template.yaml`, `architecture-decisions.template.yaml`, `implementation-decisions.template.yaml`
+- [ ] Review the new templates: `requirements.yaml`, `architecture-decisions.yaml`, `implementation-decisions.yaml`
 - [ ] Ensure you have a YAML parser available (`yq`, Python's `pyyaml`, etc.)
 
 ---
@@ -96,14 +96,14 @@ From the STDD repository, copy these new files to your project:
 
 ```bash
 # From STDD repository root
-cp requirements.template.yaml /path/to/your/project/tied/requirements.yaml
-cp architecture-decisions.template.yaml /path/to/your/project/tied/architecture-decisions.yaml
-cp implementation-decisions.template.yaml /path/to/your/project/tied/implementation-decisions.yaml
+cp requirements.yaml /path/to/your/project/tied/requirements.yaml
+cp architecture-decisions.yaml /path/to/your/project/tied/architecture-decisions.yaml
+cp implementation-decisions.yaml /path/to/your/project/tied/implementation-decisions.yaml
 
 # Also update the guide files
-cp requirements.template.md /path/to/your/project/tied/requirements.md
-cp architecture-decisions.template.md /path/to/your/project/tied/architecture-decisions.md
-cp implementation-decisions.template.md /path/to/your/project/tied/implementation-decisions.md
+cp requirements.md /path/to/your/project/tied/requirements.md
+cp architecture-decisions.md /path/to/your/project/tied/architecture-decisions.md
+cp implementation-decisions.md /path/to/your/project/tied/implementation-decisions.md
 ```
 
 ### Step 2: Migrate Requirements Index
@@ -505,9 +505,9 @@ Download the new v1.5.0 templates:
 
 ```bash
 # From STDD repository
-cp requirements.template.yaml /path/to/your/project/tied/
-cp architecture-decisions.template.yaml /path/to/your/project/tied/
-cp implementation-decisions.template.yaml /path/to/your/project/tied/
+cp requirements.yaml /path/to/your/project/tied/
+cp architecture-decisions.yaml /path/to/your/project/tied/
+cp implementation-decisions.yaml /path/to/your/project/tied/
 ```
 
 #### Step 3: Migrate Each YAML File
@@ -676,10 +676,10 @@ After automated migration:
 #### Step 6: Update Guide Files
 
 ```bash
-cp requirements.template.md /path/to/your/project/tied/requirements.md
-cp architecture-decisions.template.md /path/to/your/project/tied/architecture-decisions.md
-cp implementation-decisions.template.md /path/to/your/project/tied/implementation-decisions.md
-cp processes.template.md /path/to/your/project/tied/processes.md
+cp requirements.md /path/to/your/project/tied/requirements.md
+cp architecture-decisions.md /path/to/your/project/tied/architecture-decisions.md
+cp implementation-decisions.md /path/to/your/project/tied/implementation-decisions.md
+cp processes.md /path/to/your/project/tied/processes.md
 ```
 
 #### Step 7: Validate

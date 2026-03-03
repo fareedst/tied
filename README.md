@@ -4,7 +4,7 @@
 
 > **Note**: This methodology was previously known as STDD (Semantic Token-Driven Development). It has been renamed to TIED (Token-Integrated Engineering & Development) to better reflect its core value proposition: semantic tokens "tie" code to intent, making it impossible to modify code without confronting related context.
 
-> **v2.2.0**: Task tracking via `tasks.md` is **optional**. The core TIED value is in the **traceability chain** (requirements → architecture → implementation → tests → code) maintained through semantic tokens, not in task tracking artifacts. Agents may maintain planning state in-session or document work breakdown in `implementation-decisions`. Use `tasks.template.md` only if your project benefits from a shared task list.
+> **v2.2.0**: Task tracking via `tasks.md` is **optional**. The core TIED value is in the **traceability chain** (requirements → architecture → implementation → tests → code) maintained through semantic tokens, not in task tracking artifacts. Agents may maintain planning state in-session or document work breakdown in `implementation-decisions`. Use `tasks.md` (at repo root) only if your project benefits from a shared task list.
 
 This repository ([https://github.com/fareedst/tied](https://github.com/fareedst/tied)) contains the **Token-Integrated Engineering & Development (TIED)** methodology template that can be used as a base for development projects in any language.
 
@@ -26,7 +26,7 @@ The primary way to work with TIED is via the MCP server; a standalone bootstrap 
 
 ### Step 1: Copy Templates to Your Project
 
-**Recommended:** Download or clone the TIED repository somewhere convenient, then run `./copy_files.sh /path/to/project` (or `./copy_files.sh` if you are already in the project directory). The script copies every `.template` file into the target project's `tied/` directory, removes the `.template` suffix for you, and will never overwrite an existing `AGENTS.md` or `.cursorrules` file that may already be present in the destination.
+**Recommended:** Download or clone the TIED repository somewhere convenient, then run `./copy_files.sh /path/to/project` (or `./copy_files.sh` if you are already in the project directory). The script copies the template files from the repo root into the target project's `tied/` directory with the same filename (at root they are templates; in `tied/` they are the project indexes). It will never overwrite an existing `AGENTS.md` or `.cursorrules` file that may already be present in the destination.
 
 ```bash
 # From the TIED repo root—adjust the target path as needed
@@ -38,27 +38,27 @@ The primary way to work with TIED is via the MCP server; a standalone bootstrap 
 ```bash
 # In your project directory (after cloning/downloading the TIED repository)
 mkdir -p tied
-cp requirements.template.md tied/requirements.md
-cp requirements.template.yaml tied/requirements.yaml
+cp requirements.md tied/requirements.md
+cp requirements.yaml tied/requirements.yaml
 mkdir -p tied/requirements
-cp requirements.template/*.md tied/requirements/
-cp architecture-decisions.template.md tied/architecture-decisions.md
-cp architecture-decisions.template.yaml tied/architecture-decisions.yaml
+cp requirements.template/*.yaml tied/requirements/
+cp architecture-decisions.md tied/architecture-decisions.md
+cp architecture-decisions.yaml tied/architecture-decisions.yaml
 mkdir -p tied/architecture-decisions
-cp architecture-decisions.template/*.md tied/architecture-decisions/
-cp implementation-decisions.template.md tied/implementation-decisions.md
-cp implementation-decisions.template.yaml tied/implementation-decisions.yaml
+cp architecture-decisions.template/*.yaml tied/architecture-decisions/
+cp implementation-decisions.md tied/implementation-decisions.md
+cp implementation-decisions.yaml tied/implementation-decisions.yaml
 mkdir -p tied/implementation-decisions
-cp implementation-decisions.template/*.md tied/implementation-decisions/
-cp processes.template.md tied/processes.md
-cp semantic-tokens.template.md tied/semantic-tokens.md
-cp semantic-tokens.template.yaml tied/semantic-tokens.yaml
-# Optional: cp tasks.template.md tied/tasks.md  # Task tracking is optional
+cp implementation-decisions.template/*.yaml tied/implementation-decisions/
+cp processes.md tied/processes.md
+cp semantic-tokens.md tied/semantic-tokens.md
+cp semantic-tokens.yaml tied/semantic-tokens.yaml
+# Optional: cp tasks.md tied/tasks.md  # Task tracking is optional
 cp AGENTS.md AGENTS.md              # Copy canonical AI agent guide
 cp .cursorrules .cursorrules        # Copy Cursor loader if using Cursor
 ```
 
-**Important**: Each project should have its own copies of these files. The template files remain in the [TIED repository](https://github.com/fareedst/tied) as reference templates.
+**Important**: Each project should have its own copies of these files. At the TIED repo root the files are templates; the same filenames in your project's `tied/` directory are the project indexes.
 
 ### Step 2 (optional): Use the MCP server
 
@@ -92,7 +92,7 @@ If you do not use MCP, run `./bootstrap_without_mcp.sh /path/to/project` to get 
    - Verify all documentation is up-to-date and mirrors the semantic tokens referenced by the finished code and tests
    - Ensure the semantic tokens registered in `semantic-tokens.yaml` match the tokens used across code, tests, and documentation for these changes
 
-See [LLM Response Guide](llm-response-guide.md) for detailed information about how AI assistants should respond when working with TIED. For the full step-by-step procedure from user prompt to commit (including diagram), see **[docs/new-feature-process.md](docs/new-feature-process.md)** (`[PROC-NEW_FEATURE]`). Commit messages per session: see [CONTRIBUTING.md](CONTRIBUTING.md).
+See [LLM Response Guide](llm-response-guide.md) for detailed information about how AI assistants should respond when working with TIED. For the full step-by-step procedure from user prompt to commit (including diagram), see **[docs/new-feature-process.md](docs/new-feature-process.md)** (`[PROC-NEW_FEATURE]`). Commit messages per session: see [CONTRIBUTING.md](CONTRIBUTING.md) (TIED repo contributors). Projects set up with `copy_files.sh` get **tied/commit-guidelines.md** as the commit message quick reference.
 
 ### Phase Flow Shortcut
 ```mermaid
@@ -127,21 +127,25 @@ This repository contains:
 - `VERSION` - Current methodology version
 
 ### Project Template Files (Copy to Your Project)
-- `requirements.template.md` - Template guide for requirements documentation
-- `requirements.template.yaml` - YAML database template for requirements with `[REQ-*]` tokens **(v1.5.0: structured fields for traceability, rationale, criteria, metadata)**
-- `requirements.template/` - Individual requirement detail file examples
-- `architecture-decisions.template.md` - Template guide for architecture decisions documentation
-- `architecture-decisions.template.yaml` - YAML database template for architecture decisions with `[ARCH-*]` tokens **(v1.5.0: structured fields for traceability, rationale, alternatives, metadata)**
-- `architecture-decisions.template/` - Individual architecture decision detail file examples
-- `implementation-decisions.template.md` - Template guide for implementation decisions documentation
-- `implementation-decisions.template.yaml` - YAML database template for implementation decisions with `[IMPL-*]` tokens **(v1.5.0: structured fields for traceability, rationale, code_locations, metadata)**
-- `implementation-decisions.template/` - Individual implementation decision detail file examples
-- `processes.template.md` - Template for process tracking including `[PROC-YAML_DB_OPERATIONS]`, `[PROC-TEST_STRATEGY]`, `[PROC-TIED_DEV_CYCLE]`, and `[PROC-NEW_FEATURE]` (new feature implementation; full procedure in [docs/new-feature-process.md](docs/new-feature-process.md))
-- `semantic-tokens.template.md` - Template for semantic token registry
-- `semantic-tokens.template.yaml` - YAML registry of REQ/ARCH/IMPL/PROC tokens (minimal, foundational for bootstrap)
-- `tasks.template.md` - **Optional** template for task tracking (not required by methodology)
 
-The YAML index templates (`*.template.yaml`) contain only methodology-relevant records; new REQ/ARCH/IMPL can be added via the MCP server tools or by copying the template block at the bottom of each index file (or a template detail file such as `requirements.template/REQ-IDENTIFIER.yaml`).
+At repo root these files are templates; in your project's `tied/` they are the project indexes (same filename, location distinguishes use).
+
+- `requirements.md` - Template guide for requirements documentation
+- `requirements.yaml` - YAML database template for requirements with `[REQ-*]` tokens **(v1.5.0: structured fields for traceability, rationale, criteria, metadata)**
+- `requirements.template/` - Individual requirement detail file examples
+- `architecture-decisions.md` - Template guide for architecture decisions documentation
+- `architecture-decisions.yaml` - YAML database template for architecture decisions with `[ARCH-*]` tokens **(v1.5.0: structured fields for traceability, rationale, alternatives, metadata)**
+- `architecture-decisions.template/` - Individual architecture decision detail file examples
+- `implementation-decisions.md` - Template guide for implementation decisions documentation
+- `implementation-decisions.yaml` - YAML database template for implementation decisions with `[IMPL-*]` tokens **(v1.5.0: structured fields for traceability, rationale, code_locations, metadata)**
+- `implementation-decisions.template/` - Individual implementation decision detail file examples
+- `processes.md` - Template for process tracking including `[PROC-YAML_DB_OPERATIONS]`, `[PROC-TEST_STRATEGY]`, `[PROC-TIED_DEV_CYCLE]`, `[PROC-COMMIT_MESSAGES]`, `[PROC-RELEASE]`, and `[PROC-NEW_FEATURE]` (new feature implementation; full procedure in [docs/new-feature-process.md](docs/new-feature-process.md))
+- `commit-guidelines.md` - Commit message quick reference for TIED projects (full format in processes.md § PROC-COMMIT_MESSAGES)
+- `semantic-tokens.md` - Template for semantic token registry
+- `semantic-tokens.yaml` - YAML registry of REQ/ARCH/IMPL/PROC tokens (minimal, foundational for bootstrap)
+- `tasks.md` - **Optional** template for task tracking (not required by methodology)
+
+The YAML index files at root contain only methodology-relevant records; new REQ/ARCH/IMPL can be added via the MCP server tools or by copying the template block at the bottom of each index file (or a template detail file such as `requirements.template/REQ-IDENTIFIER.yaml`).
 
 ## Project File Structure
 

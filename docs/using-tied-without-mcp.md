@@ -14,7 +14,7 @@ Or use `./copy_files.sh /path/to/project` — you get the same result. Your proj
 
 - YAML indexes: `requirements.yaml`, `architecture-decisions.yaml`, `implementation-decisions.yaml`, `semantic-tokens.yaml`
 - YAML detail files in `tied/requirements/`, `tied/architecture-decisions/`, `tied/implementation-decisions/`
-- Guide documents: `requirements.md`, `architecture-decisions.md`, `implementation-decisions.md`, etc.
+- Guide documents: `requirements.md`, `architecture-decisions.md`, `implementation-decisions.md`, `commit-guidelines.md`, etc.
 
 ## Managing REQ/ARCH/IMPL
 

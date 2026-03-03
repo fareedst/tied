@@ -1,6 +1,6 @@
 /**
  * YAML index loader with path resolution for TIED indexes.
- * Supports tied/ layout and template-only repo (root *.template.yaml).
+ * Same filename everywhere: at repo root the file is the template; in tied/ it is the project index.
  */
 
 import fs from "node:fs";
@@ -20,14 +20,14 @@ const INDEX_FILES: Record<IndexName, string> = {
   "semantic-tokens": "semantic-tokens.yaml",
 };
 
-const TEMPLATE_FILES: Record<IndexName, string> = {
-  requirements: "requirements.template.yaml",
-  architecture: "architecture-decisions.template.yaml",
-  implementation: "implementation-decisions.template.yaml",
-  "semantic-tokens": "semantic-tokens.template.yaml",
-};
-
 let cachedBasePath: string | null = null;
+
+/**
+ * Clear cached base path (for tests). [IMPL] Allows tests to re-resolve TIED_BASE_PATH.
+ */
+export function clearBasePathCache(): void {
+  cachedBasePath = null;
+}
 
 /**
  * Resolve base path for YAML indexes. Uses TIED_BASE_PATH env; default "tied".
@@ -41,18 +41,15 @@ export function getBasePath(): string {
 }
 
 /**
- * Resolve path to an index file. Tries {basePath}/{index}.yaml then
- * {basePath}/{index.template.yaml} or {cwd}/{index.template.yaml} for template-only repos.
+ * Resolve path to an index file. Tries {basePath}/{index}.yaml (e.g. tied/requirements.yaml),
+ * then process.cwd()/{index}.yaml (root template when tied/ has no index).
  */
 export function resolveIndexPath(index: IndexName): string {
   const base = getBasePath();
   const fileName = INDEX_FILES[index];
-  const templateName = TEMPLATE_FILES[index];
   const primary = path.join(base, fileName);
   if (fs.existsSync(primary)) return primary;
-  const fallbackInBase = path.join(base, templateName);
-  if (fs.existsSync(fallbackInBase)) return fallbackInBase;
-  const fallbackCwd = path.resolve(process.cwd(), templateName);
+  const fallbackCwd = path.resolve(process.cwd(), fileName);
   if (fs.existsSync(fallbackCwd)) return fallbackCwd;
   return primary;
 }

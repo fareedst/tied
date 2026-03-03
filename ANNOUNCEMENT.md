@@ -42,14 +42,17 @@ Getting started with STDD in a new project takes just **5 minutes**:
 ### Step 1: Copy Templates (2 minutes)
 
 ```bash
-# In your new project directory
-cp requirements.template.md requirements.md
-cp architecture-decisions.template.md architecture-decisions.md
-cp implementation-decisions.template.md implementation-decisions.md
-cp processes.template.md processes.md
-cp semantic-tokens.template.md semantic-tokens.md
-cp semantic-tokens.template.yaml semantic-tokens.yaml
-# Optional: cp tasks.template.md tasks.md  # Task tracking is optional
+# In your new project directory (copy from TIED repo root; same filename in tied/)
+cp requirements.md tied/requirements.md
+cp requirements.yaml tied/requirements.yaml
+cp architecture-decisions.md tied/architecture-decisions.md
+cp architecture-decisions.yaml tied/architecture-decisions.yaml
+cp implementation-decisions.md tied/implementation-decisions.md
+cp implementation-decisions.yaml tied/implementation-decisions.yaml
+cp processes.md tied/processes.md
+cp semantic-tokens.md tied/semantic-tokens.md
+cp semantic-tokens.yaml tied/semantic-tokens.yaml
+# Optional: cp tasks.md tied/tasks.md  # Task tracking is optional
 cp AGENTS.md AGENTS.md              # Canonical AI agent guide
 cp .cursorrules .cursorrules        # Cursor loader (optional)
 ```
@@ -103,12 +106,12 @@ The STDD v1.0.1 release includes:
 - **`ai-principles.md`** - Comprehensive principles and process guide
 - **`README.md`** - Getting started guide and usage instructions
 
-### Project Templates
-- **`requirements.template.md`** - Template for documenting requirements
-- **`architecture-decisions.template.md`** - Template for architecture decisions
-- **`implementation-decisions.template.md`** - Template for implementation decisions
-- **`semantic-tokens.template.md`** - Template for semantic token registry
-- **`tasks.template.md`** - **Optional** template for task tracking (not required by methodology)
+### Project Templates (at TIED repo root; copy into project's tied/ with same filename)
+- **`requirements.md`** - Template for documenting requirements
+- **`architecture-decisions.md`** - Template for architecture decisions
+- **`implementation-decisions.md`** - Template for implementation decisions
+- **`semantic-tokens.md`** - Template for semantic token registry
+- **`tasks.md`** - **Optional** template for task tracking (not required by methodology)
 
 ### AI Agent Integration
 - **`AGENTS.md`** - Canonical AI agent operating guide

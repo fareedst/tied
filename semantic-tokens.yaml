@@ -20,15 +20,12 @@
 #   source_index: Path to the YAML index that holds the full record (e.g., requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, processes.md)
 #   detail_file: Path to the detailed .yaml file (if one exists)
 #   metadata: Structured metadata with registered and last_updated dates
-
----
-
 REQ-TIED_SETUP:
   type: REQ
   name: TIED Methodology Setup
   category: Core Functional
   status: Active
-  description: "TIED methodology setup requirement"
+  description: TIED methodology setup requirement
   cross_references:
     - ARCH-TIED_STRUCTURE
     - IMPL-TIED_FILES
@@ -37,13 +34,12 @@ REQ-TIED_SETUP:
   metadata:
     registered: 2025-11-08
     last_updated: 2026-02-08
-
 REQ-MODULE_VALIDATION:
   type: REQ
   name: Independent Module Validation Before Integration
   category: Core Functional
   status: Active
-  description: "Independent module validation before integration requirement"
+  description: Independent module validation before integration requirement
   cross_references:
     - ARCH-MODULE_VALIDATION
     - IMPL-MODULE_VALIDATION
@@ -52,12 +48,11 @@ REQ-MODULE_VALIDATION:
   metadata:
     registered: 2025-01-27
     last_updated: 2026-02-08
-
 ARCH-TIED_STRUCTURE:
   type: ARCH
   name: TIED Project Structure
   status: Active
-  description: "TIED project structure decision"
+  description: TIED project structure decision
   cross_references:
     - REQ-TIED_SETUP
     - IMPL-TIED_FILES
@@ -66,12 +61,11 @@ ARCH-TIED_STRUCTURE:
   metadata:
     registered: 2025-12-18
     last_updated: 2026-02-08
-
 ARCH-MODULE_VALIDATION:
   type: ARCH
   name: Module Validation Strategy
   status: Active
-  description: "Module validation strategy decision"
+  description: Module validation strategy decision
   cross_references:
     - REQ-MODULE_VALIDATION
     - IMPL-MODULE_VALIDATION
@@ -80,12 +74,11 @@ ARCH-MODULE_VALIDATION:
   metadata:
     registered: 2025-12-18
     last_updated: 2026-02-08
-
 IMPL-TIED_FILES:
   type: IMPL
   name: TIED File Creation
   status: Active
-  description: "TIED file creation implementation"
+  description: TIED file creation implementation
   cross_references:
     - ARCH-TIED_STRUCTURE
     - REQ-TIED_SETUP
@@ -94,12 +87,11 @@ IMPL-TIED_FILES:
   metadata:
     registered: 2025-12-18
     last_updated: 2026-02-08
-
 IMPL-MODULE_VALIDATION:
   type: IMPL
   name: Module Validation Implementation
   status: Active
-  description: "Module validation implementation"
+  description: Module validation implementation
   cross_references:
     - ARCH-MODULE_VALIDATION
     - REQ-MODULE_VALIDATION
@@ -108,12 +100,11 @@ IMPL-MODULE_VALIDATION:
   metadata:
     registered: 2025-12-18
     last_updated: 2026-02-08
-
 PROC-PROJECT_SURVEY_AND_SETUP:
   type: PROC
   name: Project Survey and Setup Process
   status: Active
-  description: "Survey and readiness process supporting REQ-TIED_SETUP and ARCH-TIED_STRUCTURE"
+  description: Survey and readiness process supporting REQ-TIED_SETUP and ARCH-TIED_STRUCTURE
   cross_references:
     - REQ-TIED_SETUP
     - ARCH-TIED_STRUCTURE
@@ -122,12 +113,11 @@ PROC-PROJECT_SURVEY_AND_SETUP:
   metadata:
     registered: 2025-11-08
     last_updated: 2026-02-08
-
 PROC-BUILD_PIPELINE_VALIDATION:
   type: PROC
   name: Build Pipeline Validation Process
   status: Active
-  description: "Build/deploy validation tied to REQ-MODULE_VALIDATION"
+  description: Build/deploy validation tied to REQ-MODULE_VALIDATION
   cross_references:
     - REQ-MODULE_VALIDATION
   source_index: processes.md
@@ -135,36 +125,33 @@ PROC-BUILD_PIPELINE_VALIDATION:
   metadata:
     registered: 2025-11-08
     last_updated: 2026-02-08
-
 PROC-TOKEN_AUDIT:
   type: PROC
   name: Token Audit Process
   status: Active
-  description: "Mandatory checklist ensuring every requirement → architecture → implementation → code/test path is annotated and documented"
+  description: Mandatory checklist ensuring every requirement → architecture → implementation → code/test path is annotated and documented
   cross_references: []
   source_index: processes.md
   detail_file: null
   metadata:
     registered: 2025-11-08
     last_updated: 2026-02-08
-
 PROC-TOKEN_VALIDATION:
   type: PROC
   name: Token Validation Process
   status: Active
-  description: "Automated validation workflow that proves all referenced tokens exist in the registry"
+  description: Automated validation workflow that proves all referenced tokens exist in the registry
   cross_references: []
   source_index: processes.md
   detail_file: null
   metadata:
     registered: 2025-11-08
     last_updated: 2026-02-08
-
 PROC-YAML_DB_OPERATIONS:
   type: PROC
   name: YAML Database Operations Process
   status: Active
-  description: "YAML database operations for reading, writing, querying, and validating YAML index files"
+  description: YAML database operations for reading, writing, querying, and validating YAML index files
   cross_references:
     - REQ-TIED_SETUP
     - ARCH-TIED_STRUCTURE
@@ -173,12 +160,11 @@ PROC-YAML_DB_OPERATIONS:
   metadata:
     registered: 2025-11-08
     last_updated: 2026-02-08
-
 PROC-TEST_STRATEGY:
   type: PROC
   name: Test Strategy and Coverage (minimize untested code)
   status: Active
-  description: "Minimize code not covered by tests; unit/integration cover IMPL/ARCH/REQ logic; E2E reserved for critical journeys"
+  description: Minimize code not covered by tests; unit/integration cover IMPL/ARCH/REQ logic; E2E reserved for critical journeys
   cross_references:
     - REQ-MODULE_VALIDATION
     - IMPL-MODULE_VALIDATION
@@ -187,29 +173,52 @@ PROC-TEST_STRATEGY:
   metadata:
     registered: 2026-03-01
     last_updated: 2026-03-01
-
 PROC-TIED_DEV_CYCLE:
   type: PROC
   name: TIED Development Cycle (session workflow)
   status: Active
-  description: "Session workflow: plan from TIED, author pseudo-code and tokens, add/align tests, implement (TDD), minimal glue, validate, sync TIED to code"
+  description: 'Session workflow: plan from TIED, author pseudo-code and tokens, add/align tests, implement (TDD), minimal glue, validate, sync TIED to code'
   cross_references:
     - REQ-TIED_SETUP
     - REQ-MODULE_VALIDATION
     - PROC-TOKEN_AUDIT
     - PROC-TOKEN_VALIDATION
+    - PROC-COMMIT_MESSAGES
   source_index: processes.md
   detail_file: null
   metadata:
     registered: 2026-03-01
     last_updated: 2026-03-01
-
+PROC-COMMIT_MESSAGES:
+  type: PROC
+  name: Commit message format and guidelines
+  status: Active
+  description: Consistent commit message format (type/scope/subject, body, footer); optional TIED token references for traceability
+  cross_references:
+    - PROC-TIED_DEV_CYCLE
+  source_index: processes.md
+  detail_file: null
+  metadata:
+    registered: 2026-03-03
+    last_updated: 2026-03-03
+PROC-RELEASE:
+  type: PROC
+  name: Release and version numbering
+  status: Active
+  description: Version numbering (major/minor/patch/build) for releases
+  cross_references:
+    - PROC-COMMIT_MESSAGES
+  source_index: processes.md
+  detail_file: null
+  metadata:
+    registered: 2026-03-03
+    last_updated: 2026-03-03
 REQ-FEEDBACK_TO_TIED:
   type: REQ
   name: Feedback to TIED (Feature Requests, Bug Reports, Methodology)
   category: Functional
   status: Active
-  description: "Projects and users can submit feature requests, bug reports, and methodology improvement suggestions; store under TIED tree and export for reporting to TIED project"
+  description: Projects and users can submit feature requests, bug reports, and methodology improvement suggestions; store under TIED tree and export for reporting to TIED project
   cross_references:
     - ARCH-FEEDBACK_STORAGE
     - IMPL-MCP_FEEDBACK_TOOLS
@@ -218,12 +227,11 @@ REQ-FEEDBACK_TO_TIED:
   metadata:
     registered: 2026-03-03
     last_updated: 2026-03-03
-
 ARCH-FEEDBACK_STORAGE:
   type: ARCH
   name: Feedback Storage for TIED Reporting
   status: Active
-  description: "Feedback stored in single file tied/feedback.yaml; MCP tools read/write via base path resolution"
+  description: Feedback stored in single file tied/feedback.yaml; MCP tools read/write via base path resolution
   cross_references:
     - REQ-FEEDBACK_TO_TIED
     - IMPL-MCP_FEEDBACK_TOOLS
@@ -232,12 +240,11 @@ ARCH-FEEDBACK_STORAGE:
   metadata:
     registered: 2026-03-03
     last_updated: 2026-03-03
-
 IMPL-MCP_FEEDBACK_TOOLS:
   type: IMPL
   name: MCP Feedback Tools
   status: Active
-  description: "Two MCP tools (tied_feedback_add, tied_feedback_export) and feedback module for load/append/export"
+  description: Two MCP tools (tied_feedback_add, tied_feedback_export) and feedback module for load/append/export
   cross_references:
     - ARCH-FEEDBACK_STORAGE
     - REQ-FEEDBACK_TO_TIED
@@ -246,7 +253,6 @@ IMPL-MCP_FEEDBACK_TOOLS:
   metadata:
     registered: 2026-03-03
     last_updated: 2026-03-03
-
 # ---
 # Template Record - Copy this block to create new tokens
 # ---

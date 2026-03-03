@@ -104,6 +104,7 @@ This acknowledgment confirms that the AI agent has:
    - **Benefits**: Improved testability, reusability, maintainability, and clarity
    - **Application**: Apply consistently when designing new features, refactoring existing code, or when complexity makes testing or reasoning difficult
    - **Rationale**: Separating simple, reusable logic from complex application logic enables independent testing, reduces coupling, and makes code easier to understand and maintain. Pure functions with single responsibilities are easier to reason about, test, and reuse across different contexts.
+   - **Minimize E2E-only code**: Minimize code that is only verifiable via E2E or manual testing; such code should be limited to true glue (event binding, platform APIs) and documented in IMPL.
 
 9. **Independent Module Validation Before Integration** (MANDATORY - Required for [REQ-MODULE_VALIDATION])
    - **MANDATORY**: Logical modules MUST be validated independently before integration into code satisfying specific requirements
@@ -117,6 +118,11 @@ This acknowledgment confirms that the AI agent has:
    - **MANDATORY**: Modules must pass all validation criteria before integration
    - **MANDATORY**: Integration tasks must be separate from module development and validation tasks
    - **Rationale**: Independent module validation eliminates bugs related to code complexity by ensuring each module works correctly in isolation before combining with other modules. This reduces integration complexity and catches bugs early in the development cycle.
+   - **Thin entry points**: Entry points (e.g. popup, service worker bootstrap) should be thin: orchestration and calls into validated modules only. Logic that could be unit- or integration-tested must live in modules, not in entry points.
+
+10. **Thin Entry Points and Testability Classification** (supports [REQ-MODULE_VALIDATION], [PROC-TEST_STRATEGY])
+   - **Principle**: Logic belongs in testable modules; entry points orchestrate only. When code is only measurable from outside (E2E/manual), document the reason in the IMPL and keep that code minimal.
+   - **Application**: When authoring or reviewing IMPLs, classify code paths as unit-testable, integration-testable, or E2E-only; require justification for E2E-only. Prefer extracting logic from entry points into modules so unit/integration tests can cover it.
 
 ---
 
@@ -785,23 +791,23 @@ This project follows AI-First Principles. Before making changes:
 
 ## 📚 Related Documents
 
-- `tied/requirements.md` - Requirements guide document (copy from `requirements.template.md` in TIED repository)
-  - `tied/requirements.yaml` - Requirements YAML index/database with all `[REQ-*]` records (copy from `requirements.template.yaml`)
+- `tied/requirements.md` - Requirements guide document (copy from `requirements.md` at TIED repo root)
+  - `tied/requirements.yaml` - Requirements YAML index/database with all `[REQ-*]` records (copy from `requirements.yaml` at TIED repo root)
   - `tied/requirements/` - Individual requirement detail files (YAML, e.g., `REQ-TIED_SETUP.yaml`, `REQ-MODULE_VALIDATION.yaml`); schema: `detail-files-schema.md`
-- `tied/architecture-decisions.md` - Architecture decisions guide document (copy from `architecture-decisions.template.md`)
-  - `tied/architecture-decisions.yaml` - Architecture decisions YAML index/database with all `[ARCH-*]` records dependent on requirements (copy from `architecture-decisions.template.yaml`)
+- `tied/architecture-decisions.md` - Architecture decisions guide document (copy from `architecture-decisions.md` at TIED repo root)
+  - `tied/architecture-decisions.yaml` - Architecture decisions YAML index/database with all `[ARCH-*]` records dependent on requirements (copy from `architecture-decisions.yaml` at TIED repo root)
   - All `[ARCH-*]` tokens must be documented in the YAML index
   - Must cross-reference `[REQ-*]` tokens from requirements
   - `tied/architecture-decisions/` - Individual architecture decision detail files (YAML, e.g., `ARCH-TIED_STRUCTURE.yaml`)
-- `tied/implementation-decisions.md` - Implementation decisions guide document (copy from `implementation-decisions.template.md`)
-  - `tied/implementation-decisions.yaml` - Implementation decisions YAML index/database with all `[IMPL-*]` records dependent on architecture and requirements (copy from `implementation-decisions.template.yaml`)
+- `tied/implementation-decisions.md` - Implementation decisions guide document (copy from `implementation-decisions.md` at TIED repo root)
+  - `tied/implementation-decisions.yaml` - Implementation decisions YAML index/database with all `[IMPL-*]` records dependent on architecture and requirements (copy from `implementation-decisions.yaml` at TIED repo root)
   - All `[IMPL-*]` tokens must be documented in the YAML index
   - Must cross-reference both `[ARCH-*]` and `[REQ-*]` tokens
   - `tied/implementation-decisions/` - Individual implementation decision detail files (YAML, e.g., `IMPL-MODULE_VALIDATION.yaml`)
 - `tied/semantic-tokens.yaml` - YAML index/database of all semantic tokens (canonical token registry)
-- `tied/semantic-tokens.md` - Semantic tokens guide with format, naming conventions, and usage examples (copy from `semantic-tokens.template.md`)
+- `tied/semantic-tokens.md` - Semantic tokens guide with format, naming conventions, and usage examples (copy from `semantic-tokens.md` at TIED repo root)
 - `detail-files-schema.md` - Schema for REQ/ARCH/IMPL detail YAML files (in TIED repo or tied/); see also `tied/requirements/*.yaml`, `tied/architecture-decisions/*.yaml`, `tied/implementation-decisions/*.yaml`
-- `tied/processes.md` - Active process tracking document (copy from `processes.template.md`)
+- `tied/processes.md` - Active process tracking document (copy from `processes.md` at TIED repo root)
 - `README.md` - Project overview and getting started guide
 
 ---

@@ -164,7 +164,7 @@ function checkFile(fileState) {
 4. Document implementation decisions with `[IMPL-*]` tokens, cross-referencing both `[ARCH-*]` and `[REQ-*]`
 5. Develop and validate each module independently before integration [REQ-MODULE_VALIDATION]
 6. Reference tokens in test names and code comments
-7. Maintain token registry in `semantic-tokens.md` (copy from `semantic-tokens.template.md` in TIED repository)
+7. Maintain token registry in `semantic-tokens.md` (copy from `semantic-tokens.md` at TIED repo root into your project's `tied/`)
 
 ---
 
@@ -759,16 +759,16 @@ TIED enables several metrics:
 **For more information**, see:
 - `ai-principles.md` - Complete TIED principles and process guide
 - `tied-language-spec.md` - TIED language specification (pseudo-code templates with semantic tokens)
-- `requirements.template.md` - Template guide for requirements documentation (copy to your project as `requirements.md`)
-- `requirements.template.yaml` - YAML index template for requirements with `[REQ-*]` tokens (copy to your project as `requirements.yaml`)
+- `requirements.md` - Template guide for requirements documentation (at TIED repo root; copy to your project's `tied/requirements.md`)
+- `requirements.yaml` - YAML index template for requirements with `[REQ-*]` tokens (copy to your project's `tied/requirements.yaml`)
 - `requirements.template/` - Individual requirement detail file examples (copy to your project's `requirements/` directory)
-- `architecture-decisions.template.md` - Template guide for architecture decisions documentation (copy to your project as `architecture-decisions.md`)
-- `architecture-decisions.template.yaml` - YAML index template for architecture decisions with `[ARCH-*]` tokens (copy to your project as `architecture-decisions.yaml`)
+- `architecture-decisions.md` - Template guide for architecture decisions documentation (copy to your project's `tied/architecture-decisions.md`)
+- `architecture-decisions.yaml` - YAML index template for architecture decisions with `[ARCH-*]` tokens (copy to your project's `tied/architecture-decisions.yaml`)
 - `architecture-decisions.template/` - Individual architecture decision detail file examples (copy to your project's `architecture-decisions/` directory)
-- `implementation-decisions.template.md` - Template guide for implementation decisions documentation (copy to your project as `implementation-decisions.md`)
-- `implementation-decisions.template.yaml` - YAML index template for implementation decisions with `[IMPL-*]` tokens (copy to your project as `implementation-decisions.yaml`)
+- `implementation-decisions.md` - Template guide for implementation decisions documentation (copy to your project's `tied/implementation-decisions.md`)
+- `implementation-decisions.yaml` - YAML index template for implementation decisions with `[IMPL-*]` tokens (copy to your project's `tied/implementation-decisions.yaml`)
 - `implementation-decisions.template/` - Individual implementation decision detail file examples (copy to your project's `implementation-decisions/` directory)
-- `processes.template.md` - Template for process tracking including `[PROC-YAML_DB_OPERATIONS]` (copy to your project as `processes.md`)
-- `semantic-tokens.template.yaml` - YAML index template for semantic tokens registry (copy to your project as `semantic-tokens.yaml`)
-- `semantic-tokens.template.md` - Template for semantic tokens guide with format and conventions (copy to your project as `semantic-tokens.md`)
+- `processes.md` - Template for process tracking including `[PROC-YAML_DB_OPERATIONS]` (copy to your project's `tied/processes.md`)
+- `semantic-tokens.yaml` - YAML index template for semantic tokens registry (copy to your project's `tied/semantic-tokens.yaml`)
+- `semantic-tokens.md` - Template for semantic tokens guide with format and conventions (copy to your project's `tied/semantic-tokens.md`)
 

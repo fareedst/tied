@@ -5,9 +5,9 @@ MCP server that exposes **tools** and **resources** for TIED YAML index files: r
 ## Requirements
 
 - Node.js 18+
-- TIED project with YAML indexes (e.g. `tied/requirements.yaml`) or template repo with `*.template.yaml` at root
+- TIED project with YAML indexes (e.g. `tied/requirements.yaml`) or template repo with the same-named files at root (e.g. `requirements.yaml`)
 
-**Template vs MCP:** The root `*.template.yaml` files are minimal and foundational for non-MCP bootstrap (e.g. `copy_files.sh`). New REQ/ARCH/IMPL records can be added via MCP tools (`yaml_index_insert`, `yaml_detail_create`, conversion tools) or by copying the template block at the bottom of each index file or the template detail file (e.g. `requirements.template/REQ-IDENTIFIER.yaml`).
+**Template vs MCP:** At repo root the index files (e.g. `requirements.yaml`) are templates; in `tied/` they are the project indexes. The root files are minimal and foundational for non-MCP bootstrap (e.g. `copy_files.sh`). New REQ/ARCH/IMPL records can be added via MCP tools (`yaml_index_insert`, `yaml_detail_create`, conversion tools) or by copying the template block at the bottom of each index file or the template detail file (e.g. `requirements.template/REQ-IDENTIFIER.yaml`).
 
 ## Install
 
@@ -20,6 +20,10 @@ npm run build
 ```
 
 The MCP server remains in the TIED repo; your project only references it via MCP configuration.
+
+## Tests
+
+Run `npm test` from the `mcp-server` directory. This builds the server and runs unit tests (yaml-generator, feedback, yaml-loader) and e2e tests. The e2e suite (`src/e2e/bootstrap-and-load.test.ts`) bootstraps a temp project with `copy_files.sh` and verifies the loader reads requirements and semantic-tokens indexes from the copied `tied/` directory.
 
 ## Configuration
 
@@ -80,7 +84,7 @@ These tools parse **monolithic** requirements and decisions files (single markdo
 
 **Example** (dry run): Call `convert_monolithic_requirements` with `content` set to your monolithic requirements markdown and `dry_run: true` to see `tokens`, `index_path`, and `detail_paths`.
 
-**Run conversion from CLI** (without MCP): CLI script and sample monolithic files are not yet included in this repo; use the MCP conversion tools above for now. After conversion, update `semantic-tokens.yaml` (or `semantic-tokens.template.yaml`) with any new tokens and keep guide docs in sync with the templates.
+**Run conversion from CLI** (without MCP): CLI script and sample monolithic files are not yet included in this repo; use the MCP conversion tools above for now. After conversion, update `semantic-tokens.yaml` with any new tokens and keep guide docs in sync (same filename at root = template, in tied/ = project index).
 
 ## Resources
 

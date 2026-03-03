@@ -1,7 +1,7 @@
 /**
  * Build YAML index records from parsed monolithic sections.
  * Maps to TIED v1.5.0+ (REQ/ARCH) and v2.2.0 (IMPL) schema.
- * [IMPL] IMPL detail YAML uses canonical data object from implementation-decisions.template.md (TIED v2.2.0).
+ * [IMPL] IMPL detail YAML uses canonical data object from implementation-decisions.md (TIED v2.2.0).
  */
 
 import type {
