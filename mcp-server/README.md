@@ -7,7 +7,7 @@ MCP server that exposes **tools** and **resources** for TIED YAML index files: r
 - Node.js 18+
 - TIED project with YAML indexes (e.g. `tied/requirements.yaml`) or template repo with the same-named files at root (e.g. `requirements.yaml`)
 
-**Template vs MCP:** At repo root the index files (e.g. `requirements.yaml`) are templates; in `tied/` they are the project indexes. The root files are minimal and foundational for non-MCP bootstrap (e.g. `copy_files.sh`). New REQ/ARCH/IMPL records can be added via MCP tools (`yaml_index_insert`, `yaml_detail_create`, conversion tools) or by copying the template block at the bottom of each index file or the template detail file (e.g. `requirements.template/REQ-IDENTIFIER.yaml`).
+**Template vs MCP:** At repo root the index files (e.g. `requirements.yaml`) are templates; in `tied/` they are the project indexes. The root files are minimal and foundational for non-MCP bootstrap (e.g. `copy_files.sh`). New REQ/ARCH/IMPL records can be added via MCP tools (`yaml_index_insert`, `yaml_detail_create`, conversion tools) or by copying the template block at the bottom of each index file or the template detail file (e.g. `requirements/REQ-IDENTIFIER.yaml`).
 
 ## Install
 

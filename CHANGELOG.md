@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Template file naming** — Removed `.template` infix from TIED template files; same filename is used at repo root (template) and in `tied/` (project index). Location distinguishes use.
   - Renamed: `requirements.template.md` → `requirements.md`, `requirements.template.yaml` → `requirements.yaml`, and similarly for `architecture-decisions`, `implementation-decisions`, `processes`, `semantic-tokens`, `tasks` (`.md` and `.yaml` where applicable).
-  - **copy_files.sh**: Copies root files into `tied/` with the same filename (no suffix stripping).
+  - **copy_files.sh**: Copies root files into `tied/` with the same filename (no suffix stripping). Detail-file examples are copied from repo-root `requirements/`, `architecture-decisions/`, and `implementation-decisions/` (no `.template` suffix).
   - **mcp-server/src/yaml-loader.ts**: Resolves index path as `{basePath}/{index}.yaml` then `cwd/{index}.yaml`; removed `TEMPLATE_FILES` fallbacks.
   - **Docs**: README, AGENTS.md, ai-principles.md, TIED.md, ANNOUNCEMENT.md, migrate-*.md, and mcp-server references updated to the new names and location semantics.
   - **mcp-server**: Added `yaml-loader.test.ts` (unit tests for `getBasePath` and `resolveIndexPath` preferring base then cwd); exported `clearBasePathCache()` for tests. `copy_files.sh`: hooks copy is conditional on source existing so bootstrap works without `.cursor/hooks.json`.

@@ -41,15 +41,15 @@ mkdir -p tied
 cp requirements.md tied/requirements.md
 cp requirements.yaml tied/requirements.yaml
 mkdir -p tied/requirements
-cp requirements.template/*.yaml tied/requirements/
+cp requirements/*.yaml tied/requirements/
 cp architecture-decisions.md tied/architecture-decisions.md
 cp architecture-decisions.yaml tied/architecture-decisions.yaml
 mkdir -p tied/architecture-decisions
-cp architecture-decisions.template/*.yaml tied/architecture-decisions/
+cp architecture-decisions/*.yaml tied/architecture-decisions/
 cp implementation-decisions.md tied/implementation-decisions.md
 cp implementation-decisions.yaml tied/implementation-decisions.yaml
 mkdir -p tied/implementation-decisions
-cp implementation-decisions.template/*.yaml tied/implementation-decisions/
+cp implementation-decisions/*.yaml tied/implementation-decisions/
 cp processes.md tied/processes.md
 cp semantic-tokens.md tied/semantic-tokens.md
 cp semantic-tokens.yaml tied/semantic-tokens.yaml
@@ -115,6 +115,7 @@ This repository contains:
 ### Scripts
 - `copy_files.sh` — Bootstrap a project with TIED templates (used by both MCP and non-MCP users; MCP users then configure the server).
 - `bootstrap_without_mcp.sh` — Same bootstrap as `copy_files.sh`, then prints next steps for non-MCP users.
+- `scripts/prepare_readme_demo.sh` — Ensures `tied/` exists with sample data (runs `copy_files.sh .` if needed), then runs the README Query Examples (yq commands) so README recordings and screenshots use consistent test data.
 
 ### Methodology Documentation (Reference Only)
 - `TIED.md` - TIED methodology overview (for beginners, intermediate, and experts)
@@ -132,20 +133,20 @@ At repo root these files are templates; in your project's `tied/` they are the p
 
 - `requirements.md` - Template guide for requirements documentation
 - `requirements.yaml` - YAML database template for requirements with `[REQ-*]` tokens **(v1.5.0: structured fields for traceability, rationale, criteria, metadata)**
-- `requirements.template/` - Individual requirement detail file examples
+- `requirements/` - Individual requirement detail file examples
 - `architecture-decisions.md` - Template guide for architecture decisions documentation
 - `architecture-decisions.yaml` - YAML database template for architecture decisions with `[ARCH-*]` tokens **(v1.5.0: structured fields for traceability, rationale, alternatives, metadata)**
-- `architecture-decisions.template/` - Individual architecture decision detail file examples
+- `architecture-decisions/` - Individual architecture decision detail file examples
 - `implementation-decisions.md` - Template guide for implementation decisions documentation
 - `implementation-decisions.yaml` - YAML database template for implementation decisions with `[IMPL-*]` tokens **(v1.5.0: structured fields for traceability, rationale, code_locations, metadata)**
-- `implementation-decisions.template/` - Individual implementation decision detail file examples
+- `implementation-decisions/` - Individual implementation decision detail file examples
 - `processes.md` - Template for process tracking including `[PROC-YAML_DB_OPERATIONS]`, `[PROC-TEST_STRATEGY]`, `[PROC-TIED_DEV_CYCLE]`, `[PROC-COMMIT_MESSAGES]`, `[PROC-RELEASE]`, and `[PROC-NEW_FEATURE]` (new feature implementation; full procedure in [docs/new-feature-process.md](docs/new-feature-process.md))
 - `commit-guidelines.md` - Commit message quick reference for TIED projects (full format in processes.md § PROC-COMMIT_MESSAGES)
 - `semantic-tokens.md` - Template for semantic token registry
 - `semantic-tokens.yaml` - YAML registry of REQ/ARCH/IMPL/PROC tokens (minimal, foundational for bootstrap)
 - `tasks.md` - **Optional** template for task tracking (not required by methodology)
 
-The YAML index files at root contain only methodology-relevant records; new REQ/ARCH/IMPL can be added via the MCP server tools or by copying the template block at the bottom of each index file (or a template detail file such as `requirements.template/REQ-IDENTIFIER.yaml`).
+The YAML index files at root contain only methodology-relevant records; new REQ/ARCH/IMPL can be added via the MCP server tools or by copying the template block at the bottom of each index file (or a template detail file such as `requirements/REQ-IDENTIFIER.yaml`).
 
 ## Project File Structure
 
@@ -278,7 +279,10 @@ The YAML index files use **structured, machine-parseable fields** instead of mar
 - **Structured criteria**: Lists of items with optional metrics/coverage for precise validation
 - **Structured metadata**: Grouped `created`, `last_updated`, `last_validated` with date/author/reason/result
 
-**Query Examples**:
+**Query Examples** (use test/sample data in `tied/`):
+
+To run these in the TIED repo, first create `tied/` with sample data: `./copy_files.sh .` (from repo root). Or run `./scripts/prepare_readme_demo.sh` to ensure `tied/` exists and print this output.
+
 ```bash
 # Get architecture dependencies
 yq '.REQ-TIED_SETUP.traceability.architecture[]' tied/requirements.yaml
@@ -291,6 +295,19 @@ yq '.ARCH-TIED_STRUCTURE.alternatives_considered[].name' tied/architecture-decis
 
 # Get code file locations
 yq '.IMPL-TIED_FILES.code_locations.files[].path' tied/implementation-decisions.yaml
+```
+
+Example output (from template sample data):
+
+```
+ARCH-TIED_STRUCTURE
+tied/ directory exists with proper structure
+All required documentation files exist and are populated from templates
+Base files properly configured
+Detail directories exist
+Root-level files
+.github or .docs folder
+copy_files.sh
 ```
 
 This enables **direct field access**, **structured queries**, **easy filtering**, and **better tool integration** compared to parsing markdown-formatted strings.

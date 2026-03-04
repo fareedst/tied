@@ -180,7 +180,7 @@ if [[ -f "${SCRIPT_DIR}/detail-files-schema.md" && ! -f "${TIED_DIR}/detail-file
 fi
 
 # Copy implementation decision detail file examples (YAML)
-IMPL_TEMPLATE_DIR="${SCRIPT_DIR}/implementation-decisions.template"
+IMPL_TEMPLATE_DIR="${SCRIPT_DIR}/implementation-decisions"
 if [[ -d "${IMPL_TEMPLATE_DIR}" ]]; then
   impl_count=0
   for detail_file in "${IMPL_TEMPLATE_DIR}"/*.yaml; do
@@ -199,7 +199,7 @@ if [[ -d "${IMPL_TEMPLATE_DIR}" ]]; then
 fi
 
 # Copy architecture decision detail file examples (YAML)
-ARCH_TEMPLATE_DIR="${SCRIPT_DIR}/architecture-decisions.template"
+ARCH_TEMPLATE_DIR="${SCRIPT_DIR}/architecture-decisions"
 if [[ -d "${ARCH_TEMPLATE_DIR}" ]]; then
   arch_count=0
   for detail_file in "${ARCH_TEMPLATE_DIR}"/*.yaml; do
@@ -218,7 +218,7 @@ if [[ -d "${ARCH_TEMPLATE_DIR}" ]]; then
 fi
 
 # Copy requirements detail file examples (YAML)
-REQ_TEMPLATE_DIR="${SCRIPT_DIR}/requirements.template"
+REQ_TEMPLATE_DIR="${SCRIPT_DIR}/requirements"
 if [[ -d "${REQ_TEMPLATE_DIR}" ]]; then
   req_count=0
   for detail_file in "${REQ_TEMPLATE_DIR}"/*.yaml; do
