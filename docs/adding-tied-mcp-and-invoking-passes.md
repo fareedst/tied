@@ -167,7 +167,7 @@ Use these to load full context for the LLM or tooling.
 
 - **`yaml_index_update`** and **`yaml_detail_update`** — Refine existing records or detail files.
 - **`yaml_index_validate`** — Validate YAML syntax of all index files under `TIED_BASE_PATH`.
-- **`tied_validate_consistency`** — Validate TIED index and detail consistency: token existence, REQ→ARCH→IMPL traceability, detail file content, and IMPL `essence_pseudocode` token refs. Returns a structured report (`index`, `index_tokens`, `token_references`, `traceability`, `detail_files`, `pseudocode`, `ok`). Run this (and any project-specific token validation script, e.g. `./scripts/validate_tokens.sh`) before considering the pass complete.
+- **`tied_validate_consistency`** — Validate TIED index and detail consistency: token existence, REQ→ARCH→IMPL traceability, detail file content, and IMPL `essence_pseudocode` token refs. Non-empty `essence_pseudocode` without any [REQ-]/[ARCH-]/[IMPL-] token comments is reported as `pseudocode[token].missing_token_comments` and fails the report ([PROC-IMPL_PSEUDOCODE_TOKENS]). Returns a structured report (`index`, `index_tokens`, `token_references`, `traceability`, `detail_files`, `pseudocode`, `ok`). Run this (and any project-specific token validation script, e.g. `./scripts/validate_tokens.sh`) before considering the pass complete.
 - **`tied_config_get_base_path`** — Report the effective TIED base path and raw `TIED_BASE_PATH` env value; use to confirm configuration or debug path issues.
 
 ### Other validation (CI, pre-commit, report)

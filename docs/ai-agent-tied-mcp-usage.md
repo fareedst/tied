@@ -12,6 +12,12 @@
 - **All code of significance is created in TIED first**: requirements (REQ), then architecture (ARCH) and implementation (IMPL) decisions, with full traceability. Only then is it implemented in source and tests using **TDD**.
 - The flow is: **TIED data → tests → code**. TIED is the source of truth for intent; tests and code realize it.
 
+### 1.1 YAML detail storage, MCP, and cognitive load
+
+- REQ, ARCH, and IMPL **detail is maintained in YAML files** (indexes + detail files per token), giving a standard, flexible record. The TIED MCP optimizes use of this YAML db by presenting R/A/I via **indexes** and **CRUD+ actions**, including **validation of the entire db**.
+- **Complex tasks**: Collect all **related R/A/I index records and detail records** via MCP (index reads, filters, traceability tools). Then **only the pseudo-code for the necessary IMPL** needs to be comprehended to develop an ideal solution. **Updating the code to match the new IMPL pseudo-code is a separate task**—design in TIED first, then implement.
+- **Rationale**: The cognitive load of processing a **handful of IMPL** records should be **smaller** than the task of parsing an arbitrary number of source code files to guess at side effects. When that holds, intent and logic live in the R/A/I YAML and IMPL pseudo-code, and code remains the implementation of that record. The MCP makes it practical to work from the YAML db (indexes + CRUD + validation) instead of scattering logic across many source files.
+
 ---
 
 ## 2. Primary interface: TIED MCP server

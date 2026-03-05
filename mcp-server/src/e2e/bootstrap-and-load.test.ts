@@ -1,6 +1,7 @@
 /**
  * E2E test: bootstrap a project with copy_files.sh then load indexes via yaml-loader.
- * [IMPL] Verifies the full flow: template copy → TIED_BASE_PATH → loader reads from tied/.
+ * [IMPL] Verifies the full flow: core methodology (inherited LEAP R+A+I) copy → TIED_BASE_PATH → loader reads from tied/.
+ * Clients receive inherited tokens (e.g. REQ-TIED_SETUP, REQ-MODULE_VALIDATION) so TIED/LEAP behaviors exist in every project.
  */
 
 import { describe, it, beforeEach, afterEach } from "node:test";
@@ -58,7 +59,11 @@ describe("e2e: bootstrap and load", () => {
     assert.ok(data !== null && typeof data === "object", "loadIndex(requirements) should return an object");
     assert.ok(
       "REQ-TIED_SETUP" in data,
-      "Copied index should contain REQ-TIED_SETUP"
+      "Copied index should contain inherited token REQ-TIED_SETUP"
+    );
+    assert.ok(
+      "REQ-MODULE_VALIDATION" in data,
+      "Copied index should contain inherited token REQ-MODULE_VALIDATION"
     );
 
     const rec = getRecord("requirements", "REQ-TIED_SETUP");

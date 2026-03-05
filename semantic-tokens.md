@@ -74,6 +74,17 @@ Before marking features complete:
 [TYPE-IDENTIFIER]
 ```
 
+## Inherited tokens (TIED/LEAP methodology)
+
+All TIED projects **inherit** a core set of REQ/ARCH/IMPL and PROC tokens via `copy_files.sh` (from `templates/`). These tokens are **mandatory for TIED success** and enforce the methodology; they must not be removed from the client's `tied/`. The inherited set includes:
+
+- **REQ**: REQ-TIED_SETUP, REQ-MODULE_VALIDATION; optionally REQ-FEEDBACK_TO_TIED
+- **ARCH**: ARCH-TIED_STRUCTURE, ARCH-MODULE_VALIDATION; optionally ARCH-FEEDBACK_STORAGE
+- **IMPL**: IMPL-TIED_FILES, IMPL-MODULE_VALIDATION; optionally IMPL-MCP_FEEDBACK_TOOLS
+- **PROC**: e.g. PROC-LEAP, PROC-TOKEN_AUDIT, PROC-TOKEN_VALIDATION, PROC-TIED_DEV_CYCLE, PROC-IMPL_PSEUDOCODE_TOKENS (see `processes.md` and `semantic-tokens.yaml`)
+
+For structure and sample records, agents refer to **`templates/`** in the TIED repository (see AGENTS.md § Client inheritance of LEAP R+A+I).
+
 ## Token Types
 
 - `[REQ-*]` - Requirements (functional/non-functional) - **The source of intent**

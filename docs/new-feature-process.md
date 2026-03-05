@@ -1,6 +1,6 @@
 # New Feature Process (`[PROC-NEW_FEATURE]`)
 
-This document describes the end-to-end procedure for implementing a new feature using the TIED methodology: from user prompt through documentation, testing, implementation, validation, and release. It invokes **[PROC-TIED_DEV_CYCLE](tied/processes.md)** and adds tooling and post-implementation steps.
+This document describes the end-to-end procedure for implementing a new feature using the TIED methodology: from user prompt through documentation, testing, implementation, validation, and release. It invokes **[PROC-TIED_DEV_CYCLE](tied/processes.md)** and adds tooling and post-implementation steps. **For the agent-executable step-by-step procedure** (what to do in each phase), see **`tied/processes.md`** § PROC-TIED_DEV_CYCLE; the diagram and phase summary below are for human reference.
 
 ## 1. Flow diagram: User prompt to commit
 
@@ -31,30 +31,32 @@ flowchart TB
         ExtractLogic["Plan extraction from entry points so logic is unit-testable"]
     end
 
-    subgraph impl [4–5. Implement]
-        TDD["Implement to tests in testable modules"]
+    subgraph impl [4. Implement via TDD]
+        TDD["Code satisfies tests; entire IMPL pseudo-code via TDD"]
         BlockComments["Source blocks carry same REQ/ARCH/IMPL comments as IMPL"]
-        MinimalGlue["Implement minimal glue; justify any non-trivial glue in IMPL"]
     end
 
-    subgraph validate [6. Validate and close gaps]
+    subgraph glue [5. Implement glue]
+        MinimalGlue["Binding code (entry points, wiring); justify non-trivial glue in IMPL"]
+    end
+
+    subgraph e2e [6. Add E2E]
+        AddE2E["E2E tests to protect glue and most basic features"]
+    end
+
+    subgraph validate [7. Validate and close gaps]
         RunSuite["Run full test suite"]
         AddMissing["Add missing unit tests"]
         TokenValidation["Run PROC-TOKEN_VALIDATION / tied_validate_consistency"]
     end
 
-    subgraph sync [7. Sync TIED to code and tests]
+    subgraph sync [8. Sync TIED to code and tests]
         SyncREQARCHIMPL["Update REQ/ARCH/IMPL to match final code and tests"]
         SyncPseudocode["Include pseudo-code comments with semantic tokens per block"]
         SyncIndexes["Sync semantic-tokens.yaml and YAML indexes"]
     end
 
-    subgraph e2e [E2E optional]
-        RecommendE2E["Recommend e2e tests for critical journeys"]
-        ApproveE2E["After approval implement e2e"]
-    end
-
-    subgraph release [8–9. Release and commit]
+    subgraph release [9–10. Release and commit]
         UpdateReadme["Update README.md for changes"]
         UpdateChangelog["Update CHANGELOG.md for changes"]
         CommitMsg["Write commit message per PROC-COMMIT_MESSAGES (processes.md)"]
@@ -73,15 +75,14 @@ flowchart TB
     ExtractLogic --> TDD
     TDD --> BlockComments
     BlockComments --> MinimalGlue
-    MinimalGlue --> RunSuite
+    MinimalGlue --> AddE2E
+    AddE2E --> RunSuite
     RunSuite --> AddMissing
     AddMissing --> TokenValidation
     TokenValidation --> SyncREQARCHIMPL
     SyncREQARCHIMPL --> SyncPseudocode
     SyncPseudocode --> SyncIndexes
-    SyncIndexes --> RecommendE2E
-    RecommendE2E --> ApproveE2E
-    ApproveE2E --> UpdateReadme
+    SyncIndexes --> UpdateReadme
     UpdateReadme --> UpdateChangelog
     UpdateChangelog --> CommitMsg
 ```
@@ -92,18 +93,19 @@ flowchart TB
 |-------|------------|
 | **Plan** | Read REQ/ARCH/IMPL; use IMPL `essence_pseudocode` as source of truth; resolve logic there before code/tests; identify doc updates. |
 | **Document** | Author/update REQ, ARCH, IMPL (with block-level token comments); use tied-yaml MCP; document and validate any direct YAML edits. |
-| **Test** | Add/align tests to IMPL; same token comments in test blocks; keep entry points thin so logic is unit-testable. |
-| **Implement** | TDD in testable modules; block comments in code; minimal glue; justify non-trivial glue in IMPL. |
+| **Test** | Add/align tests to IMPL (tests-first; tests conform to IMPL pseudo-code); same token comments in test blocks; no production code yet beyond minimum to run first test. |
+| **Implement (TDD)** | Code is written to satisfy the tests; entire IMPL pseudo-code is implemented via TDD; block comments in code. |
+| **Glue** | After TDD, implement binding/non-unit-test-covered code (entry points, wiring) so full REQ/ARCH/IMPL can run; justify non-trivial glue in IMPL. |
+| **E2E** | Add E2E tests after glue to protect the glue and the most basic features; document E2E-only behavior in IMPL. |
 | **Validate** | Full test suite; fill unit test gaps; run token/consistency validation. |
 | **Sync** | REQ/ARCH/IMPL and pseudo-code match final code/tests; sync indexes. |
-| **E2E** | Recommend e2e; implement after approval. |
 | **Release** | README, CHANGELOG, commit per [PROC-COMMIT_MESSAGES](../processes.md). |
 
 ---
 
 ## 2. Governing process and tools
 
-- **Strictly follow** the procedure **[PROC-TIED_DEV_CYCLE](tied/processes.md)** for the full development cycle (all 9 steps).
+- **Strictly follow** the procedure **[PROC-TIED_DEV_CYCLE](tied/processes.md)** for the full development cycle (all 10 steps). The mandatory implementation order (tests first, code via TDD, glue, E2E, validate, sync) is stated in that section.
 - **Use tied-yaml MCP tools** as the primary way to read/write TIED YAML:
   - **Index read/write:** `yaml_index_read`, `yaml_index_insert`, `yaml_index_update`, `yaml_index_list_tokens`, `yaml_index_filter`
   - **Detail read/write:** `yaml_detail_read`, `yaml_detail_read_many`, `yaml_detail_list`, `yaml_detail_create`, `yaml_detail_update`, `yaml_detail_delete`

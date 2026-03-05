@@ -7,10 +7,8 @@
 #
 # Creates:
 #   - Base files (.cursorrules, AGENTS.md, ai-principles.md) in project root
-#   - Template files (requirements.md, etc.) in tied/
-#   - implementation-decisions/ directory in tied/ with example detail files
-#   - architecture-decisions/ directory in tied/ with example detail files
-#   - requirements/ directory in tied/ with example detail files
+#   - Index YAMLs (requirements.yaml, etc.) and guide files in tied/ from templates/ (core methodology / inherited LEAP R+A+I) when present
+#   - requirements/, architecture-decisions/, implementation-decisions/ in tied/ with inherited detail files
 #   - Migration guides for converting monolithic decision files and token formats
 #   - .cursor/ directory and .cursor/mcp.json with tied-yaml MCP server entry (real paths)
 #
@@ -142,36 +140,52 @@ done
 
 echo "Copied ${#BASE_FILES[@]} base files into ${TARGET_PROJECT_DIR}."
 
-# At repo root these files are templates; in tied/ they are the project indexes (same filename).
-TEMPLATE_FILES=(
-  "requirements.md"
+# Core methodology (inherited LEAP R+A+I) lives in templates/; guide .md files stay at root.
+TEMPLATES_DIR="${SCRIPT_DIR}/templates"
+# Index YAMLs: copy from templates/ when present (core set only), else from root.
+INDEX_YAML_FILES=(
   "requirements.yaml"
-  "architecture-decisions.md"
   "architecture-decisions.yaml"
-  "implementation-decisions.md"
   "implementation-decisions.yaml"
-  "processes.md"
-  "semantic-tokens.md"
   "semantic-tokens.yaml"
-  "tasks.md"
-  "commit-guidelines.md"
 )
-
-for f in "${TEMPLATE_FILES[@]}"; do
-  src="${SCRIPT_DIR}/${f}"
+for f in "${INDEX_YAML_FILES[@]}"; do
+  if [[ -f "${TEMPLATES_DIR}/${f}" ]]; then
+    src="${TEMPLATES_DIR}/${f}"
+  else
+    src="${SCRIPT_DIR}/${f}"
+  fi
   dest="${TIED_DIR}/${f}"
-
   if [[ ! -f "${src}" ]]; then
-    echo "Missing template file: ${src}" >&2
+    echo "Missing index file: ${src}" >&2
     exit 1
   fi
-
   if [[ ! -f "${dest}" ]]; then
     cp -p "${src}" "${dest}"
   fi
 done
-
-echo "Copied ${#TEMPLATE_FILES[@]} template files into ${TIED_DIR}."
+# Guide and other files: always from root.
+TEMPLATE_FILES=(
+  "requirements.md"
+  "architecture-decisions.md"
+  "implementation-decisions.md"
+  "processes.md"
+  "semantic-tokens.md"
+  "tasks.md"
+  "commit-guidelines.md"
+)
+for f in "${TEMPLATE_FILES[@]}"; do
+  src="${SCRIPT_DIR}/${f}"
+  dest="${TIED_DIR}/${f}"
+  if [[ ! -f "${src}" ]]; then
+    echo "Missing template file: ${src}" >&2
+    exit 1
+  fi
+  if [[ ! -f "${dest}" ]]; then
+    cp -p "${src}" "${dest}"
+  fi
+done
+echo "Copied index YAMLs and template files into ${TIED_DIR}."
 
 # Copy detail-files schema (YAML detail file structure reference)
 if [[ -f "${SCRIPT_DIR}/detail-files-schema.md" && ! -f "${TIED_DIR}/detail-files-schema.md" ]]; then
@@ -179,8 +193,11 @@ if [[ -f "${SCRIPT_DIR}/detail-files-schema.md" && ! -f "${TIED_DIR}/detail-file
   echo "Copied detail-files-schema.md into ${TIED_DIR}."
 fi
 
-# Copy implementation decision detail file examples (YAML)
-IMPL_TEMPLATE_DIR="${SCRIPT_DIR}/implementation-decisions"
+# Copy implementation decision detail files (inherited LEAP R+A+I) from templates/ when present.
+IMPL_TEMPLATE_DIR="${TEMPLATES_DIR}/implementation-decisions"
+if [[ ! -d "${IMPL_TEMPLATE_DIR}" ]]; then
+  IMPL_TEMPLATE_DIR="${SCRIPT_DIR}/implementation-decisions"
+fi
 if [[ -d "${IMPL_TEMPLATE_DIR}" ]]; then
   impl_count=0
   for detail_file in "${IMPL_TEMPLATE_DIR}"/*.yaml; do
@@ -198,8 +215,11 @@ if [[ -d "${IMPL_TEMPLATE_DIR}" ]]; then
   fi
 fi
 
-# Copy architecture decision detail file examples (YAML)
-ARCH_TEMPLATE_DIR="${SCRIPT_DIR}/architecture-decisions"
+# Copy architecture decision detail files (inherited LEAP R+A+I) from templates/ when present.
+ARCH_TEMPLATE_DIR="${TEMPLATES_DIR}/architecture-decisions"
+if [[ ! -d "${ARCH_TEMPLATE_DIR}" ]]; then
+  ARCH_TEMPLATE_DIR="${SCRIPT_DIR}/architecture-decisions"
+fi
 if [[ -d "${ARCH_TEMPLATE_DIR}" ]]; then
   arch_count=0
   for detail_file in "${ARCH_TEMPLATE_DIR}"/*.yaml; do
@@ -217,8 +237,11 @@ if [[ -d "${ARCH_TEMPLATE_DIR}" ]]; then
   fi
 fi
 
-# Copy requirements detail file examples (YAML)
-REQ_TEMPLATE_DIR="${SCRIPT_DIR}/requirements"
+# Copy requirements detail files (inherited LEAP R+A+I) from templates/ when present.
+REQ_TEMPLATE_DIR="${TEMPLATES_DIR}/requirements"
+if [[ ! -d "${REQ_TEMPLATE_DIR}" ]]; then
+  REQ_TEMPLATE_DIR="${SCRIPT_DIR}/requirements"
+fi
 if [[ -d "${REQ_TEMPLATE_DIR}" ]]; then
   req_count=0
   for detail_file in "${REQ_TEMPLATE_DIR}"/*.yaml; do

@@ -4,7 +4,7 @@
 
 **TIED Methodology Version**: 2.2.0
 
-This document centralizes every instruction AI coding assistants must follow while working in TIED repositories. It supersedes reminders in `.ai-agent-instructions`, `.cursorrules`, and README snippets. Treat it as the canonical reference when configuring prompts, IDE rules, or agent workflows.
+This document centralizes every instruction AI coding assistants must follow while working in TIED repositories. It supersedes reminders in `.ai-agent-instructions`, `.cursorrules`, and README snippets. Treat it as the canonical reference when configuring prompts, IDE rules, or agent workflows. For methodology background (what TIED is, costs and benefits, LEAP rationale), see the human-facing docs in the TIED repo (e.g. TIED.md, docs/LEAP.md).
 
 ---
 
@@ -16,6 +16,7 @@ This document centralizes every instruction AI coding assistants must follow whi
    - Read `ai-principles.md` completely
    - Review `semantic-tokens.yaml` (token registry YAML index) and `semantic-tokens.md` (token guide)
    - Review `architecture-decisions.yaml` and `implementation-decisions.yaml` (YAML indexes)
+   - Review `implementation-decisions.md` (implementation guide) for IMPL pseudo-code and block token rules ([PROC-IMPL_PSEUDOCODE_TOKENS])
    - Understand priority order: Tests > Code > Basic Functions > Infrastructure
    - Note: same filename everywhere—at repo root these files are templates; in `tied/` they are the project indexes.
 3. Confirm access to the documents above before continuing.
@@ -28,20 +29,31 @@ This document centralizes every instruction AI coding assistants must follow whi
   - Use `[REQ-*]`, `[ARCH-*]`, `[IMPL-*]`, and other TIED tokens everywhere (requirements, docs, code, tests).
   - Maintain traceability: Requirements → Architecture → Implementation → Tests → Code.
   - Update `semantic-tokens.yaml` immediately when introducing new tokens.
+- **IMPL pseudo-code token comments (most critical)** `[PROC-IMPL_PSEUDOCODE_TOKENS]`
+  - IMPL `essence_pseudocode` is the **most critical artifact** for implementation traceability. Without token comments in pseudo-code, traceability from REQ→ARCH→IMPL breaks at the pseudo-code layer and tests/code cannot be reliably aligned to requirements.
+  - **Every block** in `essence_pseudocode` must have a comment that (1) names all REQ, ARCH, and IMPL reflected in that block and (2) states how that block implements those requirements. Top-level: one comment naming IMPL, ARCH, and REQ plus a one-line summary; sub-blocks with the same set → comment only the "how"; sub-blocks with a different set → comment listing that set and how the sub-block implements it.
 - **Documentation-First Flow**
   - Expand requirements into pseudo-code and decisions before any code changes.
   - Address all implementation issues (logical and flow) in IMPL pseudo-code before tests or code; IMPL `essence_pseudocode` is the **source of consistent logic** for implementation.
   - Record architecture decisions (`architecture-decisions.md`) with `[ARCH-*]` tokens cross-referencing requirements.
   - Record implementation decisions (`implementation-decisions.md`) with `[IMPL-*]` tokens cross-referencing `[ARCH-*]` and `[REQ-*]` tokens.
   - Never defer documentation; update as you think, design, and implement.
+- **LEAP: Logic Elevation And Propagation** (see `tied/processes.md` § LEAP / [PROC-LEAP])
+  - When code or tests written during TDD/E2E differ from IMPL, update the stack in **reverse order**: **IMPL → ARCH → REQ** in the same work item so tokens stay consistent and testable.
+  - Work may start at any layer (REQ, ARCH, IMPL, or code/tests); for work to be **complete**, apply changes **up and down** the stack as needed. Code is valid only when **all tests pass** and **all requirements are met**.
+- **Implementation order** (see `tied/processes.md` § PROC-TIED_DEV_CYCLE): (1) **Tests first** — tests conform to IMPL pseudo-code, written before production code (strict TDD). (2) **Code via TDD** — code is written to satisfy the tests; entire IMPL pseudo-code is implemented via TDD. (3) **Binding/glue** — after TDD, implement binding/non-unit-test-covered code (entry points, wiring) so the full REQ/ARCH/IMPL can run. (4) **E2E** — E2E tests are written after binding code to protect glue and basic features. (5) **Closing the loop** — update TIED data to match implementation; run `tied_validate_consistency` (or equivalent).
 - **Module Validation Mandate `[REQ-MODULE_VALIDATION]`**
   - Identify logical modules and their boundaries before implementation.
   - Develop and validate each module independently (unit tests with mocks, contract tests, edge cases, error handling) before integration.
   - Only integrate modules after validation passes. Document validation results.
 - **Priority Order**
   - Always prioritize: Tests, Code, Basic Functions ➜ Developer experience ➜ Infrastructure ➜ Security.
-- **TIED data access** (see `docs/ai-agent-tied-mcp-usage.md`)
-  - Use the **TIED MCP server** (tools and resources) as the primary way to read and write TIED data. TIED is the db that controls/directs the build; significant code is created in TIED first, then implemented with TDD. Direct file access to TIED content is permitted only when no MCP tool supports the operation; document such cases for addition to the MCP tool set.
+- **TIED data access (MCP-first)**
+  - Use the **TIED MCP server** (tools and resources) as the **primary** way to read and write TIED data. TIED is the db that controls/directs the build; significant code is created in TIED first, then implemented with TDD. **Direct file access** to TIED content (under `tied/` or `TIED_BASE_PATH`) is permitted **only when** no MCP tool supports the operation; document such cases so they can be considered for new MCP tooling.
+  - **When using MCP:** Prefer tools for index read/list/filter, detail read/write, traceability (`get_decisions_for_requirement`, `get_requirements_for_decision`), validation (`yaml_index_validate`, `tied_validate_consistency`), and token creation (`tied_token_create_with_detail`). Prefer resources (e.g. `tied://requirements`, `tied://requirement/{token}/detail`) for loading context. Before changing TIED content, read via MCP; after changing, use the appropriate write/update tool. Run **`tied_validate_consistency`** before marking work complete.
+- **Client inheritance of LEAP R+A+I**
+  - **All TIED projects inherit the LEAP R+A+I** via `copy_files.sh`: the client's `tied/` contains the methodology-enforcing REQ/ARCH/IMPL and PROC tokens (e.g. REQ-TIED_SETUP, REQ-MODULE_VALIDATION, ARCH-TIED_STRUCTURE, ARCH-MODULE_VALIDATION, IMPL-TIED_FILES, IMPL-MODULE_VALIDATION, [PROC-LEAP], and related process tokens) and their detail files so that TIED and LEAP behaviors exist in every project. These tokens are **mandatory for TIED success** and must not be removed.
+  - For structure and sample records, agents refer to **`templates/`** in the TIED repository—the same content that `copy_files.sh` copies to the client's `tied/`. The client's `tied/` has that inherited set plus any project-specific entries added by the project.
 
 ---
 
@@ -56,9 +68,11 @@ This document centralizes every instruction AI coding assistants must follow whi
 - [ ] Verify all documents in Section 1 have been reviewed
 - [ ] Understand current priorities and dependencies
 - [ ] Review existing semantic tokens, architecture decisions, and implementation decisions related to the work
+- [ ] **IMPL `essence_pseudocode`**: Every block has a comment naming REQ/ARCH/IMPL and how the block implements them ([PROC-IMPL_PSEUDOCODE_TOKENS])
 
 ### 3.3 During Work
 - [ ] Use semantic tokens in code comments and test names
+- [ ] **IMPL `essence_pseudocode`**: Every block has a comment naming REQ/ARCH/IMPL and how the block implements them; add/update when authoring or editing IMPL pseudo-code
 - [ ] Keep documentation synced as decisions change
 - [ ] Maintain module boundaries and validate independently before integration
 - [ ] Keep descriptive debug output (e.g., `DEBUG:`, `TRACE:`, `DIAGNOSTIC:`) to document decision points and execution flow; retain unless explicitly asked to remove
@@ -67,6 +81,7 @@ This document centralizes every instruction AI coding assistants must follow whi
 ### 3.4 After Completing Work
 - [ ] `semantic-tokens.yaml` reflects every token referenced in code/tests/docs
 - [ ] Architecture and implementation decision logs are current and cross-referenced
+- [ ] If code or tests diverged from IMPL: IMPL (and ARCH/REQ if scope changed) updated in reverse order so the stack is consistent
 - [ ] Tests reference their corresponding semantic tokens
 - [ ] Module validation status is documented
 - [ ] All documentation matches the implemented state (no drift)
@@ -86,7 +101,7 @@ This document centralizes every instruction AI coding assistants must follow whi
 
 ## 5. Key Files & Responsibilities
 
-Same filename at repo root (template) and in `tied/` (project index); location distinguishes use.
+Same filename at repo root (template) and in `tied/` (project index); location distinguishes use. Index YAMLs and detail files copied to the client come from **`templates/`** (core methodology / inherited LEAP R+A+I). Agents refer to `templates/` in the TIED repo for the canonical structure and sample records.
 
 | File | Purpose |
 | --- | --- |
@@ -103,8 +118,7 @@ Same filename at repo root (template) and in `tied/` (project index); location d
 | `implementation-decisions.yaml` | Implementation decisions YAML index/database with `[IMPL-*]` records tied to requirements + architecture |
 | `implementation-decisions/` | Individual implementation decision detail files (YAML, e.g., `IMPL-MODULE_VALIDATION.yaml`) |
 | `detail-files-schema.md` | Schema for REQ/ARCH/IMPL detail YAML files (in TIED repo or tied/) |
-| `processes.md` | Process tracking including `[PROC-YAML_DB_OPERATIONS]` for YAML operations |
-| `docs/ai-agent-tied-mcp-usage.md` | **AI agents**: Use TIED MCP server as primary interface to TIED data; TIED directs the build; direct file use only when necessary (see doc). |
+| `processes.md` | Process tracking including `[PROC-YAML_DB_OPERATIONS]`, LEAP, PROC-TIED_DEV_CYCLE; use TIED MCP as primary interface to TIED data (see §2 TIED data access). |
 | `.cursorrules` | IDE loader that points back to this document |
 | `.ai-agent-instructions` | Quick reminder pointing to this document |
 
@@ -130,4 +144,4 @@ You can apply these rules in several ways:
 - Mirror changes into `ai-principles.md` and related docs as needed.
 - Nested directories may introduce their own `AGENTS.md` to extend or override these rules within their subtree; the most specific file wins.
 
-**Last Updated**: 2026-02-23
+**Last Updated**: 2026-03-05

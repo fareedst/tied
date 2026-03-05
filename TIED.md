@@ -124,6 +124,14 @@ function checkFile(fileState) {
 4. **Onboarding**: New developers can understand intent quickly
 5. **Refactoring Confidence**: Changes can be validated against original intent
 
+### Costs and Trade-offs
+
+- **Discipline overhead**: Every code change must maintain token traceability. This can slow initial velocity until the habit is established.
+- **Learning curve**: New contributors must understand the token system and the REQ → ARCH → IMPL chain.
+- **Token maintenance**: Tokens can drift if the LEAP loop is not followed; tooling (e.g. `tied_validate_consistency`, `validate_tokens.sh`) mitigates this.
+- **Upfront investment**: Documentation-first means more time before the first line of code; payoff is in refactoring confidence, AI-assisted efficiency, and onboarding speed.
+- **When not to use TIED**: Throwaway prototypes, very small scripts, or projects where intent preservation has no audience.
+
 ### Comparison to Other Methodologies
 
 | Aspect | TDD | TIED | Combined |
@@ -342,6 +350,35 @@ git checkout -b feature/REQ_USER_AUTH
 ```
 
 This pattern ensures each module is validated independently before integration, reducing complexity-related bugs.
+
+### Documentation Structure in TIED Projects
+
+TIED projects maintain a consistent documentation structure. Understanding it helps you evaluate and adopt the methodology:
+
+- **Requirements** (`requirements.yaml` + `requirements/` detail files): Each requirement has a unique `[REQ-*]` token, with description, rationale, satisfaction criteria, and validation criteria. Requirements are language-agnostic; they describe WHAT and WHY, not HOW.
+- **Architecture decisions** (`architecture-decisions.yaml` + `architecture-decisions/`): High-level design choices with `[ARCH-*]` tokens, cross-referencing `[REQ-*]`. Language selection and architectural patterns live here.
+- **Implementation decisions** (`implementation-decisions.yaml` + `implementation-decisions/`): Low-level choices with `[IMPL-*]` tokens, cross-referencing both `[ARCH-*]` and `[REQ-*]`. IMPL detail files include `essence_pseudocode`—the source of consistent logic that tests and code follow.
+- **Semantic token registry** (`semantic-tokens.yaml`): Central registry of all tokens; `semantic-tokens.md` is the guide for format and conventions.
+- **Code and tests**: Code comments and test names include the same tokens so every change is traceable back to requirements.
+
+Semantic tokens are not just labels—they are the mechanism that preserves intent from requirements through architecture, implementation, tests, and code. IMPL pseudo-code is where logical and flow issues are resolved before any tests or code are written.
+
+### Bugs vs Requirements: How to Think About Them
+
+**Requirements describe desired behavior. Bugs describe implementation failures.** This distinction is fundamental to TIED:
+
+- **Requirements (`[REQ-*])`**: Describe WHAT the system should do and WHY. They are user-facing and use positive language (what should happen).
+- **Bugs**: Describe WHERE the implementation fails to meet a requirement. They are tracked in architecture or implementation decisions, with a cross-reference to the requirement that should be satisfied.
+
+**Rules for requirements:** Do not describe bugs in requirements. Do not use "fix", "bug", "issue", or "problem" in requirement descriptions. Focus on desired behavior and capabilities. If fixing a bug reveals that behavior was never properly specified, add a requirement that describes the desired behavior, then implement the fix against that requirement.
+
+**Decision tree:** Is this describing WHAT the system should do? → It's a requirement (document in requirements with `[REQ-*]`). Is this describing WHERE implementation fails? → It's a bug (document in architecture-decisions or implementation-decisions with `[ARCH-*]` or `[IMPL-*]`, cross-reference `[REQ-*]`). Is this describing HOW to implement something? → It's an architecture or implementation decision.
+
+**Example — bad:** A requirement titled "Fix configuration merge strategy for exclude_patterns" describes a fix, not behavior. **Good:** "Array configuration fields default to merge (accumulate) strategy" describes desired behavior. The bug fix is then documented in an architecture or implementation decision that references this requirement.
+
+### Configuring AI Agents (for project maintainers)
+
+If you use AI assistants in a TIED project, point them at the agent-facing files that are copied into your project: `AGENTS.md` (canonical entry point) and `ai-principles.md` (operational mandates and checklists). The `.cursorrules` file in the project root is typically configured to load these. Agents are instructed to preface every response with "Observing AI principles!" and to follow the documentation-first, token-traceable process. You do not need to duplicate these instructions; ensure `AGENTS.md` and `ai-principles.md` are present (e.g. via `copy_files.sh` from the TIED repo) and that your IDE or system prompt references them.
 
 ### TIED Language: Pseudo-Code Templates with Semantic Tokens
 
@@ -757,7 +794,7 @@ TIED enables several metrics:
 ---
 
 **For more information**, see:
-- `ai-principles.md` - Complete TIED principles and process guide
+- `ai-principles.md` - Agent operational mandates and checklists (in projects set up with TIED)
 - `tied-language-spec.md` - TIED language specification (pseudo-code templates with semantic tokens)
 - `requirements.md` - Template guide for requirements documentation (at TIED repo root; copy to your project's `tied/requirements.md`)
 - `requirements.yaml` - YAML index template for requirements with `[REQ-*]` tokens (copy to your project's `tied/requirements.yaml`)

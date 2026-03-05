@@ -26,7 +26,7 @@ The primary way to work with TIED is via the MCP server; a standalone bootstrap 
 
 ### Step 1: Copy Templates to Your Project
 
-**Recommended:** Download or clone the TIED repository somewhere convenient, then run `./copy_files.sh /path/to/project` (or `./copy_files.sh` if you are already in the project directory). The script copies the template files from the repo root into the target project's `tied/` directory with the same filename (at root they are templates; in `tied/` they are the project indexes). It will never overwrite an existing `AGENTS.md` or `.cursorrules` file that may already be present in the destination.
+**Recommended:** Download or clone the TIED repository somewhere convenient, then run `./copy_files.sh /path/to/project` (or `./copy_files.sh` if you are already in the project directory). The script copies the **core methodology (inherited LEAP R+A+I)** from `templates/` into the target project's `tied/` directory so every project has the methodology-enforcing requirements, architecture, and implementation tokens and their detail files. It will never overwrite an existing `AGENTS.md` or `.cursorrules` file that may already be present in the destination.
 
 ```bash
 # From the TIED repo root—adjust the target path as needed
@@ -75,24 +75,13 @@ If you do not use MCP, run `./bootstrap_without_mcp.sh /path/to/project` to get 
 
 ## Example Workflow
 
-1. **User Request**: "Add user authentication"
-2. **AI Response (Planning Phase - NO CODE YET)**: 
-   - Creates `[REQ-USER_AUTH]` token in `requirements.yaml`
-   - Expands into pseudo-code and decisions
-   - **IMMEDIATELY** documents architecture decisions in `architecture-decisions.yaml` with `[ARCH-*]` tokens
-   - **IMMEDIATELY** documents implementation decisions in `implementation-decisions.yaml` with `[IMPL-*]` tokens
-   - **IMMEDIATELY** updates `semantic-tokens.yaml` with all new tokens
-   - Plans implementation steps (optionally in `tasks.md`, or via in-session planning)
-   - **NO code changes yet**
-3. **User Approval**: User reviews and approves planning documents
-4. **Implementation Phase**: 
-   - Implement work, starting with highest priority
-   - **DURING implementation**: Update documentation as decisions are made or refined
-5. **Completion Phase**: 
-   - Verify all documentation is up-to-date and mirrors the semantic tokens referenced by the finished code and tests
-   - Ensure the semantic tokens registered in `semantic-tokens.yaml` match the tokens used across code, tests, and documentation for these changes
+1. **Capture intent**: Create `[REQ-USER_AUTH]` (or equivalent) in `requirements.yaml`; expand into pseudo-code and decisions.
+2. **Design**: Document architecture in `architecture-decisions.yaml` with `[ARCH-*]` tokens and implementation in `implementation-decisions.yaml` with `[IMPL-*]` tokens; update `semantic-tokens.yaml`. Plan implementation steps (optionally in `tasks.md` or in-session).
+3. **Review**: Human reviews planning documents before any code is written.
+4. **Implement**: Tests first (TDD, conforming to IMPL pseudo-code), then code, then binding/glue, then E2E tests. Update documentation as decisions are made or refined.
+5. **Close the loop**: Verify TIED data matches implementation; run token/consistency validation; ensure all tests pass and semantic tokens are consistent across code, tests, and documentation.
 
-See [LLM Response Guide](llm-response-guide.md) for detailed information about how AI assistants should respond when working with TIED. For the full step-by-step procedure from user prompt to commit (including diagram), see **[docs/new-feature-process.md](docs/new-feature-process.md)** (`[PROC-NEW_FEATURE]`). Commit messages per session: see [CONTRIBUTING.md](CONTRIBUTING.md) (TIED repo contributors). Projects set up with `copy_files.sh` get **tied/commit-guidelines.md** as the commit message quick reference.
+For the full procedure from user prompt to commit (including diagram), see **[docs/new-feature-process.md](docs/new-feature-process.md)**. For AI agent configuration and checklists, see **AGENTS.md** (copied into projects via `copy_files.sh`). Commit messages: [CONTRIBUTING.md](CONTRIBUTING.md) (TIED repo); projects get **tied/commit-guidelines.md** as the quick reference.
 
 ### Phase Flow Shortcut
 ```mermaid
@@ -108,6 +97,139 @@ flowchart LR
 ```
 *Mermaid flowchart showing the documentation-first cadence before code begins.*
 
+## LEAP (for non-programmers)
+
+**LEAP** (Logic Elevation And Propagation) is the core loop that keeps TIED consistent: we write the **plan** for how the product should behave in one place (implementation pseudo-code), and we keep that plan in sync with the actual code and tests. When tests show the plan was wrong, we update the plan first, then the code—so the plan is always the single place that describes the logic.
+
+- **In plain language**: We keep one written description of how the product is supposed to behave, update it when tests show we were wrong, and make sure code and tests always match that description—so we never lose the reasoning behind our decisions.
+- **Analogy**: Like a recipe. We write the recipe before cooking; when we taste and something’s off, we change the recipe and then cook again. The recipe stays the source of truth for the next cook (or the next sprint).
+
+For the full process definition, see `tied/processes.md` § LEAP. For an expert-level treatment (including why AI agents are more efficient reading IMPL pseudo-code than hunting through source files), see [docs/LEAP.md](docs/LEAP.md).
+
+## TIED traceability walkthrough
+
+This section is a compact example of related **R/A/I** tokens, their content, token-decorated pseudo-code, and how TIED with LEAP develops tests and code and updates TIED. No code or tests are written here—only the structure and the workflow.
+
+### A small R/A/I chain (formatted)
+
+The following is a compact view of one requirement, one architecture decision, and one implementation decision that trace to each other. In real TIED data these live in `tied/requirements.yaml`, `tied/architecture-decisions.yaml`, and `tied/implementation-decisions.yaml` (and their detail files).
+
+**REQ — Requirement (what and why)** · **`[REQ-TIED_SETUP]`**
+
+```
+REQ-TIED_SETUP
+  name: TIED Methodology Setup
+  priority: P0
+  rationale.why: Ensure traceability of intent from requirements to code
+  satisfaction_criteria:
+    - tied/ directory exists with proper structure
+    - All required documentation files exist and are populated
+  traceability.architecture: [ ARCH-TIED_STRUCTURE ]
+  traceability.implementation: [ IMPL-TIED_FILES ]
+```
+
+*Links to **ARCH-TIED_STRUCTURE** and **IMPL-TIED_FILES**.*
+
+**ARCH — Architecture (high-level how)** · **`[ARCH-TIED_STRUCTURE]`**
+
+```
+ARCH-TIED_STRUCTURE
+  name: TIED Project Structure
+  cross_references: [ REQ-TIED_SETUP ]
+  rationale.why: Keeps documentation close to code in a dedicated namespace
+  implementation_approach.summary: Create dedicated tied/ directory with YAML indexes and detail subdirectories
+  traceability.requirements: [ REQ-TIED_SETUP ]
+  traceability.implementation: [ IMPL-TIED_FILES ]
+```
+
+*Satisfies **REQ-TIED_SETUP**; implemented by **IMPL-TIED_FILES**.*
+
+**IMPL — Implementation (low-level how and pseudo-code)** · **`[IMPL-TIED_FILES]`**
+
+```
+IMPL-TIED_FILES
+  name: TIED File Creation
+  cross_references: [ ARCH-TIED_STRUCTURE, REQ-TIED_SETUP ]
+  implementation_approach.summary: Bootstrap script that creates tied/, copies templates, sets up base files
+  code_locations.files: [ { path: copy_files.sh } ]
+  traceability.requirements: [ REQ-TIED_SETUP ]
+  traceability.architecture: [ ARCH-TIED_STRUCTURE ]
+```
+
+*Implements the ARCH; code lives in `copy_files.sh`.*
+
+### Pseudo-code with tokens and blocks
+
+The IMPL detail file holds **essence_pseudocode**: the logical representation of the solution, with blocks documented by **tokens and text**. A snippet from the Hoverboard browser extension:
+
+```
+# [IMPL-ICON_CLICK_BEHAVIOR] [ARCH-ICON_CLICK_BEHAVIOR] [REQ-ICON_CLICK_BEHAVIOR]
+# Icon click opens side panel (default) or popup; when side panel, click toggles (close if already open).
+INPUT: user clicks extension toolbar icon
+OUTPUT: side panel opens or closes (toggle) when option enabled; else popup opens
+DATA: SW _iconClickOpensSidePanel (cached), _sidePanelWindowId; panel _sidePanelLoadTime; MESSAGE_TYPES.REQUEST_SIDE_PANEL_CLOSE
+
+# [REQ-ICON_CLICK_BEHAVIOR] [ARCH-ICON_CLICK_BEHAVIOR] [IMPL-ICON_CLICK_BEHAVIOR]
+# Manifest: no default_popup so onClicked fires.
+manifest action: default_icon, default_title; no default_popup
+
+# [REQ-ICON_CLICK_BEHAVIOR] [ARCH-ICON_CLICK_BEHAVIOR] [IMPL-ICON_CLICK_BEHAVIOR]
+# SW: listener passes tab from Chrome into handleActionClick(tab).
+action.onClicked.addListener((tab) => handleActionClick(tab))
+
+# [REQ-ICON_CLICK_BEHAVIOR] [ARCH-ICON_CLICK_BEHAVIOR] [IMPL-ICON_CLICK_BEHAVIOR]
+# SW handleActionClick(tab): prefer clicked window; Chrome requires sidePanel.open() in same synchronous user-gesture stack.
+handleActionClick(tab):
+  openSidePanel = (this._iconClickOpensSidePanel !== false)
+  IF NOT openSidePanel: action.openPopup(); RETURN
+  IF NOT sidePanel.open available: action.openPopup(); RETURN
+  # [IMPL-ICON_CLICK_BEHAVIOR] Prefer clicked window: use tab from onClicked when provided, else cache.
+  clickedWindowId = tab?.windowId != null ? tab.windowId : null
+  cachedWindowId = this._sidePanelWindowId
+  useWindowId = clickedWindowId != null ? clickedWindowId : cachedWindowId
+  IF useWindowId != null:
+    IF clickedWindowId != null AND NOT _isRestrictedForSidePanel(tab?.url): this._sidePanelWindowId = clickedWindowId
+    sidePanel.open({ windowId: useWindowId }); windows.update(useWindowId, { focused: true }); sendMessage(REQUEST_SIDE_PANEL_CLOSE); RETURN
+  # [IMPL-ICON_CLICK_BEHAVIOR] Cold start: no tab and no cache; do NOT call sidePanel.open in async callback (gesture would be lost). Seed cache for next click; open popup as fallback.
+  tabs.query({ active: true, currentWindow: true }, (tabs) =>
+    tabFromQuery = tabs?.[0]
+    IF tabFromQuery?.windowId != null AND NOT _isRestrictedForSidePanel(tabFromQuery.url): this._sidePanelWindowId = tabFromQuery.windowId
+  )
+  action.openPopup()
+```
+
+#### Blocks in this pseudo-code
+
+Each logical block is documented with **tokens** and **text**:
+
+1. **Header block** — The opening lines (INPUT/OUTPUT/DATA) are tagged with `[IMPL-ICON_CLICK_BEHAVIOR]` `[ARCH-ICON_CLICK_BEHAVIOR]` `[REQ-ICON_CLICK_BEHAVIOR]` and a text comment describing the feature (icon click opens side panel or popup; toggle when side panel).
+2. **Manifest block** — Same token triplet plus text: "Manifest: no default_popup so onClicked fires."
+3. **Listener registration** — Same triplet plus text: "SW: listener passes tab from Chrome into handleActionClick(tab)."
+4. **handleActionClick body** — Token triplet on the procedure header; inner blocks use `[IMPL-ICON_CLICK_BEHAVIOR]` plus text for "Prefer clicked window" and "Cold start" behavior.
+5. **Cold-start fallback** — Documented with `[IMPL-ICON_CLICK_BEHAVIOR]` and a comment explaining why `sidePanel.open` must not run in an async callback (gesture would be lost).
+
+Several blocks are documented this way (tokens + text), making the pseudo-code the **single source of consistent logic**; code and tests are derived from it and must stay aligned (LEAP).
+
+### How TIED with LEAP develops tests, code, and E2E, then closes the loop
+
+1. **Tests first (TDD)**  
+   Tests are written to **conform to** the IMPL pseudo-code; test names and comments carry the same REQ/ARCH/IMPL tokens. No production code yet (or only the minimum needed to make the first test pass). Define tests that validate each IMPL block (e.g. unit tests for “directory created,” “files copied,” “index YAML parseable”; integration tests for “full bootstrap produces valid tied/ layout.” Test names and comments reference the same tokens (e.g. `[REQ-TIED_SETUP]`, `[IMPL-TIED_FILES]`).
+2. **Code via TDD**  
+   Code is written to **satisfy** the tests. The **entire** IMPL pseudo-code is implemented via TDD: write test → make it pass → refactor; repeat until every IMPL block is covered. If behavior discovered during TDD **differs** from the IMPL, **elevate** the change into IMPL first (LEAP bottom-up), then adjust code; or adjust code to match the IMPL. If scope changed, propagate to ARCH and REQ in the same work item.
+
+3. **Binding / glue**  
+   After TDD, write **binding, non-unit-test-covered code** (entry points, platform wiring, manifest, etc.) so the full REQ/ARCH/IMPL can run. Document any non-trivial glue in the IMPL (e.g. `e2e_only_reason` or `testability: e2e_only`).
+
+4. **E2E**  
+   E2E tests are written **after** binding code to **protect** the glue and the most basic features.
+
+5. **Closing the loop**  
+   When all tests pass and all requirements are met, **update TIED** to match the implementation: IMPL `code_locations`, `traceability.tests`, and any refined `essence_pseudocode`; ARCH/REQ if scope or satisfaction criteria changed. Run `tied_validate_consistency` so the full stack (REQ ↔ ARCH ↔ IMPL ↔ tests ↔ code) remains consistent. This **propagation** (IMPL → ARCH → REQ when scope changes) is LEAP keeping the stack consistent.
+
+**LEAP** is the loop that keeps the plan (IMPL) in sync with tests and code and feeds changes back into TIED (REQ/ARCH/IMPL) so the written record stays the source of truth.
+
+See `tied/processes.md` § LEAP and § PROC-TIED_DEV_CYCLE for the rules and mandatory implementation order; [docs/implementation-order.md](docs/implementation-order.md) gives a short standalone reference.
+
 ## Repository Structure
 
 This repository contains:
@@ -115,11 +237,13 @@ This repository contains:
 ### Scripts
 - `copy_files.sh` — Bootstrap a project with TIED templates (used by both MCP and non-MCP users; MCP users then configure the server).
 - `bootstrap_without_mcp.sh` — Same bootstrap as `copy_files.sh`, then prints next steps for non-MCP users.
-- `scripts/prepare_readme_demo.sh` — Ensures `tied/` exists with sample data (runs `copy_files.sh .` if needed), then runs the README Query Examples (yq commands) so README recordings and screenshots use consistent test data.
+- `scripts/prepare_readme_demo.sh` — Ensures `tied/` exists with inherited LEAP R+A+I (runs `copy_files.sh .` if needed), then runs the README Query Examples (yq commands) against the bootstrapped `tied/`.
 
 ### Methodology Documentation (Reference Only)
 - `TIED.md` - TIED methodology overview (for beginners, intermediate, and experts)
-- `ai-principles.md` - Complete TIED principles and process guide
+- `docs/LEAP.md` - LEAP (Logic Elevation And Propagation) for expert programmers: why IMPL pseudo-code is more efficient for AI than hunting through source
+- `docs/implementation-order.md` - Mandatory implementation order (tests-first, code via TDD, glue, E2E) in one place; same order in `tied/processes.md` § PROC-TIED_DEV_CYCLE
+- `ai-principles.md` - Agent operational mandates and checklists (copied to projects via copy_files.sh)
 - `tied-language-spec.md` - TIED language specification (pseudo-code templates with semantic tokens)
 - `conversation.template.md` - Template conversation demonstrating TIED workflow
 - `AGENTS.md` - Canonical AI agent operating guide
@@ -279,9 +403,9 @@ The YAML index files use **structured, machine-parseable fields** instead of mar
 - **Structured criteria**: Lists of items with optional metrics/coverage for precise validation
 - **Structured metadata**: Grouped `created`, `last_updated`, `last_validated` with date/author/reason/result
 
-**Query Examples** (use test/sample data in `tied/`):
+**Query Examples** (use bootstrapped `tied/` with inherited LEAP R+A+I):
 
-To run these in the TIED repo, first create `tied/` with sample data: `./copy_files.sh .` (from repo root). Or run `./scripts/prepare_readme_demo.sh` to ensure `tied/` exists and print this output.
+To run these in the TIED repo, first create `tied/` with the inherited methodology: `./copy_files.sh .` (from repo root). Or run `./scripts/prepare_readme_demo.sh` to ensure `tied/` exists and print this output. Agents refer to `templates/` in the TIED repo for structure and sample records.
 
 ```bash
 # Get architecture dependencies
@@ -297,7 +421,7 @@ yq '.ARCH-TIED_STRUCTURE.alternatives_considered[].name' tied/architecture-decis
 yq '.IMPL-TIED_FILES.code_locations.files[].path' tied/implementation-decisions.yaml
 ```
 
-Example output (from template sample data):
+Example output (from bootstrapped tied/ with inherited LEAP R+A+I):
 
 ```
 ARCH-TIED_STRUCTURE
@@ -340,27 +464,6 @@ This enables **direct field access**, **structured queries**, **easy filtering**
    - Minimize code that is only measurable via E2E or manual testing; logic should live in testable modules unless justified.
    - IMPL details can classify testability (`unit` | `integration` | `e2e_only`) and, when `e2e_only`, document the reason (`e2e_only_reason`).
    - Use the TIED development cycle ([PROC-TIED_DEV_CYCLE]) per session: plan from REQ/ARCH/IMPL, author pseudo-code and tokens, add and align tests, implement (TDD), minimal glue, validate, then sync TIED to code and update README/CHANGELOG.
-
-## Visual Guides
-
-### New Requirement Timeline
-![docs/visuals/new-requirement-timeline.svg](docs/visuals/new-requirement-timeline.svg)
-
-### Traceability Graph
-![Traceability Graph](docs/visuals/traceability-graph.svg)
-*Sample graph illustrating how requirements branch to architecture and implementation tokens before hitting validation tests.*
-
-### Task & Token Alignment
-![Task & Token Alignment](docs/visuals/task-token-alignment.svg)
-
-| Work Item | Priority | Token Trail | Validation Evidence
-| --- | --- | --- | ---
-| Implement Parser Pipeline `[REQ-CFG_005]` | P0 | `[ARCH-FORMAT_PIPELINE] → [IMPL-PLACEHOLDER_ENGINE]` | Token audit + formatter unit test bundle
-| Validate Formatter Module | P1 | `[ARCH-MODULE_VALIDATION] → [IMPL-VALIDATION_SUITE]` | Contract test suite + `[PROC-TOKEN_VALIDATION]` run
-| Update Docs for New Feature | P2 | `[REQ-TIED_SETUP] → [ARCH-TIED_STRUCTURE] → [IMPL-TIED_FILES]` | Documentation review checklist
-
-*Hypothetical work items showing how planning (whether in `tasks.md`, `implementation-decisions`, or in-session) should carry semantic tokens and validation artifacts.*
-
 
 ## Language-Specific Notes
 

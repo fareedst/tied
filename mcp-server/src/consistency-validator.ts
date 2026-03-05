@@ -141,6 +141,8 @@ export interface PseudocodeResult {
   token: string;
   has_essence_pseudocode: boolean;
   essence_pseudocode_empty?: boolean;
+  /** True when essence_pseudocode is non-empty but contains no [REQ-], [ARCH-], or [IMPL-] token comments. Fatal for traceability ([PROC-IMPL_PSEUDOCODE_TOKENS]). */
+  missing_token_comments?: boolean;
   tokens_in_text: { req: string[]; arch: string[]; impl: string[] };
   ref_issues: TokenReferenceIssue[];
 }
@@ -430,6 +432,18 @@ export function validateConsistency(options: ValidateConsistencyOptions = {}): C
           }
         }
         pseudocodeResult.tokens_in_text = extractTokensFromText(text);
+        const hasAnyTokenInPseudocode =
+          pseudocodeResult.tokens_in_text.req.length > 0 ||
+          pseudocodeResult.tokens_in_text.arch.length > 0 ||
+          pseudocodeResult.tokens_in_text.impl.length > 0;
+        if (
+          pseudocodeResult.has_essence_pseudocode &&
+          !pseudocodeResult.essence_pseudocode_empty &&
+          !hasAnyTokenInPseudocode
+        ) {
+          pseudocodeResult.missing_token_comments = true;
+          report.ok = false;
+        }
         for (const t of dedupe([
           ...pseudocodeResult.tokens_in_text.req,
           ...pseudocodeResult.tokens_in_text.arch,

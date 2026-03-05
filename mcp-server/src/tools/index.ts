@@ -170,7 +170,7 @@ export const allTools = [
     name: "tied_validate_consistency",
     config: {
       description:
-        "Validate TIED index and detail YAML consistency: token existence, REQ→ARCH→IMPL traceability, detail file content, and IMPL essence_pseudocode token refs. Returns a structured report with index syntax, index_tokens, token_references, traceability, detail_files, and pseudocode sections. Use before marking work complete to ensure every referenced token has an existing record.",
+        "Validate TIED index and detail YAML consistency: token existence, REQ→ARCH→IMPL traceability, detail file content, and IMPL essence_pseudocode token refs. When include_pseudocode is true, non-empty essence_pseudocode without any [REQ-], [ARCH-], or [IMPL-] token comments is reported as missing_token_comments and fails the report ([PROC-IMPL_PSEUDOCODE_TOKENS]). Returns a structured report with index syntax, index_tokens, token_references, traceability, detail_files, and pseudocode sections. Use before marking work complete to ensure every referenced token has an existing record and IMPL pseudo-code has token comments.",
       inputSchema: z.object({
         include_detail_files: z
           .boolean()

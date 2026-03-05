@@ -15,6 +15,10 @@ Each token declares the process, its scope, and the requirements it serves. Beca
 
 Process entries become first-class trace nodes that explain **how** to survey, build, test, deploy, and otherwise steward the requirements themselves.
 
+### Inherited tokens (TIED/LEAP methodology)
+
+All TIED projects inherit a core set of REQ/ARCH/IMPL and PROC tokens via `copy_files.sh` (from `templates/`). These tokens are **mandatory for TIED success** and enforce the methodology; they must not be removed. The inherited set includes REQ-TIED_SETUP, REQ-MODULE_VALIDATION, ARCH-TIED_STRUCTURE, ARCH-MODULE_VALIDATION, IMPL-TIED_FILES, IMPL-MODULE_VALIDATION, and the process tokens defined in this document (e.g. [PROC-LEAP], [PROC-TOKEN_AUDIT], [PROC-TIED_DEV_CYCLE]). See `semantic-tokens.md` § Inherited tokens and AGENTS.md § Client inheritance of LEAP R+A+I.
+
 ## Process Entry Template
 
 Use the structure below for every process you document. Each entry should be kept current, reference the controlling requirements, and mention the deliverables or artifacts it produces.
@@ -71,6 +75,44 @@ Use the structure below for every process you document. Each entry should be kep
 #### Artifacts & Metrics
 - **Artifacts** — Onboarding checklist, environment matrix, token discovery log.
 - **Success Metrics** — Every new module has `[REQ-*]` tokens defined, token registry updated, and build/test/deploy pipelines run at least once.
+
+---
+
+## LEAP: `[PROC-LEAP]` Logic Elevation And Propagation
+
+**When it runs:** Every time a change occurs to the TIED db (REQ/ARCH/IMPL YAML indexes or detail files) or to its outputs (code, tests, or documents that reference tokens). This is the primary loop that must be executed to keep the stack consistent and testable.
+
+### Purpose
+
+Logic is **elevated** into IMPL pseudo-code (out of source code); the tasks of coding the solution live in the pseudo-code, not in the source. All changes are **distributed and validated** from top to bottom through the stack so that IMPL pseudo-code is the **logical representation of the solution**, bounded by R/A/I tokens that shape it. Source code is the implementation of that record. Code is valid only when all tests pass and all requirements are met.
+
+### Scope
+
+Applies to all work that touches requirements, architecture, implementation decisions, tests, or code annotated with TIED tokens. Applies in both top-down (REQ → ARCH → IMPL) creation and bottom-up refinement from TDD/E2E results.
+
+### Token references
+
+- All `[REQ-*]`, `[ARCH-*]`, `[IMPL-*]` tokens; `[PROC-TOKEN_AUDIT]`, `[PROC-TOKEN_VALIDATION]`.
+
+### Status
+
+Active. Mandatory on every change to the TIED db or its outputs.
+
+### Rules (core activities)
+
+1. **Logic elevation and propagation (bottom-up)**  
+   When code written during **TDD** or **E2E testing** is separate from or differs from the IMPL pseudo-code, that divergence **must** trigger updates in **reverse order** along the stack: **IMPL → ARCH → REQ** in the same work item. Elevate the new logic into IMPL; if the change affects architecture or requirement scope, propagate to ARCH and then REQ so the stack stays consistent and the IMPL remains the logical representation bounded by R/A/I tokens.
+
+2. **Bidirectional stack; distribute and validate**  
+   Work **may start at any layer** of the stack (REQ, ARCH, IMPL, or code/tests). For the work to be **complete**, changes **must be distributed and validated both up and down** the stack as needed (e.g. a change that starts in IMPL may require ARCH or REQ updates (up) and code/tests updates (down); a change that starts in code must propagate back to IMPL → ARCH → REQ (up) and ensure tests are updated (down)). **Code is only valid** when **all tests pass** and **all requirements are met**; validity implies the full stack (REQ, ARCH, IMPL, tests, code) is consistent and traceable via tokens.
+
+3. **YAML/MCP and cognitive load**  
+   REQ, ARCH, and IMPL detail is maintained in **YAML files** (indexes + detail files per token). The TIED MCP optimizes use of this YAML db by presenting R/A/I via **indexes** and **CRUD+ actions**, including **validation of the entire db**. For a complex task: collect all related R/A/I index and detail records; then **only the pseudo-code for the necessary IMPL** needs to be comprehended to develop an ideal solution. Updating the code to match the new IMPL pseudo-code is a **separate task**. The cognitive load of processing a **handful of IMPL** records should be **smaller** than parsing an arbitrary number of source code files to guess at side effects; when that holds, intent and logic live in the R/A/I YAML and IMPL pseudo-code, and code remains the implementation of that record. See `docs/ai-agent-tied-mcp-usage.md` for MCP workflow and rationale.
+
+### Artifacts & Metrics
+
+- **Artifacts** — Updated IMPL/ARCH/REQ detail files and indexes; code and tests aligned to IMPL; token registry and consistency validation output.
+- **Success Metrics** — Stack consistent (REQ ↔ ARCH ↔ IMPL ↔ tests ↔ code); all tests pass; all requirements met; `tied_validate_consistency` (or equivalent) passes.
 
 ---
 
@@ -412,41 +454,49 @@ Active
    - Use each IMPL’s `essence_pseudocode` as the full prescription for what to implement; it is the **source of consistent logic**. Resolve all logical and flow issues in IMPL pseudo-code before adding tests or code.
    - Identify required updates (new or changed requirements and decisions) before writing code or tests.
 
-2. **Author TIED docs (pseudo-code + tokens)**
+2. **Author TIED docs (pseudo-code + tokens)** `[PROC-IMPL_PSEUDOCODE_TOKENS]`
+   - **This is the most critical aspect of implementation:** IMPL pseudo-code is the source of consistent logic, and every block must carry semantic token comments for traceability.
    - Update REQ, ARCH, and IMPL (new and existing) as needed.
    - Resolve all logical and flow issues in IMPL pseudo-code so that it is complete and authoritative before proceeding to “Add and align tests.”
    - In every IMPL, ensure `essence_pseudocode` is complete. Every **block** in `essence_pseudocode` must have a comment that (1) names all REQ, ARCH, and IMPL reflected in that block and (2) states how that block implements those requirements.
    - Use the project block definition: a block is a contiguous logical unit implementing the same set of REQ/ARCH/IMPL; nested blocks implementing a different set get their own token comment.
 
-3. **Add and align tests**
+3. **Add and align tests (tests-first)**
+   - Tests are written to **conform to** the IMPL pseudo-code; they are written **before** production code (strict TDD). No production code beyond the minimum needed to run the first test.
    - Add or update tests so they match the IMPL.
    - Every test **block** must carry the same REQ/ARCH/IMPL comments as the corresponding IMPL block (in the appropriate place in the test).
    - If a comment would help tests but is not yet in the IMPL, add it to the IMPL for permanence; treat test code as transient.
    - Ensure testable logic is not implemented in entry points; plan extraction to a module so unit/integration tests can run.
 
 4. **Implement to tests (TDD)**
+   - The **entire** IMPL pseudo-code is implemented **via TDD**: code is written **only** to satisfy the tests. Write test → make it pass → refactor; repeat until every IMPL block is covered and all tests pass.
    - Implement logic in testable modules (with dependency injection or pure functions). Entry points should only call into these modules.
-   - Implement managed code to satisfy the tests.
    - Every **block** in managed sources must carry the same REQ/ARCH/IMPL comments as in the IMPL. For nested blocks with the **same** set, do not repeat token names; comment only how that sub-block implements the requirements. For a nested block with a **different** set, add a comment at the start naming that set and how the block implements it.
-   - Iterate until all tests pass.
 
 5. **Implement minimal glue**
-   - Implement **minimal** glue (entry points, manifest wiring, platform hooks). Any non-trivial logic that remains in glue must be justified in the IMPL (`e2e_only_reason` or `test_coverage_note`). Prefer extracting logic to a testable module and keeping glue thin.
-   - Annotate with the same token/block rules where the code is still “managed” and traceable.
+   - **After TDD is complete**, implement the **binding, non-unit-test-covered code** (entry points, manifest wiring, platform hooks) so the full REQ/ARCH/IMPL can run. Glue is the code that is not covered by unit/integration tests and is necessary to make the feature possible end-to-end.
+   - Keep glue **minimal**. Any non-trivial logic that remains in glue must be justified in the IMPL (`e2e_only_reason` or `test_coverage_note`). Prefer extracting logic to a testable module and keeping glue thin.
+   - Annotate with the same token/block rules where the code is still "managed" and traceable.
 
-6. **Validate and close test gaps**
+6. **Add E2E tests**
+   - E2E tests are written **after** glue to **protect** (a) the non-TDD (glue) code and (b) operations that ensure the most basic features. Add or update E2E tests so critical user journeys and glue paths are covered.
+   - Document E2E-only behavior in the IMPL so the boundary between "logic in IMPL" and "glue" is clear.
+
+7. **Validate and close test gaps**
    - Run the full test suite and add any missing tests.
    - Run `[PROC-TOKEN_VALIDATION]` (e.g. `./scripts/validate_tokens.sh`) and fix gaps so coverage and token traceability are complete.
 
-7. **Sync TIED to code and tests**
+8. **Sync TIED to code and tests**
    - Update REQ/ARCH/IMPL so they match the final code and tests. Ensure IMPLs modified this session reflect the implemented code and tests, including block-level comments with semantic tokens.
    - Sync `semantic-tokens.yaml`, `requirements.yaml`, `architecture-decisions.yaml`, and `implementation-decisions.yaml` (and detail files) so TIED docs remain the single source of truth for intent.
 
-8. **Update README and CHANGELOG**
+9. **Update README and CHANGELOG**
    - Update README.md and CHANGELOG.md for user- and release-facing changes made in this session.
 
-9. **Write commit message**
+10. **Write commit message**
    - Write the commit message **per [PROC-COMMIT_MESSAGES]**; where useful, reference the main REQ/ARCH/IMPL tokens touched in the body or footer.
+
+**Mandatory implementation order** (steps 3–8): (1) Tests first — conform to IMPL pseudo-code, no production code yet (or minimum to run first test). (2) Code via TDD — entire IMPL via TDD. (3) Binding/glue — after TDD, minimal non-unit-test-covered code (entry points, wiring). (4) E2E — after glue, to protect glue and basic features. (5) Validate and sync — run token/consistency validation; update TIED data to match implementation.
 
 ### Artifacts & Metrics
 - **Artifacts**: Updated REQ/ARCH/IMPL (including `essence_pseudocode` and block comments), tests, managed source code, README.md, CHANGELOG.md, commit.
