@@ -54,6 +54,7 @@ All path parameters (`requirements_path`, `architecture_path`, `implementation_p
 | `yaml_detail_update` | Update an existing detail file by merging top-level fields. Params: `token`, `updates` (JSON string). Fails if no file. |
 | `yaml_detail_delete` | Delete a detail YAML file. Params: `token`, optional `sync_index` (default true to clear detail_file in index). |
 | `tied_token_create_with_detail` | Create a new REQ, ARCH, or IMPL token with both index record and detail YAML in one step. Params: `token`, `index_record` (JSON string), `detail_record` (JSON string), optional `upsert_index` (default false). Sets `detail_file` on the index automatically. Fails if detail file already exists. |
+| `tied_token_rename` | Rename a single semantic token across the TIED tree. Replaces the token in YAML indexes (semantic-tokens, requirements, architecture, implementation), detail files (keys, values, list items), and renames the detail file when present. Params: `old_token`, `new_token` (same prefix required), optional `dry_run` (list would-be changes), `include_markdown` (also replace in tied/processes.md). Modified YAML is validated and pretty-printed with `yq -i -P` when yq is available. Returns `ok`, `files_modified`, `file_renamed`, `errors`. |
 | `convert_monolithic_requirements` | Convert STDD 1.0.0 monolithic `requirements.md` to TIED v1.5.0+ `requirements.yaml` + `requirements/REQ-*.yaml`. Params: `file_path` or `content`, optional `output_base_path`, `dry_run`, `overwrite`. |
 | `convert_monolithic_architecture` | Convert monolithic `architecture-decisions.md` to `architecture-decisions.yaml` + `architecture-decisions/ARCH-*.yaml`. Same params. |
 | `convert_monolithic_implementation` | Convert monolithic `implementation-decisions.md` to `implementation-decisions.yaml` + `implementation-decisions/IMPL-*.yaml`. Same params. |
@@ -62,6 +63,10 @@ All path parameters (`requirements_path`, `architecture_path`, `implementation_p
 | `tied_import_summary` | Import/inspect an existing TIED directory: read YAML indexes and report tokens plus detail file presence (hybrid .md and .yaml). Params: optional `base_path`. Use to validate a reference TIED layout. |
 | `tied_feedback_add` | Add a feedback entry (feature request, bug report, or methodology improvement). Creates or appends to `tied/feedback.yaml`. Params: `type` (feature_request \| bug_report \| methodology_improvement), `title`, `description`, optional `context` (JSON string), `include_report_snippet` (default true), optional `base_path`. Returns `ok`, `id`, `created_at`, and optionally `report_snippet` (markdown for pasting into a TIED issue). |
 | `tied_feedback_export` | Export all feedback entries for reporting to the TIED project. Params: `format` (markdown \| json), optional `base_path`. Returns a string suitable for copy-paste into an issue or report. |
+
+### Token rename
+
+Use **`tied_token_rename`** to rename a semantic token everywhere: YAML indexes, detail files (keys, values, list items), and the detail filename. Same prefix is required (e.g. REQ-X → REQ-Y). Use `dry_run: true` to list files that would change; optional `include_markdown` updates `tied/processes.md`. Modified YAML is validated and pretty-printed with `yq -i -P` when yq is available.
 
 ### Feedback (report to TIED)
 

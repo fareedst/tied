@@ -10,7 +10,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "test": "npm run build && node --test dist/convert/yaml-generator.test.js dist/feedback.test.js dist/yaml-loader.test.js dist/e2e/bootstrap-and-load.test.js",
+    "test": "npm run build && node --test dist/convert/yaml-generator.test.js dist/feedback.test.js dist/token-rename.test.js dist/yaml-loader.test.js dist/e2e/bootstrap-and-load.test.js",
     "prepare": "npm run build"
   },
   "engines": {

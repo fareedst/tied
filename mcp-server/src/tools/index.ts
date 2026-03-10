@@ -45,6 +45,7 @@ import {
   buildReportSnippet,
   type FeedbackType,
 } from "../feedback.js";
+import { renameSemanticToken } from "../token-rename.js";
 
 const INDEX_ENUM = z.enum([
   "requirements",
@@ -570,6 +571,36 @@ export const allTools = [
       return textContent(
         JSON.stringify({ ok: true, index: indexName, token, detail_path: detailFile }, null, 2)
       );
+    },
+  },
+  {
+    name: "tied_token_rename",
+    config: {
+      description:
+        "Rename a single semantic token across the TIED tree. Replaces the token in YAML indexes (semantic-tokens, requirements, architecture, implementation), detail files (keys, values, list items), and renames the detail file when present. Validates and pretty-prints modified YAML with yq -i -P when yq is available; otherwise YAML is left as-written. Use dry_run to list files and renames that would be performed.",
+      inputSchema: z.object({
+        old_token: z.string().min(1).describe("Current token ID (e.g. REQ-TIED_SETUP)"),
+        new_token: z.string().min(1).describe("New token ID; must not already exist; must have same prefix (REQ-/ARCH-/IMPL-/PROC-)"),
+        dry_run: z.boolean().optional().describe("If true, return files_modified and file_renamed that would be changed without writing"),
+        include_markdown: z.boolean().optional().describe("If true, also replace token in tied/processes.md"),
+      }),
+    },
+    handler: async ({
+      old_token,
+      new_token,
+      dry_run,
+      include_markdown,
+    }: {
+      old_token: string;
+      new_token: string;
+      dry_run?: boolean;
+      include_markdown?: boolean;
+    }) => {
+      const result = renameSemanticToken(old_token, new_token, {
+        dryRun: dry_run,
+        includeMarkdown: include_markdown,
+      });
+      return textContent(JSON.stringify(result, null, 2));
     },
   },
   {
