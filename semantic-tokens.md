@@ -190,6 +190,7 @@ Every feature must have proper token coverage across all layers:
 2. Every architecture decision must have corresponding implementation tokens
 3. Every test must link to specific requirements via `[REQ-*]` tokens
 4. All tokens must be discoverable through automated validation
+
 ## Token Creation Requirements
 
 When implementing features:

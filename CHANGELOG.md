@@ -33,6 +33,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Docs**: README, AGENTS.md, ai-principles.md, TIED.md, ANNOUNCEMENT.md, migrate-*.md, and mcp-server references updated to the new names and location semantics.
   - **mcp-server**: Added `yaml-loader.test.ts` (unit tests for `getBasePath` and `resolveIndexPath` preferring base then cwd); exported `clearBasePathCache()` for tests. `copy_files.sh`: hooks copy is conditional on source existing so bootstrap works without `.cursor/hooks.json`.
   - **mcp-server**: E2E tests in `src/e2e/bootstrap-and-load.test.ts` — run `copy_files.sh` into a temp dir, set `TIED_BASE_PATH` to `tied/`, then assert the loader reads `requirements` and `semantic-tokens` indexes from the copied files. Included in `npm test`.
+- **AGENTS.md** — Implementation order expanded to 6 steps (unit tests, unit code via TDD, composition tests, composition code via TDD, E2E with justification, closing the loop); `[PROC-YAML_EDIT_LOOP]` added to MCP usage and checklists; language-specific lint gate checklist item added during/after work.
+- **ai-principles.md** — Principle 9 (Separation of Concerns): E2E-only reworded; event bindings composition-testable. Principle 11: entry-point wiring composition-tested. Phase 3 mandatory order: 6 steps with lint gates. YAML edit loop in change-impact checklist.
+- **processes.md** — `[PROC-TEST_STRATEGY]`: new composition-tests-cover-bindings principle; E2E-only requires named platform constraint. `[PROC-YAML_DB_OPERATIONS]`: `[PROC-YAML_EDIT_LOOP]` subsection (controlling loop for YAML create/edit/validate/use). `[PROC-TIED_DEV_CYCLE]`: 11 steps; steps 3–7 governed by TDD inner loop (RED-GREEN-REFACTOR with lint gate); unit vs. composition distinction; E2E requires justification; managed vs. unmanaged code scope.
+- **semantic-tokens.md** — Minor formatting fix.
 
 ### Added
 
@@ -106,6 +110,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Update guard**: `yaml_detail_update` returns an error when the detail file is Markdown (edit `.md` files directly).
   - **Import/inspect tool**: New tool `tied_import_summary` — optional `base_path`; reads requirements/architecture/implementation YAML indexes and reports token counts and which `detail_file` paths exist (for validating or inspecting an existing TIED directory).
   - **Docs**: `mcp-server/README.md` updated with “Hybrid layout” section and `tied_import_summary`; detail read/list descriptions updated.
+
+- **`[PROC-CITDP]` Change Impact and Test Design Procedure** — 8-step procedure for analyzing, planning, testing, and implementing behavior changes; integrates with `[PROC-TIED_DEV_CYCLE]`, `[PROC-LEAP]`, `[PROC-TEST_STRATEGY]`, `[PROC-YAML_EDIT_LOOP]`; produces YAML analysis record. Defined in `processes.md`.
+
+- **`[PROC-IMPL_CODE_TEST_SYNC]` IMPL-to-Code-and-Tests Linkage** — 33-step checklist (9 phases A-I) for discovering, analyzing, documenting, and synchronizing IMPL pseudo-code with managed code and tests; enforces three-way alignment (pseudo-code / tests / code) from unit TDD through composition and E2E. Defined in `processes.md`; registered in `semantic-tokens.yaml`.
+
+- **`[PROC-SWIFT_BUILD]` Swift Build and Validation Process** — Build, test, run, and validation commands for Swift applications; lint/type-check gate for `[PROC-TIED_DEV_CYCLE]` inner loop. Defined in `processes.md`; registered in `semantic-tokens.yaml`.
+
+- **`[PROC-YAML_EDIT_LOOP]`** — Controlling loop for creating or editing TIED YAML: edit, validate with `yq -i -P`, use only after validation passes. Defined in `processes.md` under `[PROC-YAML_DB_OPERATIONS]`.
+
+- **docs/impl-code-test-linkage.md** — Practical guide for three-way alignment (IMPL pseudo-code / tests / code); 9 phases with worked examples, LEAP micro-cycle, and process diagram. Process token: `[PROC-IMPL_CODE_TEST_SYNC]`.
+
+- **docs/methodology-diagrams.md** — 6 mermaid diagrams covering TIED traceability stack with LEAP propagation, three development phases, PROC-TIED_DEV_CYCLE session workflow, TDD inner loop (RED-GREEN-REFACTOR), CITDP procedure, and YAML edit loop.
 
 ### Changed
 

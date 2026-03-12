@@ -226,6 +226,22 @@ PROC-RELEASE:
   metadata:
     registered: 2026-03-03
     last_updated: 2026-03-03
+PROC-SWIFT_BUILD:
+  type: PROC
+  name: Swift Build and Validation Process
+  status: Active
+  description: Build, test, run, and validation commands for the TextViewer Swift application; serves as the lint/type-check gate for PROC-TIED_DEV_CYCLE inner loop
+  cross_references:
+    - REQ-APP_FOUNDATION
+    - ARCH-PROJECT_STRUCTURE
+    - IMPL-PROJECT_STRUCTURE
+    - PROC-TIED_DEV_CYCLE
+    - PROC-YAML_EDIT_LOOP
+  source_index: processes.md
+  detail_file: null
+  metadata:
+    registered: "2026-03-11"
+    last_updated: "2026-03-11"
 REQ-FEEDBACK_TO_TIED:
   type: REQ
   name: Feedback to TIED (Feature Requests, Bug Reports, Methodology)
@@ -266,6 +282,25 @@ IMPL-MCP_FEEDBACK_TOOLS:
   metadata:
     registered: 2026-03-03
     last_updated: 2026-03-03
+PROC-IMPL_CODE_TEST_SYNC:
+  type: PROC
+  name: IMPL-to-Code-and-Tests Linkage
+  status: Active
+  description: Step-by-step checklist for discovering, analyzing, documenting, and synchronizing IMPL pseudo-code with managed code and tests; enforces three-way alignment (pseudo-code / tests / code) from unit TDD through composition and E2E
+  cross_references:
+    - PROC-TIED_DEV_CYCLE
+    - PROC-IMPL_PSEUDOCODE_TOKENS
+    - PROC-TEST_STRATEGY
+    - PROC-LEAP
+    - PROC-CITDP
+    - PROC-TOKEN_AUDIT
+    - PROC-TOKEN_VALIDATION
+    - REQ-MODULE_VALIDATION
+  source_index: processes.md
+  detail_file: null
+  metadata:
+    registered: "2026-03-12"
+    last_updated: "2026-03-12"
 # ---
 # Template Record - Copy this block to create new tokens
 # ---

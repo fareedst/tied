@@ -41,7 +41,7 @@ This document centralizes every instruction AI coding assistants must follow whi
 - **LEAP: Logic Elevation And Propagation** (see `tied/processes.md` § LEAP / [PROC-LEAP])
   - When code or tests written during TDD/E2E differ from IMPL, update the stack in **reverse order**: **IMPL → ARCH → REQ** in the same work item so tokens stay consistent and testable.
   - Work may start at any layer (REQ, ARCH, IMPL, or code/tests); for work to be **complete**, apply changes **up and down** the stack as needed. Code is valid only when **all tests pass** and **all requirements are met**.
-- **Implementation order** (see `tied/processes.md` § PROC-TIED_DEV_CYCLE): (1) **Tests first** — tests conform to IMPL pseudo-code, written before production code (strict TDD). (2) **Code via TDD** — code is written to satisfy the tests; entire IMPL pseudo-code is implemented via TDD. (3) **Binding/glue** — after TDD, implement binding/non-unit-test-covered code (entry points, wiring) so the full REQ/ARCH/IMPL can run. (4) **E2E** — E2E tests are written after binding code to protect glue and basic features. (5) **Closing the loop** — update TIED data to match implementation; run `tied_validate_consistency` (or equivalent).
+- **Implementation order** (see `tied/processes.md` § PROC-TIED_DEV_CYCLE): (1) **Unit tests first** — tests conform to IMPL pseudo-code, written before production code (strict TDD). (2) **Unit code via TDD** — code is written to satisfy the tests; entire IMPL pseudo-code is implemented via TDD. (3) **Composition tests first** — for every binding between units (event listeners, IPC, entry-point wiring), write failing component/integration/contract tests before composition code; each test verifies the connection without invoking the UI. (4) **Composition code via TDD** — binding/wiring/entry-point code written to satisfy composition tests; no composition code without a failing test. (5) **E2E** — only for behavior that requires UI invocation; each E2E test must justify why it cannot be tested at composition level. (6) **Closing the loop** — update TIED data; run `tied_validate_consistency` (or equivalent).
 - **Module Validation Mandate `[REQ-MODULE_VALIDATION]`**
   - Identify logical modules and their boundaries before implementation.
   - Develop and validate each module independently (unit tests with mocks, contract tests, edge cases, error handling) before integration.
@@ -50,7 +50,7 @@ This document centralizes every instruction AI coding assistants must follow whi
   - Always prioritize: Tests, Code, Basic Functions ➜ Developer experience ➜ Infrastructure ➜ Security.
 - **TIED data access (MCP-first)**
   - Use the **TIED MCP server** (tools and resources) as the **primary** way to read and write TIED data. TIED is the db that controls/directs the build; significant code is created in TIED first, then implemented with TDD. **Direct file access** to TIED content (under `tied/` or `TIED_BASE_PATH`) is permitted **only when** no MCP tool supports the operation; document such cases so they can be considered for new MCP tooling.
-  - **When using MCP:** Prefer tools for index read/list/filter, detail read/write, traceability (`get_decisions_for_requirement`, `get_requirements_for_decision`), validation (`yaml_index_validate`, `tied_validate_consistency`), and token creation (`tied_token_create_with_detail`). Prefer resources (e.g. `tied://requirements`, `tied://requirement/{token}/detail`) for loading context. Before changing TIED content, read via MCP; after changing, use the appropriate write/update tool. Run **`tied_validate_consistency`** before marking work complete.
+  - **When using MCP:** Prefer tools for index read/list/filter, detail read/write, traceability (`get_decisions_for_requirement`, `get_requirements_for_decision`), validation (`yaml_index_validate`, `tied_validate_consistency`), and token creation (`tied_token_create_with_detail`). Prefer resources (e.g. `tied://requirements`, `tied://requirement/{token}/detail`) for loading context. Before changing TIED content, read via MCP; after changing, use the appropriate write/update tool. Validate all changed TIED YAML with `yq -i -P` (or equivalent) per [PROC-YAML_EDIT_LOOP]; YAML that does not validate is invalid for use. Run **`tied_validate_consistency`** before marking work complete.
 - **Client inheritance of LEAP R+A+I**
   - **All TIED projects inherit the LEAP R+A+I** via `copy_files.sh`: the client's `tied/` contains the methodology-enforcing REQ/ARCH/IMPL and PROC tokens (e.g. REQ-TIED_SETUP, REQ-MODULE_VALIDATION, ARCH-TIED_STRUCTURE, ARCH-MODULE_VALIDATION, IMPL-TIED_FILES, IMPL-MODULE_VALIDATION, [PROC-LEAP], and related process tokens) and their detail files so that TIED and LEAP behaviors exist in every project. These tokens are **mandatory for TIED success** and must not be removed.
   - For structure and sample records, agents refer to **`templates/`** in the TIED repository—the same content that `copy_files.sh` copies to the client's `tied/`. The client's `tied/` has that inherited set plus any project-specific entries added by the project.
@@ -75,8 +75,10 @@ This document centralizes every instruction AI coding assistants must follow whi
 - [ ] **IMPL `essence_pseudocode`**: Every block has a comment naming REQ/ARCH/IMPL and how the block implements them; add/update when authoring or editing IMPL pseudo-code
 - [ ] Keep documentation synced as decisions change
 - [ ] Maintain module boundaries and validate independently before integration
+- [ ] **Run language-specific lint after each code-generation iteration**: **Rust** → `bun run lint:rust` [PROC-RUST_LINT]; **TypeScript** → `bunx tsc -b` or `bun run lint:ts` [PROC-TS_CHECK]; **Swift** → `swift build && swift test` [PROC-SWIFT_BUILD]; **YAML** → `yq -i -P <changed files>` [PROC-YAML_EDIT_LOOP] (when TIED YAML is created or updated). Fix before proceeding. Code and YAML that do not pass lint are incomplete ([PROC-TIED_DEV_CYCLE] inner loop).
 - [ ] Keep descriptive debug output (e.g., `DEBUG:`, `TRACE:`, `DIAGNOSTIC:`) to document decision points and execution flow; retain unless explicitly asked to remove
 - [ ] Record new `[ARCH-*]` and `[IMPL-*]` entries immediately with cross-references
+- [ ] **Validate all changed TIED YAML** with `yq -i -P <file>` (or equivalent) per [PROC-YAML_EDIT_LOOP]; YAML that does not validate is invalid for use
 
 ### 3.4 After Completing Work
 - [ ] `semantic-tokens.yaml` reflects every token referenced in code/tests/docs
@@ -86,6 +88,7 @@ This document centralizes every instruction AI coding assistants must follow whi
 - [ ] Module validation status is documented
 - [ ] All documentation matches the implemented state (no drift)
 - [ ] Verify all code and tests are consistently linked to requirements and decisions; update code and documentation where necessary
+- [ ] **Validate all changed TIED YAML** with `yq -i -P <file>` (or equivalent) per [PROC-YAML_EDIT_LOOP]; YAML that does not validate is invalid for use
 - [ ] Run **`tied_validate_consistency`** (TIED MCP tool) and fix any reported issues so REQ→ARCH→IMPL indexes, detail files, and token references remain consistent; align with `[PROC-TOKEN_VALIDATION]` and any project `validate_tokens.sh`.
 - [ ] Do not create a stand-alone summary document for the session (e.g. no SESSION_SUMMARY.md or similar)
 

@@ -78,7 +78,7 @@ If you do not use MCP, run `./bootstrap_without_mcp.sh /path/to/project` to get 
 1. **Capture intent**: Create `[REQ-USER_AUTH]` (or equivalent) in `requirements.yaml`; expand into pseudo-code and decisions.
 2. **Design**: Document architecture in `architecture-decisions.yaml` with `[ARCH-*]` tokens and implementation in `implementation-decisions.yaml` with `[IMPL-*]` tokens; update `semantic-tokens.yaml`. Plan implementation steps (optionally in `tasks.md` or in-session).
 3. **Review**: Human reviews planning documents before any code is written.
-4. **Implement**: Tests first (TDD, conforming to IMPL pseudo-code), then code, then binding/glue, then E2E tests. Update documentation as decisions are made or refined.
+4. **Implement**: Unit tests first (strict TDD conforming to IMPL pseudo-code), then unit code via TDD, then composition tests for bindings between units, then composition code via TDD, then E2E tests only for behavior requiring UI invocation (each must justify why it cannot be tested at composition level). Update documentation as decisions are made or refined.
 5. **Close the loop**: Verify TIED data matches implementation; run token/consistency validation; ensure all tests pass and semantic tokens are consistent across code, tests, and documentation.
 
 For the full procedure from user prompt to commit (including diagram), see **[docs/new-feature-process.md](docs/new-feature-process.md)**. For AI agent configuration and checklists, see **AGENTS.md** (copied into projects via `copy_files.sh`). Commit messages: [CONTRIBUTING.md](CONTRIBUTING.md) (TIED repo); projects get **tied/commit-guidelines.md** as the quick reference.
@@ -242,7 +242,9 @@ This repository contains:
 ### Methodology Documentation (Reference Only)
 - `TIED.md` - TIED methodology overview (for beginners, intermediate, and experts)
 - `docs/LEAP.md` - LEAP (Logic Elevation And Propagation) for expert programmers: why IMPL pseudo-code is more efficient for AI than hunting through source
-- `docs/implementation-order.md` - Mandatory implementation order (tests-first, code via TDD, glue, E2E) in one place; same order in `tied/processes.md` § PROC-TIED_DEV_CYCLE
+- `docs/implementation-order.md` - Mandatory implementation order (unit tests, unit code via TDD, composition tests, composition code via TDD, E2E) in one place; same order in `tied/processes.md` § PROC-TIED_DEV_CYCLE
+- `docs/impl-code-test-linkage.md` - Three-way alignment guide (IMPL pseudo-code / tests / code); 9 phases with worked examples and LEAP micro-cycle
+- `docs/methodology-diagrams.md` - 6 mermaid diagrams: traceability stack, development phases, dev-cycle session workflow, TDD inner loop, CITDP procedure, YAML edit loop
 - `ai-principles.md` - Agent operational mandates and checklists (copied to projects via copy_files.sh)
 - `tied-language-spec.md` - TIED language specification (pseudo-code templates with semantic tokens)
 - `conversation.template.md` - Template conversation demonstrating TIED workflow
@@ -264,7 +266,7 @@ At repo root these files are templates; in your project's `tied/` they are the p
 - `implementation-decisions.md` - Template guide for implementation decisions documentation
 - `implementation-decisions.yaml` - YAML database template for implementation decisions with `[IMPL-*]` tokens **(v1.5.0: structured fields for traceability, rationale, code_locations, metadata)**
 - `implementation-decisions/` - Individual implementation decision detail file examples
-- `processes.md` - Template for process tracking including `[PROC-YAML_DB_OPERATIONS]`, `[PROC-TEST_STRATEGY]`, `[PROC-TIED_DEV_CYCLE]`, `[PROC-COMMIT_MESSAGES]`, `[PROC-RELEASE]`, and `[PROC-NEW_FEATURE]` (new feature implementation; full procedure in [docs/new-feature-process.md](docs/new-feature-process.md))
+- `processes.md` - Template for process tracking including `[PROC-YAML_DB_OPERATIONS]`, `[PROC-YAML_EDIT_LOOP]`, `[PROC-TEST_STRATEGY]`, `[PROC-TIED_DEV_CYCLE]`, `[PROC-COMMIT_MESSAGES]`, `[PROC-RELEASE]`, `[PROC-NEW_FEATURE]`, `[PROC-CITDP]` (change impact and test design), `[PROC-IMPL_CODE_TEST_SYNC]` (IMPL-code-tests linkage), and `[PROC-SWIFT_BUILD]` (Swift build/test gate)
 - `commit-guidelines.md` - Commit message quick reference for TIED projects (full format in processes.md § PROC-COMMIT_MESSAGES)
 - `semantic-tokens.md` - Template for semantic token registry
 - `semantic-tokens.yaml` - YAML registry of REQ/ARCH/IMPL/PROC tokens (minimal, foundational for bootstrap)
@@ -464,8 +466,9 @@ This enables **direct field access**, **structured queries**, **easy filtering**
 
 6. **Test strategy and E2E-only minimization** ([PROC-TEST_STRATEGY], [REQ-MODULE_VALIDATION])
    - Minimize code that is only measurable via E2E or manual testing; logic should live in testable modules unless justified.
+   - Composition tests cover bindings between units (event listeners, IPC, entry-point wiring); E2E-only classification requires justification naming the specific platform constraint.
    - IMPL details can classify testability (`unit` | `integration` | `e2e_only`) and, when `e2e_only`, document the reason (`e2e_only_reason`).
-   - Use the TIED development cycle ([PROC-TIED_DEV_CYCLE]) per session: plan from REQ/ARCH/IMPL, author pseudo-code and tokens, add and align tests, implement (TDD), minimal glue, validate, then sync TIED to code and update README/CHANGELOG.
+   - Use the TIED development cycle ([PROC-TIED_DEV_CYCLE]) per session: plan from REQ/ARCH/IMPL, author pseudo-code and tokens, unit tests first, unit code via TDD, composition tests, composition code via TDD, E2E (justified), validate, then sync TIED to code and update README/CHANGELOG.
 
 ## Language-Specific Notes
 
