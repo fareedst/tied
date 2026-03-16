@@ -81,7 +81,7 @@ If you do not use MCP, run `./bootstrap_without_mcp.sh /path/to/project` to get 
 4. **Implement**: Unit tests first (strict TDD conforming to IMPL pseudo-code), then unit code via TDD, then composition tests for bindings between units, then composition code via TDD, then E2E tests only for behavior requiring UI invocation (each must justify why it cannot be tested at composition level). Update documentation as decisions are made or refined.
 5. **Close the loop**: Verify TIED data matches implementation; run token/consistency validation; ensure all tests pass and semantic tokens are consistent across code, tests, and documentation.
 
-For the full procedure from user prompt to commit (including diagram), see **[docs/new-feature-process.md](docs/new-feature-process.md)**. For AI agent configuration and checklists, see **AGENTS.md** (copied into projects via `copy_files.sh`). Commit messages: [CONTRIBUTING.md](CONTRIBUTING.md) (TIED repo); projects get **tied/commit-guidelines.md** as the quick reference.
+For the full procedure from user prompt to commit (including diagram), see **[tied/docs/new-feature-process.md](tied/docs/new-feature-process.md)**. For AI agent configuration and checklists, see **AGENTS.md** (copied into projects via `copy_files.sh`). Commit messages: [CONTRIBUTING.md](CONTRIBUTING.md) (TIED repo); projects get **tied/commit-guidelines.md** as the quick reference.
 
 ### Phase Flow Shortcut
 ```mermaid

@@ -107,7 +107,7 @@ Active. Mandatory on every change to the TIED db or its outputs.
    Work **may start at any layer** of the stack (REQ, ARCH, IMPL, or code/tests). For the work to be **complete**, changes **must be distributed and validated both up and down** the stack as needed (e.g. a change that starts in IMPL may require ARCH or REQ updates (up) and code/tests updates (down); a change that starts in code must propagate back to IMPL → ARCH → REQ (up) and ensure tests are updated (down)). **Code is only valid** when **all tests pass** and **all requirements are met**; validity implies the full stack (REQ, ARCH, IMPL, tests, code) is consistent and traceable via tokens.
 
 3. **YAML/MCP and cognitive load**  
-   REQ, ARCH, and IMPL detail is maintained in **YAML files** (indexes + detail files per token). The TIED MCP optimizes use of this YAML db by presenting R/A/I via **indexes** and **CRUD+ actions**, including **validation of the entire db**. For a complex task: collect all related R/A/I index and detail records; then **only the pseudo-code for the necessary IMPL** needs to be comprehended to develop an ideal solution. Updating the code to match the new IMPL pseudo-code is a **separate task**. The cognitive load of processing a **handful of IMPL** records should be **smaller** than parsing an arbitrary number of source code files to guess at side effects; when that holds, intent and logic live in the R/A/I YAML and IMPL pseudo-code, and code remains the implementation of that record. See `docs/ai-agent-tied-mcp-usage.md` for MCP workflow and rationale.
+   REQ, ARCH, and IMPL detail is maintained in **YAML files** (indexes + detail files per token). The TIED MCP optimizes use of this YAML db by presenting R/A/I via **indexes** and **CRUD+ actions**, including **validation of the entire db**. For a complex task: collect all related R/A/I index and detail records; then **only the pseudo-code for the necessary IMPL** needs to be comprehended to develop an ideal solution. Updating the code to match the new IMPL pseudo-code is a **separate task**. The cognitive load of processing a **handful of IMPL** records should be **smaller** than parsing an arbitrary number of source code files to guess at side effects; when that holds, intent and logic live in the R/A/I YAML and IMPL pseudo-code, and code remains the implementation of that record. See `tied/docs/ai-agent-tied-mcp-usage.md` for MCP workflow and rationale.
 
 ### Artifacts & Metrics
 
@@ -457,7 +457,7 @@ yq '.REQ-TIED_SETUP.metadata.last_validated.result' tied/requirements.yaml
 ## `[PROC-TIED_DEV_CYCLE]` TIED development cycle (session workflow)
 
 ### Purpose
-Run a single development session so that REQ/ARCH/IMPL and pseudo-code stay primary: test-driven development produces testable code and infrastructure; TIED docs are updated to reflect the final code and tests. Supports traceability and `[PROC-TOKEN_AUDIT]` / `[PROC-TOKEN_VALIDATION]`. For the unified step-by-step checklist that sequences this process with CITDP, IMPL_CODE_TEST_SYNC, LEAP, and validation, see `docs/agent-req-implementation-checklist.md` (`[PROC-AGENT_REQ_CHECKLIST]`).
+Run a single development session so that REQ/ARCH/IMPL and pseudo-code stay primary: test-driven development produces testable code and infrastructure; TIED docs are updated to reflect the final code and tests. Supports traceability and `[PROC-TOKEN_AUDIT]` / `[PROC-TOKEN_VALIDATION]`. For the unified step-by-step checklist that sequences this process with CITDP, IMPL_CODE_TEST_SYNC, LEAP, and validation, see `tied/docs/agent-req-implementation-checklist.md` (`[PROC-AGENT_REQ_CHECKLIST]`).
 
 ### Scope
 Applies to any feature or change that touches managed code, tests, or TIED documentation (requirements, architecture decisions, implementation decisions). Use per session or per feature slice.
@@ -708,7 +708,7 @@ Projects may extend this process (e.g. tagging workflow, release checklist) in t
 Govern how an AI agent analyzes, plans, tests, and prepares implementation work for any requested behavior change. Produce a complete change-analysis record (YAML) and test-and-implementation plan before code changes begin. Supports [REQ-TIED_SETUP] and [REQ-MODULE_VALIDATION] by ensuring pseudo-code (with token comments) is authored before tests, and that unit tests and production code carry the same REQ/ARCH/IMPL token comments linking back to the TIED db.
 
 ### Scope
-Applies to all behavior-changing work on existing projects. When used in a TIED project, integrates with [PROC-IMPL_PSEUDOCODE_TOKENS], [PROC-TIED_DEV_CYCLE], [PROC-LEAP], [PROC-TEST_STRATEGY], [PROC-TOKEN_VALIDATION], [PROC-YAML_DB_OPERATIONS], and [PROC-YAML_EDIT_LOOP]. Procedure document: `docs/agent-req-implementation-checklist.md` (`[PROC-AGENT_REQ_CHECKLIST]`). Analysis records stored under `docs/citdp/` (or project-defined location) as `CITDP-{change_request_id}.yaml`.
+Applies to all behavior-changing work on existing projects. When used in a TIED project, integrates with [PROC-IMPL_PSEUDOCODE_TOKENS], [PROC-TIED_DEV_CYCLE], [PROC-LEAP], [PROC-TEST_STRATEGY], [PROC-TOKEN_VALIDATION], [PROC-YAML_DB_OPERATIONS], and [PROC-YAML_EDIT_LOOP]. Procedure document: `tied/docs/agent-req-implementation-checklist.md` (`[PROC-AGENT_REQ_CHECKLIST]`). Analysis records stored under `docs/citdp/` (or project-defined location) as `CITDP-{change_request_id}.yaml`.
 
 ### Token references
 - [PROC-IMPL_PSEUDOCODE_TOKENS], [PROC-TIED_DEV_CYCLE], [PROC-LEAP], [PROC-TEST_STRATEGY], [PROC-TOKEN_VALIDATION], [PROC-YAML_DB_OPERATIONS], [PROC-YAML_EDIT_LOOP]
@@ -750,7 +750,7 @@ Any change where TIED (REQ/ARCH/IMPL) is already authored or updated and the rem
 - [PROC-IMPL_PSEUDOCODE_TOKENS] — block token comments in pseudo-code
 
 ### Procedure document
-`docs/tied-first-implementation-procedure.md`
+`tied/docs/tied-first-implementation-procedure.md`
 
 ### Core idea
 Execute the agent checklist from S01. S02–S03 define change and impact from the **updated** TIED (desired = new design; current = prior tests/code). S04–S06 are **verify-only**: confirm REQ/ARCH/IMPL completeness and that every IMPL block has token comments; fix any gaps before proceeding to tests/code. S07–S16 run as in the main checklist: risk, test plan from new IMPL, unit TDD (RED then GREEN then SYNC), composition tests, E2E, validation, sync TIED, README/CHANGELOG, CITDP, commit.
@@ -763,7 +763,7 @@ Active
 ## `[PROC-IMPL_CODE_TEST_SYNC]` IMPL-to-Code-and-Tests Linkage
 
 ### Purpose
-Govern how an agent discovers, analyzes, documents, and synchronizes an IMPL of interest with all related IMPLs, managed code, and tests. This process fills the gap between "IMPL pseudo-code exists" and "code and tests carry identical IMPL-derived token comments and logic." It operationalizes the linkage so that `essence_pseudocode`, tests, and source code remain a three-way aligned representation of the same intent — from initial IMPL discovery through unit TDD, composition testing, and E2E behavior. For the unified step-by-step checklist that sequences this process with CITDP, TIED dev cycle, LEAP, and validation, see `docs/agent-req-implementation-checklist.md` (`[PROC-AGENT_REQ_CHECKLIST]`).
+Govern how an agent discovers, analyzes, documents, and synchronizes an IMPL of interest with all related IMPLs, managed code, and tests. This process fills the gap between "IMPL pseudo-code exists" and "code and tests carry identical IMPL-derived token comments and logic." It operationalizes the linkage so that `essence_pseudocode`, tests, and source code remain a three-way aligned representation of the same intent — from initial IMPL discovery through unit TDD, composition testing, and E2E behavior. For the unified step-by-step checklist that sequences this process with CITDP, TIED dev cycle, LEAP, and validation, see `tied/docs/agent-req-implementation-checklist.md` (`[PROC-AGENT_REQ_CHECKLIST]`).
 
 ### Scope
 Applies whenever an agent reads, creates, or modifies an IMPL detail file, or modifies managed code or tests that reference IMPL tokens. Integrates with and extends [PROC-TIED_DEV_CYCLE] (steps 2–9), [PROC-IMPL_PSEUDOCODE_TOKENS], [PROC-TEST_STRATEGY], and [PROC-LEAP].
@@ -1142,3 +1142,112 @@ In the TDD inner loop (steps 3-7 of `[PROC-TIED_DEV_CYCLE]`):
 ### Artifacts & Metrics
 - **Artifacts**: Build output (`.build/debug/TextViewerApp`), test results (99 tests), TIED validation report.
 - **Success Metrics**: `swift build` exits 0; `swift test` reports 0 failures; `yq -i -P` exits 0 for all changed YAML; `tied_validate_consistency` reports `"ok": true`.
+
+---
+
+## `[PROC-TIED_VERIFICATION_GATED]` Verification-gated status (closed-loop)
+
+### Purpose
+When verification-gated mode is used, requirement (and optionally IMPL) status is **derived only from the last test run**; status is not edited by hand. This keeps status trustworthy and audit-friendly and fits compliance and agentic workflows where manual status edits are risky. Aligns with RTMX-style "closed-loop" traceability.
+
+### Scope
+Applies when a project opts into verification-gated mode (policy or config). Requirement index `status` and optionally implementation index `status` are updated only by the verify step after tests run.
+
+### Token references
+- `[REQ-TIED_SETUP]` — traceability and test-linked intent
+- `[PROC-TIED_DEV_CYCLE]` — test run precedes verify
+- `[PROC-TOKEN_VALIDATION]` — consistency after verify
+
+### Status
+Active (optional per project).
+
+### Core Activities
+1. **Policy**: Do not edit `status` in `requirements.yaml` (or implementation index) by hand when verification-gated mode is on. Status reflects test outcomes only.
+2. **Verify step**: After running the test suite, run the project's verify step (e.g. MCP tool `tied_verify` with `--update`, or a script that parses test results and passes covered tokens to the tool). The verify step updates REQ/IMPL status from the set of tokens that have passing tests (e.g. from test names/comments or requirement markers).
+3. **CI**: In CI, run: test suite → verify (update status) → `tied_validate_consistency`. Optionally run a "health" check with defined exit codes (0 = ok, 1 = warnings, 2 = fail).
+4. **Pre-commit**: Optionally run `tied_validate_consistency` (and `yq -i -P` on staged TIED YAML) in a pre-commit hook to catch invalid or inconsistent TIED data.
+
+### Artifacts & Metrics
+- **Artifacts**: Updated requirement/implementation index status; verify run report.
+- **Success Metrics**: Status is derived only from test results; no manual status edits; `tied_validate_consistency` passes after verify.
+
+---
+
+## `[PROC-TIED_DEPENDENCY_GRAPH]` Dependency graph and backlog views
+
+### Purpose
+Use the requirement (and optionally IMPL) dependency graph to order work: detect cycles, respect dependencies, and support backlog views (critical path, blockers, quick-wins). Resolve circular dependencies before using dependency order for planning.
+
+### Scope
+Applies to `related_requirements.depends_on` in the requirements index and `related_decisions.depends_on` (and `composed_with`) in the implementation index. Process and tooling read these fields; they are not modified by this process.
+
+### Token references
+- `[REQ-TIED_SETUP]` — requirements as primary index
+- `[PROC-YAML_DB_OPERATIONS]` — index read for depends_on
+
+### Status
+Active
+
+### Core Activities
+1. **Cycle detection**: Build a directed graph from `related_requirements.depends_on` (and optionally IMPL `depends_on`). Run cycle detection (e.g. MCP tool `tied_cycles` or equivalent). If cycles exist, report them and resolve before using dependency order. Document in this process: "Resolve circular dependencies before ordering is meaningful."
+2. **Topological order**: List REQs (or IMPLs) in dependency order (roots first, then dependents). Use for implementation order: implement roots first, then dependents.
+3. **Backlog views**: Provide views such as: **blockers** — items whose dependents are not satisfied; **critical** — high priority + dependency chain; **quick-wins** — no dependents or leaf nodes. Use MCP tool `tied_backlog` with a view parameter (e.g. `critical`, `blockers`, `quick-wins`) or a script that reads the requirements index and dependency graph.
+
+### Artifacts & Metrics
+- **Artifacts**: Cycle report (empty when clean); topological order list; backlog view output.
+- **Success Metrics**: No cycles when using dependency order; backlog views available for planning.
+
+---
+
+## `[PROC-TIED_BOOTSTRAP_FROM_TESTS]` Bootstrap TIED from existing tests
+
+### Purpose
+When adopting TIED on an existing codebase that already has tests, discover tests and token-like markers and propose or update the RTM (requirements/IMPL traceability) from test metadata. Reduces manual authoring of the TIED indexes from scratch.
+
+### Scope
+Applies when tests already exist and the project wants to retrofit traceability. After bootstrap, the full agent checklist ([PROC-AGENT_REQ_CHECKLIST]) from S04 onward is used to complete REQ/ARCH/IMPL authoring.
+
+### Token references
+- `[REQ-TIED_SETUP]` — TIED methodology and traceability
+- `[PROC-AGENT_REQ_CHECKLIST]` — full checklist after bootstrap
+- `[PROC-IMPL_CODE_TEST_SYNC]` — test–IMPL alignment
+
+### Status
+Active (optional; use when retrofitting).
+
+### Core Activities
+1. **Analyze**: Scan test files for existing token-like markers or naming patterns (e.g. `[REQ-*]`, `[IMPL-*]` in comments or test names, or project-specific markers such as `@pytest.mark.req("REQ-XX-NNN")`).
+2. **Propose RTM**: From the scan, produce a list of suggested REQ/IMPL tokens and traceability (test → requirement). Optionally use MCP or script support to output "suggested" entries. Agent or human then turns these into real REQ/ARCH/IMPL records via S04–S06 of the agent checklist.
+3. **Complete via checklist**: Run the agent checklist from S04 (Author/Update REQ) onward. Add missing markers and requirement rows as needed. Bootstrap does not replace TIED authoring rules; it seeds the RTM from tests.
+
+### Artifacts & Metrics
+- **Artifacts**: Discovery report (tests, markers, suggested tokens); updated or new REQ/ARCH/IMPL after checklist.
+- **Success Metrics**: TIED indexes populated or updated from test metadata; full traceability completed via checklist.
+
+---
+
+## `[PROC-TIED_PHASED_DELIVERY]` Phased delivery with backlog
+
+### Purpose
+Use phases (or priority as phase proxy) and backlog views to deliver in stages. Align work with milestones; use quick-wins and critical views to focus effort within a phase.
+
+### Scope
+Applies when requirements are assigned to phases (e.g. via optional `phase` or `milestone` field, or by using existing `priority`/`category` to represent phase). Integrates with [PROC-TIED_DEPENDENCY_GRAPH] for ordering within the phase.
+
+### Token references
+- `[REQ-TIED_SETUP]` — requirements index
+- `[PROC-TIED_DEPENDENCY_GRAPH]` — cycle resolution and backlog views
+- `[PROC-TIED_VERIFICATION_GATED]` — verify and status per phase
+
+### Status
+Active (optional per project).
+
+### Core Activities
+1. **Assign phase**: Assign a phase (or use priority: e.g. phase 1 = P1, phase 2 = P2) to each requirement. If the project adds an optional `phase` or `milestone` field to the requirement schema, use it; otherwise document that priority/category represents phase.
+2. **Plan iterations**: Use `tied_backlog` (or equivalent) with phase filter and view (e.g. `--phase N`, `--view quick-wins` or `critical`) to plan iterations. Resolve cycles and respect dependencies within the phase per [PROC-TIED_DEPENDENCY_GRAPH].
+3. **Verify and status**: Run `tied_verify` (or equivalent) and `tied_validate_consistency` after each phase or iteration. Use verbose status output if needed to track phase completion.
+4. **Baselines**: Optionally use diff between phase baselines (e.g. requirement status snapshot) if tooling exists.
+
+### Artifacts & Metrics
+- **Artifacts**: Phase assignment in requirements; backlog view output per phase; verify and consistency reports.
+- **Success Metrics**: Work aligned to phases; backlog views focus effort; phase completion trackable.

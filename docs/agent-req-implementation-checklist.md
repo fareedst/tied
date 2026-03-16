@@ -43,9 +43,9 @@ When REQ/ARCH/IMPL have already been updated and the remaining work is to align 
 **Tasks**:
 1. Preface the response with `"Observing AI principles!"`.
 2. Read `ai-principles.md` completely.
-3. Review `semantic-tokens.yaml` (token registry) and `semantic-tokens.md` (token guide).
-4. Review `architecture-decisions.yaml` and `implementation-decisions.yaml` (YAML indexes).
-5. Review `implementation-decisions.md` (IMPL schema, pseudo-code rules, block token rules per `[PROC-IMPL_PSEUDOCODE_TOKENS]`).
+3. Review `tied/semantic-tokens.yaml` (token registry) and `tied/semantic-tokens.md` (token guide).
+4. Review `tied/architecture-decisions.yaml` and `tied/implementation-decisions.yaml` (YAML indexes).
+5. Review `tied/implementation-decisions.md` (IMPL schema, pseudo-code rules, block token rules per `[PROC-IMPL_PSEUDOCODE_TOKENS]`).
 6. Confirm TIED MCP server availability (if applicable); prefer MCP for TIED data read/write.
 7. Understand priority order: Tests > Code > Basic Functions > Developer Experience > Infrastructure > Security.
 
@@ -70,7 +70,7 @@ When REQ/ARCH/IMPL have already been updated and the remaining work is to align 
 
 **Branch**: IF this is a bug fix AND no REQ exists for the expected behavior THEN create the missing REQ at S04 first, then return here to define the fix.
 
-**Reference**: `processes.md` § `[PROC-CITDP]` step 1; `ai-principles.md` § Bugs vs requirements.
+**Reference**: `tied/processes.md` § `[PROC-CITDP]` step 1; `ai-principles.md` § Bugs vs requirements.
 
 ---
 
@@ -103,7 +103,7 @@ When REQ/ARCH/IMPL have already been updated and the remaining work is to align 
 
 **Branch**: IF the IMPL set is large (signal of high coupling) THEN consider whether IMPLs need decomposition before proceeding.
 
-**Reference**: `processes.md` § `[PROC-CITDP]` step 2; `processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phase A (A1-A3); `docs/impl-code-test-linkage.md` § Phase A — Discovery.
+**Reference**: `tied/processes.md` § `[PROC-CITDP]` step 2; `tied/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phase A (A1-A3); `tied/docs/impl-code-test-linkage.md` § Phase A — Discovery.
 
 ---
 
@@ -113,13 +113,13 @@ When REQ/ARCH/IMPL have already been updated and the remaining work is to align 
 
 **Tasks**:
 1. Create or update the entry in `requirements.yaml` with all required fields: `name`, `category`, `priority`, `status`, `rationale` (`why`, `problems_solved`, `benefits`), `satisfaction_criteria`, `validation_criteria`, `traceability` (`architecture`, `implementation`, `tests`, `code_annotations`), `related_requirements`, `detail_file`, `metadata`.
-2. Create or update the REQ detail file in `requirements/REQ-{TOKEN}.yaml` per `detail-files-schema.md` § REQ.
+2. Create or update the REQ detail file in `requirements/REQ-{TOKEN}.yaml` per `tied/detail-files-schema.md` § REQ.
 3. Register the REQ token in `semantic-tokens.yaml`.
 4. **CALL SUB-YAML** for each changed YAML file.
 
 **Outcomes**: REQ record exists in both the index and the detail file; token is registered in `semantic-tokens.yaml`; all YAML validated.
 
-**Reference**: `processes.md` § `[PROC-YAML_DB_OPERATIONS]` § Appending a New Record; `detail-files-schema.md` § 1; `semantic-tokens.md` § Token Creation Requirements.
+**Reference**: `tied/processes.md` § `[PROC-YAML_DB_OPERATIONS]` § Appending a New Record; `tied/detail-files-schema.md` § 1; `tied/semantic-tokens.md` § Token Creation Requirements.
 
 ---
 
@@ -130,13 +130,13 @@ When REQ/ARCH/IMPL have already been updated and the remaining work is to align 
 **Tasks**:
 1. Identify architectural decisions needed (or update existing ones).
 2. Create or update the entry in `architecture-decisions.yaml` with `cross_references` to the REQ token(s), `decision`, `rationale`, `alternatives_considered`, `traceability`, `related_decisions`, `metadata`.
-3. Create or update the ARCH detail file in `architecture-decisions/ARCH-{TOKEN}.yaml` per `detail-files-schema.md` § ARCH.
+3. Create or update the ARCH detail file in `architecture-decisions/ARCH-{TOKEN}.yaml` per `tied/detail-files-schema.md` § ARCH.
 4. Register each new ARCH token in `semantic-tokens.yaml`.
 5. **CALL SUB-YAML** for each changed YAML file.
 
 **Outcomes**: ARCH records exist with REQ cross-references; tokens registered; YAML validated.
 
-**Reference**: `processes.md` § `[PROC-YAML_DB_OPERATIONS]`; `detail-files-schema.md` § 2; `ai-principles.md` § Phase 1.
+**Reference**: `tied/processes.md` § `[PROC-YAML_DB_OPERATIONS]`; `tied/detail-files-schema.md` § 2; `ai-principles.md` § Phase 1.
 
 ---
 
@@ -195,13 +195,13 @@ When REQ/ARCH/IMPL have already been updated and the remaining work is to align 
 ### S06.6: Persist IMPL Records
 
 8. Create or update `implementation-decisions.yaml` index entries with all required fields.
-9. Create or update IMPL detail files in `implementation-decisions/IMPL-{TOKEN}.yaml` per `detail-files-schema.md` § IMPL. Include complete `essence_pseudocode`.
+9. Create or update IMPL detail files in `implementation-decisions/IMPL-{TOKEN}.yaml` per `tied/detail-files-schema.md` § IMPL. Include complete `essence_pseudocode`.
 10. Register each new IMPL token in `semantic-tokens.yaml`.
 11. **CALL SUB-YAML** for each changed YAML file.
 
 **Outcomes**: All IMPL pseudo-code is complete, authoritative, and token-commented. No contradictions or gaps remain. All YAML validated.
 
-**Reference**: `processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phases B-C; `implementation-decisions.md` § Mandatory essence_pseudocode, § Preferred vocabulary, § Expressing sequence and structure; `docs/impl-code-test-linkage.md` §§ 2-3.
+**Reference**: `tied/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phases B-C; `tied/implementation-decisions.md` § Mandatory essence_pseudocode, § Preferred vocabulary, § Expressing sequence and structure; `tied/docs/impl-code-test-linkage.md` §§ 2-3.
 
 ---
 
@@ -216,7 +216,7 @@ When REQ/ARCH/IMPL have already been updated and the remaining work is to align 
 
 **Outcomes**: Risks documented with token references. Mitigations identified.
 
-**Reference**: `processes.md` § `[PROC-CITDP]` step 4.
+**Reference**: `tied/processes.md` § `[PROC-CITDP]` step 4.
 
 ---
 
@@ -244,7 +244,7 @@ When REQ/ARCH/IMPL have already been updated and the remaining work is to align 
 
 **Outcomes**: Test matrix complete; every IMPL block has a testability classification; TDD sequence planned; module boundaries documented.
 
-**Reference**: `processes.md` § `[PROC-TEST_STRATEGY]`; `processes.md` § `[PROC-CITDP]` step 5; `ai-principles.md` § Thin Entry Points and Testability Classification; `docs/implementation-order.md`.
+**Reference**: `tied/processes.md` § `[PROC-TEST_STRATEGY]`; `tied/processes.md` § `[PROC-CITDP]` step 5; `ai-principles.md` § Thin Entry Points and Testability Classification; `tied/docs/implementation-order.md`.
 
 ---
 
@@ -328,7 +328,7 @@ END LOOP (repeat S09.RED → S09.GREEN → S09.REFACTOR → S09.SYNC
           UNTIL all unit/integration IMPL blocks are covered and all tests pass)
 ```
 
-**Reference**: `processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phases D-F (steps 11-20); `docs/impl-code-test-linkage.md` § Stage 2 — Unit TDD; `docs/implementation-order.md` steps 1-2.
+**Reference**: `tied/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phases D-F (steps 11-20); `tied/docs/impl-code-test-linkage.md` § Stage 2 — Unit TDD; `tied/docs/implementation-order.md` steps 1-2.
 
 ---
 
@@ -352,7 +352,7 @@ END LOOP (repeat S09.RED → S09.GREEN → S09.REFACTOR → S09.SYNC
 
 **Outcomes**: All bindings have composition tests; composition code passes; three-way alignment holds.
 
-**Reference**: `processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phase G (steps 21-24); `docs/impl-code-test-linkage.md` § 4 — From unit modules to composition; `docs/implementation-order.md` steps 3-4.
+**Reference**: `tied/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phase G (steps 21-24); `tied/docs/impl-code-test-linkage.md` § 4 — From unit modules to composition; `tied/docs/implementation-order.md` steps 3-4. For this project’s binding inventory and coverage, see `tied/docs/composition-coverage.md`.
 
 ---
 
@@ -375,7 +375,7 @@ END LOOP (repeat S09.RED → S09.GREEN → S09.REFACTOR → S09.SYNC
 
 **Outcomes**: E2E tests exist for all UI-only behavior; each is justified with a named platform constraint.
 
-**Reference**: `processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phase H (steps 25-28); `docs/impl-code-test-linkage.md` § 4 — The E2E decision; `docs/implementation-order.md` step 4.
+**Reference**: `tied/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phase H (steps 25-28); `tied/docs/impl-code-test-linkage.md` § 4 — The E2E decision; `tied/docs/implementation-order.md` step 4.
 
 ---
 
@@ -386,7 +386,7 @@ END LOOP (repeat S09.RED → S09.GREEN → S09.REFACTOR → S09.SYNC
 **Tasks**:
 1. Run the **full test suite** (unit, composition, E2E). All must pass.
 2. Run **lint** for each language in scope: Rust → `bun run lint:rust`; TypeScript → `bunx tsc -b`; Swift → `swift build && swift test`; YAML → `yq -i -P <changed files>`.
-3. Run **`[PROC-TOKEN_VALIDATION]`**: `./scripts/validate_tokens.sh` (or project equivalent) and/or `tied_validate_consistency` (MCP). Fix any issues before proceeding.
+3. Run **`[PROC-TOKEN_VALIDATION]`**: `./scripts/validate_tokens.sh` (stub; see `tied/docs/token-validation.md`) or **`tied_validate_consistency`** (MCP). This project uses MCP for validation; fix any issues before proceeding.
 4. **Final three-way alignment audit**: for every IMPL touched, verify pseudo-code / test / code carry the same token set with logically corresponding descriptions. Document remaining `e2e_only` blocks and confirm each has `e2e_only_reason`.
 5. **Update IMPL detail metadata** for each changed IMPL detail file:
    - `traceability.tests` — list all tests that validate this IMPL.
@@ -403,7 +403,7 @@ END LOOP (repeat S09.RED → S09.GREEN → S09.REFACTOR → S09.SYNC
 - Token validation failure → register missing tokens, fix traceability gaps.
 - Three-way alignment failure → apply LEAP order (pseudo-code first, then test, then code).
 
-**Reference**: `processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phase I (steps 29-33); `processes.md` § `[PROC-CITDP]` step 7.
+**Reference**: `tied/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phase I (steps 29-33); `tied/processes.md` § `[PROC-CITDP]` step 7.
 
 ---
 
@@ -425,7 +425,7 @@ END LOOP (repeat S09.RED → S09.GREEN → S09.REFACTOR → S09.SYNC
 
 **Outcomes**: TIED docs are consistent with implementation; `tied_validate_consistency` passes.
 
-**Reference**: `processes.md` § `[PROC-TIED_DEV_CYCLE]` steps 8-9; `processes.md` § `[PROC-LEAP]`.
+**Reference**: `tied/processes.md` § `[PROC-TIED_DEV_CYCLE]` steps 8-9; `tied/processes.md` § `[PROC-LEAP]`.
 
 ---
 
@@ -439,7 +439,7 @@ END LOOP (repeat S09.RED → S09.GREEN → S09.REFACTOR → S09.SYNC
 
 **Outcomes**: External documentation reflects the session's changes.
 
-**Reference**: `processes.md` § `[PROC-TIED_DEV_CYCLE]` step 9.
+**Reference**: `tied/processes.md` § `[PROC-TIED_DEV_CYCLE]` step 9.
 
 ---
 
@@ -462,9 +462,9 @@ END LOOP (repeat S09.RED → S09.GREEN → S09.REFACTOR → S09.SYNC
 
 **Outcomes**: CITDP record stored and validated; analysis available for future reference.
 
-**Branch**: IF YAML validation fails THEN fix and repeat step 3.
+**Branch**: IF YAML validation fails THEN fix and repeat step 3. When to create vs skip a CITDP record: see `tied/docs/citdp-policy.md`.
 
-**Reference**: `processes.md` § `[PROC-CITDP]` step 8; `processes.md` § `[PROC-YAML_DB_OPERATIONS]`.
+**Reference**: `tied/processes.md` § `[PROC-CITDP]` step 8; `tied/processes.md` § `[PROC-YAML_DB_OPERATIONS]`; `tied/docs/citdp-policy.md` (project policy).
 
 ---
 
@@ -476,7 +476,7 @@ END LOOP (repeat S09.RED → S09.GREEN → S09.REFACTOR → S09.SYNC
 1. Write the commit message per `[PROC-COMMIT_MESSAGES]`:
    - **Header**: `<type>(<scope>): <subject>` (keep the full header line to 50 characters or fewer).
    - **Type**: One of `feat`, `fix`, `docs`, `refactor`, `test`, `build`, `ci`, `chore`, `perf`, `style`.
-   - **Scope**: Area affected (e.g., `core`, `ui`, `tied`, `tests`). See `processes.md` § `[PROC-COMMIT_MESSAGES]` for the full scope list.
+   - **Scope**: Area affected (e.g., `core`, `ui`, `tied`, `tests`). See `tied/processes.md` § `[PROC-COMMIT_MESSAGES]` for the full scope list.
    - **Subject**: Imperative, present tense; no capitalization; no period.
    - **Body**: Motivation and behavior change (imperative tense). Keep lines to 100 characters.
    - **Footer**: `Closes #issue` or `Fixes #issue` if applicable. Reference main REQ/ARCH/IMPL tokens touched.
@@ -487,7 +487,7 @@ END LOOP (repeat S09.RED → S09.GREEN → S09.REFACTOR → S09.SYNC
 
 **EXIT**: Checklist complete. Do not create a stand-alone summary document.
 
-**Reference**: `processes.md` § `[PROC-COMMIT_MESSAGES]`.
+**Reference**: `tied/processes.md` § `[PROC-COMMIT_MESSAGES]`.
 
 ---
 
@@ -509,7 +509,7 @@ END LOOP (repeat S09.RED → S09.GREEN → S09.REFACTOR → S09.SYNC
 
 **RETURN** to calling step.
 
-**Reference**: `processes.md` § `[PROC-YAML_EDIT_LOOP]`; `docs/methodology-diagrams.md` Diagram 6.
+**Reference**: `tied/processes.md` § `[PROC-YAML_EDIT_LOOP]`; `tied/docs/methodology-diagrams.md` Diagram 6.
 
 ---
 
@@ -532,7 +532,7 @@ END LOOP (repeat S09.RED → S09.GREEN → S09.REFACTOR → S09.SYNC
 
 **RETURN** to the calling TDD iteration (S09.GREEN continues with the next assertion or block).
 
-**Reference**: `docs/impl-code-test-linkage.md` § 3 — LEAP Micro-Cycle During TDD; `processes.md` § `[PROC-LEAP]` rule 1.
+**Reference**: `tied/docs/impl-code-test-linkage.md` § 3 — LEAP Micro-Cycle During TDD; `tied/processes.md` § `[PROC-LEAP]` rule 1.
 
 ---
 
@@ -613,14 +613,17 @@ flowchart TD
 
 | Document | What it provides |
 |---|---|
-| `processes.md` | Canonical definitions for all `[PROC-*]` tokens referenced in this checklist |
-| `docs/impl-code-test-linkage.md` | Three-way alignment guide with worked examples and the 33-step IMPL_CODE_TEST_SYNC procedure |
-| `docs/LEAP.md` | LEAP rationale: why IMPL pseudo-code beats hunting through source |
-| `docs/implementation-order.md` | Mandatory implementation order (tests → TDD → glue → E2E → close loop) |
-| `docs/methodology-diagrams.md` | Visual diagrams for the traceability stack, dev cycle, TDD inner loop, CITDP, and YAML edit loop |
+| `tied/processes.md` | Canonical definitions for all `[PROC-*]` tokens referenced in this checklist |
+| `tied/docs/impl-code-test-linkage.md` | Three-way alignment guide with worked examples and the 33-step IMPL_CODE_TEST_SYNC procedure |
+| `tied/docs/LEAP.md` | LEAP rationale: why IMPL pseudo-code beats hunting through source |
+| `tied/docs/implementation-order.md` | Mandatory implementation order (tests → TDD → glue → E2E → close loop) |
+| `tied/docs/methodology-diagrams.md` | Visual diagrams for the traceability stack, dev cycle, TDD inner loop, CITDP, and YAML edit loop |
 | `ai-principles.md` | Agent principles, checklists, change impact tracking matrix |
-| `implementation-decisions.md` | IMPL detail schema, pseudo-code rules, preferred vocabulary, collision detection |
-| `semantic-tokens.md` | Token format, naming convention, registry usage, creation requirements |
-| `detail-files-schema.md` | YAML schema for REQ, ARCH, and IMPL detail files |
+| `tied/implementation-decisions.md` | IMPL detail schema, pseudo-code rules, preferred vocabulary, collision detection |
+| `tied/semantic-tokens.md` | Token format, naming convention, registry usage, creation requirements |
+| `tied/detail-files-schema.md` | YAML schema for REQ, ARCH, and IMPL detail files |
 | `AGENTS.md` | Agent operating guide; session bootstrap; mandatory acknowledgment |
-| `docs/ai-agent-tied-mcp-usage.md` | MCP workflow and rationale for TIED data access |
+| `tied/docs/ai-agent-tied-mcp-usage.md` | MCP workflow and rationale for TIED data access |
+| `tied/docs/token-validation.md` | Project policy: token validation via MCP only; no local script |
+| `tied/docs/composition-coverage.md` | Binding inventory and composition vs E2E coverage for this project |
+| `tied/docs/citdp-policy.md` | When to create vs skip a CITDP record |

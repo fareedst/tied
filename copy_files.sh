@@ -187,6 +187,35 @@ for f in "${TEMPLATE_FILES[@]}"; do
 done
 echo "Copied index YAMLs and template files into ${TIED_DIR}."
 
+# Copy methodology docs into tied/docs/ (referenced by AGENTS.md, ai-principles.md, processes.md).
+mkdir -p "${TIED_DIR}/docs"
+DOCS_TO_COPY=(
+  "agent-req-implementation-checklist.md"
+  "tied-first-implementation-procedure.md"
+  "impl-code-test-linkage.md"
+  "implementation-order.md"
+  "LEAP.md"
+  "ai-agent-tied-mcp-usage.md"
+  "methodology-diagrams.md"
+  "new-feature-process.md"
+  "using-tied-without-mcp.md"
+  "adding-tied-mcp-and-invoking-passes.md"
+)
+docs_count=0
+for f in "${DOCS_TO_COPY[@]}"; do
+  src="${SCRIPT_DIR}/docs/${f}"
+  dest="${TIED_DIR}/docs/${f}"
+  if [[ -f "${src}" ]]; then
+    if [[ ! -f "${dest}" ]]; then
+      cp -p "${src}" "${dest}"
+      ((docs_count++)) || true
+    fi
+  fi
+done
+if [[ ${docs_count} -gt 0 ]]; then
+  echo "Copied ${docs_count} methodology doc(s) into ${TIED_DIR}/docs."
+fi
+
 # Copy detail-files schema (YAML detail file structure reference)
 if [[ -f "${SCRIPT_DIR}/detail-files-schema.md" && ! -f "${TIED_DIR}/detail-files-schema.md" ]]; then
   cp -p "${SCRIPT_DIR}/detail-files-schema.md" "${TIED_DIR}/detail-files-schema.md"

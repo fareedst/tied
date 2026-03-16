@@ -61,7 +61,7 @@ Example:
 }
 ```
 
-Path resolution: All path parameters (`output_base_path`, `file_path`, etc.) are resolved by the Node process. Absolute paths are used as-is; relative paths are resolved relative to the process current working directory (usually the workspace root). `TIED_BASE_PATH` is also cwd-relative unless you set it to an absolute path. See [mcp-server/README.md](../mcp-server/README.md) for details.
+Path resolution: All path parameters (`output_base_path`, `file_path`, etc.) are resolved by the Node process. Absolute paths are used as-is; relative paths are resolved relative to the process current working directory (usually the workspace root). `TIED_BASE_PATH` is also cwd-relative unless you set it to an absolute path. See [mcp-server/README.md](../../mcp-server/README.md) for details.
 
 ### 3.3 Verify
 
@@ -103,13 +103,13 @@ If you have existing monolithic `requirements.md`, `architecture-decisions.md`, 
 
 Order (REQ → ARCH → IMPL) matches the dependency chain and the internal order of `convert_monolithic_all`.
 
-After conversion, update `semantic-tokens.yaml` with any new tokens (manually or via MCP index tools). See [mcp-server/README.md](../mcp-server/README.md) and [using-tied-without-mcp.md](using-tied-without-mcp.md) for non-MCP alternatives.
+After conversion, update `semantic-tokens.yaml` with any new tokens (manually or via MCP index tools). See [mcp-server/README.md](../../mcp-server/README.md) and [using-tied-without-mcp.md](using-tied-without-mcp.md) for non-MCP alternatives.
 
 ---
 
 ## 5. Pass 2: Establish REQ → ARCH → IMPL (documentation-first, no code yet)
 
-This pass aligns with **TIED Phase 1: Requirements → Pseudo-Code** and the documentation-first rule in [ai-principles.md](../ai-principles.md). No code changes; only YAML indexes and detail files.
+This pass aligns with **TIED Phase 1: Requirements → Pseudo-Code** and the documentation-first rule in [ai-principles.md](../../ai-principles.md). No code changes; only YAML indexes and detail files.
 
 ### Pass 2a — Create a new requirement
 
@@ -179,7 +179,7 @@ Use these to load full context for the LLM or tooling.
 
 ### Token audit
 
-Follow [ai-principles.md](../ai-principles.md) and [AGENTS.md](../AGENTS.md): confirm that code and tests carry the correct `[REQ-*]`, `[ARCH-*]`, and `[IMPL-*]` tokens and that the registry matches usage. Run the project’s token validation script when available.
+Follow [ai-principles.md](../../ai-principles.md) and [AGENTS.md](../../AGENTS.md): confirm that code and tests carry the correct `[REQ-*]`, `[ARCH-*]`, and `[IMPL-*]` tokens and that the registry matches usage. Run the project’s token validation script when available.
 
 ---
 
@@ -208,8 +208,8 @@ flowchart LR
 
 | Document | Description |
 |----------|-------------|
-| [mcp-server/README.md](../mcp-server/README.md) | Full tool and resource list, Cursor config example, path resolution, conversion options |
-| [README.md](../README.md) | Getting Started, Step 2 (MCP), TIED YAML MCP Server section, value of MCP, data flow |
-| [docs/using-tied-without-mcp.md](using-tied-without-mcp.md) | Workflow when not using MCP (bootstrap and manual YAML management) |
-| [ai-principles.md](../ai-principles.md) | TIED phases, documentation-first rule, token discipline, priority order |
-| [AGENTS.md](../AGENTS.md) | Canonical AI agent operating guide and checklists |
+| [mcp-server/README.md](../../mcp-server/README.md) | Full tool and resource list, Cursor config example, path resolution, conversion options |
+| [README.md](../../README.md) | Getting Started, Step 2 (MCP), TIED YAML MCP Server section, value of MCP, data flow |
+| [using-tied-without-mcp.md](using-tied-without-mcp.md) | Workflow when not using MCP (bootstrap and manual YAML management) |
+| [ai-principles.md](../../ai-principles.md) | TIED phases, documentation-first rule, token discipline, priority order |
+| [AGENTS.md](../../AGENTS.md) | Canonical AI agent operating guide and checklists |

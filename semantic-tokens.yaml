@@ -317,6 +317,61 @@ PROC-TIED_FIRST_IMPLEMENTATION:
   metadata:
     registered: "2026-03-15"
     last_updated: "2026-03-15"
+PROC-TIED_VERIFICATION_GATED:
+  type: PROC
+  name: Verification-gated status (closed-loop)
+  status: Active
+  description: When enabled, requirement and optionally IMPL status are derived only from test results; run verify step after tests, do not edit status by hand
+  cross_references:
+    - REQ-TIED_SETUP
+    - PROC-TIED_DEV_CYCLE
+    - PROC-TOKEN_VALIDATION
+  source_index: processes.md
+  detail_file: null
+  metadata:
+    registered: "2026-03-16"
+    last_updated: "2026-03-16"
+PROC-TIED_DEPENDENCY_GRAPH:
+  type: PROC
+  name: Dependency graph and backlog views
+  status: Active
+  description: Cycle detection, topological order, and backlog views (quick-wins, blockers, critical) from requirement/IMPL depends_on
+  cross_references:
+    - REQ-TIED_SETUP
+    - PROC-YAML_DB_OPERATIONS
+  source_index: processes.md
+  detail_file: null
+  metadata:
+    registered: "2026-03-16"
+    last_updated: "2026-03-16"
+PROC-TIED_BOOTSTRAP_FROM_TESTS:
+  type: PROC
+  name: Bootstrap TIED from existing tests
+  status: Active
+  description: Discover tests and token-like markers; propose or update REQ/IMPL traceability from test metadata when adopting TIED on an existing codebase
+  cross_references:
+    - REQ-TIED_SETUP
+    - PROC-AGENT_REQ_CHECKLIST
+    - PROC-IMPL_CODE_TEST_SYNC
+  source_index: processes.md
+  detail_file: null
+  metadata:
+    registered: "2026-03-16"
+    last_updated: "2026-03-16"
+PROC-TIED_PHASED_DELIVERY:
+  type: PROC
+  name: Phased delivery with backlog
+  status: Active
+  description: Assign phase or priority to requirements; use backlog views and dependency order to deliver in stages; verify and status per phase
+  cross_references:
+    - REQ-TIED_SETUP
+    - PROC-TIED_DEPENDENCY_GRAPH
+    - PROC-TIED_VERIFICATION_GATED
+  source_index: processes.md
+  detail_file: null
+  metadata:
+    registered: "2026-03-16"
+    last_updated: "2026-03-16"
 # ---
 # Template Record - Copy this block to create new tokens
 # ---

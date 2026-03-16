@@ -4,7 +4,7 @@
 
 **TIED Methodology Version**: 2.2.0
 
-This document centralizes every instruction AI coding assistants must follow while working in TIED repositories. It supersedes reminders in `.ai-agent-instructions`, `.cursorrules`, and README snippets. Treat it as the canonical reference when configuring prompts, IDE rules, or agent workflows. For methodology background (what TIED is, costs and benefits, LEAP rationale), see the human-facing docs in the TIED repo (e.g. TIED.md, docs/LEAP.md).
+This document centralizes every instruction AI coding assistants must follow while working in TIED repositories. It supersedes reminders in `.ai-agent-instructions`, `.cursorrules`, and README snippets. Treat it as the canonical reference when configuring prompts, IDE rules, or agent workflows. For methodology background (what TIED is, costs and benefits, LEAP rationale), see the human-facing docs in the TIED repo (e.g. TIED.md, tied/docs/LEAP.md).
 
 ---
 
@@ -42,7 +42,7 @@ This document centralizes every instruction AI coding assistants must follow whi
   - When code or tests written during TDD/E2E differ from IMPL, update the stack in **reverse order**: **IMPL → ARCH → REQ** in the same work item so tokens stay consistent and testable.
   - Work may start at any layer (REQ, ARCH, IMPL, or code/tests); for work to be **complete**, apply changes **up and down** the stack as needed. Code is valid only when **all tests pass** and **all requirements are met**.
 - **Implementation order** (see `tied/processes.md` § PROC-TIED_DEV_CYCLE): (1) **Unit tests first** — tests conform to IMPL pseudo-code, written before production code (strict TDD). (2) **Unit code via TDD** — code is written to satisfy the tests; entire IMPL pseudo-code is implemented via TDD. (3) **Composition tests first** — for every binding between units (event listeners, IPC, entry-point wiring), write failing component/integration/contract tests before composition code; each test verifies the connection without invoking the UI. (4) **Composition code via TDD** — binding/wiring/entry-point code written to satisfy composition tests; no composition code without a failing test. (5) **E2E** — only for behavior that requires UI invocation; each E2E test must justify why it cannot be tested at composition level. (6) **Closing the loop** — update TIED data; run `tied_validate_consistency` (or equivalent).
-- **Primary implementation checklist** — For the unified, step-by-step procedure that sequences CITDP analysis, LEAP, TDD, composition, E2E, and validation into a single executable checklist, follow `docs/agent-req-implementation-checklist.md` (`[PROC-AGENT_REQ_CHECKLIST]`). Use it as the primary resource for every new REQ or change to the tested system.
+- **Primary implementation checklist** — For the unified, step-by-step procedure that sequences CITDP analysis, LEAP, TDD, composition, E2E, and validation into a single executable checklist, follow `tied/docs/agent-req-implementation-checklist.md` (`[PROC-AGENT_REQ_CHECKLIST]`). Use it as the primary resource for every new REQ or change to the tested system.
 - **Module Validation Mandate `[REQ-MODULE_VALIDATION]`**
   - Identify logical modules and their boundaries before implementation.
   - Develop and validate each module independently (unit tests with mocks, contract tests, edge cases, error handling) before integration.
@@ -80,6 +80,7 @@ This document centralizes every instruction AI coding assistants must follow whi
 - [ ] Keep descriptive debug output (e.g., `DEBUG:`, `TRACE:`, `DIAGNOSTIC:`) to document decision points and execution flow; retain unless explicitly asked to remove
 - [ ] Record new `[ARCH-*]` and `[IMPL-*]` entries immediately with cross-references
 - [ ] **Validate all changed TIED YAML** with `yq -i -P <file>` (or equivalent) per [PROC-YAML_EDIT_LOOP]; YAML that does not validate is invalid for use
+- [ ] **Verification-gated mode** ([PROC-TIED_VERIFICATION_GATED]): When the project uses verification-gated mode, do not edit requirement or IMPL `status` by hand; run the verify step (e.g. `tied_verify` with update) after tests so status is derived from test results only.
 
 ### 3.4 After Completing Work
 - [ ] `semantic-tokens.yaml` reflects every token referenced in code/tests/docs
@@ -91,6 +92,7 @@ This document centralizes every instruction AI coding assistants must follow whi
 - [ ] Verify all code and tests are consistently linked to requirements and decisions; update code and documentation where necessary
 - [ ] **Validate all changed TIED YAML** with `yq -i -P <file>` (or equivalent) per [PROC-YAML_EDIT_LOOP]; YAML that does not validate is invalid for use
 - [ ] Run **`tied_validate_consistency`** (TIED MCP tool) and fix any reported issues so REQ→ARCH→IMPL indexes, detail files, and token references remain consistent; align with `[PROC-TOKEN_VALIDATION]` and any project `validate_tokens.sh`.
+- [ ] **Verification-gated mode**: When the project uses verification-gated mode ([PROC-TIED_VERIFICATION_GATED]), run the project's **verify step** after tests (e.g. MCP `tied_verify` with update) so requirement and optionally IMPL status are derived from test results; then run `tied_validate_consistency`.
 - [ ] Do not create a stand-alone summary document for the session (e.g. no SESSION_SUMMARY.md or similar)
 
 ---
@@ -123,7 +125,7 @@ Same filename at repo root (template) and in `tied/` (project index); location d
 | `implementation-decisions/` | Individual implementation decision detail files (YAML, e.g., `IMPL-MODULE_VALIDATION.yaml`) |
 | `detail-files-schema.md` | Schema for REQ/ARCH/IMPL detail YAML files (in TIED repo or tied/) |
 | `processes.md` | Process tracking including `[PROC-YAML_DB_OPERATIONS]`, LEAP, PROC-TIED_DEV_CYCLE; use TIED MCP as primary interface to TIED data (see §2 TIED data access). |
-| `docs/agent-req-implementation-checklist.md` | Primary step-by-step checklist for implementing any new REQ or change; unifies CITDP, TIED dev cycle, IMPL_CODE_TEST_SYNC, LEAP, and validation into one executable procedure (`[PROC-AGENT_REQ_CHECKLIST]`). |
+| `tied/docs/agent-req-implementation-checklist.md` | Primary step-by-step checklist for implementing any new REQ or change; unifies CITDP, TIED dev cycle, IMPL_CODE_TEST_SYNC, LEAP, and validation into one executable procedure (`[PROC-AGENT_REQ_CHECKLIST]`). |
 | `.cursorrules` | IDE loader that points back to this document |
 | `.ai-agent-instructions` | Quick reminder pointing to this document |
 

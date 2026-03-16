@@ -47,6 +47,15 @@ import {
 } from "../feedback.js";
 import { renameSemanticToken } from "../token-rename.js";
 import { parseRecordOrYaml } from "../parse-content.js";
+import {
+  buildRequirementGraph,
+  buildImplementationGraph,
+  findCycles,
+  topologicalSort,
+  getBacklogView,
+  getRequirementStatusAndPriority,
+} from "../dependency-graph.js";
+import { updateStatusFromPassedTokens } from "../verify.js";
 
 const INDEX_ENUM = z.enum([
   "requirements",
@@ -959,6 +968,101 @@ export const allTools = [
       const output =
         args.format === "json" ? exportJson(data.entries) : exportMarkdown(data.entries);
       return textContent(output);
+    },
+  },
+  {
+    name: "tied_verify",
+    config: {
+      description:
+        "Update requirement and optionally implementation index status from test results (verification-gated, [PROC-TIED_VERIFICATION_GATED]). Pass the list of REQ/IMPL tokens that have passing tests; their status is set to Implemented/Active. Optionally set unpassed tokens to Planned. Run after the test suite; use with tied_validate_consistency in CI.",
+      inputSchema: z.object({
+        passed_requirement_tokens: z
+          .array(z.string())
+          .optional()
+          .default([])
+          .describe("REQ tokens that have passing tests; status set to Implemented"),
+        passed_impl_tokens: z
+          .array(z.string())
+          .optional()
+          .default([])
+          .describe("IMPL tokens that have passing tests; status set to Active"),
+        set_unpassed_reqs_to_planned: z
+          .boolean()
+          .optional()
+          .default(false)
+          .describe("If true, REQs not in passed_requirement_tokens set to Planned"),
+        set_unpassed_impl_to_planned: z
+          .boolean()
+          .optional()
+          .default(false)
+          .describe("If true, IMPLs not in passed_impl_tokens set to Planned"),
+      }),
+    },
+    handler: async (args: {
+      passed_requirement_tokens?: string[];
+      passed_impl_tokens?: string[];
+      set_unpassed_reqs_to_planned?: boolean;
+      set_unpassed_impl_to_planned?: boolean;
+    }) => {
+      const result = updateStatusFromPassedTokens({
+        passed_requirement_tokens: args.passed_requirement_tokens ?? [],
+        passed_impl_tokens: args.passed_impl_tokens ?? [],
+        set_unpassed_reqs_to_planned: args.set_unpassed_reqs_to_planned ?? false,
+        set_unpassed_impl_to_planned: args.set_unpassed_impl_to_planned ?? false,
+      });
+      return textContent(JSON.stringify(result, null, 2));
+    },
+  },
+  {
+    name: "tied_cycles",
+    config: {
+      description:
+        "Detect cycles in the requirement dependency graph (related_requirements.depends_on). Returns list of cycles; resolve before using dependency order for planning ([PROC-TIED_DEPENDENCY_GRAPH]).",
+      inputSchema: z.object({
+        graph: z
+          .enum(["requirements", "implementation"])
+          .optional()
+          .default("requirements")
+          .describe("Which index to build the graph from"),
+      }),
+    },
+    handler: async (args: { graph?: "requirements" | "implementation" }) => {
+      const g =
+        args.graph === "implementation"
+          ? buildImplementationGraph()
+          : buildRequirementGraph();
+      const cycles = findCycles(g);
+      return textContent(
+        JSON.stringify({ cycles, has_cycles: cycles.length > 0 }, null, 2)
+      );
+    },
+  },
+  {
+    name: "tied_backlog",
+    config: {
+      description:
+        "Backlog views from requirement dependency graph: topological order, quick-wins (roots), blockers (unmet deps), or critical (high priority) ([PROC-TIED_DEPENDENCY_GRAPH]).",
+      inputSchema: z.object({
+        view: z
+          .enum(["order", "quick-wins", "blockers", "critical"])
+          .describe("View: order = topological order (roots first), quick-wins = roots, blockers = have unmet deps, critical = P0/P1 in order"),
+      }),
+    },
+    handler: async (args: { view: "order" | "quick-wins" | "blockers" | "critical" }) => {
+      const g = buildRequirementGraph();
+      const { statusByToken, priorityByToken } = getRequirementStatusAndPriority();
+      if (args.view === "order") {
+        const order = topologicalSort(g);
+        return textContent(JSON.stringify({ order, has_cycles: order.length === 0 && g.size > 0 }, null, 2));
+      }
+      const kind =
+        args.view === "quick-wins"
+          ? "quick-wins"
+          : args.view === "blockers"
+            ? "blockers"
+            : "critical";
+      const tokens = getBacklogView(g, kind, { statusByToken, priorityByToken });
+      return textContent(JSON.stringify({ view: args.view, tokens }, null, 2));
     },
   },
 ];

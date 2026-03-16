@@ -336,7 +336,7 @@ flowchart TD
 - **TDD session workflow**: `tied/processes.md` § `[PROC-TIED_DEV_CYCLE]`; [implementation-order.md](implementation-order.md)
 - **LEAP**: `tied/processes.md` § `[PROC-LEAP]`; [LEAP.md](LEAP.md)
 - **Test strategy**: `tied/processes.md` § `[PROC-TEST_STRATEGY]`
-- **Agent operating guide**: [AGENTS.md](../AGENTS.md); [ai-principles.md](../ai-principles.md)
+- **Agent operating guide**: [AGENTS.md](../../AGENTS.md); [ai-principles.md](../../ai-principles.md)
 - **IMPL detail schema**: `tied/implementation-decisions.md` § Core data object; `tied/detail-files-schema.md`
 - **MCP usage**: [ai-agent-tied-mcp-usage.md](ai-agent-tied-mcp-usage.md)
 - **Unified agent checklist**: [agent-req-implementation-checklist.md](agent-req-implementation-checklist.md) (`[PROC-AGENT_REQ_CHECKLIST]`) — sequences all nine phases with CITDP, LEAP, TDD, and validation into a single step-by-step procedure

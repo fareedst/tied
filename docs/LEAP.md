@@ -73,7 +73,7 @@ When creating a new feature or decision:
 ### 3.4 YAML and MCP
 
 - REQ, ARCH, and IMPL detail live in **YAML** (indexes + detail files per token). The TIED MCP exposes indexes and CRUD+ validation so agents can read/write TIED data without editing YAML by hand.
-- For a complex task: use MCP (or index/detail reads) to collect all related R/A/I records; reason from the **necessary IMPL** pseudo-code only; then treat "update code to match IMPL" as a separate step. See `docs/ai-agent-tied-mcp-usage.md` for the MCP workflow.
+- For a complex task: use MCP (or index/detail reads) to collect all related R/A/I records; reason from the **necessary IMPL** pseudo-code only; then treat "update code to match IMPL" as a separate step. See `tied/docs/ai-agent-tied-mcp-usage.md` for the MCP workflow.
 
 ---
 

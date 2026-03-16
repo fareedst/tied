@@ -1,6 +1,6 @@
 # New Feature Process (`[PROC-NEW_FEATURE]`)
 
-This document describes the end-to-end procedure for implementing a new feature using the TIED methodology: from user prompt through documentation, testing, implementation, validation, and release. It invokes **[PROC-TIED_DEV_CYCLE](tied/processes.md)** and adds tooling and post-implementation steps. **For the agent-executable step-by-step procedure** (what to do in each phase), see **`docs/agent-req-implementation-checklist.md`** (`[PROC-AGENT_REQ_CHECKLIST]`) which is the primary unified checklist; it sequences `tied/processes.md` § PROC-TIED_DEV_CYCLE with CITDP, IMPL_CODE_TEST_SYNC, LEAP, and validation. The diagram and phase summary below are for human reference.
+This document describes the end-to-end procedure for implementing a new feature using the TIED methodology: from user prompt through documentation, testing, implementation, validation, and release. It invokes **[PROC-TIED_DEV_CYCLE](tied/processes.md)** and adds tooling and post-implementation steps. **For the agent-executable step-by-step procedure** (what to do in each phase), see **`tied/docs/agent-req-implementation-checklist.md`** (`[PROC-AGENT_REQ_CHECKLIST]`) which is the primary unified checklist; it sequences `tied/processes.md` § PROC-TIED_DEV_CYCLE with CITDP, IMPL_CODE_TEST_SYNC, LEAP, and validation. The diagram and phase summary below are for human reference.
 
 ## 1. Flow diagram: User prompt to commit
 
@@ -137,4 +137,4 @@ flowchart TB
 8. **Unit tests** — If any unit tests are missing, add them and ensure they reference the appropriate REQ/ARCH/IMPL tokens.
 9. **E2E tests** — Recommend e2e tests where appropriate (critical user journeys). After approval, implement them.
 10. **README and CHANGELOG** — Update [README.md](../README.md) and [CHANGELOG.md](../CHANGELOG.md) for all changes in the session.
-11. **Commit** — Write a single commit message for the entire session **per [PROC-COMMIT_MESSAGES](../processes.md)**. In projects set up with TIED, use **tied/commit-guidelines.md** as the quick reference (see also [CONTRIBUTING.md](../CONTRIBUTING.md) for the TIED repo). Use the format and types defined in processes.md; reference main REQ/ARCH/IMPL tokens in the body or footer when relevant.
+11. **Commit** — Write a single commit message for the entire session **per [PROC-COMMIT_MESSAGES](tied/processes.md)**. In projects set up with TIED, use **tied/commit-guidelines.md** as the quick reference (see also [CONTRIBUTING.md](../CONTRIBUTING.md) for the TIED repo). Use the format and types defined in tied/processes.md; reference main REQ/ARCH/IMPL tokens in the body or footer when relevant.
