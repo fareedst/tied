@@ -301,6 +301,22 @@ PROC-IMPL_CODE_TEST_SYNC:
   metadata:
     registered: "2026-03-12"
     last_updated: "2026-03-12"
+PROC-TIED_FIRST_IMPLEMENTATION:
+  type: PROC
+  name: TIED-first implementation
+  status: Active
+  description: Procedure for when REQ/ARCH/IMPL are already prepared in TIED but tests and code have not yet been updated; use updated TIED as source of truth, verify REQ/ARCH/IMPL, then implement via strict TDD
+  cross_references:
+    - PROC-AGENT_REQ_CHECKLIST
+    - PROC-IMPL_CODE_TEST_SYNC
+    - PROC-TIED_DEV_CYCLE
+    - PROC-LEAP
+    - PROC-IMPL_PSEUDOCODE_TOKENS
+  source_index: processes.md
+  detail_file: null
+  metadata:
+    registered: "2026-03-15"
+    last_updated: "2026-03-15"
 # ---
 # Template Record - Copy this block to create new tokens
 # ---

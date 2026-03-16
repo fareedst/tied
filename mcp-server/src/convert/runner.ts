@@ -5,7 +5,6 @@
 
 import fs from "node:fs";
 import path from "node:path";
-import yaml from "js-yaml";
 import {
   parseMonolithicRequirements,
   parseMonolithicArchitecture,
@@ -17,6 +16,7 @@ import {
   implementationToYamlRecord,
 } from "./yaml-generator.js";
 import { getBasePath } from "../yaml-loader.js";
+import { safeDump } from "../yaml-dump.js";
 
 /** Token format for monolithic input: hyphen [REQ-*], colon [REQ:*], or both (normalize colon to hyphen). */
 export type TokenFormat = "hyphen" | "colon" | "both";
@@ -111,7 +111,7 @@ export function convertMonolithicRequirements(
     if (!fs.existsSync(detailDir)) fs.mkdirSync(detailDir, { recursive: true });
     fs.writeFileSync(
       indexPath,
-      yaml.dump(indexRecord, { sortKeys: false, lineWidth: -1 }),
+      safeDump(indexRecord),
       "utf8"
     );
     for (let i = 0; i < deduped.length; i++) {
@@ -121,7 +121,7 @@ export function convertMonolithicRequirements(
       const content = { [token]: indexRecord[token] };
       fs.writeFileSync(
         detailPath,
-        yaml.dump(content, { sortKeys: false, lineWidth: -1 }),
+        safeDump(content),
         "utf8"
       );
     }
@@ -173,7 +173,7 @@ export function convertMonolithicArchitecture(
     if (!fs.existsSync(detailDir)) fs.mkdirSync(detailDir, { recursive: true });
     fs.writeFileSync(
       indexPath,
-      yaml.dump(indexRecord, { sortKeys: false, lineWidth: -1 }),
+      safeDump(indexRecord),
       "utf8"
     );
     for (let i = 0; i < deduped.length; i++) {
@@ -183,7 +183,7 @@ export function convertMonolithicArchitecture(
       const content = { [token]: indexRecord[token] };
       fs.writeFileSync(
         detailPath,
-        yaml.dump(content, { sortKeys: false, lineWidth: -1 }),
+        safeDump(content),
         "utf8"
       );
     }
@@ -235,7 +235,7 @@ export function convertMonolithicImplementation(
     if (!fs.existsSync(detailDir)) fs.mkdirSync(detailDir, { recursive: true });
     fs.writeFileSync(
       indexPath,
-      yaml.dump(indexRecord, { sortKeys: false, lineWidth: -1 }),
+      safeDump(indexRecord),
       "utf8"
     );
     for (let i = 0; i < deduped.length; i++) {
@@ -245,7 +245,7 @@ export function convertMonolithicImplementation(
       const content = { [token]: indexRecord[token] };
       fs.writeFileSync(
         detailPath,
-        yaml.dump(content, { sortKeys: false, lineWidth: -1 }),
+        safeDump(content),
         "utf8"
       );
     }

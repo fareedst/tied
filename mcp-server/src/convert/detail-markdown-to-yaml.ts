@@ -6,7 +6,6 @@
 
 import fs from "node:fs";
 import path from "node:path";
-import yaml from "js-yaml";
 import {
   parseMonolithicRequirements,
   parseMonolithicArchitecture,
@@ -23,6 +22,7 @@ import {
 } from "./yaml-generator.js";
 import { resolveOutputBase } from "./runner.js";
 import { updateRecord, type IndexName } from "../yaml-loader.js";
+import { safeDump } from "../yaml-dump.js";
 
 const REQ_TOKEN_RE = /^#+\s*\[(REQ-[A-Z0-9_]+)\]\s*(.*)$/m;
 const ARCH_TOKEN_RE = /^#+\s*\[(ARCH-[A-Z0-9_]+)\]\s*(.*)$/m;
@@ -354,7 +354,7 @@ export function convertDetailMarkdownToYaml(
       if (!fs.existsSync(detailDir)) fs.mkdirSync(detailDir, { recursive: true });
       fs.writeFileSync(
         detailPath,
-        yaml.dump({ [token]: record }, { sortKeys: false, lineWidth: -1 }),
+        safeDump({ [token]: record }),
         "utf8"
       );
     } catch (e) {

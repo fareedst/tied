@@ -7,6 +7,7 @@ import fs from "node:fs";
 import path from "node:path";
 import yaml from "js-yaml";
 import { getBasePath } from "./yaml-loader.js";
+import { safeDump } from "./yaml-dump.js";
 
 export const FEEDBACK_TYPES = ["feature_request", "bug_report", "methodology_improvement"] as const;
 export type FeedbackType = (typeof FEEDBACK_TYPES)[number];
@@ -118,7 +119,7 @@ export function appendEntry(
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true });
     }
-    fs.writeFileSync(filePath, yaml.dump({ entries: data.entries }, { lineWidth: -1 }), "utf8");
+    fs.writeFileSync(filePath, safeDump({ entries: data.entries }), "utf8");
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);
     return { ok: false, error: `Failed to write feedback file: ${msg}` };

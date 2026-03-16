@@ -8,6 +8,7 @@ import fs from "node:fs";
 import path from "node:path";
 import yaml from "js-yaml";
 import { getBasePath, getRecord, loadIndex, updateRecord, type IndexName } from "./yaml-loader.js";
+import { safeDump } from "./yaml-dump.js";
 
 export type DetailType = "requirement" | "architecture" | "implementation";
 
@@ -132,7 +133,7 @@ export function writeDetail(
   try {
     const dir = path.dirname(filePath);
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-    const out = yaml.dump({ [token]: record }, { sortKeys: false, lineWidth: -1 });
+    const out = safeDump({ [token]: record });
     fs.writeFileSync(filePath, out, "utf8");
     if (options?.syncIndex) {
       const indexName = getIndexName(token);
@@ -167,7 +168,7 @@ export function updateDetail(token: string, updates: Record<string, unknown>): {
   const merged = { ...existing, ...updates };
   const filePath = getDetailPath(token)!;
   try {
-    const out = yaml.dump({ [token]: merged }, { sortKeys: false, lineWidth: -1 });
+    const out = safeDump({ [token]: merged });
     fs.writeFileSync(filePath, out, "utf8");
     return { ok: true };
   } catch (e) {

@@ -6,6 +6,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import yaml from "js-yaml";
+import { safeDump } from "./yaml-dump.js";
 
 export type IndexName =
   | "requirements"
@@ -248,7 +249,7 @@ export function insertRecord(
     data[token] = record;
     const dir = path.dirname(filePath);
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-    const out = yaml.dump(data, { sortKeys: false, lineWidth: -1 });
+    const out = safeDump(data);
     fs.writeFileSync(filePath, out, "utf8");
     return { ok: true };
   } catch (e) {
@@ -276,7 +277,7 @@ export function updateRecord(
       return { ok: false, error: `Token is not a record: ${token}` };
     const merged = { ...(existing as Record<string, unknown>), ...updates };
     data[token] = merged;
-    const out = yaml.dump(data, { sortKeys: false, lineWidth: -1 });
+    const out = safeDump(data);
     fs.writeFileSync(filePath, out, "utf8");
     return { ok: true };
   } catch (e) {
@@ -306,7 +307,7 @@ export function upsertRecord(
     }
     const dir = path.dirname(filePath);
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-    const out = yaml.dump(data, { sortKeys: false, lineWidth: -1 });
+    const out = safeDump(data);
     fs.writeFileSync(filePath, out, "utf8");
     return { ok: true };
   } catch (e) {

@@ -6,6 +6,8 @@
 
 **Processes unified here**: `[PROC-CITDP]`, `[PROC-TIED_DEV_CYCLE]`, `[PROC-IMPL_CODE_TEST_SYNC]`, `[PROC-LEAP]`, `[PROC-YAML_EDIT_LOOP]`, `[PROC-IMPL_PSEUDOCODE_TOKENS]`, `[PROC-TOKEN_AUDIT]`, `[PROC-TOKEN_VALIDATION]`, `[PROC-TEST_STRATEGY]`, `[PROC-COMMIT_MESSAGES]`.
 
+**Mandatory order**: IMPL pseudo-code (every block token-commented) → RED tests (with token comments) → code (with token comments). No code before RED; no RED before complete IMPL pseudo-code.
+
 ---
 
 ## Entry Points
@@ -14,7 +16,12 @@
 |---|---|---|
 | New requirement | S01 | Full checklist applies |
 | Change to existing system | S01 | CITDP analysis applies at S02-S03; existing tokens loaded at S03 |
+| TIED prepared; tests/code not updated | S01 | S04–S06 verify-only; use updated REQ/ARCH/IMPL as source of truth; follow [PROC-TIED_FIRST_IMPLEMENTATION](tied-first-implementation-procedure.md) |
 | Bug fix | S01 | At S02, determine if a REQ is missing; if so, create REQ at S04 before defining the fix |
+
+### Variant: TIED prepared, implementation pending
+
+When REQ/ARCH/IMPL have already been updated and the remaining work is to align tests and code: use the checklist from S01. S02–S03 define the change and impact from the **updated** TIED (desired behavior = new design; current behavior = prior tests/code). S04–S06 are **verify-only** (confirm REQ/ARCH/IMPL completeness and block token comments; fix gaps before proceeding). S07–S16 are unchanged. Full procedure: [tied-first-implementation-procedure.md](tied-first-implementation-procedure.md) (`[PROC-TIED_FIRST_IMPLEMENTATION]`).
 
 ## Flow Control Notation
 

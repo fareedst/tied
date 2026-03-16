@@ -23,6 +23,7 @@
 ## 2. Primary interface: TIED MCP server
 
 - **Use the TIED MCP server as the primary way to read and write TIED data** for the project.
+- **Avoid direct edits to `tied/**/*.yaml` for writes;** use MCP write tools so the server can emit valid YAML (e.g. values with colons are quoted correctly).
 - Prefer **MCP tools** for:
   - Reading indexes and records: `yaml_index_read`, `yaml_index_list_tokens`, `yaml_index_filter`, `get_decisions_for_requirement`, `get_requirements_for_decision`
   - Reading/writing detail files: `yaml_detail_read`, `yaml_detail_read_many`, `yaml_detail_list`, `yaml_detail_create`, `yaml_detail_update`, `yaml_detail_delete`

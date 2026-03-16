@@ -46,6 +46,7 @@ import {
   type FeedbackType,
 } from "../feedback.js";
 import { renameSemanticToken } from "../token-rename.js";
+import { parseRecordOrYaml } from "../parse-content.js";
 
 const INDEX_ENUM = z.enum([
   "requirements",
@@ -61,7 +62,7 @@ export const allTools = [
     name: "yaml_index_read",
     config: {
       description:
-        "Read an entire YAML index or a specific record by token. Use index to choose which file (requirements, architecture, implementation, semantic-tokens). Optionally pass token to get a single record.",
+        "Read an entire YAML index or a specific record by token. Use index to choose which file (requirements, architecture, implementation, semantic-tokens). Optionally pass token to get a single record. Use with MCP write tools to update TIED data instead of editing YAML files by hand.",
       inputSchema: z.object({
         index: INDEX_ENUM.describe(
           "Which YAML index: requirements, architecture, implementation, or semantic-tokens"
@@ -262,7 +263,7 @@ export const allTools = [
     name: "yaml_index_insert",
     config: {
       description:
-        "Insert a new record into a YAML index. Fails if the token already exists. Record must be a JSON object (nested allowed). Writes to the index file (e.g. tied/requirements.yaml).",
+        "Insert a new record into a YAML index. Fails if the token already exists. Record must be a JSON object (nested allowed). Writes to the index file (e.g. tied/requirements.yaml). Prefer this over editing tied/*.yaml directly; the server emits valid YAML (e.g. quoting values with colons).",
       inputSchema: z.object({
         index: INDEX_ENUM.describe(
           "Which YAML index: requirements, architecture, implementation, or semantic-tokens"
@@ -270,7 +271,7 @@ export const allTools = [
         token: z.string().describe("Token ID for the new record (e.g. REQ-NEW_FEATURE)"),
         record: z
           .string()
-          .describe("JSON string of the record object (e.g. {\"name\": \"...\", \"status\": \"Planned\"})"),
+          .describe("JSON or YAML string of the record object (e.g. {\"name\": \"...\", \"status\": \"Planned\"})"),
       }),
     },
     handler: async ({
@@ -282,16 +283,9 @@ export const allTools = [
       token: string;
       record: string;
     }) => {
-      let record: Record<string, unknown>;
-      try {
-        const parsed = JSON.parse(recordJson) as unknown;
-        if (typeof parsed !== "object" || parsed === null || Array.isArray(parsed))
-          return textContent(JSON.stringify({ ok: false, error: "record must be a JSON object" }));
-        record = parsed as Record<string, unknown>;
-      } catch {
-        return textContent(JSON.stringify({ ok: false, error: "Invalid JSON in record" }));
-      }
-      const result = insertRecord(index as IndexName, token, record);
+      const parsed = parseRecordOrYaml(recordJson);
+      if (!parsed.ok) return textContent(JSON.stringify({ ok: false, error: parsed.error }));
+      const result = insertRecord(index as IndexName, token, parsed.value);
       return textContent(JSON.stringify(result, null, 2));
     },
   },
@@ -299,7 +293,7 @@ export const allTools = [
     name: "yaml_index_update",
     config: {
       description:
-        "Update an existing record in a YAML index by merging the given fields at the top level. Fails if the token does not exist. Updates must be a JSON object.",
+        "Update an existing record in a YAML index by merging the given fields at the top level. Fails if the token does not exist. Updates must be a JSON object. Prefer this over editing tied/*.yaml directly; the server emits valid YAML (e.g. quoting values with colons).",
       inputSchema: z.object({
         index: INDEX_ENUM.describe(
           "Which YAML index: requirements, architecture, implementation, or semantic-tokens"
@@ -307,7 +301,7 @@ export const allTools = [
         token: z.string().describe("Token ID of the record to update"),
         updates: z
           .string()
-          .describe("JSON string of key-value pairs to merge into the record (e.g. {\"status\": \"Implemented\"})"),
+          .describe("JSON or YAML string of key-value pairs to merge into the record (e.g. {\"status\": \"Implemented\"})"),
       }),
     },
     handler: async ({
@@ -319,16 +313,9 @@ export const allTools = [
       token: string;
       updates: string;
     }) => {
-      let updates: Record<string, unknown>;
-      try {
-        const parsed = JSON.parse(updatesJson) as unknown;
-        if (typeof parsed !== "object" || parsed === null || Array.isArray(parsed))
-          return textContent(JSON.stringify({ ok: false, error: "updates must be a JSON object" }));
-        updates = parsed as Record<string, unknown>;
-      } catch {
-        return textContent(JSON.stringify({ ok: false, error: "Invalid JSON in updates" }));
-      }
-      const result = updateRecord(index as IndexName, token, updates);
+      const parsed = parseRecordOrYaml(updatesJson);
+      if (!parsed.ok) return textContent(JSON.stringify({ ok: false, error: parsed.error }));
+      const result = updateRecord(index as IndexName, token, parsed.value);
       return textContent(JSON.stringify(result, null, 2));
     },
   },
@@ -336,7 +323,7 @@ export const allTools = [
     name: "yaml_detail_read",
     config: {
       description:
-        "Read a single detail YAML file by token (REQ-*, ARCH-*, or IMPL-*). Returns the detail record (the content under the token key). Fails if token format is invalid or no detail file exists.",
+        "Read a single detail YAML file by token (REQ-*, ARCH-*, or IMPL-*). Returns the detail record (the content under the token key). Fails if token format is invalid or no detail file exists. Use with MCP write tools to update TIED data instead of editing YAML files by hand.",
       inputSchema: z.object({
         token: z.string().min(1).describe("Token ID (e.g. REQ-TIED_SETUP, ARCH-MODULE_VALIDATION, IMPL-MODULE_VALIDATION)"),
       }),
@@ -419,10 +406,10 @@ export const allTools = [
     name: "yaml_detail_create",
     config: {
       description:
-        "Create a new detail YAML file. Token must be REQ-*, ARCH-*, or IMPL-*. Record is the JSON object for the single top-level key. Fails if file already exists or token invalid. Optionally syncs index detail_file (sync_index: true).",
+        "Create a new detail YAML file. Token must be REQ-*, ARCH-*, or IMPL-*. Record is the JSON object for the single top-level key. Fails if file already exists or token invalid. Optionally syncs index detail_file (sync_index: true). Prefer this over editing tied/*.yaml directly; the server emits valid YAML (e.g. quoting values with colons).",
       inputSchema: z.object({
         token: z.string().min(1).describe("Token ID (e.g. REQ-NEW_FEATURE)"),
-        record: z.string().describe("JSON string of the detail record object"),
+        record: z.string().describe("JSON or YAML string of the detail record object"),
         sync_index: z.boolean().optional().describe("If true, set detail_file on the corresponding index record (default: true)"),
       }),
     },
@@ -435,16 +422,9 @@ export const allTools = [
       record: string;
       sync_index?: boolean;
     }) => {
-      let record: Record<string, unknown>;
-      try {
-        const parsed = JSON.parse(recordJson) as unknown;
-        if (typeof parsed !== "object" || parsed === null || Array.isArray(parsed))
-          return textContent(JSON.stringify({ ok: false, error: "record must be a JSON object" }));
-        record = parsed as Record<string, unknown>;
-      } catch {
-        return textContent(JSON.stringify({ ok: false, error: "Invalid JSON in record" }));
-      }
-      const result = writeDetail(token, record, { syncIndex: sync_index !== false });
+      const parsed = parseRecordOrYaml(recordJson);
+      if (!parsed.ok) return textContent(JSON.stringify({ ok: false, error: parsed.error }));
+      const result = writeDetail(token, parsed.value, { syncIndex: sync_index !== false });
       return textContent(JSON.stringify(result, null, 2));
     },
   },
@@ -452,10 +432,10 @@ export const allTools = [
     name: "yaml_detail_update",
     config: {
       description:
-        "Update an existing detail YAML file by merging the given object at the top level. Fails if no detail file exists.",
+        "Update an existing detail YAML file by merging the given object at the top level. Fails if no detail file exists. Prefer this over editing tied/*.yaml directly; the server emits valid YAML (e.g. quoting values with colons).",
       inputSchema: z.object({
         token: z.string().min(1).describe("Token ID of the detail file to update"),
-        updates: z.string().describe("JSON string of key-value pairs to merge into the detail record"),
+        updates: z.string().describe("JSON or YAML string of key-value pairs to merge into the detail record"),
       }),
     },
     handler: async ({
@@ -465,16 +445,9 @@ export const allTools = [
       token: string;
       updates: string;
     }) => {
-      let updates: Record<string, unknown>;
-      try {
-        const parsed = JSON.parse(updatesJson) as unknown;
-        if (typeof parsed !== "object" || parsed === null || Array.isArray(parsed))
-          return textContent(JSON.stringify({ ok: false, error: "updates must be a JSON object" }));
-        updates = parsed as Record<string, unknown>;
-      } catch {
-        return textContent(JSON.stringify({ ok: false, error: "Invalid JSON in updates" }));
-      }
-      const result = updateDetail(token, updates);
+      const parsed = parseRecordOrYaml(updatesJson);
+      if (!parsed.ok) return textContent(JSON.stringify({ ok: false, error: parsed.error }));
+      const result = updateDetail(token, parsed.value);
       return textContent(JSON.stringify(result, null, 2));
     },
   },
@@ -503,11 +476,11 @@ export const allTools = [
     name: "tied_token_create_with_detail",
     config: {
       description:
-        "Create a new REQ, ARCH, or IMPL token with both index record and detail YAML in one step. Writes the index (requirements, architecture-decisions, or implementation-decisions) and the corresponding detail file. Fails if detail file already exists. Set upsert_index true to merge into existing index record. For IMPL tokens, detail_record should follow the TIED v2.2.0 canonical schema (see implementation-decisions.md).",
+        "Create a new REQ, ARCH, or IMPL token with both index record and detail YAML in one step. Writes the index (requirements, architecture-decisions, or implementation-decisions) and the corresponding detail file. Fails if detail file already exists. Set upsert_index true to merge into existing index record. For IMPL tokens, detail_record should follow the TIED v2.2.0 canonical schema (see implementation-decisions.md). Prefer this over editing tied/*.yaml directly; the server emits valid YAML (e.g. quoting values with colons).",
       inputSchema: z.object({
         token: z.string().min(1).describe("Token ID (REQ-*, ARCH-*, or IMPL-*)"),
-        index_record: z.string().describe("JSON string of the index record (e.g. name, status, cross_references). detail_file is set automatically."),
-        detail_record: z.string().describe("JSON string of the detail record body (per detail-files-schema.md; for IMPL use TIED v2.2.0 schema from implementation-decisions.md)."),
+        index_record: z.string().describe("JSON or YAML string of the index record (e.g. name, status, cross_references). detail_file is set automatically."),
+        detail_record: z.string().describe("JSON or YAML string of the detail record body (per detail-files-schema.md; for IMPL use TIED v2.2.0 schema from implementation-decisions.md)."),
         upsert_index: z.boolean().optional().describe("If true, merge index_record into existing index entry; if false, fail when token already exists (default: false)"),
       }),
     },
@@ -537,25 +510,15 @@ export const allTools = [
         : indexName === "architecture" ? `architecture-decisions/${token}.yaml`
         : `implementation-decisions/${token}.yaml`;
 
-      let indexRecord: Record<string, unknown>;
-      try {
-        const parsed = JSON.parse(indexRecordJson) as unknown;
-        if (typeof parsed !== "object" || parsed === null || Array.isArray(parsed))
-          return textContent(JSON.stringify({ ok: false, error: "index_record must be a JSON object" }, null, 2));
-        indexRecord = { ...(parsed as Record<string, unknown>), detail_file: detailFile };
-      } catch {
-        return textContent(JSON.stringify({ ok: false, error: "Invalid JSON in index_record" }, null, 2));
-      }
+      const indexParsed = parseRecordOrYaml(indexRecordJson);
+      if (!indexParsed.ok)
+        return textContent(JSON.stringify({ ok: false, error: indexParsed.error }, null, 2));
+      const indexRecord = { ...indexParsed.value, detail_file: detailFile };
 
-      let detailRecord: Record<string, unknown>;
-      try {
-        const parsed = JSON.parse(detailRecordJson) as unknown;
-        if (typeof parsed !== "object" || parsed === null || Array.isArray(parsed))
-          return textContent(JSON.stringify({ ok: false, error: "detail_record must be a JSON object" }, null, 2));
-        detailRecord = parsed as Record<string, unknown>;
-      } catch {
-        return textContent(JSON.stringify({ ok: false, error: "Invalid JSON in detail_record" }, null, 2));
-      }
+      const detailParsed = parseRecordOrYaml(detailRecordJson);
+      if (!detailParsed.ok)
+        return textContent(JSON.stringify({ ok: false, error: detailParsed.error }, null, 2));
+      const detailRecord = detailParsed.value;
 
       if (upsert_index) {
         const res = upsertRecord(indexName, token, indexRecord);

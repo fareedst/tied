@@ -734,6 +734,32 @@ Active
 
 ---
 
+## `[PROC-TIED_FIRST_IMPLEMENTATION]` TIED-first implementation (TIED prepared, implementation pending)
+
+### Purpose
+When REQ/ARCH/IMPL have been updated in TIED but tests and code have not, ensure agents implement from the updated TIED stack via strict TDD and three-way alignment without treating existing code as the source of truth. The updated IMPL pseudo-code is the single source of truth; existing tests and code are updated or replaced to match.
+
+### Scope
+Any change where TIED (REQ/ARCH/IMPL) is already authored or updated and the remaining work is to align tests and code with that design.
+
+### Token references
+- [PROC-AGENT_REQ_CHECKLIST] — base checklist; this process is a variant entry point
+- [PROC-IMPL_CODE_TEST_SYNC] — three-way alignment, unit TDD, composition, E2E
+- [PROC-TIED_DEV_CYCLE] — RED/GREEN/REFACTOR, composition then E2E
+- [PROC-LEAP] — propagate from IMPL when code/tests diverge
+- [PROC-IMPL_PSEUDOCODE_TOKENS] — block token comments in pseudo-code
+
+### Procedure document
+`docs/tied-first-implementation-procedure.md`
+
+### Core idea
+Execute the agent checklist from S01. S02–S03 define change and impact from the **updated** TIED (desired = new design; current = prior tests/code). S04–S06 are **verify-only**: confirm REQ/ARCH/IMPL completeness and that every IMPL block has token comments; fix any gaps before proceeding to tests/code. S07–S16 run as in the main checklist: risk, test plan from new IMPL, unit TDD (RED then GREEN then SYNC), composition tests, E2E, validation, sync TIED, README/CHANGELOG, CITDP, commit.
+
+### Status
+Active
+
+---
+
 ## `[PROC-IMPL_CODE_TEST_SYNC]` IMPL-to-Code-and-Tests Linkage
 
 ### Purpose
