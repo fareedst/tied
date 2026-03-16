@@ -794,18 +794,21 @@ TIED enables several metrics:
 ---
 
 **For more information**, see:
+
+**In the client project:** YAML that comes from TIED (methodology) is used **read-only** and is refreshed by re-running `copy_files.sh`; it lives under `tied/methodology/` and does not hold client-specific data. Client-specific REQ/ARCH/IMPL and tokens live only in **project** YAML at the root of `tied/` (e.g. `tied/requirements.yaml`, `tied/requirements/`). See `processes.md` § [PROC-TIED_METHODOLOGY_READONLY] and AGENTS.md § Client inheritance.
+
 - `ai-principles.md` - Agent operational mandates and checklists (in projects set up with TIED)
 - `tied-language-spec.md` - TIED language specification (pseudo-code templates with semantic tokens)
 - `requirements.md` - Template guide for requirements documentation (at TIED repo root; copy to your project's `tied/requirements.md`)
-- `requirements.yaml` - YAML index template for requirements with `[REQ-*]` tokens (copy to your project's `tied/requirements.yaml`)
-- `requirements/` - Individual requirement detail file examples (copy to your project's `requirements/` directory)
-- `architecture-decisions.md` - Template guide for architecture decisions documentation (copy to your project's `tied/architecture-decisions.md`)
-- `architecture-decisions.yaml` - YAML index template for architecture decisions with `[ARCH-*]` tokens (copy to your project's `tied/architecture-decisions.yaml`)
-- `architecture-decisions/` - Individual architecture decision detail file examples (copy to your project's `architecture-decisions/` directory)
-- `implementation-decisions.md` - Template guide for implementation decisions documentation (copy to your project's `tied/implementation-decisions.md`)
-- `implementation-decisions.yaml` - YAML index template for implementation decisions with `[IMPL-*]` tokens (copy to your project's `tied/implementation-decisions.yaml`)
-- `implementation-decisions/` - Individual implementation decision detail file examples (copy to your project's `implementation-decisions/` directory)
-- `processes.md` - Template for process tracking including `[PROC-YAML_DB_OPERATIONS]` (copy to your project's `tied/processes.md`)
-- `semantic-tokens.yaml` - YAML index template for semantic tokens registry (copy to your project's `tied/semantic-tokens.yaml`)
-- `semantic-tokens.md` - Template for semantic tokens guide with format and conventions (copy to your project's `tied/semantic-tokens.md`)
+- `requirements.yaml` - YAML index: in client, methodology copy in `tied/methodology/` (read-only); project index at `tied/requirements.yaml` (client data only)
+- `requirements/` - Detail files: methodology in `tied/methodology/requirements/` (read-only); project in `tied/requirements/`
+- `architecture-decisions.md` - Template guide (copy to your project's `tied/architecture-decisions.md`)
+- `architecture-decisions.yaml` - Methodology in `tied/methodology/` (read-only); project at `tied/architecture-decisions.yaml`
+- `architecture-decisions/` - Methodology in `tied/methodology/architecture-decisions/` (read-only); project in `tied/architecture-decisions/`
+- `implementation-decisions.md` - Template guide (copy to your project's `tied/implementation-decisions.md`)
+- `implementation-decisions.yaml` - Methodology in `tied/methodology/` (read-only); project at `tied/implementation-decisions.yaml`
+- `implementation-decisions/` - Methodology in `tied/methodology/implementation-decisions/` (read-only); project in `tied/implementation-decisions/`
+- `processes.md` - Process tracking including `[PROC-YAML_DB_OPERATIONS]`, `[PROC-TIED_METHODOLOGY_READONLY]` (copy to your project's `tied/processes.md`)
+- `semantic-tokens.yaml` - Methodology in `tied/methodology/` (read-only); project at `tied/semantic-tokens.yaml`
+- `semantic-tokens.md` - Template for semantic tokens guide (copy to your project's `tied/semantic-tokens.md`)
 

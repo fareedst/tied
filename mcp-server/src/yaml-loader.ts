@@ -1,6 +1,8 @@
 /**
  * YAML index loader with path resolution for TIED indexes.
- * Same filename everywhere: at repo root the file is the template; in tied/ it is the project index.
+ * Supports methodology/project split [PROC-TIED_METHODOLOGY_READONLY]: when tied/methodology/
+ * exists, methodology index is read-only and merged with project index (project overrides);
+ * writes go only to project files (tied/ root).
  */
 
 import fs from "node:fs";
@@ -32,7 +34,7 @@ export function clearBasePathCache(): void {
 
 /**
  * Resolve base path for YAML indexes. Uses TIED_BASE_PATH env; default "tied".
- * Resolved relative to process.cwd().
+ * Resolved relative to process.cwd(). This is the project (writable) root.
  */
 export function getBasePath(): string {
   if (cachedBasePath !== null) return cachedBasePath;
@@ -42,8 +44,57 @@ export function getBasePath(): string {
 }
 
 /**
- * Resolve path to an index file. Tries {basePath}/{index}.yaml (e.g. tied/requirements.yaml),
- * then process.cwd()/{index}.yaml (root template when tied/ has no index).
+ * Path to methodology directory (tied/methodology/). Null if it does not exist.
+ * Methodology is read-only; project data lives at getBasePath() root.
+ */
+export function getMethodologyBasePath(): string | null {
+  const base = getBasePath();
+  const methodologyDir = path.join(base, "methodology");
+  if (fs.existsSync(methodologyDir) && fs.statSync(methodologyDir).isDirectory()) {
+    return methodologyDir;
+  }
+  return null;
+}
+
+function loadYamlFile(filePath: string): Record<string, unknown> | null {
+  try {
+    if (!fs.existsSync(filePath)) return null;
+    const raw = fs.readFileSync(filePath, "utf8");
+    const data = yaml.load(raw) as unknown;
+    if (data !== null && typeof data === "object" && !Array.isArray(data))
+      return data as Record<string, unknown>;
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Load methodology index only (tied/methodology/{index}.yaml). Returns null if no methodology dir.
+ */
+export function loadMethodologyIndex(index: IndexName): Record<string, unknown> | null {
+  const methodologyDir = getMethodologyBasePath();
+  if (!methodologyDir) return null;
+  const filePath = path.join(methodologyDir, INDEX_FILES[index]);
+  return loadYamlFile(filePath);
+}
+
+/**
+ * Load project index only (tied/{index}.yaml). Fallback to cwd when file not under base.
+ */
+export function loadProjectIndex(index: IndexName): Record<string, unknown> | null {
+  const base = getBasePath();
+  const fileName = INDEX_FILES[index];
+  const primary = path.join(base, fileName);
+  if (fs.existsSync(primary)) return loadYamlFile(primary);
+  const fallbackCwd = path.resolve(process.cwd(), fileName);
+  if (fs.existsSync(fallbackCwd)) return loadYamlFile(fallbackCwd);
+  return loadYamlFile(primary);
+}
+
+/**
+ * Resolve path to an index file for reading. Prefers project index path (tied/{index}.yaml);
+ * fallback to cwd when tied/ has no index (legacy/template mode).
  */
 export function resolveIndexPath(index: IndexName): string {
   const base = getBasePath();
@@ -56,20 +107,32 @@ export function resolveIndexPath(index: IndexName): string {
 }
 
 /**
- * Load and parse a YAML index file. Returns record of token -> data or null if missing/invalid.
+ * Load and parse index: merged view when methodology exists (methodology + project, project overrides);
+ * otherwise single project/legacy file. Returns record of token -> data or null if missing/invalid.
  */
 export function loadIndex(index: IndexName): Record<string, unknown> | null {
-  try {
-    const filePath = resolveIndexPath(index);
-    if (!fs.existsSync(filePath)) return null;
-    const raw = fs.readFileSync(filePath, "utf8");
-    const data = yaml.load(raw) as unknown;
-    if (data !== null && typeof data === "object" && !Array.isArray(data))
-      return data as Record<string, unknown>;
-    return null;
-  } catch {
-    return null;
+  const methodology = loadMethodologyIndex(index);
+  const project = loadProjectIndex(index);
+  if (methodology == null) return project;
+  const merged = { ...methodology };
+  if (project) {
+    for (const [k, v] of Object.entries(project)) {
+      if (k.startsWith("#") || typeof v !== "object" || v === null) continue;
+      merged[k] = v;
+    }
   }
+  return merged;
+}
+
+/**
+ * True when the token exists in the methodology index (read-only in client).
+ * Used to resolve detail file path: methodology tokens read from tied/methodology/... .
+ */
+export function isTokenInMethodology(index: IndexName, token: string): boolean {
+  const data = loadMethodologyIndex(index);
+  if (!data || !(token in data)) return false;
+  const val = data[token];
+  return typeof val === "object" && val !== null;
 }
 
 /**

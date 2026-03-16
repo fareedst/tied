@@ -7,7 +7,15 @@
 import fs from "node:fs";
 import path from "node:path";
 import yaml from "js-yaml";
-import { getBasePath, getRecord, loadIndex, updateRecord, type IndexName } from "./yaml-loader.js";
+import {
+  getBasePath,
+  getMethodologyBasePath,
+  getRecord,
+  isTokenInMethodology,
+  loadIndex,
+  updateRecord,
+  type IndexName,
+} from "./yaml-loader.js";
 import { safeDump } from "./yaml-dump.js";
 
 export type DetailType = "requirement" | "architecture" | "implementation";
@@ -33,13 +41,27 @@ function getDetailType(token: string): DetailType | null {
 }
 
 /**
- * Resolve filesystem path for a detail file. Uses index detail_file when present (hybrid .md/.yaml);
+ * Base path for reading a token's detail: methodology dir if token is in methodology index,
+ * else project root ([PROC-TIED_METHODOLOGY_READONLY]). Writing always uses project root.
+ */
+function getDetailBasePathForRead(token: string): string {
+  const indexName = getIndexName(token);
+  if (indexName && isTokenInMethodology(indexName, token)) {
+    const methodologyBase = getMethodologyBasePath();
+    if (methodologyBase) return methodologyBase;
+  }
+  return getBasePath();
+}
+
+/**
+ * Resolve filesystem path for reading a detail file. Methodology tokens read from tied/methodology/...;
+ * project tokens from tied/... . Uses index detail_file when present (hybrid .md/.yaml);
  * otherwise falls back to {subdir}/{token}.yaml then {subdir}/{token}.md. Returns null if token invalid.
  */
 export function getDetailPath(token: string): string | null {
   const type = getDetailType(token);
   if (!type) return null;
-  const base = getBasePath();
+  const base = getDetailBasePathForRead(token);
   const subdir = SUBDIRS[type];
   const indexName = getIndexName(token);
   if (indexName) {
@@ -55,6 +77,17 @@ export function getDetailPath(token: string): string | null {
   const mdPath = path.join(base, subdir, `${token}.md`);
   if (fs.existsSync(mdPath)) return mdPath;
   return yamlPath;
+}
+
+/**
+ * Path for writing a new detail file. Always project (tied/...), never methodology ([PROC-TIED_METHODOLOGY_READONLY]).
+ */
+export function getProjectDetailPath(token: string): string | null {
+  const type = getDetailType(token);
+  if (!type) return null;
+  const base = getBasePath();
+  const subdir = SUBDIRS[type];
+  return path.join(base, subdir, `${token}.yaml`);
 }
 
 /** Sentinel keys for markdown detail content (hybrid layout). */
@@ -119,15 +152,16 @@ export function listDetailTokens(type: DetailType): string[] {
 }
 
 /**
- * Write a new detail file. Fails if file already exists. Creates parent directory if needed.
- * On success, optionally updates the index record's detail_file to the relative path.
+ * Write a new detail file. Always writes to project (tied/...), never methodology [PROC-TIED_METHODOLOGY_READONLY].
+ * Fails if project detail file already exists. Creates parent directory if needed.
+ * On success, optionally updates the project index record's detail_file.
  */
 export function writeDetail(
   token: string,
   record: Record<string, unknown>,
   options?: { syncIndex?: boolean }
 ): { ok: true } | { ok: false; error: string } {
-  const filePath = getDetailPath(token);
+  const filePath = getProjectDetailPath(token);
   if (!filePath) return { ok: false, error: `Invalid token: ${token}. Must be REQ-*, ARCH-*, or IMPL-*` };
   if (fs.existsSync(filePath)) return { ok: false, error: `Detail file already exists: ${token}` };
   try {
@@ -153,20 +187,21 @@ export function writeDetail(
 
 /**
  * Update an existing detail file by merging the given object at the top level. Fails if file does not exist.
- * Fails if the detail file is markdown (hybrid layout); use a text editor to edit .md.
+ * Fails if the detail file is under methodology (read-only) or markdown. [PROC-TIED_METHODOLOGY_READONLY]
  */
 export function updateDetail(token: string, updates: Record<string, unknown>): { ok: true } | { ok: false; error: string } {
-  const existing = loadDetail(token);
-  if (!existing) {
-    const filePath = getDetailPath(token);
-    if (!filePath) return { ok: false, error: `Invalid token: ${token}. Must be REQ-*, ARCH-*, or IMPL-*` };
-    return { ok: false, error: `No detail file found for token: ${token}` };
+  const filePath = getDetailPath(token);
+  if (!filePath) return { ok: false, error: `Invalid token: ${token}. Must be REQ-*, ARCH-*, or IMPL-*` };
+  const methodologyBase = getMethodologyBasePath();
+  if (methodologyBase && filePath.startsWith(methodologyBase)) {
+    return { ok: false, error: `Token ${token} is methodology-owned (read-only); cannot update. Edit in TIED repo or add project override.` };
   }
+  const existing = loadDetail(token);
+  if (!existing) return { ok: false, error: `No detail file found for token: ${token}` };
   if (existing[DETAIL_FORMAT] === "markdown") {
     return { ok: false, error: `Detail file for ${token} is markdown; edit the .md file directly` };
   }
   const merged = { ...existing, ...updates };
-  const filePath = getDetailPath(token)!;
   try {
     const out = safeDump({ [token]: merged });
     fs.writeFileSync(filePath, out, "utf8");
@@ -178,7 +213,8 @@ export function updateDetail(token: string, updates: Record<string, unknown>): {
 }
 
 /**
- * Delete a detail file. If syncIndex is true, sets the index record's detail_file to null for that token.
+ * Delete a detail file. Fails if the file is under methodology (read-only). [PROC-TIED_METHODOLOGY_READONLY]
+ * If syncIndex is true, sets the project index record's detail_file to null for that token.
  */
 export function deleteDetail(
   token: string,
@@ -186,6 +222,10 @@ export function deleteDetail(
 ): { ok: true } | { ok: false; error: string } {
   const filePath = getDetailPath(token);
   if (!filePath) return { ok: false, error: `Invalid token: ${token}. Must be REQ-*, ARCH-*, or IMPL-*` };
+  const methodologyBase = getMethodologyBasePath();
+  if (methodologyBase && filePath.startsWith(methodologyBase)) {
+    return { ok: false, error: `Token ${token} is methodology-owned (read-only); cannot delete.` };
+  }
   if (!fs.existsSync(filePath)) return { ok: false, error: `No detail file found for token: ${token}` };
   try {
     fs.unlinkSync(filePath);

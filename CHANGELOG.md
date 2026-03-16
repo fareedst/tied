@@ -9,6 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Methodology vs project YAML split** `[PROC-TIED_METHODOLOGY_READONLY]` — TIED-sourced YAML is read-only in client projects; client-specific data lives only in project YAML so methodology can be refreshed without losing project data.
+  - **Process**: New `[PROC-TIED_METHODOLOGY_READONLY]` in processes.md (purpose, scope, rules: do not modify `tied/methodology/`; add/edit only in project YAML; re-run `copy_files.sh` to refresh methodology). Token registered in templates/semantic-tokens.yaml.
+  - **copy_files.sh**: Methodology index and detail files are copied into `tied/methodology/` and **always overwritten** on each run. Project index YAMLs at `tied/` root are **created if missing** (minimal content) and **never overwritten**. Script header documents the split.
+  - **MCP server**: yaml-loader merges methodology + project on read when `tied/methodology/` exists; writes go only to project index/detail files. detail-loader: read from methodology or project by token; write/update/delete only to project; update/delete fail for methodology-owned tokens. consistency-validator resolves detail paths for methodology vs project.
+  - **Migration**: New doc `docs/migration-methodology-project-yaml.md` (one-time steps for clients with mixed YAML); referenced from processes.md and added to DOCS_TO_COPY in copy_files.sh.
+
+### Changed
+
+- **AGENTS.md** — Client inheritance and Key Files state that TIED-sourced YAML is read-only under `tied/methodology/` and client data lives only in project YAML; MCP and agents write only to project YAML. During-work checklist: do not edit methodology YAML; only edit project YAML.
+- **ai-principles.md** — New principle 12: TIED-sourced YAML read-only in client; project tokens only in project YAML; reference `[PROC-TIED_METHODOLOGY_READONLY]`.
+- **processes.md** — `[PROC-YAML_DB_OPERATIONS]`: new "Methodology vs project split" subsection (where each index/detail set lives, merged read, write only to project); append/record guidance targets project files only. `[PROC-TIED_DEV_CYCLE]`: steps 2 and 9 restrict REQ/ARCH/IMPL updates to project index and detail files only. Inherited tokens note methodology/project layout.
+- **TIED.md** — "For more information": note that in the client, TIED YAML is read-only and refreshed by copy; project YAML holds client data; paths clarified (`tied/methodology/` vs `tied/`).
+- **docs/using-tied-without-mcp.md** — Bootstrap and Managing REQ/ARCH/IMPL updated: methodology read-only in `tied/methodology/`; add/edit only in project YAML; re-run copy to refresh methodology.
+
+### Added (existing entries)
+
 - **copy_files.sh: methodology docs in tied/docs/** — Script now creates `tied/docs/` and copies 10 methodology docs from `docs/` into the client's `tied/docs/` (agent-req-implementation-checklist, tied-first-implementation-procedure, impl-code-test-linkage, implementation-order, LEAP, ai-agent-tied-mcp-usage, methodology-diagrams, new-feature-process, using-tied-without-mcp, adding-tied-mcp-and-invoking-passes). Ensures references in AGENTS.md, ai-principles.md, and processes.md resolve after bootstrap.
 - **Standardized paths to tied/docs/ and tied/** — All references to methodology docs in AGENTS.md, ai-principles.md, processes.md, README.md, and in the copied docs now use `tied/docs/...` or `tied/...` so the same content works in the TIED repo (after `copy_files.sh .`) and in any client. Checklist and sibling docs use `tied/processes.md`, `tied/detail-files-schema.md`, `tied/docs/impl-code-test-linkage.md`, etc.; root-level links from `tied/docs/` use `../../` for AGENTS.md and ai-principles.md.
 - **`[PROC-TIED_VERIFICATION_GATED]`** — Verification-gated status: requirement (and optionally IMPL) status derived only from test results; do not edit status by hand; run verify step (e.g. MCP `tied_verify` with update) after tests. Documented in processes.md; token registered in semantic-tokens.yaml.

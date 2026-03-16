@@ -5,12 +5,20 @@
 # Copies the TIED template files from the directory containing this script
 # into a target project's `tied/` directory.
 #
+# Methodology vs project ([PROC-TIED_METHODOLOGY_READONLY]):
+#   - Methodology (TIED-owned): Content under tied/methodology/ is from TIED templates/
+#     and is ALWAYS OVERWRITTEN on each run. Clients must not edit these files; they do
+#     not hold client-specific data. Re-run this script to refresh methodology.
+#   - Project (client-owned): Index YAMLs and detail dirs at the ROOT of tied/
+#     (tied/requirements.yaml, tied/requirements/, etc.) are created only if missing
+#     and are NEVER OVERWRITTEN. All client REQ/ARCH/IMPL and tokens live there.
+#
 # Creates:
 #   - Base files (.cursorrules, AGENTS.md, ai-principles.md) in project root
-#   - Index YAMLs (requirements.yaml, etc.) and guide files in tied/ from templates/ (core methodology / inherited LEAP R+A+I) when present
-#   - requirements/, architecture-decisions/, implementation-decisions/ in tied/ with inherited detail files
-#   - Migration guides for converting monolithic decision files and token formats
-#   - .cursor/ directory and .cursor/mcp.json with tied-yaml MCP server entry (real paths)
+#   - tied/methodology/: index YAMLs and inherited detail files (always overwritten)
+#   - tied/: project index YAMLs and requirements/, architecture-decisions/, implementation-decisions/ (create if missing, never overwrite)
+#   - Guide .md and tied/docs/ (copy when missing)
+#   - .cursor/ and .cursor/mcp.json with tied-yaml MCP server entry (real paths)
 #
 # Designed for macOS (Bash 3.2+) and Ubuntu (Bash 5.x+).
 #
@@ -30,6 +38,8 @@ fi
 
 CURSOR_DIR="${TARGET_PROJECT_DIR}/.cursor"
 TIED_DIR="${TARGET_PROJECT_DIR}/tied"
+METHODOLOGY_DIR="${TIED_DIR}/methodology"
+# Project dirs (client-owned; never overwritten by this script)
 IMPL_DECISIONS_DIR="${TIED_DIR}/implementation-decisions"
 ARCH_DECISIONS_DIR="${TIED_DIR}/architecture-decisions"
 REQ_DIR="${TIED_DIR}/requirements"
@@ -38,6 +48,10 @@ mkdir -p "${IMPL_DECISIONS_DIR}"
 mkdir -p "${ARCH_DECISIONS_DIR}"
 mkdir -p "${REQ_DIR}"
 mkdir -p "${CURSOR_DIR}/logs"
+# Methodology dirs (TIED-owned; overwritten on each run)
+mkdir -p "${METHODOLOGY_DIR}/requirements"
+mkdir -p "${METHODOLOGY_DIR}/architecture-decisions"
+mkdir -p "${METHODOLOGY_DIR}/implementation-decisions"
 
 # Portable real path (macOS has no realpath by default)
 _realpath() {
@@ -142,7 +156,7 @@ echo "Copied ${#BASE_FILES[@]} base files into ${TARGET_PROJECT_DIR}."
 
 # Core methodology (inherited LEAP R+A+I) lives in templates/; guide .md files stay at root.
 TEMPLATES_DIR="${SCRIPT_DIR}/templates"
-# Index YAMLs: copy from templates/ when present (core set only), else from root.
+# --- Methodology: index YAMLs into tied/methodology/ (ALWAYS OVERWRITE) ---
 INDEX_YAML_FILES=(
   "requirements.yaml"
   "architecture-decisions.yaml"
@@ -155,16 +169,24 @@ for f in "${INDEX_YAML_FILES[@]}"; do
   else
     src="${SCRIPT_DIR}/${f}"
   fi
-  dest="${TIED_DIR}/${f}"
   if [[ ! -f "${src}" ]]; then
     echo "Missing index file: ${src}" >&2
     exit 1
   fi
+  cp -p "${src}" "${METHODOLOGY_DIR}/${f}"
+done
+echo "Copied ${#INDEX_YAML_FILES[@]} methodology index YAMLs into ${METHODOLOGY_DIR} (overwritten)."
+
+# --- Project: ensure project index YAMLs exist (CREATE IF MISSING, never overwrite) ---
+for f in "${INDEX_YAML_FILES[@]}"; do
+  dest="${TIED_DIR}/${f}"
   if [[ ! -f "${dest}" ]]; then
-    cp -p "${src}" "${dest}"
+    printf '# Project %s - add project-specific tokens here. Do not edit tied/methodology/.\n{}\n' "${f}" > "${dest}"
+    echo "Created project index ${dest} (empty)."
   fi
 done
-# Guide and other files: always from root.
+
+# Guide and other files: copy from root into tied/ when missing (client may customize).
 TEMPLATE_FILES=(
   "requirements.md"
   "architecture-decisions.md"
@@ -185,7 +207,7 @@ for f in "${TEMPLATE_FILES[@]}"; do
     cp -p "${src}" "${dest}"
   fi
 done
-echo "Copied index YAMLs and template files into ${TIED_DIR}."
+echo "Copied guide/template .md files into ${TIED_DIR} (when missing)."
 
 # Copy methodology docs into tied/docs/ (referenced by AGENTS.md, ai-principles.md, processes.md).
 mkdir -p "${TIED_DIR}/docs"
@@ -197,6 +219,7 @@ DOCS_TO_COPY=(
   "LEAP.md"
   "ai-agent-tied-mcp-usage.md"
   "methodology-diagrams.md"
+  "migration-methodology-project-yaml.md"
   "new-feature-process.md"
   "using-tied-without-mcp.md"
   "adding-tied-mcp-and-invoking-passes.md"
@@ -222,7 +245,7 @@ if [[ -f "${SCRIPT_DIR}/detail-files-schema.md" && ! -f "${TIED_DIR}/detail-file
   echo "Copied detail-files-schema.md into ${TIED_DIR}."
 fi
 
-# Copy implementation decision detail files (inherited LEAP R+A+I) from templates/ when present.
+# --- Methodology: implementation decision detail files into tied/methodology/ (ALWAYS OVERWRITE) ---
 IMPL_TEMPLATE_DIR="${TEMPLATES_DIR}/implementation-decisions"
 if [[ ! -d "${IMPL_TEMPLATE_DIR}" ]]; then
   IMPL_TEMPLATE_DIR="${SCRIPT_DIR}/implementation-decisions"
@@ -232,19 +255,16 @@ if [[ -d "${IMPL_TEMPLATE_DIR}" ]]; then
   for detail_file in "${IMPL_TEMPLATE_DIR}"/*.yaml; do
     if [[ -f "${detail_file}" ]]; then
       filename="$(basename "${detail_file}")"
-      dest="${IMPL_DECISIONS_DIR}/${filename}"
-      if [[ ! -f "${dest}" ]]; then
-        cp -p "${detail_file}" "${dest}"
-        ((impl_count++)) || true
-      fi
+      cp -p "${detail_file}" "${METHODOLOGY_DIR}/implementation-decisions/${filename}"
+      ((impl_count++)) || true
     fi
   done
   if [[ ${impl_count} -gt 0 ]]; then
-    echo "Copied ${impl_count} implementation decision example(s) into ${IMPL_DECISIONS_DIR}."
+    echo "Copied ${impl_count} methodology implementation decision(s) into ${METHODOLOGY_DIR}/implementation-decisions (overwritten)."
   fi
 fi
 
-# Copy architecture decision detail files (inherited LEAP R+A+I) from templates/ when present.
+# --- Methodology: architecture decision detail files (ALWAYS OVERWRITE) ---
 ARCH_TEMPLATE_DIR="${TEMPLATES_DIR}/architecture-decisions"
 if [[ ! -d "${ARCH_TEMPLATE_DIR}" ]]; then
   ARCH_TEMPLATE_DIR="${SCRIPT_DIR}/architecture-decisions"
@@ -254,19 +274,16 @@ if [[ -d "${ARCH_TEMPLATE_DIR}" ]]; then
   for detail_file in "${ARCH_TEMPLATE_DIR}"/*.yaml; do
     if [[ -f "${detail_file}" ]]; then
       filename="$(basename "${detail_file}")"
-      dest="${ARCH_DECISIONS_DIR}/${filename}"
-      if [[ ! -f "${dest}" ]]; then
-        cp -p "${detail_file}" "${dest}"
-        ((arch_count++)) || true
-      fi
+      cp -p "${detail_file}" "${METHODOLOGY_DIR}/architecture-decisions/${filename}"
+      ((arch_count++)) || true
     fi
   done
   if [[ ${arch_count} -gt 0 ]]; then
-    echo "Copied ${arch_count} architecture decision example(s) into ${ARCH_DECISIONS_DIR}."
+    echo "Copied ${arch_count} methodology architecture decision(s) into ${METHODOLOGY_DIR}/architecture-decisions (overwritten)."
   fi
 fi
 
-# Copy requirements detail files (inherited LEAP R+A+I) from templates/ when present.
+# --- Methodology: requirements detail files (ALWAYS OVERWRITE) ---
 REQ_TEMPLATE_DIR="${TEMPLATES_DIR}/requirements"
 if [[ ! -d "${REQ_TEMPLATE_DIR}" ]]; then
   REQ_TEMPLATE_DIR="${SCRIPT_DIR}/requirements"
@@ -276,15 +293,12 @@ if [[ -d "${REQ_TEMPLATE_DIR}" ]]; then
   for detail_file in "${REQ_TEMPLATE_DIR}"/*.yaml; do
     if [[ -f "${detail_file}" ]]; then
       filename="$(basename "${detail_file}")"
-      dest="${REQ_DIR}/${filename}"
-      if [[ ! -f "${dest}" ]]; then
-        cp -p "${detail_file}" "${dest}"
-        ((req_count++)) || true
-      fi
+      cp -p "${detail_file}" "${METHODOLOGY_DIR}/requirements/${filename}"
+      ((req_count++)) || true
     fi
   done
   if [[ ${req_count} -gt 0 ]]; then
-    echo "Copied ${req_count} requirements example(s) into ${REQ_DIR}."
+    echo "Copied ${req_count} methodology requirement(s) into ${METHODOLOGY_DIR}/requirements (overwritten)."
   fi
 fi
 

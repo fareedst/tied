@@ -83,6 +83,10 @@ This acknowledgment confirms that the AI agent has:
     - Logic belongs in testable modules; entry points orchestrate only. Entry-point wiring (binding one unit to another) is composition-tested, not exempt from testing; composition tests verify the connection without invoking the UI.
     - When code is only measurable from outside (E2E/manual), document the reason in the IMPL and keep that code minimal. When authoring or reviewing IMPLs, classify code paths as unit-testable, integration-testable, or E2E-only; require justification for E2E-only (named platform constraint).
 
+12. **TIED-Sourced YAML Read-Only in Client** `[PROC-TIED_METHODOLOGY_READONLY]`
+    - TIED-sourced YAML (methodology) in the client is **read-only** and does not hold client-specific data. It lives under `tied/methodology/` and is refreshed by re-running `copy_files.sh` from the TIED repo.
+    - Project-specific tokens and details live **only** in **project** YAML: `tied/requirements.yaml`, `tied/architecture-decisions.yaml`, `tied/implementation-decisions.yaml`, `tied/semantic-tokens.yaml`, and the corresponding detail dirs at the root of `tied/`. Agents and MCP must only add or edit REQ/ARCH/IMPL in project YAML; do not modify `tied/methodology/`.
+
 **Bugs vs requirements (operational rule):** Requirements describe desired behavior (WHAT and WHY). Bugs describe implementation failures. Do NOT document bugs as requirements; document bugs in architecture/implementation decisions with cross-reference to the requirement that should be satisfied. If a bug reveals missing behavior specification, add a requirement first, then fix.
 
 ---

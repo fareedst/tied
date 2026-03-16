@@ -17,7 +17,7 @@ Process entries become first-class trace nodes that explain **how** to survey, b
 
 ### Inherited tokens (TIED/LEAP methodology)
 
-All TIED projects inherit a core set of REQ/ARCH/IMPL and PROC tokens via `copy_files.sh` (from `templates/`). These tokens are **mandatory for TIED success** and enforce the methodology; they must not be removed. The inherited set includes REQ-TIED_SETUP, REQ-MODULE_VALIDATION, ARCH-TIED_STRUCTURE, ARCH-MODULE_VALIDATION, IMPL-TIED_FILES, IMPL-MODULE_VALIDATION, and the process tokens defined in this document (e.g. [PROC-LEAP], [PROC-TOKEN_AUDIT], [PROC-TIED_DEV_CYCLE]). See `semantic-tokens.md` § Inherited tokens and AGENTS.md § Client inheritance of LEAP R+A+I.
+All TIED projects inherit a core set of REQ/ARCH/IMPL and PROC tokens via `copy_files.sh` (from `templates/`). These tokens are **mandatory for TIED success** and enforce the methodology; they must not be removed. The inherited set includes REQ-TIED_SETUP, REQ-MODULE_VALIDATION, ARCH-TIED_STRUCTURE, ARCH-MODULE_VALIDATION, IMPL-TIED_FILES, IMPL-MODULE_VALIDATION, and the process tokens defined in this document (e.g. [PROC-LEAP], [PROC-TOKEN_AUDIT], [PROC-TIED_DEV_CYCLE], [PROC-TIED_METHODOLOGY_READONLY]). In the client, methodology YAML lives under `tied/methodology/` and is read-only; project-specific data lives in project YAML under `tied/`. See `semantic-tokens.md` § Inherited tokens and AGENTS.md § Client inheritance of LEAP R+A+I.
 
 ## Process Entry Template
 
@@ -154,6 +154,35 @@ Active
 
 ---
 
+## `[PROC-TIED_METHODOLOGY_READONLY]` TIED-sourced YAML read-only in client
+
+### Purpose
+TIED-sourced YAML in the client is read-only and does not hold client-specific data; methodology can be refreshed from TIED without losing project data. Supports safe evolution of the TIED methodology when process documents and templates are updated.
+
+### Scope
+Client projects using TIED. Applies to index YAMLs and detail YAMLs that originate from TIED `templates/` (inherited LEAP R+A+I and related records).
+
+### Token references
+- `[REQ-TIED_SETUP]` — TIED methodology setup
+- `[ARCH-TIED_STRUCTURE]` — project structure; methodology lives under `tied/methodology/`
+- `[PROC-YAML_DB_OPERATIONS]` — read/write rules for project vs methodology YAML
+
+### Status
+Active
+
+### Rules
+1. **Do not modify** files under `tied/methodology/`. That directory is populated and overwritten by `copy_files.sh` from the TIED repo; it contains only methodology content (index YAMLs and inherited detail files). Client edits there would be lost on the next refresh.
+2. **Add new REQ/ARCH/IMPL and all edits** only in **project** YAML: `tied/requirements.yaml`, `tied/architecture-decisions.yaml`, `tied/implementation-decisions.yaml`, `tied/semantic-tokens.yaml`, and the corresponding `tied/requirements/`, `tied/architecture-decisions/`, `tied/implementation-decisions/` detail files at the root of `tied/`. Project files are never overwritten by `copy_files.sh`.
+3. **Refresh methodology**: Re-run `copy_files.sh` from the TIED repo to update `tied/methodology/`; it overwrites only methodology files. Project YAML is unchanged.
+
+### Artifacts & Metrics
+- **Artifacts** — `tied/methodology/` (read-only in client); project index and detail files under `tied/`.
+- **Success Metrics** — Methodology can be refreshed without losing project data; agents and MCP write only to project YAML.
+
+**Migration**: Existing clients with mixed content in a single `tied/*.yaml` should follow the one-time procedure in `tied/docs/migration-methodology-project-yaml.md` (or `docs/migration-methodology-project-yaml.md` in the TIED repo).
+
+---
+
 ## `[PROC-YAML_DB_OPERATIONS]` YAML Database Operations
 
 ### Purpose
@@ -162,9 +191,21 @@ Provides succinct guidance for reading, writing, querying, and validating the YA
 ### Scope
 Applies to all TIED YAML index files in the `tied/` directory. Implementation decision **detail** YAMLs (e.g. in `implementation-decisions/*.yaml`) may include `essence_pseudocode` and `related_decisions.composed_with` for composition analysis, combined workflow description, and test design; see `implementation-decisions.md` § Optional fields for composition and workflow.
 
+### Methodology vs project split `[PROC-TIED_METHODOLOGY_READONLY]`
+
+When the client uses the methodology/project layout (e.g. after running `copy_files.sh` from a TIED repo that creates `tied/methodology/`):
+
+- **Methodology** (`tied/methodology/`): Index YAMLs and inherited detail files from TIED `templates/`. **Read-only** in the client; written only by `copy_files.sh`. Tooling (MCP, validation) may **read** from here to build a merged view. **Writes go only to project files**, not to methodology.
+- **Project** (`tied/` root): Project index YAMLs (`tied/requirements.yaml`, etc.) and project detail dirs (`tied/requirements/`, `tied/architecture-decisions/`, `tied/implementation-decisions/`) hold **only** client-added tokens. All new records and edits are made here. These files are never overwritten by `copy_files.sh`.
+- **Reading**: MCP and validation may merge methodology + project (methodology keys first, then project keys; project overrides if same token) so the full set of REQ/ARCH/IMPL is visible.
+- **Writing**: Insert, update, and delete only in project index and project detail files. Do not modify `tied/methodology/`.
+
+If `tied/methodology/` is absent (legacy or single-file layout), tooling may treat the single set of files under `tied/` as the only source; see project docs or MCP server behavior for backward compatibility.
+
 ### Token references
 - `[REQ-TIED_SETUP]` — YAML indexes are part of TIED methodology setup
 - `[ARCH-TIED_STRUCTURE]` — YAML indexes are part of project structure
+- `[PROC-TIED_METHODOLOGY_READONLY]` — methodology YAML read-only; project YAML only for writes
 - `[PROC-YAML_EDIT_LOOP]` — controlling loop for editing and validating TIED YAML (validate and pretty-print before use)
 
 ### Status
@@ -174,8 +215,10 @@ Active
 
 #### 1. Appending a New Record
 
+Append only to **project** index files (e.g. `tied/requirements.yaml`), not to files under `tied/methodology/`. See [PROC-TIED_METHODOLOGY_READONLY].
+
 **Manual Append:**
-1. Open the YAML file (e.g., `tied/requirements.yaml`)
+1. Open the **project** YAML file (e.g., `tied/requirements.yaml`)
 2. Scroll to the bottom and find the commented template block
 3. Copy the template block
 4. Paste it at the end with a blank line before it
@@ -484,7 +527,7 @@ Active
 
 2. **Author TIED docs (pseudo-code + tokens)** `[PROC-IMPL_PSEUDOCODE_TOKENS]`
    - **This is the most critical aspect of implementation:** IMPL pseudo-code is the source of consistent logic, and every block must carry semantic token comments for traceability.
-   - Update REQ, ARCH, and IMPL (new and existing) as needed.
+   - Update REQ, ARCH, and IMPL (new and existing) as needed. Write only to **project** index and detail files under `tied/`, not to `tied/methodology/` ([PROC-TIED_METHODOLOGY_READONLY]).
    - Resolve all logical and flow issues in IMPL pseudo-code so that it is complete and authoritative before proceeding to “Add and align tests.”
    - In every IMPL, ensure `essence_pseudocode` is complete. Every **block** in `essence_pseudocode` must have a comment that (1) names all REQ, ARCH, and IMPL reflected in that block and (2) states how that block implements those requirements.
    - Use the project block definition: a block is a contiguous logical unit implementing the same set of REQ/ARCH/IMPL; nested blocks implementing a different set get their own token comment.
@@ -533,7 +576,7 @@ Active
 
 9. **Sync TIED to code and tests**
    - Update REQ/ARCH/IMPL so they match the final code and tests. Ensure IMPLs modified this session reflect the implemented code and tests, including block-level comments with semantic tokens.
-   - Sync `semantic-tokens.yaml`, `requirements.yaml`, `architecture-decisions.yaml`, and `implementation-decisions.yaml` (and detail files) so TIED docs remain the single source of truth for intent.
+   - Sync only **project** index and detail files: `tied/semantic-tokens.yaml`, `tied/requirements.yaml`, `tied/architecture-decisions.yaml`, and `tied/implementation-decisions.yaml` (and `tied/requirements/`, `tied/architecture-decisions/`, `tied/implementation-decisions/` detail files). Do not modify `tied/methodology/`; see [PROC-TIED_METHODOLOGY_READONLY]. TIED docs remain the single source of truth for intent.
 
 10. **Update README and CHANGELOG**
    - Update README.md and CHANGELOG.md for user- and release-facing changes made in this session.

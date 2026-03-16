@@ -10,6 +10,8 @@ import {
   listTokens,
   validateIndex,
   getBasePath,
+  getMethodologyBasePath,
+  isTokenInMethodology,
   type IndexName,
 } from "./yaml-loader.js";
 import { loadDetail, getDetailPath, listDetailTokens, DETAIL_FORMAT } from "./detail-loader.js";
@@ -214,7 +216,10 @@ export function validateConsistency(options: ValidateConsistencyOptions = {}): C
       const rec = data?.[token] as Record<string, unknown> | undefined;
       if (rec?.detail_file) {
         withDetailFile.push(token);
-        const basePath = getBasePath();
+        const basePath =
+          getMethodologyBasePath() && isTokenInMethodology(indexName, token)
+            ? getMethodologyBasePath()!
+            : getBasePath();
         const detailPath = path.join(basePath, String(rec.detail_file));
         if (fs.existsSync(detailPath)) detailFileExists.push(token);
       }

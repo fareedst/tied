@@ -12,15 +12,17 @@ Run from the TIED repository root:
 
 Or use `./copy_files.sh /path/to/project` — you get the same result. Your project will have a `tied/` directory with:
 
-- YAML indexes: `requirements.yaml`, `architecture-decisions.yaml`, `implementation-decisions.yaml`, `semantic-tokens.yaml`
-- YAML detail files in `tied/requirements/`, `tied/architecture-decisions/`, `tied/implementation-decisions/`
-- Guide documents: `requirements.md`, `architecture-decisions.md`, `implementation-decisions.md`, `commit-guidelines.md`, etc.
+- **Methodology** (read-only): `tied/methodology/` contains index YAMLs and inherited detail files from TIED. Do not edit these; they are overwritten when you re-run `copy_files.sh` to refresh the methodology.
+- **Project** (your data): `tied/requirements.yaml`, `tied/architecture-decisions.yaml`, `tied/implementation-decisions.yaml`, `tied/semantic-tokens.yaml`, and `tied/requirements/`, `tied/architecture-decisions/`, `tied/implementation-decisions/` hold only your project's tokens. These are never overwritten by `copy_files.sh`.
+- Guide documents: `requirements.md`, `architecture-decisions.md`, `implementation-decisions.md`, `commit-guidelines.md`, etc. in `tied/`.
 
 ## Managing REQ/ARCH/IMPL
 
-- **Indexes**: Add or edit entries in `tied/requirements.yaml`, `tied/architecture-decisions.yaml`, `tied/implementation-decisions.yaml`. Each top-level key is a token (e.g. `REQ-TIED_SETUP`).
+Add or edit entries **only in project YAML**, not in methodology YAML. Methodology YAML under `tied/methodology/` is read-only and is refreshed by re-running `copy_files.sh` from the TIED repo; it does not hold client-specific data.
+
+- **Indexes**: Add or edit entries in **project** index files: `tied/requirements.yaml`, `tied/architecture-decisions.yaml`, `tied/implementation-decisions.yaml`. Each top-level key is a token (e.g. `REQ-TIED_SETUP`). Do not edit `tied/methodology/*.yaml`.
 - **Detail files**: Add or edit YAML files in `tied/requirements/*.yaml`, `tied/architecture-decisions/*.yaml`, `tied/implementation-decisions/*.yaml`. One token per file; the top-level key must be the token id. Schema: [tied/detail-files-schema.md](tied/detail-files-schema.md).
-- **Token registry**: Keep `tied/semantic-tokens.yaml` updated when you add or rename tokens so the registry matches what you use in code and docs.
+- **Token registry**: Keep **project** `tied/semantic-tokens.yaml` updated when you add or rename tokens so the registry matches what you use in code and docs.
 
 ## Code and tests
 

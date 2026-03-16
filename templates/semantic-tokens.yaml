@@ -160,6 +160,20 @@ PROC-YAML_DB_OPERATIONS:
   metadata:
     registered: 2025-11-08
     last_updated: 2026-02-08
+PROC-TIED_METHODOLOGY_READONLY:
+  type: PROC
+  name: TIED-sourced YAML read-only in client
+  status: Active
+  description: Methodology YAML (tied/methodology/) is read-only in client; project YAML (tied/ root) holds client data only; refresh methodology via copy_files.sh
+  cross_references:
+    - REQ-TIED_SETUP
+    - ARCH-TIED_STRUCTURE
+    - PROC-YAML_DB_OPERATIONS
+  source_index: processes.md
+  detail_file: null
+  metadata:
+    registered: 2026-03-16
+    last_updated: 2026-03-16
 PROC-TEST_STRATEGY:
   type: PROC
   name: Test Strategy and Coverage (minimize untested code)

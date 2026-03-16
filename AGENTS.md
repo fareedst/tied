@@ -54,7 +54,9 @@ This document centralizes every instruction AI coding assistants must follow whi
   - **When using MCP:** Prefer tools for index read/list/filter, detail read/write, traceability (`get_decisions_for_requirement`, `get_requirements_for_decision`), validation (`yaml_index_validate`, `tied_validate_consistency`), and token creation (`tied_token_create_with_detail`). Prefer resources (e.g. `tied://requirements`, `tied://requirement/{token}/detail`) for loading context. Before changing TIED content, read via MCP; after changing, use the appropriate write/update tool. Validate all changed TIED YAML with `yq -i -P` (or equivalent) per [PROC-YAML_EDIT_LOOP]; YAML that does not validate is invalid for use. Run **`tied_validate_consistency`** before marking work complete.
 - **Client inheritance of LEAP R+A+I**
   - **All TIED projects inherit the LEAP R+A+I** via `copy_files.sh`: the client's `tied/` contains the methodology-enforcing REQ/ARCH/IMPL and PROC tokens (e.g. REQ-TIED_SETUP, REQ-MODULE_VALIDATION, ARCH-TIED_STRUCTURE, ARCH-MODULE_VALIDATION, IMPL-TIED_FILES, IMPL-MODULE_VALIDATION, [PROC-LEAP], and related process tokens) and their detail files so that TIED and LEAP behaviors exist in every project. These tokens are **mandatory for TIED success** and must not be removed.
-  - For structure and sample records, agents refer to **`templates/`** in the TIED repository—the same content that `copy_files.sh` copies to the client's `tied/`. The client's `tied/` has that inherited set plus any project-specific entries added by the project.
+  - **TIED-sourced YAML is read-only in the client** ([PROC-TIED_METHODOLOGY_READONLY]): methodology content lives under `tied/methodology/` (index YAMLs and inherited detail files from TIED `templates/`). It is used but **not modified** in the client; it does not hold client-specific data. Re-run `copy_files.sh` to refresh methodology; it overwrites only `tied/methodology/`.
+  - **Client-specific data** lives only in **project** YAML: `tied/requirements.yaml`, `tied/architecture-decisions.yaml`, `tied/implementation-decisions.yaml`, `tied/semantic-tokens.yaml`, and the corresponding `tied/requirements/`, `tied/architecture-decisions/`, `tied/implementation-decisions/` detail dirs at the root of `tied/`. MCP and agents must **only write to project YAML**; validate/read may use a merged view (methodology + project). Project files are never overwritten by `copy_files.sh`.
+  - For structure and sample records, agents refer to **`templates/`** in the TIED repository—the same content that `copy_files.sh` copies into the client's `tied/methodology/`. The client's full TIED view is methodology (read-only) plus project-specific entries in project YAML.
 
 ---
 
@@ -72,6 +74,7 @@ This document centralizes every instruction AI coding assistants must follow whi
 - [ ] **IMPL `essence_pseudocode`**: Every block has a comment naming REQ/ARCH/IMPL and how the block implements them ([PROC-IMPL_PSEUDOCODE_TOKENS])
 
 ### 3.3 During Work
+- [ ] **Do not edit methodology YAML** in the client (`tied/methodology/`); add and edit REQ/ARCH/IMPL only in **project** YAML under `tied/` ([PROC-TIED_METHODOLOGY_READONLY]).
 - [ ] Use semantic tokens in code comments and test names
 - [ ] **IMPL `essence_pseudocode`**: Every block has a comment naming REQ/ARCH/IMPL and how the block implements them; add/update when authoring or editing IMPL pseudo-code
 - [ ] Keep documentation synced as decisions change
@@ -107,7 +110,7 @@ This document centralizes every instruction AI coding assistants must follow whi
 
 ## 5. Key Files & Responsibilities
 
-Same filename at repo root (template) and in `tied/` (project index); location distinguishes use. Index YAMLs and detail files copied to the client come from **`templates/`** (core methodology / inherited LEAP R+A+I). Agents refer to `templates/` in the TIED repo for the canonical structure and sample records.
+Same filename at repo root (template) and in `tied/` (project index); location distinguishes use. **Methodology** (TIED-sourced) index YAMLs and inherited detail files are copied into **`tied/methodology/`** and are **read-only** in the client ([PROC-TIED_METHODOLOGY_READONLY]). **Project** index and detail files live at **`tied/`** root (e.g. `tied/requirements.yaml`, `tied/requirements/`) and hold only client-added tokens; agents and MCP write only there. Agents refer to `templates/` in the TIED repo for the canonical structure and sample records.
 
 | File | Purpose |
 | --- | --- |
