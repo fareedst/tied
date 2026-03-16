@@ -166,6 +166,8 @@ See `tied/processes.md` § LEAP for the canonical process definition.
 5. **MANDATORY**: Update documentation AS YOU WORK (architecture-decisions.yaml, implementation-decisions.yaml, module validation results, semantic-tokens.yaml)
 6. **MANDATORY**: Enforce token coverage; run `[PROC-TOKEN_AUDIT]` / `[PROC-TOKEN_VALIDATION]`; run `tied_validate_consistency` when using MCP before marking work complete
 
+**Unified procedural checklist**: For the step-by-step procedure that sequences Phases 1-3 with CITDP analysis, LEAP, three-way alignment, and validation into a single executable checklist, follow `docs/agent-req-implementation-checklist.md` (`[PROC-AGENT_REQ_CHECKLIST]`).
+
 ---
 
 ## Work Planning (Optional)
@@ -231,6 +233,7 @@ See `tied/processes.md` § LEAP for the canonical process definition.
 - `tied/semantic-tokens.yaml`, `tied/semantic-tokens.md`
 - `tied/processes.md` — LEAP, PROC-TIED_DEV_CYCLE, PROC-TOKEN_AUDIT, PROC-TOKEN_VALIDATION, PROC-COMMIT_MESSAGES
 - `tied/detail-files-schema.md` — Schema for REQ/ARCH/IMPL detail YAML files
+- `docs/agent-req-implementation-checklist.md` — Primary step-by-step checklist for implementing REQs or changes (`[PROC-AGENT_REQ_CHECKLIST]`); unifies CITDP, TIED dev cycle, IMPL_CODE_TEST_SYNC, LEAP, and validation
 - **Client inheritance**: All TIED projects inherit the LEAP R+A+I via `copy_files.sh` (from `templates/`); the client's `tied/` contains the methodology-enforcing tokens and their detail files. For structure and sample records, agents refer to **`templates/`** in the TIED repository (see AGENTS.md § Client inheritance of LEAP R+A+I).
 
 ---

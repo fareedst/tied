@@ -18,6 +18,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **TIED.md** — "Costs and Trade-offs"; "Documentation Structure in TIED Projects"; "Bugs vs Requirements: How to Think About Them"; "Configuring AI Agents (for project maintainers)". ai-principles.md reference updated.
 - **docs/ai-agent-tied-mcp-usage.md** — New "1.1 YAML detail storage, MCP, and cognitive load" (rationale for working from IMPL pseudo-code vs scanning source).
 - **E2E test** — `bootstrap-and-load.test.ts` asserts inherited token `REQ-MODULE_VALIDATION`; comments updated for core methodology (inherited LEAP R+A+I).
+- **Unified agent requirement implementation checklist** (`[PROC-AGENT_REQ_CHECKLIST]`) — Primary step-by-step procedure for every new REQ or change to the tested system. Document: `docs/agent-req-implementation-checklist.md`. Unifies CITDP, TIED dev cycle, IMPL_CODE_TEST_SYNC, LEAP, and validation into one executable checklist with entry points (new requirement, change, TIED-prepared implementation pending, bug fix) and variant for TIED-first implementation. AGENTS.md, ai-principles.md, processes.md (PROC-TIED_DEV_CYCLE, PROC-CITDP, PROC-IMPL_CODE_TEST_SYNC), docs/impl-code-test-linkage.md, docs/implementation-order.md, and docs/new-feature-process.md updated to reference it.
+- **scripts/extract_queries.rb** — Extracts `<user_query>` bodies from YAML (e.g. agent transcripts), deduplicates, and prints one query per line.
 
 ### Changed
 
@@ -37,6 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **ai-principles.md** — Principle 9 (Separation of Concerns): E2E-only reworded; event bindings composition-testable. Principle 11: entry-point wiring composition-tested. Phase 3 mandatory order: 6 steps with lint gates. YAML edit loop in change-impact checklist.
 - **processes.md** — `[PROC-TEST_STRATEGY]`: new composition-tests-cover-bindings principle; E2E-only requires named platform constraint. `[PROC-YAML_DB_OPERATIONS]`: `[PROC-YAML_EDIT_LOOP]` subsection (controlling loop for YAML create/edit/validate/use). `[PROC-TIED_DEV_CYCLE]`: 11 steps; steps 3–7 governed by TDD inner loop (RED-GREEN-REFACTOR with lint gate); unit vs. composition distinction; E2E requires justification; managed vs. unmanaged code scope.
 - **semantic-tokens.md** — Minor formatting fix.
+- **processes.md** — CITDP procedure document reference updated from `docs/CITDP-v1.0.0.md` to `docs/agent-req-implementation-checklist.md` (`[PROC-AGENT_REQ_CHECKLIST]`).
 
 ### Added
 

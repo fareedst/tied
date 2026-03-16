@@ -457,7 +457,7 @@ yq '.REQ-TIED_SETUP.metadata.last_validated.result' tied/requirements.yaml
 ## `[PROC-TIED_DEV_CYCLE]` TIED development cycle (session workflow)
 
 ### Purpose
-Run a single development session so that REQ/ARCH/IMPL and pseudo-code stay primary: test-driven development produces testable code and infrastructure; TIED docs are updated to reflect the final code and tests. Supports traceability and `[PROC-TOKEN_AUDIT]` / `[PROC-TOKEN_VALIDATION]`.
+Run a single development session so that REQ/ARCH/IMPL and pseudo-code stay primary: test-driven development produces testable code and infrastructure; TIED docs are updated to reflect the final code and tests. Supports traceability and `[PROC-TOKEN_AUDIT]` / `[PROC-TOKEN_VALIDATION]`. For the unified step-by-step checklist that sequences this process with CITDP, IMPL_CODE_TEST_SYNC, LEAP, and validation, see `docs/agent-req-implementation-checklist.md` (`[PROC-AGENT_REQ_CHECKLIST]`).
 
 ### Scope
 Applies to any feature or change that touches managed code, tests, or TIED documentation (requirements, architecture decisions, implementation decisions). Use per session or per feature slice.
@@ -708,7 +708,7 @@ Projects may extend this process (e.g. tagging workflow, release checklist) in t
 Govern how an AI agent analyzes, plans, tests, and prepares implementation work for any requested behavior change. Produce a complete change-analysis record (YAML) and test-and-implementation plan before code changes begin. Supports [REQ-TIED_SETUP] and [REQ-MODULE_VALIDATION] by ensuring pseudo-code (with token comments) is authored before tests, and that unit tests and production code carry the same REQ/ARCH/IMPL token comments linking back to the TIED db.
 
 ### Scope
-Applies to all behavior-changing work on existing projects. When used in a TIED project, integrates with [PROC-IMPL_PSEUDOCODE_TOKENS], [PROC-TIED_DEV_CYCLE], [PROC-LEAP], [PROC-TEST_STRATEGY], [PROC-TOKEN_VALIDATION], [PROC-YAML_DB_OPERATIONS], and [PROC-YAML_EDIT_LOOP]. Procedure document: `docs/CITDP-v1.0.0.md`. Analysis records stored under `docs/citdp/` (or project-defined location) as `CITDP-{change_request_id}.yaml`.
+Applies to all behavior-changing work on existing projects. When used in a TIED project, integrates with [PROC-IMPL_PSEUDOCODE_TOKENS], [PROC-TIED_DEV_CYCLE], [PROC-LEAP], [PROC-TEST_STRATEGY], [PROC-TOKEN_VALIDATION], [PROC-YAML_DB_OPERATIONS], and [PROC-YAML_EDIT_LOOP]. Procedure document: `docs/agent-req-implementation-checklist.md` (`[PROC-AGENT_REQ_CHECKLIST]`). Analysis records stored under `docs/citdp/` (or project-defined location) as `CITDP-{change_request_id}.yaml`.
 
 ### Token references
 - [PROC-IMPL_PSEUDOCODE_TOKENS], [PROC-TIED_DEV_CYCLE], [PROC-LEAP], [PROC-TEST_STRATEGY], [PROC-TOKEN_VALIDATION], [PROC-YAML_DB_OPERATIONS], [PROC-YAML_EDIT_LOOP]
@@ -737,7 +737,7 @@ Active
 ## `[PROC-IMPL_CODE_TEST_SYNC]` IMPL-to-Code-and-Tests Linkage
 
 ### Purpose
-Govern how an agent discovers, analyzes, documents, and synchronizes an IMPL of interest with all related IMPLs, managed code, and tests. This process fills the gap between "IMPL pseudo-code exists" and "code and tests carry identical IMPL-derived token comments and logic." It operationalizes the linkage so that `essence_pseudocode`, tests, and source code remain a three-way aligned representation of the same intent — from initial IMPL discovery through unit TDD, composition testing, and E2E behavior.
+Govern how an agent discovers, analyzes, documents, and synchronizes an IMPL of interest with all related IMPLs, managed code, and tests. This process fills the gap between "IMPL pseudo-code exists" and "code and tests carry identical IMPL-derived token comments and logic." It operationalizes the linkage so that `essence_pseudocode`, tests, and source code remain a three-way aligned representation of the same intent — from initial IMPL discovery through unit TDD, composition testing, and E2E behavior. For the unified step-by-step checklist that sequences this process with CITDP, TIED dev cycle, LEAP, and validation, see `docs/agent-req-implementation-checklist.md` (`[PROC-AGENT_REQ_CHECKLIST]`).
 
 ### Scope
 Applies whenever an agent reads, creates, or modifies an IMPL detail file, or modifies managed code or tests that reference IMPL tokens. Integrates with and extends [PROC-TIED_DEV_CYCLE] (steps 2–9), [PROC-IMPL_PSEUDOCODE_TOKENS], [PROC-TEST_STRATEGY], and [PROC-LEAP].

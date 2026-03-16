@@ -42,6 +42,7 @@ This document centralizes every instruction AI coding assistants must follow whi
   - When code or tests written during TDD/E2E differ from IMPL, update the stack in **reverse order**: **IMPL → ARCH → REQ** in the same work item so tokens stay consistent and testable.
   - Work may start at any layer (REQ, ARCH, IMPL, or code/tests); for work to be **complete**, apply changes **up and down** the stack as needed. Code is valid only when **all tests pass** and **all requirements are met**.
 - **Implementation order** (see `tied/processes.md` § PROC-TIED_DEV_CYCLE): (1) **Unit tests first** — tests conform to IMPL pseudo-code, written before production code (strict TDD). (2) **Unit code via TDD** — code is written to satisfy the tests; entire IMPL pseudo-code is implemented via TDD. (3) **Composition tests first** — for every binding between units (event listeners, IPC, entry-point wiring), write failing component/integration/contract tests before composition code; each test verifies the connection without invoking the UI. (4) **Composition code via TDD** — binding/wiring/entry-point code written to satisfy composition tests; no composition code without a failing test. (5) **E2E** — only for behavior that requires UI invocation; each E2E test must justify why it cannot be tested at composition level. (6) **Closing the loop** — update TIED data; run `tied_validate_consistency` (or equivalent).
+- **Primary implementation checklist** — For the unified, step-by-step procedure that sequences CITDP analysis, LEAP, TDD, composition, E2E, and validation into a single executable checklist, follow `docs/agent-req-implementation-checklist.md` (`[PROC-AGENT_REQ_CHECKLIST]`). Use it as the primary resource for every new REQ or change to the tested system.
 - **Module Validation Mandate `[REQ-MODULE_VALIDATION]`**
   - Identify logical modules and their boundaries before implementation.
   - Develop and validate each module independently (unit tests with mocks, contract tests, edge cases, error handling) before integration.
@@ -122,6 +123,7 @@ Same filename at repo root (template) and in `tied/` (project index); location d
 | `implementation-decisions/` | Individual implementation decision detail files (YAML, e.g., `IMPL-MODULE_VALIDATION.yaml`) |
 | `detail-files-schema.md` | Schema for REQ/ARCH/IMPL detail YAML files (in TIED repo or tied/) |
 | `processes.md` | Process tracking including `[PROC-YAML_DB_OPERATIONS]`, LEAP, PROC-TIED_DEV_CYCLE; use TIED MCP as primary interface to TIED data (see §2 TIED data access). |
+| `docs/agent-req-implementation-checklist.md` | Primary step-by-step checklist for implementing any new REQ or change; unifies CITDP, TIED dev cycle, IMPL_CODE_TEST_SYNC, LEAP, and validation into one executable procedure (`[PROC-AGENT_REQ_CHECKLIST]`). |
 | `.cursorrules` | IDE loader that points back to this document |
 | `.ai-agent-instructions` | Quick reminder pointing to this document |
 

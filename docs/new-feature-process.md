@@ -1,6 +1,6 @@
 # New Feature Process (`[PROC-NEW_FEATURE]`)
 
-This document describes the end-to-end procedure for implementing a new feature using the TIED methodology: from user prompt through documentation, testing, implementation, validation, and release. It invokes **[PROC-TIED_DEV_CYCLE](tied/processes.md)** and adds tooling and post-implementation steps. **For the agent-executable step-by-step procedure** (what to do in each phase), see **`tied/processes.md`** § PROC-TIED_DEV_CYCLE; the diagram and phase summary below are for human reference.
+This document describes the end-to-end procedure for implementing a new feature using the TIED methodology: from user prompt through documentation, testing, implementation, validation, and release. It invokes **[PROC-TIED_DEV_CYCLE](tied/processes.md)** and adds tooling and post-implementation steps. **For the agent-executable step-by-step procedure** (what to do in each phase), see **`docs/agent-req-implementation-checklist.md`** (`[PROC-AGENT_REQ_CHECKLIST]`) which is the primary unified checklist; it sequences `tied/processes.md` § PROC-TIED_DEV_CYCLE with CITDP, IMPL_CODE_TEST_SYNC, LEAP, and validation. The diagram and phase summary below are for human reference.
 
 ## 1. Flow diagram: User prompt to commit
 
