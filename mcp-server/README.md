@@ -63,6 +63,7 @@ All path parameters (`requirements_path`, `architecture_path`, `implementation_p
 | `tied_import_summary` | Import/inspect an existing TIED directory: read YAML indexes and report tokens plus detail file presence (hybrid .md and .yaml). Params: optional `base_path`. Use to validate a reference TIED layout. |
 | `tied_feedback_add` | Add a feedback entry (feature request, bug report, or methodology improvement). Creates or appends to `tied/feedback.yaml`. Params: `type` (feature_request \| bug_report \| methodology_improvement), `title`, `description`, optional `context` (JSON string), `include_report_snippet` (default true), optional `base_path`. Returns `ok`, `id`, `created_at`, and optionally `report_snippet` (markdown for pasting into a TIED issue). |
 | `tied_feedback_export` | Export all feedback entries for reporting to the TIED project. Params: `format` (markdown \| json), optional `base_path`. Returns a string suitable for copy-paste into an issue or report. |
+| `tdd_state_guide` | Guide the client through the TDD progression states. Params: optional `current_state` (string), forwarded via the wrapper's explicit `arguments` payload as `arguments.current_state`. Omit or pass an empty string to get `S09.RED`; recognized states are `S09.RED`, `S09.GREEN`, `S09.REFACTOR`, `S09.SYNC`, `S10`, `S11`, and `end`. Unknown non-empty states return `error`. The response includes `state`, `guidance`, `is_end`, and the selected record fields (`id`, `title`, `stage`, `goals`, `tasks`, `outcomes`). |
 
 ### Token rename
 

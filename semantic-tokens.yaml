@@ -214,6 +214,20 @@ PROC-IMPL_PSEUDOCODE_TOKENS:
   metadata:
     registered: 2026-03-05
     last_updated: 2026-03-05
+PROC-PSEUDOCODE_VALIDATION:
+  type: PROC
+  name: Application pseudo-code validation
+  status: Active
+  description: Run the application pseudo-code validation checklist on IMPL essence_pseudocode in recommended order; record findings with severity and source location; required checks are gating before tests or code
+  cross_references:
+    - PROC-IMPL_PSEUDOCODE_TOKENS
+    - PROC-IMPL_CODE_TEST_SYNC
+    - PROC-AGENT_REQ_CHECKLIST
+  source_index: processes.md
+  detail_file: null
+  metadata:
+    registered: "2026-03-16"
+    last_updated: "2026-03-16"
 PROC-RELEASE:
   type: PROC
   name: Release and version numbering
@@ -290,6 +304,7 @@ PROC-IMPL_CODE_TEST_SYNC:
   cross_references:
     - PROC-TIED_DEV_CYCLE
     - PROC-IMPL_PSEUDOCODE_TOKENS
+    - PROC-PSEUDOCODE_VALIDATION
     - PROC-TEST_STRATEGY
     - PROC-LEAP
     - PROC-CITDP

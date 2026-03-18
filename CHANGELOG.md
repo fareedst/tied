@@ -32,6 +32,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`[PROC-TIED_BOOTSTRAP_FROM_TESTS]`** — Bootstrap TIED from existing tests: discover tests and token-like markers, propose or update REQ/IMPL traceability from test metadata when adopting TIED on an existing codebase. Documented in processes.md; token registered.
 - **`[PROC-TIED_PHASED_DELIVERY]`** — Phased delivery with backlog: assign phase/priority to requirements; use backlog views and dependency order; verify and status per phase. Documented in processes.md; token registered.
 - **MCP tools: tied_verify, tied_cycles, tied_backlog** — `tied_verify`: update requirement and optionally implementation index status from passed REQ/IMPL tokens (verification-gated). `tied_cycles`: detect cycles in requirement or implementation dependency graph. `tied_backlog`: backlog views (e.g. critical, blockers, quick-wins). New mcp-server modules: `dependency-graph.ts` (buildRequirementGraph, buildImplementationGraph, findCycles, topologicalSort, getBacklogView, getRequirementStatusAndPriority), `verify.ts` (updateStatusFromPassedTokens); tools wired in `tools/index.ts`.
+- **Agent state guides, checklists, and pseudo-code validation tooling** — Added new agent-driven state guide docs and checklists to support TDD progression and IMPL pseudo-code validation:
+  - Docs: `docs/agent-req-checklist-state-machine.yaml`, `docs/pseudocode-writing-and-validation.md`, `docs/pseudocode-validation-checklist.yaml`, `docs/tdd-development-checklist.yaml`.
+  - MCP: new state guide tools `agent_req_state_guide`, `documentation_first_state_guide`, and `tdd_state_guide` (including tool descriptors and unit tests).
+  - Updated supporting language spec references for YAML-based `essence_pseudocode` validation guidance.
 
 ### Changed
 

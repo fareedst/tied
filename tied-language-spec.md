@@ -839,6 +839,10 @@ test "file monitoring" [REQ-FILE_MONITORING] {
 
 ## Implementation Considerations
 
+### YAML IMPL pseudo-code validation
+
+Projects that store IMPL pseudo-code in YAML (e.g. `essence_pseudocode` in IMPL detail files under `tied/implementation-decisions/`) validate it using the **application pseudo-code validation checklist** ([PROC-PSEUDOCODE_VALIDATION]). See `docs/pseudocode-writing-and-validation.md` and `docs/pseudocode-validation-checklist.yaml`. The TIED Language's template validation (e.g. Template Validation above) is complementary; the checklist applies to YAML-based pseudo-code in TIED IMPL details.
+
 ### Compiler Architecture
 
 1. **Token Parser**: Parse token declarations and annotations

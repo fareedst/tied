@@ -16,7 +16,7 @@
 
 ## Relationship to the Agent Checklist
 
-This procedure uses [agent-req-implementation-checklist.md](agent-req-implementation-checklist.md) (`[PROC-AGENT_REQ_CHECKLIST]`) as the base. It defines a **variant**: same step sequence (S01–S16) with specific entry-point semantics and step modifiers. The agent executes the checklist from S01; the following sections describe how S02–S06 differ when TIED is already prepared.
+This procedure uses [agent-req-implementation-checklist.md](agent-req-implementation-checklist.md) (`[PROC-AGENT_REQ_CHECKLIST]`) as the base; the trackable YAML is [agent-req-implementation-checklist.yaml](agent-req-implementation-checklist.yaml) (copy to a unique per-request file per its header). It defines a **variant**: same step sequence (S01–S16) with specific entry-point semantics and step modifiers. The agent executes the checklist from S01; the following sections describe how S02–S06 differ when TIED is already prepared.
 
 ---
 

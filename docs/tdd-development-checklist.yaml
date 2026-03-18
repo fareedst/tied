@@ -1,0 +1,108 @@
+# TDD-only subset extracted from the agent requirement implementation checklist.
+# This file keeps only the iterative development loop needed to turn a complete
+# IMPL into green tests and passing code, including composition and E2E branches.
+name: tdd_development_loop
+description: |
+  TDD-only subset extracted from docs/agent-req-implementation-checklist.yaml. Apply the loop repeatedly until all tests are green and all requirements are satisfied.
+source_document: docs/agent-req-implementation-checklist.yaml
+process_token: '[PROC-TIED_DEV_CYCLE]'
+version: 1.0.0
+last_updated: "2026-03-17"
+scope:
+  - unit tests first
+  - minimum production code via TDD
+  - refactor after green
+  - three-way alignment sync
+  - composition tests and composition code
+  - E2E tests only for UI-bound behavior
+prerequisites:
+  - IMPL pseudo-code is complete, token-commented, and validated.
+  - REQ/ARCH/IMPL traceability already exists for the work in scope.
+repeat_until:
+  - all tests pass
+  - all requirements are satisfied
+excluded_from_this_subset:
+  - S01 Session Bootstrap
+  - S02 Define Change or New Requirement
+  - S03 Impact Analysis and IMPL Discovery
+  - S04 Author/Update REQ
+  - S05 Author/Update ARCH
+  - S06 Author/Update IMPL with Pseudo-Code
+  - S07 Risk Analysis
+  - S08 Test Determination and Planning
+  - S12 Final Validation
+  - S13 Sync TIED to Code and Tests
+  - S14 Update README and CHANGELOG
+  - S15 Persist CITDP Record
+  - S16 Commit
+steps:
+  - id: S09.RED
+    title: Write Failing Test (Phase D)
+    stage: unit_tdd
+    goals: Map IMPL pseudo-code to a failing test.
+    tasks:
+      - Map one pseudo-code block or procedure to one test group.
+      - Name the test group after the procedure and include the REQ token.
+      - Carry the same REQ/ARCH/IMPL token comment as the pseudo-code block and state what the test validates.
+      - Write the failing test and confirm it fails for the expected reason.
+      - Verify each assertion corresponds to the pseudo-code output or effect.
+      - If no programmatic assertion can be written, mark the block `e2e_only` and document `e2e_only_reason`.
+    outcomes: Failing test exists that matches pseudo-code; no production code written.
+  - id: S09.GREEN
+    title: Write Minimum Production Code (Phase E)
+    stage: unit_tdd
+    goals: Write the minimum code to pass the failing test.
+    tasks:
+      - Write only enough production code to make the failing test pass.
+      - Carry the same REQ/ARCH/IMPL token comment as the pseudo-code block and state how the code implements it.
+      - Run tests. If tests fail, iterate on production code only.
+      - Run language-specific lint for the languages in scope and fix failures before proceeding.
+      - If GREEN reveals the pseudo-code is incomplete, wrong, or missing a dependency, apply the LEAP micro-cycle.
+    outcomes: Test passes; lint is clean; code carries the correct token comments.
+  - id: S09.REFACTOR
+    title: Refactor (optional)
+    stage: unit_tdd
+    goals: Improve code quality without changing behavior.
+    tasks:
+      - Clean up test or production code by extracting functions, renaming, or simplifying.
+      - Re-run tests and lint to confirm no regressions.
+    outcomes: Code is cleaner; all tests still pass; lint still clean.
+  - id: S09.SYNC
+    title: Three-Way Alignment Check (Phase F)
+    stage: unit_tdd
+    goals: Verify pseudo-code, tests, and code carry identical token sets with corresponding descriptions.
+    tasks:
+      - For every block in this iteration, verify the three artifacts carry the same token set.
+      - If any artifact names or omits a token differently, treat alignment as broken.
+      - If any diverge, update pseudo-code first, then test, then code.
+      - Run token audit so every token named in any of the three exists in semantic-tokens.yaml.
+    outcomes: Three-way alignment is verified for the iteration; all tokens are registered.
+  - id: S10
+    title: Composition Testing (Phase G)
+    stage: composition
+    goals: Test bindings between validated modules without invoking the UI.
+    tasks:
+      - Identify bindings: event listeners, IPC channels, entry-point delegation, function wiring, platform hooks.
+      - For each binding, locate the IMPL whose pseudo-code describes the binding.
+      - If no IMPL covers the binding and it belongs to an existing IMPL, extend that IMPL's pseudo-code and revalidate it.
+      - If no IMPL covers the binding and the binding is a distinct design decision, create a new IMPL and then return here.
+      - Write a failing composition test for each binding before composition code.
+      - Write composition code to pass the test.
+      - Apply three-way alignment and run tests plus lint.
+    outcomes: All bindings have composition tests; composition code passes; three-way alignment holds.
+  - id: S11
+    title: E2E Testing (Phase H)
+    stage: e2e
+    goals: Cover behavior that genuinely requires UI invocation.
+    tasks:
+      - Identify E2E-only behavior.
+      - Confirm the IMPL has `testability: e2e_only` and `e2e_only_reason` naming the specific platform constraint.
+      - Write an E2E test referencing REQ and IMPL tokens.
+      - Ensure behavior testable below E2E also has composition coverage.
+    outcomes: E2E tests exist for UI-only behavior; each is justified by a named platform constraint.
+references:
+  - docs/implementation-order.md
+  - docs/tied-first-implementation-procedure.md
+  - docs/impl-code-test-linkage.md
+  - docs/pseudocode-writing-and-validation.md
+  - docs/pseudocode-validation-checklist.yaml

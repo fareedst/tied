@@ -1049,6 +1049,39 @@ flowchart TD
 
 ---
 
+## `[PROC-PSEUDOCODE_VALIDATION]` Application pseudo-code validation
+
+### Purpose
+Ensure IMPL pseudo-code is parseable, well-shaped, consistent with contracts and architecture, and covered by tests before any test or code is written. Supports [PROC-IMPL_PSEUDOCODE_TOKENS] and [PROC-IMPL_CODE_TEST_SYNC] by providing a structured checklist that gates progression to RED tests and code.
+
+### Scope
+All IMPL `essence_pseudocode` blocks in the project. Applied when pseudo-code is the primary application specification and drives unit-test and integration-test definitions.
+
+### Token references
+- [PROC-IMPL_PSEUDOCODE_TOKENS] — block-level token comment rules for pseudo-code
+- [PROC-IMPL_CODE_TEST_SYNC] — phases B–C invoke validation before tests/code
+- [PROC-AGENT_REQ_CHECKLIST] — S06.5a invokes SUB-PSEUDOCODE-VALIDATE before S06.6
+
+### Status
+Active
+
+### Core activities
+1. Load the application pseudo-code validation checklist from `tied/docs/pseudocode-validation-checklist.yaml` (or `docs/pseudocode-validation-checklist.yaml` at repo root).
+2. Run each validation category in the **recommended_validation_order** (parsing → schema → symbol_resolution → contract_validation → dependency_graph → behavioral_coverage → traceability → linting → semantic_simulation → generation_readiness → reporting).
+3. Record findings with **severity** (error, warning, info) and **source location** (block identifier, line/column when available).
+4. Treat **required** checks as **gating**: do not proceed to writing tests or code until minimum gating rules are satisfied or explicitly waived and documented.
+5. If no parser or tool exists, perform a manual pass over the checklist categories and document results.
+
+### Artifacts & Metrics
+- **Artifacts**: Validation report (findings by category, severity, location); optional waiver log for any required check that is waived.
+- **Success Metrics**: All required checks pass (or are waived with justification); minimum gating rules satisfied; diagnostics include source locations where available.
+
+### Procedure and checklist documents
+- `tied/docs/pseudocode-writing-and-validation.md` — how to write and validate; when to run; minimum gating rules.
+- `tied/docs/pseudocode-validation-checklist.yaml` — canonical checklist (categories, required/optional checks, recommended order, minimum_gating_rules, tailoring).
+
+---
+
 ## `[PROC-SWIFT_BUILD]` Swift Build and Validation Process
 
 ### Purpose

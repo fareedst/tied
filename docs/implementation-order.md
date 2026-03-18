@@ -25,4 +25,4 @@
 - **Principles**: `ai-principles.md` § Phase 3 (mandatory implementation order).
 - **Agents**: `AGENTS.md` (implementation order bullet).
 - **README**: [README.md](../README.md) § "How TIED (with TDD) develops tests, code, and E2E, then closes the loop."
-- **Unified checklist**: `tied/docs/agent-req-implementation-checklist.md` (`[PROC-AGENT_REQ_CHECKLIST]`) — the step-by-step procedure that sequences this mandatory order with CITDP, LEAP, and validation.
+- **Unified checklist**: `tied/docs/agent-req-implementation-checklist.md` (`[PROC-AGENT_REQ_CHECKLIST]`) — the step-by-step procedure that sequences this mandatory order with CITDP, LEAP, and validation. A trackable YAML checklist is at `tied/docs/agent-req-implementation-checklist.yaml` (copy to a unique per-request file per its header).

@@ -4,7 +4,9 @@
 
 **Purpose**: This document is the primary procedural template an AI agent follows for every new requirement or change to the tested system. It unifies and sequences the controlling processes into a single executable checklist with explicit branching and looping. The agent executes this checklist from start to finish; skipping steps is not permitted unless a branch directive says otherwise.
 
-**Processes unified here**: `[PROC-CITDP]`, `[PROC-TIED_DEV_CYCLE]`, `[PROC-IMPL_CODE_TEST_SYNC]`, `[PROC-LEAP]`, `[PROC-YAML_EDIT_LOOP]`, `[PROC-IMPL_PSEUDOCODE_TOKENS]`, `[PROC-TOKEN_AUDIT]`, `[PROC-TOKEN_VALIDATION]`, `[PROC-TEST_STRATEGY]`, `[PROC-COMMIT_MESSAGES]`.
+**Trackable form**: A YAML version with completion comments and loop-back clearance is provided as `tied/docs/agent-req-implementation-checklist.yaml` (copied to client projects via `copy_files.sh`). Copy that file to a unique per-request file in a working folder (see the YAML header) and use it to record step completion and loop-backs.
+
+**Processes unified here**: `[PROC-CITDP]`, `[PROC-TIED_DEV_CYCLE]`, `[PROC-IMPL_CODE_TEST_SYNC]`, `[PROC-LEAP]`, `[PROC-YAML_EDIT_LOOP]`, `[PROC-IMPL_PSEUDOCODE_TOKENS]`, `[PROC-PSEUDOCODE_VALIDATION]`, `[PROC-TOKEN_AUDIT]`, `[PROC-TOKEN_VALIDATION]`, `[PROC-TEST_STRATEGY]`, `[PROC-COMMIT_MESSAGES]`.
 
 **Mandatory order**: IMPL pseudo-code (every block token-commented) → RED tests (with token comments) → code (with token comments). No code before RED; no RED before complete IMPL pseudo-code.
 
@@ -192,6 +194,10 @@ When REQ/ARCH/IMPL have already been updated and the remaining work is to align 
    - **Shared data**: which DATA keys are read/written by both; expected state at each boundary.
    - **Pre/post conditions**: what each IMPL expects before it runs and guarantees after.
 
+### S06.5a: Run Pseudo-Code Validation
+
+**CALL SUB-PSEUDOCODE-VALIDATE.** Run pseudo-code validation per `[PROC-PSEUDOCODE_VALIDATION]` using `tied/docs/pseudocode-validation-checklist.yaml` (or `docs/pseudocode-validation-checklist.yaml` at repo root). Run validation passes in the recommended order; record findings with severity and source location. Treat required checks as gating: do not proceed to S06.6 until minimum gating rules are satisfied (or explicitly waived and documented). If the project has no parser or tool yet, perform a **manual pass** over the checklist categories (parsing → schema → symbol resolution → contract → dependency graph → coverage → traceability → reporting) and document results.
+
 ### S06.6: Persist IMPL Records
 
 8. Create or update `implementation-decisions.yaml` index entries with all required fields.
@@ -201,7 +207,7 @@ When REQ/ARCH/IMPL have already been updated and the remaining work is to align 
 
 **Outcomes**: All IMPL pseudo-code is complete, authoritative, and token-commented. No contradictions or gaps remain. All YAML validated.
 
-**Reference**: `tied/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phases B-C; `tied/implementation-decisions.md` § Mandatory essence_pseudocode, § Preferred vocabulary, § Expressing sequence and structure; `tied/docs/impl-code-test-linkage.md` §§ 2-3.
+**Reference**: `tied/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phases B-C; `tied/implementation-decisions.md` § Mandatory essence_pseudocode, § Preferred vocabulary, § Expressing sequence and structure; `tied/docs/impl-code-test-linkage.md` §§ 2-3; `tied/docs/pseudocode-writing-and-validation.md` and `tied/docs/pseudocode-validation-checklist.yaml` for pseudo-code validation.
 
 ---
 
@@ -513,6 +519,24 @@ END LOOP (repeat S09.RED → S09.GREEN → S09.REFACTOR → S09.SYNC
 
 ---
 
+### SUB-PSEUDOCODE-VALIDATE: Pseudo-Code Validation
+
+**Invoked by**: S06.5a (Run Pseudo-Code Validation).
+
+**Goals**: Ensure IMPL pseudo-code satisfies the application pseudo-code validation checklist before persisting or writing tests/code. Required checks are gating unless waived and documented.
+
+**Tasks**:
+1. Load the checklist from `tied/docs/pseudocode-validation-checklist.yaml` (or `docs/pseudocode-validation-checklist.yaml` at repo root).
+2. For each pseudo-code block in the IMPL set (from S06), run each validation category in the checklist's **recommended_validation_order**; collect findings with severity and block/location.
+3. IF any required check fails OR minimum gating rules are not met THEN fix pseudo-code (or ARCH/REQ if scope changed), then repeat from step 2. **RETURN** only when gating rules pass or a waiver is documented.
+4. **RETURN** to caller (S06.5a continues to S06.6).
+
+**Outcomes**: Pseudo-code validation report (findings by category, severity, location); all required checks pass or are waived; minimum gating rules satisfied.
+
+**Reference**: `tied/docs/pseudocode-writing-and-validation.md`; `tied/docs/pseudocode-validation-checklist.yaml`; `tied/processes.md` § `[PROC-PSEUDOCODE_VALIDATION]`.
+
+---
+
 ### SUB-LEAP-MICRO: LEAP Micro-Cycle During TDD
 
 **Invoked by**: S09.GREEN when production code reveals the pseudo-code is incomplete, wrong, or missing a dependency.
@@ -627,3 +651,5 @@ flowchart TD
 | `tied/docs/token-validation.md` | Project policy: token validation via MCP only; no local script |
 | `tied/docs/composition-coverage.md` | Binding inventory and composition vs E2E coverage for this project |
 | `tied/docs/citdp-policy.md` | When to create vs skip a CITDP record |
+| `tied/docs/pseudocode-writing-and-validation.md` | How to write and validate IMPL pseudo-code; when to run validation; minimum gating rules |
+| `tied/docs/pseudocode-validation-checklist.yaml` | Canonical application pseudo-code validation checklist (categories, required/optional checks, order, tailoring) |

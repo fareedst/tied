@@ -124,6 +124,10 @@ Using these forms keeps collision detection and comparison reliable across IMPLs
 - When an IMPL is a placeholder (e.g. status Template or early draft), `essence_pseudocode` may use a stub: a line `Template: placeholder for …` plus minimal `INPUT:`/`OUTPUT:` (possibly "(to be defined)") and one procedure stub. See IMPL-ERROR_HANDLING and IMPL-EXAMPLE_IMPLEMENTATION for examples.
 - When status is Active, `essence_pseudocode` must be complete (no Template line; full contract and steps). This avoids ambiguity when comparing or composing IMPLs.
 
+### Validating essence_pseudocode
+
+Before writing tests or code, validate pseudo-code using the **application pseudo-code validation checklist** ([PROC-PSEUDOCODE_VALIDATION]). Required checks are gating unless explicitly waived and documented. The recommended validation order is: **parsing** → **schema** → **symbol resolution** → **contract validation** → **dependency graph** → **behavioral coverage** → **traceability** → (optional) **linting**, **semantic simulation**, **generation readiness** → **reporting**. See `tied/docs/pseudocode-writing-and-validation.md` (or `docs/pseudocode-writing-and-validation.md` at repo root) for the full guide and `tied/docs/pseudocode-validation-checklist.yaml` (or `docs/pseudocode-validation-checklist.yaml`) for the canonical checklist.
+
 ### Managed code and block token rules (REQ / ARCH / IMPL in pseudo-code)
 
 These rules apply to **managed code** everywhere (source, tests, data, and pseudo-code in TIED detail YAML). Code for processing, support, or management of code (e.g. build scripts, linters, token validators) is **not** managed code.

@@ -138,6 +138,7 @@ BASE_FILES=(
   "ai-principles.md"
 )
 
+base_copied=0
 for template in "${BASE_FILES[@]}"; do
   src="${SCRIPT_DIR}/${template}"
   dest="${TARGET_PROJECT_DIR}/${template}"
@@ -149,10 +150,10 @@ for template in "${BASE_FILES[@]}"; do
 
   if [[ ! -f "${dest}" ]]; then
     cp -p "${src}" "${dest}"
+    ((base_copied++)) || true
   fi
 done
-
-echo "Copied ${#BASE_FILES[@]} base files into ${TARGET_PROJECT_DIR}."
+echo "Copied ${base_copied} of ${#BASE_FILES[@]} base files into ${TARGET_PROJECT_DIR}."
 
 # Core methodology (inherited LEAP R+A+I) lives in templates/; guide .md files stay at root.
 TEMPLATES_DIR="${SCRIPT_DIR}/templates"
@@ -163,6 +164,7 @@ INDEX_YAML_FILES=(
   "implementation-decisions.yaml"
   "semantic-tokens.yaml"
 )
+index_yaml_copied=0
 for f in "${INDEX_YAML_FILES[@]}"; do
   if [[ -f "${TEMPLATES_DIR}/${f}" ]]; then
     src="${TEMPLATES_DIR}/${f}"
@@ -174,17 +176,21 @@ for f in "${INDEX_YAML_FILES[@]}"; do
     exit 1
   fi
   cp -p "${src}" "${METHODOLOGY_DIR}/${f}"
+  ((index_yaml_copied++)) || true
 done
-echo "Copied ${#INDEX_YAML_FILES[@]} methodology index YAMLs into ${METHODOLOGY_DIR} (overwritten)."
+echo "Copied ${index_yaml_copied} of ${#INDEX_YAML_FILES[@]} methodology index YAMLs into ${METHODOLOGY_DIR} (overwritten)."
 
 # --- Project: ensure project index YAMLs exist (CREATE IF MISSING, never overwrite) ---
+project_created=0
 for f in "${INDEX_YAML_FILES[@]}"; do
   dest="${TIED_DIR}/${f}"
   if [[ ! -f "${dest}" ]]; then
     printf '# Project %s - add project-specific tokens here. Do not edit tied/methodology/.\n{}\n' "${f}" > "${dest}"
     echo "Created project index ${dest} (empty)."
+    ((project_created++)) || true
   fi
 done
+echo "Created ${project_created} of ${#INDEX_YAML_FILES[@]} project index file(s) (rest already existed)."
 
 # Guide and other files: copy from root into tied/ when missing (client may customize).
 TEMPLATE_FILES=(
@@ -196,6 +202,7 @@ TEMPLATE_FILES=(
   "tasks.md"
   "commit-guidelines.md"
 )
+guide_copied=0
 for f in "${TEMPLATE_FILES[@]}"; do
   src="${SCRIPT_DIR}/${f}"
   dest="${TIED_DIR}/${f}"
@@ -205,44 +212,55 @@ for f in "${TEMPLATE_FILES[@]}"; do
   fi
   if [[ ! -f "${dest}" ]]; then
     cp -p "${src}" "${dest}"
+    ((guide_copied++)) || true
   fi
 done
-echo "Copied guide/template .md files into ${TIED_DIR} (when missing)."
+echo "Copied ${guide_copied} of ${#TEMPLATE_FILES[@]} guide/template .md files into ${TIED_DIR}."
 
 # Copy methodology docs into tied/docs/ (referenced by AGENTS.md, ai-principles.md, processes.md).
+# The agent-req-implementation-checklist.yaml is the trackable checklist; copy to a unique file per request (see its header).
 mkdir -p "${TIED_DIR}/docs"
 DOCS_TO_COPY=(
+  "adding-tied-mcp-and-invoking-passes.md"
   "agent-req-implementation-checklist.md"
-  "tied-first-implementation-procedure.md"
+  "agent-req-implementation-checklist.yaml"
+  "ai-agent-tied-mcp-usage.md"
   "impl-code-test-linkage.md"
   "implementation-order.md"
   "LEAP.md"
-  "ai-agent-tied-mcp-usage.md"
   "methodology-diagrams.md"
   "migration-methodology-project-yaml.md"
   "new-feature-process.md"
+  "pseudocode-validation-checklist.yaml"
+  "pseudocode-writing-and-validation.md"
+  "tied-first-implementation-procedure.md"
   "using-tied-without-mcp.md"
-  "adding-tied-mcp-and-invoking-passes.md"
 )
 docs_count=0
+docs_total=0
 for f in "${DOCS_TO_COPY[@]}"; do
   src="${SCRIPT_DIR}/docs/${f}"
   dest="${TIED_DIR}/docs/${f}"
   if [[ -f "${src}" ]]; then
+    ((docs_total++)) || true
     if [[ ! -f "${dest}" ]]; then
       cp -p "${src}" "${dest}"
       ((docs_count++)) || true
     fi
   fi
 done
-if [[ ${docs_count} -gt 0 ]]; then
-  echo "Copied ${docs_count} methodology doc(s) into ${TIED_DIR}/docs."
+if [[ ${docs_total} -gt 0 ]]; then
+  echo "Copied ${docs_count} of ${docs_total} methodology doc(s) into ${TIED_DIR}/docs."
 fi
 
 # Copy detail-files schema (YAML detail file structure reference)
-if [[ -f "${SCRIPT_DIR}/detail-files-schema.md" && ! -f "${TIED_DIR}/detail-files-schema.md" ]]; then
-  cp -p "${SCRIPT_DIR}/detail-files-schema.md" "${TIED_DIR}/detail-files-schema.md"
-  echo "Copied detail-files-schema.md into ${TIED_DIR}."
+if [[ -f "${SCRIPT_DIR}/detail-files-schema.md" ]]; then
+  if [[ ! -f "${TIED_DIR}/detail-files-schema.md" ]]; then
+    cp -p "${SCRIPT_DIR}/detail-files-schema.md" "${TIED_DIR}/detail-files-schema.md"
+    echo "Copied 1 of 1 detail-files-schema.md into ${TIED_DIR}."
+  else
+    echo "Skipped detail-files-schema.md (0 of 1 already present)."
+  fi
 fi
 
 # --- Methodology: implementation decision detail files into tied/methodology/ (ALWAYS OVERWRITE) ---
@@ -252,15 +270,17 @@ if [[ ! -d "${IMPL_TEMPLATE_DIR}" ]]; then
 fi
 if [[ -d "${IMPL_TEMPLATE_DIR}" ]]; then
   impl_count=0
+  impl_total=0
   for detail_file in "${IMPL_TEMPLATE_DIR}"/*.yaml; do
     if [[ -f "${detail_file}" ]]; then
+      ((impl_total++)) || true
       filename="$(basename "${detail_file}")"
       cp -p "${detail_file}" "${METHODOLOGY_DIR}/implementation-decisions/${filename}"
       ((impl_count++)) || true
     fi
   done
-  if [[ ${impl_count} -gt 0 ]]; then
-    echo "Copied ${impl_count} methodology implementation decision(s) into ${METHODOLOGY_DIR}/implementation-decisions (overwritten)."
+  if [[ ${impl_total} -gt 0 ]]; then
+    echo "Copied ${impl_count} of ${impl_total} methodology implementation decision(s) into ${METHODOLOGY_DIR}/implementation-decisions (overwritten)."
   fi
 fi
 
@@ -271,15 +291,17 @@ if [[ ! -d "${ARCH_TEMPLATE_DIR}" ]]; then
 fi
 if [[ -d "${ARCH_TEMPLATE_DIR}" ]]; then
   arch_count=0
+  arch_total=0
   for detail_file in "${ARCH_TEMPLATE_DIR}"/*.yaml; do
     if [[ -f "${detail_file}" ]]; then
+      ((arch_total++)) || true
       filename="$(basename "${detail_file}")"
       cp -p "${detail_file}" "${METHODOLOGY_DIR}/architecture-decisions/${filename}"
       ((arch_count++)) || true
     fi
   done
-  if [[ ${arch_count} -gt 0 ]]; then
-    echo "Copied ${arch_count} methodology architecture decision(s) into ${METHODOLOGY_DIR}/architecture-decisions (overwritten)."
+  if [[ ${arch_total} -gt 0 ]]; then
+    echo "Copied ${arch_count} of ${arch_total} methodology architecture decision(s) into ${METHODOLOGY_DIR}/architecture-decisions (overwritten)."
   fi
 fi
 
@@ -290,15 +312,17 @@ if [[ ! -d "${REQ_TEMPLATE_DIR}" ]]; then
 fi
 if [[ -d "${REQ_TEMPLATE_DIR}" ]]; then
   req_count=0
+  req_total=0
   for detail_file in "${REQ_TEMPLATE_DIR}"/*.yaml; do
     if [[ -f "${detail_file}" ]]; then
+      ((req_total++)) || true
       filename="$(basename "${detail_file}")"
       cp -p "${detail_file}" "${METHODOLOGY_DIR}/requirements/${filename}"
       ((req_count++)) || true
     fi
   done
-  if [[ ${req_count} -gt 0 ]]; then
-    echo "Copied ${req_count} methodology requirement(s) into ${METHODOLOGY_DIR}/requirements (overwritten)."
+  if [[ ${req_total} -gt 0 ]]; then
+    echo "Copied ${req_count} of ${req_total} methodology requirement(s) into ${METHODOLOGY_DIR}/requirements (overwritten)."
   fi
 fi
 
@@ -310,11 +334,15 @@ fi
 #   "migrate-requirements.md"
 # )
 MIGRATION_GUIDES=()
+mig_copied=0
 for guide in "${MIGRATION_GUIDES[@]}"; do
   src="${SCRIPT_DIR}/${guide}"
   dest="${TIED_DIR}/${guide}"
   if [[ -f "${src}" && ! -f "${dest}" ]]; then
     cp -p "${src}" "${dest}"
+    ((mig_copied++)) || true
   fi
 done
-echo "Copied migration guides into ${TIED_DIR}."
+if [[ ${#MIGRATION_GUIDES[@]} -gt 0 ]]; then
+  echo "Copied ${mig_copied} of ${#MIGRATION_GUIDES[@]} migration guides into ${TIED_DIR}."
+fi

@@ -56,6 +56,9 @@ import {
   getRequirementStatusAndPriority,
 } from "../dependency-graph.js";
 import { updateStatusFromPassedTokens } from "../verify.js";
+import { resolveTddStateGuide } from "./tdd-state-guide.js";
+import { resolveDocumentationFirstStateGuide } from "./documentation-first-state-guide.js";
+import { resolveAgentReqStateGuide } from "./agent-req-state-guide.js";
 
 const INDEX_ENUM = z.enum([
   "requirements",
@@ -1063,6 +1066,61 @@ export const allTools = [
             : "critical";
       const tokens = getBacklogView(g, kind, { statusByToken, priorityByToken });
       return textContent(JSON.stringify({ view: args.view, tokens }, null, 2));
+    },
+  },
+  {
+    name: "tdd_state_guide",
+    config: {
+      description:
+        "Guide the client through the TDD progression states. The wrapper should pass current_state via arguments.current_state. Call with no current_state to get S09.RED; call with current_state to get the next record. Recognized states are S09.RED, S09.GREEN, S09.REFACTOR, S09.SYNC, S10, S11, and end. When already at the end state, returns the end state again. Unknown non-empty states return error. The response includes the selected record fields plus id, guidance, and is_end.",
+      inputSchema: z.object({
+        current_state: z
+          .string()
+          .optional()
+          .describe("Current state supplied by the wrapper as arguments.current_state. Omit or pass an empty string to receive S09.RED. Unknown non-empty states return error."),
+      }),
+    },
+    handler: async (args: { current_state?: string }) => {
+      const next = resolveTddStateGuide(args.current_state);
+      return textContent(JSON.stringify(next, null, 2));
+    },
+  },
+  {
+    name: "documentation_first_state_guide",
+    config: {
+      description:
+        "Guide the client through the documentation-first checklist states (S01 through S06.6). Pass current_state via arguments.current_state. Call with no current_state to get S01; call with current_state to get the next record. Recognized states: S01, S02, S03, S04, S05, S06.1, S06.2, S06.3, S06.4, S06.5, S06.5a, S06.6, end. Unknown non-empty states return error. Response includes state, guidance, is_end, and the selected record (id, title, stage, goals, tasks, outcomes).",
+      inputSchema: z.object({
+        current_state: z
+          .string()
+          .optional()
+          .describe(
+            "Current state (arguments.current_state). Omit or empty to receive S01. Unknown non-empty states return error."
+          ),
+      }),
+    },
+    handler: async (args: { current_state?: string }) => {
+      const next = resolveDocumentationFirstStateGuide(args.current_state);
+      return textContent(JSON.stringify(next, null, 2));
+    },
+  },
+  {
+    name: "agent_req_state_guide",
+    config: {
+      description:
+        "Guide the client through the full agent REQ implementation checklist states (S01 through S16). Pass current_state via arguments.current_state. Call with no current_state to get S01; call with current_state to get the next record. Recognized states: S01, S02, S03, S04, S05, S06.1, S06.2, S06.3, S06.4, S06.5, S06.5a, S06.6, S07, S08, S09.RED, S09.GREEN, S09.REFACTOR, S09.SYNC, S10, S11, S12, S13, S14, S15, S16, end. Unknown non-empty states return error. Response includes state, guidance, is_end, and the selected record (id, title, stage, goals, tasks, outcomes).",
+      inputSchema: z.object({
+        current_state: z
+          .string()
+          .optional()
+          .describe(
+            "Current state (arguments.current_state). Omit or empty to receive S01. Unknown non-empty states return error."
+          ),
+      }),
+    },
+    handler: async (args: { current_state?: string }) => {
+      const next = resolveAgentReqStateGuide(args.current_state);
+      return textContent(JSON.stringify(next, null, 2));
     },
   },
 ];

@@ -60,6 +60,16 @@ cp .cursorrules .cursorrules        # Copy Cursor loader if using Cursor
 
 **Important**: Each project should have its own copies of these files. At the TIED repo root the files are templates; the same filenames in your project's `tied/` directory are the project indexes.
 
+### Methodology vs project YAML split
+
+TIED distinguishes between methodology-owned YAML and project-owned YAML:
+
+- Methodology-owned content is written under `tied/methodology/` and is overwritten on each `copy_files.sh` run.
+- Project-owned index YAML lives in the `tied/` root (e.g. `tied/requirements.yaml`, `tied/architecture-decisions.yaml`, `tied/implementation-decisions.yaml`), and is created if missing but never overwritten.
+- Methodology guide docs are copied into `tied/docs/` (so agent checklists and validation guidance work in clients).
+
+When using the TIED MCP server, writes go only to project-owned YAML so methodology can be refreshed without losing project data.
+
 ### Step 2 (optional): Use the MCP server
 
 The MCP server is **not** copied into your project; it stays in the TIED repository.

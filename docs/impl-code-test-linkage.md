@@ -108,6 +108,7 @@ These phases happen **before** any tests or code are written. They ensure the ps
 - [ ] **B2.** Flag insufficient specs: missing contracts, undefined procedures, unhandled error paths, stub pseudo-code on Active IMPLs, blocks without token comments.
 - [ ] **B3.** Flag contradictory specs across IMPLs: shared DATA conflicts, ordering conflicts, incompatible OUTPUT types, duplicate logic with different behavior.
 - [ ] **B4.** Resolve: update the affected IMPL pseudo-code so contracts are compatible and ordering is explicit. Propagate to ARCH/REQ via LEAP if scope changed. Validate changed YAML with `yq -i -P`.
+- [ ] **B5.** Run pseudo-code validation per [pseudocode-writing-and-validation.md](pseudocode-writing-and-validation.md) using the checklist in [pseudocode-validation-checklist.yaml](pseudocode-validation-checklist.yaml). Address all required (gating) findings before proceeding to Phase C. (B2–B4 align with the checklist’s schema, contract, and symbol-resolution categories.)
 
 **Key decision**: If two IMPLs have irreconcilable ordering or data assumptions, one must be refactored (split or restructured) before proceeding. Do not paper over contradictions — they become bugs in code.
 
@@ -121,6 +122,7 @@ These phases happen **before** any tests or code are written. They ensure the ps
   - Sub-blocks with different token set: open with full token list and *how*
 - [ ] **C2.** Cross-IMPL dependencies: when IMPL-A's procedure calls or depends on IMPL-B, the calling block in IMPL-A names IMPL-B's tokens so the dependency is visible.
 - [ ] **C3.** Collision and composition notes: for each `composed_with` pair, document ordering, shared data, and pre/post conditions.
+- [ ] **C4.** Re-run validation (or the reporting/diagnostics pass) so that findings are emitted with severity and source location; confirm no required checks fail.
 
 **Key decision**: When a block depends on another IMPL, name that IMPL in the comment even if the block is small. Invisible dependencies are the primary source of three-way alignment failures.
 
@@ -339,4 +341,5 @@ flowchart TD
 - **Agent operating guide**: [AGENTS.md](../../AGENTS.md); [ai-principles.md](../../ai-principles.md)
 - **IMPL detail schema**: `tied/implementation-decisions.md` § Core data object; `tied/detail-files-schema.md`
 - **MCP usage**: [ai-agent-tied-mcp-usage.md](ai-agent-tied-mcp-usage.md)
-- **Unified agent checklist**: [agent-req-implementation-checklist.md](agent-req-implementation-checklist.md) (`[PROC-AGENT_REQ_CHECKLIST]`) — sequences all nine phases with CITDP, LEAP, TDD, and validation into a single step-by-step procedure
+- **Unified agent checklist**: [agent-req-implementation-checklist.md](agent-req-implementation-checklist.md) (`[PROC-AGENT_REQ_CHECKLIST]`) — sequences all nine phases with CITDP, LEAP, TDD, and validation into a single step-by-step procedure. A trackable YAML is at [agent-req-implementation-checklist.yaml](agent-req-implementation-checklist.yaml) (copy to a unique per-request file per its header).
+- **Pseudo-code writing and validation**: [pseudocode-writing-and-validation.md](pseudocode-writing-and-validation.md) — how to write and validate IMPL pseudo-code; when to run validation; minimum gating rules. Checklist: [pseudocode-validation-checklist.yaml](pseudocode-validation-checklist.yaml) (`[PROC-PSEUDOCODE_VALIDATION]`)
