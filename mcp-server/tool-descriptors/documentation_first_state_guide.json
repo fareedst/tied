@@ -1,6 +1,6 @@
 {
   "name": "documentation_first_state_guide",
-  "description": "Guide the client through the documentation-first checklist states (S01 through S06.6). The wrapper should pass current_state via arguments.current_state. Call with no current_state to get S01; call with current_state to get the next record. Recognized states are S01, S02, S03, S04, S05, S06.1, S06.2, S06.3, S06.4, S06.5, S06.5a, S06.6, and end. When already at the end state, returns the end state again. Unknown non-empty states return error. The response includes the selected record fields plus state, guidance, and is_end.",
+  "description": "Guide the client through the documentation-first checklist states (S01 through S06.6). The wrapper should pass current_state via arguments.current_state. Call with no current_state to get S01; call with current_state to get the next record. Terminal state is end_documentation_first (is_end). Legacy end accepted as alias. Other states: S01 through S06.6. At terminal, same response when called again. Unknown non-empty states return error. The response includes the selected record fields plus state, guidance, and is_end.",
   "arguments": {
     "type": "object",
     "properties": {

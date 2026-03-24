@@ -1,6 +1,6 @@
 {
   "name": "tdd_state_guide",
-  "description": "Guide the client through the TDD progression states. The wrapper should pass current_state via arguments.current_state. Call with no current_state to get S09.RED; call with current_state to get the next record. Recognized states are S09.RED, S09.GREEN, S09.REFACTOR, S09.SYNC, S10, S11, and end. When already at the end state, returns the end state again. Unknown non-empty states return error. The response includes the selected record fields plus id, guidance, and is_end.",
+  "description": "Guide the client through the TDD progression states. The wrapper should pass current_state via arguments.current_state. Call with no current_state to get S09.RED; call with current_state to get the next record. Terminal state is end_tdd (is_end). Legacy end accepted as alias. Other states: S09.RED, S09.GREEN, S09.REFACTOR, S09.SYNC, S10, S11. Unknown non-empty states return error. The response includes the selected record fields plus id, guidance, and is_end.",
   "arguments": {
     "type": "object",
     "properties": {

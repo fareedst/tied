@@ -1,6 +1,6 @@
 /**
  * Rename a single semantic token across the TIED tree: YAML indexes, detail files, and file names.
- * Uses exact string replacement; validates and pretty-prints YAML with yq when available.
+ * Uses exact string replacement; validates and pretty-prints YAML with yq when available (one yq -i -P per file).
  */
 
 import { spawnSync } from "node:child_process";
@@ -88,7 +88,7 @@ function runYqPrettyPrint(filePath: string): { ok: boolean; error?: string } {
  * Rename a single semantic token across the TIED tree.
  * Replaces exact string old_token with new_token in all YAML (and optionally processes.md).
  * Renames the detail file for REQ/ARCH/IMPL when it exists.
- * Runs yq -i -P on modified YAML files when yq is available.
+ * Runs yq -i -P on each modified YAML file when yq is available (one path per process; multi-arg yq -i merges documents).
  */
 export function renameSemanticToken(
   oldToken: string,

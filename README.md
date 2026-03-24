@@ -248,6 +248,10 @@ This repository contains:
 - `copy_files.sh` — Bootstrap a project with TIED templates (used by both MCP and non-MCP users; MCP users then configure the server).
 - `bootstrap_without_mcp.sh` — Same bootstrap as `copy_files.sh`, then prints next steps for non-MCP users.
 - `scripts/prepare_readme_demo.sh` — Ensures `tied/` exists with inherited LEAP R+A+I (runs `copy_files.sh .` if needed), then runs the README Query Examples (yq commands) against the bootstrapped `tied/`.
+- `scripts/analyze_hook_log.rb` — Streaming analysis of Cursor hook YAML logs under `~/.cursor/logs/` (event counts, failures, aggregates; use `--help`).
+- `scripts/strip_transcripts.rb` — Stream-edit large hook logs to drop embedded transcript bodies (see `--dry-run`).
+- `scripts/dedupe_transcript_yaml.rb` — Deduplicate long text nodes in hook transcript YAML trees (shares helpers with `.cursor/hooks/log.rb`).
+- `scripts/run-feature-batch.sh` — Batch driver for agent-stream and feature-spec workflows (defaults and flags in script header; use `--help`).
 
 ### Methodology Documentation (Reference Only)
 - `TIED.md` - TIED methodology overview (for beginners, intermediate, and experts)
@@ -255,6 +259,9 @@ This repository contains:
 - `docs/implementation-order.md` - Mandatory implementation order (unit tests, unit code via TDD, composition tests, composition code via TDD, E2E) in one place; same order in `tied/processes.md` § PROC-TIED_DEV_CYCLE
 - `docs/impl-code-test-linkage.md` - Three-way alignment guide (IMPL pseudo-code / tests / code); 9 phases with worked examples and LEAP micro-cycle
 - `docs/methodology-diagrams.md` - 6 mermaid diagrams: traceability stack, development phases, dev-cycle session workflow, TDD inner loop, CITDP procedure, YAML edit loop
+- `docs/yaml-update-mcp-runbook.md` - Agent runbook: MCP-first routing for project TIED YAML writes (copied to `tied/docs/` via `copy_files.sh` when listed in `DOCS_TO_COPY`)
+- `docs/conversation-log-yaml-structure-and-agent-difficulties.md` - Hook log YAML structure and agent pitfalls
+- `docs/requirement-list-state-guide-agent-workflow.md`, `docs/req-impl-state-guide-agent-workflow.md` - State guide workflows for MCP tools `requirement_list_state_guide` and `req_impl_state_guide`
 - `ai-principles.md` - Agent operational mandates and checklists (copied to projects via copy_files.sh)
 - `tied-language-spec.md` - TIED language specification (pseudo-code templates with semantic tokens)
 - `conversation.template.md` - Template conversation demonstrating TIED workflow
@@ -336,14 +343,15 @@ MCP gives AI assistants and tools a single, consistent way to read and write req
 - **Discoverability**: List tokens by index or type; run traceability queries (which ARCH/IMPL satisfy a REQ; which REQs does a decision reference).
 - **Bulk and single-token detail access**: Read one detail file by token or request details for many tokens (or all tokens of a type) in one call.
 - **One-shot creation**: Create a new REQ, ARCH, or IMPL token with both index record and full detail YAML in a single tool call (`tied_token_create_with_detail`).
-- **Token rename**: Rename a semantic token across all YAML indexes, detail files, and the detail filename in one call (`tied_token_rename`); optional dry run and processes.md update.
+- **Token rename**: Rename a semantic token across all YAML indexes, detail files, and the detail filename in one call (`tied_token_rename`); optional dry run and processes.md update. The tool validates output; for **hand-edited** YAML (including after rename), use **`lint_yaml`** per `[PROC-YAML_EDIT_LOOP]` in `processes.md`—not ad hoc multi-file `yq` invocations.
+- **Agent state guides**: MCP tools walk the agent REQ checklist, documentation-first steps, TDD phases, a **client-supplied requirement list** (`requirement_list_state_guide`), and a **nested spec × checklist-step** flow (`req_impl_state_guide`). Each guide exposes an explicit terminal id (`end_agent_req`, `end_documentation_first`, `end_tdd`, `end_requirement_list`, `end_req_impl`). Workflow docs live under `docs/` (and `tied/docs/` after `copy_files.sh`).
 - **Migration**: Convert monolithic requirements/architecture/implementation markdown into TIED YAML indexes and detail files via conversion tools.
 
 This works for **any language or stack**: TIED is methodology-level; the server only needs a `tied/` (or `TIED_BASE_PATH`) layout with YAML indexes and optional detail directories.
 
 ### MCP API
 
-**Tools**: Index read, list tokens, filter by field, validate YAML; config (`tied_config_get_base_path`); traceability (`get_decisions_for_requirement`, `get_requirements_for_decision`); index insert/update; detail read (single and batch `yaml_detail_read_many`), detail list/create/update/delete; create-with-detail (`tied_token_create_with_detail`); token rename (`tied_token_rename`); feedback (`tied_feedback_add`, `tied_feedback_export`) for feature requests, bug reports, and methodology reporting to the TIED project; monolithic-to-TIED conversion (per-doc or all at once).
+**Tools**: Index read, list tokens, filter by field, validate YAML; config (`tied_config_get_base_path`); traceability (`get_decisions_for_requirement`, `get_requirements_for_decision`); index insert/update; detail read (single and batch `yaml_detail_read_many`), detail list/create/update/delete; create-with-detail (`tied_token_create_with_detail`); token rename (`tied_token_rename`); state guides (`agent_req_state_guide`, `documentation_first_state_guide`, `tdd_state_guide`, `requirement_list_state_guide`, `req_impl_state_guide`); feedback (`tied_feedback_add`, `tied_feedback_export`) for feature requests, bug reports, and methodology reporting to the TIED project; monolithic-to-TIED conversion (per-doc or all at once).
 
 **Resources**: Full indexes (`tied://requirements`, `tied://architecture-decisions`, `tied://implementation-decisions`, `tied://semantic-tokens`); single record by token (`tied://requirement/{token}`, `tied://decision/{token}`); single-token detail (`tied://requirement/{token}/detail`, `tied://decision/{token}/detail`); all details by type (`tied://details/requirements`, `tied://details/architecture`, `tied://details/implementation`).
 
@@ -369,7 +377,7 @@ flowchart LR
 
 *MCP API: tools (index, traceability, detail, create-with-detail, token rename, conversion) and resources (index URIs, per-token, details-by-type).*
 
-**For AI agents**: Use the TIED MCP server as the **primary** way to read and write TIED data. See [docs/ai-agent-tied-mcp-usage.md](docs/ai-agent-tied-mcp-usage.md) for the full directive (MCP-first; direct file access only when no tool supports the operation).
+**For AI agents**: Use the TIED MCP server as the **primary** way to read and write TIED data. See [docs/ai-agent-tied-mcp-usage.md](docs/ai-agent-tied-mcp-usage.md) for the full directive (MCP-first; direct file access only when no tool supports the operation). For routing project TIED YAML writes through MCP (mandatory paths, failure playbook), see [docs/yaml-update-mcp-runbook.md](docs/yaml-update-mcp-runbook.md).
 
 **Configuration and validation**
 

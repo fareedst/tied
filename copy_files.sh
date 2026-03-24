@@ -219,12 +219,14 @@ echo "Copied ${guide_copied} of ${#TEMPLATE_FILES[@]} guide/template .md files i
 
 # Copy methodology docs into tied/docs/ (referenced by AGENTS.md, ai-principles.md, processes.md).
 # The agent-req-implementation-checklist.yaml is the trackable checklist; copy to a unique file per request (see its header).
+# CITDP paths in that checklist refer to the client project's docs/citdp/ (client workspace root), not the TIED source repo path.
 mkdir -p "${TIED_DIR}/docs"
 DOCS_TO_COPY=(
   "adding-tied-mcp-and-invoking-passes.md"
   "agent-req-implementation-checklist.md"
   "agent-req-implementation-checklist.yaml"
   "ai-agent-tied-mcp-usage.md"
+  "yaml-update-mcp-runbook.md"
   "impl-code-test-linkage.md"
   "implementation-order.md"
   "LEAP.md"
@@ -233,6 +235,8 @@ DOCS_TO_COPY=(
   "new-feature-process.md"
   "pseudocode-validation-checklist.yaml"
   "pseudocode-writing-and-validation.md"
+  "requirement-list-state-guide-agent-workflow.md"
+  "req-impl-state-guide-agent-workflow.md"
   "tied-first-implementation-procedure.md"
   "using-tied-without-mcp.md"
 )

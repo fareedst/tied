@@ -3,11 +3,4 @@ docs/visuals/visual-specs.md
 docs/commit-message-format.md
 .cursor/mcp.json
 tied
-.cursor/hooks/logs.yaml
-.cursor/hooks/block-rm.sh
-.cursor/hooks/state/agent-metrics.json
-.cursor/hooks/log.sh
-.cursor/hooks/track-stop.ts
-.cursor/hooks.json.0
 scripts/prepare_readme_demo.sh
-.cursor/hooks/log.rb

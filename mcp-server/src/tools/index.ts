@@ -59,6 +59,8 @@ import { updateStatusFromPassedTokens } from "../verify.js";
 import { resolveTddStateGuide } from "./tdd-state-guide.js";
 import { resolveDocumentationFirstStateGuide } from "./documentation-first-state-guide.js";
 import { resolveAgentReqStateGuide } from "./agent-req-state-guide.js";
+import { resolveRequirementListStateGuide } from "./requirement-list-state-guide.js";
+import { resolveReqImplStateGuide } from "./req-impl-state-guide.js";
 
 const INDEX_ENUM = z.enum([
   "requirements",
@@ -552,7 +554,7 @@ export const allTools = [
     name: "tied_token_rename",
     config: {
       description:
-        "Rename a single semantic token across the TIED tree. Replaces the token in YAML indexes (semantic-tokens, requirements, architecture, implementation), detail files (keys, values, list items), and renames the detail file when present. Validates and pretty-prints modified YAML with yq -i -P when yq is available; otherwise YAML is left as-written. Use dry_run to list files and renames that would be performed.",
+        "Rename a single semantic token across the TIED tree. Replaces the token in YAML indexes (semantic-tokens, requirements, architecture, implementation), detail files (keys, values, list items), and renames the detail file when present. Validates and pretty-prints modified YAML with yq -i -P when yq is available (one file per yq invocation; never pass multiple paths to one command); otherwise YAML is left as-written. Use dry_run to list files and renames that would be performed.",
       inputSchema: z.object({
         old_token: z.string().min(1).describe("Current token ID (e.g. REQ-TIED_SETUP)"),
         new_token: z.string().min(1).describe("New token ID; must not already exist; must have same prefix (REQ-/ARCH-/IMPL-/PROC-)"),
@@ -1072,7 +1074,7 @@ export const allTools = [
     name: "tdd_state_guide",
     config: {
       description:
-        "Guide the client through the TDD progression states. The wrapper should pass current_state via arguments.current_state. Call with no current_state to get S09.RED; call with current_state to get the next record. Recognized states are S09.RED, S09.GREEN, S09.REFACTOR, S09.SYNC, S10, S11, and end. When already at the end state, returns the end state again. Unknown non-empty states return error. The response includes the selected record fields plus id, guidance, and is_end.",
+        "Guide the client through the TDD progression states. The wrapper should pass current_state via arguments.current_state. Call with no current_state to get S09.RED; call with current_state to get the next record. Terminal state end_tdd (legacy end alias). States: S09.RED through S11. Unknown non-empty states return error. The response includes the selected record fields plus id, guidance, and is_end.",
       inputSchema: z.object({
         current_state: z
           .string()
@@ -1089,7 +1091,7 @@ export const allTools = [
     name: "documentation_first_state_guide",
     config: {
       description:
-        "Guide the client through the documentation-first checklist states (S01 through S06.6). Pass current_state via arguments.current_state. Call with no current_state to get S01; call with current_state to get the next record. Recognized states: S01, S02, S03, S04, S05, S06.1, S06.2, S06.3, S06.4, S06.5, S06.5a, S06.6, end. Unknown non-empty states return error. Response includes state, guidance, is_end, and the selected record (id, title, stage, goals, tasks, outcomes).",
+        "Guide the client through the documentation-first checklist states (S01 through S06.6). Pass current_state via arguments.current_state. Call with no current_state to get S01; call with current_state to get the next record. Terminal end_documentation_first (legacy end alias). States S01–S06.6. Unknown non-empty states return error. Response includes state, guidance, is_end, and the selected record (id, title, stage, goals, tasks, outcomes).",
       inputSchema: z.object({
         current_state: z
           .string()
@@ -1108,7 +1110,7 @@ export const allTools = [
     name: "agent_req_state_guide",
     config: {
       description:
-        "Guide the client through the full agent REQ implementation checklist states (S01 through S16). Pass current_state via arguments.current_state. Call with no current_state to get S01; call with current_state to get the next record. Recognized states: S01, S02, S03, S04, S05, S06.1, S06.2, S06.3, S06.4, S06.5, S06.5a, S06.6, S07, S08, S09.RED, S09.GREEN, S09.REFACTOR, S09.SYNC, S10, S11, S12, S13, S14, S15, S16, end. Unknown non-empty states return error. Response includes state, guidance, is_end, and the selected record (id, title, stage, goals, tasks, outcomes).",
+        "Guide the client through the full agent REQ implementation checklist states (S01 through S16). Pass current_state via arguments.current_state. Call with no current_state to get S01; call with current_state to get the next record. Terminal end_agent_req (legacy end alias). Full checklist S01–S16. Unknown non-empty states return error. Response includes state, guidance, is_end, and the selected record (id, title, stage, goals, tasks, outcomes).",
       inputSchema: z.object({
         current_state: z
           .string()
@@ -1120,6 +1122,56 @@ export const allTools = [
     },
     handler: async (args: { current_state?: string }) => {
       const next = resolveAgentReqStateGuide(args.current_state);
+      return textContent(JSON.stringify(next, null, 2));
+    },
+  },
+  {
+    name: "requirement_list_state_guide",
+    config: {
+      description:
+        "Client-supplied requirement list in array order. First call MUST pass non-empty requirements; omit current_state. Later calls: current_state = continuation_state from prior response only. Until id end_requirement_list (is_end) or error. Per requirement: agent_req_state_guide through end_agent_req, strict TDD. Terminal: id end_requirement_list. Error: empty list, bad token, validation failure.",
+      inputSchema: z.object({
+        requirements: z
+          .array(z.unknown())
+          .optional()
+          .describe(
+            "Requirement objects in walk order. Required on first call when current_state is omitted or empty."
+          ),
+        current_state: z
+          .string()
+          .optional()
+          .describe(
+            "Opaque continuation from the previous response (continuation_state). When set, requirements is ignored."
+          ),
+      }),
+    },
+    handler: async (args: { requirements?: unknown[]; current_state?: string }) => {
+      const next = resolveRequirementListStateGuide(args);
+      return textContent(JSON.stringify(next, null, 2));
+    },
+  },
+  {
+    name: "req_impl_state_guide",
+    config: {
+      description:
+        "Nested walk: each client-supplied requirement in order, full agent REQ checklist (S01 through end_agent_req) per spec in one tool. First call: non-empty requirements; omit current_state. Later: current_state = continuation_state until id end_req_impl (is_end) or error. Composite state is spec.id__step.id (e.g. REQ-FOO__S01). Run back-to-back until terminal.",
+      inputSchema: z.object({
+        requirements: z
+          .array(z.unknown())
+          .optional()
+          .describe(
+            "Requirement objects in walk order. Required on first call when current_state is omitted or empty."
+          ),
+        current_state: z
+          .string()
+          .optional()
+          .describe(
+            "Opaque continuation from the previous response. When set, requirements is ignored."
+          ),
+      }),
+    },
+    handler: async (args: { requirements?: unknown[]; current_state?: string }) => {
+      const next = resolveReqImplStateGuide(args);
       return textContent(JSON.stringify(next, null, 2));
     },
   },

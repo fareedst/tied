@@ -120,7 +120,7 @@ When making changes, use this matrix to identify what needs updating:
 
 - [ ] All identified documents updated simultaneously
 - [ ] Cross-references validated and working
-- [ ] **All changed TIED YAML validated** with `yq -i -P <file>` (or equivalent) per [PROC-YAML_EDIT_LOOP]; YAML that does not validate is invalid for use
+- [ ] **All changed TIED YAML validated** with `lint_yaml` per [PROC-YAML_EDIT_LOOP]; YAML that does not validate is invalid for use
 - [ ] Tests updated and passing
 - [ ] Code comments include semantic tokens
 - [ ] Behavioral contracts maintained
@@ -162,7 +162,7 @@ See `tied/processes.md` § LEAP for the canonical process definition.
 
 ### Phase 3: Implementation
 
-**Mandatory order** (see `tied/processes.md` § PROC-TIED_DEV_CYCLE): (1) **Unit tests first** — tests conform to IMPL pseudo-code; written before production code (strict TDD). (2) **Unit code via TDD** — code satisfies tests; entire IMPL implemented via TDD. (3) **Composition tests first** — for every binding between units (event listeners, IPC, entry-point wiring), write failing component/integration/contract tests before composition code; each test verifies the connection without invoking the UI. (4) **Composition code via TDD** — binding/wiring/entry-point code written to satisfy composition tests; no composition code without a failing test. (5) **E2E** — only for behavior that requires UI invocation; each E2E test must justify why it cannot be tested at composition level. (6) **Closing the loop** — update TIED data; run `tied_validate_consistency`. **Within each TDD iteration:** run tests and run language-specific lint for each language in scope: **Rust** → `bun run lint:rust` [PROC-RUST_LINT]; **TypeScript** → `bunx tsc -b` or `bun run lint:ts` [PROC-TS_CHECK]; **Swift** → `swift build && swift test` [PROC-SWIFT_BUILD]; **YAML** → `yq -i -P <changed files>` [PROC-YAML_EDIT_LOOP] (when TIED YAML is created or updated). Fix before proceeding; code and YAML that do not pass lint are incomplete. Do not return work to the caller until all mandated checks pass. The code-generation inner loop (PROC-TIED_DEV_CYCLE) mandates RED as the entry point: every iteration starts with a failing test; production code is written only in GREEN to satisfy that test. Managed code created outside this loop is non-compliant.
+**Mandatory order** (see `tied/processes.md` § PROC-TIED_DEV_CYCLE): (1) **Unit tests first** — tests conform to IMPL pseudo-code; written before production code (strict TDD). (2) **Unit code via TDD** — code satisfies tests; entire IMPL implemented via TDD. (3) **Composition tests first** — for every binding between units (event listeners, IPC, entry-point wiring), write failing component/integration/contract tests before composition code; each test verifies the connection without invoking the UI. (4) **Composition code via TDD** — binding/wiring/entry-point code written to satisfy composition tests; no composition code without a failing test. (5) **E2E** — only for behavior that requires UI invocation; each E2E test must justify why it cannot be tested at composition level. (6) **Closing the loop** — update TIED data; run `tied_validate_consistency`. **Within each TDD iteration:** run tests and run language-specific lint for each language in scope: **Rust** → `bun run lint:rust` [PROC-RUST_LINT]; **TypeScript** → `bunx tsc -b` or `bun run lint:ts` [PROC-TS_CHECK]; **Swift** → `swift build && swift test` [PROC-SWIFT_BUILD]; **YAML** → run `lint_yaml` on changed YAML files [PROC-YAML_EDIT_LOOP] (when TIED YAML is created or updated); see `processes.md` `[PROC-YAML_EDIT_LOOP]` for safe multi-file use. Fix before proceeding; code and YAML that do not pass lint are incomplete. Do not return work to the caller until all mandated checks pass. The code-generation inner loop (PROC-TIED_DEV_CYCLE) mandates RED as the entry point: every iteration starts with a failing test; production code is written only in GREEN to satisfy that test. Managed code created outside this loop is non-compliant.
 
 1. Work on higher priority items first
 2. **MANDATORY**: Develop and validate each logical module independently before integration [REQ-MODULE_VALIDATION]
@@ -211,18 +211,18 @@ See `tied/processes.md` § LEAP for the canonical process definition.
 - [ ] Use semantic tokens in all code comments and test names/comments
 - [ ] **IMPL pseudo-code**: Every block in `essence_pseudocode` has a comment naming REQ/ARCH/IMPL and how it implements them; add or update when creating or editing IMPL detail
 - [ ] Cross-reference requirements → architecture → implementation
-- [ ] **MANDATORY**: Run language-specific lint after each code-generation iteration: **Rust** → `bun run lint:rust` [PROC-RUST_LINT]; **TypeScript** → `bunx tsc -b` or `bun run lint:ts` [PROC-TS_CHECK]; **Swift** → `swift build && swift test` [PROC-SWIFT_BUILD]; **YAML** → `yq -i -P <changed files>` [PROC-YAML_EDIT_LOOP] (when TIED YAML is created or updated). Fix before proceeding. Code and YAML that do not pass lint are incomplete ([PROC-TIED_DEV_CYCLE] inner loop). Do not return work to the caller until mandated checks pass.
+- [ ] **MANDATORY**: Run language-specific lint after each code-generation iteration: **Rust** → `bun run lint:rust` [PROC-RUST_LINT]; **TypeScript** → `bunx tsc -b` or `bun run lint:ts` [PROC-TS_CHECK]; **Swift** → `swift build && swift test` [PROC-SWIFT_BUILD]; **YAML** → run `lint_yaml` on changed YAML files [PROC-YAML_EDIT_LOOP] (when TIED YAML is created or updated); see `processes.md` for safe multi-file use. Fix before proceeding. Code and YAML that do not pass lint are incomplete ([PROC-TIED_DEV_CYCLE] inner loop). Do not return work to the caller until mandated checks pass.
 - [ ] **MANDATORY**: Identify logical modules and document module boundaries before development [REQ-MODULE_VALIDATION]
 - [ ] **MANDATORY**: Develop and validate each module independently before integration [REQ-MODULE_VALIDATION]
 - [ ] **MANDATORY**: Record architecture/implementation decisions in YAML IMMEDIATELY when made
 - [ ] **MANDATORY**: Update `semantic-tokens.yaml` when creating new tokens
-- [ ] **MANDATORY**: When editing TIED YAML, validate with `yq -i -P <file>` per [PROC-YAML_EDIT_LOOP]; YAML that does not validate is invalid for use
+- [ ] **MANDATORY**: When editing TIED YAML, validate with `lint_yaml` per [PROC-YAML_EDIT_LOOP]; YAML that does not validate is invalid for use
 - [ ] **MANDATORY**: Perform `[PROC-TOKEN_AUDIT]`; run `./scripts/validate_tokens.sh` and/or `tied_validate_consistency` (when using MCP)
 
 **AFTER COMPLETING WORK:**
 
 - [ ] **MANDATORY**: All semantic tokens in `semantic-tokens.yaml`; record `[PROC-TOKEN_AUDIT]` and `[PROC-TOKEN_VALIDATION]` results in implementation-decisions
-- [ ] **MANDATORY**: **Validate all changed TIED YAML** with `yq -i -P <file>` (or equivalent) per [PROC-YAML_EDIT_LOOP]; YAML that does not validate is invalid for use
+- [ ] **MANDATORY**: **Validate all changed TIED YAML** with `lint_yaml` per [PROC-YAML_EDIT_LOOP]; YAML that does not validate is invalid for use
 - [ ] **MANDATORY**: Documentation updated (architecture-decisions.yaml, implementation-decisions.yaml reflect decisions; both cross-reference [REQ-*] correctly)
 - [ ] **MANDATORY**: Tests reference semantic tokens; all documentation current and accurate
 - [ ] **MANDATORY**: Post-change validation checklist completed; behavioral contracts and dependencies documented where relevant

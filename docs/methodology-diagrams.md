@@ -185,7 +185,7 @@ flowchart TD
 
     C7["7. Completion\nLanguage-specific lint\nPROC-TOKEN_VALIDATION\ntied_validate_consistency\nModule validation\nLEAP feedback record"]
 
-    C8["8. Persistence\nStore CITDP YAML record\nValidate per PROC-YAML_EDIT_LOOP\nyq -i -P on record file"]
+    C8["8. Persistence\nStore CITDP YAML record\nValidate per PROC-YAML_EDIT_LOOP\nlint_yaml"]
 
     C1 --> C2 --> C3 --> C4 --> C5 --> C6 --> C7 --> C8
 
@@ -200,7 +200,7 @@ flowchart TD
 
 ## Diagram 6 — YAML Edit Loop and Token Validation
 
-The `[PROC-YAML_EDIT_LOOP]` that governs all TIED YAML changes. No TIED record (index or detail) is valid for use until it passes this loop. Step 1 edits the file. Step 2 validates syntax and canonicalizes formatting with `yq -i -P`. On failure, fix and repeat. Step 3 marks the file as valid for use by MCP, scripts, and downstream steps. Step 4 optionally runs `tied_validate_consistency` to check cross-file traceability; failures feed back to step 1.
+The `[PROC-YAML_EDIT_LOOP]` that governs all TIED YAML changes. No TIED record (index or detail) is valid for use until it passes this loop. Step 1 edits the file. Step 2 validates syntax and canonicalizes formatting with **`lint_yaml`** (see `processes.md` for definition; each path processed independently—never raw multi-argument `yq` pretty-print). On failure, fix and repeat. Step 3 marks the file as valid for use by MCP, scripts, and downstream steps. Step 4 optionally runs `tied_validate_consistency` to check cross-file traceability; failures feed back to step 1.
 
 ```mermaid
 flowchart TD
@@ -208,7 +208,7 @@ flowchart TD
 
     Edit["1. Edit\nCreate or modify YAML\n(index or detail file)"]
 
-    Validate["2. Validate + Pretty-Print\nyq -i -P file\nValidates syntax\nCanonicalizes formatting"]
+    Validate["2. Validate + Pretty-Print\nlint_yaml\nValidates syntax\nCanonicalizes formatting"]
 
     ValidOK{"Validation\npassed?"}
 

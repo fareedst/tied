@@ -107,7 +107,7 @@ These phases happen **before** any tests or code are written. They ensure the ps
 - [ ] **B1.** Read each IMPL's `essence_pseudocode`. Catalog INPUT/OUTPUT/DATA contracts and procedure names.
 - [ ] **B2.** Flag insufficient specs: missing contracts, undefined procedures, unhandled error paths, stub pseudo-code on Active IMPLs, blocks without token comments.
 - [ ] **B3.** Flag contradictory specs across IMPLs: shared DATA conflicts, ordering conflicts, incompatible OUTPUT types, duplicate logic with different behavior.
-- [ ] **B4.** Resolve: update the affected IMPL pseudo-code so contracts are compatible and ordering is explicit. Propagate to ARCH/REQ via LEAP if scope changed. Validate changed YAML with `yq -i -P`.
+- [ ] **B4.** Resolve: update the affected IMPL pseudo-code so contracts are compatible and ordering is explicit. Propagate to ARCH/REQ via LEAP if scope changed. Validate each changed YAML file with `lint_yaml` per [PROC-YAML_EDIT_LOOP].
 - [ ] **B5.** Run pseudo-code validation per [pseudocode-writing-and-validation.md](pseudocode-writing-and-validation.md) using the checklist in [pseudocode-validation-checklist.yaml](pseudocode-validation-checklist.yaml). Address all required (gating) findings before proceeding to Phase C. (B2–B4 align with the checklist’s schema, contract, and symbol-resolution categories.)
 
 **Key decision**: If two IMPLs have irreconcilable ordering or data assumptions, one must be refactored (split or restructured) before proceeding. Do not paper over contradictions — they become bugs in code.
@@ -189,7 +189,7 @@ These phases extend validated unit modules to composition and E2E layers.
 - [ ] **I2.** Run lint for each language in scope.
 - [ ] **I3.** Run `[PROC-TOKEN_VALIDATION]` / `tied_validate_consistency`. Fix issues.
 - [ ] **I4.** Final three-way alignment audit for every IMPL touched. Document remaining `e2e_only` blocks.
-- [ ] **I5.** Update each changed IMPL detail: `traceability.tests`, `code_locations`, `metadata.last_updated`. Run `yq -i -P`.
+- [ ] **I5.** Update each changed IMPL detail: `traceability.tests`, `code_locations`, `metadata.last_updated`. Run `lint_yaml` on each changed detail file (or pass multiple paths in one `lint_yaml` invocation if your wrapper supports it per `processes.md`).
 
 ---
 
@@ -203,7 +203,7 @@ Instead, apply a **LEAP micro-cycle** within the TDD iteration:
 1. STOP writing code.
 2. Update IMPL essence_pseudocode:
    - Add the missing block, fix the contract, or add the new dependency comment.
-   - Run yq -i -P on the detail file.
+   - Run `lint_yaml` on the detail file (never raw multi-argument `yq` pretty-print on multiple paths in one process).
 3. Update or add the test to match the corrected pseudo-code.
 4. Update the production code to pass the corrected test.
 5. Verify three-way alignment for the affected block.

@@ -7,8 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **`.cursor/hooks/log.rb`** — Transcript embedding is configurable (`--transcript` or env `CURSOR_HOOK_LOG_TRANSCRIPT`): default **`none`** writes `transcript_path` and `transcript_meta` (`bytes` only) instead of loading the full JSONL into every record (avoids O(n²) YAML growth). Modes: **`full`** (legacy behavior), **`tail:N`**, **`end-only`** (full body on `sessionEnd` / `stop` / `beforeSubmitPrompt` only), **`delta`** (append `transcript_delta` with new JSONL since last byte offset; offsets stored under `transcript_offsets` in `~/.cursor/logs/.conversation_start_times.json` per conversation).
+- **`.cursor/hooks/log.rb`** — Normalize `postToolUseFailure` into `normalized.details` (`tool_name`, `error_message`, `failure_type`, `tool_input`, etc.) via `KIND_MAP` / `details_for` / `extracted_raw_keys`, instead of falling through to generic `keys` only.
+- **`.cursor/hooks/log.rb`** — Open `~/.cursor/logs/.conversation_start_times.json` with UTF-8 and normalize reads before `JSON.parse`, so state files containing non-ASCII text in `long_text_registry` no longer raise `Encoding::InvalidByteSequenceError` and block YAML log writes.
+
 ### Added
 
+- **`scripts/citdp_hook_log_evidence_build.rb`** — Regenerates CITDP ↔ hook-log correlation markdown and TSV from `docs/citdp/CITDP-*.yaml` and `~/.cursor/logs/conv_ruby_treegrep_*.yaml` (same-day hook-log counts for audits). Optional outputs can be committed under `docs/` when publishing evidence.
+- **scripts/cursor_hook_log_stream.rb** — Shared streaming helpers for `~/.cursor/logs/conv_*.yaml`: strip embedded `transcript:` / `transcript_path:` lines (O(1) memory), split records on unindented top-level YAML list items (`- `); `epoch` is not required for splitting.
+- **scripts/strip_transcripts.rb** — Stream-edit large hook logs: remove transcript blocks and `transcript_path` lines; `--dry-run` (size report), optional `--backup` (keep `*.strip.bak`).
+- **scripts/analyze_hook_log.rb** — Streaming per-record analysis (no full-file YAML load): event counts, `postToolUseFailure` aggregation, redundant reads, sessions/compactions, shell heuristics; `--dir`, `--min-size`, `--aggregate`.
+- **scripts/cursor_hook_log_stream_test.rb** — Smoke test for stream helpers.
+- **scripts/transcript_long_text_dedupe.rb** — Shared long-`content` dedupe (3+ lines, SHA256 digest prefix) for hook YAML trees; used by `scripts/dedupe_transcript_yaml.rb` and `.cursor/hooks/log.rb`.
+- **`.cursor/hooks/log.rb`** — Inline long-text dedupe on each append: per-conversation `long_text_registry` (full string → digest) stored in `~/.cursor/logs/.conversation_start_times.json` next to `started_at`; `--no-dedupe` to disable.
+- **scripts/transcript_long_text_dedupe_test.rb** — Smoke test for incremental dedupe and registry JSON migration.
+- **docs/agent-req-implementation-checklist.yaml** — v1.0.1: `workspace_paths` with `WORKSPACE_ROOT` (/Users/fareed/Documents/dev/chatgpt/stdd); S01/S03/S04/S05/S06.6/S09.SYNC/S10/S12/S13/S15/SUB-YAML/SUB-LEAP-MICRO tasks require tied-yaml MCP for project TIED YAML, absolute paths, and links to yaml-update-mcp-runbook / ai-agent-tied-mcp-usage; SUB-YAML requires `tied_validate_consistency` when TIED changes.
+- **docs/yaml-update-mcp-runbook.md** — Agent runbook: mandatory MCP routing for project TIED YAML, tool cheat sheet, failure playbook (no silent fallback to patch/write), alignment with SUB-YAML. Linked from [ai-agent-tied-mcp-usage.md](docs/ai-agent-tied-mcp-usage.md), S01 and SUB-YAML in [agent-req-implementation-checklist.md](docs/agent-req-implementation-checklist.md). Copied to client `tied/docs/` via [copy_files.sh](copy_files.sh) (`DOCS_TO_COPY`).
+- **docs/agent-preload-contract-template.yaml** — `tied_paths`: `TIED_BASE_PATH`, `project_yaml_writable_globs`, `methodology_readonly_glob`, `mcp_tied_yaml_verified_this_session` (see sample [agent-preload-contract-conv-test-a1-sample.yaml](docs/agent-preload-contract-conv-test-a1-sample.yaml)).
+- **scripts/dedupe_transcript_yaml.rb** — Deduplicate long (3+ line) text in hook transcript YAML (first 16 hex chars of SHA256): finds any hash with a `content` key (depth-first preorder), handling array parts (`type: text` / `text`), scalar `content` strings (sibling `digest` on the parent hash), and `content.value` hashes; per-file backup, validation, backup removed on success (`--dry-run`, `--keep-backup`, `--force`). Default-on post-dedupe pruning (`--[no-]prune-keys`): removes keys with YAML null / nil (bare `key:`), empty string/array/hash, all `conversation_id`, and `kind` when value is `unknown`; stats include `pruned_keys`.
+- **`scripts/transcript_yaml_prune.rb`** — Shared post-order prune for transcript/hook YAML trees (used by `scripts/dedupe_transcript_yaml.rb` and `.cursor/hooks/log.rb`).
+- **`scripts/yaml_minimize.sh`** — Stream-edit large YAML to drop empty-ish key lines (exec/preview/approve modes; O(1) memory per line).
+- **`scripts/run-feature-batch.sh`** — ATDD agent stream helper for a feature spec batch (workspace, runner, checklist YAML, prompt file, and related options).
+- **`docs/conversation-log-yaml-structure-and-agent-difficulties.md`** — Hook YAML record shape and agent-facing pitfalls when working from conversation logs.
+- **`mcp-server/package.json`** — `npm test` includes `requirement-list-state-guide` and `req-impl-state-guide` unit tests.
+- **MCP `req_impl_state_guide`** — Nested state guide: client-supplied `requirements` (same as `requirement_list_state_guide`) × full agent REQ checklist steps per spec (`agent_req_state_guide` record order). One `continuation_state` until terminal **`end_req_impl`**. Tool descriptor, `mcp-server/src/tools/req-impl-state-guide.ts`, tests. Workflow doc `docs/req-impl-state-guide-agent-workflow.md` (copied via `copy_files.sh` to `tied/docs/`).
 - **Methodology vs project YAML split** `[PROC-TIED_METHODOLOGY_READONLY]` — TIED-sourced YAML is read-only in client projects; client-specific data lives only in project YAML so methodology can be refreshed without losing project data.
   - **Process**: New `[PROC-TIED_METHODOLOGY_READONLY]` in processes.md (purpose, scope, rules: do not modify `tied/methodology/`; add/edit only in project YAML; re-run `copy_files.sh` to refresh methodology). Token registered in templates/semantic-tokens.yaml.
   - **copy_files.sh**: Methodology index and detail files are copied into `tied/methodology/` and **always overwritten** on each run. Project index YAMLs at `tied/` root are **created if missing** (minimal content) and **never overwritten**. Script header documents the split.
@@ -35,18 +59,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Agent state guides, checklists, and pseudo-code validation tooling** — Added new agent-driven state guide docs and checklists to support TDD progression and IMPL pseudo-code validation:
   - Docs: `docs/agent-req-checklist-state-machine.yaml`, `docs/pseudocode-writing-and-validation.md`, `docs/pseudocode-validation-checklist.yaml`, `docs/tdd-development-checklist.yaml`.
   - MCP: new state guide tools `agent_req_state_guide`, `documentation_first_state_guide`, and `tdd_state_guide` (including tool descriptors and unit tests).
+  - MCP: `requirement_list_state_guide` — step through a client-supplied requirement list using round-tripped `continuation_state` (base64url JSON); first call passes `requirements`, later calls pass `current_state`.
+  - **requirement_list_state_guide agent workflow** — Doc `docs/requirement-list-state-guide-agent-workflow.md`: list on first call, `continuation_state` for advance, walk until `end_requirement_list`/`error`, full REQ checklist through `end_agent_req` per requirement. `copy_files.sh` copies into `tied/docs/`.
   - Updated supporting language spec references for YAML-based `essence_pseudocode` validation guidance.
 
 ### Changed
 
+- **MCP state guide terminal states** — Each guide now returns a **prefixed** terminal `state`/`id` so documentation is unambiguous: `end_agent_req` (`agent_req_state_guide`), `end_documentation_first`, `end_tdd`, `end_requirement_list` (`requirement_list_state_guide`). Legacy `current_state: end` remains accepted for the three linear checklist tools as an alias for that tool’s terminal id.
 - **AGENTS.md, ai-principles.md, processes.md** — References to agent checklist, LEAP, ai-agent-tied-mcp-usage, and tied-first-implementation-procedure now use `tied/docs/...` instead of `docs/...`.
 - **docs/agent-req-implementation-checklist.md** — All reference and table paths updated to `tied/processes.md`, `tied/detail-files-schema.md`, `tied/docs/...` for sibling docs; S01 uses `tied/` for indexes and guides.
 - **docs/new-feature-process.md, docs/using-tied-without-mcp.md, docs/tied-first-implementation-procedure.md, docs/impl-code-test-linkage.md, docs/LEAP.md, docs/implementation-order.md, docs/adding-tied-mcp-and-invoking-passes.md** — Links updated to `tied/` and `tied/docs/` (or `../../` for project root) so they resolve when files live in `tied/docs/`.
-- **README.md** — Full procedure link updated from `docs/new-feature-process.md` to `tied/docs/new-feature-process.md`.
+- **README.md** — Full procedure link updated from `docs/new-feature-process.md` to `tied/docs/new-feature-process.md`. MCP section: state guides (`requirement_list_state_guide`, `req_impl_state_guide`), explicit terminal `end_*` ids, `lint_yaml` for manual YAML and `tied_token_rename`; [yaml-update-mcp-runbook.md](docs/yaml-update-mcp-runbook.md); Scripts list for hook-log analysis and maintenance utilities.
 
 ### Added (existing entries)
 
-- **MCP tool `tied_token_rename`** — Rename a single semantic token across the TIED tree (YAML indexes, detail files, and detail file name). Params: `old_token`, `new_token` (same prefix required), optional `dry_run`, `include_markdown` (tied/processes.md). Modified YAML is pretty-printed with `yq -i -P` when available. Returns `ok`, `files_modified`, `file_renamed`, `errors`. mcp-server: new module `token-rename.ts` (`renameSemanticToken`); unit tests `token-rename.test.ts`; test script updated to run token-rename tests.
+- **MCP tool `tied_token_rename`** — Rename a single semantic token across the TIED tree (YAML indexes, detail files, and detail file name). Params: `old_token`, `new_token` (same prefix required), optional `dry_run`, `include_markdown` (tied/processes.md). Modified YAML is pretty-printed with `yq -i -P` when available (agents use `lint_yaml` per `processes.md` for hand-edited YAML). Returns `ok`, `files_modified`, `file_renamed`, `errors`. mcp-server: new module `token-rename.ts` (`renameSemanticToken`); unit tests `token-rename.test.ts`; test script updated to run token-rename tests.
 - **`[PROC-TIED_FIRST_IMPLEMENTATION]` TIED-first implementation procedure** — When REQ/ARCH/IMPL are already authored or updated in TIED and tests/code are pending, agents follow a variant of the agent checklist: S02–S03 define change and impact from the **updated** TIED (desired = new design, current = prior tests/code); S04–S06 are verify-only (completeness and IMPL block token comments); S07–S16 unchanged. New document `docs/tied-first-implementation-procedure.md` with entry-point semantics, step modifiers, strict TDD from new IMPL, three-way alignment and LEAP, and flow diagram. Registered in `processes.md` and `semantic-tokens.yaml`. Agent checklist updated with new entry point "TIED prepared; tests/code not updated" and mandatory order (IMPL pseudo-code → RED tests → code).
 - **MCP write tools: JSON or YAML input** — `yaml_index_insert`, `yaml_index_update`, `yaml_detail_create`, `yaml_detail_update`, and `tied_token_create_with_detail` now accept **JSON or YAML** strings for record/updates/detail_record/index_record. New module `parse-content.ts` (`parseRecordOrYaml`: try JSON then YAML; reject null/array/primitive). Unit tests in `parse-content.test.ts`.
 - **Safe YAML emission for TIED writes** — New module `yaml-dump.ts` (`safeDump` with `forceQuotes: true`, `quotingType: '"'`) so string values containing `:` (e.g. in satisfaction criteria) are double-quoted and parse correctly. All TIED YAML writes in the MCP server (yaml-loader, detail-loader, feedback, convert runner and detail-markdown-to-yaml) now use `safeDump` instead of `yaml.dump`.
@@ -96,7 +123,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Docs**: mcp-server/README.md updated with feedback tools table and "Feedback (report to TIED)" subsection; main README MCP API line updated.
 
 - **New feature process (`[PROC-NEW_FEATURE]`)** — Top-level procedure for implementing a new feature from a user prompt.
-  - **docs/new-feature-process.md**: Flow diagram (user prompt → commit), governing process and tied-yaml MCP usage, step-by-step procedure aligned with PROC-TIED_DEV_CYCLE, and post-implementation steps (sync REQ/ARCH/IMPL, unit/e2e tests, README/CHANGELOG, commit). Direct YAML edits must be documented and validated with `yq -i -P`.
+  - **docs/new-feature-process.md**: Flow diagram (user prompt → commit), governing process and tied-yaml MCP usage, step-by-step procedure aligned with PROC-TIED_DEV_CYCLE, and post-implementation steps (sync REQ/ARCH/IMPL, unit/e2e tests, README/CHANGELOG, commit). Direct YAML edits must be documented and validated with `lint_yaml` per `[PROC-YAML_EDIT_LOOP]` (`processes.md`).
   - **tied/processes.md**: New section `[PROC-NEW_FEATURE]` referencing the full procedure and diagram.
   - **tied/semantic-tokens.yaml**: Registered `PROC-NEW_FEATURE`.
   - **CONTRIBUTING.md**: Commit message guidelines (one session commit; reference main REQ/ARCH/IMPL tokens).
@@ -164,7 +191,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **`[PROC-SWIFT_BUILD]` Swift Build and Validation Process** — Build, test, run, and validation commands for Swift applications; lint/type-check gate for `[PROC-TIED_DEV_CYCLE]` inner loop. Defined in `processes.md`; registered in `semantic-tokens.yaml`.
 
-- **`[PROC-YAML_EDIT_LOOP]`** — Controlling loop for creating or editing TIED YAML: edit, validate with `yq -i -P`, use only after validation passes. Defined in `processes.md` under `[PROC-YAML_DB_OPERATIONS]`.
+- **`[PROC-YAML_EDIT_LOOP]`** — Controlling loop for creating or editing TIED YAML: edit, validate with `lint_yaml`, use only after validation passes. Defined in `processes.md` under `[PROC-YAML_DB_OPERATIONS]`.
 
 - **docs/impl-code-test-linkage.md** — Practical guide for three-way alignment (IMPL pseudo-code / tests / code); 9 phases with worked examples, LEAP micro-cycle, and process diagram. Process token: `[PROC-IMPL_CODE_TEST_SYNC]`.
 

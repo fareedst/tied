@@ -51,7 +51,7 @@ REQ/ARCH/IMPL are already updated; do **not** re-author from scratch.
   - No insufficient specs: no missing contracts, undefined procedures, unhandled error paths, stub pseudo-code on Active IMPLs, or blocks without token comments.
   - No contradictory specs across IMPLs (shared DATA, ordering, OUTPUT types, duplicate logic).
   - **Every block** has a token comment per `[PROC-IMPL_PSEUDOCODE_TOKENS]` (top-level and sub-blocks naming REQ/ARCH/IMPL and how the block implements them).
-- **If** something is missing or wrong: fix in IMPL first (then ARCH/REQ if scope changed); re-validate YAML (`yq -i -P` or equivalent); then proceed to tests/code. Do not proceed with gaps in pseudo-code.
+- **If** something is missing or wrong: fix in IMPL first (then ARCH/REQ if scope changed); re-validate each changed YAML file with `lint_yaml` per [PROC-YAML_EDIT_LOOP] (`processes.md`); then proceed to tests/code. Do not proceed with gaps in pseudo-code.
 
 ### S07–S16: Execute as in Main Checklist
 

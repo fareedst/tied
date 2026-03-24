@@ -1,6 +1,6 @@
 {
   "name": "agent_req_state_guide",
-  "description": "Guide the client through the full agent REQ implementation checklist states (S01 through S16). The wrapper should pass current_state via arguments.current_state. Call with no current_state to get S01; call with current_state to get the next record. Recognized states are S01, S02, S03, S04, S05, S06.1, S06.2, S06.3, S06.4, S06.5, S06.5a, S06.6, S07, S08, S09.RED, S09.GREEN, S09.REFACTOR, S09.SYNC, S10, S11, S12, S13, S14, S15, S16, and end. When already at the end state, returns the end state again. Unknown non-empty states return error. The response includes the selected record fields plus state, guidance, and is_end.",
+  "description": "Guide the client through the full agent REQ implementation checklist states (S01 through S16). The wrapper should pass current_state via arguments.current_state. Call with no current_state to get S01; call with current_state to get the next record. Terminal state is end_agent_req (is_end true)—not generic end; pass it back to stay at terminal. Legacy current_state end is accepted as alias for end_agent_req. Other recognized states: S01–S16 substeps as documented. Unknown non-empty states return error. Response includes selected record fields plus state, guidance, is_end.",
   "arguments": {
     "type": "object",
     "properties": {

@@ -48,7 +48,7 @@ When REQ/ARCH/IMPL have already been updated and the remaining work is to align 
 3. Review `tied/semantic-tokens.yaml` (token registry) and `tied/semantic-tokens.md` (token guide).
 4. Review `tied/architecture-decisions.yaml` and `tied/implementation-decisions.yaml` (YAML indexes).
 5. Review `tied/implementation-decisions.md` (IMPL schema, pseudo-code rules, block token rules per `[PROC-IMPL_PSEUDOCODE_TOKENS]`).
-6. Confirm TIED MCP server availability (if applicable); prefer MCP for TIED data read/write.
+6. Confirm TIED MCP server availability (if applicable). For **creating, updating, or deleting** project-owned YAML under the TIED base path (indexes, `requirements/` / `architecture-decisions/` / `implementation-decisions/` details, `semantic-tokens.yaml`, `feedback.yaml`, etc.), follow [yaml-update-mcp-runbook.md](yaml-update-mcp-runbook.md): use tied-yaml MCP tools; do not use IDE patch/write on those paths when a tool exists (document a one-line exception only when no tool covers the operation).
 7. Understand priority order: Tests > Code > Basic Functions > Developer Experience > Infrastructure > Security.
 
 **Outcomes**: Agent has read all governing documents. Session context is established.
@@ -293,7 +293,7 @@ LOOP FOR each IMPL block classified as unit or integration in S08:
    ```
    Nested blocks follow the same rules: same token set comments only *how*; different token set names that set.
 3. Run tests. IF tests fail THEN iterate on production code only (do not add new tests in GREEN).
-4. Run language-specific lint: Rust → `bun run lint:rust`; TypeScript → `bunx tsc -b` or `bun run lint:ts`; Swift → `swift build && swift test`; YAML → `yq -i -P <changed files>`. IF lint fails THEN fix before proceeding.
+4. Run language-specific lint: Rust → `bun run lint:rust`; TypeScript → `bunx tsc -b` or `bun run lint:ts`; Swift → `swift build && swift test`; YAML → run `lint_yaml` on changed files per [PROC-YAML_EDIT_LOOP] (`processes.md`). IF lint fails THEN fix before proceeding.
 
 **Branch**: IF GREEN reveals the pseudo-code is incomplete, wrong, or requires a new dependency THEN **CALL SUB-LEAP-MICRO**. Do not silently diverge.
 
@@ -391,7 +391,7 @@ END LOOP (repeat S09.RED → S09.GREEN → S09.REFACTOR → S09.SYNC
 
 **Tasks**:
 1. Run the **full test suite** (unit, composition, E2E). All must pass.
-2. Run **lint** for each language in scope: Rust → `bun run lint:rust`; TypeScript → `bunx tsc -b`; Swift → `swift build && swift test`; YAML → `yq -i -P <changed files>`.
+2. Run **lint** for each language in scope: Rust → `bun run lint:rust`; TypeScript → `bunx tsc -b`; Swift → `swift build && swift test`; YAML → run `lint_yaml` on changed files per [PROC-YAML_EDIT_LOOP] (`processes.md`).
 3. Run **`[PROC-TOKEN_VALIDATION]`**: `./scripts/validate_tokens.sh` (stub; see `tied/docs/token-validation.md`) or **`tied_validate_consistency`** (MCP). This project uses MCP for validation; fix any issues before proceeding.
 4. **Final three-way alignment audit**: for every IMPL touched, verify pseudo-code / test / code carry the same token set with logically corresponding descriptions. Document remaining `e2e_only` blocks and confirm each has `e2e_only_reason`.
 5. **Update IMPL detail metadata** for each changed IMPL detail file:
@@ -463,7 +463,7 @@ END LOOP (repeat S09.RED → S09.GREEN → S09.REFACTOR → S09.SYNC
    - **TDD sequence** (from S09-S11): what was implemented and in what order.
    - **Completion criteria**: validation results from S12.
    - **LEAP feedback**: `divergences_from_analysis` (any places where implementation differed from the original analysis), `tied_stack_updates_required` (LEAP propagations triggered), `record_status`.
-2. Store as `docs/citdp/CITDP-{change_request_id}.yaml` (or project-defined location).
+2. Store as `docs/citdp/CITDP-{change_request_id}.yaml` relative to the **client project workspace root**—the repository where the implementation and **project** `tied/` tree live (the same repo you commit for this work). Do **not** persist CITDP only under a separate checkout of the TIED methodology repository when the client is another project; optional mirrors or alternate paths are policy-specific and do not replace the canonical client path.
 3. **CALL SUB-YAML** on the record file.
 
 **Outcomes**: CITDP record stored and validated; analysis available for future reference.
@@ -503,19 +503,20 @@ END LOOP (repeat S09.RED → S09.GREEN → S09.REFACTOR → S09.SYNC
 
 **Invoked by**: Any step that creates or modifies TIED YAML (S04, S05, S06, S09.SYNC, S10, S12, S13, S15).
 
-**Goals**: Ensure every TIED YAML file is syntactically valid and canonically formatted before use.
+**Goals**: Ensure every TIED YAML file is syntactically valid and canonically formatted before use. **Mutations** to project-owned TIED YAML go through MCP when a tool exists ([yaml-update-mcp-runbook.md](yaml-update-mcp-runbook.md)). Agents use **`lint_yaml`** per [PROC-YAML_EDIT_LOOP] (`processes.md`); it may accept multiple paths but must process each file independently—never raw multi-argument `yq` pretty-print, which merges documents and corrupts files.
 
 **Tasks**:
-1. Run `yq -i -P <file>` on the changed file. This validates syntax and canonicalizes formatting in place.
-2. IF validation fails THEN fix the YAML error and repeat step 1. The file is not valid for use until this passes.
-3. (Optional, recommended at session boundaries) Run `tied_validate_consistency` (MCP) for cross-file traceability.
-4. IF consistency check fails THEN fix the issue in the TIED stack and **RETURN** to the calling step to re-validate.
+1. **Mutation path**: IF you are creating, updating, or deleting project-owned files under the TIED base path, use tied-yaml MCP tools per [yaml-update-mcp-runbook.md](yaml-update-mcp-runbook.md). Do not bypass with `apply_patch`/`Write` when the same operation is supported by MCP.
+2. Run `lint_yaml` on each changed file, or one `lint_yaml` invocation with multiple paths if your wrapper implements per-file safe passes (required for any **direct-edited** file; MCP-written files may still be normalized this way if your workflow runs it on all touched paths). This validates syntax and canonicalizes formatting in place.
+3. IF validation fails THEN fix the YAML error and repeat step 2. The file is not valid for use until this passes.
+4. Run `tied_validate_consistency` (MCP) for cross-file traceability before marking TIED work complete (and when the calling step requires it).
+5. IF consistency check fails THEN fix the issue in the TIED stack (prefer MCP) and **RETURN** to the calling step to re-validate.
 
-**Outcomes**: YAML file is syntactically valid, canonically formatted, and ready for use by MCP, scripts, and downstream steps.
+**Outcomes**: YAML file is syntactically valid, canonically formatted, consistent with the TIED graph where validated, and ready for use by MCP, scripts, and downstream steps.
 
 **RETURN** to calling step.
 
-**Reference**: `tied/processes.md` § `[PROC-YAML_EDIT_LOOP]`; `tied/docs/methodology-diagrams.md` Diagram 6.
+**Reference**: `tied/processes.md` § `[PROC-YAML_EDIT_LOOP]`; [yaml-update-mcp-runbook.md](yaml-update-mcp-runbook.md); `tied/docs/methodology-diagrams.md` Diagram 6.
 
 ---
 

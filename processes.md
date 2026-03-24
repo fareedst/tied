@@ -360,8 +360,13 @@ with open('tied/requirements.yaml', 'w') as f:
 
 This is the **controlling loop** for creating or editing any TIED YAML (index or detail). No TIED record is considered valid for use until it has passed this loop.
 
+**`lint_yaml`** — Global shell function (or project-provided equivalent) that agents **must** use to validate YAML syntax and canonicalize formatting **in place**. It accepts **one or more** file paths; the implementation must process **each path independently** (typically one underlying `yq -i -P` per file, or equivalent). **Do not** pass multiple YAML paths to a **single raw `yq -i -P` command**: mikefarah `yq` merges multiple file arguments into one stream and corrupts files. Agents use `lint_yaml`, not ad-hoc multi-argument `yq`.
+
 1. **Edit** — Create or modify the YAML file (index or detail) under `tied/` or other TIED-related paths (e.g. `docs/citdp/*.yaml` as defined by the project).
-2. **Validate and pretty-print** — Run `yq -i -P <file>` (or project-equivalent). This validates syntax and canonicalizes formatting in place. On failure, the file is invalid; fix and repeat from step 1.
+2. **Validate and pretty-print** — Run `lint_yaml` on the changed file(s), e.g. `lint_yaml <file>` or `lint_yaml path/a.yaml path/b.yaml`. This validates syntax and canonicalizes formatting in place. On failure, the file is invalid; fix and repeat from step 1.
+
+   **Caution:** If your environment lacks a safe `lint_yaml` wrapper, you must still run validation **one file per underlying pretty-print process**; never pass multiple paths to one raw `yq` invocation.
+
 3. **Use** — Only after step 2 succeeds is the file considered **valid for use** under TIED (MCP, `tied_validate_consistency`, and other tooling may rely on it). YAML that does not validate is **invalid** and **must not be used** until fixed.
 4. **Optional** — For TIED index and detail files, run **tied_validate_consistency** (and any index/detail checks) as a further gate.
 
@@ -369,15 +374,12 @@ This is the **controlling loop** for creating or editing any TIED YAML (index or
 
 #### 4. Validating YAML Syntax (mandatory before use)
 
-**All** changes to TIED YAML must be validated before the file is considered valid for use. Validate (and canonicalize) with `yq -i -P <file>`. If validation fails, the YAML is **invalid** and **must not be used** until fixed.
+**All** changes to TIED YAML must be validated before the file is considered valid for use. Validate (and canonicalize) with `lint_yaml` per § 3.1 (each path processed independently; see caution there). If validation fails, the YAML is **invalid** and **must not be used** until fixed.
 
-**Validate and pretty-print with yq (recommended):**
+**Validate and pretty-print with `lint_yaml` (recommended):**
 ```bash
-yq -i -P tied/requirements.yaml && echo "✅ Valid YAML" || echo "❌ Invalid YAML"
-yq -i -P tied/architecture-decisions.yaml && echo "✅ Valid YAML" || echo "❌ Invalid YAML"
-yq -i -P tied/implementation-decisions.yaml && echo "✅ Valid YAML" || echo "❌ Invalid YAML"
-yq -i -P tied/semantic-tokens.yaml && echo "✅ Valid YAML" || echo "❌ Invalid YAML"
-# Repeat for any changed detail files under tied/requirements/, tied/architecture-decisions/, tied/implementation-decisions/
+lint_yaml tied/requirements.yaml tied/architecture-decisions.yaml tied/implementation-decisions.yaml tied/semantic-tokens.yaml && echo "✅ Valid YAML" || echo "❌ Invalid YAML"
+# Repeat with any changed detail files under tied/requirements/, tied/architecture-decisions/, tied/implementation-decisions/
 ```
 
 **Validate only (read-only check, no canonicalization):**
@@ -493,7 +495,7 @@ yq '.REQ-TIED_SETUP.metadata.last_validated.result' tied/requirements.yaml
 
 ### Artifacts & Metrics
 - **Artifacts**: YAML index files (requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml); all created or updated per [PROC-YAML_EDIT_LOOP] so they are valid for use.
-- **Success Metrics**: YAML files are valid (validated with `yq -i -P` or equivalent), all records have required fields, cross-references are consistent; invalid YAML is not used until fixed.
+- **Success Metrics**: YAML files are valid (validated with `lint_yaml`), all records have required fields, cross-references are consistent; invalid YAML is not used until fixed.
 
 ---
 
@@ -535,7 +537,7 @@ Active
 **Code-generation inner loop (per TDD iteration)** — Steps 3–7 are governed by a single inner loop. Every iteration must complete RED → GREEN → (optional REFACTOR) before the iteration is considered done. Code that does not pass lint is incomplete and must not proceed.
 
 - **RED (mandatory entry)** — Write or update a **test** that fails for the behavior being implemented. Run the test suite; confirm the new test fails for the expected reason. No production code is written in this step.
-- **GREEN** — Write the **minimum production code** to make the failing test pass. Run tests and **language-specific lint** for each language in scope: **Rust** → `bun run lint:rust` [PROC-RUST_LINT]; **TypeScript** → `bunx tsc -b` or `bun run lint:ts` [PROC-TS_CHECK]; **Swift** → `swift build && swift test` [PROC-SWIFT_BUILD]; **YAML** → `yq -i -P <changed files>` [PROC-YAML_EDIT_LOOP] (when TIED YAML is created or updated). If tests still fail, iterate on production code only (do not add new tests in GREEN). If lint fails, fix before proceeding.
+- **GREEN** — Write the **minimum production code** to make the failing test pass. Run tests and **language-specific lint** for each language in scope: **Rust** → `bun run lint:rust` [PROC-RUST_LINT]; **TypeScript** → `bunx tsc -b` or `bun run lint:ts` [PROC-TS_CHECK]; **Swift** → `swift build && swift test` [PROC-SWIFT_BUILD]; **YAML** → run `lint_yaml` on each changed YAML file (or pass multiple paths in one `lint_yaml` invocation) [PROC-YAML_EDIT_LOOP] (when TIED YAML is created or updated). If tests still fail, iterate on production code only (do not add new tests in GREEN). If lint fails, fix before proceeding.
 - **REFACTOR** (optional) — Clean up test or production code; re-run tests and lint to confirm no regressions.
 - **NEXT** — Proceed to the next iteration (new failing test) or next step.
 
@@ -751,7 +753,7 @@ Projects may extend this process (e.g. tagging workflow, release checklist) in t
 Govern how an AI agent analyzes, plans, tests, and prepares implementation work for any requested behavior change. Produce a complete change-analysis record (YAML) and test-and-implementation plan before code changes begin. Supports [REQ-TIED_SETUP] and [REQ-MODULE_VALIDATION] by ensuring pseudo-code (with token comments) is authored before tests, and that unit tests and production code carry the same REQ/ARCH/IMPL token comments linking back to the TIED db.
 
 ### Scope
-Applies to all behavior-changing work on existing projects. When used in a TIED project, integrates with [PROC-IMPL_PSEUDOCODE_TOKENS], [PROC-TIED_DEV_CYCLE], [PROC-LEAP], [PROC-TEST_STRATEGY], [PROC-TOKEN_VALIDATION], [PROC-YAML_DB_OPERATIONS], and [PROC-YAML_EDIT_LOOP]. Procedure document: `tied/docs/agent-req-implementation-checklist.md` (`[PROC-AGENT_REQ_CHECKLIST]`). Analysis records stored under `docs/citdp/` (or project-defined location) as `CITDP-{change_request_id}.yaml`.
+Applies to all behavior-changing work on existing projects. When used in a TIED project, integrates with [PROC-IMPL_PSEUDOCODE_TOKENS], [PROC-TIED_DEV_CYCLE], [PROC-LEAP], [PROC-TEST_STRATEGY], [PROC-TOKEN_VALIDATION], [PROC-YAML_DB_OPERATIONS], and [PROC-YAML_EDIT_LOOP]. Procedure document: `tied/docs/agent-req-implementation-checklist.md` (`[PROC-AGENT_REQ_CHECKLIST]`). Analysis records stored under `docs/citdp/` (or project-defined location) as `CITDP-{change_request_id}.yaml`; that path is relative to the **client project** workspace root (the repository containing the project `tied/` and implementation), not a separate clone of the TIED methodology repository unless that clone is the active implementation workspace.
 
 ### Token references
 - [PROC-IMPL_PSEUDOCODE_TOKENS], [PROC-TIED_DEV_CYCLE], [PROC-LEAP], [PROC-TEST_STRATEGY], [PROC-TOKEN_VALIDATION], [PROC-YAML_DB_OPERATIONS], [PROC-YAML_EDIT_LOOP]
@@ -769,7 +771,7 @@ Active
 5. **Test determination** — Per [PROC-TEST_STRATEGY]; test matrix with impl_block_reference and tied_token_comments; testability_classification.
 6. **TDD sequence** — Per [PROC-TIED_DEV_CYCLE]: pseudo-code first, then failing unit tests, then unit code via TDD, then failing composition tests (component/integration/contract) for every binding, then composition code via TDD, then E2E for UI-only behavior, then validate and sync TIED stack per [PROC-LEAP] if divergences.
 7. **Completion** — Before returning work to the caller, run applicable **language and data checks**: [PROC-RUST_LINT] for Rust, [PROC-TS_CHECK] for TypeScript, [PROC-SWIFT_BUILD] for Swift, [PROC-YAML_EDIT_LOOP] for YAML (and any other gates defined in `processes.md`). All mandated checks must pass before the implementation is considered complete. Then: [PROC-TOKEN_VALIDATION] / `tied_validate_consistency`; module validation per [REQ-MODULE_VALIDATION]; LEAP feedback (divergences_from_analysis, tied_stack_updates_required, record_status) when applicable.
-8. **Persistence** — Record stored as YAML per [PROC-YAML_DB_OPERATIONS]. Validate and pretty-print per [PROC-YAML_EDIT_LOOP] (e.g. `yq -i -P <file>`); the record is not valid for use until validation passes. JSON export optional.
+8. **Persistence** — Record stored as YAML per [PROC-YAML_DB_OPERATIONS] under the client project's `docs/citdp/` (outside project `tied/` index/detail unless policy merges them). Validate and pretty-print per [PROC-YAML_EDIT_LOOP] (e.g. `lint_yaml <file>`); the record is not valid for use until validation passes. JSON export optional.
 
 ### Artifacts & Metrics
 - **Artifacts**: Change-analysis YAML record (record identity, change definition, impact analysis, risk analysis, acceptance criteria, test strategy with test matrix, TDD sequence, implementation guidance, completion criteria, LEAP feedback).
@@ -871,7 +873,7 @@ This checklist is organized into nine phases (A–I). Phases A–C are analytica
 7. **B4. Resolve and update.** For each issue found in B2–B3:
    - Update the affected IMPL's `essence_pseudocode` so contracts are compatible, ordering is explicit, and every block is complete.
    - When resolution changes the scope of an ARCH or REQ, propagate per [PROC-LEAP] (IMPL → ARCH → REQ).
-   - Run `yq -i -P` on every changed detail file per [PROC-YAML_EDIT_LOOP].
+   - Run `lint_yaml` on every changed detail file per [PROC-YAML_EDIT_LOOP].
 
 #### Phase C — Document pseudo-code (block token comments)
 
@@ -929,7 +931,7 @@ This checklist is organized into nine phases (A–I). Phases A–C are analytica
     1. Update IMPL `essence_pseudocode` first (add the missing block, fix the contract, add the new dependency comment).
     2. Update or add the test to match the corrected pseudo-code.
     3. Update the production code to pass the corrected test.
-    4. Run `yq -i -P` on the changed IMPL detail file.
+    4. Run `lint_yaml` on the changed IMPL detail file.
 
     This keeps pseudo-code authoritative at every point during TDD, not just at the end.
 
@@ -995,7 +997,7 @@ This checklist is organized into nine phases (A–I). Phases A–C are analytica
     - Update `traceability.tests` to list all tests that validate this IMPL.
     - Update `code_locations` (files and functions) to reflect the current code.
     - Update `metadata.last_updated` with date, author, and reason.
-    - Run `yq -i -P` on the detail file per [PROC-YAML_EDIT_LOOP].
+    - Run `lint_yaml` on the detail file per [PROC-YAML_EDIT_LOOP].
 
 ### Process Diagram
 
@@ -1172,11 +1174,8 @@ The app opens with no documents. Use **File > Open...** (Cmd+O) to select text f
 
 **YAML syntax validation** (per `[PROC-YAML_EDIT_LOOP]`):
 ```bash
-yq -i -P tied/semantic-tokens.yaml
-yq -i -P tied/requirements.yaml
-yq -i -P tied/architecture-decisions.yaml
-yq -i -P tied/implementation-decisions.yaml
-# Repeat for any changed detail files under tied/*/
+lint_yaml tied/semantic-tokens.yaml tied/requirements.yaml tied/architecture-decisions.yaml tied/implementation-decisions.yaml
+# Repeat with any changed detail files under tied/*/
 ```
 
 **TIED consistency check** (via MCP tool):
@@ -1198,10 +1197,7 @@ swift build
 swift test
 
 # 3. YAML validation (for any changed TIED files)
-yq -i -P tied/semantic-tokens.yaml
-yq -i -P tied/requirements.yaml
-yq -i -P tied/architecture-decisions.yaml
-yq -i -P tied/implementation-decisions.yaml
+lint_yaml tied/semantic-tokens.yaml tied/requirements.yaml tied/architecture-decisions.yaml tied/implementation-decisions.yaml
 
 # 4. TIED consistency (via MCP — must report "ok": true)
 # tied_validate_consistency
@@ -1217,7 +1213,7 @@ In the TDD inner loop (steps 3-7 of `[PROC-TIED_DEV_CYCLE]`):
 
 ### Artifacts & Metrics
 - **Artifacts**: Build output (`.build/debug/TextViewerApp`), test results (99 tests), TIED validation report.
-- **Success Metrics**: `swift build` exits 0; `swift test` reports 0 failures; `yq -i -P` exits 0 for all changed YAML; `tied_validate_consistency` reports `"ok": true`.
+- **Success Metrics**: `swift build` exits 0; `swift test` reports 0 failures; `lint_yaml` succeeds for all changed YAML; `tied_validate_consistency` reports `"ok": true`.
 
 ---
 
@@ -1241,7 +1237,7 @@ Active (optional per project).
 1. **Policy**: Do not edit `status` in `requirements.yaml` (or implementation index) by hand when verification-gated mode is on. Status reflects test outcomes only.
 2. **Verify step**: After running the test suite, run the project's verify step (e.g. MCP tool `tied_verify` with `--update`, or a script that parses test results and passes covered tokens to the tool). The verify step updates REQ/IMPL status from the set of tokens that have passing tests (e.g. from test names/comments or requirement markers).
 3. **CI**: In CI, run: test suite → verify (update status) → `tied_validate_consistency`. Optionally run a "health" check with defined exit codes (0 = ok, 1 = warnings, 2 = fail).
-4. **Pre-commit**: Optionally run `tied_validate_consistency` (and `yq -i -P` on staged TIED YAML) in a pre-commit hook to catch invalid or inconsistent TIED data.
+4. **Pre-commit**: Optionally run `tied_validate_consistency` (and `lint_yaml` on each staged TIED YAML file, or one `lint_yaml` with multiple paths) in a pre-commit hook to catch invalid or inconsistent TIED data.
 
 ### Artifacts & Metrics
 - **Artifacts**: Updated requirement/implementation index status; verify run report.

@@ -1,0 +1,21 @@
+{
+  "name": "requirement_list_state_guide",
+  "description": "Walk a client-supplied requirement list in array order. Unlike agent_req_state_guide (no args first; state = checklist id), HERE the user MUST supply requirements on the first call. First call: pass non-empty requirements array (objects with id, name, depends_on, summary, rationale, inputs, outputs, functional_requirements, acceptance_criteria, test_scope); omit current_state. Later calls: pass current_state ONLY, set to continuation_state from the prior response (requirements ignored). Agent procedure: start the sequence and keep calling back-to-back until is_end with id end_requirement_list, or state error—do not abandon the walk mid-sequence. For EACH requirement before terminal: run full agent REQ checklist once (agent_req_state_guide through end_agent_req), strict TDD. Terminal: synthetic id end_requirement_list, is_end true; bad token or empty list returns state error.",
+  "arguments": {
+    "type": "object",
+    "properties": {
+      "requirements": {
+        "type": "array",
+        "description": "Requirement objects in walk order. REQUIRED on first call when current_state is omitted or empty.",
+        "items": {}
+      },
+      "current_state": {
+        "type": "string",
+        "description": "Opaque continuation_state from the previous response. When set, requirements is ignored; use to get the next requirement."
+      }
+    },
+    "required": [],
+    "additionalProperties": false,
+    "$schema": "http://json-schema.org/draft-07/schema#"
+  }
+}
