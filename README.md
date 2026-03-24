@@ -251,7 +251,8 @@ This repository contains:
 - `scripts/analyze_hook_log.rb` — Streaming analysis of Cursor hook YAML logs under `~/.cursor/logs/` (event counts, failures, aggregates; use `--help`).
 - `scripts/strip_transcripts.rb` — Stream-edit large hook logs to drop embedded transcript bodies (see `--dry-run`).
 - `scripts/dedupe_transcript_yaml.rb` — Deduplicate long text nodes in hook transcript YAML trees (shares helpers with `.cursor/hooks/log.rb`).
-- `scripts/run-feature-batch.sh` — Batch driver for agent-stream and feature-spec workflows (defaults and flags in script header; use `--help`).
+- `scripts/run-feature-batch.sh` — Batch driver for agent-stream and feature-spec workflows. Defaults resolve **from this repo** (`tools/agent-stream/run_agent_stream.rb`, `docs/agent-req-implementation-checklist.yaml`); override with `-r` / `-c` (see `--help`).
+- `tools/agent-stream/` — Vendored **Cursor `agent` stream-json** runner (`run_agent_stream.rb`) plus `lib/` for multi-turn `--resume`, `--tdd-yaml`, and `--lead-checklist-yaml` (checklist-driven CITDP/LEAP/TIED sessions). Requires Ruby 3.x and `agent` on `PATH`. See [tools/agent-stream/README.md](tools/agent-stream/README.md) and [docs/run-agent-stream-tied.md](docs/run-agent-stream-tied.md).
 
 ### Methodology Documentation (Reference Only)
 - `TIED.md` - TIED methodology overview (for beginners, intermediate, and experts)
@@ -261,6 +262,7 @@ This repository contains:
 - `docs/methodology-diagrams.md` - 6 mermaid diagrams: traceability stack, development phases, dev-cycle session workflow, TDD inner loop, CITDP procedure, YAML edit loop
 - `docs/yaml-update-mcp-runbook.md` - Agent runbook: MCP-first routing for project TIED YAML writes (copied to `tied/docs/` via `copy_files.sh` when listed in `DOCS_TO_COPY`)
 - `docs/conversation-log-yaml-structure-and-agent-difficulties.md` - Hook log YAML structure and agent pitfalls
+- `docs/run-agent-stream-tied.md`, `docs/run-agent-stream-impl-e2e.md`, `docs/run-agent-stream-impl-composition.md`, `docs/run-agent-stream-upstream.md` - Agent stream runner (CITDP/LEAP/TIED multi-turn sessions); `docs/tdd_development_loop.yaml` - six-step TDD loop YAML for `--tdd-yaml`
 - `docs/requirement-list-state-guide-agent-workflow.md`, `docs/req-impl-state-guide-agent-workflow.md` - State guide workflows for MCP tools `requirement_list_state_guide` and `req_impl_state_guide`
 - `ai-principles.md` - Agent operational mandates and checklists (copied to projects via copy_files.sh)
 - `tied-language-spec.md` - TIED language specification (pseudo-code templates with semantic tokens)

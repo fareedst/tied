@@ -203,6 +203,148 @@ REQ-FEEDBACK_TO_TIED:
       date: 2026-03-03
       validator: AI Agent
       result: pass
+REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML:
+  name: Agent stream argv expands TDD YAML into ordered turns
+  category: Functional
+  priority: P1
+  status: Implemented
+  rationale:
+    why: Multi-turn agent sessions must run the same message sequence as TddLoopPrompts.messages_from_yaml for each --tdd-yaml path so PROC-TIED_DEV_CYCLE YAML matches runtime behavior
+    problems_solved:
+      - Divergence between documented TDD loop steps and actual agent turns
+      - Manual copy-paste of prompts across turns
+    benefits:
+      - Single source YAML drives RED/GREEN/REFACTOR/SYNC turns
+      - Aligns with docs/tdd_development_loop.yaml in this repo
+    upstream_note: Imported from atdd commit eb88236290009b78eb11ea561816f0854176bf12; see docs/run-agent-stream-upstream.md
+  satisfaction_criteria:
+    - criterion: AgentStreamArgv.parse_argv appends one turn per message from TddLoopPrompts.messages_from_yaml for each --tdd-yaml path in argv order
+    - criterion: Turn order matches delegation to TddLoopPrompts (no duplicate parsing rules in the entry point)
+  validation_criteria:
+    - method: Composition tests (upstream atdd)
+      coverage: test/composition/agent_stream_tdd_yaml_binding_test.rb
+    - method: Vendored code review
+      coverage: tools/agent-stream/lib/agent_stream_argv.rb, lib/tdd_loop_prompts.rb
+  traceability:
+    architecture:
+      - ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS
+    implementation:
+      - IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
+    tests:
+      - agent_stream_tdd_yaml_binding_test.rb
+    code_annotations:
+      - REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
+      - IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
+  related_requirements:
+    depends_on: []
+    related_to:
+      - REQ-TIED_SETUP
+    supersedes: []
+  detail_file: requirements/REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML.yaml
+  metadata:
+    created:
+      date: 2026-03-24
+      author: AI Agent
+    last_updated:
+      date: 2026-03-24
+      author: AI Agent
+      reason: Import ATDD agent stream TIED records
+    last_validated:
+      date: 2026-03-24
+      validator: AI Agent
+      result: pass
+REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS:
+  name: Export TDD YAML steps to per-step markdown files
+  category: Functional
+  priority: P2
+  status: Implemented
+  rationale:
+    why: Some workflows prefer file-per-step prompts instead of --tdd-yaml expansion; export must mirror TddLoopPrompts.step_entries_from_yaml
+    problems_solved:
+      - Need for reviewable .md artifacts per loop step
+    benefits:
+      - Repeatable prompt files under prompts/tdd/generated (when using export script)
+    upstream_note: Imported from atdd commit eb88236290009b78eb11ea561816f0854176bf12; export script lives in atdd (atdd_export_tdd_prompts.rb); STDD vendors lib used by export
+  satisfaction_criteria:
+    - criterion: Each YAML step entry becomes one markdown file named from sanitized step id with message body from format_step
+    - criterion: File count equals entry count from step_entries_from_yaml
+  validation_criteria:
+    - method: Composition tests (upstream atdd)
+      coverage: test/composition/export_tdd_prompts_binding_test.rb
+  traceability:
+    architecture:
+      - ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS
+    implementation:
+      - IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS
+    tests:
+      - export_tdd_prompts_binding_test.rb
+    code_annotations:
+      - REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS
+  related_requirements:
+    depends_on: []
+    related_to:
+      - REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
+    supersedes: []
+  detail_file: requirements/REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS.yaml
+  metadata:
+    created:
+      date: 2026-03-24
+      author: AI Agent
+    last_updated:
+      date: 2026-03-24
+      author: AI Agent
+      reason: Import ATDD agent stream TIED records
+    last_validated:
+      date: 2026-03-24
+      validator: AI Agent
+      result: pass
+REQ-ATDD-E2E-AGENT_STREAM:
+  name: E2E agent subprocess stream-json harness with session resume
+  category: Functional
+  priority: P1
+  status: Implemented
+  rationale:
+    why: The Cursor agent CLI must run as an external process; streamed NDJSON must surface assistant and thinking text and capture session_id for chained turns
+    problems_solved:
+      - No in-process API for stream-json
+      - Session continuity across multiple turns in one invocation
+    benefits:
+      - Automates PROC-AGENT_REQ_CHECKLIST and TDD loop YAML as sequential agent turns
+    upstream_note: Imported from atdd commit eb88236290009b78eb11ea561816f0854176bf12
+  satisfaction_criteria:
+    - criterion: Each turn invokes agent with stream-json; stdout lines parse as JSON; text fragments print to stdout
+    - criterion: session_id captured from stream and printed on stderr for resume; non-zero exit on agent failure
+  validation_criteria:
+    - method: E2E tests with stub agent on PATH (upstream atdd)
+      coverage: test/e2e/agent_stream_e2e_test.rb
+  traceability:
+    architecture:
+      - ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON
+    implementation:
+      - IMPL-ATDD-E2E-AGENT_STREAM
+    tests:
+      - agent_stream_e2e_test.rb
+    code_annotations:
+      - REQ-ATDD-E2E-AGENT_STREAM
+      - IMPL-ATDD-E2E-AGENT_STREAM
+  related_requirements:
+    depends_on: []
+    related_to:
+      - REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
+    supersedes: []
+  detail_file: requirements/REQ-ATDD-E2E-AGENT_STREAM.yaml
+  metadata:
+    created:
+      date: 2026-03-24
+      author: AI Agent
+    last_updated:
+      date: 2026-03-24
+      author: AI Agent
+      reason: Import ATDD agent stream TIED records
+    last_validated:
+      date: 2026-03-24
+      validator: AI Agent
+      result: pass
 # ---
 # Template Record - Copy this block to create new requirements
 # ---

@@ -225,6 +225,158 @@ IMPL-MCP_FEEDBACK_TOOLS:
       date: 2026-03-03
       validator: AI Agent
       result: pass
+IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV:
+  name: AgentStreamArgv.parse_argv wires YAML flags to prompt modules
+  status: Active
+  cross_references:
+    - ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS
+    - REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
+  rationale:
+    why: Entry point builds an ordered list of turns from CLI flags and argv tail per ATDD contract
+    problems_solved:
+      - Ad hoc prompt ordering
+    benefits:
+      - Documented turn order (argv, prompt files, tdd-yaml, lead-checklist-yaml, etc.)
+    upstream_note: tools/agent-stream/lib/agent_stream_argv.rb; atdd eb88236290009b78eb11ea561816f0854176bf12
+  implementation_approach:
+    summary: Parse flags; for each --tdd-yaml call TddLoopPrompts.messages_from_yaml; same for lead checklist and feature batch
+    details:
+      - Module AgentStreamArgv in Ruby
+      - Delegates to TddLoopPrompts, LeadChecklistPrompts, FeatureSpecBatchPrompts
+  code_locations:
+    files:
+      - path: tools/agent-stream/lib/agent_stream_argv.rb
+        description: '[REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML] [ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS] [IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV]'
+      - path: tools/agent-stream/lib/tdd_loop_prompts.rb
+        description: TDD loop YAML message expansion
+      - path: tools/agent-stream/lib/lead_checklist_prompts.rb
+        description: Lead checklist YAML expansion ([PROC-AGENT_REQ_CHECKLIST])
+  traceability:
+    architecture:
+      - ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS
+    requirements:
+      - REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
+    tests:
+      - agent_stream_tdd_yaml_binding_test.rb (upstream atdd)
+    code_annotations:
+      - IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
+  related_decisions:
+    depends_on: []
+    supersedes: []
+    see_also:
+      - IMPL-ATDD-E2E-AGENT_STREAM
+  detail_file: implementation-decisions/IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV.yaml
+  metadata:
+    created:
+      date: 2026-03-24
+      author: AI Agent
+    last_updated:
+      date: 2026-03-24
+      author: AI Agent
+      reason: Import ATDD agent stream TIED records
+    last_validated:
+      date: 2026-03-24
+      validator: AI Agent
+      result: pass
+IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS:
+  name: Export TddLoopPrompts step entries to markdown files
+  status: Active
+  cross_references:
+    - ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS
+    - REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS
+  rationale:
+    why: Optional export path materializes one file per YAML step for workflows that do not use --tdd-yaml
+    problems_solved:
+      - Review and version per-step markdown outside the runner
+    benefits:
+      - Same step_entries_from_yaml as composition layer
+    upstream_note: lib/atdd_export_tdd_prompts.rb in atdd; STDD vendors supporting lib
+  implementation_approach:
+    summary: atdd_export_tdd_prompts uses step_entries_from_yaml and writes sanitized id.md per entry
+    details:
+      - 'STDD: use upstream export_tdd_prompts.rb or replicate thin script calling vendored lib'
+  code_locations:
+    files:
+      - path: tools/agent-stream/lib/atdd_export_tdd_prompts.rb
+        description: Export pipeline [REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS]
+      - path: tools/agent-stream/lib/tdd_loop_prompts.rb
+        description: Shared step parsing
+  traceability:
+    architecture:
+      - ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS
+    requirements:
+      - REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS
+    tests:
+      - export_tdd_prompts_binding_test.rb (upstream atdd)
+    code_annotations:
+      - IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS
+  related_decisions:
+    depends_on: []
+    supersedes: []
+    see_also:
+      - IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
+  detail_file: implementation-decisions/IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS.yaml
+  metadata:
+    created:
+      date: 2026-03-24
+      author: AI Agent
+    last_updated:
+      date: 2026-03-24
+      author: AI Agent
+      reason: Import ATDD agent stream TIED records
+    last_validated:
+      date: 2026-03-24
+      validator: AI Agent
+      result: pass
+IMPL-ATDD-E2E-AGENT_STREAM:
+  name: run_agent_stream main loop and run_stream subprocess harness
+  status: Active
+  cross_references:
+    - ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON
+    - REQ-ATDD-E2E-AGENT_STREAM
+  rationale:
+    why: Orchestrates turns with agent_command and run_stream; chains session_id between turns
+    problems_solved:
+      - Multi-turn automation with single Ruby process
+    benefits:
+      - stderr session_id= enables manual resume later
+    upstream_note: tools/agent-stream/run_agent_stream.rb; atdd eb88236290009b78eb11ea561816f0854176bf12
+  implementation_approach:
+    summary: For each turn build argv for agent CLI; run_stream parses NDJSON; dry-run mode skips subprocess
+    details:
+      - extract_text_fragments for thinking and assistant events
+      - Open3.popen3 streaming
+  code_locations:
+    files:
+      - path: tools/agent-stream/run_agent_stream.rb
+        description: '[REQ-ATDD-E2E-AGENT_STREAM] [ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON] [IMPL-ATDD-E2E-AGENT_STREAM] main and run_stream'
+  traceability:
+    architecture:
+      - ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON
+    requirements:
+      - REQ-ATDD-E2E-AGENT_STREAM
+    tests:
+      - agent_stream_e2e_test.rb (upstream atdd)
+    code_annotations:
+      - IMPL-ATDD-E2E-AGENT_STREAM
+  related_decisions:
+    depends_on: []
+    supersedes: []
+    see_also:
+      - IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
+  detail_file: implementation-decisions/IMPL-ATDD-E2E-AGENT_STREAM.yaml
+  metadata:
+    created:
+      date: 2026-03-24
+      author: AI Agent
+    last_updated:
+      date: 2026-03-24
+      author: AI Agent
+      reason: Import ATDD agent stream TIED records
+    last_validated:
+      date: 2026-03-24
+      validator: AI Agent
+      result: pass
 # ---
 # Template Record - Copy this block to create new implementation decisions
 # ---

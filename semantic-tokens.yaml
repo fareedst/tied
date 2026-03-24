@@ -387,6 +387,118 @@ PROC-TIED_PHASED_DELIVERY:
   metadata:
     registered: "2026-03-16"
     last_updated: "2026-03-16"
+REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML:
+  type: REQ
+  name: Agent stream argv expands TDD YAML into ordered turns
+  category: Tooling
+  status: Active
+  description: Argv parsing expands each --tdd-yaml path into the same turn sequence as TddLoopPrompts.messages_from_yaml
+  cross_references:
+    - ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS
+    - IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
+    - PROC-TIED_DEV_CYCLE
+  source_index: requirements.yaml
+  detail_file: requirements/REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML.yaml
+  metadata:
+    registered: "2026-03-24"
+    last_updated: "2026-03-24"
+REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS:
+  type: REQ
+  name: Export TDD YAML steps to per-step markdown files
+  category: Tooling
+  status: Active
+  description: Export materializes each YAML step entry as one markdown file with the formatted message body
+  cross_references:
+    - ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS
+    - IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS
+    - PROC-TIED_DEV_CYCLE
+  source_index: requirements.yaml
+  detail_file: requirements/REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS.yaml
+  metadata:
+    registered: "2026-03-24"
+    last_updated: "2026-03-24"
+REQ-ATDD-E2E-AGENT_STREAM:
+  type: REQ
+  name: E2E agent subprocess stream-json harness with session resume
+  category: Tooling
+  status: Active
+  description: End-to-end run_agent_stream turn executes the agent subprocess and surfaces stream-json text plus session_id for resume
+  cross_references:
+    - ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON
+    - IMPL-ATDD-E2E-AGENT_STREAM
+    - PROC-TIED_DEV_CYCLE
+  source_index: requirements.yaml
+  detail_file: requirements/REQ-ATDD-E2E-AGENT_STREAM.yaml
+  metadata:
+    registered: "2026-03-24"
+    last_updated: "2026-03-24"
+ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS:
+  type: ARCH
+  name: Delegate YAML prompt semantics to TddLoopPrompts modules
+  status: Active
+  description: Composition layers delegate YAML semantics to TddLoopPrompts (no duplicate parsing rules)
+  cross_references:
+    - REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
+    - REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS
+    - IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
+    - IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS
+  source_index: architecture-decisions.yaml
+  detail_file: architecture-decisions/ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS.yaml
+  metadata:
+    registered: "2026-03-24"
+    last_updated: "2026-03-24"
+ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON:
+  type: ARCH
+  name: Subprocess NDJSON stream-json protocol for agent CLI
+  status: Active
+  description: NDJSON stream-json protocol consumed from an external agent process via Open3
+  cross_references:
+    - REQ-ATDD-E2E-AGENT_STREAM
+    - IMPL-ATDD-E2E-AGENT_STREAM
+  source_index: architecture-decisions.yaml
+  detail_file: architecture-decisions/ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON.yaml
+  metadata:
+    registered: "2026-03-24"
+    last_updated: "2026-03-24"
+IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV:
+  type: IMPL
+  name: AgentStreamArgv.parse_argv wires --tdd-yaml to messages_from_yaml
+  status: Active
+  description: AgentStreamArgv.parse_argv wires --tdd-yaml to messages_from_yaml
+  cross_references:
+    - ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS
+    - REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
+  source_index: implementation-decisions.yaml
+  detail_file: implementation-decisions/IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV.yaml
+  metadata:
+    registered: "2026-03-24"
+    last_updated: "2026-03-24"
+IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS:
+  type: IMPL
+  name: AtddExportTddPrompts.export_from_yaml wires step_entries_from_yaml to per-id .md files
+  status: Active
+  description: AtddExportTddPrompts.export_from_yaml wires step_entries_from_yaml to per-id .md files
+  cross_references:
+    - ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS
+    - REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS
+  source_index: implementation-decisions.yaml
+  detail_file: implementation-decisions/IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS.yaml
+  metadata:
+    registered: "2026-03-24"
+    last_updated: "2026-03-24"
+IMPL-ATDD-E2E-AGENT_STREAM:
+  type: IMPL
+  name: run_agent_stream run_stream loop; testability e2e_only per docs/run-agent-stream-impl-e2e.md
+  status: Active
+  description: run_agent_stream run_stream loop; subprocess stream-json harness
+  cross_references:
+    - ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON
+    - REQ-ATDD-E2E-AGENT_STREAM
+  source_index: implementation-decisions.yaml
+  detail_file: implementation-decisions/IMPL-ATDD-E2E-AGENT_STREAM.yaml
+  metadata:
+    registered: "2026-03-24"
+    last_updated: "2026-03-24"
 # ---
 # Template Record - Copy this block to create new tokens
 # ---

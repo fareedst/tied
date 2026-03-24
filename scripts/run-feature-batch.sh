@@ -24,7 +24,7 @@
 #
 # Defaults:
 #   workspace:              $HOME/Documents/dev/swift/CursorHookViewer
-#   runner:                 $HOME/Documents/dev/cursor/atdd/run_agent_stream.rb
+#   runner:                 <repo>/tools/agent-stream/run_agent_stream.rb (resolved from this script)
 #   lead checklist yaml:    $HOME/Documents/dev/chatgpt/stdd/docs/agent-req-implementation-checklist.yaml
 #   prompt file:            $workspace/agent-preload-contract.yaml
 #   feature spec batch:     $workspace/prompts/all.yaml
@@ -109,9 +109,13 @@ require_directory() {
 }
 
 main() {
+  local _script_dir
+  _script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+  local _repo_root
+  _repo_root="$(cd "${_script_dir}/.." && pwd)"
   local default_workspace="$HOME/Documents/dev/swift/CursorHookViewer"
-  local default_runner="$HOME/Documents/dev/cursor/atdd/run_agent_stream.rb"
-  local default_checklist="$HOME/Documents/dev/chatgpt/stdd/docs/agent-req-implementation-checklist.yaml"
+  local default_runner="${_repo_root}/tools/agent-stream/run_agent_stream.rb"
+  local default_checklist="${_repo_root}/docs/agent-req-implementation-checklist.yaml"
 
   local dry_run=0
   local session_id=""

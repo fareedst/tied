@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **ATDD agent stream import (permanence)** — Full TIED traceability for the Cursor `agent` CLI harness (`REQ-ATDD-*`, `ARCH-ATDD-*`, `IMPL-ATDD-*`) in root and `semantic-tokens.yaml` / index YAML; detail files under `requirements/`, `architecture-decisions/`, `implementation-decisions/` with IMPL `essence_pseudocode` and upstream note (commit `eb88236290009b78eb11ea561816f0854176bf12`).
+- **`tools/agent-stream/`** — Vendored `run_agent_stream.rb`, `export_tdd_prompts.rb`, and `lib/` (argv/YAML expansion, TDD loop, lead checklist, feature batch prompts). README documents usage from repo root.
+- **Docs** — `docs/run-agent-stream-tied.md` (index), `docs/run-agent-stream-impl-e2e.md`, `docs/run-agent-stream-impl-composition.md`, `docs/run-agent-stream-upstream.md`, `docs/tdd_development_loop.yaml` (six-turn loop for `--tdd-yaml`).
+- **`scripts/run-feature-batch.sh`** — Default runner and checklist paths are resolved relative to the repository (`tools/agent-stream/run_agent_stream.rb`, `docs/agent-req-implementation-checklist.yaml`) instead of a fixed `$HOME/.../atdd` path.
+- **`mcp-server/src/consistency-validator.ts`** — `extractTokensFromText` bracket token regex allows hyphens in suffixes (e.g. `[REQ-ATDD-COMPOS-...]`) so pseudocode validation matches multi-segment token IDs.
+
 ### Fixed
 
 - **`.cursor/hooks/log.rb`** — Transcript embedding is configurable (`--transcript` or env `CURSOR_HOOK_LOG_TRANSCRIPT`): default **`none`** writes `transcript_path` and `transcript_meta` (`bytes` only) instead of loading the full JSONL into every record (avoids O(n²) YAML growth). Modes: **`full`** (legacy behavior), **`tail:N`**, **`end-only`** (full body on `sessionEnd` / `stop` / `beforeSubmitPrompt` only), **`delta`** (append `transcript_delta` with new JSONL since last byte offset; offsets stored under `transcript_offsets` in `~/.cursor/logs/.conversation_start_times.json` per conversation).
@@ -29,7 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts/dedupe_transcript_yaml.rb** — Deduplicate long (3+ line) text in hook transcript YAML (first 16 hex chars of SHA256): finds any hash with a `content` key (depth-first preorder), handling array parts (`type: text` / `text`), scalar `content` strings (sibling `digest` on the parent hash), and `content.value` hashes; per-file backup, validation, backup removed on success (`--dry-run`, `--keep-backup`, `--force`). Default-on post-dedupe pruning (`--[no-]prune-keys`): removes keys with YAML null / nil (bare `key:`), empty string/array/hash, all `conversation_id`, and `kind` when value is `unknown`; stats include `pruned_keys`.
 - **`scripts/transcript_yaml_prune.rb`** — Shared post-order prune for transcript/hook YAML trees (used by `scripts/dedupe_transcript_yaml.rb` and `.cursor/hooks/log.rb`).
 - **`scripts/yaml_minimize.sh`** — Stream-edit large YAML to drop empty-ish key lines (exec/preview/approve modes; O(1) memory per line).
-- **`scripts/run-feature-batch.sh`** — ATDD agent stream helper for a feature spec batch (workspace, runner, checklist YAML, prompt file, and related options).
+- **`scripts/run-feature-batch.sh`** — agent stream helper for a feature spec batch (workspace, runner, checklist YAML, prompt file, and related options).
 - **`docs/conversation-log-yaml-structure-and-agent-difficulties.md`** — Hook YAML record shape and agent-facing pitfalls when working from conversation logs.
 - **`mcp-server/package.json`** — `npm test` includes `requirement-list-state-guide` and `req-impl-state-guide` unit tests.
 - **MCP `req_impl_state_guide`** — Nested state guide: client-supplied `requirements` (same as `requirement_list_state_guide`) × full agent REQ checklist steps per spec (`agent_req_state_guide` record order). One `continuation_state` until terminal **`end_req_impl`**. Tool descriptor, `mcp-server/src/tools/req-impl-state-guide.ts`, tests. Workflow doc `docs/req-impl-state-guide-agent-workflow.md` (copied via `copy_files.sh` to `tied/docs/`).

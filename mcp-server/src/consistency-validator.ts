@@ -104,9 +104,9 @@ export function extractTokensFromText(text: string): { req: string[]; arch: stri
   const req: string[] = [];
   const arch: string[] = [];
   const impl: string[] = [];
-  const reReq = /\[(REQ-[A-Z0-9_]+)\]/g;
-  const reArch = /\[(ARCH-[A-Z0-9_]+)\]/g;
-  const reImpl = /\[(IMPL-[A-Z0-9_]+)\]/g;
+  const reReq = /\[(REQ-[A-Z0-9_-]+)\]/g;
+  const reArch = /\[(ARCH-[A-Z0-9_-]+)\]/g;
+  const reImpl = /\[(IMPL-[A-Z0-9_-]+)\]/g;
   let m: RegExpExecArray | null;
   while ((m = reReq.exec(text)) !== null) req.push(m[1]);
   while ((m = reArch.exec(text)) !== null) arch.push(m[1]);

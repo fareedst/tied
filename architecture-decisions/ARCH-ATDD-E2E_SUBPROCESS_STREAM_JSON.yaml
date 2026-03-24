@@ -1,0 +1,51 @@
+ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON:
+  name: Subprocess NDJSON stream-json protocol for agent CLI
+  status: Active
+  cross_references:
+    - REQ-ATDD-E2E-AGENT_STREAM
+  rationale:
+    why: The agent binary is an external CLI; Open3 provides stdout line streaming and stderr forwarding suitable for NDJSON
+    problems_solved:
+      - Cannot embed stream-json in-process
+    benefits:
+      - Testable with PATH stub; mirrors real Cursor agent usage
+    upstream_note: Imported from atdd commit eb88236290009b78eb11ea561816f0854176bf12
+  alternatives_considered:
+    - name: HTTP API client
+      pros:
+        - In-process
+      cons:
+        - Not how Cursor agent CLI works
+      rejected_reason: Requirements target the official agent subprocess
+  implementation_approach:
+    summary: Open3.popen3 with line-wise JSON parse; extract assistant/thinking text; capture session_id
+    details:
+      - Forward stderr to process stderr
+      - Non-success exit status fails the harness
+  traceability:
+    requirements:
+      - REQ-ATDD-E2E-AGENT_STREAM
+    implementation:
+      - IMPL-ATDD-E2E-AGENT_STREAM
+    tests:
+      - agent_stream_e2e_test.rb
+    code_annotations:
+      - ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON
+  related_decisions:
+    depends_on: []
+    informs:
+      - IMPL-ATDD-E2E-AGENT_STREAM
+    see_also: []
+  detail_file: architecture-decisions/ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON.yaml
+  metadata:
+    created:
+      date: 2026-03-24
+      author: AI Agent
+    last_updated:
+      date: 2026-03-24
+      author: AI Agent
+      reason: Import ATDD agent stream TIED records
+    last_validated:
+      date: 2026-03-24
+      validator: AI Agent
+      result: pass

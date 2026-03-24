@@ -1,0 +1,45 @@
+REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS:
+  name: Export TDD YAML steps to per-step markdown files
+  category: Functional
+  priority: P2
+  status: Implemented
+  rationale:
+    why: Some workflows prefer file-per-step prompts instead of --tdd-yaml expansion; export must mirror TddLoopPrompts.step_entries_from_yaml
+    problems_solved:
+      - Need for reviewable .md artifacts per loop step
+    benefits:
+      - Repeatable prompt files under prompts/tdd/generated (when using export script)
+    upstream_note: Imported from atdd commit eb88236290009b78eb11ea561816f0854176bf12; export script tools/agent-stream/export_tdd_prompts.rb
+  satisfaction_criteria:
+    - criterion: Each YAML step entry becomes one markdown file named from sanitized step id with message body from format_step
+    - criterion: File count equals entry count from step_entries_from_yaml
+  validation_criteria:
+    - method: Composition tests (upstream atdd)
+      coverage: test/composition/export_tdd_prompts_binding_test.rb
+  traceability:
+    architecture:
+      - ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS
+    implementation:
+      - IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS
+    tests:
+      - export_tdd_prompts_binding_test.rb
+    code_annotations:
+      - REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS
+  related_requirements:
+    depends_on: []
+    related_to:
+      - REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
+    supersedes: []
+  detail_file: requirements/REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS.yaml
+  metadata:
+    created:
+      date: 2026-03-24
+      author: AI Agent
+    last_updated:
+      date: 2026-03-24
+      author: AI Agent
+      reason: Import ATDD agent stream TIED records
+    last_validated:
+      date: 2026-03-24
+      validator: AI Agent
+      result: pass
