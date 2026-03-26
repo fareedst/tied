@@ -136,6 +136,41 @@ export function isTokenInMethodology(index: IndexName, token: string): boolean {
 }
 
 /**
+ * True when the token exists only in the methodology index, not in the project index
+ * ([PROC-TIED_METHODOLOGY_READONLY]). Used to exclude or label methodology-only records in
+ * traceability reports.
+ */
+export function isMethodologyOnlyIndexToken(index: IndexName, token: string): boolean {
+  const project = loadProjectIndex(index);
+  const meth = loadMethodologyIndex(index);
+  const inP = Boolean(
+    project && token in project && typeof project[token] === "object" && project[token] !== null
+  );
+  const inM = Boolean(
+    meth && token in meth && typeof meth[token] === "object" && meth[token] !== null
+  );
+  return inM && !inP;
+}
+
+/**
+ * REQ tokens for client traceability (optionally excluding methodology-only requirements).
+ */
+export function listRequirementTokensForTraceability(excludeMethodologyOnly: boolean): string[] {
+  const tokens = listTokens("requirements").filter((t) => t.startsWith("REQ-"));
+  if (!excludeMethodologyOnly) return tokens;
+  return tokens.filter((t) => !isMethodologyOnlyIndexToken("requirements", t));
+}
+
+/**
+ * IMPL tokens for client traceability (optionally excluding methodology-only decisions).
+ */
+export function listImplementationTokensForTraceability(excludeMethodologyOnly: boolean): string[] {
+  const tokens = listTokens("implementation").filter((t) => t.startsWith("IMPL-"));
+  if (!excludeMethodologyOnly) return tokens;
+  return tokens.filter((t) => !isMethodologyOnlyIndexToken("implementation", t));
+}
+
+/**
  * Get a single record by token from an index.
  */
 export function getRecord(

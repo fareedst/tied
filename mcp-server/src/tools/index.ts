@@ -57,6 +57,34 @@ import {
 } from "../dependency-graph.js";
 import { updateStatusFromPassedTokens } from "../verify.js";
 import { resolveRequirementListStateGuide } from "./requirement-list-state-guide.js";
+import { runScopedAnalysis } from "../analysis/scoped-analysis.js";
+import { runPlumbDiffImpactPreview } from "../analysis/plumb-diff-impact-preview.js";
+import {
+  addProposal,
+  approveProposal,
+  extractDiffProposalCandidates,
+  listProposals,
+  loadQueue,
+  markApplied,
+  parseSessionExportSegments,
+  proposalsFromSessionSegments,
+  rejectProposal,
+  updatePendingProposal,
+} from "../analysis/leap-proposal-queue.js";
+
+/** LEAP proposal MCP tools: JSON envelope; catch sync throws from fs/git. [REQ-LEAP_PROPOSAL_QUEUE] */
+function leapMcpJson(payload: unknown) {
+  return textContent(JSON.stringify(payload, null, 2));
+}
+
+function safeLeapCall<T>(fn: () => T) {
+  try {
+    return leapMcpJson(fn());
+  } catch (e: unknown) {
+    const msg = e instanceof Error ? e.message : String(e);
+    return leapMcpJson({ ok: false, error: msg });
+  }
+}
 
 const INDEX_ENUM = z.enum([
   "requirements",
@@ -1089,6 +1117,405 @@ export const allTools = [
     handler: async (args: { requirements?: unknown[]; current_state?: string }) => {
       const next = resolveRequirementListStateGuide(args);
       return textContent(JSON.stringify(next, null, 2));
+    },
+  },
+  {
+    name: "tied_scoped_analysis_run",
+    config: {
+      description:
+        "Run scoped TIED analysis over explicit roots while excluding ignored paths via gitignore-style patterns. Returns an effective summary (roots used, ignore source, skipped paths count) plus optional token discovery, registry gap report, traceability gap report (REQ↔tests, REQ↔production markers, optional IMPL↔tests), or impact preview.",
+      inputSchema: z.object({
+        mode: z
+          .enum([
+            "walk_summary",
+            "token_scan",
+            "gap_report",
+            "impact_preview",
+            "traceability_gap_report",
+          ])
+          .optional()
+          .describe(
+            "What to compute: walk_summary, token_scan, gap_report (tokens in scan but not in semantic-tokens), impact_preview, or traceability_gap_report (index REQ/IMPL vs scoped tests/production markers; see .tiedanalysis.yaml traceability_gap)."
+          ),
+        roots: z
+          .array(z.string())
+          .optional()
+          .describe("Explicit analysis roots. If omitted, uses config/default roots. If provided as an empty array, falls back to default roots."),
+        config_path: z
+          .string()
+          .optional()
+          .describe("Path to .tiedanalysis.yaml (cwd-relative unless absolute). Default: .tiedanalysis.yaml"),
+        ignore_file: z
+          .string()
+          .optional()
+          .describe("Path to .tiedignore (cwd-relative unless absolute). Default: .tiedignore"),
+        ignore_patterns: z
+          .array(z.string())
+          .optional()
+          .describe("Inline gitignore-style patterns appended to ignore file patterns."),
+        follow_symlinks: z
+          .boolean()
+          .optional()
+          .describe("If false, skip symlinked roots/entries; if true, follow symlinks."),
+        include_extensions: z
+          .array(z.string())
+          .optional()
+          .describe("Token scan file extensions to include, e.g. [.ts, .md]."),
+        max_file_bytes: z
+          .number()
+          .optional()
+          .describe("Max bytes per file to scan for tokens."),
+        max_files: z
+          .number()
+          .optional()
+          .describe("Max number of eligible files to scan for tokens."),
+        traceability_strict: z
+          .boolean()
+          .optional()
+          .describe(
+            "When mode is traceability_gap_report: if true, exit_policy.suggested_exit_code is 1 when any traceability dimension reports gaps (overrides traceability_gap.strict from config)."
+          ),
+        traceability_requirement_tokens: z
+          .array(z.string())
+          .optional()
+          .describe(
+            "Optional explicit REQ-* token list to evaluate (traceability_gap_report only). When set and non-empty, only these tokens are checked for traceability dimensions."
+          ),
+        traceability_implementation_tokens: z
+          .array(z.string())
+          .optional()
+          .describe(
+            "Optional explicit IMPL-* token list to evaluate (traceability_gap_report only). When set and non-empty, only these tokens are checked for traceability dimensions."
+          ),
+      }),
+    },
+    handler: async (args: any) => {
+      try {
+        const result = runScopedAnalysis(args);
+        return textContent(JSON.stringify(result, null, 2));
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : String(e);
+        return textContent(JSON.stringify({ ok: false, error: msg }, null, 2));
+      }
+    },
+  },
+  {
+    name: "tied_plumb_diff_impact_preview",
+    config: {
+      description:
+        "Deterministic plumb diff-style impact preview over git diffs. Scans staged/unstaged diff hunks for [REQ-*]/[ARCH-*]/[IMPL-*] tokens, maps impacted tokens to TIED decisions, and returns a versioned JSON report plus a human summary. No network/LLM calls.",
+      inputSchema: z.object({
+        selection: z
+          .enum(["staged", "unstaged", "both"])
+          .optional()
+          .describe("Which git diff to scan."),
+        paths: z
+          .array(z.string())
+          .optional()
+          .describe(
+            "Optional explicit file path list to restrict scanning (cwd-relative or absolute)."
+          ),
+        include_removed: z
+          .boolean()
+          .optional()
+          .default(true)
+          .describe("Include tokens found on removed (-) diff lines."),
+        max_files: z
+          .number()
+          .optional()
+          .default(200)
+          .describe(
+            "Max candidate files scanned before deterministic truncation."
+          ),
+        max_patch_bytes: z
+          .number()
+          .optional()
+          .default(250000)
+          .describe(
+            "Max patch bytes per file before token extraction truncates for that file."
+          ),
+        max_total_patch_bytes: z
+          .number()
+          .optional()
+          .default(2000000)
+          .describe(
+            "Max total patch bytes scanned across all files."
+          ),
+      }),
+    },
+    handler: async (args: {
+      selection?: "staged" | "unstaged" | "both";
+      paths?: string[];
+      include_removed?: boolean;
+      max_files?: number;
+      max_patch_bytes?: number;
+      max_total_patch_bytes?: number;
+    }) => {
+      const report = runPlumbDiffImpactPreview({
+        selection: args.selection ?? "both",
+        paths: args.paths,
+        include_removed: args.include_removed ?? true,
+        max_files: args.max_files ?? 200,
+        max_patch_bytes: args.max_patch_bytes ?? 250000,
+        max_total_patch_bytes: args.max_total_patch_bytes ?? 2000000,
+      });
+      return textContent(JSON.stringify(report, null, 2));
+    },
+  },
+  {
+    name: "tied_leap_proposal_list",
+    config: {
+      description:
+        "List optional LEAP documentation proposals (non-canonical; not REQ/ARCH/IMPL). Stored under project_root/leap-proposals/queue.json. Use after approval to drive IMPL→ARCH→REQ updates via yaml MCP tools; this tool never writes TIED YAML.",
+      inputSchema: z.object({
+        project_root: z
+          .string()
+          .optional()
+          .describe("Repo root containing leap-proposals/ (default: process.cwd())"),
+        status: z
+          .enum(["pending", "rejected", "approved", "applied"])
+          .optional()
+          .describe("Filter by proposal status"),
+      }),
+    },
+    handler: async (args: { project_root?: string; status?: string }) => {
+      return safeLeapCall(() => {
+        const root = args.project_root ?? process.cwd();
+        const list = listProposals(
+          root,
+          args.status ? { status: args.status as "pending" | "rejected" | "approved" | "applied" } : undefined
+        );
+        return { ok: true, count: list.length, proposals: list };
+      });
+    },
+  },
+  {
+    name: "tied_leap_proposal_add",
+    config: {
+      description:
+        "Add a manual LEAP documentation proposal (pending). Proposals are non-canonical until you apply changes through yaml MCP tools after explicit approval.",
+      inputSchema: z.object({
+        project_root: z.string().optional().describe("Repo root (default: process.cwd())"),
+        title: z.string().min(1).describe("Short title"),
+        summary: z.string().min(1).describe("Proposal body (markdown/plain)"),
+        suggested_leap_order: z.enum(["impl", "arch", "req", "mixed"]).optional(),
+        leap_hints: z.record(z.unknown()).optional().describe("Optional structured hints for the approver"),
+      }),
+    },
+    handler: async (args: {
+      project_root?: string;
+      title: string;
+      summary: string;
+      suggested_leap_order?: "impl" | "arch" | "req" | "mixed";
+      leap_hints?: Record<string, unknown>;
+    }) => {
+      return safeLeapCall(() => {
+        const p = addProposal(args.project_root ?? process.cwd(), {
+          kind: "manual",
+          title: args.title,
+          summary: args.summary,
+          source: { type: "manual" },
+          suggested_leap_order: args.suggested_leap_order,
+          leap_hints: args.leap_hints,
+        });
+        return { ok: true, proposal: p };
+      });
+    },
+  },
+  {
+    name: "tied_leap_proposal_extract_diff",
+    config: {
+      description:
+        "OPT-IN deterministic extraction from git diffs: suggests documentation hints from added (+) lines. No LLM/network. Requires explicit_opt_in=true. Appends proposals to the queue (pending). Does not write TIED YAML.",
+      inputSchema: z.object({
+        explicit_opt_in: z
+          .boolean()
+          .describe("Must be true to run extraction (off by default at the tool boundary)."),
+        project_root: z.string().optional(),
+        selection: z.enum(["staged", "unstaged", "both"]).optional(),
+        paths: z.array(z.string()).optional(),
+        max_proposals: z.number().optional(),
+      }),
+    },
+    handler: async (args: {
+      explicit_opt_in: boolean;
+      project_root?: string;
+      selection?: "staged" | "unstaged" | "both";
+      paths?: string[];
+      max_proposals?: number;
+    }) => {
+      return safeLeapCall(() => {
+        if (!args.explicit_opt_in) {
+          return {
+            ok: false,
+            error: "explicit_opt_in must be true to run diff extraction (optional feature; off by default).",
+          };
+        }
+        const root = args.project_root ?? process.cwd();
+        const extracted = extractDiffProposalCandidates({
+          projectRoot: root,
+          selection: args.selection ?? "staged",
+          paths: args.paths,
+          max_proposals: args.max_proposals ?? 40,
+        });
+        if (extracted.error) {
+          return { ok: false, error: extracted.error, extraction: extracted };
+        }
+        const created: unknown[] = [];
+        for (const c of extracted.candidates) {
+          created.push(
+            addProposal(root, {
+              kind: "inferred_diff",
+              title: c.title,
+              summary: c.summary,
+              source: {
+                type: "git_diff",
+                selection: args.selection ?? "staged",
+                paths: args.paths,
+              },
+              suggested_leap_order: "impl",
+              leap_hints: { file: c.file, line_text: c.line_text },
+            })
+          );
+        }
+        return {
+          ok: true,
+          created_count: created.length,
+          created,
+          extraction: extracted,
+        };
+      });
+    },
+  },
+  {
+    name: "tied_leap_proposal_import_session",
+    config: {
+      description:
+        "OPT-IN: split session export text (or JSON array of {content}) into pending proposals. No LLM. Requires explicit_opt_in=true. Does not write TIED YAML.",
+      inputSchema: z.object({
+        explicit_opt_in: z.boolean().describe("Must be true to import."),
+        project_root: z.string().optional(),
+        raw_text: z.string().describe("Session export or transcript text"),
+        label: z.string().optional().describe("Optional label for proposal titles"),
+        max_segments: z.number().optional().default(25),
+      }),
+    },
+    handler: async (args: {
+      explicit_opt_in: boolean;
+      project_root?: string;
+      raw_text: string;
+      label?: string;
+      max_segments?: number;
+    }) => {
+      return safeLeapCall(() => {
+        if (!args.explicit_opt_in) {
+          return { ok: false, error: "explicit_opt_in must be true to import session segments." };
+        }
+        const root = args.project_root ?? process.cwd();
+        const segments = parseSessionExportSegments(args.raw_text, args.max_segments ?? 25);
+        const shaped = proposalsFromSessionSegments(segments, args.label);
+        const created: unknown[] = [];
+        for (const s of shaped) {
+          created.push(addProposal(root, s));
+        }
+        return { ok: true, created_count: created.length, created, segment_count: segments.length };
+      });
+    },
+  },
+  {
+    name: "tied_leap_proposal_reject",
+    config: {
+      description:
+        "Reject a proposal by id. Records status in queue + audit log; does not mutate TIED YAML.",
+      inputSchema: z.object({
+        project_root: z.string().optional(),
+        proposal_id: z.string().min(1),
+        reason: z.string().optional(),
+      }),
+    },
+    handler: async (args: { project_root?: string; proposal_id: string; reason?: string }) => {
+      return safeLeapCall(() => {
+        const r = rejectProposal(args.project_root ?? process.cwd(), args.proposal_id, args.reason);
+        return r.ok ? { ok: true, proposal: r.proposal } : { ok: false, error: r.error };
+      });
+    },
+  },
+  {
+    name: "tied_leap_proposal_approve",
+    config: {
+      description:
+        "Approve a pending proposal (ready for LEAP updates). Does not write project TIED YAML; apply changes with yaml_index_* MCP tools, then tied_leap_proposal_mark_applied. Run lint_yaml and tied_validate_consistency after YAML edits.",
+      inputSchema: z.object({
+        project_root: z.string().optional(),
+        proposal_id: z.string().min(1),
+        note: z.string().optional(),
+      }),
+    },
+    handler: async (args: { project_root?: string; proposal_id: string; note?: string }) => {
+      return safeLeapCall(() => {
+        const r = approveProposal(args.project_root ?? process.cwd(), args.proposal_id, args.note);
+        return r.ok ? { ok: true, proposal: r.proposal } : { ok: false, error: r.error };
+      });
+    },
+  },
+  {
+    name: "tied_leap_proposal_mark_applied",
+    config: {
+      description:
+        "Mark an approved proposal as applied after LEAP updates were written via MCP yaml tools. Does not perform YAML writes itself.",
+      inputSchema: z.object({
+        project_root: z.string().optional(),
+        proposal_id: z.string().min(1),
+      }),
+    },
+    handler: async (args: { project_root?: string; proposal_id: string }) => {
+      return safeLeapCall(() => {
+        const r = markApplied(args.project_root ?? process.cwd(), args.proposal_id);
+        return r.ok ? { ok: true, proposal: r.proposal } : { ok: false, error: r.error };
+      });
+    },
+  },
+  {
+    name: "tied_leap_proposal_update",
+    config: {
+      description:
+        "Edit title/summary/leap_hints for a proposal in pending status only.",
+      inputSchema: z.object({
+        project_root: z.string().optional(),
+        proposal_id: z.string().min(1),
+        title: z.string().optional(),
+        summary: z.string().optional(),
+        leap_hints: z.record(z.unknown()).optional(),
+      }),
+    },
+    handler: async (args: {
+      project_root?: string;
+      proposal_id: string;
+      title?: string;
+      summary?: string;
+      leap_hints?: Record<string, unknown>;
+    }) => {
+      return safeLeapCall(() => {
+        const r = updatePendingProposal(args.project_root ?? process.cwd(), args.proposal_id, {
+          title: args.title,
+          summary: args.summary,
+          leap_hints: args.leap_hints,
+        });
+        return r.ok ? { ok: true, proposal: r.proposal } : { ok: false, error: r.error };
+      });
+    },
+  },
+  {
+    name: "tied_leap_proposal_queue_snapshot",
+    config: {
+      description:
+        "Return raw queue.json contents for backup or inspection (non-canonical proposals).",
+      inputSchema: z.object({
+        project_root: z.string().optional(),
+      }),
+    },
+    handler: async (args: { project_root?: string }) => {
+      return safeLeapCall(() => loadQueue(args.project_root ?? process.cwd()));
     },
   },
 ];

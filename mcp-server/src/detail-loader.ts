@@ -94,6 +94,19 @@ export function getProjectDetailPath(token: string): string | null {
 export const DETAIL_MARKDOWN_RAW = "_raw_markdown";
 export const DETAIL_FORMAT = "_format";
 
+/** Multi-doc YAML (e.g. tied/methodology/* bundled files): find the document whose top-level key is `token`. */
+function yamlRecordForToken(raw: string, token: string): Record<string, unknown> | null {
+  const docs = yaml.loadAll(raw) as unknown[];
+  for (const data of docs) {
+    if (data === null || typeof data !== "object" || Array.isArray(data)) continue;
+    const record = (data as Record<string, unknown>)[token];
+    if (record !== null && typeof record === "object" && !Array.isArray(record)) {
+      return record as Record<string, unknown>;
+    }
+  }
+  return null;
+}
+
 /**
  * Load a detail file. For .yaml returns the record (value of the single top-level key).
  * For .md returns { _raw_markdown, _format: "markdown" }. Returns null if missing or invalid.
@@ -106,11 +119,7 @@ export function loadDetail(token: string): Record<string, unknown> | null {
     if (filePath.endsWith(".md")) {
       return { [DETAIL_MARKDOWN_RAW]: raw, [DETAIL_FORMAT]: "markdown" };
     }
-    const data = yaml.load(raw) as unknown;
-    if (data === null || typeof data !== "object" || Array.isArray(data)) return null;
-    const record = (data as Record<string, unknown>)[token];
-    if (record === null || typeof record !== "object" || Array.isArray(record)) return null;
-    return record as Record<string, unknown>;
+    return yamlRecordForToken(raw, token);
   } catch {
     return null;
   }

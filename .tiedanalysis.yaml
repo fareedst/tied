@@ -1,0 +1,30 @@
+roots: []
+default_roots:
+  - project_root
+  - TIED_BASE_PATH
+ignore_file: .tiedignore
+follow_symlinks: false
+token_scan:
+  include_extensions:
+    - .ts
+    - .tsx
+    - .js
+    - .rb
+    - .md
+    - .yaml
+    - .yml
+    - .json
+  max_file_bytes: 250000
+  max_files: 5000
+# Optional Plumb-style traceability gap report (mode: traceability_gap_report).
+# traceability_gap:
+#   dimensions:
+#     req_without_test: true
+#     req_without_implementation: true
+#     impl_without_test: false
+#   test_file:
+#     path_contains: ["__tests__", "/tests/", "/test/"]
+#     basename_suffixes: [".test.ts", ".test.tsx", ".spec.ts"]
+#   methodology_path_markers: ["tied/methodology/"]
+#   exclude_methodology_only_records: true
+#   strict: false

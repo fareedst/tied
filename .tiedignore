@@ -1,0 +1,5 @@
+# Scoped analysis ignores (gitignore-style).
+node_modules/
+dist/
+generated/
+
