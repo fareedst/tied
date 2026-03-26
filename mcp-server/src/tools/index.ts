@@ -56,11 +56,7 @@ import {
   getRequirementStatusAndPriority,
 } from "../dependency-graph.js";
 import { updateStatusFromPassedTokens } from "../verify.js";
-import { resolveTddStateGuide } from "./tdd-state-guide.js";
-import { resolveDocumentationFirstStateGuide } from "./documentation-first-state-guide.js";
-import { resolveAgentReqStateGuide } from "./agent-req-state-guide.js";
 import { resolveRequirementListStateGuide } from "./requirement-list-state-guide.js";
-import { resolveReqImplStateGuide } from "./req-impl-state-guide.js";
 
 const INDEX_ENUM = z.enum([
   "requirements",
@@ -1071,65 +1067,10 @@ export const allTools = [
     },
   },
   {
-    name: "tdd_state_guide",
-    config: {
-      description:
-        "Guide the client through the TDD progression states. The wrapper should pass current_state via arguments.current_state. Call with no current_state to get S09.RED; call with current_state to get the next record. Terminal state end_tdd (legacy end alias). States: S09.RED through S11. Unknown non-empty states return error. The response includes the selected record fields plus id, guidance, and is_end.",
-      inputSchema: z.object({
-        current_state: z
-          .string()
-          .optional()
-          .describe("Current state supplied by the wrapper as arguments.current_state. Omit or pass an empty string to receive S09.RED. Unknown non-empty states return error."),
-      }),
-    },
-    handler: async (args: { current_state?: string }) => {
-      const next = resolveTddStateGuide(args.current_state);
-      return textContent(JSON.stringify(next, null, 2));
-    },
-  },
-  {
-    name: "documentation_first_state_guide",
-    config: {
-      description:
-        "Guide the client through the documentation-first checklist states (S01 through S06.6). Pass current_state via arguments.current_state. Call with no current_state to get S01; call with current_state to get the next record. Terminal end_documentation_first (legacy end alias). States S01–S06.6. Unknown non-empty states return error. Response includes state, guidance, is_end, and the selected record (id, title, stage, goals, tasks, outcomes).",
-      inputSchema: z.object({
-        current_state: z
-          .string()
-          .optional()
-          .describe(
-            "Current state (arguments.current_state). Omit or empty to receive S01. Unknown non-empty states return error."
-          ),
-      }),
-    },
-    handler: async (args: { current_state?: string }) => {
-      const next = resolveDocumentationFirstStateGuide(args.current_state);
-      return textContent(JSON.stringify(next, null, 2));
-    },
-  },
-  {
-    name: "agent_req_state_guide",
-    config: {
-      description:
-        "Guide the client through the full agent REQ implementation checklist states (S01 through S16). Pass current_state via arguments.current_state. Call with no current_state to get S01; call with current_state to get the next record. Terminal end_agent_req (legacy end alias). Full checklist S01–S16. Unknown non-empty states return error. Response includes state, guidance, is_end, and the selected record (id, title, stage, goals, tasks, outcomes).",
-      inputSchema: z.object({
-        current_state: z
-          .string()
-          .optional()
-          .describe(
-            "Current state (arguments.current_state). Omit or empty to receive S01. Unknown non-empty states return error."
-          ),
-      }),
-    },
-    handler: async (args: { current_state?: string }) => {
-      const next = resolveAgentReqStateGuide(args.current_state);
-      return textContent(JSON.stringify(next, null, 2));
-    },
-  },
-  {
     name: "requirement_list_state_guide",
     config: {
       description:
-        "Client-supplied requirement list in array order. First call MUST pass non-empty requirements; omit current_state. Later calls: current_state = continuation_state from prior response only. Until id end_requirement_list (is_end) or error. Per requirement: agent_req_state_guide through end_agent_req, strict TDD. Terminal: id end_requirement_list. Error: empty list, bad token, validation failure.",
+        "Client-supplied requirement list in array order. First call MUST pass non-empty requirements; omit current_state. Later calls: current_state = continuation_state from prior response only. Presents one requirement record per step until id end_requirement_list (is_end) or error. For each item, follow the agent REQ checklist in documentation (e.g. agent-req-implementation-checklist.md, S01–S16) and strict TDD. Terminal: id end_requirement_list. Error: empty list, bad token, validation failure.",
       inputSchema: z.object({
         requirements: z
           .array(z.unknown())
@@ -1147,31 +1088,6 @@ export const allTools = [
     },
     handler: async (args: { requirements?: unknown[]; current_state?: string }) => {
       const next = resolveRequirementListStateGuide(args);
-      return textContent(JSON.stringify(next, null, 2));
-    },
-  },
-  {
-    name: "req_impl_state_guide",
-    config: {
-      description:
-        "Nested walk: each client-supplied requirement in order, full agent REQ checklist (S01 through end_agent_req) per spec in one tool. First call: non-empty requirements; omit current_state. Later: current_state = continuation_state until id end_req_impl (is_end) or error. Composite state is spec.id__step.id (e.g. REQ-FOO__S01). Run back-to-back until terminal.",
-      inputSchema: z.object({
-        requirements: z
-          .array(z.unknown())
-          .optional()
-          .describe(
-            "Requirement objects in walk order. Required on first call when current_state is omitted or empty."
-          ),
-        current_state: z
-          .string()
-          .optional()
-          .describe(
-            "Opaque continuation from the previous response. When set, requirements is ignored."
-          ),
-      }),
-    },
-    handler: async (args: { requirements?: unknown[]; current_state?: string }) => {
-      const next = resolveReqImplStateGuide(args);
       return textContent(JSON.stringify(next, null, 2));
     },
   },

@@ -251,7 +251,7 @@ This repository contains:
 - `scripts/analyze_hook_log.rb` — Streaming analysis of Cursor hook YAML logs under `~/.cursor/logs/` (event counts, failures, aggregates; use `--help`).
 - `scripts/strip_transcripts.rb` — Stream-edit large hook logs to drop embedded transcript bodies (see `--dry-run`).
 - `scripts/dedupe_transcript_yaml.rb` — Deduplicate long text nodes in hook transcript YAML trees (shares helpers with `.cursor/hooks/log.rb`).
-- `scripts/run-feature-batch.sh` — Batch driver for agent-stream and feature-spec workflows. Defaults resolve **from this repo** (`tools/agent-stream/run_agent_stream.rb`, `docs/agent-req-implementation-checklist.yaml`); override with `-r` / `-c` (see `--help`).
+- `scripts/run-feature-batch.sh` — Batch driver for agent-stream and feature-spec workflows. Defaults use the **current repository** as workspace (`.`), with runner and lead checklist paths **from this repo** (`tools/agent-stream/run_agent_stream.rb`, `docs/agent-req-implementation-checklist.yaml`). Supports `-o/--select-order ARG` where `ARG` is a single order `N` or an inclusive range `N-M` (it filters feature-spec-batch records by their `order`). `agent-preload-contract.yaml` and `prompts/all.yaml` are picked up only when those files exist in the workspace. Override with `-r` / `-c` (see `--help`).
 - `tools/agent-stream/` — Vendored **Cursor `agent` stream-json** runner (`run_agent_stream.rb`) plus `lib/` for multi-turn `--resume`, `--tdd-yaml`, and `--lead-checklist-yaml` (checklist-driven CITDP/LEAP/TIED sessions). Requires Ruby 3.x and `agent` on `PATH`. See [tools/agent-stream/README.md](tools/agent-stream/README.md) and [docs/run-agent-stream-tied.md](docs/run-agent-stream-tied.md).
 
 ### Methodology Documentation (Reference Only)
@@ -263,7 +263,7 @@ This repository contains:
 - `docs/yaml-update-mcp-runbook.md` - Agent runbook: MCP-first routing for project TIED YAML writes (copied to `tied/docs/` via `copy_files.sh` when listed in `DOCS_TO_COPY`)
 - `docs/conversation-log-yaml-structure-and-agent-difficulties.md` - Hook log YAML structure and agent pitfalls
 - `docs/run-agent-stream-tied.md`, `docs/run-agent-stream-impl-e2e.md`, `docs/run-agent-stream-impl-composition.md`, `docs/run-agent-stream-upstream.md` - Agent stream runner (CITDP/LEAP/TIED multi-turn sessions); `docs/tdd_development_loop.yaml` - six-step TDD loop YAML for `--tdd-yaml`
-- `docs/requirement-list-state-guide-agent-workflow.md`, `docs/req-impl-state-guide-agent-workflow.md` - State guide workflows for MCP tools `requirement_list_state_guide` and `req_impl_state_guide`
+- `docs/requirement-list-state-guide-agent-workflow.md` - State guide workflow for MCP tool `requirement_list_state_guide`
 - `ai-principles.md` - Agent operational mandates and checklists (copied to projects via copy_files.sh)
 - `tied-language-spec.md` - TIED language specification (pseudo-code templates with semantic tokens)
 - `conversation.template.md` - Template conversation demonstrating TIED workflow
@@ -346,14 +346,15 @@ MCP gives AI assistants and tools a single, consistent way to read and write req
 - **Bulk and single-token detail access**: Read one detail file by token or request details for many tokens (or all tokens of a type) in one call.
 - **One-shot creation**: Create a new REQ, ARCH, or IMPL token with both index record and full detail YAML in a single tool call (`tied_token_create_with_detail`).
 - **Token rename**: Rename a semantic token across all YAML indexes, detail files, and the detail filename in one call (`tied_token_rename`); optional dry run and processes.md update. The tool validates output; for **hand-edited** YAML (including after rename), use **`lint_yaml`** per `[PROC-YAML_EDIT_LOOP]` in `processes.md`—not ad hoc multi-file `yq` invocations.
-- **Agent state guides**: MCP tools walk the agent REQ checklist, documentation-first steps, TDD phases, a **client-supplied requirement list** (`requirement_list_state_guide`), and a **nested spec × checklist-step** flow (`req_impl_state_guide`). Each guide exposes an explicit terminal id (`end_agent_req`, `end_documentation_first`, `end_tdd`, `end_requirement_list`, `end_req_impl`). Workflow docs live under `docs/` (and `tied/docs/` after `copy_files.sh`).
+- **Requirement list walk**: `requirement_list_state_guide` steps through a client-supplied ordered requirement list (continuation state). For each item, follow the agent REQ checklist in **[docs/agent-req-implementation-checklist.md](docs/agent-req-implementation-checklist.md)** (S01–S16); there are no MCP tools for the linear checklist sequence itself.
+- **Verification and backlog**: `tied_verify`, `tied_cycles`, and `tied_backlog` support verification-gated status and dependency views ([mcp-server/README.md](mcp-server/README.md)).
 - **Migration**: Convert monolithic requirements/architecture/implementation markdown into TIED YAML indexes and detail files via conversion tools.
 
 This works for **any language or stack**: TIED is methodology-level; the server only needs a `tied/` (or `TIED_BASE_PATH`) layout with YAML indexes and optional detail directories.
 
 ### MCP API
 
-**Tools**: Index read, list tokens, filter by field, validate YAML; config (`tied_config_get_base_path`); traceability (`get_decisions_for_requirement`, `get_requirements_for_decision`); index insert/update; detail read (single and batch `yaml_detail_read_many`), detail list/create/update/delete; create-with-detail (`tied_token_create_with_detail`); token rename (`tied_token_rename`); state guides (`agent_req_state_guide`, `documentation_first_state_guide`, `tdd_state_guide`, `requirement_list_state_guide`, `req_impl_state_guide`); feedback (`tied_feedback_add`, `tied_feedback_export`) for feature requests, bug reports, and methodology reporting to the TIED project; monolithic-to-TIED conversion (per-doc or all at once).
+**Tools**: Index read, list tokens, filter by field, validate YAML; config (`tied_config_get_base_path`); traceability (`get_decisions_for_requirement`, `get_requirements_for_decision`); index insert/update; detail read (single and batch `yaml_detail_read_many`), detail list/create/update/delete; create-with-detail (`tied_token_create_with_detail`); token rename (`tied_token_rename`); consistency (`tied_validate_consistency`); verification and backlog (`tied_verify`, `tied_cycles`, `tied_backlog`); requirement list walk (`requirement_list_state_guide`); feedback (`tied_feedback_add`, `tied_feedback_export`) for feature requests, bug reports, and methodology reporting to the TIED project; monolithic-to-TIED conversion (per-doc or all at once). See [mcp-server/README.md](mcp-server/README.md) for parameters and the full table.
 
 **Resources**: Full indexes (`tied://requirements`, `tied://architecture-decisions`, `tied://implementation-decisions`, `tied://semantic-tokens`); single record by token (`tied://requirement/{token}`, `tied://decision/{token}`); single-token detail (`tied://requirement/{token}/detail`, `tied://decision/{token}/detail`); all details by type (`tied://details/requirements`, `tied://details/architecture`, `tied://details/implementation`).
 

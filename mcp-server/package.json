@@ -10,7 +10,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "test": "npm run build && node --test dist/convert/yaml-generator.test.js dist/feedback.test.js dist/token-rename.test.js dist/tools/tdd-state-guide.test.js dist/tools/documentation-first-state-guide.test.js dist/tools/agent-req-state-guide.test.js dist/tools/requirement-list-state-guide.test.js dist/tools/req-impl-state-guide.test.js dist/yaml-loader.test.js dist/e2e/bootstrap-and-load.test.js",
+    "test": "npm run build && node --test dist/convert/yaml-generator.test.js dist/feedback.test.js dist/token-rename.test.js dist/tools/requirement-list-state-guide.test.js dist/yaml-loader.test.js dist/e2e/bootstrap-and-load.test.js",
     "prepare": "npm run build"
   },
   "engines": {

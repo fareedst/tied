@@ -14,7 +14,7 @@
 # Options:
 #   -d, --dry-run
 #   -s, --session-id ID
-#   -o, --select-order N
+#   -o, --select-order ARG
 #   -w, --workspace PATH
 #   -r, --runner PATH
 #   -c, --lead-checklist-yaml PATH
@@ -46,8 +46,9 @@ Options:
   -s, --session-id ID
       Provide a session ID.
 
-  -o, --select-order N
-      Select a feature spec batch order.
+  -o, --select-order ARG
+      Filter feature-spec-batch records by their `order` field.
+      ARG supports a single number `N` or an inclusive range `N-M`.
 
   -w, --workspace PATH
       Project workspace directory.
@@ -76,9 +77,10 @@ Examples:
   run-feature-batch
   run-feature-batch --dry-run
   run-feature-batch --select-order 2
+  run-feature-batch --select-order 2-4
   run-feature-batch ~/Documents/dev/swift/CursorHookViewer/prompts/1-2.yaml
   run-feature-batch --workspace ~/Documents/dev/swift/CursorHookViewer
-  run-feature-batch --dry-run --select-order 2 --feature-spec-batch-yaml ~/Documents/dev/swift/CursorHookViewer/prompts/1-2.yaml
+  run-feature-batch --dry-run --select-order 2-3 --feature-spec-batch-yaml ~/Documents/dev/swift/CursorHookViewer/prompts/1-2.yaml
 EOF
 }
 
@@ -113,7 +115,7 @@ main() {
   _script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
   local _repo_root
   _repo_root="$(cd "${_script_dir}/.." && pwd)"
-  local default_workspace="$HOME/Documents/dev/swift/CursorHookViewer"
+  local default_workspace="."
   local default_runner="${_repo_root}/tools/agent-stream/run_agent_stream.rb"
   local default_checklist="${_repo_root}/docs/agent-req-implementation-checklist.yaml"
 
@@ -151,6 +153,8 @@ main() {
 
       o)
         require_value "-o|--select-order" "${OPTARG:-}"
+        # Passed through to the Ruby runner's --feature-spec-batch-order filter
+        # (supports single N or inclusive N-M range).
         select_order="$OPTARG"
         ;;
 
@@ -274,19 +278,22 @@ main() {
     feature_spec_batch_yaml_explicit=1
   fi
 
+  # default to this workspace's files if they exist
   if (( prompt_file_explicit == 0 )); then
     prompt_file="$workspace/agent-preload-contract.yaml"
+    [[ -f $prompt_file ]] || prompt_file=""
   fi
 
   if (( feature_spec_batch_yaml_explicit == 0 )); then
     feature_spec_batch_yaml="$workspace/prompts/all.yaml"
+    [[ -f $feature_spec_batch_yaml ]] || feature_spec_batch_yaml=""
   fi
 
   require_directory "workspace" "$workspace"
   require_readable_file "runner" "$runner"
   require_readable_file "lead checklist yaml" "$lead_checklist_yaml"
-  require_readable_file "prompt file" "$prompt_file"
-  require_readable_file "feature spec batch yaml" "$feature_spec_batch_yaml"
+  [[ -n $prompt_file ]] && require_readable_file "prompt file" "$prompt_file"
+  [[ -n $feature_spec_batch_yaml ]] && require_readable_file "feature spec batch yaml" "$feature_spec_batch_yaml"
 
   local -a cmd
   cmd=(ruby "$runner")
@@ -296,10 +303,12 @@ main() {
   cmd+=(--workspace "$workspace")
   cmd+=(--lead-checklist-yaml "$lead_checklist_yaml")
   [[ -n "$select_order" ]] && cmd+=(--feature-spec-batch-order "$select_order")
-  cmd+=(--prompt-file "$prompt_file")
+  [[ -n "$prompt_file" ]] && cmd+=(--prompt-file "$prompt_file")
   cmd+=(--feature-spec-batch-yaml "$feature_spec_batch_yaml")
 
+  set -x
   "${cmd[@]}"
+  set +x
 }
 
 main "$@"

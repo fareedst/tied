@@ -75,8 +75,7 @@
 | Operation not covered by any tool | Direct file access; document the gap for future tooling |
 | How to mutate project YAML without invalid files / MCP abandonment | [yaml-update-mcp-runbook.md](yaml-update-mcp-runbook.md) |
 | Walk an ordered multi-requirement backlog (list on first call, then `continuation_state`) | `requirement_list_state_guide` — see [requirement-list-state-guide-agent-workflow.md](requirement-list-state-guide-agent-workflow.md) |
-| Nested list + full REQ checklist per spec in one tool (until **`end_req_impl`**) | `req_impl_state_guide` — see [req-impl-state-guide-agent-workflow.md](req-impl-state-guide-agent-workflow.md) |
-| Single-requirement checklist S01–S16 | `agent_req_state_guide` — omit `current_state` for S01; terminal state is **`end_agent_req`** (not generic `end`) |
+| Single-requirement checklist S01–S16 | Follow [agent-req-implementation-checklist.md](agent-req-implementation-checklist.md) in the repo (no dedicated MCP tool for the linear step sequence) |
 
 ---
 
@@ -85,6 +84,5 @@
 - **YAML mutation routing, cheat sheet, MCP failure playbook**: [yaml-update-mcp-runbook.md](yaml-update-mcp-runbook.md)
 - **Tool and resource list**: [mcp-server/README.md](../mcp-server/README.md)
 - **Multi-requirement walk + per-REQ checklist**: [requirement-list-state-guide-agent-workflow.md](requirement-list-state-guide-agent-workflow.md)
-- **Nested list + checklist in one tool (`req_impl_state_guide`)**: [req-impl-state-guide-agent-workflow.md](req-impl-state-guide-agent-workflow.md)
 - **Setup and passes**: [adding-tied-mcp-and-invoking-passes.md](adding-tied-mcp-and-invoking-passes.md)
 - **Agent operating guide**: [AGENTS.md](../AGENTS.md); **principles**: [ai-principles.md](../ai-principles.md)

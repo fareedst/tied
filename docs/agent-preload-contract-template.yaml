@@ -1,5 +1,8 @@
 # Agent preload contract — generic template
 #
+# When the workspace is the TIED source repository (indexes at repo root, no tied/),
+# prefer docs/agent-preload-contract-tied-repo.yaml instead of this file.
+#
 # If a field is present and true, the agent should treat it as authoritative
 # and avoid redundant tool calls unless a later result contradicts it.
 #

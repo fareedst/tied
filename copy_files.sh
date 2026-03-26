@@ -236,7 +236,6 @@ DOCS_TO_COPY=(
   "pseudocode-validation-checklist.yaml"
   "pseudocode-writing-and-validation.md"
   "requirement-list-state-guide-agent-workflow.md"
-  "req-impl-state-guide-agent-workflow.md"
   "tied-first-implementation-procedure.md"
   "using-tied-without-mcp.md"
 )
