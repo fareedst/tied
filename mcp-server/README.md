@@ -112,6 +112,8 @@ Read-only resources (e.g. for LLM context). Detail files may be YAML or Markdown
 
 Configure MCP in your **development project** (the project where you ran `copy_files.sh` and have a `tied/` directory). Use your project's MCP config (e.g. `.cursor/mcp.json` in the project, or Cursor Settings → MCP with that project as the workspace).
 
+**Enable in Cursor (recommended):** From the **client project** root, run `agent enable tied-yaml`. When Cursor prompts you to apply the project MCP configuration, **approve** the update. Type **`quit`** to exit the interactive `agent` session. (The file on disk alone does not always enable the server in the IDE until you do this.)
+
 - **args**: Must be the **absolute path to the TIED repo's** `mcp-server/dist/index.js` (e.g. `/path/to/tied/mcp-server/dist/index.js`), not a path inside your project.
 - **TIED_BASE_PATH**: Must be your **project's** tied directory — absolute path (e.g. `/path/to/your/project/tied`) or relative to the workspace root (e.g. `tied` or `./tied` when your project root is the workspace).
 

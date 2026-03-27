@@ -44,8 +44,8 @@ impact_analysis:
       role: tied_leap_proposal_* handlers; safeLeapCall
     - path: mcp-server/src/detail-loader.ts
       role: loadDetail uses yaml.loadAll for methodology multi-document YAML (enables full-repo consistency)
-    - path: mcp-server/scripts/sync-ruby-tied-index.mjs
-      role: Optional index merge Ruby demo tokens (S13 validation gate)
+    - path: mcp-server/scripts/remove-client-reqs-from-tied.mjs
+      role: Optional strip of client-only REQ/ARCH/IMPL from project tied/ (inverse of mistaken merge)
   tied_tokens_new:
     - REQ-LEAP_PROPOSAL_QUEUE
     - ARCH-LEAP_PROPOSAL_QUEUE

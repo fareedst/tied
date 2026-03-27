@@ -8,6 +8,114 @@
 
 This repository ([https://github.com/fareedst/tied](https://github.com/fareedst/tied)) contains the **Token-Integrated Engineering & Development (TIED)** methodology template that can be used as a base for development projects in any language.
 
+## Spec-Driven Development with TIED
+
+**Priority path for new TIED clients:** drive development with an **ordered list of feature specs** run through the **[agent requirement implementation checklist](docs/agent-req-implementation-checklist.md)** (`[PROC-AGENT_REQ_CHECKLIST]`). That checklist sequences **CITDP** (change impact and test design), **LEAP** (logic elevation and propagation), and **TDD** so agent output stays aligned with intent. Add an **agent preload contract** so the model loads platform and project facts once instead of rediscovering them each session.
+
+### End-to-end pipeline (TIED + LEAP + CITDP)
+
+```mermaid
+flowchart LR
+    subgraph setup ["1_Setup"]
+        Bootstrap["copy_files.sh\nTIED into project"]
+        EnableTiedYaml["agent enable tied-yaml\napprove MCP config quit"]
+        Contract["agent-preload-contract.yaml\nplatform summary"]
+    end
+    subgraph specAuthor ["2_AuthorSpecs"]
+        SpecList["initial-specs.yaml\nordered feature specs"]
+    end
+    subgraph execPhase ["3_Execute"]
+        Batch["run-feature-batch.sh\nselect-order N"]
+        Checklist["Agent REQ checklist\nS01 to S16"]
+        TDD["TDD inner loop\nRED to GREEN"]
+    end
+    subgraph outPhase ["4_Output"]
+        TIEDStack["TIED stack\nREQ ARCH IMPL"]
+        Artifacts["tests and code\ntoken-traced"]
+    end
+    Bootstrap --> EnableTiedYaml --> Contract --> SpecList
+    SpecList --> Batch --> Checklist --> TDD
+    TDD --> TIEDStack
+    TDD --> Artifacts
+    Checklist -.->|"LEAP"| TIEDStack
+```
+
+*Bootstrap copies TIED into the project; in Cursor, run `agent enable tied-yaml` (approve the project MCP config when prompted; type `quit` to exit the Agent CLI). The platform contract and spec list establish context; each selected spec is executed under the lead checklist; TDD produces code and tests; LEAP keeps REQ/ARCH/IMPL consistent when behavior diverges from the plan.*
+
+### Process for a new TIED client
+
+1. **Bootstrap** — Copy TIED into the project: run `$TIED/copy_files.sh` with your project path (or `./copy_files.sh /path/to/project` from a clone of this repository). After `copy_files.sh`, build the MCP server in the TIED repo if needed, then from the **client project** directory run `agent enable tied-yaml`, **approve** the update to the project MCP config in Cursor, and type **`quit`** to exit the `agent` UI. Full options and MCP setup: **[Getting Started with a New Project](#getting-started-with-a-new-project)** below.
+
+2. **Platform contract** — If the project already has implemented code, add a local **`agent-preload-contract.yaml`** at the project root that summarizes platform and project features (fewer redundant tool calls, steadier agent behavior). Start from **[docs/agent-preload-contract-template.yaml](docs/agent-preload-contract-template.yaml)**. When this repository is the workspace, use **[docs/agent-preload-contract-tied-repo.yaml](docs/agent-preload-contract-tied-repo.yaml)** as the tailored layout. If the project is **new**, work through enough requirements to capture what is implemented; **refresh** the contract as the platform grows.
+
+3. **Spec list** — Create an ordered YAML file (for example **`prompts/initial-specs.yaml`**) listing specs. Each entry uses fields such as `order`, `feature_name`, `goal`, `rules`, `examples`, `boundary_conditions`, and `out_of_scope`.
+
+4. **Batch run** — Implement one or more specs with **`scripts/run-feature-batch.sh`**, passing the workspace, optional preload contract, lead checklist YAML, feature-spec batch YAML, and **`--select-order`** (single order `N` or inclusive range `N-M`).
+
+**Example spec entry** (shape for `prompts/initial-specs.yaml` or your chosen path):
+
+```yaml
+- order: 1
+  feature_name: "Default search root"
+  goal: "A search runs from the current working directory when no root path is provided."
+  rules:
+    - "If no root path is given, the search root is the current working directory."
+    - "The run summary shows the effective search root."
+  examples:
+    - given: "the current working directory contains app.rb"
+      when: "a file-name search for 'app' is run with no root path"
+      then: "app.rb is eligible to match and the summary shows the current working directory"
+  boundary_conditions:
+    - "An empty root path is treated the same as no root path."
+  out_of_scope: "Resolving shell aliases or environment-variable syntax in the path"
+```
+
+**Example command** (implements only the first spec; set `$TIED` to your TIED repository clone and adjust paths for your workspace):
+
+```bash
+# Implements only the first spec in the batch
+./scripts/run-feature-batch.sh \
+  --workspace . \
+  --prompt-file ./docs/agent-preload-contract-tied-repo.yaml \
+  --lead-checklist-yaml $TIED/docs/agent-req-implementation-checklist.yaml \
+  --feature-spec-batch-yaml ./prompts/initial-specs.yaml \
+  --select-order 1
+```
+
+Defaults and flags: **[scripts/run-feature-batch.sh](scripts/run-feature-batch.sh)**; runner details: **[tools/agent-stream/README.md](tools/agent-stream/README.md)**, **[docs/run-agent-stream-tied.md](docs/run-agent-stream-tied.md)**. In client projects, the lead checklist is typically **`tied/docs/agent-req-implementation-checklist.yaml`** after `copy_files.sh`.
+
+### How one spec maps into the checklist and TIED
+
+```mermaid
+flowchart TB
+    subgraph specEntry ["Feature_spec_fields"]
+        goal["goal"]
+        rules["rules"]
+        examples["examples"]
+        boundary["boundary_conditions"]
+        outScope["out_of_scope"]
+    end
+    subgraph checklistMap ["Agent_REQ_checklist"]
+        S02["S02_define_change_or_new_REQ"]
+        S04["S04_to_S06_REQ_ARCH_IMPL"]
+        S07["S07_to_S16_TDD_composition_E2E"]
+        leapNode["LEAP_IMPL_to_ARCH_to_REQ"]
+    end
+    goal --> S02
+    rules --> S04
+    boundary --> S04
+    outScope --> S02
+    examples --> S07
+    S07 -.-> leapNode
+    S04 --> S07
+```
+
+*Goals and out-of-scope anchor intent at **S02**; **rules** and **boundary_conditions** feed REQ/ARCH/IMPL authoring; **examples** ground tests and acceptance; **LEAP** applies when code or tests diverge from IMPL.*
+
+**Deeper visuals:** [docs/methodology-diagrams.md](docs/methodology-diagrams.md) — traceability stack, dev cycle, TDD inner loop, CITDP, YAML edit loop.
+
+---
+
 ## What is TIED?
 
 **Token-Integrated Engineering & Development (TIED)** uses semantic tokens to create a traceable chain from requirements through architecture and implementation to tests and code.
@@ -21,6 +129,8 @@ This repository ([https://github.com/fareedst/tied](https://github.com/fareedst/
 - **Refactoring Confidence**: Changes can be validated against original intent
 
 ## Getting Started with a New Project
+
+This section covers **bootstrap**, **methodology vs project YAML**, and **MCP** (or working without MCP). For the **spec list + batch runner + checklist** workflow that drives agent sessions in order, start with **[Spec-Driven Development with TIED](#spec-driven-development-with-tied)** at the top of this README.
 
 The primary way to work with TIED is via the MCP server; a standalone bootstrap and workflow for non-MCP users is also available.
 
@@ -74,16 +184,22 @@ When using the TIED MCP server, writes go only to project-owned YAML so methodol
 
 The MCP server is **not** copied into your project; it stays in the TIED repository.
 
-1. **Build once** (in the TIED repo): From the TIED repo root, run `cd mcp-server && npm install && npm run build`.
-2. **In your development project**, configure your MCP client (e.g. Cursor) so that the server **command/args** point to the **TIED repo's** built server (e.g. `node /path/to/tied-repo/mcp-server/dist/index.js`) and **env** `TIED_BASE_PATH` points to your **project's** `tied/` directory (e.g. `./tied` if your project root is the workspace, or an absolute path).
+1. **Build once** (in the TIED repo): From the TIED repo root, run `cd mcp-server && npm install && npm run build`. The built server must exist before `copy_files.sh` can write a valid `tied-yaml` entry in `.cursor/mcp.json`.
+2. **Bootstrap** (if not already done): Run `./copy_files.sh` targeting your development project. That creates or merges `.cursor/mcp.json` with a `tied-yaml` server entry (paths to the TIED repo’s `mcp-server/dist/index.js` and your project’s `tied/` directory).
+3. **Enable in Cursor (recommended):** From the **client project** root (the workspace that contains `tied/` and `.cursor/mcp.json`), run `agent enable tied-yaml`. When Cursor prompts you to apply the project MCP configuration, **approve** the update. Type **`quit`** to exit the interactive `agent` session.
+4. **Verify:** List MCP tools (e.g. `yaml_index_read`, `tied_config_get_base_path`) or read a resource such as `tied://requirements` to confirm the server is loaded.
 
-See [TIED YAML MCP Server](#tied-yaml-mcp-server) and [mcp-server/README.md](mcp-server/README.md) for the exact JSON and paths. For a full example process of adding the TIED MCP to a project and invoking it in several passes (bootstrap, establish REQ/ARCH/IMPL, maintain), see [docs/adding-tied-mcp-and-invoking-passes.md](docs/adding-tied-mcp-and-invoking-passes.md).
+Alternatively, configure MCP manually: set **command/args** to the **TIED repo's** built server and **env** `TIED_BASE_PATH` to your **project's** `tied/` directory—see [TIED YAML MCP Server](#tied-yaml-mcp-server) and [mcp-server/README.md](mcp-server/README.md) for the exact JSON and paths.
+
+For a full example process of adding the TIED MCP to a project and invoking it in several passes (bootstrap, establish REQ/ARCH/IMPL, maintain), see [docs/adding-tied-mcp-and-invoking-passes.md](docs/adding-tied-mcp-and-invoking-passes.md).
 
 ### Using TIED without MCP
 
 If you do not use MCP, run `./bootstrap_without_mcp.sh /path/to/project` to get the same `tied/` layout; then manage YAML by hand or with tools (e.g. `yq`). See [docs/using-tied-without-mcp.md](docs/using-tied-without-mcp.md) for the workflow.
 
 ## Example Workflow
+
+**Streamlined path:** an ordered **feature spec YAML** plus **`run-feature-batch.sh`** and the **agent REQ checklist** — see **[Spec-Driven Development with TIED](#spec-driven-development-with-tied)**. The steps below are the same methodology expressed as a manual narrative.
 
 1. **Capture intent**: Create `[REQ-USER_AUTH]` (or equivalent) in `requirements.yaml`; expand into pseudo-code and decisions.
 2. **Design**: Document architecture in `architecture-decisions.yaml` with `[ARCH-*]` tokens and implementation in `implementation-decisions.yaml` with `[IMPL-*]` tokens; update `semantic-tokens.yaml`. Plan implementation steps (optionally in `tasks.md` or in-session).
@@ -243,6 +359,8 @@ See `tied/processes.md` § LEAP and § PROC-TIED_DEV_CYCLE for the rules and man
 ## Repository Structure
 
 This repository contains:
+
+This repository may **track** `tied/` under version control (methodology and project indexes); `tied/` is not listed in `.gitignore`.
 
 ### Scripts
 - `copy_files.sh` — Bootstrap a project with TIED templates (used by both MCP and non-MCP users; MCP users then configure the server).

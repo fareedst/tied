@@ -1,0 +1,380 @@
+REQ-TIED_SETUP:
+  name: TIED Methodology Setup
+  category: Functional
+  priority: P0
+  status: Implemented
+  rationale:
+    why: To ensure traceability of intent from requirements to code and to maintain a consistent development process
+    problems_solved:
+      - Loss of intent during development lifecycle
+      - Difficulty tracking requirements through architecture to implementation
+      - Inconsistent documentation practices across projects
+    benefits:
+      - Complete traceability from requirements to code
+      - Consistent development methodology
+      - AI-friendly documentation structure
+  satisfaction_criteria:
+    - criterion: tied/ directory exists with proper structure
+    - criterion: All required documentation files exist and are populated from templates
+      metric: requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml, semantic-tokens.md, processes.md all present
+    - criterion: Base files properly configured
+      metric: .cursorrules contains TIED rules, AGENTS.md contains canonical AI agent instructions
+    - criterion: Detail directories exist
+      metric: requirements/, architecture-decisions/, implementation-decisions/ directories present
+  validation_criteria:
+    - method: Manual verification
+      coverage: File existence checks for all required files and directories
+    - method: AI agent acknowledgment
+      coverage: Agent responds with 'Observing AI principles!' confirming rules are loaded
+    - method: Structure validation
+      coverage: All index files have corresponding detail directories with proper naming
+  traceability:
+    architecture:
+      - ARCH-TIED_STRUCTURE
+    implementation:
+      - IMPL-TIED_FILES
+    tests:
+      - Manual verification checklists
+    code_annotations:
+      - IMPL-TIED_FILES
+      - ARCH-TIED_STRUCTURE
+      - REQ-TIED_SETUP
+  related_requirements:
+    depends_on: []
+    related_to: []
+    supersedes: []
+  detail_file: requirements/REQ-TIED_SETUP.yaml
+  metadata:
+    created:
+      date: 2025-11-08T00:00:00.000Z
+      author: AI Agent
+    last_updated:
+      date: 2026-02-06T00:00:00.000Z
+      author: AI Agent
+      reason: Restructured to v1.5.0 schema with machine-parseable fields
+    last_validated:
+      date: 2026-02-06T00:00:00.000Z
+      validator: AI Agent
+      result: pass
+REQ-MODULE_VALIDATION:
+  name: Independent Module Validation Before Integration
+  category: Functional
+  priority: P0
+  status: Implemented
+  rationale:
+    why: To eliminate bugs related to code complexity by ensuring each module works correctly in isolation before combining with other modules
+    problems_solved:
+      - Integration complexity causing difficult-to-debug issues
+      - Bugs discovered too late in the development cycle
+      - Module contracts not properly validated before integration
+    benefits:
+      - Bugs caught early before integration
+      - Reduced integration complexity
+      - Clear module boundaries and contracts
+      - Easier debugging by isolating issues to specific modules
+  satisfaction_criteria:
+    - criterion: All logical modules identified and documented with clear boundaries before development
+    - criterion: Module interfaces and contracts defined and documented
+    - criterion: Module validation criteria specified for each module
+      metric: What 'validated' means is explicitly defined
+    - criterion: Each module developed independently
+    - criterion: Each module passes independent validation before integration
+      metric: Unit tests with mocks, integration tests with test doubles, contract validation, edge case testing, error handling validation all passing
+    - criterion: Module validation results documented
+    - criterion: Integration tasks separate from module development tasks
+    - criterion: Integration only occurs after module validation passes
+    - criterion: Minimize code measurable only from outside testing (E2E/manual); every IMPL has test strategy (unit/integration or E2E/glue-only with documented reason)
+    - criterion: No non-trivial logic in entry points unless documented as glue with reason
+  validation_criteria:
+    - method: Manual verification
+      coverage: Modules identified and documented before development starts
+    - method: Automated testing
+      coverage: Module validation tests exist and pass before integration
+    - method: Code review
+      coverage: Integration code references validated modules
+    - method: Documentation review
+      coverage: Module validation results are documented
+    - method: Integration testing
+      coverage: Integration tests validate combined behavior of validated modules
+    - method: Coverage gates and gap report
+      coverage: IMPL traceability.tests or test_coverage_note (E2E-only with reason) for every Active IMPL
+  traceability:
+    architecture:
+      - ARCH-MODULE_VALIDATION
+    implementation:
+      - IMPL-MODULE_VALIDATION
+    tests:
+      - testModuleName_IndependentValidation_REQ_MODULE_VALIDATION
+    code_annotations:
+      - REQ-MODULE_VALIDATION
+      - IMPL-MODULE_VALIDATION
+  related_requirements:
+    depends_on:
+      - REQ-TIED_SETUP
+    related_to: []
+    supersedes: []
+  detail_file: requirements/REQ-MODULE_VALIDATION.yaml
+  metadata:
+    created:
+      date: 2025-01-27T00:00:00.000Z
+      author: AI Agent
+    last_updated:
+      date: 2026-02-06T00:00:00.000Z
+      author: AI Agent
+      reason: Restructured to v1.5.0 schema with machine-parseable fields
+    last_validated:
+      date: 2026-02-06T00:00:00.000Z
+      validator: AI Agent
+      result: pass
+REQ-FEEDBACK_TO_TIED:
+  name: Feedback to TIED (Feature Requests, Bug Reports, Methodology)
+  category: Functional
+  priority: P1
+  status: Implemented
+  rationale:
+    why: Projects and users need a standard way to submit feature requests, bug reports, and methodology improvement suggestions and to report them to the TIED project
+    problems_solved:
+      - No structured way to collect feedback from TIED adopters
+      - Methodology improvements from the field are not easily reported upstream
+    benefits:
+      - Structured feedback stored under the project TIED tree
+      - Export format suitable for reporting to the TIED project (e.g. GitHub issues)
+      - Traceability of feedback types (feature_request, bug_report, methodology_improvement)
+  satisfaction_criteria:
+    - criterion: MCP tools allow adding feedback entries (type, title, description, optional context)
+      metric: tied_feedback_add creates/updates tied/feedback.yaml
+    - criterion: Feedback can be exported for reporting to TIED
+      metric: tied_feedback_export returns markdown or JSON of all entries
+  validation_criteria:
+    - method: Unit tests
+      coverage: Feedback module load/append/export and tool handlers
+    - method: Manual or E2E
+      coverage: MCP client can call tools and get valid output
+  traceability:
+    architecture:
+      - ARCH-FEEDBACK_STORAGE
+    implementation:
+      - IMPL-MCP_FEEDBACK_TOOLS
+    tests:
+      - feedback.test.ts
+    code_annotations:
+      - IMPL-MCP_FEEDBACK_TOOLS
+      - ARCH-FEEDBACK_STORAGE
+      - REQ-FEEDBACK_TO_TIED
+  related_requirements:
+    depends_on: []
+    related_to:
+      - REQ-TIED_SETUP
+    supersedes: []
+  detail_file: requirements/REQ-FEEDBACK_TO_TIED.yaml
+  metadata:
+    created:
+      date: 2026-03-03T00:00:00.000Z
+      author: AI Agent
+    last_updated:
+      date: 2026-03-03T00:00:00.000Z
+      author: AI Agent
+      reason: Initial creation
+    last_validated:
+      date: 2026-03-03T00:00:00.000Z
+      validator: AI Agent
+      result: pass
+REQ-LEAP_PROPOSAL_QUEUE:
+  name: Optional LEAP proposal queue with human review
+  category: Functional
+  priority: P1
+  status: Implemented
+  rationale:
+    why: Teams need an optional, non-canonical queue for inferred documentation hints (diff/session) with explicit approve/reject before any project TIED YAML changes, mirroring Plumb-style review without requiring LLM or automatic promotion.
+    problems_solved:
+      - No structured place for non-authoritative LEAP suggestions outside canonical REQ/ARCH/IMPL
+      - Risk of silent or automatic TIED updates without human or explicit agent approval
+    benefits:
+      - Stable proposal ids and audit trail under leap-proposals/ without polluting tied/ until LEAP is applied via MCP
+      - Deterministic extraction path (no API keys required for built-in diff/session import)
+      - Clear separation between proposals and canonical TIED records
+  satisfaction_criteria:
+    - criterion: MCP tools list, add, reject, approve, mark applied, update pending, and snapshot the proposal queue without writing project TIED YAML
+      metric: tied_leap_proposal_* handlers persist only under leap-proposals/
+    - criterion: Diff and session import require explicit_opt_in
+      metric: explicit_opt_in false returns error and creates no proposals
+    - criterion: Reject records status in queue and audit only
+      metric: reject does not modify tied/*.yaml
+    - criterion: Unit tests cover queue persistence and lifecycle
+      metric: leap-proposal-queue.test.ts passes in mcp-server
+  validation_criteria:
+    - method: Unit tests
+      coverage: leap-proposal-queue module and schema strings
+    - method: Manual or MCP client
+      coverage: Tools callable from tied-yaml MCP server
+  traceability:
+    architecture:
+      - ARCH-LEAP_PROPOSAL_QUEUE
+    implementation:
+      - IMPL-MCP_LEAP_PROPOSAL_QUEUE
+    tests:
+      - leap-proposal-queue.test.ts
+    code_annotations:
+      - REQ-LEAP_PROPOSAL_QUEUE
+      - IMPL-MCP_LEAP_PROPOSAL_QUEUE
+  related_requirements:
+    depends_on:
+      - REQ-TIED_SETUP
+    related_to:
+      - REQ-FEEDBACK_TO_TIED
+    supersedes: []
+  detail_file: requirements/REQ-LEAP_PROPOSAL_QUEUE.yaml
+  metadata:
+    created:
+      date: 2026-03-26T00:00:00.000Z
+      author: AI Agent
+    last_updated:
+      date: 2026-03-26T00:00:00.000Z
+      author: AI Agent
+      reason: S06.4 IMPL-MCP_LEAP_PROPOSAL_QUEUE traceability
+    last_validated:
+      date: 2026-03-26T00:00:00.000Z
+      validator: AI Agent
+      result: pass
+REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML:
+  name: Agent stream argv expands TDD YAML into ordered turns
+  category: Functional
+  priority: P1
+  status: Implemented
+  rationale:
+    why: Multi-turn agent sessions must run the same message sequence as TddLoopPrompts.messages_from_yaml for each --tdd-yaml path so PROC-TIED_DEV_CYCLE YAML matches runtime behavior
+    problems_solved:
+      - Divergence between documented TDD loop steps and actual agent turns
+      - Manual copy-paste of prompts across turns
+    benefits:
+      - Single source YAML drives RED/GREEN/REFACTOR/SYNC turns
+      - Aligns with docs/tdd_development_loop.yaml in this repo
+    upstream_note: Imported from atdd commit eb88236290009b78eb11ea561816f0854176bf12; see docs/run-agent-stream-upstream.md
+  satisfaction_criteria:
+    - criterion: AgentStreamArgv.parse_argv appends one turn per message from TddLoopPrompts.messages_from_yaml for each --tdd-yaml path in argv order
+    - criterion: Turn order matches delegation to TddLoopPrompts (no duplicate parsing rules in the entry point)
+  validation_criteria:
+    - method: Composition tests (upstream atdd)
+      coverage: test/composition/agent_stream_tdd_yaml_binding_test.rb
+    - method: Vendored code review
+      coverage: tools/agent-stream/lib/agent_stream_argv.rb, lib/tdd_loop_prompts.rb
+  traceability:
+    architecture:
+      - ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS
+    implementation:
+      - IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
+    tests:
+      - agent_stream_tdd_yaml_binding_test.rb
+    code_annotations:
+      - REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
+      - IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
+  related_requirements:
+    depends_on: []
+    related_to:
+      - REQ-TIED_SETUP
+    supersedes: []
+  detail_file: requirements/REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML.yaml
+  metadata:
+    created:
+      date: 2026-03-24T00:00:00.000Z
+      author: AI Agent
+    last_updated:
+      date: 2026-03-24T00:00:00.000Z
+      author: AI Agent
+      reason: Import ATDD agent stream TIED records
+    last_validated:
+      date: 2026-03-24T00:00:00.000Z
+      validator: AI Agent
+      result: pass
+REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS:
+  name: Export TDD YAML steps to per-step markdown files
+  category: Functional
+  priority: P2
+  status: Implemented
+  rationale:
+    why: Some workflows prefer file-per-step prompts instead of --tdd-yaml expansion; export must mirror TddLoopPrompts.step_entries_from_yaml
+    problems_solved:
+      - Need for reviewable .md artifacts per loop step
+    benefits:
+      - Repeatable prompt files under prompts/tdd/generated (when using export script)
+    upstream_note: Imported from atdd commit eb88236290009b78eb11ea561816f0854176bf12; export script tools/agent-stream/export_tdd_prompts.rb
+  satisfaction_criteria:
+    - criterion: Each YAML step entry becomes one markdown file named from sanitized step id with message body from format_step
+    - criterion: File count equals entry count from step_entries_from_yaml
+  validation_criteria:
+    - method: Composition tests (upstream atdd)
+      coverage: test/composition/export_tdd_prompts_binding_test.rb
+  traceability:
+    architecture:
+      - ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS
+    implementation:
+      - IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS
+    tests:
+      - export_tdd_prompts_binding_test.rb
+    code_annotations:
+      - REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS
+  related_requirements:
+    depends_on: []
+    related_to:
+      - REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
+    supersedes: []
+  detail_file: requirements/REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS.yaml
+  metadata:
+    created:
+      date: 2026-03-24T00:00:00.000Z
+      author: AI Agent
+    last_updated:
+      date: 2026-03-24T00:00:00.000Z
+      author: AI Agent
+      reason: Import ATDD agent stream TIED records
+    last_validated:
+      date: 2026-03-24T00:00:00.000Z
+      validator: AI Agent
+      result: pass
+REQ-ATDD-E2E-AGENT_STREAM:
+  name: E2E agent subprocess stream-json harness with session resume
+  category: Functional
+  priority: P1
+  status: Implemented
+  rationale:
+    why: The Cursor agent CLI must run as an external process; streamed NDJSON must surface assistant and thinking text and capture session_id for chained turns
+    problems_solved:
+      - No in-process API for stream-json
+      - Session continuity across multiple turns in one invocation
+    benefits:
+      - Automates PROC-AGENT_REQ_CHECKLIST and TDD loop YAML as sequential agent turns
+    upstream_note: Imported from atdd commit eb88236290009b78eb11ea561816f0854176bf12
+  satisfaction_criteria:
+    - criterion: Each turn invokes agent with stream-json; stdout lines parse as JSON; text fragments print to stdout
+    - criterion: session_id captured from stream and printed on stderr for resume; non-zero exit on agent failure
+  validation_criteria:
+    - method: E2E tests with stub agent on PATH (upstream atdd)
+      coverage: test/e2e/agent_stream_e2e_test.rb
+  traceability:
+    architecture:
+      - ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON
+    implementation:
+      - IMPL-ATDD-E2E-AGENT_STREAM
+    tests:
+      - agent_stream_e2e_test.rb
+    code_annotations:
+      - REQ-ATDD-E2E-AGENT_STREAM
+      - IMPL-ATDD-E2E-AGENT_STREAM
+  related_requirements:
+    depends_on: []
+    related_to:
+      - REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
+    supersedes: []
+  detail_file: requirements/REQ-ATDD-E2E-AGENT_STREAM.yaml
+  metadata:
+    created:
+      date: 2026-03-24T00:00:00.000Z
+      author: AI Agent
+    last_updated:
+      date: 2026-03-24T00:00:00.000Z
+      author: AI Agent
+      reason: Import ATDD agent stream TIED records
+    last_validated:
+      date: 2026-03-24T00:00:00.000Z
+      validator: AI Agent
+      result: pass

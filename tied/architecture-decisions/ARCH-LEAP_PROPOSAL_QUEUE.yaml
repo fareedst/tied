@@ -1,0 +1,69 @@
+ARCH-LEAP_PROPOSAL_QUEUE:
+  name: LEAP proposal queue storage and review boundary
+  status: Active
+  cross_references:
+    - REQ-LEAP_PROPOSAL_QUEUE
+  decision: Store optional non-canonical LEAP documentation proposals outside project TIED YAML (repo-root leap-proposals/queue.json plus append-only audit-log.jsonl). Human or explicit agent approval gates any later REQ/ARCH/IMPL edits; those edits use existing MCP yaml tools only. Optional deterministic extraction (git diff, session split) stays opt-in and never auto-writes TIED.
+  rationale:
+    why: Canonical REQ/ARCH/IMPL must remain authoritative; inferred hints need a reviewable staging area without polluting tied/ or bypassing MCP validation.
+    problems_solved:
+      - Mixing AI- or diff-inferred text directly into TIED indexes without review
+      - No audit trail for reject vs approve vs applied
+    benefits:
+      - Clear separation between proposals (queue) and canonical records (tied/)
+      - Same MCP-first rule for actual LEAP updates (yaml_detail_*, yaml_index_*)
+      - Parallels feedback file pattern (artifact outside token indexes) while differing in location (repo root vs TIED base)
+  alternatives_considered:
+    - name: Store proposals under tied/proposals.yaml
+      pros:
+        - Versioned with methodology tree
+      cons:
+        - Conflicts with canonical-only expectation for tied/ project YAML; harder to distinguish from REQ/ARCH/IMPL
+      rejected_reason: Keep proposals out of TIED base path until promoted via explicit LEAP
+    - name: New requirements.yaml rows for each proposal
+      pros:
+        - Uses existing REQ index
+      cons:
+        - Proposals are not requirements until approved; would flood index and confuse traceability
+      rejected_reason: Proposals are non-canonical until approved
+    - name: Only LLM extraction
+      pros:
+        - Richer suggestions
+      cons:
+        - API keys and cost; contradicts deterministic default path
+      rejected_reason: Built-in path must be deterministic and opt-in without LLM
+  implementation_approach:
+    summary: Module leap-proposal-queue.ts under mcp-server/src/analysis; MCP tools tied_leap_proposal_*; project root from process.cwd() or optional project_root argument; queue JSON + JSONL audit; import type-only from plumb-diff-impact-preview for selection enum.
+    details:
+      - Reject and approve mutate only leap-proposals/; no yaml-loader writes for queue lifecycle
+      - Mark applied is bookkeeping after user applies LEAP via existing MCP YAML tools
+      - Diff extraction and session import require explicit_opt_in true at tool boundary
+  traceability:
+    requirements:
+      - REQ-LEAP_PROPOSAL_QUEUE
+    implementation:
+      - IMPL-MCP_LEAP_PROPOSAL_QUEUE
+    tests:
+      - leap-proposal-queue.test.ts
+    code_annotations:
+      - ARCH-LEAP_PROPOSAL_QUEUE
+      - IMPL-MCP_LEAP_PROPOSAL_QUEUE
+  related_decisions:
+    depends_on:
+      - REQ-LEAP_PROPOSAL_QUEUE
+    informs: []
+    see_also:
+      - ARCH-FEEDBACK_STORAGE
+  detail_file: architecture-decisions/ARCH-LEAP_PROPOSAL_QUEUE.yaml
+  metadata:
+    created:
+      date: 2026-03-26
+      author: AI Agent
+    last_updated:
+      date: 2026-03-26
+      author: AI Agent
+      reason: S05 [PROC-AGENT_REQ_CHECKLIST] ARCH for LEAP proposal queue
+    last_validated:
+      date: 2026-03-26
+      validator: AI Agent
+      result: pass

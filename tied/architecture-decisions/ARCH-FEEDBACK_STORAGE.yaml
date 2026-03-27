@@ -1,0 +1,910 @@
+ARCH-FEEDBACK_STORAGE:
+  name: Feedback Storage for TIED Reporting
+  status: Active
+  cross_references:
+    - REQ-FEEDBACK_TO_TIED
+  rationale:
+    why: Store user and project feedback in a single file under the TIED tree so it is versioned with the project and exportable for reporting to the TIED project
+    problems_solved:
+      - No standard location for feedback entries
+      - Feedback not tied to project context (TIED base path)
+    benefits:
+      - Single file tied/feedback.yaml; no new index type in REQ/ARCH/IMPL sense
+      - Same base path resolution as existing MCP tools (getBasePath())
+      - Entries have id, type, title, description, optional context, created_at
+  alternatives_considered:
+    - name: New YAML index (e.g. feedback.yaml as index)
+      pros:
+        - Consistent with requirements.yaml pattern
+      cons:
+        - Feedback is not a traceability index; different schema (entries array)
+      rejected_reason: Keep feedback as a separate artifact; schema is list of entries, not token-keyed records
+    - name: Store in requirements or implementation index
+      pros:
+        - No new file
+      cons:
+        - Pollutes REQ/IMPL with non-traceability data
+      rejected_reason: Feedback is not a requirement or implementation decision
+  implementation_approach:
+    summary: One file {TIED_BASE_PATH}/feedback.yaml with top-level key 'entries' (array of objects)
+    details:
+      - Use getBasePath() from yaml-loader for path resolution
+      - 'Each entry: id, type (feature_request | bug_report | methodology_improvement), title, description, context (optional), created_at (ISO 8601)'
+      - 'MCP tools: tied_feedback_add (append), tied_feedback_export (markdown or JSON)'
+  traceability:
+    requirements:
+      - REQ-FEEDBACK_TO_TIED
+    implementation:
+      - IMPL-MCP_FEEDBACK_TOOLS
+    tests:
+      - feedback.test.ts
+    code_annotations:
+      - ARCH-FEEDBACK_STORAGE
+      - IMPL-MCP_FEEDBACK_TOOLS
+  related_decisions:
+    depends_on:
+      - REQ-FEEDBACK_TO_TIED
+    informs:
+      - IMPL-MCP_FEEDBACK_TOOLS
+    see_also: []
+  detail_file: architecture-decisions/ARCH-FEEDBACK_STORAGE.yaml
+  metadata:
+    created:
+      date: 2026-03-03
+      author: AI Agent
+    last_updated:
+      date: 2026-03-03
+      author: AI Agent
+      reason: Initial creation
+    last_validated:
+      date: 2026-03-03
+      validator: AI Agent
+      result: pass
+---
+ARCH-TREEGREP_ABSOLUTE_PATH_OUTPUT_TEXT_MATCH:
+  name: Absolute path formatting for search output (architecture)
+  status: Active
+  cross_references:
+    requirements:
+      - REQ-TREEGREP_ABSOLUTE_PATH_OUTPUT_TEXT_MATCH
+    implementation:
+      - IMPL-TREEGREP_ABSOLUTE_PATH_OUTPUT_TEXT_MATCH
+      - IMPL-TREEGREP_JSON_OUTPUT_TEXT_MATCH
+      - IMPL-TREEGREP_YAML_OUTPUT_TEXT_MATCH
+      - IMPL-TREEGREP_TEXT_OUTPUT_FILENAME_MATCH_TEXT_MATCH
+      - IMPL-TREEGREP_TEXT_OUTPUT_CONTENT_MATCH_TEXT_MATCH
+  rationale: expand_path normalizes to absolute strings without symlink canonicalization; keyword stripped before traversal like sort_results.
+  constraints:
+    - absolute_paths only true/false/nil
+    - effective_search_root string used as expand_path base for relative paths
+  alternatives_considered:
+    - option: Always use realpath
+      rejected_because: Explicitly out of scope for this REQ
+---
+ARCH-TREEGREP_GIT_COMMIT_RANGE_SCOPE_TEXT_MATCH:
+  name: Git commit range scope (architecture)
+  status: Active
+  cross_references:
+    requirements:
+      - REQ-TREEGREP_GIT_COMMIT_RANGE_SCOPE_TEXT_MATCH
+    implementation:
+      - IMPL-TREEGREP_GIT_COMMIT_RANGE_SCOPE_TEXT_MATCH
+      - IMPL-TREEGREP_GIT_TRACKED_SCOPE_TEXT_MATCH
+  rationale: 'git log --pretty=format: --name-status with the user-supplied revision range aggregates paths across commits in that range (name-status lines feed GIT_COMMIT_PATHS_SET_FROM_NAME_STATUS_OUTPUT for include_deleted/include_renamed) without attributing paths to individual commits.'
+  constraints:
+    - Paths repo-relative from git output; same toplevel resolution as other git_scope modes
+    - commit_range must be supplied at API boundary when scope is :commit_range
+  alternatives_considered:
+    - option: git diff --name-only A B
+      rejected_because: Endpoint diff can omit or conflate paths relative to the union of per-commit touches required by the requirement
+---
+ARCH-TREEGREP_FILENAME_INVERT_MATCH_TEXT_MATCH:
+  name: Inverted file-name match (architecture)
+  status: Active
+  cross_references:
+    requirements:
+      - REQ-TREEGREP_FILENAME_INVERT_MATCH_TEXT_MATCH
+    implementation:
+      - IMPL-TREEGREP_FILENAME_TEXT_MATCH
+      - IMPL-TREEGREP_NAME_OR_CONTENT_QUERY_TEXT_MATCH
+  rationale: keep_path? computes positive match then negates when invert_match; validate_search_run_queries! rejects invert_match without name_query_active? so content-only runs cannot set an ambiguous invert.
+  constraints:
+    - invert_match is a filename_match_options keyword only; not applied to content matching in this slice
+---
+ARCH-TREEGREP_GIT_COMMIT_BASED_SCOPE_PATH_AND_CONTENT_ELIGIBILITY:
+  name: Commit-based scope path and content eligibility (architecture aggregate)
+  status: Active
+  cross_references:
+    requirements:
+      - REQ-TREEGREP_GIT_COMMIT_BASED_SCOPE_PATH_AND_CONTENT_ELIGIBILITY
+    implementation:
+      - IMPL-TREEGREP_GIT_TRACKED_SCOPE_TEXT_MATCH
+      - IMPL-TREEGREP_GIT_COMMIT_SCOPES_EXCLUDE_DELETED_DEFAULT_TEXT_MATCH
+      - IMPL-TREEGREP_GIT_COMMIT_SCOPES_INCLUDE_RENAMED_DEFAULT_TEXT_MATCH
+      - IMPL-TREEGREP_GIT_COMMIT_SCOPES_INCLUDE_DELETED_PATH_MATCH_TEXT_MATCH
+      - IMPL-TREEGREP_GIT_COMMIT_SCOPES_WORKING_TREE_CONTENT_TEXT_MATCH
+      - IMPL-TREEGREP_GIT_SPECIFIC_COMMIT_SNAPSHOT_CONTENT_TEXT_MATCH
+      - IMPL-TREEGREP_GIT_COMMIT_RANGE_COMMIT_SNAPSHOT_UNSUPPORTED_TEXT_MATCH
+      - IMPL-TREEGREP_GIT_SPECIFIC_COMMIT_SCOPE_TEXT_MATCH
+      - IMPL-TREEGREP_GIT_COMMIT_RANGE_SCOPE_TEXT_MATCH
+  decision: 'Commit-based git_scope (:specific_commit, :commit_range) composes three layers: (1) SearchRun validates scope parameters and optional include_deleted, include_renamed, and history_content_source for commit scopes; (2) SearchRoot builds eligible path sets from git name-status (diff-tree or git log) and optionally yields paths missing from the worktree so path-only queries can see deleted or rename-source names; (3) SearchMatch routes content reads to the working tree or to a single-commit blob snapshot via git cat-file, and rejects commit_snapshot for commit_range at validation time. Granular ARCH records define each layer; this aggregate ties them to REQ-TREEGREP_GIT_COMMIT_BASED_SCOPE_PATH_AND_CONTENT_ELIGIBILITY.'
+  rationale: A single architectural view of prompt slice 53 avoids duplicating git subprocess and match-pipeline decisions while preserving modular ARCH/IMPL decomposition for each concern.
+  constraints:
+    - 'Path eligibility and content source are orthogonal: eligibility is a set of repo-relative strings; content mode decides file read vs blob read vs skip when no file exists.'
+    - commit_snapshot content is defined only for a single resolved commit, not for an arbitrary range.
+  alternatives_considered:
+    - option: One monolithic git_scope implementation without fragment ARCHs
+      rejected_because: Existing fragment ARCHs already isolate diff-tree vs log, name-status parsing, and history transport; aggregate documents composition only.
+  related_decisions:
+    depends_on: []
+    informs: []
+    see_also:
+      - ARCH-TREEGREP_GIT_COMMIT_SCOPES_EXCLUDE_DELETED_DEFAULT_TEXT_MATCH
+      - ARCH-TREEGREP_GIT_COMMIT_SCOPES_INCLUDE_RENAMED_DEFAULT_TEXT_MATCH
+      - ARCH-TREEGREP_GIT_COMMIT_SCOPES_INCLUDE_DELETED_PATH_MATCH_TEXT_MATCH
+      - ARCH-TREEGREP_GIT_COMMIT_SCOPES_WORKING_TREE_CONTENT_TEXT_MATCH
+      - ARCH-TREEGREP_GIT_SPECIFIC_COMMIT_SNAPSHOT_CONTENT_TEXT_MATCH
+      - ARCH-TREEGREP_GIT_COMMIT_RANGE_COMMIT_SNAPSHOT_UNSUPPORTED_TEXT_MATCH
+      - ARCH-TREEGREP_GIT_SPECIFIC_COMMIT_SCOPE_TEXT_MATCH
+      - ARCH-TREEGREP_GIT_COMMIT_RANGE_SCOPE_TEXT_MATCH
+      - ARCH-TREEGREP_GIT_TRACKED_SCOPE_TEXT_MATCH
+  traceability:
+    requirements:
+      - REQ-TREEGREP_GIT_COMMIT_BASED_SCOPE_PATH_AND_CONTENT_ELIGIBILITY
+    implementation:
+      - IMPL-TREEGREP_GIT_TRACKED_SCOPE_TEXT_MATCH
+      - IMPL-TREEGREP_GIT_COMMIT_SCOPES_EXCLUDE_DELETED_DEFAULT_TEXT_MATCH
+      - IMPL-TREEGREP_GIT_COMMIT_SCOPES_INCLUDE_RENAMED_DEFAULT_TEXT_MATCH
+      - IMPL-TREEGREP_GIT_COMMIT_SCOPES_INCLUDE_DELETED_PATH_MATCH_TEXT_MATCH
+      - IMPL-TREEGREP_GIT_COMMIT_SCOPES_WORKING_TREE_CONTENT_TEXT_MATCH
+      - IMPL-TREEGREP_GIT_SPECIFIC_COMMIT_SNAPSHOT_CONTENT_TEXT_MATCH
+      - IMPL-TREEGREP_GIT_COMMIT_RANGE_COMMIT_SNAPSHOT_UNSUPPORTED_TEXT_MATCH
+      - IMPL-TREEGREP_GIT_SPECIFIC_COMMIT_SCOPE_TEXT_MATCH
+      - IMPL-TREEGREP_GIT_COMMIT_RANGE_SCOPE_TEXT_MATCH
+    tests:
+      - test/treegrep/git_specific_commit_scope_test.rb
+      - test/treegrep/git_commit_range_scope_test.rb
+      - test/treegrep/search_run_test.rb
+      - test/treegrep/search_run_search_root_composition_test.rb
+    code_annotations:
+      - ARCH-TREEGREP_GIT_COMMIT_BASED_SCOPE_PATH_AND_CONTENT_ELIGIBILITY
+  metadata:
+    last_updated:
+      date: "2026-03-23T14:15:00.000Z"
+      author: AI Agent
+      reason: '[PROC-AGENT_REQ_CHECKLIST] S05 detail recreate'
+---
+ARCH-TREEGREP_CONTENT_SMART_CASE_TEXT_MATCH:
+  name: Smart-case content literal substring policy
+  status: Active
+  cross_references:
+    - REQ-TREEGREP_CONTENT_SMART_CASE_TEXT_MATCH
+    - IMPL-TREEGREP_CONTENT_TEXT_MATCH
+    - ARCH-TREEGREP_CONTENT_TEXT_MATCH
+    - ARCH-TREEGREP_CONTENT_CASE_SENSITIVE_TEXT_MATCH
+    - ARCH-TREEGREP_CONTENT_CASE_INSENSITIVE_TEXT_MATCH
+    - ARCH-TREEGREP_CONTENT_MAX_FILE_SIZE_TEXT_MATCH
+  rationale:
+    why: Single entry point matches_in_file gains smart_case keyword; effective sensitivity derived from query without separate scanners.
+    problems_solved:
+      - Avoid duplicating line-scan logic for a third mode
+    benefits:
+      - One module; reuses sensitive and insensitive branches already defined
+  alternatives_considered:
+    - name: Separate SmartContentTextMatch module
+      pros:
+        - Isolation
+      cons:
+        - Duplicated File.foreach and hit emission
+      rejected_reason: Keep ContentTextMatch as single scanner
+  implementation_approach:
+    summary: 'matches_in_file(path, q, smart_case: true) ignores case_sensitive; if q matches /[[:upper:]]/ use line.include?(q); else line.downcase.include?(q.downcase). Hit :line is always original L. Locale tailoring out of scope.'
+    details:
+      - Same hit shape as other content modes; context lines out of scope
+      - lib/treegrep/content_text_match.rb
+  traceability:
+    requirements:
+      - REQ-TREEGREP_CONTENT_SMART_CASE_TEXT_MATCH
+    implementation:
+      - IMPL-TREEGREP_CONTENT_TEXT_MATCH
+    tests:
+      - test_token_smart_matches_Token_line_REQ_TREEGREP_CONTENT_SMART_CASE_TEXT_MATCH
+      - test_TOken_smart_does_not_match_Token_line_REQ_TREEGREP_CONTENT_SMART_CASE_TEXT_MATCH
+      - test_tok3n_smart_matches_Tok3n_line_when_no_upper_in_query_REQ_TREEGREP_CONTENT_SMART_CASE_TEXT_MATCH
+      - test_Tok3n_smart_requires_matching_case_REQ_TREEGREP_CONTENT_SMART_CASE_TEXT_MATCH
+      - test_smart_case_true_ignores_case_sensitive_true_for_lowercase_query_REQ_TREEGREP_CONTENT_SMART_CASE_TEXT_MATCH
+      - test_smart_case_true_ignores_case_sensitive_false_when_query_has_upper_REQ_TREEGREP_CONTENT_SMART_CASE_TEXT_MATCH
+      - test_traverse_Token_line_smart_token_vs_TOken_REQ_TREEGREP_CONTENT_SMART_CASE_TEXT_MATCH
+    code_annotations:
+      - ARCH-TREEGREP_CONTENT_SMART_CASE_TEXT_MATCH
+      - IMPL-TREEGREP_CONTENT_TEXT_MATCH
+      - REQ-TREEGREP_CONTENT_SMART_CASE_TEXT_MATCH
+  related_decisions:
+    depends_on:
+      - REQ-TREEGREP_CONTENT_SMART_CASE_TEXT_MATCH
+    informs:
+      - IMPL-TREEGREP_CONTENT_TEXT_MATCH
+    see_also:
+      - ARCH-TREEGREP_CONTENT_CASE_SENSITIVE_TEXT_MATCH
+      - ARCH-TREEGREP_CONTENT_CASE_INSENSITIVE_TEXT_MATCH
+      - ARCH-TREEGREP_CONTENT_TEXT_MATCH
+      - ARCH-TREEGREP_CONTENT_MAX_FILE_SIZE_TEXT_MATCH
+  decision: Smart mode selects case-sensitive vs insensitive per query using presence of any uppercase letter (Regexp [[:upper:]]); otherwise identical to existing literal substring rules on file lines.
+  metadata:
+    last_updated:
+      date: "2026-03-21T23:59:00.000Z"
+      author: AI Agent
+      reason: ARCH content smart-case [PROC-AGENT_REQ_CHECKLIST]
+---
+ARCH-TREEGREP_MODIFIED_TIME_LOWER_BOUND:
+  name: Modified-time lower bound (architecture)
+  status: Active
+  cross_references:
+    requirements:
+      - REQ-TREEGREP_MODIFIED_TIME_LOWER_BOUND
+    implementation:
+      - IMPL-TREEGREP_MODIFIED_TIME_LOWER_BOUND
+  rationale: Central gate keeps matchers and content reads unaware of time filtering.
+  constraints:
+    - Uses File.mtime; platform/filesystem timestamp resolution applies
+  decision: 'Enforce optional modified-time lower bound inside Treegrep::SearchRoot traversal: when after_time is set and time_field is :modified, coerce a lower instant and skip paths whose File.mtime is strictly before it; matchers and content reads stay unaware.'
+  related_decisions:
+    see_also:
+      - ARCH-TREEGREP_MODIFIED_TIME_UPPER_BOUND
+      - ARCH-TREEGREP_MODIFIED_TIME_RANGE
+      - ARCH-TREEGREP_DATE_ONLY_TIME_BOUND
+      - ARCH-TREEGREP_CREATED_TIME_BOUNDS
+---
+ARCH-TREEGREP_FILENAME_SMART_CASE_TEXT_MATCH:
+  name: Smart-case basename substring policy
+  status: Active
+  cross_references:
+    - REQ-TREEGREP_FILENAME_SMART_CASE_TEXT_MATCH
+    - IMPL-TREEGREP_FILENAME_TEXT_MATCH
+    - ARCH-TREEGREP_FILENAME_TEXT_MATCH
+    - ARCH-TREEGREP_FILENAME_CASE_SENSITIVE_TEXT_MATCH
+    - ARCH-TREEGREP_FILENAME_CASE_INSENSITIVE_TEXT_MATCH
+  rationale:
+    why: Single entry point keep_path? gains smart_case keyword; effective sensitivity derived from query without separate matchers.
+    problems_solved:
+      - Avoid duplicating substring logic for a third mode
+    benefits:
+      - One module; reuses sensitive and insensitive branches already defined
+  alternatives_considered:
+    - name: Separate SmartFilenameTextMatch module
+      pros:
+        - Isolation
+      cons:
+        - Duplicated basename strip-empty and include? logic
+      rejected_reason: Keep FilenameTextMatch as single predicate
+  implementation_approach:
+    summary: 'keep_path?(path, q, smart_case: true) ignores case_sensitive; after strip-empty, if q matches /[[:upper:]]/ use basename.include?(q); else basename.downcase.include?(q.downcase). Locale tailoring out of scope.'
+    details:
+      - Same traversed path emission as other filename modes; ranking out of scope
+  traceability:
+    requirements:
+      - REQ-TREEGREP_FILENAME_SMART_CASE_TEXT_MATCH
+    implementation:
+      - IMPL-TREEGREP_FILENAME_TEXT_MATCH
+    tests:
+      - test_report_smart_matches_Report_txt_REQ_TREEGREP_FILENAME_SMART_CASE_TEXT_MATCH
+      - test_RePort_smart_does_not_match_Report_txt_REQ_TREEGREP_FILENAME_SMART_CASE_TEXT_MATCH
+      - test_report1_smart_matches_Report1_txt_when_no_upper_in_query_REQ_TREEGREP_FILENAME_SMART_CASE_TEXT_MATCH
+      - test_Report1_smart_requires_matching_case_REQ_TREEGREP_FILENAME_SMART_CASE_TEXT_MATCH
+      - test_traverse_Report_txt_smart_report_vs_RePort_REQ_TREEGREP_FILENAME_SMART_CASE_TEXT_MATCH
+    code_annotations:
+      - ARCH-TREEGREP_FILENAME_SMART_CASE_TEXT_MATCH
+      - IMPL-TREEGREP_FILENAME_TEXT_MATCH
+      - REQ-TREEGREP_FILENAME_SMART_CASE_TEXT_MATCH
+  related_decisions:
+    depends_on:
+      - REQ-TREEGREP_FILENAME_SMART_CASE_TEXT_MATCH
+    informs:
+      - IMPL-TREEGREP_FILENAME_TEXT_MATCH
+    see_also:
+      - ARCH-TREEGREP_FILENAME_CASE_SENSITIVE_TEXT_MATCH
+      - ARCH-TREEGREP_FILENAME_CASE_INSENSITIVE_TEXT_MATCH
+      - ARCH-TREEGREP_FILENAME_TEXT_MATCH
+  decision: Smart mode selects case-sensitive vs insensitive per query using presence of any uppercase letter (Regexp [[:upper:]]); otherwise identical to existing substring rules on basename.
+  detail_file: architecture-decisions/ARCH-TREEGREP_FILENAME_SMART_CASE_TEXT_MATCH.yaml
+  metadata:
+    last_updated:
+      date: "2026-03-21T12:00:00.000Z"
+      author: AI Agent
+      reason: ARCH smart-case filename [PROC-AGENT_REQ_CHECKLIST]
+---
+ARCH-TREEGREP_COUNT_ONLY_TEXT_MATCH:
+  name: 'Architecture: count-only text output'
+  status: Active
+  decision: SearchRoot.count_matching_paths_after_validating_queries wraps each_matching_path_after_validating_queries (same kwargs including max_results) and returns Integer. SearchRun.format_text_search_output with count_only true formats only match_count (singular/plural grammar); listing_lines ignored.
+  cross_references:
+    - REQ-TREEGREP_COUNT_ONLY_TEXT_MATCH
+    - IMPL-TREEGREP_NAME_OR_CONTENT_QUERY_TEXT_MATCH
+  alternatives_considered:
+    - option: Count inside traverse without PATH_MATCHES_SEARCH_RUN
+      rejected_because: Would diverge from match semantics
+  detail_file: architecture-decisions/ARCH-TREEGREP_COUNT_ONLY_TEXT_MATCH.yaml
+  rationale:
+    why: Count-only must reuse the same validated traversal and PATH_MATCHES_SEARCH_RUN semantics as full listing so cardinality equals what a listing run would include (subject to max_results).
+    problems_solved:
+      - Duplicate counting logic diverging from match rules
+      - Streaming large path lists when only a total is needed
+    benefits:
+      - Single pipeline for count and list
+      - Plain-text UX can show one summary line
+  implementation_approach:
+    summary: Integer count via wrapping each_matching_path_after_validating_queries; text formatting via SearchRun.format_text_search_output when count_only is true.
+    details:
+      - SearchRoot.count_matching_paths_after_validating_queries increments on each yield from each_matching_path_after_validating_queries with identical kwargs (including max_results cap).
+      - 'SearchRun.format_text_search_output(count_only: true) emits match_count with singular/plural grammar and ignores listing_lines.'
+  traceability:
+    tests:
+      - test_count_only_output_three_no_paths_REQ_TREEGREP_COUNT_ONLY_TEXT_MATCH
+      - test_count_only_zero_matches_REQ_TREEGREP_COUNT_ONLY_TEXT_MATCH
+      - test_count_matches_each_matching_enumeration_REQ_TREEGREP_COUNT_ONLY_TEXT_MATCH
+      - test_count_matching_paths_forwards_max_results_to_each_matching_after_validating_REQ_TREEGREP_COUNT_ONLY_TEXT_MATCH
+      - test_format_count_only_one_match_grammar_REQ_TREEGREP_COUNT_ONLY_TEXT_MATCH
+      - test_format_count_only_three_matches_plural_word_REQ_TREEGREP_COUNT_ONLY_TEXT_MATCH
+  related_decisions:
+    depends_on:
+      - REQ-TREEGREP_COUNT_ONLY_TEXT_MATCH
+    informs:
+      - IMPL-TREEGREP_NAME_OR_CONTENT_QUERY_TEXT_MATCH
+    see_also:
+      - ARCH-TREEGREP_NAME_OR_CONTENT_QUERY_TEXT_MATCH
+      - ARCH-TREEGREP_MAX_RESULTS_TEXT_MATCH
+  metadata:
+    last_updated:
+      date: "2026-03-23T18:45:00.000Z"
+      author: AI Agent
+      reason: S10 [PROC-AGENT_REQ_CHECKLIST] composition test COUNT_MATCHING kwargs forward
+---
+ARCH-TREEGREP_GIT_UNTRACKED_SCOPE_TEXT_MATCH:
+  name: Git untracked scope (architecture)
+  status: Active
+  cross_references:
+    requirements:
+      - REQ-TREEGREP_GIT_UNTRACKED_SCOPE_TEXT_MATCH
+    implementation:
+      - IMPL-TREEGREP_GIT_UNTRACKED_SCOPE_TEXT_MATCH
+      - IMPL-TREEGREP_GIT_TRACKED_SCOPE_TEXT_MATCH
+  rationale: Untracked eligibility matches Git's ls-files --others --exclude-standard so ignored files stay out without treegrep interpreting .gitignore itself.
+  constraints:
+    - Same work-tree resolution as tracked scope (rev-parse)
+    - Membership in untracked set from one git invocation at traversal start
+  alternatives_considered:
+    - option: Per-file git check-ignore
+      rejected_because: Bulk ls-files --others --exclude-standard is fewer subprocesses and matches Git's definition
+---
+ARCH-TREEGREP_SORT_RESULTS_PATH_TEXT_MATCH:
+  name: Path sort for search match lists (architecture)
+  status: Active
+  cross_references:
+    requirements:
+      - REQ-TREEGREP_SORT_RESULTS_PATH_TEXT_MATCH
+    implementation:
+      - IMPL-TREEGREP_SORT_RESULTS_PATH_TEXT_MATCH
+      - IMPL-TREEGREP_JSON_OUTPUT_TEXT_MATCH
+      - IMPL-TREEGREP_YAML_OUTPUT_TEXT_MATCH
+      - IMPL-TREEGREP_TEXT_OUTPUT_FILENAME_MATCH_TEXT_MATCH
+      - IMPL-TREEGREP_TEXT_OUTPUT_CONTENT_MATCH_TEXT_MATCH
+  rationale: Optional sort_results keyword is stripped before SearchRoot traversal so Ruby keyword lists stay stable; sorting applies after collection using lexical path order.
+  constraints:
+    - sort_results is nil or :path only
+    - sort_results must not be forwarded to each_matching_path_after_validating_queries
+  alternatives_considered:
+    - option: Sort during traversal
+      rejected_because: Traversal order stays independent; post-sort keeps a single ordering policy for records and text lines
+---
+ARCH-MODULE_VALIDATION:
+  name: Module Validation Strategy
+  status: Active
+  cross_references:
+    - REQ-MODULE_VALIDATION
+  rationale:
+    why: To eliminate bugs related to code complexity by ensuring each module works correctly in isolation
+    problems_solved:
+      - Integration complexity causing difficult-to-debug issues
+      - Bugs discovered too late in development cycle
+      - Module contracts not properly validated
+    benefits:
+      - Bugs caught early before integration
+      - Reduced integration complexity
+      - Easier debugging by isolating issues
+      - Enables parallel module development
+      - Clear module boundaries and contracts
+  alternatives_considered:
+    - name: Big Bang Integration
+      pros:
+        - Faster initial integration
+      cons:
+        - Too complex to debug
+        - Bugs compound during integration
+        - Difficult to isolate issues
+      rejected_reason: Makes debugging too difficult and bugs compound
+    - name: Minimal Validation
+      pros:
+        - Faster development cycle
+      cons:
+        - Insufficient to catch complexity bugs
+        - Doesn't validate contracts properly
+      rejected_reason: Insufficient validation leads to integration issues
+    - name: Post-Integration Validation Only
+      pros:
+        - All validation done at once
+      cons:
+        - Doesn't catch module-level bugs early
+        - Increases debugging complexity
+      rejected_reason: Bugs discovered too late, making fixes expensive
+  implementation_approach:
+    summary: Independent module validation before integration with comprehensive testing strategy
+    details:
+      - Identify modules and document boundaries before development
+      - Define module interfaces and contracts explicitly
+      - Specify validation criteria for each module
+      - Unit test modules with mocked dependencies
+      - Integration test with test doubles (mocks, stubs, fakes)
+      - Validate contracts (input/output validation)
+      - Test edge cases and error handling
+      - Document validation results before integration
+      - Only integrate after validation passes
+  traceability:
+    requirements:
+      - REQ-MODULE_VALIDATION
+    implementation:
+      - IMPL-MODULE_VALIDATION
+    tests:
+      - testModuleName_IndependentValidation_REQ_MODULE_VALIDATION
+    code_annotations:
+      - IMPL-MODULE_VALIDATION
+      - REQ-MODULE_VALIDATION
+  related_decisions:
+    depends_on:
+      - REQ-MODULE_VALIDATION
+    informs:
+      - IMPL-MODULE_VALIDATION
+    see_also: []
+  detail_file: architecture-decisions/ARCH-MODULE_VALIDATION.yaml
+  metadata:
+    created:
+      date: 2025-12-18
+      author: AI Agent
+    last_updated:
+      date: 2026-02-06
+      author: AI Agent
+      reason: Restructured to v1.5.0 schema with machine-parseable fields
+    last_validated:
+      date: 2026-02-06
+      validator: AI Agent
+      result: pass
+---
+ARCH-TREEGREP_CONTENT_MAX_FILE_SIZE_TEXT_MATCH:
+  name: Max file size gate for content literal scan
+  status: Active
+  cross_references:
+    - REQ-TREEGREP_CONTENT_MAX_FILE_SIZE_TEXT_MATCH
+    - IMPL-TREEGREP_CONTENT_TEXT_MATCH
+    - ARCH-TREEGREP_CONTENT_TEXT_MATCH
+    - ARCH-TREEGREP_CONTENT_CASE_SENSITIVE_TEXT_MATCH
+    - ARCH-TREEGREP_CONTENT_CASE_INSENSITIVE_TEXT_MATCH
+    - ARCH-TREEGREP_CONTENT_SMART_CASE_TEXT_MATCH
+  rationale:
+    why: Content scanning should not unconditionally read arbitrarily large files; one module keeps stat+scan policy next to line iteration.
+    problems_solved:
+      - Unbounded read cost on huge files
+    benefits:
+      - Predictable per-file work
+      - Same hit shape when scan runs
+  alternatives_considered:
+    - name: Skip large files in traversal (SearchRoot)
+      pros:
+        - Earlier skip
+      cons:
+        - Duplicates file-type policy
+        - Traversal IMPL grows content concerns
+      rejected_reason: Keep size gate in ContentTextMatch with optional max_bytes keyword
+  implementation_approach:
+    summary: 'matches_in_file(path, q, ..., max_content_file_bytes: nil) — when max is a positive integer and File.size(path) >= max, return empty hit list without reading lines; nil/omit means no gate. Comparison uses platform byte size for the path. Symlink and sparse-file semantics follow Ruby File.size.'
+    details:
+      - Applies to content text scan only; filename matching unchanged
+      - lib/treegrep/content_text_match.rb
+  traceability:
+    requirements:
+      - REQ-TREEGREP_CONTENT_MAX_FILE_SIZE_TEXT_MATCH
+    implementation:
+      - IMPL-TREEGREP_CONTENT_TEXT_MATCH
+    tests:
+      - test_matches_in_file_respects_max_file_bytes_REQ_TREEGREP_CONTENT_MAX_FILE_SIZE_TEXT_MATCH
+      - test_traverse_skips_oversize_file_for_content_REQ_TREEGREP_CONTENT_MAX_FILE_SIZE_TEXT_MATCH
+    code_annotations:
+      - ARCH-TREEGREP_CONTENT_MAX_FILE_SIZE_TEXT_MATCH
+      - IMPL-TREEGREP_CONTENT_TEXT_MATCH
+      - REQ-TREEGREP_CONTENT_MAX_FILE_SIZE_TEXT_MATCH
+  related_decisions:
+    depends_on:
+      - REQ-TREEGREP_CONTENT_MAX_FILE_SIZE_TEXT_MATCH
+    informs:
+      - IMPL-TREEGREP_CONTENT_TEXT_MATCH
+    see_also:
+      - ARCH-TREEGREP_CONTENT_TEXT_MATCH
+      - ARCH-TREEGREP_CONTENT_CASE_SENSITIVE_TEXT_MATCH
+      - ARCH-TREEGREP_CONTENT_CASE_INSENSITIVE_TEXT_MATCH
+      - ARCH-TREEGREP_CONTENT_SMART_CASE_TEXT_MATCH
+  decision: Optional positive byte limit on matches_in_file; at or over limit yields no line reads and no hits; under limit preserves existing literal and case-mode behavior.
+  metadata:
+    last_updated:
+      date: "2026-03-22T12:00:00.000Z"
+      author: AI Agent
+      reason: S13 [PROC-AGENT_REQ_CHECKLIST] TIED synced — gate remains in ContentTextMatch; Ruby skip_content_line_reads_for_byte_cap? documents FILE_BYTE_SIZE branch
+---
+ARCH-TREEGREP_NAME_OR_CONTENT_QUERY_TEXT_MATCH:
+  name: Search run contract for optional name and content queries
+  status: Active
+  cross_references:
+    - REQ-TREEGREP_NAME_OR_CONTENT_QUERY_TEXT_MATCH
+    - REQ-TREEGREP_NAME_CONTENT_AND_TEXT_MATCH
+    - REQ-TREEGREP_NAME_CONTENT_OR_TEXT_MATCH
+    - IMPL-TREEGREP_NAME_OR_CONTENT_QUERY_TEXT_MATCH
+    - IMPL-TREEGREP_NAME_CONTENT_AND_TEXT_MATCH
+    - IMPL-TREEGREP_NAME_CONTENT_OR_TEXT_MATCH
+    - ARCH-TREEGREP_FILENAME_TEXT_MATCH
+    - ARCH-TREEGREP_CONTENT_TEXT_MATCH
+    - ARCH-TREEGREP_NAME_CONTENT_AND_TEXT_MATCH
+    - ARCH-TREEGREP_NAME_CONTENT_OR_TEXT_MATCH
+    - ARCH-TREEGREP_DEFAULT_SEARCH_ROOT
+    - ARCH-TREEGREP_EXPLICIT_SEARCH_ROOT
+  rationale:
+    why: File-name and content matchers intentionally treat empty queries as no-op filters inside their modules; a separate orchestration decision is required so a full run cannot complete successfully with both inactive.
+    problems_solved:
+      - Ad hoc traverse callbacks can list every file when both queries are empty
+      - Unclear ordering between name filter and content scan for valid runs
+    benefits:
+      - Single place to validate run inputs before I/O
+      - Preserves unit-testable primitives in FilenameTextMatch and ContentTextMatch
+  alternatives_considered:
+    - name: Change FilenameTextMatch and ContentTextMatch to reject empty queries globally
+      pros:
+        - Forces callers to think about queries
+      cons:
+        - Breaks composition patterns that rely on empty name meaning no name filter while content is active
+        - Conflates module-level predicate with run-level policy
+      rejected_reason: Keep primitives aligned with existing filename and content REQs; enforce run contract at orchestration boundary
+  implementation_approach:
+    summary: 'Treegrep::SearchRun validates at least one active query before traversal (EmptySearchQueriesError). Treegrep::SearchRoot#traverse_for_search_after_validating_queries runs validate then traverse_for_search ([IMPL-TREEGREP_NAME_OR_CONTENT_QUERY_TEXT_MATCH]). Callers combine traversal with Treegrep::SearchMatch.path_matches_search_run? for dual-query runs: match_logic :and follows ARCH-TREEGREP_NAME_CONTENT_AND_TEXT_MATCH / REQ-TREEGREP_NAME_CONTENT_AND_TEXT_MATCH; :or follows ARCH-TREEGREP_NAME_CONTENT_OR_TEXT_MATCH / REQ-TREEGREP_NAME_CONTENT_OR_TEXT_MATCH. Single-query modes apply only ARCH-TREEGREP_FILENAME_TEXT_MATCH or ARCH-TREEGREP_CONTENT_TEXT_MATCH (no redundant dimension).'
+    details:
+      - 'Production: lib/treegrep/search_run.rb, lib/treegrep/search_root.rb, lib/treegrep/search_match.rb ([IMPL-TREEGREP_NAME_CONTENT_AND_TEXT_MATCH], [IMPL-TREEGREP_NAME_CONTENT_OR_TEXT_MATCH]).'
+      - Reuse Treegrep::SearchRoot.traverse_for_search; do not change root resolution error mapping.
+      - Invalid regex and binary-skip policies remain in existing content/filename ARCH slices.
+  traceability:
+    requirements:
+      - REQ-TREEGREP_NAME_OR_CONTENT_QUERY_TEXT_MATCH
+      - REQ-TREEGREP_NAME_CONTENT_AND_TEXT_MATCH
+      - REQ-TREEGREP_NAME_CONTENT_OR_TEXT_MATCH
+    implementation:
+      - IMPL-TREEGREP_NAME_OR_CONTENT_QUERY_TEXT_MATCH
+      - IMPL-TREEGREP_NAME_CONTENT_AND_TEXT_MATCH
+      - IMPL-TREEGREP_NAME_CONTENT_OR_TEXT_MATCH
+    tests:
+      - test_s11_treegrep_impls_are_not_e2e_only_no_ui_harness_required_REQ_MODULE_VALIDATION
+      - test_active_treegrep_impl_yaml_phase_h_fields_REQ_MODULE_VALIDATION
+      - test_validate_search_run_queries_wired_into_search_root_before_traverse_REQ_TREEGREP_NAME_OR_CONTENT_QUERY_TEXT_MATCH
+      - test_name_query_active_false_for_empty_and_whitespace_REQ_TREEGREP_NAME_OR_CONTENT_QUERY_TEXT_MATCH
+      - test_name_query_active_true_when_non_empty_after_strip_REQ_TREEGREP_NAME_OR_CONTENT_QUERY_TEXT_MATCH
+      - test_content_query_active_matches_content_filter_active_REQ_TREEGREP_NAME_OR_CONTENT_QUERY_TEXT_MATCH
+      - test_validate_raises_when_both_queries_inactive_REQ_TREEGREP_NAME_OR_CONTENT_QUERY_TEXT_MATCH
+      - test_validate_no_raise_when_only_name_active_REQ_TREEGREP_NAME_OR_CONTENT_QUERY_TEXT_MATCH
+      - test_validate_no_raise_when_only_content_active_REQ_TREEGREP_NAME_OR_CONTENT_QUERY_TEXT_MATCH
+      - test_validated_traverse_both_queries_inactive_raises_before_callback_REQ_TREEGREP_NAME_OR_CONTENT_QUERY_TEXT_MATCH
+      - test_validated_traverse_name_only_active_invokes_callback_REQ_TREEGREP_NAME_OR_CONTENT_QUERY_TEXT_MATCH
+      - test_validated_traverse_content_only_active_invokes_callback_REQ_TREEGREP_NAME_OR_CONTENT_QUERY_TEXT_MATCH
+    code_annotations:
+      - ARCH-TREEGREP_NAME_OR_CONTENT_QUERY_TEXT_MATCH
+      - REQ-TREEGREP_NAME_OR_CONTENT_QUERY_TEXT_MATCH
+      - IMPL-TREEGREP_NAME_OR_CONTENT_QUERY_TEXT_MATCH
+      - ARCH-TREEGREP_NAME_CONTENT_AND_TEXT_MATCH
+      - ARCH-TREEGREP_NAME_CONTENT_OR_TEXT_MATCH
+  related_decisions:
+    depends_on:
+      - REQ-TREEGREP_NAME_OR_CONTENT_QUERY_TEXT_MATCH
+    informs:
+      - IMPL-TREEGREP_NAME_OR_CONTENT_QUERY_TEXT_MATCH
+      - IMPL-TREEGREP_NAME_CONTENT_AND_TEXT_MATCH
+      - IMPL-TREEGREP_NAME_CONTENT_OR_TEXT_MATCH
+    see_also:
+      - ARCH-TREEGREP_FILENAME_TEXT_MATCH
+      - ARCH-TREEGREP_CONTENT_TEXT_MATCH
+      - ARCH-TREEGREP_NAME_CONTENT_AND_TEXT_MATCH
+      - ARCH-TREEGREP_NAME_CONTENT_OR_TEXT_MATCH
+      - ARCH-TREEGREP_DEFAULT_SEARCH_ROOT
+      - ARCH-TREEGREP_EXPLICIT_SEARCH_ROOT
+  decision: Validate at orchestration layer that at least one of file-name or content query is active before traversal; single-query modes use only the corresponding matcher; both inactive fails fast without listing the whole tree; dual-query AND/OR union and intersection are specified in sibling ARCH/REQ pairs composed via Treegrep::SearchMatch.
+  metadata:
+    last_updated:
+      date: "2026-03-22T01:00:00.000Z"
+      author: AI Agent
+      reason: 'S05 [PROC-AGENT_REQ_CHECKLIST] LEAP: link SearchMatch AND/OR ARCH+REQ+IMPL; refresh orchestration summary'
+  s13_tied_code_test_sync:
+    process_tokens:
+      - PROC-AGENT_REQ_CHECKLIST
+      - PROC-LEAP
+    matches_code: true
+    note: implementation_approach.details now name lib/treegrep/search_run.rb and traverse_for_search_after_validating_queries
+---
+ARCH-TREEGREP_SESSION_SUMMARY_CONTENT_TEXT_MATCH:
+  name: Session summary content (architecture)
+  status: Active
+  cross_references:
+    requirements:
+      - REQ-TREEGREP_SESSION_SUMMARY_CONTENT_TEXT_MATCH
+      - REQ-TREEGREP_PERMISSION_SILENT_SKIP_TEXT_MATCH
+    implementation:
+      - IMPL-TREEGREP_SESSION_SUMMARY_CONTENT_TEXT_MATCH
+  rationale: A single pure function on SearchRun builds a String-keyed Hash from the same kwargs shape as each_matching_path_after_validating_queries plus match_count and optional warning_count, so hosts can merge run metadata without re-deriving effective filters. When permission_behavior is silent_skip, the summary MUST omit warning_count so structured output does not surface suppressed permission skips as warnings ([REQ-TREEGREP_PERMISSION_SILENT_SKIP_TEXT_MATCH]).
+  constraints:
+    - effective_search_root is effective_root.to_s (canonical path string)
+    - Omit keys for unset optional filters for stable minimal summaries
+    - permission_behavior silent_skip implies warning_count key omitted (warns treated as zero for summary consumers)
+  alternatives_considered:
+    - option: Embed full summary inside JSON/YAML search documents only
+      rejected_because: run_summary and structured output consumers need the same effective-settings snapshot independently
+  traceability:
+    requirements:
+      - REQ-TREEGREP_SESSION_SUMMARY_CONTENT_TEXT_MATCH
+    implementation:
+      - IMPL-TREEGREP_SESSION_SUMMARY_CONTENT_TEXT_MATCH
+    tests:
+      - test_summary_reports_root_queries_exclusions_git_and_count_REQ_TREEGREP_SESSION_SUMMARY_CONTENT_TEXT_MATCH
+      - test_summary_omits_unset_optional_sections_REQ_TREEGREP_SESSION_SUMMARY_CONTENT_TEXT_MATCH
+      - test_summary_warning_count_when_warnings_present_REQ_TREEGREP_SESSION_SUMMARY_CONTENT_TEXT_MATCH
+      - test_summary_warning_count_from_unreadable_skipped_REQ_TREEGREP_SESSION_SUMMARY_CONTENT_TEXT_MATCH
+      - test_summary_silent_skip_omits_warning_count_REQ_TREEGREP_PERMISSION_SILENT_SKIP_TEXT_MATCH
+      - test_summary_path_filters_and_time_bounds_when_set_REQ_TREEGREP_SESSION_SUMMARY_CONTENT_TEXT_MATCH
+      - test_summary_output_options_sort_absolute_output_mode_REQ_TREEGREP_SESSION_SUMMARY_CONTENT_TEXT_MATCH
+      - test_summary_invalid_permission_behavior_raises_REQ_TREEGREP_SESSION_SUMMARY_CONTENT_TEXT_MATCH
+      - test_summary_non_integer_warning_count_raises_REQ_TREEGREP_SESSION_SUMMARY_CONTENT_TEXT_MATCH
+      - test_summary_filename_match_options_regexp_value_serializes_to_source_string_REQ_TREEGREP_SESSION_SUMMARY_CONTENT_TEXT_MATCH
+      - test_SESSION_SUMMARY_SERIALIZE_OPTIONS_MAP_raises_type_error_when_opts_not_hash_or_nil_REQ_TREEGREP_SESSION_SUMMARY_CONTENT_TEXT_MATCH
+      - test_pipeline_name_only_then_summary_aligns_flags_count_and_options_REQ_TREEGREP_SESSION_SUMMARY_CONTENT_TEXT_MATCH
+      - test_pipeline_dual_query_match_logic_forwarded_into_summary_REQ_TREEGREP_SESSION_SUMMARY_CONTENT_TEXT_MATCH
+      - test_pipeline_exclude_dir_relative_path_regexes_align_paths_and_summary_REQ_TREEGREP_SESSION_SUMMARY_CONTENT_TEXT_MATCH
+      - test_pipeline_include_extensions_align_paths_and_summary_path_filters_REQ_TREEGREP_SESSION_SUMMARY_CONTENT_TEXT_MATCH
+      - test_pipeline_exclude_extensions_align_paths_and_summary_path_filters_REQ_TREEGREP_SESSION_SUMMARY_CONTENT_TEXT_MATCH
+      - test_s11_treegrep_impls_are_not_e2e_only_no_ui_harness_required_REQ_MODULE_VALIDATION
+      - test_active_treegrep_impl_yaml_phase_h_fields_REQ_MODULE_VALIDATION
+    code_annotations:
+      - ARCH-TREEGREP_SESSION_SUMMARY_CONTENT_TEXT_MATCH
+      - REQ-TREEGREP_SESSION_SUMMARY_CONTENT_TEXT_MATCH
+      - IMPL-TREEGREP_SESSION_SUMMARY_CONTENT_TEXT_MATCH
+  metadata:
+    last_updated:
+      date: "2026-03-24"
+      author: AI Agent
+      reason: S13 [PROC-AGENT_REQ_CHECKLIST] — SESSION_SUMMARY_SERIALIZE_OPTIONS_MAP TypeError test in traceability; retains S06.4 silent_skip summary cross-refs ([PROC-TIED_DEV_CYCLE] [PROC-LEAP])
+---
+ARCH-TREEGREP_CONTENT_CASE_SENSITIVE_TEXT_MATCH:
+  name: Case-sensitive content literal substring
+  status: Active
+  cross_references:
+    - REQ-TREEGREP_CONTENT_CASE_SENSITIVE_TEXT_MATCH
+    - IMPL-TREEGREP_CONTENT_TEXT_MATCH
+    - ARCH-TREEGREP_CONTENT_TEXT_MATCH
+    - ARCH-TREEGREP_CONTENT_CASE_INSENSITIVE_TEXT_MATCH
+    - ARCH-TREEGREP_CONTENT_SMART_CASE_TEXT_MATCH
+    - ARCH-TREEGREP_CONTENT_MAX_FILE_SIZE_TEXT_MATCH
+  rationale:
+    why: Case sensitivity is a mode on the same line literal matcher; one module with an explicit flag matches file-name design.
+    problems_solved:
+      - Duplicating traversal and line-read rules
+    benefits:
+      - 'matches_in_file(..., case_sensitive: true) uses String#include? on raw line and query'
+  alternatives_considered:
+    - name: Separate matcher module per case mode
+      pros:
+        - Clear separation
+      cons:
+        - Duplicated empty-query and encoding rules
+      rejected_reason: Extend ContentTextMatch with case_sensitive keyword default true
+  implementation_approach:
+    summary: 'ContentTextMatch.matches_in_file(path, query, case_sensitive: true) uses line.include?(query). case_sensitive: false is specified under ARCH-TREEGREP_CONTENT_CASE_INSENSITIVE_TEXT_MATCH. Locale tailoring out of scope.'
+    details:
+      - Hit records use original line string from file
+  traceability:
+    requirements:
+      - REQ-TREEGREP_CONTENT_CASE_SENSITIVE_TEXT_MATCH
+    implementation:
+      - IMPL-TREEGREP_CONTENT_TEXT_MATCH
+    tests:
+      - test_token_query_does_not_match_Token_line_REQ_TREEGREP_CONTENT_CASE_SENSITIVE_TEXT_MATCH
+      - test_Token_query_matches_Token_line_REQ_TREEGREP_CONTENT_CASE_SENSITIVE_TEXT_MATCH
+      - test_matching_line_is_original_file_content_REQ_TREEGREP_CONTENT_CASE_SENSITIVE_TEXT_MATCH
+      - test_default_case_sensitive_true_same_as_explicit_REQ_TREEGREP_CONTENT_CASE_SENSITIVE_TEXT_MATCH
+      - test_non_letter_query_matched_literally_REQ_TREEGREP_CONTENT_CASE_SENSITIVE_TEXT_MATCH
+      - test_traverse_Token_line_token_query_no_hit_Token_query_hit_REQ_TREEGREP_CONTENT_CASE_SENSITIVE_TEXT_MATCH
+    code_annotations:
+      - ARCH-TREEGREP_CONTENT_CASE_SENSITIVE_TEXT_MATCH
+      - IMPL-TREEGREP_CONTENT_TEXT_MATCH
+      - REQ-TREEGREP_CONTENT_CASE_SENSITIVE_TEXT_MATCH
+  related_decisions:
+    depends_on:
+      - REQ-TREEGREP_CONTENT_CASE_SENSITIVE_TEXT_MATCH
+    informs:
+      - IMPL-TREEGREP_CONTENT_TEXT_MATCH
+    see_also:
+      - ARCH-TREEGREP_CONTENT_TEXT_MATCH
+      - ARCH-TREEGREP_CONTENT_CASE_INSENSITIVE_TEXT_MATCH
+      - ARCH-TREEGREP_CONTENT_SMART_CASE_TEXT_MATCH
+      - ARCH-TREEGREP_CONTENT_MAX_FILE_SIZE_TEXT_MATCH
+      - ARCH-TREEGREP_FILENAME_CASE_SENSITIVE_TEXT_MATCH
+  detail_file: architecture-decisions/ARCH-TREEGREP_CONTENT_CASE_SENSITIVE_TEXT_MATCH.yaml
+  metadata:
+    last_updated:
+      date: "2026-03-21T22:05:00.000Z"
+      author: AI Agent
+      reason: detail_file, metadata, traceability.tests aligned to suite
+---
+ARCH-RUBY_INT_FOUR_INT_MULTIPLY:
+  name: Ruby pure-function layout for four-integer product
+  status: Active
+  cross_references:
+    - REQ-RUBY_INT_FOUR_INT_MULTIPLY
+    - IMPL-RUBY_INT_FOUR_INT_MULTIPLY
+  decision: Implement REQ-RUBY_INT_FOUR_INT_MULTIPLY as a single pure Ruby function in lib/ with no framework or I/O dependencies; unit tests under test/ prove Integer multiplication semantics including Bignum promotion.
+  rationale:
+    why: Mirrors ARCH-RUBY_INT_MULTIPLY pattern for an additional arity; isolates four-factor arithmetic for testability.
+    problems_solved:
+      - Unclear module boundary for a four-factor integer product
+      - Ad hoc composition of multiply_three_integers for four inputs
+    benefits:
+      - Direct unit testing of multiply_four_integers
+      - Clear module boundary aligned with REQ-MODULE_VALIDATION
+      - Parallel lib layout to three-factor helper without merging REQs
+  traceability:
+    requirements:
+      - REQ-RUBY_INT_FOUR_INT_MULTIPLY
+    implementation:
+      - IMPL-RUBY_INT_FOUR_INT_MULTIPLY
+    tests:
+      - test/multiply_four_integers_test.rb
+    code_annotations:
+      - ARCH-RUBY_INT_FOUR_INT_MULTIPLY
+      - REQ-RUBY_INT_FOUR_INT_MULTIPLY
+      - IMPL-RUBY_INT_FOUR_INT_MULTIPLY
+  metadata:
+    last_updated:
+      date: "2026-03-21"
+      author: AI Agent
+      reason: 'S13 LEAP sync: implementation_approach matches IMPL delivery (Integer guard + reduce)'
+  alternatives_considered:
+    - name: Service object with injected dependencies
+      pros:
+        - Easier mocking in larger applications
+      cons:
+        - Overhead for a single pure function
+      rejected_reason: Unnecessary complexity for four-integer multiply
+    - name: Numeric coercion pipeline
+      pros:
+        - Uniform type handling
+      cons:
+        - Out of scope per REQ non-goals
+      rejected_reason: REQ-RUBY_INT_FOUR_INT_MULTIPLY excludes non-Integer coercion unless separately required
+    - name: BigDecimal-only arithmetic
+      pros:
+        - Decimal precision
+      cons:
+        - Not aligned with Integer product requirement
+      rejected_reason: REQ specifies Integer semantics
+    - name: Compose multiply_three_integers with an extra factor (e.g. multiply_three_integers(a,b,c) * d)
+      pros:
+        - Reuse existing three-factor implementation
+      cons:
+        - Awkward API and factor grouping; blurs REQ boundaries
+      rejected_reason: Dedicated four-arg function matches REQ-RUBY_INT_FOUR_INT_MULTIPLY contract
+  implementation_approach:
+    summary: One library file lib/multiply_four_integers.rb; tests in test/multiply_four_integers_test.rb
+    details:
+      - Export a single pure function multiply_four_integers(a, b, c, d)
+      - No network, filesystem, or user I/O in the module
+      - IMPL enforces Integer-only operands (TypeError) then product via reduce(:*); same numeric semantics as chained Integer#*; no non-Integer coercion
+  related_decisions:
+    depends_on:
+      - ARCH-MODULE_VALIDATION
+    informs:
+      - IMPL-RUBY_INT_FOUR_INT_MULTIPLY
+    see_also:
+      - ARCH-RUBY_INT_MULTIPLY
+---
+ARCH-TREEGREP_DATE_ONLY_TIME_BOUND:
+  name: Date-only bound interpretation (architecture)
+  status: Active
+  cross_references:
+    requirements:
+      - REQ-TREEGREP_DATE_ONLY_TIME_BOUND
+    implementation:
+      - IMPL-TREEGREP_DATE_ONLY_TIME_BOUND
+  rationale: Users expect a bare calendar date to mean the whole local day for both lower and upper bounds ([REQ-TREEGREP_DATE_ONLY_TIME_BOUND] examples 1–2). Failing fast on bad strings avoids partial traversals and matches CLI/library error expectations.
+  constraints:
+    - Process default time zone defines local for Time.new(y,m,d,…).
+    - Explicit time-zone offset or IANA zone rules in input strings remain out of scope.
+    - The same coercion feeds modified-time and created-time bound helpers (shared IMPL).
+  decision: 'Coerce date-only after_time and before_time to closed local-calendar-day instants in Treegrep::SearchRoot: :lower uses local 00:00:00; :upper uses local end of that day (23:59:59 with last representable subsecond). Date and date-shaped strings use Date.parse then the same mapping; full Time and #to_time values are exact instants. Unparseable or invalid calendar dates raise InvalidTimeBoundError before any directory walk.'
+  related_decisions:
+    see_also:
+      - ARCH-TREEGREP_MODIFIED_TIME_LOWER_BOUND
+      - ARCH-TREEGREP_MODIFIED_TIME_UPPER_BOUND
+      - ARCH-TREEGREP_MODIFIED_TIME_RANGE
+      - ARCH-TREEGREP_CREATED_TIME_BOUNDS
+  metadata:
+    last_updated:
+      date: "2026-03-22T18:00:00.000Z"
+      author: AI Agent
+      reason: 'S05 [PROC-AGENT_REQ_CHECKLIST]: decision, rationale, constraints, related_decisions see_also'
+---
+ARCH-TREEGREP_CONTENT_INVALID_REGEX_TEXT_MATCH:
+  name: Invalid content regex handling
+  status: Active
+  cross_references:
+    - REQ-TREEGREP_CONTENT_INVALID_REGEX_TEXT_MATCH
+    - REQ-TREEGREP_CONTENT_REGEX_TEXT_MATCH
+    - ARCH-TREEGREP_CONTENT_REGEX_TEXT_MATCH
+    - IMPL-TREEGREP_CONTENT_TEXT_MATCH
+    - ARCH-TREEGREP_CONTENT_TEXT_MATCH
+  rationale:
+    why: Typed errors align with file-name invalid-regex and satisfy REQ wording.
+    alternatives_considered:
+      - name: Propagate raw RegexpError only
+        rejected_reason: Message does not name content context
+    consequences:
+      - Library callers rescue InvalidContentRegexError
+  decision: 'ContentTextMatch.content_regexp!(q) compiles with Regexp.new; rescue RegexpError and re-raise as Treegrep::ContentTextMatch::InvalidContentRegexError with prefix Invalid content regex:. matches_in_file(regex: true) uses content_regexp!(q) or caller regexp:; compile runs before max-bytes skip and before File.foreach so no partial hits.'
+  summary: content_regexp!(q) → Regexp or InvalidContentRegexError; empty pattern → ArgumentError; matches_in_file(regex:, regexp:) applies compile order per decision.
+  constraints:
+    - Do not attempt to fix invalid patterns
+  implementation_notes:
+    - InvalidContentRegexError < StandardError
+    - 'Message prefix: Invalid content regex:'
+  implementation_approach:
+    summary: content_regexp!(q) wraps Regexp.new; matches_in_file uses regexp || content_regexp!(q) before byte cap and line iteration.
+    details:
+      - lib/treegrep/content_text_match.rb
+  traceability:
+    requirements:
+      - REQ-TREEGREP_CONTENT_INVALID_REGEX_TEXT_MATCH
+    implementation:
+      - IMPL-TREEGREP_CONTENT_TEXT_MATCH
+    tests:
+      - test_open_paren_content_regexp_bang_raises_invalid_REQ_TREEGREP_CONTENT_INVALID_REGEX_TEXT_MATCH
+      - test_matches_in_file_regex_mode_invalid_pattern_raises_REQ_TREEGREP_CONTENT_INVALID_REGEX_TEXT_MATCH
+      - test_invalid_regex_raises_before_any_line_read_REQ_TREEGREP_CONTENT_INVALID_REGEX_TEXT_MATCH
+      - test_content_regexp_bang_valid_returns_regexp_REQ_TREEGREP_CONTENT_INVALID_REGEX_TEXT_MATCH
+      - test_content_regexp_bang_empty_raises_argument_error_REQ_TREEGREP_CONTENT_INVALID_REGEX_TEXT_MATCH
+      - test_invalid_regex_raises_even_when_file_over_max_bytes_REQ_TREEGREP_CONTENT_INVALID_REGEX_TEXT_MATCH
+      - test_traverse_invalid_content_regex_raises_empty_hits_REQ_TREEGREP_CONTENT_INVALID_REGEX_TEXT_MATCH
+    code_annotations:
+      - ARCH-TREEGREP_CONTENT_INVALID_REGEX_TEXT_MATCH
+      - IMPL-TREEGREP_CONTENT_TEXT_MATCH
+      - REQ-TREEGREP_CONTENT_INVALID_REGEX_TEXT_MATCH
+  related_decisions:
+    depends_on:
+      - REQ-TREEGREP_CONTENT_INVALID_REGEX_TEXT_MATCH
+    informs:
+      - IMPL-TREEGREP_CONTENT_TEXT_MATCH
+    see_also:
+      - ARCH-TREEGREP_CONTENT_REGEX_TEXT_MATCH
+      - ARCH-TREEGREP_CONTENT_TEXT_MATCH
+  metadata:
+    last_updated:
+      date: "2026-03-21T16:00:00.000Z"
+      author: AI Agent
+      reason: S16 invalid content regex ARCH [PROC-AGENT_REQ_CHECKLIST]
+---
+ARCH-TREEGREP_EXCLUDE_DIRECTORY_RELATIVE_PATH:
+  name: Relative-path directory exclusion (architecture)
+  status: Active
+  cross_references:
+    requirements:
+      - REQ-TREEGREP_EXCLUDE_DIRECTORY_RELATIVE_PATH
+    implementation:
+      - IMPL-TREEGREP_EXCLUDE_DIRECTORY_RELATIVE_PATH
+  rationale: Exact relative match targets one subtree without global basename rules.
+  constraints:
+    - Canonical relative form must match user input normalization

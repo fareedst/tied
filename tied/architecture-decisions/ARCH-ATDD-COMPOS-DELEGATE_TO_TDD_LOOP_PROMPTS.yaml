@@ -1,0 +1,55 @@
+ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS:
+  name: Delegate YAML prompt semantics to TddLoopPrompts modules
+  status: Active
+  cross_references:
+    - REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
+    - REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS
+  rationale:
+    why: One authoritative parser for TDD loop YAML avoids duplicated rules between argv expansion and export
+    problems_solved:
+      - Inconsistent step ordering or message bodies between modes
+    benefits:
+      - Single module owns messages_from_yaml and step_entries_from_yaml
+    upstream_note: Imported from atdd commit eb88236290009b78eb11ea561816f0854176bf12
+  alternatives_considered:
+    - name: Duplicate YAML parsing in argv and export
+      pros:
+        - Localized code
+      cons:
+        - Drift risk
+      rejected_reason: ATDD centralizes in TddLoopPrompts
+  implementation_approach:
+    summary: AgentStreamArgv and export pipeline call into lib/tdd_loop_prompts.rb; lead checklist uses LeadChecklistPrompts
+    details:
+      - --tdd-yaml expands via TddLoopPrompts.messages_from_yaml
+      - Export uses TddLoopPrompts.step_entries_from_yaml and format_step
+  traceability:
+    requirements:
+      - REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
+      - REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS
+    implementation:
+      - IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
+      - IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS
+    tests:
+      - agent_stream_tdd_yaml_binding_test.rb
+      - export_tdd_prompts_binding_test.rb
+    code_annotations:
+      - ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS
+  related_decisions:
+    depends_on: []
+    informs:
+      - IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
+    see_also: []
+  detail_file: architecture-decisions/ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS.yaml
+  metadata:
+    created:
+      date: 2026-03-24
+      author: AI Agent
+    last_updated:
+      date: 2026-03-24
+      author: AI Agent
+      reason: Import ATDD agent stream TIED records
+    last_validated:
+      date: 2026-03-24
+      validator: AI Agent
+      result: pass

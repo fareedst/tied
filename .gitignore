@@ -1,6 +1,6 @@
-prompts
-docs/visuals/visual-specs.md
-docs/commit-message-format.md
 .cursor/mcp.json
-tied
+docs/commit-message-format.md
+docs/visuals/visual-specs.md
+prompts
 scripts/prepare_readme_demo.sh
+tied/requirements/REQ-FEEDBACK_TO_TIED.yaml

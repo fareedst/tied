@@ -9,10 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- **mcp-server/scripts/sync-ruby-tied-index.mjs** — Removed. Client Ruby demo tokens should not be merged into this repo’s project `tied/`; use `mcp-server/scripts/remove-client-reqs-from-tied.mjs` to strip client-only REQ/ARCH/IMPL from indexes and detail files when needed.
 - **MCP checklist state guide tools** — `tdd_state_guide`, `documentation_first_state_guide`, `agent_req_state_guide`, and `req_impl_state_guide` removed from `mcp-server/src/tools/index.ts`. `mcp-server/package.json` `npm test` no longer runs those tool suites. **Breaking change:** MCP clients must not call the removed tools; use `requirement_list_state_guide` and checklist documentation (e.g. `docs/agent-req-implementation-checklist.md`) instead.
 
 ### Changed
 
+- **README** — [Spec-Driven Development with TIED](README.md#spec-driven-development-with-tied): checklist-first path (CITDP, LEAP, TDD), mermaid pipelines, agent preload contract, `run-feature-batch.sh`, cross-links to Getting Started and Example Workflow.
+- **`.gitignore`** — `tied/` is no longer ignored; `prompts` and `docs/commit-message-format.md` / `docs/visuals/visual-specs.md` entries grouped/reordered so project `tied/` can be committed.
+- **`docs/citdp/CITDP-REQ-LEAP_PROPOSAL_QUEUE.yaml`** — Optional maintenance path for LEAP proposal queue work: `remove-client-reqs-from-tied.mjs` (replaces reference to removed `sync-ruby-tied-index.mjs`).
 - **Agent preload** — Added `docs/agent-preload-contract-tied-repo.yaml` for sessions where the workspace is this repository (YAML indexes at repo root). `docs/agent-preload-contract-template.yaml` comments direct agents to that file in that layout.
 - **copy_files.sh** — `req-impl-state-guide-agent-workflow.md` removed from `DOCS_TO_COPY`.
 - **scripts/run-feature-batch.sh** — Default workspace is `.` (repo root); `agent-preload-contract.yaml` and `prompts/all.yaml` are optional when absent; `--prompt-file` is passed only when set; `set -x` / `set +x` around the Ruby runner.
@@ -20,7 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - **LEAP proposal queue (MCP)** — Optional non-canonical documentation hints under `{project_root}/leap-proposals/` (`queue.json`, `audit-log.jsonl`). MCP tools `tied_leap_proposal_*` (list, add, extract diff, import session, reject, approve, mark applied, update, snapshot); opt-in `explicit_opt_in` for extract/import; queue tools do not write project `tied/*.yaml`. Module `mcp-server/src/analysis/leap-proposal-queue.ts`, composition tests `mcp-server/src/tools/leap-proposal-mcp.test.ts`. User doc: [docs/leap-proposal-queue.md](docs/leap-proposal-queue.md). TIED: `REQ-LEAP_PROPOSAL_QUEUE`, `ARCH-LEAP_PROPOSAL_QUEUE`, `IMPL-MCP_LEAP_PROPOSAL_QUEUE`.
-- **mcp-server/scripts/sync-ruby-tied-index.mjs** — One-shot merge of standalone Ruby demo REQ/ARCH/IMPL detail files into project `requirements.yaml`, `architecture-decisions.yaml`, `implementation-decisions.yaml`, and `semantic-tokens.yaml` (for index/registry alignment with `tied_validate_consistency`).
+- **mcp-server/scripts/remove-client-reqs-from-tied.mjs** — One-shot removal of client-only REQ/ARCH/IMPL keys (TreeGrep, Ruby multiply demo, CRSRBRW main list) from project `tied/` indexes and detail files.
 - **ATDD agent stream import (permanence)** — Full TIED traceability for the Cursor `agent` CLI harness (`REQ-ATDD-*`, `ARCH-ATDD-*`, `IMPL-ATDD-*`) in root and `semantic-tokens.yaml` / index YAML; detail files under `requirements/`, `architecture-decisions/`, `implementation-decisions/` with IMPL `essence_pseudocode` and upstream note (commit `eb88236290009b78eb11ea561816f0854176bf12`).
 - **`tools/agent-stream/`** — Vendored `run_agent_stream.rb`, `export_tdd_prompts.rb`, and `lib/` (argv/YAML expansion, TDD loop, lead checklist, feature batch prompts). README documents usage from repo root.
 - **Docs** — `docs/run-agent-stream-tied.md` (index), `docs/run-agent-stream-impl-e2e.md`, `docs/run-agent-stream-impl-composition.md`, `docs/run-agent-stream-upstream.md`, `docs/tdd_development_loop.yaml` (six-turn loop for `--tdd-yaml`).

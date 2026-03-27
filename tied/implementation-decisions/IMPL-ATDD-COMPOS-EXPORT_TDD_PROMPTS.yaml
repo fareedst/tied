@@ -1,0 +1,69 @@
+IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS:
+  name: Export TddLoopPrompts step entries to markdown files
+  status: Active
+  cross_references:
+    - ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS
+    - REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS
+  decision: For each step entry from step_entries_from_yaml, write one sanitized-id.md under the output directory with the formatted message body.
+  rationale:
+    why: Optional export path materializes one file per YAML step for workflows that do not use --tdd-yaml
+    problems_solved:
+      - Review and version per-step markdown outside the runner
+    benefits:
+      - Same step_entries_from_yaml as composition layer
+    upstream_note: lib/atdd_export_tdd_prompts.rb; tools/agent-stream/export_tdd_prompts.rb
+  implementation_approach:
+    summary: AtddExportTddPrompts.export_from_yaml uses step_entries_from_yaml and writes one file per entry
+    details:
+      - 'Entry point: ruby tools/agent-stream/export_tdd_prompts.rb [yaml] [out_dir]'
+  code_locations:
+    files:
+      - path: tools/agent-stream/lib/atdd_export_tdd_prompts.rb
+        description: Export pipeline [REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS]
+      - path: tools/agent-stream/export_tdd_prompts.rb
+        description: CLI entry for export
+      - path: tools/agent-stream/lib/tdd_loop_prompts.rb
+        description: Shared step parsing
+  traceability:
+    architecture:
+      - ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS
+    requirements:
+      - REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS
+    tests:
+      - export_tdd_prompts_binding_test.rb (upstream atdd)
+    code_annotations:
+      - IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS
+  related_decisions:
+    depends_on: []
+    supersedes: []
+    see_also:
+      - IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
+  essence_pseudocode: |-
+    # [REQ-MODULE_VALIDATION] [ARCH-MODULE_VALIDATION] [IMPL-MODULE_VALIDATION] — export is testable without UI
+    # [IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS] [ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS] [REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS]
+    # Summary: Materialize each YAML step as one markdown file using the same entries as TddLoopPrompts.
+    procedure export_step_entries_to_markdown(yaml_path, out_dir):
+      # [IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS] [ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS] [REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS]
+      # How: Single call to step_entries_from_yaml — delegates parsing to TddLoopPrompts per ARCH.
+      entries = TddLoopPrompts.step_entries_from_yaml(yaml_path)
+      # [IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS] [ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS] [REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS]
+      # How: Ensure output tree exists — satisfies REQ file materialization.
+      ensure out_dir exists
+      # [IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS] [ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS] [REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS]
+      # How: One file per entry with sanitized id and format_step body — REQ satisfaction criteria.
+      for each entry in entries:
+        write file (sanitized entry id).md with entry.message body
+      return count of files written
+  detail_file: implementation-decisions/IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS.yaml
+  metadata:
+    created:
+      date: 2026-03-24
+      author: AI Agent
+    last_updated:
+      date: 2026-03-24
+      author: AI Agent
+      reason: Import ATDD agent stream TIED records
+    last_validated:
+      date: 2026-03-24
+      validator: AI Agent
+      result: pass

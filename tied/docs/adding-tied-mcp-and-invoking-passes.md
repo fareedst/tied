@@ -63,18 +63,7 @@ Example:
 
 Path resolution: All path parameters (`output_base_path`, `file_path`, etc.) are resolved by the Node process. Absolute paths are used as-is; relative paths are resolved relative to the process current working directory (usually the workspace root). `TIED_BASE_PATH` is also cwd-relative unless you set it to an absolute path. See [mcp-server/README.md](../../mcp-server/README.md) for details.
 
-### 3.3 Enable the server in Cursor (Cursor Agent CLI)
-
-After **`copy_files.sh`** (or manual edits), `.cursor/mcp.json` may already list `tied-yaml` with paths to the built server and your project’s `tied/`. To **enable** that server in Cursor for the client workspace:
-
-1. `cd` to your **development project** root (the directory that contains `tied/` and `.cursor/mcp.json`).
-2. Run: `agent enable tied-yaml`
-3. When Cursor prompts you to apply the **project MCP configuration**, **approve** the update.
-4. Type **`quit`** to exit the interactive `agent` session.
-
-You can still add or edit `.cursor/mcp.json` by hand; `copy_files.sh` only **merges** a `tied-yaml` entry when it is missing—it does not replace your whole MCP config.
-
-### 3.4 Verify
+### 3.3 Verify
 
 - List MCP tools (e.g. `yaml_index_read`, `convert_monolithic_requirements`) to confirm the server is loaded.
 - Call **`tied_config_get_base_path`** to see the effective TIED base path (and raw `TIED_BASE_PATH` env value) the server is using.
@@ -198,25 +187,18 @@ Follow [ai-principles.md](../../ai-principles.md) and [AGENTS.md](../../AGENTS.m
 
 ```mermaid
 flowchart LR
-  subgraph setupFlow [Setup]
-    BuildMcp[Build MCP server]
-    McpConfig["copy_files.sh\nor manual mcp.json"]
-    AgentEnable["agent enable tied-yaml"]
-    ApproveQuit["Approve config\nquit"]
-    VerifySetup[Verify MCP]
-    BuildMcp --> McpConfig --> AgentEnable --> ApproveQuit --> VerifySetup
-  end
+  Setup[Setup]
   Pass1[Pass 1 Bootstrap]
   Pass2[Pass 2 REQ ARCH IMPL]
   Pass3[Pass 3 Maintain]
-  VerifySetup --> Pass1
+  Setup --> Pass1
   Pass1 --> Pass2
   Pass2 --> Pass3
   Pass3 --> Pass2
 ```
 
-- **Setup**: Build the MCP server in the TIED repo; ensure MCP config in the project (e.g. `./copy_files.sh` writes `.cursor/mcp.json` with `tied-yaml` and `TIED_BASE_PATH`, or set the same fields manually). Then run **`agent enable tied-yaml`** from the client project, **approve** the Cursor config update, and type **`quit`** to exit the Agent CLI; verify tools/resources load.
-- **Pass 1**: Bootstrap `tied/` via `copy_files.sh` (greenfield; overlaps the `copy_files.sh` step in Setup when you use that path) or conversion tools (single or three-pass).
+- **Setup**: Build MCP server in TIED repo; configure MCP in project with `TIED_BASE_PATH`.
+- **Pass 1**: Bootstrap `tied/` via `copy_files.sh` or conversion tools (single or three-pass).
 - **Pass 2**: Establish REQ → ARCH → IMPL with index/detail tools and register tokens (no code).
 - **Pass 3**: Maintain via traceability queries, bulk/single reads, updates, and token audit; iterate back to Pass 2 when adding new requirements or decisions.
 

@@ -1,0 +1,50 @@
+REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML:
+  name: Agent stream argv expands TDD YAML into ordered turns
+  category: Functional
+  priority: P1
+  status: Implemented
+  rationale:
+    why: Multi-turn agent sessions must run the same message sequence as TddLoopPrompts.messages_from_yaml for each --tdd-yaml path so PROC-TIED_DEV_CYCLE YAML matches runtime behavior
+    problems_solved:
+      - Divergence between documented TDD loop steps and actual agent turns
+      - Manual copy-paste of prompts across turns
+    benefits:
+      - Single source YAML drives RED/GREEN/REFACTOR/SYNC turns
+      - Aligns with docs/tdd_development_loop.yaml in this repo
+    upstream_note: Imported from atdd commit eb88236290009b78eb11ea561816f0854176bf12; see docs/run-agent-stream-upstream.md
+  satisfaction_criteria:
+    - criterion: AgentStreamArgv.parse_argv appends one turn per message from TddLoopPrompts.messages_from_yaml for each --tdd-yaml path in argv order
+    - criterion: Turn order matches delegation to TddLoopPrompts (no duplicate parsing rules in the entry point)
+  validation_criteria:
+    - method: Composition tests (upstream atdd)
+      coverage: test/composition/agent_stream_tdd_yaml_binding_test.rb
+    - method: Vendored code review
+      coverage: tools/agent-stream/lib/agent_stream_argv.rb, lib/tdd_loop_prompts.rb
+  traceability:
+    architecture:
+      - ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS
+    implementation:
+      - IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
+    tests:
+      - agent_stream_tdd_yaml_binding_test.rb
+    code_annotations:
+      - REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
+      - IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
+  related_requirements:
+    depends_on: []
+    related_to:
+      - REQ-TIED_SETUP
+    supersedes: []
+  detail_file: requirements/REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML.yaml
+  metadata:
+    created:
+      date: 2026-03-24
+      author: AI Agent
+    last_updated:
+      date: 2026-03-24
+      author: AI Agent
+      reason: Import ATDD agent stream TIED records
+    last_validated:
+      date: 2026-03-24
+      validator: AI Agent
+      result: pass

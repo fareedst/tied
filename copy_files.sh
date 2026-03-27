@@ -19,6 +19,8 @@
 #   - tied/: project index YAMLs and requirements/, architecture-decisions/, implementation-decisions/ (create if missing, never overwrite)
 #   - Guide .md and tied/docs/ (copy when missing)
 #   - .cursor/ and .cursor/mcp.json with tied-yaml MCP server entry (real paths)
+#     After bootstrap, in Cursor run: agent enable tied-yaml — approve the project MCP
+#     config when prompted; type quit to exit the Agent CLI (enables the server in the IDE).
 #
 # Designed for macOS (Bash 3.2+) and Ubuntu (Bash 5.x+).
 #

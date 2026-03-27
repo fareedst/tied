@@ -1,0 +1,57 @@
+REQ-LEAP_PROPOSAL_QUEUE:
+  name: Optional LEAP proposal queue with human review
+  category: Functional
+  priority: P1
+  status: Implemented
+  rationale:
+    why: Teams need an optional, non-canonical queue for inferred documentation hints (diff/session) with explicit approve/reject before any project TIED YAML changes, mirroring Plumb-style review without requiring LLM or automatic promotion.
+    problems_solved:
+      - No structured place for non-authoritative LEAP suggestions outside canonical REQ/ARCH/IMPL
+      - Risk of silent or automatic TIED updates without human or explicit agent approval
+    benefits:
+      - Stable proposal ids and audit trail under leap-proposals/ without polluting tied/ until LEAP is applied via MCP
+      - Deterministic extraction path (no API keys required for built-in diff/session import)
+      - Clear separation between proposals and canonical TIED records
+  satisfaction_criteria:
+    - criterion: MCP tools list, add, reject, approve, mark applied, update pending, and snapshot the proposal queue without writing project TIED YAML
+      metric: tied_leap_proposal_* handlers persist only under leap-proposals/
+    - criterion: Diff and session import require explicit_opt_in
+      metric: explicit_opt_in false returns error and creates no proposals
+    - criterion: Reject records status in queue and audit only
+      metric: reject does not modify tied/*.yaml
+    - criterion: Unit tests cover queue persistence and lifecycle
+      metric: leap-proposal-queue.test.ts passes in mcp-server
+  validation_criteria:
+    - method: Unit tests
+      coverage: leap-proposal-queue module and schema strings
+    - method: Manual or MCP client
+      coverage: Tools callable from tied-yaml MCP server
+  traceability:
+    architecture:
+      - ARCH-LEAP_PROPOSAL_QUEUE
+    implementation:
+      - IMPL-MCP_LEAP_PROPOSAL_QUEUE
+    tests:
+      - leap-proposal-queue.test.ts
+    code_annotations:
+      - REQ-LEAP_PROPOSAL_QUEUE
+      - IMPL-MCP_LEAP_PROPOSAL_QUEUE
+  related_requirements:
+    depends_on:
+      - REQ-TIED_SETUP
+    related_to:
+      - REQ-FEEDBACK_TO_TIED
+    supersedes: []
+  detail_file: requirements/REQ-LEAP_PROPOSAL_QUEUE.yaml
+  metadata:
+    created:
+      date: 2026-03-26
+      author: AI Agent
+    last_updated:
+      date: 2026-03-26
+      author: AI Agent
+      reason: S04 [PROC-AGENT_REQ_CHECKLIST] REQ for optional LEAP proposal queue
+    last_validated:
+      date: 2026-03-26
+      validator: AI Agent
+      result: pass

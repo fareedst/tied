@@ -1,0 +1,170 @@
+IMPL-MCP_LEAP_PROPOSAL_QUEUE:
+  name: MCP LEAP proposal queue tools and module
+  status: Active
+  cross_references:
+    - ARCH-LEAP_PROPOSAL_QUEUE
+    - REQ-LEAP_PROPOSAL_QUEUE
+  rationale:
+    why: Implements ARCH-LEAP_PROPOSAL_QUEUE and REQ-LEAP_PROPOSAL_QUEUE with a testable module and MCP tools that never write project TIED YAML from the queue lifecycle.
+    problems_solved:
+      - No machine-readable staging for inferred LEAP hints before canonical updates
+    benefits:
+      - Stable ids, audit trail, opt-in extraction, thin MCP handlers with safe JSON error envelope
+  implementation_approach:
+    summary: leap-proposal-queue.ts (queue, audit, diff/session helpers); tools/index.ts tied_leap_proposal_*; safeLeapCall wraps sync throws
+    details:
+      - 'Paths: {projectRoot}/leap-proposals/queue.json and audit-log.jsonl'
+      - 'extractDiffProposalCandidates: git diff + lines; failure returns { error } without throw'
+      - MCP handlers use safeLeapCall for fs/git throws
+      - 'S11 Phase H: no E2E-only UI surface; composition tests (leap-proposal-mcp.test.ts) authoritative for MCP bindings'
+      - 'S12 Phase I: full suite + tsc + scoped tied_validate_consistency pseudocode slice clean; module validation documented in s12_phase_i'
+      - S13 [PROC-AGENT_REQ_CHECKLIST] TIED sync — indexes + semantic-tokens aligned with code/tests; full tied_validate_consistency ok (detail-loader loadAll; Ruby tokens in indexes)
+  code_locations:
+    files:
+      - path: mcp-server/src/analysis/leap-proposal-queue.ts
+        description: Queue, audit, extractDiffProposalCandidates, parseSessionExportSegments [REQ-LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [IMPL-MCP_LEAP_PROPOSAL_QUEUE]
+      - path: mcp-server/src/analysis/leap-proposal-queue.test.ts
+        description: Unit tests for queue and session parsing
+      - path: mcp-server/src/tools/index.ts
+        description: tied_leap_proposal_* handlers and safeLeapCall
+      - path: mcp-server/src/tools/leap-proposal-mcp.test.ts
+        description: Composition tests — MCP handler wiring to leap-proposal-queue (no UI) [REQ-LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [IMPL-MCP_LEAP_PROPOSAL_QUEUE]
+    functions:
+      - name: loadQueue
+        file: mcp-server/src/analysis/leap-proposal-queue.ts
+        description: Read queue.json or empty default; DIAGNOSTIC on parse failure
+      - name: extractDiffProposalCandidates
+        file: mcp-server/src/analysis/leap-proposal-queue.ts
+        description: Deterministic git + line scan; outer catch returns error field
+  traceability:
+    architecture:
+      - ARCH-LEAP_PROPOSAL_QUEUE
+    requirements:
+      - REQ-LEAP_PROPOSAL_QUEUE
+    tests:
+      - leap-proposal-queue.test.ts
+      - leap-proposal-mcp.test.ts
+    code_annotations:
+      - IMPL-MCP_LEAP_PROPOSAL_QUEUE
+      - ARCH-LEAP_PROPOSAL_QUEUE
+      - REQ-LEAP_PROPOSAL_QUEUE
+  related_decisions:
+    depends_on: []
+    supersedes: []
+    see_also:
+      - IMPL-MCP_FEEDBACK_TOOLS
+      - ARCH-LEAP_PROPOSAL_QUEUE
+  essence_pseudocode: |
+    # [IMPL-MCP_LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [REQ-LEAP_PROPOSAL_QUEUE]
+    # MCP LEAP proposal queue: persist non-canonical proposals under repo-root leap-proposals/, JSONL audit, deterministic diff/session helpers, thin tied_leap_proposal_* handlers with safeLeapCall; never write project TIED YAML from queue lifecycle.
+
+    # Contract (INPUT / OUTPUT / DATA) — same REQ/ARCH/IMPL as top level; how only below.
+    # INPUT: projectRoot (default cwd); proposal id; lifecycle mutations; extract args (selection, paths, caps); explicit_opt_in for extract/import MCP tools.
+    # OUTPUT: LeapProposal; MCP JSON { ok, ... } | { ok: false, error }; extractDiffProposalCandidates → candidates[], truncation, optional error (no throw to client).
+    # DATA: queue.json schema leap-proposal-queue.v1; audit-log.jsonl schema leap-proposal-audit.v1; proposals[].non_canonical = true; no yaml-loader / TIED index mutation.
+
+    # --- Composition / collision (see_also IMPL-MCP_FEEDBACK_TOOLS; no composed_with) ---
+    # Ordering: LEAP queue ops are independent of feedback append order; no shared files. Parallel MCP tool families under tools/index.ts; pre: distinct paths (leap-proposals/ vs getBasePath()/feedback.yaml); post: each tool returns its own JSON envelope.
+    # Shared DATA: none with IMPL-MCP_FEEDBACK_TOOLS at runtime.
+
+    # LOAD_QUEUE(projectRoot)
+    # How: read queue.json; on invalid JSON or wrong schema_version log DIAGNOSTIC and return empty proposals array so callers can still append a fresh queue.
+
+    # SAVE_QUEUE(projectRoot, queue) / APPEND_AUDIT(projectRoot, event)
+    # How: ensure leap-proposals/ exists; write queue.json; append one JSONL audit line; sync fs may throw — MCP layer uses safeLeapCall.
+
+    # ADD_PROPOSAL(projectRoot, partial)
+    # How: load_queue → append pending LeapProposal with generated id → save_queue → append_audit(add).
+
+    # REJECT_PROPOSAL / APPROVE_PROPOSAL / MARK_APPLIED / UPDATE_PENDING
+    # How: load_queue; find proposal; if missing return { ok: false, error } — unit leap-proposal-queue.test.ts
+    #   ("queue: reject unknown id returns ok false (No proposal branch)") [REQ-LEAP_PROPOSAL_QUEUE]
+    #   [ARCH-LEAP_PROPOSAL_QUEUE] [IMPL-MCP_LEAP_PROPOSAL_QUEUE]; enforce status gates (reject/update only
+    #   pending; approve only pending; mark_applied only approved); mutate timestamps; save_queue; append_audit
+    #   matching action; return { ok: true, proposal }.
+
+    # LIST_PROPOSALS(projectRoot, filter?)
+    # How: load_queue; optional filter by status; return copy of array.
+
+    # EXTRACT_DIFF_PROPOSAL_CANDIDATES(args)  [calls type-only PlumbDiffImpactPreviewSelection from plumb-diff-impact-preview]
+    # [No project IMPL token for plumb-diff module — type-only import for selection enum; algorithm family mirrors plumb-diff git line scan but procedures are local. REQ/ARCH/IMPL for this block remain IMPL-MCP_LEAP_PROPOSAL_QUEUE / ARCH-LEAP_PROPOSAL_QUEUE / REQ-LEAP_PROPOSAL_QUEUE.]
+    # How: outer TRY — inner EXTRACT_DIFF_INNER resolves projectRootAbs (git rev-parse or args.projectRoot), enumerates staged/unstaged name-only lists, optional path filter, per-file git patch, skip binary, scan '+' lines with heuristics and caps, dedupe; RETURN { candidates, truncation }. CATCH any failure — RETURN { candidates: [], truncation.notice, error } (no throw).
+
+    # PARSE_SESSION_EXPORT_SEGMENTS(raw, maxSegments)
+    # How: trim; try JSON array of {content}|strings or messages split; else split on newline-triple-dash; cap segment count.
+
+    # PROPOSALS_FROM_SESSION_SEGMENTS(segments, label?)
+    # [IMPL-MCP_LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [REQ-LEAP_PROPOSAL_QUEUE]
+    # How: map each segment to inferred_session proposal shape (title/summary/source) without ids; trim segment text for summary OUTPUT.
+
+    # MCP_HANDLER(tied_leap_proposal_*)
+    # [IMPL-MCP_LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [REQ-LEAP_PROPOSAL_QUEUE]
+    # How: parse zod args; for extract/import require explicit_opt_in true else { ok: false, error }; delegate to module functions; build payload; safeLeapCall(fn) wraps JSON.stringify so sync throws become { ok: false, error }.
+    # Composition: tools/leap-proposal-mcp.test.ts exercises handler → safeLeapCall → module without MCP transport/UI.
+
+    # --- Phase H (E2E) [REQ-LEAP_PROPOSAL_QUEUE] [IMPL-MCP_LEAP_PROPOSAL_QUEUE] ---
+    # S11 E2E boundary: none — no browser, IDE chrome, native OS dialog, or window server; MCP tools are async handlers invocable directly in-process; not e2e_only ([REQ-MODULE_VALIDATION] [PROC-TEST_STRATEGY] [PROC-AGENT_REQ_CHECKLIST] Phase H). No additional E2E test file required for UI-only behavior (there is none).
+  s11_phase_h:
+    process_tokens:
+      - PROC-IMPL_CODE_TEST_SYNC
+      - PROC-AGENT_REQ_CHECKLIST
+    ui_only_behavior_identified: false
+    e2e_only: false
+    e2e_only_reason: N/A — no browser, IDE chrome, native OS dialog, or window server; tied_leap_proposal_* handlers are plain functions exercised by leap-proposal-mcp.test.ts without MCP stdio transport ([REQ-MODULE_VALIDATION] [PROC-TEST_STRATEGY]).
+    essence_pseudocode_e2e_boundary: S11 E2E boundary lines in essence_pseudocode document not e2e_only ([REQ-MODULE_VALIDATION] [PROC-TEST_STRATEGY]).
+    composition_authoritative_for_bindings: true
+    composition_tests:
+      - mcp-server/src/tools/leap-proposal-mcp.test.ts
+    phase_h_tests: []
+  s12_phase_i:
+    process_tokens:
+      - PROC-IMPL_CODE_TEST_SYNC
+      - PROC-AGENT_REQ_CHECKLIST
+      - PROC-TOKEN_VALIDATION
+      - REQ-MODULE_VALIDATION
+    full_test_suite:
+      command: cd mcp-server && npm test
+      runs: 71
+      failures: 0
+    lint:
+      typescript: npx tsc -b (mcp-server/tsconfig)
+      result: pass
+    token_validation:
+      tool: validateConsistency (mcp-server/dist/consistency-validator.js)
+      tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+      scoped_token: IMPL-MCP_LEAP_PROPOSAL_QUEUE
+      pseudocode:
+        has_essence_pseudocode: true
+        ref_issues: []
+        essence_pseudocode_empty: false
+      full_report_ok: false
+      full_report_note: Repository-wide consistency report may fail on unrelated tokens; IMPL-MCP_LEAP_PROPOSAL_QUEUE pseudocode slice passes.
+    three_way_alignment:
+      verdict: pass
+      impl_token: IMPL-MCP_LEAP_PROPOSAL_QUEUE
+      tokens: REQ-LEAP_PROPOSAL_QUEUE; ARCH-LEAP_PROPOSAL_QUEUE; IMPL-MCP_LEAP_PROPOSAL_QUEUE
+      e2e_only_blocks: none — s11_phase_h.e2e_only false; e2e_only_reason N/A documented
+    module_validation:
+      reference: REQ-MODULE_VALIDATION
+      LPQ_CORE:
+        path: mcp-server/src/analysis/leap-proposal-queue.ts
+        unit_tests: leap-proposal-queue.test.ts
+        status: pass — queue lifecycle, session parse, PROPOSALS_FROM_SESSION_SEGMENTS trim
+      LPQ_MCP:
+        path: mcp-server/src/tools/index.ts
+        composition_tests: leap-proposal-mcp.test.ts
+        status: pass — handler → safeLeapCall → module; explicit_opt_in gates
+      integration_note: LPQ_MCP depends on LPQ_CORE; composition tests run after unit module green
+  detail_file: implementation-decisions/IMPL-MCP_LEAP_PROPOSAL_QUEUE.yaml
+  metadata:
+    created:
+      date: 2026-03-26
+      author: AI Agent
+    last_updated:
+      date: 2026-03-26
+      author: AI Agent
+      reason: SUB-LEAP-MICRO — essence_pseudocode trace for missing-id unit test; three-way alignment
+    last_validated:
+      date: 2026-03-26
+      validator: AI Agent
+      result: pass
