@@ -45,6 +45,7 @@ ARCH-LEAP_PROPOSAL_QUEUE:
       - IMPL-MCP_LEAP_PROPOSAL_QUEUE
     tests:
       - leap-proposal-queue.test.ts
+      - leap-proposal-mcp.test.ts
     code_annotations:
       - ARCH-LEAP_PROPOSAL_QUEUE
       - IMPL-MCP_LEAP_PROPOSAL_QUEUE
@@ -60,9 +61,9 @@ ARCH-LEAP_PROPOSAL_QUEUE:
       date: 2026-03-26
       author: AI Agent
     last_updated:
-      date: 2026-03-26
+      date: 2026-03-28
       author: AI Agent
-      reason: S05 [PROC-AGENT_REQ_CHECKLIST] ARCH for LEAP proposal queue
+      reason: S13 [PROC-AGENT_REQ_CHECKLIST] TIED sync — traceability.tests include composition suite
     last_validated:
       date: 2026-03-26
       validator: AI Agent

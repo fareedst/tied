@@ -113,6 +113,29 @@ test("session export: split by --- and JSON array", () => {
   assert.equal(segs[0], "hello");
 });
 
+test("LOAD_QUEUE REQ-LEAP_PROPOSAL_QUEUE — UTF-8 BOM prefixed valid queue.json loads proposals", () => {
+  // [IMPL-MCP_LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [REQ-LEAP_PROPOSAL_QUEUE]
+  // Validates LOAD_QUEUE OUTPUT: after reading queue.json, proposals from disk are visible when the file is
+  // valid JSON with leap-proposal-queue.v1 — BOM is a common editor prefix and must not force an empty queue.
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "lpq-"));
+  try {
+    const created = addProposal(dir, {
+      kind: "manual",
+      title: "BOMCase",
+      summary: "Body",
+      source: { type: "manual" },
+    });
+    const qp = getQueuePath(dir);
+    const raw = fs.readFileSync(qp, "utf8");
+    fs.writeFileSync(qp, `\uFEFF${raw}`, "utf8");
+    const q = loadQueue(dir);
+    assert.equal(q.proposals.length, 1, "expected one proposal after BOM-prefixed valid queue.json");
+    assert.equal(findProposal(q, created.id)?.title, "BOMCase");
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
 test("queue file schema", () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "lpq-"));
   try {

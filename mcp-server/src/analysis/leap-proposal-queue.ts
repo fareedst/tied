@@ -84,6 +84,14 @@ export function generateProposalId(): string {
 
 // --- queue load/save
 
+/**
+ * Strip one leading U+FEFF (UTF-8 BOM after decode) before JSON.parse.
+ * [IMPL-MCP_LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [REQ-LEAP_PROPOSAL_QUEUE] — LOAD_QUEUE text normalization only.
+ */
+function stripLeadingUtf8Bom(s: string): string {
+  return s.charCodeAt(0) === 0xfeff ? s.slice(1) : s;
+}
+
 export function loadQueue(projectRoot: string): LeapProposalQueueFile {
   const p = getQueuePath(projectRoot);
   if (!fs.existsSync(p)) {
@@ -91,7 +99,8 @@ export function loadQueue(projectRoot: string): LeapProposalQueueFile {
   }
   try {
     const raw = fs.readFileSync(p, "utf8");
-    const data = JSON.parse(raw) as unknown;
+    // [IMPL-MCP_LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [REQ-LEAP_PROPOSAL_QUEUE] — LOAD_QUEUE: normalize text (BOM) then parse queue.json.
+    const data = JSON.parse(stripLeadingUtf8Bom(raw)) as unknown;
     if (
       data !== null &&
       typeof data === "object" &&

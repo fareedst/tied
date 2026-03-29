@@ -24,6 +24,8 @@ REQ-LEAP_PROPOSAL_QUEUE:
   validation_criteria:
     - method: Unit tests
       coverage: leap-proposal-queue module and schema strings
+    - method: Composition tests
+      coverage: leap-proposal-mcp.test.ts (tied_leap_proposal_* handlers without MCP transport)
     - method: Manual or MCP client
       coverage: Tools callable from tied-yaml MCP server
   traceability:
@@ -33,6 +35,7 @@ REQ-LEAP_PROPOSAL_QUEUE:
       - IMPL-MCP_LEAP_PROPOSAL_QUEUE
     tests:
       - leap-proposal-queue.test.ts
+      - leap-proposal-mcp.test.ts
     code_annotations:
       - REQ-LEAP_PROPOSAL_QUEUE
       - IMPL-MCP_LEAP_PROPOSAL_QUEUE
@@ -48,9 +51,9 @@ REQ-LEAP_PROPOSAL_QUEUE:
       date: 2026-03-26
       author: AI Agent
     last_updated:
-      date: 2026-03-26
+      date: 2026-03-28
       author: AI Agent
-      reason: S04 [PROC-AGENT_REQ_CHECKLIST] REQ for optional LEAP proposal queue
+      reason: S13 [PROC-AGENT_REQ_CHECKLIST] TIED sync — traceability.tests + validation_criteria include composition suite
     last_validated:
       date: 2026-03-26
       validator: AI Agent

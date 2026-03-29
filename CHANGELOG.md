@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **README** — [TIED YAML MCP Server](README.md#tied-yaml-mcp-server) § Value of MCP: LEAP proposal queue bullet notes UTF-8 BOM stripping when loading `leap-proposals/queue.json` so BOM-prefixed files from common editors still parse.
+- **TIED (LEAP proposal queue)** — Project `tied/` REQ/ARCH indexes and detail files for `REQ-LEAP_PROPOSAL_QUEUE` / `ARCH-LEAP_PROPOSAL_QUEUE` list `leap-proposal-mcp.test.ts` under `traceability.tests` with unit tests; `IMPL-MCP_LEAP_PROPOSAL_QUEUE` carries `s13_sync` checklist evidence; `semantic-tokens.yaml` metadata updated for those tokens (agent checklist S13 sync).
 - **README** — [Spec-Driven Development with TIED](README.md#spec-driven-development-with-tied): checklist-first path (CITDP, LEAP, TDD), mermaid pipelines, agent preload contract, `run-feature-batch.sh`, cross-links to Getting Started and Example Workflow.
 - **`.gitignore`** — `tied/` is no longer ignored; `prompts` and `docs/commit-message-format.md` / `docs/visuals/visual-specs.md` entries grouped/reordered so project `tied/` can be committed.
 - **`docs/citdp/CITDP-REQ-LEAP_PROPOSAL_QUEUE.yaml`** — Optional maintenance path for LEAP proposal queue work: `remove-client-reqs-from-tied.mjs` (replaces reference to removed `sync-ruby-tied-index.mjs`).
@@ -33,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- **LEAP proposal queue `loadQueue`** (`mcp-server/src/analysis/leap-proposal-queue.ts`) — Strips a leading UTF-8 BOM before parsing `leap-proposals/queue.json`, so valid queue files saved with a BOM (common on some platforms/editors) load proposals instead of falling back to an empty queue.
 - **mcp-server `loadDetail`** (`detail-loader.ts`) — Uses `yaml.loadAll` and selects the document whose top-level key matches the token, so methodology bundled multi-document YAML (multiple `---`-separated records per file under `tied/methodology/`) loads correctly and `tied_validate_consistency` no longer reports spurious “Failed to parse detail file” for those paths.
 - **`.cursor/hooks/log.rb`** — Transcript embedding is configurable (`--transcript` or env `CURSOR_HOOK_LOG_TRANSCRIPT`): default **`none`** writes `transcript_path` and `transcript_meta` (`bytes` only) instead of loading the full JSONL into every record (avoids O(n²) YAML growth). Modes: **`full`** (legacy behavior), **`tail:N`**, **`end-only`** (full body on `sessionEnd` / `stop` / `beforeSubmitPrompt` only), **`delta`** (append `transcript_delta` with new JSONL since last byte offset; offsets stored under `transcript_offsets` in `~/.cursor/logs/.conversation_start_times.json` per conversation).
 - **`.cursor/hooks/log.rb`** — Normalize `postToolUseFailure` into `normalized.details` (`tool_name`, `error_message`, `failure_type`, `tool_input`, etc.) via `KIND_MAP` / `details_for` / `extracted_raw_keys`, instead of falling through to generic `keys` only.

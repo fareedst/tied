@@ -214,6 +214,7 @@ REQ-LEAP_PROPOSAL_QUEUE:
       - IMPL-MCP_LEAP_PROPOSAL_QUEUE
     tests:
       - leap-proposal-queue.test.ts
+      - leap-proposal-mcp.test.ts
     code_annotations:
       - REQ-LEAP_PROPOSAL_QUEUE
       - IMPL-MCP_LEAP_PROPOSAL_QUEUE
@@ -229,9 +230,9 @@ REQ-LEAP_PROPOSAL_QUEUE:
       date: 2026-03-26T00:00:00.000Z
       author: AI Agent
     last_updated:
-      date: 2026-03-26T00:00:00.000Z
+      date: 2026-03-28T00:00:00.000Z
       author: AI Agent
-      reason: S06.4 IMPL-MCP_LEAP_PROPOSAL_QUEUE traceability
+      reason: S13 [PROC-AGENT_REQ_CHECKLIST] TIED sync — traceability.tests include leap-proposal-mcp.test.ts
     last_validated:
       date: 2026-03-26T00:00:00.000Z
       validator: AI Agent
