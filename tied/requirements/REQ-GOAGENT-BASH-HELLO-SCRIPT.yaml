@@ -3,9 +3,8 @@ REQ-GOAGENT-BASH-HELLO-SCRIPT:
   category: Functional
   priority: P2
   status: Implemented
-  description: >-
-    Repository provides a minimal Bash script at the project root that prints exactly one line "Hello World!"
-    with exit status zero, using strict shell options, so agent pipelines can execute a trivial deterministic command.
+  description: |
+    Repository provides a minimal Bash script at the project (or workspace) root that prints exactly one line "Hello World!" with exit status zero, using strict shell options, so agent pipelines and LEAD+TIED checklist runs can execute a trivial deterministic command. Conventional filenames include hello_world.sh or hello.sh; behavior and success criteria are identical.
   rationale:
     why: Agent and CI harnesses need a zero-dependency script to confirm shell execution and workspace wiring without pulling in Go or Ruby test stacks.
     problems_solved:
@@ -13,13 +12,13 @@ REQ-GOAGENT-BASH-HELLO-SCRIPT:
     benefits:
       - Fast, portable check; no build step; clear success criteria
   satisfaction_criteria:
-    - criterion: Script exists at repository root with shebang /usr/bin/env bash
+    - criterion: Script exists at project or workspace root as hello_world.sh or hello.sh (or equivalent documented root script) with shebang /usr/bin/env bash
     - criterion: Running the script prints exactly one line "Hello World!" to stdout with trailing newline
       metric: diff against expected line; exit code 0
     - criterion: Script enables strict mode (e.g. set -euo pipefail) and succeeds on the happy path
   validation_criteria:
     - method: Automated tests
-      coverage: hello_world_script_entry_test.go TestSCRIPT_ENTRY_REQ_GOAGENT_BASH_HELLO_SCRIPT_stdout_and_exit
+      coverage: hello_world_script_entry_test.go — OUTPUT contract, stdout/exit, RESOLVE missing, bash nonzero, COMPOSE (REQ-GOAGENT-BASH-HELLO-SCRIPT)
     - method: TIED consistency
       coverage: tied_validate_consistency after S13 sync
   traceability:
@@ -28,7 +27,11 @@ REQ-GOAGENT-BASH-HELLO-SCRIPT:
     implementation:
       - IMPL-GOAGENT-BASH-HELLO-SCRIPT
     tests:
+      - hello_world_script_entry_test.go TestSCRIPT_ENTRY_OUTPUT_exactly_one_line_REQ_GOAGENT_BASH_HELLO_SCRIPT
       - hello_world_script_entry_test.go TestSCRIPT_ENTRY_REQ_GOAGENT_BASH_HELLO_SCRIPT_stdout_and_exit
+      - hello_world_script_entry_test.go TestRESOLVE_HELLO_SCRIPT_BASENAME_missing_REQ_GOAGENT_BASH_HELLO_SCRIPT
+      - hello_world_script_entry_test.go TestUNIT_TEST_SCRIPT_ENTRY_bash_nonzero_REQ_GOAGENT_BASH_HELLO_SCRIPT
+      - hello_world_script_entry_test.go TestCOMPOSE_RunScriptEntrySmokeFromRoot_REQ_GOAGENT_BASH_HELLO_SCRIPT
     code_annotations:
       - REQ-GOAGENT-BASH-HELLO-SCRIPT
   related_requirements:
@@ -43,10 +46,10 @@ REQ-GOAGENT-BASH-HELLO-SCRIPT:
       date: 2026-03-30T00:00:00.000Z
       author: AI Agent
     last_updated:
-      date: 2026-03-30T00:00:00.000Z
+      date: 2026-03-30T18:00:00.000Z
       author: AI Agent
-      reason: S13 [PROC-AGENT_REQ_CHECKLIST] sync TIED to hello_world.sh and Go unit test
+      reason: S13 [PROC-AGENT_REQ_CHECKLIST] TIED sync — detail traceability.tests match stdd hello_world_script_entry_test.go
     last_validated:
-      date: 2026-03-30T00:00:00.000Z
+      date: 2026-03-30T18:00:00.000Z
       validator: AI Agent
       result: pass

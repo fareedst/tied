@@ -3,11 +3,8 @@ ARCH-GOAGENT-BASH-HELLO-SCRIPT:
   status: Active
   cross_references:
     - REQ-GOAGENT-BASH-HELLO-SCRIPT
-  decision: >-
-    The repository SHALL expose a single-purpose Bash script at the project root (conventional name
-    hello_world.sh) that uses env bash, enables strict options (set -euo pipefail), writes exactly one line
-    "Hello World!" to stdout with a trailing newline, and exits zero on success. The script SHALL NOT be part
-    of the Go module graph; it exists only as a POSIX shell artifact for pipelines and agent smoke checks.
+  decision: |
+    The project or workspace SHALL expose a single-purpose Bash script at its root (conventional names hello_world.sh or hello.sh; one script, one contract) that uses env bash, enables strict options (set -euo pipefail), writes exactly one line "Hello World!" to stdout with a trailing newline, and exits zero on success. The script SHALL NOT be part of the Go module graph when a Go tree exists; it remains a POSIX shell artifact for pipelines, LEAD+TIED checklist runs, and agent smoke checks.
   rationale:
     why: Checklists and agent harnesses need a deterministic, dependency-free executable to verify shell and cwd without building Go or Ruby.
     problems_solved:
@@ -22,16 +19,21 @@ ARCH-GOAGENT-BASH-HELLO-SCRIPT:
         - Requires compile or bundle for minimal validation
       rejected_reason: REQ calls for Bash-only smoke at repo root
   implementation_approach:
-    summary: One file at repository root; no imports; documented path and invocation in IMPL code_locations.
+    summary: One file at project or workspace root (hello_world.sh or hello.sh per convention); no imports; documented path and invocation in IMPL code_locations.
     details:
-      - Pipelines invoke via bash or execute bit per platform convention
+      - Pipelines and checklist steps invoke via bash or execute bit per platform convention
+      - Client workspaces that only ship hello.sh satisfy the same architectural contract as hello_world.sh
   traceability:
     requirements:
       - REQ-GOAGENT-BASH-HELLO-SCRIPT
     implementation:
       - IMPL-GOAGENT-BASH-HELLO-SCRIPT
     tests:
+      - hello_world_script_entry_test.go TestSCRIPT_ENTRY_OUTPUT_exactly_one_line_REQ_GOAGENT_BASH_HELLO_SCRIPT
       - hello_world_script_entry_test.go TestSCRIPT_ENTRY_REQ_GOAGENT_BASH_HELLO_SCRIPT_stdout_and_exit
+      - hello_world_script_entry_test.go TestRESOLVE_HELLO_SCRIPT_BASENAME_missing_REQ_GOAGENT_BASH_HELLO_SCRIPT
+      - hello_world_script_entry_test.go TestUNIT_TEST_SCRIPT_ENTRY_bash_nonzero_REQ_GOAGENT_BASH_HELLO_SCRIPT
+      - hello_world_script_entry_test.go TestCOMPOSE_RunScriptEntrySmokeFromRoot_REQ_GOAGENT_BASH_HELLO_SCRIPT
     code_annotations:
       - ARCH-GOAGENT-BASH-HELLO-SCRIPT
   related_decisions:
@@ -45,10 +47,10 @@ ARCH-GOAGENT-BASH-HELLO-SCRIPT:
       date: 2026-03-30T00:00:00.000Z
       author: AI Agent
     last_updated:
-      date: 2026-03-30T00:00:00.000Z
+      date: 2026-03-30T18:00:00.000Z
       author: AI Agent
-      reason: S13 sync TIED to implementation
+      reason: S13 [PROC-AGENT_REQ_CHECKLIST] TIED sync — detail traceability.tests match full Go smoke suite
     last_validated:
-      date: 2026-03-30T00:00:00.000Z
+      date: 2026-03-30T18:00:00.000Z
       validator: AI Agent
       result: pass

@@ -50,30 +50,28 @@ IMPL-TIED_FILES:
     # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
     # Summary: Bootstrap TIED layout from templates via copy_files.sh — indexes, guides, detail dirs, AGENTS.md family.
 
-    # How: INPUT/OUTPUT/DATA lines below document the bootstrap contract (same IMPL/ARCH/REQ); not separate downstream IMPL calls.
+    # How: Contract — INPUT/OUTPUT/DATA for BOOTSTRAP_TIED below (same IMPL/ARCH/REQ); not separate downstream IMPL calls.
+    # How: INPUT — project root; template source directory (TIED repo templates/ or equivalent).
+    # How: OUTPUT — created or updated files under tied/ and selected root files; process exit status.
+    # How: DATA — requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml; methodology tree under tied/methodology/ when copied.
 
-    # INPUT: project root; template source directory (TIED repo templates/ or equivalent).
-    # OUTPUT: created or updated files under tied/ and selected root files; process exit status.
-    # DATA: requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml; methodology tree under tied/methodology/ when copied.
-
-    # procedure BOOTSTRAP_TIED(projectRoot):
-    # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
-    # How: Ensure tied/ exists; copy template indexes and guides; create detail subdirs; copy AGENTS.md, .cursorrules, ai-principles.md per script merge rules.
-    # How: Failure path — operator must fix paths or permissions before retry.
-    ON missing template source or unwritable destination: exit non-zero with actionable message
-    # How: Apply copy_files.sh matrix; no cross-IMPL composition (shell-only).
-    FOR each copy_files.sh target: apply copy or merge policy; never overwrite client project-only YAML with empty templates where script forbids
-    # How: Success — TIED tree ready for REQ/ARCH/IMPL detail files in project scope.
-    RETURN success
+    procedure BOOTSTRAP_TIED(projectRoot):
+      # How: Ensure tied/ exists; copy template indexes and guides; create detail subdirs; copy AGENTS.md, .cursorrules, ai-principles.md per script merge rules.
+      # How: Failure path — operator must fix paths or permissions before retry.
+      ON missing template source or unwritable destination: exit non-zero with actionable message
+      # How: Loop — apply copy_files.sh matrix; shell-only; no cross-IMPL composition in this procedure.
+      FOR each copy_files.sh target: apply copy or merge policy; never overwrite client project-only YAML with empty templates where script forbids
+      # How: Success — TIED tree ready for REQ/ARCH/IMPL detail files in project scope.
+      RETURN success
   detail_file: implementation-decisions/IMPL-TIED_FILES.yaml
   metadata:
     created:
       date: 2025-12-18T00:00:00.000Z
       author: AI Agent
     last_updated:
-      date: 2026-03-28T00:00:00.000Z
+      date: 2026-03-30T00:00:00.000Z
       author: AI Agent
-      reason: S06.5 [PROC-IMPL_PSEUDOCODE_TOKENS] contract + step comments
+      reason: S06.5 [PROC-AGENT_REQ_CHECKLIST] [PROC-IMPL_PSEUDOCODE_TOKENS] Phase C procedure + contract How lines
     last_validated:
       date: 2026-02-06T00:00:00.000Z
       validator: AI Agent
@@ -135,28 +133,27 @@ IMPL-MODULE_VALIDATION:
     # [IMPL-MODULE_VALIDATION] [ARCH-MODULE_VALIDATION] [REQ-MODULE_VALIDATION]
     # Summary: Five-phase lifecycle — identify module boundaries, build with DI, validate in isolation, document, integrate only when green.
 
-    # How: INPUT/OUTPUT/CONTROL lines document lifecycle contract (same IMPL/ARCH/REQ).
+    # How: Contract — INPUT/OUTPUT/CONTROL for MODULE_VALIDATION_LIFECYCLE below (same IMPL/ARCH/REQ).
+    # How: INPUT — module boundary spec; interfaces; mocks and test doubles.
+    # How: OUTPUT — validation evidence (passing tests, notes); go/no-go for integration.
+    # How: CONTROL — integration blocked until independent validation passes.
 
-    # INPUT: module boundary spec; interfaces; mocks and test doubles.
-    # OUTPUT: validation evidence (passing tests, notes); go/no-go for integration.
-    # CONTROL: integration blocked until independent validation passes.
-
-    # procedure MODULE_VALIDATION_LIFECYCLE:
-    # [IMPL-MODULE_VALIDATION] [ARCH-MODULE_VALIDATION] [REQ-MODULE_VALIDATION]
-    # How: Phase 1 document boundaries and contracts; Phase 2 implement with dependency injection; Phase 3 unit + contract + edge-case tests; Phase 4 record results; Phase 5 integration tests on combined behavior.
-    # How: Gate — blocks integration with other IMPLs until module-local validation passes (ordering: validate before compose).
-    IF phase 3 or 4 fails: RETURN without integration; fix module or revise boundaries
-    # How: Integration-phase failure — combined behavior contradicts module contracts.
-    IF phase 5 fails: RETURN; treat as integration defect against documented contracts
+    procedure MODULE_VALIDATION_LIFECYCLE:
+      # How: Phases 1–5 — document boundaries; implement with DI; unit + contract + edge-case tests; record results; integration tests on combined behavior.
+      # How: Gate — blocks integration with other IMPLs until module-local validation passes (ordering: validate before compose).
+      # How: Branch — validation or documentation failure; no integration until fixed.
+      IF phase 3 or 4 fails: RETURN without integration; fix module or revise boundaries
+      # How: Branch — combined behavior contradicts module contracts after integration attempt.
+      IF phase 5 fails: RETURN; treat as integration defect against documented contracts
   detail_file: implementation-decisions/IMPL-MODULE_VALIDATION.yaml
   metadata:
     created:
       date: 2025-12-18T00:00:00.000Z
       author: AI Agent
     last_updated:
-      date: 2026-03-28T00:00:00.000Z
+      date: 2026-03-30T00:00:00.000Z
       author: AI Agent
-      reason: S06.5 [PROC-IMPL_PSEUDOCODE_TOKENS] gates + contract header
+      reason: S06.5 [PROC-AGENT_REQ_CHECKLIST] [PROC-IMPL_PSEUDOCODE_TOKENS] Phase C procedure + contract How lines
     last_validated:
       date: 2026-02-06T00:00:00.000Z
       validator: AI Agent
@@ -706,7 +703,7 @@ IMPL-GOAGENT-LIB-TYPES:
       validator: AI Agent
       result: pass
 IMPL-GOAGENT-BASH-HELLO-SCRIPT:
-  name: Root hello_world.sh and Go smoke test for SCRIPT_ENTRY
+  name: Root hello_world.sh or hello.sh and Go smoke test for SCRIPT_ENTRY
   status: Active
   cross_references:
     - ARCH-GOAGENT-BASH-HELLO-SCRIPT
@@ -716,17 +713,28 @@ IMPL-GOAGENT-BASH-HELLO-SCRIPT:
     problems_solved:
       - No documented pseudocode-to-test mapping for the smoke script
     benefits:
-      - Block-level token comments in essence_pseudocode align with hello_world.sh and hello_world_script_entry_test.go
+      - Block-level token comments in essence_pseudocode align with REQ/ARCH dual filenames and hello_world_script_entry_test.go
   implementation_approach:
-    summary: Repository root hello_world.sh; sibling Go test module invokes bash with Dir set to module root.
+    summary: Project root hello_world.sh or hello.sh (same SCRIPT_ENTRY body); Go test resolves first existing candidate with Dir set to module root.
     details:
-      - Script is not imported by tools/agentstream
+      - Script is not imported by tools/agentstream; stdd uses hello_world.sh; checklist client workspaces may use hello.sh only
+      - 'S11 E2E (Phase H): N/A — no graphical UI, native OS menus, or visual-only surfaces; REQ-GOAGENT-BASH-HELLO-SCRIPT is satisfied by unit, integration, and composition tests (TestCOMPOSE). No IMPL testability e2e_only or e2e_only_reason.'
   code_locations:
     files:
       - path: hello_world.sh
         description: '[REQ-GOAGENT-BASH-HELLO-SCRIPT] [ARCH-GOAGENT-BASH-HELLO-SCRIPT] [IMPL-GOAGENT-BASH-HELLO-SCRIPT] SCRIPT_ENTRY'
+      - path: hello.sh
+        description: '[REQ-GOAGENT-BASH-HELLO-SCRIPT] [ARCH-GOAGENT-BASH-HELLO-SCRIPT] [IMPL-GOAGENT-BASH-HELLO-SCRIPT] SCRIPT_ENTRY alternate basename'
       - path: hello_world_script_entry_test.go
         description: '[REQ-GOAGENT-BASH-HELLO-SCRIPT] [ARCH-GOAGENT-BASH-HELLO-SCRIPT] [IMPL-GOAGENT-BASH-HELLO-SCRIPT] UNIT_TEST_SCRIPT_ENTRY'
+      - path: script_entry_contract.go
+        description: '[REQ-GOAGENT-BASH-HELLO-SCRIPT] [ARCH-GOAGENT-BASH-HELLO-SCRIPT] [IMPL-GOAGENT-BASH-HELLO-SCRIPT] AssertScriptEntryStdoutContract — SCRIPT_ENTRY OUTPUT'
+      - path: script_resolve.go
+        description: '[REQ-GOAGENT-BASH-HELLO-SCRIPT] [ARCH-GOAGENT-BASH-HELLO-SCRIPT] [IMPL-GOAGENT-BASH-HELLO-SCRIPT] ResolveHelloScriptBasename — RESOLVE'
+      - path: script_bash_stdout.go
+        description: '[REQ-GOAGENT-BASH-HELLO-SCRIPT] [ARCH-GOAGENT-BASH-HELLO-SCRIPT] [IMPL-GOAGENT-BASH-HELLO-SCRIPT] BashScriptStdout — subprocess binding'
+      - path: script_smoke_compose.go
+        description: '[REQ-GOAGENT-BASH-HELLO-SCRIPT] [ARCH-GOAGENT-BASH-HELLO-SCRIPT] [IMPL-GOAGENT-BASH-HELLO-SCRIPT] RunScriptEntrySmokeFromRoot — COMPOSE'
       - path: go.mod
         description: '[IMPL-GOAGENT-BASH-HELLO-SCRIPT] Go module stdd_hello_world_smoke for smoke test only'
   traceability:
@@ -735,7 +743,11 @@ IMPL-GOAGENT-BASH-HELLO-SCRIPT:
     requirements:
       - REQ-GOAGENT-BASH-HELLO-SCRIPT
     tests:
+      - hello_world_script_entry_test.go TestSCRIPT_ENTRY_OUTPUT_exactly_one_line_REQ_GOAGENT_BASH_HELLO_SCRIPT
       - hello_world_script_entry_test.go TestSCRIPT_ENTRY_REQ_GOAGENT_BASH_HELLO_SCRIPT_stdout_and_exit
+      - hello_world_script_entry_test.go TestRESOLVE_HELLO_SCRIPT_BASENAME_missing_REQ_GOAGENT_BASH_HELLO_SCRIPT
+      - hello_world_script_entry_test.go TestUNIT_TEST_SCRIPT_ENTRY_bash_nonzero_REQ_GOAGENT_BASH_HELLO_SCRIPT
+      - hello_world_script_entry_test.go TestCOMPOSE_RunScriptEntrySmokeFromRoot_REQ_GOAGENT_BASH_HELLO_SCRIPT
     code_annotations:
       - IMPL-GOAGENT-BASH-HELLO-SCRIPT
   related_decisions:
@@ -746,36 +758,69 @@ IMPL-GOAGENT-BASH-HELLO-SCRIPT:
       - IMPL-GOAGENT-EXECUTOR
   essence_pseudocode: |-
     # [IMPL-GOAGENT-BASH-HELLO-SCRIPT] [ARCH-GOAGENT-BASH-HELLO-SCRIPT] [REQ-GOAGENT-BASH-HELLO-SCRIPT]
-    # Summary: Root Bash script prints exactly one line "Hello World!" with newline and exits 0 under strict options; Go test validates invocation from repo root.
+    # Summary: Root Bash smoke script (hello_world.sh or hello.sh) prints one line "Hello World!" with newline and exits 0 under strict mode; Go resolves, runs bash, asserts OUTPUT; COMPOSE_SCRIPT_ENTRY_SMOKE_FROM_ROOT wires modules for harnesses (no UI).
+
+    # How: Contract block — INPUT/OUTPUT/DATA/CONTROL for SCRIPT_ENTRY and UNIT_TEST_SCRIPT_ENTRY below (same IMPL/ARCH/REQ).
+    # How: INPUT — (SCRIPT_ENTRY) none; stdin unused; cwd is caller-defined when invoking ./script.
+    # How: OUTPUT — stdout exactly one line "Hello World!" with trailing newline; exit status 0 on success.
+    # How: DATA — HELLO_SCRIPT_CANDIDATES ordered list (hello_world.sh, hello.sh); strict shell options -euo pipefail for SCRIPT_ENTRY.
+    # How: CONTROL — at most one candidate need exist per workspace; identical script body for either basename; ordering explicit for resolution.
+
+    # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
+    # How: related_decisions.depends_on — checklist workspaces assume project root and tied/ layout from BOOTSTRAP_TIED (IMPL-TIED_FILES); SCRIPT_ENTRY does not invoke copy_files.sh. Shared surface: project root path only. Ordering: bootstrap or copy_files before relying on TIED paths for other steps; smoke script order-independent once files exist. Pre/post: none required for printf path beyond file existing at chosen basename.
+
+    # [IMPL-GOAGENT-EXECUTOR] [ARCH-GOAGENT-EXECUTOR] [REQ-GOAGENT-AGENT-EXECUTOR]
+    # How: related_decisions.see_also — NDJSON agent subprocess entrypoint; no code_locations overlap with hello_world.sh, hello.sh, or hello_world_script_entry_test.go. No shared mutable DATA with SCRIPT_ENTRY. Ordering: smoke and executor are independent; smoke may run without executor.
 
     procedure SCRIPT_ENTRY:
-      # [IMPL-GOAGENT-BASH-HELLO-SCRIPT] [ARCH-GOAGENT-BASH-HELLO-SCRIPT] [REQ-GOAGENT-BASH-HELLO-SCRIPT]
-      # How: Shebang /usr/bin/env bash; set -euo pipefail; printf '%s\n' 'Hello World!' emits OUTPUT line; process exits 0 on success.
+      # How: Same steps for whichever conventional filename the workspace uses.
       emit shebang line "#!/usr/bin/env bash"
       emit comment lines naming IMPL ARCH REQ and How SCRIPT_ENTRY
       run shell builtin: set -euo pipefail
       run printf with format '%s\n' and single argument 'Hello World!' to stdout
       exit with status 0
+      # How: Fallible path under strict mode — non-zero exit; success contract fails if stdout shape wrong.
+      ON any command failure under strict mode: exit non-zero; stdout must not satisfy success contract
+
+    procedure RESOLVE_HELLO_SCRIPT_BASENAME(moduleRoot):
+      # How: Prefer hello_world.sh (stdd) then hello.sh (checklist clients); fail closed if neither regular file exists.
+      FOR each name IN HELLO_SCRIPT_CANDIDATES in order:
+        IF regular file exists at moduleRoot joined with name: RETURN name
+      RETURN error missing smoke script expected one of hello_world.sh or hello.sh
 
     procedure UNIT_TEST_SCRIPT_ENTRY:
-      # [IMPL-GOAGENT-BASH-HELLO-SCRIPT] [ARCH-GOAGENT-BASH-HELLO-SCRIPT] [REQ-GOAGENT-BASH-HELLO-SCRIPT]
-      # How: Test resolves module root via runtime.Caller; exec.Command("bash","hello_world.sh") with Dir=module root; asserts stdout equals "Hello World!\n" and exit 0.
-      derive test file directory as module root from runtime.Caller(0)
-      spawn bash with argv ["hello_world.sh"] and working directory module root
-      capture combined success path stdout
+      # How: Module root from runtime.Caller; internal ordering — resolve basename before spawn.
+      derive moduleRoot from runtime.Caller(0) test file directory
+      # How: CALL RESOLVE_HELLO_SCRIPT_BASENAME — same IMPL/ARCH/REQ; must succeed before bash.
+      basename = CALL RESOLVE_HELLO_SCRIPT_BASENAME(moduleRoot)
+      ON basename is error: FAIL test with error message
+      spawn bash with argv [basename] and working directory moduleRoot
+      capture stdout; wait process completion
+      # How: Fallible path — surface stderr when exec.ExitError available.
+      ON process error not nil or exit status not 0: FAIL test including stderr if captured
       assert stdout string equals literal "Hello World!\n"
-      assert process error is nil (exit 0)
+
+    procedure COMPOSE_SCRIPT_ENTRY_SMOKE_FROM_ROOT(moduleRoot):
+      # How: Composition binding (Phase G) — wires RESOLVE, bash subprocess stdout, and OUTPUT assert; no UI; entry for harnesses.
+      basename = CALL RESOLVE_HELLO_SCRIPT_BASENAME(moduleRoot)
+      ON basename is error: RETURN error upstream
+      out = CALL BashScriptStdout(moduleRoot, basename)
+      ON bash error: RETURN error with context
+      RETURN AssertScriptEntryStdoutContract(out) as error
+
+    # Phase H — E2E ([PROC-IMPL_CODE_TEST_SYNC]): No UI-only or platform-inseparable behavior for [REQ-GOAGENT-BASH-HELLO-SCRIPT] under [IMPL-GOAGENT-BASH-HELLO-SCRIPT].
+    # How: Manual ./hello_world.sh or ./hello.sh is operator smoke only, not a substitute for automated composition; no testability e2e_only / e2e_only_reason on this IMPL.
   detail_file: implementation-decisions/IMPL-GOAGENT-BASH-HELLO-SCRIPT.yaml
   metadata:
     created:
       date: 2026-03-30T00:00:00.000Z
       author: AI Agent
     last_updated:
-      date: 2026-03-30T00:00:00.000Z
+      date: 2026-03-30T18:00:00.000Z
       author: AI Agent
-      reason: S13 [PROC-AGENT_REQ_CHECKLIST] sync to hello_world.sh and Go test
+      reason: S13 [PROC-AGENT_REQ_CHECKLIST] TIED sync — index metadata matches detail_file; REQ/ARCH tests lists aligned
     last_validated:
-      date: 2026-03-30T00:00:00.000Z
+      date: 2026-03-30T18:00:00.000Z
       validator: AI Agent
       result: pass
 IMPL-GOAGENT-CLI-CMD:
