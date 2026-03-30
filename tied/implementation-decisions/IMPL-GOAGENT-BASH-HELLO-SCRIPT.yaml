@@ -1,0 +1,72 @@
+IMPL-GOAGENT-BASH-HELLO-SCRIPT:
+  name: Root hello_world.sh and Go smoke test for SCRIPT_ENTRY
+  status: Active
+  cross_references:
+    - ARCH-GOAGENT-BASH-HELLO-SCRIPT
+    - REQ-GOAGENT-BASH-HELLO-SCRIPT
+  rationale:
+    why: REQ needs a Bash-only artifact; automated verification uses Go exec without coupling the script to the agentstream module graph.
+    problems_solved:
+      - No documented pseudocode-to-test mapping for the smoke script
+    benefits:
+      - Block-level token comments in essence_pseudocode align with hello_world.sh and hello_world_script_entry_test.go
+  implementation_approach:
+    summary: Repository root hello_world.sh; sibling Go test module invokes bash with Dir set to module root.
+    details:
+      - Script is not imported by tools/agentstream; lives at stdd repository root next to go.mod
+  code_locations:
+    files:
+      - path: hello_world.sh
+        description: '[REQ-GOAGENT-BASH-HELLO-SCRIPT] [ARCH-GOAGENT-BASH-HELLO-SCRIPT] [IMPL-GOAGENT-BASH-HELLO-SCRIPT] SCRIPT_ENTRY'
+      - path: hello_world_script_entry_test.go
+        description: '[REQ-GOAGENT-BASH-HELLO-SCRIPT] [ARCH-GOAGENT-BASH-HELLO-SCRIPT] [IMPL-GOAGENT-BASH-HELLO-SCRIPT] UNIT_TEST_SCRIPT_ENTRY'
+      - path: go.mod
+        description: '[IMPL-GOAGENT-BASH-HELLO-SCRIPT] Go module stdd_hello_world_smoke for smoke test only'
+  traceability:
+    architecture:
+      - ARCH-GOAGENT-BASH-HELLO-SCRIPT
+    requirements:
+      - REQ-GOAGENT-BASH-HELLO-SCRIPT
+    tests:
+      - hello_world_script_entry_test.go TestSCRIPT_ENTRY_REQ_GOAGENT_BASH_HELLO_SCRIPT_stdout_and_exit
+    code_annotations:
+      - IMPL-GOAGENT-BASH-HELLO-SCRIPT
+  related_decisions:
+    depends_on:
+      - IMPL-TIED_FILES
+    supersedes: []
+    see_also:
+      - IMPL-GOAGENT-EXECUTOR
+  essence_pseudocode: |-
+    # [IMPL-GOAGENT-BASH-HELLO-SCRIPT] [ARCH-GOAGENT-BASH-HELLO-SCRIPT] [REQ-GOAGENT-BASH-HELLO-SCRIPT]
+    # Summary: Root Bash script prints exactly one line "Hello World!" with newline and exits 0 under strict options; Go test validates invocation from repo root.
+
+    procedure SCRIPT_ENTRY:
+      # [IMPL-GOAGENT-BASH-HELLO-SCRIPT] [ARCH-GOAGENT-BASH-HELLO-SCRIPT] [REQ-GOAGENT-BASH-HELLO-SCRIPT]
+      # How: Shebang /usr/bin/env bash; set -euo pipefail; printf '%s\n' 'Hello World!' emits OUTPUT line; process exits 0 on success.
+      emit shebang line "#!/usr/bin/env bash"
+      emit comment lines naming IMPL ARCH REQ and How SCRIPT_ENTRY
+      run shell builtin: set -euo pipefail
+      run printf with format '%s\n' and single argument 'Hello World!' to stdout
+      exit with status 0
+
+    procedure UNIT_TEST_SCRIPT_ENTRY:
+      # [IMPL-GOAGENT-BASH-HELLO-SCRIPT] [ARCH-GOAGENT-BASH-HELLO-SCRIPT] [REQ-GOAGENT-BASH-HELLO-SCRIPT]
+      # How: Test resolves module root via runtime.Caller; exec.Command("bash","hello_world.sh") with Dir=module root; asserts stdout equals "Hello World!\n" and exit 0.
+      derive test file directory as module root from runtime.Caller(0)
+      spawn bash with argv ["hello_world.sh"] and working directory module root
+      capture combined success path stdout
+      assert stdout string equals literal "Hello World!\n"
+      assert process error is nil (exit 0)
+  metadata:
+    created:
+      date: 2026-03-30T00:00:00.000Z
+      author: AI Agent
+    last_updated:
+      date: 2026-03-30T00:00:00.000Z
+      author: AI Agent
+      reason: S13 [PROC-AGENT_REQ_CHECKLIST] sync to hello_world.sh and Go test
+    last_validated:
+      date: 2026-03-30T00:00:00.000Z
+      validator: AI Agent
+      result: pass

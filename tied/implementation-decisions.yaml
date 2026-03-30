@@ -28,11 +28,7 @@ IMPL-TIED_FILES:
         description: Bootstrap script that sets up TIED structure
         lines:
           - 1
-          - 163
-    functions:
-      - name: setup_tied_structure
-        file: copy_files.sh
-        description: Creates directories and copies template files (if implemented as function)
+          - 352
   traceability:
     architecture:
       - ARCH-TIED_STRUCTURE
@@ -50,15 +46,34 @@ IMPL-TIED_FILES:
     see_also:
       - ARCH-TIED_STRUCTURE
       - REQ-TIED_SETUP
+  essence_pseudocode: |-
+    # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
+    # Summary: Bootstrap TIED layout from templates via copy_files.sh — indexes, guides, detail dirs, AGENTS.md family.
+
+    # How: INPUT/OUTPUT/DATA lines below document the bootstrap contract (same IMPL/ARCH/REQ); not separate downstream IMPL calls.
+
+    # INPUT: project root; template source directory (TIED repo templates/ or equivalent).
+    # OUTPUT: created or updated files under tied/ and selected root files; process exit status.
+    # DATA: requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml; methodology tree under tied/methodology/ when copied.
+
+    # procedure BOOTSTRAP_TIED(projectRoot):
+    # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
+    # How: Ensure tied/ exists; copy template indexes and guides; create detail subdirs; copy AGENTS.md, .cursorrules, ai-principles.md per script merge rules.
+    # How: Failure path — operator must fix paths or permissions before retry.
+    ON missing template source or unwritable destination: exit non-zero with actionable message
+    # How: Apply copy_files.sh matrix; no cross-IMPL composition (shell-only).
+    FOR each copy_files.sh target: apply copy or merge policy; never overwrite client project-only YAML with empty templates where script forbids
+    # How: Success — TIED tree ready for REQ/ARCH/IMPL detail files in project scope.
+    RETURN success
   detail_file: implementation-decisions/IMPL-TIED_FILES.yaml
   metadata:
     created:
       date: 2025-12-18T00:00:00.000Z
       author: AI Agent
     last_updated:
-      date: 2026-02-06T00:00:00.000Z
+      date: 2026-03-28T00:00:00.000Z
       author: AI Agent
-      reason: Restructured to v1.5.0 schema with machine-parseable fields
+      reason: S06.5 [PROC-IMPL_PSEUDOCODE_TOKENS] contract + step comments
     last_validated:
       date: 2026-02-06T00:00:00.000Z
       validator: AI Agent
@@ -116,15 +131,32 @@ IMPL-MODULE_VALIDATION:
     see_also:
       - ARCH-MODULE_VALIDATION
       - REQ-MODULE_VALIDATION
+  essence_pseudocode: |-
+    # [IMPL-MODULE_VALIDATION] [ARCH-MODULE_VALIDATION] [REQ-MODULE_VALIDATION]
+    # Summary: Five-phase lifecycle — identify module boundaries, build with DI, validate in isolation, document, integrate only when green.
+
+    # How: INPUT/OUTPUT/CONTROL lines document lifecycle contract (same IMPL/ARCH/REQ).
+
+    # INPUT: module boundary spec; interfaces; mocks and test doubles.
+    # OUTPUT: validation evidence (passing tests, notes); go/no-go for integration.
+    # CONTROL: integration blocked until independent validation passes.
+
+    # procedure MODULE_VALIDATION_LIFECYCLE:
+    # [IMPL-MODULE_VALIDATION] [ARCH-MODULE_VALIDATION] [REQ-MODULE_VALIDATION]
+    # How: Phase 1 document boundaries and contracts; Phase 2 implement with dependency injection; Phase 3 unit + contract + edge-case tests; Phase 4 record results; Phase 5 integration tests on combined behavior.
+    # How: Gate — blocks integration with other IMPLs until module-local validation passes (ordering: validate before compose).
+    IF phase 3 or 4 fails: RETURN without integration; fix module or revise boundaries
+    # How: Integration-phase failure — combined behavior contradicts module contracts.
+    IF phase 5 fails: RETURN; treat as integration defect against documented contracts
   detail_file: implementation-decisions/IMPL-MODULE_VALIDATION.yaml
   metadata:
     created:
       date: 2025-12-18T00:00:00.000Z
       author: AI Agent
     last_updated:
-      date: 2026-02-06T00:00:00.000Z
+      date: 2026-03-28T00:00:00.000Z
       author: AI Agent
-      reason: Restructured to v1.5.0 schema with machine-parseable fields
+      reason: S06.5 [PROC-IMPL_PSEUDOCODE_TOKENS] gates + contract header
     last_validated:
       date: 2026-02-06T00:00:00.000Z
       validator: AI Agent
@@ -189,15 +221,40 @@ IMPL-MCP_FEEDBACK_TOOLS:
     see_also:
       - ARCH-FEEDBACK_STORAGE
       - REQ-FEEDBACK_TO_TIED
+  essence_pseudocode: |-
+    # [IMPL-MCP_FEEDBACK_TOOLS] [ARCH-FEEDBACK_STORAGE] [REQ-FEEDBACK_TO_TIED]
+    # Summary: Pure feedback module loads/appends/exports feedback.yaml; MCP handlers stay thin JSON envelopes.
+
+    # How: INPUT/OUTPUT/DATA contract for feedback module (same IMPL/ARCH/REQ). Composition: independent of IMPL-MCP_LEAP_PROPOSAL_QUEUE — distinct paths (feedback.yaml vs leap-proposals/); no shared mutable DATA at runtime.
+
+    # INPUT: optional basePath (TIED root); append params (type, title, description, optional context); export format (markdown|json).
+    # OUTPUT: structured entries; add returns ok, id, created_at, optional report_snippet; export returns formatted string; file on disk under {base}/feedback.yaml.
+    # DATA: feedback.yaml schema with entries[]; ids and timestamps.
+
+    # procedure loadFeedback(basePath):
+    # [IMPL-MCP_FEEDBACK_TOOLS] [ARCH-FEEDBACK_STORAGE] [REQ-FEEDBACK_TO_TIED]
+    # How: Resolve path via getFeedbackPath; read YAML or default { entries: [] }.
+    # How: Corrupt YAML — deterministic recovery per feedback.ts tests.
+    ON parse error: return safe empty structure or surface error per module policy (tests lock behavior)
+
+    # procedure appendEntry(params):
+    # [IMPL-MCP_FEEDBACK_TOOLS] [ARCH-FEEDBACK_STORAGE] [REQ-FEEDBACK_TO_TIED]
+    # How: Validate type/title/description; generate id; set created_at; append; write file.
+    # How: IO/validation failure surfaces to MCP handler envelope.
+    ON IO or validation error: propagate to caller for MCP { ok: false, error }
+
+    # procedure MCP_HANDLER tied_feedback_add / tied_feedback_export:
+    # [IMPL-MCP_FEEDBACK_TOOLS] [ARCH-FEEDBACK_STORAGE] [REQ-FEEDBACK_TO_TIED]
+    # How: Parse tool args; delegate to module; return JSON payload (thin wrapper over loadFeedback/appendEntry/export* only).
   detail_file: implementation-decisions/IMPL-MCP_FEEDBACK_TOOLS.yaml
   metadata:
     created:
       date: 2026-03-03T00:00:00.000Z
       author: AI Agent
     last_updated:
-      date: 2026-03-03T00:00:00.000Z
+      date: 2026-03-28T00:00:00.000Z
       author: AI Agent
-      reason: Initial creation
+      reason: S06.5 [PROC-IMPL_PSEUDOCODE_TOKENS] composition vs LEAP queue
     last_validated:
       date: 2026-03-03T00:00:00.000Z
       validator: AI Agent
@@ -246,7 +303,7 @@ IMPL-MCP_LEAP_PROPOSAL_QUEUE:
     requirements:
       - REQ-LEAP_PROPOSAL_QUEUE
     tests:
-      - 'leap-proposal-queue.test.ts — LPQ-CORE unit: lifecycle, session parse, LOAD_QUEUE BOM (S09)'
+      - 'leap-proposal-queue.test.ts — LPQ-CORE unit: lifecycle, session parse, LOAD_QUEUE BOM, corrupt JSON/schema mismatch, extractDiff non-repo error path (S09 / SUB-LEAP-MICRO)'
       - 'leap-proposal-mcp.test.ts — LPQ-MCP composition: all tied_leap_proposal_* handler bindings (S10)'
     code_annotations:
       - IMPL-MCP_LEAP_PROPOSAL_QUEUE
@@ -276,6 +333,7 @@ IMPL-MCP_LEAP_PROPOSAL_QUEUE:
     # LOAD_QUEUE(projectRoot)
     # [IMPL-MCP_LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [REQ-LEAP_PROPOSAL_QUEUE]
     # How: read queue.json as UTF-8; strip leading BOM (U+FEFF) before JSON.parse; on invalid JSON or wrong schema_version log DIAGNOSTIC and return empty proposals array so callers can still append a fresh queue.
+    # How (tests): [IMPL-MCP_LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [REQ-LEAP_PROPOSAL_QUEUE] — unit asserts empty proposals and default leap-proposal-queue.v1 after corrupt JSON or schema mismatch on disk ([SUB-LEAP-MICRO] S09.GREEN).
 
     # SAVE_QUEUE(projectRoot, queue) / APPEND_AUDIT(projectRoot, event)
     # [IMPL-MCP_LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [REQ-LEAP_PROPOSAL_QUEUE]
@@ -301,6 +359,7 @@ IMPL-MCP_LEAP_PROPOSAL_QUEUE:
     # [IMPL-MCP_LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [REQ-LEAP_PROPOSAL_QUEUE]
     # [No project IMPL token for plumb-diff module — type-only import for selection enum; algorithm family mirrors plumb-diff git line scan but procedures are local. REQ/ARCH/IMPL for this block remain IMPL-MCP_LEAP_PROPOSAL_QUEUE / ARCH-LEAP_PROPOSAL_QUEUE / REQ-LEAP_PROPOSAL_QUEUE.]
     # How: outer TRY — inner EXTRACT_DIFF_INNER resolves projectRootAbs (git rev-parse or args.projectRoot), enumerates staged/unstaged name-only lists, optional path filter, per-file git patch, skip binary, scan '+' lines with heuristics and caps, dedupe; RETURN { candidates, truncation }. CATCH any failure — RETURN { candidates: [], truncation.notice, error } (no throw).
+    # How (tests): [IMPL-MCP_LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [REQ-LEAP_PROPOSAL_QUEUE] — unit asserts candidates empty and error populated for non-repo / git failure root without throw ([SUB-LEAP-MICRO] S09.GREEN).
 
     # PARSE_SESSION_EXPORT_SEGMENTS(raw, maxSegments)
     # [IMPL-MCP_LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [REQ-LEAP_PROPOSAL_QUEUE]
@@ -387,15 +446,40 @@ IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV:
     supersedes: []
     see_also:
       - IMPL-ATDD-E2E-AGENT_STREAM
+  essence_pseudocode: |-
+    # [REQ-MODULE_VALIDATION] [ARCH-MODULE_VALIDATION] [IMPL-MODULE_VALIDATION] — thin argv composition; validated modules before integration
+    # [IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV] [ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS] [REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML]
+    # Summary: Build ordered turn list; for each --tdd-yaml file, append one turn per message from TddLoopPrompts.
+
+    # How: INPUT/OUTPUT/DATA contract (Ruby AgentStreamArgv). Cross-IMPL note: Go equivalent loader is IMPL-GOAGENT-TDDLOOP / tddloop.LoadTurns — not invoked here; Ruby TddLoopPrompts stays single parser per ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS.
+
+    # INPUT: argv (Array of String).
+    # OUTPUT: ordered turn list for downstream agent_command / run_stream.
+    # DATA: tdd_yaml_paths; messages from TddLoopPrompts only (single parser per ARCH).
+
+    procedure wire_tdd_yaml_turns_from_argv(argv):
+      # [IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV] [ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS] [REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML]
+      # How: Scan argv for --tdd-yaml path tokens; preserve order.
+      ON argv parse error: raise or return error per AgentStreamArgv contract
+      parse argv into tdd_yaml_paths (among other flags)
+      # [IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV] [ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS] [REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML]
+      # How: Delegate message expansion to TddLoopPrompts.messages_from_yaml only.
+      ON YAML or format error inside messages_from_yaml: propagate to caller
+      # How: Expand each --tdd-yaml path to N turns (one message per step) via Ruby delegate only.
+      for each path in tdd_yaml_paths in order:
+        for each message in TddLoopPrompts.messages_from_yaml(path):
+          append turn [message] to the ordered turn list
+      # How: Return to IMPL-ATDD-E2E-AGENT_STREAM or caller run_stream (composition: argv layer before subprocess harness).
+      return ordered turn list for downstream agent_command / run_stream
   detail_file: implementation-decisions/IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV.yaml
   metadata:
     created:
       date: 2026-03-24T00:00:00.000Z
       author: AI Agent
     last_updated:
-      date: 2026-03-24T00:00:00.000Z
+      date: 2026-03-28T00:00:00.000Z
       author: AI Agent
-      reason: Import ATDD agent stream TIED records
+      reason: S06.5 [PROC-IMPL_PSEUDOCODE_TOKENS] cross-IMPL parity + loop comments
     last_validated:
       date: 2026-03-24T00:00:00.000Z
       validator: AI Agent
@@ -439,15 +523,41 @@ IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS:
     supersedes: []
     see_also:
       - IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
+  essence_pseudocode: |-
+    # [REQ-MODULE_VALIDATION] [ARCH-MODULE_VALIDATION] [IMPL-MODULE_VALIDATION] — export is testable without UI
+    # [IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS] [ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS] [REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS]
+    # Summary: Materialize each YAML step as one markdown file using the same entries as TddLoopPrompts.
+
+    # How: Contract I/O (same IMPL/ARCH/REQ). Shares parser entry points with IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV via TddLoopPrompts only — no Go IMPL call.
+
+    # INPUT: yaml_path; out_dir directory path.
+    # OUTPUT: integer count of files written.
+    # DATA: entries from TddLoopPrompts.step_entries_from_yaml(yaml_path).
+
+    procedure export_step_entries_to_markdown(yaml_path, out_dir):
+      # [IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS] [ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS] [REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS]
+      # How: Single call to step_entries_from_yaml — delegates parsing to TddLoopPrompts per ARCH.
+      ON read or YAML failure: propagate error
+      entries = TddLoopPrompts.step_entries_from_yaml(yaml_path)
+      # [IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS] [ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS] [REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS]
+      # How: Ensure output tree exists; one file per entry.
+      ON mkdir or write failure: propagate error
+      ensure out_dir exists
+      # [IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS] [ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS] [REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS]
+      # How: Sanitized id filename; body = formatted step message.
+      # How: One markdown artifact per step entry (ordering preserves YAML step order).
+      for each entry in entries:
+        write file (sanitized entry id).md with entry.message body
+      return count of files written
   detail_file: implementation-decisions/IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS.yaml
   metadata:
     created:
       date: 2026-03-24T00:00:00.000Z
       author: AI Agent
     last_updated:
-      date: 2026-03-24T00:00:00.000Z
+      date: 2026-03-28T00:00:00.000Z
       author: AI Agent
-      reason: Import ATDD agent stream TIED records
+      reason: S06.5 [PROC-IMPL_PSEUDOCODE_TOKENS] contract + shared parser note
     last_validated:
       date: 2026-03-24T00:00:00.000Z
       validator: AI Agent
@@ -488,16 +598,657 @@ IMPL-ATDD-E2E-AGENT_STREAM:
     supersedes: []
     see_also:
       - IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
+      - IMPL-GOAGENT-EXECUTOR
+  essence_pseudocode: |-
+    # [REQ-MODULE_VALIDATION] [ARCH-MODULE_VALIDATION] [IMPL-MODULE_VALIDATION] — E2E harness justified by external CLI only
+    # [IMPL-ATDD-E2E-AGENT_STREAM] [ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON] [REQ-ATDD-E2E-AGENT_STREAM]
+    # Summary: Execute agent subprocess with stream-json; surface text; capture session_id — E2E-only harness.
+
+    # How: Contract I/O (same IMPL/ARCH/REQ). Cross-IMPL: NDJSON line protocol aligned with IMPL-GOAGENT-EXECUTOR ([ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON] shared with Go executor); Ruby harness does not call Go binaries.
+
+    # INPUT: cmd (argv for agent CLI subprocess).
+    # OUTPUT: captured session_id for chained --resume; streams to stdout/stderr.
+    # CONTROL: non-zero agent exit must fail the harness per REQ.
+
+    procedure run_agent_stream_subprocess(cmd):
+      # [IMPL-ATDD-E2E-AGENT_STREAM] [ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON] [REQ-ATDD-E2E-AGENT_STREAM]
+      # How: Spawn subprocess with Open3 — satisfies ARCH external CLI boundary.
+      ON spawn failure: exit with error
+      # [IMPL-ATDD-E2E-AGENT_STREAM] [ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON] [REQ-ATDD-E2E-AGENT_STREAM]
+      # How: Forward stderr to host stderr — REQ observability for agent errors.
+      forward agent stderr stream to process stderr (async)
+      # [IMPL-ATDD-E2E-AGENT_STREAM] [ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON] [REQ-ATDD-E2E-AGENT_STREAM]
+      # How: Line-by-line JSON parse and fragment extraction — REQ stream-json protocol.
+      # How: Per-line loop matches IMPL-GOAGENT-EXECUTOR stdout scanner behavior for parity.
+      for each non-empty line on stdout:
+        parse line as JSON object
+        ON JSON parse error: log and skip line (align with Go executor: JSON parse error to stderr, continue)
+        capture session_id from object if present
+        extract_text_fragments(object) to stdout (thinking deltas and assistant text parts)
+        print newline after thinking completed events as needed
+      # [IMPL-ATDD-E2E-AGENT_STREAM] [ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON] [REQ-ATDD-E2E-AGENT_STREAM]
+      # How: Fail closed on non-zero exit — REQ reliable exit status.
+      require exit status success or exit with agent status
+      # [IMPL-ATDD-E2E-AGENT_STREAM] [ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON] [REQ-ATDD-E2E-AGENT_STREAM]
+      # How: Emit session_id on stderr for resume — REQ chaining for multi-turn.
+      print session_id=<captured> on stderr when captured
+      return captured session id to caller for next turn --resume
   detail_file: implementation-decisions/IMPL-ATDD-E2E-AGENT_STREAM.yaml
   metadata:
     created:
       date: 2026-03-24T00:00:00.000Z
       author: AI Agent
     last_updated:
-      date: 2026-03-24T00:00:00.000Z
+      date: 2026-03-28T00:00:00.000Z
       author: AI Agent
-      reason: Import ATDD agent stream TIED records
+      reason: S06.5 [PROC-IMPL_PSEUDOCODE_TOKENS] cross-IMPL NDJSON parity note
     last_validated:
       date: 2026-03-24T00:00:00.000Z
+      validator: AI Agent
+      result: pass
+IMPL-GOAGENT-LIB-TYPES:
+  name: agentstream Turn and SessionID shared types
+  status: Active
+  cross_references:
+    - ARCH-GOAGENT-LIB-LAYERING
+    - REQ-GOAGENT-LIB-MODULE
+  rationale:
+    why: Cross-package contracts for prompt parts and chain flag
+    problems_solved:
+      - Ad-hoc []string tuples
+    benefits:
+      - Single import path stdd/agentstream
+  implementation_approach:
+    summary: turn.go defines Turn and SessionID and VerifySessionPrompt constant
+    details: []
+  code_locations:
+    files:
+      - path: tools/agentstream/turn.go
+        description: '[REQ-GOAGENT-LIB-MODULE] [ARCH-GOAGENT-LIB-LAYERING] [IMPL-GOAGENT-LIB-TYPES]'
+  traceability:
+    architecture:
+      - ARCH-GOAGENT-LIB-LAYERING
+    requirements:
+      - REQ-GOAGENT-LIB-MODULE
+    tests:
+      - pipeline_test.go (imports Turn)
+    code_annotations:
+      - IMPL-GOAGENT-LIB-TYPES
+  related_decisions:
+    depends_on: []
+    supersedes: []
+    see_also: []
+  essence_pseudocode: |-
+    # [IMPL-GOAGENT-LIB-TYPES] [ARCH-GOAGENT-LIB-LAYERING] [REQ-GOAGENT-LIB-MODULE]
+    # Summary: Exported Turn { Parts []string; ChainFromPrevious bool } and SessionID alias — shared library contract.
+    # How: DATA-only package — consumed by IMPL-GOAGENT-TEXT-SOURCES, IMPL-GOAGENT-FEATURESPEC, IMPL-GOAGENT-TDDLOOP, IMPL-GOAGENT-CHECKLIST, IMPL-GOAGENT-PIPELINE, IMPL-GOAGENT-EXECUTOR (cross-IMPL dependency: all import Turn/SessionID; no reverse calls).
+
+    type Turn:
+      # [IMPL-GOAGENT-LIB-TYPES] [ARCH-GOAGENT-LIB-LAYERING] [REQ-GOAGENT-LIB-MODULE]
+      # How: Parts hold argv tokens for agent; ChainFromPrevious encodes resume vs new session per REQ pipeline rules.
+      fields Parts []string
+      fields ChainFromPrevious bool
+    # How: Opaque handle echoed by agent CLI stderr/session_id JSON field; used across executor turns.
+    type SessionID string
+    # How: Matches verify-session sentinel used by IMPL-GOAGENT-TEXT-SOURCES VerifySessionTurn ([REQ-GOAGENT-TEXT-SOURCES]).
+    const VerifySessionPrompt = "what was the most recent prompt?"
+  detail_file: implementation-decisions/IMPL-GOAGENT-LIB-TYPES.yaml
+  metadata:
+    created:
+      date: 2026-03-27T00:00:00.000Z
+      author: AI Agent
+    last_updated:
+      date: 2026-03-27T00:00:00.000Z
+      author: AI Agent
+      reason: S06.5 [PROC-IMPL_PSEUDOCODE_TOKENS] consumer IMPLs + type comments
+    last_validated:
+      date: 2026-03-27T00:00:00.000Z
+      validator: AI Agent
+      result: pass
+IMPL-GOAGENT-BASH-HELLO-SCRIPT:
+  name: Root hello_world.sh and Go smoke test for SCRIPT_ENTRY
+  status: Active
+  cross_references:
+    - ARCH-GOAGENT-BASH-HELLO-SCRIPT
+    - REQ-GOAGENT-BASH-HELLO-SCRIPT
+  rationale:
+    why: REQ needs a Bash-only artifact; automated verification uses Go exec without coupling the script to the agentstream module graph.
+    problems_solved:
+      - No documented pseudocode-to-test mapping for the smoke script
+    benefits:
+      - Block-level token comments in essence_pseudocode align with hello_world.sh and hello_world_script_entry_test.go
+  implementation_approach:
+    summary: Repository root hello_world.sh; sibling Go test module invokes bash with Dir set to module root.
+    details:
+      - Script is not imported by tools/agentstream
+  code_locations:
+    files:
+      - path: hello_world.sh
+        description: '[REQ-GOAGENT-BASH-HELLO-SCRIPT] [ARCH-GOAGENT-BASH-HELLO-SCRIPT] [IMPL-GOAGENT-BASH-HELLO-SCRIPT] SCRIPT_ENTRY'
+      - path: hello_world_script_entry_test.go
+        description: '[REQ-GOAGENT-BASH-HELLO-SCRIPT] [ARCH-GOAGENT-BASH-HELLO-SCRIPT] [IMPL-GOAGENT-BASH-HELLO-SCRIPT] UNIT_TEST_SCRIPT_ENTRY'
+      - path: go.mod
+        description: '[IMPL-GOAGENT-BASH-HELLO-SCRIPT] Go module stdd_hello_world_smoke for smoke test only'
+  traceability:
+    architecture:
+      - ARCH-GOAGENT-BASH-HELLO-SCRIPT
+    requirements:
+      - REQ-GOAGENT-BASH-HELLO-SCRIPT
+    tests:
+      - hello_world_script_entry_test.go TestSCRIPT_ENTRY_REQ_GOAGENT_BASH_HELLO_SCRIPT_stdout_and_exit
+    code_annotations:
+      - IMPL-GOAGENT-BASH-HELLO-SCRIPT
+  related_decisions:
+    depends_on:
+      - IMPL-TIED_FILES
+    supersedes: []
+    see_also:
+      - IMPL-GOAGENT-EXECUTOR
+  essence_pseudocode: |-
+    # [IMPL-GOAGENT-BASH-HELLO-SCRIPT] [ARCH-GOAGENT-BASH-HELLO-SCRIPT] [REQ-GOAGENT-BASH-HELLO-SCRIPT]
+    # Summary: Root Bash script prints exactly one line "Hello World!" with newline and exits 0 under strict options; Go test validates invocation from repo root.
+
+    procedure SCRIPT_ENTRY:
+      # [IMPL-GOAGENT-BASH-HELLO-SCRIPT] [ARCH-GOAGENT-BASH-HELLO-SCRIPT] [REQ-GOAGENT-BASH-HELLO-SCRIPT]
+      # How: Shebang /usr/bin/env bash; set -euo pipefail; printf '%s\n' 'Hello World!' emits OUTPUT line; process exits 0 on success.
+      emit shebang line "#!/usr/bin/env bash"
+      emit comment lines naming IMPL ARCH REQ and How SCRIPT_ENTRY
+      run shell builtin: set -euo pipefail
+      run printf with format '%s\n' and single argument 'Hello World!' to stdout
+      exit with status 0
+
+    procedure UNIT_TEST_SCRIPT_ENTRY:
+      # [IMPL-GOAGENT-BASH-HELLO-SCRIPT] [ARCH-GOAGENT-BASH-HELLO-SCRIPT] [REQ-GOAGENT-BASH-HELLO-SCRIPT]
+      # How: Test resolves module root via runtime.Caller; exec.Command("bash","hello_world.sh") with Dir=module root; asserts stdout equals "Hello World!\n" and exit 0.
+      derive test file directory as module root from runtime.Caller(0)
+      spawn bash with argv ["hello_world.sh"] and working directory module root
+      capture combined success path stdout
+      assert stdout string equals literal "Hello World!\n"
+      assert process error is nil (exit 0)
+  detail_file: implementation-decisions/IMPL-GOAGENT-BASH-HELLO-SCRIPT.yaml
+  metadata:
+    created:
+      date: 2026-03-30T00:00:00.000Z
+      author: AI Agent
+    last_updated:
+      date: 2026-03-30T00:00:00.000Z
+      author: AI Agent
+      reason: S13 [PROC-AGENT_REQ_CHECKLIST] sync to hello_world.sh and Go test
+    last_validated:
+      date: 2026-03-30T00:00:00.000Z
+      validator: AI Agent
+      result: pass
+IMPL-GOAGENT-CLI-CMD:
+  name: config.ParseAndResolve and cmd/agentstream main orchestration
+  status: Active
+  cross_references:
+    - ARCH-GOAGENT-CLI
+    - REQ-GOAGENT-CLI-CONFIG
+    - REQ-GOAGENT-PIPELINE-CHAIN
+  rationale:
+    why: Thin entrypoint wires parse preview pipeline dry-run executor loop
+    problems_solved:
+      - Logic embedded only in Ruby
+    benefits:
+      - Exit codes; stderr labels; session_id enforcement
+  implementation_approach:
+    summary: config package parses argv; main calls pipeline.Build then executor.Run per turn
+    details:
+      - Dry-run prints Shell-quoted argv via strconv.Quote
+  code_locations:
+    files:
+      - path: tools/agentstream/config/config.go
+        description: '[REQ-GOAGENT-CLI-CONFIG] [ARCH-GOAGENT-CLI] [IMPL-GOAGENT-CLI-CMD]'
+      - path: tools/agentstream/cmd/agentstream/main.go
+        description: '[REQ-GOAGENT-CLI-CONFIG] [REQ-GOAGENT-PIPELINE-CHAIN] [REQ-GOAGENT-AGENT-EXECUTOR] [IMPL-GOAGENT-CLI-CMD]'
+  traceability:
+    architecture:
+      - ARCH-GOAGENT-CLI
+      - ARCH-GOAGENT-PIPELINE
+    requirements:
+      - REQ-GOAGENT-CLI-CONFIG
+      - REQ-GOAGENT-PIPELINE-CHAIN
+    tests:
+      - tools/agentstream/pipeline/pipeline_test.go
+      - tools/agentstream/text/text_test.go
+      - tools/agentstream/featurespec/featurespec_test.go
+      - tools/agentstream/featurespec/order_test.go
+      - manual CLI (cmd/agentstream end-to-end)
+    code_annotations:
+      - IMPL-GOAGENT-CLI-CMD
+  related_decisions:
+    depends_on:
+      - IMPL-GOAGENT-LIB-TYPES
+    supersedes: []
+    see_also:
+      - IMPL-GOAGENT-PIPELINE
+      - IMPL-GOAGENT-EXECUTOR
+  essence_pseudocode: |-
+    # [IMPL-GOAGENT-CLI-CMD] [ARCH-GOAGENT-CLI] [REQ-GOAGENT-CLI-CONFIG]
+    # Summary: Parse argv, resolve defaults, validate, branch preview vs pipeline vs executor — unified CLI.
+
+    # How: Composition order (same IMPL as entrypoint): config.ParseAndResolve → optional IMPL-GOAGENT-FEATURESPEC Preview (early exit) → IMPL-GOAGENT-PIPELINE.Build → dry-run OR per-turn IMPL-GOAGENT-EXECUTOR. Shared DATA: []Turn and session id string; pre — cwd + os.Args; post — process exit. No MCP IMPL overlap (separate processes).
+
+    procedure main:
+      # [IMPL-GOAGENT-CLI-CMD] [ARCH-GOAGENT-CLI] [REQ-GOAGENT-CLI-CONFIG]
+      # How: config.ParseAndResolve in tools/agentstream/config (same IMPL token as this CMD record).
+      cfg := ParseAndResolve(cwd, os.Args[1:])
+      ON ParseAndResolve error: if help sentinel print usage and exit 0; else print error and exit non-zero
+      # [IMPL-GOAGENT-FEATURESPEC] [ARCH-GOAGENT-YAML-FEATURESPEC] [REQ-GOAGENT-FEATURESPEC-BATCH]
+      # How: Cross-IMPL call — featurespec.Preview only; does not invoke IMPL-GOAGENT-PIPELINE.
+      if cfg.PreviewFeatureSpecBatchYAML != "":
+        featurespec.Preview(...)
+        exit 0
+      # [IMPL-GOAGENT-PIPELINE] [ARCH-GOAGENT-PIPELINE] [REQ-GOAGENT-PIPELINE-CHAIN]
+      # How: Cross-IMPL call — pipeline.Build composes IMPL-GOAGENT-TEXT-SOURCES, IMPL-GOAGENT-TDDLOOP, IMPL-GOAGENT-FEATURESPEC, IMPL-GOAGENT-CHECKLIST into one []Turn (types IMPL-GOAGENT-LIB-TYPES).
+      turns := pipeline.Build(...)
+      ON pipeline.Build error: exit non-zero with error
+      if cfg.DryRun:
+        # How: Local dry-run printer (same package as main); uses turns from IMPL-GOAGENT-PIPELINE only.
+        runDryRun(...)
+      else:
+        for each turn:
+          # [IMPL-GOAGENT-EXECUTOR] [ARCH-GOAGENT-EXECUTOR] [REQ-GOAGENT-AGENT-EXECUTOR]
+          # How: Cross-IMPL call — executor.AgentArgv / executor.Run; Turn.Parts from IMPL-GOAGENT-LIB-TYPES; SessionForTurn/ChainBetween from IMPL-GOAGENT-PIPELINE helpers in main.
+          argv := executor.AgentArgv(...)
+          sid, code, err := executor.Run(...)
+          ON executor.Run error or empty session id when required: exit with code and message per main.go contract
+          require sid non-empty (Ruby parity)
+  detail_file: implementation-decisions/IMPL-GOAGENT-CLI-CMD.yaml
+  metadata:
+    created:
+      date: 2026-03-27T00:00:00.000Z
+      author: AI Agent
+    last_updated:
+      date: 2026-03-28T00:00:00.000Z
+      author: AI Agent
+      reason: S06.5 [PROC-IMPL_PSEUDOCODE_TOKENS] cross-IMPL composition in main
+    last_validated:
+      date: 2026-03-27T00:00:00.000Z
+      validator: AI Agent
+      result: pass
+IMPL-GOAGENT-TEXT-SOURCES:
+  name: text package prompt file and argv turns
+  status: Active
+  cross_references:
+    - ARCH-GOAGENT-TEXT-SOURCES
+    - REQ-GOAGENT-TEXT-SOURCES
+  rationale:
+    why: Pure functions for text prompt expansion
+    problems_solved:
+      - Duplicated split logic in cmd
+    benefits:
+      - Unit-tested regex split
+  implementation_approach:
+    summary: regexp split on \\r?\\n---\\s*\\r?\\n; UTF-8 ReadFile
+    details: []
+  code_locations:
+    files:
+      - path: tools/agentstream/text/text.go
+        description: '[REQ-GOAGENT-TEXT-SOURCES] [ARCH-GOAGENT-TEXT-SOURCES] [IMPL-GOAGENT-TEXT-SOURCES]'
+  traceability:
+    architecture:
+      - ARCH-GOAGENT-TEXT-SOURCES
+    requirements:
+      - REQ-GOAGENT-TEXT-SOURCES
+    tests:
+      - text_test.go
+    code_annotations:
+      - IMPL-GOAGENT-TEXT-SOURCES
+  related_decisions:
+    depends_on:
+      - IMPL-GOAGENT-LIB-TYPES
+    supersedes: []
+    see_also: []
+  essence_pseudocode: |-
+    # [IMPL-GOAGENT-TEXT-SOURCES] [ARCH-GOAGENT-TEXT-SOURCES] [REQ-GOAGENT-TEXT-SOURCES]
+    # Summary: Build Turns from argv words, whole files, --- split files, verify sentinel — all ChainFromPrevious true.
+
+    # How: Contract I/O (same IMPL/ARCH/REQ). Cross-IMPL — callee of IMPL-GOAGENT-PIPELINE only; Turn shape from IMPL-GOAGENT-LIB-TYPES.
+
+    # INPUT: argv words slice; file paths; file bytes for prompts split.
+    # OUTPUT: []Turn with Parts populated; ChainFromPrevious true for each.
+    # DATA: UTF-8 strings; regex for --- separators.
+
+    procedure text_sources:
+      # [IMPL-GOAGENT-TEXT-SOURCES] [ARCH-GOAGENT-TEXT-SOURCES] [REQ-GOAGENT-TEXT-SOURCES]
+      # How: ArgvTurn copies words to one Turn.Parts; TurnsFromPromptFiles one Turn per path; TurnsFromPromptsFiles splits on separator regex.
+      ON file read error: return error from TurnsFromPromptFiles / TurnsFromPromptsFiles
+      # How: Return value uses IMPL-GOAGENT-LIB-TYPES.Turn for all branches.
+      return []Turn per API
+  detail_file: implementation-decisions/IMPL-GOAGENT-TEXT-SOURCES.yaml
+  metadata:
+    created:
+      date: 2026-03-27T00:00:00.000Z
+      author: AI Agent
+    last_updated:
+      date: 2026-03-28T00:00:00.000Z
+      author: AI Agent
+      reason: S06.5 [PROC-IMPL_PSEUDOCODE_TOKENS] pipeline callee + LIB-TYPES
+    last_validated:
+      date: 2026-03-27T00:00:00.000Z
+      validator: AI Agent
+      result: pass
+IMPL-GOAGENT-FEATURESPEC:
+  name: featurespec YAML load sort filter render preview
+  status: Active
+  cross_references:
+    - ARCH-GOAGENT-YAML-FEATURESPEC
+    - REQ-GOAGENT-FEATURESPEC-BATCH
+  rationale:
+    why: Parity with FeatureSpecBatchPrompts.rb
+    problems_solved:
+      - Go consumers need library API
+    benefits:
+      - OrderFilter parser; yaml.Node stable sort
+  implementation_approach:
+    summary: featurespec/*.go MessagesFromYAML LoadTurns Preview ParseOrderFilter
+    details: []
+  code_locations:
+    files:
+      - path: tools/agentstream/featurespec/featurespec.go
+        description: '[REQ-GOAGENT-FEATURESPEC-BATCH] [ARCH-GOAGENT-YAML-FEATURESPEC] [IMPL-GOAGENT-FEATURESPEC]'
+      - path: tools/agentstream/featurespec/order.go
+        description: '[REQ-GOAGENT-FEATURESPEC-BATCH] [IMPL-GOAGENT-FEATURESPEC]'
+  traceability:
+    architecture:
+      - ARCH-GOAGENT-YAML-FEATURESPEC
+    requirements:
+      - REQ-GOAGENT-FEATURESPEC-BATCH
+    tests:
+      - featurespec/*_test.go
+    code_annotations:
+      - IMPL-GOAGENT-FEATURESPEC
+  related_decisions:
+    depends_on:
+      - IMPL-GOAGENT-LIB-TYPES
+    supersedes: []
+    see_also: []
+  essence_pseudocode: |-
+    # [IMPL-GOAGENT-FEATURESPEC] [ARCH-GOAGENT-YAML-FEATURESPEC] [REQ-GOAGENT-FEATURESPEC-BATCH]
+    # Summary: Normalize root; validate records; sort by order; filter; render markdown; LoadTurns sets ChainFromPrevious=false.
+
+    # How: Contract I/O (same IMPL/ARCH/REQ). Cross-IMPL — callee of IMPL-GOAGENT-PIPELINE and IMPL-GOAGENT-CLI-CMD Preview; Turn from IMPL-GOAGENT-LIB-TYPES. Ruby parity: FeatureSpecBatchPrompts (not a separate IMPL token).
+
+    # INPUT: YAML path; Options (order filter, etc.).
+    # OUTPUT: messages []string; LoadTurns yields Turn per record with ChainFromPrevious false.
+    # DATA: yaml.Node or typed structs per implementation.
+
+    procedure featurespec_from_yaml(path, opts):
+      # [IMPL-GOAGENT-FEATURESPEC] [ARCH-GOAGENT-YAML-FEATURESPEC] [REQ-GOAGENT-FEATURESPEC-BATCH]
+      # How: Parse YAML to nodes; mappingHasKey detects sort need; selectByOrder skips nil order; messageForRecord builds sections.
+      ON parse or validation error: return error to caller
+      return []string messages
+      # [IMPL-GOAGENT-FEATURESPEC] [ARCH-GOAGENT-YAML-FEATURESPEC] [REQ-GOAGENT-FEATURESPEC-BATCH]
+      # How: Preview writes === headers to io.Writer.
+      procedure Preview(...)
+  detail_file: implementation-decisions/IMPL-GOAGENT-FEATURESPEC.yaml
+  metadata:
+    created:
+      date: 2026-03-27T00:00:00.000Z
+      author: AI Agent
+    last_updated:
+      date: 2026-03-28T00:00:00.000Z
+      author: AI Agent
+      reason: S06.5 [PROC-IMPL_PSEUDOCODE_TOKENS] cross-IMPL callees + contract
+    last_validated:
+      date: 2026-03-27T00:00:00.000Z
+      validator: AI Agent
+      result: pass
+IMPL-GOAGENT-TDDLOOP:
+  name: tddloop YAML step messages
+  status: Active
+  cross_references:
+    - ARCH-GOAGENT-YAML-STEPS
+    - REQ-GOAGENT-YAML-STEP-RENDER
+  rationale:
+    why: Mirrors TddLoopPrompts.format_step
+    problems_solved:
+      - Missing Go TDD expansion
+    benefits:
+      - Typed yaml unmarshal
+  implementation_approach:
+    summary: MessagesFromYAML validates steps key then formats each step
+    details: []
+  code_locations:
+    files:
+      - path: tools/agentstream/tddloop/tddloop.go
+        description: '[REQ-GOAGENT-YAML-STEP-RENDER] [ARCH-GOAGENT-YAML-STEPS] [IMPL-GOAGENT-TDDLOOP]'
+  traceability:
+    architecture:
+      - ARCH-GOAGENT-YAML-STEPS
+    requirements:
+      - REQ-GOAGENT-YAML-STEP-RENDER
+    tests: []
+    code_annotations:
+      - IMPL-GOAGENT-TDDLOOP
+  related_decisions:
+    depends_on:
+      - IMPL-GOAGENT-LIB-TYPES
+    supersedes: []
+    see_also:
+      - IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
+  essence_pseudocode: |-
+    # [IMPL-GOAGENT-TDDLOOP] [ARCH-GOAGENT-YAML-STEPS] [REQ-GOAGENT-YAML-STEP-RENDER]
+    # Summary: Require root map with steps array; emit one markdown message per step — ChainFromPrevious true at LoadTurns.
+
+    # How: Contract I/O (same IMPL/ARCH/REQ). Cross-IMPL — callee of IMPL-GOAGENT-PIPELINE; message shape parity with Ruby TddLoopPrompts used in IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV (no runtime call). Turn from IMPL-GOAGENT-LIB-TYPES.
+
+    # INPUT: path to TDD loop YAML.
+    # OUTPUT: messages or []Turn from LoadTurns with ChainFromPrevious true per step turn.
+
+    procedure tddloop_messages(path):
+      # [IMPL-GOAGENT-TDDLOOP] [ARCH-GOAGENT-YAML-STEPS] [REQ-GOAGENT-YAML-STEP-RENDER]
+      # How: Unmarshal map; verify steps; format_step builds preamble, goals, tasks, outcomes, closing line.
+      ON missing steps or unmarshal error: return error
+      return messages
+  detail_file: implementation-decisions/IMPL-GOAGENT-TDDLOOP.yaml
+  metadata:
+    created:
+      date: 2026-03-27T00:00:00.000Z
+      author: AI Agent
+    last_updated:
+      date: 2026-03-28T00:00:00.000Z
+      author: AI Agent
+      reason: S06.5 [PROC-IMPL_PSEUDOCODE_TOKENS] ATDD parity + LIB-TYPES
+    last_validated:
+      date: 2026-03-27T00:00:00.000Z
+      validator: AI Agent
+      result: pass
+IMPL-GOAGENT-CHECKLIST:
+  name: checklist YAML main steps and sub_procedures
+  status: Active
+  cross_references:
+    - ARCH-GOAGENT-YAML-STEPS
+    - REQ-GOAGENT-YAML-STEP-RENDER
+  rationale:
+    why: Mirrors LeadChecklistPrompts.rb
+    problems_solved:
+      - Agent checklist from Go
+    benefits:
+      - IncludeSubProcedures option
+  implementation_approach:
+    summary: checklist.LoadTurns uses Options.IncludeSubProcedures
+    details: []
+  code_locations:
+    files:
+      - path: tools/agentstream/checklist/checklist.go
+        description: '[REQ-GOAGENT-YAML-STEP-RENDER] [ARCH-GOAGENT-YAML-STEPS] [IMPL-GOAGENT-CHECKLIST]'
+  traceability:
+    architecture:
+      - ARCH-GOAGENT-YAML-STEPS
+    requirements:
+      - REQ-GOAGENT-YAML-STEP-RENDER
+    tests: []
+    code_annotations:
+      - IMPL-GOAGENT-CHECKLIST
+  related_decisions:
+    depends_on:
+      - IMPL-GOAGENT-LIB-TYPES
+    supersedes: []
+    see_also:
+      - PROC-AGENT_REQ_CHECKLIST
+  essence_pseudocode: |-
+    # [IMPL-GOAGENT-CHECKLIST] [ARCH-GOAGENT-YAML-STEPS] [REQ-GOAGENT-YAML-STEP-RENDER]
+    # Summary: Render main steps then optional sub_procedures; each Turn chains from previous session.
+
+    # How: Contract I/O (same IMPL/ARCH/REQ). Cross-IMPL — callee of IMPL-GOAGENT-PIPELINE; YAML shape follows [PROC-AGENT_REQ_CHECKLIST] agent checklist schema. Turn from IMPL-GOAGENT-LIB-TYPES.
+
+    # INPUT: checklist YAML path; Options.IncludeSubProcedures (inverse of --lead-checklist-skip-sub).
+    # OUTPUT: messages or []Turn with ChainFromPrevious true.
+
+    procedure checklist_messages(path, opts):
+      # [IMPL-GOAGENT-CHECKLIST] [ARCH-GOAGENT-YAML-STEPS] [REQ-GOAGENT-YAML-STEP-RENDER]
+      # How: formatMainStep and formatSubProcedure mirror Ruby string templates including flow and references sections when present.
+      ON YAML or structure error: return error
+      return messages
+  detail_file: implementation-decisions/IMPL-GOAGENT-CHECKLIST.yaml
+  metadata:
+    created:
+      date: 2026-03-27T00:00:00.000Z
+      author: AI Agent
+    last_updated:
+      date: 2026-03-28T00:00:00.000Z
+      author: AI Agent
+      reason: S06.5 [PROC-IMPL_PSEUDOCODE_TOKENS] PROC-AGENT_REQ_CHECKLIST + pipeline callee
+    last_validated:
+      date: 2026-03-27T00:00:00.000Z
+      validator: AI Agent
+      result: pass
+IMPL-GOAGENT-PIPELINE:
+  name: pipeline.Build ordered assembly
+  status: Active
+  cross_references:
+    - ARCH-GOAGENT-PIPELINE
+    - REQ-GOAGENT-PIPELINE-CHAIN
+  rationale:
+    why: Single place for AgentStreamArgv turn order
+    problems_solved:
+      - Drift between Ruby and Go ordering
+    benefits:
+      - ChainBetween and SessionForTurn helpers
+  implementation_approach:
+    summary: pipeline.Build calls text tddloop featurespec checklist packages
+    details: []
+  code_locations:
+    files:
+      - path: tools/agentstream/pipeline/pipeline.go
+        description: '[REQ-GOAGENT-PIPELINE-CHAIN] [ARCH-GOAGENT-PIPELINE] [IMPL-GOAGENT-PIPELINE]'
+  traceability:
+    architecture:
+      - ARCH-GOAGENT-PIPELINE
+    requirements:
+      - REQ-GOAGENT-PIPELINE-CHAIN
+    tests:
+      - pipeline_test.go
+    code_annotations:
+      - IMPL-GOAGENT-PIPELINE
+  related_decisions:
+    depends_on:
+      - IMPL-GOAGENT-TEXT-SOURCES
+      - IMPL-GOAGENT-FEATURESPEC
+      - IMPL-GOAGENT-TDDLOOP
+      - IMPL-GOAGENT-CHECKLIST
+    supersedes: []
+    see_also:
+      - IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
+  essence_pseudocode: |-
+    # [IMPL-GOAGENT-PIPELINE] [ARCH-GOAGENT-PIPELINE] [REQ-GOAGENT-PIPELINE-CHAIN]
+    # Summary: Concatenate sources in fixed order; error if zero turns; expose chain metadata for executor.
+
+    # How: Composition — sequential cross-IMPL calls only; shared DATA is accumulated []Turn in memory (Turn from IMPL-GOAGENT-LIB-TYPES). Caller: IMPL-GOAGENT-CLI-CMD supplies pipeline.Input. Ordering fixed to match IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV / AgentStreamArgv Ruby parity.
+
+    procedure pipeline_Build(in):
+      # [IMPL-GOAGENT-PIPELINE] [ARCH-GOAGENT-PIPELINE] [REQ-GOAGENT-PIPELINE-CHAIN]
+      # How: Fixed order = argv, prompt-file, prompts-file, tdd-yaml, feature-spec-batch-yaml, lead-checklist-yaml, verify-session. Only feature-spec LoadTurns sets ChainFromPrevious=false per record; argv, prompt, prompts, tdd, checklist loaders set ChainFromPrevious=true (REQ-GOAGENT-PIPELINE-CHAIN: feature-spec breaks session chain; other consecutive turns resume).
+      # How: Cross-IMPL — IMPL-GOAGENT-TEXT-SOURCES ([ARCH-GOAGENT-TEXT-SOURCES] [REQ-GOAGENT-TEXT-SOURCES]): ArgvTurn, TurnsFromPromptFiles, TurnsFromPromptsFiles, VerifySessionTurn.
+      turns += text.ArgvTurn(in.ArgvWords)
+      turns += text.TurnsFromPromptFiles(in.PromptFiles) with error propagation
+      turns += text.TurnsFromPromptsFiles(in.PromptsFiles) with error propagation
+      # How: Cross-IMPL — IMPL-GOAGENT-TDDLOOP ([ARCH-GOAGENT-YAML-STEPS] [REQ-GOAGENT-YAML-STEP-RENDER]): LoadTurns per TddYAML path.
+      for each tdd path in in.TddYAMLPaths: turns += tddloop.LoadTurns(path) with error propagation
+      # How: Cross-IMPL — IMPL-GOAGENT-FEATURESPEC ([ARCH-GOAGENT-YAML-FEATURESPEC] [REQ-GOAGENT-FEATURESPEC-BATCH]): LoadTurns per feature-spec path.
+      for each feature path in in.FeatureSpecBatchYAMLPaths: turns += featurespec.LoadTurns(path, opts) with error propagation
+      # How: Cross-IMPL — IMPL-GOAGENT-CHECKLIST ([ARCH-GOAGENT-YAML-STEPS] [REQ-GOAGENT-YAML-STEP-RENDER]): LoadTurns when lead checklist path set.
+      if in.LeadChecklistYAML non-empty: turns += checklist.LoadTurns(in.LeadChecklistYAML, opts) with error propagation
+      # How: Error if no prompts — matches config/pipeline validation.
+      if len(turns)==0: return error no prompts
+      # [IMPL-GOAGENT-PIPELINE] [ARCH-GOAGENT-PIPELINE] [REQ-GOAGENT-PIPELINE-CHAIN]
+      # How: ChainBetween derives resume edges; SessionForTurn maps initial CLI session and running session id.
+      return turns
+  detail_file: implementation-decisions/IMPL-GOAGENT-PIPELINE.yaml
+  metadata:
+    created:
+      date: 2026-03-27T00:00:00.000Z
+      author: AI Agent
+    last_updated:
+      date: 2026-03-28T00:00:00.000Z
+      author: AI Agent
+      reason: S06.5 [PROC-IMPL_PSEUDOCODE_TOKENS] explicit cross-IMPL loader sequence
+    last_validated:
+      date: 2026-03-27T00:00:00.000Z
+      validator: AI Agent
+      result: pass
+IMPL-GOAGENT-EXECUTOR:
+  name: executor AgentArgv and Run stream-json
+  status: Active
+  cross_references:
+    - ARCH-GOAGENT-EXECUTOR
+    - ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON
+    - REQ-GOAGENT-AGENT-EXECUTOR
+  rationale:
+    why: Go implementation of NDJSON harness parallel to Ruby run_stream
+    problems_solved:
+      - Non-Go consumers still use Ruby; Go adds native speed and embedding
+    benefits:
+      - context.Context cancellation; ExitCode propagation
+  implementation_approach:
+    summary: os/exec with stdout Scanner; extractTextFragments; stderr goroutine
+    details: []
+  code_locations:
+    files:
+      - path: tools/agentstream/executor/executor.go
+        description: '[REQ-GOAGENT-AGENT-EXECUTOR] [ARCH-GOAGENT-EXECUTOR] [IMPL-GOAGENT-EXECUTOR]'
+  traceability:
+    architecture:
+      - ARCH-GOAGENT-EXECUTOR
+      - ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON
+    requirements:
+      - REQ-GOAGENT-AGENT-EXECUTOR
+    tests: []
+    code_annotations:
+      - IMPL-GOAGENT-EXECUTOR
+  related_decisions:
+    depends_on:
+      - IMPL-GOAGENT-LIB-TYPES
+    supersedes: []
+    see_also:
+      - IMPL-ATDD-E2E-AGENT_STREAM
+  essence_pseudocode: |-
+    # [IMPL-GOAGENT-EXECUTOR] [ARCH-GOAGENT-EXECUTOR] [REQ-GOAGENT-AGENT-EXECUTOR]
+    # Summary: Build argv with trust/force/model/workspace/resume; stream-parse JSON lines; return session id and exit code.
+
+    # How: Cross-IMPL — consumes []Turn.Parts from IMPL-GOAGENT-PIPELINE path; SessionID type from IMPL-GOAGENT-LIB-TYPES. Protocol parity with IMPL-ATDD-E2E-AGENT_STREAM ([ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON] [REQ-ATDD-E2E-AGENT_STREAM]) without calling Ruby.
+
+    procedure executor_Run(ctx, argv, out, errOut):
+      # [IMPL-GOAGENT-EXECUTOR] [ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON] [REQ-GOAGENT-AGENT-EXECUTOR]
+      # How: CommandContext; async stderr copy; stdout line JSON parse; thinking delta and assistant text parts to out; capture session_id.
+      # How: Start agent subprocess (os/exec).
+      spawn process
+      # [IMPL-GOAGENT-EXECUTOR] [ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON] [REQ-GOAGENT-AGENT-EXECUTOR]
+      # How: On parse error log to errOut and continue; on non-zero exit log status and return error with exit code.
+      # How: Await completion; join stderr goroutine.
+      wait process
+  detail_file: implementation-decisions/IMPL-GOAGENT-EXECUTOR.yaml
+  metadata:
+    created:
+      date: 2026-03-27T00:00:00.000Z
+      author: AI Agent
+    last_updated:
+      date: 2026-03-27T00:00:00.000Z
+      author: AI Agent
+      reason: S06.5 [PROC-IMPL_PSEUDOCODE_TOKENS] cross-IMPL + step comments
+    last_validated:
+      date: 2026-03-27T00:00:00.000Z
       validator: AI Agent
       result: pass

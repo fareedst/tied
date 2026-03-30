@@ -1,0 +1,52 @@
+REQ-GOAGENT-BASH-HELLO-SCRIPT:
+  name: Bash Hello World script for agentstream validation
+  category: Functional
+  priority: P2
+  status: Implemented
+  description: >-
+    Repository provides a minimal Bash script at the project root that prints exactly one line "Hello World!"
+    with exit status zero, using strict shell options, so agent pipelines can execute a trivial deterministic command.
+  rationale:
+    why: Agent and CI harnesses need a zero-dependency script to confirm shell execution and workspace wiring without pulling in Go or Ruby test stacks.
+    problems_solved:
+      - No standard trivial executable in repo for smoke checks
+    benefits:
+      - Fast, portable check; no build step; clear success criteria
+  satisfaction_criteria:
+    - criterion: Script exists at repository root with shebang /usr/bin/env bash
+    - criterion: Running the script prints exactly one line "Hello World!" to stdout with trailing newline
+      metric: diff against expected line; exit code 0
+    - criterion: Script enables strict mode (e.g. set -euo pipefail) and succeeds on the happy path
+  validation_criteria:
+    - method: Automated tests
+      coverage: hello_world_script_entry_test.go TestSCRIPT_ENTRY_REQ_GOAGENT_BASH_HELLO_SCRIPT_stdout_and_exit
+    - method: TIED consistency
+      coverage: tied_validate_consistency after S13 sync
+  traceability:
+    architecture:
+      - ARCH-GOAGENT-BASH-HELLO-SCRIPT
+    implementation:
+      - IMPL-GOAGENT-BASH-HELLO-SCRIPT
+    tests:
+      - hello_world_script_entry_test.go TestSCRIPT_ENTRY_REQ_GOAGENT_BASH_HELLO_SCRIPT_stdout_and_exit
+    code_annotations:
+      - REQ-GOAGENT-BASH-HELLO-SCRIPT
+  related_requirements:
+    depends_on:
+      - REQ-TIED_SETUP
+    related_to:
+      - REQ-ATDD-E2E-AGENT_STREAM
+      - REQ-GOAGENT-AGENT-EXECUTOR
+    supersedes: []
+  metadata:
+    created:
+      date: 2026-03-30T00:00:00.000Z
+      author: AI Agent
+    last_updated:
+      date: 2026-03-30T00:00:00.000Z
+      author: AI Agent
+      reason: S13 [PROC-AGENT_REQ_CHECKLIST] sync TIED to hello_world.sh and Go unit test
+    last_validated:
+      date: 2026-03-30T00:00:00.000Z
+      validator: AI Agent
+      result: pass

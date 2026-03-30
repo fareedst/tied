@@ -338,6 +338,7 @@ ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON:
   status: Active
   cross_references:
     - REQ-ATDD-E2E-AGENT_STREAM
+    - REQ-GOAGENT-AGENT-EXECUTOR
   rationale:
     why: The agent binary is an external CLI; Open3 provides stdout line streaming and stderr forwarding suitable for NDJSON
     problems_solved:
@@ -360,8 +361,10 @@ ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON:
   traceability:
     requirements:
       - REQ-ATDD-E2E-AGENT_STREAM
+      - REQ-GOAGENT-AGENT-EXECUTOR
     implementation:
       - IMPL-ATDD-E2E-AGENT_STREAM
+      - IMPL-GOAGENT-EXECUTOR
     tests:
       - agent_stream_e2e_test.rb
     code_annotations:
@@ -370,6 +373,7 @@ ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON:
     depends_on: []
     informs:
       - IMPL-ATDD-E2E-AGENT_STREAM
+      - IMPL-GOAGENT-EXECUTOR
     see_also: []
   detail_file: architecture-decisions/ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON.yaml
   metadata:
@@ -377,10 +381,413 @@ ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON:
       date: 2026-03-24T00:00:00.000Z
       author: AI Agent
     last_updated:
-      date: 2026-03-24T00:00:00.000Z
+      date: 2026-03-27T00:00:00.000Z
       author: AI Agent
-      reason: Import ATDD agent stream TIED records
+      reason: Cross-link Go agentstream executor REQ/IMPL
     last_validated:
       date: 2026-03-24T00:00:00.000Z
       validator: AI Agent
       result: pass
+ARCH-GOAGENT-LIB-LAYERING:
+  name: Go agentstream package layering and import rules
+  status: Active
+  cross_references:
+    - REQ-GOAGENT-LIB-MODULE
+  rationale:
+    why: Library consumers need stable packages without CLI coupling
+    problems_solved:
+      - Circular imports and untestable globals
+    benefits:
+      - cmd depends on libraries only; libraries accept io.Writer
+  implementation_approach:
+    summary: Module stdd/agentstream; packages featurespec text tddloop checklist pipeline executor config; cmd/agentstream
+    details:
+      - Shared types in root agentstream package (Turn SessionID)
+  traceability:
+    requirements:
+      - REQ-GOAGENT-LIB-MODULE
+    implementation:
+      - IMPL-GOAGENT-LIB-TYPES
+    tests:
+      - go test ./tools/agentstream/...
+    code_annotations:
+      - ARCH-GOAGENT-LIB-LAYERING
+  related_decisions:
+    depends_on: []
+    informs:
+      - IMPL-GOAGENT-LIB-TYPES
+    see_also: []
+  detail_file: architecture-decisions/ARCH-GOAGENT-LIB-LAYERING.yaml
+  metadata:
+    created:
+      date: 2026-03-27T00:00:00.000Z
+      author: AI Agent
+    last_updated:
+      date: 2026-03-27T00:00:00.000Z
+      author: AI Agent
+      reason: Go agentstream consolidated spec
+    last_validated:
+      date: 2026-03-27T00:00:00.000Z
+      validator: AI Agent
+      result: pass
+ARCH-GOAGENT-CLI:
+  name: Unified CLI surface for agentstream
+  status: Active
+  cross_references:
+    - REQ-GOAGENT-CLI-CONFIG
+  rationale:
+    why: One flag set replaces shell wrapper plus Ruby argv parsing
+    problems_solved:
+      - Split configuration and help text
+    benefits:
+      - Preview path; synonym order flags; positional batch yaml
+  implementation_approach:
+    summary: config.ParseAndResolve walks argv; defaults from workspace and repo-root discovery
+    details:
+      - Validation gates before pipeline.Build
+  traceability:
+    requirements:
+      - REQ-GOAGENT-CLI-CONFIG
+    implementation:
+      - IMPL-GOAGENT-CLI-CMD
+    tests:
+      - manual --help
+    code_annotations:
+      - ARCH-GOAGENT-CLI
+  related_decisions:
+    depends_on:
+      - ARCH-GOAGENT-LIB-LAYERING
+    informs:
+      - IMPL-GOAGENT-CLI-CMD
+    see_also: []
+  detail_file: architecture-decisions/ARCH-GOAGENT-CLI.yaml
+  metadata:
+    created:
+      date: 2026-03-27T00:00:00.000Z
+      author: AI Agent
+    last_updated:
+      date: 2026-03-27T00:00:00.000Z
+      author: AI Agent
+      reason: Go agentstream consolidated spec
+    last_validated:
+      date: 2026-03-27T00:00:00.000Z
+      validator: AI Agent
+      result: pass
+ARCH-GOAGENT-TEXT-SOURCES:
+  name: Text prompt source boundaries
+  status: Active
+  cross_references:
+    - REQ-GOAGENT-TEXT-SOURCES
+  rationale:
+    why: Text inputs are pure file/string transforms
+    problems_solved:
+      - Mixing YAML record logic with raw text
+    benefits:
+      - Isolated package text
+  implementation_approach:
+    summary: Package text exposes ArgvTurn TurnsFromPromptFiles TurnsFromPromptsFiles VerifySessionTurn
+    details: []
+  traceability:
+    requirements:
+      - REQ-GOAGENT-TEXT-SOURCES
+    implementation:
+      - IMPL-GOAGENT-TEXT-SOURCES
+    tests:
+      - text_test.go
+    code_annotations:
+      - ARCH-GOAGENT-TEXT-SOURCES
+  related_decisions:
+    depends_on:
+      - ARCH-GOAGENT-LIB-LAYERING
+    informs:
+      - IMPL-GOAGENT-TEXT-SOURCES
+    see_also: []
+  detail_file: architecture-decisions/ARCH-GOAGENT-TEXT-SOURCES.yaml
+  metadata:
+    created:
+      date: 2026-03-27T00:00:00.000Z
+      author: AI Agent
+    last_updated:
+      date: 2026-03-27T00:00:00.000Z
+      author: AI Agent
+      reason: Go agentstream consolidated spec
+    last_validated:
+      date: 2026-03-27T00:00:00.000Z
+      validator: AI Agent
+      result: pass
+ARCH-GOAGENT-YAML-FEATURESPEC:
+  name: Feature spec batch YAML normalization and rendering
+  status: Active
+  cross_references:
+    - REQ-GOAGENT-FEATURESPEC-BATCH
+  rationale:
+    why: YAML shape mirrors Ruby FeatureSpecBatchPrompts for drop-in replacement
+    problems_solved:
+      - Order sort/filter parity
+    benefits:
+      - Exported featurespec package for other Go tools
+  implementation_approach:
+    summary: yaml.v3 Node parse; stable sort; OrderFilter; Preview to io.Writer
+    details: []
+  traceability:
+    requirements:
+      - REQ-GOAGENT-FEATURESPEC-BATCH
+    implementation:
+      - IMPL-GOAGENT-FEATURESPEC
+    tests:
+      - featurespec_test.go
+    code_annotations:
+      - ARCH-GOAGENT-YAML-FEATURESPEC
+  related_decisions:
+    depends_on:
+      - ARCH-GOAGENT-LIB-LAYERING
+    informs:
+      - IMPL-GOAGENT-FEATURESPEC
+    see_also: []
+  detail_file: architecture-decisions/ARCH-GOAGENT-YAML-FEATURESPEC.yaml
+  metadata:
+    created:
+      date: 2026-03-27T00:00:00.000Z
+      author: AI Agent
+    last_updated:
+      date: 2026-03-27T00:00:00.000Z
+      author: AI Agent
+      reason: Go agentstream consolidated spec
+    last_validated:
+      date: 2026-03-27T00:00:00.000Z
+      validator: AI Agent
+      result: pass
+ARCH-GOAGENT-YAML-STEPS:
+  name: TDD and checklist YAML step rendering architecture
+  status: Active
+  cross_references:
+    - REQ-GOAGENT-YAML-STEP-RENDER
+  rationale:
+    why: Two YAML schemas share pipeline insertion rules but different templates
+    problems_solved:
+      - Monolithic prompt builder
+    benefits:
+      - Packages tddloop and checklist
+  implementation_approach:
+    summary: Unmarshal to typed structs; format functions return markdown strings
+    details: []
+  traceability:
+    requirements:
+      - REQ-GOAGENT-YAML-STEP-RENDER
+    implementation:
+      - IMPL-GOAGENT-TDDLOOP
+      - IMPL-GOAGENT-CHECKLIST
+    tests: []
+    code_annotations:
+      - ARCH-GOAGENT-YAML-STEPS
+  related_decisions:
+    depends_on:
+      - ARCH-GOAGENT-LIB-LAYERING
+    informs:
+      - IMPL-GOAGENT-TDDLOOP
+      - IMPL-GOAGENT-CHECKLIST
+    see_also:
+      - ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS
+  detail_file: architecture-decisions/ARCH-GOAGENT-YAML-STEPS.yaml
+  metadata:
+    created:
+      date: 2026-03-27T00:00:00.000Z
+      author: AI Agent
+    last_updated:
+      date: 2026-03-27T00:00:00.000Z
+      author: AI Agent
+      reason: Go agentstream consolidated spec
+    last_validated:
+      date: 2026-03-27T00:00:00.000Z
+      validator: AI Agent
+      result: pass
+ARCH-GOAGENT-PIPELINE:
+  name: Turn assembly and session chain metadata
+  status: Active
+  cross_references:
+    - REQ-GOAGENT-PIPELINE-CHAIN
+  rationale:
+    why: Explicit Build step keeps cmd thin and testable
+    problems_solved:
+      - Scattered append_turn logic
+    benefits:
+      - pipeline.Build and ChainBetween helpers
+  implementation_approach:
+    summary: Ordered concatenation; feature-spec turns break chain; SessionForTurn derives resume id
+    details: []
+  traceability:
+    requirements:
+      - REQ-GOAGENT-PIPELINE-CHAIN
+    implementation:
+      - IMPL-GOAGENT-PIPELINE
+      - IMPL-GOAGENT-CLI-CMD
+    tests:
+      - pipeline_test.go
+    code_annotations:
+      - ARCH-GOAGENT-PIPELINE
+  related_decisions:
+    depends_on:
+      - ARCH-GOAGENT-TEXT-SOURCES
+      - ARCH-GOAGENT-YAML-FEATURESPEC
+      - ARCH-GOAGENT-YAML-STEPS
+    informs:
+      - IMPL-GOAGENT-PIPELINE
+    see_also: []
+  detail_file: architecture-decisions/ARCH-GOAGENT-PIPELINE.yaml
+  metadata:
+    created:
+      date: 2026-03-27T00:00:00.000Z
+      author: AI Agent
+    last_updated:
+      date: 2026-03-27T00:00:00.000Z
+      author: AI Agent
+      reason: Go agentstream consolidated spec
+    last_validated:
+      date: 2026-03-27T00:00:00.000Z
+      validator: AI Agent
+      result: pass
+ARCH-GOAGENT-EXECUTOR:
+  name: Go subprocess executor for agent stream-json
+  status: Active
+  cross_references:
+    - REQ-GOAGENT-AGENT-EXECUTOR
+  rationale:
+    why: Reuses ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON protocol in Go os/exec
+    problems_solved:
+      - Ruby-only harness
+    benefits:
+      - Same NDJSON parsing rules; goroutine stderr drain
+  implementation_approach:
+    summary: exec.CommandContext; line scanner stdout; AgentArgv builder
+    details:
+      - Complements Ruby run_stream; primary implementation tools/agentstream/executor
+  traceability:
+    requirements:
+      - REQ-GOAGENT-AGENT-EXECUTOR
+    implementation:
+      - IMPL-GOAGENT-EXECUTOR
+    tests: []
+    code_annotations:
+      - ARCH-GOAGENT-EXECUTOR
+  related_decisions:
+    depends_on:
+      - ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON
+    informs:
+      - IMPL-GOAGENT-EXECUTOR
+    see_also: []
+  detail_file: architecture-decisions/ARCH-GOAGENT-EXECUTOR.yaml
+  metadata:
+    created:
+      date: 2026-03-27T00:00:00.000Z
+      author: AI Agent
+    last_updated:
+      date: 2026-03-27T00:00:00.000Z
+      author: AI Agent
+      reason: Go agentstream consolidated spec
+    last_validated:
+      date: 2026-03-27T00:00:00.000Z
+      validator: AI Agent
+      result: pass
+ARCH-GOAGENT-BASH-HELLO-SCRIPT:
+  name: Root Bash smoke script for agent validation
+  status: Active
+  cross_references:
+    - REQ-GOAGENT-BASH-HELLO-SCRIPT
+  rationale:
+    why: Checklists and agent harnesses need a deterministic, dependency-free executable to verify shell and cwd without building Go or Ruby.
+    problems_solved:
+      - No shared contract for a trivial validation script alongside agentstream tooling
+    benefits:
+      - One-line observable behavior; easy to assert in any test runner or manual run
+  implementation_approach:
+    summary: One file at repository root hello_world.sh; no imports; documented in IMPL code_locations.
+    details:
+      - Pipelines invoke via bash hello_world.sh from repo root
+  traceability:
+    requirements:
+      - REQ-GOAGENT-BASH-HELLO-SCRIPT
+    implementation:
+      - IMPL-GOAGENT-BASH-HELLO-SCRIPT
+    tests:
+      - hello_world_script_entry_test.go TestSCRIPT_ENTRY_REQ_GOAGENT_BASH_HELLO_SCRIPT_stdout_and_exit
+    code_annotations:
+      - ARCH-GOAGENT-BASH-HELLO-SCRIPT
+  related_decisions:
+    depends_on:
+      - ARCH-TIED_STRUCTURE
+    informs:
+      - IMPL-GOAGENT-BASH-HELLO-SCRIPT
+    see_also:
+      - ARCH-GOAGENT-EXECUTOR
+  detail_file: architecture-decisions/ARCH-GOAGENT-BASH-HELLO-SCRIPT.yaml
+  metadata:
+    created:
+      date: 2026-03-30T00:00:00.000Z
+      author: AI Agent
+    last_updated:
+      date: 2026-03-30T00:00:00.000Z
+      author: AI Agent
+      reason: S13 [PROC-AGENT_REQ_CHECKLIST] sync TIED to implementation
+    last_validated:
+      date: 2026-03-30T00:00:00.000Z
+      validator: AI Agent
+      result: pass
+ARCH-CONFIG_DISCOVERY_LAYERING:
+  name: Layered configuration discovery with local replacement of built-ins
+  status: Active
+  cross_references:
+    - REQ-CONFIG_DISCOVERY_LOCAL_LAYER
+  rationale:
+    why: Project-local configuration must be able to replace built-in defaults without silent merge; partial files must not inject defaults for omitted keys; directory excludes must match at depth.
+    problems_solved:
+      - Implicit default merge with local policy
+      - Phantom defaults in merge from defaults-seeded parse
+      - Root-only directory pattern matching
+    benefits:
+      - Predictable layering and operator control
+      - Consistent tree-wide exclusion semantics
+  alternatives_considered:
+    - name: Always merge with built-ins
+      pros:
+        - Defaults always active
+      cons:
+        - Cannot narrow lists without extra syntax
+      rejected_reason: Conflicts with REQ-CONFIG_DISCOVERY_LOCAL_LAYER
+    - name: Replace only with explicit prefix
+      pros:
+        - Very explicit
+      cons:
+        - Poor first-file ergonomics
+      rejected_reason: REQ allows unprefixed first-local replacement for selected fields
+  implementation_approach:
+    summary: Discovery-ordered load; first-local replace for configured accumulate fields; clear omitted keys after parse; segment-based directory pattern matching in exclusion engine.
+    details:
+      - Explicit merge-strategy flags per discovery phase
+      - Omit-key clearing before cross-file merge
+      - Single-segment trailing-slash patterns match any path segment
+  traceability:
+    requirements:
+      - REQ-CONFIG_DISCOVERY_LOCAL_LAYER
+    implementation: []
+    tests: []
+    code_annotations:
+      - ARCH-CONFIG_DISCOVERY_LAYERING
+  related_decisions:
+    depends_on:
+      - ARCH-TIED_STRUCTURE
+    informs: []
+    see_also:
+      - ARCH-GOAGENT-CLI
+  detail_file: architecture-decisions/ARCH-CONFIG_DISCOVERY_LAYERING.yaml
+  metadata:
+    created:
+      date: 2026-03-29T00:00:00.000Z
+      author: AI Agent
+    last_updated:
+      date: 2026-03-29T00:00:00.000Z
+      author: AI Agent
+      reason: S05 agent checklist
+    last_validated:
+      date: 2026-03-29T00:00:00.000Z
+      validator: AI Agent
+      result: pending

@@ -177,11 +177,12 @@ PROC-TIED_DEV_CYCLE:
     - PROC-TOKEN_VALIDATION
     - PROC-IMPL_PSEUDOCODE_TOKENS
     - PROC-COMMIT_MESSAGES
+    - PROC-AGENT_REQ_CHECKLIST
   source_index: processes.md
   detail_file: null
   metadata:
     registered: 2026-03-01T00:00:00.000Z
-    last_updated: 2026-03-05T00:00:00.000Z
+    last_updated: 2026-03-27T00:00:00.000Z
 PROC-COMMIT_MESSAGES:
   type: PROC
   name: Commit message format and guidelines
@@ -218,6 +219,93 @@ PROC-RELEASE:
   metadata:
     registered: 2026-03-03T00:00:00.000Z
     last_updated: 2026-03-03T00:00:00.000Z
+PROC-LEAP:
+  type: PROC
+  name: Logic Elevation And Propagation (LEAP)
+  status: Active
+  description: When code or tests differ from IMPL, update the stack in reverse order IMPL to ARCH to REQ in the same work item so tokens stay consistent and testable
+  cross_references:
+    - REQ-TIED_SETUP
+    - REQ-MODULE_VALIDATION
+    - PROC-TIED_DEV_CYCLE
+    - PROC-IMPL_PSEUDOCODE_TOKENS
+  source_index: processes.md
+  detail_file: null
+  metadata:
+    registered: 2026-03-27T00:00:00.000Z
+    last_updated: 2026-03-27T00:00:00.000Z
+PROC-YAML_EDIT_LOOP:
+  type: PROC
+  name: YAML edit and validation loop
+  status: Active
+  description: Controlling loop for creating or editing TIED YAML; validate with lint_yaml before use; no record valid until it passes
+  cross_references:
+    - REQ-TIED_SETUP
+    - ARCH-TIED_STRUCTURE
+    - PROC-YAML_DB_OPERATIONS
+  source_index: processes.md
+  detail_file: null
+  metadata:
+    registered: 2026-03-27T00:00:00.000Z
+    last_updated: 2026-03-27T00:00:00.000Z
+PROC-PSEUDOCODE_VALIDATION:
+  type: PROC
+  name: Application pseudo-code validation
+  status: Active
+  description: Run the application pseudo-code validation checklist on IMPL essence_pseudocode; required checks are gating before tests or code
+  cross_references:
+    - PROC-IMPL_PSEUDOCODE_TOKENS
+    - PROC-IMPL_CODE_TEST_SYNC
+    - PROC-AGENT_REQ_CHECKLIST
+  source_index: processes.md
+  detail_file: null
+  metadata:
+    registered: 2026-03-27T00:00:00.000Z
+    last_updated: 2026-03-27T00:00:00.000Z
+PROC-TIED_VERIFICATION_GATED:
+  type: PROC
+  name: Verification-gated status (closed-loop)
+  status: Active
+  description: When enabled, requirement and optionally IMPL status are derived only from test results; run verify step after tests; do not edit status by hand
+  cross_references:
+    - REQ-TIED_SETUP
+    - PROC-TIED_DEV_CYCLE
+    - PROC-TOKEN_VALIDATION
+  source_index: processes.md
+  detail_file: null
+  metadata:
+    registered: 2026-03-27T00:00:00.000Z
+    last_updated: 2026-03-27T00:00:00.000Z
+REQ-CONFIG_DISCOVERY_LOCAL_LAYER:
+  type: REQ
+  name: Project-local configuration replaces built-in defaults for layered discovery
+  category: Functional
+  status: Planned
+  description: Layered config discovery; first local file replaces built-in lists for configured keys; omitted keys in later files do not inject defaults; single-segment directory excludes match at any depth.
+  cross_references:
+    - REQ-TIED_SETUP
+    - REQ-GOAGENT-CLI-CONFIG
+    - ARCH-CONFIG_DISCOVERY_LAYERING
+    - PROC-AGENT_REQ_CHECKLIST
+  source_index: requirements.yaml
+  detail_file: requirements/REQ-CONFIG_DISCOVERY_LOCAL_LAYER.yaml
+  metadata:
+    registered: 2026-03-29T00:00:00.000Z
+    last_updated: 2026-03-29T00:00:00.000Z
+ARCH-CONFIG_DISCOVERY_LAYERING:
+  type: ARCH
+  name: Layered configuration discovery with local replacement of built-ins
+  status: Active
+  description: Defaults as bottom layer; first local file may replace selected built-in lists; omitted keys do not re-merge defaults; single-segment directory excludes at any depth.
+  cross_references:
+    - REQ-CONFIG_DISCOVERY_LOCAL_LAYER
+    - ARCH-TIED_STRUCTURE
+    - ARCH-GOAGENT-CLI
+  source_index: architecture-decisions.yaml
+  detail_file: architecture-decisions/ARCH-CONFIG_DISCOVERY_LAYERING.yaml
+  metadata:
+    registered: 2026-03-29T00:00:00.000Z
+    last_updated: 2026-03-29T00:00:00.000Z
 REQ-FEEDBACK_TO_TIED:
   type: REQ
   name: Feedback to TIED (Feature Requests, Bug Reports, Methodology)
@@ -245,7 +333,7 @@ REQ-LEAP_PROPOSAL_QUEUE:
   detail_file: requirements/REQ-LEAP_PROPOSAL_QUEUE.yaml
   metadata:
     registered: 2026-03-26T00:00:00.000Z
-    last_updated: 2026-03-26T00:00:00.000Z
+    last_updated: 2026-03-28T00:00:00.000Z
 ARCH-LEAP_PROPOSAL_QUEUE:
   type: ARCH
   name: LEAP proposal queue storage and review boundary
@@ -258,7 +346,7 @@ ARCH-LEAP_PROPOSAL_QUEUE:
   detail_file: architecture-decisions/ARCH-LEAP_PROPOSAL_QUEUE.yaml
   metadata:
     registered: 2026-03-26T00:00:00.000Z
-    last_updated: 2026-03-26T00:00:00.000Z
+    last_updated: 2026-03-28T00:00:00.000Z
 ARCH-FEEDBACK_STORAGE:
   type: ARCH
   name: Feedback Storage for TIED Reporting
@@ -297,38 +385,44 @@ IMPL-MCP_LEAP_PROPOSAL_QUEUE:
   detail_file: implementation-decisions/IMPL-MCP_LEAP_PROPOSAL_QUEUE.yaml
   metadata:
     registered: 2026-03-26T00:00:00.000Z
-    last_updated: 2026-03-26T00:00:00.000Z
+    last_updated: 2026-03-28T00:00:00.000Z
 PROC-AGENT_REQ_CHECKLIST:
   type: PROC
   name: Agent requirement implementation checklist
   status: Active
-  description: 'Unified LEAD+TIED checklist (S01–S16) for REQ implementation: pseudo-code, TDD, composition, E2E decision, validation'
+  description: 'Unified LEAD+TIED checklist (S01–S16) for REQ implementation: pseudo-code, TDD, composition, E2E decision, validation; see tied/docs/agent-req-implementation-checklist.md'
   cross_references:
     - PROC-TIED_DEV_CYCLE
     - PROC-IMPL_PSEUDOCODE_TOKENS
     - PROC-TOKEN_AUDIT
     - REQ-MODULE_VALIDATION
-  source_index: tied/docs/agent-req-implementation-checklist.md
+  source_index: processes.md
   detail_file: null
   metadata:
     registered: "2026-03-24T00:00:00.000Z"
-    last_updated: "2026-03-24T00:00:00.000Z"
-    reason: S09.SYNC [PROC-TOKEN_AUDIT] register PROC cited in tests/docs
+    last_updated: "2026-03-27T00:00:00.000Z"
+    reason: Align with templates; source_index processes.md [PROC-AGENT_REQ_CHECKLIST]
 PROC-IMPL_CODE_TEST_SYNC:
   type: PROC
   name: IMPL code and test synchronization (Phases D–F)
   status: Active
   description: Map pseudo-code blocks to tests and production code; three-way alignment; Phase H E2E decision when e2e_only
   cross_references:
+    - PROC-TIED_DEV_CYCLE
     - PROC-IMPL_PSEUDOCODE_TOKENS
+    - PROC-PSEUDOCODE_VALIDATION
     - PROC-TEST_STRATEGY
+    - PROC-LEAP
+    - PROC-TOKEN_AUDIT
+    - PROC-TOKEN_VALIDATION
+    - REQ-MODULE_VALIDATION
     - PROC-AGENT_REQ_CHECKLIST
-  source_index: tied/processes.md
+  source_index: processes.md
   detail_file: null
   metadata:
     registered: "2026-03-24T00:00:00.000Z"
-    last_updated: "2026-03-24T00:00:00.000Z"
-    reason: S09.SYNC [PROC-TOKEN_AUDIT] register PROC cited in tests
+    last_updated: "2026-03-27T00:00:00.000Z"
+    reason: Align cross_references with templates [PROC-IMPL_CODE_TEST_SYNC]
 REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML:
   type: REQ
   name: Agent stream argv expands TDD YAML into ordered turns
@@ -441,3 +535,339 @@ IMPL-ATDD-E2E-AGENT_STREAM:
   metadata:
     registered: "2026-03-24"
     last_updated: "2026-03-24"
+REQ-GOAGENT-LIB-MODULE:
+  type: REQ
+  name: Go agentstream library module layout and core types
+  category: Tooling
+  status: Active
+  description: Importable Go packages with Turn SessionID shared types
+  cross_references:
+    - ARCH-GOAGENT-LIB-LAYERING
+    - IMPL-GOAGENT-LIB-TYPES
+  source_index: requirements.yaml
+  detail_file: requirements/REQ-GOAGENT-LIB-MODULE.yaml
+  metadata:
+    registered: "2026-03-27"
+    last_updated: "2026-03-27"
+REQ-GOAGENT-CLI-CONFIG:
+  type: REQ
+  name: Unified CLI parsing and configuration resolution for agentstream
+  category: Tooling
+  status: Active
+  description: Merged run-feature-batch and run_agent_stream argv with defaults
+  cross_references:
+    - ARCH-GOAGENT-CLI
+    - IMPL-GOAGENT-CLI-CMD
+  source_index: requirements.yaml
+  detail_file: requirements/REQ-GOAGENT-CLI-CONFIG.yaml
+  metadata:
+    registered: "2026-03-27"
+    last_updated: "2026-03-27"
+REQ-GOAGENT-TEXT-SOURCES:
+  type: REQ
+  name: Text prompt sources argv prompt-file prompts-file verify-session
+  category: Tooling
+  status: Active
+  description: Text Turns with chain_from_previous true
+  cross_references:
+    - ARCH-GOAGENT-TEXT-SOURCES
+    - IMPL-GOAGENT-TEXT-SOURCES
+  source_index: requirements.yaml
+  detail_file: requirements/REQ-GOAGENT-TEXT-SOURCES.yaml
+  metadata:
+    registered: "2026-03-27"
+    last_updated: "2026-03-27"
+REQ-GOAGENT-FEATURESPEC-BATCH:
+  type: REQ
+  name: Feature spec batch YAML load sort filter render preview
+  category: Tooling
+  status: Active
+  description: Parity with FeatureSpecBatchPrompts.rb
+  cross_references:
+    - ARCH-GOAGENT-YAML-FEATURESPEC
+    - IMPL-GOAGENT-FEATURESPEC
+  source_index: requirements.yaml
+  detail_file: requirements/REQ-GOAGENT-FEATURESPEC-BATCH.yaml
+  metadata:
+    registered: "2026-03-27"
+    last_updated: "2026-03-27"
+REQ-GOAGENT-YAML-STEP-RENDER:
+  type: REQ
+  name: TDD loop and lead checklist YAML step renderers
+  category: Tooling
+  status: Active
+  description: tddloop and checklist packages
+  cross_references:
+    - ARCH-GOAGENT-YAML-STEPS
+    - IMPL-GOAGENT-TDDLOOP
+    - IMPL-GOAGENT-CHECKLIST
+  source_index: requirements.yaml
+  detail_file: requirements/REQ-GOAGENT-YAML-STEP-RENDER.yaml
+  metadata:
+    registered: "2026-03-27"
+    last_updated: "2026-03-27"
+REQ-GOAGENT-PIPELINE-CHAIN:
+  type: REQ
+  name: Multi-turn pipeline assembly session chaining and dry-run
+  category: Tooling
+  status: Active
+  description: pipeline.Build order and SessionForTurn
+  cross_references:
+    - ARCH-GOAGENT-PIPELINE
+    - IMPL-GOAGENT-PIPELINE
+    - IMPL-GOAGENT-CLI-CMD
+  source_index: requirements.yaml
+  detail_file: requirements/REQ-GOAGENT-PIPELINE-CHAIN.yaml
+  metadata:
+    registered: "2026-03-27"
+    last_updated: "2026-03-27"
+REQ-GOAGENT-AGENT-EXECUTOR:
+  type: REQ
+  name: Agent subprocess stream-json executor
+  category: Tooling
+  status: Active
+  description: Go executor for agent NDJSON stream
+  cross_references:
+    - ARCH-GOAGENT-EXECUTOR
+    - IMPL-GOAGENT-EXECUTOR
+  source_index: requirements.yaml
+  detail_file: requirements/REQ-GOAGENT-AGENT-EXECUTOR.yaml
+  metadata:
+    registered: "2026-03-27"
+    last_updated: "2026-03-27"
+REQ-GOAGENT-BASH-HELLO-SCRIPT:
+  type: REQ
+  name: Bash Hello World script for agentstream validation
+  category: Functional
+  status: Active
+  description: Root hello_world.sh strict Bash smoke; Go unit test validates stdout and exit 0
+  cross_references:
+    - ARCH-GOAGENT-BASH-HELLO-SCRIPT
+    - IMPL-GOAGENT-BASH-HELLO-SCRIPT
+  source_index: requirements.yaml
+  detail_file: requirements/REQ-GOAGENT-BASH-HELLO-SCRIPT.yaml
+  metadata:
+    registered: "2026-03-30"
+    last_updated: "2026-03-30"
+ARCH-GOAGENT-LIB-LAYERING:
+  type: ARCH
+  name: Go agentstream package layering and import rules
+  status: Active
+  description: cmd imports libraries only; shared types in root package
+  cross_references:
+    - REQ-GOAGENT-LIB-MODULE
+    - IMPL-GOAGENT-LIB-TYPES
+  source_index: architecture-decisions.yaml
+  detail_file: architecture-decisions/ARCH-GOAGENT-LIB-LAYERING.yaml
+  metadata:
+    registered: "2026-03-27"
+    last_updated: "2026-03-27"
+ARCH-GOAGENT-CLI:
+  type: ARCH
+  name: Unified CLI surface for agentstream
+  status: Active
+  description: config.ParseAndResolve and validation
+  cross_references:
+    - REQ-GOAGENT-CLI-CONFIG
+    - IMPL-GOAGENT-CLI-CMD
+  source_index: architecture-decisions.yaml
+  detail_file: architecture-decisions/ARCH-GOAGENT-CLI.yaml
+  metadata:
+    registered: "2026-03-27"
+    last_updated: "2026-03-27"
+ARCH-GOAGENT-TEXT-SOURCES:
+  type: ARCH
+  name: Text prompt source boundaries
+  status: Active
+  description: Package text isolation
+  cross_references:
+    - REQ-GOAGENT-TEXT-SOURCES
+    - IMPL-GOAGENT-TEXT-SOURCES
+  source_index: architecture-decisions.yaml
+  detail_file: architecture-decisions/ARCH-GOAGENT-TEXT-SOURCES.yaml
+  metadata:
+    registered: "2026-03-27"
+    last_updated: "2026-03-27"
+ARCH-GOAGENT-YAML-FEATURESPEC:
+  type: ARCH
+  name: Feature spec batch YAML normalization and rendering
+  status: Active
+  description: yaml.v3 Node parse and OrderFilter
+  cross_references:
+    - REQ-GOAGENT-FEATURESPEC-BATCH
+    - IMPL-GOAGENT-FEATURESPEC
+  source_index: architecture-decisions.yaml
+  detail_file: architecture-decisions/ARCH-GOAGENT-YAML-FEATURESPEC.yaml
+  metadata:
+    registered: "2026-03-27"
+    last_updated: "2026-03-27"
+ARCH-GOAGENT-YAML-STEPS:
+  type: ARCH
+  name: TDD and checklist YAML step rendering architecture
+  status: Active
+  description: Packages tddloop and checklist
+  cross_references:
+    - REQ-GOAGENT-YAML-STEP-RENDER
+    - IMPL-GOAGENT-TDDLOOP
+    - IMPL-GOAGENT-CHECKLIST
+  source_index: architecture-decisions.yaml
+  detail_file: architecture-decisions/ARCH-GOAGENT-YAML-STEPS.yaml
+  metadata:
+    registered: "2026-03-27"
+    last_updated: "2026-03-27"
+ARCH-GOAGENT-PIPELINE:
+  type: ARCH
+  name: Turn assembly and session chain metadata
+  status: Active
+  description: pipeline.Build and helpers
+  cross_references:
+    - REQ-GOAGENT-PIPELINE-CHAIN
+    - IMPL-GOAGENT-PIPELINE
+  source_index: architecture-decisions.yaml
+  detail_file: architecture-decisions/ARCH-GOAGENT-PIPELINE.yaml
+  metadata:
+    registered: "2026-03-27"
+    last_updated: "2026-03-27"
+ARCH-GOAGENT-EXECUTOR:
+  type: ARCH
+  name: Go subprocess executor for agent stream-json
+  status: Active
+  description: os/exec NDJSON parse parallel to Ruby
+  cross_references:
+    - REQ-GOAGENT-AGENT-EXECUTOR
+    - IMPL-GOAGENT-EXECUTOR
+  source_index: architecture-decisions.yaml
+  detail_file: architecture-decisions/ARCH-GOAGENT-EXECUTOR.yaml
+  metadata:
+    registered: "2026-03-27"
+    last_updated: "2026-03-27"
+ARCH-GOAGENT-BASH-HELLO-SCRIPT:
+  type: ARCH
+  name: Root Bash smoke script for agent validation
+  status: Active
+  description: hello_world.sh at repo root; Go smoke test in hello_world_script_entry_test.go
+  cross_references:
+    - REQ-GOAGENT-BASH-HELLO-SCRIPT
+    - IMPL-GOAGENT-BASH-HELLO-SCRIPT
+  source_index: architecture-decisions.yaml
+  detail_file: architecture-decisions/ARCH-GOAGENT-BASH-HELLO-SCRIPT.yaml
+  metadata:
+    registered: "2026-03-30"
+    last_updated: "2026-03-30"
+IMPL-GOAGENT-LIB-TYPES:
+  type: IMPL
+  name: agentstream Turn and SessionID shared types
+  status: Active
+  description: tools/agentstream/turn.go
+  cross_references:
+    - ARCH-GOAGENT-LIB-LAYERING
+    - REQ-GOAGENT-LIB-MODULE
+  source_index: implementation-decisions.yaml
+  detail_file: implementation-decisions/IMPL-GOAGENT-LIB-TYPES.yaml
+  metadata:
+    registered: "2026-03-27"
+    last_updated: "2026-03-27"
+IMPL-GOAGENT-CLI-CMD:
+  type: IMPL
+  name: config.ParseAndResolve and cmd/agentstream main orchestration
+  status: Active
+  description: CLI entry and defaults
+  cross_references:
+    - ARCH-GOAGENT-CLI
+    - REQ-GOAGENT-CLI-CONFIG
+  source_index: implementation-decisions.yaml
+  detail_file: implementation-decisions/IMPL-GOAGENT-CLI-CMD.yaml
+  metadata:
+    registered: "2026-03-27"
+    last_updated: "2026-03-27"
+IMPL-GOAGENT-TEXT-SOURCES:
+  type: IMPL
+  name: text package prompt file and argv turns
+  status: Active
+  description: tools/agentstream/text
+  cross_references:
+    - ARCH-GOAGENT-TEXT-SOURCES
+    - REQ-GOAGENT-TEXT-SOURCES
+  source_index: implementation-decisions.yaml
+  detail_file: implementation-decisions/IMPL-GOAGENT-TEXT-SOURCES.yaml
+  metadata:
+    registered: "2026-03-27"
+    last_updated: "2026-03-27"
+IMPL-GOAGENT-FEATURESPEC:
+  type: IMPL
+  name: featurespec YAML load sort filter render preview
+  status: Active
+  description: tools/agentstream/featurespec
+  cross_references:
+    - ARCH-GOAGENT-YAML-FEATURESPEC
+    - REQ-GOAGENT-FEATURESPEC-BATCH
+  source_index: implementation-decisions.yaml
+  detail_file: implementation-decisions/IMPL-GOAGENT-FEATURESPEC.yaml
+  metadata:
+    registered: "2026-03-27"
+    last_updated: "2026-03-27"
+IMPL-GOAGENT-TDDLOOP:
+  type: IMPL
+  name: tddloop YAML step messages
+  status: Active
+  description: tools/agentstream/tddloop
+  cross_references:
+    - ARCH-GOAGENT-YAML-STEPS
+    - REQ-GOAGENT-YAML-STEP-RENDER
+  source_index: implementation-decisions.yaml
+  detail_file: implementation-decisions/IMPL-GOAGENT-TDDLOOP.yaml
+  metadata:
+    registered: "2026-03-27"
+    last_updated: "2026-03-27"
+IMPL-GOAGENT-CHECKLIST:
+  type: IMPL
+  name: checklist YAML main steps and sub_procedures
+  status: Active
+  description: tools/agentstream/checklist
+  cross_references:
+    - ARCH-GOAGENT-YAML-STEPS
+    - REQ-GOAGENT-YAML-STEP-RENDER
+  source_index: implementation-decisions.yaml
+  detail_file: implementation-decisions/IMPL-GOAGENT-CHECKLIST.yaml
+  metadata:
+    registered: "2026-03-27"
+    last_updated: "2026-03-27"
+IMPL-GOAGENT-PIPELINE:
+  type: IMPL
+  name: pipeline.Build ordered assembly
+  status: Active
+  description: tools/agentstream/pipeline
+  cross_references:
+    - ARCH-GOAGENT-PIPELINE
+    - REQ-GOAGENT-PIPELINE-CHAIN
+  source_index: implementation-decisions.yaml
+  detail_file: implementation-decisions/IMPL-GOAGENT-PIPELINE.yaml
+  metadata:
+    registered: "2026-03-27"
+    last_updated: "2026-03-27"
+IMPL-GOAGENT-EXECUTOR:
+  type: IMPL
+  name: executor AgentArgv and Run stream-json
+  status: Active
+  description: tools/agentstream/executor
+  cross_references:
+    - ARCH-GOAGENT-EXECUTOR
+    - REQ-GOAGENT-AGENT-EXECUTOR
+  source_index: implementation-decisions.yaml
+  detail_file: implementation-decisions/IMPL-GOAGENT-EXECUTOR.yaml
+  metadata:
+    registered: "2026-03-27"
+    last_updated: "2026-03-27"
+IMPL-GOAGENT-BASH-HELLO-SCRIPT:
+  type: IMPL
+  name: Root hello_world.sh and Go smoke test for SCRIPT_ENTRY
+  status: Active
+  description: hello_world.sh; hello_world_script_entry_test.go; module stdd_hello_world_smoke
+  cross_references:
+    - ARCH-GOAGENT-BASH-HELLO-SCRIPT
+    - REQ-GOAGENT-BASH-HELLO-SCRIPT
+  source_index: implementation-decisions.yaml
+  detail_file: implementation-decisions/IMPL-GOAGENT-BASH-HELLO-SCRIPT.yaml
+  metadata:
+    registered: "2026-03-30"
+    last_updated: "2026-03-30"

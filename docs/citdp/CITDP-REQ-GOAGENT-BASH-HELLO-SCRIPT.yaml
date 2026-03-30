@@ -1,0 +1,273 @@
+# CITDP change-analysis record — [PROC-CITDP] step 8; checklist [PROC-AGENT_REQ_CHECKLIST] v1.0.2
+# CITDP_RECORDS: WORKSPACE_ROOT/docs/citdp (same repo as tied/)
+# change_request_id: REQ-GOAGENT-BASH-HELLO-SCRIPT
+# citdp-policy: tied/docs/citdp-policy.md not present in this clone; record created per checklist S15 (non-trivial REQ with TDD + TIED stack).
+record_identity:
+  change_request_id: REQ-GOAGENT-BASH-HELLO-SCRIPT
+  title: Root Bash Hello World smoke script and Go unit validation
+  checklist_process: '[PROC-AGENT_REQ_CHECKLIST]'
+  checklist_step_completed: S15
+  checklist_session_note: |
+    S02 (2026-03-30): Change — add repository-root hello_world.sh (strict Bash, single-line stdout) plus TIED REQ/ARCH/IMPL
+    for agent/CI smoke checks without building tools/agentstream.
+    S03 (2026-03-30): Impact — repo root artifacts (hello_world.sh, go.mod, hello_world_script_entry_test.go); project tied/ indexes,
+    detail files, semantic-tokens; README/CHANGELOG (S14). No change to Ruby agent-stream or Go agentstream packages.
+    S07 (2026-03-30): Risk — test cwd must be module root; bash must exist on PATH; TIED MCP unavailable in some sessions → TIED_YAML_BYPASS
+    with direct YAML edits + js-yaml SUB-YAML / validateConsistency CLI.
+    S08 (2026-03-30): Test strategy — single Go unit test spawning bash; IMPL blocks SCRIPT_ENTRY and UNIT_TEST_SCRIPT_ENTRY; no MCP composition;
+    no E2E (no UI).
+    S09–S11 (2026-03-30): RED → GREEN on stdout/exit; fix cmd.Dir to module root (runtime.Caller); no separate composition test file (binding is exec.Command only).
+    S12 (2026-03-30): go test ./... pass; tied_validate_consistency (CLI) ok; token audit vs semantic-tokens.
+    S13 (2026-03-30): REQ/ARCH/IMPL + detail + semantic-tokens aligned with hello_world.sh and test; SUB-YAML on changed YAML paths.
+    S14 (2026-03-30): README Scripts bullet; CHANGELOG [Unreleased] Added + Changed (README).
+    S15 (2026-03-30): This CITDP file; SUB-YAML lint pass on absolute path.
+  workspace_root: /Users/fareed/Documents/dev/chatgpt/stdd
+  tied_context:
+    requirements:
+      - REQ-GOAGENT-BASH-HELLO-SCRIPT
+    architecture:
+      - ARCH-GOAGENT-BASH-HELLO-SCRIPT
+    implementation:
+      - IMPL-GOAGENT-BASH-HELLO-SCRIPT
+change_definition:
+  summary: |
+    Provide a minimal Bash script at the repository root that prints exactly one line "Hello World!" with a trailing newline,
+    uses strict shell options, and exits zero; document and enforce via TIED REQ/ARCH/IMPL and a small Go test module that
+    invokes `bash hello_world.sh` from the repo root.
+  current_behavior_prior: |
+    No standard root-level Bash smoke artifact or TIED tokens for a trivial shell execution check alongside agentstream tooling.
+  desired_behavior: |
+    hello_world.sh at repo root; go.mod + hello_world_script_entry_test.go run `go test ./...` from root; TIED stack and
+    tied_validate_consistency report ok after sync.
+  non_goals:
+    - Integration with tools/agentstream Go packages or Ruby agent-stream
+    - Feature-rich CLI or configuration for the smoke script
+  success_criteria:
+    - bash hello_world.sh prints "Hello World!" and exits 0
+    - go test ./... from repo root passes
+    - tied_validate_consistency ok for project tied/
+    - README and CHANGELOG mention the smoke path and tokens
+    - CITDP record stored under docs/citdp and YAML-valid
+  references:
+    - hello_world.sh
+    - hello_world_script_entry_test.go
+    - tied/requirements/REQ-GOAGENT-BASH-HELLO-SCRIPT.yaml
+    - tied/architecture-decisions/ARCH-GOAGENT-BASH-HELLO-SCRIPT.yaml
+    - tied/implementation-decisions/IMPL-GOAGENT-BASH-HELLO-SCRIPT.yaml
+impact_analysis:
+  modules_affected:
+    - path: hello_world.sh
+      role: SCRIPT_ENTRY implementation per IMPL essence_pseudocode
+    - path: hello_world_script_entry_test.go
+      role: UNIT_TEST_SCRIPT_ENTRY — exec bash with Dir = module root
+    - path: go.mod
+      role: Go module stdd_hello_world_smoke for smoke test only
+    - path: tied/
+      role: REQ/ARCH/IMPL indexes, detail files, semantic-tokens.yaml
+    - path: README.md
+      role: User-facing Scripts documentation (S14)
+    - path: CHANGELOG.md
+      role: Release notes [Unreleased] (S14)
+  tied_tokens_new:
+    - REQ-GOAGENT-BASH-HELLO-SCRIPT
+    - ARCH-GOAGENT-BASH-HELLO-SCRIPT
+    - IMPL-GOAGENT-BASH-HELLO-SCRIPT
+  tied_tokens_affected: []
+  module_boundaries: |
+    Single Bash file + isolated Go test module at repo root; no imports from tools/agentstream. Validate script behavior via Go test
+    before treating TIED as authoritative ([REQ-MODULE_VALIDATION]).
+risk_analysis:
+  summary: |
+    Low scope; main hazards are wrong working directory in tests, missing bash on PATH in exotic CI images, and TIED YAML edited
+    without validation when MCP is unavailable.
+  risks:
+    - id: RISK-BASH-001
+      description: |
+        Go test runs with cwd other than repo root so hello_world.sh is not found or a different file is executed.
+      severity: Medium
+      likelihood: Low
+      tied_token_references:
+        - REQ-GOAGENT-BASH-HELLO-SCRIPT
+        - IMPL-GOAGENT-BASH-HELLO-SCRIPT
+      mitigation: |
+        Set cmd.Dir to directory of test file via runtime.Caller(0); assert in test; document in IMPL UNIT_TEST_SCRIPT_ENTRY.
+    - id: RISK-BASH-002
+      description: |
+        bash not on PATH or non-POSIX environment breaks go test despite valid script.
+      severity: Low
+      likelihood: Low
+      tied_token_references:
+        - REQ-GOAGENT-BASH-HELLO-SCRIPT
+      mitigation: |
+        Document dependency on bash for test; REQ targets normal dev/CI Unix-like environments.
+    - id: RISK-BASH-003
+      description: |
+        Direct IDE edits to tied/*.yaml without lint_yaml / tied_validate_consistency cause index/detail drift.
+      severity: Medium
+      likelihood: Medium
+      tied_token_references:
+        - REQ-TIED_SETUP
+        - IMPL-TIED_FILES
+        - IMPL-GOAGENT-BASH-HELLO-SCRIPT
+      mitigation: |
+        Prefer MCP writers when available; else TIED_YAML_BYPASS with explicit note; run validateConsistency and SUB-YAML after edits.
+test_determination_and_planning:
+  reference_impl: IMPL-GOAGENT-BASH-HELLO-SCRIPT
+  essence_pseudocode_source: tied/implementation-decisions/IMPL-GOAGENT-BASH-HELLO-SCRIPT.yaml
+  s08:
+    completed_date: 2026-03-30
+    checklist_version: agent_req_implementation_checklist v1.0.2
+    process_tokens:
+      - '[PROC-AGENT_REQ_CHECKLIST]'
+      - '[PROC-TEST_STRATEGY]'
+      - '[PROC-CITDP]'
+      - '[PROC-TIED_DEV_CYCLE]'
+      - '[REQ-MODULE_VALIDATION]'
+  e2e_only_blocks: []
+  e2e_only_note: |
+    No UI or MCP transport required; behavior is fully covered by Go unit test invoking bash.
+  e2e_only_impl_detail_pointer: |
+    IMPL essence_pseudocode procedures SCRIPT_ENTRY and UNIT_TEST_SCRIPT_ENTRY; no e2e_only flag on IMPL detail — N/A for this REQ.
+  impl_block_testability:
+    - block: SCRIPT_ENTRY
+      testability: unit
+      notes: Indirectly asserted via Go test stdout and exit code; script is the production artifact.
+    - block: UNIT_TEST_SCRIPT_ENTRY
+      testability: unit
+      notes: hello_world_script_entry_test.go TestSCRIPT_ENTRY_REQ_GOAGENT_BASH_HELLO_SCRIPT_stdout_and_exit
+  test_matrix:
+    rows:
+      - test_name: Go test — bash hello_world.sh stdout Hello World! and exit 0
+        impl_block_ref: UNIT_TEST_SCRIPT_ENTRY
+        req_token: REQ-GOAGENT-BASH-HELLO-SCRIPT
+        token_comments: '[IMPL-GOAGENT-BASH-HELLO-SCRIPT] [ARCH-GOAGENT-BASH-HELLO-SCRIPT] [REQ-GOAGENT-BASH-HELLO-SCRIPT]'
+        testability: unit
+        status: implemented
+  tdd_sequence:
+    references_ordered_workflow: |
+      [PROC-TIED_DEV_CYCLE]: unit test first (RED), hello_world.sh + test fix (GREEN), TIED sync (S13), docs (S14).
+    ordered_steps:
+      - id: 1
+        name: Unit tests first
+        scope: TestSCRIPT_ENTRY_REQ_GOAGENT_BASH_HELLO_SCRIPT_stdout_and_exit
+        notes: Asserts exact stdout line and successful exit; fails until script and Dir are correct.
+      - id: 2
+        name: Unit code via TDD
+        scope: hello_world.sh content and test cmd.Dir
+        notes: Script and test updated to satisfy RED→GREEN.
+      - id: 3
+        name: Composition tests first
+        scope: N/A — no IPC/MCP/bindings beyond os/exec to bash
+        notes: Skipped per scope; not applicable.
+      - id: 4
+        name: Composition code via TDD
+        scope: N/A
+        notes: Skipped.
+      - id: 5
+        name: E2E
+        scope: Skipped — no UI-only behavior
+        notes: Go test sufficient.
+      - id: 6
+        name: Validate and sync
+        scope: go test; tied_validate_consistency; lint/SUB-YAML on TIED and CITDP paths
+        notes: TIED_BASE_PATH=stdd/tied for consistency-validator CLI when MCP not used.
+  module_boundaries:
+    reference: '[REQ-MODULE_VALIDATION]'
+    modules:
+      - id: BASH-SMOKE-SCRIPT
+        path: hello_world.sh
+        responsibility: Deterministic one-line output under strict mode
+        validates_with: Manual bash invocation; Go test
+        integration_surface: stdout, exit code
+      - id: GO-SMOKE-TEST
+        path: hello_world_script_entry_test.go
+        responsibility: Spawn bash with correct working directory
+        validates_with: go test
+        depends_on:
+          - BASH-SMOKE-SCRIPT
+    criteria_before_integration:
+      - Script and test agree on path hello_world.sh relative to module root.
+tdd_execution_summary:
+  s09_red_green: |
+    RED — wrong cwd or missing script; GREEN — cmd.Dir = moduleRoot(t), printf line in script matches test expectation.
+  s10_composition: |
+    Not applicable — no separate composition layer for bash exec binding.
+  s11_e2e: |
+    Skipped; no browser/IDE E2E; unit test is authoritative.
+  s12_phase_i: |
+    go test ./... pass; tied_validate_consistency (include_pseudocode, require_detail_record) ok; token references registered.
+  s13_tied_sync: |
+    Indexes + detail + semantic-tokens for GOAGENT-BASH-HELLO-SCRIPT; code_locations and traceability.tests aligned.
+  s14_readme_changelog: |
+    README Repository Structure § Scripts; CHANGELOG [Unreleased] Added + Changed README line.
+  s15_citdp_persist: |
+    This file at /Users/fareed/Documents/dev/chatgpt/stdd/docs/citdp/CITDP-REQ-GOAGENT-BASH-HELLO-SCRIPT.yaml; SUB-YAML pass.
+checklist_tracking_s12:
+  step_id: S12
+  checklist_version: agent_req_implementation_checklist v1.0.2
+  completion_evidence:
+    - gate: go_test_smoke
+      command: cd /Users/fareed/Documents/dev/chatgpt/stdd && go test -v ./...
+      result: pass
+      timestamp: 1743369600
+    - gate: tied_validate_consistency_cli
+      command: |
+        cd /Users/fareed/Documents/dev/chatgpt/stdd/mcp-server && TIED_BASE_PATH=/Users/fareed/Documents/dev/chatgpt/stdd/tied \
+        node --input-type=module -e "import { validateConsistency } from './dist/consistency-validator.js'; \
+        const r=validateConsistency({ include_pseudocode: true, require_detail_record: true }); if(!r.ok) process.exit(1);"
+      result: pass
+      timestamp: 1743369600
+checklist_tracking_s13:
+  step_id: S13
+  checklist_version: agent_req_implementation_checklist v1.0.2
+  completion_evidence:
+    - gate: tied_docs_match_code_tests
+      command: Audit — hello_world.sh, hello_world_script_entry_test.go vs REQ/ARCH/IMPL + semantic-tokens
+      result: pass
+      timestamp: 1743369600
+    - gate: sub_yaml_changed_tied_paths
+      command: js-yaml load (SUB-YAML) on all changed tied/*.yaml and detail files for GOAGENT-BASH-HELLO-SCRIPT
+      result: pass
+      timestamp: 1743369600
+checklist_tracking_s15:
+  step_id: S15
+  checklist_version: agent_req_implementation_checklist v1.0.2
+  citdp_record_path: /Users/fareed/Documents/dev/chatgpt/stdd/docs/citdp/CITDP-REQ-GOAGENT-BASH-HELLO-SCRIPT.yaml
+  policy: WORKSPACE_ROOT/docs/citdp — same repository as project tied/ ([PROC-CITDP] step 8)
+  completion_evidence:
+    - gate: citdp_sections_populated
+      command: |
+        Record includes record_identity, change_definition, impact_analysis, risk_analysis, test_determination_and_planning,
+        tdd_execution_summary, checklist_tracking_s12/s13/s15, completion_criteria, leap_feedback
+      result: pass
+      timestamp: 1743369600
+    - gate: sub_yaml_lint
+      command: lint_yaml /Users/fareed/Documents/dev/chatgpt/stdd/docs/citdp/CITDP-REQ-GOAGENT-BASH-HELLO-SCRIPT.yaml; js-yaml loadAll (SUB-YAML)
+      result: pass
+      timestamp: 1743369600
+    - gate: leap_feedback_closed
+      command: leap_feedback.record_status complete; divergences_from_analysis []; tied_stack_updates_required false
+      result: pass
+      timestamp: 1743369600
+completion_criteria:
+  reference: |
+    REQ-GOAGENT-BASH-HELLO-SCRIPT: script + test + TIED stack + README/CHANGELOG + CITDP; tied_validate_consistency ok;
+    no LEAP scope change outstanding.
+  tests_passing: 1
+  tied_validate_consistency_full_report_ok: true
+  notes: |
+    Single Go test package; timestamps are approximate session markers (2026-03-30).
+leap_feedback:
+  divergences_from_analysis: []
+  tied_stack_updates_required: false
+  record_status: complete
+  notes: |
+    Minor TDD fix (cmd.Dir) did not require REQ/ARCH scope change; IMPL pseudo-code already described module root behavior.
+metadata:
+  created:
+    date: 2026-03-30
+    author: AI Agent
+  last_updated:
+    date: 2026-03-30
+    author: AI Agent
+    reason: S15 [PROC-AGENT_REQ_CHECKLIST] Persist CITDP for REQ-GOAGENT-BASH-HELLO-SCRIPT

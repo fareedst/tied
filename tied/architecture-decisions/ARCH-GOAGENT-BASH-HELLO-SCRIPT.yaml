@@ -1,0 +1,54 @@
+ARCH-GOAGENT-BASH-HELLO-SCRIPT:
+  name: Root Bash smoke script for agent validation
+  status: Active
+  cross_references:
+    - REQ-GOAGENT-BASH-HELLO-SCRIPT
+  decision: >-
+    The repository SHALL expose a single-purpose Bash script at the project root (conventional name
+    hello_world.sh) that uses env bash, enables strict options (set -euo pipefail), writes exactly one line
+    "Hello World!" to stdout with a trailing newline, and exits zero on success. The script SHALL NOT be part
+    of the Go module graph; it exists only as a POSIX shell artifact for pipelines and agent smoke checks.
+  rationale:
+    why: Checklists and agent harnesses need a deterministic, dependency-free executable to verify shell and cwd without building Go or Ruby.
+    problems_solved:
+      - No shared contract for a trivial validation script alongside agentstream tooling
+    benefits:
+      - One-line observable behavior; easy to assert in any test runner or manual run
+  alternatives_considered:
+    - name: Require only Go or Ruby smoke entrypoints
+      pros:
+        - Reuses existing test stacks
+      cons:
+        - Requires compile or bundle for minimal validation
+      rejected_reason: REQ calls for Bash-only smoke at repo root
+  implementation_approach:
+    summary: One file at repository root; no imports; documented path and invocation in IMPL code_locations.
+    details:
+      - Pipelines invoke via bash or execute bit per platform convention
+  traceability:
+    requirements:
+      - REQ-GOAGENT-BASH-HELLO-SCRIPT
+    implementation:
+      - IMPL-GOAGENT-BASH-HELLO-SCRIPT
+    tests:
+      - hello_world_script_entry_test.go TestSCRIPT_ENTRY_REQ_GOAGENT_BASH_HELLO_SCRIPT_stdout_and_exit
+    code_annotations:
+      - ARCH-GOAGENT-BASH-HELLO-SCRIPT
+  related_decisions:
+    depends_on:
+      - ARCH-TIED_STRUCTURE
+    informs: []
+    see_also:
+      - ARCH-GOAGENT-EXECUTOR
+  metadata:
+    created:
+      date: 2026-03-30T00:00:00.000Z
+      author: AI Agent
+    last_updated:
+      date: 2026-03-30T00:00:00.000Z
+      author: AI Agent
+      reason: S13 sync TIED to implementation
+    last_validated:
+      date: 2026-03-30T00:00:00.000Z
+      validator: AI Agent
+      result: pass

@@ -82,6 +82,8 @@ flowchart LR
   --select-order 1
 ```
 
+**UX-relevant updates (this working tree / branch):** Bootstrap instructions above favor **`copy_files.sh`** and spell out **`templates/` → `tied/methodology/`** vs **project `tied/*.yaml`** instead of a long manual `cp` list. In **this** repository, duplicate **root-level** TIED indexes (`requirements.yaml`, `architecture-decisions.yaml`, `implementation-decisions.yaml`, `semantic-tokens.yaml` and their old root detail dirs) are **removed**—use **`tied/`** only so there is a single place to edit project REQ/ARCH/IMPL data. **[scripts/run-feature-batch.sh](scripts/run-feature-batch.sh)** now passes through **`-f` / `--first-turn`** (with **`-s` / `--session-id`** when starting after turn 1) for **mid-batch resume** of the Ruby agent stream; see **[docs/run-agent-stream-tied.md](docs/run-agent-stream-tied.md)**. **[docs/tdd_development_loop.yaml](docs/tdd_development_loop.yaml)** is substantially expanded for **`--tdd-yaml`** multi-turn runs. **[AGENTS.md](AGENTS.md)** tightens **MCP-first** editing of project `tied/` YAML, documents **detail-file shape** pitfalls, and adds an **existence gate** for missing paths. **[.cursor/hooks/log.rb](.cursor/hooks/log.rb)** no longer JSON-parses `beforeReadFile` payloads, which keeps Cursor hook logs cleaner when files are not JSON.
+
 Defaults and flags: **[scripts/run-feature-batch.sh](scripts/run-feature-batch.sh)**; runner details: **[tools/agent-stream/README.md](tools/agent-stream/README.md)**, **[docs/run-agent-stream-tied.md](docs/run-agent-stream-tied.md)**. In client projects, the lead checklist is typically **`tied/docs/agent-req-implementation-checklist.yaml`** after `copy_files.sh`.
 
 ### How one spec maps into the checklist and TIED
@@ -143,32 +145,9 @@ The primary way to work with TIED is via the MCP server; a standalone bootstrap 
 ./copy_files.sh /path/to/your/project
 ```
 
-**Alternative (manual):**
+**Alternative (manual):** Prefer `./copy_files.sh` — it copies methodology YAML from `templates/` into `tied/methodology/`, creates project stub indexes under `tied/` when missing, and wires MCP. If you mirror by hand, follow the same source paths as [`copy_files.sh`](copy_files.sh): methodology index and detail YAML from `templates/` (and `templates/requirements/`, `templates/architecture-decisions/`, `templates/implementation-decisions/`) into `tied/methodology/`; copy guide `.md` files from the TIED repo root into `tied/`; copy `AGENTS.md`, `.cursorrules`, and `ai-principles.md` into the project root when absent.
 
-```bash
-# In your project directory (after cloning/downloading the TIED repository)
-mkdir -p tied
-cp requirements.md tied/requirements.md
-cp requirements.yaml tied/requirements.yaml
-mkdir -p tied/requirements
-cp requirements/*.yaml tied/requirements/
-cp architecture-decisions.md tied/architecture-decisions.md
-cp architecture-decisions.yaml tied/architecture-decisions.yaml
-mkdir -p tied/architecture-decisions
-cp architecture-decisions/*.yaml tied/architecture-decisions/
-cp implementation-decisions.md tied/implementation-decisions.md
-cp implementation-decisions.yaml tied/implementation-decisions.yaml
-mkdir -p tied/implementation-decisions
-cp implementation-decisions/*.yaml tied/implementation-decisions/
-cp processes.md tied/processes.md
-cp semantic-tokens.md tied/semantic-tokens.md
-cp semantic-tokens.yaml tied/semantic-tokens.yaml
-# Optional: cp tasks.md tied/tasks.md  # Task tracking is optional
-cp AGENTS.md AGENTS.md              # Copy canonical AI agent guide
-cp .cursorrules .cursorrules        # Copy Cursor loader if using Cursor
-```
-
-**Important**: Each project should have its own copies of these files. At the TIED repo root the files are templates; the same filenames in your project's `tied/` directory are the project indexes.
+**Important**: Each project should have its own copies of these files. Canonical methodology YAML lives under **`templates/`** in the TIED repository; the same filenames in a client's `tied/methodology/` are the read-only methodology copy, and `tied/*.yaml` at the project root (plus detail dirs) hold client-specific REQ/ARCH/IMPL data.
 
 ### Methodology vs project YAML split
 
@@ -371,6 +350,7 @@ This repository may **track** `tied/` under version control (methodology and pro
 - `scripts/dedupe_transcript_yaml.rb` — Deduplicate long text nodes in hook transcript YAML trees (shares helpers with `.cursor/hooks/log.rb`).
 - `scripts/run-feature-batch.sh` — Batch driver for agent-stream and feature-spec workflows. Defaults use the **current repository** as workspace (`.`), with runner and lead checklist paths **from this repo** (`tools/agent-stream/run_agent_stream.rb`, `docs/agent-req-implementation-checklist.yaml`). Supports `-o/--select-order ARG` where `ARG` is a single order `N` or an inclusive range `N-M` (it filters feature-spec-batch records by their `order`). `agent-preload-contract.yaml` and `prompts/all.yaml` are picked up only when those files exist in the workspace. Override with `-r` / `-c` (see `--help`).
 - `tools/agent-stream/` — Vendored **Cursor `agent` stream-json** runner (`run_agent_stream.rb`) plus `lib/` for multi-turn `--resume`, `--tdd-yaml`, and `--lead-checklist-yaml` (checklist-driven CITDP/LEAP/TIED sessions). Requires Ruby 3.x and `agent` on `PATH`. See [tools/agent-stream/README.md](tools/agent-stream/README.md) and [docs/run-agent-stream-tied.md](docs/run-agent-stream-tied.md).
+- **`hello_world.sh`** (repo root) — Minimal **Bash smoke** script: `#!/usr/bin/env bash`, `set -euo pipefail`, prints exactly one line `Hello World!` to stdout and exits 0. Use for agent/CI sanity checks without building Ruby or `tools/agentstream`. **`go.mod`** + **`hello_world_script_entry_test.go`** define a tiny Go module (`stdd_hello_world_smoke`) that runs `bash hello_world.sh` from the repo root and asserts stdout and exit code; run **`go test ./...`** from the repository root to execute it. TIED traceability lives under **`tied/`**: **`REQ-GOAGENT-BASH-HELLO-SCRIPT`**, **`ARCH-GOAGENT-BASH-HELLO-SCRIPT`**, **`IMPL-GOAGENT-BASH-HELLO-SCRIPT`**.
 
 ### Methodology Documentation (Reference Only)
 - `TIED.md` - TIED methodology overview (for beginners, intermediate, and experts)
