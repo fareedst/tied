@@ -361,22 +361,24 @@ with open('tied/requirements.yaml', 'w') as f:
 This is the **controlling loop** for creating or editing any TIED YAML (index or detail). No TIED record is considered valid for use until it has passed this loop.
 
 1. **Edit** — Create or modify the YAML file (index or detail) under `tied/` or other TIED-related paths (e.g. `docs/citdp/*.yaml` as defined by the project).
-2. **Validate and pretty-print** — Run `yq -i -P <file>` (or project-equivalent). This validates syntax and canonicalizes formatting in place. On failure, the file is invalid; fix and repeat from step 1.
+2. **Validate and pretty-print** — Run `lint_yaml <file> [file ...]` (or project-equivalent). This validates syntax and canonicalizes formatting in place. On failure, the file is invalid; fix and repeat from step 1.
 3. **Use** — Only after step 2 succeeds is the file considered **valid for use** under TIED (MCP, `tied_validate_consistency`, and other tooling may rely on it). YAML that does not validate is **invalid** and **must not be used** until fixed.
 4. **Optional** — For TIED index and detail files, run **tied_validate_consistency** (and any index/detail checks) as a further gate.
 
 **Valid for use** means the file may be read by MCP, scripts, or downstream steps; invalid YAML is not part of the governed TIED set. **Pretty-print** is one step of the TIED YAML creation/editing flow: all TIED records (index and detail) must be created or updated within this governance so they remain valid for use.
 
+**Safety note (yq)**: Never run raw multi-argument `yq -i -P file1 file2 ...` for linting/pretty-printing. In practice it can merge YAML documents and corrupt files. Use `lint_yaml` which processes each path independently (one `yq` invocation per file). If your system does not have `lint_yaml`, use per-file `yq -i -P <file>` in a loop.
+
 #### 4. Validating YAML Syntax (mandatory before use)
 
 **All** changes to TIED YAML must be validated before the file is considered valid for use. Validate (and canonicalize) with `yq -i -P <file>`. If validation fails, the YAML is **invalid** and **must not be used** until fixed.
 
-**Validate and pretty-print with yq (recommended):**
+**Validate and pretty-print (recommended):**
 ```bash
-yq -i -P tied/requirements.yaml && echo "✅ Valid YAML" || echo "❌ Invalid YAML"
-yq -i -P tied/architecture-decisions.yaml && echo "✅ Valid YAML" || echo "❌ Invalid YAML"
-yq -i -P tied/implementation-decisions.yaml && echo "✅ Valid YAML" || echo "❌ Invalid YAML"
-yq -i -P tied/semantic-tokens.yaml && echo "✅ Valid YAML" || echo "❌ Invalid YAML"
+scripts/lint_yaml.sh tied/requirements.yaml && echo "✅ Valid YAML" || echo "❌ Invalid YAML"
+scripts/lint_yaml.sh tied/architecture-decisions.yaml && echo "✅ Valid YAML" || echo "❌ Invalid YAML"
+scripts/lint_yaml.sh tied/implementation-decisions.yaml && echo "✅ Valid YAML" || echo "❌ Invalid YAML"
+scripts/lint_yaml.sh tied/semantic-tokens.yaml && echo "✅ Valid YAML" || echo "❌ Invalid YAML"
 # Repeat for any changed detail files under tied/requirements/, tied/architecture-decisions/, tied/implementation-decisions/
 ```
 

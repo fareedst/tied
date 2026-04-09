@@ -1,0 +1,22 @@
+IMPL-GOAGENT-CHECKLIST:
+  name: checklist YAML main steps and sub_procedures
+  status: Active
+  cross_references:
+    - ARCH-GOAGENT-YAML-STEPS
+    - REQ-GOAGENT-YAML-STEP-RENDER
+  essence_pseudocode: |-
+    # [IMPL-GOAGENT-CHECKLIST] [ARCH-GOAGENT-YAML-STEPS] [REQ-GOAGENT-YAML-STEP-RENDER]
+    # Summary: Render main steps then optional sub_procedures; each Turn chains from previous session.
+
+    # How: Contract I/O (same IMPL/ARCH/REQ). Cross-IMPL — callee of IMPL-GOAGENT-PIPELINE; YAML shape follows [PROC-AGENT_REQ_CHECKLIST] agent checklist schema. Turn from IMPL-GOAGENT-LIB-TYPES.
+
+    # INPUT: checklist YAML path; Options.IncludeSubProcedures (inverse of --lead-checklist-skip-sub); optional Options.StepFromID and StepToID (trimmed strings) for inclusive slice of main steps in YAML order ([REQ-GOAGENT-YAML-STEP-RENDER] [REQ-GOAGENT-CLI-CONFIG]).
+    # OUTPUT: messages or []Turn with ChainFromPrevious true.
+
+    procedure checklist_messages(path, opts):
+      # [IMPL-GOAGENT-CHECKLIST] [ARCH-GOAGENT-YAML-STEPS] [REQ-GOAGENT-YAML-STEP-RENDER]
+      # How: sliceMainSteps applies optional bounds by fmt.Sprint(step.ID) match; ON missing id or start>end return error with path; subs appended after sliced mains when IncludeSubProcedures.
+      # How: formatMainStep and formatSubProcedure mirror Ruby string templates including flow and references sections when present.
+      ON YAML or structure error: return error
+      return messages
+  detail_file: implementation-decisions/IMPL-GOAGENT-CHECKLIST.yaml

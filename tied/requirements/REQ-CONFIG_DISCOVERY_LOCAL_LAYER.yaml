@@ -1,0 +1,56 @@
+REQ-CONFIG_DISCOVERY_LOCAL_LAYER:
+  name: Project-local configuration replaces built-in defaults for layered discovery
+  category: Functional
+  priority: P1
+  status: Planned
+  description: When configuration is discovered from multiple layers (built-in defaults, optional user or home files, and project-local files), the project-local layer MUST be able to replace built-in default values for explicitly configured keys without retaining unstated built-in entries. For list-valued keys such as exclude patterns, an unprefixed list in the first project-local file replaces the built-in default list entirely. Files that omit a key MUST NOT inject built-in defaults for that key when merged as a later layer (no hidden merge from a DefaultConfig-shaped parse artifact). For file exclusion, a directory pattern consisting of a single path segment with a trailing slash (e.g. node_modules/) MUST match that directory name as a path segment at any depth in the tree.
+  rationale:
+    why: Users expect the project file next to the codebase to define the effective policy; merging unstated built-ins breaks that contract and surprises operators who narrow exclusions.
+    problems_solved:
+      - Built-in defaults silently combined with project-local lists when replacement was intended
+      - Later config files reintroducing defaults for omitted keys
+      - Single-segment directory exclude patterns only matching at repository root
+    benefits:
+      - Predictable effective configuration from explicit YAML
+      - Correct exclusion of named directories throughout the tree
+  satisfaction_criteria:
+    - criterion: First project-local file unprefixed exclude list replaces built-in default exclude list
+      metric: Effective patterns equal the local list only; built-in entries not present unless merged via explicit prefix or later file
+    - criterion: Later file omitting exclude_patterns does not append built-in patterns
+      metric: Effective list unchanged by that file for exclude_patterns
+    - criterion: Single-segment trailing-slash directory pattern matches at any depth
+      metric: Paths containing that segment as a path component match; similar-looking prefixes do not
+    - criterion: Explicit merge prefixes continue to append, prepend, replace, or default per field semantics
+      metric: Documented prefix behavior unchanged except as specified for first-file replace of built-ins
+  validation_criteria:
+    - method: Automated tests
+      coverage: Adopting project test suite (config load + pattern matching); tests reference REQ token or linked project REQ
+    - method: Documentation alignment
+      coverage: IMPL essence_pseudocode and agent checklist steps reflect this REQ after LEAP
+    - method: Product scope note
+      coverage: Conformance is evaluated in the product that implements layered YAML configuration merge. stdd tools/agentstream uses ParseAndResolve for CLI and default prompt paths (IMPL-GOAGENT-CLI-CMD), not multi-layer exclude merge unless extended; related_to REQ-GOAGENT-CLI-CONFIG is informational.
+  traceability:
+    architecture:
+      - ARCH-CONFIG_DISCOVERY_LAYERING
+    implementation: []
+    tests: []
+    code_annotations:
+      - REQ-CONFIG_DISCOVERY_LOCAL_LAYER
+  related_requirements:
+    depends_on:
+      - REQ-TIED_SETUP
+    related_to:
+      - REQ-GOAGENT-CLI-CONFIG
+    supersedes: []
+  metadata:
+    created:
+      date: 2026-03-29T00:00:00.000Z
+      author: AI Agent
+    last_updated:
+      date: 2026-03-28T00:00:00.000Z
+      author: AI Agent
+      reason: S06.4 validation scope vs agentstream CLI
+    last_validated:
+      date: 2026-03-29T00:00:00.000Z
+      validator: AI Agent
+      result: pending

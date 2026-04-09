@@ -1,0 +1,10 @@
+ARCH-GOAGENT-PIPELINE:
+  name: Turn assembly and session chain metadata
+  status: Active
+  traceability:
+    requirements:
+      - REQ-GOAGENT-PIPELINE-CHAIN
+    implementation:
+      - IMPL-GOAGENT-PIPELINE
+      - IMPL-GOAGENT-CLI-CMD
+  detail_file: architecture-decisions/ARCH-GOAGENT-PIPELINE.yaml

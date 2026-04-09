@@ -15,7 +15,7 @@
 | **DO** | Use the MCP tools in § 3 for every mutation of those files. |
 | **DO NOT** | Use `apply_patch`, `Write`, or bulk search-replace on those paths when an MCP tool can perform the same operation. |
 | **NEVER** | Create or edit `methodology/**` under the TIED base path; that tree is read-only in client projects (`[PROC-TIED_METHODOLOGY_READONLY]`). MCP rejects writes to methodology-owned tokens—**do not “fix” that by direct file edit**. |
-| **Exception** | If **no** MCP tool can perform the operation, document a one-line exception (what is missing), then direct-edit the minimal file, run `yq -i -P` on it, and run `tied_validate_consistency`. Treat the gap as a candidate for a new tool ([ai-agent-tied-mcp-usage.md](ai-agent-tied-mcp-usage.md) § 3). |
+| **Exception** | If **no** MCP tool can perform the operation, document a one-line exception (what is missing), then direct-edit the minimal file, run `lint_yaml <file>` per [PROC-YAML_EDIT_LOOP] (`tied/processes.md`), and run `tied_validate_consistency`. Treat the gap as a candidate for a new tool ([ai-agent-tied-mcp-usage.md](ai-agent-tied-mcp-usage.md) § 3). |
 
 **Why**: The server emits **safe YAML** (e.g. quoting values that contain `:`). Model-authored patches often break syntax, indentation, or duplicate keys.
 
@@ -25,7 +25,7 @@
 
 1. **One token at a time** for detail bodies: `yaml_detail_read` → merge your change mentally → `yaml_detail_update` with a small `updates` payload (JSON string). Avoid pasting entire index files from the model.
 2. **Batch reads only**: Use `yaml_detail_read_many` to load context; still apply **sequential** `yaml_detail_update` / `yaml_detail_create` per token unless a dedicated batch-write tool exists.
-3. **Keep index and detail aligned**: Creating a new REQ/ARCH/IMPL usually means index row **and** detail file—prefer `tied_token_create_with_detail` when appropriate, or `yaml_detail_create` with `sync_index: true` plus `yaml_index_insert` as documented in [mcp-server/README.md](../mcp-server/README.md).
+3. **Keep index and detail aligned**: Creating a new REQ/ARCH/IMPL usually means index row **and** detail file—prefer `tied_token_create_with_detail` when appropriate, or `yaml_detail_create` with `sync_index: true` plus `yaml_index_insert` as documented in [mcp-server/README.md](../../mcp-server/README.md).
 
 ---
 
@@ -69,7 +69,7 @@ Pass that object as a **string** in `updates` or `record` per the tool descripto
 | Symptom | Do this | Do not |
 |---------|---------|--------|
 | “Methodology”, “read-only”, or token not writable | Target **project** index/detail only; create project detail if the token should be client-specific | Patch files under `methodology/` or bypass with `Write` |
-| Wrong or missing `TIED_BASE_PATH` | Fix MCP env to point at the project’s `tied/` directory; confirm with `tied_config_get_base_path` | Write YAML into the wrong tree |
+| Wrong or missing `TIED_BASE_PATH` | **STOP**. Ensure the MCP server targets **this workspace’s** `tied/` directory (must be **under the workspace root**). Prefer the deterministic fix: re-run `./copy_files.sh /absolute/path/to/this/workspace` to rewrite this workspace’s `.cursor/mcp.json` (absolute `TIED_BASE_PATH` and server `args` path to your TIED clone’s `mcp-server/dist/index.js`). If manual edit is unavoidable, set `.cursor/mcp.json` `mcpServers.tied-yaml.env.TIED_BASE_PATH` to an **absolute** `<workspace>/tied` path and re-check with `tied_config_get_base_path`. | “Quick fix” by pointing at another repo’s `tied/` (risk: silent writes to the wrong project) |
 | Invalid JSON in `record` / `updates` | Fix quoting; retry with smaller `updates` chunk | Switch to full-file `Write` on the same path |
 | Tool timeout / transient error | Retry; narrow the operation (single token) | Immediately fall back to direct file edit |
 | `tied_validate_consistency` fails | Fix the reported token/path via MCP or LEAP stack; re-run validation | Mark work complete while consistency is failing |
@@ -81,13 +81,15 @@ Pass that object as a **string** in `updates` or `record` per the tool descripto
 Align with `[PROC-YAML_EDIT_LOOP]` and **SUB-YAML** in [agent-req-implementation-checklist.md](agent-req-implementation-checklist.md):
 
 1. Prefer **MCP** for the mutation (§ 1).
-2. On any path you **direct-edited** (exception only), run `yq -i -P <file>` until it passes.
+2. On any path you **direct-edited** (exception only), run `scripts/lint_yaml.sh <file> [file ...]` (or `lint_yaml` if available) until it passes.
+   - Never run raw multi-argument `yq -i -P file1 file2 ...`; it can merge documents and corrupt files.
+   - If you can only use `yq` directly, run `yq -i -P <file>` in a per-file loop.
 3. Run **`tied_validate_consistency`** before marking TIED work complete (and when the checklist calls for it).
 
 ---
 
 ## 6. References
 
-- Tool and resource catalog: [mcp-server/README.md](../mcp-server/README.md)
+- Tool and resource catalog: [mcp-server/README.md](../../mcp-server/README.md)
 - Agent directive (MCP-first): [ai-agent-tied-mcp-usage.md](ai-agent-tied-mcp-usage.md)
 - REQ checklist (S01 bootstrap, SUB-YAML): [agent-req-implementation-checklist.md](agent-req-implementation-checklist.md)

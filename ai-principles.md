@@ -138,6 +138,8 @@ See `tied/processes.md` § LEAP for the canonical process definition.
 - **Logic elevation and propagation (bottom-up):** When code or tests written during TDD or E2E differ from the IMPL pseudo-code, update in reverse order: **IMPL → ARCH → REQ** in the same work item. Keep tokens consistent; ensure the written record (REQ/ARCH/IMPL) remains the single source of intent and logic.
 - **Work can start at any layer; changes must apply up and down the stack.** For work to be **complete**, changes must be applied both up and down the stack as needed. **Code is only valid** when **all tests pass** and **all requirements are met**.
 - **TIED MCP:** Use the TIED MCP server as the primary way to read and write TIED data. Collect related R/A/I index and detail records; reason from the necessary IMPL pseudo-code only; updating code to match IMPL is a separate task. Direct file access only when no MCP tool supports the operation; document the gap.
+- **TIED MCP base path:** Before any MCP write to project TIED YAML, call **`tied_config_get_base_path`** and confirm it points at the **`tied/` of the repository you are changing**. Wrong `TIED_BASE_PATH` mutates another project’s `tied/` silently (see `AGENTS.md` §2 TIED data access, CITDP RISK-010). Fix with an absolute `TIED_BASE_PATH` in that repo’s `.cursor/mcp.json` or re-run `copy_files.sh` targeting that repo.
+- **Go agentstream preflight:** The `tools/agentstream` CLI checks `.cursor/mcp.json` / `TIED_BASE_PATH` before spawning `cursor agent`. Non-interactive runs need a valid layout or `-y` / `AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1` (see `tools/agentstream/README.md`).
 
 ### Phase 1: Requirements → Pseudo-Code
 
@@ -202,6 +204,7 @@ See `tied/processes.md` § LEAP for the canonical process definition.
 **BEFORE STARTING ANY WORK:**
 
 - [ ] Have access to semantic token registry; understand current priorities
+- [ ] **When using TIED MCP to edit project YAML:** Call **`tied_config_get_base_path`** first; confirm the path matches this workspace’s project `tied/`
 - [ ] **MANDATORY**: Review `architecture-decisions.yaml` and `implementation-decisions.yaml` for existing decisions
 - [ ] **MANDATORY**: Plan work (via implementation decisions or in-session) BEFORE writing any code
 - [ ] **MANDATORY** ([PROC-IMPL_PSEUDOCODE_TOKENS]): When authoring IMPL, ensure every block in `essence_pseudocode` has a comment naming REQ/ARCH/IMPL and how the block implements them

@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Go `agentstream` (`tools/agentstream`)** — CLI and `stdd/agentstream` packages to drive **`cursor agent`** with multi-turn prompts: feature-spec batch (order filter, preview), TDD YAML paths, lead checklist YAML (optional step bounds, skip sub), dry-run, mid-batch resume (`--first-turn`, `--session-id`), and **static tied-yaml MCP preflight** on `.cursor/mcp.json` (`--mcp-json`, `-y`, `AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1`). TIED traceability: **`REQ-GOAGENT-*`**, **`ARCH-GOAGENT-*`**, **`IMPL-GOAGENT-*`** under **`tied/`**.
+- **`scripts/run-feature-batch-agentstream.sh`** — Same options as **`run-feature-batch.sh`** but invokes Go **`agentstream`** (`AGENTSTREAM` or `go run`); forwards checklist step bounds and resume flags.
+- **`scripts/verify-agentstream-dry-run-parity.sh`** plus **`scripts/testdata-dry-run-parity/`** — Parity check between Go dry-run and Ruby argv reconstruction.
+- **`scripts/lint_yaml.sh`** — Lint helper for TIED YAML edits.
+- **Conversation analysis** — **`docs/conversation-analysis-tools.md`** (catalog), **`docs/checklist_feedback_loops.md`** (checklist feedback / Mermaid), **`docs/reddit-intro-tied-agentstream.md`** (short intro); Ruby stream extractors **`scripts/extract_user_prompts.rb`**, **`extract_repeated_tool_calls.rb`**, **`extract_tool_failure_bursts.rb`**, **`extract_agent_struggle_phrases.rb`**, **`extract_struggle_episodes.rb`** with smoke tests.
+
+### Changed
+
+- **`copy_files.sh`** — **Fails fast** if **`mcp-server/dist/index.js`** is missing; always refreshes **`tied-yaml`** in `.cursor/mcp.json` with absolute **`TIED_BASE_PATH`** for the target project and the central server **`args`**; writes MCP entries with **`type: "stdio"`** and **`disabled: false`** when creating minimal config.
+- **`AGENTS.md`** / **`ai-principles.md`** — Mandatory **`tied_config_get_base_path`** check before MCP writes; wrong-**`TIED_BASE_PATH`** risk note; **Go agentstream** preflight and skip flags; client-repo **REQ-GOAGENT-*** policy; checklist item for base-path confirmation.
+- **`docs/adding-tied-mcp-and-invoking-passes.md`**, **`docs/ai-agent-tied-mcp-usage.md`**, **`docs/yaml-update-mcp-runbook.md`** (and **`tied/docs/`** copies) — Central TIED repo wording, **`copy_files.sh`** rewrite behavior, **`tied_config_get_base_path`** safety, links to **`mcp-server/README.md`**, **`scripts/lint_yaml.sh`** in the YAML edit loop.
+- **`.cursor/hooks/log.rb`** — **`sessionStart`** normalized details include **`model`** (alongside session and transcript path metadata).
+- **`hello_world_script_entry_test.go`** — Additional coverage aligned with the bash hello contract (see diff).
+- **`tied/processes.md`**, **`tied/implementation-decisions.yaml`**, **`tied/requirements*.yaml`**, architecture/requirements detail files, **`tied/semantic-tokens.yaml`** — Updates for **CONFIG_DISCOVERY**, **GOAGENT** REQ/ARCH/IMPL, and related methodology alignment.
+- **README** — [Spec-Driven Development with TIED](README.md#spec-driven-development-with-tied) and [Repository Structure](README.md#repository-structure): Go **agentstream** path, **run-feature-batch-agentstream.sh**, **copy_files.sh** / **TIED_BASE_PATH** safety, conversation-log analysis docs and scripts, **sessionStart** **`model`** in hook logs.
+
 ### Removed
 
 - **Root-level TIED indexes and detail trees (template repo)** — `requirements.yaml`, `architecture-decisions.yaml`, `implementation-decisions.yaml`, `semantic-tokens.yaml` and root `requirements/`, `architecture-decisions/`, `implementation-decisions/` duplicates removed; canonical project TIED data for this repository lives under **`tied/`** only (avoids parallel copies). Templates for methodology remain under **`templates/`** for `copy_files.sh`.
@@ -17,7 +35,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **README** — [Repository Structure](README.md#repository-structure) § Scripts: **Bash hello smoke + Go checks** paragraph documents **`hello.sh`** as alternate basename (same contract as **`hello_world.sh`**), root **`script_*.go`** helpers and **`RunScriptEntrySmokeFromRoot`**, and what **`go test ./...`** exercises (contract, resolve, nonzero bash, compose).
 - **TIED (Bash hello smoke)** — **`tied/requirements*.yaml`** / **`tied/architecture-decisions*.yaml`** and matching REQ/ARCH detail files for **`REQ-GOAGENT-BASH-HELLO-SCRIPT`** / **`ARCH-GOAGENT-BASH-HELLO-SCRIPT`**: **`traceability.tests`** lists the full five-test matrix in **`hello_world_script_entry_test.go`**; **`IMPL-GOAGENT-BASH-HELLO-SCRIPT`** detail and **`semantic-tokens.yaml`** metadata aligned (agent checklist S12 final validation, S13 TIED sync).
-- **README** — [Spec-Driven Development with TIED](README.md#spec-driven-development-with-tied): short **UX-relevant updates** paragraph summarizing bootstrap/`tied/` layout, `run-feature-batch` first-turn resume, expanded TDD loop YAML, AGENTS MCP/shape rules, and hook log `beforeReadFile` behavior (mirrors current working-tree themes).
 - **README** — [Getting Started](README.md#getting-started-with-a-new-project): manual bootstrap replaced with guidance to prefer `copy_files.sh` and mirror `templates/` → `tied/methodology/` vs project `tied/*.yaml` when copying by hand.
 - **docs/run-agent-stream-tied.md** — Traceability link to **`tied/semantic-tokens.yaml`**; new section on **mid-run resume** with `--session-id` and `--first-turn` (Ruby `run_agent_stream.rb` and `run-feature-batch.sh`).
 - **tools/agent-stream** — `lib/agent_stream_argv.rb` / `run_agent_stream.rb` updates aligned with batch resume and stream behavior (see git diff).

@@ -18,7 +18,10 @@
 #   - tied/methodology/: index YAMLs and inherited detail files (always overwritten)
 #   - tied/: project index YAMLs and requirements/, architecture-decisions/, implementation-decisions/ (create if missing, never overwrite)
 #   - Guide .md and tied/docs/ (copy when missing)
-#   - .cursor/ and .cursor/mcp.json with tied-yaml MCP server entry (real paths)
+#   - .cursor/ and .cursor/mcp.json with tied-yaml MCP server entry (real paths).
+#     On every run, env.TIED_BASE_PATH for tied-yaml is set to this target project's tied/
+#     (absolute path) so MCP writes never stay pointed at another clone (e.g. STDD).
+#     The server args path points at the *central* TIED repo MCP server on disk (single server path).
 #     After bootstrap, in Cursor run: agent enable tied-yaml — approve the project MCP
 #     config when prompted; type quit to exit the Agent CLI (enables the server in the IDE).
 #
@@ -59,10 +62,16 @@ mkdir -p "${METHODOLOGY_DIR}/implementation-decisions"
 _realpath() {
   python3 -c "import os, sys; print(os.path.realpath(sys.argv[1]))" "$1"
 }
+
+# --- TIED MCP server path (central, single repo) ---
+# The args path MUST point at the single TIED repo MCP server on disk so client projects
+# do not depend on a vendored copy of the server.
 TIED_SERVER_PATH="$(_realpath "${SCRIPT_DIR}/mcp-server/dist/index.js")"
 TIED_BASE_PATH_VALUE="$(_realpath "${TIED_DIR}")"
-if [[ ! -f "${SCRIPT_DIR}/mcp-server/dist/index.js" ]]; then
-  echo "DEBUG: MCP server not yet built at ${TIED_SERVER_PATH}; run 'cd mcp-server && npm install && npm run build' in the TIED repo." >&2
+if [[ ! -f "${TIED_SERVER_PATH}" ]]; then
+  echo "ERROR: Central TIED MCP server not built at ${TIED_SERVER_PATH}" >&2
+  echo "Build it in the TIED repo: cd \"${SCRIPT_DIR}/mcp-server\" && npm install && npm run build" >&2
+  exit 1
 fi
 
 MCP_JSON="${TARGET_PROJECT_DIR}/.cursor/mcp.json"
@@ -80,7 +89,7 @@ _write_mcp_json() {
 import json, os
 server = os.environ["TIED_SERVER_PATH"]
 base = os.environ["TIED_BASE_PATH_VALUE"]
-entry = {"command": "node", "args": [server], "env": {"TIED_BASE_PATH": base}}
+entry = {"type": "stdio", "disabled": False, "command": "node", "args": [server], "env": {"TIED_BASE_PATH": base}}
 config = {"mcpServers": {"tied-yaml": entry}}
 with open(os.environ["MCP_JSON_DEST"], "w") as f:
     json.dump(config, f, indent=2)
@@ -94,10 +103,10 @@ else
   if command -v jq &>/dev/null; then
     tmp=$(mktemp)
     if jq --arg server "${TIED_SERVER_PATH}" --arg base "${TIED_BASE_PATH_VALUE}" \
-      '.mcpServers = ((.mcpServers // {}) | if .["tied-yaml"] == null then .["tied-yaml"] = {"command":"node","args":[$server],"env":{"TIED_BASE_PATH":$base}} else . end)' \
+      '.mcpServers |= (.["tied-yaml"] = ((.["tied-yaml"] // {}) | .command = "node" | .args = [$server] | .env = ((.env // {}) + {"TIED_BASE_PATH": $base})))' \
       "${MCP_JSON}" > "${tmp}"; then
       mv "${tmp}" "${MCP_JSON}"
-      echo "Updated ${MCP_JSON}: added tied-yaml MCP server entry (if missing)."
+      echo "Updated ${MCP_JSON}: ensured tied-yaml uses this project's TIED_BASE_PATH and server path."
     else
       rm -f "${tmp}"
       echo "DEBUG: Invalid JSON in ${MCP_JSON}; overwriting with minimal config." >&2
@@ -114,17 +123,16 @@ try:
 except (json.JSONDecodeError, IOError):
     sys.exit(1)
 config.setdefault('mcpServers', {})
-if config['mcpServers'].get('tied-yaml') is None:
-    config['mcpServers']['tied-yaml'] = {
-        'command': 'node',
-        'args': [os.environ['TIED_SERVER_PATH']],
-        'env': {'TIED_BASE_PATH': os.environ['TIED_BASE_PATH_VALUE']}
-    }
+ty = config['mcpServers'].setdefault('tied-yaml', {})
+ty['command'] = 'node'
+ty['args'] = [os.environ['TIED_SERVER_PATH']]
+ty.setdefault('env', {})
+ty['env']['TIED_BASE_PATH'] = os.environ['TIED_BASE_PATH_VALUE']
 with open(\"${tmp}\", 'w') as f:
     json.dump(config, f, indent=2)
 " 2>/dev/null; then
       mv "${tmp}" "${MCP_JSON}"
-      echo "Updated ${MCP_JSON}: added tied-yaml MCP server entry (if missing)."
+      echo "Updated ${MCP_JSON}: ensured tied-yaml uses this project's TIED_BASE_PATH and server path."
     else
       rm -f "${tmp}"
       echo "DEBUG: Invalid JSON in ${MCP_JSON}; overwriting with minimal config." >&2

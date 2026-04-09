@@ -7,6 +7,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"runtime"
+	"strings"
 	"testing"
 
 	smoke "stdd_hello_world_smoke"
@@ -117,6 +118,20 @@ func TestUNIT_TEST_SCRIPT_ENTRY_bash_nonzero_REQ_GOAGENT_BASH_HELLO_SCRIPT(t *te
 	}
 	if code := ee.ExitCode(); code != 7 {
 		t.Fatalf("exit code: want 7 got %d", code)
+	}
+}
+
+// Test group: AssertScriptEntryStdoutContract — procedure AssertScriptEntryStdoutContract mismatch path (essence_pseudocode RETURN error describing expected vs actual bytes).
+func TestAssertScriptEntryStdoutContract_mismatch_includes_req_token_REQ_GOAGENT_BASH_HELLO_SCRIPT(t *testing.T) {
+	// [IMPL-GOAGENT-BASH-HELLO-SCRIPT] [ARCH-GOAGENT-BASH-HELLO-SCRIPT] [REQ-GOAGENT-BASH-HELLO-SCRIPT]
+	// Validates: mismatch OUTPUT error is diagnosable and carries REQ token in message for traceability (S09.RED — production message updated in S09.GREEN).
+	t.Helper()
+	err := smoke.AssertScriptEntryStdoutContract([]byte("wrong-payload\n"))
+	if err == nil {
+		t.Fatal("want non-nil error when stdout does not match SCRIPT_ENTRY OUTPUT contract")
+	}
+	if !strings.Contains(err.Error(), "REQ-GOAGENT-BASH-HELLO-SCRIPT") {
+		t.Fatalf("mismatch error must include REQ token for traceability; got: %v", err)
 	}
 }
 

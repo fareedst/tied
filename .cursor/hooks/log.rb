@@ -180,7 +180,7 @@ class CursorRecordParser
   def details_for(raw)
     case raw['hook_event_name']
     when 'sessionStart'
-      slice(raw, 'session_id', 'composer_mode', 'is_background_agent', 'transcript_path')
+      slice(raw, 'session_id', 'composer_mode', 'model', 'is_background_agent', 'transcript_path')
     when 'beforeSubmitPrompt'
       {
         'prompt' => raw['prompt'],
@@ -226,7 +226,7 @@ class CursorRecordParser
   def extracted_raw_keys(raw)
     case raw['hook_event_name']
     when 'sessionStart'
-      %w[session_id composer_mode is_background_agent transcript_path]
+      %w[session_id composer_mode model is_background_agent transcript_path]
     when 'beforeSubmitPrompt'
       %w[prompt attachments]
     when 'preToolUse', 'postToolUse'

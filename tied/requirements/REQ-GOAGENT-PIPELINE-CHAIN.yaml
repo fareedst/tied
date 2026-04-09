@@ -1,0 +1,12 @@
+REQ-GOAGENT-PIPELINE-CHAIN:
+  name: Multi-turn pipeline assembly session chaining and dry-run
+  category: Tooling
+  priority: P1
+  status: Implemented
+  traceability:
+    architecture:
+      - ARCH-GOAGENT-PIPELINE
+    implementation:
+      - IMPL-GOAGENT-PIPELINE
+      - IMPL-GOAGENT-CLI-CMD
+  detail_file: requirements/REQ-GOAGENT-PIPELINE-CHAIN.yaml

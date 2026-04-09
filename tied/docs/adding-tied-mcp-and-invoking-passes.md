@@ -17,7 +17,6 @@ This guide explains how to add the TIED MCP server to a development project and 
 ## 2. Prerequisites
 
 - **Node.js 18+** (required to run the MCP server).
-- **TIED repository** cloned or downloaded (the repo that contains `mcp-server/`, templates, and this doc).
 - **Target project** with a chosen workspace root (the project that will have a `tied/` directory).
 - **Cursor** (or another MCP client) for the configuration examples that use `.cursor/mcp.json`.
 
@@ -27,22 +26,22 @@ This guide explains how to add the TIED MCP server to a development project and 
 
 ### 3.1 Build the server
 
-Build the MCP server **in the TIED repository** (not inside your project):
+Build the MCP server **in the central TIED repository** (single shared server path):
 
 ```bash
-cd mcp-server
+cd /path/to/tied-repository/mcp-server
 npm install
 npm run build
 ```
 
-The server binary lives at `mcp-server/dist/index.js` inside the TIED repo. Your project does not contain the server; it only references it via MCP configuration.
+The server binary lives at `/path/to/tied-repository/mcp-server/dist/index.js` and is referenced via MCP configuration.
 
 ### 3.2 Configure MCP in the project
 
 In your **development project** (the project that has or will have a `tied/` directory), add or edit the MCP config. For Cursor, this is typically `.cursor/mcp.json` in the project root (or Cursor Settings → MCP with the project as workspace).
 
 - **command**: `"node"`
-- **args**: Absolute path to the TIED repo’s built server, e.g. `"/path/to/tied/mcp-server/dist/index.js"`
+- **args**: Absolute path to the built server in your TIED clone, e.g. `"/path/to/tied-repository/mcp-server/dist/index.js"`
 - **env.TIED_BASE_PATH**: Your project’s `tied/` directory — use an absolute path (e.g. `/path/to/your/project/tied`) or a path relative to the workspace root (e.g. `tied` or `./tied`)
 
 Example:
@@ -51,8 +50,10 @@ Example:
 {
   "mcpServers": {
     "tied-yaml": {
+      "type": "stdio",
+      "disabled": false,
       "command": "node",
-      "args": ["/path/to/tied/mcp-server/dist/index.js"],
+      "args": ["/path/to/tied-repository/mcp-server/dist/index.js"],
       "env": {
         "TIED_BASE_PATH": "/path/to/your/project/tied"
       }
@@ -61,7 +62,11 @@ Example:
 }
 ```
 
-Path resolution: All path parameters (`output_base_path`, `file_path`, etc.) are resolved by the Node process. Absolute paths are used as-is; relative paths are resolved relative to the process current working directory (usually the workspace root). `TIED_BASE_PATH` is also cwd-relative unless you set it to an absolute path. See [mcp-server/README.md](../../mcp-server/README.md) for details.
+Path resolution: All path parameters (`output_base_path`, `file_path`, etc.) are resolved by the Node process. Absolute paths are used as-is; relative paths are resolved relative to the process current working directory (usually the workspace root). `TIED_BASE_PATH` is also cwd-relative unless you set it to an absolute path. See [mcp-server/README.md](../../../mcp-server/README.md) for details.
+
+Re-running **`copy_files.sh /path/to/this/project`** **rewrites** the `tied-yaml` entry in that project’s `.cursor/mcp.json` so `env.TIED_BASE_PATH` is always an absolute path to **that** project’s `tied/` (and refreshes the server `args` path). Use this after copying MCP config from another repo or if MCP writes were landing in the wrong tree.
+
+**Safety note (multi-repo risk):** If you have multiple TIED-enabled repos on disk, it is easy to accidentally point `env.TIED_BASE_PATH` at the *wrong* repo’s `tied/` directory. Before any write, call `tied_config_get_base_path` and confirm the reported base path is **under the current workspace root** and is the `tied/` you intend to mutate. If it is not, **STOP** and prefer the deterministic fix: re-run `copy_files.sh` targeting this project to rewrite `.cursor/mcp.json`. Only edit `.cursor/mcp.json` manually if you must, and only to an absolute `<workspace>/tied` path.
 
 ### 3.3 Verify
 
@@ -77,7 +82,7 @@ Before the MCP server can manage REQ/ARCH/IMPL, the project must have a `tied/` 
 
 ### Option A — From templates (greenfield)
 
-Run from the **TIED repository** root:
+Run from your project root (or from wherever `copy_files.sh` is located, targeting your project path):
 
 ```bash
 ./copy_files.sh /path/to/your/project
@@ -103,7 +108,7 @@ If you have existing monolithic `requirements.md`, `architecture-decisions.md`, 
 
 Order (REQ → ARCH → IMPL) matches the dependency chain and the internal order of `convert_monolithic_all`.
 
-After conversion, update `semantic-tokens.yaml` with any new tokens (manually or via MCP index tools). See [mcp-server/README.md](../../mcp-server/README.md) and [using-tied-without-mcp.md](using-tied-without-mcp.md) for non-MCP alternatives.
+After conversion, update `semantic-tokens.yaml` with any new tokens (manually or via MCP index tools). See [mcp-server/README.md](../../../mcp-server/README.md) and [using-tied-without-mcp.md](using-tied-without-mcp.md) for non-MCP alternatives.
 
 ---
 
@@ -208,7 +213,7 @@ flowchart LR
 
 | Document | Description |
 |----------|-------------|
-| [mcp-server/README.md](../../mcp-server/README.md) | Full tool and resource list, Cursor config example, path resolution, conversion options |
+| [mcp-server/README.md](../../../mcp-server/README.md) | Full tool and resource list, Cursor config example, path resolution, conversion options |
 | [README.md](../../README.md) | Getting Started, Step 2 (MCP), TIED YAML MCP Server section, value of MCP, data flow |
 | [using-tied-without-mcp.md](using-tied-without-mcp.md) | Workflow when not using MCP (bootstrap and manual YAML management) |
 | [ai-principles.md](../../ai-principles.md) | TIED phases, documentation-first rule, token discipline, priority order |

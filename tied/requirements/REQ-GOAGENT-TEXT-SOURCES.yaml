@@ -1,0 +1,11 @@
+REQ-GOAGENT-TEXT-SOURCES:
+  name: Text prompt sources argv prompt-file prompts-file verify-session
+  category: Tooling
+  priority: P1
+  status: Implemented
+  traceability:
+    architecture:
+      - ARCH-GOAGENT-TEXT-SOURCES
+    implementation:
+      - IMPL-GOAGENT-TEXT-SOURCES
+  detail_file: requirements/REQ-GOAGENT-TEXT-SOURCES.yaml

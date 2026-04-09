@@ -51,15 +51,31 @@ IMPL-MODULE_VALIDATION:
     see_also:
       - ARCH-MODULE_VALIDATION
       - REQ-MODULE_VALIDATION
+  essence_pseudocode: |-
+    # [IMPL-MODULE_VALIDATION] [ARCH-MODULE_VALIDATION] [REQ-MODULE_VALIDATION]
+    # Summary: Five-phase lifecycle — identify module boundaries, build with DI, validate in isolation, document, integrate only when green.
+
+    # How: Contract — INPUT/OUTPUT/CONTROL for MODULE_VALIDATION_LIFECYCLE below (same IMPL/ARCH/REQ).
+    # How: INPUT — module boundary spec; interfaces; mocks and test doubles.
+    # How: OUTPUT — validation evidence (passing tests, notes); go/no-go for integration.
+    # How: CONTROL — integration blocked until independent validation passes.
+
+    procedure MODULE_VALIDATION_LIFECYCLE:
+      # How: Phases 1–5 — document boundaries; implement with DI; unit + contract + edge-case tests; record results; integration tests on combined behavior.
+      # How: Gate — blocks integration with other IMPLs until module-local validation passes (ordering: validate before compose).
+      # How: Branch — validation or documentation failure; no integration until fixed.
+      IF phase 3 or 4 fails: RETURN without integration; fix module or revise boundaries
+      # How: Branch — combined behavior contradicts module contracts after integration attempt.
+      IF phase 5 fails: RETURN; treat as integration defect against documented contracts
   detail_file: implementation-decisions/IMPL-MODULE_VALIDATION.yaml
   metadata:
     created:
       date: 2025-12-18
       author: AI Agent
     last_updated:
-      date: 2026-02-06
+      date: 2026-03-30
       author: AI Agent
-      reason: Restructured to v1.5.0 schema with machine-parseable fields
+      reason: S06.5 [PROC-AGENT_REQ_CHECKLIST] [PROC-IMPL_PSEUDOCODE_TOKENS] how-only procedure body; contract How lines
     last_validated:
       date: 2026-02-06
       validator: AI Agent

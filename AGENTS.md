@@ -19,6 +19,8 @@ This document centralizes every instruction AI coding assistants must follow whi
    - Review `implementation-decisions.md` (implementation guide) for IMPL pseudo-code and block token rules ([PROC-IMPL_PSEUDOCODE_TOKENS])
    - Understand priority order: Tests > Code > Basic Functions > Infrastructure
    - Note: same filename everywhere—at repo root these files are templates; in `tied/` they are the project indexes.
+   - **TIED MCP target (mandatory before MCP writes):** Call the TIED MCP tool **`tied_config_get_base_path`** and confirm the effective path is the **`tied/` directory of the repository you intend to change** (not another clone or parent methodology repo). If it is wrong, fix `.cursor/mcp.json` `env.TIED_BASE_PATH` to an **absolute** path to that project’s `tied/`, or re-run `./copy_files.sh /path/to/that/project` from the TIED repository so the script rewrites `tied-yaml` for that target. Prefer **one Cursor window per implementation repo** when editing project TIED YAML via MCP; multi-root workspaces can leave a single `TIED_BASE_PATH` pointing at the wrong folder (see `docs/citdp/CITDP-REQ-LEAP_PROPOSAL_QUEUE.yaml` RISK-010).
+   - **Go `agentstream` (`tools/agentstream`):** Before live agent turns it runs a static **tied-yaml preflight** on `.cursor/mcp.json` for `--workspace` (or `--mcp-json`). Automated runs without a TTY need a valid MCP layout, or **`AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1`**, or **`agentstream -y`** / **`--skip-tied-mcp-preflight`**. See `tools/agentstream/README.md`.
 3. Confirm access to the documents above before continuing.
 
 ---
@@ -51,12 +53,16 @@ This document centralizes every instruction AI coding assistants must follow whi
   - Always prioritize: Tests, Code, Basic Functions ➜ Developer experience ➜ Infrastructure ➜ Security.
 - **TIED data access (MCP-first)**
   - Use the **TIED MCP server** (tools and resources) as the **primary** way to read and write TIED data. In Cursor, that server may appear under a project-specific label (e.g. `project-0-stdd-tied-yaml`); treat it as the **TIED YAML MCP** regardless of display name. TIED is the db that controls/directs the build; significant code is created in TIED first, then implemented with TDD. Writing TIED YAML via MCP ensures valid output (e.g. values containing `:` are quoted); direct file edits often produce invalid YAML. **Direct file access** to TIED content (under `tied/` or `TIED_BASE_PATH`) is permitted **only when** no MCP tool supports the operation; document such cases so they can be considered for new MCP tooling.
+  - **Wrong `TIED_BASE_PATH` (high impact):** MCP `yaml_*` tools write under whatever directory `TIED_BASE_PATH` resolves to. A session opened on repo A while `TIED_BASE_PATH` still points at repo B will mutate B’s `tied/` silently. Mitigation: **`tied_config_get_base_path` at session start**; align `.cursor/mcp.json` with the active repo; if MCP cannot target the correct tree, document **TIED_YAML_BYPASS** and edit only the intended absolute paths, then `lint_yaml` (see `tied/implementation-decisions/IMPL-MCP_LEAP_PROPOSAL_QUEUE.yaml` `yaml_writer_note`, CITDP RISK-010).
   - **When using MCP:** Prefer tools for index read/list/filter, detail read/write, traceability (`get_decisions_for_requirement`, `get_requirements_for_decision`), validation (`yaml_index_validate`, `tied_validate_consistency`), and token creation (`tied_token_create_with_detail`). Prefer resources (e.g. `tied://requirements`, `tied://requirement/{token}/detail`) for loading context. Before changing TIED content, read via MCP; after changing, use the appropriate write/update tool. Validate all changed TIED YAML with `lint_yaml` per [PROC-YAML_EDIT_LOOP] (see `processes.md` § `[PROC-YAML_EDIT_LOOP]`); do not use raw multi-argument `yq` for pretty-print. YAML that does not validate is invalid for use. Run **`tied_validate_consistency`** before marking work complete.
 - **Client inheritance of LEAP R+A+I**
   - **All TIED projects inherit the LEAP R+A+I** via `copy_files.sh`: the client's `tied/` contains the methodology-enforcing REQ/ARCH/IMPL and PROC tokens (e.g. REQ-TIED_SETUP, REQ-MODULE_VALIDATION, ARCH-TIED_STRUCTURE, ARCH-MODULE_VALIDATION, IMPL-TIED_FILES, IMPL-MODULE_VALIDATION, [PROC-LEAP], and related process tokens) and their detail files so that TIED and LEAP behaviors exist in every project. These tokens are **mandatory for TIED success** and must not be removed.
   - **TIED-sourced YAML is read-only in the client** ([PROC-TIED_METHODOLOGY_READONLY]): methodology content lives under `tied/methodology/` (index YAMLs and inherited detail files from TIED `templates/`). It is used but **not modified** in the client; it does not hold client-specific data. Re-run `copy_files.sh` to refresh methodology; it overwrites only `tied/methodology/`.
   - **Client-specific data** lives only in **project** YAML: `tied/requirements.yaml`, `tied/architecture-decisions.yaml`, `tied/implementation-decisions.yaml`, `tied/semantic-tokens.yaml`, and the corresponding `tied/requirements/`, `tied/architecture-decisions/`, `tied/implementation-decisions/` detail dirs at the root of `tied/`. MCP and agents must **only write to project YAML**; validate/read may use a merged view (methodology + project). Project files are never overwritten by `copy_files.sh`.
   - For structure and sample records, agents refer to **`templates/`** in the TIED repository—the same content that `copy_files.sh` copies into the client's `tied/methodology/`. The client's full TIED view is methodology (read-only) plus project-specific entries in project YAML.
+- **Client-only vs methodology-repo project YAML (policy / LEAP)**
+  - A repository that **implements** a feature (code, tests, scripts) may carry project REQ/ARCH/IMPL tokens for that feature in **its own** `tied/` (e.g. `REQ-GOAGENT-*` in a repo that ships `tools/agentstream` and root smoke scripts). That is normal traceability, not “methodology pollution.”
+  - If product policy requires **feature documentation to live only in a different client repo**, do not delete tokens ad hoc: run a **LEAP-aligned migration** (move or duplicate indexes and detail files, update `semantic-tokens.yaml`, validate both trees with **`tied_validate_consistency`**). Treat this as a scoped change request, not a one-off file delete.
 
 ---
 
@@ -69,6 +75,7 @@ This document centralizes every instruction AI coding assistants must follow whi
 
 ### 3.2 Before Starting Work
 - [ ] Verify all documents in Section 1 have been reviewed
+- [ ] **TIED MCP:** Call **`tied_config_get_base_path`** and confirm the path matches the **`tied/` of the repo under change** before any MCP write to project YAML
 - [ ] Understand current priorities and dependencies
 - [ ] Review existing semantic tokens, architecture decisions, and implementation decisions related to the work
 - [ ] **IMPL `essence_pseudocode`**: Every block has a comment naming REQ/ARCH/IMPL and how the block implements them ([PROC-IMPL_PSEUDOCODE_TOKENS])
@@ -156,4 +163,4 @@ You can apply these rules in several ways:
 - Mirror changes into `ai-principles.md` and related docs as needed.
 - Nested directories may introduce their own `AGENTS.md` to extend or override these rules within their subtree; the most specific file wins.
 
-**Last Updated**: 2026-03-05
+**Last Updated**: 2026-03-30

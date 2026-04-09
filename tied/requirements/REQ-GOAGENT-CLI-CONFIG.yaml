@@ -1,0 +1,11 @@
+REQ-GOAGENT-CLI-CONFIG:
+  name: Unified CLI parsing and configuration resolution for agentstream
+  category: Tooling
+  priority: P1
+  status: Implemented
+  traceability:
+    architecture:
+      - ARCH-GOAGENT-CLI
+    implementation:
+      - IMPL-GOAGENT-CLI-CMD
+  detail_file: requirements/REQ-GOAGENT-CLI-CONFIG.yaml

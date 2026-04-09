@@ -830,6 +830,7 @@ IMPL-GOAGENT-CLI-CMD:
     - ARCH-GOAGENT-CLI
     - REQ-GOAGENT-CLI-CONFIG
     - REQ-GOAGENT-PIPELINE-CHAIN
+    - REQ-GOAGENT-YAML-STEP-RENDER
   rationale:
     why: Thin entrypoint wires parse preview pipeline dry-run executor loop
     problems_solved:
@@ -845,7 +846,7 @@ IMPL-GOAGENT-CLI-CMD:
       - path: tools/agentstream/config/config.go
         description: '[REQ-GOAGENT-CLI-CONFIG] [ARCH-GOAGENT-CLI] [IMPL-GOAGENT-CLI-CMD]'
       - path: tools/agentstream/cmd/agentstream/main.go
-        description: '[REQ-GOAGENT-CLI-CONFIG] [REQ-GOAGENT-PIPELINE-CHAIN] [REQ-GOAGENT-AGENT-EXECUTOR] [IMPL-GOAGENT-CLI-CMD]'
+        description: '[REQ-GOAGENT-CLI-CONFIG] [REQ-GOAGENT-YAML-STEP-RENDER] [REQ-GOAGENT-PIPELINE-CHAIN] [REQ-GOAGENT-AGENT-EXECUTOR] [IMPL-GOAGENT-CLI-CMD]'
   traceability:
     architecture:
       - ARCH-GOAGENT-CLI
@@ -853,7 +854,9 @@ IMPL-GOAGENT-CLI-CMD:
     requirements:
       - REQ-GOAGENT-CLI-CONFIG
       - REQ-GOAGENT-PIPELINE-CHAIN
+      - REQ-GOAGENT-YAML-STEP-RENDER
     tests:
+      - tools/agentstream/config/config_test.go
       - tools/agentstream/pipeline/pipeline_test.go
       - tools/agentstream/text/text_test.go
       - tools/agentstream/featurespec/featurespec_test.go
@@ -876,7 +879,7 @@ IMPL-GOAGENT-CLI-CMD:
 
     procedure main:
       # [IMPL-GOAGENT-CLI-CMD] [ARCH-GOAGENT-CLI] [REQ-GOAGENT-CLI-CONFIG]
-      # How: config.ParseAndResolve in tools/agentstream/config (same IMPL token as this CMD record).
+      # How: config.ParseAndResolve in tools/agentstream/config (same IMPL token as this CMD record); includes --lead-checklist-from-step and --lead-checklist-to-step ([REQ-GOAGENT-YAML-STEP-RENDER]).
       cfg := ParseAndResolve(cwd, os.Args[1:])
       ON ParseAndResolve error: if help sentinel print usage and exit 0; else print error and exit non-zero
       # [IMPL-GOAGENT-FEATURESPEC] [ARCH-GOAGENT-YAML-FEATURESPEC] [REQ-GOAGENT-FEATURESPEC-BATCH]
@@ -884,8 +887,8 @@ IMPL-GOAGENT-CLI-CMD:
       if cfg.PreviewFeatureSpecBatchYAML != "":
         featurespec.Preview(...)
         exit 0
-      # [IMPL-GOAGENT-PIPELINE] [ARCH-GOAGENT-PIPELINE] [REQ-GOAGENT-PIPELINE-CHAIN]
-      # How: Cross-IMPL call — pipeline.Build composes IMPL-GOAGENT-TEXT-SOURCES, IMPL-GOAGENT-TDDLOOP, IMPL-GOAGENT-FEATURESPEC, IMPL-GOAGENT-CHECKLIST into one []Turn (types IMPL-GOAGENT-LIB-TYPES).
+      # [IMPL-GOAGENT-PIPELINE] [ARCH-GOAGENT-PIPELINE] [REQ-GOAGENT-PIPELINE-CHAIN] [REQ-GOAGENT-CLI-CONFIG] [REQ-GOAGENT-YAML-STEP-RENDER]
+      # How: Cross-IMPL call — pipeline.Build composes IMPL-GOAGENT-TEXT-SOURCES, IMPL-GOAGENT-TDDLOOP, IMPL-GOAGENT-FEATURESPEC, IMPL-GOAGENT-CHECKLIST into one []Turn (types IMPL-GOAGENT-LIB-TYPES); Input carries checklist step bounds from cfg.
       turns := pipeline.Build(...)
       ON pipeline.Build error: exit non-zero with error
       if cfg.DryRun:
@@ -905,9 +908,9 @@ IMPL-GOAGENT-CLI-CMD:
       date: 2026-03-27T00:00:00.000Z
       author: AI Agent
     last_updated:
-      date: 2026-03-28T00:00:00.000Z
+      date: 2026-03-30T00:00:00.000Z
       author: AI Agent
-      reason: S06.5 [PROC-IMPL_PSEUDOCODE_TOKENS] cross-IMPL composition in main
+      reason: Lead checklist step id bounds in ParseAndResolve and pipeline Input
     last_validated:
       date: 2026-03-27T00:00:00.000Z
       validator: AI Agent
@@ -1112,8 +1115,9 @@ IMPL-GOAGENT-CHECKLIST:
       - Agent checklist from Go
     benefits:
       - IncludeSubProcedures option
+      - Optional main-step inclusive bounds by checklist id
   implementation_approach:
-    summary: checklist.LoadTurns uses Options.IncludeSubProcedures
+    summary: checklist.LoadTurns uses Options.IncludeSubProcedures and optional StepFromID StepToID
     details: []
   code_locations:
     files:
@@ -1124,7 +1128,8 @@ IMPL-GOAGENT-CHECKLIST:
       - ARCH-GOAGENT-YAML-STEPS
     requirements:
       - REQ-GOAGENT-YAML-STEP-RENDER
-    tests: []
+    tests:
+      - checklist_test.go
     code_annotations:
       - IMPL-GOAGENT-CHECKLIST
   related_decisions:
@@ -1139,12 +1144,12 @@ IMPL-GOAGENT-CHECKLIST:
 
     # How: Contract I/O (same IMPL/ARCH/REQ). Cross-IMPL — callee of IMPL-GOAGENT-PIPELINE; YAML shape follows [PROC-AGENT_REQ_CHECKLIST] agent checklist schema. Turn from IMPL-GOAGENT-LIB-TYPES.
 
-    # INPUT: checklist YAML path; Options.IncludeSubProcedures (inverse of --lead-checklist-skip-sub).
+    # INPUT: checklist YAML path; Options.IncludeSubProcedures (inverse of --lead-checklist-skip-sub); optional StepFromID StepToID for inclusive main-step slice ([REQ-GOAGENT-YAML-STEP-RENDER] [REQ-GOAGENT-CLI-CONFIG]).
     # OUTPUT: messages or []Turn with ChainFromPrevious true.
 
     procedure checklist_messages(path, opts):
       # [IMPL-GOAGENT-CHECKLIST] [ARCH-GOAGENT-YAML-STEPS] [REQ-GOAGENT-YAML-STEP-RENDER]
-      # How: formatMainStep and formatSubProcedure mirror Ruby string templates including flow and references sections when present.
+      # How: sliceMainSteps by step id match; ON missing id or inverted range return error; formatMainStep and formatSubProcedure mirror Ruby string templates including flow and references sections when present.
       ON YAML or structure error: return error
       return messages
   detail_file: implementation-decisions/IMPL-GOAGENT-CHECKLIST.yaml
@@ -1153,9 +1158,9 @@ IMPL-GOAGENT-CHECKLIST:
       date: 2026-03-27T00:00:00.000Z
       author: AI Agent
     last_updated:
-      date: 2026-03-28T00:00:00.000Z
+      date: 2026-03-30T00:00:00.000Z
       author: AI Agent
-      reason: S06.5 [PROC-IMPL_PSEUDOCODE_TOKENS] PROC-AGENT_REQ_CHECKLIST + pipeline callee
+      reason: Optional inclusive main-step bounds by checklist id
     last_validated:
       date: 2026-03-27T00:00:00.000Z
       validator: AI Agent
@@ -1214,7 +1219,7 @@ IMPL-GOAGENT-PIPELINE:
       for each tdd path in in.TddYAMLPaths: turns += tddloop.LoadTurns(path) with error propagation
       # How: Cross-IMPL — IMPL-GOAGENT-FEATURESPEC ([ARCH-GOAGENT-YAML-FEATURESPEC] [REQ-GOAGENT-FEATURESPEC-BATCH]): LoadTurns per feature-spec path.
       for each feature path in in.FeatureSpecBatchYAMLPaths: turns += featurespec.LoadTurns(path, opts) with error propagation
-      # How: Cross-IMPL — IMPL-GOAGENT-CHECKLIST ([ARCH-GOAGENT-YAML-STEPS] [REQ-GOAGENT-YAML-STEP-RENDER]): LoadTurns when lead checklist path set.
+      # How: Cross-IMPL — IMPL-GOAGENT-CHECKLIST ([ARCH-GOAGENT-YAML-STEPS] [REQ-GOAGENT-YAML-STEP-RENDER]): LoadTurns when lead checklist path set; checklist opts include StepFromID StepToID from Input ([REQ-GOAGENT-CLI-CONFIG]).
       if in.LeadChecklistYAML non-empty: turns += checklist.LoadTurns(in.LeadChecklistYAML, opts) with error propagation
       # How: Error if no prompts — matches config/pipeline validation.
       if len(turns)==0: return error no prompts
@@ -1227,9 +1232,9 @@ IMPL-GOAGENT-PIPELINE:
       date: 2026-03-27T00:00:00.000Z
       author: AI Agent
     last_updated:
-      date: 2026-03-28T00:00:00.000Z
+      date: 2026-03-30T00:00:00.000Z
       author: AI Agent
-      reason: S06.5 [PROC-IMPL_PSEUDOCODE_TOKENS] explicit cross-IMPL loader sequence
+      reason: Pass lead checklist step id bounds into checklist.LoadTurns
     last_validated:
       date: 2026-03-27T00:00:00.000Z
       validator: AI Agent

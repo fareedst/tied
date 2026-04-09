@@ -554,7 +554,7 @@ REQ-GOAGENT-CLI-CONFIG:
   name: Unified CLI parsing and configuration resolution for agentstream
   category: Tooling
   status: Active
-  description: Merged run-feature-batch and run_agent_stream argv with defaults
+  description: Merged run-feature-batch and run_agent_stream argv with defaults; optional lead checklist step id bounds
   cross_references:
     - ARCH-GOAGENT-CLI
     - IMPL-GOAGENT-CLI-CMD
@@ -562,7 +562,7 @@ REQ-GOAGENT-CLI-CONFIG:
   detail_file: requirements/REQ-GOAGENT-CLI-CONFIG.yaml
   metadata:
     registered: "2026-03-27"
-    last_updated: "2026-03-27"
+    last_updated: "2026-03-30"
 REQ-GOAGENT-TEXT-SOURCES:
   type: REQ
   name: Text prompt sources argv prompt-file prompts-file verify-session
@@ -596,7 +596,7 @@ REQ-GOAGENT-YAML-STEP-RENDER:
   name: TDD loop and lead checklist YAML step renderers
   category: Tooling
   status: Active
-  description: tddloop and checklist packages
+  description: tddloop and checklist packages; optional inclusive main-step slice by checklist id
   cross_references:
     - ARCH-GOAGENT-YAML-STEPS
     - IMPL-GOAGENT-TDDLOOP
@@ -605,13 +605,13 @@ REQ-GOAGENT-YAML-STEP-RENDER:
   detail_file: requirements/REQ-GOAGENT-YAML-STEP-RENDER.yaml
   metadata:
     registered: "2026-03-27"
-    last_updated: "2026-03-27"
+    last_updated: "2026-03-30"
 REQ-GOAGENT-PIPELINE-CHAIN:
   type: REQ
   name: Multi-turn pipeline assembly session chaining and dry-run
   category: Tooling
   status: Active
-  description: pipeline.Build order and SessionForTurn
+  description: pipeline.Build order and SessionForTurn; optional checklist step bounds on Input
   cross_references:
     - ARCH-GOAGENT-PIPELINE
     - IMPL-GOAGENT-PIPELINE
@@ -620,7 +620,7 @@ REQ-GOAGENT-PIPELINE-CHAIN:
   detail_file: requirements/REQ-GOAGENT-PIPELINE-CHAIN.yaml
   metadata:
     registered: "2026-03-27"
-    last_updated: "2026-03-27"
+    last_updated: "2026-03-30"
 REQ-GOAGENT-AGENT-EXECUTOR:
   type: REQ
   name: Agent subprocess stream-json executor
@@ -773,15 +773,16 @@ IMPL-GOAGENT-CLI-CMD:
   type: IMPL
   name: config.ParseAndResolve and cmd/agentstream main orchestration
   status: Active
-  description: CLI entry and defaults
+  description: CLI entry and defaults; lead checklist step id bounds to pipeline
   cross_references:
     - ARCH-GOAGENT-CLI
     - REQ-GOAGENT-CLI-CONFIG
+    - REQ-GOAGENT-YAML-STEP-RENDER
   source_index: implementation-decisions.yaml
   detail_file: implementation-decisions/IMPL-GOAGENT-CLI-CMD.yaml
   metadata:
     registered: "2026-03-27"
-    last_updated: "2026-03-27"
+    last_updated: "2026-03-30"
 IMPL-GOAGENT-TEXT-SOURCES:
   type: IMPL
   name: text package prompt file and argv turns
@@ -825,7 +826,7 @@ IMPL-GOAGENT-CHECKLIST:
   type: IMPL
   name: checklist YAML main steps and sub_procedures
   status: Active
-  description: tools/agentstream/checklist
+  description: tools/agentstream/checklist; optional StepFromID StepToID on main steps
   cross_references:
     - ARCH-GOAGENT-YAML-STEPS
     - REQ-GOAGENT-YAML-STEP-RENDER
@@ -833,12 +834,12 @@ IMPL-GOAGENT-CHECKLIST:
   detail_file: implementation-decisions/IMPL-GOAGENT-CHECKLIST.yaml
   metadata:
     registered: "2026-03-27"
-    last_updated: "2026-03-27"
+    last_updated: "2026-03-30"
 IMPL-GOAGENT-PIPELINE:
   type: IMPL
   name: pipeline.Build ordered assembly
   status: Active
-  description: tools/agentstream/pipeline
+  description: tools/agentstream/pipeline; passes checklist step bounds into checklist.LoadTurns
   cross_references:
     - ARCH-GOAGENT-PIPELINE
     - REQ-GOAGENT-PIPELINE-CHAIN
@@ -846,7 +847,7 @@ IMPL-GOAGENT-PIPELINE:
   detail_file: implementation-decisions/IMPL-GOAGENT-PIPELINE.yaml
   metadata:
     registered: "2026-03-27"
-    last_updated: "2026-03-27"
+    last_updated: "2026-03-30"
 IMPL-GOAGENT-EXECUTOR:
   type: IMPL
   name: executor AgentArgv and Run stream-json

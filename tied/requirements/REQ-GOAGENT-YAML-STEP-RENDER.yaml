@@ -1,0 +1,12 @@
+REQ-GOAGENT-YAML-STEP-RENDER:
+  name: TDD loop and lead checklist YAML step renderers
+  category: Tooling
+  priority: P1
+  status: Implemented
+  traceability:
+    architecture:
+      - ARCH-GOAGENT-YAML-STEPS
+    implementation:
+      - IMPL-GOAGENT-TDDLOOP
+      - IMPL-GOAGENT-CHECKLIST
+  detail_file: requirements/REQ-GOAGENT-YAML-STEP-RENDER.yaml

@@ -1,0 +1,59 @@
+ARCH-CONFIG_DISCOVERY_LAYERING:
+  name: Layered configuration discovery with local replacement of built-ins
+  status: Active
+  cross_references:
+    - REQ-CONFIG_DISCOVERY_LOCAL_LAYER
+  decision: Configuration loaders SHALL treat built-in defaults as a distinct bottom layer. The first project-local (or discovery-ordered local) file MAY replace selected built-in list defaults in full when keys appear without merge-forcing prefixes, as defined by the product IMPL. Parsed per-file configuration MUST NOT retain built-in field values for keys absent from that file's YAML when applying later merge steps, so omitted keys do not re-merge defaults. Exclusion engines SHALL interpret single-segment trailing-slash patterns as matching that directory name at any path depth unless a product explicitly documents a narrower rule.
+  rationale:
+    why: Operators author project files expecting them to be authoritative; silent union with built-ins and phantom defaults from unmarshaling break that contract.
+    problems_solved:
+      - Implicit merge of defaults with project-local policy
+      - Later files inheriting default slices for keys not present in YAML
+      - Shallow-only semantics for common directory exclude names
+    benefits:
+      - Clear layering model for defaults vs local vs optional shared (home) files
+      - Testable merge boundaries independent of YAML library defaults
+  alternatives_considered:
+    - name: Always merge project lists with built-ins
+      pros:
+        - Safer defaults always apply
+      cons:
+        - Cannot narrow exclusions or lists without explicit negation syntax
+      rejected_reason: Violates REQ-CONFIG_DISCOVERY_LOCAL_LAYER
+    - name: Require only explicit replace prefix for every override
+      pros:
+        - Explicit operator intent
+      cons:
+        - Easy to forget; first-file ergonomics suffer
+      rejected_reason: REQ allows unprefixed replace for first local layer
+  implementation_approach:
+    summary: Product code implements discovery order, a first-local replace flag or equivalent for selected accumulate fields, and post-parse clearing of omitted keys before merge. Exclusion matcher implements segment-based directory matching for single-segment trailing-slash patterns.
+    details:
+      - Loader passes explicit parameters into merge strategy application (not only raw inheritContext)
+      - After unmarshaling a partial file into a defaults-seeded struct, clear omitted list fields used in merge
+      - PatternMatcher matches single-segment directory patterns via path segment equality
+  traceability:
+    requirements:
+      - REQ-CONFIG_DISCOVERY_LOCAL_LAYER
+    implementation: []
+    tests: []
+    code_annotations:
+      - ARCH-CONFIG_DISCOVERY_LAYERING
+  related_decisions:
+    depends_on:
+      - ARCH-TIED_STRUCTURE
+    informs: []
+    see_also:
+      - ARCH-GOAGENT-CLI
+  metadata:
+    created:
+      date: 2026-03-29T00:00:00.000Z
+      author: AI Agent
+    last_updated:
+      date: 2026-03-29T00:00:00.000Z
+      author: AI Agent
+      reason: S05 agent checklist ARCH for REQ-CONFIG_DISCOVERY_LOCAL_LAYER
+    last_validated:
+      date: 2026-03-29T00:00:00.000Z
+      validator: AI Agent
+      result: pending

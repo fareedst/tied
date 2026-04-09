@@ -1,0 +1,11 @@
+REQ-GOAGENT-LIB-MODULE:
+  name: Go agentstream library module layout and core types
+  category: Tooling
+  priority: P1
+  status: Implemented
+  traceability:
+    architecture:
+      - ARCH-GOAGENT-LIB-LAYERING
+    implementation:
+      - IMPL-GOAGENT-LIB-TYPES
+  detail_file: requirements/REQ-GOAGENT-LIB-MODULE.yaml

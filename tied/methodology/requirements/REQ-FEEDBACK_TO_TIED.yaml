@@ -51,7 +51,6 @@ REQ-FEEDBACK_TO_TIED:
       date: 2026-03-03
       validator: AI Agent
       result: pass
----
 REQ-MODULE_VALIDATION:
   name: Independent Module Validation Before Integration
   category: Functional
@@ -122,7 +121,6 @@ REQ-MODULE_VALIDATION:
       date: 2026-02-06
       validator: AI Agent
       result: pass
----
 REQ-TIED_SETUP:
   name: TIED Methodology Setup
   category: Functional
@@ -181,7 +179,6 @@ REQ-TIED_SETUP:
       date: 2026-02-06
       validator: AI Agent
       result: pass
----
 # Architecture Decisions Index (YAML Database)
 #
 # This YAML file serves as the central index/registry for all architecture decisions in the project.

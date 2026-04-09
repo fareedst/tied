@@ -4,7 +4,7 @@ TIED is designed for **MCP-based generation and management**: the primary way to
 
 ## Bootstrap
 
-Run from the TIED repository root:
+Run from your project root:
 
 ```bash
 ./bootstrap_without_mcp.sh /path/to/project

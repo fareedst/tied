@@ -1,0 +1,11 @@
+REQ-GOAGENT-FEATURESPEC-BATCH:
+  name: Feature spec batch YAML load sort filter render preview
+  category: Tooling
+  priority: P1
+  status: Implemented
+  traceability:
+    architecture:
+      - ARCH-GOAGENT-YAML-FEATURESPEC
+    implementation:
+      - IMPL-GOAGENT-FEATURESPEC
+  detail_file: requirements/REQ-GOAGENT-FEATURESPEC-BATCH.yaml

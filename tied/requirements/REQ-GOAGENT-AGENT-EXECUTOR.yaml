@@ -1,0 +1,11 @@
+REQ-GOAGENT-AGENT-EXECUTOR:
+  name: Agent subprocess stream-json executor
+  category: Tooling
+  priority: P1
+  status: Implemented
+  traceability:
+    architecture:
+      - ARCH-GOAGENT-EXECUTOR
+    implementation:
+      - IMPL-GOAGENT-EXECUTOR
+  detail_file: requirements/REQ-GOAGENT-AGENT-EXECUTOR.yaml

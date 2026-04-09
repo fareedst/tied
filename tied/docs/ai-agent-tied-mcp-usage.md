@@ -70,7 +70,7 @@
 ## 5. References
 
 - **YAML mutation routing, cheat sheet, MCP failure playbook**: [yaml-update-mcp-runbook.md](yaml-update-mcp-runbook.md)
-- **Tool and resource list**: [mcp-server/README.md](../mcp-server/README.md)
+- **Tool and resource list**: [mcp-server/README.md](../../mcp-server/README.md)
 - **Multi-requirement walk + per-REQ checklist**: [requirement-list-state-guide-agent-workflow.md](requirement-list-state-guide-agent-workflow.md)
 - **Nested list + checklist in one tool (`req_impl_state_guide`)**: [req-impl-state-guide-agent-workflow.md](req-impl-state-guide-agent-workflow.md)
 - **Setup and passes**: [adding-tied-mcp-and-invoking-passes.md](adding-tied-mcp-and-invoking-passes.md)

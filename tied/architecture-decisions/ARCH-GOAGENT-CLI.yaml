@@ -1,0 +1,9 @@
+ARCH-GOAGENT-CLI:
+  name: Unified CLI surface for agentstream
+  status: Active
+  traceability:
+    requirements:
+      - REQ-GOAGENT-CLI-CONFIG
+    implementation:
+      - IMPL-GOAGENT-CLI-CMD
+  detail_file: architecture-decisions/ARCH-GOAGENT-CLI.yaml
