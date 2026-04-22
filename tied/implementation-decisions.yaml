@@ -19,7 +19,7 @@ IMPL-TIED_FILES:
     details:
       - Create tied/ directory at project root
       - Copy YAML index files from templates (requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml)
-      - Copy guide files from templates (semantic-tokens.md, processes.md, commit-guidelines.md)
+      - Copy guide files from repo root into tied/ when missing (semantic-tokens.md, processes.md); copy reference docs from docs/ into tied/docs/ (includes commit-guidelines.md per DOCS_TO_COPY in copy_files.sh)
       - Create detail subdirectories (requirements/, architecture-decisions/, implementation-decisions/)
       - Copy base files to project root (.cursorrules, AGENTS.md, ai-principles.md)
   code_locations:
@@ -71,7 +71,7 @@ IMPL-TIED_FILES:
     last_updated:
       date: 2026-03-30T00:00:00.000Z
       author: AI Agent
-      reason: S06.5 [PROC-AGENT_REQ_CHECKLIST] [PROC-IMPL_PSEUDOCODE_TOKENS] Phase C procedure + contract How lines
+      reason: apply-token-comments [PROC-AGENT_REQ_CHECKLIST] [PROC-IMPL_PSEUDOCODE_TOKENS] Phase C procedure + contract How lines
     last_validated:
       date: 2026-02-06T00:00:00.000Z
       validator: AI Agent
@@ -153,7 +153,7 @@ IMPL-MODULE_VALIDATION:
     last_updated:
       date: 2026-03-30T00:00:00.000Z
       author: AI Agent
-      reason: S06.5 [PROC-AGENT_REQ_CHECKLIST] [PROC-IMPL_PSEUDOCODE_TOKENS] Phase C procedure + contract How lines
+      reason: apply-token-comments [PROC-AGENT_REQ_CHECKLIST] [PROC-IMPL_PSEUDOCODE_TOKENS] Phase C procedure + contract How lines
     last_validated:
       date: 2026-02-06T00:00:00.000Z
       validator: AI Agent
@@ -251,7 +251,7 @@ IMPL-MCP_FEEDBACK_TOOLS:
     last_updated:
       date: 2026-03-28T00:00:00.000Z
       author: AI Agent
-      reason: S06.5 [PROC-IMPL_PSEUDOCODE_TOKENS] composition vs LEAP queue
+      reason: apply-token-comments [PROC-IMPL_PSEUDOCODE_TOKENS] composition vs LEAP queue
     last_validated:
       date: 2026-03-03T00:00:00.000Z
       validator: AI Agent
@@ -274,9 +274,9 @@ IMPL-MCP_LEAP_PROPOSAL_QUEUE:
       - 'Paths: {projectRoot}/leap-proposals/queue.json and audit-log.jsonl'
       - 'extractDiffProposalCandidates: git diff + lines; failure returns { error } without throw'
       - MCP handlers use safeLeapCall for fs/git throws
-      - 'S11 Phase H: no E2E-only UI surface; composition tests (leap-proposal-mcp.test.ts) authoritative for MCP bindings'
-      - 'S12 Phase I: full suite + tsc + validateConsistency(TIED_BASE_PATH=stdd/tied); completion_evidence in CITDP; module validation in s12_phase_i'
-      - S13 [PROC-AGENT_REQ_CHECKLIST] TIED sync — REQ/ARCH traceability.tests include leap-proposal-mcp.test.ts; index/detail + semantic-tokens metadata; validateConsistency(stdd/tied) ok; MCP tied_validate_consistency ok (workspace tied/)
+      - 'end-to-end-ui Phase H: no E2E-only UI surface; composition tests (leap-proposal-mcp.test.ts) authoritative for MCP bindings'
+      - 'verification-gate Phase I: full suite + tsc + validateConsistency(TIED_BASE_PATH=stdd/tied); completion_evidence in CITDP; module validation in s12_phase_i'
+      - sync-tied-stack [PROC-AGENT_REQ_CHECKLIST] TIED sync — REQ/ARCH traceability.tests include leap-proposal-mcp.test.ts; index/detail + semantic-tokens metadata; validateConsistency(stdd/tied) ok; MCP tied_validate_consistency ok (workspace tied/)
   code_locations:
     files:
       - path: mcp-server/src/analysis/leap-proposal-queue.ts
@@ -300,8 +300,8 @@ IMPL-MCP_LEAP_PROPOSAL_QUEUE:
     requirements:
       - REQ-LEAP_PROPOSAL_QUEUE
     tests:
-      - 'leap-proposal-queue.test.ts — LPQ-CORE unit: lifecycle, session parse, LOAD_QUEUE BOM, corrupt JSON/schema mismatch, extractDiff non-repo error path (S09 / SUB-LEAP-MICRO)'
-      - 'leap-proposal-mcp.test.ts — LPQ-MCP composition: all tied_leap_proposal_* handler bindings (S10)'
+      - 'leap-proposal-queue.test.ts — LPQ-CORE unit: lifecycle, session parse, LOAD_QUEUE BOM, corrupt JSON/schema mismatch, extractDiff non-repo error path (S09 / sub-leap-micro-cycle)'
+      - 'leap-proposal-mcp.test.ts — LPQ-MCP composition: all tied_leap_proposal_* handler bindings (composition-integration)'
     code_annotations:
       - IMPL-MCP_LEAP_PROPOSAL_QUEUE
       - ARCH-LEAP_PROPOSAL_QUEUE
@@ -330,7 +330,7 @@ IMPL-MCP_LEAP_PROPOSAL_QUEUE:
     # LOAD_QUEUE(projectRoot)
     # [IMPL-MCP_LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [REQ-LEAP_PROPOSAL_QUEUE]
     # How: read queue.json as UTF-8; strip leading BOM (U+FEFF) before JSON.parse; on invalid JSON or wrong schema_version log DIAGNOSTIC and return empty proposals array so callers can still append a fresh queue.
-    # How (tests): [IMPL-MCP_LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [REQ-LEAP_PROPOSAL_QUEUE] — unit asserts empty proposals and default leap-proposal-queue.v1 after corrupt JSON or schema mismatch on disk ([SUB-LEAP-MICRO] S09.GREEN).
+    # How (tests): [IMPL-MCP_LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [REQ-LEAP_PROPOSAL_QUEUE] — unit asserts empty proposals and default leap-proposal-queue.v1 after corrupt JSON or schema mismatch on disk ([sub-leap-micro-cycle] unit-test-green).
 
     # SAVE_QUEUE(projectRoot, queue) / APPEND_AUDIT(projectRoot, event)
     # [IMPL-MCP_LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [REQ-LEAP_PROPOSAL_QUEUE]
@@ -356,7 +356,7 @@ IMPL-MCP_LEAP_PROPOSAL_QUEUE:
     # [IMPL-MCP_LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [REQ-LEAP_PROPOSAL_QUEUE]
     # [No project IMPL token for plumb-diff module — type-only import for selection enum; algorithm family mirrors plumb-diff git line scan but procedures are local. REQ/ARCH/IMPL for this block remain IMPL-MCP_LEAP_PROPOSAL_QUEUE / ARCH-LEAP_PROPOSAL_QUEUE / REQ-LEAP_PROPOSAL_QUEUE.]
     # How: outer TRY — inner EXTRACT_DIFF_INNER resolves projectRootAbs (git rev-parse or args.projectRoot), enumerates staged/unstaged name-only lists, optional path filter, per-file git patch, skip binary, scan '+' lines with heuristics and caps, dedupe; RETURN { candidates, truncation }. CATCH any failure — RETURN { candidates: [], truncation.notice, error } (no throw).
-    # How (tests): [IMPL-MCP_LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [REQ-LEAP_PROPOSAL_QUEUE] — unit asserts candidates empty and error populated for non-repo / git failure root without throw ([SUB-LEAP-MICRO] S09.GREEN).
+    # How (tests): [IMPL-MCP_LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [REQ-LEAP_PROPOSAL_QUEUE] — unit asserts candidates empty and error populated for non-repo / git failure root without throw ([sub-leap-micro-cycle] unit-test-green).
 
     # PARSE_SESSION_EXPORT_SEGMENTS(raw, maxSegments)
     # [IMPL-MCP_LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [REQ-LEAP_PROPOSAL_QUEUE]
@@ -373,7 +373,7 @@ IMPL-MCP_LEAP_PROPOSAL_QUEUE:
     # Composition: tools/leap-proposal-mcp.test.ts exercises handler → safeLeapCall → module without MCP transport/UI.
 
     # --- Phase H (E2E) [IMPL-MCP_LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [REQ-LEAP_PROPOSAL_QUEUE] ---
-    # S11 E2E boundary: none — no browser, IDE chrome, native OS dialog, or window server; MCP tools are async handlers invocable directly in-process; not e2e_only ([REQ-MODULE_VALIDATION] [PROC-TEST_STRATEGY] [PROC-AGENT_REQ_CHECKLIST] Phase H). No additional E2E test file required for UI-only behavior (there is none).
+    # end-to-end-ui E2E boundary: none — no browser, IDE chrome, native OS dialog, or window server; MCP tools are async handlers invocable directly in-process; not e2e_only ([REQ-MODULE_VALIDATION] [PROC-TEST_STRATEGY] [PROC-AGENT_REQ_CHECKLIST] Phase H). No additional E2E test file required for UI-only behavior (there is none).
   s13_sync:
     process_tokens:
       - PROC-AGENT_REQ_CHECKLIST
@@ -381,7 +381,7 @@ IMPL-MCP_LEAP_PROPOSAL_QUEUE:
     checklist_s13:
       completed_date: 2026-03-28
       checklist_version: agent_req_implementation_checklist v1.0.2
-      verdict: Index mirrors IMPL-MCP_LEAP_PROPOSAL_QUEUE.yaml detail_file s13_sync (validateConsistency + MCP ok; SUB-YAML lint paths)
+      verdict: Index mirrors IMPL-MCP_LEAP_PROPOSAL_QUEUE.yaml detail_file s13_sync (validateConsistency + MCP ok; sub-yaml-edit-loop lint paths)
     tied_validate_consistency:
       stdd:
         tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied
@@ -398,7 +398,7 @@ IMPL-MCP_LEAP_PROPOSAL_QUEUE:
     last_updated:
       date: 2026-03-28T00:00:00.000Z
       author: AI Agent
-      reason: S13 [PROC-AGENT_REQ_CHECKLIST] TIED sync — index s13_sync stub + implementation_approach.details aligned with detail_file
+      reason: sync-tied-stack [PROC-AGENT_REQ_CHECKLIST] TIED sync — index s13_sync stub + implementation_approach.details aligned with detail_file
     last_validated:
       date: 2026-03-26T00:00:00.000Z
       validator: AI Agent
@@ -476,7 +476,7 @@ IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV:
     last_updated:
       date: 2026-03-28T00:00:00.000Z
       author: AI Agent
-      reason: S06.5 [PROC-IMPL_PSEUDOCODE_TOKENS] cross-IMPL parity + loop comments
+      reason: apply-token-comments [PROC-IMPL_PSEUDOCODE_TOKENS] cross-IMPL parity + loop comments
     last_validated:
       date: 2026-03-24T00:00:00.000Z
       validator: AI Agent
@@ -554,7 +554,7 @@ IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS:
     last_updated:
       date: 2026-03-28T00:00:00.000Z
       author: AI Agent
-      reason: S06.5 [PROC-IMPL_PSEUDOCODE_TOKENS] contract + shared parser note
+      reason: apply-token-comments [PROC-IMPL_PSEUDOCODE_TOKENS] contract + shared parser note
     last_validated:
       date: 2026-03-24T00:00:00.000Z
       validator: AI Agent
@@ -638,7 +638,7 @@ IMPL-ATDD-E2E-AGENT_STREAM:
     last_updated:
       date: 2026-03-28T00:00:00.000Z
       author: AI Agent
-      reason: S06.5 [PROC-IMPL_PSEUDOCODE_TOKENS] cross-IMPL NDJSON parity note
+      reason: apply-token-comments [PROC-IMPL_PSEUDOCODE_TOKENS] cross-IMPL NDJSON parity note
     last_validated:
       date: 2026-03-24T00:00:00.000Z
       validator: AI Agent
@@ -697,130 +697,9 @@ IMPL-GOAGENT-LIB-TYPES:
     last_updated:
       date: 2026-03-27T00:00:00.000Z
       author: AI Agent
-      reason: S06.5 [PROC-IMPL_PSEUDOCODE_TOKENS] consumer IMPLs + type comments
+      reason: apply-token-comments [PROC-IMPL_PSEUDOCODE_TOKENS] consumer IMPLs + type comments
     last_validated:
       date: 2026-03-27T00:00:00.000Z
-      validator: AI Agent
-      result: pass
-IMPL-GOAGENT-BASH-HELLO-SCRIPT:
-  name: Root hello_world.sh or hello.sh and Go smoke test for SCRIPT_ENTRY
-  status: Active
-  cross_references:
-    - ARCH-GOAGENT-BASH-HELLO-SCRIPT
-    - REQ-GOAGENT-BASH-HELLO-SCRIPT
-  rationale:
-    why: REQ needs a Bash-only artifact; automated verification uses Go exec without coupling the script to the agentstream module graph.
-    problems_solved:
-      - No documented pseudocode-to-test mapping for the smoke script
-    benefits:
-      - Block-level token comments in essence_pseudocode align with REQ/ARCH dual filenames and hello_world_script_entry_test.go
-  implementation_approach:
-    summary: Project root hello_world.sh or hello.sh (same SCRIPT_ENTRY body); Go test resolves first existing candidate with Dir set to module root.
-    details:
-      - Script is not imported by tools/agentstream; stdd uses hello_world.sh; checklist client workspaces may use hello.sh only
-      - 'S11 E2E (Phase H): N/A — no graphical UI, native OS menus, or visual-only surfaces; REQ-GOAGENT-BASH-HELLO-SCRIPT is satisfied by unit, integration, and composition tests (TestCOMPOSE). No IMPL testability e2e_only or e2e_only_reason.'
-  code_locations:
-    files:
-      - path: hello_world.sh
-        description: '[REQ-GOAGENT-BASH-HELLO-SCRIPT] [ARCH-GOAGENT-BASH-HELLO-SCRIPT] [IMPL-GOAGENT-BASH-HELLO-SCRIPT] SCRIPT_ENTRY'
-      - path: hello.sh
-        description: '[REQ-GOAGENT-BASH-HELLO-SCRIPT] [ARCH-GOAGENT-BASH-HELLO-SCRIPT] [IMPL-GOAGENT-BASH-HELLO-SCRIPT] SCRIPT_ENTRY alternate basename'
-      - path: hello_world_script_entry_test.go
-        description: '[REQ-GOAGENT-BASH-HELLO-SCRIPT] [ARCH-GOAGENT-BASH-HELLO-SCRIPT] [IMPL-GOAGENT-BASH-HELLO-SCRIPT] UNIT_TEST_SCRIPT_ENTRY'
-      - path: script_entry_contract.go
-        description: '[REQ-GOAGENT-BASH-HELLO-SCRIPT] [ARCH-GOAGENT-BASH-HELLO-SCRIPT] [IMPL-GOAGENT-BASH-HELLO-SCRIPT] AssertScriptEntryStdoutContract — SCRIPT_ENTRY OUTPUT'
-      - path: script_resolve.go
-        description: '[REQ-GOAGENT-BASH-HELLO-SCRIPT] [ARCH-GOAGENT-BASH-HELLO-SCRIPT] [IMPL-GOAGENT-BASH-HELLO-SCRIPT] ResolveHelloScriptBasename — RESOLVE'
-      - path: script_bash_stdout.go
-        description: '[REQ-GOAGENT-BASH-HELLO-SCRIPT] [ARCH-GOAGENT-BASH-HELLO-SCRIPT] [IMPL-GOAGENT-BASH-HELLO-SCRIPT] BashScriptStdout — subprocess binding'
-      - path: script_smoke_compose.go
-        description: '[REQ-GOAGENT-BASH-HELLO-SCRIPT] [ARCH-GOAGENT-BASH-HELLO-SCRIPT] [IMPL-GOAGENT-BASH-HELLO-SCRIPT] RunScriptEntrySmokeFromRoot — COMPOSE'
-      - path: go.mod
-        description: '[IMPL-GOAGENT-BASH-HELLO-SCRIPT] Go module stdd_hello_world_smoke for smoke test only'
-  traceability:
-    architecture:
-      - ARCH-GOAGENT-BASH-HELLO-SCRIPT
-    requirements:
-      - REQ-GOAGENT-BASH-HELLO-SCRIPT
-    tests:
-      - hello_world_script_entry_test.go TestSCRIPT_ENTRY_OUTPUT_exactly_one_line_REQ_GOAGENT_BASH_HELLO_SCRIPT
-      - hello_world_script_entry_test.go TestSCRIPT_ENTRY_REQ_GOAGENT_BASH_HELLO_SCRIPT_stdout_and_exit
-      - hello_world_script_entry_test.go TestRESOLVE_HELLO_SCRIPT_BASENAME_missing_REQ_GOAGENT_BASH_HELLO_SCRIPT
-      - hello_world_script_entry_test.go TestUNIT_TEST_SCRIPT_ENTRY_bash_nonzero_REQ_GOAGENT_BASH_HELLO_SCRIPT
-      - hello_world_script_entry_test.go TestCOMPOSE_RunScriptEntrySmokeFromRoot_REQ_GOAGENT_BASH_HELLO_SCRIPT
-    code_annotations:
-      - IMPL-GOAGENT-BASH-HELLO-SCRIPT
-  related_decisions:
-    depends_on:
-      - IMPL-TIED_FILES
-    supersedes: []
-    see_also:
-      - IMPL-GOAGENT-EXECUTOR
-  essence_pseudocode: |-
-    # [IMPL-GOAGENT-BASH-HELLO-SCRIPT] [ARCH-GOAGENT-BASH-HELLO-SCRIPT] [REQ-GOAGENT-BASH-HELLO-SCRIPT]
-    # Summary: Root Bash smoke script (hello_world.sh or hello.sh) prints one line "Hello World!" with newline and exits 0 under strict mode; Go resolves, runs bash, asserts OUTPUT; COMPOSE_SCRIPT_ENTRY_SMOKE_FROM_ROOT wires modules for harnesses (no UI).
-
-    # How: Contract block — INPUT/OUTPUT/DATA/CONTROL for SCRIPT_ENTRY and UNIT_TEST_SCRIPT_ENTRY below (same IMPL/ARCH/REQ).
-    # How: INPUT — (SCRIPT_ENTRY) none; stdin unused; cwd is caller-defined when invoking ./script.
-    # How: OUTPUT — stdout exactly one line "Hello World!" with trailing newline; exit status 0 on success.
-    # How: DATA — HELLO_SCRIPT_CANDIDATES ordered list (hello_world.sh, hello.sh); strict shell options -euo pipefail for SCRIPT_ENTRY.
-    # How: CONTROL — at most one candidate need exist per workspace; identical script body for either basename; ordering explicit for resolution.
-
-    # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
-    # How: related_decisions.depends_on — checklist workspaces assume project root and tied/ layout from BOOTSTRAP_TIED (IMPL-TIED_FILES); SCRIPT_ENTRY does not invoke copy_files.sh. Shared surface: project root path only. Ordering: bootstrap or copy_files before relying on TIED paths for other steps; smoke script order-independent once files exist. Pre/post: none required for printf path beyond file existing at chosen basename.
-
-    # [IMPL-GOAGENT-EXECUTOR] [ARCH-GOAGENT-EXECUTOR] [REQ-GOAGENT-AGENT-EXECUTOR]
-    # How: related_decisions.see_also — NDJSON agent subprocess entrypoint; no code_locations overlap with hello_world.sh, hello.sh, or hello_world_script_entry_test.go. No shared mutable DATA with SCRIPT_ENTRY. Ordering: smoke and executor are independent; smoke may run without executor.
-
-    procedure SCRIPT_ENTRY:
-      # How: Same steps for whichever conventional filename the workspace uses.
-      emit shebang line "#!/usr/bin/env bash"
-      emit comment lines naming IMPL ARCH REQ and How SCRIPT_ENTRY
-      run shell builtin: set -euo pipefail
-      run printf with format '%s\n' and single argument 'Hello World!' to stdout
-      exit with status 0
-      # How: Fallible path under strict mode — non-zero exit; success contract fails if stdout shape wrong.
-      ON any command failure under strict mode: exit non-zero; stdout must not satisfy success contract
-
-    procedure RESOLVE_HELLO_SCRIPT_BASENAME(moduleRoot):
-      # How: Prefer hello_world.sh (stdd) then hello.sh (checklist clients); fail closed if neither regular file exists.
-      FOR each name IN HELLO_SCRIPT_CANDIDATES in order:
-        IF regular file exists at moduleRoot joined with name: RETURN name
-      RETURN error missing smoke script expected one of hello_world.sh or hello.sh
-
-    procedure UNIT_TEST_SCRIPT_ENTRY:
-      # How: Module root from runtime.Caller; internal ordering — resolve basename before spawn.
-      derive moduleRoot from runtime.Caller(0) test file directory
-      # How: CALL RESOLVE_HELLO_SCRIPT_BASENAME — same IMPL/ARCH/REQ; must succeed before bash.
-      basename = CALL RESOLVE_HELLO_SCRIPT_BASENAME(moduleRoot)
-      ON basename is error: FAIL test with error message
-      spawn bash with argv [basename] and working directory moduleRoot
-      capture stdout; wait process completion
-      # How: Fallible path — surface stderr when exec.ExitError available.
-      ON process error not nil or exit status not 0: FAIL test including stderr if captured
-      assert stdout string equals literal "Hello World!\n"
-
-    procedure COMPOSE_SCRIPT_ENTRY_SMOKE_FROM_ROOT(moduleRoot):
-      # How: Composition binding (Phase G) — wires RESOLVE, bash subprocess stdout, and OUTPUT assert; no UI; entry for harnesses.
-      basename = CALL RESOLVE_HELLO_SCRIPT_BASENAME(moduleRoot)
-      ON basename is error: RETURN error upstream
-      out = CALL BashScriptStdout(moduleRoot, basename)
-      ON bash error: RETURN error with context
-      RETURN AssertScriptEntryStdoutContract(out) as error
-
-    # Phase H — E2E ([PROC-IMPL_CODE_TEST_SYNC]): No UI-only or platform-inseparable behavior for [REQ-GOAGENT-BASH-HELLO-SCRIPT] under [IMPL-GOAGENT-BASH-HELLO-SCRIPT].
-    # How: Manual ./hello_world.sh or ./hello.sh is operator smoke only, not a substitute for automated composition; no testability e2e_only / e2e_only_reason on this IMPL.
-  detail_file: implementation-decisions/IMPL-GOAGENT-BASH-HELLO-SCRIPT.yaml
-  metadata:
-    created:
-      date: 2026-03-30T00:00:00.000Z
-      author: AI Agent
-    last_updated:
-      date: 2026-03-30T18:00:00.000Z
-      author: AI Agent
-      reason: S13 [PROC-AGENT_REQ_CHECKLIST] TIED sync — index metadata matches detail_file; REQ/ARCH tests lists aligned
-    last_validated:
-      date: 2026-03-30T18:00:00.000Z
       validator: AI Agent
       result: pass
 IMPL-GOAGENT-CLI-CMD:
@@ -972,7 +851,7 @@ IMPL-GOAGENT-TEXT-SOURCES:
     last_updated:
       date: 2026-03-28T00:00:00.000Z
       author: AI Agent
-      reason: S06.5 [PROC-IMPL_PSEUDOCODE_TOKENS] pipeline callee + LIB-TYPES
+      reason: apply-token-comments [PROC-IMPL_PSEUDOCODE_TOKENS] pipeline callee + LIB-TYPES
     last_validated:
       date: 2026-03-27T00:00:00.000Z
       validator: AI Agent
@@ -1038,7 +917,7 @@ IMPL-GOAGENT-FEATURESPEC:
     last_updated:
       date: 2026-03-28T00:00:00.000Z
       author: AI Agent
-      reason: S06.5 [PROC-IMPL_PSEUDOCODE_TOKENS] cross-IMPL callees + contract
+      reason: apply-token-comments [PROC-IMPL_PSEUDOCODE_TOKENS] cross-IMPL callees + contract
     last_validated:
       date: 2026-03-27T00:00:00.000Z
       validator: AI Agent
@@ -1098,7 +977,7 @@ IMPL-GOAGENT-TDDLOOP:
     last_updated:
       date: 2026-03-28T00:00:00.000Z
       author: AI Agent
-      reason: S06.5 [PROC-IMPL_PSEUDOCODE_TOKENS] ATDD parity + LIB-TYPES
+      reason: apply-token-comments [PROC-IMPL_PSEUDOCODE_TOKENS] ATDD parity + LIB-TYPES
     last_validated:
       date: 2026-03-27T00:00:00.000Z
       validator: AI Agent
@@ -1297,7 +1176,7 @@ IMPL-GOAGENT-EXECUTOR:
     last_updated:
       date: 2026-03-27T00:00:00.000Z
       author: AI Agent
-      reason: S06.5 [PROC-IMPL_PSEUDOCODE_TOKENS] cross-IMPL + step comments
+      reason: apply-token-comments [PROC-IMPL_PSEUDOCODE_TOKENS] cross-IMPL + step comments
     last_validated:
       date: 2026-03-27T00:00:00.000Z
       validator: AI Agent

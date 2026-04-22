@@ -9,6 +9,7 @@ import fs from "node:fs";
 import path from "node:path";
 import yaml from "js-yaml";
 import { safeDump } from "./yaml-dump.js";
+import { mergeRecordUpdate } from "./record-merge.js";
 
 export type IndexName =
   | "requirements"
@@ -373,7 +374,7 @@ export function updateRecord(
     const existing = data[token];
     if (typeof existing !== "object" || existing === null)
       return { ok: false, error: `Token is not a record: ${token}` };
-    const merged = { ...(existing as Record<string, unknown>), ...updates };
+    const merged = mergeRecordUpdate(existing as Record<string, unknown>, updates);
     data[token] = merged;
     const out = safeDump(data);
     fs.writeFileSync(filePath, out, "utf8");
@@ -399,7 +400,7 @@ export function upsertRecord(
     const data = loadIndex(index) ?? {};
     const existing = data[token];
     if (typeof existing === "object" && existing !== null) {
-      data[token] = { ...(existing as Record<string, unknown>), ...record };
+      data[token] = mergeRecordUpdate(existing as Record<string, unknown>, record);
     } else {
       data[token] = record;
     }

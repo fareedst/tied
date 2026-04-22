@@ -2,9 +2,9 @@
 
 **TIED Methodology Version**: 2.2.0
 
-Six diagrams that together capture the full methodology: the traceability stack, the three development phases, the LEAP bidirectional loop, the full dev-cycle session workflow, the TDD inner loop, and the CITDP change-analysis procedure.
+Six diagrams capture the core methodology: the traceability stack, the three development phases, the LEAP bidirectional loop, the full dev-cycle session workflow, the TDD inner loop, and the CITDP change-analysis procedure. A short **New client setup — Cursor** section at the end shows bootstrap and `agent enable tied-yaml` for MCP.
 
-**Related documents**: [TIED.md](../TIED.md), [LEAP.md](LEAP.md), [implementation-order.md](implementation-order.md), [processes.md](../processes.md), [ai-principles.md](../ai-principles.md)
+**Related documents**: [LEAP.md](LEAP.md), [implementation-order.md](implementation-order.md), [processes.md](../processes.md), [ai-principles.md](../ai-principles.md)
 
 ---
 
@@ -120,12 +120,12 @@ flowchart TD
     S7 --> S8
     S8["8. Validate + close test gaps\nRun full test suite\nRun PROC-TOKEN_VALIDATION"]
     S9["9. Sync TIED to code/tests\nUpdate REQ/ARCH/IMPL to match\nSync semantic-tokens.yaml"]
-    S10["10. Update README + CHANGELOG"]
-    S11["11. Write commit message\nper PROC-COMMIT_MESSAGES"]
+    composition-integration["10. Update README + CHANGELOG"]
+    end-to-end-ui["11. Write commit message\nper PROC-COMMIT_MESSAGES"]
 
-    S8 --> S9 --> S10 --> S11
+    S8 --> S9 --> composition-integration --> end-to-end-ui
 
-    S11 --> Done(["Session Complete"])
+    end-to-end-ui --> Done(["Session Complete"])
 
     S9 -.->|"LEAP: if code diverged\nfrom IMPL during TDD\nupdate IMPL -> ARCH -> REQ"| S2
 ```
@@ -185,7 +185,7 @@ flowchart TD
 
     C7["7. Completion\nLanguage-specific lint\nPROC-TOKEN_VALIDATION\ntied_validate_consistency\nModule validation\nLEAP feedback record"]
 
-    C8["8. Persistence\nStore CITDP YAML record\nValidate per PROC-YAML_EDIT_LOOP\nyq -i -P on record file"]
+    C8["8. Persistence\nStore CITDP YAML record\nValidate per PROC-YAML_EDIT_LOOP\nlint_yaml"]
 
     C1 --> C2 --> C3 --> C4 --> C5 --> C6 --> C7 --> C8
 
@@ -200,7 +200,7 @@ flowchart TD
 
 ## Diagram 6 — YAML Edit Loop and Token Validation
 
-The `[PROC-YAML_EDIT_LOOP]` that governs all TIED YAML changes. No TIED record (index or detail) is valid for use until it passes this loop. Step 1 edits the file. Step 2 validates syntax and canonicalizes formatting with `yq -i -P`. On failure, fix and repeat. Step 3 marks the file as valid for use by MCP, scripts, and downstream steps. Step 4 optionally runs `tied_validate_consistency` to check cross-file traceability; failures feed back to step 1.
+The `[PROC-YAML_EDIT_LOOP]` that governs all TIED YAML changes. No TIED record (index or detail) is valid for use until it passes this loop. Step 1 edits the file. Step 2 validates syntax and canonicalizes formatting with **`lint_yaml`** (see `processes.md` for definition; each path processed independently—never raw multi-argument `yq` pretty-print). On failure, fix and repeat. Step 3 marks the file as valid for use by MCP, scripts, and downstream steps. Step 4 optionally runs `tied_validate_consistency` to check cross-file traceability; failures feed back to step 1.
 
 ```mermaid
 flowchart TD
@@ -208,7 +208,7 @@ flowchart TD
 
     Edit["1. Edit\nCreate or modify YAML\n(index or detail file)"]
 
-    Validate["2. Validate + Pretty-Print\nyq -i -P file\nValidates syntax\nCanonicalizes formatting"]
+    Validate["2. Validate + Pretty-Print\nlint_yaml\nValidates syntax\nCanonicalizes formatting"]
 
     ValidOK{"Validation\npassed?"}
 
@@ -229,3 +229,21 @@ flowchart TD
     ConsistOK -->|"No"| FixConsist --> Edit
     ConsistOK -->|"Yes"| Done(["TIED YAML\nvalid and consistent"])
 ```
+
+---
+
+## New client setup — Cursor
+
+Sequence for configuring a **new TIED client** when using **Cursor**: bootstrap writes `.cursor/mcp.json`; the **Cursor Agent CLI** step enables the MCP server in the workspace.
+
+```mermaid
+flowchart LR
+  CopyFiles["copy_files.sh"]
+  AgentEnable["agent enable tied-yaml"]
+  Approve["Approve project\nMCP config"]
+  Quit["quit"]
+  UseMcp["Use tied-yaml\nMCP tools"]
+  CopyFiles --> AgentEnable --> Approve --> Quit --> UseMcp
+```
+
+Run `agent enable tied-yaml` from the **client project** directory after `copy_files.sh`. Approve the update when Cursor prompts you. Type **`quit`** to exit the `agent` UI. See [README.md](../README.md) (Getting Started with a New Project) and [adding-tied-mcp-and-invoking-passes.md](adding-tied-mcp-and-invoking-passes.md).

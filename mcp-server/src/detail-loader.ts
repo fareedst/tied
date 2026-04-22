@@ -16,7 +16,8 @@ import {
   updateRecord,
   type IndexName,
 } from "./yaml-loader.js";
-import { safeDump } from "./yaml-dump.js";
+import { safeDump, safeDumpTiedDetailDoc } from "./yaml-dump.js";
+import { mergeRecordUpdate } from "./record-merge.js";
 
 export type DetailType = "requirement" | "architecture" | "implementation";
 
@@ -57,26 +58,46 @@ function getDetailBasePathForRead(token: string): string {
  * Resolve filesystem path for reading a detail file. Methodology tokens read from tied/methodology/...;
  * project tokens from tied/... . Uses index detail_file when present (hybrid .md/.yaml);
  * otherwise falls back to {subdir}/{token}.yaml then {subdir}/{token}.md. Returns null if token invalid.
+ *
+ * When a token is listed in the methodology index but the methodology copy has no detail file
+ * (e.g. index-only seed rows with detail_file: null), the same path is retried under the project
+ * base (tied/) so client-owned detail files still resolve.
  */
 export function getDetailPath(token: string): string | null {
   const type = getDetailType(token);
   if (!type) return null;
-  const base = getDetailBasePathForRead(token);
   const subdir = SUBDIRS[type];
   const indexName = getIndexName(token);
-  if (indexName) {
-    const record = getRecord(indexName, token) as Record<string, unknown> | null;
-    const detailFile = record?.detail_file;
-    if (typeof detailFile === "string" && detailFile.trim()) {
-      const fromIndex = path.join(base, detailFile);
-      if (fs.existsSync(fromIndex)) return fromIndex;
+
+  const tryBase = (base: string): string | null => {
+    if (indexName) {
+      const record = getRecord(indexName, token) as Record<string, unknown> | null;
+      const detailFile = record?.detail_file;
+      if (typeof detailFile === "string" && detailFile.trim()) {
+        const fromIndex = path.join(base, detailFile);
+        if (fs.existsSync(fromIndex)) return fromIndex;
+      }
+    }
+    const yamlPath = path.join(base, subdir, `${token}.yaml`);
+    if (fs.existsSync(yamlPath)) return yamlPath;
+    const mdPath = path.join(base, subdir, `${token}.md`);
+    if (fs.existsSync(mdPath)) return mdPath;
+    return null;
+  };
+
+  if (indexName && isTokenInMethodology(indexName, token)) {
+    const mb = getMethodologyBasePath();
+    if (mb) {
+      const p = tryBase(mb);
+      if (p) return p;
     }
   }
-  const yamlPath = path.join(base, subdir, `${token}.yaml`);
-  if (fs.existsSync(yamlPath)) return yamlPath;
-  const mdPath = path.join(base, subdir, `${token}.md`);
-  if (fs.existsSync(mdPath)) return mdPath;
-  return yamlPath;
+
+  const projectPath = tryBase(getBasePath());
+  if (projectPath) return projectPath;
+
+  const defaultBase = getDetailBasePathForRead(token);
+  return path.join(defaultBase, subdir, `${token}.yaml`);
 }
 
 /**
@@ -176,7 +197,7 @@ export function writeDetail(
   try {
     const dir = path.dirname(filePath);
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-    const out = safeDump({ [token]: record });
+    const out = safeDumpTiedDetailDoc(token, record);
     fs.writeFileSync(filePath, out, "utf8");
     if (options?.syncIndex) {
       const indexName = getIndexName(token);
@@ -210,9 +231,9 @@ export function updateDetail(token: string, updates: Record<string, unknown>): {
   if (existing[DETAIL_FORMAT] === "markdown") {
     return { ok: false, error: `Detail file for ${token} is markdown; edit the .md file directly` };
   }
-  const merged = { ...existing, ...updates };
+  const merged = mergeRecordUpdate(existing as Record<string, unknown>, updates);
   try {
-    const out = safeDump({ [token]: merged });
+    const out = safeDumpTiedDetailDoc(token, merged);
     fs.writeFileSync(filePath, out, "utf8");
     return { ok: true };
   } catch (e) {
@@ -225,6 +246,42 @@ export function updateDetail(token: string, updates: Record<string, unknown>): {
  * Delete a detail file. Fails if the file is under methodology (read-only). [PROC-TIED_METHODOLOGY_READONLY]
  * If syncIndex is true, sets the project index record's detail_file to null for that token.
  */
+/**
+ * Append bullet strings to implementation_approach.details without replacing prior lines.
+ * REQ-*, ARCH-*, IMPL-* detail files only; fails for markdown details or methodology paths.
+ */
+export function appendImplementationApproachDetails(
+  token: string,
+  detailsLines: string[]
+): { ok: true } | { ok: false; error: string } {
+  if (!token.startsWith("REQ-") && !token.startsWith("ARCH-") && !token.startsWith("IMPL-")) {
+    return { ok: false, error: `Invalid token: ${token}. Must be REQ-*, ARCH-*, or IMPL-*` };
+  }
+  const lines = detailsLines.map((s) => String(s).trim()).filter((s) => s.length > 0);
+  if (lines.length === 0) return { ok: false, error: "details_lines must contain at least one non-empty string" };
+  const existing = loadDetail(token);
+  if (!existing) return { ok: false, error: `No detail file found for token: ${token}` };
+  if (existing[DETAIL_FORMAT] === "markdown") {
+    return { ok: false, error: `Detail file for ${token} is markdown; cannot append` };
+  }
+  const methodologyBase = getMethodologyBasePath();
+  const filePath = getDetailPath(token);
+  if (methodologyBase && filePath && filePath.startsWith(methodologyBase)) {
+    return { ok: false, error: `Token ${token} is methodology-owned (read-only); cannot append.` };
+  }
+  const rec = existing as Record<string, unknown>;
+  const prevIa = rec.implementation_approach;
+  const prevObj = prevIa !== null && typeof prevIa === "object" && !Array.isArray(prevIa) ? (prevIa as Record<string, unknown>) : {};
+  const prevDetails = Array.isArray(prevObj.details)
+    ? (prevObj.details as unknown[]).map((x) => String(x))
+    : [];
+  const nextIa = {
+    ...prevObj,
+    details: [...prevDetails, ...lines],
+  };
+  return updateDetail(token, { implementation_approach: nextIa });
+}
+
 export function deleteDetail(
   token: string,
   options?: { syncIndex?: boolean }

@@ -28,7 +28,7 @@ ARCH-TIED_STRUCTURE:
       cons:
         - Too generic for methodology-specific files
         - .github is typically for GitHub workflows
-      rejected_reason: tied/ is more specific to the methodology
+      rejected_reason: ./tied/ is more specific to the methodology
   implementation_approach:
     summary: Create dedicated tied/ directory with YAML indexes and detail subdirectories
     details:

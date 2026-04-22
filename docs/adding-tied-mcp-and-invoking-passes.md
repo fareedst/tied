@@ -2,7 +2,7 @@
 
 This document describes the **MCP-first** process to establish and maintain REQ (requirements), ARCH (architecture decisions), and IMPL (implementation decisions) in a project using the TIED YAML Index MCP server. It is intended for developers and AI agents who are setting up TIED in a project and want to use the MCP server across multiple, ordered passes.
 
-**Related**: [REQ-CONVERSION_TOOL], [PROC-YAML_DB_OPERATIONS], [ARCH-TIED_STRUCTURE]
+**Related**: [PROC-YAML_DB_OPERATIONS], [ARCH-TIED_STRUCTURE]
 
 ---
 
@@ -62,11 +62,11 @@ Example:
 }
 ```
 
-Path resolution: All path parameters (`output_base_path`, `file_path`, etc.) are resolved by the Node process. Absolute paths are used as-is; relative paths are resolved relative to the process current working directory (usually the workspace root). `TIED_BASE_PATH` is also cwd-relative unless you set it to an absolute path. See [mcp-server/README.md](../../mcp-server/README.md) for details.
+Path resolution: Path parameters on MCP tools are resolved by the Node process. Absolute paths are used as-is; relative paths are resolved relative to the process current working directory (usually the workspace root). `TIED_BASE_PATH` is also cwd-relative unless you set it to an absolute path. See [mcp-server/README.md](../../mcp-server/README.md) for details.
 
-Re-running **`copy_files.sh /path/to/this/project`** **rewrites** the `tied-yaml` entry in that project’s `.cursor/mcp.json` so `env.TIED_BASE_PATH` is always an absolute path to **that** project’s `tied/` (and refreshes the server `args` path). Use this after copying MCP config from another repo or if MCP writes were landing in the wrong tree.
+**`copy_files.sh` does not create or modify `.cursor/mcp.json`.** It installs `tied/` and `.cursor/skills/tied-yaml/` (including `tied-cli.sh`), from the TIED repo’s `.cursor/skills/tied-yaml` when present, otherwise from **`tools/bundled-tied-yaml-skill/`** in the TIED source tree. You must add or edit the **`tied-yaml`** MCP entry yourself (this section’s JSON example), or use **`agent enable tied-yaml`** after creating `.cursor/mcp.json`. For **terminal-only** automation, set **`TIED_MCP_BIN`** to the built server’s **`dist/index.js`**, **`TIED_BASE_PATH`** to your project’s **`tied/`**, and run **`tied-cli.sh`** from the installed skill (see **`.cursor/skills/tied-yaml/SKILL.md`**); the env var alone is not a substitute for **`tied-cli.sh`** and Node.
 
-**Safety note (multi-repo risk):** If you have multiple TIED-enabled repos on disk, it is easy to accidentally point `env.TIED_BASE_PATH` at the *wrong* repo’s `tied/` directory. Before any write, call `tied_config_get_base_path` and confirm the reported base path is **under the current workspace root** and is the `tied/` you intend to mutate. If it is not, **STOP** and prefer the deterministic fix: re-run `copy_files.sh` targeting this project to rewrite `.cursor/mcp.json`. Only edit `.cursor/mcp.json` manually if you must, and only to an absolute `<workspace>/tied` path.
+**Safety note (multi-repo risk):** If you have multiple TIED-enabled repos on disk, it is easy to accidentally point `env.TIED_BASE_PATH` at the *wrong* repo’s `tied/` directory. Before any write, call `tied_config_get_base_path` and confirm the reported base path is **under the current workspace root** and is the `tied/` you intend to mutate. If it is not, **STOP** and fix **`.cursor/mcp.json`**: set `env.TIED_BASE_PATH` to an absolute path to **this** workspace’s **`tied/`**, and ensure **`args`** points at your built **`mcp-server/dist/index.js`** (typically in your TIED clone). Re-running **`copy_files.sh`** does **not** repair MCP config.
 
 ### 3.3 Enable the server in Cursor (Cursor Agent CLI)
 
@@ -77,11 +77,11 @@ After **`copy_files.sh`** (or manual edits), `.cursor/mcp.json` may already list
 3. When Cursor prompts you to apply the **project MCP configuration**, **approve** the update.
 4. Type **`quit`** to exit the interactive `agent` session.
 
-You can still add or edit `.cursor/mcp.json` by hand; `copy_files.sh` **updates** the `tied-yaml` entry’s server path and `env.TIED_BASE_PATH` for the target project without wiping other MCP servers.
+You can add or edit `.cursor/mcp.json` by hand; **`copy_files.sh` does not merge or refresh MCP entries** — keep **`tied-yaml`** `args` and `env.TIED_BASE_PATH` accurate when you clone configs between repos or move projects.
 
 ### 3.4 Verify
 
-- List MCP tools (e.g. `yaml_index_read`, `convert_monolithic_requirements`) to confirm the server is loaded.
+- List MCP tools (e.g. `yaml_index_read`, `tied_import_summary`) to confirm the server is loaded.
 - Call **`tied_config_get_base_path`** to see the effective TIED base path (and raw `TIED_BASE_PATH` env value) the server is using.
 - Read a resource such as `tied://requirements` (or attempt a read) to confirm the server sees your project’s `tied/` — you may get empty or missing-file behavior before bootstrap, which is expected.
 
@@ -99,27 +99,7 @@ Run from your project root (or from wherever `copy_files.sh` is located, targeti
 ./copy_files.sh /path/to/your/project
 ```
 
-This copies template YAML indexes and guide docs into the project’s `tied/` directory. No MCP conversion is involved. After this, MCP tools operate on that `tied/` (with `TIED_BASE_PATH` pointing to it).
-
-### Option B — From monolithic docs (migration) [REQ-CONVERSION_TOOL]
-
-If you have existing monolithic `requirements.md`, `architecture-decisions.md`, and `implementation-decisions.md`, use the MCP conversion tools to create `tied/` with YAML indexes and detail files.
-
-**Single pass:** Call the tool `convert_monolithic_all` with:
-
-- `requirements_path`, `architecture_path`, `implementation_path` — paths to your monolithic markdown files (or use `requirements_content`, `architecture_content`, `implementation_content` to pass raw content; content overrides path when both are set).
-- `output_base_path` — e.g. `tied` or the value of `TIED_BASE_PATH`.
-- Optionally `dry_run: true` first to get `tokens`, `index_path`, and `detail_paths` without writing.
-
-**Three passes:** If you prefer to run conversions one document at a time (e.g. to inspect or fix between steps):
-
-1. Call `convert_monolithic_requirements` with `file_path` or `content`, and `output_base_path` (e.g. `tied`). Optionally `dry_run: true` first.
-2. Call `convert_monolithic_architecture` with the same `output_base_path`.
-3. Call `convert_monolithic_implementation` with the same `output_base_path`.
-
-Order (REQ → ARCH → IMPL) matches the dependency chain and the internal order of `convert_monolithic_all`.
-
-After conversion, update `semantic-tokens.yaml` with any new tokens (manually or via MCP index tools). See [mcp-server/README.md](../../mcp-server/README.md) and [using-tied-without-mcp.md](using-tied-without-mcp.md) for non-MCP alternatives.
+This copies template YAML indexes and guide docs into the project’s `tied/` directory. After this, MCP tools operate on that `tied/` (with `TIED_BASE_PATH` pointing to it).
 
 ---
 
@@ -205,7 +185,7 @@ Follow [ai-principles.md](../../ai-principles.md) and [AGENTS.md](../../AGENTS.m
 flowchart LR
   subgraph setupFlow [Setup]
     BuildMcp[Build MCP server]
-    McpConfig["copy_files.sh\nor manual mcp.json"]
+    McpConfig["manual mcp.json\nor agent enable"]
     AgentEnable["agent enable tied-yaml"]
     ApproveQuit["Approve config\nquit"]
     VerifySetup[Verify MCP]
@@ -220,7 +200,7 @@ flowchart LR
   Pass3 --> Pass2
 ```
 
-- **Setup**: Build the MCP server in the TIED repo; ensure MCP config in the project (e.g. `./copy_files.sh` writes `.cursor/mcp.json` with `tied-yaml` and `TIED_BASE_PATH`, or set the same fields manually). Then run **`agent enable tied-yaml`** from the client project, **approve** the Cursor config update, and type **`quit`** to exit the Agent CLI; verify tools/resources load.
+- **Setup**: Build the MCP server in the TIED repo; add **`tied-yaml`** to **`.cursor/mcp.json`** (JSON in §3.2) or use **`tied-cli.sh`** with **`TIED_MCP_BIN`** / **`TIED_BASE_PATH`** for terminal-only use. Then run **`agent enable tied-yaml`** from the client project when using editor MCP, **approve** the Cursor config update, and type **`quit`** to exit the Agent CLI; verify tools/resources load.
 - **Pass 1**: Bootstrap `tied/` via `copy_files.sh` (greenfield; overlaps the `copy_files.sh` step in Setup when you use that path) or conversion tools (single or three-pass).
 - **Pass 2**: Establish REQ → ARCH → IMPL with index/detail tools and register tokens (no code).
 - **Pass 3**: Maintain via traceability queries, bulk/single reads, updates, and token audit; iterate back to Pass 2 when adding new requirements or decisions.

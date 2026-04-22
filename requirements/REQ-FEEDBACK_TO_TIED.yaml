@@ -2,7 +2,7 @@ REQ-FEEDBACK_TO_TIED:
   name: Feedback to TIED (Feature Requests, Bug Reports, Methodology)
   category: Functional
   priority: P1
-  status: Planned
+  status: Implemented
   rationale:
     why: Projects and users need a standard way to submit feature requests, bug reports, and methodology improvement suggestions and to report them to the TIED project
     problems_solved:

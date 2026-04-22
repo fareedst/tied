@@ -151,6 +151,23 @@ ruby scripts/extract_repeated_tool_calls.rb --min-count 3 ~/.cursor/logs/conv_so
 ruby scripts/extract_tool_failure_bursts.rb --window-seconds 180 --min-failures 2 ~/.cursor/logs/conv_someid.yaml > bursts.yaml
 ```
 
+### `extract_shell_suspicious_details.rb`
+
+**Purpose:** List every `afterShellExecution` record whose `normalized.details.output` matches the same substring heuristic as `analyze_hook_log.rb` (`shell_output_suspicious`). Use this when the per-file count from `analyze_hook_log.rb` is non-zero and you need the command plus an output excerpt.
+
+**Caveat:** The heuristic matches plain words such as `error` / `failed` in **stdout** (for example TIED `essence_pseudocode` text printed by a shell snippet). Treat counts as “needs human triage,” not proven non-zero exit codes.
+
+**Flags:**
+
+- `--excerpt-chars N` — Truncate `output_excerpt` (default `4000`).
+- `--files-from PATH` — Repeatable.
+
+**Example:**
+
+```bash
+ruby scripts/extract_shell_suspicious_details.rb ~/.cursor/logs/conv_someid.yaml > shell_suspicious.yaml
+```
+
 ### `extract_struggle_episodes.rb`
 
 **Purpose:** Segment logs into “episodes” (prompt boundaries, epoch gaps, `stop` events), score each episode with heuristics (tool failures, repeated inputs, read thrash, text signals, etc.).
@@ -190,7 +207,7 @@ ruby scripts/extract_queries.rb export.yaml
 
 ## Docs build: `citdp_hook_log_evidence_build.rb`
 
-**Purpose:** From repo root, regenerate CITDP ↔ hook-log correlation artifacts under `docs/` (markdown table + TSV), using `docs/citdp/CITDP-*.yaml` and optional `~/.cursor/logs/conv_ruby_treegrep_*.yaml`.
+**Purpose:** From repo root, regenerate CITDP ↔ hook-log correlation artifacts under `docs/` (markdown table + TSV), using `tied/citdp/CITDP-*.yaml` and optional `~/.cursor/logs/conv_ruby_treegrep_*.yaml`.
 
 **Flags:** None.
 
@@ -211,6 +228,6 @@ See generated [`docs/citdp-evidence-hook-log-correlation.md`](citdp-evidence-hoo
 | `strip_transcripts.rb`, `dedupe_transcript_yaml.rb` | Hook YAML files (in-place writers) |
 | `analyze_hook_log.rb`, `extract_*.rb` (except `extract_queries`) | Hook YAML (`conv_*.yaml`) |
 | `extract_queries.rb` | Full transcript YAML with `<user_query>` tags |
-| `citdp_hook_log_evidence_build.rb` | Repo `docs/citdp/` + optional hook glob on disk |
+| `citdp_hook_log_evidence_build.rb` | Repo `tied/citdp/` + optional hook glob on disk |
 
 Run `ruby scripts/<name>.rb --help` for the canonical option list.

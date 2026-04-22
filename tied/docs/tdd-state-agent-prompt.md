@@ -46,7 +46,7 @@ for (let iteration = 0; iteration < MAX; iteration += 1) {
 This is likely the first step that you will receive. All records use the same keys.
 
 ```yaml
-id: "S09.RED"
+id: "unit-test-red"
 title: "Write Failing Test (Phase D)"
 stage: "unit_tdd"
 goals: "Map IMPL pseudo-code to a failing test."
@@ -63,7 +63,7 @@ outcomes: "Failing test exists that matches pseudo-code; no production code writ
 
 ## Start State
 
-MCP tdd_state_guide: omitting current_state (or calling with empty args) always returns the start state (S09.RED); to advance, pass arguments: { "current_state": "<previous tool response's state>" } exactly as in tools/tdd_state_guide.json.
+MCP tdd_state_guide: omitting current_state (or calling with empty args) always returns the start state (unit-test-red); to advance, pass arguments: { "current_state": "<previous tool response's state>" } exactly as in tools/tdd_state_guide.json.
 
 Don’t assume the wrapper is broken if the state doesn’t advance—verify the payload includes current_state before digging into server files or package.json.
 
@@ -78,18 +78,18 @@ agent_preload:
     start_call: {}
     continue_call:
       current_state: "<previous returned state>"
-    first_state: S09.RED
+    first_state: unit-test-red
     terminal_states:
       - end
       - error
     max_iterations: 20
     state_sequence:
-      - S09.RED
-      - S09.GREEN
-      - S09.REFACTOR
-      - S09.SYNC
-      - S10
-      - S11
+      - unit-test-red
+      - unit-test-green
+      - unit-refactor
+      - three-way-alignment-unit
+      - composition-integration
+      - end-to-end-ui
       - end
     operating_rules:
       - Do not pause between calls

@@ -63,7 +63,7 @@ ARCH-LEAP_PROPOSAL_QUEUE:
     last_updated:
       date: 2026-03-28
       author: AI Agent
-      reason: S13 [PROC-AGENT_REQ_CHECKLIST] TIED sync — traceability.tests include composition suite
+      reason: sync-tied-stack [PROC-AGENT_REQ_CHECKLIST] TIED sync — traceability.tests include composition suite
     last_validated:
       date: 2026-03-26
       validator: AI Agent

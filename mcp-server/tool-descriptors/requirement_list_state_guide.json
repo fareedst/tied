@@ -1,6 +1,6 @@
 {
   "name": "requirement_list_state_guide",
-  "description": "Walk a client-supplied requirement list in array order. First call: pass non-empty requirements array (objects with id, name, depends_on, summary, rationale, inputs, outputs, functional_requirements, acceptance_criteria, test_scope); omit current_state. Later calls: pass current_state ONLY, set to continuation_state from the prior response (requirements ignored). Presents one requirement per step until id end_requirement_list. For each item, follow the agent REQ checklist in project documentation (e.g. agent-req-implementation-checklist.md, S01–S16), strict TDD. Terminal: id end_requirement_list, is_end true; bad token or empty list returns state error.",
+  "description": "Walk a client-supplied requirement list in array order. First call: pass non-empty requirements array (objects with id, name, depends_on, summary, rationale, inputs, outputs, functional_requirements, acceptance_criteria, test_scope); omit current_state. Later calls: pass current_state ONLY, set to continuation_state from the prior response (requirements ignored). Presents one requirement per step until id end_requirement_list. For each item, follow the agent REQ checklist in project documentation (e.g. agent-req-implementation-checklist.md, session-bootstrap–traceable-commit), strict TDD. Terminal: id end_requirement_list, is_end true; bad token or empty list returns state error.",
   "arguments": {
     "type": "object",
     "properties": {

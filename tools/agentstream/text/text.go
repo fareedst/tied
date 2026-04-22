@@ -24,6 +24,7 @@ func ArgvTurn(words []string) []agentstream.Turn {
 }
 
 // TurnsFromPromptFiles reads each path as one UTF-8 Turn. REQ-GOAGENT-TEXT-SOURCES.
+// Note: tools/agentstream pipeline does not use this for --prompt-file; the CLI prepends file bodies on new sessions (pipeline.ReadPromptFilePreload / ApplyPromptFilePreload).
 func TurnsFromPromptFiles(paths []string) ([]agentstream.Turn, error) {
 	var out []agentstream.Turn
 	for _, p := range paths {

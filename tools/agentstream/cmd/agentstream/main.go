@@ -71,7 +71,6 @@ func main() {
 
 	turns, err := pipeline.Build(pipeline.Input{
 		ArgvWords:                 cfg.ArgvWords,
-		PromptFiles:               cfg.PromptFiles,
 		PromptsFiles:              cfg.PromptsFiles,
 		TddYAMLPaths:              cfg.TddYAMLs,
 		FeatureSpecBatchYAMLPaths: cfg.FeatureSpecBatchYAMLs,
@@ -80,7 +79,10 @@ func main() {
 		LeadChecklistSkipSub:      cfg.LeadChecklistSkipSub,
 		LeadChecklistStepFromID:   cfg.LeadChecklistStepFromID,
 		LeadChecklistStepToID:     cfg.LeadChecklistStepToID,
-		VerifySession:             cfg.VerifySession,
+		ChecklistVars:             cfg.ChecklistVars,
+		ChecklistVarStrict:        cfg.ChecklistVarStrict,
+		VerifySession:                  cfg.VerifySession,
+		LeadChecklistBeforeFeatureSpec: cfg.LeadChecklistBeforeFeatureSpec,
 	})
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "agentstream: %v\n", err)
@@ -97,6 +99,13 @@ func main() {
 		fmt.Fprintf(os.Stderr, "agentstream: %v\n", err)
 		os.Exit(1)
 	}
+
+	preload, err := pipeline.ReadPromptFilePreload(cfg.PromptFiles)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "agentstream: prompt file: %v\n", err)
+		os.Exit(1)
+	}
+	pipeline.ApplyPromptFilePreload(turns, cfg.SessionID, preload)
 
 	chain := pipeline.ChainBetween(turns)
 	if code := runTiedPreflight(cfg); code != 0 {
@@ -115,7 +124,11 @@ func main() {
 		if sess != "" {
 			label = fmt.Sprintf(" (resume %s)", sess)
 		}
-		fmt.Fprintf(os.Stderr, "\n--- turn %d/%d%s ---\n", cfg.FirstTurn+i, originalTotal, label)
+		stub := ""
+		if t.StepStub != "" {
+			stub = " [" + t.StepStub + "]"
+		}
+		fmt.Fprintf(os.Stderr, "\n--- turn %d/%d%s%s ---\n", cfg.FirstTurn+i, originalTotal, label, stub)
 
 		argv := executor.AgentArgv(cfg.AgentPath, cfg.Workspace, cfg.Model, sess, t.Parts)
 		sid, code, err := executor.Run(ctx, argv, os.Stdout, os.Stderr)
@@ -142,7 +155,11 @@ func runDryRun(cfg *config.Config, turns []agentstream.Turn, chain []bool, first
 		if sess != "" {
 			label = fmt.Sprintf(" (resume %s)", sess)
 		}
-		fmt.Fprintf(os.Stderr, "\n--- turn %d/%d%s ---\n", firstTurn+i, originalTotal, label)
+		stub := ""
+		if t.StepStub != "" {
+			stub = " [" + t.StepStub + "]"
+		}
+		fmt.Fprintf(os.Stderr, "\n--- turn %d/%d%s%s ---\n", firstTurn+i, originalTotal, label, stub)
 
 		n := len(t.Parts)
 		for j, p := range t.Parts {
@@ -154,6 +171,7 @@ func runDryRun(cfg *config.Config, turns []agentstream.Turn, chain []bool, first
 		if i == 0 && len(turns) > 1 {
 			fmt.Fprintf(os.Stderr, "dry-run: chained turns use --resume with the session_id from the previous turn; each "+
 				"--feature-spec-batch-yaml record after a prior turn omits --resume (new session). "+
+				"--prompt-file content is prepended on every new session (not a separate turn). "+
 				"An initial --session-id only applies to turn 1.\n")
 		}
 		if i < len(chain) && chain[i] {
@@ -173,9 +191,20 @@ func formatShellArgv(argv []string) string {
 	return b.String()
 }
 
-// runTiedPreflight validates .cursor/mcp.json before invoking cursor agent (REQ-GOAGENT-CLI-CONFIG).
+// effectiveSkipTiedMCPPreflight resolves CLI defaults and env overrides (preflight is off by default).
+func effectiveSkipTiedMCPPreflight(cfg *config.Config) bool {
+	if os.Getenv("AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT") == "1" {
+		return true
+	}
+	if os.Getenv("AGENTSTREAM_TIED_MCP_PREFLIGHT") == "1" {
+		return false
+	}
+	return cfg.SkipTiedMCPPreflight
+}
+
+// runTiedPreflight optionally validates .cursor/mcp.json before invoking cursor agent (REQ-GOAGENT-CLI-CONFIG).
 func runTiedPreflight(cfg *config.Config) int {
-	if cfg.SkipTiedMCPPreflight || os.Getenv("AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT") == "1" {
+	if effectiveSkipTiedMCPPreflight(cfg) {
 		return 0
 	}
 	res, err := tiedpreflight.Run(cfg.Workspace, cfg.MCPJSONPath)
@@ -198,7 +227,7 @@ func runTiedPreflight(cfg *config.Config) int {
 func tiedPreflightLocateFailure(cfg *config.Config, err error) int {
 	if errors.Is(err, tiedpreflight.ErrNotFound) {
 		fmt.Fprintf(os.Stderr, "DIAGNOSTIC: tied-yaml preflight: no .cursor/mcp.json under workspace %s\n", cfg.Workspace)
-		fmt.Fprintf(os.Stderr, "DIAGNOSTIC: fix: run copy_files.sh on the client project, or pass --mcp-json PATH to a specific mcp.json\n")
+		fmt.Fprintf(os.Stderr, "DIAGNOSTIC: fix: add tied-yaml under mcpServers in .cursor/mcp.json if you use MCP in Cursor, or pass --mcp-json PATH; copy_files.sh installs .cursor/skills/tied-yaml only (no mcp.json)\n")
 		if cfg.DryRun {
 			fmt.Fprintf(os.Stderr, "DEBUG: dry-run: would prompt or exit non-zero (use -y or --skip-tied-mcp-preflight to bypass)\n")
 			return 0

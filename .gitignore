@@ -1,7 +1,8 @@
 .cursor/mcp.json
 .markscope-preview/
 docs/*26-??-??*.md
-docs/commit-message-format.md
+docs/agentstream-unitconv-general-transcript-difficulties.md
+docs/reddit*.md
 docs/visuals/visual-specs.md
 get-prompts.md
 logs/*.sh

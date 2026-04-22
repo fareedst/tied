@@ -17,13 +17,11 @@
 #   - Base files (.cursorrules, AGENTS.md, ai-principles.md) in project root
 #   - tied/methodology/: index YAMLs and inherited detail files (always overwritten)
 #   - tied/: project index YAMLs and requirements/, architecture-decisions/, implementation-decisions/ (create if missing, never overwrite)
-#   - Guide .md and tied/docs/ (copy when missing)
-#   - .cursor/ and .cursor/mcp.json with tied-yaml MCP server entry (real paths).
-#     On every run, env.TIED_BASE_PATH for tied-yaml is set to this target project's tied/
-#     (absolute path) so MCP writes never stay pointed at another clone (e.g. STDD).
-#     The server args path points at the *central* TIED repo MCP server on disk (single server path).
-#     After bootstrap, in Cursor run: agent enable tied-yaml — approve the project MCP
-#     config when prompted; type quit to exit the Agent CLI (enables the server in the IDE).
+#   - Guide .md and tied/docs/ (copy when missing). `tied-yaml-agent-index.md` is post-processed
+#     so links resolve from tied/docs/ (see sed block in the DOCS_TO_COPY loop).
+#   - .cursor/skills/tied-yaml/: Cursor Agent Skill for REQ/ARCH/IMPL YAML via tied-cli.sh
+#     (from .cursor/ if present, else from tools/bundled-tied-yaml-skill; overwritten each run).
+#     No .cursor/mcp.json is created or modified; use tied-cli + TIED_MCP_BIN to invoke the server.
 #
 # Designed for macOS (Bash 3.2+) and Ubuntu (Bash 5.x+).
 #
@@ -58,23 +56,6 @@ mkdir -p "${METHODOLOGY_DIR}/requirements"
 mkdir -p "${METHODOLOGY_DIR}/architecture-decisions"
 mkdir -p "${METHODOLOGY_DIR}/implementation-decisions"
 
-# Portable real path (macOS has no realpath by default)
-_realpath() {
-  python3 -c "import os, sys; print(os.path.realpath(sys.argv[1]))" "$1"
-}
-
-# --- TIED MCP server path (central, single repo) ---
-# The args path MUST point at the single TIED repo MCP server on disk so client projects
-# do not depend on a vendored copy of the server.
-TIED_SERVER_PATH="$(_realpath "${SCRIPT_DIR}/mcp-server/dist/index.js")"
-TIED_BASE_PATH_VALUE="$(_realpath "${TIED_DIR}")"
-if [[ ! -f "${TIED_SERVER_PATH}" ]]; then
-  echo "ERROR: Central TIED MCP server not built at ${TIED_SERVER_PATH}" >&2
-  echo "Build it in the TIED repo: cd \"${SCRIPT_DIR}/mcp-server\" && npm install && npm run build" >&2
-  exit 1
-fi
-
-MCP_JSON="${TARGET_PROJECT_DIR}/.cursor/mcp.json"
 HOOKS_JSON="${TARGET_PROJECT_DIR}/.cursor/hooks.json"
 
 if [[ -f "${SCRIPT_DIR}/.cursor/hooks.json" ]]; then
@@ -83,63 +64,36 @@ if [[ -f "${SCRIPT_DIR}/.cursor/hooks.json" ]]; then
   sed -i '' "s|${SCRIPT_DIR}/.cursor/logs|${TARGET_PROJECT_DIR}/.cursor/logs|g" "$HOOKS_JSON"
 fi
 
-_write_mcp_json() {
-  local dest="$1"
-  TIED_SERVER_PATH="${TIED_SERVER_PATH}" TIED_BASE_PATH_VALUE="${TIED_BASE_PATH_VALUE}" MCP_JSON_DEST="${dest}" python3 -c '
-import json, os
-server = os.environ["TIED_SERVER_PATH"]
-base = os.environ["TIED_BASE_PATH_VALUE"]
-entry = {"type": "stdio", "disabled": False, "command": "node", "args": [server], "env": {"TIED_BASE_PATH": base}}
-config = {"mcpServers": {"tied-yaml": entry}}
-with open(os.environ["MCP_JSON_DEST"], "w") as f:
-    json.dump(config, f, indent=2)
-'
-}
-
-if [[ ! -f "${MCP_JSON}" ]]; then
-  _write_mcp_json "${MCP_JSON}"
-  echo "Created ${MCP_JSON} with tied-yaml MCP server entry."
-else
-  if command -v jq &>/dev/null; then
-    tmp=$(mktemp)
-    if jq --arg server "${TIED_SERVER_PATH}" --arg base "${TIED_BASE_PATH_VALUE}" \
-      '.mcpServers |= (.["tied-yaml"] = ((.["tied-yaml"] // {}) | .command = "node" | .args = [$server] | .env = ((.env // {}) + {"TIED_BASE_PATH": $base})))' \
-      "${MCP_JSON}" > "${tmp}"; then
-      mv "${tmp}" "${MCP_JSON}"
-      echo "Updated ${MCP_JSON}: ensured tied-yaml uses this project's TIED_BASE_PATH and server path."
-    else
-      rm -f "${tmp}"
-      echo "DEBUG: Invalid JSON in ${MCP_JSON}; overwriting with minimal config." >&2
-      _write_mcp_json "${MCP_JSON}"
-      echo "Created ${MCP_JSON} with tied-yaml MCP server entry."
-    fi
-  else
-    tmp=$(mktemp)
-    if TIED_SERVER_PATH="${TIED_SERVER_PATH}" TIED_BASE_PATH_VALUE="${TIED_BASE_PATH_VALUE}" python3 -c "
-import json, os, sys
-try:
-    with open(\"${MCP_JSON}\") as f:
-        config = json.load(f)
-except (json.JSONDecodeError, IOError):
-    sys.exit(1)
-config.setdefault('mcpServers', {})
-ty = config['mcpServers'].setdefault('tied-yaml', {})
-ty['command'] = 'node'
-ty['args'] = [os.environ['TIED_SERVER_PATH']]
-ty.setdefault('env', {})
-ty['env']['TIED_BASE_PATH'] = os.environ['TIED_BASE_PATH_VALUE']
-with open(\"${tmp}\", 'w') as f:
-    json.dump(config, f, indent=2)
-" 2>/dev/null; then
-      mv "${tmp}" "${MCP_JSON}"
-      echo "Updated ${MCP_JSON}: ensured tied-yaml uses this project's TIED_BASE_PATH and server path."
-    else
-      rm -f "${tmp}"
-      echo "DEBUG: Invalid JSON in ${MCP_JSON}; overwriting with minimal config." >&2
-      _write_mcp_json "${MCP_JSON}"
-      echo "Created ${MCP_JSON} with tied-yaml MCP server entry."
-    fi
+# --- Cursor Agent Skill: tied-yaml (CLI to MCP server; no mcp.json) ---
+# Prefer .cursor/skills/tied-yaml (dev checkout); else tools/bundled-tied-yaml-skill (always in git) so
+# copy_files always installs .cursor/skills/tied-yaml/.../tied-cli.sh for client projects.
+TIED_YAML_SKILL_PREFERRED="${SCRIPT_DIR}/.cursor/skills/tied-yaml"
+TIED_YAML_SKILL_BUNDLED="${SCRIPT_DIR}/tools/bundled-tied-yaml-skill"
+TIED_YAML_SKILL_DEST="${CURSOR_DIR}/skills/tied-yaml"
+install_tied_yaml_skill() {
+  local _src="$1"
+  mkdir -p "${CURSOR_DIR}/skills"
+  rm -rf "${TIED_YAML_SKILL_DEST}"
+  cp -R "${_src}" "${TIED_YAML_SKILL_DEST}"
+  chmod -R a+rX "${TIED_YAML_SKILL_DEST}"
+  if [[ -f "${TIED_YAML_SKILL_DEST}/scripts/tied-cli.sh" ]]; then
+    chmod a+x "${TIED_YAML_SKILL_DEST}/scripts/tied-cli.sh"
   fi
+  echo "Copied tied-yaml Cursor skill into ${TIED_YAML_SKILL_DEST} (from ${_src})."
+}
+if [[ -d "${TIED_YAML_SKILL_PREFERRED}" ]]; then
+  install_tied_yaml_skill "${TIED_YAML_SKILL_PREFERRED}"
+elif [[ -d "${TIED_YAML_SKILL_BUNDLED}" ]]; then
+  install_tied_yaml_skill "${TIED_YAML_SKILL_BUNDLED}"
+else
+  echo "ERROR: tied-yaml skill not found. Expected one of:" >&2
+  echo "  ${TIED_YAML_SKILL_PREFERRED}  (full Cursor skill in TIED source)" >&2
+  echo "  ${TIED_YAML_SKILL_BUNDLED}  (bundled copy; use a complete TIED repository checkout)" >&2
+  echo "Recovery: re-run this script from a TIED tree that includes tools/bundled-tied-yaml-skill/, or" >&2
+  echo "  copy a tied-yaml skill into .cursor/skills/ manually, then re-run:" >&2
+  echo "  cp -R <TIED_repo>/tools/bundled-tied-yaml-skill .cursor/skills/tied-yaml" >&2
+  echo "TIED project YAML: use a built mcp-server dist/index.js with TIED_MCP_BIN and" >&2
+  echo "  TIED_BASE_PATH, or follow tied/docs/using-tied-without-mcp.md for the manual workflow." >&2
 fi
 
 BASE_FILES=(
@@ -209,8 +163,6 @@ TEMPLATE_FILES=(
   "implementation-decisions.md"
   "processes.md"
   "semantic-tokens.md"
-  "tasks.md"
-  "commit-guidelines.md"
 )
 guide_copied=0
 for f in "${TEMPLATE_FILES[@]}"; do
@@ -229,11 +181,14 @@ echo "Copied ${guide_copied} of ${#TEMPLATE_FILES[@]} guide/template .md files i
 
 # Copy methodology docs into tied/docs/ (referenced by AGENTS.md, ai-principles.md, processes.md).
 # The agent-req-implementation-checklist.yaml is the trackable checklist; copy to a unique file per request (see its header).
-# CITDP paths in that checklist refer to the client project's docs/citdp/ (client workspace root), not the TIED source repo path.
+# CITDP paths in that checklist refer to the client project's tied/citdp/ (client workspace root), not the TIED source repo path.
 mkdir -p "${TIED_DIR}/docs"
 DOCS_TO_COPY=(
   "adding-tied-mcp-and-invoking-passes.md"
   "agent-req-implementation-checklist.md"
+  "citdp-policy.md"
+  "citdp-record-template.yaml"
+  "commit-guidelines.md"
   "agent-req-implementation-checklist.yaml"
   "ai-agent-tied-mcp-usage.md"
   "yaml-update-mcp-runbook.md"
@@ -241,12 +196,12 @@ DOCS_TO_COPY=(
   "implementation-order.md"
   "LEAP.md"
   "methodology-diagrams.md"
-  "migration-methodology-project-yaml.md"
   "new-feature-process.md"
   "pseudocode-validation-checklist.yaml"
   "pseudocode-writing-and-validation.md"
   "requirement-list-state-guide-agent-workflow.md"
   "tied-first-implementation-procedure.md"
+  "tied-yaml-agent-index.md"
   "using-tied-without-mcp.md"
 )
 docs_count=0
@@ -258,6 +213,21 @@ for f in "${DOCS_TO_COPY[@]}"; do
     ((docs_total++)) || true
     if [[ ! -f "${dest}" ]]; then
       cp -p "${src}" "${dest}"
+      # docs/*.md uses ../ for repo-root paths; under tied/docs/ those need ../../ .
+      # ../tied/foo -> ../foo (already under tied/). Keep sibling ./ links unchanged.
+      if [[ "${f}" == "tied-yaml-agent-index.md" ]]; then
+        # Regenerate this repo's tied/docs mirror after editing docs/tied-yaml-agent-index.md:
+        #   run the same sed -e chain below on "${SCRIPT_DIR}/docs/tied-yaml-agent-index.md" into "${SCRIPT_DIR}/tied/docs/tied-yaml-agent-index.md"
+        _tied_yaml_idx_tmp="${dest}.tmp.$$"
+        sed \
+          -e 's|](\.\./tied/docs/using-tied-without-mcp\.md)|](./using-tied-without-mcp.md)|g' \
+          -e 's|](\.\./tied/|](../|g' \
+          -e 's|](\.\./\.cursor/|](../../.cursor/|g' \
+          -e 's|](\.\./AGENTS\.md)|](../../AGENTS.md)|g' \
+          -e 's|](\.\./mcp-server/|](../../mcp-server/|g' \
+          -e 's|](\.\./ai-principles\.md)|](../../ai-principles.md)|g' \
+          "${dest}" > "${_tied_yaml_idx_tmp}" && mv "${_tied_yaml_idx_tmp}" "${dest}"
+      fi
       ((docs_count++)) || true
     fi
   fi
@@ -277,6 +247,8 @@ if [[ -f "${SCRIPT_DIR}/detail-files-schema.md" ]]; then
 fi
 
 # --- Methodology: implementation decision detail files into tied/methodology/ (ALWAYS OVERWRITE) ---
+# Empty template subdirs: without nullglob, bash may pass a literal *.yaml path.
+shopt -s nullglob
 IMPL_TEMPLATE_DIR="${TEMPLATES_DIR}/implementation-decisions"
 if [[ ! -d "${IMPL_TEMPLATE_DIR}" ]]; then
   IMPL_TEMPLATE_DIR="${SCRIPT_DIR}/implementation-decisions"
@@ -338,24 +310,4 @@ if [[ -d "${REQ_TEMPLATE_DIR}" ]]; then
     echo "Copied ${req_count} of ${req_total} methodology requirement(s) into ${METHODOLOGY_DIR}/requirements (overwritten)."
   fi
 fi
-
-# Copy migration guides (reference documents)
-# MIGRATION_GUIDES=(
-#   "migrate-implementation-decisions.md"
-#   "migrate-architecture-decisions.md"
-#   "migrate-semantic-token-format.md"
-#   "migrate-requirements.md"
-# )
-MIGRATION_GUIDES=()
-mig_copied=0
-for guide in "${MIGRATION_GUIDES[@]}"; do
-  src="${SCRIPT_DIR}/${guide}"
-  dest="${TIED_DIR}/${guide}"
-  if [[ -f "${src}" && ! -f "${dest}" ]]; then
-    cp -p "${src}" "${dest}"
-    ((mig_copied++)) || true
-  fi
-done
-if [[ ${#MIGRATION_GUIDES[@]} -gt 0 ]]; then
-  echo "Copied ${mig_copied} of ${#MIGRATION_GUIDES[@]} migration guides into ${TIED_DIR}."
-fi
+shopt -u nullglob

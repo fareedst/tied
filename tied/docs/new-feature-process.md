@@ -116,14 +116,14 @@ flowchart TB
   - **Document** the occurrence (what was done and why MCP was not used).
   - **Report** it (e.g. in session notes or implementation decisions) so it can be considered for new MCP tooling.
   - **Validate and pretty-print** any manual YAML edits:  
-    `yq -i -P <file>.yaml` (run from repo root or correct path).
+    `lint_yaml <file>.yaml` (run from repo root or correct path; see `processes.md` `[PROC-YAML_EDIT_LOOP]`). Use **`lint_yaml`**—do not use raw multi-argument `yq` pretty-print, which merges YAML documents and corrupts files.
 
 ---
 
 ## 3. Steps (mapping to PROC-TIED_DEV_CYCLE)
 
 1. **Plan from TIED** — Read existing REQ, ARCH, IMPL for the feature scope. Use each IMPL's `essence_pseudocode` as the full prescription; resolve all logical/flow issues there before tests or code. Identify required new or changed REQ/ARCH/IMPL.
-2. **Author TIED docs** — Update or create REQ, ARCH, IMPL. Ensure IMPL `essence_pseudocode` is complete with block-level comments naming REQ/ARCH/IMPL and how the block implements them. Use tied-yaml tools; document and validate any direct file edits with `yq -i -P`.
+2. **Author TIED docs** — Update or create REQ, ARCH, IMPL. Ensure IMPL `essence_pseudocode` is complete with block-level comments naming REQ/ARCH/IMPL and how the block implements them. Use tied-yaml tools; document and validate any direct file edits with `lint_yaml` per changed file (see `processes.md` `[PROC-YAML_EDIT_LOOP]`).
 3. **Add and align tests** — Add or update tests to match IMPL. Test blocks must carry the same REQ/ARCH/IMPL comments as the corresponding IMPL blocks. Ensure testable logic is not in entry points; extract to modules if needed.
 4. **Implement to tests (TDD)** — Implement in testable modules; entry points only call into them. Every source block carries the same REQ/ARCH/IMPL comments as in the IMPL. Iterate until tests pass.
 5. **Implement minimal glue** — Implement only minimal glue (entry points, wiring). Non-trivial logic in glue must be justified in IMPL (`e2e_only_reason` or `test_coverage_note`).
@@ -137,4 +137,4 @@ flowchart TB
 8. **Unit tests** — If any unit tests are missing, add them and ensure they reference the appropriate REQ/ARCH/IMPL tokens.
 9. **E2E tests** — Recommend e2e tests where appropriate (critical user journeys). After approval, implement them.
 10. **README and CHANGELOG** — Update [README.md](../README.md) and [CHANGELOG.md](../CHANGELOG.md) for all changes in the session.
-11. **Commit** — Write a single commit message for the entire session **per [PROC-COMMIT_MESSAGES](tied/processes.md)**. In projects set up with TIED, use **tied/commit-guidelines.md** as the quick reference (see also [CONTRIBUTING.md](../CONTRIBUTING.md) for the TIED repo). Use the format and types defined in tied/processes.md; reference main REQ/ARCH/IMPL tokens in the body or footer when relevant.
+11. **Commit** — Write a single commit message for the entire session **per [PROC-COMMIT_MESSAGES](../processes.md)**. In projects set up with TIED, use **[commit-guidelines.md](commit-guidelines.md)** as the quick reference (see also [CONTRIBUTING.md](../../CONTRIBUTING.md) for the TIED repo). Use the format and types defined in tied/processes.md; reference main REQ/ARCH/IMPL tokens in the body or footer when relevant.

@@ -8,35 +8,36 @@
 # TDD-only loop.
 name: documentation_first_loop
 description: |
-  Documentation-first subset extracted from docs/agent-req-implementation-checklist.yaml. Run from S01 through S06.6; exit when all REQ/ARCH/IMPL records are complete, token-commented, validated, and persisted. No S07–S16.
+  Documentation-first subset extracted from docs/agent-req-implementation-checklist.yaml. Run from session-bootstrap through persist-implementation-records; exit when all REQ/ARCH/IMPL records are complete, token-commented, validated, and persisted. No steps after persist-implementation-records (risk-assessment onward).
 source_document: docs/agent-req-implementation-checklist.yaml
 process_token: '[PROC-AGENT_REQ_CHECKLIST]'
-version: 1.0.0
-last_updated: "2026-03-18"
+version: 1.2.0
+last_updated: "2026-04-21"
 scope:
   - session bootstrap and governing docs
+  - sponsor intent translated to checklist phases (when agentstream passes FEATURE_* vars)
   - change definition and impact analysis (CITDP)
   - REQ/ARCH/IMPL authoring and traceability
   - IMPL pseudo-code: contracts, insufficient/contradictory spec resolution, block token comments
   - pseudo-code validation ([PROC-PSEUDOCODE_VALIDATION])
-  - persist IMPL index and detail; SUB-YAML on all changed files
+  - persist IMPL index and detail; sub-yaml-edit-loop on all changed files
 exit_when:
   - All REQ/ARCH/IMPL records for the change are complete and persisted.
   - IMPL essence_pseudocode is token-commented and passes pseudo-code validation.
-  - All changed YAML files have passed SUB-YAML (yq -i -P).
+  - All changed YAML files have passed sub-yaml-edit-loop (lint_yaml + tied_validate_consistency per runbook).
 excluded_from_this_subset:
-  - S07 Risk Analysis
-  - S08 Test Determination and Planning
-  - S09.RED / S09.GREEN / S09.REFACTOR / S09.SYNC (unit TDD)
-  - S10 Composition Testing
-  - S11 E2E Testing
-  - S12 Final Validation
-  - S13 Sync TIED to Code and Tests
-  - S14 Update README and CHANGELOG
-  - S15 Persist CITDP Record
-  - S16 Commit
+  - risk-assessment
+  - test-strategy
+  - unit-test-red / unit-test-green / unit-refactor / three-way-alignment-unit (unit TDD)
+  - composition-integration
+  - end-to-end-ui
+  - verification-gate
+  - sync-tied-stack
+  - user-facing-release-notes
+  - persist-citdp-record
+  - traceable-commit
 steps:
-  - id: S01
+  - slug: session-bootstrap
     title: Session Bootstrap
     stage: bootstrap
     goals: Confirm access to governing TIED documents; establish session context.
@@ -45,7 +46,16 @@ steps:
       - Read ai-principles.md; review semantic-tokens, architecture-decisions, implementation-decisions (YAML + guides).
       - Confirm TIED MCP availability if applicable; understand priority order.
     outcomes: Session context established; governing docs read.
-  - id: S02
+  - slug: translate-sponsor-intent
+    title: Map sponsor wording to checklist phases (planning only)
+    stage: bootstrap
+    goals: Treat FEATURE_* checklist vars as informal sponsor context; produce a numbered map to checklist phases—not code.
+    tasks:
+      - 'Sponsor context (non-directive): {{CHANGE_TITLE}} | Goal: {{FEATURE_GOAL}} | Behavior: {{FEATURE_BEHAVIOR_SUMMARY}}'
+      - Map intent onto phases through persist-implementation-records (documentation-first scope); no implementation files or automated tests here.
+      - Next step formalizes this into change-definition.
+    outcomes: Sponsor wording mapped to phases; ready for change-definition.
+  - slug: change-definition
     title: Define Change or New Requirement
     stage: citdp
     goals: Articulate current/desired/unchanged behavior, non-goals, success criteria.
@@ -53,7 +63,7 @@ steps:
       - State current behavior (or "none" for new requirement).
       - State desired behavior, unchanged behavior, non-goals, success criteria.
     outcomes: Clear change definition for CITDP.
-  - id: S03
+  - slug: impact-discovery
     title: Impact Analysis and IMPL Discovery
     stage: citdp
     goals: Build impact map and IMPL inventory table.
@@ -62,59 +72,59 @@ steps:
       - IMPL Discovery A1–A3: load IMPL details, discover related IMPLs, build IMPL inventory table.
       - Stop expansion when set stabilizes.
     outcomes: Impact map and IMPL inventory ready.
-  - id: S04
+  - slug: author-requirement
     title: Author/Update REQ
     stage: authoring
     goals: Create or update requirement record with full traceability.
     tasks:
       - Create/update requirements.yaml and REQ detail file; register token in semantic-tokens.yaml.
-      - CALL SUB-YAML for each changed file.
+      - CALL sub-yaml-edit-loop for each changed file.
     outcomes: REQ record and token registered; YAML validated.
-  - id: S05
+  - slug: author-architecture
     title: Author/Update ARCH
     stage: authoring
     goals: Create or update architecture decision(s) fulfilling the REQ.
     tasks:
       - Create/update architecture-decisions.yaml and ARCH detail; register tokens.
-      - CALL SUB-YAML for each changed file.
+      - CALL sub-yaml-edit-loop for each changed file.
     outcomes: ARCH records with REQ cross-refs; YAML validated.
-  - id: S06.1
+  - slug: catalog-pseudocode-contracts
     title: Read and Catalog Contracts (Phase B)
     stage: impl
     goals: Catalog IMPL pseudo-code contracts (INPUT/OUTPUT/DATA, procedures, branches, loops).
     outcomes: Contracts cataloged.
-  - id: S06.2
+  - slug: flag-insufficient-specs
     title: Identify Insufficient Specs
     stage: impl
     goals: Flag missing INPUT/OUTPUT, undefined procedures, missing token comments, etc.
     outcomes: All insufficient specs flagged.
-  - id: S06.3
+  - slug: flag-contradictory-specs
     title: Identify Contradictory Specs
     stage: impl
     goals: Compare across IMPLs for conflicts (DATA, ordering, OUTPUT types).
     outcomes: Contradictions identified; refactor if irreconcilable.
-  - id: S06.4
+  - slug: resolve-pseudocode
     title: Resolve and Update
     stage: impl
-    goals: Resolve S06.2–S06.3 issues; update pseudo-code; GOTO S05/S04 if scope changes.
+    goals: Resolve flag-insufficient-specs / flag-contradictory-specs issues; update pseudo-code; GOTO author-architecture / author-requirement if scope changes.
     outcomes: All issues resolved; contracts compatible.
-  - id: S06.5
+  - slug: apply-token-comments
     title: Apply Block Token Comments (Phase C)
     stage: impl
     goals: Apply [PROC-IMPL_PSEUDOCODE_TOKENS] to every block; document cross-IMPL dependencies.
     outcomes: Every block has token comments; dependencies documented.
-  - id: S06.5a
+  - slug: gate-pseudocode-validation
     title: Run Pseudo-Code Validation
     stage: impl
-    goals: Run SUB-PSEUDOCODE-VALIDATE; satisfy gating rules or document waiver.
+    goals: Run sub-pseudocode-validation-pass; satisfy gating rules or document waiver.
     tasks:
-      - CALL SUB-PSEUDOCODE-VALIDATE per tied/docs/pseudocode-validation-checklist.yaml.
-      - Do not proceed to S06.6 until gating rules pass or waiver documented.
+      - CALL sub-pseudocode-validation-pass per tied/docs/pseudocode-validation-checklist.yaml.
+      - Do not proceed to persist-implementation-records until gating rules pass or waiver documented.
     outcomes: Pseudo-code validation passed; gating satisfied.
-  - id: S06.6
+  - slug: persist-implementation-records
     title: Persist IMPL Records
     stage: impl
-    goals: Write IMPL index and detail files; register tokens; SUB-YAML.
+    goals: Write IMPL index and detail files; register tokens; sub-yaml-edit-loop.
     outcomes: IMPL pseudo-code persisted; all YAML validated. EXIT documentation-first subset.
 references:
   - docs/agent-req-implementation-checklist.md

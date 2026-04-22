@@ -390,7 +390,7 @@ PROC-AGENT_REQ_CHECKLIST:
   type: PROC
   name: Agent requirement implementation checklist
   status: Active
-  description: 'Unified LEAD+TIED checklist (S01–S16) for REQ implementation: pseudo-code, TDD, composition, E2E decision, validation; see tied/docs/agent-req-implementation-checklist.md'
+  description: 'Unified LEAD+TIED checklist (session-bootstrap–traceable-commit) for REQ implementation: pseudo-code, TDD, composition, E2E decision, validation; see tied/docs/agent-req-implementation-checklist.md'
   cross_references:
     - PROC-TIED_DEV_CYCLE
     - PROC-IMPL_PSEUDOCODE_TOKENS
@@ -635,21 +635,6 @@ REQ-GOAGENT-AGENT-EXECUTOR:
   metadata:
     registered: "2026-03-27"
     last_updated: "2026-03-27"
-REQ-GOAGENT-BASH-HELLO-SCRIPT:
-  type: REQ
-  name: Bash Hello World script for agentstream validation
-  category: Functional
-  status: Active
-  description: Root hello_world.sh or hello.sh strict Bash smoke for agentstream and checklist validation; Go unit test validates stdout and exit 0 where Go tree exists
-  cross_references:
-    - ARCH-GOAGENT-BASH-HELLO-SCRIPT
-    - IMPL-GOAGENT-BASH-HELLO-SCRIPT
-  source_index: requirements.yaml
-  detail_file: requirements/REQ-GOAGENT-BASH-HELLO-SCRIPT.yaml
-  metadata:
-    registered: "2026-03-30"
-    last_updated: "2026-03-30T18:00:00.000Z"
-    reason: S13 [PROC-AGENT_REQ_CHECKLIST] registry sync with requirements index traceability.tests
 ARCH-GOAGENT-LIB-LAYERING:
   type: ARCH
   name: Go agentstream package layering and import rules
@@ -742,20 +727,6 @@ ARCH-GOAGENT-EXECUTOR:
   metadata:
     registered: "2026-03-27"
     last_updated: "2026-03-27"
-ARCH-GOAGENT-BASH-HELLO-SCRIPT:
-  type: ARCH
-  name: Root Bash smoke script for agent validation
-  status: Active
-  description: hello_world.sh or hello.sh at project/workspace root; Go smoke test in hello_world_script_entry_test.go where Go tree exists
-  cross_references:
-    - REQ-GOAGENT-BASH-HELLO-SCRIPT
-    - IMPL-GOAGENT-BASH-HELLO-SCRIPT
-  source_index: architecture-decisions.yaml
-  detail_file: architecture-decisions/ARCH-GOAGENT-BASH-HELLO-SCRIPT.yaml
-  metadata:
-    registered: "2026-03-30"
-    last_updated: "2026-03-30T18:00:00.000Z"
-    reason: S13 [PROC-AGENT_REQ_CHECKLIST] registry sync with architecture index traceability.tests
 IMPL-GOAGENT-LIB-TYPES:
   type: IMPL
   name: agentstream Turn and SessionID shared types
@@ -861,17 +832,3 @@ IMPL-GOAGENT-EXECUTOR:
   metadata:
     registered: "2026-03-27"
     last_updated: "2026-03-27"
-IMPL-GOAGENT-BASH-HELLO-SCRIPT:
-  type: IMPL
-  name: Root hello_world.sh or hello.sh and Go smoke test for SCRIPT_ENTRY
-  status: Active
-  description: COMPOSE RunScriptEntrySmokeFromRoot; ResolveHelloScriptBasename; BashScriptStdout; AssertScriptEntryStdoutContract; hello_world.sh; five Go tests incl. TestCOMPOSE; module stdd_hello_world_smoke
-  cross_references:
-    - ARCH-GOAGENT-BASH-HELLO-SCRIPT
-    - REQ-GOAGENT-BASH-HELLO-SCRIPT
-  source_index: implementation-decisions.yaml
-  detail_file: implementation-decisions/IMPL-GOAGENT-BASH-HELLO-SCRIPT.yaml
-  metadata:
-    registered: "2026-03-30"
-    last_updated: "2026-03-30T18:00:00.000Z"
-    reason: S13 [PROC-AGENT_REQ_CHECKLIST] registry sync; IMPL detail metadata + REQ/ARCH index alignment

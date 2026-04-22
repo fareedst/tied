@@ -14,7 +14,7 @@ REQ-TIED_SETUP:
       - Consistent development methodology
       - AI-friendly documentation structure
   satisfaction_criteria:
-    - criterion: tied/ directory exists with proper structure
+    - criterion: ./tied/ directory exists with proper structure
     - criterion: All required documentation files exist and are populated from templates
       metric: requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml, semantic-tokens.md, processes.md all present
     - criterion: Base files properly configured
@@ -232,7 +232,7 @@ REQ-LEAP_PROPOSAL_QUEUE:
     last_updated:
       date: 2026-03-28T00:00:00.000Z
       author: AI Agent
-      reason: S13 [PROC-AGENT_REQ_CHECKLIST] TIED sync — traceability.tests include leap-proposal-mcp.test.ts
+      reason: sync-tied-stack [PROC-AGENT_REQ_CHECKLIST] TIED sync — traceability.tests include leap-proposal-mcp.test.ts
     last_validated:
       date: 2026-03-26T00:00:00.000Z
       validator: AI Agent
@@ -436,8 +436,8 @@ REQ-GOAGENT-CLI-CONFIG:
     benefits:
       - One entry point; preview mode; order filter synonyms
   satisfaction_criteria:
-    - criterion: Flags per consolidated spec (dry-run, session-id, workspace, model, checklist, optional --lead-checklist-from-step / --lead-checklist-to-step with checklist path, prompt sources, feature batch, preview, verify-session, help)
-    - criterion: Defaults for workspace, checklist path discovery, optional preload and prompts/all.yaml when present
+    - criterion: 'Flags per consolidated spec (dry-run, session-id, workspace, model, checklist, optional --lead-checklist-from-step / --lead-checklist-to-step with checklist path, prompt sources, feature batch, preview, verify-session, optional tied-yaml MCP preflight: --tied-mcp-preflight, --skip-tied-mcp-preflight, -y/--yes, help)'
+    - criterion: Defaults for workspace, checklist path discovery, optional preload and prompts/all.yaml when present; tied-yaml mcp.json preflight off by default unless --tied-mcp-preflight or AGENTSTREAM_TIED_MCP_PREFLIGHT=1
     - criterion: Validates paths, positional vs -b conflict, order filter requires feature batch paths (except preview-only); checklist step bounds require --lead-checklist-yaml when repo default would be empty
   validation_criteria:
     - method: Manual CLI smoke
@@ -461,14 +461,14 @@ REQ-GOAGENT-CLI-CONFIG:
   detail_file: requirements/REQ-GOAGENT-CLI-CONFIG.yaml
   metadata:
     created:
-      date: 2026-03-27T00:00:00.000Z
+      date: "2026-03-27T00:00:00.000Z"
       author: AI Agent
     last_updated:
-      date: 2026-03-30T00:00:00.000Z
+      date: "2026-04-18T00:00:00.000Z"
       author: AI Agent
-      reason: Optional lead checklist step id bounds CLI flags
+      reason: Optional tied-yaml MCP preflight default off; CLI/env flags documented
     last_validated:
-      date: 2026-03-27T00:00:00.000Z
+      date: "2026-03-27T00:00:00.000Z"
       validator: AI Agent
       result: pass
 REQ-GOAGENT-TEXT-SOURCES:
@@ -703,59 +703,6 @@ REQ-GOAGENT-AGENT-EXECUTOR:
       date: 2026-03-27T00:00:00.000Z
       validator: AI Agent
       result: pass
-REQ-GOAGENT-BASH-HELLO-SCRIPT:
-  name: Bash Hello World script for agentstream validation
-  category: Functional
-  priority: P2
-  status: Implemented
-  rationale:
-    why: Agent and CI harnesses need a zero-dependency script to confirm shell execution and workspace wiring without pulling in Go or Ruby test stacks.
-    problems_solved:
-      - No standard trivial executable in repo for smoke checks
-    benefits:
-      - Fast, portable check; no build step; clear success criteria
-  satisfaction_criteria:
-    - criterion: Script exists at project or workspace root as hello_world.sh or hello.sh (or equivalent documented root script) with shebang /usr/bin/env bash
-    - criterion: Running the script prints exactly one line "Hello World!" to stdout with trailing newline and exits 0
-    - criterion: Script enables strict mode (set -euo pipefail) and succeeds on the happy path
-  validation_criteria:
-    - method: Automated tests
-      coverage: hello_world_script_entry_test.go — OUTPUT contract, stdout/exit, RESOLVE missing, bash nonzero, COMPOSE RunScriptEntrySmokeFromRoot (REQ-GOAGENT-BASH-HELLO-SCRIPT)
-    - method: TIED consistency
-      coverage: tied_validate_consistency after S13 sync
-  traceability:
-    architecture:
-      - ARCH-GOAGENT-BASH-HELLO-SCRIPT
-    implementation:
-      - IMPL-GOAGENT-BASH-HELLO-SCRIPT
-    tests:
-      - hello_world_script_entry_test.go TestSCRIPT_ENTRY_OUTPUT_exactly_one_line_REQ_GOAGENT_BASH_HELLO_SCRIPT
-      - hello_world_script_entry_test.go TestSCRIPT_ENTRY_REQ_GOAGENT_BASH_HELLO_SCRIPT_stdout_and_exit
-      - hello_world_script_entry_test.go TestRESOLVE_HELLO_SCRIPT_BASENAME_missing_REQ_GOAGENT_BASH_HELLO_SCRIPT
-      - hello_world_script_entry_test.go TestUNIT_TEST_SCRIPT_ENTRY_bash_nonzero_REQ_GOAGENT_BASH_HELLO_SCRIPT
-      - hello_world_script_entry_test.go TestCOMPOSE_RunScriptEntrySmokeFromRoot_REQ_GOAGENT_BASH_HELLO_SCRIPT
-    code_annotations:
-      - REQ-GOAGENT-BASH-HELLO-SCRIPT
-  related_requirements:
-    depends_on:
-      - REQ-TIED_SETUP
-    related_to:
-      - REQ-ATDD-E2E-AGENT_STREAM
-      - REQ-GOAGENT-AGENT-EXECUTOR
-    supersedes: []
-  detail_file: requirements/REQ-GOAGENT-BASH-HELLO-SCRIPT.yaml
-  metadata:
-    created:
-      date: 2026-03-30T00:00:00.000Z
-      author: AI Agent
-    last_updated:
-      date: 2026-03-30T18:00:00.000Z
-      author: AI Agent
-      reason: S13 [PROC-AGENT_REQ_CHECKLIST] TIED sync — index traceability.tests aligned with hello_world_script_entry_test.go full suite and IMPL detail
-    last_validated:
-      date: 2026-03-30T18:00:00.000Z
-      validator: AI Agent
-      result: pass
 REQ-CONFIG_DISCOVERY_LOCAL_LAYER:
   name: Project-local configuration replaces built-in defaults for layered discovery
   category: Functional
@@ -803,7 +750,7 @@ REQ-CONFIG_DISCOVERY_LOCAL_LAYER:
     last_updated:
       date: 2026-03-28T00:00:00.000Z
       author: AI Agent
-      reason: S06.4 validation_criteria scope vs agentstream CLI
+      reason: resolve-pseudocode validation_criteria scope vs agentstream CLI
     last_validated:
       date: 2026-03-29T00:00:00.000Z
       validator: AI Agent

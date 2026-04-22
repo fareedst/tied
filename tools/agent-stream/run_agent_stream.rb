@@ -123,7 +123,7 @@ def run_stream(cmd)
 end
 
 begin
-  initial_cli_session, workspace, turns, dry_run, chain_between = AgentStreamArgv.parse_argv(ARGV)
+  initial_cli_session, workspace, turns, dry_run, chain_between, preload_parts = AgentStreamArgv.parse_argv(ARGV)
 rescue ArgumentError => e
   warn e.message
   AgentStreamArgv.usage
@@ -140,14 +140,21 @@ turns.each_with_index do |prompt_parts, idx|
                       running
                     end
 
+  new_session = session_for_cmd.nil? || session_for_cmd == ''
+  parts = if !preload_parts.empty? && new_session
+            preload_parts + prompt_parts
+          else
+            prompt_parts
+          end
+
   label = session_for_cmd ? " (resume #{session_for_cmd})" : ' (new session)'
   $stderr.puts "\n--- turn #{idx + 1}/#{turns.size}#{label} ---\n"
 
-  cmd = agent_command(session_for_cmd, workspace, prompt_parts)
+  cmd = agent_command(session_for_cmd, workspace, parts)
 
   if dry_run
-    n = prompt_parts.size
-    prompt_parts.each_with_index do |part, i|
+    n = parts.size
+    parts.each_with_index do |part, i|
       puts "--- argv part #{i + 1}/#{n} ---"
       puts part
     end
@@ -155,8 +162,10 @@ turns.each_with_index do |prompt_parts, idx|
     if idx.zero? && turns.size > 1
       warn 'dry-run: chained turns use --resume with the session_id from the previous turn; each ' \
            '--feature-spec-batch-yaml record after a prior turn omits --resume (new session). ' \
+           '--prompt-file content is prepended on every new session (not a separate turn). ' \
            'An initial --session-id only applies to turn 1.'
     end
+    running = 'dry-run-session-placeholder'
     next
   end
 

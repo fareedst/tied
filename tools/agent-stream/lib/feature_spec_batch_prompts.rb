@@ -61,6 +61,13 @@ module FeatureSpecBatchPrompts
     lines << goal.to_s.strip
     lines << ''
 
+    behavior = record['behavior'] || record[:behavior]
+    if behavior && !behavior.to_s.strip.empty?
+      lines << '## Behavior'
+      lines << behavior.to_s.strip
+      lines << ''
+    end
+
     append_section(lines, '## Rules', list_items(record['rules'] || record[:rules]))
     append_examples(lines, record['examples'] || record[:examples])
     append_section(lines, '## Boundary conditions', list_items(record['boundary_conditions'] || record[:boundary_conditions]))

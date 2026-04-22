@@ -1,6 +1,6 @@
 # Application Pseudo-Code Validation Checklist
 # Canonical checklist for validating IMPL essence_pseudocode in TIED projects.
-# Reference: tied/docs/pseudocode-writing-and-validation.md
+# Reference: ./tied/docs/pseudocode-writing-and-validation.md
 # Process token: [PROC-PSEUDOCODE_VALIDATION]
 name: application_pseudocode_validation_checklist
 description: |
@@ -319,7 +319,34 @@ minimum_gating_rules:
   - every implementation block has success-path coverage
   - every declared failure mode has coverage when failure is possible
   - diagnostics include source locations where available
+  - note: Full rules above assume pseudo-code drives or coexists with executable tests. For pre-test gates see tailoring.profiles.agent_req_checklist_pre_red.
 tailoring:
+  profiles:
+    agent_req_checklist_pre_red:
+      summary: Pre-RED gate for [PROC-AGENT_REQ_CHECKLIST] gate-pseudocode-validation before unit-test-red.
+      applies_when:
+        - IMPL essence_pseudocode describes implementation contracts only
+        - no automated tests exist yet for this REQ/IMPL slice
+      deferred_minimum_rules:
+        - every requirement tag is covered by at least one test
+        - every implementation block has success-path coverage
+        - every declared failure mode has coverage when failure is possible
+      deferred_until: After executable tests exist—verification-gate MUST invoke sub-pseudocode-validation-pass with agent_req_checklist_post_test (see lead checklist verification-gate).
+      still_required:
+        - structural and contract validation applicable to IMPL-only pseudo-code (parsing/schema/symbol resolution as feasible, contract_validation, dependency_graph, reporting)
+      notes:
+        - Behavioral coverage and traceability checklist categories that require a test artifact should be marked N/A or deferred with reference to this profile—not ad-hoc waiver IDs.
+    agent_req_checklist_post_test:
+      summary: Post-test gate for [PROC-AGENT_REQ_CHECKLIST] verification-gate after unit and composition tests exist—closes deferrals from agent_req_checklist_pre_red.
+      applies_when:
+        - Executable tests exist for this REQ/IMPL slice (post-unit-test-red and downstream TDD phases as applicable)
+        - Invoked from verification-gate via CALL sub-pseudocode-validation-pass
+      closes_deferred_from_profile: agent_req_checklist_pre_red
+      applies_minimum_gating_rules:
+        - all items in minimum_gating_rules above (same list as tailoring.profiles.agent_req_checklist_pre_red deferred_minimum_rules, plus structural rules not deferred pre-RED)
+      notes:
+        - Do not waive deferred_minimum_rules with ad-hoc waiver IDs—document pass/fail per checklist category; unresolved gaps imply GOTO resolve-pseudocode or unit-test-red per lead checklist verification-gate branches.
+        - Behavioral coverage and traceability rows that require executable tests must be evaluated now that tests exist (or explicitly marked N/A with rationale).
   notes:
     - add project-specific block kinds under the schema category
     - add domain-specific safety rules under contract_validation

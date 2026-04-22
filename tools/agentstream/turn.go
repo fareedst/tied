@@ -13,6 +13,8 @@ type Turn struct {
 	Parts []string
 	// ChainFromPrevious is false for feature-spec-batch records (each starts a new session).
 	ChainFromPrevious bool
+	// StepStub is the checklist step slug when this turn came from lead-checklist YAML; empty otherwise.
+	StepStub string
 }
 
 // VerifySessionPrompt is appended when --verify-session is set (matches Ruby AgentStreamArgv).

@@ -139,6 +139,8 @@ These phases implement the IMPL via strict TDD while keeping token comments sync
 - [ ] **D3.** RED: write failing tests before production code. Test names include REQ token.
 - [ ] **D4.** Verify each assertion matches the pseudo-code OUTPUT. If no assertion can be written, mark the block `e2e_only` and document `e2e_only_reason`.
 
+**Shell subprocess pitfall (Bash):** Command substitution `out=$(cmd …)` strips **all trailing newlines** from captured stdout. If the REQ contract requires an exact byte sequence including a single final LF (e.g. `Hello, World!\n`), comparing `out` to a here-string with a trailing newline will fail even when the script is correct. Capture with a temp file and `cmp`/`diff`, or use `read -r -d ''` with a NUL sentinel, instead of relying on `$(…)` for exact trailing-newline checks.
+
 #### Phase E — Derive Code
 
 **Goal**: Write minimum code to pass each test.

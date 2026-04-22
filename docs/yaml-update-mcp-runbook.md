@@ -1,6 +1,6 @@
 # YAML updates via TIED MCP (agent runbook)
 
-**Audience**: AI agents. **Companion**: [ai-agent-tied-mcp-usage.md](ai-agent-tied-mcp-usage.md), [AGENTS.md](../AGENTS.md) § TIED data access, [detail-files-schema.md](../detail-files-schema.md) (in a bootstrapped client: `tied/detail-files-schema.md` after `copy_files.sh`).
+**Audience**: AI agents. **Start here (all links in one place):** [tied-yaml-agent-index.md](tied-yaml-agent-index.md). **Companion**: [ai-agent-tied-mcp-usage.md](ai-agent-tied-mcp-usage.md), [AGENTS.md](../AGENTS.md) § TIED data access, [detail-files-schema.md](../detail-files-schema.md) (in a bootstrapped client: `tied/detail-files-schema.md` after `copy_files.sh`).
 
 **Purpose**: Stop invalid YAML and index/detail drift by **routing mutations through the tied-yaml MCP server** and by **not abandoning MCP** after the first error.
 
@@ -26,8 +26,23 @@
 ## 2. Preferred granularity
 
 1. **One token at a time** for detail bodies: `yaml_detail_read` → merge your change mentally → `yaml_detail_update` with a small `updates` payload (JSON string). Avoid pasting entire index files from the model.
-2. **Batch reads only**: Use `yaml_detail_read_many` to load context; still apply **sequential** `yaml_detail_update` / `yaml_detail_create` per token unless a dedicated batch-write tool exists.
+2. **Batch reads** use `yaml_detail_read_many`. For **multiple writes** in one process (same merge rules, optional end-of-batch `tied_validate_consistency`), use **`yaml_updates_apply`** with an ordered `steps` array; use `dry_run: true` first to inspect `merged_preview` per step without writing.
 3. **Keep index and detail aligned**: Creating a new REQ/ARCH/IMPL usually means index row **and** detail file—prefer `tied_token_create_with_detail` when appropriate, or `yaml_detail_create` with `sync_index: true` plus `yaml_index_insert` as documented in [mcp-server/README.md](../mcp-server/README.md).
+
+### 2.1 Nested maps (`metadata`, `traceability`, …): merge semantics
+
+**Server (mcp-server):** `yaml_detail_update` and `yaml_index_update` shallow-merge top-level keys, but **one level deeper** for object-shaped **`metadata`**, **`traceability`**, **`related_requirements`**, **`related_decisions`**, **`rationale`**, and **`implementation_approach`**: `{ metadata: { last_updated: "x" } }` is merged into the existing `metadata` map so **`metadata.created` is preserved** unless you intentionally overwrite a sibling key in the same object. When **`metadata.last_updated`** (or **`metadata.last_validated`**) is a **plain object on both** the existing record and the update, those objects are merged **one level** so partial `{ reason: "…" }` updates preserve existing `date` / `author` fields.
+
+**Defense in depth (agents):**
+
+1. **Read before large edits** — For non-whitelisted nested shapes or when replacing **arrays** (still replaced wholesale), capture the current record.
+2. **Re-read after write** on critical checklist steps — Confirm audit fields on **both** detail and index when both changed; if anything vanished (bug or older server), one corrective `yaml_*_update` restores them.
+3. **IMPL pseudo-code churn** — Prefer **`impl_detail_set_essence_pseudocode`** when only `essence_pseudocode` (and optional `metadata.last_updated`) changes; smaller payload, IMPL-only guard.
+4. **Large narrative fields** — Still prefer focused `updates` blobs; avoid unrelated top-level keys in the same call unless intentional.
+
+### 2.2 `tied-cli.sh`, payload size, timeouts
+
+Each [`tied-cli.sh`](../.cursor/skills/tied-yaml/scripts/tied-cli.sh) invocation starts **one** MCP stdio client and performs **one** `tools/call`. Long “sync-tied-stack” sequences therefore spawn many short-lived Node processes—keep each `args` JSON **small** (especially avoid pasting huge `essence_pseudocode` into `yaml_detail_update`; use **`impl_detail_set_essence_pseudocode`** instead). **Timeouts** are enforced by the host client; if a call is killed mid-flight, re-run **`yaml_index_validate`** and **`tied_validate_consistency`** before assuming the tree is consistent. Prefer **one** `tied_validate_consistency` at the **end** of a multi-step sync rather than after every RPC unless you are debugging. The companion **`tied-mcp-stdio-client.cjs`** reassembles JSON-RPC over newlines—do not hand-roll stdio framing.
 
 ---
 
@@ -41,12 +56,14 @@
 | Filter index rows | `yaml_index_filter` | `index`, `field`, `value` |
 | Insert new index row | `yaml_index_insert` | `index`, `token`, `record` (JSON string; YAML string also accepted where the server supports it) |
 | Merge index row fields | `yaml_index_update` | `index`, `token`, `updates` (JSON string) |
+| Ordered batch merge (index/detail) | `yaml_updates_apply` | `steps` (array of `{ kind, token, updates }` or `{ kind, index, token, updates }`); optional `dry_run`, `run_validate_consistency` |
 | Create token + index + detail in one step | `tied_token_create_with_detail` | `token`, `index_record`, `detail_record` (JSON strings); optional `upsert_index` |
 | Read one detail file | `yaml_detail_read` | `token` |
 | Read many details | `yaml_detail_read_many` | `tokens` array and/or `type` |
 | List tokens with detail files | `yaml_detail_list` | `type` |
 | Create detail file | `yaml_detail_create` | `token`, `record` (JSON string); optional `sync_index` (default true) |
 | Merge detail fields | `yaml_detail_update` | `token`, `updates` (JSON string) |
+| IMPL: set `essence_pseudocode` only | `impl_detail_set_essence_pseudocode` | `token`, `essence_pseudocode`; optional `metadata_last_updated` |
 | Delete detail file | `yaml_detail_delete` | `token`; optional `sync_index` |
 | REQ ↔ ARCH/IMPL traceability | `get_decisions_for_requirement`, `get_requirements_for_decision` | requirement or decision token |
 | Rename token everywhere | `tied_token_rename` | `old_token`, `new_token`; optional `dry_run` |
@@ -71,16 +88,17 @@ Pass that object as a **string** in `updates` or `record` per the tool descripto
 | Symptom | Do this | Do not |
 |---------|---------|--------|
 | “Methodology”, “read-only”, or token not writable | Target **project** index/detail only; create project detail if the token should be client-specific | Patch files under `methodology/` or bypass with `Write` |
-| Wrong or missing `TIED_BASE_PATH` | **STOP**. Ensure the MCP server targets **this workspace’s** `tied/` directory (must be **under the workspace root**). Prefer the deterministic fix: re-run `./copy_files.sh /absolute/path/to/this/workspace` to rewrite this workspace’s `.cursor/mcp.json` (absolute `TIED_BASE_PATH` and server `args` path to your TIED clone’s `mcp-server/dist/index.js`). If manual edit is unavoidable, set `.cursor/mcp.json` `mcpServers.tied-yaml.env.TIED_BASE_PATH` to an **absolute** `<workspace>/tied` path and re-check with `tied_config_get_base_path`. | “Quick fix” by pointing at another repo’s `tied/` (risk: silent writes to the wrong project) |
+| Wrong or missing `TIED_BASE_PATH` | **STOP**. Ensure the MCP server targets **this workspace’s** `tied/` directory (must be **under the workspace root**). **`copy_files.sh` does not modify `.cursor/mcp.json`** — edit it so `mcpServers.tied-yaml.env.TIED_BASE_PATH` is an **absolute** `<workspace>/tied` path and `args` points at your TIED clone’s built `mcp-server/dist/index.js`; re-check with `tied_config_get_base_path`. For terminal-only automation, set **`TIED_BASE_PATH`** and **`TIED_MCP_BIN`** for **`tied-cli.sh`** (see `.cursor/skills/tied-yaml/SKILL.md`). | “Quick fix” by pointing at another repo’s `tied/` (risk: silent writes to the wrong project) |
 | Invalid JSON in `record` / `updates` | Fix quoting; retry with smaller `updates` chunk | Switch to full-file `Write` on the same path |
 | Tool timeout / transient error | Retry; narrow the operation (single token) | Immediately fall back to direct file edit |
 | `tied_validate_consistency` fails | Fix the reported token/path via MCP or LEAP stack; re-run validation | Mark work complete while consistency is failing |
+| **`metadata.created` / `registered` missing after an update** | First upgrade mcp-server (deep-merge fix). Then: `yaml_detail_read` / `yaml_index_read`, restore dropped keys in one follow-up `yaml_*_update`, then §5 | Assume the field was never authored—silent loss breaks audit trails |
 
 ---
 
 ## 5. After writes: validation loop
 
-Align with `[PROC-YAML_EDIT_LOOP]` and **SUB-YAML** in [agent-req-implementation-checklist.md](agent-req-implementation-checklist.md):
+Align with `[PROC-YAML_EDIT_LOOP]` and **sub-yaml-edit-loop** in [agent-req-implementation-checklist.md](agent-req-implementation-checklist.md):
 
 1. Prefer **MCP** for the mutation (§ 1).
 2. On any path you **direct-edited** (exception only), run `scripts/lint_yaml.sh <file> [file ...]` (or `lint_yaml` if installed) until it passes.
@@ -94,4 +112,4 @@ Align with `[PROC-YAML_EDIT_LOOP]` and **SUB-YAML** in [agent-req-implementation
 
 - Tool and resource catalog: [mcp-server/README.md](../mcp-server/README.md)
 - Agent directive (MCP-first): [ai-agent-tied-mcp-usage.md](ai-agent-tied-mcp-usage.md)
-- REQ checklist (S01 bootstrap, SUB-YAML): [agent-req-implementation-checklist.md](agent-req-implementation-checklist.md)
+- REQ checklist (session-bootstrap bootstrap, sub-yaml-edit-loop): [agent-req-implementation-checklist.md](agent-req-implementation-checklist.md)

@@ -14,7 +14,7 @@ REQ-TIED_SETUP:
       - Consistent development methodology
       - AI-friendly documentation structure
   satisfaction_criteria:
-    - criterion: tied/ directory exists with proper structure
+    - criterion: ./tied/ directory exists with proper structure
     - criterion: All required documentation files exist and are populated from templates
       metric: requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml, semantic-tokens.md, processes.md all present
     - criterion: Base files properly configured

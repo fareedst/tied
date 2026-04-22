@@ -1,6 +1,6 @@
 {
   "name": "req_impl_state_guide",
-  "description": "Nested state guide: outer loop = ordered requirement list (same objects as requirement_list_state_guide); inner loop = fixed agent REQ steps S01 through end_agent_req (same as agent_req_state_guide). First call: pass non-empty requirements; omit current_state. Later calls: current_state = continuation_state only. Sequence per spec: S01…end_agent_req, then next spec. After last spec’s end_agent_req, next call returns end_req_impl (is_end). Composite state field: specId__stepId. Response includes spec (full item) and agent_step (id, title, stage, goals, tasks, outcomes). Run until end_req_impl or error; do not abandon mid-sequence.",
+  "description": "Nested state guide: outer loop = ordered requirement list (same objects as requirement_list_state_guide); inner loop = fixed agent REQ steps session-bootstrap through end_agent_req (same as agent_req_state_guide). First call: pass non-empty requirements; omit current_state. Later calls: current_state = continuation_state only. Sequence per spec: session-bootstrap…end_agent_req, then next spec. After last spec’s end_agent_req, next call returns end_req_impl (is_end). Composite state field: specId__stepId. Response includes spec (full item) and agent_step (id, title, stage, goals, tasks, outcomes). Run until end_req_impl or error; do not abandon mid-sequence.",
   "arguments": {
     "type": "object",
     "properties": {

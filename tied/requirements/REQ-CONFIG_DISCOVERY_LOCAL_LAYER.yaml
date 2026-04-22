@@ -49,7 +49,7 @@ REQ-CONFIG_DISCOVERY_LOCAL_LAYER:
     last_updated:
       date: 2026-03-28T00:00:00.000Z
       author: AI Agent
-      reason: S06.4 validation scope vs agentstream CLI
+      reason: resolve-pseudocode validation scope vs agentstream CLI
     last_validated:
       date: 2026-03-29T00:00:00.000Z
       validator: AI Agent

@@ -42,7 +42,7 @@ IMPL-TIED_FILES:
     details:
       - Create tied/ directory at project root
       - Copy YAML index files from templates (requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml)
-      - Copy guide files from templates (semantic-tokens.md, processes.md, commit-guidelines.md)
+      - Copy guide files from repo root into tied/ when missing (semantic-tokens.md, processes.md); copy reference docs from docs/ into tied/docs/ (includes commit-guidelines.md per DOCS_TO_COPY in copy_files.sh)
       - Create detail subdirectories (requirements/, architecture-decisions/, implementation-decisions/)
       - Copy base files to project root (.cursorrules, AGENTS.md, ai-principles.md)
   code_locations:
@@ -76,14 +76,14 @@ IMPL-TIED_FILES:
   detail_file: implementation-decisions/IMPL-TIED_FILES.yaml
   metadata:
     created:
-      date: 2025-12-18
+      date: 2025-12-18T00:00:00.000Z
       author: AI Agent
     last_updated:
-      date: 2026-02-06
+      date: 2026-03-30T00:00:00.000Z
       author: AI Agent
       reason: Restructured to v1.5.0 schema with machine-parseable fields
     last_validated:
-      date: 2026-02-06
+      date: 2026-02-06T00:00:00.000Z
       validator: AI Agent
       result: pass
 IMPL-MODULE_VALIDATION:
@@ -142,14 +142,14 @@ IMPL-MODULE_VALIDATION:
   detail_file: implementation-decisions/IMPL-MODULE_VALIDATION.yaml
   metadata:
     created:
-      date: 2025-12-18
+      date: 2025-12-18T00:00:00.000Z
       author: AI Agent
     last_updated:
-      date: 2026-02-06
+      date: 2026-03-30T00:00:00.000Z
       author: AI Agent
       reason: Restructured to v1.5.0 schema with machine-parseable fields
     last_validated:
-      date: 2026-02-06
+      date: 2026-02-06T00:00:00.000Z
       validator: AI Agent
       result: pass
 IMPL-MCP_FEEDBACK_TOOLS:
@@ -215,14 +215,14 @@ IMPL-MCP_FEEDBACK_TOOLS:
   detail_file: implementation-decisions/IMPL-MCP_FEEDBACK_TOOLS.yaml
   metadata:
     created:
-      date: 2026-03-03
+      date: 2026-03-03T00:00:00.000Z
       author: AI Agent
     last_updated:
-      date: 2026-03-03
+      date: 2026-03-28T00:00:00.000Z
       author: AI Agent
       reason: Initial creation
     last_validated:
-      date: 2026-03-03
+      date: 2026-03-26T00:00:00.000Z
       validator: AI Agent
       result: pass
 IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV:
@@ -268,14 +268,14 @@ IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV:
   detail_file: implementation-decisions/IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV.yaml
   metadata:
     created:
-      date: 2026-03-24
+      date: 2026-03-24T00:00:00.000Z
       author: AI Agent
     last_updated:
-      date: 2026-03-24
+      date: 2026-03-28T00:00:00.000Z
       author: AI Agent
       reason: Import ATDD agent stream TIED records
     last_validated:
-      date: 2026-03-24
+      date: 2026-03-24T00:00:00.000Z
       validator: AI Agent
       result: pass
 IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS:
@@ -318,14 +318,14 @@ IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS:
   detail_file: implementation-decisions/IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS.yaml
   metadata:
     created:
-      date: 2026-03-24
+      date: 2026-03-24T00:00:00.000Z
       author: AI Agent
     last_updated:
-      date: 2026-03-24
+      date: 2026-03-28T00:00:00.000Z
       author: AI Agent
       reason: Import ATDD agent stream TIED records
     last_validated:
-      date: 2026-03-24
+      date: 2026-03-24T00:00:00.000Z
       validator: AI Agent
       result: pass
 IMPL-ATDD-E2E-AGENT_STREAM:
@@ -367,14 +367,14 @@ IMPL-ATDD-E2E-AGENT_STREAM:
   detail_file: implementation-decisions/IMPL-ATDD-E2E-AGENT_STREAM.yaml
   metadata:
     created:
-      date: 2026-03-24
+      date: 2026-03-24T00:00:00.000Z
       author: AI Agent
     last_updated:
-      date: 2026-03-24
+      date: 2026-03-28T00:00:00.000Z
       author: AI Agent
       reason: Import ATDD agent stream TIED records
     last_validated:
-      date: 2026-03-24
+      date: 2026-03-24T00:00:00.000Z
       validator: AI Agent
       result: pass
 # ---

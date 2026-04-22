@@ -269,10 +269,3 @@ When using subdirectories, update the Detail File column in the index:
 ```markdown
 | `[ARCH-AUTH_FLOW]` | Auth Flow | Active | ... | [Detail](architecture-decisions/auth/ARCH-AUTH_FLOW.yaml) |
 ```
-
----
-
-## Migration from Monolithic File
-
-If migrating from a single monolithic `architecture-decisions.md` file, see `migrate-architecture-decisions.md` for step-by-step instructions.
-

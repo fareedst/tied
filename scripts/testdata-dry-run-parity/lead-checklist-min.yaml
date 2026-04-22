@@ -1,14 +1,14 @@
 name: parity_test_checklist
 process_token: '[PROC-PARITY_TEST]'
-version: "0.0.1"
+version: 0.0.1
 steps:
-  - id: S01
+  - slug: smoke-one
     title: First step
     goals: Smoke goals.
     tasks:
       - Task one
     outcomes: Done.
-  - id: S02
+  - slug: smoke-two
     title: Second step
     goals: More goals.
     tasks:

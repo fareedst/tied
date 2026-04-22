@@ -51,7 +51,7 @@ ARCH-TIED_STRUCTURE:
       cons:
         - Too generic for methodology-specific files
         - .github is typically for GitHub workflows
-      rejected_reason: tied/ is more specific to the methodology
+      rejected_reason: ./tied/ is more specific to the methodology
   implementation_approach:
     summary: Create dedicated tied/ directory with YAML indexes and detail subdirectories
     details:
@@ -79,14 +79,14 @@ ARCH-TIED_STRUCTURE:
   detail_file: architecture-decisions/ARCH-TIED_STRUCTURE.yaml
   metadata:
     created:
-      date: 2025-12-18
+      date: 2025-12-18T00:00:00.000Z
       author: AI Agent
     last_updated:
-      date: 2026-02-06
+      date: 2026-02-06T00:00:00.000Z
       author: AI Agent
       reason: Restructured to v1.5.0 schema with machine-parseable fields
     last_validated:
-      date: 2026-02-06
+      date: 2026-02-06T00:00:00.000Z
       validator: AI Agent
       result: pass
 ARCH-MODULE_VALIDATION:
@@ -160,14 +160,14 @@ ARCH-MODULE_VALIDATION:
   detail_file: architecture-decisions/ARCH-MODULE_VALIDATION.yaml
   metadata:
     created:
-      date: 2025-12-18
+      date: 2025-12-18T00:00:00.000Z
       author: AI Agent
     last_updated:
-      date: 2026-02-06
+      date: 2026-02-06T00:00:00.000Z
       author: AI Agent
       reason: Restructured to v1.5.0 schema with machine-parseable fields
     last_validated:
-      date: 2026-02-06
+      date: 2026-02-06T00:00:00.000Z
       validator: AI Agent
       result: pass
 ARCH-FEEDBACK_STORAGE:
@@ -222,14 +222,14 @@ ARCH-FEEDBACK_STORAGE:
   detail_file: architecture-decisions/ARCH-FEEDBACK_STORAGE.yaml
   metadata:
     created:
-      date: 2026-03-03
+      date: 2026-03-03T00:00:00.000Z
       author: AI Agent
     last_updated:
-      date: 2026-03-03
+      date: 2026-03-03T00:00:00.000Z
       author: AI Agent
       reason: Initial creation
     last_validated:
-      date: 2026-03-03
+      date: 2026-03-03T00:00:00.000Z
       validator: AI Agent
       result: pass
 ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS:
@@ -255,7 +255,7 @@ ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS:
   implementation_approach:
     summary: AgentStreamArgv and export pipeline call into lib/tdd_loop_prompts.rb; lead checklist uses LeadChecklistPrompts
     details:
-      - '--tdd-yaml expands via TddLoopPrompts.messages_from_yaml'
+      - --tdd-yaml expands via TddLoopPrompts.messages_from_yaml
       - Export uses TddLoopPrompts.step_entries_from_yaml and format_step
   traceability:
     requirements:
@@ -277,14 +277,14 @@ ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS:
   detail_file: architecture-decisions/ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS.yaml
   metadata:
     created:
-      date: 2026-03-24
+      date: 2026-03-24T00:00:00.000Z
       author: AI Agent
     last_updated:
-      date: 2026-03-24
+      date: 2026-03-24T00:00:00.000Z
       author: AI Agent
       reason: Import ATDD agent stream TIED records
     last_validated:
-      date: 2026-03-24
+      date: 2026-03-24T00:00:00.000Z
       validator: AI Agent
       result: pass
 ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON:
@@ -328,14 +328,14 @@ ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON:
   detail_file: architecture-decisions/ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON.yaml
   metadata:
     created:
-      date: 2026-03-24
+      date: 2026-03-24T00:00:00.000Z
       author: AI Agent
     last_updated:
-      date: 2026-03-24
+      date: 2026-03-27T00:00:00.000Z
       author: AI Agent
       reason: Import ATDD agent stream TIED records
     last_validated:
-      date: 2026-03-24
+      date: 2026-03-24T00:00:00.000Z
       validator: AI Agent
       result: pass
 # ---

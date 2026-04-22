@@ -116,7 +116,7 @@ func Analyze(workspace, mcpJSONPath string) (*Result, error) {
 	raw, ok := root.MCPServers["tied-yaml"]
 	if !ok || len(raw) == 0 {
 		res.Status = StatusBlocked
-		res.Errors = append(res.Errors, `mcpServers["tied-yaml"] is missing; run copy_files.sh on this project or add tied-yaml in .cursor/mcp.json`)
+		res.Errors = append(res.Errors, `mcpServers["tied-yaml"] is missing; add it in .cursor/mcp.json (copy_files.sh installs .cursor/skills/tied-yaml only; it does not create mcp.json)`)
 		return res, nil
 	}
 	var srv tiedYAMLServer

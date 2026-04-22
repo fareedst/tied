@@ -1,3 +1,5 @@
 - order: 1
   feature_name: ParityDryRun
   goal: Minimal batch record for shell vs Go dry-run comparison.
+  behavior: |
+    Optional behavior body for prompt parity (multiline-safe).

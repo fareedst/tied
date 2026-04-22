@@ -1,12 +1,12 @@
 {
   "name": "agent_req_state_guide",
-  "description": "Guide the client through the full agent REQ implementation checklist states (S01 through S16). The wrapper should pass current_state via arguments.current_state. Call with no current_state to get S01; call with current_state to get the next record. Terminal state is end_agent_req (is_end true)—not generic end; pass it back to stay at terminal. Legacy current_state end is accepted as alias for end_agent_req. Other recognized states: S01–S16 substeps as documented. Unknown non-empty states return error. Response includes selected record fields plus state, guidance, is_end.",
+  "description": "Guide the client through the full agent REQ implementation checklist states (session-bootstrap through traceable-commit). The wrapper should pass current_state via arguments.current_state. Call with no current_state to get session-bootstrap; call with current_state to get the next record. Terminal state is end_agent_req (is_end true)—not generic end; pass it back to stay at terminal. Legacy current_state end is accepted as alias for end_agent_req. Other recognized states: session-bootstrap–traceable-commit substeps as documented. Unknown non-empty states return error. Response includes selected record fields plus state, guidance, is_end.",
   "arguments": {
     "type": "object",
     "properties": {
       "current_state": {
         "type": "string",
-        "description": "Current state supplied by the wrapper as arguments.current_state. Omit or pass an empty string to receive S01. Unknown non-empty states return error."
+        "description": "Current state supplied by the wrapper as arguments.current_state. Omit or pass an empty string to receive session-bootstrap. Unknown non-empty states return error."
       }
     },
     "required": [],

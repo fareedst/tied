@@ -10,7 +10,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "test": "npm run build && node --test dist/analysis/scoped-analysis.test.js dist/analysis/traceability-gap.test.js dist/analysis/plumb-diff-impact-preview.test.js dist/analysis/plumb-audit-gate.test.js dist/analysis/leap-proposal-queue.test.js dist/convert/yaml-generator.test.js dist/feedback.test.js dist/token-rename.test.js dist/tools/requirement-list-state-guide.test.js dist/tools/leap-proposal-mcp.test.js dist/yaml-loader.test.js dist/e2e/bootstrap-and-load.test.js",
+    "test": "npm run build && node --test dist/analysis/scoped-analysis.test.js dist/analysis/traceability-gap.test.js dist/analysis/plumb-diff-impact-preview.test.js dist/analysis/plumb-audit-gate.test.js dist/analysis/leap-proposal-queue.test.js dist/feedback.test.js dist/token-rename.test.js dist/tools/requirement-list-state-guide.test.js dist/tools/leap-proposal-mcp.test.js dist/yaml-loader.test.js dist/record-merge.test.js dist/yaml-updates-apply.test.js dist/detail-loader-append.test.js dist/citdp-writer.test.js dist/verify.test.js test/tied-cli-large-args.test.cjs dist/e2e/bootstrap-and-load.test.js",
     "traceability-gap": "node dist/cli/traceability-gap.js",
     "plumb-audit-gate": "node dist/cli/plumb-audit-gate.js",
     "prepare": "npm run build"

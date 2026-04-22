@@ -4,7 +4,7 @@
 
 Six diagrams capture the core methodology: the traceability stack, the three development phases, the LEAP bidirectional loop, the full dev-cycle session workflow, the TDD inner loop, and the CITDP change-analysis procedure. A short **New client setup — Cursor** section at the end shows bootstrap and `agent enable tied-yaml` for MCP.
 
-**Related documents**: [TIED.md](../TIED.md), [LEAP.md](LEAP.md), [implementation-order.md](implementation-order.md), [processes.md](../processes.md), [ai-principles.md](../ai-principles.md)
+**Related documents**: [LEAP.md](LEAP.md), [implementation-order.md](implementation-order.md), [processes.md](../processes.md), [ai-principles.md](../ai-principles.md)
 
 ---
 
@@ -120,12 +120,12 @@ flowchart TD
     S7 --> S8
     S8["8. Validate + close test gaps\nRun full test suite\nRun PROC-TOKEN_VALIDATION"]
     S9["9. Sync TIED to code/tests\nUpdate REQ/ARCH/IMPL to match\nSync semantic-tokens.yaml"]
-    S10["10. Update README + CHANGELOG"]
-    S11["11. Write commit message\nper PROC-COMMIT_MESSAGES"]
+    composition-integration["10. Update README + CHANGELOG"]
+    end-to-end-ui["11. Write commit message\nper PROC-COMMIT_MESSAGES"]
 
-    S8 --> S9 --> S10 --> S11
+    S8 --> S9 --> composition-integration --> end-to-end-ui
 
-    S11 --> Done(["Session Complete"])
+    end-to-end-ui --> Done(["Session Complete"])
 
     S9 -.->|"LEAP: if code diverged\nfrom IMPL during TDD\nupdate IMPL -> ARCH -> REQ"| S2
 ```

@@ -505,19 +505,3 @@ When using subdirectories, update the Detail File column in the index:
 ```markdown
 | `[IMPL-AUTH_FLOW]` | Auth Flow | Active | ... | [Detail](implementation-decisions/auth/IMPL-AUTH_FLOW.yaml) |
 ```
-
----
-
-## Migration from Monolithic File
-
-If migrating from a single `implementation-decisions.md` file:
-
-1. Create the `implementation-decisions/` directory
-2. For each numbered section in the old file:
-   - Create `IMPL-{TOKEN_NAME}.yaml` using the detail template
-   - Copy content into the new file
-   - Add metadata (Status, Created, Last Updated)
-3. Replace section content in this file with an index row
-4. Update `semantic-tokens.yaml` to note the new structure
-5. Verify all links work correctly
-

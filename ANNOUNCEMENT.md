@@ -52,7 +52,6 @@ cp implementation-decisions.yaml tied/implementation-decisions.yaml
 cp processes.md tied/processes.md
 cp semantic-tokens.md tied/semantic-tokens.md
 cp semantic-tokens.yaml tied/semantic-tokens.yaml
-# Optional: cp tasks.md tied/tasks.md  # Task tracking is optional
 cp AGENTS.md AGENTS.md              # Canonical AI agent guide
 cp .cursorrules .cursorrules        # Cursor loader (optional)
 ```
@@ -111,7 +110,6 @@ The STDD v1.0.1 release includes:
 - **`architecture-decisions.md`** - Template for architecture decisions
 - **`implementation-decisions.md`** - Template for implementation decisions
 - **`semantic-tokens.md`** - Template for semantic token registry
-- **`tasks.md`** - **Optional** template for task tracking (not required by methodology)
 
 ### AI Agent Integration
 - **`AGENTS.md`** - Canonical AI agent operating guide

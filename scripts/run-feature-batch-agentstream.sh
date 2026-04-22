@@ -8,8 +8,8 @@
 #
 # Environment:
 #   AGENTSTREAM  If set, path to a prebuilt agentstream executable (skips go run).
-#   AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1  Skip Go agentstream static MCP preflight (non-TTY runs
-#                without .cursor/mcp.json exit unless you set this or invoke agentstream with -y).
+#   AGENTSTREAM_TIED_MCP_PREFLIGHT=1  Opt in to static tied-yaml mcp.json validation before cursor agent (off by default).
+#   AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1  Skip preflight when it is enabled (or use agentstream -y).
 #
 # Unsupported vs Ruby path:
 #   -r / --runner      Ignored with a warning (no Ruby runner).
@@ -33,13 +33,16 @@ Same options as run-feature-batch.sh, except:
 Go-only (forwarded to agentstream):
   --lead-checklist-from-step ID   Optional inclusive lower main-step id
   --lead-checklist-to-step ID     Optional inclusive upper main-step id
+  --checklist-var KEY=VALUE       Repeatable; expands {{KEY}} in lead checklist YAML (synonym: --lead-checklist-var)
+  --checklist-var-strict          Error if any {{NAME}} remains (env: AGENTSTREAM_CHECKLIST_VAR_STRICT=1)
 
 Mid-batch resume: -f / --first-turn N (1-based) is passed through to Go agentstream; when N>1,
 also pass -s / --session-id with the session to resume.
 
 Environment:
   AGENTSTREAM        Path to agentstream binary; if unset, uses: go run -C <repo>/tools/agentstream ./cmd/agentstream
-  AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1  Bypass tied-yaml mcp.json preflight (see tools/agentstream/README.md)
+  AGENTSTREAM_TIED_MCP_PREFLIGHT=1       Opt in to tied-yaml mcp.json preflight (default is skip)
+  AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1  Skip preflight when enabled (see tools/agentstream/README.md)
 
 See run-feature-batch.sh --help for flag meanings.
 EOF
@@ -84,6 +87,8 @@ main() {
   local lead_checklist_yaml="${_repo_root}/docs/agent-req-implementation-checklist.yaml"
   local lead_checklist_from_step=""
   local lead_checklist_to_step=""
+  local checklist_var_strict=0
+  local -a checklist_var_args=()
   local prompt_file=""
   local feature_spec_batch_yaml=""
 
@@ -151,7 +156,10 @@ main() {
           dry-run)
             dry_run=1
             ;;
-          session-id|select-order|first-turn|workspace|runner|lead-checklist-yaml|lead-checklist-from-step|lead-checklist-to-step|prompt-file|feature-spec-batch-yaml)
+          checklist-var-strict)
+            checklist_var_strict=1
+            ;;
+          session-id|select-order|first-turn|workspace|runner|lead-checklist-yaml|lead-checklist-from-step|lead-checklist-to-step|checklist-var|lead-checklist-var|prompt-file|feature-spec-batch-yaml)
             if [[ -z "$opt_value" ]]; then
               [[ "${!OPTIND:-}" == "" || "${!OPTIND:-}" == -* ]] && fail "missing value for --$long_opt"
               opt_value="${!OPTIND}"
@@ -166,6 +174,9 @@ main() {
               lead-checklist-yaml) lead_checklist_yaml="$opt_value" ;;
               lead-checklist-from-step) lead_checklist_from_step="$opt_value" ;;
               lead-checklist-to-step) lead_checklist_to_step="$opt_value" ;;
+              checklist-var|lead-checklist-var)
+                checklist_var_args+=(--checklist-var "$opt_value")
+                ;;
               prompt-file)
                 prompt_file="$opt_value"
                 prompt_file_explicit=1
@@ -250,6 +261,8 @@ main() {
   cmd+=(-c "$lead_checklist_yaml")
   [[ -n "$lead_checklist_from_step" ]] && cmd+=(--lead-checklist-from-step "$lead_checklist_from_step")
   [[ -n "$lead_checklist_to_step" ]] && cmd+=(--lead-checklist-to-step "$lead_checklist_to_step")
+  ((${#checklist_var_args[@]})) && cmd+=("${checklist_var_args[@]}")
+  ((checklist_var_strict)) && cmd+=(--checklist-var-strict)
   [[ -n "$select_order" ]] && cmd+=(-o "$select_order")
   [[ -n "$prompt_file" ]] && cmd+=(-p "$prompt_file")
   cmd+=(-b "$feature_spec_batch_yaml")

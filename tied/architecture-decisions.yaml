@@ -28,7 +28,7 @@ ARCH-TIED_STRUCTURE:
       cons:
         - Too generic for methodology-specific files
         - .github is typically for GitHub workflows
-      rejected_reason: tied/ is more specific to the methodology
+      rejected_reason: ./tied/ is more specific to the methodology
   implementation_approach:
     summary: Create dedicated tied/ directory with YAML indexes and detail subdirectories
     details:
@@ -273,7 +273,7 @@ ARCH-LEAP_PROPOSAL_QUEUE:
     last_updated:
       date: 2026-03-28T00:00:00.000Z
       author: AI Agent
-      reason: S13 [PROC-AGENT_REQ_CHECKLIST] TIED sync — traceability.tests include leap-proposal-mcp.test.ts
+      reason: sync-tied-stack [PROC-AGENT_REQ_CHECKLIST] TIED sync — traceability.tests include leap-proposal-mcp.test.ts
     last_validated:
       date: 2026-03-26T00:00:00.000Z
       validator: AI Agent
@@ -442,9 +442,10 @@ ARCH-GOAGENT-CLI:
     benefits:
       - Preview path; synonym order flags; positional batch yaml
   implementation_approach:
-    summary: config.ParseAndResolve walks argv; defaults from workspace and repo-root discovery
+    summary: config.ParseAndResolve walks argv; defaults from workspace and repo-root discovery; optional static tied-yaml mcp.json check (off by default) after pipeline slice/chain and before dry-run or executor.
     details:
       - Validation gates before pipeline.Build
+      - 'Optional tiedpreflight: opt-in via --tied-mcp-preflight or AGENTSTREAM_TIED_MCP_PREFLIGHT=1; skip via --skip-tied-mcp-preflight or AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1 when preflight would run; does not imply Cursor exposes MCP at runtime.'
   traceability:
     requirements:
       - REQ-GOAGENT-CLI-CONFIG
@@ -463,14 +464,14 @@ ARCH-GOAGENT-CLI:
   detail_file: architecture-decisions/ARCH-GOAGENT-CLI.yaml
   metadata:
     created:
-      date: 2026-03-27T00:00:00.000Z
+      date: "2026-03-27T00:00:00.000Z"
       author: AI Agent
     last_updated:
-      date: 2026-03-27T00:00:00.000Z
+      date: "2026-04-18T00:00:00.000Z"
       author: AI Agent
-      reason: Go agentstream consolidated spec
+      reason: Optional MCP preflight architecture aligned with IMPL-GOAGENT-CLI-CMD
     last_validated:
-      date: 2026-03-27T00:00:00.000Z
+      date: "2026-03-27T00:00:00.000Z"
       validator: AI Agent
       result: pass
 ARCH-GOAGENT-TEXT-SOURCES:
@@ -688,55 +689,6 @@ ARCH-GOAGENT-EXECUTOR:
       date: 2026-03-27T00:00:00.000Z
       validator: AI Agent
       result: pass
-ARCH-GOAGENT-BASH-HELLO-SCRIPT:
-  name: Root Bash smoke script for agent validation
-  status: Active
-  cross_references:
-    - REQ-GOAGENT-BASH-HELLO-SCRIPT
-  rationale:
-    why: Checklists and agent harnesses need a deterministic, dependency-free executable to verify shell and cwd without building Go or Ruby.
-    problems_solved:
-      - No shared contract for a trivial validation script alongside agentstream tooling
-    benefits:
-      - One-line observable behavior; easy to assert in any test runner or manual run
-  implementation_approach:
-    summary: One file at project or workspace root (hello_world.sh or hello.sh); no imports; documented in IMPL code_locations.
-    details:
-      - Pipelines and checklist steps invoke from project root via bash or ./script
-      - hello.sh-only client workspaces remain compliant with the same contract
-  traceability:
-    requirements:
-      - REQ-GOAGENT-BASH-HELLO-SCRIPT
-    implementation:
-      - IMPL-GOAGENT-BASH-HELLO-SCRIPT
-    tests:
-      - hello_world_script_entry_test.go TestSCRIPT_ENTRY_OUTPUT_exactly_one_line_REQ_GOAGENT_BASH_HELLO_SCRIPT
-      - hello_world_script_entry_test.go TestSCRIPT_ENTRY_REQ_GOAGENT_BASH_HELLO_SCRIPT_stdout_and_exit
-      - hello_world_script_entry_test.go TestRESOLVE_HELLO_SCRIPT_BASENAME_missing_REQ_GOAGENT_BASH_HELLO_SCRIPT
-      - hello_world_script_entry_test.go TestUNIT_TEST_SCRIPT_ENTRY_bash_nonzero_REQ_GOAGENT_BASH_HELLO_SCRIPT
-      - hello_world_script_entry_test.go TestCOMPOSE_RunScriptEntrySmokeFromRoot_REQ_GOAGENT_BASH_HELLO_SCRIPT
-    code_annotations:
-      - ARCH-GOAGENT-BASH-HELLO-SCRIPT
-  related_decisions:
-    depends_on:
-      - ARCH-TIED_STRUCTURE
-    informs:
-      - IMPL-GOAGENT-BASH-HELLO-SCRIPT
-    see_also:
-      - ARCH-GOAGENT-EXECUTOR
-  detail_file: architecture-decisions/ARCH-GOAGENT-BASH-HELLO-SCRIPT.yaml
-  metadata:
-    created:
-      date: 2026-03-30T00:00:00.000Z
-      author: AI Agent
-    last_updated:
-      date: 2026-03-30T18:00:00.000Z
-      author: AI Agent
-      reason: S13 [PROC-AGENT_REQ_CHECKLIST] TIED sync — ARCH index traceability.tests match IMPL/composition coverage
-    last_validated:
-      date: 2026-03-30T18:00:00.000Z
-      validator: AI Agent
-      result: pass
 ARCH-CONFIG_DISCOVERY_LAYERING:
   name: Layered configuration discovery with local replacement of built-ins
   status: Active
@@ -791,7 +743,7 @@ ARCH-CONFIG_DISCOVERY_LAYERING:
     last_updated:
       date: 2026-03-29T00:00:00.000Z
       author: AI Agent
-      reason: S05 agent checklist
+      reason: author-architecture agent checklist
     last_validated:
       date: 2026-03-29T00:00:00.000Z
       validator: AI Agent

@@ -79,7 +79,7 @@ def build_markdown(rows, by_day)
   lines << '# CITDP evidence: hook logs and correlation'
   lines << ''
   lines << 'Machine-readable hook events are under `~/.cursor/logs/conv_ruby_treegrep_<UTC-date-segment>_<conversation_id>.yaml` (see `.cursor/hooks/log.rb`).'
-  lines << 'CITDP archives live under [`docs/citdp/`](citdp/). This document ties them together for audits.'
+  lines << 'CITDP archives live under [`tied/citdp/`](citdp/). This document ties them together for audits.'
   lines << ''
   lines << '## Regenerate artifacts'
   lines << ''

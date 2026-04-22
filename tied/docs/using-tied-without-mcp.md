@@ -14,7 +14,7 @@ Or use `./copy_files.sh /path/to/project` — you get the same result. Your proj
 
 - **Methodology** (read-only): `tied/methodology/` contains index YAMLs and inherited detail files from TIED. Do not edit these; they are overwritten when you re-run `copy_files.sh` to refresh the methodology.
 - **Project** (your data): `tied/requirements.yaml`, `tied/architecture-decisions.yaml`, `tied/implementation-decisions.yaml`, `tied/semantic-tokens.yaml`, and `tied/requirements/`, `tied/architecture-decisions/`, `tied/implementation-decisions/` hold only your project's tokens. These are never overwritten by `copy_files.sh`.
-- Guide documents: `requirements.md`, `architecture-decisions.md`, `implementation-decisions.md`, `commit-guidelines.md`, etc. in `tied/`.
+- Guide documents at `tied/` root: `requirements.md`, `architecture-decisions.md`, `implementation-decisions.md`, `processes.md`, `semantic-tokens.md`, etc. Reference docs under `tied/docs/` (including `commit-guidelines.md`) are copied from the TIED repo’s `docs/` by `copy_files.sh`.
 
 ## Managing REQ/ARCH/IMPL
 

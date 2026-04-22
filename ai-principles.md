@@ -1,6 +1,6 @@
 # AI Agent Principles & Operations
 
-**Purpose**: This document defines the operational mandates, checklists, and conventions that AI agents must follow when working on this project. It should be referenced at the start of every AI agent interaction. For methodology background (what TIED is, why tokens matter, bugs vs requirements), see the human-facing docs in the TIED repo (e.g. TIED.md).
+**Purpose**: This document defines the operational mandates, checklists, and conventions that AI agents must follow when working on this project. It should be referenced at the start of every AI agent interaction. For methodology background (what TIED is, why tokens matter, bugs vs requirements), see `tied/docs/LEAP.md` and `semantic-tokens.md` (under `tied/` after bootstrap).
 
 ## MANDATORY ACKNOWLEDGMENT
 
@@ -139,7 +139,7 @@ See `tied/processes.md` § LEAP for the canonical process definition.
 - **Work can start at any layer; changes must apply up and down the stack.** For work to be **complete**, changes must be applied both up and down the stack as needed. **Code is only valid** when **all tests pass** and **all requirements are met**.
 - **TIED MCP:** Use the TIED MCP server as the primary way to read and write TIED data. Collect related R/A/I index and detail records; reason from the necessary IMPL pseudo-code only; updating code to match IMPL is a separate task. Direct file access only when no MCP tool supports the operation; document the gap.
 - **TIED MCP base path:** Before any MCP write to project TIED YAML, call **`tied_config_get_base_path`** and confirm it points at the **`tied/` of the repository you are changing**. Wrong `TIED_BASE_PATH` mutates another project’s `tied/` silently (see `AGENTS.md` §2 TIED data access, CITDP RISK-010). Fix with an absolute `TIED_BASE_PATH` in that repo’s `.cursor/mcp.json` or re-run `copy_files.sh` targeting that repo.
-- **Go agentstream preflight:** The `tools/agentstream` CLI checks `.cursor/mcp.json` / `TIED_BASE_PATH` before spawning `cursor agent`. Non-interactive runs need a valid layout or `-y` / `AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1` (see `tools/agentstream/README.md`).
+- **Go agentstream preflight (optional):** By default the `tools/agentstream` CLI does **not** validate `.cursor/mcp.json`. Enable with `--tied-mcp-preflight` or `AGENTSTREAM_TIED_MCP_PREFLIGHT=1`; when enabled, non-interactive runs may need `-y` or `AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1` (see `tools/agentstream/README.md`).
 
 ### Phase 1: Requirements → Pseudo-Code
 
@@ -160,7 +160,7 @@ See `tied/processes.md` § LEAP for the canonical process definition.
 2. Identify implementation sequence (implementable units, module validation before integration)
 3. Prioritize: P0 > P1 > P2 > P3; module validation is typically P0 or P1
 
-**Note**: Agents may maintain planning state in-session or in `implementation-decisions`. Optional: use `tasks.md` for shared visibility.
+**Note**: Agents may maintain planning state in-session or in `implementation-decisions`. Checklist-driven work uses `docs/agent-req-implementation-checklist.yaml` (or `tied/docs/` copy) via agentstream, one step per turn.
 
 ### Phase 3: Implementation
 

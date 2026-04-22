@@ -100,7 +100,7 @@ Perform a **manual pass** over the checklist categories in the recommended order
 
 ## 3. When to Run Validation
 
-- **Before any tests or code** — Align with S06 of the agent checklist ([PROC-AGENT_REQ_CHECKLIST]): after authoring or updating IMPL pseudo-code and applying block token comments, run validation before persisting and before S07–S16.
+- **Before any tests or code** — Align with S06 of the agent checklist ([PROC-AGENT_REQ_CHECKLIST]): after authoring or updating IMPL pseudo-code and applying block token comments, run validation before persisting and before risk-assessment–traceable-commit.
 - **After any change to IMPL `essence_pseudocode`** — When aiming for generation-ready or full traceability, re-run validation after edits so the checklist remains satisfied.
 
 ---
@@ -111,6 +111,6 @@ Perform a **manual pass** over the checklist categories in the recommended order
 |----------|------------------|
 | [pseudocode-validation-checklist.yaml](pseudocode-validation-checklist.yaml) | Canonical checklist (categories, required/optional checks, order, gating rules, tailoring) |
 | `tied/implementation-decisions.md` | Full writing rules: mandatory essence_pseudocode, vocabulary, sequence, token comments, collision detection |
-| `tied/docs/agent-req-implementation-checklist.md` | S06.5a and SUB-PSEUDOCODE-VALIDATE: where validation runs in the agent flow |
+| `tied/docs/agent-req-implementation-checklist.md` | gate-pseudocode-validation and sub-pseudocode-validation-pass: where validation runs in the agent flow |
 | `tied/docs/impl-code-test-linkage.md` | Phase B (B5) and Phase C (C4): validation in the IMPL-to-code-and-tests linkage |
 | `tied/processes.md` | [PROC-PSEUDOCODE_VALIDATION], [PROC-IMPL_PSEUDOCODE_TOKENS], [PROC-IMPL_CODE_TEST_SYNC] |

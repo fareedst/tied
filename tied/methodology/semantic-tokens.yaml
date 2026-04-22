@@ -8,7 +8,7 @@
 # 2. Paste it at the end with a blank line before it
 # 3. Replace TOKEN-IDENTIFIER with your new token
 # 4. Fill in all fields
-# 5. Update the detail_file path if a detail file exists
+# 5. Set detail_file to the detail path, or null for index-only (methodology seed); procedure: tied/docs/agent-req-implementation-checklist.yaml
 #
 # Field descriptions:
 #   type: REQ | ARCH | IMPL | TEST | PROC
@@ -18,88 +18,88 @@
 #   description: One-line description of what this token represents
 #   cross_references: List of related tokens (traceability chain)
 #   source_index: Path to the YAML index that holds the full record (e.g., requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, processes.md)
-#   detail_file: Path to the detailed .yaml file (if one exists)
+#   detail_file: Path to the detailed .yaml, or null when no detail file (methodology seed)
 #   metadata: Structured metadata with registered and last_updated dates
 REQ-TIED_SETUP:
   type: REQ
   name: TIED Methodology Setup
   category: Core Functional
   status: Active
-  description: TIED methodology setup requirement
+  description: Index stub; procedure in agent-req-implementation-checklist.yaml
   cross_references:
     - ARCH-TIED_STRUCTURE
     - IMPL-TIED_FILES
   source_index: requirements.yaml
-  detail_file: requirements/REQ-TIED_SETUP.yaml
+  detail_file: null
   metadata:
     registered: 2025-11-08
-    last_updated: 2026-02-08
+    last_updated: 2026-04-21
 REQ-MODULE_VALIDATION:
   type: REQ
   name: Independent Module Validation Before Integration
   category: Core Functional
   status: Active
-  description: Independent module validation before integration requirement
+  description: Index stub; procedure in agent-req-implementation-checklist.yaml
   cross_references:
     - ARCH-MODULE_VALIDATION
     - IMPL-MODULE_VALIDATION
   source_index: requirements.yaml
-  detail_file: requirements/REQ-MODULE_VALIDATION.yaml
+  detail_file: null
   metadata:
     registered: 2025-01-27
-    last_updated: 2026-02-08
+    last_updated: 2026-04-21
 ARCH-TIED_STRUCTURE:
   type: ARCH
   name: TIED Project Structure
   status: Active
-  description: TIED project structure decision
+  description: Index stub; procedure in agent-req-implementation-checklist.yaml
   cross_references:
     - REQ-TIED_SETUP
     - IMPL-TIED_FILES
   source_index: architecture-decisions.yaml
-  detail_file: architecture-decisions/ARCH-TIED_STRUCTURE.yaml
+  detail_file: null
   metadata:
     registered: 2025-12-18
-    last_updated: 2026-02-08
+    last_updated: 2026-04-21
 ARCH-MODULE_VALIDATION:
   type: ARCH
   name: Module Validation Strategy
   status: Active
-  description: Module validation strategy decision
+  description: Index stub; procedure in agent-req-implementation-checklist.yaml
   cross_references:
     - REQ-MODULE_VALIDATION
     - IMPL-MODULE_VALIDATION
   source_index: architecture-decisions.yaml
-  detail_file: architecture-decisions/ARCH-MODULE_VALIDATION.yaml
+  detail_file: null
   metadata:
     registered: 2025-12-18
-    last_updated: 2026-02-08
+    last_updated: 2026-04-21
 IMPL-TIED_FILES:
   type: IMPL
   name: TIED File Creation
   status: Active
-  description: TIED file creation implementation
+  description: Index stub; procedure in agent-req-implementation-checklist.yaml
   cross_references:
     - ARCH-TIED_STRUCTURE
     - REQ-TIED_SETUP
   source_index: implementation-decisions.yaml
-  detail_file: implementation-decisions/IMPL-TIED_FILES.yaml
+  detail_file: null
   metadata:
     registered: 2025-12-18
-    last_updated: 2026-02-08
+    last_updated: 2026-04-21
 IMPL-MODULE_VALIDATION:
   type: IMPL
   name: Module Validation Implementation
   status: Active
-  description: Module validation implementation
+  description: Index stub; procedure in agent-req-implementation-checklist.yaml
   cross_references:
     - ARCH-MODULE_VALIDATION
     - REQ-MODULE_VALIDATION
   source_index: implementation-decisions.yaml
-  detail_file: implementation-decisions/IMPL-MODULE_VALIDATION.yaml
+  detail_file: null
   metadata:
     registered: 2025-12-18
-    last_updated: 2026-02-08
+    last_updated: 2026-04-21
 PROC-PROJECT_SURVEY_AND_SETUP:
   type: PROC
   name: Project Survey and Setup Process
@@ -245,41 +245,41 @@ REQ-FEEDBACK_TO_TIED:
   name: Feedback to TIED (Feature Requests, Bug Reports, Methodology)
   category: Functional
   status: Active
-  description: Projects and users can submit feature requests, bug reports, and methodology improvement suggestions; store under TIED tree and export for reporting to TIED project
+  description: Index stub; optional feedback tooling; see checklist when building
   cross_references:
     - ARCH-FEEDBACK_STORAGE
     - IMPL-MCP_FEEDBACK_TOOLS
   source_index: requirements.yaml
-  detail_file: requirements/REQ-FEEDBACK_TO_TIED.yaml
+  detail_file: null
   metadata:
     registered: 2026-03-03
-    last_updated: 2026-03-03
+    last_updated: 2026-04-21
 ARCH-FEEDBACK_STORAGE:
   type: ARCH
   name: Feedback Storage for TIED Reporting
   status: Active
-  description: Feedback stored in single file tied/feedback.yaml; MCP tools read/write via base path resolution
+  description: Index stub; see checklist when building feedback path
   cross_references:
     - REQ-FEEDBACK_TO_TIED
     - IMPL-MCP_FEEDBACK_TOOLS
   source_index: architecture-decisions.yaml
-  detail_file: architecture-decisions/ARCH-FEEDBACK_STORAGE.yaml
+  detail_file: null
   metadata:
     registered: 2026-03-03
-    last_updated: 2026-03-03
+    last_updated: 2026-04-21
 IMPL-MCP_FEEDBACK_TOOLS:
   type: IMPL
   name: MCP Feedback Tools
   status: Active
-  description: Two MCP tools (tied_feedback_add, tied_feedback_export) and feedback module for load/append/export
+  description: Index stub; TIED mcp-server tools when adopted
   cross_references:
     - ARCH-FEEDBACK_STORAGE
     - REQ-FEEDBACK_TO_TIED
   source_index: implementation-decisions.yaml
-  detail_file: implementation-decisions/IMPL-MCP_FEEDBACK_TOOLS.yaml
+  detail_file: null
   metadata:
     registered: 2026-03-03
-    last_updated: 2026-03-03
+    last_updated: 2026-04-21
 # ---
 # Template Record - Copy this block to create new tokens
 # ---

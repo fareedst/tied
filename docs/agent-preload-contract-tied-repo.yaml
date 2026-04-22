@@ -7,6 +7,12 @@
 # detail dirs live at the repo root (no tied/ subtree). For client projects that use
 # tied/ after copy_files.sh, use docs/agent-preload-contract-template.yaml instead.
 #
+# Maintainers: Update this file when this repository's methodology layout, MCP/Node
+# stack, or root-index paths change—parallel to the client checklist rule that
+# refreshes agent-preload-contract.yaml after material ARCH/IMPL decisions (see
+# docs/agent-req-implementation-checklist.yaml, author-architecture and
+# persist-implementation-records).
+#
 # Copy or subset this file per session and fill values.
 agent_preload:
   workspace:
@@ -28,7 +34,7 @@ agent_preload:
     detail_files_schema: ./detail-files-schema.md
     requirements_index: ./requirements.yaml
   methodology_vs_project:
-    # Client projects: tied/methodology/** is read-only [PROC-TIED_METHODOLOGY_READONLY].
+    # Client projects: ./tied/methodology/** is read-only [PROC-TIED_METHODOLOGY_READONLY].
     # This repo: templates/** is methodology source (shipped by copy_files.sh); edit here
     # when changing methodology. Root requirements/, architecture-decisions/, implementation-decisions/
     # hold canonical template indexes and detail files.
@@ -71,14 +77,17 @@ agent_preload:
   active_user_intent:
     primary_query_summary: ""
     checklist_token: "" # e.g. PROC-AGENT_REQ_CHECKLIST
-    checklist_step_id: "" # e.g. S01
+    checklist_step_id: "" # e.g. session-bootstrap
 # Instruction block for prompts (optional; paste near agent_preload in user rules)
 preload_instructions: |
   Treat agent_preload as authoritative context. If a value is present, do not spend
   tool calls rediscovering it unless a later tool result or user message contradicts it.
   Prefer preload facts over filesystem discovery. Do not search for MCP schema, server
-  metadata, project layout, or target file existence unless needed to resolve a
-  contradiction. When tied_paths.TIED_BASE_PATH and project_yaml_writable_globs are set,
+  metadata, `.cursor/mcp.json`, or pause to confirm MCP unavailability — especially when
+  the session is driven by Go tools/agentstream (MCP preflight there is optional; copy_files.sh
+  installs `.cursor/skills/tied-yaml/` only). Do not search project layout or target file
+  existence unless needed to resolve a contradiction. When tied_paths.TIED_BASE_PATH and
+  project_yaml_writable_globs are set,
   align MCP TIED_BASE_PATH with them (use "." for this repo unless tied_config_get_base_path
   says otherwise). Methodology in this repository lives under methodology_source_glob
   (templates/**), not client tied/methodology/**. Keep preload narrow and accurate; wrong

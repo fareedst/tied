@@ -16,7 +16,7 @@ This document explains what you gain and what you pay when you combine **TIED** 
 | **LEAP** | When tests or code disagree with IMPL pseudo-code, update **IMPL first**, then propagate to ARCH/REQ if scope changed | Prevents “silent divergence” where the repo drifts from the documented plan |
 | **CITDP** | Define the change, analyze impact, plan tests, record risks, persist a **CITDP YAML record** | Makes analysis auditable and reusable; connects back to TIED tokens |
 
-The checklist **`[PROC-AGENT_REQ_CHECKLIST]`** is the spine: it sequences CITDP-style analysis (early steps), TIED authoring (REQ/ARCH/IMPL), strict TDD and validation, LEAP at divergence points, and CITDP persistence (S15). See [methodology-diagrams.md](methodology-diagrams.md) for additional diagrams.
+The checklist **`[PROC-AGENT_REQ_CHECKLIST]`** is the spine: it sequences CITDP-style analysis (early steps), TIED authoring (REQ/ARCH/IMPL), strict TDD and validation, LEAP at divergence points, and CITDP persistence (persist-citdp-record). See [methodology-diagrams.md](methodology-diagrams.md) for additional diagrams.
 
 ### Three pillars (visual)
 
@@ -37,7 +37,7 @@ flowchart TB
     subgraph citdpPillar ["CITDP_record"]
         define["Change_definition"]
         impact["Impact_and_tests"]
-        store["CITDP_YAML_at_S15"]
+        store["CITDP_YAML_at_persist-citdp-record"]
         define --> impact --> store
     end
     tiedPillar -.->|"authoritative_plan"| leapPillar
@@ -51,11 +51,11 @@ flowchart TB
 ## Benefits
 
 - **Traceability**: Decisions and code map to explicit tokens; reviews and audits have anchors.
-- **Fewer silent mistakes**: IMPL pseudo-code is written before RED tests; **SUB-LEAP-MICRO** and S09/S12 alignment checks reduce “the code works but nobody updated the spec.”
+- **Fewer silent mistakes**: IMPL pseudo-code is written before RED tests; **sub-leap-micro-cycle** and S09/verification-gate alignment checks reduce “the code works but nobody updated the spec.”
 - **Controlled agent and team behavior**: The ordered checklist ([agent-req-implementation-checklist.yaml](agent-req-implementation-checklist.yaml)) gives a repeatable session shape—especially valuable when AI agents implement features in batches.
-- **Test design up front**: S07–S08 force risk thinking and a test matrix before the heavy coding loop.
-- **Composable quality**: Unit TDD (S09), composition tests (S10), then E2E only where justified (S11)—matches [implementation-order.md](implementation-order.md).
-- **Recoverable history**: S15 CITDP records (when policy requires them—see `tied/docs/citdp-policy.md` after `copy_files.sh`) document what changed and why.
+- **Test design up front**: risk-assessment–test-strategy force risk thinking and a test matrix before the heavy coding loop.
+- **Composable quality**: Unit TDD (S09), composition tests (composition-integration), then E2E only where justified (end-to-end-ui)—matches [implementation-order.md](implementation-order.md).
+- **Recoverable history**: persist-citdp-record CITDP records (when policy requires them—see `tied/docs/citdp-policy.md` after `copy_files.sh`) document what changed and why.
 
 ---
 
@@ -64,7 +64,7 @@ flowchart TB
 - **Time and ceremony**: Authoring REQ/ARCH/IMPL with token-commented pseudo-code before production code is slower than hacking first—by design.
 - **Learning curve**: Teams must learn tokens, YAML layout, MCP workflows (typical for TIED projects), and the RED–GREEN–REFACTOR–SYNC loop.
 - **Tooling dependency**: Validating and mutating project TIED YAML often assumes the **TIED MCP server**, `lint_yaml`, and `tied_validate_consistency`; workflows degrade if those are skipped or misconfigured.
-- **Documentation maintenance**: TIED only pays off if S12–S13 are taken seriously; otherwise YAML becomes **documentation rot**—worse than no docs because it misleads.
+- **Documentation maintenance**: TIED only pays off if verification-gate–sync-tied-stack are taken seriously; otherwise YAML becomes **documentation rot**—worse than no docs because it misleads.
 - **Overkill for tiny spikes**: Throwaway experiments may not warrant full CITDP persistence; project policy (`tied/docs/citdp-policy.md`) governs when to create vs skip records.
 
 ---
@@ -90,10 +90,10 @@ Think of **TIED** like labeled rooms in a building: every important decision has
 **Tradeoffs:**
 
 - **Velocity vs safety:** Documentation-first TDD is slower than prototype-first. For disposable spikes, teams may intentionally run a **subset** of steps; that is a process choice, not a failure—provided someone documents the risk.
-- **CITDP record overhead:** Not every one-line fix needs a full CITDP file. Client projects should follow **`tied/docs/citdp-policy.md`** (copied with methodology; see checklist references) for when to persist vs skip S15.
+- **CITDP record overhead:** Not every one-line fix needs a full CITDP file. Client projects should follow **`tied/docs/citdp-policy.md`** (copied with methodology; see checklist references) for when to persist vs skip persist-citdp-record.
 - **MCP as gatekeeper:** Direct edits to `tied/*.yaml` bypassing MCP where tools exist violate the intended workflow and often break consistency; experts should enforce MCP-first or document one-line exceptions per [yaml-update-mcp-runbook.md](yaml-update-mcp-runbook.md).
 - **LEAP requires discipline:** If developers skip updating IMPL when behavior changes, LEAP cannot help—the process becomes token theater.
-- **Critique of “documentation-first”:** In fast product discovery, you may **prototype first**, then **backfill** REQ/ARCH/IMPL and tests in one LEAP-aware pass. The checklist still applies; the entry point may emphasize S02–S03 from observed behavior rather than greenfield intent.
+- **Critique of “documentation-first”:** In fast product discovery, you may **prototype first**, then **backfill** REQ/ARCH/IMPL and tests in one LEAP-aware pass. The checklist still applies; the entry point may emphasize change-definition–impact-discovery from observed behavior rather than greenfield intent.
 
 **Related deep dives:** [LEAP.md](LEAP.md), [impl-code-test-linkage.md](impl-code-test-linkage.md), [methodology-diagrams.md](methodology-diagrams.md). After `copy_files.sh`, the same content also lives under `tied/docs/` in client projects.
 
@@ -105,49 +105,49 @@ Adapted from [agent-req-implementation-checklist.md](agent-req-implementation-ch
 
 ```mermaid
 flowchart TD
-    Start(["Begin"]) --> stepS01
+    Start(["Begin"]) --> stepsession-bootstrap
 
-    stepS01["S01 Session Bootstrap\nRead TIED docs"]
-    stepS02["S02 Define Change\nSuccess criteria"]
-    stepS03["S03 Impact Analysis\nIMPL inventory"]
-    stepS04["S04 Author REQ\nIndex and detail"]
-    stepS05["S05 Author ARCH\nIndex and detail"]
+    stepsession-bootstrap["session-bootstrap Session Bootstrap\nRead TIED docs"]
+    stepchange-definition["change-definition Define Change\nSuccess criteria"]
+    stepimpact-discovery["impact-discovery Impact Analysis\nIMPL inventory"]
+    stepauthor-requirement["author-requirement Author REQ\nIndex and detail"]
+    stepauthor-architecture["author-architecture Author ARCH\nIndex and detail"]
     stepS06["S06 IMPL pseudo_code\nResolve collisions"]
 
-    stepS01 --> stepS02 --> stepS03 --> stepS04 --> stepS05 --> stepS06
-    stepS06 --> stepS07 --> stepS08
+    stepsession-bootstrap --> stepchange-definition --> stepimpact-discovery --> stepauthor-requirement --> stepauthor-architecture --> stepS06
+    stepS06 --> steprisk-assessment --> steptest-strategy
 
-    stepS07["S07 Risk Analysis"]
-    stepS08["S08 Test matrix\nTDD plan"]
+    steprisk-assessment["risk-assessment Risk Analysis"]
+    steptest-strategy["test-strategy Test matrix\nTDD plan"]
 
     subgraph unitTddLoop ["S09 Unit TDD"]
-        stepRed["S09.RED Failing test"]
-        stepGreen["S09.GREEN Minimum code"]
-        stepRefactor["S09.REFACTOR Optional"]
-        stepSync["S09.SYNC Three_way alignment"]
+        stepRed["unit-test-red Failing test"]
+        stepGreen["unit-test-green Minimum code"]
+        stepRefactor["unit-refactor Optional"]
+        stepSync["three-way-alignment-unit Three_way alignment"]
         stepRed --> stepGreen --> stepRefactor --> stepSync
     end
 
-    stepS08 --> stepRed
+    steptest-strategy --> stepRed
     stepSync -->|"more blocks"| stepRed
     stepGreen -.->|"SUB_LEAP_MICRO"| stepS06
 
-    stepS10["S10 Composition tests"]
-    stepS11["S11 E2E justified only"]
-    stepS12["S12 Final validation"]
-    stepS13["S13 Sync TIED"]
-    stepS14["S14 README CHANGELOG"]
-    stepS15["S15 Persist CITDP"]
-    stepS16["S16 Commit"]
+    stepcomposition-integration["composition-integration Composition tests"]
+    stepend-to-end-ui["end-to-end-ui E2E justified only"]
+    stepverification-gate["verification-gate Final validation"]
+    stepsync-tied-stack["sync-tied-stack Sync TIED"]
+    stepuser-facing-release-notes["user-facing-release-notes README CHANGELOG"]
+    steppersist-citdp-record["persist-citdp-record Persist CITDP"]
+    steptraceable-commit["traceable-commit Commit"]
 
-    stepSync -->|"all blocks done"| stepS10
-    stepS10 --> stepS11 --> stepS12 --> stepS13 --> stepS14 --> stepS15 --> stepS16
+    stepSync -->|"all blocks done"| stepcomposition-integration
+    stepcomposition-integration --> stepend-to-end-ui --> stepverification-gate --> stepsync-tied-stack --> stepuser-facing-release-notes --> steppersist-citdp-record --> steptraceable-commit
 
-    stepS10 -.->|"missing IMPL"| stepS06
-    stepS11 -.->|"missing IMPL"| stepS06
-    stepS13 -.->|"LEAP divergence"| stepS06
+    stepcomposition-integration -.->|"missing IMPL"| stepS06
+    stepend-to-end-ui -.->|"missing IMPL"| stepS06
+    stepsync-tied-stack -.->|"LEAP divergence"| stepS06
 
-    stepS16 --> Done(["EXIT complete"])
+    steptraceable-commit --> Done(["EXIT complete"])
 ```
 
 ---
@@ -158,39 +158,39 @@ Canonical definitions, tasks, and branches live in **[agent-req-implementation-c
 
 | Step ID | Name | Brief description |
 | --- | --- | --- |
-| S01 | Session Bootstrap | Confirm access to governing TIED documents; establish session context and priorities. |
-| S02 | Define Change or New Requirement | State current, desired, and unchanged behavior; non-goals; measurable success criteria. |
-| S03 | Impact Analysis and IMPL Discovery | Map affected modules and tokens; build IMPL inventory table for the change. |
-| S04 | Author/Update REQ | Create or update requirement index and detail; register `[REQ-*]` in `semantic-tokens.yaml`. |
-| S05 | Author/Update ARCH | Create or update architecture decisions with REQ cross-references. |
-| S06.1 | Read and Catalog Contracts (Phase B — Reasoning) | Catalog INPUT/OUTPUT/DATA and structure of each IMPL’s `essence_pseudocode`. |
-| S06.2 | Identify Insufficient Specs | Flag gaps (missing I/O, undefined procedures, missing token comments, stubs on active IMPLs). |
-| S06.3 | Identify Contradictory Specs | Detect conflicts across IMPLs (data, ordering, outputs, duplicate logic). |
-| S06.4 | Resolve and Update | Fix pseudo-code; GOTO S05/S04 if ARCH/REQ scope changes. |
-| S06.5 | Apply Block Token Comments (Phase C — Documentation) | Apply `[PROC-IMPL_PSEUDOCODE_TOKENS]`; document cross-IMPL dependencies and composition. |
-| S06.5a | Run Pseudo-Code Validation | CALL **SUB-PSEUDOCODE-VALIDATE**; gate on validation checklist or documented waiver. |
-| S06.6 | Persist IMPL Records | Write implementation index and detail files; register `[IMPL-*]`; validate YAML. |
-| S07 | Risk Analysis | List risks with mitigations and token references. |
-| S08 | Test Determination and Planning | Classify testability per block; build test matrix; plan unit → composition → E2E order. |
-| S09.RED | Write Failing Test (Phase D) | Map pseudo-code to a failing test with matching token comments; no production code. |
-| S09.GREEN | Write Minimum Production Code (Phase E) | Minimal code to pass; lint; CALL **SUB-LEAP-MICRO** if pseudo-code was wrong. |
-| S09.REFACTOR | Refactor (optional) | Improve structure without behavior change; re-run tests and lint. |
-| S09.SYNC | Three-Way Alignment Check (Phase F) | Align pseudo-code, tests, and code tokens; run token audit; CALL **SUB-YAML** as needed. |
-| S10 | Composition Testing (Phase G) | Failing composition tests then code for bindings; no UI; extend IMPL if missing. |
-| S11 | E2E Testing (Phase H) | E2E only for UI-only or platform constraints; document `e2e_only_reason`. |
-| S12 | Final Validation (Phase I) | Full suite, lint, `tied_validate_consistency`, three-way audit, IMPL metadata, module validation. |
-| S13 | Sync TIED to Code and Tests | Final TIED alignment; LEAP to S06/S05/S04 if drift remains. |
-| S14 | Update README and CHANGELOG | User-facing and release notes for the session. |
-| S15 | Persist CITDP Record | Store CITDP YAML under the client project per policy. |
-| S16 | Commit | Commit with `[PROC-COMMIT_MESSAGES]` format and token references. |
+| session-bootstrap | Session Bootstrap | Confirm access to governing TIED documents; establish session context and priorities. |
+| change-definition | Define Change or New Requirement | State current, desired, and unchanged behavior; non-goals; measurable success criteria. |
+| impact-discovery | Impact Analysis and IMPL Discovery | Map affected modules and tokens; build IMPL inventory table for the change. |
+| author-requirement | Author/Update REQ | Create or update requirement index and detail; register `[REQ-*]` in `semantic-tokens.yaml`. |
+| author-architecture | Author/Update ARCH | Create or update architecture decisions with REQ cross-references. |
+| catalog-pseudocode-contracts | Read and Catalog Contracts (Phase B — Reasoning) | Catalog INPUT/OUTPUT/DATA and structure of each IMPL’s `essence_pseudocode`. |
+| flag-insufficient-specs | Identify Insufficient Specs | Flag gaps (missing I/O, undefined procedures, missing token comments, stubs on active IMPLs). |
+| flag-contradictory-specs | Identify Contradictory Specs | Detect conflicts across IMPLs (data, ordering, outputs, duplicate logic). |
+| resolve-pseudocode | Resolve and Update | Fix pseudo-code; GOTO author-architecture/author-requirement if ARCH/REQ scope changes. |
+| apply-token-comments | Apply Block Token Comments (Phase C — Documentation) | Apply `[PROC-IMPL_PSEUDOCODE_TOKENS]`; document cross-IMPL dependencies and composition. |
+| gate-pseudocode-validation | Run Pseudo-Code Validation | CALL **sub-pseudocode-validation-pass**; gate on validation checklist or documented waiver. |
+| persist-implementation-records | Persist IMPL Records | Write implementation index and detail files; register `[IMPL-*]`; validate YAML. |
+| risk-assessment | Risk Analysis | List risks with mitigations and token references. |
+| test-strategy | Test Determination and Planning | Classify testability per block; build test matrix; plan unit → composition → E2E order. |
+| unit-test-red | Write Failing Test (Phase D) | Map pseudo-code to a failing test with matching token comments; no production code. |
+| unit-test-green | Write Minimum Production Code (Phase E) | Minimal code to pass; lint; CALL **sub-leap-micro-cycle** if pseudo-code was wrong. |
+| unit-refactor | Refactor (optional) | Improve structure without behavior change; re-run tests and lint. |
+| three-way-alignment-unit | Three-Way Alignment Check (Phase F) | Align pseudo-code, tests, and code tokens; run token audit; CALL **sub-yaml-edit-loop** as needed. |
+| composition-integration | Composition Testing (Phase G) | Failing composition tests then code for bindings; no UI; extend IMPL if missing. |
+| end-to-end-ui | E2E Testing (Phase H) | E2E only for UI-only or platform constraints; document `e2e_only_reason`. |
+| verification-gate | Final Validation (Phase I) | Full suite, lint, `tied_validate_consistency`, three-way audit, IMPL metadata, module validation. |
+| sync-tied-stack | Sync TIED to Code and Tests | Final TIED alignment; LEAP to S06/author-architecture/author-requirement if drift remains. |
+| user-facing-release-notes | Update README and CHANGELOG | User-facing and release notes for the session. |
+| persist-citdp-record | Persist CITDP Record | Store CITDP YAML under the client project per policy. |
+| traceable-commit | Commit | Commit with `[PROC-COMMIT_MESSAGES]` format and token references. |
 
 ### Sub-procedures (invoked from steps above)
 
 | Step ID | Name | Brief description |
 | --- | --- | --- |
-| SUB-YAML | YAML Edit and Validation Loop | MCP-first mutations for project TIED YAML; `lint_yaml`; `tied_validate_consistency`; no silent IDE bypass. |
-| SUB-PSEUDOCODE-VALIDATE | Pseudo-Code Validation | Run [pseudocode-validation-checklist.yaml](pseudocode-validation-checklist.yaml) categories; gate before tests/code. |
-| SUB-LEAP-MICRO | LEAP Micro-Cycle During TDD | Stop coding; fix IMPL pseudo-code and tests; align three ways; GOTO S05/S04 if scope changes. |
+| sub-yaml-edit-loop | YAML Edit and Validation Loop | MCP-first mutations for project TIED YAML; `lint_yaml`; `tied_validate_consistency`; no silent IDE bypass. |
+| sub-pseudocode-validation-pass | Pseudo-Code Validation | Run [pseudocode-validation-checklist.yaml](pseudocode-validation-checklist.yaml) categories; gate before tests/code. |
+| sub-leap-micro-cycle | LEAP Micro-Cycle During TDD | Stop coding; fix IMPL pseudo-code and tests; align three ways; GOTO author-architecture/author-requirement if scope changes. |
 
 ---
 

@@ -1,6 +1,6 @@
 # Agent workflow: `req_impl_state_guide`
 
-**Audience**: AI agents. This tool **combines** the outer loop of `requirement_list_state_guide` (ordered client-supplied specifications) with the inner loop of `agent_req_state_guide` (fixed checklist S01 through `end_agent_req`) in **one MCP tool** and **one continuation token**.
+**Audience**: AI agents. This tool **combines** the outer loop of `requirement_list_state_guide` (ordered client-supplied specifications) with the inner loop of `agent_req_state_guide` (fixed checklist session-bootstrap through `end_agent_req`) in **one MCP tool** and **one continuation token**.
 
 ---
 
@@ -19,7 +19,7 @@
 |---|--------|
 | **First call** | Non-empty **`requirements`** (same shape as `requirement_list_state_guide`: `id`, `name`, `depends_on`, `summary`, `rationale`, `inputs`, `outputs`, `functional_requirements`, `acceptance_criteria`, `test_scope`). Omit **`current_state`**. |
 | **Advance** | **`current_state`** = prior response **`continuation_state`** (opaque base64url JSON). **`requirements`** is ignored when `current_state` is set. |
-| **Per response** | **`spec`**: full requirement object for the current specification. **`agent_step`**: current checklist step (`id`, `title`, `stage`, `goals`, `tasks`, `outcomes`). **`state`**: composite `specId__stepId` (e.g. `REQ-AUTH__S06.1`). |
+| **Per response** | **`spec`**: full requirement object for the current specification. **`agent_step`**: current checklist step (`id`, `title`, `stage`, `goals`, `tasks`, `outcomes`). **`state`**: composite `specId__stepId` (e.g. `REQ-AUTH__catalog-pseudocode-contracts`). |
 | **End** | After the last spec’s **`end_agent_req`** step, the next call returns **`state: end_req_impl`**, **`is_end: true`**. Passing the same **`continuation_state`** again stays at terminal (idempotent). |
 | **Error** | Empty list, bad token, validation failure, out-of-range continuation → **`state: error`**, **`is_end: true`**. |
 

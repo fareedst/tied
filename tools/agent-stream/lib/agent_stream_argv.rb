@@ -22,7 +22,7 @@ module AgentStreamArgv
       Options:
         --session-id UUID     Resume this session for turn 1 (passed to agent as --resume)
         --workspace PATH      Pass --workspace to agent
-        --prompt-file PATH    One agent turn per file (content = full message); repeat for multiple turns
+        --prompt-file PATH    Session prefix: each file is prepended on every new agent session (not a separate turn); repeat for multiple argv parts in prepend order
         --prompts-file PATH   Multiple turns from one file, blocks separated by a line containing only ---
         --tdd-yaml PATH       Append one turn per step from docs/tdd_development_loop.yaml-style file
         --feature-spec-batch-yaml PATH   Append one turn per feature record (order, feature_name, goal, …)
@@ -30,23 +30,28 @@ module AgentStreamArgv
         --preview-feature-spec-batch-yaml PATH   Print rendered prompts to stdout and exit (no agent; run_agent_stream.rb only)
         --lead-checklist-yaml PATH   Append one turn per main step (+ sub-procedures) from agent-req checklist YAML
         --lead-checklist-skip-sub    With --lead-checklist-yaml: omit sub_procedures turns (main steps only)
+        --checklist-var KEY=VALUE    Repeatable; expands {{KEY}} in lead checklist YAML (synonym: --lead-checklist-var)
+        --checklist-var-strict       Error if any {{NAME}} remains (env: AGENTSTREAM_CHECKLIST_VAR_STRICT=1)
         --verify-session      After all other turns, run a final turn with the session smoke prompt
         --dry-run             Print each turn's prompts and agent argv; do not run agent
 
       Turn order:
         1) Words from argv after -- (if any), as separate arguments to agent (same as shell word-splitting)
-        2) Each --prompt-file in order
-        3) Each block from each --prompts-file in order
-        4) Each message generated from --tdd-yaml
-        5) Each message generated from each --feature-spec-batch-yaml
-        6) Each message generated from each --lead-checklist-yaml (steps, then sub_procedures unless --lead-checklist-skip-sub)
-        7) If --verify-session: final smoke prompt
+        2) Each block from each --prompts-file in order
+        3) Each message generated from --tdd-yaml
+        4) Each message generated from each --feature-spec-batch-yaml
+        5) Each message generated from each --lead-checklist-yaml (steps, then sub_procedures unless --lead-checklist-skip-sub)
+        6) If --verify-session: final smoke prompt
+
+      Each --prompt-file body is prepended (in order, one argv part per file) before any turn that
+      starts without --resume (including after a --feature-spec-batch-yaml record).
 
       At least one turn is required (argv words and/or files and/or --tdd-yaml and/or --feature-spec-batch-yaml and/or --lead-checklist-yaml).
 
       Streamed assistant/thinking text is printed to stdout. session_id=... is printed on stderr
       after each turn. Each --feature-spec-batch-yaml record starts a new agent session (no --resume
-      from the prior turn); other consecutive turns use --resume with the previous session id.
+      from the prior turn). Lead checklist steps with agentstream_new_session: true start a new
+      session; other consecutive turns use --resume with the previous session id.
     MSG
   end
 
@@ -73,6 +78,8 @@ module AgentStreamArgv
     feature_spec_batch_yaml_paths = []
     lead_checklist_yaml_paths = []
     lead_checklist_skip_sub = false
+    checklist_vars = {}
+    checklist_var_strict = ENV['AGENTSTREAM_CHECKLIST_VAR_STRICT'] == '1'
     feature_spec_batch_order_filter = nil
     rest = argv.dup
 
@@ -121,6 +128,18 @@ module AgentStreamArgv
       when '--lead-checklist-skip-sub'
         rest.shift
         lead_checklist_skip_sub = true
+      when '--checklist-var', '--lead-checklist-var'
+        rest.shift
+        raise ArgumentError, 'missing value for --checklist-var' if rest.empty?
+
+        pair = rest.shift
+        key, val = pair.split('=', 2)
+        raise ArgumentError, '--checklist-var requires KEY=VALUE' if key.nil? || key.strip.empty?
+
+        checklist_vars[key.strip] = val
+      when '--checklist-var-strict'
+        rest.shift
+        checklist_var_strict = true
       when '--verify-session'
         rest.shift
         verify_session = true
@@ -148,10 +167,10 @@ module AgentStreamArgv
 
     append_turn(turns, chain_between, rest, chain_from_previous: true) unless rest.empty?
 
-    prompt_file_paths.each do |p|
+    preload_parts = prompt_file_paths.map do |p|
       raise ArgumentError, "not a file: #{p}" unless File.file?(p)
 
-      append_turn(turns, chain_between, [File.read(p, encoding: 'UTF-8').strip], chain_from_previous: true)
+      File.read(p, encoding: 'UTF-8').strip
     end
 
     prompts_file_paths.each do |p|
@@ -181,8 +200,10 @@ module AgentStreamArgv
     lead_checklist_yaml_paths.each do |p|
       raise ArgumentError, "not a file: #{p}" unless File.file?(p)
 
-      LeadChecklistPrompts.messages_from_yaml(p, include_sub_procedures: !lead_checklist_skip_sub).each do |msg|
-        append_turn(turns, chain_between, [msg], chain_from_previous: true)
+      LeadChecklistPrompts.step_entries_from_yaml(p, include_sub_procedures: !lead_checklist_skip_sub,
+                                                       checklist_vars: checklist_vars,
+                                                       checklist_var_strict: checklist_var_strict).each do |e|
+        append_turn(turns, chain_between, [e[:message]], chain_from_previous: e.fetch(:chain_from_previous, true))
       end
     end
 
@@ -190,6 +211,6 @@ module AgentStreamArgv
 
     raise ArgumentError, 'no prompts: provide argv words, --prompt-file, --prompts-file, --tdd-yaml, --feature-spec-batch-yaml, and/or --lead-checklist-yaml' if turns.empty?
 
-    [session_id, workspace, turns, dry_run, chain_between]
+    [session_id, workspace, turns, dry_run, chain_between, preload_parts]
   end
 end

@@ -21,7 +21,7 @@ ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS:
   implementation_approach:
     summary: AgentStreamArgv and export pipeline call into lib/tdd_loop_prompts.rb; lead checklist uses LeadChecklistPrompts
     details:
-      - '--tdd-yaml expands via TddLoopPrompts.messages_from_yaml'
+      - --tdd-yaml expands via TddLoopPrompts.messages_from_yaml
       - Export uses TddLoopPrompts.step_entries_from_yaml and format_step
   traceability:
     requirements:

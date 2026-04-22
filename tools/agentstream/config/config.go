@@ -21,6 +21,7 @@ type Config struct {
 	OrderFilterRaw              string
 	LeadChecklistYAML           string
 	LeadChecklistSkipSub        bool
+	// LeadChecklistStepFromID / LeadChecklistStepToID: inclusive main-step bounds by YAML step slug (--lead-checklist-*-step).
 	LeadChecklistStepFromID     string
 	LeadChecklistStepToID       string
 	PromptFiles                 []string
@@ -36,10 +37,17 @@ type Config struct {
 	AssumeTiedMCPYes            bool
 	// FirstTurn is 1-based index of the first turn to run after pipeline.Build (default 1). REQ-GOAGENT-CLI-CONFIG.
 	FirstTurn int
+	// ChecklistVars maps {{KEY}} placeholders when rendering --lead-checklist-yaml (repeatable --checklist-var KEY=VALUE).
+	ChecklistVars map[string]string
+	// ChecklistVarStrict errors if any {{NAME}} remains after substitution (CLI or AGENTSTREAM_CHECKLIST_VAR_STRICT=1).
+	ChecklistVarStrict bool
+	// LeadChecklistBeforeFeatureSpec: when set with both -b and -c, emit checklist turns before feature-spec turns.
+	LeadChecklistBeforeFeatureSpec bool
 
 	promptFileExplicit          bool
 	featureSpecBatchExplicit    bool
 	positionalFeatureSpecYAML   string
+	tiedMCPPreflightUserSet     bool
 }
 
 // FindRepoRoot walks parents from start looking for docs/agent-req-implementation-checklist.yaml. REQ-GOAGENT-CLI-CONFIG.
@@ -125,6 +133,8 @@ func parseFlags(args []string, c *Config) error {
 				c.DryRun = true
 			case k == "--lead-checklist-skip-sub":
 				c.LeadChecklistSkipSub = true
+			case k == "--lead-checklist-before-feature":
+				c.LeadChecklistBeforeFeatureSpec = true
 			case k == "--verify-session":
 				c.VerifySession = true
 			case k == "-s" || k == "--session-id":
@@ -235,8 +245,28 @@ func parseFlags(args []string, c *Config) error {
 				c.MCPJSONPath = val
 			case k == "--skip-tied-mcp-preflight":
 				c.SkipTiedMCPPreflight = true
+				c.tiedMCPPreflightUserSet = true
+			case k == "--tied-mcp-preflight":
+				c.SkipTiedMCPPreflight = false
+				c.tiedMCPPreflightUserSet = true
 			case k == "-y" || k == "--yes":
 				c.AssumeTiedMCPYes = true
+			case k == "--checklist-var" || k == "--lead-checklist-var":
+				val, err := needVal(k, v, ok, args, &i)
+				if err != nil {
+					return err
+				}
+				key, value, cut := strings.Cut(val, "=")
+				key = strings.TrimSpace(key)
+				if !cut || key == "" {
+					return fmt.Errorf("%s requires KEY=VALUE", k)
+				}
+				if c.ChecklistVars == nil {
+					c.ChecklistVars = make(map[string]string)
+				}
+				c.ChecklistVars[key] = value
+			case k == "--checklist-var-strict":
+				c.ChecklistVarStrict = true
 			default:
 				return fmt.Errorf("unknown option: %s", k)
 			}
@@ -313,6 +343,13 @@ func resolveDefaults(cwd string, c *Config) error {
 	if c.FirstTurn == 0 {
 		c.FirstTurn = 1
 	}
+	if os.Getenv("AGENTSTREAM_CHECKLIST_VAR_STRICT") == "1" {
+		c.ChecklistVarStrict = true
+	}
+	// Default: do not validate .cursor/mcp.json before cursor agent (opt in with --tied-mcp-preflight).
+	if !c.tiedMCPPreflightUserSet {
+		c.SkipTiedMCPPreflight = true
+	}
 	return nil
 }
 
@@ -378,10 +415,14 @@ Options:
   -w, --workspace PATH     (default: current directory)
   -m, --model MODEL        (default: Auto)
   -c, --lead-checklist-yaml PATH
-      --lead-checklist-from-step ID   (optional inclusive lower; main steps only)
-      --lead-checklist-to-step ID     (optional inclusive upper; main steps only)
+      --lead-checklist-from-step ID-or-slug   (optional inclusive lower; main steps only)
+      --lead-checklist-to-step ID-or-slug     (optional inclusive upper; main steps only)
       --lead-checklist-skip-sub
-  -p, --prompt-file PATH   (repeatable)
+      --lead-checklist-before-feature
+                    (with -b and -c: lead checklist steps before feature-spec records; default is feature-spec first)
+      --checklist-var KEY=VALUE   (repeatable; synonym: --lead-checklist-var; expands {{KEY}} in lead checklist YAML)
+      --checklist-var-strict      (error if any {{NAME}} remains after expansion; env: AGENTSTREAM_CHECKLIST_VAR_STRICT=1)
+  -p, --prompt-file PATH   (repeatable; prepended on each new session, not a separate turn)
       --prompts-file PATH  (repeatable)
       --tdd-yaml PATH      (repeatable)
   -b, --feature-spec-batch-yaml PATH (repeatable)
@@ -389,8 +430,10 @@ Options:
       --verify-session
       --agent-path PATH    (default: agent on PATH)
       --mcp-json PATH      (explicit .cursor/mcp.json when multiple projects under --workspace)
+      --tied-mcp-preflight validate .cursor/mcp.json for tied-yaml before cursor agent
+                          (off by default; also: AGENTSTREAM_TIED_MCP_PREFLIGHT=1)
       --skip-tied-mcp-preflight
-                          (also: AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1)
+                          skip validation (default; also: AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1)
   -y, --yes              non-interactive: continue after tied-yaml preflight warnings/blocks
   -h, --help
 
@@ -399,7 +442,7 @@ Positional:
 
 Defaults when files exist:
   lead checklist: <repo>/docs/agent-req-implementation-checklist.yaml
-  prompt file:    <workspace>/agent-preload-contract.yaml
+  prompt file:    <workspace>/agent-preload-contract.yaml (prepended on new sessions only)
   feature batch:  <workspace>/prompts/all.yaml
 `, program)
 }

@@ -7,3 +7,24 @@ ARCH-GOAGENT-CLI:
     implementation:
       - IMPL-GOAGENT-CLI-CMD
   detail_file: architecture-decisions/ARCH-GOAGENT-CLI.yaml
+  cross_references:
+    - REQ-GOAGENT-CLI-CONFIG
+  decision: 'Go agentstream exposes one CLI surface (ParseAndResolve + main). Static tied-yaml validation of .cursor/mcp.json is optional and off by default: callers opt in with --tied-mcp-preflight or AGENTSTREAM_TIED_MCP_PREFLIGHT=1; it is not required for batch or CI and does not prove runtime MCP registration in Cursor.'
+  implementation_approach:
+    summary: config.ParseAndResolve walks argv; resolveDefaults applies workspace and repo-root discovery; optional tiedpreflight after pipeline chain is built and before dry-run or subprocess agent turns.
+    details:
+      - Validation gates (readable paths, checklist bounds, order filter vs batch) run inside ParseAndResolve before pipeline.Build.
+      - 'Optional tiedpreflight (package tiedpreflight): validates mcpServers.tied-yaml and TIED_BASE_PATH when enabled; default skip unless user opts in or env AGENTSTREAM_TIED_MCP_PREFLIGHT=1; AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1 forces skip.'
+      - copy_files.sh installs .cursor/skills/tied-yaml only; it does not author .cursor/mcp.json — architecture treats IDE MCP config as separate from the Cursor skill bundle.
+  metadata:
+    created:
+      date: "2026-03-27T00:00:00.000Z"
+      author: AI Agent
+    last_updated:
+      date: "2026-04-18T00:00:00.000Z"
+      author: AI Agent
+      reason: Optional tied-yaml MCP preflight documented; default off
+    last_validated:
+      date: "2026-03-27T00:00:00.000Z"
+      validator: AI Agent
+      result: pass

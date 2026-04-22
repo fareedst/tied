@@ -4,7 +4,7 @@
 
 This template demonstrates a realistic conversation between a developer and an AI-coder following the TIED methodology when adding a feature to an existing, complex application.
 
-**Note**: This conversation example shows task planning in `tasks.md`. As of TIED 2.1.0, task tracking via `tasks.md` is **optional**. Agents may maintain planning state in-session (e.g., conversation-based todo lists) or document work breakdown in `implementation-decisions`. The core TIED value is in the **traceability chain** (requirements → architecture → implementation → tests → code), not in task tracking artifacts.
+**Note**: This conversation example uses an in-session work order and TIED documentation. Execution is sequenced the same way modern TIED clients do: **agentstream** (or equivalent) feeds the **agent requirement implementation checklist** one step at a time. The core TIED value is in the **traceability chain** (requirements → architecture → implementation → tests → code), not in a separate project task file.
 
 ---
 
@@ -90,7 +90,7 @@ I'll now:
 2. Document architecture decisions in `architecture-decisions.md`
 3. Document implementation decisions in `implementation-decisions.md`
 4. Update `semantic-tokens.yaml` with new tokens
-5. Plan implementation steps (this example uses `tasks.md`, but in-session planning is also valid)
+5. Plan implementation steps (in-session work order; real runs follow the agent REQ checklist per turn)
 
 Let me start:
 
@@ -176,9 +176,7 @@ I've added `[IMPL-METRICS_EXPOSURE]` which:
 
 Updated `semantic-tokens.yaml` with all new tokens and their relationships.
 
-Now creating tasks in `tasks.md`:
-
-I've created the following tasks with priorities:
+Now capturing the implementation work order (priorities for checklist-driven execution):
 
 **P0 Tasks (Critical)**:
 - `[REQ-RATE_LIMITING]` Implement token bucket algorithm core logic
@@ -278,12 +276,12 @@ I've completed Phase 1 of TIED:
 ✅ **Architecture decisions** documented in `architecture-decisions.md` with `[ARCH-*]` tokens  
 ✅ **Implementation decisions** documented in `implementation-decisions.md` with `[IMPL-*]` tokens  
 ✅ **Semantic tokens** registered in `semantic-tokens.yaml`  
-✅ **Tasks created** in `tasks.md` with priorities  
+✅ **Work order** captured with P0/P1/P2 priorities for checklist-driven execution  
 ✅ **Pseudo-code** provided showing the approach
 
 **No code has been written yet** - this follows TIED's documentation-first approach.
 
-Please review the documentation and let me know if you'd like any changes before I proceed to Phase 2 (task breakdown) and Phase 3 (implementation).
+Please review the documentation and let me know if you'd like any changes before I proceed to Phase 2 (work breakdown) and Phase 3 (implementation).
 
 ---
 
@@ -322,15 +320,15 @@ Ready to proceed to Phase 2?
 
 ---
 
-### 📋 Phase 2: Pseudo-Code → Tasks (Task Breakdown)
+### 📋 Phase 2: Work breakdown (checklist-sized units)
 
 **AI**: "Observing AI principles!"
 
-Breaking down tasks into implementable subtasks in `tasks.md`. Each subtask is a single, complete unit of work.
+Breaking the plan into implementable units aligned to the agent REQ checklist (e.g. unit-test-red, unit-test-green) and IMPL pseudo-code. Each unit is a single, complete slice of work.
 
-**AI** (updating tasks.md):
+**AI** (recording work breakdown):
 
-I've broken down each task into subtasks:
+I've broken down each priority band into concrete units:
 
 **P0: Implement token bucket algorithm core logic [REQ-RATE_LIMITING]**
 - [ ] Create `TokenBucket` struct with fields: tokens, lastRefill, limit, refillRate
@@ -393,7 +391,7 @@ I've broken down each task into subtasks:
 - [ ] Implement config lookup with endpoint override
 - [ ] Write test `TestPerEndpointConfig_REQ_RATE_LIMITING`
 
-All subtasks are now documented. Ready to proceed to Phase 3 (implementation)?
+All units are now documented. Ready to proceed to Phase 3 (implementation)?
 
 ---
 
@@ -401,7 +399,7 @@ All subtasks are now documented. Ready to proceed to Phase 3 (implementation)?
 
 ---
 
-### 💻 Phase 3: Tasks → Implementation
+### 💻 Phase 3: Implementation
 
 **AI**: "Observing AI principles!"
 
@@ -426,11 +424,11 @@ Moving to next subtask: Implement `NewTokenBucket()` constructor.
 ✅ Completed: Wrote unit test `TestTokenBucketRefill_REQ_RATE_LIMITING`  
 ✅ Completed: Wrote unit test `TestTokenBucketExhausted_REQ_RATE_LIMITING`
 
-All subtasks for "Implement token bucket algorithm core logic" are complete. Removing subtasks and marking parent task complete.
+All units for "Implement token bucket algorithm core logic" are complete.
 
-**AI** (updating tasks.md):
+**AI** (recording progress):
 
-✅ Marked "Implement token bucket algorithm core logic" as complete
+✅ Marked "Implement token bucket algorithm core logic" as complete in the work order
 
 Starting next P0 task: "Implement rate limiting middleware"
 
@@ -443,7 +441,7 @@ Starting next P0 task: "Implement rate limiting middleware"
 ✅ Completed: Return 429 response with Retry-After header  
 ✅ Completed: Wrote integration test `TestRateLimitMiddleware_REQ_RATE_LIMITING`
 
-**AI** (updating tasks.md):
+**AI** (recording progress):
 
 ✅ Marked "Implement rate limiting middleware" as complete
 
@@ -461,7 +459,7 @@ Starting P1: "Integrate Redis storage"
 ✅ Completed: Implemented Redis key naming strategy  
 ✅ Completed: Wrote integration test `TestRedisStorage_REQ_RATE_LIMITING`
 
-**AI** (updating tasks.md):
+**AI** (recording progress):
 
 ✅ Marked "Integrate Redis storage" as complete
 
@@ -510,11 +508,9 @@ All tests passing! ✅
 
 **AI** (final documentation update):
 
-Updated `tasks.md`:
-- All completed tasks marked as ✅ Complete
-- All subtasks removed from completed tasks
+Work order updated: completed items marked ✅. Optional P2 items (metrics and per-endpoint config) remain for a follow-up pass.
 
-The rate limiting feature is implemented and tested. P2 tasks (metrics and per-endpoint config) remain as optional enhancements.
+The rate limiting feature is implemented and tested.
 
 ---
 
@@ -528,17 +524,15 @@ The rate limiting feature is implemented and tested. P2 tasks (metrics and per-e
 
 4. **Requirements Include Satisfaction & Validation**: Each requirement has explicit criteria for both satisfaction and validation
 
-5. **Tasks Have Priorities**: All tasks are assigned P0/P1/P2/P3 priorities
+5. **Work units have priorities**: P0/P1/P2/P3 ordering matches checklist and TDD emphasis
 
-6. **Subtasks Are Temporary**: Subtasks are removed when parent tasks complete
+6. **Semantic Tokens Throughout**: Every decision, test, and code comment references semantic tokens
 
-7. **Semantic Tokens Throughout**: Every decision, test, and code comment references semantic tokens
+7. **Traceability Maintained**: Requirements → Architecture → Implementation → Tests → Code all linked via tokens
 
-8. **Traceability Maintained**: Requirements → Architecture → Implementation → Tests → Code all linked via tokens
+8. **Developer can review before implementation**: Planning phase allows review before any code is written
 
-9. **Developer Can Review Before Implementation**: Planning phase allows review before any code is written
-
-10. **Iterative Refinement**: Requirements can be refined based on developer feedback before implementation
+9. **Iterative refinement**: Requirements can be refined based on developer feedback before implementation
 
 ---
 
@@ -554,7 +548,7 @@ The rate limiting feature is implemented and tested. P2 tasks (metrics and per-e
 - AI documents requirements with satisfaction/validation criteria
 - AI documents architecture decisions
 - AI documents implementation decisions
-- AI creates tasks
+- AI captures a prioritized work order aligned to the REQ checklist
 - AI provides pseudo-code
 - Developer reviews and approves
 
@@ -565,10 +559,8 @@ The rate limiting feature is implemented and tested. P2 tasks (metrics and per-e
 - Proceed to next phase
 
 ### Pattern 4: Implementation Phase
-- AI implements highest priority tasks first
-- AI updates tasks.md as subtasks complete
-- AI removes completed subtasks
-- AI marks parent tasks complete when all subtasks done
+- AI implements highest-priority units first (per checklist steps when using agentstream)
+- AI records progress in-session and in IMPL/TIED records as units complete
 - AI updates documentation throughout
 
 ### Pattern 5: Completion
@@ -601,7 +593,7 @@ When following TIED:
 3. **Document Immediately**: Don't defer documentation - do it as decisions are made
 4. **Ask Questions**: Clarify requirements before documenting
 5. **Show Pseudo-Code**: Help developer visualize the approach
-6. **Plan Work**: Break work into clear steps (via tasks.md, in-session planning, or implementation-decisions)
+6. **Plan work**: Break work into clear steps (in-session, in `implementation-decisions`, and via the agent REQ checklist when using agentstream)
 7. **Maintain Tokens**: Keep semantic-tokens.yaml updated
 8. **Cross-Reference**: Always link tokens: IMPL → ARCH → REQ
 9. **Test References**: Include semantic tokens in test names

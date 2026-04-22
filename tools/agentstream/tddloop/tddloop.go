@@ -23,6 +23,7 @@ type yamlDoc struct {
 
 type yamlStep struct {
 	ID       interface{} `yaml:"id"`
+	Slug     string      `yaml:"slug"`
 	Title    string      `yaml:"title"`
 	Stage    string      `yaml:"stage"`
 	Goals    string      `yaml:"goals"`
@@ -81,11 +82,19 @@ func MessagesFromYAML(path string) ([]string, error) {
 	return out, nil
 }
 
-func formatStep(doc *yamlDoc, step yamlStep, token string) string {
+func stepPrimaryLabel(step yamlStep) string {
+	if slug := strings.TrimSpace(step.Slug); slug != "" {
+		return slug
+	}
 	id := fmt.Sprint(step.ID)
 	if id == "" || id == "<nil>" {
-		id = "unknown"
+		return "unknown"
 	}
+	return id
+}
+
+func formatStep(doc *yamlDoc, step yamlStep, token string) string {
+	label := stepPrimaryLabel(step)
 	title := step.Title
 	lines := []string{
 		"Follow the TDD development loop for this workspace.",
@@ -94,7 +103,7 @@ func formatStep(doc *yamlDoc, step yamlStep, token string) string {
 	if doc.Name != "" || doc.Version != "" {
 		lines = append(lines, fmt.Sprintf("Document: %s (%s)", doc.Name, doc.Version))
 	}
-	lines = append(lines, "", fmt.Sprintf("## Step %s: %s", id, title))
+	lines = append(lines, "", fmt.Sprintf("## Step %s: %s", label, title))
 	if step.Stage != "" {
 		lines = append(lines, "Stage: "+step.Stage)
 	}

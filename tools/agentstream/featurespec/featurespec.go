@@ -232,6 +232,10 @@ func messageForRecord(rec *yaml.Node) (string, error) {
 		lines = append(lines, fmt.Sprintf("# [%s] %s", strings.TrimSpace(orderNode.Value), strings.TrimSpace(name)))
 	}
 	lines = append(lines, "", "## Goal", strings.TrimSpace(goal), "")
+	beh := strings.TrimSpace(scalarString(mapLookup(rec, "behavior")))
+	if beh != "" {
+		lines = append(lines, "## Behavior", beh, "")
+	}
 	appendSection(&lines, "## Rules", listItemsNode(mapLookup(rec, "rules")))
 	if err := appendExamples(&lines, mapLookup(rec, "examples")); err != nil {
 		return "", err

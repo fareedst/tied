@@ -1,5 +1,5 @@
 /**
- * MCP tool handlers for TIED YAML index operations and monolithic conversion.
+ * MCP tool handlers for TIED YAML index operations.
  */
 
 import fs from "node:fs";
@@ -28,14 +28,9 @@ import {
   writeDetail,
   updateDetail,
   deleteDetail,
+  appendImplementationApproachDetails,
 } from "../detail-loader.js";
-import {
-  convertMonolithicRequirements,
-  convertMonolithicArchitecture,
-  convertMonolithicImplementation,
-  convertMonolithicAll,
-  convertDetailMarkdownToYaml,
-} from "../convert/index.js";
+import { writeCitdpRecord } from "../citdp-writer.js";
 import { validateConsistency } from "../consistency-validator.js";
 import {
   loadFeedback,
@@ -56,6 +51,7 @@ import {
   getRequirementStatusAndPriority,
 } from "../dependency-graph.js";
 import { updateStatusFromPassedTokens } from "../verify.js";
+import { applyYamlUpdates, parseYamlUpdateSteps } from "../yaml-updates-apply.js";
 import { resolveRequirementListStateGuide } from "./requirement-list-state-guide.js";
 import { runScopedAnalysis } from "../analysis/scoped-analysis.js";
 import { runPlumbDiffImpactPreview } from "../analysis/plumb-diff-impact-preview.js";
@@ -100,7 +96,7 @@ export const allTools = [
     name: "yaml_index_read",
     config: {
       description:
-        "Read an entire YAML index or a specific record by token. Use index to choose which file (requirements, architecture, implementation, semantic-tokens). Optionally pass token to get a single record. Use with MCP write tools to update TIED data instead of editing YAML files by hand.",
+        "Read an entire YAML index or a specific record by token. Use index to choose which file (requirements, architecture, implementation, semantic-tokens). Optionally pass token to get a single record. Index rows do not include IMPL essence_pseudocode (detail-only field); use yaml_detail_read for pseudo-code bodies. Use with MCP write tools to update TIED data instead of editing YAML files by hand.",
       inputSchema: z.object({
         index: INDEX_ENUM.describe(
           "Which YAML index: requirements, architecture, implementation, or semantic-tokens"
@@ -331,7 +327,7 @@ export const allTools = [
     name: "yaml_index_update",
     config: {
       description:
-        "Update an existing record in a YAML index by merging the given fields at the top level. Fails if the token does not exist. Updates must be a JSON object. Prefer this over editing tied/*.yaml directly; the server emits valid YAML (e.g. quoting values with colons).",
+        "Update an existing record in a YAML index by merging the given fields into the token row. Top-level keys replace scalars/arrays as usual; nested objects metadata, traceability, related_requirements, related_decisions, rationale, and implementation_approach are merged one level with the existing row (partial metadata preserves metadata.created; when metadata.last_updated is an object on both sides, its sub-keys merge one level). Fails if the token does not exist. Prefer this over editing tied/*.yaml directly; the server emits valid YAML (e.g. quoting values with colons).",
       inputSchema: z.object({
         index: INDEX_ENUM.describe(
           "Which YAML index: requirements, architecture, implementation, or semantic-tokens"
@@ -358,10 +354,48 @@ export const allTools = [
     },
   },
   {
+    name: "yaml_updates_apply",
+    config: {
+      description:
+        "Apply an ordered list of index/detail merges in one Node process using the same merge rules as yaml_index_update and yaml_detail_update. Each step is { kind: \"detail\", token, updates } or { kind: \"index\", index, token, updates } (updates are objects, not JSON strings). Use dry_run: true to get merged_preview per step without writing. On write path, stops on first error (applied_steps is count completed before failure). When dry_run is false, run_validate_consistency defaults true: after all writes, runs tied_validate_consistency and returns ok: false if that report is not ok (writes are not rolled back—re-read and fix). Prefer small step lists and impl_detail_set_essence_pseudocode for large IMPL pseudo-code only.",
+      inputSchema: z.object({
+        steps: z
+          .array(z.record(z.string(), z.unknown()))
+          .describe(
+            "Ordered steps: { kind: \"detail\", token: \"REQ-X\", updates: { ... } } or { kind: \"index\", index: \"requirements\", token: \"REQ-X\", updates: { ... } }"
+          ),
+        dry_run: z
+          .boolean()
+          .optional()
+          .default(false)
+          .describe("If true, compute merged_preview per step only; no file writes"),
+        run_validate_consistency: z
+          .boolean()
+          .optional()
+          .default(true)
+          .describe("If true and dry_run is false, run tied_validate_consistency after all steps (default true)"),
+      }),
+    },
+    handler: async (args: {
+      steps: Record<string, unknown>[];
+      dry_run?: boolean;
+      run_validate_consistency?: boolean;
+    }) => {
+      const parsed = parseYamlUpdateSteps(args.steps);
+      if (!parsed.ok) return textContent(JSON.stringify({ ok: false, error: parsed.error }, null, 2));
+      const result = applyYamlUpdates({
+        steps: parsed.steps,
+        dry_run: args.dry_run ?? false,
+        run_validate_consistency: args.run_validate_consistency ?? true,
+      });
+      return textContent(JSON.stringify(result, null, 2));
+    },
+  },
+  {
     name: "yaml_detail_read",
     config: {
       description:
-        "Read a single detail YAML file by token (REQ-*, ARCH-*, or IMPL-*). Returns the detail record (the content under the token key). Fails if token format is invalid or no detail file exists. Use with MCP write tools to update TIED data instead of editing YAML files by hand.",
+        "Read a single detail YAML file by token (REQ-*, ARCH-*, or IMPL-*). Returns the detail record (the content under the token key). For IMPL-*, essence_pseudocode is null only when absent. Fails if token format is invalid or no detail file exists. Use with MCP write tools to update TIED data instead of editing YAML files by hand.",
       inputSchema: z.object({
         token: z.string().min(1).describe("Token ID (e.g. REQ-TIED_SETUP, ARCH-MODULE_VALIDATION, IMPL-MODULE_VALIDATION)"),
       }),
@@ -470,7 +504,7 @@ export const allTools = [
     name: "yaml_detail_update",
     config: {
       description:
-        "Update an existing detail YAML file by merging the given object at the top level. Fails if no detail file exists. Prefer this over editing tied/*.yaml directly; the server emits valid YAML (e.g. quoting values with colons).",
+        "Update an existing REQ/ARCH/IMPL detail YAML by merging updates into the record under the token key. Top-level keys replace scalars/arrays as usual; nested objects metadata, traceability, related_requirements, related_decisions, rationale, and implementation_approach are merged one level with existing values (partial metadata preserves metadata.created; when metadata.last_updated is an object on both sides, its sub-keys merge one level). Fails if no detail file exists. Prefer this over editing tied/*.yaml directly; the server emits valid YAML (e.g. quoting values with colons). For IMPL-only essence_pseudocode churn, consider impl_detail_set_essence_pseudocode.",
       inputSchema: z.object({
         token: z.string().min(1).describe("Token ID of the detail file to update"),
         updates: z.string().describe("JSON or YAML string of key-value pairs to merge into the detail record"),
@@ -486,6 +520,113 @@ export const allTools = [
       const parsed = parseRecordOrYaml(updatesJson);
       if (!parsed.ok) return textContent(JSON.stringify({ ok: false, error: parsed.error }));
       const result = updateDetail(token, parsed.value);
+      return textContent(JSON.stringify(result, null, 2));
+    },
+  },
+  {
+    name: "impl_detail_set_essence_pseudocode",
+    config: {
+      description:
+        "Update only IMPL-* detail essence_pseudocode (plus optional metadata.last_updated). Safer than a broad yaml_detail_update for large pseudo-code blobs: rejects non-IMPL tokens. Nested metadata follows the same rules as yaml_detail_update (metadata.created preserved; when existing and new metadata.last_updated are both objects, date/author/reason fields merge without clobbering siblings).",
+      inputSchema: z.object({
+        token: z
+          .string()
+          .min(1)
+          .describe("IMPL-* token whose detail file will be updated"),
+        essence_pseudocode: z.string().describe("Full essence_pseudocode string for the IMPL detail record"),
+        metadata_last_updated: z
+          .object({
+            date: z.string().optional(),
+            author: z.string().optional(),
+            reason: z.string().optional(),
+          })
+          .optional()
+          .describe("If set, merged under metadata.last_updated without dropping other metadata keys"),
+      }),
+    },
+    handler: async ({
+      token,
+      essence_pseudocode,
+      metadata_last_updated,
+    }: {
+      token: string;
+      essence_pseudocode: string;
+      metadata_last_updated?: { date?: string; author?: string; reason?: string };
+    }) => {
+      if (!token.startsWith("IMPL-")) {
+        return textContent(
+          JSON.stringify({ ok: false, error: `Token must be IMPL-* (got ${token})` }, null, 2)
+        );
+      }
+      const updates: Record<string, unknown> = { essence_pseudocode };
+      if (metadata_last_updated && Object.keys(metadata_last_updated).length > 0) {
+        updates.metadata = { last_updated: metadata_last_updated };
+      }
+      const result = updateDetail(token, updates);
+      return textContent(JSON.stringify(result, null, 2));
+    },
+  },
+  {
+    name: "yaml_detail_append_implementation_approach_details",
+    config: {
+      description:
+        "Append one or more bullet strings to implementation_approach.details on an existing REQ, ARCH, or IMPL detail file without replacing prior lines. Safer than yaml_detail_update when you only want to add notes (e.g. Phase G/H). Fails if detail is missing or markdown.",
+      inputSchema: z.object({
+        token: z
+          .string()
+          .min(1)
+          .describe("REQ-*, ARCH-*, or IMPL-* token whose detail YAML will be updated"),
+        details_lines: z
+          .array(z.string())
+          .min(1)
+          .describe("Non-empty lines to append (trimmed; empty strings skipped)"),
+      }),
+    },
+    handler: async ({
+      token,
+      details_lines,
+    }: {
+      token: string;
+      details_lines: string[];
+    }) => {
+      const result = appendImplementationApproachDetails(token, details_lines);
+      return textContent(JSON.stringify(result, null, 2));
+    },
+  },
+  {
+    name: "citdp_record_write",
+    config: {
+      description:
+        "Write a CITDP record YAML file under tied/citdp/ (basename CITDP-*.yaml only). record is the inner object (value under the top-level key). Use for persist-citdp-record without direct-editing tied/citdp/.",
+      inputSchema: z.object({
+        filename: z
+          .string()
+          .min(1)
+          .describe("Basename only, e.g. CITDP-REQ-MY_FEATURE.yaml"),
+        record: z.string().describe("JSON or YAML string of the document body (fields under the top-level key)"),
+        top_level_key: z
+          .string()
+          .optional()
+          .describe("YAML map key (default: filename stem without .yaml)"),
+      }),
+    },
+    handler: async ({
+      filename,
+      record: recordJson,
+      top_level_key,
+    }: {
+      filename: string;
+      record: string;
+      top_level_key?: string;
+    }) => {
+      const parsed = parseRecordOrYaml(recordJson);
+      if (!parsed.ok) return textContent(JSON.stringify({ ok: false, error: parsed.error }));
+      const rec = parsed.value as Record<string, unknown>;
+      const result = writeCitdpRecord({
+        filename,
+        record: rec,
+        top_level_key,
+      });
       return textContent(JSON.stringify(result, null, 2));
     },
   },
@@ -600,267 +741,6 @@ export const allTools = [
       const result = renameSemanticToken(old_token, new_token, {
         dryRun: dry_run,
         includeMarkdown: include_markdown,
-      });
-      return textContent(JSON.stringify(result, null, 2));
-    },
-  },
-  {
-    name: "convert_monolithic_requirements",
-    config: {
-      description:
-        "Convert markdown to YAML: parses monolithic requirements.md and writes requirements.yaml (primary output) plus requirements/REQ-*.yaml detail files. Every heading (##/###) or text label (**Label**:) that immediately contains text or a list becomes a key in the YAML structure. Provide file_path or content. Paths are cwd-relative unless absolute. Use dry_run to get paths without writing.",
-      inputSchema: z.object({
-        file_path: z
-          .string()
-          .optional()
-          .describe("Path to monolithic requirements.md file (cwd-relative unless absolute)"),
-        content: z
-          .string()
-          .optional()
-          .describe("Raw markdown content (use if file_path not provided)"),
-        output_base_path: z
-          .string()
-          .optional()
-          .describe("Output directory (default: tied or TIED_BASE_PATH). Cwd-relative unless absolute."),
-        dry_run: z
-          .boolean()
-          .optional()
-          .describe("If true, return summary and paths without writing"),
-        overwrite: z
-          .boolean()
-          .optional()
-          .describe("If false, skip writing detail files that already exist (default: true)"),
-        token_format: z
-          .enum(["hyphen", "colon", "both"])
-          .optional()
-          .describe("Input token format: hyphen [REQ-*], colon [REQ:*], or both (normalize colon to hyphen before parsing)"),
-      }),
-    },
-    handler: async (args: {
-      file_path?: string;
-      content?: string;
-      output_base_path?: string;
-      dry_run?: boolean;
-      overwrite?: boolean;
-      token_format?: "hyphen" | "colon" | "both";
-    }) => {
-      let content = args.content;
-      if (content == null && args.file_path) {
-        try {
-          content = fs.readFileSync(args.file_path, "utf8");
-        } catch (e) {
-          const msg = e instanceof Error ? e.message : String(e);
-          return textContent(JSON.stringify({ ok: false, error: `Read failed: ${msg}` }, null, 2));
-        }
-      }
-      if (content == null || content === "")
-        return textContent(
-          JSON.stringify({ ok: false, error: "Provide file_path or content" }, null, 2)
-        );
-      const result = convertMonolithicRequirements(content, args.output_base_path, {
-        dry_run: args.dry_run,
-        overwrite: args.overwrite,
-        token_format: args.token_format,
-      });
-      return textContent(JSON.stringify(result, null, 2));
-    },
-  },
-  {
-    name: "convert_monolithic_architecture",
-    config: {
-      description:
-        "Convert markdown to YAML: parses monolithic architecture-decisions.md and writes architecture-decisions.yaml (primary output) plus architecture-decisions/ARCH-*.yaml detail files. Every heading or text label that immediately contains text or a list becomes a key in the YAML structure. Paths are cwd-relative unless absolute. Use dry_run to get paths without writing.",
-      inputSchema: z.object({
-        file_path: z.string().optional().describe("Path to monolithic architecture-decisions.md (cwd-relative unless absolute)"),
-        content: z.string().optional().describe("Raw markdown content"),
-        output_base_path: z.string().optional().describe("Output directory (cwd-relative unless absolute)"),
-        dry_run: z.boolean().optional().describe("If true, no writes"),
-        overwrite: z.boolean().optional().describe("If false, skip existing detail files"),
-        token_format: z
-          .enum(["hyphen", "colon", "both"])
-          .optional()
-          .describe("Input token format: hyphen, colon [ARCH:*], or both (normalize to hyphen before parsing)"),
-      }),
-    },
-    handler: async (args: {
-      file_path?: string;
-      content?: string;
-      output_base_path?: string;
-      dry_run?: boolean;
-      overwrite?: boolean;
-      token_format?: "hyphen" | "colon" | "both";
-    }) => {
-      let content = args.content;
-      if (content == null && args.file_path) {
-        try {
-          content = fs.readFileSync(args.file_path, "utf8");
-        } catch (e) {
-          const msg = e instanceof Error ? e.message : String(e);
-          return textContent(JSON.stringify({ ok: false, error: `Read failed: ${msg}` }, null, 2));
-        }
-      }
-      if (content == null || content === "")
-        return textContent(
-          JSON.stringify({ ok: false, error: "Provide file_path or content" }, null, 2)
-        );
-      const result = convertMonolithicArchitecture(content, args.output_base_path, {
-        dry_run: args.dry_run,
-        overwrite: args.overwrite,
-        token_format: args.token_format,
-      });
-      return textContent(JSON.stringify(result, null, 2));
-    },
-  },
-  {
-    name: "convert_monolithic_implementation",
-    config: {
-      description:
-        "Convert markdown to YAML: parses monolithic implementation-decisions.md and writes implementation-decisions.yaml (primary output) plus implementation-decisions/IMPL-*.yaml detail files. Every heading or text label that immediately contains text or a list becomes a key in the YAML structure. Paths are cwd-relative unless absolute. Use dry_run to get paths without writing.",
-      inputSchema: z.object({
-        file_path: z.string().optional().describe("Path to monolithic implementation-decisions.md (cwd-relative unless absolute)"),
-        content: z.string().optional().describe("Raw markdown content"),
-        output_base_path: z.string().optional().describe("Output directory (cwd-relative unless absolute)"),
-        dry_run: z.boolean().optional().describe("If true, no writes"),
-        overwrite: z.boolean().optional().describe("If false, skip existing detail files"),
-        token_format: z
-          .enum(["hyphen", "colon", "both"])
-          .optional()
-          .describe("Input token format: hyphen, colon [IMPL:*], or both (normalize to hyphen before parsing)"),
-      }),
-    },
-    handler: async (args: {
-      file_path?: string;
-      content?: string;
-      output_base_path?: string;
-      dry_run?: boolean;
-      overwrite?: boolean;
-      token_format?: "hyphen" | "colon" | "both";
-    }) => {
-      let content = args.content;
-      if (content == null && args.file_path) {
-        try {
-          content = fs.readFileSync(args.file_path, "utf8");
-        } catch (e) {
-          const msg = e instanceof Error ? e.message : String(e);
-          return textContent(JSON.stringify({ ok: false, error: `Read failed: ${msg}` }, null, 2));
-        }
-      }
-      if (content == null || content === "")
-        return textContent(
-          JSON.stringify({ ok: false, error: "Provide file_path or content" }, null, 2)
-        );
-      const result = convertMonolithicImplementation(content, args.output_base_path, {
-        dry_run: args.dry_run,
-        overwrite: args.overwrite,
-        token_format: args.token_format,
-      });
-      return textContent(JSON.stringify(result, null, 2));
-    },
-  },
-  {
-    name: "convert_monolithic_all",
-    config: {
-      description:
-        "Convert markdown to YAML for all three monolithic files (requirements, architecture, implementation) in one call. Primary output is YAML index files; detail YAML files (REQ-*.yaml, ARCH-*.yaml, IMPL-*.yaml) are also written unless dry_run. Every heading or text label that immediately contains text or a list becomes a key in the YAML structure. Pass paths and/or raw content for any of the three; content overrides path when both provided. Paths are cwd-relative unless absolute.",
-      inputSchema: z.object({
-        requirements_path: z.string().optional().describe("Path to requirements.md (cwd-relative unless absolute)"),
-        architecture_path: z.string().optional().describe("Path to architecture-decisions.md (cwd-relative unless absolute)"),
-        implementation_path: z.string().optional().describe("Path to implementation-decisions.md (cwd-relative unless absolute)"),
-        requirements_content: z.string().optional().describe("Raw markdown for requirements (overrides requirements_path when set)"),
-        architecture_content: z.string().optional().describe("Raw markdown for architecture (overrides architecture_path when set)"),
-        implementation_content: z.string().optional().describe("Raw markdown for implementation (overrides implementation_path when set)"),
-        output_base_path: z.string().optional().describe("Output directory (cwd-relative unless absolute)"),
-        dry_run: z.boolean().optional().describe("If true, no writes"),
-        overwrite: z.boolean().optional().describe("If false, skip existing detail files"),
-        token_format: z
-          .enum(["hyphen", "colon", "both"])
-          .optional()
-          .describe("Input token format: hyphen, colon [REQ:*] etc., or both (normalize to hyphen before parsing)"),
-      }),
-    },
-    handler: async (args: {
-      requirements_path?: string;
-      architecture_path?: string;
-      implementation_path?: string;
-      requirements_content?: string;
-      architecture_content?: string;
-      implementation_content?: string;
-      output_base_path?: string;
-      dry_run?: boolean;
-      overwrite?: boolean;
-      token_format?: "hyphen" | "colon" | "both";
-    }) => {
-      const result = convertMonolithicAll({
-        requirements_path: args.requirements_path,
-        architecture_path: args.architecture_path,
-        implementation_path: args.implementation_path,
-        requirements_content: args.requirements_content,
-        architecture_content: args.architecture_content,
-        implementation_content: args.implementation_content,
-        output_base_path: args.output_base_path,
-        dry_run: args.dry_run,
-        overwrite: args.overwrite,
-        token_format: args.token_format,
-      });
-      return textContent(JSON.stringify(result, null, 2));
-    },
-  },
-  {
-    name: "convert_detail_markdown_to_yaml",
-    config: {
-      description:
-        "Convert a single REQ/ARCH/IMPL detail from markdown to YAML (per detail-files-schema). Use for existing .md detail files or pasted content. Optionally write the .yaml file, update the index detail_file, and remove the .md. When sync_index is true, the index at getBasePath() is updated; use the same output_base_path (or default) so the written file and index refer to the same tree.",
-      inputSchema: z.object({
-        file_path: z
-          .string()
-          .optional()
-          .describe("Path to existing .md detail file (cwd-relative unless absolute)"),
-        content: z
-          .string()
-          .optional()
-          .describe("Raw markdown content (use if file_path not provided)"),
-        type: z
-          .enum(["requirement", "architecture", "implementation"])
-          .optional()
-          .describe("Detail type; inferred from token or path if omitted"),
-        token: z
-          .string()
-          .optional()
-          .describe("Token override (e.g. REQ-TIED_SETUP); inferred from content or path if omitted"),
-        output_base_path: z
-          .string()
-          .optional()
-          .describe("Output directory for written .yaml (default: tied or TIED_BASE_PATH)"),
-        dry_run: z.boolean().optional().describe("If true, return summary and paths without writing"),
-        overwrite: z.boolean().optional().describe("If false, skip writing when detail .yaml already exists"),
-        write_file: z.boolean().optional().describe("If true, write the .yaml detail file (default: true)"),
-        sync_index: z.boolean().optional().describe("If true, set index record detail_file to the new .yaml path (default: true)"),
-        remove_md_after: z.boolean().optional().describe("If true and source was file_path to .md, remove the .md after successful write (default: false)"),
-      }),
-    },
-    handler: async (args: {
-      file_path?: string;
-      content?: string;
-      type?: "requirement" | "architecture" | "implementation";
-      token?: string;
-      output_base_path?: string;
-      dry_run?: boolean;
-      overwrite?: boolean;
-      write_file?: boolean;
-      sync_index?: boolean;
-      remove_md_after?: boolean;
-    }) => {
-      const result = convertDetailMarkdownToYaml({
-        content: args.content,
-        file_path: args.file_path,
-        type: args.type,
-        token: args.token,
-        output_base_path: args.output_base_path,
-        dry_run: args.dry_run,
-        overwrite: args.overwrite,
-        write_file: args.write_file,
-        sync_index: args.sync_index,
-        remove_md_after: args.remove_md_after,
       });
       return textContent(JSON.stringify(result, null, 2));
     },
@@ -1003,7 +883,7 @@ export const allTools = [
     name: "tied_verify",
     config: {
       description:
-        "Update requirement and optionally implementation index status from test results (verification-gated, [PROC-TIED_VERIFICATION_GATED]). Pass the list of REQ/IMPL tokens that have passing tests; their status is set to Implemented/Active. Optionally set unpassed tokens to Planned. Run after the test suite; use with tied_validate_consistency in CI.",
+        "Update requirement and optionally implementation index status from test results (verification-gated, [PROC-TIED_VERIFICATION_GATED]). Pass REQ/IMPL tokens that have passing tests; their status is set to Implemented / Active. Safe default: set_unpassed_reqs_to_planned and set_unpassed_impl_to_planned are false, so other tokens are not demoted. Set dry_run true to return would_update (planned index changes) without writing: would_update lists only rows whose status would change—tokens already at the target status are omitted (empty would_update means a no-op write path). Run after the test suite; use with tied_validate_consistency in CI.",
       inputSchema: z.object({
         passed_requirement_tokens: z
           .array(z.string())
@@ -1019,12 +899,17 @@ export const allTools = [
           .boolean()
           .optional()
           .default(false)
-          .describe("If true, REQs not in passed_requirement_tokens set to Planned"),
+          .describe("If true, REQs not in passed_requirement_tokens set to Planned (default false — safe)"),
         set_unpassed_impl_to_planned: z
           .boolean()
           .optional()
           .default(false)
-          .describe("If true, IMPLs not in passed_impl_tokens set to Planned"),
+          .describe("If true, IMPLs not in passed_impl_tokens set to Planned (default false — safe)"),
+        dry_run: z
+          .boolean()
+          .optional()
+          .default(false)
+          .describe("If true, no writes; returns would_update with index/token/previous_status/next_status for each row that would change"),
       }),
     },
     handler: async (args: {
@@ -1032,12 +917,14 @@ export const allTools = [
       passed_impl_tokens?: string[];
       set_unpassed_reqs_to_planned?: boolean;
       set_unpassed_impl_to_planned?: boolean;
+      dry_run?: boolean;
     }) => {
       const result = updateStatusFromPassedTokens({
         passed_requirement_tokens: args.passed_requirement_tokens ?? [],
         passed_impl_tokens: args.passed_impl_tokens ?? [],
         set_unpassed_reqs_to_planned: args.set_unpassed_reqs_to_planned ?? false,
         set_unpassed_impl_to_planned: args.set_unpassed_impl_to_planned ?? false,
+        dry_run: args.dry_run ?? false,
       });
       return textContent(JSON.stringify(result, null, 2));
     },
@@ -1098,7 +985,7 @@ export const allTools = [
     name: "requirement_list_state_guide",
     config: {
       description:
-        "Client-supplied requirement list in array order. First call MUST pass non-empty requirements; omit current_state. Later calls: current_state = continuation_state from prior response only. Presents one requirement record per step until id end_requirement_list (is_end) or error. For each item, follow the agent REQ checklist in documentation (e.g. agent-req-implementation-checklist.md, S01–S16) and strict TDD. Terminal: id end_requirement_list. Error: empty list, bad token, validation failure.",
+        "Client-supplied requirement list in array order. First call MUST pass non-empty requirements; omit current_state. Later calls: current_state = continuation_state from prior response only. Presents one requirement record per step until id end_requirement_list (is_end) or error. For each item, follow the agent REQ checklist in documentation (e.g. agent-req-implementation-checklist.md, session-bootstrap–traceable-commit) and strict TDD. Terminal: id end_requirement_list. Error: empty list, bad token, validation failure.",
       inputSchema: z.object({
         requirements: z
           .array(z.unknown())

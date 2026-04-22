@@ -76,13 +76,16 @@ if ! diff -u "${ruby_prompts}" "${go_prompts}" >"${_tmp}/diff.txt"; then
   fail "prompt bodies differ between Ruby and Go dry-run"
 fi
 
-# Session labels: Ruby dry-run does not advance `running`, so chained turns still show "(new session)";
-# Go shows "(resume <session_id_from_previous_turn>)" for checklist turns after feature-spec.
-if ! grep -q -F -- '--- turn 3/4 (new session) ---' "${_tmp}/ruby.out"; then
-  fail "expected Ruby dry-run label for chained checklist turn (known quirk)"
+# Session labels: turn 1 starts a new session (preload + feature batch); turns 2–3 resume after checklist chaining.
+# Ruby dry-run uses a literal resume placeholder in stderr; Go uses <session_id_from_previous_turn>.
+if [[ "${go_turns}" != 3 ]]; then
+  fail "expected 3 turns with prompt-file preload merged (got ${go_turns})"
 fi
-if ! grep -q -F -- '--- turn 3/4 (resume <session_id_from_previous_turn>) ---' "${_tmp}/go.out"; then
-  fail "expected Go dry-run resume placeholder for chained checklist turn"
+if ! grep -qE '^--- turn 1/3 \(new session\) ---' "${_tmp}/ruby.out" || ! grep -qE '^--- turn 1/3 \(new session\) ---' "${_tmp}/go.out"; then
+  fail "expected turn 1/3 (new session) in both ruby and go dry-run stderr"
+fi
+if ! grep -qE '^--- turn 2/3 \(resume .*\) ---' "${_tmp}/ruby.out" || ! grep -qE '^--- turn 2/3 \(resume .*\)' "${_tmp}/go.out"; then
+  fail "expected turn 2/3 resume in both ruby and go dry-run stderr"
 fi
 
-printf 'verify-agentstream-dry-run-parity: OK (%s turns; prompt bodies match; dry-run labels differ as documented).\n' "${go_turns}"
+printf 'verify-agentstream-dry-run-parity: OK (%s turns; prompt bodies match; session labels consistent).\n' "${go_turns}"

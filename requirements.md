@@ -247,12 +247,6 @@ When using subdirectories, update the Detail File column in the index:
 
 ---
 
-## Migration from Monolithic File
-
-If migrating from a single monolithic `requirements.md` file, see `migrate-requirements.md` for step-by-step instructions.
-
----
-
 ## Future Enhancements (Out of Scope)
 
 The following features are documented but marked as future enhancements:

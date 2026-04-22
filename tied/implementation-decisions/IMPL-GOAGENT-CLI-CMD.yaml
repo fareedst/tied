@@ -10,38 +10,41 @@ IMPL-GOAGENT-CLI-CMD:
     # [IMPL-GOAGENT-CLI-CMD] [ARCH-GOAGENT-CLI] [REQ-GOAGENT-CLI-CONFIG]
     # Summary: Parse argv, resolve defaults, validate, branch preview vs pipeline vs executor — unified CLI.
 
-    # How: Composition order (same IMPL as entrypoint): config.ParseAndResolve → optional IMPL-GOAGENT-FEATURESPEC Preview (early exit) → IMPL-GOAGENT-PIPELINE.Build → dry-run OR per-turn IMPL-GOAGENT-EXECUTOR. Shared DATA: []Turn and session id string; pre — cwd + os.Args; post — process exit. No MCP IMPL overlap (separate processes).
+    # How: Composition order: config.ParseAndResolve → optional IMPL-GOAGENT-FEATURESPEC Preview (early exit) → IMPL-GOAGENT-PIPELINE.Build → mid-batch slice/resume → ReadPromptFilePreload(cfg.PromptFiles) → ApplyPromptFilePreload(turns, cfg.SessionID, preload) → ChainBetween → optional tiedpreflight (static .cursor/mcp.json) → dry-run OR per-turn IMPL-GOAGENT-EXECUTOR. Shared DATA: []Turn and session id string; pre — cwd + os.Args; post — process exit.
 
     procedure main:
       # [IMPL-GOAGENT-CLI-CMD] [ARCH-GOAGENT-CLI] [REQ-GOAGENT-CLI-CONFIG]
-      # How: config.ParseAndResolve in tools/agentstream/config (same IMPL token as this CMD record); includes -f/--first-turn N (1-based, default 1).
       cfg := ParseAndResolve(cwd, os.Args[1:])
       ON ParseAndResolve error: if help sentinel print usage and exit 0; else print error and exit non-zero
       # [IMPL-GOAGENT-FEATURESPEC] [ARCH-GOAGENT-YAML-FEATURESPEC] [REQ-GOAGENT-FEATURESPEC-BATCH]
-      # How: Cross-IMPL call — featurespec.Preview only; does not invoke IMPL-GOAGENT-PIPELINE; --first-turn does not apply to preview.
       if cfg.PreviewFeatureSpecBatchYAML != "":
         featurespec.Preview(...)
         exit 0
       # [IMPL-GOAGENT-PIPELINE] [ARCH-GOAGENT-PIPELINE] [REQ-GOAGENT-PIPELINE-CHAIN] [REQ-GOAGENT-CLI-CONFIG]
-      # How: pipeline.Build Input includes LeadChecklistStepFromID LeadChecklistStepToID from cfg ([REQ-GOAGENT-YAML-STEP-RENDER]).
-      # How: pipeline.Build then mid-batch resume slice: originalTotal := len(turns); if cfg.FirstTurn > 1 require non-empty cfg.SessionID; turns := pipeline.SliceFromFirstTurn(turns, cfg.FirstTurn); chain := ChainBetween(sliced turns).
       turns := pipeline.Build(...)
       ON pipeline.Build error: exit non-zero with error
       ON cfg.FirstTurn > 1 and empty SessionID: error exit (--session-id required for resume)
       turns := pipeline.SliceFromFirstTurn(turns, cfg.FirstTurn)
       ON SliceFromFirstTurn error (e.g. N > len(turns)): exit non-zero
+      preload := pipeline.ReadPromptFilePreload(cfg.PromptFiles)
+      ON ReadPromptFilePreload error: exit non-zero
+      pipeline.ApplyPromptFilePreload(turns, cfg.SessionID, preload)
       chain := pipeline.ChainBetween(turns)
+      # [tiedpreflight] Optional validation of .cursor/mcp.json for tied-yaml before cursor agent or dry-run.
+      # Default OFF: resolveDefaults sets SkipTiedMCPPreflight=true unless user set --tied-mcp-preflight or --skip-tied-mcp-preflight.
+      # effectiveSkipTiedMCPPreflight (main.go): AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1 forces skip; AGENTSTREAM_TIED_MCP_PREFLIGHT=1 forces run.
+      # When enabled: TTY may prompt; non-TTY may exit non-zero unless -y/--yes or skip env.
+      if runTiedPreflight(cfg) != 0:
+        exit with code from preflight
       if cfg.DryRun:
-        # How: runDryRun uses original batch indices in stderr (firstTurn+i / originalTotal).
         runDryRun(...)
-      else:
-        for each turn with index i in sliced list:
-          # [IMPL-GOAGENT-EXECUTOR] [ARCH-GOAGENT-EXECUTOR] [REQ-GOAGENT-AGENT-EXECUTOR]
-          # How: SessionForTurn(i, cfg.SessionID, chain, running); stderr label turn (cfg.FirstTurn+i)/originalTotal.
-          argv := executor.AgentArgv(...)
-          sid, code, err := executor.Run(...)
-          ON executor.Run error or empty session id when required: exit with code and message per main.go contract
-          require sid non-empty (Ruby parity)
-  decision: ParseAndResolve includes --first-turn (-f) N (default 1). After pipeline.Build, main requires --session-id when N>1, slices turns via pipeline.SliceFromFirstTurn, recomputes ChainBetween on the suffix, then dry-run or per-turn executor.Run. Stderr turn labels use original 1-based index and total turn count. scripts/run-feature-batch-agentstream.sh passes -f through to Go agentstream.
-  implementation_notes: 'Dry-run stderr labels: Ruby does not update the displayed resume id between turns in dry-run mode, so chained checklist turns may still show "(new session)" while Go shows "(resume <session_id_from_previous_turn>)". Live execution still chains sessions correctly in Ruby. Verification: scripts/verify-agentstream-dry-run-parity.sh compares prompt bodies and turn counts.'
+        exit 0
+      for each turn with index i in sliced list:
+        # [IMPL-GOAGENT-EXECUTOR] [ARCH-GOAGENT-EXECUTOR] [REQ-GOAGENT-AGENT-EXECUTOR]
+        argv := executor.AgentArgv(...)
+        sid, code, err := executor.Run(...)
+        ON executor.Run error or empty session id when required: exit with code and message per main.go contract
+        require sid non-empty (Ruby parity)
+  decision: ParseAndResolve includes --first-turn (-f) N (default 1), optional tied-yaml MCP preflight flags (--tied-mcp-preflight opt-in; --skip-tied-mcp-preflight; -y/--yes when preflight runs). Default is no mcp.json preflight. After pipeline.Build, main requires --session-id when N>1, slices turns, reads prompt files, ApplyPromptFilePreload, recomputes ChainBetween, runs runTiedPreflight when not skipped, then dry-run or per-turn executor.Run. Stderr turn labels use original 1-based index and total turn count. scripts/run-feature-batch-agentstream.sh passes -f through to Go agentstream.
+  implementation_notes: 'Dry-run: Ruby and Go advance a placeholder session id between turns so stderr resume labels match for chained turns. --prompt-file bodies are prepended on every new session (SessionForTurn empty), not separate pipeline turns. Verification: scripts/verify-agentstream-dry-run-parity.sh compares prompt bodies and turn counts.'
   detail_file: implementation-decisions/IMPL-GOAGENT-CLI-CMD.yaml
