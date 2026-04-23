@@ -42,16 +42,16 @@ IMPL-TIED_FILES:
     details:
       - Create tied/ directory at project root
       - Copy YAML index files from templates (requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml)
-      - Copy guide files from repo root into tied/ when missing (semantic-tokens.md, processes.md); copy reference docs from docs/ into tied/docs/ (includes commit-guidelines.md per DOCS_TO_COPY in copy_files.sh)
+      - Copy processes.md from templates/ (TIED-distributed) into client tied/ when missing; copy the other four guide .md from TIED source tied/ when missing; copy reference docs from TIED source tied/docs/ when missing (per DOCS_TO_COPY in copy_files.sh)
       - Create detail subdirectories (requirements/, architecture-decisions/, implementation-decisions/)
-      - Copy base files to project root (.cursorrules, AGENTS.md, ai-principles.md)
+      - Copy base files to project root when missing (.cursorrules, AGENTS.md). In a TIED source repository, live guide content (including that repo’s tied/processes.md) is under tied/ and tied/docs/; agents and preload use client ./tied/ paths. New-client bootstrap for processes comes from templates/processes.md, not the TIED source live tied/processes.md
   code_locations:
     files:
       - path: copy_files.sh
         description: Bootstrap script that sets up TIED structure
         lines:
           - 1
-          - 163
+          - 200
     functions:
       - name: setup_tied_structure
         file: copy_files.sh

@@ -13,14 +13,14 @@ This document centralizes every instruction AI coding assistants must follow whi
 1. Preface **every** assistant response with:
    > `Observing AI principles!`
 2. At session start (or when instructions may have changed), immediately:
-   - Read `ai-principles.md` completely
+   - Read `tied/docs/ai-principles.md` completely
    - Review `semantic-tokens.yaml` (token registry YAML index) and `semantic-tokens.md` (token guide)
    - Review `architecture-decisions.yaml` and `implementation-decisions.yaml` (YAML indexes)
    - Review `implementation-decisions.md` (implementation guide) for IMPL pseudo-code and block token rules ([PROC-IMPL_PSEUDOCODE_TOKENS])
    - Understand priority order: Tests > Code > Basic Functions > Infrastructure
    - Note: same filename everywhere—at repo root these files are templates; in `tied/` they are the project indexes.
    - **TIED MCP target (mandatory before MCP writes):** Call the TIED MCP tool **`tied_config_get_base_path`** and confirm the effective path is the **`tied/` directory of the repository you intend to change** (not another clone or parent methodology repo). If it is wrong, fix `.cursor/mcp.json` `env.TIED_BASE_PATH` to an **absolute** path to that project’s `tied/`, or re-run `./copy_files.sh /path/to/that/project` from the TIED repository so the script rewrites `tied-yaml` for that target. Prefer **one Cursor window per implementation repo** when editing project TIED YAML via MCP; multi-root workspaces can leave a single `TIED_BASE_PATH` pointing at the wrong folder (see `tied/citdp/CITDP-REQ-LEAP_PROPOSAL_QUEUE.yaml` RISK-010).
-   - **TIED YAML update index:** For a single page that links the skill, MCP runbook, checklist steps, detail schema, and payload patterns, read `docs/tied-yaml-agent-index.md`.
+   - **TIED YAML update index:** For a single page that links the skill, MCP runbook, checklist steps, detail schema, and payload patterns, read `tied/docs/tied-yaml-agent-index.md`.
    - **Go `agentstream` (`tools/agentstream`):** Static **tied-yaml preflight** on `.cursor/mcp.json` is **off by default**. Enable with **`--tied-mcp-preflight`** or **`AGENTSTREAM_TIED_MCP_PREFLIGHT=1`** when you want validation before live turns; then non-interactive runs without a valid layout may need **`AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1`**, **`agentstream -y`**, or **`--skip-tied-mcp-preflight`**. See `tools/agentstream/README.md`.
 3. Confirm access to the documents above before continuing.
 
@@ -53,7 +53,7 @@ This document centralizes every instruction AI coding assistants must follow whi
 - **Priority Order**
   - Always prioritize: Tests, Code, Basic Functions ➜ Developer experience ➜ Infrastructure ➜ Security.
 - **TIED data access (MCP-first)**
-  - **Index of docs for YAML updates:** `docs/tied-yaml-agent-index.md` (skill, runbook, checklist, schema, base path).
+  - **Index of docs for YAML updates:** `tied/docs/tied-yaml-agent-index.md` (skill, runbook, checklist, schema, base path).
   - Use the **TIED MCP server** (tools and resources) as the **primary** way to read and write TIED data. In Cursor, that server may appear under a project-specific label (e.g. `project-0-stdd-tied-yaml`); treat it as the **TIED YAML MCP** regardless of display name. TIED is the db that controls/directs the build; significant code is created in TIED first, then implemented with TDD. Writing TIED YAML via MCP ensures valid output (e.g. values containing `:` are quoted); direct file edits often produce invalid YAML. **Direct file access** to TIED content (under `tied/` or `TIED_BASE_PATH`) is permitted **only when** no MCP tool supports the operation; document such cases so they can be considered for new MCP tooling.
   - **Wrong `TIED_BASE_PATH` (high impact):** MCP `yaml_*` tools write under whatever directory `TIED_BASE_PATH` resolves to. A session opened on repo A while `TIED_BASE_PATH` still points at repo B will mutate B’s `tied/` silently. Mitigation: **`tied_config_get_base_path` at session start**; align `.cursor/mcp.json` with the active repo; if MCP cannot target the correct tree, document **TIED_YAML_BYPASS** and edit only the intended absolute paths, then `lint_yaml` (see `tied/implementation-decisions/IMPL-MCP_LEAP_PROPOSAL_QUEUE.yaml` `yaml_writer_note`, CITDP RISK-010).
   - **When using MCP:** Prefer tools for index read/list/filter, detail read/write, traceability (`get_decisions_for_requirement`, `get_requirements_for_decision`), validation (`yaml_index_validate`, `tied_validate_consistency`), and token creation (`tied_token_create_with_detail`). Prefer resources (e.g. `tied://requirements`, `tied://requirement/{token}/detail`) for loading context. Before changing TIED content, read via MCP; after changing, use the appropriate write/update tool. Validate all changed TIED YAML with `lint_yaml` per [PROC-YAML_EDIT_LOOP] (see `processes.md` § `[PROC-YAML_EDIT_LOOP]`); do not use raw multi-argument `yq` for pretty-print. YAML that does not validate is invalid for use. Run **`tied_validate_consistency`** before marking work complete.
@@ -72,7 +72,7 @@ This document centralizes every instruction AI coding assistants must follow whi
 
 ### 3.1 Start-of-Response Checklist (repeat every turn)
 - `"Observing AI principles!"` acknowledgment
-- Confirm `ai-principles.md` has been read this session
+- Confirm `tied/docs/ai-principles.md` has been read this session
 - Reference current semantic tokens, architecture, and implementation decisions
 
 ### 3.2 Before Starting Work
@@ -124,7 +124,7 @@ Same filename at repo root (template) and in `tied/` (project index); location d
 
 | File | Purpose |
 | --- | --- |
-| `ai-principles.md` | Master principles and process guide (read fully every session) |
+| `tied/docs/ai-principles.md` | Master principles and process guide (read fully every session) |
 | `semantic-tokens.yaml` | YAML index/database of all semantic tokens (canonical registry) |
 | `semantic-tokens.md` | Semantic tokens guide with format, naming conventions, and usage examples |
 | `requirements.md` | Requirements guide with documentation (copy from root into project's tied/) |
@@ -137,7 +137,7 @@ Same filename at repo root (template) and in `tied/` (project index); location d
 | `implementation-decisions.yaml` | Implementation decisions YAML index/database with `[IMPL-*]` records tied to requirements + architecture |
 | `implementation-decisions/` | Individual implementation decision detail files (YAML, e.g., `IMPL-MODULE_VALIDATION.yaml`) |
 | `detail-files-schema.md` | Schema for REQ/ARCH/IMPL detail YAML files (in TIED repo or tied/) |
-| `processes.md` | Process tracking including `[PROC-YAML_DB_OPERATIONS]`, LEAP, PROC-TIED_DEV_CYCLE; use TIED MCP as primary interface to TIED data (see §2 TIED data access). |
+| `tied/processes.md` | Process tracking including `[PROC-YAML_DB_OPERATIONS]`, LEAP, PROC-TIED_DEV_CYCLE; new clients get an initial copy from `templates/processes.md` via `copy_files.sh`. Use TIED MCP as primary interface to TIED data (see §2 TIED data access). |
 | `tied/docs/agent-req-implementation-checklist.md` | Primary step-by-step checklist for implementing any new REQ or change; unifies CITDP, TIED dev cycle, IMPL_CODE_TEST_SYNC, LEAP, and validation into one executable procedure (`[PROC-AGENT_REQ_CHECKLIST]`). Trackable YAML: `tied/docs/agent-req-implementation-checklist.yaml` (copy to unique per-request file per its header). |
 | `tied/docs/pseudocode-writing-and-validation.md` | How to write and validate IMPL pseudo-code; when to run validation; minimum gating rules (`[PROC-PSEUDOCODE_VALIDATION]`). Checklist: `tied/docs/pseudocode-validation-checklist.yaml`. |
 | `.cursorrules` | IDE loader that points back to this document |
@@ -152,7 +152,7 @@ You can apply these rules in several ways:
 1. **System Prompt Snippet**
    ```
    MANDATORY: Preface every response with "Observing AI principles!"
-   Then follow the AGENTS.md checklists (read ai-principles.md, review semantic tokens, architecture, implementation decisions, maintain semantic traceability, module validation, documentation, and priority order).
+   Then follow the AGENTS.md checklists (read tied/docs/ai-principles.md, review semantic tokens, architecture, implementation decisions, maintain semantic traceability, module validation, documentation, and priority order).
    ```
 2. **IDE Integration (`.cursorrules`)** – keep a lightweight loader that links directly to `AGENTS.md` so Cursor automatically enforces the rules.
 3. **README / Onboarding** – reference `AGENTS.md` in project READMEs or onboarding docs to remind contributors where the canonical rules live.
@@ -162,7 +162,7 @@ You can apply these rules in several ways:
 ## 7. Maintenance
 
 - Update `AGENTS.md` whenever AI-facing processes change.
-- Mirror changes into `ai-principles.md` and related docs as needed.
+- Mirror changes into `tied/docs/ai-principles.md` and related docs as needed.
 - Nested directories may introduce their own `AGENTS.md` to extend or override these rules within their subtree; the most specific file wins.
 
 **Last Updated**: 2026-03-30

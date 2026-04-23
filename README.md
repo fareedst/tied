@@ -2,15 +2,13 @@
 
 **TIED Methodology Version**: 2.2.0
 
-> **Note**: This methodology was previously known as STDD (Semantic Token-Driven Development). It has been renamed to TIED (Token-Integrated Engineering & Development) to better reflect its core value proposition: semantic tokens "tie" code to intent, making it impossible to modify code without confronting related context.
-
 > **v2.2.0+**: Planning and execution are driven by the **traceability chain** (requirements → architecture → implementation → tests → code) and, for agents, by **agentstream** feeding the **agent requirement implementation checklist** one step at a time—not by a separate project task ledger file.
 
 This repository ([https://github.com/fareedst/tied](https://github.com/fareedst/tied)) contains the **Token-Integrated Engineering & Development (TIED)** methodology template that can be used as a base for development projects in any language.
 
 ## Spec-Driven Development with TIED
 
-**Priority path for new TIED clients:** drive development with an **ordered list of feature specs** run through the **[agent requirement implementation checklist](docs/agent-req-implementation-checklist.md)** (`[PROC-AGENT_REQ_CHECKLIST]`). That checklist sequences **CITDP** (change impact and test design), **LEAP** (logic elevation and propagation), and **TDD** so agent output stays aligned with intent. Add an **agent preload contract** so the model loads platform and project facts once instead of rediscovering them each session.
+**Priority path for new TIED clients:** drive development with an **ordered list of feature specs** run through the **[agent requirement implementation checklist](tied/docs/agent-req-implementation-checklist.md)** (`[PROC-AGENT_REQ_CHECKLIST]`). That checklist sequences **CITDP** (change impact and test design), **LEAP** (logic elevation and propagation), and **TDD** so agent output stays aligned with intent. Add an **agent preload contract** so the model loads platform and project facts once instead of rediscovering them each session.
 
 ### End-to-end pipeline (TIED + LEAP + CITDP)
 
@@ -82,7 +80,7 @@ flowchart LR
   --select-order 1
 ```
 
-**UX-relevant updates (this working tree / branch):** Bootstrap instructions above favor **`copy_files.sh`** and spell out **`templates/` → `tied/methodology/`** vs **project `tied/*.yaml`** instead of a long manual `cp` list. In **this** repository, duplicate **root-level** TIED indexes (`requirements.yaml`, `architecture-decisions.yaml`, `implementation-decisions.yaml`, `semantic-tokens.yaml` and their old root detail dirs) are **removed**—use **`tied/`** only so there is a single place to edit project REQ/ARCH/IMPL data. **`copy_files.sh`** installs **`tied/`** and **`.cursor/skills/tied-yaml/`** (from this repo’s **`.cursor/skills/tied-yaml`** when present, else from **`tools/bundled-tied-yaml-skill/`** so `tied-cli.sh` is always available) but does **not** write **`.cursor/mcp.json`**; configure **`tied-yaml`** per **`docs/adding-tied-mcp-and-invoking-passes.md`**, and use **`tied-cli.sh`** with **`TIED_MCP_BIN`** when the MCP server binary lives outside the client tree (see **`.cursor/skills/tied-yaml/SKILL.md`**). **[scripts/run-feature-batch.sh](scripts/run-feature-batch.sh)** passes through **`-f` / `--first-turn`** (with **`-s` / `--session-id`** when starting after turn 1) for **mid-batch resume**; **[scripts/run-feature-batch-agentstream.sh](scripts/run-feature-batch-agentstream.sh)** wraps the Go **`agentstream`** CLI with the same flags plus optional **lead checklist step bounds** (`--lead-checklist-from-step` / `--lead-checklist-to-step`). Go **`tools/agentstream`** unifies batch + checklist + TDD YAML driving with **dry-run**, **feature-spec preview**, and **tied-yaml MCP preflight** (see **`tools/agentstream/README.md`**). **[docs/run-agent-stream-tied.md](docs/run-agent-stream-tied.md)** covers the Ruby runner; **`scripts/verify-agentstream-dry-run-parity.sh`** compares dry-run output against Ruby where both exist. **[docs/tdd_development_loop.yaml](docs/tdd_development_loop.yaml)** supports **`--tdd-yaml`** multi-turn runs. **[AGENTS.md](AGENTS.md)** and **[ai-principles.md](ai-principles.md)** require confirming **`tied_config_get_base_path`** before MCP writes (wrong **`TIED_BASE_PATH`** can mutate another repo’s `tied/`) and document **agentstream** preflight skip flags. **[docs/checklist_feedback_loops.md](docs/checklist_feedback_loops.md)** and **[docs/conversation-analysis-tools.md](docs/conversation-analysis-tools.md)** explain checklist feedback loops and **Ruby extractors** for Cursor hook / transcript YAML (`scripts/extract_*.rb`). **[.cursor/hooks/log.rb](.cursor/hooks/log.rb)** records **`model`** on `sessionStart` details alongside session metadata.
+**UX-relevant updates (this working tree / branch):** **Methodology file layout** — for this repository, core guide **`.md`** and reference docs that ship with TIED are **only** under **`tied/`** and **`tied/docs/`** (duplicate copies at the repository root and under `docs/` for the same names were **removed** so one path is authoritative). **`copy_files.sh`** seeds **`tied/processes.md` from `templates/processes.md`** on new clients; the other four top-level guide **`.md`** and **`tied/docs/*`** still come from the TIED source tree. **Go `agentstream`**, **FindRepoRoot**, and **`run-feature-batch*.sh` defaults** all expect the lead checklist at **`tied/docs/agent-req-implementation-checklist.yaml`**. **Bootstrap** instructions above favor **`copy_files.sh`** and spell out **`templates/` → `tied/methodology/`** vs **project `tied/*.yaml`** instead of a long manual `cp` list. In **this** repository, duplicate **root-level** TIED indexes (`requirements.yaml`, `architecture-decisions.yaml`, `implementation-decisions.yaml`, `semantic-tokens.yaml` and their old root detail dirs) are **removed**—use **`tied/`** only so there is a single place to edit project REQ/ARCH/IMPL data. **`copy_files.sh`** installs **`tied/`** and **`.cursor/skills/tied-yaml/`** (from this repo’s **`.cursor/skills/tied-yaml`** when present, else from **`tools/bundled-tied-yaml-skill/`** so `tied-cli.sh` is always available) but does **not** write **`.cursor/mcp.json`**; configure **`tied-yaml`** per **`tied/docs/adding-tied-mcp-and-invoking-passes.md`**, and use **`tied-cli.sh`** with **`TIED_MCP_BIN`** when the MCP server binary lives outside the client tree (see **`.cursor/skills/tied-yaml/SKILL.md`**). **[scripts/run-feature-batch.sh](scripts/run-feature-batch.sh)** passes through **`-f` / `--first-turn`** (with **`-s` / `--session-id`** when starting after turn 1) for **mid-batch resume**; **[scripts/run-feature-batch-agentstream.sh](scripts/run-feature-batch-agentstream.sh)** wraps the Go **`agentstream`** CLI with the same flags plus optional **lead checklist step bounds** (`--lead-checklist-from-step` / `--lead-checklist-to-step`). Go **`tools/agentstream`** unifies batch + checklist + TDD YAML driving with **dry-run**, **feature-spec preview**, and **tied-yaml MCP preflight** (see **`tools/agentstream/README.md`**). **[docs/run-agent-stream-tied.md](docs/run-agent-stream-tied.md)** covers the Ruby runner; **`scripts/verify-agentstream-dry-run-parity.sh`** compares dry-run output against Ruby where both exist. **[docs/tdd_development_loop.yaml](docs/tdd_development_loop.yaml)** supports **`--tdd-yaml`** multi-turn runs. **[AGENTS.md](AGENTS.md)** and **[tied/docs/ai-principles.md](tied/docs/ai-principles.md)** require confirming **`tied_config_get_base_path`** before MCP writes (wrong **`TIED_BASE_PATH`** can mutate another repo’s `tied/`) and document **agentstream** preflight skip flags. **[docs/checklist_feedback_loops.md](docs/checklist_feedback_loops.md)** and **[docs/conversation-analysis-tools.md](docs/conversation-analysis-tools.md)** explain checklist feedback loops and **Ruby extractors** for Cursor hook / transcript YAML (`scripts/extract_*.rb`). **[.cursor/hooks/log.rb](.cursor/hooks/log.rb)** records **`model`** on `sessionStart` details alongside session metadata.
 
 Defaults and flags: **[scripts/run-feature-batch.sh](scripts/run-feature-batch.sh)**, **[scripts/run-feature-batch-agentstream.sh](scripts/run-feature-batch-agentstream.sh)**; Ruby runner: **[tools/agent-stream/README.md](tools/agent-stream/README.md)**, **[docs/run-agent-stream-tied.md](docs/run-agent-stream-tied.md)**; Go runner: **`tools/agentstream`** — **[tools/agentstream/README.md](tools/agentstream/README.md)**. In client projects, the lead checklist is typically **`tied/docs/agent-req-implementation-checklist.yaml`** after `copy_files.sh`.
 
@@ -114,7 +112,7 @@ flowchart TB
 
 *Goals and out-of-scope anchor intent at **change-definition**; **rules** and **boundary_conditions** feed REQ/ARCH/IMPL authoring; **examples** ground tests and acceptance; **LEAP** applies when code or tests diverge from IMPL.*
 
-**Deeper visuals:** [docs/methodology-diagrams.md](docs/methodology-diagrams.md) — traceability stack, dev cycle, TDD inner loop, CITDP, YAML edit loop.
+**Deeper visuals:** [tied/docs/methodology-diagrams.md](tied/docs/methodology-diagrams.md) — traceability stack, dev cycle, TDD inner loop, CITDP, YAML edit loop.
 
 ---
 
@@ -145,7 +143,7 @@ The primary way to work with TIED is via the MCP server; a standalone bootstrap 
 ./copy_files.sh /path/to/your/project
 ```
 
-**Alternative (manual):** Prefer `./copy_files.sh` — it copies methodology YAML from `templates/` into `tied/methodology/`, creates project stub indexes under `tied/` when missing, and wires MCP. If you mirror by hand, follow the same source paths as [`copy_files.sh`](copy_files.sh): methodology index and detail YAML from `templates/` (and `templates/requirements/`, `templates/architecture-decisions/`, `templates/implementation-decisions/`) into `tied/methodology/`; copy guide `.md` files from the TIED repo root into `tied/`; copy `AGENTS.md`, `.cursorrules`, and `ai-principles.md` into the project root when absent.
+**Alternative (manual):** Prefer `./copy_files.sh` — it copies methodology YAML from `templates/` into `tied/methodology/`, creates project stub indexes under `tied/` when missing, and wires MCP. If you mirror by hand, follow the same source paths as [`copy_files.sh`](copy_files.sh): methodology index and detail YAML from `templates/` (and `templates/requirements/`, `templates/architecture-decisions/`, `templates/implementation-decisions/`) into `tied/methodology/`; copy **`processes.md` from `templates/processes.md`** and the other four guide **`.md`** (requirements, architecture-decisions, implementation-decisions, semantic-tokens) from the TIED source tree’s `tied/` into the client’s `tied/`; copy `AGENTS.md` and `.cursorrules` into the project root when absent; copy methodology reference docs from the TIED source tree’s `tied/docs/` into the client’s `tied/docs/` when absent. In a TIED source checkout, **`tied/processes.md`** is the live processes file; **`templates/processes.md`** is what new clients receive at bootstrap.
 
 **Important**: Each project should have its own copies of these files. Canonical methodology YAML lives under **`templates/`** in the TIED repository; the same filenames in a client's `tied/methodology/` are the read-only methodology copy, and `tied/*.yaml` at the project root (plus detail dirs) hold client-specific REQ/ARCH/IMPL data.
 
@@ -164,29 +162,29 @@ When using the TIED MCP server, writes go only to project-owned YAML so methodol
 The MCP server is **not** copied into your project; it stays in the TIED repository.
 
 1. **Build once** (in the TIED repo): From the TIED repo root, run `cd mcp-server && npm install && npm run build`. You need this **`dist/index.js`** for **`.cursor/mcp.json`** and for **`tied-cli.sh`** (via **`TIED_MCP_BIN`**).
-2. **Bootstrap** (if not already done): Run `./copy_files.sh` targeting your development project for **`tied/`** and **`.cursor/skills/tied-yaml/`**. **`copy_files.sh` does not write `.cursor/mcp.json`** — add the **`tied-yaml`** entry manually or follow **`agent enable tied-yaml`** after creating **`mcp.json`** (see **[docs/adding-tied-mcp-and-invoking-passes.md](docs/adding-tied-mcp-and-invoking-passes.md)**).
+2. **Bootstrap** (if not already done): Run `./copy_files.sh` targeting your development project for **`tied/`** and **`.cursor/skills/tied-yaml/`**. **`copy_files.sh` does not write `.cursor/mcp.json`** — add the **`tied-yaml`** entry manually or follow **`agent enable tied-yaml`** after creating **`mcp.json`** (see **[tied/docs/adding-tied-mcp-and-invoking-passes.md](tied/docs/adding-tied-mcp-and-invoking-passes.md)**).
 3. **Enable in Cursor (recommended):** From the **client project** root (the workspace that contains `tied/` and `.cursor/mcp.json`), run `agent enable tied-yaml`. When Cursor prompts you to apply the project MCP configuration, **approve** the update. Type **`quit`** to exit the interactive `agent` session.
 4. **Verify:** List MCP tools (e.g. `yaml_index_read`, `tied_config_get_base_path`) or read a resource such as `tied://requirements` to confirm the server is loaded.
 
 Alternatively, configure MCP manually: set **command/args** to the **TIED repo's** built server and **env** `TIED_BASE_PATH` to your **project's** `tied/` directory—see [TIED YAML MCP Server](#tied-yaml-mcp-server) and [mcp-server/README.md](mcp-server/README.md) for the exact JSON and paths.
 
-For a full example process of adding the TIED MCP to a project and invoking it in several passes (bootstrap, establish REQ/ARCH/IMPL, maintain), see [docs/adding-tied-mcp-and-invoking-passes.md](docs/adding-tied-mcp-and-invoking-passes.md).
+For a full example process of adding the TIED MCP to a project and invoking it in several passes (bootstrap, establish REQ/ARCH/IMPL, maintain), see [tied/docs/adding-tied-mcp-and-invoking-passes.md](tied/docs/adding-tied-mcp-and-invoking-passes.md).
 
 ### Using TIED without MCP
 
-If you do not use MCP, run `./bootstrap_without_mcp.sh /path/to/project` to get the same `tied/` layout; then manage YAML by hand or with tools (e.g. `yq`). See [docs/using-tied-without-mcp.md](docs/using-tied-without-mcp.md) for the workflow.
+If you do not use MCP, run `./bootstrap_without_mcp.sh /path/to/project` to get the same `tied/` layout; then manage YAML by hand or with tools (e.g. `yq`). See [tied/docs/using-tied-without-mcp.md](tied/docs/using-tied-without-mcp.md) for the workflow.
 
 ## Example Workflow
 
 **Streamlined path:** an ordered **feature spec YAML** plus **`run-feature-batch.sh`** and the **agent REQ checklist** — see **[Spec-Driven Development with TIED](#spec-driven-development-with-tied)**. The steps below are the same methodology expressed as a manual narrative.
 
 1. **Capture intent**: Create `[REQ-USER_AUTH]` (or equivalent) in `requirements.yaml`; expand into pseudo-code and decisions.
-2. **Design**: Document architecture in `architecture-decisions.yaml` with `[ARCH-*]` tokens and implementation in `implementation-decisions.yaml` with `[IMPL-*]` tokens; update `semantic-tokens.yaml`. Plan implementation steps in-session or in `implementation-decisions` (checklist-driven work uses `docs/agent-req-implementation-checklist.yaml` via agentstream).
+2. **Design**: Document architecture in `architecture-decisions.yaml` with `[ARCH-*]` tokens and implementation in `implementation-decisions.yaml` with `[IMPL-*]` tokens; update `semantic-tokens.yaml`. Plan implementation steps in-session or in `implementation-decisions` (checklist-driven work uses `tied/docs/agent-req-implementation-checklist.yaml` via agentstream).
 3. **Review**: Human reviews planning documents before any code is written.
 4. **Implement**: Unit tests first (strict TDD conforming to IMPL pseudo-code), then unit code via TDD, then composition tests for bindings between units, then composition code via TDD, then E2E tests only for behavior requiring UI invocation (each must justify why it cannot be tested at composition level). Update documentation as decisions are made or refined.
 5. **Close the loop**: Verify TIED data matches implementation; run token/consistency validation; ensure all tests pass and semantic tokens are consistent across code, tests, and documentation.
 
-For the full procedure from user prompt to commit (including diagram), see **[tied/docs/new-feature-process.md](tied/docs/new-feature-process.md)**. For AI agent configuration and checklists, see **AGENTS.md** (copied into projects via `copy_files.sh`). Commit messages: [CONTRIBUTING.md](CONTRIBUTING.md) (TIED repo); projects get **tied/docs/commit-guidelines.md** as the quick reference (from **`docs/commit-guidelines.md`** via `copy_files.sh`).
+For the full procedure from user prompt to commit (including diagram), see **[tied/docs/new-feature-process.md](tied/docs/new-feature-process.md)**. For AI agent configuration and checklists, see **AGENTS.md** (copied into projects via `copy_files.sh`). Commit messages: [CONTRIBUTING.md](CONTRIBUTING.md) (TIED repo); projects get **tied/docs/commit-guidelines.md** as the quick reference (canonical in the TIED repo: **`tied/docs/commit-guidelines.md`**; installed via `copy_files.sh`).
 
 ### Phase Flow Shortcut
 ```mermaid
@@ -209,7 +207,7 @@ flowchart LR
 - **In plain language**: We keep one written description of how the product is supposed to behave, update it when tests show we were wrong, and make sure code and tests always match that description—so we never lose the reasoning behind our decisions.
 - **Analogy**: Like a recipe. We write the recipe before cooking; when we taste and something’s off, we change the recipe and then cook again. The recipe stays the source of truth for the next cook (or the next sprint).
 
-For the full process definition, see `tied/processes.md` § LEAP. For an expert-level treatment (including why AI agents are more efficient reading IMPL pseudo-code than hunting through source files), see [docs/LEAP.md](docs/LEAP.md).
+For the full process definition, see `tied/processes.md` § LEAP. For an expert-level treatment (including why AI agents are more efficient reading IMPL pseudo-code than hunting through source files), see [tied/docs/LEAP.md](tied/docs/LEAP.md).
 
 ## TIED traceability walkthrough
 
@@ -333,7 +331,7 @@ Several blocks are documented this way (tokens + text), making the pseudo-code t
 
 **LEAP** is the loop that keeps the plan (IMPL) in sync with tests and code and feeds changes back into TIED (REQ/ARCH/IMPL) so the written record stays the source of truth.
 
-See `tied/processes.md` § LEAP and § PROC-TIED_DEV_CYCLE for the rules and mandatory implementation order; [docs/implementation-order.md](docs/implementation-order.md) gives a short standalone reference.
+See `tied/processes.md` § LEAP and § PROC-TIED_DEV_CYCLE for the rules and mandatory implementation order; [tied/docs/implementation-order.md](tied/docs/implementation-order.md) gives a short standalone reference.
 
 ## Repository Structure
 
@@ -348,7 +346,7 @@ This repository may **track** `tied/` under version control (methodology and pro
 - `scripts/analyze_hook_log.rb` — Streaming analysis of Cursor hook YAML logs under `~/.cursor/logs/` (event counts, failures, aggregates; use `--help`).
 - `scripts/strip_transcripts.rb` — Stream-edit large hook logs to drop embedded transcript bodies (see `--dry-run`).
 - `scripts/dedupe_transcript_yaml.rb` — Deduplicate long text nodes in hook transcript YAML trees (shares helpers with `.cursor/hooks/log.rb`).
-- `scripts/run-feature-batch.sh` — Batch driver for agent-stream and feature-spec workflows. Defaults use the **current repository** as workspace (`.`), with runner and lead checklist paths **from this repo** (`tools/agent-stream/run_agent_stream.rb`, `docs/agent-req-implementation-checklist.yaml`). Supports `-o/--select-order ARG` where `ARG` is a single order `N` or an inclusive range `N-M` (it filters feature-spec-batch records by their `order`). Passes through `-f/--first-turn` and `-s/--session-id` for mid-batch resume. `agent-preload-contract.yaml` and `prompts/all.yaml` are picked up only when those files exist in the workspace. Override with `-r` / `-c` (see `--help`).
+- `scripts/run-feature-batch.sh` — Batch driver for agent-stream and feature-spec workflows. Defaults use the **current repository** as workspace (`.`), with runner and lead checklist paths **from this repo** (`tools/agent-stream/run_agent_stream.rb`, `tied/docs/agent-req-implementation-checklist.yaml`). Supports `-o/--select-order ARG` where `ARG` is a single order `N` or an inclusive range `N-M` (it filters feature-spec-batch records by their `order`). Passes through `-f/--first-turn` and `-s/--session-id` for mid-batch resume. `agent-preload-contract.yaml` and `prompts/all.yaml` are picked up only when those files exist in the workspace. Override with `-r` / `-c` (see `--help`).
 - `scripts/run-feature-batch-agentstream.sh` — Same CLI surface as `run-feature-batch.sh` but invokes Go **`tools/agentstream`** (`go run` or **`AGENTSTREAM`** path to a built binary). Forwards checklist step bounds and resume flags; see script header and **`tools/agentstream/README.md`**.
 - `scripts/verify-agentstream-dry-run-parity.sh` — Compares Go `agentstream -d` argv reconstruction against Ruby dry-run fixtures under `scripts/testdata-dry-run-parity/`.
 - `scripts/lint_yaml.sh` — Wrapper to validate changed TIED YAML (see **[PROC-YAML_EDIT_LOOP]**).
@@ -357,19 +355,19 @@ This repository may **track** `tied/` under version control (methodology and pro
 - `tools/agentstream/` — Go module **`stdd/agentstream`**: **`agentstream`** CLI plus packages for config, pipeline, executor, feature-spec batch, TDD loop YAML, checklist expansion, and **tied-yaml MCP preflight**. Build: `cd tools/agentstream && go build -o agentstream ./cmd/agentstream`. See [tools/agentstream/README.md](tools/agentstream/README.md).
 
 ### Methodology Documentation (Reference Only)
-- `docs/LEAP.md` - LEAP (Logic Elevation And Propagation) for expert programmers: why IMPL pseudo-code is more efficient for AI than hunting through source
-- `docs/implementation-order.md` - Mandatory implementation order (unit tests, unit code via TDD, composition tests, composition code via TDD, E2E) in one place; same order in `tied/processes.md` § PROC-TIED_DEV_CYCLE
-- `docs/impl-code-test-linkage.md` - Three-way alignment guide (IMPL pseudo-code / tests / code); 9 phases with worked examples and LEAP micro-cycle
-- `docs/methodology-diagrams.md` - 6 mermaid diagrams: traceability stack, development phases, dev-cycle session workflow, TDD inner loop, CITDP procedure, YAML edit loop
-- `docs/yaml-update-mcp-runbook.md` - Agent runbook: MCP-first routing for project TIED YAML writes (copied to `tied/docs/` via `copy_files.sh` when listed in `DOCS_TO_COPY`)
+- `tied/docs/LEAP.md` - LEAP (Logic Elevation And Propagation) for expert programmers: why IMPL pseudo-code is more efficient for AI than hunting through source
+- `tied/docs/implementation-order.md` - Mandatory implementation order (unit tests, unit code via TDD, composition tests, composition code via TDD, E2E) in one place; same order in `tied/processes.md` § PROC-TIED_DEV_CYCLE
+- `tied/docs/impl-code-test-linkage.md` - Three-way alignment guide (IMPL pseudo-code / tests / code); 9 phases with worked examples and LEAP micro-cycle
+- `tied/docs/methodology-diagrams.md` - 6 mermaid diagrams: traceability stack, development phases, dev-cycle session workflow, TDD inner loop, CITDP procedure, YAML edit loop
+- `tied/docs/yaml-update-mcp-runbook.md` - Agent runbook: MCP-first routing for project TIED YAML writes (installed to client `tied/docs/` via `copy_files.sh` `DOCS_TO_COPY`)
 - `docs/checklist_feedback_loops.md` - CITDP, TIED, and LEAP feedback in the agent requirement checklist (Mermaid flows, descriptive phases)
 - `docs/conversation-analysis-tools.md` - Catalog of Ruby preprocessors and extractors for Cursor hook / transcript YAML
 - `docs/reddit-intro-tied-agentstream.md` - Short intro to TIED + agent batch tooling (shareable overview)
 - `docs/leap-proposal-queue.md` - Optional MCP LEAP proposal queue (non-canonical hints, human review before yaml MCP writes)
 - `docs/conversation-log-yaml-structure-and-agent-difficulties.md` - Hook log YAML structure and agent pitfalls
 - `docs/run-agent-stream-tied.md`, `docs/run-agent-stream-impl-e2e.md`, `docs/run-agent-stream-impl-composition.md`, `docs/run-agent-stream-upstream.md` - Agent stream runner (CITDP/LEAP/TIED multi-turn sessions); `docs/tdd_development_loop.yaml` - six-step TDD loop YAML for `--tdd-yaml`
-- `docs/requirement-list-state-guide-agent-workflow.md` - State guide workflow for MCP tool `requirement_list_state_guide`
-- `ai-principles.md` - Agent operational mandates and checklists (copied to projects via copy_files.sh)
+- `tied/docs/requirement-list-state-guide-agent-workflow.md` - State guide workflow for MCP tool `requirement_list_state_guide`
+- `tied/docs/ai-principles.md` - Agent operational mandates and checklists (canonical in the TIED repo; installed to client `tied/docs/` via `copy_files.sh` `DOCS_TO_COPY`)
 - `conversation.template.md` - Template conversation demonstrating TIED workflow
 - `AGENTS.md` - Canonical AI agent operating guide
 - `.cursorrules` - Cursor IDE loader that points to `AGENTS.md`
@@ -378,7 +376,7 @@ This repository may **track** `tied/` under version control (methodology and pro
 
 ### Project Template Files (Copy to Your Project)
 
-At repo root these files are templates; in your project's `tied/` they are the project indexes (same filename, location distinguishes use).
+Methodology templates live in **`templates/`** (and guide **`.md`** in **`tied/`** in the TIED source, except **`processes.md`**, which bootstraps from **`templates/processes.md`**). In a client project’s **`tied/`** they are the project guides and stub indexes (same filename; `tied/methodology/` holds the read-only methodology YAML copy).
 
 - `requirements.md` - Template guide for requirements documentation
 - `requirements.yaml` - YAML database template for requirements with `[REQ-*]` tokens **(v1.5.0: structured fields for traceability, rationale, criteria, metadata)**
@@ -389,8 +387,8 @@ At repo root these files are templates; in your project's `tied/` they are the p
 - `implementation-decisions.md` - Template guide for implementation decisions documentation
 - `implementation-decisions.yaml` - YAML database template for implementation decisions with `[IMPL-*]` tokens **(v1.5.0: structured fields for traceability, rationale, code_locations, metadata)**
 - `implementation-decisions/` - Individual implementation decision detail file examples
-- `processes.md` - Template for process tracking including `[PROC-YAML_DB_OPERATIONS]`, `[PROC-YAML_EDIT_LOOP]`, `[PROC-TEST_STRATEGY]`, `[PROC-TIED_DEV_CYCLE]`, `[PROC-COMMIT_MESSAGES]`, `[PROC-RELEASE]`, `[PROC-NEW_FEATURE]`, `[PROC-CITDP]` (change impact and test design), `[PROC-IMPL_CODE_TEST_SYNC]` (IMPL-code-tests linkage), and `[PROC-SWIFT_BUILD]` (Swift build/test gate)
-- `docs/commit-guidelines.md` - Source for the project’s **tied/docs/commit-guidelines.md** (copied by `copy_files.sh` when missing); commit message quick reference (full format in **processes.md** § PROC-COMMIT_MESSAGES)
+- `templates/processes.md` — TIED-distributed bootstrap for **`tied/processes.md`** in client projects; includes `[PROC-YAML_DB_OPERATIONS]`, `[PROC-YAML_EDIT_LOOP]`, `[PROC-TEST_STRATEGY]`, `[PROC-TIED_DEV_CYCLE]`, `[PROC-COMMIT_MESSAGES]`, `[PROC-RELEASE]`, `[PROC-NEW_FEATURE]`, `[PROC-CITDP]`, `[PROC-IMPL_CODE_TEST_SYNC]`, and `[PROC-SWIFT_BUILD]`. The TIED source repository’s **live** copy is **`tied/processes.md`**
+- `tied/docs/commit-guidelines.md` - Commit message quick reference (full format in **`tied/processes.md`** § PROC-COMMIT_MESSAGES); installed to client `tied/docs/` when missing
 - `semantic-tokens.md` - Template for semantic token registry
 - `semantic-tokens.yaml` - YAML registry of REQ/ARCH/IMPL/PROC tokens (minimal, foundational for bootstrap)
 
@@ -428,7 +426,7 @@ your-project/
 └── [your source code]        # Your actual project code
 ```
 
-**Note**: Narrative methodology under `docs/` is developed in the [TIED repository](https://github.com/fareedst/tied); `copy_files.sh` copies selected guides into your project's `tied/docs/` when missing. `AGENTS.md` and `ai-principles.md` are copied to the project root when missing—see `copy_files.sh` for the exact lists.
+**Note**: Core TIED methodology markdown lives under `tied/` and `tied/docs/` in the [TIED repository](https://github.com/fareedst/tied). Additional supporting docs (e.g. runbooks, development-loop YAML) may live only under `docs/`. `copy_files.sh` copies the canonical `tied/` and `tied/docs/` set into a client project when missing. `AGENTS.md` and `.cursorrules` are copied to the project root when missing—see `copy_files.sh` for the exact lists.
 
 ## TIED YAML MCP Server
 
@@ -448,7 +446,7 @@ MCP gives AI assistants and tools a single, consistent way to read and write req
 - **Bulk and single-token detail access**: Read one detail file by token or request details for many tokens (or all tokens of a type) in one call.
 - **One-shot creation**: Create a new REQ, ARCH, or IMPL token with both index record and full detail YAML in a single tool call (`tied_token_create_with_detail`).
 - **Token rename**: Rename a semantic token across all YAML indexes, detail files, and the detail filename in one call (`tied_token_rename`); optional dry run and processes.md update. The tool validates output; for **hand-edited** YAML (including after rename), use **`lint_yaml`** per `[PROC-YAML_EDIT_LOOP]` in `processes.md`—not ad hoc multi-file `yq` invocations.
-- **Requirement list walk**: `requirement_list_state_guide` steps through a client-supplied ordered requirement list (continuation state). For each item, follow the agent REQ checklist in **[docs/agent-req-implementation-checklist.md](docs/agent-req-implementation-checklist.md)** (session-bootstrap–traceable-commit); there are no MCP tools for the linear checklist sequence itself.
+- **Requirement list walk**: `requirement_list_state_guide` steps through a client-supplied ordered requirement list (continuation state). For each item, follow the agent REQ checklist in **[tied/docs/agent-req-implementation-checklist.md](tied/docs/agent-req-implementation-checklist.md)** (session-bootstrap–traceable-commit); there are no MCP tools for the linear checklist sequence itself.
 - **Verification and backlog**: `tied_verify`, `tied_cycles`, and `tied_backlog` support verification-gated status and dependency views ([mcp-server/README.md](mcp-server/README.md)).
 - **LEAP proposal queue (optional)**: Tools `tied_leap_proposal_*` stage inferred documentation hints under `{project_root}/leap-proposals/` (`queue.json` and append-only `audit-log.jsonl`). When loading `queue.json`, the server reads UTF-8 text and strips a leading BOM (U+FEFF) before `JSON.parse`, so files saved by editors that emit a BOM still load. Diff and session import require `explicit_opt_in: true`; queue tools never write project `tied/*.yaml`—apply canonical REQ/ARCH/IMPL updates with the yaml MCP tools, then mark proposals applied. See [docs/leap-proposal-queue.md](docs/leap-proposal-queue.md).
 
@@ -481,7 +479,7 @@ flowchart LR
 
 *MCP API: tools (index, traceability, detail, create-with-detail, token rename) and resources (index URIs, per-token, details-by-type).*
 
-**For AI agents**: Use the TIED MCP server as the **primary** way to read and write TIED data. See [docs/ai-agent-tied-mcp-usage.md](docs/ai-agent-tied-mcp-usage.md) for the full directive (MCP-first; direct file access only when no tool supports the operation). For routing project TIED YAML writes through MCP (mandatory paths, failure playbook), see [docs/yaml-update-mcp-runbook.md](docs/yaml-update-mcp-runbook.md).
+**For AI agents**: Use the TIED MCP server as the **primary** way to read and write TIED data. See [tied/docs/ai-agent-tied-mcp-usage.md](tied/docs/ai-agent-tied-mcp-usage.md) for the full directive (MCP-first; direct file access only when no tool supports the operation). For routing project TIED YAML writes through MCP (mandatory paths, failure playbook), see [tied/docs/yaml-update-mcp-runbook.md](tied/docs/yaml-update-mcp-runbook.md).
 
 **Configuration and validation**
 

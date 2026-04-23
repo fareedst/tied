@@ -360,6 +360,8 @@ This is the **controlling loop** for creating or editing any TIED YAML (index or
 
 **`lint_yaml`** — Global shell function (or project-provided equivalent) that agents **must** use to validate YAML syntax and canonicalize formatting **in place**. It accepts **one or more** file paths; the implementation must process **each path independently** (typically one underlying `yq -i -P` per file, or equivalent). **Do not** pass multiple YAML paths to a **single raw `yq -i -P` command**: mikefarah `yq` merges multiple file arguments into one stream and corrupts files. Agents use `lint_yaml`, not ad-hoc multi-argument `yq`.
 
+**MCP partial updates on nested maps** — `yaml_detail_update` / `yaml_index_update` payloads that include only part of `metadata` or `traceability` can **replace the whole nested object** and drop siblings such as `metadata.created`. **Read → merge locally → write → re-read** the affected token (detail and index when both change); restore vanished audit fields with one corrective update before treating the edit as complete. Runbook: `docs/yaml-update-mcp-runbook.md` §2.1.
+
 1. **Edit** — Create or modify the YAML file (index or detail) under `tied/` or other TIED-related paths (e.g. `tied/citdp/*.yaml` as defined by the project).
 2. **Validate and pretty-print** — Run `lint_yaml` on the changed file(s), e.g. `lint_yaml <file>` or `lint_yaml path/a.yaml path/b.yaml`. This validates syntax and canonicalizes formatting in place. On failure, the file is invalid; fix and repeat from step 1.
 
@@ -708,7 +710,7 @@ Use imperative, present tense. Include motivation for the change and how it diff
 
 ### TIED and commit messages
 
-When a commit implements or touches a specific requirement or decision, you may reference TIED tokens in the body or footer (e.g. `REQ-SIDE_PANEL_TAGS_TREE`, `ARCH-*`, `IMPL-*`). This is optional but encouraged for traceability. Commit format is defined here; for token discipline in code and docs see [AGENTS.md](AGENTS.md) and `ai-principles.md`.
+When a commit implements or touches a specific requirement or decision, you may reference TIED tokens in the body or footer (e.g. `REQ-SIDE_PANEL_TAGS_TREE`, `ARCH-*`, `IMPL-*`). This is optional but encouraged for traceability. Commit format is defined here; for token discipline in code and docs see [AGENTS.md](../AGENTS.md) and [tied/docs/ai-principles.md](docs/ai-principles.md).
 
 ### Artifacts & Metrics
 - **Artifacts**: Commit history; optionally generated changelog.

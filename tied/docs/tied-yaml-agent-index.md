@@ -59,7 +59,7 @@ Read during **session-bootstrap** alongside the skill; these do not replace `tie
 |--------|----------|
 | Token registry and guide | [`tied/semantic-tokens.yaml`](../semantic-tokens.yaml), [`tied/semantic-tokens.md`](../semantic-tokens.md) |
 | IMPL pseudo-code and `[PROC-IMPL_PSEUDOCODE_TOKENS]` | [`tied/implementation-decisions.md`](../implementation-decisions.md) |
-| AI principles and ordering | [`ai-principles.md`](../../ai-principles.md) |
+| AI principles and ordering | [`ai-principles.md`](./ai-principles.md) |
 
 ---
 

@@ -115,3 +115,66 @@ func TestParseChecklistVar(t *testing.T) {
 		t.Fatal("want ChecklistVarStrict")
 	}
 }
+
+// REQ: REQ-GOAGENT-CLI-CONFIG
+func TestWorkspacePreloadMergedWithExplicitPromptFile(t *testing.T) {
+	dir := t.TempDir()
+	contract := filepath.Join(dir, "agent-preload-contract.yaml")
+	extra := filepath.Join(dir, "p.txt")
+	if err := os.WriteFile(contract, []byte("c"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(extra, []byte("x"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	cfg, err := ParseAndResolve(dir, []string{"--prompt-file", extra})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(cfg.PromptFiles) != 2 {
+		t.Fatalf("len(PromptFiles)=%d want 2: %v", len(cfg.PromptFiles), cfg.PromptFiles)
+	}
+	if filepath.Clean(cfg.PromptFiles[0]) != filepath.Clean(contract) {
+		t.Fatalf("first prompt want workspace contract: got %#v", cfg.PromptFiles)
+	}
+	if filepath.Clean(cfg.PromptFiles[1]) != filepath.Clean(extra) {
+		t.Fatalf("second prompt: got %#v", cfg.PromptFiles)
+	}
+}
+
+func TestWorkspacePreloadDeduplicateExplicitSamePath(t *testing.T) {
+	dir := t.TempDir()
+	contract := filepath.Join(dir, "agent-preload-contract.yaml")
+	if err := os.WriteFile(contract, []byte("c"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	cfg, err := ParseAndResolve(dir, []string{"--prompt-file", contract})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(cfg.PromptFiles) != 1 {
+		t.Fatalf("len(PromptFiles)=%d want 1: %v", len(cfg.PromptFiles), cfg.PromptFiles)
+	}
+}
+
+func TestSkipWorkspacePreload(t *testing.T) {
+	dir := t.TempDir()
+	contract := filepath.Join(dir, "agent-preload-contract.yaml")
+	extra := filepath.Join(dir, "p.txt")
+	if err := os.WriteFile(contract, []byte("c"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(extra, []byte("x"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	cfg, err := ParseAndResolve(dir, []string{"--skip-workspace-preload", "--prompt-file", extra})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(cfg.PromptFiles) != 1 {
+		t.Fatalf("len(PromptFiles)=%d want 1: %v", len(cfg.PromptFiles), cfg.PromptFiles)
+	}
+	if filepath.Clean(cfg.PromptFiles[0]) != filepath.Clean(extra) {
+		t.Fatalf("got %#v", cfg.PromptFiles)
+	}
+}

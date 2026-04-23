@@ -10,7 +10,7 @@
 # Maintainers: Update this file when this repository's methodology layout, MCP/Node
 # stack, or root-index paths change—parallel to the client checklist rule that
 # refreshes agent-preload-contract.yaml after material ARCH/IMPL decisions (see
-# docs/agent-req-implementation-checklist.yaml, author-architecture and
+# tied/docs/agent-req-implementation-checklist.yaml, author-architecture and
 # persist-implementation-records).
 #
 # Copy or subset this file per session and fill values.
@@ -22,16 +22,17 @@ agent_preload:
     vcs_present: true # e.g. true when .git exists
   session_bootstrap_docs:
     agents_md_path: ./AGENTS.md # canonical Cursor / agent operating guide
-    ai_principles_path: ./ai-principles.md
+    ai_principles_path: ./tied/docs/ai-principles.md
     semantic_tokens_index: ./semantic-tokens.yaml
-    semantic_tokens_guide: ./semantic-tokens.md
+    semantic_tokens_guide: ./tied/semantic-tokens.md
     architecture_decisions_index: ./architecture-decisions.yaml
     implementation_decisions_index: ./implementation-decisions.yaml
-    implementation_decisions_guide: ./implementation-decisions.md
-    processes_path: ./processes.md
-    agent_req_checklist_path: ./docs/agent-req-implementation-checklist.md
-    pseudocode_validation_guide: ./docs/pseudocode-writing-and-validation.md
-    detail_files_schema: ./detail-files-schema.md
+    implementation_decisions_guide: ./tied/implementation-decisions.md
+    # Live processes in this repository; for new client projects, copy_files.sh seeds tied/processes.md from templates/processes.md (not this file).
+    processes_path: ./tied/processes.md
+    agent_req_checklist_path: ./tied/docs/agent-req-implementation-checklist.md
+    pseudocode_validation_guide: ./tied/docs/pseudocode-writing-and-validation.md
+    detail_files_schema: ./tied/detail-files-schema.md
     requirements_index: ./requirements.yaml
   methodology_vs_project:
     # Client projects: ./tied/methodology/** is read-only [PROC-TIED_METHODOLOGY_READONLY].

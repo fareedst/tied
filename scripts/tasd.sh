@@ -32,7 +32,7 @@
 #
 # Built-in agentstream options (why they improve the generated turns)
 #
-#   --lead-checklist-yaml "$tied_path/docs/agent-req-implementation-checklist.yaml"
+#   --lead-checklist-yaml "$tied_path/tied/docs/agent-req-implementation-checklist.yaml"
 #       Pins the canonical executable checklist (REQ implementation flow). Edits to that YAML change
 #       every rendered step body—agents see session-bootstrap, translate-sponsor-intent (when FEATURE_*
 #       placeholders exist), TIED gates, unit-test-red, etc., from one
@@ -189,7 +189,7 @@ tasd () {
   echo_exec \
    "$_as" \
    -w "$test_path" \
-   --lead-checklist-yaml "$tied_path/docs/agent-req-implementation-checklist.yaml" \
+   --lead-checklist-yaml "$tied_path/tied/docs/agent-req-implementation-checklist.yaml" \
    --lead-checklist-skip-sub \
    --checklist-var "CHANGE_TITLE=${feat_name}" \
    --checklist-var "FEATURE_GOAL=${feat_goal}" \

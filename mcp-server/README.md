@@ -71,7 +71,7 @@ Path parameters on tools that accept file paths are resolved by the Node process
 | `tied_import_summary` | Import/inspect an existing TIED directory: read YAML indexes and report tokens plus detail file presence (hybrid .md and .yaml). Params: optional `base_path`. Use to validate a reference TIED layout. |
 | `tied_feedback_add` | Add a feedback entry (feature request, bug report, or methodology improvement). Creates or appends to `tied/feedback.yaml`. Params: `type` (feature_request \| bug_report \| methodology_improvement), `title`, `description`, optional `context` (JSON string), `include_report_snippet` (default true), optional `base_path`. Returns `ok`, `id`, `created_at`, and optionally `report_snippet` (markdown for pasting into a TIED issue). |
 | `tied_feedback_export` | Export all feedback entries for reporting to the TIED project. Params: `format` (markdown \| json), optional `base_path`. Returns a string suitable for copy-paste into an issue or report. |
-| `requirement_list_state_guide` | Client-supplied requirement list walk. First call: non-empty `requirements`; later: `current_state` = `continuation_state`. Returns one requirement object per step until **`id: end_requirement_list`**. For each item, use the agent REQ checklist in project docs (e.g. `docs/agent-req-implementation-checklist.md`). See [docs/requirement-list-state-guide-agent-workflow.md](../docs/requirement-list-state-guide-agent-workflow.md). |
+| `requirement_list_state_guide` | Client-supplied requirement list walk. First call: non-empty `requirements`; later: `current_state` = `continuation_state`. Returns one requirement object per step until **`id: end_requirement_list`**. For each item, use the agent REQ checklist (e.g. `tied/docs/agent-req-implementation-checklist.md`). See [tied/docs/requirement-list-state-guide-agent-workflow.md](../tied/docs/requirement-list-state-guide-agent-workflow.md). |
 
 ### Token rename
 
@@ -128,7 +128,7 @@ Configure MCP in your **development project** (the project where you ran `copy_f
 
 Replace `/path/to/tied` and `/path/to/your/project/tied` with your actual paths.
 
-For a full example process of adding the TIED MCP to a project and invoking it in several passes (setup, bootstrap, establish REQ/ARCH/IMPL, maintain), see [docs/adding-tied-mcp-and-invoking-passes.md](../docs/adding-tied-mcp-and-invoking-passes.md).
+For a full example process of adding the TIED MCP to a project and invoking it in several passes (setup, bootstrap, establish REQ/ARCH/IMPL, maintain), see [tied/docs/adding-tied-mcp-and-invoking-passes.md](../tied/docs/adding-tied-mcp-and-invoking-passes.md).
 
 ## Run locally
 

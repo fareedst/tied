@@ -224,7 +224,7 @@ steps:
       - When ./tied/ or .cursor/skills/tied-yaml/ are missing (immature client), run only tasks that apply to existing paths; defer tied-cli TIED mutations until the methodology bundle is installed—record what was deferred in the per-request checklist copy.
     tasks:
       - Preface the response with "Observing AI principles!".
-      - 'Read completely: ai-principles.md'
+      - 'Read completely: tied/docs/ai-principles.md'
       - 'Review token registry: ./tied/semantic-tokens.yaml and guide: ./tied/semantic-tokens.md'
       - 'Review YAML indexes: ./tied/architecture-decisions.yaml and ./tied/implementation-decisions.yaml'
       - 'Review IMPL schema and pseudo-code rules: ./tied/implementation-decisions.md ([PROC-IMPL_PSEUDOCODE_TOKENS]).'
@@ -236,7 +236,7 @@ steps:
     outcomes: Agent has read all governing documents. Session context is established.
     references:
       - AGENTS.md § 1-2
-      - ai-principles.md § Mandatory Acknowledgment, § Checklist for AI Agents
+      - tied/docs/ai-principles.md § Mandatory Acknowledgment, § Checklist for AI Agents
       - .cursor/skills/tied-yaml/SKILL.md
       - .cursor/skills/tied-yaml/reference.md
     flow:
@@ -295,7 +295,7 @@ steps:
     outcomes: A clear change definition exists. For CITDP records, this populates the change_definition section.
     references:
       - tied/processes.md § [PROC-CITDP] step 1
-      - ai-principles.md § Bugs vs requirements
+      - tied/docs/ai-principles.md § Bugs vs requirements
     flow:
       next: impact-discovery
       branches:
@@ -396,7 +396,7 @@ steps:
     references:
       - tied/processes.md § [PROC-YAML_DB_OPERATIONS]
       - tied/detail-files-schema.md § 2
-      - ai-principles.md § Phase 1
+      - tied/docs/ai-principles.md § Phase 1
       - ./docs/agent-preload-contract-template.yaml
       - ./docs/agent-preload-contract-tied-repo.yaml
     flow:
@@ -647,7 +647,7 @@ steps:
     references:
       - tied/processes.md § [PROC-TEST_STRATEGY]
       - tied/processes.md § [PROC-CITDP] step 5
-      - ai-principles.md § Thin Entry Points and Testability Classification
+      - tied/docs/ai-principles.md § Thin Entry Points and Testability Classification
       - tied/docs/implementation-order.md
     flow:
       next: unit-test-red
@@ -1109,7 +1109,7 @@ references:
     provides: Mandatory implementation order (tests -> TDD -> glue -> E2E -> close loop)
   - document: ./tied/docs/methodology-diagrams.md
     provides: Visual diagrams for traceability stack, dev cycle, TDD inner loop, CITDP, YAML edit loop
-  - document: ai-principles.md
+  - document: tied/docs/ai-principles.md
     provides: Agent principles, checklists, change impact tracking matrix
   - document: ./tied/implementation-decisions.md
     provides: IMPL detail schema, pseudo-code rules, preferred vocabulary, collision detection

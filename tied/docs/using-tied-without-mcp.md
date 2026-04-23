@@ -14,7 +14,7 @@ Or use `./copy_files.sh /path/to/project` — you get the same result. Your proj
 
 - **Methodology** (read-only): `tied/methodology/` contains index YAMLs and inherited detail files from TIED. Do not edit these; they are overwritten when you re-run `copy_files.sh` to refresh the methodology.
 - **Project** (your data): `tied/requirements.yaml`, `tied/architecture-decisions.yaml`, `tied/implementation-decisions.yaml`, `tied/semantic-tokens.yaml`, and `tied/requirements/`, `tied/architecture-decisions/`, `tied/implementation-decisions/` hold only your project's tokens. These are never overwritten by `copy_files.sh`.
-- Guide documents at `tied/` root: `requirements.md`, `architecture-decisions.md`, `implementation-decisions.md`, `processes.md`, `semantic-tokens.md`, etc. Reference docs under `tied/docs/` (including `commit-guidelines.md`) are copied from the TIED repo’s `docs/` by `copy_files.sh`.
+- Guide documents at `tied/` root: `requirements.md`, `architecture-decisions.md`, `implementation-decisions.md`, `processes.md`, `semantic-tokens.md`, etc. Reference docs under `tied/docs/` (including `commit-guidelines.md`) are copied from the TIED source tree’s `tied/docs/` by `copy_files.sh`.
 
 ## Managing REQ/ARCH/IMPL
 
@@ -26,7 +26,7 @@ Add or edit entries **only in project YAML**, not in methodology YAML. Methodolo
 
 ## Code and tests
 
-Use `[REQ-*]`, `[ARCH-*]`, and `[IMPL-*]` in code comments and test names. Follow the traceability chain: requirements → architecture → implementation. See [../../ai-principles.md](../../ai-principles.md) and [../../AGENTS.md](../../AGENTS.md) for the full methodology (project root).
+Use `[REQ-*]`, `[ARCH-*]`, and `[IMPL-*]` in code comments and test names. Follow the traceability chain: requirements → architecture → implementation. See [ai-principles.md](./ai-principles.md) and [../../AGENTS.md](../../AGENTS.md) for the full methodology (`tied/docs/` and project root).
 
 ## Optional validation
 
@@ -35,4 +35,4 @@ If your project has a token validation script (e.g. `./scripts/validate_tokens.s
 ## Reference
 
 - Guide docs in your project's `tied/` (e.g. `tied/requirements.md`, `tied/architecture-decisions.md`) explain structure and conventions.
-- [../../ai-principles.md](../../ai-principles.md) and [../../AGENTS.md](../../AGENTS.md) at project root describe the methodology in full.
+- [ai-principles.md](./ai-principles.md) (under `tied/docs/`) and [AGENTS.md](../../AGENTS.md) at project root describe the methodology in full.

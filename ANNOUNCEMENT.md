@@ -102,7 +102,7 @@ The STDD v1.0.1 release includes:
 
 ### Methodology Documentation
 - **`STDD.md`** - Complete methodology overview (for beginners, intermediate, and expert developers)
-- **`ai-principles.md`** - Comprehensive principles and process guide
+- **`tied/docs/ai-principles.md`** - Comprehensive principles and process guide
 - **`README.md`** - Getting started guide and usage instructions
 
 ### Project Templates (at TIED repo root; copy into project's tied/ with same filename)
@@ -168,7 +168,7 @@ STDD is perfect for:
 
 - **Getting Started**: Read `README.md` for step-by-step instructions
 - **Methodology Details**: Read `STDD.md` for complete methodology overview
-- **Process Guide**: Read `ai-principles.md` for detailed principles and workflows
+- **Process Guide**: Read `tied/docs/ai-principles.md` for detailed principles and workflows
 - **Examples**: Check the template files for examples and structure
 
 ## 🤝 Get Involved

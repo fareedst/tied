@@ -105,7 +105,7 @@ This copies template YAML indexes and guide docs into the project’s `tied/` di
 
 ## 5. Pass 2: Establish REQ → ARCH → IMPL (documentation-first, no code yet)
 
-This pass aligns with **TIED Phase 1: Requirements → Pseudo-Code** and the documentation-first rule in [ai-principles.md](../../ai-principles.md). No code changes; only YAML indexes and detail files.
+This pass aligns with **TIED Phase 1: Requirements → Pseudo-Code** and the documentation-first rule in [ai-principles.md](./ai-principles.md). No code changes; only YAML indexes and detail files.
 
 ### Pass 2a — Create a new requirement
 
@@ -175,7 +175,7 @@ Use these to load full context for the LLM or tooling.
 
 ### Token audit
 
-Follow [ai-principles.md](../../ai-principles.md) and [AGENTS.md](../../AGENTS.md): confirm that code and tests carry the correct `[REQ-*]`, `[ARCH-*]`, and `[IMPL-*]` tokens and that the registry matches usage. Run the project’s token validation script when available.
+Follow [ai-principles.md](./ai-principles.md) and [AGENTS.md](../../AGENTS.md): confirm that code and tests carry the correct `[REQ-*]`, `[ARCH-*]`, and `[IMPL-*]` tokens and that the registry matches usage. Run the project’s token validation script when available.
 
 ---
 
@@ -214,5 +214,5 @@ flowchart LR
 | [mcp-server/README.md](../../mcp-server/README.md) | Full tool and resource list, Cursor config example, path resolution, conversion options |
 | [README.md](../../README.md) | Getting Started, Step 2 (MCP), TIED YAML MCP Server section, value of MCP, data flow |
 | [using-tied-without-mcp.md](using-tied-without-mcp.md) | Workflow when not using MCP (bootstrap and manual YAML management) |
-| [ai-principles.md](../../ai-principles.md) | TIED phases, documentation-first rule, token discipline, priority order |
+| [ai-principles.md](./ai-principles.md) | TIED phases, documentation-first rule, token discipline, priority order |
 | [AGENTS.md](../../AGENTS.md) | Canonical AI agent operating guide and checklists |

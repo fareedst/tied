@@ -1,6 +1,6 @@
 # YAML updates via TIED MCP (agent runbook)
 
-**Audience**: AI agents. **Start here (all links in one place):** [tied-yaml-agent-index.md](./tied-yaml-agent-index.md) (same content as `docs/tied-yaml-agent-index.md` in the TIED repo; link targets adjusted for `tied/docs/`). **Companion**: [ai-agent-tied-mcp-usage.md](ai-agent-tied-mcp-usage.md), [AGENTS.md](../AGENTS.md) § TIED data access, [detail-files-schema.md](../detail-files-schema.md) (in a bootstrapped client: `tied/detail-files-schema.md` after `copy_files.sh`).
+**Audience**: AI agents. **Start here (all links in one place):** [tied-yaml-agent-index.md](./tied-yaml-agent-index.md) (canonical in the TIED repo). **Companion**: [ai-agent-tied-mcp-usage.md](ai-agent-tied-mcp-usage.md), [AGENTS.md](../AGENTS.md) § TIED data access, [detail-files-schema.md](../detail-files-schema.md) (in a bootstrapped client: `tied/detail-files-schema.md` after `copy_files.sh`).
 
 **Purpose**: Stop invalid YAML and index/detail drift by **routing mutations through the tied-yaml MCP server** and by **not abandoning MCP** after the first error.
 

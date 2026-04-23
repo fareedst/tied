@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-# Stub-first rewrites for docs/agent-req-implementation-checklist.yaml (and copies).
+# Stub-first rewrites for tied/docs/agent-req-implementation-checklist.yaml (and copies).
 # Preserves comments, YAML layout, clear_ids (sed canonical ids), and step id: fields.
 # Usage: ruby scripts/rewrite_agent_req_checklist_stub_names.rb PATH [PATH2 ...]
 

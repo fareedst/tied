@@ -28,7 +28,7 @@ This document describes the YAML structure for individual REQ, ARCH, and IMPL to
 | `related_requirements` | depends_on, related_to, supersedes (lists) | map of lists |
 | `metadata` | created, last_updated, last_validated (each: date, author, reason?, validator?, result?) | map |
 
-**Optional:** `behavioral_contracts` (invariants / configurable lists) and `dependencies` (depends_on, used_by, affects) for richer documentation (see ai-principles.md).
+**Optional:** `behavioral_contracts` (invariants / configurable lists) and `dependencies` (depends_on, used_by, affects) for richer documentation (see `tied/docs/ai-principles.md`).
 
 ---
 

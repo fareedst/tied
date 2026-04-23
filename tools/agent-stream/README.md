@@ -10,7 +10,7 @@ Ruby harness for the Cursor `agent` CLI with `--print --output-format stream-jso
 
 ```bash
 ruby tools/agent-stream/run_agent_stream.rb --workspace /path/to/project \
-  --lead-checklist-yaml docs/agent-req-implementation-checklist.yaml
+  --lead-checklist-yaml tied/docs/agent-req-implementation-checklist.yaml
 ```
 
 ```bash

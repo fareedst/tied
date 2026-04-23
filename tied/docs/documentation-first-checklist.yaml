@@ -43,7 +43,7 @@ steps:
     goals: Confirm access to governing TIED documents; establish session context.
     tasks:
       - Preface with "Observing AI principles!"
-      - Read ai-principles.md; review semantic-tokens, architecture-decisions, implementation-decisions (YAML + guides).
+      - Read tied/docs/ai-principles.md; review semantic-tokens, architecture-decisions, implementation-decisions (YAML + guides).
       - Confirm TIED MCP availability if applicable; understand priority order.
     outcomes: Session context established; governing docs read.
   - slug: translate-sponsor-intent

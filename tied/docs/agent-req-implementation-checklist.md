@@ -4,7 +4,7 @@
 
 **Purpose**: This document is the primary procedural template an AI agent follows for every new requirement or change to the tested system. It unifies and sequences the controlling processes into a single executable checklist with explicit branching and looping. The agent executes this checklist from start to finish; skipping steps is not permitted unless a branch directive says otherwise.
 
-**Trackable form**: The executable checklist YAML (with `id`, `slug`, completion comments, and loop-back clearance) is [`docs/agent-req-implementation-checklist.yaml`](agent-req-implementation-checklist.yaml) (version in-file). The same content is mirrored at `tied/docs/agent-req-implementation-checklist.yaml` for methodology bundles (`copy_files.sh`). Copy either to a unique per-request file in a working folder (see the YAML header) and use it to record step completion and loop-backs.
+**Trackable form**: The executable checklist YAML (with `id`, `slug`, completion comments, and loop-back clearance) is [`agent-req-implementation-checklist.yaml`](agent-req-implementation-checklist.yaml) (version in-file; canonical in this directory in the TIED repository). `copy_files.sh` installs it into a client’s `tied/docs/` when missing. Copy to a unique per-request file in a working folder (see the YAML header) and use it to record step completion and loop-backs.
 
 **Processes unified here**: `[PROC-CITDP]`, `[PROC-TIED_DEV_CYCLE]`, `[PROC-IMPL_CODE_TEST_SYNC]`, `[PROC-LEAP]`, `[PROC-YAML_EDIT_LOOP]`, `[PROC-IMPL_PSEUDOCODE_TOKENS]`, `[PROC-PSEUDOCODE_VALIDATION]`, `[PROC-TOKEN_AUDIT]`, `[PROC-TOKEN_VALIDATION]`, `[PROC-TEST_STRATEGY]`, `[PROC-COMMIT_MESSAGES]`.
 
@@ -78,7 +78,7 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 | `verification-gate` | Suite, lint, and post-test validation green for the pass. | **Close-out** without debug narrative: `sync-tied-stack`, `user-facing-release-notes` (if in scope), `persist-citdp-record`, `traceable-commit`. |
 | `persist-citdp-record` | `CITDP-*.yaml` on disk. | Short **commit** session: `traceable-commit` (see the `traceable-commit` and `session-bootstrap` notes on `CALL` / `RETURN` for driver-appended sub-procedure turns). |
 
-**Agentstream (`--lead-checklist-yaml` in the consumer repo’s `tools/agentstream` and `tools/agent-stream`):** The executable YAML sets `agentstream_new_session: true` on the main steps that begin a handoff in the table (for example `risk-assessment` through to `sync-tied-stack` per the canonical `docs/agent-req-implementation-checklist.yaml` at the repo root). The driver then issues that turn without `--resume` (a new Cursor agent session). Missing or `false` keeps chaining from the previous turn. This key is a **driver hint**; the procedural checklist and gating do not depend on it, and other clients may ignore it. Mid-run new sessions are independent of a prior turn’s `session_id`; `--session-id` (when supported) still applies to **turn 1** of the run only.
+**Agentstream (`--lead-checklist-yaml` in the consumer repo’s `tools/agentstream` and `tools/agent-stream`):** The executable YAML sets `agentstream_new_session: true` on the main steps that begin a handoff in the table (for example `risk-assessment` through to `sync-tied-stack` per the canonical `tied/docs/agent-req-implementation-checklist.yaml` in the TIED repository). The driver then issues that turn without `--resume` (a new Cursor agent session). Missing or `false` keeps chaining from the previous turn. This key is a **driver hint**; the procedural checklist and gating do not depend on it, and other clients may ignore it. Mid-run new sessions are independent of a prior turn’s `session_id`; `--session-id` (when supported) still applies to **turn 1** of the run only.
 
 **Session preload file:** When a workspace has **`agent-preload-contract.yaml` at the repo root** (optional; used by agentstream and batch scripts when present), the checklist’s **`author-architecture`** and **`persist-implementation-records`** steps require creating or updating it (see the bundled [`agent-preload-contract-template.yaml`](../../docs/agent-preload-contract-template.yaml) in the TIED source tree, or the consumer’s copy under `tied/docs/`; use [`agent-preload-contract-tied-repo.yaml`](../../docs/agent-preload-contract-tied-repo.yaml) when indexes live at the repo root). A filled preload is not a substitute for REQ+ARCH-bounded system definition; refresh after **ARCH-locked** constants, then after **IMPL-locked** `code_locations` and paths. **`sync-tied-stack`** re-checks the file if REQ/IMPL status or `traceability.tests` changed. See the executable YAML in `tied/docs/agent-req-implementation-checklist.yaml` for exact task text.
 
@@ -107,7 +107,7 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 
 **Tasks**:
 1. Preface the response with `"Observing AI principles!"`.
-2. Read `ai-principles.md` completely.
+2. Read `tied/docs/ai-principles.md` completely.
 3. Review `tied/semantic-tokens.yaml` (token registry) and `tied/semantic-tokens.md` (token guide).
 4. Review `tied/architecture-decisions.yaml` and `tied/implementation-decisions.yaml` (YAML indexes).
 5. Review `tied/implementation-decisions.md` (IMPL schema, pseudo-code rules, block token rules per `[PROC-IMPL_PSEUDOCODE_TOKENS]`).
@@ -118,7 +118,7 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 
 **Outcomes**: Agent has read all governing documents. Session context is established.
 
-**Reference**: `AGENTS.md` § 1-2; `ai-principles.md` § Mandatory Acknowledgment, § Checklist for AI Agents.
+**Reference**: `AGENTS.md` § 1-2; `tied/docs/ai-principles.md` § Mandatory Acknowledgment, § Checklist for AI Agents.
 
 ---
 
@@ -154,7 +154,7 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 
 **Branch**: IF this is a bug fix AND no REQ exists for the expected behavior THEN create the missing REQ at author-requirement first, then return here to define the fix.
 
-**Reference**: `tied/processes.md` § `[PROC-CITDP]` step 1; `ai-principles.md` § Bugs vs requirements.
+**Reference**: `tied/processes.md` § `[PROC-CITDP]` step 1; `tied/docs/ai-principles.md` § Bugs vs requirements.
 
 ---
 
@@ -223,7 +223,7 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 
 **Outcomes**: ARCH records exist with REQ cross-references; tokens registered; YAML validated; `agent-preload-contract.yaml` at the workspace root created or updated when meaningful ARCH constants were introduced (or the step output records an explicit skip).
 
-**Reference**: `tied/processes.md` § `[PROC-YAML_DB_OPERATIONS]`; `tied/detail-files-schema.md` § 2; `ai-principles.md` § Phase 1; `docs/agent-preload-contract-template.yaml` (TIED source); `docs/agent-preload-contract-tied-repo.yaml` (TIED source).
+**Reference**: `tied/processes.md` § `[PROC-YAML_DB_OPERATIONS]`; `tied/detail-files-schema.md` § 2; `tied/docs/ai-principles.md` § Phase 1; `docs/agent-preload-contract-template.yaml` (TIED source); `docs/agent-preload-contract-tied-repo.yaml` (TIED source).
 
 ---
 
@@ -336,7 +336,7 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 
 **Outcomes**: Test matrix complete; every IMPL block has a testability classification; TDD sequence planned; module boundaries documented.
 
-**Reference**: `tied/processes.md` § `[PROC-TEST_STRATEGY]`; `tied/processes.md` § `[PROC-CITDP]` step 5; `ai-principles.md` § Thin Entry Points and Testability Classification; `tied/docs/implementation-order.md`.
+**Reference**: `tied/processes.md` § `[PROC-TEST_STRATEGY]`; `tied/processes.md` § `[PROC-CITDP]` step 5; `tied/docs/ai-principles.md` § Thin Entry Points and Testability Classification; `tied/docs/implementation-order.md`.
 
 ---
 
@@ -732,7 +732,7 @@ flowchart TD
 | `tied/docs/LEAP.md` | LEAP rationale: why IMPL pseudo-code beats hunting through source |
 | `tied/docs/implementation-order.md` | Mandatory implementation order (tests → TDD → glue → E2E → close loop) |
 | `tied/docs/methodology-diagrams.md` | Visual diagrams for the traceability stack, dev cycle, TDD inner loop, CITDP, and YAML edit loop |
-| `ai-principles.md` | Agent principles, checklists, change impact tracking matrix |
+| `tied/docs/ai-principles.md` | Agent principles, checklists, change impact tracking matrix |
 | `tied/implementation-decisions.md` | IMPL detail schema, pseudo-code rules, preferred vocabulary, collision detection |
 | `tied/semantic-tokens.md` | Token format, naming convention, registry usage, creation requirements |
 | `tied/detail-files-schema.md` | YAML schema for REQ, ARCH, and IMPL detail files |

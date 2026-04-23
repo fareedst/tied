@@ -10,6 +10,7 @@
 #   AGENTSTREAM  If set, path to a prebuilt agentstream executable (skips go run).
 #   AGENTSTREAM_TIED_MCP_PREFLIGHT=1  Opt in to static tied-yaml mcp.json validation before cursor agent (off by default).
 #   AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1  Skip preflight when it is enabled (or use agentstream -y).
+# Prompt files: <workspace>/agent-preload-contract.yaml (when present) is passed first, then any -p paths (see run-feature-batch.sh).
 #
 # Unsupported vs Ruby path:
 #   -r / --runner      Ignored with a warning (no Ruby runner).
@@ -71,6 +72,14 @@ require_directory() {
   [[ -d "$path" ]] || fail "$label is not a directory: $path"
 }
 
+file_inode() {
+  if stat -f%i "$1" >/dev/null 2>&1; then
+    stat -f%i "$1"
+  else
+    stat -c%i "$1"
+  fi
+}
+
 main() {
   local _script_dir
   _script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -84,15 +93,14 @@ main() {
   local select_order=""
   local workspace="."
   local runner_ignored=0
-  local lead_checklist_yaml="${_repo_root}/docs/agent-req-implementation-checklist.yaml"
+  local lead_checklist_yaml="${_repo_root}/tied/docs/agent-req-implementation-checklist.yaml"
   local lead_checklist_from_step=""
   local lead_checklist_to_step=""
   local checklist_var_strict=0
   local -a checklist_var_args=()
-  local prompt_file=""
+  local -a prompt_file_paths=()
   local feature_spec_batch_yaml=""
 
-  local prompt_file_explicit=0
   local feature_spec_batch_yaml_explicit=0
 
   local opt=""
@@ -134,8 +142,7 @@ main() {
         ;;
       p)
         require_value "-p|--prompt-file" "${OPTARG:-}"
-        prompt_file="$OPTARG"
-        prompt_file_explicit=1
+        prompt_file_paths+=("$OPTARG")
         ;;
       b)
         require_value "-b|--feature-spec-batch-yaml" "${OPTARG:-}"
@@ -178,8 +185,7 @@ main() {
                 checklist_var_args+=(--checklist-var "$opt_value")
                 ;;
               prompt-file)
-                prompt_file="$opt_value"
-                prompt_file_explicit=1
+                prompt_file_paths+=("$opt_value")
                 ;;
               feature-spec-batch-yaml)
                 feature_spec_batch_yaml="$opt_value"
@@ -230,9 +236,20 @@ main() {
     printf 'run-feature-batch-agentstream: warning: ignoring -r/--runner (Go agentstream has no Ruby runner)\n' >&2
   fi
 
-  if (( prompt_file_explicit == 0 )); then
-    prompt_file="$workspace/agent-preload-contract.yaml"
-    [[ -f $prompt_file ]] || prompt_file=""
+  local contract_path="${workspace}/agent-preload-contract.yaml"
+  local -a prompt_args=()
+  if [[ -f "$contract_path" && -r "$contract_path" ]]; then
+    local c_in
+    c_in=$(file_inode "$contract_path")
+    prompt_args=("$contract_path")
+    for f in "${prompt_file_paths[@]}"; do
+      if [[ -f "$f" && -r "$f" ]] && [[ "$c_in" == "$(file_inode "$f")" ]]; then
+        continue
+      fi
+      prompt_args+=("$f")
+    done
+  else
+    prompt_args=("${prompt_file_paths[@]}")
   fi
 
   if (( feature_spec_batch_yaml_explicit == 0 )); then
@@ -243,7 +260,9 @@ main() {
   require_directory "workspace" "$workspace"
   [[ -d "${_go_module}" ]] || fail "Go module not found: ${_go_module}"
   require_readable_file "lead checklist yaml" "$lead_checklist_yaml"
-  [[ -n $prompt_file ]] && require_readable_file "prompt file" "$prompt_file"
+  for p in "${prompt_args[@]}"; do
+    require_readable_file "prompt file" "$p"
+  done
   [[ -n $feature_spec_batch_yaml ]] && require_readable_file "feature spec batch yaml" "$feature_spec_batch_yaml"
 
   local -a cmd
@@ -264,7 +283,9 @@ main() {
   ((${#checklist_var_args[@]})) && cmd+=("${checklist_var_args[@]}")
   ((checklist_var_strict)) && cmd+=(--checklist-var-strict)
   [[ -n "$select_order" ]] && cmd+=(-o "$select_order")
-  [[ -n "$prompt_file" ]] && cmd+=(-p "$prompt_file")
+  for p in "${prompt_args[@]}"; do
+    cmd+=(-p "$p")
+  done
   cmd+=(-b "$feature_spec_batch_yaml")
 
   exec "${cmd[@]}"

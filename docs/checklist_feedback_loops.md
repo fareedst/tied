@@ -7,7 +7,7 @@ isProject: false
 
 # Feedback loops in CITDP + LEAP + TIED
 
-Source: [docs/agent-req-implementation-checklist.yaml](docs/agent-req-implementation-checklist.yaml) (executable checklist; internal step codes stay in that file only).
+Source: [tied/docs/agent-req-implementation-checklist.yaml](../tied/docs/agent-req-implementation-checklist.yaml) (executable checklist; internal step codes stay in that file only).
 
 **Mermaid and plain text:** Each flow has a **Mermaid** diagram (for viewers that render it) and a **Plain-text flow** block right below (for Reddit, email, or any Markdown that shows Mermaid as an unreadable code fence).
 

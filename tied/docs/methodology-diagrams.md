@@ -4,7 +4,7 @@
 
 Six diagrams capture the core methodology: the traceability stack, the three development phases, the LEAP bidirectional loop, the full dev-cycle session workflow, the TDD inner loop, and the CITDP change-analysis procedure. A short **New client setup — Cursor** section at the end shows bootstrap and `agent enable tied-yaml` for MCP.
 
-**Related documents**: [LEAP.md](LEAP.md), [implementation-order.md](implementation-order.md), [processes.md](../processes.md), [ai-principles.md](../ai-principles.md)
+**Related documents**: [LEAP.md](LEAP.md), [implementation-order.md](implementation-order.md), [processes.md](../processes.md), [ai-principles.md](./ai-principles.md)
 
 ---
 

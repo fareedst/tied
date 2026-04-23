@@ -85,4 +85,4 @@
 - **Tool and resource list**: [mcp-server/README.md](../mcp-server/README.md)
 - **Multi-requirement walk + per-REQ checklist**: [requirement-list-state-guide-agent-workflow.md](requirement-list-state-guide-agent-workflow.md)
 - **Setup and passes**: [adding-tied-mcp-and-invoking-passes.md](adding-tied-mcp-and-invoking-passes.md)
-- **Agent operating guide**: [AGENTS.md](../AGENTS.md); **principles**: [ai-principles.md](../ai-principles.md)
+- **Agent operating guide**: [AGENTS.md](../AGENTS.md); **principles**: [ai-principles.md](./ai-principles.md)

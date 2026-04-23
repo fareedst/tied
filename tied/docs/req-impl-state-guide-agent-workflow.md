@@ -42,4 +42,4 @@
 - Tool descriptor: `mcp-server/tool-descriptors/req_impl_state_guide.json`
 - List-only outer walk: `requirement_list_state_guide`
 - Checklist-only inner walk: `agent_req_state_guide`
-- Operating guide: `AGENTS.md`, `ai-principles.md`
+- Operating guide: `AGENTS.md`, `tied/docs/ai-principles.md`

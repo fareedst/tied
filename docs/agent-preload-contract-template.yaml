@@ -1,6 +1,6 @@
 # Agent preload contract — generic template
 #
-# When the workspace is the TIED source repository (indexes at repo root, no tied/),
+# When the workspace is the TIED source repository (indexes at repo root; methodology guides under tied/),
 # prefer docs/agent-preload-contract-tied-repo.yaml instead of this file.
 #
 # Applicability: A blank or generic copy of this file is not a substitute for a
@@ -9,7 +9,7 @@
 # exist; then update workspace-root agent-preload-contract.yaml after
 # author-architecture (ARCH-locked constants) and again after
 # persist-implementation-records (IMPL-locked code_locations and related fields)
-# per docs/agent-req-implementation-checklist.yaml. sync-tied-stack re-checks
+# per tied/docs/agent-req-implementation-checklist.yaml. sync-tied-stack re-checks
 # preload if TIED status or traceability to tests changed.
 #
 # If a field is present and true, the agent should treat it as authoritative
@@ -23,12 +23,13 @@ agent_preload:
     top_level_entries: [] # optional; omit if likely to go stale
     vcs_present: false # e.g. true when .git exists
   session_bootstrap_docs:
-    ai_principles_path: ./ai-principles.md
+    ai_principles_path: ./tied/docs/ai-principles.md
     semantic_tokens_index: ./tied/semantic-tokens.yaml
     semantic_tokens_guide: ./tied/semantic-tokens.md
     architecture_decisions_index: ./tied/architecture-decisions.yaml
     implementation_decisions_index: ./tied/implementation-decisions.yaml
     implementation_decisions_guide: ./tied/implementation-decisions.md
+    # Client live file; TIED copy_files.sh seeds it from templates/processes.md when missing
     processes_path: ./tied/processes.md
     agent_req_checklist_path: ./tied/docs/agent-req-implementation-checklist.md
     detail_files_schema: ./tied/detail-files-schema.md

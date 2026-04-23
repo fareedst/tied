@@ -25,8 +25,8 @@
 # Defaults:
 #   workspace:              $HOME/Documents/dev/swift/CursorHookViewer
 #   runner:                 <repo>/tools/agent-stream/run_agent_stream.rb (resolved from this script)
-#   lead checklist yaml:    $HOME/Documents/dev/chatgpt/stdd/docs/agent-req-implementation-checklist.yaml
-#   prompt file:            $workspace/agent-preload-contract.yaml
+#   lead checklist yaml:    $HOME/Documents/dev/chatgpt/stdd/tied/docs/agent-req-implementation-checklist.yaml
+#   prompt file:            <workspace>/agent-preload-contract.yaml (when present) first, then any -p paths (deduplicated)
 #   feature spec batch:     $workspace/prompts/all.yaml
 #
 
@@ -60,7 +60,8 @@ Options:
       Path to agent-req-implementation-checklist.yaml.
 
   -p, --prompt-file PATH
-      Path to agent-preload-contract.yaml.
+      Session preload (repeatable). If <workspace>/agent-preload-contract.yaml exists, it is passed first, then these paths
+      (same file is not added twice). With no -p, only the workspace contract is used when present.
 
   -b, --feature-spec-batch-yaml PATH
       Path to feature spec batch YAML.
@@ -110,6 +111,15 @@ require_directory() {
   [[ -d "$path" ]] || fail "$label is not a directory: $path"
 }
 
+# inode for deduplicating prompt paths (BSD stat vs GNU).
+file_inode() {
+  if stat -f%i "$1" >/dev/null 2>&1; then
+    stat -f%i "$1"
+  else
+    stat -c%i "$1"
+  fi
+}
+
 main() {
   local _script_dir
   _script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -117,7 +127,7 @@ main() {
   _repo_root="$(cd "${_script_dir}/.." && pwd)"
   local default_workspace="."
   local default_runner="${_repo_root}/tools/agent-stream/run_agent_stream.rb"
-  local default_checklist="${_repo_root}/docs/agent-req-implementation-checklist.yaml"
+  local default_checklist="${_repo_root}/tied/docs/agent-req-implementation-checklist.yaml"
 
   local dry_run=0
   local session_id=""
@@ -125,10 +135,9 @@ main() {
   local workspace="$default_workspace"
   local runner="$default_runner"
   local lead_checklist_yaml="$default_checklist"
-  local prompt_file=""
+  local -a prompt_file_paths=()
   local feature_spec_batch_yaml=""
 
-  local prompt_file_explicit=0
   local feature_spec_batch_yaml_explicit=0
 
   local opt=""
@@ -175,8 +184,7 @@ main() {
 
       p)
         require_value "-p|--prompt-file" "${OPTARG:-}"
-        prompt_file="$OPTARG"
-        prompt_file_explicit=1
+        prompt_file_paths+=("$OPTARG")
         ;;
 
       b)
@@ -227,8 +235,7 @@ main() {
                 lead_checklist_yaml="$opt_value"
                 ;;
               prompt-file)
-                prompt_file="$opt_value"
-                prompt_file_explicit=1
+                prompt_file_paths+=("$opt_value")
                 ;;
               feature-spec-batch-yaml)
                 feature_spec_batch_yaml="$opt_value"
@@ -278,10 +285,20 @@ main() {
     feature_spec_batch_yaml_explicit=1
   fi
 
-  # default to this workspace's files if they exist
-  if (( prompt_file_explicit == 0 )); then
-    prompt_file="$workspace/agent-preload-contract.yaml"
-    [[ -f $prompt_file ]] || prompt_file=""
+  local contract_path="${workspace}/agent-preload-contract.yaml"
+  local -a prompt_args=()
+  if [[ -f "$contract_path" && -r "$contract_path" ]]; then
+    local c_in
+    c_in=$(file_inode "$contract_path")
+    prompt_args=("$contract_path")
+    for f in "${prompt_file_paths[@]}"; do
+      if [[ -f "$f" && -r "$f" ]] && [[ "$c_in" == "$(file_inode "$f")" ]]; then
+        continue
+      fi
+      prompt_args+=("$f")
+    done
+  else
+    prompt_args=("${prompt_file_paths[@]}")
   fi
 
   if (( feature_spec_batch_yaml_explicit == 0 )); then
@@ -292,7 +309,9 @@ main() {
   require_directory "workspace" "$workspace"
   require_readable_file "runner" "$runner"
   require_readable_file "lead checklist yaml" "$lead_checklist_yaml"
-  [[ -n $prompt_file ]] && require_readable_file "prompt file" "$prompt_file"
+  for p in "${prompt_args[@]}"; do
+    require_readable_file "prompt file" "$p"
+  done
   [[ -n $feature_spec_batch_yaml ]] && require_readable_file "feature spec batch yaml" "$feature_spec_batch_yaml"
 
   local -a cmd
@@ -303,7 +322,9 @@ main() {
   cmd+=(--workspace "$workspace")
   cmd+=(--lead-checklist-yaml "$lead_checklist_yaml")
   [[ -n "$select_order" ]] && cmd+=(--feature-spec-batch-order "$select_order")
-  [[ -n "$prompt_file" ]] && cmd+=(--prompt-file "$prompt_file")
+  for p in "${prompt_args[@]}"; do
+    cmd+=(--prompt-file "$p")
+  done
   cmd+=(--feature-spec-batch-yaml "$feature_spec_batch_yaml")
 
   set -x

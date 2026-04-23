@@ -710,7 +710,7 @@ Use imperative, present tense. Include motivation for the change and how it diff
 
 ### TIED and commit messages
 
-When a commit implements or touches a specific requirement or decision, you may reference TIED tokens in the body or footer (e.g. `REQ-SIDE_PANEL_TAGS_TREE`, `ARCH-*`, `IMPL-*`). This is optional but encouraged for traceability. Commit format is defined here; for token discipline in code and docs see [AGENTS.md](AGENTS.md) and `ai-principles.md`.
+When a commit implements or touches a specific requirement or decision, you may reference TIED tokens in the body or footer (e.g. `REQ-SIDE_PANEL_TAGS_TREE`, `ARCH-*`, `IMPL-*`). This is optional but encouraged for traceability. Commit format is defined here; for token discipline in code and docs see [AGENTS.md](../AGENTS.md) and [tied/docs/ai-principles.md](docs/ai-principles.md).
 
 ### Artifacts & Metrics
 - **Artifacts**: Commit history; optionally generated changelog.

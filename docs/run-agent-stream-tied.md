@@ -7,7 +7,7 @@ This repository vendors the **ATDD** Ruby harness (`run_agent_stream.rb`) so age
 
 ## Role in the methodology
 
-- **`[PROC-AGENT_REQ_CHECKLIST]`** — Pass [docs/agent-req-implementation-checklist.yaml](agent-req-implementation-checklist.yaml) (or a per-request copy) via `--lead-checklist-yaml` so each main step and sub-procedure becomes one agent turn in order.
+- **`[PROC-AGENT_REQ_CHECKLIST]`** — Pass [tied/docs/agent-req-implementation-checklist.yaml](../tied/docs/agent-req-implementation-checklist.yaml) (or a per-request copy) via `--lead-checklist-yaml` so each main step and sub-procedure becomes one agent turn in order.
 - **`[PROC-TIED_DEV_CYCLE]`** — Pass [docs/tdd_development_loop.yaml](tdd_development_loop.yaml) via `--tdd-yaml` to run the six-step TDD loop (RED/GREEN/REFACTOR/SYNC) as sequential turns; that file includes **persist CITDP record** and LEAP micro-cycle reminders where applicable.
 - **LEAP** — When the checklist or loop instructs updating IMPL/ARCH/REQ after code–test drift, apply the reverse stack update in the same work item; the runner only automates *turn delivery*, not LEAP logic itself.
 - **Traceability** — Requirements and decisions for the harness use tokens `REQ-ATDD-*`, `ARCH-ATDD-*`, `IMPL-ATDD-*` (see [semantic-tokens.yaml](../semantic-tokens.yaml)).
@@ -21,7 +21,7 @@ This repository vendors the **ATDD** Ruby harness (`run_agent_stream.rb`) so age
 
 ```bash
 ruby tools/agent-stream/run_agent_stream.rb --workspace /path/to/project \
-  --lead-checklist-yaml docs/agent-req-implementation-checklist.yaml
+  --lead-checklist-yaml tied/docs/agent-req-implementation-checklist.yaml
 ```
 
 ```bash

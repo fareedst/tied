@@ -3,8 +3,8 @@
 # IMPL into green tests and passing code, including composition and E2E branches.
 name: tdd_development_loop
 description: |
-  TDD-only subset extracted from docs/agent-req-implementation-checklist.yaml. Apply the loop repeatedly until all tests are green and all requirements are satisfied.
-source_document: docs/agent-req-implementation-checklist.yaml
+  TDD-only subset extracted from tied/docs/agent-req-implementation-checklist.yaml. Apply the loop repeatedly until all tests are green and all requirements are satisfied.
+source_document: tied/docs/agent-req-implementation-checklist.yaml
 process_token: '[PROC-TIED_DEV_CYCLE]'
 version: 1.0.0
 last_updated: "2026-04-18"
@@ -101,8 +101,8 @@ steps:
       - Ensure behavior testable below E2E also has composition coverage.
     outcomes: E2E tests exist for UI-only behavior; each is justified by a named platform constraint.
 references:
-  - docs/implementation-order.md
-  - docs/tied-first-implementation-procedure.md
-  - docs/impl-code-test-linkage.md
-  - docs/pseudocode-writing-and-validation.md
-  - docs/pseudocode-validation-checklist.yaml
+  - tied/docs/implementation-order.md
+  - tied/docs/tied-first-implementation-procedure.md
+  - tied/docs/impl-code-test-linkage.md
+  - tied/docs/pseudocode-writing-and-validation.md
+  - tied/docs/pseudocode-validation-checklist.yaml

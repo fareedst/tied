@@ -126,7 +126,7 @@ Using these forms keeps collision detection and comparison reliable across IMPLs
 
 ### Validating essence_pseudocode
 
-Before writing tests or code, validate pseudo-code using the **application pseudo-code validation checklist** ([PROC-PSEUDOCODE_VALIDATION]). Required checks are gating unless explicitly waived and documented. The recommended validation order is: **parsing** → **schema** → **symbol resolution** → **contract validation** → **dependency graph** → **behavioral coverage** → **traceability** → (optional) **linting**, **semantic simulation**, **generation readiness** → **reporting**. See `tied/docs/pseudocode-writing-and-validation.md` (or `docs/pseudocode-writing-and-validation.md` at repo root) for the full guide and `tied/docs/pseudocode-validation-checklist.yaml` (or `docs/pseudocode-validation-checklist.yaml`) for the canonical checklist.
+Before writing tests or code, validate pseudo-code using the **application pseudo-code validation checklist** ([PROC-PSEUDOCODE_VALIDATION]). Required checks are gating unless explicitly waived and documented. The recommended validation order is: **parsing** → **schema** → **symbol resolution** → **contract validation** → **dependency graph** → **behavioral coverage** → **traceability** → (optional) **linting**, **semantic simulation**, **generation readiness** → **reporting**. See `tied/docs/pseudocode-writing-and-validation.md` for the full guide and `tied/docs/pseudocode-validation-checklist.yaml` for the canonical checklist.
 
 ### Managed code and block token rules (REQ / ARCH / IMPL in pseudo-code)
 

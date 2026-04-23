@@ -44,17 +44,20 @@ type Config struct {
 	// LeadChecklistBeforeFeatureSpec: when set with both -b and -c, emit checklist turns before feature-spec turns.
 	LeadChecklistBeforeFeatureSpec bool
 
-	promptFileExplicit          bool
-	featureSpecBatchExplicit    bool
+	// skipWorkspacePreload: when true, do not prepend workspace agent-preload-contract.yaml (for tests/tools).
+	// Also: env AGENTSTREAM_SKIP_WORKSPACE_PRELOAD=1.
+	skipWorkspacePreload bool
+
+	featureSpecBatchExplicit  bool
 	positionalFeatureSpecYAML   string
 	tiedMCPPreflightUserSet     bool
 }
 
-// FindRepoRoot walks parents from start looking for docs/agent-req-implementation-checklist.yaml. REQ-GOAGENT-CLI-CONFIG.
+// FindRepoRoot walks parents from start looking for tied/docs/agent-req-implementation-checklist.yaml. REQ-GOAGENT-CLI-CONFIG.
 func FindRepoRoot(start string) (string, bool) {
 	dir := start
 	for {
-		p := filepath.Join(dir, "docs", "agent-req-implementation-checklist.yaml")
+		p := filepath.Join(dir, "tied", "docs", "agent-req-implementation-checklist.yaml")
 		if st, err := os.Stat(p); err == nil && !st.IsDir() {
 			return dir, true
 		}
@@ -205,7 +208,6 @@ func parseFlags(args []string, c *Config) error {
 					return err
 				}
 				c.PromptFiles = append(c.PromptFiles, val)
-				c.promptFileExplicit = true
 			case k == "--prompts-file":
 				val, err := needVal(k, v, ok, args, &i)
 				if err != nil {
@@ -251,6 +253,8 @@ func parseFlags(args []string, c *Config) error {
 				c.tiedMCPPreflightUserSet = true
 			case k == "-y" || k == "--yes":
 				c.AssumeTiedMCPYes = true
+			case k == "--skip-workspace-preload":
+				c.skipWorkspacePreload = true
 			case k == "--checklist-var" || k == "--lead-checklist-var":
 				val, err := needVal(k, v, ok, args, &i)
 				if err != nil {
@@ -322,18 +326,13 @@ func resolveDefaults(cwd string, c *Config) error {
 	c.Workspace = filepath.Clean(c.Workspace)
 	if c.LeadChecklistYAML == "" {
 		if root, ok := FindRepoRoot(c.Workspace); ok {
-			p := filepath.Join(root, "docs", "agent-req-implementation-checklist.yaml")
+			p := filepath.Join(root, "tied", "docs", "agent-req-implementation-checklist.yaml")
 			if fileReadable(p) {
 				c.LeadChecklistYAML = p
 			}
 		}
 	}
-	if !c.promptFileExplicit {
-		p := filepath.Join(c.Workspace, "agent-preload-contract.yaml")
-		if fileReadable(p) {
-			c.PromptFiles = append([]string{p}, c.PromptFiles...)
-		}
-	}
+	applyWorkspacePreloadDefault(c)
 	if !c.featureSpecBatchExplicit {
 		p := filepath.Join(c.Workspace, "prompts", "all.yaml")
 		if fileReadable(p) {
@@ -351,6 +350,29 @@ func resolveDefaults(cwd string, c *Config) error {
 		c.SkipTiedMCPPreflight = true
 	}
 	return nil
+}
+
+// applyWorkspacePreloadDefault prepends <workspace>/agent-preload-contract.yaml when it exists
+// and skip is not set, merging with explicit --prompt-file paths and deduplicating by cleaned path
+// (workspace file always first). REQ-GOAGENT-CLI-CONFIG.
+func applyWorkspacePreloadDefault(c *Config) {
+	skip := c.skipWorkspacePreload || os.Getenv("AGENTSTREAM_SKIP_WORKSPACE_PRELOAD") == "1"
+	def := filepath.Clean(filepath.Join(c.Workspace, "agent-preload-contract.yaml"))
+	seen := make(map[string]struct{})
+	var out []string
+	if !skip && fileReadable(def) {
+		seen[def] = struct{}{}
+		out = append(out, def)
+	}
+	for _, p := range c.PromptFiles {
+		cp := filepath.Clean(p)
+		if _, ok := seen[cp]; ok {
+			continue
+		}
+		seen[cp] = struct{}{}
+		out = append(out, p)
+	}
+	c.PromptFiles = out
 }
 
 func validate(c *Config) error {
@@ -422,7 +444,9 @@ Options:
                     (with -b and -c: lead checklist steps before feature-spec records; default is feature-spec first)
       --checklist-var KEY=VALUE   (repeatable; synonym: --lead-checklist-var; expands {{KEY}} in lead checklist YAML)
       --checklist-var-strict      (error if any {{NAME}} remains after expansion; env: AGENTSTREAM_CHECKLIST_VAR_STRICT=1)
-  -p, --prompt-file PATH   (repeatable; prepended on each new session, not a separate turn)
+  -p, --prompt-file PATH   (repeatable; prepended on each new session, not a separate turn; merged with workspace preload)
+      --skip-workspace-preload
+                    skip prepending <workspace>/agent-preload-contract.yaml (env: AGENTSTREAM_SKIP_WORKSPACE_PRELOAD=1)
       --prompts-file PATH  (repeatable)
       --tdd-yaml PATH      (repeatable)
   -b, --feature-spec-batch-yaml PATH (repeatable)
@@ -441,8 +465,8 @@ Positional:
   FEATURE_SPEC_BATCH_YAML  (alternate to -b; cannot combine with -b)
 
 Defaults when files exist:
-  lead checklist: <repo>/docs/agent-req-implementation-checklist.yaml
-  prompt file:    <workspace>/agent-preload-contract.yaml (prepended on new sessions only)
+  lead checklist: <repo>/tied/docs/agent-req-implementation-checklist.yaml
+  prompt file:    <workspace>/agent-preload-contract.yaml first, then any --prompt-file (prepended on new sessions; omit with --skip-workspace-preload)
   feature batch:  <workspace>/prompts/all.yaml
 `, program)
 }

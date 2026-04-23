@@ -1,6 +1,6 @@
 # Commit message guidelines (TIED projects)
 
-This file lives in the TIED repository as **`docs/commit-guidelines.md`**. **`copy_files.sh`** installs it into your project’s **`tied/docs/commit-guidelines.md`** when that file is missing. Use it as the commit message quick reference for this project.
+This file is canonical in the TIED repository as **`tied/docs/commit-guidelines.md`**. **`copy_files.sh`** installs it into your project’s **`tied/docs/commit-guidelines.md`** when that file is missing. Use it as the commit message quick reference for this project.
 
 Full process definitions: **[processes.md](../processes.md)** — see [PROC-COMMIT_MESSAGES](../processes.md) and [PROC-RELEASE](../processes.md).
 

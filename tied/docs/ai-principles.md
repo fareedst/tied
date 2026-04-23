@@ -160,7 +160,7 @@ See `tied/processes.md` § LEAP for the canonical process definition.
 2. Identify implementation sequence (implementable units, module validation before integration)
 3. Prioritize: P0 > P1 > P2 > P3; module validation is typically P0 or P1
 
-**Note**: Agents may maintain planning state in-session or in `implementation-decisions`. Checklist-driven work uses `docs/agent-req-implementation-checklist.yaml` (or `tied/docs/` copy) via agentstream, one step per turn.
+**Note**: Agents may maintain planning state in-session or in `implementation-decisions`. Checklist-driven work uses `tied/docs/agent-req-implementation-checklist.yaml` via agentstream, one step per turn.
 
 ### Phase 3: Implementation
 
@@ -197,7 +197,7 @@ See `tied/processes.md` § LEAP for the canonical process definition.
 **AT THE START OF EVERY RESPONSE:**
 
 - [ ] **MANDATORY**: Preface response with "Observing AI principles!"
-- [ ] Read `ai-principles.md` (if not already read in this session)
+- [ ] Read `tied/docs/ai-principles.md` (if not already read in this session)
 - [ ] Check `semantic-tokens.yaml` for existing tokens
 - [ ] Know the development process and priority levels
 
@@ -262,5 +262,5 @@ See `tied/processes.md` § LEAP for the canonical process definition.
 - **Implementation Phase**: Update documentation as decisions are refined
 - **Completion Phase**: Verify all documentation is current and complete
 
-**Last Updated**: 2026-03-05
+**Last Updated**: 2026-04-22
 **TIED Methodology Version**: 2.2.0

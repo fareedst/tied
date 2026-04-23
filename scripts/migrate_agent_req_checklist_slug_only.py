@@ -82,7 +82,7 @@ def migrate(text: str) -> str:
 def main() -> None:
     paths = [pathlib.Path(p) for p in sys.argv[1:]]
     if not paths:
-        paths = [pathlib.Path("docs/agent-req-implementation-checklist.yaml")]
+        paths = [pathlib.Path("tied/docs/agent-req-implementation-checklist.yaml")]
     for path in paths:
         raw = path.read_text(encoding="utf-8")
         path.write_text(migrate(raw), encoding="utf-8")

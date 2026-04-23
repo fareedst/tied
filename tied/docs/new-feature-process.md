@@ -1,6 +1,6 @@
 # New Feature Process (`[PROC-NEW_FEATURE]`)
 
-This document describes the end-to-end procedure for implementing a new feature using the TIED methodology: from user prompt through documentation, testing, implementation, validation, and release. It invokes **[PROC-TIED_DEV_CYCLE](tied/processes.md)** and adds tooling and post-implementation steps. **For the agent-executable step-by-step procedure** (what to do in each phase), see **`tied/docs/agent-req-implementation-checklist.md`** (`[PROC-AGENT_REQ_CHECKLIST]`) which is the primary unified checklist; it sequences `tied/processes.md` § PROC-TIED_DEV_CYCLE with CITDP, IMPL_CODE_TEST_SYNC, LEAP, and validation. The diagram and phase summary below are for human reference.
+This document describes the end-to-end procedure for implementing a new feature using the TIED methodology: from user prompt through documentation, testing, implementation, validation, and release. It invokes **[PROC-TIED_DEV_CYCLE](../processes.md)** and adds tooling and post-implementation steps. **For the agent-executable step-by-step procedure** (what to do in each phase), see **`tied/docs/agent-req-implementation-checklist.md`** (`[PROC-AGENT_REQ_CHECKLIST]`) which is the primary unified checklist; it sequences `tied/processes.md` § PROC-TIED_DEV_CYCLE with CITDP, IMPL_CODE_TEST_SYNC, LEAP, and validation. The diagram and phase summary below are for human reference.
 
 ## 1. Flow diagram: User prompt to commit
 
@@ -105,7 +105,7 @@ flowchart TB
 
 ## 2. Governing process and tools
 
-- **Strictly follow** the procedure **[PROC-TIED_DEV_CYCLE](tied/processes.md)** for the full development cycle (all 10 steps). The mandatory implementation order (tests first, code via TDD, glue, E2E, validate, sync) is stated in that section.
+- **Strictly follow** the procedure **[PROC-TIED_DEV_CYCLE](../processes.md)** for the full development cycle (all 10 steps). The mandatory implementation order (tests first, code via TDD, glue, E2E, validate, sync) is stated in that section.
 - **Use tied-yaml MCP tools** as the primary way to read/write TIED YAML:
   - **Index read/write:** `yaml_index_read`, `yaml_index_insert`, `yaml_index_update`, `yaml_index_list_tokens`, `yaml_index_filter`
   - **Detail read/write:** `yaml_detail_read`, `yaml_detail_read_many`, `yaml_detail_list`, `yaml_detail_create`, `yaml_detail_update`, `yaml_detail_delete`

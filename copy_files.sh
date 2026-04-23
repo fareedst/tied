@@ -14,10 +14,13 @@
 #     and are NEVER OVERWRITTEN. All client REQ/ARCH/IMPL and tokens live there.
 #
 # Creates:
-#   - Base files (.cursorrules, AGENTS.md, ai-principles.md) in project root
+#   - Base files (.cursorrules, AGENTS.md) in project root
 #   - tied/methodology/: index YAMLs and inherited detail files (always overwritten)
 #   - tied/: project index YAMLs and requirements/, architecture-decisions/, implementation-decisions/ (create if missing, never overwrite)
-#   - Guide .md and tied/docs/ (copy when missing). `tied-yaml-agent-index.md` is post-processed
+#   - Guide .md and tied/docs/ (copy when missing). `processes.md` for new clients comes from
+#     templates/processes.md (TIED-distributed template); the other four guides come from
+#     tied/ in the TIED source. In a TIED source checkout, tied/processes.md is the live
+#     repo file and is not the bootstrap source. `tied-yaml-agent-index.md` is post-processed
 #     so links resolve from tied/docs/ (see sed block in the DOCS_TO_COPY loop).
 #   - .cursor/skills/tied-yaml/: Cursor Agent Skill for REQ/ARCH/IMPL YAML via tied-cli.sh
 #     (from .cursor/ if present, else from tools/bundled-tied-yaml-skill; overwritten each run).
@@ -99,7 +102,6 @@ fi
 BASE_FILES=(
   ".cursorrules"
   "AGENTS.md"
-  "ai-principles.md"
 )
 
 base_copied=0
@@ -119,8 +121,10 @@ for template in "${BASE_FILES[@]}"; do
 done
 echo "Copied ${base_copied} of ${#BASE_FILES[@]} base files into ${TARGET_PROJECT_DIR}."
 
-# Core methodology (inherited LEAP R+A+I) lives in templates/; guide .md files stay at root.
+# Core methodology (inherited LEAP R+A+I) lives in templates/; the four non-process guides are
+# canonical in tied/ in the TIED source. Client bootstrap for processes.md is templates/processes.md.
 TEMPLATES_DIR="${SCRIPT_DIR}/templates"
+TIED_SOURCE_DIR="${SCRIPT_DIR}/tied"
 # --- Methodology: index YAMLs into tied/methodology/ (ALWAYS OVERWRITE) ---
 INDEX_YAML_FILES=(
   "requirements.yaml"
@@ -156,7 +160,8 @@ for f in "${INDEX_YAML_FILES[@]}"; do
 done
 echo "Created ${project_created} of ${#INDEX_YAML_FILES[@]} project index file(s) (rest already existed)."
 
-# Guide and other files: copy from root into tied/ when missing (client may customize).
+# Guide .md: copy from TIED source (tied/ for four guides, templates/ for processes.md) into
+# client tied/ when missing (client may customize).
 TEMPLATE_FILES=(
   "requirements.md"
   "architecture-decisions.md"
@@ -166,10 +171,18 @@ TEMPLATE_FILES=(
 )
 guide_copied=0
 for f in "${TEMPLATE_FILES[@]}"; do
-  src="${SCRIPT_DIR}/${f}"
+  if [[ "${f}" == "processes.md" ]]; then
+    src="${TEMPLATES_DIR}/${f}"
+  else
+    src="${TIED_SOURCE_DIR}/${f}"
+  fi
   dest="${TIED_DIR}/${f}"
   if [[ ! -f "${src}" ]]; then
-    echo "Missing template file: ${src}" >&2
+    if [[ "${f}" == "processes.md" ]]; then
+      echo "Missing template file (TIED source templates/processes.md for client bootstrap): ${src}" >&2
+    else
+      echo "Missing template file (canonical in TIED repo tied/): ${src}" >&2
+    fi
     exit 1
   fi
   if [[ ! -f "${dest}" ]]; then
@@ -179,12 +192,13 @@ for f in "${TEMPLATE_FILES[@]}"; do
 done
 echo "Copied ${guide_copied} of ${#TEMPLATE_FILES[@]} guide/template .md files into ${TIED_DIR}."
 
-# Copy methodology docs into tied/docs/ (referenced by AGENTS.md, ai-principles.md, processes.md).
+# Copy methodology docs into client tied/docs/ from canonical TIED source tied/docs/ (referenced by AGENTS.md, processes.md).
 # The agent-req-implementation-checklist.yaml is the trackable checklist; copy to a unique file per request (see its header).
 # CITDP paths in that checklist refer to the client project's tied/citdp/ (client workspace root), not the TIED source repo path.
 mkdir -p "${TIED_DIR}/docs"
 DOCS_TO_COPY=(
   "adding-tied-mcp-and-invoking-passes.md"
+  "ai-principles.md"
   "agent-req-implementation-checklist.md"
   "citdp-policy.md"
   "citdp-record-template.yaml"
@@ -199,6 +213,7 @@ DOCS_TO_COPY=(
   "new-feature-process.md"
   "pseudocode-validation-checklist.yaml"
   "pseudocode-writing-and-validation.md"
+  "req-impl-state-guide-agent-workflow.md"
   "requirement-list-state-guide-agent-workflow.md"
   "tied-first-implementation-procedure.md"
   "tied-yaml-agent-index.md"
@@ -207,43 +222,45 @@ DOCS_TO_COPY=(
 docs_count=0
 docs_total=0
 for f in "${DOCS_TO_COPY[@]}"; do
-  src="${SCRIPT_DIR}/docs/${f}"
+  src="${TIED_SOURCE_DIR}/docs/${f}"
   dest="${TIED_DIR}/docs/${f}"
-  if [[ -f "${src}" ]]; then
-    ((docs_total++)) || true
-    if [[ ! -f "${dest}" ]]; then
-      cp -p "${src}" "${dest}"
-      # docs/*.md uses ../ for repo-root paths; under tied/docs/ those need ../../ .
-      # ../tied/foo -> ../foo (already under tied/). Keep sibling ./ links unchanged.
-      if [[ "${f}" == "tied-yaml-agent-index.md" ]]; then
-        # Regenerate this repo's tied/docs mirror after editing docs/tied-yaml-agent-index.md:
-        #   run the same sed -e chain below on "${SCRIPT_DIR}/docs/tied-yaml-agent-index.md" into "${SCRIPT_DIR}/tied/docs/tied-yaml-agent-index.md"
-        _tied_yaml_idx_tmp="${dest}.tmp.$$"
-        sed \
-          -e 's|](\.\./tied/docs/using-tied-without-mcp\.md)|](./using-tied-without-mcp.md)|g' \
-          -e 's|](\.\./tied/|](../|g' \
-          -e 's|](\.\./\.cursor/|](../../.cursor/|g' \
-          -e 's|](\.\./AGENTS\.md)|](../../AGENTS.md)|g' \
-          -e 's|](\.\./mcp-server/|](../../mcp-server/|g' \
-          -e 's|](\.\./ai-principles\.md)|](../../ai-principles.md)|g' \
-          "${dest}" > "${_tied_yaml_idx_tmp}" && mv "${_tied_yaml_idx_tmp}" "${dest}"
-      fi
-      ((docs_count++)) || true
+  if [[ ! -f "${src}" ]]; then
+    echo "Missing methodology doc (canonical in TIED repo tied/docs/): ${src}" >&2
+    exit 1
+  fi
+  ((docs_total++)) || true
+  if [[ ! -f "${dest}" ]]; then
+    cp -p "${src}" "${dest}"
+    # For client copy: post-process index links for paths that assume repo-root layout.
+    if [[ "${f}" == "tied-yaml-agent-index.md" ]]; then
+      # Regenerate: edit canonical ${SCRIPT_DIR}/tied/docs/tied-yaml-agent-index.md, then re-run this script; sed normalizes for client.
+      _tied_yaml_idx_tmp="${dest}.tmp.$$"
+      sed \
+        -e 's|](\.\./tied/docs/using-tied-without-mcp\.md)|](./using-tied-without-mcp.md)|g' \
+        -e 's|](\.\./tied/|](../|g' \
+        -e 's|](\.\./\.cursor/|](../../.cursor/|g' \
+        -e 's|](\.\./AGENTS\.md)|](../../AGENTS.md)|g' \
+        -e 's|](\.\./mcp-server/|](../../mcp-server/|g' \
+        "${dest}" > "${_tied_yaml_idx_tmp}" && mv "${_tied_yaml_idx_tmp}" "${dest}"
     fi
+    ((docs_count++)) || true
   fi
 done
 if [[ ${docs_total} -gt 0 ]]; then
   echo "Copied ${docs_count} of ${docs_total} methodology doc(s) into ${TIED_DIR}/docs."
 fi
 
-# Copy detail-files schema (YAML detail file structure reference)
-if [[ -f "${SCRIPT_DIR}/detail-files-schema.md" ]]; then
+# Copy detail-files schema (YAML detail file structure reference) from canonical tied/ in TIED source.
+if [[ -f "${TIED_SOURCE_DIR}/detail-files-schema.md" ]]; then
   if [[ ! -f "${TIED_DIR}/detail-files-schema.md" ]]; then
-    cp -p "${SCRIPT_DIR}/detail-files-schema.md" "${TIED_DIR}/detail-files-schema.md"
+    cp -p "${TIED_SOURCE_DIR}/detail-files-schema.md" "${TIED_DIR}/detail-files-schema.md"
     echo "Copied 1 of 1 detail-files-schema.md into ${TIED_DIR}."
   else
     echo "Skipped detail-files-schema.md (0 of 1 already present)."
   fi
+else
+  echo "Missing: ${TIED_SOURCE_DIR}/detail-files-schema.md" >&2
+  exit 1
 fi
 
 # --- Methodology: implementation decision detail files into tied/methodology/ (ALWAYS OVERWRITE) ---

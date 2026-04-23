@@ -22,11 +22,13 @@ Run **`agentstream --help`** for the full option list. Highlights:
 | `-f`, `--first-turn N` | 1-based first turn to run (mid-batch resume). |
 | `-o`, `--select-order` | Feature-spec batch filter: single `N` or inclusive `N-M`. |
 | `-w`, `--workspace` | Workspace root (default: current directory). |
-| `-c`, `--lead-checklist-yaml` | Lead checklist YAML; default resolves to repo `docs/agent-req-implementation-checklist.yaml` when present. |
+| `-c`, `--lead-checklist-yaml` | Lead checklist YAML; default resolves to repo `tied/docs/agent-req-implementation-checklist.yaml` when present. |
 | `--lead-checklist-before-feature` | With both `-b` and `-c`, emit all checklist steps before all feature-spec records (default is feature-spec first). |
 | `--checklist-var KEY=VALUE` | Repeatable (synonym: `--lead-checklist-var`). Substitutes **`{{KEY}}`** in rendered lead checklist text (`goals`, `tasks`, step `title`, flow branch prose, etc.). Split on the **first** `=` so values may contain `=`. Missing keys leave `{{KEY}}` unchanged unless strict mode applies. |
 | `--checklist-var-strict`, `AGENTSTREAM_CHECKLIST_VAR_STRICT=1` | Fail rendering if any `{{NAME}}` remains after substitution (forgotten vars). |
-| `-p` / `--prompt-file` | Repeatable. Each file’s contents are **prepended** (one `agent` argv part per file, in flag order) on **every turn that starts a new Cursor session** (no effective `--resume`), including after a feature-spec record that breaks the chain. Not a separate pipeline turn (turn counts omit prompt-only steps). |
+| (no flag) + optional file | **`--workspace`/`agent-preload-contract.yaml`:** if that file **exists** (e.g. after the lead checklist’s ARCH/IMPL steps create it), the CLI **always** prepends it as the first session preload, **before** any explicit `-p` paths, so a generated contract is not skipped by passing other prompt files. If the file does not exist (early in a TIED run), no default preload is added. |
+| `--skip-workspace-preload`, `AGENTSTREAM_SKIP_WORKSPACE_PRELOAD=1` | Skip prepending the workspace `agent-preload-contract.yaml` even when present (e.g. tests, tooling). |
+| `-p` / `--prompt-file` | Repeatable, **merged after** the workspace `agent-preload-contract.yaml` when that file exists (deduplicated if you pass the same path again). Each file’s contents are **prepended** (one `agent` argv part per file) on **every turn that starts a new Cursor session** (no effective `--resume`), including after a feature-spec record that breaks the chain. Not a separate pipeline turn (turn counts omit prompt-only steps). |
 | `--prompts-file`, `--tdd-yaml`, `-b` / `--feature-spec-batch-yaml` | Repeatable prompt sources (same roles as Ruby runner). |
 | `--preview-feature-spec-batch-yaml PATH` | Print expanded batch records and exit (no agent). |
 | `--verify-session` | Pass-through for agent session verification when supported. |
@@ -75,21 +77,21 @@ Each flag requires a resolved `--lead-checklist-yaml` path. Sub-procedures are n
 
 ### `agentstream_new_session` (optional, per step or sub-procedure)
 
-Checklist items may set **`agentstream_new_session: true`** next to `slug` in the lead checklist YAML. For that turn, the pipeline sets `ChainFromPrevious: false`, so the driver runs **`cursor agent` without `--resume` for that turn** (a new session). Omitted or `false` continues the previous turn’s session (default). Sub-procedures support the same key. **`--session-id` applies only to turn 1** (the first turn after `--first-turn` slicing); mid-pipeline new sessions do not reuse a prior `session_id` for that specific turn. See [docs/agent-req-implementation-checklist.md](../../docs/agent-req-implementation-checklist.md) (“Suggested session handoffs”) for which canonical steps set the flag.
+Checklist items may set **`agentstream_new_session: true`** next to `slug` in the lead checklist YAML. For that turn, the pipeline sets `ChainFromPrevious: false`, so the driver runs **`cursor agent` without `--resume` for that turn** (a new session). Omitted or `false` continues the previous turn’s session (default). Sub-procedures support the same key. **`--session-id` applies only to turn 1** (the first turn after `--first-turn` slicing); mid-pipeline new sessions do not reuse a prior `session_id` for that specific turn. See [tied/docs/agent-req-implementation-checklist.md](../../tied/docs/agent-req-implementation-checklist.md) (“Suggested session handoffs”) for which canonical steps set the flag.
 
 ### Sub-procedures and duplicate turns (`--lead-checklist-skip-sub`)
 
 By default, **after** every main checklist step (through `traceable-commit`), the loader **appends** each entry in `sub_procedures` as its own turn (`sub-yaml-edit-loop`, `sub-pseudocode-validation-pass`, `sub-leap-micro-cycle`, …). Those procedures are **also** meant to run when a parent step says `CALL <slug>` during the main flow—so full checklist runs often get **duplicate** subs at the end.
 
 - Prefer **`--lead-checklist-skip-sub`** when you want **one turn per main step only** and rely on `CALL` semantics inside each step for subs.
-- If subs are included, agents should treat trailing sub turns as **no-op** unless new TIED/YAML work is pending (see `docs/agent-req-implementation-checklist.yaml` description / `traceable-commit` tasks).
+- If subs are included, agents should treat trailing sub turns as **no-op** unless new TIED/YAML work is pending (see `tied/docs/agent-req-implementation-checklist.yaml` description / `traceable-commit` tasks).
 
 ## Lead checklist placeholders (`{{KEY}}`)
 
 Static checklist YAML can include tokens such as `{{REQ_TOKEN}}` or `{{CHANGE_TITLE}}`. Pass values at invocation time:
 
 ```bash
-agentstream -d -w /path/to/repo -c docs/agent-req-implementation-checklist.yaml \
+agentstream -d -w /path/to/repo -c tied/docs/agent-req-implementation-checklist.yaml \
   --checklist-var REQ_TOKEN=REQ-HELLO_SCRIPT \
   --checklist-var CHANGE_TITLE='Hello World script' \
   --checklist-var-strict
