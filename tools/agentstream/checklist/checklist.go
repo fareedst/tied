@@ -38,16 +38,16 @@ type yamlDoc struct {
 }
 
 type yamlStep struct {
-	Slug                    string                 `yaml:"slug"`
-	Title                   string                 `yaml:"title"`
-	Goals                   string                 `yaml:"goals"`
-	Preconditions           []string               `yaml:"preconditions"`
-	Tasks                   []string               `yaml:"tasks"`
-	Outcomes                string                 `yaml:"outcomes"`
-	References              []interface{}          `yaml:"references"`
-	Flow                    map[string]interface{} `yaml:"flow"`
-	Tracking                map[string]interface{} `yaml:"tracking"`
-	AgentstreamNewSession   bool                   `yaml:"agentstream_new_session"`
+	Slug                  string                 `yaml:"slug"`
+	Title                 string                 `yaml:"title"`
+	Goals                 string                 `yaml:"goals"`
+	Preconditions         []string               `yaml:"preconditions"`
+	Tasks                 []string               `yaml:"tasks"`
+	Outcomes              string                 `yaml:"outcomes"`
+	References            []interface{}          `yaml:"references"`
+	Flow                  map[string]interface{} `yaml:"flow"`
+	Tracking              map[string]interface{} `yaml:"tracking"`
+	AgentstreamNewSession bool                   `yaml:"agentstream_new_session"`
 }
 
 type yamlSub struct {
@@ -63,9 +63,9 @@ type yamlSub struct {
 }
 
 type renderedMessage struct {
-	text                string
-	stub                string
-	chainFromPrevious   bool
+	text              string
+	stub              string
+	chainFromPrevious bool
 }
 
 // LoadTurns returns main steps then optional sub_procedures as Turns.

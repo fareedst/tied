@@ -831,3 +831,122 @@ IMPL-GOAGENT-EXECUTOR:
       date: 2026-03-27T00:00:00.000Z
       validator: AI Agent
       result: pass
+IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT:
+  name: Non-compact HTML after pipeline; single formatter seam
+  status: Active
+  cross_references:
+    - ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT
+    - REQ-GOAGENT-NON-COMPACT-HTML-FORMAT
+  rationale:
+    why: REQ/ARCH require one explicit, testable transform surface and no split-brain HTML across checklist and tddloop
+    problems_solved:
+      - Missing IMPL and essence_pseudocode from flag steps
+      - Ad-hoc duplicate HTML in multiple loaders
+    benefits:
+      - Single call site in main after ApplyPromptFilePreload
+      - Unit-testable FORMAT_NON_COMPACT_HTML in isolation
+  implementation_approach:
+    summary: Add Config flag; package under tools/agentstream (exact path in unit-test-green) implementing APPLY_TO_TURNS and formatters; wire in cmd/agentstream after ApplyPromptFilePreload. Tests in *_test.go reference REQ/IMPL tokens.
+    details:
+      - If scope later excludes feature-spec or verify, LEAP to narrow INTEGRATE_WITH_MAIN without changing FORMAT_NON_COMPACT_HTML
+      - 'end-to-end-ui Phase H: no E2E-only UI for this IMPL; s11_phase_h e2e_only false; see detail file (REQ-MODULE_VALIDATION) [PROC-AGENT_REQ_CHECKLIST]'
+  code_locations:
+    files:
+      - path: tools/agentstream/cmd/agentstream/main.go
+        description: 'Integration: applyPostPreloadNonCompactHTML after ApplyPromptFilePreload (IMPL-GOAGENT-CLI-CMD + IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT composition)'
+      - path: tools/agentstream/cmd/agentstream/compose_noncompact.go
+        description: MAP_CONFIG_TO_HTMLFORMAT_OPTIONS + call IntegrateWithMain; CLI via config.Config; IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT
+      - path: tools/agentstream/config/config.go
+        description: NonCompactHTML, NonCompactHTMLStableIndent; --non-compact-html / --non-compact-html-indent (ARCH-GOAGENT-CLI / REQ-GOAGENT-CLI-CONFIG)
+      - path: tools/agentstream/htmlformat/htmlformat.go
+        description: APPLY_TO_TURNS, FormatNonCompactHTML, addNonCompactLineBreaks, applyStableIndentLines, IntegrateWithMain (htmlformat; REQ/ARCH/IMPL IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT)
+    functions: []
+  testability: unit
+  traceability:
+    architecture:
+      - ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT
+    requirements:
+      - REQ-GOAGENT-NON-COMPACT-HTML-FORMAT
+    tests:
+      - tools/agentstream/htmlformat/htmlformat_test.go
+      - tools/agentstream/cmd/agentstream/compose_noncompact_test.go
+    code_annotations:
+      - IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT
+  related_decisions:
+    depends_on:
+      - IMPL-GOAGENT-CLI-CMD
+      - IMPL-GOAGENT-PIPELINE
+    supersedes: []
+    see_also:
+      - IMPL-GOAGENT-CHECKLIST
+      - IMPL-GOAGENT-TDDLOOP
+      - IMPL-GOAGENT-FEATURESPEC
+    composed_with:
+      - IMPL-GOAGENT-CLI-CMD
+  metadata:
+    created:
+      date: "2026-04-24T00:00:00.000Z"
+      author: AI Agent
+    last_updated:
+      date: "2026-04-24T00:00:00.000Z"
+      author: AI Agent
+      reason: 'end-to-end-ui Phase H: essence E2E boundary; s11 in detail; composition-integration unchanged'
+    last_validated:
+      date: "2026-04-24T00:00:00.000Z"
+      validator: AI Agent
+      result: pending
+  essence_pseudocode: |
+    # [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT]
+    # Summary: When enabled, a single post-pipeline, post-ApplyPromptFilePreload pass reformats each string in Turn.Parts to non-compact UTF-8 HTML; ordering and ChainFromPrevious bits unchanged. Default: disabled.
+
+    # [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT] — CONTRACT: INPUT, OUTPUT, DATA, CONTROL
+    # INPUT: turns ([]Turn from IMPL-GOAGENT-PIPELINE.Build, after ReadPromptFilePreload/ApplyPromptFilePreload in IMPL-GOAGENT-CLI-CMD); options { enabled: bool, stable_indent: int } from resolved Config; body fragments may be markdown or plain from prior checklist/tdd/feature text render.
+    # OUTPUT: same []Turn length, order, and field shapes; only string elements in Parts are replaced when enabled.
+    # DATA: []Turn, UTF-8 strings, determinism: identical logical input + same options => identical output string per part.
+    # CONTROL: enabled is false on zero-args default; when false, this IMPL is a no-op. Does not re-parse YAML, change step ids, or call executor.
+
+    # How: All REQ/ARCH behavior for the named transform lives here; other IMPLs do not embed HTML rules—only this procedure.
+
+    procedure APPLY_TO_TURNS(turns, options):
+      # [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT]
+      # How: No-op if options.enabled is false; else in-place FORMAT; propagate any FORMAT err
+      if not options.enabled:
+        return turns, nil
+      for each turn in turns:
+        for i, part in enumerate(turn.Parts):
+          s, err := FORMAT_NON_COMPACT_HTML(part, options)
+          if err != nil:
+            return nil, err
+          turn.Parts[i] = s
+      return turns, nil
+
+    procedure FORMAT_NON_COMPACT_HTML(part, options):
+      # [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT]
+      # How: map one part to stable line-broken form; pass-through when not options.enabled; empty part returns empty
+      if part == "":
+        return "", nil
+      if not options.enabled:
+        return part, nil
+      out := DETERMINISTIC_NON_COMPACT_HTML_FOR_PART(part, options)
+      return out, nil
+
+    procedure DETERMINISTIC_NON_COMPACT_HTML_FOR_PART(text, options):
+      # [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT]
+      # How: UTF-8: break at adjacent tags; else newline after first ">"; else append newline; if stable_indent>0 prefix continuation lines. (Go: htmlformat package.)
+
+    # [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT] and caller [IMPL-GOAGENT-CLI-CMD] [ARCH-GOAGENT-CLI] [REQ-GOAGENT-CLI-CONFIG] — INTEGRATE edge only.
+    procedure INTEGRATE_WITH_MAIN(cfg, turns, options):
+      if cfg is nil or turns is nil: return
+      if not (cfg has non-compact-HTML true): return
+      t2, err := APPLY_TO_TURNS(turns, options)
+      on err != nil: return error to main
+
+    # [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-CLI] [REQ-GOAGENT-CLI-CONFIG] — How: map ParseAndResolve `config` to CfgForIntegrate + options; no I/O. Go: applyPostPreloadNonCompactHTML (cmd); composition-tested; then INTEGRATE_WITH_MAIN.
+    procedure MAP_CONFIG_TO_HTMLFORMAT_OPTIONS(resolved_config, turns):
+      # How: build ic and o; delegate to INTEGRATE_WITH_MAIN (in-place `turns`)
+      ic = { non_compact: resolved_config.NonCompactHTML }
+      o = { enabled: resolved_config.NonCompactHTML, stable_indent: resolved_config.NonCompactHTMLStableIndent }
+      return INTEGRATE_WITH_MAIN(ic, turns, o)
+
+    # [PROC-IMPL_CODE_TEST_SYNC] Phase H — E2E e2e_only boundary: [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-MODULE_VALIDATION] [PROC-TEST_STRATEGY] [PROC-AGENT_REQ_CHECKLIST] — no e2e_only blocks; string transform and CLI are unit + composition; phase_h_tests []; named platform UI constraint n/a. IMPL-ATDD-E2E-AGENT_STREAM is a separate ATDD subprocess scope.
+  detail_file: implementation-decisions/IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT.yaml

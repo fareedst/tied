@@ -123,8 +123,8 @@ steps:
 		t.Fatal(err)
 	}
 	_, err := MessagesFromYAML(p, Options{
-		Vars:                 map[string]string{"K": "v"},
-		ChecklistVarStrict:   true,
+		Vars:               map[string]string{"K": "v"},
+		ChecklistVarStrict: true,
 	})
 	if err != nil {
 		t.Fatal(err)

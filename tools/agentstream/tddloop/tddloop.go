@@ -15,10 +15,10 @@ import (
 )
 
 type yamlDoc struct {
-	Steps         []yamlStep `yaml:"steps"`
-	ProcessToken  string     `yaml:"process_token"`
-	Name          string     `yaml:"name"`
-	Version       string     `yaml:"version"`
+	Steps        []yamlStep `yaml:"steps"`
+	ProcessToken string     `yaml:"process_token"`
+	Name         string     `yaml:"name"`
+	Version      string     `yaml:"version"`
 }
 
 type yamlStep struct {

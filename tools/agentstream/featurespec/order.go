@@ -14,9 +14,9 @@ import (
 
 // OrderFilter matches record order values (single value or inclusive range).
 type OrderFilter struct {
-	single *float64
-	low    float64
-	high   float64
+	single  *float64
+	low     float64
+	high    float64
 	isRange bool
 }
 

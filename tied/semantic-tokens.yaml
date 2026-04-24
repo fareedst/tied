@@ -219,6 +219,46 @@ PROC-RELEASE:
   metadata:
     registered: 2026-03-03T00:00:00.000Z
     last_updated: 2026-03-03T00:00:00.000Z
+REQ-FEEDBACK_TO_TIED:
+  type: REQ
+  name: Feedback to TIED (Feature Requests, Bug Reports, Methodology)
+  category: Functional
+  status: Active
+  description: Projects and users can submit feature requests, bug reports, and methodology improvement suggestions; store under TIED tree and export for reporting to TIED project
+  cross_references:
+    - ARCH-FEEDBACK_STORAGE
+    - IMPL-MCP_FEEDBACK_TOOLS
+  source_index: requirements.yaml
+  detail_file: requirements/REQ-FEEDBACK_TO_TIED.yaml
+  metadata:
+    registered: 2026-03-03T00:00:00.000Z
+    last_updated: 2026-03-03T00:00:00.000Z
+ARCH-FEEDBACK_STORAGE:
+  type: ARCH
+  name: Feedback Storage for TIED Reporting
+  status: Active
+  description: Feedback stored in single file tied/feedback.yaml; MCP tools read/write via base path resolution
+  cross_references:
+    - REQ-FEEDBACK_TO_TIED
+    - IMPL-MCP_FEEDBACK_TOOLS
+  source_index: architecture-decisions.yaml
+  detail_file: architecture-decisions/ARCH-FEEDBACK_STORAGE.yaml
+  metadata:
+    registered: 2026-03-03T00:00:00.000Z
+    last_updated: 2026-03-03T00:00:00.000Z
+IMPL-MCP_FEEDBACK_TOOLS:
+  type: IMPL
+  name: MCP Feedback Tools
+  status: Active
+  description: Two MCP tools (tied_feedback_add, tied_feedback_export) and feedback module for load/append/export
+  cross_references:
+    - ARCH-FEEDBACK_STORAGE
+    - REQ-FEEDBACK_TO_TIED
+  source_index: implementation-decisions.yaml
+  detail_file: implementation-decisions/IMPL-MCP_FEEDBACK_TOOLS.yaml
+  metadata:
+    registered: 2026-03-03T00:00:00.000Z
+    last_updated: 2026-03-26T00:00:00.000Z
 PROC-LEAP:
   type: PROC
   name: Logic Elevation And Propagation (LEAP)
@@ -306,20 +346,6 @@ ARCH-CONFIG_DISCOVERY_LAYERING:
   metadata:
     registered: 2026-03-29T00:00:00.000Z
     last_updated: 2026-03-29T00:00:00.000Z
-REQ-FEEDBACK_TO_TIED:
-  type: REQ
-  name: Feedback to TIED (Feature Requests, Bug Reports, Methodology)
-  category: Functional
-  status: Active
-  description: Projects and users can submit feature requests, bug reports, and methodology improvement suggestions; store under TIED tree and export for reporting to TIED project
-  cross_references:
-    - ARCH-FEEDBACK_STORAGE
-    - IMPL-MCP_FEEDBACK_TOOLS
-  source_index: requirements.yaml
-  detail_file: requirements/REQ-FEEDBACK_TO_TIED.yaml
-  metadata:
-    registered: 2026-03-03T00:00:00.000Z
-    last_updated: 2026-03-03T00:00:00.000Z
 REQ-LEAP_PROPOSAL_QUEUE:
   type: REQ
   name: Optional LEAP proposal queue with human review
@@ -347,32 +373,6 @@ ARCH-LEAP_PROPOSAL_QUEUE:
   metadata:
     registered: 2026-03-26T00:00:00.000Z
     last_updated: 2026-03-28T00:00:00.000Z
-ARCH-FEEDBACK_STORAGE:
-  type: ARCH
-  name: Feedback Storage for TIED Reporting
-  status: Active
-  description: Feedback stored in single file tied/feedback.yaml; MCP tools read/write via base path resolution
-  cross_references:
-    - REQ-FEEDBACK_TO_TIED
-    - IMPL-MCP_FEEDBACK_TOOLS
-  source_index: architecture-decisions.yaml
-  detail_file: architecture-decisions/ARCH-FEEDBACK_STORAGE.yaml
-  metadata:
-    registered: 2026-03-03T00:00:00.000Z
-    last_updated: 2026-03-03T00:00:00.000Z
-IMPL-MCP_FEEDBACK_TOOLS:
-  type: IMPL
-  name: MCP Feedback Tools
-  status: Active
-  description: Two MCP tools (tied_feedback_add, tied_feedback_export) and feedback module for load/append/export
-  cross_references:
-    - ARCH-FEEDBACK_STORAGE
-    - REQ-FEEDBACK_TO_TIED
-  source_index: implementation-decisions.yaml
-  detail_file: implementation-decisions/IMPL-MCP_FEEDBACK_TOOLS.yaml
-  metadata:
-    registered: 2026-03-03T00:00:00.000Z
-    last_updated: 2026-03-26T00:00:00.000Z
 IMPL-MCP_LEAP_PROPOSAL_QUEUE:
   type: IMPL
   name: MCP LEAP proposal queue tools and module
@@ -832,3 +832,51 @@ IMPL-GOAGENT-EXECUTOR:
   metadata:
     registered: "2026-03-27"
     last_updated: "2026-03-27"
+REQ-GOAGENT-NON-COMPACT-HTML-FORMAT:
+  type: REQ
+  name: Non-compact HTML format for agentstream rendered prompts
+  category: Tooling
+  status: Planned
+  description: Optional non-minified HTML output for in-scope turn bodies; stable contract when selected; defaults unchanged.
+  cross_references:
+    - REQ-TIED_SETUP
+    - REQ-GOAGENT-LIB-MODULE
+    - REQ-GOAGENT-YAML-STEP-RENDER
+    - ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT
+    - IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT
+    - PROC-AGENT_REQ_CHECKLIST
+  source_index: requirements.yaml
+  detail_file: requirements/REQ-GOAGENT-NON-COMPACT-HTML-FORMAT.yaml
+  metadata:
+    registered: "2026-04-24T00:00:00.000Z"
+    last_updated: "2026-04-24T00:00:00.000Z"
+ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT:
+  type: ARCH
+  name: Non-compact HTML output for agentstream rendered bodies
+  status: Active
+  description: Opt-in non-minified HTML seam after YAML step render; explicit CLI/config; default unchanged.
+  cross_references:
+    - REQ-GOAGENT-NON-COMPACT-HTML-FORMAT
+    - ARCH-GOAGENT-YAML-STEPS
+    - ARCH-GOAGENT-CLI
+    - ARCH-GOAGENT-PIPELINE
+  source_index: architecture-decisions.yaml
+  detail_file: architecture-decisions/ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT.yaml
+  metadata:
+    registered: "2026-04-24T00:00:00.000Z"
+    last_updated: "2026-04-24T00:00:00.000Z"
+IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT:
+  type: IMPL
+  name: Non-compact HTML after pipeline; single formatter seam
+  status: Active
+  description: APPLY_TO_TURNS after Build+ApplyPromptFilePreload; FORMAT per IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT (REQ/ARCH bound; paths in code_locations).
+  cross_references:
+    - ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT
+    - REQ-GOAGENT-NON-COMPACT-HTML-FORMAT
+    - IMPL-GOAGENT-CLI-CMD
+    - IMPL-GOAGENT-PIPELINE
+  source_index: implementation-decisions.yaml
+  detail_file: implementation-decisions/IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT.yaml
+  metadata:
+    registered: "2026-04-24T00:00:00.000Z"
+    last_updated: "2026-04-24T00:00:00.000Z"

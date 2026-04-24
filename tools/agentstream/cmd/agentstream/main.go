@@ -70,17 +70,17 @@ func main() {
 	}
 
 	turns, err := pipeline.Build(pipeline.Input{
-		ArgvWords:                 cfg.ArgvWords,
-		PromptsFiles:              cfg.PromptsFiles,
-		TddYAMLPaths:              cfg.TddYAMLs,
-		FeatureSpecBatchYAMLPaths: cfg.FeatureSpecBatchYAMLs,
-		FeatureSpecOpts:           &featurespec.Options{OrderFilter: fo},
-		LeadChecklistYAML:         cfg.LeadChecklistYAML,
-		LeadChecklistSkipSub:      cfg.LeadChecklistSkipSub,
-		LeadChecklistStepFromID:   cfg.LeadChecklistStepFromID,
-		LeadChecklistStepToID:     cfg.LeadChecklistStepToID,
-		ChecklistVars:             cfg.ChecklistVars,
-		ChecklistVarStrict:        cfg.ChecklistVarStrict,
+		ArgvWords:                      cfg.ArgvWords,
+		PromptsFiles:                   cfg.PromptsFiles,
+		TddYAMLPaths:                   cfg.TddYAMLs,
+		FeatureSpecBatchYAMLPaths:      cfg.FeatureSpecBatchYAMLs,
+		FeatureSpecOpts:                &featurespec.Options{OrderFilter: fo},
+		LeadChecklistYAML:              cfg.LeadChecklistYAML,
+		LeadChecklistSkipSub:           cfg.LeadChecklistSkipSub,
+		LeadChecklistStepFromID:        cfg.LeadChecklistStepFromID,
+		LeadChecklistStepToID:          cfg.LeadChecklistStepToID,
+		ChecklistVars:                  cfg.ChecklistVars,
+		ChecklistVarStrict:             cfg.ChecklistVarStrict,
 		VerifySession:                  cfg.VerifySession,
 		LeadChecklistBeforeFeatureSpec: cfg.LeadChecklistBeforeFeatureSpec,
 	})
@@ -106,6 +106,11 @@ func main() {
 		os.Exit(1)
 	}
 	pipeline.ApplyPromptFilePreload(turns, cfg.SessionID, preload)
+	// [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] MAP+INTEGRATE after ApplyPromptFilePreload; before preflight/executor; dry-run and live (same transform).
+	if err := applyPostPreloadNonCompactHTML(cfg, turns); err != nil {
+		fmt.Fprintf(os.Stderr, "agentstream: %v\n", err)
+		os.Exit(1)
+	}
 
 	chain := pipeline.ChainBetween(turns)
 	if code := runTiedPreflight(cfg); code != 0 {

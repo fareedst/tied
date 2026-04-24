@@ -44,6 +44,11 @@ type Config struct {
 	// LeadChecklistBeforeFeatureSpec: when set with both -b and -c, emit checklist turns before feature-spec turns.
 	LeadChecklistBeforeFeatureSpec bool
 
+	// NonCompactHTML: when set, reformat each Turn part to non–single-line UTF-8 HTML after pipeline preload (req IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT).
+	NonCompactHTML bool
+	// NonCompactHTMLStableIndent: continuation lines prefixed with this many spaces when NonCompactHTML is on (0 = no indent).
+	NonCompactHTMLStableIndent int
+
 	// skipWorkspacePreload: when true, do not prepend workspace tied/agent-preload-contract.yaml (for tests/tools).
 	// Also: env AGENTSTREAM_SKIP_WORKSPACE_PRELOAD=1.
 	skipWorkspacePreload bool
@@ -253,6 +258,22 @@ func parseFlags(args []string, c *Config) error {
 				c.tiedMCPPreflightUserSet = true
 			case k == "-y" || k == "--yes":
 				c.AssumeTiedMCPYes = true
+			case k == "--non-compact-html":
+				c.NonCompactHTML = true
+			case k == "--non-compact-html-indent":
+				val, err := needVal(k, v, ok, args, &i)
+				if err != nil {
+					return err
+				}
+				val = strings.TrimSpace(val)
+				if val == "" {
+					return fmt.Errorf("missing value for %s", k)
+				}
+				n, err := strconv.Atoi(val)
+				if err != nil || n < 0 {
+					return fmt.Errorf("%s must be a non-negative integer", k)
+				}
+				c.NonCompactHTMLStableIndent = n
 			case k == "--skip-workspace-preload":
 				c.skipWorkspacePreload = true
 			case k == "--checklist-var" || k == "--lead-checklist-var":
@@ -465,6 +486,8 @@ Options:
       --skip-tied-mcp-preflight
                           skip validation (default; also: AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1)
   -y, --yes              non-interactive: continue after tied-yaml preflight warnings/blocks
+      --non-compact-html     (opt-in) emit non–single-line HTML in turn body strings after load
+      --non-compact-html-indent N   (optional; 0=default) stable spaces for wrapped continuation lines
   -h, --help
 
 Positional:

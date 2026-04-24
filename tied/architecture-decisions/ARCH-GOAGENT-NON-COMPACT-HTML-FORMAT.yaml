@@ -1,0 +1,66 @@
+ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT:
+  name: Non-compact HTML output for agentstream rendered bodies
+  status: Active
+  cross_references:
+    - REQ-GOAGENT-NON-COMPACT-HTML-FORMAT
+  decision: The product SHALL support an opt-in non-compact HTML presentation of in-scope turn bodies (initially checklist- and tddloop-rendered content) as UTF-8 HTML with line breaks and stable indentation, distinct from a single minified line. Format selection SHALL be explicit (CLI flag and/or config field) and SHALL NOT change YAML step parsing or step identity; only the serialized run content passed to the agent (for example the strings assembled into Turn.Parts) changes. A shared formatter or a pipeline hook after step render and before or during Turn assembly is the preferred seam; unselected code paths remain plain/markdown and behavior-compatible with current releases.
+  rationale:
+    why: Review, diff, and log readability require a named, stable output shape; HTML in one line is not operationally reviewable.
+    problems_solved:
+      - No first-class seam between structured step text and a human-friendly HTML shape
+      - Inconsistent or ad-hoc formatting across checklist vs tdd loop without a single policy
+    benefits:
+      - One architectural locus for output-style policy and tests
+      - Clear boundary from YAML_STEPS and PIPELINE decisions
+  alternatives_considered:
+    - name: Require authors to hand-edit HTML in YAML
+      pros:
+        - No new formatter
+      cons:
+        - Error-prone
+        - no non-compact contract in code
+      rejected_reason: REQ demands a testable, programmatic non-compact mode
+    - name: Delegate pretty HTML entirely to a wrapper script outside agentstream
+      pros:
+        - Thin core
+      cons:
+        - No `agentstream` contract or traceability
+      rejected_reason: REQ is in-scope for tools/agentstream
+  implementation_approach:
+    summary: Introduce options or a small package to emit non-compact HTML for eligible renderers; wire selection through ARCH-GOAGENT-CLI and pipeline Input per IMPL. Default path unchanged.
+    details:
+      - Format decisions stay in string transformation or explicit encoding layer; do not conflate with Agent executor protocol
+      - Feature-spec batch markdown may be in or out of scope per IMPL; ARCH allows extension without changing this decision text
+  traceability:
+    requirements:
+      - REQ-GOAGENT-NON-COMPACT-HTML-FORMAT
+    implementation:
+      - IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT
+    tests:
+      - tools/agentstream/htmlformat/htmlformat_test.go
+      - tools/agentstream/cmd/agentstream/compose_noncompact_test.go
+    code_annotations:
+      - ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT
+  related_decisions:
+    depends_on:
+      - ARCH-GOAGENT-YAML-STEPS
+      - ARCH-GOAGENT-CLI
+      - ARCH-GOAGENT-LIB-LAYERING
+    informs:
+      - IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT
+    see_also:
+      - ARCH-GOAGENT-PIPELINE
+      - ARCH-GOAGENT-YAML-FEATURESPEC
+    supersedes: []
+  metadata:
+    created:
+      date: "2026-04-24T00:00:00.000Z"
+      author: AI Agent
+    last_updated:
+      date: "2026-04-24T19:00:00.000Z"
+      author: AI Agent
+      reason: 'sync-tied-stack: ARCH traceability.tests and validation aligned with IMPL/REQ.'
+    last_validated:
+      date: "2026-04-24T19:00:00.000Z"
+      validator: AI Agent
+      result: pass
