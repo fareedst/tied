@@ -7,7 +7,7 @@ import { spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { getBasePath, getRecord, loadIndex, getWritableIndexPath, type IndexName } from "./yaml-loader.js";
-import { getDetailPath } from "./detail-loader.js";
+import { getDetailPath, getImplPseudocodeSidecarPath } from "./detail-loader.js";
 
 const INDEX_FILES: IndexName[] = [
   "semantic-tokens",
@@ -38,13 +38,15 @@ export interface RenameTokenResult {
   ok: boolean;
   files_modified?: string[];
   file_renamed?: string;
+  /** If IMPL detail had a `-pseudocode.md` sidecar, its destination path after rename. */
+  pseudocode_sidecar_renamed?: string;
   errors?: string[];
   dry_run?: boolean;
 }
 
 /**
  * Collect all YAML file paths under base that may contain token references.
- * For PROC tokens, only semantic-tokens.yaml (and optionally processes.md) is relevant.
+ * For PROC tokens, only semantic-tokens.yaml (and optionally docs/processes.md) is relevant.
  */
 function collectYamlPaths(base: string, tokenIndex: IndexName | null): string[] {
   const paths: string[] = [];
@@ -86,7 +88,7 @@ function runYqPrettyPrint(filePath: string): { ok: boolean; error?: string } {
 
 /**
  * Rename a single semantic token across the TIED tree.
- * Replaces exact string old_token with new_token in all YAML (and optionally processes.md).
+ * Replaces exact string old_token with new_token in all YAML (and optionally docs/processes.md).
  * Renames the detail file for REQ/ARCH/IMPL when it exists.
  * Runs yq -i -P on each modified YAML file when yq is available (one path per process; multi-arg yq -i merges documents).
  */
@@ -148,7 +150,7 @@ export function renameSemanticToken(
   }
 
   if (includeMarkdown) {
-    const processesPath = path.join(base, "processes.md");
+    const processesPath = path.join(base, "docs", "processes.md");
     if (fs.existsSync(processesPath)) {
       const content = fs.readFileSync(processesPath, "utf8");
       if (content.includes(oldToken)) {
@@ -169,12 +171,22 @@ export function renameSemanticToken(
   }
 
   let fileRenamed: string | undefined;
+  let sidecarRenamed: string | undefined;
   if (tokenIndex !== null && dryRun) {
     const detailPath = getDetailPath(oldToken);
     if (detailPath && fs.existsSync(detailPath)) {
       const ext = path.extname(detailPath);
       const dir = path.dirname(detailPath);
       fileRenamed = path.join(dir, `${newToken}${ext}`);
+      if (oldToken.startsWith("IMPL-") && ext === ".yaml") {
+        const scOld = getImplPseudocodeSidecarPath(detailPath, oldToken);
+        if (fs.existsSync(scOld)) {
+          sidecarRenamed = getImplPseudocodeSidecarPath(
+            path.join(dir, `${newToken}.yaml`),
+            newToken
+          );
+        }
+      }
     }
   }
 
@@ -192,13 +204,28 @@ export function renameSemanticToken(
       const ext = path.extname(detailPath);
       const dir = path.dirname(detailPath);
       const newDetailPath = path.join(dir, `${newToken}${ext}`);
+      let detailKeyRenameOk = true;
       if (detailPath !== newDetailPath) {
         try {
           fs.renameSync(detailPath, newDetailPath);
           fileRenamed = newDetailPath;
         } catch (e) {
+          detailKeyRenameOk = false;
           const message = e instanceof Error ? e.message : String(e);
           errors.push(`Failed to rename detail file ${detailPath} -> ${newDetailPath}: ${message}`);
+        }
+      }
+      if (oldToken.startsWith("IMPL-") && ext === ".yaml" && detailKeyRenameOk) {
+        const scOld = getImplPseudocodeSidecarPath(detailPath, oldToken);
+        const scNew = getImplPseudocodeSidecarPath(newDetailPath, newToken);
+        if (scOld !== scNew && fs.existsSync(scOld)) {
+          try {
+            fs.renameSync(scOld, scNew);
+            sidecarRenamed = scNew;
+          } catch (e) {
+            const message = e instanceof Error ? e.message : String(e);
+            errors.push(`Failed to rename IMPL pseudo-code file ${scOld} -> ${scNew}: ${message}`);
+          }
         }
       }
     }
@@ -208,6 +235,7 @@ export function renameSemanticToken(
     ok: errors.length === 0,
     files_modified: filesModified.length > 0 ? filesModified : undefined,
     file_renamed: fileRenamed,
+    pseudocode_sidecar_renamed: sidecarRenamed,
     errors: errors.length > 0 ? errors : undefined,
     dry_run: dryRun,
   };

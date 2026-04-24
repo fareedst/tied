@@ -37,7 +37,8 @@
 
 - **Use the TIED MCP server as the primary way to read and write TIED data** for the project.
 - **Avoid direct edits to `tied/**/*.yaml` for writes;** use MCP write tools so the server can emit valid YAML (e.g. values with colons are quoted correctly).
-- **Hard rule (project-owned YAML only)**: Do not use IDE `apply_patch` / `Write` on project index or detail YAML under the TIED base path when a tool in § 2 covers the operation. If MCP errors, follow the failure playbook in [yaml-update-mcp-runbook.md](yaml-update-mcp-runbook.md); do not silently switch to direct file edit.
+- **IMPL pseudo-code sidecar (`tied/implementation-decisions/IMPL-*-pseudocode.md`)** is **plain UTF-8 text** (not YAML). It may be edited **directly** in the editor when that is most efficient, then run **`tied_validate_consistency`**, or updated via **`impl_detail_set_essence_pseudocode`** (inline, **`essence_pseudocode_path`**, or **`tied-cli`** with **`TIED_CLI_IMPL_ESSENCE_FILE`** / stdin). Prefer those over constructing huge JSON-escaped strings when possible ([impl-essence-pseudocode-mcp-workflow.md](impl-essence-pseudocode-mcp-workflow.md)).
+- **Hard rule (project-owned YAML only)**: Do not use IDE `apply_patch` / `Write` on project index or **detail** `*.yaml` under the TIED base path when a tool in § 2 covers the operation. If MCP errors, follow the failure playbook in [yaml-update-mcp-runbook.md](yaml-update-mcp-runbook.md); do not silently switch to direct file edit on those YAML files.
 - Prefer **MCP tools** for:
   - Reading indexes and records: `yaml_index_read`, `yaml_index_list_tokens`, `yaml_index_filter`, `get_decisions_for_requirement`, `get_requirements_for_decision`
   - Reading/writing detail files: `yaml_detail_read`, `yaml_detail_read_many`, `yaml_detail_list`, `yaml_detail_create`, `yaml_detail_update`, `impl_detail_set_essence_pseudocode` (IMPL-only `essence_pseudocode`), `yaml_detail_delete`

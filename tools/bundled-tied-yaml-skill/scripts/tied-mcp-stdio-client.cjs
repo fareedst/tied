@@ -43,7 +43,54 @@ function loadArgumentsObject() {
   }
 }
 
-const argsObj = loadArgumentsObject();
+/**
+ * For impl_detail_set_essence_pseudocode, inject body from a UTF-8 file (TIED_CLI_IMPL_ESSENCE_FILE)
+ * or from stdin (TIED_CLI_IMPL_ESSENCE_STDIN=1) so callers need not build JSON with a huge string.
+ * File/stdin content becomes essence_pseudocode; any essence_pseudocode_path in args is removed.
+ */
+function mergeImplEssencePseudocodeFromEnv(baseArgs) {
+  if (toolName !== "impl_detail_set_essence_pseudocode") {
+    return baseArgs;
+  }
+  const fromFile = process.env.TIED_CLI_IMPL_ESSENCE_FILE;
+  const fromStdin =
+    process.env.TIED_CLI_IMPL_ESSENCE_STDIN === "1" || process.env.TIED_CLI_IMPL_ESSENCE_STDIN === "true";
+  if (fromFile && fromStdin) {
+    console.error("ERROR: Set at most one of TIED_CLI_IMPL_ESSENCE_FILE and TIED_CLI_IMPL_ESSENCE_STDIN=1");
+    process.exit(1);
+  }
+  if (fromFile) {
+    let content;
+    try {
+      content = fs.readFileSync(fromFile, "utf8");
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : String(e);
+      console.error(`ERROR: TIED_CLI_IMPL_ESSENCE_FILE: ${msg}`);
+      process.exit(1);
+    }
+    const next = { ...baseArgs };
+    delete next.essence_pseudocode_path;
+    next.essence_pseudocode = content;
+    return next;
+  }
+  if (fromStdin) {
+    let content;
+    try {
+      content = fs.readFileSync(0, "utf8");
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : String(e);
+      console.error(`ERROR: reading stdin: ${msg}`);
+      process.exit(1);
+    }
+    const next = { ...baseArgs };
+    delete next.essence_pseudocode_path;
+    next.essence_pseudocode = content;
+    return next;
+  }
+  return baseArgs;
+}
+
+const argsObj = mergeImplEssencePseudocodeFromEnv(loadArgumentsObject());
 const argsJsonForNormalize = JSON.stringify(argsObj);
 
 function ensureImplEssencePseudocodeKey(record) {

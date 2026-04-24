@@ -1,12 +1,9 @@
 # Agent preload contract — generic template
 #
-# When the workspace is the TIED source repository (indexes at repo root; methodology guides under tied/),
-# prefer docs/agent-preload-contract-tied-repo.yaml instead of this file.
-#
 # Applicability: A blank or generic copy of this file is not a substitute for a
 # REQ+ARCH-bounded system definition. Prefer not to treat agent_preload as
 # authoritative for stack, paths, or tests until after architecture decisions
-# exist; then update workspace-root agent-preload-contract.yaml after
+# exist; then update tied/agent-preload-contract.yaml after
 # author-architecture (ARCH-locked constants) and again after
 # persist-implementation-records (IMPL-locked code_locations and related fields)
 # per tied/docs/agent-req-implementation-checklist.yaml. sync-tied-stack re-checks
@@ -25,14 +22,14 @@ agent_preload:
   session_bootstrap_docs:
     ai_principles_path: ./tied/docs/ai-principles.md
     semantic_tokens_index: ./tied/semantic-tokens.yaml
-    semantic_tokens_guide: ./tied/semantic-tokens.md
+    semantic_tokens_guide: ./tied/docs/semantic-tokens.md
     architecture_decisions_index: ./tied/architecture-decisions.yaml
     implementation_decisions_index: ./tied/implementation-decisions.yaml
-    implementation_decisions_guide: ./tied/implementation-decisions.md
-    # Client live file; TIED copy_files.sh seeds it from templates/processes.md when missing
-    processes_path: ./tied/processes.md
+    implementation_decisions_guide: ./tied/docs/implementation-decisions.md
+    # Client live file; TIED copy_files.sh copies it from tied/docs/processes.md when missing
+    processes_path: ./tied/docs/processes.md
     agent_req_checklist_path: ./tied/docs/agent-req-implementation-checklist.md
-    detail_files_schema: ./tied/detail-files-schema.md
+    detail_files_schema: ./tied/docs/detail-files-schema.md
     requirements_index: ./tied/requirements.yaml
   methodology_vs_project:
     methodology_readonly: true # tied/methodology/** not edited in client

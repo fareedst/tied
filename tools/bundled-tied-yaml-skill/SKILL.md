@@ -9,7 +9,9 @@ description: >-
 ---
 # TIED YAML Skill
 
-All reads and writes to REQ, ARCH, and IMPL YAML records **must** go through the `tied-yaml` tooling. Direct file edits (`Write`, `StrReplace`, `sed`, etc.) on TIED YAML produce invalid output (unquoted colons, broken indentation, duplicate keys). The tied-yaml server emits safe, schema-conformant YAML every time.
+In TIED-**client** checkouts, this skill is installed to **`.cursor/skills/tied-yaml/`** (via `copy_files.sh`). The path **`tools/bundled-tied-yaml-skill/`** exists only in the TIED **source** tree; do not look for it at the project root in client projects. **AGENTS.md** §1 describes the same `tied-cli` / `TIED_MCP_BIN` discovery path.
+
+All reads and writes to REQ, ARCH, and IMPL **YAML** records (indexes, `IMPL-*.yaml` detail files, and other structured TIED YAML) **must** go through the `tied-yaml` tooling. Direct file edits (`Write`, `StrReplace`, `sed`, etc.) on those paths produce invalid output (unquoted colons, broken indentation, duplicate keys). The tied-yaml server emits safe, schema-conformant YAML every time. **Exception:** the plain-text **pseudo-code sidecar** `tied/implementation-decisions/IMPL-*-pseudocode.md` may be edited **directly** in the editor when that is most efficient, then run **`tied_validate_consistency`**; or use **`impl_detail_set_essence_pseudocode`** with an inline string, `essence_pseudocode_path`, or **`tied-cli.sh`** with `TIED_CLI_IMPL_ESSENCE_FILE` / `TIED_CLI_IMPL_ESSENCE_STDIN` (see the `tied-cli.sh` header). Do not re-encode the sidecar as JSON when a direct edit or file path is simpler.
 
 ## Prerequisites
 
@@ -54,8 +56,9 @@ All operations use the wrapper script at `.cursor/skills/tied-yaml/scripts/tied-
 
 | Rule | Action |
 |------|--------|
-| **DO** | Use `tied-cli.sh` for every read and write of TIED YAML. |
-| **DO NOT** | Use `Write`, `StrReplace`, `apply_patch`, or shell `sed`/`awk` on any file under `tied/` (see **CITDP exception** below). |
+| **DO** | Use `tied-cli.sh` for every read and write of TIED **YAML** and structured TIED data (the paths the MCP server manages). |
+| **DO** | For IMPL pseudo-code **body** only, you may edit `tied/implementation-decisions/IMPL-*-pseudocode.md` directly, or set it via `impl_detail_set_essence_pseudocode` / `tied-cli` file or stdin; then `tied_validate_consistency`. |
+| **DO NOT** | Use `Write`, `StrReplace`, `apply_patch`, or shell `sed`/`awk` on TIED **YAML** or index files under `tied/` (see **CITDP** and **exception** below). The pseudo-code sidecar `.md` is plain UTF-8, not YAML—MCP/CLI is still available but not mandatory for the body. |
 | **DO NOT** | Use ad-hoc Python YAML parsing instead of **`tied-cli.sh`** / **`tied_validate_consistency`** for TIED consistency checks. |
 | **NEVER** | Edit files under `tied/methodology/` -- that tree is read-only. |
 | **Exception** | If no tool supports the operation, document the gap (one line), direct-edit the minimal file, then validate. |
@@ -106,7 +109,7 @@ All operations use the wrapper script at `.cursor/skills/tied-yaml/scripts/tied-
 | Read entire index or one record | `yaml_index_read` | `index` (required), `token` (optional). **Index rows do not include `essence_pseudocode`;** use `yaml_detail_read` / `yaml_detail_read_many` for IMPL bodies and pseudo-code. |
 | List all tokens | `yaml_index_list_tokens` | `index`; optional `type` for semantic-tokens |
 | Filter by field value | `yaml_index_filter` | `index`, `field`, `value` |
-| Read one detail file | `yaml_detail_read` | `token` |
+| Read one detail file | `yaml_detail_read` | `token`. For IMPL, `essence_pseudocode` is merged from `tied/implementation-decisions/IMPL-*-pseudocode.md` when that file exists. |
 | Read many details at once | `yaml_detail_read_many` | `tokens` array or `type` (`requirement`, `architecture`, `implementation`) |
 | List tokens that have detail files | `yaml_detail_list` | `type` |
 
@@ -131,7 +134,7 @@ The `record`, `updates`, `index_record`, and `detail_record` parameters accept a
 
 **`implementation_approach.details`:** Under `yaml_detail_update` / `yaml_index_update`, `implementation_approach` is merged one level, so the **`details` array is replaced in full** whenever your `updates` include `implementation_approach.details`. To add lines without re-sending the whole list, use **`yaml_detail_append_implementation_approach_details`**. If you use `yaml_detail_update`, send the **complete** `details` list (same rule as `cross_references`). Keep **index** and **detail** `implementation_approach` in sync when your project duplicates that block on both.
 
-Re-read after critical writes; on older server builds, merge client-side per `docs/yaml-update-mcp-runbook.md` §2.1. For IMPL-only pseudo-code edits, prefer **`impl_detail_set_essence_pseudocode`**. For several writes in one process, use **`yaml_updates_apply`** (`dry_run: true` first to preview). **`yaml_detail_read`** for IMPL-* may show `essence_pseudocode: null` only when the field is absent; use detail reads, not index reads, for pseudo-code text.
+Re-read after critical writes; on older server builds, merge client-side per `docs/yaml-update-mcp-runbook.md` §2.1. For IMPL-only pseudo-code edits, prefer **`impl_detail_set_essence_pseudocode`** (writes the **`IMPL-*-pseudocode.md` sidecar**, not inline YAML) or open-edit that `.md` and validate. For several writes in one process, use **`yaml_updates_apply`** (`dry_run: true` first to preview). **`yaml_detail_read`** for IMPL-* may show `essence_pseudocode: null` only when the field is absent; use detail reads, not index reads, for pseudo-code text.
 
 ### Traceability
 
@@ -219,12 +222,12 @@ tied/
   architecture-decisions/ARCH-*.yaml # ARCH detail files
   implementation-decisions/IMPL-*.yaml # IMPL detail files
   methodology/                      # READ-ONLY (inherited from TIED)
-  detail-files-schema.md            # schema for detail YAML files
+  docs/detail-files-schema.md       # schema for detail YAML files
 ```
 
 ## Additional resources
 
-- **Central index (easiest YAML update paths):** in this repository, [docs/tied-yaml-agent-index.md](../../../docs/tied-yaml-agent-index.md) links the skill, MCP runbook, checklist, schema, and payload guidance in one place.
+- **Central index (easiest YAML update paths):** in this repository, [tied/docs/tied-yaml-agent-index.md](../../tied/docs/tied-yaml-agent-index.md) links the skill, MCP runbook, checklist, schema, and payload guidance in one place.
 - For the complete catalog of tools with full parameter schemas, see [reference.md](reference.md).
-- For detail file field schemas, read `tied/detail-files-schema.md`.
+- For detail file field schemas, read `tied/docs/detail-files-schema.md`.
 - For the TIED methodology and agent obligations, read `AGENTS.md` at the repo root.

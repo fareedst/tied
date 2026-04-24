@@ -1,18 +1,36 @@
 # Application Pseudo-Code Validation Checklist
-# Canonical checklist for validating IMPL essence_pseudocode in TIED projects.
-# Reference: ./tied/docs/pseudocode-writing-and-validation.md
+# Layer A (TIED) before Layer B (this checklist): run tied_validate_consistency (include_pseudocode) for IMPL
+# before or alongside application categories. See ./tied/docs/pseudocode-writing-and-validation.md (Validation layers).
+# For IMPL, primary text to validate is the UTF-8 file tied/implementation-decisions/IMPL-{TOKEN}-pseudocode.md
+# (merged as essence_pseudocode by TIED; equivalent to yaml_detail_read for the body).
 # Process token: [PROC-PSEUDOCODE_VALIDATION]
 name: application_pseudocode_validation_checklist
 description: |
-  Reusable checklist for projects whose pseudo-code blocks describe the full application, including implementation intent, unit tests, integration points, requirement traceability, and generation-readiness.
+  Reusable checklist for projects whose pseudo-code blocks describe the full application, including implementation
+  intent, unit tests, integration points, requirement traceability, and generation-readiness.
+
+  In TIED IMPL layout, the canonical on-disk source for the pseudo-code body is
+  tied/implementation-decisions/IMPL-{TOKEN}-pseudocode.md (UTF-8). TIED merges that file into the logical
+  essence_pseudocode field for yaml_detail_read and for tied_validate_consistency (include_pseudocode: true
+  by default). Run that TIED gate to qualify the external file against index and token-reference rules before
+  or alongside the PARSE/SHAPE/... categories in this file.
+
+  The sidecar is Markdown. Layer A (tied_validate_consistency) still inspects the merged string; bracket
+  [REQ-*/ARCH-*/IMPL-*] tags may appear on any line, not a fixed comment prefix. When a project (e.g. Comrak)
+  has no custom pseudo-code grammar parser, treat each section between ## headings in IMPL-*-pseudocode.md as
+  one logical "block" for manual Layer B review. Optional items LINT-MD-001 and LINT-MD-002 below help reviewers
+  align with the extract-generated sidecar pattern where that script is used.
 usage:
   intended_for:
     - projects with pseudo-code as the primary application specification
     - projects where pseudo-code drives unit-test and integration-test definitions
     - projects that require requirement, architecture, and implementation traceability
   how_to_apply:
+    - for IMPL, ingest the same text TIED uses—read IMPL-TOKEN-pseudocode.md, or the merged essence_pseudocode from yaml_detail_read; they are equivalent when the sidecar is present
+    - for Comrak extract-generated IMPL-*-pseudocode.md, use script/extract_test_pseudocode_to_impl_sidecars.py as the source of truth for what a “block” is (H1 file intro, H2 per test, Source line, then list/blockquote body); do not re-invent a different block boundary without a project reason
+    - run tied_validate_consistency (Layer A) so the external or merged pseudo-code is qualified for repository traceability rules; Layer A and this checklist (Layer B) are complementary—traceability vs. contracts/structure
     - parse each pseudo-code block into a normalized internal representation
-    - run each validation pass in order
+    - run each validation pass in the recommended order (tied_data first, then application categories below)
     - record findings with severity and source location
     - treat required checks as gating unless explicitly waived
   result_severities:
@@ -20,6 +38,17 @@ usage:
     - warning
     - info
 checklist:
+  - id: TIED-POE-001
+    category: tied_data
+    required: true
+    title: TIED data validation passes for changed IMPL essence (merged pseudo-code)
+    verify:
+      - for the affected IMPL, tied_validate_consistency returns ok with include_pseudocode (default) so merged essence from IMPL-TOKEN-pseudocode.md meets TIED token comment and token-ref rules
+      - do not use this checklist in isolation when TIED is available; qualify sidecar or merged text with TIED first
+    evidence:
+      - tied_validate_consistency report with pseudocode section for the token
+      - or equivalent documented manual review only when MCP is unavailable and project policy allows
+    severity_on_failure: error
   - id: PARSE-001
     category: parsing
     required: true
@@ -266,6 +295,25 @@ checklist:
     evidence:
       - fixture and mock declaration audit
     severity_on_failure: warning
+  - id: LINT-MD-001
+    category: linting
+    required: false
+    title: IMPL Markdown sidecar matches agreed heading structure when extract-generated
+    verify:
+      - a single H1 for the file intro with REQ/ARCH/IMPL bracket tokens; per coverage section H2 with a Source line when using the Comrak extract path
+    evidence:
+      - read IMPL-TOKEN-pseudocode.md; compare to script/extract_test_pseudocode_to_impl_sidecars.py output
+    severity_on_failure: info
+  - id: LINT-MD-002
+    category: linting
+    required: false
+    title: Rust NORM line comments keep structured NORM; optional /* */ is narrative
+    verify:
+      - // lines carry FILE/TEST/contract and bracket tokens as required by the project
+      - optional /* */ preface in the pre-test span is narrative; not a substitute for // tokens unless policy and extract tooling allow
+    evidence:
+      - NORM in src/tests vs impl sidecar; tied/docs/pseudocode-writing-and-validation.md
+    severity_on_failure: info
   - id: SIM-001
     category: semantic_simulation
     required: false
@@ -301,6 +349,7 @@ checklist:
       - diagnostic output sample
     severity_on_failure: error
 recommended_validation_order:
+  - tied_data
   - parsing
   - schema
   - symbol_resolution
@@ -333,8 +382,10 @@ tailoring:
         - every declared failure mode has coverage when failure is possible
       deferred_until: After executable tests exist—verification-gate MUST invoke sub-pseudocode-validation-pass with agent_req_checklist_post_test (see lead checklist verification-gate).
       still_required:
+        - TIED-POE-001 (tied_data) — tied_validate_consistency with include_pseudocode for changed IMPL; sidecar must pass repository traceability rules
         - structural and contract validation applicable to IMPL-only pseudo-code (parsing/schema/symbol resolution as feasible, contract_validation, dependency_graph, reporting)
       notes:
+        - TIED data validation is not deferred with behavioral coverage; run Layer A whenever essence changes.
         - Behavioral coverage and traceability checklist categories that require a test artifact should be marked N/A or deferred with reference to this profile—not ad-hoc waiver IDs.
     agent_req_checklist_post_test:
       summary: Post-test gate for [PROC-AGENT_REQ_CHECKLIST] verification-gate after unit and composition tests exist—closes deferrals from agent_req_checklist_pre_red.
@@ -353,3 +404,4 @@ tailoring:
     - add project architecture constraints under dependency_graph
     - add custom coverage thresholds per block kind if needed
     - add generation backend constraints if pseudo-code drives test generation directly
+    - for Comrak-style Markdown sidecars, optional LINT-MD-001 and LINT-MD-002 align manual Layer B with extract_test_pseudocode_to_impl_sidecars.py; mark N/A when the IMPL is purely procedural and not test-catalog-driven

@@ -26,7 +26,7 @@
 #   workspace:              $HOME/Documents/dev/swift/CursorHookViewer
 #   runner:                 <repo>/tools/agent-stream/run_agent_stream.rb (resolved from this script)
 #   lead checklist yaml:    $HOME/Documents/dev/chatgpt/stdd/tied/docs/agent-req-implementation-checklist.yaml
-#   prompt file:            <workspace>/agent-preload-contract.yaml (when present) first, then any -p paths (deduplicated)
+#   prompt file:            <workspace>/tied/agent-preload-contract.yaml (when present) first, then any -p paths (deduplicated)
 #   feature spec batch:     $workspace/prompts/all.yaml
 #
 
@@ -60,7 +60,7 @@ Options:
       Path to agent-req-implementation-checklist.yaml.
 
   -p, --prompt-file PATH
-      Session preload (repeatable). If <workspace>/agent-preload-contract.yaml exists, it is passed first, then these paths
+      Session preload (repeatable). If <workspace>/tied/agent-preload-contract.yaml exists, it is passed first, then these paths
       (same file is not added twice). With no -p, only the workspace contract is used when present.
 
   -b, --feature-spec-batch-yaml PATH
@@ -285,7 +285,11 @@ main() {
     feature_spec_batch_yaml_explicit=1
   fi
 
-  local contract_path="${workspace}/agent-preload-contract.yaml"
+  local contract_path="${workspace}/tied/agent-preload-contract.yaml"
+  local legacy_contract_path="${workspace}/agent-preload-contract.yaml"
+  if [[ ! -f "$contract_path" && -f "$legacy_contract_path" ]]; then
+    contract_path="$legacy_contract_path"
+  fi
   local -a prompt_args=()
   if [[ -f "$contract_path" && -r "$contract_path" ]]; then
     local c_in

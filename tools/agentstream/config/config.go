@@ -14,13 +14,13 @@ import (
 
 // Config is the fully resolved runtime configuration. REQ-GOAGENT-CLI-CONFIG.
 type Config struct {
-	DryRun                      bool
-	SessionID                   string
-	Workspace                   string
-	Model                       string
-	OrderFilterRaw              string
-	LeadChecklistYAML           string
-	LeadChecklistSkipSub        bool
+	DryRun               bool
+	SessionID            string
+	Workspace            string
+	Model                string
+	OrderFilterRaw       string
+	LeadChecklistYAML    string
+	LeadChecklistSkipSub bool
 	// LeadChecklistStepFromID / LeadChecklistStepToID: inclusive main-step bounds by YAML step slug (--lead-checklist-*-step).
 	LeadChecklistStepFromID     string
 	LeadChecklistStepToID       string
@@ -44,13 +44,13 @@ type Config struct {
 	// LeadChecklistBeforeFeatureSpec: when set with both -b and -c, emit checklist turns before feature-spec turns.
 	LeadChecklistBeforeFeatureSpec bool
 
-	// skipWorkspacePreload: when true, do not prepend workspace agent-preload-contract.yaml (for tests/tools).
+	// skipWorkspacePreload: when true, do not prepend workspace tied/agent-preload-contract.yaml (for tests/tools).
 	// Also: env AGENTSTREAM_SKIP_WORKSPACE_PRELOAD=1.
 	skipWorkspacePreload bool
 
 	featureSpecBatchExplicit  bool
-	positionalFeatureSpecYAML   string
-	tiedMCPPreflightUserSet     bool
+	positionalFeatureSpecYAML string
+	tiedMCPPreflightUserSet   bool
 }
 
 // FindRepoRoot walks parents from start looking for tied/docs/agent-req-implementation-checklist.yaml. REQ-GOAGENT-CLI-CONFIG.
@@ -352,17 +352,23 @@ func resolveDefaults(cwd string, c *Config) error {
 	return nil
 }
 
-// applyWorkspacePreloadDefault prepends <workspace>/agent-preload-contract.yaml when it exists
+// applyWorkspacePreloadDefault prepends <workspace>/tied/agent-preload-contract.yaml when it exists
 // and skip is not set, merging with explicit --prompt-file paths and deduplicating by cleaned path
-// (workspace file always first). REQ-GOAGENT-CLI-CONFIG.
+// (workspace file always first). It falls back to the former workspace-root path for old checkouts. REQ-GOAGENT-CLI-CONFIG.
 func applyWorkspacePreloadDefault(c *Config) {
 	skip := c.skipWorkspacePreload || os.Getenv("AGENTSTREAM_SKIP_WORKSPACE_PRELOAD") == "1"
-	def := filepath.Clean(filepath.Join(c.Workspace, "agent-preload-contract.yaml"))
+	def := filepath.Clean(filepath.Join(c.Workspace, "tied", "agent-preload-contract.yaml"))
+	legacyDef := filepath.Clean(filepath.Join(c.Workspace, "agent-preload-contract.yaml"))
 	seen := make(map[string]struct{})
 	var out []string
-	if !skip && fileReadable(def) {
-		seen[def] = struct{}{}
-		out = append(out, def)
+	if !skip {
+		if fileReadable(def) {
+			seen[def] = struct{}{}
+			out = append(out, def)
+		} else if fileReadable(legacyDef) {
+			seen[legacyDef] = struct{}{}
+			out = append(out, legacyDef)
+		}
 	}
 	for _, p := range c.PromptFiles {
 		cp := filepath.Clean(p)
@@ -446,7 +452,7 @@ Options:
       --checklist-var-strict      (error if any {{NAME}} remains after expansion; env: AGENTSTREAM_CHECKLIST_VAR_STRICT=1)
   -p, --prompt-file PATH   (repeatable; prepended on each new session, not a separate turn; merged with workspace preload)
       --skip-workspace-preload
-                    skip prepending <workspace>/agent-preload-contract.yaml (env: AGENTSTREAM_SKIP_WORKSPACE_PRELOAD=1)
+                    skip prepending <workspace>/tied/agent-preload-contract.yaml (env: AGENTSTREAM_SKIP_WORKSPACE_PRELOAD=1)
       --prompts-file PATH  (repeatable)
       --tdd-yaml PATH      (repeatable)
   -b, --feature-spec-batch-yaml PATH (repeatable)
@@ -466,7 +472,7 @@ Positional:
 
 Defaults when files exist:
   lead checklist: <repo>/tied/docs/agent-req-implementation-checklist.yaml
-  prompt file:    <workspace>/agent-preload-contract.yaml first, then any --prompt-file (prepended on new sessions; omit with --skip-workspace-preload)
+  prompt file:    <workspace>/tied/agent-preload-contract.yaml first, then any --prompt-file (prepended on new sessions; omit with --skip-workspace-preload)
   feature batch:  <workspace>/prompts/all.yaml
 `, program)
 }

@@ -15,16 +15,21 @@
 #
 # Creates:
 #   - Base files (.cursorrules, AGENTS.md) in project root
+#     (created only if missing; never overwritten. To pick up a newer TIED `AGENTS.md`, delete
+#     or replace it, then re-run, or copy from the TIED source by hand)
 #   - tied/methodology/: index YAMLs and inherited detail files (always overwritten)
 #   - tied/: project index YAMLs and requirements/, architecture-decisions/, implementation-decisions/ (create if missing, never overwrite)
-#   - Guide .md and tied/docs/ (copy when missing). `processes.md` for new clients comes from
-#     templates/processes.md (TIED-distributed template); the other four guides come from
-#     tied/ in the TIED source. In a TIED source checkout, tied/processes.md is the live
-#     repo file and is not the bootstrap source. `tied-yaml-agent-index.md` is post-processed
+#   - Guide .md and tied/docs/ (copy when missing; never overwrite an existing `tied/docs/*.md`).
+#     Core guides and schema come from tied/docs/ in the TIED source.
+#     `tied-yaml-agent-index.md` is post-processed
 #     so links resolve from tied/docs/ (see sed block in the DOCS_TO_COPY loop).
 #   - .cursor/skills/tied-yaml/: Cursor Agent Skill for REQ/ARCH/IMPL YAML via tied-cli.sh
-#     (from .cursor/ if present, else from tools/bundled-tied-yaml-skill; overwritten each run).
-#     No .cursor/mcp.json is created or modified; use tied-cli + TIED_MCP_BIN to invoke the server.
+#     (from .cursor/ if complete—includes scripts/tied-cli.sh—else from tools/bundled-tied-yaml-skill; overwritten each run).
+#   - Canonical CLI: .cursor/skills/tied-yaml/scripts/tied-cli.sh (use `tree -a` to list .cursor/ or open in the IDE).
+#   - .cursor/mcp.json: (re)writes mcpServers.tied-yaml with stdio, absolute paths to this TIED
+#     repo's mcp-server/dist/index.js and the target project's tied/; preserves other mcpServers
+#     keys. Fails if mcp-server/dist/index.js is not built. After bootstrap, in Cursor you may
+#     run: agent enable tied-yaml — approve; type quit to exit the Agent CLI.
 #
 # Designed for macOS (Bash 3.2+) and Ubuntu (Bash 5.x+).
 #
@@ -34,11 +39,32 @@
 
 set -euo pipefail
 
+# Terminal colors (NO_COLOR or non-TTY disables them)
+C_OK="" C_WARN="" C_ERR="" C_RESET=""
+if [[ -z "${NO_COLOR:-}" ]] && [[ -t 1 ]]; then
+  C_OK=$'\e[0;32m'
+  C_WARN=$'\e[0;33m'
+  C_ERR=$'\e[0;31m'
+  C_RESET=$'\e[0m'
+fi
+say_ok()  { printf '%b%s%b\n'  "${C_OK}"   "$1" "${C_RESET}"; }
+say_warn(){ printf '%b%s%b\n'  "${C_WARN}" "$1" "${C_RESET}"; }
+say_err() { printf '%b%s%b\n'  "${C_ERR}"  "$1" "${C_RESET}" >&2; }
+# Green only when all items in a client-owned group are new; else yellow.
+say_x_of_y_client() {
+  local _x="$1" _y="$2" _msg="$3"
+  if [[ "${_y}" -gt 0 ]] && [[ "${_x}" -eq "${_y}" ]]; then
+    say_ok "${_msg}"
+  else
+    say_warn "${_msg}"
+  fi
+}
+
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 TARGET_PROJECT_DIR="${1:-$(pwd)}"
 
 if [[ ! -d "${TARGET_PROJECT_DIR}" ]]; then
-  echo "Target project directory does not exist: ${TARGET_PROJECT_DIR}" >&2
+  say_err "Target project directory does not exist: ${TARGET_PROJECT_DIR}"
   exit 1
 fi
 
@@ -59,6 +85,60 @@ mkdir -p "${METHODOLOGY_DIR}/requirements"
 mkdir -p "${METHODOLOGY_DIR}/architecture-decisions"
 mkdir -p "${METHODOLOGY_DIR}/implementation-decisions"
 
+# Portable real path (macOS has no realpath(1) by default)
+_realpath() {
+  python3 -c "import os, sys; print(os.path.realpath(sys.argv[1]))" "$1"
+}
+
+MCP_SERVER_DIST="${SCRIPT_DIR}/mcp-server/dist/index.js"
+if [[ ! -f "${MCP_SERVER_DIST}" ]]; then
+  say_err "Missing built MCP server: ${MCP_SERVER_DIST}"
+  say_err "Build it: cd ${SCRIPT_DIR}/mcp-server && npm install && npm run build"
+  exit 1
+fi
+TIED_SERVER_PATH="$(_realpath "${MCP_SERVER_DIST}")"
+TIED_BASE_PATH_VALUE="$(_realpath "${TIED_DIR}")"
+MCP_JSON="${CURSOR_DIR}/mcp.json"
+
+_refresh_tied_mcp_json() {
+  MCP_JSON_PATH="${MCP_JSON}" TIED_MCP_INDEX_JS="${TIED_SERVER_PATH}" TIED_BASE_PATH_VAL="${TIED_BASE_PATH_VALUE}" \
+    python3 -c '
+import json, os, sys
+mcp = os.environ["MCP_JSON_PATH"]
+js = os.environ["TIED_MCP_INDEX_JS"]
+base = os.environ["TIED_BASE_PATH_VAL"]
+entry = {
+    "type": "stdio",
+    "disabled": False,
+    "command": "node",
+    "args": [js],
+    "env": {"TIED_BASE_PATH": base},
+}
+if os.path.exists(mcp):
+    try:
+        with open(mcp, encoding="utf-8") as f:
+            cfg = json.load(f)
+    except json.JSONDecodeError as e:
+        print(f"Invalid JSON in {mcp}: {e}", file=sys.stderr)
+        sys.exit(1)
+    if not isinstance(cfg, dict):
+        cfg = {}
+    serv = cfg.get("mcpServers")
+    if not isinstance(serv, dict):
+        serv = {}
+    cfg["mcpServers"] = serv
+    cfg["mcpServers"]["tied-yaml"] = entry
+else:
+    cfg = {"mcpServers": {"tied-yaml": entry}}
+parent = os.path.dirname(mcp)
+if parent:
+    os.makedirs(parent, exist_ok=True)
+with open(mcp, "w", encoding="utf-8") as f:
+    json.dump(cfg, f, indent=2)
+    f.write("\n")
+' || exit 1
+}
+
 HOOKS_JSON="${TARGET_PROJECT_DIR}/.cursor/hooks.json"
 
 if [[ -f "${SCRIPT_DIR}/.cursor/hooks.json" ]]; then
@@ -67,12 +147,20 @@ if [[ -f "${SCRIPT_DIR}/.cursor/hooks.json" ]]; then
   sed -i '' "s|${SCRIPT_DIR}/.cursor/logs|${TARGET_PROJECT_DIR}/.cursor/logs|g" "$HOOKS_JSON"
 fi
 
-# --- Cursor Agent Skill: tied-yaml (CLI to MCP server; no mcp.json) ---
-# Prefer .cursor/skills/tied-yaml (dev checkout); else tools/bundled-tied-yaml-skill (always in git) so
-# copy_files always installs .cursor/skills/tied-yaml/.../tied-cli.sh for client projects.
+mkdir -p "${CURSOR_DIR}"
+_refresh_tied_mcp_json
+say_ok "Refreshed ${MCP_JSON} mcpServers.tied-yaml (TIED_MCP dist + project TIED_BASE_PATH)."
+
+# --- Cursor Agent Skill: tied-yaml (CLI; MCP config is refreshed above) ---
+# Prefer .cursor/skills/tied-yaml when it is a *complete* skill (includes scripts/tied-cli.sh).
+# A partial dev checkout may contain only SKILL.md; in that case use tools/bundled-tied-yaml-skill
+# (always in git) so copy_files always installs tied-cli and the stdio client for client projects.
 TIED_YAML_SKILL_PREFERRED="${SCRIPT_DIR}/.cursor/skills/tied-yaml"
 TIED_YAML_SKILL_BUNDLED="${SCRIPT_DIR}/tools/bundled-tied-yaml-skill"
 TIED_YAML_SKILL_DEST="${CURSOR_DIR}/skills/tied-yaml"
+tied_yaml_skill_is_complete() {
+  [[ -f "$1/scripts/tied-cli.sh" ]]
+}
 install_tied_yaml_skill() {
   local _src="$1"
   mkdir -p "${CURSOR_DIR}/skills"
@@ -82,21 +170,25 @@ install_tied_yaml_skill() {
   if [[ -f "${TIED_YAML_SKILL_DEST}/scripts/tied-cli.sh" ]]; then
     chmod a+x "${TIED_YAML_SKILL_DEST}/scripts/tied-cli.sh"
   fi
-  echo "Copied tied-yaml Cursor skill into ${TIED_YAML_SKILL_DEST} (from ${_src})."
+  say_warn "Copied tied-yaml Cursor skill into ${TIED_YAML_SKILL_DEST} (from ${_src})."
 }
-if [[ -d "${TIED_YAML_SKILL_PREFERRED}" ]]; then
+if tied_yaml_skill_is_complete "${TIED_YAML_SKILL_PREFERRED}"; then
   install_tied_yaml_skill "${TIED_YAML_SKILL_PREFERRED}"
-elif [[ -d "${TIED_YAML_SKILL_BUNDLED}" ]]; then
+elif tied_yaml_skill_is_complete "${TIED_YAML_SKILL_BUNDLED}"; then
+  if [[ -d "${TIED_YAML_SKILL_PREFERRED}" ]] && ! tied_yaml_skill_is_complete "${TIED_YAML_SKILL_PREFERRED}"; then
+    say_warn "Partial tied-yaml at ${TIED_YAML_SKILL_PREFERRED} (missing scripts/tied-cli.sh); using bundled ${TIED_YAML_SKILL_BUNDLED}."
+  fi
   install_tied_yaml_skill "${TIED_YAML_SKILL_BUNDLED}"
 else
-  echo "ERROR: tied-yaml skill not found. Expected one of:" >&2
-  echo "  ${TIED_YAML_SKILL_PREFERRED}  (full Cursor skill in TIED source)" >&2
-  echo "  ${TIED_YAML_SKILL_BUNDLED}  (bundled copy; use a complete TIED repository checkout)" >&2
-  echo "Recovery: re-run this script from a TIED tree that includes tools/bundled-tied-yaml-skill/, or" >&2
-  echo "  copy a tied-yaml skill into .cursor/skills/ manually, then re-run:" >&2
-  echo "  cp -R <TIED_repo>/tools/bundled-tied-yaml-skill .cursor/skills/tied-yaml" >&2
-  echo "TIED project YAML: use a built mcp-server dist/index.js with TIED_MCP_BIN and" >&2
-  echo "  TIED_BASE_PATH, or follow tied/docs/using-tied-without-mcp.md for the manual workflow." >&2
+  say_err "ERROR: tied-yaml skill not found or incomplete. Need scripts/tied-cli.sh in one of:"
+  say_err "  ${TIED_YAML_SKILL_PREFERRED}  (full Cursor skill in TIED source)"
+  say_err "  ${TIED_YAML_SKILL_BUNDLED}  (bundled copy; use a complete TIED repository checkout)"
+  say_err "Recovery: re-run this script from a TIED tree that includes tools/bundled-tied-yaml-skill/, or"
+  say_err "  copy a tied-yaml skill into .cursor/skills/ manually, then re-run:"
+  say_err "  cp -R <TIED_repo>/tools/bundled-tied-yaml-skill .cursor/skills/tied-yaml"
+  say_err "TIED project YAML: use a built mcp-server dist/index.js with TIED_MCP_BIN and"
+  say_err "  TIED_BASE_PATH, or follow tied/docs/using-tied-without-mcp.md for the manual workflow."
+  exit 1
 fi
 
 BASE_FILES=(
@@ -110,7 +202,7 @@ for template in "${BASE_FILES[@]}"; do
   dest="${TARGET_PROJECT_DIR}/${template}"
 
   if [[ ! -f "${src}" ]]; then
-    echo "Missing base file: ${src}" >&2
+    say_err "Missing base file: ${src}"
     exit 1
   fi
 
@@ -119,10 +211,10 @@ for template in "${BASE_FILES[@]}"; do
     ((base_copied++)) || true
   fi
 done
-echo "Copied ${base_copied} of ${#BASE_FILES[@]} base files into ${TARGET_PROJECT_DIR}."
+say_x_of_y_client "${base_copied}" "${#BASE_FILES[@]}" "Copied ${base_copied} of ${#BASE_FILES[@]} base files into ${TARGET_PROJECT_DIR}."
 
-# Core methodology (inherited LEAP R+A+I) lives in templates/; the four non-process guides are
-# canonical in tied/ in the TIED source. Client bootstrap for processes.md is templates/processes.md.
+# Core methodology (inherited LEAP R+A+I) lives in templates/; guide markdown and reference docs
+# are canonical in tied/docs/ in the TIED source.
 TEMPLATES_DIR="${SCRIPT_DIR}/templates"
 TIED_SOURCE_DIR="${SCRIPT_DIR}/tied"
 # --- Methodology: index YAMLs into tied/methodology/ (ALWAYS OVERWRITE) ---
@@ -140,13 +232,13 @@ for f in "${INDEX_YAML_FILES[@]}"; do
     src="${SCRIPT_DIR}/${f}"
   fi
   if [[ ! -f "${src}" ]]; then
-    echo "Missing index file: ${src}" >&2
+    say_err "Missing index file: ${src}"
     exit 1
   fi
   cp -p "${src}" "${METHODOLOGY_DIR}/${f}"
   ((index_yaml_copied++)) || true
 done
-echo "Copied ${index_yaml_copied} of ${#INDEX_YAML_FILES[@]} methodology index YAMLs into ${METHODOLOGY_DIR} (overwritten)."
+say_warn "Copied ${index_yaml_copied} of ${#INDEX_YAML_FILES[@]} methodology index YAMLs into ${METHODOLOGY_DIR} (overwritten)."
 
 # --- Project: ensure project index YAMLs exist (CREATE IF MISSING, never overwrite) ---
 project_created=0
@@ -154,43 +246,11 @@ for f in "${INDEX_YAML_FILES[@]}"; do
   dest="${TIED_DIR}/${f}"
   if [[ ! -f "${dest}" ]]; then
     printf '# Project %s - add project-specific tokens here. Do not edit tied/methodology/.\n{}\n' "${f}" > "${dest}"
-    echo "Created project index ${dest} (empty)."
+    say_ok "Created project index ${dest} (empty)."
     ((project_created++)) || true
   fi
 done
-echo "Created ${project_created} of ${#INDEX_YAML_FILES[@]} project index file(s) (rest already existed)."
-
-# Guide .md: copy from TIED source (tied/ for four guides, templates/ for processes.md) into
-# client tied/ when missing (client may customize).
-TEMPLATE_FILES=(
-  "requirements.md"
-  "architecture-decisions.md"
-  "implementation-decisions.md"
-  "processes.md"
-  "semantic-tokens.md"
-)
-guide_copied=0
-for f in "${TEMPLATE_FILES[@]}"; do
-  if [[ "${f}" == "processes.md" ]]; then
-    src="${TEMPLATES_DIR}/${f}"
-  else
-    src="${TIED_SOURCE_DIR}/${f}"
-  fi
-  dest="${TIED_DIR}/${f}"
-  if [[ ! -f "${src}" ]]; then
-    if [[ "${f}" == "processes.md" ]]; then
-      echo "Missing template file (TIED source templates/processes.md for client bootstrap): ${src}" >&2
-    else
-      echo "Missing template file (canonical in TIED repo tied/): ${src}" >&2
-    fi
-    exit 1
-  fi
-  if [[ ! -f "${dest}" ]]; then
-    cp -p "${src}" "${dest}"
-    ((guide_copied++)) || true
-  fi
-done
-echo "Copied ${guide_copied} of ${#TEMPLATE_FILES[@]} guide/template .md files into ${TIED_DIR}."
+say_x_of_y_client "${project_created}" "${#INDEX_YAML_FILES[@]}" "Created ${project_created} of ${#INDEX_YAML_FILES[@]} project index file(s) (rest already existed)."
 
 # Copy methodology docs into client tied/docs/ from canonical TIED source tied/docs/ (referenced by AGENTS.md, processes.md).
 # The agent-req-implementation-checklist.yaml is the trackable checklist; copy to a unique file per request (see its header).
@@ -198,23 +258,31 @@ echo "Copied ${guide_copied} of ${#TEMPLATE_FILES[@]} guide/template .md files i
 mkdir -p "${TIED_DIR}/docs"
 DOCS_TO_COPY=(
   "adding-tied-mcp-and-invoking-passes.md"
+  "agent-preload-contract-template.yaml"
   "ai-principles.md"
   "agent-req-implementation-checklist.md"
+  "architecture-decisions.md"
   "citdp-policy.md"
   "citdp-record-template.yaml"
   "commit-guidelines.md"
+  "detail-files-schema.md"
   "agent-req-implementation-checklist.yaml"
   "ai-agent-tied-mcp-usage.md"
   "yaml-update-mcp-runbook.md"
   "impl-code-test-linkage.md"
+  "impl-essence-pseudocode-mcp-workflow.md"
+  "implementation-decisions.md"
   "implementation-order.md"
   "LEAP.md"
   "methodology-diagrams.md"
   "new-feature-process.md"
+  "processes.md"
   "pseudocode-validation-checklist.yaml"
   "pseudocode-writing-and-validation.md"
   "req-impl-state-guide-agent-workflow.md"
   "requirement-list-state-guide-agent-workflow.md"
+  "requirements.md"
+  "semantic-tokens.md"
   "tied-first-implementation-procedure.md"
   "tied-yaml-agent-index.md"
   "using-tied-without-mcp.md"
@@ -225,7 +293,7 @@ for f in "${DOCS_TO_COPY[@]}"; do
   src="${TIED_SOURCE_DIR}/docs/${f}"
   dest="${TIED_DIR}/docs/${f}"
   if [[ ! -f "${src}" ]]; then
-    echo "Missing methodology doc (canonical in TIED repo tied/docs/): ${src}" >&2
+    say_err "Missing methodology doc (canonical in TIED repo tied/docs/): ${src}"
     exit 1
   fi
   ((docs_total++)) || true
@@ -247,20 +315,7 @@ for f in "${DOCS_TO_COPY[@]}"; do
   fi
 done
 if [[ ${docs_total} -gt 0 ]]; then
-  echo "Copied ${docs_count} of ${docs_total} methodology doc(s) into ${TIED_DIR}/docs."
-fi
-
-# Copy detail-files schema (YAML detail file structure reference) from canonical tied/ in TIED source.
-if [[ -f "${TIED_SOURCE_DIR}/detail-files-schema.md" ]]; then
-  if [[ ! -f "${TIED_DIR}/detail-files-schema.md" ]]; then
-    cp -p "${TIED_SOURCE_DIR}/detail-files-schema.md" "${TIED_DIR}/detail-files-schema.md"
-    echo "Copied 1 of 1 detail-files-schema.md into ${TIED_DIR}."
-  else
-    echo "Skipped detail-files-schema.md (0 of 1 already present)."
-  fi
-else
-  echo "Missing: ${TIED_SOURCE_DIR}/detail-files-schema.md" >&2
-  exit 1
+  say_x_of_y_client "${docs_count}" "${docs_total}" "Copied ${docs_count} of ${docs_total} methodology doc(s) into ${TIED_DIR}/docs."
 fi
 
 # --- Methodology: implementation decision detail files into tied/methodology/ (ALWAYS OVERWRITE) ---
@@ -282,7 +337,7 @@ if [[ -d "${IMPL_TEMPLATE_DIR}" ]]; then
     fi
   done
   if [[ ${impl_total} -gt 0 ]]; then
-    echo "Copied ${impl_count} of ${impl_total} methodology implementation decision(s) into ${METHODOLOGY_DIR}/implementation-decisions (overwritten)."
+    say_warn "Copied ${impl_count} of ${impl_total} methodology implementation decision(s) into ${METHODOLOGY_DIR}/implementation-decisions (overwritten)."
   fi
 fi
 
@@ -303,7 +358,7 @@ if [[ -d "${ARCH_TEMPLATE_DIR}" ]]; then
     fi
   done
   if [[ ${arch_total} -gt 0 ]]; then
-    echo "Copied ${arch_count} of ${arch_total} methodology architecture decision(s) into ${METHODOLOGY_DIR}/architecture-decisions (overwritten)."
+    say_warn "Copied ${arch_count} of ${arch_total} methodology architecture decision(s) into ${METHODOLOGY_DIR}/architecture-decisions (overwritten)."
   fi
 fi
 
@@ -324,7 +379,7 @@ if [[ -d "${REQ_TEMPLATE_DIR}" ]]; then
     fi
   done
   if [[ ${req_total} -gt 0 ]]; then
-    echo "Copied ${req_count} of ${req_total} methodology requirement(s) into ${METHODOLOGY_DIR}/requirements (overwritten)."
+    say_warn "Copied ${req_count} of ${req_total} methodology requirement(s) into ${METHODOLOGY_DIR}/requirements (overwritten)."
   fi
 fi
 shopt -u nullglob

@@ -17,11 +17,11 @@
    E2E tests are written **after** binding code to **protect** (a) the non-TDD (glue) code and (b) operations that ensure the most basic features. E2E-only behavior is documented in the IMPL.
 
 5. **Closing the loop**  
-   When all tests pass and all requirements are met, update TIED data (REQ/ARCH/IMPL, `traceability.tests`, `code_locations`, `essence_pseudocode`) to match the implementation. Run consistency validation (e.g. `tied_validate_consistency`). See LEAP in `tied/processes.md` § LEAP.
+   When all tests pass and all requirements are met, update TIED data (REQ/ARCH/IMPL, `traceability.tests`, `code_locations`, `essence_pseudocode`) to match the implementation. Run consistency validation (e.g. `tied_validate_consistency`). See LEAP in `tied/docs/processes.md` § LEAP.
 
 ## References
 
-- **Process**: `tied/processes.md` § **PROC-TIED_DEV_CYCLE** (steps 3–10: tests, TDD, glue, E2E, validate, sync, README/CHANGELOG, commit).
+- **Process**: `tied/docs/processes.md` § **PROC-TIED_DEV_CYCLE** (steps 3–10: tests, TDD, glue, E2E, validate, sync, README/CHANGELOG, commit).
 - **Principles**: `tied/docs/ai-principles.md` § Phase 3 (mandatory implementation order).
 - **Agents**: `AGENTS.md` (implementation order bullet).
 - **README**: [README.md](../README.md) § "How TIED (with TDD) develops tests, code, and E2E, then closes the loop."

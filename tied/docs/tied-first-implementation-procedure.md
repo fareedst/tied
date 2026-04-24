@@ -114,5 +114,5 @@ flowchart TD
 | [agent-req-implementation-checklist.md](agent-req-implementation-checklist.md) | Full step sequence session-bootstrap–traceable-commit; sub-yaml-edit-loop, sub-leap-micro-cycle; flow control |
 | [impl-code-test-linkage.md](impl-code-test-linkage.md) | Three-way alignment, phases A–I, LEAP micro-cycle during TDD |
 | [implementation-order.md](implementation-order.md) | Mandatory order: unit tests → unit code (TDD) → composition tests → composition code → E2E → close loop |
-| [../processes.md](../processes.md) | § LEAP, § PROC-TIED_DEV_CYCLE, § PROC-IMPL_CODE_TEST_SYNC, § PROC-IMPL_PSEUDOCODE_TOKENS |
+| [processes.md](processes.md) | § LEAP, § PROC-TIED_DEV_CYCLE, § PROC-IMPL_CODE_TEST_SYNC, § PROC-IMPL_PSEUDOCODE_TOKENS |
 | [AGENTS.md](../../AGENTS.md) | Agent operating guide; session bootstrap; mandatory acknowledgment |

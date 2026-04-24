@@ -22,11 +22,16 @@ export function safeDump(obj: unknown): string {
 }
 
 /**
- * Serialize a REQ/ARCH/IMPL detail document `{ [token]: record }` with safe quoting,
- * but emit `essence_pseudocode` as a YAML literal block (`|-`) when non-empty so
- * multi-line pseudo-code stays readable in diffs ([IMPL] detail files only).
+ * Serialize a REQ/ARCH/IMPL detail document `{ [token]: record }` with safe quoting.
+ * For REQ/ARCH, non-empty `essence_pseudocode` is emitted in YAML as a literal block (`|-`) when present.
+ * For IMPL-*, the caller must omit `essence_pseudocode` and persist it to `IMPL-*-pseudocode.md` instead; this
+ * function never embeds `essence_pseudocode` in the YAML for IMPL (strip before calling, or use writeTiedDetailToDisk).
  */
 export function safeDumpTiedDetailDoc(token: string, record: Record<string, unknown>): string {
+  if (token.startsWith("IMPL-")) {
+    const { essence_pseudocode: _ep, ...rest } = record;
+    return safeDump({ [token]: rest });
+  }
   const ep = record.essence_pseudocode;
   if (typeof ep !== "string" || ep.length === 0) {
     return safeDump({ [token]: record });

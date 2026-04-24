@@ -68,7 +68,7 @@ This document describes the YAML structure for individual REQ, ARCH, and IMPL to
 | `code_locations` | files (path, description, lines?), functions (name, file, description) | map |
 | `traceability` | architecture, requirements, tests, code_annotations | map of lists |
 | `related_decisions` | depends_on, supersedes, see_also (optional composed_with) | map of lists |
-| `essence_pseudocode` | Language-agnostic step-wise pseudo-code (main steps, data flow, control flow). Mandatory when project mandates it; used for collision detection and token-ref validation. Multiline string (e.g. `\|-`). | string (multiline) |
+| `essence_pseudocode` | Language-agnostic step-wise pseudo-code (main steps, data flow, control flow). Mandatory when project mandates it; used for collision detection and token-ref validation. In project IMPL detail, the body is stored in **`tied/implementation-decisions/IMPL-{TOKEN}-pseudocode.md`**; MCP/load merges it as this logical field. Legacy layouts may still inline it in YAML. | string (multiline) |
 | `code_examples` | Optional: list of `{ language, body }` | list of maps |
 | `token_coverage` | code_files, tests (checklist strings) | map of lists |
 | `validation_evidence` | list of `{ date, commit?, result, notes? }`; optional validation_output (string) | list + optional string |
@@ -87,4 +87,4 @@ This document describes the YAML structure for individual REQ, ARCH, and IMPL to
 
 - **Validation**: Parse detail YAML; check token id matches filename; validate cross-reference tokens exist. Use the MCP tool `tied_validate_consistency` to validate indexes, detail files, REQ→ARCH→IMPL traceability, and IMPL `essence_pseudocode` token references.
 - **Merge / report**: Combine index + detail (e.g. deep merge) for full-doc generation or export.
-- **MCP / scripts**: Use `yq` or any YAML library to query criteria, traceability, code_locations, validation_evidence, essence_pseudocode.
+- **MCP / scripts**: Use `yq` or any YAML library to query criteria, traceability, code_locations, validation_evidence. For IMPL, read **`essence_pseudocode` via the MCP** (`yaml_detail_read` merges the `IMPL-*-pseudocode.md` sidecar) or read that `.md` file directly; do not assume the raw detail YAML still embeds a block scalar.

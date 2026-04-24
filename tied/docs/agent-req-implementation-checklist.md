@@ -63,7 +63,7 @@ When REQ/ARCH/IMPL have already been updated and the remaining work is to align 
 
 This section is **optional guidance** only. Checklist order and gating are unchanged. Use these boundaries when the **repository** and **per-request checklist copy** (per the YAML header) already record enough work that a **new** session can re-bootstrap with a small prompt, avoid carrying long prior turns, and focus on the next phase.
 
-**CITDP vs the CITDP file:** In `tied/processes.md`, `[PROC-CITDP]` ties `change-definition`, `impact-discovery`, `risk-assessment`, and `test-strategy` to change analysis, and the **`persist-citdp-record`** step (slug `persist-citdp-record`) stores the final `CITDP-*.yaml` under `tied/citdp/`. A typical “analysis done, start test/code” handoff is after IMPL is persisted and the **implementation freeze** lifts: **`persist-implementation-records`**, then `risk-assessment` / `test-strategy`, then TDD. That is **not** the same as writing the final CITDP YAML file, which runs **after** implementation.
+**CITDP vs the CITDP file:** In `tied/docs/processes.md`, `[PROC-CITDP]` ties `change-definition`, `impact-discovery`, `risk-assessment`, and `test-strategy` to change analysis, and the **`persist-citdp-record`** step (slug `persist-citdp-record`) stores the final `CITDP-*.yaml` under `tied/citdp/`. A typical “analysis done, start test/code” handoff is after IMPL is persisted and the **implementation freeze** lifts: **`persist-implementation-records`**, then `risk-assessment` / `test-strategy`, then TDD. That is **not** the same as writing the final CITDP YAML file, which runs **after** implementation.
 
 ### High-value new-session boundaries (efficiency)
 
@@ -80,7 +80,7 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 
 **Agentstream (`--lead-checklist-yaml` in the consumer repo’s `tools/agentstream` and `tools/agent-stream`):** The executable YAML sets `agentstream_new_session: true` on the main steps that begin a handoff in the table (for example `risk-assessment` through to `sync-tied-stack` per the canonical `tied/docs/agent-req-implementation-checklist.yaml` in the TIED repository). The driver then issues that turn without `--resume` (a new Cursor agent session). Missing or `false` keeps chaining from the previous turn. This key is a **driver hint**; the procedural checklist and gating do not depend on it, and other clients may ignore it. Mid-run new sessions are independent of a prior turn’s `session_id`; `--session-id` (when supported) still applies to **turn 1** of the run only.
 
-**Session preload file:** When a workspace has **`agent-preload-contract.yaml` at the repo root** (optional; used by agentstream and batch scripts when present), the checklist’s **`author-architecture`** and **`persist-implementation-records`** steps require creating or updating it (see the bundled [`agent-preload-contract-template.yaml`](../../docs/agent-preload-contract-template.yaml) in the TIED source tree, or the consumer’s copy under `tied/docs/`; use [`agent-preload-contract-tied-repo.yaml`](../../docs/agent-preload-contract-tied-repo.yaml) when indexes live at the repo root). A filled preload is not a substitute for REQ+ARCH-bounded system definition; refresh after **ARCH-locked** constants, then after **IMPL-locked** `code_locations` and paths. **`sync-tied-stack`** re-checks the file if REQ/IMPL status or `traceability.tests` changed. See the executable YAML in `tied/docs/agent-req-implementation-checklist.yaml` for exact task text.
+**Session preload file:** When a workspace has **`tied/agent-preload-contract.yaml`** (optional; used by agentstream and batch scripts when present), the checklist’s **`author-architecture`** and **`persist-implementation-records`** steps require creating or updating it (see the bundled [`agent-preload-contract-template.yaml`](agent-preload-contract-template.yaml). A filled preload is not a substitute for REQ+ARCH-bounded system definition; refresh after **ARCH-locked** constants, then after **IMPL-locked** `code_locations` and paths. **`sync-tied-stack`** re-checks the file if REQ/IMPL status or `traceability.tests` changed. See the executable YAML in `tied/docs/agent-req-implementation-checklist.yaml` for exact task text.
 
 **Weaker handoffs (use only for very large work):** After `change-definition` or `impact-discovery`, REQ/ARCH/IMPL may not be complete on disk—treat the new session as **resume and verify**, not “TIED is done.” After `author-architecture`, a new session at `catalog-pseudocode-contracts` can work if ARCH/REQ files were actually written and indexed.
 
@@ -108,13 +108,13 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 **Tasks**:
 1. Preface the response with `"Observing AI principles!"`.
 2. Read `tied/docs/ai-principles.md` completely.
-3. Review `tied/semantic-tokens.yaml` (token registry) and `tied/semantic-tokens.md` (token guide).
+3. Review `tied/semantic-tokens.yaml` (token registry) and `tied/docs/semantic-tokens.md` (token guide).
 4. Review `tied/architecture-decisions.yaml` and `tied/implementation-decisions.yaml` (YAML indexes).
-5. Review `tied/implementation-decisions.md` (IMPL schema, pseudo-code rules, block token rules per `[PROC-IMPL_PSEUDOCODE_TOKENS]`).
-6. **Tied-yaml skill (required)**: Read [.cursor/skills/tied-yaml/SKILL.md](.cursor/skills/tied-yaml/SKILL.md). For a single page linking the skill, MCP runbook, detail schema, and payload patterns, read [../../docs/tied-yaml-agent-index.md](../../docs/tied-yaml-agent-index.md). For **creating, updating, or deleting** project-owned YAML under the TIED base path (indexes, `requirements/` / `architecture-decisions/` / `implementation-decisions/` details, `semantic-tokens.yaml`, `feedback.yaml`, etc.), invoke tools only through `.cursor/skills/tied-yaml/scripts/tied-cli.sh <tool_name> '<args_json>'` (full catalog in [.cursor/skills/tied-yaml/reference.md](.cursor/skills/tied-yaml/reference.md)). Set **`TIED_BASE_PATH`** and the built server path exactly as the skill **Environment overrides** section describes so Node can run `dist/index.js`. `copy_files.sh` copies the skill into `.cursor/skills/tied-yaml/` (from the TIED repo’s `.cursor/skills/tied-yaml` if present, else from `tools/bundled-tied-yaml-skill/` in the TIED source tree). If `SKILL.md` is still missing, re-run `copy_files.sh` from a full TIED checkout, or `cp -R <TIED_repo>/tools/bundled-tied-yaml-skill .cursor/skills/tied-yaml`. Note: **`TIED_MCP_BIN` is only the server binary; it does not replace the `tied-cli.sh` wrapper and Node**—see SKILL.md. Do not use `apply_patch` or `Write` on those paths when a `tied-cli.sh` tool covers the operation (document a one-line exception only when no tool covers the operation), and do not use **`TIED_YAML_BYPASS`** for routine project TIED work when the supported path is to fix the missing skill bundle.
+5. Review `tied/docs/implementation-decisions.md` (IMPL schema, pseudo-code rules, block token rules per `[PROC-IMPL_PSEUDOCODE_TOKENS]`).
+6. **Tied-yaml skill (required)**: Read [.cursor/skills/tied-yaml/SKILL.md](../../.cursor/skills/tied-yaml/SKILL.md). For a single page linking the skill, MCP runbook, detail schema, and payload patterns, read [tied-yaml-agent-index.md](tied-yaml-agent-index.md). For **creating, updating, or deleting** project-owned YAML under the TIED base path (indexes, `requirements/` / `architecture-decisions/` / `implementation-decisions/` details, `semantic-tokens.yaml`, `feedback.yaml`, etc.), invoke tools only through `.cursor/skills/tied-yaml/scripts/tied-cli.sh <tool_name> '<args_json>'` (full catalog in [.cursor/skills/tied-yaml/reference.md](../../.cursor/skills/tied-yaml/reference.md)). Set **`TIED_BASE_PATH`** and **`TIED_MCP_CMD` / `TIED_MCP_BIN` / `tied-yaml` on `PATH`** as in the skill **Environment overrides** (Cursor: **`"command": "tied-yaml"`** in **`.cursor/mcp.json`**; shell: `tied-cli.sh` uses the same `tied-yaml` CLI or a built **`dist/index.js`**). `copy_files.sh` copies the skill into `.cursor/skills/tied-yaml/` (from the TIED repo’s `.cursor/skills/tied-yaml` if present, else from `tools/bundled-tied-yaml-skill/` in the TIED source tree). If `SKILL.md` is still missing, re-run `copy_files.sh` from a full TIED checkout, or `cp -R <TIED_repo>/tools/bundled-tied-yaml-skill .cursor/skills/tied-yaml`. Note: the **`tied-yaml` server** is separate from the **`tied-cli.sh` + Node** stdio client; both are required for terminal use—see SKILL.md. Do not use `apply_patch` or `Write` on those paths when a `tied-cli.sh` tool covers the operation (document a one-line exception only when no tool covers the operation), and do not use **`TIED_YAML_BYPASS`** for routine project TIED work when the supported path is to fix the missing skill bundle.
 7. **Mandatory global sequence** (before any RED test or production code): token-commented IMPL `essence_pseudocode` → `gate-pseudocode-validation` → `persist-implementation-records` when authoring new IMPL — then RED tests → GREEN code.
 8. **Within TDD** after pseudo-code is authoritative: failing test before production code. When weighing non-implementation trade-offs: Tests > Basic Functions > Developer Experience > Infrastructure > Security — never start RED or production code before IMPL pseudo-code is complete per the mandatory sequence above.
-9. **Implementation freeze** until `gate-pseudocode-validation` and `persist-implementation-records` are satisfied for this REQ/changed IMPL set: do not add or modify production implementation files (application source, deliverable scripts, etc.) or automated test files. Exception only for TIED YAML and docs required by completed checklist steps (TIED paths routed per [.cursor/skills/tied-yaml/SKILL.md](.cursor/skills/tied-yaml/SKILL.md)).
+9. **Implementation freeze** until `gate-pseudocode-validation` and `persist-implementation-records` are satisfied for this REQ/changed IMPL set: do not add or modify production implementation files (application source, deliverable scripts, etc.) or automated test files. Exception only for TIED YAML and docs required by completed checklist steps (TIED paths routed per [.cursor/skills/tied-yaml/SKILL.md](../../.cursor/skills/tied-yaml/SKILL.md)).
 
 **Outcomes**: Agent has read all governing documents. Session context is established.
 
@@ -134,7 +134,7 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 
 **Outcomes**: Sponsor wording translated into an explicit checklist-phase plan; agent primed to follow slug order rather than imperative goal phrasing alone.
 
-**Reference**: Entry points and flow in this document; `tied/processes.md` § `[PROC-AGENT_REQ_CHECKLIST]`.
+**Reference**: Entry points and flow in this document; `tied/docs/processes.md` § `[PROC-AGENT_REQ_CHECKLIST]`.
 
 ---
 
@@ -154,7 +154,7 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 
 **Branch**: IF this is a bug fix AND no REQ exists for the expected behavior THEN create the missing REQ at author-requirement first, then return here to define the fix.
 
-**Reference**: `tied/processes.md` § `[PROC-CITDP]` step 1; `tied/docs/ai-principles.md` § Bugs vs requirements.
+**Reference**: `tied/docs/processes.md` § `[PROC-CITDP]` step 1; `tied/docs/ai-principles.md` § Bugs vs requirements.
 
 ---
 
@@ -189,7 +189,7 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 
 **Branch**: IF the IMPL set is large (signal of high coupling) THEN consider whether IMPLs need decomposition before proceeding.
 
-**Reference**: `tied/processes.md` § `[PROC-CITDP]` step 2; `tied/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phase A (A1-A3); `tied/docs/impl-code-test-linkage.md` § Phase A — Discovery.
+**Reference**: `tied/docs/processes.md` § `[PROC-CITDP]` step 2; `tied/docs/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phase A (A1-A3); `tied/docs/impl-code-test-linkage.md` § Phase A — Discovery.
 
 ---
 
@@ -199,13 +199,13 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 
 **Tasks**:
 1. Create or update the entry in `requirements.yaml` with all required fields: `name`, `category`, `priority`, `status`, `rationale` (`why`, `problems_solved`, `benefits`), `satisfaction_criteria`, `validation_criteria`, `traceability` (`architecture`, `implementation`, `tests`, `code_annotations`), `related_requirements`, `detail_file`, `metadata`.
-2. Create or update the REQ detail file in `requirements/REQ-{TOKEN}.yaml` per `tied/detail-files-schema.md` § REQ.
+2. Create or update the REQ detail file in `requirements/REQ-{TOKEN}.yaml` per `tied/docs/detail-files-schema.md` § REQ.
 3. Register the REQ token in `semantic-tokens.yaml`.
 4. **CALL sub-yaml-edit-loop** for each changed YAML file.
 
 **Outcomes**: REQ record exists in both the index and the detail file; token is registered in `semantic-tokens.yaml`; all YAML validated.
 
-**Reference**: `tied/processes.md` § `[PROC-YAML_DB_OPERATIONS]` § Appending a New Record; `tied/detail-files-schema.md` § 1; `tied/semantic-tokens.md` § Token Creation Requirements.
+**Reference**: `tied/docs/processes.md` § `[PROC-YAML_DB_OPERATIONS]` § Appending a New Record; `tied/docs/detail-files-schema.md` § 1; `tied/docs/semantic-tokens.md` § Token Creation Requirements.
 
 ---
 
@@ -216,14 +216,14 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 **Tasks**:
 1. Identify architectural decisions needed (or update existing ones).
 2. Create or update the entry in `architecture-decisions.yaml` with `cross_references` to the REQ token(s), `decision`, `rationale`, `alternatives_considered`, `traceability`, `related_decisions`, `metadata`.
-3. Create or update the ARCH detail file in `architecture-decisions/ARCH-{TOKEN}.yaml` per `tied/detail-files-schema.md` § ARCH.
+3. Create or update the ARCH detail file in `architecture-decisions/ARCH-{TOKEN}.yaml` per `tied/docs/detail-files-schema.md` § ARCH.
 4. Register each new ARCH token in `semantic-tokens.yaml`.
 5. **CALL sub-yaml-edit-loop** for each changed YAML file.
-6. **Agent preload (ARCH-locked)**: When ARCH and REQ have bounded the system in a material way, create or update **workspace-root** `agent-preload-contract.yaml` (see the executable checklist YAML for full conditions). Use the template at [`../../docs/agent-preload-contract-template.yaml`](../../docs/agent-preload-contract-template.yaml) in the TIED source tree, or the tied-repo layout file [`../../docs/agent-preload-contract-tied-repo.yaml`](../../docs/agent-preload-contract-tied-repo.yaml) if YAML indexes are at the repo root (no `tied/` subtree). Fill `session_bootstrap_docs` paths, `tied_paths.TIED_BASE_PATH`, and `implementation_contract` fields the ARCH decision fixes. If the pass only nicked cross-references, record that the preload was not refreshed.
+6. **Agent preload (ARCH-locked)**: When ARCH and REQ have bounded the system in a material way, create or update **`tied/agent-preload-contract.yaml`** (see the executable checklist YAML for full conditions). Use the template at [`agent-preload-contract-template.yaml`](agent-preload-contract-template.yaml). Fill `session_bootstrap_docs` paths, `tied_paths.TIED_BASE_PATH`, and `implementation_contract` fields the ARCH decision fixes. If the pass only nicked cross-references, record that the preload was not refreshed.
 
-**Outcomes**: ARCH records exist with REQ cross-references; tokens registered; YAML validated; `agent-preload-contract.yaml` at the workspace root created or updated when meaningful ARCH constants were introduced (or the step output records an explicit skip).
+**Outcomes**: ARCH records exist with REQ cross-references; tokens registered; YAML validated; `tied/agent-preload-contract.yaml` created or updated when meaningful ARCH constants were introduced (or the step output records an explicit skip).
 
-**Reference**: `tied/processes.md` § `[PROC-YAML_DB_OPERATIONS]`; `tied/detail-files-schema.md` § 2; `tied/docs/ai-principles.md` § Phase 1; `docs/agent-preload-contract-template.yaml` (TIED source); `docs/agent-preload-contract-tied-repo.yaml` (TIED source).
+**Reference**: `tied/docs/processes.md` § `[PROC-YAML_DB_OPERATIONS]`; `tied/docs/detail-files-schema.md` § 2; `tied/docs/ai-principles.md` § Phase 1; `tied/docs/agent-preload-contract-template.yaml` (TIED source).
 
 ---
 
@@ -286,14 +286,14 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 ### persist-implementation-records (persist-implementation-records): IMPL index/detail via tied-cli.sh; sub-yaml-edit-loop
 
 8. Create or update `implementation-decisions.yaml` index entries with all required fields.
-9. Create or update IMPL detail files in `implementation-decisions/IMPL-{TOKEN}.yaml` per `tied/detail-files-schema.md` § IMPL. Include complete `essence_pseudocode`.
+9. Create or update IMPL detail files in `implementation-decisions/IMPL-{TOKEN}.yaml` per `tied/docs/detail-files-schema.md` § IMPL. Include complete `essence_pseudocode`.
 10. Register each new IMPL token in `semantic-tokens.yaml`.
 11. **CALL sub-yaml-edit-loop** for each changed YAML file.
-12. **Agent preload (IMPL-locked)**: Refresh **workspace-root** `agent-preload-contract.yaml` using IMPL-anchored data: e.g. `code_locations` → `implementation_contract.target_source_paths`, test or harness paths from IMPL detail, `citdp_artifact_paths` per CITDP policy, language/test stack when known. Reconcile when this step is verify-only for IMPL if path lists may be stale. Keep the preload narrow (see template comments); avoid whole-repo rediscovery.
+12. **Agent preload (IMPL-locked)**: Refresh **`tied/agent-preload-contract.yaml`** using IMPL-anchored data: e.g. `code_locations` → `implementation_contract.target_source_paths`, test or harness paths from IMPL detail, `citdp_artifact_paths` per CITDP policy, language/test stack when known. Reconcile when this step is verify-only for IMPL if path lists may be stale. Keep the preload narrow (see template comments); avoid whole-repo rediscovery.
 
-**Outcomes**: All IMPL pseudo-code is complete, authoritative, and token-commented. No contradictions or gaps remain. All YAML validated. `agent-preload-contract.yaml` matches IMPL-locked paths and constants (or is explicitly left unchanged with reason).
+**Outcomes**: All IMPL pseudo-code is complete, authoritative, and token-commented. No contradictions or gaps remain. All YAML validated. `tied/agent-preload-contract.yaml` matches IMPL-locked paths and constants (or is explicitly left unchanged with reason).
 
-**Reference**: `tied/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phases B-C; `tied/implementation-decisions.md` § Mandatory essence_pseudocode, § Preferred vocabulary, § Expressing sequence and structure; `tied/docs/impl-code-test-linkage.md` §§ 2-3; `tied/docs/pseudocode-writing-and-validation.md` and `tied/docs/pseudocode-validation-checklist.yaml` for pseudo-code validation; `docs/agent-preload-contract-template.yaml`; `docs/agent-preload-contract-tied-repo.yaml` (paths relative to repo root in TIED source).
+**Reference**: `tied/docs/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phases B-C; `tied/docs/implementation-decisions.md` § Mandatory essence_pseudocode, § Preferred vocabulary, § Expressing sequence and structure; `tied/docs/impl-code-test-linkage.md` §§ 2-3; `tied/docs/pseudocode-writing-and-validation.md` and `tied/docs/pseudocode-validation-checklist.yaml` for pseudo-code validation; `tied/docs/agent-preload-contract-template.yaml`.
 
 ---
 
@@ -308,7 +308,7 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 
 **Outcomes**: Risks documented with token references. Mitigations identified.
 
-**Reference**: `tied/processes.md` § `[PROC-CITDP]` step 4.
+**Reference**: `tied/docs/processes.md` § `[PROC-CITDP]` step 4.
 
 ---
 
@@ -336,7 +336,7 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 
 **Outcomes**: Test matrix complete; every IMPL block has a testability classification; TDD sequence planned; module boundaries documented.
 
-**Reference**: `tied/processes.md` § `[PROC-TEST_STRATEGY]`; `tied/processes.md` § `[PROC-CITDP]` step 5; `tied/docs/ai-principles.md` § Thin Entry Points and Testability Classification; `tied/docs/implementation-order.md`.
+**Reference**: `tied/docs/processes.md` § `[PROC-TEST_STRATEGY]`; `tied/docs/processes.md` § `[PROC-CITDP]` step 5; `tied/docs/ai-principles.md` § Thin Entry Points and Testability Classification; `tied/docs/implementation-order.md`.
 
 ---
 
@@ -420,7 +420,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
           UNTIL all unit/integration IMPL blocks are covered and all tests pass)
 ```
 
-**Reference**: `tied/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phases D-F (steps 11-20); `tied/docs/impl-code-test-linkage.md` § Stage 2 — Unit TDD; `tied/docs/implementation-order.md` steps 1-2.
+**Reference**: `tied/docs/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phases D-F (steps 11-20); `tied/docs/impl-code-test-linkage.md` § Stage 2 — Unit TDD; `tied/docs/implementation-order.md` steps 1-2.
 
 ---
 
@@ -444,7 +444,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 
 **Outcomes**: All bindings have composition tests; composition code passes; three-way alignment holds.
 
-**Reference**: `tied/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phase G (steps 21-24); `tied/docs/impl-code-test-linkage.md` § 4 — From unit modules to composition; `tied/docs/implementation-order.md` steps 3-4. For this project’s binding inventory and coverage, see `tied/docs/composition-coverage.md`.
+**Reference**: `tied/docs/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phase G (steps 21-24); `tied/docs/impl-code-test-linkage.md` § 4 — From unit modules to composition; `tied/docs/implementation-order.md` steps 3-4. For this project’s binding inventory and coverage, see `tied/docs/composition-coverage.md`.
 
 ---
 
@@ -467,7 +467,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 
 **Outcomes**: E2E tests exist for all UI-only behavior; each is justified with a named platform constraint.
 
-**Reference**: `tied/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phase H (steps 25-28); `tied/docs/impl-code-test-linkage.md` § 4 — The E2E decision; `tied/docs/implementation-order.md` step 4.
+**Reference**: `tied/docs/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phase H (steps 25-28); `tied/docs/impl-code-test-linkage.md` § 4 — The E2E decision; `tied/docs/implementation-order.md` step 4.
 
 ---
 
@@ -495,7 +495,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 - Token validation failure → register missing tokens, fix traceability gaps.
 - Three-way alignment failure → apply LEAP order (pseudo-code first, then test, then code).
 
-**Reference**: `tied/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phase I (steps 29-33); `tied/processes.md` § `[PROC-CITDP]` step 7.
+**Reference**: `tied/docs/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phase I (steps 29-33); `tied/docs/processes.md` § `[PROC-CITDP]` step 7.
 
 ---
 
@@ -508,7 +508,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 2. Sync `semantic-tokens.yaml`, `requirements.yaml`, `architecture-decisions.yaml`, and `implementation-decisions.yaml` (and detail files) so no documentation drift exists.
 3. **CALL sub-yaml-edit-loop** on every changed file.
 4. Run `.cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency '{}'` — must report `"ok": true`.
-5. If REQ/ARCH/IMPL `status`, `traceability.tests`, or similar fields changed such that a session `agent_preload` would be stale, re-check **workspace-root** `agent-preload-contract.yaml` and patch only as needed; do not redo the full ARCH/IMPL preload passes unless something material changed.
+5. If REQ/ARCH/IMPL `status`, `traceability.tests`, or similar fields changed such that a session `agent_preload` would be stale, re-check **`tied/agent-preload-contract.yaml`** and patch only as needed; do not redo the full ARCH/IMPL preload passes unless something material changed.
 
 **Branch**: IF divergence between TIED docs and code/tests is detected THEN apply LEAP:
 - Update IMPL first (GOTO resolve-pseudocode scope).
@@ -516,9 +516,9 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 - IF scope changed, update REQ (GOTO author-requirement scope).
 - Then return here and re-run consistency validation.
 
-**Outcomes**: TIED docs are consistent with implementation; `tied_validate_consistency` passes; `agent-preload-contract.yaml` re-checked or left unchanged with reason when sync did not affect preload-relevant TIED fields.
+**Outcomes**: TIED docs are consistent with implementation; `tied_validate_consistency` passes; `tied/agent-preload-contract.yaml` re-checked or left unchanged with reason when sync did not affect preload-relevant TIED fields.
 
-**Reference**: `tied/processes.md` § `[PROC-TIED_DEV_CYCLE]` steps 8-9; `tied/processes.md` § `[PROC-LEAP]`; `docs/agent-preload-contract-template.yaml` (repo root).
+**Reference**: `tied/docs/processes.md` § `[PROC-TIED_DEV_CYCLE]` steps 8-9; `tied/docs/processes.md` § `[PROC-LEAP]`; `tied/docs/agent-preload-contract-template.yaml`.
 
 ---
 
@@ -532,7 +532,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 
 **Outcomes**: External documentation reflects the session's changes.
 
-**Reference**: `tied/processes.md` § `[PROC-TIED_DEV_CYCLE]` step 9.
+**Reference**: `tied/docs/processes.md` § `[PROC-TIED_DEV_CYCLE]` step 9.
 
 ---
 
@@ -557,7 +557,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 
 **Branch**: IF YAML validation fails THEN fix and repeat step 3. When to create vs skip a CITDP record: see `tied/docs/citdp-policy.md`.
 
-**Reference**: `tied/processes.md` § `[PROC-CITDP]` step 8; `tied/processes.md` § `[PROC-YAML_DB_OPERATIONS]`; `tied/docs/citdp-policy.md` (project policy).
+**Reference**: `tied/docs/processes.md` § `[PROC-CITDP]` step 8; `tied/docs/processes.md` § `[PROC-YAML_DB_OPERATIONS]`; `tied/docs/citdp-policy.md` (project policy).
 
 ---
 
@@ -569,7 +569,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 1. Write the commit message per `[PROC-COMMIT_MESSAGES]`:
    - **Header**: `<type>(<scope>): <subject>` (keep the full header line to 50 characters or fewer).
    - **Type**: One of `feat`, `fix`, `docs`, `refactor`, `test`, `build`, `ci`, `chore`, `perf`, `style`.
-   - **Scope**: Area affected (e.g., `core`, `ui`, `tied`, `tests`). See `tied/processes.md` § `[PROC-COMMIT_MESSAGES]` for the full scope list.
+   - **Scope**: Area affected (e.g., `core`, `ui`, `tied`, `tests`). See `tied/docs/processes.md` § `[PROC-COMMIT_MESSAGES]` for the full scope list.
    - **Subject**: Imperative, present tense; no capitalization; no period.
    - **Body**: Motivation and behavior change (imperative tense). Keep lines to 100 characters.
    - **Footer**: `Closes #issue` or `Fixes #issue` if applicable. Reference main REQ/ARCH/IMPL tokens touched.
@@ -580,7 +580,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 
 **EXIT**: Checklist complete. Do not create a stand-alone summary document.
 
-**Reference**: `tied/processes.md` § `[PROC-COMMIT_MESSAGES]`.
+**Reference**: `tied/docs/processes.md` § `[PROC-COMMIT_MESSAGES]`.
 
 ---
 
@@ -590,7 +590,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 
 **Invoked by**: Any step that creates or modifies TIED YAML (author-requirement, author-architecture, S06, three-way-alignment-unit, composition-integration, verification-gate, sync-tied-stack, persist-citdp-record).
 
-**Goals**: Ensure every TIED YAML file is syntactically valid and canonically formatted before use. **Mutations** to project-owned TIED YAML go through `.cursor/skills/tied-yaml/scripts/tied-cli.sh` per [.cursor/skills/tied-yaml/SKILL.md](.cursor/skills/tied-yaml/SKILL.md) (tool names and JSON args in [.cursor/skills/tied-yaml/reference.md](.cursor/skills/tied-yaml/reference.md)). Agents use **`lint_yaml`** per [PROC-YAML_EDIT_LOOP] (`processes.md`); it may accept multiple paths but must process each file independently—never raw multi-argument `yq` pretty-print, which merges documents and corrupts files.
+**Goals**: Ensure every TIED YAML file is syntactically valid and canonically formatted before use. **Mutations** to project-owned TIED YAML go through `.cursor/skills/tied-yaml/scripts/tied-cli.sh` per [.cursor/skills/tied-yaml/SKILL.md](../../.cursor/skills/tied-yaml/SKILL.md) (tool names and JSON args in [.cursor/skills/tied-yaml/reference.md](../../.cursor/skills/tied-yaml/reference.md)). Agents use **`lint_yaml`** per [PROC-YAML_EDIT_LOOP] (`processes.md`); it may accept multiple paths but must process each file independently—never raw multi-argument `yq` pretty-print, which merges documents and corrupts files.
 
 **Tasks**:
 1. **Mutation path**: IF you are creating, updating, or deleting project-owned files under the TIED base path, use the appropriate `tied-cli.sh` tool from the skill. Do not bypass with `apply_patch`/`Write` when the same operation is supported by `tied-cli.sh`.
@@ -603,7 +603,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 
 **RETURN** to calling step.
 
-**Reference**: `tied/processes.md` § `[PROC-YAML_EDIT_LOOP]`; [.cursor/skills/tied-yaml/SKILL.md](.cursor/skills/tied-yaml/SKILL.md); `tied/docs/methodology-diagrams.md` Diagram 6.
+**Reference**: `tied/docs/processes.md` § `[PROC-YAML_EDIT_LOOP]`; [.cursor/skills/tied-yaml/SKILL.md](../../.cursor/skills/tied-yaml/SKILL.md); `tied/docs/methodology-diagrams.md` Diagram 6.
 
 ---
 
@@ -621,7 +621,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 
 **Outcomes**: Pseudo-code validation report (findings by category, severity, location); all required checks pass or are waived; minimum gating rules satisfied.
 
-**Reference**: `tied/docs/pseudocode-writing-and-validation.md`; `tied/docs/pseudocode-validation-checklist.yaml`; `tied/processes.md` § `[PROC-PSEUDOCODE_VALIDATION]`.
+**Reference**: `tied/docs/pseudocode-writing-and-validation.md`; `tied/docs/pseudocode-validation-checklist.yaml`; `tied/docs/processes.md` § `[PROC-PSEUDOCODE_VALIDATION]`.
 
 ---
 
@@ -644,7 +644,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 
 **RETURN** to the calling TDD iteration (unit-test-green continues with the next assertion or block).
 
-**Reference**: `tied/docs/impl-code-test-linkage.md` § 3 — LEAP Micro-Cycle During TDD; `tied/processes.md` § `[PROC-LEAP]` rule 1.
+**Reference**: `tied/docs/impl-code-test-linkage.md` § 3 — LEAP Micro-Cycle During TDD; `tied/docs/processes.md` § `[PROC-LEAP]` rule 1.
 
 ---
 
@@ -727,15 +727,15 @@ flowchart TD
 
 | Document | What it provides |
 |---|---|
-| `tied/processes.md` | Canonical definitions for all `[PROC-*]` tokens referenced in this checklist |
+| `tied/docs/processes.md` | Canonical definitions for all `[PROC-*]` tokens referenced in this checklist |
 | `tied/docs/impl-code-test-linkage.md` | Three-way alignment guide with worked examples and the 33-step IMPL_CODE_TEST_SYNC procedure |
 | `tied/docs/LEAP.md` | LEAP rationale: why IMPL pseudo-code beats hunting through source |
 | `tied/docs/implementation-order.md` | Mandatory implementation order (tests → TDD → glue → E2E → close loop) |
 | `tied/docs/methodology-diagrams.md` | Visual diagrams for the traceability stack, dev cycle, TDD inner loop, CITDP, and YAML edit loop |
 | `tied/docs/ai-principles.md` | Agent principles, checklists, change impact tracking matrix |
-| `tied/implementation-decisions.md` | IMPL detail schema, pseudo-code rules, preferred vocabulary, collision detection |
-| `tied/semantic-tokens.md` | Token format, naming convention, registry usage, creation requirements |
-| `tied/detail-files-schema.md` | YAML schema for REQ, ARCH, and IMPL detail files |
+| `tied/docs/implementation-decisions.md` | IMPL detail schema, pseudo-code rules, preferred vocabulary, collision detection |
+| `tied/docs/semantic-tokens.md` | Token format, naming convention, registry usage, creation requirements |
+| `tied/docs/detail-files-schema.md` | YAML schema for REQ, ARCH, and IMPL detail files |
 | `AGENTS.md` | Agent operating guide; session bootstrap; mandatory acknowledgment |
 | `.cursor/skills/tied-yaml/SKILL.md` | Mandatory routing: all TIED YAML reads/writes via `tied-cli.sh` |
 | `.cursor/skills/tied-yaml/reference.md` | Full tied-yaml tool catalog and parameter shapes |

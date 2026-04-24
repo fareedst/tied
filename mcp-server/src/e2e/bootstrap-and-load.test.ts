@@ -71,6 +71,17 @@ describe("e2e: bootstrap and load", () => {
     const recObj = rec as Record<string, unknown>;
     assert.strictEqual(recObj.name, "TIED Methodology Setup");
 
+    const tiedCli = path.join(tempDir, ".cursor", "skills", "tied-yaml", "scripts", "tied-cli.sh");
+    assert.ok(
+      fs.existsSync(tiedCli),
+      "copy_files.sh should install the canonical tied-cli at .cursor/skills/tied-yaml/scripts/tied-cli.sh [IMPL-TIED_FILES]"
+    );
+    const rootScriptsTiedCli = path.join(tempDir, "scripts", "tied-cli.sh");
+    assert.ok(
+      !fs.existsSync(rootScriptsTiedCli),
+      "copy_files.sh should not create scripts/tied-cli.sh (single CLI path is under .cursor/skills/) [IMPL-TIED_FILES]"
+    );
+
     delete process.env.TIED_BASE_PATH;
   });
 

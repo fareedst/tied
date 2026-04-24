@@ -2,18 +2,18 @@
 
 **Purpose**: One entry page that links every document that helps agents **read and update project TIED YAML** with the least friction (correct tools, payloads, merge semantics, validation).
 
-**Do not** use this as a substitute for the skill: all mutations still go through [`.cursor/skills/tied-yaml/scripts/tied-cli.sh`](../../.cursor/skills/tied-yaml/scripts/tied-cli.sh) per the routing table below.
+**Do not** use this as a substitute for the skill: TIED **YAML** and structured records still go through [`.cursor/skills/tied-yaml/scripts/tied-cli.sh`](../../.cursor/skills/tied-yaml/scripts/tied-cli.sh) (or the same MCP in-editor) per the [skill](../../.cursor/skills/tied-yaml/SKILL.md) routing table. **Exception:** the IMPL **pseudo-code sidecar** `IMPL-*-pseudocode.md` may be edited as plain text when most efficient; see [impl-essence-pseudocode-mcp-workflow.md](impl-essence-pseudocode-mcp-workflow.md) §1.3.
 
 ---
 
 ## Shortest path (most sessions)
 
 1. Confirm the active tree: MCP tool **`tied_config_get_base_path`** (see [AGENTS.md](../../AGENTS.md) §1–2 and §3.2; cheat sheet in [yaml-update-mcp-runbook.md](yaml-update-mcp-runbook.md) §3).
-2. **Mutate only via** `tied-cli.sh` — [SKILL.md](../../.cursor/skills/tied-yaml/SKILL.md) (environment, `@args.json`, large payloads).
-3. **Heavy IMPL pseudo-code**: **`impl_detail_set_essence_pseudocode`**, not a giant `yaml_detail_update` — [yaml-update-mcp-runbook.md](yaml-update-mcp-runbook.md) §2.2.
+2. **Mutate TIED YAML via** `tied-cli.sh` (or in-editor MCP) — [SKILL.md](../../.cursor/skills/tied-yaml/SKILL.md) (environment, `@args.json`, large payloads, pseudocode file/stdin for IMPL body).
+3. **IMPL pseudo-code body**: direct **`IMPL-*-pseudocode.md`**, or **`impl_detail_set_essence_pseudocode`** with inline text / **`essence_pseudocode_path`**, or `tied-cli` **`TIED_CLI_IMPL_ESSENCE_FILE`** / **stdin** — not a giant `yaml_detail_update` — [impl-essence-pseudocode-mcp-workflow.md](impl-essence-pseudocode-mcp-workflow.md); background in [yaml-update-mcp-runbook.md](yaml-update-mcp-runbook.md) §2.2.
 4. **Several writes**: **`yaml_updates_apply`** with **`dry_run: true`** first — [yaml-update-mcp-runbook.md](yaml-update-mcp-runbook.md) §2.
 5. **After writes**: `yaml_index_validate` / `lint_yaml` (per checklist) + **`tied_validate_consistency`** — [SKILL.md](../../.cursor/skills/tied-yaml/SKILL.md), [agent-req-implementation-checklist.md](agent-req-implementation-checklist.md) (`sub-yaml-edit-loop`).
-6. **Detail field shapes** (e.g. `description`): prefer [detail-files-schema.md](../detail-files-schema.md) over partial samples.
+6. **Detail field shapes** (e.g. `description`): prefer [detail-files-schema.md](detail-files-schema.md) over partial samples.
 
 ---
 
@@ -25,6 +25,7 @@
 | Full MCP tool catalog and parameter notes | [`.cursor/skills/tied-yaml/reference.md`](../../.cursor/skills/tied-yaml/reference.md) |
 | One-token updates, batch merges, nested merge semantics, small payloads, timeouts | [yaml-update-mcp-runbook.md](yaml-update-mcp-runbook.md) |
 | **Goal → tool** cheat sheet (includes `tied_config_get_base_path`) | [yaml-update-mcp-runbook.md](yaml-update-mcp-runbook.md) §3 |
+| **Editing `essence_pseudocode` in IMPL (sidecar `.md`, MCP `essence_pseudocode_path`, `tied-cli` file/stdin, optional `jq`)** | [impl-essence-pseudocode-mcp-workflow.md](impl-essence-pseudocode-mcp-workflow.md) |
 
 **Note**: `tied_config_get_base_path` is documented in [reference.md](../../.cursor/skills/tied-yaml/reference.md) (Config), [yaml-update-mcp-runbook.md](yaml-update-mcp-runbook.md) §3, and [AGENTS.md](../../AGENTS.md).
 
@@ -44,7 +45,7 @@
 
 | Topic | Document |
 |--------|----------|
-| REQ / ARCH / IMPL detail YAML shapes | [detail-files-schema.md](../detail-files-schema.md) |
+| REQ / ARCH / IMPL detail YAML shapes | [detail-files-schema.md](detail-files-schema.md) |
 | Server behavior and tool schemas | [mcp-server/README.md](../../mcp-server/README.md) |
 | Without Node/MCP (documented manual path) | [using-tied-without-mcp.md](./using-tied-without-mcp.md) |
 | MCP narrative and footguns | [ai-agent-tied-mcp-usage.md](ai-agent-tied-mcp-usage.md) |
@@ -57,8 +58,8 @@ Read during **session-bootstrap** alongside the skill; these do not replace `tie
 
 | Topic | Document |
 |--------|----------|
-| Token registry and guide | [`tied/semantic-tokens.yaml`](../semantic-tokens.yaml), [`tied/semantic-tokens.md`](../semantic-tokens.md) |
-| IMPL pseudo-code and `[PROC-IMPL_PSEUDOCODE_TOKENS]` | [`tied/implementation-decisions.md`](../implementation-decisions.md) |
+| Token registry and guide | [`tied/semantic-tokens.yaml`](../semantic-tokens.yaml), [`tied/docs/semantic-tokens.md`](semantic-tokens.md) |
+| IMPL pseudo-code and `[PROC-IMPL_PSEUDOCODE_TOKENS]` | [`tied/docs/implementation-decisions.md`](implementation-decisions.md) |
 | AI principles and ordering | [`ai-principles.md`](./ai-principles.md) |
 
 ---

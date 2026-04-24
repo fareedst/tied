@@ -55,6 +55,7 @@ import { applyYamlUpdates, parseYamlUpdateSteps } from "../yaml-updates-apply.js
 import { resolveRequirementListStateGuide } from "./requirement-list-state-guide.js";
 import { runScopedAnalysis } from "../analysis/scoped-analysis.js";
 import { runPlumbDiffImpactPreview } from "../analysis/plumb-diff-impact-preview.js";
+import { readTextFromPseudocodePath, resolvePseudocodePathUnderTiedBase } from "../impl-pseudocode-input.js";
 import {
   addProposal,
   approveProposal,
@@ -527,13 +528,21 @@ export const allTools = [
     name: "impl_detail_set_essence_pseudocode",
     config: {
       description:
-        "Update only IMPL-* detail essence_pseudocode (plus optional metadata.last_updated). Safer than a broad yaml_detail_update for large pseudo-code blobs: rejects non-IMPL tokens. Nested metadata follows the same rules as yaml_detail_update (metadata.created preserved; when existing and new metadata.last_updated are both objects, date/author/reason fields merge without clobbering siblings).",
+        "Update only IMPL-* detail essence_pseudocode (plus optional metadata.last_updated). The pseudo-code body is written to `tied/implementation-decisions/IMPL-{TOKEN}-pseudocode.md` (not embedded in the detail YAML). Safer than a broad yaml_detail_update for large blobs. Rejects non-IMPL tokens. Provide exactly one of: `essence_pseudocode` (inline string) or `essence_pseudocode_path` (UTF-8 file under TIED_BASE_PATH). Nested metadata follows the same rules as yaml_detail_update (metadata.created preserved; when existing and new metadata.last_updated are both objects, date/author/reason fields merge without clobbering siblings).",
       inputSchema: z.object({
         token: z
           .string()
           .min(1)
           .describe("IMPL-* token whose detail file will be updated"),
-        essence_pseudocode: z.string().describe("Full essence_pseudocode string for the IMPL detail record"),
+        essence_pseudocode: z
+          .string()
+          .optional()
+          .describe("Full essence_pseudocode string (persists to IMPL-TOKEN-pseudocode.md)"),
+        essence_pseudocode_path: z
+          .string()
+          .min(1)
+          .optional()
+          .describe("Path to a UTF-8 file under TIED_BASE_PATH; file contents are used as essence_pseudocode. Mutually exclusive with essence_pseudocode (provide exactly one)."),
         metadata_last_updated: z
           .object({
             date: z.string().optional(),
@@ -544,21 +553,54 @@ export const allTools = [
           .describe("If set, merged under metadata.last_updated without dropping other metadata keys"),
       }),
     },
-    handler: async ({
-      token,
-      essence_pseudocode,
-      metadata_last_updated,
-    }: {
+    handler: async (args: {
       token: string;
-      essence_pseudocode: string;
+      essence_pseudocode?: string;
+      essence_pseudocode_path?: string;
       metadata_last_updated?: { date?: string; author?: string; reason?: string };
     }) => {
+      const { token, essence_pseudocode, essence_pseudocode_path, metadata_last_updated } = args;
+      const hasPath = typeof essence_pseudocode_path === "string" && essence_pseudocode_path.length > 0;
+      const hasInline = typeof essence_pseudocode === "string";
+      if (!hasPath && !hasInline) {
+        return textContent(
+          JSON.stringify(
+            { ok: false, error: "Provide exactly one of essence_pseudocode (string) or essence_pseudocode_path" },
+            null,
+            2
+          )
+        );
+      }
+      if (hasPath && hasInline) {
+        return textContent(
+          JSON.stringify(
+            { ok: false, error: "Provide exactly one of essence_pseudocode or essence_pseudocode_path, not both" },
+            null,
+            2
+          )
+        );
+      }
       if (!token.startsWith("IMPL-")) {
         return textContent(
           JSON.stringify({ ok: false, error: `Token must be IMPL-* (got ${token})` }, null, 2)
         );
       }
-      const updates: Record<string, unknown> = { essence_pseudocode };
+      let body: string;
+      if (hasPath) {
+        const base = getBasePath();
+        const resolved = resolvePseudocodePathUnderTiedBase(essence_pseudocode_path!, base);
+        if (!resolved.ok) {
+          return textContent(JSON.stringify({ ok: false, error: resolved.error }, null, 2));
+        }
+        const read = readTextFromPseudocodePath(resolved.absolutePath);
+        if (!read.ok) {
+          return textContent(JSON.stringify({ ok: false, error: read.error }, null, 2));
+        }
+        body = read.content;
+      } else {
+        body = essence_pseudocode as string;
+      }
+      const updates: Record<string, unknown> = { essence_pseudocode: body };
       if (metadata_last_updated && Object.keys(metadata_last_updated).length > 0) {
         updates.metadata = { last_updated: metadata_last_updated };
       }
@@ -724,7 +766,7 @@ export const allTools = [
         old_token: z.string().min(1).describe("Current token ID (e.g. REQ-TIED_SETUP)"),
         new_token: z.string().min(1).describe("New token ID; must not already exist; must have same prefix (REQ-/ARCH-/IMPL-/PROC-)"),
         dry_run: z.boolean().optional().describe("If true, return files_modified and file_renamed that would be changed without writing"),
-        include_markdown: z.boolean().optional().describe("If true, also replace token in tied/processes.md"),
+        include_markdown: z.boolean().optional().describe("If true, also replace token in tied/docs/processes.md"),
       }),
     },
     handler: async ({

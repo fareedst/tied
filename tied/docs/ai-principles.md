@@ -1,6 +1,6 @@
 # AI Agent Principles & Operations
 
-**Purpose**: This document defines the operational mandates, checklists, and conventions that AI agents must follow when working on this project. It should be referenced at the start of every AI agent interaction. For methodology background (what TIED is, why tokens matter, bugs vs requirements), see `tied/docs/LEAP.md` and `semantic-tokens.md` (under `tied/` after bootstrap).
+**Purpose**: This document defines the operational mandates, checklists, and conventions that AI agents must follow when working on this project. It should be referenced at the start of every AI agent interaction. For methodology background (what TIED is, why tokens matter, bugs vs requirements), see `tied/docs/LEAP.md` and `tied/docs/semantic-tokens.md` (under `tied/docs/` after bootstrap).
 
 ## MANDATORY ACKNOWLEDGMENT
 
@@ -133,12 +133,12 @@ When making changes, use this matrix to identify what needs updating:
 
 ### LEAP: Logic Elevation And Propagation `[PROC-LEAP]`
 
-See `tied/processes.md` § LEAP for the canonical process definition.
+See `tied/docs/processes.md` § LEAP for the canonical process definition.
 
 - **Logic elevation and propagation (bottom-up):** When code or tests written during TDD or E2E differ from the IMPL pseudo-code, update in reverse order: **IMPL → ARCH → REQ** in the same work item. Keep tokens consistent; ensure the written record (REQ/ARCH/IMPL) remains the single source of intent and logic.
 - **Work can start at any layer; changes must apply up and down the stack.** For work to be **complete**, changes must be applied both up and down the stack as needed. **Code is only valid** when **all tests pass** and **all requirements are met**.
-- **TIED MCP:** Use the TIED MCP server as the primary way to read and write TIED data. Collect related R/A/I index and detail records; reason from the necessary IMPL pseudo-code only; updating code to match IMPL is a separate task. Direct file access only when no MCP tool supports the operation; document the gap.
-- **TIED MCP base path:** Before any MCP write to project TIED YAML, call **`tied_config_get_base_path`** and confirm it points at the **`tied/` of the repository you are changing**. Wrong `TIED_BASE_PATH` mutates another project’s `tied/` silently (see `AGENTS.md` §2 TIED data access, CITDP RISK-010). Fix with an absolute `TIED_BASE_PATH` in that repo’s `.cursor/mcp.json` or re-run `copy_files.sh` targeting that repo.
+- **TIED tools (MCP in Cursor or `tied-cli.sh`):** Read and write TIED data through the **TIED tool surface**—either the **tied-yaml MCP** in the IDE (typically **`"command": "tied-yaml"`** in **`.cursor/mcp.json`**) **or** **`.cursor/skills/tied-yaml/scripts/tied-cli.sh`**, with environment as in **`.cursor/skills/tied-yaml/SKILL.md`** (see **`TIED_BASE_PATH`**, **`TIED_MCP_CMD`**, **`TIED_MCP_BIN`**). The stdio path prefers the **`tied-yaml` CLI** on `PATH`, then a built **`dist/index.js`**. The IDE not listing MCP does **not** mean you should edit `tied/*.yaml` by hand; use **`tied-cli.sh`** when MCP is missing from the session. **Direct** file access only when **no** TIED tool supports the operation; document the one-line gap, then run **`lint_yaml`** / validation per the workflow. If the **`tied-yaml` CLI**, **Node**, and a runnable **`dist/index.js`** are all unavailable, use the manual path in **`tied/docs/using-tied-without-mcp.md`**. Collect related R/A/I index and detail records; reason from the necessary IMPL pseudo-code only; updating code to match IMPL is a separate task.
+- **TIED base path before writes:** In MCP sessions, call **`tied_config_get_base_path`** and confirm it points at the **`tied/` of the repository you are changing**. When using **`tied-cli.sh`**, set **`TIED_BASE_PATH`** to that same **`tied/`** (absolute). Wrong `TIED_BASE_PATH` mutates another project’s `tied/` silently (see `AGENTS.md` §2 TIED data access, CITDP RISK-010). Fix with an absolute `TIED_BASE_PATH` in that repo’s **`.cursor/mcp.json`**, the shell environment for **`tied-cli.sh`**, or re-run `copy_files.sh` targeting that repo.
 - **Go agentstream preflight (optional):** By default the `tools/agentstream` CLI does **not** validate `.cursor/mcp.json`. Enable with `--tied-mcp-preflight` or `AGENTSTREAM_TIED_MCP_PREFLIGHT=1`; when enabled, non-interactive runs may need `-y` or `AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1` (see `tools/agentstream/README.md`).
 
 ### Phase 1: Requirements → Pseudo-Code
@@ -164,14 +164,14 @@ See `tied/processes.md` § LEAP for the canonical process definition.
 
 ### Phase 3: Implementation
 
-**Mandatory order** (see `tied/processes.md` § PROC-TIED_DEV_CYCLE): (1) **Unit tests first** — tests conform to IMPL pseudo-code; written before production code (strict TDD). (2) **Unit code via TDD** — code satisfies tests; entire IMPL implemented via TDD. (3) **Composition tests first** — for every binding between units (event listeners, IPC, entry-point wiring), write failing component/integration/contract tests before composition code; each test verifies the connection without invoking the UI. (4) **Composition code via TDD** — binding/wiring/entry-point code written to satisfy composition tests; no composition code without a failing test. (5) **E2E** — only for behavior that requires UI invocation; each E2E test must justify why it cannot be tested at composition level. (6) **Closing the loop** — update TIED data; run `tied_validate_consistency`. **Within each TDD iteration:** run tests and run language-specific lint for each language in scope: **Rust** → `bun run lint:rust` [PROC-RUST_LINT]; **TypeScript** → `bunx tsc -b` or `bun run lint:ts` [PROC-TS_CHECK]; **Swift** → `swift build && swift test` [PROC-SWIFT_BUILD]; **YAML** → run `lint_yaml` on changed YAML files [PROC-YAML_EDIT_LOOP] (when TIED YAML is created or updated); see `processes.md` `[PROC-YAML_EDIT_LOOP]` for safe multi-file use. Fix before proceeding; code and YAML that do not pass lint are incomplete. Do not return work to the caller until all mandated checks pass. The code-generation inner loop (PROC-TIED_DEV_CYCLE) mandates RED as the entry point: every iteration starts with a failing test; production code is written only in GREEN to satisfy that test. Managed code created outside this loop is non-compliant.
+**Mandatory order** (see `tied/docs/processes.md` § PROC-TIED_DEV_CYCLE): (1) **Unit tests first** — tests conform to IMPL pseudo-code; written before production code (strict TDD). (2) **Unit code via TDD** — code satisfies tests; entire IMPL implemented via TDD. (3) **Composition tests first** — for every binding between units (event listeners, IPC, entry-point wiring), write failing component/integration/contract tests before composition code; each test verifies the connection without invoking the UI. (4) **Composition code via TDD** — binding/wiring/entry-point code written to satisfy composition tests; no composition code without a failing test. (5) **E2E** — only for behavior that requires UI invocation; each E2E test must justify why it cannot be tested at composition level. (6) **Closing the loop** — update TIED data; run `tied_validate_consistency`. **Within each TDD iteration:** run tests and run language-specific lint for each language in scope: **Rust** → `bun run lint:rust` [PROC-RUST_LINT]; **TypeScript** → `bunx tsc -b` or `bun run lint:ts` [PROC-TS_CHECK]; **Swift** → `swift build && swift test` [PROC-SWIFT_BUILD]; **YAML** → run `lint_yaml` on changed YAML files [PROC-YAML_EDIT_LOOP] (when TIED YAML is created or updated); see `processes.md` `[PROC-YAML_EDIT_LOOP]` for safe multi-file use. Fix before proceeding; code and YAML that do not pass lint are incomplete. Do not return work to the caller until all mandated checks pass. The code-generation inner loop (PROC-TIED_DEV_CYCLE) mandates RED as the entry point: every iteration starts with a failing test; production code is written only in GREEN to satisfy that test. Managed code created outside this loop is non-compliant.
 
 1. Work on higher priority items first
 2. **MANDATORY**: Develop and validate each logical module independently before integration [REQ-MODULE_VALIDATION]
 3. Use extensive debug output; keep debug statements that document architecture or implementation decisions
 4. Apply separation of concerns; extract logic into testable modules when needed
 5. **MANDATORY**: Update documentation AS YOU WORK (architecture-decisions.yaml, implementation-decisions.yaml, module validation results, semantic-tokens.yaml)
-6. **MANDATORY**: Enforce token coverage; run `[PROC-TOKEN_AUDIT]` / `[PROC-TOKEN_VALIDATION]`; run `tied_validate_consistency` when using MCP before marking work complete
+6. **MANDATORY**: Enforce token coverage; run `[PROC-TOKEN_AUDIT]` / `[PROC-TOKEN_VALIDATION]`; run `tied_validate_consistency` via the TIED MCP or **`tied-cli.sh`** before marking work complete when TIED tools are in use
 
 **Unified procedural checklist**: For the step-by-step procedure that sequences Phases 1-3 with CITDP analysis, LEAP, three-way alignment, and validation into a single executable checklist, follow `tied/docs/agent-req-implementation-checklist.md` (`[PROC-AGENT_REQ_CHECKLIST]`).
 
@@ -204,7 +204,7 @@ See `tied/processes.md` § LEAP for the canonical process definition.
 **BEFORE STARTING ANY WORK:**
 
 - [ ] Have access to semantic token registry; understand current priorities
-- [ ] **When using TIED MCP to edit project YAML:** Call **`tied_config_get_base_path`** first; confirm the path matches this workspace’s project `tied/`
+- [ ] **When using TIED tools (MCP and/or `tied-cli.sh`) to edit project YAML:** Confirm the effective `tied/` path matches this workspace (MCP: **`tied_config_get_base_path`**; shell: **`TIED_BASE_PATH`**)
 - [ ] **MANDATORY**: Review `architecture-decisions.yaml` and `implementation-decisions.yaml` for existing decisions
 - [ ] **MANDATORY**: Plan work (via implementation decisions or in-session) BEFORE writing any code
 - [ ] **MANDATORY** ([PROC-IMPL_PSEUDOCODE_TOKENS]): When authoring IMPL, ensure every block in `essence_pseudocode` has a comment naming REQ/ARCH/IMPL and how the block implements them
@@ -214,13 +214,13 @@ See `tied/processes.md` § LEAP for the canonical process definition.
 - [ ] Use semantic tokens in all code comments and test names/comments
 - [ ] **IMPL pseudo-code**: Every block in `essence_pseudocode` has a comment naming REQ/ARCH/IMPL and how it implements them; add or update when creating or editing IMPL detail
 - [ ] Cross-reference requirements → architecture → implementation
-- [ ] **MANDATORY**: Run language-specific lint after each code-generation iteration: **Rust** → `bun run lint:rust` [PROC-RUST_LINT]; **TypeScript** → `bunx tsc -b` or `bun run lint:ts` [PROC-TS_CHECK]; **Swift** → `swift build && swift test` [PROC-SWIFT_BUILD]; **YAML** → run `lint_yaml` on changed YAML files [PROC-YAML_EDIT_LOOP] (when TIED YAML is created or updated); see `processes.md` for safe multi-file use. Fix before proceeding. Code and YAML that do not pass lint are incomplete ([PROC-TIED_DEV_CYCLE] inner loop). Do not return work to the caller until mandated checks pass.
+- [ ] **MANDATORY**: Run language-specific lint after each code-generation iteration: **Rust** → `bun run lint:rust` [PROC-RUST_LINT]; **TypeScript** → `bunx tsc -b` or `bun run lint:ts` [PROC-TS_CHECK]; **Swift** → `swift build && swift test` [PROC-SWIFT_BUILD]; **YAML** → run `lint_yaml` on changed YAML files [PROC-YAML_EDIT_LOOP] (when TIED YAML is created or updated); see `tied/docs/processes.md` for safe multi-file use. Fix before proceeding. Code and YAML that do not pass lint are incomplete ([PROC-TIED_DEV_CYCLE] inner loop). Do not return work to the caller until mandated checks pass.
 - [ ] **MANDATORY**: Identify logical modules and document module boundaries before development [REQ-MODULE_VALIDATION]
 - [ ] **MANDATORY**: Develop and validate each module independently before integration [REQ-MODULE_VALIDATION]
 - [ ] **MANDATORY**: Record architecture/implementation decisions in YAML IMMEDIATELY when made
 - [ ] **MANDATORY**: Update `semantic-tokens.yaml` when creating new tokens
 - [ ] **MANDATORY**: When editing TIED YAML, validate with `lint_yaml` per [PROC-YAML_EDIT_LOOP]; YAML that does not validate is invalid for use
-- [ ] **MANDATORY**: Perform `[PROC-TOKEN_AUDIT]`; run `./scripts/validate_tokens.sh` and/or `tied_validate_consistency` (when using MCP)
+- [ ] **MANDATORY**: Perform `[PROC-TOKEN_AUDIT]`; run `./scripts/validate_tokens.sh` and/or `tied_validate_consistency` via the TIED MCP or **`tied-cli.sh`**
 
 **AFTER COMPLETING WORK:**
 
@@ -235,13 +235,15 @@ See `tied/processes.md` § LEAP for the canonical process definition.
 
 ## Related Documents
 
-- `tied/requirements.md`, `tied/requirements.yaml`, `tied/requirements/`
-- `tied/architecture-decisions.md`, `tied/architecture-decisions.yaml`, `tied/architecture-decisions/`
-- `tied/implementation-decisions.md`, `tied/implementation-decisions.yaml`, `tied/implementation-decisions/`
-- `tied/semantic-tokens.yaml`, `tied/semantic-tokens.md`
-- `tied/processes.md` — LEAP, PROC-TIED_DEV_CYCLE, PROC-TOKEN_AUDIT, PROC-TOKEN_VALIDATION, PROC-COMMIT_MESSAGES
-- `tied/detail-files-schema.md` — Schema for REQ/ARCH/IMPL detail YAML files
+- `tied/docs/requirements.md`, `tied/requirements.yaml`, `tied/requirements/`
+- `tied/docs/architecture-decisions.md`, `tied/architecture-decisions.yaml`, `tied/architecture-decisions/`
+- `tied/docs/implementation-decisions.md`, `tied/implementation-decisions.yaml`, `tied/implementation-decisions/`
+- `tied/semantic-tokens.yaml`, `tied/docs/semantic-tokens.md`
+- `tied/docs/processes.md` — LEAP, PROC-TIED_DEV_CYCLE, PROC-TOKEN_AUDIT, PROC-TOKEN_VALIDATION, PROC-COMMIT_MESSAGES
+- `tied/docs/detail-files-schema.md` — Schema for REQ/ARCH/IMPL detail YAML files
 - `tied/docs/agent-req-implementation-checklist.md` — Primary step-by-step checklist for implementing REQs or changes (`[PROC-AGENT_REQ_CHECKLIST]`); unifies CITDP, TIED dev cycle, IMPL_CODE_TEST_SYNC, LEAP, and validation
+- **`.cursor/skills/tied-yaml/SKILL.md`**, **`.cursor/skills/tied-yaml/scripts/tied-cli.sh`** — TIED read/write and validation when using the stdio **CLI** (same tools as the IDE **`tied-yaml` MCP**; see **`TIED_MCP_CMD`**, **`TIED_MCP_BIN`** in the skill)
+- **`tied/docs/using-tied-without-mcp.md`** — Documented **manual** project-YAML path when the **`tied-yaml` command**, **Node** + stdio, or a **built** **`dist/index.js`** are not available; not a substitute for **`tied-cli.sh`** when a server can run
 - **Client inheritance**: All TIED projects inherit the LEAP R+A+I via `copy_files.sh` (from `templates/`); the client's `tied/` contains the methodology-enforcing tokens and their detail files. For structure and sample records, agents refer to **`templates/`** in the TIED repository (see AGENTS.md § Client inheritance of LEAP R+A+I).
 
 ---
@@ -262,5 +264,5 @@ See `tied/processes.md` § LEAP for the canonical process definition.
 - **Implementation Phase**: Update documentation as decisions are refined
 - **Completion Phase**: Verify all documentation is current and complete
 
-**Last Updated**: 2026-04-22
+**Last Updated**: 2026-04-23
 **TIED Methodology Version**: 2.2.0

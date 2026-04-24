@@ -138,13 +138,16 @@ Append strings to **`implementation_approach.details`** on an existing REQ, ARCH
 
 ### `impl_detail_set_essence_pseudocode`
 
-IMPL-* only: set **`essence_pseudocode`** and optionally **`metadata.last_updated`** without other detail fields. Rejects non-IMPL tokens.
+IMPL-* only: set **`essence_pseudocode`** and optionally **`metadata.last_updated`** without other detail fields. Rejects non-IMPL tokens. Provide **exactly one** of the body source params below (mutually exclusive).
 
 | Param | Type | Required | Description |
 |-------|------|----------|-------------|
 | `token` | string | yes | IMPL-* token |
-| `essence_pseudocode` | string | yes | Full pseudo-code body |
+| `essence_pseudocode` | string | one of | Full pseudo-code body (inline) |
+| `essence_pseudocode_path` | string | one of | Path to a UTF-8 file under `TIED_BASE_PATH`; file contents are used as the full body. Must not escape the TIED project tree. |
 | `metadata_last_updated` | object | no | `{ date?, author?, reason? }` merged under `metadata.last_updated` (sub-keys preserved when both sides are objects) |
+
+**`tied-cli.sh` (stdio client):** instead of a huge `essence_pseudocode` string in JSON, set **`TIED_CLI_IMPL_ESSENCE_FILE=/abs/path/body.md`** to load the body from disk, or **`TIED_CLI_IMPL_ESSENCE_STDIN=1`** and pipe/heredoc stdin; the client injects `essence_pseudocode` and drops `essence_pseudocode_path`. At most one of file env and stdin env. See the script header in **`.cursor/skills/tied-yaml/scripts/tied-cli.sh`** (after `copy_files.sh`) or **`tools/bundled-tied-yaml-skill/scripts/tied-cli.sh`** in the TIED source tree. Direct editing of `tied/implementation-decisions/IMPL-*-pseudocode.md` remains valid; then run `tied_validate_consistency`. |
 
 ### `citdp_record_write`
 
@@ -199,7 +202,7 @@ Rename a token across the entire TIED tree (indexes, details, cross-references).
 | `old_token` | string | yes | Current token ID |
 | `new_token` | string | yes | New token ID (same prefix required) |
 | `dry_run` | boolean | no | Preview changes without writing |
-| `include_markdown` | boolean | no | Also replace in `tied/processes.md` |
+| `include_markdown` | boolean | no | Also replace in `tied/docs/processes.md` |
 
 ---
 

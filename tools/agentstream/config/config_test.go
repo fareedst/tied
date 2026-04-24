@@ -119,8 +119,11 @@ func TestParseChecklistVar(t *testing.T) {
 // REQ: REQ-GOAGENT-CLI-CONFIG
 func TestWorkspacePreloadMergedWithExplicitPromptFile(t *testing.T) {
 	dir := t.TempDir()
-	contract := filepath.Join(dir, "agent-preload-contract.yaml")
+	contract := filepath.Join(dir, "tied", "agent-preload-contract.yaml")
 	extra := filepath.Join(dir, "p.txt")
+	if err := os.MkdirAll(filepath.Dir(contract), 0o755); err != nil {
+		t.Fatal(err)
+	}
 	if err := os.WriteFile(contract, []byte("c"), 0o644); err != nil {
 		t.Fatal(err)
 	}
@@ -144,7 +147,10 @@ func TestWorkspacePreloadMergedWithExplicitPromptFile(t *testing.T) {
 
 func TestWorkspacePreloadDeduplicateExplicitSamePath(t *testing.T) {
 	dir := t.TempDir()
-	contract := filepath.Join(dir, "agent-preload-contract.yaml")
+	contract := filepath.Join(dir, "tied", "agent-preload-contract.yaml")
+	if err := os.MkdirAll(filepath.Dir(contract), 0o755); err != nil {
+		t.Fatal(err)
+	}
 	if err := os.WriteFile(contract, []byte("c"), 0o644); err != nil {
 		t.Fatal(err)
 	}
@@ -159,8 +165,11 @@ func TestWorkspacePreloadDeduplicateExplicitSamePath(t *testing.T) {
 
 func TestSkipWorkspacePreload(t *testing.T) {
 	dir := t.TempDir()
-	contract := filepath.Join(dir, "agent-preload-contract.yaml")
+	contract := filepath.Join(dir, "tied", "agent-preload-contract.yaml")
 	extra := filepath.Join(dir, "p.txt")
+	if err := os.MkdirAll(filepath.Dir(contract), 0o755); err != nil {
+		t.Fatal(err)
+	}
 	if err := os.WriteFile(contract, []byte("c"), 0o644); err != nil {
 		t.Fatal(err)
 	}
@@ -176,5 +185,23 @@ func TestSkipWorkspacePreload(t *testing.T) {
 	}
 	if filepath.Clean(cfg.PromptFiles[0]) != filepath.Clean(extra) {
 		t.Fatalf("got %#v", cfg.PromptFiles)
+	}
+}
+
+func TestWorkspacePreloadLegacyFallback(t *testing.T) {
+	dir := t.TempDir()
+	contract := filepath.Join(dir, "agent-preload-contract.yaml")
+	if err := os.WriteFile(contract, []byte("c"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	cfg, err := ParseAndResolve(dir, nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(cfg.PromptFiles) != 1 {
+		t.Fatalf("len(PromptFiles)=%d want 1: %v", len(cfg.PromptFiles), cfg.PromptFiles)
+	}
+	if filepath.Clean(cfg.PromptFiles[0]) != filepath.Clean(contract) {
+		t.Fatalf("first prompt want legacy workspace contract: got %#v", cfg.PromptFiles)
 	}
 }

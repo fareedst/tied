@@ -131,4 +131,4 @@ references:
   - docs/agent-req-implementation-checklist.yaml
   - docs/pseudocode-writing-and-validation.md
   - docs/pseudocode-validation-checklist.yaml
-  - tied/processes.md (§ CITDP, IMPL_CODE_TEST_SYNC Phases B–C, PROC-IMPL_PSEUDOCODE_TOKENS, PROC-PSEUDOCODE_VALIDATION)
+  - tied/docs/processes.md (§ CITDP, IMPL_CODE_TEST_SYNC Phases B–C, PROC-IMPL_PSEUDOCODE_TOKENS, PROC-PSEUDOCODE_VALIDATION)

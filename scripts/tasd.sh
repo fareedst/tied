@@ -8,6 +8,7 @@
 #   Not a separate shell file on disk: agentstream expands the lead checklist YAML into one Cursor-agent
 #   argv per turn (dry-run prints those). Each turn is the rendered checklist step (goals, tasks, flow)
 #   plus optional preload text. Quality of that output depends on which flags we pass (below).
+#   agentstream also prepends $test_path/tied/agent-preload-contract.yaml when present.
 #
 # Usage:
 #   scripts/tasd.sh <name> [hello|unitconv-cf|unitconv-general|1|2a|2b] [agentstream flags...]

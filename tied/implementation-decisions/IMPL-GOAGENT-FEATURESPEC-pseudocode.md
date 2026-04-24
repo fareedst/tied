@@ -1,0 +1,17 @@
+# [IMPL-GOAGENT-FEATURESPEC] [ARCH-GOAGENT-YAML-FEATURESPEC] [REQ-GOAGENT-FEATURESPEC-BATCH]
+# Summary: Normalize root; validate records; sort by order; filter; render markdown; LoadTurns sets ChainFromPrevious=false.
+
+# How: Contract I/O (same IMPL/ARCH/REQ). Cross-IMPL — callee of IMPL-GOAGENT-PIPELINE and IMPL-GOAGENT-CLI-CMD Preview; Turn from IMPL-GOAGENT-LIB-TYPES. Ruby parity: FeatureSpecBatchPrompts (not a separate IMPL token).
+
+# INPUT: YAML path; Options (order filter, etc.).
+# OUTPUT: messages []string; LoadTurns yields Turn per record with ChainFromPrevious false.
+# DATA: yaml.Node or typed structs per implementation.
+
+procedure featurespec_from_yaml(path, opts):
+  # [IMPL-GOAGENT-FEATURESPEC] [ARCH-GOAGENT-YAML-FEATURESPEC] [REQ-GOAGENT-FEATURESPEC-BATCH]
+  # How: Parse YAML to nodes; mappingHasKey detects sort need; selectByOrder skips nil order; messageForRecord builds sections.
+  ON parse or validation error: return error to caller
+  return []string messages
+  # [IMPL-GOAGENT-FEATURESPEC] [ARCH-GOAGENT-YAML-FEATURESPEC] [REQ-GOAGENT-FEATURESPEC-BATCH]
+  # How: Preview writes === headers to io.Writer.
+  procedure Preview(...)

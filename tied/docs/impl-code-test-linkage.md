@@ -4,7 +4,7 @@
 
 **Summary**: This document is the practical guide for analyzing IMPL pseudo-code, discovering related IMPLs, resolving insufficient or contradictory specifications, and synchronizing pseudo-code with managed code and tests so that all three carry identical REQ/ARCH/IMPL token comments. It covers the full path from initial IMPL discovery through unit TDD, composition testing, and E2E behavior.
 
-See `tied/processes.md` § PROC-IMPL_CODE_TEST_SYNC for the canonical 33-step checklist. This document explains **why** each phase matters, **when** to apply key decisions, and provides worked examples.
+See `tied/docs/processes.md` § PROC-IMPL_CODE_TEST_SYNC for the canonical 33-step checklist. This document explains **why** each phase matters, **when** to apply key decisions, and provides worked examples.
 
 ---
 
@@ -335,13 +335,13 @@ flowchart TD
 
 ## 7. References
 
-- **Canonical process definition**: `tied/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` — the 33-step checklist this document explains
-- **Pseudo-code block token rules**: `tied/processes.md` § `[PROC-IMPL_PSEUDOCODE_TOKENS]`; `tied/implementation-decisions.md` § Mandatory essence_pseudocode
-- **TDD session workflow**: `tied/processes.md` § `[PROC-TIED_DEV_CYCLE]`; [implementation-order.md](implementation-order.md)
-- **LEAP**: `tied/processes.md` § `[PROC-LEAP]`; [LEAP.md](LEAP.md)
-- **Test strategy**: `tied/processes.md` § `[PROC-TEST_STRATEGY]`
+- **Canonical process definition**: `tied/docs/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` — the 33-step checklist this document explains
+- **Pseudo-code block token rules**: `tied/docs/processes.md` § `[PROC-IMPL_PSEUDOCODE_TOKENS]`; `tied/docs/implementation-decisions.md` § Mandatory essence_pseudocode
+- **TDD session workflow**: `tied/docs/processes.md` § `[PROC-TIED_DEV_CYCLE]`; [implementation-order.md](implementation-order.md)
+- **LEAP**: `tied/docs/processes.md` § `[PROC-LEAP]`; [LEAP.md](LEAP.md)
+- **Test strategy**: `tied/docs/processes.md` § `[PROC-TEST_STRATEGY]`
 - **Agent operating guide**: [AGENTS.md](../../AGENTS.md); [ai-principles.md](./ai-principles.md)
-- **IMPL detail schema**: `tied/implementation-decisions.md` § Core data object; `tied/detail-files-schema.md`
+- **IMPL detail schema**: `tied/docs/implementation-decisions.md` § Core data object; `tied/docs/detail-files-schema.md`
 - **MCP usage**: [ai-agent-tied-mcp-usage.md](ai-agent-tied-mcp-usage.md)
 - **Unified agent checklist**: [agent-req-implementation-checklist.md](agent-req-implementation-checklist.md) (`[PROC-AGENT_REQ_CHECKLIST]`) — sequences all nine phases with CITDP, LEAP, TDD, and validation into a single step-by-step procedure. A trackable YAML is at [agent-req-implementation-checklist.yaml](agent-req-implementation-checklist.yaml) (copy to a unique per-request file per its header).
 - **Pseudo-code writing and validation**: [pseudocode-writing-and-validation.md](pseudocode-writing-and-validation.md) — how to write and validate IMPL pseudo-code; when to run validation; minimum gating rules. Checklist: [pseudocode-validation-checklist.yaml](pseudocode-validation-checklist.yaml) (`[PROC-PSEUDOCODE_VALIDATION]`)

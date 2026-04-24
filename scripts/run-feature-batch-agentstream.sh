@@ -10,7 +10,7 @@
 #   AGENTSTREAM  If set, path to a prebuilt agentstream executable (skips go run).
 #   AGENTSTREAM_TIED_MCP_PREFLIGHT=1  Opt in to static tied-yaml mcp.json validation before cursor agent (off by default).
 #   AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1  Skip preflight when it is enabled (or use agentstream -y).
-# Prompt files: <workspace>/agent-preload-contract.yaml (when present) is passed first, then any -p paths (see run-feature-batch.sh).
+# Prompt files: <workspace>/tied/agent-preload-contract.yaml (when present) is passed first, then any -p paths (see run-feature-batch.sh).
 #
 # Unsupported vs Ruby path:
 #   -r / --runner      Ignored with a warning (no Ruby runner).
@@ -236,7 +236,11 @@ main() {
     printf 'run-feature-batch-agentstream: warning: ignoring -r/--runner (Go agentstream has no Ruby runner)\n' >&2
   fi
 
-  local contract_path="${workspace}/agent-preload-contract.yaml"
+  local contract_path="${workspace}/tied/agent-preload-contract.yaml"
+  local legacy_contract_path="${workspace}/agent-preload-contract.yaml"
+  if [[ ! -f "$contract_path" && -f "$legacy_contract_path" ]]; then
+    contract_path="$legacy_contract_path"
+  fi
   local -a prompt_args=()
   if [[ -f "$contract_path" && -r "$contract_path" ]]; then
     local c_in

@@ -17,6 +17,18 @@
 #   TIED_BASE_PATH  -- absolute path to the tied/ directory (auto-detected if unset)
 #   TIED_MCP_BIN    -- path to mcp-server/dist/index.js (auto-detected if unset)
 #   TIED_CLI_QUIET_MCP_STDERR -- set to 0 to forward MCP server stderr (default: suppress)
+#
+# impl_detail_set_essence_pseudocode only (optional, mutually exclusive with each other):
+#   TIED_CLI_IMPL_ESSENCE_FILE -- UTF-8 file to use as the pseudo-code body (avoids a huge JSON string).
+#   TIED_CLI_IMPL_ESSENCE_STDIN=1 (or "true") -- read the body from stdin (e.g. pipe a .md file).
+# These inject essence_pseudocode and strip essence_pseudocode_path from the JSON args, then call the MCP
+# tool the same as inline essence_pseudocode. Example (token + optional metadata in JSON, body in file):
+#   TIED_CLI_IMPL_ESSENCE_FILE=$PWD/essence.md \
+#     tied-cli.sh impl_detail_set_essence_pseudocode @/tmp/impl-essence-args.json
+#   # /tmp/impl-essence-args.json: { "token": "IMPL-FOO", "metadata_last_updated": { "date": "2026-04-24" } }
+# Stdin (pipe or heredoc) instead of TIED_CLI_IMPL_ESSENCE_FILE:
+#   TIED_CLI_IMPL_ESSENCE_STDIN=1 \
+#     tied-cli.sh impl_detail_set_essence_pseudocode '{"token":"IMPL-FOO"}' < /path/to/essence.md
 
 set -euo pipefail
 

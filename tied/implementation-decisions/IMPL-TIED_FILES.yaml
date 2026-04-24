@@ -15,20 +15,21 @@ IMPL-TIED_FILES:
       - All required files and directories created correctly
       - Easy project bootstrapping with single command
   implementation_approach:
-    summary: Bootstrap script that creates tied/ directory, copies template files, and sets up base files
+    summary: Bootstrap script that creates tied/ directory, copies template files, sets up base files, and installs the tied-yaml CLI skill under .cursor/skills/tied-yaml/
     details:
       - Create tied/ directory at project root
       - Copy YAML index files from templates (requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml)
-      - Copy processes.md from templates/ (TIED-distributed) into client tied/ when missing; copy the other four guide .md from TIED source tied/ when missing; copy reference docs from TIED source tied/docs/ when missing (per DOCS_TO_COPY in copy_files.sh)
+      - Copy guide .md files, detail-files-schema.md, preload contract templates, and reference docs from TIED source tied/docs/ into client tied/docs/ when missing (per DOCS_TO_COPY in copy_files.sh)
       - Create detail subdirectories (requirements/, architecture-decisions/, implementation-decisions/)
-      - Copy base files to project root when missing (.cursorrules, AGENTS.md). In a TIED source repository, live guide content (including that repo’s tied/processes.md) is under tied/ and tied/docs/; agents and preload use client ./tied/ paths. New-client bootstrap for processes comes from templates/processes.md, not the TIED source live tied/processes.md
+      - Copy base files to project root when missing (.cursorrules, AGENTS.md). In a TIED source repository, live guide content is under tied/docs/; agents and preload use client ./tied/docs/ paths and ./tied/agent-preload-contract.yaml.
+      - Install the tied-yaml Cursor skill to .cursor/skills/tied-yaml/ (from the TIED repo’s .cursor/skills/tied-yaml when complete, else from tools/bundled-tied-yaml-skill/; overwritten each run). The canonical stdio client is .cursor/skills/tied-yaml/scripts/tied-cli.sh only; copy_files.sh does not create a project-root scripts/tied-cli.sh entry.
   code_locations:
     files:
       - path: copy_files.sh
         description: Bootstrap script that sets up TIED structure
         lines:
           - 1
-          - 163
+          - 386
     functions:
       - name: setup_tied_structure
         file: copy_files.sh
@@ -53,13 +54,13 @@ IMPL-TIED_FILES:
   detail_file: implementation-decisions/IMPL-TIED_FILES.yaml
   metadata:
     created:
-      date: 2025-12-18
+      date: 2025-12-18T00:00:00.000Z
       author: AI Agent
     last_updated:
-      date: 2026-02-06
+      date: "2026-04-24T00:00:00.000Z"
       author: AI Agent
-      reason: Restructured to v1.5.0 schema with machine-parseable fields
+      reason: 'Single tied-cli path: no scripts/tied-cli.sh symlink; canonical .cursor/skills/tied-yaml/scripts/tied-cli.sh'
     last_validated:
-      date: 2026-02-06
+      date: 2026-02-06T00:00:00.000Z
       validator: AI Agent
       result: pass

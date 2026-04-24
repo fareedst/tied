@@ -1,6 +1,6 @@
 # New Feature Process (`[PROC-NEW_FEATURE]`)
 
-This document describes the end-to-end procedure for implementing a new feature using the TIED methodology: from user prompt through documentation, testing, implementation, validation, and release. It invokes **[PROC-TIED_DEV_CYCLE](../processes.md)** and adds tooling and post-implementation steps. **For the agent-executable step-by-step procedure** (what to do in each phase), see **`tied/docs/agent-req-implementation-checklist.md`** (`[PROC-AGENT_REQ_CHECKLIST]`) which is the primary unified checklist; it sequences `tied/processes.md` § PROC-TIED_DEV_CYCLE with CITDP, IMPL_CODE_TEST_SYNC, LEAP, and validation. The diagram and phase summary below are for human reference.
+This document describes the end-to-end procedure for implementing a new feature using the TIED methodology: from user prompt through documentation, testing, implementation, validation, and release. It invokes **[PROC-TIED_DEV_CYCLE](processes.md)** and adds tooling and post-implementation steps. **For the agent-executable step-by-step procedure** (what to do in each phase), see **`tied/docs/agent-req-implementation-checklist.md`** (`[PROC-AGENT_REQ_CHECKLIST]`) which is the primary unified checklist; it sequences `tied/docs/processes.md` § PROC-TIED_DEV_CYCLE with CITDP, IMPL_CODE_TEST_SYNC, LEAP, and validation. The diagram and phase summary below are for human reference.
 
 ## 1. Flow diagram: User prompt to commit
 
@@ -99,13 +99,13 @@ flowchart TB
 | **E2E** | Add E2E tests after glue to protect the glue and the most basic features; document E2E-only behavior in IMPL. |
 | **Validate** | Full test suite; fill unit test gaps; run token/consistency validation. |
 | **Sync** | REQ/ARCH/IMPL and pseudo-code match final code/tests; sync indexes. |
-| **Release** | README, CHANGELOG, commit per [PROC-COMMIT_MESSAGES](../processes.md). |
+| **Release** | README, CHANGELOG, commit per [PROC-COMMIT_MESSAGES](processes.md). |
 
 ---
 
 ## 2. Governing process and tools
 
-- **Strictly follow** the procedure **[PROC-TIED_DEV_CYCLE](../processes.md)** for the full development cycle (all 10 steps). The mandatory implementation order (tests first, code via TDD, glue, E2E, validate, sync) is stated in that section.
+- **Strictly follow** the procedure **[PROC-TIED_DEV_CYCLE](processes.md)** for the full development cycle (all 10 steps). The mandatory implementation order (tests first, code via TDD, glue, E2E, validate, sync) is stated in that section.
 - **Use tied-yaml MCP tools** as the primary way to read/write TIED YAML:
   - **Index read/write:** `yaml_index_read`, `yaml_index_insert`, `yaml_index_update`, `yaml_index_list_tokens`, `yaml_index_filter`
   - **Detail read/write:** `yaml_detail_read`, `yaml_detail_read_many`, `yaml_detail_list`, `yaml_detail_create`, `yaml_detail_update`, `yaml_detail_delete`
@@ -137,4 +137,4 @@ flowchart TB
 8. **Unit tests** — If any unit tests are missing, add them and ensure they reference the appropriate REQ/ARCH/IMPL tokens.
 9. **E2E tests** — Recommend e2e tests where appropriate (critical user journeys). After approval, implement them.
 10. **README and CHANGELOG** — Update [README.md](../README.md) and [CHANGELOG.md](../CHANGELOG.md) for all changes in the session.
-11. **Commit** — Write a single commit message for the entire session **per [PROC-COMMIT_MESSAGES](../processes.md)**. In projects set up with TIED, use **[commit-guidelines.md](commit-guidelines.md)** as the quick reference (see also [CONTRIBUTING.md](../../CONTRIBUTING.md) for the TIED repo). Use the format and types defined in tied/processes.md; reference main REQ/ARCH/IMPL tokens in the body or footer when relevant.
+11. **Commit** — Write a single commit message for the entire session **per [PROC-COMMIT_MESSAGES](processes.md)**. In projects set up with TIED, use **[commit-guidelines.md](commit-guidelines.md)** as the quick reference (see also [CONTRIBUTING.md](../../CONTRIBUTING.md) for the TIED repo). Use the format and types defined in tied/docs/processes.md; reference main REQ/ARCH/IMPL tokens in the body or footer when relevant.

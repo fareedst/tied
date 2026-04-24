@@ -43,14 +43,14 @@ Getting started with STDD in a new project takes just **5 minutes**:
 
 ```bash
 # In your new project directory (copy from TIED repo root; same filename in tied/)
-cp requirements.md tied/requirements.md
+cp requirements.md tied/docs/requirements.md
 cp requirements.yaml tied/requirements.yaml
-cp architecture-decisions.md tied/architecture-decisions.md
+cp architecture-decisions.md tied/docs/architecture-decisions.md
 cp architecture-decisions.yaml tied/architecture-decisions.yaml
-cp implementation-decisions.md tied/implementation-decisions.md
+cp implementation-decisions.md tied/docs/implementation-decisions.md
 cp implementation-decisions.yaml tied/implementation-decisions.yaml
-cp processes.md tied/processes.md
-cp semantic-tokens.md tied/semantic-tokens.md
+cp processes.md tied/docs/processes.md
+cp semantic-tokens.md tied/docs/semantic-tokens.md
 cp semantic-tokens.yaml tied/semantic-tokens.yaml
 cp AGENTS.md AGENTS.md              # Canonical AI agent guide
 cp .cursorrules .cursorrules        # Cursor loader (optional)

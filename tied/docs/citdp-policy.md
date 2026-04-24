@@ -1,6 +1,6 @@
 # CITDP record policy: when to create vs skip
 
-**Audience**: Teams using `[PROC-AGENT_REQ_CHECKLIST]` and the `persist-citdp-record` step. Process anchor: `tied/processes.md` § `[PROC-CITDP]`.
+**Audience**: Teams using `[PROC-AGENT_REQ_CHECKLIST]` and the `persist-citdp-record` step. Process anchor: `tied/docs/processes.md` § `[PROC-CITDP]`.
 
 This file is **project-owned**. After `copy_files.sh`, it lives at `tied/docs/citdp-policy.md` in client workspaces. Adjust the bullets below for your team; the checklist references this path for “create vs skip” decisions.
 
@@ -26,6 +26,6 @@ After `copy_files.sh`, use the layout in **`./tied/docs/citdp-record-template.ya
 
 ## References
 
-- `tied/processes.md` § `[PROC-CITDP]` (especially step 8 — persistence).
+- `tied/docs/processes.md` § `[PROC-CITDP]` (especially step 8 — persistence).
 - `tied/docs/agent-req-implementation-checklist.md` — `persist-citdp-record` and earlier CITDP-style steps.
 - At repository root, `docs/leap-tied-citdp-costs-and-benefits.md` expands on tradeoffs (not always mirrored under `tied/docs/`).

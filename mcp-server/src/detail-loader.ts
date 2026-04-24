@@ -16,7 +16,7 @@ import {
   updateRecord,
   type IndexName,
 } from "./yaml-loader.js";
-import { safeDump, safeDumpTiedDetailDoc } from "./yaml-dump.js";
+import { safeDumpTiedDetailDoc } from "./yaml-dump.js";
 import { mergeRecordUpdate } from "./record-merge.js";
 
 export type DetailType = "requirement" | "architecture" | "implementation";
@@ -111,6 +111,34 @@ export function getProjectDetailPath(token: string): string | null {
   return path.join(base, subdir, `${token}.yaml`);
 }
 
+/**
+ * Sibling file for IMPL essence pseudo-code: raw markdown / text next to the detail YAML
+ * (e.g. `.../IMPL-FOO.yaml` and `.../IMPL-FOO-pseudocode.md`).
+ */
+export function getImplPseudocodeSidecarPath(detailYamlPath: string, token: string): string {
+  return path.join(path.dirname(detailYamlPath), `${token}-pseudocode.md`);
+}
+
+/**
+ * Write IMPL-TOKEN.yaml and optional IMPL-TOKEN-pseudocode.md. REQ/ARCH use YAML-only embedding via safeDumpTiedDetailDoc.
+ */
+function writeTiedDetailToDisk(token: string, filePath: string, record: Record<string, unknown>): void {
+  const out = safeDumpTiedDetailDoc(token, record);
+  fs.writeFileSync(filePath, out, "utf8");
+  if (!token.startsWith("IMPL-")) return;
+  const side = getImplPseudocodeSidecarPath(filePath, token);
+  if (Object.prototype.hasOwnProperty.call(record, "essence_pseudocode")) {
+    const ep = record.essence_pseudocode;
+    if (typeof ep === "string") {
+      if (ep.length > 0) {
+        fs.writeFileSync(side, ep, "utf8");
+      } else if (fs.existsSync(side)) {
+        fs.unlinkSync(side);
+      }
+    }
+  }
+}
+
 /** Sentinel keys for markdown detail content (hybrid layout). */
 export const DETAIL_MARKDOWN_RAW = "_raw_markdown";
 export const DETAIL_FORMAT = "_format";
@@ -140,7 +168,16 @@ export function loadDetail(token: string): Record<string, unknown> | null {
     if (filePath.endsWith(".md")) {
       return { [DETAIL_MARKDOWN_RAW]: raw, [DETAIL_FORMAT]: "markdown" };
     }
-    return yamlRecordForToken(raw, token);
+    const record = yamlRecordForToken(raw, token);
+    if (!record) return null;
+    if (token.startsWith("IMPL-") && filePath.endsWith(".yaml")) {
+      const side = getImplPseudocodeSidecarPath(filePath, token);
+      if (fs.existsSync(side)) {
+        const body = fs.readFileSync(side, "utf8");
+        record.essence_pseudocode = body;
+      }
+    }
+    return record;
   } catch {
     return null;
   }
@@ -172,7 +209,10 @@ export function listDetailTokens(type: DetailType): string[] {
       const names = fs.readdirSync(dir);
       for (const n of names) {
         if (n.endsWith(".yaml")) seen.add(n.slice(0, -5));
-        else if (n.endsWith(".md")) seen.add(n.slice(0, -3));
+        else if (n.endsWith(".md") && /-pseudocode\.md$/.test(n)) {
+          // IMPL-FOO-pseudocode.md is a sidecar, not a top-level FOO-pseudocode token
+          continue;
+        } else if (n.endsWith(".md")) seen.add(n.slice(0, -3));
       }
     } catch {
       // ignore
@@ -197,8 +237,7 @@ export function writeDetail(
   try {
     const dir = path.dirname(filePath);
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-    const out = safeDumpTiedDetailDoc(token, record);
-    fs.writeFileSync(filePath, out, "utf8");
+    writeTiedDetailToDisk(token, filePath, record);
     if (options?.syncIndex) {
       const indexName = getIndexName(token);
       if (indexName) {
@@ -233,8 +272,7 @@ export function updateDetail(token: string, updates: Record<string, unknown>): {
   }
   const merged = mergeRecordUpdate(existing as Record<string, unknown>, updates);
   try {
-    const out = safeDumpTiedDetailDoc(token, merged);
-    fs.writeFileSync(filePath, out, "utf8");
+    writeTiedDetailToDisk(token, filePath, merged);
     return { ok: true };
   } catch (e) {
     const message = e instanceof Error ? e.message : String(e);
@@ -295,6 +333,10 @@ export function deleteDetail(
   if (!fs.existsSync(filePath)) return { ok: false, error: `No detail file found for token: ${token}` };
   try {
     fs.unlinkSync(filePath);
+    if (token.startsWith("IMPL-") && filePath.endsWith(".yaml")) {
+      const side = getImplPseudocodeSidecarPath(filePath, token);
+      if (fs.existsSync(side)) fs.unlinkSync(side);
+    }
     if (options?.syncIndex) {
       const indexName = getIndexName(token);
       if (indexName) {
