@@ -950,3 +950,75 @@ IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT:
 
     # [PROC-IMPL_CODE_TEST_SYNC] Phase H — E2E e2e_only boundary: [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-MODULE_VALIDATION] [PROC-TEST_STRATEGY] [PROC-AGENT_REQ_CHECKLIST] — no e2e_only blocks; string transform and CLI are unit + composition; phase_h_tests []; named platform UI constraint n/a. IMPL-ATDD-E2E-AGENT_STREAM is a separate ATDD subprocess scope.
   detail_file: implementation-decisions/IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT.yaml
+IMPL-GOAGENT-CHECKLIST-CONTROL:
+  name: agentstream checklist control parser and router
+  status: Active
+  cross_references:
+    - ARCH-GOAGENT-CHECKLIST-CONTROL
+    - REQ-GOAGENT-CHECKLIST-CONTROL
+  rationale:
+    why: Implements explicit runtime checklist control while preserving existing streamed output and static default flow.
+    problems_solved:
+      - No way for a turn to alter remaining checklist turns
+      - Unsafe natural-language control parsing
+    benefits:
+      - Strict parser package
+      - Validated goto target handling
+      - Focused loop-back from unit-test-green to flag-contradictory-specs
+  implementation_approach:
+    summary: Capture assistant text from executor, parse optional agentstream_control JSON, and mutate the live checklist queue only for validated actions.
+    details:
+      - executor.Run returns session id, exit code, and captured assistant text while continuing to stream text to stdout.
+      - control.Parse scans for strict fenced JSON containing agentstream_control.
+      - control.Validate checks schema_version, action, and target against known checklist slugs.
+      - cmd/agentstream uses a dynamic queue loop for live runs and preserves dry-run static rendering.
+  code_locations:
+    files:
+      - path: tools/agentstream/control/control.go
+        description: Parse and validate agentstream_control blocks [REQ-GOAGENT-CHECKLIST-CONTROL] [ARCH-GOAGENT-CHECKLIST-CONTROL] [IMPL-GOAGENT-CHECKLIST-CONTROL]
+      - path: tools/agentstream/executor/executor.go
+        description: Capture assistant text while streaming output
+      - path: tools/agentstream/cmd/agentstream/main.go
+        description: Apply validated control actions to remaining checklist queue
+    functions:
+      - name: Parse
+        file: tools/agentstream/control/control.go
+        description: Extract strict agentstream_control JSON
+      - name: Validate
+        file: tools/agentstream/control/control.go
+        description: Validate action and target slug
+  traceability:
+    architecture:
+      - ARCH-GOAGENT-CHECKLIST-CONTROL
+    requirements:
+      - REQ-GOAGENT-CHECKLIST-CONTROL
+    tests:
+      - tools/agentstream/control/control_test.go
+      - tools/agentstream/pipeline/pipeline_test.go
+      - tools/agentstream/checklist/checklist_test.go
+      - tools/agentstream/executor/executor_test.go
+    code_annotations:
+      - IMPL-GOAGENT-CHECKLIST-CONTROL
+      - ARCH-GOAGENT-CHECKLIST-CONTROL
+      - REQ-GOAGENT-CHECKLIST-CONTROL
+  related_decisions:
+    depends_on:
+      - IMPL-GOAGENT-PIPELINE
+      - IMPL-GOAGENT-EXECUTOR
+      - IMPL-GOAGENT-CHECKLIST
+    supersedes: []
+    see_also:
+      - PROC-AGENT_REQ_CHECKLIST
+  detail_file: implementation-decisions/IMPL-GOAGENT-CHECKLIST-CONTROL.yaml
+  metadata:
+    created:
+      date: "2026-04-24T00:00:00.000Z"
+      author: AI Agent
+    last_updated:
+      date: "2026-04-24T00:00:00.000Z"
+      author: AI Agent
+      reason: Implemented parser, queue routing, executor transcript capture, and loop-back marker clearance
+    last_validated:
+      date: "2026-04-24T00:00:00.000Z"
+      validator: go test ./tools/agentstream/... and tied_validate_consistency
+      result: pass

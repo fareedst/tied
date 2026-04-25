@@ -1,0 +1,21 @@
+name: agentstream_control_fixture
+version: "0"
+process_token: '[PROC-TEST]'
+loop_back_clearance:
+  rerouted-next:
+    clear_slugs:
+      - rerouted-next
+steps:
+  - slug: trigger-special
+    title: Trigger SPECIAL control payload
+    tasks:
+      - Simulate recent code changes where the focused RED test now passes but older tests fail.
+      - Emit the strict agentstream_control JSON payload targeting rerouted-next.
+  - slug: normal-next
+    title: Normal next step
+    tasks:
+      - This step should be skipped when the SPECIAL control payload is honored.
+  - slug: rerouted-next
+    title: Rerouted next step
+    tasks:
+      - This step should run immediately after trigger-special when agentstream rewrites the queue.

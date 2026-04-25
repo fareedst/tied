@@ -153,6 +153,45 @@ func SliceFromFirstTurn(turns []agentstream.Turn, first int) ([]agentstream.Turn
 	return turns[first-1:], nil
 }
 
+// KnownStepStubs returns checklist step slugs present in the current turn queue.
+// REQ-GOAGENT-CHECKLIST-CONTROL: targets are validated against known checklist slugs.
+func KnownStepStubs(turns []agentstream.Turn) map[string]bool {
+	out := make(map[string]bool)
+	for _, t := range turns {
+		if strings.TrimSpace(t.StepStub) != "" {
+			out[t.StepStub] = true
+		}
+	}
+	return out
+}
+
+// ReplaceRemainingFromStep rewrites the live queue after completedIdx so the
+// next turn starts at targetStep. Earlier completed turns stay in the transcript.
+// REQ-GOAGENT-CHECKLIST-CONTROL: validated goto actions modify checklist order.
+func ReplaceRemainingFromStep(turns []agentstream.Turn, completedIdx int, targetStep string) ([]agentstream.Turn, error) {
+	if completedIdx < 0 || completedIdx >= len(turns) {
+		return nil, fmt.Errorf("completed turn index %d out of range", completedIdx)
+	}
+	targetStep = strings.TrimSpace(targetStep)
+	if targetStep == "" {
+		return nil, fmt.Errorf("target step is empty")
+	}
+	targetIdx := -1
+	for i, t := range turns {
+		if t.StepStub == targetStep {
+			targetIdx = i
+			break
+		}
+	}
+	if targetIdx < 0 {
+		return nil, fmt.Errorf("target step not found in turn queue: %s", targetStep)
+	}
+	next := make([]agentstream.Turn, 0, completedIdx+1+len(turns)-targetIdx)
+	next = append(next, turns[:completedIdx+1]...)
+	next = append(next, turns[targetIdx:]...)
+	return next, nil
+}
+
 // SessionForTurn returns resume ID for this turn index (nil = new session). REQ-GOAGENT-PIPELINE.
 func SessionForTurn(idx int, initialSession string, chain []bool, runningSession string) string {
 	if idx == 0 {

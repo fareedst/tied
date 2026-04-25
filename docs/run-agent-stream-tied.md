@@ -17,6 +17,10 @@ This repository vendors the **ATDD** Ruby harness (`run_agent_stream.rb`) so age
 - [run-agent-stream-impl-e2e.md](run-agent-stream-impl-e2e.md) — subprocess stream-json harness (`IMPL-ATDD-E2E-AGENT_STREAM`)
 - [run-agent-stream-impl-composition.md](run-agent-stream-impl-composition.md) — argv/YAML delegation and export (`IMPL-ATDD-COMPOS-*`)
 
+## Go `agentstream` (optional)
+
+The repo also ships **[`tools/agentstream`](../tools/agentstream/README.md)** (Go), which covers the same feature-spec / lead-checklist / TDD YAML roles as the Ruby runner, plus **dynamic checklist control** (fenced JSON `agentstream_control` / `goto` on live runs) and a sponsor-only driver, **[`scripts/feature-relay.sh`](../scripts/feature-relay.sh)**. Prefer **`run-feature-batch-agentstream.sh`** when you need parity with the Ruby batch flags. See the Go README for dry-run, MCP preflight, and the control JSON schema.
+
 ## Quick start (from repo root)
 
 ```bash

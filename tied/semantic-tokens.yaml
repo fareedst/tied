@@ -880,3 +880,42 @@ IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT:
   metadata:
     registered: "2026-04-24T00:00:00.000Z"
     last_updated: "2026-04-24T00:00:00.000Z"
+REQ-GOAGENT-CHECKLIST-CONTROL:
+  type: REQ
+  name: Dynamic checklist control routing
+  status: Implemented
+  description: agentstream can honor explicit runtime checklist routing decisions
+  cross_references:
+    - ARCH-GOAGENT-CHECKLIST-CONTROL
+    - IMPL-GOAGENT-CHECKLIST-CONTROL
+  source_index: requirements.yaml
+  detail_file: requirements/REQ-GOAGENT-CHECKLIST-CONTROL.yaml
+  metadata:
+    registered: "2026-04-24T00:00:00.000Z"
+    last_updated: "2026-04-24T00:00:00.000Z"
+ARCH-GOAGENT-CHECKLIST-CONTROL:
+  type: ARCH
+  name: Structured checklist control trailer
+  status: Active
+  description: Explicit agentstream_control trailer is the runtime control plane
+  cross_references:
+    - REQ-GOAGENT-CHECKLIST-CONTROL
+    - IMPL-GOAGENT-CHECKLIST-CONTROL
+  source_index: architecture-decisions.yaml
+  detail_file: architecture-decisions/ARCH-GOAGENT-CHECKLIST-CONTROL.yaml
+  metadata:
+    registered: "2026-04-24T00:00:00.000Z"
+    last_updated: "2026-04-24T00:00:00.000Z"
+IMPL-GOAGENT-CHECKLIST-CONTROL:
+  type: IMPL
+  name: agentstream checklist control parser and router
+  status: Active
+  description: Strict parser and queue router for validated checklist control actions
+  cross_references:
+    - REQ-GOAGENT-CHECKLIST-CONTROL
+    - ARCH-GOAGENT-CHECKLIST-CONTROL
+  source_index: implementation-decisions.yaml
+  detail_file: implementation-decisions/IMPL-GOAGENT-CHECKLIST-CONTROL.yaml
+  metadata:
+    registered: "2026-04-24T00:00:00.000Z"
+    last_updated: "2026-04-24T00:00:00.000Z"

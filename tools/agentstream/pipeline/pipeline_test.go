@@ -118,6 +118,33 @@ steps:
 	}
 }
 
+// REQ-GOAGENT-CHECKLIST-CONTROL confirms the documented quick smoke slice loads
+// both the SPECIAL/control target and the step that can emit the payload.
+func TestBuild_canonicalChecklistControlSliceIncludesTargetAndEmitter(t *testing.T) {
+	checklistPath := filepath.Clean("../../tied/docs/agent-req-implementation-checklist.yaml")
+	if _, err := os.Stat(checklistPath); err != nil {
+		t.Skipf("canonical checklist not available: %v", err)
+	}
+	turns, err := Build(Input{
+		LeadChecklistYAML:       checklistPath,
+		LeadChecklistSkipSub:    true,
+		LeadChecklistStepFromID: "flag-contradictory-specs",
+		LeadChecklistStepToID:   "unit-refactor",
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	known := KnownStepStubs(turns)
+	for _, slug := range []string{"flag-contradictory-specs", "unit-test-green", "unit-refactor"} {
+		if !known[slug] {
+			t.Fatalf("canonical control smoke slice missing %q; loaded=%v", slug, known)
+		}
+	}
+	if turns[0].StepStub != "flag-contradictory-specs" || turns[len(turns)-1].StepStub != "unit-refactor" {
+		t.Fatalf("unexpected bounded slice edges: first=%q last=%q", turns[0].StepStub, turns[len(turns)-1].StepStub)
+	}
+}
+
 // REQ: REQ-GOAGENT-PIPELINE
 func TestApplyPromptFilePreload_newSessionAfterChainBreak(t *testing.T) {
 	preload := []string{"PREAMBLE"}
@@ -147,6 +174,47 @@ func TestApplyPromptFilePreload_respectsInitialSession(t *testing.T) {
 	ApplyPromptFilePreload(turns, "existing-session", preload)
 	if len(turns[0].Parts) != 1 || turns[0].Parts[0] != "first" {
 		t.Fatalf("with --session-id turn1 resumes, no prepend: %#v", turns[0].Parts)
+	}
+}
+
+// REQ-GOAGENT-CHECKLIST-CONTROL validates unit-test-green -> flag-contradictory-specs queue rewrite.
+func TestReplaceRemainingFromStep_loopBackToContradictions(t *testing.T) {
+	turns := []agentstream.Turn{
+		{Parts: []string{"flag"}, StepStub: "flag-contradictory-specs", ChainFromPrevious: true},
+		{Parts: []string{"resolve"}, StepStub: "resolve-pseudocode", ChainFromPrevious: true},
+		{Parts: []string{"red"}, StepStub: "unit-test-red", ChainFromPrevious: false},
+		{Parts: []string{"green"}, StepStub: "unit-test-green", ChainFromPrevious: true},
+		{Parts: []string{"refactor"}, StepStub: "unit-refactor", ChainFromPrevious: true},
+	}
+	got, err := ReplaceRemainingFromStep(turns, 3, "flag-contradictory-specs")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var stubs []string
+	for _, t := range got {
+		stubs = append(stubs, t.StepStub)
+	}
+	want := []string{
+		"flag-contradictory-specs",
+		"resolve-pseudocode",
+		"unit-test-red",
+		"unit-test-green",
+		"flag-contradictory-specs",
+		"resolve-pseudocode",
+		"unit-test-red",
+		"unit-test-green",
+		"unit-refactor",
+	}
+	if strings.Join(stubs, ",") != strings.Join(want, ",") {
+		t.Fatalf("stubs mismatch:\n got %v\nwant %v", stubs, want)
+	}
+}
+
+// REQ-GOAGENT-CHECKLIST-CONTROL rejects invalid dynamic routing targets.
+func TestReplaceRemainingFromStep_missingTarget(t *testing.T) {
+	_, err := ReplaceRemainingFromStep([]agentstream.Turn{{StepStub: "unit-test-green"}}, 0, "missing")
+	if err == nil {
+		t.Fatal("want missing target error")
 	}
 }
 

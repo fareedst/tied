@@ -1,7 +1,7 @@
 // Command agentstream drives the Cursor agent CLI with multi-turn YAML prompts.
-// REQ: REQ-GOAGENT-CLI-CONFIG, REQ-GOAGENT-PIPELINE, REQ-GOAGENT-EXECUTOR
-// ARCH: ARCH-GOAGENT-CLI, ARCH-GOAGENT-PIPELINE
-// IMPL: IMPL-GOAGENT-CMD
+// REQ: REQ-GOAGENT-CLI-CONFIG, REQ-GOAGENT-PIPELINE, REQ-GOAGENT-EXECUTOR, REQ-GOAGENT-CHECKLIST-CONTROL
+// ARCH: ARCH-GOAGENT-CLI, ARCH-GOAGENT-PIPELINE, ARCH-GOAGENT-CHECKLIST-CONTROL
+// IMPL: IMPL-GOAGENT-CLI-CMD, IMPL-GOAGENT-CHECKLIST-CONTROL
 package main
 
 import (
@@ -16,7 +16,9 @@ import (
 	"golang.org/x/term"
 
 	"stdd/agentstream"
+	"stdd/agentstream/checklist"
 	"stdd/agentstream/config"
+	"stdd/agentstream/control"
 	"stdd/agentstream/executor"
 	"stdd/agentstream/featurespec"
 	"stdd/agentstream/pipeline"
@@ -123,7 +125,10 @@ func main() {
 
 	ctx := context.Background()
 	running := ""
-	for i, t := range turns {
+	knownSlugs := pipeline.KnownStepStubs(turns)
+	for i := 0; i < len(turns); i++ {
+		t := turns[i]
+		chain = pipeline.ChainBetween(turns)
 		sess := pipeline.SessionForTurn(i, cfg.SessionID, chain, running)
 		label := " (new session)"
 		if sess != "" {
@@ -133,10 +138,10 @@ func main() {
 		if t.StepStub != "" {
 			stub = " [" + t.StepStub + "]"
 		}
-		fmt.Fprintf(os.Stderr, "\n--- turn %d/%d%s%s ---\n", cfg.FirstTurn+i, originalTotal, label, stub)
+		fmt.Fprintf(os.Stderr, "\n--- turn %d/%d%s%s ---\n", cfg.FirstTurn+i, len(turns), label, stub)
 
 		argv := executor.AgentArgv(cfg.AgentPath, cfg.Workspace, cfg.Model, sess, t.Parts)
-		sid, code, err := executor.Run(ctx, argv, os.Stdout, os.Stderr)
+		sid, transcript, code, err := executor.Run(ctx, argv, os.Stdout, os.Stderr)
 		if err != nil {
 			if code != 0 {
 				os.Exit(code)
@@ -149,6 +154,38 @@ func main() {
 		}
 		fmt.Fprintf(os.Stderr, "session_id=%s\n", sid)
 		running = string(sid)
+		decision, ok, err := control.Parse(transcript)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "agentstream: control parse error: %v\n", err)
+			os.Exit(1)
+		}
+		if !ok {
+			continue
+		}
+		if err := control.Validate(decision, knownSlugs); err != nil {
+			fmt.Fprintf(os.Stderr, "agentstream: invalid control block: %v\n", err)
+			os.Exit(1)
+		}
+		if decision.Action == control.ActionGoto {
+			if cfg.LeadChecklistYAML != "" {
+				cleared, err := checklist.ApplyLoopBackClearance(cfg.LeadChecklistYAML, decision.Target)
+				if err != nil {
+					fmt.Fprintf(os.Stderr, "agentstream: loop-back clearance failed: %v\n", err)
+					os.Exit(1)
+				}
+				if len(cleared) > 0 {
+					fmt.Fprintf(os.Stderr, "DIAGNOSTIC: agentstream_control goto %s; cleared checklist slugs: %s\n", decision.Target, strings.Join(cleared, ", "))
+				}
+			}
+			updated, err := pipeline.ReplaceRemainingFromStep(turns, i, decision.Target)
+			if err != nil {
+				fmt.Fprintf(os.Stderr, "agentstream: control routing failed: %v\n", err)
+				os.Exit(1)
+			}
+			turns = updated
+			knownSlugs = pipeline.KnownStepStubs(turns)
+			fmt.Fprintf(os.Stderr, "DIAGNOSTIC: agentstream_control goto %s: %s\n", decision.Target, decision.Reason)
+		}
 	}
 }
 

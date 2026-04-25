@@ -86,6 +86,24 @@ By default, **after** every main checklist step (through `traceable-commit`), th
 - Prefer **`--lead-checklist-skip-sub`** when you want **one turn per main step only** and rely on `CALL` semantics inside each step for subs.
 - If subs are included, agents should treat trailing sub turns as **no-op** unless new TIED/YAML work is pending (see `tied/docs/agent-req-implementation-checklist.yaml` description / `traceable-commit` tasks).
 
+### Dynamic checklist control
+
+Live checklist turns can alter the remaining turn queue only by emitting a strict fenced JSON control block. `agentstream` ignores prose such as “GOTO flag-contradictory-specs” unless it appears inside `agentstream_control` JSON:
+
+```json
+{
+  "agentstream_control": {
+    "schema_version": 1,
+    "action": "goto",
+    "target": "flag-contradictory-specs",
+    "reason": "Focused RED test passes, but existing tests fail after GREEN code.",
+    "evidence": ["go test ./...: TestExistingBehavior failed"]
+  }
+}
+```
+
+Supported action: `goto`. The target must match a loaded checklist step slug. On a valid `goto`, the live runner clears configured `loop_back_clearance.<target>.clear_slugs` completion markers in the checklist YAML, replaces the remaining queue with turns starting at the target slug, and continues with normal `agentstream_new_session` / resume behavior.
+
 ## Lead checklist placeholders (`{{KEY}}`)
 
 Static checklist YAML can include tokens such as `{{REQ_TOKEN}}` or `{{CHANGE_TITLE}}`. Pass values at invocation time:

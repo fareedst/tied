@@ -275,6 +275,56 @@ sub_procedures:
 	}
 }
 
+// REQ-GOAGENT-CHECKLIST-CONTROL clears configured loop-back completion markers.
+func TestApplyLoopBackClearance(t *testing.T) {
+	dir := t.TempDir()
+	p := filepath.Join(dir, "checklist.yaml")
+	y := `
+name: s
+version: "0"
+loop_back_clearance:
+  flag-contradictory-specs:
+    clear_slugs:
+      - flag-contradictory-specs
+      - unit-test-green
+steps:
+  # slug flag-contradictory-specs time 1711111111
+  - slug: flag-contradictory-specs
+    title: Flag
+    tasks: [f]
+  # slug unit-test-green time 1711111112
+  - slug: unit-test-green
+    title: Green
+    tasks: [g]
+  # slug unit-refactor time 1711111113
+  - slug: unit-refactor
+    title: Refactor
+    tasks: [r]
+`
+	if err := os.WriteFile(p, []byte(strings.TrimLeft(y, "\n")), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	cleared, err := ApplyLoopBackClearance(p, "flag-contradictory-specs")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if strings.Join(cleared, ",") != "flag-contradictory-specs,unit-test-green" {
+		t.Fatalf("unexpected cleared slugs: %v", cleared)
+	}
+	got, err := os.ReadFile(p)
+	if err != nil {
+		t.Fatal(err)
+	}
+	body := string(got)
+	if strings.Contains(body, "flag-contradictory-specs time 1711111111") ||
+		strings.Contains(body, "unit-test-green time 1711111112") {
+		t.Fatalf("loop-back markers were not cleared:\n%s", body)
+	}
+	if !strings.Contains(body, "unit-refactor time 1711111113") {
+		t.Fatalf("unrelated marker should remain:\n%s", body)
+	}
+}
+
 func TestMessagesFromYAML_duplicateSlug(t *testing.T) {
 	dir := t.TempDir()
 	p := filepath.Join(dir, "bad.yaml")

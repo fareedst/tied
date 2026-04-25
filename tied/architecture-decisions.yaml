@@ -815,3 +815,65 @@ ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT:
       validator: AI Agent
       result: pass
   detail_file: architecture-decisions/ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT.yaml
+ARCH-GOAGENT-CHECKLIST-CONTROL:
+  name: Structured checklist control trailer
+  status: Active
+  cross_references:
+    - REQ-GOAGENT-CHECKLIST-CONTROL
+  rationale:
+    why: Runtime routing must be explicit and machine-validated instead of inferred from prose.
+    problems_solved:
+      - Ambiguous natural-language GOTO mentions
+      - Static checklist turn queues cannot honor runtime branch decisions
+    benefits:
+      - Strict control block parser
+      - Known-slug validation before queue mutation
+      - Existing stream output remains visible to users
+  alternatives_considered:
+    - name: Parse natural-language clues
+      pros:
+        - No output protocol required
+      cons:
+        - False positives from explanations or history
+        - Hard to test deterministically
+      rejected_reason: Checklist control must be explicit and deterministic.
+  implementation_approach:
+    summary: A fenced JSON agentstream_control trailer describes validated actions such as goto; the CLI applies the action to the remaining checklist queue.
+    details:
+      - Only parse strict JSON control blocks named agentstream_control.
+      - Validate action and target against the loaded checklist slug set.
+      - For goto, replace the remaining checklist turn queue from the target slug and preserve normal session handling.
+  traceability:
+    requirements:
+      - REQ-GOAGENT-CHECKLIST-CONTROL
+    implementation:
+      - IMPL-GOAGENT-CHECKLIST-CONTROL
+    tests:
+      - tools/agentstream/control/control_test.go
+      - tools/agentstream/pipeline/pipeline_test.go
+      - tools/agentstream/checklist/checklist_test.go
+      - tools/agentstream/executor/executor_test.go
+    code_annotations:
+      - ARCH-GOAGENT-CHECKLIST-CONTROL
+      - REQ-GOAGENT-CHECKLIST-CONTROL
+  related_decisions:
+    depends_on:
+      - ARCH-GOAGENT-PIPELINE
+      - ARCH-GOAGENT-EXECUTOR
+      - ARCH-GOAGENT-YAML-STEPS
+    informs:
+      - IMPL-GOAGENT-CHECKLIST-CONTROL
+    see_also: []
+  metadata:
+    created:
+      date: "2026-04-24T00:00:00.000Z"
+      author: AI Agent
+    last_updated:
+      date: "2026-04-24T00:00:00.000Z"
+      author: AI Agent
+      reason: Implemented structured control routing architecture
+    last_validated:
+      date: "2026-04-24T00:00:00.000Z"
+      validator: go test ./tools/agentstream/... and tied_validate_consistency
+      result: pass
+  detail_file: architecture-decisions/ARCH-GOAGENT-CHECKLIST-CONTROL.yaml

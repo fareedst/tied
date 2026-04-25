@@ -80,6 +80,8 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 
 **Agentstream (`--lead-checklist-yaml` in the consumer repo’s `tools/agentstream` and `tools/agent-stream`):** The executable YAML sets `agentstream_new_session: true` on the main steps that begin a handoff in the table (for example `risk-assessment` through to `sync-tied-stack` per the canonical `tied/docs/agent-req-implementation-checklist.yaml` in the TIED repository). The driver then issues that turn without `--resume` (a new Cursor agent session). Missing or `false` keeps chaining from the previous turn. This key is a **driver hint**; the procedural checklist and gating do not depend on it, and other clients may ignore it. Mid-run new sessions are independent of a prior turn’s `session_id`; `--session-id` (when supported) still applies to **turn 1** of the run only.
 
+**Go `agentstream` only — dynamic checklist control:** On **live** runs, the driver may read a **machine-readable** fenced JSON trailer **`agentstream_control`** (not natural-language `GOTO` in prose) and apply **`action: goto`** to replace the **remaining** scheduled checklist turns from a validated step **`target`**, optionally clearing `loop_back_clearance` completion markers on the on-disk lead checklist. Schema and behavior: [tools/agentstream/README.md](../tools/agentstream/README.md) (“Dynamic checklist control”).
+
 **Session preload file:** When a workspace has **`tied/agent-preload-contract.yaml`** (optional; used by agentstream and batch scripts when present), the checklist’s **`author-architecture`** and **`persist-implementation-records`** steps require creating or updating it (see the bundled [`agent-preload-contract-template.yaml`](agent-preload-contract-template.yaml). A filled preload is not a substitute for REQ+ARCH-bounded system definition; refresh after **ARCH-locked** constants, then after **IMPL-locked** `code_locations` and paths. **`sync-tied-stack`** re-checks the file if REQ/IMPL status or `traceability.tests` changed. See the executable YAML in `tied/docs/agent-req-implementation-checklist.yaml` for exact task text.
 
 **Weaker handoffs (use only for very large work):** After `change-definition` or `impact-discovery`, REQ/ARCH/IMPL may not be complete on disk—treat the new session as **resume and verify**, not “TIED is done.” After `author-architecture`, a new session at `catalog-pseudocode-contracts` can work if ARCH/REQ files were actually written and indexed.
@@ -379,11 +381,12 @@ LOOP FOR each IMPL block classified as unit or integration in test-strategy:
    ```
    Nested blocks follow the same rules: same token set comments only *how*; different token set names that set.
 3. Run tests. IF tests fail THEN iterate on production code only (do not add new tests in GREEN).
-4. Run language-specific lint: Rust → `bun run lint:rust`; TypeScript → `bunx tsc -b` or `bun run lint:ts`; Swift → `swift build && swift test`; YAML → run `lint_yaml` on changed files per [PROC-YAML_EDIT_LOOP] (`processes.md`). IF lint fails THEN fix before proceeding.
+4. **IF the focused RED test now passes but other existing tests still fail** THEN stop iterating production code in this turn; emit a **final** fenced JSON **`agentstream_control`** with **`action: goto`**, **`target: flag-contradictory-specs`**, and evidence, so the Go **`agentstream`** driver can re-queue the remaining checklist to resolve cross-IMPL or contradictory specs before more GREEN work (see executable checklist YAML and [tools/agentstream/README.md](../tools/agentstream/README.md)).
+5. Run language-specific lint: Rust → `bun run lint:rust`; TypeScript → `bunx tsc -b` or `bun run lint:ts`; Swift → `swift build && swift test`; YAML → run `lint_yaml` on changed files per [PROC-YAML_EDIT_LOOP] (`processes.md`). IF lint fails THEN fix before proceeding.
 
-**Branch**: IF GREEN reveals the pseudo-code is incomplete, wrong, or requires a new dependency THEN **CALL sub-leap-micro-cycle**. Do not silently diverge.
+**Branch**: IF the focused test is green but unrelated tests break THEN **GOTO** **`flag-contradictory-specs`** via machine-readable **`agentstream_control`** (Go `agentstream` only). IF GREEN reveals the pseudo-code is incomplete, wrong, or requires a new dependency THEN **CALL sub-leap-micro-cycle**. Do not silently diverge.
 
-**Outcomes**: Test passes; lint clean; code carries correct token comments.
+**Outcomes**: Test passes; lint clean; code carries correct token comments; or controlled loop-back to **`flag-contradictory-specs`** when focused GREEN succeeds but the suite is inconsistent.
 
 ### unit-refactor (unit-refactor): Optional behavior-preserving cleanup
 

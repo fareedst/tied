@@ -490,6 +490,12 @@ Options:
       --non-compact-html-indent N   (optional; 0=default) stable spaces for wrapped continuation lines
   -h, --help
 
+Live lead-checklist runs (not dry-run):
+  When --lead-checklist-yaml is used and cursor agent is invoked, a turn may end
+  with a fenced JSON block named agentstream_control (schema in README).
+  Supported: action "goto" with a target slug. Invalid or malformed control
+  data causes a non-zero exit. See tools/agentstream/README.md.
+
 Positional:
   FEATURE_SPEC_BATCH_YAML  (alternate to -b; cannot combine with -b)
 

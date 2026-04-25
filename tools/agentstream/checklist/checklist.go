@@ -7,6 +7,7 @@ package checklist
 import (
 	"fmt"
 	"os"
+	"regexp"
 	"sort"
 	"strings"
 
@@ -30,11 +31,16 @@ type Options struct {
 }
 
 type yamlDoc struct {
-	Steps         []yamlStep `yaml:"steps"`
-	SubProcedures []yamlSub  `yaml:"sub_procedures"`
-	ProcessToken  string     `yaml:"process_token"`
-	Name          string     `yaml:"name"`
-	Version       string     `yaml:"version"`
+	Steps         []yamlStep                       `yaml:"steps"`
+	SubProcedures []yamlSub                        `yaml:"sub_procedures"`
+	ProcessToken  string                           `yaml:"process_token"`
+	Name          string                           `yaml:"name"`
+	Version       string                           `yaml:"version"`
+	LoopBack      map[string]yamlLoopBackClearance `yaml:"loop_back_clearance"`
+}
+
+type yamlLoopBackClearance struct {
+	ClearSlugs []string `yaml:"clear_slugs"`
 }
 
 type yamlStep struct {
@@ -267,6 +273,36 @@ func validateSubsHaveSlugs(subs []yamlSub, path string) error {
 		}
 	}
 	return nil
+}
+
+// ApplyLoopBackClearance resets completion comments for the target's configured
+// clear_slugs. It is a no-op when the checklist has no loop_back_clearance for
+// target. REQ-GOAGENT-CHECKLIST-CONTROL.
+func ApplyLoopBackClearance(path, target string) ([]string, error) {
+	data, err := os.ReadFile(path)
+	if err != nil {
+		return nil, err
+	}
+	var doc yamlDoc
+	if err := yaml.Unmarshal(data, &doc); err != nil {
+		return nil, err
+	}
+	lb, ok := doc.LoopBack[strings.TrimSpace(target)]
+	if !ok || len(lb.ClearSlugs) == 0 {
+		return nil, nil
+	}
+	text := string(data)
+	for _, slug := range lb.ClearSlugs {
+		re := regexp.MustCompile(`(?m)^(\s*# slug ` + regexp.QuoteMeta(slug) + ` time) [0-9]+$`)
+		text = re.ReplaceAllString(text, `${1}`)
+	}
+	if text == string(data) {
+		return append([]string(nil), lb.ClearSlugs...), nil
+	}
+	if err := os.WriteFile(path, []byte(text), 0o644); err != nil {
+		return nil, err
+	}
+	return append([]string(nil), lb.ClearSlugs...), nil
 }
 
 func findMainStepIndex(steps []yamlStep, path, want string) (int, error) {

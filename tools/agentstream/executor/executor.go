@@ -1,7 +1,7 @@
 // Package executor runs the Cursor `agent` CLI and parses stream-json output.
-// REQ: REQ-GOAGENT-EXECUTOR, REQ-ATDD-E2E-AGENT_STREAM
-// ARCH: ARCH-GOAGENT-EXECUTOR, ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON
-// IMPL: IMPL-GOAGENT-EXECUTOR, IMPL-ATDD-E2E-AGENT_STREAM
+// REQ: REQ-GOAGENT-EXECUTOR, REQ-ATDD-E2E-AGENT_STREAM, REQ-GOAGENT-CHECKLIST-CONTROL
+// ARCH: ARCH-GOAGENT-EXECUTOR, ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON, ARCH-GOAGENT-CHECKLIST-CONTROL
+// IMPL: IMPL-GOAGENT-EXECUTOR, IMPL-ATDD-E2E-AGENT_STREAM, IMPL-GOAGENT-CHECKLIST-CONTROL
 package executor
 
 import (
@@ -39,19 +39,20 @@ func AgentArgv(agentPath, workspace, model, resumeID string, parts []string) []s
 	return cmd
 }
 
-// Run executes agent with argv, streams text to out, forwards stderr, returns session ID and exit code. REQ-GOAGENT-EXECUTOR.
-func Run(ctx context.Context, argv []string, out io.Writer, errOut io.Writer) (agentstream.SessionID, int, error) {
+// Run executes agent with argv, streams text to out, forwards stderr, and
+// returns session ID, captured assistant text, and exit code. REQ-GOAGENT-EXECUTOR.
+func Run(ctx context.Context, argv []string, out io.Writer, errOut io.Writer) (agentstream.SessionID, string, int, error) {
 	cmd := exec.CommandContext(ctx, argv[0], argv[1:]...)
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
-		return "", -1, err
+		return "", "", -1, err
 	}
 	stderr, err := cmd.StderrPipe()
 	if err != nil {
-		return "", -1, err
+		return "", "", -1, err
 	}
 	if err := cmd.Start(); err != nil {
-		return "", -1, err
+		return "", "", -1, err
 	}
 
 	errDone := make(chan struct{})
@@ -64,6 +65,7 @@ func Run(ctx context.Context, argv []string, out io.Writer, errOut io.Writer) (a
 	}()
 
 	var captured agentstream.SessionID
+	var transcript strings.Builder
 	sc := bufio.NewScanner(stdout)
 	for sc.Scan() {
 		line := strings.TrimSpace(sc.Text())
@@ -80,10 +82,12 @@ func Run(ctx context.Context, argv []string, out io.Writer, errOut io.Writer) (a
 		}
 		for _, f := range extractTextFragments(obj) {
 			_, _ = out.Write([]byte(f))
+			transcript.WriteString(f)
 		}
 		if typ, _ := obj["type"].(string); typ == "thinking" {
 			if sub, _ := obj["subtype"].(string); sub == "completed" {
 				_, _ = out.Write([]byte("\n"))
+				transcript.WriteByte('\n')
 			}
 		}
 	}
@@ -96,9 +100,9 @@ func Run(ctx context.Context, argv []string, out io.Writer, errOut io.Writer) (a
 			exit = ee.ExitCode()
 		}
 		_, _ = fmt.Fprintf(errOut, "agent exited with status %d\n", exit)
-		return captured, exit, waitErr
+		return captured, transcript.String(), exit, waitErr
 	}
-	return captured, exit, nil
+	return captured, transcript.String(), exit, nil
 }
 
 func extractTextFragments(obj map[string]interface{}) []string {

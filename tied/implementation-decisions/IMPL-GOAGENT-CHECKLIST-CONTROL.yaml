@@ -1,0 +1,30 @@
+IMPL-GOAGENT-CHECKLIST-CONTROL:
+  name: agentstream checklist control parser and router
+  status: Active
+  cross_references:
+    - ARCH-GOAGENT-CHECKLIST-CONTROL
+    - REQ-GOAGENT-CHECKLIST-CONTROL
+  traceability:
+    architecture:
+      - ARCH-GOAGENT-CHECKLIST-CONTROL
+    requirements:
+      - REQ-GOAGENT-CHECKLIST-CONTROL
+    tests:
+      - tools/agentstream/control/control_test.go
+      - tools/agentstream/pipeline/pipeline_test.go
+      - tools/agentstream/checklist/checklist_test.go
+      - tools/agentstream/executor/executor_test.go
+    code_annotations:
+      - IMPL-GOAGENT-CHECKLIST-CONTROL
+      - ARCH-GOAGENT-CHECKLIST-CONTROL
+      - REQ-GOAGENT-CHECKLIST-CONTROL
+  detail_file: implementation-decisions/IMPL-GOAGENT-CHECKLIST-CONTROL.yaml
+  metadata:
+    last_updated:
+      date: "2026-04-24T00:00:00.000Z"
+      author: AI Agent
+      reason: Implemented parser, queue routing, executor transcript capture, and loop-back marker clearance
+    last_validated:
+      date: "2026-04-24T00:00:00.000Z"
+      validator: go test ./tools/agentstream/... and tied_validate_consistency
+      result: pass

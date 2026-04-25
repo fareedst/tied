@@ -172,6 +172,25 @@ loop_back_clearance:
       - end-to-end-ui
       - verification-gate
       - sync-tied-stack
+  flag-contradictory-specs:
+    from_steps:
+      - unit-test-green
+    clear_slugs:
+      - flag-contradictory-specs
+      - resolve-pseudocode
+      - apply-token-comments
+      - gate-pseudocode-validation
+      - persist-implementation-records
+      - risk-assessment
+      - test-strategy
+      - unit-test-red
+      - unit-test-green
+      - unit-refactor
+      - three-way-alignment-unit
+      - composition-integration
+      - end-to-end-ui
+      - verification-gate
+      - sync-tied-stack
   apply-token-comments:
     from_steps:
       - composition-integration
@@ -703,12 +722,16 @@ steps:
       - Write only enough production code to make the failing test pass.
       - Carry the same REQ/ARCH/IMPL token comment as the pseudo-code block, stating how the code implements.
       - Run tests. IF tests fail THEN iterate on production code only (do not add new tests in GREEN).
+      - 'IF the focused RED test now passes but other existing tests fail, STOP production-code iteration and emit a final fenced JSON control block: {"agentstream_control":{"schema_version":1,"action":"goto","target":"flag-contradictory-specs","reason":"Focused RED test passes, but existing tests fail after GREEN code; re-check related IMPL pseudo-code for contradictory specs before more code changes.","evidence":["<test command and failing existing test names or concise summary>"]}}. Do not infer this from prose; the fenced JSON block is the machine-readable agentstream routing signal.'
       - Run language-specific lint (Rust/TypeScript/Swift/YAML per project). IF lint fails THEN fix before proceeding.
     outcomes: Test passes; lint clean; code carries correct token comments.
     references: []
     flow:
       next: unit-refactor
       branches:
+        - condition: Focused RED test passes but existing tests fail after GREEN code
+          action: GOTO flag-contradictory-specs via agentstream_control; do not continue production-code iteration until related IMPL pseudo-code is reconsidered
+          target: flag-contradictory-specs
         - condition: GREEN reveals pseudo-code incomplete, wrong, or requires new dependency
           action: CALL sub-leap-micro-cycle; do not silently diverge
           target: sub-leap-micro-cycle

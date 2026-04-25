@@ -810,3 +810,56 @@ REQ-GOAGENT-NON-COMPACT-HTML-FORMAT:
       validator: AI Agent
       result: pass
   detail_file: requirements/REQ-GOAGENT-NON-COMPACT-HTML-FORMAT.yaml
+REQ-GOAGENT-CHECKLIST-CONTROL:
+  name: Dynamic checklist control routing
+  category: Tooling
+  priority: P1
+  status: Implemented
+  rationale:
+    why: Checklist runs sometimes need to change the remaining turn sequence when a completed turn reveals a required loop-back.
+    problems_solved:
+      - Static agentstream turn queues ignore checklist GOTO decisions discovered at runtime
+      - Natural-language transcript parsing is ambiguous
+    benefits:
+      - Deterministic loop-back from unit-test-green to flag-contradictory-specs
+      - Human-readable transcript remains separate from machine control
+  satisfaction_criteria:
+    - criterion: Checklist turn output can include a strict machine-readable agentstream_control block.
+    - criterion: agentstream validates goto targets against known checklist slugs before changing the remaining turn queue.
+    - criterion: unit-test-green can route to flag-contradictory-specs when the focused RED test passes but existing tests fail.
+  validation_criteria:
+    - method: Unit tests
+      coverage: tools/agentstream/control/control_test.go; tools/agentstream/pipeline/pipeline_test.go; tools/agentstream/checklist/checklist_test.go; tools/agentstream/executor/executor_test.go
+  traceability:
+    architecture:
+      - ARCH-GOAGENT-CHECKLIST-CONTROL
+    implementation:
+      - IMPL-GOAGENT-CHECKLIST-CONTROL
+    tests:
+      - tools/agentstream/control/control_test.go
+      - tools/agentstream/pipeline/pipeline_test.go
+      - tools/agentstream/checklist/checklist_test.go
+      - tools/agentstream/executor/executor_test.go
+    code_annotations:
+      - REQ-GOAGENT-CHECKLIST-CONTROL
+  related_requirements:
+    depends_on:
+      - REQ-GOAGENT-YAML-STEP-RENDER
+      - REQ-GOAGENT-PIPELINE-CHAIN
+      - REQ-GOAGENT-AGENT-EXECUTOR
+    related_to:
+      - PROC-AGENT_REQ_CHECKLIST
+    supersedes: []
+  metadata:
+    created:
+      date: "2026-04-24T00:00:00.000Z"
+      author: AI Agent
+    last_updated:
+      date: "2026-04-24T00:00:00.000Z"
+      author: AI Agent
+      reason: Implemented dynamic checklist control routing in tools/agentstream
+    last_validated:
+      date: "2026-04-24T00:00:00.000Z"
+      validator: go test ./tools/agentstream/... and tied_validate_consistency
+      result: pass
+  detail_file: requirements/REQ-GOAGENT-CHECKLIST-CONTROL.yaml
