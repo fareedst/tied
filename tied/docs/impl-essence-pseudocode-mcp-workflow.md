@@ -20,7 +20,7 @@
 
 - **Index vs detail**: Rows in `tied/implementation-decisions.yaml` do **not** include full `essence_pseudocode`. To read the body, use **`yaml_detail_read`** (or `yaml_detail_read_many`), not only `yaml_index_read`.
 - **When to prefer MCP+CLI** for the body: **`impl_detail_set_essence_pseudocode`** (IMPL only) sets the **full** string (or loads it from a file path), optionally merges **`metadata.last_updated`**, and does not clobber other detail fields—prefer it over a massive **`yaml_detail_update`** for the same field, especially in automation. **Direct** `.md` edit is equivalent for bytes on disk; run **`tied_validate_consistency`** after either.
-- **Same tool everywhere (optional path)**: The **Cursor MCP** server and the **CLI** (below) call the same `mcp-server` binary. For structure of the pseudo-code, see the [template in the shared doc](pseudocode-writing-and-validation.md#canonical-structure-for-essence_pseudocode).
+- **Same tool everywhere (optional path)**: The **Cursor MCP** server and the **CLI** (below) call the same `mcp-server` binary. For the **body structure** of hand-authored sidecars, see [pseudocode-writing-and-validation.md](pseudocode-writing-and-validation.md#canonical-structure-for-essence_pseudocode) and the [IMPL essence template file](../../templates/impl-essence-pseudocode-template.md).
 
 ### 1.3 Markdown sources (order of convenience)
 
@@ -122,6 +122,8 @@ flowchart LR
 ## 6. See also
 
 - [pseudocode-writing-and-validation.md](pseudocode-writing-and-validation.md) — sidecar as source of the body, Layer A (TIED) vs Layer B (application checklist), and content rules for `essence_pseudocode`.
+- [templates/impl-essence-pseudocode-template.md](../../templates/impl-essence-pseudocode-template.md) — canonical copy-paste sidecar body (hand-authored layout).
+- [docs/pseudocode-format-and-practices.md](../../docs/pseudocode-format-and-practices.md) — portable format and sidecar practices.
 - [yaml-update-mcp-runbook.md](yaml-update-mcp-runbook.md) — routing, small payloads, timeouts, goal → tool table.
 - [tied-yaml-agent-index.md](tied-yaml-agent-index.md) — central index to other TIED YAML / MCP docs.
 - [tied-yaml skill](../../.cursor/skills/tied-yaml/SKILL.md) and [reference.md](../../.cursor/skills/tied-yaml/reference.md) — full CLI and MCP tool catalog, including `impl_detail_set_essence_pseudocode` parameters.

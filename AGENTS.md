@@ -141,6 +141,8 @@ Same filename at repo root (template) and in `tied/` (project index); location d
 | `tied/docs/processes.md` | Process tracking including `[PROC-YAML_DB_OPERATIONS]`, LEAP, PROC-TIED_DEV_CYCLE. Use TIED MCP as primary interface to TIED data (see §2 TIED data access). |
 | `tied/docs/agent-req-implementation-checklist.md` | Primary step-by-step checklist for implementing any new REQ or change; unifies CITDP, TIED dev cycle, IMPL_CODE_TEST_SYNC, LEAP, and validation into one executable procedure (`[PROC-AGENT_REQ_CHECKLIST]`). Trackable YAML: `tied/docs/agent-req-implementation-checklist.yaml` (copy to unique per-request file per its header). |
 | `tied/docs/pseudocode-writing-and-validation.md` | How to write and validate IMPL pseudo-code; when to run validation; minimum gating rules (`[PROC-PSEUDOCODE_VALIDATION]`). Checklist: `tied/docs/pseudocode-validation-checklist.yaml`. |
+| `docs/pseudocode-format-and-practices.md` | Standalone format and practices (portable); pairs with the writing doc. **Strong** sidecar preference for non-trivial or growing projects. |
+| `templates/impl-essence-pseudocode-template.md` | Canonical copy-paste `essence_pseudocode` (sidecar) body template. |
 | `.cursorrules` | IDE loader that points back to this document |
 | `.ai-agent-instructions` | Quick reminder pointing to this document |
 

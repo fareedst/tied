@@ -4,13 +4,25 @@
 
 **Purpose**: This document is the single place for how to **write** and how to **validate** the logical `essence_pseudocode` for IMPL decisions in TIED projects. The **on-disk** body is the sidecar **Markdown** file; tooling merges it into the detail record. The doc ties together writing rules (`implementation-decisions.md`), **TIED** data validation, and the **application** pseudo-code validation checklist (`pseudocode-validation-checklist.yaml`).
 
+**Related (portable / template):** Cross-project **format and practices** (standalone) — [docs/pseudocode-format-and-practices.md](../../docs/pseudocode-format-and-practices.md). The **canonical copy-paste** Markdown template file lives at [templates/impl-essence-pseudocode-template.md](../../templates/impl-essence-pseudocode-template.md).
+
 ---
 
 ## 1. How to Write IMPL Pseudo-Code
 
 The **logical** field is `essence_pseudocode` on the IMPL detail record. For project IMPLs, the **on-disk** source of that string is **`tied/implementation-decisions/IMPL-{TOKEN}-pseudocode.md`**, not an inline YAML block in `IMPL-{TOKEN}.yaml`. Tools merge the sidecar when present. Do not add new inline `essence_pseudocode` in the detail YAML in normal workflows. The file is available to any editor or process (see [impl-essence-pseudocode-mcp-workflow.md](impl-essence-pseudocode-mcp-workflow.md)).
 
-The merged field is the **source of consistent logic** for the implementation; tests and code are derived from it and must stay aligned ([PROC-IMPL_PSEUDOCODE_TOKENS], [PROC-LEAP]).
+The merged field is the **primary and authoritative source of implementation logic**; tests and code are derived from it and must stay aligned ([PROC-IMPL_PSEUDOCODE_TOKENS], [PROC-LEAP]).
+
+### Sidecar preference (growing complexity)
+
+**Strong preference:** use the **sidecar** for any **non-trivial** pseudo-code—multiple H2 blocks, cross-IMPL composition, long or frequently reviewed bodies, or as the team or IMPL set grows. Sidecars are diff-friendly, reviewable in pull requests, and avoid YAML multiline/quoting problems. **Inline** `essence_pseudocode` in `IMPL-*.yaml` is acceptable only for small, **stable** single-block stubs; it is not the default path for large or evolving logic.
+
+<a id="canonical-structure-for-essence_pseudocode"></a>
+
+### Canonical structure for essence_pseudocode
+
+The **on-disk** body for a new or hand-authored IMPL usually starts from the shared **template** in [templates/impl-essence-pseudocode-template.md](../../templates/impl-essence-pseudocode-template.md) (read the file header: copy the Markdown after the `---` separator into your `IMPL-{TOKEN}-pseudocode.md`). H2 per block, contract lines, and optional **COMPOSITION_ORDER** / **OWNERSHIP** follow that file. For a standalone summary of the same model (vocabulary, validation, machine vs. hand), see [docs/pseudocode-format-and-practices.md](../../docs/pseudocode-format-and-practices.md).
 
 ### IMPL sidecar as readable Markdown (Comrak / extract-generated)
 
@@ -30,11 +42,13 @@ A well-formed `/*` … `*/` block in the same **pre–`#[test]` / pre–ntest `f
 ### Writing rules (summary)
 
 - **Mandatory structure**: Every IMPL with a decision detail must have **essence** content in the place your project uses (here: the **sidecar** + merge). Address all logical and flow issues there **before** writing tests or code.
+- **No code chunks in pseudocode (mandatory)**: `essence_pseudocode` must not contain language-specific code snippets, compilable fragments, or pasted production/test code blocks. Keep logic language-agnostic.
 - **Contract block**: Use explicit `INPUT:`, `OUTPUT:`, `DATA:` (and `CONTROL:` when relevant). Procedure names in UPPER_SNAKE or camelCase.
 - **One action per step**: Each logical step should express one clear action or decision; avoid long prose that mixes multiple actions.
 - **Token comments in every block** ([PROC-IMPL_PSEUDOCODE_TOKENS]): Every block must have a comment that (1) names all REQ, ARCH, and IMPL reflected in that block and (2) states how the block implements them. The **“top-level”** line in Markdown is a **file** heading: `# [IMPL-X] [ARCH-Y] [REQ-Z]` (an H1 in the sidecar), **not** a per-line `//` paste. In extract-generated sidecars, each per-test *section* usually repeats a full bracket line as a **list item** (first `//` line in Rust); more-indented `//` lines map to nested list items. Sub-blocks with the same token set: state only the *how*. Sub-blocks with a different set: open with the full token list and how the sub-block implements them. TIED sees tokens as **plain text** in the merged string, regardless of list vs. heading.
 - **Preferred vocabulary**: INPUT, OUTPUT, DATA, CONTROL; ON, WHEN; SEND, BROADCAST, RETURN; IF, ELSE; FOR … IN; ON error, RETURN error; AWAIT, Promise. See the full list in `implementation-decisions.md`.
 - **Collision detection**: When IMPLs are composed or share code paths, document ordering, shared data, and pre/post conditions so overlapping steps and conflicting assumptions are visible.
+- **LEAP drift rule (mandatory)**: if tests or production code contain logic not present in pseudocode, treat it as drift. Translate that logic into pseudocode first, then evaluate whether ARCH and REQ updates are required via LEAP.
 
 **Full writing guide**: See `tied/docs/implementation-decisions.md` (or root `implementation-decisions.md`) for:
 
@@ -57,7 +71,7 @@ Validation is **two layers**. They are **complementary**: Layer A (TIED) enforce
 
 **Layer A — TIED data validation** — After editing **`IMPL-{TOKEN}-pseudocode.md`**, calling **`impl_detail_set_essence_pseudocode`**, or any change that updates merged essence, run **`tied_validate_consistency`**. Use default options so **`include_pseudocode`** runs (MCP/CLI: see the **mcp-server** [README](../mcp-server/README.md)). TIED **loads the sidecar** via `loadDetail` and validates the merged `essence_pseudocode` for presence, **token comment** requirements (`[REQ-*]`, `[ARCH-*]`, `[IMPL-*]` where applicable) on **any** line of the merged Markdown, and **cross-reference** integrity. No particular prefix (such as a fake heading on every line) is required, as long as the bracketed tokens appear where the project’s rules and generators expect. The report’s **`pseudocode`** section qualifies external/sidecar text as consistent with TIED indexes and detail files. This is **not** a substitute for parsing the pseudo-code into execution or test cases.
 
-**Layer B — Application pseudo-code validation checklist** — The checklist in [pseudocode-validation-checklist.yaml](pseudocode-validation-checklist.yaml) is for **parse, schema, contracts, graph, behavioral coverage, traceability to tests**, and related categories. **Apply it to the same string** the project uses as `essence_pseudocode` for the IMPL: read **`IMPL-{TOKEN}-pseudocode.md`**, or use the merged value from `yaml_detail_read` (equivalent when the sidecar is the source). Use Layer B to ensure pseudo-code is parseable, well-shaped, consistent with contracts and architecture, and covered by tests (when that phase applies) before or alongside code. Optional checklist item **TIED-POE-001** explicitly ties this layer to a passing TIED run.
+**Layer B — Application pseudo-code validation checklist** — The checklist in [pseudocode-validation-checklist.yaml](pseudocode-validation-checklist.yaml) is for **parse, schema, contracts, graph, behavioral coverage, traceability to tests**, and related categories. **Apply it to the same string** the project uses as `essence_pseudocode` for the IMPL: read **`IMPL-{TOKEN}-pseudocode.md`**, or use the merged value from `yaml_detail_read` (equivalent when the sidecar is the source). Use Layer B to ensure pseudo-code is parseable, well-shaped, consistent with contracts and architecture, and covered by tests (when that phase applies) before or alongside code. Layer B should also fail or warn when pseudocode contains language-specific code chunks instead of logic-only pseudocode. Optional checklist item **TIED-POE-001** explicitly ties this layer to a passing TIED run.
 
 The **application pseudo-code validation checklist** is the structured definition for Layer B. The sections below (intended use, how to apply, order, tailoring) focus on that checklist; remember Layer A runs first in typical IMPL workflows in this repository.
 
@@ -145,6 +159,8 @@ Perform a **manual pass** over the checklist categories in the recommended order
 | [impl-pseudocode-rust-block-comment-guide.md](impl-pseudocode-rust-block-comment-guide.md) | Placing **verbatim** IMPL `##` sections as `/* */` in production **Rust** (placement vs `///`, H2 naming, TIED) |
 | [detail-files-schema.md](detail-files-schema.md) | Field shapes, sidecar + merge description for `essence_pseudocode` |
 | [impl-essence-pseudocode-mcp-workflow.md](impl-essence-pseudocode-mcp-workflow.md) | Direct edit vs MCP+CLI, policy split, `tied_validate_consistency` after sidecar edits |
+| [`templates/impl-essence-pseudocode-template.md`](../../templates/impl-essence-pseudocode-template.md) | Canonical hand-authored sidecar **body** (copy after `---` into `IMPL-{TOKEN}-pseudocode.md`) |
+| [`docs/pseudocode-format-and-practices.md`](../../docs/pseudocode-format-and-practices.md) | Portable format, vocabulary, and sidecar practices (cross-project) |
 | `tied/docs/implementation-decisions.md` | Full writing rules: mandatory logical essence, vocabulary, sequence, token comments, collision detection |
 | `tied/docs/agent-req-implementation-checklist.md` | gate-pseudocode-validation and sub-pseudocode-validation-pass: where validation runs in the agent flow |
 | `tied/docs/impl-code-test-linkage.md` | Phase B (B5) and Phase C (C4): validation in the IMPL-to-code-and-tests linkage |

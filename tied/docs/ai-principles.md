@@ -151,7 +151,7 @@ See `tied/docs/processes.md` § LEAP for the canonical process definition.
 4. **IMMEDIATELY** identify logical modules; document boundaries, interfaces, validation criteria
 5. Address all implementation issues in IMPL `essence_pseudocode` **before** writing tests or code
 6. In every IMPL, ensure every **block** in `essence_pseudocode` has a comment naming REQ/ARCH/IMPL and how the block implements them ([PROC-IMPL_PSEUDOCODE_TOKENS])
-7. Validate pseudo-code with the application pseudo-code validation checklist before writing tests or code; see `tied/docs/pseudocode-writing-and-validation.md` ([PROC-PSEUDOCODE_VALIDATION])
+7. Validate pseudo-code with the application pseudo-code validation checklist before writing tests or code; see `tied/docs/pseudocode-writing-and-validation.md` ([PROC-PSEUDOCODE_VALIDATION]). For portable format and sidecar **template** text, use `docs/pseudocode-format-and-practices.md` and `templates/impl-essence-pseudocode-template.md` (strong **sidecar** preference as IMPLs grow)
 8. **IMMEDIATELY** update `semantic-tokens.yaml` with any new tokens
 
 ### Phase 2: Planning Implementation (MANDATORY - Plan BEFORE Implementation)

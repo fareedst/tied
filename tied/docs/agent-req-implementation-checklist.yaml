@@ -45,6 +45,7 @@
 name: agent_req_implementation_checklist
 description: |
   Primary procedural template for every new requirement or change to the tested system. Unifies CITDP, TIED dev cycle, IMPL_CODE_TEST_SYNC, LEAP, YAML edit loop, and related processes. Mandatory order: IMPL pseudo-code (token-commented) -> RED tests -> code.
+  Responsibility split: pseudo-code-owner steps define and validate logic intent; test/code-owner steps implement only logic already present in pseudo-code. If new logic appears in tests/code, route back to pseudo-code-owner steps first (LEAP).
   Driver note (agentstream): When sub_procedures are appended as extra turns after traceable-commit, each was usually already executed via CALL during an earlier step. Unless new TIED/YAML mutations are pending, respond with a one-line RETURN (no full re-validation). Prefer --lead-checklist-skip-sub when generating turns to avoid duplicate subs (see tools/agentstream README).
   Non-normative: Optional new-session handoffs (when disk + per-request copy justify a fresh context) are documented in source_document under "Suggested session handoffs"; see YAML header comment for slug summary. [PROC-CITDP] final CITDP file is persist-citdp-record after implementation; pre-TDD analysis ends at test-strategy after TIED/IMPL on disk.
   Main steps that start a handoff set agentstream_new_session: true for tools/agentstream and tools/agent-stream (per source_document at repo root docs/); other clients may ignore.
@@ -440,6 +441,7 @@ steps:
       - When no IMPL detail files exist yet, defer cataloging until after draft pseudo-code exists—skip with explicit note rather than inventing contracts.
       - Primary targets are project/feature IMPLs for this REQ (from tied_tokens_affected / tied_tokens_new / planned project IMPL). Methodology IMPLs under ./tied/methodology are read-only unless this pass edits methodology—do not enumerate row-by-row contract extraction for them when essence_pseudocode is null and they are out of scope.
     tasks:
+      - 'Responsibility: pseudo-code owner step. Define contract-level logic intent only; do not author production code or automated test logic here.'
       - 'For each in-scope project/feature IMPL, read essence_pseudocode sequentially. For each, note: INPUT/OUTPUT/DATA (and CONTROL when present); procedure names (UPPER_SNAKE or camelCase); key branches (IF/ELSE), loops (FOR ... IN), error paths (ON error, RETURN error); async boundaries (AWAIT, Promise).'
       - 'Methodology-only IMPLs (inherited merged view): at most one short note that essence_pseudocode may be null and contracts are not extracted here—do not produce large empty tables.'
     outcomes: Contracts cataloged for in-scope feature IMPLs; procedure names and structure noted.
@@ -467,6 +469,7 @@ steps:
     preconditions:
       - catalog-pseudocode-contracts satisfied for the IMPL set in scope (contracts read or explicitly deferred per preconditions there).
     tasks:
+      - 'Responsibility: pseudo-code owner step. This step blocks tests/code when logic intent is incomplete.'
       - Apply flags to project/feature IMPLs for this REQ only. Do not flag inherited methodology IMPLs under [PROC-TIED_METHODOLOGY_READONLY] (null essence_pseudocode, Active status) as client debt unless change-definition explicitly requires methodology edits.
       - Flag missing INPUT or OUTPUT declarations.
       - Flag procedures referenced but not defined.
@@ -492,6 +495,7 @@ steps:
     preconditions:
       - flag-insufficient-specs complete (or waived with note) so contradictions are assessed on the same IMPL set.
     tasks:
+      - 'Responsibility: pseudo-code owner step. Resolve logic contradictions before test/code execution continues.'
       - 'Compare across in-scope project/feature IMPLs (and overlapping verified-present code paths): shared DATA conflict; ordering conflict; incompatible OUTPUT types; duplicate logic with different parameters or behavior. Skip pairwise comparison of unrelated inherited methodology IMPL records.'
     outcomes: Contradictions identified among in-scope IMPLs.
     references: []
@@ -515,6 +519,7 @@ steps:
     preconditions:
       - Flag steps produced a resolvable issue list (or none); IMPL essence_pseudocode editable via tied-cli or agreed draft location.
     tasks:
+      - 'Responsibility: pseudo-code owner step. Update logic intent first; test/code follow only after this step resolves issues.'
       - 'For each issue from flag-insufficient-specs-flag-contradictory-specs: update affected IMPL essence_pseudocode so contracts are compatible, ordering explicit, every block complete.'
       - IF you persist a new IMPL in this step via tied_token_create_with_detail or yaml_detail_* (index/detail/semantic-tokens), persist-implementation-records may be verify-only (confirm on-disk index/detail/tokens and run sub-yaml-edit-loop)—do not duplicate authoring work.
       - IF resolution changes scope of an ARCH THEN GOTO author-architecture to update ARCH, then return here.
@@ -544,6 +549,7 @@ steps:
     preconditions:
       - resolve-pseudocode satisfied for in-scope IMPLs (contracts compatible; no unresolved blocking flags).
     tasks:
+      - 'Responsibility: pseudo-code owner step. Do not introduce new executable logic here; annotate and clarify intent in pseudocode.'
       - 'Apply top-level comment: # [IMPL-X] [ARCH-Y] [REQ-Z] plus one-line summary.'
       - 'Sub-blocks (same token set): comment only the how.'
       - 'Sub-blocks (different token set): open with # [IMPL-...] [ARCH-...] [REQ-...] and how the sub-block implements them.'
@@ -572,6 +578,7 @@ steps:
       - apply-token-comments satisfied (token comments present on blocks to validate).
       - ./tied/docs/pseudocode-validation-checklist.yaml or ./docs/pseudocode-validation-checklist.yaml exists, or manual validation pass documented per tasks.
     tasks:
+      - 'Responsibility: pseudo-code owner step. This is the final logic-intent gate before tests/code steps may proceed.'
       - 'Use tailoring profile agent_req_checklist_pre_red in ./tied/docs/pseudocode-validation-checklist.yaml (and docs/ copy): this gate runs before unit-test-red—IMPL essence_pseudocode is implementation-only; behavioral_coverage and traceability rows that require existing executable tests are deferred until tests exist (optional re-pass after verification-gate).'
       - CALL sub-pseudocode-validation-pass. Run validation per [PROC-PSEUDOCODE_VALIDATION] using ./tied/docs/pseudocode-validation-checklist.yaml or ./docs/pseudocode-validation-checklist.yaml.
       - Run validation passes in recommended order; record findings with severity and source location.
@@ -602,6 +609,7 @@ steps:
     preconditions:
       - gate-pseudocode-validation satisfied (gating rules pass or waiver documented in scope).
     tasks:
+      - 'Responsibility: pseudo-code owner step. Persist validated logic intent and traceability; do not treat persistence as permission to introduce new logic outside pseudocode in later steps.'
       - IF IMPL index/detail/tokens were already written during resolve-pseudocode, treat this step as verify-only — confirm yaml_index_read / yaml_detail_read / semantic-tokens rows, refresh metadata if needed, CALL sub-yaml-edit-loop on touched paths, tied_validate_consistency — do not recreate records from scratch.
       - Create or update ./tied/implementation-decisions.yaml index entries via tied-cli.sh (yaml_index_* or tied_token_create_with_detail); do not patch that file directly when tied-cli.sh covers the change.
       - Create or update IMPL detail at ./tied/implementation-decisions/IMPL-{TOKEN}.yaml via tied-cli.sh yaml_detail_*; include complete essence_pseudocode per ./tied/docs/detail-files-schema.md § IMPL.
@@ -655,6 +663,7 @@ steps:
     preconditions:
       - risk-assessment outputs available or explicitly skipped with note when policy allows minimal CITDP.
     tasks:
+      - 'Responsibility: test/code owner step. Plan tests and implementation sequencing from existing pseudocode; do not invent new behavior here.'
       - For each IMPL block/procedure, classify as unit, integration, or e2e_only.
       - IF e2e_only THEN document e2e_only_reason naming the specific platform constraint in IMPL detail.
       - Build test matrix (Test name, IMPL block ref, REQ token, Token comments, Testability).
@@ -686,6 +695,7 @@ steps:
       - gate-pseudocode-validation satisfied (or documented waiver) and persist-implementation-records completed for the IMPL set in scope.
       - Automated test harness exists and is runnable (e.g. go test, npm test, pytest, cargo test, xcodebuild test, bash tests/*.sh). If absent, establish a minimal harness in this step (including a bash-based runner) or document harness gap / e2e_only per tasks and IMPL detail.
     tasks:
+      - 'Responsibility: test/code owner step. Write tests only for pseudocode-defined logic; if a missing behavior is discovered, route back to pseudo-code-owner steps.'
       - Map the pseudo-code block/procedure to one test group (describe/it or test function). One block maps to approximately one test group.
       - Name the test group after the procedure and include the REQ token.
       - Carry the same REQ/ARCH/IMPL token comment as the pseudo-code block, stating what the test validates.
@@ -719,6 +729,7 @@ steps:
       - Either at least one failing RED test from unit-test-red exists for this block, OR brownfield baseline was documented (correct test passes first run)—same pseudo-code block scope.
       - Do not write or change production implementation before unit-test-red completed for this iteration.
     tasks:
+      - 'Responsibility: test/code owner step. Implement only logic already defined in pseudocode for this block.'
       - Write only enough production code to make the failing test pass.
       - Carry the same REQ/ARCH/IMPL token comment as the pseudo-code block, stating how the code implements.
       - Run tests. IF tests fail THEN iterate on production code only (do not add new tests in GREEN).
@@ -750,6 +761,7 @@ steps:
     preconditions:
       - unit-test-green complete for the iteration (tests pass for the block under refactor).
     tasks:
+      - 'Responsibility: test/code owner step. Refactor without introducing new behavior; behavior changes require return to pseudo-code-owner steps.'
       - Clean up test or production code (extract functions, rename, simplify).
       - Re-run tests + lint. Confirm no regressions.
     outcomes: Code is cleaner; all tests still pass; lint still clean.
@@ -772,6 +784,7 @@ steps:
       - For each block under review, pseudo-code, test, and production artifacts exist (skip blocks not yet started—document skipped slugs).
       - ./tied/semantic-tokens.yaml reachable when registering missing tokens.
     tasks:
+      - 'Responsibility: test/code owner step with pseudocode parity enforcement. Any newly observed logic in test/code must be reflected in pseudocode first (LEAP order).'
       - For every block in this iteration, verify the three artifacts carry the same token set (pseudo-code block, test block, code block). IF any artifact names or omits a token differently, alignment is broken.
       - 'IF any diverge THEN update pseudo-code first, then test, then code (LEAP order: IMPL -> test -> code).'
       - 'Run [PROC-TOKEN_AUDIT]: every token named in any of the three must exist in ./tied/semantic-tokens.yaml. IF missing THEN register via tied-cli.sh yaml_index_* on index semantic-tokens and CALL sub-yaml-edit-loop.'
@@ -801,6 +814,7 @@ steps:
       - Unit-level TDD stable for modules being wired (or explicitly out of scope with note).
       - Composition-level test entrypoint exists in repo (integration test target, test module, etc.); if absent, document before writing composition RED tests.
     tasks:
+      - 'Responsibility: test/code owner step. Composition wiring must be covered by existing or newly authored pseudocode before code is finalized.'
       - 'Identify bindings: event listeners, IPC channels, entry-point delegation, function wiring, platform hooks.'
       - 'For each binding: locate IMPL that describes composition. IF none and binding belongs to existing IMPL THEN extend IMPL pseudo-code (persist via tied-cli.sh yaml_detail_* under ./tied/implementation-decisions/), GOTO apply-token-comments, CALL sub-yaml-edit-loop, return here. IF none and distinct design THEN create new IMPL starting at catalog-pseudocode-contracts (IMPL phase stubs catalog-pseudocode-contracts … persist-implementation-records), return here.'
       - Write failing composition test for each binding (before composition code); carries IMPL token comments; verifies trigger -> unit called -> arguments -> effect; does not invoke UI.
@@ -836,6 +850,7 @@ steps:
       - E2E harness present when E2E tests are required (Playwright, Cypress, XCUITest, Espresso, etc., per stack). If no UI-only scope or harness missing, skip with explicit note per citdp/test policy.
       - IMPL marks e2e_only with e2e_only_reason for blocks covered here.
     tasks:
+      - 'Responsibility: test/code owner step. E2E assertions must map to pseudocode-defined e2e_only logic boundaries.'
       - 'Identify E2E-only behavior: native OS menus, visual rendering, platform behavior that cannot be simulated below E2E.'
       - Confirm IMPL detail has testability e2e_only, e2e_only_reason (named platform constraint), and E2E-only boundary comment in essence_pseudocode.
       - Write E2E test referencing REQ and IMPL tokens; comment justifies why composition-level testing is insufficient.
@@ -866,6 +881,7 @@ steps:
       - Project test command runnable from workspace root (same harness used in TDD phases). If tests cannot run, fix harness before claiming gate—defer gate with note only when policy allows.
       - ./tied/ present when tied_validate_consistency and token validation apply; if TIED not in client yet, skip token steps with explicit maturity note.
     tasks:
+      - 'Responsibility: test/code owner step. Verify implementation fidelity to pseudocode; if new logic is discovered, route back to resolve-pseudocode before accepting.'
       - Run full test suite (unit, composition, E2E). All must pass.
       - Run lint for each language in scope.
       - 'CALL sub-pseudocode-validation-pass: re-run pseudo-code validation using tailoring profile agent_req_checklist_post_test in ./tied/docs/pseudocode-validation-checklist.yaml (docs/ copy at repo root when present)—close deferred_minimum_rules from agent_req_checklist_pre_red now that executable tests exist; document findings by category and severity. IF unresolved gaps THEN GOTO resolve-pseudocode or unit-test-red per findings.'

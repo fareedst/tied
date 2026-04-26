@@ -624,7 +624,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 
 **Outcomes**: Pseudo-code validation report (findings by category, severity, location); all required checks pass or are waived; minimum gating rules satisfied.
 
-**Reference**: `tied/docs/pseudocode-writing-and-validation.md`; `tied/docs/pseudocode-validation-checklist.yaml`; `tied/docs/processes.md` § `[PROC-PSEUDOCODE_VALIDATION]`.
+**Reference**: `tied/docs/pseudocode-writing-and-validation.md` (and `docs/pseudocode-format-and-practices.md` for portable format); `templates/impl-essence-pseudocode-template.md` for the sidecar body template; `tied/docs/pseudocode-validation-checklist.yaml`; `tied/docs/processes.md` § `[PROC-PSEUDOCODE_VALIDATION]`.
 
 ---
 
@@ -745,5 +745,6 @@ flowchart TD
 | `tied/docs/token-validation.md` | How `[PROC-TOKEN_VALIDATION]` combines project scripts with `tied_validate_consistency` |
 | `tied/docs/composition-coverage.md` | Binding inventory and composition vs E2E coverage for this project |
 | `tied/docs/citdp-policy.md` | When to create vs skip a CITDP record |
-| `tied/docs/pseudocode-writing-and-validation.md` | How to write and validate IMPL pseudo-code; when to run validation; minimum gating rules |
+| `tied/docs/pseudocode-writing-and-validation.md` | How to write and validate IMPL pseudo-code; when to run validation; minimum gating rules; canonical sidecar body structure links to `templates/impl-essence-pseudocode-template.md` |
+| `docs/pseudocode-format-and-practices.md` | Portable format and practices; strong sidecar preference for non-trivial IMPLs; template lives in `templates/impl-essence-pseudocode-template.md` |
 | `tied/docs/pseudocode-validation-checklist.yaml` | Canonical application pseudo-code validation checklist (categories, required/optional checks, order, tailoring) |
