@@ -191,7 +191,7 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 
 **Branch**: IF the IMPL set is large (signal of high coupling) THEN consider whether IMPLs need decomposition before proceeding.
 
-**Reference**: `tied/docs/processes.md` § `[PROC-CITDP]` step 2; `tied/docs/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phase A (A1-A3); `tied/docs/impl-code-test-linkage.md` § Phase A — Discovery.
+**Reference**: `tied/docs/processes.md` § `[PROC-CITDP]` step 2; `tied/docs/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phase A (A1-A3); `tied/docs/pseudocode-writing-and-validation.md` § Phase A — Discovery (`#phase-a--discovery`).
 
 ---
 
@@ -295,7 +295,7 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 
 **Outcomes**: All IMPL pseudo-code is complete, authoritative, and token-commented. No contradictions or gaps remain. All YAML validated. `tied/agent-preload-contract.yaml` matches IMPL-locked paths and constants (or is explicitly left unchanged with reason).
 
-**Reference**: `tied/docs/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phases B-C; `tied/docs/implementation-decisions.md` § Mandatory essence_pseudocode, § Preferred vocabulary, § Expressing sequence and structure; `tied/docs/impl-code-test-linkage.md` §§ 2-3; `tied/docs/pseudocode-writing-and-validation.md` and `tied/docs/pseudocode-validation-checklist.yaml` for pseudo-code validation; `tied/docs/agent-preload-contract-template.yaml`.
+**Reference**: `tied/docs/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phases B-C; `tied/docs/implementation-decisions.md` § Mandatory essence_pseudocode, § Preferred vocabulary, § Expressing sequence and structure; `tied/docs/pseudocode-writing-and-validation.md` (Phases B–C and three-way alignment); `tied/docs/pseudocode-validation-checklist.yaml` for pseudo-code validation; `tied/docs/agent-preload-contract-template.yaml`.
 
 ---
 
@@ -357,7 +357,7 @@ LOOP FOR each IMPL block classified as unit or integration in test-strategy:
 **Tasks**:
 1. Map the pseudo-code block/procedure to one test group (`describe`/`it` or test function). One block maps to approximately one test group.
 2. Name the test group after the procedure and include the REQ token (e.g., `describe("SAVE_WORKFLOW REQ_DATA_SAVE", ...)`).
-3. Carry the **same** REQ/ARCH/IMPL token comment as the pseudo-code block, stating *what the test validates*:
+3. **Literal copy (mandatory):** As the first comment(s) in the test locus, place the **block lead** from `essence_pseudocode` for this block **verbatim** (same text; only wrap in the host language’s line or block comments; no paraphrase). See [pseudocode-writing-and-validation.md § Block lead and literal copy](pseudocode-writing-and-validation.md#block-lead-and-literal-copy-in-tests-and-code). Example shape (language may vary; content must match IMPL):
    ```
    // [IMPL-X] [ARCH-Y] [REQ-Z] — validates that PROCEDURE returns { ok }
    //   when input is valid and DEPENDENCY succeeds.
@@ -374,7 +374,7 @@ LOOP FOR each IMPL block classified as unit or integration in test-strategy:
 
 **Tasks**:
 1. Write only enough production code to make the failing test pass.
-2. Carry the **same** REQ/ARCH/IMPL token comment as the pseudo-code block, stating *how the code implements*:
+2. **Literal copy (mandatory):** The first comment(s) in the production locus for this block must be the same **block lead** text as in the IMPL and test (verbatim; host comment syntax only). [pseudocode-writing-and-validation.md § Block lead and literal copy](pseudocode-writing-and-validation.md#block-lead-and-literal-copy-in-tests-and-code). Example shape (language may vary; content must match the mapped pseudocode block lead):
    ```
    // [IMPL-X] [ARCH-Y] [REQ-Z] — PROCEDURE: validates input, delegates
    //   to DEPENDENCY, returns { ok }.
@@ -423,7 +423,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
           UNTIL all unit/integration IMPL blocks are covered and all tests pass)
 ```
 
-**Reference**: `tied/docs/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phases D-F (steps 11-20); `tied/docs/impl-code-test-linkage.md` § Stage 2 — Unit TDD; `tied/docs/implementation-order.md` steps 1-2.
+**Reference**: `tied/docs/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phases D-F (steps 11-20); `tied/docs/pseudocode-writing-and-validation.md` (Unit TDD Phases D–F; literal **block lead** in tests and code); `tied/docs/implementation-order.md` steps 1-2.
 
 ---
 
@@ -447,7 +447,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 
 **Outcomes**: All bindings have composition tests; composition code passes; three-way alignment holds.
 
-**Reference**: `tied/docs/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phase G (steps 21-24); `tied/docs/impl-code-test-linkage.md` § 4 — From unit modules to composition; `tied/docs/implementation-order.md` steps 3-4. For this project’s binding inventory and coverage, see `tied/docs/composition-coverage.md`.
+**Reference**: `tied/docs/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phase G (steps 21-24); `tied/docs/pseudocode-writing-and-validation.md` § Composition and E2E expansion (`#composition-and-e2e-expansion`); `tied/docs/implementation-order.md` steps 3-4. For this project’s binding inventory and coverage, see `tied/docs/composition-coverage.md`.
 
 ---
 
@@ -470,7 +470,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 
 **Outcomes**: E2E tests exist for all UI-only behavior; each is justified with a named platform constraint.
 
-**Reference**: `tied/docs/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phase H (steps 25-28); `tied/docs/impl-code-test-linkage.md` § 4 — The E2E decision; `tied/docs/implementation-order.md` step 4.
+**Reference**: `tied/docs/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phase H (steps 25-28); `tied/docs/pseudocode-writing-and-validation.md` § The E2E decision (under Composition and E2E expansion); `tied/docs/implementation-order.md` step 4.
 
 ---
 
@@ -647,7 +647,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 
 **RETURN** to the calling TDD iteration (unit-test-green continues with the next assertion or block).
 
-**Reference**: `tied/docs/impl-code-test-linkage.md` § 3 — LEAP Micro-Cycle During TDD; `tied/docs/processes.md` § `[PROC-LEAP]` rule 1.
+**Reference**: `tied/docs/pseudocode-writing-and-validation.md` § LEAP micro-cycle and post-fix recovery; `tied/docs/processes.md` § `[PROC-LEAP]` rule 1.
 
 ---
 
@@ -731,7 +731,7 @@ flowchart TD
 | Document | What it provides |
 |---|---|
 | `tied/docs/processes.md` | Canonical definitions for all `[PROC-*]` tokens referenced in this checklist |
-| `tied/docs/impl-code-test-linkage.md` | Three-way alignment guide with worked examples and the 33-step IMPL_CODE_TEST_SYNC procedure |
+| `tied/docs/pseudocode-writing-and-validation.md` | Unified IMPL pseudo-code guide: REQ vs post-fix tracks, MCP/sidecar mechanics, literal block linkage, phases A–I, LEAP, validation; replaces narrative in `impl-code-test-linkage.md` (stub) |
 | `tied/docs/LEAP.md` | LEAP rationale: why IMPL pseudo-code beats hunting through source |
 | `tied/docs/implementation-order.md` | Mandatory implementation order (tests → TDD → glue → E2E → close loop) |
 | `tied/docs/methodology-diagrams.md` | Visual diagrams for the traceability stack, dev cycle, TDD inner loop, CITDP, and YAML edit loop |
@@ -745,6 +745,6 @@ flowchart TD
 | `tied/docs/token-validation.md` | How `[PROC-TOKEN_VALIDATION]` combines project scripts with `tied_validate_consistency` |
 | `tied/docs/composition-coverage.md` | Binding inventory and composition vs E2E coverage for this project |
 | `tied/docs/citdp-policy.md` | When to create vs skip a CITDP record |
-| `tied/docs/pseudocode-writing-and-validation.md` | How to write and validate IMPL pseudo-code; when to run validation; minimum gating rules; canonical sidecar body structure links to `templates/impl-essence-pseudocode-template.md` |
+| `templates/impl-essence-pseudocode-template.md` | Canonical copy-paste sidecar body (linked from the unified pseudocode guide) |
 | `docs/pseudocode-format-and-practices.md` | Portable format and practices; strong sidecar preference for non-trivial IMPLs; template lives in `templates/impl-essence-pseudocode-template.md` |
 | `tied/docs/pseudocode-validation-checklist.yaml` | Canonical application pseudo-code validation checklist (categories, required/optional checks, order, tailoring) |

@@ -103,6 +103,5 @@ steps:
 references:
   - tied/docs/implementation-order.md
   - tied/docs/tied-first-implementation-procedure.md
-  - tied/docs/impl-code-test-linkage.md
   - tied/docs/pseudocode-writing-and-validation.md
   - tied/docs/pseudocode-validation-checklist.yaml

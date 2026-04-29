@@ -263,7 +263,7 @@ IMPL-TIED_FILES
 
 ### Pseudo-code with tokens and blocks
 
-The IMPL detail record has a logical field **`essence_pseudocode`**: the step-wise plan for the solution, with blocks documented by **tokens and text**. In this repository and in typical client checkouts, the **primary on-disk copy** of that string lives next to the IMPL detail YAML in **`tied/implementation-decisions/IMPL-TOKEN-pseudocode.md`**, not as an inline block inside **`IMPL-TOKEN.yaml`**; tools merge the sidecar when you read the detail. Workflows, MCP, and the CLI: [tied/docs/impl-essence-pseudocode-mcp-workflow.md](tied/docs/impl-essence-pseudocode-mcp-workflow.md). The **Hoverboard** fragment below is an illustrative **pseudo-code** sample, not a proof of on-disk format:
+The IMPL detail record has a logical field **`essence_pseudocode`**: the step-wise plan for the solution, with blocks documented by **tokens and text**. In this repository and in typical client checkouts, the **primary on-disk copy** of that string lives next to the IMPL detail YAML in **`tied/implementation-decisions/IMPL-TOKEN-pseudocode.md`**, not as an inline block inside **`IMPL-TOKEN.yaml`**; tools merge the sidecar when you read the detail. Workflows, MCP, and the CLI: [tied/docs/pseudocode-writing-and-validation.md § Mechanics](tied/docs/pseudocode-writing-and-validation.md#mechanics-editing-the-sidecar-mcp-and-cli) (see also stub [tied/docs/impl-essence-pseudocode-mcp-workflow.md](tied/docs/impl-essence-pseudocode-mcp-workflow.md)). The **Hoverboard** fragment below is an illustrative **pseudo-code** sample, not a proof of on-disk format:
 
 ```
 # [IMPL-ICON_CLICK_BEHAVIOR] [ARCH-ICON_CLICK_BEHAVIOR] [REQ-ICON_CLICK_BEHAVIOR]
@@ -357,10 +357,10 @@ This repository may **track** `tied/` under version control (methodology and pro
 ### Methodology Documentation (Reference Only)
 - `tied/docs/LEAP.md` - LEAP (Logic Elevation And Propagation) for expert programmers: why IMPL pseudo-code is more efficient for AI than hunting through source
 - `tied/docs/implementation-order.md` - Mandatory implementation order (unit tests, unit code via TDD, composition tests, composition code via TDD, E2E) in one place; same order in `tied/docs/processes.md` § PROC-TIED_DEV_CYCLE
-- `tied/docs/impl-code-test-linkage.md` - Three-way alignment guide (IMPL pseudo-code / tests / code); 9 phases with worked examples and LEAP micro-cycle
+- `tied/docs/pseudocode-writing-and-validation.md` - Unified IMPL pseudo-code guide (three-way alignment, phases A–I, LEAP); `impl-code-test-linkage.md` is a short redirect
 - `tied/docs/methodology-diagrams.md` - 6 mermaid diagrams: traceability stack, development phases, dev-cycle session workflow, TDD inner loop, CITDP procedure, YAML edit loop
 - `tied/docs/yaml-update-mcp-runbook.md` - Agent runbook: MCP-first routing for project TIED YAML writes (installed to client `tied/docs/` via `copy_files.sh` `DOCS_TO_COPY`)
-- `tied/docs/impl-essence-pseudocode-mcp-workflow.md` - IMPL `essence_pseudocode` sidecar (`IMPL-*-pseudocode.md`), direct edit vs MCP vs `tied-cli` file/stdin, validate after change
+- `tied/docs/pseudocode-writing-and-validation.md` - Full guide; § Mechanics covers sidecar (`IMPL-*-pseudocode.md`), MCP, `tied-cli`; `impl-essence-pseudocode-mcp-workflow.md` is a short redirect
 - `docs/checklist_feedback_loops.md` - CITDP, TIED, and LEAP feedback in the agent requirement checklist (Mermaid flows, descriptive phases)
 - `docs/conversation-analysis-tools.md` - Catalog of Ruby preprocessors and extractors for Cursor hook / transcript YAML
 - `docs/reddit-intro-tied-agentstream.md` - Short intro to TIED + agent batch tooling (shareable overview)

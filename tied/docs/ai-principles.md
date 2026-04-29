@@ -240,6 +240,8 @@ See `tied/docs/processes.md` § LEAP for the canonical process definition.
 - `tied/docs/implementation-decisions.md`, `tied/implementation-decisions.yaml`, `tied/implementation-decisions/`
 - `tied/semantic-tokens.yaml`, `tied/docs/semantic-tokens.md`
 - `tied/docs/processes.md` — LEAP, PROC-TIED_DEV_CYCLE, PROC-TOKEN_AUDIT, PROC-TOKEN_VALIDATION, PROC-COMMIT_MESSAGES
+- `tied/docs/source-file-impl-traceability.md` — Scoping IMPLs to specific files, TIED artifact checklist, dual pseudocode in sidecar and block comments (this repository)
+- `tied/docs/pseudocode-writing-and-validation.md` (#block-lead-and-literal-copy-in-tests-and-code) — Block lead only (default) vs full block in tests/code; pairs with the source-file guide
 - `tied/docs/detail-files-schema.md` — Schema for REQ/ARCH/IMPL detail YAML files
 - `tied/docs/agent-req-implementation-checklist.md` — Primary step-by-step checklist for implementing REQs or changes (`[PROC-AGENT_REQ_CHECKLIST]`); unifies CITDP, TIED dev cycle, IMPL_CODE_TEST_SYNC, LEAP, and validation
 - **`.cursor/skills/tied-yaml/SKILL.md`**, **`.cursor/skills/tied-yaml/scripts/tied-cli.sh`** — TIED read/write and validation when using the stdio **CLI** (same tools as the IDE **`tied-yaml` MCP**; see **`TIED_MCP_CMD`**, **`TIED_MCP_BIN`** in the skill)
@@ -264,5 +266,5 @@ See `tied/docs/processes.md` § LEAP for the canonical process definition.
 - **Implementation Phase**: Update documentation as decisions are refined
 - **Completion Phase**: Verify all documentation is current and complete
 
-**Last Updated**: 2026-04-23
+**Last Updated**: 2026-04-26
 **TIED Methodology Version**: 2.2.0

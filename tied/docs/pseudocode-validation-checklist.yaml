@@ -1,4 +1,5 @@
 # Application Pseudo-Code Validation Checklist
+# Unified narrative guide (Definition, writing, MCP mechanics, block linkage, phases A-I, LEAP, validation): tied/docs/pseudocode-writing-and-validation.md
 # Layer A (TIED) before Layer B (this checklist): run tied_validate_consistency (include_pseudocode) for IMPL
 # before or alongside application categories. See ./tied/docs/pseudocode-writing-and-validation.md (Validation layers).
 # For IMPL, primary text to validate is the UTF-8 file tied/implementation-decisions/IMPL-{TOKEN}-pseudocode.md
@@ -6,8 +7,16 @@
 # Process token: [PROC-PSEUDOCODE_VALIDATION]
 name: application_pseudocode_validation_checklist
 description: |
-  Reusable checklist for projects whose pseudo-code blocks describe the full application, including implementation
-  intent, unit tests, integration points, requirement traceability, and generation-readiness.
+  Reusable checklist for projects whose IMPL pseudo-code blocks describe implementation intent, unit and
+  integration tests, traceability, and (optionally) generation-readiness. Canonical definition and grammar
+  (language-agnostic TIED vocabulary, block-format sync to tests and code, LEAP when scope changes): see
+  tied/docs/pseudocode-writing-and-validation.md § Definition; sidecar body template: templates/impl-essence-pseudocode-template.md.
+
+  IMPL essence_pseudocode is language-agnostic: it uses INPUT/OUTPUT/DATA/CONTROL and procedure steps, not
+  host-language source. Full token lines use IMPL, ARCH, REQ bracket order when all three appear (see implementation-decisions.md).
+  Each logical block (e.g. Markdown ## section) is synchronized to tests and production code via literal block
+  leads (and optional full-block copy per project policy). Edits that change behavior or requirement/architecture
+  scope require [PROC-LEAP] validation (IMPL, then ARCH and REQ)—Layer A and Layer B do not replace that propagation.
 
   In TIED IMPL layout, the canonical on-disk source for the pseudo-code body is
   tied/implementation-decisions/IMPL-{TOKEN}-pseudocode.md (UTF-8). TIED merges that file into the logical
@@ -16,16 +25,17 @@ description: |
   or alongside the PARSE/SHAPE/... categories in this file.
 
   The sidecar is Markdown. Layer A (tied_validate_consistency) still inspects the merged string; bracket
-  [REQ-*/ARCH-*/IMPL-*] tags may appear on any line, not a fixed comment prefix. When a project (e.g. Comrak)
+  [IMPL-*/ARCH-*/REQ-*] tags may appear on any line, not a fixed comment prefix. When a project (e.g. Comrak)
   has no custom pseudo-code grammar parser, treat each section between ## headings in IMPL-*-pseudocode.md as
   one logical "block" for manual Layer B review. Optional items LINT-MD-001 and LINT-MD-002 below help reviewers
   align with the extract-generated sidecar pattern where that script is used.
 usage:
   intended_for:
-    - projects with pseudo-code as the primary application specification
-    - projects where pseudo-code drives unit-test and integration-test definitions
-    - projects that require requirement, architecture, and implementation traceability
+    - projects with IMPL pseudo-code as the primary specification for behavior (language-agnostic contracts and steps)
+    - projects where pseudo-code drives unit-test and integration-test definitions and literal block linkage to code
+    - projects that require REQ, ARCH, and IMPL traceability and LEAP-aligned updates when pseudocode scope changes
   how_to_apply:
+    - run Layer A (tied_validate_consistency) before relying on Layer B rows; resolve LEAP (IMPL to ARCH/REQ) when edits change scope—not only checklist passes
     - for IMPL, ingest the same text TIED uses—read IMPL-TOKEN-pseudocode.md, or the merged essence_pseudocode from yaml_detail_read; they are equivalent when the sidecar is present
     - for Comrak extract-generated IMPL-*-pseudocode.md, use script/extract_test_pseudocode_to_impl_sidecars.py as the source of truth for what a “block” is (H1 file intro, H2 per test, Source line, then list/blockquote body); do not re-invent a different block boundary without a project reason
     - run tied_validate_consistency (Layer A) so the external or merged pseudo-code is qualified for repository traceability rules; Layer A and this checklist (Layer B) are complementary—traceability vs. contracts/structure
@@ -300,7 +310,7 @@ checklist:
     required: false
     title: IMPL Markdown sidecar matches agreed heading structure when extract-generated
     verify:
-      - a single H1 for the file intro with REQ/ARCH/IMPL bracket tokens; per coverage section H2 with a Source line when using the Comrak extract path
+      - a single H1 for the file intro with IMPL/ARCH/REQ bracket tokens (methodology order when all three appear); per coverage section H2 with a Source line when using the Comrak extract path
     evidence:
       - read IMPL-TOKEN-pseudocode.md; compare to script/extract_test_pseudocode_to_impl_sidecars.py output
     severity_on_failure: info
@@ -387,6 +397,7 @@ tailoring:
       notes:
         - TIED data validation is not deferred with behavioral coverage; run Layer A whenever essence changes.
         - Behavioral coverage and traceability checklist categories that require a test artifact should be marked N/A or deferred with reference to this profile—not ad-hoc waiver IDs.
+        - Pseudocode or scope changes still require [PROC-LEAP] (IMPL, then ARCH/REQ) when they alter requirement or architecture commitments—do not treat pre_red checklist pass alone as LEAP completion (see pseudocode-writing-and-validation.md § LEAP).
     agent_req_checklist_post_test:
       summary: Post-test gate for [PROC-AGENT_REQ_CHECKLIST] verification-gate after unit and composition tests exist—closes deferrals from agent_req_checklist_pre_red.
       applies_when:
@@ -398,6 +409,7 @@ tailoring:
       notes:
         - Do not waive deferred_minimum_rules with ad-hoc waiver IDs—document pass/fail per checklist category; unresolved gaps imply GOTO resolve-pseudocode or unit-test-red per lead checklist verification-gate branches.
         - Behavioral coverage and traceability rows that require executable tests must be evaluated now that tests exist (or explicitly marked N/A with rationale).
+        - If IMPL pseudocode edits during this gate changed REQ or ARCH scope, confirm LEAP updates to ARCH/REQ records and indexes before marking the REQ slice complete.
   notes:
     - add project-specific block kinds under the schema category
     - add domain-specific safety rules under contract_validation

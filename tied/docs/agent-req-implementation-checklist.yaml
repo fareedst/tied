@@ -352,7 +352,7 @@ steps:
     references:
       - tied/docs/processes.md § [PROC-CITDP] step 2
       - tied/docs/processes.md § [PROC-IMPL_CODE_TEST_SYNC] Phase A (A1-A3)
-      - tied/docs/impl-code-test-linkage.md § Phase A — Discovery
+      - tied/docs/pseudocode-writing-and-validation.md#phase-a--discovery
     flow:
       next: author-requirement
       branches:
@@ -619,7 +619,8 @@ steps:
     outcomes: All IMPL pseudo-code complete, authoritative, token-commented; no contradictions or gaps; all YAML validated; tied/agent-preload-contract.yaml reconciled with IMPL code_locations and related fields (or explicitly unchanged with reason).
     references:
       - tied/docs/implementation-decisions.md § Mandatory essence_pseudocode, § Preferred vocabulary
-      - tied/docs/impl-code-test-linkage.md §§ 2-3
+      - tied/docs/pseudocode-writing-and-validation.md#three-way-alignment-and-phases-a-through-i
+      - tied/docs/pseudocode-writing-and-validation.md#leap-micro-cycle-and-post-fix-recovery
       - ./tied/docs/agent-preload-contract-template.yaml
     flow:
       next: risk-assessment
@@ -698,7 +699,8 @@ steps:
       - 'Responsibility: test/code owner step. Write tests only for pseudocode-defined logic; if a missing behavior is discovered, route back to pseudo-code-owner steps.'
       - Map the pseudo-code block/procedure to one test group (describe/it or test function). One block maps to approximately one test group.
       - Name the test group after the procedure and include the REQ token.
-      - Carry the same REQ/ARCH/IMPL token comment as the pseudo-code block, stating what the test validates.
+      - Copy the **block lead** line(s) for this block from `essence_pseudocode` **literally** (verbatim; host-language comments only) as the first comment(s) in the test locus; do not paraphrase. See ./tied/docs/pseudocode-writing-and-validation.md#block-lead-and-literal-copy-in-tests-and-code
+      - Carry the same REQ/ARCH/IMPL token comment as the pseudo-code block, stating what the test validates; this must be the same text as the corresponding block lead in the IMPL (literal copy rule).
       - Assertions must match REQ/IMPL OUTPUT and behavior—never use deliberately wrong expected values (e.g. incorrect bytes) solely to force a failure; that invalidates “expected reason.”
       - 'Brownfield: if production already satisfies the contract, write the correct regression test per REQ/IMPL; first run may pass—document as baseline lock. Do not require synthetic failure.'
       - 'Honest failing RED (when needed): add a new measurable requirement not yet implemented, or use a test-side fixture that simulates failure without editing production (document how); do not falsify expected output.'
@@ -709,14 +711,14 @@ steps:
     outcomes: Test exists matching pseudo-code and REQ; honest RED or brownfield baseline documented; production source unchanged except Pattern B minimal shim when declared.
     references:
       - tied/docs/processes.md § [PROC-IMPL_CODE_TEST_SYNC] Phases D-F
-      - tied/docs/impl-code-test-linkage.md § Stage 2 — Unit TDD
+      - tied/docs/pseudocode-writing-and-validation.md#three-way-alignment-and-phases-a-through-i
     flow:
       next: unit-test-green
       branches: []
       calls: []
     tracking:
       status: pending
-      consideration_before_proceeding: Test written and run; assertion matches pseudo-code OUTPUT/effect; failure reason honest (implementation gap, fixture, or brownfield baseline pass)—not wrong expected data.
+      consideration_before_proceeding: Test written and run; block lead comment copied literally from IMPL; assertion matches pseudo-code OUTPUT/effect; failure reason honest (implementation gap, fixture, or brownfield baseline pass)—not wrong expected data.
       retry_count: 0
       returned_from:
         - three-way-alignment-unit
@@ -731,12 +733,14 @@ steps:
     tasks:
       - 'Responsibility: test/code owner step. Implement only logic already defined in pseudocode for this block.'
       - Write only enough production code to make the failing test pass.
-      - Carry the same REQ/ARCH/IMPL token comment as the pseudo-code block, stating how the code implements.
+      - Copy the same **block lead** line(s) as **literal** (verbatim) first comment(s) in the production locus for this block as in the test and in `essence_pseudocode`—see ./tied/docs/pseudocode-writing-and-validation.md#block-lead-and-literal-copy-in-tests-and-code
+      - Carry the same REQ/ARCH/IMPL token comment as the pseudo-code block, stating how the code implements; must match the IMPL block lead text.
       - Run tests. IF tests fail THEN iterate on production code only (do not add new tests in GREEN).
       - 'IF the focused RED test now passes but other existing tests fail, STOP production-code iteration and emit a final fenced JSON control block: {"agentstream_control":{"schema_version":1,"action":"goto","target":"flag-contradictory-specs","reason":"Focused RED test passes, but existing tests fail after GREEN code; re-check related IMPL pseudo-code for contradictory specs before more code changes.","evidence":["<test command and failing existing test names or concise summary>"]}}. Do not infer this from prose; the fenced JSON block is the machine-readable agentstream routing signal.'
       - Run language-specific lint (Rust/TypeScript/Swift/YAML per project). IF lint fails THEN fix before proceeding.
-    outcomes: Test passes; lint clean; code carries correct token comments.
-    references: []
+    outcomes: Test passes; lint clean; code carries block lead text matching IMPL (literal copy) and correct token comments.
+    references:
+      - tied/docs/pseudocode-writing-and-validation.md#block-lead-and-literal-copy-in-tests-and-code
     flow:
       next: unit-refactor
       branches:
@@ -750,7 +754,7 @@ steps:
         - sub-leap-micro-cycle
     tracking:
       status: pending
-      consideration_before_proceeding: Test passes; lint clean; token comments match pseudo-code block.
+      consideration_before_proceeding: Test passes; lint clean; block lead in production matches IMPL and test; token comments match pseudo-code block.
       retry_count: 0
       returned_from: []
       state_history: []
@@ -823,7 +827,7 @@ steps:
     outcomes: All bindings have composition tests; composition code passes; three-way alignment holds.
     references:
       - tied/docs/processes.md § [PROC-IMPL_CODE_TEST_SYNC] Phase G
-      - tied/docs/impl-code-test-linkage.md § 4 — From unit modules to composition
+      - tied/docs/pseudocode-writing-and-validation.md#composition-and-e2e-expansion
       - tied/docs/composition-coverage.md
     flow:
       next: end-to-end-ui
@@ -858,7 +862,7 @@ steps:
     outcomes: E2E tests exist for all UI-only behavior; each justified with named platform constraint.
     references:
       - tied/docs/processes.md § [PROC-IMPL_CODE_TEST_SYNC] Phase H
-      - tied/docs/impl-code-test-linkage.md § 4 — The E2E decision
+      - tied/docs/pseudocode-writing-and-validation.md#composition-and-e2e-expansion
     flow:
       next: verification-gate
       branches:
@@ -1119,7 +1123,7 @@ sub_procedures:
       - 'IF the change affects REQ scope THEN update REQ via tied-cli.sh: GOTO author-requirement (scoped to affected REQ), CALL sub-yaml-edit-loop, then return here.'
     outcomes: Pseudo-code remained authoritative. No silent divergence. Three-way alignment holds for the affected block.
     references:
-      - tied/docs/impl-code-test-linkage.md § 3 — LEAP Micro-Cycle During TDD
+      - tied/docs/pseudocode-writing-and-validation.md#leap-micro-cycle-and-post-fix-recovery
       - tied/docs/processes.md § [PROC-LEAP] rule 1
     flow:
       return_to: unit-test-green
@@ -1139,7 +1143,7 @@ references:
   - document: ./tied/docs/processes.md
     provides: Canonical definitions for all [PROC-*] tokens referenced in this checklist
   - document: ./tied/docs/impl-code-test-linkage.md
-    provides: Three-way alignment guide with worked examples and the 33-step IMPL_CODE_TEST_SYNC procedure
+    provides: Stub; canonical three-way alignment and phases A–I are in pseudocode-writing-and-validation.md
   - document: ./tied/docs/LEAP.md
     provides: 'LEAP rationale: why IMPL pseudo-code beats hunting through source'
   - document: ./tied/docs/implementation-order.md
@@ -1167,6 +1171,6 @@ references:
   - document: ./tied/docs/citdp-policy.md
     provides: When to create vs skip a CITDP record
   - document: ./tied/docs/pseudocode-writing-and-validation.md
-    provides: How to write and validate IMPL pseudo-code; when to run validation; minimum gating rules
+    provides: Unified IMPL pseudo-code guide (REQ vs fix tracks, MCP mechanics, block linkage, phases A–I, LEAP, validation layers)
   - document: ./tied/docs/pseudocode-validation-checklist.yaml
     provides: Canonical application pseudo-code validation checklist (categories, required/optional checks, order, tailoring)

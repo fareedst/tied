@@ -255,6 +255,7 @@ say_x_of_y_client "${project_created}" "${#INDEX_YAML_FILES[@]}" "Created ${proj
 # Copy methodology docs into client tied/docs/ from canonical TIED source tied/docs/ (referenced by AGENTS.md, processes.md).
 # The agent-req-implementation-checklist.yaml is the trackable checklist; copy to a unique file per request (see its header).
 # CITDP paths in that checklist refer to the client project's tied/citdp/ (client workspace root), not the TIED source repo path.
+# IMPL pseudo-code methodology is centralized in pseudocode-writing-and-validation.md + pseudocode-validation-checklist.yaml below (do not re-add retired split docs to this list).
 mkdir -p "${TIED_DIR}/docs"
 DOCS_TO_COPY=(
   "adding-tied-mcp-and-invoking-passes.md"
@@ -269,16 +270,21 @@ DOCS_TO_COPY=(
   "agent-req-implementation-checklist.yaml"
   "ai-agent-tied-mcp-usage.md"
   "yaml-update-mcp-runbook.md"
-  "impl-code-test-linkage.md"
-  "impl-essence-pseudocode-mcp-workflow.md"
   "implementation-decisions.md"
   "implementation-order.md"
   "LEAP.md"
   "methodology-diagrams.md"
   "new-feature-process.md"
   "processes.md"
-  "pseudocode-validation-checklist.yaml"
+  # Canonical IMPL pseudo-code (primary references for bootstrap):
+  # - pseudocode-writing-and-validation.md — unified guide (writing, MCP mechanics, block linkage, phases A–I, LEAP, when to validate).
+  # - pseudocode-validation-checklist.yaml — Layer B application checklist ([PROC-PSEUDOCODE_VALIDATION]).
+  # Short bookmark stubs (same legacy filenames; redirect into the unified guide — copy for stable links):
+  "impl-code-test-linkage.md"
+  "impl-essence-pseudocode-mcp-workflow.md"
+  "impl-pseudocode-block-comment-linkage.md"
   "pseudocode-writing-and-validation.md"
+  "pseudocode-validation-checklist.yaml"
   "req-impl-state-guide-agent-workflow.md"
   "requirement-list-state-guide-agent-workflow.md"
   "requirements.md"

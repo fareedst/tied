@@ -2,7 +2,7 @@
 
 **Purpose**: One entry page that links every document that helps agents **read and update project TIED YAML** with the least friction (correct tools, payloads, merge semantics, validation).
 
-**Do not** use this as a substitute for the skill: TIED **YAML** and structured records still go through [`.cursor/skills/tied-yaml/scripts/tied-cli.sh`](../../.cursor/skills/tied-yaml/scripts/tied-cli.sh) (or the same MCP in-editor) per the [skill](../../.cursor/skills/tied-yaml/SKILL.md) routing table. **Exception:** the IMPL **pseudo-code sidecar** `IMPL-*-pseudocode.md` may be edited as plain text when most efficient; see [impl-essence-pseudocode-mcp-workflow.md](impl-essence-pseudocode-mcp-workflow.md) §1.3.
+**Do not** use this as a substitute for the skill: TIED **YAML** and structured records still go through [`.cursor/skills/tied-yaml/scripts/tied-cli.sh`](../../.cursor/skills/tied-yaml/scripts/tied-cli.sh) (or the same MCP in-editor) per the [skill](../../.cursor/skills/tied-yaml/SKILL.md) routing table. **Exception:** the IMPL **pseudo-code sidecar** `IMPL-*-pseudocode.md` may be edited as plain text when most efficient; see [pseudocode-writing-and-validation.md § Mechanics](pseudocode-writing-and-validation.md#mechanics-editing-the-sidecar-mcp-and-cli).
 
 ---
 
@@ -10,7 +10,7 @@
 
 1. Confirm the active tree: MCP tool **`tied_config_get_base_path`** (see [AGENTS.md](../../AGENTS.md) §1–2 and §3.2; cheat sheet in [yaml-update-mcp-runbook.md](yaml-update-mcp-runbook.md) §3).
 2. **Mutate TIED YAML via** `tied-cli.sh` (or in-editor MCP) — [SKILL.md](../../.cursor/skills/tied-yaml/SKILL.md) (environment, `@args.json`, large payloads, pseudocode file/stdin for IMPL body).
-3. **IMPL pseudo-code body**: direct **`IMPL-*-pseudocode.md`**, or **`impl_detail_set_essence_pseudocode`** with inline text / **`essence_pseudocode_path`**, or `tied-cli` **`TIED_CLI_IMPL_ESSENCE_FILE`** / **stdin** — not a giant `yaml_detail_update` — [impl-essence-pseudocode-mcp-workflow.md](impl-essence-pseudocode-mcp-workflow.md); background in [yaml-update-mcp-runbook.md](yaml-update-mcp-runbook.md) §2.2.
+3. **IMPL pseudo-code body**: direct **`IMPL-*-pseudocode.md`**, or **`impl_detail_set_essence_pseudocode`** with inline text / **`essence_pseudocode_path`**, or `tied-cli` **`TIED_CLI_IMPL_ESSENCE_FILE`** / **stdin** — not a giant `yaml_detail_update` — [pseudocode-writing-and-validation.md § Mechanics](pseudocode-writing-and-validation.md#mechanics-editing-the-sidecar-mcp-and-cli); background in [yaml-update-mcp-runbook.md](yaml-update-mcp-runbook.md) §2.2.
 4. **Several writes**: **`yaml_updates_apply`** with **`dry_run: true`** first — [yaml-update-mcp-runbook.md](yaml-update-mcp-runbook.md) §2.
 5. **After writes**: `yaml_index_validate` / `lint_yaml` (per checklist) + **`tied_validate_consistency`** — [SKILL.md](../../.cursor/skills/tied-yaml/SKILL.md), [agent-req-implementation-checklist.md](agent-req-implementation-checklist.md) (`sub-yaml-edit-loop`).
 6. **Detail field shapes** (e.g. `description`): prefer [detail-files-schema.md](detail-files-schema.md) over partial samples.
@@ -25,7 +25,7 @@
 | Full MCP tool catalog and parameter notes | [`.cursor/skills/tied-yaml/reference.md`](../../.cursor/skills/tied-yaml/reference.md) |
 | One-token updates, batch merges, nested merge semantics, small payloads, timeouts | [yaml-update-mcp-runbook.md](yaml-update-mcp-runbook.md) |
 | **Goal → tool** cheat sheet (includes `tied_config_get_base_path`) | [yaml-update-mcp-runbook.md](yaml-update-mcp-runbook.md) §3 |
-| **Editing `essence_pseudocode` in IMPL (sidecar `.md`, MCP `essence_pseudocode_path`, `tied-cli` file/stdin, optional `jq`)** | [impl-essence-pseudocode-mcp-workflow.md](impl-essence-pseudocode-mcp-workflow.md) |
+| **Editing `essence_pseudocode` in IMPL (sidecar `.md`, MCP `essence_pseudocode_path`, `tied-cli` file/stdin, optional `jq`)** | [pseudocode-writing-and-validation.md § Mechanics](pseudocode-writing-and-validation.md#mechanics-editing-the-sidecar-mcp-and-cli) |
 | **Pseudocode writing/validation, portable format, canonical hand-authored body template (prefer sidecar for non-trivial IMPLs)** | [pseudocode-writing-and-validation.md](pseudocode-writing-and-validation.md) · [docs/pseudocode-format-and-practices.md](../docs/pseudocode-format-and-practices.md) · [templates/impl-essence-pseudocode-template.md](../templates/impl-essence-pseudocode-template.md) |
 
 **Note**: `tied_config_get_base_path` is documented in [reference.md](../../.cursor/skills/tied-yaml/reference.md) (Config), [yaml-update-mcp-runbook.md](yaml-update-mcp-runbook.md) §3, and [AGENTS.md](../../AGENTS.md).

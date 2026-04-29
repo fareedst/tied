@@ -7,7 +7,7 @@ isProject: false
 
 # TIED pseudocode format and practices (cross-project standardization)
 
-**In a TIED project tree:** the detailed how-to and validation order live in [tied/docs/pseudocode-writing-and-validation.md](../tied/docs/pseudocode-writing-and-validation.md) ([PROC-PSEUDOCODE_VALIDATION]). The **canonical copy-paste** Markdown for new sidecar bodies is [templates/impl-essence-pseudocode-template.md](../templates/impl-essence-pseudocode-template.md).
+**In a TIED project tree:** the detailed how-to and validation order live in [tied/docs/pseudocode-writing-and-validation.md](../tied/docs/pseudocode-writing-and-validation.md) ([PROC-PSEUDOCODE_VALIDATION]). The **language-agnostic** rule for **literal copy of block lead comments** from IMPL into tests and code is in [tied/docs/pseudocode-writing-and-validation.md § Block lead and literal copy](../tied/docs/pseudocode-writing-and-validation.md#block-lead-and-literal-copy-in-tests-and-code). The **canonical copy-paste** Markdown for new sidecar bodies is [templates/impl-essence-pseudocode-template.md](../templates/impl-essence-pseudocode-template.md).
 
 ---
 
@@ -42,6 +42,19 @@ TIED uses bracket tokens in plain text. **Every block** in `essence_pseudocode` 
 - **Sub-blocks** that implement the **same** REQ/ARCH/IMPL set: state only the **how** (repeat the full token list is optional).
 - **Sub-blocks** that implement a **different** set (e.g. another IMPL, extra REQ): open with a line listing that set and **how** that sub-block implements it.
 - In **Markdown** sidecars, the “comment” is usually the first **bullet** line in a section or a line starting with tokens in brackets. Tied validation can require bracketed `[REQ-*]`, `[ARCH-*]`, `[IMPL-*]` to appear on lines in the merged string—place them where your project’s gate expects them (commonly the first substantive line of each H2 block).
+
+---
+
+## 3a. Block lead comments in source and tests (literal copy)
+
+- **IMPL grammar** in `essence_pseudocode` is defined by the TIED vocabulary in §2 and §4—not by any product programming language.
+- For **each** logical block, the **block lead** line(s) that satisfy `[PROC-IMPL_PSEUDOCODE_TOKENS]` (REQ/ARCH/IMPL naming + *how* / one-line summary per block rules) **must be copied literally** into:
+  - the test locus for that block, and
+  - the managed production (or equivalent) locus for that block,
+  using **only** that language’s **comment** delimiters (e.g. `//`, `#`, `/* */`); the **string content** of the lead must match the pseudocode block (no paraphrase).
+- **Not required:** pasting the full procedure body, `INPUT`/`OUTPUT` **lines as code**, or entire H2 sections into every file. Algorithm lives in TIED; executable logic lives in source. See the full spec: [tied/docs/pseudocode-writing-and-validation.md § Block lead and literal copy](../tied/docs/pseudocode-writing-and-validation.md#block-lead-and-literal-copy-in-tests-and-code).
+
+**Minimal shape (illustrative):** If the first substantive line in the H2 is `- [REQ-X] [ARCH-Y] [IMPL-Z] How: ...`, the same line (after any project-normalized leading marker) appears as a comment at the top of the matching test and the matching implementation unit.
 
 ---
 
@@ -119,7 +132,7 @@ flowchart LR
 | **Hand-authored** | The sidecar is the editable artifact. No script overwrites it, or the script is off by default. |
 | **Machine-owned (full or partial)** | Authoritative change happens in **generator inputs** (e.g. NORM comments in test sources). Re-run the project script. **Do not** hand-edit generated regions. If the repo uses a **marker** (e.g. a line that begins a generated tail), do not hand-edit **below** that line. |
 
-**Optional code anchors:** In Rust, a well-formed `/* */` block **above** a function can mirror a sidecar H2; keep rustdoc in `///` for public API docs, sidecar for full traceability. Other languages: a short file header comment pointing to `tied/.../IMPL-{TOKEN}-pseudocode.md` and the H2 name reduces drift.
+**Optional extra anchors (does not replace literal block leads):** In **Rust** only, a well-formed `/* */` block **above** a function can provide narrative or **mirror** a sidecar H2 for human orientation; `///` remains for public rustdoc, sidecar for full traceability. In **any** language, a file-header pointer to `tied/.../IMPL-{TOKEN}-pseudocode.md` and an H2 or block name is optional. These patterns **do not** replace the mandatory **§3a** rule: the **block lead** text for each block must still appear **verbatim** (in comments) at the implementing test and code sites, per [pseudocode-writing-and-validation.md § Block lead and literal copy](../tied/docs/pseudocode-writing-and-validation.md#block-lead-and-literal-copy-in-tests-and-code).
 
 ---
 
@@ -127,13 +140,14 @@ flowchart LR
 
 1. **Adopt the sidecar** as default for `essence_pseudocode` (UTF-8 Markdown path above).
 2. **Use the template in §5** (or a strict superset) so H1/H2, contracts, and token lines stay uniform across IMPLs.
-3. **Embed preferred vocabulary (§4)** in team conventions.
-4. **Enforce [PROC-IMPL_PSEUDOCODE_TOKENS] (§3)** in review and in Layer A.
-5. **Run Layer A** after every pseudocode/sidecar change; add **Layer B** in proportion to reliance on pseudo-code as the spec of record.
-6. **Document** whether each IMPL’s sidecar is hand-authored or script-owned; document block boundaries for any generator.
-7. **Treat test/code logic drift as LEAP input**: when tests or code contain logic missing from pseudocode, translate it into pseudocode first, then assess ARCH/REQ propagation.
-8. **For cross-IMPL work**, use explicit composition and ownership (see template and §2 collision detection).
-9. **Process token:** Reference **`[PROC-PSEUDOCODE_VALIDATION]`** in project process docs for “when to validate.”
+3. **Apply §3a** (literal **block lead** in tests and code) for every in-scope block.
+4. **Embed preferred vocabulary (§4)** in team conventions.
+5. **Enforce [PROC-IMPL_PSEUDOCODE_TOKENS] (§3)** in review and in Layer A.
+6. **Run Layer A** after every pseudocode/sidecar change; add **Layer B** in proportion to reliance on pseudo-code as the spec of record.
+7. **Document** whether each IMPL’s sidecar is hand-authored or script-owned; document block boundaries for any generator.
+8. **Treat test/code logic drift as LEAP input**: when tests or code contain logic missing from pseudocode, translate it into pseudocode first, then assess ARCH/REQ propagation.
+9. **For cross-IMPL work**, use explicit composition and ownership (see template and §2 collision detection).
+10. **Process token:** Reference **`[PROC-PSEUDOCODE_VALIDATION]`** in project process docs for “when to validate.”
 
 ---
 
@@ -148,7 +162,7 @@ flowchart LR
 
 ## 10. Summary one-liner
 
-**Standardize on:** `IMPL-{TOKEN}-pseudocode.md` as canonical `essence_pseudocode`, the **template file** [`templates/impl-essence-pseudocode-template.md`](../templates/impl-essence-pseudocode-template.md) (same content as §5) plus **vocabulary in §4**, **token comments on every block (§3)**, **Layer A after every change**, **Layer B as scaled**, and a clear **hand vs machine** policy for each generated path.
+**Standardize on:** `IMPL-{TOKEN}-pseudocode.md` as canonical `essence_pseudocode`, the **template file** [`templates/impl-essence-pseudocode-template.md`](../templates/impl-essence-pseudocode-template.md) (same content as §5) plus **vocabulary in §4**, **token comments on every block (§3)**, **§3a literal block-lead copy** into tests and code, **Layer A after every change**, **Layer B as scaled**, and a clear **hand vs machine** policy for each generated path.
 
 ---
 

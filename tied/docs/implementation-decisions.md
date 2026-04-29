@@ -8,7 +8,7 @@ This document serves as the **index** for all implementation decisions in this p
 
 All decisions are cross-referenced with architecture decisions using `[ARCH-*]` tokens and requirements using `[REQ-*]` tokens for traceability.
 
-**Source of consistent logic:** IMPL pseudo-code (`essence_pseudocode` in each IMPL detail file) is the **source of consistent logic** for the implementation. Logical and flow issues are resolved there before any tests or code are written; tests and code are derived from and must align with it.
+**Source of consistent logic:** IMPL pseudo-code (`essence_pseudocode` in each IMPL detail file) is the **source of consistent logic** for the implementation. Logical and flow issues are resolved there before any tests or code are written; tests and code are derived from and must align with it. For the **language-agnostic** rule that each block’s **lead comment** in `essence_pseudocode` is **copied literally** into the corresponding test and implementation sites (host-language comments only), see [pseudocode-writing-and-validation.md § Block lead and literal copy](pseudocode-writing-and-validation.md#block-lead-and-literal-copy-in-tests-and-code).
 
 ## Directory Structure
 
@@ -96,6 +96,7 @@ Every IMPL detail file **must** include an `essence_pseudocode` field. **Address
 - **One action per step:** Each logical step in `essence_pseudocode` should express one clear action or decision (or one small, coherent block). Avoid long prose lines that mix multiple actions; that weakens collision detection and makes it harder to compare IMPLs and spot overlapping steps or ordering.
 - **Traceability to tests:** Key branches and procedures in `essence_pseudocode` should be reflected in test names or test structure (e.g. one procedure or branch ≈ one `describe`/`it` or test section). That keeps the pseudo-code precise enough to guide tests and to detect when an IMPL’s behavior has drifted from its description. Optionally, note the intended test level in a comment at block start (e.g. `# unit-testable: NORMALIZE_INPUT`, `# E2E-only: platform onMessage binding`) so E2E-only code is visible and justified at design time.
 - **Token comments in every block (critical)** `[PROC-IMPL_PSEUDOCODE_TOKENS]`: Every block in `essence_pseudocode` must include a comment that names the REQ, ARCH, and IMPL reflected in that block and states how the block implements them. Top-level: one comment naming IMPL, ARCH, and REQ plus a one-line summary of what the pseudo-code implements. For each logical sub-block (e.g. INPUT/OUTPUT, a procedure, an event handler): if it implements the same set as the top level, comment only the *how* (no token list); if a sub-block implements a different set (e.g. depends on another IMPL), start that sub-block with a comment listing the tokens for that set and how the sub-block implements them. This is the primary mechanism for traceability from requirements to implementation.
+- **Literal copy of block lead comments to tests and code (mandatory linkage):** For every logical block, the **same** block lead line(s) that satisfy `[PROC-IMPL_PSEUDOCODE_TOKENS]` for that block must be **reproduced literally** in managed **test** and **production** code (wrapped only in that host language’s comment syntax). Do not paraphrase; if the block lead text changes, update TIED and then the copies (LEAP when scope changes). This keeps IMPL, tests, and code aligned for `[PROC-TOKEN_AUDIT]`. Full rule: [pseudocode-writing-and-validation.md § Block lead and literal copy](pseudocode-writing-and-validation.md#block-lead-and-literal-copy-in-tests-and-code). **IMPL** uses its own grammar; block lead text is not host-language code.
 
 ### Preferred vocabulary for essence_pseudocode
 
@@ -138,6 +139,7 @@ These rules apply to **managed code** everywhere (source, tests, data, and pseud
 
 2. **Block and token naming**
    - Every **block** of managed code must include a comment that names all **REQ**, **ARCH**, and **IMPL** reflected in that block (i.e. whose implementation depends on that block), and states **how** that block implements the requirements.
+   - The **wording of that lead comment** for each block must be the **same literal** text as the corresponding **block lead** in `essence_pseudocode` (after wrapping in the host language’s comment delimiters), unless the only changes are the approved synchronization updates from a LEAP pass. See [pseudocode-writing-and-validation.md § Block lead and literal copy](pseudocode-writing-and-validation.md#block-lead-and-literal-copy-in-tests-and-code).
    - For TIED tokens, a **block** is a contiguous sequence of code (complete logical units) that all implement the **same set** of REQ / ARCH / IMPL. A single block may contain **nested blocks** that implement a **different set** of REQ / ARCH / IMPL.
 
 3. **Using token names selectively**
