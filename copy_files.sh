@@ -274,15 +274,10 @@ DOCS_TO_COPY=(
   "implementation-order.md"
   "LEAP.md"
   "methodology-diagrams.md"
-  "new-feature-process.md"
   "processes.md"
   # Canonical IMPL pseudo-code (primary references for bootstrap):
   # - pseudocode-writing-and-validation.md — unified guide (writing, MCP mechanics, block linkage, phases A–I, LEAP, when to validate).
   # - pseudocode-validation-checklist.yaml — Layer B application checklist ([PROC-PSEUDOCODE_VALIDATION]).
-  # Short bookmark stubs (same legacy filenames; redirect into the unified guide — copy for stable links):
-  "impl-code-test-linkage.md"
-  "impl-essence-pseudocode-mcp-workflow.md"
-  "impl-pseudocode-block-comment-linkage.md"
   "pseudocode-writing-and-validation.md"
   "pseudocode-validation-checklist.yaml"
   "req-impl-state-guide-agent-workflow.md"

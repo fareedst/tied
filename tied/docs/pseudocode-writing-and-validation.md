@@ -582,4 +582,4 @@ Mechanical generation from tests does **not** replace verbatim block-lead rules 
 | [tied-yaml skill](../../.cursor/skills/tied-yaml/SKILL.md), [reference.md](../../.cursor/skills/tied-yaml/reference.md) | CLI/MCP tools |
 | [source-file-impl-traceability.md](source-file-impl-traceability.md) | Full-block file layout (markdown_exec) |
 
-**Legacy stubs (same filenames; redirect here):** [impl-essence-pseudocode-mcp-workflow.md](impl-essence-pseudocode-mcp-workflow.md), [impl-pseudocode-block-comment-linkage.md](impl-pseudocode-block-comment-linkage.md), [impl-code-test-linkage.md](impl-code-test-linkage.md).
+Older split guides under legacy filenames were retired; **this document** is the single narrative source for three-way alignment, MCP/sidecar mechanics, block-lead linkage, phases A–I, LEAP, and validation.

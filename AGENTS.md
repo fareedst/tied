@@ -4,7 +4,7 @@
 
 **TIED Methodology Version**: 2.2.0
 
-This document centralizes every instruction AI coding assistants must follow while working in TIED repositories. It supersedes reminders in `.ai-agent-instructions`, `.cursorrules`, and README snippets. Treat it as the canonical reference when configuring prompts, IDE rules, or agent workflows. For methodology background (what TIED is, costs and benefits, LEAP rationale), see `tied/docs/LEAP.md`, `tied/docs/implementation-decisions.md`, and `tied/docs/pseudocode-writing-and-validation.md` (IMPL pseudo-code lifecycle, three-way alignment, LEAP; copied into the project by `copy_files.sh` when missing). `tied/docs/impl-code-test-linkage.md` is a short redirect to the same guide.
+This document centralizes every instruction AI coding assistants must follow while working in TIED repositories. It supersedes reminders in `.ai-agent-instructions`, `.cursorrules`, and README snippets. Treat it as the canonical reference when configuring prompts, IDE rules, or agent workflows. For methodology background (what TIED is, costs and benefits, LEAP rationale), see `tied/docs/LEAP.md`, `tied/docs/implementation-decisions.md`, and `tied/docs/pseudocode-writing-and-validation.md` (IMPL pseudo-code lifecycle, three-way alignment, LEAP; copied into the project by `copy_files.sh` when missing).
 
 ---
 
@@ -140,7 +140,7 @@ Same filename at repo root (template) and in `tied/` (project index); location d
 | `tied/docs/detail-files-schema.md` | Schema for REQ/ARCH/IMPL detail YAML files |
 | `tied/docs/processes.md` | Process tracking including `[PROC-YAML_DB_OPERATIONS]`, LEAP, PROC-TIED_DEV_CYCLE. Use TIED MCP as primary interface to TIED data (see §2 TIED data access). |
 | `tied/docs/agent-req-implementation-checklist.md` | Primary step-by-step checklist for implementing any new REQ or change; unifies CITDP, TIED dev cycle, IMPL_CODE_TEST_SYNC, LEAP, and validation into one executable procedure (`[PROC-AGENT_REQ_CHECKLIST]`). Trackable YAML: `tied/docs/agent-req-implementation-checklist.yaml` (copy to unique per-request file per its header). |
-| `tied/docs/pseudocode-writing-and-validation.md` | Unified IMPL pseudo-code guide: new-REQ vs post-fix tracks, MCP/sidecar mechanics, literal block linkage, phases A–I, LEAP, validation layers (`[PROC-PSEUDOCODE_VALIDATION]`). Checklist: `tied/docs/pseudocode-validation-checklist.yaml`. Stubs: `impl-code-test-linkage.md`, `impl-pseudocode-block-comment-linkage.md`, `impl-essence-pseudocode-mcp-workflow.md`. |
+| `tied/docs/pseudocode-writing-and-validation.md` | Unified IMPL pseudo-code guide: new-REQ vs post-fix tracks, MCP/sidecar mechanics, literal block linkage, phases A–I, LEAP, validation layers (`[PROC-PSEUDOCODE_VALIDATION]`). Checklist: `tied/docs/pseudocode-validation-checklist.yaml`. |
 | `docs/pseudocode-format-and-practices.md` | Standalone format and practices (portable); pairs with the writing doc. **Strong** sidecar preference for non-trivial or growing projects. |
 | `templates/impl-essence-pseudocode-template.md` | Canonical copy-paste `essence_pseudocode` (sidecar) body template. |
 | `.cursorrules` | IDE loader that points back to this document |

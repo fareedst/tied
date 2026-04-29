@@ -1142,8 +1142,6 @@ sub_procedures:
 references:
   - document: ./tied/docs/processes.md
     provides: Canonical definitions for all [PROC-*] tokens referenced in this checklist
-  - document: ./tied/docs/impl-code-test-linkage.md
-    provides: Stub; canonical three-way alignment and phases A–I are in pseudocode-writing-and-validation.md
   - document: ./tied/docs/LEAP.md
     provides: 'LEAP rationale: why IMPL pseudo-code beats hunting through source'
   - document: ./tied/docs/implementation-order.md

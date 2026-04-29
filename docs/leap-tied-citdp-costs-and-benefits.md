@@ -95,7 +95,7 @@ Think of **TIED** like labeled rooms in a building: every important decision has
 - **LEAP requires discipline:** If developers skip updating IMPL when behavior changes, LEAP cannot help—the process becomes token theater.
 - **Critique of “documentation-first”:** In fast product discovery, you may **prototype first**, then **backfill** REQ/ARCH/IMPL and tests in one LEAP-aware pass. The checklist still applies; the entry point may emphasize change-definition–impact-discovery from observed behavior rather than greenfield intent.
 
-**Related deep dives:** [LEAP.md](LEAP.md), [pseudocode-writing-and-validation.md](../tied/docs/pseudocode-writing-and-validation.md) (three-way alignment; [impl-code-test-linkage.md](../tied/docs/impl-code-test-linkage.md) redirects), [methodology-diagrams.md](methodology-diagrams.md). After `copy_files.sh`, the same content also lives under `tied/docs/` in client projects.
+**Related deep dives:** [LEAP.md](LEAP.md), [pseudocode-writing-and-validation.md](../tied/docs/pseudocode-writing-and-validation.md#three-way-alignment-and-phases-a-through-i) (three-way alignment and phases A–I), [methodology-diagrams.md](methodology-diagrams.md). After `copy_files.sh`, the same content also lives under `tied/docs/` in client projects.
 
 ---
 
