@@ -44,16 +44,16 @@ CITDP-REQ-GOAGENT-NON-COMPACT-HTML-FORMAT:
       - REQ satisfaction criteria and ARCH/IMPL tests documented; REQ status Implemented
       - tools/agentstream tests pass; tied_validate_consistency ok for project tied/
     references:
-      - tied/requirements/REQ-GOAGENT-NON-COMPACT-HTML-FORMAT.yaml
       - tied/architecture-decisions/ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT.yaml
-      - tied/implementation-decisions/IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT.yaml
       - tied/implementation-decisions/IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT-pseudocode.md
+      - tied/implementation-decisions/IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT.yaml
+      - tied/requirements/REQ-GOAGENT-NON-COMPACT-HTML-FORMAT.yaml
   impact_analysis:
     tied_tokens_affected: []
     tied_tokens_new:
-      - REQ-GOAGENT-NON-COMPACT-HTML-FORMAT
       - ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT
       - IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT
+      - REQ-GOAGENT-NON-COMPACT-HTML-FORMAT
     modules_or_boundaries: |
       config: NonCompactHTML, NonCompactHTMLStableIndent; main: after ApplyPromptFilePreload, applyPostPreloadNonCompactHTML;
       htmlformat: IntegrateWithMain, ApplyToTurns, FormatNonCompactHTML. Boundaries: string transform on Turn.Parts only; pipeline Build and executor unchanged.

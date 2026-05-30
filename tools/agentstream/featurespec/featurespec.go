@@ -1,3 +1,5 @@
+// [IMPL-GOAGENT-FEATURESPEC] [ARCH-GOAGENT-YAML-FEATURESPEC] [REQ-GOAGENT-FEATURESPEC-BATCH]
+// How: Normalize batch YAML, sort by order, filter, render markdown; LoadTurns ChainFromPrevious false.
 package featurespec
 
 import (

@@ -1,7 +1,6 @@
 // Package text builds Turns from argv words, prompt files, and multi-block prompts files.
-// REQ: REQ-GOAGENT-TEXT-SOURCES
-// ARCH: ARCH-GOAGENT-TEXT-SOURCES
-// IMPL: IMPL-GOAGENT-TEXT-SOURCES
+// [IMPL-GOAGENT-TEXT-SOURCES] [ARCH-GOAGENT-TEXT-SOURCES] [REQ-GOAGENT-TEXT-SOURCES]
+// How: ArgvTurn, TurnsFromPromptFiles, TurnsFromPromptsFiles, VerifySessionTurn — each Turn ChainFromPrevious true.
 package text
 
 import (

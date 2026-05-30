@@ -9,3 +9,5 @@ REQ-GOAGENT-AGENT-EXECUTOR:
     implementation:
       - IMPL-GOAGENT-EXECUTOR
   detail_file: requirements/REQ-GOAGENT-AGENT-EXECUTOR.yaml
+  satisfaction_criteria:
+    - criterion: Executor and stream-json terms are canonical in tied/vocab/agentstream.md; executor_Run block in IMPL-GOAGENT-EXECUTOR-pseudocode.md

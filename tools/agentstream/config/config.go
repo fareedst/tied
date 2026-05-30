@@ -1,7 +1,6 @@
 // Package config parses CLI arguments and resolves defaults (unified shell + Ruby runner).
-// REQ: REQ-GOAGENT-CLI-CONFIG
-// ARCH: ARCH-GOAGENT-CLI
-// IMPL: IMPL-GOAGENT-CLI
+// [IMPL-GOAGENT-CLI-CMD] [ARCH-GOAGENT-CLI] [REQ-GOAGENT-CLI-CONFIG]
+// How: ParseAndResolve splits --, parses flags, resolveDefaults, validate; consumed by cmd/agentstream main.
 package config
 
 import (

@@ -1,5 +1,6 @@
 // Package tiedpreflight validates .cursor/mcp.json for tied-yaml before spawning cursor agent.
-// REQ-GOAGENT-CLI-CONFIG (companion guard)
+// [IMPL-GOAGENT-CLI-CMD] [ARCH-GOAGENT-CLI] [REQ-GOAGENT-CLI-CONFIG]
+// How: Optional static preflight when SkipTiedMCPPreflight is false; companion guard for MCP layout.
 package tiedpreflight
 
 import (

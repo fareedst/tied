@@ -9,7 +9,8 @@ import (
 	"testing"
 )
 
-// REQ-GOAGENT-CHECKLIST-CONTROL ensures streamed assistant text is also captured for control parsing.
+// [IMPL-GOAGENT-EXECUTOR] [ARCH-GOAGENT-EXECUTOR] [REQ-GOAGENT-AGENT-EXECUTOR]
+// How: Run captures assistant text fragments and session_id from stream-json stdout.
 func TestRunCapturesAssistantText(t *testing.T) {
 	dir := t.TempDir()
 	agent := filepath.Join(dir, "agent-stub.sh")

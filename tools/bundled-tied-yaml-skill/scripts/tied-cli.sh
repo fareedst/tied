@@ -44,10 +44,20 @@ if [[ "${ARGS_JSON}" == @* ]]; then
 fi
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+# Client project root (four levels up from .cursor/skills/tied-yaml/scripts); used for TIED_BASE_PATH default.
 REPO_ROOT="$(cd "$SCRIPT_DIR/../../../.." && pwd)"
 
 : "${TIED_BASE_PATH:=$REPO_ROOT/tied}"
-: "${TIED_MCP_BIN:=$REPO_ROOT/mcp-server/dist/index.js}"
+
+# TIED methodology repository (mcp-server lives here). copy_files.sh replaces the placeholder below
+# with the absolute TIED source dir used at bootstrap so TIED_MCP_BIN points at that repo's dist/index.js.
+: "${TIED_REPO_ROOT:=/ABSOLUTE/PATH/TO/TIED/SOURCE/DIR}"
+if [[ "${TIED_REPO_ROOT}" == "/ABSOLUTE/PATH/TO/TIED/SOURCE/DIR" ]] \
+   && [[ -f "${REPO_ROOT}/mcp-server/dist/index.js" ]]; then
+  TIED_REPO_ROOT="${REPO_ROOT}"
+fi
+
+: "${TIED_MCP_BIN:=$TIED_REPO_ROOT/mcp-server/dist/index.js}"
 
 if [[ ! -f "$TIED_MCP_BIN" ]]; then
   echo "ERROR: MCP server binary missing: $TIED_MCP_BIN" >&2

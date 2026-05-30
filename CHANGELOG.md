@@ -17,6 +17,18 @@ This release (when tagged) will summarize work that **(a)** makes **`tied/docs/`
 
 ### Added
 
+- **`scripts/yaml_tool.sh`** — Combined YAML utility: default lint/pretty-print (`yq -i -P`, one file per invocation); `--sort-lists` runs **`scripts/yaml_list_sorter.rb`** on the same path set (`-F`, stdin, NUL-separated paths). **`scripts/lint_yaml.sh`** remains a lint-only backward-compatible wrapper. **`scripts/yaml_list_sorter_test.rb`** covers sorter and shell integration.
+
+- **Domain vocabulary index** — [`tied/vocab/`](tied/vocab/) corpus (nine topic glossaries + [`domain-references.md`](tied/vocab/domain-references.md) index), process token **`[PROC-VOCABULARY_INDEX]`**, checklist **`sub-vocabulary-sync`** / **`VOCAB_INDEX`**, and meta-standard [`docs/vocabulary-index-analysis-and-standards.md`](docs/vocabulary-index-analysis-and-standards.md) (includes STDD `tied/vocab/*.md` convention).
+
+- **Bootstrap: vocab seed and tied-cli TIED_REPO_ROOT** — **`copy_files.sh`** seeds **`tied/vocab/*.md`** when the client tree has no vocab files yet; installs the bundled skill from **`tools/bundled-tied-yaml-skill/`**; bakes **`TIED_REPO_ROOT`** into client **`.cursor/skills/tied-yaml/scripts/tied-cli.sh`** so **`TIED_MCP_BIN`** resolves when the TIED source repo differs from the client project.
+
+- **YAML list sort normalization** — Mechanical alphabetization of qualifying list groups (3+ items) across TIED index **`cross_references`** and similar lists via **`yaml_tool.sh --sort-lists`**.
+
+- **Block-lead traceability comments** — Go **`agentstream`** packages and tests use **`[IMPL-*] [ARCH-*] [REQ-*]`** plus **`How:`** lines aligned with IMPL pseudo-code sidecars ([`PROC-IMPL_PSEUDOCODE_TOKENS`]).
+
+- **Track C pseudo-code prompts** — [`tied/docs/impl-pseudocode-from-code-agent-prompt.md`](tied/docs/impl-pseudocode-from-code-agent-prompt.md) (retrofit sidecars from existing code/tests) and [`tied/docs/pseudocode-fidelity-audit-agent-prompt.md`](tied/docs/pseudocode-fidelity-audit-agent-prompt.md) (audit fidelity); **Track C** section in [`tied/docs/pseudocode-writing-and-validation.md`](tied/docs/pseudocode-writing-and-validation.md).
+
 - **Pseudocode format doc, sidecar template, and author UX** — New [`docs/pseudocode-format-and-practices.md`](docs/pseudocode-format-and-practices.md) (portable format, vocabulary, validation layers, and block-token rules). New [`templates/impl-essence-pseudocode-template.md`](templates/impl-essence-pseudocode-template.md) (canonical copy-paste body for hand-authored **`IMPL-*-pseudocode.md`** sidecars). [`tied/docs/pseudocode-writing-and-validation.md`](tied/docs/pseudocode-writing-and-validation.md) gains **sidecar preference** for non-trivial or growing IMPLs, **`#canonical-structure-for-essence_pseudocode`**, and template/portable doc links. [`tools/bundled-tied-yaml-skill/SKILL.md`](tools/bundled-tied-yaml-skill/SKILL.md) aligns with the same. [`AGENTS.md`](AGENTS.md) Key files and **README** call out the portable doc, template, and **sidecar-first** usability for evolving IMPLs. [`tied/docs/ai-principles.md`](tied/docs/ai-principles.md) and [`tied/docs/tied-yaml-agent-index.md`](tied/docs/tied-yaml-agent-index.md) link the template and portable doc for discoverability.
 
 - **Go `agentstream` (dynamic checklist control)** — On live runs with **`--lead-checklist-yaml`**, captures assistant output and parses optional fenced JSON **`agentstream_control`**; validated **`goto`** replaces the remaining checklist from **`target`**, and the driver clears **`loop_back_clearance`** step completion markers on the on-disk lead checklist when configured. TIED: **`REQ-GOAGENT-CHECKLIST-CONTROL`**, **`ARCH-GOAGENT-CHECKLIST-CONTROL`**, **`IMPL-GOAGENT-CHECKLIST-CONTROL`**.
@@ -28,9 +40,17 @@ This release (when tagged) will summarize work that **(a)** makes **`tied/docs/`
 
 ### Changed
 
+- **`lint_yaml.sh`** — Delegates to **`scripts/yaml_tool.sh`**; **`--sort-lists`** redirects to yaml_tool with a hint.
+
+- **AGENTS.md / bundled skill** — Canonical tied-yaml source is **`tools/bundled-tied-yaml-skill/`** in the TIED repository; client installs live under **`.cursor/skills/tied-yaml/`**. **`[PROC-YAML_EDIT_LOOP]`** documents yaml_tool as the primary validate path.
+
 - **Onboarding and cross-links** — **`CONTRIBUTING.md`** session-commit alignment references **`[PROC-AGENT_REQ_CHECKLIST]`** instead of **`PROC-NEW_FEATURE`** (example block updated). **README** workflow and methodology tree link the agent REQ checklist and **`methodology-diagrams.md`** instead of **`new-feature-process.md`**; IMPL pseudo-code UX paragraph and methodology index bullets point at **`pseudocode-writing-and-validation.md`** § Mechanics. **`docs/leap-tied-citdp-costs-and-benefits.md`** deep-links the unified pseudocode guide. **`tied/docs/ai-agent-tied-mcp-usage.md`**, **`tied/docs/agent-req-implementation-checklist`** (Markdown/YAML references table), and **`tied/docs/tied-first-implementation-procedure.md`** drop stub mentions.
 
 - **Unified IMPL pseudo-code documentation** — [`tied/docs/pseudocode-writing-and-validation.md`](tied/docs/pseudocode-writing-and-validation.md) is the **only** shipped narrative for three-way alignment, MCP/sidecar mechanics, block linkage, phases A–I, LEAP, and validation; legacy split-guide filenames were retired (no stub redirect files). Layer B remains [`tied/docs/pseudocode-validation-checklist.yaml`](tied/docs/pseudocode-validation-checklist.yaml). Cross-references updated across AGENTS.md, agent REQ checklist (Markdown/YAML), README, implementation-decisions.md, tied-yaml index, runbook, and related docs.
+
+### Fixed
+
+- **Client tied-cli MCP binary path** — Installed **`tied-cli.sh`** no longer assumes **`mcp-server/dist/index.js`** lives at the client project root when TIED source and client repo differ; **`TIED_REPO_ROOT`** is baked at bootstrap (e2e: **`mcp-server/src/e2e/bootstrap-and-load.test.ts`**).
 
 - **Block-lead literal copy** — [`docs/pseudocode-format-and-practices.md`](docs/pseudocode-format-and-practices.md) §3a, [`templates/impl-essence-pseudocode-template.md`](templates/impl-essence-pseudocode-template.md), and agent REQ checklist ([`tied/docs/agent-req-implementation-checklist.md`](tied/docs/agent-req-implementation-checklist.md), [`.yaml`](tied/docs/agent-req-implementation-checklist.yaml)) require **[PROC-IMPL_PSEUDOCODE_TOKENS]** block leads copied **verbatim** into matching test and production comment sites; full rule in [`tied/docs/pseudocode-writing-and-validation.md` § Block lead](tied/docs/pseudocode-writing-and-validation.md#block-lead-and-literal-copy-in-tests-and-code).
 

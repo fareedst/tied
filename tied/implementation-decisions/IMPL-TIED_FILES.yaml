@@ -7,29 +7,33 @@ IMPL-TIED_FILES:
   rationale:
     why: Implements ARCH-TIED_STRUCTURE and realizes REQ-TIED_SETUP by creating the foundational TIED directory structure and files
     problems_solved:
-      - Manual setup of TIED structure is error-prone
       - Inconsistent project structure across implementations
+      - Manual setup of TIED structure is error-prone
       - Missing required TIED files and directories
     benefits:
-      - Automated, consistent TIED setup
       - All required files and directories created correctly
+      - Automated, consistent TIED setup
       - Easy project bootstrapping with single command
   implementation_approach:
     summary: Bootstrap script that creates tied/ directory, copies template files, sets up base files, and installs the tied-yaml CLI skill under .cursor/skills/tied-yaml/
     details:
-      - Create tied/ directory at project root
-      - Copy YAML index files from templates (requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml)
-      - Copy guide .md files, detail-files-schema.md, preload contract templates, and reference docs from TIED source tied/docs/ into client tied/docs/ when missing (per DOCS_TO_COPY in copy_files.sh)
-      - Create detail subdirectories (requirements/, architecture-decisions/, implementation-decisions/)
       - Copy base files to project root when missing (.cursorrules, AGENTS.md). In a TIED source repository, live guide content is under tied/docs/; agents and preload use client ./tied/docs/ paths and ./tied/agent-preload-contract.yaml.
-      - Install the tied-yaml Cursor skill to .cursor/skills/tied-yaml/ (from the TIED repo’s .cursor/skills/tied-yaml when complete, else from tools/bundled-tied-yaml-skill/; overwritten each run). The canonical stdio client is .cursor/skills/tied-yaml/scripts/tied-cli.sh only; copy_files.sh does not create a project-root scripts/tied-cli.sh entry.
+      - Copy guide .md files, detail-files-schema.md, preload contract templates, and reference docs from TIED source tied/docs/ into client tied/docs/ when missing (per DOCS_TO_COPY in copy_files.sh)
+      - Copy YAML index files from templates (requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml)
+      - Create detail subdirectories (requirements/, architecture-decisions/, implementation-decisions/)
+      - Create tied/ directory at project root
+      - Install the tied-yaml Cursor skill to .cursor/skills/tied-yaml/ (from tools/bundled-tied-yaml-skill/ in the TIED source repo; .cursor/skills/tied-yaml only if the bundle is missing; overwritten each run). The canonical stdio client on the client is .cursor/skills/tied-yaml/scripts/tied-cli.sh only; copy_files.sh does not create a project-root scripts/tied-cli.sh entry.
+      - Patch installed tied-cli.sh to bake TIED_REPO_ROOT (absolute TIED source path) so TIED_MCP_BIN resolves on client projects (_patch_tied_cli_repo_root in copy_files.sh)
+      - Seed tied/vocab/*.md from TIED source when client tied/vocab/ is missing or empty (never overwrite existing client vocab files)
   code_locations:
     files:
       - path: copy_files.sh
-        description: Bootstrap script that sets up TIED structure
+        description: Bootstrap script that sets up TIED structure, skill install, TIED_REPO_ROOT patch, vocab seed
         lines:
           - 1
-          - 386
+          - 450
+      - path: tools/bundled-tied-yaml-skill/scripts/tied-cli.sh
+        description: Bundled tied-cli with TIED_REPO_ROOT placeholder for client bake
     functions:
       - name: setup_tied_structure
         file: copy_files.sh
@@ -41,9 +45,10 @@ IMPL-TIED_FILES:
       - REQ-TIED_SETUP
     tests:
       - Manual verification checklists
+      - mcp-server/src/e2e/bootstrap-and-load.test.ts
     code_annotations:
-      - IMPL-TIED_FILES
       - ARCH-TIED_STRUCTURE
+      - IMPL-TIED_FILES
       - REQ-TIED_SETUP
   related_decisions:
     depends_on: []

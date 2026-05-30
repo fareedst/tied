@@ -1,7 +1,6 @@
 // Package pipeline assembles Turns from all sources in Ruby-compatible order.
-// REQ: REQ-GOAGENT-PIPELINE, REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
-// ARCH: ARCH-GOAGENT-PIPELINE
-// IMPL: IMPL-GOAGENT-PIPELINE
+// [IMPL-GOAGENT-PIPELINE] [ARCH-GOAGENT-PIPELINE] [REQ-GOAGENT-PIPELINE-CHAIN]
+// How: Build concatenates text, tdd, feature-spec, checklist, verify; preload helpers prepend prompt-file bodies on new sessions.
 package pipeline
 
 import (
@@ -154,7 +153,8 @@ func SliceFromFirstTurn(turns []agentstream.Turn, first int) ([]agentstream.Turn
 }
 
 // KnownStepStubs returns checklist step slugs present in the current turn queue.
-// REQ-GOAGENT-CHECKLIST-CONTROL: targets are validated against known checklist slugs.
+// [IMPL-GOAGENT-CHECKLIST-CONTROL] [ARCH-GOAGENT-CHECKLIST-CONTROL] [REQ-GOAGENT-CHECKLIST-CONTROL]
+// How: KnownStepStubs collects StepStub values for goto target validation.
 func KnownStepStubs(turns []agentstream.Turn) map[string]bool {
 	out := make(map[string]bool)
 	for _, t := range turns {
@@ -167,7 +167,8 @@ func KnownStepStubs(turns []agentstream.Turn) map[string]bool {
 
 // ReplaceRemainingFromStep rewrites the live queue after completedIdx so the
 // next turn starts at targetStep. Earlier completed turns stay in the transcript.
-// REQ-GOAGENT-CHECKLIST-CONTROL: validated goto actions modify checklist order.
+// [IMPL-GOAGENT-CHECKLIST-CONTROL] [ARCH-GOAGENT-CHECKLIST-CONTROL] [REQ-GOAGENT-CHECKLIST-CONTROL]
+// How: ReplaceRemainingFromStep splices suffix from targetStep after completedIdx for validated goto.
 func ReplaceRemainingFromStep(turns []agentstream.Turn, completedIdx int, targetStep string) ([]agentstream.Turn, error) {
 	if completedIdx < 0 || completedIdx >= len(turns) {
 		return nil, fmt.Errorf("completed turn index %d out of range", completedIdx)

@@ -97,12 +97,12 @@ flowchart TD
   test-strategy["test-strategy: Test Plan\nTest matrix, TDD sequence\nfrom new IMPL"]
   TDD["S09: Unit TDD\nRED then GREEN then SYNC\nper IMPL block"]
   composition-integration["composition-integration: Composition Tests\nFailing test then code"]
-  end-to-end-ui["end-to-end-ui: E2E if UI-only"]
+  e2e_ui["end-to-end-ui: E2E if UI-only"]
   verification-gate["verification-gate: Final Validation\nSuite, lint, token audit"]
   Sync["sync-tied-stack: Sync TIED\nDocs match code/tests\ntied_validate_consistency"]
   Commit["user-facing-release-notes–traceable-commit: README, CITDP, Commit"]
 
-  session-bootstrap --> change-definition --> impact-discovery --> Verify --> test-strategy --> TDD --> composition-integration --> end-to-end-ui --> verification-gate --> Sync --> Commit
+  session-bootstrap --> change-definition --> impact-discovery --> Verify --> test-strategy --> TDD --> composition-integration --> e2e_ui --> verification-gate --> Sync --> Commit
 ```
 
 ---

@@ -22,6 +22,7 @@ REQ-CONFIG_DISCOVERY_LOCAL_LAYER:
       metric: Paths containing that segment as a path component match; similar-looking prefixes do not
     - criterion: Explicit merge prefixes continue to append, prepend, replace, or default per field semantics
       metric: Documented prefix behavior unchanged except as specified for first-file replace of built-ins
+    - criterion: Layered config terms (proposed) are canonical in tied/vocab/config-discovery.md; LOAD_LAYERED_CONFIG block proposed until IMPL exists
   validation_criteria:
     - method: Automated tests
       coverage: Adopting project test suite (config load + pattern matching); tests reference REQ token or linked project REQ

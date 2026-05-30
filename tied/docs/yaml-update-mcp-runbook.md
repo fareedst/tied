@@ -15,7 +15,7 @@
 | **DO** | Use the MCP tools in § 3 for every mutation of those files. |
 | **DO NOT** | Use `apply_patch`, `Write`, or bulk search-replace on those paths when an MCP tool can perform the same operation. |
 | **NEVER** | Create or edit `methodology/**` under the TIED base path; that tree is read-only in client projects (`[PROC-TIED_METHODOLOGY_READONLY]`). MCP rejects writes to methodology-owned tokens—**do not “fix” that by direct file edit**. |
-| **Exception** | If **no** MCP tool can perform the operation, document a one-line exception (what is missing), then direct-edit the minimal file, run `scripts/lint_yaml.sh <file> [file ...]` (or `lint_yaml` if installed) per [PROC-YAML_EDIT_LOOP] (`tied/docs/processes.md`), and run `tied_validate_consistency`. Treat the gap as a candidate for a new tool ([ai-agent-tied-mcp-usage.md](ai-agent-tied-mcp-usage.md) § 3). **IMPL pseudo-code sidecar:** the body file `tied/implementation-decisions/IMPL-*-pseudocode.md` is **plain text**; editing it **directly** (or using `impl_detail_set_essence_pseudocode` with `essence_pseudocode_path`, or `tied-cli` with `TIED_CLI_IMPL_ESSENCE_FILE` / `TIED_CLI_IMPL_ESSENCE_STDIN`) is **first-class** and not a “YAML escape hatch”—see [pseudocode-writing-and-validation.md § Mechanics](pseudocode-writing-and-validation.md#mechanics-editing-the-sidecar-mcp-and-cli). |
+| **Exception** | If **no** MCP tool can perform the operation, document a one-line exception (what is missing), then direct-edit the minimal file, run `scripts/yaml_tool.sh <file> [file ...]` or `scripts/lint_yaml.sh <file> [file ...]` (or `lint_yaml` if installed) per [PROC-YAML_EDIT_LOOP] (`tied/docs/processes.md`), and run `tied_validate_consistency`. Treat the gap as a candidate for a new tool ([ai-agent-tied-mcp-usage.md](ai-agent-tied-mcp-usage.md) § 3). **IMPL pseudo-code sidecar:** the body file `tied/implementation-decisions/IMPL-*-pseudocode.md` is **plain text**; editing it **directly** (or using `impl_detail_set_essence_pseudocode` with `essence_pseudocode_path`, or `tied-cli` with `TIED_CLI_IMPL_ESSENCE_FILE` / `TIED_CLI_IMPL_ESSENCE_STDIN`) is **first-class** and not a “YAML escape hatch”—see [pseudocode-writing-and-validation.md § Mechanics](pseudocode-writing-and-validation.md#mechanics-editing-the-sidecar-mcp-and-cli). |
 
 **Why**: The server emits **safe YAML** (e.g. quoting values that contain `:`). Model-authored patches often break syntax, indentation, or duplicate keys.
 
@@ -101,7 +101,7 @@ Pass that object as a **string** in `updates` or `record` per the tool descripto
 Align with `[PROC-YAML_EDIT_LOOP]` and **sub-yaml-edit-loop** in [agent-req-implementation-checklist.md](agent-req-implementation-checklist.md):
 
 1. Prefer **MCP** for the mutation (§ 1).
-2. On any path you **direct-edited** (exception only), run `scripts/lint_yaml.sh <file> [file ...]` (or `lint_yaml` if installed) until it passes.
+2. On any path you **direct-edited** (exception only), run `scripts/yaml_tool.sh <file> [file ...]` or `scripts/lint_yaml.sh <file> [file ...]` (or `lint_yaml` if installed) until it passes.
    - Never run raw multi-argument `yq -i -P file1 file2 ...`; it can merge documents and corrupt files.
    - If you can only use `yq` directly, run `yq -i -P <file>` in a per-file loop.
 3. Run **`tied_validate_consistency`** before marking TIED work complete (and when the checklist calls for it).

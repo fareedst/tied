@@ -9,7 +9,8 @@ import (
 	"stdd/agentstream"
 )
 
-// REQ: REQ-GOAGENT-PIPELINE
+// [IMPL-GOAGENT-PIPELINE] [ARCH-GOAGENT-PIPELINE] [REQ-GOAGENT-PIPELINE-CHAIN]
+// How: SliceFromFirstTurn returns 1-based suffix; errors on zero or out-of-range first turn.
 func TestSliceFromFirstTurn(t *testing.T) {
 	turns := []agentstream.Turn{
 		{Parts: []string{"a"}},
@@ -36,7 +37,8 @@ func TestSliceFromFirstTurn(t *testing.T) {
 	}
 }
 
-// REQ: REQ-GOAGENT-PIPELINE
+// [IMPL-GOAGENT-PIPELINE] [ARCH-GOAGENT-PIPELINE] [REQ-GOAGENT-PIPELINE-CHAIN]
+// How: ChainBetween returns nil when a single argv turn has no resume chain.
 func TestChainBetween(t *testing.T) {
 	in := Input{
 		ArgvWords: []string{"hello"},
@@ -67,7 +69,8 @@ func TestSessionForTurn(t *testing.T) {
 	}
 }
 
-// REQ: REQ-GOAGENT-PIPELINE-CHAIN, REQ-GOAGENT-YAML-STEP-RENDER
+// [IMPL-GOAGENT-PIPELINE] [ARCH-GOAGENT-PIPELINE] [REQ-GOAGENT-PIPELINE-CHAIN] [REQ-GOAGENT-YAML-STEP-RENDER]
+// How: Build with lead checklist step bounds emits one turn for the inclusive slug slice.
 func TestBuild_leadChecklistStepBounds(t *testing.T) {
 	dir := t.TempDir()
 	prompt := filepath.Join(dir, "one.txt")
@@ -118,8 +121,8 @@ steps:
 	}
 }
 
-// REQ-GOAGENT-CHECKLIST-CONTROL confirms the documented quick smoke slice loads
-// both the SPECIAL/control target and the step that can emit the payload.
+// [IMPL-GOAGENT-CHECKLIST-CONTROL] [ARCH-GOAGENT-CHECKLIST-CONTROL] [REQ-GOAGENT-CHECKLIST-CONTROL]
+// How: Canonical checklist slice from flag-contradictory-specs through unit-refactor includes control target and emitter steps.
 func TestBuild_canonicalChecklistControlSliceIncludesTargetAndEmitter(t *testing.T) {
 	checklistPath := filepath.Clean("../../tied/docs/agent-req-implementation-checklist.yaml")
 	if _, err := os.Stat(checklistPath); err != nil {
@@ -145,7 +148,8 @@ func TestBuild_canonicalChecklistControlSliceIncludesTargetAndEmitter(t *testing
 	}
 }
 
-// REQ: REQ-GOAGENT-PIPELINE
+// [IMPL-GOAGENT-PIPELINE] [ARCH-GOAGENT-PIPELINE] [REQ-GOAGENT-PIPELINE-CHAIN]
+// How: ApplyPromptFilePreload prepends preload on new sessions after ChainFromPrevious false breaks the chain.
 func TestApplyPromptFilePreload_newSessionAfterChainBreak(t *testing.T) {
 	preload := []string{"PREAMBLE"}
 	turns := []agentstream.Turn{
@@ -165,7 +169,8 @@ func TestApplyPromptFilePreload_newSessionAfterChainBreak(t *testing.T) {
 	}
 }
 
-// REQ: REQ-GOAGENT-PIPELINE
+// [IMPL-GOAGENT-PIPELINE] [ARCH-GOAGENT-PIPELINE] [REQ-GOAGENT-PIPELINE-CHAIN]
+// How: ApplyPromptFilePreload skips prepend on first turn when initial session id is set for resume.
 func TestApplyPromptFilePreload_respectsInitialSession(t *testing.T) {
 	preload := []string{"PREAMBLE"}
 	turns := []agentstream.Turn{
@@ -177,7 +182,8 @@ func TestApplyPromptFilePreload_respectsInitialSession(t *testing.T) {
 	}
 }
 
-// REQ-GOAGENT-CHECKLIST-CONTROL validates unit-test-green -> flag-contradictory-specs queue rewrite.
+// [IMPL-GOAGENT-CHECKLIST-CONTROL] [ARCH-GOAGENT-CHECKLIST-CONTROL] [REQ-GOAGENT-CHECKLIST-CONTROL]
+// How: ReplaceRemainingFromStep rewrites queue from unit-test-green goto to flag-contradictory-specs.
 func TestReplaceRemainingFromStep_loopBackToContradictions(t *testing.T) {
 	turns := []agentstream.Turn{
 		{Parts: []string{"flag"}, StepStub: "flag-contradictory-specs", ChainFromPrevious: true},
@@ -210,7 +216,8 @@ func TestReplaceRemainingFromStep_loopBackToContradictions(t *testing.T) {
 	}
 }
 
-// REQ-GOAGENT-CHECKLIST-CONTROL rejects invalid dynamic routing targets.
+// [IMPL-GOAGENT-CHECKLIST-CONTROL] [ARCH-GOAGENT-CHECKLIST-CONTROL] [REQ-GOAGENT-CHECKLIST-CONTROL]
+// How: ReplaceRemainingFromStep errors when goto target slug is not in the loaded checklist turns.
 func TestReplaceRemainingFromStep_missingTarget(t *testing.T) {
 	_, err := ReplaceRemainingFromStep([]agentstream.Turn{{StepStub: "unit-test-green"}}, 0, "missing")
 	if err == nil {
@@ -218,7 +225,8 @@ func TestReplaceRemainingFromStep_missingTarget(t *testing.T) {
 	}
 }
 
-// REQ: REQ-GOAGENT-PIPELINE
+// [IMPL-GOAGENT-PIPELINE] [ARCH-GOAGENT-PIPELINE] [REQ-GOAGENT-PIPELINE-CHAIN]
+// How: Build default order concatenates feature-spec batch turn(s) then lead checklist turns.
 func TestBuild_featureSpecThenChecklist_default(t *testing.T) {
 	dir := t.TempDir()
 	batch := filepath.Join(dir, "batch.yaml")
@@ -264,7 +272,8 @@ steps:
 	}
 }
 
-// REQ: REQ-GOAGENT-PIPELINE
+// [IMPL-GOAGENT-PIPELINE] [ARCH-GOAGENT-PIPELINE] [REQ-GOAGENT-PIPELINE-CHAIN]
+// How: Build with checklist-before-feature-spec flag orders checklist turns before batch turns.
 func TestBuild_checklistBeforeFeatureSpec_flag(t *testing.T) {
 	dir := t.TempDir()
 	batch := filepath.Join(dir, "batch.yaml")

@@ -1,7 +1,6 @@
 // Package tddloop renders TDD loop YAML steps into agent prompt strings.
-// REQ: REQ-GOAGENT-YAML-STEPS, REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
-// ARCH: ARCH-GOAGENT-YAML-TDD
-// IMPL: IMPL-GOAGENT-TDDLOOP
+// [IMPL-GOAGENT-TDDLOOP] [ARCH-GOAGENT-YAML-STEPS] [REQ-GOAGENT-YAML-STEP-RENDER]
+// How: MessagesFromYAML requires steps array; LoadTurns emits one chained Turn per formatted step.
 package tddloop
 
 import (

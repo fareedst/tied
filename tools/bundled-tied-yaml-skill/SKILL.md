@@ -22,8 +22,8 @@ All reads and writes to REQ, ARCH, and IMPL **YAML** records (indexes, `IMPL-*.y
 
 - **Registering `tied-yaml` in Cursor** (`.cursor/mcp.json` / **Settings → MCP**) is for **in-editor** tool calls. It is **optional** for shell use.
 - **`tied-cli.sh`** talks to the **same** server over **stdio** (`node …/dist/index.js`). An empty MCP server list in the IDE does **not** mean `tied-cli.sh` cannot run — it means only that the editor has not loaded that MCP entry (common in CI, sandboxes, or before `agent enable tied-yaml`).
-- **Default binary path**: `<repo_root>/mcp-server/dist/index.js`. Client projects bootstrapped with `copy_files.sh` usually **do not** vendor `mcp-server/` at the repo root; point at your built server with **`TIED_MCP_BIN`** instead.
-- **Shell alone is not enough:** `TIED_MCP_BIN` (path to `dist/index.js`) plus `tied-cli.sh` in `.cursor/skills/tied-yaml/scripts/`; setting only `TIED_MCP_BIN` does not provide the JSON-RPC client.
+- **Default MCP binary**: After **`copy_files.sh`**, `tied-cli.sh` bakes **`TIED_REPO_ROOT`** (and thus default **`TIED_MCP_BIN`**) to the TIED repository that ran bootstrap (`…/mcp-server/dist/index.js`). Client projects usually **do not** vendor `mcp-server/` at the project root; rely on the baked path or set **`TIED_MCP_BIN`** / **`TIED_REPO_ROOT`** to override.
+- **Shell alone is not enough:** `tied-cli.sh` in `.cursor/skills/tied-yaml/scripts/` plus Node; setting only **`TIED_MCP_BIN`** in the environment without the script does not provide the JSON-RPC client.
 
 ### Environment overrides
 
@@ -33,8 +33,9 @@ TIED_MCP_BIN=/absolute/path/to/tied-repository/mcp-server/dist/index.js \
   .cursor/skills/tied-yaml/scripts/tied-cli.sh yaml_index_list_tokens '{"index":"requirements"}'
 ```
 
-- **`TIED_BASE_PATH`** — absolute path to the project’s **`tied/`** directory (defaults to `<repo_root>/tied` when unset).
-- **`TIED_MCP_BIN`** — absolute path to **`mcp-server/dist/index.js`** when it is **not** under `<repo_root>/mcp-server/`.
+- **`TIED_BASE_PATH`** — absolute path to the project’s **`tied/`** directory (defaults to `<client_repo_root>/tied` when unset).
+- **`TIED_REPO_ROOT`** — TIED methodology repository used for **`mcp-server`** (baked by **`copy_files.sh`**; override if the TIED clone moved).
+- **`TIED_MCP_BIN`** — absolute path to **`mcp-server/dist/index.js`** (defaults to `$TIED_REPO_ROOT/mcp-server/dist/index.js`).
 
 ### Do not substitute Python for TIED validation
 

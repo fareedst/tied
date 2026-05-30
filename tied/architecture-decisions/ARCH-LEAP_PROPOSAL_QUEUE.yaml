@@ -11,8 +11,8 @@ ARCH-LEAP_PROPOSAL_QUEUE:
       - No audit trail for reject vs approve vs applied
     benefits:
       - Clear separation between proposals (queue) and canonical records (tied/)
-      - Same MCP-first rule for actual LEAP updates (yaml_detail_*, yaml_index_*)
       - Parallels feedback file pattern (artifact outside token indexes) while differing in location (repo root vs TIED base)
+      - Same MCP-first rule for actual LEAP updates (yaml_detail_*, yaml_index_*)
   alternatives_considered:
     - name: Store proposals under tied/proposals.yaml
       pros:
@@ -35,9 +35,9 @@ ARCH-LEAP_PROPOSAL_QUEUE:
   implementation_approach:
     summary: Module leap-proposal-queue.ts under mcp-server/src/analysis; MCP tools tied_leap_proposal_*; project root from process.cwd() or optional project_root argument; queue JSON + JSONL audit; import type-only from plumb-diff-impact-preview for selection enum.
     details:
-      - Reject and approve mutate only leap-proposals/; no yaml-loader writes for queue lifecycle
-      - Mark applied is bookkeeping after user applies LEAP via existing MCP YAML tools
       - Diff extraction and session import require explicit_opt_in true at tool boundary
+      - Mark applied is bookkeeping after user applies LEAP via existing MCP YAML tools
+      - Reject and approve mutate only leap-proposals/; no yaml-loader writes for queue lifecycle
   traceability:
     requirements:
       - REQ-LEAP_PROPOSAL_QUEUE

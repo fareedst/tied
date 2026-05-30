@@ -9,10 +9,10 @@ REQ-GOAGENT-CHECKLIST-CONTROL:
     implementation:
       - IMPL-GOAGENT-CHECKLIST-CONTROL
     tests:
-      - tools/agentstream/control/control_test.go
-      - tools/agentstream/pipeline/pipeline_test.go
       - tools/agentstream/checklist/checklist_test.go
+      - tools/agentstream/control/control_test.go
       - tools/agentstream/executor/executor_test.go
+      - tools/agentstream/pipeline/pipeline_test.go
   detail_file: requirements/REQ-GOAGENT-CHECKLIST-CONTROL.yaml
   metadata:
     last_updated:
@@ -23,3 +23,5 @@ REQ-GOAGENT-CHECKLIST-CONTROL:
       date: "2026-04-24T00:00:00.000Z"
       validator: go test ./tools/agentstream/... and tied_validate_consistency
       result: pass
+  satisfaction_criteria:
+    - criterion: agentstream_control routing terms are canonical in tied/vocab/agentstream.md; PARSE_CONTROL block in IMPL-GOAGENT-CHECKLIST-CONTROL-pseudocode.md

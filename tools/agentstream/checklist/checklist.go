@@ -1,7 +1,6 @@
 // Package checklist renders agent-req-implementation-checklist-style YAML into Turns.
-// REQ: REQ-GOAGENT-YAML-STEPS, REQ-GOAGENT-YAML-STEP-RENDER, PROC-AGENT_REQ_CHECKLIST
-// ARCH: ARCH-GOAGENT-YAML-CHECKLIST
-// IMPL: IMPL-GOAGENT-CHECKLIST
+// [IMPL-GOAGENT-CHECKLIST] [ARCH-GOAGENT-YAML-STEPS] [REQ-GOAGENT-YAML-STEP-RENDER]
+// How: Main steps then optional sub_procedures; bounds by slug; agentstream_new_session breaks chain.
 package checklist
 
 import (

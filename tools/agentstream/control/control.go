@@ -1,7 +1,6 @@
 // Package control parses explicit agentstream checklist control trailers.
-// REQ: REQ-GOAGENT-CHECKLIST-CONTROL
-// ARCH: ARCH-GOAGENT-CHECKLIST-CONTROL
-// IMPL: IMPL-GOAGENT-CHECKLIST-CONTROL
+// [IMPL-GOAGENT-CHECKLIST-CONTROL] [ARCH-GOAGENT-CHECKLIST-CONTROL] [REQ-GOAGENT-CHECKLIST-CONTROL]
+// How: Parse scans fenced JSON blocks for strict agentstream_control envelope; Validate checks schema and known targets.
 package control
 
 import (

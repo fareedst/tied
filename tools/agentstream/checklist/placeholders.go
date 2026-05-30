@@ -1,4 +1,5 @@
-// REQ: REQ-GOAGENT-YAML-STEPS, REQ-GOAGENT-YAML-STEP-RENDER
+// [IMPL-GOAGENT-CHECKLIST] [ARCH-GOAGENT-YAML-STEPS] [REQ-GOAGENT-YAML-STEP-RENDER]
+// How: expandPlaceholders substitutes checklist template variables in step prompt text.
 package checklist
 
 import (

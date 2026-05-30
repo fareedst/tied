@@ -10,8 +10,8 @@ import (
 	"testing"
 )
 
-// REQ-GOAGENT-CHECKLIST-CONTROL validates that a live agentstream run recognizes
-// a SPECIAL/control payload from the fake Ruby agent and processes the GOTO target next.
+// [IMPL-GOAGENT-CHECKLIST-CONTROL] [ARCH-GOAGENT-CHECKLIST-CONTROL] [REQ-GOAGENT-CHECKLIST-CONTROL]
+// How: Live agentstream run routes fake-agent agentstream_control goto to the next checklist turn.
 func TestAgentstreamRoutesRubyFakeAgentControlPayload(t *testing.T) {
 	if _, err := exec.LookPath("ruby"); err != nil {
 		t.Skipf("ruby not available for fake agent fixture: %v", err)

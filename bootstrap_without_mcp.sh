@@ -3,7 +3,7 @@
 # bootstrap_without_mcp.sh
 #
 # Bootstrap a project with TIED templates (no Cursor MCP config).
-# Runs copy_files.sh (installs .cursor/skills/tied-yaml from .cursor/ or tools/bundled-tied-yaml-skill), then prints next steps.
+# Runs copy_files.sh (installs .cursor/skills/tied-yaml from tools/bundled-tied-yaml-skill), then prints next steps.
 #
 # Usage:
 #   ./bootstrap_without_mcp.sh /path/to/project

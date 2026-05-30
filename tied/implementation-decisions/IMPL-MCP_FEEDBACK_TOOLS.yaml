@@ -14,10 +14,10 @@ IMPL-MCP_FEEDBACK_TOOLS:
   implementation_approach:
     summary: Feedback module (load/append/export) under mcp-server/src/feedback.ts; two tool handlers in tools/index.ts
     details:
-      - 'getFeedbackPath(basePath?): resolve {base}/feedback.yaml'
-      - 'loadFeedback(basePath?): read YAML or return { entries: [] }; create file if missing on first append'
       - 'appendEntry(params): validate type/title/description; generate id (e.g. timestamp-based); set created_at; append to entries; write file'
       - 'exportMarkdown(entries), exportJson(entries): format all entries for report'
+      - 'getFeedbackPath(basePath?): resolve {base}/feedback.yaml'
+      - 'loadFeedback(basePath?): read YAML or return { entries: [] }; create file if missing on first append'
       - 'tied_feedback_add: parse args, call appendEntry, return ok/id/created_at and optional report_snippet (markdown)'
       - 'tied_feedback_export: load entries, call exportMarkdown or exportJson, return string'
   code_locations:
@@ -49,8 +49,8 @@ IMPL-MCP_FEEDBACK_TOOLS:
     tests:
       - feedback.test.ts
     code_annotations:
-      - IMPL-MCP_FEEDBACK_TOOLS
       - ARCH-FEEDBACK_STORAGE
+      - IMPL-MCP_FEEDBACK_TOOLS
       - REQ-FEEDBACK_TO_TIED
   related_decisions:
     depends_on: []

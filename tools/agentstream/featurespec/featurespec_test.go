@@ -7,7 +7,8 @@ import (
 	"testing"
 )
 
-// REQ: REQ-GOAGENT-FEATURESPEC
+// [IMPL-GOAGENT-FEATURESPEC] [ARCH-GOAGENT-YAML-FEATURESPEC] [REQ-GOAGENT-FEATURESPEC-BATCH]
+// How: sortByOrder then selectByOrder filter yields one message for matching record.
 func TestMessagesFromYAML_sortAndFilter(t *testing.T) {
 	dir := t.TempDir()
 	p := filepath.Join(dir, "batch.yaml")

@@ -9,9 +9,9 @@ REQ-LEAP_PROPOSAL_QUEUE:
       - No structured place for non-authoritative LEAP suggestions outside canonical REQ/ARCH/IMPL
       - Risk of silent or automatic TIED updates without human or explicit agent approval
     benefits:
-      - Stable proposal ids and audit trail under leap-proposals/ without polluting tied/ until LEAP is applied via MCP
-      - Deterministic extraction path (no API keys required for built-in diff/session import)
       - Clear separation between proposals and canonical TIED records
+      - Deterministic extraction path (no API keys required for built-in diff/session import)
+      - Stable proposal ids and audit trail under leap-proposals/ without polluting tied/ until LEAP is applied via MCP
   satisfaction_criteria:
     - criterion: MCP tools list, add, reject, approve, mark applied, update pending, and snapshot the proposal queue without writing project TIED YAML
       metric: tied_leap_proposal_* handlers persist only under leap-proposals/
@@ -21,6 +21,7 @@ REQ-LEAP_PROPOSAL_QUEUE:
       metric: reject does not modify tied/*.yaml
     - criterion: Unit tests cover queue persistence and lifecycle
       metric: leap-proposal-queue.test.ts passes in mcp-server
+    - criterion: LEAP proposal queue terms and tied_leap_proposal_* tools are canonical in tied/vocab/leap-proposal-queue.md; LOAD_QUEUE block in IMPL-MCP_LEAP_PROPOSAL_QUEUE-pseudocode.md
   validation_criteria:
     - method: Unit tests
       coverage: leap-proposal-queue module and schema strings
@@ -48,13 +49,13 @@ REQ-LEAP_PROPOSAL_QUEUE:
   detail_file: requirements/REQ-LEAP_PROPOSAL_QUEUE.yaml
   metadata:
     created:
-      date: 2026-03-26
+      date: 2026-03-26T00:00:00.000Z
       author: AI Agent
     last_updated:
-      date: 2026-03-28
+      date: 2026-03-28T00:00:00.000Z
       author: AI Agent
       reason: sync-tied-stack [PROC-AGENT_REQ_CHECKLIST] TIED sync — traceability.tests + validation_criteria include composition suite
     last_validated:
-      date: 2026-03-26
+      date: 2026-03-26T00:00:00.000Z
       validator: AI Agent
       result: pass

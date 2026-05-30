@@ -10,13 +10,13 @@ IMPL-GOAGENT-CHECKLIST-CONTROL:
     requirements:
       - REQ-GOAGENT-CHECKLIST-CONTROL
     tests:
-      - tools/agentstream/control/control_test.go
-      - tools/agentstream/pipeline/pipeline_test.go
       - tools/agentstream/checklist/checklist_test.go
+      - tools/agentstream/control/control_test.go
       - tools/agentstream/executor/executor_test.go
+      - tools/agentstream/pipeline/pipeline_test.go
     code_annotations:
-      - IMPL-GOAGENT-CHECKLIST-CONTROL
       - ARCH-GOAGENT-CHECKLIST-CONTROL
+      - IMPL-GOAGENT-CHECKLIST-CONTROL
       - REQ-GOAGENT-CHECKLIST-CONTROL
   detail_file: implementation-decisions/IMPL-GOAGENT-CHECKLIST-CONTROL.yaml
   metadata:

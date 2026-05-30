@@ -6,13 +6,13 @@ REQ-TIED_SETUP:
   rationale:
     why: To ensure traceability of intent from requirements to code and to maintain a consistent development process
     problems_solved:
-      - Loss of intent during development lifecycle
       - Difficulty tracking requirements through architecture to implementation
       - Inconsistent documentation practices across projects
+      - Loss of intent during development lifecycle
     benefits:
+      - AI-friendly documentation structure
       - Complete traceability from requirements to code
       - Consistent development methodology
-      - AI-friendly documentation structure
   satisfaction_criteria:
     - criterion: ./tied/ directory exists with proper structure
     - criterion: All required documentation files exist and are populated from templates
@@ -36,8 +36,8 @@ REQ-TIED_SETUP:
     tests:
       - Manual verification checklists
     code_annotations:
-      - IMPL-TIED_FILES
       - ARCH-TIED_STRUCTURE
+      - IMPL-TIED_FILES
       - REQ-TIED_SETUP
   related_requirements:
     depends_on: []
@@ -64,14 +64,14 @@ REQ-MODULE_VALIDATION:
   rationale:
     why: To eliminate bugs related to code complexity by ensuring each module works correctly in isolation before combining with other modules
     problems_solved:
-      - Integration complexity causing difficult-to-debug issues
       - Bugs discovered too late in the development cycle
+      - Integration complexity causing difficult-to-debug issues
       - Module contracts not properly validated before integration
     benefits:
       - Bugs caught early before integration
-      - Reduced integration complexity
       - Clear module boundaries and contracts
       - Easier debugging by isolating issues to specific modules
+      - Reduced integration complexity
   satisfaction_criteria:
     - criterion: All logical modules identified and documented with clear boundaries before development
     - criterion: Module interfaces and contracts defined and documented
@@ -80,10 +80,10 @@ REQ-MODULE_VALIDATION:
     - criterion: Each module developed independently
     - criterion: Each module passes independent validation before integration
       metric: Unit tests with mocks, integration tests with test doubles, contract validation, edge case testing, error handling validation all passing
-    - criterion: Module validation results documented
-    - criterion: Integration tasks separate from module development tasks
     - criterion: Integration only occurs after module validation passes
+    - criterion: Integration tasks separate from module development tasks
     - criterion: Minimize code measurable only from outside testing (E2E/manual); every IMPL has test strategy (unit/integration or E2E/glue-only with documented reason)
+    - criterion: Module validation results documented
     - criterion: No non-trivial logic in entry points unless documented as glue with reason
   validation_criteria:
     - method: Manual verification
@@ -137,14 +137,15 @@ REQ-FEEDBACK_TO_TIED:
       - No structured way to collect feedback from TIED adopters
       - Methodology improvements from the field are not easily reported upstream
     benefits:
-      - Structured feedback stored under the project TIED tree
       - Export format suitable for reporting to the TIED project (e.g. GitHub issues)
+      - Structured feedback stored under the project TIED tree
       - Traceability of feedback types (feature_request, bug_report, methodology_improvement)
   satisfaction_criteria:
     - criterion: MCP tools allow adding feedback entries (type, title, description, optional context)
       metric: tied_feedback_add creates/updates tied/feedback.yaml
     - criterion: Feedback can be exported for reporting to TIED
       metric: tied_feedback_export returns markdown or JSON of all entries
+    - criterion: Feedback entry types and MCP tool names are canonical in tied/vocab/feedback-to-tied.md; appendEntry block in IMPL-MCP_FEEDBACK_TOOLS-pseudocode.md
   validation_criteria:
     - method: Unit tests
       coverage: Feedback module load/append/export and tool handlers
@@ -158,8 +159,8 @@ REQ-FEEDBACK_TO_TIED:
     tests:
       - feedback.test.ts
     code_annotations:
-      - IMPL-MCP_FEEDBACK_TOOLS
       - ARCH-FEEDBACK_STORAGE
+      - IMPL-MCP_FEEDBACK_TOOLS
       - REQ-FEEDBACK_TO_TIED
   related_requirements:
     depends_on: []
@@ -190,9 +191,9 @@ REQ-LEAP_PROPOSAL_QUEUE:
       - No structured place for non-authoritative LEAP suggestions outside canonical REQ/ARCH/IMPL
       - Risk of silent or automatic TIED updates without human or explicit agent approval
     benefits:
-      - Stable proposal ids and audit trail under leap-proposals/ without polluting tied/ until LEAP is applied via MCP
-      - Deterministic extraction path (no API keys required for built-in diff/session import)
       - Clear separation between proposals and canonical TIED records
+      - Deterministic extraction path (no API keys required for built-in diff/session import)
+      - Stable proposal ids and audit trail under leap-proposals/ without polluting tied/ until LEAP is applied via MCP
   satisfaction_criteria:
     - criterion: MCP tools list, add, reject, approve, mark applied, update pending, and snapshot the proposal queue without writing project TIED YAML
       metric: tied_leap_proposal_* handlers persist only under leap-proposals/
@@ -570,10 +571,10 @@ REQ-GOAGENT-YAML-STEP-RENDER:
     benefits:
       - PROC-AGENT_REQ_CHECKLIST automation from Go
   satisfaction_criteria:
-    - criterion: TDD YAML requires steps array; each step formatted per Ruby template
+    - criterion: All such Turns use ChainFromPrevious true
     - criterion: Checklist YAML requires steps; optional sub_procedures; --lead-checklist-skip-sub omits subs
     - criterion: Optional inclusive main-step bounds by checklist step id (YAML order); missing lower or upper means unbounded on that side; subs unchanged by bounds
-    - criterion: All such Turns use ChainFromPrevious true
+    - criterion: TDD YAML requires steps array; each step formatted per Ruby template
   validation_criteria:
     - method: Unit tests
       coverage: tools/agentstream/checklist/checklist_test.go
@@ -622,8 +623,8 @@ REQ-GOAGENT-PIPELINE-CHAIN:
       - Deterministic session_for_turn selection
   satisfaction_criteria:
     - criterion: Assembly order argv prompt-file prompts-file tdd feature-spec lead-checklist verify
-    - criterion: pipeline.Input passes optional lead checklist step id bounds into checklist loader
     - criterion: Dry-run prints argv parts and quoted command with chaining stderr note
+    - criterion: pipeline.Input passes optional lead checklist step id bounds into checklist loader
   validation_criteria:
     - method: Unit tests
       coverage: tools/agentstream/pipeline/pipeline_test.go
@@ -640,8 +641,8 @@ REQ-GOAGENT-PIPELINE-CHAIN:
       - REQ-GOAGENT-PIPELINE-CHAIN
   related_requirements:
     depends_on:
-      - REQ-GOAGENT-TEXT-SOURCES
       - REQ-GOAGENT-FEATURESPEC-BATCH
+      - REQ-GOAGENT-TEXT-SOURCES
       - REQ-GOAGENT-YAML-STEP-RENDER
     related_to:
       - REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
@@ -711,17 +712,17 @@ REQ-CONFIG_DISCOVERY_LOCAL_LAYER:
   rationale:
     why: Project-local files must define effective policy without silent union with built-in defaults; omission in a later file must not re-inject defaults; single-segment directory excludes must match at any depth.
     problems_solved:
-      - Unintended merge of built-in exclude patterns with project-local lists
       - Phantom defaults from DefaultConfig-shaped unmarshaling on partial YAML
       - Root-only matching for patterns such as node_modules/
+      - Unintended merge of built-in exclude patterns with project-local lists
     benefits:
       - Predictable configuration from explicit YAML
       - Correct tree-wide directory exclusion semantics
   satisfaction_criteria:
+    - criterion: Explicit merge prefixes retain documented behavior where applicable
     - criterion: First project-local unprefixed exclude list replaces built-in default list
     - criterion: Later file omitting exclude_patterns does not append built-in patterns
     - criterion: Single-segment trailing-slash directory pattern matches at any depth
-    - criterion: Explicit merge prefixes retain documented behavior where applicable
   validation_criteria:
     - method: Automated tests
       coverage: Adopting project config and exclusion tests
@@ -824,8 +825,8 @@ REQ-GOAGENT-CHECKLIST-CONTROL:
       - Deterministic loop-back from unit-test-green to flag-contradictory-specs
       - Human-readable transcript remains separate from machine control
   satisfaction_criteria:
-    - criterion: Checklist turn output can include a strict machine-readable agentstream_control block.
     - criterion: agentstream validates goto targets against known checklist slugs before changing the remaining turn queue.
+    - criterion: Checklist turn output can include a strict machine-readable agentstream_control block.
     - criterion: unit-test-green can route to flag-contradictory-specs when the focused RED test passes but existing tests fail.
   validation_criteria:
     - method: Unit tests
@@ -836,17 +837,17 @@ REQ-GOAGENT-CHECKLIST-CONTROL:
     implementation:
       - IMPL-GOAGENT-CHECKLIST-CONTROL
     tests:
-      - tools/agentstream/control/control_test.go
-      - tools/agentstream/pipeline/pipeline_test.go
       - tools/agentstream/checklist/checklist_test.go
+      - tools/agentstream/control/control_test.go
       - tools/agentstream/executor/executor_test.go
+      - tools/agentstream/pipeline/pipeline_test.go
     code_annotations:
       - REQ-GOAGENT-CHECKLIST-CONTROL
   related_requirements:
     depends_on:
-      - REQ-GOAGENT-YAML-STEP-RENDER
-      - REQ-GOAGENT-PIPELINE-CHAIN
       - REQ-GOAGENT-AGENT-EXECUTOR
+      - REQ-GOAGENT-PIPELINE-CHAIN
+      - REQ-GOAGENT-YAML-STEP-RENDER
     related_to:
       - PROC-AGENT_REQ_CHECKLIST
     supersedes: []

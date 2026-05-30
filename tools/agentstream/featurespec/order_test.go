@@ -4,7 +4,8 @@ import (
 	"testing"
 )
 
-// REQ: REQ-GOAGENT-FEATURESPEC, REQ-GOAGENT-CLI-CONFIG
+// [IMPL-GOAGENT-FEATURESPEC] [ARCH-GOAGENT-YAML-FEATURESPEC] [REQ-GOAGENT-FEATURESPEC-BATCH]
+// How: ParseOrderFilter accepts single numeric order values for batch record filtering.
 func TestParseOrderFilter_single(t *testing.T) {
 	f, err := ParseOrderFilter("2")
 	if err != nil {

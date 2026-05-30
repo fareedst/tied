@@ -6,14 +6,14 @@ REQ-MODULE_VALIDATION:
   rationale:
     why: To eliminate bugs related to code complexity by ensuring each module works correctly in isolation before combining with other modules
     problems_solved:
-      - Integration complexity causing difficult-to-debug issues
       - Bugs discovered too late in the development cycle
+      - Integration complexity causing difficult-to-debug issues
       - Module contracts not properly validated before integration
     benefits:
       - Bugs caught early before integration
-      - Reduced integration complexity
       - Clear module boundaries and contracts
       - Easier debugging by isolating issues to specific modules
+      - Reduced integration complexity
   satisfaction_criteria:
     - criterion: All logical modules identified and documented with clear boundaries before development
     - criterion: Module interfaces and contracts defined and documented
@@ -22,10 +22,11 @@ REQ-MODULE_VALIDATION:
     - criterion: Each module developed independently
     - criterion: Each module passes independent validation before integration
       metric: Unit tests with mocks, integration tests with test doubles, contract validation, edge case testing, error handling validation all passing
-    - criterion: Module validation results documented
-    - criterion: Integration tasks separate from module development tasks
     - criterion: Integration only occurs after module validation passes
+    - criterion: Integration tasks separate from module development tasks
     - criterion: Minimize code measurable only from outside testing (E2E/manual); every IMPL has test strategy (unit/integration or E2E/glue-only with documented reason)
+    - criterion: Module validation results documented
+    - criterion: Module validation terminology (module validation, independent validation before integration) is canonical in tied/vocab/tied-methodology.md; logical unit names align with UPPER_SNAKE blocks in sibling glossaries
     - criterion: No non-trivial logic in entry points unless documented as glue with reason
   validation_criteria:
     - method: Manual verification
@@ -58,13 +59,13 @@ REQ-MODULE_VALIDATION:
   detail_file: requirements/REQ-MODULE_VALIDATION.yaml
   metadata:
     created:
-      date: 2025-01-27
+      date: 2025-01-27T00:00:00.000Z
       author: AI Agent
     last_updated:
-      date: 2026-02-06
+      date: 2026-02-06T00:00:00.000Z
       author: AI Agent
       reason: Restructured to v1.5.0 schema with machine-parseable fields
     last_validated:
-      date: 2026-02-06
+      date: 2026-02-06T00:00:00.000Z
       validator: AI Agent
       result: pass

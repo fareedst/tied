@@ -46,31 +46,35 @@ name: agent_req_implementation_checklist
 description: |
   Primary procedural template for every new requirement or change to the tested system. Unifies CITDP, TIED dev cycle, IMPL_CODE_TEST_SYNC, LEAP, YAML edit loop, and related processes. Mandatory order: IMPL pseudo-code (token-commented) -> RED tests -> code.
   Responsibility split: pseudo-code-owner steps define and validate logic intent; test/code-owner steps implement only logic already present in pseudo-code. If new logic appears in tests/code, route back to pseudo-code-owner steps first (LEAP).
+  Domain vocabulary discipline ([PROC-VOCABULARY_INDEX]): at every point where a concept is named or expressed, CALL sub-vocabulary-sync against the domain vocabulary index files at tied/vocab/*.md (filenames have no -vocabulary suffix). RESOLVE before naming/writing (reword fuzzy input to one preferred term; name TIED tokens, storage items, and logical units from canonical terms; resolve names before tests, code, design, and UI docs); RECORD as new concepts are generated and after those artifacts change so the index stays consistent. This is distinct from the IMPL pseudo-code grammar "preferred vocabulary" (INPUT/OUTPUT/DATA keywords); standards live in docs/vocabulary-index-analysis-and-standards.md.
   Driver note (agentstream): When sub_procedures are appended as extra turns after traceable-commit, each was usually already executed via CALL during an earlier step. Unless new TIED/YAML mutations are pending, respond with a one-line RETURN (no full re-validation). Prefer --lead-checklist-skip-sub when generating turns to avoid duplicate subs (see tools/agentstream README).
   Non-normative: Optional new-session handoffs (when disk + per-request copy justify a fresh context) are documented in source_document under "Suggested session handoffs"; see YAML header comment for slug summary. [PROC-CITDP] final CITDP file is persist-citdp-record after implementation; pre-TDD analysis ends at test-strategy after TIED/IMPL on disk.
   Main steps that start a handoff set agentstream_new_session: true for tools/agentstream and tools/agent-stream (per source_document at repo root docs/); other clients may ignore.
 source_document: docs/agent-req-implementation-checklist.md
 process_token: '[PROC-AGENT_REQ_CHECKLIST]'
-version: 1.5.2
-last_updated: "2026-04-22"
+version: 1.6.0
+last_updated: "2026-05-29"
 # Paths below are repo-relative from the workspace root where this checklist runs.
 workspace_paths:
   # WORKSPACE_ROOT: set when copies live outside the default checkout
   TIED_BASE: ./tied
   TIED_DOCS: ./tied/docs
   CITDP_RECORDS: ./tied/citdp
+  # VOCAB_INDEX: domain vocabulary index files (*.md, no -vocabulary suffix); standards in docs/vocabulary-index-analysis-and-standards.md
+  VOCAB_INDEX: ./tied/vocab
 processes_unified:
   - '[PROC-CITDP]'
-  - '[PROC-TIED_DEV_CYCLE]'
+  - '[PROC-COMMIT_MESSAGES]'
   - '[PROC-IMPL_CODE_TEST_SYNC]'
-  - '[PROC-LEAP]'
-  - '[PROC-YAML_EDIT_LOOP]'
   - '[PROC-IMPL_PSEUDOCODE_TOKENS]'
+  - '[PROC-LEAP]'
   - '[PROC-PSEUDOCODE_VALIDATION]'
+  - '[PROC-TEST_STRATEGY]'
+  - '[PROC-TIED_DEV_CYCLE]'
   - '[PROC-TOKEN_AUDIT]'
   - '[PROC-TOKEN_VALIDATION]'
-  - '[PROC-TEST_STRATEGY]'
-  - '[PROC-COMMIT_MESSAGES]'
+  - '[PROC-VOCABULARY_INDEX]'
+  - '[PROC-YAML_EDIT_LOOP]'
 entry_points:
   - scenario: New requirement
     start_at: session-bootstrap
@@ -107,119 +111,119 @@ loop_back_clearance:
       - sub-leap-micro-cycle
       - sync-tied-stack
     clear_slugs:
-      - author-requirement
-      - author-architecture
-      - catalog-pseudocode-contracts
-      - flag-insufficient-specs
-      - flag-contradictory-specs
-      - resolve-pseudocode
       - apply-token-comments
-      - gate-pseudocode-validation
-      - persist-implementation-records
-      - risk-assessment
-      - test-strategy
-      - unit-test-red
-      - unit-test-green
-      - unit-refactor
-      - three-way-alignment-unit
+      - author-architecture
+      - author-requirement
+      - catalog-pseudocode-contracts
       - composition-integration
       - end-to-end-ui
-      - verification-gate
+      - flag-contradictory-specs
+      - flag-insufficient-specs
+      - gate-pseudocode-validation
+      - persist-implementation-records
+      - resolve-pseudocode
+      - risk-assessment
       - sync-tied-stack
+      - test-strategy
+      - three-way-alignment-unit
+      - unit-refactor
+      - unit-test-green
+      - unit-test-red
+      - verification-gate
   author-architecture:
     from_steps:
       - resolve-pseudocode
       - sub-leap-micro-cycle
       - sync-tied-stack
     clear_slugs:
+      - apply-token-comments
       - author-architecture
       - catalog-pseudocode-contracts
-      - flag-insufficient-specs
-      - flag-contradictory-specs
-      - resolve-pseudocode
-      - apply-token-comments
-      - gate-pseudocode-validation
-      - persist-implementation-records
-      - risk-assessment
-      - test-strategy
-      - unit-test-red
-      - unit-test-green
-      - unit-refactor
-      - three-way-alignment-unit
       - composition-integration
       - end-to-end-ui
-      - verification-gate
+      - flag-contradictory-specs
+      - flag-insufficient-specs
+      - gate-pseudocode-validation
+      - persist-implementation-records
+      - resolve-pseudocode
+      - risk-assessment
       - sync-tied-stack
+      - test-strategy
+      - three-way-alignment-unit
+      - unit-refactor
+      - unit-test-green
+      - unit-test-red
+      - verification-gate
   catalog-pseudocode-contracts:
     from_steps:
       - composition-integration
       - end-to-end-ui
       - sync-tied-stack
     clear_slugs:
-      - catalog-pseudocode-contracts
-      - flag-insufficient-specs
-      - flag-contradictory-specs
-      - resolve-pseudocode
       - apply-token-comments
-      - gate-pseudocode-validation
-      - persist-implementation-records
-      - risk-assessment
-      - test-strategy
-      - unit-test-red
-      - unit-test-green
-      - unit-refactor
-      - three-way-alignment-unit
+      - catalog-pseudocode-contracts
       - composition-integration
       - end-to-end-ui
-      - verification-gate
+      - flag-contradictory-specs
+      - flag-insufficient-specs
+      - gate-pseudocode-validation
+      - persist-implementation-records
+      - resolve-pseudocode
+      - risk-assessment
       - sync-tied-stack
+      - test-strategy
+      - three-way-alignment-unit
+      - unit-refactor
+      - unit-test-green
+      - unit-test-red
+      - verification-gate
   flag-contradictory-specs:
     from_steps:
       - unit-test-green
     clear_slugs:
-      - flag-contradictory-specs
-      - resolve-pseudocode
       - apply-token-comments
-      - gate-pseudocode-validation
-      - persist-implementation-records
-      - risk-assessment
-      - test-strategy
-      - unit-test-red
-      - unit-test-green
-      - unit-refactor
-      - three-way-alignment-unit
       - composition-integration
       - end-to-end-ui
-      - verification-gate
+      - flag-contradictory-specs
+      - gate-pseudocode-validation
+      - persist-implementation-records
+      - resolve-pseudocode
+      - risk-assessment
       - sync-tied-stack
+      - test-strategy
+      - three-way-alignment-unit
+      - unit-refactor
+      - unit-test-green
+      - unit-test-red
+      - verification-gate
   apply-token-comments:
     from_steps:
       - composition-integration
     clear_slugs:
       - apply-token-comments
+      - composition-integration
+      - end-to-end-ui
       - gate-pseudocode-validation
       - persist-implementation-records
       - risk-assessment
-      - test-strategy
-      - unit-test-red
-      - unit-test-green
-      - unit-refactor
-      - three-way-alignment-unit
-      - composition-integration
-      - end-to-end-ui
-      - verification-gate
       - sync-tied-stack
+      - test-strategy
+      - three-way-alignment-unit
+      - unit-refactor
+      - unit-test-green
+      - unit-test-red
+      - verification-gate
   unit-test-red:
     from_steps:
       - three-way-alignment-unit
       - verification-gate
     clear_slugs:
-      - unit-test-red
-      - unit-test-green
-      - unit-refactor
-      - three-way-alignment-unit
       - composition-integration
       - end-to-end-ui
+      - three-way-alignment-unit
+      - unit-refactor
+      - unit-test-green
+      - unit-test-red
       - verification-gate
   composition-integration:
     from_steps:
@@ -243,26 +247,29 @@ steps:
       - Active workspace root is the implementation repository for this requirement or change.
       - When ./tied/ or .cursor/skills/tied-yaml/ are missing (immature client), run only tasks that apply to existing paths; defer tied-cli TIED mutations until the methodology bundle is installed—record what was deferred in the per-request checklist copy.
     tasks:
-      - Preface the response with "Observing AI principles!".
+      - 'Implementation freeze until gate-pseudocode-validation and persist-implementation-records are satisfied for this REQ/changed IMPL set: do not add or modify production implementation files (application source, deliverable scripts, etc.) or automated test files. Exception only for TIED YAML and docs required by completed checklist steps (TIED paths routed per .cursor/skills/tied-yaml/SKILL.md).'
+      - 'Mandatory global sequence (before any RED test or production code): token-commented IMPL essence_pseudocode → gate-pseudocode-validation → persist-implementation-records when authoring new IMPL — then RED tests → GREEN code.'
       - 'Read completely: tied/docs/ai-principles.md'
+      - 'Review IMPL schema and pseudo-code rules: ./tied/docs/implementation-decisions.md ([PROC-IMPL_PSEUDOCODE_TOKENS]).'
+      - 'Review the domain vocabulary index ([PROC-VOCABULARY_INDEX]): scan ./tied/vocab/*.md (preferred terms; filenames have no -vocabulary suffix) and the standards in docs/vocabulary-index-analysis-and-standards.md so concept names stay consistent this session. If ./tied/vocab/ is absent, note it (immature client) and apply the discipline when concepts arise. This is distinct from the IMPL grammar "preferred vocabulary" (INPUT/OUTPUT/DATA).'
       - 'Review token registry: ./tied/semantic-tokens.yaml and guide: ./tied/docs/semantic-tokens.md'
       - 'Review YAML indexes: ./tied/architecture-decisions.yaml and ./tied/implementation-decisions.yaml'
-      - 'Review IMPL schema and pseudo-code rules: ./tied/docs/implementation-decisions.md ([PROC-IMPL_PSEUDOCODE_TOKENS]).'
-      - Read .cursor/skills/tied-yaml/SKILL.md. For every create/update/delete under project TIED YAML (./tied/*.yaml and detail trees under ./tied/requirements, ./tied/architecture-decisions, ./tied/implementation-decisions, excluding methodology), invoke tools only through .cursor/skills/tied-yaml/scripts/tied-cli.sh with tool name and JSON arguments per the skill and .cursor/skills/tied-yaml/reference.md. Set TIED_BASE_PATH and the built dist/index.js path per the skill Environment overrides. When .cursor/skills/tied-yaml/ or tied-cli.sh is missing, follow this step's preconditions (defer, lightweight pass, or explicit note in the per-request checklist copy)—do not leave the checklist to obtain tooling. In agentstream or headless runs, rely on tied-cli.sh only. Do not use apply_patch or Write on those paths when tied-cli.sh covers the operation; on errors retry with corrected JSON; do not silently fall back to direct file edit.
-      - 'Mandatory global sequence (before any RED test or production code): token-commented IMPL essence_pseudocode → gate-pseudocode-validation → persist-implementation-records when authoring new IMPL — then RED tests → GREEN code.'
       - 'Within TDD after pseudo-code is authoritative: failing test before production code. When weighing non-implementation trade-offs: Tests > Basic Functions > Developer Experience > Infrastructure > Security — never start RED or production code before IMPL pseudo-code is complete per the mandatory sequence above.'
-      - 'Implementation freeze until gate-pseudocode-validation and persist-implementation-records are satisfied for this REQ/changed IMPL set: do not add or modify production implementation files (application source, deliverable scripts, etc.) or automated test files. Exception only for TIED YAML and docs required by completed checklist steps (TIED paths routed per .cursor/skills/tied-yaml/SKILL.md).'
       - Do not paste or author deliverable production scripts or automated test files in this bootstrap step; session-bootstrap is read-only orientation (governing docs and skill contract), not implementation.
+      - Preface the response with "Observing AI principles!".
+      - Read .cursor/skills/tied-yaml/SKILL.md. For every create/update/delete under project TIED YAML (./tied/*.yaml and detail trees under ./tied/requirements, ./tied/architecture-decisions, ./tied/implementation-decisions, excluding methodology), invoke tools only through .cursor/skills/tied-yaml/scripts/tied-cli.sh with tool name and JSON arguments per the skill and .cursor/skills/tied-yaml/reference.md. Set TIED_BASE_PATH and the built dist/index.js path per the skill Environment overrides. When .cursor/skills/tied-yaml/ or tied-cli.sh is missing, follow this step's preconditions (defer, lightweight pass, or explicit note in the per-request checklist copy)—do not leave the checklist to obtain tooling. In agentstream or headless runs, rely on tied-cli.sh only. Do not use apply_patch or Write on those paths when tied-cli.sh covers the operation; on errors retry with corrected JSON; do not silently fall back to direct file edit.
     outcomes: Agent has read all governing documents. Session context is established.
     references:
-      - AGENTS.md § 1-2
-      - tied/docs/ai-principles.md § Mandatory Acknowledgment, § Checklist for AI Agents
-      - .cursor/skills/tied-yaml/SKILL.md
       - .cursor/skills/tied-yaml/reference.md
+      - .cursor/skills/tied-yaml/SKILL.md
+      - AGENTS.md § 1-2
+      - docs/vocabulary-index-analysis-and-standards.md
+      - tied/docs/ai-principles.md § Mandatory Acknowledgment, § Checklist for AI Agents
     flow:
       next: translate-sponsor-intent
       branches: []
-      calls: []
+      calls:
+        - sub-vocabulary-sync
     tracking:
       status: pending
       consideration_before_proceeding: All governing documents read; session context established; mandatory IMPL→validation→persist→RED→GREEN sequence and implementation freeze understood.
@@ -281,21 +288,24 @@ steps:
         Title / label: {{CHANGE_TITLE}}
         Goal (sponsor): {{FEATURE_GOAL}}
         Behavior summary (sponsor): {{FEATURE_BEHAVIOR_SUMMARY}}
+      - 'Reword fuzzy sponsor wording that names concepts: CALL sub-vocabulary-sync (RESOLVE) to map synonyms/ambiguous terms in the sponsor strings onto the preferred domain terms from ./tied/vocab/*.md before mapping intent to phases; CALL sub-vocabulary-sync (RECORD) for any genuinely new concept the sponsor introduces so it is captured immediately ([PROC-VOCABULARY_INDEX]).'
+      - At change-definition next, refine this plan into the formal change definition (current, desired, unchanged, non-goals, success criteria); do not duplicate full REQ/IMPL authoring here.
+      - Do not create, modify, or paste implementation files or automated tests in this step; output is the translation/plan prose only (no repo mutations required).
       - Explicitly restate that the lines above are not authorization to write production code, deliverable scripts, automated tests, or TIED YAML beyond what a later checklist step assigns.
       - Produce a numbered plan mapping sponsor intent onto checklist phases in order—for example change-definition → impact-discovery → author-requirement → author-architecture → catalog-pseudocode-contracts … → gate-pseudocode-validation → persist-implementation-records → test-strategy → unit-test-red → unit-test-green → composition-integration → verification-gate → traceable-commit—adjusted to branches that apply in this workspace. Mention where pseudo-code gates and RED precede GREEN.
-      - Do not create, modify, or paste implementation files or automated tests in this step; output is the translation/plan prose only (no repo mutations required).
-      - At change-definition next, refine this plan into the formal change definition (current, desired, unchanged, non-goals, success criteria); do not duplicate full REQ/IMPL authoring here.
-    outcomes: Sponsor wording translated into an explicit checklist-phase plan; agent primed to follow slug order rather than imperative goal phrasing alone.
+    outcomes: Sponsor wording translated into an explicit checklist-phase plan using canonical domain terms; agent primed to follow slug order rather than imperative goal phrasing alone.
     references:
       - docs/agent-req-implementation-checklist.md § Entry Points
+      - docs/vocabulary-index-analysis-and-standards.md
       - tied/docs/processes.md § [PROC-AGENT_REQ_CHECKLIST]
     flow:
       next: change-definition
       branches: []
-      calls: []
+      calls:
+        - sub-vocabulary-sync
     tracking:
       status: pending
-      consideration_before_proceeding: Sponsor intent mapped to checklist phases in writing; no implementation or test artifacts introduced; ready for formal change-definition.
+      consideration_before_proceeding: Sponsor intent mapped to checklist phases in writing using canonical vocabulary (fuzzy terms reworded; new concepts recorded); no implementation or test artifacts introduced; ready for formal change-definition.
       retry_count: 0
       returned_from: []
       state_history: []
@@ -306,26 +316,29 @@ steps:
     preconditions:
       - Writable workspace; no TIED tree required—pure analysis and written change definition only.
     tasks:
+      - 'Express the change definition using canonical domain terms: CALL sub-vocabulary-sync (RESOLVE) to reword fuzzy/synonym wording in current/desired/success-criteria to the preferred terms in ./tied/vocab/*.md; CALL sub-vocabulary-sync (RECORD) for any new concept named here ([PROC-VOCABULARY_INDEX]).'
+      - Deliverable production code and automated tests are out of scope for this step; output is the written change definition (current, desired, unchanged, non-goals, success criteria) only.
       - State current behavior (or "none" for a new requirement).
       - State desired behavior.
-      - State unchanged behavior (explicit boundaries of what is not affected).
       - State non-goals (what this work intentionally does not address).
       - State success criteria (measurable outcomes that determine when the work is done).
-      - Deliverable production code and automated tests are out of scope for this step; output is the written change definition (current, desired, unchanged, non-goals, success criteria) only.
-    outcomes: A clear change definition exists. For CITDP records, this populates the change_definition section.
+      - State unchanged behavior (explicit boundaries of what is not affected).
+    outcomes: A clear change definition exists, worded with canonical domain terms. For CITDP records, this populates the change_definition section.
     references:
-      - tied/docs/processes.md § [PROC-CITDP] step 1
+      - docs/vocabulary-index-analysis-and-standards.md
       - tied/docs/ai-principles.md § Bugs vs requirements
+      - tied/docs/processes.md § [PROC-CITDP] step 1
     flow:
       next: impact-discovery
       branches:
         - condition: Bug fix AND no REQ exists for the expected behavior
           action: GOTO author-requirement first, then return here to define the fix
           target: author-requirement
-      calls: []
+      calls:
+        - sub-vocabulary-sync
     tracking:
       status: pending
-      consideration_before_proceeding: Change definition documented; current, desired, unchanged, non-goals, and success criteria stated; no implementation or test artifacts introduced in this step.
+      consideration_before_proceeding: Change definition documented using canonical vocabulary (fuzzy terms reworded; new concepts recorded); current, desired, unchanged, non-goals, and success criteria stated; no implementation or test artifacts introduced in this step.
       retry_count: 0
       returned_from: []
       state_history: []
@@ -337,8 +350,6 @@ steps:
       - Change definition for this pass is available (from change-definition or equivalent context).
       - When ./tied/ is absent or indexes are missing, discovery is code-and-docs-only; defer tied-cli IMPL detail reads until TIED exists—document inventory gaps instead of inventing YAML.
     tasks:
-      - Identify affected modules and functions with their tied tokens.
-      - Identify module boundaries the change touches or crosses.
       - 'Build tied_context: tied_tokens_affected, tied_tokens_new.'
       - 'IMPL Discovery A1: Load each affected IMPL detail via tied-cli.sh yaml_detail_read or yaml_detail_read_many (preferred batch read); record cross_references, related_decisions (depends_on, composed_with, see_also), traceability. Resolve paths under ./tied/implementation-decisions/ only after confirming tokens via tied-cli.sh or index—do not assume files exist on disk before creation (Read failures are expected until persist-implementation-records).'
       - 'IMPL Discovery A2: Discover related IMPLs via (a) composed_with/depends_on, (b) shared REQ/ARCH tokens, (c) code_locations overlap, (d) [IMPL-*] in source/tests.'
@@ -346,6 +357,8 @@ steps:
       - 'Phase B/C scope: For catalog-pseudocode-contracts through flag-contradictory-specs, treat project/feature IMPLs tied to this REQ or change-definition as the primary IMPL set. Methodology IMPLs visible in merged index reads are inherited context only unless change-definition explicitly changes methodology—do not build large empty contract tables for them.'
       - 'Traceability vs workspace: TIED code_locations document where an IMPL is anchored; they do not require every listed path to exist in this checkout. Paths absent here (other layouts, methodology-only tooling, unrelated inherited IMPLs): note as N/A or out of scope for this pass; do not treat as missing implementation or block the checklist.'
       - Do not expand discovery into locating or fixing methodology or TIED-setup assets when change-definition does not concern that area.
+      - Identify affected modules and functions with their tied tokens.
+      - Identify module boundaries the change touches or crosses.
       - IMPL inventory verified-present entries are discovery-only — not permission to create new files. Do not add or modify production source or automated tests here; new or changed implementation artifacts begin at unit-test-red (tests) and unit-test-green (production code) after pseudo-code is validated and persisted.
       - Stop expanding when no new IMPLs share code paths, REQ/ARCH tokens, or composed_with links with the current set.
     outcomes: Complete impact map; IMPL inventory table ready; all affected and related tokens identified; inherited IMPL paths interpreted per traceability rules without false blocking.
@@ -374,23 +387,26 @@ steps:
       - ./tied/ present or creatable at workspace root; ./tied/requirements.yaml (or project index path) reachable for index operations.
       - .cursor/skills/tied-yaml/scripts/tied-cli.sh available when mutating TIED paths (per session-bootstrap); if missing, defer REQ authoring until bootstrap—do not apply_patch TIED index/detail when tied-cli is required.
     tasks:
-      - Create or update the requirements index row via tied-cli.sh (yaml_index_insert / yaml_index_update) or tied_token_create_with_detail on ./tied/requirements.yaml — do not apply_patch the index file directly unless no tied-cli.sh tool covers the operation (document one-line exception).
-      - Create or update REQ detail via tied-cli.sh yaml_detail_create / yaml_detail_update (prefer yaml_detail_read then small updates) at ./tied/requirements/REQ-{TOKEN}.yaml per ./tied/docs/detail-files-schema.md § REQ (or detail-files-schema.md at template root).
-      - Register the REQ token in ./tied/semantic-tokens.yaml via tied-cli.sh yaml_index_insert / yaml_index_update on index semantic-tokens.
+      - 'Name this TIED resource from canonical vocabulary: CALL sub-vocabulary-sync (RESOLVE) before choosing the REQ token suffix and the record `name` field so they reflect the preferred domain term in ./tied/vocab/*.md; CALL sub-vocabulary-sync (RECORD) to add the concept <-> REQ-token naming-bridge entry ([PROC-VOCABULARY_INDEX]).'
       - CALL sub-yaml-edit-loop for each changed YAML file under ./tied/ (after tied-cli.sh writes; for direct-edit exceptions only, run lint_yaml on that absolute path inside sub-yaml-edit-loop—never raw multi-argument `yq` pretty-print on multiple paths in one process; see processes.md [PROC-YAML_EDIT_LOOP]).
-    outcomes: REQ record exists in both the index and the detail file; token is registered in semantic-tokens.yaml; all YAML validated.
+      - Create or update REQ detail via tied-cli.sh yaml_detail_create / yaml_detail_update (prefer yaml_detail_read then small updates) at ./tied/requirements/REQ-{TOKEN}.yaml per ./tied/docs/detail-files-schema.md § REQ (or detail-files-schema.md at template root).
+      - Create or update the requirements index row via tied-cli.sh (yaml_index_insert / yaml_index_update) or tied_token_create_with_detail on ./tied/requirements.yaml — do not apply_patch the index file directly unless no tied-cli.sh tool covers the operation (document one-line exception).
+      - Register the REQ token in ./tied/semantic-tokens.yaml via tied-cli.sh yaml_index_insert / yaml_index_update on index semantic-tokens.
+    outcomes: REQ record exists in both the index and the detail file; token name reflects the canonical domain term and is recorded in the vocabulary naming bridge; token is registered in semantic-tokens.yaml; all YAML validated.
     references:
-      - tied/docs/processes.md § [PROC-YAML_DB_OPERATIONS] § Appending a New Record
+      - docs/vocabulary-index-analysis-and-standards.md
       - tied/docs/detail-files-schema.md § 1
+      - tied/docs/processes.md § [PROC-YAML_DB_OPERATIONS] § Appending a New Record
       - tied/docs/semantic-tokens.md § Token Creation Requirements
     flow:
       next: author-architecture
       branches: []
       calls:
         - sub-yaml-edit-loop
+        - sub-vocabulary-sync
     tracking:
       status: pending
-      consideration_before_proceeding: REQ index and detail file complete; token in semantic-tokens.yaml; sub-yaml-edit-loop passed for all changed files.
+      consideration_before_proceeding: REQ index and detail file complete; token name resolved from canonical vocabulary and concept<->token bridge recorded; token in semantic-tokens.yaml; sub-yaml-edit-loop passed for all changed files.
       retry_count: 0
       returned_from:
         - change-definition
@@ -406,26 +422,30 @@ steps:
       - REQ token and scope for this change identified (author-requirement completed or verify-only REQ exists on disk).
       - Same ./tied/ and tied-cli availability as author-requirement.
     tasks:
-      - Identify architectural decisions needed (or update existing ones).
+      - 'Agent preload contract (ARCH-locked): After material ARCH/REQ decisions exist, create or update ./tied/agent-preload-contract.yaml (agentstream and batch runners use this file when present). Base it on ./tied/docs/agent-preload-contract-template.yaml when YAML indexes live at the repo root (TIED source layout, no ./tied/ subtree). Populate from locked REQ+ARCH, for example session_bootstrap_docs paths, tied_paths.TIED_BASE_PATH, and implementation_contract fields the ARCH decision fixes (language/stack hints, high-level target_source_paths if ARCH names roots); set active_user_intent.checklist_step_id if useful. A generic or empty preload is not a substitute for REQ+ARCH-bounded system definition; do not treat it as authoritative for implementation before REQ and ARCH exist. If this pass only adjusted cross-references and did not change stack, layout, or other constants, state in the step output that ./tied/agent-preload-contract.yaml was not refreshed.'
+      - 'Refer to vocab before writing design documents and naming TIED/storage resources: CALL sub-vocabulary-sync (RESOLVE) so the ARCH token name, record `name`, design prose, and any layout/path/schema names this decision fixes use preferred terms from ./tied/vocab/*.md ([PROC-VOCABULARY_INDEX]).'
+      - 'Update vocab after writing design: CALL sub-vocabulary-sync (RECORD) to capture new design/architecture terms and concept <-> ARCH-token (and concept <-> storage-name) naming-bridge rows.'
+      - CALL sub-yaml-edit-loop for each changed YAML file under ./tied/ (direct-edit exception only with one-line logged gap per .cursor/skills/tied-yaml/SKILL.md).
       - Create or update ./tied/architecture-decisions.yaml via tied-cli.sh yaml_index_insert / yaml_index_update; never write to ./tied/methodology/**.
       - Create or update ARCH detail at ./tied/architecture-decisions/ARCH-{TOKEN}.yaml via tied-cli.sh yaml_detail_create / yaml_detail_update per detail-files-schema § ARCH.
+      - Identify architectural decisions needed (or update existing ones).
       - Register each new ARCH token in ./tied/semantic-tokens.yaml via tied-cli.sh yaml_index_insert / yaml_index_update on index semantic-tokens.
-      - CALL sub-yaml-edit-loop for each changed YAML file under ./tied/ (direct-edit exception only with one-line logged gap per .cursor/skills/tied-yaml/SKILL.md).
-      - 'Agent preload contract (ARCH-locked): After material ARCH/REQ decisions exist, create or update ./tied/agent-preload-contract.yaml (agentstream and batch runners use this file when present). Base it on ./tied/docs/agent-preload-contract-template.yaml when YAML indexes live at the repo root (TIED source layout, no ./tied/ subtree). Populate from locked REQ+ARCH, for example session_bootstrap_docs paths, tied_paths.TIED_BASE_PATH, and implementation_contract fields the ARCH decision fixes (language/stack hints, high-level target_source_paths if ARCH names roots); set active_user_intent.checklist_step_id if useful. A generic or empty preload is not a substitute for REQ+ARCH-bounded system definition; do not treat it as authoritative for implementation before REQ and ARCH exist. If this pass only adjusted cross-references and did not change stack, layout, or other constants, state in the step output that ./tied/agent-preload-contract.yaml was not refreshed.'
     outcomes: ARCH records exist with REQ cross-references; tokens registered; YAML validated; ./tied/agent-preload-contract.yaml created or updated when ARCH introduced meaningful platform constants (or step output records explicit skip or not-applicable).
     references:
-      - tied/docs/processes.md § [PROC-YAML_DB_OPERATIONS]
-      - tied/docs/detail-files-schema.md § 2
-      - tied/docs/ai-principles.md § Phase 1
       - ./tied/docs/agent-preload-contract-template.yaml
+      - docs/vocabulary-index-analysis-and-standards.md
+      - tied/docs/ai-principles.md § Phase 1
+      - tied/docs/detail-files-schema.md § 2
+      - tied/docs/processes.md § [PROC-YAML_DB_OPERATIONS]
     flow:
       next: catalog-pseudocode-contracts
       branches: []
       calls:
         - sub-yaml-edit-loop
+        - sub-vocabulary-sync
     tracking:
       status: pending
-      consideration_before_proceeding: ARCH index and detail files complete; tokens in semantic-tokens.yaml; sub-yaml-edit-loop passed for all changed files; tied/agent-preload-contract.yaml updated after meaningful ARCH changes or explicitly skipped with reason.
+      consideration_before_proceeding: ARCH index and detail files complete; design prose and ARCH/storage names resolved from canonical vocabulary and new design terms recorded; tokens in semantic-tokens.yaml; sub-yaml-edit-loop passed for all changed files; tied/agent-preload-contract.yaml updated after meaningful ARCH changes or explicitly skipped with reason.
       retry_count: 0
       returned_from:
         - resolve-pseudocode
@@ -438,27 +458,30 @@ steps:
     goals: Catalog IMPL pseudo-code contracts for reasoning and validation.
     preconditions:
       - IMPL inventory from impact-discovery lists IMPL tokens; each target has or will have essence_pseudocode (readable detail or working draft in scope).
-      - When no IMPL detail files exist yet, defer cataloging until after draft pseudo-code exists—skip with explicit note rather than inventing contracts.
       - Primary targets are project/feature IMPLs for this REQ (from tied_tokens_affected / tied_tokens_new / planned project IMPL). Methodology IMPLs under ./tied/methodology are read-only unless this pass edits methodology—do not enumerate row-by-row contract extraction for them when essence_pseudocode is null and they are out of scope.
+      - When no IMPL detail files exist yet, defer cataloging until after draft pseudo-code exists—skip with explicit note rather than inventing contracts.
     tasks:
-      - 'Responsibility: pseudo-code owner step. Define contract-level logic intent only; do not author production code or automated test logic here.'
       - 'For each in-scope project/feature IMPL, read essence_pseudocode sequentially. For each, note: INPUT/OUTPUT/DATA (and CONTROL when present); procedure names (UPPER_SNAKE or camelCase); key branches (IF/ELSE), loops (FOR ... IN), error paths (ON error, RETURN error); async boundaries (AWAIT, Promise).'
       - 'Methodology-only IMPLs (inherited merged view): at most one short note that essence_pseudocode may be null and contracts are not extracted here—do not produce large empty tables.'
-    outcomes: Contracts cataloged for in-scope feature IMPLs; procedure names and structure noted.
+      - 'Name logical units from canonical vocabulary: when noting procedure names and UPPER_SNAKE block names, CALL sub-vocabulary-sync (RESOLVE) so each maps to the preferred domain term in ./tied/vocab/*.md (the preferred term IS the block name); CALL sub-vocabulary-sync (RECORD) for any new block-name/procedure term so it is captured immediately ([PROC-VOCABULARY_INDEX]).'
+      - 'Responsibility: pseudo-code owner step. Define contract-level logic intent only; do not author production code or automated test logic here.'
+    outcomes: Contracts cataloged for in-scope feature IMPLs; procedure names and UPPER_SNAKE block names drawn from and recorded in the canonical vocabulary; structure noted.
     references:
       - tied/docs/processes.md § [PROC-IMPL_CODE_TEST_SYNC] Phases B-C
+      - docs/vocabulary-index-analysis-and-standards.md
     flow:
       next: flag-insufficient-specs
       branches: []
-      calls: []
+      calls:
+        - sub-vocabulary-sync
     tracking:
       status: pending
-      consideration_before_proceeding: In-scope feature IMPL contracts cataloged; methodology IMPLs handled per preconditions (no empty churn).
+      consideration_before_proceeding: In-scope feature IMPL contracts cataloged; procedure/block names resolved from and recorded in the canonical vocabulary; methodology IMPLs handled per preconditions (no empty churn).
       retry_count: 0
       returned_from:
-        - resolve-pseudocode
         - composition-integration
         - end-to-end-ui
+        - resolve-pseudocode
         - sub-leap-micro-cycle
         - sync-tied-stack
       state_history: []
@@ -471,11 +494,11 @@ steps:
     tasks:
       - 'Responsibility: pseudo-code owner step. This step blocks tests/code when logic intent is incomplete.'
       - Apply flags to project/feature IMPLs for this REQ only. Do not flag inherited methodology IMPLs under [PROC-TIED_METHODOLOGY_READONLY] (null essence_pseudocode, Active status) as client debt unless change-definition explicitly requires methodology edits.
+      - Flag blocks with no token comment (violates [PROC-IMPL_PSEUDOCODE_TOKENS]).
+      - Flag branches without error handling on fallible paths.
       - Flag missing INPUT or OUTPUT declarations.
       - Flag procedures referenced but not defined.
-      - Flag branches without error handling on fallible paths.
       - Flag stub or template pseudo-code on IMPL with status Active (for in-scope project IMPLs).
-      - Flag blocks with no token comment (violates [PROC-IMPL_PSEUDOCODE_TOKENS]).
     outcomes: All insufficient specs flagged for in-scope IMPLs; resolution required before proceeding.
     references: []
     flow:
@@ -519,13 +542,15 @@ steps:
     preconditions:
       - Flag steps produced a resolvable issue list (or none); IMPL essence_pseudocode editable via tied-cli or agreed draft location.
     tasks:
-      - 'Responsibility: pseudo-code owner step. Update logic intent first; test/code follow only after this step resolves issues.'
       - 'For each issue from flag-insufficient-specs-flag-contradictory-specs: update affected IMPL essence_pseudocode so contracts are compatible, ordering explicit, every block complete.'
-      - IF you persist a new IMPL in this step via tied_token_create_with_detail or yaml_detail_* (index/detail/semantic-tokens), persist-implementation-records may be verify-only (confirm on-disk index/detail/tokens and run sub-yaml-edit-loop)—do not duplicate authoring work.
-      - IF resolution changes scope of an ARCH THEN GOTO author-architecture to update ARCH, then return here.
+      - 'Responsibility: pseudo-code owner step. Update logic intent first; test/code follow only after this step resolves issues.'
+      - 'When resolving contracts introduces or renames logical units (procedures, UPPER_SNAKE block names) or data: CALL sub-vocabulary-sync (RESOLVE) so new names use preferred domain terms in ./tied/vocab/*.md, and CALL sub-vocabulary-sync (RECORD) to capture them immediately ([PROC-VOCABULARY_INDEX]).'
       - IF resolution changes scope of a REQ THEN GOTO author-requirement to update REQ, then return here.
-    outcomes: All issues resolved; contracts compatible; ordering explicit.
-    references: []
+      - IF resolution changes scope of an ARCH THEN GOTO author-architecture to update ARCH, then return here.
+      - IF you persist a new IMPL in this step via tied_token_create_with_detail or yaml_detail_* (index/detail/semantic-tokens), persist-implementation-records may be verify-only (confirm on-disk index/detail/tokens and run sub-yaml-edit-loop)—do not duplicate authoring work.
+    outcomes: All issues resolved; contracts compatible; ordering explicit; any new/renamed logical units named from and recorded in the canonical vocabulary.
+    references:
+      - docs/vocabulary-index-analysis-and-standards.md
     flow:
       next: apply-token-comments
       branches:
@@ -535,10 +560,11 @@ steps:
         - condition: Resolution changes scope of REQ
           action: GOTO author-requirement, then return here
           target: author-requirement
-      calls: []
+      calls:
+        - sub-vocabulary-sync
     tracking:
       status: pending
-      consideration_before_proceeding: All flagged issues resolved; no scope change pending or ARCH/REQ updated and returned.
+      consideration_before_proceeding: All flagged issues resolved; new/renamed logical units resolved from and recorded in the canonical vocabulary; no scope change pending or ARCH/REQ updated and returned.
       retry_count: 0
       returned_from:
         - sync-tied-stack
@@ -549,23 +575,26 @@ steps:
     preconditions:
       - resolve-pseudocode satisfied for in-scope IMPLs (contracts compatible; no unresolved blocking flags).
     tasks:
-      - 'Responsibility: pseudo-code owner step. Do not introduce new executable logic here; annotate and clarify intent in pseudocode.'
       - 'Apply top-level comment: # [IMPL-X] [ARCH-Y] [REQ-Z] plus one-line summary.'
-      - 'Sub-blocks (same token set): comment only the how.'
-      - 'Sub-blocks (different token set): open with # [IMPL-...] [ARCH-...] [REQ-...] and how the sub-block implements them.'
-      - 'Cross-IMPL dependency comments: when IMPL-A calls/depends on IMPL-B, calling block in IMPL-A names IMPL-B (and ARCH/REQ).'
       - 'Collision and composition notes: for each composed_with pair or code-path overlap document ordering, shared data, pre/post conditions.'
+      - 'Confirm block names match the canonical vocabulary: CALL sub-vocabulary-sync (RESOLVE) so UPPER_SNAKE block names used in comments are the preferred domain terms in ./tied/vocab/*.md; CALL sub-vocabulary-sync (RECORD) for any block-name term not yet indexed ([PROC-VOCABULARY_INDEX]).'
+      - 'Cross-IMPL dependency comments: when IMPL-A calls/depends on IMPL-B, calling block in IMPL-A names IMPL-B (and ARCH/REQ).'
       - 'Minimal slice: when the IMPL has no runtime cross-IMPL calls and related_decisions only lists traceability (see_also), skip invented COMPOSITION_NOTE or policy-only pseudo-blocks—top-level plus real CONTRACT/MAIN/ON error blocks suffice.'
-    outcomes: Every substantive block has token comments; cross-IMPL dependencies documented where real calls or composition exist.
+      - 'Responsibility: pseudo-code owner step. Do not introduce new executable logic here; annotate and clarify intent in pseudocode.'
+      - 'Sub-blocks (different token set): open with # [IMPL-...] [ARCH-...] [REQ-...] and how the sub-block implements them.'
+      - 'Sub-blocks (same token set): comment only the how.'
+    outcomes: Every substantive block has token comments with block names drawn from the canonical vocabulary; cross-IMPL dependencies documented where real calls or composition exist.
     references:
       - tied/docs/processes.md § [PROC-IMPL_PSEUDOCODE_TOKENS]
+      - docs/vocabulary-index-analysis-and-standards.md
     flow:
       next: gate-pseudocode-validation
       branches: []
-      calls: []
+      calls:
+        - sub-vocabulary-sync
     tracking:
       status: pending
-      consideration_before_proceeding: All blocks token-commented; dependencies and composition notes in place.
+      consideration_before_proceeding: All blocks token-commented with canonical block names (resolved and recorded); dependencies and composition notes in place.
       retry_count: 0
       returned_from:
         - composition-integration
@@ -578,19 +607,19 @@ steps:
       - apply-token-comments satisfied (token comments present on blocks to validate).
       - ./tied/docs/pseudocode-validation-checklist.yaml or ./docs/pseudocode-validation-checklist.yaml exists, or manual validation pass documented per tasks.
     tasks:
+      - 'If no parser/tool: perform manual pass over checklist categories and document results.'
+      - 'Mode (A) pre-test structural gate: satisfy parsing/schema/symbol/contract/graph/reporting checks applicable to IMPL-only pseudo-code; defer test-matrix minimum rules per tailoring profile instead of ad-hoc waiver IDs.'
+      - 'Mode (B) post-test: after executable tests exist, verification-gate MUST invoke sub-pseudocode-validation-pass with profile agent_req_checklist_post_test to close rows deferred from agent_req_checklist_pre_red (see verification-gate).'
       - 'Responsibility: pseudo-code owner step. This is the final logic-intent gate before tests/code steps may proceed.'
       - 'Use tailoring profile agent_req_checklist_pre_red in ./tied/docs/pseudocode-validation-checklist.yaml (and docs/ copy): this gate runs before unit-test-red—IMPL essence_pseudocode is implementation-only; behavioral_coverage and traceability rows that require existing executable tests are deferred until tests exist (optional re-pass after verification-gate).'
       - CALL sub-pseudocode-validation-pass. Run validation per [PROC-PSEUDOCODE_VALIDATION] using ./tied/docs/pseudocode-validation-checklist.yaml or ./docs/pseudocode-validation-checklist.yaml.
-      - Run validation passes in recommended order; record findings with severity and source location.
-      - 'Mode (A) pre-test structural gate: satisfy parsing/schema/symbol/contract/graph/reporting checks applicable to IMPL-only pseudo-code; defer test-matrix minimum rules per tailoring profile instead of ad-hoc waiver IDs.'
-      - 'Mode (B) post-test: after executable tests exist, verification-gate MUST invoke sub-pseudocode-validation-pass with profile agent_req_checklist_post_test to close rows deferred from agent_req_checklist_pre_red (see verification-gate).'
       - Do not proceed to persist-implementation-records until minimum gating rules for the active mode are satisfied (structural pre-test or full post-test per profile).
-      - 'If no parser/tool: perform manual pass over checklist categories and document results.'
+      - Run validation passes in recommended order; record findings with severity and source location.
     outcomes: Pseudo-code validation run; pre-test structural gating satisfied per tailoring profile; full coverage/trace deferred appropriately until tests exist.
     references:
-      - tied/docs/pseudocode-writing-and-validation.md
-      - tied/docs/pseudocode-validation-checklist.yaml
       - tied/docs/processes.md § [PROC-PSEUDOCODE_VALIDATION]
+      - tied/docs/pseudocode-validation-checklist.yaml
+      - tied/docs/pseudocode-writing-and-validation.md
     flow:
       next: persist-implementation-records
       branches: []
@@ -609,27 +638,30 @@ steps:
     preconditions:
       - gate-pseudocode-validation satisfied (gating rules pass or waiver documented in scope).
     tasks:
+      - 'Agent preload contract (IMPL-locked): Refresh tied/agent-preload-contract.yaml (same template sources as author-architecture) using IMPL-anchored data—e.g. code_locations into implementation_contract.target_source_paths, test or harness paths if derivable from IMPL detail, citdp_artifact_paths per project CITDP policy, language/test_framework when known. Set or clear discovery_already_done fields only from quick checks or already-known TIED state (do not re-scan the whole repo; keep preload narrow). If this step was verify-only for IMPL, still reconcile the preload if earlier steps may have left path or stack lists stale.'
+      - 'Name storage items from canonical vocabulary: CALL sub-vocabulary-sync (RESOLVE) so IMPL token name and any code_locations file/folder/schema names recorded here derive from preferred domain terms in ./tied/vocab/*.md; CALL sub-vocabulary-sync (RECORD) to add concept <-> IMPL-token and concept <-> storage-name naming-bridge rows ([PROC-VOCABULARY_INDEX]).'
       - 'Responsibility: pseudo-code owner step. Persist validated logic intent and traceability; do not treat persistence as permission to introduce new logic outside pseudocode in later steps.'
-      - IF IMPL index/detail/tokens were already written during resolve-pseudocode, treat this step as verify-only — confirm yaml_index_read / yaml_detail_read / semantic-tokens rows, refresh metadata if needed, CALL sub-yaml-edit-loop on touched paths, tied_validate_consistency — do not recreate records from scratch.
+      - CALL sub-yaml-edit-loop for each changed YAML file under ./tied/.
       - Create or update ./tied/implementation-decisions.yaml index entries via tied-cli.sh (yaml_index_* or tied_token_create_with_detail); do not patch that file directly when tied-cli.sh covers the change.
       - Create or update IMPL detail at ./tied/implementation-decisions/IMPL-{TOKEN}.yaml via tied-cli.sh yaml_detail_*; include complete essence_pseudocode per ./tied/docs/detail-files-schema.md § IMPL.
+      - IF IMPL index/detail/tokens were already written during resolve-pseudocode, treat this step as verify-only — confirm yaml_index_read / yaml_detail_read / semantic-tokens rows, refresh metadata if needed, CALL sub-yaml-edit-loop on touched paths, tied_validate_consistency — do not recreate records from scratch.
       - Register each new IMPL token in ./tied/semantic-tokens.yaml via tied-cli.sh yaml_index_* on index semantic-tokens.
-      - CALL sub-yaml-edit-loop for each changed YAML file under ./tied/.
-      - 'Agent preload contract (IMPL-locked): Refresh tied/agent-preload-contract.yaml (same template sources as author-architecture) using IMPL-anchored data—e.g. code_locations into implementation_contract.target_source_paths, test or harness paths if derivable from IMPL detail, citdp_artifact_paths per project CITDP policy, language/test_framework when known. Set or clear discovery_already_done fields only from quick checks or already-known TIED state (do not re-scan the whole repo; keep preload narrow). If this step was verify-only for IMPL, still reconcile the preload if earlier steps may have left path or stack lists stale.'
     outcomes: All IMPL pseudo-code complete, authoritative, token-commented; no contradictions or gaps; all YAML validated; tied/agent-preload-contract.yaml reconciled with IMPL code_locations and related fields (or explicitly unchanged with reason).
     references:
-      - tied/docs/implementation-decisions.md § Mandatory essence_pseudocode, § Preferred vocabulary
-      - tied/docs/pseudocode-writing-and-validation.md#three-way-alignment-and-phases-a-through-i
-      - tied/docs/pseudocode-writing-and-validation.md#leap-micro-cycle-and-post-fix-recovery
       - ./tied/docs/agent-preload-contract-template.yaml
+      - docs/vocabulary-index-analysis-and-standards.md
+      - tied/docs/implementation-decisions.md § Mandatory essence_pseudocode, § Preferred vocabulary
+      - tied/docs/pseudocode-writing-and-validation.md#leap-micro-cycle-and-post-fix-recovery
+      - tied/docs/pseudocode-writing-and-validation.md#three-way-alignment-and-phases-a-through-i
     flow:
       next: risk-assessment
       branches: []
       calls:
         - sub-yaml-edit-loop
+        - sub-vocabulary-sync
     tracking:
       status: pending
-      consideration_before_proceeding: IMPL index and detail files persisted; tokens registered; sub-yaml-edit-loop passed for all changed files; ./tied/agent-preload-contract.yaml updated or reconciled for IMPL-locked paths and constants.
+      consideration_before_proceeding: IMPL index and detail files persisted; IMPL token and storage (code_locations/file/folder/schema) names resolved from and recorded in the canonical vocabulary; tokens registered; sub-yaml-edit-loop passed for all changed files; ./tied/agent-preload-contract.yaml updated or reconciled for IMPL-locked paths and constants.
       retry_count: 0
       returned_from: []
       state_history: []
@@ -641,9 +673,9 @@ steps:
     preconditions:
       - IMPL set for the change identified (persist-implementation-records done for new IMPLs, or verify-only IMPL paths on disk).
     tasks:
+      - Document mitigation strategies.
       - List risks with severity and likelihood.
       - Where applicable, attach tied_token_references to each risk (which REQ/ARCH/IMPL the risk affects).
-      - Document mitigation strategies.
     outcomes: Risks documented with token references. Mitigations identified.
     references:
       - tied/docs/processes.md § [PROC-CITDP] step 4
@@ -664,18 +696,18 @@ steps:
     preconditions:
       - risk-assessment outputs available or explicitly skipped with note when policy allows minimal CITDP.
     tasks:
-      - 'Responsibility: test/code owner step. Plan tests and implementation sequencing from existing pseudocode; do not invent new behavior here.'
-      - For each IMPL block/procedure, classify as unit, integration, or e2e_only.
-      - IF e2e_only THEN document e2e_only_reason naming the specific platform constraint in IMPL detail.
-      - Build test matrix (Test name, IMPL block ref, REQ token, Token comments, Testability).
       - 'Plan TDD sequence: (1) Unit tests first, (2) Unit code via TDD, (3) Composition tests first, (4) Composition code via TDD, (5) E2E, (6) Validate and sync.'
+      - 'Responsibility: test/code owner step. Plan tests and implementation sequencing from existing pseudocode; do not invent new behavior here.'
+      - Build test matrix (Test name, IMPL block ref, REQ token, Token comments, Testability).
+      - For each IMPL block/procedure, classify as unit, integration, or e2e_only.
       - Identify module boundaries and validation criteria per [REQ-MODULE_VALIDATION].
+      - IF e2e_only THEN document e2e_only_reason naming the specific platform constraint in IMPL detail.
     outcomes: Test matrix complete; every IMPL block has testability classification; TDD sequence planned; module boundaries documented.
     references:
-      - tied/docs/processes.md § [PROC-TEST_STRATEGY]
-      - tied/docs/processes.md § [PROC-CITDP] step 5
       - tied/docs/ai-principles.md § Thin Entry Points and Testability Classification
       - tied/docs/implementation-order.md
+      - tied/docs/processes.md § [PROC-CITDP] step 5
+      - tied/docs/processes.md § [PROC-TEST_STRATEGY]
     flow:
       next: unit-test-red
       branches: []
@@ -692,33 +724,36 @@ steps:
     title: One failing test per pseudo-code block (Phase D)
     goals: Map pseudo-code to a failing test.
     preconditions:
-      - Target IMPL essence_pseudocode is token-commented per [PROC-IMPL_PSEUDOCODE_TOKENS] for blocks under test.
-      - gate-pseudocode-validation satisfied (or documented waiver) and persist-implementation-records completed for the IMPL set in scope.
       - Automated test harness exists and is runnable (e.g. go test, npm test, pytest, cargo test, xcodebuild test, bash tests/*.sh). If absent, establish a minimal harness in this step (including a bash-based runner) or document harness gap / e2e_only per tasks and IMPL detail.
+      - gate-pseudocode-validation satisfied (or documented waiver) and persist-implementation-records completed for the IMPL set in scope.
+      - Target IMPL essence_pseudocode is token-commented per [PROC-IMPL_PSEUDOCODE_TOKENS] for blocks under test.
     tasks:
-      - 'Responsibility: test/code owner step. Write tests only for pseudocode-defined logic; if a missing behavior is discovered, route back to pseudo-code-owner steps.'
-      - Map the pseudo-code block/procedure to one test group (describe/it or test function). One block maps to approximately one test group.
-      - Name the test group after the procedure and include the REQ token.
-      - Copy the **block lead** line(s) for this block from `essence_pseudocode` **literally** (verbatim; host-language comments only) as the first comment(s) in the test locus; do not paraphrase. See ./tied/docs/pseudocode-writing-and-validation.md#block-lead-and-literal-copy-in-tests-and-code
-      - Carry the same REQ/ARCH/IMPL token comment as the pseudo-code block, stating what the test validates; this must be the same text as the corresponding block lead in the IMPL (literal copy rule).
-      - Assertions must match REQ/IMPL OUTPUT and behavior—never use deliberately wrong expected values (e.g. incorrect bytes) solely to force a failure; that invalidates “expected reason.”
+      - 'Allowed RED patterns (pick one and state it in the step output): Pattern A — tests-only: do not add or change files under production roots (e.g. src/, lib/, application packages) listed in IMPL code_locations; use test doubles, dynamic import, or harness-only helpers under tests/ or test/. Pattern B — minimal shim: if static imports require a production path, add only a minimal module at a path already declared in IMPL code_locations, exporting symbols the tests import with stub behavior (wrong values, throws, or not-implemented)—not real REQ satisfying behavior; full behavior belongs in unit-test-green.'
       - 'Brownfield: if production already satisfies the contract, write the correct regression test per REQ/IMPL; first run may pass—document as baseline lock. Do not require synthetic failure.'
       - 'Honest failing RED (when needed): add a new measurable requirement not yet implemented, or use a test-side fixture that simulates failure without editing production (document how); do not falsify expected output.'
-      - 'Allowed RED patterns (pick one and state it in the step output): Pattern A — tests-only: do not add or change files under production roots (e.g. src/, lib/, application packages) listed in IMPL code_locations; use test doubles, dynamic import, or harness-only helpers under tests/ or test/. Pattern B — minimal shim: if static imports require a production path, add only a minimal module at a path already declared in IMPL code_locations, exporting symbols the tests import with stub behavior (wrong values, throws, or not-implemented)—not real REQ satisfying behavior; full behavior belongs in unit-test-green.'
-      - Write the test; run the suite. IF the test is intended to fail on a wrong implementation, confirm failure is due to implementation vs contract mismatch—not a buggy assertion. Do not add real REQ satisfying production implementation in this step (Pattern B shim-only when needed).
-      - Verify the assertion corresponds to the OUTPUT or effect in the pseudo-code block.
+      - 'Refer to vocab before writing the test: CALL sub-vocabulary-sync (RESOLVE) so test group names, identifiers, and fixture names use the preferred domain terms in ./tied/vocab/*.md (and match the IMPL block name); the block lead literal copy still governs the comment text ([PROC-VOCABULARY_INDEX]).'
+      - 'Responsibility: test/code owner step. Write tests only for pseudocode-defined logic; if a missing behavior is discovered, route back to pseudo-code-owner steps.'
+      - Assertions must match REQ/IMPL OUTPUT and behavior—never use deliberately wrong expected values (e.g. incorrect bytes) solely to force a failure; that invalidates “expected reason.”
+      - Carry the same REQ/ARCH/IMPL token comment as the pseudo-code block, stating what the test validates; this must be the same text as the corresponding block lead in the IMPL (literal copy rule).
+      - Copy the **block lead** line(s) for this block from `essence_pseudocode` **literally** (verbatim; host-language comments only) as the first comment(s) in the test locus; do not paraphrase. See ./tied/docs/pseudocode-writing-and-validation.md#block-lead-and-literal-copy-in-tests-and-code
       - IF no programmatic assertion can be written THEN mark testability e2e_only in IMPL detail with e2e_only_reason; skip to next block.
+      - Map the pseudo-code block/procedure to one test group (describe/it or test function). One block maps to approximately one test group.
+      - Name the test group after the procedure and include the REQ token.
+      - Verify the assertion corresponds to the OUTPUT or effect in the pseudo-code block.
+      - Write the test; run the suite. IF the test is intended to fail on a wrong implementation, confirm failure is due to implementation vs contract mismatch—not a buggy assertion. Do not add real REQ satisfying production implementation in this step (Pattern B shim-only when needed).
     outcomes: Test exists matching pseudo-code and REQ; honest RED or brownfield baseline documented; production source unchanged except Pattern B minimal shim when declared.
     references:
+      - docs/vocabulary-index-analysis-and-standards.md
       - tied/docs/processes.md § [PROC-IMPL_CODE_TEST_SYNC] Phases D-F
       - tied/docs/pseudocode-writing-and-validation.md#three-way-alignment-and-phases-a-through-i
     flow:
       next: unit-test-green
       branches: []
-      calls: []
+      calls:
+        - sub-vocabulary-sync
     tracking:
       status: pending
-      consideration_before_proceeding: Test written and run; block lead comment copied literally from IMPL; assertion matches pseudo-code OUTPUT/effect; failure reason honest (implementation gap, fixture, or brownfield baseline pass)—not wrong expected data.
+      consideration_before_proceeding: Test written and run; test/identifier/fixture names resolved against the canonical vocabulary; block lead comment copied literally from IMPL; assertion matches pseudo-code OUTPUT/effect; failure reason honest (implementation gap, fixture, or brownfield baseline pass)—not wrong expected data.
       retry_count: 0
       returned_from:
         - three-way-alignment-unit
@@ -731,16 +766,18 @@ steps:
       - Either at least one failing RED test from unit-test-red exists for this block, OR brownfield baseline was documented (correct test passes first run)—same pseudo-code block scope.
       - Do not write or change production implementation before unit-test-red completed for this iteration.
     tasks:
-      - 'Responsibility: test/code owner step. Implement only logic already defined in pseudocode for this block.'
-      - Write only enough production code to make the failing test pass.
-      - Copy the same **block lead** line(s) as **literal** (verbatim) first comment(s) in the production locus for this block as in the test and in `essence_pseudocode`—see ./tied/docs/pseudocode-writing-and-validation.md#block-lead-and-literal-copy-in-tests-and-code
-      - Carry the same REQ/ARCH/IMPL token comment as the pseudo-code block, stating how the code implements; must match the IMPL block lead text.
-      - Run tests. IF tests fail THEN iterate on production code only (do not add new tests in GREEN).
       - 'IF the focused RED test now passes but other existing tests fail, STOP production-code iteration and emit a final fenced JSON control block: {"agentstream_control":{"schema_version":1,"action":"goto","target":"flag-contradictory-specs","reason":"Focused RED test passes, but existing tests fail after GREEN code; re-check related IMPL pseudo-code for contradictory specs before more code changes.","evidence":["<test command and failing existing test names or concise summary>"]}}. Do not infer this from prose; the fenced JSON block is the machine-readable agentstream routing signal.'
+      - 'Refer to vocab before writing code: CALL sub-vocabulary-sync (RESOLVE) so new symbols, identifiers, and any file/folder/schema names introduced by the code use the preferred domain terms in ./tied/vocab/*.md and match the IMPL block name; CALL sub-vocabulary-sync (RECORD) for any new code-level term/storage name ([PROC-VOCABULARY_INDEX]).'
+      - 'Responsibility: test/code owner step. Implement only logic already defined in pseudocode for this block.'
+      - Carry the same REQ/ARCH/IMPL token comment as the pseudo-code block, stating how the code implements; must match the IMPL block lead text.
+      - Copy the same **block lead** line(s) as **literal** (verbatim) first comment(s) in the production locus for this block as in the test and in `essence_pseudocode`—see ./tied/docs/pseudocode-writing-and-validation.md#block-lead-and-literal-copy-in-tests-and-code
       - Run language-specific lint (Rust/TypeScript/Swift/YAML per project). IF lint fails THEN fix before proceeding.
+      - Run tests. IF tests fail THEN iterate on production code only (do not add new tests in GREEN).
+      - Write only enough production code to make the failing test pass.
     outcomes: Test passes; lint clean; code carries block lead text matching IMPL (literal copy) and correct token comments.
     references:
       - tied/docs/pseudocode-writing-and-validation.md#block-lead-and-literal-copy-in-tests-and-code
+      - docs/vocabulary-index-analysis-and-standards.md
     flow:
       next: unit-refactor
       branches:
@@ -752,9 +789,10 @@ steps:
           target: sub-leap-micro-cycle
       calls:
         - sub-leap-micro-cycle
+        - sub-vocabulary-sync
     tracking:
       status: pending
-      consideration_before_proceeding: Test passes; lint clean; block lead in production matches IMPL and test; token comments match pseudo-code block.
+      consideration_before_proceeding: Test passes; lint clean; new code symbols/storage names resolved from and recorded in the canonical vocabulary; block lead in production matches IMPL and test; token comments match pseudo-code block.
       retry_count: 0
       returned_from: []
       state_history: []
@@ -788,24 +826,27 @@ steps:
       - For each block under review, pseudo-code, test, and production artifacts exist (skip blocks not yet started—document skipped slugs).
       - ./tied/semantic-tokens.yaml reachable when registering missing tokens.
     tasks:
-      - 'Responsibility: test/code owner step with pseudocode parity enforcement. Any newly observed logic in test/code must be reflected in pseudocode first (LEAP order).'
-      - For every block in this iteration, verify the three artifacts carry the same token set (pseudo-code block, test block, code block). IF any artifact names or omits a token differently, alignment is broken.
-      - 'IF any diverge THEN update pseudo-code first, then test, then code (LEAP order: IMPL -> test -> code).'
-      - 'Run [PROC-TOKEN_AUDIT]: every token named in any of the three must exist in ./tied/semantic-tokens.yaml. IF missing THEN register via tied-cli.sh yaml_index_* on index semantic-tokens and CALL sub-yaml-edit-loop.'
       - 'Flow: IF only MAIN (or chosen blocks) are in scope and optional blocks (e.g. ON error) are explicitly deferred product policy, use next_when_all_blocks_done to composition-integration—do not loop to unit-test-red solely to cover deferred optional blocks.'
-      - 'REQ-mandated behaviors: Where the REQ enumerates behaviors, errors, or edge cases (including in satisfaction_criteria or explicit REQ prose), the corresponding pseudo-code branches require coverage in this iteration—do not use next_when_all_blocks_done or deferral to composition-integration solely to skip unit-test-red for those branches unless the REQ or change-definition explicitly marks them out of scope.'
+      - 'IF any diverge THEN update pseudo-code first, then test, then code (LEAP order: IMPL -> test -> code).'
       - 'Optional / deferred blocks: Use the optional-blocks flow above only when deferral is explicit in REQ/ARCH or change-definition—not for norms the REQ already promised.'
-    outcomes: Three-way alignment verified for the iteration. All tokens registered.
-    references: []
+      - 'REQ-mandated behaviors: Where the REQ enumerates behaviors, errors, or edge cases (including in satisfaction_criteria or explicit REQ prose), the corresponding pseudo-code branches require coverage in this iteration—do not use next_when_all_blocks_done or deferral to composition-integration solely to skip unit-test-red for those branches unless the REQ or change-definition explicitly marks them out of scope.'
+      - 'Responsibility: test/code owner step with pseudocode parity enforcement. Any newly observed logic in test/code must be reflected in pseudocode first (LEAP order).'
+      - 'Run [PROC-TOKEN_AUDIT]: every token named in any of the three must exist in ./tied/semantic-tokens.yaml. IF missing THEN register via tied-cli.sh yaml_index_* on index semantic-tokens and CALL sub-yaml-edit-loop.'
+      - 'Update vocab after writing tests/code: CALL sub-vocabulary-sync (RECORD) to reconcile ./tied/vocab/*.md with any term, symbol, or storage name that emerged or changed during this iteration; keep preferred-term tables and the alphabetical index in sync ([PROC-VOCABULARY_INDEX]).'
+      - For every block in this iteration, verify the three artifacts carry the same token set (pseudo-code block, test block, code block). IF any artifact names or omits a token differently, alignment is broken.
+    outcomes: Three-way alignment verified for the iteration. All tokens registered; canonical vocabulary reconciled with terms used in tests/code this iteration.
+    references:
+      - docs/vocabulary-index-analysis-and-standards.md
     flow:
       next: unit-test-red
       next_when_all_blocks_done: composition-integration
       branches: []
       calls:
         - sub-yaml-edit-loop
+        - sub-vocabulary-sync
     tracking:
       status: pending
-      consideration_before_proceeding: Three-way alignment verified for iteration; all tokens in semantic-tokens.yaml. If all required blocks for this change are covered (optional blocks explicitly deferred per REQ/change-definition—not REQ-mandated gaps), proceed per flow to composition-integration; else loop to unit-test-red only for uncovered required blocks.
+      consideration_before_proceeding: Three-way alignment verified for iteration; all tokens in semantic-tokens.yaml; canonical vocabulary reconciled (RECORD) with this iteration's terms. If all required blocks for this change are covered (optional blocks explicitly deferred per REQ/change-definition—not REQ-mandated gaps), proceed per flow to composition-integration; else loop to unit-test-red only for uncovered required blocks.
       retry_count: 0
       returned_from: []
       state_history: []
@@ -818,17 +859,19 @@ steps:
       - Unit-level TDD stable for modules being wired (or explicitly out of scope with note).
       - Composition-level test entrypoint exists in repo (integration test target, test module, etc.); if absent, document before writing composition RED tests.
     tasks:
-      - 'Responsibility: test/code owner step. Composition wiring must be covered by existing or newly authored pseudocode before code is finalized.'
-      - 'Identify bindings: event listeners, IPC channels, entry-point delegation, function wiring, platform hooks.'
       - 'For each binding: locate IMPL that describes composition. IF none and binding belongs to existing IMPL THEN extend IMPL pseudo-code (persist via tied-cli.sh yaml_detail_* under ./tied/implementation-decisions/), GOTO apply-token-comments, CALL sub-yaml-edit-loop, return here. IF none and distinct design THEN create new IMPL starting at catalog-pseudocode-contracts (IMPL phase stubs catalog-pseudocode-contracts … persist-implementation-records), return here.'
-      - Write failing composition test for each binding (before composition code); carries IMPL token comments; verifies trigger -> unit called -> arguments -> effect; does not invoke UI.
-      - Write composition code to pass the test. No composition code without preceding failing test.
+      - 'Identify bindings: event listeners, IPC channels, entry-point delegation, function wiring, platform hooks.'
+      - 'Refer to vocab before writing composition tests/code: CALL sub-vocabulary-sync (RESOLVE) so binding, channel, and test names use the preferred domain terms in ./tied/vocab/*.md; CALL sub-vocabulary-sync (RECORD) for any new binding/channel concept ([PROC-VOCABULARY_INDEX]).'
+      - 'Responsibility: test/code owner step. Composition wiring must be covered by existing or newly authored pseudocode before code is finalized.'
       - Apply three-way alignment (same rules as three-way-alignment-unit). Run tests + lint; fix any failures.
+      - Write composition code to pass the test. No composition code without preceding failing test.
+      - Write failing composition test for each binding (before composition code); carries IMPL token comments; verifies trigger -> unit called -> arguments -> effect; does not invoke UI.
     outcomes: All bindings have composition tests; composition code passes; three-way alignment holds.
     references:
+      - docs/vocabulary-index-analysis-and-standards.md
+      - tied/docs/composition-coverage.md
       - tied/docs/processes.md § [PROC-IMPL_CODE_TEST_SYNC] Phase G
       - tied/docs/pseudocode-writing-and-validation.md#composition-and-e2e-expansion
-      - tied/docs/composition-coverage.md
     flow:
       next: end-to-end-ui
       branches:
@@ -840,9 +883,10 @@ steps:
           target: catalog-pseudocode-contracts
       calls:
         - sub-yaml-edit-loop
+        - sub-vocabulary-sync
     tracking:
       status: pending
-      consideration_before_proceeding: All bindings have IMPL coverage and composition tests; tests and lint pass.
+      consideration_before_proceeding: All bindings have IMPL coverage and composition tests; binding/channel/test names resolved from and recorded in the canonical vocabulary; tests and lint pass.
       retry_count: 0
       returned_from: []
       state_history: []
@@ -854,13 +898,15 @@ steps:
       - E2E harness present when E2E tests are required (Playwright, Cypress, XCUITest, Espresso, etc., per stack). If no UI-only scope or harness missing, skip with explicit note per citdp/test policy.
       - IMPL marks e2e_only with e2e_only_reason for blocks covered here.
     tasks:
-      - 'Responsibility: test/code owner step. E2E assertions must map to pseudocode-defined e2e_only logic boundaries.'
       - 'Identify E2E-only behavior: native OS menus, visual rendering, platform behavior that cannot be simulated below E2E.'
+      - 'Refer to vocab before writing the E2E test and naming UI behavior: CALL sub-vocabulary-sync (RESOLVE) so UI-facing labels/terms and test names use the preferred domain terms in ./tied/vocab/*.md; CALL sub-vocabulary-sync (RECORD) for any new UI-facing concept ([PROC-VOCABULARY_INDEX]).'
+      - 'Responsibility: test/code owner step. E2E assertions must map to pseudocode-defined e2e_only logic boundaries.'
       - Confirm IMPL detail has testability e2e_only, e2e_only_reason (named platform constraint), and E2E-only boundary comment in essence_pseudocode.
-      - Write E2E test referencing REQ and IMPL tokens; comment justifies why composition-level testing is insufficient.
       - Ensure bindings testable below E2E have composition tests even if E2E also covers them.
+      - Write E2E test referencing REQ and IMPL tokens; comment justifies why composition-level testing is insufficient.
     outcomes: E2E tests exist for all UI-only behavior; each justified with named platform constraint.
     references:
+      - docs/vocabulary-index-analysis-and-standards.md
       - tied/docs/processes.md § [PROC-IMPL_CODE_TEST_SYNC] Phase H
       - tied/docs/pseudocode-writing-and-validation.md#composition-and-e2e-expansion
     flow:
@@ -869,10 +915,11 @@ steps:
         - condition: E2E reveals missing IMPL block
           action: GOTO catalog-pseudocode-contracts to create or extend IMPL pseudo-code (IMPL phase stubs catalog-pseudocode-contracts … persist-implementation-records), then return here
           target: catalog-pseudocode-contracts
-      calls: []
+      calls:
+        - sub-vocabulary-sync
     tracking:
       status: pending
-      consideration_before_proceeding: E2E-only behavior identified and documented; E2E tests written and justified.
+      consideration_before_proceeding: E2E-only behavior identified and documented; UI-facing terms and E2E test names resolved from and recorded in the canonical vocabulary; E2E tests written and justified.
       retry_count: 0
       returned_from: []
       state_history: []
@@ -885,18 +932,20 @@ steps:
       - Project test command runnable from workspace root (same harness used in TDD phases). If tests cannot run, fix harness before claiming gate—defer gate with note only when policy allows.
       - ./tied/ present when tied_validate_consistency and token validation apply; if TIED not in client yet, skip token steps with explicit maturity note.
     tasks:
+      - 'CALL sub-pseudocode-validation-pass: re-run pseudo-code validation using tailoring profile agent_req_checklist_post_test in ./tied/docs/pseudocode-validation-checklist.yaml (docs/ copy at repo root when present)—close deferred_minimum_rules from agent_req_checklist_pre_red now that executable tests exist; document findings by category and severity. IF unresolved gaps THEN GOTO resolve-pseudocode or unit-test-red per findings.'
+      - 'Final three-way alignment audit: for every IMPL touched, verify pseudo-code/test/code same token set; document e2e_only blocks and e2e_only_reason.'
+      - 'Module validation per [REQ-MODULE_VALIDATION]: confirm each module validated independently; document results.'
       - 'Responsibility: test/code owner step. Verify implementation fidelity to pseudocode; if new logic is discovered, route back to resolve-pseudocode before accepting.'
+      - 'Run [PROC-TOKEN_VALIDATION]: run .cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency with JSON args per SKILL; fix any issues on ./tied/ via tied-cli.sh when possible.'
+      - 'Update vocab after writing tests/code: CALL sub-vocabulary-sync (RECORD) to reconcile ./tied/vocab/*.md with all terms, symbols, and storage names in the final tests and code; verify each named concept resolves to exactly one preferred term and the alphabetical index is current ([PROC-VOCABULARY_INDEX]).'
       - Run full test suite (unit, composition, E2E). All must pass.
       - Run lint for each language in scope.
-      - 'CALL sub-pseudocode-validation-pass: re-run pseudo-code validation using tailoring profile agent_req_checklist_post_test in ./tied/docs/pseudocode-validation-checklist.yaml (docs/ copy at repo root when present)—close deferred_minimum_rules from agent_req_checklist_pre_red now that executable tests exist; document findings by category and severity. IF unresolved gaps THEN GOTO resolve-pseudocode or unit-test-red per findings.'
-      - 'Run [PROC-TOKEN_VALIDATION]: run .cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency with JSON args per SKILL; fix any issues on ./tied/ via tied-cli.sh when possible.'
-      - 'Final three-way alignment audit: for every IMPL touched, verify pseudo-code/test/code same token set; document e2e_only blocks and e2e_only_reason.'
       - Update IMPL detail metadata (traceability.tests, code_locations, metadata.last_updated) via tied-cli.sh yaml_detail_update on ./tied/implementation-decisions/IMPL-{TOKEN}.yaml; CALL sub-yaml-edit-loop on each changed absolute path.
-      - 'Module validation per [REQ-MODULE_VALIDATION]: confirm each module validated independently; document results.'
-    outcomes: All tests pass; lint clean; post-test pseudo-code validation pass recorded; token validation passes; three-way alignment verified; IMPL metadata current; module validation documented.
+    outcomes: All tests pass; lint clean; post-test pseudo-code validation pass recorded; token validation passes; three-way alignment verified; IMPL metadata current; module validation documented; canonical vocabulary reconciled with final tests/code.
     references:
-      - tied/docs/processes.md § [PROC-IMPL_CODE_TEST_SYNC] Phase I
+      - docs/vocabulary-index-analysis-and-standards.md
       - tied/docs/processes.md § [PROC-CITDP] step 7
+      - tied/docs/processes.md § [PROC-IMPL_CODE_TEST_SYNC] Phase I
     flow:
       next: sync-tied-stack
       branches:
@@ -917,10 +966,11 @@ steps:
           target: resolve-pseudocode
       calls:
         - sub-pseudocode-validation-pass
+        - sub-vocabulary-sync
         - sub-yaml-edit-loop
     tracking:
       status: pending
-      consideration_before_proceeding: Full suite and lint pass; post-test sub-pseudocode-validation-pass complete; token validation ok; three-way audit done; IMPL metadata updated; module validation documented.
+      consideration_before_proceeding: Full suite and lint pass; post-test sub-pseudocode-validation-pass complete; token validation ok; three-way audit done; IMPL metadata updated; module validation documented; canonical vocabulary reconciled (RECORD) with final tests/code.
       retry_count: 0
       returned_from: []
       state_history: []
@@ -933,16 +983,18 @@ steps:
       - verification-gate satisfied for this pass, or partial sync explicitly scoped (document divergence).
       - tied-cli.sh available for mutations under ./tied/.
     tasks:
-      - Update REQ/ARCH/IMPL index and detail files under ./tied/ via tied-cli.sh so final code/tests match TIED; IMPLs reflect implemented code and block-level token comments.
-      - Sync ./tied/semantic-tokens.yaml, requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml and detail dirs; no documentation drift; do not patch those YAML paths with IDE tools when tied-cli.sh covers the mutation.
+      - 'Update vocab after design and implementation: CALL sub-vocabulary-sync (RECORD) so ./tied/vocab/*.md reflects the final REQ/ARCH/IMPL terms, design/UI terms, and storage names; each concept resolves to one preferred term and the naming bridge and alphabetical index are current ([PROC-VOCABULARY_INDEX]).'
       - CALL sub-yaml-edit-loop on every changed TIED YAML file.
-      - Run .cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency '{}' — must report ok true.
       - If REQ/ARCH/IMPL status, traceability.tests, or other TIED fields changed in this pass such that they would desync a session preload (status lines, test file paths, implementation_contract hints), re-check tied/agent-preload-contract.yaml and update only as needed; do not duplicate the full author-architecture or persist-implementation-records rewrite if nothing material changed.
+      - Run .cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency '{}' — must report ok true.
+      - Sync ./tied/semantic-tokens.yaml, requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml and detail dirs; no documentation drift; do not patch those YAML paths with IDE tools when tied-cli.sh covers the mutation.
+      - Update REQ/ARCH/IMPL index and detail files under ./tied/ via tied-cli.sh so final code/tests match TIED; IMPLs reflect implemented code and block-level token comments.
     outcomes: TIED docs consistent with implementation; tied_validate_consistency passes; optional ./tied/agent-preload-contract.yaml recheck if TIED status or traceability to tests/code shifted.
     references:
-      - tied/docs/processes.md § [PROC-TIED_DEV_CYCLE] steps 8-9
-      - tied/docs/processes.md § [PROC-LEAP]
       - ./tied/docs/agent-preload-contract-template.yaml
+      - docs/vocabulary-index-analysis-and-standards.md
+      - tied/docs/processes.md § [PROC-LEAP]
+      - tied/docs/processes.md § [PROC-TIED_DEV_CYCLE] steps 8-9
     flow:
       next: user-facing-release-notes
       branches:
@@ -951,9 +1003,10 @@ steps:
           target: resolve-pseudocode
       calls:
         - sub-yaml-edit-loop
+        - sub-vocabulary-sync
     tracking:
       status: pending
-      consideration_before_proceeding: TIED docs match code/tests; tied_validate_consistency reports ok true; ./tied/agent-preload-contract.yaml re-checked or explicitly unchanged if sync did not affect preload-relevant fields.
+      consideration_before_proceeding: TIED docs match code/tests; tied_validate_consistency reports ok true; canonical vocabulary reconciled (RECORD) with final REQ/ARCH/IMPL, design/UI, and storage terms; ./tied/agent-preload-contract.yaml re-checked or explicitly unchanged if sync did not affect preload-relevant fields.
       retry_count: 0
       returned_from: []
       state_history: []
@@ -964,19 +1017,22 @@ steps:
     preconditions:
       - Update README.md / CHANGELOG.md only when the repo already tracks them, project policy requires them, or the change-definition / FEATURE_GOAL explicitly asks for user-facing docs—do not create them solely because they are missing unless policy says otherwise.
     tasks:
-      - IF preconditions met, update README.md for user-facing changes (new features, changed behavior, setup instructions).
-      - IF preconditions met, update CHANGELOG.md for release-facing changes (features, fixes, breaking changes).
+      - 'Refer to vocab before writing UI/release docs: CALL sub-vocabulary-sync (RESOLVE) so README/CHANGELOG and any UI text use the preferred domain terms in ./tied/vocab/*.md (user-facing and developer-facing terms converge). Update vocab after writing: CALL sub-vocabulary-sync (RECORD) for any new user-facing term ([PROC-VOCABULARY_INDEX]).'
       - IF no user-facing doc obligation applies, skip with one-line note—do not add README/CHANGELOG just to satisfy the step.
-    outcomes: External documentation reflects the session's changes when applicable.
+      - IF preconditions met, update CHANGELOG.md for release-facing changes (features, fixes, breaking changes).
+      - IF preconditions met, update README.md for user-facing changes (new features, changed behavior, setup instructions).
+    outcomes: External documentation reflects the session's changes when applicable, using canonical user-facing terms reconciled with the vocabulary index.
     references:
       - tied/docs/processes.md § [PROC-TIED_DEV_CYCLE] step 9
+      - docs/vocabulary-index-analysis-and-standards.md
     flow:
       next: persist-citdp-record
       branches: []
-      calls: []
+      calls:
+        - sub-vocabulary-sync
     tracking:
       status: pending
-      consideration_before_proceeding: README/CHANGELOG updated when policy or goal requires; otherwise explicitly skipped.
+      consideration_before_proceeding: README/CHANGELOG updated when policy or goal requires (UI/release terms resolved from and recorded in the canonical vocabulary); otherwise explicitly skipped.
       retry_count: 0
       returned_from: []
       state_history: []
@@ -988,14 +1044,14 @@ steps:
       - ./tied/citdp/ creatable at client workspace root (or path per project policy). When ./tied/docs/citdp-policy.md says skip, record skip instead of writing a file.
     tasks:
       - 'Populate CITDP YAML record: start from ./tied/docs/citdp-record-template.yaml (copy methodology layout); fill record identity; change definition (from change-definition); impact analysis (from impact-discovery); risk analysis (from risk-assessment); test strategy (from test-strategy); TDD sequence (from unit-test-red through end-to-end-ui); completion criteria (from verification-gate); LEAP feedback (divergences_from_analysis, tied_stack_updates_required, record_status).'
+      - CALL sub-yaml-edit-loop on the record file.
       - Store as tied/citdp/CITDP-{change_request_id}.yaml. Must be the client project root—same repository as the project tied/ tree for this implementation. Do not persist CITDP only under a separate checkout of the TIED methodology repository when the client is another project; optional mirrors elsewhere are policy-specific and do not replace this path. Project-defined absolute path outside tied/ only when policy explicitly requires.
       - Validate with lint_yaml on that absolute CITDP path (per [PROC-YAML_EDIT_LOOP] in processes.md; raw multi-argument `yq` merges documents—do not use that). CITDP files are outside the standard TIED index/detail paths unless project policy adds tooling for them.
-      - CALL sub-yaml-edit-loop on the record file.
     outcomes: CITDP record stored and validated; analysis available for future reference.
     references:
+      - tied/docs/citdp-policy.md
       - tied/docs/processes.md § [PROC-CITDP] step 8
       - tied/docs/processes.md § [PROC-YAML_DB_OPERATIONS]
-      - tied/docs/citdp-policy.md
     flow:
       next: traceable-commit
       branches:
@@ -1018,9 +1074,9 @@ steps:
       - Git repository at workspace root (.git present); working tree changes staged per project norms. If not a git repo, skip with explicit note—do not initialize git unless policy asks.
     tasks:
       - 'Write commit message per [PROC-COMMIT_MESSAGES]: header <type>(<scope>): <subject> (≤50 chars); type feat|fix|docs|refactor|test|build|ci|chore|perf|style; scope area affected; subject imperative present tense; body motivation/behavior; footer Closes/Fixes #issue and REQ/ARCH/IMPL tokens touched.'
-      - Stage relevant files. Commit.
       - Do NOT push unless explicitly asked.
       - IF the driver emits additional turns for sub-yaml-edit-loop, sub-pseudocode-validation-pass, or sub-leap-micro-cycle after this step, those subs were already invoked via CALL during earlier steps—unless you have new mutations, reply with one-line RETURN; do not repeat full procedures.
+      - Stage relevant files. Commit.
     outcomes: 'Commit exists with proper format; TIED tokens referenced in body or footer. EXIT: Checklist complete. Do not create a stand-alone summary document.'
     references:
       - tied/docs/processes.md § [PROC-COMMIT_MESSAGES]
@@ -1042,31 +1098,31 @@ sub_procedures:
       - Caller provides absolute or repo-relative paths for changed YAML files.
       - When mutating ./tied/ project-owned YAML, .cursor/skills/tied-yaml/scripts/tied-cli.sh and SKILL.md contract available; if tied-cli missing, RETURN error to caller—no silent IDE patch of TIED paths.
     invoked_by:
-      - author-requirement
       - author-architecture
-      - persist-implementation-records
-      - three-way-alignment-unit
+      - author-requirement
       - composition-integration
-      - verification-gate
-      - sync-tied-stack
       - persist-citdp-record
+      - persist-implementation-records
       - sub-leap-micro-cycle
+      - sync-tied-stack
+      - three-way-alignment-unit
+      - verification-gate
     goals: Ensure every TIED YAML file is syntactically valid, skill-routed where applicable, and consistent before use. Use lint_yaml per [PROC-YAML_EDIT_LOOP] (processes.md); it accepts one or more paths and must process each file independently. Never use raw multi-argument `yq` pretty-print on multiple paths in one process.
     tasks:
-      - 'Mutation path: for create/update/delete under ./tied/ on project-owned YAML (indexes, requirements/*.yaml, architecture-decisions/*.yaml, implementation-decisions/*.yaml, semantic-tokens.yaml, feedback.yaml), use .cursor/skills/tied-yaml/scripts/tied-cli.sh per .cursor/skills/tied-yaml/SKILL.md. Do not use apply_patch/Write on those absolute paths when tied-cli.sh covers the operation.'
       - 'After yaml_detail_update or yaml_index_update: re-read affected detail/index rows; mcp-server deep-merges one level for metadata/traceability/related_* objects, but arrays (e.g. cross_references) still replace wholesale—if metadata.created or similar is missing (older server or mistaken payload), restore with one follow-up yaml_*_update—see docs/yaml-update-mcp-runbook.md §2.1.'
-      - Never mutate ./tied/methodology/** (read-only). If a tool rejects a write as methodology-owned, fix the target token/path—do not bypass with direct file edit.
-      - 'IF tied-cli.sh returns an error: interpret payload, TIED_BASE_PATH, methodology vs project and retry; do not silently fall back to IDE file tools on the same paths.'
       - 'Direct-edit exception only when no tied-cli.sh tool covers the operation: document one-line gap, edit minimal file, then run lint_yaml <absolute-path> until it passes (or one lint_yaml with multiple paths if your wrapper implements per-file safe passes per processes.md).'
-      - Run lint_yaml on each changed file that was direct-edited or when your workflow requires canonical formatting on disk—never raw multi-argument `yq` with multiple file arguments in one process. If validation fails, fix and repeat; file is invalid until lint_yaml succeeds.
-      - Run .cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency '{}' (required before marking TIED work complete; not optional when sub-yaml-edit-loop is invoked for TIED changes).
+      - 'IF tied-cli.sh returns an error: interpret payload, TIED_BASE_PATH, methodology vs project and retry; do not silently fall back to IDE file tools on the same paths.'
+      - 'Mutation path: for create/update/delete under ./tied/ on project-owned YAML (indexes, requirements/*.yaml, architecture-decisions/*.yaml, implementation-decisions/*.yaml, semantic-tokens.yaml, feedback.yaml), use .cursor/skills/tied-yaml/scripts/tied-cli.sh per .cursor/skills/tied-yaml/SKILL.md. Do not use apply_patch/Write on those absolute paths when tied-cli.sh covers the operation.'
       - IF consistency check fails THEN fix the TIED stack via tied-cli.sh (prefer yaml_detail_update / yaml_index_update) and RETURN to the calling step to re-validate.
+      - Never mutate ./tied/methodology/** (read-only). If a tool rejects a write as methodology-owned, fix the target token/path—do not bypass with direct file edit.
+      - Run .cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency '{}' (required before marking TIED work complete; not optional when sub-yaml-edit-loop is invoked for TIED changes).
+      - Run lint_yaml on each changed file that was direct-edited or when your workflow requires canonical formatting on disk—never raw multi-argument `yq` with multiple file arguments in one process. If validation fails, fix and repeat; file is invalid until lint_yaml succeeds.
     outcomes: YAML valid and consistent; mutations used tied-cli.sh where required; no silent bypass of tied-yaml.
     references:
-      - .cursor/skills/tied-yaml/SKILL.md
-      - .cursor/skills/tied-yaml/reference.md
-      - ./tied/docs/processes.md § [PROC-YAML_EDIT_LOOP]
       - ./tied/docs/methodology-diagrams.md Diagram 6
+      - ./tied/docs/processes.md § [PROC-YAML_EDIT_LOOP]
+      - .cursor/skills/tied-yaml/reference.md
+      - .cursor/skills/tied-yaml/SKILL.md
     flow:
       return_to: caller
     tracking:
@@ -1085,17 +1141,17 @@ sub_procedures:
       - verification-gate
     goals: Ensure IMPL pseudo-code satisfies the application pseudo-code validation checklist before persisting or writing tests/code. Required checks are gating unless waived and documented.
     tasks:
-      - Load the checklist from tied/docs/pseudocode-validation-checklist.yaml (or docs/pseudocode-validation-checklist.yaml at repo root).
-      - Apply tailoring profile agent_req_checklist_pre_red when invoked from gate-pseudocode-validation before tests exist—defer minimum_gating_rules items that assume executable tests already exist (see checklist tailoring.profiles).
       - Apply tailoring profile agent_req_checklist_post_test when invoked from verification-gate—do not defer deferred_minimum_rules from agent_req_checklist_pre_red; evaluate behavioral/traceability rows that require executable tests now that tests exist (or mark N/A with rationale).
+      - Apply tailoring profile agent_req_checklist_pre_red when invoked from gate-pseudocode-validation before tests exist—defer minimum_gating_rules items that assume executable tests already exist (see checklist tailoring.profiles).
       - For each pseudo-code block in the IMPL set (from IMPL phase (stubs catalog-pseudocode-contracts … persist-implementation-records)), run each validation category in the checklist's recommended_validation_order; collect findings with severity and block/location.
       - IF any required check fails OR minimum gating rules for the active profile are not met THEN fix pseudo-code (or ARCH/REQ if scope changed), then repeat from step 2. RETURN only when gating rules pass or documented deferral per profile.
+      - Load the checklist from tied/docs/pseudocode-validation-checklist.yaml (or docs/pseudocode-validation-checklist.yaml at repo root).
       - RETURN to caller (gate-pseudocode-validation continues to persist-implementation-records; verification-gate continues after post-test pass).
     outcomes: Pseudo-code validation report (findings by category, severity, location); structural checks pass; test-dependent rules deferred per agent_req_checklist_pre_red when applicable only for pre-RED invocations; post-test invocations close pre-RED deferrals per agent_req_checklist_post_test.
     references:
-      - tied/docs/pseudocode-writing-and-validation.md
-      - tied/docs/pseudocode-validation-checklist.yaml
       - tied/docs/processes.md § [PROC-PSEUDOCODE_VALIDATION]
+      - tied/docs/pseudocode-validation-checklist.yaml
+      - tied/docs/pseudocode-writing-and-validation.md
     flow:
       return_to: gate-pseudocode-validation
     tracking:
@@ -1113,14 +1169,14 @@ sub_procedures:
       - unit-test-green
     goals: Keep pseudo-code authoritative at every point during TDD. Prevent silent divergence.
     tasks:
-      - STOP writing production code immediately.
+      - 'IF the change affects ARCH scope THEN update ARCH via tied-cli.sh: GOTO author-architecture (scoped to affected ARCH), CALL sub-yaml-edit-loop, then return here.'
+      - 'IF the change affects REQ scope THEN update REQ via tied-cli.sh: GOTO author-requirement (scoped to affected REQ), CALL sub-yaml-edit-loop, then return here.'
       - 'Update IMPL essence_pseudocode via tied-cli.sh: prefer impl_detail_set_essence_pseudocode when only essence_pseudocode (and optional metadata.last_updated) changes; otherwise yaml_detail_read then yaml_detail_update on ./tied/implementation-decisions/IMPL-{TOKEN}.yaml (no direct patch when tied-cli.sh works).'
       - CALL sub-yaml-edit-loop on the changed detail file (absolute path under ./tied/).
+      - STOP writing production code immediately.
       - Update or add the test to match the corrected pseudo-code. Carry the same token comments.
       - Update the production code to pass the corrected test. Carry the same token comments.
       - Verify three-way alignment for the affected block (per three-way-alignment-unit rules).
-      - 'IF the change affects ARCH scope THEN update ARCH via tied-cli.sh: GOTO author-architecture (scoped to affected ARCH), CALL sub-yaml-edit-loop, then return here.'
-      - 'IF the change affects REQ scope THEN update REQ via tied-cli.sh: GOTO author-requirement (scoped to affected REQ), CALL sub-yaml-edit-loop, then return here.'
     outcomes: Pseudo-code remained authoritative. No silent divergence. Three-way alignment holds for the affected block.
     references:
       - tied/docs/pseudocode-writing-and-validation.md#leap-micro-cycle-and-post-fix-recovery
@@ -1137,6 +1193,49 @@ sub_procedures:
     tracking:
       status: pending
       consideration_before_proceeding: IMPL/test/code updated; three-way alignment verified; ARCH/REQ updated if scope changed; RETURN to unit-test-green.
+      retry_count: 0
+      state_history: []
+  # slug sub-vocabulary-sync time
+  - slug: sub-vocabulary-sync
+    title: Resolve names against the domain vocabulary index and record new terms
+    preconditions:
+      - Caller indicates mode (RESOLVE before naming/writing, RECORD when concepts are generated or after artifacts change) and the concept(s) or artifact in scope.
+      - Domain vocabulary index files live at ./tied/vocab/*.md (plain Markdown; filenames have no -vocabulary suffix, e.g. tied/vocab/<topic>.md). They are NOT TIED index/detail YAML and are NOT under ./tied/methodology, so they are edited DIRECTLY (like ./tied/implementation-decisions/IMPL-*-pseudocode.md sidecars)—do not route through tied-cli.sh and do not run lint_yaml on them.
+      - When ./tied/vocab/ or its *.md files do not exist (immature client), create ./tied/vocab/ and seed an index file when this change introduces enough named concepts; otherwise do a lightweight consistency pass or skip with an explicit note in the per-request checklist copy. Do not fabricate terms.
+    invoked_by:
+      - apply-token-comments
+      - author-architecture
+      - author-requirement
+      - catalog-pseudocode-contracts
+      - change-definition
+      - composition-integration
+      - end-to-end-ui
+      - persist-implementation-records
+      - resolve-pseudocode
+      - session-bootstrap
+      - sync-tied-stack
+      - three-way-alignment-unit
+      - translate-sponsor-intent
+      - unit-test-green
+      - unit-test-red
+      - user-facing-release-notes
+      - verification-gate
+    goals: Keep one controlled set of preferred domain terms so requirements, architecture, IMPL pseudo-code, tests, code, and user-facing docs name each concept identically per [PROC-VOCABULARY_INDEX]. A chosen preferred term is the literal identifier reused as the IMPL UPPER_SNAKE block name, the test/code symbol, the storage name, and the UI label.
+    tasks:
+      - 'IF vocab files are absent and the change does not yet warrant seeding an index: pick internally consistent terms for this pass and note the deferral; do not block the caller.'
+      - 'RECORD mode (as concepts are generated, and after artifacts are written): add or update the term immediately—preferred-term-vs-synonym row, naming bridge row (concept <-> token <-> storage name <-> UI label), and UPPER_SNAKE block name—keep the alphabetical index in sync, and cite the relevant REQ/ARCH/IMPL.'
+      - 'RESOLVE mode (before naming or writing): look up the concept in ./tied/vocab/*.md; choose the one preferred term; reword fuzzy/synonym wording to that canonical term; verify exact spelling/backtick form; flag any term absent from the index (route to RECORD).'
+      - Distinguish from the IMPL pseudo-code grammar "preferred vocabulary" (INPUT/OUTPUT/DATA/CONTROL keywords in implementation-decisions.md); this sub-procedure governs which DOMAIN term names a concept, not the grammar of a block.
+      - Follow the structure/format/content/governance standards in docs/vocabulary-index-analysis-and-standards.md (preferred-term tables, naming bridges, define-once-link-many, vocabulary-not-algorithm, alphabetical index).
+    outcomes: Concept(s) resolve to exactly one preferred term (or deferral noted); new/changed terms recorded in ./tied/vocab/*.md with alphabetical index in sync and REQ/ARCH/IMPL cited.
+    references:
+      - docs/vocabulary-index-analysis-and-standards.md
+      - ./tied/docs/processes.md § [PROC-VOCABULARY_INDEX]
+    flow:
+      return_to: caller
+    tracking:
+      status: pending
+      consideration_before_proceeding: Caller's concept(s)/artifact resolved to canonical terms (RESOLVE) and/or new terms recorded (RECORD); immature-client deferral noted when tied/vocab is absent; RETURN to caller.
       retry_count: 0
       state_history: []
 references:
@@ -1172,3 +1271,5 @@ references:
     provides: Unified IMPL pseudo-code guide (REQ vs fix tracks, MCP mechanics, block linkage, phases A–I, LEAP, validation layers)
   - document: ./tied/docs/pseudocode-validation-checklist.yaml
     provides: Canonical application pseudo-code validation checklist (categories, required/optional checks, order, tailoring)
+  - document: docs/vocabulary-index-analysis-and-standards.md
+    provides: 'Domain vocabulary index standards ([PROC-VOCABULARY_INDEX]): structure, format, content, and governance for tied/vocab/*.md preferred-term indexes consulted/updated by sub-vocabulary-sync'

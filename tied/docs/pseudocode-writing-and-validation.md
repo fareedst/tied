@@ -27,7 +27,7 @@ Machine-readable validation rules: [pseudocode-validation-checklist.yaml](pseudo
 ## Table of contents
 
 1. [Definition of IMPL pseudocode](#definition-of-impl-pseudocode)
-2. [Choose your path](#choose-your-path) — Track A (new feature) vs Track B (fix already implemented)
+2. [Choose your path](#choose-your-path) — Track A (new feature), Track B (fix already implemented), Track C (code/tests without pseudo-code)
 3. [Foundations: how to write IMPL pseudo-code](#foundations-how-to-write-impl-pseudo-code)
 4. [Block lead and literal copy in tests and code](#block-lead-and-literal-copy-in-tests-and-code)
 5. [Mechanics: editing the sidecar (MCP and CLI)](#mechanics-editing-the-sidecar-mcp-and-cli)
@@ -59,6 +59,12 @@ flowchart LR
     T[Tests]
     C[Code_comments]
     IMPL --> T --> C
+  end
+  subgraph retrofitTrack [TrackC_FromCodeTests]
+    EV[Read_tests_and_code]
+    W[Write_IMPL_sidecar]
+    AL[Align_block_lead_comments]
+    EV --> W --> AL
   end
 ```
 
@@ -97,6 +103,18 @@ Use this when a **fix landed in code/tests** (or both) without a prior IMPL upda
 7. **Metadata** — Refresh `traceability.tests`, `code_locations`, `metadata.last_updated` on affected IMPL detail records.
 
 This is the same **IMPL → test → code** order as the [LEAP micro-cycle](#leap-micro-cycle-and-post-fix-recovery), applied as **recovery** after an out-of-order fix.
+
+<a id="track-c-code-and-tests-without-pseudocode"></a>
+
+### Track C — Code and tests exist; pseudo-code does not (brownfield retrofit)
+
+Use when **production code and tests already implement the behavior** but **`IMPL-*-pseudocode.md` is missing, empty, or no longer matches** what tests and code do. You are **reverse-documenting** implemented behavior into language-agnostic pseudo-code, then aligning **literal block leads** in tests and code ([PROC-IMPL_CODE_TEST_SYNC]).
+
+**Evidence order for this track:** read **tests and code** → author or refresh **IMPL sidecar** → sync **comments** (and optional full-block copies per policy). Do **not** rewrite passing tests or product logic except to fix comments/traceability or documented bugs.
+
+**Executable agent prompt (copy-paste):** [impl-pseudocode-from-code-agent-prompt.md](impl-pseudocode-from-code-agent-prompt.md).
+
+If REQ/ARCH/IMPL indexes are thin, seed traceability with [PROC-TIED_BOOTSTRAP_FROM_TESTS] in [processes.md](processes.md) before Track C.
 
 ---
 
@@ -577,6 +595,8 @@ Mechanical generation from tests does **not** replace verbatim block-lead rules 
 | [`docs/pseudocode-format-and-practices.md`](../../docs/pseudocode-format-and-practices.md) | Portable format |
 | [implementation-decisions.md](implementation-decisions.md) | Mandatory essence, vocabulary, managed code |
 | [agent-req-implementation-checklist.md](agent-req-implementation-checklist.md) | Executable REQ checklist (`[PROC-AGENT_REQ_CHECKLIST]`) |
+| [impl-pseudocode-from-code-agent-prompt.md](impl-pseudocode-from-code-agent-prompt.md) | Track C: retrofit pseudo-code from existing code and tests |
+| [pseudocode-fidelity-audit-agent-prompt.md](pseudocode-fidelity-audit-agent-prompt.md) | Audit whether existing pseudo-code is a reliable + complete transform of tests/code; report then LEAP-fix gaps |
 | [processes.md](processes.md) | `[PROC-PSEUDOCODE_VALIDATION]`, `[PROC-IMPL_CODE_TEST_SYNC]`, `[PROC-LEAP]` |
 | [yaml-update-mcp-runbook.md](yaml-update-mcp-runbook.md) | MCP routing, `TIED_BASE_PATH` |
 | [tied-yaml skill](../../.cursor/skills/tied-yaml/SKILL.md), [reference.md](../../.cursor/skills/tied-yaml/reference.md) | CLI/MCP tools |

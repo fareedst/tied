@@ -53,9 +53,9 @@ change_definition:
     - Automatic promotion of proposals to canonical TIED without explicit MCP yaml steps
     - Full Plumb code rewrite parity
   success_criteria:
-    - Unit and composition tests pass; README/CHANGELOG updated
-    - tied_validate_consistency ok after TIED sync (detail-loader multi-doc; Ruby index alignment)
     - CITDP analysis record stored at tied/citdp/CITDP-REQ-LEAP_PROPOSAL_QUEUE.yaml (same repo as tied/) and lint-clean
+    - tied_validate_consistency ok after TIED sync (detail-loader multi-doc; Ruby index alignment)
+    - Unit and composition tests pass; README/CHANGELOG updated
   references:
     - docs/leap-proposal-queue.md
     - tied/requirements/REQ-LEAP_PROPOSAL_QUEUE.yaml
@@ -70,9 +70,9 @@ impact_analysis:
     - path: mcp-server/scripts/remove-client-reqs-from-tied.mjs
       role: Optional strip of client-only REQ/ARCH/IMPL from project tied/ (inverse of mistaken merge)
   tied_tokens_new:
-    - REQ-LEAP_PROPOSAL_QUEUE
     - ARCH-LEAP_PROPOSAL_QUEUE
     - IMPL-MCP_LEAP_PROPOSAL_QUEUE
+    - REQ-LEAP_PROPOSAL_QUEUE
   tied_tokens_affected: []
   module_boundaries: |
     LPQ-CORE (leap-proposal-queue.ts) validated before LPQ-MCP (handlers); see test_determination_and_planning.module_boundaries.
@@ -93,9 +93,9 @@ risk_analysis:
       severity: High
       likelihood: Medium
       tied_token_references:
-        - REQ-LEAP_PROPOSAL_QUEUE
         - ARCH-LEAP_PROPOSAL_QUEUE
         - IMPL-MCP_LEAP_PROPOSAL_QUEUE
+        - REQ-LEAP_PROPOSAL_QUEUE
       mitigation: |
         Document that proposals live under leap-proposals/ only; require explicit MCP YAML edits,
         lint_yaml, and tied_validate_consistency before marking applied. tied_leap_proposal_approve
@@ -187,10 +187,10 @@ risk_analysis:
       severity: Medium
       likelihood: Medium
       tied_token_references:
-        - REQ-TIED_SETUP
         - ARCH-TIED_STRUCTURE
-        - IMPL-TIED_FILES
         - IMPL-MCP_LEAP_PROPOSAL_QUEUE
+        - IMPL-TIED_FILES
+        - REQ-TIED_SETUP
       mitigation: |
         After edits, run persist-implementation-records-style sync (copy authoritative essence into index or vice versa per policy),
         then lint_yaml per file. Spot-check with a short script comparing parsed essence strings for tokens
@@ -231,10 +231,10 @@ risk_analysis:
       severity: Medium
       likelihood: Medium
       tied_token_references:
-        - IMPL-GOAGENT-CLI-CMD
-        - IMPL-GOAGENT-PIPELINE
-        - IMPL-GOAGENT-EXECUTOR
         - IMPL-ATDD-E2E-AGENT_STREAM
+        - IMPL-GOAGENT-CLI-CMD
+        - IMPL-GOAGENT-EXECUTOR
+        - IMPL-GOAGENT-PIPELINE
       mitigation: |
         Prefer smaller, token-scoped commits; run tied_validate_consistency and pseudo-code validation
         (gate-pseudocode-validation) before persisting; use grep or MCP token scans to ensure bracket tokens resolve in
@@ -247,8 +247,8 @@ test_determination_and_planning:
     checklist_version: agent_req_implementation_checklist v1.0.2
     process_tokens:
       - '[PROC-AGENT_REQ_CHECKLIST]'
-      - '[PROC-TEST_STRATEGY]'
       - '[PROC-CITDP]'
+      - '[PROC-TEST_STRATEGY]'
       - '[PROC-TIED_DEV_CYCLE]'
       - '[REQ-MODULE_VALIDATION]'
   e2e_only_blocks: []

@@ -1,7 +1,6 @@
 // Package featurespec loads feature-spec-batch YAML and renders agent prompts.
-// REQ: REQ-GOAGENT-FEATURESPEC
-// ARCH: ARCH-GOAGENT-YAML-FEATURESPEC
-// IMPL: IMPL-GOAGENT-FEATURESPEC-ORDER
+// [IMPL-GOAGENT-FEATURESPEC] [ARCH-GOAGENT-YAML-FEATURESPEC] [REQ-GOAGENT-FEATURESPEC-BATCH]
+// How: sortByOrder orders feature-spec records by numeric order field before filter/render.
 package featurespec
 
 import (

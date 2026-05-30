@@ -13,9 +13,9 @@ ARCH-GOAGENT-CLI:
   implementation_approach:
     summary: config.ParseAndResolve walks argv; resolveDefaults applies workspace and repo-root discovery; optional tiedpreflight after pipeline chain is built and before dry-run or subprocess agent turns.
     details:
-      - Validation gates (readable paths, checklist bounds, order filter vs batch) run inside ParseAndResolve before pipeline.Build.
       - 'Optional tiedpreflight (package tiedpreflight): validates mcpServers.tied-yaml and TIED_BASE_PATH when enabled; default skip unless user opts in or env AGENTSTREAM_TIED_MCP_PREFLIGHT=1; AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1 forces skip.'
       - copy_files.sh installs .cursor/skills/tied-yaml only; it does not author .cursor/mcp.json — architecture treats IDE MCP config as separate from the Cursor skill bundle.
+      - Validation gates (readable paths, checklist bounds, order filter vs batch) run inside ParseAndResolve before pipeline.Build.
   metadata:
     created:
       date: "2026-03-27T00:00:00.000Z"

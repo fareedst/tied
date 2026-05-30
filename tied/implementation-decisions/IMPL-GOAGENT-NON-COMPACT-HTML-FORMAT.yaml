@@ -46,8 +46,8 @@ IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT:
     supersedes: []
     see_also:
       - IMPL-GOAGENT-CHECKLIST
-      - IMPL-GOAGENT-TDDLOOP
       - IMPL-GOAGENT-FEATURESPEC
+      - IMPL-GOAGENT-TDDLOOP
     composed_with:
       - IMPL-GOAGENT-CLI-CMD
   s11_phase_h:

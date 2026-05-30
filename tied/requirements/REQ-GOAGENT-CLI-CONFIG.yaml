@@ -9,3 +9,5 @@ REQ-GOAGENT-CLI-CONFIG:
     implementation:
       - IMPL-GOAGENT-CLI-CMD
   detail_file: requirements/REQ-GOAGENT-CLI-CONFIG.yaml
+  satisfaction_criteria:
+    - criterion: CLI flag and config terms are canonical in tied/vocab/agentstream.md; ParseAndResolve block in IMPL-GOAGENT-CLI-CMD-pseudocode.md

@@ -6,13 +6,13 @@ REQ-TIED_SETUP:
   rationale:
     why: To ensure traceability of intent from requirements to code and to maintain a consistent development process
     problems_solved:
-      - Loss of intent during development lifecycle
       - Difficulty tracking requirements through architecture to implementation
       - Inconsistent documentation practices across projects
+      - Loss of intent during development lifecycle
     benefits:
+      - AI-friendly documentation structure
       - Complete traceability from requirements to code
       - Consistent development methodology
-      - AI-friendly documentation structure
   satisfaction_criteria:
     - criterion: ./tied/ directory exists with proper structure
     - criterion: All required documentation files exist and are populated from templates
@@ -21,6 +21,10 @@ REQ-TIED_SETUP:
       metric: .cursorrules contains TIED rules, AGENTS.md contains canonical AI agent instructions
     - criterion: Detail directories exist
       metric: requirements/, architecture-decisions/, implementation-decisions/ directories present
+    - criterion: Domain vocabulary for TIED layout (project YAML, semantic token, TIED base path) is defined in tied/vocab/tied-methodology.md; naming uses sub-vocabulary-sync RESOLVE/RECORD per [PROC-VOCABULARY_INDEX]
+    - criterion: copy_files.sh seeds tied/vocab/ when client tied/vocab/ is missing or empty (minimum domain-references.md and tied-methodology.md)
+      metric: After bootstrap, tied/vocab/*.md present; existing client vocab files never overwritten
+    - criterion: YAML validation uses scripts/yaml_tool.sh or lint_yaml wrapper per [PROC-YAML_EDIT_LOOP]; terms documented in tied/vocab/tied-methodology.md
   validation_criteria:
     - method: Manual verification
       coverage: File existence checks for all required files and directories
@@ -36,8 +40,8 @@ REQ-TIED_SETUP:
     tests:
       - Manual verification checklists
     code_annotations:
-      - IMPL-TIED_FILES
       - ARCH-TIED_STRUCTURE
+      - IMPL-TIED_FILES
       - REQ-TIED_SETUP
   related_requirements:
     depends_on: []
@@ -46,13 +50,13 @@ REQ-TIED_SETUP:
   detail_file: requirements/REQ-TIED_SETUP.yaml
   metadata:
     created:
-      date: 2025-11-08
+      date: 2025-11-08T00:00:00.000Z
       author: AI Agent
     last_updated:
-      date: 2026-02-06
+      date: 2026-02-06T00:00:00.000Z
       author: AI Agent
       reason: Restructured to v1.5.0 schema with machine-parseable fields
     last_validated:
-      date: 2026-02-06
+      date: 2026-02-06T00:00:00.000Z
       validator: AI Agent
       result: pass

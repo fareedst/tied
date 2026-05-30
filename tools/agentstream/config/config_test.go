@@ -7,7 +7,8 @@ import (
 	"testing"
 )
 
-// REQ: REQ-GOAGENT-CLI-CONFIG
+// [IMPL-GOAGENT-CLI-CMD] [ARCH-GOAGENT-CLI] [REQ-GOAGENT-CLI-CONFIG]
+// How: --first-turn (-f) parses positive integer; default 1 when flag omitted.
 func TestParseFirstTurn(t *testing.T) {
 	dir := t.TempDir()
 	p := filepath.Join(dir, "p.txt")
@@ -58,7 +59,8 @@ func TestParseFirstTurnErrors(t *testing.T) {
 	}
 }
 
-// REQ: REQ-GOAGENT-CLI-CONFIG
+// [IMPL-GOAGENT-CLI-CMD] [ARCH-GOAGENT-CLI] [REQ-GOAGENT-CLI-CONFIG]
+// How: SkipTiedMCPPreflight defaults true; --tied-mcp-preflight opts into static MCP preflight.
 func TestSkipTiedMCPPreflightDefaultAndOptIn(t *testing.T) {
 	dir := t.TempDir()
 	p := filepath.Join(dir, "p.txt")
@@ -116,7 +118,8 @@ func TestParseChecklistVar(t *testing.T) {
 	}
 }
 
-// REQ: REQ-GOAGENT-CLI-CONFIG
+// [IMPL-GOAGENT-CLI-CMD] [ARCH-GOAGENT-CLI] [REQ-GOAGENT-CLI-CONFIG]
+// How: workspace preload from agent-preload-contract merges with explicit --prompt-file paths.
 func TestWorkspacePreloadMergedWithExplicitPromptFile(t *testing.T) {
 	dir := t.TempDir()
 	contract := filepath.Join(dir, "tied", "agent-preload-contract.yaml")

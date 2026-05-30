@@ -42,9 +42,9 @@ agent_preload:
     TIED_BASE_PATH: tied
     project_yaml_writable_globs:
       - '*.yaml'
-      - requirements/*.yaml
       - architecture-decisions/*.yaml
       - implementation-decisions/*.yaml
+      - requirements/*.yaml
     methodology_readonly_glob: methodology/**
     mcp_tied_yaml_verified_this_session: false
   discovery_already_done:

@@ -7,6 +7,8 @@ import (
 	"testing"
 )
 
+// [IMPL-GOAGENT-TDDLOOP] [ARCH-GOAGENT-YAML-STEPS] [REQ-GOAGENT-YAML-STEP-RENDER]
+// How: formatStep prefers slug in ## Step heading over numeric id.
 func TestMessagesFromYAML_prefersSlugInHeading(t *testing.T) {
 	dir := t.TempDir()
 	p := filepath.Join(dir, "tdd.yaml")

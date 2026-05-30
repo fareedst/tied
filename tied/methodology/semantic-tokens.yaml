@@ -166,9 +166,9 @@ PROC-TIED_METHODOLOGY_READONLY:
   status: Active
   description: Methodology YAML (tied/methodology/) is read-only in client; project YAML (tied/ root) holds client data only; refresh methodology via copy_files.sh
   cross_references:
-    - REQ-TIED_SETUP
     - ARCH-TIED_STRUCTURE
     - PROC-YAML_DB_OPERATIONS
+    - REQ-TIED_SETUP
   source_index: processes.md
   detail_file: null
   metadata:
@@ -193,12 +193,12 @@ PROC-TIED_DEV_CYCLE:
   status: Active
   description: 'Session workflow: plan from TIED, author pseudo-code and tokens, add/align tests, implement (TDD), minimal glue, validate, sync TIED to code'
   cross_references:
-    - REQ-TIED_SETUP
-    - REQ-MODULE_VALIDATION
+    - PROC-COMMIT_MESSAGES
+    - PROC-IMPL_PSEUDOCODE_TOKENS
     - PROC-TOKEN_AUDIT
     - PROC-TOKEN_VALIDATION
-    - PROC-IMPL_PSEUDOCODE_TOKENS
-    - PROC-COMMIT_MESSAGES
+    - REQ-MODULE_VALIDATION
+    - REQ-TIED_SETUP
   source_index: processes.md
   detail_file: null
   metadata:
@@ -280,6 +280,20 @@ IMPL-MCP_FEEDBACK_TOOLS:
   metadata:
     registered: 2026-03-03
     last_updated: 2026-04-21
+PROC-VOCABULARY_INDEX:
+  type: PROC
+  name: Domain vocabulary index discipline
+  status: Active
+  description: Consult and maintain domain vocabulary index files at tied/vocab/*.md whenever a concept is named or expressed; distinct from IMPL pseudo-code grammar vocabulary
+  cross_references:
+    - PROC-AGENT_REQ_CHECKLIST
+    - PROC-IMPL_PSEUDOCODE_TOKENS
+    - PROC-TOKEN_AUDIT
+  source_index: processes.md
+  detail_file: null
+  metadata:
+    registered: 2026-05-29
+    last_updated: 2026-05-29
 # ---
 # Template Record - Copy this block to create new tokens
 # ---

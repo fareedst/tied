@@ -51,9 +51,9 @@ agent_preload:
     TIED_BASE_PATH: "" # e.g. tied or absolute path to .../project/tied
     project_yaml_writable_globs:
       - '*.yaml' # index + feedback at base: requirements, architecture-decisions, implementation-decisions, semantic-tokens, feedback
-      - requirements/*.yaml
       - architecture-decisions/*.yaml
       - implementation-decisions/*.yaml
+      - requirements/*.yaml
     methodology_readonly_glob: methodology/** # never agent-write; refreshed by copy_files.sh
     mcp_tied_yaml_verified_this_session: false # set true after a successful MCP read/write this session
   discovery_already_done:

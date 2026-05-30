@@ -7,7 +7,8 @@ import (
 	"testing"
 )
 
-// REQ: REQ-GOAGENT-YAML-STEP-RENDER
+// [IMPL-GOAGENT-CHECKLIST] [ARCH-GOAGENT-YAML-STEPS] [REQ-GOAGENT-YAML-STEP-RENDER]
+// How: MessagesFromYAML renders main steps with preconditions; bounds slice by slug.
 const testChecklistYAML = `
 name: test_checklist
 version: "0"
@@ -275,7 +276,8 @@ sub_procedures:
 	}
 }
 
-// REQ-GOAGENT-CHECKLIST-CONTROL clears configured loop-back completion markers.
+// [IMPL-GOAGENT-CHECKLIST-CONTROL] [ARCH-GOAGENT-CHECKLIST-CONTROL] [REQ-GOAGENT-CHECKLIST-CONTROL]
+// How: ApplyLoopBackClearance clears on-disk completion markers for configured loop-back slugs.
 func TestApplyLoopBackClearance(t *testing.T) {
 	dir := t.TempDir()
 	p := filepath.Join(dir, "checklist.yaml")

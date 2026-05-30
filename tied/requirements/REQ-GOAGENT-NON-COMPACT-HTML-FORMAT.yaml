@@ -18,6 +18,7 @@ REQ-GOAGENT-NON-COMPACT-HTML-FORMAT:
       metric: Regression tests or explicit assertions on prior behavior
     - criterion: Same logical step or record content in non-compact HTML mode serializes to a stable deterministic output per the documented contract
       metric: Snapshot or structural tests on golden fixtures
+    - criterion: Non-compact HTML terms are canonical in tied/vocab/agentstream.md; APPLY_TO_TURNS block in IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT-pseudocode.md
   validation_criteria:
     - method: go test in tools/agentstream
       coverage: packages implementing the format after IMPL linkage

@@ -358,14 +358,37 @@ with open('tied/requirements.yaml', 'w') as f:
 
 This is the **controlling loop** for creating or editing any TIED YAML (index or detail). No TIED record is considered valid for use until it has passed this loop.
 
-**`lint_yaml`** — Global shell function (or project-provided equivalent) that agents **must** use to validate YAML syntax and canonicalize formatting **in place**. It accepts **one or more** file paths; the implementation must process **each path independently** (typically one underlying `yq -i -P` per file, or equivalent). **Do not** pass multiple YAML paths to a **single raw `yq -i -P` command**: mikefarah `yq` merges multiple file arguments into one stream and corrupts files. Agents use `lint_yaml`, not ad-hoc multi-argument `yq`.
+**`scripts/yaml_tool.sh`** — Primary project utility for YAML validation and list normalization. Default operation: validate and pretty-print each path in place (`yq -i -P`, **one file per invocation**). **`--sort-lists`** runs **`scripts/yaml_list_sorter.rb`** on the same path set (sorts **qualifying list groups**: 3+ consecutive same-indent `- ` lines). Supports `-F/--find`, stdin, and NUL-separated paths like the former inline `lint_yaml.sh` implementation.
+
+**`lint_yaml`** / **`scripts/lint_yaml.sh`** — Backward-compatible alias; delegates to **`yaml_tool.sh`**. Global shell function (or project-provided equivalent) that agents **must** use to validate YAML syntax and canonicalize formatting **in place**. It accepts **one or more** file paths; the implementation must process **each path independently** (typically one underlying `yq -i -P` per file, or equivalent). **Do not** pass multiple YAML paths to a **single raw `yq -i -P` command**: mikefarah `yq` merges multiple file arguments into one stream and corrupts files. Agents use `lint_yaml` or `yaml_tool.sh`, not ad-hoc multi-argument `yq`.
+
+**Pseudo-code blocks (implementation reference):**
+
+```
+procedure LINT_YAML_FILES(paths):
+  # [PROC-YAML_EDIT_LOOP] [REQ-TIED_SETUP]
+  # How: For each path, run yq -i -P independently; never batch multiple files in one yq invocation.
+  FOR each path in paths:
+    IF path not a regular file: record error; continue
+    RUN yq -i -P path
+  RETURN aggregate exit status
+
+procedure SORT_QUALIFYING_LIST_GROUPS(paths):
+  # [PROC-YAML_EDIT_LOOP] [REQ-TIED_SETUP]
+  # How: Delegate to yaml_list_sorter.rb; group = 3+ consecutive lines with same indent starting with "- ".
+  REQUIRE ruby on PATH
+  FOR each path in paths: RUN ruby scripts/yaml_list_sorter.rb path
+  RETURN aggregate exit status
+```
 
 **MCP partial updates on nested maps** — `yaml_detail_update` / `yaml_index_update` payloads that include only part of `metadata` or `traceability` can **replace the whole nested object** and drop siblings such as `metadata.created`. **Read → merge locally → write → re-read** the affected token (detail and index when both change); restore vanished audit fields with one corrective update before treating the edit as complete. Runbook: `docs/yaml-update-mcp-runbook.md` §2.1.
 
 1. **Edit** — Create or modify the YAML file (index or detail) under `tied/` or other TIED-related paths (e.g. `tied/citdp/*.yaml` as defined by the project).
-2. **Validate and pretty-print** — Run `lint_yaml` on the changed file(s), e.g. `lint_yaml <file>` or `lint_yaml path/a.yaml path/b.yaml`. This validates syntax and canonicalizes formatting in place. On failure, the file is invalid; fix and repeat from step 1.
+2. **Validate and pretty-print** — Run `scripts/yaml_tool.sh <file>` or `lint_yaml <file>` (or multiple paths in one invocation). This validates syntax and canonicalizes formatting in place. On failure, the file is invalid; fix and repeat from step 1.
 
-   **Caution:** If your environment lacks a safe `lint_yaml` wrapper, you must still run validation **one file per underlying pretty-print process**; never pass multiple paths to one raw `yq` invocation.
+   **Optional list sort:** Run `scripts/yaml_tool.sh --sort-lists <file>` to alphabetize qualifying list groups (e.g. `cross_references` in index files).
+
+   **Caution:** If your environment lacks a safe `lint_yaml` / `yaml_tool` wrapper, you must still run validation **one file per underlying pretty-print process**; never pass multiple paths to one raw `yq` invocation.
 
 3. **Use** — Only after step 2 succeeds is the file considered **valid for use** under TIED (MCP, `tied_validate_consistency`, and other tooling may rely on it). YAML that does not validate is **invalid** and **must not be used** until fixed.
 4. **Optional** — For TIED index and detail files, run **tied_validate_consistency** (and any index/detail checks) as a further gate.
@@ -376,9 +399,10 @@ This is the **controlling loop** for creating or editing any TIED YAML (index or
 
 **All** changes to TIED YAML must be validated before the file is considered valid for use. Validate (and canonicalize) with `lint_yaml` per § 3.1 (each path processed independently; see caution there). If validation fails, the YAML is **invalid** and **must not be used** until fixed.
 
-**Validate and pretty-print with `lint_yaml` (recommended):**
+**Validate and pretty-print with `yaml_tool.sh` or `lint_yaml` (recommended):**
 ```bash
-lint_yaml tied/requirements.yaml tied/architecture-decisions.yaml tied/implementation-decisions.yaml tied/semantic-tokens.yaml && echo "✅ Valid YAML" || echo "❌ Invalid YAML"
+scripts/yaml_tool.sh tied/requirements.yaml tied/architecture-decisions.yaml tied/implementation-decisions.yaml tied/semantic-tokens.yaml && echo "✅ Valid YAML" || echo "❌ Invalid YAML"
+# Or: lint_yaml … (delegates to yaml_tool.sh)
 # Repeat with any changed detail files under tied/requirements/, tied/architecture-decisions/, tied/implementation-decisions/
 ```
 
@@ -1081,6 +1105,39 @@ Active
 ### Procedure and checklist documents
 - `tied/docs/pseudocode-writing-and-validation.md` — how to write and validate; when to run; minimum gating rules.
 - `tied/docs/pseudocode-validation-checklist.yaml` — canonical checklist (categories, required/optional checks, recommended order, minimum_gating_rules, tailoring).
+
+---
+
+## `[PROC-VOCABULARY_INDEX]` Domain vocabulary index discipline
+
+### Purpose
+Keep one controlled set of preferred terms so that requirements, architecture, IMPL pseudo-code, tests, code, and user-facing docs all name the same concept the same way. The **domain vocabulary index** files at `tied/vocab/*.md` are an active traceability artifact: a chosen preferred term becomes the literal identifier reused as the IMPL pseudo-code **UPPER_SNAKE block name**, the test/code symbol, the storage name, and the UI label, which keeps REQ criteria testable and three-way alignment (`[PROC-IMPL_CODE_TEST_SYNC]`) intact. This is **distinct** from the IMPL pseudo-code grammar "preferred vocabulary" (the keywords INPUT/OUTPUT/DATA/CONTROL in `implementation-decisions.md`); that grammar governs how a block is written, whereas this process governs which **domain term** a concept is named.
+
+The recommended structure, format, content, and governance standards for these files are described in `docs/vocabulary-index-analysis-and-standards.md`.
+
+### Scope
+Every point in `[PROC-AGENT_REQ_CHECKLIST]` where a concept is named or expressed: rewording fuzzy user/sponsor input that names concepts; naming TIED resources (REQ/ARCH/IMPL tokens and record `name` fields); naming storage items (files, folders, schema); naming logical units (procedures, UPPER_SNAKE block names); writing tests, code, design, and UI documents; and reconciling the index after those artifacts change.
+
+### Token references
+- [PROC-AGENT_REQ_CHECKLIST] — the implementation checklist invokes `sub-vocabulary-sync` at each naming/expression point
+- [PROC-IMPL_PSEUDOCODE_TOKENS] — preferred terms become UPPER_SNAKE block names in `essence_pseudocode`
+- [PROC-TOKEN_AUDIT] — vocabulary terms thread IMPL ↔ tests ↔ code alongside REQ/ARCH/IMPL tokens
+
+### Status
+Active
+
+### File location and editing
+- Domain vocabulary index files live at `tied/vocab/*.md`. Filenames do **not** carry a `-vocabulary` suffix (e.g. `tied/vocab/<topic>.md`).
+- They are **plain Markdown**, not TIED index/detail YAML, and are **not** under `tied/methodology/`. Edit them **directly** (like the `tied/implementation-decisions/IMPL-*-pseudocode.md` sidecars) — do **not** route through `tied-cli.sh`, and do not run `lint_yaml` on them.
+
+### Core activities
+1. **RESOLVE (before naming/writing)**: look up the concept in `tied/vocab/*.md`; choose the one **preferred** term; reword fuzzy or synonym wording to that canonical term; verify exact spelling/backtick form; flag any term absent from the index.
+2. **RECORD (as concepts are generated, and after artifacts are written)**: add or update the term immediately — preferred-term-vs-synonym row, naming bridge row (concept ↔ token ↔ storage ↔ UI label), and UPPER_SNAKE block name — keep the alphabetical index in sync, and cite the relevant REQ/ARCH/IMPL.
+3. **Immature client**: if `tied/vocab/` or its `*.md` files do not exist, create `tied/vocab/` and seed an index file when the change introduces enough named concepts; otherwise do a lightweight consistency pass or skip with an explicit note in the per-request checklist copy.
+
+### Artifacts & Metrics
+- **Artifacts**: `tied/vocab/*.md` index files (preferred-term tables, naming bridges, UPPER_SNAKE block-name tables, alphabetical index).
+- **Success Metrics**: each named concept resolves to exactly one preferred term; new concepts recorded the moment they are generated; tokens/storage/logical-unit names and UI/design terms match the index; index reconciled after tests, code, design, and UI docs change.
 
 ---
 

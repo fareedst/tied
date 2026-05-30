@@ -1,7 +1,6 @@
 // Package agentstream provides shared types for Cursor agent multi-turn streaming.
-// REQ: REQ-GOAGENT-LIB-MODULE, REQ-GOAGENT-PIPELINE
-// ARCH: ARCH-GOAGENT-LIB-LAYERING
-// IMPL: IMPL-GOAGENT-LIB-TYPES
+// [IMPL-GOAGENT-LIB-TYPES] [ARCH-GOAGENT-LIB-LAYERING] [REQ-GOAGENT-LIB-MODULE]
+// How: DATA-only root package; Turn, SessionID, VerifySessionPrompt shared by all agentstream packages.
 package agentstream
 
 // SessionID identifies a Cursor agent session for --resume chaining.

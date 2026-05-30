@@ -14,37 +14,37 @@ process_token: '[PROC-AGENT_REQ_CHECKLIST]'
 version: 1.2.0
 last_updated: "2026-04-21"
 scope:
+  - change definition and impact analysis (CITDP)
+  - IMPL pseudo-code: contracts, insufficient/contradictory spec resolution, block token comments
+  - persist IMPL index and detail; sub-yaml-edit-loop on all changed files
+  - pseudo-code validation ([PROC-PSEUDOCODE_VALIDATION])
+  - REQ/ARCH/IMPL authoring and traceability
   - session bootstrap and governing docs
   - sponsor intent translated to checklist phases (when agentstream passes FEATURE_* vars)
-  - change definition and impact analysis (CITDP)
-  - REQ/ARCH/IMPL authoring and traceability
-  - IMPL pseudo-code: contracts, insufficient/contradictory spec resolution, block token comments
-  - pseudo-code validation ([PROC-PSEUDOCODE_VALIDATION])
-  - persist IMPL index and detail; sub-yaml-edit-loop on all changed files
 exit_when:
+  - All changed YAML files have passed sub-yaml-edit-loop (lint_yaml + tied_validate_consistency per runbook).
   - All REQ/ARCH/IMPL records for the change are complete and persisted.
   - IMPL essence_pseudocode is token-commented and passes pseudo-code validation.
-  - All changed YAML files have passed sub-yaml-edit-loop (lint_yaml + tied_validate_consistency per runbook).
 excluded_from_this_subset:
-  - risk-assessment
-  - test-strategy
-  - unit-test-red / unit-test-green / unit-refactor / three-way-alignment-unit (unit TDD)
   - composition-integration
   - end-to-end-ui
-  - verification-gate
-  - sync-tied-stack
-  - user-facing-release-notes
   - persist-citdp-record
+  - risk-assessment
+  - sync-tied-stack
+  - test-strategy
   - traceable-commit
+  - unit-test-red / unit-test-green / unit-refactor / three-way-alignment-unit (unit TDD)
+  - user-facing-release-notes
+  - verification-gate
 steps:
   - slug: session-bootstrap
     title: Session Bootstrap
     stage: bootstrap
     goals: Confirm access to governing TIED documents; establish session context.
     tasks:
+      - Confirm TIED MCP availability if applicable; understand priority order.
       - Preface with "Observing AI principles!"
       - Read tied/docs/ai-principles.md; review semantic-tokens, architecture-decisions, implementation-decisions (YAML + guides).
-      - Confirm TIED MCP availability if applicable; understand priority order.
     outcomes: Session context established; governing docs read.
   - slug: translate-sponsor-intent
     title: Map sponsor wording to checklist phases (planning only)
@@ -129,6 +129,6 @@ steps:
 references:
   - docs/agent-req-implementation-checklist.md
   - docs/agent-req-implementation-checklist.yaml
-  - docs/pseudocode-writing-and-validation.md
   - docs/pseudocode-validation-checklist.yaml
+  - docs/pseudocode-writing-and-validation.md
   - tied/docs/processes.md (§ CITDP, IMPL_CODE_TEST_SYNC Phases B–C, PROC-IMPL_PSEUDOCODE_TOKENS, PROC-PSEUDOCODE_VALIDATION)

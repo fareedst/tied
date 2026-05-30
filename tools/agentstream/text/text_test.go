@@ -8,7 +8,8 @@ import (
 	"stdd/agentstream"
 )
 
-// REQ: REQ-GOAGENT-TEXT-SOURCES
+// [IMPL-GOAGENT-TEXT-SOURCES] [ARCH-GOAGENT-TEXT-SOURCES] [REQ-GOAGENT-TEXT-SOURCES]
+// How: TurnsFromPromptsFiles splits on --- boundaries; each chunk is one chained Turn.
 func TestTurnsFromPromptsFile_split(t *testing.T) {
 	dir := t.TempDir()
 	p := filepath.Join(dir, "m.txt")

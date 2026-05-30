@@ -6,13 +6,13 @@ ARCH-TIED_STRUCTURE:
   rationale:
     why: Keeps documentation close to code but organized in a dedicated namespace
     problems_solved:
-      - Documentation scattered across project
       - Difficulty finding all context in one place
+      - Documentation scattered across project
       - Meta-documentation mixed with source code
     benefits:
       - Clear separation of concerns
-      - Standard project layout for AI agents
       - Easy discovery of all TIED documentation
+      - Standard project layout for AI agents
       - Testable and maintainable structure
   alternatives_considered:
     - name: Root-level files
@@ -32,10 +32,10 @@ ARCH-TIED_STRUCTURE:
   implementation_approach:
     summary: Create dedicated tied/ directory with YAML indexes and detail subdirectories
     details:
-      - Create tied/ directory at project root
-      - 'Populate with YAML index files: requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml'
-      - 'Create detail subdirectories: requirements/, architecture-decisions/, implementation-decisions/'
       - 'Add guide files: semantic-tokens.md, processes.md'
+      - 'Create detail subdirectories: requirements/, architecture-decisions/, implementation-decisions/'
+      - 'Populate with YAML index files: requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml'
+      - Create tied/ directory at project root
   traceability:
     requirements:
       - REQ-TIED_SETUP
@@ -44,8 +44,8 @@ ARCH-TIED_STRUCTURE:
     tests:
       - TestTIEDSetup_REQ_TIED_SETUP
     code_annotations:
-      - IMPL-TIED_FILES
       - ARCH-TIED_STRUCTURE
+      - IMPL-TIED_FILES
       - REQ-TIED_SETUP
   related_decisions:
     depends_on:
@@ -74,23 +74,23 @@ ARCH-MODULE_VALIDATION:
   rationale:
     why: To eliminate bugs related to code complexity by ensuring each module works correctly in isolation
     problems_solved:
-      - Integration complexity causing difficult-to-debug issues
       - Bugs discovered too late in development cycle
+      - Integration complexity causing difficult-to-debug issues
       - Module contracts not properly validated
     benefits:
       - Bugs caught early before integration
-      - Reduced integration complexity
+      - Clear module boundaries and contracts
       - Easier debugging by isolating issues
       - Enables parallel module development
-      - Clear module boundaries and contracts
+      - Reduced integration complexity
   alternatives_considered:
     - name: Big Bang Integration
       pros:
         - Faster initial integration
       cons:
-        - Too complex to debug
         - Bugs compound during integration
         - Difficult to isolate issues
+        - Too complex to debug
       rejected_reason: Makes debugging too difficult and bugs compound
     - name: Minimal Validation
       pros:
@@ -109,15 +109,15 @@ ARCH-MODULE_VALIDATION:
   implementation_approach:
     summary: Independent module validation before integration with comprehensive testing strategy
     details:
-      - Identify modules and document boundaries before development
       - Define module interfaces and contracts explicitly
-      - Specify validation criteria for each module
-      - Unit test modules with mocked dependencies
-      - Integration test with test doubles (mocks, stubs, fakes)
-      - Validate contracts (input/output validation)
-      - Test edge cases and error handling
       - Document validation results before integration
+      - Identify modules and document boundaries before development
+      - Integration test with test doubles (mocks, stubs, fakes)
       - Only integrate after validation passes
+      - Specify validation criteria for each module
+      - Test edge cases and error handling
+      - Unit test modules with mocked dependencies
+      - Validate contracts (input/output validation)
   traceability:
     requirements:
       - REQ-MODULE_VALIDATION
@@ -158,9 +158,9 @@ ARCH-FEEDBACK_STORAGE:
       - No standard location for feedback entries
       - Feedback not tied to project context (TIED base path)
     benefits:
-      - Single file tied/feedback.yaml; no new index type in REQ/ARCH/IMPL sense
-      - Same base path resolution as existing MCP tools (getBasePath())
       - Entries have id, type, title, description, optional context, created_at
+      - Same base path resolution as existing MCP tools (getBasePath())
+      - Single file tied/feedback.yaml; no new index type in REQ/ARCH/IMPL sense
   alternatives_considered:
     - name: New YAML index (e.g. feedback.yaml as index)
       pros:
@@ -177,9 +177,9 @@ ARCH-FEEDBACK_STORAGE:
   implementation_approach:
     summary: One file {TIED_BASE_PATH}/feedback.yaml with top-level key 'entries' (array of objects)
     details:
-      - Use getBasePath() from yaml-loader for path resolution
       - 'Each entry: id, type (feature_request | bug_report | methodology_improvement), title, description, context (optional), created_at (ISO 8601)'
       - 'MCP tools: tied_feedback_add (append), tied_feedback_export (markdown or JSON)'
+      - Use getBasePath() from yaml-loader for path resolution
   traceability:
     requirements:
       - REQ-FEEDBACK_TO_TIED
@@ -221,8 +221,8 @@ ARCH-LEAP_PROPOSAL_QUEUE:
       - No audit trail for reject vs approve vs applied
     benefits:
       - Clear separation between proposals (queue) and canonical records (tied/)
-      - Same MCP-first rule for actual LEAP updates (yaml_detail_*, yaml_index_*)
       - Parallels feedback file pattern (artifact outside token indexes) while differing in location (repo root vs TIED base)
+      - Same MCP-first rule for actual LEAP updates (yaml_detail_*, yaml_index_*)
   alternatives_considered:
     - name: Store proposals under tied/proposals.yaml
       pros:
@@ -245,9 +245,9 @@ ARCH-LEAP_PROPOSAL_QUEUE:
   implementation_approach:
     summary: Module leap-proposal-queue.ts under mcp-server/src/analysis; MCP tools tied_leap_proposal_*; project root from process.cwd() or optional project_root argument; queue JSON + JSONL audit; import type-only from plumb-diff-impact-preview for selection enum.
     details:
-      - Reject and approve mutate only leap-proposals/; no yaml-loader writes for queue lifecycle
-      - Mark applied is bookkeeping after user applies LEAP via existing MCP YAML tools
       - Diff extraction and session import require explicit_opt_in true at tool boundary
+      - Mark applied is bookkeeping after user applies LEAP via existing MCP YAML tools
+      - Reject and approve mutate only leap-proposals/; no yaml-loader writes for queue lifecycle
   traceability:
     requirements:
       - REQ-LEAP_PROPOSAL_QUEUE
@@ -793,9 +793,9 @@ ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT:
       - ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT
   related_decisions:
     depends_on:
-      - ARCH-GOAGENT-YAML-STEPS
       - ARCH-GOAGENT-CLI
       - ARCH-GOAGENT-LIB-LAYERING
+      - ARCH-GOAGENT-YAML-STEPS
     informs:
       - IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT
     see_also:
@@ -826,9 +826,9 @@ ARCH-GOAGENT-CHECKLIST-CONTROL:
       - Ambiguous natural-language GOTO mentions
       - Static checklist turn queues cannot honor runtime branch decisions
     benefits:
-      - Strict control block parser
-      - Known-slug validation before queue mutation
       - Existing stream output remains visible to users
+      - Known-slug validation before queue mutation
+      - Strict control block parser
   alternatives_considered:
     - name: Parse natural-language clues
       pros:
@@ -840,26 +840,26 @@ ARCH-GOAGENT-CHECKLIST-CONTROL:
   implementation_approach:
     summary: A fenced JSON agentstream_control trailer describes validated actions such as goto; the CLI applies the action to the remaining checklist queue.
     details:
+      - For goto, replace the remaining checklist turn queue from the target slug and preserve normal session handling.
       - Only parse strict JSON control blocks named agentstream_control.
       - Validate action and target against the loaded checklist slug set.
-      - For goto, replace the remaining checklist turn queue from the target slug and preserve normal session handling.
   traceability:
     requirements:
       - REQ-GOAGENT-CHECKLIST-CONTROL
     implementation:
       - IMPL-GOAGENT-CHECKLIST-CONTROL
     tests:
-      - tools/agentstream/control/control_test.go
-      - tools/agentstream/pipeline/pipeline_test.go
       - tools/agentstream/checklist/checklist_test.go
+      - tools/agentstream/control/control_test.go
       - tools/agentstream/executor/executor_test.go
+      - tools/agentstream/pipeline/pipeline_test.go
     code_annotations:
       - ARCH-GOAGENT-CHECKLIST-CONTROL
       - REQ-GOAGENT-CHECKLIST-CONTROL
   related_decisions:
     depends_on:
-      - ARCH-GOAGENT-PIPELINE
       - ARCH-GOAGENT-EXECUTOR
+      - ARCH-GOAGENT-PIPELINE
       - ARCH-GOAGENT-YAML-STEPS
     informs:
       - IMPL-GOAGENT-CHECKLIST-CONTROL

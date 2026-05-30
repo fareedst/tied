@@ -9,3 +9,5 @@ REQ-GOAGENT-LIB-MODULE:
     implementation:
       - IMPL-GOAGENT-LIB-TYPES
   detail_file: requirements/REQ-GOAGENT-LIB-MODULE.yaml
+  satisfaction_criteria:
+    - criterion: Turn and ChainFromPrevious terms are canonical in tied/vocab/agentstream.md; Turn type documented under IMPL-GOAGENT-LIB-TYPES

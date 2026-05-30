@@ -59,9 +59,9 @@ agent_preload:
     TIED_BASE_PATH: . # template/root layout per mcp-server README; reconfirm via tied_config_get_base_path
     project_yaml_writable_globs:
       - '*.yaml' # index + feedback at base: requirements, architecture-decisions, implementation-decisions, semantic-tokens, feedback
-      - requirements/*.yaml
       - architecture-decisions/*.yaml
       - implementation-decisions/*.yaml
+      - requirements/*.yaml
     # Client preload uses methodology_readonly_glob: methodology/** under tied/. Here methodology ships from templates/.
     methodology_source_glob: templates/**
     mcp_tied_yaml_verified_this_session: false # set true after a successful MCP read/write this session

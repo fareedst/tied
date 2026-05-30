@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 #
+# [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
+# How: Bootstrap client tied/ layout, methodology refresh, tied-yaml skill install, vocab seed, MCP config.
+#
 # copy_files.sh
 #
 # Copies the TIED template files from the directory containing this script
@@ -24,7 +27,9 @@
 #     `tied-yaml-agent-index.md` is post-processed
 #     so links resolve from tied/docs/ (see sed block in the DOCS_TO_COPY loop).
 #   - .cursor/skills/tied-yaml/: Cursor Agent Skill for REQ/ARCH/IMPL YAML via tied-cli.sh
-#     (from .cursor/ if complete—includes scripts/tied-cli.sh—else from tools/bundled-tied-yaml-skill; overwritten each run).
+#     (from tools/bundled-tied-yaml-skill/ in git; .cursor/skills/tied-yaml only if bundled is missing; overwritten each run).
+#     Installed tied-cli.sh bakes TIED_REPO_ROOT to this TIED source repo for TIED_MCP_BIN default.
+#   - tied/vocab/: domain vocabulary glossaries (*.md); seeded when missing or empty (never overwrites client files)
 #   - Canonical CLI: .cursor/skills/tied-yaml/scripts/tied-cli.sh (use `tree -a` to list .cursor/ or open in the IDE).
 #   - .cursor/mcp.json: (re)writes mcpServers.tied-yaml with stdio, absolute paths to this TIED
 #     repo's mcp-server/dist/index.js and the target project's tied/; preserves other mcpServers
@@ -152,14 +157,45 @@ _refresh_tied_mcp_json
 say_ok "Refreshed ${MCP_JSON} mcpServers.tied-yaml (TIED_MCP dist + project TIED_BASE_PATH)."
 
 # --- Cursor Agent Skill: tied-yaml (CLI; MCP config is refreshed above) ---
-# Prefer .cursor/skills/tied-yaml when it is a *complete* skill (includes scripts/tied-cli.sh).
-# A partial dev checkout may contain only SKILL.md; in that case use tools/bundled-tied-yaml-skill
-# (always in git) so copy_files always installs tied-cli and the stdio client for client projects.
-TIED_YAML_SKILL_PREFERRED="${SCRIPT_DIR}/.cursor/skills/tied-yaml"
-TIED_YAML_SKILL_BUNDLED="${SCRIPT_DIR}/tools/bundled-tied-yaml-skill"
+# Canonical source: tools/bundled-tied-yaml-skill/ (committed). Fallback: .cursor/skills/tied-yaml
+# only when bundled is missing or incomplete (non-canonical; warn). Local .cursor/ is gitignored for dev edits.
+TIED_YAML_SKILL_CANONICAL="${SCRIPT_DIR}/tools/bundled-tied-yaml-skill"
+TIED_YAML_SKILL_DEV_FALLBACK="${SCRIPT_DIR}/.cursor/skills/tied-yaml"
 TIED_YAML_SKILL_DEST="${CURSOR_DIR}/skills/tied-yaml"
+TIED_CLI_REPO_ROOT_MARKER="/ABSOLUTE/PATH/TO/TIED/SOURCE/DIR"
 tied_yaml_skill_is_complete() {
   [[ -f "$1/scripts/tied-cli.sh" ]]
+}
+_patch_tied_cli_repo_root() {
+  local _cli="${TIED_YAML_SKILL_DEST}/scripts/tied-cli.sh"
+  if [[ ! -f "${_cli}" ]]; then
+    return 0
+  fi
+  local _root
+  _root="$(_realpath "${SCRIPT_DIR}")"
+  TIED_CLI_PATH="${_cli}" TIED_SOURCE_ROOT="${_root}" TIED_CLI_MARKER="${TIED_CLI_REPO_ROOT_MARKER}" \
+    python3 -c '
+import os, sys
+path = os.environ["TIED_CLI_PATH"]
+root = os.environ["TIED_SOURCE_ROOT"]
+marker = os.environ["TIED_CLI_MARKER"]
+old_line = f": \"${{TIED_REPO_ROOT:={marker}}}\""
+new_line = f": \"${{TIED_REPO_ROOT:={root}}}\""
+with open(path, encoding="utf-8") as f:
+    text = f.read()
+if old_line not in text:
+    print("MISSING_MARKER", file=sys.stderr)
+    sys.exit(2)
+with open(path, "w", encoding="utf-8") as f:
+    f.write(text.replace(old_line, new_line, 1))
+' || {
+    local _rc=$?
+    if [[ "${_rc}" -eq 2 ]]; then
+      say_warn "tied-cli.sh at ${_cli} has no TIED_REPO_ROOT placeholder; skipped baking TIED source path."
+    else
+      exit "${_rc}"
+    fi
+  }
 }
 install_tied_yaml_skill() {
   local _src="$1"
@@ -169,27 +205,60 @@ install_tied_yaml_skill() {
   chmod -R a+rX "${TIED_YAML_SKILL_DEST}"
   if [[ -f "${TIED_YAML_SKILL_DEST}/scripts/tied-cli.sh" ]]; then
     chmod a+x "${TIED_YAML_SKILL_DEST}/scripts/tied-cli.sh"
+    _patch_tied_cli_repo_root
   fi
   say_warn "Copied tied-yaml Cursor skill into ${TIED_YAML_SKILL_DEST} (from ${_src})."
 }
-if tied_yaml_skill_is_complete "${TIED_YAML_SKILL_PREFERRED}"; then
-  install_tied_yaml_skill "${TIED_YAML_SKILL_PREFERRED}"
-elif tied_yaml_skill_is_complete "${TIED_YAML_SKILL_BUNDLED}"; then
-  if [[ -d "${TIED_YAML_SKILL_PREFERRED}" ]] && ! tied_yaml_skill_is_complete "${TIED_YAML_SKILL_PREFERRED}"; then
-    say_warn "Partial tied-yaml at ${TIED_YAML_SKILL_PREFERRED} (missing scripts/tied-cli.sh); using bundled ${TIED_YAML_SKILL_BUNDLED}."
-  fi
-  install_tied_yaml_skill "${TIED_YAML_SKILL_BUNDLED}"
+if tied_yaml_skill_is_complete "${TIED_YAML_SKILL_CANONICAL}"; then
+  install_tied_yaml_skill "${TIED_YAML_SKILL_CANONICAL}"
+elif tied_yaml_skill_is_complete "${TIED_YAML_SKILL_DEV_FALLBACK}"; then
+  say_warn "Bundled tied-yaml missing or incomplete at ${TIED_YAML_SKILL_CANONICAL}; using non-canonical ${TIED_YAML_SKILL_DEV_FALLBACK}."
+  install_tied_yaml_skill "${TIED_YAML_SKILL_DEV_FALLBACK}"
 else
   say_err "ERROR: tied-yaml skill not found or incomplete. Need scripts/tied-cli.sh in one of:"
-  say_err "  ${TIED_YAML_SKILL_PREFERRED}  (full Cursor skill in TIED source)"
-  say_err "  ${TIED_YAML_SKILL_BUNDLED}  (bundled copy; use a complete TIED repository checkout)"
+  say_err "  ${TIED_YAML_SKILL_CANONICAL}  (canonical bundled copy; use a complete TIED repository checkout)"
+  say_err "  ${TIED_YAML_SKILL_DEV_FALLBACK}  (dev fallback; copy bundled into .cursor/skills/ if needed)"
   say_err "Recovery: re-run this script from a TIED tree that includes tools/bundled-tied-yaml-skill/, or"
-  say_err "  copy a tied-yaml skill into .cursor/skills/ manually, then re-run:"
   say_err "  cp -R <TIED_repo>/tools/bundled-tied-yaml-skill .cursor/skills/tied-yaml"
   say_err "TIED project YAML: use a built mcp-server dist/index.js with TIED_MCP_BIN and"
   say_err "  TIED_BASE_PATH, or follow tied/docs/using-tied-without-mcp.md for the manual workflow."
   exit 1
 fi
+
+# --- Domain vocabulary index (project-scoped; seed when absent) ---
+# [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [PROC-VOCABULARY_INDEX]
+# How: SEED_DOMAIN_VOCAB — copy tied/vocab/*.md from TIED source when client has no vocab files yet.
+VOCAB_SRC="${SCRIPT_DIR}/tied/vocab"
+VOCAB_DEST="${TIED_DIR}/vocab"
+_seed_domain_vocab() {
+  local _src="$1" _dest="$2"
+  if [[ ! -d "${_src}" ]]; then
+    say_warn "No domain vocabulary source at ${_src}; skipped tied/vocab seed."
+    return 0
+  fi
+  shopt -s nullglob
+  local _existing=( "${_dest}"/*.md )
+  shopt -u nullglob
+  if [[ ${#_existing[@]} -gt 0 ]]; then
+    say_warn "Client tied/vocab/ already has ${#_existing[@]} file(s); skipped vocab seed (preserved)."
+    return 0
+  fi
+  mkdir -p "${_dest}"
+  local _count=0 _total=0
+  for _f in "${_src}"/*.md; do
+    if [[ -f "${_f}" ]]; then
+      (( _total++ )) || true
+      cp -p "${_f}" "${_dest}/$(basename "${_f}")"
+      (( _count++ )) || true
+    fi
+  done
+  if [[ ${_total} -gt 0 ]]; then
+    say_x_of_y_client "${_count}" "${_total}" "Seeded ${_count} of ${_total} domain vocabulary file(s) into ${_dest}."
+  else
+    say_warn "No *.md in ${_src}; skipped tied/vocab seed."
+  fi
+}
+_seed_domain_vocab "${VOCAB_SRC}" "${VOCAB_DEST}"
 
 BASE_FILES=(
   ".cursorrules"

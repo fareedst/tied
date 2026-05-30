@@ -10,3 +10,5 @@ REQ-GOAGENT-YAML-STEP-RENDER:
       - IMPL-GOAGENT-TDDLOOP
       - IMPL-GOAGENT-CHECKLIST
   detail_file: requirements/REQ-GOAGENT-YAML-STEP-RENDER.yaml
+  satisfaction_criteria:
+    - criterion: Checklist and TDD step render terms are canonical in tied/vocab/agentstream.md; checklist_messages and tddloop_messages blocks in IMPL-GOAGENT-CHECKLIST and IMPL-GOAGENT-TDDLOOP pseudo-code

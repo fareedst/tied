@@ -13,10 +13,15 @@ const { spawnSync } = require("node:child_process");
 
 const MCP_ROOT = path.join(__dirname, "..");
 const REPO_ROOT = path.join(MCP_ROOT, "..");
-const TIED_CLI = path.join(
+const TIED_CLI_BUNDLED = path.join(
+  REPO_ROOT,
+  "tools/bundled-tied-yaml-skill/scripts/tied-cli.sh"
+);
+const TIED_CLI_CURSOR = path.join(
   REPO_ROOT,
   ".cursor/skills/tied-yaml/scripts/tied-cli.sh"
 );
+const TIED_CLI = fs.existsSync(TIED_CLI_BUNDLED) ? TIED_CLI_BUNDLED : TIED_CLI_CURSOR;
 const MCP_BIN = path.join(MCP_ROOT, "dist/index.js");
 const TIED_BASE = path.join(REPO_ROOT, "tied");
 

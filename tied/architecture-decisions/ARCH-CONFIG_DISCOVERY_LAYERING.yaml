@@ -29,8 +29,8 @@ ARCH-CONFIG_DISCOVERY_LAYERING:
   implementation_approach:
     summary: Product code implements discovery order, a first-local replace flag or equivalent for selected accumulate fields, and post-parse clearing of omitted keys before merge. Exclusion matcher implements segment-based directory matching for single-segment trailing-slash patterns.
     details:
-      - Loader passes explicit parameters into merge strategy application (not only raw inheritContext)
       - After unmarshaling a partial file into a defaults-seeded struct, clear omitted list fields used in merge
+      - Loader passes explicit parameters into merge strategy application (not only raw inheritContext)
       - PatternMatcher matches single-segment directory patterns via path segment equality
   traceability:
     requirements:

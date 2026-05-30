@@ -31,22 +31,22 @@ description: |
   align with the extract-generated sidecar pattern where that script is used.
 usage:
   intended_for:
-    - projects with IMPL pseudo-code as the primary specification for behavior (language-agnostic contracts and steps)
-    - projects where pseudo-code drives unit-test and integration-test definitions and literal block linkage to code
     - projects that require REQ, ARCH, and IMPL traceability and LEAP-aligned updates when pseudocode scope changes
+    - projects where pseudo-code drives unit-test and integration-test definitions and literal block linkage to code
+    - projects with IMPL pseudo-code as the primary specification for behavior (language-agnostic contracts and steps)
   how_to_apply:
-    - run Layer A (tied_validate_consistency) before relying on Layer B rows; resolve LEAP (IMPL to ARCH/REQ) when edits change scope—not only checklist passes
-    - for IMPL, ingest the same text TIED uses—read IMPL-TOKEN-pseudocode.md, or the merged essence_pseudocode from yaml_detail_read; they are equivalent when the sidecar is present
     - for Comrak extract-generated IMPL-*-pseudocode.md, use script/extract_test_pseudocode_to_impl_sidecars.py as the source of truth for what a “block” is (H1 file intro, H2 per test, Source line, then list/blockquote body); do not re-invent a different block boundary without a project reason
-    - run tied_validate_consistency (Layer A) so the external or merged pseudo-code is qualified for repository traceability rules; Layer A and this checklist (Layer B) are complementary—traceability vs. contracts/structure
+    - for IMPL, ingest the same text TIED uses—read IMPL-TOKEN-pseudocode.md, or the merged essence_pseudocode from yaml_detail_read; they are equivalent when the sidecar is present
     - parse each pseudo-code block into a normalized internal representation
-    - run each validation pass in the recommended order (tied_data first, then application categories below)
     - record findings with severity and source location
+    - run each validation pass in the recommended order (tied_data first, then application categories below)
+    - run Layer A (tied_validate_consistency) before relying on Layer B rows; resolve LEAP (IMPL to ARCH/REQ) when edits change scope—not only checklist passes
+    - run tied_validate_consistency (Layer A) so the external or merged pseudo-code is qualified for repository traceability rules; Layer A and this checklist (Layer B) are complementary—traceability vs. contracts/structure
     - treat required checks as gating unless explicitly waived
   result_severities:
     - error
-    - warning
     - info
+    - warning
 checklist:
   - id: TIED-POE-001
     category: tied_data
@@ -64,9 +64,9 @@ checklist:
     required: true
     title: Every pseudo-code block parses successfully
     verify:
-      - the block conforms to the project grammar
       - malformed syntax is rejected
       - parsing produces a normalized internal representation
+      - the block conforms to the project grammar
     evidence:
       - parse result exists for each block
       - parse failures include source location
@@ -87,9 +87,9 @@ checklist:
     required: true
     title: Required sections exist for each block kind
     verify:
+      - block headers and tags follow naming rules
       - required sections are present for the declared block kind
       - section order follows project conventions if order is significant
-      - block headers and tags follow naming rules
     evidence:
       - section inventory per block kind
       - no missing required fields
@@ -99,8 +99,8 @@ checklist:
     required: true
     title: Inputs outputs and data declarations are internally consistent
     verify:
-      - identifiers are declared before use
       - duplicate declarations are rejected unless explicitly allowed
+      - identifiers are declared before use
       - output variants are structurally valid
     evidence:
       - declaration table matches block references
@@ -120,10 +120,10 @@ checklist:
     required: true
     title: Unit-test phases are explicit or inferable
     verify:
-      - setup exists
       - act exists
       - assertion or expected outcome exists
       - error expectation is explicit when failure behavior is tested
+      - setup exists
     evidence:
       - normalized phase map exists for each unit-test block
     severity_on_failure: error
@@ -133,8 +133,8 @@ checklist:
     title: Integration-test blocks declare participating collaborators
     verify:
       - all directly involved blocks or routines are named
-      - undeclared collaborators are rejected
       - external boundaries are identified when present
+      - undeclared collaborators are rejected
     evidence:
       - collaborator list resolves against the application symbol table
     severity_on_failure: error
@@ -143,9 +143,9 @@ checklist:
     required: true
     title: Integration-test boundaries follow architecture rules
     verify:
-      - only allowed dependency directions are used
-      - forbidden layers are not crossed
       - collaborator usage matches architecture constraints
+      - forbidden layers are not crossed
+      - only allowed dependency directions are used
     evidence:
       - dependency graph analysis for each integration test
     severity_on_failure: error
@@ -154,10 +154,10 @@ checklist:
     required: true
     title: Every referenced symbol resolves uniquely
     verify:
-      - referenced routines exist
-      - referenced blocks exist
-      - referenced tags exist
       - names are not ambiguous
+      - referenced blocks exist
+      - referenced routines exist
+      - referenced tags exist
     evidence:
       - symbol table with unique bindings
     severity_on_failure: error
@@ -176,8 +176,8 @@ checklist:
     required: true
     title: Test inputs conform to target block contracts
     verify:
-      - test inputs match the declared input names and shapes
       - preconditions are satisfied by setup
+      - test inputs match the declared input names and shapes
       - undeclared inputs are rejected
     evidence:
       - contract comparison result for each test target
@@ -187,9 +187,9 @@ checklist:
     required: true
     title: Expected outputs and errors conform to target block contracts
     verify:
-      - expected success results match a declared output variant
-      - expected errors match declared error types or failure modes
       - assertions refer only to observable behavior
+      - expected errors match declared error types or failure modes
+      - expected success results match a declared output variant
     evidence:
       - output and error expectation comparison report
     severity_on_failure: error
@@ -198,9 +198,9 @@ checklist:
     required: true
     title: Safety and invariant claims are testable where required
     verify:
-      - safety constraints stated in the target spec are reflected in tests
       - invariants are asserted where the project requires them
       - prohibited behaviors are explicitly checked when relevant
+      - safety constraints stated in the target spec are reflected in tests
     evidence:
       - mapping from safety clauses to test assertions
     severity_on_failure: warning
@@ -209,9 +209,9 @@ checklist:
     required: true
     title: The application dependency graph is valid
     verify:
+      - allowed cycles are classified and documented
       - every dependency edge connects known nodes
       - forbidden cycles are rejected
-      - allowed cycles are classified and documented
     evidence:
       - graph validation report
     severity_on_failure: error
@@ -250,8 +250,8 @@ checklist:
     title: Boundary and edge cases are covered
     verify:
       - empty inputs are tested where meaningful
-      - minimal valid inputs are tested
       - malformed or extreme values are tested where relevant
+      - minimal valid inputs are tested
     evidence:
       - edge-case coverage inventory
     severity_on_failure: warning
@@ -329,9 +329,9 @@ checklist:
     required: false
     title: Test pseudo-code is semantically coherent under symbolic interpretation
     verify:
-      - setup can satisfy target preconditions
       - assertions are reachable
       - expected results do not contradict the target contract
+      - setup can satisfy target preconditions
     evidence:
       - symbolic validation report
     severity_on_failure: warning
@@ -340,9 +340,9 @@ checklist:
     required: false
     title: Test pseudo-code can be translated into executable tests
     verify:
+      - assertions are machine-translatable
       - each step maps to a supported test framework primitive
       - fixtures can be materialized
-      - assertions are machine-translatable
       - unresolved natural language steps are reported
     evidence:
       - generation feasibility report
@@ -352,32 +352,32 @@ checklist:
     required: true
     title: Findings are emitted with severity message and source location
     verify:
-      - all findings include severity
       - all findings include a concise explanation
+      - all findings include severity
       - all findings point to block and source location when available
     evidence:
       - diagnostic output sample
     severity_on_failure: error
 recommended_validation_order:
-  - tied_data
-  - parsing
-  - schema
-  - symbol_resolution
+  - behavioral_coverage
   - contract_validation
   - dependency_graph
-  - behavioral_coverage
-  - traceability
-  - linting
-  - semantic_simulation
   - generation_readiness
+  - linting
+  - parsing
   - reporting
+  - schema
+  - semantic_simulation
+  - symbol_resolution
+  - tied_data
+  - traceability
 minimum_gating_rules:
   - all required checks pass
-  - no unresolved symbols remain
-  - every requirement tag is covered by at least one test
-  - every implementation block has success-path coverage
-  - every declared failure mode has coverage when failure is possible
   - diagnostics include source locations where available
+  - every declared failure mode has coverage when failure is possible
+  - every implementation block has success-path coverage
+  - every requirement tag is covered by at least one test
+  - no unresolved symbols remain
   - note: Full rules above assume pseudo-code drives or coexists with executable tests. For pre-test gates see tailoring.profiles.agent_req_checklist_pre_red.
 tailoring:
   profiles:
@@ -387,17 +387,17 @@ tailoring:
         - IMPL essence_pseudocode describes implementation contracts only
         - no automated tests exist yet for this REQ/IMPL slice
       deferred_minimum_rules:
-        - every requirement tag is covered by at least one test
-        - every implementation block has success-path coverage
         - every declared failure mode has coverage when failure is possible
+        - every implementation block has success-path coverage
+        - every requirement tag is covered by at least one test
       deferred_until: After executable tests exist—verification-gate MUST invoke sub-pseudocode-validation-pass with agent_req_checklist_post_test (see lead checklist verification-gate).
       still_required:
         - TIED-POE-001 (tied_data) — tied_validate_consistency with include_pseudocode for changed IMPL; sidecar must pass repository traceability rules
         - structural and contract validation applicable to IMPL-only pseudo-code (parsing/schema/symbol resolution as feasible, contract_validation, dependency_graph, reporting)
       notes:
-        - TIED data validation is not deferred with behavioral coverage; run Layer A whenever essence changes.
         - Behavioral coverage and traceability checklist categories that require a test artifact should be marked N/A or deferred with reference to this profile—not ad-hoc waiver IDs.
         - Pseudocode or scope changes still require [PROC-LEAP] (IMPL, then ARCH/REQ) when they alter requirement or architecture commitments—do not treat pre_red checklist pass alone as LEAP completion (see pseudocode-writing-and-validation.md § LEAP).
+        - TIED data validation is not deferred with behavioral coverage; run Layer A whenever essence changes.
     agent_req_checklist_post_test:
       summary: Post-test gate for [PROC-AGENT_REQ_CHECKLIST] verification-gate after unit and composition tests exist—closes deferrals from agent_req_checklist_pre_red.
       applies_when:
@@ -407,13 +407,13 @@ tailoring:
       applies_minimum_gating_rules:
         - all items in minimum_gating_rules above (same list as tailoring.profiles.agent_req_checklist_pre_red deferred_minimum_rules, plus structural rules not deferred pre-RED)
       notes:
-        - Do not waive deferred_minimum_rules with ad-hoc waiver IDs—document pass/fail per checklist category; unresolved gaps imply GOTO resolve-pseudocode or unit-test-red per lead checklist verification-gate branches.
         - Behavioral coverage and traceability rows that require executable tests must be evaluated now that tests exist (or explicitly marked N/A with rationale).
+        - Do not waive deferred_minimum_rules with ad-hoc waiver IDs—document pass/fail per checklist category; unresolved gaps imply GOTO resolve-pseudocode or unit-test-red per lead checklist verification-gate branches.
         - If IMPL pseudocode edits during this gate changed REQ or ARCH scope, confirm LEAP updates to ARCH/REQ records and indexes before marking the REQ slice complete.
   notes:
-    - add project-specific block kinds under the schema category
-    - add domain-specific safety rules under contract_validation
-    - add project architecture constraints under dependency_graph
     - add custom coverage thresholds per block kind if needed
+    - add domain-specific safety rules under contract_validation
     - add generation backend constraints if pseudo-code drives test generation directly
+    - add project architecture constraints under dependency_graph
+    - add project-specific block kinds under the schema category
     - for Comrak-style Markdown sidecars, optional LINT-MD-001 and LINT-MD-002 align manual Layer B with extract_test_pseudocode_to_impl_sidecars.py; mark N/A when the IMPL is purely procedural and not test-catalog-driven

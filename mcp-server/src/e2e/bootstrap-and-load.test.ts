@@ -76,10 +76,31 @@ describe("e2e: bootstrap and load", () => {
       fs.existsSync(tiedCli),
       "copy_files.sh should install the canonical tied-cli at .cursor/skills/tied-yaml/scripts/tied-cli.sh [IMPL-TIED_FILES]"
     );
+    const tiedCliText = fs.readFileSync(tiedCli, "utf8");
+    const tiedRepoRootReal = fs.realpathSync(repoRoot);
+    assert.ok(
+      tiedCliText.includes(`TIED_REPO_ROOT:=${tiedRepoRootReal}`),
+      "installed tied-cli.sh should bake TIED_REPO_ROOT default from the TIED repo used for copy_files.sh"
+    );
+    assert.ok(
+      !tiedCliText.includes('TIED_REPO_ROOT:=/ABSOLUTE/PATH/TO/TIED/SOURCE/DIR'),
+      "installed tied-cli.sh should not leave the unsubstituted TIED_REPO_ROOT default"
+    );
     const rootScriptsTiedCli = path.join(tempDir, "scripts", "tied-cli.sh");
     assert.ok(
       !fs.existsSync(rootScriptsTiedCli),
       "copy_files.sh should not create scripts/tied-cli.sh (single CLI path is under .cursor/skills/) [IMPL-TIED_FILES]"
+    );
+
+    const vocabIndex = path.join(tiedDir, "vocab", "domain-references.md");
+    const vocabMethodology = path.join(tiedDir, "vocab", "tied-methodology.md");
+    assert.ok(
+      fs.existsSync(vocabIndex),
+      "copy_files.sh should seed tied/vocab/domain-references.md [IMPL-TIED_FILES] [PROC-VOCABULARY_INDEX]"
+    );
+    assert.ok(
+      fs.existsSync(vocabMethodology),
+      "copy_files.sh should seed tied/vocab/tied-methodology.md [REQ-TIED_SETUP]"
     );
 
     delete process.env.TIED_BASE_PATH;

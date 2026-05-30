@@ -1,7 +1,6 @@
 // Package executor runs the Cursor `agent` CLI and parses stream-json output.
-// REQ: REQ-GOAGENT-EXECUTOR, REQ-ATDD-E2E-AGENT_STREAM, REQ-GOAGENT-CHECKLIST-CONTROL
-// ARCH: ARCH-GOAGENT-EXECUTOR, ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON, ARCH-GOAGENT-CHECKLIST-CONTROL
-// IMPL: IMPL-GOAGENT-EXECUTOR, IMPL-ATDD-E2E-AGENT_STREAM, IMPL-GOAGENT-CHECKLIST-CONTROL
+// [IMPL-GOAGENT-EXECUTOR] [ARCH-GOAGENT-EXECUTOR] [REQ-GOAGENT-AGENT-EXECUTOR]
+// How: AgentArgv builds resume-capable argv; Run stream-parses JSON stdout for session_id and assistant text.
 package executor
 
 import (

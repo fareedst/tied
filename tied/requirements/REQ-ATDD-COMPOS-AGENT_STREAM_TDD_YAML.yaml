@@ -14,6 +14,7 @@ REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML:
     upstream_note: Imported from atdd commit eb88236290009b78eb11ea561816f0854176bf12; see docs/run-agent-stream-upstream.md
   satisfaction_criteria:
     - criterion: AgentStreamArgv.parse_argv appends one turn per message from TddLoopPrompts.messages_from_yaml for each --tdd-yaml path in argv order
+    - criterion: Ruby argv TDD wiring terms are canonical in tied/vocab/agent-stream-ruby.md; wire_tdd_yaml_turns_from_argv block in IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV-pseudocode.md
     - criterion: Turn order matches delegation to TddLoopPrompts (no duplicate parsing rules in the entry point)
   validation_criteria:
     - method: Composition tests (upstream atdd)
@@ -38,13 +39,13 @@ REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML:
   detail_file: requirements/REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML.yaml
   metadata:
     created:
-      date: 2026-03-24
+      date: 2026-03-24T00:00:00.000Z
       author: AI Agent
     last_updated:
-      date: 2026-03-24
+      date: 2026-03-24T00:00:00.000Z
       author: AI Agent
       reason: Import ATDD agent stream TIED records
     last_validated:
-      date: 2026-03-24
+      date: 2026-03-24T00:00:00.000Z
       validator: AI Agent
       result: pass

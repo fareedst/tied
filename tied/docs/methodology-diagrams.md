@@ -96,6 +96,8 @@ flowchart LR
 
 All 11 steps of a development session. Steps 1–2 are documentation-first (plan and author TIED docs with pseudo-code). Steps 3–7 form the code-generation inner loop governed by TDD (see Diagram 4 for the per-iteration cycle). Steps 8–11 validate, sync, and commit. The LEAP arrow from step 9 back to step 2 fires when code diverged from IMPL during TDD.
 
+**Mermaid:** Flowchart node IDs must not match reserved words or hyphen-split into tokens such as `end` (which closes `subgraph`). Use safe IDs (for example `e2e_ui`) and keep checklist step names only inside `["…"]` labels.
+
 ```mermaid
 flowchart TD
     Start(["Session Start"]) --> S1
@@ -121,11 +123,11 @@ flowchart TD
     S8["8. Validate + close test gaps\nRun full test suite\nRun PROC-TOKEN_VALIDATION"]
     S9["9. Sync TIED to code/tests\nUpdate REQ/ARCH/IMPL to match\nSync semantic-tokens.yaml"]
     composition-integration["10. Update README + CHANGELOG"]
-    end-to-end-ui["11. Write commit message\nper PROC-COMMIT_MESSAGES"]
+    e2e_ui["11. Write commit message\nper PROC-COMMIT_MESSAGES"]
 
-    S8 --> S9 --> composition-integration --> end-to-end-ui
+    S8 --> S9 --> composition-integration --> e2e_ui
 
-    end-to-end-ui --> Done(["Session Complete"])
+    e2e_ui --> Done(["Session Complete"])
 
     S9 -.->|"LEAP: if code diverged\nfrom IMPL during TDD\nupdate IMPL -> ARCH -> REQ"| S2
 ```

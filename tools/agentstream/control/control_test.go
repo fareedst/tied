@@ -2,7 +2,8 @@ package control
 
 import "testing"
 
-// REQ-GOAGENT-CHECKLIST-CONTROL validates strict fenced control parsing.
+// [IMPL-GOAGENT-CHECKLIST-CONTROL] [ARCH-GOAGENT-CHECKLIST-CONTROL] [REQ-GOAGENT-CHECKLIST-CONTROL]
+// How: Parse returns latest valid fenced agentstream_control JSON; ignores prose-only GOTO hints.
 func TestParseLatestFencedControl(t *testing.T) {
 	text := "ordinary prose mentions GOTO flag-contradictory-specs\n" +
 		"```json\n{\"not_agentstream_control\":true}\n```\n" +
@@ -19,7 +20,8 @@ func TestParseLatestFencedControl(t *testing.T) {
 	}
 }
 
-// REQ-GOAGENT-CHECKLIST-CONTROL rejects natural-language clues without control JSON.
+// [IMPL-GOAGENT-CHECKLIST-CONTROL] [ARCH-GOAGENT-CHECKLIST-CONTROL] [REQ-GOAGENT-CHECKLIST-CONTROL]
+// How: Parse ignores natural-language GOTO without fenced agentstream_control JSON.
 func TestParseIgnoresProseClues(t *testing.T) {
 	got, ok, err := Parse("Please GOTO flag-contradictory-specs, but this is just prose.")
 	if err != nil {
@@ -30,7 +32,8 @@ func TestParseIgnoresProseClues(t *testing.T) {
 	}
 }
 
-// REQ-GOAGENT-CHECKLIST-CONTROL treats malformed control JSON as an error.
+// [IMPL-GOAGENT-CHECKLIST-CONTROL] [ARCH-GOAGENT-CHECKLIST-CONTROL] [REQ-GOAGENT-CHECKLIST-CONTROL]
+// How: Parse returns error when agentstream_control JSON is malformed inside a fence.
 func TestParseMalformedControlJSON(t *testing.T) {
 	_, ok, err := Parse("```json\n{\"agentstream_control\": \n```\n")
 	if err == nil {
@@ -41,7 +44,8 @@ func TestParseMalformedControlJSON(t *testing.T) {
 	}
 }
 
-// REQ-GOAGENT-CHECKLIST-CONTROL validates known targets before routing.
+// [IMPL-GOAGENT-CHECKLIST-CONTROL] [ARCH-GOAGENT-CHECKLIST-CONTROL] [REQ-GOAGENT-CHECKLIST-CONTROL]
+// How: Validate rejects unknown targets and unsupported schema_version before routing.
 func TestValidateTarget(t *testing.T) {
 	known := map[string]bool{"flag-contradictory-specs": true}
 	if err := Validate(Decision{SchemaVersion: 1, Action: ActionGoto, Target: "flag-contradictory-specs"}, known); err != nil {

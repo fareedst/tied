@@ -144,9 +144,9 @@ PROC-TIED_METHODOLOGY_READONLY:
   status: Active
   description: Methodology YAML (tied/methodology/) is read-only in client; project YAML (tied/ root) holds client data only; refresh methodology via copy_files.sh
   cross_references:
-    - REQ-TIED_SETUP
     - ARCH-TIED_STRUCTURE
     - PROC-YAML_DB_OPERATIONS
+    - REQ-TIED_SETUP
   source_index: processes.md
   detail_file: null
   metadata:
@@ -171,13 +171,13 @@ PROC-TIED_DEV_CYCLE:
   status: Active
   description: 'Session workflow: plan from TIED, author pseudo-code and tokens, add/align tests, implement (TDD), minimal glue, validate, sync TIED to code'
   cross_references:
-    - REQ-TIED_SETUP
-    - REQ-MODULE_VALIDATION
+    - PROC-AGENT_REQ_CHECKLIST
+    - PROC-COMMIT_MESSAGES
+    - PROC-IMPL_PSEUDOCODE_TOKENS
     - PROC-TOKEN_AUDIT
     - PROC-TOKEN_VALIDATION
-    - PROC-IMPL_PSEUDOCODE_TOKENS
-    - PROC-COMMIT_MESSAGES
-    - PROC-AGENT_REQ_CHECKLIST
+    - REQ-MODULE_VALIDATION
+    - REQ-TIED_SETUP
   source_index: processes.md
   detail_file: null
   metadata:
@@ -265,10 +265,10 @@ PROC-LEAP:
   status: Active
   description: When code or tests differ from IMPL, update the stack in reverse order IMPL to ARCH to REQ in the same work item so tokens stay consistent and testable
   cross_references:
-    - REQ-TIED_SETUP
-    - REQ-MODULE_VALIDATION
-    - PROC-TIED_DEV_CYCLE
     - PROC-IMPL_PSEUDOCODE_TOKENS
+    - PROC-TIED_DEV_CYCLE
+    - REQ-MODULE_VALIDATION
+    - REQ-TIED_SETUP
   source_index: processes.md
   detail_file: null
   metadata:
@@ -280,9 +280,9 @@ PROC-YAML_EDIT_LOOP:
   status: Active
   description: Controlling loop for creating or editing TIED YAML; validate with lint_yaml before use; no record valid until it passes
   cross_references:
-    - REQ-TIED_SETUP
     - ARCH-TIED_STRUCTURE
     - PROC-YAML_DB_OPERATIONS
+    - REQ-TIED_SETUP
   source_index: processes.md
   detail_file: null
   metadata:
@@ -294,9 +294,9 @@ PROC-PSEUDOCODE_VALIDATION:
   status: Active
   description: Run the application pseudo-code validation checklist on IMPL essence_pseudocode; required checks are gating before tests or code
   cross_references:
-    - PROC-IMPL_PSEUDOCODE_TOKENS
-    - PROC-IMPL_CODE_TEST_SYNC
     - PROC-AGENT_REQ_CHECKLIST
+    - PROC-IMPL_CODE_TEST_SYNC
+    - PROC-IMPL_PSEUDOCODE_TOKENS
   source_index: processes.md
   detail_file: null
   metadata:
@@ -308,9 +308,9 @@ PROC-TIED_VERIFICATION_GATED:
   status: Active
   description: When enabled, requirement and optionally IMPL status are derived only from test results; run verify step after tests; do not edit status by hand
   cross_references:
-    - REQ-TIED_SETUP
     - PROC-TIED_DEV_CYCLE
     - PROC-TOKEN_VALIDATION
+    - REQ-TIED_SETUP
   source_index: processes.md
   detail_file: null
   metadata:
@@ -323,10 +323,10 @@ REQ-CONFIG_DISCOVERY_LOCAL_LAYER:
   status: Planned
   description: Layered config discovery; first local file replaces built-in lists for configured keys; omitted keys in later files do not inject defaults; single-segment directory excludes match at any depth.
   cross_references:
-    - REQ-TIED_SETUP
-    - REQ-GOAGENT-CLI-CONFIG
     - ARCH-CONFIG_DISCOVERY_LAYERING
     - PROC-AGENT_REQ_CHECKLIST
+    - REQ-GOAGENT-CLI-CONFIG
+    - REQ-TIED_SETUP
   source_index: requirements.yaml
   detail_file: requirements/REQ-CONFIG_DISCOVERY_LOCAL_LAYER.yaml
   metadata:
@@ -338,9 +338,9 @@ ARCH-CONFIG_DISCOVERY_LAYERING:
   status: Active
   description: Defaults as bottom layer; first local file may replace selected built-in lists; omitted keys do not re-merge defaults; single-segment directory excludes at any depth.
   cross_references:
-    - REQ-CONFIG_DISCOVERY_LOCAL_LAYER
-    - ARCH-TIED_STRUCTURE
     - ARCH-GOAGENT-CLI
+    - ARCH-TIED_STRUCTURE
+    - REQ-CONFIG_DISCOVERY_LOCAL_LAYER
   source_index: architecture-decisions.yaml
   detail_file: architecture-decisions/ARCH-CONFIG_DISCOVERY_LAYERING.yaml
   metadata:
@@ -392,8 +392,8 @@ PROC-AGENT_REQ_CHECKLIST:
   status: Active
   description: 'Unified LEAD+TIED checklist (session-bootstrap–traceable-commit) for REQ implementation: pseudo-code, TDD, composition, E2E decision, validation; see tied/docs/agent-req-implementation-checklist.md'
   cross_references:
-    - PROC-TIED_DEV_CYCLE
     - PROC-IMPL_PSEUDOCODE_TOKENS
+    - PROC-TIED_DEV_CYCLE
     - PROC-TOKEN_AUDIT
     - REQ-MODULE_VALIDATION
   source_index: processes.md
@@ -408,15 +408,15 @@ PROC-IMPL_CODE_TEST_SYNC:
   status: Active
   description: Map pseudo-code blocks to tests and production code; three-way alignment; Phase H E2E decision when e2e_only
   cross_references:
-    - PROC-TIED_DEV_CYCLE
+    - PROC-AGENT_REQ_CHECKLIST
     - PROC-IMPL_PSEUDOCODE_TOKENS
+    - PROC-LEAP
     - PROC-PSEUDOCODE_VALIDATION
     - PROC-TEST_STRATEGY
-    - PROC-LEAP
+    - PROC-TIED_DEV_CYCLE
     - PROC-TOKEN_AUDIT
     - PROC-TOKEN_VALIDATION
     - REQ-MODULE_VALIDATION
-    - PROC-AGENT_REQ_CHECKLIST
   source_index: processes.md
   detail_file: null
   metadata:
@@ -474,10 +474,10 @@ ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS:
   status: Active
   description: Composition layers delegate YAML semantics to TddLoopPrompts (no duplicate parsing rules)
   cross_references:
-    - REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
-    - REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS
     - IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
     - IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS
+    - REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
+    - REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS
   source_index: architecture-decisions.yaml
   detail_file: architecture-decisions/ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS.yaml
   metadata:
@@ -599,8 +599,8 @@ REQ-GOAGENT-YAML-STEP-RENDER:
   description: tddloop and checklist packages; optional inclusive main-step slice by checklist id
   cross_references:
     - ARCH-GOAGENT-YAML-STEPS
-    - IMPL-GOAGENT-TDDLOOP
     - IMPL-GOAGENT-CHECKLIST
+    - IMPL-GOAGENT-TDDLOOP
   source_index: requirements.yaml
   detail_file: requirements/REQ-GOAGENT-YAML-STEP-RENDER.yaml
   metadata:
@@ -614,8 +614,8 @@ REQ-GOAGENT-PIPELINE-CHAIN:
   description: pipeline.Build order and SessionForTurn; optional checklist step bounds on Input
   cross_references:
     - ARCH-GOAGENT-PIPELINE
-    - IMPL-GOAGENT-PIPELINE
     - IMPL-GOAGENT-CLI-CMD
+    - IMPL-GOAGENT-PIPELINE
   source_index: requirements.yaml
   detail_file: requirements/REQ-GOAGENT-PIPELINE-CHAIN.yaml
   metadata:
@@ -693,9 +693,9 @@ ARCH-GOAGENT-YAML-STEPS:
   status: Active
   description: Packages tddloop and checklist
   cross_references:
-    - REQ-GOAGENT-YAML-STEP-RENDER
-    - IMPL-GOAGENT-TDDLOOP
     - IMPL-GOAGENT-CHECKLIST
+    - IMPL-GOAGENT-TDDLOOP
+    - REQ-GOAGENT-YAML-STEP-RENDER
   source_index: architecture-decisions.yaml
   detail_file: architecture-decisions/ARCH-GOAGENT-YAML-STEPS.yaml
   metadata:
@@ -839,12 +839,12 @@ REQ-GOAGENT-NON-COMPACT-HTML-FORMAT:
   status: Planned
   description: Optional non-minified HTML output for in-scope turn bodies; stable contract when selected; defaults unchanged.
   cross_references:
-    - REQ-TIED_SETUP
-    - REQ-GOAGENT-LIB-MODULE
-    - REQ-GOAGENT-YAML-STEP-RENDER
     - ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT
     - IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT
     - PROC-AGENT_REQ_CHECKLIST
+    - REQ-GOAGENT-LIB-MODULE
+    - REQ-GOAGENT-YAML-STEP-RENDER
+    - REQ-TIED_SETUP
   source_index: requirements.yaml
   detail_file: requirements/REQ-GOAGENT-NON-COMPACT-HTML-FORMAT.yaml
   metadata:
@@ -856,10 +856,10 @@ ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT:
   status: Active
   description: Opt-in non-minified HTML seam after YAML step render; explicit CLI/config; default unchanged.
   cross_references:
-    - REQ-GOAGENT-NON-COMPACT-HTML-FORMAT
-    - ARCH-GOAGENT-YAML-STEPS
     - ARCH-GOAGENT-CLI
     - ARCH-GOAGENT-PIPELINE
+    - ARCH-GOAGENT-YAML-STEPS
+    - REQ-GOAGENT-NON-COMPACT-HTML-FORMAT
   source_index: architecture-decisions.yaml
   detail_file: architecture-decisions/ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT.yaml
   metadata:
@@ -872,9 +872,9 @@ IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT:
   description: APPLY_TO_TURNS after Build+ApplyPromptFilePreload; FORMAT per IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT (REQ/ARCH bound; paths in code_locations).
   cross_references:
     - ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT
-    - REQ-GOAGENT-NON-COMPACT-HTML-FORMAT
     - IMPL-GOAGENT-CLI-CMD
     - IMPL-GOAGENT-PIPELINE
+    - REQ-GOAGENT-NON-COMPACT-HTML-FORMAT
   source_index: implementation-decisions.yaml
   detail_file: implementation-decisions/IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT.yaml
   metadata:
@@ -919,3 +919,17 @@ IMPL-GOAGENT-CHECKLIST-CONTROL:
   metadata:
     registered: "2026-04-24T00:00:00.000Z"
     last_updated: "2026-04-24T00:00:00.000Z"
+PROC-VOCABULARY_INDEX:
+  type: PROC
+  name: Domain vocabulary index discipline
+  status: Active
+  description: 'Consult and maintain domain vocabulary index files at tied/vocab/*.md whenever a concept is named or expressed: reword fuzzy terms to one preferred term, record new concepts immediately, name TIED tokens/storage/logical units from canonical terms, and update the index after tests, code, design, and UI docs; distinct from IMPL pseudo-code grammar vocabulary'
+  cross_references:
+    - PROC-AGENT_REQ_CHECKLIST
+    - PROC-IMPL_PSEUDOCODE_TOKENS
+    - PROC-TOKEN_AUDIT
+  source_index: processes.md
+  detail_file: null
+  metadata:
+    registered: "2026-05-29T00:00:00.000Z"
+    last_updated: "2026-05-29T00:00:00.000Z"

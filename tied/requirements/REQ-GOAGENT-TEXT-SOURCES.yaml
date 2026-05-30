@@ -9,3 +9,5 @@ REQ-GOAGENT-TEXT-SOURCES:
     implementation:
       - IMPL-GOAGENT-TEXT-SOURCES
   detail_file: requirements/REQ-GOAGENT-TEXT-SOURCES.yaml
+  satisfaction_criteria:
+    - criterion: Text source terms are canonical in tied/vocab/agentstream.md; text_sources block in IMPL-GOAGENT-TEXT-SOURCES-pseudocode.md

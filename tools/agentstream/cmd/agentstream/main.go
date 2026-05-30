@@ -1,7 +1,6 @@
 // Command agentstream drives the Cursor agent CLI with multi-turn YAML prompts.
-// REQ: REQ-GOAGENT-CLI-CONFIG, REQ-GOAGENT-PIPELINE, REQ-GOAGENT-EXECUTOR, REQ-GOAGENT-CHECKLIST-CONTROL
-// ARCH: ARCH-GOAGENT-CLI, ARCH-GOAGENT-PIPELINE, ARCH-GOAGENT-CHECKLIST-CONTROL
-// IMPL: IMPL-GOAGENT-CLI-CMD, IMPL-GOAGENT-CHECKLIST-CONTROL
+// [IMPL-GOAGENT-CLI-CMD] [ARCH-GOAGENT-CLI] [REQ-GOAGENT-CLI-CONFIG]
+// How: ParseAndResolve → optional Preview → pipeline.Build → slice/preload → preflight → dry-run or executor loop.
 package main
 
 import (

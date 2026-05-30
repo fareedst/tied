@@ -13,3 +13,5 @@ scripts/__pycache__
 scripts/prepare_readme_demo.sh
 tied/requirements/REQ-FEEDBACK_TO_TIED.yaml
 TODO.md
+tied/docs/.markscope-preview-cache/
+.markscope-preview-cache

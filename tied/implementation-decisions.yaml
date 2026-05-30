@@ -7,22 +7,22 @@ IMPL-TIED_FILES:
   rationale:
     why: Implements ARCH-TIED_STRUCTURE and realizes REQ-TIED_SETUP by creating the foundational TIED directory structure and files
     problems_solved:
-      - Manual setup of TIED structure is error-prone
       - Inconsistent project structure across implementations
+      - Manual setup of TIED structure is error-prone
       - Missing required TIED files and directories
     benefits:
-      - Automated, consistent TIED setup
       - All required files and directories created correctly
+      - Automated, consistent TIED setup
       - Easy project bootstrapping with single command
   implementation_approach:
     summary: Bootstrap script that creates tied/ directory, copies template files, sets up base files, and installs the tied-yaml CLI skill under .cursor/skills/tied-yaml/
     details:
-      - Create tied/ directory at project root
-      - Copy YAML index files from templates (requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml)
-      - Copy guide .md files, detail-files-schema.md, preload contract templates, and reference docs from TIED source tied/docs/ into client tied/docs/ when missing (per DOCS_TO_COPY in copy_files.sh)
-      - Create detail subdirectories (requirements/, architecture-decisions/, implementation-decisions/)
       - Copy base files to project root when missing (.cursorrules, AGENTS.md). In a TIED source repository, live guide content is under tied/docs/; agents and preload use client ./tied/docs/ paths and ./tied/agent-preload-contract.yaml.
-      - Install the tied-yaml Cursor skill to .cursor/skills/tied-yaml/ (from the TIED repo’s .cursor/skills/tied-yaml when complete, else from tools/bundled-tied-yaml-skill/; overwritten each run). The canonical stdio client is .cursor/skills/tied-yaml/scripts/tied-cli.sh only; copy_files.sh does not create a project-root scripts/tied-cli.sh entry.
+      - Copy guide .md files, detail-files-schema.md, preload contract templates, and reference docs from TIED source tied/docs/ into client tied/docs/ when missing (per DOCS_TO_COPY in copy_files.sh)
+      - Copy YAML index files from templates (requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml)
+      - Create detail subdirectories (requirements/, architecture-decisions/, implementation-decisions/)
+      - Create tied/ directory at project root
+      - Install the tied-yaml Cursor skill to .cursor/skills/tied-yaml/ (from tools/bundled-tied-yaml-skill/ in the TIED source repo; .cursor/skills/tied-yaml only if the bundle is missing; overwritten each run). The canonical stdio client on the client is .cursor/skills/tied-yaml/scripts/tied-cli.sh only; copy_files.sh does not create a project-root scripts/tied-cli.sh entry.
   code_locations:
     files:
       - path: copy_files.sh
@@ -38,8 +38,8 @@ IMPL-TIED_FILES:
     tests:
       - Manual verification checklists
     code_annotations:
-      - IMPL-TIED_FILES
       - ARCH-TIED_STRUCTURE
+      - IMPL-TIED_FILES
       - REQ-TIED_SETUP
   related_decisions:
     depends_on: []
@@ -74,8 +74,8 @@ IMPL-MODULE_VALIDATION:
       - Module contracts not validated before integration
     benefits:
       - Bugs caught early in development cycle
-      - Easier debugging by isolating issues to specific modules
       - Clear validation criteria for each module
+      - Easier debugging by isolating issues to specific modules
       - Reduced integration complexity
   implementation_approach:
     summary: 'Five-phase approach: module identification, independent development, independent validation, documentation, and integration'
@@ -142,10 +142,10 @@ IMPL-MCP_FEEDBACK_TOOLS:
   implementation_approach:
     summary: Feedback module (load/append/export) under mcp-server/src/feedback.ts; two tool handlers in tools/index.ts
     details:
-      - 'getFeedbackPath(basePath?): resolve {base}/feedback.yaml'
-      - 'loadFeedback(basePath?): read YAML or return { entries: [] }; create file if missing on first append'
       - 'appendEntry(params): validate type/title/description; generate id (e.g. timestamp-based); set created_at; append to entries; write file'
       - 'exportMarkdown(entries), exportJson(entries): format all entries for report'
+      - 'getFeedbackPath(basePath?): resolve {base}/feedback.yaml'
+      - 'loadFeedback(basePath?): read YAML or return { entries: [] }; create file if missing on first append'
       - 'tied_feedback_add: parse args, call appendEntry, return ok/id/created_at and optional report_snippet (markdown)'
       - 'tied_feedback_export: load entries, call exportMarkdown or exportJson, return string'
   code_locations:
@@ -177,8 +177,8 @@ IMPL-MCP_FEEDBACK_TOOLS:
     tests:
       - feedback.test.ts
     code_annotations:
-      - IMPL-MCP_FEEDBACK_TOOLS
       - ARCH-FEEDBACK_STORAGE
+      - IMPL-MCP_FEEDBACK_TOOLS
       - REQ-FEEDBACK_TO_TIED
   related_decisions:
     depends_on: []
@@ -214,11 +214,11 @@ IMPL-MCP_LEAP_PROPOSAL_QUEUE:
   implementation_approach:
     summary: leap-proposal-queue.ts (queue, audit, diff/session helpers); tools/index.ts tied_leap_proposal_*; safeLeapCall wraps sync throws
     details:
-      - 'Paths: {projectRoot}/leap-proposals/queue.json and audit-log.jsonl'
-      - 'extractDiffProposalCandidates: git diff + lines; failure returns { error } without throw'
-      - MCP handlers use safeLeapCall for fs/git throws
       - 'end-to-end-ui Phase H: no E2E-only UI surface; composition tests (leap-proposal-mcp.test.ts) authoritative for MCP bindings'
+      - 'extractDiffProposalCandidates: git diff + lines; failure returns { error } without throw'
+      - 'Paths: {projectRoot}/leap-proposals/queue.json and audit-log.jsonl'
       - 'verification-gate Phase I: full suite + tsc + validateConsistency(TIED_BASE_PATH=stdd/tied); completion_evidence in CITDP; module validation in s12_phase_i'
+      - MCP handlers use safeLeapCall for fs/git throws
       - sync-tied-stack [PROC-AGENT_REQ_CHECKLIST] TIED sync — REQ/ARCH traceability.tests include leap-proposal-mcp.test.ts; index/detail + semantic-tokens metadata; validateConsistency(stdd/tied) ok; MCP tied_validate_consistency ok (workspace tied/)
   code_locations:
     files:
@@ -246,8 +246,8 @@ IMPL-MCP_LEAP_PROPOSAL_QUEUE:
       - 'leap-proposal-queue.test.ts — LPQ-CORE unit: lifecycle, session parse, LOAD_QUEUE BOM, corrupt JSON/schema mismatch, extractDiff non-repo error path (S09 / sub-leap-micro-cycle)'
       - 'leap-proposal-mcp.test.ts — LPQ-MCP composition: all tied_leap_proposal_* handler bindings (composition-integration)'
     code_annotations:
-      - IMPL-MCP_LEAP_PROPOSAL_QUEUE
       - ARCH-LEAP_PROPOSAL_QUEUE
+      - IMPL-MCP_LEAP_PROPOSAL_QUEUE
       - REQ-LEAP_PROPOSAL_QUEUE
   related_decisions:
     depends_on: []
@@ -517,12 +517,12 @@ IMPL-GOAGENT-CLI-CMD:
       - REQ-GOAGENT-PIPELINE-CHAIN
       - REQ-GOAGENT-YAML-STEP-RENDER
     tests:
+      - manual CLI (cmd/agentstream end-to-end)
       - tools/agentstream/config/config_test.go
-      - tools/agentstream/pipeline/pipeline_test.go
-      - tools/agentstream/text/text_test.go
       - tools/agentstream/featurespec/featurespec_test.go
       - tools/agentstream/featurespec/order_test.go
-      - manual CLI (cmd/agentstream end-to-end)
+      - tools/agentstream/pipeline/pipeline_test.go
+      - tools/agentstream/text/text_test.go
     code_annotations:
       - IMPL-GOAGENT-CLI-CMD
   related_decisions:
@@ -763,10 +763,10 @@ IMPL-GOAGENT-PIPELINE:
       - IMPL-GOAGENT-PIPELINE
   related_decisions:
     depends_on:
-      - IMPL-GOAGENT-TEXT-SOURCES
+      - IMPL-GOAGENT-CHECKLIST
       - IMPL-GOAGENT-FEATURESPEC
       - IMPL-GOAGENT-TDDLOOP
-      - IMPL-GOAGENT-CHECKLIST
+      - IMPL-GOAGENT-TEXT-SOURCES
     supersedes: []
     see_also:
       - IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
@@ -787,8 +787,8 @@ IMPL-GOAGENT-EXECUTOR:
   name: executor AgentArgv and Run stream-json
   status: Active
   cross_references:
-    - ARCH-GOAGENT-EXECUTOR
     - ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON
+    - ARCH-GOAGENT-EXECUTOR
     - REQ-GOAGENT-AGENT-EXECUTOR
   rationale:
     why: Go implementation of NDJSON harness parallel to Ruby run_stream
@@ -879,8 +879,8 @@ IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT:
     supersedes: []
     see_also:
       - IMPL-GOAGENT-CHECKLIST
-      - IMPL-GOAGENT-TDDLOOP
       - IMPL-GOAGENT-FEATURESPEC
+      - IMPL-GOAGENT-TDDLOOP
     composed_with:
       - IMPL-GOAGENT-CLI-CMD
   metadata:
@@ -962,16 +962,16 @@ IMPL-GOAGENT-CHECKLIST-CONTROL:
       - No way for a turn to alter remaining checklist turns
       - Unsafe natural-language control parsing
     benefits:
+      - Focused loop-back from unit-test-green to flag-contradictory-specs
       - Strict parser package
       - Validated goto target handling
-      - Focused loop-back from unit-test-green to flag-contradictory-specs
   implementation_approach:
     summary: Capture assistant text from executor, parse optional agentstream_control JSON, and mutate the live checklist queue only for validated actions.
     details:
-      - executor.Run returns session id, exit code, and captured assistant text while continuing to stream text to stdout.
+      - cmd/agentstream uses a dynamic queue loop for live runs and preserves dry-run static rendering.
       - control.Parse scans for strict fenced JSON containing agentstream_control.
       - control.Validate checks schema_version, action, and target against known checklist slugs.
-      - cmd/agentstream uses a dynamic queue loop for live runs and preserves dry-run static rendering.
+      - executor.Run returns session id, exit code, and captured assistant text while continuing to stream text to stdout.
   code_locations:
     files:
       - path: tools/agentstream/control/control.go
@@ -993,19 +993,19 @@ IMPL-GOAGENT-CHECKLIST-CONTROL:
     requirements:
       - REQ-GOAGENT-CHECKLIST-CONTROL
     tests:
-      - tools/agentstream/control/control_test.go
-      - tools/agentstream/pipeline/pipeline_test.go
       - tools/agentstream/checklist/checklist_test.go
+      - tools/agentstream/control/control_test.go
       - tools/agentstream/executor/executor_test.go
+      - tools/agentstream/pipeline/pipeline_test.go
     code_annotations:
-      - IMPL-GOAGENT-CHECKLIST-CONTROL
       - ARCH-GOAGENT-CHECKLIST-CONTROL
+      - IMPL-GOAGENT-CHECKLIST-CONTROL
       - REQ-GOAGENT-CHECKLIST-CONTROL
   related_decisions:
     depends_on:
-      - IMPL-GOAGENT-PIPELINE
-      - IMPL-GOAGENT-EXECUTOR
       - IMPL-GOAGENT-CHECKLIST
+      - IMPL-GOAGENT-EXECUTOR
+      - IMPL-GOAGENT-PIPELINE
     supersedes: []
     see_also:
       - PROC-AGENT_REQ_CHECKLIST
