@@ -1,11 +1,11 @@
 IMPL-GOAGENT-CLI-CMD:
-  name: config.ParseAndResolve and cmd/agentstream main orchestration
-  status: Active
   cross_references:
     - ARCH-GOAGENT-CLI
     - REQ-GOAGENT-CLI-CONFIG
     - REQ-GOAGENT-PIPELINE-CHAIN
     - REQ-GOAGENT-YAML-STEP-RENDER
   decision: ParseAndResolve includes --first-turn (-f) N (default 1), optional tied-yaml MCP preflight flags (--tied-mcp-preflight opt-in; --skip-tied-mcp-preflight; -y/--yes when preflight runs). Default is no mcp.json preflight. After pipeline.Build, main requires --session-id when N>1, slices turns, reads prompt files, ApplyPromptFilePreload, recomputes ChainBetween, runs runTiedPreflight when not skipped, then dry-run or per-turn executor.Run. Stderr turn labels use original 1-based index and total turn count. scripts/run-feature-batch-agentstream.sh passes -f through to Go agentstream.
-  implementation_notes: 'Dry-run: Ruby and Go advance a placeholder session id between turns so stderr resume labels match for chained turns. --prompt-file bodies are prepended on every new session (SessionForTurn empty), not separate pipeline turns. Verification: scripts/verify-agentstream-dry-run-parity.sh compares prompt bodies and turn counts.'
   detail_file: implementation-decisions/IMPL-GOAGENT-CLI-CMD.yaml
+  implementation_notes: 'Dry-run: Ruby and Go advance a placeholder session id between turns so stderr resume labels match for chained turns. --prompt-file bodies are prepended on every new session (SessionForTurn empty), not separate pipeline turns. Verification: scripts/verify-agentstream-dry-run-parity.sh compares prompt bodies and turn counts.'
+  name: config.ParseAndResolve and cmd/agentstream main orchestration
+  status: Active

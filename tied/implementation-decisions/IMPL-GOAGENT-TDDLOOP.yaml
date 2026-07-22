@@ -1,7 +1,7 @@
 IMPL-GOAGENT-TDDLOOP:
-  name: tddloop YAML step messages
-  status: Active
   cross_references:
     - ARCH-GOAGENT-YAML-STEPS
     - REQ-GOAGENT-YAML-STEP-RENDER
   detail_file: implementation-decisions/IMPL-GOAGENT-TDDLOOP.yaml
+  name: tddloop YAML step messages
+  status: Active

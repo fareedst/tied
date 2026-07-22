@@ -62,6 +62,23 @@ ruby scripts/dedupe_transcript_yaml.rb --keep-backup ~/.cursor/logs/conv_someid.
 
 ## Metrics and summaries
 
+### `analyze_tied_mcp_metrics.rb`
+
+**Purpose:** Stream through TIED MCP usage metrics JSONL (default `~/.cursor/logs/tied-mcp-metrics.jsonl` when **`TIED_MCP_COLLECT_METRICS=1`**), emit one YAML report per file on **stdout** (tool counts, client split, durations, failures, top arg signatures). With **`--aggregate`**, also writes a merged summary YAML to **stderr**.
+
+Enable collection: set **`TIED_MCP_COLLECT_METRICS=1`** in `.cursor/mcp.json` `env` (IDE MCP) and/or export before **`tied-cli.sh`**. See **`mcp-server/README.md`** and **`tied/vocab/tied-yaml-mcp.md`**.
+
+**Flags:**
+
+- `--aggregate` — After per-file YAML on stdout, print merged summary on stderr.
+
+**Examples:**
+
+```bash
+ruby scripts/analyze_tied_mcp_metrics.rb ~/.cursor/logs/tied-mcp-metrics.jsonl
+ruby scripts/analyze_tied_mcp_metrics.rb --aggregate ~/.cursor/logs/tied-mcp-metrics.jsonl 2>/tmp/tied-mcp-summary.yaml
+```
+
 ### `analyze_hook_log.rb`
 
 **Purpose:** Stream through hook logs (transcript stripped per record), emit one YAML report per file on **stdout** (events, tools, failures, redundant reads, session metadata, etc.). With `--aggregate`, also writes a merged summary YAML to **stderr**.
@@ -226,6 +243,7 @@ See generated [`docs/citdp-evidence-hook-log-correlation.md`](citdp-evidence-hoo
 | Script | Typical input |
 | --- | --- |
 | `strip_transcripts.rb`, `dedupe_transcript_yaml.rb` | Hook YAML files (in-place writers) |
+| `analyze_tied_mcp_metrics.rb` | TIED MCP metrics JSONL (`tied-mcp-metrics.jsonl`) |
 | `analyze_hook_log.rb`, `extract_*.rb` (except `extract_queries`) | Hook YAML (`conv_*.yaml`) |
 | `extract_queries.rb` | Full transcript YAML with `<user_query>` tags |
 | `citdp_hook_log_evidence_build.rb` | Repo `tied/citdp/` + optional hook glob on disk |

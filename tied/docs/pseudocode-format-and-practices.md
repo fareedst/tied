@@ -7,7 +7,7 @@ isProject: false
 
 # TIED pseudocode format and practices (cross-project standardization)
 
-**In a TIED project tree:** the detailed how-to and validation order live in [tied/docs/pseudocode-writing-and-validation.md](../tied/docs/pseudocode-writing-and-validation.md) ([PROC-PSEUDOCODE_VALIDATION]). The **language-agnostic** rule for **literal copy of block lead comments** from IMPL into tests and code is in [tied/docs/pseudocode-writing-and-validation.md § Block lead and literal copy](../tied/docs/pseudocode-writing-and-validation.md#block-lead-and-literal-copy-in-tests-and-code). The **canonical copy-paste** Markdown for new sidecar bodies is [templates/impl-essence-pseudocode-template.md](../templates/impl-essence-pseudocode-template.md).
+**In a TIED project tree:** the detailed how-to and validation order live in [pseudocode-writing-and-validation.md](pseudocode-writing-and-validation.md) ([PROC-PSEUDOCODE_VALIDATION]). The **language-agnostic** rule for **literal copy of block lead comments** from IMPL into tests and code is in [pseudocode-writing-and-validation.md § Block lead and literal copy](pseudocode-writing-and-validation.md#block-lead-and-literal-copy-in-tests-and-code). The **canonical copy-paste** Markdown for new sidecar bodies is [templates/impl-essence-pseudocode-template.md](../../templates/impl-essence-pseudocode-template.md).
 
 ---
 
@@ -52,7 +52,7 @@ TIED uses bracket tokens in plain text. **Every block** in `essence_pseudocode` 
   - the test locus for that block, and
   - the managed production (or equivalent) locus for that block,
   using **only** that language’s **comment** delimiters (e.g. `//`, `#`, `/* */`); the **string content** of the lead must match the pseudocode block (no paraphrase).
-- **Not required:** pasting the full procedure body, `INPUT`/`OUTPUT` **lines as code**, or entire H2 sections into every file. Algorithm lives in TIED; executable logic lives in source. See the full spec: [tied/docs/pseudocode-writing-and-validation.md § Block lead and literal copy](../tied/docs/pseudocode-writing-and-validation.md#block-lead-and-literal-copy-in-tests-and-code).
+- **Not required:** pasting the full procedure body, `INPUT`/`OUTPUT` **lines as code**, or entire H2 sections into every file. Algorithm lives in TIED; executable logic lives in source. See the full spec: [pseudocode-writing-and-validation.md § Block lead and literal copy](pseudocode-writing-and-validation.md#block-lead-and-literal-copy-in-tests-and-code).
 
 **Minimal shape (illustrative):** If the first substantive line in the H2 is `- [REQ-X] [ARCH-Y] [IMPL-Z] How: ...`, the same line (after any project-normalized leading marker) appears as a comment at the top of the matching test and the matching implementation unit.
 
@@ -82,7 +82,7 @@ Use these keywords consistently so different IMPLs and tooling stay comparable.
 
 ## 5. Recommended template (copy into `IMPL-{TOKEN}-pseudocode.md`)
 
-The **single** maintained copy of the hand-authored template body is the file **[`templates/impl-essence-pseudocode-template.md`](../templates/impl-essence-pseudocode-template.md)** in a TIED methodology repository. Copy from below the `---` line in that file into `tied/implementation-decisions/IMPL-{TOKEN}-pseudocode.md`, then fill `{…}` placeholders, remove unneeded sections, and keep **one H1** with **H2** for every logical block.
+The **single** maintained copy of the hand-authored template body is the file **[`templates/impl-essence-pseudocode-template.md`](../../templates/impl-essence-pseudocode-template.md)** in a TIED methodology repository. Copy from below the `---` line in that file into `tied/implementation-decisions/IMPL-{TOKEN}-pseudocode.md`, then fill `{…}` placeholders, remove unneeded sections, and keep **one H1** with **H2** for every logical block.
 
 **H2 titling (project chooses one convention and documents it):**
 
@@ -132,7 +132,7 @@ flowchart LR
 | **Hand-authored** | The sidecar is the editable artifact. No script overwrites it, or the script is off by default. |
 | **Machine-owned (full or partial)** | Authoritative change happens in **generator inputs** (e.g. NORM comments in test sources). Re-run the project script. **Do not** hand-edit generated regions. If the repo uses a **marker** (e.g. a line that begins a generated tail), do not hand-edit **below** that line. |
 
-**Optional extra anchors (does not replace literal block leads):** In **Rust** only, a well-formed `/* */` block **above** a function can provide narrative or **mirror** a sidecar H2 for human orientation; `///` remains for public rustdoc, sidecar for full traceability. In **any** language, a file-header pointer to `tied/.../IMPL-{TOKEN}-pseudocode.md` and an H2 or block name is optional. These patterns **do not** replace the mandatory **§3a** rule: the **block lead** text for each block must still appear **verbatim** (in comments) at the implementing test and code sites, per [pseudocode-writing-and-validation.md § Block lead and literal copy](../tied/docs/pseudocode-writing-and-validation.md#block-lead-and-literal-copy-in-tests-and-code).
+**Optional extra anchors (does not replace literal block leads):** In **Rust** only, a well-formed `/* */` block **above** a function can provide narrative or **mirror** a sidecar H2 for human orientation; `///` remains for public rustdoc, sidecar for full traceability. In **any** language, a file-header pointer to `tied/.../IMPL-{TOKEN}-pseudocode.md` and an H2 or block name is optional. These patterns **do not** replace the mandatory **§3a** rule: the **block lead** text for each block must still appear **verbatim** (in comments) at the implementing test and code sites, per [pseudocode-writing-and-validation.md § Block lead and literal copy](pseudocode-writing-and-validation.md#block-lead-and-literal-copy-in-tests-and-code).
 
 ---
 
@@ -162,10 +162,10 @@ flowchart LR
 
 ## 10. Summary one-liner
 
-**Standardize on:** `IMPL-{TOKEN}-pseudocode.md` as canonical `essence_pseudocode`, the **template file** [`templates/impl-essence-pseudocode-template.md`](../templates/impl-essence-pseudocode-template.md) (same content as §5) plus **vocabulary in §4**, **token comments on every block (§3)**, **§3a literal block-lead copy** into tests and code, **Layer A after every change**, **Layer B as scaled**, and a clear **hand vs machine** policy for each generated path.
+**Standardize on:** `IMPL-{TOKEN}-pseudocode.md` as canonical `essence_pseudocode`, the **template file** [`templates/impl-essence-pseudocode-template.md`](../../templates/impl-essence-pseudocode-template.md) (same content as §5) plus **vocabulary in §4**, **token comments on every block (§3)**, **§3a literal block-lead copy** into tests and code, **Layer A after every change**, **Layer B as scaled**, and a clear **hand vs machine** policy for each generated path.
 
 ---
 
 ## 11. Using this plan elsewhere
 
-To adopt in another repository: copy **§1–§10** into that project’s internal standards or `tied/docs`, and copy **[`templates/impl-essence-pseudocode-template.md`](../templates/impl-essence-pseudocode-template.md)** (or vendor the same file under your tree); replace `{TOKEN}` examples with the project’s naming; add any project-specific H2 rule or script names in a **short** local preface. Keep methodology **process token** names if the project follows TIED.
+To adopt in another repository: copy **§1–§10** into that project’s internal standards or `tied/docs`, and copy **[`templates/impl-essence-pseudocode-template.md`](../../templates/impl-essence-pseudocode-template.md)** (or vendor the same file under your tree); replace `{TOKEN}` examples with the project’s naming; add any project-specific H2 rule or script names in a **short** local preface. Keep methodology **process token** names if the project follows TIED.

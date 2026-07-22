@@ -4,7 +4,7 @@
 
 **Traceability:** [PROC-PSEUDOCODE_VALIDATION](../docs/processes.md) · [PROC-CITDP](../docs/processes.md) · [PROC-IMPL_PSEUDOCODE_TOKENS](../docs/processes.md) · [PROC-IMPL_CODE_TEST_SYNC](../docs/processes.md) · [PROC-VOCABULARY_INDEX](../docs/processes.md) · [REQ-TIED_SETUP](../requirements/REQ-TIED_SETUP.yaml)
 
-**See also:** [`domain-references.md`](domain-references.md) · [`tied-methodology.md`](tied-methodology.md) · [`../docs/citdp-policy.md`](../docs/citdp-policy.md) · [`../../docs/pseudocode-format-and-practices.md`](../../docs/pseudocode-format-and-practices.md)
+**See also:** [`domain-references.md`](domain-references.md) · [`tied-methodology.md`](tied-methodology.md) · [`../docs/citdp-policy.md`](../docs/citdp-policy.md) · [`../docs/pseudocode-format-and-practices.md`](../docs/pseudocode-format-and-practices.md)
 
 ---
 

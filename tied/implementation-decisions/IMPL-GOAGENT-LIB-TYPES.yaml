@@ -1,7 +1,7 @@
 IMPL-GOAGENT-LIB-TYPES:
-  name: agentstream Turn and SessionID shared types
-  status: Active
   cross_references:
     - ARCH-GOAGENT-LIB-LAYERING
     - REQ-GOAGENT-LIB-MODULE
   detail_file: implementation-decisions/IMPL-GOAGENT-LIB-TYPES.yaml
+  name: agentstream Turn and SessionID shared types
+  status: Active

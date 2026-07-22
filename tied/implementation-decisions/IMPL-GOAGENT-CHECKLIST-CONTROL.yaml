@@ -1,12 +1,26 @@
 IMPL-GOAGENT-CHECKLIST-CONTROL:
-  name: agentstream checklist control parser and router
-  status: Active
   cross_references:
     - ARCH-GOAGENT-CHECKLIST-CONTROL
     - REQ-GOAGENT-CHECKLIST-CONTROL
+  detail_file: implementation-decisions/IMPL-GOAGENT-CHECKLIST-CONTROL.yaml
+  metadata:
+    last_updated:
+      author: AI Agent
+      date: "2026-04-24T00:00:00.000Z"
+      reason: Implemented parser, queue routing, executor transcript capture, and loop-back marker clearance
+    last_validated:
+      date: "2026-04-24T00:00:00.000Z"
+      result: pass
+      validator: go test ./tools/agentstream/... and tied_validate_consistency
+  name: agentstream checklist control parser and router
+  status: Active
   traceability:
     architecture:
       - ARCH-GOAGENT-CHECKLIST-CONTROL
+    code_annotations:
+      - ARCH-GOAGENT-CHECKLIST-CONTROL
+      - IMPL-GOAGENT-CHECKLIST-CONTROL
+      - REQ-GOAGENT-CHECKLIST-CONTROL
     requirements:
       - REQ-GOAGENT-CHECKLIST-CONTROL
     tests:
@@ -14,17 +28,3 @@ IMPL-GOAGENT-CHECKLIST-CONTROL:
       - tools/agentstream/control/control_test.go
       - tools/agentstream/executor/executor_test.go
       - tools/agentstream/pipeline/pipeline_test.go
-    code_annotations:
-      - ARCH-GOAGENT-CHECKLIST-CONTROL
-      - IMPL-GOAGENT-CHECKLIST-CONTROL
-      - REQ-GOAGENT-CHECKLIST-CONTROL
-  detail_file: implementation-decisions/IMPL-GOAGENT-CHECKLIST-CONTROL.yaml
-  metadata:
-    last_updated:
-      date: "2026-04-24T00:00:00.000Z"
-      author: AI Agent
-      reason: Implemented parser, queue routing, executor transcript capture, and loop-back marker clearance
-    last_validated:
-      date: "2026-04-24T00:00:00.000Z"
-      validator: go test ./tools/agentstream/... and tied_validate_consistency
-      result: pass

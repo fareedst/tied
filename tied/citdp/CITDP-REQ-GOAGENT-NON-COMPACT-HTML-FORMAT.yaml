@@ -1,12 +1,52 @@
 # CITDP change-analysis record — [PROC-CITDP] step 8; [PROC-AGENT_REQ_CHECKLIST] persist-citdp-record
 # change_request_id: REQ-GOAGENT-NON-COMPACT-HTML-FORMAT
 CITDP-REQ-GOAGENT-NON-COMPACT-HTML-FORMAT:
+  change_definition:
+    current_behavior_prior: |
+      Checklist- and TDD-generated turn bodies were not given a first-class, testable "non-compact HTML" mode;
+      log/diff review of long single-line HTML was the primary pain.
+    desired_behavior: |
+      When --non-compact-html (and optional --non-compact-html-indent) is resolved true, a single post-preload
+      pass replaces Part strings with FORMAT_NON_COMPACT_HTML output; when off, bytes are unchanged.
+    non_goals:
+      - Replace the Ruby agent-stream runner; Go-only feature in tools/agentstream
+      - Require authors to hand-edit HTML inside YAML step files
+    references:
+      - tied/architecture-decisions/ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT.yaml
+      - tied/implementation-decisions/IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT-pseudocode.md
+      - tied/implementation-decisions/IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT.yaml
+      - tied/requirements/REQ-GOAGENT-NON-COMPACT-HTML-FORMAT.yaml
+    success_criteria:
+      - REQ satisfaction criteria and ARCH/IMPL tests documented; REQ status Implemented
+      - tools/agentstream tests pass; tied_validate_consistency ok for project tied/
+    summary: |
+      Add an opt-in, explicit CLI/config-controlled pass that reformats each Turn part string to deterministic,
+      multi-line UTF-8 HTML after the pipeline and preload, without changing YAML step identity, turn order,
+      or downstream executor contract.
+    unchanged_behavior: |
+      Default and non-selected code paths: markdown/plain and prior pipeline behavior unchanged. No change to
+      step slugs, ChainFromPrevious, or agent executor invocation order.
+  completion_criteria:
+    verification_gate_notes: |
+      go test in tools/agentstream; gofmt/vet; tied_validate_consistency; REQ/ARCH/IMPL and semantic tokens aligned.
+  impact_analysis:
+    impl_inventory_notes: |
+      tools/agentstream/config/config.go; cmd/agentstream/main.go, compose_noncompact.go, compose_noncompact_test.go; htmlformat/htmlformat.go, htmlformat_test.go.
+    modules_or_boundaries: |
+      config: NonCompactHTML, NonCompactHTMLStableIndent; main: after ApplyPromptFilePreload, applyPostPreloadNonCompactHTML;
+      htmlformat: IntegrateWithMain, ApplyToTurns, FormatNonCompactHTML. Boundaries: string transform on Turn.Parts only; pipeline Build and executor unchanged.
+    tied_tokens_affected: []
+    tied_tokens_new:
+      - ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT
+      - IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT
+      - REQ-GOAGENT-NON-COMPACT-HTML-FORMAT
+  leap_feedback:
+    divergences_from_analysis: none
+    record_status: complete
+    tied_stack_updates_required: []
   record_identity:
     change_request_id: REQ-GOAGENT-NON-COMPACT-HTML-FORMAT
-    title: Non-compact HTML for agentstream checklist and TDD-loop turn bodies (opt-in)
     checklist_process: '[PROC-AGENT_REQ_CHECKLIST]'
-    checklist_version: agent_req_implementation_checklist v1.5.2
-    checklist_step_completed: persist-citdp-record
     checklist_session_note: |
       change-definition: new REQ/ARCH/IMPL, IMPL sidecar pseudo-code (FORMAT, APPLY, INTEGRATE after preload).
       impact-discovery: config flags; tools/agentstream/htmlformat; cmd integration after ApplyPromptFilePreload.
@@ -14,78 +54,38 @@ CITDP-REQ-GOAGENT-NON-COMPACT-HTML-FORMAT:
       TDD: unit tests before green implementation; composition tests for cfg → applyPostPreloadNonCompactHTML.
       verification-gate: go test ./... tools/agentstream; tied_validate_consistency; REQ Implemented.
       sync-tied-stack: detail/index aligned; user-facing-release-notes: README + CHANGELOG [Unreleased] updated.
+    checklist_step_completed: persist-citdp-record
+    checklist_version: agent_req_implementation_checklist v1.5.2
     recorded_at: 2026-04-24
-    workspace_root: /Users/fareed/Documents/dev/chatgpt/stdd
     tied_context:
-      requirements:
-        - REQ-GOAGENT-NON-COMPACT-HTML-FORMAT
       architecture:
         - ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT
       implementation:
         - IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT
-  change_definition:
-    summary: |
-      Add an opt-in, explicit CLI/config-controlled pass that reformats each Turn part string to deterministic,
-      multi-line UTF-8 HTML after the pipeline and preload, without changing YAML step identity, turn order,
-      or downstream executor contract.
-    current_behavior_prior: |
-      Checklist- and TDD-generated turn bodies were not given a first-class, testable "non-compact HTML" mode;
-      log/diff review of long single-line HTML was the primary pain.
-    desired_behavior: |
-      When --non-compact-html (and optional --non-compact-html-indent) is resolved true, a single post-preload
-      pass replaces Part strings with FORMAT_NON_COMPACT_HTML output; when off, bytes are unchanged.
-    unchanged_behavior: |
-      Default and non-selected code paths: markdown/plain and prior pipeline behavior unchanged. No change to
-      step slugs, ChainFromPrevious, or agent executor invocation order.
-    non_goals:
-      - Require authors to hand-edit HTML inside YAML step files
-      - Replace the Ruby agent-stream runner; Go-only feature in tools/agentstream
-    success_criteria:
-      - REQ satisfaction criteria and ARCH/IMPL tests documented; REQ status Implemented
-      - tools/agentstream tests pass; tied_validate_consistency ok for project tied/
-    references:
-      - tied/architecture-decisions/ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT.yaml
-      - tied/implementation-decisions/IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT-pseudocode.md
-      - tied/implementation-decisions/IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT.yaml
-      - tied/requirements/REQ-GOAGENT-NON-COMPACT-HTML-FORMAT.yaml
-  impact_analysis:
-    tied_tokens_affected: []
-    tied_tokens_new:
-      - ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT
-      - IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT
-      - REQ-GOAGENT-NON-COMPACT-HTML-FORMAT
-    modules_or_boundaries: |
-      config: NonCompactHTML, NonCompactHTMLStableIndent; main: after ApplyPromptFilePreload, applyPostPreloadNonCompactHTML;
-      htmlformat: IntegrateWithMain, ApplyToTurns, FormatNonCompactHTML. Boundaries: string transform on Turn.Parts only; pipeline Build and executor unchanged.
-    impl_inventory_notes: |
-      tools/agentstream/config/config.go; cmd/agentstream/main.go, compose_noncompact.go, compose_noncompact_test.go; htmlformat/htmlformat.go, htmlformat_test.go.
+      requirements:
+        - REQ-GOAGENT-NON-COMPACT-HTML-FORMAT
+    title: Non-compact HTML for agentstream checklist and TDD-loop turn bodies (opt-in)
+    workspace_root: /Users/fareed/Documents/dev/chatgpt/stdd
   risk_analysis:
     risks:
       - id: RISK-NC-001
         description: |
           Operators enable non-compact HTML in automation that assumed single-line bodies; diffs or log parsers break.
-        severity: Medium
         likelihood: Low
         mitigation: Default off; document flags; regression tests for disabled path.
+        severity: Medium
       - id: RISK-NC-002
         description: |
           Formatter or indent rules produce non-deterministic or surprising HTML on edge-case UTF-8.
-        severity: Low
         likelihood: Low
         mitigation: Unit tests; CONTRACT in IMPL; stable-indent option bounded.
-  test_strategy:
-    summary: |
-      [REQ-MODULE_VALIDATION]: unit tests for htmlformat; composition tests for cmd wiring; no platform UI E2E (e2e_only false).
-    matrix_notes: |
-      htmlformat_test.go: FORMAT invariants, determinism, disabled no-op. compose_noncompact_test.go: MAP and applyPostPreloadNonCompactHTML.
+        severity: Low
   tdd_sequence:
     summary: |
       unit-test-red: failing tests in htmlformat_test.go (and shims as per checklist). unit-test-green: implement htmlformat, config, cmd.
       composition-integration: compose_noncompact_test. end-to-end-ui: not applicable; Phase H documents composition authority.
-  completion_criteria:
-    verification_gate_notes: |
-      go test in tools/agentstream; gofmt/vet; tied_validate_consistency; REQ/ARCH/IMPL and semantic tokens aligned.
-  leap_feedback:
-    divergences_from_analysis: none
-    tied_stack_updates_required: []
-    record_status: complete
+  test_strategy:
+    matrix_notes: |
+      htmlformat_test.go: FORMAT invariants, determinism, disabled no-op. compose_noncompact_test.go: MAP and applyPostPreloadNonCompactHTML.
+    summary: |
+      [REQ-MODULE_VALIDATION]: unit tests for htmlformat; composition tests for cmd wiring; no platform UI E2E (e2e_only false).

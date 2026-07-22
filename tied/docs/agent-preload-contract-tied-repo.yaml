@@ -15,71 +15,71 @@
 #
 # Copy or subset this file per session and fill values.
 agent_preload:
-  workspace:
-    cwd: /Users/fareed/Documents/dev/chatgpt/stdd # absolute path; must match session workspace_roots[0] when set
-    project_summary: TIED methodology repository (template/root indexes)
-    top_level_entries: [] # optional; omit if likely to go stale
-    vcs_present: true # e.g. true when .git exists
-  session_bootstrap_docs:
-    agents_md_path: ./AGENTS.md # canonical Cursor / agent operating guide
-    ai_principles_path: ./tied/docs/ai-principles.md
-    semantic_tokens_index: ./semantic-tokens.yaml
-    semantic_tokens_guide: ./tied/docs/semantic-tokens.md
-    architecture_decisions_index: ./architecture-decisions.yaml
-    implementation_decisions_index: ./implementation-decisions.yaml
-    implementation_decisions_guide: ./tied/docs/implementation-decisions.md
-    # Live processes in this repository; for new client projects, copy_files.sh copies tied/docs/processes.md from this path.
-    processes_path: ./tied/docs/processes.md
-    agent_req_checklist_path: ./tied/docs/agent-req-implementation-checklist.md
-    pseudocode_validation_guide: ./tied/docs/pseudocode-writing-and-validation.md
-    detail_files_schema: ./tied/docs/detail-files-schema.md
-    requirements_index: ./requirements.yaml
+  active_user_intent:
+    checklist_step_id: "" # e.g. session-bootstrap
+    # Instruction block for prompts (optional; paste near agent_preload in user rules)
+    checklist_token: "" # e.g. PROC-AGENT_REQ_CHECKLIST
+    primary_query_summary: ""
+  discovery_already_done:
+    gemfile_present: false
+    grep_patterns_satisfied:
+      # REQ|ARCH|IMPL across ts/tsx/rb/md/yaml as relevant to this repo
+      repo_layout_scan: false # **/* or equivalent
+      token_scan_in_sources: false
+    ruby_files_present: false # scripts/, tools/, .cursor/
+    ruby_test_files_present: false
+    semantic_tokens_present: false
+    typescript_files_present: false # mcp-server/**/*.ts
+  implementation_contract:
+    citdp_artifact_paths: []
+    invalid_input: "" # e.g. exception, nil, documented behavior
+    language: TypeScript
+    language_version: node>=18; typescript^5.4.0 # see mcp-server/package.json engines / devDependencies
+    target_source_paths:
+      - mcp-server/src
+    test_cohabit_code: false
+    test_framework: node:test # mcp-server npm test
   methodology_vs_project:
     # Client projects: ./tied/methodology/** is read-only [PROC-TIED_METHODOLOGY_READONLY].
     # This repo: templates/** is methodology source (shipped by copy_files.sh); edit here
     # when changing methodology. Root requirements/, architecture-decisions/, implementation-decisions/
     # hold canonical template indexes and detail files.
-    tied_source_repo: true
     methodology_readonly: false # not client tied/methodology; N/A at repo root
     project_tokens_only_writable: true
-  implementation_contract:
-    language: TypeScript
-    language_version: node>=18; typescript^5.4.0 # see mcp-server/package.json engines / devDependencies
-    test_framework: node:test # mcp-server npm test
-    test_cohabit_code: false
-    invalid_input: "" # e.g. exception, nil, documented behavior
-    target_source_paths:
-      - mcp-server/src
-    citdp_artifact_paths: []
+    tied_source_repo: true
+  session_bootstrap_docs:
+    agent_req_checklist_path: ./tied/docs/agent-req-implementation-checklist.md
+    agents_md_path: ./AGENTS.md # canonical Cursor / agent operating guide
+    ai_principles_path: ./tied/docs/ai-principles.md
+    architecture_decisions_index: ./architecture-decisions.yaml
+    detail_files_schema: ./tied/docs/detail-files-schema.md
+    implementation_decisions_guide: ./tied/docs/implementation-decisions.md
+    # Live processes in this repository; for new client projects, copy_files.sh copies tied/docs/processes.md from this path.
+    implementation_decisions_index: ./implementation-decisions.yaml
+    processes_path: ./tied/docs/processes.md
+    pseudocode_validation_guide: ./tied/docs/pseudocode-writing-and-validation.md
+    requirements_index: ./requirements.yaml
+    semantic_tokens_guide: ./tied/docs/semantic-tokens.md
+    semantic_tokens_index: ./semantic-tokens.yaml
   tied_mcp:
     base_path_resolved: false # if true, skip tied_config_get_base_path unless cwd changed
     yaml_detail_batch_done: false # if true, skip yaml_detail_read_many for same keys
   # Paths below: indexes resolve under TIED_BASE_PATH (. = repo root). Match MCP env TIED_BASE_PATH.
   tied_paths:
-    TIED_BASE_PATH: . # template/root layout per mcp-server README; reconfirm via tied_config_get_base_path
+    mcp_tied_yaml_verified_this_session: false # set true after a successful MCP read/write this session
+    methodology_source_glob: templates/**
     project_yaml_writable_globs:
       - '*.yaml' # index + feedback at base: requirements, architecture-decisions, implementation-decisions, semantic-tokens, feedback
       - architecture-decisions/*.yaml
       - implementation-decisions/*.yaml
       - requirements/*.yaml
     # Client preload uses methodology_readonly_glob: methodology/** under tied/. Here methodology ships from templates/.
-    methodology_source_glob: templates/**
-    mcp_tied_yaml_verified_this_session: false # set true after a successful MCP read/write this session
-  discovery_already_done:
-    ruby_files_present: false # scripts/, tools/, .cursor/
-    ruby_test_files_present: false
-    gemfile_present: false
-    typescript_files_present: false # mcp-server/**/*.ts
-    semantic_tokens_present: false
-    grep_patterns_satisfied:
-      # REQ|ARCH|IMPL across ts/tsx/rb/md/yaml as relevant to this repo
-      token_scan_in_sources: false
-      repo_layout_scan: false # **/* or equivalent
-  active_user_intent:
-    primary_query_summary: ""
-    checklist_token: "" # e.g. PROC-AGENT_REQ_CHECKLIST
-    checklist_step_id: "" # e.g. session-bootstrap
-# Instruction block for prompts (optional; paste near agent_preload in user rules)
+    TIED_BASE_PATH: . # template/root layout per mcp-server README; reconfirm via tied_config_get_base_path
+  workspace:
+    cwd: /Users/fareed/Documents/dev/chatgpt/stdd # absolute path; must match session workspace_roots[0] when set
+    project_summary: TIED methodology repository (template/root indexes)
+    top_level_entries: [] # optional; omit if likely to go stale
+    vcs_present: true # e.g. true when .git exists
 preload_instructions: |
   Treat agent_preload as authoritative context. If a value is present, do not spend
   tool calls rediscovering it unless a later tool result or user message contradicts it.

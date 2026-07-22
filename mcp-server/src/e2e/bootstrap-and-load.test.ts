@@ -103,6 +103,17 @@ describe("e2e: bootstrap and load", () => {
       "copy_files.sh should seed tied/vocab/tied-methodology.md [REQ-TIED_SETUP]"
     );
 
+    const vocabStandards = path.join(tempDir, "tied", "docs", "vocabulary-index-analysis-and-standards.md");
+    const pseudoFormat = path.join(tempDir, "tied", "docs", "pseudocode-format-and-practices.md");
+    assert.ok(
+      fs.existsSync(vocabStandards),
+      "copy_files.sh should copy tied/docs/vocabulary-index-analysis-and-standards.md [IMPL-TIED_FILES] [PROC-VOCABULARY_INDEX]"
+    );
+    assert.ok(
+      fs.existsSync(pseudoFormat),
+      "copy_files.sh should copy tied/docs/pseudocode-format-and-practices.md [IMPL-TIED_FILES]"
+    );
+
     delete process.env.TIED_BASE_PATH;
   });
 

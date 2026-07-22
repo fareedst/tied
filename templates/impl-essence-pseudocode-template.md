@@ -12,7 +12,7 @@
 
   **Strong preference:** For non-trivial pseudo-code (multiple blocks, cross-IMPL composition, long or frequently reviewed bodies), keep the on-disk body in a **sidecar** file; avoid large inline `essence_pseudocode` in `IMPL-*.yaml` (quoting, diff, review).
 
-  Guides: [pseudocode writing and validation](../tied/docs/pseudocode-writing-and-validation.md), [pseudocode format and practices](../docs/pseudocode-format-and-practices.md), [block lead literal copy in tests and code](../tied/docs/pseudocode-writing-and-validation.md#block-lead-and-literal-copy-in-tests-and-code).
+  Guides: [pseudocode writing and validation](../tied/docs/pseudocode-writing-and-validation.md), [pseudocode format and practices](../tied/docs/pseudocode-format-and-practices.md), [block lead literal copy in tests and code](../tied/docs/pseudocode-writing-and-validation.md#block-lead-and-literal-copy-in-tests-and-code).
 
   **Block lead (per H2 / logical block):** The first token line(s) in each block (the [PROC-IMPL_PSEUDOCODE_TOKENS] **block lead**) must be **copied literally** (verbatim) into the matching test and production sites—host-language **comment** delimiters only. See the linkage doc.
 -->

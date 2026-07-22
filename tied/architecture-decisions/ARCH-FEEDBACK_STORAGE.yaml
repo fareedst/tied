@@ -1,107 +1,93 @@
 ARCH-FEEDBACK_STORAGE:
-  name: Feedback Storage for TIED Reporting
-  status: Active
-  cross_references:
-    - REQ-FEEDBACK_TO_TIED
-  rationale:
-    why: Store user and project feedback in a single file under the TIED tree so it is versioned with the project and exportable for reporting to the TIED project
-    problems_solved:
-      - No standard location for feedback entries
-      - Feedback not tied to project context (TIED base path)
-    benefits:
-      - Entries have id, type, title, description, optional context, created_at
-      - Same base path resolution as existing MCP tools (getBasePath())
-      - Single file tied/feedback.yaml; no new index type in REQ/ARCH/IMPL sense
   alternatives_considered:
     - name: New YAML index (e.g. feedback.yaml as index)
-      pros:
-        - Consistent with requirements.yaml pattern
       cons:
         - Feedback is not a traceability index; different schema (entries array)
+      pros:
+        - Consistent with requirements.yaml pattern
       rejected_reason: Keep feedback as a separate artifact; schema is list of entries, not token-keyed records
     - name: Store in requirements or implementation index
-      pros:
-        - No new file
       cons:
         - Pollutes REQ/IMPL with non-traceability data
+      pros:
+        - No new file
       rejected_reason: Feedback is not a requirement or implementation decision
+  cross_references:
+    - REQ-FEEDBACK_TO_TIED
+  detail_file: architecture-decisions/ARCH-FEEDBACK_STORAGE.yaml
   implementation_approach:
-    summary: One file {TIED_BASE_PATH}/feedback.yaml with top-level key 'entries' (array of objects)
     details:
       - 'Each entry: id, type (feature_request | bug_report | methodology_improvement), title, description, context (optional), created_at (ISO 8601)'
       - 'MCP tools: tied_feedback_add (append), tied_feedback_export (markdown or JSON)'
       - Use getBasePath() from yaml-loader for path resolution
-  traceability:
-    requirements:
-      - REQ-FEEDBACK_TO_TIED
-    implementation:
-      - IMPL-MCP_FEEDBACK_TOOLS
-    tests:
-      - feedback.test.ts
-    code_annotations:
-      - ARCH-FEEDBACK_STORAGE
-      - IMPL-MCP_FEEDBACK_TOOLS
+    summary: One file {TIED_BASE_PATH}/feedback.yaml with top-level key 'entries' (array of objects)
+  metadata:
+    created:
+      author: AI Agent
+      date: 2026-03-03
+    last_updated:
+      author: AI Agent
+      date: 2026-03-03
+      reason: Initial creation
+    last_validated:
+      date: 2026-03-03
+      result: pass
+      validator: AI Agent
+  name: Feedback Storage for TIED Reporting
+  rationale:
+    benefits:
+      - Entries have id, type, title, description, optional context, created_at
+      - Same base path resolution as existing MCP tools (getBasePath())
+      - Single file tied/feedback.yaml; no new index type in REQ/ARCH/IMPL sense
+    problems_solved:
+      - Feedback not tied to project context (TIED base path)
+      - No standard location for feedback entries
+    why: Store user and project feedback in a single file under the TIED tree so it is versioned with the project and exportable for reporting to the TIED project
   related_decisions:
     depends_on:
       - REQ-FEEDBACK_TO_TIED
     informs:
       - IMPL-MCP_FEEDBACK_TOOLS
     see_also: []
-  detail_file: architecture-decisions/ARCH-FEEDBACK_STORAGE.yaml
-  metadata:
-    created:
-      date: 2026-03-03
-      author: AI Agent
-    last_updated:
-      date: 2026-03-03
-      author: AI Agent
-      reason: Initial creation
-    last_validated:
-      date: 2026-03-03
-      validator: AI Agent
-      result: pass
-ARCH-MODULE_VALIDATION:
-  name: Module Validation Strategy
   status: Active
-  cross_references:
-    - REQ-MODULE_VALIDATION
-  rationale:
-    why: To eliminate bugs related to code complexity by ensuring each module works correctly in isolation
-    problems_solved:
-      - Bugs discovered too late in development cycle
-      - Integration complexity causing difficult-to-debug issues
-      - Module contracts not properly validated
-    benefits:
-      - Bugs caught early before integration
-      - Clear module boundaries and contracts
-      - Easier debugging by isolating issues
-      - Enables parallel module development
-      - Reduced integration complexity
+  traceability:
+    code_annotations:
+      - ARCH-FEEDBACK_STORAGE
+      - IMPL-MCP_FEEDBACK_TOOLS
+    implementation:
+      - IMPL-MCP_FEEDBACK_TOOLS
+    requirements:
+      - REQ-FEEDBACK_TO_TIED
+    tests:
+      - feedback.test.ts
+ARCH-MODULE_VALIDATION:
   alternatives_considered:
     - name: Big Bang Integration
-      pros:
-        - Faster initial integration
       cons:
         - Bugs compound during integration
         - Difficult to isolate issues
         - Too complex to debug
+      pros:
+        - Faster initial integration
       rejected_reason: Makes debugging too difficult and bugs compound
     - name: Minimal Validation
+      cons:
+        - Doesn't validate contracts properly
+        - Insufficient to catch complexity bugs
       pros:
         - Faster development cycle
-      cons:
-        - Insufficient to catch complexity bugs
-        - Doesn't validate contracts properly
       rejected_reason: Insufficient validation leads to integration issues
     - name: Post-Integration Validation Only
-      pros:
-        - All validation done at once
       cons:
         - Doesn't catch module-level bugs early
         - Increases debugging complexity
+      pros:
+        - All validation done at once
       rejected_reason: Bugs discovered too late, making fixes expensive
+  cross_references:
+    - REQ-MODULE_VALIDATION
+  detail_file: architecture-decisions/ARCH-MODULE_VALIDATION.yaml
   implementation_approach:
-    summary: Independent module validation before integration with comprehensive testing strategy
     details:
       - Define module interfaces and contracts explicitly
       - Document validation results before integration
@@ -112,32 +98,46 @@ ARCH-MODULE_VALIDATION:
       - Test edge cases and error handling
       - Unit test modules with mocked dependencies
       - Validate contracts (input/output validation)
-  traceability:
-    requirements:
-      - REQ-MODULE_VALIDATION
-    implementation:
-      - IMPL-MODULE_VALIDATION
-    tests:
-      - testModuleName_IndependentValidation_REQ_MODULE_VALIDATION
-    code_annotations:
-      - IMPL-MODULE_VALIDATION
-      - REQ-MODULE_VALIDATION
+    summary: Independent module validation before integration with comprehensive testing strategy
+  metadata:
+    created:
+      author: AI Agent
+      date: 2025-12-18
+    last_updated:
+      author: AI Agent
+      date: 2026-02-06
+      reason: Restructured to v1.5.0 schema with machine-parseable fields
+    last_validated:
+      date: 2026-02-06
+      result: pass
+      validator: AI Agent
+  name: Module Validation Strategy
+  rationale:
+    benefits:
+      - Bugs caught early before integration
+      - Clear module boundaries and contracts
+      - Easier debugging by isolating issues
+      - Enables parallel module development
+      - Reduced integration complexity
+    problems_solved:
+      - Bugs discovered too late in development cycle
+      - Integration complexity causing difficult-to-debug issues
+      - Module contracts not properly validated
+    why: To eliminate bugs related to code complexity by ensuring each module works correctly in isolation
   related_decisions:
     depends_on:
       - REQ-MODULE_VALIDATION
     informs:
       - IMPL-MODULE_VALIDATION
     see_also: []
-  detail_file: architecture-decisions/ARCH-MODULE_VALIDATION.yaml
-  metadata:
-    created:
-      date: 2025-12-18
-      author: AI Agent
-    last_updated:
-      date: 2026-02-06
-      author: AI Agent
-      reason: Restructured to v1.5.0 schema with machine-parseable fields
-    last_validated:
-      date: 2026-02-06
-      validator: AI Agent
-      result: pass
+  status: Active
+  traceability:
+    code_annotations:
+      - IMPL-MODULE_VALIDATION
+      - REQ-MODULE_VALIDATION
+    implementation:
+      - IMPL-MODULE_VALIDATION
+    requirements:
+      - REQ-MODULE_VALIDATION
+    tests:
+      - testModuleName_IndependentValidation_REQ_MODULE_VALIDATION

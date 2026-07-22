@@ -4,7 +4,7 @@
 
 **Traceability:** [REQ-TIED_SETUP](../requirements/REQ-TIED_SETUP.yaml) · [REQ-MODULE_VALIDATION](../requirements/REQ-MODULE_VALIDATION.yaml) · [ARCH-TIED_STRUCTURE](../architecture-decisions/ARCH-TIED_STRUCTURE.yaml) · [ARCH-MODULE_VALIDATION](../architecture-decisions/ARCH-MODULE_VALIDATION.yaml) · [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) · [IMPL-MODULE_VALIDATION](../implementation-decisions/IMPL-MODULE_VALIDATION.yaml)
 
-**See also:** [`domain-references.md`](domain-references.md) · [`tied-yaml-mcp.md`](tied-yaml-mcp.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) · [`../../docs/vocabulary-index-analysis-and-standards.md`](../../docs/vocabulary-index-analysis-and-standards.md)
+**See also:** [`domain-references.md`](domain-references.md) · [`tied-yaml-mcp.md`](tied-yaml-mcp.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) · [`../docs/vocabulary-index-analysis-and-standards.md`](../docs/vocabulary-index-analysis-and-standards.md)
 
 ---
 
@@ -21,7 +21,10 @@
 | **Observing AI principles!** | (omit) | Mandatory session acknowledgment per [REQ-TIED_SETUP](../requirements/REQ-TIED_SETUP.yaml) |
 | **yaml_tool** | yaml lint script, yq wrapper (alone) | Primary YAML utility: `scripts/yaml_tool.sh`; default lint/pretty-print per [PROC-YAML_EDIT_LOOP](../docs/processes.md) |
 | **lint_yaml** | lint yaml (generic) | Backward-compatible wrapper; delegates to **yaml_tool** |
-| **qualifying list group** | yaml list, bullet group | 3+ consecutive lines with same indent, each starting with `- `; sortable by **yaml_list_sorter** |
+| **qualifying list group** | yaml list, bullet group | 2+ consecutive lines with same indent, each starting with `- `; sortable by **yaml_list_sorter** |
+| **sort map keys** | hash key sort, key normalization | Optional **`--sort-keys`** on **yaml_list_sorter** / **yaml_tool --sort-lists**; alphabetizes sibling map keys at every indent level; **block-scalar** (`\|`, `>`) bodies stay opaque |
+| **yaml_semantic_compare** | YAML equality check, deep YAML diff (alone) | Library: `scripts/yaml_semantic_compare.rb`; compares loaded YAML values (key order ignored; optional unordered arrays); used by **yaml_list_sorter** post-sort validation |
+| **compare_yaml_dirs** | directory YAML diff, recursive yaml compare | CLI: `scripts/compare_yaml_dirs.rb LEFT_DIR RIGHT_DIR`; relative-path pairing; reports missing files and semantic differences |
 
 ---
 
@@ -36,12 +39,15 @@
 | Token registry | semantic tokens | `tied/semantic-tokens.yaml` | index=`semantic-tokens` | [REQ-TIED_SETUP](../requirements/REQ-TIED_SETUP.yaml) |
 | Methodology merge view | merged TIED view | read via MCP resources | `tied://requirements` etc. | [PROC-TIED_METHODOLOGY_READONLY](../docs/processes.md) |
 | Agent operating guide | AGENTS | `AGENTS.md` | — | [REQ-TIED_SETUP](../requirements/REQ-TIED_SETUP.yaml) |
+| Client development index | core six | `tied/docs/client-development-index.md` | minimal CITDP+LEAP+TIED doc set | [PROC-AGENT_REQ_CHECKLIST](../docs/processes.md) |
 | Bootstrap script | copy_files | `copy_files.sh` | `./copy_files.sh /path/to/client` | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
 | Domain vocabulary index | vocab index | `tied/vocab/*.md` | checklist `VOCAB_INDEX` | [PROC-VOCABULARY_INDEX](../docs/processes.md) |
 | Per-request checklist copy | working folder checklist | `<working_folder>/REQ-*_<timestamp>.yaml` | — | [PROC-AGENT_REQ_CHECKLIST](../docs/processes.md) |
-| YAML validate/sort | yaml_tool | `scripts/yaml_tool.sh` | `--sort-lists` → Ruby sorter | [PROC-YAML_EDIT_LOOP](../docs/processes.md) |
+| YAML validate/sort | yaml_tool | `scripts/yaml_tool.sh` | `--sort-lists` → Ruby sorter; optional `--sort-keys` | [PROC-YAML_EDIT_LOOP](../docs/processes.md) |
 | YAML lint wrapper | lint_yaml | `scripts/lint_yaml.sh` | delegates to yaml_tool | [PROC-YAML_EDIT_LOOP](../docs/processes.md) |
-| List group sorter | yaml_list_sorter | `scripts/yaml_list_sorter.rb` | invoked by yaml_tool `--sort-lists` | [PROC-YAML_EDIT_LOOP](../docs/processes.md) |
+| List group sorter | yaml_list_sorter | `scripts/yaml_list_sorter.rb` | `--sort-keys` optional; invoked by yaml_tool `--sort-lists`; post-sort **yaml_semantic_compare** | [PROC-YAML_EDIT_LOOP](../docs/processes.md) |
+| Semantic YAML compare | yaml_semantic_compare | `scripts/yaml_semantic_compare.rb` | library + `YamlSemanticCompare.compare` | [PROC-YAML_EDIT_LOOP](../docs/processes.md) |
+| YAML directory compare | compare_yaml_dirs | `scripts/compare_yaml_dirs.rb` | `LEFT_DIR RIGHT_DIR`; `--unordered-arrays`; `--[no-]missing` | [PROC-YAML_EDIT_LOOP](../docs/processes.md) |
 
 ---
 
@@ -107,8 +113,11 @@ Exact spellings for checklist and docs cross-reference:
 | semantic token | Preferred terms |
 | TIED base path | Naming bridge |
 | tied/vocab | Naming bridge |
+| compare_yaml_dirs | Preferred terms |
 | lint_yaml | Preferred terms |
 | qualifying list group | Preferred terms |
+| sort map keys | Preferred terms |
 | VOCAB_INDEX | Naming bridge |
 | yaml_list_sorter | Naming bridge |
+| yaml_semantic_compare | Preferred terms |
 | yaml_tool | Preferred terms |

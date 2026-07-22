@@ -6,7 +6,7 @@
 
 **Purpose**: Single guide for IMPL **`essence_pseudocode`**: where it lives on disk, how to edit it (editor vs MCP/CLI), **literal linkage** to tests and production code, **three-way alignment** from discovery through TDD to composition/E2E, **LEAP** when logic drifts, and **validation** (Layer A TIED + Layer B application checklist). The machine-readable Layer B definition remains [pseudocode-validation-checklist.yaml](pseudocode-validation-checklist.yaml).
 
-**Related (portable / template):** [docs/pseudocode-format-and-practices.md](../../docs/pseudocode-format-and-practices.md). Canonical sidecar body template: [templates/impl-essence-pseudocode-template.md](../../templates/impl-essence-pseudocode-template.md). RSpec/Bats in IMPL sidecars: [pseudocode-rspec-bats-policy.md](pseudocode-rspec-bats-policy.md).
+**Related (portable / template):** [pseudocode-format-and-practices.md](pseudocode-format-and-practices.md). Canonical sidecar body template: [templates/impl-essence-pseudocode-template.md](../../templates/impl-essence-pseudocode-template.md). RSpec/Bats in IMPL sidecars: [pseudocode-rspec-bats-policy.md](pseudocode-rspec-bats-policy.md).
 
 ---
 
@@ -51,7 +51,7 @@ flowchart LR
     RP[resolve_pseudocode]
     GV[gate_pseudocode_validation]
     UR[unit_test_red_green]
-    VG[verification_gate_post_test]
+    VG[verification_gate]
     CP --> RP --> GV --> UR --> VG
   end
   subgraph fixTrack [TrackB_PostFix_LEAP]
@@ -79,11 +79,11 @@ Executable step-by-step procedure: [agent-req-implementation-checklist.md](agent
 | `catalog-pseudocode-contracts` (Phase B) | Read `essence_pseudocode`; extract INPUT/OUTPUT/DATA, procedures, branches | [Three-way alignment § Phase B](#phase-b--reasoning); [Foundations](#foundations-how-to-write-impl-pseudo-code) |
 | `flag-insufficient-specs` / `flag-contradictory-specs` | Feed `resolve-pseudocode` | Phase B |
 | `resolve-pseudocode` | Edit IMPL sidecar; compatible contracts; every block token-commented | Phase B–C; [Block lead](#block-lead-and-literal-copy-in-tests-and-code) |
-| `gate-pseudocode-validation` | Layer A + sub-pass with profile `agent_req_checklist_pre_red` | [Validation layers](#validation-layers); [pseudocode-validation-checklist.yaml](pseudocode-validation-checklist.yaml) `tailoring.profiles` |
+| `gate-pseudocode-validation` | Layer A + pre-RED structural Layer B pass | [Validation layers](#validation-layers) (Pre-RED vs post-test) |
 | `persist-implementation-records` | IMPL YAML detail + sidecar consistent; `tied_validate_consistency` | [Mechanics](#mechanics-editing-the-sidecar-mcp-and-cli); [detail-files-schema.md](detail-files-schema.md) |
 | `unit-test-red` / `unit-test-green` | Literal block leads (or full blocks per policy) in tests then code | [Block lead](#block-lead-and-literal-copy-in-tests-and-code); Phases D–F |
 | `composition-integration` | IMPL describes bindings; composition tests + code | Phase G |
-| `verification-gate` | `sub-pseudocode-validation-pass` with **`agent_req_checklist_post_test`** closes deferred Layer B rows | [Validation layers](#validation-layers) |
+| `verification-gate` | `sub-pseudocode-validation-pass` — full Layer B including **minimum_gating_rules** | [Validation layers](#validation-layers) (Pre-RED vs post-test) |
 | `traceable-commit` | Suite green; token validation; IMPL metadata | Phase I |
 
 **Mandatory global sequence** (from checklist): token-commented IMPL `essence_pseudocode` → `gate-pseudocode-validation` → `persist-implementation-records` when authoring new IMPL **before** RED tests or production implementation files.
@@ -99,7 +99,7 @@ Use this when a **fix landed in code/tests** (or both) without a prior IMPL upda
 3. **Run Layer A** — `tied_validate_consistency` after sidecar changes; `lint_yaml` on touched IMPL detail YAML per [PROC-YAML_EDIT_LOOP].
 4. **Update tests** — Align assertions and **literal** block lead (or full-block) comments with the revised sidecar.
 5. **Update production code** — Same literal traceability text at implementing loci; product logic matches IMPL.
-6. **Layer B** — Run checklist pass appropriate to phase (`agent_req_checklist_post_test` when executable tests exist).
+6. **Layer B** — Run full checklist pass when executable tests exist (verification-gate context); otherwise structural subset only (see [Validation layers](#validation-layers)).
 7. **Metadata** — Refresh `traceability.tests`, `code_locations`, `metadata.last_updated` on affected IMPL detail records.
 
 This is the same **IMPL → test → code** order as the [LEAP micro-cycle](#leap-micro-cycle-and-post-fix-recovery), applied as **recovery** after an out-of-order fix.
@@ -134,7 +134,7 @@ The merged field is the **primary and authoritative source of implementation log
 
 ### Canonical structure for essence_pseudocode
 
-Hand-authored IMPL bodies usually start from [templates/impl-essence-pseudocode-template.md](../../templates/impl-essence-pseudocode-template.md) (copy the Markdown after the `---` separator into `IMPL-{TOKEN}-pseudocode.md`). For a standalone summary of vocabulary and validation, see [docs/pseudocode-format-and-practices.md](../../docs/pseudocode-format-and-practices.md).
+Hand-authored IMPL bodies usually start from [templates/impl-essence-pseudocode-template.md](../../templates/impl-essence-pseudocode-template.md) (copy the Markdown after the `---` separator into `IMPL-{TOKEN}-pseudocode.md`). For a standalone summary of vocabulary and validation, see [pseudocode-format-and-practices.md](pseudocode-format-and-practices.md).
 
 **markdown_exec project conventions (this repo):** File title uses H1 with bracket tokens in order **IMPL, ARCH, REQ** (stay consistent with [implementation-decisions.md](implementation-decisions.md) top-level naming). Open with `## Summary contract` when the IMPL needs file-level INPUT/OUTPUT/DATA before the first runtime H2. Under `## EMBEDDED_MINITEST: …`, express each block lead as a **list item** (`- [IMPL-…] [ARCH-…] [REQ-…] …`), not a second H1. Prefer **language-agnostic** steps in CONTRACT/CONTROL.
 
@@ -508,14 +508,22 @@ During GREEN (Phase E), if pseudo-code is incomplete or wrong: **stop** coding; 
 
 Validation is **two layers**, complementary: **Layer A (TIED)** = repository/traceability on merged essence; **Layer B (application checklist)** = shape, contracts, coverage, traceability to tests.
 
-**Order:** Run **Layer A** when essence changes, then **Layer B** (or tailored subset). Use **`tailoring.profiles`** in [pseudocode-validation-checklist.yaml](pseudocode-validation-checklist.yaml):
-
-- **`agent_req_checklist_pre_red`** — Before executable tests: defer checklist rows that **require** tests (behavioral_coverage/traceability-to-tests minimums); **still run** `tied_validate_consistency` / TIED-POE-001.
-- **`agent_req_checklist_post_test`** — After tests exist: close deferred rules from pre_red (`verification-gate` invokes **`sub-pseudocode-validation-pass`** with this profile).
+**Order:** Run **Layer A** when essence changes, then **Layer B** (full checklist or structural subset per invocation context below).
 
 **Layer A — `tied_validate_consistency`** — After editing the sidecar or merged essence, with default **`include_pseudocode`**. Validates token comments and cross-references. See [mcp-server README](../mcp-server/README.md).
 
 **Layer B — [pseudocode-validation-checklist.yaml](pseudocode-validation-checklist.yaml)** — Parse, schema, symbol resolution, contracts, dependency graph, behavioral coverage, traceability, optional lint/simulation/generation, reporting. Apply to **`IMPL-{TOKEN}-pseudocode.md`** or merged `yaml_detail_read` text.
+
+### Pre-RED vs post-test
+
+The same checklist file applies in two **invocation contexts** (no YAML profiles). See [agent-req-implementation-checklist.yaml](agent-req-implementation-checklist.yaml) for caller slugs.
+
+| Invocation | When | Layer A | Layer B scope | Gating |
+|------------|------|---------|---------------|--------|
+| `gate-pseudocode-validation` → `sub-pseudocode-validation-pass` | Before RED; no executable tests yet | Required (`TIED-POE-001`) | parsing, schema, symbol_resolution, contract_validation, dependency_graph, reporting | Structural rows must pass; **behavioral_coverage** and **traceability** rows that require test artifacts → mark **N/A** with rationale ("no tests yet"), not ad-hoc waivers |
+| `verification-gate` → `sub-pseudocode-validation-pass` | After unit/composition tests exist | Re-run if essence changed | Full checklist including **minimum_gating_rules** | All required rows + minimum gating rules must pass or be documented N/A with rationale |
+
+A pre-RED pass does **not** replace **[PROC-LEAP]** when pseudo-code changes alter REQ or ARCH scope.
 
 ### Intended use
 
@@ -540,11 +548,11 @@ Matches YAML `recommended_validation_order`: **tied_data** → parsing → schem
 
 ### Minimum gating rules
 
-See YAML **`minimum_gating_rules`**; pre_red profile **defers** some items until tests exist—document deferrals, do not ad-hoc waive.
+See YAML **`minimum_gating_rules`**. Before executable tests exist, the pre-RED gate evaluates structural checks only; coverage and traceability minimums apply at **verification-gate** when tests exist. Document N/A rows with rationale—do not ad-hoc waive.
 
 ### Tailoring
 
-Project-specific block kinds, safety rules, architecture constraints—see YAML **`tailoring`**.
+Project-specific block kinds, safety rules, architecture constraints—see YAML **`tailoring.notes`**.
 
 ### If no parser
 
@@ -557,9 +565,9 @@ Manual walk of checklist categories in order; document pass/fail/waived per item
 ## When to run validation
 
 - **Layer A** — After any change to **`IMPL-*-pseudocode.md`** or merged essence; before commits affecting TIED.
-- **Layer B** — Per phase (pre_red vs post_test profiles).
-- **Agent flow** — After authoring/updating pseudo-code and token comments: Layer A + Layer B subset **before** RED tests where checklist mandates (`gate-pseudocode-validation`).
-- **Post-fix** — Re-run Layer A after IMPL edits; Layer B when closing deferred rows after tests exist.
+- **Layer B** — Pre-RED structural pass at `gate-pseudocode-validation`; full pass at `verification-gate` when tests exist.
+- **Agent flow** — After authoring/updating pseudo-code and token comments: Layer A + pre-RED structural Layer B **before** RED tests (`gate-pseudocode-validation`).
+- **Post-fix** — Re-run Layer A after IMPL edits; full Layer B at verification-gate when tests exist.
 
 ---
 
@@ -587,12 +595,12 @@ Mechanical generation from tests does **not** replace verbatim block-lead rules 
 
 | Document | What it provides |
 |----------|------------------|
-| [pseudocode-validation-checklist.yaml](pseudocode-validation-checklist.yaml) | Layer B checklist; **`tailoring.profiles`** for agent REQ flow |
+| [pseudocode-validation-checklist.yaml](pseudocode-validation-checklist.yaml) | Layer B checklist; pre-RED vs post-test contexts in this guide |
 | [`script/extract_test_pseudocode_to_impl_sidecars.py`](../../script/extract_test_pseudocode_to_impl_sidecars.py) | Optional Rust test → Markdown sidecar |
 | `tied_validate_consistency` (MCP/CLI) | Layer A; default `include_pseudocode` |
 | [detail-files-schema.md](detail-files-schema.md) | IMPL detail fields; sidecar merge |
 | [`templates/impl-essence-pseudocode-template.md`](../../templates/impl-essence-pseudocode-template.md) | Hand-authored sidecar body template |
-| [`docs/pseudocode-format-and-practices.md`](../../docs/pseudocode-format-and-practices.md) | Portable format |
+| [pseudocode-format-and-practices.md](pseudocode-format-and-practices.md) | Portable format |
 | [implementation-decisions.md](implementation-decisions.md) | Mandatory essence, vocabulary, managed code |
 | [agent-req-implementation-checklist.md](agent-req-implementation-checklist.md) | Executable REQ checklist (`[PROC-AGENT_REQ_CHECKLIST]`) |
 | [impl-pseudocode-from-code-agent-prompt.md](impl-pseudocode-from-code-agent-prompt.md) | Track C: retrofit pseudo-code from existing code and tests |

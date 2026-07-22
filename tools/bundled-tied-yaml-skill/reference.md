@@ -195,7 +195,7 @@ Create a new REQ, ARCH, or IMPL token with both index record and detail YAML in 
 
 ### `tied_token_rename`
 
-Rename a token across the entire TIED tree (indexes, details, cross-references).
+Rename a token across the default TIED rename scope (indexes, details, cross-references, detail filename) and optional extra substitution targets under the client project root.
 
 | Param | Type | Required | Description |
 |-------|------|----------|-------------|
@@ -203,6 +203,8 @@ Rename a token across the entire TIED tree (indexes, details, cross-references).
 | `new_token` | string | yes | New token ID (same prefix required) |
 | `dry_run` | boolean | no | Preview changes without writing |
 | `include_markdown` | boolean | no | Also replace in `tied/docs/processes.md` |
+| `extra_globs` | string[] | no | Path globs from client project root (e.g. `./*.md`, `tied/vocab/**/*.md`) |
+| `extra_extensions` | string[] | no | Extensions expanded to `**/*.{ext}` under client project root (e.g. `swift`) |
 
 ---
 

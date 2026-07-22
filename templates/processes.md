@@ -1071,16 +1071,19 @@ Active
 1. Load the application pseudo-code validation checklist from `tied/docs/pseudocode-validation-checklist.yaml` (or `docs/pseudocode-validation-checklist.yaml` at repo root).
 2. Run each validation category in the **recommended_validation_order** (parsing → schema → symbol_resolution → contract_validation → dependency_graph → behavioral_coverage → traceability → linting → semantic_simulation → generation_readiness → reporting).
 3. Record findings with **severity** (error, warning, info) and **source location** (block identifier, line/column when available).
-4. Treat **required** checks as **gating**: do not proceed to writing tests or code until minimum gating rules are satisfied or explicitly waived and documented.
-5. If no parser or tool exists, perform a manual pass over the checklist categories and document results.
+4. Apply **caller context** (see `tied/docs/pseudocode-writing-and-validation.md` § Validation layers — Pre-RED vs post-test):
+   - **gate-pseudocode-validation** (pre-RED): Layer A plus structural Layer B; mark behavioral_coverage and traceability rows that require test artifacts as N/A with rationale before executable tests exist.
+   - **verification-gate** (post-test): full Layer B including **minimum_gating_rules** once executable tests exist.
+5. Treat **required** checks as **gating** for the active context; document N/A rows with rationale—do not ad-hoc waive.
+6. If no parser or tool exists, perform a manual pass over the checklist categories and document results.
 
 ### Artifacts & Metrics
-- **Artifacts**: Validation report (findings by category, severity, location); optional waiver log for any required check that is waived.
-- **Success Metrics**: All required checks pass (or are waived with justification); minimum gating rules satisfied; diagnostics include source locations where available.
+- **Artifacts**: Validation report (findings by category, severity, location); N/A log for pre-RED test-dependent rows; optional waiver log only when policy allows explicit waiver (prefer N/A with rationale pre-RED).
+- **Success Metrics**: Pre-RED structural gate satisfied before persist; full minimum_gating_rules satisfied at verification-gate; diagnostics include source locations where available.
 
 ### Procedure and checklist documents
-- `tied/docs/pseudocode-writing-and-validation.md` — how to write and validate; when to run; minimum gating rules.
-- `tied/docs/pseudocode-validation-checklist.yaml` — canonical checklist (categories, required/optional checks, recommended order, minimum_gating_rules, tailoring).
+- `tied/docs/pseudocode-writing-and-validation.md` — how to write and validate; pre-RED vs post-test contexts; minimum gating rules.
+- `tied/docs/pseudocode-validation-checklist.yaml` — canonical checklist (categories, required/optional checks, recommended order, minimum_gating_rules; tailoring.notes for project extensions).
 
 ---
 

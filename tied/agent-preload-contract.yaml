@@ -1,66 +1,64 @@
 # Agent preload contract — stdd client (tied/ at repo subpath)
-# REQ+ARCH+IMPL: REQ-GOAGENT-NON-COMPACT-HTML-FORMAT, ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT, IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT
-# Reconciled with implementation-decisions/IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT code_locations (persist-implementation-records).
+# Neutral session template: clear active_user_intent / implementation_contract when starting a new REQ.
+# Schema aligned with tied/docs/agent-preload-contract-template.yaml.
 agent_preload:
-  workspace:
-    cwd: /Users/fareed/Documents/dev/chatgpt/stdd
-    project_summary: stdd; Go agentstream; IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT (non-compact HTML after pipeline)
-    top_level_entries: []
-    vcs_present: true
-  session_bootstrap_docs:
-    agents_md_path: ./AGENTS.md
-    ai_principles_path: ./tied/docs/ai-principles.md
-    semantic_tokens_index: ./tied/semantic-tokens.yaml
-    semantic_tokens_guide: ./tied/docs/semantic-tokens.md
-    architecture_decisions_index: ./tied/architecture-decisions.yaml
-    implementation_decisions_index: ./tied/implementation-decisions.yaml
-    implementation_decisions_guide: ./tied/docs/implementation-decisions.md
-    processes_path: ./tied/docs/processes.md
-    agent_req_checklist_path: ./tied/docs/agent-req-implementation-checklist.md
-    detail_files_schema: ./tied/docs/detail-files-schema.md
-    requirements_index: ./tied/requirements.yaml
+  active_user_intent:
+    checklist_step_id: ""
+    checklist_token: ""
+    primary_query_summary: ""
+  discovery_already_done:
+    gemfile_present: false
+    grep_patterns_satisfied:
+      repo_layout_scan: false
+      token_scan_in_sources: false
+    ruby_files_present: false
+    ruby_test_files_present: false
+    semantic_tokens_present: true
+  implementation_contract:
+    citdp_artifact_paths: []
+    invalid_input: ""
+    language: ""
+    language_version: ""
+    target_source_paths: []
+    test_cohabit_code: false
+    test_framework: ""
   methodology_vs_project:
     methodology_readonly: true
     project_tokens_only_writable: true
-  implementation_contract:
-    language: Go
-    language_version: go 1.22+ (see tools/agentstream/go.mod)
-    test_framework: go test
-    test_cohabit_code: true
-    invalid_input: ""
-    # From IMPL code_locations (integration + formatter package; htmlformat/ present in tree)
-    target_source_paths:
-      - tools/agentstream
-      - tools/agentstream/cmd/agentstream
-      - tools/agentstream/htmlformat
-    citdp_artifact_paths: []
+  session_bootstrap_docs:
+    agent_req_checklist_path: ./tied/docs/agent-req-implementation-checklist.md
+    agents_md_path: ./AGENTS.md
+    ai_principles_path: ./tied/docs/ai-principles.md
+    architecture_decisions_index: ./tied/architecture-decisions.yaml
+    detail_files_schema: ./tied/docs/detail-files-schema.md
+    implementation_decisions_guide: ./tied/docs/implementation-decisions.md
+    implementation_decisions_index: ./tied/implementation-decisions.yaml
+    processes_path: ./tied/docs/processes.md
+    requirements_index: ./tied/requirements.yaml
+    semantic_tokens_guide: ./tied/docs/semantic-tokens.md
+    semantic_tokens_index: ./tied/semantic-tokens.yaml
   tied_mcp:
-    base_path_resolved: true
-    yaml_detail_batch_done: false
+    base_path_resolved: false
     tied_cli_stdio_ok_without_cursor_mcp: true
+    yaml_detail_batch_done: false
   tied_paths:
-    TIED_BASE_PATH: tied
+    mcp_tied_yaml_verified_this_session: false
+    methodology_readonly_glob: methodology/**
     project_yaml_writable_globs:
       - '*.yaml'
       - architecture-decisions/*.yaml
       - implementation-decisions/*.yaml
       - requirements/*.yaml
-    methodology_readonly_glob: methodology/**
-    mcp_tied_yaml_verified_this_session: false
-  discovery_already_done:
-    ruby_files_present: false
-    ruby_test_files_present: false
-    gemfile_present: false
-    semantic_tokens_present: true
-    grep_patterns_satisfied:
-      token_scan_in_sources: false
-      repo_layout_scan: false
-  active_user_intent:
-    primary_query_summary: IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT / REQ-GOAGENT-NON-COMPACT-HTML-FORMAT (agentstream non-compact HTML)
-    checklist_token: PROC-AGENT_REQ_CHECKLIST
-    checklist_step_id: user-facing-release-notes
+    TIED_BASE_PATH: tied
+  workspace:
+    cwd: /Users/fareed/Documents/dev/chatgpt/stdd
+    project_summary: TIED methodology repository (stdd); project YAML under tied/
+    top_level_entries: []
+    vcs_present: true
 preload_instructions: |
-  Treat agent_preload as authoritative context. REQ-GOAGENT-NON-COMPACT-HTML-FORMAT Implemented; tests
-  tools/agentstream/htmlformat/htmlformat_test.go, tools/agentstream/cmd/agentstream/compose_noncompact_test.go.
-  IMPL: integration in tools/agentstream/cmd/agentstream/main.go; formatters in tools/agentstream/htmlformat/.
-  Align MCP TIED_BASE_PATH with tied_paths. Do not treat methodology/** as writable.
+  Treat agent_preload as authoritative context. If a value is present, do not spend
+  tool calls rediscovering it unless a later tool result or user message contradicts it.
+  Align MCP TIED_BASE_PATH with tied_paths (this repo: tied/). Do not treat methodology/**
+  as writable. Prefer tied-cli.sh when IDE MCP tools are unavailable and Node + built
+  mcp-server/dist/index.js are present. Clear active_user_intent and implementation_contract
+  when switching to a new REQ/session.

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # [PROC-YAML_EDIT_LOOP] [REQ-TIED_SETUP]
-# How: Default lint pretty-prints each YAML path with yq -i -P (one file per invocation); --sort-lists runs yaml_list_sorter.rb.
+# How: Default lint pretty-prints each YAML path with yq -i -P (one file per invocation); --sort-lists runs yaml_list_sorter.rb; --sort-keys forwards optional map-key sort to the Ruby sorter.
 set -euo pipefail
 
 tool_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
@@ -10,6 +10,8 @@ usage() {
   printf 'usage: %s [options] [(-0|--null) | (-F|--find) [DIR [GLOB]]] [--] [file ...]\n' "${0##*/}" 1>&2
   printf '  Default: validate and pretty-print each YAML file (yq -i -P, one file per invocation).\n' 1>&2
   printf '  --sort-lists  sort qualifying list groups in place (Ruby); same file selection as default.\n' 1>&2
+  printf '               Rejects the sort when semantic comparison fails (file unchanged).\n' 1>&2
+  printf '  --sort-keys   with --sort-lists, also sort sibling map keys at every indent level.\n' 1>&2
   printf '  -F, --find [DIR [GLOB]]  run find internally (default DIR=. GLOB=*.yaml);\n' 1>&2
   printf '     quote GLOB to avoid shell expansion. Mutually exclusive with file args / stdin.\n' 1>&2
   printf '  Unusual find expressions: use find ... -print0 | %s -0 (paths NUL-separated).\n' "${0##*/}" 1>&2
@@ -50,13 +52,24 @@ sort_yaml_list_files() {
     return 2
   fi
 
-  ruby "${tool_dir}/yaml_list_sorter.rb" "$@"
+  local sort_keys_flag=()
+  if [ "$sort_keys" = true ]; then
+    sort_keys_flag=(--sort-keys)
+  fi
+
+  ruby "${tool_dir}/yaml_list_sorter.rb" "${sort_keys_flag[@]}" "$@"
+  local rc=$?
+  if [ "$rc" -ne 0 ]; then
+    printf 'yaml_tool: --sort-lists finished with exit %s (see yaml_list_sorter summary above)\n' "$rc" 1>&2
+  fi
+  return "$rc"
 }
 
 null_delim=false
 find_mode=false
 find_base='.'
 find_name='*.yaml'
+sort_keys=false
 
 while [ "$#" -gt 0 ]; do
   case "$1" in
@@ -66,6 +79,10 @@ while [ "$#" -gt 0 ]; do
         usage
       fi
       operation=sort_lists
+      shift
+      ;;
+    --sort-keys)
+      sort_keys=true
       shift
       ;;
     -0 | --null)
@@ -114,6 +131,11 @@ done
 if [ "$find_mode" = true ] && [ "$#" -gt 0 ]; then
   printf '%s: --find cannot be combined with file path arguments; use a pipe, or use --find with optional DIR and GLOB only\n' \
     "${0##*/}" 1>&2
+  usage
+fi
+
+if [ "$sort_keys" = true ] && [ "$operation" != sort_lists ]; then
+  printf '%s: --sort-keys requires --sort-lists\n' "${0##*/}" 1>&2
   usage
 fi
 

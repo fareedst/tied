@@ -1,7 +1,19 @@
 REQ-GOAGENT-CHECKLIST-CONTROL:
-  name: Dynamic checklist control routing
   category: Tooling
+  detail_file: requirements/REQ-GOAGENT-CHECKLIST-CONTROL.yaml
+  metadata:
+    last_updated:
+      author: AI Agent
+      date: "2026-04-24T00:00:00.000Z"
+      reason: Implemented dynamic checklist control routing in tools/agentstream
+    last_validated:
+      date: "2026-04-24T00:00:00.000Z"
+      result: pass
+      validator: go test ./tools/agentstream/... and tied_validate_consistency
+  name: Dynamic checklist control routing
   priority: P1
+  satisfaction_criteria:
+    - criterion: agentstream_control routing terms are canonical in tied/vocab/agentstream.md; PARSE_CONTROL block in IMPL-GOAGENT-CHECKLIST-CONTROL-pseudocode.md
   status: Implemented
   traceability:
     architecture:
@@ -13,15 +25,3 @@ REQ-GOAGENT-CHECKLIST-CONTROL:
       - tools/agentstream/control/control_test.go
       - tools/agentstream/executor/executor_test.go
       - tools/agentstream/pipeline/pipeline_test.go
-  detail_file: requirements/REQ-GOAGENT-CHECKLIST-CONTROL.yaml
-  metadata:
-    last_updated:
-      date: "2026-04-24T00:00:00.000Z"
-      author: AI Agent
-      reason: Implemented dynamic checklist control routing in tools/agentstream
-    last_validated:
-      date: "2026-04-24T00:00:00.000Z"
-      validator: go test ./tools/agentstream/... and tied_validate_consistency
-      result: pass
-  satisfaction_criteria:
-    - criterion: agentstream_control routing terms are canonical in tied/vocab/agentstream.md; PARSE_CONTROL block in IMPL-GOAGENT-CHECKLIST-CONTROL-pseudocode.md

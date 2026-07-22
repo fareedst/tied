@@ -4,7 +4,7 @@
 
 **Traceability:** [REQ-FEEDBACK_TO_TIED](../requirements/REQ-FEEDBACK_TO_TIED.yaml) · [ARCH-FEEDBACK_STORAGE](../architecture-decisions/ARCH-FEEDBACK_STORAGE.yaml) · [IMPL-MCP_FEEDBACK_TOOLS](../implementation-decisions/IMPL-MCP_FEEDBACK_TOOLS.yaml)
 
-**See also:** [`domain-references.md`](domain-references.md) · [`tied-yaml-mcp.md`](tied-yaml-mcp.md) · [`leap-proposal-queue.md`](leap-proposal-queue.md) · [`../../docs/vocabulary-index-analysis-and-standards.md`](../../docs/vocabulary-index-analysis-and-standards.md)
+**See also:** [`domain-references.md`](domain-references.md) · [`tied-yaml-mcp.md`](tied-yaml-mcp.md) · [`leap-proposal-queue.md`](leap-proposal-queue.md) · [`../docs/vocabulary-index-analysis-and-standards.md`](../docs/vocabulary-index-analysis-and-standards.md)
 
 ---
 

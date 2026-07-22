@@ -45,6 +45,14 @@ export function getBasePath(): string {
 }
 
 /**
+ * Client project root: directory containing the TIED base path (parent of getBasePath()).
+ * Used as the search anchor for tied_token_rename extra_globs / extra_extensions.
+ */
+export function getClientProjectRoot(): string {
+  return path.dirname(getBasePath());
+}
+
+/**
  * Path to methodology directory (tied/methodology/). Null if it does not exist.
  * Methodology is read-only; project data lives at getBasePath() root.
  */

@@ -1,6 +1,7 @@
 /**
- * Unit tests for token rename. [PROC-YAML_DB_OPERATIONS]
- * Verifies dry_run and actual rename across YAML indexes and detail file.
+ * Unit tests for token rename. [PROC-YAML_DB_OPERATIONS] [IMPL-TIED_FILES] [REQ-TIED_SETUP]
+ * - [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] How: tied_token_rename supports extra_globs/extra_extensions anchored at client project root for substitution outside default TIED rename scope.
+ * Verifies dry_run and actual rename across YAML indexes, detail file, and extra substitution targets.
  */
 
 import { describe, it, beforeEach, afterEach } from "node:test";
@@ -8,25 +9,28 @@ import assert from "node:assert";
 import fs from "node:fs";
 import path from "node:path";
 import os from "node:os";
-import { clearBasePathCache } from "./yaml-loader.js";
-import { renameSemanticToken } from "./token-rename.js";
+import { clearBasePathCache, getClientProjectRoot } from "./yaml-loader.js";
+import { renameSemanticToken, collectExtraSubstitutionPaths } from "./token-rename.js";
 
 let tempDir: string;
+let clientRoot: string;
 
 beforeEach(() => {
   clearBasePathCache();
 });
 
 afterEach(() => {
-  if (tempDir && fs.existsSync(tempDir)) {
-    fs.rmSync(tempDir, { recursive: true });
+  if (clientRoot && fs.existsSync(clientRoot)) {
+    fs.rmSync(clientRoot, { recursive: true });
   }
   delete process.env.TIED_BASE_PATH;
   clearBasePathCache();
 });
 
 function setupTiedTree(withRequirementDetail: boolean): string {
-  tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-rename-"));
+  clientRoot = fs.mkdtempSync(path.join(os.tmpdir(), "tied-rename-"));
+  tempDir = path.join(clientRoot, "tied");
+  fs.mkdirSync(tempDir, { recursive: true });
   process.env.TIED_BASE_PATH = tempDir;
 
   const semanticTokens = `
@@ -69,6 +73,29 @@ REQ-TEST_OLD:
   clearBasePathCache();
   return tempDir;
 }
+
+describe("collectExtraSubstitutionPaths", () => {
+  it("resolves globs and extensions from client project root", () => {
+    clientRoot = fs.mkdtempSync(path.join(os.tmpdir(), "tied-extra-"));
+    fs.writeFileSync(path.join(clientRoot, "CHANGELOG.md"), "# REQ-TEST_OLD", "utf8");
+    fs.mkdirSync(path.join(clientRoot, "Sources"), { recursive: true });
+    fs.writeFileSync(path.join(clientRoot, "Sources", "App.swift"), "// REQ-TEST_OLD", "utf8");
+    fs.mkdirSync(path.join(clientRoot, "node_modules", "pkg"), { recursive: true });
+    fs.writeFileSync(path.join(clientRoot, "node_modules", "pkg", "index.swift"), "REQ-TEST_OLD", "utf8");
+
+    const paths = collectExtraSubstitutionPaths(clientRoot, ["./*.md"], ["swift"]);
+    assert.ok(paths.some((p) => p.endsWith("CHANGELOG.md")));
+    assert.ok(paths.some((p) => p.endsWith("Sources/App.swift")));
+    assert.ok(!paths.some((p) => p.includes("node_modules")));
+  });
+});
+
+describe("getClientProjectRoot", () => {
+  it("returns parent of TIED base path", () => {
+    setupTiedTree(false);
+    assert.strictEqual(getClientProjectRoot(), clientRoot);
+  });
+});
 
 describe("renameSemanticToken", () => {
   it("returns error when old_token not in semantic-tokens", () => {
@@ -151,5 +178,54 @@ REQ-TEST_NEW:
     const detailContent = fs.readFileSync(detailNew, "utf8");
     assert.ok(!detailContent.includes("REQ-TEST_OLD"));
     assert.ok(detailContent.includes("REQ-TEST_NEW"));
+  });
+
+  it("dry_run reports extra_globs and extra_extensions targets", () => {
+    setupTiedTree(false);
+    fs.writeFileSync(path.join(clientRoot, "CHANGELOG.md"), "tracks REQ-TEST_OLD", "utf8");
+    fs.mkdirSync(path.join(clientRoot, "Tests"), { recursive: true });
+    fs.writeFileSync(path.join(clientRoot, "Tests", "FooTests.swift"), "// REQ-TEST_OLD", "utf8");
+    fs.mkdirSync(path.join(tempDir, "vocab"), { recursive: true });
+    fs.writeFileSync(path.join(tempDir, "vocab", "topic.md"), "REQ-TEST_OLD", "utf8");
+
+    const result = renameSemanticToken("REQ-TEST_OLD", "REQ-TEST_NEW", {
+      dryRun: true,
+      extraGlobs: ["./*.md", "tied/vocab/**/*.md"],
+      extraExtensions: ["swift"],
+    });
+    assert.strictEqual(result.ok, true);
+    assert.ok(result.files_modified!.some((p) => p.endsWith("CHANGELOG.md")));
+    assert.ok(result.files_modified!.some((p) => p.endsWith("FooTests.swift")));
+    assert.ok(result.files_modified!.some((p) => p.endsWith("topic.md")));
+  });
+
+  it("substitutes in extra targets when not dry_run", () => {
+    setupTiedTree(false);
+    fs.writeFileSync(path.join(clientRoot, "TODO.md"), "REQ-TEST_OLD todo", "utf8");
+
+    const result = renameSemanticToken("REQ-TEST_OLD", "REQ-TEST_NEW", {
+      dryRun: false,
+      extraGlobs: ["./*.md"],
+    });
+    assert.strictEqual(result.ok, true);
+    const todoContent = fs.readFileSync(path.join(clientRoot, "TODO.md"), "utf8");
+    assert.ok(!todoContent.includes("REQ-TEST_OLD"));
+    assert.ok(todoContent.includes("REQ-TEST_NEW"));
+  });
+
+  it("include_markdown still updates processes.md additively", () => {
+    setupTiedTree(false);
+    const docsDir = path.join(tempDir, "docs");
+    fs.mkdirSync(docsDir, { recursive: true });
+    fs.writeFileSync(path.join(docsDir, "processes.md"), "See REQ-TEST_OLD in [PROC-LEAP]", "utf8");
+
+    const result = renameSemanticToken("REQ-TEST_OLD", "REQ-TEST_NEW", {
+      dryRun: false,
+      includeMarkdown: true,
+    });
+    assert.strictEqual(result.ok, true);
+    const procContent = fs.readFileSync(path.join(docsDir, "processes.md"), "utf8");
+    assert.ok(!procContent.includes("REQ-TEST_OLD"));
+    assert.ok(procContent.includes("REQ-TEST_NEW"));
   });
 });

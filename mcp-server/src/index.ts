@@ -8,6 +8,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { allTools } from "./tools/index.js";
 import { registerResources } from "./resources.js";
+import { isMetricsEnabled, wrapToolHandler } from "./usage-metrics.js";
 
 const server = new McpServer(
   {
@@ -23,7 +24,14 @@ const server = new McpServer(
 );
 
 for (const tool of allTools) {
-  server.registerTool(tool.name, tool.config, tool.handler as (args: unknown) => Promise<{ content: Array<{ type: "text"; text: string }> }>);
+  const handler = isMetricsEnabled()
+    ? wrapToolHandler(tool.name, tool.handler as import("./usage-metrics.js").ToolHandler)
+    : tool.handler;
+  server.registerTool(
+    tool.name,
+    tool.config,
+    handler as (args: unknown) => Promise<{ content: Array<{ type: "text"; text: string }> }>
+  );
 }
 
 registerResources(server);

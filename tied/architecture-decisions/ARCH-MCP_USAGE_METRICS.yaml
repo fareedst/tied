@@ -1,0 +1,74 @@
+ARCH-MCP_USAGE_METRICS:
+  alternatives_considered:
+    - name: Cursor hook logs only
+      cons:
+        - Misses tied-cli and headless MCP invocations
+        - Requires separate hooks.json setup per project
+      pros:
+        - Already captures some IDE tool events
+      rejected_reason: Does not cover tied-cli/API path; server-side wrapper covers both surfaces uniformly
+    - name: Store metrics in tied/feedback.yaml
+      cons:
+        - Mixes human feedback with high-volume telemetry
+        - Would version noisy data with project git
+      pros:
+        - Reuses existing feedback module
+      rejected_reason: Separate append-only JSONL under ~/.cursor/logs/ keeps metrics local and out of project YAML
+    - name: Always-on collection
+      cons:
+        - Privacy and I/O overhead without explicit opt-in
+      pros:
+        - Simpler for operators
+      rejected_reason: Default off via TIED_MCP_COLLECT_METRICS matches local-only opt-in requirement
+  cross_references:
+    - REQ-MCP_USAGE_METRICS
+  detail_file: architecture-decisions/ARCH-MCP_USAGE_METRICS.yaml
+  implementation_approach:
+    details:
+      - 'Env gate: TIED_MCP_COLLECT_METRICS=1 or true enables collection; default disabled'
+      - 'Storage: append-only JSONL at TIED_MCP_METRICS_PATH or ~/.cursor/logs/tied-mcp-metrics.jsonl'
+      - Client label from TIED_MCP_METRICS_CLIENT (tied-cli sets tied-cli; IDE default cursor-mcp)
+      - Registration-time wrapToolHandler in mcp-server/src/index.ts — no per-handler edits
+      - sanitizeArgs redacts blob fields; never logs full essence_pseudocode or record bodies
+      - Write failures are non-fatal (DIAGNOSTIC stderr only)
+    summary: Wrapper at MCP tool registration appends sanitized JSONL records when env opt-in is set
+  metadata:
+    created:
+      author: AI Agent
+      date: 2026-06-25
+    last_updated:
+      author: AI Agent
+      date: 2026-06-25
+      reason: Initial creation
+    last_validated:
+      date: 2026-06-25
+      result: pass
+      validator: AI Agent
+  name: MCP usage metrics wrapper and JSONL storage
+  rationale:
+    benefits:
+      - Sanitized records support frequency and intent clustering offline
+      - Single instrumentation point for all tools without touching each handler
+      - Works for Cursor MCP and tied-cli stdio clients
+    problems_solved:
+      - No unified metrics for TIED MCP tool calls
+      - Risk of logging sensitive pseudo-code or large JSON payloads
+    why: Central wrapper at registration time with env-gated JSONL append balances observability and privacy for local MCP/API improvement workflows
+  related_decisions:
+    depends_on:
+      - REQ-MCP_USAGE_METRICS
+    informs:
+      - IMPL-MCP_USAGE_METRICS
+    see_also:
+      - ARCH-FEEDBACK_STORAGE
+  status: Active
+  traceability:
+    code_annotations:
+      - ARCH-MCP_USAGE_METRICS
+      - IMPL-MCP_USAGE_METRICS
+    implementation:
+      - IMPL-MCP_USAGE_METRICS
+    requirements:
+      - REQ-MCP_USAGE_METRICS
+    tests:
+      - usage-metrics.test.ts

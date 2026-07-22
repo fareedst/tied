@@ -1,12 +1,14 @@
 # Domain vocabulary index (canonical)
 
+> **Agent bootstrap:** Do NOT read this file at session start. Read [`domain-references-routing.md`](domain-references-routing.md) instead (~70 lines). Consult this file only for **Cross-topic** notes when working on a cross-cutting concern.
+
 **Scope:** Single-page directory for all domain vocabulary glossaries under `tied/vocab/`. Lists priority, scope, and cross-topic notes. This page is an **index only** — canonical terms live in the linked sibling files. Algorithms and step-by-step behavior stay in `tied/implementation-decisions/*-pseudocode.md`.
 
-**Checklist path:** [`../docs/agent-req-implementation-checklist.yaml`](../docs/agent-req-implementation-checklist.yaml) sets `VOCAB_INDEX: ./tied/vocab`. Agents **CALL** `sub-vocabulary-sync` (RESOLVE before naming/writing; RECORD when concepts are generated or artifacts change) per [`../docs/processes.md`](../docs/processes.md) § `[PROC-VOCABULARY_INDEX]`.
+**Checklist path:** [`../docs/agent-req-implementation-checklist.yaml`](../docs/agent-req-implementation-checklist.yaml) sets `VOCAB_INDEX: ./tied/vocab`. Agents **CALL** `sub-vocabulary-sync` per [`../docs/processes.md`](../docs/processes.md) § `[PROC-VOCABULARY_INDEX]` at **three touchpoints**: **RESOLVE** at prompt intake (`translate-sponsor-intent`, `change-definition`); **PRELOAD** before reading TIED/docs/code (`session-bootstrap`, `impact-discovery`); **VALIDATE** before commit (`traceable-commit`). Inline during work: RESOLVE before naming; RECORD after artifact edits.
 
-**Standards:** [`../../docs/vocabulary-index-analysis-and-standards.md`](../../docs/vocabulary-index-analysis-and-standards.md).
+**Standards:** [`../docs/vocabulary-index-analysis-and-standards.md`](../docs/vocabulary-index-analysis-and-standards.md).
 
-**See also:** [`tied-methodology.md`](tied-methodology.md) · [`tied-yaml-mcp.md`](tied-yaml-mcp.md) · [`feedback-to-tied.md`](feedback-to-tied.md) · [`leap-proposal-queue.md`](leap-proposal-queue.md) · [`agentstream.md`](agentstream.md) · [`agent-stream-ruby.md`](agent-stream-ruby.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) · [`config-discovery.md`](config-discovery.md)
+**See also:** [`../docs/client-development-index.md`](../docs/client-development-index.md) · [`tied-methodology.md`](tied-methodology.md) · [`tied-yaml-mcp.md`](tied-yaml-mcp.md) · [`feedback-to-tied.md`](feedback-to-tied.md) · [`leap-proposal-queue.md`](leap-proposal-queue.md) · [`agentstream.md`](agentstream.md) · [`agent-stream-ruby.md`](agent-stream-ruby.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) · [`config-discovery.md`](config-discovery.md)
 
 ---
 
@@ -30,7 +32,11 @@
 
 | Document | Role |
 |----------|------|
-| [`../../docs/vocabulary-index-analysis-and-standards.md`](../../docs/vocabulary-index-analysis-and-standards.md) | Meta-standard for glossary structure and TIED integration |
+| [`domain-references-routing.md`](domain-references-routing.md) | Lightweight session bootstrap — keyword → glossary routing (PRELOAD) |
+| [`../docs/client-development-index.md`](../docs/client-development-index.md) | Minimal named set for CITDP + LEAP + TIED (Core six) |
+| [`../docs/vocabulary-index-analysis-and-standards.md`](../docs/vocabulary-index-analysis-and-standards.md) | Meta-standard for glossary structure and TIED integration |
+| [`../docs/vocabulary-layer-tied-leap-citdp.md`](../docs/vocabulary-layer-tied-leap-citdp.md) | Outreach: Vocab understanding vs TIED intent vs CITDP vs LEAP |
+| [`../docs/tied-domain-vocabulary-research-prompt.md`](../docs/tied-domain-vocabulary-research-prompt.md) | Copy-paste agent prompt to author vocab corpora in client repos |
 | [`../docs/pseudocode-writing-and-validation.md`](../docs/pseudocode-writing-and-validation.md) | IMPL pseudo-code lifecycle (not domain term registry) |
 | [`../docs/implementation-decisions.md`](../docs/implementation-decisions.md) | IMPL grammar vocabulary (INPUT/OUTPUT/DATA) — distinct from domain vocab |
 
@@ -38,7 +44,7 @@
 
 ## Cross-topic notes
 
-- **STDD / TIED repository layout:** canonical domain glossaries live at `tied/vocab/<topic>.md` (no `-vocabulary` filename suffix). Meta-standard: [`../../docs/vocabulary-index-analysis-and-standards.md`](../../docs/vocabulary-index-analysis-and-standards.md) § STDD convention. Other TIED client repos may use `docs/*-vocabulary.md` per the replication prompt; this repo uses `tied/vocab/`.
+- **STDD / TIED repository layout:** canonical domain glossaries live at `tied/vocab/<topic>.md` (no `-vocabulary` filename suffix). Meta-standard: [`../docs/vocabulary-index-analysis-and-standards.md`](../docs/vocabulary-index-analysis-and-standards.md) § STDD convention. Other TIED client repos may use `docs/*-vocabulary.md` per the replication prompt; this repo uses `tied/vocab/`.
 - **agentstream** (Go product/CLI name) vs **agent-stream** (Ruby directory/package) vs **run-feature-batch** driver scripts — define once in [`agentstream.md`](agentstream.md) and [`agent-stream-ruby.md`](agent-stream-ruby.md); link from both.
 - **Domain vocabulary** (this tree) vs **IMPL grammar vocabulary** (INPUT/OUTPUT/DATA keywords) — define once in [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md).
 - **TIED base path** / **project YAML** vs **methodology YAML** — define once in [`tied-methodology.md`](tied-methodology.md); referenced from [`tied-yaml-mcp.md`](tied-yaml-mcp.md).

@@ -67,7 +67,7 @@ Path parameters on tools that accept file paths are resolved by the Node process
 | `tied_verify` | After tests: set passed REQs to `Implemented` and passed IMPLs to `Active`. Defaults **do not** demote other tokens (`set_unpassed_*_to_planned` default false). Params: `passed_requirement_tokens`, `passed_impl_tokens`, optional booleans, optional **`dry_run`** (returns `would_update` without writing; omits tokens whose status would not change—empty list means a no-op write). |
 | `yaml_detail_delete` | Delete a detail YAML file. Params: `token`, optional `sync_index` (default true to clear detail_file in index). |
 | `tied_token_create_with_detail` | Create a new REQ, ARCH, or IMPL token with both index record and detail YAML in one step. Params: `token`, `index_record` (JSON string), `detail_record` (JSON string), optional `upsert_index` (default false). Sets `detail_file` on the index automatically. Fails if detail file already exists. |
-| `tied_token_rename` | Rename a single semantic token across the TIED tree. Replaces the token in YAML indexes (semantic-tokens, requirements, architecture, implementation), detail files (keys, values, list items), and renames the detail file when present. Params: `old_token`, `new_token` (same prefix required), optional `dry_run` (list would-be changes), `include_markdown` (also replace in tied/docs/processes.md). The implementation validates and pretty-prints modified YAML with `yq -i -P` when yq is available (one invocation per file; never pass multiple paths to a single `yq -i -P` command). Agents editing YAML by hand should use the global `lint_yaml` function per `processes.md` `[PROC-YAML_EDIT_LOOP]`. Returns `ok`, `files_modified`, `file_renamed`, `errors`. |
+| `tied_token_rename` | Rename a single semantic token across the **default TIED rename scope** (project YAML indexes, detail files, pseudo-code sidecars, detail filename renames) and optional **extra substitution targets** under the **client project root** (parent of `TIED_BASE_PATH`). Params: `old_token`, `new_token` (same prefix required), optional `dry_run`, `include_markdown` (also replace in `tied/docs/processes.md`), `extra_globs` (path globs from client project root, e.g. `./*.md`, `tied/vocab/**/*.md`), `extra_extensions` (e.g. `swift` → `**/*.swift`). Skips `.git`, `node_modules`, `build`, `dist`, `vendor`, `DerivedData` for extra targets; skips binary files. Pretty-prints modified YAML with `yq -i -P` when available (one invocation per file). Returns `ok`, `files_modified`, `file_renamed`, optional `files_skipped`, `errors`. |
 | `tied_import_summary` | Import/inspect an existing TIED directory: read YAML indexes and report tokens plus detail file presence (hybrid .md and .yaml). Params: optional `base_path`. Use to validate a reference TIED layout. |
 | `tied_feedback_add` | Add a feedback entry (feature request, bug report, or methodology improvement). Creates or appends to `tied/feedback.yaml`. Params: `type` (feature_request \| bug_report \| methodology_improvement), `title`, `description`, optional `context` (JSON string), `include_report_snippet` (default true), optional `base_path`. Returns `ok`, `id`, `created_at`, and optionally `report_snippet` (markdown for pasting into a TIED issue). |
 | `tied_feedback_export` | Export all feedback entries for reporting to the TIED project. Params: `format` (markdown \| json), optional `base_path`. Returns a string suitable for copy-paste into an issue or report. |
@@ -75,7 +75,7 @@ Path parameters on tools that accept file paths are resolved by the Node process
 
 ### Token rename
 
-Use **`tied_token_rename`** to rename a semantic token everywhere: YAML indexes, detail files (keys, values, list items), and the detail filename. Same prefix is required (e.g. REQ-X → REQ-Y). Use `dry_run: true` to list files that would change; optional `include_markdown` updates `tied/docs/processes.md`. The tool validates and pretty-prints with `yq -i -P` when yq is available (one `yq` process per modified file). For manual YAML edits, use `lint_yaml` per `processes.md` `[PROC-YAML_EDIT_LOOP]`.
+Use **`tied_token_rename`** to rename a semantic token everywhere in the default TIED rename scope: YAML indexes, detail files (keys, values, list items), and the detail filename. Same prefix is required (e.g. REQ-X → REQ-Y). Use `dry_run: true` to list files that would change; optional `include_markdown` updates `tied/docs/processes.md`. Optional **`extra_globs`** and **`extra_extensions`** search from the **client project root** (parent of `TIED_BASE_PATH`) for additional substitution targets—e.g. root `*.md`, `tied/vocab/**/*.md`, or all `.swift` files. The tool validates and pretty-prints with `yq -i -P` when yq is available (one `yq` process per modified YAML file). For manual YAML edits, use `lint_yaml` per `processes.md` `[PROC-YAML_EDIT_LOOP]`.
 
 ### Feedback (report to TIED)
 
@@ -138,3 +138,15 @@ TIED_BASE_PATH=.. node dist/index.js
 ```
 
 The server uses stdio transport; it is intended to be started by an MCP client (e.g. Cursor), not run interactively.
+
+## Usage metrics (opt-in)
+
+Local MCP tool usage metrics are **off by default**. Enable with **`TIED_MCP_COLLECT_METRICS=1`** (or `true`) in the MCP server environment (e.g. `.cursor/mcp.json` `env` for Cursor, or export before **`tied-cli.sh`**).
+
+| Env | Default | Purpose |
+| --- | --- | --- |
+| `TIED_MCP_COLLECT_METRICS` | off | When `1` or `true`, append one JSONL line per `tools/call` |
+| `TIED_MCP_METRICS_PATH` | `~/.cursor/logs/tied-mcp-metrics.jsonl` | Override metrics file path |
+| `TIED_MCP_METRICS_CLIENT` | `cursor-mcp` | Client label in records; **`tied-cli.sh`** sets `tied-cli` when collection is enabled |
+
+Records include tool name, duration, ok/failure snippet, sanitized `args_summary` (large payloads redacted), and `args_signature` for clustering. Analyze offline with **`scripts/analyze_tied_mcp_metrics.rb`** (see [docs/conversation-analysis-tools.md](../docs/conversation-analysis-tools.md)). Traceability: [REQ-MCP_USAGE_METRICS], [ARCH-MCP_USAGE_METRICS], [IMPL-MCP_USAGE_METRICS].

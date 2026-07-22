@@ -17,9 +17,11 @@ This document centralizes every instruction AI coding assistants must follow whi
    - Review `semantic-tokens.yaml` (token registry YAML index) and `tied/docs/semantic-tokens.md` (token guide)
    - Review `architecture-decisions.yaml` and `implementation-decisions.yaml` (YAML indexes)
    - Review `tied/docs/implementation-decisions.md` (implementation guide) for IMPL pseudo-code and block token rules ([PROC-IMPL_PSEUDOCODE_TOKENS])
+   - Read `tied/vocab/domain-references-routing.md` (lightweight routing index, ~70 lines); match task keywords to the routing table; **PRELOAD** only matched glossary file(s) under `tied/vocab/` before reading TIED YAML or source (Touchpoint 2). For cross-cutting concerns, search `tied/vocab/domain-references.md` for the relevant cross-topic note. Read `tied/docs/vocabulary-index-analysis-and-standards.md` for structure and RESOLVE/RECORD/VALIDATE standards ([PROC-VOCABULARY_INDEX]). This is **distinct** from the IMPL grammar "preferred vocabulary" (INPUT/OUTPUT/DATA) in `tied/docs/implementation-decisions.md`.
    - Understand priority order: Tests > Code > Basic Functions > Infrastructure
    - Note: same filename everywhere—at repo root these files are templates; in `tied/` they are the project indexes.
    - **TIED MCP target (mandatory before MCP writes):** Call the TIED MCP tool **`tied_config_get_base_path`** and confirm the effective path is the **`tied/` directory of the repository you intend to change** (not another clone or parent methodology repo). If it is wrong, fix `.cursor/mcp.json` `env.TIED_BASE_PATH` to an **absolute** path to that project’s `tied/`, or re-run `./copy_files.sh /path/to/that/project` from the TIED repository so the script rewrites `tied-yaml` for that target. Prefer **one Cursor window per implementation repo** when editing project TIED YAML via MCP; multi-root workspaces can leave a single `TIED_BASE_PATH` pointing at the wrong folder (see `tied/citdp/CITDP-REQ-LEAP_PROPOSAL_QUEUE.yaml` RISK-010).
+   - **Client development index (minimal CITDP + LEAP + TIED):** Read `tied/docs/client-development-index.md` for the named **Core six** documents and scenario entry points.
    - **TIED YAML update index:** For a single page that links the skill, MCP runbook, checklist steps, detail schema, and payload patterns, read `tied/docs/tied-yaml-agent-index.md`.
    - **tied-yaml skill and `tied-cli.sh`:** In **client** projects (after `copy_files.sh`), the skill lives under **`.cursor/skills/tied-yaml/`** (e.g. **`SKILL.md`**, **`scripts/tied-cli.sh`**). In the **TIED source** repository, the git-tracked canonical copy is **`tools/bundled-tied-yaml-skill/`** (what `copy_files.sh` installs); a local **`.cursor/skills/tied-yaml/`** may exist for dev edits but is gitignored and is not the bootstrap source. **`tied-cli.sh`** invokes the **same** MCP tool surface as the in-editor **tied-yaml** server over stdio, using a built **`mcp-server/dist/index.js`**, with **`TIED_BASE_PATH`** and **`TIED_MCP_BIN`** as documented in the skill. An empty or missing entry in **Settings → MCP** does not block the CLI. If **Node** and a **built server** are unavailable, follow **`tied/docs/using-tied-without-mcp.md`** for the documented **manual** project-YAML workflow—do not substitute ad-hoc direct file edits for tools in the skill when the IDE MCP is merely absent.
    - **Go `agentstream` (`tools/agentstream`):** Static **tied-yaml preflight** on `.cursor/mcp.json` is **off by default**. Enable with **`--tied-mcp-preflight`** or **`AGENTSTREAM_TIED_MCP_PREFLIGHT=1`** when you want validation before live turns; then non-interactive runs without a valid layout may need **`AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1`**, **`agentstream -y`**, or **`--skip-tied-mcp-preflight`**. See `tools/agentstream/README.md`.
@@ -36,6 +38,17 @@ This document centralizes every instruction AI coding assistants must follow whi
 - **IMPL pseudo-code token comments (most critical)** `[PROC-IMPL_PSEUDOCODE_TOKENS]`
   - IMPL `essence_pseudocode` is the **most critical artifact** for implementation traceability. Without token comments in pseudo-code, traceability from REQ→ARCH→IMPL breaks at the pseudo-code layer and tests/code cannot be reliably aligned to requirements.
   - **Every block** in `essence_pseudocode` must have a comment that (1) names all REQ, ARCH, and IMPL reflected in that block and (2) states how that block implements those requirements. Top-level: one comment naming IMPL, ARCH, and REQ plus a one-line summary; sub-blocks with the same set → comment only the "how"; sub-blocks with a different set → comment listing that set and how the sub-block implements it.
+- **Domain vocabulary discipline** `[PROC-VOCABULARY_INDEX]`
+  - **Three mandatory touchpoints** (executor: `sub-vocabulary-sync` in `[PROC-AGENT_REQ_CHECKLIST]`):
+    | Touchpoint | When | Mode |
+    |---|---|---|
+    | Prompt intake | Interpreting sponsor/user requests that name concepts | **RESOLVE** (+ RECORD for new concepts) |
+    | Pre-read | Before reading project docs, TIED YAML, source, or tests | **PRELOAD** |
+    | Pre-commit | Before `git commit` | **VALIDATE** |
+  - **Inline during work:** **RESOLVE** before naming anything (REQ/ARCH/IMPL tokens, UPPER_SNAKE block names, symbols, UI labels, storage paths); **RECORD** when a new concept appears or artifacts change.
+  - Edit vocab files **directly** (plain Markdown, like IMPL pseudo-code sidecars); do **not** route through MCP or `lint_yaml`.
+  - If `tied/vocab/` is absent or empty (immature client), seed when the change introduces enough named concepts; note in session.
+  - Full process: `tied/docs/processes.md` § `[PROC-VOCABULARY_INDEX]`; checklist slugs: `translate-sponsor-intent`, `change-definition` (Touchpoint 1); `session-bootstrap`, `impact-discovery` (Touchpoint 2); `traceable-commit` (Touchpoint 3).
 - **Documentation-First Flow**
   - Expand requirements into pseudo-code and decisions before any code changes.
   - Address all implementation issues (logical and flow) in IMPL pseudo-code before tests or code; IMPL `essence_pseudocode` is the **source of consistent logic** for implementation.
@@ -82,6 +95,7 @@ This document centralizes every instruction AI coding assistants must follow whi
 - [ ] Understand current priorities and dependencies
 - [ ] Review existing semantic tokens, architecture decisions, and implementation decisions related to the work
 - [ ] **IMPL `essence_pseudocode`**: Every block has a comment naming REQ/ARCH/IMPL and how the block implements them ([PROC-IMPL_PSEUDOCODE_TOKENS])
+- [ ] **Domain vocabulary** ([PROC-VOCABULARY_INDEX]): **PRELOAD** — read `tied/vocab/domain-references-routing.md`; match task keywords to routing table; open only matched glossaries; build a term map before reading TIED YAML or source (Touchpoint 2)
 
 ### 3.3 During Work
 - [ ] **Do not edit methodology YAML** in the client (`tied/methodology/`); add and edit REQ/ARCH/IMPL only in **project** YAML under `tied/` ([PROC-TIED_METHODOLOGY_READONLY]).
@@ -94,6 +108,7 @@ This document centralizes every instruction AI coding assistants must follow whi
 - [ ] Keep descriptive debug output (e.g., `DEBUG:`, `TRACE:`, `DIAGNOSTIC:`) to document decision points and execution flow; retain unless explicitly asked to remove
 - [ ] Record new `[ARCH-*]` and `[IMPL-*]` entries immediately with cross-references
 - [ ] **Validate all changed TIED YAML** with `lint_yaml` per [PROC-YAML_EDIT_LOOP]; YAML that does not validate is invalid for use
+- [ ] **Domain vocabulary** ([PROC-VOCABULARY_INDEX]): RESOLVE before naming (Touchpoint 1 when interpreting prompts); RECORD when introducing or renaming concepts in tests, code, design, or UI docs
 - [ ] **Verification-gated mode** ([PROC-TIED_VERIFICATION_GATED]): When the project uses verification-gated mode, do not edit requirement or IMPL `status` by hand; run the verify step (e.g. `tied_verify` with update) after tests so status is derived from test results only.
 
 ### 3.4 After Completing Work
@@ -106,6 +121,7 @@ This document centralizes every instruction AI coding assistants must follow whi
 - [ ] Verify all code and tests are consistently linked to requirements and decisions; update code and documentation where necessary
 - [ ] **Validate all changed TIED YAML** with `lint_yaml` per [PROC-YAML_EDIT_LOOP]; YAML that does not validate is invalid for use
 - [ ] Run **`tied_validate_consistency`** (TIED MCP tool) and fix any reported issues so REQ→ARCH→IMPL indexes, detail files, and token references remain consistent; align with `[PROC-TOKEN_VALIDATION]` and any project `validate_tokens.sh`.
+- [ ] **Domain vocabulary** ([PROC-VOCABULARY_INDEX]): Reconcile `tied/vocab/*.md` with final REQ/ARCH/IMPL, tests, code, and UI docs (RECORD); **VALIDATE** before commit — audit names in docs, tokens, and code vs index (Touchpoint 3; `traceable-commit`)
 - [ ] **Verification-gated mode**: When the project uses verification-gated mode ([PROC-TIED_VERIFICATION_GATED]), run the project's **verify step** after tests (e.g. MCP `tied_verify` with update) so requirement and optionally IMPL status are derived from test results; then run `tied_validate_consistency`.
 - [ ] Do not create a stand-alone summary document for the session (e.g. no SESSION_SUMMARY.md or similar)
 
@@ -141,7 +157,11 @@ Same filename at repo root (template) and in `tied/` (project index); location d
 | `tied/docs/processes.md` | Process tracking including `[PROC-YAML_DB_OPERATIONS]`, LEAP, PROC-TIED_DEV_CYCLE. Use TIED MCP as primary interface to TIED data (see §2 TIED data access). |
 | `tied/docs/agent-req-implementation-checklist.md` | Primary step-by-step checklist for implementing any new REQ or change; unifies CITDP, TIED dev cycle, IMPL_CODE_TEST_SYNC, LEAP, and validation into one executable procedure (`[PROC-AGENT_REQ_CHECKLIST]`). Trackable YAML: `tied/docs/agent-req-implementation-checklist.yaml` (copy to unique per-request file per its header). |
 | `tied/docs/pseudocode-writing-and-validation.md` | Unified IMPL pseudo-code guide: new-REQ vs post-fix tracks, MCP/sidecar mechanics, literal block linkage, phases A–I, LEAP, validation layers (`[PROC-PSEUDOCODE_VALIDATION]`). Checklist: `tied/docs/pseudocode-validation-checklist.yaml`. |
-| `docs/pseudocode-format-and-practices.md` | Standalone format and practices (portable); pairs with the writing doc. **Strong** sidecar preference for non-trivial or growing projects. |
+| `tied/docs/pseudocode-format-and-practices.md` | Standalone format and practices (portable); pairs with the writing doc. **Strong** sidecar preference for non-trivial or growing projects. |
+| `tied/docs/vocabulary-index-analysis-and-standards.md` | Meta-standard for domain glossary structure and TIED integration ([PROC-VOCABULARY_INDEX]) |
+| `tied/vocab/domain-references-routing.md` | Lightweight routing index for session bootstrap — maps task keywords to glossary files (~70 lines) |
+| `tied/vocab/domain-references.md` | Full reference index with cross-topic notes (read on-demand, not at bootstrap) |
+| `tied/vocab/*.md` | Project domain vocabulary (client-owned; RESOLVE/RECORD target) |
 | `templates/impl-essence-pseudocode-template.md` | Canonical copy-paste `essence_pseudocode` (sidecar) body template. |
 | `.cursorrules` | IDE loader that points back to this document |
 | `.ai-agent-instructions` | Quick reminder pointing to this document |
@@ -155,7 +175,7 @@ You can apply these rules in several ways:
 1. **System Prompt Snippet**
    ```
    MANDATORY: Preface every response with "Observing AI principles!"
-   Then follow the AGENTS.md checklists (read tied/docs/ai-principles.md, review semantic tokens, architecture, implementation decisions, maintain semantic traceability, module validation, documentation, and priority order).
+   Then follow the AGENTS.md checklists (read tied/docs/ai-principles.md, review semantic tokens, architecture, implementation decisions, maintain domain vocabulary via [PROC-VOCABULARY_INDEX], maintain semantic traceability, module validation, documentation, and priority order).
    ```
 2. **IDE Integration (`.cursorrules`)** – keep a lightweight loader that links directly to `AGENTS.md` so Cursor automatically enforces the rules.
 3. **README / Onboarding** – reference `AGENTS.md` in project READMEs or onboarding docs to remind contributors where the canonical rules live.
@@ -168,4 +188,4 @@ You can apply these rules in several ways:
 - Mirror changes into `tied/docs/ai-principles.md` and related docs as needed.
 - Nested directories may introduce their own `AGENTS.md` to extend or override these rules within their subtree; the most specific file wins.
 
-**Last Updated**: 2026-03-30
+**Last Updated**: 2026-06-02

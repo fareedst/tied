@@ -10,7 +10,23 @@
 
 **Mandatory order**: IMPL pseudo-code (every block token-commented) → RED tests (with token comments) → code (with token comments). No code before RED; no RED before complete IMPL pseudo-code.
 
-**Domain vocabulary discipline** (`[PROC-VOCABULARY_INDEX]`): at every point where a concept is named or expressed, **CALL sub-vocabulary-sync** against the domain vocabulary index files at `tied/vocab/*.md` (plain Markdown; filenames have **no** `-vocabulary` suffix, e.g. `tied/vocab/<topic>.md`). **RESOLVE** before naming/writing (reword fuzzy input to one preferred term; name TIED tokens, storage items, and logical units from canonical terms; resolve names before tests, code, design, and UI docs); **RECORD** as new concepts are generated and after those artifacts change. This is **distinct** from the IMPL pseudo-code grammar "preferred vocabulary" (INPUT/OUTPUT/DATA keywords). Standards: [`docs/vocabulary-index-analysis-and-standards.md`](../../docs/vocabulary-index-analysis-and-standards.md).
+**Domain vocabulary discipline** (`[PROC-VOCABULARY_INDEX]`): three mandatory **touchpoints** govern when agents use `tied/vocab/*.md` (plain Markdown; filenames have **no** `-vocabulary` suffix). Inline during work: **RESOLVE** before naming/writing; **RECORD** as concepts are generated and after artifacts change. **CALL sub-vocabulary-sync** at each touchpoint and naming point. This is **distinct** from the IMPL pseudo-code grammar "preferred vocabulary" (INPUT/OUTPUT/DATA keywords). Standards: [vocabulary-index-analysis-and-standards.md](vocabulary-index-analysis-and-standards.md).
+
+## Three vocabulary touchpoints
+
+| Touchpoint | When | Mode | Primary steps | Done when |
+|---|---|---|---|---|
+| **1 — Prompt intake** | Sponsor or user text names concepts before formal TIED work | **RESOLVE** (+ RECORD for new concepts) | `translate-sponsor-intent`, `change-definition` | Plan and change definition use canonical terms; new concepts flagged or recorded |
+| **2 — Pre-read** | Before reading TIED indexes, detail files, source, or tests | **PRELOAD** | `session-bootstrap`, `impact-discovery` | Term map loaded from `domain-references-routing.md` and only matched glossaries |
+| **3 — Pre-commit** | Before staging and `git commit` | **VALIDATE** | `traceable-commit` | All changed artifact names resolve to one preferred term; commit blocked on mismatch |
+
+**Touchpoint 1 example:** Sponsor says "config file loader" but the vocab canonicalizes **config discovery** — reword the sponsor plan and change definition before choosing `[REQ-*]` tokens.
+
+**Touchpoint 2 example:** Before grep-reading `code_locations` or IMPL detail in `impact-discovery`, PRELOAD glossaries for the affected subsystem so you interpret existing symbols with canonical names.
+
+**Touchpoint 3 example:** Before commit, VALIDATE that the REQ token suffix, UPPER_SNAKE block name, test `describe` label, and naming-bridge row in `tied/vocab/*.md` all refer to the same preferred term.
+
+`verification-gate` and `sync-tied-stack` **RECORD** reconcile vocab during close-out; the hard **VALIDATE** gate is at `traceable-commit`.
 
 **Step `id` and `slug`**: Each YAML step has a stable **`id`** (used in GOTO, loop-back clearance, and tooling) and a kebab-case **`slug`** (for stable references in docs and code). Titles match the executable YAML (`version` / `last_updated` in that file).
 
@@ -40,12 +56,12 @@
 | verification-gate | verification-gate | Full suite, lint, token validation, audit, metadata (Phase I) |
 | sync-tied-stack | sync-tied-stack | TIED docs match implementation; consistency via tied-cli.sh |
 | user-facing-release-notes | user-facing-release-notes | README and CHANGELOG |
-| persist-citdp-record | persist-citdp-record | CITDP YAML under client docs/citdp |
+| persist-citdp-record | persist-citdp-record | CITDP YAML under client tied/citdp |
 | traceable-commit | traceable-commit | Commit per PROC-COMMIT_MESSAGES; no push unless asked |
 | sub-yaml-edit-loop | sub-yaml-edit-loop | tied-cli.sh mutations, lint_yaml, tied_validate_consistency |
 | sub-pseudocode-validation-pass | sub-pseudocode-validation-pass | Checklist-ordered passes until gating satisfied |
 | sub-leap-micro-cycle | leap-micro-cycle | Fix IMPL first during GREEN; revisit REQ/ARCH if scope shifts |
-| sub-vocabulary-sync | sub-vocabulary-sync | Resolve names against the domain vocabulary index and record new terms |
+| sub-vocabulary-sync | sub-vocabulary-sync | Resolve, preload, record, validate domain vocab |
 
 ---
 
@@ -116,7 +132,8 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 3. Review `tied/semantic-tokens.yaml` (token registry) and `tied/docs/semantic-tokens.md` (token guide).
 4. Review `tied/architecture-decisions.yaml` and `tied/implementation-decisions.yaml` (YAML indexes).
 5. Review `tied/docs/implementation-decisions.md` (IMPL schema, pseudo-code rules, block token rules per `[PROC-IMPL_PSEUDOCODE_TOKENS]`).
-5a. **Domain vocabulary index** (`[PROC-VOCABULARY_INDEX]`): scan `tied/vocab/*.md` (preferred terms; filenames have no `-vocabulary` suffix) and the standards in [`docs/vocabulary-index-analysis-and-standards.md`](../../docs/vocabulary-index-analysis-and-standards.md) so concept names stay consistent this session. If `tied/vocab/` is absent, note it (immature client) and apply the discipline when concepts arise. Distinct from the IMPL grammar "preferred vocabulary" (INPUT/OUTPUT/DATA).
+5a. **Domain vocabulary index** (`[PROC-VOCABULARY_INDEX]`): scan `tied/vocab/*.md` (preferred terms; filenames have no `-vocabulary` suffix) and the standards in [vocabulary-index-analysis-and-standards.md](vocabulary-index-analysis-and-standards.md) so concept names stay consistent this session. If `tied/vocab/` is absent, note it (immature client) and apply the discipline when concepts arise. Distinct from the IMPL grammar "preferred vocabulary" (INPUT/OUTPUT/DATA).
+5b. **Touchpoint 2 (pre-read):** **CALL sub-vocabulary-sync** (**PRELOAD**) — read `tied/vocab/domain-references-routing.md`, match task keywords to the routing table, open only matched glossaries, skim preferred-term and naming-bridge tables; produce a brief term map for this session. For cross-cutting concerns, search `tied/vocab/domain-references.md` on demand.
 6. **Tied-yaml skill (required)**: Read [.cursor/skills/tied-yaml/SKILL.md](../../.cursor/skills/tied-yaml/SKILL.md). For a single page linking the skill, MCP runbook, detail schema, and payload patterns, read [tied-yaml-agent-index.md](tied-yaml-agent-index.md). For **creating, updating, or deleting** project-owned YAML under the TIED base path (indexes, `requirements/` / `architecture-decisions/` / `implementation-decisions/` details, `semantic-tokens.yaml`, `feedback.yaml`, etc.), invoke tools only through `.cursor/skills/tied-yaml/scripts/tied-cli.sh <tool_name> '<args_json>'` (full catalog in [.cursor/skills/tied-yaml/reference.md](../../.cursor/skills/tied-yaml/reference.md)). Set **`TIED_BASE_PATH`** and **`TIED_MCP_CMD` / `TIED_MCP_BIN` / `tied-yaml` on `PATH`** as in the skill **Environment overrides** (Cursor: **`"command": "tied-yaml"`** in **`.cursor/mcp.json`**; shell: `tied-cli.sh` uses the same `tied-yaml` CLI or a built **`dist/index.js`**). `copy_files.sh` copies the skill into `.cursor/skills/tied-yaml/` (from the TIED repo’s `.cursor/skills/tied-yaml` if present, else from `tools/bundled-tied-yaml-skill/` in the TIED source tree). If `SKILL.md` is still missing, re-run `copy_files.sh` from a full TIED checkout, or `cp -R <TIED_repo>/tools/bundled-tied-yaml-skill .cursor/skills/tied-yaml`. Note: the **`tied-yaml` server** is separate from the **`tied-cli.sh` + Node** stdio client; both are required for terminal use—see SKILL.md. Do not use `apply_patch` or `Write` on those paths when a `tied-cli.sh` tool covers the operation (document a one-line exception only when no tool covers the operation), and do not use **`TIED_YAML_BYPASS`** for routine project TIED work when the supported path is to fix the missing skill bundle.
 7. **Mandatory global sequence** (before any RED test or production code): token-commented IMPL `essence_pseudocode` → `gate-pseudocode-validation` → `persist-implementation-records` when authoring new IMPL — then RED tests → GREEN code.
 8. **Within TDD** after pseudo-code is authoritative: failing test before production code. When weighing non-implementation trade-offs: Tests > Basic Functions > Developer Experience > Infrastructure > Security — never start RED or production code before IMPL pseudo-code is complete per the mandatory sequence above.
@@ -124,9 +141,9 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 
 **Outcomes**: Agent has read all governing documents. Session context is established.
 
-**Reference**: `AGENTS.md` § 1-2; `tied/docs/ai-principles.md` § Mandatory Acknowledgment, § Checklist for AI Agents; [`docs/vocabulary-index-analysis-and-standards.md`](../../docs/vocabulary-index-analysis-and-standards.md).
+**Reference**: `AGENTS.md` § 1-2; `tied/docs/ai-principles.md` § Mandatory Acknowledgment, § Checklist for AI Agents; [vocabulary-index-analysis-and-standards.md](vocabulary-index-analysis-and-standards.md).
 
-**CALL**: sub-vocabulary-sync (review the domain vocabulary index).
+**CALL**: sub-vocabulary-sync (**PRELOAD** — review and load the domain vocabulary index).
 
 ---
 
@@ -139,11 +156,11 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 2. Restate that sponsor text does not authorize writing production code, deliverable scripts, automated tests, or TIED YAML except what later steps assign.
 3. Produce a numbered plan mapping sponsor intent onto checklist phases through `traceable-commit` (adjusting for branches in this workspace), including where pseudo-code gates and RED precede GREEN.
 4. Do not create or modify implementation artifacts in this step—output is the translation/plan only. The next step (`change-definition`) refines this into the formal change definition.
-5. **Reword fuzzy sponsor wording that names concepts** (`[PROC-VOCABULARY_INDEX]`): **CALL sub-vocabulary-sync** (RESOLVE) to map synonyms/ambiguous sponsor terms onto the preferred domain terms in `tied/vocab/*.md` before mapping intent to phases; **CALL sub-vocabulary-sync** (RECORD) for any genuinely new concept the sponsor introduces so it is captured immediately.
+5. **Touchpoint 1 (prompt intake):** **Reword fuzzy sponsor wording that names concepts** (`[PROC-VOCABULARY_INDEX]`): **CALL sub-vocabulary-sync** (**RESOLVE**) to map synonyms/ambiguous sponsor terms onto the preferred domain terms in `tied/vocab/*.md` before mapping intent to phases; **CALL sub-vocabulary-sync** (**RECORD**) for any genuinely new concept the sponsor introduces so it is captured immediately.
 
 **Outcomes**: Sponsor wording translated into an explicit checklist-phase plan using canonical domain terms; agent primed to follow slug order rather than imperative goal phrasing alone.
 
-**Reference**: Entry points and flow in this document; `tied/docs/processes.md` § `[PROC-AGENT_REQ_CHECKLIST]`; [`docs/vocabulary-index-analysis-and-standards.md`](../../docs/vocabulary-index-analysis-and-standards.md).
+**Reference**: Entry points and flow in this document; `tied/docs/processes.md` § `[PROC-AGENT_REQ_CHECKLIST]`; [vocabulary-index-analysis-and-standards.md](vocabulary-index-analysis-and-standards.md).
 
 ---
 
@@ -158,13 +175,13 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 4. State **non-goals** (what this work intentionally does not address).
 5. State **success criteria** (measurable outcomes that determine when the work is done).
 6. Deliverable production code and automated tests are **out of scope** for this step; output is the written change definition (current, desired, unchanged, non-goals, success criteria) only.
-7. **Express the change definition using canonical domain terms** (`[PROC-VOCABULARY_INDEX]`): **CALL sub-vocabulary-sync** (RESOLVE) to reword fuzzy/synonym wording in current/desired/success-criteria to the preferred terms in `tied/vocab/*.md`; **CALL sub-vocabulary-sync** (RECORD) for any new concept named here.
+7. **Touchpoint 1 (prompt intake):** **Express the change definition using canonical domain terms** (`[PROC-VOCABULARY_INDEX]`): **CALL sub-vocabulary-sync** (**RESOLVE**) to reword fuzzy/synonym wording in current/desired/success-criteria to the preferred terms in `tied/vocab/*.md`; **CALL sub-vocabulary-sync** (**RECORD**) for any new concept named here.
 
 **Outcomes**: A clear change definition exists, worded with canonical domain terms. For CITDP records, this populates the `change_definition` section.
 
 **Branch**: IF this is a bug fix AND no REQ exists for the expected behavior THEN create the missing REQ at author-requirement first, then return here to define the fix.
 
-**Reference**: `tied/docs/processes.md` § `[PROC-CITDP]` step 1; `tied/docs/ai-principles.md` § Bugs vs requirements; [`docs/vocabulary-index-analysis-and-standards.md`](../../docs/vocabulary-index-analysis-and-standards.md).
+**Reference**: `tied/docs/processes.md` § `[PROC-CITDP]` step 1; `tied/docs/ai-principles.md` § Bugs vs requirements; [vocabulary-index-analysis-and-standards.md](vocabulary-index-analysis-and-standards.md).
 
 ---
 
@@ -173,12 +190,13 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 **Goals**: Identify all affected modules, tokens, code, and tests; build an IMPL inventory table that serves as the working context for the rest of the checklist.
 
 **Tasks**:
-1. Identify affected modules and functions with their tied tokens.
-2. Identify module boundaries the change touches or crosses.
-3. Build `tied_context`:
+1. **Touchpoint 2 (pre-read):** **CALL sub-vocabulary-sync** (**PRELOAD**) scoped to modules and concepts from change-definition — load glossaries under `tied/vocab/` for affected subsystems so subsequent IMPL/code reads interpret symbols and paths with canonical names.
+2. Identify affected modules and functions with their tied tokens.
+3. Identify module boundaries the change touches or crosses.
+4. Build `tied_context`:
    - `tied_tokens_affected` — existing REQ/ARCH/IMPL tokens touched by the change.
    - `tied_tokens_new` — tokens to be created.
-4. **IMPL Discovery** (`[PROC-IMPL_CODE_TEST_SYNC]` Phase A):
+5. **IMPL Discovery** (`[PROC-IMPL_CODE_TEST_SYNC]` Phase A):
    - **A1.** Load each affected IMPL detail file. Record `cross_references`, `related_decisions` (`depends_on`, `composed_with`, `see_also`), and `traceability` fields.
    - **A2.** Discover related IMPLs via four paths:
      - (a) Follow `composed_with` and `depends_on` links in `related_decisions`.
@@ -193,13 +211,15 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 
      Code files and Test files list **existing** artifacts for discovery only — not permission to create new files. Do not add or modify production source or automated tests in this step; new or changed implementation artifacts begin at `unit-test-red` (tests) and `unit-test-green` (production code) after pseudo-code is validated and persisted.
 
-5. **Stop expanding** when no new IMPLs share code paths, REQ/ARCH tokens, or `composed_with` links with the current set.
+6. **Stop expanding** when no new IMPLs share code paths, REQ/ARCH tokens, or `composed_with` links with the current set.
 
-**Outcomes**: Complete impact map; IMPL inventory table ready; all affected and related tokens identified.
+**Outcomes**: Complete impact map; vocabulary term map loaded (PRELOAD) for affected subsystems; IMPL inventory table ready; all affected and related tokens identified.
 
 **Branch**: IF the IMPL set is large (signal of high coupling) THEN consider whether IMPLs need decomposition before proceeding.
 
-**Reference**: `tied/docs/processes.md` § `[PROC-CITDP]` step 2; `tied/docs/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phase A (A1-A3); `tied/docs/pseudocode-writing-and-validation.md` § Phase A — Discovery (`#phase-a--discovery`).
+**Reference**: `tied/docs/processes.md` § `[PROC-CITDP]` step 2; `tied/docs/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phase A (A1-A3); `tied/docs/pseudocode-writing-and-validation.md` § Phase A — Discovery (`#phase-a--discovery`); [vocabulary-index-analysis-and-standards.md](vocabulary-index-analysis-and-standards.md).
+
+**CALL**: sub-vocabulary-sync (**PRELOAD**).
 
 ---
 
@@ -216,7 +236,7 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 
 **Outcomes**: REQ record exists in both the index and the detail file; token name reflects the canonical domain term and is recorded in the vocabulary naming bridge; token is registered in `semantic-tokens.yaml`; all YAML validated.
 
-**Reference**: `tied/docs/processes.md` § `[PROC-YAML_DB_OPERATIONS]` § Appending a New Record; `tied/docs/detail-files-schema.md` § 1; `tied/docs/semantic-tokens.md` § Token Creation Requirements; [`docs/vocabulary-index-analysis-and-standards.md`](../../docs/vocabulary-index-analysis-and-standards.md).
+**Reference**: `tied/docs/processes.md` § `[PROC-YAML_DB_OPERATIONS]` § Appending a New Record; `tied/docs/detail-files-schema.md` § 1; `tied/docs/semantic-tokens.md` § Token Creation Requirements; [vocabulary-index-analysis-and-standards.md](vocabulary-index-analysis-and-standards.md).
 
 ---
 
@@ -235,7 +255,7 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 
 **Outcomes**: ARCH records exist with REQ cross-references; design prose and ARCH/storage names resolved from canonical vocabulary and new design terms recorded; tokens registered; YAML validated; `tied/agent-preload-contract.yaml` created or updated when meaningful ARCH constants were introduced (or the step output records an explicit skip).
 
-**Reference**: `tied/docs/processes.md` § `[PROC-YAML_DB_OPERATIONS]`; `tied/docs/detail-files-schema.md` § 2; `tied/docs/ai-principles.md` § Phase 1; `tied/docs/agent-preload-contract-template.yaml` (TIED source); [`docs/vocabulary-index-analysis-and-standards.md`](../../docs/vocabulary-index-analysis-and-standards.md).
+**Reference**: `tied/docs/processes.md` § `[PROC-YAML_DB_OPERATIONS]`; `tied/docs/detail-files-schema.md` § 2; `tied/docs/ai-principles.md` § Phase 1; `tied/docs/agent-preload-contract-template.yaml` (TIED source); [vocabulary-index-analysis-and-standards.md](vocabulary-index-analysis-and-standards.md).
 
 ---
 
@@ -296,7 +316,7 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 
 ### gate-pseudocode-validation (gate-pseudocode-validation): sub-pseudocode-validation-pass and gating before persist
 
-**CALL sub-pseudocode-validation-pass.** Run pseudo-code validation per `[PROC-PSEUDOCODE_VALIDATION]` using `tied/docs/pseudocode-validation-checklist.yaml` (or `docs/pseudocode-validation-checklist.yaml` at repo root). Run validation passes in the recommended order; record findings with severity and source location. Treat required checks as gating: do not proceed to persist-implementation-records until minimum gating rules are satisfied (or explicitly waived and documented). If the project has no parser or tool yet, perform a **manual pass** over the checklist categories (parsing → schema → symbol resolution → contract → dependency graph → coverage → traceability → reporting) and document results.
+**CALL sub-pseudocode-validation-pass.** Run pseudo-code validation per `[PROC-PSEUDOCODE_VALIDATION]` using `tied/docs/pseudocode-validation-checklist.yaml` (or `docs/pseudocode-validation-checklist.yaml` at repo root). **Pre-RED context** (before executable tests): Layer A (`tied_validate_consistency`) plus structural Layer B (parsing, schema, symbol resolution, contract validation, dependency graph, reporting). Mark **behavioral_coverage** and **traceability** rows that require test artifacts as **N/A** with rationale ("no tests yet")—not ad-hoc waivers. Run validation passes in the recommended order; record findings with severity and source location. Do not proceed to persist-implementation-records until pre-RED structural gating is satisfied. If the project has no parser or tool yet, perform a **manual pass** over the applicable checklist categories and document results.
 
 ### persist-implementation-records (persist-implementation-records): IMPL index/detail via tied-cli.sh; sub-yaml-edit-loop
 
@@ -309,7 +329,7 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 
 **Outcomes**: All IMPL pseudo-code is complete, authoritative, and token-commented. Procedure/block names, IMPL token names, and storage names are drawn from and recorded in the canonical vocabulary. No contradictions or gaps remain. All YAML validated. `tied/agent-preload-contract.yaml` matches IMPL-locked paths and constants (or is explicitly left unchanged with reason).
 
-**Reference**: `tied/docs/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phases B-C; `tied/docs/implementation-decisions.md` § Mandatory essence_pseudocode, § Preferred vocabulary, § Expressing sequence and structure; `tied/docs/pseudocode-writing-and-validation.md` (Phases B–C and three-way alignment); `tied/docs/pseudocode-validation-checklist.yaml` for pseudo-code validation; `tied/docs/agent-preload-contract-template.yaml`; [`docs/vocabulary-index-analysis-and-standards.md`](../../docs/vocabulary-index-analysis-and-standards.md) (`[PROC-VOCABULARY_INDEX]`).
+**Reference**: `tied/docs/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phases B-C; `tied/docs/implementation-decisions.md` § Mandatory essence_pseudocode, § Preferred vocabulary, § Expressing sequence and structure; `tied/docs/pseudocode-writing-and-validation.md` (Phases B–C and three-way alignment); `tied/docs/pseudocode-validation-checklist.yaml` for pseudo-code validation; `tied/docs/agent-preload-contract-template.yaml`; [vocabulary-index-analysis-and-standards.md](vocabulary-index-analysis-and-standards.md) (`[PROC-VOCABULARY_INDEX]`).
 
 ---
 
@@ -465,7 +485,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 
 **Outcomes**: All bindings have composition tests; binding/channel/test names resolved from and recorded in the canonical vocabulary; composition code passes; three-way alignment holds.
 
-**Reference**: `tied/docs/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phase G (steps 21-24); `tied/docs/pseudocode-writing-and-validation.md` § Composition and E2E expansion (`#composition-and-e2e-expansion`); `tied/docs/implementation-order.md` steps 3-4; [`docs/vocabulary-index-analysis-and-standards.md`](../../docs/vocabulary-index-analysis-and-standards.md). For this project’s binding inventory and coverage, see `tied/docs/composition-coverage.md`.
+**Reference**: `tied/docs/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phase G (steps 21-24); `tied/docs/pseudocode-writing-and-validation.md` § Composition and E2E expansion (`#composition-and-e2e-expansion`); `tied/docs/implementation-order.md` steps 3-4; [vocabulary-index-analysis-and-standards.md](vocabulary-index-analysis-and-standards.md). For this project’s binding inventory and coverage, see `tied/docs/composition-coverage.md`.
 
 ---
 
@@ -489,7 +509,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 
 **Outcomes**: E2E tests exist for all UI-only behavior; UI-facing terms and E2E test names resolved from and recorded in the canonical vocabulary; each is justified with a named platform constraint.
 
-**Reference**: `tied/docs/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phase H (steps 25-28); `tied/docs/pseudocode-writing-and-validation.md` § The E2E decision (under Composition and E2E expansion); `tied/docs/implementation-order.md` step 4; [`docs/vocabulary-index-analysis-and-standards.md`](../../docs/vocabulary-index-analysis-and-standards.md).
+**Reference**: `tied/docs/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phase H (steps 25-28); `tied/docs/pseudocode-writing-and-validation.md` § The E2E decision (under Composition and E2E expansion); `tied/docs/implementation-order.md` step 4; [vocabulary-index-analysis-and-standards.md](vocabulary-index-analysis-and-standards.md).
 
 ---
 
@@ -498,6 +518,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 **Goals**: Confirm everything is aligned, passing, and consistent. This is the compound gate that must pass before work is considered complete.
 
 **Tasks**:
+0. **CALL sub-pseudocode-validation-pass** — full Layer B including **minimum_gating_rules** now that executable tests exist; document findings by category and severity. IF unresolved gaps THEN GOTO resolve-pseudocode or unit-test-red per findings.
 1. Run the **full test suite** (unit, composition, E2E). All must pass.
 2. Run **lint** for each language in scope: Rust → `bun run lint:rust`; TypeScript → `bunx tsc -b`; Swift → `swift build && swift test`; YAML → run `lint_yaml` on changed files per [PROC-YAML_EDIT_LOOP] (`processes.md`).
 3. Run **`[PROC-TOKEN_VALIDATION]`**: `./scripts/validate_tokens.sh` when the project provides it (see `tied/docs/token-validation.md`), and always run **`.cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency '{}'`**; fix any issues before proceeding.
@@ -508,7 +529,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
    - `metadata.last_updated` — date, author, reason.
    - **CALL sub-yaml-edit-loop** on each changed detail file.
 6. **Module validation** per `[REQ-MODULE_VALIDATION]`: confirm each module was validated independently before integration. Document validation results.
-7. **Update vocab after writing tests/code** (`[PROC-VOCABULARY_INDEX]`): **CALL sub-vocabulary-sync** (RECORD) to reconcile `tied/vocab/*.md` with all terms, symbols, and storage names in the final tests and code; verify each named concept resolves to exactly one preferred term and the alphabetical index is current.
+7. **Update vocab after writing tests/code** (`[PROC-VOCABULARY_INDEX]`): **CALL sub-vocabulary-sync** (**RECORD**) to reconcile `tied/vocab/*.md` with all terms, symbols, and storage names in the final tests and code; verify each named concept resolves to exactly one preferred term and the alphabetical index is current. Final **VALIDATE** gate is at `traceable-commit` (Touchpoint 3).
 
 **Outcomes**: All tests pass; lint clean; token validation passes; three-way alignment verified; IMPL metadata current; module validation documented; canonical vocabulary reconciled with final tests/code.
 
@@ -518,7 +539,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 - Token validation failure → register missing tokens, fix traceability gaps.
 - Three-way alignment failure → apply LEAP order (pseudo-code first, then test, then code).
 
-**Reference**: `tied/docs/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phase I (steps 29-33); `tied/docs/processes.md` § `[PROC-CITDP]` step 7; [`docs/vocabulary-index-analysis-and-standards.md`](../../docs/vocabulary-index-analysis-and-standards.md).
+**Reference**: `tied/docs/processes.md` § `[PROC-IMPL_CODE_TEST_SYNC]` Phase I (steps 29-33); `tied/docs/processes.md` § `[PROC-CITDP]` step 7; [vocabulary-index-analysis-and-standards.md](vocabulary-index-analysis-and-standards.md).
 
 ---
 
@@ -531,7 +552,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 2. Sync `semantic-tokens.yaml`, `requirements.yaml`, `architecture-decisions.yaml`, and `implementation-decisions.yaml` (and detail files) so no documentation drift exists.
 3. **CALL sub-yaml-edit-loop** on every changed file.
 4. Run `.cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency '{}'` — must report `"ok": true`.
-4a. **Update vocab after design and implementation** (`[PROC-VOCABULARY_INDEX]`): **CALL sub-vocabulary-sync** (RECORD) so `tied/vocab/*.md` reflects the final REQ/ARCH/IMPL terms, design/UI terms, and storage names; each concept resolves to one preferred term and the naming bridge and alphabetical index are current.
+4a. **Update vocab after design and implementation** (`[PROC-VOCABULARY_INDEX]`): **CALL sub-vocabulary-sync** (**RECORD**) so `tied/vocab/*.md` reflects the final REQ/ARCH/IMPL terms, design/UI terms, and storage names; each concept resolves to one preferred term and the naming bridge and alphabetical index are current. Final **VALIDATE** gate is at `traceable-commit` (Touchpoint 3).
 5. If REQ/ARCH/IMPL `status`, `traceability.tests`, or similar fields changed such that a session `agent_preload` would be stale, re-check **`tied/agent-preload-contract.yaml`** and patch only as needed; do not redo the full ARCH/IMPL preload passes unless something material changed.
 
 **Branch**: IF divergence between TIED docs and code/tests is detected THEN apply LEAP:
@@ -542,7 +563,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 
 **Outcomes**: TIED docs are consistent with implementation; `tied_validate_consistency` passes; canonical vocabulary reconciled with final REQ/ARCH/IMPL, design/UI, and storage terms; `tied/agent-preload-contract.yaml` re-checked or left unchanged with reason when sync did not affect preload-relevant TIED fields.
 
-**Reference**: `tied/docs/processes.md` § `[PROC-TIED_DEV_CYCLE]` steps 8-9; `tied/docs/processes.md` § `[PROC-LEAP]`; `tied/docs/agent-preload-contract-template.yaml`; [`docs/vocabulary-index-analysis-and-standards.md`](../../docs/vocabulary-index-analysis-and-standards.md).
+**Reference**: `tied/docs/processes.md` § `[PROC-TIED_DEV_CYCLE]` steps 8-9; `tied/docs/processes.md` § `[PROC-LEAP]`; `tied/docs/agent-preload-contract-template.yaml`; [vocabulary-index-analysis-and-standards.md](vocabulary-index-analysis-and-standards.md).
 
 ---
 
@@ -557,7 +578,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 
 **Outcomes**: External documentation reflects the session's changes, using canonical user-facing terms reconciled with the vocabulary index.
 
-**Reference**: `tied/docs/processes.md` § `[PROC-TIED_DEV_CYCLE]` step 9; [`docs/vocabulary-index-analysis-and-standards.md`](../../docs/vocabulary-index-analysis-and-standards.md).
+**Reference**: `tied/docs/processes.md` § `[PROC-TIED_DEV_CYCLE]` step 9; [vocabulary-index-analysis-and-standards.md](vocabulary-index-analysis-and-standards.md).
 
 ---
 
@@ -591,21 +612,24 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 **Goals**: Create a traceable commit with proper format and token references.
 
 **Tasks**:
-1. Write the commit message per `[PROC-COMMIT_MESSAGES]`:
+1. **Touchpoint 3 (pre-commit):** **CALL sub-vocabulary-sync** (**VALIDATE**) — audit all files changed this pass: TIED record `name` fields and token suffixes in `semantic-tokens.yaml`, UPPER_SNAKE block names in pseudo-code, test/code identifiers, README/CHANGELOG/UI terms; each must resolve to exactly one preferred term in `tied/vocab/*.md` with naming bridges and alphabetical index current. Do not stage or commit until VALIDATE passes or immature-client deferral is explicitly noted.
+2. Write the commit message per `[PROC-COMMIT_MESSAGES]`:
    - **Header**: `<type>(<scope>): <subject>` (keep the full header line to 50 characters or fewer).
    - **Type**: One of `feat`, `fix`, `docs`, `refactor`, `test`, `build`, `ci`, `chore`, `perf`, `style`.
    - **Scope**: Area affected (e.g., `core`, `ui`, `tied`, `tests`). See `tied/docs/processes.md` § `[PROC-COMMIT_MESSAGES]` for the full scope list.
    - **Subject**: Imperative, present tense; no capitalization; no period.
    - **Body**: Motivation and behavior change (imperative tense). Keep lines to 100 characters.
    - **Footer**: `Closes #issue` or `Fixes #issue` if applicable. Reference main REQ/ARCH/IMPL tokens touched.
-2. Stage relevant files. Commit.
-3. Do NOT push unless explicitly asked.
+3. Stage relevant files. Commit.
+4. Do NOT push unless explicitly asked.
 
-**Outcomes**: Commit exists with proper format; TIED tokens referenced in body or footer.
+**Outcomes**: Vocabulary VALIDATE passed (or deferral noted); commit exists with proper format; TIED tokens referenced in body or footer.
+
+**Branch**: IF VALIDATE reports unresolved vocabulary mismatches THEN fix via RECORD or RESOLVE and re-run VALIDATE; or **GOTO sync-tied-stack** if TIED/docs drift caused failures; do not commit until VALIDATE passes.
 
 **EXIT**: Checklist complete. Do not create a stand-alone summary document.
 
-**Reference**: `tied/docs/processes.md` § `[PROC-COMMIT_MESSAGES]`.
+**Reference**: `tied/docs/processes.md` § `[PROC-COMMIT_MESSAGES]`; [vocabulary-index-analysis-and-standards.md](vocabulary-index-analysis-and-standards.md).
 
 ---
 
@@ -634,19 +658,22 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 
 ### sub-pseudocode-validation-pass (sub-pseudocode-validation-pass): Checklist-ordered passes until gating satisfied
 
-**Invoked by**: gate-pseudocode-validation (Run Pseudo-Code Validation).
+**Invoked by**: gate-pseudocode-validation (pre-RED structural pass) or verification-gate (full Layer B after tests exist).
 
-**Goals**: Ensure IMPL pseudo-code satisfies the application pseudo-code validation checklist before persisting or writing tests/code. Required checks are gating unless waived and documented.
+**Goals**: Ensure IMPL pseudo-code satisfies the application pseudo-code validation checklist before persisting or writing tests/code (pre-RED) or before close-out (post-test). Required checks are gating unless documented N/A with rationale.
 
 **Tasks**:
 1. Load the checklist from `tied/docs/pseudocode-validation-checklist.yaml` (or `docs/pseudocode-validation-checklist.yaml` at repo root).
-2. For each pseudo-code block in the IMPL set (from S06), run each validation category in the checklist's **recommended_validation_order**; collect findings with severity and block/location.
-3. IF any required check fails OR minimum gating rules are not met THEN fix pseudo-code (or ARCH/REQ if scope changed), then repeat from step 2. **RETURN** only when gating rules pass or a waiver is documented.
-4. **RETURN** to caller (gate-pseudocode-validation continues to persist-implementation-records).
+2. Branch on **caller**:
+   - **From gate-pseudocode-validation** (no tests yet): run structural categories; mark behavioral_coverage and traceability rows that require test artifacts as N/A with rationale.
+   - **From verification-gate** (tests exist): run full checklist including **minimum_gating_rules**; evaluate coverage and traceability rows now that tests exist.
+3. For each pseudo-code block in the IMPL set (from S06), run each validation category in the checklist's **recommended_validation_order**; collect findings with severity and block/location.
+4. IF any required check fails OR gating for the active caller context is not met THEN fix pseudo-code (or ARCH/REQ if scope changed), then repeat from step 2. **RETURN** only when gating passes or N/A rows are documented with rationale.
+5. **RETURN** to caller (gate-pseudocode-validation continues to persist-implementation-records; verification-gate continues after post-test pass).
 
-**Outcomes**: Pseudo-code validation report (findings by category, severity, location); all required checks pass or are waived; minimum gating rules satisfied.
+**Outcomes**: Pseudo-code validation report (findings by category, severity, location); pre-RED invocations satisfy structural gate; verification-gate invocations satisfy full minimum_gating_rules.
 
-**Reference**: `tied/docs/pseudocode-writing-and-validation.md` (and `docs/pseudocode-format-and-practices.md` for portable format); `templates/impl-essence-pseudocode-template.md` for the sidecar body template; `tied/docs/pseudocode-validation-checklist.yaml`; `tied/docs/processes.md` § `[PROC-PSEUDOCODE_VALIDATION]`.
+**Reference**: `tied/docs/pseudocode-writing-and-validation.md` (Validation layers — Pre-RED vs post-test); `tied/docs/pseudocode-format-and-practices.md` for portable format; `templates/impl-essence-pseudocode-template.md` for the sidecar body template; `tied/docs/pseudocode-validation-checklist.yaml`; `tied/docs/processes.md` § `[PROC-PSEUDOCODE_VALIDATION]`.
 
 ---
 
@@ -673,31 +700,36 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 
 ---
 
-### sub-vocabulary-sync (sub-vocabulary-sync): Resolve names against the domain vocabulary index and record new terms
+### sub-vocabulary-sync (sub-vocabulary-sync): Resolve, preload, record, and validate domain vocabulary index terms
 
-**Invoked by**: session-bootstrap, translate-sponsor-intent, change-definition, author-requirement, author-architecture, catalog-pseudocode-contracts, resolve-pseudocode, apply-token-comments, persist-implementation-records, unit-test-red, unit-test-green, composition-integration, end-to-end-ui, three-way-alignment-unit, verification-gate, sync-tied-stack, user-facing-release-notes.
+**Invoked by**: session-bootstrap, translate-sponsor-intent, change-definition, impact-discovery, author-requirement, author-architecture, catalog-pseudocode-contracts, resolve-pseudocode, apply-token-comments, persist-implementation-records, unit-test-red, unit-test-green, composition-integration, end-to-end-ui, three-way-alignment-unit, verification-gate, sync-tied-stack, user-facing-release-notes, traceable-commit.
 
 **Goals**: Keep one controlled set of preferred domain terms (`[PROC-VOCABULARY_INDEX]`) so requirements, architecture, IMPL pseudo-code, tests, code, and user-facing docs name each concept identically. A chosen preferred term is the literal identifier reused as the IMPL UPPER_SNAKE block name, the test/code symbol, the storage name, and the UI label.
 
 **File location and editing**: Domain vocabulary index files live at `tied/vocab/*.md` (filenames have **no** `-vocabulary` suffix, e.g. `tied/vocab/<topic>.md`). They are **plain Markdown**, not TIED index/detail YAML, and **not** under `tied/methodology/`. Edit them **directly** (like the `tied/implementation-decisions/IMPL-*-pseudocode.md` sidecars)—do **not** route through `tied-cli.sh`, and do **not** run `lint_yaml` on them.
 
-**Tasks**:
-1. **RESOLVE** (before naming/writing): look up the concept in `tied/vocab/*.md`; choose the one **preferred** term; reword fuzzy/synonym wording to that canonical term; verify exact spelling/backtick form; flag any term absent from the index (route to RECORD).
-2. **RECORD** (as concepts are generated, and after artifacts are written): add or update the term immediately—preferred-term-vs-synonym row, naming bridge row (concept ↔ token ↔ storage name ↔ UI label), and UPPER_SNAKE block name—keep the alphabetical index in sync, and cite the relevant REQ/ARCH/IMPL.
-3. **Distinct** from the IMPL pseudo-code grammar "preferred vocabulary" (INPUT/OUTPUT/DATA/CONTROL keywords in `implementation-decisions.md`): this governs which **domain term** names a concept, not the grammar of a block.
-4. **Immature client**: if `tied/vocab/` or its `*.md` files do not exist, create `tied/vocab/` and seed an index file when the change introduces enough named concepts; otherwise do a lightweight consistency pass or skip with an explicit note in the per-request checklist copy. Do not fabricate terms or block the caller.
+**Modes** (caller passes mode in preconditions):
 
-**Outcomes**: Concept(s) resolve to exactly one preferred term (or deferral noted); new/changed terms recorded in `tied/vocab/*.md` with the alphabetical index in sync and REQ/ARCH/IMPL cited.
+1. **PRELOAD** (Touchpoint 2 — before reading TIED indexes, detail files, source, or tests): read `tied/vocab/domain-references-routing.md`; match task keywords to the routing table; from caller scope list concepts/subsystems in play; open only matched glossaries; extract preferred terms, avoid-list synonyms, naming-bridge rows, and UPPER_SNAKE block names; produce a brief term map in step output or the per-request checklist copy. For cross-cutting concerns, search `tied/vocab/domain-references.md` on demand.
+2. **RESOLVE** (Touchpoint 1 and inline before naming/writing): look up the concept in `tied/vocab/*.md`; choose the one **preferred** term; reword fuzzy/synonym wording to that canonical term; verify exact spelling/backtick form; flag any term absent from the index (route to RECORD).
+3. **RECORD** (inline during work): add or update the term immediately—preferred-term-vs-synonym row, naming bridge row (concept ↔ token ↔ storage name ↔ UI label), and UPPER_SNAKE block name—keep the alphabetical index in sync, and cite the relevant REQ/ARCH/IMPL.
+4. **VALIDATE** (Touchpoint 3 — before commit): enumerate named concepts changed this pass across vocab, TIED records, `semantic-tokens.yaml`, pseudo-code blocks, tests, code, and README/CHANGELOG; confirm each resolves to exactly one preferred term; emit pass/fail report; RETURN failures to caller for RECORD/RESOLVE before re-VALIDATE.
+
+**Distinct** from the IMPL pseudo-code grammar "preferred vocabulary" (INPUT/OUTPUT/DATA/CONTROL keywords in `implementation-decisions.md`): this governs which **domain term** names a concept, not the grammar of a block.
+
+**Immature client**: if `tied/vocab/` or its `*.md` files do not exist, create `tied/vocab/` and seed an index file when the change introduces enough named concepts; otherwise do a lightweight consistency pass or skip with an explicit note in the per-request checklist copy. Do not fabricate terms; VALIDATE must not fake pass.
+
+**Outcomes**: RESOLVE/PRELOAD/RECORD/VALIDATE satisfied per caller mode; immature-client deferral noted when applicable.
 
 **RETURN** to calling step.
 
-**Reference**: [`docs/vocabulary-index-analysis-and-standards.md`](../../docs/vocabulary-index-analysis-and-standards.md); `tied/docs/processes.md` § `[PROC-VOCABULARY_INDEX]`.
+**Reference**: [vocabulary-index-analysis-and-standards.md](vocabulary-index-analysis-and-standards.md); `tied/docs/processes.md` § `[PROC-VOCABULARY_INDEX]`.
 
 ---
 
 ## Process Diagram
 
-**Mermaid:** The Phase H step uses node ID `e2e_ui` in the diagram (not the slug `end-to-end-ui`) because `end` is a reserved flowchart keyword. See [methodology-diagrams.md](methodology-diagrams.md) (Diagram 3 intro).
+**Mermaid:** The Phase H step uses node ID `e2e_ui` in the diagram (not the slug `end-to-end-ui`) because `end` is a reserved flowchart keyword. Vocabulary **PRELOAD** runs at `session-bootstrap` and `impact-discovery`; **VALIDATE** at `traceable-commit`. See [methodology-diagrams.md](methodology-diagrams.md) (Diagram 3 intro).
 
 ```mermaid
 flowchart TD
@@ -768,7 +800,15 @@ flowchart TD
 | sync-tied-stack | sync-tied-stack | TIED docs synced | `tied_validate_consistency` must pass |
 | user-facing-release-notes | user-facing-release-notes | README + CHANGELOG | Document user/release-facing deltas |
 | persist-citdp-record | persist-citdp-record | CITDP record | Validated YAML under client `docs/citdp` |
-| traceable-commit | traceable-commit | Git commit | PROC-COMMIT_MESSAGES; tokens in body/footer |
+| traceable-commit | traceable-commit | Git commit | PROC-COMMIT_MESSAGES; VALIDATE vocab (Touchpoint 3); tokens in body/footer |
+
+### Vocabulary touchpoints (quick reference)
+
+| Touchpoint | Mode | Steps |
+|---|---|---|
+| Prompt intake | RESOLVE (+ RECORD) | translate-sponsor-intent, change-definition |
+| Pre-read | PRELOAD | session-bootstrap, impact-discovery |
+| Pre-commit | VALIDATE | traceable-commit |
 
 ---
 
@@ -792,6 +832,6 @@ flowchart TD
 | `tied/docs/composition-coverage.md` | Binding inventory and composition vs E2E coverage for this project |
 | `tied/docs/citdp-policy.md` | When to create vs skip a CITDP record |
 | `templates/impl-essence-pseudocode-template.md` | Canonical copy-paste sidecar body (linked from the unified pseudocode guide) |
-| `docs/pseudocode-format-and-practices.md` | Portable format and practices; strong sidecar preference for non-trivial IMPLs; template lives in `templates/impl-essence-pseudocode-template.md` |
-| `tied/docs/pseudocode-validation-checklist.yaml` | Canonical application pseudo-code validation checklist (categories, required/optional checks, order, tailoring) |
-| `docs/vocabulary-index-analysis-and-standards.md` | Domain vocabulary index standards (`[PROC-VOCABULARY_INDEX]`): structure, format, content, governance for `tied/vocab/*.md` preferred-term indexes consulted/updated by sub-vocabulary-sync |
+| `tied/docs/pseudocode-format-and-practices.md` | Portable format and practices; strong sidecar preference for non-trivial IMPLs; template lives in `templates/impl-essence-pseudocode-template.md` |
+| `tied/docs/pseudocode-validation-checklist.yaml` | Canonical application pseudo-code validation checklist (categories, required/optional checks, order, pre-RED vs post-test contexts in writing guide) |
+| `tied/docs/vocabulary-index-analysis-and-standards.md` | Domain vocabulary index standards (`[PROC-VOCABULARY_INDEX]`): structure, format, content, governance for `tied/vocab/*.md` preferred-term indexes consulted/updated by sub-vocabulary-sync |

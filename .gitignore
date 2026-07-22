@@ -15,3 +15,4 @@ tied/requirements/REQ-FEEDBACK_TO_TIED.yaml
 TODO.md
 tied/docs/.markscope-preview-cache/
 .markscope-preview-cache
+.cursor/debug-*.log

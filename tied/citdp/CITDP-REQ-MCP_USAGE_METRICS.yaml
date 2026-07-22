@@ -1,0 +1,79 @@
+CITDP-REQ-MCP_USAGE_METRICS:
+  change_definition:
+    current_behavior_prior: No unified, opt-in instrumentation for TIED YAML MCP tool calls. Cursor hook logs miss tied-cli/headless stdio; no sanitized arg signatures for offline clustering.
+    desired_behavior: When TIED_MCP_COLLECT_METRICS is 1 or true, every MCP tools/call appends one sanitized JSONL v1 record (tool, client, duration, ok, args_summary, args_signature). Default off. tied-cli sets TIED_MCP_METRICS_CLIENT=tied-cli. Offline Ruby aggregator reports counts, failures, durations, top signatures.
+    non_goals:
+      - Always-on collection or off-machine export
+      - Storing metrics in tied/feedback.yaml or project git
+      - Logging full essence_pseudocode or record bodies
+    references:
+      - tied/requirements/REQ-MCP_USAGE_METRICS.yaml
+      - tied/architecture-decisions/ARCH-MCP_USAGE_METRICS.yaml
+      - tied/implementation-decisions/IMPL-MCP_USAGE_METRICS.yaml
+      - tied/implementation-decisions/IMPL-MCP_USAGE_METRICS-pseudocode.md
+      - tied/vocab/tied-yaml-mcp.md
+    success_criteria:
+      - No JSONL append when env unset; append when set to 1 or true
+      - usage-metrics.test.ts and analyze_tied_mcp_metrics_test.rb pass
+      - tied-cli.sh exports TIED_MCP_METRICS_CLIENT=tied-cli when collection enabled
+      - REQ/ARCH/IMPL stack consistent under tied_validate_consistency
+    summary: 'Add opt-in local MCP tool usage metrics: registration-time wrapToolHandler, sanitized JSONL under ~/.cursor/logs (or override), tied-cli client tag, offline Ruby aggregator.'
+    unchanged_behavior: When TIED_MCP_COLLECT_METRICS is unset, handlers and I/O paths are unchanged (zero metrics file I/O). Feedback.yaml and project TIED YAML writes are unaffected.
+  completion_criteria:
+    verification_gate_notes: mcp-server TypeScript tests; Ruby analyzer smoke; tied_validate_consistency with include_pseudocode; REQ-MCP_USAGE_METRICS satisfaction criteria covered by named tests.
+  impact_analysis:
+    impl_inventory_notes: mcp-server/src/usage-metrics.ts, usage-metrics.test.ts, index.ts registration wrap; tools/bundled-tied-yaml-skill/scripts/tied-cli.sh client tag; scripts/analyze_tied_mcp_metrics.rb + test.
+    modules_or_boundaries: 'usage-metrics: env gate, sanitizeArgs, recordToolCall, wrapToolHandler. index.ts: registration wiring only. tied-cli: env export before stdio client. analyze_tied_mcp_metrics.rb: offline streaming aggregator. Boundaries: append-only JSONL outside project tied/; non-fatal IO; no per-handler edits.'
+    tied_tokens_affected: []
+    tied_tokens_new:
+      - REQ-MCP_USAGE_METRICS
+      - ARCH-MCP_USAGE_METRICS
+      - IMPL-MCP_USAGE_METRICS
+  leap_feedback:
+    divergences_from_analysis: none
+    record_status: complete
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: REQ-MCP_USAGE_METRICS
+    checklist_process: '[PROC-AGENT_REQ_CHECKLIST]'
+    checklist_session_note: |-
+      change-definition: new REQ/ARCH/IMPL for opt-in MCP usage metrics.
+      impact-discovery: usage-metrics module; index registration wrap; tied-cli client tag; Ruby offline aggregator.
+      test-strategy: unit usage-metrics.test.ts and analyze_tied_mcp_metrics_test.rb; composition via index registration; E2E N/A (no UI).
+      verification-gate: mcp-server tests; Ruby smoke; tied_validate_consistency.
+      sync-tied-stack: depends_on ARCH on IMPL; pseudocode H2 format pass; CITDP persisted.
+      CITDP skip note: YAML sort/compare and token-rename extra_globs under REQ-TIED_SETUP are low-risk maintenance; no separate CITDP (citdp-policy reasonable skip).
+    checklist_step_completed: persist-citdp-record
+    checklist_version: agent_req_implementation_checklist v1.5.2
+    recorded_at: "2026-07-21"
+    tied_context:
+      architecture:
+        - ARCH-MCP_USAGE_METRICS
+      implementation:
+        - IMPL-MCP_USAGE_METRICS
+      requirements:
+        - REQ-MCP_USAGE_METRICS
+    title: Opt-in local MCP tool usage metrics (JSONL + offline aggregator)
+    workspace_root: /Users/fareed/Documents/dev/chatgpt/stdd
+  risk_analysis:
+    risks:
+      - id: RISK-MET-001
+        description: Operators accidentally enable metrics and grow a large JSONL on disk.
+        likelihood: Low
+        mitigation: Default off; path override documented; write failures non-fatal; offline rotate/delete is operator-owned.
+        severity: Low
+      - id: RISK-MET-002
+        description: Sanitizer misses a sensitive field and logs a large or private payload fragment.
+        likelihood: Low
+        mitigation: BLOB_KEYS redact essence_pseudocode/record/updates; string truncate 200; unit tests for sanitizeArgs.
+        severity: Medium
+      - id: RISK-MET-003
+        description: Metrics wrap alters handler error propagation.
+        likelihood: Low
+        mitigation: Wrapper rethrows; IO errors swallowed after DIAGNOSTIC stderr; wrapToolHandler unit tests.
+        severity: Medium
+  tdd_sequence:
+    summary: 'unit-test-red/green: usage-metrics.test.ts for isMetricsEnabled, resolveMetricsPath, sanitizeArgs, wrapToolHandler, recordToolCall. Ruby smoke for aggregator. composition: index.ts registers wrapToolHandler when enabled (covered via module + bootstrap load). end-to-end-ui: N/A.'
+  test_strategy:
+    matrix_notes: 'Unit: usage-metrics.test.ts (env gate, path, sanitize, wrap, record). Unit/smoke: analyze_tied_mcp_metrics_test.rb. Composition: registration wrap in index.ts; bootstrap-and-load.test.ts remains bootstrap E2E. E2E: N/A for pure callable modules.'
+    summary: '[REQ-MODULE_VALIDATION]: unit tests for usage-metrics and Ruby aggregator; composition via registration wiring; no platform UI E2E.'

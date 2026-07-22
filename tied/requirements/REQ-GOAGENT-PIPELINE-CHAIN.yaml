@@ -1,14 +1,14 @@
 REQ-GOAGENT-PIPELINE-CHAIN:
-  name: Multi-turn pipeline assembly session chaining and dry-run
   category: Tooling
+  detail_file: requirements/REQ-GOAGENT-PIPELINE-CHAIN.yaml
+  name: Multi-turn pipeline assembly session chaining and dry-run
   priority: P1
+  satisfaction_criteria:
+    - criterion: Pipeline turn order and ChainFromPrevious rules are canonical in tied/vocab/agentstream.md; pipeline_Build block in IMPL-GOAGENT-PIPELINE-pseudocode.md
   status: Implemented
   traceability:
     architecture:
       - ARCH-GOAGENT-PIPELINE
     implementation:
-      - IMPL-GOAGENT-PIPELINE
       - IMPL-GOAGENT-CLI-CMD
-  detail_file: requirements/REQ-GOAGENT-PIPELINE-CHAIN.yaml
-  satisfaction_criteria:
-    - criterion: Pipeline turn order and ChainFromPrevious rules are canonical in tied/vocab/agentstream.md; pipeline_Build block in IMPL-GOAGENT-PIPELINE-pseudocode.md
+      - IMPL-GOAGENT-PIPELINE

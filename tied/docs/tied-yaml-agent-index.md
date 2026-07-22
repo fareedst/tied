@@ -26,7 +26,7 @@
 | One-token updates, batch merges, nested merge semantics, small payloads, timeouts | [yaml-update-mcp-runbook.md](yaml-update-mcp-runbook.md) |
 | **Goal → tool** cheat sheet (includes `tied_config_get_base_path`) | [yaml-update-mcp-runbook.md](yaml-update-mcp-runbook.md) §3 |
 | **Editing `essence_pseudocode` in IMPL (sidecar `.md`, MCP `essence_pseudocode_path`, `tied-cli` file/stdin, optional `jq`)** | [pseudocode-writing-and-validation.md § Mechanics](pseudocode-writing-and-validation.md#mechanics-editing-the-sidecar-mcp-and-cli) |
-| **Pseudocode writing/validation, portable format, canonical hand-authored body template (prefer sidecar for non-trivial IMPLs)** | [pseudocode-writing-and-validation.md](pseudocode-writing-and-validation.md) · [docs/pseudocode-format-and-practices.md](../docs/pseudocode-format-and-practices.md) · [templates/impl-essence-pseudocode-template.md](../templates/impl-essence-pseudocode-template.md) |
+| **Pseudocode writing/validation, portable format, canonical hand-authored body template (prefer sidecar for non-trivial IMPLs)** | [pseudocode-writing-and-validation.md](pseudocode-writing-and-validation.md) · [pseudocode-format-and-practices.md](pseudocode-format-and-practices.md) · [templates/impl-essence-pseudocode-template.md](../templates/impl-essence-pseudocode-template.md) |
 
 **Note**: `tied_config_get_base_path` is documented in [reference.md](../../.cursor/skills/tied-yaml/reference.md) (Config), [yaml-update-mcp-runbook.md](yaml-update-mcp-runbook.md) §3, and [AGENTS.md](../../AGENTS.md).
 
@@ -59,6 +59,7 @@ Read during **session-bootstrap** alongside the skill; these do not replace `tie
 
 | Topic | Document |
 |--------|----------|
+| Domain vocabulary (**PRELOAD** before reading TIED/resources) | [`tied/vocab/domain-references.md`](../vocab/domain-references.md), [`tied/docs/vocabulary-index-analysis-and-standards.md`](vocabulary-index-analysis-and-standards.md) |
 | Token registry and guide | [`tied/semantic-tokens.yaml`](../semantic-tokens.yaml), [`tied/docs/semantic-tokens.md`](semantic-tokens.md) |
 | IMPL pseudo-code and `[PROC-IMPL_PSEUDOCODE_TOKENS]` | [`tied/docs/implementation-decisions.md`](implementation-decisions.md) |
 | AI principles and ordering | [`ai-principles.md`](./ai-principles.md) |

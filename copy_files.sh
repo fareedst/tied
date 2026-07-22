@@ -29,7 +29,7 @@
 #   - .cursor/skills/tied-yaml/: Cursor Agent Skill for REQ/ARCH/IMPL YAML via tied-cli.sh
 #     (from tools/bundled-tied-yaml-skill/ in git; .cursor/skills/tied-yaml only if bundled is missing; overwritten each run).
 #     Installed tied-cli.sh bakes TIED_REPO_ROOT to this TIED source repo for TIED_MCP_BIN default.
-#   - tied/vocab/: domain vocabulary glossaries (*.md); seeded when missing or empty (never overwrites client files)
+#   - tied/vocab/: domain vocabulary glossaries (*.md) including domain-references-routing.md; seeded when missing or empty (never overwrites client files)
 #   - Canonical CLI: .cursor/skills/tied-yaml/scripts/tied-cli.sh (use `tree -a` to list .cursor/ or open in the IDE).
 #   - .cursor/mcp.json: (re)writes mcpServers.tied-yaml with stdio, absolute paths to this TIED
 #     repo's mcp-server/dist/index.js and the target project's tied/; preserves other mcpServers
@@ -334,6 +334,7 @@ DOCS_TO_COPY=(
   "architecture-decisions.md"
   "citdp-policy.md"
   "citdp-record-template.yaml"
+  "client-development-index.md"
   "commit-guidelines.md"
   "detail-files-schema.md"
   "agent-req-implementation-checklist.yaml"
@@ -347,6 +348,7 @@ DOCS_TO_COPY=(
   # Canonical IMPL pseudo-code (primary references for bootstrap):
   # - pseudocode-writing-and-validation.md — unified guide (writing, MCP mechanics, block linkage, phases A–I, LEAP, when to validate).
   # - pseudocode-validation-checklist.yaml — Layer B application checklist ([PROC-PSEUDOCODE_VALIDATION]).
+  "pseudocode-format-and-practices.md"
   "pseudocode-writing-and-validation.md"
   "pseudocode-validation-checklist.yaml"
   "req-impl-state-guide-agent-workflow.md"
@@ -356,6 +358,9 @@ DOCS_TO_COPY=(
   "tied-first-implementation-procedure.md"
   "tied-yaml-agent-index.md"
   "using-tied-without-mcp.md"
+  "vocabulary-index-analysis-and-standards.md"
+  "tied-domain-vocabulary-research-prompt.md"
+  "vocabulary-layer-tied-leap-citdp.md"
 )
 docs_count=0
 docs_total=0

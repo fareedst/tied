@@ -1,13 +1,13 @@
 REQ-GOAGENT-LIB-MODULE:
-  name: Go agentstream library module layout and core types
   category: Tooling
+  detail_file: requirements/REQ-GOAGENT-LIB-MODULE.yaml
+  name: Go agentstream library module layout and core types
   priority: P1
+  satisfaction_criteria:
+    - criterion: Turn and ChainFromPrevious terms are canonical in tied/vocab/agentstream.md; Turn type documented under IMPL-GOAGENT-LIB-TYPES
   status: Implemented
   traceability:
     architecture:
       - ARCH-GOAGENT-LIB-LAYERING
     implementation:
       - IMPL-GOAGENT-LIB-TYPES
-  detail_file: requirements/REQ-GOAGENT-LIB-MODULE.yaml
-  satisfaction_criteria:
-    - criterion: Turn and ChainFromPrevious terms are canonical in tied/vocab/agentstream.md; Turn type documented under IMPL-GOAGENT-LIB-TYPES

@@ -4,7 +4,7 @@
 
 **Traceability:** [REQ-CONFIG_DISCOVERY_LOCAL_LAYER](../requirements/REQ-CONFIG_DISCOVERY_LOCAL_LAYER.yaml) · [ARCH-CONFIG_DISCOVERY_LAYERING](../architecture-decisions/ARCH-CONFIG_DISCOVERY_LAYERING.yaml) · (no IMPL yet)
 
-**See also:** [`domain-references.md`](domain-references.md) · [`agentstream.md`](agentstream.md) (informational link to `ParseAndResolve` — not multi-layer exclude merge today) · [`../../docs/vocabulary-index-analysis-and-standards.md`](../../docs/vocabulary-index-analysis-and-standards.md)
+**See also:** [`domain-references.md`](domain-references.md) · [`agentstream.md`](agentstream.md) (informational link to `ParseAndResolve` — not multi-layer exclude merge today) · [`../docs/vocabulary-index-analysis-and-standards.md`](../docs/vocabulary-index-analysis-and-standards.md)
 
 ---
 

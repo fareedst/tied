@@ -6,7 +6,7 @@
 
 **When not to use:** Greenfield REQ work (pseudo-code before tests) — follow [agent-req-implementation-checklist.md](agent-req-implementation-checklist.md) Track A and [pseudocode-writing-and-validation.md](pseudocode-writing-and-validation.md#track-a-new-feature-req). Implementing *new* behavior from an already-updated IMPL — follow [tied-first-implementation-procedure.md](tied-first-implementation-procedure.md).
 
-**Canonical references:** [pseudocode-writing-and-validation.md](pseudocode-writing-and-validation.md) (definition, block leads, phases A–I, validation), [templates/impl-essence-pseudocode-template.md](../../templates/impl-essence-pseudocode-template.md), [pseudocode-validation-checklist.yaml](pseudocode-validation-checklist.yaml) (Layer B; use profile **`agent_req_checklist_post_test`** when executable tests exist).
+**Canonical references:** [pseudocode-writing-and-validation.md](pseudocode-writing-and-validation.md) (definition, block leads, phases A–I, validation), [templates/impl-essence-pseudocode-template.md](../../templates/impl-essence-pseudocode-template.md), [pseudocode-validation-checklist.yaml](pseudocode-validation-checklist.yaml) (Layer B; full pass including **minimum_gating_rules** when executable tests exist).
 
 ---
 
@@ -74,7 +74,7 @@ Tests validate **what**; code comments state **how** at the locus—the **token 
 - Update IMPL detail YAML: traceability.tests, code_locations, metadata.last_updated (via tied-cli/MCP, not hand-edited invalid YAML).
 - Run lint_yaml on changed YAML files ([PROC-YAML_EDIT_LOOP]).
 - Run tied_validate_consistency (include_pseudocode default).
-- Run Layer B checklist with profile agent_req_checklist_post_test; fix gating rows.
+- Run Layer B checklist (full pass including minimum_gating_rules); fix gating rows.
 - Run the project's test suite; failures mean pseudo-code or comments still diverge from behavior—reconcile (usually fix pseudo-code to match tests, then comments).
 
 ## Alignment rules (mandatory)
@@ -99,7 +99,7 @@ Tests validate **what**; code comments state **how** at the locus—the **token 
 
 - Every in-scope IMPL has a complete IMPL-{TOKEN}-pseudocode.md.
 - Inventory table shows code, test, and comment alignment for every block.
-- tied_validate_consistency ok; Layer B post_test profile satisfied or waivers documented.
+- tied_validate_consistency ok; Layer B minimum_gating_rules satisfied or waivers documented.
 - Tests pass unchanged (unless you explicitly fixed a bug and documented LEAP).
 ```
 

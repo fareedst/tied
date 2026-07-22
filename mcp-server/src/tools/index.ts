@@ -761,12 +761,24 @@ export const allTools = [
     name: "tied_token_rename",
     config: {
       description:
-        "Rename a single semantic token across the TIED tree. Replaces the token in YAML indexes (semantic-tokens, requirements, architecture, implementation), detail files (keys, values, list items), and renames the detail file when present. Validates and pretty-prints modified YAML with yq -i -P when yq is available (one file per yq invocation; never pass multiple paths to one command); otherwise YAML is left as-written. Use dry_run to list files and renames that would be performed.",
+        "Rename a single semantic token across the TIED tree (default TIED rename scope: project YAML indexes, detail files, pseudo-code sidecars, detail filename renames) and optional extra substitution targets under the client project root (parent of TIED base path). Replaces exact old_token string with new_token. Params: old_token, new_token; optional dry_run, include_markdown (tied/docs/processes.md only), extra_globs (path globs from client project root), extra_extensions (e.g. swift -> **/*.swift). Validates and pretty-prints modified YAML with yq -i -P when yq is available (one file per yq invocation). Skips common build/vendor dirs and binary files for extra targets.",
       inputSchema: z.object({
         old_token: z.string().min(1).describe("Current token ID (e.g. REQ-TIED_SETUP)"),
         new_token: z.string().min(1).describe("New token ID; must not already exist; must have same prefix (REQ-/ARCH-/IMPL-/PROC-)"),
         dry_run: z.boolean().optional().describe("If true, return files_modified and file_renamed that would be changed without writing"),
         include_markdown: z.boolean().optional().describe("If true, also replace token in tied/docs/processes.md"),
+        extra_globs: z
+          .array(z.string())
+          .optional()
+          .describe(
+            "Path globs relative to client project root (parent of TIED base path), e.g. ./*.md, tied/vocab/**/*.md"
+          ),
+        extra_extensions: z
+          .array(z.string())
+          .optional()
+          .describe(
+            "File extensions (with or without leading dot); each expands to **/*.{ext} under client project root, e.g. swift"
+          ),
       }),
     },
     handler: async ({
@@ -774,15 +786,21 @@ export const allTools = [
       new_token,
       dry_run,
       include_markdown,
+      extra_globs,
+      extra_extensions,
     }: {
       old_token: string;
       new_token: string;
       dry_run?: boolean;
       include_markdown?: boolean;
+      extra_globs?: string[];
+      extra_extensions?: string[];
     }) => {
       const result = renameSemanticToken(old_token, new_token, {
         dryRun: dry_run,
         includeMarkdown: include_markdown,
+        extraGlobs: extra_globs,
+        extraExtensions: extra_extensions,
       });
       return textContent(JSON.stringify(result, null, 2));
     },

@@ -17,6 +17,8 @@
 #   TIED_BASE_PATH  -- absolute path to the tied/ directory (auto-detected if unset)
 #   TIED_MCP_BIN    -- path to mcp-server/dist/index.js (auto-detected if unset)
 #   TIED_CLI_QUIET_MCP_STDERR -- set to 0 to forward MCP server stderr (default: suppress)
+#   TIED_MCP_COLLECT_METRICS -- set to 1 or true to append usage metrics JSONL (default: off)
+#   TIED_MCP_METRICS_PATH -- optional override for metrics JSONL (default: ~/.cursor/logs/tied-mcp-metrics.jsonl)
 #
 # impl_detail_set_essence_pseudocode only (optional, mutually exclusive with each other):
 #   TIED_CLI_IMPL_ESSENCE_FILE -- UTF-8 file to use as the pseudo-code body (avoids a huge JSON string).
@@ -68,6 +70,15 @@ if [[ ! -f "$TIED_MCP_BIN" ]]; then
 fi
 
 export TIED_BASE_PATH
+
+# Tag metrics records when opt-in collection is enabled [IMPL-MCP_USAGE_METRICS]
+if [[ -n "${TIED_MCP_COLLECT_METRICS:-}" ]]; then
+  _tied_metrics_flag="$(printf '%s' "${TIED_MCP_COLLECT_METRICS}" | tr '[:upper:]' '[:lower:]')"
+  case "${_tied_metrics_flag}" in
+    1|true|yes) export TIED_MCP_METRICS_CLIENT=tied-cli ;;
+  esac
+  unset _tied_metrics_flag
+fi
 
 REQUEST_ID=1
 

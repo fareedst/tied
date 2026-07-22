@@ -9,7 +9,7 @@
 
 **When not to use:** Greenfield REQ work (pseudo-code before tests) → [agent-req-implementation-checklist.md](agent-req-implementation-checklist.md) Track A. Authoring or refreshing missing/stale sidecars *from* code → [impl-pseudocode-from-code-agent-prompt.md](impl-pseudocode-from-code-agent-prompt.md) (Track C). This audit assumes pseudo-code **exists** and asks how good it is; the retrofit prompt assumes it is **absent** and writes it.
 
-**Canonical references:** [pseudocode-writing-and-validation.md](pseudocode-writing-and-validation.md) (definition, block leads, three-way alignment, phases A–I, validation layers), [pseudocode-validation-checklist.yaml](pseudocode-validation-checklist.yaml) (Layer B; profile **`agent_req_checklist_post_test`** because executable tests exist), [templates/impl-essence-pseudocode-template.md](../../templates/impl-essence-pseudocode-template.md), [processes.md](processes.md) (`[PROC-LEAP]`, `[PROC-IMPL_CODE_TEST_SYNC]`).
+**Canonical references:** [pseudocode-writing-and-validation.md](pseudocode-writing-and-validation.md) (definition, block leads, three-way alignment, phases A–I, validation layers), [pseudocode-validation-checklist.yaml](pseudocode-validation-checklist.yaml) (Layer B; full pass including **minimum_gating_rules** because executable tests exist), [templates/impl-essence-pseudocode-template.md](../../templates/impl-essence-pseudocode-template.md), [processes.md](processes.md) (`[PROC-LEAP]`, `[PROC-IMPL_CODE_TEST_SYNC]`).
 
 ---
 
@@ -88,7 +88,7 @@ Emit: COMPLETENESS FINDINGS list (every MISSING row).
    - RELIABLE-INCOMPLETE: no false statements, but >=1 missing behavior (completeness gap).
    - UNRELIABLE: >=1 false/contradictory/stale statement.
 4. Per IMPL and overall, compute a simple scorecard (count of PASS / RELIABLE-INCOMPLETE / UNRELIABLE blocks; count of findings by severity).
-5. Gating verdict using profile agent_req_checklist_post_test minimum_gating_rules: list which gating rules pass/fail (every REQ tag covered, every block has success-path coverage, every failure mode covered, no unresolved symbols, diagnostics carry source locations).
+5. Gating verdict using **minimum_gating_rules**: list which gating rules pass/fail (every REQ tag covered, every block has success-path coverage, every failure mode covered, no unresolved symbols, diagnostics carry source locations).
 
 Emit the AUDIT REPORT:
 - Scope + base path (from Stage 0).
@@ -110,7 +110,7 @@ For each confirmed gap, apply fixes in LEAP reverse order ([PROC-LEAP]; IMPL -> 
 2. If a fix changes requirement or architecture scope (new behavior, new touchpoint), propagate up: update ARCH, then REQ, in the same work item. Do not leave IMPL ahead of ARCH/REQ.
 3. Align comments: copy the (possibly updated) block lead literally to the test locus and the production locus; full-block copy where project policy requires (source-file-impl-traceability.md). Host comment syntax only; no paraphrase.
 4. Do NOT rewrite passing tests or change product logic unless you found a definite bug; in that case fix code/tests and document the LEAP.
-5. Re-validate: lint_yaml on touched IMPL/ARCH/REQ YAML; tied_validate_consistency; Layer B with profile agent_req_checklist_post_test; run the project test suite. Failures mean pseudo-code or comments still diverge — reconcile.
+5. Re-validate: lint_yaml on touched IMPL/ARCH/REQ YAML; tied_validate_consistency; full Layer B including minimum_gating_rules; run the project test suite. Failures mean pseudo-code or comments still diverge — reconcile.
 
 Emit: REMEDIATION LOG (finding -> fix applied -> files touched -> re-validation result) and a re-run of the Stage 4 scorecard showing residual findings (ideally none).
 
@@ -127,7 +127,7 @@ Emit: REMEDIATION LOG (finding -> fix applied -> files touched -> re-validation 
 
 - Every in-scope block has an inventory row, a bidirectional coverage matrix, and a verdict.
 - The audit report lists all findings with severity and source location and a scorecard + gating verdict.
-- (If Stage 5 ran) every error-severity finding is remediated via LEAP; tied_validate_consistency ok; Layer B post_test gating rules pass or carry documented waivers; the test suite passes.
+- (If Stage 5 ran) every error-severity finding is remediated via LEAP; tied_validate_consistency ok; Layer B minimum_gating_rules pass or carry documented waivers; the test suite passes.
 ```
 
 ---
@@ -157,8 +157,8 @@ This prompt deliberately reuses, rather than reinvents, the checks defined in [p
 |-------|-----------|--------------------------|
 | 2 — Reliability | pseudo-code statements are true | `CONTRACT-001`, `CONTRACT-002`, `CONTRACT-003`, `GRAPH-001`, `SIM-001` |
 | 3 — Completeness | nothing missing | `COVER-001`, `COVER-002`, `COVER-003`, `TRACE-001`, `TRACE-002`, `TRACE-003`, `GRAPH-002` |
-| 4 — Report | findings + gating | `DIAG-001`, `TIED-POE-001` (Layer A `tied_validate_consistency`), profile `agent_req_checklist_post_test` `minimum_gating_rules` |
-| 5 — Remediation | fix + re-validate | Layer A re-run, Layer B post_test profile, `[PROC-LEAP]` |
+| 4 — Report | findings + gating | `DIAG-001`, `TIED-POE-001` (Layer A `tied_validate_consistency`), **minimum_gating_rules** |
+| 5 — Remediation | fix + re-validate | Layer A re-run, full Layer B, `[PROC-LEAP]` |
 
 Three-way alignment definitions (block lead, literal copy, IMPL→test→code authority) come from [pseudocode-writing-and-validation.md](pseudocode-writing-and-validation.md#block-lead-and-literal-copy-in-tests-and-code).
 
@@ -167,7 +167,7 @@ Three-way alignment definitions (block lead, literal copy, IMPL→test→code au
 1. **Inventory table** — IMPL | block | block-lead tokens | test locus | code locus | loci found.
 2. **Bidirectional coverage matrix** per block — Direction A (pseudo-code statement → code/test evidence) and Direction B (code behavior / test assertion → covering pseudo-code statement). Direction A unmatched rows = reliability gaps; Direction B MISSING rows = completeness gaps.
 3. **Findings list** — id, severity (error/warning/info), block, source location, dimension (reliable vs complete), explanation.
-4. **Scorecard + gating verdict** — per-block verdict (PASS / RELIABLE-INCOMPLETE / UNRELIABLE), per-IMPL and overall counts, Layer A result, post_test gating pass/fail, prioritized gap list with recommended LEAP action.
+4. **Scorecard + gating verdict** — per-block verdict (PASS / RELIABLE-INCOMPLETE / UNRELIABLE), per-IMPL and overall counts, Layer A result, minimum_gating_rules pass/fail, prioritized gap list with recommended LEAP action.
 5. **Remediation log** (Stage 5 only) — finding → fix → files touched → re-validation result, plus a re-scored scorecard.
 
 ### Session scope
@@ -183,7 +183,7 @@ Audit one IMPL token set or one module boundary per session so inventory tables 
 - [ ] Stage 2 flagged (not excused) any pseudo-code statement contradicted by code/tests
 - [ ] Stage 3 produced a two-direction coverage matrix; every MISSING row is a recorded completeness gap
 - [ ] Each block has a verdict (PASS / RELIABLE-INCOMPLETE / UNRELIABLE) with severity and source location
-- [ ] Layer A `tied_validate_consistency` result recorded; `agent_req_checklist_post_test` gating verdict stated
+- [ ] Layer A `tied_validate_consistency` result recorded; **minimum_gating_rules** gating verdict stated
 - [ ] Report produced before any Stage 5 edit
 - [ ] (Stage 5) LEAP order IMPL → ARCH → REQ; block leads re-synced to tests/code verbatim
-- [ ] (Stage 5) `lint_yaml` clean, `tied_validate_consistency` → ok, Layer B post_test satisfied, test suite passes
+- [ ] (Stage 5) `lint_yaml` clean, `tied_validate_consistency` → ok, Layer B minimum_gating_rules satisfied, test suite passes

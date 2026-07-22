@@ -1,13 +1,13 @@
 REQ-GOAGENT-FEATURESPEC-BATCH:
-  name: Feature spec batch YAML load sort filter render preview
   category: Tooling
+  detail_file: requirements/REQ-GOAGENT-FEATURESPEC-BATCH.yaml
+  name: Feature spec batch YAML load sort filter render preview
   priority: P1
+  satisfaction_criteria:
+    - criterion: Feature-spec batch terms are canonical in tied/vocab/agentstream.md; featurespec_from_yaml block in IMPL-GOAGENT-FEATURESPEC-pseudocode.md
   status: Implemented
   traceability:
     architecture:
       - ARCH-GOAGENT-YAML-FEATURESPEC
     implementation:
       - IMPL-GOAGENT-FEATURESPEC
-  detail_file: requirements/REQ-GOAGENT-FEATURESPEC-BATCH.yaml
-  satisfaction_criteria:
-    - criterion: Feature-spec batch terms are canonical in tied/vocab/agentstream.md; featurespec_from_yaml block in IMPL-GOAGENT-FEATURESPEC-pseudocode.md

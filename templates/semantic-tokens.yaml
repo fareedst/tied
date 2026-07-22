@@ -54,8 +54,8 @@ ARCH-TIED_STRUCTURE:
   status: Active
   description: Index stub; procedure in agent-req-implementation-checklist.yaml
   cross_references:
-    - REQ-TIED_SETUP
     - IMPL-TIED_FILES
+    - REQ-TIED_SETUP
   source_index: architecture-decisions.yaml
   detail_file: null
   metadata:
@@ -67,8 +67,8 @@ ARCH-MODULE_VALIDATION:
   status: Active
   description: Index stub; procedure in agent-req-implementation-checklist.yaml
   cross_references:
-    - REQ-MODULE_VALIDATION
     - IMPL-MODULE_VALIDATION
+    - REQ-MODULE_VALIDATION
   source_index: architecture-decisions.yaml
   detail_file: null
   metadata:
@@ -106,8 +106,8 @@ PROC-PROJECT_SURVEY_AND_SETUP:
   status: Active
   description: Survey and readiness process supporting REQ-TIED_SETUP and ARCH-TIED_STRUCTURE
   cross_references:
-    - REQ-TIED_SETUP
     - ARCH-TIED_STRUCTURE
+    - REQ-TIED_SETUP
   source_index: processes.md
   detail_file: null
   metadata:
@@ -153,8 +153,8 @@ PROC-YAML_DB_OPERATIONS:
   status: Active
   description: YAML database operations for reading, writing, querying, and validating YAML index files
   cross_references:
-    - REQ-TIED_SETUP
     - ARCH-TIED_STRUCTURE
+    - REQ-TIED_SETUP
   source_index: processes.md
   detail_file: null
   metadata:
@@ -166,9 +166,9 @@ PROC-TIED_METHODOLOGY_READONLY:
   status: Active
   description: Methodology YAML (tied/methodology/) is read-only in client; project YAML (tied/ root) holds client data only; refresh methodology via copy_files.sh
   cross_references:
-    - REQ-TIED_SETUP
     - ARCH-TIED_STRUCTURE
     - PROC-YAML_DB_OPERATIONS
+    - REQ-TIED_SETUP
   source_index: processes.md
   detail_file: null
   metadata:
@@ -180,8 +180,8 @@ PROC-TEST_STRATEGY:
   status: Active
   description: Minimize code not covered by tests; unit/integration cover IMPL/ARCH/REQ logic; E2E reserved for critical journeys
   cross_references:
-    - REQ-MODULE_VALIDATION
     - IMPL-MODULE_VALIDATION
+    - REQ-MODULE_VALIDATION
   source_index: processes.md
   detail_file: null
   metadata:
@@ -193,12 +193,12 @@ PROC-TIED_DEV_CYCLE:
   status: Active
   description: 'Session workflow: plan from TIED, author pseudo-code and tokens, add/align tests, implement (TDD), minimal glue, validate, sync TIED to code'
   cross_references:
-    - REQ-TIED_SETUP
-    - REQ-MODULE_VALIDATION
+    - PROC-COMMIT_MESSAGES
+    - PROC-IMPL_PSEUDOCODE_TOKENS
     - PROC-TOKEN_AUDIT
     - PROC-TOKEN_VALIDATION
-    - PROC-IMPL_PSEUDOCODE_TOKENS
-    - PROC-COMMIT_MESSAGES
+    - REQ-MODULE_VALIDATION
+    - REQ-TIED_SETUP
   source_index: processes.md
   detail_file: null
   metadata:
@@ -260,8 +260,8 @@ ARCH-FEEDBACK_STORAGE:
   status: Active
   description: Index stub; see checklist when building feedback path
   cross_references:
-    - REQ-FEEDBACK_TO_TIED
     - IMPL-MCP_FEEDBACK_TOOLS
+    - REQ-FEEDBACK_TO_TIED
   source_index: architecture-decisions.yaml
   detail_file: null
   metadata:

@@ -11,7 +11,7 @@ description: >-
 
 In TIED-**client** checkouts, this skill is installed to **`.cursor/skills/tied-yaml/`** (via `copy_files.sh`). The path **`tools/bundled-tied-yaml-skill/`** exists only in the TIED **source** tree; do not look for it at the project root in client projects. **AGENTS.md** §1 describes the same `tied-cli` / `TIED_MCP_BIN` discovery path.
 
-All reads and writes to REQ, ARCH, and IMPL **YAML** records (indexes, `IMPL-*.yaml` detail files, and other structured TIED YAML) **must** go through the `tied-yaml` tooling. Direct file edits (`Write`, `StrReplace`, `sed`, etc.) on those paths produce invalid output (unquoted colons, broken indentation, duplicate keys). The tied-yaml server emits safe, schema-conformant YAML every time. **Exception:** the plain-text **pseudo-code sidecar** `tied/implementation-decisions/IMPL-*-pseudocode.md` may be edited **directly** in the editor when that is most efficient, then run **`tied_validate_consistency`**; or use **`impl_detail_set_essence_pseudocode`** with an inline string, `essence_pseudocode_path`, or **`tied-cli.sh`** with `TIED_CLI_IMPL_ESSENCE_FILE` / `TIED_CLI_IMPL_ESSENCE_STDIN` (see the `tied-cli.sh` header). Do not re-encode the sidecar as JSON when a direct edit or file path is simpler. **Preference:** for non-trivial or growing IMPLs, the **sidecar** is the primary artifact (diffable, avoids YAML body pitfalls); a **canonical** hand-authored body template lives at `templates/impl-essence-pseudocode-template.md` (methodology repo) — see `tied/docs/pseudocode-writing-and-validation.md` and `docs/pseudocode-format-and-practices.md`.
+All reads and writes to REQ, ARCH, and IMPL **YAML** records (indexes, `IMPL-*.yaml` detail files, and other structured TIED YAML) **must** go through the `tied-yaml` tooling. Direct file edits (`Write`, `StrReplace`, `sed`, etc.) on those paths produce invalid output (unquoted colons, broken indentation, duplicate keys). The tied-yaml server emits safe, schema-conformant YAML every time. **Exception:** the plain-text **pseudo-code sidecar** `tied/implementation-decisions/IMPL-*-pseudocode.md` may be edited **directly** in the editor when that is most efficient, then run **`tied_validate_consistency`**; or use **`impl_detail_set_essence_pseudocode`** with an inline string, `essence_pseudocode_path`, or **`tied-cli.sh`** with `TIED_CLI_IMPL_ESSENCE_FILE` / `TIED_CLI_IMPL_ESSENCE_STDIN` (see the `tied-cli.sh` header). Do not re-encode the sidecar as JSON when a direct edit or file path is simpler. **Preference:** for non-trivial or growing IMPLs, the **sidecar** is the primary artifact (diffable, avoids YAML body pitfalls); a **canonical** hand-authored body template lives at `templates/impl-essence-pseudocode-template.md` (methodology repo) — see `tied/docs/pseudocode-writing-and-validation.md` and `tied/docs/pseudocode-format-and-practices.md`.
 
 ## Prerequisites
 
@@ -36,6 +36,9 @@ TIED_MCP_BIN=/absolute/path/to/tied-repository/mcp-server/dist/index.js \
 - **`TIED_BASE_PATH`** — absolute path to the project’s **`tied/`** directory (defaults to `<client_repo_root>/tied` when unset).
 - **`TIED_REPO_ROOT`** — TIED methodology repository used for **`mcp-server`** (baked by **`copy_files.sh`**; override if the TIED clone moved).
 - **`TIED_MCP_BIN`** — absolute path to **`mcp-server/dist/index.js`** (defaults to `$TIED_REPO_ROOT/mcp-server/dist/index.js`).
+- **`TIED_MCP_COLLECT_METRICS`** — set to `1` or `true` to append local usage metrics JSONL (default **off**). Works for **`tied-cli.sh`** and IDE MCP when the server inherits the same env.
+- **`TIED_MCP_METRICS_PATH`** — optional override; default `~/.cursor/logs/tied-mcp-metrics.jsonl`.
+- Analyze with **`scripts/analyze_tied_mcp_metrics.rb`** in the TIED repo (see `docs/conversation-analysis-tools.md`). Traceability: [REQ-MCP_USAGE_METRICS], [IMPL-MCP_USAGE_METRICS].
 
 ### Do not substitute Python for TIED validation
 
@@ -127,7 +130,7 @@ Index names: `requirements`, `architecture`, `implementation`, `semantic-tokens`
 | Append bullets to `implementation_approach.details` | `yaml_detail_append_implementation_approach_details` | `token`, `details_lines` (array of strings)—appends without dropping existing lines |
 | Delete detail file | `yaml_detail_delete` | `token`; `sync_index` (default true) |
 | Create token + index + detail | `tied_token_create_with_detail` | `token`, `index_record`, `detail_record` (JSON strings) |
-| Rename a token everywhere | `tied_token_rename` | `old_token`, `new_token`; optional `dry_run` |
+| Rename a token everywhere | `tied_token_rename` | `old_token`, `new_token`; optional `dry_run`, `include_markdown`, `extra_globs`, `extra_extensions` |
 
 The `record`, `updates`, `index_record`, and `detail_record` parameters accept a **JSON string**. Escape inner quotes appropriately.
 

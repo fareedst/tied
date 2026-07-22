@@ -358,7 +358,7 @@ with open('tied/requirements.yaml', 'w') as f:
 
 This is the **controlling loop** for creating or editing any TIED YAML (index or detail). No TIED record is considered valid for use until it has passed this loop.
 
-**`scripts/yaml_tool.sh`** — Primary project utility for YAML validation and list normalization. Default operation: validate and pretty-print each path in place (`yq -i -P`, **one file per invocation**). **`--sort-lists`** runs **`scripts/yaml_list_sorter.rb`** on the same path set (sorts **qualifying list groups**: 3+ consecutive same-indent `- ` lines). Supports `-F/--find`, stdin, and NUL-separated paths like the former inline `lint_yaml.sh` implementation.
+**`scripts/yaml_tool.sh`** — Primary project utility for YAML validation and list normalization. Default operation: validate and pretty-print each path in place (`yq -i -P`, **one file per invocation**). **`--sort-lists`** runs **`scripts/yaml_list_sorter.rb`** on the same path set (sorts **qualifying list groups**: 2+ consecutive same-indent `- ` lines). Optional **`--sort-keys`** (with **`--sort-lists`**) also alphabetizes sibling map keys at every indent level. **Block-scalar bodies** (`|`, `>`, and chomping variants) are **opaque**: string content is never sorted as keys or lists. Supports `-F/--find`, stdin, and NUL-separated paths like the former inline `lint_yaml.sh` implementation.
 
 **`lint_yaml`** / **`scripts/lint_yaml.sh`** — Backward-compatible alias; delegates to **`yaml_tool.sh`**. Global shell function (or project-provided equivalent) that agents **must** use to validate YAML syntax and canonicalize formatting **in place**. It accepts **one or more** file paths; the implementation must process **each path independently** (typically one underlying `yq -i -P` per file, or equivalent). **Do not** pass multiple YAML paths to a **single raw `yq -i -P` command**: mikefarah `yq` merges multiple file arguments into one stream and corrupts files. Agents use `lint_yaml` or `yaml_tool.sh`, not ad-hoc multi-argument `yq`.
 
@@ -373,11 +373,15 @@ procedure LINT_YAML_FILES(paths):
     RUN yq -i -P path
   RETURN aggregate exit status
 
-procedure SORT_QUALIFYING_LIST_GROUPS(paths):
+procedure SORT_QUALIFYING_LIST_GROUPS(paths, sort_keys=false):
   # [PROC-YAML_EDIT_LOOP] [REQ-TIED_SETUP]
-  # How: Delegate to yaml_list_sorter.rb; group = 3+ consecutive lines with same indent starting with "- ".
+  # How: Delegate to yaml_list_sorter.rb; list group = 2+ consecutive lines with same indent starting with "- ".
+  # When sort_keys: also alphabetize sibling map keys at every indent level (--sort-keys).
+  # Block-scalar (| or >) bodies are opaque string content; never sorted as keys or lists.
+  # Before write: parse original and sorted YAML; semantic compare must pass (unordered arrays when list groups modified).
   REQUIRE ruby on PATH
-  FOR each path in paths: RUN ruby scripts/yaml_list_sorter.rb path
+  FOR each path in paths:
+    RUN ruby scripts/yaml_list_sorter.rb [--sort-keys when sort_keys] path
   RETURN aggregate exit status
 ```
 
@@ -386,7 +390,7 @@ procedure SORT_QUALIFYING_LIST_GROUPS(paths):
 1. **Edit** — Create or modify the YAML file (index or detail) under `tied/` or other TIED-related paths (e.g. `tied/citdp/*.yaml` as defined by the project).
 2. **Validate and pretty-print** — Run `scripts/yaml_tool.sh <file>` or `lint_yaml <file>` (or multiple paths in one invocation). This validates syntax and canonicalizes formatting in place. On failure, the file is invalid; fix and repeat from step 1.
 
-   **Optional list sort:** Run `scripts/yaml_tool.sh --sort-lists <file>` to alphabetize qualifying list groups (e.g. `cross_references` in index files).
+   **Optional list sort:** Run `scripts/yaml_tool.sh --sort-lists <file>` to alphabetize qualifying list groups (e.g. `cross_references` in index files). Add **`--sort-keys`** to also sort sibling map keys at every indent level.
 
    **Caution:** If your environment lacks a safe `lint_yaml` / `yaml_tool` wrapper, you must still run validation **one file per underlying pretty-print process**; never pass multiple paths to one raw `yq` invocation.
 
@@ -1095,16 +1099,19 @@ Active
 1. Load the application pseudo-code validation checklist from `tied/docs/pseudocode-validation-checklist.yaml` (or `docs/pseudocode-validation-checklist.yaml` at repo root).
 2. Run each validation category in the **recommended_validation_order** (parsing → schema → symbol_resolution → contract_validation → dependency_graph → behavioral_coverage → traceability → linting → semantic_simulation → generation_readiness → reporting).
 3. Record findings with **severity** (error, warning, info) and **source location** (block identifier, line/column when available).
-4. Treat **required** checks as **gating**: do not proceed to writing tests or code until minimum gating rules are satisfied or explicitly waived and documented.
-5. If no parser or tool exists, perform a manual pass over the checklist categories and document results.
+4. Apply **caller context** (see `tied/docs/pseudocode-writing-and-validation.md` § Validation layers — Pre-RED vs post-test):
+   - **gate-pseudocode-validation** (pre-RED): Layer A plus structural Layer B; mark behavioral_coverage and traceability rows that require test artifacts as N/A with rationale before executable tests exist.
+   - **verification-gate** (post-test): full Layer B including **minimum_gating_rules** once executable tests exist.
+5. Treat **required** checks as **gating** for the active context; document N/A rows with rationale—do not ad-hoc waive.
+6. If no parser or tool exists, perform a manual pass over the checklist categories and document results.
 
 ### Artifacts & Metrics
-- **Artifacts**: Validation report (findings by category, severity, location); optional waiver log for any required check that is waived.
-- **Success Metrics**: All required checks pass (or are waived with justification); minimum gating rules satisfied; diagnostics include source locations where available.
+- **Artifacts**: Validation report (findings by category, severity, location); N/A log for pre-RED test-dependent rows; optional waiver log only when policy allows explicit waiver (prefer N/A with rationale pre-RED).
+- **Success Metrics**: Pre-RED structural gate satisfied before persist; full minimum_gating_rules satisfied at verification-gate; diagnostics include source locations where available.
 
 ### Procedure and checklist documents
-- `tied/docs/pseudocode-writing-and-validation.md` — how to write and validate; when to run; minimum gating rules.
-- `tied/docs/pseudocode-validation-checklist.yaml` — canonical checklist (categories, required/optional checks, recommended order, minimum_gating_rules, tailoring).
+- `tied/docs/pseudocode-writing-and-validation.md` — how to write and validate; pre-RED vs post-test contexts; minimum gating rules.
+- `tied/docs/pseudocode-validation-checklist.yaml` — canonical checklist (categories, required/optional checks, recommended order, minimum_gating_rules; tailoring.notes for project extensions).
 
 ---
 
@@ -1113,7 +1120,7 @@ Active
 ### Purpose
 Keep one controlled set of preferred terms so that requirements, architecture, IMPL pseudo-code, tests, code, and user-facing docs all name the same concept the same way. The **domain vocabulary index** files at `tied/vocab/*.md` are an active traceability artifact: a chosen preferred term becomes the literal identifier reused as the IMPL pseudo-code **UPPER_SNAKE block name**, the test/code symbol, the storage name, and the UI label, which keeps REQ criteria testable and three-way alignment (`[PROC-IMPL_CODE_TEST_SYNC]`) intact. This is **distinct** from the IMPL pseudo-code grammar "preferred vocabulary" (the keywords INPUT/OUTPUT/DATA/CONTROL in `implementation-decisions.md`); that grammar governs how a block is written, whereas this process governs which **domain term** a concept is named.
 
-The recommended structure, format, content, and governance standards for these files are described in `docs/vocabulary-index-analysis-and-standards.md`.
+The recommended structure, format, content, and governance standards for these files are described in `tied/docs/vocabulary-index-analysis-and-standards.md`.
 
 ### Scope
 Every point in `[PROC-AGENT_REQ_CHECKLIST]` where a concept is named or expressed: rewording fuzzy user/sponsor input that names concepts; naming TIED resources (REQ/ARCH/IMPL tokens and record `name` fields); naming storage items (files, folders, schema); naming logical units (procedures, UPPER_SNAKE block names); writing tests, code, design, and UI documents; and reconciling the index after those artifacts change.
@@ -1132,12 +1139,23 @@ Active
 
 ### Core activities
 1. **RESOLVE (before naming/writing)**: look up the concept in `tied/vocab/*.md`; choose the one **preferred** term; reword fuzzy or synonym wording to that canonical term; verify exact spelling/backtick form; flag any term absent from the index.
-2. **RECORD (as concepts are generated, and after artifacts are written)**: add or update the term immediately — preferred-term-vs-synonym row, naming bridge row (concept ↔ token ↔ storage ↔ UI label), and UPPER_SNAKE block name — keep the alphabetical index in sync, and cite the relevant REQ/ARCH/IMPL.
-3. **Immature client**: if `tied/vocab/` or its `*.md` files do not exist, create `tied/vocab/` and seed an index file when the change introduces enough named concepts; otherwise do a lightweight consistency pass or skip with an explicit note in the per-request checklist copy.
+2. **PRELOAD (before reading TIED indexes, detail files, source, or tests)**: read `tied/vocab/domain-references-routing.md` (lightweight routing index); match task keywords to the routing table; from task scope (change-definition, sponsor context, affected modules) list concepts/subsystems in play; open only matched glossaries; extract preferred terms, avoid-list synonyms, naming-bridge rows, and UPPER_SNAKE block names; produce a brief term map for interpreting subsequent artifacts. For cross-cutting concerns, search `tied/vocab/domain-references.md` for the relevant cross-topic note (**Touchpoint 2**).
+3. **RECORD (as concepts are generated, and after artifacts are written)**: add or update the term immediately — preferred-term-vs-synonym row, naming bridge row (concept ↔ token ↔ storage ↔ UI label), and UPPER_SNAKE block name — keep the alphabetical index in sync, and cite the relevant REQ/ARCH/IMPL.
+4. **VALIDATE (before commit)**: audit changed artifacts (TIED record names, `semantic-tokens.yaml`, pseudo-code block names, tests, code, README/CHANGELOG) against the index; confirm each concept resolves to exactly one preferred term; block commit on unresolved synonym drift or missing bridges (**Touchpoint 3**).
+5. **Immature client**: if `tied/vocab/` or its `*.md` files do not exist, create `tied/vocab/` and seed an index file when the change introduces enough named concepts; otherwise do a lightweight consistency pass or skip with an explicit note in the per-request checklist copy.
+
+### Touchpoint mapping ([PROC-AGENT_REQ_CHECKLIST])
+| Touchpoint | Mode | Checklist steps |
+|---|---|---|
+| Prompt intake | RESOLVE (+ RECORD for new concepts) | `translate-sponsor-intent`, `change-definition` |
+| Pre-read | PRELOAD | `session-bootstrap`, `impact-discovery` |
+| Pre-commit | VALIDATE | `traceable-commit` |
+
+Inline during work: RESOLVE before naming; RECORD after artifact edits. Executor: `sub-vocabulary-sync` in [`agent-req-implementation-checklist.yaml`](agent-req-implementation-checklist.yaml).
 
 ### Artifacts & Metrics
 - **Artifacts**: `tied/vocab/*.md` index files (preferred-term tables, naming bridges, UPPER_SNAKE block-name tables, alphabetical index).
-- **Success Metrics**: each named concept resolves to exactly one preferred term; new concepts recorded the moment they are generated; tokens/storage/logical-unit names and UI/design terms match the index; index reconciled after tests, code, design, and UI docs change.
+- **Success Metrics**: each named concept resolves to exactly one preferred term; term map loaded before reading TIED/code (PRELOAD); new concepts recorded the moment they are generated; tokens/storage/logical-unit names and UI/design terms match the index; index reconciled after tests, code, design, and UI docs change; VALIDATE pass before commit.
 
 ---
 

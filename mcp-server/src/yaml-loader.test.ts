@@ -10,6 +10,7 @@ import path from "node:path";
 import os from "node:os";
 import {
   getBasePath,
+  getClientProjectRoot,
   resolveIndexPath,
   clearBasePathCache,
 } from "./yaml-loader.js";
@@ -33,6 +34,20 @@ describe("getBasePath", () => {
     } finally {
       delete process.env.TIED_BASE_PATH;
       fs.rmSync(dir, { recursive: true });
+    }
+  });
+
+  it("getClientProjectRoot returns parent of TIED base path", () => {
+    const clientRoot = fs.mkdtempSync(path.join(os.tmpdir(), "tied-loader-client-"));
+    const tiedDir = path.join(clientRoot, "tied");
+    fs.mkdirSync(tiedDir, { recursive: true });
+    try {
+      process.env.TIED_BASE_PATH = tiedDir;
+      clearBasePathCache();
+      assert.strictEqual(getClientProjectRoot(), clientRoot);
+    } finally {
+      delete process.env.TIED_BASE_PATH;
+      fs.rmSync(clientRoot, { recursive: true });
     }
   });
 });

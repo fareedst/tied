@@ -1,16 +1,34 @@
 REQ-GOAGENT-NON-COMPACT-HTML-FORMAT:
-  name: Non-compact HTML format for agentstream rendered prompts
   category: Tooling
-  priority: P1
-  status: Implemented
   description: When a documented output mode (non-compact HTML) is selected, turn bodies for checklist and TDD-loop (and any other in-scope renderers) MUST be produced as human- and diff-friendly HTML with line breaks and stable element boundaries, not a single minified line. The exact whitespace contract (indentation, optional blank lines, element ordering) MUST be defined in implementation records and testable. When the mode is not selected, existing markdown/plain and pipeline behavior for those sources MUST remain unchanged.
+  metadata:
+    created:
+      author: AI Agent
+      date: "2026-04-24T00:00:00.000Z"
+    last_updated:
+      author: AI Agent
+      date: "2026-04-24T19:00:00.000Z"
+      reason: 'sync-tied-stack: REQ status and tests aligned with go test, IMPL, and code.'
+    last_validated:
+      date: "2026-04-24T19:00:00.000Z"
+      result: pass
+      validator: AI Agent
+  name: Non-compact HTML format for agentstream rendered prompts
+  priority: P1
   rationale:
-    why: Sponsor and operator workflows need readable, reviewable prompt bodies; compact single-line HTML is hard to read in logs, diffs, and agent transcripts.
+    benefits:
+      - Testable, traceable format selection aligned with [PROC-AGENT_REQ_CHECKLIST] and TIED tokens
     problems_solved:
       - Lack of a single named contract for non-minified HTML-shaped output in Go agentstream
       - Risk of ad-hoc formatting that breaks diff stability or parity with checklist-driven runs
-    benefits:
-      - Testable, traceable format selection aligned with [PROC-AGENT_REQ_CHECKLIST] and TIED tokens
+    why: Sponsor and operator workflows need readable, reviewable prompt bodies; compact single-line HTML is hard to read in logs, diffs, and agent transcripts.
+  related_requirements:
+    depends_on:
+      - REQ-GOAGENT-LIB-MODULE
+      - REQ-GOAGENT-YAML-STEP-RENDER
+    related_to:
+      - PROC-AGENT_REQ_CHECKLIST
+    supersedes: []
   satisfaction_criteria:
     - criterion: A documented `non_compact_html` (or equivalent) output mode exists with explicit rules for line breaks and non-minified structure
       metric: Recorded in REQ satisfaction criteria and later ARCH/IMPL; verified by unit tests
@@ -19,37 +37,19 @@ REQ-GOAGENT-NON-COMPACT-HTML-FORMAT:
     - criterion: Same logical step or record content in non-compact HTML mode serializes to a stable deterministic output per the documented contract
       metric: Snapshot or structural tests on golden fixtures
     - criterion: Non-compact HTML terms are canonical in tied/vocab/agentstream.md; APPLY_TO_TURNS block in IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT-pseudocode.md
+  status: Implemented
+  traceability:
+    architecture:
+      - ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT
+    code_annotations:
+      - REQ-GOAGENT-NON-COMPACT-HTML-FORMAT
+    implementation:
+      - IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT
+    tests:
+      - tools/agentstream/cmd/agentstream/compose_noncompact_test.go
+      - tools/agentstream/htmlformat/htmlformat_test.go
   validation_criteria:
     - method: go test in tools/agentstream
       coverage: packages implementing the format after IMPL linkage
     - method: tied_validate_consistency
       coverage: After ARCH/IMPL records exist and link to this REQ
-  traceability:
-    architecture:
-      - ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT
-    implementation:
-      - IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT
-    tests:
-      - tools/agentstream/htmlformat/htmlformat_test.go
-      - tools/agentstream/cmd/agentstream/compose_noncompact_test.go
-    code_annotations:
-      - REQ-GOAGENT-NON-COMPACT-HTML-FORMAT
-  related_requirements:
-    depends_on:
-      - REQ-GOAGENT-LIB-MODULE
-      - REQ-GOAGENT-YAML-STEP-RENDER
-    related_to:
-      - PROC-AGENT_REQ_CHECKLIST
-    supersedes: []
-  metadata:
-    created:
-      date: "2026-04-24T00:00:00.000Z"
-      author: AI Agent
-    last_updated:
-      date: "2026-04-24T19:00:00.000Z"
-      author: AI Agent
-      reason: 'sync-tied-stack: REQ status and tests aligned with go test, IMPL, and code.'
-    last_validated:
-      date: "2026-04-24T19:00:00.000Z"
-      validator: AI Agent
-      result: pass

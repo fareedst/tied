@@ -1,13 +1,13 @@
 REQ-GOAGENT-CLI-CONFIG:
-  name: Unified CLI parsing and configuration resolution for agentstream
   category: Tooling
+  detail_file: requirements/REQ-GOAGENT-CLI-CONFIG.yaml
+  name: Unified CLI parsing and configuration resolution for agentstream
   priority: P1
+  satisfaction_criteria:
+    - criterion: CLI flag and config terms are canonical in tied/vocab/agentstream.md; ParseAndResolve block in IMPL-GOAGENT-CLI-CMD-pseudocode.md
   status: Implemented
   traceability:
     architecture:
       - ARCH-GOAGENT-CLI
     implementation:
       - IMPL-GOAGENT-CLI-CMD
-  detail_file: requirements/REQ-GOAGENT-CLI-CONFIG.yaml
-  satisfaction_criteria:
-    - criterion: CLI flag and config terms are canonical in tied/vocab/agentstream.md; ParseAndResolve block in IMPL-GOAGENT-CLI-CMD-pseudocode.md

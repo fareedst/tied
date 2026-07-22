@@ -1,30 +1,4 @@
 IMPL-TIED_FILES:
-  name: TIED File Creation
-  status: Active
-  cross_references:
-    - ARCH-TIED_STRUCTURE
-    - REQ-TIED_SETUP
-  rationale:
-    why: Implements ARCH-TIED_STRUCTURE and realizes REQ-TIED_SETUP by creating the foundational TIED directory structure and files
-    problems_solved:
-      - Inconsistent project structure across implementations
-      - Manual setup of TIED structure is error-prone
-      - Missing required TIED files and directories
-    benefits:
-      - All required files and directories created correctly
-      - Automated, consistent TIED setup
-      - Easy project bootstrapping with single command
-  implementation_approach:
-    summary: Bootstrap script that creates tied/ directory, copies template files, sets up base files, and installs the tied-yaml CLI skill under .cursor/skills/tied-yaml/
-    details:
-      - Copy base files to project root when missing (.cursorrules, AGENTS.md). In a TIED source repository, live guide content is under tied/docs/; agents and preload use client ./tied/docs/ paths and ./tied/agent-preload-contract.yaml.
-      - Copy guide .md files, detail-files-schema.md, preload contract templates, and reference docs from TIED source tied/docs/ into client tied/docs/ when missing (per DOCS_TO_COPY in copy_files.sh)
-      - Copy YAML index files from templates (requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml)
-      - Create detail subdirectories (requirements/, architecture-decisions/, implementation-decisions/)
-      - Create tied/ directory at project root
-      - Install the tied-yaml Cursor skill to .cursor/skills/tied-yaml/ (from tools/bundled-tied-yaml-skill/ in the TIED source repo; .cursor/skills/tied-yaml only if the bundle is missing; overwritten each run). The canonical stdio client on the client is .cursor/skills/tied-yaml/scripts/tied-cli.sh only; copy_files.sh does not create a project-root scripts/tied-cli.sh entry.
-      - Patch installed tied-cli.sh to bake TIED_REPO_ROOT (absolute TIED source path) so TIED_MCP_BIN resolves on client projects (_patch_tied_cli_repo_root in copy_files.sh)
-      - Seed tied/vocab/*.md from TIED source when client tied/vocab/ is missing or empty (never overwrite existing client vocab files)
   code_locations:
     files:
       - path: copy_files.sh
@@ -34,38 +8,90 @@ IMPL-TIED_FILES:
           - 450
       - path: tools/bundled-tied-yaml-skill/scripts/tied-cli.sh
         description: Bundled tied-cli with TIED_REPO_ROOT placeholder for client bake
+      - path: scripts/yaml_tool.sh
+        description: YAML lint/pretty-print and --sort-lists/--sort-keys entry point [PROC-YAML_EDIT_LOOP]
+      - path: scripts/yaml_list_sorter.rb
+        description: Qualifying list sort; optional --sort-keys; post-sort yaml_semantic_compare [PROC-YAML_EDIT_LOOP]
+      - path: scripts/yaml_list_sorter_test.rb
+        description: Tests for yaml_list_sorter and yaml_semantic_compare library behavior
+      - path: scripts/yaml_semantic_compare.rb
+        description: Semantic YAML value compare for post-sort validation and directory diffs
+      - path: scripts/compare_yaml_dirs.rb
+        description: Directory-level YAML semantic comparison CLI
+      - path: scripts/compare_yaml_dirs_test.rb
+        description: Smoke tests for compare_yaml_dirs.rb
+      - path: scripts/analyze_tied_mcp_metrics.rb
+        description: Offline MCP usage metrics JSONL aggregator (supporting script under TIED tooling)
+      - path: scripts/analyze_tied_mcp_metrics_test.rb
+        description: Smoke tests for analyze_tied_mcp_metrics.rb
+      - path: mcp-server/src/token-rename.ts
+        description: tied_token_rename; extra_globs/extra_extensions from client project root
+      - path: mcp-server/src/token-rename.test.ts
+        description: Unit tests for token rename including extra substitution targets
     functions:
       - name: setup_tied_structure
-        file: copy_files.sh
         description: Creates directories and copies template files (if implemented as function)
+        file: copy_files.sh
+  cross_references:
+    - ARCH-TIED_STRUCTURE
+    - REQ-TIED_SETUP
+  detail_file: implementation-decisions/IMPL-TIED_FILES.yaml
+  implementation_approach:
+    details:
+      - Copy base files to project root when missing (.cursorrules, AGENTS.md). In a TIED source repository, live guide content is under tied/docs/; agents and preload use client ./tied/docs/ paths and ./tied/agent-preload-contract.yaml.
+      - Copy guide .md files, detail-files-schema.md, preload contract templates, and reference docs from TIED source tied/docs/ into client tied/docs/ when missing (per DOCS_TO_COPY in copy_files.sh)
+      - Copy YAML index files from templates (requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml)
+      - Create detail subdirectories (requirements/, architecture-decisions/, implementation-decisions/)
+      - Create tied/ directory at project root
+      - Install the tied-yaml Cursor skill to .cursor/skills/tied-yaml/ (from tools/bundled-tied-yaml-skill/ in the TIED source repo; .cursor/skills/tied-yaml only if the bundle is missing; overwritten each run). The canonical stdio client on the client is .cursor/skills/tied-yaml/scripts/tied-cli.sh only; copy_files.sh does not create a project-root scripts/tied-cli.sh entry.
+      - Patch installed tied-cli.sh to bake TIED_REPO_ROOT (absolute TIED source path) so TIED_MCP_BIN resolves on client projects (_patch_tied_cli_repo_root in copy_files.sh)
+      - Seed tied/vocab/*.md from TIED source when client tied/vocab/ is missing or empty (never overwrite existing client vocab files)
+      - 'YAML edit-loop tooling: yaml_tool.sh --sort-lists/--sort-keys via yaml_list_sorter.rb; post-sort semantic validation via yaml_semantic_compare.rb; directory compare via compare_yaml_dirs.rb [PROC-YAML_EDIT_LOOP]'
+      - tied_token_rename supports extra_globs/extra_extensions anchored at client project root for substitution outside default TIED rename scope
+    summary: Bootstrap script that creates tied/ directory, copies template files, sets up base files, and installs the tied-yaml CLI skill under .cursor/skills/tied-yaml/; ships YAML sort/compare and token-rename tooling
+  metadata:
+    created:
+      author: AI Agent
+      date: 2025-12-18T00:00:00.000Z
+    last_updated:
+      author: AI Agent
+      date: "2026-07-21T00:00:00.000Z"
+      reason: Add compare_yaml_dirs_test.rb to code_locations and traceability.tests
+    last_validated:
+      date: 2026-02-06T00:00:00.000Z
+      result: pass
+      validator: AI Agent
+  name: TIED File Creation
+  rationale:
+    benefits:
+      - All required files and directories created correctly
+      - Automated, consistent TIED setup
+      - Easy project bootstrapping with single command
+    problems_solved:
+      - Inconsistent project structure across implementations
+      - Manual setup of TIED structure is error-prone
+      - Missing required TIED files and directories
+    why: Implements ARCH-TIED_STRUCTURE and realizes REQ-TIED_SETUP by creating the foundational TIED directory structure and files
+  related_decisions:
+    depends_on: []
+    see_also:
+      - ARCH-TIED_STRUCTURE
+      - REQ-TIED_SETUP
+    supersedes: []
+  status: Active
   traceability:
     architecture:
       - ARCH-TIED_STRUCTURE
+    code_annotations:
+      - ARCH-TIED_STRUCTURE
+      - IMPL-TIED_FILES
+      - REQ-TIED_SETUP
     requirements:
       - REQ-TIED_SETUP
     tests:
       - Manual verification checklists
       - mcp-server/src/e2e/bootstrap-and-load.test.ts
-    code_annotations:
-      - ARCH-TIED_STRUCTURE
-      - IMPL-TIED_FILES
-      - REQ-TIED_SETUP
-  related_decisions:
-    depends_on: []
-    supersedes: []
-    see_also:
-      - ARCH-TIED_STRUCTURE
-      - REQ-TIED_SETUP
-  detail_file: implementation-decisions/IMPL-TIED_FILES.yaml
-  metadata:
-    created:
-      date: 2025-12-18T00:00:00.000Z
-      author: AI Agent
-    last_updated:
-      date: "2026-04-24T00:00:00.000Z"
-      author: AI Agent
-      reason: 'Single tied-cli path: no scripts/tied-cli.sh symlink; canonical .cursor/skills/tied-yaml/scripts/tied-cli.sh'
-    last_validated:
-      date: 2026-02-06T00:00:00.000Z
-      validator: AI Agent
-      result: pass
+      - scripts/yaml_list_sorter_test.rb
+      - scripts/compare_yaml_dirs_test.rb
+      - scripts/analyze_tied_mcp_metrics_test.rb
+      - mcp-server/src/token-rename.test.ts

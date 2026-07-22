@@ -66,7 +66,7 @@ Each [`tied-cli.sh`](../../.cursor/skills/tied-yaml/scripts/tied-cli.sh) invocat
 | IMPL: set `essence_pseudocode` only | `impl_detail_set_essence_pseudocode` | `token`, and **exactly one of** `essence_pseudocode` **or** `essence_pseudocode_path` (file under TIED base); optional `metadata_last_updated`. `tied-cli:` `TIED_CLI_IMPL_ESSENCE_FILE` or `TIED_CLI_IMPL_ESSENCE_STDIN=1` to supply the body without a huge JSON string. |
 | Delete detail file | `yaml_detail_delete` | `token`; optional `sync_index` |
 | REQ ↔ ARCH/IMPL traceability | `get_decisions_for_requirement`, `get_requirements_for_decision` | requirement or decision token |
-| Rename token everywhere | `tied_token_rename` | `old_token`, `new_token`; optional `dry_run` |
+| Rename token everywhere | `tied_token_rename` | `old_token`, `new_token`; optional `dry_run`, `include_markdown`, `extra_globs`, `extra_extensions` |
 | Validate index YAML syntax | `yaml_index_validate` | — |
 | Full consistency (traceability, detail files, pseudo-code token comments) | `tied_validate_consistency` | optional flags per README |
 
