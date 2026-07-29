@@ -93,10 +93,15 @@ describe("e2e: bootstrap and load", () => {
     );
 
     const vocabIndex = path.join(tiedDir, "vocab", "domain-references.md");
+    const vocabRouting = path.join(tiedDir, "vocab", "routing.md");
     const vocabMethodology = path.join(tiedDir, "vocab", "tied-methodology.md");
     assert.ok(
       fs.existsSync(vocabIndex),
       "copy_files.sh should seed tied/vocab/domain-references.md [IMPL-TIED_FILES] [PROC-VOCABULARY_INDEX]"
+    );
+    assert.ok(
+      fs.existsSync(vocabRouting),
+      "copy_files.sh should seed tied/vocab/routing.md [IMPL-TIED_FILES] [PROC-VOCABULARY_INDEX]"
     );
     assert.ok(
       fs.existsSync(vocabMethodology),

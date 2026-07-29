@@ -1,6 +1,6 @@
-# Domain vocabulary routing index
+# Vocab directory routing index (primary entry)
 
-**Purpose:** Lightweight bootstrap file for AI agent sessions. Read this (~70 lines) instead of the full [`domain-references.md`](domain-references.md) at session start. Identifies which glossary file(s) to PRELOAD for a given task.
+**Purpose:** Primary entry for `tied/vocab/`. Lightweight bootstrap file for AI agent sessions. Read this (~70 lines) instead of the full [`domain-references.md`](domain-references.md) at session start. Identifies which glossary file(s) to PRELOAD for a given task.
 
 **Procedure:**
 1. Read this file (once per session).

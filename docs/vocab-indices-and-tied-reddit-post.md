@@ -20,7 +20,7 @@ The vocabulary system is three layers, not one flat page.
 
 In the TIED methodology repo:
 
-- **Routing index** — [`tied/vocab/domain-references-routing.md`](../tied/vocab/domain-references-routing.md) (~70 lines). Session bootstrap: match task keywords, PRELOAD only the matched glossaries. Mature clients add this when the full index grows too large for agents to read at every session start.
+- **Routing index** — [`tied/vocab/routing.md`](../tied/vocab/routing.md) (~70 lines). Session bootstrap: match task keywords, PRELOAD only the matched glossaries. Mature clients add this when the full index grows too large for agents to read at every session start.
 - **Full index** — [`tied/vocab/domain-references.md`](../tied/vocab/domain-references.md). Directory: priority, scope, one row per glossary, plus "authoring guides (not glossaries)" and cross-topic notes. Read on-demand for cross-cutting concerns—not at bootstrap when a routing index exists.
 
 Other TIED client repos may use `docs/*-vocabulary.md` instead; the structural idea is the same. The meta-standard lives in [`tied/docs/vocabulary-index-analysis-and-standards.md`](../tied/docs/vocabulary-index-analysis-and-standards.md). Outreach framing: [`vocabulary-layer-tied-leap-citdp.md`](vocabulary-layer-tied-leap-citdp.md).
@@ -101,7 +101,7 @@ Look up the concept in `tied/vocab/*.md`. Choose the **one preferred term**. Rew
 
 ### PRELOAD (Touchpoint 2 — before reading docs/code)
 
-Read `tied/vocab/domain-references-routing.md`; match task keywords; open **only** matched glossaries; build a term map **before** reading TIED indexes, detail files, source, or tests so symbols and paths are interpreted with canonical names. For cross-cutting concerns, search the full `domain-references.md` on demand. Primary steps: `session-bootstrap`, `impact-discovery`.
+Read `tied/vocab/routing.md`; match task keywords; open **only** matched glossaries; build a term map **before** reading TIED indexes, detail files, source, or tests so symbols and paths are interpreted with canonical names. For cross-cutting concerns, search the full `domain-references.md` on demand. Primary steps: `session-bootstrap`, `impact-discovery`.
 
 ### RECORD (inline during work)
 
@@ -185,7 +185,7 @@ A traditional glossary *describes* the system for humans. These indices are a **
 
 ## TL;DR (comment-section edition)
 
-- We keep domain glossaries as plain Markdown under `tied/vocab/`, indexed by `domain-references.md`, with `domain-references-routing.md` for lightweight session bootstrap.
+- We keep domain glossaries as plain Markdown under `tied/vocab/`, indexed by `domain-references.md`, with `routing.md` for lightweight session bootstrap.
 - They're not wiki fluff — they're wired into `[PROC-VOCABULARY_INDEX]` and the agent REQ checklist via `sub-vocabulary-sync`.
 - **RESOLVE** before you name anything (tokens, blocks, files, UI copy). **PRELOAD** via the routing index before reading TIED/docs/code. **RECORD** when new concepts show up or artifacts change. **VALIDATE** before commit.
 - The preferred term becomes the `UPPER_SNAKE` pseudo-code block name, then copies into test/code comments. One name, three places, or alignment breaks.
@@ -195,4 +195,4 @@ A traditional glossary *describes* the system for humans. These indices are a **
 
 ---
 
-*Further reading: [`tied/docs/vocabulary-index-analysis-and-standards.md`](../tied/docs/vocabulary-index-analysis-and-standards.md) · [`tied/vocab/domain-references-routing.md`](../tied/vocab/domain-references-routing.md) · [`tied/vocab/domain-references.md`](../tied/vocab/domain-references.md) · [`vocabulary-layer-tied-leap-citdp.md`](vocabulary-layer-tied-leap-citdp.md) · [`tied-domain-vocabulary-research-prompt.md`](tied-domain-vocabulary-research-prompt.md) · [`tied/docs/processes.md`](../tied/docs/processes.md) § `[PROC-VOCABULARY_INDEX]`*
+*Further reading: [`tied/docs/vocabulary-index-analysis-and-standards.md`](../tied/docs/vocabulary-index-analysis-and-standards.md) · [`tied/vocab/routing.md`](../tied/vocab/routing.md) · [`tied/vocab/domain-references.md`](../tied/vocab/domain-references.md) · [`vocabulary-layer-tied-leap-citdp.md`](vocabulary-layer-tied-leap-citdp.md) · [`tied-domain-vocabulary-research-prompt.md`](tied-domain-vocabulary-research-prompt.md) · [`tied/docs/processes.md`](../tied/docs/processes.md) § `[PROC-VOCABULARY_INDEX]`*

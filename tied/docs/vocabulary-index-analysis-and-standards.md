@@ -2,7 +2,7 @@
 
 Analysis of the canonical domain vocabulary indices — what they contain, recommended authoring standards, and how their TIED integration differs from a traditional software glossary.
 
-**Client bootstrap:** Bootstrapped TIED client projects use `tied/vocab/<topic>.md` (no `-vocabulary` filename suffix) with an index at `tied/vocab/domain-references.md` and a lightweight routing index at `tied/vocab/domain-references-routing.md` for session PRELOAD. Section 1 below uses Markscope `docs/*-vocabulary.md` as an **illustrative example corpus**; §2–§3 apply to all TIED clients; §4 documents the STDD/TIED repository layout.
+**Client bootstrap:** Bootstrapped TIED client projects use `tied/vocab/<topic>.md` (no `-vocabulary` filename suffix) with an index at `tied/vocab/domain-references.md` and a lightweight routing index at `tied/vocab/routing.md` for session PRELOAD. Section 1 below uses Markscope `docs/*-vocabulary.md` as an **illustrative example corpus**; §2–§3 apply to all TIED clients; §4 documents the STDD/TIED repository layout.
 
 **Index of the example corpus:** [`markscope-domain-references.md`](markscope-domain-references.md). **Replication prompt:** [`tied-domain-vocabulary-research-prompt.md`](tied-domain-vocabulary-research-prompt.md). **Outreach (Vocab ↔ TIED ↔ CITDP ↔ LEAP):** [`vocabulary-layer-tied-leap-citdp.md`](vocabulary-layer-tied-leap-citdp.md).
 
@@ -16,7 +16,7 @@ Analysis of the canonical domain vocabulary indices — what they contain, recom
 
 The vocabulary system is layered, not just the glossaries:
 
-- **One routing index** — `tied/vocab/domain-references-routing.md` (~70 lines). Lightweight session bootstrap: keyword → glossary routing table; agents PRELOAD only matched files. Create this when the full index grows too large for bootstrap.
+- **One routing index (primary directory entry)** — `tied/vocab/routing.md` (~70 lines). Lightweight session bootstrap: keyword → glossary routing table; agents PRELOAD only matched files. Create this when the full index grows too large for bootstrap.
 - **One full index page** — [`markscope-domain-references.md`](markscope-domain-references.md) (example) / `tied/vocab/domain-references.md` (TIED). A directory with a `Priority | Document | Scope` table (one row per glossary), plus "Authoring guides (not glossaries)," "Behavior inventories (not glossaries)," and cross-topic notes. Read on-demand for cross-cutting concerns—not at every session start when a routing index exists.
 - **Nine canonical glossaries** (`docs/*-vocabulary.md` in the example corpus):
 
@@ -109,7 +109,7 @@ These consolidate what the corpus does well and tighten observed inconsistencies
 
 - **Mandatory section order**: Title `(canonical)` → Scope (with explicit exclusions) → Traceability → See also → body → Alphabetical index. Make this a template/checklist.
 - **One index page is required** and must list *every* glossary with a scope line; segregate non-glossaries (authoring guides, behavior inventories) into clearly labeled sections.
-- **Routing index when the full index is large:** add `domain-references-routing.md` with a keyword→glossary table; PRELOAD reads the routing file first and opens only matched glossaries. Keep the full index for cross-topic notes and authoring.
+- **Routing index when the full index is large:** add `routing.md` with a keyword→glossary table; PRELOAD reads the routing file first and opens only matched glossaries. Keep the full index for cross-topic notes and authoring.
 - **Add a "Pseudo-code block names" section to every glossary.** The replication prompt *requires* this (Phase 2), but the lower-priority glossaries (`shell-evaluation`, `macos-distribution`, `diagnostics`, `mermaid-layout`) lacked it while the priority-1/2 glossaries reference blocks inline. Standardize a `Preferred term | UPPER_SNAKE block | Owning IMPL` table, with `(proposed)` for gaps. This is the single most valuable structural fix.
 - **Split/merge rule**: split at ~15+ named concepts or distinct audiences; merge when two areas share one dispatch/order story. Promote this note into each file.
 
@@ -183,7 +183,7 @@ This **TIED methodology repository** (stdd) uses a project-local vocabulary tree
 
 | Element | Location in this repo |
 |---------|------------------------|
-| Routing index (bootstrap) | [`../vocab/domain-references-routing.md`](../vocab/domain-references-routing.md) |
+| Routing index (bootstrap) | [`../vocab/routing.md`](../vocab/routing.md) |
 | Full index page (on-demand) | [`../vocab/domain-references.md`](../vocab/domain-references.md) |
 | Canonical glossaries | `tied/vocab/<topic>.md` (plain Markdown; **no** `-vocabulary` suffix) |
 | Meta-standard (this doc) | [`vocabulary-index-analysis-and-standards.md`](vocabulary-index-analysis-and-standards.md) |

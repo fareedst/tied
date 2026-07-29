@@ -70,7 +70,7 @@ Use these **nicknames** in tickets, PRs, and agent prompts.
 | **Token registry** | `tied/semantic-tokens.yaml` | Every `[REQ-*]`, `[ARCH-*]`, `[IMPL-*]`, `[PROC-*]`. |
 | **CITDP records** | `tied/citdp/CITDP-*.yaml` | Change-analysis audit trail. |
 | **Methodology** (read-only) | `tied/methodology/` | Inherited tokens; refreshed by `copy_files.sh`; do not edit. |
-| **Domain names** | `tied/vocab/domain-references-routing.md` → matched glossaries | PRELOAD via routing index before reading YAML or source; full `domain-references.md` on demand for cross-topic. |
+| **Domain names** | `tied/vocab/routing.md` → matched glossaries | PRELOAD via routing index before reading YAML or source; full `domain-references.md` on demand for cross-topic. |
 
 Guides for YAML shapes: [requirements.md](requirements.md), [architecture-decisions.md](architecture-decisions.md), [implementation-decisions.md](implementation-decisions.md), [semantic-tokens.md](semantic-tokens.md), [detail-files-schema.md](detail-files-schema.md).
 

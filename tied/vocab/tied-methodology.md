@@ -4,7 +4,7 @@
 
 **Traceability:** [REQ-TIED_SETUP](../requirements/REQ-TIED_SETUP.yaml) · [REQ-MODULE_VALIDATION](../requirements/REQ-MODULE_VALIDATION.yaml) · [ARCH-TIED_STRUCTURE](../architecture-decisions/ARCH-TIED_STRUCTURE.yaml) · [ARCH-MODULE_VALIDATION](../architecture-decisions/ARCH-MODULE_VALIDATION.yaml) · [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) · [IMPL-MODULE_VALIDATION](../implementation-decisions/IMPL-MODULE_VALIDATION.yaml)
 
-**See also:** [`domain-references.md`](domain-references.md) · [`tied-yaml-mcp.md`](tied-yaml-mcp.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) · [`../docs/vocabulary-index-analysis-and-standards.md`](../docs/vocabulary-index-analysis-and-standards.md)
+**See also:** [`routing.md`](routing.md) (primary entry / PRELOAD) · [`domain-references.md`](domain-references.md) (full catalog, on-demand) · [`tied-yaml-mcp.md`](tied-yaml-mcp.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) · [`../docs/vocabulary-index-analysis-and-standards.md`](../docs/vocabulary-index-analysis-and-standards.md)
 
 ---
 
@@ -25,6 +25,7 @@
 | **sort map keys** | hash key sort, key normalization | Optional **`--sort-keys`** on **yaml_list_sorter** / **yaml_tool --sort-lists**; alphabetizes sibling map keys at every indent level; **block-scalar** (`\|`, `>`) bodies stay opaque |
 | **yaml_semantic_compare** | YAML equality check, deep YAML diff (alone) | Library: `scripts/yaml_semantic_compare.rb`; compares loaded YAML values (key order ignored; optional unordered arrays); used by **yaml_list_sorter** post-sort validation |
 | **compare_yaml_dirs** | directory YAML diff, recursive yaml compare | CLI: `scripts/compare_yaml_dirs.rb LEFT_DIR RIGHT_DIR`; relative-path pairing; reports missing files and semantic differences |
+| **routing.md** / **routing index** | `domain-references-routing.md`, bootstrap via full catalog | Primary `tied/vocab/` PRELOAD entry; keyword → glossary table. Full catalog remains [`domain-references.md`](domain-references.md) (on-demand) |
 
 ---
 
@@ -42,6 +43,8 @@
 | Client development index | core six | `tied/docs/client-development-index.md` | minimal CITDP+LEAP+TIED doc set | [PROC-AGENT_REQ_CHECKLIST](../docs/processes.md) |
 | Bootstrap script | copy_files | `copy_files.sh` | `./copy_files.sh /path/to/client` | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
 | Domain vocabulary index | vocab index | `tied/vocab/*.md` | checklist `VOCAB_INDEX` | [PROC-VOCABULARY_INDEX](../docs/processes.md) |
+| Vocab directory routing index | routing index | `tied/vocab/routing.md` | PRELOAD primary entry | [PROC-VOCABULARY_INDEX](../docs/processes.md) |
+| Domain vocabulary full catalog | full catalog | `tied/vocab/domain-references.md` | on-demand cross-topic / Priority table | [PROC-VOCABULARY_INDEX](../docs/processes.md) |
 | Per-request checklist copy | working folder checklist | `<working_folder>/REQ-*_<timestamp>.yaml` | — | [PROC-AGENT_REQ_CHECKLIST](../docs/processes.md) |
 | YAML validate/sort | yaml_tool | `scripts/yaml_tool.sh` | `--sort-lists` → Ruby sorter; optional `--sort-keys` | [PROC-YAML_EDIT_LOOP](../docs/processes.md) |
 | YAML lint wrapper | lint_yaml | `scripts/lint_yaml.sh` | delegates to yaml_tool | [PROC-YAML_EDIT_LOOP](../docs/processes.md) |
@@ -102,22 +105,27 @@ Exact spellings for checklist and docs cross-reference:
 | Term | Section |
 |------|---------|
 | AGENTS.md | Naming bridge |
+| compare_yaml_dirs | Preferred terms |
 | copy_files.sh | Naming bridge |
 | detail file | Preferred terms |
+| domain-references.md | Naming bridge |
+| full catalog | Naming bridge |
+| lint_yaml | Preferred terms |
 | methodology YAML | Preferred terms |
 | module validation | Preferred terms |
 | Observing AI principles! | Preferred terms |
 | PROC-AGENT_REQ_CHECKLIST | PROC catalog |
 | PROC-VOCABULARY_INDEX | PROC catalog |
 | project YAML | Preferred terms |
+| qualifying list group | Preferred terms |
+| routing index | Preferred terms |
+| routing.md | Preferred terms |
 | semantic token | Preferred terms |
+| sort map keys | Preferred terms |
 | TIED base path | Naming bridge |
 | tied/vocab | Naming bridge |
-| compare_yaml_dirs | Preferred terms |
-| lint_yaml | Preferred terms |
-| qualifying list group | Preferred terms |
-| sort map keys | Preferred terms |
 | VOCAB_INDEX | Naming bridge |
+| Vocab directory routing index | Naming bridge |
 | yaml_list_sorter | Naming bridge |
 | yaml_semantic_compare | Preferred terms |
 | yaml_tool | Preferred terms |

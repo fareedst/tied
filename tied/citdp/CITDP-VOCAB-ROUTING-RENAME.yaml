@@ -1,0 +1,75 @@
+CITDP-VOCAB-ROUTING-RENAME:
+  change_definition:
+    current_behavior_prior: "Primary tied/vocab PRELOAD entry was tied/vocab/domain-references-routing.md; agents and docs named that path for Touchpoint 2 bootstrap."
+    desired_behavior: "Primary directory entry is tied/vocab/routing.md for PRELOAD (keyword → glossary). Full catalog remains tied/vocab/domain-references.md on-demand. Docs, AGENTS, checklists, glossary RECORD, IMPL SEED_DOMAIN_VOCAB How-comment, and bootstrap e2e assert routing.md seed."
+    non_goals:
+      - "New REQ/ARCH/IMPL tokens for the rename"
+      - "Overwriting existing client tied/vocab files via copy_files.sh"
+      - "Changing scripts/yaml_tool.sh default yq pretty-print behavior (out of scope for this change request)"
+    references:
+      - "tied/vocab/routing.md"
+      - "tied/vocab/domain-references.md"
+      - "tied/docs/processes.md"
+      - "tied/implementation-decisions/IMPL-TIED_FILES-pseudocode.md"
+      - "AGENTS.md"
+      - "CHANGELOG.md"
+    success_criteria:
+      - "No live references to domain-references-routing.md outside CHANGELOG historical note"
+      - "PRELOAD docs (AGENTS, processes, tied-yaml-agent-index, checklists) point at routing.md"
+      - "Glossary RECORD prefers routing.md / routing index; avoid domain-references-routing.md"
+      - "SEED_DOMAIN_VOCAB How-comment names routing.md and domain-references.md; algorithm unchanged"
+      - "bootstrap-and-load e2e asserts seed of tied/vocab/routing.md"
+      - "REQ-TIED_SETUP seed minima (domain-references.md + tied-methodology.md) remain valid; no contradicting criterion"
+    summary: "Rename vocab routing index to routing.md as primary PRELOAD entry; keep domain-references.md as on-demand full catalog; align docs, vocab, IMPL How-comment, and bootstrap e2e."
+    unchanged_behavior: "copy_files.sh still seeds all TIED_SOURCE/tied/vocab/*.md when client vocab is missing/empty and never overwrites existing client vocab files. REQ seed minimum files unchanged."
+  completion_criteria:
+    verification_gate_notes: "bootstrap-and-load.test.ts asserts routing.md seed; repo-wide grep for domain-references-routing only in CHANGELOG; REQ/ARCH left unchanged (no contradictory criteria)."
+  impact_analysis:
+    impl_inventory_notes: "Git rename domain-references-routing.md → routing.md; doc rewires; vocab RECORD in domain-references.md, tied-methodology.md, pseudocode-and-citdp.md; IMPL-TIED_FILES-pseudocode SEED_DOMAIN_VOCAB How-comment; mcp-server e2e bootstrap-and-load.test.ts; copy_files.sh header comment only."
+    modules_or_boundaries: "Documentation and vocab under tied/vocab and tied/docs; bootstrap seed is basename-agnostic (no copy_files.sh algorithm change). Out of scope: scripts/yaml_tool.sh yq format change."
+    tied_tokens_affected:
+      - "PROC-VOCABULARY_INDEX"
+      - "IMPL-TIED_FILES"
+      - "REQ-TIED_SETUP"
+      - "ARCH-TIED_STRUCTURE"
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: "REQ/ARCH acceptance text still names seed minima domain-references.md + tied-methodology.md only; does not contradict routing.md as primary PRELOAD entry when present. No REQ/ARCH edit required."
+    record_status: "complete"
+    tied_stack_updates_required:
+      - "IMPL-TIED_FILES essence_pseudocode SEED_DOMAIN_VOCAB How-comment (done)"
+  record_identity:
+    change_request_id: "VOCAB-ROUTING-RENAME"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    checklist_session_note: "change-definition: rename primary vocab PRELOAD entry to routing.md.\nimpact-discovery: docs, vocab RECORD, IMPL How-comment, bootstrap e2e; yaml_tool.sh excluded.\ntest-strategy: e2e bootstrap seed assertion for routing.md; unit N/A for doc rename.\nverification-gate: bootstrap-and-load e2e; VALIDATE stale filename grep.\nsync-tied-stack: IMPL How-comment only; REQ/ARCH unchanged.\nCITDP: this record."
+    checklist_step_completed: "persist-citdp-record"
+    checklist_version: "agent_req_implementation_checklist v1.7.0"
+    recorded_at: "2026-07-29"
+    tied_context:
+      architecture:
+        - "ARCH-TIED_STRUCTURE"
+      implementation:
+        - "IMPL-TIED_FILES"
+      requirements:
+        - "REQ-TIED_SETUP"
+      processes:
+        - "PROC-VOCABULARY_INDEX"
+    title: "Rename vocab routing index to routing.md (primary PRELOAD entry)"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  risk_analysis:
+    risks:
+      - id: "RISK-VOCAB-ROUTE-001"
+        description: "Existing client trees keep domain-references-routing.md until renamed locally because copy_files.sh never overwrites client vocab."
+        likelihood: "High"
+        mitigation: "CHANGELOG documents client non-overwrite; clients rename locally or re-seed empty vocab dirs from updated TIED source."
+        severity: "Low"
+      - id: "RISK-VOCAB-ROUTE-002"
+        description: "Stale PRELOAD pointers keep agents reading the full catalog at bootstrap."
+        likelihood: "Medium"
+        mitigation: "Rewire AGENTS/processes/checklists/tied-yaml-agent-index; VALIDATE grep for old filename."
+        severity: "Medium"
+  tdd_sequence:
+    summary: "unit: N/A (doc/vocab rename). composition: N/A. end-to-end: bootstrap-and-load.test.ts asserts empty-client seed includes tied/vocab/routing.md."
+  test_strategy:
+    matrix_notes: "E2E: mcp-server/src/e2e/bootstrap-and-load.test.ts [IMPL-TIED_FILES] [PROC-VOCABULARY_INDEX]. Unit/composition: none for filename rename."
+    summary: "Confirm bootstrap seed coverage for routing.md; no yaml_tool tests in this change request."

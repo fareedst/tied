@@ -38,7 +38,7 @@ procedure PATCH_TIED_CLI_REPO_ROOT(projectRoot):
 
 procedure SEED_DOMAIN_VOCAB(projectRoot):
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [PROC-VOCABULARY_INDEX]
-  # How: When client tied/vocab/ is missing or has no *.md files, copy all *.md from TIED_SOURCE/tied/vocab/; never overwrite existing client vocab files.
+  # How: When client tied/vocab/ is missing or has no *.md files, copy all *.md from TIED_SOURCE/tied/vocab/ preserving basename (seed set includes routing.md as primary PRELOAD entry and domain-references.md as full on-demand catalog); never overwrite existing client vocab files.
   dest := projectRoot/tied/vocab/
   IF dest has one or more *.md files: RETURN (client extensions preserved)
   IF TIED_SOURCE/tied/vocab/ missing or empty: warn; RETURN

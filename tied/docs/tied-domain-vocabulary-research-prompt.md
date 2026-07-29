@@ -5,7 +5,7 @@ Copy everything in the **Prompt** section below into a new Cursor (or other TIED
 **Purpose:** Research existing code, tests, and docs; author one or more **canonical domain vocabulary** files plus an **index** (and a lightweight **routing** index when the full index grows large); wire light TIED cross-links. Vocabulary makes IMPL `essence_pseudocode` **precise, comparable, and traceable**—not a substitute for implementing features.
 
 **Reference implementations:**
-- **TIED methodology:** [`../vocab/domain-references.md`](../vocab/domain-references.md) + [`../vocab/domain-references-routing.md`](../vocab/domain-references-routing.md)
+- **TIED methodology:** [`../vocab/domain-references.md`](../vocab/domain-references.md) + [`../vocab/routing.md`](../vocab/routing.md)
 - **Mature product clients:** large federated corpus under `tied/vocab/` with a routing index for bootstrap when the full index exceeds agent-context comfort
 
 ---
@@ -16,7 +16,7 @@ Copy everything in the **Prompt** section below into a new Cursor (or other TIED
 |-------------|------------------------------|------------------|
 | `{PROJECT}` | `stdd` / `acme` | _e.g. `acme`_ |
 | `{INDEX_PATH}` | `tied/vocab/domain-references.md` | usually `tied/vocab/domain-references.md` |
-| `{ROUTING_PATH}` | `tied/vocab/domain-references-routing.md` | create when the full index grows large |
+| `{ROUTING_PATH}` | `tied/vocab/routing.md` | create when the full index grows large |
 | `{VOCAB_DIR}` | `tied/vocab/` | usually `tied/vocab/` |
 | `{DOMAIN_SEEDS}` | See **Domain seeds** below | REQ clusters from `tied/requirements.yaml` |
 
@@ -65,7 +65,7 @@ Read before writing vocabulary:
 - `tied/docs/vocabulary-index-analysis-and-standards.md` — structure and governance standards
 - `templates/impl-essence-pseudocode-template.md` (if present) or an existing `tied/implementation-decisions/*-pseudocode.md` sidecar in this repo
 
-**Reference example (TIED methodology):** Index `tied/vocab/domain-references.md`; routing `tied/vocab/domain-references-routing.md`; glossaries such as `tied/vocab/agentstream.md`, `tied/vocab/tied-yaml-mcp.md`, `tied/vocab/leap-proposal-queue.md`. REQ criteria should cite glossary paths **and** pseudo-code block names together.
+**Reference example (TIED methodology):** Index `tied/vocab/domain-references.md`; routing `tied/vocab/routing.md`; glossaries such as `tied/vocab/agentstream.md`, `tied/vocab/tied-yaml-mcp.md`, `tied/vocab/leap-proposal-queue.md`. REQ criteria should cite glossary paths **and** pseudo-code block names together.
 
 ---
 
@@ -195,7 +195,7 @@ This checklist confirms the **pattern** the prompt produces.
 | Acceptance item | TIED status |
 |-----------------|-------------|
 | Index lists all vocabulary files | [`../vocab/domain-references.md`](../vocab/domain-references.md) |
-| Routing index for bootstrap | [`../vocab/domain-references-routing.md`](../vocab/domain-references-routing.md) |
+| Routing index for bootstrap | [`../vocab/routing.md`](../vocab/routing.md) |
 | Each glossary: scope, synonyms, concepts, index | e.g. [`../vocab/agentstream.md`](../vocab/agentstream.md), [`../vocab/leap-proposal-queue.md`](../vocab/leap-proposal-queue.md) |
 | Glossary ↔ UPPER_SNAKE blocks | e.g. `LOAD_QUEUE` in leap-proposal-queue vocab / IMPL |
 | Vocabulary thin; IMPL owns behavior | Glossaries point to IMPL pseudo-code sidecars |
@@ -217,7 +217,7 @@ This checklist confirms the **pattern** the prompt produces.
 ```mermaid
 flowchart LR
   subgraph docsLayer [vocab layer]
-    Routing[domain-references-routing]
+    Routing["routing.md"]
     Index[domain-references index]
     Vocab1[domain vocabulary files]
   end

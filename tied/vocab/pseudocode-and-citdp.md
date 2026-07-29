@@ -4,7 +4,7 @@
 
 **Traceability:** [PROC-PSEUDOCODE_VALIDATION](../docs/processes.md) · [PROC-CITDP](../docs/processes.md) · [PROC-IMPL_PSEUDOCODE_TOKENS](../docs/processes.md) · [PROC-IMPL_CODE_TEST_SYNC](../docs/processes.md) · [PROC-VOCABULARY_INDEX](../docs/processes.md) · [REQ-TIED_SETUP](../requirements/REQ-TIED_SETUP.yaml)
 
-**See also:** [`domain-references.md`](domain-references.md) · [`tied-methodology.md`](tied-methodology.md) · [`../docs/citdp-policy.md`](../docs/citdp-policy.md) · [`../docs/pseudocode-format-and-practices.md`](../docs/pseudocode-format-and-practices.md)
+**See also:** [`routing.md`](routing.md) (PRELOAD primary entry) · [`domain-references.md`](domain-references.md) (full catalog, on-demand) · [`tied-methodology.md`](tied-methodology.md) · [`../docs/citdp-policy.md`](../docs/citdp-policy.md) · [`../docs/pseudocode-format-and-practices.md`](../docs/pseudocode-format-and-practices.md)
 
 ---
 
@@ -33,7 +33,9 @@ Checklist **`sub-vocabulary-sync`** uses **domain** vocab. Do not conflate with 
 | **LEAP** | stack update | Reverse order IMPL → ARCH → REQ when scope changes |
 | **block-lead bracket format** | token comment line | Exact pattern: `[IMPL-*] [ARCH-*] [REQ-*]` then `How: …` (IMPL, ARCH, REQ order when all three appear) |
 | **sub-vocabulary-sync RESOLVE** | lookup vocab | Before naming/writing: map fuzzy terms to one preferred term in `tied/vocab/*.md` |
+| **sub-vocabulary-sync PRELOAD** | read full catalog at bootstrap | Before reading TIED/docs/code: read [`routing.md`](routing.md), match keywords, open only matched glossaries ([PROC-VOCABULARY_INDEX] Touchpoint 2) |
 | **sub-vocabulary-sync RECORD** | update vocab | After artifacts change: add preferred-term rows, naming bridges, alphabetical index entries |
+| **sub-vocabulary-sync VALIDATE** | skip vocab audit | Before commit: audit names in docs/tokens/code against `tied/vocab/` ([PROC-VOCABULARY_INDEX] Touchpoint 3) |
 
 ---
 
@@ -48,6 +50,7 @@ Checklist **`sub-vocabulary-sync`** uses **domain** vocab. Do not conflate with 
 | CITDP record | `tied/citdp/CITDP-REQ-{TOKEN}.yaml` (pattern) | [PROC-CITDP](../docs/processes.md) |
 | Validation checklist | `tied/docs/pseudocode-validation-checklist.yaml` | [PROC-PSEUDOCODE_VALIDATION](../docs/processes.md) |
 | Domain vocab index | `tied/vocab/*.md` | [PROC-VOCABULARY_INDEX](../docs/processes.md) |
+| Vocab routing index (PRELOAD) | `tied/vocab/routing.md` | [PROC-VOCABULARY_INDEX](../docs/processes.md) |
 
 ---
 
@@ -100,8 +103,12 @@ Prefer in `essence_pseudocode` (not domain terms):
 | LEAP | Preferred terms |
 | per-request checklist copy | Preferred terms |
 | pseudo-code sidecar | Preferred terms |
+| routing.md | Naming bridge |
 | sub-vocabulary-sync | Pseudo-code blocks |
+| sub-vocabulary-sync PRELOAD | Preferred terms |
 | sub-vocabulary-sync RECORD | Preferred terms |
 | sub-vocabulary-sync RESOLVE | Preferred terms |
+| sub-vocabulary-sync VALIDATE | Preferred terms |
 | three-way alignment | Preferred terms |
 | UPPER_SNAKE block name | Preferred terms |
+| Vocab routing index | Naming bridge |

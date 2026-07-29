@@ -15,9 +15,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Semantic YAML compare tooling** — [`scripts/yaml_semantic_compare.rb`](scripts/yaml_semantic_compare.rb) (value compare; post-sort validation) and [`scripts/compare_yaml_dirs.rb`](scripts/compare_yaml_dirs.rb) (directory CLI). [`scripts/yaml_list_sorter.rb`](scripts/yaml_list_sorter.rb) rejects sorts that fail semantic comparison.
 
-- **Vocabulary routing index and client development index** — [`tied/vocab/domain-references-routing.md`](tied/vocab/domain-references-routing.md) (~70-line bootstrap router); [`tied/docs/client-development-index.md`](tied/docs/client-development-index.md); outreach copies under [`docs/`](docs/) for vocabulary research / LEAP+CITDP narrative.
+- **Vocabulary routing index and client development index** — [`tied/vocab/routing.md`](tied/vocab/routing.md) (~70-line bootstrap router); [`tied/docs/client-development-index.md`](tied/docs/client-development-index.md); outreach copies under [`docs/`](docs/) for vocabulary research / LEAP+CITDP narrative.
 
 ### Changed
+
+- **Vocab routing index rename** — [`tied/vocab/domain-references-routing.md`](tied/vocab/routing.md) → [`tied/vocab/routing.md`](tied/vocab/routing.md) as the primary `tied/vocab/` directory entry for PRELOAD. Full catalog remains [`tied/vocab/domain-references.md`](tied/vocab/domain-references.md) (on-demand). Updated AGENTS.md, process/checklist docs, outreach mirrors, and `copy_files.sh` seed comment. Existing client trees keep the old filename until renamed locally (`copy_files.sh` never overwrites client vocab files).
 
 - **Pseudo-code validation — remove YAML profile deferral** — Deleted `tailoring.profiles` (`agent_req_checklist_pre_red` / `agent_req_checklist_post_test`) from [`tied/docs/pseudocode-validation-checklist.yaml`](tied/docs/pseudocode-validation-checklist.yaml). Pre-RED vs post-test gating is now documented in prose ([`pseudocode-writing-and-validation.md`](tied/docs/pseudocode-writing-and-validation.md) § Validation layers; [`agent-req-implementation-checklist.yaml`](tied/docs/agent-req-implementation-checklist.yaml) caller contexts). Aligned: agent REQ checklist Markdown, [`processes.md`](tied/docs/processes.md) § `[PROC-PSEUDOCODE_VALIDATION]`, fidelity/retrofit agent prompts. Client trees that copied an older checklist retain profiles until methodology docs are refreshed manually (`copy_files.sh` does not overwrite existing files).
 

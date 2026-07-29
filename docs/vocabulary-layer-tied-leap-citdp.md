@@ -62,7 +62,7 @@ Most project glossaries describe the system after it exists. Ours is meant to be
 | Rarely tied to builds | Feeds pseudo-code block names, REQ criteria, Help/docs |
 | Synonyms left informal | One **preferred term** per concept; others marked avoid/legacy |
 
-Files live at `tied/vocab/<topic>.md`. The index [`tied/vocab/domain-references.md`](../tied/vocab/domain-references.md) lists every glossary and **cross-topic** notes—short relation graphs for features that span modules. When that full index grows large, agents bootstrap from [`tied/vocab/domain-references-routing.md`](../tied/vocab/domain-references-routing.md) (~70 lines) and PRELOAD only matched glossaries.
+Files live at `tied/vocab/<topic>.md`. The index [`tied/vocab/domain-references.md`](../tied/vocab/domain-references.md) lists every glossary and **cross-topic** notes—short relation graphs for features that span modules. When that full index grows large, agents bootstrap from [`tied/vocab/routing.md`](../tied/vocab/routing.md) (~70 lines) and PRELOAD only matched glossaries.
 
 Algorithms stay out of the glossaries on purpose. Step-by-step logic belongs in IMPL `essence_pseudocode`; the glossary only holds stable names and relationships so refactors do not rewrite the product dictionary every week.
 
@@ -123,7 +123,7 @@ Whether you are discussing a feature in chat or an agent is executing the implem
 | Mode | When | What to do |
 |---|---|---|
 | **RESOLVE** | Someone describes a feature informally | Map their words to canonical terms; resolve ambiguity before TIED work |
-| **PRELOAD** | Before reading YAML, source, or tests | Read `domain-references-routing.md`, match keywords, then only the matched glossaries |
+| **PRELOAD** | Before reading YAML, source, or tests | Read `routing.md`, match keywords, then only the matched glossaries |
 | **RECORD** | After naming something new or renaming | Update glossaries and cross-topic notes; wire terms into REQ when behavior is testable |
 | **VALIDATE** | Before commit | Confirm REQ, docs, tests, and commit message still use preferred terms |
 
@@ -131,7 +131,7 @@ Whether you are discussing a feature in chat or an agent is executing the implem
 
 ## A simple workflow for day-to-day discussion
 
-1. Open [`tied/vocab/domain-references-routing.md`](../tied/vocab/domain-references-routing.md).
+1. Open [`tied/vocab/routing.md`](../tied/vocab/routing.md).
 2. Match your topic to one or two glossaries; open only those.
 3. Agree preferred terms, distinctions, and relations **there**—that is the *understanding* step, not a long REQ draft.
 4. When behavior must become testable, formalize in REQ/ARCH/IMPL using those exact terms—that is the *intent* step.

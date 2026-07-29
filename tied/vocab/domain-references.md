@@ -1,14 +1,22 @@
-# Domain vocabulary index (canonical)
+# Domain vocabulary index (full catalog, on-demand)
 
-> **Agent bootstrap:** Do NOT read this file at session start. Read [`domain-references-routing.md`](domain-references-routing.md) instead (~70 lines). Consult this file only for **Cross-topic** notes when working on a cross-cutting concern.
+> **Primary directory entry:** [`routing.md`](routing.md) (~70 lines). Agents MUST read that file at session start (PRELOAD). Do **not** read this full catalog at bootstrap. Use this file only for the Priority/Document/Scope table, authoring-guide links, and **Cross-topic** notes when a concern spans glossaries.
 
-**Scope:** Single-page directory for all domain vocabulary glossaries under `tied/vocab/`. Lists priority, scope, and cross-topic notes. This page is an **index only** — canonical terms live in the linked sibling files. Algorithms and step-by-step behavior stay in `tied/implementation-decisions/*-pseudocode.md`.
+**Scope:** Full on-demand directory for all domain vocabulary glossaries under `tied/vocab/`. Lists priority, scope, and cross-topic notes. This page is an **index only** — canonical terms live in the linked sibling files. Algorithms and step-by-step behavior stay in `tied/implementation-decisions/*-pseudocode.md`.
 
 **Checklist path:** [`../docs/agent-req-implementation-checklist.yaml`](../docs/agent-req-implementation-checklist.yaml) sets `VOCAB_INDEX: ./tied/vocab`. Agents **CALL** `sub-vocabulary-sync` per [`../docs/processes.md`](../docs/processes.md) § `[PROC-VOCABULARY_INDEX]` at **three touchpoints**: **RESOLVE** at prompt intake (`translate-sponsor-intent`, `change-definition`); **PRELOAD** before reading TIED/docs/code (`session-bootstrap`, `impact-discovery`); **VALIDATE** before commit (`traceable-commit`). Inline during work: RESOLVE before naming; RECORD after artifact edits.
 
 **Standards:** [`../docs/vocabulary-index-analysis-and-standards.md`](../docs/vocabulary-index-analysis-and-standards.md).
 
-**See also:** [`../docs/client-development-index.md`](../docs/client-development-index.md) · [`tied-methodology.md`](tied-methodology.md) · [`tied-yaml-mcp.md`](tied-yaml-mcp.md) · [`feedback-to-tied.md`](feedback-to-tied.md) · [`leap-proposal-queue.md`](leap-proposal-queue.md) · [`agentstream.md`](agentstream.md) · [`agent-stream-ruby.md`](agent-stream-ruby.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) · [`config-discovery.md`](config-discovery.md)
+**See also:** [`routing.md`](routing.md) (primary entry / PRELOAD) · [`../docs/client-development-index.md`](../docs/client-development-index.md) · [`tied-methodology.md`](tied-methodology.md) · [`tied-yaml-mcp.md`](tied-yaml-mcp.md) · [`feedback-to-tied.md`](feedback-to-tied.md) · [`leap-proposal-queue.md`](leap-proposal-queue.md) · [`agentstream.md`](agentstream.md) · [`agent-stream-ruby.md`](agent-stream-ruby.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) · [`config-discovery.md`](config-discovery.md)
+
+---
+
+## Directory entry (bootstrap)
+
+| Document | Role |
+|----------|------|
+| [`routing.md`](routing.md) | **Primary** `tied/vocab/` entry — keyword → glossary routing for PRELOAD |
 
 ---
 
@@ -16,7 +24,7 @@
 
 | Priority | Document | Scope |
 |----------|----------|-------|
-| 0 | [`domain-references.md`](domain-references.md) | This index |
+| 0 | [`domain-references.md`](domain-references.md) | This full catalog (on-demand) |
 | 1 | [`tied-methodology.md`](tied-methodology.md) | TIED layout, semantic tokens, module validation, bootstrap, methodology vs project YAML, PROC-* process names |
 | 2 | [`tied-yaml-mcp.md`](tied-yaml-mcp.md) | TIED YAML MCP server, `tied-cli`, bundled skill, validation/verify/cycles/backlog/scoped analysis |
 | 2b | [`feedback-to-tied.md`](feedback-to-tied.md) | Upstream feedback artifact (`feedback.yaml`) and MCP export |
@@ -32,7 +40,6 @@
 
 | Document | Role |
 |----------|------|
-| [`domain-references-routing.md`](domain-references-routing.md) | Lightweight session bootstrap — keyword → glossary routing (PRELOAD) |
 | [`../docs/client-development-index.md`](../docs/client-development-index.md) | Minimal named set for CITDP + LEAP + TIED (Core six) |
 | [`../docs/vocabulary-index-analysis-and-standards.md`](../docs/vocabulary-index-analysis-and-standards.md) | Meta-standard for glossary structure and TIED integration |
 | [`../docs/vocabulary-layer-tied-leap-citdp.md`](../docs/vocabulary-layer-tied-leap-citdp.md) | Outreach: Vocab understanding vs TIED intent vs CITDP vs LEAP |
@@ -52,6 +59,16 @@
 
 ---
 
+## Preferred terms vs synonyms (directory entry)
+
+| Preferred | Avoid | Notes |
+|-----------|-------|-------|
+| **routing.md** | `domain-references-routing.md` | Primary `tied/vocab/` directory entry; PRELOAD starts here |
+| **routing index** / **Vocab directory routing index** | Domain vocabulary routing index (old title) | Lightweight keyword → glossary table in `routing.md` |
+| **full catalog** / **domain-references.md** (on-demand) | “canonical index read at bootstrap” | This file — Priority table, authoring guides, cross-topic notes only |
+
+---
+
 ## Alphabetical index
 
 | Term | Section |
@@ -59,6 +76,11 @@
 | agent-stream | Cross-topic notes |
 | agentstream | Cross-topic notes |
 | Domain vocabulary index | Title |
+| domain-references.md | Preferred terms (directory entry) |
+| full catalog | Preferred terms (directory entry) |
 | IMPL grammar vocabulary | Authoring guides |
+| routing index | Preferred terms (directory entry) |
+| routing.md | Directory entry (bootstrap) |
 | sub-vocabulary-sync | Scope |
 | VOCAB_INDEX | Scope |
+| Vocab directory routing index | Preferred terms (directory entry) |

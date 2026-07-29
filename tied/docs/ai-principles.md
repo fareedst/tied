@@ -90,12 +90,12 @@ This acknowledgment confirms that the AI agent has:
 13. **Domain Vocabulary Discipline** `[PROC-VOCABULARY_INDEX]`
     - **Three mandatory touchpoints** (via `sub-vocabulary-sync` in `[PROC-AGENT_REQ_CHECKLIST]`):
       - **Prompt intake (RESOLVE):** reword sponsor/user wording that names concepts before it drives REQ/ARCH/IMPL work (`translate-sponsor-intent`, `change-definition`).
-      - **Pre-read (PRELOAD):** read `tied/vocab/domain-references-routing.md`; match task keywords; load only matched glossaries before reading TIED YAML, docs, source, or tests (`session-bootstrap`, `impact-discovery`).
+      - **Pre-read (PRELOAD):** read `tied/vocab/routing.md`; match task keywords; load only matched glossaries before reading TIED YAML, docs, source, or tests (`session-bootstrap`, `impact-discovery`).
       - **Pre-commit (VALIDATE):** audit names in docs, `semantic-tokens.yaml`, TIED records, tests, and code vs the index before commit (`traceable-commit`).
     - **Inline during work:** **RESOLVE** before naming; **RECORD** when concepts appear or artifacts change — update glossary rows, naming bridges, UPPER_SNAKE block-name tables, and the alphabetical index in `tied/vocab/*.md` immediately.
     - Edit vocab files **directly** (plain Markdown, like IMPL pseudo-code sidecars); do **not** route through MCP or `lint_yaml`.
     - This is **distinct** from the IMPL grammar "preferred vocabulary" (INPUT/OUTPUT/DATA keywords in `implementation-decisions.md`).
-    - Standards: `tied/docs/vocabulary-index-analysis-and-standards.md`; routing index: `tied/vocab/domain-references-routing.md`; full index (on-demand): `tied/vocab/domain-references.md`; full process: `tied/docs/processes.md` § `[PROC-VOCABULARY_INDEX]`.
+    - Standards: `tied/docs/vocabulary-index-analysis-and-standards.md`; routing index: `tied/vocab/routing.md`; full index (on-demand): `tied/vocab/domain-references.md`; full process: `tied/docs/processes.md` § `[PROC-VOCABULARY_INDEX]`.
 
 **Bugs vs requirements (operational rule):** Requirements describe desired behavior (WHAT and WHY). Bugs describe implementation failures. Do NOT document bugs as requirements; document bugs in architecture/implementation decisions with cross-reference to the requirement that should be satisfied. If a bug reveals missing behavior specification, add a requirement first, then fix.
 
@@ -218,7 +218,7 @@ See `tied/docs/processes.md` § LEAP for the canonical process definition.
 - [ ] **MANDATORY**: Review `architecture-decisions.yaml` and `implementation-decisions.yaml` for existing decisions
 - [ ] **MANDATORY**: Plan work (via implementation decisions or in-session) BEFORE writing any code
 - [ ] **MANDATORY** ([PROC-IMPL_PSEUDOCODE_TOKENS]): When authoring IMPL, ensure every block in `essence_pseudocode` has a comment naming REQ/ARCH/IMPL and how the block implements them
-- [ ] **Domain vocabulary** ([PROC-VOCABULARY_INDEX]): **PRELOAD** — read `tied/vocab/domain-references-routing.md`; match task keywords to routing table; open only matched glossaries; build a term map before reading TIED YAML or source (Touchpoint 2)
+- [ ] **Domain vocabulary** ([PROC-VOCABULARY_INDEX]): **PRELOAD** — read `tied/vocab/routing.md`; match task keywords to routing table; open only matched glossaries; build a term map before reading TIED YAML or source (Touchpoint 2)
 
 **DURING WORK:**
 
@@ -254,7 +254,7 @@ See `tied/docs/processes.md` § LEAP for the canonical process definition.
 - `tied/semantic-tokens.yaml`, `tied/docs/semantic-tokens.md`
 - `tied/docs/processes.md` — LEAP, PROC-TIED_DEV_CYCLE, PROC-TOKEN_AUDIT, PROC-TOKEN_VALIDATION, PROC-COMMIT_MESSAGES, `[PROC-VOCABULARY_INDEX]`
 - `tied/docs/vocabulary-index-analysis-and-standards.md` — Meta-standard for domain glossary structure and TIED integration
-- `tied/vocab/domain-references-routing.md`, `tied/vocab/domain-references.md`, `tied/vocab/*.md` — Routing index (bootstrap), full index (on-demand), and glossaries (RESOLVE/PRELOAD/RECORD/VALIDATE via `sub-vocabulary-sync`)
+- `tied/vocab/routing.md`, `tied/vocab/domain-references.md`, `tied/vocab/*.md` — Primary routing index (bootstrap), full catalog (on-demand), and glossaries (RESOLVE/PRELOAD/RECORD/VALIDATE via `sub-vocabulary-sync`)
 - `tied/docs/source-file-impl-traceability.md` — Scoping IMPLs to specific files, TIED artifact checklist, dual pseudocode in sidecar and block comments (this repository)
 - `tied/docs/pseudocode-writing-and-validation.md` (#block-lead-and-literal-copy-in-tests-and-code) — Block lead only (default) vs full block in tests/code; pairs with the source-file guide
 - `tied/docs/detail-files-schema.md` — Schema for REQ/ARCH/IMPL detail YAML files

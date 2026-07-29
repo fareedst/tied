@@ -29,7 +29,7 @@
 #   - .cursor/skills/tied-yaml/: Cursor Agent Skill for REQ/ARCH/IMPL YAML via tied-cli.sh
 #     (from tools/bundled-tied-yaml-skill/ in git; .cursor/skills/tied-yaml only if bundled is missing; overwritten each run).
 #     Installed tied-cli.sh bakes TIED_REPO_ROOT to this TIED source repo for TIED_MCP_BIN default.
-#   - tied/vocab/: domain vocabulary glossaries (*.md) including domain-references-routing.md; seeded when missing or empty (never overwrites client files)
+#   - tied/vocab/: domain vocabulary glossaries (*.md) including routing.md; seeded when missing or empty (never overwrites client files)
 #   - Canonical CLI: .cursor/skills/tied-yaml/scripts/tied-cli.sh (use `tree -a` to list .cursor/ or open in the IDE).
 #   - .cursor/mcp.json: (re)writes mcpServers.tied-yaml with stdio, absolute paths to this TIED
 #     repo's mcp-server/dist/index.js and the target project's tied/; preserves other mcpServers
