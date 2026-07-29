@@ -1,54 +1,54 @@
 IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV:
   code_locations:
     files:
-      - path: tools/agent-stream/lib/agent_stream_argv.rb
-        description: '[REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML] [ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS] [IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV]'
-      - path: tools/agent-stream/lib/tdd_loop_prompts.rb
-        description: TDD loop YAML message expansion
-      - path: tools/agent-stream/lib/lead_checklist_prompts.rb
-        description: Lead checklist YAML expansion ([PROC-AGENT_REQ_CHECKLIST])
+      - path: "tools/agent-stream/lib/agent_stream_argv.rb"
+        description: "[REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML] [ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS] [IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV]"
+      - path: "tools/agent-stream/lib/tdd_loop_prompts.rb"
+        description: "TDD loop YAML message expansion"
+      - path: "tools/agent-stream/lib/lead_checklist_prompts.rb"
+        description: "Lead checklist YAML expansion ([PROC-AGENT_REQ_CHECKLIST])"
   cross_references:
-    - ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS
-    - REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
-  decision: Parse CLI argv into an ordered list of turns by delegating each --tdd-yaml path to TddLoopPrompts.messages_from_yaml.
-  detail_file: implementation-decisions/IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV.yaml
+    - "ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS"
+    - "REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML"
+  decision: "Parse CLI argv into an ordered list of turns by delegating each --tdd-yaml path to TddLoopPrompts.messages_from_yaml."
+  detail_file: "implementation-decisions/IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV.yaml"
   implementation_approach:
     details:
-      - Delegates to TddLoopPrompts, LeadChecklistPrompts, FeatureSpecBatchPrompts
-      - Module AgentStreamArgv in Ruby
-    summary: Parse flags; for each --tdd-yaml call TddLoopPrompts.messages_from_yaml; same for lead checklist and feature batch
+      - "Delegates to TddLoopPrompts, LeadChecklistPrompts, FeatureSpecBatchPrompts"
+      - "Module AgentStreamArgv in Ruby"
+    summary: "Parse flags; for each --tdd-yaml call TddLoopPrompts.messages_from_yaml; same for lead checklist and feature batch"
   metadata:
     created:
-      author: AI Agent
-      date: 2026-03-24
+      author: "AI Agent"
+      date: "2026-03-24"
     last_updated:
-      author: AI Agent
-      date: 2026-03-24
-      reason: Import ATDD agent stream TIED records
+      author: "AI Agent"
+      date: "2026-03-24"
+      reason: "Import ATDD agent stream TIED records"
     last_validated:
-      date: 2026-03-24
-      result: pass
-      validator: AI Agent
-  name: AgentStreamArgv.parse_argv wires YAML flags to prompt modules
+      date: "2026-03-24"
+      result: "pass"
+      validator: "AI Agent"
+  name: "AgentStreamArgv.parse_argv wires YAML flags to prompt modules"
   rationale:
     benefits:
-      - Documented turn order (argv, prompt files, tdd-yaml, lead-checklist-yaml, etc.)
+      - "Documented turn order (argv, prompt files, tdd-yaml, lead-checklist-yaml, etc.)"
     problems_solved:
-      - Ad hoc prompt ordering
-    upstream_note: tools/agent-stream/lib/agent_stream_argv.rb; atdd eb88236290009b78eb11ea561816f0854176bf12
-    why: Entry point builds an ordered list of turns from CLI flags and argv tail per ATDD contract
+      - "Ad hoc prompt ordering"
+    upstream_note: "tools/agent-stream/lib/agent_stream_argv.rb; atdd eb88236290009b78eb11ea561816f0854176bf12"
+    why: "Entry point builds an ordered list of turns from CLI flags and argv tail per ATDD contract"
   related_decisions:
     depends_on: []
     see_also:
-      - IMPL-ATDD-E2E-AGENT_STREAM
+      - "IMPL-ATDD-E2E-AGENT_STREAM"
     supersedes: []
-  status: Active
+  status: "Active"
   traceability:
     architecture:
-      - ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS
+      - "ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS"
     code_annotations:
-      - IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
+      - "IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV"
     requirements:
-      - REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
+      - "REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML"
     tests:
-      - agent_stream_tdd_yaml_binding_test.rb (upstream atdd)
+      - "agent_stream_tdd_yaml_binding_test.rb (upstream atdd)"

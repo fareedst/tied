@@ -1,71 +1,71 @@
 IMPL-MCP_USAGE_METRICS:
   code_locations:
     files:
-      - path: mcp-server/src/usage-metrics.ts
-        description: Env gate, sanitizeArgs, JSONL append, wrapToolHandler [REQ-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS]
-      - path: mcp-server/src/usage-metrics.test.ts
-        description: Unit tests for metrics module
-      - path: mcp-server/src/index.ts
-        description: Registers wrapToolHandler when metrics enabled
-      - path: tools/bundled-tied-yaml-skill/scripts/tied-cli.sh
-        description: Exports TIED_MCP_METRICS_CLIENT=tied-cli when collection enabled
-      - path: scripts/analyze_tied_mcp_metrics.rb
-        description: Offline JSONL aggregator
-      - path: scripts/analyze_tied_mcp_metrics_test.rb
-        description: Smoke test for aggregator
+      - path: "mcp-server/src/usage-metrics.ts"
+        description: "Env gate, sanitizeArgs, JSONL append, wrapToolHandler [REQ-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS]"
+      - path: "mcp-server/src/usage-metrics.test.ts"
+        description: "Unit tests for metrics module"
+      - path: "mcp-server/src/index.ts"
+        description: "Registers wrapToolHandler when metrics enabled"
+      - path: "tools/bundled-tied-yaml-skill/scripts/tied-cli.sh"
+        description: "Exports TIED_MCP_METRICS_CLIENT=tied-cli when collection enabled"
+      - path: "scripts/analyze_tied_mcp_metrics.rb"
+        description: "Offline JSONL aggregator"
+      - path: "scripts/analyze_tied_mcp_metrics_test.rb"
+        description: "Smoke test for aggregator"
   cross_references:
-    - ARCH-MCP_USAGE_METRICS
-    - REQ-MCP_USAGE_METRICS
-  detail_file: implementation-decisions/IMPL-MCP_USAGE_METRICS.yaml
-  essence_pseudocode_path: implementation-decisions/IMPL-MCP_USAGE_METRICS-pseudocode.md
+    - "ARCH-MCP_USAGE_METRICS"
+    - "REQ-MCP_USAGE_METRICS"
+  detail_file: "implementation-decisions/IMPL-MCP_USAGE_METRICS.yaml"
+  essence_pseudocode_path: "implementation-decisions/IMPL-MCP_USAGE_METRICS-pseudocode.md"
   implementation_approach:
     details:
-      - 'analyze_tied_mcp_metrics.rb: streaming counts, durations, top_signatures, --aggregate'
-      - 'isMetricsEnabled(): TIED_MCP_COLLECT_METRICS in {1,true} case-insensitive'
-      - 'recordToolCall: append one JSON line v1 schema; swallow IO errors'
-      - 'resolveMetricsPath(): env override or homedir .cursor/logs/tied-mcp-metrics.jsonl'
-      - 'sanitizeArgs(tool, args): scalars preserved; blobs as _bytes/_keys; signature SHA-256 prefix'
-      - 'tied-cli.sh: export TIED_MCP_METRICS_CLIENT=tied-cli when metrics env set'
-      - 'wrapToolHandler: time handler; ok from throws and result.isError'
-    summary: usage-metrics.ts module; index.ts wiring; tied-cli client tag; Ruby offline analyzer
+      - "analyze_tied_mcp_metrics.rb: streaming counts, durations, top_signatures, --aggregate"
+      - "isMetricsEnabled(): TIED_MCP_COLLECT_METRICS in {1,true} case-insensitive"
+      - "recordToolCall: append one JSON line v1 schema; swallow IO errors"
+      - "resolveMetricsPath(): env override or homedir .cursor/logs/tied-mcp-metrics.jsonl"
+      - "sanitizeArgs(tool, args): scalars preserved; blobs as _bytes/_keys; signature SHA-256 prefix"
+      - "tied-cli.sh: export TIED_MCP_METRICS_CLIENT=tied-cli when metrics env set"
+      - "wrapToolHandler: time handler; ok from throws and result.isError"
+    summary: "usage-metrics.ts module; index.ts wiring; tied-cli client tag; Ruby offline analyzer"
   metadata:
     created:
-      author: AI Agent
-      date: 2026-06-25T00:00:00.000Z
+      author: "AI Agent"
+      date: "2026-06-25T00:00:00.000Z"
     last_updated:
-      author: AI Agent
+      author: "AI Agent"
       date: "2026-07-21T00:00:00.000Z"
-      reason: Add depends_on ARCH-MCP_USAGE_METRICS for LEAP stack consistency
+      reason: "Add depends_on ARCH-MCP_USAGE_METRICS for LEAP stack consistency"
     last_validated:
-      date: 2026-06-25T00:00:00.000Z
-      result: pass
-      validator: AI Agent
-  name: MCP usage metrics module and offline analyzer
+      date: "2026-06-25T00:00:00.000Z"
+      result: "pass"
+      validator: "AI Agent"
+  name: "MCP usage metrics module and offline analyzer"
   rationale:
     benefits:
-      - Metrics never break tool handlers
-      - Offline script reuses streaming JSONL pattern from hook analysis tools
-      - Testable pure functions for sanitize and path resolution
+      - "Metrics never break tool handlers"
+      - "Offline script reuses streaming JSONL pattern from hook analysis tools"
+      - "Testable pure functions for sanitize and path resolution"
     problems_solved:
-      - No implementation for REQ-MCP_USAGE_METRICS observability
-    why: Implements ARCH-MCP_USAGE_METRICS with a focused module, registration wrapper, tied-cli env export, and Ruby aggregator
+      - "No implementation for REQ-MCP_USAGE_METRICS observability"
+    why: "Implements ARCH-MCP_USAGE_METRICS with a focused module, registration wrapper, tied-cli env export, and Ruby aggregator"
   related_decisions:
     depends_on:
-      - ARCH-MCP_USAGE_METRICS
+      - "ARCH-MCP_USAGE_METRICS"
     see_also:
-      - ARCH-MCP_USAGE_METRICS
-      - IMPL-MCP_FEEDBACK_TOOLS
+      - "ARCH-MCP_USAGE_METRICS"
+      - "IMPL-MCP_FEEDBACK_TOOLS"
     supersedes: []
-  status: Active
+  status: "Active"
   traceability:
     architecture:
-      - ARCH-MCP_USAGE_METRICS
+      - "ARCH-MCP_USAGE_METRICS"
     code_annotations:
-      - ARCH-MCP_USAGE_METRICS
-      - IMPL-MCP_USAGE_METRICS
-      - REQ-MCP_USAGE_METRICS
+      - "ARCH-MCP_USAGE_METRICS"
+      - "IMPL-MCP_USAGE_METRICS"
+      - "REQ-MCP_USAGE_METRICS"
     requirements:
-      - REQ-MCP_USAGE_METRICS
+      - "REQ-MCP_USAGE_METRICS"
     tests:
-      - analyze_tied_mcp_metrics_test.rb
-      - usage-metrics.test.ts
+      - "analyze_tied_mcp_metrics_test.rb"
+      - "usage-metrics.test.ts"

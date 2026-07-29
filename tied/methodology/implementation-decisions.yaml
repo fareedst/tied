@@ -24,12 +24,12 @@
 # Methodology seed: token identity and traceability only; expand rationale in project detail files.
 IMPL-MCP_FEEDBACK_TOOLS:
   cross_references:
-    - ARCH-FEEDBACK_STORAGE
-    - REQ-FEEDBACK_TO_TIED
-  detail_file: null
+    - "ARCH-FEEDBACK_STORAGE"
+    - "REQ-FEEDBACK_TO_TIED"
+  detail_file: "null"
   metadata:
     last_updated:
-      reason: 'Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml'
+      reason: "Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml"
       # ---
       # Template Record - Copy this block to create new implementation decisions
       # ---
@@ -89,58 +89,58 @@ IMPL-MCP_FEEDBACK_TOOLS:
       #       date: YYYY-MM-DD
       #       validator: "agent/contributor"
       #       result: "pass"
-  name: MCP Feedback Tools (tied_feedback_add, tied_feedback_export)
+  name: "MCP Feedback Tools (tied_feedback_add, tied_feedback_export)"
   related_decisions:
     depends_on: []
     see_also:
-      - ARCH-FEEDBACK_STORAGE
-      - REQ-FEEDBACK_TO_TIED
+      - "ARCH-FEEDBACK_STORAGE"
+      - "REQ-FEEDBACK_TO_TIED"
     supersedes: []
-  status: Active
+  status: "Active"
   traceability:
     architecture:
-      - ARCH-FEEDBACK_STORAGE
+      - "ARCH-FEEDBACK_STORAGE"
     requirements:
-      - REQ-FEEDBACK_TO_TIED
+      - "REQ-FEEDBACK_TO_TIED"
 IMPL-MODULE_VALIDATION:
   cross_references:
-    - ARCH-MODULE_VALIDATION
-    - REQ-MODULE_VALIDATION
-  detail_file: null
+    - "ARCH-MODULE_VALIDATION"
+    - "REQ-MODULE_VALIDATION"
+  detail_file: "null"
   metadata:
     last_updated:
-      reason: 'Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml'
-  name: Module Validation Implementation
+      reason: "Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml"
+  name: "Module Validation Implementation"
   related_decisions:
     depends_on: []
     see_also:
-      - ARCH-MODULE_VALIDATION
-      - REQ-MODULE_VALIDATION
+      - "ARCH-MODULE_VALIDATION"
+      - "REQ-MODULE_VALIDATION"
     supersedes: []
-  status: Active
+  status: "Active"
   traceability:
     architecture:
-      - ARCH-MODULE_VALIDATION
+      - "ARCH-MODULE_VALIDATION"
     requirements:
-      - REQ-MODULE_VALIDATION
+      - "REQ-MODULE_VALIDATION"
 IMPL-TIED_FILES:
   cross_references:
-    - ARCH-TIED_STRUCTURE
-    - REQ-TIED_SETUP
-  detail_file: null
+    - "ARCH-TIED_STRUCTURE"
+    - "REQ-TIED_SETUP"
+  detail_file: "null"
   metadata:
     last_updated:
-      reason: 'Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml'
-  name: TIED File Creation
+      reason: "Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml"
+  name: "TIED File Creation"
   related_decisions:
     depends_on: []
     see_also:
-      - ARCH-TIED_STRUCTURE
-      - REQ-TIED_SETUP
+      - "ARCH-TIED_STRUCTURE"
+      - "REQ-TIED_SETUP"
     supersedes: []
-  status: Active
+  status: "Active"
   traceability:
     architecture:
-      - ARCH-TIED_STRUCTURE
+      - "ARCH-TIED_STRUCTURE"
     requirements:
-      - REQ-TIED_SETUP
+      - "REQ-TIED_SETUP"

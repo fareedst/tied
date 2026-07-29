@@ -1,0 +1,87 @@
+CITDP-YAML_TOOL_DOUBLE_QUOTE_SORT:
+  change_definition:
+    current_behavior_prior: "Default yaml_tool / lint_yaml canonicalized each YAML path with yq -i -P (pretty-print only). MCP tied_token_rename used the same -P path. Docs and PROC-YAML_EDIT_LOOP described yq -i -P."
+    desired_behavior: "Default lint runs yq -i 'sort_keys(.. style=\"double\")' one file per invocation (recursive key sort + double-quoted scalars). Bool/int on disk become string scalars. Bulk TIED YAML re-linted. MCP rename, PROC docs, vocab, and IMPL-TIED_FILES pseudocode aligned to the same contract."
+    non_goals:
+      - "agentstream / LEAP proposal queue feature work"
+      - "Changing Ruby yaml_list_sorter --sort-lists qualifying-list semantics"
+      - "New REQ/ARCH/IMPL token ids (reuse REQ-TIED_SETUP / ARCH-TIED_STRUCTURE / IMPL-TIED_FILES)"
+      - "Reverting stringified bool/int scalars"
+    references:
+      - "CHANGELOG.md"
+      - "mcp-server/src/token-rename.ts"
+      - "scripts/yaml_list_sorter_test.rb"
+      - "scripts/yaml_tool.sh"
+      - "tied/docs/processes.md"
+      - "tied/implementation-decisions/IMPL-TIED_FILES-pseudocode.md"
+      - "tied/vocab/tied-methodology.md"
+    success_criteria:
+      - "IMPL-TIED_FILES essence has CANONICALIZE_YAML_FILE / LINT_YAML_PATHS with block token comments"
+      - "PROC-YAML_EDIT_LOOP, templates/processes.md, READMEs, runbook no longer document default lint as yq -i -P"
+      - "Shell tests assert key order, double quotes, and bool stringification"
+      - "tied_validate_consistency ok; e2e_only false documented"
+      - "token-rename pretty-print uses the same yq expression"
+      - "Vocab RECORD documents double-quoted scalar lint and recursive key sort (lint)"
+      - "yaml_tool default lint uses sort_keys(.. style=\"double\") and header/usage match"
+    summary: "Canonicalize TIED YAML via double-quoted sorted-key lint; align MCP rename, PROC, vocab, IMPL; bulk re-lint staged tree."
+    unchanged_behavior: "One yq process per file (never multi-arg). --sort-lists / --sort-keys Ruby path unchanged. Block-scalar opacity for list/key sort on Ruby path unchanged."
+  completion_criteria:
+    verification_gate_notes: "ruby scripts/yaml_list_sorter_test.rb green; rename/unit tests green when yq present; tied_validate_consistency ok; e2e_only false (no UI)."
+  impact_analysis:
+    impl_inventory_notes: "scripts/yaml_tool.sh lint body; bulk tied/**/*.yaml style rewrite; mcp-server token-rename + tool description; IMPL-TIED_FILES yaml + pseudocode; processes.md / templates; vocab; CHANGELOG; package-lock transitive refresh."
+    modules_or_boundaries: "YAML-TOOL lint module (shell + yq); LPQ/MCP rename composition uses shared canonicalize expression; docs/vocab LEAP. Out of scope: yaml_list_sorter algorithm."
+    tied_tokens_affected:
+      - "ARCH-TIED_STRUCTURE"
+      - "IMPL-TIED_FILES"
+      - "PROC-YAML_EDIT_LOOP"
+      - "REQ-TIED_SETUP"
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: "none"
+    record_status: "complete"
+    tied_stack_updates_required:
+      - "IMPL-TIED_FILES essence_pseudocode CANONICALIZE_YAML_FILE / LINT_YAML_PATHS (done)"
+      - "PROC-YAML_EDIT_LOOP narrative in processes.md and templates/processes.md (done)"
+      - "REQ-TIED_SETUP satisfaction criterion for double-quoted scalar lint (done); ARCH-TIED_STRUCTURE unchanged (no -P text)"
+  record_identity:
+    change_request_id: "YAML_TOOL_DOUBLE_QUOTE_SORT"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    checklist_session_note: "change-definition: accept sort_keys(.. style=\"double\") as canonical lint including stringified scalars.\nimpact-discovery: yaml_tool, token-rename, PROC, vocab, IMPL-TIED_FILES, bulk YAML.\ntest-strategy: unit/shell assertions in yaml_list_sorter_test.rb; composition via rename path; e2e_only false.\nverification-gate: sorter tests + validateConsistency.\nsync-tied-stack: IMPL + PROC + light REQ/ARCH if needed.\nCITDP: this record."
+    checklist_step_completed: "persist-citdp-record"
+    checklist_version: "agent_req_implementation_checklist v1.7.0"
+    recorded_at: "2026-07-29"
+    tied_context:
+      architecture:
+        - "ARCH-TIED_STRUCTURE"
+      implementation:
+        - "IMPL-TIED_FILES"
+      processes:
+        - "PROC-YAML_EDIT_LOOP"
+      requirements:
+        - "REQ-TIED_SETUP"
+    title: "Canonical YAML lint: sort_keys double-quoted style"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  risk_analysis:
+    risks:
+      - id: "RISK-YAML-DQ-001"
+        description: "Consumers that require YAML bool/int types see string scalars after load (e.g. e2e_only: \"false\")."
+        likelihood: "High"
+        mitigation: "Document stringified-scalar contract in vocab, PROC, IMPL; coerce after load when typed values required."
+        severity: "Medium"
+      - id: "RISK-YAML-DQ-002"
+        description: "MCP tied_token_rename remaining on yq -i -P would reformat files away from canonical lint."
+        likelihood: "High if unmitigated"
+        mitigation: "Align token-rename.ts and tool description to the same yq expression."
+        severity: "High"
+      - id: "RISK-YAML-DQ-003"
+        description: "Client trees not yet re-linted produce large diffs on first yaml_tool pass after upgrade."
+        likelihood: "High"
+        mitigation: "CHANGELOG notes bulk canonicalize; clients run yaml_tool on their tied/ when adopting."
+        severity: "Low"
+  tdd_sequence:
+    summary: "unit: yaml_list_sorter_test.rb default-lint asserts key order, double quotes, bool stringification. composition: token-rename pretty-print uses same expression; rename tests green. end-to-end-ui: e2e_only false — no UI surface."
+  test_strategy:
+    e2e_only: "false"
+    e2e_only_reason: "N/A — canonicalize is shell/yq and in-process rename pretty-print; no browser or IDE chrome."
+    matrix_notes: "Unit/shell: scripts/yaml_list_sorter_test.rb. Composition: mcp-server token-rename.test.ts when yq present. E2E: none."
+    summary: "Confirm default lint contract and MCP rename alignment; skip E2E."

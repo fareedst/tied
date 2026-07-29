@@ -1,7 +1,7 @@
 /**
  * Rename a single semantic token across the TIED tree: YAML indexes, detail files, and file names.
  * Optionally substitutes in extra client-repo files via extra_globs / extra_extensions.
- * Uses exact string replacement; validates and pretty-prints YAML with yq when available (one yq -i -P per file).
+ * Uses exact string replacement; validates and pretty-prints YAML with yq when available (one yq sort_keys(.. style="double") per file).
  */
 
 import { spawnSync } from "node:child_process";
@@ -179,8 +179,11 @@ function applySubstitutionInFile(
   }
 }
 
+/** Same expression as scripts/yaml_tool.sh default lint [PROC-YAML_EDIT_LOOP]. */
+const YQ_CANONICALIZE_EXPR = 'sort_keys(.. style="double")';
+
 function runYqPrettyPrint(filePath: string): { ok: boolean; error?: string } {
-  const result = spawnSync("yq", ["-i", "-P", filePath], { encoding: "utf8" });
+  const result = spawnSync("yq", ["-i", YQ_CANONICALIZE_EXPR, filePath], { encoding: "utf8" });
   if (result.status !== 0) {
     const stderr = result.stderr?.trim() || result.error?.message || String(result.status);
     return { ok: false, error: stderr };
@@ -192,7 +195,7 @@ function runYqPrettyPrint(filePath: string): { ok: boolean; error?: string } {
  * Rename a single semantic token across the TIED tree and optional extra substitution targets.
  * Replaces exact string old_token with new_token in all YAML (and optionally docs/processes.md and client-repo files).
  * Renames the detail file for REQ/ARCH/IMPL when it exists.
- * Runs yq -i -P on each modified YAML file when yq is available (one path per process; multi-arg yq -i merges documents).
+ * Runs yq -i 'sort_keys(.. style="double")' on each modified YAML file when yq is available (one path per process; multi-arg yq -i merges documents).
  */
 export function renameSemanticToken(
   oldToken: string,

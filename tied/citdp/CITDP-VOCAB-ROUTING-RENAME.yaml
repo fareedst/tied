@@ -3,23 +3,23 @@ CITDP-VOCAB-ROUTING-RENAME:
     current_behavior_prior: "Primary tied/vocab PRELOAD entry was tied/vocab/domain-references-routing.md; agents and docs named that path for Touchpoint 2 bootstrap."
     desired_behavior: "Primary directory entry is tied/vocab/routing.md for PRELOAD (keyword → glossary). Full catalog remains tied/vocab/domain-references.md on-demand. Docs, AGENTS, checklists, glossary RECORD, IMPL SEED_DOMAIN_VOCAB How-comment, and bootstrap e2e assert routing.md seed."
     non_goals:
+      - "Changing scripts/yaml_tool.sh default yq pretty-print behavior (out of scope for this change request)"
       - "New REQ/ARCH/IMPL tokens for the rename"
       - "Overwriting existing client tied/vocab files via copy_files.sh"
-      - "Changing scripts/yaml_tool.sh default yq pretty-print behavior (out of scope for this change request)"
     references:
-      - "tied/vocab/routing.md"
-      - "tied/vocab/domain-references.md"
-      - "tied/docs/processes.md"
-      - "tied/implementation-decisions/IMPL-TIED_FILES-pseudocode.md"
       - "AGENTS.md"
       - "CHANGELOG.md"
+      - "tied/docs/processes.md"
+      - "tied/implementation-decisions/IMPL-TIED_FILES-pseudocode.md"
+      - "tied/vocab/domain-references.md"
+      - "tied/vocab/routing.md"
     success_criteria:
+      - "bootstrap-and-load e2e asserts seed of tied/vocab/routing.md"
+      - "Glossary RECORD prefers routing.md / routing index; avoid domain-references-routing.md"
       - "No live references to domain-references-routing.md outside CHANGELOG historical note"
       - "PRELOAD docs (AGENTS, processes, tied-yaml-agent-index, checklists) point at routing.md"
-      - "Glossary RECORD prefers routing.md / routing index; avoid domain-references-routing.md"
-      - "SEED_DOMAIN_VOCAB How-comment names routing.md and domain-references.md; algorithm unchanged"
-      - "bootstrap-and-load e2e asserts seed of tied/vocab/routing.md"
       - "REQ-TIED_SETUP seed minima (domain-references.md + tied-methodology.md) remain valid; no contradicting criterion"
+      - "SEED_DOMAIN_VOCAB How-comment names routing.md and domain-references.md; algorithm unchanged"
     summary: "Rename vocab routing index to routing.md as primary PRELOAD entry; keep domain-references.md as on-demand full catalog; align docs, vocab, IMPL How-comment, and bootstrap e2e."
     unchanged_behavior: "copy_files.sh still seeds all TIED_SOURCE/tied/vocab/*.md when client vocab is missing/empty and never overwrites existing client vocab files. REQ seed minimum files unchanged."
   completion_criteria:
@@ -28,10 +28,10 @@ CITDP-VOCAB-ROUTING-RENAME:
     impl_inventory_notes: "Git rename domain-references-routing.md → routing.md; doc rewires; vocab RECORD in domain-references.md, tied-methodology.md, pseudocode-and-citdp.md; IMPL-TIED_FILES-pseudocode SEED_DOMAIN_VOCAB How-comment; mcp-server e2e bootstrap-and-load.test.ts; copy_files.sh header comment only."
     modules_or_boundaries: "Documentation and vocab under tied/vocab and tied/docs; bootstrap seed is basename-agnostic (no copy_files.sh algorithm change). Out of scope: scripts/yaml_tool.sh yq format change."
     tied_tokens_affected:
-      - "PROC-VOCABULARY_INDEX"
-      - "IMPL-TIED_FILES"
-      - "REQ-TIED_SETUP"
       - "ARCH-TIED_STRUCTURE"
+      - "IMPL-TIED_FILES"
+      - "PROC-VOCABULARY_INDEX"
+      - "REQ-TIED_SETUP"
     tied_tokens_new: []
   leap_feedback:
     divergences_from_analysis: "REQ/ARCH acceptance text still names seed minima domain-references.md + tied-methodology.md only; does not contradict routing.md as primary PRELOAD entry when present. No REQ/ARCH edit required."
@@ -50,10 +50,10 @@ CITDP-VOCAB-ROUTING-RENAME:
         - "ARCH-TIED_STRUCTURE"
       implementation:
         - "IMPL-TIED_FILES"
-      requirements:
-        - "REQ-TIED_SETUP"
       processes:
         - "PROC-VOCABULARY_INDEX"
+      requirements:
+        - "REQ-TIED_SETUP"
     title: "Rename vocab routing index to routing.md (primary PRELOAD entry)"
     workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
   risk_analysis:

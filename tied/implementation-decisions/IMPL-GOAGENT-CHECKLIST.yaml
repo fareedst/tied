@@ -1,7 +1,7 @@
 IMPL-GOAGENT-CHECKLIST:
   cross_references:
-    - ARCH-GOAGENT-YAML-STEPS
-    - REQ-GOAGENT-YAML-STEP-RENDER
-  detail_file: implementation-decisions/IMPL-GOAGENT-CHECKLIST.yaml
-  name: checklist YAML main steps and sub_procedures
-  status: Active
+    - "ARCH-GOAGENT-YAML-STEPS"
+    - "REQ-GOAGENT-YAML-STEP-RENDER"
+  detail_file: "implementation-decisions/IMPL-GOAGENT-CHECKLIST.yaml"
+  name: "checklist YAML main steps and sub_procedures"
+  status: "Active"

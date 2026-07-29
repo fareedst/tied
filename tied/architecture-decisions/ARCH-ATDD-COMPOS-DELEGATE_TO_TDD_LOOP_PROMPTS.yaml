@@ -1,55 +1,55 @@
 ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS:
   alternatives_considered:
-    - name: Duplicate YAML parsing in argv and export
+    - name: "Duplicate YAML parsing in argv and export"
       cons:
-        - Drift risk
+        - "Drift risk"
       pros:
-        - Localized code
-      rejected_reason: ATDD centralizes in TddLoopPrompts
+        - "Localized code"
+      rejected_reason: "ATDD centralizes in TddLoopPrompts"
   cross_references:
-    - REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
-    - REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS
-  detail_file: architecture-decisions/ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS.yaml
+    - "REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML"
+    - "REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS"
+  detail_file: "architecture-decisions/ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS.yaml"
   implementation_approach:
     details:
-      - --tdd-yaml expands via TddLoopPrompts.messages_from_yaml
-      - Export uses TddLoopPrompts.step_entries_from_yaml and format_step
-    summary: AgentStreamArgv and export pipeline call into lib/tdd_loop_prompts.rb; lead checklist uses LeadChecklistPrompts
+      - "--tdd-yaml expands via TddLoopPrompts.messages_from_yaml"
+      - "Export uses TddLoopPrompts.step_entries_from_yaml and format_step"
+    summary: "AgentStreamArgv and export pipeline call into lib/tdd_loop_prompts.rb; lead checklist uses LeadChecklistPrompts"
   metadata:
     created:
-      author: AI Agent
-      date: 2026-03-24
+      author: "AI Agent"
+      date: "2026-03-24"
     last_updated:
-      author: AI Agent
-      date: 2026-03-24
-      reason: Import ATDD agent stream TIED records
+      author: "AI Agent"
+      date: "2026-03-24"
+      reason: "Import ATDD agent stream TIED records"
     last_validated:
-      date: 2026-03-24
-      result: pass
-      validator: AI Agent
-  name: Delegate YAML prompt semantics to TddLoopPrompts modules
+      date: "2026-03-24"
+      result: "pass"
+      validator: "AI Agent"
+  name: "Delegate YAML prompt semantics to TddLoopPrompts modules"
   rationale:
     benefits:
-      - Single module owns messages_from_yaml and step_entries_from_yaml
+      - "Single module owns messages_from_yaml and step_entries_from_yaml"
     problems_solved:
-      - Inconsistent step ordering or message bodies between modes
-    upstream_note: Imported from atdd commit eb88236290009b78eb11ea561816f0854176bf12
-    why: One authoritative parser for TDD loop YAML avoids duplicated rules between argv expansion and export
+      - "Inconsistent step ordering or message bodies between modes"
+    upstream_note: "Imported from atdd commit eb88236290009b78eb11ea561816f0854176bf12"
+    why: "One authoritative parser for TDD loop YAML avoids duplicated rules between argv expansion and export"
   related_decisions:
     depends_on: []
     informs:
-      - IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
+      - "IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV"
     see_also: []
-  status: Active
+  status: "Active"
   traceability:
     code_annotations:
-      - ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS
+      - "ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS"
     implementation:
-      - IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
-      - IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS
+      - "IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV"
+      - "IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS"
     requirements:
-      - REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
-      - REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS
+      - "REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML"
+      - "REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS"
     tests:
-      - agent_stream_tdd_yaml_binding_test.rb
-      - export_tdd_prompts_binding_test.rb
+      - "agent_stream_tdd_yaml_binding_test.rb"
+      - "export_tdd_prompts_binding_test.rb"

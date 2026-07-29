@@ -1,7 +1,7 @@
 IMPL-GOAGENT-FEATURESPEC:
   cross_references:
-    - ARCH-GOAGENT-YAML-FEATURESPEC
-    - REQ-GOAGENT-FEATURESPEC-BATCH
-  detail_file: implementation-decisions/IMPL-GOAGENT-FEATURESPEC.yaml
-  name: featurespec YAML load sort filter render preview
-  status: Active
+    - "ARCH-GOAGENT-YAML-FEATURESPEC"
+    - "REQ-GOAGENT-FEATURESPEC-BATCH"
+  detail_file: "implementation-decisions/IMPL-GOAGENT-FEATURESPEC.yaml"
+  name: "featurespec YAML load sort filter render preview"
+  status: "Active"

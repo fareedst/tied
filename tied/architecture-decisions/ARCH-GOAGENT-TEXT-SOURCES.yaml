@@ -1,9 +1,9 @@
 ARCH-GOAGENT-TEXT-SOURCES:
-  detail_file: architecture-decisions/ARCH-GOAGENT-TEXT-SOURCES.yaml
-  name: Text prompt source boundaries
-  status: Active
+  detail_file: "architecture-decisions/ARCH-GOAGENT-TEXT-SOURCES.yaml"
+  name: "Text prompt source boundaries"
+  status: "Active"
   traceability:
     implementation:
-      - IMPL-GOAGENT-TEXT-SOURCES
+      - "IMPL-GOAGENT-TEXT-SOURCES"
     requirements:
-      - REQ-GOAGENT-TEXT-SOURCES
+      - "REQ-GOAGENT-TEXT-SOURCES"

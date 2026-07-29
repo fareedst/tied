@@ -1,11 +1,11 @@
 ARCH-GOAGENT-CHECKLIST-CONTROL:
   cross_references:
-    - REQ-GOAGENT-CHECKLIST-CONTROL
-  detail_file: architecture-decisions/ARCH-GOAGENT-CHECKLIST-CONTROL.yaml
-  name: Structured checklist control trailer
-  status: Active
+    - "REQ-GOAGENT-CHECKLIST-CONTROL"
+  detail_file: "architecture-decisions/ARCH-GOAGENT-CHECKLIST-CONTROL.yaml"
+  name: "Structured checklist control trailer"
+  status: "Active"
   traceability:
     implementation:
-      - IMPL-GOAGENT-CHECKLIST-CONTROL
+      - "IMPL-GOAGENT-CHECKLIST-CONTROL"
     requirements:
-      - REQ-GOAGENT-CHECKLIST-CONTROL
+      - "REQ-GOAGENT-CHECKLIST-CONTROL"

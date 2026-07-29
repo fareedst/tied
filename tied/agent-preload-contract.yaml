@@ -7,58 +7,52 @@ agent_preload:
     checklist_token: ""
     primary_query_summary: ""
   discovery_already_done:
-    gemfile_present: false
+    gemfile_present: "false"
     grep_patterns_satisfied:
-      repo_layout_scan: false
-      token_scan_in_sources: false
-    ruby_files_present: false
-    ruby_test_files_present: false
-    semantic_tokens_present: true
+      repo_layout_scan: "false"
+      token_scan_in_sources: "false"
+    ruby_files_present: "false"
+    ruby_test_files_present: "false"
+    semantic_tokens_present: "true"
   implementation_contract:
     citdp_artifact_paths: []
     invalid_input: ""
     language: ""
     language_version: ""
     target_source_paths: []
-    test_cohabit_code: false
+    test_cohabit_code: "false"
     test_framework: ""
   methodology_vs_project:
-    methodology_readonly: true
-    project_tokens_only_writable: true
+    methodology_readonly: "true"
+    project_tokens_only_writable: "true"
   session_bootstrap_docs:
-    agent_req_checklist_path: ./tied/docs/agent-req-implementation-checklist.md
-    agents_md_path: ./AGENTS.md
-    ai_principles_path: ./tied/docs/ai-principles.md
-    architecture_decisions_index: ./tied/architecture-decisions.yaml
-    detail_files_schema: ./tied/docs/detail-files-schema.md
-    implementation_decisions_guide: ./tied/docs/implementation-decisions.md
-    implementation_decisions_index: ./tied/implementation-decisions.yaml
-    processes_path: ./tied/docs/processes.md
-    requirements_index: ./tied/requirements.yaml
-    semantic_tokens_guide: ./tied/docs/semantic-tokens.md
-    semantic_tokens_index: ./tied/semantic-tokens.yaml
+    agent_req_checklist_path: "./tied/docs/agent-req-implementation-checklist.md"
+    agents_md_path: "./AGENTS.md"
+    ai_principles_path: "./tied/docs/ai-principles.md"
+    architecture_decisions_index: "./tied/architecture-decisions.yaml"
+    detail_files_schema: "./tied/docs/detail-files-schema.md"
+    implementation_decisions_guide: "./tied/docs/implementation-decisions.md"
+    implementation_decisions_index: "./tied/implementation-decisions.yaml"
+    processes_path: "./tied/docs/processes.md"
+    requirements_index: "./tied/requirements.yaml"
+    semantic_tokens_guide: "./tied/docs/semantic-tokens.md"
+    semantic_tokens_index: "./tied/semantic-tokens.yaml"
   tied_mcp:
-    base_path_resolved: false
-    tied_cli_stdio_ok_without_cursor_mcp: true
-    yaml_detail_batch_done: false
+    base_path_resolved: "false"
+    tied_cli_stdio_ok_without_cursor_mcp: "true"
+    yaml_detail_batch_done: "false"
   tied_paths:
-    mcp_tied_yaml_verified_this_session: false
-    methodology_readonly_glob: methodology/**
+    mcp_tied_yaml_verified_this_session: "false"
+    methodology_readonly_glob: "methodology/**"
     project_yaml_writable_globs:
-      - '*.yaml'
-      - architecture-decisions/*.yaml
-      - implementation-decisions/*.yaml
-      - requirements/*.yaml
-    TIED_BASE_PATH: tied
+      - "*.yaml"
+      - "architecture-decisions/*.yaml"
+      - "implementation-decisions/*.yaml"
+      - "requirements/*.yaml"
+    TIED_BASE_PATH: "tied"
   workspace:
-    cwd: /Users/fareed/Documents/dev/chatgpt/stdd
-    project_summary: TIED methodology repository (stdd); project YAML under tied/
+    cwd: "/Users/fareed/Documents/dev/chatgpt/stdd"
+    project_summary: "TIED methodology repository (stdd); project YAML under tied/"
     top_level_entries: []
-    vcs_present: true
-preload_instructions: |
-  Treat agent_preload as authoritative context. If a value is present, do not spend
-  tool calls rediscovering it unless a later tool result or user message contradicts it.
-  Align MCP TIED_BASE_PATH with tied_paths (this repo: tied/). Do not treat methodology/**
-  as writable. Prefer tied-cli.sh when IDE MCP tools are unavailable and Node + built
-  mcp-server/dist/index.js are present. Clear active_user_intent and implementation_contract
-  when switching to a new REQ/session.
+    vcs_present: "true"
+preload_instructions: "Treat agent_preload as authoritative context. If a value is present, do not spend\ntool calls rediscovering it unless a later tool result or user message contradicts it.\nAlign MCP TIED_BASE_PATH with tied_paths (this repo: tied/). Do not treat methodology/**\nas writable. Prefer tied-cli.sh when IDE MCP tools are unavailable and Node + built\nmcp-server/dist/index.js are present. Clear active_user_intent and implementation_contract\nwhen switching to a new REQ/session.\n"

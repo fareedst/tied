@@ -1,953 +1,953 @@
 ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS:
   alternatives_considered:
-    - name: Duplicate YAML parsing in argv and export
+    - name: "Duplicate YAML parsing in argv and export"
       cons:
-        - Drift risk
+        - "Drift risk"
       pros:
-        - Localized code
-      rejected_reason: ATDD centralizes in TddLoopPrompts
+        - "Localized code"
+      rejected_reason: "ATDD centralizes in TddLoopPrompts"
   cross_references:
-    - REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
-    - REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS
-  detail_file: architecture-decisions/ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS.yaml
+    - "REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML"
+    - "REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS"
+  detail_file: "architecture-decisions/ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS.yaml"
   implementation_approach:
     details:
-      - --tdd-yaml expands via TddLoopPrompts.messages_from_yaml
-      - Export uses TddLoopPrompts.step_entries_from_yaml and format_step
-    summary: AgentStreamArgv and export pipeline call into lib/tdd_loop_prompts.rb; lead checklist uses LeadChecklistPrompts
+      - "--tdd-yaml expands via TddLoopPrompts.messages_from_yaml"
+      - "Export uses TddLoopPrompts.step_entries_from_yaml and format_step"
+    summary: "AgentStreamArgv and export pipeline call into lib/tdd_loop_prompts.rb; lead checklist uses LeadChecklistPrompts"
   metadata:
     created:
-      author: AI Agent
-      date: 2026-03-24T00:00:00.000Z
+      author: "AI Agent"
+      date: "2026-03-24T00:00:00.000Z"
     last_updated:
-      author: AI Agent
-      date: 2026-03-24T00:00:00.000Z
-      reason: Import ATDD agent stream TIED records
+      author: "AI Agent"
+      date: "2026-03-24T00:00:00.000Z"
+      reason: "Import ATDD agent stream TIED records"
     last_validated:
-      date: 2026-03-24T00:00:00.000Z
-      result: pass
-      validator: AI Agent
-  name: Delegate YAML prompt semantics to TddLoopPrompts modules
+      date: "2026-03-24T00:00:00.000Z"
+      result: "pass"
+      validator: "AI Agent"
+  name: "Delegate YAML prompt semantics to TddLoopPrompts modules"
   rationale:
     benefits:
-      - Single module owns messages_from_yaml and step_entries_from_yaml
+      - "Single module owns messages_from_yaml and step_entries_from_yaml"
     problems_solved:
-      - Inconsistent step ordering or message bodies between modes
-    upstream_note: Imported from atdd commit eb88236290009b78eb11ea561816f0854176bf12
-    why: One authoritative parser for TDD loop YAML avoids duplicated rules between argv expansion and export
+      - "Inconsistent step ordering or message bodies between modes"
+    upstream_note: "Imported from atdd commit eb88236290009b78eb11ea561816f0854176bf12"
+    why: "One authoritative parser for TDD loop YAML avoids duplicated rules between argv expansion and export"
   related_decisions:
     depends_on: []
     informs:
-      - IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
+      - "IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV"
     see_also: []
-  status: Active
+  status: "Active"
   traceability:
     code_annotations:
-      - ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS
+      - "ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS"
     implementation:
-      - IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
-      - IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS
+      - "IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV"
+      - "IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS"
     requirements:
-      - REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
-      - REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS
+      - "REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML"
+      - "REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS"
     tests:
-      - agent_stream_tdd_yaml_binding_test.rb
-      - export_tdd_prompts_binding_test.rb
+      - "agent_stream_tdd_yaml_binding_test.rb"
+      - "export_tdd_prompts_binding_test.rb"
 ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON:
   alternatives_considered:
-    - name: HTTP API client
+    - name: "HTTP API client"
       cons:
-        - Not how Cursor agent CLI works
+        - "Not how Cursor agent CLI works"
       pros:
-        - In-process
-      rejected_reason: Requirements target the official agent subprocess
+        - "In-process"
+      rejected_reason: "Requirements target the official agent subprocess"
   cross_references:
-    - REQ-ATDD-E2E-AGENT_STREAM
-    - REQ-GOAGENT-AGENT-EXECUTOR
-  detail_file: architecture-decisions/ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON.yaml
+    - "REQ-ATDD-E2E-AGENT_STREAM"
+    - "REQ-GOAGENT-AGENT-EXECUTOR"
+  detail_file: "architecture-decisions/ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON.yaml"
   implementation_approach:
     details:
-      - Forward stderr to process stderr
-      - Non-success exit status fails the harness
-    summary: Open3.popen3 with line-wise JSON parse; extract assistant/thinking text; capture session_id
+      - "Forward stderr to process stderr"
+      - "Non-success exit status fails the harness"
+    summary: "Open3.popen3 with line-wise JSON parse; extract assistant/thinking text; capture session_id"
   metadata:
     created:
-      author: AI Agent
-      date: 2026-03-24T00:00:00.000Z
+      author: "AI Agent"
+      date: "2026-03-24T00:00:00.000Z"
     last_updated:
-      author: AI Agent
-      date: 2026-03-27T00:00:00.000Z
-      reason: Cross-link Go agentstream executor REQ/IMPL
+      author: "AI Agent"
+      date: "2026-03-27T00:00:00.000Z"
+      reason: "Cross-link Go agentstream executor REQ/IMPL"
     last_validated:
-      date: 2026-03-24T00:00:00.000Z
-      result: pass
-      validator: AI Agent
-  name: Subprocess NDJSON stream-json protocol for agent CLI
+      date: "2026-03-24T00:00:00.000Z"
+      result: "pass"
+      validator: "AI Agent"
+  name: "Subprocess NDJSON stream-json protocol for agent CLI"
   rationale:
     benefits:
-      - Testable with PATH stub; mirrors real Cursor agent usage
+      - "Testable with PATH stub; mirrors real Cursor agent usage"
     problems_solved:
-      - Cannot embed stream-json in-process
-    upstream_note: Imported from atdd commit eb88236290009b78eb11ea561816f0854176bf12
-    why: The agent binary is an external CLI; Open3 provides stdout line streaming and stderr forwarding suitable for NDJSON
+      - "Cannot embed stream-json in-process"
+    upstream_note: "Imported from atdd commit eb88236290009b78eb11ea561816f0854176bf12"
+    why: "The agent binary is an external CLI; Open3 provides stdout line streaming and stderr forwarding suitable for NDJSON"
   related_decisions:
     depends_on: []
     informs:
-      - IMPL-ATDD-E2E-AGENT_STREAM
-      - IMPL-GOAGENT-EXECUTOR
+      - "IMPL-ATDD-E2E-AGENT_STREAM"
+      - "IMPL-GOAGENT-EXECUTOR"
     see_also: []
-  status: Active
+  status: "Active"
   traceability:
     code_annotations:
-      - ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON
+      - "ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON"
     implementation:
-      - IMPL-ATDD-E2E-AGENT_STREAM
-      - IMPL-GOAGENT-EXECUTOR
+      - "IMPL-ATDD-E2E-AGENT_STREAM"
+      - "IMPL-GOAGENT-EXECUTOR"
     requirements:
-      - REQ-ATDD-E2E-AGENT_STREAM
-      - REQ-GOAGENT-AGENT-EXECUTOR
+      - "REQ-ATDD-E2E-AGENT_STREAM"
+      - "REQ-GOAGENT-AGENT-EXECUTOR"
     tests:
-      - agent_stream_e2e_test.rb
+      - "agent_stream_e2e_test.rb"
 ARCH-CONFIG_DISCOVERY_LAYERING:
   alternatives_considered:
-    - name: Always merge with built-ins
+    - name: "Always merge with built-ins"
       cons:
-        - Cannot narrow lists without extra syntax
+        - "Cannot narrow lists without extra syntax"
       pros:
-        - Defaults always active
-      rejected_reason: Conflicts with REQ-CONFIG_DISCOVERY_LOCAL_LAYER
-    - name: Replace only with explicit prefix
+        - "Defaults always active"
+      rejected_reason: "Conflicts with REQ-CONFIG_DISCOVERY_LOCAL_LAYER"
+    - name: "Replace only with explicit prefix"
       cons:
-        - Poor first-file ergonomics
+        - "Poor first-file ergonomics"
       pros:
-        - Very explicit
-      rejected_reason: REQ allows unprefixed first-local replacement for selected fields
+        - "Very explicit"
+      rejected_reason: "REQ allows unprefixed first-local replacement for selected fields"
   cross_references:
-    - REQ-CONFIG_DISCOVERY_LOCAL_LAYER
-  detail_file: architecture-decisions/ARCH-CONFIG_DISCOVERY_LAYERING.yaml
+    - "REQ-CONFIG_DISCOVERY_LOCAL_LAYER"
+  detail_file: "architecture-decisions/ARCH-CONFIG_DISCOVERY_LAYERING.yaml"
   implementation_approach:
     details:
-      - Explicit merge-strategy flags per discovery phase
-      - Omit-key clearing before cross-file merge
-      - Single-segment trailing-slash patterns match any path segment
-    summary: Discovery-ordered load; first-local replace for configured accumulate fields; clear omitted keys after parse; segment-based directory pattern matching in exclusion engine.
+      - "Explicit merge-strategy flags per discovery phase"
+      - "Omit-key clearing before cross-file merge"
+      - "Single-segment trailing-slash patterns match any path segment"
+    summary: "Discovery-ordered load; first-local replace for configured accumulate fields; clear omitted keys after parse; segment-based directory pattern matching in exclusion engine."
   metadata:
     created:
-      author: AI Agent
-      date: 2026-03-29T00:00:00.000Z
+      author: "AI Agent"
+      date: "2026-03-29T00:00:00.000Z"
     last_updated:
-      author: AI Agent
-      date: 2026-03-29T00:00:00.000Z
-      reason: author-architecture agent checklist
+      author: "AI Agent"
+      date: "2026-03-29T00:00:00.000Z"
+      reason: "author-architecture agent checklist"
     last_validated:
-      date: 2026-03-29T00:00:00.000Z
-      result: pending
-      validator: AI Agent
-  name: Layered configuration discovery with local replacement of built-ins
+      date: "2026-03-29T00:00:00.000Z"
+      result: "pending"
+      validator: "AI Agent"
+  name: "Layered configuration discovery with local replacement of built-ins"
   rationale:
     benefits:
-      - Consistent tree-wide exclusion semantics
-      - Predictable layering and operator control
+      - "Consistent tree-wide exclusion semantics"
+      - "Predictable layering and operator control"
     problems_solved:
-      - Implicit default merge with local policy
-      - Phantom defaults in merge from defaults-seeded parse
-      - Root-only directory pattern matching
-    why: Project-local configuration must be able to replace built-in defaults without silent merge; partial files must not inject defaults for omitted keys; directory excludes must match at depth.
+      - "Implicit default merge with local policy"
+      - "Phantom defaults in merge from defaults-seeded parse"
+      - "Root-only directory pattern matching"
+    why: "Project-local configuration must be able to replace built-in defaults without silent merge; partial files must not inject defaults for omitted keys; directory excludes must match at depth."
   related_decisions:
     depends_on:
-      - ARCH-TIED_STRUCTURE
+      - "ARCH-TIED_STRUCTURE"
     informs: []
     see_also:
-      - ARCH-GOAGENT-CLI
-  status: Active
+      - "ARCH-GOAGENT-CLI"
+  status: "Active"
   traceability:
     code_annotations:
-      - ARCH-CONFIG_DISCOVERY_LAYERING
+      - "ARCH-CONFIG_DISCOVERY_LAYERING"
     implementation: []
     requirements:
-      - REQ-CONFIG_DISCOVERY_LOCAL_LAYER
+      - "REQ-CONFIG_DISCOVERY_LOCAL_LAYER"
     tests: []
 ARCH-FEEDBACK_STORAGE:
   alternatives_considered:
-    - name: New YAML index (e.g. feedback.yaml as index)
+    - name: "New YAML index (e.g. feedback.yaml as index)"
       cons:
-        - Feedback is not a traceability index; different schema (entries array)
+        - "Feedback is not a traceability index; different schema (entries array)"
       pros:
-        - Consistent with requirements.yaml pattern
-      rejected_reason: Keep feedback as a separate artifact; schema is list of entries, not token-keyed records
-    - name: Store in requirements or implementation index
+        - "Consistent with requirements.yaml pattern"
+      rejected_reason: "Keep feedback as a separate artifact; schema is list of entries, not token-keyed records"
+    - name: "Store in requirements or implementation index"
       cons:
-        - Pollutes REQ/IMPL with non-traceability data
+        - "Pollutes REQ/IMPL with non-traceability data"
       pros:
-        - No new file
-      rejected_reason: Feedback is not a requirement or implementation decision
+        - "No new file"
+      rejected_reason: "Feedback is not a requirement or implementation decision"
   cross_references:
-    - REQ-FEEDBACK_TO_TIED
-  detail_file: architecture-decisions/ARCH-FEEDBACK_STORAGE.yaml
+    - "REQ-FEEDBACK_TO_TIED"
+  detail_file: "architecture-decisions/ARCH-FEEDBACK_STORAGE.yaml"
   implementation_approach:
     details:
-      - 'Each entry: id, type (feature_request | bug_report | methodology_improvement), title, description, context (optional), created_at (ISO 8601)'
-      - 'MCP tools: tied_feedback_add (append), tied_feedback_export (markdown or JSON)'
-      - Use getBasePath() from yaml-loader for path resolution
-    summary: One file {TIED_BASE_PATH}/feedback.yaml with top-level key 'entries' (array of objects)
+      - "Each entry: id, type (feature_request | bug_report | methodology_improvement), title, description, context (optional), created_at (ISO 8601)"
+      - "MCP tools: tied_feedback_add (append), tied_feedback_export (markdown or JSON)"
+      - "Use getBasePath() from yaml-loader for path resolution"
+    summary: "One file {TIED_BASE_PATH}/feedback.yaml with top-level key 'entries' (array of objects)"
   metadata:
     created:
-      author: AI Agent
-      date: 2026-03-03T00:00:00.000Z
+      author: "AI Agent"
+      date: "2026-03-03T00:00:00.000Z"
     last_updated:
-      author: AI Agent
-      date: 2026-03-03T00:00:00.000Z
-      reason: Initial creation
+      author: "AI Agent"
+      date: "2026-03-03T00:00:00.000Z"
+      reason: "Initial creation"
     last_validated:
-      date: 2026-03-03T00:00:00.000Z
-      result: pass
-      validator: AI Agent
-  name: Feedback Storage for TIED Reporting
+      date: "2026-03-03T00:00:00.000Z"
+      result: "pass"
+      validator: "AI Agent"
+  name: "Feedback Storage for TIED Reporting"
   rationale:
     benefits:
-      - Entries have id, type, title, description, optional context, created_at
-      - Same base path resolution as existing MCP tools (getBasePath())
-      - Single file tied/feedback.yaml; no new index type in REQ/ARCH/IMPL sense
+      - "Entries have id, type, title, description, optional context, created_at"
+      - "Same base path resolution as existing MCP tools (getBasePath())"
+      - "Single file tied/feedback.yaml; no new index type in REQ/ARCH/IMPL sense"
     problems_solved:
-      - Feedback not tied to project context (TIED base path)
-      - No standard location for feedback entries
-    why: Store user and project feedback in a single file under the TIED tree so it is versioned with the project and exportable for reporting to the TIED project
+      - "Feedback not tied to project context (TIED base path)"
+      - "No standard location for feedback entries"
+    why: "Store user and project feedback in a single file under the TIED tree so it is versioned with the project and exportable for reporting to the TIED project"
   related_decisions:
     depends_on:
-      - REQ-FEEDBACK_TO_TIED
+      - "REQ-FEEDBACK_TO_TIED"
     informs:
-      - IMPL-MCP_FEEDBACK_TOOLS
+      - "IMPL-MCP_FEEDBACK_TOOLS"
     see_also: []
-  status: Active
+  status: "Active"
   traceability:
     code_annotations:
-      - ARCH-FEEDBACK_STORAGE
-      - IMPL-MCP_FEEDBACK_TOOLS
+      - "ARCH-FEEDBACK_STORAGE"
+      - "IMPL-MCP_FEEDBACK_TOOLS"
     implementation:
-      - IMPL-MCP_FEEDBACK_TOOLS
+      - "IMPL-MCP_FEEDBACK_TOOLS"
     requirements:
-      - REQ-FEEDBACK_TO_TIED
+      - "REQ-FEEDBACK_TO_TIED"
     tests:
-      - feedback.test.ts
+      - "feedback.test.ts"
 ARCH-GOAGENT-CHECKLIST-CONTROL:
   alternatives_considered:
-    - name: Parse natural-language clues
+    - name: "Parse natural-language clues"
       cons:
-        - False positives from explanations or history
-        - Hard to test deterministically
+        - "False positives from explanations or history"
+        - "Hard to test deterministically"
       pros:
-        - No output protocol required
-      rejected_reason: Checklist control must be explicit and deterministic.
+        - "No output protocol required"
+      rejected_reason: "Checklist control must be explicit and deterministic."
   cross_references:
-    - REQ-GOAGENT-CHECKLIST-CONTROL
-  detail_file: architecture-decisions/ARCH-GOAGENT-CHECKLIST-CONTROL.yaml
+    - "REQ-GOAGENT-CHECKLIST-CONTROL"
+  detail_file: "architecture-decisions/ARCH-GOAGENT-CHECKLIST-CONTROL.yaml"
   implementation_approach:
     details:
-      - For goto, replace the remaining checklist turn queue from the target slug and preserve normal session handling.
-      - Only parse strict JSON control blocks named agentstream_control.
-      - Validate action and target against the loaded checklist slug set.
-    summary: A fenced JSON agentstream_control trailer describes validated actions such as goto; the CLI applies the action to the remaining checklist queue.
+      - "For goto, replace the remaining checklist turn queue from the target slug and preserve normal session handling."
+      - "Only parse strict JSON control blocks named agentstream_control."
+      - "Validate action and target against the loaded checklist slug set."
+    summary: "A fenced JSON agentstream_control trailer describes validated actions such as goto; the CLI applies the action to the remaining checklist queue."
   metadata:
     created:
-      author: AI Agent
+      author: "AI Agent"
       date: "2026-04-24T00:00:00.000Z"
     last_updated:
-      author: AI Agent
+      author: "AI Agent"
       date: "2026-04-24T00:00:00.000Z"
-      reason: Implemented structured control routing architecture
+      reason: "Implemented structured control routing architecture"
     last_validated:
       date: "2026-04-24T00:00:00.000Z"
-      result: pass
-      validator: go test ./tools/agentstream/... and tied_validate_consistency
-  name: Structured checklist control trailer
+      result: "pass"
+      validator: "go test ./tools/agentstream/... and tied_validate_consistency"
+  name: "Structured checklist control trailer"
   rationale:
     benefits:
-      - Existing stream output remains visible to users
-      - Known-slug validation before queue mutation
-      - Strict control block parser
+      - "Existing stream output remains visible to users"
+      - "Known-slug validation before queue mutation"
+      - "Strict control block parser"
     problems_solved:
-      - Ambiguous natural-language GOTO mentions
-      - Static checklist turn queues cannot honor runtime branch decisions
-    why: Runtime routing must be explicit and machine-validated instead of inferred from prose.
+      - "Ambiguous natural-language GOTO mentions"
+      - "Static checklist turn queues cannot honor runtime branch decisions"
+    why: "Runtime routing must be explicit and machine-validated instead of inferred from prose."
   related_decisions:
     depends_on:
-      - ARCH-GOAGENT-EXECUTOR
-      - ARCH-GOAGENT-PIPELINE
-      - ARCH-GOAGENT-YAML-STEPS
+      - "ARCH-GOAGENT-EXECUTOR"
+      - "ARCH-GOAGENT-PIPELINE"
+      - "ARCH-GOAGENT-YAML-STEPS"
     informs:
-      - IMPL-GOAGENT-CHECKLIST-CONTROL
+      - "IMPL-GOAGENT-CHECKLIST-CONTROL"
     see_also: []
-  status: Active
+  status: "Active"
   traceability:
     code_annotations:
-      - ARCH-GOAGENT-CHECKLIST-CONTROL
-      - REQ-GOAGENT-CHECKLIST-CONTROL
+      - "ARCH-GOAGENT-CHECKLIST-CONTROL"
+      - "REQ-GOAGENT-CHECKLIST-CONTROL"
     implementation:
-      - IMPL-GOAGENT-CHECKLIST-CONTROL
+      - "IMPL-GOAGENT-CHECKLIST-CONTROL"
     requirements:
-      - REQ-GOAGENT-CHECKLIST-CONTROL
+      - "REQ-GOAGENT-CHECKLIST-CONTROL"
     tests:
-      - tools/agentstream/checklist/checklist_test.go
-      - tools/agentstream/control/control_test.go
-      - tools/agentstream/executor/executor_test.go
-      - tools/agentstream/pipeline/pipeline_test.go
+      - "tools/agentstream/checklist/checklist_test.go"
+      - "tools/agentstream/control/control_test.go"
+      - "tools/agentstream/executor/executor_test.go"
+      - "tools/agentstream/pipeline/pipeline_test.go"
 ARCH-GOAGENT-CLI:
   cross_references:
-    - REQ-GOAGENT-CLI-CONFIG
-  detail_file: architecture-decisions/ARCH-GOAGENT-CLI.yaml
+    - "REQ-GOAGENT-CLI-CONFIG"
+  detail_file: "architecture-decisions/ARCH-GOAGENT-CLI.yaml"
   implementation_approach:
     details:
-      - 'Optional tiedpreflight: opt-in via --tied-mcp-preflight or AGENTSTREAM_TIED_MCP_PREFLIGHT=1; skip via --skip-tied-mcp-preflight or AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1 when preflight would run; does not imply Cursor exposes MCP at runtime.'
-      - Validation gates before pipeline.Build
-    summary: config.ParseAndResolve walks argv; defaults from workspace and repo-root discovery; optional static tied-yaml mcp.json check (off by default) after pipeline slice/chain and before dry-run or executor.
+      - "Optional tiedpreflight: opt-in via --tied-mcp-preflight or AGENTSTREAM_TIED_MCP_PREFLIGHT=1; skip via --skip-tied-mcp-preflight or AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1 when preflight would run; does not imply Cursor exposes MCP at runtime."
+      - "Validation gates before pipeline.Build"
+    summary: "config.ParseAndResolve walks argv; defaults from workspace and repo-root discovery; optional static tied-yaml mcp.json check (off by default) after pipeline slice/chain and before dry-run or executor."
   metadata:
     created:
-      author: AI Agent
+      author: "AI Agent"
       date: "2026-03-27T00:00:00.000Z"
     last_updated:
-      author: AI Agent
+      author: "AI Agent"
       date: "2026-04-18T00:00:00.000Z"
-      reason: Optional MCP preflight architecture aligned with IMPL-GOAGENT-CLI-CMD
+      reason: "Optional MCP preflight architecture aligned with IMPL-GOAGENT-CLI-CMD"
     last_validated:
       date: "2026-03-27T00:00:00.000Z"
-      result: pass
-      validator: AI Agent
-  name: Unified CLI surface for agentstream
+      result: "pass"
+      validator: "AI Agent"
+  name: "Unified CLI surface for agentstream"
   rationale:
     benefits:
-      - Preview path; synonym order flags; positional batch yaml
+      - "Preview path; synonym order flags; positional batch yaml"
     problems_solved:
-      - Split configuration and help text
-    why: One flag set replaces shell wrapper plus Ruby argv parsing
+      - "Split configuration and help text"
+    why: "One flag set replaces shell wrapper plus Ruby argv parsing"
   related_decisions:
     depends_on:
-      - ARCH-GOAGENT-LIB-LAYERING
+      - "ARCH-GOAGENT-LIB-LAYERING"
     informs:
-      - IMPL-GOAGENT-CLI-CMD
+      - "IMPL-GOAGENT-CLI-CMD"
     see_also: []
-  status: Active
+  status: "Active"
   traceability:
     code_annotations:
-      - ARCH-GOAGENT-CLI
+      - "ARCH-GOAGENT-CLI"
     implementation:
-      - IMPL-GOAGENT-CLI-CMD
+      - "IMPL-GOAGENT-CLI-CMD"
     requirements:
-      - REQ-GOAGENT-CLI-CONFIG
+      - "REQ-GOAGENT-CLI-CONFIG"
     tests:
-      - manual --help
+      - "manual --help"
 ARCH-GOAGENT-EXECUTOR:
   cross_references:
-    - REQ-GOAGENT-AGENT-EXECUTOR
-  detail_file: architecture-decisions/ARCH-GOAGENT-EXECUTOR.yaml
+    - "REQ-GOAGENT-AGENT-EXECUTOR"
+  detail_file: "architecture-decisions/ARCH-GOAGENT-EXECUTOR.yaml"
   implementation_approach:
     details:
-      - Complements Ruby run_stream; primary implementation tools/agentstream/executor
-    summary: exec.CommandContext; line scanner stdout; AgentArgv builder
+      - "Complements Ruby run_stream; primary implementation tools/agentstream/executor"
+    summary: "exec.CommandContext; line scanner stdout; AgentArgv builder"
   metadata:
     created:
-      author: AI Agent
-      date: 2026-03-27T00:00:00.000Z
+      author: "AI Agent"
+      date: "2026-03-27T00:00:00.000Z"
     last_updated:
-      author: AI Agent
-      date: 2026-03-27T00:00:00.000Z
-      reason: Go agentstream consolidated spec
+      author: "AI Agent"
+      date: "2026-03-27T00:00:00.000Z"
+      reason: "Go agentstream consolidated spec"
     last_validated:
-      date: 2026-03-27T00:00:00.000Z
-      result: pass
-      validator: AI Agent
-  name: Go subprocess executor for agent stream-json
+      date: "2026-03-27T00:00:00.000Z"
+      result: "pass"
+      validator: "AI Agent"
+  name: "Go subprocess executor for agent stream-json"
   rationale:
     benefits:
-      - Same NDJSON parsing rules; goroutine stderr drain
+      - "Same NDJSON parsing rules; goroutine stderr drain"
     problems_solved:
-      - Ruby-only harness
-    why: Reuses ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON protocol in Go os/exec
+      - "Ruby-only harness"
+    why: "Reuses ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON protocol in Go os/exec"
   related_decisions:
     depends_on:
-      - ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON
+      - "ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON"
     informs:
-      - IMPL-GOAGENT-EXECUTOR
+      - "IMPL-GOAGENT-EXECUTOR"
     see_also: []
-  status: Active
+  status: "Active"
   traceability:
     code_annotations:
-      - ARCH-GOAGENT-EXECUTOR
+      - "ARCH-GOAGENT-EXECUTOR"
     implementation:
-      - IMPL-GOAGENT-EXECUTOR
+      - "IMPL-GOAGENT-EXECUTOR"
     requirements:
-      - REQ-GOAGENT-AGENT-EXECUTOR
+      - "REQ-GOAGENT-AGENT-EXECUTOR"
     tests: []
 ARCH-GOAGENT-LIB-LAYERING:
   cross_references:
-    - REQ-GOAGENT-LIB-MODULE
-  detail_file: architecture-decisions/ARCH-GOAGENT-LIB-LAYERING.yaml
+    - "REQ-GOAGENT-LIB-MODULE"
+  detail_file: "architecture-decisions/ARCH-GOAGENT-LIB-LAYERING.yaml"
   implementation_approach:
     details:
-      - Shared types in root agentstream package (Turn SessionID)
-    summary: Module stdd/agentstream; packages featurespec text tddloop checklist pipeline executor config; cmd/agentstream
+      - "Shared types in root agentstream package (Turn SessionID)"
+    summary: "Module stdd/agentstream; packages featurespec text tddloop checklist pipeline executor config; cmd/agentstream"
   metadata:
     created:
-      author: AI Agent
-      date: 2026-03-27T00:00:00.000Z
+      author: "AI Agent"
+      date: "2026-03-27T00:00:00.000Z"
     last_updated:
-      author: AI Agent
-      date: 2026-03-27T00:00:00.000Z
-      reason: Go agentstream consolidated spec
+      author: "AI Agent"
+      date: "2026-03-27T00:00:00.000Z"
+      reason: "Go agentstream consolidated spec"
     last_validated:
-      date: 2026-03-27T00:00:00.000Z
-      result: pass
-      validator: AI Agent
-  name: Go agentstream package layering and import rules
+      date: "2026-03-27T00:00:00.000Z"
+      result: "pass"
+      validator: "AI Agent"
+  name: "Go agentstream package layering and import rules"
   rationale:
     benefits:
-      - cmd depends on libraries only; libraries accept io.Writer
+      - "cmd depends on libraries only; libraries accept io.Writer"
     problems_solved:
-      - Circular imports and untestable globals
-    why: Library consumers need stable packages without CLI coupling
+      - "Circular imports and untestable globals"
+    why: "Library consumers need stable packages without CLI coupling"
   related_decisions:
     depends_on: []
     informs:
-      - IMPL-GOAGENT-LIB-TYPES
+      - "IMPL-GOAGENT-LIB-TYPES"
     see_also: []
-  status: Active
+  status: "Active"
   traceability:
     code_annotations:
-      - ARCH-GOAGENT-LIB-LAYERING
+      - "ARCH-GOAGENT-LIB-LAYERING"
     implementation:
-      - IMPL-GOAGENT-LIB-TYPES
+      - "IMPL-GOAGENT-LIB-TYPES"
     requirements:
-      - REQ-GOAGENT-LIB-MODULE
+      - "REQ-GOAGENT-LIB-MODULE"
     tests:
-      - go test ./tools/agentstream/...
+      - "go test ./tools/agentstream/..."
 ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT:
   alternatives_considered:
-    - name: Require authors to hand-edit HTML in YAML
+    - name: "Require authors to hand-edit HTML in YAML"
       cons:
-        - Error-prone
-        - no non-compact contract in code
+        - "Error-prone"
+        - "no non-compact contract in code"
       pros:
-        - No new formatter
-      rejected_reason: REQ demands a testable, programmatic non-compact mode
-    - name: Delegate pretty HTML entirely to a wrapper script outside agentstream
+        - "No new formatter"
+      rejected_reason: "REQ demands a testable, programmatic non-compact mode"
+    - name: "Delegate pretty HTML entirely to a wrapper script outside agentstream"
       cons:
-        - No `agentstream` contract or traceability
+        - "No `agentstream` contract or traceability"
       pros:
-        - Thin core
-      rejected_reason: REQ is in-scope for tools/agentstream
+        - "Thin core"
+      rejected_reason: "REQ is in-scope for tools/agentstream"
   cross_references:
-    - REQ-GOAGENT-NON-COMPACT-HTML-FORMAT
-  decision: The product SHALL support an opt-in non-compact HTML presentation of in-scope turn bodies (initially checklist- and tddloop-rendered content) as UTF-8 HTML with line breaks and stable indentation, distinct from a single minified line. Format selection SHALL be explicit (CLI flag and/or config field) and SHALL NOT change YAML step parsing or step identity; only the serialized run content passed to the agent (for example the strings assembled into Turn.Parts) changes. A shared formatter or a pipeline hook after step render and before or during Turn assembly is the preferred seam; unselected code paths remain plain/markdown and behavior-compatible with current releases.
-  detail_file: architecture-decisions/ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT.yaml
+    - "REQ-GOAGENT-NON-COMPACT-HTML-FORMAT"
+  decision: "The product SHALL support an opt-in non-compact HTML presentation of in-scope turn bodies (initially checklist- and tddloop-rendered content) as UTF-8 HTML with line breaks and stable indentation, distinct from a single minified line. Format selection SHALL be explicit (CLI flag and/or config field) and SHALL NOT change YAML step parsing or step identity; only the serialized run content passed to the agent (for example the strings assembled into Turn.Parts) changes. A shared formatter or a pipeline hook after step render and before or during Turn assembly is the preferred seam; unselected code paths remain plain/markdown and behavior-compatible with current releases."
+  detail_file: "architecture-decisions/ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT.yaml"
   implementation_approach:
     details:
-      - Feature-spec batch markdown may be in or out of scope per IMPL; ARCH allows extension without changing this decision text
-      - Format decisions stay in string transformation or explicit encoding layer; do not conflate with Agent executor protocol
-    summary: Introduce options or a small package to emit non-compact HTML for eligible renderers; wire selection through ARCH-GOAGENT-CLI and pipeline Input per IMPL. Default path unchanged.
+      - "Feature-spec batch markdown may be in or out of scope per IMPL; ARCH allows extension without changing this decision text"
+      - "Format decisions stay in string transformation or explicit encoding layer; do not conflate with Agent executor protocol"
+    summary: "Introduce options or a small package to emit non-compact HTML for eligible renderers; wire selection through ARCH-GOAGENT-CLI and pipeline Input per IMPL. Default path unchanged."
   metadata:
     created:
-      author: AI Agent
+      author: "AI Agent"
       date: "2026-04-24T00:00:00.000Z"
     last_updated:
-      author: AI Agent
+      author: "AI Agent"
       date: "2026-04-24T19:00:00.000Z"
-      reason: 'sync-tied-stack: architecture index row matches detail.'
+      reason: "sync-tied-stack: architecture index row matches detail."
     last_validated:
       date: "2026-04-24T19:00:00.000Z"
-      result: pass
-      validator: AI Agent
-  name: Non-compact HTML output for agentstream rendered bodies
+      result: "pass"
+      validator: "AI Agent"
+  name: "Non-compact HTML output for agentstream rendered bodies"
   rationale:
     benefits:
-      - Clear boundary from YAML_STEPS and PIPELINE decisions
-      - One architectural locus for output-style policy and tests
+      - "Clear boundary from YAML_STEPS and PIPELINE decisions"
+      - "One architectural locus for output-style policy and tests"
     problems_solved:
-      - Inconsistent or ad-hoc formatting across checklist vs tdd loop without a single policy
-      - No first-class seam between structured step text and a human-friendly HTML shape
-    why: Review, diff, and log readability require a named, stable output shape; HTML in one line is not operationally reviewable.
+      - "Inconsistent or ad-hoc formatting across checklist vs tdd loop without a single policy"
+      - "No first-class seam between structured step text and a human-friendly HTML shape"
+    why: "Review, diff, and log readability require a named, stable output shape; HTML in one line is not operationally reviewable."
   related_decisions:
     depends_on:
-      - ARCH-GOAGENT-CLI
-      - ARCH-GOAGENT-LIB-LAYERING
-      - ARCH-GOAGENT-YAML-STEPS
+      - "ARCH-GOAGENT-CLI"
+      - "ARCH-GOAGENT-LIB-LAYERING"
+      - "ARCH-GOAGENT-YAML-STEPS"
     informs:
-      - IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT
+      - "IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT"
     see_also:
-      - ARCH-GOAGENT-PIPELINE
-      - ARCH-GOAGENT-YAML-FEATURESPEC
+      - "ARCH-GOAGENT-PIPELINE"
+      - "ARCH-GOAGENT-YAML-FEATURESPEC"
     supersedes: []
-  status: Active
+  status: "Active"
   traceability:
     code_annotations:
-      - ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT
+      - "ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT"
     implementation:
-      - IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT
+      - "IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT"
     requirements:
-      - REQ-GOAGENT-NON-COMPACT-HTML-FORMAT
+      - "REQ-GOAGENT-NON-COMPACT-HTML-FORMAT"
     tests:
-      - tools/agentstream/cmd/agentstream/compose_noncompact_test.go
-      - tools/agentstream/htmlformat/htmlformat_test.go
+      - "tools/agentstream/cmd/agentstream/compose_noncompact_test.go"
+      - "tools/agentstream/htmlformat/htmlformat_test.go"
 ARCH-GOAGENT-PIPELINE:
   cross_references:
-    - REQ-GOAGENT-PIPELINE-CHAIN
-  detail_file: architecture-decisions/ARCH-GOAGENT-PIPELINE.yaml
+    - "REQ-GOAGENT-PIPELINE-CHAIN"
+  detail_file: "architecture-decisions/ARCH-GOAGENT-PIPELINE.yaml"
   implementation_approach:
     details: []
-    summary: Ordered concatenation; feature-spec turns break chain; SessionForTurn derives resume id
+    summary: "Ordered concatenation; feature-spec turns break chain; SessionForTurn derives resume id"
   metadata:
     created:
-      author: AI Agent
-      date: 2026-03-27T00:00:00.000Z
+      author: "AI Agent"
+      date: "2026-03-27T00:00:00.000Z"
     last_updated:
-      author: AI Agent
-      date: 2026-03-27T00:00:00.000Z
-      reason: Go agentstream consolidated spec
+      author: "AI Agent"
+      date: "2026-03-27T00:00:00.000Z"
+      reason: "Go agentstream consolidated spec"
     last_validated:
-      date: 2026-03-27T00:00:00.000Z
-      result: pass
-      validator: AI Agent
-  name: Turn assembly and session chain metadata
+      date: "2026-03-27T00:00:00.000Z"
+      result: "pass"
+      validator: "AI Agent"
+  name: "Turn assembly and session chain metadata"
   rationale:
     benefits:
-      - pipeline.Build and ChainBetween helpers
+      - "pipeline.Build and ChainBetween helpers"
     problems_solved:
-      - Scattered append_turn logic
-    why: Explicit Build step keeps cmd thin and testable
+      - "Scattered append_turn logic"
+    why: "Explicit Build step keeps cmd thin and testable"
   related_decisions:
     depends_on:
-      - ARCH-GOAGENT-TEXT-SOURCES
-      - ARCH-GOAGENT-YAML-FEATURESPEC
-      - ARCH-GOAGENT-YAML-STEPS
+      - "ARCH-GOAGENT-TEXT-SOURCES"
+      - "ARCH-GOAGENT-YAML-FEATURESPEC"
+      - "ARCH-GOAGENT-YAML-STEPS"
     informs:
-      - IMPL-GOAGENT-PIPELINE
+      - "IMPL-GOAGENT-PIPELINE"
     see_also: []
-  status: Active
+  status: "Active"
   traceability:
     code_annotations:
-      - ARCH-GOAGENT-PIPELINE
+      - "ARCH-GOAGENT-PIPELINE"
     implementation:
-      - IMPL-GOAGENT-CLI-CMD
-      - IMPL-GOAGENT-PIPELINE
+      - "IMPL-GOAGENT-CLI-CMD"
+      - "IMPL-GOAGENT-PIPELINE"
     requirements:
-      - REQ-GOAGENT-PIPELINE-CHAIN
+      - "REQ-GOAGENT-PIPELINE-CHAIN"
     tests:
-      - pipeline_test.go
+      - "pipeline_test.go"
 ARCH-GOAGENT-TEXT-SOURCES:
   cross_references:
-    - REQ-GOAGENT-TEXT-SOURCES
-  detail_file: architecture-decisions/ARCH-GOAGENT-TEXT-SOURCES.yaml
+    - "REQ-GOAGENT-TEXT-SOURCES"
+  detail_file: "architecture-decisions/ARCH-GOAGENT-TEXT-SOURCES.yaml"
   implementation_approach:
     details: []
-    summary: Package text exposes ArgvTurn TurnsFromPromptFiles TurnsFromPromptsFiles VerifySessionTurn
+    summary: "Package text exposes ArgvTurn TurnsFromPromptFiles TurnsFromPromptsFiles VerifySessionTurn"
   metadata:
     created:
-      author: AI Agent
-      date: 2026-03-27T00:00:00.000Z
+      author: "AI Agent"
+      date: "2026-03-27T00:00:00.000Z"
     last_updated:
-      author: AI Agent
-      date: 2026-03-27T00:00:00.000Z
-      reason: Go agentstream consolidated spec
+      author: "AI Agent"
+      date: "2026-03-27T00:00:00.000Z"
+      reason: "Go agentstream consolidated spec"
     last_validated:
-      date: 2026-03-27T00:00:00.000Z
-      result: pass
-      validator: AI Agent
-  name: Text prompt source boundaries
+      date: "2026-03-27T00:00:00.000Z"
+      result: "pass"
+      validator: "AI Agent"
+  name: "Text prompt source boundaries"
   rationale:
     benefits:
-      - Isolated package text
+      - "Isolated package text"
     problems_solved:
-      - Mixing YAML record logic with raw text
-    why: Text inputs are pure file/string transforms
+      - "Mixing YAML record logic with raw text"
+    why: "Text inputs are pure file/string transforms"
   related_decisions:
     depends_on:
-      - ARCH-GOAGENT-LIB-LAYERING
+      - "ARCH-GOAGENT-LIB-LAYERING"
     informs:
-      - IMPL-GOAGENT-TEXT-SOURCES
+      - "IMPL-GOAGENT-TEXT-SOURCES"
     see_also: []
-  status: Active
+  status: "Active"
   traceability:
     code_annotations:
-      - ARCH-GOAGENT-TEXT-SOURCES
+      - "ARCH-GOAGENT-TEXT-SOURCES"
     implementation:
-      - IMPL-GOAGENT-TEXT-SOURCES
+      - "IMPL-GOAGENT-TEXT-SOURCES"
     requirements:
-      - REQ-GOAGENT-TEXT-SOURCES
+      - "REQ-GOAGENT-TEXT-SOURCES"
     tests:
-      - text_test.go
+      - "text_test.go"
 ARCH-GOAGENT-YAML-FEATURESPEC:
   cross_references:
-    - REQ-GOAGENT-FEATURESPEC-BATCH
-  detail_file: architecture-decisions/ARCH-GOAGENT-YAML-FEATURESPEC.yaml
+    - "REQ-GOAGENT-FEATURESPEC-BATCH"
+  detail_file: "architecture-decisions/ARCH-GOAGENT-YAML-FEATURESPEC.yaml"
   implementation_approach:
     details: []
-    summary: yaml.v3 Node parse; stable sort; OrderFilter; Preview to io.Writer
+    summary: "yaml.v3 Node parse; stable sort; OrderFilter; Preview to io.Writer"
   metadata:
     created:
-      author: AI Agent
-      date: 2026-03-27T00:00:00.000Z
+      author: "AI Agent"
+      date: "2026-03-27T00:00:00.000Z"
     last_updated:
-      author: AI Agent
-      date: 2026-03-27T00:00:00.000Z
-      reason: Go agentstream consolidated spec
+      author: "AI Agent"
+      date: "2026-03-27T00:00:00.000Z"
+      reason: "Go agentstream consolidated spec"
     last_validated:
-      date: 2026-03-27T00:00:00.000Z
-      result: pass
-      validator: AI Agent
-  name: Feature spec batch YAML normalization and rendering
+      date: "2026-03-27T00:00:00.000Z"
+      result: "pass"
+      validator: "AI Agent"
+  name: "Feature spec batch YAML normalization and rendering"
   rationale:
     benefits:
-      - Exported featurespec package for other Go tools
+      - "Exported featurespec package for other Go tools"
     problems_solved:
-      - Order sort/filter parity
-    why: YAML shape mirrors Ruby FeatureSpecBatchPrompts for drop-in replacement
+      - "Order sort/filter parity"
+    why: "YAML shape mirrors Ruby FeatureSpecBatchPrompts for drop-in replacement"
   related_decisions:
     depends_on:
-      - ARCH-GOAGENT-LIB-LAYERING
+      - "ARCH-GOAGENT-LIB-LAYERING"
     informs:
-      - IMPL-GOAGENT-FEATURESPEC
+      - "IMPL-GOAGENT-FEATURESPEC"
     see_also: []
-  status: Active
+  status: "Active"
   traceability:
     code_annotations:
-      - ARCH-GOAGENT-YAML-FEATURESPEC
+      - "ARCH-GOAGENT-YAML-FEATURESPEC"
     implementation:
-      - IMPL-GOAGENT-FEATURESPEC
+      - "IMPL-GOAGENT-FEATURESPEC"
     requirements:
-      - REQ-GOAGENT-FEATURESPEC-BATCH
+      - "REQ-GOAGENT-FEATURESPEC-BATCH"
     tests:
-      - featurespec_test.go
+      - "featurespec_test.go"
 ARCH-GOAGENT-YAML-STEPS:
   cross_references:
-    - REQ-GOAGENT-YAML-STEP-RENDER
-  detail_file: architecture-decisions/ARCH-GOAGENT-YAML-STEPS.yaml
+    - "REQ-GOAGENT-YAML-STEP-RENDER"
+  detail_file: "architecture-decisions/ARCH-GOAGENT-YAML-STEPS.yaml"
   implementation_approach:
     details: []
-    summary: Unmarshal to typed structs; format functions return markdown strings
+    summary: "Unmarshal to typed structs; format functions return markdown strings"
   metadata:
     created:
-      author: AI Agent
-      date: 2026-03-27T00:00:00.000Z
+      author: "AI Agent"
+      date: "2026-03-27T00:00:00.000Z"
     last_updated:
-      author: AI Agent
-      date: 2026-03-27T00:00:00.000Z
-      reason: Go agentstream consolidated spec
+      author: "AI Agent"
+      date: "2026-03-27T00:00:00.000Z"
+      reason: "Go agentstream consolidated spec"
     last_validated:
-      date: 2026-03-27T00:00:00.000Z
-      result: pass
-      validator: AI Agent
-  name: TDD and checklist YAML step rendering architecture
+      date: "2026-03-27T00:00:00.000Z"
+      result: "pass"
+      validator: "AI Agent"
+  name: "TDD and checklist YAML step rendering architecture"
   rationale:
     benefits:
-      - Packages tddloop and checklist
+      - "Packages tddloop and checklist"
     problems_solved:
-      - Monolithic prompt builder
-    why: Two YAML schemas share pipeline insertion rules but different templates
+      - "Monolithic prompt builder"
+    why: "Two YAML schemas share pipeline insertion rules but different templates"
   related_decisions:
     depends_on:
-      - ARCH-GOAGENT-LIB-LAYERING
+      - "ARCH-GOAGENT-LIB-LAYERING"
     informs:
-      - IMPL-GOAGENT-CHECKLIST
-      - IMPL-GOAGENT-TDDLOOP
+      - "IMPL-GOAGENT-CHECKLIST"
+      - "IMPL-GOAGENT-TDDLOOP"
     see_also:
-      - ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS
-  status: Active
+      - "ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS"
+  status: "Active"
   traceability:
     code_annotations:
-      - ARCH-GOAGENT-YAML-STEPS
+      - "ARCH-GOAGENT-YAML-STEPS"
     implementation:
-      - IMPL-GOAGENT-CHECKLIST
-      - IMPL-GOAGENT-TDDLOOP
+      - "IMPL-GOAGENT-CHECKLIST"
+      - "IMPL-GOAGENT-TDDLOOP"
     requirements:
-      - REQ-GOAGENT-YAML-STEP-RENDER
+      - "REQ-GOAGENT-YAML-STEP-RENDER"
     tests: []
 ARCH-LEAP_PROPOSAL_QUEUE:
   alternatives_considered:
-    - name: Store proposals under tied/proposals.yaml
+    - name: "Store proposals under tied/proposals.yaml"
       cons:
-        - Conflicts with canonical-only expectation for tied/ project YAML; harder to distinguish from REQ/ARCH/IMPL
+        - "Conflicts with canonical-only expectation for tied/ project YAML; harder to distinguish from REQ/ARCH/IMPL"
       pros:
-        - Versioned with methodology tree
-      rejected_reason: Keep proposals out of TIED base path until promoted via explicit LEAP
-    - name: New requirements.yaml rows for each proposal
+        - "Versioned with methodology tree"
+      rejected_reason: "Keep proposals out of TIED base path until promoted via explicit LEAP"
+    - name: "New requirements.yaml rows for each proposal"
       cons:
-        - Proposals are not requirements until approved; would flood index and confuse traceability
+        - "Proposals are not requirements until approved; would flood index and confuse traceability"
       pros:
-        - Uses existing REQ index
-      rejected_reason: Proposals are non-canonical until approved
-    - name: Only LLM extraction
+        - "Uses existing REQ index"
+      rejected_reason: "Proposals are non-canonical until approved"
+    - name: "Only LLM extraction"
       cons:
-        - API keys and cost; contradicts deterministic default path
+        - "API keys and cost; contradicts deterministic default path"
       pros:
-        - Richer suggestions
-      rejected_reason: Built-in path must be deterministic and opt-in without LLM
+        - "Richer suggestions"
+      rejected_reason: "Built-in path must be deterministic and opt-in without LLM"
   cross_references:
-    - REQ-LEAP_PROPOSAL_QUEUE
-  detail_file: architecture-decisions/ARCH-LEAP_PROPOSAL_QUEUE.yaml
+    - "REQ-LEAP_PROPOSAL_QUEUE"
+  detail_file: "architecture-decisions/ARCH-LEAP_PROPOSAL_QUEUE.yaml"
   implementation_approach:
     details:
-      - Diff extraction and session import require explicit_opt_in true at tool boundary
-      - Mark applied is bookkeeping after user applies LEAP via existing MCP YAML tools
-      - Reject and approve mutate only leap-proposals/; no yaml-loader writes for queue lifecycle
-    summary: Module leap-proposal-queue.ts under mcp-server/src/analysis; MCP tools tied_leap_proposal_*; project root from process.cwd() or optional project_root argument; queue JSON + JSONL audit; import type-only from plumb-diff-impact-preview for selection enum.
+      - "Diff extraction and session import require explicit_opt_in true at tool boundary"
+      - "Mark applied is bookkeeping after user applies LEAP via existing MCP YAML tools"
+      - "Reject and approve mutate only leap-proposals/; no yaml-loader writes for queue lifecycle"
+    summary: "Module leap-proposal-queue.ts under mcp-server/src/analysis; MCP tools tied_leap_proposal_*; project root from process.cwd() or optional project_root argument; queue JSON + JSONL audit; import type-only from plumb-diff-impact-preview for selection enum."
   metadata:
     created:
-      author: AI Agent
-      date: 2026-03-26T00:00:00.000Z
+      author: "AI Agent"
+      date: "2026-03-26T00:00:00.000Z"
     last_updated:
-      author: AI Agent
-      date: 2026-03-28T00:00:00.000Z
-      reason: sync-tied-stack [PROC-AGENT_REQ_CHECKLIST] TIED sync — traceability.tests include leap-proposal-mcp.test.ts
+      author: "AI Agent"
+      date: "2026-03-28T00:00:00.000Z"
+      reason: "sync-tied-stack [PROC-AGENT_REQ_CHECKLIST] TIED sync — traceability.tests include leap-proposal-mcp.test.ts"
     last_validated:
-      date: 2026-03-26T00:00:00.000Z
-      result: pass
-      validator: AI Agent
-  name: LEAP proposal queue storage and review boundary
+      date: "2026-03-26T00:00:00.000Z"
+      result: "pass"
+      validator: "AI Agent"
+  name: "LEAP proposal queue storage and review boundary"
   rationale:
     benefits:
-      - Clear separation between proposals (queue) and canonical records (tied/)
-      - Parallels feedback file pattern (artifact outside token indexes) while differing in location (repo root vs TIED base)
-      - Same MCP-first rule for actual LEAP updates (yaml_detail_*, yaml_index_*)
+      - "Clear separation between proposals (queue) and canonical records (tied/)"
+      - "Parallels feedback file pattern (artifact outside token indexes) while differing in location (repo root vs TIED base)"
+      - "Same MCP-first rule for actual LEAP updates (yaml_detail_*, yaml_index_*)"
     problems_solved:
-      - Mixing AI- or diff-inferred text directly into TIED indexes without review
-      - No audit trail for reject vs approve vs applied
-    why: Canonical REQ/ARCH/IMPL must remain authoritative; inferred hints need a reviewable staging area without polluting tied/ or bypassing MCP validation.
+      - "Mixing AI- or diff-inferred text directly into TIED indexes without review"
+      - "No audit trail for reject vs approve vs applied"
+    why: "Canonical REQ/ARCH/IMPL must remain authoritative; inferred hints need a reviewable staging area without polluting tied/ or bypassing MCP validation."
   related_decisions:
     depends_on:
-      - REQ-LEAP_PROPOSAL_QUEUE
+      - "REQ-LEAP_PROPOSAL_QUEUE"
     informs: []
     see_also:
-      - ARCH-FEEDBACK_STORAGE
-  status: Active
+      - "ARCH-FEEDBACK_STORAGE"
+  status: "Active"
   traceability:
     code_annotations:
-      - ARCH-LEAP_PROPOSAL_QUEUE
-      - IMPL-MCP_LEAP_PROPOSAL_QUEUE
+      - "ARCH-LEAP_PROPOSAL_QUEUE"
+      - "IMPL-MCP_LEAP_PROPOSAL_QUEUE"
     implementation:
-      - IMPL-MCP_LEAP_PROPOSAL_QUEUE
+      - "IMPL-MCP_LEAP_PROPOSAL_QUEUE"
     requirements:
-      - REQ-LEAP_PROPOSAL_QUEUE
+      - "REQ-LEAP_PROPOSAL_QUEUE"
     tests:
-      - leap-proposal-mcp.test.ts
-      - leap-proposal-queue.test.ts
+      - "leap-proposal-mcp.test.ts"
+      - "leap-proposal-queue.test.ts"
 ARCH-MCP_USAGE_METRICS:
   alternatives_considered:
-    - name: Cursor hook logs only
+    - name: "Cursor hook logs only"
       cons:
-        - Misses tied-cli and headless MCP invocations
-        - Requires separate hooks.json setup per project
+        - "Misses tied-cli and headless MCP invocations"
+        - "Requires separate hooks.json setup per project"
       pros:
-        - Already captures some IDE tool events
-      rejected_reason: Does not cover tied-cli/API path; server-side wrapper covers both surfaces uniformly
-    - name: Store metrics in tied/feedback.yaml
+        - "Already captures some IDE tool events"
+      rejected_reason: "Does not cover tied-cli/API path; server-side wrapper covers both surfaces uniformly"
+    - name: "Store metrics in tied/feedback.yaml"
       cons:
-        - Mixes human feedback with high-volume telemetry
-        - Would version noisy data with project git
+        - "Mixes human feedback with high-volume telemetry"
+        - "Would version noisy data with project git"
       pros:
-        - Reuses existing feedback module
-      rejected_reason: Separate append-only JSONL under ~/.cursor/logs/ keeps metrics local and out of project YAML
-    - name: Always-on collection
+        - "Reuses existing feedback module"
+      rejected_reason: "Separate append-only JSONL under ~/.cursor/logs/ keeps metrics local and out of project YAML"
+    - name: "Always-on collection"
       cons:
-        - Privacy and I/O overhead without explicit opt-in
+        - "Privacy and I/O overhead without explicit opt-in"
       pros:
-        - Simpler for operators
-      rejected_reason: Default off via TIED_MCP_COLLECT_METRICS matches local-only opt-in requirement
+        - "Simpler for operators"
+      rejected_reason: "Default off via TIED_MCP_COLLECT_METRICS matches local-only opt-in requirement"
   cross_references:
-    - REQ-MCP_USAGE_METRICS
-  detail_file: architecture-decisions/ARCH-MCP_USAGE_METRICS.yaml
+    - "REQ-MCP_USAGE_METRICS"
+  detail_file: "architecture-decisions/ARCH-MCP_USAGE_METRICS.yaml"
   implementation_approach:
     details:
-      - 'Env gate: TIED_MCP_COLLECT_METRICS=1 or true enables collection; default disabled'
-      - 'Storage: append-only JSONL at TIED_MCP_METRICS_PATH or ~/.cursor/logs/tied-mcp-metrics.jsonl'
-      - Client label from TIED_MCP_METRICS_CLIENT (tied-cli sets tied-cli; IDE default cursor-mcp)
-      - Registration-time wrapToolHandler in mcp-server/src/index.ts — no per-handler edits
-      - sanitizeArgs redacts blob fields; never logs full essence_pseudocode or record bodies
-      - Write failures are non-fatal (DIAGNOSTIC stderr only)
-    summary: Wrapper at MCP tool registration appends sanitized JSONL records when env opt-in is set
+      - "Client label from TIED_MCP_METRICS_CLIENT (tied-cli sets tied-cli; IDE default cursor-mcp)"
+      - "Env gate: TIED_MCP_COLLECT_METRICS=1 or true enables collection; default disabled"
+      - "Registration-time wrapToolHandler in mcp-server/src/index.ts — no per-handler edits"
+      - "sanitizeArgs redacts blob fields; never logs full essence_pseudocode or record bodies"
+      - "Storage: append-only JSONL at TIED_MCP_METRICS_PATH or ~/.cursor/logs/tied-mcp-metrics.jsonl"
+      - "Write failures are non-fatal (DIAGNOSTIC stderr only)"
+    summary: "Wrapper at MCP tool registration appends sanitized JSONL records when env opt-in is set"
   metadata:
     created:
-      author: AI Agent
-      date: 2026-06-25
+      author: "AI Agent"
+      date: "2026-06-25"
     last_updated:
-      author: AI Agent
-      date: 2026-06-25
-      reason: Initial creation
+      author: "AI Agent"
+      date: "2026-06-25"
+      reason: "Initial creation"
     last_validated:
-      date: 2026-06-25
-      result: pass
-      validator: AI Agent
-  name: MCP usage metrics wrapper and JSONL storage
+      date: "2026-06-25"
+      result: "pass"
+      validator: "AI Agent"
+  name: "MCP usage metrics wrapper and JSONL storage"
   rationale:
     benefits:
-      - Sanitized records support frequency and intent clustering offline
-      - Single instrumentation point for all tools without touching each handler
-      - Works for Cursor MCP and tied-cli stdio clients
+      - "Sanitized records support frequency and intent clustering offline"
+      - "Single instrumentation point for all tools without touching each handler"
+      - "Works for Cursor MCP and tied-cli stdio clients"
     problems_solved:
-      - No unified metrics for TIED MCP tool calls
-      - Risk of logging sensitive pseudo-code or large JSON payloads
-    why: Central wrapper at registration time with env-gated JSONL append balances observability and privacy for local MCP/API improvement workflows
+      - "No unified metrics for TIED MCP tool calls"
+      - "Risk of logging sensitive pseudo-code or large JSON payloads"
+    why: "Central wrapper at registration time with env-gated JSONL append balances observability and privacy for local MCP/API improvement workflows"
   related_decisions:
     depends_on:
-      - REQ-MCP_USAGE_METRICS
+      - "REQ-MCP_USAGE_METRICS"
     informs:
-      - IMPL-MCP_USAGE_METRICS
+      - "IMPL-MCP_USAGE_METRICS"
     see_also:
-      - ARCH-FEEDBACK_STORAGE
-  status: Active
+      - "ARCH-FEEDBACK_STORAGE"
+  status: "Active"
   traceability:
     code_annotations:
-      - ARCH-MCP_USAGE_METRICS
-      - IMPL-MCP_USAGE_METRICS
+      - "ARCH-MCP_USAGE_METRICS"
+      - "IMPL-MCP_USAGE_METRICS"
     implementation:
-      - IMPL-MCP_USAGE_METRICS
+      - "IMPL-MCP_USAGE_METRICS"
     requirements:
-      - REQ-MCP_USAGE_METRICS
+      - "REQ-MCP_USAGE_METRICS"
     tests:
-      - usage-metrics.test.ts
+      - "usage-metrics.test.ts"
 ARCH-MODULE_VALIDATION:
   alternatives_considered:
-    - name: Big Bang Integration
+    - name: "Big Bang Integration"
       cons:
-        - Bugs compound during integration
-        - Difficult to isolate issues
-        - Too complex to debug
+        - "Bugs compound during integration"
+        - "Difficult to isolate issues"
+        - "Too complex to debug"
       pros:
-        - Faster initial integration
-      rejected_reason: Makes debugging too difficult and bugs compound
-    - name: Minimal Validation
+        - "Faster initial integration"
+      rejected_reason: "Makes debugging too difficult and bugs compound"
+    - name: "Minimal Validation"
       cons:
-        - Doesn't validate contracts properly
-        - Insufficient to catch complexity bugs
+        - "Doesn't validate contracts properly"
+        - "Insufficient to catch complexity bugs"
       pros:
-        - Faster development cycle
-      rejected_reason: Insufficient validation leads to integration issues
-    - name: Post-Integration Validation Only
+        - "Faster development cycle"
+      rejected_reason: "Insufficient validation leads to integration issues"
+    - name: "Post-Integration Validation Only"
       cons:
-        - Doesn't catch module-level bugs early
-        - Increases debugging complexity
+        - "Doesn't catch module-level bugs early"
+        - "Increases debugging complexity"
       pros:
-        - All validation done at once
-      rejected_reason: Bugs discovered too late, making fixes expensive
+        - "All validation done at once"
+      rejected_reason: "Bugs discovered too late, making fixes expensive"
   cross_references:
-    - REQ-MODULE_VALIDATION
-  detail_file: architecture-decisions/ARCH-MODULE_VALIDATION.yaml
+    - "REQ-MODULE_VALIDATION"
+  detail_file: "architecture-decisions/ARCH-MODULE_VALIDATION.yaml"
   implementation_approach:
     details:
-      - Define module interfaces and contracts explicitly
-      - Document validation results before integration
-      - Identify modules and document boundaries before development
-      - Integration test with test doubles (mocks, stubs, fakes)
-      - Only integrate after validation passes
-      - Specify validation criteria for each module
-      - Test edge cases and error handling
-      - Unit test modules with mocked dependencies
-      - Validate contracts (input/output validation)
-    summary: Independent module validation before integration with comprehensive testing strategy
+      - "Define module interfaces and contracts explicitly"
+      - "Document validation results before integration"
+      - "Identify modules and document boundaries before development"
+      - "Integration test with test doubles (mocks, stubs, fakes)"
+      - "Only integrate after validation passes"
+      - "Specify validation criteria for each module"
+      - "Test edge cases and error handling"
+      - "Unit test modules with mocked dependencies"
+      - "Validate contracts (input/output validation)"
+    summary: "Independent module validation before integration with comprehensive testing strategy"
   metadata:
     created:
-      author: AI Agent
-      date: 2025-12-18T00:00:00.000Z
+      author: "AI Agent"
+      date: "2025-12-18T00:00:00.000Z"
     last_updated:
-      author: AI Agent
-      date: 2026-02-06T00:00:00.000Z
-      reason: Restructured to v1.5.0 schema with machine-parseable fields
+      author: "AI Agent"
+      date: "2026-02-06T00:00:00.000Z"
+      reason: "Restructured to v1.5.0 schema with machine-parseable fields"
     last_validated:
-      date: 2026-02-06T00:00:00.000Z
-      result: pass
-      validator: AI Agent
-  name: Module Validation Strategy
+      date: "2026-02-06T00:00:00.000Z"
+      result: "pass"
+      validator: "AI Agent"
+  name: "Module Validation Strategy"
   rationale:
     benefits:
-      - Bugs caught early before integration
-      - Clear module boundaries and contracts
-      - Easier debugging by isolating issues
-      - Enables parallel module development
-      - Reduced integration complexity
+      - "Bugs caught early before integration"
+      - "Clear module boundaries and contracts"
+      - "Easier debugging by isolating issues"
+      - "Enables parallel module development"
+      - "Reduced integration complexity"
     problems_solved:
-      - Bugs discovered too late in development cycle
-      - Integration complexity causing difficult-to-debug issues
-      - Module contracts not properly validated
-    why: To eliminate bugs related to code complexity by ensuring each module works correctly in isolation
+      - "Bugs discovered too late in development cycle"
+      - "Integration complexity causing difficult-to-debug issues"
+      - "Module contracts not properly validated"
+    why: "To eliminate bugs related to code complexity by ensuring each module works correctly in isolation"
   related_decisions:
     depends_on:
-      - REQ-MODULE_VALIDATION
+      - "REQ-MODULE_VALIDATION"
     informs:
-      - IMPL-MODULE_VALIDATION
+      - "IMPL-MODULE_VALIDATION"
     see_also: []
-  status: Active
+  status: "Active"
   traceability:
     code_annotations:
-      - IMPL-MODULE_VALIDATION
-      - REQ-MODULE_VALIDATION
+      - "IMPL-MODULE_VALIDATION"
+      - "REQ-MODULE_VALIDATION"
     implementation:
-      - IMPL-MODULE_VALIDATION
+      - "IMPL-MODULE_VALIDATION"
     requirements:
-      - REQ-MODULE_VALIDATION
+      - "REQ-MODULE_VALIDATION"
     tests:
-      - testModuleName_IndependentValidation_REQ_MODULE_VALIDATION
+      - "testModuleName_IndependentValidation_REQ_MODULE_VALIDATION"
 ARCH-TIED_STRUCTURE:
   alternatives_considered:
-    - name: Root-level files
+    - name: "Root-level files"
       cons:
-        - Clutters the root directory
-        - No clear organization
+        - "Clutters the root directory"
+        - "No clear organization"
       pros:
-        - Immediately visible in repository root
-      rejected_reason: Creates too much clutter at project root
-    - name: .github or .docs folder
+        - "Immediately visible in repository root"
+      rejected_reason: "Creates too much clutter at project root"
+    - name: ".github or .docs folder"
       cons:
-        - .github is typically for GitHub workflows
-        - Too generic for methodology-specific files
+        - ".github is typically for GitHub workflows"
+        - "Too generic for methodology-specific files"
       pros:
-        - Common convention for documentation
-      rejected_reason: ./tied/ is more specific to the methodology
+        - "Common convention for documentation"
+      rejected_reason: "./tied/ is more specific to the methodology"
   cross_references:
-    - REQ-TIED_SETUP
-  detail_file: architecture-decisions/ARCH-TIED_STRUCTURE.yaml
+    - "REQ-TIED_SETUP"
+  detail_file: "architecture-decisions/ARCH-TIED_STRUCTURE.yaml"
   implementation_approach:
     details:
-      - 'Add guide files: semantic-tokens.md, processes.md'
-      - 'Create detail subdirectories: requirements/, architecture-decisions/, implementation-decisions/'
-      - 'Populate with YAML index files: requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml'
-      - Create tied/ directory at project root
-    summary: Create dedicated tied/ directory with YAML indexes and detail subdirectories
+      - "Add guide files: semantic-tokens.md, processes.md"
+      - "Create detail subdirectories: requirements/, architecture-decisions/, implementation-decisions/"
+      - "Create tied/ directory at project root"
+      - "Populate with YAML index files: requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml"
+    summary: "Create dedicated tied/ directory with YAML indexes and detail subdirectories"
   metadata:
     created:
-      author: AI Agent
-      date: 2025-12-18T00:00:00.000Z
+      author: "AI Agent"
+      date: "2025-12-18T00:00:00.000Z"
     last_updated:
-      author: AI Agent
-      date: 2026-02-06T00:00:00.000Z
-      reason: Restructured to v1.5.0 schema with machine-parseable fields
+      author: "AI Agent"
+      date: "2026-02-06T00:00:00.000Z"
+      reason: "Restructured to v1.5.0 schema with machine-parseable fields"
     last_validated:
-      date: 2026-02-06T00:00:00.000Z
-      result: pass
-      validator: AI Agent
-  name: TIED Project Structure
+      date: "2026-02-06T00:00:00.000Z"
+      result: "pass"
+      validator: "AI Agent"
+  name: "TIED Project Structure"
   rationale:
     benefits:
-      - Clear separation of concerns
-      - Easy discovery of all TIED documentation
-      - Standard project layout for AI agents
-      - Testable and maintainable structure
+      - "Clear separation of concerns"
+      - "Easy discovery of all TIED documentation"
+      - "Standard project layout for AI agents"
+      - "Testable and maintainable structure"
     problems_solved:
-      - Difficulty finding all context in one place
-      - Documentation scattered across project
-      - Meta-documentation mixed with source code
-    why: Keeps documentation close to code but organized in a dedicated namespace
+      - "Difficulty finding all context in one place"
+      - "Documentation scattered across project"
+      - "Meta-documentation mixed with source code"
+    why: "Keeps documentation close to code but organized in a dedicated namespace"
   related_decisions:
     depends_on:
-      - REQ-TIED_SETUP
+      - "REQ-TIED_SETUP"
     informs:
-      - IMPL-TIED_FILES
+      - "IMPL-TIED_FILES"
     see_also: []
-  status: Active
+  status: "Active"
   traceability:
     code_annotations:
-      - ARCH-TIED_STRUCTURE
-      - IMPL-TIED_FILES
-      - REQ-TIED_SETUP
+      - "ARCH-TIED_STRUCTURE"
+      - "IMPL-TIED_FILES"
+      - "REQ-TIED_SETUP"
     implementation:
-      - IMPL-TIED_FILES
+      - "IMPL-TIED_FILES"
     requirements:
-      - REQ-TIED_SETUP
+      - "REQ-TIED_SETUP"
     tests:
-      - TestTIEDSetup_REQ_TIED_SETUP
+      - "TestTIEDSetup_REQ_TIED_SETUP"

@@ -1,46 +1,46 @@
 REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS:
-  category: Functional
-  detail_file: requirements/REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS.yaml
+  category: "Functional"
+  detail_file: "requirements/REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS.yaml"
   metadata:
     created:
-      author: AI Agent
-      date: 2026-03-24T00:00:00.000Z
+      author: "AI Agent"
+      date: "2026-03-24T00:00:00.000Z"
     last_updated:
-      author: AI Agent
-      date: 2026-03-24T00:00:00.000Z
-      reason: Import ATDD agent stream TIED records
+      author: "AI Agent"
+      date: "2026-03-24T00:00:00.000Z"
+      reason: "Import ATDD agent stream TIED records"
     last_validated:
-      date: 2026-03-24T00:00:00.000Z
-      result: pass
-      validator: AI Agent
-  name: Export TDD YAML steps to per-step markdown files
-  priority: P2
+      date: "2026-03-24T00:00:00.000Z"
+      result: "pass"
+      validator: "AI Agent"
+  name: "Export TDD YAML steps to per-step markdown files"
+  priority: "P2"
   rationale:
     benefits:
-      - Repeatable prompt files under prompts/tdd/generated (when using export script)
+      - "Repeatable prompt files under prompts/tdd/generated (when using export script)"
     problems_solved:
-      - Need for reviewable .md artifacts per loop step
-    upstream_note: Imported from atdd commit eb88236290009b78eb11ea561816f0854176bf12; export script tools/agent-stream/export_tdd_prompts.rb
-    why: Some workflows prefer file-per-step prompts instead of --tdd-yaml expansion; export must mirror TddLoopPrompts.step_entries_from_yaml
+      - "Need for reviewable .md artifacts per loop step"
+    upstream_note: "Imported from atdd commit eb88236290009b78eb11ea561816f0854176bf12; export script tools/agent-stream/export_tdd_prompts.rb"
+    why: "Some workflows prefer file-per-step prompts instead of --tdd-yaml expansion; export must mirror TddLoopPrompts.step_entries_from_yaml"
   related_requirements:
     depends_on: []
     related_to:
-      - REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
+      - "REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML"
     supersedes: []
   satisfaction_criteria:
-    - criterion: Each YAML step entry becomes one markdown file named from sanitized step id with message body from format_step
-    - criterion: Export step terminology is canonical in tied/vocab/agent-stream-ruby.md; export_step_entries_to_markdown block in IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS-pseudocode.md
-    - criterion: File count equals entry count from step_entries_from_yaml
-  status: Implemented
+    - criterion: "Each YAML step entry becomes one markdown file named from sanitized step id with message body from format_step"
+    - criterion: "Export step terminology is canonical in tied/vocab/agent-stream-ruby.md; export_step_entries_to_markdown block in IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS-pseudocode.md"
+    - criterion: "File count equals entry count from step_entries_from_yaml"
+  status: "Implemented"
   traceability:
     architecture:
-      - ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS
+      - "ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS"
     code_annotations:
-      - REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS
+      - "REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS"
     implementation:
-      - IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS
+      - "IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS"
     tests:
-      - export_tdd_prompts_binding_test.rb
+      - "export_tdd_prompts_binding_test.rb"
   validation_criteria:
-    - method: Composition tests (upstream atdd)
-      coverage: test/composition/export_tdd_prompts_binding_test.rb
+    - method: "Composition tests (upstream atdd)"
+      coverage: "test/composition/export_tdd_prompts_binding_test.rb"

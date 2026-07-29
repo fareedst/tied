@@ -1,7 +1,7 @@
 IMPL-GOAGENT-PIPELINE:
   cross_references:
-    - ARCH-GOAGENT-PIPELINE
-    - REQ-GOAGENT-PIPELINE-CHAIN
-  detail_file: implementation-decisions/IMPL-GOAGENT-PIPELINE.yaml
-  name: pipeline.Build ordered assembly
-  status: Active
+    - "ARCH-GOAGENT-PIPELINE"
+    - "REQ-GOAGENT-PIPELINE-CHAIN"
+  detail_file: "implementation-decisions/IMPL-GOAGENT-PIPELINE.yaml"
+  name: "pipeline.Build ordered assembly"
+  status: "Active"

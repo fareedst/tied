@@ -1,30 +1,30 @@
 ARCH-GOAGENT-CLI:
   cross_references:
-    - REQ-GOAGENT-CLI-CONFIG
-  decision: 'Go agentstream exposes one CLI surface (ParseAndResolve + main). Static tied-yaml validation of .cursor/mcp.json is optional and off by default: callers opt in with --tied-mcp-preflight or AGENTSTREAM_TIED_MCP_PREFLIGHT=1; it is not required for batch or CI and does not prove runtime MCP registration in Cursor.'
-  detail_file: architecture-decisions/ARCH-GOAGENT-CLI.yaml
+    - "REQ-GOAGENT-CLI-CONFIG"
+  decision: "Go agentstream exposes one CLI surface (ParseAndResolve + main). Static tied-yaml validation of .cursor/mcp.json is optional and off by default: callers opt in with --tied-mcp-preflight or AGENTSTREAM_TIED_MCP_PREFLIGHT=1; it is not required for batch or CI and does not prove runtime MCP registration in Cursor."
+  detail_file: "architecture-decisions/ARCH-GOAGENT-CLI.yaml"
   implementation_approach:
     details:
-      - 'Optional tiedpreflight (package tiedpreflight): validates mcpServers.tied-yaml and TIED_BASE_PATH when enabled; default skip unless user opts in or env AGENTSTREAM_TIED_MCP_PREFLIGHT=1; AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1 forces skip.'
-      - copy_files.sh installs .cursor/skills/tied-yaml only; it does not author .cursor/mcp.json — architecture treats IDE MCP config as separate from the Cursor skill bundle.
-      - Validation gates (readable paths, checklist bounds, order filter vs batch) run inside ParseAndResolve before pipeline.Build.
-    summary: config.ParseAndResolve walks argv; resolveDefaults applies workspace and repo-root discovery; optional tiedpreflight after pipeline chain is built and before dry-run or subprocess agent turns.
+      - "copy_files.sh installs .cursor/skills/tied-yaml only; it does not author .cursor/mcp.json — architecture treats IDE MCP config as separate from the Cursor skill bundle."
+      - "Optional tiedpreflight (package tiedpreflight): validates mcpServers.tied-yaml and TIED_BASE_PATH when enabled; default skip unless user opts in or env AGENTSTREAM_TIED_MCP_PREFLIGHT=1; AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1 forces skip."
+      - "Validation gates (readable paths, checklist bounds, order filter vs batch) run inside ParseAndResolve before pipeline.Build."
+    summary: "config.ParseAndResolve walks argv; resolveDefaults applies workspace and repo-root discovery; optional tiedpreflight after pipeline chain is built and before dry-run or subprocess agent turns."
   metadata:
     created:
-      author: AI Agent
+      author: "AI Agent"
       date: "2026-03-27T00:00:00.000Z"
     last_updated:
-      author: AI Agent
+      author: "AI Agent"
       date: "2026-04-18T00:00:00.000Z"
-      reason: Optional tied-yaml MCP preflight documented; default off
+      reason: "Optional tied-yaml MCP preflight documented; default off"
     last_validated:
       date: "2026-03-27T00:00:00.000Z"
-      result: pass
-      validator: AI Agent
-  name: Unified CLI surface for agentstream
-  status: Active
+      result: "pass"
+      validator: "AI Agent"
+  name: "Unified CLI surface for agentstream"
+  status: "Active"
   traceability:
     implementation:
-      - IMPL-GOAGENT-CLI-CMD
+      - "IMPL-GOAGENT-CLI-CMD"
     requirements:
-      - REQ-GOAGENT-CLI-CONFIG
+      - "REQ-GOAGENT-CLI-CONFIG"

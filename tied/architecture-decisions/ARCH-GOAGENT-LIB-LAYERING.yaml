@@ -1,9 +1,9 @@
 ARCH-GOAGENT-LIB-LAYERING:
-  detail_file: architecture-decisions/ARCH-GOAGENT-LIB-LAYERING.yaml
-  name: Go agentstream package layering and import rules
-  status: Active
+  detail_file: "architecture-decisions/ARCH-GOAGENT-LIB-LAYERING.yaml"
+  name: "Go agentstream package layering and import rules"
+  status: "Active"
   traceability:
     implementation:
-      - IMPL-GOAGENT-LIB-TYPES
+      - "IMPL-GOAGENT-LIB-TYPES"
     requirements:
-      - REQ-GOAGENT-LIB-MODULE
+      - "REQ-GOAGENT-LIB-MODULE"

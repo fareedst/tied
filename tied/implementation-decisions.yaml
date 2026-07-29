@@ -1,1094 +1,1041 @@
 IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV:
   code_locations:
     files:
-      - path: tools/agent-stream/lib/agent_stream_argv.rb
-        description: '[REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML] [ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS] [IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV]'
-      - path: tools/agent-stream/lib/tdd_loop_prompts.rb
-        description: TDD loop YAML message expansion
-      - path: tools/agent-stream/lib/lead_checklist_prompts.rb
-        description: Lead checklist YAML expansion ([PROC-AGENT_REQ_CHECKLIST])
+      - path: "tools/agent-stream/lib/agent_stream_argv.rb"
+        description: "[REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML] [ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS] [IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV]"
+      - path: "tools/agent-stream/lib/tdd_loop_prompts.rb"
+        description: "TDD loop YAML message expansion"
+      - path: "tools/agent-stream/lib/lead_checklist_prompts.rb"
+        description: "Lead checklist YAML expansion ([PROC-AGENT_REQ_CHECKLIST])"
   cross_references:
-    - ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS
-    - REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
-  detail_file: implementation-decisions/IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV.yaml
+    - "ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS"
+    - "REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML"
+  detail_file: "implementation-decisions/IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV.yaml"
   implementation_approach:
     details:
-      - Delegates to TddLoopPrompts, LeadChecklistPrompts, FeatureSpecBatchPrompts
-      - Module AgentStreamArgv in Ruby
-    summary: Parse flags; for each --tdd-yaml call TddLoopPrompts.messages_from_yaml; same for lead checklist and feature batch
+      - "Delegates to TddLoopPrompts, LeadChecklistPrompts, FeatureSpecBatchPrompts"
+      - "Module AgentStreamArgv in Ruby"
+    summary: "Parse flags; for each --tdd-yaml call TddLoopPrompts.messages_from_yaml; same for lead checklist and feature batch"
   metadata:
     created:
-      author: AI Agent
-      date: 2026-03-24T00:00:00.000Z
+      author: "AI Agent"
+      date: "2026-03-24T00:00:00.000Z"
     last_updated:
-      author: AI Agent
-      date: 2026-03-28T00:00:00.000Z
-      reason: apply-token-comments [PROC-IMPL_PSEUDOCODE_TOKENS] cross-IMPL parity + loop comments
+      author: "AI Agent"
+      date: "2026-03-28T00:00:00.000Z"
+      reason: "apply-token-comments [PROC-IMPL_PSEUDOCODE_TOKENS] cross-IMPL parity + loop comments"
     last_validated:
-      date: 2026-03-24T00:00:00.000Z
-      result: pass
-      validator: AI Agent
-  name: AgentStreamArgv.parse_argv wires YAML flags to prompt modules
+      date: "2026-03-24T00:00:00.000Z"
+      result: "pass"
+      validator: "AI Agent"
+  name: "AgentStreamArgv.parse_argv wires YAML flags to prompt modules"
   rationale:
     benefits:
-      - Documented turn order (argv, prompt files, tdd-yaml, lead-checklist-yaml, etc.)
+      - "Documented turn order (argv, prompt files, tdd-yaml, lead-checklist-yaml, etc.)"
     problems_solved:
-      - Ad hoc prompt ordering
-    upstream_note: tools/agent-stream/lib/agent_stream_argv.rb; atdd eb88236290009b78eb11ea561816f0854176bf12
-    why: Entry point builds an ordered list of turns from CLI flags and argv tail per ATDD contract
+      - "Ad hoc prompt ordering"
+    upstream_note: "tools/agent-stream/lib/agent_stream_argv.rb; atdd eb88236290009b78eb11ea561816f0854176bf12"
+    why: "Entry point builds an ordered list of turns from CLI flags and argv tail per ATDD contract"
   related_decisions:
     depends_on: []
     see_also:
-      - IMPL-ATDD-E2E-AGENT_STREAM
+      - "IMPL-ATDD-E2E-AGENT_STREAM"
     supersedes: []
-  status: Active
+  status: "Active"
   traceability:
     architecture:
-      - ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS
+      - "ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS"
     code_annotations:
-      - IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
+      - "IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV"
     requirements:
-      - REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
+      - "REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML"
     tests:
-      - agent_stream_tdd_yaml_binding_test.rb (upstream atdd)
+      - "agent_stream_tdd_yaml_binding_test.rb (upstream atdd)"
 IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS:
   code_locations:
     files:
-      - path: tools/agent-stream/lib/atdd_export_tdd_prompts.rb
-        description: Export pipeline [REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS]
-      - path: tools/agent-stream/export_tdd_prompts.rb
-        description: CLI entry for export
-      - path: tools/agent-stream/lib/tdd_loop_prompts.rb
-        description: Shared step parsing
+      - path: "tools/agent-stream/lib/atdd_export_tdd_prompts.rb"
+        description: "Export pipeline [REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS]"
+      - path: "tools/agent-stream/export_tdd_prompts.rb"
+        description: "CLI entry for export"
+      - path: "tools/agent-stream/lib/tdd_loop_prompts.rb"
+        description: "Shared step parsing"
   cross_references:
-    - ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS
-    - REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS
-  detail_file: implementation-decisions/IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS.yaml
+    - "ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS"
+    - "REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS"
+  detail_file: "implementation-decisions/IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS.yaml"
   implementation_approach:
     details:
-      - 'Entry point: ruby tools/agent-stream/export_tdd_prompts.rb [yaml] [out_dir]'
-    summary: AtddExportTddPrompts.export_from_yaml uses step_entries_from_yaml and writes one file per entry
+      - "Entry point: ruby tools/agent-stream/export_tdd_prompts.rb [yaml] [out_dir]"
+    summary: "AtddExportTddPrompts.export_from_yaml uses step_entries_from_yaml and writes one file per entry"
   metadata:
     created:
-      author: AI Agent
-      date: 2026-03-24T00:00:00.000Z
+      author: "AI Agent"
+      date: "2026-03-24T00:00:00.000Z"
     last_updated:
-      author: AI Agent
-      date: 2026-03-28T00:00:00.000Z
-      reason: apply-token-comments [PROC-IMPL_PSEUDOCODE_TOKENS] contract + shared parser note
+      author: "AI Agent"
+      date: "2026-03-28T00:00:00.000Z"
+      reason: "apply-token-comments [PROC-IMPL_PSEUDOCODE_TOKENS] contract + shared parser note"
     last_validated:
-      date: 2026-03-24T00:00:00.000Z
-      result: pass
-      validator: AI Agent
-  name: Export TddLoopPrompts step entries to markdown files
+      date: "2026-03-24T00:00:00.000Z"
+      result: "pass"
+      validator: "AI Agent"
+  name: "Export TddLoopPrompts step entries to markdown files"
   rationale:
     benefits:
-      - Same step_entries_from_yaml as composition layer
+      - "Same step_entries_from_yaml as composition layer"
     problems_solved:
-      - Review and version per-step markdown outside the runner
-    upstream_note: lib/atdd_export_tdd_prompts.rb; tools/agent-stream/export_tdd_prompts.rb
-    why: Optional export path materializes one file per YAML step for workflows that do not use --tdd-yaml
+      - "Review and version per-step markdown outside the runner"
+    upstream_note: "lib/atdd_export_tdd_prompts.rb; tools/agent-stream/export_tdd_prompts.rb"
+    why: "Optional export path materializes one file per YAML step for workflows that do not use --tdd-yaml"
   related_decisions:
     depends_on: []
     see_also:
-      - IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
+      - "IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV"
     supersedes: []
-  status: Active
+  status: "Active"
   traceability:
     architecture:
-      - ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS
+      - "ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS"
     code_annotations:
-      - IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS
+      - "IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS"
     requirements:
-      - REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS
+      - "REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS"
     tests:
-      - export_tdd_prompts_binding_test.rb (upstream atdd)
+      - "export_tdd_prompts_binding_test.rb (upstream atdd)"
 IMPL-ATDD-E2E-AGENT_STREAM:
   code_locations:
     files:
-      - path: tools/agent-stream/run_agent_stream.rb
-        description: '[REQ-ATDD-E2E-AGENT_STREAM] [ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON] [IMPL-ATDD-E2E-AGENT_STREAM] main and run_stream'
+      - path: "tools/agent-stream/run_agent_stream.rb"
+        description: "[REQ-ATDD-E2E-AGENT_STREAM] [ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON] [IMPL-ATDD-E2E-AGENT_STREAM] main and run_stream"
   cross_references:
-    - ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON
-    - REQ-ATDD-E2E-AGENT_STREAM
-  detail_file: implementation-decisions/IMPL-ATDD-E2E-AGENT_STREAM.yaml
+    - "ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON"
+    - "REQ-ATDD-E2E-AGENT_STREAM"
+  detail_file: "implementation-decisions/IMPL-ATDD-E2E-AGENT_STREAM.yaml"
   implementation_approach:
     details:
-      - extract_text_fragments for thinking and assistant events
-      - Open3.popen3 streaming
-    summary: For each turn build argv for agent CLI; run_stream parses NDJSON; dry-run mode skips subprocess
+      - "extract_text_fragments for thinking and assistant events"
+      - "Open3.popen3 streaming"
+    summary: "For each turn build argv for agent CLI; run_stream parses NDJSON; dry-run mode skips subprocess"
   metadata:
     created:
-      author: AI Agent
-      date: 2026-03-24T00:00:00.000Z
+      author: "AI Agent"
+      date: "2026-03-24T00:00:00.000Z"
     last_updated:
-      author: AI Agent
-      date: 2026-03-28T00:00:00.000Z
-      reason: apply-token-comments [PROC-IMPL_PSEUDOCODE_TOKENS] cross-IMPL NDJSON parity note
+      author: "AI Agent"
+      date: "2026-03-28T00:00:00.000Z"
+      reason: "apply-token-comments [PROC-IMPL_PSEUDOCODE_TOKENS] cross-IMPL NDJSON parity note"
     last_validated:
-      date: 2026-03-24T00:00:00.000Z
-      result: pass
-      validator: AI Agent
-  name: run_agent_stream main loop and run_stream subprocess harness
+      date: "2026-03-24T00:00:00.000Z"
+      result: "pass"
+      validator: "AI Agent"
+  name: "run_agent_stream main loop and run_stream subprocess harness"
   rationale:
     benefits:
-      - stderr session_id= enables manual resume later
+      - "stderr session_id= enables manual resume later"
     problems_solved:
-      - Multi-turn automation with single Ruby process
-    upstream_note: tools/agent-stream/run_agent_stream.rb; atdd eb88236290009b78eb11ea561816f0854176bf12
-    why: Orchestrates turns with agent_command and run_stream; chains session_id between turns
+      - "Multi-turn automation with single Ruby process"
+    upstream_note: "tools/agent-stream/run_agent_stream.rb; atdd eb88236290009b78eb11ea561816f0854176bf12"
+    why: "Orchestrates turns with agent_command and run_stream; chains session_id between turns"
   related_decisions:
     depends_on: []
     see_also:
-      - IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
-      - IMPL-GOAGENT-EXECUTOR
+      - "IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV"
+      - "IMPL-GOAGENT-EXECUTOR"
     supersedes: []
-  status: Active
+  status: "Active"
   traceability:
     architecture:
-      - ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON
+      - "ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON"
     code_annotations:
-      - IMPL-ATDD-E2E-AGENT_STREAM
+      - "IMPL-ATDD-E2E-AGENT_STREAM"
     requirements:
-      - REQ-ATDD-E2E-AGENT_STREAM
+      - "REQ-ATDD-E2E-AGENT_STREAM"
     tests:
-      - agent_stream_e2e_test.rb (upstream atdd)
+      - "agent_stream_e2e_test.rb (upstream atdd)"
 IMPL-GOAGENT-CHECKLIST:
   code_locations:
     files:
-      - path: tools/agentstream/checklist/checklist.go
-        description: '[REQ-GOAGENT-YAML-STEP-RENDER] [ARCH-GOAGENT-YAML-STEPS] [IMPL-GOAGENT-CHECKLIST]'
+      - path: "tools/agentstream/checklist/checklist.go"
+        description: "[REQ-GOAGENT-YAML-STEP-RENDER] [ARCH-GOAGENT-YAML-STEPS] [IMPL-GOAGENT-CHECKLIST]"
   cross_references:
-    - ARCH-GOAGENT-YAML-STEPS
-    - REQ-GOAGENT-YAML-STEP-RENDER
-  detail_file: implementation-decisions/IMPL-GOAGENT-CHECKLIST.yaml
+    - "ARCH-GOAGENT-YAML-STEPS"
+    - "REQ-GOAGENT-YAML-STEP-RENDER"
+  detail_file: "implementation-decisions/IMPL-GOAGENT-CHECKLIST.yaml"
   implementation_approach:
     details: []
-    summary: checklist.LoadTurns uses Options.IncludeSubProcedures and optional StepFromID StepToID
+    summary: "checklist.LoadTurns uses Options.IncludeSubProcedures and optional StepFromID StepToID"
   metadata:
     created:
-      author: AI Agent
-      date: 2026-03-27T00:00:00.000Z
+      author: "AI Agent"
+      date: "2026-03-27T00:00:00.000Z"
     last_updated:
-      author: AI Agent
-      date: 2026-03-30T00:00:00.000Z
-      reason: Optional inclusive main-step bounds by checklist id
+      author: "AI Agent"
+      date: "2026-03-30T00:00:00.000Z"
+      reason: "Optional inclusive main-step bounds by checklist id"
     last_validated:
-      date: 2026-03-27T00:00:00.000Z
-      result: pass
-      validator: AI Agent
-  name: checklist YAML main steps and sub_procedures
+      date: "2026-03-27T00:00:00.000Z"
+      result: "pass"
+      validator: "AI Agent"
+  name: "checklist YAML main steps and sub_procedures"
   rationale:
     benefits:
-      - IncludeSubProcedures option
-      - Optional main-step inclusive bounds by checklist id
+      - "IncludeSubProcedures option"
+      - "Optional main-step inclusive bounds by checklist id"
     problems_solved:
-      - Agent checklist from Go
-    why: Mirrors LeadChecklistPrompts.rb
+      - "Agent checklist from Go"
+    why: "Mirrors LeadChecklistPrompts.rb"
   related_decisions:
     depends_on:
-      - IMPL-GOAGENT-LIB-TYPES
+      - "IMPL-GOAGENT-LIB-TYPES"
     see_also:
-      - PROC-AGENT_REQ_CHECKLIST
+      - "PROC-AGENT_REQ_CHECKLIST"
     supersedes: []
-  status: Active
+  status: "Active"
   traceability:
     architecture:
-      - ARCH-GOAGENT-YAML-STEPS
+      - "ARCH-GOAGENT-YAML-STEPS"
     code_annotations:
-      - IMPL-GOAGENT-CHECKLIST
+      - "IMPL-GOAGENT-CHECKLIST"
     requirements:
-      - REQ-GOAGENT-YAML-STEP-RENDER
+      - "REQ-GOAGENT-YAML-STEP-RENDER"
     tests:
-      - checklist_test.go
+      - "checklist_test.go"
 IMPL-GOAGENT-CHECKLIST-CONTROL:
   code_locations:
     files:
-      - path: tools/agentstream/control/control.go
-        description: Parse and validate agentstream_control blocks [REQ-GOAGENT-CHECKLIST-CONTROL] [ARCH-GOAGENT-CHECKLIST-CONTROL] [IMPL-GOAGENT-CHECKLIST-CONTROL]
-      - path: tools/agentstream/executor/executor.go
-        description: Capture assistant text while streaming output
-      - path: tools/agentstream/cmd/agentstream/main.go
-        description: Apply validated control actions to remaining checklist queue
+      - path: "tools/agentstream/control/control.go"
+        description: "Parse and validate agentstream_control blocks [REQ-GOAGENT-CHECKLIST-CONTROL] [ARCH-GOAGENT-CHECKLIST-CONTROL] [IMPL-GOAGENT-CHECKLIST-CONTROL]"
+      - path: "tools/agentstream/executor/executor.go"
+        description: "Capture assistant text while streaming output"
+      - path: "tools/agentstream/cmd/agentstream/main.go"
+        description: "Apply validated control actions to remaining checklist queue"
     functions:
-      - name: Parse
-        description: Extract strict agentstream_control JSON
-        file: tools/agentstream/control/control.go
-      - name: Validate
-        description: Validate action and target slug
-        file: tools/agentstream/control/control.go
+      - name: "Parse"
+        description: "Extract strict agentstream_control JSON"
+        file: "tools/agentstream/control/control.go"
+      - name: "Validate"
+        description: "Validate action and target slug"
+        file: "tools/agentstream/control/control.go"
   cross_references:
-    - ARCH-GOAGENT-CHECKLIST-CONTROL
-    - REQ-GOAGENT-CHECKLIST-CONTROL
-  detail_file: implementation-decisions/IMPL-GOAGENT-CHECKLIST-CONTROL.yaml
+    - "ARCH-GOAGENT-CHECKLIST-CONTROL"
+    - "REQ-GOAGENT-CHECKLIST-CONTROL"
+  detail_file: "implementation-decisions/IMPL-GOAGENT-CHECKLIST-CONTROL.yaml"
   implementation_approach:
     details:
-      - cmd/agentstream uses a dynamic queue loop for live runs and preserves dry-run static rendering.
-      - control.Parse scans for strict fenced JSON containing agentstream_control.
-      - control.Validate checks schema_version, action, and target against known checklist slugs.
-      - executor.Run returns session id, exit code, and captured assistant text while continuing to stream text to stdout.
-    summary: Capture assistant text from executor, parse optional agentstream_control JSON, and mutate the live checklist queue only for validated actions.
+      - "cmd/agentstream uses a dynamic queue loop for live runs and preserves dry-run static rendering."
+      - "control.Parse scans for strict fenced JSON containing agentstream_control."
+      - "control.Validate checks schema_version, action, and target against known checklist slugs."
+      - "executor.Run returns session id, exit code, and captured assistant text while continuing to stream text to stdout."
+    summary: "Capture assistant text from executor, parse optional agentstream_control JSON, and mutate the live checklist queue only for validated actions."
   metadata:
     created:
-      author: AI Agent
+      author: "AI Agent"
       date: "2026-04-24T00:00:00.000Z"
     last_updated:
-      author: AI Agent
+      author: "AI Agent"
       date: "2026-04-24T00:00:00.000Z"
-      reason: Implemented parser, queue routing, executor transcript capture, and loop-back marker clearance
+      reason: "Implemented parser, queue routing, executor transcript capture, and loop-back marker clearance"
     last_validated:
       date: "2026-04-24T00:00:00.000Z"
-      result: pass
-      validator: go test ./tools/agentstream/... and tied_validate_consistency
-  name: agentstream checklist control parser and router
+      result: "pass"
+      validator: "go test ./tools/agentstream/... and tied_validate_consistency"
+  name: "agentstream checklist control parser and router"
   rationale:
     benefits:
-      - Focused loop-back from unit-test-green to flag-contradictory-specs
-      - Strict parser package
-      - Validated goto target handling
+      - "Focused loop-back from unit-test-green to flag-contradictory-specs"
+      - "Strict parser package"
+      - "Validated goto target handling"
     problems_solved:
-      - No way for a turn to alter remaining checklist turns
-      - Unsafe natural-language control parsing
-    why: Implements explicit runtime checklist control while preserving existing streamed output and static default flow.
+      - "No way for a turn to alter remaining checklist turns"
+      - "Unsafe natural-language control parsing"
+    why: "Implements explicit runtime checklist control while preserving existing streamed output and static default flow."
   related_decisions:
     depends_on:
-      - IMPL-GOAGENT-CHECKLIST
-      - IMPL-GOAGENT-EXECUTOR
-      - IMPL-GOAGENT-PIPELINE
+      - "IMPL-GOAGENT-CHECKLIST"
+      - "IMPL-GOAGENT-EXECUTOR"
+      - "IMPL-GOAGENT-PIPELINE"
     see_also:
-      - PROC-AGENT_REQ_CHECKLIST
+      - "PROC-AGENT_REQ_CHECKLIST"
     supersedes: []
-  status: Active
+  status: "Active"
   traceability:
     architecture:
-      - ARCH-GOAGENT-CHECKLIST-CONTROL
+      - "ARCH-GOAGENT-CHECKLIST-CONTROL"
     code_annotations:
-      - ARCH-GOAGENT-CHECKLIST-CONTROL
-      - IMPL-GOAGENT-CHECKLIST-CONTROL
-      - REQ-GOAGENT-CHECKLIST-CONTROL
+      - "ARCH-GOAGENT-CHECKLIST-CONTROL"
+      - "IMPL-GOAGENT-CHECKLIST-CONTROL"
+      - "REQ-GOAGENT-CHECKLIST-CONTROL"
     requirements:
-      - REQ-GOAGENT-CHECKLIST-CONTROL
+      - "REQ-GOAGENT-CHECKLIST-CONTROL"
     tests:
-      - tools/agentstream/checklist/checklist_test.go
-      - tools/agentstream/control/control_test.go
-      - tools/agentstream/executor/executor_test.go
-      - tools/agentstream/pipeline/pipeline_test.go
+      - "tools/agentstream/checklist/checklist_test.go"
+      - "tools/agentstream/control/control_test.go"
+      - "tools/agentstream/executor/executor_test.go"
+      - "tools/agentstream/pipeline/pipeline_test.go"
 IMPL-GOAGENT-CLI-CMD:
   code_locations:
     files:
-      - path: tools/agentstream/config/config.go
-        description: '[REQ-GOAGENT-CLI-CONFIG] [ARCH-GOAGENT-CLI] [IMPL-GOAGENT-CLI-CMD]'
-      - path: tools/agentstream/cmd/agentstream/main.go
-        description: '[REQ-GOAGENT-CLI-CONFIG] [REQ-GOAGENT-YAML-STEP-RENDER] [REQ-GOAGENT-PIPELINE-CHAIN] [REQ-GOAGENT-AGENT-EXECUTOR] [IMPL-GOAGENT-CLI-CMD]'
+      - path: "tools/agentstream/config/config.go"
+        description: "[REQ-GOAGENT-CLI-CONFIG] [ARCH-GOAGENT-CLI] [IMPL-GOAGENT-CLI-CMD]"
+      - path: "tools/agentstream/cmd/agentstream/main.go"
+        description: "[REQ-GOAGENT-CLI-CONFIG] [REQ-GOAGENT-YAML-STEP-RENDER] [REQ-GOAGENT-PIPELINE-CHAIN] [REQ-GOAGENT-AGENT-EXECUTOR] [IMPL-GOAGENT-CLI-CMD]"
   cross_references:
-    - ARCH-GOAGENT-CLI
-    - REQ-GOAGENT-CLI-CONFIG
-    - REQ-GOAGENT-PIPELINE-CHAIN
-    - REQ-GOAGENT-YAML-STEP-RENDER
-  detail_file: implementation-decisions/IMPL-GOAGENT-CLI-CMD.yaml
+    - "ARCH-GOAGENT-CLI"
+    - "REQ-GOAGENT-CLI-CONFIG"
+    - "REQ-GOAGENT-PIPELINE-CHAIN"
+    - "REQ-GOAGENT-YAML-STEP-RENDER"
+  detail_file: "implementation-decisions/IMPL-GOAGENT-CLI-CMD.yaml"
   implementation_approach:
     details:
-      - Dry-run prints Shell-quoted argv via strconv.Quote
-    summary: config package parses argv; main calls pipeline.Build then executor.Run per turn
+      - "Dry-run prints Shell-quoted argv via strconv.Quote"
+    summary: "config package parses argv; main calls pipeline.Build then executor.Run per turn"
   metadata:
     created:
-      author: AI Agent
-      date: 2026-03-27T00:00:00.000Z
+      author: "AI Agent"
+      date: "2026-03-27T00:00:00.000Z"
     last_updated:
-      author: AI Agent
-      date: 2026-03-30T00:00:00.000Z
-      reason: Lead checklist step id bounds in ParseAndResolve and pipeline Input
+      author: "AI Agent"
+      date: "2026-03-30T00:00:00.000Z"
+      reason: "Lead checklist step id bounds in ParseAndResolve and pipeline Input"
     last_validated:
-      date: 2026-03-27T00:00:00.000Z
-      result: pass
-      validator: AI Agent
-  name: config.ParseAndResolve and cmd/agentstream main orchestration
+      date: "2026-03-27T00:00:00.000Z"
+      result: "pass"
+      validator: "AI Agent"
+  name: "config.ParseAndResolve and cmd/agentstream main orchestration"
   rationale:
     benefits:
-      - Exit codes; stderr labels; session_id enforcement
+      - "Exit codes; stderr labels; session_id enforcement"
     problems_solved:
-      - Logic embedded only in Ruby
-    why: Thin entrypoint wires parse preview pipeline dry-run executor loop
+      - "Logic embedded only in Ruby"
+    why: "Thin entrypoint wires parse preview pipeline dry-run executor loop"
   related_decisions:
     depends_on:
-      - IMPL-GOAGENT-LIB-TYPES
+      - "IMPL-GOAGENT-LIB-TYPES"
     see_also:
-      - IMPL-GOAGENT-EXECUTOR
-      - IMPL-GOAGENT-PIPELINE
+      - "IMPL-GOAGENT-EXECUTOR"
+      - "IMPL-GOAGENT-PIPELINE"
     supersedes: []
-  status: Active
+  status: "Active"
   traceability:
     architecture:
-      - ARCH-GOAGENT-CLI
-      - ARCH-GOAGENT-PIPELINE
+      - "ARCH-GOAGENT-CLI"
+      - "ARCH-GOAGENT-PIPELINE"
     code_annotations:
-      - IMPL-GOAGENT-CLI-CMD
+      - "IMPL-GOAGENT-CLI-CMD"
     requirements:
-      - REQ-GOAGENT-CLI-CONFIG
-      - REQ-GOAGENT-PIPELINE-CHAIN
-      - REQ-GOAGENT-YAML-STEP-RENDER
+      - "REQ-GOAGENT-CLI-CONFIG"
+      - "REQ-GOAGENT-PIPELINE-CHAIN"
+      - "REQ-GOAGENT-YAML-STEP-RENDER"
     tests:
-      - manual CLI (cmd/agentstream end-to-end)
-      - tools/agentstream/config/config_test.go
-      - tools/agentstream/featurespec/featurespec_test.go
-      - tools/agentstream/featurespec/order_test.go
-      - tools/agentstream/pipeline/pipeline_test.go
-      - tools/agentstream/text/text_test.go
+      - "manual CLI (cmd/agentstream end-to-end)"
+      - "tools/agentstream/config/config_test.go"
+      - "tools/agentstream/featurespec/featurespec_test.go"
+      - "tools/agentstream/featurespec/order_test.go"
+      - "tools/agentstream/pipeline/pipeline_test.go"
+      - "tools/agentstream/text/text_test.go"
 IMPL-GOAGENT-EXECUTOR:
   code_locations:
     files:
-      - path: tools/agentstream/executor/executor.go
-        description: '[REQ-GOAGENT-AGENT-EXECUTOR] [ARCH-GOAGENT-EXECUTOR] [IMPL-GOAGENT-EXECUTOR]'
+      - path: "tools/agentstream/executor/executor.go"
+        description: "[REQ-GOAGENT-AGENT-EXECUTOR] [ARCH-GOAGENT-EXECUTOR] [IMPL-GOAGENT-EXECUTOR]"
   cross_references:
-    - ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON
-    - ARCH-GOAGENT-EXECUTOR
-    - REQ-GOAGENT-AGENT-EXECUTOR
-  detail_file: implementation-decisions/IMPL-GOAGENT-EXECUTOR.yaml
+    - "ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON"
+    - "ARCH-GOAGENT-EXECUTOR"
+    - "REQ-GOAGENT-AGENT-EXECUTOR"
+  detail_file: "implementation-decisions/IMPL-GOAGENT-EXECUTOR.yaml"
   implementation_approach:
     details: []
-    summary: os/exec with stdout Scanner; extractTextFragments; stderr goroutine
+    summary: "os/exec with stdout Scanner; extractTextFragments; stderr goroutine"
   metadata:
     created:
-      author: AI Agent
-      date: 2026-03-27T00:00:00.000Z
+      author: "AI Agent"
+      date: "2026-03-27T00:00:00.000Z"
     last_updated:
-      author: AI Agent
-      date: 2026-03-27T00:00:00.000Z
-      reason: apply-token-comments [PROC-IMPL_PSEUDOCODE_TOKENS] cross-IMPL + step comments
+      author: "AI Agent"
+      date: "2026-03-27T00:00:00.000Z"
+      reason: "apply-token-comments [PROC-IMPL_PSEUDOCODE_TOKENS] cross-IMPL + step comments"
     last_validated:
-      date: 2026-03-27T00:00:00.000Z
-      result: pass
-      validator: AI Agent
-  name: executor AgentArgv and Run stream-json
+      date: "2026-03-27T00:00:00.000Z"
+      result: "pass"
+      validator: "AI Agent"
+  name: "executor AgentArgv and Run stream-json"
   rationale:
     benefits:
-      - context.Context cancellation; ExitCode propagation
+      - "context.Context cancellation; ExitCode propagation"
     problems_solved:
-      - Non-Go consumers still use Ruby; Go adds native speed and embedding
-    why: Go implementation of NDJSON harness parallel to Ruby run_stream
+      - "Non-Go consumers still use Ruby; Go adds native speed and embedding"
+    why: "Go implementation of NDJSON harness parallel to Ruby run_stream"
   related_decisions:
     depends_on:
-      - IMPL-GOAGENT-LIB-TYPES
+      - "IMPL-GOAGENT-LIB-TYPES"
     see_also:
-      - IMPL-ATDD-E2E-AGENT_STREAM
+      - "IMPL-ATDD-E2E-AGENT_STREAM"
     supersedes: []
-  status: Active
+  status: "Active"
   traceability:
     architecture:
-      - ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON
-      - ARCH-GOAGENT-EXECUTOR
+      - "ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON"
+      - "ARCH-GOAGENT-EXECUTOR"
     code_annotations:
-      - IMPL-GOAGENT-EXECUTOR
+      - "IMPL-GOAGENT-EXECUTOR"
     requirements:
-      - REQ-GOAGENT-AGENT-EXECUTOR
+      - "REQ-GOAGENT-AGENT-EXECUTOR"
     tests: []
 IMPL-GOAGENT-FEATURESPEC:
   code_locations:
     files:
-      - path: tools/agentstream/featurespec/featurespec.go
-        description: '[REQ-GOAGENT-FEATURESPEC-BATCH] [ARCH-GOAGENT-YAML-FEATURESPEC] [IMPL-GOAGENT-FEATURESPEC]'
-      - path: tools/agentstream/featurespec/order.go
-        description: '[REQ-GOAGENT-FEATURESPEC-BATCH] [IMPL-GOAGENT-FEATURESPEC]'
+      - path: "tools/agentstream/featurespec/featurespec.go"
+        description: "[REQ-GOAGENT-FEATURESPEC-BATCH] [ARCH-GOAGENT-YAML-FEATURESPEC] [IMPL-GOAGENT-FEATURESPEC]"
+      - path: "tools/agentstream/featurespec/order.go"
+        description: "[REQ-GOAGENT-FEATURESPEC-BATCH] [IMPL-GOAGENT-FEATURESPEC]"
   cross_references:
-    - ARCH-GOAGENT-YAML-FEATURESPEC
-    - REQ-GOAGENT-FEATURESPEC-BATCH
-  detail_file: implementation-decisions/IMPL-GOAGENT-FEATURESPEC.yaml
+    - "ARCH-GOAGENT-YAML-FEATURESPEC"
+    - "REQ-GOAGENT-FEATURESPEC-BATCH"
+  detail_file: "implementation-decisions/IMPL-GOAGENT-FEATURESPEC.yaml"
   implementation_approach:
     details: []
-    summary: featurespec/*.go MessagesFromYAML LoadTurns Preview ParseOrderFilter
+    summary: "featurespec/*.go MessagesFromYAML LoadTurns Preview ParseOrderFilter"
   metadata:
     created:
-      author: AI Agent
-      date: 2026-03-27T00:00:00.000Z
+      author: "AI Agent"
+      date: "2026-03-27T00:00:00.000Z"
     last_updated:
-      author: AI Agent
-      date: 2026-03-28T00:00:00.000Z
-      reason: apply-token-comments [PROC-IMPL_PSEUDOCODE_TOKENS] cross-IMPL callees + contract
+      author: "AI Agent"
+      date: "2026-03-28T00:00:00.000Z"
+      reason: "apply-token-comments [PROC-IMPL_PSEUDOCODE_TOKENS] cross-IMPL callees + contract"
     last_validated:
-      date: 2026-03-27T00:00:00.000Z
-      result: pass
-      validator: AI Agent
-  name: featurespec YAML load sort filter render preview
+      date: "2026-03-27T00:00:00.000Z"
+      result: "pass"
+      validator: "AI Agent"
+  name: "featurespec YAML load sort filter render preview"
   rationale:
     benefits:
-      - OrderFilter parser; yaml.Node stable sort
+      - "OrderFilter parser; yaml.Node stable sort"
     problems_solved:
-      - Go consumers need library API
-    why: Parity with FeatureSpecBatchPrompts.rb
+      - "Go consumers need library API"
+    why: "Parity with FeatureSpecBatchPrompts.rb"
   related_decisions:
     depends_on:
-      - IMPL-GOAGENT-LIB-TYPES
+      - "IMPL-GOAGENT-LIB-TYPES"
     see_also: []
     supersedes: []
-  status: Active
+  status: "Active"
   traceability:
     architecture:
-      - ARCH-GOAGENT-YAML-FEATURESPEC
+      - "ARCH-GOAGENT-YAML-FEATURESPEC"
     code_annotations:
-      - IMPL-GOAGENT-FEATURESPEC
+      - "IMPL-GOAGENT-FEATURESPEC"
     requirements:
-      - REQ-GOAGENT-FEATURESPEC-BATCH
+      - "REQ-GOAGENT-FEATURESPEC-BATCH"
     tests:
-      - featurespec/*_test.go
+      - "featurespec/*_test.go"
 IMPL-GOAGENT-LIB-TYPES:
   code_locations:
     files:
-      - path: tools/agentstream/turn.go
-        description: '[REQ-GOAGENT-LIB-MODULE] [ARCH-GOAGENT-LIB-LAYERING] [IMPL-GOAGENT-LIB-TYPES]'
+      - path: "tools/agentstream/turn.go"
+        description: "[REQ-GOAGENT-LIB-MODULE] [ARCH-GOAGENT-LIB-LAYERING] [IMPL-GOAGENT-LIB-TYPES]"
   cross_references:
-    - ARCH-GOAGENT-LIB-LAYERING
-    - REQ-GOAGENT-LIB-MODULE
-  detail_file: implementation-decisions/IMPL-GOAGENT-LIB-TYPES.yaml
+    - "ARCH-GOAGENT-LIB-LAYERING"
+    - "REQ-GOAGENT-LIB-MODULE"
+  detail_file: "implementation-decisions/IMPL-GOAGENT-LIB-TYPES.yaml"
   implementation_approach:
     details: []
-    summary: turn.go defines Turn and SessionID and VerifySessionPrompt constant
+    summary: "turn.go defines Turn and SessionID and VerifySessionPrompt constant"
   metadata:
     created:
-      author: AI Agent
-      date: 2026-03-27T00:00:00.000Z
+      author: "AI Agent"
+      date: "2026-03-27T00:00:00.000Z"
     last_updated:
-      author: AI Agent
-      date: 2026-03-27T00:00:00.000Z
-      reason: apply-token-comments [PROC-IMPL_PSEUDOCODE_TOKENS] consumer IMPLs + type comments
+      author: "AI Agent"
+      date: "2026-03-27T00:00:00.000Z"
+      reason: "apply-token-comments [PROC-IMPL_PSEUDOCODE_TOKENS] consumer IMPLs + type comments"
     last_validated:
-      date: 2026-03-27T00:00:00.000Z
-      result: pass
-      validator: AI Agent
-  name: agentstream Turn and SessionID shared types
+      date: "2026-03-27T00:00:00.000Z"
+      result: "pass"
+      validator: "AI Agent"
+  name: "agentstream Turn and SessionID shared types"
   rationale:
     benefits:
-      - Single import path stdd/agentstream
+      - "Single import path stdd/agentstream"
     problems_solved:
-      - Ad-hoc []string tuples
-    why: Cross-package contracts for prompt parts and chain flag
+      - "Ad-hoc []string tuples"
+    why: "Cross-package contracts for prompt parts and chain flag"
   related_decisions:
     depends_on: []
     see_also: []
     supersedes: []
-  status: Active
+  status: "Active"
   traceability:
     architecture:
-      - ARCH-GOAGENT-LIB-LAYERING
+      - "ARCH-GOAGENT-LIB-LAYERING"
     code_annotations:
-      - IMPL-GOAGENT-LIB-TYPES
+      - "IMPL-GOAGENT-LIB-TYPES"
     requirements:
-      - REQ-GOAGENT-LIB-MODULE
+      - "REQ-GOAGENT-LIB-MODULE"
     tests:
-      - pipeline_test.go (imports Turn)
+      - "pipeline_test.go (imports Turn)"
 IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT:
   code_locations:
     files:
-      - path: tools/agentstream/cmd/agentstream/main.go
-        description: 'Integration: applyPostPreloadNonCompactHTML after ApplyPromptFilePreload (IMPL-GOAGENT-CLI-CMD + IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT composition)'
-      - path: tools/agentstream/cmd/agentstream/compose_noncompact.go
-        description: MAP_CONFIG_TO_HTMLFORMAT_OPTIONS + call IntegrateWithMain; CLI via config.Config; IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT
-      - path: tools/agentstream/config/config.go
-        description: NonCompactHTML, NonCompactHTMLStableIndent; --non-compact-html / --non-compact-html-indent (ARCH-GOAGENT-CLI / REQ-GOAGENT-CLI-CONFIG)
-      - path: tools/agentstream/htmlformat/htmlformat.go
-        description: APPLY_TO_TURNS, FormatNonCompactHTML, addNonCompactLineBreaks, applyStableIndentLines, IntegrateWithMain (htmlformat; REQ/ARCH/IMPL IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT)
+      - path: "tools/agentstream/cmd/agentstream/main.go"
+        description: "Integration: applyPostPreloadNonCompactHTML after ApplyPromptFilePreload (IMPL-GOAGENT-CLI-CMD + IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT composition)"
+      - path: "tools/agentstream/cmd/agentstream/compose_noncompact.go"
+        description: "MAP_CONFIG_TO_HTMLFORMAT_OPTIONS + call IntegrateWithMain; CLI via config.Config; IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT"
+      - path: "tools/agentstream/config/config.go"
+        description: "NonCompactHTML, NonCompactHTMLStableIndent; --non-compact-html / --non-compact-html-indent (ARCH-GOAGENT-CLI / REQ-GOAGENT-CLI-CONFIG)"
+      - path: "tools/agentstream/htmlformat/htmlformat.go"
+        description: "APPLY_TO_TURNS, FormatNonCompactHTML, addNonCompactLineBreaks, applyStableIndentLines, IntegrateWithMain (htmlformat; REQ/ARCH/IMPL IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT)"
     functions: []
   cross_references:
-    - ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT
-    - REQ-GOAGENT-NON-COMPACT-HTML-FORMAT
-  detail_file: implementation-decisions/IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT.yaml
-  essence_pseudocode: |
-    # [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT]
-    # Summary: When enabled, a single post-pipeline, post-ApplyPromptFilePreload pass reformats each string in Turn.Parts to non-compact UTF-8 HTML; ordering and ChainFromPrevious bits unchanged. Default: disabled.
-
-    # [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT] — CONTRACT: INPUT, OUTPUT, DATA, CONTROL
-    # INPUT: turns ([]Turn from IMPL-GOAGENT-PIPELINE.Build, after ReadPromptFilePreload/ApplyPromptFilePreload in IMPL-GOAGENT-CLI-CMD); options { enabled: bool, stable_indent: int } from resolved Config; body fragments may be markdown or plain from prior checklist/tdd/feature text render.
-    # OUTPUT: same []Turn length, order, and field shapes; only string elements in Parts are replaced when enabled.
-    # DATA: []Turn, UTF-8 strings, determinism: identical logical input + same options => identical output string per part.
-    # CONTROL: enabled is false on zero-args default; when false, this IMPL is a no-op. Does not re-parse YAML, change step ids, or call executor.
-
-    # How: All REQ/ARCH behavior for the named transform lives here; other IMPLs do not embed HTML rules—only this procedure.
-
-    procedure APPLY_TO_TURNS(turns, options):
-      # [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT]
-      # How: No-op if options.enabled is false; else in-place FORMAT; propagate any FORMAT err
-      if not options.enabled:
-        return turns, nil
-      for each turn in turns:
-        for i, part in enumerate(turn.Parts):
-          s, err := FORMAT_NON_COMPACT_HTML(part, options)
-          if err != nil:
-            return nil, err
-          turn.Parts[i] = s
-      return turns, nil
-
-    procedure FORMAT_NON_COMPACT_HTML(part, options):
-      # [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT]
-      # How: map one part to stable line-broken form; pass-through when not options.enabled; empty part returns empty
-      if part == "":
-        return "", nil
-      if not options.enabled:
-        return part, nil
-      out := DETERMINISTIC_NON_COMPACT_HTML_FOR_PART(part, options)
-      return out, nil
-
-    procedure DETERMINISTIC_NON_COMPACT_HTML_FOR_PART(text, options):
-      # [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT]
-      # How: UTF-8: break at adjacent tags; else newline after first ">"; else append newline; if stable_indent>0 prefix continuation lines. (Go: htmlformat package.)
-
-    # [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT] and caller [IMPL-GOAGENT-CLI-CMD] [ARCH-GOAGENT-CLI] [REQ-GOAGENT-CLI-CONFIG] — INTEGRATE edge only.
-    procedure INTEGRATE_WITH_MAIN(cfg, turns, options):
-      if cfg is nil or turns is nil: return
-      if not (cfg has non-compact-HTML true): return
-      t2, err := APPLY_TO_TURNS(turns, options)
-      on err != nil: return error to main
-
-    # [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-CLI] [REQ-GOAGENT-CLI-CONFIG] — How: map ParseAndResolve `config` to CfgForIntegrate + options; no I/O. Go: applyPostPreloadNonCompactHTML (cmd); composition-tested; then INTEGRATE_WITH_MAIN.
-    procedure MAP_CONFIG_TO_HTMLFORMAT_OPTIONS(resolved_config, turns):
-      # How: build ic and o; delegate to INTEGRATE_WITH_MAIN (in-place `turns`)
-      ic = { non_compact: resolved_config.NonCompactHTML }
-      o = { enabled: resolved_config.NonCompactHTML, stable_indent: resolved_config.NonCompactHTMLStableIndent }
-      return INTEGRATE_WITH_MAIN(ic, turns, o)
-
-    # [PROC-IMPL_CODE_TEST_SYNC] Phase H — E2E e2e_only boundary: [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-MODULE_VALIDATION] [PROC-TEST_STRATEGY] [PROC-AGENT_REQ_CHECKLIST] — no e2e_only blocks; string transform and CLI are unit + composition; phase_h_tests []; named platform UI constraint n/a. IMPL-ATDD-E2E-AGENT_STREAM is a separate ATDD subprocess scope.
+    - "ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT"
+    - "REQ-GOAGENT-NON-COMPACT-HTML-FORMAT"
+  detail_file: "implementation-decisions/IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT.yaml"
+  essence_pseudocode: "# [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT]\n# Summary: When enabled, a single post-pipeline, post-ApplyPromptFilePreload pass reformats each string in Turn.Parts to non-compact UTF-8 HTML; ordering and ChainFromPrevious bits unchanged. Default: disabled.\n\n# [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT] — CONTRACT: INPUT, OUTPUT, DATA, CONTROL\n# INPUT: turns ([]Turn from IMPL-GOAGENT-PIPELINE.Build, after ReadPromptFilePreload/ApplyPromptFilePreload in IMPL-GOAGENT-CLI-CMD); options { enabled: bool, stable_indent: int } from resolved Config; body fragments may be markdown or plain from prior checklist/tdd/feature text render.\n# OUTPUT: same []Turn length, order, and field shapes; only string elements in Parts are replaced when enabled.\n# DATA: []Turn, UTF-8 strings, determinism: identical logical input + same options => identical output string per part.\n# CONTROL: enabled is false on zero-args default; when false, this IMPL is a no-op. Does not re-parse YAML, change step ids, or call executor.\n\n# How: All REQ/ARCH behavior for the named transform lives here; other IMPLs do not embed HTML rules—only this procedure.\n\nprocedure APPLY_TO_TURNS(turns, options):\n  # [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT]\n  # How: No-op if options.enabled is false; else in-place FORMAT; propagate any FORMAT err\n  if not options.enabled:\n    return turns, nil\n  for each turn in turns:\n    for i, part in enumerate(turn.Parts):\n      s, err := FORMAT_NON_COMPACT_HTML(part, options)\n      if err != nil:\n        return nil, err\n      turn.Parts[i] = s\n  return turns, nil\n\nprocedure FORMAT_NON_COMPACT_HTML(part, options):\n  # [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT]\n  # How: map one part to stable line-broken form; pass-through when not options.enabled; empty part returns empty\n  if part == \"\":\n    return \"\", nil\n  if not options.enabled:\n    return part, nil\n  out := DETERMINISTIC_NON_COMPACT_HTML_FOR_PART(part, options)\n  return out, nil\n\nprocedure DETERMINISTIC_NON_COMPACT_HTML_FOR_PART(text, options):\n  # [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT]\n  # How: UTF-8: break at adjacent tags; else newline after first \">\"; else append newline; if stable_indent>0 prefix continuation lines. (Go: htmlformat package.)\n\n# [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT] and caller [IMPL-GOAGENT-CLI-CMD] [ARCH-GOAGENT-CLI] [REQ-GOAGENT-CLI-CONFIG] — INTEGRATE edge only.\nprocedure INTEGRATE_WITH_MAIN(cfg, turns, options):\n  if cfg is nil or turns is nil: return\n  if not (cfg has non-compact-HTML true): return\n  t2, err := APPLY_TO_TURNS(turns, options)\n  on err != nil: return error to main\n\n# [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-CLI] [REQ-GOAGENT-CLI-CONFIG] — How: map ParseAndResolve `config` to CfgForIntegrate + options; no I/O. Go: applyPostPreloadNonCompactHTML (cmd); composition-tested; then INTEGRATE_WITH_MAIN.\nprocedure MAP_CONFIG_TO_HTMLFORMAT_OPTIONS(resolved_config, turns):\n  # How: build ic and o; delegate to INTEGRATE_WITH_MAIN (in-place `turns`)\n  ic = { non_compact: resolved_config.NonCompactHTML }\n  o = { enabled: resolved_config.NonCompactHTML, stable_indent: resolved_config.NonCompactHTMLStableIndent }\n  return INTEGRATE_WITH_MAIN(ic, turns, o)\n\n# [PROC-IMPL_CODE_TEST_SYNC] Phase H — E2E e2e_only boundary: [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-MODULE_VALIDATION] [PROC-TEST_STRATEGY] [PROC-AGENT_REQ_CHECKLIST] — no e2e_only blocks; string transform and CLI are unit + composition; phase_h_tests []; named platform UI constraint n/a. IMPL-ATDD-E2E-AGENT_STREAM is a separate ATDD subprocess scope.\n"
   implementation_approach:
     details:
-      - 'end-to-end-ui Phase H: no E2E-only UI for this IMPL; s11_phase_h e2e_only false; see detail file (REQ-MODULE_VALIDATION) [PROC-AGENT_REQ_CHECKLIST]'
-      - If scope later excludes feature-spec or verify, LEAP to narrow INTEGRATE_WITH_MAIN without changing FORMAT_NON_COMPACT_HTML
-    summary: Add Config flag; package under tools/agentstream (exact path in unit-test-green) implementing APPLY_TO_TURNS and formatters; wire in cmd/agentstream after ApplyPromptFilePreload. Tests in *_test.go reference REQ/IMPL tokens.
+      - "end-to-end-ui Phase H: no E2E-only UI for this IMPL; s11_phase_h e2e_only false; see detail file (REQ-MODULE_VALIDATION) [PROC-AGENT_REQ_CHECKLIST]"
+      - "If scope later excludes feature-spec or verify, LEAP to narrow INTEGRATE_WITH_MAIN without changing FORMAT_NON_COMPACT_HTML"
+    summary: "Add Config flag; package under tools/agentstream (exact path in unit-test-green) implementing APPLY_TO_TURNS and formatters; wire in cmd/agentstream after ApplyPromptFilePreload. Tests in *_test.go reference REQ/IMPL tokens."
   metadata:
     created:
-      author: AI Agent
+      author: "AI Agent"
       date: "2026-04-24T00:00:00.000Z"
     last_updated:
-      author: AI Agent
+      author: "AI Agent"
       date: "2026-04-24T00:00:00.000Z"
-      reason: 'end-to-end-ui Phase H: essence E2E boundary; s11 in detail; composition-integration unchanged'
+      reason: "end-to-end-ui Phase H: essence E2E boundary; s11 in detail; composition-integration unchanged"
     last_validated:
       date: "2026-04-24T00:00:00.000Z"
-      result: pending
-      validator: AI Agent
-  name: Non-compact HTML after pipeline; single formatter seam
+      result: "pending"
+      validator: "AI Agent"
+  name: "Non-compact HTML after pipeline; single formatter seam"
   rationale:
     benefits:
-      - Single call site in main after ApplyPromptFilePreload
-      - Unit-testable FORMAT_NON_COMPACT_HTML in isolation
+      - "Single call site in main after ApplyPromptFilePreload"
+      - "Unit-testable FORMAT_NON_COMPACT_HTML in isolation"
     problems_solved:
-      - Ad-hoc duplicate HTML in multiple loaders
-      - Missing IMPL and essence_pseudocode from flag steps
-    why: REQ/ARCH require one explicit, testable transform surface and no split-brain HTML across checklist and tddloop
+      - "Ad-hoc duplicate HTML in multiple loaders"
+      - "Missing IMPL and essence_pseudocode from flag steps"
+    why: "REQ/ARCH require one explicit, testable transform surface and no split-brain HTML across checklist and tddloop"
   related_decisions:
     composed_with:
-      - IMPL-GOAGENT-CLI-CMD
+      - "IMPL-GOAGENT-CLI-CMD"
     depends_on:
-      - IMPL-GOAGENT-CLI-CMD
-      - IMPL-GOAGENT-PIPELINE
+      - "IMPL-GOAGENT-CLI-CMD"
+      - "IMPL-GOAGENT-PIPELINE"
     see_also:
-      - IMPL-GOAGENT-CHECKLIST
-      - IMPL-GOAGENT-FEATURESPEC
-      - IMPL-GOAGENT-TDDLOOP
+      - "IMPL-GOAGENT-CHECKLIST"
+      - "IMPL-GOAGENT-FEATURESPEC"
+      - "IMPL-GOAGENT-TDDLOOP"
     supersedes: []
-  status: Active
-  testability: unit
+  status: "Active"
+  testability: "unit"
   traceability:
     architecture:
-      - ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT
+      - "ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT"
     code_annotations:
-      - IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT
+      - "IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT"
     requirements:
-      - REQ-GOAGENT-NON-COMPACT-HTML-FORMAT
+      - "REQ-GOAGENT-NON-COMPACT-HTML-FORMAT"
     tests:
-      - tools/agentstream/cmd/agentstream/compose_noncompact_test.go
-      - tools/agentstream/htmlformat/htmlformat_test.go
+      - "tools/agentstream/cmd/agentstream/compose_noncompact_test.go"
+      - "tools/agentstream/htmlformat/htmlformat_test.go"
 IMPL-GOAGENT-PIPELINE:
   code_locations:
     files:
-      - path: tools/agentstream/pipeline/pipeline.go
-        description: '[REQ-GOAGENT-PIPELINE-CHAIN] [ARCH-GOAGENT-PIPELINE] [IMPL-GOAGENT-PIPELINE]'
+      - path: "tools/agentstream/pipeline/pipeline.go"
+        description: "[REQ-GOAGENT-PIPELINE-CHAIN] [ARCH-GOAGENT-PIPELINE] [IMPL-GOAGENT-PIPELINE]"
   cross_references:
-    - ARCH-GOAGENT-PIPELINE
-    - REQ-GOAGENT-PIPELINE-CHAIN
-  detail_file: implementation-decisions/IMPL-GOAGENT-PIPELINE.yaml
+    - "ARCH-GOAGENT-PIPELINE"
+    - "REQ-GOAGENT-PIPELINE-CHAIN"
+  detail_file: "implementation-decisions/IMPL-GOAGENT-PIPELINE.yaml"
   implementation_approach:
     details: []
-    summary: pipeline.Build calls text tddloop featurespec checklist packages
+    summary: "pipeline.Build calls text tddloop featurespec checklist packages"
   metadata:
     created:
-      author: AI Agent
-      date: 2026-03-27T00:00:00.000Z
+      author: "AI Agent"
+      date: "2026-03-27T00:00:00.000Z"
     last_updated:
-      author: AI Agent
-      date: 2026-03-30T00:00:00.000Z
-      reason: Pass lead checklist step id bounds into checklist.LoadTurns
+      author: "AI Agent"
+      date: "2026-03-30T00:00:00.000Z"
+      reason: "Pass lead checklist step id bounds into checklist.LoadTurns"
     last_validated:
-      date: 2026-03-27T00:00:00.000Z
-      result: pass
-      validator: AI Agent
-  name: pipeline.Build ordered assembly
+      date: "2026-03-27T00:00:00.000Z"
+      result: "pass"
+      validator: "AI Agent"
+  name: "pipeline.Build ordered assembly"
   rationale:
     benefits:
-      - ChainBetween and SessionForTurn helpers
+      - "ChainBetween and SessionForTurn helpers"
     problems_solved:
-      - Drift between Ruby and Go ordering
-    why: Single place for AgentStreamArgv turn order
+      - "Drift between Ruby and Go ordering"
+    why: "Single place for AgentStreamArgv turn order"
   related_decisions:
     depends_on:
-      - IMPL-GOAGENT-CHECKLIST
-      - IMPL-GOAGENT-FEATURESPEC
-      - IMPL-GOAGENT-TDDLOOP
-      - IMPL-GOAGENT-TEXT-SOURCES
+      - "IMPL-GOAGENT-CHECKLIST"
+      - "IMPL-GOAGENT-FEATURESPEC"
+      - "IMPL-GOAGENT-TDDLOOP"
+      - "IMPL-GOAGENT-TEXT-SOURCES"
     see_also:
-      - IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
+      - "IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV"
     supersedes: []
-  status: Active
+  status: "Active"
   traceability:
     architecture:
-      - ARCH-GOAGENT-PIPELINE
+      - "ARCH-GOAGENT-PIPELINE"
     code_annotations:
-      - IMPL-GOAGENT-PIPELINE
+      - "IMPL-GOAGENT-PIPELINE"
     requirements:
-      - REQ-GOAGENT-PIPELINE-CHAIN
+      - "REQ-GOAGENT-PIPELINE-CHAIN"
     tests:
-      - pipeline_test.go
+      - "pipeline_test.go"
 IMPL-GOAGENT-TDDLOOP:
   code_locations:
     files:
-      - path: tools/agentstream/tddloop/tddloop.go
-        description: '[REQ-GOAGENT-YAML-STEP-RENDER] [ARCH-GOAGENT-YAML-STEPS] [IMPL-GOAGENT-TDDLOOP]'
+      - path: "tools/agentstream/tddloop/tddloop.go"
+        description: "[REQ-GOAGENT-YAML-STEP-RENDER] [ARCH-GOAGENT-YAML-STEPS] [IMPL-GOAGENT-TDDLOOP]"
   cross_references:
-    - ARCH-GOAGENT-YAML-STEPS
-    - REQ-GOAGENT-YAML-STEP-RENDER
-  detail_file: implementation-decisions/IMPL-GOAGENT-TDDLOOP.yaml
+    - "ARCH-GOAGENT-YAML-STEPS"
+    - "REQ-GOAGENT-YAML-STEP-RENDER"
+  detail_file: "implementation-decisions/IMPL-GOAGENT-TDDLOOP.yaml"
   implementation_approach:
     details: []
-    summary: MessagesFromYAML validates steps key then formats each step
+    summary: "MessagesFromYAML validates steps key then formats each step"
   metadata:
     created:
-      author: AI Agent
-      date: 2026-03-27T00:00:00.000Z
+      author: "AI Agent"
+      date: "2026-03-27T00:00:00.000Z"
     last_updated:
-      author: AI Agent
-      date: 2026-03-28T00:00:00.000Z
-      reason: apply-token-comments [PROC-IMPL_PSEUDOCODE_TOKENS] ATDD parity + LIB-TYPES
+      author: "AI Agent"
+      date: "2026-03-28T00:00:00.000Z"
+      reason: "apply-token-comments [PROC-IMPL_PSEUDOCODE_TOKENS] ATDD parity + LIB-TYPES"
     last_validated:
-      date: 2026-03-27T00:00:00.000Z
-      result: pass
-      validator: AI Agent
-  name: tddloop YAML step messages
+      date: "2026-03-27T00:00:00.000Z"
+      result: "pass"
+      validator: "AI Agent"
+  name: "tddloop YAML step messages"
   rationale:
     benefits:
-      - Typed yaml unmarshal
+      - "Typed yaml unmarshal"
     problems_solved:
-      - Missing Go TDD expansion
-    why: Mirrors TddLoopPrompts.format_step
+      - "Missing Go TDD expansion"
+    why: "Mirrors TddLoopPrompts.format_step"
   related_decisions:
     depends_on:
-      - IMPL-GOAGENT-LIB-TYPES
+      - "IMPL-GOAGENT-LIB-TYPES"
     see_also:
-      - IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
+      - "IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV"
     supersedes: []
-  status: Active
+  status: "Active"
   traceability:
     architecture:
-      - ARCH-GOAGENT-YAML-STEPS
+      - "ARCH-GOAGENT-YAML-STEPS"
     code_annotations:
-      - IMPL-GOAGENT-TDDLOOP
+      - "IMPL-GOAGENT-TDDLOOP"
     requirements:
-      - REQ-GOAGENT-YAML-STEP-RENDER
+      - "REQ-GOAGENT-YAML-STEP-RENDER"
     tests: []
 IMPL-GOAGENT-TEXT-SOURCES:
   code_locations:
     files:
-      - path: tools/agentstream/text/text.go
-        description: '[REQ-GOAGENT-TEXT-SOURCES] [ARCH-GOAGENT-TEXT-SOURCES] [IMPL-GOAGENT-TEXT-SOURCES]'
+      - path: "tools/agentstream/text/text.go"
+        description: "[REQ-GOAGENT-TEXT-SOURCES] [ARCH-GOAGENT-TEXT-SOURCES] [IMPL-GOAGENT-TEXT-SOURCES]"
   cross_references:
-    - ARCH-GOAGENT-TEXT-SOURCES
-    - REQ-GOAGENT-TEXT-SOURCES
-  detail_file: implementation-decisions/IMPL-GOAGENT-TEXT-SOURCES.yaml
+    - "ARCH-GOAGENT-TEXT-SOURCES"
+    - "REQ-GOAGENT-TEXT-SOURCES"
+  detail_file: "implementation-decisions/IMPL-GOAGENT-TEXT-SOURCES.yaml"
   implementation_approach:
     details: []
-    summary: regexp split on \\r?\\n---\\s*\\r?\\n; UTF-8 ReadFile
+    summary: "regexp split on \\\\r?\\\\n---\\\\s*\\\\r?\\\\n; UTF-8 ReadFile"
   metadata:
     created:
-      author: AI Agent
-      date: 2026-03-27T00:00:00.000Z
+      author: "AI Agent"
+      date: "2026-03-27T00:00:00.000Z"
     last_updated:
-      author: AI Agent
-      date: 2026-03-28T00:00:00.000Z
-      reason: apply-token-comments [PROC-IMPL_PSEUDOCODE_TOKENS] pipeline callee + LIB-TYPES
+      author: "AI Agent"
+      date: "2026-03-28T00:00:00.000Z"
+      reason: "apply-token-comments [PROC-IMPL_PSEUDOCODE_TOKENS] pipeline callee + LIB-TYPES"
     last_validated:
-      date: 2026-03-27T00:00:00.000Z
-      result: pass
-      validator: AI Agent
-  name: text package prompt file and argv turns
+      date: "2026-03-27T00:00:00.000Z"
+      result: "pass"
+      validator: "AI Agent"
+  name: "text package prompt file and argv turns"
   rationale:
     benefits:
-      - Unit-tested regex split
+      - "Unit-tested regex split"
     problems_solved:
-      - Duplicated split logic in cmd
-    why: Pure functions for text prompt expansion
+      - "Duplicated split logic in cmd"
+    why: "Pure functions for text prompt expansion"
   related_decisions:
     depends_on:
-      - IMPL-GOAGENT-LIB-TYPES
+      - "IMPL-GOAGENT-LIB-TYPES"
     see_also: []
     supersedes: []
-  status: Active
+  status: "Active"
   traceability:
     architecture:
-      - ARCH-GOAGENT-TEXT-SOURCES
+      - "ARCH-GOAGENT-TEXT-SOURCES"
     code_annotations:
-      - IMPL-GOAGENT-TEXT-SOURCES
+      - "IMPL-GOAGENT-TEXT-SOURCES"
     requirements:
-      - REQ-GOAGENT-TEXT-SOURCES
+      - "REQ-GOAGENT-TEXT-SOURCES"
     tests:
-      - text_test.go
+      - "text_test.go"
 IMPL-MCP_FEEDBACK_TOOLS:
   code_locations:
     files:
-      - path: mcp-server/src/feedback.ts
-        description: Feedback load/append/export logic [REQ-FEEDBACK_TO_TIED] [ARCH-FEEDBACK_STORAGE] [IMPL-MCP_FEEDBACK_TOOLS]
-      - path: mcp-server/src/feedback.test.ts
-        description: Unit tests for feedback module
-      - path: mcp-server/src/tools/index.ts
-        description: Tool handlers tied_feedback_add, tied_feedback_export
+      - path: "mcp-server/src/feedback.ts"
+        description: "Feedback load/append/export logic [REQ-FEEDBACK_TO_TIED] [ARCH-FEEDBACK_STORAGE] [IMPL-MCP_FEEDBACK_TOOLS]"
+      - path: "mcp-server/src/feedback.test.ts"
+        description: "Unit tests for feedback module"
+      - path: "mcp-server/src/tools/index.ts"
+        description: "Tool handlers tied_feedback_add, tied_feedback_export"
     functions:
-      - name: loadFeedback
-        description: Load feedback.yaml or default structure
-        file: mcp-server/src/feedback.ts
-      - name: appendEntry
-        description: Append one entry with id and created_at
-        file: mcp-server/src/feedback.ts
-      - name: exportMarkdown
-        description: Export entries as markdown for TIED report
-        file: mcp-server/src/feedback.ts
-      - name: exportJson
-        description: Export entries as JSON string
-        file: mcp-server/src/feedback.ts
+      - name: "loadFeedback"
+        description: "Load feedback.yaml or default structure"
+        file: "mcp-server/src/feedback.ts"
+      - name: "appendEntry"
+        description: "Append one entry with id and created_at"
+        file: "mcp-server/src/feedback.ts"
+      - name: "exportMarkdown"
+        description: "Export entries as markdown for TIED report"
+        file: "mcp-server/src/feedback.ts"
+      - name: "exportJson"
+        description: "Export entries as JSON string"
+        file: "mcp-server/src/feedback.ts"
   cross_references:
-    - ARCH-FEEDBACK_STORAGE
-    - REQ-FEEDBACK_TO_TIED
-  detail_file: implementation-decisions/IMPL-MCP_FEEDBACK_TOOLS.yaml
+    - "ARCH-FEEDBACK_STORAGE"
+    - "REQ-FEEDBACK_TO_TIED"
+  detail_file: "implementation-decisions/IMPL-MCP_FEEDBACK_TOOLS.yaml"
   implementation_approach:
     details:
-      - 'appendEntry(params): validate type/title/description; generate id (e.g. timestamp-based); set created_at; append to entries; write file'
-      - 'exportMarkdown(entries), exportJson(entries): format all entries for report'
-      - 'getFeedbackPath(basePath?): resolve {base}/feedback.yaml'
-      - 'loadFeedback(basePath?): read YAML or return { entries: [] }; create file if missing on first append'
-      - 'tied_feedback_add: parse args, call appendEntry, return ok/id/created_at and optional report_snippet (markdown)'
-      - 'tied_feedback_export: load entries, call exportMarkdown or exportJson, return string'
-    summary: Feedback module (load/append/export) under mcp-server/src/feedback.ts; two tool handlers in tools/index.ts
+      - "appendEntry(params): validate type/title/description; generate id (e.g. timestamp-based); set created_at; append to entries; write file"
+      - "exportMarkdown(entries), exportJson(entries): format all entries for report"
+      - "getFeedbackPath(basePath?): resolve {base}/feedback.yaml"
+      - "loadFeedback(basePath?): read YAML or return { entries: [] }; create file if missing on first append"
+      - "tied_feedback_add: parse args, call appendEntry, return ok/id/created_at and optional report_snippet (markdown)"
+      - "tied_feedback_export: load entries, call exportMarkdown or exportJson, return string"
+    summary: "Feedback module (load/append/export) under mcp-server/src/feedback.ts; two tool handlers in tools/index.ts"
   metadata:
     created:
-      author: AI Agent
-      date: 2026-03-03T00:00:00.000Z
+      author: "AI Agent"
+      date: "2026-03-03T00:00:00.000Z"
     last_updated:
-      author: AI Agent
-      date: 2026-03-28T00:00:00.000Z
-      reason: apply-token-comments [PROC-IMPL_PSEUDOCODE_TOKENS] composition vs LEAP queue
+      author: "AI Agent"
+      date: "2026-03-28T00:00:00.000Z"
+      reason: "apply-token-comments [PROC-IMPL_PSEUDOCODE_TOKENS] composition vs LEAP queue"
     last_validated:
-      date: 2026-03-03T00:00:00.000Z
-      result: pass
-      validator: AI Agent
-  name: MCP Feedback Tools (tied_feedback_add, tied_feedback_export)
+      date: "2026-03-03T00:00:00.000Z"
+      result: "pass"
+      validator: "AI Agent"
+  name: "MCP Feedback Tools (tied_feedback_add, tied_feedback_export)"
   rationale:
     benefits:
-      - Logic in pure/testable module; handlers stay thin
-      - Projects can record and export feedback for the TIED project
+      - "Logic in pure/testable module; handlers stay thin"
+      - "Projects can record and export feedback for the TIED project"
     problems_solved:
-      - No programmatic way to add or export feedback from a TIED project
-    why: Implement REQ-FEEDBACK_TO_TIED and ARCH-FEEDBACK_STORAGE via two MCP tools and a testable feedback module
+      - "No programmatic way to add or export feedback from a TIED project"
+    why: "Implement REQ-FEEDBACK_TO_TIED and ARCH-FEEDBACK_STORAGE via two MCP tools and a testable feedback module"
   related_decisions:
     depends_on: []
     see_also:
-      - ARCH-FEEDBACK_STORAGE
-      - REQ-FEEDBACK_TO_TIED
+      - "ARCH-FEEDBACK_STORAGE"
+      - "REQ-FEEDBACK_TO_TIED"
     supersedes: []
-  status: Active
+  status: "Active"
   traceability:
     architecture:
-      - ARCH-FEEDBACK_STORAGE
+      - "ARCH-FEEDBACK_STORAGE"
     code_annotations:
-      - ARCH-FEEDBACK_STORAGE
-      - IMPL-MCP_FEEDBACK_TOOLS
-      - REQ-FEEDBACK_TO_TIED
+      - "ARCH-FEEDBACK_STORAGE"
+      - "IMPL-MCP_FEEDBACK_TOOLS"
+      - "REQ-FEEDBACK_TO_TIED"
     requirements:
-      - REQ-FEEDBACK_TO_TIED
+      - "REQ-FEEDBACK_TO_TIED"
     tests:
-      - feedback.test.ts
+      - "feedback.test.ts"
 IMPL-MCP_LEAP_PROPOSAL_QUEUE:
   code_locations:
     files:
-      - path: mcp-server/src/analysis/leap-proposal-queue.ts
-        description: Queue, audit, extractDiffProposalCandidates, parseSessionExportSegments [REQ-LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [IMPL-MCP_LEAP_PROPOSAL_QUEUE]
-      - path: mcp-server/src/analysis/leap-proposal-queue.test.ts
-        description: Unit tests for queue and session parsing
-      - path: mcp-server/src/tools/index.ts
-        description: tied_leap_proposal_* handlers and safeLeapCall
-      - path: mcp-server/src/tools/leap-proposal-mcp.test.ts
-        description: Composition tests — MCP handler wiring to leap-proposal-queue (no UI) [REQ-LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [IMPL-MCP_LEAP_PROPOSAL_QUEUE]
+      - path: "mcp-server/src/analysis/leap-proposal-queue.ts"
+        description: "Queue, audit, extractDiffProposalCandidates, parseSessionExportSegments [REQ-LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [IMPL-MCP_LEAP_PROPOSAL_QUEUE]"
+      - path: "mcp-server/src/analysis/leap-proposal-queue.test.ts"
+        description: "Unit tests for queue and session parsing"
+      - path: "mcp-server/src/tools/index.ts"
+        description: "tied_leap_proposal_* handlers and safeLeapCall"
+      - path: "mcp-server/src/tools/leap-proposal-mcp.test.ts"
+        description: "Composition tests — MCP handler wiring to leap-proposal-queue (no UI) [REQ-LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [IMPL-MCP_LEAP_PROPOSAL_QUEUE]"
     functions:
-      - name: loadQueue
-        description: Read queue.json or empty default; strip UTF-8 BOM before parse; DIAGNOSTIC on parse failure
-        file: mcp-server/src/analysis/leap-proposal-queue.ts
-      - name: extractDiffProposalCandidates
-        description: Deterministic git + line scan; outer catch returns error field
-        file: mcp-server/src/analysis/leap-proposal-queue.ts
+      - name: "loadQueue"
+        description: "Read queue.json or empty default; strip UTF-8 BOM before parse; DIAGNOSTIC on parse failure"
+        file: "mcp-server/src/analysis/leap-proposal-queue.ts"
+      - name: "extractDiffProposalCandidates"
+        description: "Deterministic git + line scan; outer catch returns error field"
+        file: "mcp-server/src/analysis/leap-proposal-queue.ts"
   cross_references:
-    - ARCH-LEAP_PROPOSAL_QUEUE
-    - REQ-LEAP_PROPOSAL_QUEUE
-  detail_file: implementation-decisions/IMPL-MCP_LEAP_PROPOSAL_QUEUE.yaml
+    - "ARCH-LEAP_PROPOSAL_QUEUE"
+    - "REQ-LEAP_PROPOSAL_QUEUE"
+  detail_file: "implementation-decisions/IMPL-MCP_LEAP_PROPOSAL_QUEUE.yaml"
   implementation_approach:
     details:
-      - 'end-to-end-ui Phase H: no E2E-only UI surface; composition tests (leap-proposal-mcp.test.ts) authoritative for MCP bindings'
-      - 'extractDiffProposalCandidates: git diff + lines; failure returns { error } without throw'
-      - 'Paths: {projectRoot}/leap-proposals/queue.json and audit-log.jsonl'
-      - 'verification-gate Phase I: full suite + tsc + validateConsistency(TIED_BASE_PATH=stdd/tied); completion_evidence in CITDP; module validation in s12_phase_i'
-      - MCP handlers use safeLeapCall for fs/git throws
-      - sync-tied-stack [PROC-AGENT_REQ_CHECKLIST] TIED sync — REQ/ARCH traceability.tests include leap-proposal-mcp.test.ts; index/detail + semantic-tokens metadata; validateConsistency(stdd/tied) ok; MCP tied_validate_consistency ok (workspace tied/)
-    summary: leap-proposal-queue.ts (queue, audit, diff/session helpers); tools/index.ts tied_leap_proposal_*; safeLeapCall wraps sync throws
+      - "end-to-end-ui Phase H: no E2E-only UI surface; composition tests (leap-proposal-mcp.test.ts) authoritative for MCP bindings"
+      - "extractDiffProposalCandidates: git diff + lines; failure returns { error } without throw"
+      - "MCP handlers use safeLeapCall for fs/git throws"
+      - "Paths: {projectRoot}/leap-proposals/queue.json and audit-log.jsonl"
+      - "sync-tied-stack [PROC-AGENT_REQ_CHECKLIST] TIED sync — REQ/ARCH traceability.tests include leap-proposal-mcp.test.ts; index/detail + semantic-tokens metadata; validateConsistency(stdd/tied) ok; MCP tied_validate_consistency ok (workspace tied/)"
+      - "verification-gate Phase I: full suite + tsc + validateConsistency(TIED_BASE_PATH=stdd/tied); completion_evidence in CITDP; module validation in s12_phase_i"
+    summary: "leap-proposal-queue.ts (queue, audit, diff/session helpers); tools/index.ts tied_leap_proposal_*; safeLeapCall wraps sync throws"
   metadata:
     created:
-      author: AI Agent
-      date: 2026-03-26T00:00:00.000Z
+      author: "AI Agent"
+      date: "2026-03-26T00:00:00.000Z"
     last_updated:
-      author: AI Agent
-      date: 2026-03-28T00:00:00.000Z
-      reason: sync-tied-stack [PROC-AGENT_REQ_CHECKLIST] TIED sync — index s13_sync stub + implementation_approach.details aligned with detail_file
+      author: "AI Agent"
+      date: "2026-03-28T00:00:00.000Z"
+      reason: "sync-tied-stack [PROC-AGENT_REQ_CHECKLIST] TIED sync — index s13_sync stub + implementation_approach.details aligned with detail_file"
     last_validated:
-      date: 2026-03-26T00:00:00.000Z
-      result: pass
-      validator: AI Agent
-  name: MCP LEAP proposal queue tools and module
+      date: "2026-03-26T00:00:00.000Z"
+      result: "pass"
+      validator: "AI Agent"
+  name: "MCP LEAP proposal queue tools and module"
   rationale:
     benefits:
-      - Stable ids, audit trail, opt-in extraction, thin MCP handlers with safe JSON error envelope
+      - "Stable ids, audit trail, opt-in extraction, thin MCP handlers with safe JSON error envelope"
     problems_solved:
-      - No machine-readable staging for inferred LEAP hints before canonical updates
-    why: Implements ARCH-LEAP_PROPOSAL_QUEUE and REQ-LEAP_PROPOSAL_QUEUE with a testable module and MCP tools that never write project TIED YAML from the queue lifecycle
+      - "No machine-readable staging for inferred LEAP hints before canonical updates"
+    why: "Implements ARCH-LEAP_PROPOSAL_QUEUE and REQ-LEAP_PROPOSAL_QUEUE with a testable module and MCP tools that never write project TIED YAML from the queue lifecycle"
   related_decisions:
     depends_on: []
     see_also:
-      - ARCH-LEAP_PROPOSAL_QUEUE
-      - IMPL-MCP_FEEDBACK_TOOLS
+      - "ARCH-LEAP_PROPOSAL_QUEUE"
+      - "IMPL-MCP_FEEDBACK_TOOLS"
     supersedes: []
   s13_sync:
     checklist_s13:
-      checklist_version: agent_req_implementation_checklist v1.0.2
-      completed_date: 2026-03-28T00:00:00.000Z
-      verdict: Index mirrors IMPL-MCP_LEAP_PROPOSAL_QUEUE.yaml detail_file s13_sync (validateConsistency + MCP ok; sub-yaml-edit-loop lint paths)
+      checklist_version: "agent_req_implementation_checklist v1.0.2"
+      completed_date: "2026-03-28T00:00:00.000Z"
+      verdict: "Index mirrors IMPL-MCP_LEAP_PROPOSAL_QUEUE.yaml detail_file s13_sync (validateConsistency + MCP ok; sub-yaml-edit-loop lint paths)"
     process_tokens:
-      - PROC-AGENT_REQ_CHECKLIST
-      - PROC-TIED_DEV_CYCLE
+      - "PROC-AGENT_REQ_CHECKLIST"
+      - "PROC-TIED_DEV_CYCLE"
     tied_validate_consistency:
       mcp_workspace:
-        result: ok true
-        tool: mcp_tied-yaml_tied_validate_consistency
+        result: "ok true"
+        tool: "mcp_tied-yaml_tied_validate_consistency"
       stdd:
-        result: ok true
-        tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied
-    yaml_writer_note: TIED_YAML_BYPASS when MCP TIED_BASE_PATH is not stdd — see detail_file s13_sync
-  status: Active
+        result: "ok true"
+        tied_base_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied"
+    yaml_writer_note: "TIED_YAML_BYPASS when MCP TIED_BASE_PATH is not stdd — see detail_file s13_sync"
+  status: "Active"
   traceability:
     architecture:
-      - ARCH-LEAP_PROPOSAL_QUEUE
+      - "ARCH-LEAP_PROPOSAL_QUEUE"
     code_annotations:
-      - ARCH-LEAP_PROPOSAL_QUEUE
-      - IMPL-MCP_LEAP_PROPOSAL_QUEUE
-      - REQ-LEAP_PROPOSAL_QUEUE
+      - "ARCH-LEAP_PROPOSAL_QUEUE"
+      - "IMPL-MCP_LEAP_PROPOSAL_QUEUE"
+      - "REQ-LEAP_PROPOSAL_QUEUE"
     requirements:
-      - REQ-LEAP_PROPOSAL_QUEUE
+      - "REQ-LEAP_PROPOSAL_QUEUE"
     tests:
-      - 'leap-proposal-mcp.test.ts — LPQ-MCP composition: all tied_leap_proposal_* handler bindings (composition-integration)'
-      - 'leap-proposal-queue.test.ts — LPQ-CORE unit: lifecycle, session parse, LOAD_QUEUE BOM, corrupt JSON/schema mismatch, extractDiff non-repo error path (S09 / sub-leap-micro-cycle)'
+      - "leap-proposal-mcp.test.ts — LPQ-MCP composition: all tied_leap_proposal_* handler bindings (composition-integration)"
+      - "leap-proposal-queue.test.ts — LPQ-CORE unit: lifecycle, session parse, LOAD_QUEUE BOM, corrupt JSON/schema mismatch, extractDiff non-repo error path (S09 / sub-leap-micro-cycle)"
 IMPL-MCP_USAGE_METRICS:
   code_locations:
     files:
-      - path: mcp-server/src/usage-metrics.ts
-        description: Env gate, sanitizeArgs, JSONL append, wrapToolHandler [REQ-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS]
-      - path: mcp-server/src/usage-metrics.test.ts
-        description: Unit tests for metrics module
-      - path: mcp-server/src/index.ts
-        description: Registers wrapToolHandler when metrics enabled
-      - path: tools/bundled-tied-yaml-skill/scripts/tied-cli.sh
-        description: Exports TIED_MCP_METRICS_CLIENT=tied-cli when collection enabled
-      - path: scripts/analyze_tied_mcp_metrics.rb
-        description: Offline JSONL aggregator
-      - path: scripts/analyze_tied_mcp_metrics_test.rb
-        description: Smoke test for aggregator
+      - path: "mcp-server/src/usage-metrics.ts"
+        description: "Env gate, sanitizeArgs, JSONL append, wrapToolHandler [REQ-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS]"
+      - path: "mcp-server/src/usage-metrics.test.ts"
+        description: "Unit tests for metrics module"
+      - path: "mcp-server/src/index.ts"
+        description: "Registers wrapToolHandler when metrics enabled"
+      - path: "tools/bundled-tied-yaml-skill/scripts/tied-cli.sh"
+        description: "Exports TIED_MCP_METRICS_CLIENT=tied-cli when collection enabled"
+      - path: "scripts/analyze_tied_mcp_metrics.rb"
+        description: "Offline JSONL aggregator"
+      - path: "scripts/analyze_tied_mcp_metrics_test.rb"
+        description: "Smoke test for aggregator"
   cross_references:
-    - ARCH-MCP_USAGE_METRICS
-    - REQ-MCP_USAGE_METRICS
-  detail_file: implementation-decisions/IMPL-MCP_USAGE_METRICS.yaml
-  essence_pseudocode_path: implementation-decisions/IMPL-MCP_USAGE_METRICS-pseudocode.md
+    - "ARCH-MCP_USAGE_METRICS"
+    - "REQ-MCP_USAGE_METRICS"
+  detail_file: "implementation-decisions/IMPL-MCP_USAGE_METRICS.yaml"
+  essence_pseudocode_path: "implementation-decisions/IMPL-MCP_USAGE_METRICS-pseudocode.md"
   implementation_approach:
     details:
-      - 'analyze_tied_mcp_metrics.rb: streaming counts, durations, top_signatures, --aggregate'
-      - 'isMetricsEnabled(): TIED_MCP_COLLECT_METRICS in {1,true} case-insensitive'
-      - 'recordToolCall: append one JSON line v1 schema; swallow IO errors'
-      - 'resolveMetricsPath(): env override or homedir .cursor/logs/tied-mcp-metrics.jsonl'
-      - 'sanitizeArgs(tool, args): scalars preserved; blobs as _bytes/_keys; signature SHA-256 prefix'
-      - 'tied-cli.sh: export TIED_MCP_METRICS_CLIENT=tied-cli when metrics env set'
-      - 'wrapToolHandler: time handler; ok from throws and result.isError'
-    summary: usage-metrics.ts module; index.ts wiring; tied-cli client tag; Ruby offline analyzer
+      - "analyze_tied_mcp_metrics.rb: streaming counts, durations, top_signatures, --aggregate"
+      - "isMetricsEnabled(): TIED_MCP_COLLECT_METRICS in {1,true} case-insensitive"
+      - "recordToolCall: append one JSON line v1 schema; swallow IO errors"
+      - "resolveMetricsPath(): env override or homedir .cursor/logs/tied-mcp-metrics.jsonl"
+      - "sanitizeArgs(tool, args): scalars preserved; blobs as _bytes/_keys; signature SHA-256 prefix"
+      - "tied-cli.sh: export TIED_MCP_METRICS_CLIENT=tied-cli when metrics env set"
+      - "wrapToolHandler: time handler; ok from throws and result.isError"
+    summary: "usage-metrics.ts module; index.ts wiring; tied-cli client tag; Ruby offline analyzer"
   metadata:
     created:
-      author: AI Agent
-      date: 2026-06-25
+      author: "AI Agent"
+      date: "2026-06-25"
     last_updated:
-      author: AI Agent
-      date: 2026-06-25
-      reason: Initial creation
+      author: "AI Agent"
+      date: "2026-06-25"
+      reason: "Initial creation"
     last_validated:
-      date: 2026-06-25
-      result: pass
-      validator: AI Agent
-  name: MCP usage metrics module and offline analyzer
+      date: "2026-06-25"
+      result: "pass"
+      validator: "AI Agent"
+  name: "MCP usage metrics module and offline analyzer"
   rationale:
     benefits:
-      - Metrics never break tool handlers
-      - Offline script reuses streaming JSONL pattern from hook analysis tools
-      - Testable pure functions for sanitize and path resolution
+      - "Metrics never break tool handlers"
+      - "Offline script reuses streaming JSONL pattern from hook analysis tools"
+      - "Testable pure functions for sanitize and path resolution"
     problems_solved:
-      - No implementation for REQ-MCP_USAGE_METRICS observability
-    why: Implements ARCH-MCP_USAGE_METRICS with a focused module, registration wrapper, tied-cli env export, and Ruby aggregator
+      - "No implementation for REQ-MCP_USAGE_METRICS observability"
+    why: "Implements ARCH-MCP_USAGE_METRICS with a focused module, registration wrapper, tied-cli env export, and Ruby aggregator"
   related_decisions:
     depends_on: []
     see_also:
-      - ARCH-MCP_USAGE_METRICS
-      - IMPL-MCP_FEEDBACK_TOOLS
+      - "ARCH-MCP_USAGE_METRICS"
+      - "IMPL-MCP_FEEDBACK_TOOLS"
     supersedes: []
-  status: Active
+  status: "Active"
   traceability:
     architecture:
-      - ARCH-MCP_USAGE_METRICS
+      - "ARCH-MCP_USAGE_METRICS"
     code_annotations:
-      - ARCH-MCP_USAGE_METRICS
-      - IMPL-MCP_USAGE_METRICS
-      - REQ-MCP_USAGE_METRICS
+      - "ARCH-MCP_USAGE_METRICS"
+      - "IMPL-MCP_USAGE_METRICS"
+      - "REQ-MCP_USAGE_METRICS"
     requirements:
-      - REQ-MCP_USAGE_METRICS
+      - "REQ-MCP_USAGE_METRICS"
     tests:
-      - analyze_tied_mcp_metrics_test.rb
-      - usage-metrics.test.ts
+      - "analyze_tied_mcp_metrics_test.rb"
+      - "usage-metrics.test.ts"
 IMPL-MODULE_VALIDATION:
   code_locations:
     files:
-      - path: '*_module_test.[ext]'
-        description: Module validation test files
-      - path: '*_validation_test.[ext]'
-        description: Module validation test files (alternate pattern)
-      - path: '*_integration_test.[ext]'
-        description: Integration test files
+      - path: "*_module_test.[ext]"
+        description: "Module validation test files"
+      - path: "*_validation_test.[ext]"
+        description: "Module validation test files (alternate pattern)"
+      - path: "*_integration_test.[ext]"
+        description: "Integration test files"
     functions:
-      - name: testModuleName_IndependentValidation_REQ_MODULE_VALIDATION
-        description: Module validation test function pattern
-        file: various test files
+      - name: "testModuleName_IndependentValidation_REQ_MODULE_VALIDATION"
+        description: "Module validation test function pattern"
+        file: "various test files"
   cross_references:
-    - ARCH-MODULE_VALIDATION
-    - REQ-MODULE_VALIDATION
-  detail_file: implementation-decisions/IMPL-MODULE_VALIDATION.yaml
+    - "ARCH-MODULE_VALIDATION"
+    - "REQ-MODULE_VALIDATION"
+  detail_file: "implementation-decisions/IMPL-MODULE_VALIDATION.yaml"
   implementation_approach:
     details:
-      - 'Phase 1: Identify modules and document boundaries, interfaces, contracts, dependencies, validation criteria'
-      - 'Phase 2: Develop module independently with dependency injection'
-      - 'Phase 3: Validate independently with unit tests (mocked dependencies), contract validation, edge cases, error handling, integration tests with test doubles'
-      - 'Phase 4: Document validation results including passed tests, limitations, assumptions'
-      - 'Phase 5: Integrate only after validation passes, with integration tests validating combined behavior'
-    summary: 'Five-phase approach: module identification, independent development, independent validation, documentation, and integration'
+      - "Phase 1: Identify modules and document boundaries, interfaces, contracts, dependencies, validation criteria"
+      - "Phase 2: Develop module independently with dependency injection"
+      - "Phase 3: Validate independently with unit tests (mocked dependencies), contract validation, edge cases, error handling, integration tests with test doubles"
+      - "Phase 4: Document validation results including passed tests, limitations, assumptions"
+      - "Phase 5: Integrate only after validation passes, with integration tests validating combined behavior"
+    summary: "Five-phase approach: module identification, independent development, independent validation, documentation, and integration"
   metadata:
     created:
-      author: AI Agent
-      date: 2025-12-18T00:00:00.000Z
+      author: "AI Agent"
+      date: "2025-12-18T00:00:00.000Z"
     last_updated:
-      author: AI Agent
-      date: 2026-03-30T00:00:00.000Z
-      reason: apply-token-comments [PROC-AGENT_REQ_CHECKLIST] [PROC-IMPL_PSEUDOCODE_TOKENS] Phase C procedure + contract How lines
+      author: "AI Agent"
+      date: "2026-03-30T00:00:00.000Z"
+      reason: "apply-token-comments [PROC-AGENT_REQ_CHECKLIST] [PROC-IMPL_PSEUDOCODE_TOKENS] Phase C procedure + contract How lines"
     last_validated:
-      date: 2026-02-06T00:00:00.000Z
-      result: pass
-      validator: AI Agent
-  name: Module Validation Implementation
+      date: "2026-02-06T00:00:00.000Z"
+      result: "pass"
+      validator: "AI Agent"
+  name: "Module Validation Implementation"
   rationale:
     benefits:
-      - Bugs caught early in development cycle
-      - Clear validation criteria for each module
-      - Easier debugging by isolating issues to specific modules
-      - Reduced integration complexity
+      - "Bugs caught early in development cycle"
+      - "Clear validation criteria for each module"
+      - "Easier debugging by isolating issues to specific modules"
+      - "Reduced integration complexity"
     problems_solved:
-      - Complexity-related bugs discovered too late
-      - Difficult to debug integration issues
-      - Module contracts not validated before integration
-    why: Implements REQ-MODULE_VALIDATION requirement and ARCH-MODULE_VALIDATION strategy to ensure modules are validated independently before integration
+      - "Complexity-related bugs discovered too late"
+      - "Difficult to debug integration issues"
+      - "Module contracts not validated before integration"
+    why: "Implements REQ-MODULE_VALIDATION requirement and ARCH-MODULE_VALIDATION strategy to ensure modules are validated independently before integration"
   related_decisions:
     depends_on: []
     see_also:
-      - ARCH-MODULE_VALIDATION
-      - REQ-MODULE_VALIDATION
+      - "ARCH-MODULE_VALIDATION"
+      - "REQ-MODULE_VALIDATION"
     supersedes: []
-  status: Active
+  status: "Active"
   traceability:
     architecture:
-      - ARCH-MODULE_VALIDATION
+      - "ARCH-MODULE_VALIDATION"
     code_annotations:
-      - IMPL-MODULE_VALIDATION
-      - REQ-MODULE_VALIDATION
+      - "IMPL-MODULE_VALIDATION"
+      - "REQ-MODULE_VALIDATION"
     requirements:
-      - REQ-MODULE_VALIDATION
+      - "REQ-MODULE_VALIDATION"
     tests:
-      - testModuleName_IndependentValidation_REQ_MODULE_VALIDATION
+      - "testModuleName_IndependentValidation_REQ_MODULE_VALIDATION"
 IMPL-TIED_FILES:
   code_locations:
     files:
-      - path: copy_files.sh
-        description: Bootstrap script that sets up TIED structure
+      - path: "copy_files.sh"
+        description: "Bootstrap script that sets up TIED structure"
         lines:
-          - 1
-          - 386
+          - "1"
+          - "386"
   cross_references:
-    - ARCH-TIED_STRUCTURE
-    - REQ-TIED_SETUP
-  detail_file: implementation-decisions/IMPL-TIED_FILES.yaml
+    - "ARCH-TIED_STRUCTURE"
+    - "REQ-TIED_SETUP"
+  detail_file: "implementation-decisions/IMPL-TIED_FILES.yaml"
   implementation_approach:
     details:
-      - Copy base files to project root when missing (.cursorrules, AGENTS.md). In a TIED source repository, live guide content is under tied/docs/; agents and preload use client ./tied/docs/ paths and ./tied/agent-preload-contract.yaml.
-      - Copy guide .md files, detail-files-schema.md, preload contract templates, and reference docs from TIED source tied/docs/ into client tied/docs/ when missing (per DOCS_TO_COPY in copy_files.sh)
-      - Copy YAML index files from templates (requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml)
-      - Create detail subdirectories (requirements/, architecture-decisions/, implementation-decisions/)
-      - Create tied/ directory at project root
-      - Install the tied-yaml Cursor skill to .cursor/skills/tied-yaml/ (from tools/bundled-tied-yaml-skill/ in the TIED source repo; .cursor/skills/tied-yaml only if the bundle is missing; overwritten each run). The canonical stdio client on the client is .cursor/skills/tied-yaml/scripts/tied-cli.sh only; copy_files.sh does not create a project-root scripts/tied-cli.sh entry.
-    summary: Bootstrap script that creates tied/ directory, copies template files, sets up base files, and installs the tied-yaml CLI skill under .cursor/skills/tied-yaml/
+      - "Copy base files to project root when missing (.cursorrules, AGENTS.md). In a TIED source repository, live guide content is under tied/docs/; agents and preload use client ./tied/docs/ paths and ./tied/agent-preload-contract.yaml."
+      - "Copy guide .md files, detail-files-schema.md, preload contract templates, and reference docs from TIED source tied/docs/ into client tied/docs/ when missing (per DOCS_TO_COPY in copy_files.sh)"
+      - "Copy YAML index files from templates (requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml)"
+      - "Create detail subdirectories (requirements/, architecture-decisions/, implementation-decisions/)"
+      - "Create tied/ directory at project root"
+      - "Install the tied-yaml Cursor skill to .cursor/skills/tied-yaml/ (from tools/bundled-tied-yaml-skill/ in the TIED source repo; .cursor/skills/tied-yaml only if the bundle is missing; overwritten each run). The canonical stdio client on the client is .cursor/skills/tied-yaml/scripts/tied-cli.sh only; copy_files.sh does not create a project-root scripts/tied-cli.sh entry."
+    summary: "Bootstrap script that creates tied/ directory, copies template files, sets up base files, and installs the tied-yaml CLI skill under .cursor/skills/tied-yaml/"
   metadata:
     created:
-      author: AI Agent
-      date: 2025-12-18T00:00:00.000Z
+      author: "AI Agent"
+      date: "2025-12-18T00:00:00.000Z"
     last_updated:
-      author: AI Agent
+      author: "AI Agent"
       date: "2026-04-24T00:00:00.000Z"
-      reason: 'Index aligned to IMPL detail: single tied-cli path'
+      reason: "Index aligned to IMPL detail: single tied-cli path"
     last_validated:
-      date: 2026-02-06T00:00:00.000Z
-      result: pass
-      validator: AI Agent
-  name: TIED File Creation
+      date: "2026-02-06T00:00:00.000Z"
+      result: "pass"
+      validator: "AI Agent"
+  name: "TIED File Creation"
   rationale:
     benefits:
-      - All required files and directories created correctly
-      - Automated, consistent TIED setup
-      - Easy project bootstrapping with single command
+      - "All required files and directories created correctly"
+      - "Automated, consistent TIED setup"
+      - "Easy project bootstrapping with single command"
     problems_solved:
-      - Inconsistent project structure across implementations
-      - Manual setup of TIED structure is error-prone
-      - Missing required TIED files and directories
-    why: Implements ARCH-TIED_STRUCTURE and realizes REQ-TIED_SETUP by creating the foundational TIED directory structure and files
+      - "Inconsistent project structure across implementations"
+      - "Manual setup of TIED structure is error-prone"
+      - "Missing required TIED files and directories"
+    why: "Implements ARCH-TIED_STRUCTURE and realizes REQ-TIED_SETUP by creating the foundational TIED directory structure and files"
   related_decisions:
     depends_on: []
     see_also:
-      - ARCH-TIED_STRUCTURE
-      - REQ-TIED_SETUP
+      - "ARCH-TIED_STRUCTURE"
+      - "REQ-TIED_SETUP"
     supersedes: []
-  status: Active
+  status: "Active"
   traceability:
     architecture:
-      - ARCH-TIED_STRUCTURE
+      - "ARCH-TIED_STRUCTURE"
     code_annotations:
-      - ARCH-TIED_STRUCTURE
-      - IMPL-TIED_FILES
-      - REQ-TIED_SETUP
+      - "ARCH-TIED_STRUCTURE"
+      - "IMPL-TIED_FILES"
+      - "REQ-TIED_SETUP"
     requirements:
-      - REQ-TIED_SETUP
+      - "REQ-TIED_SETUP"
     tests:
-      - Manual verification checklists
+      - "Manual verification checklists"

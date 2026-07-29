@@ -1,13 +1,13 @@
 REQ-GOAGENT-TEXT-SOURCES:
-  category: Tooling
-  detail_file: requirements/REQ-GOAGENT-TEXT-SOURCES.yaml
-  name: Text prompt sources argv prompt-file prompts-file verify-session
-  priority: P1
+  category: "Tooling"
+  detail_file: "requirements/REQ-GOAGENT-TEXT-SOURCES.yaml"
+  name: "Text prompt sources argv prompt-file prompts-file verify-session"
+  priority: "P1"
   satisfaction_criteria:
-    - criterion: Text source terms are canonical in tied/vocab/agentstream.md; text_sources block in IMPL-GOAGENT-TEXT-SOURCES-pseudocode.md
-  status: Implemented
+    - criterion: "Text source terms are canonical in tied/vocab/agentstream.md; text_sources block in IMPL-GOAGENT-TEXT-SOURCES-pseudocode.md"
+  status: "Implemented"
   traceability:
     architecture:
-      - ARCH-GOAGENT-TEXT-SOURCES
+      - "ARCH-GOAGENT-TEXT-SOURCES"
     implementation:
-      - IMPL-GOAGENT-TEXT-SOURCES
+      - "IMPL-GOAGENT-TEXT-SOURCES"

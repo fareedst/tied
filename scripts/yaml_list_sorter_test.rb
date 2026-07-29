@@ -485,11 +485,31 @@ assert parse_failed, 'validate_sorted_content! should reject unparseable sorted 
 funparse.close!
 
 # --- yaml_tool default lint (requires yq) ---
+# [PROC-YAML_EDIT_LOOP] [IMPL-TIED_FILES] — default lint: sort_keys(.. style="double")
 if system('command -v yq >/dev/null 2>&1')
   fl = write_temp_yaml!("key: value\n")
   _out, _err, st = run_yaml_tool([fl.path])
   assert st.success?, "yaml_tool lint failed: #{_err}"
+  fl_body = File.read(fl.path)
+  assert fl_body.include?('"value"') || fl_body.include?('key: "value"'),
+         "yaml_tool lint double-quote: #{fl_body}"
   fl.close!
+
+  # Default lint: recursive key sort + double-quoted scalars (bool → string)
+  dq = write_temp_yaml!(<<~YAML)
+    b: two
+    flag: false
+    a: one
+    count: 0
+  YAML
+  _out, _err, st = run_yaml_tool([dq.path])
+  assert st.success?, "yaml_tool double-quote lint failed: #{_err}"
+  dq_body = File.read(dq.path)
+  assert dq_body.index('a:') < dq_body.index('b:'), "yaml_tool lint key order: #{dq_body}"
+  assert dq_body.match?(/flag:\s*"false"/), "yaml_tool lint bool stringify: #{dq_body}"
+  assert dq_body.match?(/count:\s*"0"/), "yaml_tool lint int stringify: #{dq_body}"
+  assert dq_body.match?(/a:\s*"one"/), "yaml_tool lint string quote: #{dq_body}"
+  dq.close!
 
   fs = write_temp_yaml!(<<~YAML)
     tags:

@@ -19,10 +19,12 @@
 | **pseudo-code sidecar** | essence in index body | Plain Markdown `IMPL-*-pseudocode.md`; not YAML |
 | **module validation** | unit testing (alone) | Independent validation before integration per [REQ-MODULE_VALIDATION](../requirements/REQ-MODULE_VALIDATION.yaml) |
 | **Observing AI principles!** | (omit) | Mandatory session acknowledgment per [REQ-TIED_SETUP](../requirements/REQ-TIED_SETUP.yaml) |
-| **yaml_tool** | yaml lint script, yq wrapper (alone) | Primary YAML utility: `scripts/yaml_tool.sh`; default lint/pretty-print per [PROC-YAML_EDIT_LOOP](../docs/processes.md) |
+| **yaml_tool** | yaml lint script, yq wrapper (alone) | Primary YAML utility: `scripts/yaml_tool.sh`; default lint = **double-quoted scalar lint** per [PROC-YAML_EDIT_LOOP](../docs/processes.md) |
 | **lint_yaml** | lint yaml (generic) | Backward-compatible wrapper; delegates to **yaml_tool** |
+| **double-quoted scalar lint** | `yq -i -P` (as default lint), pretty-print-only lint | Default `yaml_tool` / `lint_yaml`: `yq -i 'sort_keys(.. style="double")'` one file per invocation. On-disk **bool/int become string scalars** (e.g. `e2e_only: "false"`); coerce after load when typed values are required |
+| **recursive key sort (lint)** | default `--sort-keys`, key sort via Ruby only | Key alphabetization on **default lint** via the yq `sort_keys(..)` expression. Distinct from optional **`--sort-lists --sort-keys`** on **yaml_list_sorter** |
 | **qualifying list group** | yaml list, bullet group | 2+ consecutive lines with same indent, each starting with `- `; sortable by **yaml_list_sorter** |
-| **sort map keys** | hash key sort, key normalization | Optional **`--sort-keys`** on **yaml_list_sorter** / **yaml_tool --sort-lists**; alphabetizes sibling map keys at every indent level; **block-scalar** (`\|`, `>`) bodies stay opaque |
+| **sort map keys** | hash key sort, key normalization | Optional **`--sort-keys`** on **yaml_list_sorter** / **yaml_tool --sort-lists**; alphabetizes sibling map keys at every indent level; **block-scalar** (`\|`, `>`) bodies stay opaque. For default lint key order, see **recursive key sort (lint)** |
 | **yaml_semantic_compare** | YAML equality check, deep YAML diff (alone) | Library: `scripts/yaml_semantic_compare.rb`; compares loaded YAML values (key order ignored; optional unordered arrays); used by **yaml_list_sorter** post-sort validation |
 | **compare_yaml_dirs** | directory YAML diff, recursive yaml compare | CLI: `scripts/compare_yaml_dirs.rb LEFT_DIR RIGHT_DIR`; relative-path pairing; reports missing files and semantic differences |
 | **routing.md** / **routing index** | `domain-references-routing.md`, bootstrap via full catalog | Primary `tied/vocab/` PRELOAD entry; keyword → glossary table. Full catalog remains [`domain-references.md`](domain-references.md) (on-demand) |
@@ -46,7 +48,8 @@
 | Vocab directory routing index | routing index | `tied/vocab/routing.md` | PRELOAD primary entry | [PROC-VOCABULARY_INDEX](../docs/processes.md) |
 | Domain vocabulary full catalog | full catalog | `tied/vocab/domain-references.md` | on-demand cross-topic / Priority table | [PROC-VOCABULARY_INDEX](../docs/processes.md) |
 | Per-request checklist copy | working folder checklist | `<working_folder>/REQ-*_<timestamp>.yaml` | — | [PROC-AGENT_REQ_CHECKLIST](../docs/processes.md) |
-| YAML validate/sort | yaml_tool | `scripts/yaml_tool.sh` | `--sort-lists` → Ruby sorter; optional `--sort-keys` | [PROC-YAML_EDIT_LOOP](../docs/processes.md) |
+| YAML validate/sort | yaml_tool | `scripts/yaml_tool.sh` | default: `sort_keys(.. style="double")`; `--sort-lists` → Ruby sorter; optional `--sort-keys` | [PROC-YAML_EDIT_LOOP](../docs/processes.md) |
+| Double-quoted scalar lint | canonical lint | via **yaml_tool** / **lint_yaml** | `yq -i 'sort_keys(.. style="double")'` | [PROC-YAML_EDIT_LOOP](../docs/processes.md) |
 | YAML lint wrapper | lint_yaml | `scripts/lint_yaml.sh` | delegates to yaml_tool | [PROC-YAML_EDIT_LOOP](../docs/processes.md) |
 | List group sorter | yaml_list_sorter | `scripts/yaml_list_sorter.rb` | `--sort-keys` optional; invoked by yaml_tool `--sort-lists`; post-sort **yaml_semantic_compare** | [PROC-YAML_EDIT_LOOP](../docs/processes.md) |
 | Semantic YAML compare | yaml_semantic_compare | `scripts/yaml_semantic_compare.rb` | library + `YamlSemanticCompare.compare` | [PROC-YAML_EDIT_LOOP](../docs/processes.md) |

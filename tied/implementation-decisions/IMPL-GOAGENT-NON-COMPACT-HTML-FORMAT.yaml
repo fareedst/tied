@@ -1,83 +1,80 @@
 IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT:
   code_locations:
     files:
-      - path: tools/agentstream/cmd/agentstream/main.go
-        description: 'Integration: applyPostPreloadNonCompactHTML after ApplyPromptFilePreload (IMPL-GOAGENT-CLI-CMD + IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT composition)'
-      - path: tools/agentstream/cmd/agentstream/compose_noncompact.go
-        description: 'MAP_CONFIG_TO_HTMLFORMAT_OPTIONS + call IntegrateWithMain; REQ/ARCH/IMPL: IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT; CLI via config.Config'
-      - path: tools/agentstream/config/config.go
-        description: NonCompactHTML, NonCompactHTMLStableIndent; --non-compact-html / --non-compact-html-indent (ARCH-GOAGENT-CLI / REQ-GOAGENT-CLI-CONFIG)
-      - path: tools/agentstream/htmlformat/htmlformat.go
-        description: 'APPLY_TO_TURNS, FormatNonCompactHTML, addNonCompactLineBreaks, applyStableIndentLines, IntegrateWithMain (htmlformat); REQ/ARCH/IMPL: IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT'
+      - path: "tools/agentstream/cmd/agentstream/main.go"
+        description: "Integration: applyPostPreloadNonCompactHTML after ApplyPromptFilePreload (IMPL-GOAGENT-CLI-CMD + IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT composition)"
+      - path: "tools/agentstream/cmd/agentstream/compose_noncompact.go"
+        description: "MAP_CONFIG_TO_HTMLFORMAT_OPTIONS + call IntegrateWithMain; REQ/ARCH/IMPL: IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT; CLI via config.Config"
+      - path: "tools/agentstream/config/config.go"
+        description: "NonCompactHTML, NonCompactHTMLStableIndent; --non-compact-html / --non-compact-html-indent (ARCH-GOAGENT-CLI / REQ-GOAGENT-CLI-CONFIG)"
+      - path: "tools/agentstream/htmlformat/htmlformat.go"
+        description: "APPLY_TO_TURNS, FormatNonCompactHTML, addNonCompactLineBreaks, applyStableIndentLines, IntegrateWithMain (htmlformat); REQ/ARCH/IMPL: IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT"
     functions: []
   cross_references:
-    - ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT
-    - REQ-GOAGENT-NON-COMPACT-HTML-FORMAT
+    - "ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT"
+    - "REQ-GOAGENT-NON-COMPACT-HTML-FORMAT"
   implementation_approach:
     details:
-      - 'end-to-end-ui Phase H: no E2E-only UI surface for this IMPL; s11_phase_h documents e2e_only false; htmlformat + compose_noncompact authoritatively cover Go bindings (REQ-MODULE_VALIDATION) [PROC-AGENT_REQ_CHECKLIST]'
-      - If scope later excludes feature-spec or verify, LEAP to narrow INTEGRATE_WITH_MAIN without changing FORMAT_NON_COMPACT_HTML
-    summary: Add Config flag; package under tools/agentstream (exact path in unit-test-green) implementing APPLY_TO_TURNS and formatters; wire in cmd/agentstream after ApplyPromptFilePreload. Tests in *_test.go reference REQ/IMPL tokens.
+      - "end-to-end-ui Phase H: no E2E-only UI surface for this IMPL; s11_phase_h documents e2e_only false; htmlformat + compose_noncompact authoritatively cover Go bindings (REQ-MODULE_VALIDATION) [PROC-AGENT_REQ_CHECKLIST]"
+      - "If scope later excludes feature-spec or verify, LEAP to narrow INTEGRATE_WITH_MAIN without changing FORMAT_NON_COMPACT_HTML"
+    summary: "Add Config flag; package under tools/agentstream (exact path in unit-test-green) implementing APPLY_TO_TURNS and formatters; wire in cmd/agentstream after ApplyPromptFilePreload. Tests in *_test.go reference REQ/IMPL tokens."
   metadata:
     created:
-      author: AI Agent
+      author: "AI Agent"
       date: "2026-04-24T00:00:00.000Z"
     last_updated:
-      author: AI Agent
+      author: "AI Agent"
       date: "2026-04-24T18:30:00.000Z"
-      reason: 'verification-gate Phase I: go test -count=1 ./... (tools/agentstream), go vet, gofmt; sub-pseudocode-validation-pass full Layer B including minimum_gating_rules; tied_validate_consistency; three-way alignment; REQ-MODULE_VALIDATION.'
+      reason: "verification-gate Phase I: go test -count=1 ./... (tools/agentstream), go vet, gofmt; sub-pseudocode-validation-pass full Layer B including minimum_gating_rules; tied_validate_consistency; three-way alignment; REQ-MODULE_VALIDATION."
     last_validated:
       date: "2026-04-24T18:30:00.000Z"
-      result: pass
-      validator: AI Agent
-  name: Non-compact HTML after pipeline; single formatter seam
+      result: "pass"
+      validator: "AI Agent"
+  name: "Non-compact HTML after pipeline; single formatter seam"
   rationale:
     benefits:
-      - Single call site in main after ApplyPromptFilePreload
-      - Unit-testable FORMAT_NON_COMPACT_HTML in isolation
+      - "Single call site in main after ApplyPromptFilePreload"
+      - "Unit-testable FORMAT_NON_COMPACT_HTML in isolation"
     problems_solved:
-      - Ad-hoc duplicate HTML in multiple loaders
-      - Missing IMPL and essence_pseudocode from flag steps
-    why: REQ/ARCH require one explicit, testable transform surface and no split-brain HTML across checklist and tddloop
+      - "Ad-hoc duplicate HTML in multiple loaders"
+      - "Missing IMPL and essence_pseudocode from flag steps"
+    why: "REQ/ARCH require one explicit, testable transform surface and no split-brain HTML across checklist and tddloop"
   related_decisions:
     composed_with:
-      - IMPL-GOAGENT-CLI-CMD
+      - "IMPL-GOAGENT-CLI-CMD"
     depends_on:
-      - IMPL-GOAGENT-CLI-CMD
-      - IMPL-GOAGENT-PIPELINE
+      - "IMPL-GOAGENT-CLI-CMD"
+      - "IMPL-GOAGENT-PIPELINE"
     see_also:
-      - IMPL-GOAGENT-CHECKLIST
-      - IMPL-GOAGENT-FEATURESPEC
-      - IMPL-GOAGENT-TDDLOOP
+      - "IMPL-GOAGENT-CHECKLIST"
+      - "IMPL-GOAGENT-FEATURESPEC"
+      - "IMPL-GOAGENT-TDDLOOP"
     supersedes: []
   s11_phase_h:
     agent_checklist_s11:
-      checklist_version: agent_req_implementation_checklist v1.5.2
-      completed_date: 2026-04-24T00:00:00.000Z
-      verdict: |
-        No E2E-only platform constraint for the formatter. Unit tests cover FORMAT/APPLY/INTEGRATE; composition tests cover
-        config.Config → applyPostPreloadNonCompactHTML → htmlformat. Adding a Cursor agent or headless browser E2E would not
-        test line-break invariants more precisely than the existing Go tests. phase_h_tests remains [].
-    composition_authoritative_for_bindings: true
+      checklist_version: "agent_req_implementation_checklist v1.5.2"
+      completed_date: "2026-04-24T00:00:00.000Z"
+      verdict: "No E2E-only platform constraint for the formatter. Unit tests cover FORMAT/APPLY/INTEGRATE; composition tests cover\nconfig.Config → applyPostPreloadNonCompactHTML → htmlformat. Adding a Cursor agent or headless browser E2E would not\ntest line-break invariants more precisely than the existing Go tests. phase_h_tests remains [].\n"
+    composition_authoritative_for_bindings: "true"
     composition_tests:
-      - tools/agentstream/cmd/agentstream/compose_noncompact_test.go
-    e2e_only: false
-    e2e_only_reason: 'N/A — no browser, native OS dialog, IDE chrome, or window-server render path; non-compact HTML is deterministic UTF-8 in-memory + CLI flags, exercised by htmlformat_test.go and compose_noncompact_test.go without Playwright or interactive Cursor (REQ-MODULE_VALIDATION) [PROC-TEST_STRATEGY] [CITDP test policy: E2E reserved for genuinely UI-only scope].'
-    essence_pseudocode_e2e_boundary: end-to-end-ui Phase H lines in IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT-pseudocode.md and essence_pseudocode document e2e_only false; no e2e_only block in format procedures
+      - "tools/agentstream/cmd/agentstream/compose_noncompact_test.go"
+    e2e_only: "false"
+    e2e_only_reason: "N/A — no browser, native OS dialog, IDE chrome, or window-server render path; non-compact HTML is deterministic UTF-8 in-memory + CLI flags, exercised by htmlformat_test.go and compose_noncompact_test.go without Playwright or interactive Cursor (REQ-MODULE_VALIDATION) [PROC-TEST_STRATEGY] [CITDP test policy: E2E reserved for genuinely UI-only scope]."
+    essence_pseudocode_e2e_boundary: "end-to-end-ui Phase H lines in IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT-pseudocode.md and essence_pseudocode document e2e_only false; no e2e_only block in format procedures"
     phase_h_tests: []
     process_tokens:
-      - PROC-AGENT_REQ_CHECKLIST
-      - PROC-IMPL_CODE_TEST_SYNC
-    ui_only_behavior_identified: false
-  status: Active
-  testability: unit
+      - "PROC-AGENT_REQ_CHECKLIST"
+      - "PROC-IMPL_CODE_TEST_SYNC"
+    ui_only_behavior_identified: "false"
+  status: "Active"
+  testability: "unit"
   traceability:
     architecture:
-      - ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT
+      - "ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT"
     code_annotations:
-      - IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT
+      - "IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT"
     requirements:
-      - REQ-GOAGENT-NON-COMPACT-HTML-FORMAT
+      - "REQ-GOAGENT-NON-COMPACT-HTML-FORMAT"
     tests:
-      - tools/agentstream/cmd/agentstream/compose_noncompact_test.go
-      - tools/agentstream/htmlformat/htmlformat_test.go
+      - "tools/agentstream/cmd/agentstream/compose_noncompact_test.go"
+      - "tools/agentstream/htmlformat/htmlformat_test.go"

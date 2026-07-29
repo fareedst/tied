@@ -1,10 +1,10 @@
 ARCH-GOAGENT-YAML-STEPS:
-  detail_file: architecture-decisions/ARCH-GOAGENT-YAML-STEPS.yaml
-  name: TDD and checklist YAML step rendering architecture
-  status: Active
+  detail_file: "architecture-decisions/ARCH-GOAGENT-YAML-STEPS.yaml"
+  name: "TDD and checklist YAML step rendering architecture"
+  status: "Active"
   traceability:
     implementation:
-      - IMPL-GOAGENT-CHECKLIST
-      - IMPL-GOAGENT-TDDLOOP
+      - "IMPL-GOAGENT-CHECKLIST"
+      - "IMPL-GOAGENT-TDDLOOP"
     requirements:
-      - REQ-GOAGENT-YAML-STEP-RENDER
+      - "REQ-GOAGENT-YAML-STEP-RENDER"

@@ -24,11 +24,11 @@
 #   metadata: Optional metadata
 # Methodology seed: token identity and traceability only; do not expand rationale here (use the checklist and project detail files when needed).
 REQ-FEEDBACK_TO_TIED:
-  category: Functional
-  detail_file: null
+  category: "Functional"
+  detail_file: "null"
   metadata:
     last_updated:
-      reason: 'Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml'
+      reason: "Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml"
       # ---
       # Template Record - Copy this block to create new requirements
       # ---
@@ -83,53 +83,53 @@ REQ-FEEDBACK_TO_TIED:
       #       date: YYYY-MM-DD
       #       validator: "agent/contributor"
       #       result: "pass"
-  name: Feedback to TIED (Feature Requests, Bug Reports, Methodology)
-  priority: P1
+  name: "Feedback to TIED (Feature Requests, Bug Reports, Methodology)"
+  priority: "P1"
   related_requirements:
     depends_on: []
     related_to:
-      - REQ-TIED_SETUP
+      - "REQ-TIED_SETUP"
     supersedes: []
-  status: Planned
+  status: "Planned"
   traceability:
     architecture:
-      - ARCH-FEEDBACK_STORAGE
+      - "ARCH-FEEDBACK_STORAGE"
     implementation:
-      - IMPL-MCP_FEEDBACK_TOOLS
+      - "IMPL-MCP_FEEDBACK_TOOLS"
 REQ-MODULE_VALIDATION:
-  category: Functional
-  detail_file: null
+  category: "Functional"
+  detail_file: "null"
   metadata:
     last_updated:
-      reason: 'Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml'
-  name: Independent Module Validation Before Integration
-  priority: P0
+      reason: "Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml"
+  name: "Independent Module Validation Before Integration"
+  priority: "P0"
   related_requirements:
     depends_on:
-      - REQ-TIED_SETUP
+      - "REQ-TIED_SETUP"
     related_to: []
     supersedes: []
-  status: Implemented
+  status: "Implemented"
   traceability:
     architecture:
-      - ARCH-MODULE_VALIDATION
+      - "ARCH-MODULE_VALIDATION"
     implementation:
-      - IMPL-MODULE_VALIDATION
+      - "IMPL-MODULE_VALIDATION"
 REQ-TIED_SETUP:
-  category: Functional
-  detail_file: null
+  category: "Functional"
+  detail_file: "null"
   metadata:
     last_updated:
-      reason: 'Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml'
-  name: TIED Methodology Setup
-  priority: P0
+      reason: "Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml"
+  name: "TIED Methodology Setup"
+  priority: "P0"
   related_requirements:
     depends_on: []
     related_to: []
     supersedes: []
-  status: Implemented
+  status: "Implemented"
   traceability:
     architecture:
-      - ARCH-TIED_STRUCTURE
+      - "ARCH-TIED_STRUCTURE"
     implementation:
-      - IMPL-TIED_FILES
+      - "IMPL-TIED_FILES"

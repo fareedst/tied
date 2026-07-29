@@ -1,9 +1,9 @@
 ARCH-GOAGENT-YAML-FEATURESPEC:
-  detail_file: architecture-decisions/ARCH-GOAGENT-YAML-FEATURESPEC.yaml
-  name: Feature spec batch YAML normalization and rendering
-  status: Active
+  detail_file: "architecture-decisions/ARCH-GOAGENT-YAML-FEATURESPEC.yaml"
+  name: "Feature spec batch YAML normalization and rendering"
+  status: "Active"
   traceability:
     implementation:
-      - IMPL-GOAGENT-FEATURESPEC
+      - "IMPL-GOAGENT-FEATURESPEC"
     requirements:
-      - REQ-GOAGENT-FEATURESPEC-BATCH
+      - "REQ-GOAGENT-FEATURESPEC-BATCH"

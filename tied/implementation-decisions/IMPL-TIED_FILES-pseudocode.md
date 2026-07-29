@@ -43,3 +43,19 @@ procedure SEED_DOMAIN_VOCAB(projectRoot):
   IF dest has one or more *.md files: RETURN (client extensions preserved)
   IF TIED_SOURCE/tied/vocab/ missing or empty: warn; RETURN
   FOR each *.md in TIED_SOURCE/tied/vocab/: copy to dest preserving basename
+
+procedure CANONICALIZE_YAML_FILE(path):
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [PROC-YAML_EDIT_LOOP]
+  # How: Run one yq process: yq -i 'sort_keys(.. style="double")' path — recursive key sort + double-quoted scalars (double-quoted scalar lint). Bool/int become string scalars on disk; never pass multiple paths to one yq. Same expression as mcp-server token-rename pretty-print.
+  IF path missing or not a regular file: RETURN error
+  RUN yq -i 'sort_keys(.. style="double")' path
+  RETURN yq exit status
+
+procedure LINT_YAML_PATHS(paths):
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [PROC-YAML_EDIT_LOOP]
+  # How: For each path, CALL CANONICALIZE_YAML_FILE independently (scripts/yaml_tool.sh / lint_yaml default); aggregate exit status. Optional --sort-lists / --sort-keys remain a separate Ruby path (SORT_QUALIFYING_LIST_GROUPS in processes.md).
+  rc := 0
+  FOR each path in paths:
+    st := CALL CANONICALIZE_YAML_FILE(path)
+    IF st != 0: rc := st
+  RETURN rc

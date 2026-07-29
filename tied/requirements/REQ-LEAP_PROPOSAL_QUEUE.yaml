@@ -1,61 +1,61 @@
 REQ-LEAP_PROPOSAL_QUEUE:
-  category: Functional
-  detail_file: requirements/REQ-LEAP_PROPOSAL_QUEUE.yaml
+  category: "Functional"
+  detail_file: "requirements/REQ-LEAP_PROPOSAL_QUEUE.yaml"
   metadata:
     created:
-      author: AI Agent
-      date: 2026-03-26T00:00:00.000Z
+      author: "AI Agent"
+      date: "2026-03-26T00:00:00.000Z"
     last_updated:
-      author: AI Agent
-      date: 2026-03-28T00:00:00.000Z
-      reason: sync-tied-stack [PROC-AGENT_REQ_CHECKLIST] TIED sync — traceability.tests + validation_criteria include composition suite
+      author: "AI Agent"
+      date: "2026-03-28T00:00:00.000Z"
+      reason: "sync-tied-stack [PROC-AGENT_REQ_CHECKLIST] TIED sync — traceability.tests + validation_criteria include composition suite"
     last_validated:
-      date: 2026-03-26T00:00:00.000Z
-      result: pass
-      validator: AI Agent
-  name: Optional LEAP proposal queue with human review
-  priority: P1
+      date: "2026-03-26T00:00:00.000Z"
+      result: "pass"
+      validator: "AI Agent"
+  name: "Optional LEAP proposal queue with human review"
+  priority: "P1"
   rationale:
     benefits:
-      - Clear separation between proposals and canonical TIED records
-      - Deterministic extraction path (no API keys required for built-in diff/session import)
-      - Stable proposal ids and audit trail under leap-proposals/ without polluting tied/ until LEAP is applied via MCP
+      - "Clear separation between proposals and canonical TIED records"
+      - "Deterministic extraction path (no API keys required for built-in diff/session import)"
+      - "Stable proposal ids and audit trail under leap-proposals/ without polluting tied/ until LEAP is applied via MCP"
     problems_solved:
-      - No structured place for non-authoritative LEAP suggestions outside canonical REQ/ARCH/IMPL
-      - Risk of silent or automatic TIED updates without human or explicit agent approval
-    why: Teams need an optional, non-canonical queue for inferred documentation hints (diff/session) with explicit approve/reject before any project TIED YAML changes, mirroring Plumb-style review without requiring LLM or automatic promotion.
+      - "No structured place for non-authoritative LEAP suggestions outside canonical REQ/ARCH/IMPL"
+      - "Risk of silent or automatic TIED updates without human or explicit agent approval"
+    why: "Teams need an optional, non-canonical queue for inferred documentation hints (diff/session) with explicit approve/reject before any project TIED YAML changes, mirroring Plumb-style review without requiring LLM or automatic promotion."
   related_requirements:
     depends_on:
-      - REQ-TIED_SETUP
+      - "REQ-TIED_SETUP"
     related_to:
-      - REQ-FEEDBACK_TO_TIED
+      - "REQ-FEEDBACK_TO_TIED"
     supersedes: []
   satisfaction_criteria:
-    - criterion: MCP tools list, add, reject, approve, mark applied, update pending, and snapshot the proposal queue without writing project TIED YAML
-      metric: tied_leap_proposal_* handlers persist only under leap-proposals/
-    - criterion: Diff and session import require explicit_opt_in
-      metric: explicit_opt_in false returns error and creates no proposals
-    - criterion: Reject records status in queue and audit only
-      metric: reject does not modify tied/*.yaml
-    - criterion: Unit tests cover queue persistence and lifecycle
-      metric: leap-proposal-queue.test.ts passes in mcp-server
-    - criterion: LEAP proposal queue terms and tied_leap_proposal_* tools are canonical in tied/vocab/leap-proposal-queue.md; LOAD_QUEUE block in IMPL-MCP_LEAP_PROPOSAL_QUEUE-pseudocode.md
-  status: Implemented
+    - criterion: "MCP tools list, add, reject, approve, mark applied, update pending, and snapshot the proposal queue without writing project TIED YAML"
+      metric: "tied_leap_proposal_* handlers persist only under leap-proposals/"
+    - criterion: "Diff and session import require explicit_opt_in"
+      metric: "explicit_opt_in false returns error and creates no proposals"
+    - criterion: "Reject records status in queue and audit only"
+      metric: "reject does not modify tied/*.yaml"
+    - criterion: "Unit tests cover queue persistence and lifecycle"
+      metric: "leap-proposal-queue.test.ts passes in mcp-server"
+    - criterion: "LEAP proposal queue terms and tied_leap_proposal_* tools are canonical in tied/vocab/leap-proposal-queue.md; LOAD_QUEUE block in IMPL-MCP_LEAP_PROPOSAL_QUEUE-pseudocode.md"
+  status: "Implemented"
   traceability:
     architecture:
-      - ARCH-LEAP_PROPOSAL_QUEUE
+      - "ARCH-LEAP_PROPOSAL_QUEUE"
     code_annotations:
-      - IMPL-MCP_LEAP_PROPOSAL_QUEUE
-      - REQ-LEAP_PROPOSAL_QUEUE
+      - "IMPL-MCP_LEAP_PROPOSAL_QUEUE"
+      - "REQ-LEAP_PROPOSAL_QUEUE"
     implementation:
-      - IMPL-MCP_LEAP_PROPOSAL_QUEUE
+      - "IMPL-MCP_LEAP_PROPOSAL_QUEUE"
     tests:
-      - leap-proposal-mcp.test.ts
-      - leap-proposal-queue.test.ts
+      - "leap-proposal-mcp.test.ts"
+      - "leap-proposal-queue.test.ts"
   validation_criteria:
-    - method: Unit tests
-      coverage: leap-proposal-queue module and schema strings
-    - method: Composition tests
-      coverage: leap-proposal-mcp.test.ts (tied_leap_proposal_* handlers without MCP transport)
-    - method: Manual or MCP client
-      coverage: Tools callable from tied-yaml MCP server
+    - method: "Unit tests"
+      coverage: "leap-proposal-queue module and schema strings"
+    - method: "Composition tests"
+      coverage: "leap-proposal-mcp.test.ts (tied_leap_proposal_* handlers without MCP transport)"
+    - method: "Manual or MCP client"
+      coverage: "Tools callable from tied-yaml MCP server"

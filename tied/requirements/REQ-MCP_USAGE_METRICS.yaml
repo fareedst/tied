@@ -1,60 +1,60 @@
 REQ-MCP_USAGE_METRICS:
-  category: Functional
-  detail_file: requirements/REQ-MCP_USAGE_METRICS.yaml
+  category: "Functional"
+  detail_file: "requirements/REQ-MCP_USAGE_METRICS.yaml"
   metadata:
     created:
-      author: AI Agent
-      date: 2026-06-25T00:00:00.000Z
+      author: "AI Agent"
+      date: "2026-06-25T00:00:00.000Z"
     last_updated:
-      author: AI Agent
-      date: 2026-06-25T00:00:00.000Z
-      reason: Initial creation
+      author: "AI Agent"
+      date: "2026-06-25T00:00:00.000Z"
+      reason: "Initial creation"
     last_validated:
-      date: 2026-06-25T00:00:00.000Z
-      result: pass
-      validator: AI Agent
-  name: Opt-in local MCP tool usage metrics
-  priority: P2
+      date: "2026-06-25T00:00:00.000Z"
+      result: "pass"
+      validator: "AI Agent"
+  name: "Opt-in local MCP tool usage metrics"
+  priority: "P2"
   rationale:
     benefits:
-      - Frequency and latency stats per tool and client surface (IDE MCP vs tied-cli)
-      - Offline analysis informs MCP/API improvements and tied_feedback_add reports
-      - Sanitized arg summaries reveal common call patterns without logging full payloads
+      - "Frequency and latency stats per tool and client surface (IDE MCP vs tied-cli)"
+      - "Offline analysis informs MCP/API improvements and tied_feedback_add reports"
+      - "Sanitized arg summaries reveal common call patterns without logging full payloads"
     problems_solved:
-      - No visibility into how agents use TIED YAML MCP tools in practice
-      - tied-cli and headless runs are invisible to Cursor hook logs
-    why: Teams need optional, local-first instrumentation to learn which MCP tools are used, how often, and with what intent—without enabling collection by default or exporting data off-machine.
+      - "No visibility into how agents use TIED YAML MCP tools in practice"
+      - "tied-cli and headless runs are invisible to Cursor hook logs"
+    why: "Teams need optional, local-first instrumentation to learn which MCP tools are used, how often, and with what intent—without enabling collection by default or exporting data off-machine."
   related_requirements:
     depends_on:
-      - REQ-TIED_SETUP
+      - "REQ-TIED_SETUP"
     related_to:
-      - REQ-FEEDBACK_TO_TIED
+      - "REQ-FEEDBACK_TO_TIED"
     supersedes: []
   satisfaction_criteria:
-    - criterion: Metrics collection is off unless TIED_MCP_COLLECT_METRICS is set locally
-      metric: No JSONL append when env unset; append when set to 1 or true
-    - criterion: Every MCP tools/call records tool name, client, duration, ok, sanitized args
-      metric: usage-metrics.test.ts passes; large essence_pseudocode omitted from args_summary
-    - criterion: tied-cli tags client as tied-cli when metrics enabled
-      metric: tied-cli.sh exports TIED_MCP_METRICS_CLIENT=tied-cli
-    - criterion: Offline aggregator reports tool counts, failures, and top arg signatures
-      metric: analyze_tied_mcp_metrics_test.rb passes
-    - criterion: Env vars and JSONL path documented in tied/vocab/tied-yaml-mcp.md
-  status: Implemented
+    - criterion: "Metrics collection is off unless TIED_MCP_COLLECT_METRICS is set locally"
+      metric: "No JSONL append when env unset; append when set to 1 or true"
+    - criterion: "Every MCP tools/call records tool name, client, duration, ok, sanitized args"
+      metric: "usage-metrics.test.ts passes; large essence_pseudocode omitted from args_summary"
+    - criterion: "tied-cli tags client as tied-cli when metrics enabled"
+      metric: "tied-cli.sh exports TIED_MCP_METRICS_CLIENT=tied-cli"
+    - criterion: "Offline aggregator reports tool counts, failures, and top arg signatures"
+      metric: "analyze_tied_mcp_metrics_test.rb passes"
+    - criterion: "Env vars and JSONL path documented in tied/vocab/tied-yaml-mcp.md"
+  status: "Implemented"
   traceability:
     architecture:
-      - ARCH-MCP_USAGE_METRICS
+      - "ARCH-MCP_USAGE_METRICS"
     code_annotations:
-      - ARCH-MCP_USAGE_METRICS
-      - IMPL-MCP_USAGE_METRICS
-      - REQ-MCP_USAGE_METRICS
+      - "ARCH-MCP_USAGE_METRICS"
+      - "IMPL-MCP_USAGE_METRICS"
+      - "REQ-MCP_USAGE_METRICS"
     implementation:
-      - IMPL-MCP_USAGE_METRICS
+      - "IMPL-MCP_USAGE_METRICS"
     tests:
-      - analyze_tied_mcp_metrics_test.rb
-      - usage-metrics.test.ts
+      - "analyze_tied_mcp_metrics_test.rb"
+      - "usage-metrics.test.ts"
   validation_criteria:
-    - method: Unit tests
-      coverage: usage-metrics module and wrapToolHandler
-    - method: Ruby smoke test
-      coverage: analyze_tied_mcp_metrics.rb fixture aggregation
+    - method: "Unit tests"
+      coverage: "usage-metrics module and wrapToolHandler"
+    - method: "Ruby smoke test"
+      coverage: "analyze_tied_mcp_metrics.rb fixture aggregation"

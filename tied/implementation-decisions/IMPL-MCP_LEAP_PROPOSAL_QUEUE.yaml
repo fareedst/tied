@@ -1,167 +1,162 @@
 IMPL-MCP_LEAP_PROPOSAL_QUEUE:
   code_locations:
     files:
-      - path: mcp-server/src/analysis/leap-proposal-queue.ts
-        description: Queue, audit, extractDiffProposalCandidates, parseSessionExportSegments [REQ-LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [IMPL-MCP_LEAP_PROPOSAL_QUEUE]
-      - path: mcp-server/src/analysis/leap-proposal-queue.test.ts
-        description: Unit tests for queue and session parsing
-      - path: mcp-server/src/tools/index.ts
-        description: tied_leap_proposal_* handlers and safeLeapCall
-      - path: mcp-server/src/tools/leap-proposal-mcp.test.ts
-        description: Composition tests — MCP handler wiring to leap-proposal-queue (no UI) [REQ-LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [IMPL-MCP_LEAP_PROPOSAL_QUEUE]
+      - path: "mcp-server/src/analysis/leap-proposal-queue.ts"
+        description: "Queue, audit, extractDiffProposalCandidates, parseSessionExportSegments [REQ-LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [IMPL-MCP_LEAP_PROPOSAL_QUEUE]"
+      - path: "mcp-server/src/analysis/leap-proposal-queue.test.ts"
+        description: "Unit tests for queue and session parsing"
+      - path: "mcp-server/src/tools/index.ts"
+        description: "tied_leap_proposal_* handlers and safeLeapCall"
+      - path: "mcp-server/src/tools/leap-proposal-mcp.test.ts"
+        description: "Composition tests — MCP handler wiring to leap-proposal-queue (no UI) [REQ-LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [IMPL-MCP_LEAP_PROPOSAL_QUEUE]"
     functions:
-      - name: loadQueue
-        description: Read queue.json or empty default; strip UTF-8 BOM before parse; DIAGNOSTIC on parse failure
-        file: mcp-server/src/analysis/leap-proposal-queue.ts
-      - name: extractDiffProposalCandidates
-        description: Deterministic git + line scan; outer catch returns error field
-        file: mcp-server/src/analysis/leap-proposal-queue.ts
+      - name: "loadQueue"
+        description: "Read queue.json or empty default; strip UTF-8 BOM before parse; DIAGNOSTIC on parse failure"
+        file: "mcp-server/src/analysis/leap-proposal-queue.ts"
+      - name: "extractDiffProposalCandidates"
+        description: "Deterministic git + line scan; outer catch returns error field"
+        file: "mcp-server/src/analysis/leap-proposal-queue.ts"
   cross_references:
-    - ARCH-LEAP_PROPOSAL_QUEUE
-    - REQ-LEAP_PROPOSAL_QUEUE
-  detail_file: implementation-decisions/IMPL-MCP_LEAP_PROPOSAL_QUEUE.yaml
+    - "ARCH-LEAP_PROPOSAL_QUEUE"
+    - "REQ-LEAP_PROPOSAL_QUEUE"
+  detail_file: "implementation-decisions/IMPL-MCP_LEAP_PROPOSAL_QUEUE.yaml"
   implementation_approach:
     details:
-      - 'end-to-end-ui Phase H: no E2E-only UI surface; composition tests (leap-proposal-mcp.test.ts) authoritative for MCP bindings'
-      - 'extractDiffProposalCandidates: git diff + lines; failure returns { error } without throw'
-      - 'Paths: {projectRoot}/leap-proposals/queue.json and audit-log.jsonl'
-      - 'verification-gate Phase I: full suite + tsc + validateConsistency(TIED_BASE_PATH=stdd/tied); completion_evidence in CITDP; module validation in s12_phase_i'
-      - MCP handlers use safeLeapCall for fs/git throws
-      - sync-tied-stack [PROC-AGENT_REQ_CHECKLIST] TIED sync — REQ/ARCH traceability.tests include leap-proposal-mcp.test.ts; index/detail + semantic-tokens metadata; validateConsistency(stdd/tied) ok; MCP tied_validate_consistency ok (workspace tied/)
-    summary: leap-proposal-queue.ts (queue, audit, diff/session helpers); tools/index.ts tied_leap_proposal_*; safeLeapCall wraps sync throws
+      - "end-to-end-ui Phase H: no E2E-only UI surface; composition tests (leap-proposal-mcp.test.ts) authoritative for MCP bindings"
+      - "extractDiffProposalCandidates: git diff + lines; failure returns { error } without throw"
+      - "MCP handlers use safeLeapCall for fs/git throws"
+      - "Paths: {projectRoot}/leap-proposals/queue.json and audit-log.jsonl"
+      - "sync-tied-stack [PROC-AGENT_REQ_CHECKLIST] TIED sync — REQ/ARCH traceability.tests include leap-proposal-mcp.test.ts; index/detail + semantic-tokens metadata; validateConsistency(stdd/tied) ok; MCP tied_validate_consistency ok (workspace tied/)"
+      - "verification-gate Phase I: full suite + tsc + validateConsistency(TIED_BASE_PATH=stdd/tied); completion_evidence in CITDP; module validation in s12_phase_i"
+    summary: "leap-proposal-queue.ts (queue, audit, diff/session helpers); tools/index.ts tied_leap_proposal_*; safeLeapCall wraps sync throws"
   metadata:
     created:
-      author: AI Agent
-      date: 2026-03-26
+      author: "AI Agent"
+      date: "2026-03-26"
     last_updated:
-      author: AI Agent
-      date: 2026-03-28
-      reason: sync-tied-stack [PROC-AGENT_REQ_CHECKLIST] TIED sync — s13_sync, REQ/ARCH test traceability, semantic-tokens metadata, CITDP checklist_tracking_s13
+      author: "AI Agent"
+      date: "2026-03-28"
+      reason: "sync-tied-stack [PROC-AGENT_REQ_CHECKLIST] TIED sync — s13_sync, REQ/ARCH test traceability, semantic-tokens metadata, CITDP checklist_tracking_s13"
     last_validated:
-      date: 2026-03-26
-      result: pass
-      validator: AI Agent
-  name: MCP LEAP proposal queue tools and module
+      date: "2026-03-26"
+      result: "pass"
+      validator: "AI Agent"
+  name: "MCP LEAP proposal queue tools and module"
   rationale:
     benefits:
-      - Stable ids, audit trail, opt-in extraction, thin MCP handlers with safe JSON error envelope
+      - "Stable ids, audit trail, opt-in extraction, thin MCP handlers with safe JSON error envelope"
     problems_solved:
-      - No machine-readable staging for inferred LEAP hints before canonical updates
-    why: Implements ARCH-LEAP_PROPOSAL_QUEUE and REQ-LEAP_PROPOSAL_QUEUE with a testable module and MCP tools that never write project TIED YAML from the queue lifecycle.
+      - "No machine-readable staging for inferred LEAP hints before canonical updates"
+    why: "Implements ARCH-LEAP_PROPOSAL_QUEUE and REQ-LEAP_PROPOSAL_QUEUE with a testable module and MCP tools that never write project TIED YAML from the queue lifecycle."
   related_decisions:
     depends_on: []
     see_also:
-      - ARCH-LEAP_PROPOSAL_QUEUE
-      - IMPL-MCP_FEEDBACK_TOOLS
+      - "ARCH-LEAP_PROPOSAL_QUEUE"
+      - "IMPL-MCP_FEEDBACK_TOOLS"
     supersedes: []
   s11_phase_h:
     agent_checklist_s11:
-      checklist_version: agent_req_implementation_checklist v1.0.2
-      completed_date: 2026-03-28
-      verdict: |
-        No browser, IDE chrome, native OS dialog, or window-server-only behavior for tied_leap_proposal_* tools.
-        Composition tests invoke handlers in-process; adding Playwright/Cursor E2E would not test intrinsic queue
-        correctness beyond Phase G. phase_h_tests remains [] per e2e_only false ([REQ-MODULE_VALIDATION] [PROC-TEST_STRATEGY]).
-    composition_authoritative_for_bindings: true
+      checklist_version: "agent_req_implementation_checklist v1.0.2"
+      completed_date: "2026-03-28"
+      verdict: "No browser, IDE chrome, native OS dialog, or window-server-only behavior for tied_leap_proposal_* tools.\nComposition tests invoke handlers in-process; adding Playwright/Cursor E2E would not test intrinsic queue\ncorrectness beyond Phase G. phase_h_tests remains [] per e2e_only false ([REQ-MODULE_VALIDATION] [PROC-TEST_STRATEGY]).\n"
+    composition_authoritative_for_bindings: "true"
     composition_tests:
-      - mcp-server/src/tools/leap-proposal-mcp.test.ts
-    e2e_only: false
-    e2e_only_reason: N/A — no browser, IDE chrome, native OS dialog, or window server; tied_leap_proposal_* handlers are plain functions exercised by leap-proposal-mcp.test.ts without MCP stdio transport ([REQ-MODULE_VALIDATION] [PROC-TEST_STRATEGY]).
-    essence_pseudocode_e2e_boundary: end-to-end-ui E2E boundary lines in essence_pseudocode document not e2e_only ([REQ-MODULE_VALIDATION] [PROC-TEST_STRATEGY]).
+      - "mcp-server/src/tools/leap-proposal-mcp.test.ts"
+    e2e_only: "false"
+    e2e_only_reason: "N/A — no browser, IDE chrome, native OS dialog, or window server; tied_leap_proposal_* handlers are plain functions exercised by leap-proposal-mcp.test.ts without MCP stdio transport ([REQ-MODULE_VALIDATION] [PROC-TEST_STRATEGY])."
+    essence_pseudocode_e2e_boundary: "end-to-end-ui E2E boundary lines in essence_pseudocode document not e2e_only ([REQ-MODULE_VALIDATION] [PROC-TEST_STRATEGY])."
     phase_h_tests: []
     process_tokens:
-      - PROC-AGENT_REQ_CHECKLIST
-      - PROC-IMPL_CODE_TEST_SYNC
-    ui_only_behavior_identified: false
+      - "PROC-AGENT_REQ_CHECKLIST"
+      - "PROC-IMPL_CODE_TEST_SYNC"
+    ui_only_behavior_identified: "false"
   s12_phase_i:
     checklist_s12:
-      completed_date: 2026-03-28
+      completed_date: "2026-03-28"
       module_validation_req:
-        LPQ-CORE: validated independently via leap-proposal-queue.test.ts before LPQ-MCP composition (integration_note unchanged).
-        LPQ-MCP: leap-proposal-mcp.test.ts exercises handlers without MCP stdio/UI.
-        reference: REQ-MODULE_VALIDATION
-      three_way_alignment_audit: |
-        LOAD_QUEUE and MCP_HANDLER essence blocks include [IMPL-MCP_LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [REQ-LEAP_PROPOSAL_QUEUE];
-        leap-proposal-queue.ts LOAD_QUEUE path and leap-proposal-mcp.test.ts composition cases use the same triple; e2e_only false (s11_phase_h).
+        LPQ-CORE: "validated independently via leap-proposal-queue.test.ts before LPQ-MCP composition (integration_note unchanged)."
+        LPQ-MCP: "leap-proposal-mcp.test.ts exercises handlers without MCP stdio/UI."
+        reference: "REQ-MODULE_VALIDATION"
+      three_way_alignment_audit: "LOAD_QUEUE and MCP_HANDLER essence blocks include [IMPL-MCP_LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [REQ-LEAP_PROPOSAL_QUEUE];\nleap-proposal-queue.ts LOAD_QUEUE path and leap-proposal-mcp.test.ts composition cases use the same triple; e2e_only false (s11_phase_h).\n"
     full_test_suite:
-      command: cd mcp-server && npm test
-      failures: 0
-      runs: 78
+      command: "cd mcp-server && npm test"
+      failures: "0"
+      runs: "78"
     lint:
-      result: pass
-      typescript: npx tsc -b (mcp-server/tsconfig)
+      result: "pass"
+      typescript: "npx tsc -b (mcp-server/tsconfig)"
       yaml_changed_paths_linted:
-        - tied/citdp/CITDP-REQ-LEAP_PROPOSAL_QUEUE.yaml
-        - tied/implementation-decisions.yaml
-        - tied/implementation-decisions/IMPL-MCP_LEAP_PROPOSAL_QUEUE.yaml
+        - "tied/citdp/CITDP-REQ-LEAP_PROPOSAL_QUEUE.yaml"
+        - "tied/implementation-decisions.yaml"
+        - "tied/implementation-decisions/IMPL-MCP_LEAP_PROPOSAL_QUEUE.yaml"
     module_validation:
-      integration_note: LPQ_MCP depends on LPQ_CORE; composition tests run after unit module green
+      integration_note: "LPQ_MCP depends on LPQ_CORE; composition tests run after unit module green"
       LPQ_CORE:
-        path: mcp-server/src/analysis/leap-proposal-queue.ts
-        status: pass — queue lifecycle, session parse, PROPOSALS_FROM_SESSION_SEGMENTS trim, LOAD_QUEUE BOM (S09)
-        unit_tests: leap-proposal-queue.test.ts
+        path: "mcp-server/src/analysis/leap-proposal-queue.ts"
+        status: "pass — queue lifecycle, session parse, PROPOSALS_FROM_SESSION_SEGMENTS trim, LOAD_QUEUE BOM (S09)"
+        unit_tests: "leap-proposal-queue.test.ts"
       LPQ_MCP:
-        composition_tests: leap-proposal-mcp.test.ts
-        path: mcp-server/src/tools/index.ts
-        status: pass — handler → safeLeapCall → module; lifecycle + extract error path + queue_snapshot BOM (composition-integration)
-      reference: REQ-MODULE_VALIDATION
+        composition_tests: "leap-proposal-mcp.test.ts"
+        path: "mcp-server/src/tools/index.ts"
+        status: "pass — handler → safeLeapCall → module; lifecycle + extract error path + queue_snapshot BOM (composition-integration)"
+      reference: "REQ-MODULE_VALIDATION"
     process_tokens:
-      - PROC-AGENT_REQ_CHECKLIST
-      - PROC-IMPL_CODE_TEST_SYNC
-      - PROC-TOKEN_VALIDATION
-      - REQ-MODULE_VALIDATION
+      - "PROC-AGENT_REQ_CHECKLIST"
+      - "PROC-IMPL_CODE_TEST_SYNC"
+      - "PROC-TOKEN_VALIDATION"
+      - "REQ-MODULE_VALIDATION"
     three_way_alignment:
-      e2e_only_blocks: none — s11_phase_h.e2e_only false; e2e_only_reason N/A documented
-      impl_token: IMPL-MCP_LEAP_PROPOSAL_QUEUE
-      tokens: REQ-LEAP_PROPOSAL_QUEUE; ARCH-LEAP_PROPOSAL_QUEUE; IMPL-MCP_LEAP_PROPOSAL_QUEUE
-      verdict: pass
+      e2e_only_blocks: "none — s11_phase_h.e2e_only false; e2e_only_reason N/A documented"
+      impl_token: "IMPL-MCP_LEAP_PROPOSAL_QUEUE"
+      tokens: "REQ-LEAP_PROPOSAL_QUEUE; ARCH-LEAP_PROPOSAL_QUEUE; IMPL-MCP_LEAP_PROPOSAL_QUEUE"
+      verdict: "pass"
     token_validation:
-      full_report_note: verification-gate — validateConsistency({}) with TIED_BASE_PATH=stdd/tied returned ok true (indexes, detail files, pseudocode).
-      full_report_ok: true
+      full_report_note: "verification-gate — validateConsistency({}) with TIED_BASE_PATH=stdd/tied returned ok true (indexes, detail files, pseudocode)."
+      full_report_ok: "true"
       pseudocode:
-        essence_pseudocode_empty: false
-        has_essence_pseudocode: true
+        essence_pseudocode_empty: "false"
+        has_essence_pseudocode: "true"
         ref_issues: []
-      scoped_token: IMPL-MCP_LEAP_PROPOSAL_QUEUE
-      tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied
-      tool: validateConsistency (mcp-server/dist/consistency-validator.js)
+      scoped_token: "IMPL-MCP_LEAP_PROPOSAL_QUEUE"
+      tied_base_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied"
+      tool: "validateConsistency (mcp-server/dist/consistency-validator.js)"
   s13_sync:
     checklist_s13:
-      checklist_version: agent_req_implementation_checklist v1.0.2
-      completed_date: 2026-03-28
-      verdict: TIED REQ/ARCH/IMPL + semantic-tokens aligned with leap-proposal-queue.ts, leap-proposal-queue.test.ts, leap-proposal-mcp.test.ts, tools/index.ts handlers
+      checklist_version: "agent_req_implementation_checklist v1.0.2"
+      completed_date: "2026-03-28"
+      verdict: "TIED REQ/ARCH/IMPL + semantic-tokens aligned with leap-proposal-queue.ts, leap-proposal-queue.test.ts, leap-proposal-mcp.test.ts, tools/index.ts handlers"
     process_tokens:
-      - PROC-AGENT_REQ_CHECKLIST
-      - PROC-TIED_DEV_CYCLE
+      - "PROC-AGENT_REQ_CHECKLIST"
+      - "PROC-TIED_DEV_CYCLE"
     sub_yaml_lint_paths:
-      - tied/architecture-decisions.yaml
-      - tied/architecture-decisions/ARCH-LEAP_PROPOSAL_QUEUE.yaml
-      - tied/citdp/CITDP-REQ-LEAP_PROPOSAL_QUEUE.yaml
-      - tied/implementation-decisions.yaml
-      - tied/implementation-decisions/IMPL-MCP_LEAP_PROPOSAL_QUEUE.yaml
-      - tied/requirements.yaml
-      - tied/requirements/REQ-LEAP_PROPOSAL_QUEUE.yaml
-      - tied/semantic-tokens.yaml
+      - "tied/architecture-decisions.yaml"
+      - "tied/architecture-decisions/ARCH-LEAP_PROPOSAL_QUEUE.yaml"
+      - "tied/citdp/CITDP-REQ-LEAP_PROPOSAL_QUEUE.yaml"
+      - "tied/implementation-decisions.yaml"
+      - "tied/implementation-decisions/IMPL-MCP_LEAP_PROPOSAL_QUEUE.yaml"
+      - "tied/requirements.yaml"
+      - "tied/requirements/REQ-LEAP_PROPOSAL_QUEUE.yaml"
+      - "tied/semantic-tokens.yaml"
     tied_validate_consistency:
       mcp_workspace:
-        result: ok true
-        tied_base_path_note: Server TIED_BASE_PATH=/Users/fareed/Documents/dev/go/bkpdir/tied (session workspace)
-        tool: mcp_tied-yaml_tied_validate_consistency
+        result: "ok true"
+        tied_base_path_note: "Server TIED_BASE_PATH=/Users/fareed/Documents/dev/go/bkpdir/tied (session workspace)"
+        tool: "mcp_tied-yaml_tied_validate_consistency"
       stdd:
-        command: cd /Users/fareed/Documents/dev/chatgpt/stdd/mcp-server && TIED_BASE_PATH=/Users/fareed/Documents/dev/chatgpt/stdd/tied node --input-type=module -e "import { validateConsistency } from './dist/consistency-validator.js'; validateConsistency({})"
-        result: ok true
-        tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied
-    yaml_writer_note: TIED_YAML_BYPASS — MCP yaml_detail_update/yaml_index_update target server TIED_BASE_PATH; stdd tied/ mutations this step used StrReplace + lint_yaml per AGENTS.md single-writer exception when bases differ
-  status: Active
+        command: "cd /Users/fareed/Documents/dev/chatgpt/stdd/mcp-server && TIED_BASE_PATH=/Users/fareed/Documents/dev/chatgpt/stdd/tied node --input-type=module -e \"import { validateConsistency } from './dist/consistency-validator.js'; validateConsistency({})\""
+        result: "ok true"
+        tied_base_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied"
+    yaml_writer_note: "TIED_YAML_BYPASS — MCP yaml_detail_update/yaml_index_update target server TIED_BASE_PATH; stdd tied/ mutations this step used StrReplace + lint_yaml per AGENTS.md single-writer exception when bases differ"
+  status: "Active"
   traceability:
     architecture:
-      - ARCH-LEAP_PROPOSAL_QUEUE
+      - "ARCH-LEAP_PROPOSAL_QUEUE"
     code_annotations:
-      - ARCH-LEAP_PROPOSAL_QUEUE
-      - IMPL-MCP_LEAP_PROPOSAL_QUEUE
-      - REQ-LEAP_PROPOSAL_QUEUE
+      - "ARCH-LEAP_PROPOSAL_QUEUE"
+      - "IMPL-MCP_LEAP_PROPOSAL_QUEUE"
+      - "REQ-LEAP_PROPOSAL_QUEUE"
     requirements:
-      - REQ-LEAP_PROPOSAL_QUEUE
+      - "REQ-LEAP_PROPOSAL_QUEUE"
     tests:
-      - 'leap-proposal-mcp.test.ts — LPQ-MCP composition: all tied_leap_proposal_* handler bindings (composition-integration)'
-      - 'leap-proposal-queue.test.ts — LPQ-CORE unit: lifecycle, session parse, LOAD_QUEUE BOM (S09)'
+      - "leap-proposal-mcp.test.ts — LPQ-MCP composition: all tied_leap_proposal_* handler bindings (composition-integration)"
+      - "leap-proposal-queue.test.ts — LPQ-CORE unit: lifecycle, session parse, LOAD_QUEUE BOM (S09)"

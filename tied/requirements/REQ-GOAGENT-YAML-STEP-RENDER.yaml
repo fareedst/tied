@@ -1,14 +1,14 @@
 REQ-GOAGENT-YAML-STEP-RENDER:
-  category: Tooling
-  detail_file: requirements/REQ-GOAGENT-YAML-STEP-RENDER.yaml
-  name: TDD loop and lead checklist YAML step renderers
-  priority: P1
+  category: "Tooling"
+  detail_file: "requirements/REQ-GOAGENT-YAML-STEP-RENDER.yaml"
+  name: "TDD loop and lead checklist YAML step renderers"
+  priority: "P1"
   satisfaction_criteria:
-    - criterion: Checklist and TDD step render terms are canonical in tied/vocab/agentstream.md; checklist_messages and tddloop_messages blocks in IMPL-GOAGENT-CHECKLIST and IMPL-GOAGENT-TDDLOOP pseudo-code
-  status: Implemented
+    - criterion: "Checklist and TDD step render terms are canonical in tied/vocab/agentstream.md; checklist_messages and tddloop_messages blocks in IMPL-GOAGENT-CHECKLIST and IMPL-GOAGENT-TDDLOOP pseudo-code"
+  status: "Implemented"
   traceability:
     architecture:
-      - ARCH-GOAGENT-YAML-STEPS
+      - "ARCH-GOAGENT-YAML-STEPS"
     implementation:
-      - IMPL-GOAGENT-CHECKLIST
-      - IMPL-GOAGENT-TDDLOOP
+      - "IMPL-GOAGENT-CHECKLIST"
+      - "IMPL-GOAGENT-TDDLOOP"

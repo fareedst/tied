@@ -1,8 +1,8 @@
 IMPL-GOAGENT-EXECUTOR:
   cross_references:
-    - ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON
-    - ARCH-GOAGENT-EXECUTOR
-    - REQ-GOAGENT-AGENT-EXECUTOR
-  detail_file: implementation-decisions/IMPL-GOAGENT-EXECUTOR.yaml
-  name: executor AgentArgv and Run stream-json
-  status: Active
+    - "ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON"
+    - "ARCH-GOAGENT-EXECUTOR"
+    - "REQ-GOAGENT-AGENT-EXECUTOR"
+  detail_file: "implementation-decisions/IMPL-GOAGENT-EXECUTOR.yaml"
+  name: "executor AgentArgv and Run stream-json"
+  status: "Active"

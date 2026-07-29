@@ -1,9 +1,9 @@
 ARCH-GOAGENT-EXECUTOR:
-  detail_file: architecture-decisions/ARCH-GOAGENT-EXECUTOR.yaml
-  name: Go subprocess executor for agent stream-json
-  status: Active
+  detail_file: "architecture-decisions/ARCH-GOAGENT-EXECUTOR.yaml"
+  name: "Go subprocess executor for agent stream-json"
+  status: "Active"
   traceability:
     implementation:
-      - IMPL-GOAGENT-EXECUTOR
+      - "IMPL-GOAGENT-EXECUTOR"
     requirements:
-      - REQ-GOAGENT-AGENT-EXECUTOR
+      - "REQ-GOAGENT-AGENT-EXECUTOR"

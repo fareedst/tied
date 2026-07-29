@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # [PROC-YAML_EDIT_LOOP] [REQ-TIED_SETUP]
-# How: Default lint pretty-prints each YAML path with yq -i -P (one file per invocation); --sort-lists runs yaml_list_sorter.rb; --sort-keys forwards optional map-key sort to the Ruby sorter.
+# How: Default lint canonicalizes each YAML path with yq -i 'sort_keys(.. style="double")' (one file per invocation; recursive key sort + double-quoted scalars; bool/int become string scalars); --sort-lists runs yaml_list_sorter.rb; --sort-keys forwards optional map-key sort to the Ruby sorter.
 set -euo pipefail
 
 tool_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
@@ -8,7 +8,7 @@ operation=lint
 
 usage() {
   printf 'usage: %s [options] [(-0|--null) | (-F|--find) [DIR [GLOB]]] [--] [file ...]\n' "${0##*/}" 1>&2
-  printf '  Default: validate and pretty-print each YAML file (yq -i -P, one file per invocation).\n' 1>&2
+  printf '  Default: canonicalize each YAML file (yq sort_keys(.. style="double"), one file per invocation).\n' 1>&2
   printf '  --sort-lists  sort qualifying list groups in place (Ruby); same file selection as default.\n' 1>&2
   printf '               Rejects the sort when semantic comparison fails (file unchanged).\n' 1>&2
   printf '  --sort-keys   with --sort-lists, also sort sibling map keys at every indent level.\n' 1>&2
@@ -39,8 +39,11 @@ lint_yaml_files() {
     fi
 
     # IMPORTANT: do not pass multiple files to one yq invocation.
-    # Multi-arg yq pretty-print can merge documents and corrupt files.
-    yq -i -P "$file" || rc=$?
+    # Multi-arg yq pretty-print can merge documents and corrupt the target.
+
+    # 2026-07-29 this format matches what Cursor generates, plus sorting
+    yq -i 'sort_keys(.. style="double")' "$file" || rc=$?
+
   done
 
   return "$rc"

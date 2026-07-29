@@ -1,7 +1,7 @@
 IMPL-GOAGENT-TEXT-SOURCES:
   cross_references:
-    - ARCH-GOAGENT-TEXT-SOURCES
-    - REQ-GOAGENT-TEXT-SOURCES
-  detail_file: implementation-decisions/IMPL-GOAGENT-TEXT-SOURCES.yaml
-  name: text package prompt file and argv turns
-  status: Active
+    - "ARCH-GOAGENT-TEXT-SOURCES"
+    - "REQ-GOAGENT-TEXT-SOURCES"
+  detail_file: "implementation-decisions/IMPL-GOAGENT-TEXT-SOURCES.yaml"
+  name: "text package prompt file and argv turns"
+  status: "Active"

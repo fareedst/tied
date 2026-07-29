@@ -358,19 +358,20 @@ with open('tied/requirements.yaml', 'w') as f:
 
 This is the **controlling loop** for creating or editing any TIED YAML (index or detail). No TIED record is considered valid for use until it has passed this loop.
 
-**`scripts/yaml_tool.sh`** — Primary project utility for YAML validation and list normalization. Default operation: validate and pretty-print each path in place (`yq -i -P`, **one file per invocation**). **`--sort-lists`** runs **`scripts/yaml_list_sorter.rb`** on the same path set (sorts **qualifying list groups**: 2+ consecutive same-indent `- ` lines). Optional **`--sort-keys`** (with **`--sort-lists`**) also alphabetizes sibling map keys at every indent level. **Block-scalar bodies** (`|`, `>`, and chomping variants) are **opaque**: string content is never sorted as keys or lists. Supports `-F/--find`, stdin, and NUL-separated paths like the former inline `lint_yaml.sh` implementation.
+**`scripts/yaml_tool.sh`** — Primary project utility for YAML validation and list normalization. Default operation: canonicalize each path in place with **double-quoted scalar lint** (`yq -i 'sort_keys(.. style="double")'`, **one file per invocation**): recursive key sort plus double-quoted scalars. **On-disk effect:** YAML bool/int scalars become **string scalars** (e.g. `e2e_only: "false"`); coerce after load when typed values are required. **`--sort-lists`** runs **`scripts/yaml_list_sorter.rb`** on the same path set (sorts **qualifying list groups**: 2+ consecutive same-indent `- ` lines). Optional **`--sort-keys`** (with **`--sort-lists`**) also alphabetizes sibling map keys at every indent level (Ruby path; distinct from default-lint key sort). **Block-scalar bodies** (`|`, `>`, and chomping variants) are **opaque** on the Ruby sort path: string content is never sorted as keys or lists. Supports `-F/--find`, stdin, and NUL-separated paths like the former inline `lint_yaml.sh` implementation.
 
-**`lint_yaml`** / **`scripts/lint_yaml.sh`** — Backward-compatible alias; delegates to **`yaml_tool.sh`**. Global shell function (or project-provided equivalent) that agents **must** use to validate YAML syntax and canonicalize formatting **in place**. It accepts **one or more** file paths; the implementation must process **each path independently** (typically one underlying `yq -i -P` per file, or equivalent). **Do not** pass multiple YAML paths to a **single raw `yq -i -P` command**: mikefarah `yq` merges multiple file arguments into one stream and corrupts files. Agents use `lint_yaml` or `yaml_tool.sh`, not ad-hoc multi-argument `yq`.
+**`lint_yaml`** / **`scripts/lint_yaml.sh`** — Backward-compatible alias; delegates to **`yaml_tool.sh`**. Global shell function (or project-provided equivalent) that agents **must** use to validate YAML syntax and canonicalize formatting **in place**. It accepts **one or more** file paths; the implementation must process **each path independently** (typically one underlying `yq -i 'sort_keys(.. style="double")'` per file). **Do not** pass multiple YAML paths to a **single raw `yq -i` command**: mikefarah `yq` merges multiple file arguments into one stream and corrupts files. Agents use `lint_yaml` or `yaml_tool.sh`, not ad-hoc multi-argument `yq`. MCP **`tied_token_rename`** uses the **same** yq expression when pretty-printing modified YAML.
 
 **Pseudo-code blocks (implementation reference):**
 
 ```
 procedure LINT_YAML_FILES(paths):
-  # [PROC-YAML_EDIT_LOOP] [REQ-TIED_SETUP]
-  # How: For each path, run yq -i -P independently; never batch multiple files in one yq invocation.
+  # [PROC-YAML_EDIT_LOOP] [REQ-TIED_SETUP] [IMPL-TIED_FILES]
+  # How: For each path, run yq -i 'sort_keys(.. style="double")' independently; never batch multiple files in one yq invocation.
+  # Contract: recursive key sort + double-quoted scalars; bool/int become string scalars on disk.
   FOR each path in paths:
     IF path not a regular file: record error; continue
-    RUN yq -i -P path
+    RUN yq -i 'sort_keys(.. style="double")' path
   RETURN aggregate exit status
 
 procedure SORT_QUALIFYING_LIST_GROUPS(paths, sort_keys=false):
