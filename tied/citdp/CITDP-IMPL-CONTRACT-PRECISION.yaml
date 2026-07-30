@@ -1,0 +1,84 @@
+CITDP-IMPL-CONTRACT-PRECISION:
+  change_definition:
+    current_behavior_prior: "Active IMPL essence_pseudocode contracts used INPUT/OUTPUT/DATA/CONTROL; Layer B schema lacked SHAPE-003..006; agent Phase B/D and checklists did not require PRE/POST/EFFECTS or related precision fields."
+    desired_behavior: "New/changed Active procedure blocks declare language-agnostic contract precision (PRE, POST, EFFECTS; FAILURE_MODES/DATA_TRANSITION/TERMINATION when applicable). Template stubs stay minimal. Untouched legacy Active blocks may use Layer B N/A pre-contract-grammar until next edit. Guides, template, AGENTS, vocab, agent checklist, processes, and pseudocode-validation-checklist (SHAPE-003..006 + minimum_gating_rules) aligned. Same commit adds docs/Netscape-Bookmark-HTML-Format.md reference note."
+    non_goals:
+      - "Mass-rewriting untouched Active IMPL sidecars to the new contract"
+      - "MCP structural parser for essence_pseudocode"
+      - "New REQ/ARCH/IMPL product tokens for contract precision"
+      - "Wiring Netscape bookmark format into agentstream or bookmark IMPLs/code in this change"
+    references:
+      - "AGENTS.md"
+      - "CHANGELOG.md"
+      - "docs/Netscape-Bookmark-HTML-Format.md"
+      - "templates/impl-essence-pseudocode-template.md"
+      - "templates/processes.md"
+      - "tied/docs/agent-req-implementation-checklist.md"
+      - "tied/docs/agent-req-implementation-checklist.yaml"
+      - "tied/docs/ai-principles.md"
+      - "tied/docs/implementation-decisions.md"
+      - "tied/docs/processes.md"
+      - "tied/docs/pseudocode-format-and-practices.md"
+      - "tied/docs/pseudocode-validation-checklist.yaml"
+      - "tied/docs/pseudocode-writing-and-validation.md"
+      - "tied/vocab/domain-references.md"
+      - "tied/vocab/pseudocode-and-citdp.md"
+    success_criteria:
+      - "CHANGELOG covers IMPL contract precision grammar and Netscape bookmark HTML format note"
+      - "CITDP-IMPL-CONTRACT-PRECISION recorded; no new REQ/ARCH/IMPL tokens"
+      - "Guides, template, agent checklist, processes, AGENTS, and vocab document contract precision and pre-contract-grammar migration"
+      - "SHAPE-003..006 present in pseudocode-validation-checklist.yaml and listed in minimum_gating_rules"
+      - "Unit/composition/E2E N/A documented (docs/process only; manual Layer B until parser exists)"
+    summary: "Add IMPL contract precision grammar (PRE/POST/EFFECTS/…) with SHAPE-003..006 gates and migration grace; align docs/checklists/vocab; include Netscape bookmark HTML format note in the same commit."
+    unchanged_behavior: "CONTROL remains optional env/flags/ordering distinct from EFFECTS. Domain vocabulary (tied/vocab) stays distinct from IMPL grammar keywords. Existing Active IMPL sidecars need not be rewritten until next edit."
+  completion_criteria:
+    verification_gate_notes: "Docs/process-only change: unit/composition/E2E N/A. Manual Layer B checklist is the enforcement path until an MCP structural parser exists. VALIDATE vocab preferred terms for contract precision and SHAPE-003..006. No REQ/ARCH/IMPL YAML edits."
+  impact_analysis:
+    impl_inventory_notes: "No production IMPL sidecar retrofit. Template and guide examples updated. Existing Active blocks use pre-contract-grammar N/A until edited. Secondary deliverable: docs/Netscape-Bookmark-HTML-Format.md (reference only)."
+    modules_or_boundaries: "Methodology docs under tied/docs, templates/, AGENTS.md, tied/vocab/pseudocode-and-citdp.md; CITDP under tied/citdp/. Out of scope: MCP parser, bookmark/agentstream code."
+    tied_tokens_affected:
+      - "PROC-AGENT_REQ_CHECKLIST"
+      - "PROC-IMPL_CODE_TEST_SYNC"
+      - "PROC-IMPL_PSEUDOCODE_TOKENS"
+      - "PROC-PSEUDOCODE_VALIDATION"
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: "Process-doc expansion of existing PROC tokens only; no REQ/ARCH/IMPL stack rewrite. Migration grace avoids LEAP into every Active sidecar."
+    record_status: "complete"
+    tied_stack_updates_required:
+      - "PROC docs/checklists/template/vocab only (done); no REQ/ARCH/IMPL detail edits"
+  record_identity:
+    change_request_id: "IMPL-CONTRACT-PRECISION"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    checklist_session_note: "change-definition: IMPL contract precision grammar + Netscape format note.\nimpact-discovery: docs, checklists, template, vocab, AGENTS; no code.\ntest-strategy: unit/composition/E2E N/A.\nverification-gate: SHAPE-003..006 + CHANGELOG + vocab VALIDATE.\nsync-tied-stack: PROC docs only; no new REQ/ARCH/IMPL.\nCITDP: this record."
+    checklist_step_completed: "persist-citdp-record"
+    checklist_version: "agent_req_implementation_checklist v1.7.0"
+    recorded_at: "2026-07-29"
+    tied_context:
+      architecture: []
+      implementation: []
+      processes:
+        - "PROC-AGENT_REQ_CHECKLIST"
+        - "PROC-IMPL_CODE_TEST_SYNC"
+        - "PROC-IMPL_PSEUDOCODE_TOKENS"
+        - "PROC-PSEUDOCODE_VALIDATION"
+      requirements: []
+    title: "IMPL contract precision grammar (SHAPE-003..006) + Netscape bookmark format note"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  risk_analysis:
+    risks:
+      - id: "RISK-CONTRACT-PREC-001"
+        description: "Agents continue authoring Active blocks with INPUT/OUTPUT only because no MCP parser enforces SHAPE-003..006."
+        likelihood: "Medium"
+        mitigation: "Checklist gates, Phase B flags, and CHANGELOG document manual Layer B; pre-contract-grammar limited to unchanged legacy blocks."
+        severity: "Medium"
+      - id: "RISK-CONTRACT-PREC-002"
+        description: "Authors confuse CONTROL (env/ordering) with EFFECTS (effect row)."
+        likelihood: "Medium"
+        mitigation: "Vocab and implementation-decisions.md distinguish CONTROL vs EFFECTS; template stubs show both."
+        severity: "Low"
+  tdd_sequence:
+    summary: "unit: N/A (docs/process only). composition: N/A. end-to-end: N/A (no bootstrap/seed or runtime behavior change). Enforcement: manual Layer B until a structural parser exists."
+  test_strategy:
+    matrix_notes: "No unit, composition, or E2E tests in this change request. Staged set is documentation, checklists, template, vocab, CITDP, and docs/Netscape-Bookmark-HTML-Format.md."
+    summary: "Confirm no production code/tests staged; record N/A for all test layers."

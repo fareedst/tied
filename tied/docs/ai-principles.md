@@ -37,6 +37,7 @@ This acknowledgment confirms that the AI agent has:
 2. **IMPL Pseudo-Code Token Comments (Most Critical)** `[PROC-IMPL_PSEUDOCODE_TOKENS]`
    - IMPL `essence_pseudocode` is the **most critical artifact** for implementation traceability. Without token comments in pseudo-code, traceability from REQ→ARCH→IMPL breaks and tests/code cannot be reliably aligned to requirements.
    - **Every block** in `essence_pseudocode` MUST have a comment that (1) names all REQ, ARCH, and IMPL reflected in that block and (2) states how that block implements those requirements. Top-level: one comment naming IMPL, ARCH, and REQ plus a one-line summary; sub-blocks (same set → comment only the "how"; different set → comment listing that set and how the sub-block implements it).
+   - **Contract precision** (language-agnostic): new and changed Active procedure blocks declare **PRE**, **POST**, and **EFFECTS** (plus **FAILURE_MODES** / **DATA_TRANSITION** / **TERMINATION** when applicable). See `tied/docs/implementation-decisions.md` § Preferred vocabulary; Layer B SHAPE-003..006. Untouched legacy Active blocks may use N/A `pre-contract-grammar` until next edit.
 
 3. **Documentation-First Development**
    - Requirements MUST be expanded into pseudo-code and architectural decisions before implementation.
@@ -94,7 +95,7 @@ This acknowledgment confirms that the AI agent has:
       - **Pre-commit (VALIDATE):** audit names in docs, `semantic-tokens.yaml`, TIED records, tests, and code vs the index before commit (`traceable-commit`).
     - **Inline during work:** **RESOLVE** before naming; **RECORD** when concepts appear or artifacts change — update glossary rows, naming bridges, UPPER_SNAKE block-name tables, and the alphabetical index in `tied/vocab/*.md` immediately.
     - Edit vocab files **directly** (plain Markdown, like IMPL pseudo-code sidecars); do **not** route through MCP or `lint_yaml`.
-    - This is **distinct** from the IMPL grammar "preferred vocabulary" (INPUT/OUTPUT/DATA keywords in `implementation-decisions.md`).
+    - This is **distinct** from the IMPL grammar "preferred vocabulary" (INPUT/OUTPUT/DATA/PRE/POST/EFFECTS keywords in `implementation-decisions.md`).
     - Standards: `tied/docs/vocabulary-index-analysis-and-standards.md`; routing index: `tied/vocab/routing.md`; full index (on-demand): `tied/vocab/domain-references.md`; full process: `tied/docs/processes.md` § `[PROC-VOCABULARY_INDEX]`.
 
 **Bugs vs requirements (operational rule):** Requirements describe desired behavior (WHAT and WHY). Bugs describe implementation failures. Do NOT document bugs as requirements; document bugs in architecture/implementation decisions with cross-reference to the requirement that should be satisfied. If a bug reveals missing behavior specification, add a requirement first, then fix.

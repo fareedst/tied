@@ -853,21 +853,27 @@ This checklist is organized into nine phases (A–I). Phases A–C are analytica
 
 4. **B1. Read and catalog contracts.** Read each IMPL's `essence_pseudocode` sequentially. For each, note:
    - INPUT/OUTPUT/DATA declarations (and CONTROL when present)
+   - Precision contract fields: PRE, POST, EFFECTS; FAILURE_MODES when errors are possible; DATA_TRANSITION when DATA is mutated or EFFECTS includes State; TERMINATION when recursion / WHILE / open-ended wait (prefer `total` otherwise)
    - Procedure names (UPPER_SNAKE or camelCase)
-   - Key branches (IF/ELSE), loops (FOR ... IN), error paths (ON error, RETURN error)
-   - Async boundaries (AWAIT, Promise)
+   - Key branches (IF/ELSE), loops (FOR ... IN), error paths (ON error, RETURN error) and whether error names appear in FAILURE_MODES
+   - Async boundaries (AWAIT, Promise) and whether EFFECTS includes `Async`
 
 5. **B2. Identify insufficient specifications.** Flag any of these as incomplete and requiring resolution before tests or code:
    - Missing INPUT or OUTPUT declarations
+   - Missing PRE, POST, or EFFECTS on a new or **changed** Active procedure block (Template stubs exempt; untouched legacy Active blocks may defer with documented N/A `pre-contract-grammar` until next edit)
+   - Missing FAILURE_MODES when OUTPUT includes error, or steps use ON error / fallible returns
+   - Missing DATA_TRANSITION when DATA is mutated or EFFECTS includes State
+   - Missing TERMINATION when recursion / WHILE / open-ended wait is present
    - Procedures referenced but not defined (called by name but body absent)
    - Branches without error handling (no ON error, no RETURN error on a fallible path)
    - Stub or template pseudo-code (`Template: placeholder for ...`) on an IMPL with `status: Active`
    - Blocks with no token comment (violates [PROC-IMPL_PSEUDOCODE_TOKENS])
 
 6. **B3. Identify contradictory specifications.** Compare across IMPLs in the set:
-   - **Shared DATA conflict** — two IMPLs read/write the same DATA key or structure with different assumptions (e.g., one assumes sync storage, another assumes async).
+   - **Shared DATA conflict** — two IMPLs read/write the same DATA key or structure with different assumptions (e.g., one assumes sync storage, another assumes async), or incompatible DATA_TRANSITION / PRE/POST on shared DATA.
+   - **EFFECTS conflict** — composed IMPLs claim incompatible effect rows on the same path (e.g., both mutate the same State without ordering).
    - **Ordering conflict** — IMPL-A expects to run before IMPL-B (e.g., index must be loaded before lookup), but IMPL-B has no such ordering constraint or assumes the reverse.
-   - **Incompatible OUTPUT types** — IMPL-A produces `{ result }` but IMPL-B expects `{ result, metadata }` from the same procedure.
+   - **Incompatible OUTPUT types** — IMPL-A produces `{ result }` but IMPL-B expects `{ result, metadata }` from the same procedure; or FAILURE_MODES sets disagree for the same error surface.
    - **Duplicate logic** — the same step appears in two IMPLs with different parameters or behavior; one must defer to the other or a shared procedure must be extracted.
 
 7. **B4. Resolve and update.** For each issue found in B2–B3:
@@ -913,7 +919,7 @@ This checklist is organized into nine phases (A–I). Phases A–C are analytica
 
 13. **D3. RED — write failing tests before production code.** Per [PROC-TIED_DEV_CYCLE] inner loop: write the test, run the suite, confirm the test fails for the expected reason. No production code in this step.
 
-14. **D4. Verify assertion matches pseudo-code OUTPUT.** For each test, check that the assertion corresponds to the OUTPUT or effect described in the pseudo-code block. If no programmatic assertion can be written for a block (e.g., platform-only behavior), mark it as `testability: e2e_only` in the IMPL detail and document the `e2e_only_reason` naming the platform constraint. Do not leave blocks silently untested.
+14. **D4. Verify assertion matches pseudo-code OUTPUT, POST, and FAILURE_MODES.** For each test, check that the assertion corresponds to the OUTPUT, POST predicates, and named FAILURE_MODES (not only a coarse success/error shape) described in the pseudo-code block. Test setup must satisfy PRE (CONTRACT-001). If no programmatic assertion can be written for a block (e.g., platform-only behavior), mark it as `testability: e2e_only` in the IMPL detail and document the `e2e_only_reason` naming the platform constraint. Do not leave blocks silently untested.
 
 #### Phase E — Derive code from pseudo-code (TDD, unit layer)
 
