@@ -42,6 +42,33 @@ type yamlLoopBackClearance struct {
 	ClearSlugs []string `yaml:"clear_slugs"`
 }
 
+// yamlBool accepts YAML bool or common string forms ("true"/"false") so linted
+// checklists that quote scalars still load. REQ-GOAGENT-YAML-STEP-RENDER.
+type yamlBool bool
+
+func (b *yamlBool) UnmarshalYAML(value *yaml.Node) error {
+	switch value.Kind {
+	case yaml.ScalarNode:
+		switch strings.ToLower(strings.TrimSpace(value.Value)) {
+		case "true", "yes", "1", "on":
+			*b = true
+			return nil
+		case "false", "no", "0", "off", "":
+			*b = false
+			return nil
+		default:
+			var v bool
+			if err := value.Decode(&v); err != nil {
+				return fmt.Errorf("agentstream_new_session: %w", err)
+			}
+			*b = yamlBool(v)
+			return nil
+		}
+	default:
+		return fmt.Errorf("agentstream_new_session: expected scalar, got kind %v", value.Kind)
+	}
+}
+
 type yamlStep struct {
 	Slug                  string                 `yaml:"slug"`
 	Title                 string                 `yaml:"title"`
@@ -52,7 +79,7 @@ type yamlStep struct {
 	References            []interface{}          `yaml:"references"`
 	Flow                  map[string]interface{} `yaml:"flow"`
 	Tracking              map[string]interface{} `yaml:"tracking"`
-	AgentstreamNewSession bool                   `yaml:"agentstream_new_session"`
+	AgentstreamNewSession yamlBool               `yaml:"agentstream_new_session"`
 }
 
 type yamlSub struct {
@@ -64,7 +91,7 @@ type yamlSub struct {
 	Outcomes              string                 `yaml:"outcomes"`
 	InvokedBy             []string               `yaml:"invoked_by"`
 	Flow                  map[string]interface{} `yaml:"flow"`
-	AgentstreamNewSession bool                   `yaml:"agentstream_new_session"`
+	AgentstreamNewSession yamlBool               `yaml:"agentstream_new_session"`
 }
 
 type renderedMessage struct {
@@ -150,7 +177,7 @@ func messagesRendered(path string, opts Options) ([]renderedMessage, error) {
 		out = append(out, renderedMessage{
 			text:              text,
 			stub:              stepPrimaryLabel(step),
-			chainFromPrevious: !step.AgentstreamNewSession,
+			chainFromPrevious: !bool(step.AgentstreamNewSession),
 		})
 	}
 	if opts.IncludeSubProcedures {
@@ -162,7 +189,7 @@ func messagesRendered(path string, opts Options) ([]renderedMessage, error) {
 			out = append(out, renderedMessage{
 				text:              text,
 				stub:              subPrimaryLabel(sub),
-				chainFromPrevious: !sub.AgentstreamNewSession,
+				chainFromPrevious: !bool(sub.AgentstreamNewSession),
 			})
 		}
 	}

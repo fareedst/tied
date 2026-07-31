@@ -1,0 +1,103 @@
+CITDP-REQ-MODULE_VALIDATION-COMPOSITION:
+  change_definition:
+    current_behavior_prior: "Module validation was a five-phase lifecycle ending at integrate-after-unit-validation. Binding/glue was often deferred to E2E; no canonical binding inventory or UI-free composition gate. yaml_list_sorter alphabetized all qualifying list groups including order-preserving keys such as recommended_validation_order. Checklist YAML bools quoted by double-quoted scalar lint could break agentstream_new_session parsing."
+    desired_behavior: "Six-phase MODULE_VALIDATION_LIFECYCLE with COMPOSITION_BINDING_VALIDATION: binding inventory + UI-free composition evidence before integration; E2E only for named platform constraints. Guide composition-coverage.md; LEAP into REQ/ARCH/IMPL; vocab terms binding inventory and composition evidence; agentstream composition coverage tests; yaml_list_sorter skips order/*_order/order_*/_*order_* lists; checklist coerces quoted bools."
+    non_goals:
+      - "Mass retrofit of every client IMPL sidecar to composition inventory"
+      - "New product REQ/ARCH/IMPL tokens beyond MODULE_VALIDATION stack"
+      - "Playwright/browser E2E suite in this change"
+    references:
+      - "CHANGELOG.md"
+      - "README.md"
+      - "scripts/yaml_list_sorter.rb"
+      - "scripts/yaml_list_sorter_test.rb"
+      - "tied/architecture-decisions/ARCH-MODULE_VALIDATION.yaml"
+      - "tied/docs/agent-req-implementation-checklist.yaml"
+      - "tied/docs/composition-coverage.md"
+      - "tied/docs/implementation-order.md"
+      - "tied/docs/processes.md"
+      - "tied/implementation-decisions/IMPL-MODULE_VALIDATION-pseudocode.md"
+      - "tied/requirements/REQ-MODULE_VALIDATION.yaml"
+      - "tied/vocab/pseudocode-and-citdp.md"
+      - "tied/vocab/tied-methodology.md"
+      - "tools/agentstream/checklist/composition_coverage_test.go"
+      - "tools/agentstream/pipeline/composition_coverage_test.go"
+    success_criteria:
+      - "CHANGELOG Unreleased summarizes the change"
+      - "CITDP-REQ-MODULE_VALIDATION-COMPOSITION recorded"
+      - "composition-coverage.md documents inventory columns and E2E exclusion"
+      - "Composition: agentstream checklist/pipeline composition_coverage_test.go pass"
+      - "E2E: N/A — no UI-required behavior in this change"
+      - "IMPL sidecar has contract-precise MODULE_VALIDATION_LIFECYCLE and COMPOSITION_BINDING_VALIDATION"
+      - "REQ/ARCH/IMPL MODULE_VALIDATION describe composition gate and binding inventory"
+      - "Unit: yaml_list_sorter order-key tests and checklist quoted-bool test pass"
+      - "Vocab RECORD for binding inventory and composition evidence (preferred terms + alphabetical index)"
+    summary: "Elevate composition binding validation into MODULE_VALIDATION (REQ/ARCH/IMPL), document binding inventory, prove agentstream composition seams, and preserve ordered YAML lists / quoted checklist bools."
+    unchanged_behavior: "Independent unit validation before integration remains mandatory. Domain vocab stays distinct from IMPL grammar PRE/POST/EFFECTS. Double-quoted scalar lint behavior unchanged except consumers must coerce quoted bools."
+  completion_criteria:
+    verification_gate_notes: "Run ruby scripts/yaml_list_sorter_test.rb; go test ./checklist/ ./pipeline/ under tools/agentstream; tied_validate_consistency; vocab VALIDATE for binding inventory / composition evidence."
+  impact_analysis:
+    impl_inventory_notes: "IMPL-MODULE_VALIDATION sidecar rewritten to six phases + COMPOSITION_BINDING_VALIDATION. Supporting code: yaml_list_sorter order-preserving keys; checklist yamlBool; composition_coverage tests. Docs: composition-coverage.md and process/checklist/README mirrors."
+    modules_or_boundaries: "MODULE_VALIDATION methodology stack; yaml_list_sorter; agentstream checklist + pipeline composition seams. Out of scope: full client tree retrofit of every binding inventory."
+    tied_tokens_affected:
+      - "ARCH-MODULE_VALIDATION"
+      - "IMPL-MODULE_VALIDATION"
+      - "PROC-AGENT_REQ_CHECKLIST"
+      - "PROC-TEST_STRATEGY"
+      - "PROC-TIED_DEV_CYCLE"
+      - "PROC-YAML_EDIT_LOOP"
+      - "REQ-MODULE_VALIDATION"
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: "None material — composition gate elevated IMPL→ARCH→REQ in same work item; vocab and CITDP updated."
+    record_status: "complete"
+    tied_stack_updates_required:
+      - "ARCH-MODULE_VALIDATION composition boundaries (done)"
+      - "IMPL-MODULE_VALIDATION six-phase + composition block (done)"
+      - "REQ-MODULE_VALIDATION satisfaction + verification (done)"
+      - "Vocab RECORD binding inventory / composition evidence (done)"
+  record_identity:
+    change_request_id: "REQ-MODULE_VALIDATION-COMPOSITION"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    checklist_session_note: "change-definition: composition binding validation for MODULE_VALIDATION.\nimpact-discovery: REQ/ARCH/IMPL MODULE_VALIDATION, processes, checklist, yaml_list_sorter, agentstream composition tests.\ntest-strategy: unit sorter + quoted bool; composition checklist/pipeline gates; E2E N/A.\nverification-gate: tests + tied_validate_consistency + CHANGELOG + vocab VALIDATE.\nsync-tied-stack: LEAP IMPL→ARCH→REQ done.\nCITDP: this record."
+    checklist_step_completed: "persist-citdp-record"
+    checklist_version: "agent_req_implementation_checklist v1.7.0"
+    recorded_at: "2026-07-31"
+    tied_context:
+      architecture:
+        - "ARCH-MODULE_VALIDATION"
+      implementation:
+        - "IMPL-MODULE_VALIDATION"
+      processes:
+        - "PROC-AGENT_REQ_CHECKLIST"
+        - "PROC-LEAP"
+        - "PROC-TEST_STRATEGY"
+        - "PROC-TIED_DEV_CYCLE"
+        - "PROC-VOCABULARY_INDEX"
+        - "PROC-YAML_EDIT_LOOP"
+      requirements:
+        - "REQ-MODULE_VALIDATION"
+    title: "Composition binding validation for MODULE_VALIDATION (UI-free gates + ordered YAML lists)"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  risk_analysis:
+    risks:
+      - id: "RISK-COMP-001"
+        description: "Agents still mark entry-point wiring as e2e_only without named platform constraint."
+        likelihood: "Medium"
+        mitigation: "composition-coverage.md decision gate; REQ satisfaction criteria; checklist end-to-end-ui tasks require platform constraint."
+        severity: "Medium"
+      - id: "RISK-COMP-002"
+        description: "yaml_list_sorter order-key heuristic misses non-underscore order spellings and silently reorders semantic sequences."
+        likelihood: "Low"
+        mitigation: "Document order / *_order / order_* / *_order_* pattern in vocab and sorter header; unit tests cover recommended_validation_order and bare order."
+        severity: "Medium"
+      - id: "RISK-COMP-003"
+        description: "Quoted bool coercion limited to checklist agentstream_new_session; other YAML bool fields remain string after lint."
+        likelihood: "Medium"
+        mitigation: "yamlBool helper in checklist; CHANGELOG notes lint scalar coercion; extend coercion when other fields break."
+        severity: "Low"
+  tdd_sequence:
+    summary: "unit: yaml_list_sorter order-preserving keys; checklist quoted agentstream_new_session. composition: checklist + pipeline composition_coverage_test.go (ordering, binding instructions, pipeline↔checklist). end-to-end: N/A (no UI-required platform constraint in this change)."
+  test_strategy:
+    matrix_notes: "Unit: scripts/yaml_list_sorter_test.rb; checklist TestLoadTurns_agentstreamNewSession_quotedString. Composition: tools/agentstream/checklist/composition_coverage_test.go and pipeline/composition_coverage_test.go. E2E: N/A — composition-testable seams only."
+    summary: "Prove composition gate rendering and pipeline binding without UI; prove order-key skip and quoted-bool parse."

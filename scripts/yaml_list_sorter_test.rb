@@ -79,6 +79,101 @@ assert sorted.index('- REQ-A') < sorted.index('- REQ-M'), 'REQ-A before REQ-M'
 assert sorted.index('- REQ-M') < sorted.index('- REQ-Z'), 'REQ-M before REQ-Z'
 f3.close!
 
+# --- order / *_order / order_* / *_order_*: list order preserved ---
+forder = write_temp_yaml!(<<~YAML)
+  recommended_validation_order:
+    - "tied_data"
+    - "parsing"
+    - "schema"
+  cross_references:
+    - REQ-Z
+    - REQ-A
+YAML
+out, _err, st = run_sorter([forder.path])
+assert st.success?, "order key skip: #{_err}"
+order_body = File.read(forder.path)
+order_block = order_body[/recommended_validation_order:\n(.*?)\ncross_references:/m, 1]
+assert order_block.index('"tied_data"') < order_block.index('"parsing"'),
+       "recommended_validation_order must keep document order:\n#{order_body}"
+assert order_block.index('"parsing"') < order_block.index('"schema"'),
+       "recommended_validation_order mid sequence:\n#{order_body}"
+refs_block = order_body[/cross_references:\n(.*)\z/m, 1]
+assert refs_block.index('- REQ-A') < refs_block.index('- REQ-Z'),
+       "non-order sibling list still sorted:\n#{order_body}"
+assert out.include?('groups found=1'), "order key list must not count as groups found: #{out}"
+assert out.include?('groups modified=1'), "only cross_references modified: #{out}"
+forder.close!
+
+# --- bare key "order:" and same-indent *_order preserved ---
+forder_bare = write_temp_yaml!(<<~YAML)
+  order:
+    - zebra
+    - alpha
+YAML
+_out, _err, st = run_sorter([forder_bare.path])
+assert st.success?, "bare order key: #{_err}"
+bare_body = File.read(forder_bare.path)
+assert bare_body.index('- zebra') < bare_body.index('- alpha'),
+       "bare order: list must stay unsorted:\n#{bare_body}"
+forder_bare.close!
+
+forder_si = write_temp_yaml!(<<~YAML)
+  implementation_order:
+  - zebra
+  - alpha
+YAML
+_out, _err, st = run_sorter([forder_si.path])
+assert st.success?, "same-indent order key: #{_err}"
+si_order_body = File.read(forder_si.path)
+assert si_order_body =~ /implementation_order:\n- zebra\n- alpha/m,
+       "same-indent *_order list preserved:\n#{si_order_body}"
+forder_si.close!
+
+# --- order_* and *_order_* patterns preserved; "border" still sorts ---
+forder_prefix = write_temp_yaml!(<<~YAML)
+  order_steps:
+    - zebra
+    - alpha
+  step_order_list:
+    - zebra
+    - alpha
+  border:
+    - zebra
+    - alpha
+YAML
+_out, _err, st = run_sorter([forder_prefix.path])
+assert st.success?, "order_* / *_order_* / border: #{_err}"
+prefix_body = File.read(forder_prefix.path)
+steps_block = prefix_body[/order_steps:\n(.*?)\nstep_order_list:/m, 1]
+assert steps_block.index('- zebra') < steps_block.index('- alpha'),
+       "order_* list preserved:\n#{prefix_body}"
+mid_block = prefix_body[/step_order_list:\n(.*?)\nborder:/m, 1]
+assert mid_block.index('- zebra') < mid_block.index('- alpha'),
+       "*_order_* list preserved:\n#{prefix_body}"
+border_block = prefix_body[/border:\n(.*)\z/m, 1]
+assert border_block.index('- alpha') < border_block.index('- zebra'),
+       "border must still sort (not an order token):\n#{prefix_body}"
+forder_prefix.close!
+
+# --- nested non-order list under order-keyed maps still sorts ---
+forder_nested = write_temp_yaml!(<<~YAML)
+  recommended_validation_order:
+    - name: first
+      tags:
+        - zebra
+        - alpha
+    - name: second
+YAML
+_out, _err, st = run_sorter([forder_nested.path])
+assert st.success?, "nested under order key: #{_err}"
+nested_order_body = File.read(forder_nested.path)
+assert nested_order_body.index('name: first') < nested_order_body.index('name: second'),
+       "order key top-level items preserved:\n#{nested_order_body}"
+tags_block = nested_order_body[/tags:\n(.*?)(?:\n    - name: second|\z)/m, 1]
+assert tags_block.index('- alpha') < tags_block.index('- zebra'),
+       "nested non-order tags list still sorted:\n#{nested_order_body}"
+forder_nested.close!
+
 # --- last line without trailing newline (EOF): must not merge with prior line after sort ---
 feof = write_temp_yaml!(<<~YAML)
   key:

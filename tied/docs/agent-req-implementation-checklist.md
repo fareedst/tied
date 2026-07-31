@@ -825,7 +825,7 @@ flowchart TD
 | `tied/docs/processes.md` | Canonical definitions for all `[PROC-*]` tokens referenced in this checklist |
 | `tied/docs/pseudocode-writing-and-validation.md` | Unified IMPL pseudo-code guide: REQ vs post-fix tracks, MCP/sidecar mechanics, literal block linkage, phases A–I, LEAP, validation |
 | `tied/docs/LEAP.md` | LEAP rationale: why IMPL pseudo-code beats hunting through source |
-| `tied/docs/implementation-order.md` | Mandatory implementation order (tests → TDD → glue → E2E → close loop) |
+| `tied/docs/implementation-order.md` | Mandatory implementation order (unit tests → unit TDD → composition tests → composition code → justified E2E → close loop) |
 | `tied/docs/methodology-diagrams.md` | Visual diagrams for the traceability stack, dev cycle, TDD inner loop, CITDP, and YAML edit loop |
 | `tied/docs/ai-principles.md` | Agent principles, checklists, change impact tracking matrix |
 | `tied/docs/implementation-decisions.md` | IMPL detail schema, pseudo-code rules, preferred vocabulary, collision detection |

@@ -124,10 +124,7 @@ steps:
 // [IMPL-GOAGENT-CHECKLIST-CONTROL] [ARCH-GOAGENT-CHECKLIST-CONTROL] [REQ-GOAGENT-CHECKLIST-CONTROL]
 // How: Canonical checklist slice from flag-contradictory-specs through unit-refactor includes control target and emitter steps.
 func TestBuild_canonicalChecklistControlSliceIncludesTargetAndEmitter(t *testing.T) {
-	checklistPath := filepath.Clean("../../tied/docs/agent-req-implementation-checklist.yaml")
-	if _, err := os.Stat(checklistPath); err != nil {
-		t.Skipf("canonical checklist not available: %v", err)
-	}
+	checklistPath := findCanonicalChecklist(t)
 	turns, err := Build(Input{
 		LeadChecklistYAML:       checklistPath,
 		LeadChecklistSkipSub:    true,

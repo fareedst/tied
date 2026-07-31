@@ -315,18 +315,21 @@ Several blocks are documented this way (tokens + text), making the pseudo-code t
 
 ### How TIED with LEAP develops tests, code, and E2E, then closes the loop
 
-1. **Tests first (TDD)**  
-   Tests are written to **conform to** the IMPL pseudo-code; test names and comments carry the same REQ/ARCH/IMPL tokens. No production code yet (or only the minimum needed to make the first test pass). Define tests that validate each IMPL block (e.g. unit tests for “directory created,” “files copied,” “index YAML parseable”; integration tests for “full bootstrap produces valid tied/ layout.” Test names and comments reference the same tokens (e.g. `[REQ-TIED_SETUP]`, `[IMPL-TIED_FILES]`).
-2. **Code via TDD**  
-   Code is written to **satisfy** the tests. The **entire** IMPL pseudo-code is implemented via TDD: write test → make it pass → refactor; repeat until every IMPL block is covered. If behavior discovered during TDD **differs** from the IMPL, **elevate** the change into IMPL first (LEAP bottom-up), then adjust code; or adjust code to match the IMPL. If scope changed, propagate to ARCH and REQ in the same work item.
+1. **Unit tests first (TDD)**  
+   Unit tests are written to **conform to** the IMPL pseudo-code; test names and comments carry the same REQ/ARCH/IMPL tokens. No production code yet (or only the minimum needed to make the first test pass). Define tests that validate each unit-classified IMPL block (e.g. unit tests for “directory created,” “files copied,” “index YAML parseable”). Test names and comments reference the same tokens (e.g. `[REQ-TIED_SETUP]`, `[IMPL-TIED_FILES]`).
+2. **Unit code via TDD**  
+   Code is written to **satisfy** the unit tests. The **entire** unit-testable IMPL pseudo-code is implemented via TDD: write test → make it pass → refactor; repeat until every unit block is covered. If behavior discovered during TDD **differs** from the IMPL, **elevate** the change into IMPL first (LEAP bottom-up), then adjust code; or adjust code to match the IMPL. If scope changed, propagate to ARCH and REQ in the same work item.
 
-3. **Binding / glue**  
-   After TDD, write **binding, non-unit-test-covered code** (entry points, platform wiring, manifest, etc.) so the full REQ/ARCH/IMPL can run. Document any non-trivial glue in the IMPL (e.g. `e2e_only_reason` or `testability: e2e_only`).
+3. **Composition tests first**  
+   After unit tests pass, for every **binding between units** (event listeners, IPC, entry-point delegation, wiring), write **failing** composition tests **before** composition code. Each test verifies trigger → callee → arguments → effect **without invoking the UI**. See [tied/docs/composition-coverage.md](tied/docs/composition-coverage.md).
 
-4. **E2E**  
-   E2E tests are written **after** binding code to **protect** the glue and the most basic features.
+4. **Composition code via TDD**  
+   Implement binding/wiring/entry-point code **only** to satisfy the composition tests. No composition code without a preceding failing composition test. Document remaining platform-constrained glue with `e2e_only_reason` naming a specific constraint.
 
-5. **Closing the loop**  
+5. **E2E (UI-only, justified)**  
+   E2E tests cover behavior that **requires UI invocation**. Each E2E test must justify why composition-level testing is insufficient. E2E does **not** substitute for composition tests of bindings.
+
+6. **Closing the loop**  
    When all tests pass and all requirements are met, **update TIED** to match the implementation: IMPL `code_locations`, `traceability.tests`, and any refined `essence_pseudocode`; ARCH/REQ if scope or satisfaction criteria changed. Run `tied_validate_consistency` so the full stack (REQ ↔ ARCH ↔ IMPL ↔ tests ↔ code) remains consistent. This **propagation** (IMPL → ARCH → REQ when scope changes) is LEAP keeping the stack consistent.
 
 **LEAP** is the loop that keeps the plan (IMPL) in sync with tests and code and feeds changes back into TIED (REQ/ARCH/IMPL) so the written record stays the source of truth.

@@ -14,13 +14,13 @@
 
 | Pri | File | Keywords / When to read |
 |-----|------|------------------------|
-| 1 | [tied-methodology.md](tied-methodology.md) | TIED layout, semantic tokens, module validation, bootstrap, methodology vs project YAML, PROC-* process names, `copy_files.sh`, detail files, `yaml_tool`, `yaml_list_sorter`, sort map keys, `yaml_semantic_compare`, `compare_yaml_dirs` |
+| 1 | [tied-methodology.md](tied-methodology.md) | TIED layout, semantic tokens, module validation, binding inventory, composition evidence, bootstrap, methodology vs project YAML, PROC-* process names, `copy_files.sh`, detail files, `yaml_tool`, `yaml_list_sorter`, sort map keys, `yaml_semantic_compare`, `compare_yaml_dirs` |
 | 2 | [tied-yaml-mcp.md](tied-yaml-mcp.md) | TIED YAML MCP, `tied-cli`, bundled skill, `TIED_BASE_PATH`, validation, verify, cycles, backlog, scoped analysis, token rename, usage metrics, `args_signature`, `TIED_MCP_COLLECT_METRICS` |
 | 2b | [feedback-to-tied.md](feedback-to-tied.md) | `feedback.yaml`, `tied_feedback_add`, `tied_feedback_export`, feature_request, bug_report, methodology_improvement |
 | 3 | [leap-proposal-queue.md](leap-proposal-queue.md) | LEAP proposals, non-canonical proposal, pending/approved/rejected/applied, `tied_leap_proposal_*`, leap-proposals audit |
 | 4 | [agentstream.md](agentstream.md) | Go `agentstream`, pipeline, turns, checklist render, executor, HTML format, MCP preflight, feature-spec batch |
 | 4b | [agent-stream-ruby.md](agent-stream-ruby.md) | Ruby ATDD runner, `agent-stream`, TddLoopPrompts, export_tdd_prompts, stream-json, Open3 |
-| 5 | [pseudocode-and-citdp.md](pseudocode-and-citdp.md) | Domain vocab vs IMPL grammar, three-way alignment, UPPER_SNAKE blocks, CITDP record naming, essence_pseudocode, sub-vocabulary-sync |
+| 5 | [pseudocode-and-citdp.md](pseudocode-and-citdp.md) | Domain vocab vs IMPL grammar, contract precision, binding inventory, composition evidence, three-way alignment, UPPER_SNAKE blocks, CITDP record naming, essence_pseudocode, sub-vocabulary-sync |
 | — | [config-discovery.md](config-discovery.md) | Layered YAML config, project-local layer, exclude_patterns, `(proposed)` terms |
 
 ---

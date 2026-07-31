@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # [PROC-YAML_EDIT_LOOP] [REQ-TIED_SETUP]
-# How: Default lint canonicalizes each YAML path with yq -i 'sort_keys(.. style="double")' (one file per invocation; recursive key sort + double-quoted scalars; bool/int become string scalars); --sort-lists runs yaml_list_sorter.rb; --sort-keys forwards optional map-key sort to the Ruby sorter.
+# How: Default lint canonicalizes each YAML path with yq -i 'sort_keys(.. style="double")' (one file per invocation; recursive key sort + double-quoted scalars; bool/int become string scalars); --sort-lists runs yaml_list_sorter.rb (skips lists under keys matching order / *_order / order_* / *_order_*); --sort-keys forwards optional map-key sort to the Ruby sorter.
 set -euo pipefail
 
 tool_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
@@ -10,6 +10,7 @@ usage() {
   printf 'usage: %s [options] [(-0|--null) | (-F|--find) [DIR [GLOB]]] [--] [file ...]\n' "${0##*/}" 1>&2
   printf '  Default: canonicalize each YAML file (yq sort_keys(.. style="double"), one file per invocation).\n' 1>&2
   printf '  --sort-lists  sort qualifying list groups in place (Ruby); same file selection as default.\n' 1>&2
+  printf '               Skips lists under map keys matching order / *_order / order_* / *_order_*.\n' 1>&2
   printf '               Rejects the sort when semantic comparison fails (file unchanged).\n' 1>&2
   printf '  --sort-keys   with --sort-lists, also sort sibling map keys at every indent level.\n' 1>&2
   printf '  -F, --find [DIR [GLOB]]  run find internally (default DIR=. GLOB=*.yaml);\n' 1>&2

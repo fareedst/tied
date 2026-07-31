@@ -29,7 +29,7 @@ For each in-scope IMPL token, produce or update tied/implementation-decisions/IM
 
 - Every logical block (typically one Markdown ## section) describes the **same** control flow, branches, data contracts, and error paths that the **tests prove** and the **production code implements**.
 - Every block has a **block lead** ([PROC-IMPL_PSEUDOCODE_TOKENS]): bracket tokens in order IMPL, ARCH, REQ when all three appear, plus how the block implements them.
-- Pseudo-code is **language-agnostic** (INPUT/OUTPUT/DATA/CONTROL, procedures, IF/ELSE, ON error). Do **not** paste host-language source into the sidecar.
+- Pseudo-code is **language-agnostic** (INPUT/OUTPUT/DATA/CONTROL; PRE/POST/EFFECTS and applicable FAILURE_MODES/DATA_TRANSITION/TERMINATION for new/changed Active blocks; procedures, IF/ELSE, ON error). Do **not** paste host-language source into the sidecar. Unchanged legacy Active blocks may keep N/A `pre-contract-grammar` until next edit.
 - The **same** block-lead text (verbatim) appears in the matching test locus and production locus. If comments exist but differ, update comments to match the sidecar after the sidecar is correct—not paraphrased.
 
 Do **not** change product logic or test assertions unless you discover a definite bug; this task is documentation and traceability alignment, not a feature rewrite.
@@ -54,7 +54,7 @@ For each IMPL, edit or create IMPL-{TOKEN}-pseudocode.md from templates/impl-ess
 - Start from **tests**: names, arrange/act/assert, mocks, expected OUTPUT/effects, edge cases, error expectations.
 - Cross-check **production code**: branches, early returns, delegation to other IMPLs, shared DATA, ordering.
 - One ## block per logical unit (function, workflow step, binding, or validation catalog section per project policy).
-- Per block: block lead → Contract (INPUT/OUTPUT/DATA/CONTROL) → PROCEDURE steps (one action per line) → branches/errors.
+- Per block: block lead → Contract (INPUT/OUTPUT/DATA/CONTROL; PRE/POST/EFFECTS; FAILURE_MODES/DATA_TRANSITION/TERMINATION when applicable) → PROCEDURE steps (one action per line) → branches/errors.
 - Sub-blocks with the same token set: comment **how** only. Different token set: full IMPL/ARCH/REQ list and how.
 - If behavior implies missing ARCH or REQ scope, apply [PROC-LEAP]: update IMPL first, then ARCH, then REQ in the same work item.
 

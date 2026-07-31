@@ -1,15 +1,74 @@
 # [IMPL-MODULE_VALIDATION] [ARCH-MODULE_VALIDATION] [REQ-MODULE_VALIDATION]
-# Summary: Five-phase lifecycle — identify module boundaries, build with DI, validate in isolation, document, integrate only when green.
+# Summary: Six-phase lifecycle — identify module boundaries, build with DI, validate in isolation, document, prove every binding with UI-free composition tests, integrate only when green; E2E only for named platform constraints.
 
-# How: Contract — INPUT/OUTPUT/CONTROL for MODULE_VALIDATION_LIFECYCLE below (same IMPL/ARCH/REQ).
-# How: INPUT — module boundary spec; interfaces; mocks and test doubles.
-# How: OUTPUT — validation evidence (passing tests, notes); go/no-go for integration.
-# How: CONTROL — integration blocked until independent validation passes.
+## MODULE_VALIDATION_LIFECYCLE
+# How: Contract-precise lifecycle gate — independent module validation before any binding composition; composition evidence required before integration; E2E excluded by default.
+
+Contract:
+  INPUT: module_boundary_spec; interface_contracts; dependency_mocks_and_doubles; binding_inventory_rows
+  OUTPUT: validation_evidence; composition_evidence; go_no_go_for_integration
+  DATA: documented_boundaries; validation_results; binding_inventory
+  CONTROL: integration_blocked_until_independent_and_composition_gates_pass
+  PRE: module_boundary_spec identifies logical modules with clear interfaces; binding_inventory lists every trigger→callee seam in scope
+  POST: every module has passing independent validation; every binding_inventory row has a composition test locus; go_no_go is allow only when both gates pass
+  EFFECTS: State — validation_results and composition_evidence recorded; Control — integration allowed or blocked
+  FAILURE_MODES: MISSING_BOUNDARIES; INDEPENDENT_VALIDATION_FAILED; MISSING_BINDING_INVENTORY; MISSING_COMPOSITION_EVIDENCE; COMPOSITION_BINDING_FAILED; UNJUSTIFIED_E2E_ONLY
+  DATA_TRANSITION: documented_boundaries empty→populated (phase 1); validation_results pending→pass|fail (phase 3–4); binding_inventory draft→proven (phase 5); go_no_go blocked→allow when all gates green
+  TERMINATION: total — finite phases; no open wait
 
 procedure MODULE_VALIDATION_LIFECYCLE:
-  # How: Phases 1–5 — document boundaries; implement with DI; unit + contract + edge-case tests; record results; integration tests on combined behavior.
-  # How: Gate — blocks integration with other IMPLs until module-local validation passes (ordering: validate before compose).
-  # How: Branch — validation or documentation failure; no integration until fixed.
-  IF phase 3 or 4 fails: RETURN without integration; fix module or revise boundaries
-  # How: Branch — combined behavior contradicts module contracts after integration attempt.
-  IF phase 5 fails: RETURN; treat as integration defect against documented contracts
+  # How: Phase 1 — document boundaries, interfaces, contracts, dependencies, validation criteria, and initial binding inventory.
+  DOCUMENT module boundaries, interfaces, contracts, dependencies, validation criteria
+  BUILD binding_inventory with columns: Binding_ID, Trigger, Callee, Arguments, Effect, Ordering_PRE, Failure_mode, Composition_test, E2E_flag
+  # How: Phase 2 — develop module independently with dependency injection.
+  DEVELOP module with injectable collaborators (no hard-wired untested peers)
+  # How: Phase 3 — unit + contract + edge-case + error-path validation with mocks/doubles.
+  RUN independent unit and contract tests with mocked dependencies
+  RUN edge_case and error_handling validation
+  # How: Phase 4 — record validation results, limitations, assumptions.
+  DOCUMENT validation_results including passed tests, limitations, assumptions
+  IF independent validation fails:
+    RETURN FAILURE_MODE INDEPENDENT_VALIDATION_FAILED without integration
+  # How: Phase 5 — COMPOSITION_BINDING_VALIDATION (same token set): one failing composition test per binding, then minimal wiring; UI-free.
+  CALL COMPOSITION_BINDING_VALIDATION(binding_inventory)
+  IF composition gate fails:
+    RETURN without integration; fix binding or revise inventory
+  # How: Phase 6 — integrate only after independent + composition gates pass; combined behavior must honor contracts.
+  INTEGRATE validated modules
+  RUN integration assertions on combined behavior against documented contracts
+  IF phase 6 fails:
+    RETURN; treat as integration defect against documented contracts
+  SET go_no_go = allow
+
+## COMPOSITION_BINDING_VALIDATION
+# How: UI-free composition gate for every binding — failing composition test before wiring; E2E only with named platform constraint.
+
+Contract:
+  INPUT: binding_inventory; independently_validated_modules
+  OUTPUT: composition_evidence_per_binding; remaining_e2e_only_rows_with_named_constraint
+  DATA: binding_inventory
+  CONTROL: no_composition_code_without_failing_composition_test
+  PRE: every module in binding_inventory collaborators has passed independent validation; each row names Trigger, Callee, Arguments, Effect
+  POST: each composition-testable row has a RED-then-GREEN composition test verifying trigger→callee→arguments→effect without UI; each e2e_only row names a specific platform constraint
+  EFFECTS: State — binding_inventory rows marked proven or e2e_only; Tests — composition tests exist and pass for non-E2E rows
+  FAILURE_MODES: MISSING_BINDING_INVENTORY; MISSING_COMPOSITION_EVIDENCE; COMPOSITION_BINDING_FAILED; UNJUSTIFIED_E2E_ONLY
+  DATA_TRANSITION: binding_inventory row status draft→proven|e2e_only_justified
+  TERMINATION: total — iterate finite inventory rows
+
+procedure COMPOSITION_BINDING_VALIDATION(binding_inventory):
+  IF binding_inventory is empty AND change introduces collaborators:
+    RETURN FAILURE_MODE MISSING_BINDING_INVENTORY
+  FOR each row IN binding_inventory:
+    IF row claims e2e_only:
+      IF row.e2e_only_reason does not name a platform constraint:
+        RETURN FAILURE_MODE UNJUSTIFIED_E2E_ONLY
+      CONTINUE
+    # How: Decision gate — programmatic trigger and observable effect without browser/UI → composition test required.
+    WRITE failing composition test asserting Trigger fires, Callee invoked, Arguments match PRE/INPUT, Effect matches POST/EFFECTS or FAILURE_MODES
+    IMPLEMENT minimal wiring or binding code only to satisfy that test
+    IF composition test fails after wiring:
+      RETURN FAILURE_MODE COMPOSITION_BINDING_FAILED
+    MARK row proven with composition_test locus
+  IF any composition-testable row lacks composition_test locus:
+    RETURN FAILURE_MODE MISSING_COMPOSITION_EVIDENCE
+  RETURN composition_evidence_per_binding

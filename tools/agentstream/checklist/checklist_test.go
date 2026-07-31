@@ -276,6 +276,37 @@ sub_procedures:
 	}
 }
 
+func TestLoadTurns_agentstreamNewSession_quotedString(t *testing.T) {
+	// Canonical checklist YAML may quote bools after double-quoted scalar lint.
+	dir := t.TempDir()
+	p := filepath.Join(dir, "quoted.yaml")
+	y := `
+name: q
+version: "0"
+steps:
+  - slug: first
+    title: A
+    tasks: [a]
+  - slug: second
+    agentstream_new_session: "true"
+    title: B
+    tasks: [b]
+`
+	if err := os.WriteFile(p, []byte(strings.TrimLeft(y, "\n")), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	turns, err := LoadTurns(p, Options{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(turns) != 2 {
+		t.Fatalf("want 2 turns, got %d", len(turns))
+	}
+	if turns[1].ChainFromPrevious {
+		t.Fatalf("quoted \"true\" must break chain")
+	}
+}
+
 // [IMPL-GOAGENT-CHECKLIST-CONTROL] [ARCH-GOAGENT-CHECKLIST-CONTROL] [REQ-GOAGENT-CHECKLIST-CONTROL]
 // How: ApplyLoopBackClearance clears on-disk completion markers for configured loop-back slugs.
 func TestApplyLoopBackClearance(t *testing.T) {

@@ -20,11 +20,15 @@ end
 # optional --sort-keys recursively sorts sibling map keys at every indent level.
 # Block-scalar bodies (| or >) and multiline quoted scalars (' or ") are opaque: string content
 # is never sorted as keys or lists.
+# Lists whose owning map key matches order / *_order / order_* / *_order_* (e.g.
+# recommended_validation_order, order_steps) are left in document order and are not
+# treated as qualifying sortable groups.
 #
 # Sorts YAML list groups in one or more files.
 #
 # A qualifying list group is 2 or more consecutive lines where each line has the same
-# indentation and begins with "- " immediately after that indentation.
+# indentation and begins with "- " immediately after that indentation, except when the
+# parent map key matches order / *_order / order_* / *_order_*.
 #
 # Each qualifying group is sorted alphabetically in place.
 class YamlListSorter
@@ -134,6 +138,7 @@ class YamlListSorter
       end
 
       indentation = match[1]
+      group_start = index
       group = []
 
       while index < lines.length
@@ -148,15 +153,20 @@ class YamlListSorter
       end
 
       if group.length >= 2
-        groups_found += 1
-
-        sorted_group = group.sort_by { |line| line.sub(/^#{Regexp.escape(indentation)}- /, "").downcase }
-
-        if sorted_group != group
-          groups_modified += 1
-          output.concat(sorted_group)
-        else
+        parent_key = parent_key_for_list_group(lines, group_start, indentation)
+        if order_preserving_key?(parent_key)
           output.concat(group)
+        else
+          groups_found += 1
+
+          sorted_group = group.sort_by { |line| line.sub(/^#{Regexp.escape(indentation)}- /, "").downcase }
+
+          if sorted_group != group
+            groups_modified += 1
+            output.concat(sorted_group)
+          else
+            output.concat(group)
+          end
         end
       else
         output.concat(group)
@@ -180,6 +190,58 @@ class YamlListSorter
 
   def normalize_line_endings(lines)
     lines.map { |line| line.end_with?("\n") ? line : "#{line}\n" }
+  end
+
+  # Owning map key for a list group, or nil when the group is not a key's block value.
+  def parent_key_for_list_group(lines, group_start, list_indent)
+    i = group_start - 1
+
+    while i >= 0
+      line = lines[i]
+
+      if blank_or_comment?(line)
+        i -= 1
+        next
+      end
+
+      key_match = line.match(KEY_LINE_PATTERN)
+      if key_match
+        key_indent = key_match[1]
+        key_name = key_match[2]
+
+        if list_indent.length > key_indent.length
+          return key_name if implicit_block_value_key?(line)
+
+          i -= 1
+          next
+        end
+
+        if list_indent.length == key_indent.length && implicit_block_value_key?(line)
+          return key_name
+        end
+
+        return nil
+      end
+
+      list_match = line.match(LIST_ITEM_PATTERN)
+      if list_match && list_match[1].length <= list_indent.length
+        return nil
+      end
+
+      i -= 1
+    end
+
+    nil
+  end
+
+  # True for key names: order, *_order, order_*, *_order_* (underscore-bounded "order").
+  def order_preserving_key?(key_name)
+    return false if key_name.nil?
+
+    key_name == "order" ||
+      key_name.start_with?("order_") ||
+      key_name.end_with?("_order") ||
+      key_name.include?("_order_")
   end
 
   def walk_for_block_scalars(lines, start_idx, end_idx, regions)

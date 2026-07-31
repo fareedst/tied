@@ -358,7 +358,7 @@ with open('tied/requirements.yaml', 'w') as f:
 
 This is the **controlling loop** for creating or editing any TIED YAML (index or detail). No TIED record is considered valid for use until it has passed this loop.
 
-**`scripts/yaml_tool.sh`** — Primary project utility for YAML validation and list normalization. Default operation: canonicalize each path in place with **double-quoted scalar lint** (`yq -i 'sort_keys(.. style="double")'`, **one file per invocation**): recursive key sort plus double-quoted scalars. **On-disk effect:** YAML bool/int scalars become **string scalars** (e.g. `e2e_only: "false"`); coerce after load when typed values are required. **`--sort-lists`** runs **`scripts/yaml_list_sorter.rb`** on the same path set (sorts **qualifying list groups**: 2+ consecutive same-indent `- ` lines). Optional **`--sort-keys`** (with **`--sort-lists`**) also alphabetizes sibling map keys at every indent level (Ruby path; distinct from default-lint key sort). **Block-scalar bodies** (`|`, `>`, and chomping variants) are **opaque** on the Ruby sort path: string content is never sorted as keys or lists. Supports `-F/--find`, stdin, and NUL-separated paths like the former inline `lint_yaml.sh` implementation.
+**`scripts/yaml_tool.sh`** — Primary project utility for YAML validation and list normalization. Default operation: canonicalize each path in place with **double-quoted scalar lint** (`yq -i 'sort_keys(.. style="double")'`, **one file per invocation**): recursive key sort plus double-quoted scalars. **On-disk effect:** YAML bool/int scalars become **string scalars** (e.g. `e2e_only: "false"`); coerce after load when typed values are required. **`--sort-lists`** runs **`scripts/yaml_list_sorter.rb`** on the same path set (sorts **qualifying list groups**: 2+ consecutive same-indent `- ` lines; **skips** lists whose owning map key matches `order` / `*_order` / `order_*` / `*_order_*`, e.g. `recommended_validation_order`). Optional **`--sort-keys`** (with **`--sort-lists`**) also alphabetizes sibling map keys at every indent level (Ruby path; distinct from default-lint key sort). **Block-scalar bodies** (`|`, `>`, and chomping variants) are **opaque** on the Ruby sort path: string content is never sorted as keys or lists. Supports `-F/--find`, stdin, and NUL-separated paths like the former inline `lint_yaml.sh` implementation.
 
 **`lint_yaml`** / **`scripts/lint_yaml.sh`** — Backward-compatible alias; delegates to **`yaml_tool.sh`**. Global shell function (or project-provided equivalent) that agents **must** use to validate YAML syntax and canonicalize formatting **in place**. It accepts **one or more** file paths; the implementation must process **each path independently** (typically one underlying `yq -i 'sort_keys(.. style="double")'` per file). **Do not** pass multiple YAML paths to a **single raw `yq -i` command**: mikefarah `yq` merges multiple file arguments into one stream and corrupts files. Agents use `lint_yaml` or `yaml_tool.sh`, not ad-hoc multi-argument `yq`. MCP **`tied_token_rename`** uses the **same** yq expression when pretty-printing modified YAML.
 
@@ -377,6 +377,7 @@ procedure LINT_YAML_FILES(paths):
 procedure SORT_QUALIFYING_LIST_GROUPS(paths, sort_keys=false):
   # [PROC-YAML_EDIT_LOOP] [REQ-TIED_SETUP]
   # How: Delegate to yaml_list_sorter.rb; list group = 2+ consecutive lines with same indent starting with "- ".
+  # Skip list groups whose owning map key matches order / *_order / order_* / *_order_* (document order preserved).
   # When sort_keys: also alphabetize sibling map keys at every indent level (--sort-keys).
   # Block-scalar (| or >) bodies are opaque string content; never sorted as keys or lists.
   # Before write: parse original and sorted YAML; semantic compare must pass (unordered arrays when list groups modified).
@@ -391,7 +392,7 @@ procedure SORT_QUALIFYING_LIST_GROUPS(paths, sort_keys=false):
 1. **Edit** — Create or modify the YAML file (index or detail) under `tied/` or other TIED-related paths (e.g. `tied/citdp/*.yaml` as defined by the project).
 2. **Validate and pretty-print** — Run `scripts/yaml_tool.sh <file>` or `lint_yaml <file>` (or multiple paths in one invocation). This validates syntax and canonicalizes formatting in place. On failure, the file is invalid; fix and repeat from step 1.
 
-   **Optional list sort:** Run `scripts/yaml_tool.sh --sort-lists <file>` to alphabetize qualifying list groups (e.g. `cross_references` in index files). Add **`--sort-keys`** to also sort sibling map keys at every indent level.
+   **Optional list sort:** Run `scripts/yaml_tool.sh --sort-lists <file>` to alphabetize qualifying list groups (e.g. `cross_references` in index files). Lists under keys matching `order` / `*_order` / `order_*` / `*_order_*` are left in document order. Add **`--sort-keys`** to also sort sibling map keys at every indent level.
 
    **Caution:** If your environment lacks a safe `lint_yaml` / `yaml_tool` wrapper, you must still run validation **one file per underlying pretty-print process**; never pass multiple paths to one raw `yq` invocation.
 
@@ -992,7 +993,7 @@ This checklist is organized into nine phases (A–I). Phases A–C are analytica
 
 #### Phase G — Expand to composition testing
 
-21. **G1. Identify bindings.** After all unit tests pass, identify the bindings between validated modules: event listeners, IPC channels, entry-point delegation, function wiring, platform hooks. Each binding connects two or more units that were validated independently in Phases D–F.
+21. **G1. Identify bindings.** After all unit tests pass, identify the bindings between validated modules: event listeners, IPC channels, entry-point delegation, function wiring, platform hooks. Each binding connects two or more units that were validated independently in Phases D–F. Maintain a binding inventory (trigger, callee, arguments, effect, ordering, failure behavior, composition test locus, E2E flag); see `tied/docs/composition-coverage.md` when present in the project.
 
 22. **G2. Find or create IMPL coverage for each binding.** For each binding, locate the IMPL(s) whose `essence_pseudocode` describes the composition (often in ON/WHEN event handlers or wiring procedures). If no IMPL covers the binding:
     - Extend an existing IMPL's pseudo-code to add a composition block describing the binding, **or**

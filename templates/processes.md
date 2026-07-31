@@ -963,7 +963,7 @@ This checklist is organized into nine phases (A–I). Phases A–C are analytica
 
 #### Phase G — Expand to composition testing
 
-21. **G1. Identify bindings.** After all unit tests pass, identify the bindings between validated modules: event listeners, IPC channels, entry-point delegation, function wiring, platform hooks. Each binding connects two or more units that were validated independently in Phases D–F.
+21. **G1. Identify bindings.** After all unit tests pass, identify the bindings between validated modules: event listeners, IPC channels, entry-point delegation, function wiring, platform hooks. Each binding connects two or more units that were validated independently in Phases D–F. Maintain a binding inventory (trigger, callee, arguments, effect, ordering, failure behavior, composition test locus, E2E flag); see `tied/docs/composition-coverage.md` when present in the project.
 
 22. **G2. Find or create IMPL coverage for each binding.** For each binding, locate the IMPL(s) whose `essence_pseudocode` describes the composition (often in ON/WHEN event handlers or wiring procedures). If no IMPL covers the binding:
     - Extend an existing IMPL's pseudo-code to add a composition block describing the binding, **or**
