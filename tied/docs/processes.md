@@ -1,6 +1,6 @@
 # TIED Processes
 
-**TIED Methodology Version**: 1.4.0
+**TIED Methodology Version**: 2.2.0
 
 Process documentation is the missing link that keeps tooling, rituals, and expectations traceable back to requirements. This guide defines how to record repeatable processes with semantic tokens so that every operational step you take is measurable, auditable, and associated with the intent that drove it.
 
@@ -122,7 +122,7 @@ Active. Mandatory on every change to the TIED db or its outputs.
 Minimize the amount of code not covered by tests so that IMPL/ARCH/REQ logic is validated by unit and integration tests; E2E remains expensive and is reserved for critical user journeys.
 
 ### Scope
-Chrome extension `src/` only (Safari-only code excluded). Applies to unit tests (`tests/unit/**/*.test.js`), integration tests (`**/*.integration.test.js`), and Playwright E2E (`tests/playwright/`).
+Applies to managed source and tests in the active project. Each project declares its supported unit, integration/composition, and E2E suites; this process does not assume a particular language, test runner, or directory layout.
 
 ### Token references
 - `[IMPL-TESTING]` — testing implementation decisions
@@ -138,19 +138,84 @@ Active
 2. **Unit + integration tests cover logic** — Unit and integration tests should cover IMPL/ARCH/REQ logic so that untested pathways are found and fixed before or alongside E2E.
 3. **Composition tests cover bindings** — Every binding between tested units (event listeners, IPC, entry-point delegation, wiring) must have a composition test (component, integration, or contract) that verifies the connection works without invoking the UI. If a binding exists and no composition test covers it, there is a gap.
 4. **IMPL–test alignment** — Every Active IMPL should have at least one test reference in `traceability.tests`, or be explicitly documented as "tested only via E2E" / "no unit tests" with a reason.
-5. **Coverage gates** — Jest `coverageThreshold` and the coverage gap report (`scripts/coverage-gap-report.js`) help prevent regressions and surface files/IMPLs with no tests.
+5. **Coverage and evidence gates** — Use configured coverage, traceability, and quality-evidence checks when the project provides them. Do not treat percentage coverage or marker presence as proof of correctness; every Active IMPL must still have a testability classification and explicit evidence boundary.
 6. **E2E-only requires justification** — `e2e_only` classification in an IMPL requires justification that no mock, stub, or programmatic trigger can exercise the boundary below E2E. The justification must name the specific platform constraint (e.g. "native OS menu click cannot be simulated in JSDOM or Playwright"). Bindings between units that communicate via events, messages, or function calls are not E2E-only — they are composition-testable.
 7. **Minimize E2E-only code** — Treat E2E and manual verification as the exception. Every IMPL should have unit or integration tests for its logic, or an explicit E2E-only reason in the IMPL detail.
 
 ### Activities
-- Run `npm run test:coverage` before merging; fix or document any new code that lowers coverage below threshold.
-- Run `node scripts/coverage-gap-report.js [threshold]` to list src files below threshold and IMPLs with empty `traceability.tests`; use the report in MRs or docs.
+- Run the project's declared unit, composition/integration, E2E, and quality-evidence commands before merging; record commands, versions, thresholds, and results in the verification evidence manifest when that artifact is enabled.
+- If a project has no configured coverage or gap command, record that limitation and rely on the applicable test matrix, binding inventory, token audit, and explicit risk rationale rather than inventing a command.
 - For IMPLs that are intentionally not unit-tested (e.g. platform-specific glue or debug tooling), record in the IMPL detail that coverage is via E2E or manual testing so the "no tests" is explicit and reviewable.
-- When adding or changing IMPLs, classify code as unit-testable, integration-testable, or E2E-only. If E2E-only, set `traceability.tests` to [] and document in the IMPL (e.g. `test_coverage_note` or `e2e_only_reason`) why unit/integration are not used; the justification must name the specific platform constraint. Bindings (event listeners, IPC, wiring) are composition-testable, not E2E-only. Use the coverage gap report to catch IMPLs with empty tests and no justification.
+- When adding or changing IMPLs, classify code as unit-testable, integration-testable, or E2E-only. If E2E-only, set `traceability.tests` to [] and document in the IMPL (e.g. `test_coverage_note` or `e2e_only_reason`) why unit/integration are not used; the justification must name the specific platform constraint. Bindings (event listeners, IPC, wiring) are composition-testable, not E2E-only. Use the project's configured traceability or evidence validator, when present, to catch IMPLs with empty tests and no justification.
 
 ### Artifacts & Metrics
-- **Artifacts** — Coverage report (`coverage/`), coverage gap report output, TIED `traceability.tests` in IMPL detail files.
-- **Success Metrics** — Coverage at or above threshold; IMPL traceability.tests populated or explicitly documented; E2E used for critical flows only.
+- **Artifacts** — Project-declared test output, quality evidence matrix, verification evidence manifest, and TIED `traceability.tests` in IMPL detail files.
+- **Success Metrics** — Applicable evidence is reproducible or explicitly accepted with owner/expiry; IMPL testability is classified; E2E is used only for justified platform boundaries.
+
+---
+
+## `[PROC-QUALITY_ASSURANCE]` Risk-triggered quality assurance
+
+### Purpose
+Select only the quality attributes justified by change risk, then define evidence and ownership before implementation. This preserves the mandatory TDD, module-validation, composition, LEAP, and TIED-consistency spine without universal ceremony.
+
+### Scope
+Every behavior-changing requirement or change that reaches CITDP. The baseline-functional profile is always considered; specialized profiles are selected only when their triggers are present.
+
+### Token references
+- `[REQ-QUALITY_ASSURANCE_EVIDENCE]`
+- `[ARCH-QUALITY_ASSURANCE_PROFILES]`
+- `[IMPL-QUALITY_EVIDENCE_MANIFEST]`
+- `[PROC-QUALITY_EVIDENCE_PROVENANCE]`
+- `[PROC-TEST_ADEQUACY]`
+
+### Profile selectors
+1. **baseline-functional** — all behavior changes; unit TDD, applicable composition evidence, and traceability boundaries.
+2. **external-input-security** — untrusted input, authorization, API, CLI, message, file, or content boundaries.
+3. **data-integrity-migration** — persistence, schema, migration, import/export, replay, or idempotency changes.
+4. **stateful-reliability** — retries, recovery, restart, concurrency, or state-machine behavior.
+5. **performance-scale-cost** — workload, latency, throughput, resource, external-call, or model/tool cost risk.
+6. **user-facing-accessibility** — user-visible interaction or accessibility contracts.
+7. **regulated-privacy** — sensitive data, retention, consent, or named regulatory obligations.
+8. **ai-enabled** — model, prompt, tool, agent, or generated-content boundaries.
+
+Profiles are applicability selectors, not a requirement to execute every profile. An inapplicable row records a reason; an accepted residual risk records an owner and expiry.
+
+### Required evidence row
+For each quality attribute, record: `applicability`, `rationale`, `risk`, `evidence_method`, `command_or_test`, `threshold`, `result`, `owner`, `limitation`, and `waiver/expiry` when applicable. Select risk before REQ/ARCH/IMPL design and freeze implementation until pseudo-code validation and TIED persistence pass.
+
+### Proof boundaries
+`tied_validate_consistency` proves TIED index/detail/token/pseudo-code integrity and traceability. It does not prove runtime security, performance, usability, compliance, resilience, privacy, or product correctness. Those claims require profile-specific executable or qualified human evidence.
+
+### Artifacts & Metrics
+- **Artifacts** — CITDP risk/profile matrix, bounded scenario and abuse-case rows, evidence manifest reference, waiver/residual-risk decisions.
+- **Success Metrics** — Applicable quality rows have reproducible evidence or owned expiring acceptance; specialized checks remain scoped to selected profiles.
+
+---
+
+## `[PROC-QUALITY_EVIDENCE_PROVENANCE]` Evidence provenance
+
+### Purpose
+Make machine-derived verification evidence reproducible and distinguish it from human rationale, waivers, and residual-risk decisions.
+
+### Required provenance
+Record commit identity, environment and tool versions, exact commands, exit codes, test/lint/build results, covered REQ/IMPL tokens, quality-matrix outcomes, validator diagnostics, and TIED consistency results. Store human decisions separately.
+
+### Proof boundary
+An evidence manifest reports what commands observed in one environment and does not claim universal correctness, regulatory certification, or complete product quality.
+
+---
+
+## `[PROC-TEST_ADEQUACY]` Risk-triggered test adequacy
+
+### Purpose
+Apply advanced testing and maintainability controls only when selected by the assurance profile and changed-module risk.
+
+### Conditional checks
+Mutation, property/metamorphic testing, fuzzing, deterministic replay, flaky-test detection, harness self-tests, complexity/dead-code review, dependency/license/vulnerability review, maintainability/coupling thresholds, and external-call cost controls are conditional. Record repeat count, seed, retry classification, quarantine owner/expiry, expected call volume, timeout, retry budget, caching/batching choice, and resource-exhaustion behavior when relevant.
+
+### Non-goal
+Ordinary low-risk internal or documentation changes use a bounded N/A rationale instead of irrelevant load, accessibility, compliance, or pilot ceremony.
 
 ---
 

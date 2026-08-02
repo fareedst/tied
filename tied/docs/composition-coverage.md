@@ -32,6 +32,12 @@ Maintain one row per binding in scope (CITDP `test_strategy`, IMPL notes, or thi
 
 **Done when:** every binding in the change has a composition test that carries IMPL block token comments and verifies trigger → callee → arguments → effect. Missing rows are gaps under `[PROC-TEST_STRATEGY]`.
 
+### Machine validation contract
+
+The `binding_inventory_validate` validator accepts the same rows as structured data. Every row must contain non-empty `id`, `trigger`, `callee`, `arguments`, `effect`, `ordering`, and `failure_behavior`. A composition-testable row must also contain `composition_test`. A row may set `e2e_only: true` only when `e2e_only_reason` names a platform constraint such as native OS, window-server, visual, browser, file-dialog, or filesystem behavior.
+
+The validator proves inventory completeness and E2E justification only. It does not prove that the callee works, that arguments are semantically correct, or that the composition test passes.
+
 ---
 
 ## Composition test contract (UI-free)
@@ -89,6 +95,8 @@ High-value composition bindings already exercised (extend when adding features):
 | `ATDD argv → TddLoopPrompts` | Ruby/ATDD COMPOS IMPLs | Documented in `docs/run-agent-stream-impl-composition.md` |
 
 When changing these seams, re-run composition tests and update this inventory if bindings are added or removed.
+
+The methodology repository exposes the structured contract through `binding_inventory_validate`; callers should run it before composition wiring and retain its diagnostics in the verification evidence manifest.
 
 ---
 

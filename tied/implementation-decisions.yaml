@@ -977,6 +977,74 @@ IMPL-MODULE_VALIDATION:
       - "REQ-MODULE_VALIDATION"
     tests:
       - "testModuleName_IndependentValidation_REQ_MODULE_VALIDATION"
+IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK:
+  cross_references:
+    - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+  description: "Exercise baseline, external-input-security, data-integrity-migration, and stateful-reliability profiles on a bounded SQLite webhook inbox."
+  detail_file: "implementation-decisions/IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK.yaml"
+  name: "Authenticated webhook inbox pilot"
+  status: "Active"
+IMPL-QUALITY_BINDING_INVENTORY:
+  cross_references:
+    - "ARCH-MODULE_VALIDATION"
+    - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    - "REQ-MODULE_VALIDATION"
+    - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+  detail_file: "implementation-decisions/IMPL-QUALITY_BINDING_INVENTORY.yaml"
+  name: "Quality binding inventory validator"
+  status: "Active"
+IMPL-QUALITY_EVIDENCE_COLLECTION:
+  cross_references:
+    - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    - "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER"
+    - "IMPL-QUALITY_EVIDENCE_MANIFEST"
+    - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+  detail_file: "implementation-decisions/IMPL-QUALITY_EVIDENCE_COLLECTION.yaml"
+  name: "Command-to-manifest evidence collector"
+  status: "Active"
+IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER:
+  cross_references:
+    - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    - "IMPL-QUALITY_EVIDENCE_COLLECTION"
+    - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+  description: "Execute declared quality commands and capture reproducible command evidence for the verification manifest."
+  detail_file: "implementation-decisions/IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER.yaml"
+  name: "Quality evidence command runner"
+  status: "Active"
+IMPL-QUALITY_EVIDENCE_MANIFEST:
+  cross_references:
+    - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    - "IMPL-QUALITY_EVIDENCE_COLLECTION"
+    - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+  description: "Generate deterministic machine-derived evidence records for commands, tests, lint, validators, quality-matrix outcomes, and TIED consistency without conflating them with human risk acceptance."
+  detail_file: "implementation-decisions/IMPL-QUALITY_EVIDENCE_MANIFEST.yaml"
+  name: "Verification evidence manifest generation"
+  status: "Active"
+IMPL-QUALITY_PSEUDOCODE_VALIDATOR:
+  cross_references:
+    - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    - "PROC-PSEUDOCODE_VALIDATION"
+    - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+  detail_file: "implementation-decisions/IMPL-QUALITY_PSEUDOCODE_VALIDATOR.yaml"
+  name: "Layer B pseudo-code validator"
+  status: "Active"
+IMPL-QUALITY_SECURITY_PROFILE_VALIDATION:
+  cross_references:
+    - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+  description: "Require executable evidence or owned expiry-bound waivers for selected external-input security abuse cases."
+  detail_file: "implementation-decisions/IMPL-QUALITY_SECURITY_PROFILE_VALIDATION.yaml"
+  name: "External-input security profile validation"
+  status: "Active"
+IMPL-QUALITY_TEST_ADEQUACY:
+  cross_references:
+    - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    - "PROC-TEST_ADEQUACY"
+    - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+  detail_file: "implementation-decisions/IMPL-QUALITY_TEST_ADEQUACY.yaml"
+  name: "Risk-triggered test adequacy validator"
+  status: "Active"
 IMPL-TIED_FILES:
   code_locations:
     files:

@@ -29,6 +29,20 @@ checklist:
       - "malformed syntax is rejected"
       - "parsing produces a normalized internal representation"
       - "the block conforms to the project grammar"
+  - id: "EXEC-001"
+    category: "executable_layer_b"
+    evidence:
+      - "diagnostics include source line and block where applicable"
+      - "proof_boundary states structural validation only"
+      - "pseudocode_validate result with schema_version layer-b-pseudocode-validator.v1"
+    required: "true"
+    severity_on_failure: "error"
+    title: "Layer B validator runs deterministically after Layer A"
+    verify:
+      - "do not interpret structural success as runtime correctness or complete behavioral coverage"
+      - "require_behavioral_coverage remains false or N/A before RED with rationale; test-dependent evidence is supplied after RED"
+      - "run pseudocode_validate after tied_validate_consistency for changed IMPL pseudo-code"
+      - "validate blocks, contracts, token linkage, symbol closure, and dependency graph"
   - id: "PARSE-002"
     category: "parsing"
     evidence:

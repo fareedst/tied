@@ -883,6 +883,21 @@ ARCH-MODULE_VALIDATION:
       - "REQ-MODULE_VALIDATION"
     tests:
       - "testModuleName_IndependentValidation_REQ_MODULE_VALIDATION"
+ARCH-QUALITY_ASSURANCE_PROFILES:
+  cross_references:
+    - "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK"
+    - "IMPL-QUALITY_BINDING_INVENTORY"
+    - "IMPL-QUALITY_EVIDENCE_COLLECTION"
+    - "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER"
+    - "IMPL-QUALITY_EVIDENCE_MANIFEST"
+    - "IMPL-QUALITY_PSEUDOCODE_VALIDATOR"
+    - "IMPL-QUALITY_SECURITY_PROFILE_VALIDATION"
+    - "IMPL-QUALITY_TEST_ADEQUACY"
+    - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+  description: "Use bounded applicability profiles to select quality evidence by risk, while keeping TIED consistency, runtime validation, and human risk acceptance as distinct proof boundaries."
+  detail_file: "architecture-decisions/ARCH-QUALITY_ASSURANCE_PROFILES.yaml"
+  name: "Risk-triggered quality assurance profiles and evidence boundary"
+  status: "Active"
 ARCH-TIED_STRUCTURE:
   alternatives_considered:
     - name: "Root-level files"

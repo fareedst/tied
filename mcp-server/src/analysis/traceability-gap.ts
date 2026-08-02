@@ -8,11 +8,11 @@ import { getDetailPath } from "../detail-loader.js";
 
 export type TraceabilityGapDimensionsConfig = {
   /** REQ index entries with no [REQ-*] occurrence in classified test files under the walk. */
-  req_without_test?: boolean;
+  req_without_test?: boolean | string;
   /** REQ index entries with no [REQ-*] occurrence in classified production files under the walk. */
-  req_without_implementation?: boolean;
+  req_without_implementation?: boolean | string;
   /** IMPL index entries with no [IMPL-*] occurrence in classified test files (block-level pseudocode mapping is out of scope). */
-  impl_without_test?: boolean;
+  impl_without_test?: boolean | string;
 };
 
 export type TraceabilityGapTestFileConfig = {
@@ -31,10 +31,15 @@ export type TraceabilityGapProjectConfig = {
    */
   methodology_path_markers?: string[];
   /**
+   * Path substrings that mark templates/examples/fixtures rather than shipped
+   * production implementation. Test files are still classified as tests first.
+   */
+  non_production_path_markers?: string[];
+  /**
    * When true, report metadata sets would_fail_strict / suggested_exit_code for CI
    * (non-zero if any counted gap exists).
    */
-  strict?: boolean;
+  strict?: boolean | string;
 };
 
 export type TraceabilityGapEntry = {
@@ -62,6 +67,9 @@ export type TraceabilityGapReportResult = {
     requirements_excluded: string[];
     implementation_excluded: string[];
   };
+  non_production: {
+    files_excluded: string[];
+  };
   exit_policy: {
     strict: boolean;
     would_fail_strict: boolean;
@@ -85,11 +93,26 @@ const DEFAULT_TEST: Required<TraceabilityGapTestFileConfig> = {
     ".spec.jsx",
     "_test.ts",
     "_test.tsx",
+    "_test.go",
+    "_test.rb",
     "_test.py",
   ],
 };
 
 const DEFAULT_METHODOLOGY_MARKERS = ["tied/methodology/"];
+const DEFAULT_NON_PRODUCTION_MARKERS = [
+  "templates/",
+  "/examples/",
+  "examples/",
+  "/testdata/",
+  "testdata/",
+];
+
+function booleanConfigValue(value: boolean | string | undefined, fallback: boolean): boolean {
+  if (value === true || value === "true") return true;
+  if (value === false || value === "false") return false;
+  return fallback;
+}
 
 export function mergeTestFileConfig(
   cfg: TraceabilityGapTestFileConfig | undefined
@@ -117,6 +140,14 @@ export function isMethodologyContentPath(
 ): boolean {
   const m = markers && markers.length > 0 ? markers : DEFAULT_METHODOLOGY_MARKERS;
   return m.some((mk) => relPosix.includes(mk));
+}
+
+export function isNonProductionContentPath(
+  relPosix: string,
+  markers?: string[],
+): boolean {
+  const selected = markers && markers.length > 0 ? markers : DEFAULT_NON_PRODUCTION_MARKERS;
+  return selected.some((marker) => relPosix.includes(marker));
 }
 
 function definitionRefsForToken(token: string, projectRoot: string): string[] {
@@ -164,24 +195,29 @@ export function buildTraceabilityGapReport(params: {
 
   const testCfg = mergeTestFileConfig(projectConfig.test_file);
   const methMarkers = projectConfig.methodology_path_markers;
+  const nonProductionMarkers = projectConfig.non_production_path_markers;
 
   const dim = projectConfig.dimensions ?? {};
-  const reqNoTest = dim.req_without_test !== false;
-  const reqNoImpl = dim.req_without_implementation !== false;
-  const implNoTest = dim.impl_without_test === true;
+  const reqNoTest = booleanConfigValue(dim.req_without_test, true);
+  const reqNoImpl = booleanConfigValue(dim.req_without_implementation, true);
+  const implNoTest = booleanConfigValue(dim.impl_without_test, false);
 
   const reqInTests = new Set<string>();
   const reqInProd = new Set<string>();
   const implInTests = new Set<string>();
+  const nonProductionFiles = new Set<string>();
 
   for (const row of perFile) {
     const isTest = isTestFilePath(row.relPosix, testCfg);
     const isMeth = isMethodologyContentPath(row.relPosix, methMarkers);
+    const isNonProduction = isNonProductionContentPath(row.relPosix, nonProductionMarkers);
     if (isTest) {
       for (const t of row.tokens.REQ) reqInTests.add(t);
       for (const t of row.tokens.IMPL) implInTests.add(t);
-    } else if (!isMeth) {
+    } else if (!isMeth && !isNonProduction) {
       for (const t of row.tokens.REQ) reqInProd.add(t);
+    } else if (isNonProduction) {
+      nonProductionFiles.add(row.relPosix);
     }
   }
 
@@ -209,7 +245,7 @@ export function buildTraceabilityGapReport(params: {
     }
   }
 
-  const strict = projectConfig.strict === true;
+  const strict = booleanConfigValue(projectConfig.strict, false);
   const counted =
     (reqNoTest ? gapsReqTest.length : 0) +
     (reqNoImpl ? gapsReqImpl.length : 0) +
@@ -242,6 +278,9 @@ export function buildTraceabilityGapReport(params: {
     methodology_only: {
       requirements_excluded: [...methodology_only_requirements].sort(),
       implementation_excluded: [...methodology_only_implementation].sort(),
+    },
+    non_production: {
+      files_excluded: [...nonProductionFiles].sort(),
     },
     exit_policy: {
       strict,

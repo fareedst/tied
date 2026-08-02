@@ -55,7 +55,23 @@ import { applyYamlUpdates, parseYamlUpdateSteps } from "../yaml-updates-apply.js
 import { resolveRequirementListStateGuide } from "./requirement-list-state-guide.js";
 import { runScopedAnalysis } from "../analysis/scoped-analysis.js";
 import { runPlumbDiffImpactPreview } from "../analysis/plumb-diff-impact-preview.js";
+import { validateBindingInventory } from "../analysis/binding-inventory.js";
+import { validateEssencePseudocode } from "../analysis/pseudocode-validator.js";
+import { validateTestAdequacyPlan } from "../quality-adequacy.js";
 import { readTextFromPseudocodePath, resolvePseudocodePathUnderTiedBase } from "../impl-pseudocode-input.js";
+import {
+  buildVerificationEvidenceManifest,
+  type VerificationEvidenceInput,
+} from "../quality-evidence.js";
+import {
+  runDeclaredQualityCommands,
+  type QualityCommandRunnerInput,
+} from "../quality-command-runner.js";
+import {
+  collectVerificationEvidence,
+  type QualityEvidenceCollectionInput,
+} from "../quality-evidence-collection.js";
+import { validateSecurityProfile, type SecurityProfileInput } from "../quality-security.js";
 import {
   addProposal,
   approveProposal,
@@ -1144,6 +1160,238 @@ export const allTools = [
         const msg = e instanceof Error ? e.message : String(e);
         return textContent(JSON.stringify({ ok: false, error: msg }, null, 2));
       }
+    },
+  },
+  {
+    name: "test_adequacy_validate",
+    config: {
+      description:
+        "Validate risk-triggered advanced test adequacy and external-call cost controls. Requires selected profiles and explicit replay, flakiness, timeout, retry, and resource behavior fields when applicable; does not run the checks.",
+      inputSchema: z.object({
+        selected_profiles: z.array(z.string()),
+        checks: z.array(z.record(z.unknown())),
+      }),
+    },
+    handler: async (args: Parameters<typeof validateTestAdequacyPlan>[0]) => {
+      return textContent(JSON.stringify(validateTestAdequacyPlan(args), null, 2));
+    },
+  },
+  {
+    name: "quality_evidence_manifest_build",
+    config: {
+      description:
+        "Build a deterministic machine-derived verification evidence manifest. Records command results, quality-matrix outcomes, covered tokens, and proof boundaries; human waiver and residual-risk decisions remain separate.",
+      inputSchema: z.object({
+        run_id: z.string(),
+        commit: z.string(),
+        environment: z.record(z.union([z.string(), z.number(), z.boolean(), z.null()])),
+        command_results: z.array(
+          z.object({
+            id: z.string(),
+            command: z.union([z.string(), z.array(z.string())]),
+            cwd: z.string(),
+            exit_code: z.number().int(),
+            result: z.enum(["passed", "failed"]),
+            duration_ms: z.number().optional(),
+            threshold: z.string().optional(),
+            artifacts: z.array(z.string()).optional(),
+            diagnostics: z.array(z.string()).optional(),
+            tool_versions: z.record(z.string()).optional(),
+          }),
+        ),
+        quality_rows: z.array(
+          z.object({
+            id: z.string(),
+            attribute: z.string(),
+            applicability: z.enum(["applicable", "not_applicable", "accepted_risk"]),
+            rationale: z.string(),
+            risk: z.string().optional(),
+            evidence_method: z.string(),
+            command_or_test: z.string().optional(),
+            threshold: z.string().optional(),
+            result: z.enum(["passed", "failed", "skipped", "pending", "not_applicable"]),
+            owner: z.string().optional(),
+            limitation: z.string().optional(),
+            waiver: z
+              .object({
+                required: z.boolean(),
+                reason: z.string().optional(),
+                owner: z.string().optional(),
+                expiry: z.string().optional(),
+              })
+              .optional(),
+          }),
+        ),
+        covered_tokens: z.array(z.string()),
+        proof_boundaries: z.array(z.string()),
+        decision_references: z.array(z.string()).optional(),
+      }),
+    },
+    handler: async (args: Record<string, unknown>) => {
+      try {
+        const manifest = buildVerificationEvidenceManifest(args as unknown as VerificationEvidenceInput);
+        return textContent(JSON.stringify(manifest, null, 2));
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : String(e);
+        return textContent(JSON.stringify({ ok: false, error: msg }, null, 2));
+      }
+    },
+  },
+  {
+    name: "quality_evidence_collect",
+    config: {
+      description:
+        "Execute declared argv-only quality commands with timeout and output limits, write stdout/stderr artifacts, and return normalized command results for quality_evidence_manifest_build.",
+      inputSchema: z.object({
+        commands: z.array(
+          z.object({
+            id: z.string().min(1),
+            argv: z.array(z.string()).min(1),
+            cwd: z.string().min(1),
+            environment: z.record(z.string()).optional(),
+            timeout_ms: z.number().int().positive().optional(),
+            max_output_bytes: z.number().int().positive().optional(),
+            artifact_dir: z.string().min(1),
+            threshold: z.string().optional(),
+            tool_version_argv: z.array(z.string()).min(1).optional(),
+            tool_version_name: z.string().optional(),
+          }),
+        ),
+        default_timeout_ms: z.number().int().positive().optional(),
+        default_max_output_bytes: z.number().int().positive().optional(),
+      }),
+    },
+    handler: async (args: QualityCommandRunnerInput) => {
+      try {
+        const results = await runDeclaredQualityCommands(args);
+        return textContent(JSON.stringify({ ok: true, command_results: results }, null, 2));
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : String(e);
+        return textContent(JSON.stringify({ ok: false, error: msg }, null, 2));
+      }
+    },
+  },
+  {
+    name: "quality_security_profile_validate",
+    config: {
+      description:
+        "Validate executable evidence or rationale-owner-expiry waivers for external-input security abuse cases. This checks plan completeness only.",
+      inputSchema: z.object({
+        selected_profiles: z.array(z.string()),
+        evidence_rows: z.array(
+          z.object({
+            abuse_case: z.string(),
+            command_or_test: z.string().optional(),
+            result: z.enum(["passed", "waived"]).optional(),
+            waiver: z
+              .object({
+                reason: z.string().optional(),
+                owner: z.string().optional(),
+                expiry: z.string().optional(),
+              })
+              .optional(),
+          }),
+        ),
+      }),
+    },
+    handler: async (args: SecurityProfileInput) => {
+      return textContent(JSON.stringify(validateSecurityProfile(args), null, 2));
+    },
+  },
+  {
+    name: "quality_evidence_collect_manifest",
+    config: {
+      description:
+        "Execute declared argv-only quality commands and build verification-evidence-manifest.v1 from observed results. Human decisions remain separate.",
+      inputSchema: z.object({
+        run_id: z.string(),
+        commit: z.string(),
+        environment: z.record(z.union([z.string(), z.number(), z.boolean(), z.null()])),
+        commands: z.array(
+          z.object({
+            id: z.string().min(1),
+            argv: z.array(z.string()).min(1),
+            cwd: z.string().min(1),
+            environment: z.record(z.string()).optional(),
+            timeout_ms: z.number().int().positive().optional(),
+            max_output_bytes: z.number().int().positive().optional(),
+            artifact_dir: z.string().min(1),
+            threshold: z.string().optional(),
+            tool_version_argv: z.array(z.string()).min(1).optional(),
+            tool_version_name: z.string().optional(),
+          }),
+        ),
+        default_timeout_ms: z.number().int().positive().optional(),
+        default_max_output_bytes: z.number().int().positive().optional(),
+        quality_rows: z.array(
+          z.object({
+            id: z.string(),
+            attribute: z.string(),
+            applicability: z.enum(["applicable", "not_applicable", "accepted_risk"]),
+            rationale: z.string(),
+            risk: z.string().optional(),
+            evidence_method: z.string(),
+            command_or_test: z.string().optional(),
+            threshold: z.string().optional(),
+            result: z.enum(["passed", "failed", "skipped", "pending", "not_applicable"]),
+            owner: z.string().optional(),
+            limitation: z.string().optional(),
+            waiver: z
+              .object({
+                required: z.boolean(),
+                reason: z.string().optional(),
+                owner: z.string().optional(),
+                expiry: z.string().optional(),
+              })
+              .optional(),
+          }),
+        ),
+        covered_tokens: z.array(z.string()),
+        proof_boundaries: z.array(z.string()),
+        decision_references: z.array(z.string()).optional(),
+      }),
+    },
+    handler: async (args: QualityEvidenceCollectionInput) => {
+      try {
+        const manifest = await collectVerificationEvidence(args);
+        return textContent(JSON.stringify(manifest, null, 2));
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : String(e);
+        return textContent(JSON.stringify({ ok: false, error: msg }, null, 2));
+      }
+    },
+  },
+  {
+    name: "pseudocode_validate",
+    config: {
+      description:
+        "Run Layer B structural pseudo-code validation: source-located diagnostics, contract shape, symbol closure, dependency graph, token linkage, and optional behavioral coverage references. Does not claim runtime behavior coverage.",
+      inputSchema: z.object({
+        token: z.string(),
+        pseudocode: z.string(),
+        known_tokens: z.array(z.string()).optional(),
+        require_contracts: z.boolean().optional(),
+        require_behavioral_coverage: z.boolean().optional(),
+        coverage_references: z.record(z.array(z.string())).optional(),
+      }),
+    },
+    handler: async (args: Parameters<typeof validateEssencePseudocode>[0]) => {
+      return textContent(JSON.stringify(validateEssencePseudocode(args), null, 2));
+    },
+  },
+  {
+    name: "binding_inventory_validate",
+    config: {
+      description:
+        "Validate binding inventory rows for trigger, callee, arguments, effect, ordering, failure behavior, UI-free composition evidence, and named E2E platform constraints.",
+      inputSchema: z.object({
+        rows: z.array(z.record(z.unknown())),
+      }),
+    },
+    handler: async (args: { rows: unknown[] }) => {
+      return textContent(
+        JSON.stringify(validateBindingInventory(args.rows as Parameters<typeof validateBindingInventory>[0]), null, 2),
+      );
     },
   },
   {

@@ -1,0 +1,9 @@
+{
+  "name": "tied-quality-webhook-inbox-pilot",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "start": "node src/server.mjs"
+  }
+}

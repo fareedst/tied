@@ -212,6 +212,19 @@ ARCH-MODULE_VALIDATION:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-QUALITY_ASSURANCE_PROFILES:
+  cross_references:
+    - "IMPL-QUALITY_EVIDENCE_MANIFEST"
+    - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+  description: "Bounded applicability profiles select quality evidence while TIED integrity remains distinct from runtime quality proof."
+  detail_file: "architecture-decisions/ARCH-QUALITY_ASSURANCE_PROFILES.yaml"
+  metadata:
+    last_updated: "2026-08-02"
+    registered: "2026-08-02"
+  name: "Risk-triggered quality assurance profiles and evidence boundary"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_STRUCTURE:
   cross_references:
     - "IMPL-TIED_FILES"
@@ -449,6 +462,110 @@ IMPL-MODULE_VALIDATION:
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
+IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK:
+  cross_references:
+    - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+  description: "Boundary-rich SQLite webhook pilot for authentication, idempotency, replay protection, and retries."
+  detail_file: "implementation-decisions/IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK.yaml"
+  name: "Authenticated webhook inbox pilot"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-QUALITY_BINDING_INVENTORY:
+  cross_references:
+    - "ARCH-MODULE_VALIDATION"
+    - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    - "REQ-MODULE_VALIDATION"
+    - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+  description: "Deterministic validation of composition bindings and UI-free evidence references."
+  detail_file: "implementation-decisions/IMPL-QUALITY_BINDING_INVENTORY.yaml"
+  metadata:
+    last_updated: "2026-08-02"
+    registered: "2026-08-02"
+  name: "Quality binding inventory validator"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-QUALITY_EVIDENCE_COLLECTION:
+  cross_references:
+    - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    - "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER"
+    - "IMPL-QUALITY_EVIDENCE_MANIFEST"
+    - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+  description: "Composition of bounded quality-command execution and verification evidence manifest generation."
+  detail_file: "implementation-decisions/IMPL-QUALITY_EVIDENCE_COLLECTION.yaml"
+  metadata:
+    last_updated: "2026-08-02"
+    registered: "2026-08-02"
+  name: "Command-to-manifest evidence collector"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER:
+  cross_references:
+    - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+  description: "Shell-free bounded execution of declared quality commands with reproducible artifacts."
+  detail_file: "implementation-decisions/IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER.yaml"
+  name: "Quality evidence command runner"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-QUALITY_EVIDENCE_MANIFEST:
+  cross_references:
+    - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    - "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK"
+    - "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER"
+    - "IMPL-QUALITY_SECURITY_PROFILE_VALIDATION"
+    - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+  description: "Deterministic machine-derived evidence manifest with explicit proof boundaries and separate human decisions."
+  detail_file: "implementation-decisions/IMPL-QUALITY_EVIDENCE_MANIFEST.yaml"
+  metadata:
+    last_updated: "2026-08-02"
+    registered: "2026-08-02"
+  name: "Verification evidence manifest generation"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-QUALITY_PSEUDOCODE_VALIDATOR:
+  cross_references:
+    - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    - "PROC-PSEUDOCODE_VALIDATION"
+    - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+  description: "Deterministic structural pseudo-code validation with token linkage and contract diagnostics."
+  detail_file: "implementation-decisions/IMPL-QUALITY_PSEUDOCODE_VALIDATOR.yaml"
+  metadata:
+    last_updated: "2026-08-02"
+    registered: "2026-08-02"
+  name: "Layer B pseudo-code validator"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-QUALITY_SECURITY_PROFILE_VALIDATION:
+  cross_references:
+    - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+  description: "Conditional abuse-case evidence and waiver validation for external-input security risk."
+  detail_file: "implementation-decisions/IMPL-QUALITY_SECURITY_PROFILE_VALIDATION.yaml"
+  name: "External-input security profile validation"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-QUALITY_TEST_ADEQUACY:
+  cross_references:
+    - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    - "PROC-TEST_ADEQUACY"
+    - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+  description: "Risk-relative validation of test levels, boundaries, failure paths, and waiver evidence."
+  detail_file: "implementation-decisions/IMPL-QUALITY_TEST_ADEQUACY.yaml"
+  metadata:
+    last_updated: "2026-08-02"
+    registered: "2026-08-02"
+  name: "Risk-triggered test adequacy validator"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
 IMPL-TIED_FILES:
   cross_references:
     - "ARCH-TIED_STRUCTURE"
@@ -577,6 +694,31 @@ PROC-PSEUDOCODE_VALIDATION:
   source_index: "processes.md"
   status: "Active"
   type: "PROC"
+PROC-QUALITY_ASSURANCE:
+  cross_references:
+    - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    - "IMPL-QUALITY_EVIDENCE_MANIFEST"
+    - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+  description: "Select applicable quality profiles before design and record evidence, N/A rationale, owner, expiry, and residual risk without universal ceremony."
+  metadata:
+    last_updated: "2026-08-02"
+    registered: "2026-08-02"
+  name: "Risk-triggered quality assurance selection"
+  source_index: "processes.md"
+  status: "Active"
+  type: "PROC"
+PROC-QUALITY_EVIDENCE_PROVENANCE:
+  cross_references:
+    - "IMPL-QUALITY_EVIDENCE_MANIFEST"
+    - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+  description: "Retain command identity, environment, tool versions, thresholds, results, artifacts, and proof boundaries for machine-derived evidence."
+  metadata:
+    last_updated: "2026-08-02"
+    registered: "2026-08-02"
+  name: "Quality evidence provenance"
+  source_index: "processes.md"
+  status: "Active"
+  type: "PROC"
 PROC-RELEASE:
   cross_references:
     - "PROC-COMMIT_MESSAGES"
@@ -586,6 +728,18 @@ PROC-RELEASE:
     last_updated: "2026-03-03T00:00:00.000Z"
     registered: "2026-03-03T00:00:00.000Z"
   name: "Release and version numbering"
+  source_index: "processes.md"
+  status: "Active"
+  type: "PROC"
+PROC-TEST_ADEQUACY:
+  cross_references:
+    - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+  description: "Apply advanced testing, flakiness, maintainability, dependency, and external-call controls only when selected by risk profile."
+  metadata:
+    last_updated: "2026-08-02"
+    registered: "2026-08-02"
+  name: "Risk-triggered test adequacy"
   source_index: "processes.md"
   status: "Active"
   type: "PROC"
@@ -958,6 +1112,22 @@ REQ-MODULE_VALIDATION:
   name: "Independent Module Validation Before Integration"
   source_index: "requirements.yaml"
   status: "Active"
+  type: "REQ"
+REQ-QUALITY_ASSURANCE_EVIDENCE:
+  cross_references:
+    - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    - "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK"
+    - "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER"
+    - "IMPL-QUALITY_EVIDENCE_MANIFEST"
+    - "IMPL-QUALITY_SECURITY_PROFILE_VALIDATION"
+  description: "Risk-triggered applicability and reproducible quality evidence with explicit proof boundaries."
+  detail_file: "requirements/REQ-QUALITY_ASSURANCE_EVIDENCE.yaml"
+  metadata:
+    last_updated: "2026-08-02"
+    registered: "2026-08-02"
+  name: "Risk-triggered quality assurance evidence"
+  source_index: "requirements.yaml"
+  status: "Planned"
   type: "REQ"
 REQ-TIED_SETUP:
   category: "Core Functional"
