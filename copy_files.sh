@@ -41,6 +41,8 @@
 # Usage:
 #   ./copy_files.sh /path/to/project
 #   ./copy_files.sh            # copies into the current working directory
+#   ./copy_files.sh --merge-vocab /path/to/project
+#     adds missing vocabulary files without overwriting existing client glossaries
 
 set -euo pipefail
 
@@ -66,6 +68,11 @@ say_x_of_y_client() {
 }
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+MERGE_VOCAB=false
+if [[ "${1:-}" == "--merge-vocab" ]]; then
+  MERGE_VOCAB=true
+  shift
+fi
 TARGET_PROJECT_DIR="${1:-$(pwd)}"
 
 if [[ ! -d "${TARGET_PROJECT_DIR}" ]]; then
@@ -167,6 +174,8 @@ tied_yaml_skill_is_complete() {
   [[ -f "$1/scripts/tied-cli.sh" ]]
 }
 _patch_tied_cli_repo_root() {
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
+  # How: Resolve the installed CLI's repository marker once and leave already customized clients unchanged.
   local _cli="${TIED_YAML_SKILL_DEST}/scripts/tied-cli.sh"
   if [[ ! -f "${_cli}" ]]; then
     return 0
@@ -198,6 +207,8 @@ with open(path, "w", encoding="utf-8") as f:
   }
 }
 install_tied_yaml_skill() {
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
+  # How: Install the canonical or explicitly permitted fallback skill, then patch its TIED repository root.
   local _src="$1"
   mkdir -p "${CURSOR_DIR}/skills"
   rm -rf "${TIED_YAML_SKILL_DEST}"
@@ -231,6 +242,8 @@ fi
 VOCAB_SRC="${SCRIPT_DIR}/tied/vocab"
 VOCAB_DEST="${TIED_DIR}/vocab"
 _seed_domain_vocab() {
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [PROC-VOCABULARY_INDEX]
+  # How: Seed canonical glossaries only for a client with no existing Markdown vocabulary.
   local _src="$1" _dest="$2"
   if [[ ! -d "${_src}" ]]; then
     say_warn "No domain vocabulary source at ${_src}; skipped tied/vocab seed."
@@ -260,6 +273,34 @@ _seed_domain_vocab() {
 }
 _seed_domain_vocab "${VOCAB_SRC}" "${VOCAB_DEST}"
 
+if [[ "${MERGE_VOCAB}" == "true" ]]; then
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [PROC-VOCABULARY_INDEX]
+  # How: Add absent canonical glossary basenames under --merge-vocab without overwriting client glossaries.
+  merge_count=0
+  merge_total=0
+  merge_skipped=0
+  shopt -s nullglob
+  for _f in "${VOCAB_SRC}"/*.md; do
+    if [[ -f "${_f}" ]]; then
+      ((merge_total++)) || true
+      _dest_file="${VOCAB_DEST}/$(basename "${_f}")"
+      if [[ -f "${_dest_file}" ]]; then
+        ((merge_skipped++)) || true
+      else
+        mkdir -p "${VOCAB_DEST}"
+        cp -p "${_f}" "${_dest_file}"
+        ((merge_count++)) || true
+      fi
+    fi
+  done
+  shopt -u nullglob
+  if [[ ${merge_total} -gt 0 ]]; then
+    say_warn "Vocabulary merge added ${merge_count} of ${merge_total} canonical file(s); preserved ${merge_skipped} existing client file(s)."
+  else
+    say_warn "No *.md in ${VOCAB_SRC}; skipped vocabulary merge."
+  fi
+fi
+
 BASE_FILES=(
   ".cursorrules"
   "AGENTS.md"
@@ -287,6 +328,15 @@ say_x_of_y_client "${base_copied}" "${#BASE_FILES[@]}" "Copied ${base_copied} of
 TEMPLATES_DIR="${SCRIPT_DIR}/templates"
 TIED_SOURCE_DIR="${SCRIPT_DIR}/tied"
 # --- Methodology: index YAMLs into tied/methodology/ (ALWAYS OVERWRITE) ---
+# [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
+# How: Bootstrap or refresh the client layout while preserving client-owned project YAML and existing vocabulary.
+#
+# [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
+# How: Refresh inherited methodology content as an exact source-template snapshot; project YAML and client docs remain outside this tree.
+rm -rf "${METHODOLOGY_DIR}"
+mkdir -p "${METHODOLOGY_DIR}/requirements"
+mkdir -p "${METHODOLOGY_DIR}/architecture-decisions"
+mkdir -p "${METHODOLOGY_DIR}/implementation-decisions"
 INDEX_YAML_FILES=(
   "requirements.yaml"
   "architecture-decisions.yaml"
@@ -336,6 +386,7 @@ DOCS_TO_COPY=(
   "citdp-record-template.yaml"
   "client-development-index.md"
   "commit-guidelines.md"
+  "composition-coverage.md"
   "detail-files-schema.md"
   "agent-req-implementation-checklist.yaml"
   "ai-agent-tied-mcp-usage.md"
@@ -343,6 +394,7 @@ DOCS_TO_COPY=(
   "implementation-decisions.md"
   "implementation-order.md"
   "LEAP.md"
+  "methodology-migration.md"
   "methodology-diagrams.md"
   "processes.md"
   # Canonical IMPL pseudo-code (primary references for bootstrap):
@@ -351,6 +403,9 @@ DOCS_TO_COPY=(
   "pseudocode-format-and-practices.md"
   "pseudocode-writing-and-validation.md"
   "pseudocode-validation-checklist.yaml"
+  "quality-assurance-commands.md"
+  "quality-assurance-pilot.md"
+  "quality-evidence-manifest.md"
   "req-impl-state-guide-agent-workflow.md"
   "requirement-list-state-guide-agent-workflow.md"
   "requirements.md"
@@ -413,6 +468,19 @@ if [[ -d "${IMPL_TEMPLATE_DIR}" ]]; then
   done
   if [[ ${impl_total} -gt 0 ]]; then
     say_warn "Copied ${impl_count} of ${impl_total} methodology implementation decision(s) into ${METHODOLOGY_DIR}/implementation-decisions (overwritten)."
+  fi
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
+  # How: Refresh inherited IMPL sidecars from templates while leaving project-owned implementation decisions untouched.
+  impl_sidecar_count=0
+  for sidecar_file in "${IMPL_TEMPLATE_DIR}"/*-pseudocode.md; do
+    if [[ -f "${sidecar_file}" ]]; then
+      filename="$(basename "${sidecar_file}")"
+      cp -p "${sidecar_file}" "${METHODOLOGY_DIR}/implementation-decisions/${filename}"
+      ((impl_sidecar_count++)) || true
+    fi
+  done
+  if [[ ${impl_sidecar_count} -gt 0 ]]; then
+    say_warn "Copied ${impl_sidecar_count} methodology implementation pseudo-code sidecar(s) into ${METHODOLOGY_DIR}/implementation-decisions (overwritten)."
   fi
 fi
 

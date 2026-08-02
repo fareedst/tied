@@ -985,6 +985,9 @@ IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK:
   detail_file: "implementation-decisions/IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK.yaml"
   name: "Authenticated webhook inbox pilot"
   status: "Active"
+  traceability:
+    tests:
+      - "pilot/webhook-inbox/test/webhook-inbox.test.mjs"
 IMPL-QUALITY_BINDING_INVENTORY:
   cross_references:
     - "ARCH-MODULE_VALIDATION"
@@ -994,6 +997,10 @@ IMPL-QUALITY_BINDING_INVENTORY:
   detail_file: "implementation-decisions/IMPL-QUALITY_BINDING_INVENTORY.yaml"
   name: "Quality binding inventory validator"
   status: "Active"
+  traceability:
+    tests:
+      - "mcp-server/src/analysis/binding-inventory.test.ts"
+      - "mcp-server/src/tools/quality-validation-mcp.test.ts"
 IMPL-QUALITY_EVIDENCE_COLLECTION:
   cross_references:
     - "ARCH-QUALITY_ASSURANCE_PROFILES"
@@ -1003,6 +1010,12 @@ IMPL-QUALITY_EVIDENCE_COLLECTION:
   detail_file: "implementation-decisions/IMPL-QUALITY_EVIDENCE_COLLECTION.yaml"
   name: "Command-to-manifest evidence collector"
   status: "Active"
+  traceability:
+    tests:
+      - "mcp-server/src/quality-command-runner.test.ts"
+      - "mcp-server/src/quality-evidence-collection.test.ts"
+      - "mcp-server/src/quality-evidence.test.ts"
+      - "mcp-server/src/tools/quality-validation-mcp.test.ts"
 IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER:
   cross_references:
     - "ARCH-QUALITY_ASSURANCE_PROFILES"
@@ -1011,7 +1024,15 @@ IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER:
   description: "Execute declared quality commands and capture reproducible command evidence for the verification manifest."
   detail_file: "implementation-decisions/IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER.yaml"
   name: "Quality evidence command runner"
+  related_decisions:
+    composed_with:
+      - "IMPL-QUALITY_EVIDENCE_COLLECTION"
   status: "Active"
+  traceability:
+    tests:
+      - "mcp-server/src/quality-command-runner.test.ts"
+      - "mcp-server/src/quality-evidence-collection.test.ts"
+      - "mcp-server/src/tools/quality-validation-mcp.test.ts"
 IMPL-QUALITY_EVIDENCE_MANIFEST:
   cross_references:
     - "ARCH-QUALITY_ASSURANCE_PROFILES"
@@ -1021,6 +1042,11 @@ IMPL-QUALITY_EVIDENCE_MANIFEST:
   detail_file: "implementation-decisions/IMPL-QUALITY_EVIDENCE_MANIFEST.yaml"
   name: "Verification evidence manifest generation"
   status: "Active"
+  traceability:
+    tests:
+      - "mcp-server/src/quality-evidence-collection.test.ts"
+      - "mcp-server/src/quality-evidence.test.ts"
+      - "mcp-server/src/tools/quality-validation-mcp.test.ts"
 IMPL-QUALITY_PSEUDOCODE_VALIDATOR:
   cross_references:
     - "ARCH-QUALITY_ASSURANCE_PROFILES"
@@ -1029,6 +1055,10 @@ IMPL-QUALITY_PSEUDOCODE_VALIDATOR:
   detail_file: "implementation-decisions/IMPL-QUALITY_PSEUDOCODE_VALIDATOR.yaml"
   name: "Layer B pseudo-code validator"
   status: "Active"
+  traceability:
+    tests:
+      - "mcp-server/src/analysis/pseudocode-validator.test.ts"
+      - "mcp-server/src/tools/quality-validation-mcp.test.ts"
 IMPL-QUALITY_SECURITY_PROFILE_VALIDATION:
   cross_references:
     - "ARCH-QUALITY_ASSURANCE_PROFILES"
@@ -1037,6 +1067,10 @@ IMPL-QUALITY_SECURITY_PROFILE_VALIDATION:
   detail_file: "implementation-decisions/IMPL-QUALITY_SECURITY_PROFILE_VALIDATION.yaml"
   name: "External-input security profile validation"
   status: "Active"
+  traceability:
+    tests:
+      - "mcp-server/src/quality-security.test.ts"
+      - "mcp-server/src/tools/quality-validation-mcp.test.ts"
 IMPL-QUALITY_TEST_ADEQUACY:
   cross_references:
     - "ARCH-QUALITY_ASSURANCE_PROFILES"
@@ -1045,6 +1079,10 @@ IMPL-QUALITY_TEST_ADEQUACY:
   detail_file: "implementation-decisions/IMPL-QUALITY_TEST_ADEQUACY.yaml"
   name: "Risk-triggered test adequacy validator"
   status: "Active"
+  traceability:
+    tests:
+      - "mcp-server/src/quality-adequacy.test.ts"
+      - "mcp-server/src/tools/quality-validation-mcp.test.ts"
 IMPL-TIED_FILES:
   code_locations:
     files:
@@ -1059,13 +1097,16 @@ IMPL-TIED_FILES:
   detail_file: "implementation-decisions/IMPL-TIED_FILES.yaml"
   implementation_approach:
     details:
+      - "Additive vocabulary merge mode: copy_files.sh --merge-vocab copies only absent TIED_SOURCE/tied/vocab/*.md filenames and reports added versus preserved files; existing client vocabulary remains authoritative."
       - "Copy base files to project root when missing (.cursorrules, AGENTS.md). In a TIED source repository, live guide content is under tied/docs/; agents and preload use client ./tied/docs/ paths and ./tied/agent-preload-contract.yaml."
       - "Copy guide .md files, detail-files-schema.md, preload contract templates, and reference docs from TIED source tied/docs/ into client tied/docs/ when missing (per DOCS_TO_COPY in copy_files.sh)"
       - "Copy YAML index files from templates (requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml)"
       - "Create detail subdirectories (requirements/, architecture-decisions/, implementation-decisions/)"
       - "Create tied/ directory at project root"
+      - "DOCS_TO_COPY now installs methodology-migration.md, composition-coverage.md, and the quality-assurance command, pilot, and evidence-manifest guides when missing."
       - "Install the tied-yaml Cursor skill to .cursor/skills/tied-yaml/ (from tools/bundled-tied-yaml-skill/ in the TIED source repo; .cursor/skills/tied-yaml only if the bundle is missing; overwritten each run). The canonical stdio client on the client is .cursor/skills/tied-yaml/scripts/tied-cli.sh only; copy_files.sh does not create a project-root scripts/tied-cli.sh entry."
-    summary: "Bootstrap script that creates tied/ directory, copies template files, sets up base files, and installs the tied-yaml CLI skill under .cursor/skills/tied-yaml/"
+      - "Template promotion supplies quality REQ/ARCH/IMPL detail YAML and IMPL-*-pseudocode.md sidecars; copy_files.sh refreshes inherited implementation pseudo-code sidecars into tied/methodology/implementation-decisions/ without touching project YAML."
+    summary: "Bootstrap script that creates tied/ directory, copies template files and inherited pseudo-code sidecars, sets up base files, installs the tied-yaml CLI skill under .cursor/skills/tied-yaml/, and supports additive vocabulary merge."
   metadata:
     created:
       author: "AI Agent"
@@ -1106,4 +1147,4 @@ IMPL-TIED_FILES:
     requirements:
       - "REQ-TIED_SETUP"
     tests:
-      - "Manual verification checklists"
+      - "mcp-server/src/e2e/bootstrap-and-load.test.ts"

@@ -34,7 +34,7 @@ ARCH-QUALITY_ASSURANCE_PROFILES:
     last_updated:
       author: "AI Agent"
       date: "2026-08-02"
-      reason: "Align quality implementation dependency graph and evidence traceability"
+      reason: "Formalize dedicated quality implementation ownership and composition evidence"
     last_validated:
       date: "2026-08-02"
       result: "pending"

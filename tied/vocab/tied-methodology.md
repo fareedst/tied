@@ -31,6 +31,11 @@
 | **yaml_semantic_compare** | YAML equality check, deep YAML diff (alone) | Library: `scripts/yaml_semantic_compare.rb`; compares loaded YAML values (key order ignored; optional unordered arrays); used by **yaml_list_sorter** post-sort validation |
 | **compare_yaml_dirs** | directory YAML diff, recursive yaml compare | CLI: `scripts/compare_yaml_dirs.rb LEFT_DIR RIGHT_DIR`; relative-path pairing; reports missing files and semantic differences |
 | **routing.md** / **routing index** | `domain-references-routing.md`, bootstrap via full catalog | Primary `tied/vocab/` PRELOAD entry; keyword → glossary table. Full catalog remains [`domain-references.md`](domain-references.md) (on-demand) |
+| **methodology migration** | client upgrade, methodology refresh (alone) | Controlled refresh of inherited methodology content that preserves project YAML and client-owned documentation |
+| **client refresh** | rerun bootstrap (alone) | A `copy_files.sh` execution against an existing client project |
+| **inherited methodology snapshot** | copied methodology, stale methodology | The exact current template-derived contents of `tied/methodology/`, refreshed as an inherited read-only tree |
+| **promoted quality record** | quality template, copied quality YAML | A quality REQ/ARCH/IMPL detail record installed into the inherited methodology view from canonical templates |
+| **vocabulary merge mode** | overwrite vocab, vocab sync (alone) | Additive `copy_files.sh --merge-vocab` behavior that copies absent glossary files without replacing existing client files |
 
 ---
 
@@ -47,6 +52,8 @@
 | Agent operating guide | AGENTS | `AGENTS.md` | — | [REQ-TIED_SETUP](../requirements/REQ-TIED_SETUP.yaml) |
 | Client development index | core six | `tied/docs/client-development-index.md` | minimal CITDP+LEAP+TIED doc set | [PROC-AGENT_REQ_CHECKLIST](../docs/processes.md) |
 | Bootstrap script | copy_files | `copy_files.sh` | `./copy_files.sh /path/to/client` | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
+| Methodology migration guide | migration guide | `tied/docs/methodology-migration.md` | Existing-client upgrade procedure | [REQ-TIED_SETUP](../requirements/REQ-TIED_SETUP.yaml) |
+| Vocabulary merge mode | copy-missing-vocab | `copy_files.sh --merge-vocab` | Additive vocabulary installation | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
 | Domain vocabulary index | vocab index | `tied/vocab/*.md` | checklist `VOCAB_INDEX` | [PROC-VOCABULARY_INDEX](../docs/processes.md) |
 | Vocab directory routing index | routing index | `tied/vocab/routing.md` | PRELOAD primary entry | [PROC-VOCABULARY_INDEX](../docs/processes.md) |
 | Domain vocabulary full catalog | full catalog | `tied/vocab/domain-references.md` | on-demand cross-topic / Priority table | [PROC-VOCABULARY_INDEX](../docs/processes.md) |
@@ -103,7 +110,16 @@ Exact spellings for checklist and docs cross-reference:
 
 | Preferred term | UPPER_SNAKE block | Owning IMPL |
 |----------------|-------------------|-------------|
-| (methodology tokens are PROC-level; no dedicated UPPER_SNAKE blocks in methodology IMPLs) | — | — |
+| module validation lifecycle | `MODULE_VALIDATION_LIFECYCLE` | [IMPL-MODULE_VALIDATION](../implementation-decisions/IMPL-MODULE_VALIDATION.yaml) |
+| composition binding validation | `COMPOSITION_BINDING_VALIDATION` | [IMPL-MODULE_VALIDATION](../implementation-decisions/IMPL-MODULE_VALIDATION.yaml) |
+| TIED bootstrap | `BOOTSTRAP_TIED` | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
+| TIED YAML skill installation | `INSTALL_TIED_YAML_SKILL` | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
+| TIED CLI repository-root patch | `PATCH_TIED_CLI_REPO_ROOT` | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
+| domain vocabulary seed | `SEED_DOMAIN_VOCAB` | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
+| domain vocabulary merge | `MERGE_DOMAIN_VOCAB` | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
+| implementation pseudo-code sidecar copy | `COPY_IMPLEMENTATION_PSEUDOCODE_SIDECARS` | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
+| YAML canonicalization | `CANONICALIZE_YAML_FILE` | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
+| YAML path lint | `LINT_YAML_PATHS` | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
 
 ---
 
@@ -113,6 +129,7 @@ Exact spellings for checklist and docs cross-reference:
 |------|---------|
 | AGENTS.md | Naming bridge |
 | binding inventory | Preferred terms |
+| client refresh | Preferred terms |
 | compare_yaml_dirs | Preferred terms |
 | composition evidence | Preferred terms |
 | composition-coverage.md | Naming bridge |
@@ -121,10 +138,13 @@ Exact spellings for checklist and docs cross-reference:
 | detail file | Preferred terms |
 | domain-references.md | Naming bridge |
 | full catalog | Naming bridge |
+| inherited methodology snapshot | Preferred terms |
 | lint_yaml | Preferred terms |
 | methodology YAML | Preferred terms |
+| methodology migration | Preferred terms |
 | module validation | Preferred terms |
 | Observing AI principles! | Preferred terms |
+| promoted quality record | Preferred terms |
 | PROC-AGENT_REQ_CHECKLIST | PROC catalog |
 | PROC-VOCABULARY_INDEX | PROC catalog |
 | project YAML | Preferred terms |
@@ -137,6 +157,7 @@ Exact spellings for checklist and docs cross-reference:
 | tied/vocab | Naming bridge |
 | VOCAB_INDEX | Naming bridge |
 | Vocab directory routing index | Naming bridge |
+| vocabulary merge mode | Preferred terms |
 | yaml_list_sorter | Naming bridge |
 | yaml_semantic_compare | Preferred terms |
 | yaml_tool | Preferred terms |

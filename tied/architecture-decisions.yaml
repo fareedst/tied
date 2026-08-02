@@ -897,7 +897,45 @@ ARCH-QUALITY_ASSURANCE_PROFILES:
   description: "Use bounded applicability profiles to select quality evidence by risk, while keeping TIED consistency, runtime validation, and human risk acceptance as distinct proof boundaries."
   detail_file: "architecture-decisions/ARCH-QUALITY_ASSURANCE_PROFILES.yaml"
   name: "Risk-triggered quality assurance profiles and evidence boundary"
+  related_decisions:
+    depends_on:
+      - "ARCH-MODULE_VALIDATION"
+      - "ARCH-TIED_STRUCTURE"
+    informs:
+      - "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK"
+      - "IMPL-QUALITY_BINDING_INVENTORY"
+      - "IMPL-QUALITY_EVIDENCE_COLLECTION"
+      - "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER"
+      - "IMPL-QUALITY_EVIDENCE_MANIFEST"
+      - "IMPL-QUALITY_PSEUDOCODE_VALIDATOR"
+      - "IMPL-QUALITY_SECURITY_PROFILE_VALIDATION"
+      - "IMPL-QUALITY_TEST_ADEQUACY"
   status: "Active"
+  traceability:
+    code_annotations:
+      - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    implementation:
+      - "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK"
+      - "IMPL-QUALITY_BINDING_INVENTORY"
+      - "IMPL-QUALITY_EVIDENCE_COLLECTION"
+      - "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER"
+      - "IMPL-QUALITY_EVIDENCE_MANIFEST"
+      - "IMPL-QUALITY_PSEUDOCODE_VALIDATOR"
+      - "IMPL-QUALITY_SECURITY_PROFILE_VALIDATION"
+      - "IMPL-QUALITY_TEST_ADEQUACY"
+    requirements:
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+    tests:
+      - "mcp-server/src/analysis/binding-inventory.test.ts"
+      - "mcp-server/src/analysis/pseudocode-validator.test.ts"
+      - "mcp-server/src/analysis/traceability-gap.test.ts"
+      - "mcp-server/src/quality-adequacy.test.ts"
+      - "mcp-server/src/quality-command-runner.test.ts"
+      - "mcp-server/src/quality-evidence-collection.test.ts"
+      - "mcp-server/src/quality-evidence.test.ts"
+      - "mcp-server/src/quality-security.test.ts"
+      - "mcp-server/src/tools/quality-validation-mcp.test.ts"
+      - "pilot/webhook-inbox/test/webhook-inbox.test.mjs"
 ARCH-TIED_STRUCTURE:
   alternatives_considered:
     - name: "Root-level files"
@@ -922,7 +960,11 @@ ARCH-TIED_STRUCTURE:
       - "Add guide files: semantic-tokens.md, processes.md"
       - "Create detail subdirectories: requirements/, architecture-decisions/, implementation-decisions/"
       - "Create tied/ directory at project root"
+      - "Install promoted quality REQ/ARCH/IMPL detail files and pseudo-code sidecars into the inherited methodology snapshot."
+      - "Never overwrite project YAML indexes or detail directories under the tied/ root during bootstrap."
       - "Populate with YAML index files: requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml"
+      - "Refresh tied/methodology/ as an inherited read-only snapshot with exact template parity and stale-file pruning."
+      - "Use copy_files.sh --merge-vocab to add absent glossary basenames without replacing existing client vocabulary."
     summary: "Create dedicated tied/ directory with YAML indexes and detail subdirectories"
   metadata:
     created:
@@ -930,8 +972,8 @@ ARCH-TIED_STRUCTURE:
       date: "2025-12-18T00:00:00.000Z"
     last_updated:
       author: "AI Agent"
-      date: "2026-02-06T00:00:00.000Z"
-      reason: "Restructured to v1.5.0 schema with machine-parseable fields"
+      date: "2026-08-02"
+      reason: "LEAP: document inherited methodology refresh and project-data preservation boundaries"
     last_validated:
       date: "2026-02-06T00:00:00.000Z"
       result: "pass"

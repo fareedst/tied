@@ -1,7 +1,6 @@
 /**
- * E2E test: bootstrap a project with copy_files.sh then load indexes via yaml-loader.
- * [IMPL] Verifies the full flow: core methodology (inherited LEAP R+A+I) copy → TIED_BASE_PATH → loader reads from tied/.
- * Clients receive inherited tokens (e.g. REQ-TIED_SETUP, REQ-MODULE_VALIDATION) so TIED/LEAP behaviors exist in every project.
+ * [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
+ * How: Exercise bootstrap and refresh behavior while preserving client-owned project YAML, documentation, vocabulary, and unrelated content.
  */
 
 import { describe, it, beforeEach, afterEach } from "node:test";
@@ -29,6 +28,7 @@ describe("e2e: bootstrap and load", () => {
   });
 
   afterEach(() => {
+    delete process.env.TIED_BASE_PATH;
     if (tempDir && fs.existsSync(tempDir)) {
       fs.rmSync(tempDir, { recursive: true });
     }
@@ -119,7 +119,127 @@ describe("e2e: bootstrap and load", () => {
       "copy_files.sh should copy tied/docs/pseudocode-format-and-practices.md [IMPL-TIED_FILES]"
     );
 
-    delete process.env.TIED_BASE_PATH;
+  });
+
+  it("refreshes inherited methodology without overwriting client content [IMPL-TIED_FILES]", () => {
+    // [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
+    // How: Refresh the inherited methodology snapshot, add absent vocabulary files, and preserve client-owned content.
+    const copyScript = path.join(repoRoot, "copy_files.sh");
+    const tiedDir = path.join(tempDir, "tied");
+    const projectRequirements = path.join(tiedDir, "requirements.yaml");
+    const customRequirement = path.join(tiedDir, "requirements", "REQ-CLIENT_ONLY.yaml");
+    const customDoc = path.join(tiedDir, "docs", "methodology-migration.md");
+    const vocabDir = path.join(tiedDir, "vocab");
+    const customRouting = path.join(vocabDir, "routing.md");
+    const customVocab = path.join(vocabDir, "client-only.md");
+    const unrelatedClientFile = path.join(tempDir, "client-notes.txt");
+
+    fs.mkdirSync(path.dirname(projectRequirements), { recursive: true });
+    fs.mkdirSync(path.dirname(customRequirement), { recursive: true });
+    fs.mkdirSync(path.dirname(customDoc), { recursive: true });
+    fs.mkdirSync(vocabDir, { recursive: true });
+    fs.writeFileSync(projectRequirements, "# client project YAML sentinel\nCLIENT_PROJECT: preserved\n");
+    fs.writeFileSync(customRequirement, "REQ-CLIENT_ONLY:\n  name: client sentinel\n");
+    fs.writeFileSync(customDoc, "# Client migration notes\npreserve this customized document.\n");
+    fs.writeFileSync(customRouting, "# Client routing glossary\npreserve this customized glossary.\n");
+    fs.writeFileSync(customVocab, "# Client-only glossary\n");
+    fs.writeFileSync(unrelatedClientFile, "unrelated client content\n");
+
+    execSync(`bash "${copyScript}" "${tempDir}"`, { stdio: "pipe", cwd: repoRoot });
+
+    const methodologyDir = path.join(tiedDir, "methodology");
+    const staleMethodologyFile = path.join(
+      methodologyDir,
+      "implementation-decisions",
+      "STALE-INHERITED.yaml"
+    );
+    const staleMethodologySidecar = path.join(
+      methodologyDir,
+      "implementation-decisions",
+      "STALE-INHERITED-pseudocode.md"
+    );
+    fs.writeFileSync(staleMethodologyFile, "stale: true\n");
+    fs.writeFileSync(staleMethodologySidecar, "# stale inherited sidecar\n");
+
+    execSync(`bash "${copyScript}" --merge-vocab "${tempDir}"`, {
+      stdio: "pipe",
+      cwd: repoRoot,
+    });
+
+    assert.strictEqual(
+      fs.readFileSync(projectRequirements, "utf8"),
+      "# client project YAML sentinel\nCLIENT_PROJECT: preserved\n",
+      "refresh must preserve client project YAML"
+    );
+    assert.strictEqual(
+      fs.readFileSync(customRequirement, "utf8"),
+      "REQ-CLIENT_ONLY:\n  name: client sentinel\n",
+      "refresh must preserve client detail YAML"
+    );
+    assert.strictEqual(
+      fs.readFileSync(customDoc, "utf8"),
+      "# Client migration notes\npreserve this customized document.\n",
+      "refresh must preserve customized client documentation"
+    );
+    assert.strictEqual(
+      fs.readFileSync(customRouting, "utf8"),
+      "# Client routing glossary\npreserve this customized glossary.\n",
+      "merge must preserve customized routing vocabulary"
+    );
+    assert.ok(fs.existsSync(path.join(vocabDir, "quality-assurance.md")), "merge must add an absent canonical glossary");
+    assert.ok(fs.existsSync(customVocab), "merge must preserve unrelated client vocabulary");
+    assert.strictEqual(
+      fs.readFileSync(unrelatedClientFile, "utf8"),
+      "unrelated client content\n",
+      "refresh must preserve unrelated client content"
+    );
+    assert.ok(
+      !fs.existsSync(staleMethodologyFile) && !fs.existsSync(staleMethodologySidecar),
+      "refresh must prune stale inherited methodology files"
+    );
+
+    const promotedQualityDetail = path.join(
+      methodologyDir,
+      "implementation-decisions",
+      "IMPL-QUALITY_EVIDENCE_MANIFEST.yaml"
+    );
+    const promotedQualitySidecar = path.join(
+      methodologyDir,
+      "implementation-decisions",
+      "IMPL-QUALITY_EVIDENCE_MANIFEST-pseudocode.md"
+    );
+    assert.ok(fs.existsSync(promotedQualityDetail), "refresh must install promoted quality detail YAML");
+    assert.ok(fs.existsSync(promotedQualitySidecar), "refresh must install promoted quality pseudo-code sidecar");
+    assert.match(
+      fs.readFileSync(promotedQualitySidecar, "utf8"),
+      /\[IMPL-QUALITY_EVIDENCE_MANIFEST\]/,
+      "promoted quality sidecar must retain its literal token linkage"
+    );
+
+    const listRelativeFiles = (root: string): string[] => {
+      const entries = fs.readdirSync(root, { withFileTypes: true });
+      return entries.flatMap((entry) => {
+        const absolute = path.join(root, entry.name);
+        if (entry.isDirectory()) {
+          return listRelativeFiles(absolute).map((nested) => path.join(entry.name, nested));
+        }
+        return [entry.name];
+      });
+    };
+    const expectedMethodologyFiles = [
+      "requirements.yaml",
+      "architecture-decisions.yaml",
+      "implementation-decisions.yaml",
+      "semantic-tokens.yaml",
+      ...["requirements", "architecture-decisions", "implementation-decisions"].flatMap((directory) =>
+        listRelativeFiles(path.join(repoRoot, "templates", directory)).map((file) => path.join(directory, file))
+      ),
+    ].sort();
+    assert.deepStrictEqual(
+      listRelativeFiles(methodologyDir).sort(),
+      expectedMethodologyFiles,
+      "refreshed methodology must match the current template file set exactly"
+    );
   });
 
   it("loader reads semantic-tokens index from bootstrapped tied/ [IMPL]", () => {

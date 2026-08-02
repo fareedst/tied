@@ -1,0 +1,84 @@
+ARCH-MODULE_VALIDATION:
+  alternatives_considered:
+    - name: "Big Bang Integration"
+      cons:
+        - "Bugs compound during integration"
+        - "Difficult to isolate issues"
+        - "Too complex to debug"
+      pros:
+        - "Faster initial integration"
+      rejected_reason: "Makes debugging too difficult and bugs compound"
+    - name: "Minimal Validation"
+      cons:
+        - "Doesn't validate contracts properly"
+        - "Insufficient to catch complexity bugs"
+      pros:
+        - "Faster development cycle"
+      rejected_reason: "Insufficient validation leads to integration issues"
+    - name: "Post-Integration Validation Only"
+      cons:
+        - "Doesn't catch module-level bugs early"
+        - "Increases debugging complexity"
+      pros:
+        - "All validation done at once"
+      rejected_reason: "Bugs discovered too late, making fixes expensive"
+  cross_references:
+    - "REQ-MODULE_VALIDATION"
+  detail_file: "architecture-decisions/ARCH-MODULE_VALIDATION.yaml"
+  implementation_approach:
+    details:
+      - "Allowed collaborators for a binding are only independently validated modules (or explicit test doubles)"
+      - "Define module interfaces and contracts explicitly (INPUT/OUTPUT plus PRE/POST/EFFECTS at IMPL layer)"
+      - "Document validation and composition results before integration"
+      - "E2E-only classification requires a named platform constraint; bindings via events, messages, or function calls are composition-testable, not E2E-only"
+      - "Every composition-testable binding must be UI-free testable — fire trigger programmatically and observe callee, arguments, and effect without browser/UI"
+      - "Identify modules and document boundaries before development"
+      - "Integration test with test doubles where full peers are unavailable; validate combined behavior against documented contracts"
+      - "Maintain a binding inventory for composition boundaries — each row names Binding ID, Trigger, Callee/collaborator, Arguments asserted, Effect asserted, Ordering/PRE, Failure behavior, Composition test locus, and E2E flag"
+      - "Only integrate after independent validation and composition gates pass"
+      - "Specify validation criteria for each module"
+      - "Unit test modules with mocked dependencies; validate contracts, edge cases, and error handling"
+      - "Write failing composition tests before composition/wiring code; implement minimal wiring only to satisfy those tests"
+    summary: "Independent module validation before integration, then UI-free composition validation of every binding, with E2E reserved for named platform constraints"
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2025-12-18"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-07-31"
+      reason: "Define composition boundaries via binding inventory and UI-free composition gates"
+    last_validated:
+      date: "2026-02-06"
+      result: "pass"
+      validator: "AI Agent"
+  name: "Module Validation Strategy"
+  rationale:
+    benefits:
+      - "Bugs caught early before integration"
+      - "Clear module boundaries and contracts"
+      - "Easier debugging by isolating issues"
+      - "Enables parallel module development"
+      - "Reduced integration complexity"
+    problems_solved:
+      - "Bugs discovered too late in development cycle"
+      - "Integration complexity causing difficult-to-debug issues"
+      - "Module contracts not properly validated"
+    why: "To eliminate bugs related to code complexity by ensuring each module works correctly in isolation"
+  related_decisions:
+    depends_on:
+      - "REQ-MODULE_VALIDATION"
+    informs:
+      - "IMPL-MODULE_VALIDATION"
+    see_also: []
+  status: "Active"
+  traceability:
+    code_annotations:
+      - "IMPL-MODULE_VALIDATION"
+      - "REQ-MODULE_VALIDATION"
+    implementation:
+      - "IMPL-MODULE_VALIDATION"
+    requirements:
+      - "REQ-MODULE_VALIDATION"
+    tests:
+      - "testModuleName_IndependentValidation_REQ_MODULE_VALIDATION"

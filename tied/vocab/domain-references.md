@@ -55,6 +55,7 @@
 - **agentstream** (Go product/CLI name) vs **agent-stream** (Ruby directory/package) vs **run-feature-batch** driver scripts — define once in [`agentstream.md`](agentstream.md) and [`agent-stream-ruby.md`](agent-stream-ruby.md); link from both.
 - **Domain vocabulary** (this tree) vs **IMPL grammar vocabulary** (INPUT/OUTPUT/DATA/PRE/POST/EFFECTS keywords) — define once in [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md).
 - **TIED base path** / **project YAML** vs **methodology YAML** — define once in [`tied-methodology.md`](tied-methodology.md); referenced from [`tied-yaml-mcp.md`](tied-yaml-mcp.md).
+- **Methodology migration** / **client refresh** / **vocabulary merge mode** — a `copy_files.sh` refresh replaces only the inherited `tied/methodology/` snapshot, preserves project YAML and client-owned vocabulary, and uses `--merge-vocab` to add absent glossary files; canonical terms live in [`tied-methodology.md`](tied-methodology.md) and the operational procedure in [`../docs/methodology-migration.md`](../docs/methodology-migration.md).
 - **Non-canonical LEAP proposals** (`leap-proposals/`) never mutate project TIED YAML — see [`leap-proposal-queue.md`](leap-proposal-queue.md).
 
 ---
@@ -75,12 +76,15 @@
 |------|---------|
 | agent-stream | Cross-topic notes |
 | agentstream | Cross-topic notes |
+| client refresh | Cross-topic notes |
 | Domain vocabulary index | Title |
 | domain-references.md | Preferred terms (directory entry) |
 | full catalog | Preferred terms (directory entry) |
+| methodology migration | Cross-topic notes |
 | IMPL grammar vocabulary | Authoring guides |
 | routing index | Preferred terms (directory entry) |
 | routing.md | Directory entry (bootstrap) |
 | sub-vocabulary-sync | Scope |
 | VOCAB_INDEX | Scope |
 | Vocab directory routing index | Preferred terms (directory entry) |
+| vocabulary merge mode | Cross-topic notes |

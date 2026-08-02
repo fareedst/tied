@@ -23,7 +23,7 @@ IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER:
     last_updated:
       author: "AI Agent"
       date: "2026-08-02"
-      reason: "Record collector composition backlink and executable test traceability"
+      reason: "Synchronize literal block leads"
   name: "Quality evidence command runner"
   rationale:
     benefits:

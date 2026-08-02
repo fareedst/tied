@@ -23,62 +23,65 @@
 #   detail_file: Path to the detailed .yaml in requirements/ or null for methodology index-only rows; procedure: tied/docs/agent-req-implementation-checklist.yaml
 #   metadata: Optional metadata
 # Methodology seed: token identity and traceability only; do not expand rationale here (use the checklist and project detail files when needed).
-REQ-TIED_SETUP:
-  name: TIED Methodology Setup
-  category: Functional
-  priority: P0
-  status: Implemented
-  detail_file: null
-  traceability:
-    architecture:
-      - ARCH-TIED_STRUCTURE
-    implementation:
-      - IMPL-TIED_FILES
-  related_requirements:
-    depends_on: []
-    related_to: []
-    supersedes: []
-  metadata:
-    last_updated:
-      reason: 'Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml'
-REQ-MODULE_VALIDATION:
-  name: Independent Module Validation Before Integration
-  category: Functional
-  priority: P0
-  status: Implemented
-  detail_file: null
-  traceability:
-    architecture:
-      - ARCH-MODULE_VALIDATION
-    implementation:
-      - IMPL-MODULE_VALIDATION
-  related_requirements:
-    depends_on:
-      - REQ-TIED_SETUP
-    related_to: []
-    supersedes: []
-  metadata:
-    last_updated:
-      reason: 'Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml'
 REQ-FEEDBACK_TO_TIED:
-  name: Feedback to TIED (Feature Requests, Bug Reports, Methodology)
-  category: Functional
-  priority: P1
-  status: Planned
-  detail_file: null
+  name: "Feedback to TIED (Feature Requests, Bug Reports, Methodology)"
+  category: "Functional"
+  priority: "P1"
+  status: "Planned"
+  detail_file: "null"
   traceability:
     architecture:
-      - ARCH-FEEDBACK_STORAGE
+      - "ARCH-FEEDBACK_STORAGE"
     implementation:
-      - IMPL-MCP_FEEDBACK_TOOLS
+      - "IMPL-MCP_FEEDBACK_TOOLS"
   related_requirements:
     depends_on: []
     related_to:
-      - REQ-TIED_SETUP
+      - "REQ-TIED_SETUP"
     supersedes: []
   metadata:
     last_updated:
-      reason: 'Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml'
+      reason: "Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml"
+REQ-MODULE_VALIDATION:
+  name: "Independent Module Validation Before Integration"
+  category: "Functional"
+  priority: "P0"
+  status: "Implemented"
+  detail_file: "null"
+  traceability:
+    architecture:
+      - "ARCH-MODULE_VALIDATION"
+    implementation:
+      - "IMPL-MODULE_VALIDATION"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_SETUP"
+    related_to: []
+    supersedes: []
+  metadata:
+    last_updated:
+      reason: "Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml"
+REQ-QUALITY_ASSURANCE_EVIDENCE:
+  category: "Non-Functional"
+  cross_references:
+    - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    - "IMPL-QUALITY_EVIDENCE_MANIFEST"
+  description: "Every behavior-changing change selects applicable quality attributes from a bounded risk profile and records reproducible evidence, limitations, and accepted residual risk without imposing irrelevant checks."
+  detail_file: "requirements/REQ-QUALITY_ASSURANCE_EVIDENCE.yaml"
+  name: "Risk-triggered quality assurance evidence"
+  priority: "P0"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    implementation:
+      - "IMPL-QUALITY_EVIDENCE_MANIFEST"
+  related_requirements:
+    depends_on:
+      - "REQ-MODULE_VALIDATION"
+      - "REQ-TIED_SETUP"
+    related_to: []
+    supersedes: []
 # ---
 # Template Record - Copy this block to create new requirements
 # ---
@@ -133,3 +136,22 @@ REQ-FEEDBACK_TO_TIED:
 #       date: YYYY-MM-DD
 #       validator: "agent/contributor"
 #       result: "pass"
+
+REQ-TIED_SETUP:
+  name: "TIED Methodology Setup"
+  category: "Functional"
+  priority: "P0"
+  status: "Implemented"
+  detail_file: "null"
+  traceability:
+    architecture:
+      - "ARCH-TIED_STRUCTURE"
+    implementation:
+      - "IMPL-TIED_FILES"
+  related_requirements:
+    depends_on: []
+    related_to: []
+    supersedes: []
+  metadata:
+    last_updated:
+      reason: "Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml"

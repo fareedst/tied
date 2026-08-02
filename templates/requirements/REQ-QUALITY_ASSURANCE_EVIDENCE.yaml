@@ -8,7 +8,7 @@ REQ-QUALITY_ASSURANCE_EVIDENCE:
     last_updated:
       author: "AI Agent"
       date: "2026-08-02"
-      reason: "Align promoted quality traceability and observed test evidence"
+      reason: "Formalize quality module ownership and complete unit/composition/pilot traceability"
   name: "Risk-triggered quality assurance evidence"
   priority: "P0"
   rationale:

@@ -7,8 +7,8 @@ REQ-TIED_SETUP:
       date: "2025-11-08T00:00:00.000Z"
     last_updated:
       author: "AI Agent"
-      date: "2026-08-02"
-      reason: "LEAP: record non-destructive methodology migration and additive vocabulary merge satisfaction criteria"
+      date: "2026-07-29T00:00:00.000Z"
+      reason: "Satisfaction criterion: double-quoted scalar lint via yaml_tool sort_keys(.. style=\"double\") [PROC-YAML_EDIT_LOOP]"
     last_validated:
       date: "2026-02-06T00:00:00.000Z"
       result: "pass"
