@@ -22,6 +22,69 @@
 #   detail_file: Path to the detailed .yaml in architecture-decisions/ or null for methodology index-only; procedure: tied/docs/agent-req-implementation-checklist.yaml
 #   metadata: Optional metadata
 # Methodology seed: token identity and traceability only; expand rationale in project detail files.
+#
+# ---
+# Template Record - Copy this block to create new architecture decisions
+# ---
+#
+# ARCH-IDENTIFIER:
+#   name: Architecture Decision Title
+#   status: Active
+#   cross_references:
+#     - REQ-RELATED_REQUIREMENT
+#   rationale:
+#     why: "Primary reason for this decision"
+#     problems_solved:
+#       - "Problem 1"
+#       - "Problem 2"
+#     benefits:
+#       - "Benefit 1"
+#       - "Benefit 2"
+#   alternatives_considered:
+#     - name: "Alternative 1"
+#       pros:
+#         - "Pro 1"
+#       cons:
+#         - "Con 1"
+#       rejected_reason: "Why it was rejected"
+#     - name: "Alternative 2"
+#       pros:
+#         - "Pro 1"
+#       cons:
+#         - "Con 1"
+#       rejected_reason: "Why it was rejected"
+#   implementation_approach:
+#     summary: "High-level description of the approach"
+#     details:
+#       - "Key component 1"
+#       - "Key component 2"
+#       - "Integration point 1"
+#   traceability:
+#     requirements:
+#       - REQ-IDENTIFIER
+#     implementation:
+#       - IMPL-IDENTIFIER
+#     tests:
+#       - testFeatureName_ARCH_IDENTIFIER
+#     code_annotations:
+#       - ARCH-IDENTIFIER
+#   related_decisions:
+#     depends_on: []
+#     informs: []
+#     see_also: []
+#   detail_file: architecture-decisions/ARCH-IDENTIFIER.yaml
+#   metadata:
+#     created:
+#       date: YYYY-MM-DD
+#       author: "agent/contributor"
+#     last_updated:
+#       date: YYYY-MM-DD
+#       author: "agent/contributor"
+#       reason: "Initial creation"
+#     last_validated:
+#       date: YYYY-MM-DD
+#       validator: "agent/contributor"
+#       result: "pass"
 ARCH-FEEDBACK_STORAGE:
   cross_references:
     - "REQ-FEEDBACK_TO_TIED"
@@ -29,68 +92,6 @@ ARCH-FEEDBACK_STORAGE:
   metadata:
     last_updated:
       reason: "Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml"
-      # ---
-      # Template Record - Copy this block to create new architecture decisions
-      # ---
-      #
-      # ARCH-IDENTIFIER:
-      #   name: Architecture Decision Title
-      #   status: Active
-      #   cross_references:
-      #     - REQ-RELATED_REQUIREMENT
-      #   rationale:
-      #     why: "Primary reason for this decision"
-      #     problems_solved:
-      #       - "Problem 1"
-      #       - "Problem 2"
-      #     benefits:
-      #       - "Benefit 1"
-      #       - "Benefit 2"
-      #   alternatives_considered:
-      #     - name: "Alternative 1"
-      #       pros:
-      #         - "Pro 1"
-      #       cons:
-      #         - "Con 1"
-      #       rejected_reason: "Why it was rejected"
-      #     - name: "Alternative 2"
-      #       pros:
-      #         - "Pro 1"
-      #       cons:
-      #         - "Con 1"
-      #       rejected_reason: "Why it was rejected"
-      #   implementation_approach:
-      #     summary: "High-level description of the approach"
-      #     details:
-      #       - "Key component 1"
-      #       - "Key component 2"
-      #       - "Integration point 1"
-      #   traceability:
-      #     requirements:
-      #       - REQ-IDENTIFIER
-      #     implementation:
-      #       - IMPL-IDENTIFIER
-      #     tests:
-      #       - testFeatureName_ARCH_IDENTIFIER
-      #     code_annotations:
-      #       - ARCH-IDENTIFIER
-      #   related_decisions:
-      #     depends_on: []
-      #     informs: []
-      #     see_also: []
-      #   detail_file: architecture-decisions/ARCH-IDENTIFIER.yaml
-      #   metadata:
-      #     created:
-      #       date: YYYY-MM-DD
-      #       author: "agent/contributor"
-      #     last_updated:
-      #       date: YYYY-MM-DD
-      #       author: "agent/contributor"
-      #       reason: "Initial creation"
-      #     last_validated:
-      #       date: YYYY-MM-DD
-      #       validator: "agent/contributor"
-      #       result: "pass"
   name: "Feedback Storage for TIED Reporting"
   related_decisions:
     depends_on:

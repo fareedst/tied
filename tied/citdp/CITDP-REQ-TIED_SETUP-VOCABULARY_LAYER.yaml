@@ -1,0 +1,91 @@
+CITDP-REQ-TIED_SETUP-VOCABULARY_LAYER:
+  change_definition:
+    current_behavior_prior: "TIED 3.0.0 documentation and bootstrap changes introduce a vocabulary control layer, but the work-in-progress needs explicit term records, complete IMPL block linkage, and coverage for preserving existing MCP configuration files."
+    desired_behavior: "TIED 3.0.0 vocabulary-layer terminology, bootstrap behavior, IMPL pseudo-code, REQ/ARCH/IMPL traceability, tests, and validation evidence are aligned; copy_files.sh preserves an existing .cursor/mcp.json byte-for-byte."
+    non_goals:
+      - "Do not commit or push the work"
+      - "Do not edit inherited tied/methodology/ content"
+      - "Do not modify an existing .cursor/mcp.json, even when tied-yaml is absent"
+    references:
+      - "AGENTS.md"
+      - "CHANGELOG.md"
+      - "copy_files.sh"
+      - "mcp-server/src/e2e/bootstrap-and-load.test.ts"
+      - "templates/implementation-decisions/IMPL-TIED_FILES-pseudocode.md"
+      - "tied/docs/LEAP.md"
+      - "tied/docs/pseudocode-validation-checklist.yaml"
+      - "tied/docs/pseudocode-writing-and-validation.md"
+      - "tied/implementation-decisions/IMPL-TIED_FILES-pseudocode.md"
+      - "tied/vocab/pseudocode-and-citdp.md"
+      - "tied/vocab/routing.md"
+      - "tied/vocab/tied-methodology.md"
+    success_criteria:
+      - "Bootstrap E2E proves an existing .cursor/mcp.json remains unchanged"
+      - "Canonical vocabulary records vocabulary layer, agent-control layer, and RESOLVE/PRELOAD/RECORD/VALIDATE touchpoints"
+      - "Changed YAML and pseudo-code pass their validators"
+      - "Every changed IMPL pseudo-code block has the required REQ/ARCH/IMPL lead comment and applicable contract fields"
+      - "REQ-TIED_SETUP, ARCH-TIED_STRUCTURE, and IMPL-TIED_FILES describe the same bootstrap and preservation behavior"
+      - "tied_validate_consistency passes"
+  completion_criteria:
+    leap_closeout_notes: "IMPL-TIED_FILES behavior was propagated to ARCH-TIED_STRUCTURE and REQ-TIED_SETUP; vocabulary records the canonical vocabulary layer, agent-control layer, MCP config preservation, and cross-topic routing; AGENTS.md and the MCP runbook now describe the preserve-existing configuration contract."
+    record_status: "complete"
+    verification_gate_notes: "Completed on 2026-08-04: mcp-server build and npm test passed (145 tests); bash -n copy_files.sh passed; project TIED YAML lint passed; changed IMPL blocks passed pseudocode_validate; tied_validate_consistency returned ok true; bootstrap E2E covered initial config creation and existing config preservation."
+  impact_analysis:
+    modules_or_boundaries: "Domain vocabulary, copy_files.sh bootstrap, methodology/project TIED data boundary, IMPL pseudo-code sidecars, mcp-server test harness, and release documentation."
+    tied_tokens_affected:
+      - "ARCH-TIED_STRUCTURE"
+      - "IMPL-TIED_FILES"
+      - "PROC-CITDP"
+      - "PROC-IMPL_CODE_TEST_SYNC"
+      - "PROC-IMPL_PSEUDOCODE_TOKENS"
+      - "PROC-LEAP"
+      - "PROC-TEST_STRATEGY"
+      - "PROC-VOCABULARY_INDEX"
+      - "REQ-TIED_SETUP"
+    tied_tokens_new: []
+  record_identity:
+    change_request_id: "REQ-TIED_SETUP-VOCABULARY_LAYER"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    checklist_step_completed: "persist-citdp-record"
+    checklist_version: "agent_req_implementation_checklist v3.0.0"
+    recorded_at: "2026-08-04"
+    tied_context:
+      architecture:
+        - "ARCH-TIED_STRUCTURE"
+      implementation:
+        - "IMPL-TIED_FILES"
+      processes:
+        - "PROC-IMPL_CODE_TEST_SYNC"
+        - "PROC-IMPL_PSEUDOCODE_TOKENS"
+        - "PROC-LEAP"
+        - "PROC-VOCABULARY_INDEX"
+      requirements:
+        - "REQ-TIED_SETUP"
+    title: "TIED 3.0.0 vocabulary layer and non-destructive MCP config preservation"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  risk_analysis:
+    risks:
+      - id: "RISK-VOCABULARY-001"
+        description: "New methodology terms are used without canonical glossary ownership."
+        likelihood: "Medium"
+        mitigation: "PRELOAD routed glossaries, RECORD preferred-term and naming-bridge rows, then VALIDATE names across artifacts."
+        severity: "Medium"
+      - id: "RISK-MCP-CONFIG-001"
+        description: "Preserving an existing MCP configuration can leave tied-yaml absent, but changing the file could overwrite user-owned settings."
+        likelihood: "Medium"
+        mitigation: "Treat whole-file preservation as the selected contract and cover it byte-for-byte in the bootstrap fixture."
+        severity: "Medium"
+      - id: "RISK-TRACEABILITY-001"
+        description: "IMPL pseudo-code, source comments, tests, and REQ/ARCH/IMPL records can drift during version alignment."
+        likelihood: "Medium"
+        mitigation: "Apply block-lead comments, perform LEAP reconciliation, and run pseudo-code plus TIED consistency validation."
+        severity: "High"
+    summary: "The change is documentation- and bootstrap-focused; the main risks are vocabulary ambiguity, intentional MCP config preservation, and three-way traceability drift."
+  tdd_sequence:
+    summary: "Updated IMPL pseudo-code and vocabulary contracts first, aligned source/test comments and REQ/ARCH/IMPL records, added preservation assertions, then executed validation gates. No UI E2E was required."
+  test_strategy:
+    coverage_gaps:
+      - "Bootstrap failure modes beyond the preservation and refresh fixture remain outside the change."
+      - "No UI invocation exists in this scope."
+    matrix_notes: "mcp-server npm test passed: 145 tests; bootstrap E2E passed with initial MCP config creation and byte-for-byte existing-config preservation; bash -n copy_files.sh passed; changed project TIED YAML passed scripts/lint_yaml.sh; changed IMPL bootstrap/MCP blocks passed Layer B pseudocode_validate; tied_validate_consistency returned ok true; git diff --check passed."
+    summary: "Unit, composition, and filesystem E2E coverage passed for the staged scope; no UI E2E is required because the change has no UI invocation."

@@ -1,6 +1,6 @@
 # LEAP, TIED, and CITDP: Costs, Benefits, and Checklist Reference
 
-**TIED Methodology Version**: 2.2.0
+**TIED Methodology Version**: 3.0.0
 
 **Audience**: Humans (product owners, engineers, reviewers). Process token for the unified procedure: `[PROC-AGENT_REQ_CHECKLIST]`.
 

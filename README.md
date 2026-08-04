@@ -1,14 +1,14 @@
 # TIED Methodology Template
 
-**TIED Methodology Version**: 2.2.0
+**TIED Methodology Version**: 3.0.0
 
-> **v2.2.0+**: Planning and execution are driven by the **traceability chain** (requirements → architecture → implementation → tests → code) and, for agents, by **agentstream** feeding the **agent requirement implementation checklist** one step at a time—not by a separate project task ledger file.
+> **v3.0.0+**: Agent planning begins with the **domain vocabulary layer** (`tied/vocab/`) so sponsor language, TIED records, pseudo-code blocks, tests, code, and user-facing documentation use one preferred term. The vocabulary layer and the traceability chain (requirements → architecture → implementation → tests → code) are enforced by the **agent requirement implementation checklist**, with **agentstream** feeding it one step at a time.
 
 This repository ([https://github.com/fareedst/tied](https://github.com/fareedst/tied)) contains the **Token-Integrated Engineering & Development (TIED)** methodology template that can be used as a base for development projects in any language.
 
 ## Spec-Driven Development with TIED
 
-**Priority path for new TIED clients:** drive development with an **ordered list of feature specs** run through the **[agent requirement implementation checklist](tied/docs/agent-req-implementation-checklist.md)** (`[PROC-AGENT_REQ_CHECKLIST]`). That checklist sequences **CITDP** (change impact and test design), **LEAP** (logic elevation and propagation), and **TDD** so agent output stays aligned with intent. Add an **agent preload contract** so the model loads platform and project facts once instead of rediscovering them each session.
+**Priority path for new TIED clients:** drive development with an **ordered list of feature specs** run through the **[agent requirement implementation checklist](tied/docs/agent-req-implementation-checklist.md)** (`[PROC-AGENT_REQ_CHECKLIST]`). The checklist first resolves sponsor language and preloads the routed vocabulary, then sequences **CITDP** (change impact and test design), **LEAP** (logic elevation and propagation), and **TDD** so agent output stays aligned with both shared understanding and formal intent. Add an **agent preload contract** so the model loads platform and project facts once instead of rediscovering them each session.
 
 ### End-to-end pipeline (TIED + LEAP + CITDP)
 

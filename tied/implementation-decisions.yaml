@@ -1104,17 +1104,20 @@ IMPL-TIED_FILES:
       - "Create detail subdirectories (requirements/, architecture-decisions/, implementation-decisions/)"
       - "Create tied/ directory at project root"
       - "DOCS_TO_COPY now installs methodology-migration.md, composition-coverage.md, and the quality-assurance command, pilot, and evidence-manifest guides when missing."
+      - "Initialize .cursor/mcp.json only when it is absent; preserve an existing file byte-for-byte rather than merging or refreshing tied-yaml settings, including when tied-yaml is absent."
       - "Install the tied-yaml Cursor skill to .cursor/skills/tied-yaml/ (from tools/bundled-tied-yaml-skill/ in the TIED source repo; .cursor/skills/tied-yaml only if the bundle is missing; overwritten each run). The canonical stdio client on the client is .cursor/skills/tied-yaml/scripts/tied-cli.sh only; copy_files.sh does not create a project-root scripts/tied-cli.sh entry."
       - "Template promotion supplies quality REQ/ARCH/IMPL detail YAML and IMPL-*-pseudocode.md sidecars; copy_files.sh refreshes inherited implementation pseudo-code sidecars into tied/methodology/implementation-decisions/ without touching project YAML."
-    summary: "Bootstrap script that creates tied/ directory, copies template files and inherited pseudo-code sidecars, sets up base files, installs the tied-yaml CLI skill under .cursor/skills/tied-yaml/, and supports additive vocabulary merge."
+      - "The bootstrap E2E fixture verifies initial MCP config creation and byte-for-byte preservation during methodology and vocabulary refresh."
+      - "Treat the vocabulary layer as an agent-control layer and keep its RESOLVE, PRELOAD, RECORD, and VALIDATE touchpoints aligned with [PROC-VOCABULARY_INDEX]."
+    summary: "Bootstrap script that creates tied/ directory, copies template files and inherited pseudo-code sidecars, sets up base files, installs the tied-yaml CLI skill under .cursor/skills/tied-yaml/, supports additive vocabulary merge, and preserves existing MCP configuration"
   metadata:
     created:
       author: "AI Agent"
       date: "2025-12-18T00:00:00.000Z"
     last_updated:
       author: "AI Agent"
-      date: "2026-04-24T00:00:00.000Z"
-      reason: "Index aligned to IMPL detail: single tied-cli path"
+      date: "2026-08-04"
+      reason: "LEAP: align bootstrap pseudo-code, vocabulary control layer, and MCP preservation"
     last_validated:
       date: "2026-02-06T00:00:00.000Z"
       result: "pass"

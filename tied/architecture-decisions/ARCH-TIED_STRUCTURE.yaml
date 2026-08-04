@@ -24,20 +24,22 @@ ARCH-TIED_STRUCTURE:
       - "Create detail subdirectories: requirements/, architecture-decisions/, implementation-decisions/"
       - "Create tied/ directory at project root"
       - "Create tied/vocab/ for project-scoped domain vocabulary (plain Markdown *.md; writable; seeded by copy_files.sh when absent; not under tied/methodology/)"
+      - "Initialize .cursor/mcp.json only when absent; preserve an existing MCP configuration byte-for-byte, including custom settings and whether tied-yaml is present."
       - "Install promoted quality REQ/ARCH/IMPL detail files and pseudo-code sidecars into the inherited methodology snapshot."
       - "Never overwrite project YAML indexes or detail directories under the tied/ root during bootstrap."
       - "Populate with YAML index files: requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml"
       - "Refresh tied/methodology/ as an inherited read-only snapshot with exact template parity and stale-file pruning."
+      - "Treat domain vocabulary as an agent-control layer alongside semantic tokens and IMPL pseudo-code, using RESOLVE, PRELOAD, RECORD, and VALIDATE touchpoints defined by [PROC-VOCABULARY_INDEX]."
       - "Use copy_files.sh --merge-vocab to add absent glossary basenames without replacing existing client vocabulary."
-    summary: "Create dedicated tied/ directory with YAML indexes and detail subdirectories"
+    summary: "Create dedicated tied/ directory with YAML indexes, domain vocabulary controls, and non-destructive bootstrap boundaries"
   metadata:
     created:
       author: "AI Agent"
       date: "2025-12-18"
     last_updated:
       author: "AI Agent"
-      date: "2026-08-02"
-      reason: "LEAP: document inherited methodology refresh and project-data preservation boundaries"
+      date: "2026-08-04"
+      reason: "LEAP: record vocabulary control layer and preserve existing MCP configuration"
     last_validated:
       date: "2026-02-06"
       result: "pass"

@@ -1,6 +1,6 @@
 # LEAP+TIED+CITDP Methodology Diagrams
 
-**TIED Methodology Version**: 2.2.0
+**TIED Methodology Version**: 3.0.0
 
 Six diagrams capture the core methodology: the traceability stack, the three development phases, the LEAP bidirectional loop, the full dev-cycle session workflow, the TDD inner loop, and the CITDP change-analysis procedure. A short **New client setup — Cursor** section at the end shows bootstrap and `agent enable tied-yaml` for MCP.
 

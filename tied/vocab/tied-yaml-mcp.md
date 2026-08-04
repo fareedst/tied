@@ -21,6 +21,7 @@
 | **project YAML write** | any yaml under tied | MCP writes **only** project indexes/detail dirs; never `tied/methodology/` |
 | **merged view** | full yaml read | Methodology + project for read/validate; writes target project only |
 | **consistency validation** | lint only | `tied_validate_consistency` — graph + schema, not just YAML syntax |
+| **MCP config preservation** | MCP config refresh, MCP config merge | `copy_files.sh` creates `.cursor/mcp.json` only when absent; an existing file remains byte-for-byte unchanged |
 | **essence_pseudocode sidecar** | inline yaml pseudocode | Prefer `IMPL-*-pseudocode.md` or `impl_detail_set_essence_pseudocode` |
 | **TIED methodology repository** | TIED repo, source repo | Git checkout that ships `mcp-server/`, `copy_files.sh`, `tools/bundled-tied-yaml-skill/`; distinct from **client project root** |
 | **bundled skill** | .cursor skill source | Git-tracked canonical: `tools/bundled-tied-yaml-skill/`; installed to client `.cursor/skills/tied-yaml/` |
@@ -41,6 +42,7 @@
 | TIED source root | TIED methodology repo | — | `TIED_REPO_ROOT` (baked by `copy_files.sh` into installed tied-cli) | default for `TIED_MCP_BIN` |
 | Client project root | client repo | — | derived in tied-cli (`REPO_ROOT`) | default for `TIED_BASE_PATH`; `getClientProjectRoot()` for extra rename globs |
 | IDE MCP config | mcp.json | `.cursor/mcp.json` | `env.TIED_BASE_PATH` | Cursor Settings → MCP |
+| MCP config preservation | preserve existing MCP config | `.cursor/mcp.json` | `copy_files.sh` initializes only when absent | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
 | Large CLI args | args file | temp file | `TIED_CLI_ARGS_FILE` | `@/path/to/payload.json` |
 | IMPL body from file | essence file | `IMPL-*-pseudocode.md` | `TIED_CLI_IMPL_ESSENCE_FILE` | `impl_detail_set_essence_pseudocode` |
 | MCP usage metrics | metrics JSONL | `~/.cursor/logs/tied-mcp-metrics.jsonl` | `TIED_MCP_COLLECT_METRICS`, `TIED_MCP_METRICS_PATH`, `TIED_MCP_METRICS_CLIENT` | `usage-metrics.ts` `wrapToolHandler` |
@@ -162,6 +164,7 @@ Feedback and LEAP proposal tools are documented in sibling glossaries ([`feedbac
 | getClientProjectRoot | Naming bridge |
 | impl_detail_set_essence_pseudocode | MCP catalog |
 | merged view | Preferred terms |
+| MCP config preservation | Preferred terms |
 | metrics JSONL | MCP usage metrics |
 | TIED base path | Preferred terms |
 | TIED methodology repository | Preferred terms |

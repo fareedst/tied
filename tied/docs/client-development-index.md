@@ -2,7 +2,7 @@
 
 **Audience**: Engineers and AI agents in a **TIED client project** (after `copy_files.sh`).
 
-**Purpose**: One page that names the **smallest document set** needed to apply **TIED** (traceable REQ → ARCH → IMPL → tests → code), **CITDP** (structured change analysis), and **LEAP** (keep docs and code aligned) on every development task.
+**Purpose**: One page that names the **smallest document set** needed to apply the **vocabulary layer** (shared domain language), **TIED** (traceable REQ → ARCH → IMPL → tests → code), **CITDP** (structured change analysis), and **LEAP** (keep docs and code aligned) on every development task.
 
 **Process spine**: `[PROC-AGENT_REQ_CHECKLIST]` in [agent-req-implementation-checklist.md](agent-req-implementation-checklist.md).
 
@@ -12,7 +12,8 @@
 
 | Piece | Client nickname | What it does |
 | --- | --- | --- |
-| **TIED** | **Traceability stack** | Records intent in YAML tokens and IMPL pseudo-code; links requirements, design, tests, and code. |
+| **Vocabulary** | **Shared language** | Resolves sponsor terms, routes pre-read context, records naming bridges, and validates names across artifacts. |
+| **TIED** | **Traceability stack** | Records intent in YAML tokens and IMPL pseudo-code; links requirements, design, tests, and code using vocabulary terms. |
 | **CITDP** | **Change analysis** | Before code: define the change, blast radius, risks, test plan; after: persist `tied/citdp/CITDP-*.yaml`. |
 | **LEAP** | **Stack sync** | When tests or code disagree with IMPL, update **IMPL first**, then ARCH/REQ if scope changed—not silent drift. |
 
@@ -20,18 +21,19 @@
 
 ---
 
-## Core six — read these for every project
+## Core seven — read these for every project
 
 Use these **nicknames** in tickets, PRs, and agent prompts.
 
 | # | Nickname | File | Read when |
 | --- | --- | --- | --- |
 | 1 | **Rules** | [`../../AGENTS.md`](../../AGENTS.md) | Session start; defines obligations, MCP base path, vocab touchpoints. |
-| 2 | **Checklist** | [agent-req-implementation-checklist.md](agent-req-implementation-checklist.md) | **Every** new feature, change, or bug fix — the executable procedure. |
-| 3 | **Tracker** | [agent-req-implementation-checklist.yaml](agent-req-implementation-checklist.yaml) | Copy to a working folder per task; record step completion (see YAML header). |
-| 4 | **Processes** | [processes.md](processes.md) | Need the **definition** behind a checklist step. Read these sections only: `[PROC-CITDP]`, `[PROC-LEAP]`, `[PROC-TIED_DEV_CYCLE]`, `[PROC-IMPL_CODE_TEST_SYNC]`, `[PROC-TEST_STRATEGY]`, `[PROC-QUALITY_ASSURANCE]`, `[PROC-QUALITY_EVIDENCE_PROVENANCE]`, `[PROC-TEST_ADEQUACY]`, `[PROC-VOCABULARY_INDEX]`. |
-| 5 | **Pseudo-code** | [pseudocode-writing-and-validation.md](pseudocode-writing-and-validation.md) | Authoring or repairing IMPL `essence_pseudocode`; three-way alignment; LEAP micro-cycle. Tracks: **new feature** (A), **post-fix** (B), **code without spec** (C). |
-| 6 | **Change records** | [citdp-policy.md](citdp-policy.md) + [citdp-record-template.yaml](citdp-record-template.yaml) | When to write a CITDP file; shape for `tied/citdp/CITDP-*.yaml`, quality evidence matrix, and residual-risk decisions. |
+| 2 | **Vocabulary** | [`../vocab/routing.md`](../vocab/routing.md) → matched glossaries | **Before** reading TIED, source, or tests; resolve and preload terms, then record new names and validate before commit. |
+| 3 | **Checklist** | [agent-req-implementation-checklist.md](agent-req-implementation-checklist.md) | **Every** new feature, change, or bug fix — the executable procedure. |
+| 4 | **Tracker** | [agent-req-implementation-checklist.yaml](agent-req-implementation-checklist.yaml) | Copy to a working folder per task; record step completion (see YAML header). |
+| 5 | **Processes** | [processes.md](processes.md) | Need the **definition** behind a checklist step. Read these sections only: `[PROC-CITDP]`, `[PROC-LEAP]`, `[PROC-TIED_DEV_CYCLE]`, `[PROC-IMPL_CODE_TEST_SYNC]`, `[PROC-TEST_STRATEGY]`, `[PROC-QUALITY_ASSURANCE]`, `[PROC-QUALITY_EVIDENCE_PROVENANCE]`, `[PROC-TEST_ADEQUACY]`, `[PROC-VOCABULARY_INDEX]`. |
+| 6 | **Pseudo-code** | [pseudocode-writing-and-validation.md](pseudocode-writing-and-validation.md) | Authoring or repairing IMPL `essence_pseudocode`; three-way alignment; LEAP micro-cycle. Tracks: **new feature** (A), **post-fix** (B), **code without spec** (C). |
+| 7 | **Change records** | [citdp-policy.md](citdp-policy.md) + [citdp-record-template.yaml](citdp-record-template.yaml) | When to write a CITDP file; shape for `tied/citdp/CITDP-*.yaml`, quality evidence matrix, and residual-risk decisions. |
 
 Quality assurance references: [quality-assurance-commands.md](quality-assurance-commands.md), [quality-evidence-manifest.md](quality-evidence-manifest.md), [quality-assurance-pilot.md](quality-assurance-pilot.md), and [composition-coverage.md](composition-coverage.md).
 
@@ -108,8 +110,8 @@ After writes: `lint_yaml` on changed YAML + `tied_validate_consistency` (checkli
 
 ## One-line agent prompt
 
-> Follow **Rules**, execute **Checklist** steps from a per-task **Tracker** copy, author/repair behavior in **Pseudo-code** before RED tests, apply **LEAP** on divergence, persist **Change records** when behavior changes, mutate project YAML via **tied-cli**, validate with `tied_validate_consistency`.
+> Follow **Rules**, resolve and preload **Vocabulary**, execute **Checklist** steps from a per-task **Tracker** copy, author/repair behavior in **Pseudo-code** before RED tests, apply **LEAP** on divergence, record new terms, persist **Change records** when behavior changes, mutate project YAML via **tied-cli**, and validate vocabulary plus `tied_validate_consistency`.
 
 ---
 
-**TIED Methodology Version**: 2.2.0 · **Last updated**: 2026-06-14
+**TIED Methodology Version**: 3.0.0 · **Last updated**: 2026-08-04

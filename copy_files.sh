@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
-# How: Bootstrap client tied/ layout, methodology refresh, tied-yaml skill install, vocab seed, MCP config.
+# How: Bootstrap client tied/ layout, methodology refresh, tied-yaml skill install, vocab seed, and conditional MCP config initialization.
 #
 # copy_files.sh
 #
@@ -31,9 +31,10 @@
 #     Installed tied-cli.sh bakes TIED_REPO_ROOT to this TIED source repo for TIED_MCP_BIN default.
 #   - tied/vocab/: domain vocabulary glossaries (*.md) including routing.md; seeded when missing or empty (never overwrites client files)
 #   - Canonical CLI: .cursor/skills/tied-yaml/scripts/tied-cli.sh (use `tree -a` to list .cursor/ or open in the IDE).
-#   - .cursor/mcp.json: (re)writes mcpServers.tied-yaml with stdio, absolute paths to this TIED
-#     repo's mcp-server/dist/index.js and the target project's tied/; preserves other mcpServers
-#     keys. Fails if mcp-server/dist/index.js is not built. After bootstrap, in Cursor you may
+#   - .cursor/mcp.json: creates mcpServers.tied-yaml with stdio, absolute paths to this TIED
+#     repo's mcp-server/dist/index.js and the target project's tied/ only when the file is
+#     missing; preserves an existing file byte-for-byte. Fails if mcp-server/dist/index.js is
+#     not built. After bootstrap, in Cursor you may
 #     run: agent enable tied-yaml — approve; type quit to exit the Agent CLI.
 #
 # Designed for macOS (Bash 3.2+) and Ubuntu (Bash 5.x+).
@@ -113,6 +114,8 @@ TIED_BASE_PATH_VALUE="$(_realpath "${TIED_DIR}")"
 MCP_JSON="${CURSOR_DIR}/mcp.json"
 
 _refresh_tied_mcp_json() {
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
+  # How: Create the default TIED MCP configuration for a missing client file; the caller guards existing files so client-owned settings remain untouched.
   MCP_JSON_PATH="${MCP_JSON}" TIED_MCP_INDEX_JS="${TIED_SERVER_PATH}" TIED_BASE_PATH_VAL="${TIED_BASE_PATH_VALUE}" \
     python3 -c '
 import json, os, sys
@@ -160,10 +163,14 @@ if [[ -f "${SCRIPT_DIR}/.cursor/hooks.json" ]]; then
 fi
 
 mkdir -p "${CURSOR_DIR}"
-_refresh_tied_mcp_json
-say_ok "Refreshed ${MCP_JSON} mcpServers.tied-yaml (TIED_MCP dist + project TIED_BASE_PATH)."
+# [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
+# How: INITIALIZE_TIED_MCP_CONFIG creates .cursor/mcp.json only when absent and preserves an existing MCP configuration byte-for-byte.
+if [[ ! -f "${MCP_JSON}" ]]; then
+  _refresh_tied_mcp_json
+  say_ok "Initialized ${MCP_JSON} mcpServers.tied-yaml (TIED_MCP dist + project TIED_BASE_PATH)."
+fi
 
-# --- Cursor Agent Skill: tied-yaml (CLI; MCP config is refreshed above) ---
+# --- Cursor Agent Skill: tied-yaml (CLI; MCP config is initialized above when absent) ---
 # Canonical source: tools/bundled-tied-yaml-skill/ (committed). Fallback: .cursor/skills/tied-yaml
 # only when bundled is missing or incomplete (non-canonical; warn). Local .cursor/ is gitignored for dev edits.
 TIED_YAML_SKILL_CANONICAL="${SCRIPT_DIR}/tools/bundled-tied-yaml-skill"

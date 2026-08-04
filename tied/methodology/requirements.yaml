@@ -23,66 +23,67 @@
 #   detail_file: Path to the detailed .yaml in requirements/ or null for methodology index-only rows; procedure: tied/docs/agent-req-implementation-checklist.yaml
 #   metadata: Optional metadata
 # Methodology seed: token identity and traceability only; do not expand rationale here (use the checklist and project detail files when needed).
+#
+# ---
+# Template Record - Copy this block to create new requirements
+# ---
+#
+# REQ-IDENTIFIER:
+#   name: Requirement Name
+#   category: Functional
+#   priority: P1
+#   status: "Planned"
+#   rationale:
+#     why: "Primary reason for this requirement"
+#     problems_solved:
+#       - "Problem 1"
+#       - "Problem 2"
+#     benefits:
+#       - "Benefit 1"
+#       - "Benefit 2"
+#   satisfaction_criteria:
+#     - criterion: "Criterion description 1"
+#       metric: "Measurable target (optional)"
+#     - criterion: "Criterion description 2"
+#   validation_criteria:
+#     - method: "Unit tests"
+#       coverage: "All core functions"
+#     - method: "Integration tests"
+#       coverage: "End-to-end flows"
+#     - method: "Manual testing"
+#       coverage: "QA checklist"
+#   traceability:
+#     architecture:
+#       - ARCH-IDENTIFIER
+#     implementation:
+#       - IMPL-IDENTIFIER
+#     tests:
+#       - testFeatureName_REQ_IDENTIFIER
+#     code_annotations:
+#       - REQ-IDENTIFIER
+#   related_requirements:
+#     depends_on: []
+#     related_to: []
+#     supersedes: []
+#   detail_file: requirements/REQ-IDENTIFIER.yaml
+#   metadata:
+#     created:
+#       date: YYYY-MM-DD
+#       author: "agent/contributor"
+#     last_updated:
+#       date: YYYY-MM-DD
+#       author: "agent/contributor"
+#       reason: "Initial creation"
+#     last_validated:
+#       date: YYYY-MM-DD
+#       validator: "agent/contributor"
+#       result: "pass"
 REQ-FEEDBACK_TO_TIED:
   category: "Functional"
   detail_file: "null"
   metadata:
     last_updated:
       reason: "Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml"
-      # ---
-      # Template Record - Copy this block to create new requirements
-      # ---
-      #
-      # REQ-IDENTIFIER:
-      #   name: Requirement Name
-      #   category: Functional
-      #   priority: P1
-      #   status: "Planned"
-      #   rationale:
-      #     why: "Primary reason for this requirement"
-      #     problems_solved:
-      #       - "Problem 1"
-      #       - "Problem 2"
-      #     benefits:
-      #       - "Benefit 1"
-      #       - "Benefit 2"
-      #   satisfaction_criteria:
-      #     - criterion: "Criterion description 1"
-      #       metric: "Measurable target (optional)"
-      #     - criterion: "Criterion description 2"
-      #   validation_criteria:
-      #     - method: "Unit tests"
-      #       coverage: "All core functions"
-      #     - method: "Integration tests"
-      #       coverage: "End-to-end flows"
-      #     - method: "Manual testing"
-      #       coverage: "QA checklist"
-      #   traceability:
-      #     architecture:
-      #       - ARCH-IDENTIFIER
-      #     implementation:
-      #       - IMPL-IDENTIFIER
-      #     tests:
-      #       - testFeatureName_REQ_IDENTIFIER
-      #     code_annotations:
-      #       - REQ-IDENTIFIER
-      #   related_requirements:
-      #     depends_on: []
-      #     related_to: []
-      #     supersedes: []
-      #   detail_file: requirements/REQ-IDENTIFIER.yaml
-      #   metadata:
-      #     created:
-      #       date: YYYY-MM-DD
-      #       author: "agent/contributor"
-      #     last_updated:
-      #       date: YYYY-MM-DD
-      #       author: "agent/contributor"
-      #       reason: "Initial creation"
-      #     last_validated:
-      #       date: YYYY-MM-DD
-      #       validator: "agent/contributor"
-      #       result: "pass"
   name: "Feedback to TIED (Feature Requests, Bug Reports, Methodology)"
   priority: "P1"
   related_requirements:

@@ -22,6 +22,66 @@
 #   detail_file: Path to the detailed .yaml in implementation-decisions/ or null for methodology index-only; procedure: tied/docs/agent-req-implementation-checklist.yaml
 #   metadata: Optional metadata
 # Methodology seed: token identity and traceability only; expand rationale in project detail files.
+#
+# ---
+# Template Record - Copy this block to create new implementation decisions
+# ---
+#
+# IMPL-IDENTIFIER:
+#   name: Implementation Title
+#   status: Active
+#   cross_references:
+#     - ARCH-RELATED_ARCHITECTURE
+#     - REQ-RELATED_REQUIREMENT
+#   rationale:
+#     why: "Primary reason for this implementation approach"
+#     problems_solved:
+#       - "Problem 1"
+#       - "Problem 2"
+#     benefits:
+#       - "Benefit 1"
+#       - "Benefit 2"
+#   implementation_approach:
+#     summary: "High-level description of implementation"
+#     details:
+#       - "Specific technical detail 1"
+#       - "Code structure or pattern"
+#       - "API design decision"
+#   code_locations:
+#     files:
+#       - path: "path/to/file.ext"
+#         description: "Description of what's implemented there"
+#         lines: [10, 50]  # optional line range
+#     functions:
+#       - name: "exampleFunction"
+#         file: "path/to/file.ext"
+#         description: "What it does"
+#   traceability:
+#     architecture:
+#       - ARCH-IDENTIFIER
+#     requirements:
+#       - REQ-IDENTIFIER
+#     tests:
+#       - testFeatureName_REQ_IDENTIFIER
+#     code_annotations:
+#       - IMPL-IDENTIFIER
+#   related_decisions:
+#     depends_on: []
+#     supersedes: []
+#     see_also: []
+#   detail_file: implementation-decisions/IMPL-IDENTIFIER.yaml
+#   metadata:
+#     created:
+#       date: YYYY-MM-DD
+#       author: "agent/contributor"
+#     last_updated:
+#       date: YYYY-MM-DD
+#       author: "agent/contributor"
+#       reason: "Initial creation"
+#     last_validated:
+#       date: YYYY-MM-DD
+#       validator: "agent/contributor"
+#       result: "pass"
 IMPL-MCP_FEEDBACK_TOOLS:
   cross_references:
     - "ARCH-FEEDBACK_STORAGE"
@@ -30,65 +90,6 @@ IMPL-MCP_FEEDBACK_TOOLS:
   metadata:
     last_updated:
       reason: "Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml"
-      # ---
-      # Template Record - Copy this block to create new implementation decisions
-      # ---
-      #
-      # IMPL-IDENTIFIER:
-      #   name: Implementation Title
-      #   status: Active
-      #   cross_references:
-      #     - ARCH-RELATED_ARCHITECTURE
-      #     - REQ-RELATED_REQUIREMENT
-      #   rationale:
-      #     why: "Primary reason for this implementation approach"
-      #     problems_solved:
-      #       - "Problem 1"
-      #       - "Problem 2"
-      #     benefits:
-      #       - "Benefit 1"
-      #       - "Benefit 2"
-      #   implementation_approach:
-      #     summary: "High-level description of implementation"
-      #     details:
-      #       - "Specific technical detail 1"
-      #       - "Code structure or pattern"
-      #       - "API design decision"
-      #   code_locations:
-      #     files:
-      #       - path: "path/to/file.ext"
-      #         description: "Description of what's implemented there"
-      #         lines: [10, 50]  # optional line range
-      #     functions:
-      #       - name: "exampleFunction"
-      #         file: "path/to/file.ext"
-      #         description: "What it does"
-      #   traceability:
-      #     architecture:
-      #       - ARCH-IDENTIFIER
-      #     requirements:
-      #       - REQ-IDENTIFIER
-      #     tests:
-      #       - testFeatureName_REQ_IDENTIFIER
-      #     code_annotations:
-      #       - IMPL-IDENTIFIER
-      #   related_decisions:
-      #     depends_on: []
-      #     supersedes: []
-      #     see_also: []
-      #   detail_file: implementation-decisions/IMPL-IDENTIFIER.yaml
-      #   metadata:
-      #     created:
-      #       date: YYYY-MM-DD
-      #       author: "agent/contributor"
-      #     last_updated:
-      #       date: YYYY-MM-DD
-      #       author: "agent/contributor"
-      #       reason: "Initial creation"
-      #     last_validated:
-      #       date: YYYY-MM-DD
-      #       validator: "agent/contributor"
-      #       result: "pass"
   name: "MCP Feedback Tools (tied_feedback_add, tied_feedback_export)"
   related_decisions:
     depends_on: []

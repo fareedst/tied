@@ -8,30 +8,50 @@
 # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
 # How: OUTPUT — created or updated files under tied/ and selected root files; process exit status.
 # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
-# How: DATA — requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml; methodology tree under tied/methodology/ when copied; tied/vocab/*.md when seeded or merged; IMPL-*-pseudocode.md sidecars under methodology/implementation-decisions/.
+# How: DATA — project indexes; inherited methodology tree; tied/vocab/*.md when seeded or merged; IMPL-*-pseudocode.md sidecars; and the client .cursor/mcp.json when initialized.
 
 procedure BOOTSTRAP_TIED(projectRoot):
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
-  # How: Bootstrap or refresh the client layout while preserving client-owned project YAML and existing vocabulary.
+  # How: Bootstrap or refresh the client layout while preserving client-owned project YAML, existing vocabulary, and any existing MCP configuration.
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
   # How: Ensure tied/ exists; copy template indexes, detail YAML, and implementation pseudo-code sidecars; copy guide/schema docs from tied/docs/ in the TIED source per copy_files.sh; create detail subdirs; copy AGENTS.md, .cursorrules to project root.
   Contract:
     INPUT: projectRoot; template source; TIED source root; optional merge-vocab flag
     OUTPUT: bootstrapped or refreshed client layout; process exit status
-    DATA: project YAML; inherited methodology files; client vocabulary files
-    CONTROL: preserve client project YAML and existing vocabulary; overwrite inherited methodology content
+    DATA: project YAML; inherited methodology files; client vocabulary files; client MCP configuration
+    CONTROL: preserve client project YAML, existing vocabulary, and existing .cursor/mcp.json byte-for-byte; overwrite inherited methodology content
     PRE: projectRoot is a writable client directory; template source and required TIED source paths are readable
     POST: required TIED indexes, docs, detail directories, skill, and vocabulary policy outputs exist; failure returns non-zero
     EFFECTS: File I/O — creates or updates selected client files; Process — invokes helper copy and patch operations
-    FAILURE_MODES: MISSING_TEMPLATE_SOURCE; UNWRITABLE_DESTINATION; SKILL_INSTALL_FAILED; COPY_FAILED; VOCABULARY_SOURCE_MISSING
-    DATA_TRANSITION: client layout absent|stale→bootstrapped|refreshed; inherited methodology old→current; client project YAML unchanged
+    FAILURE_MODES: MISSING_TEMPLATE_SOURCE; UNWRITABLE_DESTINATION; SKILL_INSTALL_FAILED; COPY_FAILED; VOCABULARY_SOURCE_MISSING; MCP_CONFIG_INIT_FAILED
+    DATA_TRANSITION: client layout absent|stale→bootstrapped|refreshed; inherited methodology old→current; client project YAML and existing MCP configuration unchanged
     TERMINATION: total — finite target list and finite vocabulary/file loops
   ON missing template source or unwritable destination: exit non-zero with actionable message
   FOR each copy_files.sh target: apply copy or merge policy; never overwrite client project-only YAML with empty templates where script forbids
+  CALL INITIALIZE_TIED_MCP_CONFIG(projectRoot)
   CALL INSTALL_TIED_YAML_SKILL(projectRoot)
   CALL SEED_DOMAIN_VOCAB(projectRoot)
   CALL MERGE_DOMAIN_VOCAB(projectRoot) WHEN --merge-vocab is supplied
   RETURN success
+
+procedure INITIALIZE_TIED_MCP_CONFIG(projectRoot):
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
+  # How: Create the default TIED MCP configuration only when the client has no .cursor/mcp.json; preserve an existing configuration byte-for-byte.
+  Contract:
+    INPUT: projectRoot; built TIED MCP server path; absolute project TIED base path
+    OUTPUT: newly initialized projectRoot/.cursor/mcp.json or unchanged existing configuration
+    DATA: MCP server command, TIED_MCP_BIN args, TIED_BASE_PATH environment, existing client MCP configuration
+    CONTROL: initialize only when .cursor/mcp.json is absent; never merge, rewrite, or normalize an existing file
+    PRE: projectRoot/.cursor/ is writable when initialization is needed; built MCP server and TIED base path are resolvable
+    POST: absent configuration becomes a valid TIED MCP config; existing configuration retains its original bytes
+    EFFECTS: File I/O — conditionally creates one JSON file; Process — resolves paths and emits diagnostics
+    FAILURE_MODES: MCP_SERVER_DIST_MISSING; MCP_CONFIG_PARENT_UNWRITABLE; MCP_CONFIG_WRITE_FAILED
+    DATA_TRANSITION: config absent→default TIED MCP config; config present→same bytes
+    TERMINATION: total — one existence check and at most one initialization
+  IF projectRoot/.cursor/mcp.json exists:
+    RETURN preserved
+  CALL _refresh_tied_mcp_json(projectRoot)
+  RETURN initialized
 
 procedure INSTALL_TIED_YAML_SKILL(projectRoot):
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]

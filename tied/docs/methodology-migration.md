@@ -1,6 +1,6 @@
 # TIED client methodology migration
 
-**Audience:** Engineers and AI agents upgrading an existing TIED client to methodology **2.2.0**.
+**Audience:** Engineers and AI agents upgrading an existing TIED client to methodology **3.0.0**.
 
 **Process spine:** Start with the [client development index](client-development-index.md), copy a per-request **Tracker** from [agent-req-implementation-checklist.yaml](agent-req-implementation-checklist.yaml), and follow the [Checklist](agent-req-implementation-checklist.md) for any client behavior change.
 

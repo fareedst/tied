@@ -43,6 +43,10 @@ describe("e2e: bootstrap and load", () => {
     });
     const tiedDir = path.join(tempDir, "tied");
     assert.ok(fs.existsSync(tiedDir), "tied/ should exist after copy_files.sh");
+    assert.ok(
+      fs.existsSync(path.join(tempDir, ".cursor", "mcp.json")),
+      "copy_files.sh should initialize .cursor/mcp.json when it is absent [IMPL-TIED_FILES]"
+    );
     const requirementsPath = path.join(tiedDir, "requirements.yaml");
     assert.ok(fs.existsSync(requirementsPath), "tied/requirements.yaml should exist");
 
@@ -132,6 +136,7 @@ describe("e2e: bootstrap and load", () => {
     const vocabDir = path.join(tiedDir, "vocab");
     const customRouting = path.join(vocabDir, "routing.md");
     const customVocab = path.join(vocabDir, "client-only.md");
+    const mcpConfigPath = path.join(tempDir, ".cursor", "mcp.json");
     const unrelatedClientFile = path.join(tempDir, "client-notes.txt");
 
     fs.mkdirSync(path.dirname(projectRequirements), { recursive: true });
@@ -146,6 +151,16 @@ describe("e2e: bootstrap and load", () => {
     fs.writeFileSync(unrelatedClientFile, "unrelated client content\n");
 
     execSync(`bash "${copyScript}" "${tempDir}"`, { stdio: "pipe", cwd: repoRoot });
+    const preservedMcpConfig = [
+      "{",
+      '  "customSetting": "preserve me",',
+      '  "mcpServers": {',
+      '    "other-server": {"command": "custom-node"}',
+      "  }",
+      "}",
+      "",
+    ].join("\n");
+    fs.writeFileSync(mcpConfigPath, preservedMcpConfig);
 
     const methodologyDir = path.join(tiedDir, "methodology");
     const staleMethodologyFile = path.join(
@@ -161,6 +176,8 @@ describe("e2e: bootstrap and load", () => {
     fs.writeFileSync(staleMethodologyFile, "stale: true\n");
     fs.writeFileSync(staleMethodologySidecar, "# stale inherited sidecar\n");
 
+    // [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
+    // How: Refresh inherited methodology and vocabulary while preserving an existing client MCP configuration byte-for-byte.
     execSync(`bash "${copyScript}" --merge-vocab "${tempDir}"`, {
       stdio: "pipe",
       cwd: repoRoot,
@@ -192,6 +209,11 @@ describe("e2e: bootstrap and load", () => {
       fs.readFileSync(unrelatedClientFile, "utf8"),
       "unrelated client content\n",
       "refresh must preserve unrelated client content"
+    );
+    assert.strictEqual(
+      fs.readFileSync(mcpConfigPath, "utf8"),
+      preservedMcpConfig,
+      "refresh must preserve an existing .cursor/mcp.json byte-for-byte"
     );
     assert.ok(
       !fs.existsSync(staleMethodologyFile) && !fs.existsSync(staleMethodologySidecar),

@@ -2,13 +2,28 @@
 
 **Audience**: AI agents. Process token: `[PROC-AGENT_REQ_CHECKLIST]`.
 
-**Purpose**: This document is the primary procedural template an AI agent follows for every new requirement or change to the tested system. It unifies and sequences the controlling processes into a single executable checklist with explicit branching and looping. The agent executes this checklist from start to finish; skipping steps is not permitted unless a branch directive says otherwise.
+**TIED Methodology Version**: 3.0.0
+
+**Purpose**: This document is the primary behavioral guide an AI agent follows for every new requirement or change to the tested system. It makes domain vocabulary a peer control layer alongside pseudo-code, semantic-token, YAML, and test validation, then unifies and sequences the controlling processes into a single executable checklist with explicit branching and looping. The agent executes this checklist from start to finish; skipping steps is not permitted unless a branch directive says otherwise.
 
 **Trackable form**: The executable checklist YAML (with `id`, `slug`, completion comments, and loop-back clearance) is [`agent-req-implementation-checklist.yaml`](agent-req-implementation-checklist.yaml) (version in-file; canonical in this directory in the TIED repository). `copy_files.sh` installs it into a client’s `tied/docs/` when missing. Copy to a unique per-request file in a working folder (see the YAML header) and use it to record step completion and loop-backs.
 
 **Processes unified here**: `[PROC-CITDP]`, `[PROC-TIED_DEV_CYCLE]`, `[PROC-IMPL_CODE_TEST_SYNC]`, `[PROC-LEAP]`, `[PROC-YAML_EDIT_LOOP]`, `[PROC-IMPL_PSEUDOCODE_TOKENS]`, `[PROC-PSEUDOCODE_VALIDATION]`, `[PROC-TOKEN_AUDIT]`, `[PROC-TOKEN_VALIDATION]`, `[PROC-TEST_STRATEGY]`, `[PROC-COMMIT_MESSAGES]`, `[PROC-VOCABULARY_INDEX]`.
 
 **Mandatory order**: IMPL pseudo-code (every block token-commented) → RED tests (with token comments) → code (with token comments). No code before RED; no RED before complete IMPL pseudo-code.
+
+## Vocabulary is an agent control layer
+
+The vocabulary layer answers **what a named concept means** before TIED answers what the system must do. It is the primary guide for agent–developer conversation: the agent resolves sponsor language, loads only the relevant glossary context, records new concepts, and validates naming consistency before a change can be committed. This is not a passive glossary and it is not the IMPL grammar vocabulary (`INPUT`, `OUTPUT`, `DATA`, `PRE`, `POST`, `EFFECTS`, and related keywords).
+
+Treat the vocabulary gate as equally blocking with pseudo-code, token, YAML, and test gates:
+
+- **RESOLVE** before interpreting or naming a concept. If “config loader” maps to the preferred **config discovery** term, use that exact term in the change definition and subsequent TIED records.
+- **PRELOAD** before reading TIED records, source, or tests. Read [`routing.md`](../vocab/routing.md), match task keywords, and load only the relevant glossaries so the agent reads existing symbols in the correct domain context.
+- **RECORD** when a new concept, synonym, identifier, storage name, UI label, or naming bridge appears. Record it while the decision is fresh, not as an afterthought.
+- **VALIDATE** before commit. Audit the preferred term across the REQ/ARCH/IMPL names, pseudo-code block, test/code identifiers, and user-facing text; an unresolved mismatch sends the work back to RESOLVE or RECORD.
+
+**Conversation demonstration:** When a developer says “make the config loader handle the local layer,” the agent first resolves **config loader** against the routed glossary, states the canonical term and any ambiguity, preloads the matched glossary before impact discovery, uses **config discovery** in the REQ and IMPL block name, records any new local-layer bridge, and reports the vocabulary validation result with the test and code evidence. The checklist therefore governs the agent’s behavior and language, not only the order of file edits.
 
 **Domain vocabulary discipline** (`[PROC-VOCABULARY_INDEX]`): three mandatory **touchpoints** govern when agents use `tied/vocab/*.md` (plain Markdown; filenames have **no** `-vocabulary` suffix). Inline during work: **RESOLVE** before naming/writing; **RECORD** as concepts are generated and after artifacts change. **CALL sub-vocabulary-sync** at each touchpoint and naming point. This is **distinct** from the IMPL pseudo-code grammar "preferred vocabulary" (INPUT/OUTPUT/DATA/PRE/POST/EFFECTS keywords). Standards: [vocabulary-index-analysis-and-standards.md](vocabulary-index-analysis-and-standards.md).
 
@@ -126,6 +141,8 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 
 **Goals**: Confirm access to all governing TIED documents; understand current project state and priorities.
 
+**Vocabulary benefit**: Establishes the term map before the agent forms conclusions, so the rest of the session starts from shared domain meaning.
+
 **Tasks**:
 1. Preface the response with `"Observing AI principles!"`.
 2. Read `tied/docs/ai-principles.md` completely.
@@ -151,6 +168,8 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 
 **Goals**: Interpret driver-supplied placeholders (`{{CHANGE_TITLE}}`, `{{FEATURE_GOAL}}`, `{{FEATURE_BEHAVIOR_SUMMARY}}` when expanded by agentstream) as *sponsor context*, not as permission to skip checklist phases or implement code or tests immediately. Produce a concise written mapping from that intent onto the checklist’s ordered phases.
 
+**Vocabulary benefit**: Converts informal sponsor language into canonical terms before it becomes a plan or token name.
+
 **Tasks**:
 1. List the sponsor lines from the rendered checklist step (expanded from checklist vars when the driver passes `--checklist-var`). Treat them as informal intent, not executable orders.
 2. Restate that sponsor text does not authorize writing production code, deliverable scripts, automated tests, or TIED YAML except what later steps assign.
@@ -167,6 +186,8 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 ## change-definition (change-definition): Bound problem, non-goals, and measurable success
 
 **Goals**: Articulate what is changing or being added, why, what stays the same, and measurable success criteria.
+
+**Vocabulary benefit**: Makes current behavior, desired behavior, and success criteria use one preferred term for each concept.
 
 **Tasks**:
 1. State **current behavior** (or "none" for a new requirement).
@@ -188,6 +209,8 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 ## impact-discovery (impact-discovery): Blast radius, tied_context, IMPL inventory (Phase A)
 
 **Goals**: Identify all affected modules, tokens, code, and tests; build an IMPL inventory table that serves as the working context for the rest of the checklist.
+
+**Vocabulary benefit**: Makes impact discovery interpretable by loading the glossaries that define affected modules, paths, and symbols.
 
 **Tasks**:
 1. **Touchpoint 2 (pre-read):** **CALL sub-vocabulary-sync** (**PRELOAD**) scoped to modules and concepts from change-definition — load glossaries under `tied/vocab/` for affected subsystems so subsequent IMPL/code reads interpret symbols and paths with canonical names.
@@ -232,6 +255,8 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 
 **Goals**: Create or update the requirement record so the change has a formal `[REQ-*]` token with full traceability fields.
 
+**Vocabulary benefit**: Ensures the requirement name, token suffix, acceptance language, and naming bridge identify the same concept.
+
 **Tasks**:
 1. Create or update the entry in `requirements.yaml` with all required fields: `name`, `category`, `priority`, `status`, `rationale` (`why`, `problems_solved`, `benefits`), `satisfaction_criteria`, `validation_criteria`, `traceability` (`architecture`, `implementation`, `tests`, `code_annotations`), `related_requirements`, `detail_file`, `metadata`.
 2. Create or update the REQ detail file in `requirements/REQ-{TOKEN}.yaml` per `tied/docs/detail-files-schema.md` § REQ.
@@ -248,6 +273,8 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 ## author-architecture (author-architecture): ARCH decisions linked to REQ
 
 **Goals**: Create or update architecture decision(s) that fulfill the REQ, with cross-references.
+
+**Vocabulary benefit**: Keeps structural decisions, boundaries, storage names, and architecture tokens aligned with the preferred domain terms.
 
 **Tasks**:
 1. Identify architectural decisions needed (or update existing ones).
@@ -267,6 +294,8 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 ## S06: Author/Update IMPL with Pseudo-Code (catalog-pseudocode-contracts–persist-implementation-records)
 
 **Goals**: Create or update IMPL decisions with complete `essence_pseudocode` and block-level token comments. Resolve all logical and flow issues in pseudo-code before any tests or code. Pseudo-code is the **source of consistent logic**.
+
+**Vocabulary benefit**: Makes procedure and UPPER_SNAKE block names stable identifiers that can be copied into tests and code without synonym drift.
 
 **Tasks**:
 
@@ -348,6 +377,8 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 
 **Goals**: Confirm the pre-design risk/profile decision and document residual risks, mitigations, and evidence ownership associated with the change.
 
+**Vocabulary benefit**: Gives risks, quality attributes, and evidence owners names that remain consistent across analysis and validation artifacts.
+
 **Tasks**:
 1. Confirm that `impact-discovery` selected `baseline-functional` and any triggered assurance profiles before REQ/ARCH/IMPL design; if missing, return to `impact-discovery`.
 2. List risks with severity, likelihood, quality attribute, and selected profile.
@@ -364,6 +395,8 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 ## test-strategy (test-strategy): Test matrix, classification, mandatory order
 
 **Goals**: Classify testability for each IMPL block; connect the selected quality evidence matrix to executable checks; produce a test matrix; plan the TDD sequence.
+
+**Vocabulary benefit**: Ensures test groups, fixtures, evidence rows, and testability classifications refer to the same named behavior as the IMPL.
 
 **Tasks**:
 1. For each IMPL block/procedure, classify as: `unit`, `integration`, or `e2e_only`.
@@ -393,6 +426,8 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 ## S09 (unit-tdd): Unit TDD (Phases D–E–F)
 
 **Goals**: Implement all unit-testable IMPL blocks via strict TDD while maintaining three-way alignment (pseudo-code / tests / code).
+
+**Vocabulary benefit**: Carries canonical terms from IMPL block names into RED tests, GREEN symbols, fixtures, and alignment evidence.
 
 ```
 LOOP FOR each IMPL block classified as unit or integration in test-strategy:
@@ -482,6 +517,8 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 
 **Goals**: Test bindings between validated modules without invoking the UI. Every binding between units must have IMPL coverage and a composition test.
 
+**Vocabulary benefit**: Names triggers, channels, callees, and effects consistently so the binding inventory and composition test describe one seam.
+
 **Tasks**:
 1. **Identify bindings**: event listeners, IPC channels, entry-point delegation, function wiring, platform hooks. Each binding connects two or more units validated independently in S09.
 1a. **Refer to vocab before writing composition tests/code** (`[PROC-VOCABULARY_INDEX]`): **CALL sub-vocabulary-sync** (RESOLVE) so binding, channel, and test names use the preferred domain terms in `tied/vocab/*.md`; **CALL sub-vocabulary-sync** (RECORD) for any new binding/channel concept.
@@ -507,6 +544,8 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 
 **Goals**: Cover behavior that genuinely requires UI invocation. E2E does not substitute for composition tests.
 
+**Vocabulary benefit**: Keeps UI labels and E2E test names aligned with the domain terms already used by REQ, IMPL, and composition evidence.
+
 **Tasks**:
 1. Identify E2E-only behavior: native OS menus, visual rendering, platform behavior that cannot be simulated below E2E. Everything else should already be covered by unit or composition tests from S09-composition-integration.
 2. Confirm the IMPL detail file has:
@@ -530,6 +569,8 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 ## verification-gate (verification-gate): Full suite, lint, token validation, audit, metadata (Phase I)
 
 **Goals**: Confirm everything is aligned, passing, and consistent. This is the compound gate that must pass before work is considered complete.
+
+**Vocabulary benefit**: Performs the final RECORD reconciliation and ensures every named concept resolves to exactly one preferred term before close-out.
 
 **Tasks**:
 0. **CALL sub-pseudocode-validation-pass** — full Layer B including **minimum_gating_rules** now that executable tests exist; document findings by category and severity. IF unresolved gaps THEN GOTO resolve-pseudocode or unit-test-red per findings.
@@ -561,6 +602,8 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 
 **Goals**: Ensure TIED documentation matches the final implementation. TIED docs remain the single source of truth for intent.
 
+**Vocabulary benefit**: Reconciles final REQ/ARCH/IMPL, UI, storage, test, and code names before declaring documentation synchronized.
+
 **Tasks**:
 1. Update REQ/ARCH/IMPL index entries and detail files so they match the final code and tests. Ensure IMPLs modified this session reflect the implemented code, including block-level comments with semantic tokens.
 2. Sync `semantic-tokens.yaml`, `requirements.yaml`, `architecture-decisions.yaml`, and `implementation-decisions.yaml` (and detail files) so no documentation drift exists.
@@ -585,6 +628,8 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 
 **Goals**: Record user-facing and release-facing changes made in this session.
 
+**Vocabulary benefit**: Keeps release language understandable to developers and users by using the same preferred terms as the implementation.
+
 **Tasks**:
 1. Update `README.md` for any user-facing changes (new features, changed behavior, setup instructions).
 2. Update `CHANGELOG.md` for release-facing changes (features, fixes, breaking changes).
@@ -599,6 +644,8 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 ## persist-citdp-record (persist-citdp-record): CITDP YAML under client docs/citdp
 
 **Goals**: Store the change-analysis record so the analysis, decisions, and outcomes are available for future reference.
+
+**Vocabulary benefit**: Preserves the canonical terms used to explain the change, its risks, and any divergence from the original analysis.
 
 **Tasks**:
 1. Populate the CITDP YAML record with:
@@ -624,6 +671,8 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 ## traceable-commit (traceable-commit): Commit per PROC-COMMIT_MESSAGES; no push unless asked
 
 **Goals**: Create a traceable commit with proper format and token references.
+
+**Vocabulary benefit**: Makes vocabulary `VALIDATE` a true pre-commit gate across records, pseudo-code, tests, code, release text, and the commit message.
 
 **Tasks**:
 1. **Touchpoint 3 (pre-commit):** **CALL sub-vocabulary-sync** (**VALIDATE**) — audit all files changed this pass: TIED record `name` fields and token suffixes in `semantic-tokens.yaml`, UPPER_SNAKE block names in pseudo-code, test/code identifiers, README/CHANGELOG/UI terms; each must resolve to exactly one preferred term in `tied/vocab/*.md` with naming bridges and alphabetical index current. Do not stage or commit until VALIDATE passes or immature-client deferral is explicitly noted.

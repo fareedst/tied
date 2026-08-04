@@ -69,6 +69,8 @@ What makes these "indices" rather than prose docs:
 
 Vocabulary is not “TIED lite.” It answers a different question than REQ/ARCH/IMPL, and LEAP answers a third:
 
+In TIED 3.0.0, vocabulary is also an **agent-control layer**: it governs how the agent understands and names the request before the traceability stack is authored, and remains a blocking precision check throughout the work.
+
 | Layer | Role | When it applies |
 |---|---|---|
 | **Vocabulary** (`tied/vocab/`) | Shared *understanding* — preferred terms, demoted synonyms, naming bridges, cross-topic relations between sponsor language and system structure | Before and during design; continuously when names surface |

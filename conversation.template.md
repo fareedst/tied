@@ -1,6 +1,6 @@
 # TIED Conversation Template: Adding a Feature to an Existing Complex Application
 
-**TIED Methodology Version**: 2.2.0
+**TIED Methodology Version**: 3.0.0
 
 This template demonstrates a realistic conversation between a developer and an AI-coder following the TIED methodology when adding a feature to an existing, complex application.
 

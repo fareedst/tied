@@ -713,11 +713,11 @@ export const allTools = [
     name: "tied_token_create_with_detail",
     config: {
       description:
-        "Create a new REQ, ARCH, or IMPL token with both index record and detail YAML in one step. Writes the index (requirements, architecture-decisions, or implementation-decisions) and the corresponding detail file. Fails if detail file already exists. Set upsert_index true to merge into existing index record. For IMPL tokens, detail_record should follow the TIED v2.2.0 canonical schema (see implementation-decisions.md). Prefer this over editing tied/*.yaml directly; the server emits valid YAML (e.g. quoting values with colons).",
+        "Create a new REQ, ARCH, or IMPL token with both index record and detail YAML in one step. Writes the index (requirements, architecture-decisions, or implementation-decisions) and the corresponding detail file. Fails if detail file already exists. Set upsert_index true to merge into existing index record. For IMPL tokens, detail_record should follow the TIED v3.0.0 canonical schema (see implementation-decisions.md). Prefer this over editing tied/*.yaml directly; the server emits valid YAML (e.g. quoting values with colons).",
       inputSchema: z.object({
         token: z.string().min(1).describe("Token ID (REQ-*, ARCH-*, or IMPL-*)"),
         index_record: z.string().describe("JSON or YAML string of the index record (e.g. name, status, cross_references). detail_file is set automatically."),
-        detail_record: z.string().describe("JSON or YAML string of the detail record body (per detail-files-schema.md; for IMPL use TIED v2.2.0 schema from implementation-decisions.md)."),
+        detail_record: z.string().describe("JSON or YAML string of the detail record body (per detail-files-schema.md; for IMPL use TIED v3.0.0 schema from implementation-decisions.md)."),
         upsert_index: z.boolean().optional().describe("If true, merge index_record into existing index entry; if false, fail when token already exists (default: false)"),
       }),
     },

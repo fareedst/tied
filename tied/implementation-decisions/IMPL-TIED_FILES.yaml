@@ -45,21 +45,24 @@ IMPL-TIED_FILES:
       - "Create detail subdirectories (requirements/, architecture-decisions/, implementation-decisions/)"
       - "Create tied/ directory at project root"
       - "DOCS_TO_COPY now installs methodology-migration.md, composition-coverage.md, and the quality-assurance command, pilot, and evidence-manifest guides when missing."
+      - "Initialize .cursor/mcp.json only when it is absent; preserve an existing file byte-for-byte rather than merging or refreshing tied-yaml settings, including when tied-yaml is absent."
       - "Install the tied-yaml Cursor skill to .cursor/skills/tied-yaml/ (from tools/bundled-tied-yaml-skill/ in the TIED source repo; .cursor/skills/tied-yaml only if the bundle is missing; overwritten each run). The canonical stdio client on the client is .cursor/skills/tied-yaml/scripts/tied-cli.sh only; copy_files.sh does not create a project-root scripts/tied-cli.sh entry."
       - "Patch installed tied-cli.sh to bake TIED_REPO_ROOT (absolute TIED source path) so TIED_MCP_BIN resolves on client projects (_patch_tied_cli_repo_root in copy_files.sh)"
       - "Seed tied/vocab/*.md from TIED source when client tied/vocab/ is missing or empty (never overwrite existing client vocab files)"
       - "Template promotion supplies quality REQ/ARCH/IMPL detail YAML and IMPL-*-pseudocode.md sidecars; copy_files.sh refreshes inherited implementation pseudo-code sidecars into tied/methodology/implementation-decisions/ without touching project YAML."
+      - "The bootstrap E2E fixture verifies initial MCP config creation and byte-for-byte preservation during methodology and vocabulary refresh."
       - "tied_token_rename supports extra_globs/extra_extensions anchored at client project root for substitution outside default TIED rename scope; pretty-prints modified YAML with the same yq expression as yaml_tool default lint"
+      - "Treat the vocabulary layer as an agent-control layer and keep its RESOLVE, PRELOAD, RECORD, and VALIDATE touchpoints aligned with [PROC-VOCABULARY_INDEX]."
       - "YAML edit-loop tooling: yaml_tool.sh default lint uses yq sort_keys(.. style=\"double\") (recursive key sort + double-quoted scalars; bool/int become string scalars); --sort-lists/--sort-keys via yaml_list_sorter.rb; post-sort semantic validation via yaml_semantic_compare.rb; directory compare via compare_yaml_dirs.rb [PROC-YAML_EDIT_LOOP]"
-    summary: "Bootstrap script that creates tied/ directory, copies template files, sets up base files, and installs the tied-yaml CLI skill under .cursor/skills/tied-yaml/; ships YAML sort/compare and token-rename tooling"
+    summary: "Bootstrap script that creates tied/ directory, copies template files and inherited pseudo-code sidecars, sets up base files, installs the tied-yaml CLI skill under .cursor/skills/tied-yaml/, supports additive vocabulary merge, and preserves existing MCP configuration"
   metadata:
     created:
       author: "AI Agent"
       date: "2025-12-18T00:00:00.000Z"
     last_updated:
       author: "AI Agent"
-      date: "2026-08-02"
-      reason: "Add non-destructive methodology migration, vocabulary merge, and inherited pseudo-code sidecars"
+      date: "2026-08-04"
+      reason: "LEAP: align bootstrap pseudo-code, vocabulary control layer, and MCP preservation"
     last_validated:
       date: "2026-02-06T00:00:00.000Z"
       result: "pass"

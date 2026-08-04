@@ -1,6 +1,6 @@
 # Requirements Directory
 
-**TIED Methodology Version**: 1.5.0
+**TIED Methodology Version**: 3.0.0
 
 ## Overview
 This document serves as the **central listing/registry** for all requirements in this project. Each requirement is stored in its own file within the `requirements/` directory for scalability. Each requirement has a unique semantic token `[REQ-IDENTIFIER]` for traceability.

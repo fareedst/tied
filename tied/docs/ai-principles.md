@@ -89,7 +89,8 @@ This acknowledgment confirms that the AI agent has:
     - TIED-sourced YAML (methodology) in the client is **read-only** and does not hold client-specific data. It lives under `tied/methodology/` and is refreshed by re-running `copy_files.sh` from the TIED repo.
     - Project-specific tokens and details live **only** in **project** YAML: `tied/requirements.yaml`, `tied/architecture-decisions.yaml`, `tied/implementation-decisions.yaml`, `tied/semantic-tokens.yaml`, and the corresponding detail dirs at the root of `tied/`. Agents and MCP must only add or edit REQ/ARCH/IMPL in project YAML; do not modify `tied/methodology/`.
 
-13. **Domain Vocabulary Discipline** `[PROC-VOCABULARY_INDEX]`
+13. **Domain Vocabulary Discipline — Peer Agent-Control Layer** `[PROC-VOCABULARY_INDEX]`
+    - Vocabulary is equally important to pseudo-code, semantic-token, YAML, and test precision. It is the primary guide for how the agent interprets and discusses developer intent, not a passive glossary consulted after implementation.
     - **Three mandatory touchpoints** (via `sub-vocabulary-sync` in `[PROC-AGENT_REQ_CHECKLIST]`):
       - **Prompt intake (RESOLVE):** reword sponsor/user wording that names concepts before it drives REQ/ARCH/IMPL work (`translate-sponsor-intent`, `change-definition`).
       - **Pre-read (PRELOAD):** read `tied/vocab/routing.md`; match task keywords; load only matched glossaries before reading TIED YAML, docs, source, or tests (`session-bootstrap`, `impact-discovery`).
@@ -286,4 +287,4 @@ See `tied/docs/processes.md` § LEAP for the canonical process definition.
 - **Completion Phase**: Verify all documentation is current and complete
 
 **Last Updated**: 2026-06-02
-**TIED Methodology Version**: 2.2.0
+**TIED Methodology Version**: 3.0.0

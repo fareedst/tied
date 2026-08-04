@@ -1,437 +1,130 @@
----
-name: Checklist feedback loops
-overview: Describes CITDP, TIED, and LEAP feedback in the agent requirement checklist using descriptive phase names, Mermaid flowcharts for major flows, and short supporting bullets (no internal step codes).
-todos: []
-isProject: false
----
+# Agent checklist: phases and feedback loops
 
-# Feedback loops in CITDP + LEAP + TIED
+**TIED Methodology Version**: 3.0.0
 
-Source: [tied/docs/agent-req-implementation-checklist.yaml](../tied/docs/agent-req-implementation-checklist.yaml) (executable checklist; internal step codes stay in that file only).
+This page explains how the [agent requirement implementation checklist](../tied/docs/agent-req-implementation-checklist.md) governs agent behavior. The executable tracker remains the source for step order, branching, completion markers, and loop-back bookkeeping; this page explains the purpose and benefit of each phase without reproducing that tracker.
 
-**Mermaid and plain text:** Each flow has a **Mermaid** diagram (for viewers that render it) and a **Plain-text flow** block right below (for Reddit, email, or any Markdown that shows Mermaid as an unreadable code fence).
+## The agent’s operating pattern
 
----
+Every change follows the same conversational discipline:
 
-## 1. End-to-end spine (forward path)
+1. **Acknowledge and orient.** Read the governing guidance and state the active change and checklist phase.
+2. **Resolve language.** Map developer or sponsor wording to one preferred domain term before interpreting the request.
+3. **Preload context.** Read [`tied/vocab/routing.md`](../tied/vocab/routing.md), match task keywords, and open only the relevant glossaries before reading TIED records, source, or tests.
+4. **Work through the gate.** Report the phase outcome and its evidence; do not silently skip a gate.
+5. **Record and validate.** Capture new concepts as they appear, then validate vocabulary and traceability before commit.
+6. **Loop back honestly.** If evidence contradicts the current intent, return to the appropriate earlier phase instead of patching around the contradiction.
 
-The default run is **one long forward pass**. Feedback loops (later sections) are **jumps back** to an earlier kind of work—not extra steps on this main line.
+Vocabulary is therefore a control layer, not a documentation afterthought. `RESOLVE`, `PRELOAD`, `RECORD`, and `VALIDATE` have the same practical blocking importance as pseudo-code, semantic-token, YAML, and test validation.
 
-```mermaid
-flowchart TB
-  subgraph phaseA [Bootstrap and change analysis]
-    p1[Session context and governance]
-    p2[Change definition and success criteria]
-    p3[Impact map and implementation-decision inventory]
-  end
-  subgraph phaseB [TIED stack before coding]
-    p4[Requirements]
-    p5[Architecture]
-    p6[Specification loop: contracts through persisted implementation records]
-  end
-  subgraph phaseC [Plan and build]
-    p7[Risk analysis]
-    p8[Test plan and testability]
-    p9[Test-driven cycle per pseudo-code block]
-    p10[Composition testing]
-    p11[End-to-end testing where justified]
-  end
-  subgraph phaseD [Close out]
-    p12[Final validation gate]
-    p13[TIED sync to code and tests]
-    p14[README and changelog if needed]
-    p15[CITDP analysis record]
-    p16[Commit]
-  end
-  p1 --> p2 --> p3 --> p4 --> p5 --> p6 --> p7 --> p8 --> p9 --> p10 --> p11 --> p12 --> p13 --> p14 --> p15 --> p16
-```
+## Phase benefits
 
-**Plain-text flow (e.g. Reddit, plain Markdown):** one forward chain; group names match the diagram subgraphs.
+### Bootstrap, intake, and change analysis
 
-```
-Bootstrap and change analysis
-  Session context and governance
-  -> Change definition and success criteria
-  -> Impact map and implementation-decision inventory
+- **Vocabulary and bootstrap:** Establishes the terms, tools, priorities, and repository boundaries the agent is allowed to use. The benefit is a shared conversation and a correct starting context instead of confident work based on synonyms or stale assumptions.
+- **Change definition:** Separates current behavior, desired behavior, unchanged behavior, non-goals, and measurable success. The benefit is a bounded request that can be tested and reviewed.
+- **Impact discovery (Phase A):** Finds affected modules, tokens, implementation decisions, tests, risks, and vocabulary routes. The benefit is a finite blast radius and a working inventory rather than source hunting without a boundary.
 
-TIED stack before coding
-  -> Requirements
-  -> Architecture
-  -> Specification loop (contracts through persisted implementation records)
+### TIED authoring and pseudo-code specification
 
-Plan and build
-  -> Risk analysis
-  -> Test plan and testability
-  -> Test-driven cycle per pseudo-code block
-  -> Composition testing
-  -> End-to-end testing where justified
+- **REQ and ARCH authoring:** Converts agreed language into a traceable obligation and a structural decision. The benefit is that “what” and “why” remain linked to “how.”
+- **Contract catalog (Phase B):** Reads implementation pseudo-code for inputs, outputs, state, control, branches, failure modes, and termination. The benefit is that missing behavior is found before tests encode it.
+- **Resolution and token comments (Phase C):** Repairs contradictions, records scope changes, and tags every logical block with its REQ/ARCH/IMPL relationship. The benefit is comparable pseudo-code and reliable three-way traceability.
+- **Pseudo-code validation and persistence:** Gates the authoritative behavior description before RED tests or production code. The benefit is a stable design surface that prevents implementation from becoming an undocumented second specification.
 
-Close out
-  -> Final validation gate
-  -> TIED sync to code and tests
-  -> README and changelog if needed
-  -> CITDP analysis record
-  -> Commit
-```
+### Risk, test strategy, and implementation
 
-Linear shortcut (same order):  
-`Session/governance` → `Change + criteria` → `Impact + IMPL inventory` → `Requirements` → `Architecture` → `Specification loop` → `Risks` → `Test plan` → `TDD per block` → `Composition` → `E2E` → `Final validation` → `TIED sync` → `README/CHANGELOG` → `CITDP record` → `Commit`.
+- **Risk assessment:** Connects risks and mitigations to TIED tokens and evidence owners. The benefit is proportionate quality work with visible residual risk.
+- **Test strategy:** Classifies each block and plans module validation, unit tests, composition evidence, and justified E2E. The benefit is test coverage aimed at the actual behavior and boundaries, not universal ceremony.
+- **Unit TDD (Phases D–F):** RED proves the intended behavior can fail, GREEN adds only enough code to pass, and alignment reconciles pseudo-code, tests, and code. The benefit is small increments, fast diagnosis, and no silent logic drift.
+- **Composition (Phase G):** Tests bindings between independently validated modules without invoking the UI. The benefit is direct evidence for wiring, arguments, and effects while keeping entry points thin.
+- **E2E (Phase H):** Reserves UI-level tests for named platform constraints. The benefit is meaningful UI coverage without using slow E2E tests to hide testable module or binding gaps.
 
-- The **specification** column is where pseudo-code is hardened before tests—see §4.
-- The **test-driven cycle** node is the tight TDD loop—see §5 and §6.
+### Verification and close-out
 
----
+- **Verification (Phase I):** Runs the full suite, language lint, token validation, consistency checks, alignment audit, metadata updates, and module-validation review. The benefit is a compound exit check that catches drift across artifacts.
+- **TIED synchronization:** Updates REQ/ARCH/IMPL metadata and traceability to match the final tests and code. The benefit is durable documentation that remains useful to the next agent.
+- **Release notes and CITDP record:** Communicates user-facing impact and preserves the difference between early analysis and delivered behavior. The benefit is searchable institutional memory without pretending the implementation was perfectly predictable.
+- **Traceable commit:** Performs the final vocabulary `VALIDATE`, then commits with token references and a clear reason. The benefit is a reviewable unit of change whose language and evidence are internally consistent.
 
-## 2. What “feedback loop” means; LEAP ordering
+## Feedback loops
 
-**Feedback loop:** later work produces evidence (fails, missing coverage, consistency errors) that forces **revisiting** an earlier activity.
-
-**Aligning artifacts (same scope):** bring **implementation pseudo-code**, **tests**, and **production code** into agreement in this order:
+The forward path is linear for clarity; feedback loops are controlled returns to the phase that owns the failed assumption.
 
 ```mermaid
-flowchart LR
-  pseudo[Implementation pseudo-code]
-  tests[Tests]
-  prod[Production code]
-  pseudo -->|"update first"| tests
-  tests --> prod
+flowchart TD
+    intake["Developer language"] --> vocab["RESOLVE / PRELOAD"]
+    vocab --> analysis["Change and impact analysis"]
+    analysis --> spec["REQ / ARCH / IMPL"]
+    spec --> tests["RED / GREEN / alignment"]
+    tests --> compose["Composition and E2E"]
+    compose --> verify["Verification and sync"]
+    verify --> commit["VALIDATE and commit"]
+    tests -.->|"logic differs"| leap["LEAP: IMPL first"]
+    leap --> spec
+    compose -.->|"missing coverage"| spec
+    verify -.->|"drift or inconsistency"| spec
+    commit -.->|"term mismatch"| vocab
 ```
 
-**Plain-text flow:** align in this order (repeat until stable):
-
-1. **Implementation pseudo-code** (authoritative for behavior)
-2. **Tests** (match pseudo-code)
-3. **Production code** (pass tests)
-
-**When scope changes** (what the system must do or how it is shaped), updates may need to move **up** the traceability stack—not only down into code:
-
-```mermaid
-flowchart TB
-  trigger[Evidence implies scope shift]
-  impl[Implementation pseudo-code and records]
-  arch[Architecture decisions]
-  req[Requirements]
-  trigger --> impl
-  impl -->|"architectural scope"| arch
-  impl -->|"requirement scope"| req
-  arch -->|"may require"| req
-```
-
-**Plain-text flow:** scope shifts propagate **up** the stack (not only into code).
-
-```
-Evidence implies scope shift
-  -> Update implementation pseudo-code and records
-       -> If architectural scope changed: update architecture decisions
-       -> If requirement scope changed: update requirements
-  (Architecture changes may require requirement updates.)
-```
-
----
-
-## 3. CITDP: feed-forward analysis, then retrospective record
-
-Early outputs (**change definition**, **impact**, **risks**, **test strategy**) are **consumed** during implementation; they are not a tight retry loop in the middle of the run.
-
-```mermaid
-flowchart LR
-  analysis[Early CITDP outputs]
-  delivery[Implementation and validation]
-  record[CITDP record under docs or citdp]
-  analysis --> delivery --> record
-```
-
-**Plain-text flow:**
-
-```
-Early CITDP outputs  ->  Implementation and validation  ->  CITDP record (e.g. under docs/citdp)
-```
-
-The **record** step captures **what happened versus the early analysis** (divergences, required TIED updates, status)—closing the loop into **durable memory**, not into an immediate redo of analysis.
-
----
-
-## 4. Specification loop (before relying on failing tests)
-
-This loop keeps **implementation pseudo-code** authoritative and complete **before** the main test-writing phase.
-
-```mermaid
-flowchart TB
-  start[Implementation decisions discovered]
-  catalog[Catalog contracts from pseudo-code]
-  review[Flag insufficient or contradictory specs]
-  resolve[Resolve in essence_pseudocode]
-  archTouch[Update architecture if scope changed]
-  reqTouch[Update requirements if scope changed]
-  comments[Apply block token comments]
-  validate[Pseudo-code validation gating]
-  persist[Persist implementation records to TIED]
-  start --> catalog --> review --> resolve
-  resolve --> archTouch
-  resolve --> reqTouch
-  archTouch --> resolve
-  reqTouch --> resolve
-  resolve --> comments --> validate
-  validate -->|"fail or iterate"| resolve
-  validate -->|"pass or waived"| persist
-```
-
-**Plain-text flow:**
-
-```
-Start: implementation decisions discovered
-  -> Catalog contracts from pseudo-code
-  -> Flag insufficient or contradictory specs
-  -> Resolve in essence_pseudocode
-        |-> If architecture scope changed: update architecture, then back to Resolve
-        |-> If requirement scope changed: update requirements, then back to Resolve
-  -> Apply block token comments
-  -> Pseudo-code validation (gating)
-        |-> Fail or iterate: back to Resolve
-        |-> Pass or waived: Persist implementation records to TIED
-```
-
-- **Irreconcilable** contradictions between two implementation views: **restructure or split** decisions—do not patch over conflicts.
-- **Validation** repeats until gates pass or a waiver is documented.
-
----
-
-## 5. Test-driven inner loop and exit to composition
-
-Per **logical block** of pseudo-code:
-
-```mermaid
-flowchart LR
-  red[Write failing test]
-  green[Minimal production code]
-  ref[Refactor]
-  sync[Three-way alignment]
-  red --> green --> ref --> sync
-  sync -->|"more blocks"| red
-  sync -->|"unit and integration blocks done"| comp[Composition testing]
-```
-
-**Plain-text flow:**
-
-```
-Write failing test
-  -> Minimal production code
-  -> Refactor
-  -> Three-way alignment
-        |-> More blocks to cover: loop to "Write failing test"
-        |-> Unit/integration blocks done: go to Composition testing
-```
-
-- **Three-way alignment:** pseudo-code, test, and code share the same semantic token set and intent; on mismatch, use the **pseudo-code → tests → code** order from §2.
-
----
-
-## 6. LEAP micro-cycle during minimal coding
-
-When “green” work shows pseudo-code is wrong, incomplete, or needs a new dependency—**stop** adding production code and realign.
-
-```mermaid
-flowchart TB
-  coding[Minimal production code]
-  check{Spec wrong incomplete or new dependency?}
-  halt[Stop coding]
-  impl[Update implementation decision in TIED]
-  yaml[YAML lint and consistency sub-procedure]
-  archReq[Update architecture or requirements if scope changed]
-  test[Update test to match pseudo-code]
-  code[Update code to pass test]
-  align[Verify three-way alignment]
-  coding --> check
-  check -->|no| onward[Continue refactor or three-way alignment per checklist]
-  check -->|yes| halt --> impl --> yaml --> archReq --> test --> code --> align --> coding
-```
-
-**Plain-text flow:**
-
-```
-Minimal production code
-  -> Spec wrong, incomplete, or new dependency?
-       NO  -> Continue refactor or three-way alignment (normal checklist)
-       YES -> Stop coding
-              -> Update implementation decision in TIED
-              -> YAML lint and consistency sub-procedure
-              -> Update architecture or requirements if scope changed
-              -> Update test to match pseudo-code
-              -> Update code to pass test
-              -> Verify three-way alignment
-              -> Resume minimal production code
-```
-
-- **Architecture or requirements** updates run through the same YAML validation path before retargeting tests and code.
-- After a micro-cycle, **minimal coding** resumes until the increment passes; when there is **no** spec mismatch, follow the normal **refactor** and **alignment** steps without entering the halt branch.
-
----
-
-## 7. Composition and end-to-end: discovery loops back into implementation intent
-
-Integration and UI-level work can expose **missing** formal implementation coverage.
-
-```mermaid
-flowchart TB
-  comp[Composition testing]
-  e2e[End-to-end testing]
-  subflow[Implementation sub-flow: catalog contracts through persist]
-  comp -->|"binding lacks IMPL coverage"| subflow
-  subflow --> comp
-  e2e -->|"missing pseudo-code block"| subflow
-  subflow --> e2e
-```
-
-**Plain-text flow:**
-
-```
-Composition testing
-  -> Binding lacks IMPL coverage?
-       Yes: run implementation sub-flow (catalog contracts through persist), then return to Composition testing
-
-End-to-end testing
-  -> Missing pseudo-code block for observed behavior?
-       Yes: run the same implementation sub-flow, then return to End-to-end testing
-```
-
-- **Light gap:** extend existing implementation pseudo-code, then return to **token-comment** work before returning to composition.
-- **Separate design:** rerun the full **specification loop** from contract cataloging through persistence, then return.
-
----
-
-## 8. Final validation gate (compound exit check)
-
-Everything must pass before treating the work as complete. Failures **route back** by kind of problem:
-
-```mermaid
-flowchart TB
-  gate[Final validation: suite lint tokens alignment and metadata]
-  decision{All gates pass?}
-  ok[Continue to TIED sync]
-  unitLoop[Return to failing-test phase]
-  compLoop[Return to composition testing]
-  e2eLoop[Return to E2E]
-  lintLoop[Fix lint re-run gate]
-  tokenLoop[Fix traceability and token registry]
-  leapLoop[LEAP: pseudo-code then test then code]
-  gate --> decision
-  decision -->|yes| ok
-  decision -->|unit tests| unitLoop
-  decision -->|composition| compLoop
-  decision -->|E2E| e2eLoop
-  decision -->|lint| lintLoop --> gate
-  decision -->|tokens or consistency| tokenLoop --> gate
-  decision -->|three-way drift| leapLoop --> gate
-```
-
-**Plain-text flow:**
-
-```
-Final validation (suite, lint, tokens, alignment, metadata)
-  -> All gates pass?
-       YES -> Continue to TIED sync
-       NO  -> By failure kind:
-                Unit test failure        -> Return to failing-test phase
-                Composition failure      -> Return to composition testing
-                E2E failure              -> Return to E2E
-                Lint                     -> Fix lint, re-run final validation
-                Tokens / consistency     -> Fix traceability, re-run final validation
-                Three-way drift          -> LEAP (pseudo-code, then test, then code), re-run final validation
-```
-
----
-
-## 9. Post-implementation TIED sync (outer drift loop)
-
-After behavior stabilizes, **sync** ensures TIED still matches code and tests.
-
-```mermaid
-flowchart TB
-  sync[TIED sync step]
-  aligned{Documentation matches code and tests?}
-  leap[LEAP: resolve pseudo-code then architecture and requirements if needed]
-  consist[Re-run consistency validation]
-  next[README changelog CITDP record commit]
-  sync --> aligned
-  aligned -->|yes| next
-  aligned -->|no| leap --> consist --> sync
-```
-
-**Plain-text flow:**
-
-```
-TIED sync step
-  -> Documentation matches code and tests?
-       YES -> Continue (README, changelog, CITDP record, commit)
-       NO  -> LEAP: resolve pseudo-code; update architecture and requirements if needed
-              -> Re-run consistency validation
-              -> Return to TIED sync step (repeat until aligned)
-```
-
-This prevents **long-lived drift** between repository behavior and traceable intent.
-
----
-
-## 10. YAML edit and validation sub-procedure
-
-Any TIED YAML mutation goes through **lint** (for direct edits) and **consistency validation**. The main checklist does not advance on broken or inconsistent YAML.
-
-```mermaid
-flowchart TB
-  change[Create or update TIED YAML]
-  lint[lint_yaml where applicable]
-  validate{tied_validate_consistency}
-  repair[Fix indexes or detail files via prescribed tooling]
-  resume[Return to calling checklist step]
-  change --> lint --> validate
-  validate -->|fail| repair --> validate
-  validate -->|pass| resume
-```
-
-**Plain-text flow:**
-
-```
-Create or update TIED YAML
-  -> lint_yaml (where applicable)
-  -> tied_validate_consistency
-        |-> FAIL: fix indexes or detail files via prescribed tooling, then validate again
-        |-> PASS: return to the calling checklist step
-```
-
-**Callers** include (conceptually): requirement, architecture, and implementation persistence; three-way alignment; composition; final validation; sync; CITDP record write; and the LEAP micro-cycle when it touches implementation files.
-
----
-
-## 11. Checklist tracking on re-entry
-
-The machine-readable checklist defines **which completion markers to clear** when an agent **re-enters** an earlier phase after a loop-back—so downstream steps are not left incorrectly marked finished. This is **bookkeeping** for honest re-runs, not a separate business logic loop.
-
----
-
-## 12. Compact mental model (three pillars)
-
-| Pillar | Role in loops |
-|--------|----------------|
-| **CITDP** | Analyze early; **close** with a stored record that can hold divergences. |
-| **TIED** | Wrap doc changes in **validate → fix → re-validate** (§10). |
-| **LEAP** | Surface gaps from tests, composition, E2E, or sync → return to **implementation pseudo-code** (and **architecture** or **requirements** when scope changes) → propagate **pseudo-code → tests → code** (§2, §5, §6). |
-
-```mermaid
-flowchart TB
-  pillars[CITDP plus TIED plus LEAP]
-  citdp[CITDP: analysis then record]
-  tied[TIED: YAML and consistency loop]
-  leap[LEAP: pseudo-code first then tests then code]
-  pillars --> citdp
-  pillars --> tied
-  pillars --> leap
-```
-
-**Plain-text flow:**
-
-```
-Checklist unifies three ideas in parallel:
-  - CITDP: analysis early, then a closing record
-  - TIED: YAML edits wrapped in lint + consistency until pass
-  - LEAP: pseudo-code first, then tests, then code; scope changes move up REQ/ARCH/IMPL
-```
+### Vocabulary lifecycle
+
+**RESOLVE → PRELOAD → RECORD → VALIDATE** keeps the same concept stable across conversation, TIED records, pseudo-code block names, tests, code, storage, and UI text.
+
+- **Benefit:** It prevents false synonyms from becoming different tokens or identifiers.
+- **Loop behavior:** An ambiguous phrase pauses interpretation; a new concept is recorded with its naming bridge; a pre-commit mismatch returns to RESOLVE or RECORD.
+
+### Specification loop
+
+Contract cataloging can expose missing inputs, outputs, contracts, failure modes, dependencies, or contradictory IMPL assumptions. The agent resolves those issues in pseudo-code, updates ARCH or REQ when scope changes, reapplies token comments, validates, and persists.
+
+- **Benefit:** Tests and code inherit one coherent behavior description.
+- **Loop behavior:** Validation failure returns to pseudo-code resolution; irreconcilable assumptions require restructuring or splitting, not a compensating code patch.
+
+### LEAP micro-cycle
+
+If GREEN work reveals that pseudo-code is incomplete, wrong, or missing a dependency, the agent stops production coding. It updates IMPL first, validates YAML, updates ARCH/REQ if scope changed, updates the test, updates code, and checks three-way alignment.
+
+- **Benefit:** Newly learned implementation truth is elevated into the durable design instead of remaining hidden in source.
+- **Loop behavior:** The normal TDD iteration resumes only after pseudo-code → test → code is aligned.
+
+### Composition and E2E discovery loop
+
+If a binding lacks IMPL coverage, the agent extends an existing IMPL or runs the full implementation specification path for a distinct design. It then returns to composition testing. If E2E reveals a missing pseudo-code block, the same return applies.
+
+- **Benefit:** Integration evidence cannot create undocumented behavior.
+- **Loop behavior:** The smallest missing intent is added at the implementation layer, then the affected test and binding are revalidated.
+
+### Verification and TIED drift loop
+
+Failures route by evidence: unit failures return to RED/GREEN, composition failures to composition, E2E failures to E2E, lint failures to the changed artifact, token failures to registry/traceability repair, and three-way drift to LEAP.
+
+- **Benefit:** The agent spends effort at the layer that owns the defect instead of rerunning everything blindly.
+- **Loop behavior:** TIED synchronization repeats until the final implementation, tests, and records agree.
+
+### YAML consistency loop
+
+Every supported TIED YAML mutation follows **write → lint/validate → consistency check → repair → re-check**.
+
+- **Benefit:** Broken syntax, missing detail files, and invalid cross-references are caught before downstream work relies on them.
+- **Loop behavior:** The calling checklist phase cannot be marked complete until the consistency check passes.
+
+### CITDP close-out loop
+
+CITDP feeds the forward run with change definition, impact, risks, and test strategy; after implementation, its record captures divergences, evidence, and required TIED updates.
+
+- **Benefit:** Early analysis guides delivery while the retrospective record preserves what was learned without forcing an unnecessary restart of the whole analysis.
+
+## A short behavior example
+
+Developer: “Make the config loader handle the local layer.”
+
+The agent should respond and act in this order:
+
+1. **RESOLVE:** Check whether “config loader” is the preferred term; use **config discovery** if that is the indexed concept.
+2. **PRELOAD:** Route “local layer” and configuration keywords, then read only the matched glossary before inspecting TIED or source.
+3. **State the gate:** Explain that the request is at intake/change-definition, not yet permission to write code.
+4. **Record and formalize:** Use the preferred term in the change definition, REQ/ARCH/IMPL names, and the relevant pseudo-code block; record any new local-layer naming bridge.
+5. **Prove and close:** Carry the term into the RED test and GREEN code, reconcile it during alignment, and report vocabulary `VALIDATE` with the final traceability evidence.
+
+The checklist is the agent’s behavioral contract: it tells the agent how to converse, what to read before forming conclusions, which artifact owns a correction, and what evidence is required before moving on.

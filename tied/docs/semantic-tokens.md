@@ -1,6 +1,6 @@
 # Semantic Tokens Directory
 
-**TIED Methodology Version**: 1.6.0
+**TIED Methodology Version**: 3.0.0
 
 ## Overview
 This document serves as the **central directory/registry** for all semantic tokens used in the project. Semantic tokens (`[REQ-*]`, `[ARCH-*]`, `[IMPL-*]`) provide a consistent vocabulary and traceability mechanism that ties together all documentation, code, and tests.

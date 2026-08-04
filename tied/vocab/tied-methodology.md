@@ -36,6 +36,8 @@
 | **inherited methodology snapshot** | copied methodology, stale methodology | The exact current template-derived contents of `tied/methodology/`, refreshed as an inherited read-only tree |
 | **promoted quality record** | quality template, copied quality YAML | A quality REQ/ARCH/IMPL detail record installed into the inherited methodology view from canonical templates |
 | **vocabulary merge mode** | overwrite vocab, vocab sync (alone) | Additive `copy_files.sh --merge-vocab` behavior that copies absent glossary files without replacing existing client files |
+| **vocabulary layer** | glossary-only documentation, terminology notes (alone) | Agent-control layer that resolves, preloads, records, and validates canonical domain terms across the TIED workflow |
+| **agent-control layer** | agent guidance (alone), vocabulary policy (alone) | Peer control layer alongside semantic tokens and IMPL pseudo-code; owned by `[PROC-VOCABULARY_INDEX]` |
 
 ---
 
@@ -50,13 +52,14 @@
 | Token registry | semantic tokens | `tied/semantic-tokens.yaml` | index=`semantic-tokens` | [REQ-TIED_SETUP](../requirements/REQ-TIED_SETUP.yaml) |
 | Methodology merge view | merged TIED view | read via MCP resources | `tied://requirements` etc. | [PROC-TIED_METHODOLOGY_READONLY](../docs/processes.md) |
 | Agent operating guide | AGENTS | `AGENTS.md` | — | [REQ-TIED_SETUP](../requirements/REQ-TIED_SETUP.yaml) |
-| Client development index | core six | `tied/docs/client-development-index.md` | minimal CITDP+LEAP+TIED doc set | [PROC-AGENT_REQ_CHECKLIST](../docs/processes.md) |
+| Client development index | core seven | `tied/docs/client-development-index.md` | minimal CITDP+LEAP+TIED doc set, including domain vocabulary | [PROC-AGENT_REQ_CHECKLIST](../docs/processes.md) |
 | Bootstrap script | copy_files | `copy_files.sh` | `./copy_files.sh /path/to/client` | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
 | Methodology migration guide | migration guide | `tied/docs/methodology-migration.md` | Existing-client upgrade procedure | [REQ-TIED_SETUP](../requirements/REQ-TIED_SETUP.yaml) |
 | Vocabulary merge mode | copy-missing-vocab | `copy_files.sh --merge-vocab` | Additive vocabulary installation | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
 | Domain vocabulary index | vocab index | `tied/vocab/*.md` | checklist `VOCAB_INDEX` | [PROC-VOCABULARY_INDEX](../docs/processes.md) |
 | Vocab directory routing index | routing index | `tied/vocab/routing.md` | PRELOAD primary entry | [PROC-VOCABULARY_INDEX](../docs/processes.md) |
 | Domain vocabulary full catalog | full catalog | `tied/vocab/domain-references.md` | on-demand cross-topic / Priority table | [PROC-VOCABULARY_INDEX](../docs/processes.md) |
+| Vocabulary control layer | vocabulary layer / agent-control layer | `tied/vocab/*.md` plus checklist touchpoints | RESOLVE / PRELOAD / RECORD / VALIDATE | [PROC-VOCABULARY_INDEX](../docs/processes.md) |
 | Per-request checklist copy | working folder checklist | `<working_folder>/REQ-*_<timestamp>.yaml` | — | [PROC-AGENT_REQ_CHECKLIST](../docs/processes.md) |
 | Composition coverage guide | binding inventory / E2E exclusion | `tied/docs/composition-coverage.md` | checklist `composition-integration` | [REQ-MODULE_VALIDATION](../requirements/REQ-MODULE_VALIDATION.yaml) |
 | YAML validate/sort | yaml_tool | `scripts/yaml_tool.sh` | default: `sort_keys(.. style="double")`; `--sort-lists` → Ruby sorter; optional `--sort-keys` | [PROC-YAML_EDIT_LOOP](../docs/processes.md) |
@@ -128,6 +131,7 @@ Exact spellings for checklist and docs cross-reference:
 | Term | Section |
 |------|---------|
 | AGENTS.md | Naming bridge |
+| agent-control layer | Preferred terms |
 | binding inventory | Preferred terms |
 | client refresh | Preferred terms |
 | compare_yaml_dirs | Preferred terms |
@@ -158,6 +162,7 @@ Exact spellings for checklist and docs cross-reference:
 | VOCAB_INDEX | Naming bridge |
 | Vocab directory routing index | Naming bridge |
 | vocabulary merge mode | Preferred terms |
+| vocabulary layer | Preferred terms |
 | yaml_list_sorter | Naming bridge |
 | yaml_semantic_compare | Preferred terms |
 | yaml_tool | Preferred terms |

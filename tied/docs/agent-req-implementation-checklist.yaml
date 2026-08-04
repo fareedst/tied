@@ -10,6 +10,9 @@
 # Source: docs/agent-req-implementation-checklist.md
 # Process token: [PROC-AGENT_REQ_CHECKLIST]
 # Each step is atomic (repeatable/skippable). Tracking supports completion gates and retry state.
+# TIED methodology version: 3.0.0
+# Vocabulary is a peer control layer: it governs agent interpretation and naming before,
+# during, and after the REQ -> ARCH -> IMPL -> tests -> code traceability chain.
 #
 # Optional per-step key: preconditions (list of strings). Semantics:
 #   - When ALL preconditions hold, the step's primary gated work is mandatory per tasks and session-bootstrap sequence.
@@ -56,6 +59,12 @@ entry_points:
   - scenario: "Bug fix"
     notes: "At change-definition, determine if a REQ is missing; if so, create REQ at author-requirement before defining the fix"
     start_at: "session-bootstrap"
+feedback_loops:
+  composition_and_e2e: "Missing implementation coverage returns to the specification path before evidence is accepted."
+  leap: "Implementation evidence updates IMPL first, then tests and code, with ARCH/REQ updates when scope changes."
+  specification: "Contract or contradiction failure returns to pseudo-code resolution before tests or code."
+  validation_and_sync: "Failures route to their owning phase; TIED synchronization repeats until docs, tests, and code agree."
+  vocabulary: "RESOLVE -> PRELOAD -> RECORD -> VALIDATE; term mismatch returns to RESOLVE or RECORD."
 flow_control_notation:
   - symbol: "GOTO <stub>"
     meaning: "Jump to the step identified by its YAML slug (stub name); resume from there (same slug in completion markers)."
@@ -209,6 +218,16 @@ loop_back_clearance:
       - "three-way-alignment-unit"
       - "verification-gate"
 name: "agent_req_implementation_checklist"
+phase_benefits:
+  bootstrap_and_analysis: "Shared vocabulary and bounded impact prevent the agent from acting on ambiguous sponsor language or stale assumptions."
+  phase_d_red: "Preferred terms carry intent from pseudo-code into failing tests without introducing naming drift."
+  phase_e_green: "Code symbols and storage names remain aligned with the tested IMPL behavior."
+  phase_f_alignment: "Vocabulary reconciliation makes pseudo-code, tests, and code describe the same blocks."
+  phase_g_composition: "Shared binding and channel names make trigger-to-effect evidence inspectable."
+  phase_h_e2e: "UI terms remain consistent while E2E is limited to named platform constraints."
+  phase_i_closeout: "Final vocabulary validation prevents unresolved names from reaching synchronized docs or a commit."
+  risk_and_test_strategy: "Consistent names connect risks, evidence, testability, fixtures, and module boundaries."
+  tied_authoring: "Canonical terms keep REQ, ARCH, IMPL, and pseudo-code block names referentially identical."
 process_token: "[PROC-AGENT_REQ_CHECKLIST]"
 processes_unified:
   - "[PROC-CITDP]"
@@ -1279,7 +1298,17 @@ sub_procedures:
       retry_count: "0"
       state_history: []
       status: "pending"
-version: "1.7.0"
+version: "3.0.0"
+vocabulary_layer:
+  entry_gate: "Do not proceed with an ambiguous domain term; resolve it or record an explicit immature-client deferral."
+  modes:
+    - "PRELOAD: route task keywords to matched glossaries before reading TIED records, source, or tests."
+    - "RECORD: capture new concepts, naming bridges, and artifact terms as they emerge."
+    - "RESOLVE: map sponsor and developer language to one preferred term before naming or interpreting work."
+    - "VALIDATE: audit names across changed artifacts before staging or committing."
+  priority: "Peer control layer with the same blocking status as pseudo-code, token, YAML, and test validation."
+  process_token: "[PROC-VOCABULARY_INDEX]"
+  source: "tied/vocab/routing.md"
 vocabulary_touchpoints:
   - id: "prompt-intake"
     mode: "RESOLVE"

@@ -40,7 +40,7 @@
 
 | Document | Role |
 |----------|------|
-| [`../docs/client-development-index.md`](../docs/client-development-index.md) | Minimal named set for CITDP + LEAP + TIED (Core six) |
+| [`../docs/client-development-index.md`](../docs/client-development-index.md) | Minimal named set for CITDP + LEAP + TIED (Core seven, including domain vocabulary) |
 | [`../docs/vocabulary-index-analysis-and-standards.md`](../docs/vocabulary-index-analysis-and-standards.md) | Meta-standard for glossary structure and TIED integration |
 | [`../docs/vocabulary-layer-tied-leap-citdp.md`](../docs/vocabulary-layer-tied-leap-citdp.md) | Outreach: Vocab understanding vs TIED intent vs CITDP vs LEAP |
 | [`../docs/tied-domain-vocabulary-research-prompt.md`](../docs/tied-domain-vocabulary-research-prompt.md) | Copy-paste agent prompt to author vocab corpora in client repos |
@@ -54,6 +54,7 @@
 - **STDD / TIED repository layout:** canonical domain glossaries live at `tied/vocab/<topic>.md` (no `-vocabulary` filename suffix). Meta-standard: [`../docs/vocabulary-index-analysis-and-standards.md`](../docs/vocabulary-index-analysis-and-standards.md) § STDD convention. Other TIED client repos may use `docs/*-vocabulary.md` per the replication prompt; this repo uses `tied/vocab/`.
 - **agentstream** (Go product/CLI name) vs **agent-stream** (Ruby directory/package) vs **run-feature-batch** driver scripts — define once in [`agentstream.md`](agentstream.md) and [`agent-stream-ruby.md`](agent-stream-ruby.md); link from both.
 - **Domain vocabulary** (this tree) vs **IMPL grammar vocabulary** (INPUT/OUTPUT/DATA/PRE/POST/EFFECTS keywords) — define once in [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md).
+- **Vocabulary layer** / **agent-control layer** — the peer control layer that resolves, preloads, records, and validates domain terms; canonical terms live in [`tied-methodology.md`](tied-methodology.md), while touchpoints are defined by `[PROC-VOCABULARY_INDEX]`.
 - **TIED base path** / **project YAML** vs **methodology YAML** — define once in [`tied-methodology.md`](tied-methodology.md); referenced from [`tied-yaml-mcp.md`](tied-yaml-mcp.md).
 - **Methodology migration** / **client refresh** / **vocabulary merge mode** — a `copy_files.sh` refresh replaces only the inherited `tied/methodology/` snapshot, preserves project YAML and client-owned vocabulary, and uses `--merge-vocab` to add absent glossary files; canonical terms live in [`tied-methodology.md`](tied-methodology.md) and the operational procedure in [`../docs/methodology-migration.md`](../docs/methodology-migration.md).
 - **Non-canonical LEAP proposals** (`leap-proposals/`) never mutate project TIED YAML — see [`leap-proposal-queue.md`](leap-proposal-queue.md).
@@ -87,4 +88,6 @@
 | sub-vocabulary-sync | Scope |
 | VOCAB_INDEX | Scope |
 | Vocab directory routing index | Preferred terms (directory entry) |
+| agent-control layer | Cross-topic notes |
+| vocabulary layer | Cross-topic notes |
 | vocabulary merge mode | Cross-topic notes |

@@ -9,7 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **TIED 3.0.0 vocabulary layer** — Domain vocabulary is now an explicit agent-control layer in the requirement implementation checklist. `RESOLVE`, `PRELOAD`, `RECORD`, and `VALIDATE` guide conversation, naming, discovery, artifact alignment, and commit readiness alongside TIED, CITDP, LEAP, and TDD.
+
 - **Methodology migration hardening** — `[REQ-TIED_SETUP]` / `[ARCH-TIED_STRUCTURE]` / `[IMPL-TIED_FILES]` now define and verify non-destructive inherited-snapshot refresh, project YAML preservation, additive `--merge-vocab`, promoted quality detail and token-commented pseudo-code sidecars, and stale-file pruning. Added disposable-client E2E coverage and completed the Layer B pseudo-code gate.
+
+- **Non-destructive MCP configuration** — `copy_files.sh` initializes `.cursor/mcp.json` only when absent and preserves an existing file byte-for-byte, including custom settings or a missing `tied-yaml` entry. The bootstrap E2E fixture and `[REQ-TIED_SETUP]` / `[ARCH-TIED_STRUCTURE]` / `[IMPL-TIED_FILES]` records cover the contract.
 
 - **Risk-triggered quality evidence** — `[REQ-QUALITY_ASSURANCE_EVIDENCE]` / `[ARCH-QUALITY_ASSURANCE_PROFILES]` now have dedicated IMPL ownership for manifest generation, bounded command execution, command-to-manifest collection, security, Layer B pseudo-code, binding inventory, and test adequacy validation. Added seven MCP validators (`test_adequacy_validate`, `quality_evidence_manifest_build`, `quality_evidence_collect`, `quality_security_profile_validate`, `quality_evidence_collect_manifest`, `pseudocode_validate`, and `binding_inventory_validate`), UI-free composition coverage, and an HTTP/SQLite webhook pilot covering authentication, retries, persistence failures, bounded batches, oversized input, and competing claims. Added the quality-assurance vocabulary and [`tied/docs/quality-assurance-commands.md`](tied/docs/quality-assurance-commands.md), [`tied/docs/quality-assurance-pilot.md`](tied/docs/quality-assurance-pilot.md), and [`tied/docs/quality-evidence-manifest.md`](tied/docs/quality-evidence-manifest.md). Proof boundaries and evidence provenance are recorded in [`tied/citdp/CITDP-REQ-QUALITY_ASSURANCE_EVIDENCE.yaml`](tied/citdp/CITDP-REQ-QUALITY_ASSURANCE_EVIDENCE.yaml).
 
@@ -29,6 +33,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Vocabulary routing index and client development index** — [`tied/vocab/routing.md`](tied/vocab/routing.md) (~70-line bootstrap router); [`tied/docs/client-development-index.md`](tied/docs/client-development-index.md); outreach copies under [`docs/`](docs/) for vocabulary research / LEAP+CITDP narrative.
 
 ### Changed
+
+- **`copy_files.sh` MCP behavior** — Existing `.cursor/mcp.json` files are no longer refreshed; bootstrap initializes the file only when absent and preserves existing configuration byte-for-byte. Clients that need new `tied-yaml` paths must update the MCP configuration explicitly or remove it before bootstrapping. CITDP: `CITDP-REQ-TIED_SETUP-VOCABULARY_LAYER`.
 
 - **yaml_list_sorter order-preserving keys** — Lists under map keys matching `order` / `*_order` / `order_*` / `*_order_*` (e.g. `recommended_validation_order`) keep document order; sibling non-order lists still sort. Unit coverage in [`scripts/yaml_list_sorter_test.rb`](scripts/yaml_list_sorter_test.rb). Checklist loader coerces quoted bools for `agentstream_new_session` after double-quoted scalar lint.
 
@@ -801,6 +807,7 @@ This enhancement addresses the need to eliminate bugs related to code complexity
 - AI agent integration (Cursor IDE)
 - Template-based structure for easy adoption
 
+[3.0.0]: https://github.com/fareedst/tied/releases/tag/v3.0.0
 [2.2.0]: https://github.com/fareedst/tied/releases/tag/v2.2.0
 [2.1.0]: https://github.com/fareedst/tied/releases/tag/v2.1.0
 [1.0.0]: https://github.com/fareedst/tied/releases/tag/v1.0.0

@@ -30,6 +30,8 @@ Checklist **`sub-vocabulary-sync`** uses **domain** vocab. Do not conflate with 
 | **UPPER_SNAKE block name** | procedure name (ambiguous) | Preferred **domain** term becomes block identifier |
 | **CITDP record** | citdp file | `tied/citdp/CITDP-*.yaml` |
 | **per-request checklist copy** | checklist yaml | Never run completion against canonical checklist in `tied/docs/` |
+| **vocabulary layer** | glossary-only documentation, terminology notes (alone) | Peer agent-control layer that resolves, preloads, records, and validates canonical domain terms; see [`tied-methodology.md`](tied-methodology.md) |
+| **agent-control layer** | agent guidance (alone), vocabulary policy (alone) | Vocabulary control layer alongside semantic tokens and IMPL pseudo-code; owned by [PROC-VOCABULARY_INDEX](../docs/processes.md) |
 | **LEAP** | stack update | Reverse order IMPL → ARCH → REQ when scope changes |
 | **block-lead bracket format** | token comment line | Exact pattern: `[IMPL-*] [ARCH-*] [REQ-*]` then `How: …` (IMPL, ARCH, REQ order when all three appear) |
 | **contract precision** | precise contracts, extended contract | Active-block PRE/POST/EFFECTS (+ FAILURE_MODES/DATA_TRANSITION/TERMINATION when applicable); Layer B SHAPE-003..006 |
@@ -110,6 +112,7 @@ Prefer in `essence_pseudocode` (not domain terms):
 | Term | Section |
 |------|---------|
 | binding inventory | Preferred terms |
+| agent-control layer | Preferred terms |
 | block lead comment | Preferred terms |
 | block-lead bracket format | Preferred terms |
 | CITDP record | Preferred terms |
@@ -143,3 +146,4 @@ Prefer in `essence_pseudocode` (not domain terms):
 | three-way alignment | Preferred terms |
 | UPPER_SNAKE block name | Preferred terms |
 | Vocab routing index | Naming bridge |
+| vocabulary layer | Preferred terms |
