@@ -31,7 +31,7 @@ export type YamlFormatMetadata = {
 };
 
 // [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
-// How: Recursively sort maps and eligible string lists while preserving scalar types, ordered-list order, object-list order, mixed-list order, and opaque text structure.
+// How: Recursively sort maps and eligible string lists with case-insensitive-primary ordering and original-value lexical tie-breaking while preserving scalar types, ordered-list order, object-list order, mixed-list order, and opaque text structure.
 export function canonicalizeValue(value: unknown, parentKey?: string): CanonicalYamlValue {
   if (value === null || typeof value === "string" || typeof value === "number" || typeof value === "boolean") {
     return value;
@@ -57,7 +57,15 @@ export function canonicalizeValue(value: unknown, parentKey?: string): Canonical
   throw new TypeError(`Unsupported YAML value: ${typeof value}`);
 }
 
+// [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
+// How: Compare Unicode-lowercased values first, then original values as a deterministic case-sensitive tie-breaker.
 function compareLexical(left: string, right: string): number {
+  const foldedComparison = compareCodeUnits(left.toLowerCase(), right.toLowerCase());
+  if (foldedComparison !== 0) return foldedComparison;
+  return compareCodeUnits(left, right);
+}
+
+function compareCodeUnits(left: string, right: string): number {
   return left < right ? -1 : left > right ? 1 : 0;
 }
 
@@ -74,7 +82,7 @@ export function formatYamlMetadata(
     profile_id: YAML_FORMAT_PROFILE,
     scalar_style: resolvedStyle.scalar_style,
     style_source: resolvedStyle.style_source,
-    recursive_key_order: "locale-independent lexical",
+    recursive_key_order: "case-insensitive-primary locale-independent lexical with original-value tie-break",
     ordered_list_key_pattern: "order|order_*|*_order|*_order_*",
     string_list_rule: "sort all-string lists except ordered-list keys",
     scalar_policy: "preserve string, boolean, number, and null types",

@@ -14,12 +14,12 @@ CITDP-VOCAB-ROUTING-RENAME:
       - "tied/vocab/domain-references.md"
       - "tied/vocab/routing.md"
     success_criteria:
+      - "bootstrap-and-load e2e asserts seed of tied/vocab/routing.md"
       - "Glossary RECORD prefers routing.md / routing index; avoid domain-references-routing.md"
       - "No live references to domain-references-routing.md outside CHANGELOG historical note"
       - "PRELOAD docs (AGENTS, processes, tied-yaml-agent-index, checklists) point at routing.md"
       - "REQ-TIED_SETUP seed minima (domain-references.md + tied-methodology.md) remain valid; no contradicting criterion"
       - "SEED_DOMAIN_VOCAB How-comment names routing.md and domain-references.md; algorithm unchanged"
-      - "bootstrap-and-load e2e asserts seed of tied/vocab/routing.md"
     summary: "Rename vocab routing index to routing.md as primary PRELOAD entry; keep domain-references.md as on-demand full catalog; align docs, vocab, IMPL How-comment, and bootstrap e2e."
     unchanged_behavior: "copy_files.sh still seeds all TIED_SOURCE/tied/vocab/*.md when client vocab is missing/empty and never overwrites existing client vocab files. REQ seed minimum files unchanged."
   completion_criteria:

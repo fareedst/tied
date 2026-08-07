@@ -39,12 +39,12 @@ IMPL-TIED_FILES:
   implementation_approach:
     details:
       - "Additive vocabulary merge mode: copy_files.sh --merge-vocab copies only absent TIED_SOURCE/tied/vocab/*.md filenames and reports added versus preserved files; existing client vocabulary remains authoritative."
-      - "Copy YAML index files from templates (requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml)."
       - "Copy base files to project root when missing (.cursorrules, AGENTS.md). In a TIED source repository, live guide content is under tied/docs/; agents and preload use client ./tied/docs/ paths and ./tied/agent-preload-contract.yaml."
       - "Copy guide .md files, detail-files-schema.md, preload contract templates, and reference docs from TIED source tied/docs/ into client tied/docs/ when missing (per DOCS_TO_COPY in copy_files.sh)."
+      - "Copy YAML index files from templates (requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml)."
       - "Create detail subdirectories (requirements/, architecture-decisions/, implementation-decisions/) and tied/ directory at project root."
-      - "DOCS_TO_COPY installs methodology-migration.md, composition-coverage.md, and quality assurance guides when missing."
       - "Delegate CANONICALIZE_YAML_FILE and LINT_YAML_PATHS to IMPL-TIED_YAML_CANONICALIZER; do not embed a second yq/Ruby serialization policy in bootstrap documentation."
+      - "DOCS_TO_COPY installs methodology-migration.md, composition-coverage.md, and quality assurance guides when missing."
       - "Initialize .cursor/mcp.json only when absent; preserve an existing file byte-for-byte rather than merging or refreshing tied-yaml settings."
       - "Install the tied-yaml Cursor skill to .cursor/skills/tied-yaml/ and patch TIED_REPO_ROOT for client stdio resolution."
       - "Keep PROC-YAML_EDIT_LOOP, templates, skill docs, and compatibility frontends aligned with tied-yaml-canonical-v1."

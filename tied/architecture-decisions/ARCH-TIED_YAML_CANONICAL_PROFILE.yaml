@@ -19,7 +19,7 @@ ARCH-TIED_YAML_CANONICAL_PROFILE:
     - "REQ-TIED_SETUP"
     - "REQ-TIED_YAML_CANONICALIZATION"
     - "REQ-TIED_YAML_STYLE_CONFIGURATION"
-  decision: "All TIED YAML write surfaces delegate to one typed canonicalizer with profile id tied-yaml-canonical-v1. The canonicalizer recursively orders mapping keys using locale-independent lexical ordering, sorts only all-string lists outside ordered-list keys, preserves scalar types and opaque block text, writes atomically, and returns stable yaml_format metadata. Compatibility frontends delegate to the same profile while retaining historical flags."
+  decision: "All TIED YAML write surfaces delegate to one typed canonicalizer with profile id tied-yaml-canonical-v1. The canonicalizer recursively orders mapping keys and eligible all-string lists using case-insensitive-primary, locale-independent lexical ordering with the original value as a case-sensitive tie-breaker; it preserves scalar types, opaque block text, ordered-list order, and writes atomically while returning stable yaml_format metadata. Compatibility frontends delegate to the same profile while retaining historical flags."
   detail_file: "architecture-decisions/ARCH-TIED_YAML_CANONICAL_PROFILE.yaml"
   implementation_approach:
     details:
@@ -28,7 +28,7 @@ ARCH-TIED_YAML_CANONICAL_PROFILE:
       - "Return yaml_format metadata from every successful writer"
       - "Sort only all-string lists unless owning key matches order, order_*, *_order, or *_order_*"
       - "Treat block scalar bodies and IMPL sidecars as opaque text"
-      - "Use locale-independent lexical key ordering"
+      - "Use case-insensitive-primary locale-independent lexical ordering with original-value lexical tie-breaking for map keys and eligible string lists"
     summary: "Pure typed canonicalizer plus atomic file writer shared by MCP and compatibility frontends"
   metadata:
     created:
@@ -37,7 +37,7 @@ ARCH-TIED_YAML_CANONICAL_PROFILE:
     last_updated:
       author: "AI Agent"
       date: "2026-08-06"
-      reason: "Align architecture evidence with registered unit, composition, and compatibility tests"
+      reason: "Align architecture with legacy case-insensitive phrase ordering and deterministic tie-breaking"
   name: "Shared typed canonical YAML profile"
   rationale:
     benefits:

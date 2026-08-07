@@ -79,8 +79,8 @@ checklist:
     title: "Active procedure blocks declare PRE POST and EFFECTS"
     verify:
       - "N/A allowed for status Template stubs or unchanged legacy Active blocks with rationale pre-contract-grammar"
-      - "PRE true is used only when the block is genuinely unconstrained and the choice is documented"
       - "new or changed Active non-stub procedure blocks declare PRE POST and EFFECTS alongside INPUT and OUTPUT"
+      - "PRE true is used only when the block is genuinely unconstrained and the choice is documented"
   - category: "schema"
     evidence:
       - "FAILURE_MODES set vs OUTPUT error variants and step-level error names"
@@ -89,9 +89,9 @@ checklist:
     severity_on_failure: "error"
     title: "FAILURE_MODES closed set when errors are possible"
     verify:
+      - "every error name used in steps appears in FAILURE_MODES"
       - "FAILURE_MODES is present when OUTPUT includes error or steps use ON error or fallible returns"
       - "N/A when the block has no error OUTPUT and no fallible error paths"
-      - "every error name used in steps appears in FAILURE_MODES"
   - category: "schema"
     evidence:
       - "DATA_TRANSITION present when DATA mutates or EFFECTS includes State"
@@ -111,8 +111,8 @@ checklist:
     title: "TERMINATION when recursion WHILE or open-ended wait"
     verify:
       - "N/A when no recursion WHILE or open-ended wait (or document TERMINATION total)"
-      - "TERMINATION total or may_diverge with justification when recursion WHILE or open-ended wait is present"
       - "prefer TERMINATION total when the block is clearly total"
+      - "TERMINATION total or may_diverge with justification when recursion WHILE or open-ended wait is present"
   - category: "unit_test_spec"
     evidence:
       - "exactly one target symbol is resolved"
@@ -181,8 +181,8 @@ checklist:
       - "duplicate requirement or implementation tags are explainable"
   - category: "contract_validation"
     evidence:
-      - "PRE clauses vs test setup"
       - "contract comparison result for each test target"
+      - "PRE clauses vs test setup"
     id: "CONTRACT-001"
     required: "true"
     severity_on_failure: "error"
@@ -194,28 +194,28 @@ checklist:
       - "undeclared inputs are rejected"
   - category: "contract_validation"
     evidence:
-      - "POST and FAILURE_MODES vs assertions"
       - "output and error expectation comparison report"
+      - "POST and FAILURE_MODES vs assertions"
     id: "CONTRACT-002"
     required: "true"
     severity_on_failure: "error"
     title: "Expected outputs and errors conform to target block contracts"
     verify:
       - "assertions refer only to observable behavior"
-      - "expected errors match declared FAILURE_MODES names and error POST where stated"
       - "expected errors match declared error types or failure modes"
+      - "expected errors match declared FAILURE_MODES names and error POST where stated"
       - "expected success results match a declared output variant and success POST where stated"
   - category: "contract_validation"
     evidence:
-      - "POST invariants mapped to tests"
       - "mapping from safety clauses to test assertions"
+      - "POST invariants mapped to tests"
     id: "CONTRACT-003"
     required: "true"
     severity_on_failure: "warning"
     title: "Safety and invariant claims are testable where required"
     verify:
-      - "POST invariants are asserted where stated"
       - "invariants are asserted where the project requires them"
+      - "POST invariants are asserted where stated"
       - "prohibited behaviors are explicitly checked when relevant"
       - "safety constraints stated in the target spec are reflected in tests"
   - category: "dependency_graph"
@@ -250,8 +250,8 @@ checklist:
       - "at least one test exercises the intended success result"
   - category: "behavioral_coverage"
     evidence:
-      - "FAILURE_MODES names used in failure-path assertions"
       - "coverage map from failure modes to tests"
+      - "FAILURE_MODES names used in failure-path assertions"
     id: "COVER-002"
     required: "true"
     severity_on_failure: "error"
@@ -402,21 +402,21 @@ recommended_validation_order:
   - "reporting"
 tailoring:
   notes:
-    - "SHAPE-003..006 contract precision: do not weaken requiredness for new/changed Active blocks; pre-contract-grammar N/A is only for unchanged legacy Active blocks until next edit"
     - "add custom coverage thresholds per block kind if needed"
     - "add domain-specific safety rules under contract_validation"
     - "add generation backend constraints if pseudo-code drives test generation directly"
     - "add project architecture constraints under dependency_graph"
     - "add project-specific block kinds under the schema category"
     - "for Comrak-style Markdown sidecars, optional LINT-MD-001 and LINT-MD-002 align manual Layer B with extract_test_pseudocode_to_impl_sidecars.py; mark N/A when the IMPL is purely procedural and not test-catalog-driven"
+    - "SHAPE-003..006 contract precision: do not weaken requiredness for new/changed Active blocks; pre-contract-grammar N/A is only for unchanged legacy Active blocks until next edit"
 usage:
   how_to_apply:
     - "for Comrak extract-generated IMPL-*-pseudocode.md, use script/extract_test_pseudocode_to_impl_sidecars.py as the source of truth for what a “block” is (H1 file intro, H2 per test, Source line, then list/blockquote body); do not re-invent a different block boundary without a project reason"
     - "for IMPL, ingest the same text TIED uses—read IMPL-TOKEN-pseudocode.md, or the merged essence_pseudocode from yaml_detail_read; they are equivalent when the sidecar is present"
     - "parse each pseudo-code block into a normalized internal representation"
     - "record findings with severity and source location"
-    - "run Layer A (tied_validate_consistency) before relying on Layer B rows; resolve LEAP (IMPL to ARCH/REQ) when edits change scope—not only checklist passes"
     - "run each validation pass in the recommended order (tied_data first, then application categories below)"
+    - "run Layer A (tied_validate_consistency) before relying on Layer B rows; resolve LEAP (IMPL to ARCH/REQ) when edits change scope—not only checklist passes"
     - "run tied_validate_consistency (Layer A) so the external or merged pseudo-code is qualified for repository traceability rules; Layer A and this checklist (Layer B) are complementary—traceability vs. contracts/structure"
     - "treat required checks as gating unless explicitly waived"
   intended_for:

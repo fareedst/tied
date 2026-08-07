@@ -10,8 +10,8 @@ IMPL-ATDD-E2E-AGENT_STREAM:
   detail_file: "implementation-decisions/IMPL-ATDD-E2E-AGENT_STREAM.yaml"
   implementation_approach:
     details:
-      - "Open3.popen3 streaming"
       - "extract_text_fragments for thinking and assistant events"
+      - "Open3.popen3 streaming"
     summary: "For each turn build argv for agent CLI; run_stream parses NDJSON; dry-run mode skips subprocess"
   metadata:
     created:

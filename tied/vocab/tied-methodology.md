@@ -34,8 +34,10 @@
 | **scalar-type preservation** | typed round trip, coercion after load | Boolean, number, null, and string scalar types remain their parsed types through canonicalization |
 | **format metadata** | serializer metadata, format details | Stable `yaml_format` response object describing the active canonical YAML profile |
 | **opaque text** | raw text, unparsed body | Block-scalar bodies and IMPL pseudo-code sidecars are preserved as text rather than recursively normalized |
-| **recursive key sort (canonicalization)** | default `--sort-keys`, key sort via Ruby only | Locale-independent lexical ordering of map keys at every nested map level under the canonical YAML profile |
-| **qualifying list group** | yaml list, bullet group | 2+ consecutive lines with same indent, each starting with `- `; sortable by **yaml_list_sorter**, except when the owning map key matches an ordered-list key |
+| **case-insensitive-primary ordering** | case-insensitive sort, downcase-only sort | Locale-independent ordering that compares Unicode-lowercased values before applying the original-value tie-break |
+| **original-value tie-break** | stable sort alone, case-folded equality | Case-sensitive lexical comparison of original values when their lowercased forms are equal |
+| **recursive key sort (canonicalization)** | default `--sort-keys`, key sort via Ruby only | Case-insensitive-primary, locale-independent lexical ordering with original-value tie-breaking for map keys at every nested map level under the canonical YAML profile |
+| **qualifying list group** | yaml list, bullet group | 2+ consecutive lines with same indent, each starting with `- `; sortable by **yaml_list_sorter** using case-insensitive-primary, locale-independent lexical ordering with original-value tie-breaking, except when the owning map key matches an ordered-list key |
 | **sort map keys** | hash key sort, key normalization | Canonicalization recursively orders map keys; compatibility `--sort-keys` remains accepted by the sorter frontend; block-scalar bodies stay opaque |
 | **yaml_semantic_compare** | YAML equality check, deep YAML diff (alone) | Library: `scripts/yaml_semantic_compare.rb`; compares loaded YAML values (key order ignored; optional unordered arrays); used by **yaml_list_sorter** post-sort validation |
 | **compare_yaml_dirs** | directory YAML diff, recursive yaml compare | CLI: `scripts/compare_yaml_dirs.rb LEFT_DIR RIGHT_DIR`; relative-path pairing; reports missing files and semantic differences |
@@ -133,6 +135,7 @@ Exact spellings for checklist and docs cross-reference:
 | YAML canonicalization | `CANONICALIZE_YAML_FILE` | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
 | YAML path lint | `LINT_YAML_PATHS` | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
 | typed YAML value canonicalization | `CANONICALIZE_YAML_VALUE` | [IMPL-TIED_YAML_CANONICALIZER](../implementation-decisions/IMPL-TIED_YAML_CANONICALIZER.yaml) |
+| canonical text comparison | `COMPARE_CANONICAL_TEXT` | [IMPL-TIED_YAML_CANONICALIZER](../implementation-decisions/IMPL-TIED_YAML_CANONICALIZER.yaml) |
 | YAML format metadata | `REPORT_YAML_FORMAT` | [IMPL-TIED_YAML_CANONICALIZER](../implementation-decisions/IMPL-TIED_YAML_CANONICALIZER.yaml) |
 | atomic YAML write | `WRITE_CANONICAL_YAML_ATOMIC` | [IMPL-TIED_YAML_CANONICALIZER](../implementation-decisions/IMPL-TIED_YAML_CANONICALIZER.yaml) |
 
@@ -146,7 +149,9 @@ Exact spellings for checklist and docs cross-reference:
 | agent-control layer | Preferred terms |
 | atomic YAML write | Pseudo-code block names |
 | binding inventory | Preferred terms |
+| canonical text comparison | Pseudo-code block names |
 | canonical YAML profile | Preferred terms |
+| case-insensitive-primary ordering | Preferred terms |
 | client refresh | Preferred terms |
 | compare_yaml_dirs | Preferred terms |
 | composition evidence | Preferred terms |
@@ -170,6 +175,7 @@ Exact spellings for checklist and docs cross-reference:
 | qualifying list group | Preferred terms |
 | opaque text | Preferred terms |
 | ordered-list key | Preferred terms |
+| original-value tie-break | Preferred terms |
 | routing index | Preferred terms |
 | routing.md | Preferred terms |
 | semantic token | Preferred terms |

@@ -3,10 +3,10 @@ CITDP-YAML_TOOL_DOUBLE_QUOTE_SORT:
     current_behavior_prior: "Default yaml_tool / lint_yaml canonicalized each YAML path with yq -i -P (pretty-print only). MCP tied_token_rename used the same -P path."
     desired_behavior: "Default lint delegates to typed tied-yaml-canonical-v1 with recursive lexical map-key ordering, eligible all-string-list ordering, ordered-list exceptions, scalar-type preservation, opaque text, atomic writes, and yaml_format metadata. MCP writers and compatibility frontends share the same profile."
     non_goals:
+      - "agentstream / LEAP proposal queue feature work"
       - "Changing Ruby yaml_list_sorter --sort-lists qualifying-list semantics"
       - "Editing inherited methodology YAML"
       - "Reverting historical changelog entries"
-      - "agentstream / LEAP proposal queue feature work"
     references:
       - "CHANGELOG.md"
       - "mcp-server/src/token-rename.ts"
@@ -24,10 +24,10 @@ CITDP-YAML_TOOL_DOUBLE_QUOTE_SORT:
       - "Every successful YAML writer reports yaml_format metadata"
       - "IMPL-TIED_FILES and IMPL-TIED_YAML_CANONICALIZER pseudo-code have token comments on every block"
       - "PROC-YAML_EDIT_LOOP, templates/processes.md, READMEs, runbook, and vocab describe the shared canonical profile"
-      - "UI-free MCP composition tests cover format metadata for index and detail writers"
-      - "Unit and compatibility tests cover ordering, list exceptions, typed scalar preservation, opaque text, invalid input, and atomic failure"
       - "tied_token_rename uses the shared canonicalizer and preserves original files on failure"
       - "tied_validate_consistency and pseudocode_validate pass; no UI E2E is applicable"
+      - "UI-free MCP composition tests cover format metadata for index and detail writers"
+      - "Unit and compatibility tests cover ordering, list exceptions, typed scalar preservation, opaque text, invalid input, and atomic failure"
     summary: "Replace split yq/Ruby YAML serialization with shared typed tied-yaml-canonical-v1 canonicalization across MCP and compatibility frontends while preserving ordered workflow lists, opaque text, scalar types, and atomic failure behavior."
     unchanged_behavior: "One independent operation per YAML path. --sort-lists / --sort-keys Ruby compatibility behavior remains available. Block-scalar bodies and IMPL pseudo-code sidecars remain opaque."
   completion_criteria:

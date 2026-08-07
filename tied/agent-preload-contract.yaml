@@ -39,7 +39,6 @@ agent_preload:
     tied_cli_stdio_ok_without_cursor_mcp: "true"
     yaml_detail_batch_done: "false"
   tied_paths:
-    TIED_BASE_PATH: "tied"
     mcp_tied_yaml_verified_this_session: "false"
     methodology_readonly_glob: "methodology/**"
     project_yaml_writable_globs:
@@ -47,6 +46,7 @@ agent_preload:
       - "architecture-decisions/*.yaml"
       - "implementation-decisions/*.yaml"
       - "requirements/*.yaml"
+    TIED_BASE_PATH: "tied"
   workspace:
     cwd: "/Users/fareed/Documents/dev/chatgpt/stdd"
     project_summary: "TIED methodology repository (stdd); project YAML under tied/"

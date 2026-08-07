@@ -11,7 +11,7 @@ import {
 } from "./yaml-canonicalizer.js";
 
 // [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
-// How: Recursively sort maps and eligible string lists while preserving scalar types, ordered-list order, object-list order, mixed-list order, and opaque text structure.
+// How: Recursively sort maps and eligible string lists with case-insensitive-primary ordering and original-value lexical tie-breaking while preserving scalar types, ordered-list order, object-list order, mixed-list order, and opaque text structure.
 test("canonicalizes nested maps and eligible string lists without changing scalar types REQ-TIED_YAML_CANONICALIZATION", () => {
   const value = {
     z: 3,
@@ -41,6 +41,27 @@ test("canonicalizes nested maps and eligible string lists without changing scala
   assert.equal(typeof (result as any).z, "number");
   assert.equal(typeof (result as any).nested.beta, "boolean");
   assert.equal((result as any).nullable, null);
+});
+
+// [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
+// How: Compare Unicode-lowercased values first, then original values as a deterministic case-sensitive tie-breaker.
+test("canonicalizes mixed-case phrase lists and map keys deterministically REQ-TIED_YAML_CANONICALIZATION", () => {
+  const value = {
+    phrases: ["zebra", "Apple", "apple", "Banana"],
+    order_phrases: ["zebra", "Apple"],
+    keys: {
+      zebra: "z",
+      Apple: "A",
+      apple: "a",
+      Banana: "B",
+    },
+  };
+
+  const result = canonicalizeValue(value) as any;
+
+  assert.deepEqual(result.phrases, ["Apple", "apple", "Banana", "zebra"]);
+  assert.deepEqual(result.order_phrases, ["zebra", "Apple"]);
+  assert.deepEqual(Object.keys(result.keys), ["Apple", "apple", "Banana", "zebra"]);
 });
 
 // [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
@@ -80,7 +101,10 @@ test("reports tied-yaml-canonical-v1 metadata REQ-TIED_YAML_CANONICALIZATION", (
   assert.equal(metadata.profile_id, "tied-yaml-canonical-v1");
   assert.equal(metadata.scalar_style, "unwrapped");
   assert.ok(["default", "repository"].includes(metadata.style_source));
-  assert.equal(metadata.recursive_key_order, "locale-independent lexical");
+  assert.equal(
+    metadata.recursive_key_order,
+    "case-insensitive-primary locale-independent lexical with original-value tie-break",
+  );
   assert.equal(metadata.ordered_list_key_pattern, "order|order_*|*_order|*_order_*");
   assert.equal(metadata.string_list_rule, "sort all-string lists except ordered-list keys");
   assert.equal(metadata.scalar_policy, "preserve string, boolean, number, and null types");

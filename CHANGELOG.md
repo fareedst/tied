@@ -38,6 +38,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **YAML writer canonicalization** — `yaml_tool`, MCP writers, and `tied_token_rename` now share typed `tied-yaml-canonical-v1` output instead of the default double-quoted `yq` lint; `tied_yaml_format` exposes the profile and successful writes report `yaml_format`.
 
+- **Deterministic mixed-case YAML ordering** — Recursive map keys and eligible phrase lists now use case-insensitive-primary, locale-independent lexical ordering with the original value as a deterministic tie-breaker across TypeScript and Ruby compatibility paths.
+
 - **Repository YAML scalar-style enforcement** — `[REQ-TIED_YAML_STYLE_CONFIGURATION]` / `[ARCH-TIED_YAML_STYLE_RESOLUTION]` / `[IMPL-TIED_YAML_STYLE_RESOLVER]` add repository-over-global `wrapped`/`unwrapped` selection. `yaml_tool`, `--sort-lists`, `tied-cli.sh`, and MCP writers now use the same resolved policy; wrapped mode quotes strings only and preserves typed booleans, numbers, and nulls.
 
 - **`copy_files.sh` MCP behavior** — Existing `.cursor/mcp.json` files are no longer refreshed; bootstrap initializes the file only when absent and preserves existing configuration byte-for-byte. Clients that need new `tied-yaml` paths must update the MCP configuration explicitly or remove it before bootstrapping. CITDP: `CITDP-REQ-TIED_SETUP-VOCABULARY_LAYER`.

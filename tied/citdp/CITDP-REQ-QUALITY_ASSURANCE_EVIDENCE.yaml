@@ -237,9 +237,9 @@ CITDP-REQ-QUALITY_ASSURANCE_EVIDENCE:
         residual_risk: "Cross-process SQLite operational limits remain outside this pilot."
         severity: "high"
     scenarios:
-      - "Go, Ruby, and pilot .mjs test naming conventions are classified"
       - "binding missing required fields and justified platform-only E2E are classified"
       - "binding without composition evidence or duplicate id is rejected"
+      - "Go, Ruby, and pilot .mjs test naming conventions are classified"
       - "incomplete collection context is rejected before command execution"
       - "missing command identity and invalid quality row produce diagnostics"
       - "pseudo-code missing contract or symbol produces source-located diagnostics"

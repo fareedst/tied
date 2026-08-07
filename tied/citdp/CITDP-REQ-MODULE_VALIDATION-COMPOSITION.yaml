@@ -25,13 +25,13 @@ CITDP-REQ-MODULE_VALIDATION-COMPOSITION:
     success_criteria:
       - "CHANGELOG Unreleased summarizes the change"
       - "CITDP-REQ-MODULE_VALIDATION-COMPOSITION recorded"
+      - "composition-coverage.md documents inventory columns and E2E exclusion"
       - "Composition: agentstream checklist/pipeline composition_coverage_test.go pass"
       - "E2E: N/A — no UI-required behavior in this change"
       - "IMPL sidecar has contract-precise MODULE_VALIDATION_LIFECYCLE and COMPOSITION_BINDING_VALIDATION"
       - "REQ/ARCH/IMPL MODULE_VALIDATION describe composition gate and binding inventory"
       - "Unit: yaml_list_sorter order-key tests and checklist quoted-bool test pass"
       - "Vocab RECORD for binding inventory and composition evidence (preferred terms + alphabetical index)"
-      - "composition-coverage.md documents inventory columns and E2E exclusion"
     summary: "Elevate composition binding validation into MODULE_VALIDATION (REQ/ARCH/IMPL), document binding inventory, prove agentstream composition seams, and preserve ordered YAML lists / quoted checklist bools."
     unchanged_behavior: "Independent unit validation before integration remains mandatory. Domain vocab stays distinct from IMPL grammar PRE/POST/EFFECTS. Double-quoted scalar lint behavior unchanged except consumers must coerce quoted bools."
   completion_criteria:

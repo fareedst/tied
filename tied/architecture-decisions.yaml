@@ -758,9 +758,9 @@ ARCH-MCP_USAGE_METRICS:
       - "Client label from TIED_MCP_METRICS_CLIENT (tied-cli sets tied-cli; IDE default cursor-mcp)"
       - "Env gate: TIED_MCP_COLLECT_METRICS=1 or true enables collection; default disabled"
       - "Registration-time wrapToolHandler in mcp-server/src/index.ts — no per-handler edits"
+      - "sanitizeArgs redacts blob fields; never logs full essence_pseudocode or record bodies"
       - "Storage: append-only JSONL at TIED_MCP_METRICS_PATH or ~/.cursor/logs/tied-mcp-metrics.jsonl"
       - "Write failures are non-fatal (DIAGNOSTIC stderr only)"
-      - "sanitizeArgs redacts blob fields; never logs full essence_pseudocode or record bodies"
     summary: "Wrapper at MCP tool registration appends sanitized JSONL records when env opt-in is set"
   metadata:
     created:
@@ -1017,7 +1017,7 @@ ARCH-TIED_YAML_CANONICAL_PROFILE:
     - "REQ-TIED_SETUP"
     - "REQ-TIED_YAML_CANONICALIZATION"
     - "REQ-TIED_YAML_STYLE_CONFIGURATION"
-  description: "A single typed tied-yaml-canonical-v1 profile governs recursive map ordering, ordered-list exceptions, scalar preservation, opaque text, atomic writes, and yaml_format metadata."
+  description: "A single typed tied-yaml-canonical-v1 profile governs recursive map and eligible phrase-list ordering, ordered-list exceptions, scalar preservation, opaque text, atomic writes, and yaml_format metadata. Lexical ordering is case-insensitive-primary with original-value tie-breaking and no locale dependence."
   detail_file: "architecture-decisions/ARCH-TIED_YAML_CANONICAL_PROFILE.yaml"
   metadata:
     created:
@@ -1026,7 +1026,7 @@ ARCH-TIED_YAML_CANONICAL_PROFILE:
     last_updated:
       author: "AI Agent"
       date: "2026-08-06"
-      reason: "Define shared serialization architecture before implementation"
+      reason: "Align architecture index with case-insensitive-primary canonical ordering"
   name: "Shared typed canonical YAML profile"
   status: "Active"
   type: "ARCH"

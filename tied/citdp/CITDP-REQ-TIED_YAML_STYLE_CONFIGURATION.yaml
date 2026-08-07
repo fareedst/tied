@@ -10,7 +10,6 @@ CITDP-REQ-TIED_YAML_STYLE_CONFIGURATION:
     current_behavior: "Canonicalization preserves typed values but has no repository-level wrapped/unwrapped style control; compatibility list sorting can run separately from canonical serialization."
     requested_change: "Make repository YAML scalar style configurable and enforce the same resolved policy across yaml_tool, tied-cli.sh, and all MCP YAML writers."
     scope_in:
-      - "TIED YAML style documentation and vocabulary"
       - "mcp-server/src/cli/yaml-canonicalizer.ts"
       - "mcp-server/src/tools/index.ts"
       - "mcp-server/src/yaml-canonicalizer.ts"
@@ -18,6 +17,7 @@ CITDP-REQ-TIED_YAML_STYLE_CONFIGURATION:
       - "mcp-server/src/yaml-style-config.ts"
       - "scripts/yaml_list_sorter_test.rb"
       - "scripts/yaml_tool.sh"
+      - "TIED YAML style documentation and vocabulary"
     scope_out:
       - "Methodology YAML under tied/methodology/"
       - "Opaque IMPL pseudo-code sidecar text"

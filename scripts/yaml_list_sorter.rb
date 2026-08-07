@@ -16,7 +16,7 @@ class SemanticSortValidationError < StandardError
 end
 
 # [PROC-YAML_EDIT_LOOP] [REQ-TIED_SETUP]
-# How: Sort qualifying list groups (2+ consecutive same-indent "- " lines) alphabetically in place;
+# How: Sort qualifying list groups (2+ consecutive same-indent "- " lines) with case-insensitive-primary ordering and original-value lexical tie-breaking in place;
 # optional --sort-keys recursively sorts sibling map keys at every indent level.
 # Block-scalar bodies (| or >) and multiline quoted scalars (' or ") are opaque: string content
 # is never sorted as keys or lists.
@@ -159,7 +159,9 @@ class YamlListSorter
         else
           groups_found += 1
 
-          sorted_group = group.sort_by { |line| line.sub(/^#{Regexp.escape(indentation)}- /, "").downcase }
+          sorted_group = group.sort_by do |line|
+            canonical_sort_key(line.sub(/^#{Regexp.escape(indentation)}- /, ""))
+          end
 
           if sorted_group != group
             groups_modified += 1
@@ -391,7 +393,7 @@ class YamlListSorter
 
       if blocks.length >= 2
         maps_found += 1
-        sorted_blocks = blocks.sort_by { |block| extract_key_name(block[0]).downcase }
+        sorted_blocks = blocks.sort_by { |block| canonical_sort_key(extract_key_name(block[0])) }
         if sorted_blocks != blocks
           maps_modified += 1
           sorted_blocks.each { |block| output.concat(block) }
@@ -545,6 +547,12 @@ class YamlListSorter
 
   def extract_key_name(key_line)
     key_line.match(KEY_LINE_PATTERN)[2]
+  end
+
+  # [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
+  # How: Compare Unicode-lowercased values first, then original values as a deterministic case-sensitive tie-breaker.
+  def canonical_sort_key(value)
+    [value.downcase, value]
   end
 
   def extract_value_part(key_line)

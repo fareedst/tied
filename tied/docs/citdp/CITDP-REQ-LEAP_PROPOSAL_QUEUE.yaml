@@ -9,8 +9,8 @@ change_definition:
     - "tied/requirements/REQ-LEAP_PROPOSAL_QUEUE.yaml"
   success_criteria:
     - "CITDP analysis record stored at tied/citdp/CITDP-REQ-LEAP_PROPOSAL_QUEUE.yaml (same repo as tied/) and lint-clean"
-    - "Unit and composition tests pass; README/CHANGELOG updated"
     - "tied_validate_consistency ok after TIED sync (detail-loader multi-doc; Ruby index alignment)"
+    - "Unit and composition tests pass; README/CHANGELOG updated"
   summary: "Add an optional, non-canonical queue for inferred LEAP documentation hints (git diff lines, session\nexport segments) with explicit human/agent review before any project TIED YAML changes. MCP tools\npersist data only under {projectRoot}/leap-proposals/; canonical REQ/ARCH/IMPL updates remain via\nexisting yaml_index_* / detail tools after approval.\n"
 checklist_tracking_s12:
   checklist_version: "agent_req_implementation_checklist v1.0.2"

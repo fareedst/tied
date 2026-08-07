@@ -11,8 +11,8 @@ excluded_from_this_subset:
   - "user-facing-release-notes"
   - "verification-gate"
 exit_when:
-  - "All REQ/ARCH/IMPL records for the change are complete and persisted."
   - "All changed YAML files have passed sub-yaml-edit-loop (lint_yaml + tied_validate_consistency per runbook)."
+  - "All REQ/ARCH/IMPL records for the change are complete and persisted."
   - "IMPL essence_pseudocode is token-commented and passes pseudo-code validation."
 last_updated: "2026-07-31"
 name: "documentation_first_loop"

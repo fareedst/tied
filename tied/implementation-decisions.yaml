@@ -114,8 +114,8 @@ IMPL-ATDD-E2E-AGENT_STREAM:
   detail_file: "implementation-decisions/IMPL-ATDD-E2E-AGENT_STREAM.yaml"
   implementation_approach:
     details:
-      - "Open3.popen3 streaming"
       - "extract_text_fragments for thinking and assistant events"
+      - "Open3.popen3 streaming"
     summary: "For each turn build argv for agent CLI; run_stream parses NDJSON; dry-run mode skips subprocess"
   metadata:
     created:
@@ -494,8 +494,8 @@ IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT:
   essence_pseudocode: "# [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT]\n# Summary: When enabled, a single post-pipeline, post-ApplyPromptFilePreload pass reformats each string in Turn.Parts to non-compact UTF-8 HTML; ordering and ChainFromPrevious bits unchanged. Default: disabled.\n\n# [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT] — CONTRACT: INPUT, OUTPUT, DATA, CONTROL\n# INPUT: turns ([]Turn from IMPL-GOAGENT-PIPELINE.Build, after ReadPromptFilePreload/ApplyPromptFilePreload in IMPL-GOAGENT-CLI-CMD); options { enabled: bool, stable_indent: int } from resolved Config; body fragments may be markdown or plain from prior checklist/tdd/feature text render.\n# OUTPUT: same []Turn length, order, and field shapes; only string elements in Parts are replaced when enabled.\n# DATA: []Turn, UTF-8 strings, determinism: identical logical input + same options => identical output string per part.\n# CONTROL: enabled is false on zero-args default; when false, this IMPL is a no-op. Does not re-parse YAML, change step ids, or call executor.\n\n# How: All REQ/ARCH behavior for the named transform lives here; other IMPLs do not embed HTML rules—only this procedure.\n\nprocedure APPLY_TO_TURNS(turns, options):\n  # [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT]\n  # How: No-op if options.enabled is false; else in-place FORMAT; propagate any FORMAT err\n  if not options.enabled:\n    return turns, nil\n  for each turn in turns:\n    for i, part in enumerate(turn.Parts):\n      s, err := FORMAT_NON_COMPACT_HTML(part, options)\n      if err != nil:\n        return nil, err\n      turn.Parts[i] = s\n  return turns, nil\n\nprocedure FORMAT_NON_COMPACT_HTML(part, options):\n  # [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT]\n  # How: map one part to stable line-broken form; pass-through when not options.enabled; empty part returns empty\n  if part == \"\":\n    return \"\", nil\n  if not options.enabled:\n    return part, nil\n  out := DETERMINISTIC_NON_COMPACT_HTML_FOR_PART(part, options)\n  return out, nil\n\nprocedure DETERMINISTIC_NON_COMPACT_HTML_FOR_PART(text, options):\n  # [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT]\n  # How: UTF-8: break at adjacent tags; else newline after first \">\"; else append newline; if stable_indent>0 prefix continuation lines. (Go: htmlformat package.)\n\n# [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT] and caller [IMPL-GOAGENT-CLI-CMD] [ARCH-GOAGENT-CLI] [REQ-GOAGENT-CLI-CONFIG] — INTEGRATE edge only.\nprocedure INTEGRATE_WITH_MAIN(cfg, turns, options):\n  if cfg is nil or turns is nil: return\n  if not (cfg has non-compact-HTML true): return\n  t2, err := APPLY_TO_TURNS(turns, options)\n  on err != nil: return error to main\n\n# [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-CLI] [REQ-GOAGENT-CLI-CONFIG] — How: map ParseAndResolve `config` to CfgForIntegrate + options; no I/O. Go: applyPostPreloadNonCompactHTML (cmd); composition-tested; then INTEGRATE_WITH_MAIN.\nprocedure MAP_CONFIG_TO_HTMLFORMAT_OPTIONS(resolved_config, turns):\n  # How: build ic and o; delegate to INTEGRATE_WITH_MAIN (in-place `turns`)\n  ic = { non_compact: resolved_config.NonCompactHTML }\n  o = { enabled: resolved_config.NonCompactHTML, stable_indent: resolved_config.NonCompactHTMLStableIndent }\n  return INTEGRATE_WITH_MAIN(ic, turns, o)\n\n# [PROC-IMPL_CODE_TEST_SYNC] Phase H — E2E e2e_only boundary: [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-MODULE_VALIDATION] [PROC-TEST_STRATEGY] [PROC-AGENT_REQ_CHECKLIST] — no e2e_only blocks; string transform and CLI are unit + composition; phase_h_tests []; named platform UI constraint n/a. IMPL-ATDD-E2E-AGENT_STREAM is a separate ATDD subprocess scope.\n"
   implementation_approach:
     details:
-      - "If scope later excludes feature-spec or verify, LEAP to narrow INTEGRATE_WITH_MAIN without changing FORMAT_NON_COMPACT_HTML"
       - "end-to-end-ui Phase H: no E2E-only UI for this IMPL; s11_phase_h e2e_only false; see detail file (REQ-MODULE_VALIDATION) [PROC-AGENT_REQ_CHECKLIST]"
+      - "If scope later excludes feature-spec or verify, LEAP to narrow INTEGRATE_WITH_MAIN without changing FORMAT_NON_COMPACT_HTML"
     summary: "Add Config flag; package under tools/agentstream (exact path in unit-test-green) implementing APPLY_TO_TURNS and formatters; wire in cmd/agentstream after ApplyPromptFilePreload. Tests in *_test.go reference REQ/IMPL tokens."
   metadata:
     created:
@@ -780,10 +780,10 @@ IMPL-MCP_LEAP_PROPOSAL_QUEUE:
   detail_file: "implementation-decisions/IMPL-MCP_LEAP_PROPOSAL_QUEUE.yaml"
   implementation_approach:
     details:
-      - "MCP handlers use safeLeapCall for fs/git throws"
-      - "Paths: {projectRoot}/leap-proposals/queue.json and audit-log.jsonl"
       - "end-to-end-ui Phase H: no E2E-only UI surface; composition tests (leap-proposal-mcp.test.ts) authoritative for MCP bindings"
       - "extractDiffProposalCandidates: git diff + lines; failure returns { error } without throw"
+      - "MCP handlers use safeLeapCall for fs/git throws"
+      - "Paths: {projectRoot}/leap-proposals/queue.json and audit-log.jsonl"
       - "sync-tied-stack [PROC-AGENT_REQ_CHECKLIST] TIED sync — REQ/ARCH traceability.tests include leap-proposal-mcp.test.ts; index/detail + semantic-tokens metadata; validateConsistency(stdd/tied) ok; MCP tied_validate_consistency ok (workspace tied/)"
       - "verification-gate Phase I: full suite + tsc + validateConsistency(TIED_BASE_PATH=stdd/tied); completion_evidence in CITDP; module validation in s12_phase_i"
     summary: "leap-proposal-queue.ts (queue, audit, diff/session helpers); tools/index.ts tied_leap_proposal_*; safeLeapCall wraps sync throws"
@@ -1098,9 +1098,9 @@ IMPL-TIED_FILES:
   implementation_approach:
     details:
       - "Additive vocabulary merge mode: copy_files.sh --merge-vocab copies only absent TIED_SOURCE/tied/vocab/*.md filenames and reports added versus preserved files; existing client vocabulary remains authoritative."
-      - "Copy YAML index files from templates (requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml)"
       - "Copy base files to project root when missing (.cursorrules, AGENTS.md). In a TIED source repository, live guide content is under tied/docs/; agents and preload use client ./tied/docs/ paths and ./tied/agent-preload-contract.yaml."
       - "Copy guide .md files, detail-files-schema.md, preload contract templates, and reference docs from TIED source tied/docs/ into client tied/docs/ when missing (per DOCS_TO_COPY in copy_files.sh)"
+      - "Copy YAML index files from templates (requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml)"
       - "Create detail subdirectories (requirements/, architecture-decisions/, implementation-decisions/)"
       - "Create tied/ directory at project root"
       - "DOCS_TO_COPY now installs methodology-migration.md, composition-coverage.md, and the quality-assurance command, pilot, and evidence-manifest guides when missing."
@@ -1159,7 +1159,7 @@ IMPL-TIED_YAML_CANONICALIZER:
     - "REQ-MODULE_VALIDATION"
     - "REQ-TIED_YAML_CANONICALIZATION"
     - "REQ-TIED_YAML_STYLE_CONFIGURATION"
-  description: "Shared typed canonicalizer, atomic writer, format metadata, MCP writer integration, and compatibility frontend delegation."
+  description: "Shared typed canonicalizer, atomic writer, format metadata, MCP writer integration, and compatibility frontend delegation with case-insensitive-primary locale-independent ordering and original-value tie-breaking."
   detail_file: "implementation-decisions/IMPL-TIED_YAML_CANONICALIZER.yaml"
   metadata:
     created:
@@ -1168,7 +1168,7 @@ IMPL-TIED_YAML_CANONICALIZER:
     last_updated:
       author: "AI Agent"
       date: "2026-08-06"
-      reason: "Define canonicalizer implementation before RED tests"
+      reason: "Implement synchronized phrase ordering comparator across TypeScript and Ruby"
   name: "Shared typed TIED YAML canonicalizer"
   status: "Active"
   type: "IMPL"

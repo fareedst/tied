@@ -423,7 +423,7 @@ with open('tied/requirements.yaml', 'w') as f:
 
 This is the **controlling loop** for creating or editing any TIED YAML (index or detail). No TIED record is considered valid for use until it has passed this loop.
 
-**`scripts/yaml_tool.sh`** — Primary project utility for YAML validation and list normalization. Default operation: canonicalize each path in place with the typed **`tied-yaml-canonical-v1`** profile (one path per operation): recursively sort map keys, sort eligible all-string lists, preserve ordered-list keys, preserve scalar types, and keep block-scalar bodies opaque. **`--sort-lists`** runs **`scripts/yaml_list_sorter.rb`** on the same path set for compatibility, then applies the shared canonicalizer so scalar style cannot drift. Optional **`--sort-keys`** (with **`--sort-lists`**) also alphabetizes sibling map keys at every indent level. IMPL pseudo-code sidecars are never parsed as YAML.
+**`scripts/yaml_tool.sh`** — Primary project utility for YAML validation and list normalization. Default operation: canonicalize each path in place with the typed **`tied-yaml-canonical-v1`** profile (one path per operation): recursively sort map keys and eligible all-string lists using case-insensitive-primary, locale-independent lexical ordering with original-value tie-breaking, preserve ordered-list keys, preserve scalar types, and keep block-scalar bodies opaque. **`--sort-lists`** runs **`scripts/yaml_list_sorter.rb`** on the same path set for compatibility, then applies the shared canonicalizer so scalar style cannot drift. Optional **`--sort-keys`** (with **`--sort-lists`**) also alphabetizes sibling map keys at every indent level. IMPL pseudo-code sidecars are never parsed as YAML.
 
 **Repository scalar-style policy** — Set `scalar_style: unwrapped` or `scalar_style: wrapped` in `.tied-yaml.yaml` at the project root (the parent of `TIED_BASE_PATH`). Resolution precedence is repository file, `TIED_YAML_STYLE`, `$XDG_CONFIG_HOME/tied/yaml-format.yaml`, then `unwrapped`. `wrapped` double-quotes string scalars only; booleans, numbers, and null remain typed. An invalid explicit setting fails without fallback. MCP writers and `tied-cli.sh` use this same policy, and successful `yaml_format` metadata reports `scalar_style` and `style_source`. Use `scripts/yaml_tool.sh --check <file>` as a read-only enforcement gate.
 
@@ -435,7 +435,8 @@ This is the **controlling loop** for creating or editing any TIED YAML (index or
 procedure LINT_YAML_FILES(paths):
   # [PROC-YAML_EDIT_LOOP] [REQ-TIED_SETUP] [IMPL-TIED_FILES]
   # How: For each path, invoke the shared typed canonicalizer independently.
-  # Contract: tied-yaml-canonical-v1; resolve repository scalar style, then apply recursive key sort,
+  # Contract: tied-yaml-canonical-v1; resolve repository scalar style, then apply case-insensitive-primary
+  # recursive key sort with original-value tie-breaking,
   # eligible string-list sort, typed scalars, and opaque block text.
   FOR each path in paths:
     IF path not a regular file: record error; continue

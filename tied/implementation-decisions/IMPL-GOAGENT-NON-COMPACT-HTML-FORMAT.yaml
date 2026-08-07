@@ -15,8 +15,8 @@ IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT:
     - "REQ-GOAGENT-NON-COMPACT-HTML-FORMAT"
   implementation_approach:
     details:
-      - "If scope later excludes feature-spec or verify, LEAP to narrow INTEGRATE_WITH_MAIN without changing FORMAT_NON_COMPACT_HTML"
       - "end-to-end-ui Phase H: no E2E-only UI surface for this IMPL; s11_phase_h documents e2e_only false; htmlformat + compose_noncompact authoritatively cover Go bindings (REQ-MODULE_VALIDATION) [PROC-AGENT_REQ_CHECKLIST]"
+      - "If scope later excludes feature-spec or verify, LEAP to narrow INTEGRATE_WITH_MAIN without changing FORMAT_NON_COMPACT_HTML"
     summary: "Add Config flag; package under tools/agentstream (exact path in unit-test-green) implementing APPLY_TO_TURNS and formatters; wire in cmd/agentstream after ApplyPromptFilePreload. Tests in *_test.go reference REQ/IMPL tokens."
   metadata:
     created:

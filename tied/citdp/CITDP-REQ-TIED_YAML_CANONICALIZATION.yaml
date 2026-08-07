@@ -1,42 +1,135 @@
 CITDP-REQ-TIED_YAML_CANONICALIZATION:
   change_definition:
+    current_behavior: "The shared TypeScript canonicalizer compares strings with case-sensitive lexical ordering while the Ruby compatibility sorter lowercases without an original-value tie-break, so equal-folded values can diverge across surfaces."
+    requested_change: "Use one case-insensitive-primary, locale-independent comparator with original-value lexical tie-breaking for recursive map keys and eligible all-string lists across TypeScript and Ruby compatibility paths."
     scope_in:
-      - "MCP index/detail/rename writes"
+      - "ARCH canonical profile and process documentation"
       - "atomic writes"
+      - "canonical ordering vocabulary and CHANGELOG"
       - "format metadata operation"
+      - "IMPL canonicalizer and style-resolver pseudo-code metadata"
+      - "MCP index/detail/rename writes"
+      - "mcp-server/src/yaml-canonicalizer.test.ts"
+      - "mcp-server/src/yaml-canonicalizer.ts"
+      - "scripts/yaml_list_sorter.rb"
+      - "scripts/yaml_list_sorter_test.rb"
       - "yaml_semantic_compare ordered-list semantics"
       - "yaml_tool default lint"
     scope_out:
       - "Changing IMPL pseudo-code sidecar semantics"
+      - "Changing ordered-list semantics"
+      - "Changing scalar-type preservation or opaque-text boundaries"
       - "Migration of historical YAML bytes unrelated to touched writers"
-    summary: "Replace split yq/Ruby YAML serialization with shared typed tied-yaml-canonical-v1 canonicalization across MCP and compatibility frontends."
+      - "UI behavior or a separate E2E surface"
+    summary: "Align canonical map-key and eligible phrase-list ordering across the shared typed profile and compatibility frontend."
   change_id: "REQ-TIED_YAML_CANONICALIZATION"
+  completion_criteria:
+    - "Changed TIED YAML passes lint and tied_validate_consistency."
+    - "IMPL pseudo-code, ARCH/REQ traceability, source comments, tests, vocabulary, and CHANGELOG describe the same comparator."
+    - "Ordered-list keys remain in document order and scalar/opaque-text behavior remains unchanged."
+    - "TypeScript and Ruby produce Apple, apple, Banana, zebra in the same order for mixed-case values."
+    - "Unit, composition, and compatibility validation pass; E2E is explicitly not applicable."
+  evidence:
+    commands:
+      - "cd mcp-server && npm test — tsc build plus 159 tests passed, 0 failed"
+      - "MCP pseudocode_validate(IMPL-TIED_YAML_CANONICALIZER) — Layer B ok with 9 blocks and no diagnostics"
+      - "MCP tied_validate_consistency — ok true"
+      - "MCP tied_verify dry_run — no status changes required"
+      - "MCP yaml_index_validate — requirements, architecture, implementation, and semantic-tokens valid"
+      - "ruby -c scripts/yaml_list_sorter.rb — Syntax OK"
+      - "ruby scripts/yaml_list_sorter_test.rb — all assertions passed"
+      - "scripts/yaml_tool.sh --check — all changed TIED YAML passed"
+    manifest_reference: "~"
+    proof_boundaries:
+      - "No UI E2E is applicable because the changed behavior is pure canonicalization plus CLI/MCP writer composition."
+      - "Runtime tests prove repository fixtures and shared writer behavior, not every possible Unicode locale or external YAML producer."
   impact_analysis:
     architecture:
       - "ARCH-TIED_YAML_CANONICAL_PROFILE"
     implementation:
       - "IMPL-TIED_FILES"
       - "IMPL-TIED_YAML_CANONICALIZER"
+    implementation_decisions:
+      - "IMPL-TIED_YAML_CANONICALIZER"
+      - "IMPL-TIED_YAML_STYLE_RESOLVER"
     modules:
       - "mcp-server/src/detail-loader.ts"
       - "mcp-server/src/token-rename.ts"
       - "mcp-server/src/tools/index.ts"
+      - "mcp-server/src/tools/yaml-canonicalization-mcp.test.ts"
       - "mcp-server/src/yaml-canonicalizer.ts"
       - "mcp-server/src/yaml-loader.ts"
+      - "scripts/yaml_list_sorter.rb"
       - "scripts/yaml_semantic_compare.rb"
       - "scripts/yaml_tool.sh"
     requirements:
       - "REQ-MODULE_VALIDATION"
       - "REQ-TIED_SETUP"
       - "REQ-TIED_YAML_CANONICALIZATION"
+      - "REQ-TIED_YAML_STYLE_CONFIGURATION"
+  implementation_guidance:
+    affected_behavior: "The canonical ordering contract is case-insensitive-primary with original-value lexical tie-breaking and no locale dependence."
+    rollback: "Revert the comparator and synchronized documentation/test changes, then re-run the prior canonical profile validation; atomic writers preserve target bytes on failure."
+    sequence:
+      - "Align unit and compatibility tests and production comments."
+      - "Confirm UI-free MCP composition coverage."
+      - "Run TypeScript, Ruby, pseudo-code, YAML, token, and TIED consistency gates."
+      - "Update final evidence and release notes."
+      - "Update IMPL pseudo-code and block leads first."
   implementation_status: "Implemented and validated in current worktree"
+  leap_feedback:
+    divergences_from_analysis: "The staged implementation exposed a cross-surface ordering mismatch: TypeScript was case-sensitive and Ruby had no deterministic tie-break for equal-folded values."
+    propagation: "Refined IMPL pseudo-code first, then aligned ARCH profile wording, REQ acceptance context, source/tests, style metadata, vocabulary, and release documentation; no new token was required."
+    status: "applied"
+    tied_stack_updates_required:
+      - "Canonicalization IMPL, ARCH, REQ, vocabulary, tests, and docs now carry the same comparator contract."
   module_validation:
-    canonicalizer: "validated by 5 passing unit tests covering ordering, list exceptions, scalar types, opaque block text, metadata, and invalid-input preservation"
-    cli_frontend: "validated by yaml_list_sorter_test.rb with all assertions passing"
-    writer_integration: "validated by the complete MCP suite: 151 passing tests, including canonicalizer unit tests, UI-free MCP composition, detail sidecars, rename, loader paths, and existing writer tests"
+    canonicalizer: "Validated by six canonicalizer unit tests covering mixed-case ordering, list exceptions, scalar types, opaque block text, metadata, and invalid-input preservation."
+    cli_frontend: "Validated by ruby -c and yaml_list_sorter_test.rb with all assertions passing, including mixed-case phrase lists, map keys, ordered-list exceptions, opaque text, and semantic-preservation failures."
+    writer_integration: "Validated by the complete MCP suite: 159 passing tests, including canonicalizer unit tests, UI-free MCP composition, detail sidecars, rename, loader paths, and existing writer tests."
+  record_identity:
+    citdp_id: "CITDP-REQ-TIED_YAML_CANONICALIZATION"
+    created_at: "2026-08-06"
+    status: "Implemented"
+    title: "Shared typed YAML canonicalization and deterministic mixed-case ordering"
+    updated_at: "2026-08-06"
   residual_work:
-    - "Add exhaustive composition fixtures for every feedback, verification, batch, and CITDP writer family"
-    - "Add shared cross-frontend fixture corpus and explicit yaml_format assertions to each writer response"
+    - "Add exhaustive composition fixtures for every feedback, verification, batch, and CITDP writer family."
+    - "Add shared cross-frontend fixture corpus and explicit yaml_format assertions to each writer response."
+  risk_analysis:
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "mcp-server npm test; ruby -c scripts/yaml_list_sorter.rb; ruby scripts/yaml_list_sorter_test.rb; tied_validate_consistency; pseudocode_validate"
+        evidence_method: "Unit, UI-free composition, compatibility, pseudo-code, YAML, and TIED consistency validation"
+        limitation: "Evidence is environment-specific and does not prove universal locale behavior beyond the tested deterministic comparator contract."
+        owner: "AI Agent"
+        rationale: "This is a behavior-changing serialization contract with cross-surface parity risk."
+        result: "pass: TypeScript 159 tests, Ruby compatibility, YAML canonical check, pseudo-code validation, and TIED consistency all passed"
+        risk: "Cross-surface ordering divergence or accidental reordering of protected lists"
+        threshold: "All required commands pass; mixed-case parity and ordered-list preservation assertions pass"
+        waiver:
+          expiry: "~"
+          owner: "~"
+          reason: "~"
+          required: false
+    quality_profiles:
+      - "baseline-functional"
+    residual_risk:
+      expiry: "~"
+      owner: "~"
+      summary: "Locale behavior outside the tested Unicode-lowercase and original-value code-unit comparator remains bounded by the documented profile contract."
+    risks:
+      - description: "TypeScript and Ruby sort equal-folded strings differently."
+        id: "RISK-CANONICAL-ORDER-001"
+        likelihood: "Medium"
+        mitigation: "Use the same Unicode-lowercase-primary and original-value tie-break contract in both implementations and test mixed-case phrases and keys."
+        severity: "Medium"
+      - description: "Canonicalization reorders a list whose order is semantically meaningful."
+        id: "RISK-CANONICAL-ORDER-002"
+        likelihood: "Low"
+        mitigation: "Retain exact, prefix, suffix, and combined ordered-list key exclusions and assert them in unit and compatibility tests."
+        severity: "Medium"
   risk_assessment:
     - mitigation: "Typed js-yaml round trip, profile fixtures, and compatibility tests assert booleans/numbers/null remain typed."
       risk: "Canonical output changes historical formatting or scalar types"
@@ -46,15 +139,23 @@ CITDP-REQ-TIED_YAML_CANONICALIZATION:
       risk: "Failed parse or rename leaves partial files"
     - mitigation: "Both use the same canonicalizer module/profile metadata and TIED consistency validation passes."
       risk: "MCP and CLI drift"
+  tdd_sequence:
+    e2e: "N/A; no UI boundary."
+    summary: "Existing staged RED/GREEN work is finalized by IMPL-first LEAP alignment, then unit/compatibility/composition verification and final consistency validation."
   test_strategy:
     compatibility:
-      - "ruby -c scripts/yaml_semantic_compare.rb"
-      - "scripts/yaml_list_sorter_test.rb"
+      - "ruby -c scripts/yaml_list_sorter.rb"
+      - "ruby scripts/yaml_list_sorter_test.rb"
     composition:
       - "MCP build and writer integration tests for detail, index, rename, and metadata operation"
-      - "mcp-server/src/tools/yaml-canonicalization-mcp.test.ts — UI-free handler binding for tied_yaml_format and yaml_index_insert"
+      - "mcp-server/src/tools/yaml-canonicalization-mcp.test.ts validates tied_yaml_format and shared writer binding; existing assertion exercises the shared writer path."
+      - "No UI composition or browser boundary exists."
+    e2e: "Not applicable: canonicalization is a pure typed module plus CLI/MCP writer boundary; no UI invocation is required."
     unit:
-      - "mcp-server/src/yaml-canonicalizer.test.ts"
+      - "mcp-server/src/yaml-canonicalizer.test.ts — mixed-case, ordered-list, opaque-text, metadata, atomic-failure, and scalar-type coverage"
     validation:
-      - "npm test (151 passing)"
-      - "tied_validate_consistency"
+      - "npm test — 159 passed, 0 failed"
+      - "pseudocode_validate — ok"
+      - "scripts/yaml_tool.sh --check — all changed TIED YAML passed"
+      - "tied_validate_consistency — ok true"
+      - "yaml_index_validate — all four indexes valid"

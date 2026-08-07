@@ -21,9 +21,9 @@ ARCH-TIED_YAML_STYLE_RESOLUTION:
   decision: "Use one shared typed style resolver. Read repository .tied-yaml.yaml at the client project root derived from TIED_BASE_PATH first; otherwise read global TIED_YAML_STYLE and optional XDG config; otherwise use unwrapped. Reject malformed or unknown explicit styles. Pass the resolved style into every YAML serializer and report it in yaml_format."
   implementation_approach:
     details:
+      - "The repository config file is .tied-yaml.yaml with scalar_style: unwrapped|wrapped."
       - "TIED_BASE_PATH identifies the client tied directory and its parent identifies the repository root."
       - "TIED_YAML_STYLE is a global fallback only when repository configuration is absent."
-      - "The repository config file is .tied-yaml.yaml with scalar_style: unwrapped|wrapped."
       - "XDG_CONFIG_HOME/tied/yaml-format.yaml is an optional global file fallback."
       - "yaml_tool --sort-lists canonicalizes after Ruby list sorting so style cannot drift."
     summary: "Repository configuration is authoritative; global configuration is fallback; one canonical serializer emits either plain-when-safe or double-quoted strings while preserving typed non-string scalars."

@@ -33,6 +33,7 @@ IMPL-TIED_YAML_CANONICALIZER:
       - "Return yaml_format metadata from successful write operations"
       - "Serialize using stable typed scalar rules while retaining opaque block-scalar and sidecar text"
       - "Testability boundary: unit tests cover pure canonicalization and atomic failure; UI-free MCP composition covers handler wiring; the compatibility CLI is exercised by scripts/yaml_list_sorter_test.rb; no separate UI E2E is applicable because this feature has no UI boundary."
+      - "Use case-insensitive-primary locale-independent lexical ordering with original-value lexical tie-breaking for map keys and eligible phrase lists"
       - "Write through temporary files and atomic rename only after successful parse and serialization"
     summary: "Implement a pure typed canonicalizer and atomic file writer, then route MCP and compatibility writers through it."
   metadata:
@@ -42,7 +43,7 @@ IMPL-TIED_YAML_CANONICALIZER:
     last_updated:
       author: "AI Agent"
       date: "2026-08-06"
-      reason: "Align pseudocode, deterministic lexical sorting, registered unit suite, and UI-free composition coverage"
+      reason: "Implement synchronized case-insensitive-primary comparator with deterministic tie-breaking"
   name: "Shared typed TIED YAML canonicalizer"
   rationale:
     benefits:

@@ -22,6 +22,11 @@ end
 SCRIPT_DIR = File.expand_path(__dir__)
 SORTER = File.join(SCRIPT_DIR, 'yaml_list_sorter.rb')
 YAML_TOOL = File.join(SCRIPT_DIR, 'yaml_tool.sh')
+DEFAULT_STYLE_ROOT = Dir.mktmpdir('tied_yaml_default_style_')
+DEFAULT_STYLE_TIED = File.join(DEFAULT_STYLE_ROOT, 'tied')
+FileUtils.mkdir_p(DEFAULT_STYLE_TIED)
+
+at_exit { FileUtils.remove_entry(DEFAULT_STYLE_ROOT) }
 
 def run_sorter(args)
   cmd = ['ruby', SORTER, *args]
@@ -31,7 +36,7 @@ end
 
 def run_yaml_tool(args, env: {})
   cmd = [YAML_TOOL, *args]
-  out, err, status = Open3.capture3(env, *cmd)
+  out, err, status = Open3.capture3({ 'TIED_BASE_PATH' => DEFAULT_STYLE_TIED }.merge(env), *cmd)
   [out, err, status]
 end
 
@@ -53,6 +58,37 @@ assert st.success?, "sorter exit 2-item group: #{_err}"
 sorted2 = File.read(f2.path)
 assert sorted2.index('- alpha') < sorted2.index('- zebra'), "group of 2 should be sorted:\n#{sorted2}"
 f2.close!
+
+# [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
+# How: Compare Unicode-lowercased values first, then original values as a deterministic case-sensitive tie-breaker.
+fmixed = write_temp_yaml!(<<~YAML)
+  phrases:
+    - zebra
+    - Apple
+    - apple
+    - Banana
+  keys:
+    zebra: z
+    Apple: A
+    apple: a
+    Banana: B
+YAML
+_out, _err, st = run_sorter(['--sort-keys', fmixed.path])
+assert st.success?, "mixed-case canonical ordering: #{_err}"
+mixed_lines = File.readlines(fmixed.path)
+phrase_values = mixed_lines.filter_map { |line| line[/^\s+- (Apple|apple|Banana|zebra)$/, 1] }
+assert phrase_values == %w[Apple apple Banana zebra],
+       "phrase list lines should be emitted in canonical sequence:\n#{mixed_lines.join}"
+assert mixed_lines.index { |line| line.match?(/^\s+- Apple\s*$/) } <
+         mixed_lines.index { |line| line.match?(/^\s+- apple\s*$/) },
+       "original-value tie-break should place Apple before apple:\n#{mixed_lines.join}"
+key_values = mixed_lines.filter_map { |line| line[/^\s+(Apple|apple|Banana|zebra):/, 1] }
+assert key_values == %w[Apple apple Banana zebra],
+       "map key lines should be emitted in canonical sequence:\n#{mixed_lines.join}"
+assert mixed_lines.index { |line| line.match?(/^\s+Apple:\s+A\s*$/) } <
+         mixed_lines.index { |line| line.match?(/^\s+apple:\s+a\s*$/) },
+       "map key tie-break should place Apple before apple:\n#{mixed_lines.join}"
+fmixed.close!
 
 # --- single-item list unchanged ---
 f1 = write_temp_yaml!(<<~YAML)

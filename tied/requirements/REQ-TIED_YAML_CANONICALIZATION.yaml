@@ -7,7 +7,7 @@ REQ-TIED_YAML_CANONICALIZATION:
     - "IMPL-TIED_YAML_STYLE_RESOLVER"
     - "REQ-MODULE_VALIDATION"
     - "REQ-TIED_SETUP"
-  description: "All supported TIED YAML writers and compatibility frontends produce deterministic typed output under the tied-yaml-canonical-v1 profile while preserving opaque pseudo-code and block-scalar bodies."
+  description: "All supported TIED YAML writers and compatibility frontends produce deterministic typed output under the tied-yaml-canonical-v1 profile while preserving opaque pseudo-code and block-scalar bodies. Recursive map keys and eligible all-string lists use case-insensitive-primary, locale-independent lexical ordering with original-value tie-breaking."
   detail_file: "requirements/REQ-TIED_YAML_CANONICALIZATION.yaml"
   metadata:
     created:
@@ -16,7 +16,7 @@ REQ-TIED_YAML_CANONICALIZATION:
     last_updated:
       author: "AI Agent"
       date: "2026-08-06"
-      reason: "Verification passed: 151 MCP tests, Ruby compatibility tests, pseudocode validation, and TIED consistency validation"
+      reason: "Propagate deterministic mixed-case ordering contract from IMPL through ARCH to REQ"
   name: "Deterministic typed TIED YAML canonicalization"
   priority: "P0"
   rationale:
@@ -38,7 +38,7 @@ REQ-TIED_YAML_CANONICALIZATION:
   satisfaction_criteria:
     - criterion: "Block-scalar bodies and IMPL pseudo-code sidecars remain opaque"
     - criterion: "Boolean, number, null, and string scalar types survive round trips"
-    - criterion: "Canonical output uses profile tied-yaml-canonical-v1 with recursive lexical map ordering"
+    - criterion: "Canonical output uses profile tied-yaml-canonical-v1 with recursive case-insensitive-primary map and eligible list ordering plus original-value tie-breaking"
     - criterion: "Every successful YAML write reports yaml_format metadata"
     - criterion: "MCP, yaml_tool, yaml_list_sorter, and yaml_semantic_compare share conformance fixtures"
     - criterion: "String-only lists sort except under ordered-list keys, while object and mixed lists preserve order"

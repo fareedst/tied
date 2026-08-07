@@ -102,7 +102,7 @@ procedure REPORT_YAML_FORMAT(resolved):
     profile_id: tied-yaml-canonical-v1,
     scalar_style: resolved.scalar_style,
     style_source: resolved.source,
-    recursive_key_order: locale-independent lexical,
+    recursive_key_order: case-insensitive-primary locale-independent lexical with original-value tie-break,
     string_scalar_rule: double-quote strings only when wrapped,
     typed_scalar_rule: preserve booleans numbers and nulls,
     opaque_block_policy: preserve block-scalar bodies and IMPL pseudo-code sidecars

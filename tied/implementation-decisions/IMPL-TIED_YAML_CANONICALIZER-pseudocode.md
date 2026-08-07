@@ -8,7 +8,7 @@ Contract:
   INPUT: parsed YAML value or one YAML file path; optional compatibility flags
   OUTPUT: canonical typed YAML text or atomic write result with yaml_format metadata
   DATA: maps, scalar values, lists, ordered-list key path, opaque block-scalar bodies, pseudo-code sidecar text
-  CONTROL: profile id tied-yaml-canonical-v1; locale-independent lexical ordering; one file write at a time
+  CONTROL: profile id tied-yaml-canonical-v1; case-insensitive-primary locale-independent lexical ordering with original-value tie-break; one file write at a time
   PRE: input is valid YAML when parsing is requested; target path is a regular project YAML file when writing
   POST: successful output is deterministic and typed; failed parse/serialize/write leaves the original target unchanged
   EFFECTS: pure for value canonicalization; File I/O for atomic writes; Exn for reported failures
@@ -18,26 +18,47 @@ Contract:
 
 ## CANONICALIZE_YAML_VALUE
 # [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
-# How: Recursively sort maps and eligible string lists while preserving scalar types, ordered-list order, object-list order, mixed-list order, and opaque text structure.
+# How: Recursively sort maps and eligible string lists with case-insensitive-primary ordering and original-value lexical tie-breaking while preserving scalar types, ordered-list order, object-list order, mixed-list order, and opaque text structure.
 procedure CANONICALIZE_YAML_VALUE(value, path):
   PRE: value is a supported typed YAML value
-  POST: map keys are locale-independent lexically ordered; eligible string lists are sorted; excluded structures retain order and values
+  POST: map keys and eligible string lists use case-insensitive-primary locale-independent lexical order with original-value tie-breaking; excluded structures retain order and values
   EFFECTS: pure
   FAILURE_MODES: UNSUPPORTED_VALUE
   TERMINATION: total
   IF value is a map:
     ordered := empty map
-    FOR each key in locale-independent lexical order:
+    FOR each key in canonical lexical order:
       ordered[key] := CANONICALIZE_YAML_VALUE(value[key], path + key)
     RETURN ordered
   IF value is a list:
     mapped := FOR each item IN value: CANONICALIZE_YAML_VALUE(item, path)
     IF every original element is a string AND path parent key is not an ordered-list key:
-      RETURN locale-independent lexical sort(mapped)
+      RETURN canonical lexical sort(mapped)
     RETURN mapped
   IF value is a string, boolean, number, or null:
     RETURN value unchanged
   RETURN error UNSUPPORTED_VALUE
+
+## COMPARE_CANONICAL_TEXT
+# [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
+# How: Compare Unicode-lowercased values first, then original values as a deterministic case-sensitive tie-breaker.
+procedure COMPARE_CANONICAL_TEXT(left, right):
+  PRE: left and right are strings
+  POST: returns a locale-independent ordering result
+  EFFECTS: pure
+  FAILURE_MODES: none
+  TERMINATION: total
+  folded_left := Unicode-lowercase(left)
+  folded_right := Unicode-lowercase(right)
+  IF folded_left < folded_right:
+    RETURN before
+  IF folded_left > folded_right:
+    RETURN after
+  IF left < right:
+    RETURN before
+  IF left > right:
+    RETURN after
+  RETURN equal
 
 ## IS_ORDERED_LIST_KEY
 # [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
@@ -97,7 +118,7 @@ procedure REPORT_YAML_FORMAT():
   TERMINATION: total
   RETURN {
     profile_id: "tied-yaml-canonical-v1",
-    recursive_key_order: "locale-independent lexical",
+    recursive_key_order: "case-insensitive-primary locale-independent lexical with original-value tie-break",
     ordered_list_key_pattern: "order|order_*|*_order|*_order_*",
     string_list_rule: "sort all-string lists except ordered-list keys",
     scalar_policy: "preserve string, boolean, number, and null types",

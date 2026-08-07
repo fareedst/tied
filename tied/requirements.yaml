@@ -579,8 +579,8 @@ REQ-GOAGENT-PIPELINE-CHAIN:
       - "IMPL-GOAGENT-CLI-CMD"
       - "IMPL-GOAGENT-PIPELINE"
     tests:
-      - "TestBuild_leadChecklistStepBounds"
       - "pipeline_test.go"
+      - "TestBuild_leadChecklistStepBounds"
   validation_criteria:
     - coverage: "tools/agentstream/pipeline/pipeline_test.go"
       method: "Unit tests"
@@ -1028,7 +1028,7 @@ REQ-TIED_YAML_CANONICALIZATION:
     - "IMPL-TIED_YAML_STYLE_RESOLVER"
     - "REQ-MODULE_VALIDATION"
     - "REQ-TIED_SETUP"
-  description: "All supported TIED YAML writers and compatibility frontends produce deterministic typed output under the tied-yaml-canonical-v1 profile while preserving opaque pseudo-code and block-scalar bodies."
+  description: "Deterministic typed TIED YAML canonicalization under one shared profile; recursive map keys and eligible all-string lists use case-insensitive-primary locale-independent ordering with original-value tie-breaking."
   detail_file: "requirements/REQ-TIED_YAML_CANONICALIZATION.yaml"
   metadata:
     created:
@@ -1037,7 +1037,7 @@ REQ-TIED_YAML_CANONICALIZATION:
     last_updated:
       author: "AI Agent"
       date: "2026-08-06"
-      reason: "Verification passed: 151 MCP tests, Ruby compatibility tests, pseudocode validation, and TIED consistency validation"
+      reason: "Propagate deterministic mixed-case ordering contract from IMPL through ARCH to REQ"
   name: "Deterministic typed TIED YAML canonicalization"
   priority: "P0"
   rationale:

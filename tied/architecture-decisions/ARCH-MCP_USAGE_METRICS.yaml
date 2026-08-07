@@ -28,9 +28,9 @@ ARCH-MCP_USAGE_METRICS:
       - "Client label from TIED_MCP_METRICS_CLIENT (tied-cli sets tied-cli; IDE default cursor-mcp)"
       - "Env gate: TIED_MCP_COLLECT_METRICS=1 or true enables collection; default disabled"
       - "Registration-time wrapToolHandler in mcp-server/src/index.ts — no per-handler edits"
+      - "sanitizeArgs redacts blob fields; never logs full essence_pseudocode or record bodies"
       - "Storage: append-only JSONL at TIED_MCP_METRICS_PATH or ~/.cursor/logs/tied-mcp-metrics.jsonl"
       - "Write failures are non-fatal (DIAGNOSTIC stderr only)"
-      - "sanitizeArgs redacts blob fields; never logs full essence_pseudocode or record bodies"
     summary: "Wrapper at MCP tool registration appends sanitized JSONL records when env opt-in is set"
   metadata:
     created:

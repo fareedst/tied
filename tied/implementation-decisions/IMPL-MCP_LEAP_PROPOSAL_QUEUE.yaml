@@ -22,10 +22,10 @@ IMPL-MCP_LEAP_PROPOSAL_QUEUE:
   detail_file: "implementation-decisions/IMPL-MCP_LEAP_PROPOSAL_QUEUE.yaml"
   implementation_approach:
     details:
-      - "MCP handlers use safeLeapCall for fs/git throws"
-      - "Paths: {projectRoot}/leap-proposals/queue.json and audit-log.jsonl"
       - "end-to-end-ui Phase H: no E2E-only UI surface; composition tests (leap-proposal-mcp.test.ts) authoritative for MCP bindings"
       - "extractDiffProposalCandidates: git diff + lines; failure returns { error } without throw"
+      - "MCP handlers use safeLeapCall for fs/git throws"
+      - "Paths: {projectRoot}/leap-proposals/queue.json and audit-log.jsonl"
       - "sync-tied-stack [PROC-AGENT_REQ_CHECKLIST] TIED sync — REQ/ARCH traceability.tests include leap-proposal-mcp.test.ts; index/detail + semantic-tokens metadata; validateConsistency(stdd/tied) ok; MCP tied_validate_consistency ok (workspace tied/)"
       - "verification-gate Phase I: full suite + tsc + validateConsistency(TIED_BASE_PATH=stdd/tied); completion_evidence in CITDP; module validation in s12_phase_i"
     summary: "leap-proposal-queue.ts (queue, audit, diff/session helpers); tools/index.ts tied_leap_proposal_*; safeLeapCall wraps sync throws"
@@ -90,6 +90,7 @@ IMPL-MCP_LEAP_PROPOSAL_QUEUE:
         - "tied/implementation-decisions.yaml"
         - "tied/implementation-decisions/IMPL-MCP_LEAP_PROPOSAL_QUEUE.yaml"
     module_validation:
+      integration_note: "LPQ_MCP depends on LPQ_CORE; composition tests run after unit module green"
       LPQ_CORE:
         path: "mcp-server/src/analysis/leap-proposal-queue.ts"
         status: "pass — queue lifecycle, session parse, PROPOSALS_FROM_SESSION_SEGMENTS trim, LOAD_QUEUE BOM (S09)"
@@ -98,7 +99,6 @@ IMPL-MCP_LEAP_PROPOSAL_QUEUE:
         composition_tests: "leap-proposal-mcp.test.ts"
         path: "mcp-server/src/tools/index.ts"
         status: "pass — handler → safeLeapCall → module; lifecycle + extract error path + queue_snapshot BOM (composition-integration)"
-      integration_note: "LPQ_MCP depends on LPQ_CORE; composition tests run after unit module green"
       reference: "REQ-MODULE_VALIDATION"
     process_tokens:
       - "PROC-AGENT_REQ_CHECKLIST"

@@ -28,7 +28,7 @@
 | **yaml_semantic_compare** | YAML equality check (alone) | `scripts/yaml_semantic_compare.rb` — semantic value compare for post-sort validation and directory diffs; see [`tied-methodology.md`](tied-methodology.md) |
 | **compare_yaml_dirs** | recursive yaml directory diff | `scripts/compare_yaml_dirs.rb` — pairs YAML by relative path across two dirs; see [`tied-methodology.md`](tied-methodology.md) |
 | **YAML canonicalization** (rename) | independent rename serialization | `tied_token_rename` delegates substituted YAML to the shared `tied-yaml-canonical-v1` profile and preserves original files on parse or serialization failure |
-| **format metadata** | serializer details | Successful rename and other YAML writes return the stable `yaml_format` object for the active profile |
+| **format metadata** | serializer details | Successful rename and other YAML writes return the stable `yaml_format` object for the active profile, including `recursive_key_order` for the case-insensitive-primary comparator and original-value tie-break described in [`tied-methodology.md`](tied-methodology.md) |
 | **scalar-style resolution** | quote configuration, YAML style | Shared repository-over-global policy used by MCP writers, `tied-cli.sh`, and `yaml_tool.sh` |
 | **repository YAML style** | local style config | `.tied-yaml.yaml` at the parent of `TIED_BASE_PATH`; `scalar_style` is `unwrapped` or `wrapped` |
 | **wrapped** | quoted scalars | Double-quote string scalars only; preserve boolean, number, and null types |
