@@ -1,12 +1,12 @@
 IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV:
   code_locations:
     files:
-      - path: "tools/agent-stream/lib/agent_stream_argv.rb"
-        description: "[REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML] [ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS] [IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV]"
-      - path: "tools/agent-stream/lib/tdd_loop_prompts.rb"
-        description: "TDD loop YAML message expansion"
-      - path: "tools/agent-stream/lib/lead_checklist_prompts.rb"
-        description: "Lead checklist YAML expansion ([PROC-AGENT_REQ_CHECKLIST])"
+      - description: "[REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML] [ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS] [IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV]"
+        path: "tools/agent-stream/lib/agent_stream_argv.rb"
+      - description: "TDD loop YAML message expansion"
+        path: "tools/agent-stream/lib/tdd_loop_prompts.rb"
+      - description: "Lead checklist YAML expansion ([PROC-AGENT_REQ_CHECKLIST])"
+        path: "tools/agent-stream/lib/lead_checklist_prompts.rb"
   cross_references:
     - "ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS"
     - "REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML"

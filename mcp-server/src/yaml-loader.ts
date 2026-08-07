@@ -8,7 +8,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import yaml from "js-yaml";
-import { safeDump } from "./yaml-dump.js";
+import { writeCanonicalValueAtomic } from "./yaml-canonicalizer.js";
 import { mergeRecordUpdate } from "./record-merge.js";
 
 export type IndexName =
@@ -356,9 +356,11 @@ export function insertRecord(
     data[token] = record;
     const dir = path.dirname(filePath);
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-    const out = safeDump(data);
-    fs.writeFileSync(filePath, out, "utf8");
-    return { ok: true };
+    // [IMPL-TIED_YAML_STYLE_RESOLVER] [ARCH-TIED_YAML_STYLE_RESOLUTION] [REQ-TIED_YAML_STYLE_CONFIGURATION] [REQ-MODULE_VALIDATION]
+    // How: Resolve repository scalar style through the shared canonical writer and return one format contract.
+    const writeResult = writeCanonicalValueAtomic(filePath, data);
+    if (!writeResult.ok) return writeResult;
+    return writeResult;
   } catch (e) {
     const message = e instanceof Error ? e.message : String(e);
     return { ok: false, error: message };
@@ -384,9 +386,11 @@ export function updateRecord(
       return { ok: false, error: `Token is not a record: ${token}` };
     const merged = mergeRecordUpdate(existing as Record<string, unknown>, updates);
     data[token] = merged;
-    const out = safeDump(data);
-    fs.writeFileSync(filePath, out, "utf8");
-    return { ok: true };
+    // [IMPL-TIED_YAML_STYLE_RESOLVER] [ARCH-TIED_YAML_STYLE_RESOLUTION] [REQ-TIED_YAML_STYLE_CONFIGURATION] [REQ-MODULE_VALIDATION]
+    // How: Resolve repository scalar style through the shared canonical writer and return one format contract.
+    const writeResult = writeCanonicalValueAtomic(filePath, data);
+    if (!writeResult.ok) return writeResult;
+    return writeResult;
   } catch (e) {
     const message = e instanceof Error ? e.message : String(e);
     return { ok: false, error: message };
@@ -414,9 +418,11 @@ export function upsertRecord(
     }
     const dir = path.dirname(filePath);
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-    const out = safeDump(data);
-    fs.writeFileSync(filePath, out, "utf8");
-    return { ok: true };
+    // [IMPL-TIED_YAML_STYLE_RESOLVER] [ARCH-TIED_YAML_STYLE_RESOLUTION] [REQ-TIED_YAML_STYLE_CONFIGURATION] [REQ-MODULE_VALIDATION]
+    // How: Resolve repository scalar style through the shared canonical writer and return one format contract.
+    const writeResult = writeCanonicalValueAtomic(filePath, data);
+    if (!writeResult.ok) return writeResult;
+    return writeResult;
   } catch (e) {
     const message = e instanceof Error ? e.message : String(e);
     return { ok: false, error: message };

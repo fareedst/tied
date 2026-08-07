@@ -1,0 +1,78 @@
+IMPL-TIED_YAML_CANONICALIZER:
+  code_locations:
+    files:
+      - description: "Pure profile and typed canonicalization module"
+        path: "mcp-server/src/yaml-canonicalizer.ts"
+      - description: "Shared dump and opaque block handling"
+        path: "mcp-server/src/yaml-dump.ts"
+      - description: "Atomic project YAML writes"
+        path: "mcp-server/src/yaml-loader.ts"
+      - description: "Canonical rename substitution and failure preservation"
+        path: "mcp-server/src/token-rename.ts"
+      - description: "Compatibility frontend"
+        path: "scripts/yaml_tool.sh"
+      - description: "Compatibility sorter frontend"
+        path: "scripts/yaml_list_sorter.rb"
+      - description: "Typed semantic compare"
+        path: "scripts/yaml_semantic_compare.rb"
+    functions: []
+  cross_references:
+    - "ARCH-TIED_YAML_CANONICAL_PROFILE"
+    - "ARCH-TIED_YAML_STYLE_RESOLUTION"
+    - "IMPL-TIED_FILES"
+    - "REQ-MODULE_VALIDATION"
+    - "REQ-TIED_YAML_CANONICALIZATION"
+    - "REQ-TIED_YAML_STYLE_CONFIGURATION"
+  description: "Shared typed canonicalizer, atomic writer, format metadata, MCP writer integration, and compatibility frontend delegation."
+  detail_file: "implementation-decisions/IMPL-TIED_YAML_CANONICALIZER.yaml"
+  implementation_approach:
+    details:
+      - "Canonicalize parsed YAML values recursively with path-aware ordered-list exceptions"
+      - "Expose a read-only tied_yaml_format operation and add metadata to all successful YAML writes"
+      - "Keep yaml_tool compatibility flags while delegating default and sorter comparison behavior to shared profile"
+      - "Return yaml_format metadata from successful write operations"
+      - "Serialize using stable typed scalar rules while retaining opaque block-scalar and sidecar text"
+      - "Testability boundary: unit tests cover pure canonicalization and atomic failure; UI-free MCP composition covers handler wiring; the compatibility CLI is exercised by scripts/yaml_list_sorter_test.rb; no separate UI E2E is applicable because this feature has no UI boundary."
+      - "Write through temporary files and atomic rename only after successful parse and serialization"
+    summary: "Implement a pure typed canonicalizer and atomic file writer, then route MCP and compatibility writers through it."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-06"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-06"
+      reason: "Align pseudocode, deterministic lexical sorting, registered unit suite, and UI-free composition coverage"
+  name: "Shared typed TIED YAML canonicalizer"
+  rationale:
+    benefits:
+      - "Atomic unchanged-on-failure behavior"
+      - "One policy for MCP and CLI surfaces"
+      - "Typed deterministic output"
+    problems_solved:
+      - "Missing format metadata and cross-surface parity"
+      - "Split yq/Ruby serialization policies"
+      - "Unsafe in-place writes after parse failures"
+    why: "A pure shared module makes serialization rules deterministic and independently testable before MCP composition."
+  related_decisions:
+    composed_with: []
+    depends_on:
+      - "IMPL-TIED_FILES"
+    see_also:
+      - "PROC-YAML_EDIT_LOOP"
+    supersedes: []
+  status: "Active"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-TIED_YAML_CANONICAL_PROFILE"
+      - "ARCH-TIED_YAML_STYLE_RESOLUTION"
+    code_annotations:
+      - "IMPL-TIED_YAML_CANONICALIZER"
+    requirements:
+      - "REQ-TIED_YAML_CANONICALIZATION"
+      - "REQ-TIED_YAML_STYLE_CONFIGURATION"
+    tests:
+      - "mcp-server/src/tools/yaml-canonicalization-mcp.test.ts"
+      - "mcp-server/src/yaml-canonicalizer.test.ts"
+      - "scripts/yaml_list_sorter_test.rb"

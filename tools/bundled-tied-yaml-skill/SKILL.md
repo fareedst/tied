@@ -40,6 +40,17 @@ TIED_MCP_BIN=/absolute/path/to/tied-repository/mcp-server/dist/index.js \
 - **`TIED_MCP_METRICS_PATH`** — optional override; default `~/.cursor/logs/tied-mcp-metrics.jsonl`.
 - Analyze with **`scripts/analyze_tied_mcp_metrics.rb`** in the TIED repo (see `docs/conversation-analysis-tools.md`). Traceability: [REQ-MCP_USAGE_METRICS], [IMPL-MCP_USAGE_METRICS].
 
+### Repository YAML scalar style
+
+Put `scalar_style: unwrapped` or `scalar_style: wrapped` in `.tied-yaml.yaml` at the client project root (the parent of `TIED_BASE_PATH`). Resolution precedence is:
+
+1. repository `.tied-yaml.yaml`;
+2. global `TIED_YAML_STYLE`;
+3. `$XDG_CONFIG_HOME/tied/yaml-format.yaml`;
+4. `unwrapped` default.
+
+Repository configuration is authoritative. `wrapped` means double-quoted string scalars only; booleans, numbers, and null remain typed YAML scalars. Invalid explicit configuration fails rather than falling back. `yaml_tool.sh`, `tied-cli.sh`, and MCP writers use the same resolved policy; `tied_yaml_format` and successful writes expose `scalar_style` and `style_source` in `yaml_format`. Use `scripts/yaml_tool.sh --check <file>` for a read-only canonical-style gate.
+
 ### Do not substitute Python for TIED validation
 
 Do **not** replace `tied-cli.sh` tools (especially **`tied_validate_consistency`**) with ad-hoc **`python3` + PyYAML** parsing when the goal is TIED consistency — that skips schema and graph checks. If neither Node nor a built server is available, follow **`tied/docs/using-tied-without-mcp.md`** for the documented manual project-YAML workflow instead of inventing a parser script.

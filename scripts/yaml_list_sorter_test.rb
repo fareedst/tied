@@ -10,6 +10,7 @@
 require 'open3'
 require 'tempfile'
 require 'fileutils'
+require 'tmpdir'
 
 require_relative 'yaml_semantic_compare'
 require_relative 'yaml_list_sorter'
@@ -28,9 +29,9 @@ def run_sorter(args)
   [out, err, status]
 end
 
-def run_yaml_tool(args)
+def run_yaml_tool(args, env: {})
   cmd = [YAML_TOOL, *args]
-  out, err, status = Open3.capture3(*cmd)
+  out, err, status = Open3.capture3(env, *cmd)
   [out, err, status]
 end
 
@@ -579,18 +580,18 @@ end
 assert parse_failed, 'validate_sorted_content! should reject unparseable sorted YAML'
 funparse.close!
 
-# --- yaml_tool default lint (requires yq) ---
-# [PROC-YAML_EDIT_LOOP] [IMPL-TIED_FILES] — default lint: sort_keys(.. style="double")
-if system('command -v yq >/dev/null 2>&1')
+# --- yaml_tool default lint (requires built canonicalizer) ---
+# [PROC-YAML_EDIT_LOOP] [IMPL-TIED_YAML_CANONICALIZER] [REQ-TIED_YAML_CANONICALIZATION]
+# How: Default lint uses tied-yaml-canonical-v1 and preserves typed scalar values.
+if File.file?(File.join(SCRIPT_DIR, '..', 'mcp-server', 'dist', 'cli', 'yaml-canonicalizer.js'))
   fl = write_temp_yaml!("key: value\n")
   _out, _err, st = run_yaml_tool([fl.path])
   assert st.success?, "yaml_tool lint failed: #{_err}"
   fl_body = File.read(fl.path)
-  assert fl_body.include?('"value"') || fl_body.include?('key: "value"'),
-         "yaml_tool lint double-quote: #{fl_body}"
+  assert fl_body.include?('key: value'), "yaml_tool canonical scalar preservation: #{fl_body}"
   fl.close!
 
-  # Default lint: recursive key sort + double-quoted scalars (bool → string)
+  # Default lint: recursive key sort + typed scalar preservation
   dq = write_temp_yaml!(<<~YAML)
     b: two
     flag: false
@@ -601,9 +602,9 @@ if system('command -v yq >/dev/null 2>&1')
   assert st.success?, "yaml_tool double-quote lint failed: #{_err}"
   dq_body = File.read(dq.path)
   assert dq_body.index('a:') < dq_body.index('b:'), "yaml_tool lint key order: #{dq_body}"
-  assert dq_body.match?(/flag:\s*"false"/), "yaml_tool lint bool stringify: #{dq_body}"
-  assert dq_body.match?(/count:\s*"0"/), "yaml_tool lint int stringify: #{dq_body}"
-  assert dq_body.match?(/a:\s*"one"/), "yaml_tool lint string quote: #{dq_body}"
+  assert dq_body.match?(/flag:\s*false/), "yaml_tool lint bool preservation: #{dq_body}"
+  assert dq_body.match?(/count:\s*0/), "yaml_tool lint int preservation: #{dq_body}"
+  assert dq_body.match?(/a:\s*one/), "yaml_tool lint string preservation: #{dq_body}"
   dq.close!
 
   fs = write_temp_yaml!(<<~YAML)
@@ -627,8 +628,42 @@ if system('command -v yq >/dev/null 2>&1')
   tool_keys = File.read(fk_tool.path)
   assert tool_keys.index('a:') < tool_keys.index('b:'), "yaml_tool sort-keys: #{tool_keys}"
   fk_tool.close!
+
+  # Resolved repository style: wrapped quotes strings only and preserves typed scalars.
+  style_root = Dir.mktmpdir('tied_yaml_style_cli_')
+  style_tied = File.join(style_root, 'tied')
+  FileUtils.mkdir_p(style_tied)
+  File.write(File.join(style_root, '.tied-yaml.yaml'), "scalar_style: wrapped\n")
+  wrapped_source = File.join(style_root, 'wrapped.yaml')
+  fixture = File.join(SCRIPT_DIR, '..', 'mcp-server', 'test', 'fixtures', 'yaml-style.yaml')
+  FileUtils.cp(fixture, wrapped_source)
+  wrapped_env = { 'TIED_BASE_PATH' => style_tied }
+  _out, err, st = run_yaml_tool([wrapped_source], env: wrapped_env)
+  assert st.success?, "yaml_tool wrapped lint failed: #{err}"
+  wrapped_body = File.read(wrapped_source)
+  assert wrapped_body.include?('message: "hello"'), "wrapped strings must be quoted: #{wrapped_body}"
+  assert wrapped_body.match?(/flag: false/), "wrapped bool must remain typed: #{wrapped_body}"
+  assert wrapped_body.match?(/count: 7/), "wrapped number must remain typed: #{wrapped_body}"
+  assert wrapped_body.match?(/empty: null/), "wrapped null must remain typed: #{wrapped_body}"
+
+  wrapped_check, check_err, st = run_yaml_tool(['--check', wrapped_source], env: wrapped_env)
+  assert st.success?, "yaml_tool --check should accept canonical wrapped output: #{check_err}"
+  assert wrapped_check.empty?, "yaml_tool --check should not rewrite or print on success"
+  File.write(wrapped_source, wrapped_body.sub('message: "hello"', 'message: hello'))
+  _out, check_err, st = run_yaml_tool(['--check', wrapped_source], env: wrapped_env)
+  assert !st.success?, 'yaml_tool --check should reject the wrong scalar style'
+  assert check_err.include?('not in resolved canonical style'), "check diagnostic: #{check_err}"
+
+  sorted_wrapped = File.join(style_root, 'sorted.yaml')
+  File.write(sorted_wrapped, "tags:\n  - zed\n  - ant\n")
+  _out, err, st = run_yaml_tool(['--sort-lists', sorted_wrapped], env: wrapped_env)
+  assert st.success?, "yaml_tool wrapped --sort-lists failed: #{err}"
+  sorted_wrapped_body = File.read(sorted_wrapped)
+  assert sorted_wrapped_body.include?('- "ant"'), "sorted wrapped list style: #{sorted_wrapped_body}"
+  assert sorted_wrapped_body.include?('- "zed"'), "sorted wrapped list style: #{sorted_wrapped_body}"
+  FileUtils.remove_entry(style_root)
 else
-  warn 'SKIP: yq not on PATH; yaml_tool lint integration tests skipped'
+  warn 'SKIP: built canonicalizer not found; yaml_tool lint integration tests skipped'
 end
 
 puts 'yaml_list_sorter_test.rb: all assertions passed'

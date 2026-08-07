@@ -3,8 +3,8 @@ CITDP-IMPL-CONTRACT-PRECISION:
     current_behavior_prior: "Active IMPL essence_pseudocode contracts used INPUT/OUTPUT/DATA/CONTROL; Layer B schema lacked SHAPE-003..006; agent Phase B/D and checklists did not require PRE/POST/EFFECTS or related precision fields."
     desired_behavior: "New/changed Active procedure blocks declare language-agnostic contract precision (PRE, POST, EFFECTS; FAILURE_MODES/DATA_TRANSITION/TERMINATION when applicable). Template stubs stay minimal. Untouched legacy Active blocks may use Layer B N/A pre-contract-grammar until next edit. Guides, template, AGENTS, vocab, agent checklist, processes, and pseudocode-validation-checklist (SHAPE-003..006 + minimum_gating_rules) aligned. Same commit adds docs/Netscape-Bookmark-HTML-Format.md reference note."
     non_goals:
-      - "Mass-rewriting untouched Active IMPL sidecars to the new contract"
       - "MCP structural parser for essence_pseudocode"
+      - "Mass-rewriting untouched Active IMPL sidecars to the new contract"
       - "New REQ/ARCH/IMPL product tokens for contract precision"
       - "Wiring Netscape bookmark format into agentstream or bookmark IMPLs/code in this change"
     references:
@@ -67,13 +67,13 @@ CITDP-IMPL-CONTRACT-PRECISION:
     workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
   risk_analysis:
     risks:
-      - id: "RISK-CONTRACT-PREC-001"
-        description: "Agents continue authoring Active blocks with INPUT/OUTPUT only because no MCP parser enforces SHAPE-003..006."
+      - description: "Agents continue authoring Active blocks with INPUT/OUTPUT only because no MCP parser enforces SHAPE-003..006."
+        id: "RISK-CONTRACT-PREC-001"
         likelihood: "Medium"
         mitigation: "Checklist gates, Phase B flags, and CHANGELOG document manual Layer B; pre-contract-grammar limited to unchanged legacy blocks."
         severity: "Medium"
-      - id: "RISK-CONTRACT-PREC-002"
-        description: "Authors confuse CONTROL (env/ordering) with EFFECTS (effect row)."
+      - description: "Authors confuse CONTROL (env/ordering) with EFFECTS (effect row)."
+        id: "RISK-CONTRACT-PREC-002"
         likelihood: "Medium"
         mitigation: "Vocab and implementation-decisions.md distinguish CONTROL vs EFFECTS; template stubs show both."
         severity: "Low"

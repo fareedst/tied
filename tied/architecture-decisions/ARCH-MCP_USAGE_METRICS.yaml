@@ -1,22 +1,22 @@
 ARCH-MCP_USAGE_METRICS:
   alternatives_considered:
-    - name: "Cursor hook logs only"
-      cons:
+    - cons:
         - "Misses tied-cli and headless MCP invocations"
         - "Requires separate hooks.json setup per project"
+      name: "Cursor hook logs only"
       pros:
         - "Already captures some IDE tool events"
       rejected_reason: "Does not cover tied-cli/API path; server-side wrapper covers both surfaces uniformly"
-    - name: "Store metrics in tied/feedback.yaml"
-      cons:
+    - cons:
         - "Mixes human feedback with high-volume telemetry"
         - "Would version noisy data with project git"
+      name: "Store metrics in tied/feedback.yaml"
       pros:
         - "Reuses existing feedback module"
       rejected_reason: "Separate append-only JSONL under ~/.cursor/logs/ keeps metrics local and out of project YAML"
-    - name: "Always-on collection"
-      cons:
+    - cons:
         - "Privacy and I/O overhead without explicit opt-in"
+      name: "Always-on collection"
       pros:
         - "Simpler for operators"
       rejected_reason: "Default off via TIED_MCP_COLLECT_METRICS matches local-only opt-in requirement"
@@ -28,9 +28,9 @@ ARCH-MCP_USAGE_METRICS:
       - "Client label from TIED_MCP_METRICS_CLIENT (tied-cli sets tied-cli; IDE default cursor-mcp)"
       - "Env gate: TIED_MCP_COLLECT_METRICS=1 or true enables collection; default disabled"
       - "Registration-time wrapToolHandler in mcp-server/src/index.ts — no per-handler edits"
-      - "sanitizeArgs redacts blob fields; never logs full essence_pseudocode or record bodies"
       - "Storage: append-only JSONL at TIED_MCP_METRICS_PATH or ~/.cursor/logs/tied-mcp-metrics.jsonl"
       - "Write failures are non-fatal (DIAGNOSTIC stderr only)"
+      - "sanitizeArgs redacts blob fields; never logs full essence_pseudocode or record bodies"
     summary: "Wrapper at MCP tool registration appends sanitized JSONL records when env opt-in is set"
   metadata:
     created:

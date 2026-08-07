@@ -1,14 +1,14 @@
 IMPL-QUALITY_SECURITY_PROFILE_VALIDATION:
   code_locations:
     files:
-      - path: "mcp-server/src/quality-security.ts"
-        description: "External-input security profile completeness validator"
-      - path: "mcp-server/src/quality-security.test.ts"
-        description: "Unit tests for required abuse cases and waivers"
+      - description: "External-input security profile completeness validator"
+        path: "mcp-server/src/quality-security.ts"
+      - description: "Unit tests for required abuse cases and waivers"
+        path: "mcp-server/src/quality-security.test.ts"
     functions:
-      - name: "validateSecurityProfile"
-        description: "Require executable evidence or complete waivers for security cases"
+      - description: "Require executable evidence or complete waivers for security cases"
         file: "mcp-server/src/quality-security.ts"
+        name: "validateSecurityProfile"
   cross_references:
     - "ARCH-QUALITY_ASSURANCE_PROFILES"
     - "REQ-QUALITY_ASSURANCE_EVIDENCE"

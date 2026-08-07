@@ -1,14 +1,14 @@
 IMPL-QUALITY_EVIDENCE_MANIFEST:
   code_locations:
     files:
-      - path: "mcp-server/src/quality-evidence.ts"
-        description: "Pure evidence manifest types and builder"
-      - path: "mcp-server/src/quality-evidence.test.ts"
-        description: "Unit tests for deterministic manifest generation"
+      - description: "Pure evidence manifest types and builder"
+        path: "mcp-server/src/quality-evidence.ts"
+      - description: "Unit tests for deterministic manifest generation"
+        path: "mcp-server/src/quality-evidence.test.ts"
     functions:
-      - name: "buildVerificationEvidenceManifest"
-        description: "Build normalized machine-derived evidence manifest"
+      - description: "Build normalized machine-derived evidence manifest"
         file: "mcp-server/src/quality-evidence.ts"
+        name: "buildVerificationEvidenceManifest"
   cross_references:
     - "ARCH-QUALITY_ASSURANCE_PROFILES"
     - "IMPL-QUALITY_EVIDENCE_COLLECTION"

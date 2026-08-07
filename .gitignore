@@ -16,3 +16,4 @@ TODO.md
 tied/docs/.markscope-preview-cache/
 .markscope-preview-cache
 .cursor/debug-*.log
+.cursor/work

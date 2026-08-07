@@ -1,22 +1,22 @@
 IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT:
   code_locations:
     files:
-      - path: "tools/agentstream/cmd/agentstream/main.go"
-        description: "Integration: applyPostPreloadNonCompactHTML after ApplyPromptFilePreload (IMPL-GOAGENT-CLI-CMD + IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT composition)"
-      - path: "tools/agentstream/cmd/agentstream/compose_noncompact.go"
-        description: "MAP_CONFIG_TO_HTMLFORMAT_OPTIONS + call IntegrateWithMain; REQ/ARCH/IMPL: IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT; CLI via config.Config"
-      - path: "tools/agentstream/config/config.go"
-        description: "NonCompactHTML, NonCompactHTMLStableIndent; --non-compact-html / --non-compact-html-indent (ARCH-GOAGENT-CLI / REQ-GOAGENT-CLI-CONFIG)"
-      - path: "tools/agentstream/htmlformat/htmlformat.go"
-        description: "APPLY_TO_TURNS, FormatNonCompactHTML, addNonCompactLineBreaks, applyStableIndentLines, IntegrateWithMain (htmlformat); REQ/ARCH/IMPL: IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT"
+      - description: "Integration: applyPostPreloadNonCompactHTML after ApplyPromptFilePreload (IMPL-GOAGENT-CLI-CMD + IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT composition)"
+        path: "tools/agentstream/cmd/agentstream/main.go"
+      - description: "MAP_CONFIG_TO_HTMLFORMAT_OPTIONS + call IntegrateWithMain; REQ/ARCH/IMPL: IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT; CLI via config.Config"
+        path: "tools/agentstream/cmd/agentstream/compose_noncompact.go"
+      - description: "NonCompactHTML, NonCompactHTMLStableIndent; --non-compact-html / --non-compact-html-indent (ARCH-GOAGENT-CLI / REQ-GOAGENT-CLI-CONFIG)"
+        path: "tools/agentstream/config/config.go"
+      - description: "APPLY_TO_TURNS, FormatNonCompactHTML, addNonCompactLineBreaks, applyStableIndentLines, IntegrateWithMain (htmlformat); REQ/ARCH/IMPL: IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT"
+        path: "tools/agentstream/htmlformat/htmlformat.go"
     functions: []
   cross_references:
     - "ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT"
     - "REQ-GOAGENT-NON-COMPACT-HTML-FORMAT"
   implementation_approach:
     details:
-      - "end-to-end-ui Phase H: no E2E-only UI surface for this IMPL; s11_phase_h documents e2e_only false; htmlformat + compose_noncompact authoritatively cover Go bindings (REQ-MODULE_VALIDATION) [PROC-AGENT_REQ_CHECKLIST]"
       - "If scope later excludes feature-spec or verify, LEAP to narrow INTEGRATE_WITH_MAIN without changing FORMAT_NON_COMPACT_HTML"
+      - "end-to-end-ui Phase H: no E2E-only UI surface for this IMPL; s11_phase_h documents e2e_only false; htmlformat + compose_noncompact authoritatively cover Go bindings (REQ-MODULE_VALIDATION) [PROC-AGENT_REQ_CHECKLIST]"
     summary: "Add Config flag; package under tools/agentstream (exact path in unit-test-green) implementing APPLY_TO_TURNS and formatters; wire in cmd/agentstream after ApplyPromptFilePreload. Tests in *_test.go reference REQ/IMPL tokens."
   metadata:
     created:

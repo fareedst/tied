@@ -1,31 +1,31 @@
 IMPL-MCP_LEAP_PROPOSAL_QUEUE:
   code_locations:
     files:
-      - path: "mcp-server/src/analysis/leap-proposal-queue.ts"
-        description: "Queue, audit, extractDiffProposalCandidates, parseSessionExportSegments [REQ-LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [IMPL-MCP_LEAP_PROPOSAL_QUEUE]"
-      - path: "mcp-server/src/analysis/leap-proposal-queue.test.ts"
-        description: "Unit tests for queue and session parsing"
-      - path: "mcp-server/src/tools/index.ts"
-        description: "tied_leap_proposal_* handlers and safeLeapCall"
-      - path: "mcp-server/src/tools/leap-proposal-mcp.test.ts"
-        description: "Composition tests — MCP handler wiring to leap-proposal-queue (no UI) [REQ-LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [IMPL-MCP_LEAP_PROPOSAL_QUEUE]"
+      - description: "Queue, audit, extractDiffProposalCandidates, parseSessionExportSegments [REQ-LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [IMPL-MCP_LEAP_PROPOSAL_QUEUE]"
+        path: "mcp-server/src/analysis/leap-proposal-queue.ts"
+      - description: "Unit tests for queue and session parsing"
+        path: "mcp-server/src/analysis/leap-proposal-queue.test.ts"
+      - description: "tied_leap_proposal_* handlers and safeLeapCall"
+        path: "mcp-server/src/tools/index.ts"
+      - description: "Composition tests — MCP handler wiring to leap-proposal-queue (no UI) [REQ-LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [IMPL-MCP_LEAP_PROPOSAL_QUEUE]"
+        path: "mcp-server/src/tools/leap-proposal-mcp.test.ts"
     functions:
-      - name: "loadQueue"
-        description: "Read queue.json or empty default; strip UTF-8 BOM before parse; DIAGNOSTIC on parse failure"
+      - description: "Read queue.json or empty default; strip UTF-8 BOM before parse; DIAGNOSTIC on parse failure"
         file: "mcp-server/src/analysis/leap-proposal-queue.ts"
-      - name: "extractDiffProposalCandidates"
-        description: "Deterministic git + line scan; outer catch returns error field"
+        name: "loadQueue"
+      - description: "Deterministic git + line scan; outer catch returns error field"
         file: "mcp-server/src/analysis/leap-proposal-queue.ts"
+        name: "extractDiffProposalCandidates"
   cross_references:
     - "ARCH-LEAP_PROPOSAL_QUEUE"
     - "REQ-LEAP_PROPOSAL_QUEUE"
   detail_file: "implementation-decisions/IMPL-MCP_LEAP_PROPOSAL_QUEUE.yaml"
   implementation_approach:
     details:
-      - "end-to-end-ui Phase H: no E2E-only UI surface; composition tests (leap-proposal-mcp.test.ts) authoritative for MCP bindings"
-      - "extractDiffProposalCandidates: git diff + lines; failure returns { error } without throw"
       - "MCP handlers use safeLeapCall for fs/git throws"
       - "Paths: {projectRoot}/leap-proposals/queue.json and audit-log.jsonl"
+      - "end-to-end-ui Phase H: no E2E-only UI surface; composition tests (leap-proposal-mcp.test.ts) authoritative for MCP bindings"
+      - "extractDiffProposalCandidates: git diff + lines; failure returns { error } without throw"
       - "sync-tied-stack [PROC-AGENT_REQ_CHECKLIST] TIED sync — REQ/ARCH traceability.tests include leap-proposal-mcp.test.ts; index/detail + semantic-tokens metadata; validateConsistency(stdd/tied) ok; MCP tied_validate_consistency ok (workspace tied/)"
       - "verification-gate Phase I: full suite + tsc + validateConsistency(TIED_BASE_PATH=stdd/tied); completion_evidence in CITDP; module validation in s12_phase_i"
     summary: "leap-proposal-queue.ts (queue, audit, diff/session helpers); tools/index.ts tied_leap_proposal_*; safeLeapCall wraps sync throws"
@@ -90,7 +90,6 @@ IMPL-MCP_LEAP_PROPOSAL_QUEUE:
         - "tied/implementation-decisions.yaml"
         - "tied/implementation-decisions/IMPL-MCP_LEAP_PROPOSAL_QUEUE.yaml"
     module_validation:
-      integration_note: "LPQ_MCP depends on LPQ_CORE; composition tests run after unit module green"
       LPQ_CORE:
         path: "mcp-server/src/analysis/leap-proposal-queue.ts"
         status: "pass — queue lifecycle, session parse, PROPOSALS_FROM_SESSION_SEGMENTS trim, LOAD_QUEUE BOM (S09)"
@@ -99,6 +98,7 @@ IMPL-MCP_LEAP_PROPOSAL_QUEUE:
         composition_tests: "leap-proposal-mcp.test.ts"
         path: "mcp-server/src/tools/index.ts"
         status: "pass — handler → safeLeapCall → module; lifecycle + extract error path + queue_snapshot BOM (composition-integration)"
+      integration_note: "LPQ_MCP depends on LPQ_CORE; composition tests run after unit module green"
       reference: "REQ-MODULE_VALIDATION"
     process_tokens:
       - "PROC-AGENT_REQ_CHECKLIST"

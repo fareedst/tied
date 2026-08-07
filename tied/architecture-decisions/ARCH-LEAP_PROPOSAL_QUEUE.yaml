@@ -1,20 +1,20 @@
 ARCH-LEAP_PROPOSAL_QUEUE:
   alternatives_considered:
-    - name: "Store proposals under tied/proposals.yaml"
-      cons:
+    - cons:
         - "Conflicts with canonical-only expectation for tied/ project YAML; harder to distinguish from REQ/ARCH/IMPL"
+      name: "Store proposals under tied/proposals.yaml"
       pros:
         - "Versioned with methodology tree"
       rejected_reason: "Keep proposals out of TIED base path until promoted via explicit LEAP"
-    - name: "New requirements.yaml rows for each proposal"
-      cons:
+    - cons:
         - "Proposals are not requirements until approved; would flood index and confuse traceability"
+      name: "New requirements.yaml rows for each proposal"
       pros:
         - "Uses existing REQ index"
       rejected_reason: "Proposals are non-canonical until approved"
-    - name: "Only LLM extraction"
-      cons:
+    - cons:
         - "API keys and cost; contradicts deterministic default path"
+      name: "Only LLM extraction"
       pros:
         - "Richer suggestions"
       rejected_reason: "Built-in path must be deterministic and opt-in without LLM"

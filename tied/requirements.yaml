@@ -44,10 +44,10 @@ REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML:
     tests:
       - "agent_stream_tdd_yaml_binding_test.rb"
   validation_criteria:
-    - method: "Composition tests (upstream atdd)"
-      coverage: "test/composition/agent_stream_tdd_yaml_binding_test.rb"
-    - method: "Vendored code review"
-      coverage: "tools/agent-stream/lib/agent_stream_argv.rb, lib/tdd_loop_prompts.rb"
+    - coverage: "test/composition/agent_stream_tdd_yaml_binding_test.rb"
+      method: "Composition tests (upstream atdd)"
+    - coverage: "tools/agent-stream/lib/agent_stream_argv.rb, lib/tdd_loop_prompts.rb"
+      method: "Vendored code review"
 REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS:
   category: "Functional"
   detail_file: "requirements/REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS.yaml"
@@ -91,8 +91,8 @@ REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS:
     tests:
       - "export_tdd_prompts_binding_test.rb"
   validation_criteria:
-    - method: "Composition tests (upstream atdd)"
-      coverage: "test/composition/export_tdd_prompts_binding_test.rb"
+    - coverage: "test/composition/export_tdd_prompts_binding_test.rb"
+      method: "Composition tests (upstream atdd)"
 REQ-ATDD-E2E-AGENT_STREAM:
   category: "Functional"
   detail_file: "requirements/REQ-ATDD-E2E-AGENT_STREAM.yaml"
@@ -139,8 +139,8 @@ REQ-ATDD-E2E-AGENT_STREAM:
     tests:
       - "agent_stream_e2e_test.rb"
   validation_criteria:
-    - method: "E2E tests with stub agent on PATH (upstream atdd)"
-      coverage: "test/e2e/agent_stream_e2e_test.rb"
+    - coverage: "test/e2e/agent_stream_e2e_test.rb"
+      method: "E2E tests with stub agent on PATH (upstream atdd)"
 REQ-CONFIG_DISCOVERY_LOCAL_LAYER:
   category: "Functional"
   detail_file: "requirements/REQ-CONFIG_DISCOVERY_LOCAL_LAYER.yaml"
@@ -187,12 +187,12 @@ REQ-CONFIG_DISCOVERY_LOCAL_LAYER:
     implementation: []
     tests: []
   validation_criteria:
-    - method: "Automated tests"
-      coverage: "Adopting project config and exclusion tests"
-    - method: "TIED consistency"
-      coverage: "tied_validate_consistency after ARCH/IMPL linkage in consuming project"
-    - method: "Product scope note"
-      coverage: "Conformance targets the adopting product that implements multi-file YAML config merge (e.g. backup config). tools/agentstream config.ParseAndResolve (IMPL-GOAGENT-CLI-CMD) is CLI flags plus default file discovery only unless explicitly extended; it is not the sole conformance surface for this REQ."
+    - coverage: "Adopting project config and exclusion tests"
+      method: "Automated tests"
+    - coverage: "tied_validate_consistency after ARCH/IMPL linkage in consuming project"
+      method: "TIED consistency"
+    - coverage: "Conformance targets the adopting product that implements multi-file YAML config merge (e.g. backup config). tools/agentstream config.ParseAndResolve (IMPL-GOAGENT-CLI-CMD) is CLI flags plus default file discovery only unless explicitly extended; it is not the sole conformance surface for this REQ."
+      method: "Product scope note"
 REQ-FEEDBACK_TO_TIED:
   category: "Functional"
   detail_file: "requirements/REQ-FEEDBACK_TO_TIED.yaml"
@@ -243,10 +243,10 @@ REQ-FEEDBACK_TO_TIED:
     tests:
       - "feedback.test.ts"
   validation_criteria:
-    - method: "Unit tests"
-      coverage: "Feedback module load/append/export and tool handlers"
-    - method: "Manual or E2E"
-      coverage: "MCP client can call tools and get valid output"
+    - coverage: "Feedback module load/append/export and tool handlers"
+      method: "Unit tests"
+    - coverage: "MCP client can call tools and get valid output"
+      method: "Manual or E2E"
 REQ-GOAGENT-AGENT-EXECUTOR:
   category: "Tooling"
   detail_file: "requirements/REQ-GOAGENT-AGENT-EXECUTOR.yaml"
@@ -289,8 +289,8 @@ REQ-GOAGENT-AGENT-EXECUTOR:
       - "IMPL-GOAGENT-EXECUTOR"
     tests: []
   validation_criteria:
-    - method: "E2E with stub agent on PATH (future) / manual"
-      coverage: "manual with real agent"
+    - coverage: "manual with real agent"
+      method: "E2E with stub agent on PATH (future) / manual"
 REQ-GOAGENT-CHECKLIST-CONTROL:
   category: "Tooling"
   detail_file: "requirements/REQ-GOAGENT-CHECKLIST-CONTROL.yaml"
@@ -342,8 +342,8 @@ REQ-GOAGENT-CHECKLIST-CONTROL:
       - "tools/agentstream/executor/executor_test.go"
       - "tools/agentstream/pipeline/pipeline_test.go"
   validation_criteria:
-    - method: "Unit tests"
-      coverage: "tools/agentstream/control/control_test.go; tools/agentstream/pipeline/pipeline_test.go; tools/agentstream/checklist/checklist_test.go; tools/agentstream/executor/executor_test.go"
+    - coverage: "tools/agentstream/control/control_test.go; tools/agentstream/pipeline/pipeline_test.go; tools/agentstream/checklist/checklist_test.go; tools/agentstream/executor/executor_test.go"
+      method: "Unit tests"
 REQ-GOAGENT-CLI-CONFIG:
   category: "Tooling"
   detail_file: "requirements/REQ-GOAGENT-CLI-CONFIG.yaml"
@@ -389,8 +389,8 @@ REQ-GOAGENT-CLI-CONFIG:
       - "tools/agentstream (config parse exercised via integration)"
       - "tools/agentstream/config/config_test.go"
   validation_criteria:
-    - method: "Manual CLI smoke"
-      coverage: "agentstream --help"
+    - coverage: "agentstream --help"
+      method: "Manual CLI smoke"
 REQ-GOAGENT-FEATURESPEC-BATCH:
   category: "Tooling"
   detail_file: "requirements/REQ-GOAGENT-FEATURESPEC-BATCH.yaml"
@@ -433,8 +433,8 @@ REQ-GOAGENT-FEATURESPEC-BATCH:
     tests:
       - "featurespec_test.go"
   validation_criteria:
-    - method: "Unit tests"
-      coverage: "tools/agentstream/featurespec/*_test.go"
+    - coverage: "tools/agentstream/featurespec/*_test.go"
+      method: "Unit tests"
 REQ-GOAGENT-LIB-MODULE:
   category: "Tooling"
   detail_file: "requirements/REQ-GOAGENT-LIB-MODULE.yaml"
@@ -477,8 +477,8 @@ REQ-GOAGENT-LIB-MODULE:
     tests:
       - "tools/agentstream/..._test.go"
   validation_criteria:
-    - method: "go test ./... under tools/agentstream"
-      coverage: "unit tests for featurespec, text, pipeline"
+    - coverage: "unit tests for featurespec, text, pipeline"
+      method: "go test ./... under tools/agentstream"
 REQ-GOAGENT-NON-COMPACT-HTML-FORMAT:
   category: "Tooling"
   description: "When a documented output mode (non-compact HTML) is selected, turn bodies for checklist and TDD-loop (and any other in-scope renderers) MUST be produced as human- and diff-friendly HTML with line breaks and stable element boundaries, not a single minified line. The exact whitespace contract (indentation, optional blank lines, element ordering) MUST be defined in implementation records and testable. When the mode is not selected, existing markdown/plain and pipeline behavior for those sources MUST remain unchanged."
@@ -530,10 +530,10 @@ REQ-GOAGENT-NON-COMPACT-HTML-FORMAT:
       - "tools/agentstream/cmd/agentstream/compose_noncompact_test.go"
       - "tools/agentstream/htmlformat/htmlformat_test.go"
   validation_criteria:
-    - method: "go test in tools/agentstream"
-      coverage: "packages implementing the format after IMPL linkage"
-    - method: "tied_validate_consistency"
-      coverage: "After ARCH/IMPL records exist and link to this REQ"
+    - coverage: "packages implementing the format after IMPL linkage"
+      method: "go test in tools/agentstream"
+    - coverage: "After ARCH/IMPL records exist and link to this REQ"
+      method: "tied_validate_consistency"
 REQ-GOAGENT-PIPELINE-CHAIN:
   category: "Tooling"
   detail_file: "requirements/REQ-GOAGENT-PIPELINE-CHAIN.yaml"
@@ -579,11 +579,11 @@ REQ-GOAGENT-PIPELINE-CHAIN:
       - "IMPL-GOAGENT-CLI-CMD"
       - "IMPL-GOAGENT-PIPELINE"
     tests:
-      - "pipeline_test.go"
       - "TestBuild_leadChecklistStepBounds"
+      - "pipeline_test.go"
   validation_criteria:
-    - method: "Unit tests"
-      coverage: "tools/agentstream/pipeline/pipeline_test.go"
+    - coverage: "tools/agentstream/pipeline/pipeline_test.go"
+      method: "Unit tests"
 REQ-GOAGENT-TEXT-SOURCES:
   category: "Tooling"
   detail_file: "requirements/REQ-GOAGENT-TEXT-SOURCES.yaml"
@@ -625,8 +625,8 @@ REQ-GOAGENT-TEXT-SOURCES:
     tests:
       - "text_test.go"
   validation_criteria:
-    - method: "Unit tests"
-      coverage: "tools/agentstream/text/text_test.go"
+    - coverage: "tools/agentstream/text/text_test.go"
+      method: "Unit tests"
 REQ-GOAGENT-YAML-STEP-RENDER:
   category: "Tooling"
   detail_file: "requirements/REQ-GOAGENT-YAML-STEP-RENDER.yaml"
@@ -674,10 +674,10 @@ REQ-GOAGENT-YAML-STEP-RENDER:
     tests:
       - "checklist_test.go"
   validation_criteria:
-    - method: "Unit tests"
-      coverage: "tools/agentstream/checklist/checklist_test.go"
-    - method: "Manual fixture comparison"
-      coverage: "sample YAML under docs/"
+    - coverage: "tools/agentstream/checklist/checklist_test.go"
+      method: "Unit tests"
+    - coverage: "sample YAML under docs/"
+      method: "Manual fixture comparison"
 REQ-LEAP_PROPOSAL_QUEUE:
   category: "Functional"
   detail_file: "requirements/REQ-LEAP_PROPOSAL_QUEUE.yaml"
@@ -732,10 +732,10 @@ REQ-LEAP_PROPOSAL_QUEUE:
       - "leap-proposal-mcp.test.ts"
       - "leap-proposal-queue.test.ts"
   validation_criteria:
-    - method: "Unit tests"
-      coverage: "leap-proposal-queue module and schema strings"
-    - method: "Manual or MCP client"
-      coverage: "Tools callable from tied-yaml MCP server"
+    - coverage: "leap-proposal-queue module and schema strings"
+      method: "Unit tests"
+    - coverage: "Tools callable from tied-yaml MCP server"
+      method: "Manual or MCP client"
 REQ-MCP_USAGE_METRICS:
   category: "Functional"
   detail_file: "requirements/REQ-MCP_USAGE_METRICS.yaml"
@@ -792,10 +792,10 @@ REQ-MCP_USAGE_METRICS:
       - "analyze_tied_mcp_metrics_test.rb"
       - "usage-metrics.test.ts"
   validation_criteria:
-    - method: "Unit tests"
-      coverage: "usage-metrics module and wrapToolHandler"
-    - method: "Ruby smoke test"
-      coverage: "analyze_tied_mcp_metrics.rb fixture aggregation"
+    - coverage: "usage-metrics module and wrapToolHandler"
+      method: "Unit tests"
+    - coverage: "analyze_tied_mcp_metrics.rb fixture aggregation"
+      method: "Ruby smoke test"
 REQ-MODULE_VALIDATION:
   category: "Functional"
   detail_file: "requirements/REQ-MODULE_VALIDATION.yaml"
@@ -854,18 +854,18 @@ REQ-MODULE_VALIDATION:
     tests:
       - "testModuleName_IndependentValidation_REQ_MODULE_VALIDATION"
   validation_criteria:
-    - method: "Manual verification"
-      coverage: "Modules identified and documented before development starts"
-    - method: "Automated testing"
-      coverage: "Module validation tests exist and pass before integration"
-    - method: "Code review"
-      coverage: "Integration code references validated modules"
-    - method: "Documentation review"
-      coverage: "Module validation results are documented"
-    - method: "Integration testing"
-      coverage: "Integration tests validate combined behavior of validated modules"
-    - method: "Coverage gates and gap report"
-      coverage: "IMPL traceability.tests or test_coverage_note (E2E-only with reason) for every Active IMPL"
+    - coverage: "Modules identified and documented before development starts"
+      method: "Manual verification"
+    - coverage: "Module validation tests exist and pass before integration"
+      method: "Automated testing"
+    - coverage: "Integration code references validated modules"
+      method: "Code review"
+    - coverage: "Module validation results are documented"
+      method: "Documentation review"
+    - coverage: "Integration tests validate combined behavior of validated modules"
+      method: "Integration testing"
+    - coverage: "IMPL traceability.tests or test_coverage_note (E2E-only with reason) for every Active IMPL"
+      method: "Coverage gates and gap report"
 REQ-QUALITY_ASSURANCE_EVIDENCE:
   category: "Non-Functional"
   cross_references:
@@ -938,14 +938,15 @@ REQ-QUALITY_ASSURANCE_EVIDENCE:
       - "mcp-server/src/tools/quality-validation-mcp.test.ts"
       - "pilot/webhook-inbox/test/webhook-inbox.test.mjs"
   validation_criteria:
-    - method: "CITDP quality evidence matrix review"
-      coverage: "Applicability, risk, scenarios, abuse cases, evidence, waivers, and residual risk."
-    - method: "Unit and composition tests"
-      coverage: "Evidence and validator modules plus their bindings."
-    - method: "tied_validate_consistency"
-      coverage: "REQ to ARCH to IMPL traceability and token-commented pseudo-code."
+    - coverage: "Applicability, risk, scenarios, abuse cases, evidence, waivers, and residual risk."
+      method: "CITDP quality evidence matrix review"
+    - coverage: "Evidence and validator modules plus their bindings."
+      method: "Unit and composition tests"
+    - coverage: "REQ to ARCH to IMPL traceability and token-commented pseudo-code."
+      method: "tied_validate_consistency"
 REQ-TIED_SETUP:
   category: "Functional"
+  description: "TIED setup includes deterministic typed YAML canonicalization through the shared tied-yaml-canonical-v1 profile."
   detail_file: "requirements/REQ-TIED_SETUP.yaml"
   metadata:
     created:
@@ -953,8 +954,8 @@ REQ-TIED_SETUP:
       date: "2025-11-08T00:00:00.000Z"
     last_updated:
       author: "AI Agent"
-      date: "2026-08-04"
-      reason: "LEAP: record vocabulary control layer and preserve existing MCP configuration"
+      date: "2026-08-06"
+      reason: "Replace historical double-quoted scalar lint contract with shared typed canonical profile"
     last_validated:
       date: "2026-02-06T00:00:00.000Z"
       result: "pass"
@@ -988,7 +989,8 @@ REQ-TIED_SETUP:
     - criterion: "Domain vocabulary for TIED layout (project YAML, semantic token, TIED base path) is defined in tied/vocab/tied-methodology.md; naming uses sub-vocabulary-sync RESOLVE/RECORD per [PROC-VOCABULARY_INDEX]"
     - criterion: "The vocabulary layer is an agent-control layer that applies RESOLVE, PRELOAD, RECORD, and VALIDATE across TIED work"
       metric: "Canonical vocabulary rows and checklist/process references use the same terms"
-    - criterion: "YAML validation uses scripts/yaml_tool.sh or lint_yaml wrapper per [PROC-YAML_EDIT_LOOP] with default double-quoted scalar lint (yq sort_keys(.. style=\"double\")); terms documented in tied/vocab/tied-methodology.md"
+    - criterion: "YAML validation uses the tied-yaml-canonical-v1 profile through scripts/yaml_tool.sh or lint_yaml per [PROC-YAML_EDIT_LOOP]"
+      metric: "Recursive lexical map ordering, ordered-list key exceptions, string-only list sorting, scalar-type preservation, and opaque block policy are documented and tested"
     - criterion: "Existing clients can follow tied/docs/methodology-migration.md when adopting a newer methodology snapshot"
       metric: "Migration guide is installed when missing and preserves client-owned project YAML and customized documentation"
     - criterion: "copy_files.sh --merge-vocab adds absent glossary basenames without overwriting existing client vocabulary"
@@ -1011,9 +1013,104 @@ REQ-TIED_SETUP:
       - "Manual verification checklists"
       - "mcp-server/src/e2e/bootstrap-and-load.test.ts"
   validation_criteria:
-    - method: "Manual verification"
-      coverage: "File existence checks for all required files and directories"
-    - method: "AI agent acknowledgment"
-      coverage: "Agent responds with 'Observing AI principles!' confirming rules are loaded"
-    - method: "Structure validation"
-      coverage: "All index files have corresponding detail directories with proper naming"
+    - coverage: "File existence checks for all required files and directories"
+      method: "Manual verification"
+    - coverage: "Agent responds with 'Observing AI principles!' confirming rules are loaded"
+      method: "AI agent acknowledgment"
+    - coverage: "All index files have corresponding detail directories with proper naming"
+      method: "Structure validation"
+REQ-TIED_YAML_CANONICALIZATION:
+  category: "Functional"
+  cross_references:
+    - "ARCH-TIED_YAML_CANONICAL_PROFILE"
+    - "ARCH-TIED_YAML_STYLE_RESOLUTION"
+    - "IMPL-TIED_YAML_CANONICALIZER"
+    - "IMPL-TIED_YAML_STYLE_RESOLVER"
+    - "REQ-MODULE_VALIDATION"
+    - "REQ-TIED_SETUP"
+  description: "All supported TIED YAML writers and compatibility frontends produce deterministic typed output under the tied-yaml-canonical-v1 profile while preserving opaque pseudo-code and block-scalar bodies."
+  detail_file: "requirements/REQ-TIED_YAML_CANONICALIZATION.yaml"
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-06"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-06"
+      reason: "Verification passed: 151 MCP tests, Ruby compatibility tests, pseudocode validation, and TIED consistency validation"
+  name: "Deterministic typed TIED YAML canonicalization"
+  priority: "P0"
+  rationale:
+    benefits:
+      - "Cross-surface compatibility"
+      - "Stable byte output"
+      - "Typed scalar preservation"
+    problems_solved:
+      - "Accidental mutation of pseudo-code and block-scalar bodies"
+      - "Missing format contract for downstream clients"
+      - "Non-deterministic or divergent YAML output"
+    why: "Split serialization policies can silently change scalar types, list order, and opaque text across MCP and CLI surfaces."
+  related_requirements:
+    depends_on:
+      - "REQ-MODULE_VALIDATION"
+      - "REQ-TIED_SETUP"
+    related_to: []
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Block-scalar bodies and IMPL pseudo-code sidecars remain opaque"
+    - criterion: "Boolean, number, null, and string scalar types survive round trips"
+    - criterion: "Canonical output uses profile tied-yaml-canonical-v1 with recursive lexical map ordering"
+    - criterion: "Every successful YAML write reports yaml_format metadata"
+    - criterion: "MCP, yaml_tool, yaml_list_sorter, and yaml_semantic_compare share conformance fixtures"
+    - criterion: "String-only lists sort except under ordered-list keys, while object and mixed lists preserve order"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_YAML_CANONICAL_PROFILE"
+      - "ARCH-TIED_YAML_STYLE_RESOLUTION"
+    code_annotations:
+      - "REQ-TIED_YAML_CANONICALIZATION"
+    implementation:
+      - "IMPL-TIED_YAML_CANONICALIZER"
+      - "IMPL-TIED_YAML_STYLE_RESOLVER"
+    tests:
+      - "mcp-server/src/tools/yaml-canonicalization-mcp.test.ts"
+      - "mcp-server/src/yaml-canonicalizer.test.ts"
+      - "scripts/yaml_list_sorter_test.rb"
+  validation_criteria:
+    - coverage: "Ordering, list exceptions, scalar types, opaque text, invalid input, atomic failure"
+      method: "Canonicalizer unit tests"
+    - coverage: "All YAML writer families, rename, batch, CITDP, feedback, verification, metadata"
+      method: "MCP composition tests"
+    - coverage: "yaml_tool, sorter, semantic compare, flags, invalid-input preservation"
+      method: "CLI compatibility tests"
+REQ-TIED_YAML_STYLE_CONFIGURATION:
+  category: "Functional"
+  cross_references:
+    - "ARCH-TIED_YAML_STYLE_RESOLUTION"
+    - "REQ-MODULE_VALIDATION"
+    - "REQ-TIED_YAML_CANONICALIZATION"
+  description: "All TIED YAML lint and MCP writes use one repository-resolved scalar style, with wrapped and unwrapped modes aligned across surfaces."
+  detail_file: "requirements/REQ-TIED_YAML_STYLE_CONFIGURATION.yaml"
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-06"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-06"
+      reason: "Define enforceable repository-wide YAML scalar style alignment"
+  name: "Repository-wide YAML scalar style configuration"
+  priority: "P0"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_YAML_STYLE_RESOLUTION"
+    code_annotations:
+      - "REQ-TIED_YAML_STYLE_CONFIGURATION"
+    implementation:
+      - "IMPL-TIED_YAML_STYLE_RESOLVER"
+    tests:
+      - "mcp-server/src/tools/yaml-canonicalization-mcp.test.ts"
+      - "mcp-server/src/yaml-style-config.test.ts"
+      - "scripts/yaml_list_sorter_test.rb"

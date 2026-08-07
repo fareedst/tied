@@ -1,0 +1,67 @@
+ARCH-TIED_YAML_STYLE_RESOLUTION:
+  alternatives_considered:
+    - cons:
+        - "Cross-surface drift"
+        - "Different repository outcomes"
+      name: "Independent MCP and yaml_tool style settings"
+      pros:
+        - "Small local changes"
+      rejected_reason: "The requested guarantee requires one resolver and one serializer policy."
+    - cons:
+        - "A repository cannot enforce its checked-in style"
+      name: "Global environment always overrides repository configuration"
+      pros:
+        - "Operator override"
+      rejected_reason: "Repository style must be authoritative for reproducible lint and MCP writes."
+  cross_references:
+    - "ARCH-TIED_STRUCTURE"
+    - "ARCH-TIED_YAML_CANONICAL_PROFILE"
+    - "REQ-TIED_YAML_CANONICALIZATION"
+    - "REQ-TIED_YAML_STYLE_CONFIGURATION"
+  decision: "Use one shared typed style resolver. Read repository .tied-yaml.yaml at the client project root derived from TIED_BASE_PATH first; otherwise read global TIED_YAML_STYLE and optional XDG config; otherwise use unwrapped. Reject malformed or unknown explicit styles. Pass the resolved style into every YAML serializer and report it in yaml_format."
+  implementation_approach:
+    details:
+      - "TIED_BASE_PATH identifies the client tied directory and its parent identifies the repository root."
+      - "TIED_YAML_STYLE is a global fallback only when repository configuration is absent."
+      - "The repository config file is .tied-yaml.yaml with scalar_style: unwrapped|wrapped."
+      - "XDG_CONFIG_HOME/tied/yaml-format.yaml is an optional global file fallback."
+      - "yaml_tool --sort-lists canonicalizes after Ruby list sorting so style cannot drift."
+    summary: "Repository configuration is authoritative; global configuration is fallback; one canonical serializer emits either plain-when-safe or double-quoted strings while preserving typed non-string scalars."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-06"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-06"
+      reason: "Define shared repository-over-global YAML style resolution"
+  name: "Shared repository YAML style resolution"
+  rationale:
+    benefits:
+      - "Consistent CLI and MCP behavior"
+      - "Explicit diagnostics for invalid style configuration"
+      - "Reproducible repository output"
+    problems_solved:
+      - "Global settings overriding repository conventions"
+      - "MCP and lint style divergence"
+      - "Unobservable effective scalar style"
+    why: "A single resolution decision must govern all TIED YAML mutation surfaces."
+  related_decisions:
+    depends_on:
+      - "ARCH-TIED_STRUCTURE"
+      - "ARCH-TIED_YAML_CANONICAL_PROFILE"
+    see_also: []
+    supersedes: []
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_YAML_STYLE_RESOLUTION"
+    code_annotations:
+      - "ARCH-TIED_YAML_STYLE_RESOLUTION"
+    requirements:
+      - "REQ-TIED_YAML_CANONICALIZATION"
+      - "REQ-TIED_YAML_STYLE_CONFIGURATION"
+    tests:
+      - "mcp-server/src/tools/yaml-canonicalization-mcp.test.ts"
+      - "mcp-server/src/yaml-style-config.test.ts"
+      - "scripts/yaml_list_sorter_test.rb"

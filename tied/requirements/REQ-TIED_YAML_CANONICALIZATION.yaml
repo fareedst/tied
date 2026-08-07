@@ -1,0 +1,65 @@
+REQ-TIED_YAML_CANONICALIZATION:
+  category: "Functional"
+  cross_references:
+    - "ARCH-TIED_YAML_CANONICAL_PROFILE"
+    - "ARCH-TIED_YAML_STYLE_RESOLUTION"
+    - "IMPL-TIED_YAML_CANONICALIZER"
+    - "IMPL-TIED_YAML_STYLE_RESOLVER"
+    - "REQ-MODULE_VALIDATION"
+    - "REQ-TIED_SETUP"
+  description: "All supported TIED YAML writers and compatibility frontends produce deterministic typed output under the tied-yaml-canonical-v1 profile while preserving opaque pseudo-code and block-scalar bodies."
+  detail_file: "requirements/REQ-TIED_YAML_CANONICALIZATION.yaml"
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-06"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-06"
+      reason: "Verification passed: 151 MCP tests, Ruby compatibility tests, pseudocode validation, and TIED consistency validation"
+  name: "Deterministic typed TIED YAML canonicalization"
+  priority: "P0"
+  rationale:
+    benefits:
+      - "Cross-surface compatibility"
+      - "Stable byte output"
+      - "Typed scalar preservation"
+    problems_solved:
+      - "Accidental mutation of pseudo-code and block-scalar bodies"
+      - "Missing format contract for downstream clients"
+      - "Non-deterministic or divergent YAML output"
+    why: "Split serialization policies can silently change scalar types, list order, and opaque text across MCP and CLI surfaces."
+  related_requirements:
+    depends_on:
+      - "REQ-MODULE_VALIDATION"
+      - "REQ-TIED_SETUP"
+    related_to: []
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Block-scalar bodies and IMPL pseudo-code sidecars remain opaque"
+    - criterion: "Boolean, number, null, and string scalar types survive round trips"
+    - criterion: "Canonical output uses profile tied-yaml-canonical-v1 with recursive lexical map ordering"
+    - criterion: "Every successful YAML write reports yaml_format metadata"
+    - criterion: "MCP, yaml_tool, yaml_list_sorter, and yaml_semantic_compare share conformance fixtures"
+    - criterion: "String-only lists sort except under ordered-list keys, while object and mixed lists preserve order"
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-TIED_YAML_CANONICAL_PROFILE"
+      - "ARCH-TIED_YAML_STYLE_RESOLUTION"
+    code_annotations:
+      - "REQ-TIED_YAML_CANONICALIZATION"
+    implementation:
+      - "IMPL-TIED_YAML_CANONICALIZER"
+      - "IMPL-TIED_YAML_STYLE_RESOLVER"
+    tests:
+      - "mcp-server/src/tools/yaml-canonicalization-mcp.test.ts"
+      - "mcp-server/src/yaml-canonicalizer.test.ts"
+      - "scripts/yaml_list_sorter_test.rb"
+  validation_criteria:
+    - coverage: "Ordering, list exceptions, scalar types, opaque text, invalid input, atomic failure"
+      method: "Canonicalizer unit tests"
+    - coverage: "All YAML writer families, rename, batch, CITDP, feedback, verification, metadata"
+      method: "MCP composition tests"
+    - coverage: "yaml_tool, sorter, semantic compare, flags, invalid-input preservation"
+      method: "CLI compatibility tests"

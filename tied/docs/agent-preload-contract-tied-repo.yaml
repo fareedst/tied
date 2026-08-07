@@ -1,60 +1,37 @@
-# Agent preload contract — TIED methodology repository (this repo)
-#
-# If a field is present and true, the agent should treat it as authoritative
-# and avoid redundant tool calls unless a later result contradicts it.
-#
-# Use this file when the workspace is the TIED source repository: YAML indexes and
-# detail dirs live at the repo root (no tied/ subtree). For client projects that use
-# tied/ after copy_files.sh, use tied/docs/agent-preload-contract-template.yaml instead.
-#
-# Maintainers: Update this file when this repository's methodology layout, MCP/Node
-# stack, or root-index paths change—parallel to the client checklist rule that
-# refreshes agent-preload-contract.yaml after material ARCH/IMPL decisions (see
-# tied/docs/agent-req-implementation-checklist.yaml, author-architecture and
-# persist-implementation-records).
-#
-# Copy or subset this file per session and fill values.
 agent_preload:
   active_user_intent:
-    checklist_step_id: "" # e.g. session-bootstrap
-    # Instruction block for prompts (optional; paste near agent_preload in user rules)
-    checklist_token: "" # e.g. PROC-AGENT_REQ_CHECKLIST
+    checklist_step_id: ""
+    checklist_token: ""
     primary_query_summary: ""
   discovery_already_done:
     gemfile_present: "false"
     grep_patterns_satisfied:
-      # REQ|ARCH|IMPL across ts/tsx/rb/md/yaml as relevant to this repo
-      repo_layout_scan: "false" # **/* or equivalent
+      repo_layout_scan: "false"
       token_scan_in_sources: "false"
-    ruby_files_present: "false" # scripts/, tools/, .cursor/
+    ruby_files_present: "false"
     ruby_test_files_present: "false"
     semantic_tokens_present: "false"
-    typescript_files_present: "false" # mcp-server/**/*.ts
+    typescript_files_present: "false"
   implementation_contract:
     citdp_artifact_paths: []
-    invalid_input: "" # e.g. exception, nil, documented behavior
+    invalid_input: ""
     language: "TypeScript"
-    language_version: "node>=18; typescript^5.4.0" # see mcp-server/package.json engines / devDependencies
+    language_version: "node>=18; typescript^5.4.0"
     target_source_paths:
       - "mcp-server/src"
     test_cohabit_code: "false"
-    test_framework: "node:test" # mcp-server npm test
+    test_framework: "node:test"
   methodology_vs_project:
-    # Client projects: ./tied/methodology/** is read-only [PROC-TIED_METHODOLOGY_READONLY].
-    # This repo: templates/** is methodology source (shipped by copy_files.sh); edit here
-    # when changing methodology. Root requirements/, architecture-decisions/, implementation-decisions/
-    # hold canonical template indexes and detail files.
-    methodology_readonly: "false" # not client tied/methodology; N/A at repo root
+    methodology_readonly: "false"
     project_tokens_only_writable: "true"
     tied_source_repo: "true"
   session_bootstrap_docs:
     agent_req_checklist_path: "./tied/docs/agent-req-implementation-checklist.md"
-    agents_md_path: "./AGENTS.md" # canonical Cursor / agent operating guide
+    agents_md_path: "./AGENTS.md"
     ai_principles_path: "./tied/docs/ai-principles.md"
     architecture_decisions_index: "./architecture-decisions.yaml"
     detail_files_schema: "./tied/docs/detail-files-schema.md"
     implementation_decisions_guide: "./tied/docs/implementation-decisions.md"
-    # Live processes in this repository; for new client projects, copy_files.sh copies tied/docs/processes.md from this path.
     implementation_decisions_index: "./implementation-decisions.yaml"
     processes_path: "./tied/docs/processes.md"
     pseudocode_validation_guide: "./tied/docs/pseudocode-writing-and-validation.md"
@@ -62,22 +39,20 @@ agent_preload:
     semantic_tokens_guide: "./tied/docs/semantic-tokens.md"
     semantic_tokens_index: "./semantic-tokens.yaml"
   tied_mcp:
-    base_path_resolved: "false" # if true, skip tied_config_get_base_path unless cwd changed
-    yaml_detail_batch_done: "false" # if true, skip yaml_detail_read_many for same keys
-  # Paths below: indexes resolve under TIED_BASE_PATH (. = repo root). Match MCP env TIED_BASE_PATH.
+    base_path_resolved: "false"
+    yaml_detail_batch_done: "false"
   tied_paths:
-    mcp_tied_yaml_verified_this_session: "false" # set true after a successful MCP read/write this session
+    TIED_BASE_PATH: "."
+    mcp_tied_yaml_verified_this_session: "false"
     methodology_source_glob: "templates/**"
     project_yaml_writable_globs:
-      - "*.yaml" # index + feedback at base: requirements, architecture-decisions, implementation-decisions, semantic-tokens, feedback
+      - "*.yaml"
       - "architecture-decisions/*.yaml"
       - "implementation-decisions/*.yaml"
       - "requirements/*.yaml"
-    # Client preload uses methodology_readonly_glob: methodology/** under tied/. Here methodology ships from templates/.
-    TIED_BASE_PATH: "." # template/root layout per mcp-server README; reconfirm via tied_config_get_base_path
   workspace:
-    cwd: "/Users/fareed/Documents/dev/chatgpt/stdd" # absolute path; must match session workspace_roots[0] when set
+    cwd: "/Users/fareed/Documents/dev/chatgpt/stdd"
     project_summary: "TIED methodology repository (template/root indexes)"
-    top_level_entries: [] # optional; omit if likely to go stale
-    vcs_present: "true" # e.g. true when .git exists
+    top_level_entries: []
+    vcs_present: "true"
 preload_instructions: "Treat agent_preload as authoritative context. If a value is present, do not spend\ntool calls rediscovering it unless a later tool result or user message contradicts it.\nPrefer preload facts over filesystem discovery. Do not search for MCP schema, server\nmetadata, `.cursor/mcp.json`, or pause to confirm MCP unavailability — especially when\nthe session is driven by Go tools/agentstream (MCP preflight there is optional; copy_files.sh\ninstalls `.cursor/skills/tied-yaml/` only). Do not search project layout or target file\nexistence unless needed to resolve a contradiction. When tied_paths.TIED_BASE_PATH and\nproject_yaml_writable_globs are set,\nalign MCP TIED_BASE_PATH with them (use \".\" for this repo unless tied_config_get_base_path\nsays otherwise). Methodology in this repository lives under methodology_source_glob\n(templates/**), not client tied/methodology/**. Keep preload narrow and accurate; wrong\npreload costs more than one discovery call.\n"

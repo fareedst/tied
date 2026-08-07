@@ -1,14 +1,14 @@
 ARCH-FEEDBACK_STORAGE:
   alternatives_considered:
-    - name: "New YAML index (e.g. feedback.yaml as index)"
-      cons:
+    - cons:
         - "Feedback is not a traceability index; different schema (entries array)"
+      name: "New YAML index (e.g. feedback.yaml as index)"
       pros:
         - "Consistent with requirements.yaml pattern"
       rejected_reason: "Keep feedback as a separate artifact; schema is list of entries, not token-keyed records"
-    - name: "Store in requirements or implementation index"
-      cons:
+    - cons:
         - "Pollutes REQ/IMPL with non-traceability data"
+      name: "Store in requirements or implementation index"
       pros:
         - "No new file"
       rejected_reason: "Feedback is not a requirement or implementation decision"
@@ -62,25 +62,25 @@ ARCH-FEEDBACK_STORAGE:
       - "feedback.test.ts"
 ARCH-MODULE_VALIDATION:
   alternatives_considered:
-    - name: "Big Bang Integration"
-      cons:
+    - cons:
         - "Bugs compound during integration"
         - "Difficult to isolate issues"
         - "Too complex to debug"
+      name: "Big Bang Integration"
       pros:
         - "Faster initial integration"
       rejected_reason: "Makes debugging too difficult and bugs compound"
-    - name: "Minimal Validation"
-      cons:
+    - cons:
         - "Doesn't validate contracts properly"
         - "Insufficient to catch complexity bugs"
+      name: "Minimal Validation"
       pros:
         - "Faster development cycle"
       rejected_reason: "Insufficient validation leads to integration issues"
-    - name: "Post-Integration Validation Only"
-      cons:
+    - cons:
         - "Doesn't catch module-level bugs early"
         - "Increases debugging complexity"
+      name: "Post-Integration Validation Only"
       pros:
         - "All validation done at once"
       rejected_reason: "Bugs discovered too late, making fixes expensive"

@@ -18,6 +18,8 @@ import {
 } from "./yaml-loader.js";
 import { safeDumpTiedDetailDoc } from "./yaml-dump.js";
 import { mergeRecordUpdate } from "./record-merge.js";
+import { writeAtomicText, type YamlFormatMetadata } from "./yaml-canonicalizer.js";
+import { getDefaultTiedBasePath, resolveYamlStyle } from "./yaml-style-config.js";
 
 export type DetailType = "requirement" | "architecture" | "implementation";
 
@@ -122,10 +124,18 @@ export function getImplPseudocodeSidecarPath(detailYamlPath: string, token: stri
 /**
  * Write IMPL-TOKEN.yaml and optional IMPL-TOKEN-pseudocode.md. REQ/ARCH use YAML-only embedding via safeDumpTiedDetailDoc.
  */
-function writeTiedDetailToDisk(token: string, filePath: string, record: Record<string, unknown>): void {
-  const out = safeDumpTiedDetailDoc(token, record);
-  fs.writeFileSync(filePath, out, "utf8");
-  if (!token.startsWith("IMPL-")) return;
+function writeTiedDetailToDisk(
+  token: string,
+  filePath: string,
+  record: Record<string, unknown>
+): YamlFormatMetadata {
+  const resolvedStyle = resolveYamlStyle(getDefaultTiedBasePath());
+  const out = safeDumpTiedDetailDoc(token, record, resolvedStyle);
+  // [IMPL-TIED_YAML_STYLE_RESOLVER] [ARCH-TIED_YAML_STYLE_RESOLUTION] [REQ-TIED_YAML_STYLE_CONFIGURATION] [REQ-MODULE_VALIDATION]
+  // How: Resolve style once and return the same policy metadata used to serialize every detail.
+  const result = writeAtomicText(filePath, out, resolvedStyle);
+  if (!result.ok) throw new Error(result.error);
+  if (!token.startsWith("IMPL-")) return result.yaml_format;
   const side = getImplPseudocodeSidecarPath(filePath, token);
   if (Object.prototype.hasOwnProperty.call(record, "essence_pseudocode")) {
     const ep = record.essence_pseudocode;
@@ -137,6 +147,7 @@ function writeTiedDetailToDisk(token: string, filePath: string, record: Record<s
       }
     }
   }
+  return result.yaml_format;
 }
 
 /** Sentinel keys for markdown detail content (hybrid layout). */
@@ -230,14 +241,14 @@ export function writeDetail(
   token: string,
   record: Record<string, unknown>,
   options?: { syncIndex?: boolean }
-): { ok: true } | { ok: false; error: string } {
+): { ok: true; yaml_format: YamlFormatMetadata } | { ok: false; error: string } {
   const filePath = getProjectDetailPath(token);
   if (!filePath) return { ok: false, error: `Invalid token: ${token}. Must be REQ-*, ARCH-*, or IMPL-*` };
   if (fs.existsSync(filePath)) return { ok: false, error: `Detail file already exists: ${token}` };
   try {
     const dir = path.dirname(filePath);
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-    writeTiedDetailToDisk(token, filePath, record);
+    const yaml_format = writeTiedDetailToDisk(token, filePath, record);
     if (options?.syncIndex) {
       const indexName = getIndexName(token);
       if (indexName) {
@@ -247,7 +258,7 @@ export function writeDetail(
         if (!res.ok) return res;
       }
     }
-    return { ok: true };
+    return { ok: true, yaml_format };
   } catch (e) {
     const message = e instanceof Error ? e.message : String(e);
     return { ok: false, error: message };
@@ -258,7 +269,10 @@ export function writeDetail(
  * Update an existing detail file by merging the given object at the top level. Fails if file does not exist.
  * Fails if the detail file is under methodology (read-only) or markdown. [PROC-TIED_METHODOLOGY_READONLY]
  */
-export function updateDetail(token: string, updates: Record<string, unknown>): { ok: true } | { ok: false; error: string } {
+export function updateDetail(
+  token: string,
+  updates: Record<string, unknown>
+): { ok: true; yaml_format: YamlFormatMetadata } | { ok: false; error: string } {
   const filePath = getDetailPath(token);
   if (!filePath) return { ok: false, error: `Invalid token: ${token}. Must be REQ-*, ARCH-*, or IMPL-*` };
   const methodologyBase = getMethodologyBasePath();
@@ -272,8 +286,8 @@ export function updateDetail(token: string, updates: Record<string, unknown>): {
   }
   const merged = mergeRecordUpdate(existing as Record<string, unknown>, updates);
   try {
-    writeTiedDetailToDisk(token, filePath, merged);
-    return { ok: true };
+    const yaml_format = writeTiedDetailToDisk(token, filePath, merged);
+    return { ok: true, yaml_format };
   } catch (e) {
     const message = e instanceof Error ? e.message : String(e);
     return { ok: false, error: message };

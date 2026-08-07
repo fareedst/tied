@@ -52,6 +52,7 @@ import {
 } from "../dependency-graph.js";
 import { updateStatusFromPassedTokens } from "../verify.js";
 import { applyYamlUpdates, parseYamlUpdateSteps } from "../yaml-updates-apply.js";
+import { formatYamlMetadata } from "../yaml-canonicalizer.js";
 import { resolveRequirementListStateGuide } from "./requirement-list-state-guide.js";
 import { runScopedAnalysis } from "../analysis/scoped-analysis.js";
 import { runPlumbDiffImpactPreview } from "../analysis/plumb-diff-impact-preview.js";
@@ -369,6 +370,15 @@ export const allTools = [
       const result = updateRecord(index as IndexName, token, parsed.value);
       return textContent(JSON.stringify(result, null, 2));
     },
+  },
+  {
+    name: "tied_yaml_format",
+    config: {
+      description:
+        "Return the resolved tied-yaml-canonical-v1 profile, scalar style, and configuration source used by successful TIED YAML writes.",
+      inputSchema: z.object({}),
+    },
+    handler: async () => textContent(JSON.stringify({ yaml_format: formatYamlMetadata() }, null, 2)),
   },
   {
     name: "yaml_updates_apply",
@@ -769,7 +779,11 @@ export const allTools = [
       if (!writeRes.ok) return textContent(JSON.stringify(writeRes, null, 2));
 
       return textContent(
-        JSON.stringify({ ok: true, index: indexName, token, detail_path: detailFile }, null, 2)
+        JSON.stringify(
+          { ok: true, index: indexName, token, detail_path: detailFile, yaml_format: writeRes.yaml_format },
+          null,
+          2,
+        )
       );
     },
   },
@@ -777,7 +791,7 @@ export const allTools = [
     name: "tied_token_rename",
     config: {
       description:
-        "Rename a single semantic token across the TIED tree (default TIED rename scope: project YAML indexes, detail files, pseudo-code sidecars, detail filename renames) and optional extra substitution targets under the client project root (parent of TIED base path). Replaces exact old_token string with new_token. Params: old_token, new_token; optional dry_run, include_markdown (tied/docs/processes.md only), extra_globs (path globs from client project root), extra_extensions (e.g. swift -> **/*.swift). Validates and pretty-prints modified YAML with yq -i 'sort_keys(.. style=\"double\")' when yq is available (one file per yq invocation; same contract as yaml_tool default lint). Skips common build/vendor dirs and binary files for extra targets.",
+        "Rename a single semantic token across the TIED tree (default TIED rename scope: project YAML indexes, detail files, pseudo-code sidecars, detail filename renames) and optional extra substitution targets under the client project root (parent of TIED base path). Replaces exact old_token string with new_token; modified YAML uses tied-yaml-canonical-v1 atomically. Params: old_token, new_token; optional dry_run, include_markdown (tied/docs/processes.md only), extra_globs (path globs from client project root), extra_extensions (e.g. swift -> **/*.swift). Successful writes report yaml_format metadata. Skips common build/vendor dirs and binary files for extra targets.",
       inputSchema: z.object({
         old_token: z.string().min(1).describe("Current token ID (e.g. REQ-TIED_SETUP)"),
         new_token: z.string().min(1).describe("New token ID; must not already exist; must have same prefix (REQ-/ARCH-/IMPL-/PROC-)"),

@@ -164,41 +164,35 @@ procedure COPY_IMPLEMENTATION_PSEUDOCODE_SIDECARS(projectRoot):
     copy file to projectRoot/tied/methodology/implementation-decisions/ overwriting inherited copy
 
 procedure CANONICALIZE_YAML_FILE(path):
-  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [PROC-YAML_EDIT_LOOP]
-  # How: Canonicalize one YAML file with one yq invocation and expose its exit status.
-  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [PROC-YAML_EDIT_LOOP]
-  # How: Run one yq process: yq -i 'sort_keys(.. style="double")' path — recursive key sort + double-quoted scalars (double-quoted scalar lint). Bool/int become string scalars on disk; never pass multiple paths to one yq. Same expression as mcp-server token-rename pretty-print.
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION] [PROC-YAML_EDIT_LOOP]
+  # How: Delegate one YAML file to the shared tied-yaml-canonical-v1 profile; preserve IMPL pseudo-code sidecars as opaque text.
   Contract:
     INPUT: one YAML file path
-    OUTPUT: canonicalized YAML file; yq exit status
+    OUTPUT: canonicalized YAML file; shared profile result and yaml_format metadata
     DATA: YAML mapping or sequence at path
-    CONTROL: one path per invocation; recursive key sort and double-quoted scalar style
-    PRE: path exists and is a regular writable YAML file; yq is available
-    POST: file is rewritten in canonical format when yq succeeds; non-zero status identifies failure
-    EFFECTS: File I/O — rewrites one YAML file; Process — invokes yq
-    FAILURE_MODES: PATH_MISSING; PATH_NOT_REGULAR; YAML_PARSE_FAILED; YQ_UNAVAILABLE; YQ_WRITE_FAILED
+    CONTROL: one path per invocation; tied-yaml-canonical-v1
+    PRE: path exists and is a regular writable project YAML file
+    POST: shared canonicalizer rewrites valid output atomically; failures preserve original bytes
+    EFFECTS: File I/O; Exn
+    FAILURE_MODES: PATH_MISSING; PATH_NOT_REGULAR; INVALID_YAML; WRITE_FAILED
     DATA_TRANSITION: valid YAML non-canonical→valid canonical YAML; invalid or inaccessible→unchanged with failure
-    TERMINATION: total — one yq invocation
-  IF path missing or not a regular file: RETURN error
-  RUN yq -i 'sort_keys(.. style="double")' path
-  RETURN yq exit status
+    TERMINATION: total
+  RETURN IMPL-TIED_YAML_CANONICALIZER.CANONICALIZE_YAML_FILE(path)
 
 procedure LINT_YAML_PATHS(paths):
-  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [PROC-YAML_EDIT_LOOP]
-  # How: Attempt each YAML path independently and aggregate the observed canonicalization statuses.
-  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [PROC-YAML_EDIT_LOOP]
-  # How: For each path, CALL CANONICALIZE_YAML_FILE independently (scripts/yaml_tool.sh / lint_yaml default); aggregate exit status. Optional --sort-lists / --sort-keys remain a separate Ruby path (SORT_QUALIFYING_LIST_GROUPS in processes.md).
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION] [PROC-YAML_EDIT_LOOP]
+  # How: Attempt each YAML path independently through the shared canonicalizer and aggregate results; compatibility flags remain accepted by the frontend.
   Contract:
     INPUT: finite list of YAML paths
-    OUTPUT: aggregate lint exit status
+    OUTPUT: aggregate lint result with yaml_format metadata
     DATA: per-path canonicalization statuses
-    CONTROL: invoke canonicalization independently for every path; retain the latest non-zero status
+    CONTROL: invoke shared canonicalization independently for every path; retain the latest non-zero status
     PRE: paths is finite; each path is intended to be validated independently
     POST: every supplied path was attempted; zero means all paths passed, non-zero identifies at least one failure
-    EFFECTS: File I/O — each successful path may be rewritten; Process — invokes yq once per path
-    FAILURE_MODES: EMPTY_PATH_LIST; PATH_VALIDATION_FAILED; YAML_PARSE_FAILED; YQ_UNAVAILABLE
+    EFFECTS: File I/O; Exn
+    FAILURE_MODES: EMPTY_PATH_LIST; PATH_VALIDATION_FAILED; INVALID_YAML; WRITE_FAILED
     DATA_TRANSITION: input paths→per-path statuses→aggregate status
-    TERMINATION: total — iterate finite paths
+    TERMINATION: total
   rc := 0
   FOR each path in paths:
     st := CALL CANONICALIZE_YAML_FILE(path)

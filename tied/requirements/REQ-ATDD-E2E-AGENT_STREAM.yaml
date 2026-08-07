@@ -44,5 +44,5 @@ REQ-ATDD-E2E-AGENT_STREAM:
     tests:
       - "agent_stream_e2e_test.rb"
   validation_criteria:
-    - method: "E2E tests with stub agent on PATH (upstream atdd)"
-      coverage: "test/e2e/agent_stream_e2e_test.rb"
+    - coverage: "test/e2e/agent_stream_e2e_test.rb"
+      method: "E2E tests with stub agent on PATH (upstream atdd)"

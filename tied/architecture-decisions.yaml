@@ -1,8 +1,8 @@
 ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS:
   alternatives_considered:
-    - name: "Duplicate YAML parsing in argv and export"
-      cons:
+    - cons:
         - "Drift risk"
+      name: "Duplicate YAML parsing in argv and export"
       pros:
         - "Localized code"
       rejected_reason: "ATDD centralizes in TddLoopPrompts"
@@ -55,9 +55,9 @@ ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS:
       - "export_tdd_prompts_binding_test.rb"
 ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON:
   alternatives_considered:
-    - name: "HTTP API client"
-      cons:
+    - cons:
         - "Not how Cursor agent CLI works"
+      name: "HTTP API client"
       pros:
         - "In-process"
       rejected_reason: "Requirements target the official agent subprocess"
@@ -110,15 +110,15 @@ ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON:
       - "agent_stream_e2e_test.rb"
 ARCH-CONFIG_DISCOVERY_LAYERING:
   alternatives_considered:
-    - name: "Always merge with built-ins"
-      cons:
+    - cons:
         - "Cannot narrow lists without extra syntax"
+      name: "Always merge with built-ins"
       pros:
         - "Defaults always active"
       rejected_reason: "Conflicts with REQ-CONFIG_DISCOVERY_LOCAL_LAYER"
-    - name: "Replace only with explicit prefix"
-      cons:
+    - cons:
         - "Poor first-file ergonomics"
+      name: "Replace only with explicit prefix"
       pros:
         - "Very explicit"
       rejected_reason: "REQ allows unprefixed first-local replacement for selected fields"
@@ -169,15 +169,15 @@ ARCH-CONFIG_DISCOVERY_LAYERING:
     tests: []
 ARCH-FEEDBACK_STORAGE:
   alternatives_considered:
-    - name: "New YAML index (e.g. feedback.yaml as index)"
-      cons:
+    - cons:
         - "Feedback is not a traceability index; different schema (entries array)"
+      name: "New YAML index (e.g. feedback.yaml as index)"
       pros:
         - "Consistent with requirements.yaml pattern"
       rejected_reason: "Keep feedback as a separate artifact; schema is list of entries, not token-keyed records"
-    - name: "Store in requirements or implementation index"
-      cons:
+    - cons:
         - "Pollutes REQ/IMPL with non-traceability data"
+      name: "Store in requirements or implementation index"
       pros:
         - "No new file"
       rejected_reason: "Feedback is not a requirement or implementation decision"
@@ -231,10 +231,10 @@ ARCH-FEEDBACK_STORAGE:
       - "feedback.test.ts"
 ARCH-GOAGENT-CHECKLIST-CONTROL:
   alternatives_considered:
-    - name: "Parse natural-language clues"
-      cons:
+    - cons:
         - "False positives from explanations or history"
         - "Hard to test deterministically"
+      name: "Parse natural-language clues"
       pros:
         - "No output protocol required"
       rejected_reason: "Checklist control must be explicit and deterministic."
@@ -421,16 +421,16 @@ ARCH-GOAGENT-LIB-LAYERING:
       - "go test ./tools/agentstream/..."
 ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT:
   alternatives_considered:
-    - name: "Require authors to hand-edit HTML in YAML"
-      cons:
+    - cons:
         - "Error-prone"
         - "no non-compact contract in code"
+      name: "Require authors to hand-edit HTML in YAML"
       pros:
         - "No new formatter"
       rejected_reason: "REQ demands a testable, programmatic non-compact mode"
-    - name: "Delegate pretty HTML entirely to a wrapper script outside agentstream"
-      cons:
+    - cons:
         - "No `agentstream` contract or traceability"
+      name: "Delegate pretty HTML entirely to a wrapper script outside agentstream"
       pros:
         - "Thin core"
       rejected_reason: "REQ is in-scope for tools/agentstream"
@@ -661,21 +661,21 @@ ARCH-GOAGENT-YAML-STEPS:
     tests: []
 ARCH-LEAP_PROPOSAL_QUEUE:
   alternatives_considered:
-    - name: "Store proposals under tied/proposals.yaml"
-      cons:
+    - cons:
         - "Conflicts with canonical-only expectation for tied/ project YAML; harder to distinguish from REQ/ARCH/IMPL"
+      name: "Store proposals under tied/proposals.yaml"
       pros:
         - "Versioned with methodology tree"
       rejected_reason: "Keep proposals out of TIED base path until promoted via explicit LEAP"
-    - name: "New requirements.yaml rows for each proposal"
-      cons:
+    - cons:
         - "Proposals are not requirements until approved; would flood index and confuse traceability"
+      name: "New requirements.yaml rows for each proposal"
       pros:
         - "Uses existing REQ index"
       rejected_reason: "Proposals are non-canonical until approved"
-    - name: "Only LLM extraction"
-      cons:
+    - cons:
         - "API keys and cost; contradicts deterministic default path"
+      name: "Only LLM extraction"
       pros:
         - "Richer suggestions"
       rejected_reason: "Built-in path must be deterministic and opt-in without LLM"
@@ -730,23 +730,23 @@ ARCH-LEAP_PROPOSAL_QUEUE:
       - "leap-proposal-queue.test.ts"
 ARCH-MCP_USAGE_METRICS:
   alternatives_considered:
-    - name: "Cursor hook logs only"
-      cons:
+    - cons:
         - "Misses tied-cli and headless MCP invocations"
         - "Requires separate hooks.json setup per project"
+      name: "Cursor hook logs only"
       pros:
         - "Already captures some IDE tool events"
       rejected_reason: "Does not cover tied-cli/API path; server-side wrapper covers both surfaces uniformly"
-    - name: "Store metrics in tied/feedback.yaml"
-      cons:
+    - cons:
         - "Mixes human feedback with high-volume telemetry"
         - "Would version noisy data with project git"
+      name: "Store metrics in tied/feedback.yaml"
       pros:
         - "Reuses existing feedback module"
       rejected_reason: "Separate append-only JSONL under ~/.cursor/logs/ keeps metrics local and out of project YAML"
-    - name: "Always-on collection"
-      cons:
+    - cons:
         - "Privacy and I/O overhead without explicit opt-in"
+      name: "Always-on collection"
       pros:
         - "Simpler for operators"
       rejected_reason: "Default off via TIED_MCP_COLLECT_METRICS matches local-only opt-in requirement"
@@ -758,9 +758,9 @@ ARCH-MCP_USAGE_METRICS:
       - "Client label from TIED_MCP_METRICS_CLIENT (tied-cli sets tied-cli; IDE default cursor-mcp)"
       - "Env gate: TIED_MCP_COLLECT_METRICS=1 or true enables collection; default disabled"
       - "Registration-time wrapToolHandler in mcp-server/src/index.ts — no per-handler edits"
-      - "sanitizeArgs redacts blob fields; never logs full essence_pseudocode or record bodies"
       - "Storage: append-only JSONL at TIED_MCP_METRICS_PATH or ~/.cursor/logs/tied-mcp-metrics.jsonl"
       - "Write failures are non-fatal (DIAGNOSTIC stderr only)"
+      - "sanitizeArgs redacts blob fields; never logs full essence_pseudocode or record bodies"
     summary: "Wrapper at MCP tool registration appends sanitized JSONL records when env opt-in is set"
   metadata:
     created:
@@ -804,25 +804,25 @@ ARCH-MCP_USAGE_METRICS:
       - "usage-metrics.test.ts"
 ARCH-MODULE_VALIDATION:
   alternatives_considered:
-    - name: "Big Bang Integration"
-      cons:
+    - cons:
         - "Bugs compound during integration"
         - "Difficult to isolate issues"
         - "Too complex to debug"
+      name: "Big Bang Integration"
       pros:
         - "Faster initial integration"
       rejected_reason: "Makes debugging too difficult and bugs compound"
-    - name: "Minimal Validation"
-      cons:
+    - cons:
         - "Doesn't validate contracts properly"
         - "Insufficient to catch complexity bugs"
+      name: "Minimal Validation"
       pros:
         - "Faster development cycle"
       rejected_reason: "Insufficient validation leads to integration issues"
-    - name: "Post-Integration Validation Only"
-      cons:
+    - cons:
         - "Doesn't catch module-level bugs early"
         - "Increases debugging complexity"
+      name: "Post-Integration Validation Only"
       pros:
         - "All validation done at once"
       rejected_reason: "Bugs discovered too late, making fixes expensive"
@@ -938,17 +938,17 @@ ARCH-QUALITY_ASSURANCE_PROFILES:
       - "pilot/webhook-inbox/test/webhook-inbox.test.mjs"
 ARCH-TIED_STRUCTURE:
   alternatives_considered:
-    - name: "Root-level files"
-      cons:
+    - cons:
         - "Clutters the root directory"
         - "No clear organization"
+      name: "Root-level files"
       pros:
         - "Immediately visible in repository root"
       rejected_reason: "Creates too much clutter at project root"
-    - name: ".github or .docs folder"
-      cons:
+    - cons:
         - ".github is typically for GitHub workflows"
         - "Too generic for methodology-specific files"
+      name: ".github or .docs folder"
       pros:
         - "Common convention for documentation"
       rejected_reason: "./tied/ is more specific to the methodology"
@@ -1010,3 +1010,53 @@ ARCH-TIED_STRUCTURE:
       - "REQ-TIED_SETUP"
     tests:
       - "TestTIEDSetup_REQ_TIED_SETUP"
+ARCH-TIED_YAML_CANONICAL_PROFILE:
+  cross_references:
+    - "ARCH-MODULE_VALIDATION"
+    - "ARCH-TIED_STRUCTURE"
+    - "REQ-TIED_SETUP"
+    - "REQ-TIED_YAML_CANONICALIZATION"
+    - "REQ-TIED_YAML_STYLE_CONFIGURATION"
+  description: "A single typed tied-yaml-canonical-v1 profile governs recursive map ordering, ordered-list exceptions, scalar preservation, opaque text, atomic writes, and yaml_format metadata."
+  detail_file: "architecture-decisions/ARCH-TIED_YAML_CANONICAL_PROFILE.yaml"
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-06"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-06"
+      reason: "Define shared serialization architecture before implementation"
+  name: "Shared typed canonical YAML profile"
+  status: "Active"
+  type: "ARCH"
+ARCH-TIED_YAML_STYLE_RESOLUTION:
+  cross_references:
+    - "ARCH-TIED_STRUCTURE"
+    - "ARCH-TIED_YAML_CANONICAL_PROFILE"
+    - "REQ-TIED_YAML_CANONICALIZATION"
+    - "REQ-TIED_YAML_STYLE_CONFIGURATION"
+  description: "Resolve one repository YAML scalar style for MCP, tied-cli.sh, and yaml_tool using repository-over-global precedence."
+  detail_file: "architecture-decisions/ARCH-TIED_YAML_STYLE_RESOLUTION.yaml"
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-06"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-06"
+      reason: "Define shared repository-over-global YAML style resolution"
+  name: "Shared repository YAML style resolution"
+  status: "Active"
+  traceability:
+    code_annotations:
+      - "ARCH-TIED_YAML_STYLE_RESOLUTION"
+    implementation:
+      - "IMPL-TIED_YAML_STYLE_RESOLVER"
+    requirements:
+      - "REQ-TIED_YAML_CANONICALIZATION"
+      - "REQ-TIED_YAML_STYLE_CONFIGURATION"
+    tests:
+      - "mcp-server/src/tools/yaml-canonicalization-mcp.test.ts"
+      - "mcp-server/src/yaml-style-config.test.ts"
+      - "scripts/yaml_list_sorter_test.rb"

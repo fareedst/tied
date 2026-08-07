@@ -27,7 +27,12 @@
 | **bundled skill** | .cursor skill source | Git-tracked canonical: `tools/bundled-tied-yaml-skill/`; installed to client `.cursor/skills/tied-yaml/` |
 | **yaml_semantic_compare** | YAML equality check (alone) | `scripts/yaml_semantic_compare.rb` — semantic value compare for post-sort validation and directory diffs; see [`tied-methodology.md`](tied-methodology.md) |
 | **compare_yaml_dirs** | recursive yaml directory diff | `scripts/compare_yaml_dirs.rb` — pairs YAML by relative path across two dirs; see [`tied-methodology.md`](tied-methodology.md) |
-| **double-quoted scalar lint** (rename) | `yq -i -P` after rename | `tied_token_rename` pretty-prints modified YAML with the same expression as **yaml_tool** default lint: `sort_keys(.. style="double")` (one file per yq); see [`tied-methodology.md`](tied-methodology.md) |
+| **YAML canonicalization** (rename) | independent rename serialization | `tied_token_rename` delegates substituted YAML to the shared `tied-yaml-canonical-v1` profile and preserves original files on parse or serialization failure |
+| **format metadata** | serializer details | Successful rename and other YAML writes return the stable `yaml_format` object for the active profile |
+| **scalar-style resolution** | quote configuration, YAML style | Shared repository-over-global policy used by MCP writers, `tied-cli.sh`, and `yaml_tool.sh` |
+| **repository YAML style** | local style config | `.tied-yaml.yaml` at the parent of `TIED_BASE_PATH`; `scalar_style` is `unwrapped` or `wrapped` |
+| **wrapped** | quoted scalars | Double-quote string scalars only; preserve boolean, number, and null types |
+| **unwrapped** | plain scalars | Default plain-when-safe string emission; preserve typed scalar values |
 
 ---
 
@@ -46,6 +51,9 @@
 | Large CLI args | args file | temp file | `TIED_CLI_ARGS_FILE` | `@/path/to/payload.json` |
 | IMPL body from file | essence file | `IMPL-*-pseudocode.md` | `TIED_CLI_IMPL_ESSENCE_FILE` | `impl_detail_set_essence_pseudocode` |
 | MCP usage metrics | metrics JSONL | `~/.cursor/logs/tied-mcp-metrics.jsonl` | `TIED_MCP_COLLECT_METRICS`, `TIED_MCP_METRICS_PATH`, `TIED_MCP_METRICS_CLIENT` | `usage-metrics.ts` `wrapToolHandler` |
+| YAML canonicalization | canonical YAML profile | shared MCP writer path | `tied-yaml-canonical-v1` | [IMPL-TIED_YAML_CANONICALIZER](../implementation-decisions/IMPL-TIED_YAML_CANONICALIZER.yaml) |
+| Scalar style | scalar_style / style_source | `.tied-yaml.yaml`, `TIED_YAML_STYLE`, XDG fallback | repository > environment > XDG > unwrapped | [ARCH-TIED_YAML_STYLE_RESOLUTION](../architecture-decisions/ARCH-TIED_YAML_STYLE_RESOLUTION.yaml) |
+| Format metadata | yaml_format | MCP write response | profile, scalar style, and configuration source | [REQ-TIED_YAML_STYLE_CONFIGURATION](../requirements/REQ-TIED_YAML_STYLE_CONFIGURATION.yaml) |
 
 ---
 
@@ -101,6 +109,7 @@ Exact tool names registered in `mcp-server/src/tools/index.ts`:
 | `get_requirements_for_decision` | ARCH/IMPL → REQ |
 | `tied_token_create_with_detail` | Create token + detail + registry |
 | `tied_token_rename` | Rename token across tree; optional `extra_globs` / `extra_extensions` from **client project root** |
+| `tied_yaml_format` | Read-only description of the active canonical YAML profile and resolved scalar style |
 | `tied_import_summary` | Import/summary helper |
 
 ### Validation and verification
@@ -156,11 +165,13 @@ Feedback and LEAP proposal tools are documented in sibling glossaries ([`feedbac
 | Term | Section |
 |------|---------|
 | args_signature | MCP usage metrics |
+| canonical YAML profile | Preferred terms |
 | citdp_record_write | MCP catalog |
 | client project root | Preferred terms |
 | compare_yaml_dirs | Preferred terms |
 | default TIED rename scope | Preferred terms |
 | extra substitution targets | Preferred terms |
+| format metadata | Preferred terms |
 | getClientProjectRoot | Naming bridge |
 | impl_detail_set_essence_pseudocode | MCP catalog |
 | merged view | Preferred terms |
@@ -175,9 +186,11 @@ Feedback and LEAP proposal tools are documented in sibling glossaries ([`feedbac
 | TIED_MCP_METRICS_CLIENT | MCP usage metrics |
 | TIED_MCP_METRICS_PATH | MCP usage metrics |
 | TIED_YAML MCP | Preferred terms |
+| tied_yaml_format | MCP catalog |
 | tied_validate_consistency | MCP catalog |
 | tied_verify | MCP catalog |
 | usage metrics | MCP usage metrics |
 | yaml_detail_update | MCP catalog |
 | yaml_index_insert | MCP catalog |
 | yaml_semantic_compare | Preferred terms |
+| YAML canonicalization | Preferred terms |

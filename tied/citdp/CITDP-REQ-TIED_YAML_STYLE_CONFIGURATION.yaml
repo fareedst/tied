@@ -1,0 +1,91 @@
+CITDP-REQ-TIED_YAML_STYLE_CONFIGURATION:
+  acceptance_criteria:
+    - "MCP and tied-cli output bytes and yaml_format metadata agree on scalar_style and style_source."
+    - "Repository configuration overrides global style sources."
+    - "Supported styles are exactly unwrapped and wrapped."
+    - "Wrapped output retains native boolean, number, and null values."
+    - "yaml_tool --check fails without rewriting noncanonical files."
+    - "yaml_tool default and --sort-lists enforce the resolved style."
+  change_definition:
+    current_behavior: "Canonicalization preserves typed values but has no repository-level wrapped/unwrapped style control; compatibility list sorting can run separately from canonical serialization."
+    requested_change: "Make repository YAML scalar style configurable and enforce the same resolved policy across yaml_tool, tied-cli.sh, and all MCP YAML writers."
+    scope_in:
+      - "TIED YAML style documentation and vocabulary"
+      - "mcp-server/src/cli/yaml-canonicalizer.ts"
+      - "mcp-server/src/tools/index.ts"
+      - "mcp-server/src/yaml-canonicalizer.ts"
+      - "mcp-server/src/yaml-dump.ts"
+      - "mcp-server/src/yaml-style-config.ts"
+      - "scripts/yaml_list_sorter_test.rb"
+      - "scripts/yaml_tool.sh"
+    scope_out:
+      - "Methodology YAML under tied/methodology/"
+      - "Opaque IMPL pseudo-code sidecar text"
+    target_behavior: "Repository .tied-yaml.yaml selects unwrapped or wrapped, taking precedence over TIED_YAML_STYLE and XDG global configuration, with unwrapped as default. Wrapped quotes string scalars only and preserves boolean, number, and null types."
+  completion_criteria:
+    - "Changed YAML passes yaml_tool and tied_validate_consistency."
+    - "IMPL pseudo-code passes structural validation with token comments."
+    - "REQ/ARCH/IMPL/CITDP/vocabulary/docs agree with implemented behavior."
+    - "Ruby yaml_list_sorter_test.rb passes under both styles."
+    - "TypeScript build and full MCP tests pass."
+  impact_analysis:
+    architecture:
+      - "ARCH-TIED_YAML_CANONICAL_PROFILE"
+      - "ARCH-TIED_YAML_STYLE_RESOLUTION"
+    implementation_decisions:
+      - "IMPL-TIED_YAML_CANONICALIZER"
+      - "IMPL-TIED_YAML_STYLE_RESOLVER"
+    interfaces:
+      - ".tied-yaml.yaml"
+      - "TIED_YAML_STYLE"
+      - "yaml_format metadata"
+      - "yaml_tool --check"
+    modules:
+      - "MCP writer adapters"
+      - "Ruby list sorter integration"
+      - "style resolver"
+      - "typed canonical serializer"
+      - "yaml_tool compatibility frontend"
+    requirements:
+      - "REQ-TIED_YAML_CANONICALIZATION"
+      - "REQ-TIED_YAML_STYLE_CONFIGURATION"
+  implementation_guidance:
+    rollback: "Revert code/config changes and re-run the prior canonical profile; atomic writers preserve target bytes on parse, configuration, serialization, or rename failure."
+    sequence:
+      - "Add wrapped/unwrapped unit, composition, and compatibility tests"
+      - "Define repository/global resolver and metadata contract"
+      - "Route canonicalizer, yaml-dump, MCP writers, CLI, and list-sort post-processing through resolver"
+      - "Run TypeScript, Ruby, pseudo-code, YAML, and consistency gates"
+      - "Update TIED records, vocabulary, docs, and changelog"
+  leap_feedback:
+    divergence: "The requested repository style control extends the prior fixed canonical profile."
+    propagation: "Added IMPL-TIED_YAML_STYLE_RESOLVER, ARCH-TIED_YAML_STYLE_RESOLUTION, and REQ-TIED_YAML_STYLE_CONFIGURATION with cross-references and token-linked pseudocode."
+    status: "applied"
+  record_identity:
+    citdp_id: "CITDP-REQ-TIED_YAML_STYLE_CONFIGURATION"
+    created_at: "2026-08-06"
+    status: "Implemented"
+    title: "Enforce repository-wide YAML scalar style alignment"
+    updated_at: "2026-08-06"
+  risk_analysis:
+    residual_risks:
+      - "Existing files require a canonicalization pass when a repository changes its selected style."
+    risks:
+      - description: "A writer bypasses the shared serializer and emits a different style."
+        id: "RISK-STYLE-001"
+        mitigation: "Route all typed YAML writers through writeCanonicalValueAtomic or safeDumpTiedDetailDoc with the resolved style; test MCP composition and CLI parity."
+      - description: "Wrapped mode coerces typed scalars to strings."
+        id: "RISK-STYLE-002"
+        mitigation: "Use js-yaml forceQuotes for string emission only and assert parsed boolean, number, and null types."
+      - description: "Invalid repository configuration silently falls through to a global value."
+        id: "RISK-STYLE-003"
+        mitigation: "Resolver rejects invalid explicit repository settings before any write."
+  test_strategy:
+    compatibility:
+      - "scripts/yaml_list_sorter_test.rb"
+    composition:
+      - "mcp-server/src/tools/yaml-canonicalization-mcp.test.ts"
+    e2e: "No UI E2E is applicable; the CLI and MCP composition boundaries provide the required external coverage."
+    unit:
+      - "mcp-server/src/yaml-canonicalizer.test.ts"
+      - "mcp-server/src/yaml-style-config.test.ts"

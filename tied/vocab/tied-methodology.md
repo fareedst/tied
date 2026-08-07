@@ -22,12 +22,21 @@
 | **composition evidence** | E2E covers wiring | UI-free composition/integration/contract test proving a binding before integration |
 | **contract precision** | INPUT/OUTPUT only (for new Active blocks) | PRE/POST/EFFECTS required on new/changed Active procedure blocks; FAILURE_MODES/DATA_TRANSITION/TERMINATION when applicable |
 | **Observing AI principles!** | (omit) | Mandatory session acknowledgment per [REQ-TIED_SETUP](../requirements/REQ-TIED_SETUP.yaml) |
-| **yaml_tool** | yaml lint script, yq wrapper (alone) | Primary YAML utility: `scripts/yaml_tool.sh`; default lint = **double-quoted scalar lint** per [PROC-YAML_EDIT_LOOP](../docs/processes.md) |
+| **yaml_tool** | yaml lint script, yq wrapper (alone) | Compatibility frontend for the shared **canonical YAML profile** in `scripts/yaml_tool.sh` per [PROC-YAML_EDIT_LOOP](../docs/processes.md) |
 | **lint_yaml** | lint yaml (generic) | Backward-compatible wrapper; delegates to **yaml_tool** |
-| **double-quoted scalar lint** | `yq -i -P` (as default lint), pretty-print-only lint | Default `yaml_tool` / `lint_yaml`: `yq -i 'sort_keys(.. style="double")'` one file per invocation. On-disk **bool/int become string scalars** (e.g. `e2e_only: "false"`); coerce after load when typed values are required |
-| **recursive key sort (lint)** | default `--sort-keys`, key sort via Ruby only | Key alphabetization on **default lint** via the yq `sort_keys(..)` expression. Distinct from optional **`--sort-lists --sort-keys`** on **yaml_list_sorter** |
-| **qualifying list group** | yaml list, bullet group | 2+ consecutive lines with same indent, each starting with `- `; sortable by **yaml_list_sorter**, except when the owning map key matches `order` / `*_order` / `order_*` / `*_order_*` (e.g. `recommended_validation_order` — document order preserved) |
-| **sort map keys** | hash key sort, key normalization | Optional **`--sort-keys`** on **yaml_list_sorter** / **yaml_tool --sort-lists**; alphabetizes sibling map keys at every indent level; **block-scalar** (`\|`, `>`) bodies stay opaque. For default lint key order, see **recursive key sort (lint)** |
+| **YAML canonicalization** | YAML normalization, pretty-printing | Deterministic transformation under profile `tied-yaml-canonical-v1`; recursively orders map keys, applies ordered-list exceptions, preserves scalar types, and keeps opaque text unchanged |
+| **canonical YAML profile** | serializer policy, YAML format convention | The named `tied-yaml-canonical-v1` contract shared by TIED YAML MCP writers and compatibility frontends |
+| **scalar style** | quote style, YAML wrapping | Repository policy selecting `unwrapped` or `wrapped` scalar emission for the shared canonical YAML serializer |
+| **wrapped** | quoted YAML, double-quoted output | Scalar style that double-quotes string scalars only while preserving boolean, number, and null types |
+| **unwrapped** | plain YAML, plain scalars | Default scalar style that emits strings plain when safe while preserving typed scalar values |
+| **repository YAML style** | local YAML format, `.tied-yaml.yaml` | Project-root `scalar_style` configuration that overrides global style fallbacks for lint and MCP writes |
+| **ordered-list key** | protected list key, ordering field | A map key matching `order`, `order_*`, `*_order`, or `*_order_*`; all-string lists under these keys preserve their original order |
+| **scalar-type preservation** | typed round trip, coercion after load | Boolean, number, null, and string scalar types remain their parsed types through canonicalization |
+| **format metadata** | serializer metadata, format details | Stable `yaml_format` response object describing the active canonical YAML profile |
+| **opaque text** | raw text, unparsed body | Block-scalar bodies and IMPL pseudo-code sidecars are preserved as text rather than recursively normalized |
+| **recursive key sort (canonicalization)** | default `--sort-keys`, key sort via Ruby only | Locale-independent lexical ordering of map keys at every nested map level under the canonical YAML profile |
+| **qualifying list group** | yaml list, bullet group | 2+ consecutive lines with same indent, each starting with `- `; sortable by **yaml_list_sorter**, except when the owning map key matches an ordered-list key |
+| **sort map keys** | hash key sort, key normalization | Canonicalization recursively orders map keys; compatibility `--sort-keys` remains accepted by the sorter frontend; block-scalar bodies stay opaque |
 | **yaml_semantic_compare** | YAML equality check, deep YAML diff (alone) | Library: `scripts/yaml_semantic_compare.rb`; compares loaded YAML values (key order ignored; optional unordered arrays); used by **yaml_list_sorter** post-sort validation |
 | **compare_yaml_dirs** | directory YAML diff, recursive yaml compare | CLI: `scripts/compare_yaml_dirs.rb LEFT_DIR RIGHT_DIR`; relative-path pairing; reports missing files and semantic differences |
 | **routing.md** / **routing index** | `domain-references-routing.md`, bootstrap via full catalog | Primary `tied/vocab/` PRELOAD entry; keyword → glossary table. Full catalog remains [`domain-references.md`](domain-references.md) (on-demand) |
@@ -62,8 +71,8 @@
 | Vocabulary control layer | vocabulary layer / agent-control layer | `tied/vocab/*.md` plus checklist touchpoints | RESOLVE / PRELOAD / RECORD / VALIDATE | [PROC-VOCABULARY_INDEX](../docs/processes.md) |
 | Per-request checklist copy | working folder checklist | `<working_folder>/REQ-*_<timestamp>.yaml` | — | [PROC-AGENT_REQ_CHECKLIST](../docs/processes.md) |
 | Composition coverage guide | binding inventory / E2E exclusion | `tied/docs/composition-coverage.md` | checklist `composition-integration` | [REQ-MODULE_VALIDATION](../requirements/REQ-MODULE_VALIDATION.yaml) |
-| YAML validate/sort | yaml_tool | `scripts/yaml_tool.sh` | default: `sort_keys(.. style="double")`; `--sort-lists` → Ruby sorter; optional `--sort-keys` | [PROC-YAML_EDIT_LOOP](../docs/processes.md) |
-| Double-quoted scalar lint | canonical lint | via **yaml_tool** / **lint_yaml** | `yq -i 'sort_keys(.. style="double")'` | [PROC-YAML_EDIT_LOOP](../docs/processes.md) |
+| YAML canonicalization | canonical YAML profile | `scripts/yaml_tool.sh` and TIED YAML MCP | `tied-yaml-canonical-v1`; compatibility flags retained | [REQ-TIED_YAML_CANONICALIZATION](../requirements/REQ-TIED_YAML_CANONICALIZATION.yaml) |
+| Format metadata | yaml_format | MCP write responses | profile id, scalar style, style source, key ordering, ordered-list pattern, string-list rule, scalar and opaque-text policy | [REQ-TIED_YAML_STYLE_CONFIGURATION](../requirements/REQ-TIED_YAML_STYLE_CONFIGURATION.yaml) |
 | YAML lint wrapper | lint_yaml | `scripts/lint_yaml.sh` | delegates to yaml_tool | [PROC-YAML_EDIT_LOOP](../docs/processes.md) |
 | List group sorter | yaml_list_sorter | `scripts/yaml_list_sorter.rb` | `--sort-keys` optional; invoked by yaml_tool `--sort-lists`; post-sort **yaml_semantic_compare** | [PROC-YAML_EDIT_LOOP](../docs/processes.md) |
 | Semantic YAML compare | yaml_semantic_compare | `scripts/yaml_semantic_compare.rb` | library + `YamlSemanticCompare.compare` | [PROC-YAML_EDIT_LOOP](../docs/processes.md) |
@@ -123,6 +132,9 @@ Exact spellings for checklist and docs cross-reference:
 | implementation pseudo-code sidecar copy | `COPY_IMPLEMENTATION_PSEUDOCODE_SIDECARS` | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
 | YAML canonicalization | `CANONICALIZE_YAML_FILE` | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
 | YAML path lint | `LINT_YAML_PATHS` | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
+| typed YAML value canonicalization | `CANONICALIZE_YAML_VALUE` | [IMPL-TIED_YAML_CANONICALIZER](../implementation-decisions/IMPL-TIED_YAML_CANONICALIZER.yaml) |
+| YAML format metadata | `REPORT_YAML_FORMAT` | [IMPL-TIED_YAML_CANONICALIZER](../implementation-decisions/IMPL-TIED_YAML_CANONICALIZER.yaml) |
+| atomic YAML write | `WRITE_CANONICAL_YAML_ATOMIC` | [IMPL-TIED_YAML_CANONICALIZER](../implementation-decisions/IMPL-TIED_YAML_CANONICALIZER.yaml) |
 
 ---
 
@@ -132,7 +144,9 @@ Exact spellings for checklist and docs cross-reference:
 |------|---------|
 | AGENTS.md | Naming bridge |
 | agent-control layer | Preferred terms |
+| atomic YAML write | Pseudo-code block names |
 | binding inventory | Preferred terms |
+| canonical YAML profile | Preferred terms |
 | client refresh | Preferred terms |
 | compare_yaml_dirs | Preferred terms |
 | composition evidence | Preferred terms |
@@ -142,6 +156,7 @@ Exact spellings for checklist and docs cross-reference:
 | detail file | Preferred terms |
 | domain-references.md | Naming bridge |
 | full catalog | Naming bridge |
+| format metadata | Preferred terms |
 | inherited methodology snapshot | Preferred terms |
 | lint_yaml | Preferred terms |
 | methodology YAML | Preferred terms |
@@ -153,9 +168,12 @@ Exact spellings for checklist and docs cross-reference:
 | PROC-VOCABULARY_INDEX | PROC catalog |
 | project YAML | Preferred terms |
 | qualifying list group | Preferred terms |
+| opaque text | Preferred terms |
+| ordered-list key | Preferred terms |
 | routing index | Preferred terms |
 | routing.md | Preferred terms |
 | semantic token | Preferred terms |
+| scalar-type preservation | Preferred terms |
 | sort map keys | Preferred terms |
 | TIED base path | Naming bridge |
 | tied/vocab | Naming bridge |
@@ -166,3 +184,4 @@ Exact spellings for checklist and docs cross-reference:
 | yaml_list_sorter | Naming bridge |
 | yaml_semantic_compare | Preferred terms |
 | yaml_tool | Preferred terms |
+| YAML canonicalization | Preferred terms |

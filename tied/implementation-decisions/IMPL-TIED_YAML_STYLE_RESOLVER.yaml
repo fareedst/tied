@@ -1,0 +1,75 @@
+IMPL-TIED_YAML_STYLE_RESOLVER:
+  category: "Technical"
+  code_locations:
+    - description: "Repository/global style resolver and js-yaml serializer options"
+      path: "mcp-server/src/yaml-style-config.ts"
+    - description: "Style-aware canonical serialization and yaml_format metadata"
+      path: "mcp-server/src/yaml-canonicalizer.ts"
+    - description: "Style-aware detail serialization"
+      path: "mcp-server/src/yaml-dump.ts"
+    - description: "Canonicalization and --check CLI"
+      path: "mcp-server/src/cli/yaml-canonicalizer.ts"
+    - description: "Lint and list-sort compatibility frontend"
+      path: "scripts/yaml_tool.sh"
+    - description: "Precedence and invalid configuration unit tests"
+      path: "mcp-server/src/yaml-style-config.test.ts"
+    - description: "Wrapped MCP writer composition coverage"
+      path: "mcp-server/src/tools/yaml-canonicalization-mcp.test.ts"
+    - description: "Wrapped CLI and list-sort compatibility coverage"
+      path: "scripts/yaml_list_sorter_test.rb"
+  cross_references:
+    - "ARCH-TIED_YAML_STYLE_RESOLUTION"
+    - "IMPL-TIED_YAML_CANONICALIZER"
+    - "REQ-MODULE_VALIDATION"
+    - "REQ-TIED_YAML_STYLE_CONFIGURATION"
+  description: "Provide one resolver and serializer options contract for all typed YAML writes. Repository .tied-yaml.yaml overrides TIED_YAML_STYLE and XDG global configuration; unconfigured repositories use unwrapped. Wrapped uses double-quoted strings only and preserves typed booleans, numbers, and nulls. Opaque block scalars and IMPL pseudo-code sidecars retain existing preservation rules."
+  implementation_approach:
+    details:
+      - "Add yaml-style-config.ts beside yaml-canonicalizer.ts with scalar_style validation, repository-root discovery, and precedence resolution."
+      - "Extend canonical profile metadata with scalar_style and style_source."
+      - "Reject invalid repository configuration without falling back to global values; preserve atomic failure behavior."
+      - "Route yaml_tool and --sort-lists through the same CLI resolver contract and canonical output."
+      - "Use js-yaml forceQuotes and quotingType double only for wrapped string serialization; never stringify typed scalars."
+    summary: "Resolve style once per operation from repository root, pass it into the canonicalizer and yaml-dump, and expose the effective style and source in yaml_format metadata."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-06"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-06"
+      reason: "Complete contract fields and validator-approved style resolver pseudocode"
+  name: "Shared YAML scalar style resolver"
+  rationale:
+    benefits:
+      - "Observable configuration precedence"
+      - "Repository-enforceable formatting"
+      - "Typed wrapped output"
+    problems_solved:
+      - "MCP responses that do not reveal effective formatting policy"
+      - "Style decisions duplicated across serializers"
+      - "Uncontrolled wrapped versus unwrapped output"
+    why: "A single implementation boundary prevents repository lint, MCP, and tied-cli output from disagreeing about scalar style."
+  related_decisions:
+    depends_on:
+      - "ARCH-TIED_YAML_STYLE_RESOLUTION"
+      - "IMPL-TIED_YAML_CANONICALIZER"
+    see_also:
+      - "PROC-YAML_EDIT_LOOP"
+    supersedes: []
+  status: "Active"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-TIED_YAML_CANONICAL_PROFILE"
+      - "ARCH-TIED_YAML_STYLE_RESOLUTION"
+    code_annotations:
+      - "IMPL-TIED_YAML_STYLE_RESOLVER"
+    requirements:
+      - "REQ-TIED_YAML_CANONICALIZATION"
+      - "REQ-TIED_YAML_STYLE_CONFIGURATION"
+    tests:
+      - "mcp-server/src/tools/yaml-canonicalization-mcp.test.ts"
+      - "mcp-server/src/yaml-canonicalizer.test.ts"
+      - "mcp-server/src/yaml-style-config.test.ts"
+      - "scripts/yaml_list_sorter_test.rb"

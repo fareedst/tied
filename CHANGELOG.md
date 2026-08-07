@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Deterministic TIED YAML canonicalization** — `[REQ-TIED_YAML_CANONICALIZATION]` / `[ARCH-TIED_YAML_CANONICAL_PROFILE]` / `[IMPL-TIED_YAML_CANONICALIZER]` now provide one typed `tied-yaml-canonical-v1` profile for MCP writers and compatibility frontends, with ordered-list exceptions, opaque-text boundaries, atomic writes, and `yaml_format` metadata. Added canonicalizer unit coverage, UI-free MCP composition coverage, and preserved the existing non-UI CLI compatibility path.
+
 - **TIED 3.0.0 vocabulary layer** — Domain vocabulary is now an explicit agent-control layer in the requirement implementation checklist. `RESOLVE`, `PRELOAD`, `RECORD`, and `VALIDATE` guide conversation, naming, discovery, artifact alignment, and commit readiness alongside TIED, CITDP, LEAP, and TDD.
 
 - **Methodology migration hardening** — `[REQ-TIED_SETUP]` / `[ARCH-TIED_STRUCTURE]` / `[IMPL-TIED_FILES]` now define and verify non-destructive inherited-snapshot refresh, project YAML preservation, additive `--merge-vocab`, promoted quality detail and token-commented pseudo-code sidecars, and stale-file pruning. Added disposable-client E2E coverage and completed the Layer B pseudo-code gate.
@@ -33,6 +35,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Vocabulary routing index and client development index** — [`tied/vocab/routing.md`](tied/vocab/routing.md) (~70-line bootstrap router); [`tied/docs/client-development-index.md`](tied/docs/client-development-index.md); outreach copies under [`docs/`](docs/) for vocabulary research / LEAP+CITDP narrative.
 
 ### Changed
+
+- **YAML writer canonicalization** — `yaml_tool`, MCP writers, and `tied_token_rename` now share typed `tied-yaml-canonical-v1` output instead of the default double-quoted `yq` lint; `tied_yaml_format` exposes the profile and successful writes report `yaml_format`.
+
+- **Repository YAML scalar-style enforcement** — `[REQ-TIED_YAML_STYLE_CONFIGURATION]` / `[ARCH-TIED_YAML_STYLE_RESOLUTION]` / `[IMPL-TIED_YAML_STYLE_RESOLVER]` add repository-over-global `wrapped`/`unwrapped` selection. `yaml_tool`, `--sort-lists`, `tied-cli.sh`, and MCP writers now use the same resolved policy; wrapped mode quotes strings only and preserves typed booleans, numbers, and nulls.
 
 - **`copy_files.sh` MCP behavior** — Existing `.cursor/mcp.json` files are no longer refreshed; bootstrap initializes the file only when absent and preserves existing configuration byte-for-byte. Clients that need new `tied-yaml` paths must update the MCP configuration explicitly or remove it before bootstrapping. CITDP: `CITDP-REQ-TIED_SETUP-VOCABULARY_LAYER`.
 

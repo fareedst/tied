@@ -1,16 +1,16 @@
 ARCH-TIED_STRUCTURE:
   alternatives_considered:
-    - name: "Root-level files"
-      cons:
+    - cons:
         - "Clutters the root directory"
         - "No clear organization"
+      name: "Root-level files"
       pros:
         - "Immediately visible in repository root"
       rejected_reason: "Creates too much clutter at project root"
-    - name: ".github or .docs folder"
-      cons:
+    - cons:
         - ".github is typically for GitHub workflows"
         - "Too generic for methodology-specific files"
+      name: ".github or .docs folder"
       pros:
         - "Common convention for documentation"
       rejected_reason: "./tied/ is more specific to the methodology"

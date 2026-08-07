@@ -1,12 +1,12 @@
 IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV:
   code_locations:
     files:
-      - path: "tools/agent-stream/lib/agent_stream_argv.rb"
-        description: "[REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML] [ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS] [IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV]"
-      - path: "tools/agent-stream/lib/tdd_loop_prompts.rb"
-        description: "TDD loop YAML message expansion"
-      - path: "tools/agent-stream/lib/lead_checklist_prompts.rb"
-        description: "Lead checklist YAML expansion ([PROC-AGENT_REQ_CHECKLIST])"
+      - description: "[REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML] [ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS] [IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV]"
+        path: "tools/agent-stream/lib/agent_stream_argv.rb"
+      - description: "TDD loop YAML message expansion"
+        path: "tools/agent-stream/lib/tdd_loop_prompts.rb"
+      - description: "Lead checklist YAML expansion ([PROC-AGENT_REQ_CHECKLIST])"
+        path: "tools/agent-stream/lib/lead_checklist_prompts.rb"
   cross_references:
     - "ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS"
     - "REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML"
@@ -54,12 +54,12 @@ IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV:
 IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS:
   code_locations:
     files:
-      - path: "tools/agent-stream/lib/atdd_export_tdd_prompts.rb"
-        description: "Export pipeline [REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS]"
-      - path: "tools/agent-stream/export_tdd_prompts.rb"
-        description: "CLI entry for export"
-      - path: "tools/agent-stream/lib/tdd_loop_prompts.rb"
-        description: "Shared step parsing"
+      - description: "Export pipeline [REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS]"
+        path: "tools/agent-stream/lib/atdd_export_tdd_prompts.rb"
+      - description: "CLI entry for export"
+        path: "tools/agent-stream/export_tdd_prompts.rb"
+      - description: "Shared step parsing"
+        path: "tools/agent-stream/lib/tdd_loop_prompts.rb"
   cross_references:
     - "ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS"
     - "REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS"
@@ -106,16 +106,16 @@ IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS:
 IMPL-ATDD-E2E-AGENT_STREAM:
   code_locations:
     files:
-      - path: "tools/agent-stream/run_agent_stream.rb"
-        description: "[REQ-ATDD-E2E-AGENT_STREAM] [ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON] [IMPL-ATDD-E2E-AGENT_STREAM] main and run_stream"
+      - description: "[REQ-ATDD-E2E-AGENT_STREAM] [ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON] [IMPL-ATDD-E2E-AGENT_STREAM] main and run_stream"
+        path: "tools/agent-stream/run_agent_stream.rb"
   cross_references:
     - "ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON"
     - "REQ-ATDD-E2E-AGENT_STREAM"
   detail_file: "implementation-decisions/IMPL-ATDD-E2E-AGENT_STREAM.yaml"
   implementation_approach:
     details:
-      - "extract_text_fragments for thinking and assistant events"
       - "Open3.popen3 streaming"
+      - "extract_text_fragments for thinking and assistant events"
     summary: "For each turn build argv for agent CLI; run_stream parses NDJSON; dry-run mode skips subprocess"
   metadata:
     created:
@@ -156,8 +156,8 @@ IMPL-ATDD-E2E-AGENT_STREAM:
 IMPL-GOAGENT-CHECKLIST:
   code_locations:
     files:
-      - path: "tools/agentstream/checklist/checklist.go"
-        description: "[REQ-GOAGENT-YAML-STEP-RENDER] [ARCH-GOAGENT-YAML-STEPS] [IMPL-GOAGENT-CHECKLIST]"
+      - description: "[REQ-GOAGENT-YAML-STEP-RENDER] [ARCH-GOAGENT-YAML-STEPS] [IMPL-GOAGENT-CHECKLIST]"
+        path: "tools/agentstream/checklist/checklist.go"
   cross_references:
     - "ARCH-GOAGENT-YAML-STEPS"
     - "REQ-GOAGENT-YAML-STEP-RENDER"
@@ -204,19 +204,19 @@ IMPL-GOAGENT-CHECKLIST:
 IMPL-GOAGENT-CHECKLIST-CONTROL:
   code_locations:
     files:
-      - path: "tools/agentstream/control/control.go"
-        description: "Parse and validate agentstream_control blocks [REQ-GOAGENT-CHECKLIST-CONTROL] [ARCH-GOAGENT-CHECKLIST-CONTROL] [IMPL-GOAGENT-CHECKLIST-CONTROL]"
-      - path: "tools/agentstream/executor/executor.go"
-        description: "Capture assistant text while streaming output"
-      - path: "tools/agentstream/cmd/agentstream/main.go"
-        description: "Apply validated control actions to remaining checklist queue"
+      - description: "Parse and validate agentstream_control blocks [REQ-GOAGENT-CHECKLIST-CONTROL] [ARCH-GOAGENT-CHECKLIST-CONTROL] [IMPL-GOAGENT-CHECKLIST-CONTROL]"
+        path: "tools/agentstream/control/control.go"
+      - description: "Capture assistant text while streaming output"
+        path: "tools/agentstream/executor/executor.go"
+      - description: "Apply validated control actions to remaining checklist queue"
+        path: "tools/agentstream/cmd/agentstream/main.go"
     functions:
-      - name: "Parse"
-        description: "Extract strict agentstream_control JSON"
+      - description: "Extract strict agentstream_control JSON"
         file: "tools/agentstream/control/control.go"
-      - name: "Validate"
-        description: "Validate action and target slug"
+        name: "Parse"
+      - description: "Validate action and target slug"
         file: "tools/agentstream/control/control.go"
+        name: "Validate"
   cross_references:
     - "ARCH-GOAGENT-CHECKLIST-CONTROL"
     - "REQ-GOAGENT-CHECKLIST-CONTROL"
@@ -276,10 +276,10 @@ IMPL-GOAGENT-CHECKLIST-CONTROL:
 IMPL-GOAGENT-CLI-CMD:
   code_locations:
     files:
-      - path: "tools/agentstream/config/config.go"
-        description: "[REQ-GOAGENT-CLI-CONFIG] [ARCH-GOAGENT-CLI] [IMPL-GOAGENT-CLI-CMD]"
-      - path: "tools/agentstream/cmd/agentstream/main.go"
-        description: "[REQ-GOAGENT-CLI-CONFIG] [REQ-GOAGENT-YAML-STEP-RENDER] [REQ-GOAGENT-PIPELINE-CHAIN] [REQ-GOAGENT-AGENT-EXECUTOR] [IMPL-GOAGENT-CLI-CMD]"
+      - description: "[REQ-GOAGENT-CLI-CONFIG] [ARCH-GOAGENT-CLI] [IMPL-GOAGENT-CLI-CMD]"
+        path: "tools/agentstream/config/config.go"
+      - description: "[REQ-GOAGENT-CLI-CONFIG] [REQ-GOAGENT-YAML-STEP-RENDER] [REQ-GOAGENT-PIPELINE-CHAIN] [REQ-GOAGENT-AGENT-EXECUTOR] [IMPL-GOAGENT-CLI-CMD]"
+        path: "tools/agentstream/cmd/agentstream/main.go"
   cross_references:
     - "ARCH-GOAGENT-CLI"
     - "REQ-GOAGENT-CLI-CONFIG"
@@ -337,8 +337,8 @@ IMPL-GOAGENT-CLI-CMD:
 IMPL-GOAGENT-EXECUTOR:
   code_locations:
     files:
-      - path: "tools/agentstream/executor/executor.go"
-        description: "[REQ-GOAGENT-AGENT-EXECUTOR] [ARCH-GOAGENT-EXECUTOR] [IMPL-GOAGENT-EXECUTOR]"
+      - description: "[REQ-GOAGENT-AGENT-EXECUTOR] [ARCH-GOAGENT-EXECUTOR] [IMPL-GOAGENT-EXECUTOR]"
+        path: "tools/agentstream/executor/executor.go"
   cross_references:
     - "ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON"
     - "ARCH-GOAGENT-EXECUTOR"
@@ -385,10 +385,10 @@ IMPL-GOAGENT-EXECUTOR:
 IMPL-GOAGENT-FEATURESPEC:
   code_locations:
     files:
-      - path: "tools/agentstream/featurespec/featurespec.go"
-        description: "[REQ-GOAGENT-FEATURESPEC-BATCH] [ARCH-GOAGENT-YAML-FEATURESPEC] [IMPL-GOAGENT-FEATURESPEC]"
-      - path: "tools/agentstream/featurespec/order.go"
-        description: "[REQ-GOAGENT-FEATURESPEC-BATCH] [IMPL-GOAGENT-FEATURESPEC]"
+      - description: "[REQ-GOAGENT-FEATURESPEC-BATCH] [ARCH-GOAGENT-YAML-FEATURESPEC] [IMPL-GOAGENT-FEATURESPEC]"
+        path: "tools/agentstream/featurespec/featurespec.go"
+      - description: "[REQ-GOAGENT-FEATURESPEC-BATCH] [IMPL-GOAGENT-FEATURESPEC]"
+        path: "tools/agentstream/featurespec/order.go"
   cross_references:
     - "ARCH-GOAGENT-YAML-FEATURESPEC"
     - "REQ-GOAGENT-FEATURESPEC-BATCH"
@@ -433,8 +433,8 @@ IMPL-GOAGENT-FEATURESPEC:
 IMPL-GOAGENT-LIB-TYPES:
   code_locations:
     files:
-      - path: "tools/agentstream/turn.go"
-        description: "[REQ-GOAGENT-LIB-MODULE] [ARCH-GOAGENT-LIB-LAYERING] [IMPL-GOAGENT-LIB-TYPES]"
+      - description: "[REQ-GOAGENT-LIB-MODULE] [ARCH-GOAGENT-LIB-LAYERING] [IMPL-GOAGENT-LIB-TYPES]"
+        path: "tools/agentstream/turn.go"
   cross_references:
     - "ARCH-GOAGENT-LIB-LAYERING"
     - "REQ-GOAGENT-LIB-MODULE"
@@ -478,14 +478,14 @@ IMPL-GOAGENT-LIB-TYPES:
 IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT:
   code_locations:
     files:
-      - path: "tools/agentstream/cmd/agentstream/main.go"
-        description: "Integration: applyPostPreloadNonCompactHTML after ApplyPromptFilePreload (IMPL-GOAGENT-CLI-CMD + IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT composition)"
-      - path: "tools/agentstream/cmd/agentstream/compose_noncompact.go"
-        description: "MAP_CONFIG_TO_HTMLFORMAT_OPTIONS + call IntegrateWithMain; CLI via config.Config; IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT"
-      - path: "tools/agentstream/config/config.go"
-        description: "NonCompactHTML, NonCompactHTMLStableIndent; --non-compact-html / --non-compact-html-indent (ARCH-GOAGENT-CLI / REQ-GOAGENT-CLI-CONFIG)"
-      - path: "tools/agentstream/htmlformat/htmlformat.go"
-        description: "APPLY_TO_TURNS, FormatNonCompactHTML, addNonCompactLineBreaks, applyStableIndentLines, IntegrateWithMain (htmlformat; REQ/ARCH/IMPL IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT)"
+      - description: "Integration: applyPostPreloadNonCompactHTML after ApplyPromptFilePreload (IMPL-GOAGENT-CLI-CMD + IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT composition)"
+        path: "tools/agentstream/cmd/agentstream/main.go"
+      - description: "MAP_CONFIG_TO_HTMLFORMAT_OPTIONS + call IntegrateWithMain; CLI via config.Config; IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT"
+        path: "tools/agentstream/cmd/agentstream/compose_noncompact.go"
+      - description: "NonCompactHTML, NonCompactHTMLStableIndent; --non-compact-html / --non-compact-html-indent (ARCH-GOAGENT-CLI / REQ-GOAGENT-CLI-CONFIG)"
+        path: "tools/agentstream/config/config.go"
+      - description: "APPLY_TO_TURNS, FormatNonCompactHTML, addNonCompactLineBreaks, applyStableIndentLines, IntegrateWithMain (htmlformat; REQ/ARCH/IMPL IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT)"
+        path: "tools/agentstream/htmlformat/htmlformat.go"
     functions: []
   cross_references:
     - "ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT"
@@ -494,8 +494,8 @@ IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT:
   essence_pseudocode: "# [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT]\n# Summary: When enabled, a single post-pipeline, post-ApplyPromptFilePreload pass reformats each string in Turn.Parts to non-compact UTF-8 HTML; ordering and ChainFromPrevious bits unchanged. Default: disabled.\n\n# [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT] — CONTRACT: INPUT, OUTPUT, DATA, CONTROL\n# INPUT: turns ([]Turn from IMPL-GOAGENT-PIPELINE.Build, after ReadPromptFilePreload/ApplyPromptFilePreload in IMPL-GOAGENT-CLI-CMD); options { enabled: bool, stable_indent: int } from resolved Config; body fragments may be markdown or plain from prior checklist/tdd/feature text render.\n# OUTPUT: same []Turn length, order, and field shapes; only string elements in Parts are replaced when enabled.\n# DATA: []Turn, UTF-8 strings, determinism: identical logical input + same options => identical output string per part.\n# CONTROL: enabled is false on zero-args default; when false, this IMPL is a no-op. Does not re-parse YAML, change step ids, or call executor.\n\n# How: All REQ/ARCH behavior for the named transform lives here; other IMPLs do not embed HTML rules—only this procedure.\n\nprocedure APPLY_TO_TURNS(turns, options):\n  # [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT]\n  # How: No-op if options.enabled is false; else in-place FORMAT; propagate any FORMAT err\n  if not options.enabled:\n    return turns, nil\n  for each turn in turns:\n    for i, part in enumerate(turn.Parts):\n      s, err := FORMAT_NON_COMPACT_HTML(part, options)\n      if err != nil:\n        return nil, err\n      turn.Parts[i] = s\n  return turns, nil\n\nprocedure FORMAT_NON_COMPACT_HTML(part, options):\n  # [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT]\n  # How: map one part to stable line-broken form; pass-through when not options.enabled; empty part returns empty\n  if part == \"\":\n    return \"\", nil\n  if not options.enabled:\n    return part, nil\n  out := DETERMINISTIC_NON_COMPACT_HTML_FOR_PART(part, options)\n  return out, nil\n\nprocedure DETERMINISTIC_NON_COMPACT_HTML_FOR_PART(text, options):\n  # [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT]\n  # How: UTF-8: break at adjacent tags; else newline after first \">\"; else append newline; if stable_indent>0 prefix continuation lines. (Go: htmlformat package.)\n\n# [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT] and caller [IMPL-GOAGENT-CLI-CMD] [ARCH-GOAGENT-CLI] [REQ-GOAGENT-CLI-CONFIG] — INTEGRATE edge only.\nprocedure INTEGRATE_WITH_MAIN(cfg, turns, options):\n  if cfg is nil or turns is nil: return\n  if not (cfg has non-compact-HTML true): return\n  t2, err := APPLY_TO_TURNS(turns, options)\n  on err != nil: return error to main\n\n# [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-CLI] [REQ-GOAGENT-CLI-CONFIG] — How: map ParseAndResolve `config` to CfgForIntegrate + options; no I/O. Go: applyPostPreloadNonCompactHTML (cmd); composition-tested; then INTEGRATE_WITH_MAIN.\nprocedure MAP_CONFIG_TO_HTMLFORMAT_OPTIONS(resolved_config, turns):\n  # How: build ic and o; delegate to INTEGRATE_WITH_MAIN (in-place `turns`)\n  ic = { non_compact: resolved_config.NonCompactHTML }\n  o = { enabled: resolved_config.NonCompactHTML, stable_indent: resolved_config.NonCompactHTMLStableIndent }\n  return INTEGRATE_WITH_MAIN(ic, turns, o)\n\n# [PROC-IMPL_CODE_TEST_SYNC] Phase H — E2E e2e_only boundary: [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-MODULE_VALIDATION] [PROC-TEST_STRATEGY] [PROC-AGENT_REQ_CHECKLIST] — no e2e_only blocks; string transform and CLI are unit + composition; phase_h_tests []; named platform UI constraint n/a. IMPL-ATDD-E2E-AGENT_STREAM is a separate ATDD subprocess scope.\n"
   implementation_approach:
     details:
-      - "end-to-end-ui Phase H: no E2E-only UI for this IMPL; s11_phase_h e2e_only false; see detail file (REQ-MODULE_VALIDATION) [PROC-AGENT_REQ_CHECKLIST]"
       - "If scope later excludes feature-spec or verify, LEAP to narrow INTEGRATE_WITH_MAIN without changing FORMAT_NON_COMPACT_HTML"
+      - "end-to-end-ui Phase H: no E2E-only UI for this IMPL; s11_phase_h e2e_only false; see detail file (REQ-MODULE_VALIDATION) [PROC-AGENT_REQ_CHECKLIST]"
     summary: "Add Config flag; package under tools/agentstream (exact path in unit-test-green) implementing APPLY_TO_TURNS and formatters; wire in cmd/agentstream after ApplyPromptFilePreload. Tests in *_test.go reference REQ/IMPL tokens."
   metadata:
     created:
@@ -544,8 +544,8 @@ IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT:
 IMPL-GOAGENT-PIPELINE:
   code_locations:
     files:
-      - path: "tools/agentstream/pipeline/pipeline.go"
-        description: "[REQ-GOAGENT-PIPELINE-CHAIN] [ARCH-GOAGENT-PIPELINE] [IMPL-GOAGENT-PIPELINE]"
+      - description: "[REQ-GOAGENT-PIPELINE-CHAIN] [ARCH-GOAGENT-PIPELINE] [IMPL-GOAGENT-PIPELINE]"
+        path: "tools/agentstream/pipeline/pipeline.go"
   cross_references:
     - "ARCH-GOAGENT-PIPELINE"
     - "REQ-GOAGENT-PIPELINE-CHAIN"
@@ -594,8 +594,8 @@ IMPL-GOAGENT-PIPELINE:
 IMPL-GOAGENT-TDDLOOP:
   code_locations:
     files:
-      - path: "tools/agentstream/tddloop/tddloop.go"
-        description: "[REQ-GOAGENT-YAML-STEP-RENDER] [ARCH-GOAGENT-YAML-STEPS] [IMPL-GOAGENT-TDDLOOP]"
+      - description: "[REQ-GOAGENT-YAML-STEP-RENDER] [ARCH-GOAGENT-YAML-STEPS] [IMPL-GOAGENT-TDDLOOP]"
+        path: "tools/agentstream/tddloop/tddloop.go"
   cross_references:
     - "ARCH-GOAGENT-YAML-STEPS"
     - "REQ-GOAGENT-YAML-STEP-RENDER"
@@ -640,8 +640,8 @@ IMPL-GOAGENT-TDDLOOP:
 IMPL-GOAGENT-TEXT-SOURCES:
   code_locations:
     files:
-      - path: "tools/agentstream/text/text.go"
-        description: "[REQ-GOAGENT-TEXT-SOURCES] [ARCH-GOAGENT-TEXT-SOURCES] [IMPL-GOAGENT-TEXT-SOURCES]"
+      - description: "[REQ-GOAGENT-TEXT-SOURCES] [ARCH-GOAGENT-TEXT-SOURCES] [IMPL-GOAGENT-TEXT-SOURCES]"
+        path: "tools/agentstream/text/text.go"
   cross_references:
     - "ARCH-GOAGENT-TEXT-SOURCES"
     - "REQ-GOAGENT-TEXT-SOURCES"
@@ -686,25 +686,25 @@ IMPL-GOAGENT-TEXT-SOURCES:
 IMPL-MCP_FEEDBACK_TOOLS:
   code_locations:
     files:
-      - path: "mcp-server/src/feedback.ts"
-        description: "Feedback load/append/export logic [REQ-FEEDBACK_TO_TIED] [ARCH-FEEDBACK_STORAGE] [IMPL-MCP_FEEDBACK_TOOLS]"
-      - path: "mcp-server/src/feedback.test.ts"
-        description: "Unit tests for feedback module"
-      - path: "mcp-server/src/tools/index.ts"
-        description: "Tool handlers tied_feedback_add, tied_feedback_export"
+      - description: "Feedback load/append/export logic [REQ-FEEDBACK_TO_TIED] [ARCH-FEEDBACK_STORAGE] [IMPL-MCP_FEEDBACK_TOOLS]"
+        path: "mcp-server/src/feedback.ts"
+      - description: "Unit tests for feedback module"
+        path: "mcp-server/src/feedback.test.ts"
+      - description: "Tool handlers tied_feedback_add, tied_feedback_export"
+        path: "mcp-server/src/tools/index.ts"
     functions:
-      - name: "loadFeedback"
-        description: "Load feedback.yaml or default structure"
+      - description: "Load feedback.yaml or default structure"
         file: "mcp-server/src/feedback.ts"
-      - name: "appendEntry"
-        description: "Append one entry with id and created_at"
+        name: "loadFeedback"
+      - description: "Append one entry with id and created_at"
         file: "mcp-server/src/feedback.ts"
-      - name: "exportMarkdown"
-        description: "Export entries as markdown for TIED report"
+        name: "appendEntry"
+      - description: "Export entries as markdown for TIED report"
         file: "mcp-server/src/feedback.ts"
-      - name: "exportJson"
-        description: "Export entries as JSON string"
+        name: "exportMarkdown"
+      - description: "Export entries as JSON string"
         file: "mcp-server/src/feedback.ts"
+        name: "exportJson"
   cross_references:
     - "ARCH-FEEDBACK_STORAGE"
     - "REQ-FEEDBACK_TO_TIED"
@@ -759,31 +759,31 @@ IMPL-MCP_FEEDBACK_TOOLS:
 IMPL-MCP_LEAP_PROPOSAL_QUEUE:
   code_locations:
     files:
-      - path: "mcp-server/src/analysis/leap-proposal-queue.ts"
-        description: "Queue, audit, extractDiffProposalCandidates, parseSessionExportSegments [REQ-LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [IMPL-MCP_LEAP_PROPOSAL_QUEUE]"
-      - path: "mcp-server/src/analysis/leap-proposal-queue.test.ts"
-        description: "Unit tests for queue and session parsing"
-      - path: "mcp-server/src/tools/index.ts"
-        description: "tied_leap_proposal_* handlers and safeLeapCall"
-      - path: "mcp-server/src/tools/leap-proposal-mcp.test.ts"
-        description: "Composition tests — MCP handler wiring to leap-proposal-queue (no UI) [REQ-LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [IMPL-MCP_LEAP_PROPOSAL_QUEUE]"
+      - description: "Queue, audit, extractDiffProposalCandidates, parseSessionExportSegments [REQ-LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [IMPL-MCP_LEAP_PROPOSAL_QUEUE]"
+        path: "mcp-server/src/analysis/leap-proposal-queue.ts"
+      - description: "Unit tests for queue and session parsing"
+        path: "mcp-server/src/analysis/leap-proposal-queue.test.ts"
+      - description: "tied_leap_proposal_* handlers and safeLeapCall"
+        path: "mcp-server/src/tools/index.ts"
+      - description: "Composition tests — MCP handler wiring to leap-proposal-queue (no UI) [REQ-LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [IMPL-MCP_LEAP_PROPOSAL_QUEUE]"
+        path: "mcp-server/src/tools/leap-proposal-mcp.test.ts"
     functions:
-      - name: "loadQueue"
-        description: "Read queue.json or empty default; strip UTF-8 BOM before parse; DIAGNOSTIC on parse failure"
+      - description: "Read queue.json or empty default; strip UTF-8 BOM before parse; DIAGNOSTIC on parse failure"
         file: "mcp-server/src/analysis/leap-proposal-queue.ts"
-      - name: "extractDiffProposalCandidates"
-        description: "Deterministic git + line scan; outer catch returns error field"
+        name: "loadQueue"
+      - description: "Deterministic git + line scan; outer catch returns error field"
         file: "mcp-server/src/analysis/leap-proposal-queue.ts"
+        name: "extractDiffProposalCandidates"
   cross_references:
     - "ARCH-LEAP_PROPOSAL_QUEUE"
     - "REQ-LEAP_PROPOSAL_QUEUE"
   detail_file: "implementation-decisions/IMPL-MCP_LEAP_PROPOSAL_QUEUE.yaml"
   implementation_approach:
     details:
-      - "end-to-end-ui Phase H: no E2E-only UI surface; composition tests (leap-proposal-mcp.test.ts) authoritative for MCP bindings"
-      - "extractDiffProposalCandidates: git diff + lines; failure returns { error } without throw"
       - "MCP handlers use safeLeapCall for fs/git throws"
       - "Paths: {projectRoot}/leap-proposals/queue.json and audit-log.jsonl"
+      - "end-to-end-ui Phase H: no E2E-only UI surface; composition tests (leap-proposal-mcp.test.ts) authoritative for MCP bindings"
+      - "extractDiffProposalCandidates: git diff + lines; failure returns { error } without throw"
       - "sync-tied-stack [PROC-AGENT_REQ_CHECKLIST] TIED sync — REQ/ARCH traceability.tests include leap-proposal-mcp.test.ts; index/detail + semantic-tokens metadata; validateConsistency(stdd/tied) ok; MCP tied_validate_consistency ok (workspace tied/)"
       - "verification-gate Phase I: full suite + tsc + validateConsistency(TIED_BASE_PATH=stdd/tied); completion_evidence in CITDP; module validation in s12_phase_i"
     summary: "leap-proposal-queue.ts (queue, audit, diff/session helpers); tools/index.ts tied_leap_proposal_*; safeLeapCall wraps sync throws"
@@ -844,18 +844,18 @@ IMPL-MCP_LEAP_PROPOSAL_QUEUE:
 IMPL-MCP_USAGE_METRICS:
   code_locations:
     files:
-      - path: "mcp-server/src/usage-metrics.ts"
-        description: "Env gate, sanitizeArgs, JSONL append, wrapToolHandler [REQ-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS]"
-      - path: "mcp-server/src/usage-metrics.test.ts"
-        description: "Unit tests for metrics module"
-      - path: "mcp-server/src/index.ts"
-        description: "Registers wrapToolHandler when metrics enabled"
-      - path: "tools/bundled-tied-yaml-skill/scripts/tied-cli.sh"
-        description: "Exports TIED_MCP_METRICS_CLIENT=tied-cli when collection enabled"
-      - path: "scripts/analyze_tied_mcp_metrics.rb"
-        description: "Offline JSONL aggregator"
-      - path: "scripts/analyze_tied_mcp_metrics_test.rb"
-        description: "Smoke test for aggregator"
+      - description: "Env gate, sanitizeArgs, JSONL append, wrapToolHandler [REQ-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS]"
+        path: "mcp-server/src/usage-metrics.ts"
+      - description: "Unit tests for metrics module"
+        path: "mcp-server/src/usage-metrics.test.ts"
+      - description: "Registers wrapToolHandler when metrics enabled"
+        path: "mcp-server/src/index.ts"
+      - description: "Exports TIED_MCP_METRICS_CLIENT=tied-cli when collection enabled"
+        path: "tools/bundled-tied-yaml-skill/scripts/tied-cli.sh"
+      - description: "Offline JSONL aggregator"
+        path: "scripts/analyze_tied_mcp_metrics.rb"
+      - description: "Smoke test for aggregator"
+        path: "scripts/analyze_tied_mcp_metrics_test.rb"
   cross_references:
     - "ARCH-MCP_USAGE_METRICS"
     - "REQ-MCP_USAGE_METRICS"
@@ -914,16 +914,16 @@ IMPL-MCP_USAGE_METRICS:
 IMPL-MODULE_VALIDATION:
   code_locations:
     files:
-      - path: "*_module_test.[ext]"
-        description: "Module validation test files"
-      - path: "*_validation_test.[ext]"
-        description: "Module validation test files (alternate pattern)"
-      - path: "*_integration_test.[ext]"
-        description: "Integration test files"
+      - description: "Module validation test files"
+        path: "*_module_test.[ext]"
+      - description: "Module validation test files (alternate pattern)"
+        path: "*_validation_test.[ext]"
+      - description: "Integration test files"
+        path: "*_integration_test.[ext]"
     functions:
-      - name: "testModuleName_IndependentValidation_REQ_MODULE_VALIDATION"
-        description: "Module validation test function pattern"
+      - description: "Module validation test function pattern"
         file: "various test files"
+        name: "testModuleName_IndependentValidation_REQ_MODULE_VALIDATION"
   cross_references:
     - "ARCH-MODULE_VALIDATION"
     - "REQ-MODULE_VALIDATION"
@@ -1086,11 +1086,11 @@ IMPL-QUALITY_TEST_ADEQUACY:
 IMPL-TIED_FILES:
   code_locations:
     files:
-      - path: "copy_files.sh"
-        description: "Bootstrap script that sets up TIED structure"
+      - description: "Bootstrap script that sets up TIED structure"
         lines:
           - "1"
           - "386"
+        path: "copy_files.sh"
   cross_references:
     - "ARCH-TIED_STRUCTURE"
     - "REQ-TIED_SETUP"
@@ -1098,9 +1098,9 @@ IMPL-TIED_FILES:
   implementation_approach:
     details:
       - "Additive vocabulary merge mode: copy_files.sh --merge-vocab copies only absent TIED_SOURCE/tied/vocab/*.md filenames and reports added versus preserved files; existing client vocabulary remains authoritative."
+      - "Copy YAML index files from templates (requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml)"
       - "Copy base files to project root when missing (.cursorrules, AGENTS.md). In a TIED source repository, live guide content is under tied/docs/; agents and preload use client ./tied/docs/ paths and ./tied/agent-preload-contract.yaml."
       - "Copy guide .md files, detail-files-schema.md, preload contract templates, and reference docs from TIED source tied/docs/ into client tied/docs/ when missing (per DOCS_TO_COPY in copy_files.sh)"
-      - "Copy YAML index files from templates (requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml)"
       - "Create detail subdirectories (requirements/, architecture-decisions/, implementation-decisions/)"
       - "Create tied/ directory at project root"
       - "DOCS_TO_COPY now installs methodology-migration.md, composition-coverage.md, and the quality-assurance command, pilot, and evidence-manifest guides when missing."
@@ -1151,3 +1151,56 @@ IMPL-TIED_FILES:
       - "REQ-TIED_SETUP"
     tests:
       - "mcp-server/src/e2e/bootstrap-and-load.test.ts"
+IMPL-TIED_YAML_CANONICALIZER:
+  cross_references:
+    - "ARCH-TIED_YAML_CANONICAL_PROFILE"
+    - "ARCH-TIED_YAML_STYLE_RESOLUTION"
+    - "IMPL-TIED_FILES"
+    - "REQ-MODULE_VALIDATION"
+    - "REQ-TIED_YAML_CANONICALIZATION"
+    - "REQ-TIED_YAML_STYLE_CONFIGURATION"
+  description: "Shared typed canonicalizer, atomic writer, format metadata, MCP writer integration, and compatibility frontend delegation."
+  detail_file: "implementation-decisions/IMPL-TIED_YAML_CANONICALIZER.yaml"
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-06"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-06"
+      reason: "Define canonicalizer implementation before RED tests"
+  name: "Shared typed TIED YAML canonicalizer"
+  status: "Active"
+  type: "IMPL"
+IMPL-TIED_YAML_STYLE_RESOLVER:
+  cross_references:
+    - "ARCH-TIED_YAML_STYLE_RESOLUTION"
+    - "IMPL-TIED_YAML_CANONICALIZER"
+    - "REQ-MODULE_VALIDATION"
+    - "REQ-TIED_YAML_STYLE_CONFIGURATION"
+  description: "Resolve repository-over-global YAML scalar style and route canonical serialization, MCP writers, tied-cli.sh, and yaml_tool through the resolved policy."
+  detail_file: "implementation-decisions/IMPL-TIED_YAML_STYLE_RESOLVER.yaml"
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-06"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-06"
+      reason: "Implement shared repository-wide YAML scalar style policy"
+  name: "Shared YAML scalar style resolver"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_YAML_CANONICAL_PROFILE"
+      - "ARCH-TIED_YAML_STYLE_RESOLUTION"
+    code_annotations:
+      - "IMPL-TIED_YAML_STYLE_RESOLVER"
+    requirements:
+      - "REQ-TIED_YAML_CANONICALIZATION"
+      - "REQ-TIED_YAML_STYLE_CONFIGURATION"
+    tests:
+      - "mcp-server/src/tools/yaml-canonicalization-mcp.test.ts"
+      - "mcp-server/src/yaml-canonicalizer.test.ts"
+      - "mcp-server/src/yaml-style-config.test.ts"
+      - "scripts/yaml_list_sorter_test.rb"

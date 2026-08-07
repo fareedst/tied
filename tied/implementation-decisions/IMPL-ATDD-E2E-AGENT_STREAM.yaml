@@ -1,8 +1,8 @@
 IMPL-ATDD-E2E-AGENT_STREAM:
   code_locations:
     files:
-      - path: "tools/agent-stream/run_agent_stream.rb"
-        description: "[REQ-ATDD-E2E-AGENT_STREAM] [ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON] [IMPL-ATDD-E2E-AGENT_STREAM] main and run_stream"
+      - description: "[REQ-ATDD-E2E-AGENT_STREAM] [ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON] [IMPL-ATDD-E2E-AGENT_STREAM] main and run_stream"
+        path: "tools/agent-stream/run_agent_stream.rb"
   cross_references:
     - "ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON"
     - "REQ-ATDD-E2E-AGENT_STREAM"
@@ -10,8 +10,8 @@ IMPL-ATDD-E2E-AGENT_STREAM:
   detail_file: "implementation-decisions/IMPL-ATDD-E2E-AGENT_STREAM.yaml"
   implementation_approach:
     details:
-      - "extract_text_fragments for thinking and assistant events"
       - "Open3.popen3 streaming"
+      - "extract_text_fragments for thinking and assistant events"
     summary: "For each turn build argv for agent CLI; run_stream parses NDJSON; dry-run mode skips subprocess"
   metadata:
     created:

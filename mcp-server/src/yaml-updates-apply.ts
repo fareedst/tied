@@ -6,6 +6,7 @@ import { loadDetail, updateDetail } from "./detail-loader.js";
 import { getRecord, updateRecord, type IndexName } from "./yaml-loader.js";
 import { mergeRecordUpdate } from "./record-merge.js";
 import { validateConsistency, type ConsistencyReport } from "./consistency-validator.js";
+import { formatYamlMetadata, type YamlFormatMetadata } from "./yaml-canonicalizer.js";
 
 const INDEX_NAMES = new Set<string>([
   "requirements",
@@ -93,6 +94,7 @@ export interface ApplyYamlUpdatesResult {
   step_results: YamlUpdateStepResult[];
   error?: string;
   consistency?: ConsistencyReport;
+  yaml_format?: YamlFormatMetadata;
 }
 
 function simulateStep(step: YamlUpdateStep, stepIndex: number): YamlUpdateStepResult {
@@ -183,6 +185,7 @@ export function applyYamlUpdates(options: ApplyYamlUpdatesOptions): ApplyYamlUpd
       applied_steps: steps.length,
       step_results,
       consistency,
+      yaml_format: formatYamlMetadata(),
     };
     if (!consistency.ok) {
       return {
@@ -199,5 +202,6 @@ export function applyYamlUpdates(options: ApplyYamlUpdatesOptions): ApplyYamlUpd
     dry_run,
     applied_steps: dry_run ? 0 : steps.length,
     step_results,
+    ...(dry_run ? {} : { yaml_format: formatYamlMetadata() }),
   };
 }

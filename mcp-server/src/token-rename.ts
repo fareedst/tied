@@ -1,15 +1,15 @@
 /**
  * Rename a single semantic token across the TIED tree: YAML indexes, detail files, and file names.
  * Optionally substitutes in extra client-repo files via extra_globs / extra_extensions.
- * Uses exact string replacement; validates and pretty-prints YAML with yq when available (one yq sort_keys(.. style="double") per file).
+ * Uses exact string replacement; canonicalizes YAML through the shared profile with atomic failure preservation.
  */
 
-import { spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import fg from "fast-glob";
 import { getBasePath, getClientProjectRoot, loadIndex, getWritableIndexPath, type IndexName } from "./yaml-loader.js";
 import { getDetailPath, getImplPseudocodeSidecarPath } from "./detail-loader.js";
+import { formatYamlMetadata, writeCanonicalYamlTextAtomic, type YamlFormatMetadata } from "./yaml-canonicalizer.js";
 
 const INDEX_FILES: IndexName[] = [
   "semantic-tokens",
@@ -65,6 +65,7 @@ export interface RenameTokenResult {
   files_skipped?: string[];
   errors?: string[];
   dry_run?: boolean;
+  yaml_format?: YamlFormatMetadata;
 }
 
 /**
@@ -171,7 +172,17 @@ function applySubstitutionInFile(
     return;
   }
   try {
-    fs.writeFileSync(filePath, newContent, "utf8");
+    if (filePath.endsWith(".yaml")) {
+      // [IMPL-TIED_YAML_STYLE_RESOLVER] [ARCH-TIED_YAML_STYLE_RESOLUTION] [REQ-TIED_YAML_STYLE_CONFIGURATION] [REQ-MODULE_VALIDATION]
+      // How: Apply token substitution through the resolved repository scalar style and shared atomic writer.
+      const result = writeCanonicalYamlTextAtomic(filePath, newContent);
+      if (!result.ok) {
+        errors.push(`Failed to canonicalize ${filePath}: ${result.error}`);
+        return;
+      }
+    } else {
+      fs.writeFileSync(filePath, newContent, "utf8");
+    }
     filesModified.push(filePath);
   } catch (e) {
     const message = e instanceof Error ? e.message : String(e);
@@ -179,23 +190,11 @@ function applySubstitutionInFile(
   }
 }
 
-/** Same expression as scripts/yaml_tool.sh default lint [PROC-YAML_EDIT_LOOP]. */
-const YQ_CANONICALIZE_EXPR = 'sort_keys(.. style="double")';
-
-function runYqPrettyPrint(filePath: string): { ok: boolean; error?: string } {
-  const result = spawnSync("yq", ["-i", YQ_CANONICALIZE_EXPR, filePath], { encoding: "utf8" });
-  if (result.status !== 0) {
-    const stderr = result.stderr?.trim() || result.error?.message || String(result.status);
-    return { ok: false, error: stderr };
-  }
-  return { ok: true };
-}
-
 /**
  * Rename a single semantic token across the TIED tree and optional extra substitution targets.
  * Replaces exact string old_token with new_token in all YAML (and optionally docs/processes.md and client-repo files).
  * Renames the detail file for REQ/ARCH/IMPL when it exists.
- * Runs yq -i 'sort_keys(.. style="double")' on each modified YAML file when yq is available (one path per process; multi-arg yq -i merges documents).
+ * Canonicalizes substituted YAML through tied-yaml-canonical-v1 with atomic failure preservation.
  */
 export function renameSemanticToken(
   oldToken: string,
@@ -276,14 +275,6 @@ export function renameSemanticToken(
     }
   }
 
-  if (!dryRun && filesModified.length > 0) {
-    for (const filePath of filesModified) {
-      if (filePath.endsWith(".yaml")) {
-        runYqPrettyPrint(filePath);
-      }
-    }
-  }
-
   if (tokenIndex !== null && !dryRun) {
     const detailPath = getDetailPath(oldToken);
     if (detailPath && fs.existsSync(detailPath)) {
@@ -325,5 +316,9 @@ export function renameSemanticToken(
     files_skipped: filesSkipped.length > 0 ? filesSkipped : undefined,
     errors: errors.length > 0 ? errors : undefined,
     dry_run: dryRun,
+    yaml_format:
+      !dryRun && errors.length === 0 && filesModified.some((filePath) => filePath.endsWith(".yaml"))
+        ? formatYamlMetadata()
+        : undefined,
   };
 }

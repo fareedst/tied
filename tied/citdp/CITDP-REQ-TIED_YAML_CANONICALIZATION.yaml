@@ -1,0 +1,60 @@
+CITDP-REQ-TIED_YAML_CANONICALIZATION:
+  change_definition:
+    scope_in:
+      - "MCP index/detail/rename writes"
+      - "atomic writes"
+      - "format metadata operation"
+      - "yaml_semantic_compare ordered-list semantics"
+      - "yaml_tool default lint"
+    scope_out:
+      - "Changing IMPL pseudo-code sidecar semantics"
+      - "Migration of historical YAML bytes unrelated to touched writers"
+    summary: "Replace split yq/Ruby YAML serialization with shared typed tied-yaml-canonical-v1 canonicalization across MCP and compatibility frontends."
+  change_id: "REQ-TIED_YAML_CANONICALIZATION"
+  impact_analysis:
+    architecture:
+      - "ARCH-TIED_YAML_CANONICAL_PROFILE"
+    implementation:
+      - "IMPL-TIED_FILES"
+      - "IMPL-TIED_YAML_CANONICALIZER"
+    modules:
+      - "mcp-server/src/detail-loader.ts"
+      - "mcp-server/src/token-rename.ts"
+      - "mcp-server/src/tools/index.ts"
+      - "mcp-server/src/yaml-canonicalizer.ts"
+      - "mcp-server/src/yaml-loader.ts"
+      - "scripts/yaml_semantic_compare.rb"
+      - "scripts/yaml_tool.sh"
+    requirements:
+      - "REQ-MODULE_VALIDATION"
+      - "REQ-TIED_SETUP"
+      - "REQ-TIED_YAML_CANONICALIZATION"
+  implementation_status: "Implemented and validated in current worktree"
+  module_validation:
+    canonicalizer: "validated by 5 passing unit tests covering ordering, list exceptions, scalar types, opaque block text, metadata, and invalid-input preservation"
+    cli_frontend: "validated by yaml_list_sorter_test.rb with all assertions passing"
+    writer_integration: "validated by the complete MCP suite: 151 passing tests, including canonicalizer unit tests, UI-free MCP composition, detail sidecars, rename, loader paths, and existing writer tests"
+  residual_work:
+    - "Add exhaustive composition fixtures for every feedback, verification, batch, and CITDP writer family"
+    - "Add shared cross-frontend fixture corpus and explicit yaml_format assertions to each writer response"
+  risk_assessment:
+    - mitigation: "Typed js-yaml round trip, profile fixtures, and compatibility tests assert booleans/numbers/null remain typed."
+      risk: "Canonical output changes historical formatting or scalar types"
+    - mitigation: "Protect order/order_*/ *_order / *_order_* keys in canonicalizer, sorter, and semantic compare."
+      risk: "Ordered workflow lists are reordered"
+    - mitigation: "Temporary-file write followed by atomic rename; invalid-input test verifies original bytes remain."
+      risk: "Failed parse or rename leaves partial files"
+    - mitigation: "Both use the same canonicalizer module/profile metadata and TIED consistency validation passes."
+      risk: "MCP and CLI drift"
+  test_strategy:
+    compatibility:
+      - "ruby -c scripts/yaml_semantic_compare.rb"
+      - "scripts/yaml_list_sorter_test.rb"
+    composition:
+      - "MCP build and writer integration tests for detail, index, rename, and metadata operation"
+      - "mcp-server/src/tools/yaml-canonicalization-mcp.test.ts — UI-free handler binding for tied_yaml_format and yaml_index_insert"
+    unit:
+      - "mcp-server/src/yaml-canonicalizer.test.ts"
+    validation:
+      - "npm test (151 passing)"
+      - "tied_validate_consistency"

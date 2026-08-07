@@ -1,0 +1,40 @@
+REQ-TIED_YAML_STYLE_CONFIGURATION:
+  category: "Functional"
+  cross_references:
+    - "ARCH-TIED_YAML_STYLE_RESOLUTION"
+    - "REQ-MODULE_VALIDATION"
+    - "REQ-TIED_YAML_CANONICALIZATION"
+  description: "A repository MAY select unwrapped or wrapped scalar style through .tied-yaml.yaml. Repository configuration overrides global TIED_YAML_STYLE and global config, and unconfigured repositories default to unwrapped. Wrapped quotes string scalars only while preserving boolean, number, and null types. yaml_tool, MCP writers, and tied-cli.sh MUST resolve and apply the same style."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-06"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-06"
+      reason: "Define enforceable repository-wide YAML scalar style alignment"
+  name: "Repository-wide YAML scalar style configuration"
+  priority: "P0"
+  rationale:
+    benefits:
+      - "Cross-surface deterministic output"
+      - "One enforceable style policy"
+      - "Typed scalar preservation in wrapped mode"
+    problems_solved:
+      - "Global defaults cannot be overridden per repository"
+      - "MCP writes can differ from yaml_tool output"
+      - "No repository control for scalar quote style"
+    why: "MCP and lint output must not drift when a repository selects a formatting convention."
+  satisfaction_criteria:
+    - criterion: "MCP, tied-cli.sh, yaml_tool default lint, and yaml_tool --sort-lists produce the configured scalar style"
+    - criterion: "Repository .tied-yaml.yaml scalar_style selects unwrapped or wrapped"
+    - criterion: "Repository configuration overrides global fallback and invalid explicit configuration fails clearly"
+    - criterion: "Wrapped mode double-quotes strings while preserving boolean, number, and null types"
+    - criterion: "yaml_format reports the resolved scalar_style and configuration source"
+  validation_criteria:
+    - coverage: "Configuration precedence and invalid values"
+      method: "YAML style resolver unit tests"
+    - coverage: "MCP metadata and writer bytes for both styles"
+      method: "UI-free MCP composition tests"
+    - coverage: "Default lint and list-sort compatibility under both styles"
+      method: "Ruby yaml_tool integration tests"

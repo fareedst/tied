@@ -45,7 +45,7 @@ REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML:
     tests:
       - "agent_stream_tdd_yaml_binding_test.rb"
   validation_criteria:
-    - method: "Composition tests (upstream atdd)"
-      coverage: "test/composition/agent_stream_tdd_yaml_binding_test.rb"
-    - method: "Vendored code review"
-      coverage: "tools/agent-stream/lib/agent_stream_argv.rb, lib/tdd_loop_prompts.rb"
+    - coverage: "test/composition/agent_stream_tdd_yaml_binding_test.rb"
+      method: "Composition tests (upstream atdd)"
+    - coverage: "tools/agent-stream/lib/agent_stream_argv.rb, lib/tdd_loop_prompts.rb"
+      method: "Vendored code review"

@@ -1,14 +1,14 @@
 IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER:
   code_locations:
     files:
-      - path: "mcp-server/src/quality-command-runner.ts"
-        description: "Shell-free bounded quality command executor"
-      - path: "mcp-server/src/quality-command-runner.test.ts"
-        description: "Unit tests for command execution, provenance, and artifacts"
+      - description: "Shell-free bounded quality command executor"
+        path: "mcp-server/src/quality-command-runner.ts"
+      - description: "Unit tests for command execution, provenance, and artifacts"
+        path: "mcp-server/src/quality-command-runner.test.ts"
     functions:
-      - name: "runDeclaredQualityCommands"
-        description: "Execute declared argv commands and capture evidence"
+      - description: "Execute declared argv commands and capture evidence"
         file: "mcp-server/src/quality-command-runner.ts"
+        name: "runDeclaredQualityCommands"
   cross_references:
     - "ARCH-QUALITY_ASSURANCE_PROFILES"
     - "IMPL-QUALITY_EVIDENCE_COLLECTION"

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# [PROC-YAML_EDIT_LOOP] [REQ-TIED_SETUP]
-# How: Default lint canonicalizes each YAML path with yq -i 'sort_keys(.. style="double")' (one file per invocation; recursive key sort + double-quoted scalars; bool/int become string scalars); --sort-lists runs yaml_list_sorter.rb (skips lists under keys matching order / *_order / order_* / *_order_*); --sort-keys forwards optional map-key sort to the Ruby sorter.
+# [PROC-YAML_EDIT_LOOP] [REQ-TIED_SETUP] [REQ-TIED_YAML_CANONICALIZATION] [REQ-TIED_YAML_STYLE_CONFIGURATION]
+# How: Default lint and compatibility sorting delegate serialization to the built canonicalizer, which resolves repository-over-global scalar style.
 set -euo pipefail
 
 tool_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
@@ -8,7 +8,8 @@ operation=lint
 
 usage() {
   printf 'usage: %s [options] [(-0|--null) | (-F|--find) [DIR [GLOB]]] [--] [file ...]\n' "${0##*/}" 1>&2
-  printf '  Default: canonicalize each YAML file (yq sort_keys(.. style="double"), one file per invocation).\n' 1>&2
+  printf '  Default: canonicalize each YAML file with tied-yaml-canonical-v1, one file per invocation.\n' 1>&2
+  printf '  --check      fail when a file is not in the resolved canonical style; do not rewrite.\n' 1>&2
   printf '  --sort-lists  sort qualifying list groups in place (Ruby); same file selection as default.\n' 1>&2
   printf '               Skips lists under map keys matching order / *_order / order_* / *_order_*.\n' 1>&2
   printf '               Rejects the sort when semantic comparison fails (file unchanged).\n' 1>&2
@@ -24,30 +25,18 @@ usage() {
 }
 
 lint_yaml_files() {
-  local file
-  local rc=0
-
-  for file in "$@"; do
-    if [ ! -e "$file" ]; then
-      printf 'yaml_tool: not found: %s\n' "$file" 1>&2
-      rc=1
-      continue
-    fi
-    if [ ! -f "$file" ]; then
-      printf 'yaml_tool: not a regular file: %s\n' "$file" 1>&2
-      rc=1
-      continue
-    fi
-
-    # IMPORTANT: do not pass multiple files to one yq invocation.
-    # Multi-arg yq pretty-print can merge documents and corrupt the target.
-
-    # 2026-07-29 this format matches what Cursor generates, plus sorting
-    yq -i 'sort_keys(.. style="double")' "$file" || rc=$?
-
-  done
-
-  return "$rc"
+  local repo_root
+  repo_root=$(cd "${tool_dir}/.." && pwd)
+  local cli="${repo_root}/mcp-server/dist/cli/yaml-canonicalizer.js"
+  if [ ! -f "$cli" ]; then
+    printf 'yaml_tool: built canonicalizer not found: %s\n' "$cli" 1>&2
+    return 1
+  fi
+  if [ "$check_mode" = true ]; then
+    node "$cli" --check "$@"
+  else
+    node "$cli" "$@"
+  fi
 }
 
 sort_yaml_list_files() {
@@ -65,8 +54,11 @@ sort_yaml_list_files() {
   local rc=$?
   if [ "$rc" -ne 0 ]; then
     printf 'yaml_tool: --sort-lists finished with exit %s (see yaml_list_sorter summary above)\n' "$rc" 1>&2
+    return "$rc"
   fi
-  return "$rc"
+  # [IMPL-TIED_YAML_STYLE_RESOLVER] [ARCH-TIED_YAML_STYLE_RESOLUTION] [REQ-TIED_YAML_STYLE_CONFIGURATION]
+  # How: Re-run the shared canonicalizer after Ruby ordering so list sorting cannot leave scalar style divergent.
+  lint_yaml_files "$@"
 }
 
 null_delim=false
@@ -74,6 +66,7 @@ find_mode=false
 find_base='.'
 find_name='*.yaml'
 sort_keys=false
+check_mode=false
 
 while [ "$#" -gt 0 ]; do
   case "$1" in
@@ -87,6 +80,10 @@ while [ "$#" -gt 0 ]; do
       ;;
     --sort-keys)
       sort_keys=true
+      shift
+      ;;
+    --check)
+      check_mode=true
       shift
       ;;
     -0 | --null)
@@ -140,6 +137,11 @@ fi
 
 if [ "$sort_keys" = true ] && [ "$operation" != sort_lists ]; then
   printf '%s: --sort-keys requires --sort-lists\n' "${0##*/}" 1>&2
+  usage
+fi
+
+if [ "$check_mode" = true ] && [ "$operation" = sort_lists ]; then
+  printf '%s: --check cannot be combined with --sort-lists\n' "${0##*/}" 1>&2
   usage
 fi
 

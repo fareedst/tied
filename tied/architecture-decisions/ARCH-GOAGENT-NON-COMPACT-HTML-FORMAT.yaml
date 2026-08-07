@@ -1,15 +1,15 @@
 ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT:
   alternatives_considered:
-    - name: "Require authors to hand-edit HTML in YAML"
-      cons:
+    - cons:
         - "Error-prone"
         - "no non-compact contract in code"
+      name: "Require authors to hand-edit HTML in YAML"
       pros:
         - "No new formatter"
       rejected_reason: "REQ demands a testable, programmatic non-compact mode"
-    - name: "Delegate pretty HTML entirely to a wrapper script outside agentstream"
-      cons:
+    - cons:
         - "No `agentstream` contract or traceability"
+      name: "Delegate pretty HTML entirely to a wrapper script outside agentstream"
       pros:
         - "Thin core"
       rejected_reason: "REQ is in-scope for tools/agentstream"

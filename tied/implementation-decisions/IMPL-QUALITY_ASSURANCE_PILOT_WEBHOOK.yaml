@@ -1,19 +1,19 @@
 IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK:
   code_locations:
     files:
-      - path: "pilot/webhook-inbox/src/server.mjs"
-        description: "Authenticated HTTP webhook handler and retry worker"
-      - path: "pilot/webhook-inbox/src/sqlite-store.mjs"
-        description: "SQLite CLI inbox persistence and state transitions"
-      - path: "pilot/webhook-inbox/test/webhook-inbox.test.mjs"
-        description: "Pilot authentication, idempotency, and retry tests"
+      - description: "Authenticated HTTP webhook handler and retry worker"
+        path: "pilot/webhook-inbox/src/server.mjs"
+      - description: "SQLite CLI inbox persistence and state transitions"
+        path: "pilot/webhook-inbox/src/sqlite-store.mjs"
+      - description: "Pilot authentication, idempotency, and retry tests"
+        path: "pilot/webhook-inbox/test/webhook-inbox.test.mjs"
     functions:
-      - name: "createWebhookInboxServer"
-        description: "Create bounded authenticated webhook HTTP server"
+      - description: "Create bounded authenticated webhook HTTP server"
         file: "pilot/webhook-inbox/src/server.mjs"
-      - name: "processDueEvents"
-        description: "Process pending events with bounded retries"
+        name: "createWebhookInboxServer"
+      - description: "Process pending events with bounded retries"
         file: "pilot/webhook-inbox/src/server.mjs"
+        name: "processDueEvents"
   cross_references:
     - "ARCH-QUALITY_ASSURANCE_PROFILES"
     - "REQ-QUALITY_ASSURANCE_EVIDENCE"

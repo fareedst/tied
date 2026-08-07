@@ -1,24 +1,24 @@
 ARCH-MODULE_VALIDATION:
   alternatives_considered:
-    - name: "Big Bang Integration"
-      cons:
+    - cons:
         - "Bugs compound during integration"
         - "Difficult to isolate issues"
         - "Too complex to debug"
+      name: "Big Bang Integration"
       pros:
         - "Faster initial integration"
       rejected_reason: "Makes debugging too difficult and bugs compound"
-    - name: "Minimal Validation"
-      cons:
+    - cons:
         - "Doesn't validate contracts properly"
         - "Insufficient to catch complexity bugs"
+      name: "Minimal Validation"
       pros:
         - "Faster development cycle"
       rejected_reason: "Insufficient validation leads to integration issues"
-    - name: "Post-Integration Validation Only"
-      cons:
+    - cons:
         - "Doesn't catch module-level bugs early"
         - "Increases debugging complexity"
+      name: "Post-Integration Validation Only"
       pros:
         - "All validation done at once"
       rejected_reason: "Bugs discovered too late, making fixes expensive"

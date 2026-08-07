@@ -1,8 +1,8 @@
 ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS:
   alternatives_considered:
-    - name: "Duplicate YAML parsing in argv and export"
-      cons:
+    - cons:
         - "Drift risk"
+      name: "Duplicate YAML parsing in argv and export"
       pros:
         - "Localized code"
       rejected_reason: "ATDD centralizes in TddLoopPrompts"

@@ -1,14 +1,14 @@
 ARCH-QUALITY_ASSURANCE_PROFILES:
   alternatives_considered:
-    - name: "Universal quality checklist"
-      cons:
+    - cons:
         - "Imposes irrelevant ceremony and expensive evidence"
+      name: "Universal quality checklist"
       pros:
         - "Simple to describe"
       rejected_reason: "Conflicts with risk-triggered applicability."
-    - name: "TIED consistency as complete quality proof"
-      cons:
+    - cons:
         - "Does not exercise runtime security, performance, resilience, usability, or compliance behavior"
+      name: "TIED consistency as complete quality proof"
       pros:
         - "Uses an existing gate"
       rejected_reason: "Proof boundary is technically false."

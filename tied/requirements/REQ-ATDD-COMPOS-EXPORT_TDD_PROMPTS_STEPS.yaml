@@ -42,5 +42,5 @@ REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS:
     tests:
       - "export_tdd_prompts_binding_test.rb"
   validation_criteria:
-    - method: "Composition tests (upstream atdd)"
-      coverage: "test/composition/export_tdd_prompts_binding_test.rb"
+    - coverage: "test/composition/export_tdd_prompts_binding_test.rb"
+      method: "Composition tests (upstream atdd)"

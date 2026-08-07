@@ -95,7 +95,7 @@ class DifferenceWalker
 
   private
 
-  def compare(left, right, path, result)
+  def compare(left, right, path, result, ordered_key: false)
     if left.class != right.class
       result << "#{path}: type differs: left=#{type_and_value(left)}, right=#{type_and_value(right)}"
       return
@@ -105,7 +105,7 @@ class DifferenceWalker
     when Hash
       compare_hashes(left, right, path, result)
     when Array
-      if @unordered_arrays
+      if @unordered_arrays && !ordered_key
         compare_unordered_arrays(left, right, path, result)
       else
         compare_ordered_arrays(left, right, path, result)
@@ -130,8 +130,19 @@ class DifferenceWalker
     end
 
     (left_keys & right_keys).to_a.sort_by { |key| sort_key(key) }.each do |key|
-      compare(left[key], right[key], hash_path(path, key), result)
+      compare(
+        left[key],
+        right[key],
+        hash_path(path, key),
+        result,
+        ordered_key: ordered_list_key?(key)
+      )
     end
+  end
+
+  def ordered_list_key?(key)
+    key_text = key.to_s
+    key_text.match?(/\A(?:order|order_.+|.+_order|.+_order_.+)\z/)
   end
 
   def compare_ordered_arrays(left, right, path, result)

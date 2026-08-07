@@ -1,8 +1,3 @@
-# CITDP analysis record template
-#
-# Copy to tied/citdp/CITDP-{change_request_id}.yaml at the client project root,
-# replace placeholders, then lint per persist-citdp-record in docs/agent-req-implementation-checklist.yaml.
-# Policy: tied/docs/citdp-policy.md
 change_definition:
   current_behavior: "~"
   desired_behavior: "~"
@@ -31,8 +26,8 @@ record_identity:
 risk_analysis:
   abuse_cases: []
   quality_evidence_matrix:
-    - attribute: "baseline-functional"
-      applicability: "applicable"
+    - applicability: "applicable"
+      attribute: "baseline-functional"
       command_or_test: "~"
       evidence_method: "~"
       limitation: "~"

@@ -238,6 +238,30 @@ ARCH-TIED_STRUCTURE:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_YAML_CANONICAL_PROFILE:
+  cross_references:
+    - "ARCH-MODULE_VALIDATION"
+    - "ARCH-TIED_STRUCTURE"
+    - "REQ-TIED_SETUP"
+    - "REQ-TIED_YAML_CANONICALIZATION"
+  description: "Shared typed tied-yaml-canonical-v1 serialization profile"
+  detail_file: "architecture-decisions/ARCH-TIED_YAML_CANONICAL_PROFILE.yaml"
+  metadata:
+    last_updated: "2026-08-06T00:00:00.000Z"
+    registered: "2026-08-06T00:00:00.000Z"
+  name: "Shared typed canonical YAML profile"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
+ARCH-TIED_YAML_STYLE_RESOLUTION:
+  cross_references:
+    - "IMPL-TIED_YAML_STYLE_RESOLVER"
+    - "REQ-TIED_YAML_STYLE_CONFIGURATION"
+  description: "Repository configuration overrides global YAML style fallbacks for all TIED serialization surfaces."
+  name: "Shared repository YAML style resolution"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV:
   cross_references:
     - "ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS"
@@ -576,6 +600,30 @@ IMPL-TIED_FILES:
     last_updated: "2026-02-08T00:00:00.000Z"
     registered: "2025-12-18T00:00:00.000Z"
   name: "TIED File Creation"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-TIED_YAML_CANONICALIZER:
+  cross_references:
+    - "ARCH-TIED_YAML_CANONICAL_PROFILE"
+    - "IMPL-TIED_FILES"
+    - "REQ-MODULE_VALIDATION"
+    - "REQ-TIED_YAML_CANONICALIZATION"
+  description: "Shared typed canonicalizer, atomic writer, metadata, and compatibility frontend delegation"
+  detail_file: "implementation-decisions/IMPL-TIED_YAML_CANONICALIZER.yaml"
+  metadata:
+    last_updated: "2026-08-06T00:00:00.000Z"
+    registered: "2026-08-06T00:00:00.000Z"
+  name: "Shared typed TIED YAML canonicalizer"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-TIED_YAML_STYLE_RESOLVER:
+  cross_references:
+    - "ARCH-TIED_YAML_STYLE_RESOLUTION"
+    - "REQ-TIED_YAML_STYLE_CONFIGURATION"
+  description: "Resolve and apply repository-over-global scalar style through canonicalizer, lint, CLI, and MCP writers."
+  name: "Shared YAML scalar style resolver"
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
@@ -1140,6 +1188,29 @@ REQ-TIED_SETUP:
     last_updated: "2026-02-08T00:00:00.000Z"
     registered: "2025-11-08T00:00:00.000Z"
   name: "TIED Methodology Setup"
+  source_index: "requirements.yaml"
+  status: "Active"
+  type: "REQ"
+REQ-TIED_YAML_CANONICALIZATION:
+  category: "Functional"
+  cross_references:
+    - "ARCH-TIED_YAML_CANONICAL_PROFILE"
+    - "IMPL-TIED_YAML_CANONICALIZER"
+  description: "Deterministic typed TIED YAML canonicalization under one shared profile"
+  detail_file: "requirements/REQ-TIED_YAML_CANONICALIZATION.yaml"
+  metadata:
+    last_updated: "2026-08-06T00:00:00.000Z"
+    registered: "2026-08-06T00:00:00.000Z"
+  name: "Deterministic typed TIED YAML canonicalization"
+  source_index: "requirements.yaml"
+  status: "Planned"
+  type: "REQ"
+REQ-TIED_YAML_STYLE_CONFIGURATION:
+  cross_references:
+    - "ARCH-TIED_YAML_STYLE_RESOLUTION"
+    - "IMPL-TIED_YAML_STYLE_RESOLVER"
+  description: "Configurable repository-over-global wrapped or unwrapped YAML scalar style enforced by lint, CLI, and MCP writers."
+  name: "Repository-wide YAML scalar style configuration"
   source_index: "requirements.yaml"
   status: "Active"
   type: "REQ"

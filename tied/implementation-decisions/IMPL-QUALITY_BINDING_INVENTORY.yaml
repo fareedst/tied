@@ -1,16 +1,16 @@
 IMPL-QUALITY_BINDING_INVENTORY:
   code_locations:
     files:
-      - path: "mcp-server/src/analysis/binding-inventory.ts"
-        description: "Binding inventory row validator"
-      - path: "mcp-server/src/analysis/binding-inventory.test.ts"
-        description: "Unit coverage for valid, duplicate, malformed, and unsupported bindings"
-      - path: "mcp-server/src/tools/index.ts"
-        description: "MCP binding_inventory_validate handler"
+      - description: "Binding inventory row validator"
+        path: "mcp-server/src/analysis/binding-inventory.ts"
+      - description: "Unit coverage for valid, duplicate, malformed, and unsupported bindings"
+        path: "mcp-server/src/analysis/binding-inventory.test.ts"
+      - description: "MCP binding_inventory_validate handler"
+        path: "mcp-server/src/tools/index.ts"
     functions:
-      - name: "validateBindingInventory"
-        description: "Validate composition binding inventory rows and diagnostics"
+      - description: "Validate composition binding inventory rows and diagnostics"
         file: "mcp-server/src/analysis/binding-inventory.ts"
+        name: "validateBindingInventory"
   cross_references:
     - "ARCH-MODULE_VALIDATION"
     - "ARCH-QUALITY_ASSURANCE_PROFILES"

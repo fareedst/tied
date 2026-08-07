@@ -1,5 +1,3 @@
-# CITDP change-analysis record — [PROC-CITDP] step 8; [PROC-AGENT_REQ_CHECKLIST] persist-citdp-record
-# change_request_id: REQ-GOAGENT-NON-COMPACT-HTML-FORMAT
 CITDP-REQ-GOAGENT-NON-COMPACT-HTML-FORMAT:
   change_definition:
     current_behavior_prior: "Checklist- and TDD-generated turn bodies were not given a first-class, testable \"non-compact HTML\" mode;\nlog/diff review of long single-line HTML was the primary pain.\n"
@@ -49,13 +47,13 @@ CITDP-REQ-GOAGENT-NON-COMPACT-HTML-FORMAT:
     workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
   risk_analysis:
     risks:
-      - id: "RISK-NC-001"
-        description: "Operators enable non-compact HTML in automation that assumed single-line bodies; diffs or log parsers break.\n"
+      - description: "Operators enable non-compact HTML in automation that assumed single-line bodies; diffs or log parsers break.\n"
+        id: "RISK-NC-001"
         likelihood: "Low"
         mitigation: "Default off; document flags; regression tests for disabled path."
         severity: "Medium"
-      - id: "RISK-NC-002"
-        description: "Formatter or indent rules produce non-deterministic or surprising HTML on edge-case UTF-8.\n"
+      - description: "Formatter or indent rules produce non-deterministic or surprising HTML on edge-case UTF-8.\n"
+        id: "RISK-NC-002"
         likelihood: "Low"
         mitigation: "Unit tests; CONTRACT in IMPL; stable-indent option bounded."
         severity: "Low"

@@ -1,8 +1,8 @@
 ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON:
   alternatives_considered:
-    - name: "HTTP API client"
-      cons:
+    - cons:
         - "Not how Cursor agent CLI works"
+      name: "HTTP API client"
       pros:
         - "In-process"
       rejected_reason: "Requirements target the official agent subprocess"

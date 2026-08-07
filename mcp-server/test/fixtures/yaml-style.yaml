@@ -1,0 +1,13 @@
+message: hello
+flag: false
+count: 7
+empty: null
+names:
+  - zeta
+  - alpha
+order:
+  - second
+  - first
+note: |
+  z: keep
+  a: order

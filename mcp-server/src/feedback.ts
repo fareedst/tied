@@ -7,7 +7,7 @@ import fs from "node:fs";
 import path from "node:path";
 import yaml from "js-yaml";
 import { getBasePath } from "./yaml-loader.js";
-import { safeDump } from "./yaml-dump.js";
+import { writeCanonicalValueAtomic, type YamlFormatMetadata } from "./yaml-canonicalizer.js";
 
 export const FEEDBACK_TYPES = ["feature_request", "bug_report", "methodology_improvement"] as const;
 export type FeedbackType = (typeof FEEDBACK_TYPES)[number];
@@ -77,6 +77,7 @@ export interface AppendEntryResult {
   ok: boolean;
   id?: string;
   created_at?: string;
+  yaml_format?: YamlFormatMetadata;
   error?: string;
 }
 
@@ -119,12 +120,15 @@ export function appendEntry(
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true });
     }
-    fs.writeFileSync(filePath, safeDump({ entries: data.entries }), "utf8");
+    // [IMPL-TIED_YAML_STYLE_RESOLVER] [ARCH-TIED_YAML_STYLE_RESOLUTION] [REQ-TIED_YAML_STYLE_CONFIGURATION] [REQ-MODULE_VALIDATION]
+    // How: Apply the resolved repository scalar style through the shared canonical writer.
+    const result = writeCanonicalValueAtomic(filePath, { entries: data.entries });
+    if (!result.ok) throw new Error(result.error);
+    return { ok: true, id, created_at, yaml_format: result.yaml_format };
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);
     return { ok: false, error: `Failed to write feedback file: ${msg}` };
   }
-  return { ok: true, id, created_at };
 }
 
 /**

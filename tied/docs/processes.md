@@ -423,20 +423,23 @@ with open('tied/requirements.yaml', 'w') as f:
 
 This is the **controlling loop** for creating or editing any TIED YAML (index or detail). No TIED record is considered valid for use until it has passed this loop.
 
-**`scripts/yaml_tool.sh`** — Primary project utility for YAML validation and list normalization. Default operation: canonicalize each path in place with **double-quoted scalar lint** (`yq -i 'sort_keys(.. style="double")'`, **one file per invocation**): recursive key sort plus double-quoted scalars. **On-disk effect:** YAML bool/int scalars become **string scalars** (e.g. `e2e_only: "false"`); coerce after load when typed values are required. **`--sort-lists`** runs **`scripts/yaml_list_sorter.rb`** on the same path set (sorts **qualifying list groups**: 2+ consecutive same-indent `- ` lines; **skips** lists whose owning map key matches `order` / `*_order` / `order_*` / `*_order_*`, e.g. `recommended_validation_order`). Optional **`--sort-keys`** (with **`--sort-lists`**) also alphabetizes sibling map keys at every indent level (Ruby path; distinct from default-lint key sort). **Block-scalar bodies** (`|`, `>`, and chomping variants) are **opaque** on the Ruby sort path: string content is never sorted as keys or lists. Supports `-F/--find`, stdin, and NUL-separated paths like the former inline `lint_yaml.sh` implementation.
+**`scripts/yaml_tool.sh`** — Primary project utility for YAML validation and list normalization. Default operation: canonicalize each path in place with the typed **`tied-yaml-canonical-v1`** profile (one path per operation): recursively sort map keys, sort eligible all-string lists, preserve ordered-list keys, preserve scalar types, and keep block-scalar bodies opaque. **`--sort-lists`** runs **`scripts/yaml_list_sorter.rb`** on the same path set for compatibility, then applies the shared canonicalizer so scalar style cannot drift. Optional **`--sort-keys`** (with **`--sort-lists`**) also alphabetizes sibling map keys at every indent level. IMPL pseudo-code sidecars are never parsed as YAML.
 
-**`lint_yaml`** / **`scripts/lint_yaml.sh`** — Backward-compatible alias; delegates to **`yaml_tool.sh`**. Global shell function (or project-provided equivalent) that agents **must** use to validate YAML syntax and canonicalize formatting **in place**. It accepts **one or more** file paths; the implementation must process **each path independently** (typically one underlying `yq -i 'sort_keys(.. style="double")'` per file). **Do not** pass multiple YAML paths to a **single raw `yq -i` command**: mikefarah `yq` merges multiple file arguments into one stream and corrupts files. Agents use `lint_yaml` or `yaml_tool.sh`, not ad-hoc multi-argument `yq`. MCP **`tied_token_rename`** uses the **same** yq expression when pretty-printing modified YAML.
+**Repository scalar-style policy** — Set `scalar_style: unwrapped` or `scalar_style: wrapped` in `.tied-yaml.yaml` at the project root (the parent of `TIED_BASE_PATH`). Resolution precedence is repository file, `TIED_YAML_STYLE`, `$XDG_CONFIG_HOME/tied/yaml-format.yaml`, then `unwrapped`. `wrapped` double-quotes string scalars only; booleans, numbers, and null remain typed. An invalid explicit setting fails without fallback. MCP writers and `tied-cli.sh` use this same policy, and successful `yaml_format` metadata reports `scalar_style` and `style_source`. Use `scripts/yaml_tool.sh --check <file>` as a read-only enforcement gate.
+
+**`lint_yaml`** / **`scripts/lint_yaml.sh`** — Backward-compatible alias; delegates to **`yaml_tool.sh`**. It accepts one or more paths and processes each independently through the shared canonicalizer. MCP YAML writers and **`tied_token_rename`** use the same profile and return `yaml_format` metadata on successful writes.
 
 **Pseudo-code blocks (implementation reference):**
 
 ```
 procedure LINT_YAML_FILES(paths):
   # [PROC-YAML_EDIT_LOOP] [REQ-TIED_SETUP] [IMPL-TIED_FILES]
-  # How: For each path, run yq -i 'sort_keys(.. style="double")' independently; never batch multiple files in one yq invocation.
-  # Contract: recursive key sort + double-quoted scalars; bool/int become string scalars on disk.
+  # How: For each path, invoke the shared typed canonicalizer independently.
+  # Contract: tied-yaml-canonical-v1; resolve repository scalar style, then apply recursive key sort,
+  # eligible string-list sort, typed scalars, and opaque block text.
   FOR each path in paths:
     IF path not a regular file: record error; continue
-    RUN yq -i 'sort_keys(.. style="double")' path
+    RUN CANONICALIZE_YAML_FILE(path)
   RETURN aggregate exit status
 
 procedure SORT_QUALIFYING_LIST_GROUPS(paths, sort_keys=false):

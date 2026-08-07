@@ -4,6 +4,7 @@
  */
 
 import { loadIndex, updateRecord } from "./yaml-loader.js";
+import { formatYamlMetadata, type YamlFormatMetadata } from "./yaml-canonicalizer.js";
 
 const REQ_IMPLEMENTED_STATUS = "Implemented";
 const REQ_PLANNED_STATUS = "Planned";
@@ -43,6 +44,7 @@ export interface VerifyUpdateResult {
   requirements_set_planned?: string[];
   implementation_set_active?: string[];
   implementation_set_planned?: string[];
+  yaml_format?: YamlFormatMetadata;
 }
 
 function collectVerifyChanges(options: VerifyUpdateOptions): VerifyDryRunChange[] {
@@ -160,9 +162,11 @@ export function updateStatusFromPassedTokens(options: VerifyUpdateOptions): Veri
       if (reqImplemented.has(token)) {
         const res = updateRecord("requirements", token, { status: REQ_IMPLEMENTED_STATUS });
         if (res.ok) requirements_set_implemented.push(token);
+        else return { ok: false, error: res.error };
       } else if (set_unpassed_reqs_to_planned) {
         const res = updateRecord("requirements", token, { status: REQ_PLANNED_STATUS });
         if (res.ok) requirements_set_planned.push(token);
+        else return { ok: false, error: res.error };
       }
     }
   }
@@ -176,9 +180,11 @@ export function updateStatusFromPassedTokens(options: VerifyUpdateOptions): Veri
       if (implActive.has(token)) {
         const res = updateRecord("implementation", token, { status: IMPL_ACTIVE_STATUS });
         if (res.ok) implementation_set_active.push(token);
+        else return { ok: false, error: res.error };
       } else if (set_unpassed_impl_to_planned) {
         const res = updateRecord("implementation", token, { status: IMPL_PLANNED_STATUS });
         if (res.ok) implementation_set_planned.push(token);
+        else return { ok: false, error: res.error };
       }
     }
   }
@@ -191,5 +197,6 @@ export function updateStatusFromPassedTokens(options: VerifyUpdateOptions): Veri
     requirements_set_planned,
     implementation_set_active,
     implementation_set_planned,
+    yaml_format: formatYamlMetadata(),
   };
 }
