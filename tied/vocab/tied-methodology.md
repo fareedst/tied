@@ -34,6 +34,8 @@
 | **scalar-type preservation** | typed round trip, coercion after load | Boolean, number, null, and string scalar types remain their parsed types through canonicalization |
 | **format metadata** | serializer metadata, format details | Stable `yaml_format` response object describing the active canonical YAML profile |
 | **opaque text** | raw text, unparsed body | Block-scalar bodies and IMPL pseudo-code sidecars are preserved as text rather than recursively normalized |
+| **unchanged path reporting** | zero-modification output, unchanged-file noise | Normal stdout omits a YAML path when no list group or map was modified |
+| **modified path reporting** | changed-file summary, modification log | Normal stdout retains validation and modification summaries for paths changed by sorting |
 | **case-insensitive-primary ordering** | case-insensitive sort, downcase-only sort | Locale-independent ordering that compares Unicode-lowercased values before applying the original-value tie-break |
 | **original-value tie-break** | stable sort alone, case-folded equality | Case-sensitive lexical comparison of original values when their lowercased forms are equal |
 | **recursive key sort (canonicalization)** | default `--sort-keys`, key sort via Ruby only | Case-insensitive-primary, locale-independent lexical ordering with original-value tie-breaking for map keys at every nested map level under the canonical YAML profile |
@@ -173,12 +175,14 @@ Exact spellings for checklist and docs cross-reference:
 | PROC-VOCABULARY_INDEX | PROC catalog |
 | project YAML | Preferred terms |
 | qualifying list group | Preferred terms |
+| modified path reporting | Preferred terms |
 | opaque text | Preferred terms |
 | ordered-list key | Preferred terms |
 | original-value tie-break | Preferred terms |
 | routing index | Preferred terms |
 | routing.md | Preferred terms |
 | semantic token | Preferred terms |
+| unchanged path reporting | Preferred terms |
 | scalar-type preservation | Preferred terms |
 | sort map keys | Preferred terms |
 | TIED base path | Naming bridge |

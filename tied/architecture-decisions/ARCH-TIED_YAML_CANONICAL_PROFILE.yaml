@@ -24,6 +24,7 @@ ARCH-TIED_YAML_CANONICAL_PROFILE:
   implementation_approach:
     details:
       - "Canonicalize token rename substitutions before replacement and preserve originals on failure"
+      - "Compatibility sorter reporting: yaml_list_sorter and yaml_tool --sort-lists emit normal stdout only for modified paths, retain validation and modification summaries for those paths, and keep failure diagnostics on stderr; unchanged paths remain silent."
       - "Preserve object and mixed list order"
       - "Return yaml_format metadata from every successful writer"
       - "Sort only all-string lists unless owning key matches order, order_*, *_order, or *_order_*"
@@ -36,8 +37,8 @@ ARCH-TIED_YAML_CANONICAL_PROFILE:
       date: "2026-08-06"
     last_updated:
       author: "AI Agent"
-      date: "2026-08-06"
-      reason: "Align architecture with legacy case-insensitive phrase ordering and deterministic tie-breaking"
+      date: "2026-08-07"
+      reason: "LEAP: propagate compatibility sorter path reporting contract from IMPL through ARCH to REQ"
   name: "Shared typed canonical YAML profile"
   rationale:
     benefits:

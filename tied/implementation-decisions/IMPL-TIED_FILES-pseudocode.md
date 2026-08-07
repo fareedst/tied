@@ -198,3 +198,23 @@ procedure LINT_YAML_PATHS(paths):
     st := CALL CANONICALIZE_YAML_FILE(path)
     IF st != 0: rc := st
   RETURN rc
+
+## REPORT_MODIFIED_PATHS
+# [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION] [PROC-YAML_EDIT_LOOP]
+# How: Emit normal stdout only for paths whose list or map ordering changed; retain stderr diagnostics for failures.
+procedure REPORT_MODIFIED_PATHS(result):
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION] [PROC-YAML_EDIT_LOOP]
+  # How: Emit normal stdout only for paths whose list or map ordering changed; retain stderr diagnostics for failures.
+  Contract:
+    INPUT: one sorter result with list and map modification counts
+    OUTPUT: normal stdout for modified paths; no normal stdout for unchanged paths
+    PRE: result contains groups_modified and maps_modified counts
+    POST: unchanged paths are silent; changed paths retain validation and modification summaries
+    EFFECTS: stdout emission only
+    TERMINATION: total
+  modified := result.groups_modified > 0 OR result.maps_modified > 0
+  IF modified is false:
+    RETURN no normal stdout
+  IF result.validated:
+    EMIT semantic validation passed
+  EMIT modification summary

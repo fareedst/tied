@@ -1,7 +1,7 @@
 CITDP-REQ-TIED_YAML_CANONICALIZATION:
   change_definition:
-    current_behavior: "The shared TypeScript canonicalizer compares strings with case-sensitive lexical ordering while the Ruby compatibility sorter lowercases without an original-value tie-break, so equal-folded values can diverge across surfaces."
-    requested_change: "Use one case-insensitive-primary, locale-independent comparator with original-value lexical tie-breaking for recursive map keys and eligible all-string lists across TypeScript and Ruby compatibility paths."
+    current_behavior: "The shared TypeScript canonicalizer compares strings with case-sensitive lexical ordering while the Ruby compatibility sorter lowercases without an original-value tie-break, so equal-folded values can diverge across surfaces; unchanged sorter paths also reported zero modifications on normal stdout."
+    requested_change: "Use one case-insensitive-primary, locale-independent comparator with original-value lexical tie-breaking for recursive map keys and eligible all-string lists across TypeScript and Ruby compatibility paths, and omit unchanged paths from normal sorter stdout."
     scope_in:
       - "ARCH canonical profile and process documentation"
       - "atomic writes"
@@ -13,19 +13,21 @@ CITDP-REQ-TIED_YAML_CANONICALIZATION:
       - "mcp-server/src/yaml-canonicalizer.ts"
       - "scripts/yaml_list_sorter.rb"
       - "scripts/yaml_list_sorter_test.rb"
+      - "unchanged path reporting and modified path reporting"
       - "yaml_semantic_compare ordered-list semantics"
       - "yaml_tool default lint"
     scope_out:
-      - "Changing IMPL pseudo-code sidecar semantics"
+      - "Changing canonical ordering semantics beyond the documented comparator contract"
       - "Changing ordered-list semantics"
       - "Changing scalar-type preservation or opaque-text boundaries"
       - "Migration of historical YAML bytes unrelated to touched writers"
       - "UI behavior or a separate E2E surface"
-    summary: "Align canonical map-key and eligible phrase-list ordering across the shared typed profile and compatibility frontend."
+    summary: "Align canonical map-key and eligible phrase-list ordering across the shared typed profile and compatibility frontend, while keeping unchanged compatibility paths silent."
   change_id: "REQ-TIED_YAML_CANONICALIZATION"
   completion_criteria:
     - "Changed TIED YAML passes lint and tied_validate_consistency."
-    - "IMPL pseudo-code, ARCH/REQ traceability, source comments, tests, vocabulary, and CHANGELOG describe the same comparator."
+    - "IMPL pseudo-code, ARCH/REQ traceability, source comments, tests, vocabulary, and CHANGELOG describe the same comparator and output-reporting contract."
+    - "Modified paths retain normal stdout summaries while unchanged paths emit no normal stdout."
     - "Ordered-list keys remain in document order and scalar/opaque-text behavior remains unchanged."
     - "TypeScript and Ruby produce Apple, apple, Banana, zebra in the same order for mixed-case values."
     - "Unit, composition, and compatibility validation pass; E2E is explicitly not applicable."
@@ -37,7 +39,7 @@ CITDP-REQ-TIED_YAML_CANONICALIZATION:
       - "MCP tied_verify dry_run — no status changes required"
       - "MCP yaml_index_validate — requirements, architecture, implementation, and semantic-tokens valid"
       - "ruby -c scripts/yaml_list_sorter.rb — Syntax OK"
-      - "ruby scripts/yaml_list_sorter_test.rb — all assertions passed"
+      - "ruby scripts/yaml_list_sorter_test.rb — all assertions passed, including unchanged stdout suppression"
       - "scripts/yaml_tool.sh --check — all changed TIED YAML passed"
     manifest_reference: "~"
     proof_boundaries:
@@ -68,7 +70,7 @@ CITDP-REQ-TIED_YAML_CANONICALIZATION:
       - "REQ-TIED_YAML_CANONICALIZATION"
       - "REQ-TIED_YAML_STYLE_CONFIGURATION"
   implementation_guidance:
-    affected_behavior: "The canonical ordering contract is case-insensitive-primary with original-value lexical tie-breaking and no locale dependence."
+    affected_behavior: "The canonical ordering contract is case-insensitive-primary with original-value lexical tie-breaking and no locale dependence; unchanged sorter paths produce no normal stdout."
     rollback: "Revert the comparator and synchronized documentation/test changes, then re-run the prior canonical profile validation; atomic writers preserve target bytes on failure."
     sequence:
       - "Align unit and compatibility tests and production comments."
@@ -76,23 +78,24 @@ CITDP-REQ-TIED_YAML_CANONICALIZATION:
       - "Run TypeScript, Ruby, pseudo-code, YAML, token, and TIED consistency gates."
       - "Update final evidence and release notes."
       - "Update IMPL pseudo-code and block leads first."
+      - "Verify unchanged paths are silent through both yaml_list_sorter.rb and yaml_tool.sh --sort-lists."
   implementation_status: "Implemented and validated in current worktree"
   leap_feedback:
-    divergences_from_analysis: "The staged implementation exposed a cross-surface ordering mismatch: TypeScript was case-sensitive and Ruby had no deterministic tie-break for equal-folded values."
-    propagation: "Refined IMPL pseudo-code first, then aligned ARCH profile wording, REQ acceptance context, source/tests, style metadata, vocabulary, and release documentation; no new token was required."
+    divergences_from_analysis: "The staged implementation exposed a cross-surface ordering mismatch: TypeScript was case-sensitive and Ruby had no deterministic tie-break for equal-folded values; the compatibility summary also exposed zero-modification noise for unchanged paths."
+    propagation: "Refined IMPL pseudo-code first, then confirmed the existing ARCH/REQ canonicalization scope remained accurate, aligned source/tests, style metadata, vocabulary, and release documentation; no new semantic token was required."
     status: "applied"
     tied_stack_updates_required:
-      - "Canonicalization IMPL, ARCH, REQ, vocabulary, tests, and docs now carry the same comparator contract."
+      - "Canonicalization IMPL, ARCH, REQ, vocabulary, tests, and docs now carry the same comparator and output-reporting contract."
   module_validation:
     canonicalizer: "Validated by six canonicalizer unit tests covering mixed-case ordering, list exceptions, scalar types, opaque block text, metadata, and invalid-input preservation."
-    cli_frontend: "Validated by ruby -c and yaml_list_sorter_test.rb with all assertions passing, including mixed-case phrase lists, map keys, ordered-list exceptions, opaque text, and semantic-preservation failures."
+    cli_frontend: "Validated by ruby -c and yaml_list_sorter_test.rb with all assertions passing, including mixed-case phrase lists, map keys, ordered-list exceptions, opaque text, semantic-preservation failures, and unchanged stdout suppression."
     writer_integration: "Validated by the complete MCP suite: 159 passing tests, including canonicalizer unit tests, UI-free MCP composition, detail sidecars, rename, loader paths, and existing writer tests."
   record_identity:
     citdp_id: "CITDP-REQ-TIED_YAML_CANONICALIZATION"
     created_at: "2026-08-06"
     status: "Implemented"
     title: "Shared typed YAML canonicalization and deterministic mixed-case ordering"
-    updated_at: "2026-08-06"
+    updated_at: "2026-08-07"
   residual_work:
     - "Add exhaustive composition fixtures for every feedback, verification, batch, and CITDP writer family."
     - "Add shared cross-frontend fixture corpus and explicit yaml_format assertions to each writer response."
@@ -105,9 +108,9 @@ CITDP-REQ-TIED_YAML_CANONICALIZATION:
         limitation: "Evidence is environment-specific and does not prove universal locale behavior beyond the tested deterministic comparator contract."
         owner: "AI Agent"
         rationale: "This is a behavior-changing serialization contract with cross-surface parity risk."
-        result: "pass: TypeScript 159 tests, Ruby compatibility, YAML canonical check, pseudo-code validation, and TIED consistency all passed"
-        risk: "Cross-surface ordering divergence or accidental reordering of protected lists"
-        threshold: "All required commands pass; mixed-case parity and ordered-list preservation assertions pass"
+        result: "pass: TypeScript 159 tests, Ruby compatibility, unchanged stdout suppression, YAML canonical check, pseudo-code validation, and TIED consistency all passed"
+        risk: "Cross-surface ordering divergence, accidental reordering of protected lists, or noisy unchanged output"
+        threshold: "All required commands pass; mixed-case parity, ordered-list preservation, and unchanged stdout assertions pass"
         waiver:
           expiry: "~"
           owner: "~"
@@ -130,6 +133,11 @@ CITDP-REQ-TIED_YAML_CANONICALIZATION:
         likelihood: "Low"
         mitigation: "Retain exact, prefix, suffix, and combined ordered-list key exclusions and assert them in unit and compatibility tests."
         severity: "Medium"
+      - description: "Unchanged compatibility paths produce unnecessary normal stdout noise."
+        id: "RISK-CANONICAL-OUTPUT-001"
+        likelihood: "Low"
+        mitigation: "Suppress normal stdout when both list and map modification counts are zero while retaining failure diagnostics."
+        severity: "Low"
   risk_assessment:
     - mitigation: "Typed js-yaml round trip, profile fixtures, and compatibility tests assert booleans/numbers/null remain typed."
       risk: "Canonical output changes historical formatting or scalar types"
@@ -139,6 +147,8 @@ CITDP-REQ-TIED_YAML_CANONICALIZATION:
       risk: "Failed parse or rename leaves partial files"
     - mitigation: "Both use the same canonicalizer module/profile metadata and TIED consistency validation passes."
       risk: "MCP and CLI drift"
+    - mitigation: "Changed-path and unchanged-path stdout assertions cover the compatibility reporting contract."
+      risk: "Normal stdout becomes noisy or hides modified paths"
   tdd_sequence:
     e2e: "N/A; no UI boundary."
     summary: "Existing staged RED/GREEN work is finalized by IMPL-first LEAP alignment, then unit/compatibility/composition verification and final consistency validation."
@@ -150,9 +160,11 @@ CITDP-REQ-TIED_YAML_CANONICALIZATION:
       - "MCP build and writer integration tests for detail, index, rename, and metadata operation"
       - "mcp-server/src/tools/yaml-canonicalization-mcp.test.ts validates tied_yaml_format and shared writer binding; existing assertion exercises the shared writer path."
       - "No UI composition or browser boundary exists."
+      - "scripts/yaml_list_sorter_test.rb validates yaml_tool.sh --sort-lists changed and unchanged stdout behavior."
     e2e: "Not applicable: canonicalization is a pure typed module plus CLI/MCP writer boundary; no UI invocation is required."
     unit:
       - "mcp-server/src/yaml-canonicalizer.test.ts — mixed-case, ordered-list, opaque-text, metadata, atomic-failure, and scalar-type coverage"
+      - "scripts/yaml_list_sorter_test.rb — modified summaries and unchanged stdout suppression"
     validation:
       - "npm test — 159 passed, 0 failed"
       - "pseudocode_validate — ok"

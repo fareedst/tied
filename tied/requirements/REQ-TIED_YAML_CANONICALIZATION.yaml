@@ -15,8 +15,8 @@ REQ-TIED_YAML_CANONICALIZATION:
       date: "2026-08-06"
     last_updated:
       author: "AI Agent"
-      date: "2026-08-06"
-      reason: "Propagate deterministic mixed-case ordering contract from IMPL through ARCH to REQ"
+      date: "2026-08-07"
+      reason: "LEAP: propagate unchanged and modified path reporting contract from IMPL through ARCH to REQ"
   name: "Deterministic typed TIED YAML canonicalization"
   priority: "P0"
   rationale:
@@ -42,6 +42,7 @@ REQ-TIED_YAML_CANONICALIZATION:
     - criterion: "Every successful YAML write reports yaml_format metadata"
     - criterion: "MCP, yaml_tool, yaml_list_sorter, and yaml_semantic_compare share conformance fixtures"
     - criterion: "String-only lists sort except under ordered-list keys, while object and mixed lists preserve order"
+    - criterion: "Compatibility sorting omits unchanged paths from normal stdout, retains summaries for modified paths, and keeps failure diagnostics on stderr"
   status: "Planned"
   traceability:
     architecture:

@@ -361,7 +361,7 @@ nested_block = mixed[/nested:\n(.*)\z/m, 1]
 assert nested_block.include?("- x\n"), "nested group sorted: #{nested_block}"
 fm.close!
 
-# --- already sorted: groups_modified=0 ---
+# --- already sorted: unchanged files are omitted from stdout ---
 fa = write_temp_yaml!(<<~YAML)
   refs:
     - alpha
@@ -372,7 +372,9 @@ before_mtime = File.mtime(fa.path)
 sleep 0.05
 out, _err, st = run_sorter([fa.path])
 assert st.success?, "already sorted: #{_err}"
-assert out.include?('groups modified=0'), "expected no modifications: #{out}"
+# [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION] [PROC-YAML_EDIT_LOOP]
+# How: Emit normal stdout only for paths whose list or map ordering changed; retain stderr diagnostics for failures.
+assert out.empty?, "unchanged file should be omitted from stdout: #{out}"
 assert File.mtime(fa.path) == before_mtime, 'file should not be rewritten when unchanged'
 fa.close!
 
@@ -401,7 +403,7 @@ parent_block = nested_body[/parent:\n(.*)\z/m, 1]
 assert parent_block.index('a:') < parent_block.index('z:'), "nested keys sorted:\n#{nested_body}"
 fn.close!
 
-# --- already sorted keys: maps modified=0 ---
+# --- already sorted keys: unchanged files are omitted from stdout ---
 fks = write_temp_yaml!(<<~YAML)
   alpha: 1
   beta: 2
@@ -410,7 +412,7 @@ before_keys_mtime = File.mtime(fks.path)
 sleep 0.05
 out, _err, st = run_sorter(['--sort-keys', fks.path])
 assert st.success?, "already sorted keys: #{_err}"
-assert out.include?('maps modified=0'), "expected no key modifications: #{out}"
+assert out.empty?, "unchanged file should be omitted from stdout: #{out}"
 assert File.mtime(fks.path) == before_keys_mtime, 'file should not be rewritten when keys unchanged'
 fks.close!
 
@@ -654,6 +656,14 @@ if File.file?(File.join(SCRIPT_DIR, '..', 'mcp-server', 'dist', 'cli', 'yaml-can
   body = File.read(fs.path)
   assert body.index('- ant') < body.index('- mid'), "yaml_tool sort: #{body}"
   fs.close!
+
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION] [PROC-YAML_EDIT_LOOP]
+  # How: Emit normal stdout only for paths whose list or map ordering changed; retain stderr diagnostics for failures.
+  fs_unchanged = write_temp_yaml!("tags:\n  - ant\n  - mid\n  - zed\n")
+  quiet_out, quiet_err, st = run_yaml_tool(['--sort-lists', fs_unchanged.path])
+  assert st.success?, "yaml_tool unchanged sort failed: #{quiet_err}"
+  assert quiet_out.empty?, "yaml_tool should omit unchanged files from stdout: #{quiet_out}"
+  fs_unchanged.close!
 
   fk_tool = write_temp_yaml!(<<~YAML)
     b: two

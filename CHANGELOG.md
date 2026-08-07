@@ -46,6 +46,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **yaml_list_sorter order-preserving keys** — Lists under map keys matching `order` / `*_order` / `order_*` / `*_order_*` (e.g. `recommended_validation_order`) keep document order; sibling non-order lists still sort. Unit coverage in [`scripts/yaml_list_sorter_test.rb`](scripts/yaml_list_sorter_test.rb). Checklist loader coerces quoted bools for `agentstream_new_session` after double-quoted scalar lint.
 
+- **Quiet unchanged YAML sorting output** — `yaml_list_sorter` and `yaml_tool --sort-lists` now omit unchanged paths from normal stdout while retaining summaries for modified paths and diagnostics for failures.
+
 - **YAML double-quoted scalar lint** — Default [`scripts/yaml_tool.sh`](scripts/yaml_tool.sh) / `lint_yaml` now runs `yq -i 'sort_keys(.. style="double")'` (one file per invocation): recursive key sort + double-quoted scalars. **Bool/int become string scalars on disk** (e.g. `e2e_only: "false"`). Bulk TIED YAML re-linted; MCP `tied_token_rename` pretty-print aligned; `[PROC-YAML_EDIT_LOOP]`, IMPL-TIED_FILES pseudocode (`CANONICALIZE_YAML_FILE` / `LINT_YAML_PATHS`), vocab, READMEs updated. CITDP: [`tied/citdp/CITDP-YAML_TOOL_DOUBLE_QUOTE_SORT.yaml`](tied/citdp/CITDP-YAML_TOOL_DOUBLE_QUOTE_SORT.yaml). Client trees produce a large first-lint diff until re-canonicalized.
 
 - **`mcp-server/package-lock.json`** — Transitive lock refresh (`@modelcontextprotocol/sdk`, `@hono/node-server`, and related); no `package.json` change.

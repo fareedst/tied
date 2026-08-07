@@ -56,8 +56,8 @@ IMPL-TIED_FILES:
       date: "2025-12-18T00:00:00.000Z"
     last_updated:
       author: "AI Agent"
-      date: "2026-08-04"
-      reason: "LEAP: align bootstrap pseudo-code, vocabulary control layer, and MCP preservation"
+      date: "2026-08-07"
+      reason: "LEAP: document unchanged path reporting for YAML sorter compatibility output"
     last_validated:
       date: "2026-02-06T00:00:00.000Z"
       result: "pass"
