@@ -64,7 +64,7 @@ Verify after refresh:
 2. `tied-cli.sh` reads the intended client project YAML.
 3. The refreshed `tied/methodology/` matches the source templates.
 4. Project indexes and detail files are unchanged unless the client explicitly adopted a project-record change.
-5. The `tied-yaml` MCP entry points to the intended built server and preserves unrelated MCP servers.
+5. If `.cursor/mcp.json` was absent, the new `tied-yaml` MCP entry points to the intended built server and client TIED base path. If it already existed, it is preserved byte-for-byte and must be reviewed separately when changing TIED source or server paths.
 
 ### Bootstrap preservation matrix
 
@@ -76,11 +76,11 @@ Verify after refresh:
 | `tied/vocab/*.md` without `--merge-vocab` | Seeded only when the client vocabulary directory has no Markdown files |
 | `tied/vocab/*.md` with `--merge-vocab` | Copies absent filenames only; never overwrites existing files |
 | `.cursor/skills/tied-yaml/` | Refreshed from the bundled skill |
-| `.cursor/mcp.json` `tied-yaml` entry | Rewritten for the selected TIED source and client base path; unrelated servers preserved |
+| `.cursor/mcp.json` | Created with the selected TIED source and client base path only when absent; an existing file is preserved byte-for-byte |
 
 ## Phase 2 — controlled documentation and vocabulary merge
 
-The lean inherited documentation pack includes the migration guide, quality-assurance command and pilot guides, the evidence-manifest guide, and composition coverage. Files already present in a client remain authoritative until a human compares and merges them.
+The lean inherited documentation pack includes the migration guide, quality-assurance command and pilot guides, the evidence-manifest guide, and composition coverage. Files already present in a client remain authoritative until a human compares and merges them; a successful bootstrap does not prove that customized client documentation has received current methodology changes.
 
 For every customized `tied/docs/` file:
 
@@ -88,6 +88,8 @@ For every customized `tied/docs/` file:
 2. preserve client-specific policy and links;
 3. merge new process requirements and validator names;
 4. validate links from the client path, not only from the source repository.
+
+The refresh output reports how many canonical documents were copied and warns when existing documents were preserved. Treat preserved documents as an explicit review queue: compare them with the corresponding files under the TIED source `tied/docs/`, merge applicable methodology changes, and rerun the client’s documentation and link checks.
 
 For vocabulary:
 

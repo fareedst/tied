@@ -1,0 +1,51 @@
+REQ-TIED_FIDELITY_RESEARCH:
+  category: "Functional"
+  description: "Read-only research distinguishes behavioral correctness from translation fidelity across the TIED chain and preserves evidence before remediation."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-09"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-09"
+      reason: "Methodology promotion for all TIED clients"
+  name: "TIED Fidelity Research"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Audited projects remain read-only during research."
+      - "Findings retain evidence provenance and proof boundaries."
+      - "Specification changes remain distinct from implementation defects."
+    problems_solved:
+      - "Agent observations can be promoted to bugs without adjudication."
+      - "Structural TIED consistency can be mistaken for runtime correctness."
+      - "Tests and code can be mistaken for current desired behavior after a specification change."
+    why: "TIED clients need a safe, reproducible way to analyze fidelity and defect origin without polluting approved project intent."
+  related_requirements:
+    depends_on:
+      - "REQ-MODULE_VALIDATION"
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "A bounded one-project, one-IMPL/module analysis can run without mutating the audited project."
+    - criterion: "Candidate and confirmed findings remain distinct through the finding lifecycle."
+    - criterion: "Specification change, implementation lag, missing specification, and unresolved outcomes remain distinct."
+    - criterion: "Duplicate reruns link observations without inflating defect counts."
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_FIDELITY_RESEARCH"
+    code_annotations:
+      - "REQ-TIED_FIDELITY_RESEARCH"
+    implementation:
+      - "IMPL-TIED_FIDELITY_RESEARCH"
+    tests: []
+  validation_criteria:
+    - coverage: "Client read-only workflow and evidence boundaries"
+      method: "Methodology procedure review"
+    - coverage: "Module and composition ordering"
+      method: "Client project test strategy"
+    - coverage: "REQ to ARCH to IMPL and pseudo-code token linkage"
+      method: "tied_validate_consistency"

@@ -37,10 +37,15 @@ describe("e2e: bootstrap and load", () => {
   it("copy_files.sh populates tied/ and loader reads requirements index from it [IMPL]", () => {
     const copyScript = path.join(repoRoot, "copy_files.sh");
     assert.ok(fs.existsSync(copyScript), `copy_files.sh not found at ${copyScript}`);
-    execSync(`bash "${copyScript}" "${tempDir}"`, {
+    const bootstrapOutput = execSync(`bash "${copyScript}" "${tempDir}"`, {
       stdio: "pipe",
       cwd: repoRoot,
-    });
+    }).toString();
+    assert.match(
+      bootstrapOutput,
+      /MUST verify fidelity research methodology artifacts/,
+      "bootstrap should report the mandatory fidelity methodology gate"
+    );
     const tiedDir = path.join(tempDir, "tied");
     assert.ok(fs.existsSync(tiedDir), "tied/ should exist after copy_files.sh");
     assert.ok(
@@ -68,6 +73,44 @@ describe("e2e: bootstrap and load", () => {
     assert.ok(
       "REQ-MODULE_VALIDATION" in data,
       "Copied index should contain inherited token REQ-MODULE_VALIDATION"
+    );
+    assert.ok(
+      "REQ-TIED_FIDELITY_RESEARCH" in data,
+      "Copied index should contain inherited fidelity research requirement"
+    );
+    assert.ok(
+      fs.existsSync(
+        path.join(tiedDir, "methodology", "requirements", "REQ-TIED_FIDELITY_RESEARCH.yaml")
+      ),
+      "Methodology should include the fidelity research requirement detail"
+    );
+    assert.ok(
+      fs.existsSync(
+        path.join(tiedDir, "methodology", "architecture-decisions", "ARCH-TIED_FIDELITY_RESEARCH.yaml")
+      ),
+      "Methodology should include the fidelity research architecture detail"
+    );
+    assert.ok(
+      fs.existsSync(
+        path.join(
+          tiedDir,
+          "methodology",
+          "implementation-decisions",
+          "IMPL-TIED_FIDELITY_RESEARCH.yaml"
+        )
+      ),
+      "Methodology should include the fidelity research implementation detail"
+    );
+    assert.ok(
+      fs.existsSync(
+        path.join(
+          tiedDir,
+          "methodology",
+          "implementation-decisions",
+          "IMPL-TIED_FIDELITY_RESEARCH-pseudocode.md"
+        )
+      ),
+      "Methodology should include the fidelity research pseudo-code sidecar"
     );
 
     const rec = getRecord("requirements", "REQ-TIED_SETUP");
@@ -111,9 +154,15 @@ describe("e2e: bootstrap and load", () => {
       fs.existsSync(vocabMethodology),
       "copy_files.sh should seed tied/vocab/tied-methodology.md [REQ-TIED_SETUP]"
     );
+    assert.ok(
+      fs.existsSync(path.join(tiedDir, "vocab", "fidelity-research.md")),
+      "copy_files.sh should seed tied/vocab/fidelity-research.md"
+    );
 
     const vocabStandards = path.join(tempDir, "tied", "docs", "vocabulary-index-analysis-and-standards.md");
     const pseudoFormat = path.join(tempDir, "tied", "docs", "pseudocode-format-and-practices.md");
+    const fidelityGuide = path.join(tempDir, "tied", "docs", "tied-fidelity-research.md");
+    const fidelityPrompt = path.join(tempDir, "tied", "docs", "pseudocode-fidelity-audit-agent-prompt.md");
     assert.ok(
       fs.existsSync(vocabStandards),
       "copy_files.sh should copy tied/docs/vocabulary-index-analysis-and-standards.md [IMPL-TIED_FILES] [PROC-VOCABULARY_INDEX]"
@@ -121,6 +170,14 @@ describe("e2e: bootstrap and load", () => {
     assert.ok(
       fs.existsSync(pseudoFormat),
       "copy_files.sh should copy tied/docs/pseudocode-format-and-practices.md [IMPL-TIED_FILES]"
+    );
+    assert.ok(
+      fs.existsSync(fidelityGuide),
+      "copy_files.sh should copy tied/docs/tied-fidelity-research.md"
+    );
+    assert.ok(
+      fs.existsSync(fidelityPrompt),
+      "copy_files.sh should copy the fidelity audit prompt"
     );
 
   });
@@ -178,10 +235,15 @@ describe("e2e: bootstrap and load", () => {
 
     // [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
     // How: Refresh inherited methodology and vocabulary while preserving an existing client MCP configuration byte-for-byte.
-    execSync(`bash "${copyScript}" --merge-vocab "${tempDir}"`, {
+    const refreshOutput = execSync(`bash "${copyScript}" --merge-vocab "${tempDir}"`, {
       stdio: "pipe",
       cwd: repoRoot,
-    });
+    }).toString();
+    assert.match(
+      refreshOutput,
+      /Preserved \d+ existing methodology document\(s\); compare them with/,
+      "refresh must identify preserved client documentation for explicit comparison and merge"
+    );
 
     assert.strictEqual(
       fs.readFileSync(projectRequirements, "utf8"),
@@ -204,6 +266,10 @@ describe("e2e: bootstrap and load", () => {
       "merge must preserve customized routing vocabulary"
     );
     assert.ok(fs.existsSync(path.join(vocabDir, "quality-assurance.md")), "merge must add an absent canonical glossary");
+    assert.ok(
+      fs.existsSync(path.join(vocabDir, "fidelity-research.md")),
+      "merge must add the absent fidelity research glossary"
+    );
     assert.ok(fs.existsSync(customVocab), "merge must preserve unrelated client vocabulary");
     assert.strictEqual(
       fs.readFileSync(unrelatedClientFile, "utf8"),
@@ -236,6 +302,16 @@ describe("e2e: bootstrap and load", () => {
       fs.readFileSync(promotedQualitySidecar, "utf8"),
       /\[IMPL-QUALITY_EVIDENCE_MANIFEST\]/,
       "promoted quality sidecar must retain its literal token linkage"
+    );
+    assert.ok(
+      fs.existsSync(
+        path.join(
+          methodologyDir,
+          "implementation-decisions",
+          "IMPL-TIED_FIDELITY_RESEARCH-pseudocode.md"
+        )
+      ),
+      "refresh must install the fidelity research pseudo-code sidecar"
     );
 
     const listRelativeFiles = (root: string): string[] => {

@@ -225,6 +225,19 @@ ARCH-QUALITY_ASSURANCE_PROFILES:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_FIDELITY_RESEARCH:
+  cross_references:
+    - "IMPL-TIED_FIDELITY_RESEARCH"
+    - "REQ-TIED_FIDELITY_RESEARCH"
+  description: "Separate research evidence and adjudication from audited project TIED data and remediation"
+  detail_file: "architecture-decisions/ARCH-TIED_FIDELITY_RESEARCH.yaml"
+  metadata:
+    last_updated: "2026-08-09"
+    registered: "2026-08-09"
+  name: "Read-Only Fidelity Research Boundary"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_STRUCTURE:
   cross_references:
     - "IMPL-TIED_FILES"
@@ -587,6 +600,19 @@ IMPL-QUALITY_TEST_ADEQUACY:
     last_updated: "2026-08-02"
     registered: "2026-08-02"
   name: "Risk-triggered test adequacy validator"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-TIED_FIDELITY_RESEARCH:
+  cross_references:
+    - "ARCH-TIED_FIDELITY_RESEARCH"
+    - "REQ-TIED_FIDELITY_RESEARCH"
+  description: "Validated modules and read-only composition for fidelity findings and evidence"
+  detail_file: "implementation-decisions/IMPL-TIED_FIDELITY_RESEARCH.yaml"
+  metadata:
+    last_updated: "2026-08-09"
+    registered: "2026-08-09"
+  name: "Fidelity Research First Vertical Slice"
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
@@ -1176,6 +1202,20 @@ REQ-QUALITY_ASSURANCE_EVIDENCE:
   name: "Risk-triggered quality assurance evidence"
   source_index: "requirements.yaml"
   status: "Planned"
+  type: "REQ"
+REQ-TIED_FIDELITY_RESEARCH:
+  category: "Functional"
+  cross_references:
+    - "ARCH-TIED_FIDELITY_RESEARCH"
+    - "IMPL-TIED_FIDELITY_RESEARCH"
+  description: "Read-only fidelity and defect-origin analysis across the TIED translation chain"
+  detail_file: "requirements/REQ-TIED_FIDELITY_RESEARCH.yaml"
+  metadata:
+    last_updated: "2026-08-09"
+    registered: "2026-08-09"
+  name: "TIED Fidelity Research"
+  source_index: "requirements.yaml"
+  status: "Active"
   type: "REQ"
 REQ-TIED_SETUP:
   category: "Core Functional"

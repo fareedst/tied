@@ -8,7 +8,7 @@
 
 **Standards:** [`../docs/vocabulary-index-analysis-and-standards.md`](../docs/vocabulary-index-analysis-and-standards.md).
 
-**See also:** [`routing.md`](routing.md) (primary entry / PRELOAD) · [`../docs/client-development-index.md`](../docs/client-development-index.md) · [`tied-methodology.md`](tied-methodology.md) · [`tied-yaml-mcp.md`](tied-yaml-mcp.md) · [`feedback-to-tied.md`](feedback-to-tied.md) · [`leap-proposal-queue.md`](leap-proposal-queue.md) · [`agentstream.md`](agentstream.md) · [`agent-stream-ruby.md`](agent-stream-ruby.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) · [`config-discovery.md`](config-discovery.md)
+**See also:** [`routing.md`](routing.md) (primary entry / PRELOAD) · [`../docs/client-development-index.md`](../docs/client-development-index.md) · [`tied-methodology.md`](tied-methodology.md) · [`tied-yaml-mcp.md`](tied-yaml-mcp.md) · [`feedback-to-tied.md`](feedback-to-tied.md) · [`leap-proposal-queue.md`](leap-proposal-queue.md) · [`agentstream.md`](agentstream.md) · [`agent-stream-ruby.md`](agent-stream-ruby.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) · [`fidelity-research.md`](fidelity-research.md) · [`config-discovery.md`](config-discovery.md)
 
 ---
 
@@ -32,6 +32,7 @@
 | 4 | [`agentstream.md`](agentstream.md) | Go `agentstream` CLI: pipeline, turns, checklist render, executor, HTML format, MCP preflight |
 | 4b | [`agent-stream-ruby.md`](agent-stream-ruby.md) | Ruby ATDD runner parity with Go |
 | 5 | [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) | Domain vocab vs IMPL grammar; three-way alignment; CITDP record naming |
+| 5c | [`fidelity-research.md`](fidelity-research.md) | Fidelity findings, specification state, origin layer, divergent edge, read-only research profile, finding lifecycle, evidence provenance |
 | — | [`config-discovery.md`](config-discovery.md) | Planned layered YAML config (stub; `(proposed)` terms) |
 
 ---
@@ -59,6 +60,7 @@
 - **TIED base path** / **project YAML** vs **methodology YAML** — define once in [`tied-methodology.md`](tied-methodology.md); referenced from [`tied-yaml-mcp.md`](tied-yaml-mcp.md).
 - **Methodology migration** / **client refresh** / **vocabulary merge mode** — a `copy_files.sh` refresh replaces only the inherited `tied/methodology/` snapshot, preserves project YAML and client-owned vocabulary, and uses `--merge-vocab` to add absent glossary files; canonical terms live in [`tied-methodology.md`](tied-methodology.md) and the operational procedure in [`../docs/methodology-migration.md`](../docs/methodology-migration.md).
 - **Non-canonical LEAP proposals** (`leap-proposals/`) never mutate project TIED YAML — see [`leap-proposal-queue.md`](leap-proposal-queue.md).
+- **Fidelity research** is read-only against audited projects; candidate findings and case reports belong in the research dataset, while remediation is a separately approved LEAP operation — see [`fidelity-research.md`](fidelity-research.md) and [`../docs/tied-fidelity-research-plan.md`](../../docs/tied-fidelity-research-plan.md).
 
 ---
 
@@ -83,6 +85,13 @@
 | domain-references.md | Preferred terms (directory entry) |
 | full catalog | Preferred terms (directory entry) |
 | methodology migration | Cross-topic notes |
+| origin layer | `fidelity-research.md` |
+| proof boundary | `fidelity-research.md` |
+| specification state | `fidelity-research.md` |
+| divergent edge | `fidelity-research.md` |
+| fidelity finding | `fidelity-research.md` |
+| finding lifecycle | `fidelity-research.md` |
+| read-only research profile | `fidelity-research.md` |
 | IMPL grammar vocabulary | Authoring guides |
 | routing index | Preferred terms (directory entry) |
 | routing.md | Directory entry (bootstrap) |

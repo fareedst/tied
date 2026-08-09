@@ -60,6 +60,7 @@ Quality assurance references: [quality-assurance-commands.md](quality-assurance-
 | Upgrade TIED methodology | **methodology-migration.md** → Phase 0 | **Rules**, refreshed TIED YAML MCP, and the per-request Tracker |
 | TIED already updated; code/tests lag | [tied-first-implementation-procedure.md](tied-first-implementation-procedure.md) (**TIED-first**) | **Checklist** with verify-only REQ/ARCH/IMPL steps |
 | Bug fix | **Checklist** → `session-bootstrap` | Add REQ at `author-requirement` if missing |
+| Fidelity research | **tied-fidelity-research.md** | Read-only stages 0–4 audit; preserve evidence; promote only after adjudication |
 | Tests/code diverged from IMPL | **Pseudo-code** § LEAP micro-cycle | **Processes** § `[PROC-LEAP]`; checklist `sub-leap-micro-cycle` |
 | Repair without full new REQ | **Checklist** + **Pseudo-code** Track B or C | Same LEAP order |
 
@@ -103,6 +104,7 @@ After writes: `lint_yaml` on changed YAML + `tied_validate_consistency` (checkli
 | MCP setup | `adding-tied-mcp-and-invoking-passes.md`, `ai-agent-tied-mcp-usage.md`, `yaml-update-mcp-runbook.md` |
 | Automation | `req-impl-state-guide-agent-workflow.md`, `requirement-list-state-guide-agent-workflow.md` |
 | Preload contract | `agent-preload-contract-template.yaml` → client `tied/agent-preload-contract.yaml` |
+| Fidelity research | `tied-fidelity-research.md`, `pseudocode-fidelity-audit-agent-prompt.md` |
 | Pseudo-code extras | `pseudocode-format-and-practices.md`, `pseudocode-validation-checklist.yaml`, `templates/impl-essence-pseudocode-template.md` |
 | Vocab meta | `vocabulary-index-analysis-and-standards.md` |
 

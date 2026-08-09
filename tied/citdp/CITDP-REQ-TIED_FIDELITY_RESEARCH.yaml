@@ -1,0 +1,121 @@
+CITDP-REQ-TIED_FIDELITY_RESEARCH:
+  change_definition:
+    current_behavior: "No implemented fidelity-research vertical slice existed."
+    desired_behavior: "Analyze one project and one IMPL/module boundary in read-only mode, capture candidate findings, preserve evidence provenance, classify specification state, audit fidelity, evaluate binding evidence, promote one reviewed case, verify deterministic rerun, and compose the validated modules."
+    non_goals:
+      - "Automatic REQ/ARCH/IMPL remediation"
+      - "Centralizing secrets or unrestricted source content"
+      - "Cross-project aggregation"
+    success_criteria:
+      - "Candidate and confirmed findings remain distinct."
+      - "Composition wiring calls validated modules in declared order."
+      - "Duplicate reruns do not inflate defect counts."
+      - "Specification change, implementation lag, missing specification, and implementation defect remain distinct."
+    unchanged_behavior:
+      - "Audited project source, tests, project YAML, methodology YAML, and approved specifications remain unchanged."
+      - "Structural validation is not reported as runtime correctness."
+  completion_criteria:
+    focused_tests: "20 passed"
+    full_mcp_server_tests: "179 passed"
+    lint: "no IDE diagnostics"
+    pseudocode_behavioral_coverage: "passed for all 11 blocks"
+    pseudocode_structural_validation: "passed with 11 blocks and no diagnostics"
+    tied_validate_consistency: "passed"
+    typescript_typecheck: "passed"
+  impact_analysis:
+    audited_project_mutation: "none"
+    files:
+      - "mcp-server/src/fidelity-research/"
+    modules:
+      - "binding_analysis_adapter"
+      - "case_promotion"
+      - "change_snapshot"
+      - "deterministic_rerun"
+      - "fidelity_analysis_adapter"
+      - "finding_capture"
+      - "first_slice_composition"
+      - "project_manifest"
+      - "specification_state"
+      - "structural_analysis_adapter"
+  leap_feedback:
+    divergences_from_analysis:
+      - "Composition required a new RUN_FIRST_SLICE block; pseudo-code was updated before the composition RED test."
+      - "Concrete pilot orchestration initially duplicated RUN_FIRST_SLICE ordering; LEAP added RUN_FIDELITY_RESEARCH_PILOT and refactored the pilot to delegate through injected adapters."
+      - "Validator grammar required explicit procedure declarations and per-procedure Contract headings; IMPL pseudo-code was repaired before GREEN."
+    record_status: "complete"
+    tied_stack_updates_required:
+      - "Fidelity-research vocabulary recorded RUN_FIRST_SLICE, RUN_FIDELITY_RESEARCH_PILOT, fidelity research pilot, and research dataset."
+      - "IMPL pseudo-code added the token-commented RUN_FIDELITY_RESEARCH_PILOT block and concrete adapter delegation."
+      - "REQ/ARCH/IMPL test traceability includes pilot.test.ts."
+  next_phase: "pilot execution against one real project and one IMPL/module boundary; no cross-project aggregation yet."
+  proof_boundaries:
+    - "Fidelity audit results require evidence review and do not automatically establish product defects."
+    - "Research case promotion does not mutate audited project TIED data."
+    - "Structural validators prove artifact consistency only."
+  record_identity:
+    author: "AI Agent"
+    change_request_id: "REQ-TIED_FIDELITY_RESEARCH"
+    date: "2026-08-09"
+    record_status: "complete"
+  risk_analysis:
+    not_applicable:
+      - "ai-enabled"
+      - "performance-scale-cost"
+      - "regulated-privacy"
+      - "user-facing-accessibility"
+    profiles:
+      - "baseline-functional"
+      - "data-integrity-migration"
+      - "external-input-security"
+      - "stateful-reliability"
+    risks:
+      - mitigation: "Require absolute project/tied equality before analysis."
+        name: "wrong TIED base path"
+        severity: "high"
+      - mitigation: "Use append-only findings and duplicate links."
+        name: "research record overwrites evidence"
+        severity: "high"
+      - mitigation: "Persist explicit structural-only proof boundary."
+        name: "structural pass mistaken for runtime proof"
+        severity: "high"
+      - mitigation: "Composition test asserts all nine stage calls in declared order."
+        name: "composition ordering drift"
+        severity: "high"
+  tdd_sequence:
+    - "Add composition RED test before orchestration code."
+    - "Author token-commented IMPL pseudo-code."
+    - "Implement composition GREEN orchestration."
+    - "Implement GREEN modules incrementally."
+    - "Run full MCP-server suite and TypeScript type-check."
+    - "Run post-test pseudo-code coverage validation."
+    - "Run pre-RED structural pseudo-code validation."
+    - "Write RED tests before production code."
+  test_strategy:
+    composition_pending: false
+    red_before_green: true
+    testability:
+      e2e_only: []
+      integration:
+        - "RUN_FIDELITY_RESEARCH_PILOT"
+        - "RUN_FIRST_SLICE"
+        - "RUN_STRUCTURAL_ANALYSIS"
+      unit:
+        - "ANALYZE_BINDING_EVIDENCE"
+        - "ANALYZE_SPECIFICATION_STATE"
+        - "APPEND_CANDIDATE_FINDING"
+        - "AUDIT_IMPL_FIDELITY"
+        - "PROJECT_MANIFEST"
+        - "PROMOTE_CONFIRMED_CASE"
+        - "SNAPSHOT_CHANGE"
+        - "VERIFY_DETERMINISTIC_RERUN"
+    tests:
+      - "mcp-server/src/fidelity-research/*.test.ts"
+  tied_context:
+    architecture:
+      - "ARCH-TIED_FIDELITY_RESEARCH"
+    implementation:
+      - "IMPL-TIED_FIDELITY_RESEARCH"
+    methodology_version: "3.0.0"
+    requirements:
+      - "REQ-TIED_FIDELITY_RESEARCH"
+    tied_base_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied"

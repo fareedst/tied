@@ -1,0 +1,56 @@
+IMPL-TIED_FIDELITY_RESEARCH:
+  code_locations:
+    files: []
+    functions: []
+  cross_references:
+    - "ARCH-TIED_FIDELITY_RESEARCH"
+    - "REQ-TIED_FIDELITY_RESEARCH"
+  implementation_approach:
+    details:
+      - "Append candidate findings and preserve duplicate links without overwriting evidence."
+      - "Capture SNAPSHOT_CHANGE with revisions, hashes, paths, commands, and exclusions."
+      - "Classify specification state before treating tests or code as regression evidence."
+      - "Compose validated modules through RUN_FIRST_SLICE and verify deterministic rerun."
+      - "Promote case reports only after independent review and never mutate audited project TIED."
+      - "Resolve PROJECT_MANIFEST before loading audited project artifacts."
+      - "Run structural, fidelity, and binding analysis with explicit proof boundaries."
+    summary: "Provide independently validated read-only fidelity research modules and composition."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-09"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-09"
+      reason: "Methodology promotion for all TIED clients"
+  name: "Fidelity Research First Vertical Slice"
+  rationale:
+    benefits:
+      - "Append-only evidence preservation"
+      - "Safe promotion without automatic product mutation"
+      - "Small independently validated modules"
+    problems_solved:
+      - "No consistent client procedure existed for fidelity observations."
+      - "Research adapters lacked explicit proof boundaries."
+      - "Specification state and implementation defects could be conflated."
+    why: "TIED clients need a repeatable, read-only procedure for tracing defects to their first divergent layer."
+  related_decisions:
+    depends_on:
+      - "IMPL-MODULE_VALIDATION"
+      - "IMPL-TIED_FILES"
+    see_also:
+      - "IMPL-QUALITY_BINDING_INVENTORY"
+      - "IMPL-QUALITY_PSEUDOCODE_VALIDATOR"
+    supersedes: []
+  status: "Active"
+  testability: "integration"
+  traceability:
+    architecture:
+      - "ARCH-TIED_FIDELITY_RESEARCH"
+    code_annotations:
+      - "ARCH-TIED_FIDELITY_RESEARCH"
+      - "IMPL-TIED_FIDELITY_RESEARCH"
+      - "REQ-TIED_FIDELITY_RESEARCH"
+    requirements:
+      - "REQ-TIED_FIDELITY_RESEARCH"
+    tests: []

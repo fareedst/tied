@@ -1,186 +1,110 @@
-# Implementation Decisions Index (YAML Database)
-#
-# This YAML file serves as the central index/registry for all implementation decisions in the project.
-# Each top-level key is a semantic token (e.g., IMPL-MODULE_VALIDATION).
-#
-# To append a new implementation decision:
-# 1. Copy the template block at the bottom of this file (IMPL-IDENTIFIER)
-# 2. Paste it at the end with a blank line before it
-# 3. Replace IMPL-IDENTIFIER with your new token
-# 4. Fill in all fields
-# 5. Set detail_file to your new .yaml under implementation-decisions/ or null; methodology: agent-req-implementation-checklist.yaml
-#
-# Field descriptions:
-#   name: Short descriptive name of the decision
-#   status: Active | Deprecated | Template | Superseded
-#   cross_references: List of ARCH-* and REQ-* tokens this decision implements
-#   rationale: Structured explanation with why, problems_solved, benefits
-#   implementation_approach: Structured approach with summary and details
-#   code_locations: Structured code locations with files and functions
-#   traceability: Structured links to architecture, requirements, tests, code_annotations
-#   related_decisions: Lists of depends_on, supersedes, see_also (YAML lists or [])
-#   detail_file: Path to the detailed .yaml in implementation-decisions/ or null for methodology index-only; procedure: tied/docs/agent-req-implementation-checklist.yaml
-#   metadata: Optional metadata
-# Methodology seed: token identity and traceability only; expand rationale in project detail files.
 IMPL-MCP_FEEDBACK_TOOLS:
-  name: "MCP Feedback Tools (tied_feedback_add, tied_feedback_export)"
-  status: "Active"
   cross_references:
     - "ARCH-FEEDBACK_STORAGE"
     - "REQ-FEEDBACK_TO_TIED"
   detail_file: "null"
+  metadata:
+    last_updated:
+      reason: "Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml"
+  name: "MCP Feedback Tools (tied_feedback_add, tied_feedback_export)"
+  related_decisions:
+    depends_on: []
+    see_also:
+      - "ARCH-FEEDBACK_STORAGE"
+      - "REQ-FEEDBACK_TO_TIED"
+    supersedes: []
+  status: "Active"
   traceability:
     architecture:
       - "ARCH-FEEDBACK_STORAGE"
     requirements:
       - "REQ-FEEDBACK_TO_TIED"
-  related_decisions:
-    depends_on: []
-    supersedes: []
-    see_also:
-      - "ARCH-FEEDBACK_STORAGE"
-      - "REQ-FEEDBACK_TO_TIED"
-  metadata:
-    last_updated:
-      reason: "Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml"
-# ---
-# Template Record - Copy this block to create new implementation decisions
-# ---
-#
-# IMPL-IDENTIFIER:
-#   name: Implementation Title
-#   status: Active
-#   cross_references:
-#     - ARCH-RELATED_ARCHITECTURE
-#     - REQ-RELATED_REQUIREMENT
-#   rationale:
-#     why: "Primary reason for this implementation approach"
-#     problems_solved:
-#       - "Problem 1"
-#       - "Problem 2"
-#     benefits:
-#       - "Benefit 1"
-#       - "Benefit 2"
-#   implementation_approach:
-#     summary: "High-level description of implementation"
-#     details:
-#       - "Specific technical detail 1"
-#       - "Code structure or pattern"
-#       - "API design decision"
-#   code_locations:
-#     files:
-#       - path: "path/to/file.ext"
-#         description: "Description of what's implemented there"
-#         lines: [10, 50]  # optional line range
-#     functions:
-#       - name: "exampleFunction"
-#         file: "path/to/file.ext"
-#         description: "What it does"
-#   traceability:
-#     architecture:
-#       - ARCH-IDENTIFIER
-#     requirements:
-#       - REQ-IDENTIFIER
-#     tests:
-#       - testFeatureName_REQ_IDENTIFIER
-#     code_annotations:
-#       - IMPL-IDENTIFIER
-#   related_decisions:
-#     depends_on: []
-#     supersedes: []
-#     see_also: []
-#   detail_file: implementation-decisions/IMPL-IDENTIFIER.yaml
-#   metadata:
-#     created:
-#       date: YYYY-MM-DD
-#       author: "agent/contributor"
-#     last_updated:
-#       date: YYYY-MM-DD
-#       author: "agent/contributor"
-#       reason: "Initial creation"
-#     last_validated:
-#       date: YYYY-MM-DD
-#       validator: "agent/contributor"
-#       result: "pass"
-
 IMPL-MODULE_VALIDATION:
-  name: "Module Validation Implementation"
-  status: "Active"
   cross_references:
     - "ARCH-MODULE_VALIDATION"
     - "REQ-MODULE_VALIDATION"
   detail_file: "implementation-decisions/IMPL-MODULE_VALIDATION.yaml"
+  metadata:
+    last_updated:
+      reason: "Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml"
+  name: "Module Validation Implementation"
+  related_decisions:
+    depends_on: []
+    see_also:
+      - "ARCH-MODULE_VALIDATION"
+      - "REQ-MODULE_VALIDATION"
+    supersedes: []
+  status: "Active"
   traceability:
     architecture:
       - "ARCH-MODULE_VALIDATION"
     requirements:
       - "REQ-MODULE_VALIDATION"
-  related_decisions:
-    depends_on: []
-    supersedes: []
-    see_also:
-      - "ARCH-MODULE_VALIDATION"
-      - "REQ-MODULE_VALIDATION"
-  metadata:
-    last_updated:
-      reason: "Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml"
 IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK:
-  name: "Authenticated webhook inbox pilot"
-  status: "Active"
   cross_references:
     - "ARCH-QUALITY_ASSURANCE_PROFILES"
     - "REQ-QUALITY_ASSURANCE_EVIDENCE"
   detail_file: "implementation-decisions/IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK.yaml"
+  name: "Authenticated webhook inbox pilot"
+  related_decisions:
+    depends_on: []
+    see_also: []
+    supersedes: []
+  status: "Active"
   traceability:
     architecture:
       - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    code_annotations:
+      - "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK"
     requirements:
       - "REQ-QUALITY_ASSURANCE_EVIDENCE"
     tests:
       - "pilot/webhook-inbox/test/webhook-inbox.test.mjs"
-    code_annotations:
-      - "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK"
-  related_decisions:
-    depends_on: []
-    supersedes: []
-    see_also: []
 IMPL-QUALITY_BINDING_INVENTORY:
-  name: "Quality binding inventory validator"
-  status: "Active"
   cross_references:
     - "ARCH-MODULE_VALIDATION"
     - "ARCH-QUALITY_ASSURANCE_PROFILES"
     - "REQ-MODULE_VALIDATION"
     - "REQ-QUALITY_ASSURANCE_EVIDENCE"
   detail_file: "implementation-decisions/IMPL-QUALITY_BINDING_INVENTORY.yaml"
+  name: "Quality binding inventory validator"
+  related_decisions:
+    depends_on: []
+    see_also: []
+    supersedes: []
+  status: "Active"
   traceability:
     architecture:
       - "ARCH-MODULE_VALIDATION"
       - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    code_annotations:
+      - "IMPL-QUALITY_BINDING_INVENTORY"
     requirements:
       - "REQ-MODULE_VALIDATION"
       - "REQ-QUALITY_ASSURANCE_EVIDENCE"
     tests:
       - "mcp-server/src/analysis/binding-inventory.test.ts"
       - "mcp-server/src/tools/quality-validation-mcp.test.ts"
-    code_annotations:
-      - "IMPL-QUALITY_BINDING_INVENTORY"
-  related_decisions:
-    depends_on: []
-    supersedes: []
-    see_also: []
 IMPL-QUALITY_EVIDENCE_COLLECTION:
-  name: "Command-to-manifest evidence collector"
-  status: "Active"
   cross_references:
     - "ARCH-QUALITY_ASSURANCE_PROFILES"
     - "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER"
     - "IMPL-QUALITY_EVIDENCE_MANIFEST"
     - "REQ-QUALITY_ASSURANCE_EVIDENCE"
   detail_file: "implementation-decisions/IMPL-QUALITY_EVIDENCE_COLLECTION.yaml"
+  name: "Command-to-manifest evidence collector"
+  related_decisions:
+    depends_on:
+      - "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER"
+      - "IMPL-QUALITY_EVIDENCE_MANIFEST"
+    see_also: []
+    supersedes: []
+  status: "Active"
   traceability:
     architecture:
       - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    code_annotations:
+      - "IMPL-QUALITY_EVIDENCE_COLLECTION"
     requirements:
       - "REQ-QUALITY_ASSURANCE_EVIDENCE"
     tests:
@@ -188,135 +112,159 @@ IMPL-QUALITY_EVIDENCE_COLLECTION:
       - "mcp-server/src/quality-evidence-collection.test.ts"
       - "mcp-server/src/quality-evidence.test.ts"
       - "mcp-server/src/tools/quality-validation-mcp.test.ts"
-    code_annotations:
-      - "IMPL-QUALITY_EVIDENCE_COLLECTION"
-  related_decisions:
-    depends_on:
-      - "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER"
-      - "IMPL-QUALITY_EVIDENCE_MANIFEST"
-    supersedes: []
-    see_also: []
 IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER:
-  name: "Quality evidence command runner"
-  status: "Active"
   cross_references:
     - "ARCH-QUALITY_ASSURANCE_PROFILES"
     - "IMPL-QUALITY_EVIDENCE_COLLECTION"
     - "REQ-QUALITY_ASSURANCE_EVIDENCE"
   detail_file: "implementation-decisions/IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER.yaml"
+  name: "Quality evidence command runner"
+  related_decisions:
+    composed_with:
+      - "IMPL-QUALITY_EVIDENCE_COLLECTION"
+    depends_on: []
+    see_also: []
+    supersedes: []
+  status: "Active"
   traceability:
     architecture:
       - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    code_annotations:
+      - "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER"
     requirements:
       - "REQ-QUALITY_ASSURANCE_EVIDENCE"
     tests:
       - "mcp-server/src/quality-command-runner.test.ts"
       - "mcp-server/src/quality-evidence-collection.test.ts"
       - "mcp-server/src/tools/quality-validation-mcp.test.ts"
-    code_annotations:
-      - "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER"
-  related_decisions:
-    composed_with:
-      - "IMPL-QUALITY_EVIDENCE_COLLECTION"
-    depends_on: []
-    supersedes: []
-    see_also: []
 IMPL-QUALITY_EVIDENCE_MANIFEST:
-  name: "Verification evidence manifest generation"
-  status: "Active"
   cross_references:
     - "ARCH-QUALITY_ASSURANCE_PROFILES"
     - "IMPL-QUALITY_EVIDENCE_COLLECTION"
     - "REQ-QUALITY_ASSURANCE_EVIDENCE"
   detail_file: "implementation-decisions/IMPL-QUALITY_EVIDENCE_MANIFEST.yaml"
+  name: "Verification evidence manifest generation"
+  related_decisions:
+    depends_on:
+      - "IMPL-QUALITY_EVIDENCE_COLLECTION"
+    see_also: []
+    supersedes: []
+  status: "Active"
   traceability:
     architecture:
       - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    code_annotations:
+      - "IMPL-QUALITY_EVIDENCE_MANIFEST"
     requirements:
       - "REQ-QUALITY_ASSURANCE_EVIDENCE"
     tests:
       - "mcp-server/src/quality-evidence-collection.test.ts"
       - "mcp-server/src/quality-evidence.test.ts"
       - "mcp-server/src/tools/quality-validation-mcp.test.ts"
-    code_annotations:
-      - "IMPL-QUALITY_EVIDENCE_MANIFEST"
-  related_decisions:
-    depends_on:
-      - "IMPL-QUALITY_EVIDENCE_COLLECTION"
-    supersedes: []
-    see_also: []
 IMPL-QUALITY_PSEUDOCODE_VALIDATOR:
-  name: "Layer B pseudo-code validator"
-  status: "Active"
   cross_references:
     - "ARCH-QUALITY_ASSURANCE_PROFILES"
     - "PROC-PSEUDOCODE_VALIDATION"
     - "REQ-QUALITY_ASSURANCE_EVIDENCE"
   detail_file: "implementation-decisions/IMPL-QUALITY_PSEUDOCODE_VALIDATOR.yaml"
+  name: "Layer B pseudo-code validator"
+  related_decisions:
+    depends_on: []
+    see_also: []
+    supersedes: []
+  status: "Active"
   traceability:
     architecture:
       - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    code_annotations:
+      - "IMPL-QUALITY_PSEUDOCODE_VALIDATOR"
     requirements:
       - "REQ-QUALITY_ASSURANCE_EVIDENCE"
     tests:
       - "mcp-server/src/analysis/pseudocode-validator.test.ts"
       - "mcp-server/src/tools/quality-validation-mcp.test.ts"
-    code_annotations:
-      - "IMPL-QUALITY_PSEUDOCODE_VALIDATOR"
-  related_decisions:
-    depends_on: []
-    supersedes: []
-    see_also: []
 IMPL-QUALITY_SECURITY_PROFILE_VALIDATION:
-  name: "External-input security profile validation"
-  status: "Active"
   cross_references:
     - "ARCH-QUALITY_ASSURANCE_PROFILES"
     - "REQ-QUALITY_ASSURANCE_EVIDENCE"
   detail_file: "implementation-decisions/IMPL-QUALITY_SECURITY_PROFILE_VALIDATION.yaml"
+  name: "External-input security profile validation"
+  related_decisions:
+    depends_on: []
+    see_also: []
+    supersedes: []
+  status: "Active"
   traceability:
     architecture:
       - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    code_annotations:
+      - "IMPL-QUALITY_SECURITY_PROFILE_VALIDATION"
     requirements:
       - "REQ-QUALITY_ASSURANCE_EVIDENCE"
     tests:
       - "mcp-server/src/quality-security.test.ts"
       - "mcp-server/src/tools/quality-validation-mcp.test.ts"
-    code_annotations:
-      - "IMPL-QUALITY_SECURITY_PROFILE_VALIDATION"
-  related_decisions:
-    depends_on: []
-    supersedes: []
-    see_also: []
 IMPL-QUALITY_TEST_ADEQUACY:
-  name: "Risk-triggered test adequacy validator"
-  status: "Active"
   cross_references:
     - "ARCH-QUALITY_ASSURANCE_PROFILES"
     - "PROC-TEST_ADEQUACY"
     - "REQ-QUALITY_ASSURANCE_EVIDENCE"
   detail_file: "implementation-decisions/IMPL-QUALITY_TEST_ADEQUACY.yaml"
+  name: "Risk-triggered test adequacy validator"
+  related_decisions:
+    depends_on: []
+    see_also: []
+    supersedes: []
+  status: "Active"
   traceability:
     architecture:
       - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    code_annotations:
+      - "IMPL-QUALITY_TEST_ADEQUACY"
     requirements:
       - "REQ-QUALITY_ASSURANCE_EVIDENCE"
     tests:
       - "mcp-server/src/quality-adequacy.test.ts"
       - "mcp-server/src/tools/quality-validation-mcp.test.ts"
-    code_annotations:
-      - "IMPL-QUALITY_TEST_ADEQUACY"
+IMPL-TIED_FIDELITY_RESEARCH:
+  cross_references:
+    - "ARCH-TIED_FIDELITY_RESEARCH"
+    - "REQ-TIED_FIDELITY_RESEARCH"
+  detail_file: "implementation-decisions/IMPL-TIED_FIDELITY_RESEARCH.yaml"
+  metadata:
+    last_updated:
+      reason: "Methodology seed for read-only fidelity research; procedure: tied/docs/tied-fidelity-research.md"
+  name: "Fidelity Research First Vertical Slice"
   related_decisions:
-    depends_on: []
+    depends_on:
+      - "IMPL-MODULE_VALIDATION"
+      - "IMPL-TIED_FILES"
+    see_also:
+      - "IMPL-QUALITY_BINDING_INVENTORY"
+      - "IMPL-QUALITY_PSEUDOCODE_VALIDATOR"
     supersedes: []
-    see_also: []
-IMPL-TIED_FILES:
-  name: "TIED File Creation"
   status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_FIDELITY_RESEARCH"
+    requirements:
+      - "REQ-TIED_FIDELITY_RESEARCH"
+IMPL-TIED_FILES:
   cross_references:
     - "ARCH-TIED_STRUCTURE"
     - "REQ-TIED_SETUP"
   detail_file: "implementation-decisions/IMPL-TIED_FILES.yaml"
+  metadata:
+    last_updated:
+      reason: "Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml"
+  name: "TIED File Creation"
+  related_decisions:
+    depends_on: []
+    see_also:
+      - "ARCH-TIED_STRUCTURE"
+      - "REQ-TIED_SETUP"
+    supersedes: []
+  status: "Active"
   traceability:
     architecture:
       - "ARCH-TIED_STRUCTURE"
@@ -324,12 +272,3 @@ IMPL-TIED_FILES:
       - "REQ-TIED_SETUP"
     tests:
       - "mcp-server/src/e2e/bootstrap-and-load.test.ts"
-  related_decisions:
-    depends_on: []
-    supersedes: []
-    see_also:
-      - "ARCH-TIED_STRUCTURE"
-      - "REQ-TIED_SETUP"
-  metadata:
-    last_updated:
-      reason: "Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml"

@@ -56,3 +56,18 @@ alias lint-reorder=scripts/lint.sh
 alias build-agentstream='echo_exec --cd tools/agentstream go build -o agentstream ./cmd/agentstream'
 alias build-mcp='echo_exec --cd mcp-server bun install && echo_exec --cd mcp-server bun run build'
 alias test-mcp='echo_exec --cd mcp-server bun run test'
+
+unalias how 2>/dev/null || true
+how () {
+  # print a summary of the commands above
+  echo "Summary of commands:"
+  echo "--------------------------------"
+  echo "bi: backup inc"
+  echo "b.: backup . (current directory)"
+  echo "tied-cli: tied-yaml CLI tool"
+  echo "lint-tied: lint tied-yaml files"
+  echo "lint-reorder: lint reorder tied-yaml files"
+  echo "build-agentstream: build agentstream binary"
+  echo "build-mcp: build mcp-server binary"
+  echo "test-mcp: test mcp-server binary"
+}

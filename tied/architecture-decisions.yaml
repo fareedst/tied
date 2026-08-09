@@ -936,6 +936,75 @@ ARCH-QUALITY_ASSURANCE_PROFILES:
       - "mcp-server/src/quality-security.test.ts"
       - "mcp-server/src/tools/quality-validation-mcp.test.ts"
       - "pilot/webhook-inbox/test/webhook-inbox.test.mjs"
+ARCH-TIED_FIDELITY_RESEARCH:
+  alternatives_considered:
+    - cons:
+        - "Destroys read-only audit boundary"
+        - "Pollutes approved intent"
+      name: "Write findings directly into project TIED YAML"
+      pros:
+        - "Immediate visibility"
+      rejected_reason: "Research findings require triage and adjudication before changing project intent."
+    - cons:
+        - "Cannot reliably map block-level evidence"
+        - "Weak provenance"
+      name: "Use only transcript-derived natural language"
+      pros:
+        - "Low implementation cost"
+      rejected_reason: "Structured evidence must be emitted at discovery boundaries."
+  cross_references:
+    - "REQ-TIED_FIDELITY_RESEARCH"
+  decision: "Separate research analysis and append-only research evidence from audited project TIED data and remediation workflows."
+  detail_file: "architecture-decisions/ARCH-TIED_FIDELITY_RESEARCH.yaml"
+  implementation_approach:
+    details:
+      - "Concrete pilot wiring delegates stage ordering to RUN_FIRST_SLICE through validated adapters."
+      - "Confirm the absolute TIED base path independently for each analyzed project."
+      - "Keep research records outside audited project project YAML."
+      - "Represent specification state before interpreting tests or code as regression evidence."
+      - "Require human or policy-based promotion before any REQ/ARCH/IMPL mutation."
+      - "Separate unit fidelity, binding/composition evidence, and structural validation results."
+    summary: "Use explicit project manifests, immutable artifact snapshots, append-only findings, adapter proof boundaries, and separate case reports."
+  name: "Read-Only Fidelity Research Boundary"
+  rationale:
+    benefits:
+      - "Explicit handoff to approved LEAP remediation"
+      - "Reproducible evidence boundaries"
+      - "Safe independent project analysis"
+    problems_solved:
+      - "Audited projects could be mutated during analysis."
+      - "Candidate observations could be promoted without adjudication."
+      - "Structural evidence could be mistaken for runtime proof."
+    why: "Research must preserve pre-remediation evidence and prevent automatic specification pollution or cross-project writes."
+  related_decisions:
+    depends_on:
+      - "ARCH-MODULE_VALIDATION"
+      - "ARCH-TIED_STRUCTURE"
+    informs:
+      - "IMPL-TIED_FIDELITY_RESEARCH"
+    see_also:
+      - "ARCH-LEAP_PROPOSAL_QUEUE"
+      - "ARCH-QUALITY_ASSURANCE_PROFILES"
+  status: "Active"
+  traceability:
+    code_annotations:
+      - "ARCH-TIED_FIDELITY_RESEARCH"
+    implementation:
+      - "IMPL-TIED_FIDELITY_RESEARCH"
+    requirements:
+      - "REQ-TIED_FIDELITY_RESEARCH"
+    tests:
+      - "mcp-server/src/fidelity-research/binding-analysis.test.ts"
+      - "mcp-server/src/fidelity-research/case-promotion.test.ts"
+      - "mcp-server/src/fidelity-research/deterministic-rerun.test.ts"
+      - "mcp-server/src/fidelity-research/fidelity-audit.test.ts"
+      - "mcp-server/src/fidelity-research/finding-ledger.test.ts"
+      - "mcp-server/src/fidelity-research/first-slice.test.ts"
+      - "mcp-server/src/fidelity-research/manifest.test.ts"
+      - "mcp-server/src/fidelity-research/pilot.test.ts"
+      - "mcp-server/src/fidelity-research/snapshot.test.ts"
+      - "mcp-server/src/fidelity-research/specification-state.test.ts"
+      - "mcp-server/src/fidelity-research/structural-analysis.test.ts"
 ARCH-TIED_STRUCTURE:
   alternatives_considered:
     - cons:

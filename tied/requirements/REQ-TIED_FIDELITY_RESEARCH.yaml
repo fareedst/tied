@@ -1,0 +1,60 @@
+REQ-TIED_FIDELITY_RESEARCH:
+  category: "Functional"
+  description: "Provide a read-only research capability that measures fidelity and defect origin across domain vocabulary, REQ, ARCH, IMPL pseudo-code, tests, code, and documentation."
+  metadata:
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-09"
+      reason: "Record first vertical slice implementation and test traceability"
+  name: "TIED Fidelity Research"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Read-only defect-origin analysis"
+      - "Reproducible evidence and provenance"
+      - "Separate research findings from remediation"
+    problems_solved:
+      - "Agent observations can be mistaken for confirmed product defects."
+      - "Specification changes can be misclassified as regressions."
+      - "Structural consistency does not establish runtime correctness."
+    why: "Distinguish behavioral correctness from translation fidelity and preserve evidence about where meaning diverges across the TIED chain."
+  related_requirements:
+    depends_on:
+      - "REQ-MODULE_VALIDATION"
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-LEAP_PROPOSAL_QUEUE"
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "A first vertical slice analyzes one project and one IMPL/module boundary without mutating the audited project."
+    - criterion: "Candidate findings retain lifecycle, evidence, provenance, and proof-boundary information."
+    - criterion: "Deterministic reruns link duplicates without inflating defect counts."
+    - criterion: "Specification change, implementation lag, missing specification, and implementation defect remain distinct outcomes."
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_FIDELITY_RESEARCH"
+    code_annotations:
+      - "REQ-TIED_FIDELITY_RESEARCH"
+    implementation:
+      - "IMPL-TIED_FIDELITY_RESEARCH"
+    tests:
+      - "mcp-server/src/fidelity-research/binding-analysis.test.ts"
+      - "mcp-server/src/fidelity-research/case-promotion.test.ts"
+      - "mcp-server/src/fidelity-research/deterministic-rerun.test.ts"
+      - "mcp-server/src/fidelity-research/fidelity-audit.test.ts"
+      - "mcp-server/src/fidelity-research/finding-ledger.test.ts"
+      - "mcp-server/src/fidelity-research/first-slice.test.ts"
+      - "mcp-server/src/fidelity-research/manifest.test.ts"
+      - "mcp-server/src/fidelity-research/pilot.test.ts"
+      - "mcp-server/src/fidelity-research/snapshot.test.ts"
+      - "mcp-server/src/fidelity-research/specification-state.test.ts"
+      - "mcp-server/src/fidelity-research/structural-analysis.test.ts"
+  validation_criteria:
+    - coverage: "Manifest, finding lifecycle, specification-state classification, fidelity matrices, promotion, and deterministic rerun."
+      method: "Unit tests"
+    - coverage: "Structural, fidelity, and binding adapters prove trigger, arguments, result, and proof boundary without UI."
+      method: "Composition tests"
+    - coverage: "Audited project source, tests, and project YAML remain unchanged."
+      method: "Read-only safety checks"

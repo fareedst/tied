@@ -404,10 +404,12 @@ DOCS_TO_COPY=(
   "methodology-migration.md"
   "methodology-diagrams.md"
   "processes.md"
+  "tied-fidelity-research.md"
   # Canonical IMPL pseudo-code (primary references for bootstrap):
   # - pseudocode-writing-and-validation.md — unified guide (writing, MCP mechanics, block linkage, phases A–I, LEAP, when to validate).
   # - pseudocode-validation-checklist.yaml — Layer B application checklist ([PROC-PSEUDOCODE_VALIDATION]).
   "pseudocode-format-and-practices.md"
+  "pseudocode-fidelity-audit-agent-prompt.md"
   "pseudocode-writing-and-validation.md"
   "pseudocode-validation-checklist.yaml"
   "quality-assurance-commands.md"
@@ -453,6 +455,9 @@ for f in "${DOCS_TO_COPY[@]}"; do
 done
 if [[ ${docs_total} -gt 0 ]]; then
   say_x_of_y_client "${docs_count}" "${docs_total}" "Copied ${docs_count} of ${docs_total} methodology doc(s) into ${TIED_DIR}/docs."
+  if [[ ${docs_count} -lt ${docs_total} ]]; then
+    say_warn "Preserved $((docs_total - docs_count)) existing methodology document(s); compare them with ${TIED_SOURCE_DIR}/docs/ and merge applicable changes."
+  fi
 fi
 
 # --- Methodology: implementation decision detail files into tied/methodology/ (ALWAYS OVERWRITE) ---
@@ -533,3 +538,51 @@ if [[ -d "${REQ_TEMPLATE_DIR}" ]]; then
   fi
 fi
 shopt -u nullglob
+
+# --- Fidelity research methodology verification ---
+# [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [REQ-TIED_FIDELITY_RESEARCH]
+# How: VERIFY_FIDELITY_METHODOLOGY — fail bootstrap when the mandatory client
+# methodology contract is incomplete; report optional validation commands without
+# mutating the client project or audited research targets.
+FIDELITY_METHODOLOGY_REQUIRED_FILES=(
+  "methodology/requirements/REQ-TIED_FIDELITY_RESEARCH.yaml"
+  "methodology/architecture-decisions/ARCH-TIED_FIDELITY_RESEARCH.yaml"
+  "methodology/implementation-decisions/IMPL-TIED_FIDELITY_RESEARCH.yaml"
+  "methodology/implementation-decisions/IMPL-TIED_FIDELITY_RESEARCH-pseudocode.md"
+  "docs/tied-fidelity-research.md"
+  "docs/pseudocode-fidelity-audit-agent-prompt.md"
+  "vocab/fidelity-research.md"
+)
+
+verify_fidelity_methodology() {
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [REQ-TIED_FIDELITY_RESEARCH]
+  # How: Require the inherited guide, vocabulary, REQ/ARCH/IMPL records, and
+  # pseudo-code sidecar before declaring the client methodology installed.
+  local _missing=0 _deferred_vocab=0 _relative
+  say_warn "MUST verify fidelity research methodology artifacts before completion."
+  for _relative in "${FIDELITY_METHODOLOGY_REQUIRED_FILES[@]}"; do
+    if [[ ! -f "${TIED_DIR}/${_relative}" ]]; then
+      if [[ "${_relative}" == "vocab/fidelity-research.md" ]] && [[ "${MERGE_VOCAB}" != "true" ]]; then
+        say_warn "MUST run ./copy_files.sh --merge-vocab ${TARGET_PROJECT_DIR} to add the fidelity research vocabulary."
+        _deferred_vocab=1
+        continue
+      fi
+      say_err "MISSING mandatory fidelity methodology artifact: ${TIED_DIR}/${_relative}"
+      _missing=1
+    fi
+  done
+  if [[ "${_missing}" -ne 0 ]]; then
+    say_err "Fidelity research methodology verification failed; client bootstrap is incomplete."
+    return 1
+  fi
+  if [[ "${_deferred_vocab}" -eq 0 ]]; then
+    say_ok "MUST verify fidelity research methodology artifacts: complete."
+  else
+    say_warn "MUST complete fidelity research vocabulary installation with --merge-vocab."
+  fi
+  say_warn "CAN run structural validation: TIED_BASE_PATH=${TIED_BASE_PATH_VALUE} ${TIED_CLI_DEST:-${CURSOR_DIR}/skills/tied-yaml/scripts/tied-cli.sh} tied_validate_consistency."
+  say_warn "CAN run the read-only audit: ${TIED_DIR}/docs/pseudocode-fidelity-audit-agent-prompt.md (Stages 0-4)."
+  say_warn "CAN merge new vocabulary into an existing client with: ./copy_files.sh --merge-vocab /path/to/client."
+}
+
+verify_fidelity_methodology

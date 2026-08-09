@@ -1,0 +1,62 @@
+ARCH-TIED_FIDELITY_RESEARCH:
+  alternatives_considered:
+    - cons:
+        - "Findings can pollute approved project intent."
+        - "Pre-remediation evidence can be lost."
+      name: "Write findings directly into project TIED YAML"
+      pros:
+        - "Immediate project visibility"
+      rejected_reason: "Research observations require triage and adjudication before changing intent."
+    - cons:
+        - "Weak provenance and block-level mapping"
+      name: "Use transcript-only natural-language findings"
+      pros:
+        - "Low initial implementation cost"
+      rejected_reason: "Findings must be emitted at discovery boundaries with structured evidence."
+  cross_references:
+    - "REQ-TIED_FIDELITY_RESEARCH"
+  decision: "Separate read-only research analysis and append-only evidence from audited project TIED data and remediation workflows."
+  implementation_approach:
+    details:
+      - "Confirm the absolute TIED base path independently for each analyzed project."
+      - "Establish prior/current approved specification state before interpreting behavior evidence."
+      - "Keep research records outside audited project project YAML."
+      - "Require explicit promotion before any REQ, ARCH, or IMPL mutation."
+      - "Separate structural, fidelity, and binding evidence with explicit proof boundaries."
+    summary: "Use bounded manifests, immutable snapshots, append-only findings, evidence adapters, and separate case reports."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-09"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-09"
+      reason: "Methodology promotion for all TIED clients"
+  name: "Read-Only Fidelity Research Boundary"
+  rationale:
+    benefits:
+      - "Explicit handoff to approved LEAP remediation"
+      - "Reproducible evidence boundaries"
+      - "Safe independent project analysis"
+    problems_solved:
+      - "Audited projects could be mutated during analysis."
+      - "Candidate observations could be promoted without review."
+      - "Structural evidence could be mistaken for runtime proof."
+    why: "Research must preserve pre-remediation evidence and prevent automatic specification pollution."
+  related_decisions:
+    depends_on:
+      - "ARCH-MODULE_VALIDATION"
+      - "ARCH-TIED_STRUCTURE"
+    informs:
+      - "IMPL-TIED_FIDELITY_RESEARCH"
+    see_also:
+      - "ARCH-QUALITY_ASSURANCE_PROFILES"
+  status: "Active"
+  traceability:
+    code_annotations:
+      - "ARCH-TIED_FIDELITY_RESEARCH"
+    implementation:
+      - "IMPL-TIED_FIDELITY_RESEARCH"
+    requirements:
+      - "REQ-TIED_FIDELITY_RESEARCH"
+    tests: []
