@@ -866,6 +866,64 @@ REQ-MODULE_VALIDATION:
       method: "Integration testing"
     - coverage: "IMPL traceability.tests or test_coverage_note (E2E-only with reason) for every Active IMPL"
       method: "Coverage gates and gap report"
+REQ-PROMPT_TYPE_GLOBAL_SKILLS:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+    - "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
+    - "REQ-TIED_SETUP"
+  description: "The TIED methodology repository shall provide a versioned prompt-type skill bundle that can be installed into TIED client projects for consistent ongoing development workflows."
+  detail_file: "requirements/REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml"
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-12"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Replace triple-colon payload delimiter with invocation remainder and linked plan"
+  name: "Global Prompt-Type Skills"
+  priority: "P1"
+  status: "Implemented"
+REQ-PROMPT_TYPE_SUBAGENT:
+  category: "Tooling"
+  description: "Project-scoped Cursor custom subagents provide an explicit-only foreground Task wrapper for each of the 13 leaf prompt types, plus a plan-refine-build sequence orchestrator."
+  detail_file: "requirements/REQ-PROMPT_TYPE_SUBAGENT.yaml"
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-12"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Replace triple-colon payload delimiter with invocation remainder and linked plan"
+  name: "Prompt-Type Subagents"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-TIED_SETUP"
+    related_to: []
+    supersedes: []
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-PROMPT_TYPE_SUBAGENT"
+    code_annotations:
+      - "ARCH-PROMPT_TYPE_SUBAGENT"
+      - "IMPL-PROMPT_TYPE_SUBAGENT"
+      - "REQ-PROMPT_TYPE_SUBAGENT"
+    implementation:
+      - "IMPL-PROMPT_TYPE_SUBAGENT"
+    tests:
+      - "mcp-server/src/e2e/prompt-type-subagent.test.ts"
+  validation_criteria:
+    - coverage: "Frontmatter and activation policy"
+      method: "Static contract test"
+    - coverage: "Workflow gates and parent return contract"
+      method: "Static contract test"
+    - coverage: "TIED traceability"
+      method: "tied_validate_consistency"
 REQ-QUALITY_ASSURANCE_EVIDENCE:
   category: "Non-Functional"
   cross_references:
@@ -1003,7 +1061,7 @@ REQ-TIED_FIDELITY_RESEARCH:
       method: "Read-only safety checks"
 REQ-TIED_SETUP:
   category: "Functional"
-  description: "TIED setup includes deterministic typed YAML canonicalization through the shared tied-yaml-canonical-v1 profile."
+  description: "TIED setup provides a deterministic client bootstrap: it creates the TIED structure, installs managed skills and the 13 leaf prompt-type Task wrappers, preserves attributes with cp -p/cp -pR, normalizes only client-copy mtimes to each source item's local calendar-date midnight, and warns before replacing destinations whose mtimes are not midnight."
   detail_file: "requirements/REQ-TIED_SETUP.yaml"
   metadata:
     created:
@@ -1011,8 +1069,8 @@ REQ-TIED_SETUP:
       date: "2025-11-08T00:00:00.000Z"
     last_updated:
       author: "AI Agent"
-      date: "2026-08-06"
-      reason: "Replace historical double-quoted scalar lint contract with shared typed canonical profile"
+      date: "2026-08-13"
+      reason: "Install all 13 leaf prompt-type Task wrappers during bootstrap"
     last_validated:
       date: "2026-02-06T00:00:00.000Z"
       result: "pass"
@@ -1056,6 +1114,10 @@ REQ-TIED_SETUP:
       metric: "tied/methodology/ matches the current template snapshot and stale inherited files are pruned"
     - criterion: "When .cursor/mcp.json already exists, copy_files.sh preserves its exact bytes and does not initialize or merge tied-yaml into it"
       metric: "Bootstrap E2E refresh fixture compares the pre-existing MCP config byte-for-byte after refresh"
+    - criterion: "Managed bootstrap artifacts preserve supported attributes, retain source content, normalize only client-copy mtimes to each source item's local calendar-date midnight, and warn before replacement when an existing destination mtime is not midnight"
+      metric: "Prompt skill/bootstrap tests verify cp flags, source immutability, destination midnight mtime, and warning output"
+    - criterion: "copy_files.sh installs the canonical .cursor/agents/<prompt-type>.md wrappers for all 13 leaf prompt types into clients"
+      metric: "Installed agent content is byte-identical to the source and refresh restores an edited copy"
   status: "Implemented"
   traceability:
     architecture:

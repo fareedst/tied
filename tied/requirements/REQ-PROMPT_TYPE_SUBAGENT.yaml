@@ -1,0 +1,58 @@
+REQ-PROMPT_TYPE_SUBAGENT:
+  category: "Tooling"
+  description: "Project-scoped Cursor custom subagents provide an explicit-only foreground Task wrapper for each of the 13 leaf prompt types, plus a plan-refine-build sequence orchestrator that Task-launches plan-new-feature, then refine-plan, then build-plan. Each leaf wrapper follows its canonical Prompt Composer skill, preserves that skill's procedure, gates, and TIED applicability boundary, avoids unsafe clipboard and automatic Git mutations, returns structured evidence to its parent, and is installed into TIED clients as a managed bootstrap artifact with source-date midnight client-copy timestamps and non-midnight modification detection. Implementing and close-out wrappers are writable; question and other are readonly. The sequence orchestrator does not implement the feature in its own context."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-12"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Replace triple-colon payload delimiter with invocation remainder and linked plan"
+    last_validated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      result: "pass"
+  name: "Prompt-Type Subagents"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Explicit delegation keeps each canonical skill as the workflow source."
+      - "Static tests prevent contract drift across all 13 wrappers."
+      - "Writable implementation remains compatible with Implement and close-out phases."
+    problems_solved:
+      - "A single plan-new-feature wrapper leaves the other 12 leaf skills without an isolated Task contract."
+      - "A stub body does not define the workflow or handoff evidence."
+      - "readonly true prevents required Implement or close-out phases."
+    why: "A Cursor Task subagent starts in a clean context and needs an explicit workflow contract for every leaf prompt type."
+  related_requirements:
+    depends_on:
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-TIED_SETUP"
+    related_to: []
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: ".cursor/agents/plan-refine-build.md is an explicit-only writable foreground sequencer that Task-launches plan-new-feature, then refine-plan, then build-plan, stops on a failed child gate, and does not implement the feature in its own context."
+    - criterion: "A deterministic static contract test covers all 13 leaf wrappers."
+    - criterion: "copy_files.sh installs every canonical .cursor/agents/*.md wrapper into clients with byte-identical content."
+    - criterion: "Each body forbids clipboard commands, automatic Git mutation, and inferred TIED applicability."
+    - criterion: "Each body preserves that prompt type's procedure, gates, TIED applicability boundary, and parent handoff contract."
+    - criterion: "Each description distinguishes neighboring prompt types without proactive activation language."
+    - criterion: "Each leaf body identifies tools/bundled-prompt-type-skills/<prompt-type>/SKILL.md as the workflow source and does not rely on an include."
+    - criterion: "Each of the 13 leaf wrappers at .cursor/agents/<prompt-type>.md has valid frontmatter with a matching name and is_background false."
+    - criterion: "Implementing and close-out wrappers have readonly false; question and other have readonly true."
+    - criterion: "Leaf and sequence agents name invocation remainder and linked plan instead of a triple-colon payload delimiter. plan-new-feature treats remainder as the requirement. refine-plan and build-plan require a linked or in-message plan. plan-refine-build passes remainder then linked plans to its children."
+    - criterion: "Managed agent refresh normalizes only the client copy to the source item's local-date midnight, leaves the source mtime unchanged, and warns before overwriting a destination whose mtime is not midnight."
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-PROMPT_TYPE_SUBAGENT"
+    implementation:
+      - "IMPL-PROMPT_TYPE_SUBAGENT"
+    tests:
+      - "mcp-server/src/e2e/prompt-type-subagent.test.ts"
+  validation_criteria:
+    - coverage: "Frontmatter, activation, canonical skill path, ordering, gates, safety boundary, return contract, and token comments"
+      method: "Node static contract test"
+    - coverage: "TIED index, detail, token, and pseudo-code consistency"
+      method: "tied_validate_consistency"

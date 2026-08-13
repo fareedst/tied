@@ -883,6 +883,94 @@ ARCH-MODULE_VALIDATION:
       - "REQ-MODULE_VALIDATION"
     tests:
       - "testModuleName_IndependentValidation_REQ_MODULE_VALIDATION"
+ARCH-PROMPT_TYPE_GLOBAL_SKILLS:
+  cross_references:
+    - "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
+    - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+  description: "A tracked hybrid bundle keeps canonical prompt skills in the TIED repository and installs them into each client’s local Cursor skill directory."
+  detail_file: "architecture-decisions/ARCH-PROMPT_TYPE_GLOBAL_SKILLS.yaml"
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-12"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Name invocation remainder and linked plan as skill payloads"
+  name: "Hybrid Prompt-Type Skill Bundle"
+  status: "Active"
+ARCH-PROMPT_TYPE_SUBAGENT:
+  alternatives_considered:
+    - cons:
+        - "Cannot perform Implement"
+      name: "Keep the stub readonly"
+      pros:
+        - "Limits mutation risk"
+      rejected_reason: "The selected full workflow requires writable execution."
+    - cons:
+        - "Duplicates the canonical workflow and drifts"
+      name: "Paste the entire skill into the agent"
+      pros:
+        - "More self-contained prompt"
+      rejected_reason: "The wrapper should reference the canonical skill and repeat only clean-context-critical boundaries."
+    - cons:
+        - "Adds a repository-specific orchestration entry to client tooling"
+      name: "Install the agent in every client"
+      pros:
+        - "Uniform Task availability"
+      rejected_reason: "Client projects receive the canonical skill; this Task wrapper is intentionally TIED-source scoped."
+  cross_references:
+    - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+    - "REQ-PROMPT_TYPE_SUBAGENT"
+  description: "Project-scoped Cursor Task wrappers delegate explicitly to each canonical leaf prompt-type skill; plan-refine-build sequences three leaf Task children using invocation remainder then linked plans."
+  detail_file: "architecture-decisions/ARCH-PROMPT_TYPE_SUBAGENT.yaml"
+  implementation_approach:
+    details:
+      - "A static test validates frontmatter, workflow gates, managed installation, source-date midnight timestamp, source immutability, warning behavior, and required prompt clauses for all 13 leaf wrappers without attempting runtime LLM evaluation."
+      - "copy_files.sh installs each project-scoped wrapper into the client .cursor/agents/ directory as a managed canonical artifact alongside the skill bundle."
+      - "Each wrapper repeats only the bootstrap, gates, safety boundary, and return contract needed by a clean subagent context; refresh warns on non-midnight client mtimes before replacement and does not modify source timestamps."
+      - "The canonical workflow remains tools/bundled-prompt-type-skills/<prompt-type>/SKILL.md for each leaf."
+    summary: "Keep each agent file as a thin project-scoped Task wrapper with explicit activation, type-specific readonly, foreground execution, canonical skill delegation, managed client installation, destination-only source-date midnight metadata, and a structured parent handoff."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-12"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Name invocation remainder and linked plan as agent payloads"
+  name: "Prompt-Type Task Subagent Boundary"
+  rationale:
+    benefits:
+      - "Explicit delegation keeps the skill as the single workflow source."
+      - "Static validation makes the agent contract reviewable and deterministic."
+      - "Writable foreground execution supports sequential TIED gates."
+    problems_solved:
+      - "A stub body does not define the workflow or handoff evidence."
+      - "Missing contract tests allow activation and safety drift."
+      - "readonly true prevents the required Implement phase."
+    why: "Cursor custom subagents start with isolated context and do not reliably include a separately named skill from a one-line body."
+  related_decisions:
+    depends_on:
+      - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+    informs:
+      - "IMPL-PROMPT_TYPE_SUBAGENT"
+    see_also:
+      - "ARCH-TIED_STRUCTURE"
+      - "IMPL-TIED_FILES"
+    supersedes: []
+  status: "Active"
+  traceability:
+    code_annotations:
+      - "ARCH-PROMPT_TYPE_SUBAGENT"
+      - "IMPL-PROMPT_TYPE_SUBAGENT"
+      - "REQ-PROMPT_TYPE_SUBAGENT"
+    implementation:
+      - "IMPL-PROMPT_TYPE_SUBAGENT"
+    requirements:
+      - "REQ-PROMPT_TYPE_SUBAGENT"
+    tests:
+      - "mcp-server/src/e2e/prompt-type-subagent.test.ts"
 ARCH-QUALITY_ASSURANCE_PROFILES:
   cross_references:
     - "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK"
@@ -1029,22 +1117,25 @@ ARCH-TIED_STRUCTURE:
       - "Add guide files: semantic-tokens.md, processes.md"
       - "Create detail subdirectories: requirements/, architecture-decisions/, implementation-decisions/"
       - "Create tied/ directory at project root"
+      - "Existing managed destinations are checked before refresh; non-midnight mtimes produce a client-modification warning, while refresh remains deterministic and source files remain unchanged."
       - "Initialize .cursor/mcp.json only when absent; preserve an existing MCP configuration byte-for-byte, including custom settings and whether tied-yaml is present."
       - "Install promoted quality REQ/ARCH/IMPL detail files and pseudo-code sidecars into the inherited methodology snapshot."
+      - "Managed bootstrap artifacts use cp -p/cp -pR, then normalize only client-copy mtimes to each source item's local calendar-date midnight."
       - "Never overwrite project YAML indexes or detail directories under the tied/ root during bootstrap."
       - "Populate with YAML index files: requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml"
       - "Refresh tied/methodology/ as an inherited read-only snapshot with exact template parity and stale-file pruning."
+      - "The 13 leaf prompt-type Task wrappers at .cursor/agents/<prompt-type>.md are installed alongside the managed prompt-type skill bundle."
       - "Treat domain vocabulary as an agent-control layer alongside semantic tokens and IMPL pseudo-code, using RESOLVE, PRELOAD, RECORD, and VALIDATE touchpoints defined by [PROC-VOCABULARY_INDEX]."
       - "Use copy_files.sh --merge-vocab to add absent glossary basenames without replacing existing client vocabulary."
-    summary: "Create dedicated tied/ directory with YAML indexes, domain vocabulary controls, and non-destructive bootstrap boundaries"
+    summary: "Create dedicated tied/ directory with YAML indexes, domain vocabulary controls, managed prompt artifacts, copy timestamp metadata, and non-destructive bootstrap boundaries"
   metadata:
     created:
       author: "AI Agent"
       date: "2025-12-18T00:00:00.000Z"
     last_updated:
       author: "AI Agent"
-      date: "2026-08-04"
-      reason: "LEAP: record vocabulary control layer and preserve existing MCP configuration"
+      date: "2026-08-13"
+      reason: "Install all 13 leaf prompt-type Task wrappers"
     last_validated:
       date: "2026-02-06T00:00:00.000Z"
       result: "pass"

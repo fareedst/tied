@@ -1,5 +1,5 @@
 # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
-# Summary: Bootstrap TIED layout from templates via copy_files.sh — indexes, guides, detail dirs, AGENTS.md family, vocabulary seed/merge, implementation pseudo-code sidecars, and tied-yaml skill.
+# Summary: Bootstrap TIED layout from templates via copy_files.sh — indexes, guides, detail dirs, AGENTS.md family, vocabulary seed/merge, managed prompt-type skills and subagent, attribute-preserving copies, source-date midnight timestamps on client copies, modification warnings, implementation pseudo-code sidecars, and tied-yaml skill.
 
 # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
 # How: Contract — INPUT/OUTPUT/DATA for BOOTSTRAP_TIED below; these fields define the bootstrap boundary.
@@ -8,30 +8,123 @@
 # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
 # How: OUTPUT — created or updated files under tied/ and selected root files; process exit status.
 # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
-# How: DATA — project indexes; inherited methodology tree; tied/vocab/*.md when seeded or merged; IMPL-*-pseudocode.md sidecars; and the client .cursor/mcp.json when initialized.
+# How: DATA — project indexes; inherited methodology tree; tied/vocab/*.md when seeded or merged; IMPL-*-pseudocode.md sidecars; managed .cursor/skills/ and .cursor/agents/ artifacts; source-date midnight metadata applied only to client copies; modification diagnostics; and the client .cursor/mcp.json when initialized.
 
 procedure BOOTSTRAP_TIED(projectRoot):
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
-  # How: Bootstrap or refresh the client layout while preserving client-owned project YAML, existing vocabulary, and any existing MCP configuration.
+  # How: Bootstrap or refresh the client layout while preserving client-owned project YAML, existing vocabulary, and any existing MCP configuration; managed copies retain attributes, receive source-date midnight timestamps, and warn before overwriting a changed client copy.
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
   # How: Ensure tied/ exists; copy template indexes, detail YAML, and implementation pseudo-code sidecars; copy guide/schema docs from tied/docs/ in the TIED source per copy_files.sh; create detail subdirs; copy AGENTS.md, .cursorrules to project root.
   Contract:
     INPUT: projectRoot; template source; TIED source root; optional merge-vocab flag
     OUTPUT: bootstrapped or refreshed client layout; process exit status
     DATA: project YAML; inherited methodology files; client vocabulary files; client MCP configuration
-    CONTROL: preserve client project YAML, existing vocabulary, and existing .cursor/mcp.json byte-for-byte; overwrite inherited methodology content
+    CONTROL: preserve client project YAML, existing vocabulary, and existing .cursor/mcp.json byte-for-byte; overwrite inherited methodology and managed agent/skill content; use cp -p or cp -pR and normalize only destination timestamps
     PRE: projectRoot is a writable client directory; template source and required TIED source paths are readable
-    POST: required TIED indexes, docs, detail directories, skill, and vocabulary policy outputs exist; failure returns non-zero
+    POST: required TIED indexes, docs, detail directories, skill, managed leaf prompt-type agents, and vocabulary policy outputs exist; copied managed files have their source item's local-date midnight timestamp; modification warnings precede managed overwrites; source files remain unchanged; failure returns non-zero
     EFFECTS: File I/O — creates or updates selected client files; Process — invokes helper copy and patch operations
     FAILURE_MODES: MISSING_TEMPLATE_SOURCE; UNWRITABLE_DESTINATION; SKILL_INSTALL_FAILED; COPY_FAILED; VOCABULARY_SOURCE_MISSING; MCP_CONFIG_INIT_FAILED
-    DATA_TRANSITION: client layout absent|stale→bootstrapped|refreshed; inherited methodology old→current; client project YAML and existing MCP configuration unchanged
+    DATA_TRANSITION: client layout absent|stale→bootstrapped|refreshed; inherited methodology old→current; source mtimes→destination local-date midnight mtimes; non-midnight managed destination→warning then current source; client project YAML and existing MCP configuration unchanged; source files unchanged
     TERMINATION: total — finite target list and finite vocabulary/file loops
   ON missing template source or unwritable destination: exit non-zero with actionable message
   FOR each copy_files.sh target: apply copy or merge policy; never overwrite client project-only YAML with empty templates where script forbids
   CALL INITIALIZE_TIED_MCP_CONFIG(projectRoot)
   CALL INSTALL_TIED_YAML_SKILL(projectRoot)
+  CALL INSTALL_PROMPT_TYPE_SUBAGENTS(projectRoot)
   CALL SEED_DOMAIN_VOCAB(projectRoot)
   CALL MERGE_DOMAIN_VOCAB(projectRoot) WHEN --merge-vocab is supplied
+  RETURN success
+
+procedure COPY_WITH_ATTRIBUTES(sourcePath, destinationPath, recursive):
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
+  # How: Copy a managed file or tree with cp -p/cp -pR, then apply each source item's local-date midnight timestamp only to the copied path and descendants.
+  Contract:
+    INPUT: readable sourcePath; destinationPath; recursive flag
+    OUTPUT: copied destination with preserved non-time attributes and source-date midnight timestamps
+    DATA: source file/tree; destination file/tree; source mtime map; destination timestamp map
+    CONTROL: recursive=true selects cp -pR; recursive=false selects cp -p; calculate source-date midnights before copy; normalize destination after copy
+    PRE: sourcePath exists; destination parent is writable
+    POST: destination contains the source snapshot; mode/ownership/flags are preserved where cp -p supports them; each copied item has the source item's local-date midnight timestamp; source metadata and content are unchanged
+    EFFECTS: File I/O; Process — invokes cp and Python timestamp helper
+    FAILURE_MODES: SOURCE_MISSING; DESTINATION_UNWRITABLE; COPY_FAILED; TIMESTAMP_CALCULATION_FAILED; TIMESTAMP_NORMALIZATION_FAILED
+    DATA_TRANSITION: destination absent|stale→source snapshot with source-date midnight timestamps; source unchanged
+    TERMINATION: total
+  CALL CALCULATE_SOURCE_DATE_MIDNIGHTS(sourcePath)
+  IF recursive:
+    RUN cp -pR sourcePath destinationPath
+  ELSE:
+    RUN cp -p sourcePath destinationPath
+  CALL NORMALIZE_COPIED_PATH_TIMESTAMPS(sourcePath, destinationPath)
+  RETURN success
+
+procedure CALCULATE_SOURCE_DATE_MIDNIGHTS(sourcePath):
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
+  # How: Read source mtimes and calculate local calendar-date midnights without modifying source files.
+  Contract:
+    INPUT: sourcePath
+    OUTPUT: source item→local-date midnight timestamp map
+    DATA: source item mtimes; calculated timestamp map
+    PRE: sourcePath exists and metadata is readable
+    POST: every source item has a calculated local-date midnight; source content and metadata are unchanged
+    EFFECTS: File I/O — reads metadata; Process — invokes portable Python datetime calculation
+    FAILURE_MODES: SOURCE_MISSING; SOURCE_METADATA_UNREADABLE; TIMESTAMP_CALCULATION_FAILED
+    DATA_TRANSITION: source mtime→calculated local-date midnight map; source unchanged
+    TERMINATION: total — finite file tree
+  RUN portable source timestamp calculation
+  RETURN success
+
+procedure NORMALIZE_COPIED_PATH_TIMESTAMPS(sourcePath, destinationPath):
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
+  # How: Apply each source item's local-date midnight to its corresponding copied destination item without changing source files or cp -p-preserved non-time attributes.
+  Contract:
+    INPUT: unchanged sourcePath; copied destinationPath
+    OUTPUT: destinationPath with source-date midnight modification times
+    DATA: source item→midnight map; destination file/tree
+    PRE: sourcePath and destinationPath contain corresponding readable items
+    POST: each destination item's modification time is the corresponding source item's local-date midnight; copied access times and other non-time attributes remain unchanged; source remains unchanged
+    EFFECTS: File I/O — writes destination timestamps; Process — invokes portable Python os.utime traversal
+    FAILURE_MODES: SOURCE_MISSING; DESTINATION_MISSING; PATH_MAPPING_FAILED; TIMESTAMP_NORMALIZATION_FAILED
+    DATA_TRANSITION: cp-preserved source mtimes→source-date midnight destination mtimes; source unchanged
+    TERMINATION: total — finite file tree
+  RUN portable source-to-destination timestamp normalization
+  RETURN success
+
+procedure WARN_ON_MODIFIED_COPY_TARGET(destinationPath):
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
+  # How: Before replacing an existing managed destination, report any file or descendant whose mtime is not truncated to local calendar-date midnight.
+  Contract:
+    INPUT: existing destinationPath
+    OUTPUT: modification diagnostics or no diagnostic
+    DATA: destination file/tree; local calendar-date midnight predicate; modified path list
+    PRE: destinationPath may be absent or readable
+    POST: absent destinations are silent; every non-midnight file is reported before overwrite
+    EFFECTS: File I/O; stdout diagnostics
+    FAILURE_MODES: DESTINATION_UNREADABLE
+    TERMINATION: total — finite file tree
+  IF destinationPath is absent:
+    RETURN no diagnostic
+  RUN portable midnight predicate for destinationPath
+  IF any mtime is not local-date midnight:
+    EMIT "Client-modified managed copy detected" with each path
+  RETURN diagnostics
+
+procedure INSTALL_PROMPT_TYPE_SUBAGENTS(projectRoot):
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-PROMPT_TYPE_SUBAGENT] [ARCH-PROMPT_TYPE_SUBAGENT] [REQ-PROMPT_TYPE_SUBAGENT]
+  # How: Install every canonical prompt-type Task wrapper under projectRoot/.cursor/agents/ as a managed, source-date-midnight copy.
+  Contract:
+    INPUT: projectRoot; TIED source .cursor/agents/*.md
+    OUTPUT: projectRoot/.cursor/agents/*.md
+    DATA: canonical agent prompts; client agent prompts; source-date midnight timestamps
+    CONTROL: copy every source agent markdown including leaf wrappers and sequence orchestrators; warn before replacing an existing client copy; overwrite with canonical source
+    PRE: at least one canonical agent prompt is readable; projectRoot/.cursor/agents/ is writable or creatable
+    POST: each client agent content equals its canonical source and has the source item's local-date midnight timestamp; source remains unchanged
+    EFFECTS: File I/O; Diagnostics
+    FAILURE_MODES: AGENT_SOURCE_MISSING; AGENT_DESTINATION_UNWRITABLE; COPY_FAILED
+    DATA_TRANSITION: agents absent|stale→canonical agents with source-date midnight timestamps; source unchanged
+    TERMINATION: total
+  FOR each agent_markdown in TIED_SOURCE/.cursor/agents/*.md:
+    CALL WARN_ON_MODIFIED_COPY_TARGET(projectRoot/.cursor/agents/{basename})
+    CALL COPY_WITH_ATTRIBUTES(agent_markdown, projectRoot/.cursor/agents/{basename}, false)
   RETURN success
 
 procedure INITIALIZE_TIED_MCP_CONFIG(projectRoot):

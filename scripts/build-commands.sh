@@ -57,6 +57,19 @@ alias build-agentstream='echo_exec --cd tools/agentstream go build -o agentstrea
 alias build-mcp='echo_exec --cd mcp-server bun install && echo_exec --cd mcp-server bun run build'
 alias test-mcp='echo_exec --cd mcp-server bun run test'
 
+test-tied-client () {
+  DN=$(date +%s)
+  cd ~/Documents/dev/test
+  mkdir -p "$DN"
+  cd "$DN"
+  ../../chatgpt/stdd/copy_files.sh
+  ../../chatgpt/stdd/scripts/lint_yaml.sh -F tied
+  agent mcp enable tied-yaml
+  git init
+  git add .
+  git commit -m TIED
+}
+
 unalias how 2>/dev/null || true
 how () {
   # print a summary of the commands above

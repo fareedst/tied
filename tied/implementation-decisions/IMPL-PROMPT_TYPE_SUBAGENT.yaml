@@ -1,0 +1,59 @@
+IMPL-PROMPT_TYPE_SUBAGENT:
+  code_locations:
+    files:
+      - description: "Project-scoped Cursor Task subagent prompt wrappers for the 13 leaf prompt types"
+        path: ".cursor/agents/"
+      - description: "Static frontmatter, prompt contract, and managed bootstrap installation tests"
+        path: "mcp-server/src/e2e/prompt-type-subagent.test.ts"
+      - description: "Managed bootstrap copy, destination midnight normalization, source immutability, and client-modification warning implementation"
+        path: "copy_files.sh"
+  cross_references:
+    - "ARCH-PROMPT_TYPE_SUBAGENT"
+    - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+    - "REQ-PROMPT_TYPE_SUBAGENT"
+  description: "Thin foreground Cursor Task wrappers for all 13 leaf prompt types, plus a plan-refine-build sequencer that Task-launches those three leaves in order using invocation remainder then linked plans, with static contract validation and canonical skill delegation."
+  implementation_approach:
+    details:
+      - "copy_files.sh installs all 13 wrappers with cp -p, preserves source content and non-time attributes, normalizes only the client copy to the source item's local-date midnight, and warns when an existing managed copy has a non-midnight mtime."
+      - "copy_files.sh installs every .cursor/agents/*.md wrapper, including sequence orchestrators."
+      - "Description is explicit-only and includes neighboring prompt-type exclusions without proactive activation language."
+      - "DISPATCH_PROMPT_TYPE_SEQUENCE passes the invocation remainder to plan-new-feature, then the produced plan as the linked plan to refine-plan, then the refined plan as the linked plan to build-plan."
+      - "Each body directly names the canonical skill, vocabulary preload, type-specific gates, forbidden operations, and return evidence."
+      - "Frontmatter sets is_background false; readonly is false for implementing and close-out wrappers and true for question and other."
+      - "plan-refine-build.md is a writable foreground sequencer that Task-launches plan-new-feature, then refine-plan, then build-plan, stops on a failed child gate, and does not implement the feature in its own context."
+      - "Static contract tests parse frontmatter and assert required clauses, client byte identity, source-date midnight timestamp, source immutability, and refresh warning behavior."
+    summary: "Validate and maintain one project-scoped agent per leaf prompt type whose prompt delegates to the canonical skill, carries clean-context gates and parent handoff requirements, and is distributed with auditable destination-only source-date midnight metadata."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-12"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "DISPATCH_PROMPT_TYPE_SEQUENCE uses invocation remainder and linked plan"
+    last_validated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      result: "pass"
+  name: "Prompt-Type Task Subagent Contract"
+  rationale:
+    benefits:
+      - "Deterministic contract coverage for Markdown agent definitions."
+      - "Parent agents receive auditable completion evidence."
+      - "Single workflow source remains the bundled leaf skill."
+    problems_solved:
+      - "A one-line body is not a reliable skill include."
+      - "Covering only plan-new-feature leaves the other leaves without an isolated contract."
+      - "The absence of tests permits contract drift."
+    why: "The Task wrapper must preserve the canonical skill workflow while making permissions, safety gates, and parent-visible evidence explicit in an isolated context."
+  related_decisions:
+    composed_with: []
+    depends_on:
+      - "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "IMPL-TIED_FILES"
+    see_also:
+      - "ARCH-PROMPT_TYPE_SUBAGENT"
+      - "REQ-PROMPT_TYPE_SUBAGENT"
+    supersedes: []
+  status: "Active"
+  testability: "unit"

@@ -1,0 +1,67 @@
+ARCH-PROMPT_TYPE_GLOBAL_SKILLS:
+  alternatives_considered:
+    - cons:
+        - "Not reproducible across developers or TIED projects"
+      name: "Keep skills only under ~/.cursor/skills/"
+      pros:
+        - "No repository changes"
+      rejected_reason: "Does not satisfy ongoing shared development or client bootstrap needs."
+    - cons:
+        - "No versioned source of truth and high drift risk"
+      name: "Copy skills directly into each client without a TIED canonical bundle"
+      pros:
+        - "Simple one-off installation"
+      rejected_reason: "Duplicates maintenance across projects."
+    - cons:
+        - "Adds availability/versioning dependency to bootstrap"
+      name: "Fetch skills from an external runtime package"
+      pros:
+        - "Centralized distribution outside git"
+      rejected_reason: "TIED bootstrap should remain deterministic and repository-backed."
+  decision: "Maintain one git-tracked canonical prompt-type skill bundle in the TIED methodology repository and install its managed contents into each TIED client’s .cursor/skills/ directory through copy_files.sh."
+  implementation_approach:
+    details:
+      - "Copy tied/docs/prompt-type-skills.md when missing so clients receive the distribution contract and maintenance guidance."
+      - "Install only the managed prompt-type directories and prompt-shared directory; preserve unrelated client skills."
+      - "Keep the 13 leaf SKILL.md files, prompt-type-router/SKILL.md, and 14 prompt-shared Markdown references in the canonical bundle."
+      - "Leaf skills take an invocation remainder; refine-plan and build-plan take a linked or in-message plan. Skills do not use a triple-colon payload delimiter or emit composer headers."
+      - "Treat installed prompt skills as refreshable tooling artifacts, analogous to the bundled tied-yaml skill."
+    summary: "Use tools/bundled-prompt-type-skills as the canonical source and copy its explicit managed file set into client .cursor/skills during copy_files.sh refresh."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-12"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Name invocation remainder and linked plan as skill payloads"
+  name: "Hybrid Prompt-Type Skill Bundle"
+  rationale:
+    benefits:
+      - "Relative ../prompt-shared links remain local and resolvable."
+      - "Simple copy_files.sh rollout to existing and new clients."
+      - "Unrelated client skills and existing MCP configuration remain outside the managed bundle."
+      - "Versioned source of truth in the TIED repository."
+    problems_solved:
+      - "A project-local copy without a canonical TIED source can drift between clients."
+      - "A remote or runtime dependency would make bootstrap less deterministic."
+      - "Personal-only skill files are not reproducible across projects."
+    why: "The prompt workflows are shared development tooling, while client-local installation is needed for Cursor to resolve relative shared references and for each project to receive a reproducible version."
+  related_decisions:
+    depends_on:
+      - "ARCH-TIED_STRUCTURE"
+    see_also:
+      - "IMPL-TIED_FILES"
+    supersedes: []
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+    code_annotations:
+      - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+    requirements:
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+    tests:
+      - "mcp-server/src/e2e/prompt-type-skills.test.ts"

@@ -1,0 +1,64 @@
+CITDP-REQ-PROMPT_TYPE_GLOBAL_SKILLS:
+  change_definition:
+    current_behavior_prior: "Prompt Composer workflow skills lived only under personal ~/.cursor/skills/ with no versioned TIED canonical bundle or copy_files.sh installer."
+    desired_behavior: "Git-tracked tools/bundled-prompt-type-skills/ (13 explicit-only leaf skills, prompt-type-router, 14 prompt-shared references) installed into client .cursor/skills/ by copy_files.sh while preserving unrelated skills and MCP configuration."
+    non_goals:
+      - "Automatic git stage/commit from prompt-type skills"
+      - "Fetching skills from external runtime packages"
+      - "Inferring TIED applicability from repository layout"
+    references:
+      - "tied/architecture-decisions/ARCH-PROMPT_TYPE_GLOBAL_SKILLS.yaml"
+      - "tied/docs/prompt-type-skills.md"
+      - "tied/implementation-decisions/IMPL-PROMPT_TYPE_GLOBAL_SKILLS-pseudocode.md"
+      - "tied/implementation-decisions/IMPL-PROMPT_TYPE_GLOBAL_SKILLS.yaml"
+      - "tied/requirements/REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml"
+      - "tied/vocab/prompt-composer.md"
+    success_criteria:
+      - "copy_files.sh preserves unrelated client skills and mcp.json on refresh"
+      - "Every SKILL.md is explicit-only with resolvable prompt-shared links"
+      - "REQ/ARCH/IMPL stack consistent under tied_validate_consistency"
+      - "Static contract tests pass for canonical bundle and installed client copy"
+    summary: "Versioned prompt-type skill bundle with bootstrap installer and contract tests."
+    unchanged_behavior: "Unrelated client skills, existing MCP configuration, and non-managed prompt workflows remain unchanged."
+  completion_criteria:
+    verification_gate_notes: "mcp-server/src/e2e/prompt-type-skills.test.ts; tied_validate_consistency; REQ-PROMPT_TYPE_GLOBAL_SKILLS satisfaction criteria."
+  impact_analysis:
+    impl_inventory_notes: "tools/bundled-prompt-type-skills/; copy_files.sh install_prompt_type_skills; mcp-server/src/e2e/prompt-type-skills.test.ts; tied/docs/prompt-type-skills.md; tied/vocab/prompt-composer.md; routing.md prompt-composer entry."
+    modules_or_boundaries: "INVENTORY_PROMPT_TYPE_SKILLS, INSTALL_PROMPT_TYPE_SKILLS, VALIDATE_PROMPT_TYPE_SKILL_CONTRACT pseudo-code blocks; copy_files.sh managed-directory refresh only."
+    tied_tokens_affected: []
+    tied_tokens_new:
+      - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+  leap_feedback:
+    divergences_from_analysis: "none"
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    checklist_session_note: "plan-close-out: static contract + bootstrap integration tests green; REQ status Implemented."
+    checklist_step_completed: "persist-citdp-record"
+    checklist_version: "agent_req_implementation_checklist v1.7.0"
+    recorded_at: "2026-08-12"
+    tied_context:
+      architecture:
+        - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+      implementation:
+        - "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
+      requirements:
+        - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+    title: "Global prompt-type skills bundle and bootstrap installer"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  risk_analysis:
+    risks:
+      - description: "Managed directory refresh overwrites client-local prompt-type skill edits."
+        id: "RISK-PROMPT-001"
+        likelihood: "Medium"
+        mitigation: "Document refresh behavior in prompt-type-skills.md; canonical source is tools/bundled-prompt-type-skills/."
+        severity: "Low"
+  tdd_sequence:
+    summary: "unit-test-red/green: assertSkillContract static checks. integration: copy_files.sh temp client install + preservation test. E2E N/A (no UI)."
+  test_strategy:
+    matrix_notes: "Static: bundle inventory, frontmatter, shared links, line limits. Integration: copy_files.sh installs bundle and preserves unrelated skills/MCP. E2E: N/A."
+    summary: "[REQ-MODULE_VALIDATION]: contract validation unit tests; bootstrap integration; no platform UI E2E."

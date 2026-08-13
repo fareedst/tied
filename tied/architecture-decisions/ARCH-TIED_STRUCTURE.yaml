@@ -20,15 +20,16 @@ ARCH-TIED_STRUCTURE:
   implementation_approach:
     details:
       - "Add guide files: semantic-tokens.md, processes.md"
-      - "Bootstrap installs bundled tied-yaml skill to .cursor/skills/tied-yaml/ and bakes TIED_REPO_ROOT into tied-cli.sh for client MCP binary resolution"
       - "Create detail subdirectories: requirements/, architecture-decisions/, implementation-decisions/"
       - "Create tied/ directory at project root"
-      - "Create tied/vocab/ for project-scoped domain vocabulary (plain Markdown *.md; writable; seeded by copy_files.sh when absent; not under tied/methodology/)"
+      - "Existing managed destinations are checked before refresh; non-midnight mtimes produce a client-modification warning, while refresh remains deterministic and source files remain unchanged."
       - "Initialize .cursor/mcp.json only when absent; preserve an existing MCP configuration byte-for-byte, including custom settings and whether tied-yaml is present."
       - "Install promoted quality REQ/ARCH/IMPL detail files and pseudo-code sidecars into the inherited methodology snapshot."
+      - "Managed bootstrap artifacts use cp -p/cp -pR, then normalize only client-copy mtimes to each source item's local calendar-date midnight."
       - "Never overwrite project YAML indexes or detail directories under the tied/ root during bootstrap."
       - "Populate with YAML index files: requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml"
       - "Refresh tied/methodology/ as an inherited read-only snapshot with exact template parity and stale-file pruning."
+      - "The 13 leaf prompt-type Task wrappers at .cursor/agents/<prompt-type>.md are installed alongside the managed prompt-type skill bundle."
       - "Treat domain vocabulary as an agent-control layer alongside semantic tokens and IMPL pseudo-code, using RESOLVE, PRELOAD, RECORD, and VALIDATE touchpoints defined by [PROC-VOCABULARY_INDEX]."
       - "Use copy_files.sh --merge-vocab to add absent glossary basenames without replacing existing client vocabulary."
     summary: "Create dedicated tied/ directory with YAML indexes, domain vocabulary controls, and non-destructive bootstrap boundaries"
@@ -38,8 +39,8 @@ ARCH-TIED_STRUCTURE:
       date: "2025-12-18"
     last_updated:
       author: "AI Agent"
-      date: "2026-08-04"
-      reason: "LEAP: record vocabulary control layer and preserve existing MCP configuration"
+      date: "2026-08-13"
+      reason: "Install all 13 leaf prompt-type Task wrappers"
     last_validated:
       date: "2026-02-06"
       result: "pass"

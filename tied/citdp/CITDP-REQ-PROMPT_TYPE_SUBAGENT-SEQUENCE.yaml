@@ -1,0 +1,115 @@
+CITDP-REQ-PROMPT_TYPE_SUBAGENT-SEQUENCE:
+  change_definition:
+    current_behavior: "Thirteen leaf prompt-type Task wrappers existed; callers had to launch plan-new-feature, refine-plan, and build-plan separately."
+    desired_behavior: "A plan-refine-build sequence orchestrator at .cursor/agents/plan-refine-build.md Task-launches those three leaf wrappers in order, stops on a failed child gate, does not implement the feature in its own context, and is installed with every other .cursor/agents/*.md wrapper."
+    non_goals:
+      - "A fourteenth leaf skill"
+      - "A generic prompt-type-router Task wrapper"
+      - "Changing shared Refine, Plan, or Implement workflow documents"
+      - "Runtime evaluation of the LLM"
+    success_criteria:
+      - "copy_files.sh globs all .cursor/agents/*.md including plan-refine-build.md."
+      - "Static contract tests pass for the sequencer plus the 13 leaf wrappers."
+      - "The sequencer body names sequential Task children plan-new-feature, then refine-plan, then build-plan, merge gates, and aggregated parent handoff."
+    unchanged_behavior: "Each leaf wrapper remains the source of truth for its canonical skill procedure; the sequencer only owns sequence, Task launch, merge gates, and aggregated handoff."
+  completion_criteria:
+    verification_gate_notes: "Prompt-type skill and subagent contract tests passed including the plan-refine-build sequence test; YAML indexes and TIED consistency passed; Layer B pseudo-code validation passed for IMPL-PROMPT_TYPE_SUBAGENT; lint_yaml passed on changed project TIED YAML; bash -n copy_files.sh passed."
+  evidence:
+    commands:
+      - command: "node --test dist/e2e/prompt-type-subagent.test.js"
+        notes: "Sixteen static contract tests passed, including sequential Task children for plan-refine-build."
+        result: "pass"
+      - command: "node --test dist/e2e/prompt-type-skills.test.js"
+        notes: "Four prompt bundle installation tests passed including glob install of all agent files."
+        result: "pass"
+      - command: "yaml_index_validate"
+        notes: "requirements, architecture, implementation, and semantic-tokens indexes valid."
+        result: "pass"
+      - command: "pseudocode_validate IMPL-PROMPT_TYPE_SUBAGENT"
+        notes: "Layer B contract, token linkage, and dependency diagnostics passed including DISPATCH_PROMPT_TYPE_SEQUENCE."
+        result: "pass"
+      - command: "tied_validate_consistency"
+        notes: "TIED indexes, detail files, traceability, and pseudo-code token comments passed."
+        result: "pass"
+      - command: "scripts/lint_yaml.sh"
+        notes: "Changed project TIED YAML records passed YAML lint."
+        result: "pass"
+      - command: "bash -n copy_files.sh"
+        notes: "Bootstrap shell syntax validation passed."
+        result: "pass"
+    manifest_reference: "mcp-server/src/e2e/prompt-type-subagent.test.ts; mcp-server/src/e2e/prompt-type-skills.test.ts"
+    proof_boundaries:
+      - "Static contract tests prove file shape and required prompt clauses, not runtime LLM Task invocation."
+      - "tied_validate_consistency proves TIED structural consistency, not semantic correctness beyond declared contracts."
+  impact_analysis:
+    impl_inventory_notes: ".cursor/agents/plan-refine-build.md; copy_files.sh glob of .cursor/agents/*.md; mcp-server/src/e2e/prompt-type-subagent.test.ts sequence test; mcp-server/src/e2e/prompt-type-skills.test.ts glob install; IMPL-PROMPT_TYPE_SUBAGENT DISPATCH_PROMPT_TYPE_SEQUENCE; tied/docs/prompt-type-skills.md; tied/vocab/prompt-composer.md."
+    modules_or_boundaries: "DISPATCH_PROMPT_TYPE_SEQUENCE launches plan-new-feature, then refine-plan, then build-plan and stops on a failed child gate; VALIDATE_PROMPT_TYPE_SUBAGENT_CONTRACT remains leaf-only; INSTALL_PROMPT_TYPE_SUBAGENTS copies every .cursor/agents/*.md file."
+    tied_tokens_affected:
+      - "ARCH-PROMPT_TYPE_SUBAGENT"
+      - "ARCH-TIED_STRUCTURE"
+      - "IMPL-PROMPT_TYPE_SUBAGENT"
+      - "IMPL-TIED_FILES"
+      - "REQ-PROMPT_TYPE_SUBAGENT"
+      - "REQ-TIED_SETUP"
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: "The original CITDP listed a prompt-type-router Task wrapper as a non-goal. This increment adds only the fixed plan-refine-build sequence, not a generic router agent."
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "REQ-PROMPT_TYPE_SUBAGENT"
+    checklist_process: "PROC-AGENT_REQ_CHECKLIST"
+    checklist_session_note: "Added plan-refine-build sequence orchestrator that Task-launches plan-new-feature, refine-plan, then build-plan."
+    checklist_step_completed: "persist-citdp-record"
+    checklist_version: "agent_req_implementation_checklist v1.7.0"
+    recorded_at: "2026-08-13"
+    tied_context:
+      architecture:
+        - "ARCH-PROMPT_TYPE_SUBAGENT"
+      implementation:
+        - "IMPL-PROMPT_TYPE_SUBAGENT"
+      requirements:
+        - "REQ-PROMPT_TYPE_SUBAGENT"
+    title: "plan-refine-build sequence orchestrator"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  risk_analysis:
+    abuse_cases:
+      - "Children could be launched in parallel or a later Implement gate could start after a failed Plan gate."
+      - "The sequencer could implement the feature in its own context instead of launching children."
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "mcp-server/src/e2e/prompt-type-subagent.test.ts"
+        evidence_method: "Static contract assertions"
+        limitation: "Does not run Cursor's LLM Task invocation."
+        owner: "AI Agent"
+        rationale: "The artifact is Markdown configuration; deterministic contract coverage is the appropriate test level."
+        result: "pass"
+        risk: "Sequence order or merge-gate drift"
+        threshold: "All assertions pass"
+        waiver:
+          expiry: "~"
+          owner: "~"
+          reason: "~"
+          required: "false"
+    quality_profiles: []
+    residual_risk:
+      expiry: "~"
+      owner: "AI Agent"
+      summary: "Cursor-specific runtime Task delegation remains outside static tests; explicit invocation and parent review reduce the risk."
+    risks:
+      - description: "The sequencer could drift from child skill contracts if merge-gate wording changes in the router skill without updating the orchestrator."
+        id: "RISK-PROMPT-SEQUENCE-001"
+        likelihood: "Medium"
+        mitigation: "Keep the orchestrator thin, retain the router skill path for merge gates, and run the sequence contract test."
+        severity: "Low"
+    scenarios:
+      - expected: "plan-new-feature, then refine-plan, then build-plan run as sequential foreground Task children; the orchestrator returns aggregated handoff."
+        name: "Successful three-step sequence"
+      - expected: "Sequence stops and reports incomplete evidence without starting the next child."
+        name: "Failed child gate"
+  tdd_sequence:
+    summary: "LEAP REQ/ARCH/IMPL for DISPATCH_PROMPT_TYPE_SEQUENCE; RED sequence contract test; GREEN plan-refine-build.md and glob installer; focused tests; YAML lint and TIED consistency; CITDP close-out."
+  test_strategy:
+    matrix_notes: "Unit/static contract: frontmatter, sequential subagent_type clauses, merge gates, forbidden parallel dispatch, parent handoff, installer glob. Integration: bootstrap refresh suite. E2E UI: not applicable."
+    summary: "Validate the Markdown sequencer and bootstrap glob deterministically; keep runtime LLM behavior outside the test boundary."

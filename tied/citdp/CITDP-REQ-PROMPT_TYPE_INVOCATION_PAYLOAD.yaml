@@ -1,0 +1,121 @@
+CITDP-REQ-PROMPT_TYPE_INVOCATION_PAYLOAD:
+  change_definition:
+    current_behavior: "Skills and agents told the model to process text after a triple-colon delimiter and to emit composer headers. Cursor skill and agent invocation never shows that delimiter; plan-new-feature was looking for a body that is actually the remainder after the skill name, while refine-plan and build-plan usually receive a linked plan."
+    desired_behavior: "Skills and agents name invocation remainder and linked plan. plan-new-feature treats remainder as the requirement. refine-plan and build-plan require a linked or in-message plan and stop if none is present. plan-refine-build passes remainder then linked plans to its children. Composer emit-header and Improve the plan below closers are not procedure steps."
+    non_goals:
+      - "Changing Refine, Plan, or Implement workflow documents"
+      - "Keeping the triple-colon delimiter as a hidden synonym"
+      - "Runtime evaluation of the LLM"
+    success_criteria:
+      - "No leaf skill, router, or agent file uses a triple-colon payload delimiter."
+      - "plan-new-feature names invocation remainder and does not treat a linked plan as the request."
+      - "plan-refine-build passes remainder then linked plans in order."
+      - "refine-plan and build-plan name linked plan and stop when none is present."
+      - "Static contract tests pass."
+    unchanged_behavior: "Canonical skills remain the workflow source of truth; Task wrappers stay thin; TIED applicability, gates, and forbidden Git or clipboard operations are unchanged."
+  completion_criteria:
+    verification_gate_notes: "Prompt-type skill and subagent contract tests passed; YAML indexes and TIED consistency passed; Layer B pseudo-code validation passed for IMPL-PROMPT_TYPE_GLOBAL_SKILLS and IMPL-PROMPT_TYPE_SUBAGENT; lint_yaml passed on changed project TIED YAML."
+  evidence:
+    commands:
+      - command: "node --test dist/e2e/prompt-type-skills.test.js"
+        notes: "Four bundle tests passed, including no triple-colon delimiter and linked-plan naming."
+        result: "pass"
+      - command: "node --test dist/e2e/prompt-type-subagent.test.js"
+        notes: "Sixteen agent contract tests passed, including remainder and linked-plan sequence dispatch."
+        result: "pass"
+      - command: "yaml_index_validate"
+        notes: "requirements, architecture, implementation, and semantic-tokens indexes valid."
+        result: "pass"
+      - command: "pseudocode_validate IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
+        notes: "Layer B passed including VALIDATE_PROMPT_TYPE_SKILL_CONTRACT payload checks."
+        result: "pass"
+      - command: "pseudocode_validate IMPL-PROMPT_TYPE_SUBAGENT"
+        notes: "Layer B passed including DISPATCH_PROMPT_TYPE_SEQUENCE remainder and linked-plan launches."
+        result: "pass"
+      - command: "tied_validate_consistency"
+        notes: "TIED indexes, detail files, traceability, and pseudo-code token comments passed."
+        result: "pass"
+      - command: "scripts/lint_yaml.sh"
+        notes: "Changed project TIED YAML records passed YAML lint."
+        result: "pass"
+    manifest_reference: "mcp-server/src/e2e/prompt-type-skills.test.ts; mcp-server/src/e2e/prompt-type-subagent.test.ts"
+    proof_boundaries:
+      - "Static contract tests prove file wording, not runtime Cursor plan-attachment behavior."
+      - "tied_validate_consistency proves TIED structural consistency, not semantic correctness beyond declared contracts."
+  impact_analysis:
+    impl_inventory_notes: "tools/bundled-prompt-type-skills/*/SKILL.md; prompt-type-router; .cursor/agents/*.md; tied/vocab/prompt-composer.md; tied/docs/prompt-type-skills.md; IMPL-PROMPT_TYPE_GLOBAL_SKILLS and IMPL-PROMPT_TYPE_SUBAGENT sidecars; e2e contract tests."
+    modules_or_boundaries: "VALIDATE_PROMPT_TYPE_SKILL_CONTRACT rejects a triple-colon delimiter; DISPATCH_PROMPT_TYPE_SEQUENCE passes invocation remainder then linked plans."
+    tied_tokens_affected:
+      - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "ARCH-PROMPT_TYPE_SUBAGENT"
+      - "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "IMPL-PROMPT_TYPE_SUBAGENT"
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-PROMPT_TYPE_SUBAGENT"
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: "None. The change matches the agreed payload model: invocation remainder versus linked plan."
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+    checklist_process: "PROC-AGENT_REQ_CHECKLIST"
+    checklist_session_note: "Removed triple-colon payload delimiter from prompt-type skills and agents; named invocation remainder and linked plan."
+    checklist_step_completed: "persist-citdp-record"
+    checklist_version: "agent_req_implementation_checklist v1.7.0"
+    recorded_at: "2026-08-13"
+    tied_context:
+      architecture:
+        - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+        - "ARCH-PROMPT_TYPE_SUBAGENT"
+      implementation:
+        - "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
+        - "IMPL-PROMPT_TYPE_SUBAGENT"
+      requirements:
+        - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+        - "REQ-PROMPT_TYPE_SUBAGENT"
+    title: "Invocation remainder and linked plan replace triple-colon payloads"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  risk_analysis:
+    abuse_cases:
+      - "build-plan could invent a plan from remainder if a linked plan is missing."
+      - "plan-new-feature could treat an attached plan as the requirement."
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "mcp-server/src/e2e/prompt-type-skills.test.ts"
+        evidence_method: "Static contract assertions"
+        limitation: "Does not run Cursor plan-attachment or LLM invocation."
+        owner: "AI Agent"
+        rationale: "The artifacts are Markdown configuration; deterministic wording coverage is the appropriate test level."
+        result: "pass"
+        risk: "Payload delimiter wording drift"
+        threshold: "All assertions pass"
+        waiver:
+          expiry: "~"
+          owner: "~"
+          reason: "~"
+          required: "false"
+    quality_profiles: []
+    residual_risk:
+      expiry: "~"
+      owner: "AI Agent"
+      summary: "Cursor plan-attachment runtime remains outside static tests; explicit linked-plan stop rules reduce the risk."
+    risks:
+      - description: "Callers who still paste generated composer prompts with a triple-colon delimiter may not be recognized unless remainder parsing is lenient at runtime."
+        id: "RISK-PROMPT-PAYLOAD-001"
+        likelihood: "Low"
+        mitigation: "New prose does not mention the delimiter; leftover generated prompts are out of scope for this increment."
+        severity: "Low"
+    scenarios:
+      - expected: "The remainder after the skill or agent name is planned as the new requirement."
+        name: "plan-new-feature with remainder"
+      - expected: "The attached plan is improved; remainder is optional notes."
+        name: "refine-plan with linked plan"
+      - expected: "The attached plan is executed; work stops if no plan is present."
+        name: "build-plan with linked plan"
+  tdd_sequence:
+    summary: "LEAP vocab and REQ/ARCH/IMPL; RED payload contract tests; GREEN skill and agent prose; focused tests; YAML lint and TIED consistency; CITDP close-out."
+  test_strategy:
+    matrix_notes: "Unit/static contract: no triple-colon delimiter, invocation remainder, linked plan, sequence child payloads. Integration: bootstrap refresh suite. E2E UI: not applicable."
+    summary: "Validate Markdown payload wording deterministically; keep runtime plan-attachment behavior outside the test boundary."

@@ -1,15 +1,20 @@
 REQ-TIED_SETUP:
   category: "Functional"
-  description: "TIED setup includes deterministic typed YAML canonicalization through the shared tied-yaml-canonical-v1 profile."
+  description: "TIED setup provides a deterministic client bootstrap: it creates the TIED structure, installs managed skills and the 13 leaf prompt-type Task wrappers, preserves attributes with cp -p/cp -pR, normalizes only client-copy mtimes to each source item's local calendar-date midnight, and warns before replacing destinations whose mtimes are not midnight."
   detail_file: "requirements/REQ-TIED_SETUP.yaml"
+  implementation_approach:
+    details:
+      - "Bootstrap managed artifacts preserve copy attributes where supported, leave source files unchanged, normalize only client-copy mtimes to each source item's local calendar-date midnight, and warn when an existing managed destination has a non-midnight mtime before refresh."
+      - "The canonical .cursor/agents/<prompt-type>.md Task wrappers for all 13 leaf prompt types are installed in clients with the managed prompt-type distribution and receive destination-only source-date midnight normalization."
+    summary: "Provide deterministic TIED client bootstrap with source-preserving copies, destination-only local-midnight metadata, and non-midnight modification detection."
   metadata:
     created:
       author: "AI Agent"
       date: "2025-11-08T00:00:00.000Z"
     last_updated:
       author: "AI Agent"
-      date: "2026-08-06"
-      reason: "Replace historical double-quoted scalar lint contract with shared typed canonical profile"
+      date: "2026-08-13"
+      reason: "Install all 13 leaf prompt-type Task wrappers during bootstrap"
     last_validated:
       date: "2026-02-06T00:00:00.000Z"
       result: "pass"
@@ -53,6 +58,10 @@ REQ-TIED_SETUP:
       metric: "tied/methodology/ matches the current template snapshot and stale inherited files are pruned"
     - criterion: "When .cursor/mcp.json already exists, copy_files.sh preserves its exact bytes and does not initialize or merge tied-yaml into it"
       metric: "Bootstrap E2E refresh fixture compares the pre-existing MCP config byte-for-byte after refresh"
+    - criterion: "Managed bootstrap artifacts preserve supported attributes, retain source content, normalize only client-copy mtimes to each source item's local calendar-date midnight, and warn before replacement when an existing destination mtime is not midnight"
+      metric: "Prompt skill/bootstrap tests verify cp flags, source immutability, destination midnight mtime, and warning output"
+    - criterion: "copy_files.sh installs the canonical .cursor/agents/<prompt-type>.md wrappers for all 13 leaf prompt types into clients"
+      metric: "Installed agent content is byte-identical to the source and refresh restores an edited copy"
   status: "Implemented"
   traceability:
     architecture:

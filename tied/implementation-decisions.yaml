@@ -977,6 +977,92 @@ IMPL-MODULE_VALIDATION:
       - "REQ-MODULE_VALIDATION"
     tests:
       - "testModuleName_IndependentValidation_REQ_MODULE_VALIDATION"
+IMPL-PROMPT_TYPE_GLOBAL_SKILLS:
+  cross_references:
+    - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+    - "IMPL-TIED_FILES"
+    - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+  description: "Canonical prompt-type skills bundle under tools and deterministic client installation through copy_files.sh."
+  detail_file: "implementation-decisions/IMPL-PROMPT_TYPE_GLOBAL_SKILLS.yaml"
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-12"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Validate invocation remainder and linked plan payload naming"
+  name: "Prompt-Type Skill Bundle and Bootstrap Installer"
+  status: "Active"
+IMPL-PROMPT_TYPE_SUBAGENT:
+  code_locations:
+    files:
+      - description: "Project-scoped Cursor Task subagent prompt wrappers for the 13 leaf prompt types"
+        path: ".cursor/agents/"
+      - description: "Static frontmatter, prompt contract, and managed bootstrap installation tests"
+        path: "mcp-server/src/e2e/prompt-type-subagent.test.ts"
+      - description: "Managed bootstrap copy, destination midnight normalization, source immutability, and client-modification warning implementation"
+        path: "copy_files.sh"
+  cross_references:
+    - "ARCH-PROMPT_TYPE_SUBAGENT"
+    - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+    - "REQ-PROMPT_TYPE_SUBAGENT"
+  description: "Thin foreground Cursor Task wrappers for all 13 leaf prompt types, plus a plan-refine-build sequencer that Task-launches those three leaves in order using invocation remainder then linked plans."
+  detail_file: "implementation-decisions/IMPL-PROMPT_TYPE_SUBAGENT.yaml"
+  essence_pseudocode: "# [IMPL-PROMPT_TYPE_SUBAGENT] [ARCH-PROMPT_TYPE_SUBAGENT] [REQ-PROMPT_TYPE_SUBAGENT]\n# Summary: Validate the explicit-only writable plan-new-feature Task wrapper and its clean-context workflow contract.\n\nContract:\n  INPUT: agent_markdown; canonical_skill_markdown; test_contract\n  PRE: agent_markdown is readable; canonical_skill_markdown exists; test_contract names required clauses\n  OUTPUT: pass or contract_violation diagnostics\n  POST: pass means frontmatter, delegation, workflow gates, safety boundary, and parent handoff contract are present\n  FAILURE_MODES: missing_agent; invalid_frontmatter; invalid_activation; missing_skill_reference; missing_gate; missing_safety_boundary; missing_return_contract\n  DATA: frontmatter; prompt_body; required_clauses\n  EFFECTS: IO\n  TERMINATION: total\n\nprocedure VALIDATE_PROMPT_TYPE_SUBAGENT_CONTRACT(agent_markdown, canonical_skill_markdown, test_contract):\n  # [IMPL-PROMPT_TYPE_SUBAGENT] [ARCH-PROMPT_TYPE_SUBAGENT] [REQ-PROMPT_TYPE_SUBAGENT] — How: verify the agent file is an explicit-only writable foreground wrapper around the canonical plan-new-feature skill.\n  Contract:\n    INPUT: agent_markdown; canonical_skill_markdown; test_contract\n    PRE: all inputs are readable text\n    OUTPUT: pass or contract_violation diagnostics\n    POST: pass means each required frontmatter and body clause is present\n    FAILURE_MODES: invalid_frontmatter; invalid_activation; missing_skill_reference; missing_gate; missing_safety_boundary; missing_return_contract\n    EFFECTS: IO\n    TERMINATION: total\n  PARSE frontmatter from agent_markdown\n  CHECK name equals plan-new-feature\n  CHECK readonly equals false\n  CHECK is_background equals false\n  CHECK description contains positive and negative activation guidance\n  CHECK description excludes proactive activation language\n  CHECK prompt_body references tools/bundled-prompt-type-skills/plan-new-feature/SKILL.md\n  CHECK prompt_body orders Refine before Plan before Implement\n  CHECK prompt_body blocks Plan until ambiguity is cleared\n  CHECK prompt_body blocks code until token-commented IMPL pseudo-code and test strategy exist\n  CHECK prompt_body forbids clipboard and automatic Git mutation\n  CHECK prompt_body requires explicit TIED applicability and parent-visible validation evidence\n  RETURN pass or diagnostics\n\nprocedure REPORT_PROMPT_TYPE_SUBAGENT_RESULT(execution_evidence):\n  # [IMPL-PROMPT_TYPE_SUBAGENT] [ARCH-PROMPT_TYPE_SUBAGENT] [REQ-PROMPT_TYPE_SUBAGENT] — How: return auditable workflow evidence to the parent without overstating completion.\n  Contract:\n    INPUT: execution_evidence\n    PRE: execution_evidence records completed gates and validation outcomes\n    OUTPUT: parent_handoff\n    POST: parent_handoff names resolved terms, Tracker, CITDP status, tests, validation, and remaining risks\n    EFFECTS: pure\n    TERMINATION: total\n  INCLUDE resolved terms and vocabulary status\n  INCLUDE per-request Tracker path\n  INCLUDE CITDP path or deferred status\n  INCLUDE tests and validation results\n  INCLUDE remaining risks and blocked gates\n  IF verification-gate or tied_validate_consistency failed:\n    MARK completion as incomplete\n  RETURN parent_handoff\n"
+  implementation_approach:
+    details:
+      - "copy_files.sh installs all 13 wrappers with cp -p, preserves source content and non-time attributes, normalizes only the client copy to the source item's local-date midnight, and warns when an existing managed copy has a non-midnight mtime."
+      - "Description is explicit-only and includes neighboring prompt-type exclusions without proactive activation language."
+      - "Each body directly names the canonical skill, vocabulary preload, type-specific gates, forbidden operations, and return evidence."
+      - "Frontmatter sets is_background false; readonly is false for implementing and close-out wrappers and true for question and other."
+      - "Static contract tests parse frontmatter and assert required clauses, client byte identity, source-date midnight timestamp, source immutability, and refresh warning behavior."
+    summary: "Validate and maintain one project-scoped agent per leaf prompt type whose prompt delegates to the canonical skill, carries clean-context gates and parent handoff requirements, and is distributed with auditable destination-only source-date midnight metadata."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-12"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "DISPATCH_PROMPT_TYPE_SEQUENCE uses invocation remainder and linked plan"
+    last_validated:
+      author: "AI Agent"
+      date: "2026-08-12"
+      result: "pass"
+  name: "Prompt-Type Task Subagent Contract"
+  rationale:
+    benefits:
+      - "Deterministic contract coverage for a Markdown agent definition."
+      - "Parent agents receive auditable completion evidence."
+      - "Single workflow source remains the bundled plan-new-feature skill."
+    problems_solved:
+      - "The absence of tests permits contract drift."
+      - "The one-line body is not a reliable skill include."
+      - "The readonly stub cannot implement."
+    why: "The Task wrapper must preserve the canonical skill workflow while making write permissions, safety gates, and parent-visible evidence explicit in an isolated context."
+  related_decisions:
+    composed_with: []
+    depends_on:
+      - "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "IMPL-TIED_FILES"
+    see_also:
+      - "ARCH-PROMPT_TYPE_SUBAGENT"
+      - "REQ-PROMPT_TYPE_SUBAGENT"
+    supersedes: []
+  status: "Active"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-PROMPT_TYPE_SUBAGENT"
+    code_annotations:
+      - "ARCH-PROMPT_TYPE_SUBAGENT"
+      - "IMPL-PROMPT_TYPE_SUBAGENT"
+      - "REQ-PROMPT_TYPE_SUBAGENT"
+    requirements:
+      - "REQ-PROMPT_TYPE_SUBAGENT"
+    tests:
+      - "mcp-server/src/e2e/prompt-type-subagent.test.ts"
 IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK:
   cross_references:
     - "ARCH-QUALITY_ASSURANCE_PROFILES"
@@ -1202,11 +1288,19 @@ IMPL-TIED_FIDELITY_RESEARCH:
 IMPL-TIED_FILES:
   code_locations:
     files:
-      - description: "Bootstrap script that sets up TIED structure"
+      - description: "Bootstrap script that sets up TIED structure, skill install, prompt-type skill bundle, TIED_REPO_ROOT patch, vocabulary seed, destination midnight normalization, and agent install"
         lines:
           - "1"
-          - "386"
+          - "784"
         path: "copy_files.sh"
+      - description: "Canonical tracked prompt-type skill bundle"
+        path: "tools/bundled-prompt-type-skills/"
+      - description: "Bundled tied-cli with TIED_REPO_ROOT placeholder for client bake"
+        path: "tools/bundled-tied-yaml-skill/scripts/tied-cli.sh"
+      - description: "Bootstrap preservation and methodology integration tests"
+        path: "mcp-server/src/e2e/bootstrap-and-load.test.ts"
+      - description: "Prompt-type bundle contract, managed agent installation, source-date midnight, source immutability, warning, and copy flag tests"
+        path: "mcp-server/src/e2e/prompt-type-skills.test.ts"
   cross_references:
     - "ARCH-TIED_STRUCTURE"
     - "REQ-TIED_SETUP"
@@ -1216,24 +1310,29 @@ IMPL-TIED_FILES:
       - "Additive vocabulary merge mode: copy_files.sh --merge-vocab copies only absent TIED_SOURCE/tied/vocab/*.md filenames and reports added versus preserved files; existing client vocabulary remains authoritative."
       - "Copy base files to project root when missing (.cursorrules, AGENTS.md). In a TIED source repository, live guide content is under tied/docs/; agents and preload use client ./tied/docs/ paths and ./tied/agent-preload-contract.yaml."
       - "Copy guide .md files, detail-files-schema.md, preload contract templates, and reference docs from TIED source tied/docs/ into client tied/docs/ when missing (per DOCS_TO_COPY in copy_files.sh)"
+      - "Copy tied/docs/prompt-type-skills.md into client tied/docs/ when missing so the prompt-type distribution contract travels with the TIED documentation."
       - "Copy YAML index files from templates (requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml)"
       - "Create detail subdirectories (requirements/, architecture-decisions/, implementation-decisions/)"
       - "Create tied/ directory at project root"
       - "DOCS_TO_COPY now installs methodology-migration.md, composition-coverage.md, and the quality-assurance command, pilot, and evidence-manifest guides when missing."
       - "Initialize .cursor/mcp.json only when it is absent; preserve an existing file byte-for-byte rather than merging or refreshing tied-yaml settings, including when tied-yaml is absent."
+      - "Install .cursor/agents/<prompt-type>.md for each of the 13 leaf prompt types as managed canonical Task wrappers and verify byte identity, source-date midnight mtime, source immutability, and warning behavior."
       - "Install the tied-yaml Cursor skill to .cursor/skills/tied-yaml/ (from tools/bundled-tied-yaml-skill/ in the TIED source repo; .cursor/skills/tied-yaml only if the bundle is missing; overwritten each run). The canonical stdio client on the client is .cursor/skills/tied-yaml/scripts/tied-cli.sh only; copy_files.sh does not create a project-root scripts/tied-cli.sh entry."
+      - "Install the tracked tools/bundled-prompt-type-skills/ bundle into client .cursor/skills/ with an explicit managed directory list; refresh only prompt-type and prompt-shared paths while preserving unrelated skills and .cursor/mcp.json."
+      - "Route every managed file and tree copy through COPY_WITH_ATTRIBUTES using cp -p or cp -pR; calculate source-date midnights before copy and normalize only corresponding client paths afterward."
       - "Template promotion supplies quality REQ/ARCH/IMPL detail YAML and IMPL-*-pseudocode.md sidecars; copy_files.sh refreshes inherited implementation pseudo-code sidecars into tied/methodology/implementation-decisions/ without touching project YAML."
       - "The bootstrap E2E fixture verifies initial MCP config creation and byte-for-byte preservation during methodology and vocabulary refresh."
       - "Treat the vocabulary layer as an agent-control layer and keep its RESOLVE, PRELOAD, RECORD, and VALIDATE touchpoints aligned with [PROC-VOCABULARY_INDEX]."
-    summary: "Bootstrap script that creates tied/ directory, copies template files and inherited pseudo-code sidecars, sets up base files, installs the tied-yaml CLI skill under .cursor/skills/tied-yaml/, supports additive vocabulary merge, and preserves existing MCP configuration"
+      - "WARN_ON_MODIFIED_COPY_TARGET reports non-midnight destination mtimes before managed refresh; post-processed files are re-normalized without changing source files."
+    summary: "Bootstrap TIED layout and managed prompt artifacts with attribute-preserving copies, destination-only source-date midnight normalization, pre-refresh non-midnight modification warnings, and delegated YAML canonicalization"
   metadata:
     created:
       author: "AI Agent"
       date: "2025-12-18T00:00:00.000Z"
     last_updated:
       author: "AI Agent"
-      date: "2026-08-04"
-      reason: "LEAP: align bootstrap pseudo-code, vocabulary control layer, and MCP preservation"
+      date: "2026-08-13"
+      reason: "Install all 13 leaf prompt-type Task wrappers"
     last_validated:
       date: "2026-02-06T00:00:00.000Z"
       result: "pass"
@@ -1267,6 +1366,7 @@ IMPL-TIED_FILES:
       - "REQ-TIED_SETUP"
     tests:
       - "mcp-server/src/e2e/bootstrap-and-load.test.ts"
+      - "mcp-server/src/e2e/prompt-type-skills.test.ts"
 IMPL-TIED_YAML_CANONICALIZER:
   cross_references:
     - "ARCH-TIED_YAML_CANONICAL_PROFILE"

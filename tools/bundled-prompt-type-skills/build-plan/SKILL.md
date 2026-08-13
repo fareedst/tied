@@ -1,0 +1,53 @@
+---
+name: build-plan
+description: >-
+  Executes a refined TIED linked plan with guiding vocab, CITDP build Plan,
+  and Implement gates—no Refine section. Use when the caller names build-plan,
+  executes an approved linked plan, or implements from a completed plan
+  document. Do not use for refine-plan (improve the linked plan first),
+  plan-new-feature (new feature from scratch), or non-tied-plan.
+disable-model-invocation: true
+---
+
+# build-plan
+
+Explicit invocation only (`@build-plan` or `prompt-type: build-plan`).
+
+The project-scoped Task wrapper at
+`.cursor/agents/build-plan.md` delegates to this skill when isolated
+foreground implementation is requested; this skill remains the workflow source
+of truth. `copy_files.sh` installs that wrapper into client projects as a
+managed artifact. [REQ-PROMPT_TYPE_SUBAGENT]
+[ARCH-PROMPT_TYPE_SUBAGENT] [IMPL-TIED_FILES]
+
+## Inputs
+
+- **Optional prompt envelope:** `prompt-type: build-plan`, `git-condition:` (informational)
+- **Linked plan:** the attached or in-message approved plan to execute. Required.
+- **Invocation remainder:** optional constraints; do not invent a plan from remainder alone.
+
+## TIED applicability
+
+Full TIED execute — [tied-boundary.md](../prompt-shared/tied-boundary.md). **Omits Refine.**
+
+## Procedure
+
+Execute the linked plan in this order:
+
+1. **Guiding vocab** — [guiding-vocab.md](../prompt-shared/guiding-vocab.md)
+2. **Plan** — [tied-plan-citdp-build.md](../prompt-shared/tied-plan-citdp-build.md)
+3. **Implement** — [tied-implement.md](../prompt-shared/tied-implement.md)
+
+If neither a linked plan nor an in-message plan is present, stop.
+
+## Gates
+
+Do not start code until IMPL pseudo-code (block comments) and test strategy in place.
+
+## Outputs
+
+Implementation per Tracker; CITDP record after behavior changes; verification gate.
+
+## Forbidden
+
+`pbpaste`/`pbcopy`, automatic git, unapproved repo inspection, Refine section.

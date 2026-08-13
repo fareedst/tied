@@ -1,11 +1,13 @@
 IMPL-TIED_FILES:
   code_locations:
     files:
-      - description: "Bootstrap script that sets up TIED structure, skill install, TIED_REPO_ROOT patch, vocab seed"
+      - description: "Bootstrap script that sets up TIED structure, skill install, prompt-type skill bundle, TIED_REPO_ROOT patch, vocab seed"
         lines:
           - "1"
-          - "450"
+          - "642"
         path: "copy_files.sh"
+      - description: "Canonical tracked prompt-type skill bundle"
+        path: "tools/bundled-prompt-type-skills/"
       - description: "Bundled tied-cli with TIED_REPO_ROOT placeholder for client bake"
         path: "tools/bundled-tied-yaml-skill/scripts/tied-cli.sh"
       - description: "YAML canonicalize via sort_keys(.. style=\"double\") and --sort-lists/--sort-keys entry point [PROC-YAML_EDIT_LOOP]"
@@ -28,6 +30,10 @@ IMPL-TIED_FILES:
         path: "mcp-server/src/token-rename.ts"
       - description: "Unit tests for token rename including extra substitution targets"
         path: "mcp-server/src/token-rename.test.ts"
+      - description: "Bootstrap preservation and methodology integration tests"
+        path: "mcp-server/src/e2e/bootstrap-and-load.test.ts"
+      - description: "Prompt-type bundle contract and client installation tests"
+        path: "mcp-server/src/e2e/prompt-type-skills.test.ts"
     functions:
       - description: "Creates directories and copies template files (if implemented as function)"
         file: "copy_files.sh"
@@ -40,24 +46,30 @@ IMPL-TIED_FILES:
     details:
       - "Additive vocabulary merge mode: copy_files.sh --merge-vocab copies only absent TIED_SOURCE/tied/vocab/*.md filenames and reports added versus preserved files; existing client vocabulary remains authoritative."
       - "Copy base files to project root when missing (.cursorrules, AGENTS.md). In a TIED source repository, live guide content is under tied/docs/; agents and preload use client ./tied/docs/ paths and ./tied/agent-preload-contract.yaml."
-      - "Copy guide .md files, detail-files-schema.md, preload contract templates, and reference docs from TIED source tied/docs/ into client tied/docs/ when missing (per DOCS_TO_COPY in copy_files.sh)."
-      - "Copy YAML index files from templates (requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml)."
-      - "Create detail subdirectories (requirements/, architecture-decisions/, implementation-decisions/) and tied/ directory at project root."
-      - "Delegate CANONICALIZE_YAML_FILE and LINT_YAML_PATHS to IMPL-TIED_YAML_CANONICALIZER; do not embed a second yq/Ruby serialization policy in bootstrap documentation."
-      - "DOCS_TO_COPY installs methodology-migration.md, composition-coverage.md, and quality assurance guides when missing."
-      - "Initialize .cursor/mcp.json only when absent; preserve an existing file byte-for-byte rather than merging or refreshing tied-yaml settings."
-      - "Install the tied-yaml Cursor skill to .cursor/skills/tied-yaml/ and patch TIED_REPO_ROOT for client stdio resolution."
-      - "Keep PROC-YAML_EDIT_LOOP, templates, skill docs, and compatibility frontends aligned with tied-yaml-canonical-v1."
-      - "Template promotion supplies inherited methodology detail YAML and pseudo-code sidecars without touching project YAML."
-    summary: "Bootstrap TIED layout and delegate YAML canonicalization to IMPL-TIED_YAML_CANONICALIZER while preserving project boundaries."
+      - "Copy guide .md files, detail-files-schema.md, preload contract templates, and reference docs from TIED source tied/docs/ into client tied/docs/ when missing (per DOCS_TO_COPY in copy_files.sh)"
+      - "Copy tied/docs/prompt-type-skills.md into client tied/docs/ when missing so the prompt-type distribution contract travels with the TIED documentation."
+      - "Copy YAML index files from templates (requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml)"
+      - "Create detail subdirectories (requirements/, architecture-decisions/, implementation-decisions/)"
+      - "Create tied/ directory at project root"
+      - "DOCS_TO_COPY now installs methodology-migration.md, composition-coverage.md, and the quality-assurance command, pilot, and evidence-manifest guides when missing."
+      - "Initialize .cursor/mcp.json only when it is absent; preserve an existing file byte-for-byte rather than merging or refreshing tied-yaml settings, including when tied-yaml is absent."
+      - "Install .cursor/agents/<prompt-type>.md for each of the 13 leaf prompt types as managed canonical Task wrappers and verify byte identity, source-date midnight mtime, source immutability, and warning behavior."
+      - "Install the tied-yaml Cursor skill to .cursor/skills/tied-yaml/ (from tools/bundled-tied-yaml-skill/ in the TIED source repo; .cursor/skills/tied-yaml only if the bundle is missing; overwritten each run). The canonical stdio client on the client is .cursor/skills/tied-yaml/scripts/tied-cli.sh only; copy_files.sh does not create a project-root scripts/tied-cli.sh entry."
+      - "Install the tracked tools/bundled-prompt-type-skills/ bundle into client .cursor/skills/ with an explicit managed directory list; refresh only prompt-type and prompt-shared paths while preserving unrelated skills and .cursor/mcp.json."
+      - "Route every managed file and tree copy through COPY_WITH_ATTRIBUTES using cp -p or cp -pR; calculate source-date midnights before copy and normalize only corresponding client paths afterward."
+      - "Template promotion supplies quality REQ/ARCH/IMPL detail YAML and IMPL-*-pseudocode.md sidecars; copy_files.sh refreshes inherited implementation pseudo-code sidecars into tied/methodology/implementation-decisions/ without touching project YAML."
+      - "The bootstrap E2E fixture verifies initial MCP config creation and byte-for-byte preservation during methodology and vocabulary refresh."
+      - "Treat the vocabulary layer as an agent-control layer and keep its RESOLVE, PRELOAD, RECORD, and VALIDATE touchpoints aligned with [PROC-VOCABULARY_INDEX]."
+      - "WARN_ON_MODIFIED_COPY_TARGET reports non-midnight destination mtimes before managed refresh; post-processed files are re-normalized without changing source files."
+    summary: "Bootstrap TIED layout and managed prompt artifacts with attribute-preserving copies, destination-only source-date midnight normalization, pre-refresh non-midnight modification warnings, and delegated YAML canonicalization"
   metadata:
     created:
       author: "AI Agent"
       date: "2025-12-18T00:00:00.000Z"
     last_updated:
       author: "AI Agent"
-      date: "2026-08-07"
-      reason: "LEAP: document unchanged path reporting for YAML sorter compatibility output"
+      date: "2026-08-13"
+      reason: "Install all 13 leaf prompt-type Task wrappers"
     last_validated:
       date: "2026-02-06T00:00:00.000Z"
       result: "pass"
@@ -92,6 +104,7 @@ IMPL-TIED_FILES:
     tests:
       - "Manual verification checklists"
       - "mcp-server/src/e2e/bootstrap-and-load.test.ts"
+      - "mcp-server/src/e2e/prompt-type-skills.test.ts"
       - "mcp-server/src/token-rename.test.ts"
       - "scripts/analyze_tied_mcp_metrics_test.rb"
       - "scripts/compare_yaml_dirs_test.rb"

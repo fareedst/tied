@@ -1,0 +1,52 @@
+REQ-PROMPT_TYPE_GLOBAL_SKILLS:
+  category: "Tooling"
+  description: "Provide explicit-only prompt-type leaf skills, an ordered prompt-type router, and shared workflow references as a versioned bundle distributed by the TIED bootstrap process. Skills take an invocation remainder and, for refine-plan and build-plan, a linked plan; they do not use a triple-colon payload delimiter."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-12"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Replace triple-colon payload delimiter with invocation remainder and linked plan"
+  name: "Global Prompt-Type Skills"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Explicit safety boundaries remain versioned with the skills."
+      - "One canonical source for ongoing maintenance."
+      - "Reproducible prompt workflows across TIED clients."
+    problems_solved:
+      - "Client projects cannot bootstrap the prompt-type workflow bundle from the TIED methodology repository."
+      - "Prompt workflow versions can drift between TIED projects."
+    why: "Personal Cursor skill files are not reproducible across TIED projects when they remain only under an individual home directory."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_SETUP"
+    related_to: []
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "A TIED client bootstrap installs the same managed bundle under .cursor/skills/ without modifying unrelated skills or existing MCP configuration."
+    - criterion: "Every installed skill is explicit-only, preserves its workflow gates, names invocation remainder and linked plan where applicable, and resolves its shared references."
+    - criterion: "Leaf skills and the router do not use a triple-colon payload delimiter. plan-new-feature treats the invocation remainder as the requirement. refine-plan and build-plan require a linked or in-message plan."
+    - criterion: "The bundle and bootstrap behavior are covered by deterministic static and integration tests."
+    - criterion: "The canonical TIED repository contains all 13 prompt-type leaf skills, one prompt-type router, and all direct shared references."
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+    code_annotations:
+      - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+    implementation:
+      - "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
+    tests:
+      - "mcp-server/src/e2e/prompt-type-skills.test.ts"
+  validation_criteria:
+    - coverage: "Bundle inventory, frontmatter, names, shared links, and line limits."
+      method: "Static contract tests"
+    - coverage: "Temporary TIED client receives the canonical prompt-type bundle and documentation."
+      method: "Bootstrap integration test"
+    - coverage: "Requirement, architecture, implementation, detail files, and semantic-token references."
+      method: "TIED consistency validation"

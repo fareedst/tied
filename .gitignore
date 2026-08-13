@@ -1,5 +1,8 @@
 .cursor/mcp.json
-.cursor/skills/tied-yaml/
+.cursor/debug-*.log
+# .cursor/skills/tied-yaml/
+# .cursor/work
+.markscope-preview-cache
 .markscope-preview/
 docs/*26-??-??*.md
 docs/agentstream-unitconv-general-transcript-difficulties.md
@@ -11,9 +14,6 @@ logs/*.txt
 prompts
 scripts/__pycache__
 scripts/prepare_readme_demo.sh
+tied/docs/.markscope-preview-cache/
 tied/requirements/REQ-FEEDBACK_TO_TIED.yaml
 TODO.md
-tied/docs/.markscope-preview-cache/
-.markscope-preview-cache
-.cursor/debug-*.log
-.cursor/work

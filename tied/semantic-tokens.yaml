@@ -212,6 +212,30 @@ ARCH-MODULE_VALIDATION:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-PROMPT_TYPE_GLOBAL_SKILLS:
+  cross_references:
+    - "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
+    - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+  description: "Tracked prompt-type bundle installed into TIED client Cursor skill directories."
+  detail_file: "architecture-decisions/ARCH-PROMPT_TYPE_GLOBAL_SKILLS.yaml"
+  metadata:
+    last_updated: "2026-08-12"
+    registered: "2026-08-12"
+  name: "Hybrid Prompt-Type Skill Bundle"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
+ARCH-PROMPT_TYPE_SUBAGENT:
+  cross_references:
+    - "IMPL-PROMPT_TYPE_SUBAGENT"
+    - "REQ-PROMPT_TYPE_SUBAGENT"
+  description: "Project-scoped Cursor Task wrapper around the canonical plan-new-feature skill."
+  metadata:
+    last_updated: "2026-08-12"
+    registered: "2026-08-12"
+  name: "Plan-New-Feature Task Subagent Boundary"
+  status: "Active"
+  type: "ARCH"
 ARCH-QUALITY_ASSURANCE_PROFILES:
   cross_references:
     - "IMPL-QUALITY_EVIDENCE_MANIFEST"
@@ -497,6 +521,31 @@ IMPL-MODULE_VALIDATION:
     registered: "2025-12-18T00:00:00.000Z"
   name: "Module Validation Implementation"
   source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-PROMPT_TYPE_GLOBAL_SKILLS:
+  cross_references:
+    - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+    - "IMPL-TIED_FILES"
+    - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+  description: "Canonical prompt-type skill bundle and deterministic client installation through copy_files.sh."
+  detail_file: "implementation-decisions/IMPL-PROMPT_TYPE_GLOBAL_SKILLS.yaml"
+  metadata:
+    last_updated: "2026-08-12"
+    registered: "2026-08-12"
+  name: "Prompt-Type Skill Bundle and Bootstrap Installer"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-PROMPT_TYPE_SUBAGENT:
+  cross_references:
+    - "ARCH-PROMPT_TYPE_SUBAGENT"
+    - "REQ-PROMPT_TYPE_SUBAGENT"
+  description: "Static contract and clean-context workflow contract for the writable plan-new-feature Task subagent."
+  metadata:
+    last_updated: "2026-08-12"
+    registered: "2026-08-12"
+  name: "Plan-New-Feature Task Subagent Contract"
   status: "Active"
   type: "IMPL"
 IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK:
@@ -1186,6 +1235,30 @@ REQ-MODULE_VALIDATION:
   name: "Independent Module Validation Before Integration"
   source_index: "requirements.yaml"
   status: "Active"
+  type: "REQ"
+REQ-PROMPT_TYPE_GLOBAL_SKILLS:
+  cross_references:
+    - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+    - "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
+  description: "Versioned prompt-type skill bundle distributed to TIED clients."
+  detail_file: "requirements/REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml"
+  metadata:
+    last_updated: "2026-08-12"
+    registered: "2026-08-12"
+  name: "Global Prompt-Type Skills"
+  source_index: "requirements.yaml"
+  status: "Planned"
+  type: "REQ"
+REQ-PROMPT_TYPE_SUBAGENT:
+  cross_references:
+    - "ARCH-PROMPT_TYPE_SUBAGENT"
+    - "IMPL-PROMPT_TYPE_SUBAGENT"
+  description: "Explicit-only writable Cursor Task subagent for the plan-new-feature prompt type."
+  metadata:
+    last_updated: "2026-08-12"
+    registered: "2026-08-12"
+  name: "Plan-New-Feature Prompt-Type Subagent"
+  status: "Implemented"
   type: "REQ"
 REQ-QUALITY_ASSURANCE_EVIDENCE:
   cross_references:

@@ -1,0 +1,123 @@
+CITDP-REQ-PROMPT_TYPE_SUBAGENT:
+  change_definition:
+    current_behavior: "Only plan-new-feature had a project-scoped Cursor Task wrapper; the other 12 leaf prompt types had skills but no isolated Task agents."
+    desired_behavior: "Each of the 13 leaf prompt types has an explicit-only foreground Task wrapper at .cursor/agents/<prompt-type>.md that delegates to its canonical skill, preserves type-specific gates and TIED applicability, forbids clipboard and automatic Git mutation, returns structured parent evidence, and is installed into clients as a managed bootstrap artifact with source-date midnight timestamps."
+    non_goals:
+      - "A prompt-type-router Task wrapper"
+      - "Changing shared Refine, Plan, or Implement workflow documents"
+      - "Runtime evaluation of the LLM"
+    success_criteria:
+      - "copy_files.sh installs all 13 canonical agents into client .cursor/agents/<prompt-type>.md with byte-identical content."
+      - "Each agent body names the canonical skill, type-specific gates, forbidden operations, and parent handoff fields."
+      - "Each agent description positively identifies its prompt type and excludes neighboring types without proactive activation language."
+      - "Implementing and close-out wrappers are writable; question and other are readonly."
+      - "Static contract tests pass for all 13 wrappers and are included in the package test command."
+    unchanged_behavior: "The canonical bundled skills remain the workflow source of truth; client bootstrap preserves unrelated skills and existing MCP configuration while installing the managed Task wrappers."
+  completion_criteria:
+    verification_gate_notes: "Prompt-type skill and subagent contract tests passed; YAML indexes and TIED consistency passed; Layer B pseudo-code validation passed for IMPL-PROMPT_TYPE_SUBAGENT; lint_yaml passed on changed project TIED YAML."
+  evidence:
+    commands:
+      - command: "node --test dist/e2e/prompt-type-subagent.test.js"
+        notes: "Fifteen static frontmatter, workflow, safety, and handoff contract tests passed for all 13 leaf wrappers."
+        result: "pass"
+      - command: "node --test dist/e2e/prompt-type-skills.test.js"
+        notes: "Four prompt bundle installation, managed-agent identity, source-date midnight, warning, and static copy-contract tests passed including all 13 agents."
+        result: "pass"
+      - command: "yaml_index_validate"
+        notes: "requirements, architecture, implementation, and semantic-tokens indexes valid."
+        result: "pass"
+      - command: "pseudocode_validate IMPL-PROMPT_TYPE_SUBAGENT"
+        notes: "Layer B contract, token linkage, and dependency diagnostics passed."
+        result: "pass"
+      - command: "tied_validate_consistency"
+        notes: "TIED indexes, detail files, traceability, and pseudo-code token comments passed."
+        result: "pass"
+      - command: "scripts/lint_yaml.sh"
+        notes: "Changed project TIED YAML records passed YAML lint."
+        result: "pass"
+      - command: "bash -n copy_files.sh"
+        notes: "Bootstrap shell syntax validation passed."
+        result: "pass"
+    manifest_reference: "mcp-server/src/e2e/prompt-type-subagent.test.ts; mcp-server/src/e2e/prompt-type-skills.test.ts"
+    proof_boundaries:
+      - "mtime-only detection cannot identify an edit that deliberately restores a midnight timestamp."
+      - "Static contract tests prove file shape and required prompt clauses, not runtime LLM behavior."
+      - "tied_validate_consistency proves TIED structural consistency, not semantic correctness beyond declared contracts."
+  impact_analysis:
+    impl_inventory_notes: ".cursor/agents/<prompt-type>.md for 13 leaves; mcp-server/src/e2e/prompt-type-subagent.test.ts; mcp-server/src/e2e/prompt-type-skills.test.ts; copy_files.sh; tools/bundled-prompt-type-skills/*/SKILL.md wrapper notes; tied/docs/prompt-type-skills.md; tied/vocab/prompt-composer.md; tied/vocab/tied-methodology.md; REQ/ARCH/IMPL records and IMPL-PROMPT_TYPE_SUBAGENT and IMPL-TIED_FILES pseudo-code sidecars."
+    modules_or_boundaries: "VALIDATE_PROMPT_TYPE_SUBAGENT_CONTRACT validates frontmatter and prompt clauses for each leaf; REPORT_PROMPT_TYPE_SUBAGENT_RESULT defines type-specific parent handoff; INSTALL_PROMPT_TYPE_SUBAGENTS binds all 13 canonical agents to client destinations."
+    tied_tokens_affected:
+      - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "ARCH-PROMPT_TYPE_SUBAGENT"
+      - "ARCH-TIED_STRUCTURE"
+      - "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "IMPL-PROMPT_TYPE_SUBAGENT"
+      - "IMPL-TIED_FILES"
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-PROMPT_TYPE_SUBAGENT"
+      - "REQ-TIED_SETUP"
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: "The original CITDP treated other prompt-type Task subagents as a non-goal. This change expands the same REQ/ARCH/IMPL tokens to cover all 13 leaf wrappers, with readonly true for question and other."
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "REQ-PROMPT_TYPE_SUBAGENT"
+    checklist_process: "PROC-AGENT_REQ_CHECKLIST"
+    checklist_session_note: "Expanded plan-new-feature-only Task wrapper to all 13 leaf prompt types."
+    checklist_step_completed: "persist-citdp-record"
+    checklist_version: "agent_req_implementation_checklist v1.7.0"
+    recorded_at: "2026-08-13"
+    tied_context:
+      architecture:
+        - "ARCH-PROMPT_TYPE_SUBAGENT"
+      implementation:
+        - "IMPL-PROMPT_TYPE_SUBAGENT"
+      requirements:
+        - "REQ-PROMPT_TYPE_SUBAGENT"
+    title: "Prompt-type Task subagents for all 13 leaf skills"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  risk_analysis:
+    abuse_cases:
+      - "A caller could mistake a Task wrapper for the canonical skill and bypass the documented workflow source."
+      - "A failed TIED validation could be reported as successful completion."
+      - "Writable execution could be used for unintended Git mutation if the safety boundary is omitted."
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "mcp-server/src/e2e/prompt-type-subagent.test.ts"
+        evidence_method: "Static contract assertions"
+        limitation: "Does not run Cursor's LLM Task invocation."
+        owner: "AI Agent"
+        rationale: "The artifacts are Markdown configuration; deterministic contract coverage is the appropriate test level."
+        result: "pass"
+        risk: "Contract drift in frontmatter or prompt clauses"
+        threshold: "All assertions pass"
+        waiver:
+          expiry: "~"
+          owner: "~"
+          reason: "~"
+          required: "false"
+    quality_profiles: []
+    residual_risk:
+      expiry: "~"
+      owner: "AI Agent"
+      summary: "Cursor-specific runtime delegation and model availability remain outside static tests; explicit invocation and parent review reduce the risk."
+    risks:
+      - description: "Wrappers can drift from canonical skills if a skill contract changes without updating its agent file."
+        id: "RISK-PROMPT-SUBAGENT-001"
+        likelihood: "Medium"
+        mitigation: "Keep wrappers thin, retain the canonical skill path, and run the static contract test for all 13 leaves."
+        severity: "Low"
+    scenarios:
+      - expected: "Each wrapper loads its canonical skill contract and executes that prompt type's procedure and gates."
+        name: "Explicit leaf prompt-type delegation"
+      - expected: "Description directs the caller to another prompt type rather than this wrapper."
+        name: "Neighboring prompt type"
+      - expected: "Parent handoff reports incomplete status and evidence."
+        name: "Validation failure"
+  tdd_sequence:
+    summary: "IMPL pseudo-code and Layer B validation; RED static contract tests for all 13 leaves; GREEN agent prompts and managed bootstrap loop; focused tests; YAML lint and TIED consistency; CITDP close-out."
+  test_strategy:
+    matrix_notes: "Unit/static contract: frontmatter, activation, skill delegation, type-specific gates, forbidden operations, parent handoff, token comments, managed byte identity, source-date midnight timestamp, warning behavior, and cp flag policy. Integration: bootstrap refresh suite. E2E UI: not applicable because no Cursor UI invocation is exercised."
+    summary: "Validate the Markdown Task wrappers and bootstrap distribution deterministically; keep runtime LLM behavior outside the test boundary."

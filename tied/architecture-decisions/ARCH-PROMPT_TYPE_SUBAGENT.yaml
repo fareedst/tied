@@ -1,0 +1,56 @@
+ARCH-PROMPT_TYPE_SUBAGENT:
+  cross_references:
+    - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+    - "REQ-PROMPT_TYPE_SUBAGENT"
+  description: "Project-scoped Cursor Task wrappers delegate explicitly to each canonical leaf prompt-type skill. A plan-refine-build sequencer Task-launches plan-new-feature, then refine-plan, then build-plan without implementing in its own context. Implementing and close-out wrappers are writable and foreground; question and other are readonly foreground. Agents consume an invocation remainder and, for refine-plan and build-plan, a linked plan."
+  implementation_approach:
+    details:
+      - "A static test validates frontmatter, workflow gates, managed installation, source-date midnight timestamp, source immutability, warning behavior, and required prompt clauses for all 13 leaf wrappers without attempting runtime LLM evaluation."
+      - "copy_files.sh installs each project-scoped wrapper into the client .cursor/agents/ directory as a managed canonical artifact alongside the skill bundle."
+      - "Each wrapper repeats only the bootstrap, gates, safety boundary, and return contract needed by a clean subagent context; refresh warns on non-midnight client mtimes before replacement and does not modify source timestamps."
+      - "plan-new-feature consumes the invocation remainder as the requirement. refine-plan and build-plan consume a linked or in-message plan. plan-refine-build passes remainder then linked plans to its children and does not use a triple-colon delimiter."
+      - "plan-refine-build.md Task-launches plan-new-feature, then refine-plan, then build-plan as sequential foreground children and does not implement the feature in its own context."
+      - "The canonical workflow remains tools/bundled-prompt-type-skills/<prompt-type>/SKILL.md for each leaf."
+    summary: "Keep each agent file as a thin project-scoped Task wrapper with explicit activation, type-specific readonly, foreground execution, canonical skill delegation, managed client installation, destination-only source-date midnight metadata, and a structured parent handoff."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-12"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Name invocation remainder and linked plan as agent payloads"
+  name: "Prompt-Type Task Subagent Boundary"
+  rationale:
+    benefits:
+      - "Explicit delegation keeps the skill as the single workflow source."
+      - "Static validation makes the agent contract reviewable and deterministic."
+      - "Writable foreground execution supports sequential TIED gates."
+    problems_solved:
+      - "A stub body does not define the workflow or handoff evidence."
+      - "Missing contract tests allow activation and safety drift."
+      - "readonly true prevents the required Implement phase."
+    why: "Cursor custom subagents start with isolated context and do not reliably include a separately named skill from a one-line body."
+  related_decisions:
+    depends_on:
+      - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+    informs:
+      - "IMPL-PROMPT_TYPE_SUBAGENT"
+    see_also:
+      - "ARCH-TIED_STRUCTURE"
+      - "IMPL-TIED_FILES"
+    supersedes: []
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-PROMPT_TYPE_SUBAGENT"
+    code_annotations:
+      - "ARCH-PROMPT_TYPE_SUBAGENT"
+      - "IMPL-PROMPT_TYPE_SUBAGENT"
+      - "REQ-PROMPT_TYPE_SUBAGENT"
+    implementation:
+      - "IMPL-PROMPT_TYPE_SUBAGENT"
+    requirements:
+      - "REQ-PROMPT_TYPE_SUBAGENT"
+    tests:
+      - "mcp-server/src/e2e/prompt-type-subagent.test.ts"

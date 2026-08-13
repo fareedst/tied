@@ -1,0 +1,69 @@
+IMPL-PROMPT_TYPE_GLOBAL_SKILLS:
+  code_locations:
+    files:
+      - description: "Canonical tracked prompt-type skill bundle"
+        path: "tools/bundled-prompt-type-skills/"
+      - description: "Installs the managed prompt-type skill bundle into client .cursor/skills"
+        path: "copy_files.sh"
+      - description: "Distribution, traceability, and maintenance documentation"
+        path: "tied/docs/prompt-type-skills.md"
+      - description: "Static bundle contract and bootstrap installation tests"
+        path: "mcp-server/src/e2e/prompt-type-skills.test.ts"
+    functions:
+      - description: "Copy the canonical prompt-type bundle into the client skill directory"
+        file: "copy_files.sh"
+        name: "install_prompt_type_skills"
+  cross_references:
+    - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+    - "IMPL-TIED_FILES"
+    - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+  detail_file: "implementation-decisions/IMPL-PROMPT_TYPE_GLOBAL_SKILLS.yaml"
+  implementation_approach:
+    details:
+      - "Canonical source: tools/bundled-prompt-type-skills/."
+      - "Managed leaf directories: plan-new-feature, refine-plan, build-plan, plan-close-out, debug, question, use-skill, ammend-commit, non-tied-plan, non-tied-debug, leap-ad-hoc, leap-diff-promote, other, and prompt-type-router."
+      - "Managed shared directory: prompt-shared with the 14 direct Markdown references used by the leaf skills."
+      - "The documentation contract and static tests define source provenance, exact inventory, explicit activation, link resolution, and line limits."
+      - "The installer removes and recreates only those managed prompt-type directories, preserving unrelated client skills."
+      - "VALIDATE_PROMPT_TYPE_SKILL_CONTRACT rejects a triple-colon payload delimiter and requires invocation remainder and linked plan naming on the applicable leaves."
+    summary: "Copy an explicit inventory of prompt-type skills and shared references from the tracked bundle into each client’s .cursor/skills directory during copy_files.sh."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-12"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Validate invocation remainder and linked plan payload naming"
+  name: "Prompt-Type Skill Bundle and Bootstrap Installer"
+  rationale:
+    benefits:
+      - "Client bootstrap installs one consistent bundle."
+      - "Exact source copies are reviewable in git."
+      - "Static contract tests detect missing or malformed skills before release."
+    problems_solved:
+      - "Bootstrap has no contract for installing this shared development tooling."
+      - "Personal skill files are unavailable to other TIED projects."
+      - "Prompt-type leaf skills and shared references can drift when copied manually."
+    why: "A complete prompt-type workflow bundle must be versioned with the TIED methodology and distributed consistently to TIED clients."
+  related_decisions:
+    composed_with:
+      - "IMPL-TIED_FILES"
+    depends_on:
+      - "IMPL-TIED_FILES"
+    see_also:
+      - "ARCH-TIED_STRUCTURE"
+    supersedes: []
+  status: "Active"
+  testability: "integration"
+  traceability:
+    architecture:
+      - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+    code_annotations:
+      - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+    requirements:
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+    tests:
+      - "mcp-server/src/e2e/prompt-type-skills.test.ts"

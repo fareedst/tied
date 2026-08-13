@@ -23,6 +23,7 @@
 | 5 | [pseudocode-and-citdp.md](pseudocode-and-citdp.md) | Domain vocab vs IMPL grammar, contract precision, binding inventory, composition evidence, three-way alignment, UPPER_SNAKE blocks, CITDP record naming, essence_pseudocode, sub-vocabulary-sync |
 | 5b | [quality-assurance.md](quality-assurance.md) | Quality assurance, quality attributes, risk tiers, assurance profiles, evidence matrix, evidence provenance, residual risk, waivers, pilots, stop criteria, test adequacy |
 | 5c | [fidelity-research.md](fidelity-research.md) | Fidelity findings, specification state, origin layer, divergent edge, read-only research profile, finding lifecycle, evidence provenance, case reports, fidelity audit |
+| 5d | [prompt-composer.md](prompt-composer.md) | Prompt Composer, prompt type, global prompt skill, prompt-type router, prompt envelope, invocation remainder, linked plan, prompt-shared bundle, client installation, canonical bundle |
 | — | [config-discovery.md](config-discovery.md) | Layered YAML config, project-local layer, exclude_patterns, `(proposed)` terms |
 
 ---

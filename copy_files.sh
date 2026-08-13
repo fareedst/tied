@@ -28,14 +28,25 @@
 #     so links resolve from tied/docs/ (see sed block in the DOCS_TO_COPY loop).
 #   - .cursor/skills/tied-yaml/: Cursor Agent Skill for REQ/ARCH/IMPL YAML via tied-cli.sh
 #     (from tools/bundled-tied-yaml-skill/ in git; .cursor/skills/tied-yaml only if bundled is missing; overwritten each run).
+#   - .cursor/skills/: managed prompt-type skills and prompt-shared references
+#     (from tools/bundled-prompt-type-skills/; managed directories are overwritten each run).
 #     Installed tied-cli.sh bakes TIED_REPO_ROOT to this TIED source repo for TIED_MCP_BIN default.
 #   - tied/vocab/: domain vocabulary glossaries (*.md) including routing.md; seeded when missing or empty (never overwrites client files)
+#   - .cursor/agents/*.md: managed Task wrappers for the 13 leaf prompt types
+#     plus sequence orchestrators, refreshed with the prompt-type bundle and
+#     checked for client edits
 #   - Canonical CLI: .cursor/skills/tied-yaml/scripts/tied-cli.sh (use `tree -a` to list .cursor/ or open in the IDE).
 #   - .cursor/mcp.json: creates mcpServers.tied-yaml with stdio, absolute paths to this TIED
 #     repo's mcp-server/dist/index.js and the target project's tied/ only when the file is
 #     missing; preserves an existing file byte-for-byte. Fails if mcp-server/dist/index.js is
 #     not built. After bootstrap, in Cursor you may
 #     run: agent enable tied-yaml — approve; type quit to exit the Agent CLI.
+#
+# Managed bootstrap copy metadata:
+#   Managed copies use cp -p/cp -pR, then receive the source item's local
+#   calendar-date midnight mtime on the client. Before refresh, a non-midnight
+#   destination mtime emits a client-modification warning. Source files remain
+#   untouched; this is mtime-based detection only.
 #
 # Designed for macOS (Bash 3.2+) and Ubuntu (Bash 5.x+).
 #
@@ -103,6 +114,127 @@ _realpath() {
   python3 -c "import os, sys; print(os.path.realpath(sys.argv[1]))" "$1"
 }
 
+# [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
+# How: Apply each source item's local calendar-date midnight to its corresponding managed client copy without modifying source files.
+_normalize_copy_timestamps() {
+  local _source="$1" _destination="$2"
+  python3 - "${_source}" "${_destination}" <<'PY'
+import datetime
+import os
+import sys
+
+source, destination = sys.argv[1:3]
+if not os.path.lexists(source):
+    raise SystemExit(f"TIMESTAMP_CALCULATION_FAILED: source does not exist: {source}")
+if not os.path.lexists(destination):
+    raise SystemExit(f"TIMESTAMP_NORMALIZATION_FAILED: destination does not exist: {destination}")
+
+def descendants(root):
+    yield root
+    if os.path.isdir(root) and not os.path.islink(root):
+        for current, dirs, files in os.walk(root, followlinks=False):
+            for name in dirs:
+                yield os.path.join(current, name)
+            for name in files:
+                yield os.path.join(current, name)
+
+def midnight(timestamp):
+    local = datetime.datetime.fromtimestamp(timestamp)
+    return local.replace(hour=0, minute=0, second=0, microsecond=0).timestamp()
+
+source_items = list(descendants(source))
+for source_item in source_items:
+    relative = os.path.relpath(source_item, source)
+    destination_item = destination if relative == "." else os.path.join(destination, relative)
+    if not os.path.lexists(destination_item):
+        raise SystemExit(
+            f"PATH_MAPPING_FAILED: missing copied path {destination_item} for {source_item}"
+        )
+    timestamp = midnight(os.stat(source_item, follow_symlinks=False).st_mtime)
+    access_time = os.stat(destination_item, follow_symlinks=False).st_atime
+    os.utime(destination_item, (access_time, timestamp), follow_symlinks=False)
+PY
+}
+
+# [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
+# How: Warn before replacing a managed destination when any file mtime is not truncated to local calendar-date midnight.
+_warn_modified_copy_target() {
+  local _path="$1"
+  if [[ ! -e "${_path}" ]] && [[ ! -L "${_path}" ]]; then
+    return 0
+  fi
+  python3 - "${_path}" <<'PY'
+import datetime
+import os
+import sys
+
+path = sys.argv[1]
+paths = [path]
+if os.path.isdir(path) and not os.path.islink(path):
+    for root, dirs, files in os.walk(path, followlinks=False):
+        paths.extend(os.path.join(root, name) for name in dirs)
+        paths.extend(os.path.join(root, name) for name in files)
+
+for item in paths:
+    timestamp = os.stat(item, follow_symlinks=False).st_mtime
+    local = datetime.datetime.fromtimestamp(timestamp)
+    midnight = local.replace(hour=0, minute=0, second=0, microsecond=0).timestamp()
+    if abs(timestamp - midnight) > 0.000001:
+        print(f"WARNING: Client-modified managed copy detected: {item}")
+PY
+}
+
+# [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
+# How: Preserve file attributes with cp -p, calculate the source-date midnight before copying, warn before replacement, and normalize only the copied file.
+_copy_file() {
+  local _source="$1" _destination="$2"
+  local _source_midnight
+  _source_midnight="$(
+    python3 - "${_source}" <<'PY'
+import datetime
+import os
+import sys
+
+path = sys.argv[1]
+timestamp = os.stat(path, follow_symlinks=False).st_mtime
+print(datetime.datetime.fromtimestamp(timestamp).replace(
+    hour=0, minute=0, second=0, microsecond=0
+).timestamp())
+PY
+  )"
+  _warn_modified_copy_target "${_destination}"
+  mkdir -p "$(dirname "${_destination}")"
+  cp -p "${_source}" "${_destination}"
+  python3 - "${_destination}" "${_source_midnight}" <<'PY'
+import os
+import sys
+
+path = sys.argv[1]
+timestamp = float(sys.argv[2])
+access_time = os.stat(path, follow_symlinks=False).st_atime
+os.utime(path, (access_time, timestamp), follow_symlinks=False)
+PY
+}
+
+# [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
+# How: Preserve tree attributes with cp -pR, calculate source-date midnights before copying, warn before replacement, and normalize only the copied tree.
+_copy_tree() {
+  local _source="$1" _destination="$2"
+  python3 - "${_source}" <<'PY'
+import os
+import sys
+
+if not os.path.lexists(sys.argv[1]):
+    raise SystemExit(f"SOURCE_MISSING: {sys.argv[1]}")
+os.stat(sys.argv[1], follow_symlinks=False)
+PY
+  _warn_modified_copy_target "${_destination}"
+  mkdir -p "$(dirname "${_destination}")"
+  rm -rf "${_destination}"
+  cp -pR "${_source}" "${_destination}"
+  _normalize_copy_timestamps "${_source}" "${_destination}"
+}
+
 MCP_SERVER_DIST="${SCRIPT_DIR}/mcp-server/dist/index.js"
 if [[ ! -f "${MCP_SERVER_DIST}" ]]; then
   say_err "Missing built MCP server: ${MCP_SERVER_DIST}"
@@ -158,8 +290,9 @@ HOOKS_JSON="${TARGET_PROJECT_DIR}/.cursor/hooks.json"
 
 if [[ -f "${SCRIPT_DIR}/.cursor/hooks.json" ]]; then
   mkdir -p "${CURSOR_DIR}"
-  cp "${SCRIPT_DIR}/.cursor/hooks.json" "$HOOKS_JSON"
+  _copy_file "${SCRIPT_DIR}/.cursor/hooks.json" "$HOOKS_JSON"
   sed -i '' "s|${SCRIPT_DIR}/.cursor/logs|${TARGET_PROJECT_DIR}/.cursor/logs|g" "$HOOKS_JSON"
+  _normalize_copy_timestamps "${SCRIPT_DIR}/.cursor/hooks.json" "$HOOKS_JSON"
 fi
 
 mkdir -p "${CURSOR_DIR}"
@@ -183,12 +316,14 @@ tied_yaml_skill_is_complete() {
 _patch_tied_cli_repo_root() {
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
   # How: Resolve the installed CLI's repository marker once and leave already customized clients unchanged.
-  local _cli="${TIED_YAML_SKILL_DEST}/scripts/tied-cli.sh"
+  local _source="$1" _cli="${TIED_YAML_SKILL_DEST}/scripts/tied-cli.sh"
+  local _source_cli="${_source}/scripts/tied-cli.sh"
   if [[ ! -f "${_cli}" ]]; then
     return 0
   fi
   local _root
   _root="$(_realpath "${SCRIPT_DIR}")"
+  local _patch_rc=0
   TIED_CLI_PATH="${_cli}" TIED_SOURCE_ROOT="${_root}" TIED_CLI_MARKER="${TIED_CLI_REPO_ROOT_MARKER}" \
     python3 -c '
 import os, sys
@@ -204,26 +339,25 @@ if old_line not in text:
     sys.exit(2)
 with open(path, "w", encoding="utf-8") as f:
     f.write(text.replace(old_line, new_line, 1))
-' || {
-    local _rc=$?
-    if [[ "${_rc}" -eq 2 ]]; then
+' || _patch_rc=$?
+  if [[ "${_patch_rc}" -eq 2 ]]; then
       say_warn "tied-cli.sh at ${_cli} has no TIED_REPO_ROOT placeholder; skipped baking TIED source path."
-    else
-      exit "${_rc}"
-    fi
-  }
+  elif [[ "${_patch_rc}" -ne 0 ]]; then
+    exit "${_patch_rc}"
+  else
+    _normalize_copy_timestamps "${_source_cli}" "${_cli}"
+  fi
 }
 install_tied_yaml_skill() {
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
   # How: Install the canonical or explicitly permitted fallback skill, then patch its TIED repository root.
   local _src="$1"
   mkdir -p "${CURSOR_DIR}/skills"
-  rm -rf "${TIED_YAML_SKILL_DEST}"
-  cp -R "${_src}" "${TIED_YAML_SKILL_DEST}"
+  _copy_tree "${_src}" "${TIED_YAML_SKILL_DEST}"
   chmod -R a+rX "${TIED_YAML_SKILL_DEST}"
   if [[ -f "${TIED_YAML_SKILL_DEST}/scripts/tied-cli.sh" ]]; then
     chmod a+x "${TIED_YAML_SKILL_DEST}/scripts/tied-cli.sh"
-    _patch_tied_cli_repo_root
+    _patch_tied_cli_repo_root "${_src}"
   fi
   say_warn "Copied tied-yaml Cursor skill into ${TIED_YAML_SKILL_DEST} (from ${_src})."
 }
@@ -237,11 +371,77 @@ else
   say_err "  ${TIED_YAML_SKILL_CANONICAL}  (canonical bundled copy; use a complete TIED repository checkout)"
   say_err "  ${TIED_YAML_SKILL_DEV_FALLBACK}  (dev fallback; copy bundled into .cursor/skills/ if needed)"
   say_err "Recovery: re-run this script from a TIED tree that includes tools/bundled-tied-yaml-skill/, or"
-  say_err "  cp -R <TIED_repo>/tools/bundled-tied-yaml-skill .cursor/skills/tied-yaml"
+  say_err "  cp -pR <TIED_repo>/tools/bundled-tied-yaml-skill .cursor/skills/tied-yaml"
   say_err "TIED project YAML: use a built mcp-server dist/index.js with TIED_MCP_BIN and"
   say_err "  TIED_BASE_PATH, or follow tied/docs/using-tied-without-mcp.md for the manual workflow."
   exit 1
 fi
+
+# --- Cursor Agent Skills: prompt-type bundle ---
+# [IMPL-PROMPT_TYPE_GLOBAL_SKILLS] [ARCH-PROMPT_TYPE_GLOBAL_SKILLS] [REQ-PROMPT_TYPE_GLOBAL_SKILLS]
+# How: Install the tracked explicit-only prompt-type skills and their direct shared references into each client.
+PROMPT_TYPE_SKILLS_CANONICAL="${SCRIPT_DIR}/tools/bundled-prompt-type-skills"
+PROMPT_TYPE_SKILLS_DEST="${CURSOR_DIR}/skills"
+PROMPT_TYPE_SKILL_DIRS=(
+  "plan-new-feature"
+  "refine-plan"
+  "build-plan"
+  "plan-close-out"
+  "debug"
+  "question"
+  "use-skill"
+  "ammend-commit"
+  "non-tied-plan"
+  "non-tied-debug"
+  "leap-ad-hoc"
+  "leap-diff-promote"
+  "other"
+  "prompt-type-router"
+)
+PROMPT_TYPE_SHARED_DIR="prompt-shared"
+prompt_type_skills_is_complete() {
+  [[ -d "$1/${PROMPT_TYPE_SHARED_DIR}" ]] &&
+    [[ -f "$1/${PROMPT_TYPE_SKILL_DIRS[0]}/SKILL.md" ]] &&
+    [[ -f "$1/prompt-type-router/SKILL.md" ]]
+}
+install_prompt_type_skills() {
+  # [IMPL-PROMPT_TYPE_GLOBAL_SKILLS] [ARCH-PROMPT_TYPE_GLOBAL_SKILLS] [REQ-PROMPT_TYPE_GLOBAL_SKILLS]
+  # How: Refresh only the managed prompt-type directories while preserving unrelated client skills and MCP configuration.
+  local _src="$1"
+  if ! prompt_type_skills_is_complete "${_src}"; then
+    say_err "ERROR: prompt-type skill bundle not found or incomplete at ${_src}."
+    exit 1
+  fi
+  mkdir -p "${PROMPT_TYPE_SKILLS_DEST}"
+  _copy_tree "${_src}/${PROMPT_TYPE_SHARED_DIR}" "${PROMPT_TYPE_SKILLS_DEST}/${PROMPT_TYPE_SHARED_DIR}"
+  local _skill_dir
+  for _skill_dir in "${PROMPT_TYPE_SKILL_DIRS[@]}"; do
+    _copy_tree "${_src}/${_skill_dir}" "${PROMPT_TYPE_SKILLS_DEST}/${_skill_dir}"
+  done
+  chmod -R a+rX "${PROMPT_TYPE_SKILLS_DEST}/${PROMPT_TYPE_SHARED_DIR}"
+  for _skill_dir in "${PROMPT_TYPE_SKILL_DIRS[@]}"; do
+    chmod -R a+rX "${PROMPT_TYPE_SKILLS_DEST}/${_skill_dir}"
+  done
+  say_warn "Copied prompt-type Cursor skills into ${PROMPT_TYPE_SKILLS_DEST} (from ${_src})."
+}
+install_prompt_type_skills "${PROMPT_TYPE_SKILLS_CANONICAL}"
+
+# --- Cursor Task subagents: managed prompt-type wrappers ---
+# [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-PROMPT_TYPE_SUBAGENT] [ARCH-PROMPT_TYPE_SUBAGENT] [REQ-PROMPT_TYPE_SUBAGENT]
+# How: Install every canonical prompt-type Task wrapper under .cursor/agents/ with managed copy metadata and warn before replacing client edits.
+mkdir -p "${CURSOR_DIR}/agents"
+shopt -s nullglob
+_prompt_type_agent_files=( "${SCRIPT_DIR}/.cursor/agents/"*.md )
+shopt -u nullglob
+if [[ ${#_prompt_type_agent_files[@]} -eq 0 ]]; then
+  say_err "Missing managed prompt-type agents under ${SCRIPT_DIR}/.cursor/agents"
+  exit 1
+fi
+_agent_src=""
+for _agent_src in "${_prompt_type_agent_files[@]}"; do
+  _copy_file "${_agent_src}" "${CURSOR_DIR}/agents/$(basename "${_agent_src}")"
+done
+say_warn "Installed managed prompt-type Task wrappers under ${CURSOR_DIR}/agents with source-date midnight timestamps."
 
 # --- Domain vocabulary index (project-scoped; seed when absent) ---
 # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [PROC-VOCABULARY_INDEX]
@@ -268,7 +468,7 @@ _seed_domain_vocab() {
   for _f in "${_src}"/*.md; do
     if [[ -f "${_f}" ]]; then
       (( _total++ )) || true
-      cp -p "${_f}" "${_dest}/$(basename "${_f}")"
+      _copy_file "${_f}" "${_dest}/$(basename "${_f}")"
       (( _count++ )) || true
     fi
   done
@@ -295,7 +495,7 @@ if [[ "${MERGE_VOCAB}" == "true" ]]; then
         ((merge_skipped++)) || true
       else
         mkdir -p "${VOCAB_DEST}"
-        cp -p "${_f}" "${_dest_file}"
+        _copy_file "${_f}" "${_dest_file}"
         ((merge_count++)) || true
       fi
     fi
@@ -324,7 +524,7 @@ for template in "${BASE_FILES[@]}"; do
   fi
 
   if [[ ! -f "${dest}" ]]; then
-    cp -p "${src}" "${dest}"
+    _copy_file "${src}" "${dest}"
     ((base_copied++)) || true
   fi
 done
@@ -340,6 +540,7 @@ TIED_SOURCE_DIR="${SCRIPT_DIR}/tied"
 #
 # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
 # How: Refresh inherited methodology content as an exact source-template snapshot; project YAML and client docs remain outside this tree.
+_warn_modified_copy_target "${METHODOLOGY_DIR}"
 rm -rf "${METHODOLOGY_DIR}"
 mkdir -p "${METHODOLOGY_DIR}/requirements"
 mkdir -p "${METHODOLOGY_DIR}/architecture-decisions"
@@ -361,7 +562,7 @@ for f in "${INDEX_YAML_FILES[@]}"; do
     say_err "Missing index file: ${src}"
     exit 1
   fi
-  cp -p "${src}" "${METHODOLOGY_DIR}/${f}"
+  _copy_file "${src}" "${METHODOLOGY_DIR}/${f}"
   ((index_yaml_copied++)) || true
 done
 say_warn "Copied ${index_yaml_copied} of ${#INDEX_YAML_FILES[@]} methodology index YAMLs into ${METHODOLOGY_DIR} (overwritten)."
@@ -412,6 +613,7 @@ DOCS_TO_COPY=(
   "pseudocode-fidelity-audit-agent-prompt.md"
   "pseudocode-writing-and-validation.md"
   "pseudocode-validation-checklist.yaml"
+  "prompt-type-skills.md"
   "quality-assurance-commands.md"
   "quality-assurance-pilot.md"
   "quality-evidence-manifest.md"
@@ -437,7 +639,7 @@ for f in "${DOCS_TO_COPY[@]}"; do
   fi
   ((docs_total++)) || true
   if [[ ! -f "${dest}" ]]; then
-    cp -p "${src}" "${dest}"
+    _copy_file "${src}" "${dest}"
     # For client copy: post-process index links for paths that assume repo-root layout.
     if [[ "${f}" == "tied-yaml-agent-index.md" ]]; then
       # Regenerate: edit canonical ${SCRIPT_DIR}/tied/docs/tied-yaml-agent-index.md, then re-run this script; sed normalizes for client.
@@ -449,6 +651,7 @@ for f in "${DOCS_TO_COPY[@]}"; do
         -e 's|](\.\./AGENTS\.md)|](../../AGENTS.md)|g' \
         -e 's|](\.\./mcp-server/|](../../mcp-server/|g' \
         "${dest}" > "${_tied_yaml_idx_tmp}" && mv "${_tied_yaml_idx_tmp}" "${dest}"
+      _normalize_copy_timestamps "${src}" "${dest}"
     fi
     ((docs_count++)) || true
   fi
@@ -474,7 +677,7 @@ if [[ -d "${IMPL_TEMPLATE_DIR}" ]]; then
     if [[ -f "${detail_file}" ]]; then
       ((impl_total++)) || true
       filename="$(basename "${detail_file}")"
-      cp -p "${detail_file}" "${METHODOLOGY_DIR}/implementation-decisions/${filename}"
+      _copy_file "${detail_file}" "${METHODOLOGY_DIR}/implementation-decisions/${filename}"
       ((impl_count++)) || true
     fi
   done
@@ -487,7 +690,7 @@ if [[ -d "${IMPL_TEMPLATE_DIR}" ]]; then
   for sidecar_file in "${IMPL_TEMPLATE_DIR}"/*-pseudocode.md; do
     if [[ -f "${sidecar_file}" ]]; then
       filename="$(basename "${sidecar_file}")"
-      cp -p "${sidecar_file}" "${METHODOLOGY_DIR}/implementation-decisions/${filename}"
+      _copy_file "${sidecar_file}" "${METHODOLOGY_DIR}/implementation-decisions/${filename}"
       ((impl_sidecar_count++)) || true
     fi
   done
@@ -508,7 +711,7 @@ if [[ -d "${ARCH_TEMPLATE_DIR}" ]]; then
     if [[ -f "${detail_file}" ]]; then
       ((arch_total++)) || true
       filename="$(basename "${detail_file}")"
-      cp -p "${detail_file}" "${METHODOLOGY_DIR}/architecture-decisions/${filename}"
+      _copy_file "${detail_file}" "${METHODOLOGY_DIR}/architecture-decisions/${filename}"
       ((arch_count++)) || true
     fi
   done
@@ -529,7 +732,7 @@ if [[ -d "${REQ_TEMPLATE_DIR}" ]]; then
     if [[ -f "${detail_file}" ]]; then
       ((req_total++)) || true
       filename="$(basename "${detail_file}")"
-      cp -p "${detail_file}" "${METHODOLOGY_DIR}/requirements/${filename}"
+      _copy_file "${detail_file}" "${METHODOLOGY_DIR}/requirements/${filename}"
       ((req_count++)) || true
     fi
   done
