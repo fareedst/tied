@@ -32,9 +32,6 @@
 #     (from tools/bundled-prompt-type-skills/; managed directories are overwritten each run).
 #     Installed tied-cli.sh bakes TIED_REPO_ROOT to this TIED source repo for TIED_MCP_BIN default.
 #   - tied/vocab/: domain vocabulary glossaries (*.md) including routing.md; seeded when missing or empty (never overwrites client files)
-#   - .cursor/agents/*.md: managed Task wrappers for the 13 leaf prompt types
-#     plus sequence orchestrators, refreshed with the prompt-type bundle and
-#     checked for client edits
 #   - Canonical CLI: .cursor/skills/tied-yaml/scripts/tied-cli.sh (use `tree -a` to list .cursor/ or open in the IDE).
 #   - .cursor/mcp.json: creates mcpServers.tied-yaml with stdio, absolute paths to this TIED
 #     repo's mcp-server/dist/index.js and the target project's tied/ only when the file is
@@ -425,23 +422,6 @@ install_prompt_type_skills() {
   say_warn "Copied prompt-type Cursor skills into ${PROMPT_TYPE_SKILLS_DEST} (from ${_src})."
 }
 install_prompt_type_skills "${PROMPT_TYPE_SKILLS_CANONICAL}"
-
-# --- Cursor Task subagents: managed prompt-type wrappers ---
-# [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-PROMPT_TYPE_SUBAGENT] [ARCH-PROMPT_TYPE_SUBAGENT] [REQ-PROMPT_TYPE_SUBAGENT]
-# How: Install every canonical prompt-type Task wrapper under .cursor/agents/ with managed copy metadata and warn before replacing client edits.
-mkdir -p "${CURSOR_DIR}/agents"
-shopt -s nullglob
-_prompt_type_agent_files=( "${SCRIPT_DIR}/.cursor/agents/"*.md )
-shopt -u nullglob
-if [[ ${#_prompt_type_agent_files[@]} -eq 0 ]]; then
-  say_err "Missing managed prompt-type agents under ${SCRIPT_DIR}/.cursor/agents"
-  exit 1
-fi
-_agent_src=""
-for _agent_src in "${_prompt_type_agent_files[@]}"; do
-  _copy_file "${_agent_src}" "${CURSOR_DIR}/agents/$(basename "${_agent_src}")"
-done
-say_warn "Installed managed prompt-type Task wrappers under ${CURSOR_DIR}/agents with source-date midnight timestamps."
 
 # --- Domain vocabulary index (project-scoped; seed when absent) ---
 # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [PROC-VOCABULARY_INDEX]

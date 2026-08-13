@@ -9,11 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Prompt-type client distribution** — `copy_files.sh` installs only the canonical prompt-type **skills** into client `.cursor/skills/`. Prompt-type Task wrappers under `.cursor/agents/` remain TIED-source development artifacts for static contract tests; they are no longer copied into client projects alongside skills.
+
 - **Prompt-type payloads** — `[REQ-PROMPT_TYPE_GLOBAL_SKILLS]` / `[REQ-PROMPT_TYPE_SUBAGENT]` skills and agents consume an **invocation remainder** (text after the skill or agent name) and, for `refine-plan` / `build-plan`, a **linked plan**. They no longer use `:::` as a payload delimiter or emit composer “Prepare to process…” headers.
 
 ### Added
 
-- **Prompt-type Task subagents** — `[REQ-PROMPT_TYPE_SUBAGENT]` / `[ARCH-PROMPT_TYPE_SUBAGENT]` / `[IMPL-PROMPT_TYPE_SUBAGENT]` provide one explicit-only foreground Cursor Task wrapper per leaf prompt type at `.cursor/agents/<prompt-type>.md`, plus the `plan-refine-build` sequence orchestrator that Task-launches `plan-new-feature`, then `refine-plan`, then `build-plan`. `copy_files.sh` installs every `.cursor/agents/*.md` wrapper as a managed bootstrap artifact. Implementing and close-out wrappers are writable; `question` and `other` are readonly.
+- **Prompt-type Task subagents** — `[REQ-PROMPT_TYPE_SUBAGENT]` / `[ARCH-PROMPT_TYPE_SUBAGENT]` / `[IMPL-PROMPT_TYPE_SUBAGENT]` provide one explicit-only foreground Cursor Task wrapper per leaf prompt type at `.cursor/agents/<prompt-type>.md` in the TIED source repository, plus the `plan-refine-build` sequence orchestrator that Task-launches `plan-new-feature`, then `refine-plan`, then `build-plan`. Implementing and close-out wrappers are writable; `question` and `other` are readonly.
 
 - **Global prompt-type skills** — `[REQ-PROMPT_TYPE_GLOBAL_SKILLS]` / `[ARCH-PROMPT_TYPE_GLOBAL_SKILLS]` / `[IMPL-PROMPT_TYPE_GLOBAL_SKILLS]` add a git-tracked canonical bundle under `tools/bundled-prompt-type-skills/` (13 explicit-only leaf skills, `prompt-type-router`, and 14 `prompt-shared` references) installed into client `.cursor/skills/` by `copy_files.sh` while preserving unrelated skills and existing MCP configuration. Added static contract and bootstrap integration tests in `mcp-server/src/e2e/prompt-type-skills.test.ts`, distribution docs in [`tied/docs/prompt-type-skills.md`](tied/docs/prompt-type-skills.md), vocabulary in [`tied/vocab/prompt-composer.md`](tied/vocab/prompt-composer.md), and CITDP [`tied/citdp/CITDP-REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml`](tied/citdp/CITDP-REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml).
 

@@ -14,14 +14,12 @@ disable-model-invocation: true
 
 Explicit invocation only (`@plan-new-feature` or caller names `prompt-type: plan-new-feature`).
 
-The project-scoped Task wrapper at
-`.cursor/agents/plan-new-feature.md` delegates to this skill when isolated
-foreground implementation is requested; this skill remains the workflow source
-of truth. `copy_files.sh` installs that wrapper into client projects as a
-managed artifact, preserves source content and non-time attributes, normalizes
-only the client copy to the source item's local-date midnight, and warns before
-replacing a destination whose mtime is not midnight. [REQ-PROMPT_TYPE_SUBAGENT]
-[ARCH-PROMPT_TYPE_SUBAGENT] [IMPL-TIED_FILES]
+This skill is the workflow source of truth for client prompt-type invocation.
+`copy_files.sh` installs it under `.cursor/skills/plan-new-feature/`. Task wrappers under
+`.cursor/agents/` remain TIED-source development artifacts only.
+[REQ-PROMPT_TYPE_GLOBAL_SKILLS] [ARCH-PROMPT_TYPE_GLOBAL_SKILLS]
+[IMPL-PROMPT_TYPE_GLOBAL_SKILLS]
+
 
 ## Inputs
 

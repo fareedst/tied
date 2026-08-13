@@ -1,5 +1,5 @@
 # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
-# Summary: Bootstrap TIED layout from templates via copy_files.sh — indexes, guides, detail dirs, AGENTS.md family, vocabulary seed/merge, managed prompt-type skills and subagent, attribute-preserving copies, source-date midnight timestamps on client copies, modification warnings, implementation pseudo-code sidecars, and tied-yaml skill.
+# Summary: Bootstrap TIED layout from templates via copy_files.sh — indexes, guides, detail dirs, AGENTS.md family, vocabulary seed/merge, managed prompt-type skills, attribute-preserving copies, source-date midnight timestamps on client copies, modification warnings, implementation pseudo-code sidecars, and tied-yaml skill.
 
 # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
 # How: Contract — INPUT/OUTPUT/DATA for BOOTSTRAP_TIED below; these fields define the bootstrap boundary.
@@ -8,7 +8,7 @@
 # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
 # How: OUTPUT — created or updated files under tied/ and selected root files; process exit status.
 # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
-# How: DATA — project indexes; inherited methodology tree; tied/vocab/*.md when seeded or merged; IMPL-*-pseudocode.md sidecars; managed .cursor/skills/ and .cursor/agents/ artifacts; source-date midnight metadata applied only to client copies; modification diagnostics; and the client .cursor/mcp.json when initialized.
+# How: DATA — project indexes; inherited methodology tree; tied/vocab/*.md when seeded or merged; IMPL-*-pseudocode.md sidecars; managed .cursor/skills/ artifacts; source-date midnight metadata applied only to client copies; modification diagnostics; and the client .cursor/mcp.json when initialized.
 
 procedure BOOTSTRAP_TIED(projectRoot):
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
@@ -19,9 +19,9 @@ procedure BOOTSTRAP_TIED(projectRoot):
     INPUT: projectRoot; template source; TIED source root; optional merge-vocab flag
     OUTPUT: bootstrapped or refreshed client layout; process exit status
     DATA: project YAML; inherited methodology files; client vocabulary files; client MCP configuration
-    CONTROL: preserve client project YAML, existing vocabulary, and existing .cursor/mcp.json byte-for-byte; overwrite inherited methodology and managed agent/skill content; use cp -p or cp -pR and normalize only destination timestamps
+    CONTROL: preserve client project YAML, existing vocabulary, and existing .cursor/mcp.json byte-for-byte; overwrite inherited methodology and managed skill content; use cp -p or cp -pR and normalize only destination timestamps
     PRE: projectRoot is a writable client directory; template source and required TIED source paths are readable
-    POST: required TIED indexes, docs, detail directories, skill, managed leaf prompt-type agents, and vocabulary policy outputs exist; copied managed files have their source item's local-date midnight timestamp; modification warnings precede managed overwrites; source files remain unchanged; failure returns non-zero
+    POST: required TIED indexes, docs, detail directories, managed prompt-type skills, and vocabulary policy outputs exist; copied managed files have their source item's local-date midnight timestamp; modification warnings precede managed overwrites; source files remain unchanged; failure returns non-zero
     EFFECTS: File I/O — creates or updates selected client files; Process — invokes helper copy and patch operations
     FAILURE_MODES: MISSING_TEMPLATE_SOURCE; UNWRITABLE_DESTINATION; SKILL_INSTALL_FAILED; COPY_FAILED; VOCABULARY_SOURCE_MISSING; MCP_CONFIG_INIT_FAILED
     DATA_TRANSITION: client layout absent|stale→bootstrapped|refreshed; inherited methodology old→current; source mtimes→destination local-date midnight mtimes; non-midnight managed destination→warning then current source; client project YAML and existing MCP configuration unchanged; source files unchanged
@@ -30,7 +30,6 @@ procedure BOOTSTRAP_TIED(projectRoot):
   FOR each copy_files.sh target: apply copy or merge policy; never overwrite client project-only YAML with empty templates where script forbids
   CALL INITIALIZE_TIED_MCP_CONFIG(projectRoot)
   CALL INSTALL_TIED_YAML_SKILL(projectRoot)
-  CALL INSTALL_PROMPT_TYPE_SUBAGENTS(projectRoot)
   CALL SEED_DOMAIN_VOCAB(projectRoot)
   CALL MERGE_DOMAIN_VOCAB(projectRoot) WHEN --merge-vocab is supplied
   RETURN success
@@ -107,25 +106,6 @@ procedure WARN_ON_MODIFIED_COPY_TARGET(destinationPath):
   IF any mtime is not local-date midnight:
     EMIT "Client-modified managed copy detected" with each path
   RETURN diagnostics
-
-procedure INSTALL_PROMPT_TYPE_SUBAGENTS(projectRoot):
-  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-PROMPT_TYPE_SUBAGENT] [ARCH-PROMPT_TYPE_SUBAGENT] [REQ-PROMPT_TYPE_SUBAGENT]
-  # How: Install every canonical prompt-type Task wrapper under projectRoot/.cursor/agents/ as a managed, source-date-midnight copy.
-  Contract:
-    INPUT: projectRoot; TIED source .cursor/agents/*.md
-    OUTPUT: projectRoot/.cursor/agents/*.md
-    DATA: canonical agent prompts; client agent prompts; source-date midnight timestamps
-    CONTROL: copy every source agent markdown including leaf wrappers and sequence orchestrators; warn before replacing an existing client copy; overwrite with canonical source
-    PRE: at least one canonical agent prompt is readable; projectRoot/.cursor/agents/ is writable or creatable
-    POST: each client agent content equals its canonical source and has the source item's local-date midnight timestamp; source remains unchanged
-    EFFECTS: File I/O; Diagnostics
-    FAILURE_MODES: AGENT_SOURCE_MISSING; AGENT_DESTINATION_UNWRITABLE; COPY_FAILED
-    DATA_TRANSITION: agents absent|stale→canonical agents with source-date midnight timestamps; source unchanged
-    TERMINATION: total
-  FOR each agent_markdown in TIED_SOURCE/.cursor/agents/*.md:
-    CALL WARN_ON_MODIFIED_COPY_TARGET(projectRoot/.cursor/agents/{basename})
-    CALL COPY_WITH_ATTRIBUTES(agent_markdown, projectRoot/.cursor/agents/{basename}, false)
-  RETURN success
 
 procedure INITIALIZE_TIED_MCP_CONFIG(projectRoot):
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]

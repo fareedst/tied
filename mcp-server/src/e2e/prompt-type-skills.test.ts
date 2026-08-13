@@ -47,12 +47,6 @@ const SHARED_REFERENCES = [
 
 const repoRoot = path.resolve(process.cwd(), "..");
 
-function localMidnightMs(filePath: string): number {
-  const date = new Date(fs.statSync(filePath).mtimeMs);
-  date.setHours(0, 0, 0, 0);
-  return date.getTime();
-}
-
 function assertSkillContract(root: string): void {
   // [IMPL-PROMPT_TYPE_GLOBAL_SKILLS] [ARCH-PROMPT_TYPE_GLOBAL_SKILLS] [REQ-PROMPT_TYPE_GLOBAL_SKILLS] — How: verify exact names, explicit-only frontmatter, direct shared-link resolution, and bounded file size before distribution.
   for (const skillDir of SKILL_DIRS) {
@@ -90,11 +84,9 @@ describe("prompt-type skill bundle", () => {
   });
 
   it("installs the canonical bundle while preserving unrelated client tooling [REQ-PROMPT_TYPE_GLOBAL_SKILLS] [IMPL-PROMPT_TYPE_GLOBAL_SKILLS]", () => {
-    // [IMPL-PROMPT_TYPE_GLOBAL_SKILLS] [ARCH-PROMPT_TYPE_GLOBAL_SKILLS] [REQ-PROMPT_TYPE_GLOBAL_SKILLS] — How: refresh managed prompt-type directories and every Task wrapper under .cursor/agents/ while preserving unrelated client skills and MCP configuration.
+    // [IMPL-PROMPT_TYPE_GLOBAL_SKILLS] [ARCH-PROMPT_TYPE_GLOBAL_SKILLS] [REQ-PROMPT_TYPE_GLOBAL_SKILLS] — How: refresh managed prompt-type directories while preserving unrelated client skills and MCP configuration; prompt-type Task wrappers remain TIED-source development artifacts and are not installed into clients.
     const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-prompt-skills-"));
     const copyScript = path.join(repoRoot, "copy_files.sh");
-    const sourceAgent = path.join(repoRoot, ".cursor", "agents", "plan-new-feature.md");
-    const sourceMtimeBefore = fs.statSync(sourceAgent).mtimeMs;
     try {
       execFileSync("bash", [copyScript, tempDir], { cwd: repoRoot, stdio: "pipe" });
 
@@ -103,6 +95,11 @@ describe("prompt-type skill bundle", () => {
       assert.ok(
         fs.existsSync(path.join(tempDir, "tied", "docs", "prompt-type-skills.md")),
         "bootstrap should install prompt-type skills documentation"
+      );
+      assert.equal(
+        fs.existsSync(path.join(tempDir, ".cursor", "agents")),
+        false,
+        "bootstrap should not install prompt-type Task wrappers into client projects"
       );
 
       const customSkill = path.join(clientSkillRoot, "client-only", "SKILL.md");
@@ -122,60 +119,13 @@ describe("prompt-type skill bundle", () => {
           "utf8"
         )
       );
-
-      const sourceAgentsDir = path.join(repoRoot, ".cursor", "agents");
-      const sourceAgentFiles = fs
-        .readdirSync(sourceAgentsDir)
-        .filter((name) => name.endsWith(".md"));
-      assert.ok(
-        sourceAgentFiles.includes("plan-refine-build.md"),
-        "source agents must include the plan-refine-build sequence orchestrator"
-      );
-      for (const agentFile of sourceAgentFiles) {
-        const installedAgent = path.join(tempDir, ".cursor", "agents", agentFile);
-        const sourceAgentFile = path.join(sourceAgentsDir, agentFile);
-        assert.equal(
-          fs.readFileSync(installedAgent, "utf8"),
-          fs.readFileSync(sourceAgentFile, "utf8"),
-          `bootstrap should install the canonical ${agentFile} Task wrapper byte-for-byte`
-        );
-        assert.equal(
-          Math.trunc(fs.statSync(installedAgent).mtimeMs),
-          localMidnightMs(sourceAgentFile),
-          `managed ${agentFile} should receive the source file's local-date midnight timestamp`
-        );
-      }
-
-      const installedAgent = path.join(tempDir, ".cursor", "agents", "plan-new-feature.md");
-      assert.equal(fs.statSync(sourceAgent).mtimeMs, sourceMtimeBefore, "bootstrap must not modify source timestamps");
-
-      fs.appendFileSync(installedAgent, "\nclient edit\n");
-      const editedTimeMs = Date.now();
-      fs.utimesSync(installedAgent, editedTimeMs / 1000, editedTimeMs / 1000);
-      const refreshOutput = execFileSync("bash", [copyScript, tempDir], {
-        cwd: repoRoot,
-        stdio: "pipe",
-      }).toString();
-      assert.match(
-        refreshOutput,
-        /Client-modified managed copy detected.*plan-new-feature\.md/s,
-        "refresh should warn before replacing an edited managed agent"
-      );
-      assert.equal(
-        fs.readFileSync(installedAgent, "utf8"),
-        fs.readFileSync(sourceAgent, "utf8"),
-        "refresh should restore the canonical managed agent"
-      );
-      assert.equal(Math.trunc(fs.statSync(installedAgent).mtimeMs), localMidnightMs(sourceAgent));
-      assert.equal(fs.statSync(sourceAgent).mtimeMs, sourceMtimeBefore, "refresh must not modify source timestamps");
     } finally {
       fs.rmSync(tempDir, { recursive: true, force: true });
     }
   });
 
-  it("uses attribute-preserving copy invocations and installs the managed agent [REQ-TIED_SETUP] [IMPL-TIED_FILES]", () => {
-    // [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-PROMPT_TYPE_SUBAGENT] [ARCH-PROMPT_TYPE_SUBAGENT] [REQ-PROMPT_TYPE_SUBAGENT]
-    // How: Install every canonical prompt-type Task wrapper under projectRoot/.cursor/agents/ as a managed, timestamp-marked copy.
+  it("uses attribute-preserving copy invocations for managed bootstrap artifacts [REQ-TIED_SETUP] [IMPL-TIED_FILES]", () => {
+    // [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] — How: route managed file and tree copies through cp -p/cp -pR with destination-only source-date midnight normalization.
     const copyScript = fs.readFileSync(path.join(repoRoot, "copy_files.sh"), "utf8");
     const copyInvocations = copyScript
       .split(/\r?\n/)
@@ -185,7 +135,7 @@ describe("prompt-type skill bundle", () => {
     for (const invocation of copyInvocations) {
       assert.match(invocation, /^cp -pR?\s/, `copy must preserve attributes: ${invocation}`);
     }
-    assert.match(copyScript, /\.cursor\/agents\/"\*\.md/);
+    assert.doesNotMatch(copyScript, /\.cursor\/agents\/"\*\.md/);
     assert.match(copyScript, /Client-modified managed copy detected/);
     assert.doesNotMatch(copyScript, /2000-01-01T00:00:00Z/);
     assert.match(copyScript, /normalize_copy_timestamps/);

@@ -887,7 +887,7 @@ REQ-PROMPT_TYPE_GLOBAL_SKILLS:
   status: "Implemented"
 REQ-PROMPT_TYPE_SUBAGENT:
   category: "Tooling"
-  description: "Project-scoped Cursor custom subagents provide an explicit-only foreground Task wrapper for each of the 13 leaf prompt types, plus a plan-refine-build sequence orchestrator."
+  description: "TIED-source Cursor custom subagents provide an explicit-only foreground Task wrapper for each of the 13 leaf prompt types, plus a plan-refine-build sequence orchestrator. Client projects receive skills via copy_files.sh, not Task wrappers."
   detail_file: "requirements/REQ-PROMPT_TYPE_SUBAGENT.yaml"
   metadata:
     created:
@@ -1061,7 +1061,7 @@ REQ-TIED_FIDELITY_RESEARCH:
       method: "Read-only safety checks"
 REQ-TIED_SETUP:
   category: "Functional"
-  description: "TIED setup provides a deterministic client bootstrap: it creates the TIED structure, installs managed skills and the 13 leaf prompt-type Task wrappers, preserves attributes with cp -p/cp -pR, normalizes only client-copy mtimes to each source item's local calendar-date midnight, and warns before replacing destinations whose mtimes are not midnight."
+  description: "TIED setup provides a deterministic client bootstrap: it creates the TIED structure, installs managed prompt-type skills, preserves attributes with cp -p/cp -pR, normalizes only client-copy mtimes to each source item's local calendar-date midnight, and warns before replacing destinations whose mtimes are not midnight."
   detail_file: "requirements/REQ-TIED_SETUP.yaml"
   metadata:
     created:
@@ -1070,7 +1070,7 @@ REQ-TIED_SETUP:
     last_updated:
       author: "AI Agent"
       date: "2026-08-13"
-      reason: "Install all 13 leaf prompt-type Task wrappers during bootstrap"
+      reason: "Stop installing prompt-type Task wrappers into client projects during bootstrap"
     last_validated:
       date: "2026-02-06T00:00:00.000Z"
       result: "pass"
@@ -1116,8 +1116,8 @@ REQ-TIED_SETUP:
       metric: "Bootstrap E2E refresh fixture compares the pre-existing MCP config byte-for-byte after refresh"
     - criterion: "Managed bootstrap artifacts preserve supported attributes, retain source content, normalize only client-copy mtimes to each source item's local calendar-date midnight, and warn before replacement when an existing destination mtime is not midnight"
       metric: "Prompt skill/bootstrap tests verify cp flags, source immutability, destination midnight mtime, and warning output"
-    - criterion: "copy_files.sh installs the canonical .cursor/agents/<prompt-type>.md wrappers for all 13 leaf prompt types into clients"
-      metric: "Installed agent content is byte-identical to the source and refresh restores an edited copy"
+    - criterion: "copy_files.sh installs the canonical prompt-type skill bundle into client .cursor/skills/ and does not create client .cursor/agents/ wrappers"
+      metric: "Bootstrap tests verify managed skill installation and absence of client .cursor/agents/"
   status: "Implemented"
   traceability:
     architecture:

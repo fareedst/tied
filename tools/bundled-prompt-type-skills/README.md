@@ -18,10 +18,11 @@ development, but clients must consume the version committed here.
 ## Client installation
 
 `copy_files.sh` installs the managed skill directories and `prompt-shared/`
-under a client project's `.cursor/skills/`, and installs every
-`.cursor/agents/*.md` Task wrapper, including `plan-refine-build`. The installer
-refreshes only these managed prompt-type paths; unrelated skills and
-`.cursor/mcp.json` remain client-owned.
+under a client project's `.cursor/skills/`. Prompt-type Task wrappers under
+`.cursor/agents/` (including `plan-refine-build`) are TIED-source development
+artifacts only and are not copied into client projects. The installer refreshes
+only managed prompt-type skill paths; unrelated skills and `.cursor/mcp.json`
+remain client-owned.
 
 All leaf skills use relative `../prompt-shared/*.md` references. The source and
 installed layouts preserve that one-level relationship so references resolve

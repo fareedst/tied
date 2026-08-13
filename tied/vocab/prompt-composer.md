@@ -18,8 +18,8 @@ files and the implementation pseudo-code.
 | **Prompt Composer** | prompt builder | Source workflow taxonomy and composition contract |
 | **prompt type** | prompt mode | One branch of the Prompt Composer taxonomy |
 | **global prompt skill** | personal skill copy | A versioned leaf skill distributed to client projects |
-| **prompt-type subagent** | agent wrapper, skill include | A project-scoped Cursor Task wrapper for a prompt type; distinct from the global prompt skill. One wrapper exists per leaf prompt type at `.cursor/agents/<prompt-type>.md`. Implementing and close-out wrappers are writable; `question` and `other` are readonly. |
-| **prompt-type sequence subagent** | multi-agent wrapper, pipeline agent | A project-scoped Cursor Task orchestrator that launches leaf prompt-type subagents in a fixed order. Canonical: `plan-refine-build` runs `plan-new-feature`, then `refine-plan`, then `build-plan`. |
+| **prompt-type subagent** | agent wrapper, skill include | A TIED-source Cursor Task wrapper for a prompt type; distinct from the global prompt skill. One wrapper exists per leaf prompt type at `.cursor/agents/<prompt-type>.md` for static contract validation. Implementing and close-out wrappers are writable; `question` and `other` are readonly. Not installed into client projects by `copy_files.sh`. |
+| **prompt-type sequence subagent** | multi-agent wrapper, pipeline agent | A TIED-source Cursor Task orchestrator that launches leaf prompt-type subagents in a fixed order. Canonical: `plan-refine-build` runs `plan-new-feature`, then `refine-plan`, then `build-plan`. |
 | **prompt-type router** | multi-prompt helper | Explicit ordered composition of prompt types |
 | **prompt envelope** | prompt wrapper | Optional `prompt-type:` and `git-condition:` fields on a generated prompt; not required for Cursor skill or agent invocation |
 | **invocation remainder** | ::: body, request after ::: | Text after the named skill or agent (or the Task prompt body). For `plan-new-feature` this is the requirement, not a plan document. |
@@ -41,9 +41,9 @@ files and the implementation pseudo-code.
 | Leaf skill | `<prompt-type>/SKILL.md` | [REQ-PROMPT_TYPE_GLOBAL_SKILLS](../requirements/REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml) |
 | Router | `prompt-type-router/SKILL.md` | [IMPL-PROMPT_TYPE_GLOBAL_SKILLS](../implementation-decisions/IMPL-PROMPT_TYPE_GLOBAL_SKILLS.yaml) |
 | Shared reference | `prompt-shared/*.md` | [IMPL-PROMPT_TYPE_GLOBAL_SKILLS](../implementation-decisions/IMPL-PROMPT_TYPE_GLOBAL_SKILLS.yaml) |
-| Prompt-type subagent | `.cursor/agents/<prompt-type>.md` | [ARCH-PROMPT_TYPE_SUBAGENT](../architecture-decisions/ARCH-PROMPT_TYPE_SUBAGENT.yaml) · [IMPL-PROMPT_TYPE_SUBAGENT](../implementation-decisions/IMPL-PROMPT_TYPE_SUBAGENT.yaml) |
-| Prompt-type sequence subagent | `.cursor/agents/plan-refine-build.md` | [ARCH-PROMPT_TYPE_SUBAGENT](../architecture-decisions/ARCH-PROMPT_TYPE_SUBAGENT.yaml) · [IMPL-PROMPT_TYPE_SUBAGENT](../implementation-decisions/IMPL-PROMPT_TYPE_SUBAGENT.yaml) |
-| Bootstrap installer | `copy_files.sh` | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
+| Prompt-type subagent | `.cursor/agents/<prompt-type>.md` (TIED source only) | [ARCH-PROMPT_TYPE_SUBAGENT](../architecture-decisions/ARCH-PROMPT_TYPE_SUBAGENT.yaml) · [IMPL-PROMPT_TYPE_SUBAGENT](../implementation-decisions/IMPL-PROMPT_TYPE_SUBAGENT.yaml) |
+| Prompt-type sequence subagent | `.cursor/agents/plan-refine-build.md` (TIED source only) | [ARCH-PROMPT_TYPE_SUBAGENT](../architecture-decisions/ARCH-PROMPT_TYPE_SUBAGENT.yaml) · [IMPL-PROMPT_TYPE_SUBAGENT](../implementation-decisions/IMPL-PROMPT_TYPE_SUBAGENT.yaml) |
+| Bootstrap installer | `copy_files.sh` (skills only) | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
 | Explicit activation | `disable-model-invocation: true` | [REQ-PROMPT_TYPE_GLOBAL_SKILLS](../requirements/REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml) |
 
 ---

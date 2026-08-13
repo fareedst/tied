@@ -1,6 +1,6 @@
 REQ-PROMPT_TYPE_SUBAGENT:
   category: "Tooling"
-  description: "Project-scoped Cursor custom subagents provide an explicit-only foreground Task wrapper for each of the 13 leaf prompt types, plus a plan-refine-build sequence orchestrator that Task-launches plan-new-feature, then refine-plan, then build-plan. Each leaf wrapper follows its canonical Prompt Composer skill, preserves that skill's procedure, gates, and TIED applicability boundary, avoids unsafe clipboard and automatic Git mutations, returns structured evidence to its parent, and is installed into TIED clients as a managed bootstrap artifact with source-date midnight client-copy timestamps and non-midnight modification detection. Implementing and close-out wrappers are writable; question and other are readonly. The sequence orchestrator does not implement the feature in its own context."
+  description: "Project-scoped Cursor custom subagents provide an explicit-only foreground Task wrapper for each of the 13 leaf prompt types in the TIED source repository, plus a plan-refine-build sequence orchestrator that Task-launches plan-new-feature, then refine-plan, then build-plan. Each leaf wrapper follows its canonical Prompt Composer skill, preserves that skill's procedure, gates, and TIED applicability boundary, avoids unsafe clipboard and automatic Git mutations, and returns structured evidence to its parent. Implementing and close-out wrappers are writable; question and other are readonly. The sequence orchestrator does not implement the feature in its own context. Client projects receive prompt-type skills via copy_files.sh; Task wrappers remain TIED-source development artifacts for static contract validation."
   metadata:
     created:
       author: "AI Agent"
@@ -34,7 +34,8 @@ REQ-PROMPT_TYPE_SUBAGENT:
   satisfaction_criteria:
     - criterion: ".cursor/agents/plan-refine-build.md is an explicit-only writable foreground sequencer that Task-launches plan-new-feature, then refine-plan, then build-plan, stops on a failed child gate, and does not implement the feature in its own context."
     - criterion: "A deterministic static contract test covers all 13 leaf wrappers."
-    - criterion: "copy_files.sh installs every canonical .cursor/agents/*.md wrapper into clients with byte-identical content."
+    - criterion: "copy_files.sh does not install .cursor/agents/*.md wrappers into client projects"
+    - criterion: "copy_files.sh installs the canonical prompt-type skill bundle into client .cursor/skills/"
     - criterion: "Each body forbids clipboard commands, automatic Git mutation, and inferred TIED applicability."
     - criterion: "Each body preserves that prompt type's procedure, gates, TIED applicability boundary, and parent handoff contract."
     - criterion: "Each description distinguishes neighboring prompt types without proactive activation language."
@@ -42,7 +43,6 @@ REQ-PROMPT_TYPE_SUBAGENT:
     - criterion: "Each of the 13 leaf wrappers at .cursor/agents/<prompt-type>.md has valid frontmatter with a matching name and is_background false."
     - criterion: "Implementing and close-out wrappers have readonly false; question and other have readonly true."
     - criterion: "Leaf and sequence agents name invocation remainder and linked plan instead of a triple-colon payload delimiter. plan-new-feature treats remainder as the requirement. refine-plan and build-plan require a linked or in-message plan. plan-refine-build passes remainder then linked plans to its children."
-    - criterion: "Managed agent refresh normalizes only the client copy to the source item's local-date midnight, leaves the source mtime unchanged, and warns before overwriting a destination whose mtime is not midnight."
   status: "Implemented"
   traceability:
     architecture:

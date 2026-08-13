@@ -70,7 +70,8 @@
 | Agent operating guide | AGENTS | `AGENTS.md` | — | [REQ-TIED_SETUP](../requirements/REQ-TIED_SETUP.yaml) |
 | Client development index | core seven | `tied/docs/client-development-index.md` | minimal CITDP+LEAP+TIED doc set, including domain vocabulary | [PROC-AGENT_REQ_CHECKLIST](../docs/processes.md) |
 | Bootstrap script | copy_files | `copy_files.sh` | `./copy_files.sh /path/to/client` | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
-| Managed agent copy | managed bootstrap artifact | `.cursor/agents/<prompt-type>.md` | source-date midnight + pre-refresh warning | [REQ-PROMPT_TYPE_SUBAGENT](../requirements/REQ-PROMPT_TYPE_SUBAGENT.yaml) |
+| Prompt-type skill installation | managed bootstrap artifact | `.cursor/skills/<prompt-type>/SKILL.md` | source-date midnight + pre-refresh warning | [REQ-PROMPT_TYPE_GLOBAL_SKILLS](../requirements/REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml) |
+| Prompt-type Task wrapper (TIED source) | TIED-source development artifact | `.cursor/agents/<prompt-type>.md` | static contract tests only; not installed into clients | [REQ-PROMPT_TYPE_SUBAGENT](../requirements/REQ-PROMPT_TYPE_SUBAGENT.yaml) |
 | Copy timestamp normalization | copy timestamp normalization | managed bootstrap paths | source-date local midnight | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
 | Client-modification warning | client-modification warning | `copy_files.sh` diagnostics | `Client-modified managed copy detected` for non-midnight mtime | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
 | Methodology migration guide | migration guide | `tied/docs/methodology-migration.md` | Existing-client upgrade procedure | [REQ-TIED_SETUP](../requirements/REQ-TIED_SETUP.yaml) |
@@ -144,7 +145,6 @@ Exact spellings for checklist and docs cross-reference:
 | source-date midnight calculation | `CALCULATE_SOURCE_DATE_MIDNIGHTS` | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
 | copied timestamp normalization | `NORMALIZE_COPIED_PATH_TIMESTAMPS` | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
 | client modification detection | `WARN_ON_MODIFIED_COPY_TARGET` | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
-| prompt-type agent installation | `INSTALL_PROMPT_TYPE_SUBAGENTS` | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
 | YAML canonicalization | `CANONICALIZE_YAML_FILE` | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
 | YAML path lint | `LINT_YAML_PATHS` | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
 | typed YAML value canonicalization | `CANONICALIZE_YAML_VALUE` | [IMPL-TIED_YAML_CANONICALIZER](../implementation-decisions/IMPL-TIED_YAML_CANONICALIZER.yaml) |
@@ -170,7 +170,6 @@ Exact spellings for checklist and docs cross-reference:
 | copy timestamp normalization | Preferred terms |
 | CALCULATE_SOURCE_DATE_MIDNIGHTS | Pseudo-code block names |
 | COPY_WITH_ATTRIBUTES | Pseudo-code block names |
-| INSTALL_PROMPT_TYPE_SUBAGENTS | Pseudo-code block names |
 | managed bootstrap artifact | Preferred terms |
 | NORMALIZE_COPIED_PATH_TIMESTAMPS | Pseudo-code block names |
 | WARN_ON_MODIFIED_COPY_TARGET | Pseudo-code block names |

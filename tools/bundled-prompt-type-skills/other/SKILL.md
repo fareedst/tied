@@ -12,12 +12,11 @@ disable-model-invocation: true
 
 Explicit invocation only (`@other` or `prompt-type: other`).
 
-The project-scoped Task wrapper at
-`.cursor/agents/other.md` delegates to this skill when isolated
-Task execution is requested; this skill remains the workflow source
-of truth. `copy_files.sh` installs that wrapper into client projects as a
-managed artifact. [REQ-PROMPT_TYPE_SUBAGENT]
-[ARCH-PROMPT_TYPE_SUBAGENT] [IMPL-TIED_FILES]
+This skill is the workflow source of truth for client prompt-type invocation.
+`copy_files.sh` installs it under `.cursor/skills/other/`. Task wrappers under
+`.cursor/agents/` remain TIED-source development artifacts only.
+[REQ-PROMPT_TYPE_GLOBAL_SKILLS] [ARCH-PROMPT_TYPE_GLOBAL_SKILLS]
+[IMPL-PROMPT_TYPE_GLOBAL_SKILLS]
 
 ## Inputs
 

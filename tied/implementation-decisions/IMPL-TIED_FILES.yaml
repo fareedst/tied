@@ -51,9 +51,9 @@ IMPL-TIED_FILES:
       - "Copy YAML index files from templates (requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml)"
       - "Create detail subdirectories (requirements/, architecture-decisions/, implementation-decisions/)"
       - "Create tied/ directory at project root"
+      - "Do not install .cursor/agents/ prompt-type Task wrappers into client projects during bootstrap."
       - "DOCS_TO_COPY now installs methodology-migration.md, composition-coverage.md, and the quality-assurance command, pilot, and evidence-manifest guides when missing."
       - "Initialize .cursor/mcp.json only when it is absent; preserve an existing file byte-for-byte rather than merging or refreshing tied-yaml settings, including when tied-yaml is absent."
-      - "Install .cursor/agents/<prompt-type>.md for each of the 13 leaf prompt types as managed canonical Task wrappers and verify byte identity, source-date midnight mtime, source immutability, and warning behavior."
       - "Install the tied-yaml Cursor skill to .cursor/skills/tied-yaml/ (from tools/bundled-tied-yaml-skill/ in the TIED source repo; .cursor/skills/tied-yaml only if the bundle is missing; overwritten each run). The canonical stdio client on the client is .cursor/skills/tied-yaml/scripts/tied-cli.sh only; copy_files.sh does not create a project-root scripts/tied-cli.sh entry."
       - "Install the tracked tools/bundled-prompt-type-skills/ bundle into client .cursor/skills/ with an explicit managed directory list; refresh only prompt-type and prompt-shared paths while preserving unrelated skills and .cursor/mcp.json."
       - "Route every managed file and tree copy through COPY_WITH_ATTRIBUTES using cp -p or cp -pR; calculate source-date midnights before copy and normalize only corresponding client paths afterward."
@@ -69,7 +69,7 @@ IMPL-TIED_FILES:
     last_updated:
       author: "AI Agent"
       date: "2026-08-13"
-      reason: "Install all 13 leaf prompt-type Task wrappers"
+      reason: "Stop installing prompt-type Task wrappers into client projects during bootstrap"
     last_validated:
       date: "2026-02-06T00:00:00.000Z"
       result: "pass"

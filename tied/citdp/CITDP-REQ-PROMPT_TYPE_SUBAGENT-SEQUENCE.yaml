@@ -1,17 +1,17 @@
 CITDP-REQ-PROMPT_TYPE_SUBAGENT-SEQUENCE:
   change_definition:
     current_behavior: "Thirteen leaf prompt-type Task wrappers existed; callers had to launch plan-new-feature, refine-plan, and build-plan separately."
-    desired_behavior: "A plan-refine-build sequence orchestrator at .cursor/agents/plan-refine-build.md Task-launches those three leaf wrappers in order, stops on a failed child gate, does not implement the feature in its own context, and is installed with every other .cursor/agents/*.md wrapper."
+    desired_behavior: "A plan-refine-build sequence orchestrator at .cursor/agents/plan-refine-build.md in the TIED source repository only Task-launches those three leaf wrappers in order, stops on a failed child gate, does not implement the feature in its own context, and returns aggregated parent evidence. copy_files.sh installs the canonical prompt-type skills into client .cursor/skills/ and does not install .cursor/agents/ wrappers."
     non_goals:
       - "A fourteenth leaf skill"
       - "A generic prompt-type-router Task wrapper"
       - "Changing shared Refine, Plan, or Implement workflow documents"
       - "Runtime evaluation of the LLM"
     success_criteria:
-      - "copy_files.sh globs all .cursor/agents/*.md including plan-refine-build.md."
-      - "Static contract tests pass for the sequencer plus the 13 leaf wrappers."
+      - "copy_files.sh installs the canonical prompt-type skill bundle into client .cursor/skills/ and does not copy TIED-source .cursor/agents/*.md wrappers into client projects."
+      - "Static contract tests pass for the plan-refine-build sequencer plus the 13 TIED-source leaf wrappers."
       - "The sequencer body names sequential Task children plan-new-feature, then refine-plan, then build-plan, merge gates, and aggregated parent handoff."
-    unchanged_behavior: "Each leaf wrapper remains the source of truth for its canonical skill procedure; the sequencer only owns sequence, Task launch, merge gates, and aggregated handoff."
+    unchanged_behavior: "Each leaf wrapper remains the source of truth for its canonical skill procedure; the TIED-source sequencer only owns sequence, Task launch, merge gates, and aggregated handoff, while client distribution remains skills-only."
   completion_criteria:
     verification_gate_notes: "Prompt-type skill and subagent contract tests passed including the plan-refine-build sequence test; YAML indexes and TIED consistency passed; Layer B pseudo-code validation passed for IMPL-PROMPT_TYPE_SUBAGENT; lint_yaml passed on changed project TIED YAML; bash -n copy_files.sh passed."
   evidence:
@@ -20,7 +20,7 @@ CITDP-REQ-PROMPT_TYPE_SUBAGENT-SEQUENCE:
         notes: "Sixteen static contract tests passed, including sequential Task children for plan-refine-build."
         result: "pass"
       - command: "node --test dist/e2e/prompt-type-skills.test.js"
-        notes: "Four prompt bundle installation tests passed including glob install of all agent files."
+        notes: "Four prompt bundle installation tests passed; the bootstrap suite confirms canonical skills are installed and .cursor/agents/ wrappers are not installed into clients."
         result: "pass"
       - command: "yaml_index_validate"
         notes: "requirements, architecture, implementation, and semantic-tokens indexes valid."
@@ -39,11 +39,11 @@ CITDP-REQ-PROMPT_TYPE_SUBAGENT-SEQUENCE:
         result: "pass"
     manifest_reference: "mcp-server/src/e2e/prompt-type-subagent.test.ts; mcp-server/src/e2e/prompt-type-skills.test.ts"
     proof_boundaries:
-      - "Static contract tests prove file shape and required prompt clauses, not runtime LLM Task invocation."
+      - "Static contract tests prove source wrapper shape and required prompt clauses plus client skill distribution, not runtime LLM Task invocation."
       - "tied_validate_consistency proves TIED structural consistency, not semantic correctness beyond declared contracts."
   impact_analysis:
-    impl_inventory_notes: ".cursor/agents/plan-refine-build.md; copy_files.sh glob of .cursor/agents/*.md; mcp-server/src/e2e/prompt-type-subagent.test.ts sequence test; mcp-server/src/e2e/prompt-type-skills.test.ts glob install; IMPL-PROMPT_TYPE_SUBAGENT DISPATCH_PROMPT_TYPE_SEQUENCE; tied/docs/prompt-type-skills.md; tied/vocab/prompt-composer.md."
-    modules_or_boundaries: "DISPATCH_PROMPT_TYPE_SEQUENCE launches plan-new-feature, then refine-plan, then build-plan and stops on a failed child gate; VALIDATE_PROMPT_TYPE_SUBAGENT_CONTRACT remains leaf-only; INSTALL_PROMPT_TYPE_SUBAGENTS copies every .cursor/agents/*.md file."
+    impl_inventory_notes: "TIED-source .cursor/agents/plan-refine-build.md; copy_files.sh prompt-type skill bundle installation; mcp-server/src/e2e/prompt-type-subagent.test.ts sequence test; mcp-server/src/e2e/prompt-type-skills.test.ts skills-only bootstrap test; IMPL-PROMPT_TYPE_SUBAGENT DISPATCH_PROMPT_TYPE_SEQUENCE; tied/docs/prompt-type-skills.md; tied/vocab/prompt-composer.md. Client distribution is .cursor/skills/ only; .cursor/agents/ remains TIED-source-only."
+    modules_or_boundaries: "DISPATCH_PROMPT_TYPE_SEQUENCE launches plan-new-feature, then refine-plan, then build-plan and stops on a failed child gate; VALIDATE_PROMPT_TYPE_SUBAGENT_CONTRACT remains source-wrapper-only; INSTALL_PROMPT_TYPE_SKILLS copies the canonical skill bundle into client .cursor/skills/ and excludes .cursor/agents/ wrappers."
     tied_tokens_affected:
       - "ARCH-PROMPT_TYPE_SUBAGENT"
       - "ARCH-TIED_STRUCTURE"
@@ -53,7 +53,7 @@ CITDP-REQ-PROMPT_TYPE_SUBAGENT-SEQUENCE:
       - "REQ-TIED_SETUP"
     tied_tokens_new: []
   leap_feedback:
-    divergences_from_analysis: "The original CITDP listed a prompt-type-router Task wrapper as a non-goal. This increment adds only the fixed plan-refine-build sequence, not a generic router agent."
+    divergences_from_analysis: "LEAP close-out corrected the stale distribution claim: the plan-refine-build sequencer and 13 leaf Task wrappers remain TIED-source development and static-validation artifacts, while copy_files.sh distributes only the canonical prompt-type skills to client .cursor/skills/. Existing REQ/ARCH/IMPL records already express this boundary, so no TIED stack updates are required."
     record_status: "complete"
     tied_stack_updates_required: []
   record_identity:
@@ -109,7 +109,7 @@ CITDP-REQ-PROMPT_TYPE_SUBAGENT-SEQUENCE:
       - expected: "Sequence stops and reports incomplete evidence without starting the next child."
         name: "Failed child gate"
   tdd_sequence:
-    summary: "LEAP REQ/ARCH/IMPL for DISPATCH_PROMPT_TYPE_SEQUENCE; RED sequence contract test; GREEN plan-refine-build.md and glob installer; focused tests; YAML lint and TIED consistency; CITDP close-out."
+    summary: "LEAP REQ/ARCH/IMPL for DISPATCH_PROMPT_TYPE_SEQUENCE; RED sequence contract test; GREEN plan-refine-build.md source wrapper and skills-only bootstrap distribution; focused tests; YAML lint and TIED consistency; CITDP close-out."
   test_strategy:
-    matrix_notes: "Unit/static contract: frontmatter, sequential subagent_type clauses, merge gates, forbidden parallel dispatch, parent handoff, installer glob. Integration: bootstrap refresh suite. E2E UI: not applicable."
-    summary: "Validate the Markdown sequencer and bootstrap glob deterministically; keep runtime LLM behavior outside the test boundary."
+    matrix_notes: "Unit/static contract: source-wrapper frontmatter, sequential subagent_type clauses, merge gates, forbidden parallel dispatch, parent handoff, and client skills-only bootstrap installation. Integration: bootstrap refresh suite verifies canonical .cursor/skills/ distribution and absence of .cursor/agents/ wrappers. E2E UI: not applicable."
+    summary: "Validate the TIED-source Markdown sequencer and skills-only bootstrap distribution deterministically; keep runtime LLM behavior outside the test boundary."

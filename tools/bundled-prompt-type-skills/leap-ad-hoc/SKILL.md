@@ -12,12 +12,12 @@ disable-model-invocation: true
 
 Explicit invocation only (`@leap-ad-hoc` or `prompt-type: leap-ad-hoc`).
 
-The project-scoped Task wrapper at
-`.cursor/agents/leap-ad-hoc.md` delegates to this skill when isolated
-foreground implementation is requested; this skill remains the workflow source
-of truth. `copy_files.sh` installs that wrapper into client projects as a
-managed artifact. [REQ-PROMPT_TYPE_SUBAGENT]
-[ARCH-PROMPT_TYPE_SUBAGENT] [IMPL-TIED_FILES]
+This skill is the workflow source of truth for client prompt-type invocation.
+`copy_files.sh` installs it under `.cursor/skills/leap-ad-hoc/`. Task wrappers under
+`.cursor/agents/` remain TIED-source development artifacts only.
+[REQ-PROMPT_TYPE_GLOBAL_SKILLS] [ARCH-PROMPT_TYPE_GLOBAL_SKILLS]
+[IMPL-PROMPT_TYPE_GLOBAL_SKILLS]
+
 
 ## Inputs
 

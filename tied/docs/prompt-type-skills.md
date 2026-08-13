@@ -37,22 +37,22 @@ The corresponding project records are:
 - Implementation: `tied/implementation-decisions/IMPL-PROMPT_TYPE_GLOBAL_SKILLS.yaml`
 - Semantic-token registry: `tied/semantic-tokens.yaml`
 
-## Task subagent wrappers
+## Task subagent wrappers (TIED source only)
 
 The TIED repository contains one project-scoped Cursor Task wrapper per leaf
-prompt type at `.cursor/agents/<prompt-type>.md`. Each wrapper is a foreground
-Task subagent that delegates to its canonical leaf skill while making
-clean-context gates, forbidden operations, and parent handoff evidence
-explicit. Implementing and close-out wrappers are writable; `question` and
-`other` are readonly. A fixed-sequence orchestrator at
-`.cursor/agents/plan-refine-build.md` Task-launches `plan-new-feature`, then
-`refine-plan`, then `build-plan`, and does not implement the feature in its
-own context. `copy_files.sh` installs every `.cursor/agents/*.md` wrapper into
-each client project's `.cursor/agents/` directory as managed bootstrap
-artifacts alongside the canonical skill bundle. Managed copies use `cp -p`/`cp -pR`,
-retain source content and non-time attributes, normalize only the client copy
-to that source item's local-date midnight, and produce a warning before
-refresh when an existing destination has a non-midnight mtime.
+prompt type at `.cursor/agents/<prompt-type>.md` for development and static
+contract validation. Each wrapper is a foreground Task subagent that delegates
+to its canonical leaf skill while making clean-context gates, forbidden
+operations, and parent handoff evidence explicit. Implementing and close-out
+wrappers are writable; `question` and `other` are readonly. A fixed-sequence
+orchestrator at `.cursor/agents/plan-refine-build.md` Task-launches
+`plan-new-feature`, then `refine-plan`, then `build-plan`, and does not
+implement the feature in its own context.
+
+`copy_files.sh` installs only the canonical prompt-type **skills** into client
+`.cursor/skills/`. It does not copy `.cursor/agents/` wrappers into client
+projects; skills are the published distribution path because they converse with
+the user about vocabulary definitions and workflow gates directly.
 
 Traceability: [REQ-PROMPT_TYPE_SUBAGENT](../requirements/REQ-PROMPT_TYPE_SUBAGENT.yaml) · [ARCH-PROMPT_TYPE_SUBAGENT](../architecture-decisions/ARCH-PROMPT_TYPE_SUBAGENT.yaml) · [IMPL-PROMPT_TYPE_SUBAGENT](../implementation-decisions/IMPL-PROMPT_TYPE_SUBAGENT.yaml)
 
@@ -176,9 +176,9 @@ types. It:
 ### [IMPL-PROMPT_TYPE_GLOBAL_SKILLS] Tracked prompt-type skill bundle and router
 
 The completed implementation contains 14 tracked skills and 14 shared
-references. The bootstrap process installs the same managed files into each
-client project and installs every prompt-type Task wrapper under
-`.cursor/agents/`, including the `plan-refine-build` sequence orchestrator.
+references. The bootstrap process installs the same managed skill files into
+each client project. Prompt-type Task wrappers under `.cursor/agents/` remain
+TIED-source development artifacts and are not installed by `copy_files.sh`.
 
 ### Leaf skills
 
