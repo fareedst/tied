@@ -1,0 +1,33 @@
+REQ-FEAT_READINESS_DIAGNOSTICS:
+  category: "Functional"
+  description: "Report deterministic readiness diagnostics that identify each unmet prerequisite, affected phase, evidence, and corrective command without changing configuration."
+  name: "Exact readiness diagnostics"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Auditable operator guidance"
+      - "Faster recovery"
+    problems_solved:
+      - "Non-actionable errors"
+      - "Opaque blocked states"
+    why: "Users should not need repository archaeology to understand why a feature is blocked."
+  related_requirements:
+    depends_on:
+      - "REQ-FEAT_CLARIFICATION_GATES"
+      - "REQ-FEAT_CONSTITUTION_COMPLIANCE"
+    related_to: []
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Diagnostics name the exact missing prerequisite and a corrective command."
+    - criterion: "Readiness reporting is non-mutating and remains distinct from TIED consistency and runtime proof."
+    - criterion: "Repeated equivalent inputs produce stable diagnostic ordering and content."
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_READINESS_DIAGNOSTICS"
+    implementation:
+      - "IMPL-FEAT_READINESS_DIAGNOSTICS"
+    tests: []
+  validation_criteria:
+    - method: "Composition tests for readiness command output."
+    - method: "Unit tests for diagnostic classification and deterministic ordering."

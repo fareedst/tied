@@ -1,0 +1,24 @@
+ARCH-FEAT_AGENTSTREAM_ADAPTER:
+  alternatives_considered:
+    - cons:
+        - "Breaks existing compatibility contract"
+      name: "Replace feature-spec batch with task graph"
+      pros:
+        - "One input"
+      rejected_reason: "REQ-GOAGENT-FEATURESPEC-BATCH requires ordered behavior to remain supported."
+  cross_references:
+    - "ARCH-GOAGENT-EXECUTOR"
+    - "ARCH-GOAGENT-YAML-FEATURESPEC"
+    - "IMPL-FEAT_AGENTSTREAM_ADAPTER"
+    - "REQ-FEAT_AGENTSTREAM_ADAPTER"
+    - "REQ-GOAGENT-FEATURESPEC-BATCH"
+  decision: "Add a task-graph input/adapter boundary beside existing feature-spec batch loading; share executor and dry-run rendering primitives without changing legacy ordering semantics."
+  description: "The agentstream adapter consumes the canonical scheduler projection and delegates execution through existing Turn and executor surfaces while retaining the ordered feature-spec batch path unchanged."
+  implementation_approach:
+    details:
+      - "Dry-run and live execution consume one schedule projection."
+      - "Keep CLI/process wiring thin and module-testable."
+      - "Preserve existing feature-spec batch behavior byte-for-byte where inputs use that mode."
+    summary: "Adapter maps scheduled task groups to governed turns and execution evidence."
+  name: "Additive agentstream task adapter"
+  status: "Active"

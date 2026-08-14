@@ -1,0 +1,37 @@
+ARCH-FEAT_CANONICAL_LINK_BOUNDARY:
+  cross_references:
+    - "REQ-FEAT_CANONICAL_LINKS"
+  implementation_approach:
+    details:
+      - "Keep linking read-only until later orchestration batches define persistence commands."
+      - "Reject embedded canonical record bodies."
+      - "Validate required cross-layer references through existing TIED graph."
+      - "Validate token existence and declared REQ/ARCH/IMPL type."
+    summary: "Use typed references containing semantic token and expected layer, resolve them against canonical TIED indexes, and report errors without writes."
+  name: "Canonical TIED reference boundary"
+  rationale:
+    benefits:
+      - "Existing consistency checks remain authoritative"
+      - "Ownership clarity"
+      - "Safe composition"
+    problems_solved:
+      - "Dangling token links"
+      - "Parallel specification stores"
+      - "Silent canonical-data mutation"
+    why: "The feature layer must remain an orchestration index over the existing TIED graph."
+  related_decisions:
+    depends_on: []
+    informs:
+      - "IMPL-FEAT_REFERENCE_LINKER"
+    see_also:
+      - "ARCH-TIED_STRUCTURE"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_CANONICAL_LINK_BOUNDARY"
+    implementation:
+      - "IMPL-FEAT_REFERENCE_LINKER"
+    requirements:
+      - "REQ-FEAT_CANONICAL_LINKS"
+    tests:
+      - "canonical_link_boundary_tests"

@@ -1,0 +1,15 @@
+REQ-FEAT_CLARIFICATION_GATES:
+  category: "Functional"
+  description: "Readiness gates distinguish informational uncertainty from uncertainty blocking REQ authoring, ARCH/IMPL authoring, or RED tests, including ownership, stale-resolution, and unresolved-blocker behavior."
+  name: "Phase-specific clarification gates"
+  priority: "P0"
+  rationale:
+    why: "Lifecycle commands must expose uncertainty and prevent affected phases from proceeding without durable decisions."
+  satisfaction_criteria:
+    - criterion: "A resolution becomes stale after an affected-scope feature revision."
+    - criterion: "Open or stale blocking records produce deterministic blockers for intersecting phases."
+    - criterion: "The gate projects readiness into Batch 1 commands without implementing a second lifecycle engine."
+  status: "Planned"
+  validation_criteria:
+    - method: "Composition tests for lifecycle readiness integration."
+    - method: "Unit tests for all blocking classes, scope intersections, stale resolutions, and deterministic diagnostics."

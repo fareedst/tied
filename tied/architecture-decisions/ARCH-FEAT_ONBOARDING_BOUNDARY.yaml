@@ -1,0 +1,40 @@
+ARCH-FEAT_ONBOARDING_BOUNDARY:
+  alternatives_considered:
+    - cons:
+        - "Semantic drift"
+      name: "Reimplement lifecycle in a tied wrapper"
+      pros:
+        - "Local simplicity"
+      rejected_reason: "Batch 6 is an adoption layer only."
+  cross_references:
+    - "REQ-FEAT_ADOPTION_GUIDANCE"
+    - "REQ-FEAT_ONBOARDING_COMMANDS"
+  decision: "Expose safe top-level onboarding commands as thin adapters over feature-orchestrator and validated Batch 1-4 modules; do not duplicate lifecycle, YAML, scheduling, or validation behavior."
+  implementation_approach:
+    details:
+      - "Add quickstart and advanced reference guidance."
+      - "Keep agentstream feature-spec batch compatibility."
+      - "Keep tied-cli and TIED YAML MCP as separate YAML surfaces."
+    summary: "Map tied init and tied feature commands to feature-orchestrator modules and documented paths."
+  name: "Thin onboarding command boundary"
+  rationale:
+    benefits:
+      - "Stable delegation contract"
+      - "Thin entry points"
+    problems_solved:
+      - "Accidental replacement of advanced tools"
+      - "Duplicate command semantics"
+    why: "A stable adoption boundary reduces user friction while preserving one implementation source."
+  related_decisions:
+    depends_on:
+      - "ARCH-FEAT_ORCHESTRATION_BOUNDARY"
+      - "ARCH-FEAT_ORCHESTRATION_COMMANDS"
+    informs: []
+  status: "Active"
+  traceability:
+    implementation:
+      - "IMPL-FEAT_ONBOARDING_COMMANDS"
+    requirements:
+      - "REQ-FEAT_ADOPTION_GUIDANCE"
+      - "REQ-FEAT_ONBOARDING_COMMANDS"
+    tests: []

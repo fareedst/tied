@@ -1,0 +1,46 @@
+IMPL-FEAT_VIEW_STALE_DETECTION:
+  code_locations:
+    files:
+      - description: "Generated metadata parsing and fail/warn stale detection"
+        path: "mcp-server/src/feature-orchestration/views.ts"
+    functions:
+      - file: "mcp-server/src/feature-orchestration/views.ts"
+        name: "detectStaleView"
+  cross_references:
+    - "ARCH-FEAT_VIEW_STALENESS"
+    - "REQ-FEAT_VIEW_STALENESS"
+  detail_file: "implementation-decisions/IMPL-FEAT_VIEW_STALE_DETECTION.yaml"
+  implementation_approach:
+    details:
+      - "Attach proof-boundary diagnostics stating stale views are not current intent or runtime correctness proof."
+      - "Identify each stale view and changed source identity in stable order."
+      - "Parse generated banners and source revision/hash entries deterministically."
+      - "Return fail for CI and verification policy; return warn only for explicit local inspection policy."
+    summary: "Compare view source_revision metadata with current canonical projection revisions and apply explicit stale-view policy."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: {}
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Batch 4 implementation and focused tests"
+  name: "Generated-view stale detection and policy enforcement"
+  related_decisions:
+    depends_on:
+      - "IMPL-FEAT_VIEW_PROJECTION"
+      - "IMPL-FEAT_VIEW_RENDERER"
+    see_also: []
+    supersedes: []
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_VIEW_STALENESS"
+    code_annotations:
+      - "ARCH-FEAT_VIEW_STALENESS"
+      - "IMPL-FEAT_VIEW_STALE_DETECTION"
+      - "REQ-FEAT_VIEW_STALENESS"
+    requirements:
+      - "REQ-FEAT_VIEW_STALENESS"
+    tests:
+      - "mcp-server/src/feature-orchestration/views.test.ts"

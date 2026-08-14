@@ -167,6 +167,324 @@ ARCH-CONFIG_DISCOVERY_LAYERING:
     requirements:
       - "REQ-CONFIG_DISCOVERY_LOCAL_LAYER"
     tests: []
+ARCH-FEAT_AGENTSTREAM_ADAPTER:
+  cross_references:
+    - "ARCH-GOAGENT-EXECUTOR"
+    - "ARCH-GOAGENT-YAML-FEATURESPEC"
+    - "IMPL-FEAT_AGENTSTREAM_ADAPTER"
+    - "REQ-FEAT_AGENTSTREAM_ADAPTER"
+    - "REQ-GOAGENT-FEATURESPEC-BATCH"
+  detail_file: "architecture-decisions/ARCH-FEAT_AGENTSTREAM_ADAPTER.yaml"
+  name: "Additive agentstream task adapter"
+  status: "Active"
+ARCH-FEAT_CANONICAL_LINK_BOUNDARY:
+  cross_references:
+    - "IMPL-FEAT_REFERENCE_LINKER"
+    - "REQ-FEAT_CANONICAL_LINKS"
+  description: "Feature orchestration references canonical REQ, ARCH, and IMPL records and never replaces or mutates them."
+  detail_file: "architecture-decisions/ARCH-FEAT_CANONICAL_LINK_BOUNDARY.yaml"
+  name: "Canonical TIED reference boundary"
+  status: "Active"
+ARCH-FEAT_CLARIFICATION_BOUNDARY:
+  cross_references:
+    - "REQ-FEAT_CLARIFICATION_GATES"
+    - "REQ-FEAT_CLARIFICATION_RECORDS"
+  detail_file: "architecture-decisions/ARCH-FEAT_CLARIFICATION_BOUNDARY.yaml"
+  name: "Feature-local clarification boundary"
+  status: "Active"
+ARCH-FEAT_CONSTITUTION_ANALYZER:
+  cross_references:
+    - "REQ-FEAT_CONSTITUTION_COMPLIANCE"
+  detail_file: "architecture-decisions/ARCH-FEAT_CONSTITUTION_ANALYZER.yaml"
+  name: "Constitution compliance analyzer boundary"
+  status: "Active"
+ARCH-FEAT_CONSTITUTION_STORAGE:
+  cross_references:
+    - "REQ-FEAT_CONSTITUTION_SCHEMA"
+  detail_file: "architecture-decisions/ARCH-FEAT_CONSTITUTION_STORAGE.yaml"
+  name: "Project constitution storage and ownership"
+  status: "Active"
+ARCH-FEAT_FIXTURE_CORPUS:
+  cross_references:
+    - "IMPL-FEAT_FIXTURE_VALIDATORS"
+    - "REQ-FEAT_FIXTURE_VALIDATION"
+  description: "A fixture corpus exercises valid, invalid, lifecycle, migration, ownership, and partial-write boundaries without user-facing orchestration surfaces."
+  detail_file: "architecture-decisions/ARCH-FEAT_FIXTURE_CORPUS.yaml"
+  name: "Representative feature contract fixtures"
+  status: "Active"
+ARCH-FEAT_IDEMPOTENT_CREATION:
+  cross_references:
+    - "REQ-FEAT_IDEMPOTENT_CREATION"
+  detail_file: "architecture-decisions/ARCH-FEAT_IDEMPOTENT_CREATION.yaml"
+  name: "Request-key creation serialization"
+  status: "Active"
+ARCH-FEAT_IDENTIFIER_ALLOCATION:
+  cross_references:
+    - "REQ-FEAT_IDENTIFIER_ALLOCATION"
+  detail_file: "architecture-decisions/ARCH-FEAT_IDENTIFIER_ALLOCATION.yaml"
+  name: "Deterministic feature allocation"
+  status: "Active"
+ARCH-FEAT_LIFECYCLE_STATE_MACHINE:
+  cross_references:
+    - "IMPL-FEAT_LIFECYCLE_ENGINE"
+    - "REQ-FEAT_LIFECYCLE"
+  description: "A finite persisted lifecycle state machine defines legal transitions, preconditions, blocked states, and approvals."
+  detail_file: "architecture-decisions/ARCH-FEAT_LIFECYCLE_STATE_MACHINE.yaml"
+  name: "Feature lifecycle transition matrix"
+  status: "Active"
+ARCH-FEAT_LOCAL_DEFAULT_RESOLUTION:
+  cross_references:
+    - "IMPL-FEAT_LOCAL_DEFAULTS"
+    - "REQ-FEAT_LOCAL_DEFAULTS"
+  detail_file: "architecture-decisions/ARCH-FEAT_LOCAL_DEFAULT_RESOLUTION.yaml"
+  name: "Explicit local default resolution"
+  status: "Active"
+ARCH-FEAT_MANIFEST_CONTRACT:
+  cross_references:
+    - "IMPL-FEAT_MANIFEST_VALIDATOR"
+    - "REQ-FEAT_MANIFEST_SCHEMA"
+  description: "A versioned reference-only manifest contract governs identity, lifecycle field shape, revisions, and compatibility."
+  detail_file: "architecture-decisions/ARCH-FEAT_MANIFEST_CONTRACT.yaml"
+  name: "Versioned feature manifest contract"
+  status: "Active"
+ARCH-FEAT_MIGRATION_PREVIEW:
+  cross_references:
+    - "IMPL-FEAT_MIGRATION_APPLY"
+    - "IMPL-FEAT_MIGRATION_PREVIEW"
+    - "REQ-FEAT_LEGACY_MIGRATION"
+  detail_file: "architecture-decisions/ARCH-FEAT_MIGRATION_PREVIEW.yaml"
+  name: "Review-first legacy migration boundary"
+  status: "Active"
+ARCH-FEAT_OFFLINE_COMPATIBILITY:
+  cross_references:
+    - "IMPL-FEAT_OFFLINE_FALLBACK"
+    - "REQ-FEAT_OFFLINE_WORKFLOW_PRESERVATION"
+  detail_file: "architecture-decisions/ARCH-FEAT_OFFLINE_COMPATIBILITY.yaml"
+  name: "Additive offline compatibility boundary"
+  status: "Active"
+ARCH-FEAT_ONBOARDING_BOUNDARY:
+  cross_references:
+    - "IMPL-FEAT_ONBOARDING_COMMANDS"
+    - "REQ-FEAT_ADOPTION_GUIDANCE"
+    - "REQ-FEAT_ONBOARDING_COMMANDS"
+  detail_file: "architecture-decisions/ARCH-FEAT_ONBOARDING_BOUNDARY.yaml"
+  name: "Thin onboarding command boundary"
+  status: "Active"
+ARCH-FEAT_ORCHESTRATION_BOUNDARY:
+  cross_references:
+    - "REQ-FEAT_ORCHESTRATION_SURFACE"
+  detail_file: "architecture-decisions/ARCH-FEAT_ORCHESTRATION_BOUNDARY.yaml"
+  name: "Separate CLI and delegated MCP boundary"
+  status: "Active"
+ARCH-FEAT_ORCHESTRATION_COMMANDS:
+  cross_references:
+    - "REQ-FEAT_ORCHESTRATION_COMMANDS"
+  detail_file: "architecture-decisions/ARCH-FEAT_ORCHESTRATION_COMMANDS.yaml"
+  name: "Lifecycle command adapter"
+  status: "Active"
+ARCH-FEAT_READINESS_DIAGNOSTICS:
+  cross_references:
+    - "IMPL-FEAT_READINESS_DIAGNOSTICS"
+    - "REQ-FEAT_READINESS_DIAGNOSTICS"
+  detail_file: "architecture-decisions/ARCH-FEAT_READINESS_DIAGNOSTICS.yaml"
+  name: "Deterministic readiness diagnostic boundary"
+  status: "Active"
+ARCH-FEAT_READINESS_PROJECTION:
+  cross_references:
+    - "REQ-FEAT_CLARIFICATION_GATES"
+    - "REQ-FEAT_CONSTITUTION_COMPLIANCE"
+  detail_file: "architecture-decisions/ARCH-FEAT_READINESS_PROJECTION.yaml"
+  name: "Batch 2 readiness projection"
+  status: "Active"
+ARCH-FEAT_REVISION_SAFE_MUTATION:
+  cross_references:
+    - "REQ-FEAT_REVISION_SAFE_MUTATION"
+  detail_file: "architecture-decisions/ARCH-FEAT_REVISION_SAFE_MUTATION.yaml"
+  name: "Revision-checked atomic publication"
+  status: "Active"
+ARCH-FEAT_STORE_PERSISTENCE:
+  cross_references:
+    - "REQ-FEAT_STORE_PERSISTENCE"
+  detail_file: "architecture-decisions/ARCH-FEAT_STORE_PERSISTENCE.yaml"
+  name: "Feature-local manifest store"
+  status: "Active"
+ARCH-FEAT_TASK_DERIVATION_BOUNDARY:
+  cross_references:
+    - "IMPL-FEAT_TASK_DERIVATION"
+    - "REQ-FEAT_TASK_DERIVATION"
+  detail_file: "architecture-decisions/ARCH-FEAT_TASK_DERIVATION_BOUNDARY.yaml"
+  name: "Canonical task derivation boundary"
+  status: "Active"
+ARCH-FEAT_TASK_EXECUTION_STATE:
+  cross_references:
+    - "IMPL-FEAT_TASK_EXECUTION_STATE"
+    - "REQ-FEAT_TASK_EXECUTION_RECOVERY"
+  detail_file: "architecture-decisions/ARCH-FEAT_TASK_EXECUTION_STATE.yaml"
+  name: "Stable task execution state and evidence"
+  status: "Active"
+ARCH-FEAT_TASK_GRAPH_SCHEDULER:
+  cross_references:
+    - "IMPL-FEAT_TASK_GRAPH_SCHEDULER"
+    - "REQ-FEAT_TASK_GRAPH_SCHEDULING"
+  detail_file: "architecture-decisions/ARCH-FEAT_TASK_GRAPH_SCHEDULER.yaml"
+  name: "Deterministic task graph scheduler"
+  status: "Active"
+ARCH-FEAT_VIEW_PROJECTION:
+  alternatives_considered:
+    - cons:
+        - "Creates competing source"
+      name: "Render directly from Markdown views"
+      pros:
+        - "Simple initial implementation"
+      rejected_reason: "Generated views are outputs and cannot define intent."
+  cross_references:
+    - "IMPL-FEAT_VIEW_PROJECTION"
+    - "REQ-FEAT_VIEW_GENERATION"
+  decision: "Assemble a normalized reference-only view source projection from the feature manifest, Batch 2 clarification and constitution projections, Batch 3 task graph and execution evidence projections, canonical REQ/ARCH/IMPL references, and proof-boundary labels."
+  description: "Generated views consume stable structured projections and preserve ownership of canonical records; they never become a second source of truth."
+  detail_file: "architecture-decisions/ARCH-FEAT_VIEW_PROJECTION.yaml"
+  implementation_approach:
+    details:
+      - "Carry source revisions or hashes for every source contribution."
+      - "Carry token links, evidence links, and proof-boundary labels without copying full canonical bodies."
+      - "Sort unordered collections by canonical identity while preserving semantic order fields."
+    summary: "Normalize references and projection data before selecting view renderers."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: {}
+    last_updated:
+      author: "AI Agent"
+      date: {}
+      reason: "Batch 4 planning"
+  name: "Canonical generated-view source projection"
+  rationale:
+    benefits:
+      - "Shared traceability"
+      - "Stable renderer inputs"
+    problems_solved:
+      - "Canonical body duplication"
+      - "Renderer-specific source drift"
+    why: "A single projection boundary prevents each renderer from inventing its own interpretation of canonical intent."
+  related_decisions:
+    depends_on:
+      - "ARCH-FEAT_CLARIFICATION_BOUNDARY"
+      - "ARCH-FEAT_CONSTITUTION_ANALYZER"
+      - "ARCH-FEAT_MANIFEST_CONTRACT"
+      - "ARCH-FEAT_TASK_DERIVATION_BOUNDARY"
+    informs: []
+    see_also: []
+  status: "Active"
+  traceability:
+    code_annotations: []
+    implementation:
+      - "IMPL-FEAT_VIEW_PROJECTION"
+    requirements:
+      - "REQ-FEAT_VIEW_GENERATION"
+    tests: []
+ARCH-FEAT_VIEW_RENDERING:
+  alternatives_considered:
+    - cons:
+        - "Divergent metadata and link behavior"
+      name: "Independent ad hoc renderers"
+      pros:
+        - "Local flexibility"
+      rejected_reason: "Every view must preserve the same traceability and proof-boundary contract."
+  cross_references:
+    - "IMPL-FEAT_VIEW_RENDERER"
+    - "REQ-FEAT_VIEW_DETERMINISM"
+    - "REQ-FEAT_VIEW_GENERATION"
+  decision: "Use one deterministic renderer contract for spec.md, plan.md, tasks.md, quickstart.md, data-model.md, and applicable contracts views, with a clear generated banner and stable metadata/link sections."
+  description: "Rendering is a pure projection-to-Markdown boundary; semantic comparison operates on normalized view meaning and never changes canonical data."
+  detail_file: "architecture-decisions/ARCH-FEAT_VIEW_RENDERING.yaml"
+  implementation_approach:
+    details:
+      - "Include generated-file banner and source revision/hash metadata in every file."
+      - "Preserve stable ordering for sections, links, evidence, and proof-boundary labels."
+      - "Render only references, summaries, projections, and links; do not inline full REQ/ARCH/IMPL bodies."
+    summary: "Render normalized sections with fixed ordering and semantic comparison support."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: {}
+    last_updated:
+      author: "AI Agent"
+      date: {}
+      reason: "Batch 4 planning"
+  name: "Deterministic generated-view rendering boundary"
+  rationale:
+    benefits:
+      - "Byte-stable regeneration"
+      - "Predictable human-readable views"
+    problems_solved:
+      - "Formatting-only diff noise"
+      - "Inconsistent view structure"
+    why: "Shared rendering rules make committed views stable and reviewable across feature types."
+  related_decisions:
+    depends_on:
+      - "ARCH-FEAT_VIEW_PROJECTION"
+    informs: []
+    see_also: []
+  status: "Active"
+  traceability:
+    code_annotations: []
+    implementation:
+      - "IMPL-FEAT_VIEW_RENDERER"
+    requirements:
+      - "REQ-FEAT_VIEW_DETERMINISM"
+      - "REQ-FEAT_VIEW_GENERATION"
+    tests: []
+ARCH-FEAT_VIEW_STALENESS:
+  alternatives_considered:
+    - cons:
+        - "Obsolete intent can pass review"
+      name: "Treat structurally valid Markdown as current"
+      pros:
+        - "Minimal checking"
+      rejected_reason: "Structural validity does not establish freshness or runtime proof."
+  cross_references:
+    - "IMPL-FEAT_VIEW_STALE_DETECTION"
+    - "REQ-FEAT_VIEW_STALENESS"
+  decision: "Record canonical source revisions or content hashes in generated-view metadata and compare them with current projections; fail in CI and verification by default, while allowing an explicit local warn mode."
+  description: "Staleness is a freshness result over source metadata, separate from TIED consistency, constitution compliance, task readiness, runtime correctness, and quality evidence."
+  detail_file: "architecture-decisions/ARCH-FEAT_VIEW_STALENESS.yaml"
+  implementation_approach:
+    details:
+      - "Mark stale output as non-current-intent and non-runtime-proof evidence."
+      - "Report stale view paths and changed source identities deterministically."
+      - "Use fail for CI/verification and warn only when explicitly requested for local inspection."
+    summary: "Compare per-source revision/hash metadata and apply explicit policy outcomes."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: {}
+    last_updated:
+      author: "AI Agent"
+      date: {}
+      reason: "Batch 4 planning"
+  name: "Explicit stale-view detection boundary"
+  rationale:
+    benefits:
+      - "Clear residual risk"
+      - "Deterministic enforcement"
+    problems_solved:
+      - "Cross-boundary proof claims"
+      - "False freshness"
+    why: "A stale projection can be structurally valid yet materially obsolete."
+  related_decisions:
+    depends_on:
+      - "ARCH-FEAT_VIEW_PROJECTION"
+      - "ARCH-FEAT_VIEW_RENDERING"
+    informs: []
+    see_also: []
+  status: "Active"
+  traceability:
+    code_annotations: []
+    implementation:
+      - "IMPL-FEAT_VIEW_STALE_DETECTION"
+    requirements:
+      - "REQ-FEAT_VIEW_STALENESS"
+    tests: []
 ARCH-FEEDBACK_STORAGE:
   alternatives_considered:
     - cons:
@@ -1026,6 +1344,16 @@ ARCH-QUALITY_ASSURANCE_PROFILES:
       - "mcp-server/src/quality-security.test.ts"
       - "mcp-server/src/tools/quality-validation-mcp.test.ts"
       - "pilot/webhook-inbox/test/webhook-inbox.test.mjs"
+ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY:
+  cross_references:
+    - "ARCH-FEEDBACK_STORAGE"
+    - "ARCH-LEAP_PROPOSAL_QUEUE"
+    - "IMPL-TIED_FEEDBACK_PROMOTION"
+    - "REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION"
+  description: "Normalizes operational sources into feedback, preserves distinct non-canonical LEAP proposals, and requires human review before any canonical promotion."
+  detail_file: "architecture-decisions/ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY.yaml"
+  name: "Operational feedback and reviewed promotion boundary"
+  status: "Active"
 ARCH-TIED_FIDELITY_RESEARCH:
   alternatives_considered:
     - cons:
@@ -1095,6 +1423,16 @@ ARCH-TIED_FIDELITY_RESEARCH:
       - "mcp-server/src/fidelity-research/snapshot.test.ts"
       - "mcp-server/src/fidelity-research/specification-state.test.ts"
       - "mcp-server/src/fidelity-research/structural-analysis.test.ts"
+ARCH-TIED_RESEARCH_RECORD_BOUNDARY:
+  cross_references:
+    - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    - "ARCH-TIED_FIDELITY_RESEARCH"
+    - "IMPL-TIED_RESEARCH_RECORDS"
+    - "REQ-TIED_RESEARCH_RECORDS"
+  description: "Typed append-only research records remain outside audited project YAML under the read-only fidelity profile, with explicit provenance, freshness, and human classification boundaries."
+  detail_file: "architecture-decisions/ARCH-TIED_RESEARCH_RECORD_BOUNDARY.yaml"
+  name: "External research record boundary"
+  status: "Active"
 ARCH-TIED_STRUCTURE:
   alternatives_considered:
     - cons:

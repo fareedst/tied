@@ -1,0 +1,31 @@
+REQ-FEAT_LOCAL_DEFAULTS:
+  category: "Functional"
+  description: "Resolve local defaults for the TIED MCP binary, TIED base path, project constitution, feature directory, and readiness inputs deterministically without silently mutating configuration."
+  name: "Sensible local defaults"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Predictable startup"
+      - "Safe incremental adoption"
+    problems_solved:
+      - "Hidden configuration mutation"
+      - "Repeated path configuration"
+    why: "Adoption should work from a conventional project while keeping configuration changes explicit."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_SETUP"
+    related_to: []
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Defaults use documented local discovery order and expose the resolved source."
+    - criterion: "Missing or ambiguous defaults produce a corrective diagnostic rather than a silent write."
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_LOCAL_DEFAULT_RESOLUTION"
+    implementation:
+      - "IMPL-FEAT_LOCAL_DEFAULTS"
+    tests: []
+  validation_criteria:
+    - method: "Composition tests for environment and command propagation."
+    - method: "Unit tests for precedence, missing paths, and ambiguity."

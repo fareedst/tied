@@ -1,0 +1,47 @@
+IMPL-FEAT_REFERENCE_LINKER:
+  code_locations:
+    files:
+      - description: "Planned reference linker; no production code in this Plan gate."
+        path: "TBD: Batch 0 implementation module"
+    functions: []
+  cross_references:
+    - "ARCH-FEAT_CANONICAL_LINK_BOUNDARY"
+    - "REQ-FEAT_CANONICAL_LINKS"
+  implementation_approach:
+    details:
+      - "Check REQ→ARCH→IMPL relationships using existing TIED consistency semantics."
+      - "Reject missing, duplicate, malformed, and wrong-type references."
+      - "Resolve each token against the matching canonical index."
+      - "Return diagnostics and resolved metadata only; never write canonical records."
+    summary: "Resolve declared REQ, ARCH, and IMPL references against canonical indexes and validate graph consistency without writes."
+  metadata:
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Batch 0 Plan gate sidecar"
+  name: "Canonical REQ ARCH IMPL reference linker"
+  rationale:
+    problems_solved:
+      - "Canonical record mutation from orchestration"
+      - "Dangling references"
+      - "Wrong-layer references"
+    why: "Typed read-only resolution keeps feature manifests linked to the authoritative TIED graph."
+  related_decisions:
+    depends_on:
+      - "IMPL-FEAT_MANIFEST_VALIDATOR"
+    see_also:
+      - "IMPL-FEAT_FIXTURE_VALIDATORS"
+    supersedes: []
+  status: "Active"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_CANONICAL_LINK_BOUNDARY"
+    code_annotations:
+      - "ARCH-FEAT_CANONICAL_LINK_BOUNDARY"
+      - "IMPL-FEAT_REFERENCE_LINKER"
+      - "REQ-FEAT_CANONICAL_LINKS"
+    requirements:
+      - "REQ-FEAT_CANONICAL_LINKS"
+    tests:
+      - "canonical_link_boundary_tests"

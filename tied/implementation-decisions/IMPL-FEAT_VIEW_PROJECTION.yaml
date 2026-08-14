@@ -1,0 +1,51 @@
+IMPL-FEAT_VIEW_PROJECTION:
+  code_locations:
+    files:
+      - description: "Reference-only source projection and source revision aggregation"
+        path: "mcp-server/src/feature-orchestration/views.ts"
+    functions:
+      - file: "mcp-server/src/feature-orchestration/views.ts"
+        name: "buildViewSourceProjection"
+      - file: "mcp-server/src/feature-orchestration/views.ts"
+        name: "contribution"
+  cross_references:
+    - "ARCH-FEAT_VIEW_PROJECTION"
+    - "REQ-FEAT_VIEW_GENERATION"
+  detail_file: "implementation-decisions/IMPL-FEAT_VIEW_PROJECTION.yaml"
+  implementation_approach:
+    details:
+      - "Attach source_revision metadata using canonical revision IDs when present and deterministic content hashes otherwise."
+      - "Merge clarification, constitution, task graph, execution evidence, and proof-boundary projections by stable identity."
+      - "Read feature manifest references without copying canonical record bodies."
+      - "Reject unresolved references and preserve token/evidence links."
+    summary: "Normalize canonical feature references and Batch 2/3 projections into a renderer-neutral source projection."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: {}
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Batch 4 implementation and focused tests"
+  name: "Generated-view source projection"
+  related_decisions:
+    depends_on:
+      - "IMPL-FEAT_CLARIFICATION_GATE"
+      - "IMPL-FEAT_CONSTITUTION_ANALYZER"
+      - "IMPL-FEAT_MANIFEST_VALIDATOR"
+      - "IMPL-FEAT_TASK_DERIVATION"
+    see_also:
+      - "IMPL-FEAT_REFERENCE_LINKER"
+    supersedes: []
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_VIEW_PROJECTION"
+    code_annotations:
+      - "ARCH-FEAT_VIEW_PROJECTION"
+      - "IMPL-FEAT_VIEW_PROJECTION"
+      - "REQ-FEAT_VIEW_GENERATION"
+    requirements:
+      - "REQ-FEAT_VIEW_GENERATION"
+    tests:
+      - "mcp-server/src/feature-orchestration/views.test.ts"

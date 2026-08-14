@@ -1,0 +1,21 @@
+IMPL-FEAT_CLARIFICATION_LIFECYCLE_ADAPTER:
+  cross_references:
+    - "ARCH-FEAT_READINESS_PROJECTION"
+    - "REQ-FEAT_CLARIFICATION_GATES"
+  decision: "Adapt clarification gate output into Batch 1 lifecycle command readiness without duplicating the lifecycle engine."
+  implementation_approach:
+    details:
+      - "Never override an unresolved blocking question through CLI or generated output."
+      - "Return blockers and evidence before invoking a transition."
+    summary: "Thin adapter around the Batch 0/1 lifecycle interfaces."
+  metadata:
+    last_updated: "2026-08-14"
+  name: "Clarification lifecycle readiness adapter"
+  rationale:
+    why: "Existing transition legality remains centralized while blocked phases are visible to commands and status output."
+  status: "Active"
+  traceability:
+    code_locations:
+      - "mcp-server/src/feature-orchestration/commands.ts"
+    tests:
+      - "mcp-server/src/feature-orchestration/readiness.test.ts"

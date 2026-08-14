@@ -1,0 +1,52 @@
+ARCH-FEAT_VIEW_RENDERING:
+  alternatives_considered:
+    - cons:
+        - "Divergent metadata and link behavior"
+      name: "Independent ad hoc renderers"
+      pros:
+        - "Local flexibility"
+      rejected_reason: "Every view must preserve the same traceability and proof-boundary contract."
+  cross_references:
+    - "IMPL-FEAT_VIEW_RENDERER"
+    - "REQ-FEAT_VIEW_DETERMINISM"
+    - "REQ-FEAT_VIEW_GENERATION"
+  decision: "Use one deterministic renderer contract for spec.md, plan.md, tasks.md, quickstart.md, data-model.md, and applicable contracts views, with a clear generated banner and stable metadata/link sections."
+  description: "Rendering is a pure projection-to-Markdown boundary; semantic comparison operates on normalized view meaning and never changes canonical data."
+  detail_file: "architecture-decisions/ARCH-FEAT_VIEW_RENDERING.yaml"
+  implementation_approach:
+    details:
+      - "Include generated-file banner and source revision/hash metadata in every file."
+      - "Preserve stable ordering for sections, links, evidence, and proof-boundary labels."
+      - "Render only references, summaries, projections, and links; do not inline full REQ/ARCH/IMPL bodies."
+    summary: "Render normalized sections with fixed ordering and semantic comparison support."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: {}
+    last_updated:
+      author: "AI Agent"
+      date: {}
+      reason: "Batch 4 planning"
+  name: "Deterministic generated-view rendering boundary"
+  rationale:
+    benefits:
+      - "Byte-stable regeneration"
+      - "Predictable human-readable views"
+    problems_solved:
+      - "Formatting-only diff noise"
+      - "Inconsistent view structure"
+    why: "Shared rendering rules make committed views stable and reviewable across feature types."
+  related_decisions:
+    depends_on:
+      - "ARCH-FEAT_VIEW_PROJECTION"
+    informs: []
+    see_also: []
+  status: "Active"
+  traceability:
+    code_annotations: []
+    implementation:
+      - "IMPL-FEAT_VIEW_RENDERER"
+    requirements:
+      - "REQ-FEAT_VIEW_DETERMINISM"
+      - "REQ-FEAT_VIEW_GENERATION"
+    tests: []

@@ -1,0 +1,20 @@
+ARCH-FEAT_CONSTITUTION_STORAGE:
+  alternatives_considered:
+    - cons:
+        - "Duplicates project policy"
+      name: "Feature-local constitution reference"
+      pros:
+        - "Local access"
+      rejected_reason: "The roadmap resolves constitution storage as project-owned at tied/constitution.yaml."
+  cross_references:
+    - "REQ-FEAT_CONSTITUTION_SCHEMA"
+  decision: "Use tied/constitution.yaml as project-owned versioned structured data with one explicit validated write boundary."
+  implementation_approach:
+    details:
+      - "Do not duplicate tied-cli.sh CRUD or quality evidence."
+      - "Do not edit methodology YAML."
+    summary: "Validated store with schema and amendment checks."
+  name: "Project constitution storage and ownership"
+  rationale:
+    why: "Constitution rules govern the project rather than one feature and must remain independent of feature-local manifests and views."
+  status: "Active"

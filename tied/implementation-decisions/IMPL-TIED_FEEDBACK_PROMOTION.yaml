@@ -1,0 +1,78 @@
+IMPL-TIED_FEEDBACK_PROMOTION:
+  code_locations:
+    files:
+      - description: "Operational source normalization, duplicate grouping, and reviewed proposal boundary"
+        path: "mcp-server/src/feedback-promotion.ts"
+      - description: "Operational feedback unit validation"
+        path: "mcp-server/src/feedback-promotion.test.ts"
+      - description: "Additive operational feedback fields"
+        path: "mcp-server/src/feedback.ts"
+      - description: "Operational feedback and promotion MCP handlers"
+        path: "mcp-server/src/tools/index.ts"
+      - description: "Feedback MCP composition tests"
+        path: "mcp-server/src/tools/batch-5-mcp.test.ts"
+    functions:
+      - file: "mcp-server/src/feedback-promotion.ts"
+        name: "normalizeOperationalSource"
+      - file: "mcp-server/src/feedback-promotion.ts"
+        name: "groupDuplicateFeedback"
+      - file: "mcp-server/src/feedback-promotion.ts"
+        name: "createReviewedLeapProposal"
+      - file: "mcp-server/src/feedback-promotion.ts"
+        name: "reportPromotionStatus"
+  cross_references:
+    - "ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY"
+    - "IMPL-MCP_FEEDBACK_TOOLS"
+    - "IMPL-MCP_LEAP_PROPOSAL_QUEUE"
+    - "REQ-FEEDBACK_TO_TIED"
+    - "REQ-LEAP_PROPOSAL_QUEUE"
+    - "REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION"
+  implementation_approach:
+    code_locations:
+      files: []
+      functions: []
+    details:
+      - "Accept incident, metric, test_failure, and user_report source types with source-specific provenance."
+      - "Create or update a non-canonical LEAP proposal only after a human review decision; preserve feedback_id links."
+      - "Extend feedback entries additively with affected_feature, severity, evidence_links, duplicate_group, proposed_req, and promotion_status."
+      - "Require human reviewer identity, decision, rationale, and evidence links for canonical_ready; canonical application occurs through existing TIED tools outside this adapter."
+      - "Return promotion_pending, proposal_created, canonical_ready, rejected, or duplicate status without writing project YAML."
+      - "Use stable source, feature, signature, and evidence identity for duplicate grouping without deleting originals."
+    summary: "Normalize operational sources into feedback metadata, group duplicates, create reviewed non-canonical proposals, and require a separate explicit canonical action."
+  metadata:
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Batch 5 implementation and validation"
+  name: "Operational feedback adapters and reviewed promotion"
+  rationale:
+    benefits:
+      - "Deterministic normalization"
+      - "Human-controlled promotion"
+      - "Preserved source evidence"
+    problems_solved:
+      - "Duplicate report inflation"
+      - "Inconsistent operational source shapes"
+      - "Unreviewed canonical promotion"
+    why: "A distinct adapter and review layer can extend existing feedback and LEAP tools without conflating evidence capture with canonical intent."
+  related_decisions:
+    depends_on:
+      - "IMPL-MCP_FEEDBACK_TOOLS"
+      - "IMPL-MCP_LEAP_PROPOSAL_QUEUE"
+    see_also:
+      - "IMPL-TIED_FIDELITY_RESEARCH"
+    supersedes: []
+  status: "Active"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY"
+    code_annotations:
+      - "IMPL-TIED_FEEDBACK_PROMOTION"
+    requirements:
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-LEAP_PROPOSAL_QUEUE"
+      - "REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION"
+    tests:
+      - "mcp-server/src/feedback-promotion.test.ts"
+      - "mcp-server/src/tools/batch-5-mcp.test.ts"

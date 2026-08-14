@@ -1,0 +1,22 @@
+REQ-FEAT_TASK_DERIVATION:
+  category: "Functional"
+  cross_references:
+    - "ARCH-FEAT_TASK_DERIVATION_BOUNDARY"
+    - "IMPL-FEAT_TASK_DERIVATION"
+  description: "Derive deterministic task graph entries from canonical REQ acceptance criteria, ARCH boundaries, IMPL blocks, contracts, testability classifications, and selected quality profiles without copying canonical record bodies."
+  name: "Canonical task derivation and source projection"
+  priority: "P0"
+  rationale:
+    benefits:
+      - "Batch 4 source projection compatibility"
+      - "Deterministic task identity"
+    problems_solved:
+      - "Implicit task creation"
+      - "Missing traceability"
+      - "Unstable generated inputs"
+    why: "Batch 3 needs executable work to remain a projection of canonical intent rather than a prose task list or second source of truth."
+  satisfaction_criteria:
+    - criterion: "Equivalent canonical inputs produce byte-stable task entries and stable source projection metadata."
+    - criterion: "Every task carries source_tokens, deliverables, test_level, and evidence requirements derived from canonical records."
+    - criterion: "Invalid or unresolved source references are rejected without partial graph output."
+  status: "Planned"

@@ -1,0 +1,54 @@
+IMPL-FEAT_ORCHESTRATION_CLI:
+  code_locations:
+    files:
+      - description: "Thin feature-orchestrator argument adapter"
+        path: "mcp-server/src/feature-orchestration/cli.ts"
+      - description: "Standalone binary entry point"
+        path: "mcp-server/src/feature-orchestration/entry.ts"
+    functions:
+      - file: "mcp-server/src/feature-orchestration/cli.ts"
+        name: "runFeatureOrchestrator"
+  cross_references:
+    - "ARCH-FEAT_ORCHESTRATION_BOUNDARY"
+    - "REQ-FEAT_ORCHESTRATION_SURFACE"
+  implementation_approach:
+    details:
+      - "Do not add a tied subcommand."
+      - "Do not modify tied-cli.sh."
+      - "Parse commands into the same service request schema used by MCP."
+      - "Return deterministic structured diagnostics and next phase."
+    summary: "Expose the exact binary feature-orchestrator with lifecycle commands backed by the shared orchestration service."
+  metadata:
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Batch 1 implementation evidence"
+  name: "Feature orchestration CLI"
+  rationale:
+    benefits:
+      - "Explicit executable contract"
+      - "Shared service behavior"
+      - "Thin command entry point"
+    problems_solved:
+      - "CLI boundary overload"
+      - "Unclear ownership of lifecycle UX"
+    why: "A standalone binary gives feature workflows a product boundary while avoiding mutation of the YAML MCP client."
+  related_decisions:
+    composed_with: []
+    depends_on:
+      - "IMPL-FEAT_ORCHESTRATION_COMMANDS"
+    see_also: []
+    supersedes: []
+  status: "Active"
+  testability: "integration"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_ORCHESTRATION_BOUNDARY"
+    code_annotations:
+      - "ARCH-FEAT_ORCHESTRATION_BOUNDARY"
+      - "IMPL-FEAT_ORCHESTRATION_CLI"
+      - "REQ-FEAT_ORCHESTRATION_SURFACE"
+    requirements:
+      - "REQ-FEAT_ORCHESTRATION_SURFACE"
+    tests:
+      - "mcp-server/src/feature-orchestration/cli.test.ts"

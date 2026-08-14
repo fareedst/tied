@@ -1,0 +1,44 @@
+IMPL-FEAT_ONBOARDING_COMMANDS:
+  code_locations:
+    files: []
+    functions: []
+  cross_references:
+    - "ARCH-FEAT_ONBOARDING_BOUNDARY"
+    - "REQ-FEAT_ADOPTION_GUIDANCE"
+    - "REQ-FEAT_ONBOARDING_COMMANDS"
+  implementation_approach:
+    details:
+      - "Delegate build readiness and task execution to existing projections and agentstream adapter."
+      - "Delegate manifest creation to existing creation and store modules."
+      - "Return corrective diagnostics and preserve advanced command paths."
+    summary: "Parse tied init, tied feature new, and tied feature build, then delegate to validated feature-orchestrator modules."
+  name: "Safe onboarding command adapter"
+  rationale:
+    benefits:
+      - "Stable delegation"
+      - "Thin entry points"
+    problems_solved:
+      - "Duplicate lifecycle and persistence logic"
+      - "Unclear user handoff"
+    why: "Top-level commands must reduce discovery cost without creating a second orchestration engine."
+  related_decisions:
+    depends_on:
+      - "IMPL-FEAT_IDENTIFIER_ALLOCATOR"
+      - "IMPL-FEAT_ORCHESTRATION_CLI"
+      - "IMPL-FEAT_ORCHESTRATION_COMMANDS"
+      - "IMPL-FEAT_STORE"
+    see_also: []
+    supersedes: []
+  status: "Active"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_ONBOARDING_BOUNDARY"
+    code_annotations:
+      - "ARCH-FEAT_ONBOARDING_BOUNDARY"
+      - "IMPL-FEAT_ONBOARDING_COMMANDS"
+      - "REQ-FEAT_ONBOARDING_COMMANDS"
+    requirements:
+      - "REQ-FEAT_ADOPTION_GUIDANCE"
+      - "REQ-FEAT_ONBOARDING_COMMANDS"
+    tests: []

@@ -1,0 +1,38 @@
+REQ-FEAT_LEGACY_MIGRATION:
+  category: "Functional"
+  description: "Provide migration guidance and a deterministic dry-run preview from legacy initial-specs or feature-spec batch inputs and ordered agentstream batches into feature manifests, with conflict reporting, backup and rollback behavior, explicit confirmation, and preservation of project-owned TIED YAML and ordering."
+  name: "Dry-run legacy feature migration"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Recoverable writes"
+      - "Reviewable adoption"
+    problems_solved:
+      - "Ambiguous migration outcomes"
+      - "Legacy input isolation"
+    why: "Existing projects need incremental adoption without silent migration or behavior loss."
+  related_requirements:
+    depends_on:
+      - "REQ-FEAT_MANIFEST_SCHEMA"
+      - "REQ-FEAT_STORE_PERSISTENCE"
+      - "REQ-GOAGENT-FEATURESPEC-BATCH"
+    related_to:
+      - "REQ-FEAT_AGENTSTREAM_ADAPTER"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Conflicts or partial failures leave source inputs and project-owned TIED YAML unchanged and support rollback."
+    - criterion: "Dry-run is the default and emits normalized candidates, deterministic conflicts, and source ordering evidence without writes."
+    - criterion: "Migration never creates branches/worktrees or promotes canonical REQ/ARCH/IMPL records automatically."
+    - criterion: "Persisted migration requires explicit confirmation and creates a recoverable backup before atomic publication."
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_MIGRATION_PREVIEW"
+    implementation:
+      - "IMPL-FEAT_MIGRATION_APPLY"
+      - "IMPL-FEAT_MIGRATION_PREVIEW"
+    tests: []
+  validation_criteria:
+    - method: "Composition tests for preview and confirmed migration boundaries."
+    - method: "Fixture tests for legacy, mixed, conflict, and partial-failure inputs."
+    - method: "Unit tests for normalization, conflict classification, ordering, backup, and rollback."

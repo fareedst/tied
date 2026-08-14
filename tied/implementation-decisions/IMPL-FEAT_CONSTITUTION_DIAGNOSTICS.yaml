@@ -1,0 +1,22 @@
+IMPL-FEAT_CONSTITUTION_DIAGNOSTICS:
+  cross_references:
+    - "ARCH-FEAT_CONSTITUTION_ANALYZER"
+    - "ARCH-FEAT_READINESS_PROJECTION"
+    - "REQ-FEAT_CONSTITUTION_COMPLIANCE"
+  decision: "Emit stable diagnostics with artifact, article, code, severity, location, exception state, and remediation, ordered independently of traversal order."
+  implementation_approach:
+    details:
+      - "Diagnostic output is evidence, not proof of runtime correctness or TIED consistency."
+      - "Expired, rejected, or unapproved exceptions produce explicit diagnostics."
+    summary: "Normalize and sort analyzer results before returning readiness evidence."
+  metadata:
+    last_updated: "2026-08-14"
+  name: "Deterministic constitution diagnostics"
+  rationale:
+    why: "Failures must be reproducible and visible before implementation, with no CLI or generated-view bypass."
+  status: "Active"
+  traceability:
+    code_locations:
+      - "mcp-server/src/feature-orchestration/constitution.ts"
+    tests:
+      - "mcp-server/src/feature-orchestration/constitution.test.ts"

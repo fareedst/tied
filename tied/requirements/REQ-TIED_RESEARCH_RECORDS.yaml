@@ -1,0 +1,46 @@
+REQ-TIED_RESEARCH_RECORDS:
+  category: "Functional"
+  description: "Provide structured, provenance-rich research records for library comparisons, benchmarks, security findings, organizational constraints, and experiments without mutating audited project intent."
+  name: "Structured research records and freshness"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Explicit evidence provenance and proof boundaries"
+      - "Reviewable links to ARCH/IMPL alternatives"
+      - "Safe research storage outside audited project YAML"
+    problems_solved:
+      - "Candidate findings, confirmed case reports, and accepted uncertainty can be conflated."
+      - "Stale evidence can silently influence architecture or implementation choices."
+      - "Unstructured research cannot be compared or revisited deterministically."
+    why: "Research conclusions need durable source, method, uncertainty, decision links, and freshness semantics while remaining outside canonical project YAML under the read-only fidelity profile."
+  related_requirements:
+    depends_on:
+      - "REQ-MODULE_VALIDATION"
+      - "REQ-TIED_FIDELITY_RESEARCH"
+    related_to:
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+      - "REQ-TIED_SETUP"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "A research record captures record type, source, date, method, conclusion, uncertainty, affected decisions, evidence provenance, and freshness policy."
+    - criterion: "Library comparisons, benchmarks, security findings, organizational constraints, and experiments are representable without changing the schema contract."
+    - criterion: "Read-only fidelity mode emits records outside audited project YAML and preserves artifact snapshots and proof-boundary labels."
+    - criterion: "Records link to ARCH and IMPL alternatives and preserve candidate finding, confirmed case report, or accepted uncertainty classification."
+    - criterion: "Stale records are deterministically identified using an explicit freshness policy and source/date metadata."
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-TIED_RESEARCH_RECORD_BOUNDARY"
+    code_annotations:
+      - "REQ-TIED_RESEARCH_RECORDS"
+    implementation:
+      - "IMPL-TIED_RESEARCH_RECORDS"
+    requirements:
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+      - "REQ-TIED_FIDELITY_RESEARCH"
+    tests: []
+  validation_criteria:
+    - coverage: "Record schema, required provenance, classifications, decision links, freshness, and read-only storage boundary"
+      method: "Unit and contract tests"
+    - coverage: "Research adapter and export bindings preserve evidence and never write audited project YAML"
+      method: "Composition tests"

@@ -1,0 +1,71 @@
+CITDP-FEAT-ORCH-BATCH-4:
+  change_definition:
+    current_behavior: "Batches 0-3 provide canonical feature projections and task execution data, but no generated human-readable views or freshness checks."
+    desired_behavior: "Generate deterministic reference-only feature views with source revision metadata, preserved traceability/evidence/proof labels, semantic comparison, and explicit stale fail/warn policy."
+    exclusions:
+      - "Git branches/worktrees"
+      - "lifecycle, clarification, or constitution redesign"
+      - "migration/onboarding"
+      - "replacement for TIED YAML MCP or tied-cli.sh"
+      - "research/feedback promotion"
+      - "runtime correctness claims from generated output or structural validation"
+      - "task scheduler redesign"
+    success_criteria:
+      - "Projection rejects unresolved references and conflicting revisions."
+      - "spec.md, plan.md, tasks.md, quickstart.md, data-model.md, and contracts views render deterministically."
+      - "Stale views fail in CI/verification and warn only under explicit local policy."
+      - "Unchanged inputs produce no semantic diff."
+    unchanged_behavior:
+      - "Canonical REQ/ARCH/IMPL records remain the source of intent."
+      - "Feature manifests remain reference-oriented without copied canonical bodies."
+  evidence_provenance:
+    focused_tests: "11 passed, 0 failed across Batch 4 view and composition tests."
+    full_mcp_tests: "244 passed, 0 failed."
+    pseudocode_validation: "3/3 Batch 4 pseudo-code sidecars passed with require_contracts=true; structural proof only."
+    tied_validate_consistency: "passed with ok: true."
+    tied_verify: "tied_verify updated 3 REQ and 3 IMPL records from passing tests."
+    token_audit: "All Batch 4 tokens were present in semantic-tokens.yaml; no standalone validate_tokens.sh exists in this repository."
+    typescript_build: "npm run build passed."
+    typescript_lint: "ReadLints reported no errors on changed TypeScript files."
+    yaml_index_validation: "requirements, architecture, implementation, semantic-tokens valid."
+    yaml_lint: "scripts/lint_yaml.sh passed for all changed project indexes and Batch 4 detail YAML files."
+  feature_goal: "Reference-only generated feature views with deterministic rendering and safe stale detection."
+  leap_updates: "none; implementation conforms to approved Batch 4 pseudo-code and contracts; no scope-changing divergence observed."
+  module_validation:
+    composition_surface: "MCP route test passed; CLI view adapter compiles and uses the shared projection/renderer boundary."
+    generated_view_renderer: "Independent unit tests passed: six view families, banner/metadata, stable sections, semantic comparison, and unchanged-input behavior."
+    stale_view_detector: "Independent unit tests passed: missing/changed/new sources, deterministic diagnostics, fail/warn policy, and non-current proof flags."
+    view_source_projection: "Independent unit tests passed: normalization, unresolved-reference rejection, revision conflict rejection, link/proof preservation, and no canonical body copying."
+  remaining_risks:
+    - "Source revision callers must supply current canonical references; stale detection cannot infer revisions from Markdown bodies."
+    - "View file persistence and CI integration are not added; this batch provides pure render/check boundaries and adapters."
+  request_id: "CITDP-FEAT-ORCH-BATCH-4"
+  risk_assessment:
+    deferred_profiles:
+      - "performance-scale-cost"
+      - "regulated-privacy"
+      - "user-facing-accessibility"
+    residual_risk: "Generated views are structurally and semantically validated but do not prove runtime correctness, quality/security evidence, constitution compliance, task readiness, or human approval; durable view persistence and CI filesystem integration remain future work."
+    selected_profiles:
+      - "baseline-functional"
+      - "data-integrity-migration"
+      - "external-input-security"
+      - "stateful-reliability"
+  scope_tokens:
+    architecture:
+      - "ARCH-FEAT_VIEW_PROJECTION"
+      - "ARCH-FEAT_VIEW_RENDERING"
+      - "ARCH-FEAT_VIEW_STALENESS"
+    implementation:
+      - "IMPL-FEAT_VIEW_PROJECTION"
+      - "IMPL-FEAT_VIEW_RENDERER"
+      - "IMPL-FEAT_VIEW_STALE_DETECTION"
+    requirements:
+      - "REQ-FEAT_VIEW_DETERMINISM"
+      - "REQ-FEAT_VIEW_GENERATION"
+      - "REQ-FEAT_VIEW_STALENESS"
+  status: "implemented"
+  test_strategy:
+    composition: "Feature view MCP route and standalone feature-orchestrator view adapter; no UI invocation."
+    e2e: "not_applicable; all bindings are composition-testable without UI."
+    unit: "Projection, renderers, semantic comparison, stale metadata and policy."

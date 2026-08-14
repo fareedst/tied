@@ -1,0 +1,40 @@
+ARCH-FEAT_FIXTURE_CORPUS:
+  cross_references:
+    - "REQ-FEAT_FIXTURE_VALIDATION"
+  implementation_approach:
+    details:
+      - "Do not require CLI, MCP orchestration, generated views, or Git state."
+      - "Include proof-boundary metadata distinguishing structural validation from runtime evidence."
+      - "Keep fixture inputs and expected diagnostics versioned together."
+      - "Separate accepted normalized output from rejection categories."
+    summary: "Organize fixtures by contract concern and expected outcome, including greenfield, brownfield, ambiguity, multi-module, multi-approach, stale-view, partial-write, migration, and invalid cases."
+  name: "Representative feature contract fixtures"
+  rationale:
+    benefits:
+      - "Deterministic rejection evidence"
+      - "Independent module validation"
+      - "Strict TDD corpus"
+    problems_solved:
+      - "Inconsistent diagnostics"
+      - "Missing backward-compatibility evidence"
+      - "Unreviewable edge cases"
+    why: "Executable fixtures expose contract gaps before production modules and orchestration surfaces are built."
+  related_decisions:
+    depends_on:
+      - "ARCH-FEAT_CANONICAL_LINK_BOUNDARY"
+      - "ARCH-FEAT_LIFECYCLE_STATE_MACHINE"
+      - "ARCH-FEAT_MANIFEST_CONTRACT"
+    informs:
+      - "IMPL-FEAT_FIXTURE_VALIDATORS"
+    see_also:
+      - "ARCH-MODULE_VALIDATION"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_FIXTURE_CORPUS"
+    implementation:
+      - "IMPL-FEAT_FIXTURE_VALIDATORS"
+    requirements:
+      - "REQ-FEAT_FIXTURE_VALIDATION"
+    tests:
+      - "feature_fixture_corpus_tests"

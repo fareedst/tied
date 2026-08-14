@@ -1,0 +1,60 @@
+IMPL-FEAT_AGENTSTREAM_ADAPTER:
+  code_locations:
+    files: []
+    functions: []
+  cross_references:
+    - "ARCH-FEAT_AGENTSTREAM_ADAPTER"
+    - "REQ-FEAT_AGENTSTREAM_ADAPTER"
+    - "REQ-GOAGENT-FEATURESPEC-BATCH"
+  detail_file: "implementation-decisions/IMPL-FEAT_AGENTSTREAM_ADAPTER.yaml"
+  implementation_approach:
+    details:
+      - "Delegate process execution to existing executor and keep adapter entry points thin."
+      - "Keep existing feature-spec batch loading and ordered turn behavior unchanged."
+      - "Preserve governed sequence: pseudo-code before RED, RED before GREEN, module validation before composition, composition before justified E2E, validation before close-out."
+      - "Use the same scheduled groups for dry-run output and live execution."
+    summary: "Map one scheduler projection to dry-run or live agentstream turns and execution evidence."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-13"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Batch 3 plan gate"
+  name: "Agentstream task graph adapter"
+  rationale:
+    benefits:
+      - "Compatibility"
+      - "Single schedule source"
+      - "Thin composition boundary"
+    problems_solved:
+      - "Dry-run/live divergence"
+      - "Duplicate executor"
+      - "Legacy feature-spec regressions"
+    why: "Reuse existing agentstream turns and executor while adding graph scheduling as an opt-in path."
+  related_decisions:
+    depends_on:
+      - "IMPL-FEAT_TASK_EXECUTION_STATE"
+      - "IMPL-FEAT_TASK_GRAPH_SCHEDULER"
+      - "IMPL-GOAGENT-EXECUTOR"
+      - "IMPL-GOAGENT-FEATURESPEC"
+    see_also:
+      - "IMPL-GOAGENT-PIPELINE"
+    supersedes: []
+  status: "Active"
+  testability: "integration"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_AGENTSTREAM_ADAPTER"
+    code_annotations:
+      - "ARCH-FEAT_AGENTSTREAM_ADAPTER"
+      - "IMPL-FEAT_AGENTSTREAM_ADAPTER"
+      - "REQ-FEAT_AGENTSTREAM_ADAPTER"
+    requirements:
+      - "REQ-FEAT_AGENTSTREAM_ADAPTER"
+      - "REQ-GOAGENT-FEATURESPEC-BATCH"
+    tests:
+      - "agentstream_dry_run_matches_live_schedule_REQ_FEAT_AGENTSTREAM_ADAPTER"
+      - "agentstream_maps_task_groups_REQ_FEAT_AGENTSTREAM_ADAPTER"
+      - "agentstream_preserves_feature_spec_order_REQ_FEAT_AGENTSTREAM_ADAPTER"

@@ -1,0 +1,13 @@
+REQ-FEAT_CONSTITUTION_SCHEMA:
+  category: "Functional"
+  description: "The project owns a versioned constitution at tied/constitution.yaml with articles, scope, enforcement level, exceptions, approver, rationale, and amendment history."
+  name: "Versioned project constitution"
+  priority: "P0"
+  rationale:
+    why: "Make project-specific engineering principles explicit, reviewable, and consumable by later orchestration phases."
+  satisfaction_criteria:
+    - criterion: "The canonical path and schema are validated deterministically."
+    - criterion: "Writes have one explicit project-owned validated boundary and do not duplicate TIED YAML CRUD."
+  status: "Planned"
+  validation_criteria:
+    - method: "Schema, ownership, amendment, and atomic publication tests."

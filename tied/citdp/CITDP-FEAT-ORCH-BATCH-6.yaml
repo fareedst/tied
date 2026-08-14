@@ -1,0 +1,67 @@
+CITDP-FEAT-ORCH-BATCH-6:
+  change_definition:
+    exclusions:
+      - "automatic canonical promotion"
+      - "generated-view redesign"
+      - "Git branch/worktree mutation"
+      - "lifecycle redesign"
+      - "replacement for tied-cli.sh, TIED YAML MCP, or agentstream"
+      - "research/feedback redesign"
+      - "scheduler redesign"
+    scope:
+      - "REQ-FEAT_ADOPTION_GUIDANCE"
+      - "REQ-FEAT_LEGACY_MIGRATION"
+      - "REQ-FEAT_LOCAL_DEFAULTS"
+      - "REQ-FEAT_OFFLINE_WORKFLOW_PRESERVATION"
+      - "REQ-FEAT_ONBOARDING_COMMANDS"
+      - "REQ-FEAT_READINESS_DIAGNOSTICS"
+    summary: "Add low-friction TIED onboarding delegates, explicit local capability/default reporting, offline workflow preservation, and recoverable legacy feature migration without duplicating validated orchestration behavior."
+  implementation:
+    files:
+      - "docs/tied-feature-onboarding.md"
+      - "mcp-server/src/feature-orchestration/defaults.ts"
+      - "mcp-server/src/feature-orchestration/diagnostics.ts"
+      - "mcp-server/src/feature-orchestration/migration.ts"
+      - "mcp-server/src/feature-orchestration/offline.ts"
+      - "mcp-server/src/feature-orchestration/onboarding-entry.ts"
+      - "mcp-server/src/feature-orchestration/onboarding.ts"
+    modules:
+      - "local default resolution"
+      - "migration apply"
+      - "migration preview"
+      - "offline fallback"
+      - "onboarding command composition"
+      - "readiness diagnostics"
+    tied_base_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied"
+  leap:
+    result: "No scope divergence required; pseudo-code sidecars were synchronized with validator-required DATA_TRANSITION contract fields before implementation validation."
+  metadata:
+    author: "AI Agent"
+    date: "2026-08-13"
+    result: "pass"
+    validator: "TIED MCP"
+  risks:
+    mitigations:
+      - "Defaults expose source and corrective commands without configuration writes."
+      - "Migration is dry-run by default, conflict-blocked, explicitly confirmed, backed up, and rollback-capable."
+      - "Migration writes only migration-owned tied/features destinations and leaves project-owned TIED YAML untouched."
+    remaining:
+      - "Cross-platform executable discovery and filesystem stress testing remain future hardening work."
+  status: "implemented"
+  test_strategy:
+    agentstream: "go test ./... passed for all packages"
+    composition: "onboarding dispatch delegates FeatureStore and existing readiness/task/view/agentstream boundaries"
+    focused:
+      passed: 9
+      total: 9
+    full_mcp:
+      passed: 262
+      total: 262
+  validation:
+    pseudo_code: "six Batch 6 sidecars passed structural validation"
+    tied_validate_consistency: "passed: ok true"
+    tied_verify: "6 REQ Implemented and 6 IMPL Active"
+    token_audit: "Batch 6 source and tests carry REQ/ARCH/IMPL markers"
+    typescript_build: "passed"
+    typescript_lints: "passed"
+    yaml_index_validation: "passed"

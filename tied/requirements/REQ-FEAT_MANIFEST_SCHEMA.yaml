@@ -1,0 +1,30 @@
+REQ-FEAT_MANIFEST_SCHEMA:
+  category: "Functional"
+  description: "A feature manifest uses schema_version feature-manifest.v1 and stores stable feature identity, lifecycle state, mode, canonical REQ/ARCH/IMPL references, revision metadata, and history without copying canonical record bodies."
+  name: "Feature manifest schema contract"
+  priority: "P0"
+  rationale:
+    benefits:
+      - "Canonical record ownership"
+      - "Deterministic validation"
+      - "Explicit compatibility boundary"
+    problems_solved:
+      - "Ambiguous identity and revision semantics"
+      - "Duplicate source of truth"
+      - "Schema drift"
+    why: "Batch 0 needs one versioned contract before lifecycle tooling or generated views exist."
+  satisfaction_criteria:
+    - criterion: "Embedded canonical REQ, ARCH, or IMPL bodies are rejected; references are token-shaped and ownership remains canonical."
+    - criterion: "Stable feature identifiers, slugs, immutable fields, mutable fields, and revision behavior are documented and tested."
+    - criterion: "Valid feature-manifest.v1 fixtures accept required fields and reject unsupported versions."
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_MANIFEST_CONTRACT"
+    implementation:
+      - "IMPL-FEAT_MANIFEST_VALIDATOR"
+    requirements:
+      - "REQ-FEAT_MANIFEST_SCHEMA"
+    tests:
+      - "manifest_schema_accepts_valid_v1_fixture_REQ_FEAT_MANIFEST_SCHEMA"
+      - "manifest_schema_rejects_unsupported_version_REQ_FEAT_MANIFEST_SCHEMA"

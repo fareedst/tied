@@ -1,0 +1,21 @@
+IMPL-FEAT_CLARIFICATION_GATE:
+  cross_references:
+    - "ARCH-FEAT_CLARIFICATION_BOUNDARY"
+    - "REQ-FEAT_CLARIFICATION_GATES"
+  decision: "Evaluate clarification records against requested lifecycle phase and artifact scope, invalidating stale resolutions and returning stable blockers."
+  implementation_approach:
+    details:
+      - "Sort blockers by phase, clarification id, and blocking class."
+      - "Use feature revision and resolution_revision to detect stale decisions."
+    summary: "Pure deterministic projection with no persistence or transition mutation."
+  metadata:
+    last_updated: "2026-08-14"
+  name: "Clarification gate evaluator"
+  rationale:
+    why: "Readiness must distinguish informational uncertainty from phase-blocking uncertainty."
+  status: "Active"
+  traceability:
+    code_locations:
+      - "mcp-server/src/feature-orchestration/clarification.ts"
+    tests:
+      - "mcp-server/src/feature-orchestration/clarification.test.ts"

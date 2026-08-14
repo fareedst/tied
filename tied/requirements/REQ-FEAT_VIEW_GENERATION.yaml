@@ -1,0 +1,51 @@
+REQ-FEAT_VIEW_GENERATION:
+  category: "Functional"
+  cross_references:
+    - "ARCH-FEAT_VIEW_PROJECTION"
+    - "IMPL-FEAT_VIEW_PROJECTION"
+  description: "Generate deterministic committed Markdown views inside each feature directory from canonical feature projections, preserving references and proof-boundary labels without copying canonical REQ/ARCH/IMPL bodies."
+  detail_file: "requirements/REQ-FEAT_VIEW_GENERATION.yaml"
+  metadata:
+    created:
+      author: "AI Agent"
+      date: {}
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Batch 4 implementation and focused tests"
+  name: "Human-readable generated feature views"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Reviewable feature directory"
+      - "Stable source ownership"
+    problems_solved:
+      - "Prose views becoming canonical accidentally"
+      - "Scattered feature intent"
+    why: "Reviewers and agents need a compact feature-local understanding without creating a second source of truth."
+  related_requirements:
+    depends_on:
+      - "REQ-FEAT_MANIFEST_SCHEMA"
+    related_to:
+      - "REQ-FEAT_CLARIFICATION_RECORDS"
+      - "REQ-FEAT_CONSTITUTION_COMPLIANCE"
+      - "REQ-FEAT_TASK_DERIVATION"
+  satisfaction_criteria:
+    - criterion: "Every view preserves token links, evidence links, and proof-boundary labels."
+    - criterion: "Generated Markdown is explicitly marked as a view and never treated as canonical intent."
+    - criterion: "Supported view paths are generated from the canonical feature manifest and stable projections."
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_VIEW_PROJECTION"
+    code_annotations: []
+    implementation:
+      - "IMPL-FEAT_VIEW_PROJECTION"
+    tests:
+      - "mcp-server/src/feature-orchestration/mcp.test.ts"
+      - "mcp-server/src/feature-orchestration/views.test.ts"
+  validation_criteria:
+    - coverage: "View types and applicable contracts"
+      method: "Deterministic renderer contract tests"
+    - coverage: "Banner, source metadata, links, and proof boundaries"
+      method: "Structural validation"

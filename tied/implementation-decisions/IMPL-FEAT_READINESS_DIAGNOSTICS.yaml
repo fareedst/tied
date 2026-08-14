@@ -1,0 +1,42 @@
+IMPL-FEAT_READINESS_DIAGNOSTICS:
+  code_locations:
+    files: []
+    functions: []
+  cross_references:
+    - "ARCH-FEAT_READINESS_DIAGNOSTICS"
+    - "REQ-FEAT_READINESS_DIAGNOSTICS"
+  implementation_approach:
+    details:
+      - "Consume clarification, constitution, task, view, and capability evidence."
+      - "Include exact missing prerequisite, source evidence, affected command, and corrective command."
+      - "Never execute corrective commands or mutate state."
+    summary: "Normalize existing readiness evidence into stable diagnostics ordered by phase, identity, and severity."
+  name: "Readiness diagnostic adapter"
+  rationale:
+    benefits:
+      - "Proof-boundary clarity"
+      - "Stable remediation guidance"
+    problems_solved:
+      - "Mixed validation claims"
+      - "Opaque blocked state"
+    why: "Existing readiness projections must become actionable without changing their authority."
+  related_decisions:
+    depends_on:
+      - "IMPL-FEAT_CLARIFICATION_LIFECYCLE_ADAPTER"
+      - "IMPL-FEAT_CONSTITUTION_DIAGNOSTICS"
+      - "IMPL-FEAT_TASK_GRAPH_SCHEDULER"
+      - "IMPL-FEAT_VIEW_STALE_DETECTION"
+    see_also: []
+    supersedes: []
+  status: "Active"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_READINESS_DIAGNOSTICS"
+    code_annotations:
+      - "ARCH-FEAT_READINESS_DIAGNOSTICS"
+      - "IMPL-FEAT_READINESS_DIAGNOSTICS"
+      - "REQ-FEAT_READINESS_DIAGNOSTICS"
+    requirements:
+      - "REQ-FEAT_READINESS_DIAGNOSTICS"
+    tests: []

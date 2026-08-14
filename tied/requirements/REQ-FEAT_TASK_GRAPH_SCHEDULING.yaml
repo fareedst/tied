@@ -1,0 +1,19 @@
+REQ-FEAT_TASK_GRAPH_SCHEDULING:
+  category: "Functional"
+  cross_references:
+    - "ARCH-FEAT_TASK_GRAPH_SCHEDULER"
+    - "IMPL-FEAT_TASK_GRAPH_SCHEDULER"
+  description: "Validate task dependencies, detect cycles, reject unsafe parallelization, and project deterministic readiness reasons and parallel groups from graph edges and module evidence rather than task prose or ordering."
+  name: "Deterministic task graph scheduling"
+  priority: "P0"
+  rationale:
+    problems_solved:
+      - "Ambiguous readiness"
+      - "Hidden dependency cycles"
+      - "Unsafe parallel execution"
+    why: "Independent modules must execute concurrently only when their canonical dependencies and readiness evidence permit it."
+  satisfaction_criteria:
+    - criterion: "Cycles and invalid dependency references are rejected deterministically."
+    - criterion: "Parallel groups contain only independent ready tasks with required module-validation evidence."
+    - criterion: "Readiness explains each blocked or ready task using structured reasons and evidence."
+  status: "Planned"

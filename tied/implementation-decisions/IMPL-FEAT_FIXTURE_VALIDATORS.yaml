@@ -1,0 +1,53 @@
+IMPL-FEAT_FIXTURE_VALIDATORS:
+  code_locations:
+    files:
+      - description: "Planned fixture corpus and validators; no production code in this Plan gate."
+        path: "TBD: Batch 0 fixture and validator modules"
+    functions: []
+  cross_references:
+    - "ARCH-FEAT_FIXTURE_CORPUS"
+    - "REQ-FEAT_FIXTURE_VALIDATION"
+  implementation_approach:
+    details:
+      - "Assert accepted normalized output or named rejection category."
+      - "Catalog valid and invalid fixtures by scenario and module boundary."
+      - "Mark runtime correctness, security, performance, and UI proof as out of scope for Batch 0 structural fixtures."
+      - "Run modules independently before any composition tests in the later implementation phase."
+    summary: "Load fixture cases, dispatch them to schema, lifecycle, linker, migration, and partial-write validators, and compare stable expected outcomes."
+  metadata:
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Batch 0 Plan gate sidecar"
+  name: "Feature fixture corpus validators"
+  rationale:
+    benefits:
+      - "Explicit proof boundaries"
+      - "Independent module validation"
+      - "Regression fixtures"
+    problems_solved:
+      - "Confusing structural and runtime proof"
+      - "Missing scenario coverage"
+      - "Unstable rejection categories"
+    why: "A deterministic corpus validator turns the Batch 0 contract into reviewable executable evidence."
+  related_decisions:
+    depends_on:
+      - "IMPL-FEAT_LIFECYCLE_ENGINE"
+      - "IMPL-FEAT_MANIFEST_VALIDATOR"
+      - "IMPL-FEAT_REFERENCE_LINKER"
+    see_also:
+      - "IMPL-MODULE_VALIDATION"
+    supersedes: []
+  status: "Active"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_FIXTURE_CORPUS"
+    code_annotations:
+      - "ARCH-FEAT_FIXTURE_CORPUS"
+      - "IMPL-FEAT_FIXTURE_VALIDATORS"
+      - "REQ-FEAT_FIXTURE_VALIDATION"
+    requirements:
+      - "REQ-FEAT_FIXTURE_VALIDATION"
+    tests:
+      - "feature_fixture_corpus_tests"

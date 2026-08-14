@@ -1,0 +1,30 @@
+REQ-FEAT_LIFECYCLE:
+  category: "Functional"
+  description: "The feature lifecycle persists draft, refining, specified, planned, tasked, verifying, and closed phases, with abandoned as a terminal state, and rejects illegal transitions deterministically."
+  name: "Feature lifecycle state machine"
+  priority: "P0"
+  rationale:
+    benefits:
+      - "Deterministic transition errors"
+      - "Explicit blocked-state derivation"
+      - "Resumable state"
+    problems_solved:
+      - "Hidden human approval points"
+      - "Illegal phase changes"
+      - "Unclear readiness gates"
+    why: "Lifecycle semantics must be stable before commands and orchestration surfaces are added."
+  satisfaction_criteria:
+    - criterion: "Each transition has preconditions, postconditions, blocked-state behavior, and approval ownership."
+    - criterion: "State changes preserve revision identity and produce deterministic transition outcomes."
+    - criterion: "The transition matrix enumerates every legal transition and rejects all other transitions."
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_LIFECYCLE_STATE_MACHINE"
+    implementation:
+      - "IMPL-FEAT_LIFECYCLE_ENGINE"
+    requirements:
+      - "REQ-FEAT_LIFECYCLE"
+    tests:
+      - "lifecycle_derives_blocked_state_REQ_FEAT_LIFECYCLE"
+      - "lifecycle_rejects_illegal_transition_REQ_FEAT_LIFECYCLE"

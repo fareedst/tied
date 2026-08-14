@@ -1,0 +1,100 @@
+CITDP-FEAT-ORCH-BATCH-2:
+  change_definition:
+    current_behavior: "Batch 1 lifecycle commands defer clarification and constitution readiness gates."
+    desired_behavior: "Canonical feature-local clarification records and project-owned constitution rules provide deterministic blockers, diagnostics, and readiness projections."
+    non_goals:
+      - "Batch 3 task graph or scheduler"
+      - "Batch 4 generated views or stale CI"
+      - "Batch 5 research or feedback promotion"
+      - "Batch 6 migration or onboarding"
+      - "Git branches/worktrees"
+      - "replacement for tied-cli.sh or TIED YAML CRUD"
+    success_criteria:
+      - "Blocked lifecycle requests do not invoke lifecycle mutation."
+      - "Clarification records normalize, persist atomically, enforce ownership, and stale affected resolutions."
+      - "Constitution articles, exceptions, amendments, compliance findings, and diagnostics are deterministic."
+    unchanged_behavior: "Batch 1 lifecycle engine remains transition authority; TIED consistency and quality evidence remain separate proof boundaries."
+  completion_criteria:
+    status: "complete"
+    verification_gate_notes: "Focused 12/12 and full 230/230 tests passed; TypeScript build passed; TIED consistency returned ok true; tied_verify updated four REQ and seven IMPL statuses."
+  evidence:
+    commands:
+      - "node --test dist/feature-orchestration/clarification.test.js dist/feature-orchestration/constitution.test.js dist/feature-orchestration/readiness.test.js dist/feature-orchestration/commands.test.js"
+      - "npm run build"
+      - "npm test"
+      - "tied_validate_consistency"
+      - "tied_verify"
+    manifest_reference: "focused Batch 2 output and full npm test output"
+    proof_boundaries:
+      - "Constitution compliance remains distinct from quality evidence."
+      - "Runtime tests prove covered behavior, not constitution compliance beyond supplied projections."
+      - "tied_validate_consistency proves TIED traceability, not runtime correctness or security."
+  impact_analysis:
+    impl_inventory_notes: "Implemented seven Batch 2 IMPL contracts with literal block leads in tests and code."
+    modules_or_boundaries: "clarification store; clarification gate; lifecycle readiness adapter; constitution store; validator; analyzer; diagnostics."
+    tied_tokens_affected:
+      - "IMPL-FEAT_CLARIFICATION_GATE"
+      - "IMPL-FEAT_CLARIFICATION_LIFECYCLE_ADAPTER"
+      - "IMPL-FEAT_CLARIFICATION_STORE"
+      - "IMPL-FEAT_CONSTITUTION_ANALYZER"
+      - "IMPL-FEAT_CONSTITUTION_DIAGNOSTICS"
+      - "IMPL-FEAT_CONSTITUTION_STORE"
+      - "IMPL-FEAT_CONSTITUTION_VALIDATOR"
+      - "REQ-FEAT_CLARIFICATION_GATES"
+      - "REQ-FEAT_CLARIFICATION_RECORDS"
+      - "REQ-FEAT_CONSTITUTION_COMPLIANCE"
+      - "REQ-FEAT_CONSTITUTION_SCHEMA"
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: "Added explicit pass findings for in-scope constitution rules to satisfy every-rule output contract; no scope expansion."
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "CITDP-FEAT-ORCH-BATCH-2"
+    recorded_at: "2026-08-14"
+    title: "Implement structured clarifications and project constitution readiness"
+  risk_analysis:
+    abuse_cases:
+      - "malformed-oversized-input"
+      - "path-traversal-file-access"
+      - "replay-duplicate"
+      - "resource-exhaustion-timeout-rate-limit"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "npm test"
+        evidence_method: "230 passing tests including 12 focused Batch 2 tests"
+        limitation: "Does not prove runtime correctness beyond covered contracts"
+        owner: "implementation agent"
+        rationale: "Behavior-changing storage, gates, and diagnostics"
+        result: "pass"
+        risk: "canonical data or readiness drift"
+        threshold: "all tests pass"
+        waiver:
+          expiry: "~"
+          owner: "~"
+          reason: "~"
+          required: "false"
+    quality_profiles:
+      - "baseline-functional"
+      - "data-integrity-migration"
+      - "external-input-security"
+      - "stateful-reliability"
+    residual_risk:
+      expiry: "2026-09-30"
+      owner: "feature orchestration maintainers"
+      summary: "Constitution rule language is bounded and requires future contract expansion for richer policy predicates; Batch 3 must consume projections only."
+    risks:
+      - "Bounded rule expressions are intentionally limited to require:<field> and compliant_rules matches; no implicit scripting engine."
+      - "Constitution and clarification stores use atomic sibling replacement and compare-and-swap revisions."
+    scenarios:
+      - "Expired or unapproved exception"
+      - "Lifecycle blocker before transition"
+      - "Malformed records and invalid exceptions"
+      - "Stale resolution after scope revision"
+      - "Unauthorized resolution and missing evidence"
+  tdd_sequence:
+    summary: "RED tests were added before production modules; minimal GREEN implementations followed; composition readiness test verified blocked requests preserve lifecycle revision; refactor and full validation passed."
+  test_strategy:
+    matrix_notes: "12 focused Batch 2 tests; 230 full-suite tests; no UI/E2E required because CLI/MCP/lifecycle bindings are programmatically testable."
+    summary: "Strict RED/GREEN unit tests for each store, gate, validator, analyzer, and diagnostics module, followed by UI-free readiness composition coverage and full regression suite."

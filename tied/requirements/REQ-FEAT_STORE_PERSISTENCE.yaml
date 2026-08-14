@@ -1,0 +1,29 @@
+REQ-FEAT_STORE_PERSISTENCE:
+  category: "Functional"
+  description: "Persist each feature manifest at tied/features/<feature-directory>/feature.yaml with deterministic discovery and resumable reads."
+  name: "Feature store persistence"
+  priority: "P0"
+  rationale:
+    benefits:
+      - "Compatibility with existing TIED records"
+      - "Deterministic discovery"
+      - "Durable feature packages"
+    problems_solved:
+      - "No feature-local persistence boundary"
+      - "Non-resumable orchestration state"
+    why: "Batch 1 needs a durable feature package without replacing canonical TIED records."
+  satisfaction_criteria:
+    - criterion: "A created feature has exactly one feature.yaml under its feature directory."
+    - criterion: "Reads return the persisted manifest and preserve canonical REQ/ARCH/IMPL references."
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_STORE_PERSISTENCE"
+    implementation:
+      - "IMPL-FEAT_STORE"
+    requirements:
+      - "REQ-FEAT_STORE_PERSISTENCE"
+    tests: []
+  validation_criteria:
+    - method: "Composition tests for store integration with the feature orchestration surface."
+    - method: "Unit tests for path resolution, read, and write behavior."

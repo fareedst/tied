@@ -1,0 +1,57 @@
+ARCH-TIED_RESEARCH_RECORD_BOUNDARY:
+  alternatives_considered:
+    - cons:
+        - "Breaks read-only fidelity boundary"
+        - "Pollutes canonical intent"
+      name: "Write research directly into project TIED YAML"
+      pros:
+        - "Immediate discoverability"
+      rejected_reason: "Research evidence and uncertainty require review before canonical promotion."
+    - cons:
+        - "No deterministic freshness"
+        - "Weak comparison and provenance"
+      name: "Store unstructured research notes only"
+      pros:
+        - "Low authoring cost"
+      rejected_reason: "Structured fields are required for reproducible decision support."
+  decision: "Use a typed append-only research dataset outside audited project YAML for research records; preserve source evidence and snapshots, link records to ARCH/IMPL alternatives, and require explicit classification and freshness evaluation before records influence planning."
+  implementation_approach:
+    details:
+      - "Allow classification values candidate_finding, confirmed_case_report, and accepted_uncertainty; classification is not inferred as canonical intent."
+      - "Assign each evidence item an explicit proof boundary and do not treat research records as runtime or quality proof by themselves."
+      - "Link ARCH and IMPL alternatives by token and preserve rejected/selected alternative context."
+      - "Record source, source_date, method, conclusion, uncertainty, affected_decisions, evidence_provenance, freshness_policy, and classification."
+      - "Under read-only fidelity profile, prohibit writes to audited project source, tests, methodology, and project YAML."
+    summary: "Define a versioned research-record schema and an external append-only dataset boundary consumed by fidelity research and later review workflows."
+  name: "External research record boundary"
+  rationale:
+    benefits:
+      - "Deterministic freshness diagnostics"
+      - "Read-only audited project"
+      - "Traceable alternative links and provenance"
+    problems_solved:
+      - "Confusion between structural evidence and runtime proof"
+      - "Stale evidence ambiguity"
+      - "Unreviewed research mutation"
+    why: "Research is evidence about decisions, not itself canonical intent; storage and classification must preserve that distinction."
+  related_decisions:
+    depends_on:
+      - "ARCH-QUALITY_ASSURANCE_PROFILES"
+      - "ARCH-TIED_FIDELITY_RESEARCH"
+    informs:
+      - "IMPL-TIED_RESEARCH_RECORDS"
+    see_also:
+      - "ARCH-LEAP_PROPOSAL_QUEUE"
+    supersedes: []
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-QUALITY_ASSURANCE_PROFILES"
+      - "ARCH-TIED_FIDELITY_RESEARCH"
+    code_annotations:
+      - "ARCH-TIED_RESEARCH_RECORD_BOUNDARY"
+    implementation:
+      - "IMPL-TIED_RESEARCH_RECORDS"
+    requirements:
+      - "REQ-TIED_RESEARCH_RECORDS"
+    tests: []

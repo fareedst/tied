@@ -1,0 +1,31 @@
+REQ-FEAT_REVISION_SAFE_MUTATION:
+  category: "Non-Functional"
+  description: "Require mutating feature operations to validate the expected manifest revision, publish complete manifests atomically, and never expose partial writes."
+  name: "Revision-safe atomic mutation"
+  priority: "P0"
+  rationale:
+    benefits:
+      - "Crash-resistant publication"
+      - "Deterministic stale revision errors"
+      - "Safe concurrency"
+    problems_solved:
+      - "Lost updates"
+      - "Partial feature.yaml writes"
+      - "Unclear stale revision behavior"
+    why: "Concurrent lifecycle commands and failures must preserve manifest integrity."
+  satisfaction_criteria:
+    - criterion: "A stale expected revision is rejected without changing the manifest."
+    - criterion: "Accepted mutation increments revision exactly once and reports the next permitted phase."
+    - criterion: "Atomic publication either leaves the previous complete manifest or installs the complete next manifest."
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_REVISION_SAFE_MUTATION"
+    implementation:
+      - "IMPL-FEAT_ATOMIC_MUTATION"
+    requirements:
+      - "REQ-FEAT_REVISION_SAFE_MUTATION"
+    tests: []
+  validation_criteria:
+    - method: "Integration tests for atomic write failure and recovery."
+    - method: "Unit tests for revision checks and next-phase derivation."

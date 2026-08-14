@@ -1,0 +1,51 @@
+IMPL-FEAT_LIFECYCLE_ENGINE:
+  code_locations:
+    files:
+      - description: "Planned lifecycle evaluator; no production code in this Plan gate."
+        path: "TBD: Batch 0 implementation module"
+    functions: []
+  cross_references:
+    - "ARCH-FEAT_LIFECYCLE_STATE_MACHINE"
+    - "REQ-FEAT_LIFECYCLE"
+  implementation_approach:
+    details:
+      - "Derive blocked state from unmet preconditions without mutating the manifest."
+      - "Encode draft → refining → specified → planned → tasked → verifying → closed."
+      - "Represent abandoned as terminal."
+      - "Return approval_required explicitly where human ownership is required."
+    summary: "Evaluate requested lifecycle transitions against current manifest state and validation evidence, returning a proposed next state or a stable rejection."
+  metadata:
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Batch 0 Plan gate sidecar"
+  name: "Feature lifecycle transition evaluator"
+  rationale:
+    benefits:
+      - "Deterministic transition matrix"
+      - "Explicit approval decisions"
+      - "No Git or file effects"
+    problems_solved:
+      - "Illegal transitions"
+      - "Implicit lifecycle gates"
+      - "State mutation mixed with orchestration"
+    why: "A pure transition evaluator makes legal phases, preconditions, blocked states, and approvals testable without command or persistence surfaces."
+  related_decisions:
+    depends_on:
+      - "IMPL-FEAT_MANIFEST_VALIDATOR"
+    see_also:
+      - "IMPL-FEAT_FIXTURE_VALIDATORS"
+    supersedes: []
+  status: "Active"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_LIFECYCLE_STATE_MACHINE"
+    code_annotations:
+      - "ARCH-FEAT_LIFECYCLE_STATE_MACHINE"
+      - "IMPL-FEAT_LIFECYCLE_ENGINE"
+      - "REQ-FEAT_LIFECYCLE"
+    requirements:
+      - "REQ-FEAT_LIFECYCLE"
+    tests:
+      - "lifecycle_transition_matrix_tests"

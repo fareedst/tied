@@ -1,0 +1,21 @@
+IMPL-FEAT_CONSTITUTION_VALIDATOR:
+  cross_references:
+    - "ARCH-FEAT_CONSTITUTION_STORAGE"
+    - "REQ-FEAT_CONSTITUTION_SCHEMA"
+  decision: "Validate articles, scopes, enforcement levels, exceptions, approval metadata, expiry, and amendment compatibility before publication."
+  implementation_approach:
+    details:
+      - "Approved exceptions require an approver and applicable expiry."
+      - "Every exception requires owner, rationale, and review status."
+    summary: "Deterministic schema and semantic validation."
+  metadata:
+    last_updated: "2026-08-14"
+  name: "Constitution schema validator"
+  rationale:
+    why: "Malformed or incompatible policy must fail before it can govern implementation."
+  status: "Active"
+  traceability:
+    code_locations:
+      - "mcp-server/src/feature-orchestration/constitution.ts"
+    tests:
+      - "mcp-server/src/feature-orchestration/constitution.test.ts"

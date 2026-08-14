@@ -1,0 +1,44 @@
+ARCH-FEAT_ORCHESTRATION_COMMANDS:
+  alternatives_considered:
+    - cons:
+        - "Semantic divergence"
+      name: "Command-specific state machines"
+      pros:
+        - "Local simplicity"
+      rejected_reason: "Batch 0 lifecycle engine is the mandated shared evaluator."
+  cross_references:
+    - "REQ-FEAT_ORCHESTRATION_COMMANDS"
+  decision: "Implement lifecycle commands as a thin adapter over the persisted manifest store and Batch 0 lifecycle evaluator, with a shared response containing state, revision, diagnostics, and next permitted phase."
+  implementation_approach:
+    details:
+      - "Batch 2 clarification and constitution gates remain explicit integration blockers, not invented here."
+      - "Refine, plan, tasks, verify, and close out request named transitions."
+      - "Responses derive the next permitted phase from the resulting manifest and evidence."
+      - "Specify creates or initializes a feature package."
+    summary: "Map each command to an explicit lifecycle request and delegate evaluation and mutation."
+  name: "Lifecycle command adapter"
+  rationale:
+    benefits:
+      - "Consistent next-phase reporting"
+      - "Single lifecycle source"
+      - "Thin testable adapter"
+    problems_solved:
+      - "Duplicated transitions"
+      - "Inconsistent diagnostics"
+      - "Unclear resume behavior"
+    why: "Command behavior should not fork lifecycle semantics or embed persistence logic."
+  related_decisions:
+    depends_on:
+      - "ARCH-FEAT_LIFECYCLE_STATE_MACHINE"
+      - "ARCH-FEAT_MANIFEST_CONTRACT"
+    informs:
+      - "ARCH-FEAT_ORCHESTRATION_BOUNDARY"
+    see_also: []
+  status: "Active"
+  traceability:
+    code_annotations: []
+    implementation:
+      - "IMPL-FEAT_ORCHESTRATION_COMMANDS"
+    requirements:
+      - "REQ-FEAT_ORCHESTRATION_COMMANDS"
+    tests: []

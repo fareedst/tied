@@ -1,0 +1,66 @@
+CITDP-FEAT-ORCH-BATCH-3:
+  change_definition:
+    current_behavior: "Batches 0-2 provided feature manifests, lifecycle, clarification, constitution, and ordered feature-spec execution without a canonical task graph."
+    desired_behavior: "Derive stable dependency-aware tasks, project readiness, preserve execution evidence, and adapt safe schedules while retaining legacy feature-spec ordering."
+    exclusions:
+      - "Batch 2 redesign"
+      - "Batch 5 research and feedback promotion"
+      - "Batch 6 migration and onboarding"
+      - "generated tasks.md and other Batch 4 views"
+      - "Git branches and worktrees"
+  divergences:
+    - "Adapter is implemented as a TypeScript contract boundary; existing Go agentstream packages remain unchanged and compatibility-tested."
+    - "Generated views intentionally deferred per Batch 3 user exclusion despite roadmap wording; source projection contract is exposed for Batch 4."
+  evidence_provenance:
+    agentstream_compatibility: "go test ./... passed across all packages."
+    focused_tests: "8 passed, 0 failed."
+    full_mcp_tests: "238 passed, 0 failed."
+    pseudocode_validation: "4/4 passed with require_contracts=true."
+    tied_validate_consistency: "passed."
+    typescript_build: "npm run build passed."
+    verification_gate: "tied_verify updated 4 REQ and 4 IMPL records."
+    yaml_index_validation: "requirements, architecture, implementation, semantic-tokens valid."
+  feature_goal: "Canonical task derivation, deterministic graph scheduling, execution recovery, and additive agentstream adaptation without generated views."
+  leap_updates: "none; implementation conforms to approved Batch 3 pseudo-code and contracts."
+  module_validation:
+    agentstream_adapter: "independent dry-run/live and legacy compatibility tests passed."
+    task_derivation: "independent unit tests passed."
+    task_execution_state: "independent retry/stale/cancellation tests passed."
+    task_graph_scheduler: "independent cycle/readiness tests passed."
+  remaining_risks:
+    - "Durable task graph and execution-state persistence policy must be selected before production lifecycle integration."
+    - "Quality profile inputs are projections; Batch 3 does not duplicate the quality evidence system."
+  request_id: "CITDP-FEAT-ORCH-BATCH-3"
+  risk_assessment:
+    deferred_profiles:
+      - "performance-scale-cost"
+      - "regulated-privacy"
+      - "user-facing-accessibility"
+    residual_risk: "Durable graph persistence and production Go CLI wiring remain future integration work; this Batch 3 implementation provides pure projection, state, and adapter contracts in the MCP server."
+    selected_profiles:
+      - "ai-enabled"
+      - "baseline-functional"
+      - "data-integrity-migration"
+      - "external-input-security"
+      - "stateful-reliability"
+  scope_tokens:
+    architecture:
+      - "ARCH-FEAT_AGENTSTREAM_ADAPTER"
+      - "ARCH-FEAT_TASK_DERIVATION_BOUNDARY"
+      - "ARCH-FEAT_TASK_EXECUTION_STATE"
+      - "ARCH-FEAT_TASK_GRAPH_SCHEDULER"
+    implementation:
+      - "IMPL-FEAT_AGENTSTREAM_ADAPTER"
+      - "IMPL-FEAT_TASK_DERIVATION"
+      - "IMPL-FEAT_TASK_EXECUTION_STATE"
+      - "IMPL-FEAT_TASK_GRAPH_SCHEDULER"
+    requirements:
+      - "REQ-FEAT_AGENTSTREAM_ADAPTER"
+      - "REQ-FEAT_TASK_DERIVATION"
+      - "REQ-FEAT_TASK_EXECUTION_RECOVERY"
+      - "REQ-FEAT_TASK_GRAPH_SCHEDULING"
+  status: "implemented"
+  test_strategy:
+    composition: "Scheduler projection to Turns, dry-run/live parity, legacy feature-spec delegation."
+    e2e: "not_applicable; no UI or platform-only boundary."
+    unit: "Deterministic derivation, stable identity, source rejection, cycle detection, readiness blockers, recovery transitions, evidence append, stale resume."

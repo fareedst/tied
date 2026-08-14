@@ -15,6 +15,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Feature orchestration foundation through onboarding (batches 0–6)** — Feature
+  manifests, lifecycle and readiness gates, clarifications and constitution,
+  task scheduling and agentstream adapter, generated views, orchestration CLI/MCP,
+  research and feedback boundaries, onboarding delegates, offline compatibility,
+  and migration preview/apply are implemented in `mcp-server/src/feature-orchestration/`
+  with full TIED traceability (CITDP-FEAT-ORCH-BATCH-0..6), adoption docs, and
+  validation evidence. Git integration remains explicitly deferred.
+
 - **Greenfield TIED outreach** — [`docs/tied-greenfield-reddit-post.md`](docs/tied-greenfield-reddit-post.md) provides a first-day workflow walkthrough.
 
 - **Prompt-type Task subagents** — `[REQ-PROMPT_TYPE_SUBAGENT]` / `[ARCH-PROMPT_TYPE_SUBAGENT]` / `[IMPL-PROMPT_TYPE_SUBAGENT]` provide one explicit-only foreground Cursor Task wrapper per leaf prompt type at `.cursor/agents/<prompt-type>.md` in the TIED source repository, plus the `plan-refine-build` sequence orchestrator that Task-launches `plan-new-feature`, then `refine-plan`, then `build-plan`. Implementing and close-out wrappers are writable; `question` and `other` are readonly.

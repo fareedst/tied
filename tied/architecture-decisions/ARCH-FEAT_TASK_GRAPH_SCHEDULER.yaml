@@ -1,0 +1,21 @@
+ARCH-FEAT_TASK_GRAPH_SCHEDULER:
+  alternatives_considered:
+    - cons:
+        - "Cannot represent safe parallelism or cycles"
+      name: "Ordered task list scheduler"
+      pros:
+        - "Simple"
+      rejected_reason: "Roadmap requires dependency-aware scheduling."
+  cross_references:
+    - "IMPL-FEAT_TASK_GRAPH_SCHEDULER"
+    - "REQ-FEAT_TASK_GRAPH_SCHEDULING"
+  decision: "Use explicit dependency edges, structured readiness evidence, and deterministic topological ordering; require clarification and constitution projections to pass before scheduling."
+  description: "A pure graph/readiness boundary validates dependencies, computes stable readiness reasons, rejects unsafe parallel groups, and never infers execution permission from task text or list order."
+  implementation_approach:
+    details:
+      - "Cycle detection returns stable cycle members and edge diagnostics."
+      - "Readiness reasons are structured and sorted."
+      - "Unsafe parallelization rejects shared mutable deliverables, dependency overlap, or missing module validation evidence."
+    summary: "Pure graph validation and readiness projection consumed by an execution adapter."
+  name: "Deterministic task graph scheduler"
+  status: "Active"

@@ -1,0 +1,37 @@
+ARCH-FEAT_OFFLINE_COMPATIBILITY:
+  alternatives_considered:
+    - cons:
+        - "Breaks offline and advanced users"
+      name: "Make onboarding binary mandatory"
+      pros:
+        - "One path"
+      rejected_reason: "Explicit compatibility is a Batch 6 requirement."
+  cross_references:
+    - "REQ-FEAT_OFFLINE_WORKFLOW_PRESERVATION"
+  decision: "Treat feature-orchestrator as an optional adoption surface and retain explicit tied-cli, TIED YAML MCP, agentstream, and documented manual/offline workflows as compatibility paths."
+  implementation_approach:
+    details:
+      - "Do not replace agentstream feature-spec batches."
+      - "Keep tied-cli/TIED YAML MCP terminology distinct from feature-orchestrator."
+      - "Link using-tied-without-mcp.md for manual operation."
+    summary: "Detect capabilities, emit fallback guidance, and never hide direct tooling."
+  name: "Additive offline compatibility boundary"
+  rationale:
+    benefits:
+      - "Graceful capability detection"
+      - "Incremental adoption"
+    problems_solved:
+      - "Hard dependency on Node or MCP"
+      - "Loss of established workflows"
+    why: "Tool availability varies across local and CI environments."
+  related_decisions:
+    depends_on:
+      - "ARCH-FEAT_ORCHESTRATION_BOUNDARY"
+    informs: []
+  status: "Active"
+  traceability:
+    implementation:
+      - "IMPL-FEAT_OFFLINE_FALLBACK"
+    requirements:
+      - "REQ-FEAT_OFFLINE_WORKFLOW_PRESERVATION"
+    tests: []

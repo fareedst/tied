@@ -1,0 +1,38 @@
+ARCH-FEAT_LOCAL_DEFAULT_RESOLUTION:
+  alternatives_considered:
+    - cons:
+        - "Unexpected mutation"
+      name: "Auto-write discovered paths"
+      pros:
+        - "Fewer prompts"
+      rejected_reason: "Explicit configuration ownership is required."
+  cross_references:
+    - "REQ-FEAT_LOCAL_DEFAULTS"
+  decision: "Resolve conventional local defaults through deterministic precedence and report the selected source; never persist inferred configuration without an explicit command."
+  implementation_approach:
+    details:
+      - "Prefer explicit flags and environment values."
+      - "Preserve existing configuration files byte-for-byte unless a dedicated explicit command is used."
+      - "Validate paths and report exact corrective commands."
+    summary: "Discover TIED_MCP_BIN, TIED_BASE_PATH, constitution, and feature directory using local conventions and explicit overrides."
+  name: "Explicit local default resolution"
+  rationale:
+    benefits:
+      - "Reproducible discovery"
+      - "Safe override behavior"
+    problems_solved:
+      - "Hidden environment assumptions"
+      - "Unbounded configuration mutation"
+    why: "Defaults improve first-run ergonomics only when their origin and limits are visible."
+  related_decisions:
+    depends_on:
+      - "ARCH-TIED_STRUCTURE"
+      - "ARCH-TIED_YAML_STYLE_RESOLUTION"
+    informs: []
+  status: "Active"
+  traceability:
+    implementation:
+      - "IMPL-FEAT_LOCAL_DEFAULTS"
+    requirements:
+      - "REQ-FEAT_LOCAL_DEFAULTS"
+    tests: []

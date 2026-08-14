@@ -1,0 +1,114 @@
+CITDP-FEAT-ORCH-BATCH-5:
+  change_definition:
+    current_behavior: "Fidelity research emits read-only candidate findings and case reports; feedback stores basic entries; LEAP queue stores distinct non-canonical proposals, but no structured research-record or source-aware promotion boundary exists."
+    desired_behavior: "Add typed external append-only research records with provenance, alternatives, freshness, and explicit classification; normalize operational feedback, group duplicates, and create reviewed non-canonical LEAP proposals without canonical YAML writes."
+    exclusions:
+      - "Automatic canonical promotion"
+      - "Generated-view redesign"
+      - "Git branches/worktrees"
+      - "Lifecycle or scheduler redesign"
+      - "Migration/onboarding"
+      - "Universal quality ceremony"
+    success_criteria:
+      - "Canonical REQ/ARCH/IMPL writes are rejected by the adapter boundary."
+      - "Duplicate grouping preserves original entries and reviewed promotion uses the existing non-canonical LEAP queue."
+      - "External dataset emission rejects audited project tied/ paths."
+      - "Five research record types normalize with required provenance and ARCH/IMPL reference links."
+      - "Freshness deterministically reports current, stale, or freshness_unknown."
+      - "Incident, metric, test_failure, and user_report sources normalize with evidence and promotion metadata."
+    unchanged_behavior:
+      - "Canonical application remains an explicit human-reviewed TIED YAML operation."
+      - "Existing fidelity research, feedback, and LEAP queue surfaces remain owners."
+      - "Feedback entries remain distinct from non-canonical LEAP proposals."
+  completion_criteria:
+    verification_gate_notes: "tied_verify updated Batch 5 REQ/IMPL statuses; tied_validate_consistency passed after writes."
+  evidence_provenance:
+    focused_tests: "9 passed, 0 failed: 7 Batch 5 unit tests and 2 MCP composition tests."
+    full_mcp_tests: "253 passed, 0 failed."
+    pseudocode_validation: "Both Batch 5 sidecars passed pseudocode_validate with require_contracts=true; structural proof only."
+    tied_validate_consistency: "passed with ok: true after implementation and verification."
+    tied_verify: "updated 2 REQ and 2 IMPL records from passing tests."
+    token_audit: "MCP consistency validation substituted because scripts/validate_tokens.sh is absent in this repository."
+    typescript_build: "npm run build passed."
+    typescript_lint: "ReadLints reported no errors on changed TypeScript files."
+    yaml_index_validation: "requirements, architecture, implementation, and semantic-tokens indexes valid."
+    yaml_lint: "scripts/lint_yaml.sh passed for changed project indexes and Batch 5 detail YAML files."
+  feature_goal: "Provide safe, structured research evidence and human-reviewed operational feedback promotion while preserving canonical TIED ownership."
+  impact_analysis:
+    impl_inventory_notes: "Reused existing fidelity research, feedback storage, and LEAP proposal queue; no duplicate queue or fidelity implementation."
+    modules_or_boundaries: "Research normalizer, freshness evaluator, external dataset boundary, operational adapters, duplicate grouper, reviewed promotion adapter, and MCP composition handlers."
+    tied_tokens_affected:
+      - "ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY"
+      - "ARCH-TIED_RESEARCH_RECORD_BOUNDARY"
+      - "IMPL-TIED_FEEDBACK_PROMOTION"
+      - "IMPL-TIED_RESEARCH_RECORDS"
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-LEAP_PROPOSAL_QUEUE"
+      - "REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION"
+      - "REQ-TIED_RESEARCH_RECORDS"
+  leap_feedback:
+    divergences_from_analysis: "none"
+    record_status: "complete"
+    tied_stack_updates_required: []
+  leap_updates: "none; implementation followed approved Batch 5 IMPL sidecars and no scope-changing divergence was observed."
+  module_validation:
+    duplicate_grouper: "Independent tests cover stable grouping without deleting original feedback."
+    freshness_evaluator: "Independent unit tests cover current, stale, and freshness_unknown deterministic outcomes."
+    operational_source_adapters: "Independent tests cover source normalization and missing evidence for all source contract paths."
+    research_dataset_boundary: "Independent tests cover append-only external emission and audited tied/ rejection."
+    research_record_normalizer: "Independent unit tests cover supported types, required fields, provenance, decision links, classification, and proof boundaries."
+    review_promotion_adapter: "Independent and MCP composition tests cover review-required behavior, non-canonical proposal creation, and canonical-write rejection."
+  record_identity:
+    change_request_id: "CITDP-FEAT-ORCH-BATCH-5"
+    recorded_at: "2026-08-13"
+    title: "Batch 5 research records and operational feedback promotion"
+  remaining_risks:
+    - "Research dataset persistence is JSONL and external to audited TIED YAML; cross-project indexing and retention management remain future work."
+    - "Sensitive incident and user-report payload redaction/retention policy is bounded only by caller-provided evidence links and payload; a deployment-specific security profile is still required before accepting untrusted production payloads."
+    - "The MCP composition surface accepts structured records through runtime validation but does not replace domain-specific source authentication."
+  request_id: "CITDP-FEAT-ORCH-BATCH-5"
+  risk_assessment:
+    deferred_profiles:
+      - "performance-scale-cost"
+      - "regulated-privacy"
+      - "user-facing-accessibility"
+    quality_evidence_matrix:
+      - attribute: "baseline-functional"
+        command_or_test: "npm test; focused Batch 5 tests"
+        proof_boundary: "Unit and composition behavior only"
+        result: "pass"
+      - attribute: "data-integrity-migration"
+        command_or_test: "research boundary and duplicate preservation tests"
+        proof_boundary: "Append-only and no canonical write behavior"
+        result: "pass"
+      - attribute: "external-input-security"
+        command_or_test: "missing evidence, canonical write rejection, tied path rejection tests"
+        proof_boundary: "Boundary checks; no deployment authentication/redaction policy"
+        result: "pass with residual risk"
+      - attribute: "stateful-reliability"
+        command_or_test: "external JSONL append and existing LEAP queue composition tests"
+        proof_boundary: "Local persistence semantics only"
+        result: "pass"
+    residual_risk: "The implemented boundaries prove schema, provenance, freshness, duplicate handling, and no-write behavior, but do not prove runtime product correctness, production security posture, or human approval beyond the supplied review record."
+    selected_profiles:
+      - "baseline-functional"
+      - "data-integrity-migration"
+      - "external-input-security"
+      - "stateful-reliability"
+  scope_tokens:
+    architecture:
+      - "ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY"
+      - "ARCH-TIED_RESEARCH_RECORD_BOUNDARY"
+    implementation:
+      - "IMPL-TIED_FEEDBACK_PROMOTION"
+      - "IMPL-TIED_RESEARCH_RECORDS"
+    requirements:
+      - "REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION"
+      - "REQ-TIED_RESEARCH_RECORDS"
+  status: "implemented"
+  tdd_sequence:
+    summary: "IMPL sidecars and RED tests preceded minimal TypeScript modules; modules were independently validated before MCP composition adapters; full suite and verification gate completed."
+  test_strategy:
+    composition: "MCP handlers for external research emission, operational feedback storage, and reviewed promotion; no UI invocation."
+    e2e: "not_applicable; all Batch 5 bindings are unit- or composition-testable without UI."
+    unit: "Research normalization, freshness, external boundary, source adapters, duplicate grouping, and review gating."

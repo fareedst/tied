@@ -1,0 +1,21 @@
+IMPL-FEAT_CONSTITUTION_STORE:
+  cross_references:
+    - "ARCH-FEAT_CONSTITUTION_STORAGE"
+    - "REQ-FEAT_CONSTITUTION_SCHEMA"
+  decision: "Read, validate, and atomically publish tied/constitution.yaml through the project-owned validated boundary."
+  implementation_approach:
+    details:
+      - "Reject methodology paths and feature-local constitution copies."
+      - "Require amendment compatibility before publication."
+    summary: "Version-aware store separated from feature-local persistence."
+  metadata:
+    last_updated: "2026-08-14"
+  name: "Project constitution store"
+  rationale:
+    why: "Project policy must have explicit ownership and safe revision behavior."
+  status: "Active"
+  traceability:
+    code_locations:
+      - "mcp-server/src/feature-orchestration/constitution.ts"
+    tests:
+      - "mcp-server/src/feature-orchestration/constitution.test.ts"

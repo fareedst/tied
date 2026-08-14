@@ -1,0 +1,61 @@
+tracker:
+  name: "Batch 6 low-friction onboarding and adoption"
+  source: "tied/docs/agent-req-implementation-checklist.yaml"
+  process_token: "PROC-AGENT_REQ_CHECKLIST"
+  invocation: "plan-new-feature"
+status: "implemented"
+citdp_policy: "Post-implementation CITDP persisted through tied-yaml MCP after validation."
+  scope:
+    requirements:
+      - REQ-FEAT_ONBOARDING_COMMANDS
+      - REQ-FEAT_LOCAL_DEFAULTS
+      - REQ-FEAT_READINESS_DIAGNOSTICS
+      - REQ-FEAT_OFFLINE_WORKFLOW_PRESERVATION
+      - REQ-FEAT_LEGACY_MIGRATION
+      - REQ-FEAT_ADOPTION_GUIDANCE
+    architecture:
+      - ARCH-FEAT_ONBOARDING_BOUNDARY
+      - ARCH-FEAT_LOCAL_DEFAULT_RESOLUTION
+      - ARCH-FEAT_READINESS_DIAGNOSTICS
+      - ARCH-FEAT_OFFLINE_COMPATIBILITY
+      - ARCH-FEAT_MIGRATION_PREVIEW
+    implementation:
+      - IMPL-FEAT_ONBOARDING_COMMANDS
+      - IMPL-FEAT_LOCAL_DEFAULTS
+      - IMPL-FEAT_READINESS_DIAGNOSTICS
+      - IMPL-FEAT_OFFLINE_FALLBACK
+      - IMPL-FEAT_MIGRATION_PREVIEW
+      - IMPL-FEAT_MIGRATION_APPLY
+  steps:
+    session-bootstrap: completed
+    translate-sponsor-intent: completed
+    change-definition: completed
+    impact-discovery: completed
+    author-requirement: completed
+    author-architecture: completed
+    catalog-pseudocode-contracts: completed
+    resolve-pseudocode: completed
+    gate-pseudocode-validation: completed
+    persist-implementation-records: completed
+    risk-assessment: completed
+    test-strategy: completed
+    unit-test-red: completed
+    unit-test-green: completed
+    composition-integration: completed
+    end-to-end-ui: not_applicable
+    verification-gate: completed
+    sync-tied-stack: completed
+    persist-citdp-record: completed
+  gates:
+    production_code_changed: true
+    production_tests_changed: true
+    pre_red_pseudocode_validation: passed
+    yaml_index_validation: passed
+    tied_validate_consistency: passed
+    focused_tests: "9/9"
+    full_tests: "262/262"
+    agentstream_tests: "all packages passed"
+    typescript_build: passed
+    pseudocode_validation: passed
+    tied_verify: "6 REQ Implemented, 6 IMPL Active"
+  build_plan_entry: "build-plan: Batch 6 implementation completed; proceed to close-out review"

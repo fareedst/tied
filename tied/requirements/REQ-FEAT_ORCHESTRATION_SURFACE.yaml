@@ -1,0 +1,31 @@
+REQ-FEAT_ORCHESTRATION_SURFACE:
+  category: "Functional"
+  description: "Provide a separate feature orchestration CLI named feature-orchestrator and a parallel MCP surface that delegates canonical REQ/ARCH/IMPL CRUD and validation to existing TIED YAML tooling."
+  name: "Separate orchestration surfaces"
+  priority: "P0"
+  rationale:
+    benefits:
+      - "Clear tool ownership"
+      - "Delegated canonical writes"
+      - "Equivalent CLI and MCP behavior"
+    problems_solved:
+      - "Divergent validation behavior"
+      - "Duplicated YAML CRUD"
+      - "Overloaded tied-cli.sh boundary"
+    why: "Feature workflow UX must remain separate from the YAML CRUD client while preserving one canonical TIED data path."
+  satisfaction_criteria:
+    - criterion: "CLI and MCP return equivalent orchestration results for equivalent inputs."
+    - criterion: "MCP operations delegate REQ/ARCH/IMPL persistence and validation to existing TIED YAML tooling."
+    - criterion: "The executable name is feature-orchestrator and is not implemented as tied-cli.sh or a tied subcommand."
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_ORCHESTRATION_BOUNDARY"
+    implementation:
+      - "IMPL-FEAT_ORCHESTRATION_CLI"
+      - "IMPL-FEAT_ORCHESTRATION_MCP"
+    requirements:
+      - "REQ-FEAT_ORCHESTRATION_SURFACE"
+    tests: []
+  validation_criteria:
+    - method: "Composition contract tests for CLI and MCP delegation."

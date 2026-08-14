@@ -1,0 +1,36 @@
+ARCH-FEAT_MANIFEST_CONTRACT:
+  cross_references:
+    - "REQ-FEAT_MANIFEST_SCHEMA"
+  implementation_approach:
+    details:
+      - "Keep canonical REQ/ARCH/IMPL bodies outside the manifest."
+      - "Require schema_version feature-manifest.v1."
+      - "Separate immutable identity fields from mutable lifecycle and revision fields."
+      - "Use FEAT-NNN identity with slug as directory-safe companion."
+    summary: "Define feature-manifest.v1 as a reference-only YAML contract with stable identity, mode, lifecycle, canonical references, revision, and history fields."
+  name: "Versioned feature manifest contract"
+  rationale:
+    benefits:
+      - "Deterministic normalization"
+      - "Explicit compatibility gate"
+      - "Stable identity"
+    problems_solved:
+      - "Ambiguous revision semantics"
+      - "Embedded source-of-truth copies"
+      - "Unbounded schema evolution"
+    why: "A versioned contract prevents schema churn and duplicate canonical content."
+  related_decisions:
+    depends_on: []
+    informs:
+      - "IMPL-FEAT_MANIFEST_VALIDATOR"
+    see_also: []
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_MANIFEST_CONTRACT"
+    implementation:
+      - "IMPL-FEAT_MANIFEST_VALIDATOR"
+    requirements:
+      - "REQ-FEAT_MANIFEST_SCHEMA"
+    tests:
+      - "manifest_schema_contract_tests"

@@ -1,0 +1,31 @@
+REQ-FEAT_ORCHESTRATION_COMMANDS:
+  category: "Functional"
+  description: "Expose specify, refine, plan, tasks, verify, and close out operations that evaluate and apply the Batch 0 lifecycle contract, report complete feature state, and return the next permitted phase."
+  name: "Feature lifecycle commands"
+  priority: "P0"
+  rationale:
+    benefits:
+      - "Actionable next-phase reporting"
+      - "Resumable workflow"
+      - "Shared Batch 0 semantics"
+    problems_solved:
+      - "Hidden transition rules"
+      - "Manual lifecycle mutation"
+      - "No next-phase guidance"
+    why: "Users need resumable lifecycle operations over the persisted feature manifest."
+  satisfaction_criteria:
+    - criterion: "Each command maps to a documented lifecycle transition or read-only state report."
+    - criterion: "Every response includes current state and next permitted phase."
+    - criterion: "Illegal transitions and unmet gates return stable diagnostics without mutation."
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_ORCHESTRATION_COMMANDS"
+    implementation:
+      - "IMPL-FEAT_ORCHESTRATION_COMMANDS"
+    requirements:
+      - "REQ-FEAT_ORCHESTRATION_COMMANDS"
+    tests: []
+  validation_criteria:
+    - method: "Composition tests for command surface to store and lifecycle engine."
+    - method: "Unit tests for command-to-transition mapping and response contracts."

@@ -1,0 +1,21 @@
+IMPL-FEAT_CONSTITUTION_ANALYZER:
+  cross_references:
+    - "ARCH-FEAT_CONSTITUTION_ANALYZER"
+    - "REQ-FEAT_CONSTITUTION_COMPLIANCE"
+  decision: "Evaluate constitution articles over REQ, ARCH, IMPL, task-plan, and CITDP projections without mutating their canonical records."
+  implementation_approach:
+    details:
+      - "Advisory findings remain visible but do not block unless explicitly configured by the article."
+      - "Required article failures are not suppressed by invalid exceptions."
+    summary: "Scope matching and precedence evaluation over stable artifact projections."
+  metadata:
+    last_updated: "2026-08-14"
+  name: "Constitution compliance analyzer"
+  rationale:
+    why: "Compliance must be reported before implementation while preserving existing ownership and proof boundaries."
+  status: "Active"
+  traceability:
+    code_locations:
+      - "mcp-server/src/feature-orchestration/constitution.ts"
+    tests:
+      - "mcp-server/src/feature-orchestration/constitution.test.ts"

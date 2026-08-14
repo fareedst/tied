@@ -24,6 +24,7 @@
 | 5b | [quality-assurance.md](quality-assurance.md) | Quality assurance, quality attributes, risk tiers, assurance profiles, evidence matrix, evidence provenance, residual risk, waivers, pilots, stop criteria, test adequacy |
 | 5c | [fidelity-research.md](fidelity-research.md) | Fidelity findings, specification state, origin layer, divergent edge, read-only research profile, finding lifecycle, evidence provenance, case reports, fidelity audit |
 | 5d | [prompt-composer.md](prompt-composer.md) | Prompt Composer, prompt type, global prompt skill, prompt-type router, prompt envelope, invocation remainder, linked plan, prompt-shared bundle, client installation, canonical bundle |
+| 5e | [feature-orchestration.md](feature-orchestration.md) | Feature manifest, feature lifecycle, feature orchestration CLI, clarification record, project constitution, task graph, generated view, FEAT identifier, initial-specs migration, `tied/features/` |
 | — | [config-discovery.md](config-discovery.md) | Layered YAML config, project-local layer, exclude_patterns, `(proposed)` terms |
 
 ---

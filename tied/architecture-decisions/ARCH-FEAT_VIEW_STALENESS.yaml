@@ -1,0 +1,51 @@
+ARCH-FEAT_VIEW_STALENESS:
+  alternatives_considered:
+    - cons:
+        - "Obsolete intent can pass review"
+      name: "Treat structurally valid Markdown as current"
+      pros:
+        - "Minimal checking"
+      rejected_reason: "Structural validity does not establish freshness or runtime proof."
+  cross_references:
+    - "IMPL-FEAT_VIEW_STALE_DETECTION"
+    - "REQ-FEAT_VIEW_STALENESS"
+  decision: "Record canonical source revisions or content hashes in generated-view metadata and compare them with current projections; fail in CI and verification by default, while allowing an explicit local warn mode."
+  description: "Staleness is a freshness result over source metadata, separate from TIED consistency, constitution compliance, task readiness, runtime correctness, and quality evidence."
+  detail_file: "architecture-decisions/ARCH-FEAT_VIEW_STALENESS.yaml"
+  implementation_approach:
+    details:
+      - "Mark stale output as non-current-intent and non-runtime-proof evidence."
+      - "Report stale view paths and changed source identities deterministically."
+      - "Use fail for CI/verification and warn only when explicitly requested for local inspection."
+    summary: "Compare per-source revision/hash metadata and apply explicit policy outcomes."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: {}
+    last_updated:
+      author: "AI Agent"
+      date: {}
+      reason: "Batch 4 planning"
+  name: "Explicit stale-view detection boundary"
+  rationale:
+    benefits:
+      - "Clear residual risk"
+      - "Deterministic enforcement"
+    problems_solved:
+      - "Cross-boundary proof claims"
+      - "False freshness"
+    why: "A stale projection can be structurally valid yet materially obsolete."
+  related_decisions:
+    depends_on:
+      - "ARCH-FEAT_VIEW_PROJECTION"
+      - "ARCH-FEAT_VIEW_RENDERING"
+    informs: []
+    see_also: []
+  status: "Active"
+  traceability:
+    code_annotations: []
+    implementation:
+      - "IMPL-FEAT_VIEW_STALE_DETECTION"
+    requirements:
+      - "REQ-FEAT_VIEW_STALENESS"
+    tests: []

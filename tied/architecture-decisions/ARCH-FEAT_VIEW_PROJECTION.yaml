@@ -1,0 +1,53 @@
+ARCH-FEAT_VIEW_PROJECTION:
+  alternatives_considered:
+    - cons:
+        - "Creates competing source"
+      name: "Render directly from Markdown views"
+      pros:
+        - "Simple initial implementation"
+      rejected_reason: "Generated views are outputs and cannot define intent."
+  cross_references:
+    - "IMPL-FEAT_VIEW_PROJECTION"
+    - "REQ-FEAT_VIEW_GENERATION"
+  decision: "Assemble a normalized reference-only view source projection from the feature manifest, Batch 2 clarification and constitution projections, Batch 3 task graph and execution evidence projections, canonical REQ/ARCH/IMPL references, and proof-boundary labels."
+  description: "Generated views consume stable structured projections and preserve ownership of canonical records; they never become a second source of truth."
+  detail_file: "architecture-decisions/ARCH-FEAT_VIEW_PROJECTION.yaml"
+  implementation_approach:
+    details:
+      - "Carry source revisions or hashes for every source contribution."
+      - "Carry token links, evidence links, and proof-boundary labels without copying full canonical bodies."
+      - "Sort unordered collections by canonical identity while preserving semantic order fields."
+    summary: "Normalize references and projection data before selecting view renderers."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: {}
+    last_updated:
+      author: "AI Agent"
+      date: {}
+      reason: "Batch 4 planning"
+  name: "Canonical generated-view source projection"
+  rationale:
+    benefits:
+      - "Shared traceability"
+      - "Stable renderer inputs"
+    problems_solved:
+      - "Canonical body duplication"
+      - "Renderer-specific source drift"
+    why: "A single projection boundary prevents each renderer from inventing its own interpretation of canonical intent."
+  related_decisions:
+    depends_on:
+      - "ARCH-FEAT_CLARIFICATION_BOUNDARY"
+      - "ARCH-FEAT_CONSTITUTION_ANALYZER"
+      - "ARCH-FEAT_MANIFEST_CONTRACT"
+      - "ARCH-FEAT_TASK_DERIVATION_BOUNDARY"
+    informs: []
+    see_also: []
+  status: "Active"
+  traceability:
+    code_annotations: []
+    implementation:
+      - "IMPL-FEAT_VIEW_PROJECTION"
+    requirements:
+      - "REQ-FEAT_VIEW_GENERATION"
+    tests: []

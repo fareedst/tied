@@ -1,0 +1,103 @@
+description: "Per-request tracker copied from tied/docs/agent-req-implementation-checklist.yaml for Batch 3 planning. Mandatory order: token-commented IMPL pseudo-code -> RED tests -> code; this plan gate stops before tests and code."
+request_id: CITDP-FEAT-ORCH-BATCH-3
+feature_goal: "Plan canonical task derivation, deterministic graph scheduling, execution recovery, and an additive agentstream adapter without generated views or Git mutation."
+planning_status: planned
+implementation_gate: "build-plan entry after pseudo-code, YAML, vocabulary, and TIED consistency validation"
+scope_tokens:
+  requirements:
+    - REQ-FEAT_TASK_DERIVATION
+    - REQ-FEAT_TASK_GRAPH_SCHEDULING
+    - REQ-FEAT_TASK_EXECUTION_RECOVERY
+    - REQ-FEAT_AGENTSTREAM_ADAPTER
+  architecture:
+    - ARCH-FEAT_TASK_DERIVATION_BOUNDARY
+    - ARCH-FEAT_TASK_GRAPH_SCHEDULER
+    - ARCH-FEAT_TASK_EXECUTION_STATE
+    - ARCH-FEAT_AGENTSTREAM_ADAPTER
+  implementation:
+    - IMPL-FEAT_TASK_DERIVATION
+    - IMPL-FEAT_TASK_GRAPH_SCHEDULER
+    - IMPL-FEAT_TASK_EXECUTION_STATE
+    - IMPL-FEAT_AGENTSTREAM_ADAPTER
+process_token: "[PROC-AGENT_REQ_CHECKLIST]"
+tracker_source: tied/docs/agent-req-implementation-checklist.yaml
+gates:
+  refine:
+    status: complete
+    evidence: "Sponsor terms resolved to task derivation, task graph, readiness projection, execution evidence history, stale input, unsafe parallelization, and agentstream task adapter."
+  plan:
+    status: complete
+    evidence:
+      citdp_analysis: working/feature-orchestration-batch-3/CITDP-FEAT-ORCH-BATCH-3-analysis.md
+      pseudo_code: "Four Active IMPL sidecars authored with token-commented blocks and contract precision."
+      test_strategy: "RED-first unit strategy, independent module validation, composition tests, no unjustified E2E."
+  implement:
+    status: complete
+    entry_point: "build-plan completed from unit-test-red through module validation and composition parity."
+steps:
+  - id: session-bootstrap
+    status: complete
+    notes: "Rules, principles, routing, matched glossaries, client index, YAML skill, and current Batch 0–2 contracts reviewed."
+  - id: translate-sponsor-intent
+    status: complete
+    notes: "Batch 3 scope and non-goals resolved; no user clarification required."
+  - id: change-definition
+    status: complete
+    notes: "Current/desired behavior, canonical ownership, source projection contract, and non-goals recorded in CITDP analysis."
+  - id: impact-discovery
+    status: complete
+    notes: "Batch 0–2 feature contracts and REQ-GOAGENT-FEATURESPEC-BATCH/agent executor compatibility reviewed."
+  - id: author-requirement
+    status: complete
+    notes: "Four Batch 3 REQ records created through TIED YAML tools."
+  - id: author-architecture
+    status: complete
+    notes: "Four architecture boundaries created; scheduler consumes Batch 2 projections and adapter preserves legacy feature-spec mode."
+  - id: catalog-pseudocode-contracts
+    status: complete
+    notes: "Four IMPL decisions include complete pseudo-code, stable block names, contracts, failure modes, and testability."
+  - id: risk-assessment
+    status: complete
+    notes: "baseline-functional, stateful-reliability, data-integrity-migration, external-input-security, and conditional ai-enabled profiles selected."
+  - id: test-strategy
+    status: complete
+    notes: "RED unit tests, independent module validation, composition parity tests, and E2E boundary decision recorded."
+  - id: gate-pseudocode-validation
+    status: complete
+    notes: "Four pseudocode_validate calls passed with require_contracts=true; structural proof only."
+  - id: apply-token-comments
+    status: complete
+    notes: "Every new pseudo-code block has a REQ/ARCH/IMPL lead comment and How statement."
+  - id: unit-test-red
+    status: complete
+    notes: "RED-first Batch 3 tests cover derivation, graph/readiness, recovery, and adapter contracts."
+  - id: unit-test-green
+    status: complete
+    notes: "TypeScript task graph, execution-state, and agentstream adapter modules pass focused tests."
+  - id: composition-integration
+    status: complete
+    notes: "Dry-run/live schedule parity and legacy feature-spec delegation composition tests pass; existing Go agentstream suite remains green."
+  - id: end-to-end-ui
+    status: pending
+    notes: "Expected not applicable; revisit only for a named platform boundary."
+  - id: verification-gate
+    status: complete
+    notes: "tied_verify updated 4 Batch 3 requirements and 4 implementation decisions from passing evidence."
+  - id: sync-tied-stack
+    status: complete
+    notes: "No LEAP scope change; project TIED records, pseudo-code, code, and tests remain aligned."
+  - id: persist-citdp-record
+    status: complete
+    notes: "Persisted tied/citdp/CITDP-FEAT-ORCH-BATCH-3.yaml with risks, evidence provenance, divergences, and residual risk."
+  - id: traceable-commit
+    status: pending
+    notes: "No commit or push requested or permitted."
+validation_evidence:
+  pseudocode_validate: "4/4 passed with require_contracts=true; structural shape, token linkage, and dependency diagnostics only."
+  yaml_index_validate: "requirements, architecture, implementation, and semantic-tokens all valid."
+  tied_validate_consistency: "ok: true; detail files and pseudo-code token comments included."
+  linter: "No linter errors for edited TypeScript modules and tests."
+  typescript_build: "npm run build passed."
+  focused_tests: "8 passed, 0 failed."
+  full_mcp_tests: "238 passed, 0 failed."
+  agentstream_compatibility: "go test ./... passed."

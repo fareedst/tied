@@ -1,0 +1,13 @@
+REQ-FEAT_CONSTITUTION_COMPLIANCE:
+  category: "Functional"
+  description: "Analyze REQ, ARCH, IMPL, task-plan, and CITDP records against the project constitution before implementation with deterministic diagnostics, precedence, exception expiry, and amendment compatibility."
+  name: "Constitution compliance analysis"
+  priority: "P0"
+  rationale:
+    why: "Constitution failures must be visible before implementation and cannot be hidden by views or CLI overrides."
+  satisfaction_criteria:
+    - criterion: "Constitution compliance remains distinct from TIED consistency, quality evidence, and runtime correctness."
+    - criterion: "Pass, fail, approved-exception, expired-exception, and amendment-incompatibility outcomes are deterministic."
+  status: "Planned"
+  validation_criteria:
+    - method: "Unit and contract tests for rule scope, precedence, diagnostics, exceptions, expiry, and pre-implementation reporting."

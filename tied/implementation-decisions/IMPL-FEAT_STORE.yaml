@@ -1,0 +1,52 @@
+IMPL-FEAT_STORE:
+  code_locations:
+    files:
+      - description: "FeatureStore path resolution, manifest read, deterministic allocation, and atomic publication"
+        path: "mcp-server/src/feature-orchestration/store.ts"
+    functions:
+      - file: "mcp-server/src/feature-orchestration/store.ts"
+        name: "FeatureStore"
+  cross_references:
+    - "ARCH-FEAT_STORE_PERSISTENCE"
+    - "REQ-FEAT_STORE_PERSISTENCE"
+  implementation_approach:
+    details:
+      - "Keep feature manifest references to canonical REQ/ARCH/IMPL records."
+      - "Serialize feature.yaml deterministically."
+      - "Use the same-directory temporary file and atomic rename for publication."
+    summary: "Resolve feature directories beneath tied/features and expose read, create, and atomic publication primitives."
+  metadata:
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Batch 1 implementation evidence"
+  name: "Feature manifest store"
+  rationale:
+    benefits:
+      - "Canonical references remain external"
+      - "Resumable manifests"
+      - "Testable storage boundary"
+    problems_solved:
+      - "Feature state without durable storage"
+      - "Persistence ownership ambiguity"
+    why: "A narrow store module provides deterministic feature-local persistence and a clean seam for orchestration commands."
+  related_decisions:
+    composed_with:
+      - "IMPL-FEAT_ATOMIC_MUTATION"
+    depends_on:
+      - "IMPL-FEAT_MANIFEST_VALIDATOR"
+    see_also: []
+    supersedes: []
+  status: "Active"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_STORE_PERSISTENCE"
+    code_annotations:
+      - "ARCH-FEAT_STORE_PERSISTENCE"
+      - "IMPL-FEAT_STORE"
+      - "REQ-FEAT_STORE_PERSISTENCE"
+    requirements:
+      - "REQ-FEAT_STORE_PERSISTENCE"
+    tests:
+      - "mcp-server/src/feature-orchestration/store.test.ts"

@@ -1,0 +1,30 @@
+REQ-FEAT_FIXTURE_VALIDATION:
+  category: "Tooling"
+  description: "A representative fixture corpus covers greenfield, brownfield, ambiguous, multi-module, multi-approach, stale-view, partial-write, migration, invalid-reference, duplicate-ID, illegal-transition, incomplete-state, and unsupported-version cases."
+  name: "Feature orchestration fixture corpus and validators"
+  priority: "P0"
+  rationale:
+    benefits:
+      - "Regression-ready validator corpus"
+      - "Reviewable contracts"
+      - "Strict TDD inputs"
+    problems_solved:
+      - "Missing migration coverage"
+      - "Non-deterministic rejection behavior"
+      - "Unspecified edge cases"
+    why: "Fixtures make the Batch 0 contracts executable before production implementation begins."
+  satisfaction_criteria:
+    - criterion: "Every named scenario has at least one fixture and expected validator outcome."
+    - criterion: "Fixture validation covers greenfield and brownfield ownership without requiring CLI, MCP, views, or Git state."
+    - criterion: "Validator diagnostics identify stable rejection categories and preserve proof boundaries."
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_FIXTURE_CORPUS"
+    implementation:
+      - "IMPL-FEAT_FIXTURE_VALIDATORS"
+    requirements:
+      - "REQ-FEAT_FIXTURE_VALIDATION"
+    tests:
+      - "fixture_corpus_covers_required_scenarios_REQ_FEAT_FIXTURE_VALIDATION"
+      - "validators_reject_invalid_fixture_REQ_FEAT_FIXTURE_VALIDATION"

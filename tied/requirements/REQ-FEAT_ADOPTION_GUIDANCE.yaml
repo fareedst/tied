@@ -1,0 +1,32 @@
+REQ-FEAT_ADOPTION_GUIDANCE:
+  category: "Functional"
+  description: "Provide concise quickstart and advanced reference guidance that distinguishes greenfield onboarding, brownfield adoption, migration preview, direct TIED tooling, and manual offline operation."
+  name: "Incremental adoption guidance"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Clear capability boundaries"
+      - "Gradual adoption"
+    problems_solved:
+      - "Premature universal replacement"
+      - "Unclear workflow choice"
+    why: "Users need discoverable paths without making the advanced surfaces obsolete."
+  related_requirements:
+    depends_on:
+      - "REQ-FEAT_OFFLINE_WORKFLOW_PRESERVATION"
+      - "REQ-FEAT_ONBOARDING_COMMANDS"
+    related_to: []
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Guidance explicitly preserves advanced tools and does not imply universal replacement."
+    - criterion: "Guidance names the safe default path and links exact corrective commands for blocked prerequisites."
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_ONBOARDING_BOUNDARY"
+    implementation:
+      - "IMPL-FEAT_ONBOARDING_COMMANDS"
+    tests: []
+  validation_criteria:
+    - method: "Documentation contract tests for command names, boundaries, and offline links."
+    - method: "Manual review against the roadmap migration and readiness gates."

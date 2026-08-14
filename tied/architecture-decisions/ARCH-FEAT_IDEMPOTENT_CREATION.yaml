@@ -1,0 +1,45 @@
+ARCH-FEAT_IDEMPOTENT_CREATION:
+  alternatives_considered:
+    - cons:
+        - "Different requests can share titles"
+      name: "Title-based deduplication"
+      pros:
+        - "Simple API"
+      rejected_reason: "The roadmap requires an explicit request key."
+  cross_references:
+    - "REQ-FEAT_IDEMPOTENT_CREATION"
+  decision: "Serialize creation through a request-key lock and durable request-key metadata, returning the existing feature for an exact normalized retry and a deterministic collision for divergent input."
+  implementation_approach:
+    details:
+      - "Normalize request inputs before fingerprinting."
+      - "Release locks after complete publication or cleanup."
+      - "Require a non-empty explicit request key."
+      - "Return existing feature on matching fingerprint."
+      - "Return REQUEST_KEY_COLLISION on mismatch."
+    summary: "Use a canonical request fingerprint and lock-protected request-key index before allocating a feature number."
+  name: "Request-key creation serialization"
+  rationale:
+    benefits:
+      - "Atomic publication"
+      - "Safe replay"
+      - "Stable conflict behavior"
+    problems_solved:
+      - "Concurrent partial creation"
+      - "Duplicate retries"
+      - "Request-key ambiguity"
+    why: "Idempotency must be explicit and concurrency-safe rather than inferred from title or slug."
+  related_decisions:
+    depends_on:
+      - "ARCH-FEAT_IDENTIFIER_ALLOCATION"
+      - "ARCH-FEAT_STORE_PERSISTENCE"
+    informs:
+      - "ARCH-FEAT_REVISION_SAFE_MUTATION"
+    see_also: []
+  status: "Active"
+  traceability:
+    code_annotations: []
+    implementation:
+      - "IMPL-FEAT_IDEMPOTENT_CREATE"
+    requirements:
+      - "REQ-FEAT_IDEMPOTENT_CREATION"
+    tests: []

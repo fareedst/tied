@@ -1,0 +1,21 @@
+ARCH-FEAT_TASK_DERIVATION_BOUNDARY:
+  alternatives_considered:
+    - cons:
+        - "Unstable and non-canonical"
+      name: "Derive from tasks.md prose"
+      pros:
+        - "Human-readable"
+      rejected_reason: "Batch 4 generated views are consumers, not sources."
+  cross_references:
+    - "IMPL-FEAT_TASK_DERIVATION"
+    - "REQ-FEAT_TASK_DERIVATION"
+  decision: "Derive tasks from structured acceptance criteria, architecture module boundaries, implementation blocks/contracts, testability, and selected quality profiles; reject unresolved or invalid sources before graph publication."
+  description: "Task derivation reads canonical REQ, ARCH, IMPL, clarification, constitution, and quality projections and emits reference-preserving task graph entries; it does not own canonical records or generated views."
+  implementation_approach:
+    details:
+      - "Emit the Batch 4 projection contract without rendering Markdown."
+      - "Preserve source_tokens and source revision/hash metadata."
+      - "Require structured deliverables, test_level, and evidence fields."
+    summary: "Pure source projection and deterministic task identity allocation."
+  name: "Canonical task derivation boundary"
+  status: "Active"

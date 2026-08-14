@@ -1,0 +1,37 @@
+ARCH-FEAT_READINESS_DIAGNOSTICS:
+  alternatives_considered:
+    - cons:
+        - "Nondeterministic and unsafe"
+      name: "Infer readiness from prose or command text"
+      pros:
+        - "Low initial effort"
+      rejected_reason: "Existing readiness projections are authoritative."
+  cross_references:
+    - "REQ-FEAT_READINESS_DIAGNOSTICS"
+  decision: "Project Batch 2-4 readiness projections into stable diagnostics that name prerequisite, evidence, phase, and corrective command without mutating state."
+  implementation_approach:
+    details:
+      - "Include corrective command templates without executing them."
+      - "Preserve distinction from tied_validate_consistency and quality evidence."
+      - "Sort diagnostics deterministically by phase and identity."
+    summary: "Adapt existing clarification, constitution, task, and view readiness evidence into stable diagnostics."
+  name: "Deterministic readiness diagnostic boundary"
+  rationale:
+    benefits:
+      - "Actionable blocked-state reports"
+      - "Clear separation of concerns"
+    problems_solved:
+      - "Mixed proof boundaries"
+      - "Unstable error guidance"
+    why: "Readiness is an observable projection, not a second lifecycle or validation engine."
+  related_decisions:
+    depends_on:
+      - "ARCH-FEAT_READINESS_PROJECTION"
+    informs: []
+  status: "Active"
+  traceability:
+    implementation:
+      - "IMPL-FEAT_READINESS_DIAGNOSTICS"
+    requirements:
+      - "REQ-FEAT_READINESS_DIAGNOSTICS"
+    tests: []

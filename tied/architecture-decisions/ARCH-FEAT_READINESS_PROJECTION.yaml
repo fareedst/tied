@@ -1,0 +1,21 @@
+ARCH-FEAT_READINESS_PROJECTION:
+  alternatives_considered:
+    - cons:
+        - "Conflicting state machines"
+      name: "Second Batch 2 lifecycle engine"
+      pros:
+        - "Local implementation"
+      rejected_reason: "Explicit non-goal; Batch 2 supplies readiness projections only."
+  cross_references:
+    - "REQ-FEAT_CLARIFICATION_GATES"
+    - "REQ-FEAT_CONSTITUTION_COMPLIANCE"
+  decision: "Integrate clarification blockers and constitution diagnostics as preconditions/readiness evidence for Batch 1 lifecycle commands without duplicating lifecycle transition evaluation."
+  implementation_approach:
+    details:
+      - "No Batch 3 scheduling or Batch 4 view generation is included."
+      - "Status output must expose blockers rather than hide them."
+    summary: "Adapter consumes existing lifecycle command inputs and returns blockers/evidence."
+  name: "Batch 2 readiness projection"
+  rationale:
+    why: "Batch 1 cannot claim a complete lifecycle workflow until Batch 2 gates pass, while the existing lifecycle engine remains the sole transition authority."
+  status: "Active"

@@ -1,0 +1,32 @@
+REQ-FEAT_OFFLINE_WORKFLOW_PRESERVATION:
+  category: "Functional"
+  description: "Preserve tied-cli, TIED YAML MCP, and documented manual/offline workflows when Node or the MCP binary is unavailable; onboarding must identify and hand off to those workflows."
+  name: "Explicit offline workflow preservation"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Backward compatibility"
+      - "Offline resilience"
+    problems_solved:
+      - "Loss of advanced/manual workflows"
+      - "Tool availability assumptions"
+    why: "Adoption must not strand existing users or require the new binary."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-FEAT_ORCHESTRATION_SURFACE"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Existing tied-cli and agentstream behavior remains available and is not replaced."
+    - criterion: "Missing Node or MCP prerequisites produce an explicit fallback command or manual guide path."
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_OFFLINE_COMPATIBILITY"
+    implementation:
+      - "IMPL-FEAT_OFFLINE_FALLBACK"
+    tests: []
+  validation_criteria:
+    - method: "Composition tests for documented fallback handoff."
+    - method: "Unit tests for capability detection and fallback selection."

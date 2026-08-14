@@ -1,0 +1,31 @@
+REQ-FEAT_ONBOARDING_COMMANDS:
+  category: "Functional"
+  description: "Provide tied init, tied feature new, and tied feature build as safe adoption entry points that delegate to the validated feature orchestration binary and existing lifecycle, readiness, task, and view modules."
+  name: "Safe onboarding commands"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Low-friction adoption"
+      - "Preserved advanced tooling"
+    problems_solved:
+      - "Duplicate lifecycle behavior in wrappers"
+      - "Fragmented entry points"
+    why: "New users need a short governed path without learning internal TIED files."
+  related_requirements:
+    depends_on:
+      - "REQ-FEAT_ORCHESTRATION_COMMANDS"
+    related_to: []
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Commands report exact next action and preserve explicit advanced surfaces."
+    - criterion: "Each top-level command delegates to feature-orchestrator modules and does not implement duplicate lifecycle, scheduler, or YAML semantics."
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_ONBOARDING_BOUNDARY"
+    implementation:
+      - "IMPL-FEAT_ONBOARDING_COMMANDS"
+    tests: []
+  validation_criteria:
+    - method: "Composition tests for top-level command wiring."
+    - method: "Unit tests for command dispatch and delegation boundaries."

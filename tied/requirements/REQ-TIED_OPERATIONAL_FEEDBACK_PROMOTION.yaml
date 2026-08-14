@@ -1,0 +1,47 @@
+REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION:
+  category: "Functional"
+  description: "Extend feedback and LEAP proposal workflows with normalized operational evidence, duplicate grouping, proposed requirements, and explicit human-reviewed promotion without automatic canonical writes."
+  name: "Reviewed operational feedback promotion"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Explicit human review and promotion status"
+      - "Safe separation of feedback, proposals, and canonical YAML"
+      - "Traceable source and evidence links"
+    problems_solved:
+      - "Duplicate reports inflate apparent defect volume."
+      - "Feedback can be mistaken for a reviewed LEAP proposal or canonical requirement."
+      - "Operational evidence arrives in incompatible shapes."
+    why: "Operational incidents, metrics, test failures, and user reports need a controlled path into reviewed LEAP proposals without collapsing feedback and proposals or silently mutating canonical intent."
+  related_requirements:
+    depends_on:
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-LEAP_PROPOSAL_QUEUE"
+      - "REQ-MODULE_VALIDATION"
+    related_to:
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+      - "REQ-TIED_FIDELITY_RESEARCH"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "A reviewed LEAP proposal remains non-canonical and distinct from its source feedback entry."
+    - criterion: "Adapters normalize incidents, metrics, test failures, and user reports into existing feedback entries without losing source provenance."
+    - criterion: "Duplicate grouping is deterministic and does not merge or delete original feedback entries."
+    - criterion: "Feedback entries retain source type, affected feature, severity, evidence links, duplicate group, proposed REQ, and promotion status."
+    - criterion: "Promotion requires explicit human review and never automatically writes project REQ, ARCH, or IMPL YAML."
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY"
+    code_annotations:
+      - "REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION"
+    implementation:
+      - "IMPL-TIED_FEEDBACK_PROMOTION"
+    requirements:
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-LEAP_PROPOSAL_QUEUE"
+    tests: []
+  validation_criteria:
+    - coverage: "Normalization, validation, duplicate grouping, proposal separation, review states, and no-write behavior"
+      method: "Unit and contract tests"
+    - coverage: "Incident, metric, test-failure, and user-report adapter bindings to feedback and LEAP proposal surfaces"
+      method: "Composition tests"

@@ -1,0 +1,31 @@
+REQ-FEAT_IDEMPOTENT_CREATION:
+  category: "Functional"
+  description: "Create a feature idempotently for an explicit request key, returning the original result for repeats and a deterministic collision error for conflicting requests."
+  name: "Idempotent feature creation"
+  priority: "P0"
+  rationale:
+    benefits:
+      - "Auditable request identity"
+      - "Safe retries"
+      - "Stable collision diagnostics"
+    problems_solved:
+      - "Ambiguous concurrent allocation"
+      - "Duplicate features from retries"
+      - "Silent request-key collisions"
+    why: "Retries and concurrent callers must not create duplicate feature packages."
+  satisfaction_criteria:
+    - criterion: "A reused request key with different normalized input returns a deterministic collision error."
+    - criterion: "Concurrent creators serialize allocation and never publish partial manifests."
+    - criterion: "The same request key and normalized request return the existing feature without a second allocation."
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_IDEMPOTENT_CREATION"
+    implementation:
+      - "IMPL-FEAT_IDEMPOTENT_CREATE"
+    requirements:
+      - "REQ-FEAT_IDEMPOTENT_CREATION"
+    tests: []
+  validation_criteria:
+    - method: "Composition tests for concurrent store callers."
+    - method: "Unit tests for repeat, collision, lock contention, and recovery after failed writes."

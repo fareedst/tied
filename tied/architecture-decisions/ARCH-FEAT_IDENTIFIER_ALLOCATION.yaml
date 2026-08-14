@@ -1,0 +1,41 @@
+ARCH-FEAT_IDENTIFIER_ALLOCATION:
+  alternatives_considered:
+    - cons:
+        - "Poor human discoverability"
+      name: "UUID-only allocation"
+      pros:
+        - "Collision resistance"
+      rejected_reason: "Does not satisfy the roadmap's deterministic FEAT numbering contract."
+  cross_references:
+    - "REQ-FEAT_IDENTIFIER_ALLOCATION"
+  decision: "Allocate the lowest unused next FEAT number from feature directories and derive a normalized kebab-case slug from the title."
+  implementation_approach:
+    details:
+      - "Normalize Unicode and separators deterministically."
+      - "Reject empty or unusable slugs."
+      - "Reserve the selected number under the creation lock."
+      - "Scan existing FEAT directories under the store root."
+    summary: "Separate pure title normalization from store-backed number allocation."
+  name: "Deterministic feature allocation"
+  rationale:
+    benefits:
+      - "Predictable paths"
+      - "Readable directories"
+      - "Stable references"
+    problems_solved:
+      - "Random numbering"
+      - "Slug drift"
+    why: "Stable identifiers and paths make retries, diagnostics, and repository review reproducible."
+  related_decisions:
+    depends_on:
+      - "ARCH-FEAT_STORE_PERSISTENCE"
+    informs: []
+    see_also: []
+  status: "Active"
+  traceability:
+    code_annotations: []
+    implementation:
+      - "IMPL-FEAT_IDENTIFIER_ALLOCATOR"
+    requirements:
+      - "REQ-FEAT_IDENTIFIER_ALLOCATION"
+    tests: []

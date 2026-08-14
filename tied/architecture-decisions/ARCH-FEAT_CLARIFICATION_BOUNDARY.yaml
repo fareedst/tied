@@ -1,0 +1,21 @@
+ARCH-FEAT_CLARIFICATION_BOUNDARY:
+  alternatives_considered:
+    - cons:
+        - "Mixes manifest and uncertainty mutation"
+      name: "Embed questions in feature.yaml"
+      pros:
+        - "Fewer files"
+      rejected_reason: "The roadmap explicitly reserves clarifications.yaml as the feature-local sidecar."
+  cross_references:
+    - "REQ-FEAT_CLARIFICATION_GATES"
+    - "REQ-FEAT_CLARIFICATION_RECORDS"
+  decision: "Persist canonical clarification records in each feature directory and expose a pure readiness projection to the existing lifecycle engine."
+  implementation_approach:
+    details:
+      - "Markers are generated views only."
+      - "Revision and affected-scope metadata control stale resolutions."
+    summary: "Separate sidecar store, gate evaluator, and lifecycle adapter."
+  name: "Feature-local clarification boundary"
+  rationale:
+    why: "Keeps uncertainty local and durable while preventing a second lifecycle state machine or duplicate canonical TIED records."
+  status: "Active"

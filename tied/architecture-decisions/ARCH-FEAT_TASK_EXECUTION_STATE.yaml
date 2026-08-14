@@ -1,0 +1,21 @@
+ARCH-FEAT_TASK_EXECUTION_STATE:
+  alternatives_considered:
+    - cons:
+        - "Loses audit history and breaks resume identity"
+      name: "Replace task entry on retry"
+      pros:
+        - "Small state"
+      rejected_reason: "Evidence history is a Batch 3 acceptance criterion."
+  cross_references:
+    - "IMPL-FEAT_TASK_EXECUTION_STATE"
+    - "REQ-FEAT_TASK_EXECUTION_RECOVERY"
+  decision: "Model failure, retry, cancellation, timeout, stale-input, and resume as explicit state transitions with dependent-unlock rules."
+  description: "Task identity and append-only evidence history remain stable across attempts and resumes while execution outcomes remain separate from source task definitions."
+  implementation_approach:
+    details:
+      - "Evidence records retain attempt, outcome, provenance, and timestamps in deterministic order."
+      - "Failed tasks do not satisfy dependencies."
+      - "Resume accepts only matching source revision or explicit stale recovery."
+    summary: "Versioned execution records keyed by stable task_id and source revision."
+  name: "Stable task execution state and evidence"
+  status: "Active"

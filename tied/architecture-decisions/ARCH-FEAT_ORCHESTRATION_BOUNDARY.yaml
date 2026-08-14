@@ -1,0 +1,43 @@
+ARCH-FEAT_ORCHESTRATION_BOUNDARY:
+  alternatives_considered:
+    - cons:
+        - "Contradicts separate-binary requirement"
+      name: "Add tied feature subcommands"
+      pros:
+        - "One binary"
+      rejected_reason: "Roadmap explicitly excludes a tied subcommand and tied-cli.sh overload."
+  cross_references:
+    - "REQ-FEAT_ORCHESTRATION_SURFACE"
+  decision: "Expose feature orchestration through the standalone feature-orchestrator binary and a parallel MCP namespace; route canonical REQ/ARCH/IMPL CRUD and validation to existing TIED YAML tooling."
+  implementation_approach:
+    details:
+      - "Equivalent result schemas across CLI and MCP."
+      - "Exact binary name: feature-orchestrator."
+      - "No duplicate REQ/ARCH/IMPL validators."
+      - "No tied-cli.sh mutation or replacement."
+    summary: "Keep CLI parsing and MCP handlers thin; share orchestration service modules and delegate canonical writes through the existing TIED YAML surface."
+  name: "Separate CLI and delegated MCP boundary"
+  rationale:
+    benefits:
+      - "Equivalent automation surfaces"
+      - "Explicit ownership"
+      - "Reuse of validated tooling"
+    problems_solved:
+      - "Duplicate CRUD"
+      - "Tool boundary confusion"
+      - "Validation drift"
+    why: "The roadmap requires distinct product UX without creating a second canonical YAML implementation."
+  related_decisions:
+    depends_on:
+      - "ARCH-FEAT_ORCHESTRATION_COMMANDS"
+    informs: []
+    see_also: []
+  status: "Active"
+  traceability:
+    code_annotations: []
+    implementation:
+      - "IMPL-FEAT_ORCHESTRATION_CLI"
+      - "IMPL-FEAT_ORCHESTRATION_MCP"
+    requirements:
+      - "REQ-FEAT_ORCHESTRATION_SURFACE"
+    tests: []

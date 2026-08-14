@@ -1,0 +1,21 @@
+REQ-FEAT_AGENTSTREAM_ADAPTER:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-FEAT_AGENTSTREAM_ADAPTER"
+    - "IMPL-FEAT_AGENTSTREAM_ADAPTER"
+    - "REQ-GOAGENT-AGENT-EXECUTOR"
+    - "REQ-GOAGENT-FEATURESPEC-BATCH"
+  description: "Extend existing agentstream execution with task-graph scheduling while preserving ordered feature-spec batch inputs, existing Turn and executor behavior, dry-run parity, and governed TDD sequencing."
+  name: "Additive agentstream task execution adapter"
+  priority: "P0"
+  rationale:
+    problems_solved:
+      - "Dry-run/live divergence"
+      - "Duplicate execution path"
+      - "Feature-spec compatibility regression"
+    why: "Feature orchestration must reuse the validated agentstream surface without breaking existing ordered workflows."
+  satisfaction_criteria:
+    - criterion: "Adapter preserves pseudo-code-before-RED, RED-before-GREEN, module validation before composition, composition before justified E2E, and validation before close-out."
+    - criterion: "Existing feature-spec batch inputs retain ordered behavior and compatibility contract."
+    - criterion: "Task-group dry-run output is the same schedule consumed by live execution."
+  status: "Planned"

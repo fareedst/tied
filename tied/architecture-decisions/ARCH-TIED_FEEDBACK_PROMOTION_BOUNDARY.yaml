@@ -1,0 +1,57 @@
+ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY:
+  alternatives_considered:
+    - cons:
+        - "No human accountability"
+        - "Pollutes intent"
+      name: "Automatic canonical promotion"
+      pros:
+        - "Fast updates"
+      rejected_reason: "Promotion requires human review."
+    - cons:
+        - "Breaks feedback contract"
+        - "Loses source history"
+      name: "Replace feedback with proposals"
+      pros:
+        - "One artifact type"
+      rejected_reason: "Feedback and proposals remain distinct."
+  decision: "Extend existing feedback and LEAP proposal surfaces through additive adapters and a human-review boundary; feedback entries, non-canonical proposals, and canonical TIED records remain distinct with no automatic project YAML writes."
+  implementation_approach:
+    details:
+      - "Canonical REQ/ARCH/IMPL writes remain separate explicit TIED YAML actions."
+      - "Create a non-canonical proposal only after explicit review."
+      - "Normalize incident, metric, test_failure, and user_report sources with affected feature, severity, evidence links, duplicate group, proposed REQ, and promotion status."
+      - "Preserve original feedback entries and link duplicates."
+      - "Require reviewer identity, decision, rationale, and evidence before canonical application."
+    summary: "Add source-aware feedback metadata and adapters, deterministic duplicate grouping, and an explicit handoff into the existing non-canonical LEAP proposal queue."
+  name: "Operational feedback and reviewed promotion boundary"
+  rationale:
+    benefits:
+      - "Additive compatibility"
+      - "Explicit review"
+      - "Stable provenance"
+    problems_solved:
+      - "Automatic mutation"
+      - "Duplicate reports"
+      - "Source fragmentation"
+    why: "Operational evidence needs a safe path into reviewed governance."
+  related_decisions:
+    depends_on:
+      - "ARCH-FEEDBACK_STORAGE"
+      - "ARCH-LEAP_PROPOSAL_QUEUE"
+    informs:
+      - "IMPL-TIED_FEEDBACK_PROMOTION"
+    see_also:
+      - "ARCH-TIED_FIDELITY_RESEARCH"
+    supersedes: []
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-FEEDBACK_STORAGE"
+      - "ARCH-LEAP_PROPOSAL_QUEUE"
+    code_annotations:
+      - "ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY"
+    implementation:
+      - "IMPL-TIED_FEEDBACK_PROMOTION"
+    requirements:
+      - "REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION"
+    tests: []

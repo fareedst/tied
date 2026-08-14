@@ -1,0 +1,50 @@
+IMPL-FEAT_MANIFEST_VALIDATOR:
+  code_locations:
+    files:
+      - description: "Planned pure manifest validator; no production code in this Plan gate."
+        path: "TBD: Batch 0 implementation module"
+    functions: []
+  cross_references:
+    - "ARCH-FEAT_MANIFEST_CONTRACT"
+    - "REQ-FEAT_MANIFEST_SCHEMA"
+  implementation_approach:
+    details:
+      - "Expose named rejection categories for fixtures."
+      - "Normalize deterministic comparison fields while excluding timestamps from identity unless the contract explicitly marks them."
+      - "Reject embedded canonical bodies and unsupported versions."
+      - "Validate schema_version, FEAT-NNN identity, slug, mode, lifecycle, references, revision, and history."
+    summary: "Parse, validate, normalize, and return feature-manifest.v1 values without writing files or canonical TIED records."
+  metadata:
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Batch 0 Plan gate sidecar"
+  name: "Feature manifest schema validator"
+  rationale:
+    benefits:
+      - "No side effects"
+      - "Stable diagnostics"
+      - "Unit-testable contract"
+    problems_solved:
+      - "Duplicate source of truth"
+      - "Unstable identity and revision handling"
+      - "Unsupported versions"
+    why: "A pure validator gives the manifest contract deterministic acceptance and rejection before persistence or orchestration."
+  related_decisions:
+    depends_on: []
+    see_also:
+      - "IMPL-FEAT_REFERENCE_LINKER"
+    supersedes: []
+  status: "Active"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_MANIFEST_CONTRACT"
+    code_annotations:
+      - "ARCH-FEAT_MANIFEST_CONTRACT"
+      - "IMPL-FEAT_MANIFEST_VALIDATOR"
+      - "REQ-FEAT_MANIFEST_SCHEMA"
+    requirements:
+      - "REQ-FEAT_MANIFEST_SCHEMA"
+    tests:
+      - "manifest_schema_contract_tests"

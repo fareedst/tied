@@ -1,0 +1,41 @@
+ARCH-FEAT_STORE_PERSISTENCE:
+  alternatives_considered:
+    - cons:
+        - "Mixes orchestration and canonical records"
+      name: "Store feature state in canonical TIED indexes"
+      pros:
+        - "One location"
+      rejected_reason: "Violates the roadmap boundary between orchestration manifests and canonical TIED YAML."
+  cross_references:
+    - "REQ-FEAT_STORE_PERSISTENCE"
+  decision: "Use tied/features/<feature-directory>/feature.yaml as the feature orchestration persistence boundary while retaining canonical REQ/ARCH/IMPL records in their existing stores."
+  implementation_approach:
+    details:
+      - "Keep REQ/ARCH/IMPL bodies referenced, not copied."
+      - "Read and write feature.yaml through atomic store operations."
+      - "Resolve feature directory beneath tied/features."
+    summary: "Define a store interface around feature-local manifests and canonical reference fields."
+  name: "Feature-local manifest store"
+  rationale:
+    benefits:
+      - "Clear ownership"
+      - "Existing-project compatibility"
+      - "Stable paths"
+    problems_solved:
+      - "Mixed persistence ownership"
+      - "Unresumable feature state"
+    why: "Feature-local state needs a durable package boundary without duplicating canonical TIED data."
+  related_decisions:
+    depends_on:
+      - "ARCH-FEAT_MANIFEST_CONTRACT"
+    informs:
+      - "ARCH-FEAT_REVISION_SAFE_MUTATION"
+    see_also: []
+  status: "Active"
+  traceability:
+    code_annotations: []
+    implementation:
+      - "IMPL-FEAT_STORE"
+    requirements:
+      - "REQ-FEAT_STORE_PERSISTENCE"
+    tests: []

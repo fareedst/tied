@@ -1,0 +1,28 @@
+REQ-FEAT_IDENTIFIER_ALLOCATION:
+  category: "Functional"
+  description: "Allocate the next deterministic zero-padded feature identifier and generate a canonical slug and feature directory name from the requested title."
+  name: "Deterministic feature identifiers"
+  priority: "P0"
+  rationale:
+    benefits:
+      - "Canonical slugs"
+      - "Deterministic allocation"
+      - "Stable FEAT identifiers"
+    problems_solved:
+      - "Inconsistent feature directory names"
+      - "Non-reproducible feature numbering"
+    why: "Feature packages need stable identifiers and paths for reproducible tooling and human discovery."
+  satisfaction_criteria:
+    - criterion: "Allocation scans existing feature directories and returns the deterministic next identifier."
+    - criterion: "Equivalent titles normalize to the same slug under the documented normalization rules."
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_IDENTIFIER_ALLOCATION"
+    implementation:
+      - "IMPL-FEAT_IDENTIFIER_ALLOCATOR"
+    requirements:
+      - "REQ-FEAT_IDENTIFIER_ALLOCATION"
+    tests: []
+  validation_criteria:
+    - method: "Unit tests for numbering, normalization, reserved characters, and empty-title rejection."

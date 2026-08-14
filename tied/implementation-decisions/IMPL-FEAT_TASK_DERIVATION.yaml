@@ -1,0 +1,54 @@
+IMPL-FEAT_TASK_DERIVATION:
+  code_locations:
+    files: []
+    functions: []
+  cross_references:
+    - "ARCH-FEAT_TASK_DERIVATION_BOUNDARY"
+    - "REQ-FEAT_TASK_DERIVATION"
+  detail_file: "implementation-decisions/IMPL-FEAT_TASK_DERIVATION.yaml"
+  implementation_approach:
+    details:
+      - "Derive task_id from canonical source identity plus deterministic role, never from list position."
+      - "Emit task schema fields task_id, source_tokens, depends_on, deliverables, test_level, parallel_group, status, evidence, and source_revision."
+      - "Reject unresolved source references and malformed contracts before output."
+    summary: "Pure deterministic derivation from canonical acceptance, boundary, implementation, testability, and quality projections."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-13"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Batch 3 plan gate"
+  name: "Task derivation and source projection"
+  rationale:
+    benefits:
+      - "Batch 4-compatible source projection"
+      - "Stable task identity"
+    problems_solved:
+      - "Projection drift"
+      - "Prose-driven tasks"
+      - "Untraceable deliverables"
+    why: "Derive executable tasks from canonical structured intent while preserving ownership."
+  related_decisions:
+    depends_on:
+      - "IMPL-FEAT_CLARIFICATION_GATE"
+      - "IMPL-FEAT_CONSTITUTION_ANALYZER"
+      - "IMPL-FEAT_REFERENCE_LINKER"
+    see_also:
+      - "IMPL-QUALITY_TEST_ADEQUACY"
+    supersedes: []
+  status: "Active"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_TASK_DERIVATION_BOUNDARY"
+    code_annotations:
+      - "ARCH-FEAT_TASK_DERIVATION_BOUNDARY"
+      - "IMPL-FEAT_TASK_DERIVATION"
+      - "REQ-FEAT_TASK_DERIVATION"
+    requirements:
+      - "REQ-FEAT_TASK_DERIVATION"
+    tests:
+      - "task_derivation_determinism_REQ_FEAT_TASK_DERIVATION"
+      - "task_source_projection_contract_REQ_FEAT_TASK_DERIVATION"

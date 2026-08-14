@@ -1,0 +1,48 @@
+REQ-FEAT_VIEW_STALENESS:
+  category: "Functional"
+  cross_references:
+    - "ARCH-FEAT_VIEW_STALENESS"
+    - "IMPL-FEAT_VIEW_STALE_DETECTION"
+  description: "Record source revision or content-hash metadata in every generated view and deterministically detect stale output after canonical inputs change, with explicit fail and warn policies; stale views never count as current intent or runtime proof."
+  detail_file: "requirements/REQ-FEAT_VIEW_STALENESS.yaml"
+  metadata:
+    created:
+      author: "AI Agent"
+      date: {}
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Batch 4 implementation and focused tests"
+  name: "Deterministic stale-view detection and policy"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Actionable freshness diagnostics"
+      - "Safe CI enforcement"
+    problems_solved:
+      - "Proof-boundary confusion"
+      - "Silent view staleness"
+    why: "Committed projections must not be mistaken for current canonical intent after source changes."
+  related_requirements:
+    depends_on:
+      - "REQ-FEAT_VIEW_DETERMINISM"
+      - "REQ-FEAT_VIEW_GENERATION"
+  satisfaction_criteria:
+    - criterion: "CI and verification fail deterministically while local inspection can warn explicitly."
+    - criterion: "Current-input mismatch identifies exactly which views are stale."
+    - criterion: "Source revisions or hashes identify the canonical inputs used for each view."
+    - criterion: "Stale output is excluded from current-intent and runtime-correctness evidence."
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_VIEW_STALENESS"
+    code_annotations: []
+    implementation:
+      - "IMPL-FEAT_VIEW_STALE_DETECTION"
+    tests:
+      - "mcp-server/src/feature-orchestration/views.test.ts"
+  validation_criteria:
+    - coverage: "Revision and hash mismatch paths"
+      method: "Stale detection tests"
+    - coverage: "Fail and warn modes"
+      method: "Policy tests"

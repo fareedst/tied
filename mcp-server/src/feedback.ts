@@ -19,6 +19,14 @@ export interface FeedbackEntry {
   description: string;
   context?: Record<string, unknown>;
   created_at: string;
+  source_type?: "incident" | "metric" | "test_failure" | "user_report";
+  source_id?: string;
+  affected_feature?: string;
+  severity?: string;
+  evidence_links?: string[];
+  duplicate_group?: string;
+  proposed_req?: string;
+  promotion_status?: "promotion_pending" | "proposal_created" | "canonical_ready" | "rejected" | "duplicate";
 }
 
 export interface FeedbackData {
@@ -71,6 +79,14 @@ export interface AppendEntryParams {
   title: string;
   description: string;
   context?: Record<string, unknown>;
+  source_type?: FeedbackEntry["source_type"];
+  source_id?: string;
+  affected_feature?: string;
+  severity?: string;
+  evidence_links?: string[];
+  duplicate_group?: string;
+  proposed_req?: string;
+  promotion_status?: FeedbackEntry["promotion_status"];
 }
 
 export interface AppendEntryResult {
@@ -112,6 +128,14 @@ export function appendEntry(
   if (context !== undefined && context !== null && typeof context === "object") {
     entry.context = context as Record<string, unknown>;
   }
+  if (params.source_type) entry.source_type = params.source_type;
+  if (params.source_id) entry.source_id = params.source_id;
+  if (params.affected_feature) entry.affected_feature = params.affected_feature;
+  if (params.severity) entry.severity = params.severity;
+  if (params.evidence_links) entry.evidence_links = [...params.evidence_links];
+  if (params.duplicate_group) entry.duplicate_group = params.duplicate_group;
+  if (params.proposed_req) entry.proposed_req = params.proposed_req;
+  if (params.promotion_status) entry.promotion_status = params.promotion_status;
   const data = loadFeedback(basePath);
   data.entries.push(entry);
   const filePath = getFeedbackPath(basePath);

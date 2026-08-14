@@ -1,0 +1,44 @@
+IMPL-FEAT_MIGRATION_PREVIEW:
+  code_locations:
+    files: []
+    functions: []
+  cross_references:
+    - "ARCH-FEAT_MIGRATION_PREVIEW"
+    - "REQ-FEAT_LEGACY_MIGRATION"
+  implementation_approach:
+    details:
+      - "Accept prompts/initial-specs.yaml and equivalent feature-spec batch inputs."
+      - "Consume ordered agentstream batches as source evidence, not replacement manifests."
+      - "Detect duplicate identifiers, conflicting ownership, unsupported records, and ordering ambiguity."
+      - "Emit preview, conflict, source-order, and no-write metadata."
+    summary: "Parse legacy feature-spec and ordered agentstream inputs, normalize candidates, preserve order, and emit a stable conflict report without writes."
+  name: "Deterministic migration preview and conflict report"
+  rationale:
+    benefits:
+      - "Dry-run safety"
+      - "Reproducible review"
+    problems_solved:
+      - "Legacy schema ambiguity"
+      - "Ordering loss"
+      - "Silent conflict resolution"
+    why: "Migration must be reviewable and deterministic before any persistence."
+  related_decisions:
+    depends_on:
+      - "IMPL-FEAT_AGENTSTREAM_ADAPTER"
+      - "IMPL-FEAT_IDENTIFIER_ALLOCATOR"
+      - "IMPL-FEAT_MANIFEST_VALIDATOR"
+      - "IMPL-FEAT_REFERENCE_LINKER"
+    see_also: []
+    supersedes: []
+  status: "Active"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_MIGRATION_PREVIEW"
+    code_annotations:
+      - "ARCH-FEAT_MIGRATION_PREVIEW"
+      - "IMPL-FEAT_MIGRATION_PREVIEW"
+      - "REQ-FEAT_LEGACY_MIGRATION"
+    requirements:
+      - "REQ-FEAT_LEGACY_MIGRATION"
+    tests: []

@@ -1,0 +1,49 @@
+ARCH-FEAT_MIGRATION_PREVIEW:
+  alternatives_considered:
+    - cons:
+        - "Data loss and hidden behavior changes"
+      name: "In-place automatic migration"
+      pros:
+        - "Fast"
+      rejected_reason: "No silent migration is permitted."
+    - cons:
+        - "Competing source of truth"
+      name: "Convert Markdown generated views as source"
+      pros:
+        - "Convenient"
+      rejected_reason: "Views are not canonical intent."
+  cross_references:
+    - "REQ-FEAT_LEGACY_MIGRATION"
+  decision: "Normalize legacy feature-spec and ordered agentstream inputs into a non-mutating migration preview, then require explicit confirmation for backup-protected atomic publication."
+  implementation_approach:
+    details:
+      - "Keep project-owned REQ/ARCH/IMPL YAML unchanged."
+      - "Preserve ordered source records and report any ordering ambiguity."
+      - "Reject branch/worktree creation and automatic canonical promotion."
+      - "Use deterministic conflict identities and stable report ordering."
+    summary: "Separate preview, conflict reporting, confirmation, backup, apply, and rollback modules."
+  name: "Review-first legacy migration boundary"
+  rationale:
+    benefits:
+      - "Backup and rollback"
+      - "Deterministic review"
+      - "Project YAML preservation"
+    problems_solved:
+      - "Irrecoverable partial writes"
+      - "Order loss"
+      - "Silent migration"
+    why: "Brownfield adoption must preserve source ownership, ordering, and recoverability."
+  related_decisions:
+    depends_on:
+      - "ARCH-FEAT_AGENTSTREAM_ADAPTER"
+      - "ARCH-FEAT_MANIFEST_CONTRACT"
+      - "ARCH-FEAT_STORE_PERSISTENCE"
+    informs: []
+  status: "Active"
+  traceability:
+    implementation:
+      - "IMPL-FEAT_MIGRATION_APPLY"
+      - "IMPL-FEAT_MIGRATION_PREVIEW"
+    requirements:
+      - "REQ-FEAT_LEGACY_MIGRATION"
+    tests: []

@@ -1,0 +1,36 @@
+ARCH-FEAT_LIFECYCLE_STATE_MACHINE:
+  cross_references:
+    - "REQ-FEAT_LIFECYCLE"
+  implementation_approach:
+    details:
+      - "Abandoned is terminal and only allowed from explicitly documented non-terminal states."
+      - "Legal path: draft → refining → specified → planned → tasked → verifying → closed."
+      - "Revision increments only on accepted state changes."
+      - "Transition evaluation is pure over manifest state and validation evidence."
+    summary: "Represent the persisted lifecycle as a finite transition matrix from draft through closed, with abandoned terminal, preconditions, blocked-state derivation, and human approval markers."
+  name: "Feature lifecycle transition matrix"
+  rationale:
+    benefits:
+      - "Auditable gates"
+      - "Deterministic state changes"
+      - "Resumable workflow"
+    problems_solved:
+      - "Illegal transitions"
+      - "Implicit readiness"
+      - "Unowned approval points"
+    why: "Lifecycle state must be explicit and machine-checkable before command surfaces exist."
+  related_decisions:
+    depends_on: []
+    informs:
+      - "IMPL-FEAT_LIFECYCLE_ENGINE"
+    see_also: []
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_LIFECYCLE_STATE_MACHINE"
+    implementation:
+      - "IMPL-FEAT_LIFECYCLE_ENGINE"
+    requirements:
+      - "REQ-FEAT_LIFECYCLE"
+    tests:
+      - "lifecycle_transition_matrix_tests"

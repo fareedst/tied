@@ -1,0 +1,55 @@
+IMPL-FEAT_ATOMIC_MUTATION:
+  code_locations:
+    files:
+      - description: "Feature mutation lock, compare-and-swap revision, validation, and atomic replacement"
+        path: "mcp-server/src/feature-orchestration/store.ts"
+    functions:
+      - file: "mcp-server/src/feature-orchestration/store.ts"
+        name: "FeatureStore.mutate"
+  cross_references:
+    - "ARCH-FEAT_REVISION_SAFE_MUTATION"
+    - "REQ-FEAT_REVISION_SAFE_MUTATION"
+  implementation_approach:
+    details:
+      - "Increment revision only after accepted mutation."
+      - "Preserve old file when serialization or replacement fails."
+      - "Reject stale revision before candidate publication."
+      - "Return next permitted phase from resulting state."
+    summary: "Lock, read, compare expected revision, validate candidate, write a same-directory temporary file, atomically replace, and derive next phase."
+  metadata:
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Batch 1 implementation evidence"
+  name: "Revision-safe atomic mutation"
+  rationale:
+    benefits:
+      - "Crash-safe writes"
+      - "Deterministic stale errors"
+      - "Exact revision accounting"
+    problems_solved:
+      - "Incorrect revision reporting"
+      - "Lost updates"
+      - "Truncated manifests"
+    why: "Compare-and-swap plus atomic publication protects manifest integrity and makes stale writes deterministic."
+  related_decisions:
+    composed_with:
+      - "IMPL-FEAT_ORCHESTRATION_COMMANDS"
+    depends_on:
+      - "IMPL-FEAT_LIFECYCLE_ENGINE"
+      - "IMPL-FEAT_STORE"
+    see_also: []
+    supersedes: []
+  status: "Active"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_REVISION_SAFE_MUTATION"
+    code_annotations:
+      - "ARCH-FEAT_REVISION_SAFE_MUTATION"
+      - "IMPL-FEAT_ATOMIC_MUTATION"
+      - "REQ-FEAT_REVISION_SAFE_MUTATION"
+    requirements:
+      - "REQ-FEAT_REVISION_SAFE_MUTATION"
+    tests:
+      - "mcp-server/src/feature-orchestration/store.test.ts"

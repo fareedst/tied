@@ -1,0 +1,56 @@
+IMPL-FEAT_IDEMPOTENT_CREATE:
+  code_locations:
+    files:
+      - description: "Request-key lock, fingerprint, retry, collision, and complete publication"
+        path: "mcp-server/src/feature-orchestration/store.ts"
+    functions:
+      - file: "mcp-server/src/feature-orchestration/store.ts"
+        name: "FeatureStore.createIdempotently"
+  cross_references:
+    - "ARCH-FEAT_IDEMPOTENT_CREATION"
+    - "REQ-FEAT_IDEMPOTENT_CREATION"
+  implementation_approach:
+    details:
+      - "Clean up uncommitted reservations on failure."
+      - "Compute deterministic fingerprint from normalized title and initial references."
+      - "Require explicit request_key."
+      - "Return existing feature for matching key and fingerprint."
+      - "Return REQUEST_KEY_COLLISION for mismatch."
+    summary: "Normalize the request, acquire a request-key lock, compare durable request metadata, allocate if absent, publish fully, and release the lock."
+  metadata:
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Batch 1 implementation evidence"
+  name: "Idempotent feature creation"
+  rationale:
+    benefits:
+      - "Atomic request ownership"
+      - "Safe retries"
+      - "Stable collision errors"
+    problems_solved:
+      - "Concurrent allocation races"
+      - "Duplicate creation"
+      - "Partial package publication"
+    why: "A request-key fingerprint and lock-protected index make retries safe and collisions deterministic."
+  related_decisions:
+    composed_with:
+      - "IMPL-FEAT_ATOMIC_MUTATION"
+    depends_on:
+      - "IMPL-FEAT_IDENTIFIER_ALLOCATOR"
+      - "IMPL-FEAT_STORE"
+    see_also: []
+    supersedes: []
+  status: "Active"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_IDEMPOTENT_CREATION"
+    code_annotations:
+      - "ARCH-FEAT_IDEMPOTENT_CREATION"
+      - "IMPL-FEAT_IDEMPOTENT_CREATE"
+      - "REQ-FEAT_IDEMPOTENT_CREATION"
+    requirements:
+      - "REQ-FEAT_IDEMPOTENT_CREATION"
+    tests:
+      - "mcp-server/src/feature-orchestration/store.test.ts"

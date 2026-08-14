@@ -1,0 +1,44 @@
+ARCH-FEAT_REVISION_SAFE_MUTATION:
+  alternatives_considered:
+    - cons:
+        - "Can expose truncated manifests"
+      name: "In-place YAML rewrite"
+      pros:
+        - "Fewer filesystem operations"
+      rejected_reason: "Does not meet the roadmap's partial-write requirement."
+  cross_references:
+    - "REQ-FEAT_REVISION_SAFE_MUTATION"
+  decision: "Treat each mutation as an expected-revision compare-and-swap followed by atomic temporary-file publication and deterministic next-phase derivation."
+  implementation_approach:
+    details:
+      - "Increment revision once on accepted mutation."
+      - "Reject stale expected_revision before any write."
+      - "Rename atomically only after serialization succeeds."
+      - "Use a lock for compare-and-swap and publication."
+      - "Write and flush a temporary file in the same directory."
+    summary: "Validate revision before mutation, write a complete candidate, atomically replace the manifest, then report the next allowed phase."
+  name: "Revision-checked atomic publication"
+  rationale:
+    benefits:
+      - "Auditable revisions"
+      - "Crash-safe publication"
+      - "Deterministic concurrency errors"
+    problems_solved:
+      - "Lost updates"
+      - "Partial writes"
+      - "Stale state reporting"
+    why: "Lifecycle commands must be safe under retries, concurrent writers, and process interruption."
+  related_decisions:
+    depends_on:
+      - "ARCH-FEAT_LIFECYCLE_STATE_MACHINE"
+      - "ARCH-FEAT_STORE_PERSISTENCE"
+    informs: []
+    see_also: []
+  status: "Active"
+  traceability:
+    code_annotations: []
+    implementation:
+      - "IMPL-FEAT_ATOMIC_MUTATION"
+    requirements:
+      - "REQ-FEAT_REVISION_SAFE_MUTATION"
+    tests: []

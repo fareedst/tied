@@ -1,0 +1,55 @@
+IMPL-FEAT_TASK_GRAPH_SCHEDULER:
+  code_locations:
+    files: []
+    functions: []
+  cross_references:
+    - "ARCH-FEAT_TASK_GRAPH_SCHEDULER"
+    - "REQ-FEAT_TASK_GRAPH_SCHEDULING"
+  detail_file: "implementation-decisions/IMPL-FEAT_TASK_GRAPH_SCHEDULER.yaml"
+  implementation_approach:
+    details:
+      - "Detect cycles with stable node and edge ordering."
+      - "Reject parallel groups with dependency overlap, shared mutable deliverables, or incomplete module evidence."
+      - "Use structured readiness reasons and never task prose or list position."
+    summary: "Pure graph validator and readiness projector consumed by execution surfaces."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-13"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Batch 3 plan gate"
+  name: "Task graph validation and readiness scheduler"
+  rationale:
+    benefits:
+      - "Explainable blockers"
+      - "Stable schedule"
+    problems_solved:
+      - "Cycle ambiguity"
+      - "Text-based readiness"
+      - "Unsafe parallel groups"
+    why: "Explicit graph semantics make cycles, readiness, and safe parallelism deterministic."
+  related_decisions:
+    depends_on:
+      - "IMPL-FEAT_CLARIFICATION_GATE"
+      - "IMPL-FEAT_CONSTITUTION_ANALYZER"
+      - "IMPL-FEAT_TASK_DERIVATION"
+    see_also:
+      - "IMPL-MODULE_VALIDATION"
+    supersedes: []
+  status: "Active"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_TASK_GRAPH_SCHEDULER"
+    code_annotations:
+      - "ARCH-FEAT_TASK_GRAPH_SCHEDULER"
+      - "IMPL-FEAT_TASK_GRAPH_SCHEDULER"
+      - "REQ-FEAT_TASK_GRAPH_SCHEDULING"
+    requirements:
+      - "REQ-FEAT_TASK_GRAPH_SCHEDULING"
+    tests:
+      - "scheduler_explains_readiness_REQ_FEAT_TASK_GRAPH_SCHEDULING"
+      - "scheduler_rejects_unsafe_parallelism_REQ_FEAT_TASK_GRAPH_SCHEDULING"
+      - "task_graph_rejects_cycles_REQ_FEAT_TASK_GRAPH_SCHEDULING"

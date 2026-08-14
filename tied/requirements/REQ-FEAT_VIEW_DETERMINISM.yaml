@@ -1,0 +1,46 @@
+REQ-FEAT_VIEW_DETERMINISM:
+  category: "Non-Functional"
+  cross_references:
+    - "ARCH-FEAT_VIEW_RENDERING"
+    - "IMPL-FEAT_VIEW_RENDERER"
+  description: "Equivalent canonical feature inputs produce byte-stable generated views, unchanged-input regeneration produces no diff, and semantic comparison distinguishes meaning from permitted formatting differences without dropping source metadata or links."
+  detail_file: "requirements/REQ-FEAT_VIEW_DETERMINISM.yaml"
+  metadata:
+    created:
+      author: "AI Agent"
+      date: {}
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Batch 4 implementation and focused tests"
+  name: "Deterministic generated-view rendering and comparison"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Precise change review"
+      - "Reproducible output"
+    problems_solved:
+      - "Formatting churn"
+      - "Unclear view equivalence"
+    why: "Committed views are useful only when regeneration is reviewable and noise-free."
+  related_requirements:
+    depends_on:
+      - "REQ-FEAT_VIEW_GENERATION"
+  satisfaction_criteria:
+    - criterion: "Canonically equivalent inputs render identical bytes."
+    - criterion: "Regenerating unchanged inputs produces no diff."
+    - criterion: "Semantic comparison reports meaningful changes while preserving source metadata."
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_VIEW_RENDERING"
+    code_annotations: []
+    implementation:
+      - "IMPL-FEAT_VIEW_RENDERER"
+    tests:
+      - "mcp-server/src/feature-orchestration/views.test.ts"
+  validation_criteria:
+    - coverage: "All supported view kinds"
+      method: "Deterministic rendering tests"
+    - coverage: "Formatting-only and meaningful changes"
+      method: "Semantic comparison tests"

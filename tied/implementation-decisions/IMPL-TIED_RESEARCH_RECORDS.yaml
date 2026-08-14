@@ -1,0 +1,72 @@
+IMPL-TIED_RESEARCH_RECORDS:
+  code_locations:
+    files:
+      - description: "Research record normalization, freshness, and external dataset boundary"
+        path: "mcp-server/src/research-records.ts"
+      - description: "Research record unit validation"
+        path: "mcp-server/src/research-records.test.ts"
+      - description: "Research record MCP composition handler"
+        path: "mcp-server/src/tools/index.ts"
+      - description: "Research record MCP composition test"
+        path: "mcp-server/src/tools/batch-5-mcp.test.ts"
+    functions:
+      - file: "mcp-server/src/research-records.ts"
+        name: "normalizeResearchRecord"
+      - file: "mcp-server/src/research-records.ts"
+        name: "evaluateResearchFreshness"
+      - file: "mcp-server/src/research-records.ts"
+        name: "emitResearchDatasetRecord"
+  cross_references:
+    - "ARCH-TIED_RESEARCH_RECORD_BOUNDARY"
+    - "IMPL-TIED_FIDELITY_RESEARCH"
+    - "REQ-TIED_FIDELITY_RESEARCH"
+    - "REQ-TIED_RESEARCH_RECORDS"
+  implementation_approach:
+    code_locations:
+      files: []
+      functions: []
+    details:
+      - "Keep candidate_finding, confirmed_case_report, and accepted_uncertainty explicit and mutually distinguishable."
+      - "Preserve evidence provenance and proof-boundary labels on every emitted record."
+      - "Require source, source_date, method, conclusion, uncertainty, affected_decisions, evidence_provenance, freshness_policy, and classification."
+      - "Return stale, current, or freshness_unknown deterministically from policy and source date."
+      - "Support library_comparison, benchmark, security_finding, organizational_constraint, and experiment record types."
+      - "Use read-only fidelity profile guards to reject audited project YAML writes."
+      - "Validate ARCH/IMPL alternative links as references only; do not copy canonical bodies."
+    summary: "Validate and normalize research records, evaluate freshness, preserve proof boundaries, and emit them to an external research dataset without canonical YAML writes."
+  metadata:
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Batch 5 implementation and validation"
+  name: "Research record schema and freshness evaluator"
+  rationale:
+    benefits:
+      - "Deterministic normalization and freshness"
+      - "External append-only provenance"
+      - "Safe links to canonical alternatives"
+    problems_solved:
+      - "Classification drift between candidate, confirmed, and uncertainty states"
+      - "Missing structured research evidence"
+      - "Stale or weakly sourced decision inputs"
+    why: "A pure schema and lifecycle boundary makes heterogeneous research comparable while preserving the fidelity research read-only contract."
+  related_decisions:
+    depends_on:
+      - "IMPL-TIED_FIDELITY_RESEARCH"
+    see_also:
+      - "IMPL-MCP_LEAP_PROPOSAL_QUEUE"
+      - "IMPL-QUALITY_EVIDENCE_MANIFEST"
+    supersedes: []
+  status: "Active"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-TIED_RESEARCH_RECORD_BOUNDARY"
+    code_annotations:
+      - "IMPL-TIED_RESEARCH_RECORDS"
+    requirements:
+      - "REQ-TIED_FIDELITY_RESEARCH"
+      - "REQ-TIED_RESEARCH_RECORDS"
+    tests:
+      - "mcp-server/src/research-records.test.ts"
+      - "mcp-server/src/tools/batch-5-mcp.test.ts"

@@ -1,0 +1,41 @@
+IMPL-FEAT_LOCAL_DEFAULTS:
+  code_locations:
+    files: []
+    functions: []
+  cross_references:
+    - "ARCH-FEAT_LOCAL_DEFAULT_RESOLUTION"
+    - "REQ-FEAT_LOCAL_DEFAULTS"
+  implementation_approach:
+    details:
+      - "Report every selected source and reject ambiguity."
+      - "Resolve constitution and features paths under the resolved TIED base."
+      - "Resolve TIED_BASE_PATH from explicit flag, environment, then project tied/ directory."
+      - "Resolve TIED_MCP_BIN from explicit flag, environment, then repository-local dist index."
+    summary: "Resolve explicit values first, then documented local conventions for binary, TIED base, constitution, and feature directory."
+  name: "Local default resolver"
+  rationale:
+    benefits:
+      - "Clear source reporting"
+      - "Deterministic first-run behavior"
+    problems_solved:
+      - "Repeated setup flags"
+      - "Silent config writes"
+    why: "Conventional projects need predictable discovery while configuration ownership remains explicit."
+  related_decisions:
+    depends_on:
+      - "IMPL-TIED_FILES"
+      - "IMPL-TIED_YAML_STYLE_RESOLVER"
+    see_also: []
+    supersedes: []
+  status: "Active"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_LOCAL_DEFAULT_RESOLUTION"
+    code_annotations:
+      - "ARCH-FEAT_LOCAL_DEFAULT_RESOLUTION"
+      - "IMPL-FEAT_LOCAL_DEFAULTS"
+      - "REQ-FEAT_LOCAL_DEFAULTS"
+    requirements:
+      - "REQ-FEAT_LOCAL_DEFAULTS"
+    tests: []

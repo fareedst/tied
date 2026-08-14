@@ -1,0 +1,55 @@
+IMPL-FEAT_IDENTIFIER_ALLOCATOR:
+  code_locations:
+    files:
+      - description: "Stable slug normalization and lowest-unused FEAT allocation"
+        path: "mcp-server/src/feature-orchestration/store.ts"
+    functions:
+      - file: "mcp-server/src/feature-orchestration/store.ts"
+        name: "FeatureStore.allocate"
+      - file: "mcp-server/src/feature-orchestration/store.ts"
+        name: "FeatureStore.generateSlug"
+  cross_references:
+    - "ARCH-FEAT_IDENTIFIER_ALLOCATION"
+    - "REQ-FEAT_IDENTIFIER_ALLOCATION"
+  implementation_approach:
+    details:
+      - "Normalize Unicode, whitespace, separators, and punctuation."
+      - "Reject titles that produce no slug."
+      - "Return feature identifier, slug, and directory name."
+      - "Scan existing feature directories for FEAT-NNN prefixes."
+    summary: "Normalize titles into slugs and allocate the lowest unused zero-padded FEAT number under the creation lock."
+  metadata:
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Batch 1 implementation evidence"
+  name: "Feature identifier allocator"
+  rationale:
+    benefits:
+      - "Canonical slugs"
+      - "Independent unit tests"
+      - "Stable FEAT numbering"
+    problems_solved:
+      - "Unsafe title-to-path conversion"
+      - "Unstable identifiers"
+    why: "Pure normalization plus lock-protected directory scanning makes allocation deterministic and testable."
+  related_decisions:
+    composed_with:
+      - "IMPL-FEAT_IDEMPOTENT_CREATE"
+    depends_on:
+      - "IMPL-FEAT_STORE"
+    see_also: []
+    supersedes: []
+  status: "Active"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_IDENTIFIER_ALLOCATION"
+    code_annotations:
+      - "ARCH-FEAT_IDENTIFIER_ALLOCATION"
+      - "IMPL-FEAT_IDENTIFIER_ALLOCATOR"
+      - "REQ-FEAT_IDENTIFIER_ALLOCATION"
+    requirements:
+      - "REQ-FEAT_IDENTIFIER_ALLOCATION"
+    tests:
+      - "mcp-server/src/feature-orchestration/store.test.ts"

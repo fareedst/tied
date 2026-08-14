@@ -1,0 +1,13 @@
+REQ-FEAT_CLARIFICATION_RECORDS:
+  category: "Functional"
+  description: "Each feature owns a versioned clarifications.yaml sidecar containing canonical structured clarification records; human-readable NEEDS_CLARIFICATION markers are generated views only."
+  name: "Structured clarification records"
+  priority: "P0"
+  rationale:
+    why: "Prevent silent assumptions and preserve durable uncertainty evidence."
+  satisfaction_criteria:
+    - criterion: "Canonical records contain id, question, affected_scope, blocking, owner, priority, status, decision, resolved_at, and evidence/approval references."
+    - criterion: "Generated markers cannot replace or mutate the structured record."
+  status: "Planned"
+  validation_criteria:
+    - method: "Unit and contract tests for schema, ownership, normalization, and canonical/view separation."

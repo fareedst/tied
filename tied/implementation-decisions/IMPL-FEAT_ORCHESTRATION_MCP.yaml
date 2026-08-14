@@ -1,0 +1,56 @@
+IMPL-FEAT_ORCHESTRATION_MCP:
+  code_locations:
+    files:
+      - description: "Thin shared orchestration MCP router"
+        path: "mcp-server/src/feature-orchestration/mcp.ts"
+      - description: "Registered feature orchestration MCP tools and canonical delegation"
+        path: "mcp-server/src/tools/index.ts"
+    functions:
+      - file: "mcp-server/src/feature-orchestration/mcp.ts"
+        name: "handleOrchestrationTool"
+  cross_references:
+    - "ARCH-FEAT_ORCHESTRATION_BOUNDARY"
+    - "REQ-FEAT_ORCHESTRATION_SURFACE"
+  implementation_approach:
+    details:
+      - "Delegate canonical token CRUD and consistency validation."
+      - "Keep feature manifest operations in the orchestration store."
+      - "Never duplicate manifest or TIED validators."
+      - "Return the same result schema as feature-orchestrator."
+    summary: "Register feature orchestration MCP handlers that invoke the shared service and existing TIED YAML tools for canonical REQ/ARCH/IMPL operations."
+  metadata:
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Batch 1 implementation evidence"
+  name: "Feature orchestration MCP surface"
+  rationale:
+    benefits:
+      - "Delegated validation"
+      - "Equivalent automation"
+      - "One canonical YAML path"
+    problems_solved:
+      - "Duplicated YAML CRUD"
+      - "MCP/CLI divergence"
+      - "Unvalidated canonical writes"
+    why: "Automation needs a parallel surface with the same orchestration contract and canonical TIED delegation."
+  related_decisions:
+    composed_with: []
+    depends_on:
+      - "IMPL-FEAT_ORCHESTRATION_COMMANDS"
+      - "IMPL-FEAT_STORE"
+    see_also: []
+    supersedes: []
+  status: "Active"
+  testability: "integration"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_ORCHESTRATION_BOUNDARY"
+    code_annotations:
+      - "ARCH-FEAT_ORCHESTRATION_BOUNDARY"
+      - "IMPL-FEAT_ORCHESTRATION_MCP"
+      - "REQ-FEAT_ORCHESTRATION_SURFACE"
+    requirements:
+      - "REQ-FEAT_ORCHESTRATION_SURFACE"
+    tests:
+      - "mcp-server/src/feature-orchestration/mcp.test.ts"

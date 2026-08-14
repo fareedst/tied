@@ -1,0 +1,30 @@
+REQ-FEAT_CANONICAL_LINKS:
+  category: "Functional"
+  description: "Feature manifests reference existing canonical REQ, ARCH, and IMPL tokens and validators prove token existence, type correctness, and cross-layer consistency."
+  name: "Canonical REQ ARCH IMPL reference linking"
+  priority: "P0"
+  rationale:
+    benefits:
+      - "Bidirectional traceability"
+      - "Clear ownership boundary"
+      - "Safe brownfield linking"
+    problems_solved:
+      - "Confusion between feature identity and semantic tokens"
+      - "Dangling references"
+      - "Duplicate canonical content"
+    why: "The orchestration layer must compose with TIED rather than create a parallel specification database."
+  satisfaction_criteria:
+    - criterion: "Dangling, wrong-type, duplicate, and cross-layer-inconsistent references are rejected deterministically."
+    - criterion: "Link validation never mutates canonical REQ, ARCH, or IMPL records."
+    - criterion: "Valid references resolve to existing canonical records of the declared layer."
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_CANONICAL_LINK_BOUNDARY"
+    implementation:
+      - "IMPL-FEAT_REFERENCE_LINKER"
+    requirements:
+      - "REQ-FEAT_CANONICAL_LINKS"
+    tests:
+      - "linker_rejects_dangling_reference_REQ_FEAT_CANONICAL_LINKS"
+      - "linker_resolves_canonical_tokens_REQ_FEAT_CANONICAL_LINKS"

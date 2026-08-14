@@ -1,0 +1,43 @@
+tracker:
+  name: "TIED improvement roadmap refinement"
+  source_checklist: "tied/docs/agent-req-implementation-checklist.yaml"
+  plan: "docs/tied-improvement-roadmap.md"
+  scope: "Documentation-only refinement of the implementation roadmap; no feature code or project TIED YAML mutation."
+  vocabulary:
+    resolve: "Resolved feature manifest, feature lifecycle, clarification record, project constitution, task graph, generated view, proof boundary, and migration as proposed roadmap concepts."
+    preload: "Loaded tied-methodology.md, tied-yaml-mcp.md, pseudocode-and-citdp.md, quality-assurance.md, feedback-to-tied.md, leap-proposal-queue.md, fidelity-research.md, and prompt-composer.md."
+    record: "Deferred new glossary rows and feature-specific semantic tokens until Batch 0 schema work; no finalized domain identifier was introduced by this documentation pass."
+    validate: "Deferred to the implementation batches because this pass creates no new TIED YAML, source, or test identifiers."
+  steps:
+    session-bootstrap: completed
+    translate-sponsor-intent: completed
+    change-definition: completed
+    impact-discovery: completed
+    risk-assessment: completed
+    test-strategy: completed
+    persist-implementation-records: deferred
+    unit-test-red: deferred
+    unit-test-green: deferred
+    composition-integration: deferred
+    end-to-end-ui: deferred
+    verification-gate: "completed for documentation scope; runtime checks not applicable"
+    sync-tied-stack: deferred
+    persist-citdp-record: deferred
+    traceable-commit: not_run
+    sub-yaml-edit-loop: not_applicable
+    sub-pseudocode-validation-pass: not_applicable
+    sub-leap-micro-cycle: not_applicable
+    sub-vocabulary-sync:
+      status: "completed with RECORD and VALIDATE deferred"
+      reason: "No new TIED token, implementation pseudo-code, source, test, or project YAML was authored."
+  citdp:
+    status: deferred
+    reason: "The roadmap edit is non-executable documentation. Persist a CITDP record for each behavior-changing implementation batch under tied/citdp/."
+  validation:
+    roadmap_lint: "pass; no IDE diagnostics"
+    tracker_lint: "pass; no IDE diagnostics"
+    tied_validate_consistency: "pass; ok=true; no TIED YAML changed by this refinement"
+    runtime_tests: "not_run; this pass changed documentation and planning metadata only"
+  implementation_gate:
+    status: "deferred to batch execution"
+    condition: "No batch may enter code until its REQ/ARCH/IMPL, token-commented pseudo-code, and test strategy are complete."

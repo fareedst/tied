@@ -1,0 +1,20 @@
+ARCH-FEAT_CONSTITUTION_ANALYZER:
+  alternatives_considered:
+    - cons:
+        - "Conflates project policy with traceability"
+      name: "Enforce during TIED consistency"
+      pros:
+        - "One validator"
+      rejected_reason: "Roadmap requires constitution compliance to remain a separate boundary."
+  cross_references:
+    - "REQ-FEAT_CONSTITUTION_COMPLIANCE"
+  decision: "Analyze governed artifact projections without mutating REQ, ARCH, IMPL, task-plan, or CITDP ownership, and return stable diagnostics before implementation."
+  implementation_approach:
+    details:
+      - "Expired or unapproved exceptions never suppress failures."
+      - "Required articles outrank approved in-scope exceptions."
+    summary: "Pure rule evaluation plus deterministic diagnostic ordering."
+  name: "Constitution compliance analyzer boundary"
+  rationale:
+    why: "Compliance is a distinct proof boundary and must not weaken canonical traceability or quality gates."
+  status: "Active"

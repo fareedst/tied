@@ -153,6 +153,328 @@ IMPL-ATDD-E2E-AGENT_STREAM:
       - "REQ-ATDD-E2E-AGENT_STREAM"
     tests:
       - "agent_stream_e2e_test.rb (upstream atdd)"
+IMPL-FEAT_AGENTSTREAM_ADAPTER:
+  cross_references:
+    - "ARCH-FEAT_AGENTSTREAM_ADAPTER"
+    - "REQ-FEAT_AGENTSTREAM_ADAPTER"
+    - "REQ-GOAGENT-FEATURESPEC-BATCH"
+  detail_file: "implementation-decisions/IMPL-FEAT_AGENTSTREAM_ADAPTER.yaml"
+  name: "Agentstream task graph adapter"
+  status: "Active"
+IMPL-FEAT_ATOMIC_MUTATION:
+  cross_references:
+    - "ARCH-FEAT_REVISION_SAFE_MUTATION"
+    - "REQ-FEAT_REVISION_SAFE_MUTATION"
+  detail_file: "implementation-decisions/IMPL-FEAT_ATOMIC_MUTATION.yaml"
+  name: "Revision-safe atomic mutation"
+  status: "Active"
+IMPL-FEAT_CLARIFICATION_GATE:
+  cross_references:
+    - "ARCH-FEAT_CLARIFICATION_BOUNDARY"
+    - "REQ-FEAT_CLARIFICATION_GATES"
+  detail_file: "implementation-decisions/IMPL-FEAT_CLARIFICATION_GATE.yaml"
+  name: "Clarification gate evaluator"
+  status: "Active"
+IMPL-FEAT_CLARIFICATION_LIFECYCLE_ADAPTER:
+  cross_references:
+    - "ARCH-FEAT_READINESS_PROJECTION"
+    - "REQ-FEAT_CLARIFICATION_GATES"
+  detail_file: "implementation-decisions/IMPL-FEAT_CLARIFICATION_LIFECYCLE_ADAPTER.yaml"
+  name: "Clarification lifecycle readiness adapter"
+  status: "Active"
+IMPL-FEAT_CLARIFICATION_STORE:
+  cross_references:
+    - "ARCH-FEAT_CLARIFICATION_BOUNDARY"
+    - "REQ-FEAT_CLARIFICATION_RECORDS"
+  detail_file: "implementation-decisions/IMPL-FEAT_CLARIFICATION_STORE.yaml"
+  name: "Clarification sidecar store"
+  status: "Active"
+IMPL-FEAT_CONSTITUTION_ANALYZER:
+  cross_references:
+    - "ARCH-FEAT_CONSTITUTION_ANALYZER"
+    - "REQ-FEAT_CONSTITUTION_COMPLIANCE"
+  detail_file: "implementation-decisions/IMPL-FEAT_CONSTITUTION_ANALYZER.yaml"
+  name: "Constitution compliance analyzer"
+  status: "Active"
+IMPL-FEAT_CONSTITUTION_DIAGNOSTICS:
+  cross_references:
+    - "ARCH-FEAT_CONSTITUTION_ANALYZER"
+    - "ARCH-FEAT_READINESS_PROJECTION"
+    - "REQ-FEAT_CONSTITUTION_COMPLIANCE"
+  detail_file: "implementation-decisions/IMPL-FEAT_CONSTITUTION_DIAGNOSTICS.yaml"
+  name: "Deterministic constitution diagnostics"
+  status: "Active"
+IMPL-FEAT_CONSTITUTION_STORE:
+  cross_references:
+    - "ARCH-FEAT_CONSTITUTION_STORAGE"
+    - "REQ-FEAT_CONSTITUTION_SCHEMA"
+  detail_file: "implementation-decisions/IMPL-FEAT_CONSTITUTION_STORE.yaml"
+  name: "Project constitution store"
+  status: "Active"
+IMPL-FEAT_CONSTITUTION_VALIDATOR:
+  cross_references:
+    - "ARCH-FEAT_CONSTITUTION_STORAGE"
+    - "REQ-FEAT_CONSTITUTION_SCHEMA"
+  detail_file: "implementation-decisions/IMPL-FEAT_CONSTITUTION_VALIDATOR.yaml"
+  name: "Constitution schema validator"
+  status: "Active"
+IMPL-FEAT_FIXTURE_VALIDATORS:
+  cross_references:
+    - "ARCH-FEAT_FIXTURE_CORPUS"
+    - "REQ-FEAT_FIXTURE_VALIDATION"
+  description: "Deterministic validators and expected-outcome catalog for representative Batch 0 fixtures."
+  detail_file: "implementation-decisions/IMPL-FEAT_FIXTURE_VALIDATORS.yaml"
+  name: "Feature fixture corpus validators"
+  status: "Active"
+IMPL-FEAT_IDEMPOTENT_CREATE:
+  cross_references:
+    - "ARCH-FEAT_IDEMPOTENT_CREATION"
+    - "REQ-FEAT_IDEMPOTENT_CREATION"
+  detail_file: "implementation-decisions/IMPL-FEAT_IDEMPOTENT_CREATE.yaml"
+  name: "Idempotent feature creation"
+  status: "Active"
+IMPL-FEAT_IDENTIFIER_ALLOCATOR:
+  cross_references:
+    - "ARCH-FEAT_IDENTIFIER_ALLOCATION"
+    - "REQ-FEAT_IDENTIFIER_ALLOCATION"
+  detail_file: "implementation-decisions/IMPL-FEAT_IDENTIFIER_ALLOCATOR.yaml"
+  name: "Feature identifier allocator"
+  status: "Active"
+IMPL-FEAT_LIFECYCLE_ENGINE:
+  cross_references:
+    - "ARCH-FEAT_LIFECYCLE_STATE_MACHINE"
+    - "REQ-FEAT_LIFECYCLE"
+  description: "Pure transition evaluation for the Batch 0 feature lifecycle matrix."
+  detail_file: "implementation-decisions/IMPL-FEAT_LIFECYCLE_ENGINE.yaml"
+  name: "Feature lifecycle transition evaluator"
+  status: "Active"
+IMPL-FEAT_LOCAL_DEFAULTS:
+  cross_references:
+    - "ARCH-FEAT_LOCAL_DEFAULT_RESOLUTION"
+    - "REQ-FEAT_LOCAL_DEFAULTS"
+  detail_file: "implementation-decisions/IMPL-FEAT_LOCAL_DEFAULTS.yaml"
+  name: "Local default resolver"
+  status: "Active"
+IMPL-FEAT_MANIFEST_VALIDATOR:
+  cross_references:
+    - "ARCH-FEAT_MANIFEST_CONTRACT"
+    - "REQ-FEAT_MANIFEST_SCHEMA"
+  description: "Pure schema normalization and validation for feature-manifest.v1."
+  detail_file: "implementation-decisions/IMPL-FEAT_MANIFEST_VALIDATOR.yaml"
+  name: "Feature manifest schema validator"
+  status: "Active"
+IMPL-FEAT_MIGRATION_APPLY:
+  cross_references:
+    - "ARCH-FEAT_MIGRATION_PREVIEW"
+    - "REQ-FEAT_LEGACY_MIGRATION"
+  detail_file: "implementation-decisions/IMPL-FEAT_MIGRATION_APPLY.yaml"
+  name: "Confirmed backup-protected migration apply"
+  status: "Active"
+IMPL-FEAT_MIGRATION_PREVIEW:
+  cross_references:
+    - "ARCH-FEAT_MIGRATION_PREVIEW"
+    - "REQ-FEAT_LEGACY_MIGRATION"
+  detail_file: "implementation-decisions/IMPL-FEAT_MIGRATION_PREVIEW.yaml"
+  name: "Deterministic migration preview and conflict report"
+  status: "Active"
+IMPL-FEAT_OFFLINE_FALLBACK:
+  cross_references:
+    - "ARCH-FEAT_OFFLINE_COMPATIBILITY"
+    - "REQ-FEAT_OFFLINE_WORKFLOW_PRESERVATION"
+  detail_file: "implementation-decisions/IMPL-FEAT_OFFLINE_FALLBACK.yaml"
+  name: "Explicit offline fallback adapter"
+  status: "Active"
+IMPL-FEAT_ONBOARDING_COMMANDS:
+  cross_references:
+    - "ARCH-FEAT_ONBOARDING_BOUNDARY"
+    - "REQ-FEAT_ADOPTION_GUIDANCE"
+    - "REQ-FEAT_ONBOARDING_COMMANDS"
+  detail_file: "implementation-decisions/IMPL-FEAT_ONBOARDING_COMMANDS.yaml"
+  name: "Safe onboarding command adapter"
+  status: "Active"
+IMPL-FEAT_ORCHESTRATION_CLI:
+  cross_references:
+    - "ARCH-FEAT_ORCHESTRATION_BOUNDARY"
+    - "REQ-FEAT_ORCHESTRATION_SURFACE"
+  detail_file: "implementation-decisions/IMPL-FEAT_ORCHESTRATION_CLI.yaml"
+  name: "Feature orchestration CLI"
+  status: "Active"
+IMPL-FEAT_ORCHESTRATION_COMMANDS:
+  cross_references:
+    - "ARCH-FEAT_ORCHESTRATION_COMMANDS"
+    - "REQ-FEAT_ORCHESTRATION_COMMANDS"
+  detail_file: "implementation-decisions/IMPL-FEAT_ORCHESTRATION_COMMANDS.yaml"
+  name: "Feature lifecycle command adapter"
+  status: "Active"
+IMPL-FEAT_ORCHESTRATION_MCP:
+  cross_references:
+    - "ARCH-FEAT_ORCHESTRATION_BOUNDARY"
+    - "REQ-FEAT_ORCHESTRATION_SURFACE"
+  detail_file: "implementation-decisions/IMPL-FEAT_ORCHESTRATION_MCP.yaml"
+  name: "Feature orchestration MCP surface"
+  status: "Active"
+IMPL-FEAT_READINESS_DIAGNOSTICS:
+  cross_references:
+    - "ARCH-FEAT_READINESS_DIAGNOSTICS"
+    - "REQ-FEAT_READINESS_DIAGNOSTICS"
+  detail_file: "implementation-decisions/IMPL-FEAT_READINESS_DIAGNOSTICS.yaml"
+  name: "Readiness diagnostic adapter"
+  status: "Active"
+IMPL-FEAT_REFERENCE_LINKER:
+  cross_references:
+    - "ARCH-FEAT_CANONICAL_LINK_BOUNDARY"
+    - "REQ-FEAT_CANONICAL_LINKS"
+  description: "Read-only typed resolution and consistency validation for feature references to canonical TIED records."
+  detail_file: "implementation-decisions/IMPL-FEAT_REFERENCE_LINKER.yaml"
+  name: "Canonical REQ ARCH IMPL reference linker"
+  status: "Active"
+IMPL-FEAT_STORE:
+  cross_references:
+    - "ARCH-FEAT_STORE_PERSISTENCE"
+    - "REQ-FEAT_STORE_PERSISTENCE"
+  detail_file: "implementation-decisions/IMPL-FEAT_STORE.yaml"
+  name: "Feature manifest store"
+  status: "Active"
+IMPL-FEAT_TASK_DERIVATION:
+  cross_references:
+    - "ARCH-FEAT_TASK_DERIVATION_BOUNDARY"
+    - "REQ-FEAT_TASK_DERIVATION"
+  detail_file: "implementation-decisions/IMPL-FEAT_TASK_DERIVATION.yaml"
+  name: "Task derivation and source projection"
+  status: "Active"
+IMPL-FEAT_TASK_EXECUTION_STATE:
+  cross_references:
+    - "ARCH-FEAT_TASK_EXECUTION_STATE"
+    - "REQ-FEAT_TASK_EXECUTION_RECOVERY"
+  detail_file: "implementation-decisions/IMPL-FEAT_TASK_EXECUTION_STATE.yaml"
+  name: "Task execution state and evidence history"
+  status: "Active"
+IMPL-FEAT_TASK_GRAPH_SCHEDULER:
+  cross_references:
+    - "ARCH-FEAT_TASK_GRAPH_SCHEDULER"
+    - "REQ-FEAT_TASK_GRAPH_SCHEDULING"
+  detail_file: "implementation-decisions/IMPL-FEAT_TASK_GRAPH_SCHEDULER.yaml"
+  name: "Task graph validation and readiness scheduler"
+  status: "Active"
+IMPL-FEAT_VIEW_PROJECTION:
+  code_locations:
+    files: []
+    functions: []
+  cross_references:
+    - "ARCH-FEAT_VIEW_PROJECTION"
+    - "REQ-FEAT_VIEW_GENERATION"
+  detail_file: "implementation-decisions/IMPL-FEAT_VIEW_PROJECTION.yaml"
+  implementation_approach:
+    details:
+      - "Attach source_revision metadata using canonical revision IDs when present and deterministic content hashes otherwise."
+      - "Merge clarification, constitution, task graph, execution evidence, and proof-boundary projections by stable identity."
+      - "Read feature manifest references without copying canonical record bodies."
+      - "Reject unresolved references and preserve token/evidence links."
+    summary: "Normalize canonical feature references and Batch 2/3 projections into a renderer-neutral source projection."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: {}
+    last_updated:
+      author: "AI Agent"
+      date: {}
+      reason: "Batch 4 planning"
+  name: "Generated-view source projection"
+  related_decisions:
+    depends_on:
+      - "IMPL-FEAT_CLARIFICATION_GATE"
+      - "IMPL-FEAT_CONSTITUTION_ANALYZER"
+      - "IMPL-FEAT_MANIFEST_VALIDATOR"
+      - "IMPL-FEAT_TASK_DERIVATION"
+    see_also:
+      - "IMPL-FEAT_REFERENCE_LINKER"
+    supersedes: []
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_VIEW_PROJECTION"
+    code_annotations: []
+    requirements:
+      - "REQ-FEAT_VIEW_GENERATION"
+    tests: []
+IMPL-FEAT_VIEW_RENDERER:
+  code_locations:
+    files: []
+    functions: []
+  cross_references:
+    - "ARCH-FEAT_VIEW_RENDERING"
+    - "REQ-FEAT_VIEW_DETERMINISM"
+    - "REQ-FEAT_VIEW_GENERATION"
+  detail_file: "implementation-decisions/IMPL-FEAT_VIEW_RENDERER.yaml"
+  implementation_approach:
+    details:
+      - "Compare normalized semantic sections while retaining metadata and link changes as meaningful."
+      - "Emit a generated-file banner, source revision/hash metadata, token links, evidence links, and proof-boundary labels in every view."
+      - "Never copy full canonical REQ/ARCH/IMPL bodies into views."
+      - "Support spec.md, plan.md, tasks.md, quickstart.md, data-model.md, and applicable contracts views."
+      - "Use fixed section ordering and canonical sorting for byte-stable output."
+    summary: "Render stable Markdown views from the normalized source projection and compare normalized semantics without mutating canonical records."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: {}
+    last_updated:
+      author: "AI Agent"
+      date: {}
+      reason: "Batch 4 planning"
+  name: "Deterministic generated-view renderer and semantic comparison"
+  related_decisions:
+    depends_on:
+      - "IMPL-FEAT_VIEW_PROJECTION"
+    see_also: []
+    supersedes: []
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_VIEW_RENDERING"
+    code_annotations: []
+    requirements:
+      - "REQ-FEAT_VIEW_DETERMINISM"
+      - "REQ-FEAT_VIEW_GENERATION"
+    tests: []
+IMPL-FEAT_VIEW_STALE_DETECTION:
+  code_locations:
+    files: []
+    functions: []
+  cross_references:
+    - "ARCH-FEAT_VIEW_STALENESS"
+    - "REQ-FEAT_VIEW_STALENESS"
+  detail_file: "implementation-decisions/IMPL-FEAT_VIEW_STALE_DETECTION.yaml"
+  implementation_approach:
+    details:
+      - "Attach proof-boundary diagnostics stating stale views are not current intent or runtime correctness proof."
+      - "Identify each stale view and changed source identity in stable order."
+      - "Parse generated banners and source revision/hash entries deterministically."
+      - "Return fail for CI and verification policy; return warn only for explicit local inspection policy."
+    summary: "Compare view source_revision metadata with current canonical projection revisions and apply explicit stale-view policy."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: {}
+    last_updated:
+      author: "AI Agent"
+      date: {}
+      reason: "Batch 4 planning"
+  name: "Generated-view stale detection and policy enforcement"
+  related_decisions:
+    depends_on:
+      - "IMPL-FEAT_VIEW_PROJECTION"
+      - "IMPL-FEAT_VIEW_RENDERER"
+    see_also: []
+    supersedes: []
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_VIEW_STALENESS"
+    code_annotations: []
+    requirements:
+      - "REQ-FEAT_VIEW_STALENESS"
+    tests: []
 IMPL-GOAGENT-CHECKLIST:
   code_locations:
     files:
@@ -1167,6 +1489,41 @@ IMPL-QUALITY_TEST_ADEQUACY:
     tests:
       - "mcp-server/src/quality-adequacy.test.ts"
       - "mcp-server/src/tools/quality-validation-mcp.test.ts"
+IMPL-TIED_FEEDBACK_PROMOTION:
+  code_locations:
+    files:
+      - path: "mcp-server/src/feedback-promotion.test.ts"
+      - path: "mcp-server/src/feedback-promotion.ts"
+      - path: "mcp-server/src/feedback.ts"
+      - path: "mcp-server/src/tools/batch-5-mcp.test.ts"
+      - path: "mcp-server/src/tools/index.ts"
+    functions:
+      - file: "mcp-server/src/feedback-promotion.ts"
+        name: "normalizeOperationalSource"
+      - file: "mcp-server/src/feedback-promotion.ts"
+        name: "groupDuplicateFeedback"
+      - file: "mcp-server/src/feedback-promotion.ts"
+        name: "createReviewedLeapProposal"
+      - file: "mcp-server/src/feedback-promotion.ts"
+        name: "reportPromotionStatus"
+  cross_references:
+    - "ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY"
+    - "REQ-FEEDBACK_TO_TIED"
+    - "REQ-LEAP_PROPOSAL_QUEUE"
+    - "REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION"
+  description: "Defines source normalization, duplicate grouping, review-gated LEAP proposal creation, and explicit no-write promotion boundaries."
+  detail_file: "implementation-decisions/IMPL-TIED_FEEDBACK_PROMOTION.yaml"
+  metadata:
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Batch 5 implementation and validation"
+  name: "Operational feedback adapters and reviewed promotion"
+  status: "Active"
+  traceability:
+    tests:
+      - "mcp-server/src/feedback-promotion.test.ts"
+      - "mcp-server/src/tools/batch-5-mcp.test.ts"
 IMPL-TIED_FIDELITY_RESEARCH:
   code_locations:
     files:
@@ -1378,6 +1735,37 @@ IMPL-TIED_FILES:
       - "scripts/analyze_tied_mcp_metrics_test.rb"
       - "scripts/compare_yaml_dirs_test.rb"
       - "scripts/yaml_list_sorter_test.rb"
+IMPL-TIED_RESEARCH_RECORDS:
+  code_locations:
+    files:
+      - path: "mcp-server/src/research-records.test.ts"
+      - path: "mcp-server/src/research-records.ts"
+      - path: "mcp-server/src/tools/batch-5-mcp.test.ts"
+      - path: "mcp-server/src/tools/index.ts"
+    functions:
+      - file: "mcp-server/src/research-records.ts"
+        name: "normalizeResearchRecord"
+      - file: "mcp-server/src/research-records.ts"
+        name: "evaluateResearchFreshness"
+      - file: "mcp-server/src/research-records.ts"
+        name: "emitResearchDatasetRecord"
+  cross_references:
+    - "ARCH-TIED_RESEARCH_RECORD_BOUNDARY"
+    - "REQ-TIED_FIDELITY_RESEARCH"
+    - "REQ-TIED_RESEARCH_RECORDS"
+  description: "Defines structured external research records, provenance, classification, alternative links, freshness evaluation, and read-only dataset emission."
+  detail_file: "implementation-decisions/IMPL-TIED_RESEARCH_RECORDS.yaml"
+  metadata:
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Batch 5 implementation and validation"
+  name: "Research record schema and freshness evaluator"
+  status: "Active"
+  traceability:
+    tests:
+      - "mcp-server/src/research-records.test.ts"
+      - "mcp-server/src/tools/batch-5-mcp.test.ts"
 IMPL-TIED_YAML_CANONICALIZER:
   cross_references:
     - "ARCH-TIED_YAML_CANONICAL_PROFILE"

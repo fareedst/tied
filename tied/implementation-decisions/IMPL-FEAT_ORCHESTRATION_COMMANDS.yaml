@@ -1,0 +1,57 @@
+IMPL-FEAT_ORCHESTRATION_COMMANDS:
+  code_locations:
+    files:
+      - description: "Lifecycle command mapping and deferred-gate diagnostics"
+        path: "mcp-server/src/feature-orchestration/commands.ts"
+    functions:
+      - file: "mcp-server/src/feature-orchestration/commands.ts"
+        name: "executeLifecycleCommand"
+  cross_references:
+    - "ARCH-FEAT_ORCHESTRATION_COMMANDS"
+    - "REQ-FEAT_ORCHESTRATION_COMMANDS"
+  implementation_approach:
+    details:
+      - "Delegate accepted mutation to IMPL-FEAT_ATOMIC_MUTATION."
+      - "Delegate transition evaluation to IMPL-FEAT_LIFECYCLE_ENGINE."
+      - "Derive next permitted phase without inventing Batch 2 gates."
+      - "Read manifest and expected revision."
+    summary: "Map specify, refine, plan, tasks, verify, and close out to lifecycle requests and return current state plus next permitted phase."
+  metadata:
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "LEAP: add explicit DATA_TRANSITION required by lifecycle mutation validation"
+  name: "Feature lifecycle command adapter"
+  rationale:
+    benefits:
+      - "Resumable command results"
+      - "Shared evaluator"
+      - "Thin adapters"
+    problems_solved:
+      - "Forked lifecycle semantics"
+      - "Inconsistent phase reporting"
+      - "Thick entry points"
+    why: "Commands should translate user operations into Batch 0 lifecycle evaluations and store mutations without owning either concern."
+  related_decisions:
+    composed_with:
+      - "IMPL-FEAT_ORCHESTRATION_CLI"
+      - "IMPL-FEAT_ORCHESTRATION_MCP"
+    depends_on:
+      - "IMPL-FEAT_ATOMIC_MUTATION"
+      - "IMPL-FEAT_LIFECYCLE_ENGINE"
+      - "IMPL-FEAT_STORE"
+    see_also: []
+    supersedes: []
+  status: "Active"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_ORCHESTRATION_COMMANDS"
+    code_annotations:
+      - "ARCH-FEAT_ORCHESTRATION_COMMANDS"
+      - "IMPL-FEAT_ORCHESTRATION_COMMANDS"
+      - "REQ-FEAT_ORCHESTRATION_COMMANDS"
+    requirements:
+      - "REQ-FEAT_ORCHESTRATION_COMMANDS"
+    tests:
+      - "mcp-server/src/feature-orchestration/commands.test.ts"

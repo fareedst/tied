@@ -1,0 +1,21 @@
+IMPL-FEAT_CLARIFICATION_STORE:
+  cross_references:
+    - "ARCH-FEAT_CLARIFICATION_BOUNDARY"
+    - "REQ-FEAT_CLARIFICATION_RECORDS"
+  decision: "Validate and persist feature-local clarifications.yaml records with revision and ownership metadata."
+  implementation_approach:
+    details:
+      - "Preserve evidence and approval references as structured links."
+      - "Reject duplicate ids, malformed scope, missing owners, and invalid resolution metadata."
+    summary: "Pure normalization plus atomic feature-local persistence."
+  metadata:
+    last_updated: "2026-08-14"
+  name: "Clarification sidecar store"
+  rationale:
+    why: "Canonical uncertainty must be durable and separate from generated markers."
+  status: "Active"
+  traceability:
+    code_locations:
+      - "mcp-server/src/feature-orchestration/clarification.ts"
+    tests:
+      - "mcp-server/src/feature-orchestration/clarification.test.ts"

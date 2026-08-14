@@ -85,6 +85,21 @@ import {
   rejectProposal,
   updatePendingProposal,
 } from "../analysis/leap-proposal-queue.js";
+import { FeatureStore } from "../feature-orchestration/store.js";
+import { handleOrchestrationTool } from "../feature-orchestration/mcp.js";
+import {
+  emitResearchDatasetRecord,
+  evaluateResearchFreshness,
+  normalizeResearchRecord,
+  type ResearchRecordInput,
+} from "../research-records.js";
+import {
+  createReviewedLeapProposal,
+  groupDuplicateFeedback,
+  normalizeOperationalSource,
+  reportPromotionStatus,
+  type OperationalSource,
+} from "../feedback-promotion.js";
 
 /** LEAP proposal MCP tools: JSON envelope; catch sync throws from fs/git. [REQ-LEAP_PROPOSAL_QUEUE] */
 function leapMcpJson(payload: unknown) {
@@ -970,6 +985,104 @@ export const allTools = [
     },
   },
   {
+    name: "tied_research_record_add",
+    config: {
+      description:
+        "Normalize and append one external research record with provenance and freshness; rejects writes inside the audited project's tied/ boundary.",
+      inputSchema: z.object({
+        record: z.record(z.unknown()),
+        audited_project_root: z.string().min(1),
+        dataset_path: z.string().min(1),
+        evaluated_at: z.string().min(1),
+      }),
+    },
+    handler: async (args: {
+      record: Record<string, unknown>;
+      audited_project_root: string;
+      dataset_path: string;
+      evaluated_at: string;
+    }) => {
+      const normalized = normalizeResearchRecord(args.record as unknown as ResearchRecordInput);
+      if (!normalized.ok) return textContent(JSON.stringify(normalized, null, 2));
+      const freshness = evaluateResearchFreshness(normalized.record, args.evaluated_at);
+      return textContent(JSON.stringify(
+        emitResearchDatasetRecord(normalized.record, freshness, {
+          auditedProjectRoot: args.audited_project_root,
+          datasetPath: args.dataset_path,
+        }),
+        null,
+        2,
+      ));
+    },
+  },
+  {
+    name: "tied_feedback_operational_add",
+    config: {
+      description:
+        "Normalize an incident, metric, test-failure, or user-report source and append additive metadata to the existing feedback store.",
+      inputSchema: z.object({
+        source: z.record(z.unknown()),
+        base_path: z.string().optional(),
+      }),
+    },
+    handler: async (args: { source: Record<string, unknown>; base_path?: string }) => {
+      const normalized = normalizeOperationalSource(args.source as unknown as OperationalSource);
+      if (!normalized.ok) return textContent(JSON.stringify(normalized, null, 2));
+      const duplicate = groupDuplicateFeedback(
+        normalized.entry,
+        loadFeedback(args.base_path).entries.filter(
+          (entry): entry is typeof normalized.entry => Boolean(entry.duplicate_group && entry.source_type),
+        ),
+      );
+      const entry = duplicate.entry;
+      const result = appendEntry({
+        type: entry.type,
+        title: entry.title,
+        description: entry.description,
+        context: entry.context,
+        source_type: entry.source_type,
+        source_id: entry.source_id,
+        affected_feature: entry.affected_feature,
+        severity: entry.severity,
+        evidence_links: entry.evidence_links,
+        duplicate_group: entry.duplicate_group,
+        proposed_req: entry.proposed_req,
+        promotion_status: entry.promotion_status,
+      }, args.base_path);
+      return textContent(JSON.stringify({ ...result, duplicate_of: duplicate.kind === "duplicate" ? duplicate.duplicate_of : undefined }, null, 2));
+    },
+  },
+  {
+    name: "tied_feedback_promote",
+    config: {
+      description:
+        "Create a reviewed non-canonical LEAP proposal from an operational feedback entry; never writes canonical REQ, ARCH, or IMPL YAML.",
+      inputSchema: z.object({
+        entry: z.record(z.unknown()),
+        project_root: z.string().min(1),
+        review: z.record(z.unknown()).optional(),
+        canonical_write: z.boolean().optional(),
+      }),
+    },
+    handler: async (args: {
+      entry: Record<string, unknown>;
+      project_root: string;
+      review?: Record<string, unknown>;
+      canonical_write?: boolean;
+    }) => {
+      const entry = args.entry as unknown as Parameters<typeof createReviewedLeapProposal>[0];
+      const result = createReviewedLeapProposal(entry, {
+        projectRoot: args.project_root,
+        canonicalWrite: args.canonical_write,
+        review: args.review as Parameters<typeof createReviewedLeapProposal>[1]["review"],
+      });
+      return textContent(JSON.stringify({
+        ...result,
+        promotion_status: reportPromotionStatus(entry, result.ok ? result.proposal : undefined),
+      }, null, 2));
+    },
+  },
+  {
     name: "tied_verify",
     config: {
       description:
@@ -1726,5 +1839,107 @@ export const allTools = [
     handler: async (args: { project_root?: string }) => {
       return safeLeapCall(() => loadQueue(args.project_root ?? process.cwd()));
     },
+  },
+  ...(["feature_specify", "feature_refine", "feature_plan", "feature_tasks", "feature_verify", "feature_close_out"] as const).map((name) => ({
+    name,
+    config: {
+      description: `Feature orchestration lifecycle command ${name}; returns current state and next permitted phase.`,
+      inputSchema: z.object({
+        feature_identifier: z.string().min(1),
+        expected_revision: z.number().int().positive().optional(),
+        command_input: z.record(z.unknown()).optional(),
+      }),
+    },
+    handler: async (args: {
+      feature_identifier: string;
+      expected_revision?: number;
+      command_input?: Record<string, unknown>;
+    }) => textContent(JSON.stringify(
+      await handleOrchestrationTool(name, args, { store: new FeatureStore(path.join(getBasePath(), "features")) }),
+      null,
+      2,
+    )),
+  })),
+  {
+    name: "feature_view_render",
+    config: {
+      description: "Render a deterministic Batch 4 feature view from a reference-only source projection.",
+      inputSchema: z.object({
+        view_kind: z.string().min(1),
+        source_input: z.record(z.unknown()),
+      }),
+    },
+    handler: async (args: { view_kind: string; source_input: Record<string, unknown> }) =>
+      textContent(JSON.stringify(await handleOrchestrationTool("feature_view_render", args, {
+        store: new FeatureStore(path.join(getBasePath(), "features")),
+      }), null, 2)),
+  },
+  {
+    name: "feature_view_check_stale",
+    config: {
+      description: "Check a generated Batch 4 feature view against current source revisions; fail or warn explicitly.",
+      inputSchema: z.object({
+        generated_view: z.string(),
+        current_source_revision: z.array(z.record(z.unknown())),
+        policy: z.enum(["fail", "warn"]),
+        view_path: z.string().optional(),
+      }),
+    },
+    handler: async (args: {
+      generated_view: string;
+      current_source_revision: Record<string, unknown>[];
+      policy: "fail" | "warn";
+      view_path?: string;
+    }) => textContent(JSON.stringify(await handleOrchestrationTool("feature_view_check_stale", args, {
+      store: new FeatureStore(path.join(getBasePath(), "features")),
+    }), null, 2)),
+  },
+  {
+    name: "feature_create",
+    config: {
+      description: "Create an idempotent feature package under tied/features.",
+      inputSchema: z.object({
+        request_key: z.string().min(1),
+        title: z.string().min(1),
+        mode: z.enum(["greenfield", "brownfield"]).optional(),
+      }),
+    },
+    handler: async (args: { request_key: string; title: string; mode?: "greenfield" | "brownfield" }) => textContent(JSON.stringify(
+      await handleOrchestrationTool("feature_create", args, { store: new FeatureStore(path.join(getBasePath(), "features")) }),
+      null,
+      2,
+    )),
+  },
+  {
+    name: "feature_update_canonical",
+    config: {
+      description: "Delegate canonical REQ, ARCH, or IMPL mutation to the existing TIED YAML surface.",
+      inputSchema: z.object({ token: z.string().min(1), updates: z.record(z.unknown()) }),
+    },
+    handler: async (args: { token: string; updates: Record<string, unknown> }) => textContent(JSON.stringify(
+      await handleOrchestrationTool("feature_update_canonical", args, {
+        store: new FeatureStore(path.join(getBasePath(), "features")),
+        delegateCanonical: async (request) => {
+          const token = request.token;
+          const updates = request.updates;
+          if (typeof token !== "string" || typeof updates !== "object" || updates === null || Array.isArray(updates)) {
+            return { ok: false, error: "INVALID_INPUT" };
+          }
+          const index = token.startsWith("REQ-")
+            ? "requirements"
+            : token.startsWith("ARCH-")
+              ? "architecture"
+              : token.startsWith("IMPL-")
+                ? "implementation"
+                : null;
+          if (!index) return { ok: false, error: "INVALID_TOKEN" };
+          const updated = updateRecord(index, token, updates as Record<string, unknown>);
+          if (!updated.ok) return updated;
+          return { ...updated, consistency: validateConsistency({ include_detail_files: true, include_pseudocode: true }) };
+        },
+      }),
+      null,
+      2,
+    )),
   },
 ];

@@ -193,6 +193,335 @@ REQ-CONFIG_DISCOVERY_LOCAL_LAYER:
       method: "TIED consistency"
     - coverage: "Conformance targets the adopting product that implements multi-file YAML config merge (e.g. backup config). tools/agentstream config.ParseAndResolve (IMPL-GOAGENT-CLI-CMD) is CLI flags plus default file discovery only unless explicitly extended; it is not the sole conformance surface for this REQ."
       method: "Product scope note"
+REQ-FEAT_ADOPTION_GUIDANCE:
+  category: "Functional"
+  cross_references:
+    - "ARCH-FEAT_ONBOARDING_BOUNDARY"
+    - "IMPL-FEAT_ONBOARDING_COMMANDS"
+  detail_file: "requirements/REQ-FEAT_ADOPTION_GUIDANCE.yaml"
+  name: "Incremental adoption guidance"
+  priority: "P1"
+  status: "Implemented"
+REQ-FEAT_AGENTSTREAM_ADAPTER:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-FEAT_AGENTSTREAM_ADAPTER"
+    - "REQ-GOAGENT-FEATURESPEC-BATCH"
+  detail_file: "requirements/REQ-FEAT_AGENTSTREAM_ADAPTER.yaml"
+  name: "Additive agentstream task execution adapter"
+  priority: "P0"
+  status: "Implemented"
+REQ-FEAT_CANONICAL_LINKS:
+  category: "Functional"
+  cross_references:
+    - "ARCH-FEAT_CANONICAL_LINK_BOUNDARY"
+    - "IMPL-FEAT_REFERENCE_LINKER"
+  description: "Define links from feature manifests to canonical REQ, ARCH, and IMPL records without replacing the existing TIED graph."
+  detail_file: "requirements/REQ-FEAT_CANONICAL_LINKS.yaml"
+  name: "Canonical REQ ARCH IMPL reference linking"
+  priority: "P0"
+  status: "Implemented"
+REQ-FEAT_CLARIFICATION_GATES:
+  category: "Functional"
+  detail_file: "requirements/REQ-FEAT_CLARIFICATION_GATES.yaml"
+  name: "Phase-specific clarification gates"
+  priority: "P0"
+  status: "Implemented"
+REQ-FEAT_CLARIFICATION_RECORDS:
+  category: "Functional"
+  detail_file: "requirements/REQ-FEAT_CLARIFICATION_RECORDS.yaml"
+  name: "Structured clarification records"
+  priority: "P0"
+  status: "Implemented"
+REQ-FEAT_CONSTITUTION_COMPLIANCE:
+  category: "Functional"
+  detail_file: "requirements/REQ-FEAT_CONSTITUTION_COMPLIANCE.yaml"
+  name: "Constitution compliance analysis"
+  priority: "P0"
+  status: "Implemented"
+REQ-FEAT_CONSTITUTION_SCHEMA:
+  category: "Functional"
+  detail_file: "requirements/REQ-FEAT_CONSTITUTION_SCHEMA.yaml"
+  name: "Versioned project constitution"
+  priority: "P0"
+  status: "Implemented"
+REQ-FEAT_FIXTURE_VALIDATION:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-FEAT_FIXTURE_CORPUS"
+    - "IMPL-FEAT_FIXTURE_VALIDATORS"
+  description: "Provide representative valid and invalid fixtures and strict validators for schema, lifecycle, references, migration, and partial-write boundaries."
+  detail_file: "requirements/REQ-FEAT_FIXTURE_VALIDATION.yaml"
+  name: "Feature orchestration fixture corpus and validators"
+  priority: "P0"
+  status: "Implemented"
+REQ-FEAT_IDEMPOTENT_CREATION:
+  category: "Functional"
+  detail_file: "requirements/REQ-FEAT_IDEMPOTENT_CREATION.yaml"
+  name: "Idempotent feature creation"
+  priority: "P0"
+  status: "Implemented"
+REQ-FEAT_IDENTIFIER_ALLOCATION:
+  category: "Functional"
+  detail_file: "requirements/REQ-FEAT_IDENTIFIER_ALLOCATION.yaml"
+  name: "Deterministic feature identifiers"
+  priority: "P0"
+  status: "Implemented"
+REQ-FEAT_LEGACY_MIGRATION:
+  category: "Functional"
+  cross_references:
+    - "ARCH-FEAT_MIGRATION_PREVIEW"
+    - "IMPL-FEAT_MIGRATION_APPLY"
+    - "IMPL-FEAT_MIGRATION_PREVIEW"
+  detail_file: "requirements/REQ-FEAT_LEGACY_MIGRATION.yaml"
+  name: "Dry-run legacy feature migration"
+  priority: "P1"
+  status: "Implemented"
+REQ-FEAT_LIFECYCLE:
+  category: "Functional"
+  cross_references:
+    - "ARCH-FEAT_LIFECYCLE_STATE_MACHINE"
+    - "IMPL-FEAT_LIFECYCLE_ENGINE"
+  description: "Define persisted feature lifecycle phases, legal transitions, preconditions, blocked-state derivation, and approval points."
+  detail_file: "requirements/REQ-FEAT_LIFECYCLE.yaml"
+  name: "Feature lifecycle state machine"
+  priority: "P0"
+  status: "Implemented"
+REQ-FEAT_LOCAL_DEFAULTS:
+  category: "Functional"
+  cross_references:
+    - "ARCH-FEAT_LOCAL_DEFAULT_RESOLUTION"
+    - "IMPL-FEAT_LOCAL_DEFAULTS"
+  detail_file: "requirements/REQ-FEAT_LOCAL_DEFAULTS.yaml"
+  name: "Sensible local defaults"
+  priority: "P1"
+  status: "Implemented"
+REQ-FEAT_MANIFEST_SCHEMA:
+  category: "Functional"
+  cross_references:
+    - "ARCH-FEAT_MANIFEST_CONTRACT"
+    - "IMPL-FEAT_MANIFEST_VALIDATOR"
+  description: "Define feature-manifest.v1 required fields, reference-only ownership, version gate, immutable and mutable fields, and deterministic normalization."
+  detail_file: "requirements/REQ-FEAT_MANIFEST_SCHEMA.yaml"
+  name: "Feature manifest schema contract"
+  priority: "P0"
+  status: "Implemented"
+REQ-FEAT_OFFLINE_WORKFLOW_PRESERVATION:
+  category: "Functional"
+  cross_references:
+    - "ARCH-FEAT_OFFLINE_COMPATIBILITY"
+    - "IMPL-FEAT_OFFLINE_FALLBACK"
+  detail_file: "requirements/REQ-FEAT_OFFLINE_WORKFLOW_PRESERVATION.yaml"
+  name: "Explicit offline workflow preservation"
+  priority: "P1"
+  status: "Implemented"
+REQ-FEAT_ONBOARDING_COMMANDS:
+  category: "Functional"
+  cross_references:
+    - "ARCH-FEAT_ONBOARDING_BOUNDARY"
+    - "IMPL-FEAT_ONBOARDING_COMMANDS"
+  detail_file: "requirements/REQ-FEAT_ONBOARDING_COMMANDS.yaml"
+  name: "Safe onboarding commands"
+  priority: "P1"
+  status: "Implemented"
+REQ-FEAT_ORCHESTRATION_COMMANDS:
+  category: "Functional"
+  detail_file: "requirements/REQ-FEAT_ORCHESTRATION_COMMANDS.yaml"
+  name: "Feature lifecycle commands"
+  priority: "P0"
+  status: "Implemented"
+REQ-FEAT_ORCHESTRATION_SURFACE:
+  category: "Functional"
+  detail_file: "requirements/REQ-FEAT_ORCHESTRATION_SURFACE.yaml"
+  name: "Separate orchestration surfaces"
+  priority: "P0"
+  status: "Implemented"
+REQ-FEAT_READINESS_DIAGNOSTICS:
+  category: "Functional"
+  cross_references:
+    - "ARCH-FEAT_READINESS_DIAGNOSTICS"
+    - "IMPL-FEAT_READINESS_DIAGNOSTICS"
+  detail_file: "requirements/REQ-FEAT_READINESS_DIAGNOSTICS.yaml"
+  name: "Exact readiness diagnostics"
+  priority: "P1"
+  status: "Implemented"
+REQ-FEAT_REVISION_SAFE_MUTATION:
+  category: "Non-Functional"
+  detail_file: "requirements/REQ-FEAT_REVISION_SAFE_MUTATION.yaml"
+  name: "Revision-safe atomic mutation"
+  priority: "P0"
+  status: "Implemented"
+REQ-FEAT_STORE_PERSISTENCE:
+  category: "Functional"
+  detail_file: "requirements/REQ-FEAT_STORE_PERSISTENCE.yaml"
+  name: "Feature store persistence"
+  priority: "P0"
+  status: "Implemented"
+REQ-FEAT_TASK_DERIVATION:
+  category: "Functional"
+  cross_references:
+    - "ARCH-FEAT_TASK_DERIVATION_BOUNDARY"
+  detail_file: "requirements/REQ-FEAT_TASK_DERIVATION.yaml"
+  name: "Canonical task derivation and source projection"
+  priority: "P0"
+  status: "Implemented"
+REQ-FEAT_TASK_EXECUTION_RECOVERY:
+  category: "Functional"
+  cross_references:
+    - "ARCH-FEAT_TASK_EXECUTION_STATE"
+  detail_file: "requirements/REQ-FEAT_TASK_EXECUTION_RECOVERY.yaml"
+  name: "Task execution recovery and evidence history"
+  priority: "P0"
+  status: "Implemented"
+REQ-FEAT_TASK_GRAPH_SCHEDULING:
+  category: "Functional"
+  cross_references:
+    - "ARCH-FEAT_TASK_GRAPH_SCHEDULER"
+  detail_file: "requirements/REQ-FEAT_TASK_GRAPH_SCHEDULING.yaml"
+  name: "Deterministic task graph scheduling"
+  priority: "P0"
+  status: "Implemented"
+REQ-FEAT_VIEW_DETERMINISM:
+  category: "Non-Functional"
+  cross_references:
+    - "ARCH-FEAT_VIEW_RENDERING"
+    - "IMPL-FEAT_VIEW_RENDERER"
+  description: "Equivalent canonical feature inputs produce byte-stable generated views, unchanged-input regeneration produces no diff, and semantic comparison distinguishes meaning from permitted formatting differences without dropping source metadata or links."
+  detail_file: "requirements/REQ-FEAT_VIEW_DETERMINISM.yaml"
+  metadata:
+    created:
+      author: "AI Agent"
+      date: {}
+    last_updated:
+      author: "AI Agent"
+      date: {}
+      reason: "Batch 4 planning"
+  name: "Deterministic generated-view rendering and comparison"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Precise change review"
+      - "Reproducible output"
+    problems_solved:
+      - "Formatting churn"
+      - "Unclear view equivalence"
+    why: "Committed views are useful only when regeneration is reviewable and noise-free."
+  related_requirements:
+    depends_on:
+      - "REQ-FEAT_VIEW_GENERATION"
+  satisfaction_criteria:
+    - criterion: "Canonically equivalent inputs render identical bytes."
+    - criterion: "Regenerating unchanged inputs produces no diff."
+    - criterion: "Semantic comparison reports meaningful changes while preserving source metadata."
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_VIEW_RENDERING"
+    code_annotations: []
+    implementation:
+      - "IMPL-FEAT_VIEW_RENDERER"
+    tests: []
+  validation_criteria:
+    - coverage: "All supported view kinds"
+      method: "Deterministic rendering tests"
+    - coverage: "Formatting-only and meaningful changes"
+      method: "Semantic comparison tests"
+REQ-FEAT_VIEW_GENERATION:
+  category: "Functional"
+  cross_references:
+    - "ARCH-FEAT_VIEW_PROJECTION"
+    - "IMPL-FEAT_VIEW_PROJECTION"
+  description: "Generate deterministic committed Markdown views inside each feature directory from canonical feature projections, preserving references and proof-boundary labels without copying canonical REQ/ARCH/IMPL bodies."
+  detail_file: "requirements/REQ-FEAT_VIEW_GENERATION.yaml"
+  metadata:
+    created:
+      author: "AI Agent"
+      date: {}
+    last_updated:
+      author: "AI Agent"
+      date: {}
+      reason: "Batch 4 planning"
+  name: "Human-readable generated feature views"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Reviewable feature directory"
+      - "Stable source ownership"
+    problems_solved:
+      - "Prose views becoming canonical accidentally"
+      - "Scattered feature intent"
+    why: "Reviewers and agents need a compact feature-local understanding without creating a second source of truth."
+  related_requirements:
+    depends_on:
+      - "REQ-FEAT_MANIFEST_SCHEMA"
+    related_to:
+      - "REQ-FEAT_CLARIFICATION_RECORDS"
+      - "REQ-FEAT_CONSTITUTION_COMPLIANCE"
+      - "REQ-FEAT_TASK_DERIVATION"
+  satisfaction_criteria:
+    - criterion: "Every view preserves token links, evidence links, and proof-boundary labels."
+    - criterion: "Generated Markdown is explicitly marked as a view and never treated as canonical intent."
+    - criterion: "Supported view paths are generated from the canonical feature manifest and stable projections."
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_VIEW_PROJECTION"
+    code_annotations: []
+    implementation:
+      - "IMPL-FEAT_VIEW_PROJECTION"
+    tests: []
+  validation_criteria:
+    - coverage: "View types and applicable contracts"
+      method: "Deterministic renderer contract tests"
+    - coverage: "Banner, source metadata, links, and proof boundaries"
+      method: "Structural validation"
+REQ-FEAT_VIEW_STALENESS:
+  category: "Functional"
+  cross_references:
+    - "ARCH-FEAT_VIEW_STALENESS"
+    - "IMPL-FEAT_VIEW_STALE_DETECTION"
+  description: "Record source revision or content-hash metadata in every generated view and deterministically detect stale output after canonical inputs change, with explicit fail and warn policies; stale views never count as current intent or runtime proof."
+  detail_file: "requirements/REQ-FEAT_VIEW_STALENESS.yaml"
+  metadata:
+    created:
+      author: "AI Agent"
+      date: {}
+    last_updated:
+      author: "AI Agent"
+      date: {}
+      reason: "Batch 4 planning"
+  name: "Deterministic stale-view detection and policy"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Actionable freshness diagnostics"
+      - "Safe CI enforcement"
+    problems_solved:
+      - "Proof-boundary confusion"
+      - "Silent view staleness"
+    why: "Committed projections must not be mistaken for current canonical intent after source changes."
+  related_requirements:
+    depends_on:
+      - "REQ-FEAT_VIEW_DETERMINISM"
+      - "REQ-FEAT_VIEW_GENERATION"
+  satisfaction_criteria:
+    - criterion: "CI and verification fail deterministically while local inspection can warn explicitly."
+    - criterion: "Current-input mismatch identifies exactly which views are stale."
+    - criterion: "Source revisions or hashes identify the canonical inputs used for each view."
+    - criterion: "Stale output is excluded from current-intent and runtime-correctness evidence."
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_VIEW_STALENESS"
+    code_annotations: []
+    implementation:
+      - "IMPL-FEAT_VIEW_STALE_DETECTION"
+    tests: []
+  validation_criteria:
+    - coverage: "Revision and hash mismatch paths"
+      method: "Stale detection tests"
+    - coverage: "Fail and warn modes"
+      method: "Policy tests"
 REQ-FEEDBACK_TO_TIED:
   category: "Functional"
   detail_file: "requirements/REQ-FEEDBACK_TO_TIED.yaml"
@@ -1061,6 +1390,30 @@ REQ-TIED_FIDELITY_RESEARCH:
       method: "Composition tests"
     - coverage: "Audited project source, tests, and project YAML remain unchanged."
       method: "Read-only safety checks"
+REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION:
+  category: "Functional"
+  cross_references:
+    - "ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY"
+    - "IMPL-TIED_FEEDBACK_PROMOTION"
+    - "REQ-FEEDBACK_TO_TIED"
+    - "REQ-LEAP_PROPOSAL_QUEUE"
+  description: "Extend feedback and LEAP proposal workflows with normalized operational evidence, duplicate grouping, proposed requirements, and explicit human-reviewed promotion without automatic canonical writes."
+  detail_file: "requirements/REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION.yaml"
+  name: "Reviewed operational feedback promotion"
+  priority: "P1"
+  status: "Implemented"
+REQ-TIED_RESEARCH_RECORDS:
+  category: "Functional"
+  cross_references:
+    - "ARCH-TIED_RESEARCH_RECORD_BOUNDARY"
+    - "IMPL-TIED_RESEARCH_RECORDS"
+    - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+    - "REQ-TIED_FIDELITY_RESEARCH"
+  description: "Provide structured, provenance-rich research records for library comparisons, benchmarks, security findings, organizational constraints, and experiments without mutating audited project intent."
+  detail_file: "requirements/REQ-TIED_RESEARCH_RECORDS.yaml"
+  name: "Structured research records and freshness"
+  priority: "P1"
+  status: "Implemented"
 REQ-TIED_SETUP:
   category: "Functional"
   description: "TIED setup provides a deterministic client bootstrap: it creates the TIED structure, installs managed prompt-type skills, preserves attributes with cp -p/cp -pR, normalizes only client-copy mtimes to each source item's local calendar-date midnight, and warns before replacing destinations whose mtimes are not midnight."

@@ -1,0 +1,45 @@
+IMPL-FEAT_MIGRATION_APPLY:
+  code_locations:
+    files: []
+    functions: []
+  cross_references:
+    - "ARCH-FEAT_MIGRATION_PREVIEW"
+    - "REQ-FEAT_LEGACY_MIGRATION"
+  implementation_approach:
+    details:
+      - "Backup only migration-owned destination files; never rewrite project-owned TIED YAML."
+      - "Do not create branches/worktrees or promote canonical records."
+      - "Publish complete feature manifests atomically."
+      - "Reject apply without preview identity and explicit confirmation."
+      - "Restore backup on partial failure and report rollback outcome."
+    summary: "Require clean preview and explicit confirmation, create a backup, publish manifests atomically, and restore on failure."
+  name: "Confirmed backup-protected migration apply"
+  rationale:
+    benefits:
+      - "Atomic publication"
+      - "Auditable confirmation"
+      - "Rollback support"
+    problems_solved:
+      - "Accidental writes"
+      - "Canonical YAML ownership violations"
+      - "Irrecoverable partial migration"
+    why: "Persisted migration needs an explicit operator boundary and recovery path."
+  related_decisions:
+    depends_on:
+      - "IMPL-FEAT_ATOMIC_MUTATION"
+      - "IMPL-FEAT_MIGRATION_PREVIEW"
+      - "IMPL-FEAT_STORE"
+    see_also: []
+    supersedes: []
+  status: "Active"
+  testability: "integration"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_MIGRATION_PREVIEW"
+    code_annotations:
+      - "ARCH-FEAT_MIGRATION_PREVIEW"
+      - "IMPL-FEAT_MIGRATION_APPLY"
+      - "REQ-FEAT_LEGACY_MIGRATION"
+    requirements:
+      - "REQ-FEAT_LEGACY_MIGRATION"
+    tests: []

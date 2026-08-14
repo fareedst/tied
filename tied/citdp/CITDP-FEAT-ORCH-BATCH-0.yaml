@@ -1,0 +1,127 @@
+CITDP-FEAT-ORCH-BATCH-0:
+  change_definition:
+    current_behavior: "Canonical TIED records existed without feature-manifest.v1 validation, lifecycle evaluation, canonical reference linking, or a fixture corpus."
+    desired_behavior: "Four independently testable TypeScript Batch 0 contract modules preserve canonical TIED ownership."
+    non_goals:
+      - "clarification schema/gates"
+      - "constitution schema/analyzer"
+      - "generated Markdown views"
+      - "Git branch/worktree integration"
+      - "legacy initial-specs.yaml migration"
+      - "orchestration MCP tools"
+      - "user-facing CLI"
+    success_criteria:
+      - "Canonical links are read-only, typed, and graph-checked."
+      - "Lifecycle evaluation is pure and accepted transitions increment immutable revisions."
+      - "Manifest validation is versioned, reference-only, deterministic, and rejects embedded canonical bodies."
+      - "Required fixture scenarios and deterministic diagnostics are validated."
+  completion_criteria:
+    deferred_work:
+      - "Batch 1 feature store and lifecycle command persistence"
+      - "Batch 2 clarification and constitution gates"
+      - "Batch 4 generated Markdown views"
+      - "Batch 6 legacy initial-specs.yaml migration"
+      - "user-facing orchestration CLI and MCP tools"
+    verification_gate_notes: "tied_verify updated all four REQ statuses to Implemented and all four IMPL statuses to Active; post-update tied_validate_consistency returned ok true."
+  evidence:
+    commands:
+      - "node --test dist/feature-orchestration/*.test.js"
+      - "npm run build"
+      - "npm test"
+      - "pseudocode_validate for all four IMPL sidecars"
+      - "tied_validate_consistency before and after verification"
+      - "tied_verify with four REQ and four IMPL tokens"
+    manifest_reference: "MCP outputs and npm test terminal evidence from this implementation session."
+    proof_boundaries:
+      - "Layer B pseudo-code validation proves structural shape and token linkage only, not runtime behavior."
+      - "Tests prove implemented pure module behavior, not deferred persistence, CLI, MCP orchestration, or migration runtime behavior."
+      - "tied_validate_consistency proves TIED index/detail/traceability integrity only, not runtime security, performance, usability, or product correctness."
+  impact_analysis:
+    impl_inventory_notes: "Existing four IMPL pseudo-code sidecars were authoritative; no LEAP contract mismatch was found."
+    modules_or_boundaries: "mcp-server/src/feature-orchestration/manifest.ts, lifecycle.ts, references.ts, fixtures.ts and colocated unit tests; manifest precedes lifecycle/linking; fixtures inject validators."
+    tied_tokens_affected:
+      - "ARCH-FEAT_CANONICAL_LINK_BOUNDARY"
+      - "ARCH-FEAT_FIXTURE_CORPUS"
+      - "ARCH-FEAT_LIFECYCLE_STATE_MACHINE"
+      - "ARCH-FEAT_MANIFEST_CONTRACT"
+      - "IMPL-FEAT_FIXTURE_VALIDATORS"
+      - "IMPL-FEAT_LIFECYCLE_ENGINE"
+      - "IMPL-FEAT_MANIFEST_VALIDATOR"
+      - "IMPL-FEAT_REFERENCE_LINKER"
+      - "REQ-FEAT_CANONICAL_LINKS"
+      - "REQ-FEAT_FIXTURE_VALIDATION"
+      - "REQ-FEAT_LIFECYCLE"
+      - "REQ-FEAT_MANIFEST_SCHEMA"
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: "none"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "FEAT-ORCH-BATCH-0"
+    recorded_at: "2026-08-13"
+    title: "Feature orchestration Batch 0 foundation modules"
+  record_status: "complete"
+  risk_analysis:
+    excluded_profiles:
+      - applicability: "accepted_risk"
+        profile: "external-input-security"
+        rationale: "No external command, network, user-facing parser, CLI, or orchestration boundary is implemented."
+      - applicability: "not_applicable"
+        profile: "performance-scale-cost"
+        rationale: "Contract-only pure modules with no scale boundary."
+      - applicability: "not_applicable"
+        profile: "user-facing-accessibility"
+        rationale: "No UI or user-facing surface."
+      - applicability: "not_applicable"
+        profile: "regulated-privacy"
+        rationale: "No regulated data boundary."
+      - applicability: "not_applicable"
+        profile: "AI-enabled"
+        rationale: "No AI runtime behavior."
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "npm test"
+        limitation: "Does not prove future persistence or orchestration surfaces."
+        rationale: "Unit and contract tests cover manifests, transitions, links, and fixtures."
+        result: "pass; 209 tests passed, 0 failed"
+      - applicability: "applicable"
+        attribute: "data-integrity-migration"
+        command_or_test: "npm test"
+        limitation: "Atomic persistence is deferred to Batch 1."
+        rationale: "Reference-only manifests reject embedded bodies and unsupported versions; link resolution is read-only."
+        result: "pass"
+      - applicability: "applicable"
+        attribute: "stateful-reliability"
+        command_or_test: "npm test"
+        limitation: "No runtime lock or atomic file store is in Batch 0."
+        rationale: "Revision and immutable transition behavior are tested without claiming runtime persistence reliability."
+        result: "pass"
+    quality_profiles:
+      - "baseline-functional"
+      - "data-integrity-migration"
+      - "stateful-reliability"
+    residual_risk:
+      expiry: "2026-12-31"
+      owner: "Batch 1/2 implementation"
+      summary: "Persistence, locking, migration, external-input resource controls, and orchestration surfaces remain deferred."
+  tdd_sequence:
+    modules:
+      - "canonical reference linker"
+      - "fixture validators"
+      - "lifecycle engine"
+      - "manifest validator"
+    summary: "Tests preceded each module; production code followed observed RED failures; each module was validated independently before suite integration."
+  test_strategy:
+    commands:
+      - "node --test dist/feature-orchestration/*.test.js"
+      - "npm run build"
+      - "npm test"
+    e2e_applicability: "not_applicable"
+    e2e_rationale: "No UI, external process, network, CLI, or orchestration MCP boundary is in scope."
+    results:
+      - Focused tests: "11 passed."
+      - Full suite: "209 passed, 0 failed."
+      - GREEN: "npm run build passed."
+      - RED observed: "npm run build failed before implementation with missing feature-orchestration modules."
+    summary: "Strict RED to GREEN unit TDD, independent module validation before fixture integration, no E2E."

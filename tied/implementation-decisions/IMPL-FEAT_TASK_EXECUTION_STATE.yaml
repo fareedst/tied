@@ -1,0 +1,53 @@
+IMPL-FEAT_TASK_EXECUTION_STATE:
+  code_locations:
+    files: []
+    functions: []
+  cross_references:
+    - "ARCH-FEAT_TASK_EXECUTION_STATE"
+    - "REQ-FEAT_TASK_EXECUTION_RECOVERY"
+  detail_file: "implementation-decisions/IMPL-FEAT_TASK_EXECUTION_STATE.yaml"
+  implementation_approach:
+    details:
+      - "Append evidence rather than replacing history."
+      - "Model failure, retry, cancellation, timeout, stale-input, and resume as explicit outcomes."
+      - "Require matching source revision for resume or an explicit stale-input recovery transition."
+    summary: "Versioned execution state keyed by task_id and source revision with explicit failure and recovery transitions."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-13"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Batch 3 plan gate"
+  name: "Task execution state and evidence history"
+  rationale:
+    benefits:
+      - "Deterministic recovery"
+      - "Stable identity"
+    problems_solved:
+      - "Dependent unlock after failure"
+      - "Lost retry evidence"
+      - "Unsafe resume"
+    why: "Explicit attempt state and append-only evidence preserve safe recovery and auditability."
+  related_decisions:
+    depends_on:
+      - "IMPL-FEAT_TASK_GRAPH_SCHEDULER"
+    see_also:
+      - "IMPL-GOAGENT-EXECUTOR"
+    supersedes: []
+  status: "Active"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_TASK_EXECUTION_STATE"
+    code_annotations:
+      - "ARCH-FEAT_TASK_EXECUTION_STATE"
+      - "IMPL-FEAT_TASK_EXECUTION_STATE"
+      - "REQ-FEAT_TASK_EXECUTION_RECOVERY"
+    requirements:
+      - "REQ-FEAT_TASK_EXECUTION_RECOVERY"
+    tests:
+      - "execution_blocks_dependents_after_failure_REQ_FEAT_TASK_EXECUTION_RECOVERY"
+      - "execution_preserves_identity_on_retry_REQ_FEAT_TASK_EXECUTION_RECOVERY"
+      - "execution_rejects_stale_resume_REQ_FEAT_TASK_EXECUTION_RECOVERY"

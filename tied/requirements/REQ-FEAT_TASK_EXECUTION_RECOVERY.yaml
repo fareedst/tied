@@ -1,0 +1,19 @@
+REQ-FEAT_TASK_EXECUTION_RECOVERY:
+  category: "Functional"
+  cross_references:
+    - "ARCH-FEAT_TASK_EXECUTION_STATE"
+    - "IMPL-FEAT_TASK_EXECUTION_STATE"
+  description: "Define stable task identity and evidence history across failure, retry, cancellation, timeout, stale-input, and resume outcomes; failed tasks never unlock dependents."
+  name: "Task execution recovery and evidence history"
+  priority: "P0"
+  rationale:
+    problems_solved:
+      - "Dependent unlock after failure"
+      - "Evidence loss on retry"
+      - "Unsafe stale resumes"
+    why: "Execution must be resumable and auditable without rewriting task identity or losing prior evidence."
+  satisfaction_criteria:
+    - criterion: "Each execution outcome has deterministic status and reason semantics."
+    - criterion: "Retries and resumed runs preserve task_id and append evidence history."
+    - criterion: "Stale input and cancellation prevent dependents from becoming ready until an explicit valid recovery occurs."
+  status: "Planned"

@@ -1,0 +1,51 @@
+IMPL-FEAT_VIEW_RENDERER:
+  code_locations:
+    files:
+      - description: "Deterministic Markdown renderers and semantic comparison"
+        path: "mcp-server/src/feature-orchestration/views.ts"
+    functions:
+      - file: "mcp-server/src/feature-orchestration/views.ts"
+        name: "renderGeneratedView"
+      - file: "mcp-server/src/feature-orchestration/views.ts"
+        name: "semanticCompareView"
+  cross_references:
+    - "ARCH-FEAT_VIEW_RENDERING"
+    - "REQ-FEAT_VIEW_DETERMINISM"
+    - "REQ-FEAT_VIEW_GENERATION"
+  detail_file: "implementation-decisions/IMPL-FEAT_VIEW_RENDERER.yaml"
+  implementation_approach:
+    details:
+      - "Compare normalized semantic sections while retaining metadata and link changes as meaningful."
+      - "Emit a generated-file banner, source revision/hash metadata, token links, evidence links, and proof-boundary labels in every view."
+      - "Never copy full canonical REQ/ARCH/IMPL bodies into views."
+      - "Support spec.md, plan.md, tasks.md, quickstart.md, data-model.md, and applicable contracts views."
+      - "Use fixed section ordering and canonical sorting for byte-stable output."
+    summary: "Render stable Markdown views from the normalized source projection and compare normalized semantics without mutating canonical records."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: {}
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Batch 4 implementation and focused tests"
+  name: "Deterministic generated-view renderer and semantic comparison"
+  related_decisions:
+    depends_on:
+      - "IMPL-FEAT_VIEW_PROJECTION"
+    see_also: []
+    supersedes: []
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_VIEW_RENDERING"
+    code_annotations:
+      - "ARCH-FEAT_VIEW_RENDERING"
+      - "IMPL-FEAT_VIEW_RENDERER"
+      - "REQ-FEAT_VIEW_DETERMINISM"
+      - "REQ-FEAT_VIEW_GENERATION"
+    requirements:
+      - "REQ-FEAT_VIEW_DETERMINISM"
+      - "REQ-FEAT_VIEW_GENERATION"
+    tests:
+      - "mcp-server/src/feature-orchestration/views.test.ts"

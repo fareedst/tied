@@ -1,0 +1,40 @@
+IMPL-FEAT_OFFLINE_FALLBACK:
+  code_locations:
+    files: []
+    functions: []
+  cross_references:
+    - "ARCH-FEAT_OFFLINE_COMPATIBILITY"
+    - "REQ-FEAT_OFFLINE_WORKFLOW_PRESERVATION"
+  implementation_approach:
+    details:
+      - "Detect Node and MCP binary independently."
+      - "Prefer tied-cli when available and manual guide otherwise."
+      - "Preserve direct TIED YAML MCP and agentstream instructions."
+    summary: "Detect capability gaps and return tied-cli or manual/offline guidance without changing project state."
+  name: "Explicit offline fallback adapter"
+  rationale:
+    benefits:
+      - "Explicit operator choice"
+      - "Offline continuity"
+    problems_solved:
+      - "Hidden replacement of direct tools"
+      - "Mandatory Node/MCP assumption"
+    why: "New onboarding must remain additive when optional dependencies are unavailable."
+  related_decisions:
+    depends_on:
+      - "IMPL-FEAT_LOCAL_DEFAULTS"
+      - "IMPL-TIED_FILES"
+    see_also: []
+    supersedes: []
+  status: "Active"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-FEAT_OFFLINE_COMPATIBILITY"
+    code_annotations:
+      - "ARCH-FEAT_OFFLINE_COMPATIBILITY"
+      - "IMPL-FEAT_OFFLINE_FALLBACK"
+      - "REQ-FEAT_OFFLINE_WORKFLOW_PRESERVATION"
+    requirements:
+      - "REQ-FEAT_OFFLINE_WORKFLOW_PRESERVATION"
+    tests: []
