@@ -2,7 +2,7 @@
 
 **TIED Methodology Version**: 3.0.0
 
-Six diagrams capture the core methodology: the traceability stack, the three development phases, the LEAP bidirectional loop, the full dev-cycle session workflow, the TDD inner loop, and the CITDP change-analysis procedure. A short **New client setup — Cursor** section at the end shows bootstrap and `agent enable tied-yaml` for MCP.
+Six diagrams capture the core methodology: the traceability stack, the three development phases, the LEAP bidirectional loop, the full dev-cycle session workflow, the TDD inner loop, and the CITDP change-analysis procedure. A short **New client setup — Cursor** section at the end shows bootstrap and `agent mcp enable tied-yaml` for MCP.
 
 **Related documents**: [LEAP.md](LEAP.md), [implementation-order.md](implementation-order.md), [processes.md](processes.md), [ai-principles.md](./ai-principles.md)
 
@@ -241,11 +241,11 @@ Sequence for configuring a **new TIED client** when using **Cursor**: bootstrap 
 ```mermaid
 flowchart LR
   CopyFiles["copy_files.sh"]
-  AgentEnable["agent enable tied-yaml"]
+  AgentEnable["agent mcp enable tied-yaml"]
   Approve["Approve project\nMCP config"]
   Quit["quit"]
   UseMcp["Use tied-yaml\nMCP tools"]
   CopyFiles --> AgentEnable --> Approve --> Quit --> UseMcp
 ```
 
-Run `agent enable tied-yaml` from the **client project** directory after `copy_files.sh`. Approve the update when Cursor prompts you. Type **`quit`** to exit the `agent` UI. See [README.md](../README.md) (Getting Started with a New Project) and [adding-tied-mcp-and-invoking-passes.md](adding-tied-mcp-and-invoking-passes.md).
+Run `agent mcp enable tied-yaml` from the **client project** directory after `copy_files.sh`. Approve the update when Cursor prompts you. Type **`quit`** to exit the `agent` UI. See [README.md](../README.md) (Getting Started with a New Project) and [adding-tied-mcp-and-invoking-passes.md](adding-tied-mcp-and-invoking-passes.md).

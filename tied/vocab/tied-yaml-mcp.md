@@ -47,6 +47,7 @@
 | TIED source root | TIED methodology repo | — | `TIED_REPO_ROOT` (baked by `copy_files.sh` into installed tied-cli) | default for `TIED_MCP_BIN` |
 | Client project root | client repo | — | derived in tied-cli (`REPO_ROOT`) | default for `TIED_BASE_PATH`; `getClientProjectRoot()` for extra rename globs |
 | IDE MCP config | mcp.json | `.cursor/mcp.json` | `env.TIED_BASE_PATH` | Cursor Settings → MCP |
+| Bootstrap metrics configuration | new `.cursor/mcp.json` metrics fields | `copy_files.sh` | `TIED_MCP_COLLECT_METRICS=1`, `TIED_MCP_METRICS_CLIENT` | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) · [REQ-MCP_USAGE_METRICS](../requirements/REQ-MCP_USAGE_METRICS.yaml) |
 | MCP config preservation | preserve existing MCP config | `.cursor/mcp.json` | `copy_files.sh` initializes only when absent | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
 | Large CLI args | args file | temp file | `TIED_CLI_ARGS_FILE` | `@/path/to/payload.json` |
 | IMPL body from file | essence file | `IMPL-*-pseudocode.md` | `TIED_CLI_IMPL_ESSENCE_FILE` | `impl_detail_set_essence_pseudocode` |
@@ -165,6 +166,7 @@ Feedback and LEAP proposal tools are documented in sibling glossaries ([`feedbac
 | Term | Section |
 |------|---------|
 | args_signature | MCP usage metrics |
+| bootstrap metrics configuration | Naming bridge |
 | canonical YAML profile | Preferred terms |
 | citdp_record_write | MCP catalog |
 | client project root | Preferred terms |

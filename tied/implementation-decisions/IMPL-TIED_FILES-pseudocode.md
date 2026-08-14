@@ -1,5 +1,5 @@
-# [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
-# Summary: Bootstrap TIED layout from templates via copy_files.sh — indexes, guides, detail dirs, AGENTS.md family, vocabulary seed/merge, managed prompt-type skills, attribute-preserving copies, source-date midnight timestamps on client copies, modification warnings, implementation pseudo-code sidecars, and tied-yaml skill.
+# [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS] [IMPL-MCP_USAGE_METRICS]
+# Summary: Bootstrap TIED layout from templates via copy_files.sh — indexes, guides, detail dirs, AGENTS.md family, vocabulary seed/merge, managed prompt-type skills, attribute-preserving copies, source-date midnight timestamps on client copies, modification warnings, implementation pseudo-code sidecars, tied-yaml skill, and opt-in MCP metrics configuration.
 
 # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
 # How: Contract — INPUT/OUTPUT/DATA for BOOTSTRAP_TIED below; these fields define the bootstrap boundary.
@@ -8,11 +8,11 @@
 # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
 # How: OUTPUT — created or updated files under tied/ and selected root files; process exit status.
 # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
-# How: DATA — project indexes; inherited methodology tree; tied/vocab/*.md when seeded or merged; IMPL-*-pseudocode.md sidecars; managed .cursor/skills/ artifacts; source-date midnight metadata applied only to client copies; modification diagnostics; and the client .cursor/mcp.json when initialized.
+# How: DATA — project indexes; inherited methodology tree; tied/vocab/*.md when seeded or merged; IMPL-*-pseudocode.md sidecars; managed .cursor/skills/ artifacts; source-date midnight metadata applied only to client copies; modification diagnostics; and the client .cursor/mcp.json when initialized, including opt-in metrics fields.
 
 procedure BOOTSTRAP_TIED(projectRoot):
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
-  # How: Bootstrap or refresh the client layout while preserving client-owned project YAML, existing vocabulary, and any existing MCP configuration; managed copies retain attributes, receive source-date midnight timestamps, and warn before overwriting a changed client copy.
+  # How: Bootstrap or refresh the client layout while preserving client-owned project YAML, existing vocabulary, and any existing MCP configuration; managed copies retain attributes, receive source-date midnight timestamps, warn before overwriting a changed client copy, and initialize optional metrics fields only for a new MCP configuration when collection is explicitly enabled.
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
   # How: Ensure tied/ exists; copy template indexes, detail YAML, and implementation pseudo-code sidecars; copy guide/schema docs from tied/docs/ in the TIED source per copy_files.sh; create detail subdirs; copy AGENTS.md, .cursorrules to project root.
   Contract:
@@ -108,21 +108,24 @@ procedure WARN_ON_MODIFIED_COPY_TARGET(destinationPath):
   RETURN diagnostics
 
 procedure INITIALIZE_TIED_MCP_CONFIG(projectRoot):
-  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
-  # How: Create the default TIED MCP configuration only when the client has no .cursor/mcp.json; preserve an existing configuration byte-for-byte.
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS] [IMPL-MCP_USAGE_METRICS]
+  # How: Create the default TIED MCP configuration only when the client has no .cursor/mcp.json; when TIED_MCP_COLLECT_METRICS is exactly 1, add metrics fields and derive the client label from an explicit override or the project basename; preserve an existing configuration byte-for-byte.
   Contract:
-    INPUT: projectRoot; built TIED MCP server path; absolute project TIED base path
+    INPUT: projectRoot; built TIED MCP server path; absolute project TIED base path; optional TIED_MCP_COLLECT_METRICS and TIED_MCP_METRICS_CLIENT environment values
     OUTPUT: newly initialized projectRoot/.cursor/mcp.json or unchanged existing configuration
-    DATA: MCP server command, TIED_MCP_BIN args, TIED_BASE_PATH environment, existing client MCP configuration
-    CONTROL: initialize only when .cursor/mcp.json is absent; never merge, rewrite, or normalize an existing file
+    DATA: MCP server command, TIED_MCP_BIN args, TIED_BASE_PATH environment, optional TIED_MCP_COLLECT_METRICS and TIED_MCP_METRICS_CLIENT environment values, existing client MCP configuration
+    CONTROL: initialize only when .cursor/mcp.json is absent; when collection equals 1, set TIED_MCP_COLLECT_METRICS to 1 and use a non-empty TIED_MCP_METRICS_CLIENT override or basename(projectRoot); never merge, rewrite, or normalize an existing file
     PRE: projectRoot/.cursor/ is writable when initialization is needed; built MCP server and TIED base path are resolvable
-    POST: absent configuration becomes a valid TIED MCP config; existing configuration retains its original bytes
+    POST: absent configuration becomes a valid TIED MCP config; when collection equals 1 its env contains both metrics fields; otherwise metrics fields are absent; existing configuration retains its original bytes
     EFFECTS: File I/O — conditionally creates one JSON file; Process — resolves paths and emits diagnostics
     FAILURE_MODES: MCP_SERVER_DIST_MISSING; MCP_CONFIG_PARENT_UNWRITABLE; MCP_CONFIG_WRITE_FAILED
-    DATA_TRANSITION: config absent→default TIED MCP config; config present→same bytes
+    DATA_TRANSITION: config absent→default TIED MCP config with optional metrics fields; config present→same bytes
     TERMINATION: total — one existence check and at most one initialization
   IF projectRoot/.cursor/mcp.json exists:
     RETURN preserved
+  IF TIED_MCP_COLLECT_METRICS equals "1":
+    metricsClient := TIED_MCP_METRICS_CLIENT WHEN non-empty ELSE basename(projectRoot)
+    include TIED_MCP_COLLECT_METRICS := "1" and TIED_MCP_METRICS_CLIENT := metricsClient in the generated env
   CALL _refresh_tied_mcp_json(projectRoot)
   RETURN initialized
 

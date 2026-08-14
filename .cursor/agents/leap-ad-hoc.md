@@ -1,11 +1,7 @@
 ---
 name: leap-ad-hoc
-description: >-
-  Use when the caller explicitly selects leap-ad-hoc or delegates fortifying
-  caller-supplied staged ad-hoc work with Read Ad-Hoc, Refine, Plan, and
-  Implement. Do not use for leap-diff-promote, plan-close-out, plan-new-feature,
-  or without staged context.
-model: gpt-5.6-luna[effort=high]
+description: Use when the caller explicitly selects leap-ad-hoc or delegates fortifying caller-supplied staged ad-hoc work with Read Ad-Hoc, Refine, Plan, and Implement. Do not use for leap-diff-promote, plan-close-out, plan-new-feature, or without staged context.
+model: inherit
 readonly: false
 is_background: false
 ---

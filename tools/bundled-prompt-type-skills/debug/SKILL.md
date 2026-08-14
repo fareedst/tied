@@ -1,10 +1,6 @@
 ---
 name: debug
-description: >-
-  TIED bug workflow: Refine (debug gate), Capture Failure, Plan, Implement.
-  Use when the caller names debug, reports a TIED-tracked bug, or needs failure
-  reproduction before planning. Do not use for non-tied-debug, question, or
-  plan-new-feature.
+description: TIED bug workflow: Refine (debug gate), Capture Failure, Plan, Implement. Use when the caller names debug, reports a TIED-tracked bug, or needs failure reproduction before planning. Do not use for non-tied-debug, question, or plan-new-feature.
 disable-model-invocation: true
 ---
 

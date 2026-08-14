@@ -1,10 +1,7 @@
 ---
 name: question
-description: >-
-  Use when the caller explicitly selects question or delegates a minimal
-  question from the invocation remainder. Do not use for plan-new-feature,
-  debug, build-plan, refine-plan, or other TIED workflows.
-model: gpt-5.6-luna[effort=high]
+description: Use when the caller explicitly selects question or delegates a minimal question from the invocation remainder. Do not use for plan-new-feature, debug, build-plan, refine-plan, or other TIED workflows.
+model: inherit
 readonly: true
 is_background: false
 ---

@@ -1,10 +1,6 @@
 ---
 name: use-skill
-description: >-
-  Imports skills and applies them to the project with full TIED Refine, Plan,
-  and Implement gates. Use when the caller names use-skill, imports Cursor
-  skills to a project, or applies skill instructions in the invocation
-  remainder. Do not use for prompt-type-router, question, or non-tied-plan.
+description: Imports skills and applies them to the project with full TIED Refine, Plan, and Implement gates. Use when the caller names use-skill, imports Cursor skills to a project, or applies skill instructions in the invocation remainder. Do not use for prompt-type-router, question, or non-tied-plan.
 disable-model-invocation: true
 ---
 

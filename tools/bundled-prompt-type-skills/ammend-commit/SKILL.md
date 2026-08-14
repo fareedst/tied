@@ -1,10 +1,6 @@
 ---
 name: ammend-commit
-description: >-
-  Staged patches to amend the last commit: TIED process, CHANGELOG, proposed
-  amend message—do not commit. Use when the caller names ammend-commit (preserve
-  spelling), amends the most recent commit from staged patches, or prepares an
-  amend message. Do not use for plan-close-out or leap-diff-promote.
+description: Staged patches to amend the last commit: TIED process, CHANGELOG, proposed amend message—do not commit. Use when the caller names ammend-commit (preserve spelling), amends the most recent commit from staged patches, or prepares an amend message. Do not use for plan-close-out or leap-diff-promote.
 disable-model-invocation: true
 ---
 

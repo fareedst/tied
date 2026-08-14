@@ -1,10 +1,6 @@
 ---
 name: leap-diff-promote
-description: >-
-  Promotes git diff patches onto a TIED-complete stage: process, CHANGELOG,
-  proposed commit—do not commit. Use when the caller names leap-diff-promote,
-  promotes diff onto staged TIED-complete files, or close-outs diff patches. Do
-  not use for plan-close-out or ammend-commit.
+description: Promotes git diff patches onto a TIED-complete stage: process, CHANGELOG, proposed commit—do not commit. Use when the caller names leap-diff-promote, promotes diff onto staged TIED-complete files, or close-outs diff patches. Do not use for plan-close-out or ammend-commit.
 disable-model-invocation: true
 ---
 

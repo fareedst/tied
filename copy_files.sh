@@ -37,7 +37,7 @@
 #     repo's mcp-server/dist/index.js and the target project's tied/ only when the file is
 #     missing; preserves an existing file byte-for-byte. Fails if mcp-server/dist/index.js is
 #     not built. After bootstrap, in Cursor you may
-#     run: agent enable tied-yaml — approve; type quit to exit the Agent CLI.
+#     run: agent mcp enable tied-yaml — approve; type quit to exit the Agent CLI.
 #
 # Managed bootstrap copy metadata:
 #   Managed copies use cp -p/cp -pR, then receive the source item's local
@@ -243,20 +243,32 @@ TIED_BASE_PATH_VALUE="$(_realpath "${TIED_DIR}")"
 MCP_JSON="${CURSOR_DIR}/mcp.json"
 
 _refresh_tied_mcp_json() {
-  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
-  # How: Create the default TIED MCP configuration for a missing client file; the caller guards existing files so client-owned settings remain untouched.
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS]
+  # How: Create the default TIED MCP configuration for a missing client file; when metrics collection is exactly 1, add the opt-in fields and use an explicit client label or the project basename; the caller guards existing files so client-owned settings remain untouched.
   MCP_JSON_PATH="${MCP_JSON}" TIED_MCP_INDEX_JS="${TIED_SERVER_PATH}" TIED_BASE_PATH_VAL="${TIED_BASE_PATH_VALUE}" \
+  TIED_MCP_COLLECT_METRICS_VAL="${TIED_MCP_COLLECT_METRICS:-}" \
+  TIED_MCP_METRICS_CLIENT_VAL="${TIED_MCP_METRICS_CLIENT:-}" \
+  TIED_PROJECT_BASENAME="$(basename "${TARGET_PROJECT_DIR}")" \
     python3 -c '
 import json, os, sys
 mcp = os.environ["MCP_JSON_PATH"]
 js = os.environ["TIED_MCP_INDEX_JS"]
 base = os.environ["TIED_BASE_PATH_VAL"]
+collect_metrics = os.environ["TIED_MCP_COLLECT_METRICS_VAL"] == "1"
+metrics_client = (
+    os.environ["TIED_MCP_METRICS_CLIENT_VAL"]
+    or os.environ["TIED_PROJECT_BASENAME"]
+)
+env = {"TIED_BASE_PATH": base}
+if collect_metrics:
+    env["TIED_MCP_COLLECT_METRICS"] = "1"
+    env["TIED_MCP_METRICS_CLIENT"] = metrics_client
 entry = {
     "type": "stdio",
     "disabled": False,
     "command": "node",
     "args": [js],
-    "env": {"TIED_BASE_PATH": base},
+    "env": env,
 }
 if os.path.exists(mcp):
     try:

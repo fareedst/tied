@@ -1,11 +1,6 @@
 ---
 name: tied-yaml
-description: >-
-  Read and write TIED REQ/ARCH/IMPL YAML records via the tied-yaml CLI.
-  Use when working with requirements.yaml, architecture-decisions.yaml,
-  implementation-decisions.yaml, semantic-tokens.yaml, detail files under
-  tied/, or any task involving REQ-*, ARCH-*, IMPL-* tokens, traceability,
-  or TIED validation. This is the exclusive interface for TIED YAML mutations.
+description: Read and write TIED REQ/ARCH/IMPL YAML records via the tied-yaml CLI. Use when working with requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml, detail files under tied/, or any task involving REQ-*, ARCH-*, IMPL-* tokens, traceability, or TIED validation. This is the exclusive interface for TIED YAML mutations.
 ---
 # TIED YAML Skill
 
@@ -21,7 +16,7 @@ All reads and writes to REQ, ARCH, and IMPL **YAML** records (indexes, `IMPL-*.y
 ### Cursor MCP vs `tied-cli.sh`
 
 - **Registering `tied-yaml` in Cursor** (`.cursor/mcp.json` / **Settings → MCP**) is for **in-editor** tool calls. It is **optional** for shell use.
-- **`tied-cli.sh`** talks to the **same** server over **stdio** (`node …/dist/index.js`). An empty MCP server list in the IDE does **not** mean `tied-cli.sh` cannot run — it means only that the editor has not loaded that MCP entry (common in CI, sandboxes, or before `agent enable tied-yaml`).
+- **`tied-cli.sh`** talks to the **same** server over **stdio** (`node …/dist/index.js`). An empty MCP server list in the IDE does **not** mean `tied-cli.sh` cannot run — it means only that the editor has not loaded that MCP entry (common in CI, sandboxes, or before `agent mcp enable tied-yaml`).
 - **Default MCP binary**: After **`copy_files.sh`**, `tied-cli.sh` bakes **`TIED_REPO_ROOT`** (and thus default **`TIED_MCP_BIN`**) to the TIED repository that ran bootstrap (`…/mcp-server/dist/index.js`). Client projects usually **do not** vendor `mcp-server/` at the project root; rely on the baked path or set **`TIED_MCP_BIN`** / **`TIED_REPO_ROOT`** to override.
 - **Shell alone is not enough:** `tied-cli.sh` in `.cursor/skills/tied-yaml/scripts/` plus Node; setting only **`TIED_MCP_BIN`** in the environment without the script does not provide the JSON-RPC client.
 

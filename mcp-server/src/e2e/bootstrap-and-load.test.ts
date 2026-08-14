@@ -8,7 +8,7 @@ import assert from "node:assert";
 import fs from "node:fs";
 import path from "node:path";
 import os from "node:os";
-import { execSync } from "node:child_process";
+import { execFileSync, execSync } from "node:child_process";
 import {
   clearBasePathCache,
   loadIndex,
@@ -139,6 +139,19 @@ describe("e2e: bootstrap and load", () => {
       "copy_files.sh should not create scripts/tied-cli.sh (single CLI path is under .cursor/skills/) [IMPL-TIED_FILES]"
     );
 
+    const legacyMcpEnableCommand = ["agent", "enable", "tied-yaml"].join(" ");
+    const currentMcpEnableCommand = ["agent", "mcp", "enable", "tied-yaml"].join(" ");
+    const bundledSkillPath = path.join(repoRoot, "tools", "bundled-tied-yaml-skill", "SKILL.md");
+    const installedSkillPath = path.join(tempDir, ".cursor", "skills", "tied-yaml", "SKILL.md");
+    for (const [label, content] of [
+      ["copy_files.sh", fs.readFileSync(copyScript, "utf8")],
+      ["bundled tied-yaml skill", fs.readFileSync(bundledSkillPath, "utf8")],
+      ["installed tied-yaml skill", fs.readFileSync(installedSkillPath, "utf8")],
+    ] as const) {
+      assert.match(content, new RegExp(currentMcpEnableCommand.replaceAll(" ", "\\s+")), `${label} should document the current MCP enable command [REQ-TIED_SETUP]`);
+      assert.doesNotMatch(content, new RegExp(legacyMcpEnableCommand.replaceAll(" ", "\\s+")), `${label} should not retain the legacy MCP enable command [REQ-TIED_SETUP]`);
+    }
+
     const vocabIndex = path.join(tiedDir, "vocab", "domain-references.md");
     const vocabRouting = path.join(tiedDir, "vocab", "routing.md");
     const vocabMethodology = path.join(tiedDir, "vocab", "tied-methodology.md");
@@ -180,6 +193,51 @@ describe("e2e: bootstrap and load", () => {
       "copy_files.sh should copy the fidelity audit prompt"
     );
 
+  });
+
+  it("initializes opt-in MCP metrics fields with an override or project basename [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS]", () => {
+    // [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS]
+    // How: Create the default TIED MCP configuration only when the client has no .cursor/mcp.json; when TIED_MCP_COLLECT_METRICS is exactly 1, add metrics fields and derive the client label from an explicit override or the project basename; preserve an existing configuration byte-for-byte.
+    const copyScript = path.join(repoRoot, "copy_files.sh");
+    const runBootstrap = (target: string, metricsValue?: string, clientValue?: string) => {
+      const env = { ...process.env };
+      delete env.TIED_MCP_COLLECT_METRICS;
+      delete env.TIED_MCP_METRICS_CLIENT;
+      if (metricsValue !== undefined) env.TIED_MCP_COLLECT_METRICS = metricsValue;
+      if (clientValue !== undefined) env.TIED_MCP_METRICS_CLIENT = clientValue;
+      execFileSync("bash", [copyScript, target], {
+        stdio: "pipe",
+        cwd: repoRoot,
+        env,
+      });
+      return JSON.parse(fs.readFileSync(path.join(target, ".cursor", "mcp.json"), "utf8")) as {
+        mcpServers: { "tied-yaml": { env: Record<string, string> } };
+      };
+    };
+
+    const basenameTarget = path.join(tempDir, "basename-client");
+    fs.mkdirSync(basenameTarget);
+    const basenameConfig = runBootstrap(basenameTarget, "1");
+    assert.deepStrictEqual(basenameConfig.mcpServers["tied-yaml"].env, {
+      TIED_BASE_PATH: fs.realpathSync(path.join(basenameTarget, "tied")),
+      TIED_MCP_COLLECT_METRICS: "1",
+      TIED_MCP_METRICS_CLIENT: "basename-client",
+    });
+
+    const overrideTarget = path.join(tempDir, "override-client");
+    fs.mkdirSync(overrideTarget);
+    const overrideConfig = runBootstrap(overrideTarget, "1", "explicit-client");
+    assert.strictEqual(
+      overrideConfig.mcpServers["tied-yaml"].env.TIED_MCP_METRICS_CLIENT,
+      "explicit-client"
+    );
+
+    const nonOneTarget = path.join(tempDir, "non-one-client");
+    fs.mkdirSync(nonOneTarget);
+    const nonOneConfig = runBootstrap(nonOneTarget, "true");
+    assert.deepStrictEqual(nonOneConfig.mcpServers["tied-yaml"].env, {
+      TIED_BASE_PATH: fs.realpathSync(path.join(nonOneTarget, "tied")),
+    });
   });
 
   it("refreshes inherited methodology without overwriting client content [IMPL-TIED_FILES]", () => {
@@ -238,6 +296,11 @@ describe("e2e: bootstrap and load", () => {
     const refreshOutput = execSync(`bash "${copyScript}" --merge-vocab "${tempDir}"`, {
       stdio: "pipe",
       cwd: repoRoot,
+      env: {
+        ...process.env,
+        TIED_MCP_COLLECT_METRICS: "1",
+        TIED_MCP_METRICS_CLIENT: "should-not-rewrite",
+      },
     }).toString();
     assert.match(
       refreshOutput,

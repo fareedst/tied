@@ -1,10 +1,6 @@
 ---
 name: plan-close-out
-description: >-
-  Staged LEAP close-out: process stack sync, CHANGELOG, and proposed commit
-  message without committing. Use when the caller names plan-close-out, closes
-  out staged TIED work, or prepares a commit from staged changes. Do not use
-  for ammend-commit, leap-diff-promote, or planning new features.
+description: Staged LEAP close-out: process stack sync, CHANGELOG, and proposed commit message without committing. Use when the caller names plan-close-out, closes out staged TIED work, or prepares a commit from staged changes. Do not use for ammend-commit, leap-diff-promote, or planning new features.
 disable-model-invocation: true
 ---
 

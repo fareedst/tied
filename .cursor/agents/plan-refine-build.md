@@ -1,11 +1,7 @@
 ---
 name: plan-refine-build
-description: >-
-  Use when the caller explicitly selects plan-refine-build or delegates a new
-  TIED-tracked feature that must run plan-new-feature, then refine-plan, then
-  build-plan as sequential Task subagents. Do not use for a single leaf, a
-  custom prompt-type-router list, non-tied-plan, or question.
-model: gpt-5.6-luna[effort=high]
+description: Use when the caller explicitly selects plan-refine-build or delegates a new TIED-tracked feature that must run plan-new-feature, then refine-plan, then build-plan as sequential Task subagents. Do not use for a single leaf, a custom prompt-type-router list, non-tied-plan, or question.
+model: inherit
 readonly: false
 is_background: false
 ---

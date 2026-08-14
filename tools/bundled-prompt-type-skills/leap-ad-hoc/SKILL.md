@@ -1,10 +1,6 @@
 ---
 name: leap-ad-hoc
-description: >-
-  Fortifies staged ad-hoc code: Read Ad-Hoc Changes, Refine, Plan (no Tracker
-  copy), Implement. Use when the caller names leap-ad-hoc, fortifies git-staged
-  work without prior CITDP, or LEAP-syncs ad-hoc changes. Do not use without
-  caller-supplied staged context; do not auto-run git diff.
+description: Fortifies staged ad-hoc code: Read Ad-Hoc Changes, Refine, Plan (no Tracker copy), Implement. Use when the caller names leap-ad-hoc, fortifies git-staged work without prior CITDP, or LEAP-syncs ad-hoc changes. Do not use without caller-supplied staged context; do not auto-run git diff.
 disable-model-invocation: true
 ---
 

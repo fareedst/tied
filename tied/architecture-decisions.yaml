@@ -751,25 +751,27 @@ ARCH-MCP_USAGE_METRICS:
         - "Simpler for operators"
       rejected_reason: "Default off via TIED_MCP_COLLECT_METRICS matches local-only opt-in requirement"
   cross_references:
+    - "IMPL-TIED_FILES"
     - "REQ-MCP_USAGE_METRICS"
   detail_file: "architecture-decisions/ARCH-MCP_USAGE_METRICS.yaml"
   implementation_approach:
     details:
+      - "Bootstrap may propagate metrics environment fields into a newly created .cursor/mcp.json when TIED_MCP_COLLECT_METRICS=1; existing configurations remain byte-for-byte unchanged"
       - "Client label from TIED_MCP_METRICS_CLIENT (tied-cli sets tied-cli; IDE default cursor-mcp)"
       - "Env gate: TIED_MCP_COLLECT_METRICS=1 or true enables collection; default disabled"
       - "Registration-time wrapToolHandler in mcp-server/src/index.ts — no per-handler edits"
       - "sanitizeArgs redacts blob fields; never logs full essence_pseudocode or record bodies"
       - "Storage: append-only JSONL at TIED_MCP_METRICS_PATH or ~/.cursor/logs/tied-mcp-metrics.jsonl"
       - "Write failures are non-fatal (DIAGNOSTIC stderr only)"
-    summary: "Wrapper at MCP tool registration appends sanitized JSONL records when env opt-in is set"
+    summary: "Wrapper at MCP tool registration appends sanitized JSONL records when env opt-in is set; bootstrap may seed metrics fields only in new MCP configurations"
   metadata:
     created:
       author: "AI Agent"
       date: "2026-06-25"
     last_updated:
       author: "AI Agent"
-      date: "2026-06-25"
-      reason: "Initial creation"
+      date: "2026-08-13"
+      reason: "Record conditional bootstrap metrics configuration and preserve existing MCP files"
     last_validated:
       date: "2026-06-25"
       result: "pass"

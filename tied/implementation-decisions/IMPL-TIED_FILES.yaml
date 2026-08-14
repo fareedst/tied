@@ -39,7 +39,10 @@ IMPL-TIED_FILES:
         file: "copy_files.sh"
         name: "setup_tied_structure"
   cross_references:
+    - "ARCH-MCP_USAGE_METRICS"
     - "ARCH-TIED_STRUCTURE"
+    - "IMPL-MCP_USAGE_METRICS"
+    - "REQ-MCP_USAGE_METRICS"
     - "REQ-TIED_SETUP"
   detail_file: "implementation-decisions/IMPL-TIED_FILES.yaml"
   implementation_approach:
@@ -56,12 +59,14 @@ IMPL-TIED_FILES:
       - "Initialize .cursor/mcp.json only when it is absent; preserve an existing file byte-for-byte rather than merging or refreshing tied-yaml settings, including when tied-yaml is absent."
       - "Install the tied-yaml Cursor skill to .cursor/skills/tied-yaml/ (from tools/bundled-tied-yaml-skill/ in the TIED source repo; .cursor/skills/tied-yaml only if the bundle is missing; overwritten each run). The canonical stdio client on the client is .cursor/skills/tied-yaml/scripts/tied-cli.sh only; copy_files.sh does not create a project-root scripts/tied-cli.sh entry."
       - "Install the tracked tools/bundled-prompt-type-skills/ bundle into client .cursor/skills/ with an explicit managed directory list; refresh only prompt-type and prompt-shared paths while preserving unrelated skills and .cursor/mcp.json."
+      - "Preserve the existing .cursor/mcp.json byte-for-byte regardless of the metrics environment."
       - "Route every managed file and tree copy through COPY_WITH_ATTRIBUTES using cp -p or cp -pR; calculate source-date midnights before copy and normalize only corresponding client paths afterward."
       - "Template promotion supplies quality REQ/ARCH/IMPL detail YAML and IMPL-*-pseudocode.md sidecars; copy_files.sh refreshes inherited implementation pseudo-code sidecars into tied/methodology/implementation-decisions/ without touching project YAML."
       - "The bootstrap E2E fixture verifies initial MCP config creation and byte-for-byte preservation during methodology and vocabulary refresh."
       - "Treat the vocabulary layer as an agent-control layer and keep its RESOLVE, PRELOAD, RECORD, and VALIDATE touchpoints aligned with [PROC-VOCABULARY_INDEX]."
       - "WARN_ON_MODIFIED_COPY_TARGET reports non-midnight destination mtimes before managed refresh; post-processed files are re-normalized without changing source files."
-    summary: "Bootstrap TIED layout and managed prompt artifacts with attribute-preserving copies, destination-only source-date midnight normalization, pre-refresh non-midnight modification warnings, and delegated YAML canonicalization"
+      - "When initializing a new .cursor/mcp.json, include TIED_MCP_COLLECT_METRICS=1 and TIED_MCP_METRICS_CLIENT only when TIED_MCP_COLLECT_METRICS is exactly 1; use a non-empty explicit TIED_MCP_METRICS_CLIENT override or the target project directory basename."
+    summary: "Bootstrap TIED layout and managed prompt artifacts with attribute-preserving copies, destination-only source-date midnight normalization, pre-refresh non-midnight modification warnings, delegated YAML canonicalization, and conditional MCP metrics fields for new configs"
   metadata:
     created:
       author: "AI Agent"
@@ -69,11 +74,11 @@ IMPL-TIED_FILES:
     last_updated:
       author: "AI Agent"
       date: "2026-08-13"
-      reason: "Stop installing prompt-type Task wrappers into client projects during bootstrap"
+      reason: "Add opt-in MCP metrics fields and project client-name fallback to new bootstrap configuration"
     last_validated:
-      date: "2026-02-06T00:00:00.000Z"
+      date: "2026-08-13"
       result: "pass"
-      validator: "AI Agent"
+      validator: "npm test; tied_validate_consistency"
   name: "TIED File Creation"
   rationale:
     benefits:
@@ -94,12 +99,17 @@ IMPL-TIED_FILES:
   status: "Active"
   traceability:
     architecture:
+      - "ARCH-MCP_USAGE_METRICS"
       - "ARCH-TIED_STRUCTURE"
     code_annotations:
+      - "ARCH-MCP_USAGE_METRICS"
       - "ARCH-TIED_STRUCTURE"
+      - "IMPL-MCP_USAGE_METRICS"
       - "IMPL-TIED_FILES"
+      - "REQ-MCP_USAGE_METRICS"
       - "REQ-TIED_SETUP"
     requirements:
+      - "REQ-MCP_USAGE_METRICS"
       - "REQ-TIED_SETUP"
     tests:
       - "Manual verification checklists"

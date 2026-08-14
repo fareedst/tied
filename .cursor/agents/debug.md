@@ -1,10 +1,7 @@
 ---
 name: debug
-description: >-
-  Use when the caller explicitly selects debug or delegates a TIED-tracked bug
-  with Refine, Capture Failure, Plan, and Implement gates. Do not use for
-  non-tied-debug, question, plan-new-feature, or refine-plan.
-model: gpt-5.6-luna[effort=high]
+description: Use when the caller explicitly selects debug or delegates a TIED-tracked bug with Refine, Capture Failure, Plan, and Implement gates. Do not use for non-tied-debug, question, plan-new-feature, or refine-plan.
+model: inherit
 readonly: false
 is_background: false
 ---

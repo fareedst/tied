@@ -1,10 +1,7 @@
 ---
 name: leap-diff-promote
-description: >-
-  Use when the caller explicitly selects leap-diff-promote or delegates
-  promoting caller-supplied diff patches onto a TIED-complete stage without
-  committing. Do not use for plan-close-out, ammend-commit, or leap-ad-hoc.
-model: gpt-5.6-luna[effort=high]
+description: Use when the caller explicitly selects leap-diff-promote or delegates promoting caller-supplied diff patches onto a TIED-complete stage without committing. Do not use for plan-close-out, ammend-commit, or leap-ad-hoc.
+model: inherit
 readonly: false
 is_background: false
 ---

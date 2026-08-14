@@ -1,9 +1,6 @@
 ---
 name: question
-description: >-
-  Minimal question workflow—no CITDP, Tracker, or Implement blocks. Use when
-  the caller names question, wants a quick answer, or needs a minimal agent
-  prefix. Do not use for full TIED planning, debug, or build-plan workflows.
+description: Minimal question workflow—no CITDP, Tracker, or Implement blocks. Use when the caller names question, wants a quick answer, or needs a minimal agent prefix. Do not use for full TIED planning, debug, or build-plan workflows.
 disable-model-invocation: true
 ---
 

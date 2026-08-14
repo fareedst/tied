@@ -1,11 +1,7 @@
 ---
 name: plan-new-feature
-description: >-
-  Use when the caller explicitly selects plan-new-feature or delegates a new
-  TIED-tracked feature with full Refine, CITDP Plan, and Implement gates. Do not
-  use for refine-plan, build-plan, debug, non-tied-plan, question, or other
-  minimal workflows.
-model: gpt-5.6-luna[effort=high]
+description: Use when the caller explicitly selects plan-new-feature or delegates a new TIED-tracked feature with full Refine, CITDP Plan, and Implement gates. Do not use for refine-plan, build-plan, debug, non-tied-plan, question, or other minimal workflows.
+model: inherit
 readonly: false
 is_background: false
 ---

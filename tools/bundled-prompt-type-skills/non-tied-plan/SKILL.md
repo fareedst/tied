@@ -1,10 +1,6 @@
 ---
 name: non-tied-plan
-description: >-
-  Ordinary development plan inside a TIED client without TIED synchronization
-  writes. May read TIED/YAML for context. Use when the caller names non-tied-plan,
-  wants development outside TIED tracking, or explicitly bypasses CITDP/Tracker.
-  Do not use for plan-new-feature, build-plan, or non-tied-debug.
+description: Ordinary development plan inside a TIED client without TIED synchronization writes. May read TIED/YAML for context. Use when the caller names non-tied-plan, wants development outside TIED tracking, or explicitly bypasses CITDP/Tracker. Do not use for plan-new-feature, build-plan, or non-tied-debug.
 disable-model-invocation: true
 ---
 

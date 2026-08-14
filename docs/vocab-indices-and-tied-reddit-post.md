@@ -1,198 +1,238 @@
-# We turned our project glossary into part of the build chain. Here's how (TIED domain vocab).
+# I added TIED to an existing codebase. Here's the brownfield workflow.
 
-*Draft Reddit post — r/programming / r/ExperiencedDevs tone. Source analysis: [`vocabulary-index-analysis-and-standards.md`](../tied/docs/vocabulary-index-analysis-and-standards.md).*
-
----
-
-Most teams have a glossary somewhere. Confluence page, README footnote, maybe a wiki nobody opens after onboarding. It describes what terms *mean* after the code already exists. Nothing fails when someone renames a flag in YAML but the wiki still says the old name. Nothing enforces that the test helper, the pseudo-code block, and the UI label all refer to the same thing.
-
-We've been building with **TIED** (Traceable Implementation Engineering Decisions) — requirements, architecture, and implementation as linked YAML with semantic tokens like `[REQ-*]`, `[ARCH-*]`, `[IMPL-*]`. The interesting part for this post isn't the YAML schema; it's what we did with **domain vocabulary indices**: plain Markdown glossaries that sit *inside* the methodology instead of beside it.
-
-Short version: the glossary isn't documentation you read once. It's a **controlled-vocabulary layer** whose preferred terms become literal identifiers in pseudo-code, tests, code, and TIED records. Pick one name, reuse it everywhere, or three-way alignment breaks and requirements stop being testable.
+*Draft Reddit post — r/programming / r/ExperiencedDevs tone.*
 
 ---
 
-## What actually exists (the resources)
+Most specification-first methods assume a blank repository. Ours wasn't blank. It already had production code, tests, terminology, and a backlog of decisions living in people's heads.
 
-The vocabulary system is three layers, not one flat page.
+We added **TIED** — Token-Integrated Engineering & Development — without pretending the project was greenfield. TIED gives us a traceability chain:
 
-### 1. Routing index + full index page
-
-In the TIED methodology repo:
-
-- **Routing index** — [`tied/vocab/routing.md`](../tied/vocab/routing.md) (~70 lines). Session bootstrap: match task keywords, PRELOAD only the matched glossaries. Mature clients add this when the full index grows too large for agents to read at every session start.
-- **Full index** — [`tied/vocab/domain-references.md`](../tied/vocab/domain-references.md). Directory: priority, scope, one row per glossary, plus "authoring guides (not glossaries)" and cross-topic notes. Read on-demand for cross-cutting concerns—not at bootstrap when a routing index exists.
-
-Other TIED client repos may use `docs/*-vocabulary.md` instead; the structural idea is the same. The meta-standard lives in [`tied/docs/vocabulary-index-analysis-and-standards.md`](../tied/docs/vocabulary-index-analysis-and-standards.md). Outreach framing: [`vocabulary-layer-tied-leap-citdp.md`](vocabulary-layer-tied-leap-citdp.md).
-
-### 2. Canonical glossaries
-
-Topic files under `tied/vocab/<topic>.md` — plain Markdown, **no** `-vocabulary` filename suffix. Examples in this repo:
-
-| File | What it covers |
-|------|----------------|
-| `tied-methodology.md` | TIED layout, semantic tokens, bootstrap, methodology vs project YAML |
-| `tied-yaml-mcp.md` | MCP server, `tied-cli`, validation, verify |
-| `pseudocode-and-citdp.md` | Domain vocab vs IMPL grammar; three-way alignment |
-| `agentstream.md` | Go CLI pipeline, turns, checklist render |
-| `leap-proposal-queue.md` | Non-canonical LEAP proposals |
-
-Each glossary follows a repeatable skeleton:
-
-1. Title with **(canonical)** — this file is the single source of preferred terms.
-2. **Scope** — what the subsystem covers and what it *excludes* ("vocabulary only"; algorithms live in IMPL pseudo-code sidecars).
-3. **Traceability** — links to primary `[REQ-*]`, `[ARCH-*]`, `[IMPL-*]` tokens.
-4. **See also** — sibling glossaries and the index; shared concepts defined once, linked many times.
-5. **Body** — built from a small set of reusable shapes (below).
-6. **Alphabetical index** — `Term | Section` table for quick lookup.
-
-These are **not** TIED YAML. You edit them directly, like the `IMPL-*-pseudocode.md` sidecars. No `tied-cli`, no `lint_yaml`.
-
-### 3. A replication prompt
-
-The analysis doc references [`tied-domain-vocabulary-research-prompt.md`](tied-domain-vocabulary-research-prompt.md) — a copy-paste agent prompt (Phases 1–4, acceptance criteria) so other TIED client repos can reproduce the same pattern. Same standards, different path layout if the project prefers `docs/*-vocabulary.md`.
-
-### What makes them "indices" and not prose docs
-
-Five content shapes show up over and over:
-
-- **Preferred-term vs synonym table** — one row picks the winner; the rest are "avoid in UI" or legacy.
-- **Naming bridge table** — one concept mapped across UI label, YAML key, CLI flag, env var, storage path, TIED token suffix.
-- **Named-concept bullets** — bold stable terms with definitions (often the same words pseudo-code reuses as `UPPER_SNAKE` block names).
-- **Catalogs / enums** — verbatim code values, greppable.
-- **Key/attribute tables** — exact spellings in backticks for symbols, CSS classes, YAML keys.
-
-Behavioral rules that matter:
-
-- **Exact spellings, in backticks** — so `rg` finds the same string in vocab, tests, and production code.
-- **Define-once-link-many** — federated glossaries with an index, not one 200-term page.
-- **Vocabulary, not algorithm** — step-by-step logic stays in `tied/implementation-decisions/*-pseudocode.md`; the glossary survives refactors.
-- **Bidirectional TIED linkage** — glossaries cite REQ/ARCH/IMPL; REQ acceptance criteria cite the glossary path *and* the pseudo-code block name together.
-
-```mermaid
-flowchart LR
-  Index["domain-references index"]
-  Vocab["tied/vocab topic files"]
-  REQ["REQ acceptance criteria"]
-  IMPL["IMPL essence_pseudocode UPPER_SNAKE blocks"]
-  Tests["tests"]
-  Code["production code"]
-  Index --> Vocab
-  Vocab --> REQ
-  Vocab --> IMPL
-  IMPL --> Tests
-  IMPL --> Code
-  REQ --> Tests
+```text
+requirements (what and why)
+  -> architecture decisions (boundaries and trade-offs)
+  -> implementation decisions (behavior and pseudo-code)
+  -> tests
+  -> production code
 ```
 
-`copy_files.sh` seeds `tied/vocab/` into client projects when absent, so the discipline travels with the methodology bootstrap.
+The important brownfield trick is that the first pass runs in the opposite direction:
 
----
+```text
+passing tests + production behavior
+  -> requirements
+  -> architecture
+  -> implementation pseudo-code
+```
 
-## How it's operated (the processes)
+That is documentation and traceability work, not a license to rewrite working code.
 
-The process token is **`[PROC-VOCABULARY_INDEX]`** — "Domain vocabulary index discipline" in [`tied/docs/processes.md`](../tied/docs/processes.md).
+## 1. Install TIED without trampling the project
 
-The implementation checklist ([`tied/docs/agent-req-implementation-checklist.md`](../tied/docs/agent-req-implementation-checklist.md), trackable YAML v1.7.0 with `VOCAB_INDEX: ./tied/vocab`) invokes **`sub-vocabulary-sync`** at mandatory **touchpoints** and at each naming point. Four modes:
+Clone the TIED methodology repository somewhere stable. From that checkout, build the MCP server first:
 
-### RESOLVE (Touchpoint 1 — prompt intake)
+```bash
+export TIED_SOURCE="/path/to/tied"
+export CLIENT="/path/to/existing-project"
 
-Look up the concept in `tied/vocab/*.md`. Choose the **one preferred term**. Reword fuzzy sponsor wording, synonyms, or ambiguous phrasing to that canonical term. Primary steps: `translate-sponsor-intent`, `change-definition`.
+(cd "$TIED_SOURCE/mcp-server" && npm install && npm run build)
+"$TIED_SOURCE/copy_files.sh" "$CLIENT"
+```
 
-### PRELOAD (Touchpoint 2 — before reading docs/code)
+The current bootstrap requires the built `mcp-server/dist/index.js`, even if you plan to use the command-line wrapper later.
 
-Read `tied/vocab/routing.md`; match task keywords; open **only** matched glossaries; build a term map **before** reading TIED indexes, detail files, source, or tests so symbols and paths are interpreted with canonical names. For cross-cutting concerns, search the full `domain-references.md` on demand. Primary steps: `session-bootstrap`, `impact-discovery`.
+For an existing client that needs new inherited vocabulary files:
 
-### RECORD (inline during work)
+```bash
+"$TIED_SOURCE/copy_files.sh" --merge-vocab "$CLIENT"
+```
 
-Add or update the index immediately: preferred-term-vs-synonym row, naming-bridge row (concept ↔ token ↔ storage ↔ UI label), UPPER_SNAKE block-name row, alphabetical index entry. Cite the relevant REQ/ARCH/IMPL.
+That is additive for `tied/vocab/*.md`: absent filenames are added and existing glossary files are preserved. It still performs the normal methodology refresh.
 
-Reconcile after tests, code, design docs, or UI copy change — not as a quarterly wiki cleanup.
+### Know what is yours and what is inherited
 
-### VALIDATE (Touchpoint 3 — before commit)
+The bootstrap creates the structure, but it deliberately separates ownership:
 
-Audit changed artifacts vs the index; block commit on synonym drift or missing bridges. Primary step: `traceable-commit`.
+- **Project YAML** — your records in `tied/requirements.yaml`, `tied/architecture-decisions.yaml`, `tied/implementation-decisions.yaml`, `tied/semantic-tokens.yaml`, and their detail directories. These are created when missing and are not overwritten.
+- **Methodology YAML** — inherited records under `tied/methodology/`. This tree is read-only in the client and is refreshed from the TIED templates.
+- **Guides** — files under `tied/docs/` are copied when missing, so customized client docs are retained for deliberate comparison and merging.
+- **Managed skills** — `.cursor/skills/tied-yaml/`, the prompt-type skills, and shared prompt references are refreshed by the bootstrap. Unrelated client skills remain alone.
+- **Vocabulary** — seeded when the client has no Markdown glossaries; with `--merge-vocab`, only missing glossary basenames are added.
+- **Root guidance** — `AGENTS.md` and `.cursorrules` are created only when missing.
 
-### Critical distinction: two different "vocabularies"
+One easy-to-miss detail: `.cursor/mcp.json` is created only when it does not exist. If it already exists, `copy_files.sh` preserves it byte-for-byte; it does not merge or repair the TIED entry. Treat an existing config as client-owned and inspect its `command`, `args`, and `TIED_BASE_PATH` intentionally.
 
-This trips people up.
+From the client root, enable the server in Cursor:
 
-| Layer | Location | Governs |
-|-------|----------|---------|
-| **Domain vocabulary** | `tied/vocab/*.md` | Which **name** a concept has |
-| **IMPL grammar vocabulary** | `tied/docs/implementation-decisions.md` | How a **block** is written (`INPUT`, `OUTPUT`, `DATA`, `IF`, `AWAIT`, …) |
+```bash
+cd "$CLIENT"
+agent mcp enable tied-yaml
+```
 
-`sub-vocabulary-sync` uses **domain** vocab. INPUT/OUTPUT/DATA are pseudo-code keywords, not product terms.
+Approve the project MCP configuration when prompted, then type `quit` to leave the Agent CLI.
 
----
+Verify the active project before reading or writing records:
 
-## What it does (effects on TIED, tests, code, docs)
+```bash
+export TIED_BASE_PATH="$CLIENT/tied"
+export TIED_MCP_BIN="$TIED_SOURCE/mcp-server/dist/index.js"
 
-### In TIED YAML
+"$CLIENT/.cursor/skills/tied-yaml/scripts/tied-cli.sh" \
+  tied_config_get_base_path '{}'
+```
 
-The preferred domain term drives:
+The reported path must be the `tied/` directory of this client. Multiple TIED repositories on disk make a wrong base path surprisingly easy to miss.
 
-- **REQ/ARCH/IMPL token suffixes** and record `name` fields — e.g. you don't invent `REQ-FOO-BAR` from a meeting nickname if the vocab already says **leap-proposal-queue**.
-- **Acceptance criteria wording** — criteria reference the glossary path plus the owning pseudo-code block name, so "satisfied" has a precise, grep-friendly anchor.
-- **Traceability blocks** in glossaries link back to detail files under `tied/requirements/`, `tied/architecture-decisions/`, `tied/implementation-decisions/`.
+## 2. Register the implementation that already exists
 
-After wiring glossary references into REQ/ARCH/IMPL, you run `tied_validate_consistency` — same as any other TIED edit loop.
+Don't start by inventing a hundred records or copying every source file into a YAML description. Register one module or workflow at a time.
 
-Governance expectation from the standards: a glossary should be cited by at least one REQ criterion so terms aren't orphaned.
+### First, preload the vocabulary
 
-### In IMPL pseudo-code
+Read [`tied/vocab/routing.md`](../tied/vocab/routing.md) before reading TIED records, source, or tests. Match the task keywords and open only the relevant glossaries:
 
-This is the sharpest integration. The preferred domain term **is** the `UPPER_SNAKE` block name in `essence_pseudocode`.
+- [`tied-methodology.md`](../tied/vocab/tied-methodology.md) for layout, project YAML, bootstrap, and methodology boundaries.
+- [`tied-yaml-mcp.md`](../tied/vocab/tied-yaml-mcp.md) for MCP, `tied-cli`, base paths, and validation.
+- [`pseudocode-and-citdp.md`](../tied/vocab/pseudocode-and-citdp.md) for brownfield pseudo-code, CITDP, and three-way alignment.
 
-Example pattern (from a product repo that uses the same standards): if the vocab canonicalizes **data fence wrap**, the block is named `DATA_FENCE_WRAP`, not "handle the fence" or `processFence`. Block lead comments name `[IMPL-*] [ARCH-*] [REQ-*]` and state how the block implements them — per `[PROC-IMPL_PSEUDOCODE_TOKENS]`.
+This sounds fussy until a project has three names for the same concept. TIED calls the four vocabulary actions **RESOLVE**, **PRELOAD**, **RECORD**, and **VALIDATE**:
 
-The glossary deliberately holds **terms and relationships**, not algorithms. When behavior changes, you update pseudo-code first; the glossary stays stable unless the *concept* or *name* changed.
+1. **RESOLVE** ambiguous sponsor or code terminology to one preferred term.
+2. **PRELOAD** the matched glossary before impact discovery.
+3. **RECORD** new terms and naming bridges while the decision is fresh.
+4. **VALIDATE** names across records, pseudo-code, tests, code, and docs before commit.
 
-### In tests and code
+### Then inventory before authoring
 
-`[PROC-IMPL_CODE_TEST_SYNC]` requires **three-way alignment**: IMPL block lead comment ↔ test comment ↔ production code comment — literal copy, same tokens, same block name.
+Establish a baseline: which tests pass, which modules are in scope, and which behavior is actually supported. The TIED tools can inspect the existing tree:
 
-So a vocabulary choice isn't cosmetic. If pseudo-code says `UX_RESOLVE_ACT_PRECEDENCE` but the test file comments say `resolveActOrder`, you've broken alignment. Imprecise or synonym-heavy wording in the glossary propagates into untestable REQ criteria.
+```bash
+"$CLIENT/.cursor/skills/tied-yaml/scripts/tied-cli.sh" \
+  tied_import_summary '{}'
 
-Module and function names in code, test describe blocks, and storage paths (`code_locations` in IMPL detail) are expected to derive from the same preferred terms recorded in naming-bridge tables.
+"$CLIENT/.cursor/skills/tied-yaml/scripts/tied-cli.sh" \
+  yaml_index_list_tokens '{"index":"requirements"}'
 
-### In docs and UI
+"$CLIENT/.cursor/skills/tied-yaml/scripts/tied-cli.sh" \
+  yaml_detail_read_many '{"type":"implementation"}'
+```
 
-Where product repos tie glossaries to in-app Help, the naming bridge keeps **user-facing labels** and **developer-facing identifiers** converged: one concept row might list UI string, L10n key prefix, YAML key, and Swift enum case.
+Use scoped analysis when available for a bounded source/test path: a walk summary, token scan, gap report, and traceability-gap report are more useful than asking an agent to reread the entire repository. There is no general “convert this codebase into TIED” button. Import tools report structure; humans and agents still decide what behavior deserves a requirement.
 
-Authoring guides (`tied/docs/pseudocode-writing-and-validation.md`, `AGENTS.md`, agent preload contracts) reference the vocab index at session start so agents and humans pick the same terms before writing.
+For each module, make a small inventory:
 
----
+- production files and meaningful functions;
+- tests and the behavior they prove;
+- existing `[REQ-*]`, `[ARCH-*]`, and `[IMPL-*]` comments;
+- external boundaries, dependencies, and shared state;
+- missing or stale implementation pseudo-code;
+- unit, integration, composition, or genuinely E2E-only testability.
 
-## Traditional glossary vs this approach
+### Build the chain from evidence
 
-| Traditional glossary | TIED domain vocabulary index |
-|----------------------|------------------------------|
-| Onboarding / communication | Active traceability artifact |
-| Describes terms after the fact | Terms chosen **before** REQ/ARCH/IMPL naming |
-| One flat list, often stale | Federated glossaries + index + naming bridges |
-| Outside build/verification | Feeds pseudo-code block names that thread into tests and code |
-| Nothing fails on drift | Drift breaks three-way alignment and testability |
-| Passive reference | RESOLVE/RECORD discipline in the agent checklist |
+Create records in this order:
 
-A traditional glossary *describes* the system for humans. These indices are a **controlled-vocabulary layer in the TIED chain**:
+1. **REQ** — state observable behavior and why it matters. Derive satisfaction and validation criteria from tests, user behavior, and project docs. Keep implementation mechanics out of the requirement.
+2. **ARCH** — record stable module boundaries, ownership, data flow, dependencies, and alternatives evidenced by the current implementation.
+3. **IMPL** — describe meaningful workflows and decisions, not merely a list of files. Record `code_locations`, tests, dependencies, composition, and testability.
 
-**REQ → ARCH → IMPL pseudo-code → tests → code**
+For new records, prefer one tool call that creates the index row and detail file:
 
-…whose terms become the literal identifiers that keep requirements testable.
+```bash
+"$CLIENT/.cursor/skills/tied-yaml/scripts/tied-cli.sh" \
+  tied_token_create_with_detail @/tmp/req-or-arch-or-impl.json
+```
 
----
+Register each new token in the project's `tied/semantic-tokens.yaml` as well. Keep the token suffix, record name, glossary term, pseudo-code block name, and test/code identifiers aligned. Use small `yaml_index_update` or `yaml_detail_update` payloads for existing records. For several related updates, preview them first:
 
-## TL;DR (comment-section edition)
+```bash
+"$CLIENT/.cursor/skills/tied-yaml/scripts/tied-cli.sh" \
+  yaml_updates_apply @/tmp/ordered-updates.json
+```
 
-- We keep domain glossaries as plain Markdown under `tied/vocab/`, indexed by `domain-references.md`, with `routing.md` for lightweight session bootstrap.
-- They're not wiki fluff — they're wired into `[PROC-VOCABULARY_INDEX]` and the agent REQ checklist via `sub-vocabulary-sync`.
-- **RESOLVE** before you name anything (tokens, blocks, files, UI copy). **PRELOAD** via the routing index before reading TIED/docs/code. **RECORD** when new concepts show up or artifacts change. **VALIDATE** before commit.
-- The preferred term becomes the `UPPER_SNAKE` pseudo-code block name, then copies into test/code comments. One name, three places, or alignment breaks.
-- Domain vocab (what things are *called*) ≠ IMPL grammar vocab (`INPUT`/`OUTPUT`/`DATA` — how blocks are *written*).
-- REQ criteria cite both the glossary and the block name; glossaries cite REQ/ARCH/IMPL back. Bidirectional, grep-friendly, deliberately thin on algorithms.
-- If you've ever had a requirement that nobody could write a test for because three subsystems used three names for the same thing — this is the boring structural fix.
+Use the tool's `dry_run` option before applying a batch. Arrays replace the existing array, so don't send a partial replacement accidentally.
 
----
+### Make the IMPL sidecar the useful part
 
-*Further reading: [`tied/docs/vocabulary-index-analysis-and-standards.md`](../tied/docs/vocabulary-index-analysis-and-standards.md) · [`tied/vocab/routing.md`](../tied/vocab/routing.md) · [`tied/vocab/domain-references.md`](../tied/vocab/domain-references.md) · [`vocabulary-layer-tied-leap-citdp.md`](vocabulary-layer-tied-leap-citdp.md) · [`tied-domain-vocabulary-research-prompt.md`](tied-domain-vocabulary-research-prompt.md) · [`tied/docs/processes.md`](../tied/docs/processes.md) § `[PROC-VOCABULARY_INDEX]`*
+The IMPL detail is where the behavior becomes executable intent. For an existing implementation:
+
+- start from the tests: inputs, outputs, effects, edge cases, and failures;
+- cross-check production branches, ordering, delegation, and shared data;
+- write language-agnostic pseudo-code in `tied/implementation-decisions/IMPL-<TOKEN>-pseudocode.md`;
+- give every logical block a token comment and a description of how it implements the requirement;
+- copy each block lead literally into the matching test and production comment.
+
+Use `impl_detail_set_essence_pseudocode` through `tied-cli.sh` for a sidecar file, or edit the plain Markdown sidecar directly and validate afterward. Do not put a giant escaped pseudo-code string into an unrelated YAML update.
+
+Because this is brownfield work, do not manufacture failing tests just to satisfy a greenfield TDD narrative. If the baseline tests already pass, document that baseline and reverse-document the behavior. Future behavior changes return to the normal TIED order: complete pseudo-code, write a failing test, then change production code.
+
+Finish the registration pass with:
+
+```bash
+"$CLIENT/.cursor/skills/tied-yaml/scripts/tied-cli.sh" \
+  yaml_index_validate '{}'
+
+"$CLIENT/.cursor/skills/tied-yaml/scripts/tied-cli.sh" \
+  tied_validate_consistency '{}'
+```
+
+Also run the project's tests and `./scripts/validate_tokens.sh` when it exists. In a verification-gated project, use `tied_verify` after tests so statuses come from evidence instead of being hand-edited.
+
+## 3. Use the installed skills from then on
+
+The bootstrap installs two related skill groups:
+
+- `.cursor/skills/tied-yaml/` — the TIED YAML skill, `SKILL.md`, tool reference, and `scripts/tied-cli.sh`.
+- `.cursor/skills/` — explicit Prompt Composer skills such as `plan-new-feature`, `refine-plan`, `build-plan`, `debug`, `plan-close-out`, `use-skill`, `leap-ad-hoc`, `leap-diff-promote`, `non-tied-plan`, `non-tied-debug`, and `prompt-type-router`.
+
+The `.cursor/agents/` Task wrappers in the TIED source repository are development artifacts; they are not copied into clients. The client distribution path is `.cursor/skills/`.
+
+All prompt-type skills are explicit-only. Choose the workflow instead of expecting the router to infer one from vague language:
+
+- `@plan-new-feature` for a new requirement or behavior change;
+- `@refine-plan` when there is a plan to improve;
+- `@build-plan` when an approved plan is ready to execute;
+- `@debug` for a failure investigation;
+- `@plan-close-out` to synchronize TIED, evidence, release notes, and a proposed commit;
+- `@non-tied-plan` or `@non-tied-debug` for ordinary client-local work that must not write TIED records;
+- `@prompt-type-router` when you explicitly want an ordered composition such as `refine-plan, build-plan`.
+
+For every TIED change, use the per-request checklist from `tied/docs/agent-req-implementation-checklist.md`: bootstrap context, define the change, discover impact, author or verify REQ/ARCH/IMPL, validate pseudo-code, test, implement, synchronize, and close out. The skill is a workflow guide, not an autonomous Git operator: it does not automatically inspect Git, stage, commit, amend, push, or access the clipboard.
+
+The daily loop is now pleasantly repetitive:
+
+```text
+route vocabulary
+  -> confirm TIED_BASE_PATH
+  -> read related REQ/ARCH/IMPL
+  -> update project YAML through MCP or tied-cli
+  -> validate pseudo-code and TIED consistency
+  -> tests first, then code
+  -> LEAP back to IMPL when evidence changes the behavior
+  -> update ARCH/REQ if the scope changed
+```
+
+Never write client-specific records under `tied/methodology/`. For project YAML, use the TIED YAML MCP or the installed `tied-cli.sh`; the plain-text IMPL pseudo-code sidecar and domain vocabulary Markdown are the intentional exceptions. Run `lint_yaml` on changed YAML and finish with `tied_validate_consistency`.
+
+## What I would tell my past self
+
+- Install the methodology before trying to organize the codebase.
+- Build the MCP server before running `copy_files.sh`.
+- Verify the base path before the first write.
+- Start with one module and passing tests, not a repository-wide taxonomy.
+- Treat REQ/ARCH/IMPL as a connected chain, not three independent folders.
+- Use the sidecar for behavior and the glossary for names; don't turn either into a copy of the source tree.
+- Let LEAP surface disagreements early: update IMPL first, then tests, then code.
+
+The payoff is not that the old code suddenly becomes “spec-driven.” The payoff is that its intent becomes inspectable, and the next change has a smaller, safer place to start.
+
+## TL;DR
+
+1. Build TIED's MCP server and run `copy_files.sh` against the existing project.
+2. Preserve project YAML; refresh only inherited methodology and managed skills.
+3. Confirm the client's `TIED_BASE_PATH`.
+4. Use tests and production behavior as evidence to register REQ → ARCH → IMPL.
+5. Put detailed behavior in token-commented IMPL sidecars and register every semantic token.
+6. Use explicit TIED skills for each future change, with `tied-cli.sh` for YAML and `tied_validate_consistency` at the end.
+
+Further reading: [`tied/docs/methodology-migration.md`](../tied/docs/methodology-migration.md) · [`tied/docs/adding-tied-mcp-and-invoking-passes.md`](../tied/docs/adding-tied-mcp-and-invoking-passes.md) · [`tied/docs/client-development-index.md`](../tied/docs/client-development-index.md) · [`tied/vocab/routing.md`](../tied/vocab/routing.md)

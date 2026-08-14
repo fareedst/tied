@@ -1,11 +1,6 @@
 ---
 name: prompt-type-router
-description: >-
-  Composes multiple prompt-type workflows in caller-specified order. Use only
-  when the caller explicitly names prompt-type-router or lists multiple prompt
-  types (e.g. refine-plan then build-plan). Do not activate for a single clear
-  type, ambiguous natural language ("plan and ship"), or to wrap use-skill
-  recursively.
+description: Composes multiple prompt-type workflows in caller-specified order. Use only when the caller explicitly names prompt-type-router or lists multiple prompt types (e.g. refine-plan then build-plan). Do not activate for a single clear type, ambiguous natural language ("plan and ship"), or to wrap use-skill recursively.
 disable-model-invocation: true
 ---
 

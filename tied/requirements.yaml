@@ -745,8 +745,8 @@ REQ-MCP_USAGE_METRICS:
       date: "2026-06-25T00:00:00.000Z"
     last_updated:
       author: "AI Agent"
-      date: "2026-06-25T00:00:00.000Z"
-      reason: "Initial creation"
+      date: "2026-08-13"
+      reason: "Record conditional bootstrap metrics configuration as a tested requirement"
     last_validated:
       date: "2026-06-25T00:00:00.000Z"
       result: "pass"
@@ -769,15 +769,17 @@ REQ-MCP_USAGE_METRICS:
       - "REQ-FEEDBACK_TO_TIED"
     supersedes: []
   satisfaction_criteria:
-    - criterion: "Metrics collection is off unless TIED_MCP_COLLECT_METRICS is set locally"
-      metric: "No JSONL append when env unset; append when set to 1 or true"
+    - criterion: "Bootstrap seeds metrics environment fields only for an absent .cursor/mcp.json when TIED_MCP_COLLECT_METRICS is exactly 1"
+      metric: "bootstrap-and-load.test.ts verifies basename and explicit client labels, non-1 opt-in behavior, and existing configuration preservation"
+    - criterion: "Env vars and JSONL path documented in tied/vocab/tied-yaml-mcp.md"
     - criterion: "Every MCP tools/call records tool name, client, duration, ok, sanitized args"
       metric: "usage-metrics.test.ts passes; large essence_pseudocode omitted from args_summary"
-    - criterion: "tied-cli tags client as tied-cli when metrics enabled"
-      metric: "tied-cli.sh exports TIED_MCP_METRICS_CLIENT=tied-cli"
+    - criterion: "Metrics collection is off unless TIED_MCP_COLLECT_METRICS is set locally"
+      metric: "No JSONL append when env unset; append when set to 1 or true"
     - criterion: "Offline aggregator reports tool counts, failures, and top arg signatures"
       metric: "analyze_tied_mcp_metrics_test.rb passes"
-    - criterion: "Env vars and JSONL path documented in tied/vocab/tied-yaml-mcp.md"
+    - criterion: "tied-cli tags client as tied-cli when metrics enabled"
+      metric: "tied-cli.sh exports TIED_MCP_METRICS_CLIENT=tied-cli"
   status: "Implemented"
   traceability:
     architecture:

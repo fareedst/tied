@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Greenfield TIED outreach** — [`docs/tied-greenfield-reddit-post.md`](docs/tied-greenfield-reddit-post.md) provides a first-day workflow walkthrough.
+
 - **Prompt-type Task subagents** — `[REQ-PROMPT_TYPE_SUBAGENT]` / `[ARCH-PROMPT_TYPE_SUBAGENT]` / `[IMPL-PROMPT_TYPE_SUBAGENT]` provide one explicit-only foreground Cursor Task wrapper per leaf prompt type at `.cursor/agents/<prompt-type>.md` in the TIED source repository, plus the `plan-refine-build` sequence orchestrator that Task-launches `plan-new-feature`, then `refine-plan`, then `build-plan`. Implementing and close-out wrappers are writable; `question` and `other` are readonly.
 
 - **Global prompt-type skills** — `[REQ-PROMPT_TYPE_GLOBAL_SKILLS]` / `[ARCH-PROMPT_TYPE_GLOBAL_SKILLS]` / `[IMPL-PROMPT_TYPE_GLOBAL_SKILLS]` add a git-tracked canonical bundle under `tools/bundled-prompt-type-skills/` (13 explicit-only leaf skills, `prompt-type-router`, and 14 `prompt-shared` references) installed into client `.cursor/skills/` by `copy_files.sh` while preserving unrelated skills and existing MCP configuration. Added static contract and bootstrap integration tests in `mcp-server/src/e2e/prompt-type-skills.test.ts`, distribution docs in [`tied/docs/prompt-type-skills.md`](tied/docs/prompt-type-skills.md), vocabulary in [`tied/vocab/prompt-composer.md`](tied/vocab/prompt-composer.md), and CITDP [`tied/citdp/CITDP-REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml`](tied/citdp/CITDP-REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml).
@@ -40,6 +42,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Opt-in MCP usage metrics** — `[REQ-MCP_USAGE_METRICS]` / `[ARCH-MCP_USAGE_METRICS]` / `[IMPL-MCP_USAGE_METRICS]`: env-gated JSONL per MCP tool call (`TIED_MCP_COLLECT_METRICS`), sanitized `args_summary` / `args_signature`, registration-time `wrapToolHandler`, **tied-cli** client tag, offline [`scripts/analyze_tied_mcp_metrics.rb`](scripts/analyze_tied_mcp_metrics.rb). CITDP: [`tied/citdp/CITDP-REQ-MCP_USAGE_METRICS.yaml`](tied/citdp/CITDP-REQ-MCP_USAGE_METRICS.yaml). Vocab: [`tied/vocab/tied-yaml-mcp.md`](tied/vocab/tied-yaml-mcp.md).
 
+- **Bootstrap metrics configuration** — `copy_files.sh` adds `TIED_MCP_COLLECT_METRICS=1` and a `TIED_MCP_METRICS_CLIENT` label to newly created `.cursor/mcp.json` files when opt-in collection is enabled, using the project basename when no explicit label is provided; existing MCP configurations remain byte-for-byte unchanged.
+
 - **Token rename extra substitution targets** — `tied_token_rename` accepts `extra_globs` / `extra_extensions` anchored at **client project root** (`getClientProjectRoot()`), beyond default TIED rename scope.
 
 - **Semantic YAML compare tooling** — [`scripts/yaml_semantic_compare.rb`](scripts/yaml_semantic_compare.rb) (value compare; post-sort validation) and [`scripts/compare_yaml_dirs.rb`](scripts/compare_yaml_dirs.rb) (directory CLI). [`scripts/yaml_list_sorter.rb`](scripts/yaml_list_sorter.rb) rejects sorts that fail semantic comparison.
@@ -47,6 +51,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Vocabulary routing index and client development index** — [`tied/vocab/routing.md`](tied/vocab/routing.md) (~70-line bootstrap router); [`tied/docs/client-development-index.md`](tied/docs/client-development-index.md); outreach copies under [`docs/`](docs/) for vocabulary research / LEAP+CITDP narrative.
 
 ### Changed
+
+- **Brownfield TIED outreach** — [`docs/vocab-indices-and-tied-reddit-post.md`](docs/vocab-indices-and-tied-reddit-post.md) now describes adopting TIED in an existing codebase.
+
+- **Cursor MCP enable command** — documentation, skills, and the bootstrap E2E contract now use `agent mcp enable tied-yaml`; the legacy command is explicitly rejected by the contract test.
+
+- **Prompt-type wrapper metadata** — TIED-source `.cursor/agents/*.md` wrappers now use `model: inherit` and single-line frontmatter descriptions aligned with the bundled skills.
+
+- **Build-command metrics opt-in** — [`scripts/build-commands.sh`](scripts/build-commands.sh) exports `TIED_MCP_COLLECT_METRICS=1` for local bootstrap and test flows.
 
 - **YAML writer canonicalization** — `yaml_tool`, MCP writers, and `tied_token_rename` now share typed `tied-yaml-canonical-v1` output instead of the default double-quoted `yq` lint; `tied_yaml_format` exposes the profile and successful writes report `yaml_format`.
 

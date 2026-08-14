@@ -1,11 +1,6 @@
 ---
 name: build-plan
-description: >-
-  Executes a refined TIED linked plan with guiding vocab, CITDP build Plan,
-  and Implement gates—no Refine section. Use when the caller names build-plan,
-  executes an approved linked plan, or implements from a completed plan
-  document. Do not use for refine-plan (improve the linked plan first),
-  plan-new-feature (new feature from scratch), or non-tied-plan.
+description: Executes a refined TIED linked plan with guiding vocab, CITDP build Plan, and Implement gates—no Refine section. Use when the caller names build-plan, executes an approved linked plan, or implements from a completed plan document. Do not use for refine-plan (improve the linked plan first), plan-new-feature (new feature from scratch), or non-tied-plan.
 disable-model-invocation: true
 ---
 

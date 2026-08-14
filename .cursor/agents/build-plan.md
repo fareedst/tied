@@ -1,11 +1,7 @@
 ---
 name: build-plan
-description: >-
-  Use when the caller explicitly selects build-plan or delegates execution of an
-  approved TIED linked plan with guiding vocab, CITDP build Plan, and
-  Implement gates. Do not use for refine-plan, plan-new-feature, non-tied-plan,
-  debug, or question.
-model: gpt-5.6-luna[effort=high]
+description: Use when the caller explicitly selects build-plan or delegates execution of an approved TIED linked plan with guiding vocab, CITDP build Plan, and Implement gates. Do not use for refine-plan, plan-new-feature, non-tied-plan, debug, or question.
+model: inherit
 readonly: false
 is_background: false
 ---

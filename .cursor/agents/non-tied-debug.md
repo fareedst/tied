@@ -1,10 +1,7 @@
 ---
 name: non-tied-debug
-description: >-
-  Use when the caller explicitly selects non-tied-debug or delegates ordinary
-  bug debugging inside a TIED client without TIED synchronization writes. Do
-  not use for debug, plan-new-feature, or non-tied-plan.
-model: gpt-5.6-luna[effort=high]
+description: Use when the caller explicitly selects non-tied-debug or delegates ordinary bug debugging inside a TIED client without TIED synchronization writes. Do not use for debug, plan-new-feature, or non-tied-plan.
+model: inherit
 readonly: false
 is_background: false
 ---

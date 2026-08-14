@@ -1,11 +1,6 @@
 ---
 name: refine-plan
-description: >-
-  Refines an existing linked or in-message plan with TIED Refine, CITDP Plan,
-  and Implement sections. Use when the caller names refine-plan, asks to
-  improve a linked plan, or says "Improve the plan below." Do not use for
-  build-plan (execute a linked plan), plan-new-feature (new requirement),
-  or non-tied-plan.
+description: Refines an existing linked or in-message plan with TIED Refine, CITDP Plan, and Implement sections. Use when the caller names refine-plan, asks to improve a linked plan, or says "Improve the plan below." Do not use for build-plan (execute a linked plan), plan-new-feature (new requirement), or non-tied-plan.
 disable-model-invocation: true
 ---
 

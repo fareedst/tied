@@ -1,10 +1,7 @@
 ---
 name: use-skill
-description: >-
-  Use when the caller explicitly selects use-skill or delegates importing and
-  applying skills with full TIED Refine, Plan, and Implement gates. Do not use
-  for prompt-type-router, question, non-tied-plan, or plan-new-feature.
-model: gpt-5.6-luna[effort=high]
+description: Use when the caller explicitly selects use-skill or delegates importing and applying skills with full TIED Refine, Plan, and Implement gates. Do not use for prompt-type-router, question, non-tied-plan, or plan-new-feature.
+model: inherit
 readonly: false
 is_background: false
 ---

@@ -1,10 +1,7 @@
 ---
 name: ammend-commit
-description: >-
-  Use when the caller explicitly selects ammend-commit (preserve spelling) or
-  delegates staged patches to amend the last commit without committing. Do not
-  use for plan-close-out, leap-diff-promote, or plan-new-feature.
-model: gpt-5.6-luna[effort=high]
+description: Use when the caller explicitly selects ammend-commit (preserve spelling) or delegates staged patches to amend the last commit without committing. Do not use for plan-close-out, leap-diff-promote, or plan-new-feature.
+model: inherit
 readonly: false
 is_background: false
 ---

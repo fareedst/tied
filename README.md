@@ -16,7 +16,7 @@ This repository ([https://github.com/fareedst/tied](https://github.com/fareedst/
 flowchart LR
     subgraph setup ["1_Setup"]
         Bootstrap["copy_files.sh\nTIED into project"]
-        EnableTiedYaml["agent enable tied-yaml\napprove MCP config quit"]
+        EnableTiedYaml["agent mcp enable tied-yaml\napprove MCP config quit"]
         Contract["tied/agent-preload-contract.yaml\nplatform summary"]
     end
     subgraph specAuthor ["2_AuthorSpecs"]
@@ -38,11 +38,11 @@ flowchart LR
     Checklist -.->|"LEAP"| TIEDStack
 ```
 
-*Bootstrap copies TIED into the project; in Cursor, run `agent enable tied-yaml` (approve the project MCP config when prompted; type `quit` to exit the Agent CLI). The platform contract and spec list establish context; each selected spec is executed under the lead checklist; TDD produces code and tests; LEAP keeps REQ/ARCH/IMPL consistent when behavior diverges from the plan.*
+*Bootstrap copies TIED into the project; in Cursor, run `agent mcp enable tied-yaml` (approve the project MCP config when prompted; type `quit` to exit the Agent CLI). The platform contract and spec list establish context; each selected spec is executed under the lead checklist; TDD produces code and tests; LEAP keeps REQ/ARCH/IMPL consistent when behavior diverges from the plan.*
 
 ### Process for a new TIED client
 
-1. **Bootstrap** — Copy TIED into the project: run `$TIED/copy_files.sh` with your project path (or `./copy_files.sh /path/to/project` from a clone of this repository). After `copy_files.sh`, build the MCP server in the TIED repo if needed, then from the **client project** directory run `agent enable tied-yaml`, **approve** the update to the project MCP config in Cursor, and type **`quit`** to exit the `agent` UI. Full options and MCP setup: **[Getting Started with a New Project](#getting-started-with-a-new-project)** below.
+1. **Bootstrap** — Copy TIED into the project: run `$TIED/copy_files.sh` with your project path (or `./copy_files.sh /path/to/project` from a clone of this repository). After `copy_files.sh`, build the MCP server in the TIED repo if needed, then from the **client project** directory run `agent mcp enable tied-yaml`, **approve** the update to the project MCP config in Cursor, and type **`quit`** to exit the `agent` UI. Full options and MCP setup: **[Getting Started with a New Project](#getting-started-with-a-new-project)** below.
 
 2. **Platform contract** — If the project already has implemented code, add a local **`tied/agent-preload-contract.yaml`** that summarizes platform and project features (fewer redundant tool calls, steadier agent behavior). Start from **[tied/docs/agent-preload-contract-template.yaml](tied/docs/agent-preload-contract-template.yaml)**. If the project is **new**, work through enough requirements to capture what is implemented; **refresh** the contract as the platform grows.
 
@@ -162,8 +162,8 @@ When using the TIED MCP server, writes go only to project-owned YAML so methodol
 The MCP server is **not** copied into your project; it stays in the TIED repository.
 
 1. **Build once** (in the TIED repo): From the TIED repo root, run `cd mcp-server && npm install && npm run build`. You need this **`dist/index.js`** for **`.cursor/mcp.json`** and for **`tied-cli.sh`** (via **`TIED_MCP_BIN`**).
-2. **Bootstrap** (if not already done): Run `./copy_files.sh` targeting your development project for **`tied/`** and **`.cursor/skills/tied-yaml/`**. **`copy_files.sh` does not write `.cursor/mcp.json`** — add the **`tied-yaml`** entry manually or follow **`agent enable tied-yaml`** after creating **`mcp.json`** (see **[tied/docs/adding-tied-mcp-and-invoking-passes.md](tied/docs/adding-tied-mcp-and-invoking-passes.md)**).
-3. **Enable in Cursor (recommended):** From the **client project** root (the workspace that contains `tied/` and `.cursor/mcp.json`), run `agent enable tied-yaml`. When Cursor prompts you to apply the project MCP configuration, **approve** the update. Type **`quit`** to exit the interactive `agent` session.
+2. **Bootstrap** (if not already done): Run `./copy_files.sh` targeting your development project for **`tied/`** and **`.cursor/skills/tied-yaml/`**. **`copy_files.sh` does not write `.cursor/mcp.json`** — add the **`tied-yaml`** entry manually or follow **`agent mcp enable tied-yaml`** after creating **`mcp.json`** (see **[tied/docs/adding-tied-mcp-and-invoking-passes.md](tied/docs/adding-tied-mcp-and-invoking-passes.md)**).
+3. **Enable in Cursor (recommended):** From the **client project** root (the workspace that contains `tied/` and `.cursor/mcp.json`), run `agent mcp enable tied-yaml`. When Cursor prompts you to apply the project MCP configuration, **approve** the update. Type **`quit`** to exit the interactive `agent` session.
 4. **Verify:** List MCP tools (e.g. `yaml_index_read`, `tied_config_get_base_path`) or read a resource such as `tied://requirements` to confirm the server is loaded.
 
 Alternatively, configure MCP manually: set **command/args** to the **TIED repo's** built server and **env** `TIED_BASE_PATH` to your **project's** `tied/` directory—see [TIED YAML MCP Server](#tied-yaml-mcp-server) and [mcp-server/README.md](mcp-server/README.md) for the exact JSON and paths.

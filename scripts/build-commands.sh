@@ -1,5 +1,7 @@
 # build-commands.sh
 
+export TIED_MCP_COLLECT_METRICS=1
+
 # echo_exec
 
 if ! command -v echo_exec >/dev/null 2>&1; then

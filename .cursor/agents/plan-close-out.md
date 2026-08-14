@@ -1,10 +1,7 @@
 ---
 name: plan-close-out
-description: >-
-  Use when the caller explicitly selects plan-close-out or delegates staged TIED
-  LEAP close-out with CHANGELOG and a proposed commit message. Do not use for
-  ammend-commit, leap-diff-promote, plan-new-feature, or build-plan.
-model: gpt-5.6-luna[effort=high]
+description: Use when the caller explicitly selects plan-close-out or delegates staged TIED LEAP close-out with CHANGELOG and a proposed commit message. Do not use for ammend-commit, leap-diff-promote, plan-new-feature, or build-plan.
+model: inherit
 readonly: false
 is_background: false
 ---

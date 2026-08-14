@@ -1,10 +1,7 @@
 ---
 name: other
-description: >-
-  Use when the caller explicitly selects other or delegates a custom prefix
-  without CITDP, Tracker, or Implement blocks. Do not use for question,
-  plan-new-feature, debug, or any full TIED workflow.
-model: gpt-5.6-luna[effort=high]
+description: Use when the caller explicitly selects other or delegates a custom prefix without CITDP, Tracker, or Implement blocks. Do not use for question, plan-new-feature, debug, or any full TIED workflow.
+model: inherit
 readonly: true
 is_background: false
 ---

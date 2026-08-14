@@ -1,10 +1,6 @@
 ---
 name: non-tied-debug
-description: >-
-  Ordinary bug debugging inside a TIED client without TIED synchronization
-  writes. May read TIED/YAML for domain context. Use when the caller names
-  non-tied-debug, debugs outside TIED tracking, or reproduces failures without
-  CITDP. Do not use for debug (TIED), plan-new-feature, or non-tied-plan.
+description: Ordinary bug debugging inside a TIED client without TIED synchronization writes. May read TIED/YAML for domain context. Use when the caller names non-tied-debug, debugs outside TIED tracking, or reproduces failures without CITDP. Do not use for debug (TIED), plan-new-feature, or non-tied-plan.
 disable-model-invocation: true
 ---
 

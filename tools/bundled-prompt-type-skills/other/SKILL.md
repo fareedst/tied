@@ -1,10 +1,6 @@
 ---
 name: other
-description: >-
-  Minimal custom workflow—same shape as question with no TIED blocks. Use when
-  the caller names other, needs a custom prefix without CITDP, or selects the
-  Other prompt type. Do not use for question (semantic difference is caller
-  intent only) or any full TIED workflow.
+description: Minimal custom workflow—same shape as question with no TIED blocks. Use when the caller names other, needs a custom prefix without CITDP, or selects the Other prompt type. Do not use for question (semantic difference is caller intent only) or any full TIED workflow.
 disable-model-invocation: true
 ---
 

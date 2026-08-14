@@ -1298,7 +1298,10 @@ IMPL-TIED_FILES:
       - description: "Prompt-type skill bundle contract, client skills-only distribution, absence of client agents, source-date midnight, source immutability, warning, and copy flag tests"
         path: "mcp-server/src/e2e/prompt-type-skills.test.ts"
   cross_references:
+    - "ARCH-MCP_USAGE_METRICS"
     - "ARCH-TIED_STRUCTURE"
+    - "IMPL-MCP_USAGE_METRICS"
+    - "REQ-MCP_USAGE_METRICS"
     - "REQ-TIED_SETUP"
   detail_file: "implementation-decisions/IMPL-TIED_FILES.yaml"
   implementation_approach:
@@ -1320,7 +1323,8 @@ IMPL-TIED_FILES:
       - "The bootstrap E2E fixture verifies initial MCP config creation and byte-for-byte preservation during methodology and vocabulary refresh."
       - "Treat the vocabulary layer as an agent-control layer and keep its RESOLVE, PRELOAD, RECORD, and VALIDATE touchpoints aligned with [PROC-VOCABULARY_INDEX]."
       - "WARN_ON_MODIFIED_COPY_TARGET reports non-midnight destination mtimes before managed refresh; post-processed files are re-normalized without changing source files."
-    summary: "Bootstrap TIED layout and managed prompt artifacts with attribute-preserving copies, destination-only source-date midnight normalization, pre-refresh non-midnight modification warnings, and delegated YAML canonicalization"
+      - "When initializing a new .cursor/mcp.json and TIED_MCP_COLLECT_METRICS is exactly 1, add TIED_MCP_COLLECT_METRICS=1 and TIED_MCP_METRICS_CLIENT; use a non-empty explicit client override or the target project directory basename."
+    summary: "Bootstrap TIED layout and managed prompt artifacts with attribute-preserving copies, destination-only source-date midnight normalization, pre-refresh non-midnight modification warnings, delegated YAML canonicalization, and conditional MCP metrics fields for new configs"
   metadata:
     created:
       author: "AI Agent"
@@ -1328,11 +1332,11 @@ IMPL-TIED_FILES:
     last_updated:
       author: "AI Agent"
       date: "2026-08-13"
-      reason: "Stop installing prompt-type Task wrappers into client projects during bootstrap"
+      reason: "Add opt-in MCP metrics fields and project client-name fallback to new bootstrap configuration"
     last_validated:
-      date: "2026-02-06T00:00:00.000Z"
+      date: "2026-08-13"
       result: "pass"
-      validator: "AI Agent"
+      validator: "npm test; tied_validate_consistency"
   name: "TIED File Creation"
   rationale:
     benefits:
@@ -1353,16 +1357,27 @@ IMPL-TIED_FILES:
   status: "Active"
   traceability:
     architecture:
+      - "ARCH-MCP_USAGE_METRICS"
       - "ARCH-TIED_STRUCTURE"
     code_annotations:
+      - "ARCH-MCP_USAGE_METRICS"
       - "ARCH-TIED_STRUCTURE"
+      - "IMPL-MCP_USAGE_METRICS"
       - "IMPL-TIED_FILES"
+      - "REQ-MCP_USAGE_METRICS"
       - "REQ-TIED_SETUP"
+    implementation:
+      - "IMPL-MCP_USAGE_METRICS"
+      - "IMPL-TIED_FILES"
     requirements:
+      - "REQ-MCP_USAGE_METRICS"
       - "REQ-TIED_SETUP"
     tests:
       - "mcp-server/src/e2e/bootstrap-and-load.test.ts"
       - "mcp-server/src/e2e/prompt-type-skills.test.ts"
+      - "scripts/analyze_tied_mcp_metrics_test.rb"
+      - "scripts/compare_yaml_dirs_test.rb"
+      - "scripts/yaml_list_sorter_test.rb"
 IMPL-TIED_YAML_CANONICALIZER:
   cross_references:
     - "ARCH-TIED_YAML_CANONICAL_PROFILE"

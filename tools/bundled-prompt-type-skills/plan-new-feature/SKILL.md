@@ -1,12 +1,6 @@
 ---
 name: plan-new-feature
-description: >-
-  Plans a new TIED-tracked feature with Refine, CITDP analysis, and Implement
-  gates. Use when the caller names plan-new-feature, plans a new requirement with
-  full TIED traceability, or starts feature work with Tracker and IMPL
-  pseudo-code. Do not use for build-plan (execute an existing linked plan),
-  refine-plan (improve a linked plan), non-tied-plan, question, or other
-  minimal prompts.
+description: Plans a new TIED-tracked feature with Refine, CITDP analysis, and Implement gates. Use when the caller names plan-new-feature, plans a new requirement with full TIED traceability, or starts feature work with Tracker and IMPL pseudo-code. Do not use for build-plan (execute an existing linked plan), refine-plan (improve a linked plan), non-tied-plan, question, or other minimal prompts.
 disable-model-invocation: true
 ---
 
