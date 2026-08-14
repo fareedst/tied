@@ -5,14 +5,19 @@
 From a project root with Node and the built TIED MCP server available:
 
 ```text
-tied init
-tied feature new "Add count-lines CLI"
-tied feature build --feature FEAT-001
+.cursor/skills/tied-yaml/scripts/tied.sh init
+.cursor/skills/tied-yaml/scripts/tied.sh feature new "Add count-lines CLI"
+.cursor/skills/tied-yaml/scripts/tied.sh feature build --feature FEAT-001
 ```
 
 These commands are adoption delegates. Lifecycle transitions, manifest
 persistence, readiness, task scheduling, generated views, and agentstream
 execution remain owned by their existing validated modules.
+
+The wrapper points at the TIED repository that ran `copy_files.sh`. If that
+repository moves, set `TIED_REPO_ROOT` to its absolute path before invoking it.
+The standalone feature surface is available at
+`.cursor/skills/tied-yaml/scripts/feature-orchestrator.sh`.
 
 ## Advanced and offline paths
 
@@ -27,7 +32,7 @@ TIED_BASE_PATH=/absolute/project/tied \
 ```
 
 For a manual workflow, follow
-[`tied/docs/using-tied-without-mcp.md`](../tied/docs/using-tied-without-mcp.md).
+[`using-tied-without-mcp.md`](using-tied-without-mcp.md).
 The TIED YAML MCP, `tied-cli.sh`, and `tools/agentstream` remain supported.
 
 ## Brownfield migration
@@ -35,8 +40,8 @@ The TIED YAML MCP, `tied-cli.sh`, and `tools/agentstream` remain supported.
 Migration is dry-run by default:
 
 ```text
-tied feature migrate --source prompts/initial-specs.yaml
-tied feature migrate --source prompts/initial-specs.yaml --confirm-migration
+.cursor/skills/tied-yaml/scripts/tied.sh feature migrate --source prompts/initial-specs.yaml
+.cursor/skills/tied-yaml/scripts/tied.sh feature migrate --source prompts/initial-specs.yaml --confirm-migration
 ```
 
 Preview output includes normalized candidates, source ordering, deterministic
@@ -44,3 +49,8 @@ conflicts, and no-write evidence. Confirmed migration creates a backup before
 publishing feature manifests atomically. Conflicts, stale previews, and
 publication failures do not modify project-owned TIED YAML and never create
 Git branches or worktrees.
+
+For an existing client, re-run `copy_files.sh`; use
+`./copy_files.sh --merge-vocab /path/to/client` when the feature-orchestration
+glossary is absent. The bootstrap preserves existing project YAML, MCP
+configuration, documentation, and vocabulary.

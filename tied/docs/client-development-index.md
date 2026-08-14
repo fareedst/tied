@@ -61,6 +61,7 @@ Quality assurance references: [quality-assurance-commands.md](quality-assurance-
 | TIED already updated; code/tests lag | [tied-first-implementation-procedure.md](tied-first-implementation-procedure.md) (**TIED-first**) | **Checklist** with verify-only REQ/ARCH/IMPL steps |
 | Bug fix | **Checklist** → `session-bootstrap` | Add REQ at `author-requirement` if missing |
 | Fidelity research | **tied-fidelity-research.md** | Read-only stages 0–4 audit; preserve evidence; promote only after adjudication |
+| New staged feature | **tied-feature-onboarding.md** → `tied init` | `.cursor/skills/tied-yaml/scripts/tied.sh feature new`; use the feature-orchestration MCP tools for lifecycle work |
 | Tests/code diverged from IMPL | **Pseudo-code** § LEAP micro-cycle | **Processes** § `[PROC-LEAP]`; checklist `sub-leap-micro-cycle` |
 | Repair without full new REQ | **Checklist** + **Pseudo-code** Track B or C | Same LEAP order |
 

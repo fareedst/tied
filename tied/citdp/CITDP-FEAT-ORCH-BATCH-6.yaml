@@ -1,4 +1,12 @@
 CITDP-FEAT-ORCH-BATCH-6:
+  adoption_evidence:
+    commands:
+      - "npm test --prefix mcp-server"
+      - "TIED_BASE_PATH=/Users/fareed/Documents/dev/chatgpt/stdd/tied .cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency '{}'"
+      - "tied_scoped_analysis_run walk_summary"
+    demo: "docs/tied-feature-demo.md sections 1-6"
+    recorded_at: "2026-08-14"
+    result: "Batch 6 demo validation evidence recorded; publication remains a separate lightweight Option A change."
   change_definition:
     exclusions:
       - "automatic canonical promotion"
@@ -37,7 +45,7 @@ CITDP-FEAT-ORCH-BATCH-6:
     result: "No scope divergence required; pseudo-code sidecars were synchronized with validator-required DATA_TRANSITION contract fields before implementation validation."
   metadata:
     author: "AI Agent"
-    date: "2026-08-13"
+    date: "2026-08-14"
     result: "pass"
     validator: "TIED MCP"
   risks:

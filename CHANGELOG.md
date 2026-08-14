@@ -17,6 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Client orchestration publication (Option A) via `copy_files.sh`** — `[REQ-FEAT_ADOPTION_GUIDANCE]`, `[REQ-FEAT_ONBOARDING_COMMANDS]`, `[REQ-FEAT_ORCHESTRATION_SURFACE]`, `[REQ-TIED_SETUP]`, `[IMPL-TIED_FILES]`, and `[IMPL-FEAT_ONBOARDING_COMMANDS]` deliver the client distribution layer for feature orchestration onboarding. Artifacts installed copy-if-missing: `tied/constitution.example.yaml`; [`tied/docs/tied-feature-onboarding.md`](tied/docs/tied-feature-onboarding.md) (relocated from `docs/tied-feature-onboarding.md`); `tools/bundled-tied-yaml-skill/scripts/tied.sh` and `feature-orchestrator.sh` (baked `TIED_REPO_ROOT`); additive vocabulary merge for [`tied/vocab/feature-orchestration.md`](tied/vocab/feature-orchestration.md). Bootstrap gate: fail-closed `verify_feature_orchestration_methodology` with E2E coverage in `mcp-server/src/e2e/bootstrap-and-load.test.ts`. Explicit non-goals: no Batch 0–6 FEAT token promotion into methodology YAML; no npm publish; no git/worktree mutation. CITDP: [`tied/citdp/CITDP-REQ-FEAT_ONBOARDING_PUBLICATION.yaml`](tied/citdp/CITDP-REQ-FEAT_ONBOARDING_PUBLICATION.yaml). Entry point: [`tied/docs/client-development-index.md`](tied/docs/client-development-index.md).
+
 - **Staged feature orchestration demo** — [`docs/tied-feature-demo.md`](docs/tied-feature-demo.md) provides a disposable, copy-paste walkthrough for onboarding, lifecycle, views, migration preview, research/feedback boundaries, and repository TIED validation without mutating project YAML.
 
 - **Feature orchestration foundation through onboarding (batches 0–6)** — Feature

@@ -1,0 +1,71 @@
+CITDP-REQ-FEAT_ONBOARDING_PUBLICATION:
+  change_definition:
+    current_behavior: "Fresh clients lacked the onboarding guide, constitution starter, runnable wrappers, and a closed bootstrap verification gate."
+    desired_behavior: "Fresh and refreshed clients receive the lightweight publication surface, preserve client-owned data, and fail closed when mandatory orchestration artifacts are absent."
+    non_goals:
+      - "Feature lifecycle redesign"
+      - "Fidelity research pilot or cross-project aggregation"
+      - "Git branch or worktree mutation"
+      - "npm publishing"
+      - "Promote the 61 REQ-FEAT project tokens into methodology YAML"
+    scope:
+      - "REQ-FEAT_ADOPTION_GUIDANCE"
+      - "REQ-FEAT_ONBOARDING_COMMANDS"
+      - "REQ-FEAT_ORCHESTRATION_SURFACE"
+      - "REQ-TIED_SETUP"
+    summary: "Publish the existing validated feature-orchestration adoption surface to TIED clients through copy_files.sh without promoting project-owned FEAT tokens."
+    unchanged_behavior: "Runtime lifecycle semantics, project TIED YAML, existing MCP configuration, customized documentation, vocabulary content, tied-cli.sh, TIED YAML MCP, and agentstream remain authoritative."
+  impact:
+    files:
+      - "copy_files.sh"
+      - "mcp-server/README.md"
+      - "mcp-server/src/e2e/bootstrap-and-load.test.ts"
+      - "tied/constitution.example.yaml"
+      - "tied/docs/client-development-index.md"
+      - "tied/docs/methodology-migration.md"
+      - "tied/docs/tied-feature-onboarding.md"
+      - "tied/implementation-decisions/IMPL-TIED_FILES-pseudocode.md"
+      - "tied/vocab/feature-orchestration.md"
+      - "tools/bundled-tied-yaml-skill/scripts/feature-orchestrator.sh"
+      - "tools/bundled-tied-yaml-skill/scripts/tied.sh"
+    modules:
+      - "bundled tied-yaml onboarding and feature-orchestrator wrappers"
+      - "client onboarding guide and development index"
+      - "copy_files.sh managed bootstrap and closed feature-orchestration gate"
+      - "feature orchestration MCP README catalog"
+      - "feature-orchestration vocabulary merge"
+      - "fresh-client and brownfield refresh E2E"
+      - "project constitution example"
+  metadata:
+    author: "AI Agent"
+    methodology_version: "3.0.0"
+    option: "A — lightweight publication"
+    recorded_at: "2026-08-14"
+    tied_base_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied"
+  risks:
+    mitigations:
+      - "Bake and assert the absolute TIED_REPO_ROOT; document override when the source repository moves."
+      - "Fail closed when required docs, constitution example, vocabulary, or wrapper are missing."
+      - "Use create-if-missing constitution, copy-when-missing docs, additive vocabulary merge, and preservation E2E."
+      - "Use quoted shell arguments and UI-free wrapper smoke coverage."
+    remaining:
+      - "Cross-platform executable discovery and filesystem stress testing remain future hardening work."
+    selected_profiles:
+      - "baseline-functional"
+      - "data-integrity-migration"
+      - "external-input-security"
+      - "stateful-reliability"
+  status: "implemented"
+  test_strategy:
+    focused: "bootstrap-and-load E2E: 4 passed"
+    full_mcp: "npm test --prefix mcp-server: 263 passed, 0 failed"
+    order: "IMPL pseudo-code, RED bootstrap/wrapper assertions, implementation, module validation, fresh-client smoke, full suite, verification, YAML/vocabulary/consistency validation."
+    smoke: "Fresh client bootstrap executed tied init and tied feature new successfully in bootstrap E2E."
+  validation:
+    pseudocode: "IMPL-TIED_FILES sidecar passed token-linkage/consistency validation; inline Layer B pseudocode_validate structural validation passed before RED tests."
+    shell_syntax: "passed: bash -n copy_files.sh and bundled wrappers"
+    tied_validate_consistency: "passed: ok true; indexes, details, and pseudo-code token references valid"
+    tied_verify: "passed: tied_verify derived 4 Implemented requirement statuses and 2 Active implementation statuses from passing test evidence"
+    typescript_build: "passed via npm test"
+    vocabulary: "RESOLVE/PRELOAD/RECORD/VALIDATE passed; canonical terms found in feature-orchestration.md, tied-methodology.md, routing.md, and domain-references.md"
+    yaml_lint: "passed: constitution.example.yaml, tracker, CITDP records, and IMPL-TIED_FILES detail"

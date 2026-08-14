@@ -1,5 +1,5 @@
 # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS] [IMPL-MCP_USAGE_METRICS]
-# Summary: Bootstrap TIED layout from templates via copy_files.sh — indexes, guides, detail dirs, AGENTS.md family, vocabulary seed/merge, managed prompt-type skills, attribute-preserving copies, source-date midnight timestamps on client copies, modification warnings, implementation pseudo-code sidecars, tied-yaml skill, and opt-in MCP metrics configuration.
+# Summary: Bootstrap TIED layout from templates via copy_files.sh — indexes, guides, detail dirs, AGENTS.md family, vocabulary seed/merge, managed prompt-type skills, feature-orchestration onboarding artifacts and wrappers, create-if-missing constitution example, closed publication verification, attribute-preserving copies, source-date midnight timestamps on client copies, modification warnings, implementation pseudo-code sidecars, tied-yaml skill, and opt-in MCP metrics configuration.
 
 # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
 # How: Contract — INPUT/OUTPUT/DATA for BOOTSTRAP_TIED below; these fields define the bootstrap boundary.
@@ -8,7 +8,7 @@
 # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
 # How: OUTPUT — created or updated files under tied/ and selected root files; process exit status.
 # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
-# How: DATA — project indexes; inherited methodology tree; tied/vocab/*.md when seeded or merged; IMPL-*-pseudocode.md sidecars; managed .cursor/skills/ artifacts; source-date midnight metadata applied only to client copies; modification diagnostics; and the client .cursor/mcp.json when initialized, including opt-in metrics fields.
+# How: DATA — project indexes; inherited methodology tree; tied/vocab/*.md when seeded or merged; feature-orchestration onboarding and constitution artifacts; IMPL-*-pseudocode.md sidecars; managed .cursor/skills/ artifacts; source-date midnight metadata applied only to client copies; modification diagnostics; and the client .cursor/mcp.json when initialized, including opt-in metrics fields.
 
 procedure BOOTSTRAP_TIED(projectRoot):
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
@@ -21,17 +21,19 @@ procedure BOOTSTRAP_TIED(projectRoot):
     DATA: project YAML; inherited methodology files; client vocabulary files; client MCP configuration
     CONTROL: preserve client project YAML, existing vocabulary, and existing .cursor/mcp.json byte-for-byte; overwrite inherited methodology and managed skill content; use cp -p or cp -pR and normalize only destination timestamps
     PRE: projectRoot is a writable client directory; template source and required TIED source paths are readable
-    POST: required TIED indexes, docs, detail directories, managed prompt-type skills, and vocabulary policy outputs exist; copied managed files have their source item's local-date midnight timestamp; modification warnings precede managed overwrites; source files remain unchanged; failure returns non-zero
+    POST: required TIED indexes, docs, detail directories, managed prompt-type skills, feature-orchestration artifacts, and vocabulary policy outputs exist; copied managed files have their source item's local-date midnight timestamp; modification warnings precede managed overwrites; source files remain unchanged; failure returns non-zero
     EFFECTS: File I/O — creates or updates selected client files; Process — invokes helper copy and patch operations
-    FAILURE_MODES: MISSING_TEMPLATE_SOURCE; UNWRITABLE_DESTINATION; SKILL_INSTALL_FAILED; COPY_FAILED; VOCABULARY_SOURCE_MISSING; MCP_CONFIG_INIT_FAILED
+    FAILURE_MODES: MISSING_TEMPLATE_SOURCE; UNWRITABLE_DESTINATION; SKILL_INSTALL_FAILED; COPY_FAILED; VOCABULARY_SOURCE_MISSING; FEATURE_ORCHESTRATION_PACKAGE_INCOMPLETE; MCP_CONFIG_INIT_FAILED
     DATA_TRANSITION: client layout absent|stale→bootstrapped|refreshed; inherited methodology old→current; source mtimes→destination local-date midnight mtimes; non-midnight managed destination→warning then current source; client project YAML and existing MCP configuration unchanged; source files unchanged
     TERMINATION: total — finite target list and finite vocabulary/file loops
   ON missing template source or unwritable destination: exit non-zero with actionable message
   FOR each copy_files.sh target: apply copy or merge policy; never overwrite client project-only YAML with empty templates where script forbids
   CALL INITIALIZE_TIED_MCP_CONFIG(projectRoot)
   CALL INSTALL_TIED_YAML_SKILL(projectRoot)
+  CALL INSTALL_FEATURE_ORCHESTRATION_WRAPPERS(projectRoot)
   CALL SEED_DOMAIN_VOCAB(projectRoot)
   CALL MERGE_DOMAIN_VOCAB(projectRoot) WHEN --merge-vocab is supplied
+  CALL COPY_FEATURE_ORCHESTRATION_ARTIFACTS(projectRoot)
   RETURN success
 
 procedure COPY_WITH_ATTRIBUTES(sourcePath, destinationPath, recursive):
@@ -176,6 +178,85 @@ procedure PATCH_TIED_CLI_REPO_ROOT(projectRoot):
   IF cliPath contains unsubstituted marker /ABSOLUTE/PATH/TO/TIED/SOURCE/DIR:
     replace marker with realpath(TIED_SOURCE) once via python3 inline script
   ELSE IF marker line absent: warn and skip (non-fatal)
+
+procedure INSTALL_FEATURE_ORCHESTRATION_WRAPPERS(projectRoot):
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-FEAT_ONBOARDING_COMMANDS] [ARCH-FEAT_ONBOARDING_BOUNDARY] [REQ-FEAT_ONBOARDING_COMMANDS]
+  # How: Distribute the onboarding wrapper with the managed tied-yaml skill and bake the canonical TIED source root so fresh clients can invoke feature orchestration without duplicating runtime logic.
+  Contract:
+    INPUT: projectRoot; canonical bundled tied-yaml skill; TIED source real path
+    OUTPUT: executable projectRoot/.cursor/skills/tied-yaml/scripts/tied.sh and optional feature-orchestrator.sh
+    DATA: wrapper scripts; TIED_REPO_ROOT marker; onboarding and orchestration entry-point paths
+    CONTROL: canonical bundle is copied by INSTALL_TIED_YAML_SKILL; replace only the unsubstituted repository marker; preserve client-owned files outside the managed skill
+    PRE: bundled wrapper source exists; built onboarding and orchestration entry points are available in the TIED source when invoked
+    POST: client wrapper scripts are present, executable, and resolve the absolute TIED source root; missing build remains an actionable runtime failure
+    EFFECTS: File I/O — copies managed scripts and patches marker; Process — invokes chmod and inline marker replacement
+    FAILURE_MODES: WRAPPER_SOURCE_MISSING; WRAPPER_COPY_FAILED; WRAPPER_MARKER_REPLACEMENT_FAILED; ENTRYPOINT_BUILD_MISSING
+    DATA_TRANSITION: wrapper absent|stale→managed wrapper with resolved source root; client-owned non-wrapper files unchanged
+    TERMINATION: total — finite wrapper list and one marker replacement pass
+  CALL PATCH_FEATURE_WRAPPER_REPO_ROOT(projectRoot)
+  RUN chmod executable on each installed wrapper
+  RETURN success
+
+procedure PATCH_FEATURE_WRAPPER_REPO_ROOT(projectRoot):
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-FEAT_ONBOARDING_COMMANDS] [ARCH-FEAT_ONBOARDING_BOUNDARY] [REQ-FEAT_ONBOARDING_COMMANDS]
+  # How: Replace the wrapper's unresolved TIED_REPO_ROOT marker with the bootstrap source realpath while leaving already customized clients unchanged.
+  Contract:
+    INPUT: projectRoot; TIED source real path
+    OUTPUT: patched onboarding wrapper scripts or explicit non-fatal skip for an absent optional wrapper
+    DATA: wrapper text; TIED_REPO_ROOT marker
+    CONTROL: patch tied.sh when present; patch feature-orchestrator.sh when present; replace each marker once; do not rewrite resolved scripts
+    PRE: installed skill directory is readable; wrapper scripts may be absent only when the bundle does not provide them
+    POST: each present wrapper resolves TIED_REPO_ROOT to the canonical TIED source; absent optional wrapper is reported without mutation
+    EFFECTS: File I/O — reads and conditionally rewrites managed scripts; Diagnostics — reports skipped optional paths
+    FAILURE_MODES: WRAPPER_UNREADABLE; MARKER_REPLACEMENT_FAILED; NON_FATAL_OPTIONAL_WRAPPER_ABSENT
+    DATA_TRANSITION: placeholder marker→absolute TIED source path; resolved marker→unchanged; absent optional wrapper→unchanged
+    TERMINATION: total — finite wrapper list
+  FOR each wrapper in tied.sh, feature-orchestrator.sh:
+    IF wrapper is absent: continue
+    IF wrapper contains unsubstituted marker: replace marker with realpath(TIED_SOURCE) once
+    ELSE IF marker line absent: warn and skip (non-fatal)
+
+procedure COPY_FEATURE_ORCHESTRATION_ARTIFACTS(projectRoot):
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [REQ-FEAT_ADOPTION_GUIDANCE] [IMPL-FEAT_ONBOARDING_COMMANDS] [ARCH-FEAT_ONBOARDING_BOUNDARY] [REQ-FEAT_ONBOARDING_COMMANDS]
+  # How: Publish the client-facing constitution example and onboarding guide additively, then verify the complete orchestration package without overwriting project-owned YAML or existing documentation.
+  Contract:
+    INPUT: projectRoot; canonical TIED source
+    OUTPUT: constitution example when absent; onboarding guide when absent; verification result
+    DATA: source constitution example; source onboarding guide; client tied/ and tied/docs/ paths; required orchestration artifact list
+    CONTROL: create-if-missing for constitution; copy-when-missing for docs; inherited methodology remains refreshable; existing client content is preserved
+    PRE: projectRoot/tied/ is writable or creatable; canonical source artifacts are readable
+    POST: fresh clients contain the example and guide; brownfield clients retain existing bytes; verification fails closed when any required package artifact is absent
+    EFFECTS: File I/O — conditionally creates client artifacts; Diagnostics — reports package completeness and corrective commands
+    FAILURE_MODES: CONSTITUTION_SOURCE_MISSING; ONBOARDING_DOC_SOURCE_MISSING; CLIENT_DESTINATION_UNWRITABLE; FEATURE_ORCHESTRATION_PACKAGE_INCOMPLETE
+    DATA_TRANSITION: absent client package→published package; existing client artifact→same bytes; incomplete package→non-zero bootstrap
+    TERMINATION: total — finite artifact list
+  IF projectRoot/tied/constitution.example.yaml is absent:
+    copy canonical tied/constitution.example.yaml
+  IF projectRoot/tied/docs/tied-feature-onboarding.md is absent:
+    copy canonical tied/docs/tied-feature-onboarding.md
+  CALL VERIFY_FEATURE_ORCHESTRATION_METHODOLOGY(projectRoot)
+  RETURN verification result
+
+procedure VERIFY_FEATURE_ORCHESTRATION_METHODOLOGY(projectRoot):
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [REQ-FEAT_ADOPTION_GUIDANCE] [IMPL-FEAT_ONBOARDING_COMMANDS] [ARCH-FEAT_ONBOARDING_BOUNDARY] [REQ-FEAT_ONBOARDING_COMMANDS]
+  # How: Fail closed when the fresh-client orchestration contract is incomplete and report the exact wrapper, documentation, constitution, vocabulary, and build recovery paths.
+  Contract:
+    INPUT: projectRoot; required orchestration artifact paths
+    OUTPUT: success diagnostics or non-zero failure with missing paths and corrective commands
+    DATA: client methodology records; onboarding docs; constitution example; vocabulary; wrapper scripts; built entry points
+    CONTROL: require files that bootstrap promises; allow no silent omission; validation is read-only
+    PRE: bootstrap copy and skill installation have completed
+    POST: every required artifact exists and is readable, or bootstrap exits non-zero with actionable diagnostics
+    EFFECTS: File I/O — reads file existence and permissions; Diagnostics — emits completion or recovery guidance
+    FAILURE_MODES: REQUIRED_ARTIFACT_MISSING; REQUIRED_ARTIFACT_UNREADABLE; FEATURE_ORCHESTRATION_GATE_FAILED
+    DATA_TRANSITION: unknown package→verified complete|verified incomplete; client files unchanged
+    TERMINATION: total — finite required artifact list
+  FOR each required artifact:
+    IF artifact is absent or unreadable:
+      report missing path and corrective command
+      RETURN non-zero
+  report tied init, tied feature new, tied_validate_consistency, and manual/offline corrective paths
+  RETURN success
 
 procedure SEED_DOMAIN_VOCAB(projectRoot):
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [PROC-VOCABULARY_INDEX]

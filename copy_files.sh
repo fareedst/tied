@@ -322,12 +322,13 @@ TIED_CLI_REPO_ROOT_MARKER="/ABSOLUTE/PATH/TO/TIED/SOURCE/DIR"
 tied_yaml_skill_is_complete() {
   [[ -f "$1/scripts/tied-cli.sh" ]]
 }
-_patch_tied_cli_repo_root() {
+_patch_tied_repo_root() {
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
-  # How: Resolve the installed CLI's repository marker once and leave already customized clients unchanged.
-  local _source="$1" _cli="${TIED_YAML_SKILL_DEST}/scripts/tied-cli.sh"
-  local _source_cli="${_source}/scripts/tied-cli.sh"
-  if [[ ! -f "${_cli}" ]]; then
+  # How: Resolve each installed wrapper's repository marker once and leave already customized clients unchanged.
+  local _source="$1" _script_name="$2"
+  local _cli="${TIED_YAML_SKILL_DEST}/scripts/${_script_name}"
+  local _source_cli="${_source}/scripts/${_script_name}"
+  if [[ ! -f "${_cli}" ]] || [[ ! -f "${_source_cli}" ]]; then
     return 0
   fi
   local _root
@@ -350,7 +351,7 @@ with open(path, "w", encoding="utf-8") as f:
     f.write(text.replace(old_line, new_line, 1))
 ' || _patch_rc=$?
   if [[ "${_patch_rc}" -eq 2 ]]; then
-      say_warn "tied-cli.sh at ${_cli} has no TIED_REPO_ROOT placeholder; skipped baking TIED source path."
+      say_warn "${_script_name} at ${_cli} has no TIED_REPO_ROOT placeholder; skipped baking TIED source path."
   elif [[ "${_patch_rc}" -ne 0 ]]; then
     exit "${_patch_rc}"
   else
@@ -366,8 +367,14 @@ install_tied_yaml_skill() {
   chmod -R a+rX "${TIED_YAML_SKILL_DEST}"
   if [[ -f "${TIED_YAML_SKILL_DEST}/scripts/tied-cli.sh" ]]; then
     chmod a+x "${TIED_YAML_SKILL_DEST}/scripts/tied-cli.sh"
-    _patch_tied_cli_repo_root "${_src}"
+    _patch_tied_repo_root "${_src}" "tied-cli.sh"
   fi
+  for _wrapper in tied.sh feature-orchestrator.sh; do
+    if [[ -f "${TIED_YAML_SKILL_DEST}/scripts/${_wrapper}" ]]; then
+      chmod a+x "${TIED_YAML_SKILL_DEST}/scripts/${_wrapper}"
+      _patch_tied_repo_root "${_src}" "${_wrapper}"
+    fi
+  done
   say_warn "Copied tied-yaml Cursor skill into ${TIED_YAML_SKILL_DEST} (from ${_src})."
 }
 if tied_yaml_skill_is_complete "${TIED_YAML_SKILL_CANONICAL}"; then
@@ -571,6 +578,20 @@ for f in "${INDEX_YAML_FILES[@]}"; do
 done
 say_x_of_y_client "${project_created}" "${#INDEX_YAML_FILES[@]}" "Created ${project_created} of ${#INDEX_YAML_FILES[@]} project index file(s) (rest already existed)."
 
+# --- Feature orchestration starter: create constitution example only when missing ---
+CONSTITUTION_EXAMPLE_SOURCE="${SCRIPT_DIR}/tied/constitution.example.yaml"
+CONSTITUTION_EXAMPLE_DEST="${TIED_DIR}/constitution.example.yaml"
+if [[ ! -f "${CONSTITUTION_EXAMPLE_SOURCE}" ]]; then
+  say_err "Missing feature orchestration constitution example: ${CONSTITUTION_EXAMPLE_SOURCE}"
+  exit 1
+fi
+if [[ ! -f "${CONSTITUTION_EXAMPLE_DEST}" ]]; then
+  _copy_file "${CONSTITUTION_EXAMPLE_SOURCE}" "${CONSTITUTION_EXAMPLE_DEST}"
+  say_ok "Created client constitution example ${CONSTITUTION_EXAMPLE_DEST}."
+else
+  say_warn "Preserved existing client constitution example ${CONSTITUTION_EXAMPLE_DEST}."
+fi
+
 # Copy methodology docs into client tied/docs/ from canonical TIED source tied/docs/ (referenced by AGENTS.md, processes.md).
 # The agent-req-implementation-checklist.yaml is the trackable checklist; copy to a unique file per request (see its header).
 # CITDP paths in that checklist refer to the client project's tied/citdp/ (client workspace root), not the TIED source repo path.
@@ -598,6 +619,7 @@ DOCS_TO_COPY=(
   "methodology-diagrams.md"
   "processes.md"
   "tied-fidelity-research.md"
+  "tied-feature-onboarding.md"
   # Canonical IMPL pseudo-code (primary references for bootstrap):
   # - pseudocode-writing-and-validation.md — unified guide (writing, MCP mechanics, block linkage, phases A–I, LEAP, when to validate).
   # - pseudocode-validation-checklist.yaml — Layer B application checklist ([PROC-PSEUDOCODE_VALIDATION]).
@@ -781,3 +803,50 @@ verify_fidelity_methodology() {
 }
 
 verify_fidelity_methodology
+
+# --- Feature orchestration methodology verification ---
+# [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
+# How: Require the lightweight onboarding guide, constitution starter, vocabulary, and
+# executable wrapper before declaring the client feature-orchestration surface installed.
+FEATURE_ORCHESTRATION_METHODOLOGY_REQUIRED_FILES=(
+  "tied/docs/tied-feature-onboarding.md"
+  "tied/constitution.example.yaml"
+  "tied/vocab/feature-orchestration.md"
+  ".cursor/skills/tied-yaml/scripts/tied.sh"
+)
+
+verify_feature_orchestration_methodology() {
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
+  # How: Fail closed for missing mandatory publication artifacts while deferring only
+  # brownfield vocabulary to the explicit additive --merge-vocab refresh path.
+  local _missing=0 _deferred_vocab=0 _relative _artifact_path
+  say_warn "MUST verify feature orchestration methodology artifacts before completion."
+  for _relative in "${FEATURE_ORCHESTRATION_METHODOLOGY_REQUIRED_FILES[@]}"; do
+    _artifact_path="${TIED_DIR}/${_relative}"
+    if [[ "${_relative}" == tied/* ]] || [[ "${_relative}" == .cursor/* ]]; then
+      _artifact_path="${TARGET_PROJECT_DIR}/${_relative}"
+    fi
+    if [[ ! -f "${_artifact_path}" ]]; then
+      if { [[ "${_relative}" == "vocab/feature-orchestration.md" ]] || [[ "${_relative}" == "tied/vocab/feature-orchestration.md" ]]; } && [[ "${MERGE_VOCAB}" != "true" ]]; then
+        say_warn "MUST run ./copy_files.sh --merge-vocab ${TARGET_PROJECT_DIR} to add feature orchestration vocabulary."
+        _deferred_vocab=1
+        continue
+      fi
+      say_err "MISSING mandatory feature orchestration artifact: ${_artifact_path}"
+      _missing=1
+    fi
+  done
+  if [[ "${_missing}" -ne 0 ]]; then
+    say_err "Feature orchestration methodology verification failed; client bootstrap is incomplete."
+    return 1
+  fi
+  if [[ "${_deferred_vocab}" -eq 0 ]]; then
+    say_ok "MUST verify feature orchestration methodology artifacts: complete."
+  else
+    say_warn "MUST complete feature orchestration vocabulary installation with --merge-vocab."
+  fi
+  say_warn "CAN run onboarding smoke: (cd ${TARGET_PROJECT_DIR} && .cursor/skills/tied-yaml/scripts/tied.sh init)."
+  say_warn "CAN run structural validation: TIED_BASE_PATH=${TIED_BASE_PATH_VALUE} ${TIED_CLI_DEST:-${CURSOR_DIR}/skills/tied-yaml/scripts/tied-cli.sh} tied_validate_consistency."
+}
+
+verify_feature_orchestration_methodology

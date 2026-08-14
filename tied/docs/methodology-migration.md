@@ -58,6 +58,13 @@ export TIED_BASE="${CLIENT}/tied"
 
 The second command is additive. It does not replace the normal refresh; run it when missing canonical vocabulary files should be installed into a client that already has vocabulary files.
 
+Feature-orchestration publication follows the same non-destructive refresh rules:
+the onboarding guide and wrapper scripts are copied when missing or refreshed as
+managed skill content, while `tied/constitution.example.yaml` is created only
+when absent. After either command, the bootstrap must report a passing
+feature-orchestration verification gate. If the TIED source repository moves,
+set `TIED_REPO_ROOT` before using the installed wrappers.
+
 Verify after refresh:
 
 1. `tied_config_get_base_path` reports exactly `${TIED_BASE}`.
@@ -75,8 +82,16 @@ Verify after refresh:
 | Files listed in `DOCS_TO_COPY` | Copied only when missing |
 | `tied/vocab/*.md` without `--merge-vocab` | Seeded only when the client vocabulary directory has no Markdown files |
 | `tied/vocab/*.md` with `--merge-vocab` | Copies absent filenames only; never overwrites existing files |
+| `tied/constitution.example.yaml` | Created only when missing; client-owned constitution remains `tied/constitution.yaml` |
+| `tied/docs/tied-feature-onboarding.md` | Copied only when missing; customized client guide remains authoritative |
 | `.cursor/skills/tied-yaml/` | Refreshed from the bundled skill |
+| `.cursor/skills/tied-yaml/scripts/tied.sh` and `feature-orchestrator.sh` | Refreshed from the bundled skill and baked to the TIED source root |
 | `.cursor/mcp.json` | Created with the selected TIED source and client base path only when absent; an existing file is preserved byte-for-byte |
+
+The `verify_feature_orchestration_methodology` gate checks the onboarding
+guide, constitution example, feature-orchestration vocabulary, and `tied.sh`.
+It fails closed for missing non-vocabulary artifacts and points brownfield
+clients to `--merge-vocab` when only the glossary is absent.
 
 ## Phase 2 — controlled documentation and vocabulary merge
 

@@ -1,0 +1,22 @@
+amendment_history:
+  - amended_at: "2099-01-01T00:00:00.000Z"
+    amendments: "Initial project constitution example."
+    compatibility: "compatible"
+    version: 1
+articles:
+  - enforcement: "required"
+    exceptions: []
+    id: "traceable-change"
+    rationale: "Keep project decisions, implementation, and validation evidence aligned."
+    rule: "require:traceability"
+    scope:
+      - "architecture"
+      - "citdp"
+      - "implementation"
+      - "requirements"
+      - "task_plans"
+    title: "Traceable change records"
+constitution_version: 1
+exceptions: []
+project: "TIED client project"
+schema_version: "project-constitution.v1"

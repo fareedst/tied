@@ -21,6 +21,10 @@
 | **generated view** | spec.md, plan.md (as source) | Human-readable Markdown render committed in the feature directory and stale-checked by CI; never competing source of truth |
 | **feature orchestration CLI** | tied feature, tied init | Separate product binary named **`feature-orchestrator`** for lifecycle commands; **not** `tied-cli.sh` (YAML MCP client) |
 | **feature-spec batch** | initial-specs, batch yaml | Existing `agentstream` / `--feature-spec-batch-yaml` input; migration source, not replacement manifest |
+| **onboarding wrapper** | feature wrapper, tied script | Managed client shell entry point at `.cursor/skills/tied-yaml/scripts/tied.sh`; delegates to the TIED-source onboarding entry point |
+| **constitution example** | starter constitution | Copy-if-missing project template at `tied/constitution.example.yaml`; distinct from the client-owned `tied/constitution.yaml` |
+| **bootstrap verification gate** | bootstrap gate, publication gate | Read-only `verify_feature_orchestration_methodology` check that fails closed when the published client package is incomplete |
+| **client orchestration publication** | methodology publication | Option A distribution of runtime, docs, wrappers, and vocabulary while Batch 0–6 FEAT tokens remain project-owned |
 
 ---
 
@@ -171,6 +175,10 @@ Project tokens are registered under predictable families in `semantic-tokens.yam
 | migration preview | Batch 6 terms |
 | offline fallback | Batch 6 terms |
 | onboarding command | Batch 6 terms |
+| onboarding wrapper | Preferred terms vs synonyms |
+| constitution example | Preferred terms vs synonyms |
+| bootstrap verification gate | Preferred terms vs synonyms |
+| client orchestration publication | Preferred terms vs synonyms |
 | proof-boundary label | Batch 4 terms |
 | readiness diagnostic | Batch 6 terms |
 | registered token families | Registered token families |

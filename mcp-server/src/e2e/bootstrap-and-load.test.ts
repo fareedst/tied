@@ -46,6 +46,11 @@ describe("e2e: bootstrap and load", () => {
       /MUST verify fidelity research methodology artifacts/,
       "bootstrap should report the mandatory fidelity methodology gate"
     );
+    assert.match(
+      bootstrapOutput,
+      /MUST verify feature orchestration methodology artifacts/,
+      "bootstrap should report the mandatory feature orchestration methodology gate [REQ-FEAT_ONBOARDING_COMMANDS]"
+    );
     const tiedDir = path.join(tempDir, "tied");
     assert.ok(fs.existsSync(tiedDir), "tied/ should exist after copy_files.sh");
     assert.ok(
@@ -112,6 +117,18 @@ describe("e2e: bootstrap and load", () => {
       ),
       "Methodology should include the fidelity research pseudo-code sidecar"
     );
+    assert.ok(
+      fs.existsSync(path.join(tiedDir, "constitution.example.yaml")),
+      "bootstrap should publish the create-if-missing project constitution example [IMPL-TIED_FILES]"
+    );
+    assert.ok(
+      fs.existsSync(path.join(tiedDir, "docs", "tied-feature-onboarding.md")),
+      "bootstrap should publish the feature onboarding guide [REQ-FEAT_ADOPTION_GUIDANCE]"
+    );
+    assert.ok(
+      fs.existsSync(path.join(tiedDir, "vocab", "feature-orchestration.md")),
+      "bootstrap should publish the feature orchestration vocabulary [PROC-VOCABULARY_INDEX]"
+    );
 
     const rec = getRecord("requirements", "REQ-TIED_SETUP");
     assert.ok(rec !== null && typeof rec === "object", "getRecord should return REQ-TIED_SETUP");
@@ -133,6 +150,46 @@ describe("e2e: bootstrap and load", () => {
       !tiedCliText.includes('TIED_REPO_ROOT:=/ABSOLUTE/PATH/TO/TIED/SOURCE/DIR'),
       "installed tied-cli.sh should not leave the unsubstituted TIED_REPO_ROOT default"
     );
+    const tiedOnboarding = path.join(tempDir, ".cursor", "skills", "tied-yaml", "scripts", "tied.sh");
+    assert.ok(
+      fs.existsSync(tiedOnboarding),
+      "copy_files.sh should install the feature onboarding wrapper [REQ-FEAT_ONBOARDING_COMMANDS]"
+    );
+    assert.ok(
+      (fs.statSync(tiedOnboarding).mode & 0o111) !== 0,
+      "installed tied.sh should be executable [IMPL-TIED_FILES]"
+    );
+    const tiedOnboardingText = fs.readFileSync(tiedOnboarding, "utf8");
+    assert.ok(
+      tiedOnboardingText.includes(`TIED_REPO_ROOT:=${tiedRepoRootReal}`),
+      "installed tied.sh should bake TIED_REPO_ROOT from the TIED repo used for copy_files.sh"
+    );
+    assert.doesNotMatch(
+      tiedOnboardingText,
+      /TIED_REPO_ROOT:=\/ABSOLUTE\/PATH\/TO\/TIED\/SOURCE\/DIR/,
+      "installed tied.sh should not leave the unsubstituted TIED_REPO_ROOT default"
+    );
+    const featureOrchestrator = path.join(tempDir, ".cursor", "skills", "tied-yaml", "scripts", "feature-orchestrator.sh");
+    assert.ok(
+      fs.existsSync(featureOrchestrator),
+      "copy_files.sh should install the standalone feature orchestration wrapper [REQ-FEAT_ORCHESTRATION_SURFACE]"
+    );
+    assert.ok(
+      fs.readFileSync(featureOrchestrator, "utf8").includes(`TIED_REPO_ROOT:=${tiedRepoRootReal}`),
+      "installed feature-orchestrator.sh should bake TIED_REPO_ROOT from the TIED repo used for copy_files.sh"
+    );
+    const onboardingResult = execFileSync(tiedOnboarding, ["init"], {
+      cwd: tempDir,
+      env: { ...process.env, TIED_BASE_PATH: tiedDir },
+      stdio: "pipe",
+    }).toString();
+    assert.match(onboardingResult, /"delegate": "feature-orchestrator bootstrap boundary"/);
+    const featureResult = execFileSync(tiedOnboarding, ["feature", "new", "Fresh client smoke"], {
+      cwd: tempDir,
+      env: { ...process.env, TIED_BASE_PATH: tiedDir },
+      stdio: "pipe",
+    }).toString();
+    assert.match(featureResult, /"delegate": "FeatureStore\.createIdempotently"/);
     const rootScriptsTiedCli = path.join(tempDir, "scripts", "tied-cli.sh");
     assert.ok(
       !fs.existsSync(rootScriptsTiedCli),
@@ -332,6 +389,10 @@ describe("e2e: bootstrap and load", () => {
     assert.ok(
       fs.existsSync(path.join(vocabDir, "fidelity-research.md")),
       "merge must add the absent fidelity research glossary"
+    );
+    assert.ok(
+      fs.existsSync(path.join(vocabDir, "feature-orchestration.md")),
+      "merge must add the absent feature orchestration glossary"
     );
     assert.ok(fs.existsSync(customVocab), "merge must preserve unrelated client vocabulary");
     assert.strictEqual(

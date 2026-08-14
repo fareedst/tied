@@ -47,6 +47,8 @@ IMPL-TIED_FILES:
   detail_file: "implementation-decisions/IMPL-TIED_FILES.yaml"
   implementation_approach:
     details:
+      - "[2026-08-14] Brownfield refresh preserves project YAML, existing MCP configuration, customized documentation, and vocabulary; --merge-vocab adds absent feature-orchestration.md without overwriting client glossaries."
+      - "[2026-08-14] Lightweight feature-orchestration publication: copy tied/constitution.example.yaml only when absent, copy tied/docs/tied-feature-onboarding.md when absent, distribute executable tied.sh and feature-orchestrator.sh wrappers with TIED_REPO_ROOT baked by copy_files.sh, and fail closed through verify_feature_orchestration_methodology when required artifacts are missing."
       - "Additive vocabulary merge mode: copy_files.sh --merge-vocab copies only absent TIED_SOURCE/tied/vocab/*.md filenames and reports added versus preserved files; existing client vocabulary remains authoritative."
       - "Copy base files to project root when missing (.cursorrules, AGENTS.md). In a TIED source repository, live guide content is under tied/docs/; agents and preload use client ./tied/docs/ paths and ./tied/agent-preload-contract.yaml."
       - "Copy guide .md files, detail-files-schema.md, preload contract templates, and reference docs from TIED source tied/docs/ into client tied/docs/ when missing (per DOCS_TO_COPY in copy_files.sh)"
@@ -54,13 +56,17 @@ IMPL-TIED_FILES:
       - "Copy YAML index files from templates (requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml)"
       - "Create detail subdirectories (requirements/, architecture-decisions/, implementation-decisions/)"
       - "Create tied/ directory at project root"
+      - "Distribute tied.sh with the bundled tied-yaml skill, patch its TIED_REPO_ROOT to the canonical TIED source realpath at bootstrap, and keep feature-orchestrator as an optional direct runtime surface."
       - "Do not install .cursor/agents/ prompt-type Task wrappers into client projects during bootstrap."
       - "DOCS_TO_COPY now installs methodology-migration.md, composition-coverage.md, and the quality-assurance command, pilot, and evidence-manifest guides when missing."
       - "Initialize .cursor/mcp.json only when it is absent; preserve an existing file byte-for-byte rather than merging or refreshing tied-yaml settings, including when tied-yaml is absent."
       - "Install the tied-yaml Cursor skill to .cursor/skills/tied-yaml/ (from tools/bundled-tied-yaml-skill/ in the TIED source repo; .cursor/skills/tied-yaml only if the bundle is missing; overwritten each run). The canonical stdio client on the client is .cursor/skills/tied-yaml/scripts/tied-cli.sh only; copy_files.sh does not create a project-root scripts/tied-cli.sh entry."
       - "Install the tracked tools/bundled-prompt-type-skills/ bundle into client .cursor/skills/ with an explicit managed directory list; refresh only prompt-type and prompt-shared paths while preserving unrelated skills and .cursor/mcp.json."
+      - "Option A keeps Batch 0–6 FEAT tokens project-owned; publication ships runtime, docs, wrappers, and vocabulary without promoting feature tokens into client methodology YAML."
       - "Preserve the existing .cursor/mcp.json byte-for-byte regardless of the metrics environment."
+      - "Publish the client-facing feature orchestration package additively: create tied/constitution.example.yaml only when absent and copy tied/docs/tied-feature-onboarding.md only when absent, preserving client-owned content during brownfield refresh."
       - "Route every managed file and tree copy through COPY_WITH_ATTRIBUTES using cp -p or cp -pR; calculate source-date midnights before copy and normalize only corresponding client paths afterward."
+      - "Run verify_feature_orchestration_methodology after wrapper, documentation, constitution, vocabulary, and methodology copies; fail closed with actionable tied init, tied feature new, tied_validate_consistency, and manual/offline recovery commands when required artifacts are missing."
       - "Template promotion supplies quality REQ/ARCH/IMPL detail YAML and IMPL-*-pseudocode.md sidecars; copy_files.sh refreshes inherited implementation pseudo-code sidecars into tied/methodology/implementation-decisions/ without touching project YAML."
       - "The bootstrap E2E fixture verifies initial MCP config creation and byte-for-byte preservation during methodology and vocabulary refresh."
       - "Treat the vocabulary layer as an agent-control layer and keep its RESOLVE, PRELOAD, RECORD, and VALIDATE touchpoints aligned with [PROC-VOCABULARY_INDEX]."
@@ -73,8 +79,8 @@ IMPL-TIED_FILES:
       date: "2025-12-18T00:00:00.000Z"
     last_updated:
       author: "AI Agent"
-      date: "2026-08-13"
-      reason: "Add opt-in MCP metrics fields and project client-name fallback to new bootstrap configuration"
+      date: "2026-08-14"
+      reason: "Publish feature orchestration onboarding artifacts, wrappers, constitution example, and fail-closed client bootstrap verification"
     last_validated:
       date: "2026-08-13"
       result: "pass"
@@ -93,22 +99,33 @@ IMPL-TIED_FILES:
   related_decisions:
     depends_on: []
     see_also:
+      - "ARCH-FEAT_ONBOARDING_BOUNDARY"
+      - "ARCH-MCP_USAGE_METRICS"
       - "ARCH-TIED_STRUCTURE"
+      - "REQ-FEAT_ADOPTION_GUIDANCE"
+      - "REQ-FEAT_ONBOARDING_COMMANDS"
       - "REQ-TIED_SETUP"
     supersedes: []
   status: "Active"
   traceability:
     architecture:
+      - "ARCH-FEAT_ONBOARDING_BOUNDARY"
       - "ARCH-MCP_USAGE_METRICS"
       - "ARCH-TIED_STRUCTURE"
     code_annotations:
+      - "ARCH-FEAT_ONBOARDING_BOUNDARY"
       - "ARCH-MCP_USAGE_METRICS"
       - "ARCH-TIED_STRUCTURE"
+      - "IMPL-FEAT_ONBOARDING_COMMANDS"
       - "IMPL-MCP_USAGE_METRICS"
       - "IMPL-TIED_FILES"
+      - "REQ-FEAT_ADOPTION_GUIDANCE"
+      - "REQ-FEAT_ONBOARDING_COMMANDS"
       - "REQ-MCP_USAGE_METRICS"
       - "REQ-TIED_SETUP"
     requirements:
+      - "REQ-FEAT_ADOPTION_GUIDANCE"
+      - "REQ-FEAT_ONBOARDING_COMMANDS"
       - "REQ-MCP_USAGE_METRICS"
       - "REQ-TIED_SETUP"
     tests:

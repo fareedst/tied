@@ -84,6 +84,29 @@ Path parameters on tools that accept file paths are resolved by the Node process
 | `tied_feedback_export` | Export all feedback entries for reporting to the TIED project. Params: `format` (markdown \| json), optional `base_path`. Returns a string suitable for copy-paste into an issue or report. |
 | `requirement_list_state_guide` | Client-supplied requirement list walk. First call: non-empty `requirements`; later: `current_state` = `continuation_state`. Returns one requirement object per step until **`id: end_requirement_list`**. For each item, use the agent REQ checklist (e.g. `tied/docs/agent-req-implementation-checklist.md`). See [tied/docs/requirement-list-state-guide-agent-workflow.md](../tied/docs/requirement-list-state-guide-agent-workflow.md). |
 
+### Feature orchestration tools
+
+These tools operate on client feature manifests under `tied/features/`. They are
+separate from the TIED YAML record tools above and from `tied-cli.sh`:
+
+| Tool | Purpose |
+|------|---------|
+| `feature_create` | Create a greenfield or brownfield feature manifest from a request key and title. |
+| `feature_update_canonical` | Apply a validated update to an existing canonical feature manifest. |
+| `feature_specify` | Record the feature specification and its traceable change intent. |
+| `feature_refine` | Refine feature terms, scope, and readiness inputs. |
+| `feature_plan` | Produce the staged implementation plan and dependencies. |
+| `feature_tasks` | Materialize or inspect the feature task graph. |
+| `feature_verify` | Run feature readiness and verification checks. |
+| `feature_close_out` | Close out a verified feature and retain its evidence. |
+| `feature_view_render` | Render a deterministic feature view from a manifest or source input. |
+| `feature_view_check_stale` | Detect whether a generated feature view is stale. |
+
+Use `.cursor/skills/tied-yaml/scripts/tied.sh` for onboarding delegates and
+`.cursor/skills/tied-yaml/scripts/feature-orchestrator.sh` for the standalone
+CLI. The wrappers are baked to the TIED repository that ran `copy_files.sh`;
+set `TIED_REPO_ROOT` explicitly if that repository moves.
+
 ### Token rename
 
 Use **`tied_token_rename`** to rename a semantic token everywhere in the default TIED rename scope: YAML indexes, detail files (keys, values, list items), and the detail filename. Same prefix is required (e.g. REQ-X → REQ-Y). Use `dry_run: true` to list files that would change; optional `include_markdown` updates `tied/docs/processes.md`. Optional **`extra_globs`** and **`extra_extensions`** search from the **client project root** (parent of `TIED_BASE_PATH`) for additional substitution targets—e.g. root `*.md`, `tied/vocab/**/*.md`, or all `.swift` files. Modified YAML uses the shared repository style atomically. For manual YAML edits, use `yaml_tool.sh --check` or `lint_yaml` per `processes.md` `[PROC-YAML_EDIT_LOOP]`.
