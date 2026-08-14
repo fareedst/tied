@@ -47,7 +47,19 @@ export function dispatchOnboardingCommand(argv: string[], context: OnboardingCon
     };
   }
   if (!defaults.ok && argv[0] !== "feature" && argv[1] !== "new") {
-    return { ok: false, command, diagnostics: defaults.diagnostics, fallback: selectOfflinePath(capabilities, root), mutated_configuration: false };
+    const fallback = selectOfflinePath(capabilities, root);
+    const offlineDoc = "tied/docs/using-tied-without-mcp.md";
+    const correctivePath = fallback.command.includes(offlineDoc) ? fallback.command : `see ${offlineDoc}`;
+    return {
+      ok: false,
+      command,
+      diagnostics: [
+        ...defaults.diagnostics,
+        `Onboarding prerequisites are unavailable; no configuration was changed. Corrective path: ${correctivePath}`,
+      ],
+      fallback,
+      mutated_configuration: false,
+    };
   }
   const report = defaults.ok ? defaults.defaults : defaults.report;
   if (argv[0] === "init") {
@@ -101,5 +113,5 @@ export function dispatchOnboardingCommand(argv: string[], context: OnboardingCon
 export function mainOnboarding(argv = process.argv.slice(2)): void {
   const result = dispatchOnboardingCommand(argv, { project_root: process.cwd() });
   process.stdout.write(`${JSON.stringify(result, null, 2)}\n`);
-  process.exitCode = result.ok ? 0 : 1;
+  process.exitCode = result.ok ? 0 : result.fallback ? 0 : 1;
 }

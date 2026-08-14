@@ -1,7 +1,11 @@
 IMPL-FEAT_ONBOARDING_COMMANDS:
   code_locations:
-    files: []
-    functions: []
+    files:
+      - "mcp-server/src/feature-orchestration/onboarding-entry.ts"
+      - "mcp-server/src/feature-orchestration/onboarding.ts"
+    functions:
+      - "dispatchOnboardingCommand"
+      - "mainOnboarding"
   cross_references:
     - "ARCH-FEAT_ONBOARDING_BOUNDARY"
     - "REQ-FEAT_ADOPTION_GUIDANCE"
@@ -41,4 +45,5 @@ IMPL-FEAT_ONBOARDING_COMMANDS:
     requirements:
       - "REQ-FEAT_ADOPTION_GUIDANCE"
       - "REQ-FEAT_ONBOARDING_COMMANDS"
-    tests: []
+    tests:
+      - "mcp-server/src/feature-orchestration/onboarding.test.ts"

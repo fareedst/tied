@@ -9,11 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Feature orchestration onboarding offline handoff** — `[IMPL-FEAT_ONBOARDING_COMMANDS]` now merges local-default diagnostics with an explicit `using-tied-without-mcp.md` corrective path when `TIED_MCP_BIN` is missing, treats actionable offline fallback as exit code 0 for demo/operator flows, and documents the behavior in onboarding pseudo-code and unit tests.
+
 - **Prompt-type client distribution** — `copy_files.sh` installs only the canonical prompt-type **skills** into client `.cursor/skills/`. Prompt-type Task wrappers under `.cursor/agents/` remain TIED-source development artifacts for static contract tests; they are no longer copied into client projects alongside skills.
 
 - **Prompt-type payloads** — `[REQ-PROMPT_TYPE_GLOBAL_SKILLS]` / `[REQ-PROMPT_TYPE_SUBAGENT]` skills and agents consume an **invocation remainder** (text after the skill or agent name) and, for `refine-plan` / `build-plan`, a **linked plan**. They no longer use `:::` as a payload delimiter or emit composer “Prepare to process…” headers.
 
 ### Added
+
+- **Staged feature orchestration demo** — [`docs/tied-feature-demo.md`](docs/tied-feature-demo.md) provides a disposable, copy-paste walkthrough for onboarding, lifecycle, views, migration preview, research/feedback boundaries, and repository TIED validation without mutating project YAML.
 
 - **Feature orchestration foundation through onboarding (batches 0–6)** — Feature
   manifests, lifecycle and readiness gates, clarifications and constitution,
