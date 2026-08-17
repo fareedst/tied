@@ -228,6 +228,35 @@ describe("e2e: bootstrap and load", () => {
       fs.existsSync(path.join(tiedDir, "vocab", "fidelity-research.md")),
       "copy_files.sh should seed tied/vocab/fidelity-research.md"
     );
+    assert.ok(
+      fs.existsSync(path.join(repoRoot, "tied", "vocab", "prompt-composer.md")),
+      "TIED source should retain the Prompt Composer glossary for source-only development"
+    );
+    assert.ok(
+      !fs.existsSync(path.join(tiedDir, "vocab", "prompt-composer.md")),
+      "copy_files.sh should not publish the source-only Prompt Composer glossary to clients"
+    );
+    const clientVocabRouting = fs.readFileSync(vocabRouting, "utf8");
+    const clientVocabCatalog = fs.readFileSync(vocabIndex, "utf8");
+    assert.doesNotMatch(
+      clientVocabRouting,
+      /prompt-composer\.md/,
+      "client routing should not advertise the source-only Prompt Composer glossary"
+    );
+    assert.doesNotMatch(
+      clientVocabCatalog,
+      /prompt-composer\.md/,
+      "client vocabulary catalog should not link the source-only Prompt Composer glossary"
+    );
+    const clientPromptTypeDocs = fs.readFileSync(
+      path.join(tiedDir, "docs", "prompt-type-skills.md"),
+      "utf8"
+    );
+    assert.doesNotMatch(
+      clientPromptTypeDocs,
+      /\]\(\.\.\/vocab\/prompt-composer\.md\)/,
+      "client prompt-type documentation should not link the source-only glossary"
+    );
 
     const vocabStandards = path.join(tempDir, "tied", "docs", "vocabulary-index-analysis-and-standards.md");
     const pseudoFormat = path.join(tempDir, "tied", "docs", "pseudocode-format-and-practices.md");
@@ -393,6 +422,15 @@ describe("e2e: bootstrap and load", () => {
     assert.ok(
       fs.existsSync(path.join(vocabDir, "feature-orchestration.md")),
       "merge must add the absent feature orchestration glossary"
+    );
+    assert.ok(
+      !fs.existsSync(path.join(vocabDir, "prompt-composer.md")),
+      "merge must not add the source-only Prompt Composer glossary"
+    );
+    assert.doesNotMatch(
+      fs.readFileSync(path.join(vocabDir, "domain-references.md"), "utf8"),
+      /prompt-composer\.md/,
+      "merge must not leave a source-only Prompt Composer link in a new client catalog"
     );
     assert.ok(fs.existsSync(customVocab), "merge must preserve unrelated client vocabulary");
     assert.strictEqual(

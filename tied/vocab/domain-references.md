@@ -8,7 +8,7 @@
 
 **Standards:** [`../docs/vocabulary-index-analysis-and-standards.md`](../docs/vocabulary-index-analysis-and-standards.md).
 
-**See also:** [`routing.md`](routing.md) (primary entry / PRELOAD) · [`../docs/client-development-index.md`](../docs/client-development-index.md) · [`tied-methodology.md`](tied-methodology.md) · [`tied-yaml-mcp.md`](tied-yaml-mcp.md) · [`feedback-to-tied.md`](feedback-to-tied.md) · [`leap-proposal-queue.md`](leap-proposal-queue.md) · [`agentstream.md`](agentstream.md) · [`agent-stream-ruby.md`](agent-stream-ruby.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) · [`fidelity-research.md`](fidelity-research.md) · [`config-discovery.md`](config-discovery.md)
+**See also:** [`routing.md`](routing.md) (primary entry / PRELOAD) · [`../docs/client-development-index.md`](../docs/client-development-index.md) · [`tied-methodology.md`](tied-methodology.md) · [`tied-yaml-mcp.md`](tied-yaml-mcp.md) · [`feedback-to-tied.md`](feedback-to-tied.md) · [`leap-proposal-queue.md`](leap-proposal-queue.md) · [`agentstream.md`](agentstream.md) · [`agent-stream-ruby.md`](agent-stream-ruby.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) · [`quality-assurance.md`](quality-assurance.md) · [`fidelity-research.md`](fidelity-research.md) · [`prompt-composer.md`](prompt-composer.md) · [`feature-orchestration.md`](feature-orchestration.md) · [`config-discovery.md`](config-discovery.md)
 
 ---
 
@@ -32,8 +32,10 @@
 | 4 | [`agentstream.md`](agentstream.md) | Go `agentstream` CLI: pipeline, turns, checklist render, executor, HTML format, MCP preflight |
 | 4b | [`agent-stream-ruby.md`](agent-stream-ruby.md) | Ruby ATDD runner parity with Go |
 | 5 | [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) | Domain vocab vs IMPL grammar; three-way alignment; CITDP record naming |
+| 5b | [`quality-assurance.md`](quality-assurance.md) | Quality attributes, assurance profiles, evidence matrices, evidence provenance, proof boundaries, and residual-risk decisions |
 | 5c | [`fidelity-research.md`](fidelity-research.md) | Fidelity findings, specification state, origin layer, divergent edge, read-only research profile, finding lifecycle, evidence provenance |
-| 5d | [`prompt-composer.md`](prompt-composer.md) | Prompt Composer, prompt types, global prompt skills, explicit router, prompt envelope, shared references, and client installation |
+| 5d | [`prompt-composer.md`](prompt-composer.md) | TIED-source-only Prompt Composer, prompt types, global prompt skills, explicit router, prompt envelope, shared references, and client skill installation; glossary not installed into clients |
+| 5e | [`feature-orchestration.md`](feature-orchestration.md) | Feature manifests, lifecycle, clarification and constitution gates, task graphs, generated views, onboarding, migration, and client publication |
 | — | [`config-discovery.md`](config-discovery.md) | Planned layered YAML config (stub; `(proposed)` terms) |
 
 ---
@@ -57,7 +59,7 @@
 - **agentstream** (Go product/CLI name) vs **agent-stream** (Ruby directory/package) vs **run-feature-batch** driver scripts — define once in [`agentstream.md`](agentstream.md) and [`agent-stream-ruby.md`](agent-stream-ruby.md); link from both.
 - **Domain vocabulary** (this tree) vs **IMPL grammar vocabulary** (INPUT/OUTPUT/DATA/PRE/POST/EFFECTS keywords) — define once in [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md).
 - **Vocabulary layer** / **agent-control layer** — the peer control layer that resolves, preloads, records, and validates domain terms; canonical terms live in [`tied-methodology.md`](tied-methodology.md), while touchpoints are defined by `[PROC-VOCABULARY_INDEX]`.
-- **Prompt Composer / prompt-type skills** — canonical terms for the versioned bundle and explicit router live in [`prompt-composer.md`](prompt-composer.md); distribution behavior is defined by [ARCH-PROMPT_TYPE_GLOBAL_SKILLS](../architecture-decisions/ARCH-PROMPT_TYPE_GLOBAL_SKILLS.yaml) and [IMPL-PROMPT_TYPE_GLOBAL_SKILLS](../implementation-decisions/IMPL-PROMPT_TYPE_GLOBAL_SKILLS.yaml).
+- **Prompt Composer / prompt-type skills** — canonical source-only terms for the versioned bundle and explicit router live in [`prompt-composer.md`](prompt-composer.md); distribution behavior for client skills is defined by [ARCH-PROMPT_TYPE_GLOBAL_SKILLS](../architecture-decisions/ARCH-PROMPT_TYPE_GLOBAL_SKILLS.yaml) and [IMPL-PROMPT_TYPE_GLOBAL_SKILLS](../implementation-decisions/IMPL-PROMPT_TYPE_GLOBAL_SKILLS.yaml).
 - **YAML canonicalization** / **format metadata** — the canonical domain terms live in [`tied-methodology.md`](tied-methodology.md); MCP-specific `tied_yaml_format` and `yaml_format` terms live in [`tied-yaml-mcp.md`](tied-yaml-mcp.md). The typed `tied-yaml-canonical-v1` profile supersedes double-quoted scalar lint as the default `yaml_tool` behavior while retaining compatibility frontends. The repository scalar-style policy selects `wrapped` or `unwrapped` with repository-over-global precedence.
 - **TIED base path** / **project YAML** vs **methodology YAML** — define once in [`tied-methodology.md`](tied-methodology.md); referenced from [`tied-yaml-mcp.md`](tied-yaml-mcp.md).
 - **Methodology migration** / **client refresh** / **vocabulary merge mode** — a `copy_files.sh` refresh replaces only the inherited `tied/methodology/` snapshot, preserves project YAML and client-owned vocabulary, and uses `--merge-vocab` to add absent glossary files; canonical terms live in [`tied-methodology.md`](tied-methodology.md) and the operational procedure in [`../docs/methodology-migration.md`](../docs/methodology-migration.md).

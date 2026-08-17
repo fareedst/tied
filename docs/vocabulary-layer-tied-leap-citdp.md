@@ -163,7 +163,8 @@ An ontology asks “what exists and what follows?”; VOCAB asks “when we say 
 
 ## Where to read more
 
-- [Reddit draft — vocab indices as build chain](vocab-indices-and-tied-reddit-post.md) — paste-ready post on controlled vocabulary in TIED
+- [TIED value proposition matrix](tied-value-proposition-matrix.md) — reader-oriented map from vocabulary through executable evidence
+- [Certified TIED workflows thesis](tied-certified-workflows-thesis.md) — how approved vocabulary and REQ meaning reduce downstream review
 - [Vocabulary index analysis and standards](../tied/docs/vocabulary-index-analysis-and-standards.md) — corpus structure, governance, agent touchpoints
 - [Client development index](../tied/docs/client-development-index.md) — one-page map of TIED, CITDP, LEAP, and tooling
 - [LEAP overview](../tied/docs/LEAP.md) — why IMPL-first stack sync beats hunting source files

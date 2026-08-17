@@ -187,7 +187,7 @@ Feedback and LEAP proposal tools are documented in sibling glossaries ([`feedbac
 | TIED_MCP_COLLECT_METRICS | MCP usage metrics |
 | TIED_MCP_METRICS_CLIENT | MCP usage metrics |
 | TIED_MCP_METRICS_PATH | MCP usage metrics |
-| TIED_YAML MCP | Preferred terms |
+| TIED YAML MCP | Preferred terms |
 | tied_yaml_format | MCP catalog |
 | tied_validate_consistency | MCP catalog |
 | tied_verify | MCP catalog |

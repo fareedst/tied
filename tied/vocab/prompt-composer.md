@@ -29,6 +29,7 @@ files and the implementation pseudo-code.
 | **TIED-client-local development** | non-TIED project | Development that reads context but intentionally avoids TIED synchronization |
 | **canonical bundle** | personal source | Git-tracked source under `tools/bundled-prompt-type-skills/` |
 | **client installation** | global sync | Copy into a client’s `.cursor/skills/` by `copy_files.sh` |
+| **source-only glossary** | client glossary | Canonical glossary retained in the TIED source repository and excluded from client bootstrap |
 
 ---
 
@@ -95,5 +96,6 @@ unknown or ambiguous input.
 | prompt-type subagent contract validation | Pseudo-code block names |
 | prompt-type subagent parent handoff | Pseudo-code block names |
 | prompt-type router | Preferred terms vs synonyms |
+| source-only glossary | Preferred terms vs synonyms |
 | TIED applicability boundary | Preferred terms vs synonyms |
 | TIED-client-local development | Preferred terms vs synonyms |

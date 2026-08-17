@@ -4,6 +4,8 @@
 
 **Status:** Batches 0–6 implemented (2026-08-13 close-out). Naming bridges below align with staged TIED tokens and `mcp-server/src/feature-orchestration/`; amend through LEAP when behavior changes.
 
+**Traceability:** [REQ-FEAT_MANIFEST_SCHEMA](../requirements/REQ-FEAT_MANIFEST_SCHEMA.yaml) · [ARCH-FEAT_LIFECYCLE_STATE_MACHINE](../architecture-decisions/ARCH-FEAT_LIFECYCLE_STATE_MACHINE.yaml) · [IMPL-FEAT_MANIFEST_VALIDATOR](../implementation-decisions/IMPL-FEAT_MANIFEST_VALIDATOR.yaml)
+
 **See also:** [`routing.md`](routing.md) · [`agentstream.md`](agentstream.md) · [`fidelity-research.md`](fidelity-research.md) · [`feedback-to-tied.md`](feedback-to-tied.md) · [`leap-proposal-queue.md`](leap-proposal-queue.md) · [`../../docs/tied-improvement-roadmap.md`](../../docs/tied-improvement-roadmap.md)
 
 ---

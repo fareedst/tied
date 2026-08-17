@@ -260,46 +260,76 @@ procedure VERIFY_FEATURE_ORCHESTRATION_METHODOLOGY(projectRoot):
 
 procedure SEED_DOMAIN_VOCAB(projectRoot):
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [PROC-VOCABULARY_INDEX]
-  # How: Seed canonical glossaries only for a client with no existing Markdown vocabulary.
+  # How: Seed canonical client glossaries only for a client with no existing Markdown vocabulary and exclude source-only glossaries.
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [PROC-VOCABULARY_INDEX]
-  # How: When client tied/vocab/ is missing or has no *.md files, copy all *.md from TIED_SOURCE/tied/vocab/ preserving basename (seed set includes routing.md as primary PRELOAD entry and domain-references.md as full on-demand catalog); never overwrite existing client vocab files.
+  # How: When client tied/vocab/ is missing or has no *.md files, copy each non-source-only *.md from TIED_SOURCE/tied/vocab/ preserving basename; filter client-facing routing.md and domain-references.md links after copying; never overwrite existing client vocab files.
   Contract:
     INPUT: projectRoot; canonical vocabulary source
     OUTPUT: seeded client tied/vocab/ or preserved existing vocabulary
-    DATA: canonical glossary files; client glossary files
-    CONTROL: seed only when the client has no Markdown glossary; preserve every existing client glossary
+    DATA: canonical glossary files; source-only basename allowlist; client glossary files; client-facing index text
+    CONTROL: seed only when the client has no Markdown glossary; skip source-only basenames; filter copied client-facing indexes; preserve every existing client glossary
     PRE: vocabulary source and destination may be absent; destination can be created when writable
-    POST: when source is non-empty and destination is empty, every canonical glossary is copied; otherwise client files remain unchanged
-    EFFECTS: File I/O — creates a directory and copies glossary files; Diagnostics — reports skipped or empty-source cases
-    FAILURE_MODES: VOCABULARY_SOURCE_MISSING; VOCABULARY_DESTINATION_UNWRITABLE; VOCABULARY_COPY_FAILED
-    DATA_TRANSITION: vocabulary absent→seeded; existing client vocabulary→preserved
+    POST: when source is non-empty and destination is empty, every non-source-only canonical glossary is copied and client-facing indexes contain no source-only links; otherwise client files remain unchanged
+    EFFECTS: File I/O — creates a directory, copies glossary files, and filters copied index text; Diagnostics — reports skipped or empty-source cases
+    FAILURE_MODES: VOCABULARY_SOURCE_MISSING; VOCABULARY_DESTINATION_UNWRITABLE; VOCABULARY_COPY_FAILED; VOCABULARY_INDEX_FILTER_FAILED
+    DATA_TRANSITION: vocabulary absent→seeded without source-only files; copied index text→client-filtered index text; existing client vocabulary→preserved
     TERMINATION: total — finite canonical glossary files
   dest := projectRoot/tied/vocab/
   IF dest has one or more *.md files: RETURN (client extensions preserved)
   IF TIED_SOURCE/tied/vocab/ missing or empty: warn; RETURN
   FOR each *.md in TIED_SOURCE/tied/vocab/: copy to dest preserving basename
+    IF basename(file) is source-only: continue
+    COPY file with preserved attributes
+    IF basename(file) is routing.md or domain-references.md: FILTER_CLIENT_BOOTSTRAP_DOC(file)
 
 procedure MERGE_DOMAIN_VOCAB(projectRoot):
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [PROC-VOCABULARY_INDEX]
-  # How: Add absent canonical glossary basenames under --merge-vocab without overwriting client glossaries.
+  # How: Add absent non-source-only canonical glossary basenames under --merge-vocab without overwriting client glossaries and filter newly copied indexes.
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [PROC-VOCABULARY_INDEX]
-  # How: When --merge-vocab is supplied, add only canonical glossary filenames absent from projectRoot/tied/vocab/; preserve every existing client glossary and report added/preserved counts.
+  # How: When --merge-vocab is supplied, skip source-only basenames, add only canonical glossary filenames absent from projectRoot/tied/vocab/, filter newly copied routing.md and domain-references.md, preserve every existing client glossary, and report added/preserved counts.
   Contract:
     INPUT: projectRoot; canonical vocabulary source; merge-vocab control
     OUTPUT: additive vocabulary changes; added and preserved counts
-    DATA: canonical glossary files; client glossary files; merge counters
-    CONTROL: add only absent basenames; never overwrite client-owned glossary content
+    DATA: canonical glossary files; source-only basename allowlist; client glossary files; client-facing index text; merge counters
+    CONTROL: add only absent non-source-only basenames; filter newly copied indexes; never overwrite client-owned glossary content
     PRE: merge-vocab was explicitly supplied; source and destination paths are inspectable or creatable
-    POST: each canonical basename is present; pre-existing client files retain their original content; counts describe observed actions
-    EFFECTS: File I/O — creates destination and copies absent glossary files; Diagnostics — reports added and preserved counts
-    FAILURE_MODES: VOCABULARY_SOURCE_MISSING; VOCABULARY_DESTINATION_UNWRITABLE; VOCABULARY_COPY_FAILED
-    DATA_TRANSITION: client vocabulary set→union(client set, canonical set); existing file content unchanged
+    POST: each non-source-only canonical basename is present; newly copied client-facing indexes contain no source-only links; pre-existing client files retain their original content; counts describe observed actions
+    EFFECTS: File I/O — creates destination, copies absent glossary files, and filters newly copied indexes; Diagnostics — reports added and preserved counts
+    FAILURE_MODES: VOCABULARY_SOURCE_MISSING; VOCABULARY_DESTINATION_UNWRITABLE; VOCABULARY_COPY_FAILED; VOCABULARY_INDEX_FILTER_FAILED
+    DATA_TRANSITION: client vocabulary set→union(client set, non-source-only canonical set); copied index text→client-filtered index text; existing file content unchanged
     TERMINATION: total — finite canonical glossary files
   dest := projectRoot/tied/vocab/
   IF TIED_SOURCE/tied/vocab/ missing or empty: warn; RETURN
   FOR each *.md in TIED_SOURCE/tied/vocab/:
-    IF dest/basename(file) is absent: copy file preserving basename
-    ELSE: preserve existing client file
+    IF basename(file) is source-only: continue
+    IF dest/basename(file) is absent:
+      copy file preserving basename
+      IF basename(file) is routing.md or domain-references.md: FILTER_CLIENT_BOOTSTRAP_DOC(file)
+    ELSE:
+      preserve existing client file
+
+procedure FILTER_CLIENT_BOOTSTRAP_DOC(sourcePath):
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [PROC-VOCABULARY_INDEX]
+  # How: Remove source-only Prompt Composer references from copied client-facing indexes and prompt-type documentation while leaving canonical TIED-source text unchanged.
+  Contract:
+    INPUT: sourcePath; copied destinationPath; destination basename
+    OUTPUT: filtered client-facing Markdown file
+    DATA: copied Markdown text; source-only glossary basename; client-facing link and guidance lines
+    CONTROL: filter routing.md and domain-references.md links; replace prompt-type-skills.md source-only guidance with client-safe wording; do not filter canonical source files
+    PRE: sourcePath and destinationPath are readable copied counterparts
+    POST: destination contains no client-facing Prompt Composer glossary link or install instruction; sourcePath remains unchanged
+    EFFECTS: File I/O — reads and rewrites destination text
+    FAILURE_MODES: SOURCE_MISSING; DESTINATION_MISSING; DESTINATION_READ_FAILED; DESTINATION_WRITE_FAILED
+    DATA_TRANSITION: copied canonical Markdown→client-safe Markdown; source unchanged
+    TERMINATION: total
+  IF basename(destinationPath) is routing.md:
+    remove lines containing prompt-composer.md
+  ELSE IF basename(destinationPath) is domain-references.md:
+    remove Prompt Composer glossary rows and links
+  ELSE IF basename(destinationPath) is prompt-type-skills.md:
+    replace source-only glossary links and maintenance instructions with client-safe wording
+  write filtered text to destinationPath
+  RETURN success
 
 procedure COPY_IMPLEMENTATION_PSEUDOCODE_SIDECARS(projectRoot):
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]

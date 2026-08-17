@@ -444,12 +444,74 @@ install_prompt_type_skills "${PROMPT_TYPE_SKILLS_CANONICAL}"
 
 # --- Domain vocabulary index (project-scoped; seed when absent) ---
 # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [PROC-VOCABULARY_INDEX]
-# How: SEED_DOMAIN_VOCAB — copy tied/vocab/*.md from TIED source when client has no vocab files yet.
+# How: SEED_DOMAIN_VOCAB — copy client-published tied/vocab/*.md from TIED source when client has no vocab files yet; source-only glossaries remain in the TIED source tree.
 VOCAB_SRC="${SCRIPT_DIR}/tied/vocab"
 VOCAB_DEST="${TIED_DIR}/vocab"
+SOURCE_ONLY_VOCAB_BASENAMES=(
+  "prompt-composer.md"
+)
+is_source_only_vocab() {
+  local _basename="$1"
+  local _source_only
+  for _source_only in "${SOURCE_ONLY_VOCAB_BASENAMES[@]}"; do
+    if [[ "${_basename}" == "${_source_only}" ]]; then
+      return 0
+    fi
+  done
+  return 1
+}
+_filter_client_bootstrap_doc() {
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [PROC-VOCABULARY_INDEX]
+  # How: Remove source-only glossary links from client-facing indexes and prompt-type documentation while preserving the canonical TIED-source files.
+  local _source="$1" _destination="$2" _basename="$3"
+  FILTER_SOURCE="${_source}" FILTER_DESTINATION="${_destination}" FILTER_BASENAME="${_basename}" \
+    python3 - <<'PY'
+import os
+
+source = os.environ["FILTER_SOURCE"]
+destination = os.environ["FILTER_DESTINATION"]
+basename = os.environ["FILTER_BASENAME"]
+with open(destination, encoding="utf-8") as handle:
+    text = handle.read()
+
+if basename == "routing.md":
+    text = "".join(
+        line for line in text.splitlines(keepends=True)
+        if "prompt-composer.md" not in line
+    )
+elif basename == "domain-references.md":
+    filtered = []
+    for line in text.splitlines(keepends=True):
+        if line.startswith("| 5d |") or line.startswith("- **Prompt Composer"):
+            continue
+        line = line.replace(
+            " · [`prompt-composer.md`](prompt-composer.md)",
+            "",
+        )
+        filtered.append(line)
+    text = "".join(filtered)
+elif basename == "prompt-type-skills.md":
+    text = text.replace(
+        "**Vocabulary:** [`tied/vocab/prompt-composer.md`](../vocab/prompt-composer.md)",
+        "**Vocabulary:** Prompt Composer terms are maintained in the TIED source repository and are not installed into clients.",
+    )
+    text = text.replace(
+        "The canonical glossary is\n[`tied/vocab/prompt-composer.md`](../vocab/prompt-composer.md). The following\nterms were recorded for this skill implementation.",
+        "Prompt Composer terms are recorded here for client skill context; the canonical glossary is maintained in the TIED source repository and is not installed into clients.",
+    )
+    text = text.replace(
+        "1. Update `tied/vocab/prompt-composer.md` for new or renamed concepts.",
+        "1. Update the source-only `tied/vocab/prompt-composer.md` glossary for new or renamed concepts.",
+    )
+
+with open(destination, "w", encoding="utf-8") as handle:
+    handle.write(text)
+PY
+  _normalize_copy_timestamps "${_source}" "${_destination}"
+}
 _seed_domain_vocab() {
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [PROC-VOCABULARY_INDEX]
-  # How: Seed canonical glossaries only for a client with no existing Markdown vocabulary.
+  # How: Seed canonical client glossaries only for a client with no existing Markdown vocabulary; exclude source-only Prompt Composer vocabulary.
   local _src="$1" _dest="$2"
   if [[ ! -d "${_src}" ]]; then
     say_warn "No domain vocabulary source at ${_src}; skipped tied/vocab seed."
@@ -466,8 +528,17 @@ _seed_domain_vocab() {
   local _count=0 _total=0
   for _f in "${_src}"/*.md; do
     if [[ -f "${_f}" ]]; then
+      if is_source_only_vocab "$(basename "${_f}")"; then
+        continue
+      fi
       (( _total++ )) || true
-      _copy_file "${_f}" "${_dest}/$(basename "${_f}")"
+      _dest_file="${_dest}/$(basename "${_f}")"
+      _copy_file "${_f}" "${_dest_file}"
+      case "$(basename "${_f}")" in
+        routing.md|domain-references.md)
+          _filter_client_bootstrap_doc "${_f}" "${_dest_file}" "$(basename "${_f}")"
+          ;;
+      esac
       (( _count++ )) || true
     fi
   done
@@ -481,13 +552,16 @@ _seed_domain_vocab "${VOCAB_SRC}" "${VOCAB_DEST}"
 
 if [[ "${MERGE_VOCAB}" == "true" ]]; then
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [PROC-VOCABULARY_INDEX]
-  # How: Add absent canonical glossary basenames under --merge-vocab without overwriting client glossaries.
+  # How: Add absent canonical client glossary basenames under --merge-vocab without overwriting client glossaries; source-only Prompt Composer vocabulary is never added.
   merge_count=0
   merge_total=0
   merge_skipped=0
   shopt -s nullglob
   for _f in "${VOCAB_SRC}"/*.md; do
     if [[ -f "${_f}" ]]; then
+      if is_source_only_vocab "$(basename "${_f}")"; then
+        continue
+      fi
       ((merge_total++)) || true
       _dest_file="${VOCAB_DEST}/$(basename "${_f}")"
       if [[ -f "${_dest_file}" ]]; then
@@ -495,6 +569,11 @@ if [[ "${MERGE_VOCAB}" == "true" ]]; then
       else
         mkdir -p "${VOCAB_DEST}"
         _copy_file "${_f}" "${_dest_file}"
+        case "$(basename "${_f}")" in
+          routing.md|domain-references.md)
+            _filter_client_bootstrap_doc "${_f}" "${_dest_file}" "$(basename "${_f}")"
+            ;;
+        esac
         ((merge_count++)) || true
       fi
     fi
@@ -666,6 +745,9 @@ for f in "${DOCS_TO_COPY[@]}"; do
         -e 's|](\.\./mcp-server/|](../../mcp-server/|g' \
         "${dest}" > "${_tied_yaml_idx_tmp}" && mv "${_tied_yaml_idx_tmp}" "${dest}"
       _normalize_copy_timestamps "${src}" "${dest}"
+    fi
+    if [[ "${f}" == "prompt-type-skills.md" ]]; then
+      _filter_client_bootstrap_doc "${src}" "${dest}" "${f}"
     fi
     ((docs_count++)) || true
   fi

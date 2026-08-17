@@ -1,5 +1,17 @@
 # Staged feature demo
 
+```bash @on-load @hide
+cd "$INDESCRIPT_DOC_DIR/.." # from 'docs'
+source ~/.bash_profile
+
+export ROOT="$(pwd)"
+
+export ONBOARD="$ROOT/mcp-server/dist/feature-orchestration/onboarding-entry.js"
+export SERVER="$ROOT/mcp-server/dist/index.js"
+
+export TIED_CLI_SH="$ROOT/.cursor/skills/tied-yaml/scripts/tied-cli.sh"
+export TIED_MCP_BIN="$SERVER"
+```
 This is a disposable, copy-paste demo for the staged feature-orchestration
 surface. It uses a temporary project and does not write this repository's
 project YAML. Generated views remain projections, not canonical records or
@@ -12,16 +24,6 @@ npm --prefix "$ROOT/mcp-server" run build
 ```
 
 Run from the TIED repository root:
-```bash @on-load @hide
-cd "$INDESCRIPT_DOC_DIR/.." # from 'docs'
-source ~/.bash_profile
-ROOT="$(pwd)"
-SERVER="$ROOT/mcp-server/dist/index.js"
-ONBOARD="$ROOT/mcp-server/dist/feature-orchestration/onboarding-entry.js"
-TIED_CLI_SH="$ROOT/.cursor/skills/tied-yaml/scripts/tied-cli.sh"
-
-export TIED_MCP_BIN="$SERVER"
-```
 ```ux @req(DEMO) @hide
 prompt: Delete the dir
 exec: |

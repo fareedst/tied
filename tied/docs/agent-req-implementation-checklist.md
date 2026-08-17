@@ -675,7 +675,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 **Vocabulary benefit**: Makes vocabulary `VALIDATE` a true pre-commit gate across records, pseudo-code, tests, code, release text, and the commit message.
 
 **Tasks**:
-1. **Touchpoint 3 (pre-commit):** **CALL sub-vocabulary-sync** (**VALIDATE**) — audit all files changed this pass: TIED record `name` fields and token suffixes in `semantic-tokens.yaml`, UPPER_SNAKE block names in pseudo-code, test/code identifiers, README/CHANGELOG/UI terms; each must resolve to exactly one preferred term in `tied/vocab/*.md` with naming bridges and alphabetical index current. Do not stage or commit until VALIDATE passes or immature-client deferral is explicitly noted.
+1. **Touchpoint 3 (pre-commit):** **CALL sub-vocabulary-sync** (**VALIDATE**) — audit all files changed this pass: TIED record `name` fields and token suffixes in `semantic-tokens.yaml`, UPPER_SNAKE block names in pseudo-code, test/code identifiers, README/CHANGELOG/UI terms; each must resolve to exactly one preferred term in `tied/vocab/*.md` with naming bridges and alphabetical index current. Run `ruby scripts/validate_vocab_index.rb` from the repository root to verify routing/catalog parity, local links, glossary structure, and alphabetical-index entries. Do not stage or commit until VALIDATE passes or immature-client deferral is explicitly noted.
 2. Write the commit message per `[PROC-COMMIT_MESSAGES]`:
    - **Header**: `<type>(<scope>): <subject>` (keep the full header line to 50 characters or fewer).
    - **Type**: One of `feat`, `fix`, `docs`, `refactor`, `test`, `build`, `ci`, `chore`, `perf`, `style`.

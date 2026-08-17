@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Source-only Prompt Composer vocabulary** — `copy_files.sh` excludes
+  `tied/vocab/prompt-composer.md` from client seed and merge operations, and
+  filters source-only references from client-facing vocabulary indexes and
+  prompt-type documentation. Bootstrap E2E coverage records the boundary.
+
+- **Vocabulary validation** — Added the structural
+  `scripts/validate_vocab_index.rb` gate to the process and agent checklist
+  VALIDATE touchpoint, covering glossary structure, catalog membership, links,
+  and alphabetical-index definitions.
+
 - **Feature orchestration onboarding offline handoff** — `[IMPL-FEAT_ONBOARDING_COMMANDS]` now merges local-default diagnostics with an explicit `using-tied-without-mcp.md` corrective path when `TIED_MCP_BIN` is missing, treats actionable offline fallback as exit code 0 for demo/operator flows, and documents the behavior in onboarding pseudo-code and unit tests.
 
 - **Prompt-type client distribution** — `copy_files.sh` installs only the canonical prompt-type **skills** into client `.cursor/skills/`. Prompt-type Task wrappers under `.cursor/agents/` remain TIED-source development artifacts for static contract tests; they are no longer copied into client projects alongside skills.
@@ -21,6 +31,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Staged feature orchestration demo** — [`docs/tied-feature-demo.md`](docs/tied-feature-demo.md) provides a disposable, copy-paste walkthrough for onboarding, lifecycle, views, migration preview, research/feedback boundaries, and repository TIED validation without mutating project YAML.
 
+- **Adoption documentation** — Added the value proposition matrix,
+  certified-workflows thesis, and extended feature-orchestration demo.
+
+- **Feature smoke helpers** — Added onboarding and lifecycle checks to
+  `scripts/build-commands.sh`.
+
 - **Feature orchestration foundation through onboarding (batches 0–6)** — Feature
   manifests, lifecycle and readiness gates, clarifications and constitution,
   task scheduling and agentstream adapter, generated views, orchestration CLI/MCP,
@@ -29,7 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   with full TIED traceability (CITDP-FEAT-ORCH-BATCH-0..6), adoption docs, and
   validation evidence. Git integration remains explicitly deferred.
 
-- **Greenfield TIED outreach** — [`docs/tied-greenfield-reddit-post.md`](docs/tied-greenfield-reddit-post.md) provides a first-day workflow walkthrough.
+- **Greenfield TIED outreach** — `docs/tied-greenfield-reddit-post.md` provided a first-day workflow walkthrough; the retired draft is retained only in repository history.
 
 - **Prompt-type Task subagents** — `[REQ-PROMPT_TYPE_SUBAGENT]` / `[ARCH-PROMPT_TYPE_SUBAGENT]` / `[IMPL-PROMPT_TYPE_SUBAGENT]` provide one explicit-only foreground Cursor Task wrapper per leaf prompt type at `.cursor/agents/<prompt-type>.md` in the TIED source repository, plus the `plan-refine-build` sequence orchestrator that Task-launches `plan-new-feature`, then `refine-plan`, then `build-plan`. Implementing and close-out wrappers are writable; `question` and `other` are readonly.
 
@@ -66,7 +82,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **Brownfield TIED outreach** — [`docs/vocab-indices-and-tied-reddit-post.md`](docs/vocab-indices-and-tied-reddit-post.md) now describes adopting TIED in an existing codebase.
+- **Brownfield TIED outreach** — `docs/vocab-indices-and-tied-reddit-post.md` described adopting TIED in an existing codebase; the retired draft is retained only in repository history.
 
 - **Cursor MCP enable command** — documentation, skills, and the bootstrap E2E contract now use `agent mcp enable tied-yaml`; the legacy command is explicitly rejected by the contract test.
 
@@ -99,6 +115,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 This release (when tagged) will summarize work that **(a)** makes **`tied/docs/`** the canonical in-tree location for TIED guide and reference **`.md`** files, **(b)** has **`copy_files.sh`** copy guide/schema docs from **`tied/docs/`**, and **(c)** aligns **Go `agentstream`**, batch **shell** drivers, **AGENTS.md** / **preload** paths, and **IMPL-TIED** text with **`tied/agent-preload-contract.yaml`**, **`tied/docs/agent-req-implementation-checklist.yaml`**, and **`tied/docs/…`** entry points. Removed duplicate methodology files at the repo **root**, under **`tied/`**, and under **`docs/`** where they mirrored `tied/docs/`.
 
 ### Removed
+
+- **Reddit outreach drafts** — Removed `docs/tied-greenfield-reddit-post.md` and
+  `docs/vocab-indices-and-tied-reddit-post.md`; current adoption guidance lives
+  in the feature demos, value proposition matrix, and certified-workflows thesis.
 
 - **`tied/docs/new-feature-process.md` and orphan `[PROC-NEW_FEATURE]`** — Superseded by **`[PROC-AGENT_REQ_CHECKLIST]`** ([`tied/docs/agent-req-implementation-checklist.md`](tied/docs/agent-req-implementation-checklist.md) + [`.yaml`](tied/docs/agent-req-implementation-checklist.yaml)) for the step-by-step procedure and [`tied/docs/methodology-diagrams.md`](tied/docs/methodology-diagrams.md) Diagrams 2/3/4 for the visual flow. **README.md**, **CONTRIBUTING.md**, and **`copy_files.sh`** references retargeted; historical CHANGELOG entries preserved.
 

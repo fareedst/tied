@@ -1,6 +1,12 @@
-# Quality assurance vocabulary
+# Quality assurance (canonical)
 
 **Scope:** Risk-triggered quality selection and evidence provenance for TIED changes.
+
+**Traceability:** [REQ-QUALITY_ASSURANCE_EVIDENCE](../requirements/REQ-QUALITY_ASSURANCE_EVIDENCE.yaml) · [ARCH-QUALITY_ASSURANCE_PROFILES](../architecture-decisions/ARCH-QUALITY_ASSURANCE_PROFILES.yaml) · [IMPL-QUALITY_EVIDENCE_MANIFEST](../implementation-decisions/IMPL-QUALITY_EVIDENCE_MANIFEST.yaml) · [PROC-QUALITY_ASSURANCE](../docs/processes.md) · [PROC-QUALITY_EVIDENCE_PROVENANCE](../docs/processes.md)
+
+**See also:** [`routing.md`](routing.md) · [`domain-references.md`](domain-references.md) · [`tied-methodology.md`](tied-methodology.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md)
+
+---
 
 ## Canonical terms
 

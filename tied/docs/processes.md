@@ -1218,7 +1218,7 @@ Active
 1. **RESOLVE (before naming/writing)**: look up the concept in `tied/vocab/*.md`; choose the one **preferred** term; reword fuzzy or synonym wording to that canonical term; verify exact spelling/backtick form; flag any term absent from the index.
 2. **PRELOAD (before reading TIED indexes, detail files, source, or tests)**: read `tied/vocab/routing.md` (lightweight routing index); match task keywords to the routing table; from task scope (change-definition, sponsor context, affected modules) list concepts/subsystems in play; open only matched glossaries; extract preferred terms, avoid-list synonyms, naming-bridge rows, and UPPER_SNAKE block names; produce a brief term map for interpreting subsequent artifacts. For cross-cutting concerns, search `tied/vocab/domain-references.md` for the relevant cross-topic note (**Touchpoint 2**).
 3. **RECORD (as concepts are generated, and after artifacts are written)**: add or update the term immediately — preferred-term-vs-synonym row, naming bridge row (concept ↔ token ↔ storage ↔ UI label), and UPPER_SNAKE block name — keep the alphabetical index in sync, and cite the relevant REQ/ARCH/IMPL.
-4. **VALIDATE (before commit)**: audit changed artifacts (TIED record names, `semantic-tokens.yaml`, pseudo-code block names, tests, code, README/CHANGELOG) against the index; confirm each concept resolves to exactly one preferred term; block commit on unresolved synonym drift or missing bridges (**Touchpoint 3**).
+4. **VALIDATE (before commit)**: audit changed artifacts (TIED record names, `semantic-tokens.yaml`, pseudo-code block names, tests, code, README/CHANGELOG) against the index; confirm each concept resolves to exactly one preferred term; block commit on unresolved synonym drift or missing bridges (**Touchpoint 3**). Run `ruby scripts/validate_vocab_index.rb` from the repository root to verify routing/catalog parity, local links, glossary structure, and alphabetical-index entries.
 5. **Immature client**: if `tied/vocab/` or its `*.md` files do not exist, create `tied/vocab/` and seed an index file when the change introduces enough named concepts; otherwise do a lightweight consistency pass or skip with an explicit note in the per-request checklist copy.
 
 ### Touchpoint mapping ([PROC-AGENT_REQ_CHECKLIST])
@@ -1231,7 +1231,7 @@ Active
 Inline during work: RESOLVE before naming; RECORD after artifact edits. Executor: `sub-vocabulary-sync` in [`agent-req-implementation-checklist.yaml`](agent-req-implementation-checklist.yaml).
 
 ### Artifacts & Metrics
-- **Artifacts**: `tied/vocab/*.md` index files (preferred-term tables, naming bridges, UPPER_SNAKE block-name tables, alphabetical index).
+- **Artifacts**: `tied/vocab/*.md` index files (preferred-term tables, naming bridges, UPPER_SNAKE block-name tables, alphabetical index); the `scripts/validate_vocab_index.rb` validation report.
 - **Success Metrics**: each named concept resolves to exactly one preferred term; term map loaded before reading TIED/code (PRELOAD); new concepts recorded the moment they are generated; tokens/storage/logical-unit names and UI/design terms match the index; index reconciled after tests, code, design, and UI docs change; VALIDATE pass before commit.
 
 ---

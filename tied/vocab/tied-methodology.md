@@ -13,6 +13,7 @@
 | Preferred | Avoid in docs/code | Notes |
 |-----------|-------------------|-------|
 | **semantic token** | token string alone | Always `[REQ-*]`, `[ARCH-*]`, `[IMPL-*]`, or `[PROC-*]` in prose when naming the registry entry |
+| **TIED base path** | workspace path, repo root | Absolute `tied/` directory used as the project data boundary; the client project root is its parent |
 | **project YAML** | client YAML, root yaml | Writable REQ/ARCH/IMPL under `tied/` root (not `tied/methodology/`) |
 | **methodology YAML** | template yaml, inherited yaml | Read-only under `tied/methodology/`; refreshed by `copy_files.sh` |
 | **detail file** | sidecar yaml (for REQ/ARCH/IMPL index rows) | YAML under `tied/requirements/`, `tied/architecture-decisions/`, `tied/implementation-decisions/` |
@@ -49,6 +50,7 @@
 | **inherited methodology snapshot** | copied methodology, stale methodology | The exact current template-derived contents of `tied/methodology/`, refreshed as an inherited read-only tree |
 | **promoted quality record** | quality template, copied quality YAML | A quality REQ/ARCH/IMPL detail record installed into the inherited methodology view from canonical templates |
 | **vocabulary merge mode** | overwrite vocab, vocab sync (alone) | Additive `copy_files.sh --merge-vocab` behavior that copies absent glossary files without replacing existing client files |
+| **vocabulary index validator** | vocab lint script, glossary checker | Structural gate that checks routing/catalog membership, glossary markers, links, and alphabetical-index definitions in `tied/vocab/` |
 | **vocabulary layer** | glossary-only documentation, terminology notes (alone) | Agent-control layer that resolves, preloads, records, and validates canonical domain terms across the TIED workflow |
 | **agent-control layer** | agent guidance (alone), vocabulary policy (alone) | Peer control layer alongside semantic tokens and IMPL pseudo-code; owned by `[PROC-VOCABULARY_INDEX]` |
 | **managed bootstrap artifact** | copied file, installed file (alone) | Canonical client artifact refreshed by `copy_files.sh` and checked for client edits before replacement |
@@ -208,6 +210,7 @@ Exact spellings for checklist and docs cross-reference:
 | VOCAB_INDEX | Naming bridge |
 | Vocab directory routing index | Naming bridge |
 | vocabulary merge mode | Preferred terms |
+| vocabulary index validator | Preferred terms |
 | vocabulary layer | Preferred terms |
 | yaml_list_sorter | Naming bridge |
 | yaml_semantic_compare | Preferred terms |
