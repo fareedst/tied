@@ -1,15 +1,20 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
+# [IMPL-TIED_FILES] [IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [REQ-TIED_ADVERSARIAL_INQUIRY]
+# How: Stream MCP usage records and pair adversarial inquiry calls with request-scoped artifact completeness.
+
 # Streaming analysis of TIED MCP usage metrics JSONL (~/.cursor/logs/tied-mcp-metrics.jsonl).
 # O(1) memory per line.
 #
 # Usage:
 #   ruby scripts/analyze_tied_mcp_metrics.rb FILE [FILE ...]
 #   ruby scripts/analyze_tied_mcp_metrics.rb --aggregate FILE 2>summary.yaml
+#   ruby scripts/analyze_tied_mcp_metrics.rb --project-root PATH FILE
 #
 # Options:
 #   --aggregate  After per-file YAML on stdout, print merged summary to stderr
+#   --project-root PATH  Check request-scoped adversarial artifacts under PATH
 
 require 'json'
 require 'optparse'
@@ -23,6 +28,10 @@ def empty_stats
     client_counts: Hash.new(0),
     ok_count: 0,
     fail_count: 0,
+    adversarial_inquiry_count: 0,
+    adversarial_request_counts: Hash.new(0),
+    adversarial_client_counts: Hash.new(0),
+    adversarial_request_counts_by_client: Hash.new { |h, k| h[k] = Hash.new(0) },
     duration_by_tool: Hash.new { |h, k| h[k] = { min: nil, max: 0, sum: 0, n: 0 } },
     failures: {},
     signatures: {}
@@ -40,6 +49,15 @@ def ingest_line(obj, stats)
   ok = obj['ok']
   stats[:tool_counts][tool] += 1 if tool && !tool.empty?
   stats[:client_counts][client] += 1 if client && !client.empty?
+  if tool == 'tied_adversarial_inquiry_run'
+    stats[:adversarial_inquiry_count] += 1
+    client_key = client.empty? ? '(missing client)' : client
+    stats[:adversarial_client_counts][client_key] += 1
+    request_token = obj.dig('args_summary', 'request_token').to_s
+    request_token = '(missing request_token)' if request_token.empty?
+    stats[:adversarial_request_counts][request_token] += 1
+    stats[:adversarial_request_counts_by_client][client_key][request_token] += 1
+  end
   if ok == true
     stats[:ok_count] += 1
   else
@@ -82,7 +100,54 @@ def duration_stats_to_hash(bucket)
   }
 end
 
-def stats_to_report(path, stats)
+def artifact_status(project_root, request_tokens)
+  return nil if project_root.nil?
+
+  artifact_names = %w[
+    obligation-report.json
+    finding-ledger.jsonl
+    gate-result.json
+    evidence-provenance.json
+  ]
+  request_tokens.to_h do |request_token, _count|
+    unless /\AREQ-[A-Z0-9][A-Z0-9_-]*\z/.match?(request_token)
+      files = artifact_names.to_h { |name| [name, false] }
+      next [
+        request_token,
+        {
+          'directory' => nil,
+          'files' => files,
+          'complete' => false,
+          'diagnostic' => 'invalid_request_token'
+        }
+      ]
+    end
+    artifact_dir = File.join(project_root, 'working', request_token, 'adversarial-inquiry')
+    files = artifact_names.to_h { |name| [name, File.file?(File.join(artifact_dir, name))] }
+    [
+      request_token,
+      {
+        'directory' => artifact_dir,
+        'files' => files,
+        'complete' => files.values.all?
+      }
+    ]
+  end
+end
+
+def adversarial_clients_to_hash(stats)
+  stats[:adversarial_client_counts].keys.sort.to_h do |client|
+    [
+      client,
+      {
+        'inquiry_call_count' => stats[:adversarial_client_counts][client],
+        'request_token_counts' => stats[:adversarial_request_counts_by_client][client].sort.to_h
+      }
+    ]
+  end
+end
+
+def stats_to_report(path, stats, project_root = nil)
   durations = {}
   stats[:duration_by_tool].each do |tool, bucket|
     h = duration_stats_to_hash(bucket)
@@ -96,6 +161,12 @@ def stats_to_report(path, stats)
     'parse_errors' => stats[:parse_errors],
     'ok_count' => stats[:ok_count],
     'fail_count' => stats[:fail_count],
+    'activation' => {
+      'inquiry_call_count' => stats[:adversarial_inquiry_count],
+      'by_client' => adversarial_clients_to_hash(stats),
+      'request_token_counts' => stats[:adversarial_request_counts].sort.to_h,
+      'artifact_status' => artifact_status(project_root, stats[:adversarial_request_counts])
+    },
     'tool_counts' => stats[:tool_counts].sort_by { |_t, c| -c }.to_h,
     'client_counts' => stats[:client_counts].sort.to_h,
     'duration_by_tool' => durations.sort.to_h,
@@ -104,10 +175,10 @@ def stats_to_report(path, stats)
   }
 end
 
-def analyze_file(path)
+def analyze_file(path, project_root = nil)
   path = File.expand_path(path)
   stats = empty_stats
-  File.foreach(path, chomp: true) do |line|
+  File.foreach(path, chomp: true, encoding: 'UTF-8:UTF-8') do |line|
     next if line.strip.empty?
 
     begin
@@ -118,16 +189,27 @@ def analyze_file(path)
     end
     ingest_line(obj, stats)
   end
-  stats_to_report(path, stats)
+  stats_to_report(path, stats, project_root)
 end
 
-def build_aggregate(reports)
+def build_aggregate(reports, project_root = nil)
   merged = empty_stats
   reports.each do |r|
     merged[:lines] += r['lines'].to_i
     merged[:parse_errors] += r['parse_errors'].to_i
     merged[:ok_count] += r['ok_count'].to_i
     merged[:fail_count] += r['fail_count'].to_i
+    activation = r['activation'] || {}
+    merged[:adversarial_inquiry_count] += activation['inquiry_call_count'].to_i
+    (activation['by_client'] || {}).each do |client, client_stats|
+      merged[:adversarial_client_counts][client] += client_stats['inquiry_call_count'].to_i
+      (client_stats['request_token_counts'] || {}).each do |request_token, count|
+        merged[:adversarial_request_counts_by_client][client][request_token] += count.to_i
+      end
+    end
+    (activation['request_token_counts'] || {}).each do |request_token, count|
+      merged[:adversarial_request_counts][request_token] += count.to_i
+    end
     (r['tool_counts'] || {}).each { |k, v| merged[:tool_counts][k] += v.to_i }
     (r['client_counts'] || {}).each { |k, v| merged[:client_counts][k] += v.to_i }
     (r['failures'] || []).each do |h|
@@ -166,6 +248,12 @@ def build_aggregate(reports)
       'parse_errors' => merged[:parse_errors],
       'ok_count' => merged[:ok_count],
       'fail_count' => merged[:fail_count],
+      'activation' => {
+        'inquiry_call_count' => merged[:adversarial_inquiry_count],
+        'by_client' => adversarial_clients_to_hash(merged),
+        'request_token_counts' => merged[:adversarial_request_counts].sort.to_h,
+        'artifact_status' => artifact_status(project_root, merged[:adversarial_request_counts])
+      },
       'tool_counts' => merged[:tool_counts].sort_by { |_t, c| -c }.to_h,
       'client_counts' => merged[:client_counts].sort.to_h,
       'duration_by_tool' => merged[:duration_by_tool].transform_values { |b| duration_stats_to_hash(b) }.compact.sort.to_h,
@@ -175,11 +263,14 @@ def build_aggregate(reports)
   }
 end
 
-options = { aggregate: false }
+options = { aggregate: false, project_root: nil }
 parser = OptionParser.new do |opts|
   opts.banner = 'Usage: analyze_tied_mcp_metrics.rb [options] FILE [FILE ...]'
   opts.on('--aggregate', 'Print merged summary YAML to stderr after per-file reports') do
     options[:aggregate] = true
+  end
+  opts.on('--project-root PATH', 'Check request-scoped adversarial artifacts under PATH') do |path|
+    options[:project_root] = File.expand_path(path)
   end
 end
 parser.parse!
@@ -190,9 +281,9 @@ if files.empty?
   exit 1
 end
 
-reports = files.map { |f| analyze_file(f) }
+reports = files.map { |f| analyze_file(f, options[:project_root]) }
 reports.each { |r| puts YAML.dump([r]) }
 
 if options[:aggregate]
-  warn YAML.dump(build_aggregate(reports))
+  warn YAML.dump(build_aggregate(reports, options[:project_root]))
 end

@@ -1,5 +1,5 @@
 /**
- * [IMPL-TIED_FILES] [IMPL-TIED_VOCABULARY_REFRESH] [ARCH-TIED_STRUCTURE] [ARCH-TIED_VOCABULARY_LAYERS] [REQ-TIED_SETUP] [REQ-TIED_VOCABULARY_OWNERSHIP]
+ * [IMPL-TIED_FILES] [IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST] [IMPL-TIED_VOCABULARY_REFRESH] [ARCH-TIED_STRUCTURE] [ARCH-TIED_ADVERSARIAL_INQUIRY] [ARCH-TIED_VOCABULARY_LAYERS] [REQ-TIED_SETUP] [REQ-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_VOCABULARY_OWNERSHIP]
  * How: Exercise bootstrap and layered vocabulary refresh behavior while preserving client-owned project YAML, documentation, vocabulary, and unrelated content.
  */
 
@@ -45,6 +45,11 @@ describe("e2e: bootstrap and load", () => {
       bootstrapOutput,
       /MUST verify fidelity research methodology artifacts/,
       "bootstrap should report the mandatory fidelity methodology gate"
+    );
+    assert.match(
+      bootstrapOutput,
+      /MUST verify adversarial inquiry methodology artifacts: complete\./,
+      "bootstrap should report the adversarial inquiry inheritance gate [REQ-TIED_ADVERSARIAL_INQUIRY]"
     );
     assert.match(
       bootstrapOutput,
@@ -117,6 +122,19 @@ describe("e2e: bootstrap and load", () => {
       ),
       "Methodology should include the fidelity research pseudo-code sidecar"
     );
+    for (const relative of [
+      "requirements/REQ-TIED_ADVERSARIAL_INQUIRY.yaml",
+      "architecture-decisions/ARCH-TIED_ADVERSARIAL_INQUIRY.yaml",
+      "implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY.yaml",
+      "implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY-pseudocode.md",
+      "implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST.yaml",
+      "implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST-pseudocode.md",
+    ]) {
+      assert.ok(
+        fs.existsSync(path.join(tiedDir, "methodology", relative)),
+        `bootstrap should inherit adversarial inquiry artifact ${relative} [IMPL-TIED_FILES] [REQ-TIED_ADVERSARIAL_INQUIRY]`
+      );
+    }
     assert.ok(
       fs.existsSync(path.join(tiedDir, "constitution.example.yaml")),
       "bootstrap should publish the create-if-missing project constitution example [IMPL-TIED_FILES]"

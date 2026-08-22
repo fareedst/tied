@@ -57,6 +57,34 @@ REQ-QUALITY_ASSURANCE_EVIDENCE:
       - "ARCH-QUALITY_ASSURANCE_PROFILES"
     implementation:
       - "IMPL-QUALITY_EVIDENCE_MANIFEST"
+REQ-TIED_ADVERSARIAL_INQUIRY:
+  category: "Functional"
+  cross_references:
+    - "ARCH-TIED_ADVERSARIAL_INQUIRY"
+    - "IMPL-TIED_ADVERSARIAL_INQUIRY"
+    - "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST"
+  description: "Provide bounded, read-only obligation mapping and bidirectional fidelity evidence without treating structural presence as semantic or runtime proof."
+  detail_file: "requirements/REQ-TIED_ADVERSARIAL_INQUIRY.yaml"
+  metadata:
+    last_updated:
+      reason: "Methodology seed for bounded adversarial inquiry and fidelity evidence"
+  name: "Adversarial inquiry for obligation and fidelity evidence"
+  priority: "P0"
+  related_requirements:
+    depends_on:
+      - "REQ-MODULE_VALIDATION"
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+      - "REQ-TIED_FIDELITY_RESEARCH"
+    related_to:
+      - "REQ-TIED_SETUP"
+    supersedes: []
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_ADVERSARIAL_INQUIRY"
+    implementation:
+      - "IMPL-TIED_ADVERSARIAL_INQUIRY"
+      - "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST"
 REQ-TIED_FIDELITY_RESEARCH:
   category: "Functional"
   detail_file: "requirements/REQ-TIED_FIDELITY_RESEARCH.yaml"

@@ -43,6 +43,7 @@ CITDP-REQ-TIED_ADVERSARIAL_INQUIRY:
       - "ruby_minitest_adapter"
       - "statement_level_fidelity"
   leap_feedback:
+    activation_inheritance_evidence: "copy_files.sh verifies all six inherited adversarial REQ/ARCH/IMPL and pseudo-code artifacts via verify_adversarial_inquiry_methodology; bootstrap E2E asserts the gate and artifact set."
     divergences_from_analysis:
       - "Generated obligations, normalized evidence, reports, and findings remain non-canonical and do not mutate audited YAML."
       - "The first implementation used content-derived block identity with a separate semantic revision, preserving formatting stability and exposing semantic edits."
@@ -62,7 +63,18 @@ CITDP-REQ-TIED_ADVERSARIAL_INQUIRY:
     change_request_id: "REQ-TIED_ADVERSARIAL_INQUIRY"
     date: "2026-08-21"
     record_status: "complete"
+  record_status: "complete"
   risk_analysis:
+    adversarial_inquiry:
+      activation_evidence:
+        - "all four request-scoped artifacts"
+        - "bootstrap inheritance verification"
+        - "matching tied_adversarial_inquiry_run metric"
+      assurance_profile: "baseline-functional"
+      depth_tier: "integrated"
+      gate_policy: "advisory"
+      proof_boundary: "Metric and artifact pairing establishes integrated activation evidence, not universal runtime proof."
+      research_profile: "integrated-agent"
     not_applicable:
       - "regulated-privacy"
       - "user-facing-accessibility"

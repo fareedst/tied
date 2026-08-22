@@ -1,3 +1,4 @@
+copy_hygiene: "When copying this template to working/{REQ-TOKEN}/, set execution_evidence.request to the feature REQ token and clear completed, close_out_evidence, and gates. Never inherit another request's close-out evidence."
 description: "Primary procedural template for every new requirement or change to the tested system. Unifies CITDP, TIED dev cycle, IMPL_CODE_TEST_SYNC, LEAP, YAML edit loop, and related processes. Mandatory order: IMPL pseudo-code (token-commented) -> RED tests -> code.\nResponsibility split: pseudo-code-owner steps define and validate logic intent; test/code-owner steps implement only logic already present in pseudo-code. If new logic appears in tests/code, route back to pseudo-code-owner steps first (LEAP).\nDomain vocabulary discipline ([PROC-VOCABULARY_INDEX]): three mandatory touchpoints—(1) prompt intake: RESOLVE sponsor/user wording that names concepts before it drives work (translate-sponsor-intent, change-definition); (2) pre-read: PRELOAD task-relevant glossaries before reading TIED indexes, detail files, source, or tests (session-bootstrap, impact-discovery); (3) pre-commit: VALIDATE names in docs, semantic-tokens.yaml, TIED records, tests, and code before staging/commit (traceable-commit). Inline during work: RESOLVE before naming/writing; RECORD as concepts are generated and after artifacts change. CALL sub-vocabulary-sync against tied/vocab/*.md (filenames have no -vocabulary suffix). This is distinct from the IMPL pseudo-code grammar \"preferred vocabulary\" (INPUT/OUTPUT/DATA/CONTROL/PRE/POST/EFFECTS/FAILURE_MODES/DATA_TRANSITION/TERMINATION keywords); standards live in tied/docs/vocabulary-index-analysis-and-standards.md.\nDriver note (agentstream): When sub_procedures are appended as extra turns after traceable-commit, each was usually already executed via CALL during an earlier step. Unless new TIED/YAML mutations are pending, respond with a one-line RETURN (no full re-validation). Prefer --lead-checklist-skip-sub when generating turns to avoid duplicate subs (see tools/agentstream README).\nNon-normative: Optional new-session handoffs (when disk + per-request copy justify a fresh context) are documented in source_document under \"Suggested session handoffs\"; see YAML header comment for slug summary. [PROC-CITDP] final CITDP file is persist-citdp-record after implementation; pre-TDD analysis ends at test-strategy after TIED/IMPL on disk.\nMain steps that start a handoff set agentstream_new_session: true for tools/agentstream and tools/agent-stream (per source_document at repo root docs/); other clients may ignore.\n"
 entry_points:
   - notes: "Full checklist applies"
@@ -14,39 +15,16 @@ entry_points:
     start_at: "session-bootstrap"
 execution_evidence:
   close_out_evidence:
-    date: "2026-08-22"
-    deferred:
-      - "G6 operator MCP smoke via tied-cli (operator_evidence.status not_run)"
-      - "Part F4 automated YAML/MD parity (manual B14 gate)"
-    gates:
-      go_test: "tools/agentstream go test ./... — pass"
-      mcp_server_npm_test: "303 tests pass (includes adversarial-inquiry + checklist-integration + MCP composition)"
-      tied_validate_consistency: "ok: true"
-      tied_verify: "ok: true (REQ-TIED_ADVERSARIAL_INQUIRY, no status drift)"
-      typescript_typecheck: "bunx tsc -b mcp-server — pass"
-      vocab_validate: "ruby scripts/validate_vocab_index.rb — pass"
-    master_checklist: "docs/adversarial-inquiry-checklist-integration-checklist.md Parts A–G checked"
-  completed:
-    - "phase0-docs"
-    - "phase0-rebuild"
-    - "phase0-smoke-automated"
-    - "phase0-smoke-operator"
-    - "phase1-close-out-sync"
-    - "phase1-decisions"
-    - "phase1-fixture-scaffold"
-    - "phase1-green-dispatch"
-    - "phase1-green-modules"
-    - "phase1-pseudocode"
-    - "phase1-red-composition"
-    - "phase1-red-loader"
-    - "phase1-red-orchestrator"
-    - "phase1-validate"
-    - "plan-close-out-validation-20260822"
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: ""
+  completed: []
   operator_evidence:
     command: ".cursor/skills/tied-yaml/scripts/tied-cli.sh tied_adversarial_inquiry_run @/tmp/inquiry-smoke.json"
     limitation: "Requires a human-operated Cursor MCP reload and catalog check."
     status: "not_run"
-  request: "adversarial_inquiry_adoption_53e273d2"
+  request: ""
 feedback_loops:
   composition_and_e2e: "Missing implementation coverage returns to the specification path before evidence is accepted."
   leap: "Implementation evidence updates IMPL first, then tests and code, with ARCH/REQ updates when scope changes."

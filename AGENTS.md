@@ -112,6 +112,27 @@ This document centralizes every instruction AI coding assistants must follow whi
 - [ ] **Domain vocabulary** ([PROC-VOCABULARY_INDEX]): RESOLVE before naming (Touchpoint 1 when interpreting prompts); RECORD when introducing or renaming concepts in tests, code, design, or UI docs
 - [ ] **Verification-gated mode** ([PROC-TIED_VERIFICATION_GATED]): When the project uses verification-gated mode, do not edit requirement or IMPL `status` by hand; run the verify step (e.g. `tied_verify` with update) after tests so status is derived from test results only.
 
+### 3.3.1 Adversarial inquiry activation
+
+When `[REQ-TIED_ADVERSARIAL_INQUIRY]` applies, or when a behavior-changing
+CITDP uses `depth_tier: minimal` or higher:
+
+- PRELOAD `tied/vocab/fidelity-research.md` and `tied/vocab/quality-assurance.md`
+  in addition to the normal routed glossaries.
+- At `risk-assessment`, record `depth_tier` in CITDP independently from the
+  research profile, assurance profile, and gate policy.
+- At `integrated` depth, CALL `sub-adversarial-inquiry-pass` at structural,
+  pre-RED, and verification phases; invoke `tied_adversarial_inquiry_run`
+  with explicit request scope and advisory policy when MCP is available.
+- Persist only `obligation-report.json`, `finding-ledger.jsonl`,
+  `gate-result.json`, and `evidence-provenance.json` under
+  `working/{REQ-TOKEN}/adversarial-inquiry/`.
+- Treat observed findings as review-gated evidence, not LEAP triggers. Only
+  confirmed findings may route through the owning checklist step.
+- Do not treat inherited checklist `execution_evidence`, checklist text,
+  token presence, or TIED consistency as feature activation evidence. Integrated
+  activation requires the matching inquiry metric and all four artifacts.
+
 ### 3.4 After Completing Work
 - [ ] `semantic-tokens.yaml` reflects every token referenced in code/tests/docs
 - [ ] Architecture and implementation decision logs are current and cross-referenced

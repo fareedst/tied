@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Adversarial inquiry activation close-out** — `[IMPL-TIED_FILES]` now records
+  fail-closed inheritance verification, paired inquiry metrics and artifact
+  checks, with Ruby smoke and bootstrap E2E coverage. The primary CITDP records
+  integrated depth and request-scoped activation evidence; remaining H5/native
+  Go adapter/operator smoke work stays deferred.
+
 - **Adversarial inquiry checklist composition (Batches 5–6)** — Extended
   `[PROC-AGENT_REQ_CHECKLIST]` with §4 adversarial task text on all parent-plan
   slugs, mandatory `sub-adversarial-inquiry-pass`, bounded assurance rows (Batch 5),

@@ -1,0 +1,75 @@
+ARCH-TIED_ADVERSARIAL_INQUIRY:
+  alternatives_considered:
+    - cons:
+        - "Breaks read-only research"
+        - "Pollutes intent"
+      name: "Write generated obligations into canonical TIED YAML"
+      pros:
+        - "Immediate visibility"
+      rejected_reason: "Generated analysis is evidence, not approved intent."
+    - cons:
+        - "Creates language-specific coupling"
+        - "Inhibits multiple adapters"
+      name: "Implement language semantics in the core analyzer"
+      pros:
+        - "Single implementation"
+      rejected_reason: "Adapters own language extraction; the core consumes normalized evidence."
+  decision: "Use a language-neutral normalized evidence model and generated obligation projection outside canonical project YAML. Keep adapters language-specific, keep findings append-only and review-gated, and derive strict status only from scoped eligible evidence."
+  decision_constraints:
+    - "Analysis never writes audited project YAML."
+    - "IMPL block identity uses normalized token, block name, and semantic content with separate revisions."
+    - "REQ criterion identity is explicit and content-independent."
+    - "Strict status is scoped and requires eligibility evidence."
+  implementation_approach:
+    details:
+      - "Checklist orchestration stays under [PROC-AGENT_REQ_CHECKLIST] and reuses [PROC-PSEUDOCODE_VALIDATION], [PROC-QUALITY_ASSURANCE], and [PROC-LEAP]."
+      - "Mode B uses a dedicated explicit-context project scope loader rather than global TIED_BASE_PATH loader state."
+      - "Research profile, assurance profile, and gate policy are orthogonal dimensions; selecting an assurance profile does not authorize strict blocking."
+      - "Strict blocking is a scoped projection only after eligibility and explicit human CITDP approval; unrelated records remain unchanged."
+      - "The live MCP registration is a composition boundary that must be rebuilt, discovered, and smoke-tested before adoption is complete."
+      - "The project orchestrator composes canonical records, the Ruby Minitest adapter, and structured production evidence into the normalized core; production source remains a locus only."
+      - "Working artifacts are project-local evidence outside canonical TIED YAML, with root confinement and atomic snapshot semantics."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-21"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-21"
+      reason: "Record Mode B explicit-context loader and orchestrator boundary"
+  name: "Read-only obligation graph and evidence gate boundary"
+  rationale:
+    benefits:
+      - "Deterministic and inspectable reports."
+      - "Explicit proof boundaries."
+      - "Safe adoption with risk-triggered assurance."
+    problems_solved:
+      - "Language adapters can otherwise redefine the core model."
+      - "Scoped evidence can accidentally demote unrelated records."
+      - "Structural linkage is not semantic proof."
+    why: "Adversarial evidence must strengthen fidelity without creating a second source of intent or mutating audited projects."
+  related_decisions:
+    depends_on:
+      - "ARCH-MODULE_VALIDATION"
+      - "ARCH-QUALITY_ASSURANCE_PROFILES"
+      - "ARCH-TIED_FIDELITY_RESEARCH"
+    informs: []
+    see_also:
+      - "ARCH-TIED_RESEARCH_RECORD_BOUNDARY"
+    supersedes: []
+  status: "Active"
+  traceability:
+    code_annotations:
+      - "ARCH-TIED_ADVERSARIAL_INQUIRY"
+    implementation:
+      - "IMPL-TIED_ADVERSARIAL_INQUIRY"
+      - "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST"
+    requirements:
+      - "REQ-TIED_ADVERSARIAL_INQUIRY"
+    tests:
+      - "mcp-server/src/adversarial-inquiry/*.test.ts"
+      - "mcp-server/src/adversarial-inquiry/checklist-integration.test.ts"
+      - "mcp-server/src/tools/adversarial-inquiry-mcp.test.ts"
+      - "tools/agentstream/checklist/checklist_test.go"
+      - "tools/agentstream/checklist/composition_coverage_test.go"
+      - "tools/agentstream/pipeline/composition_coverage_test.go"

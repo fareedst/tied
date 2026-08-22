@@ -962,6 +962,41 @@ verify_fidelity_methodology() {
 
 verify_fidelity_methodology
 
+# --- Adversarial inquiry methodology verification ---
+# [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [REQ-TIED_ADVERSARIAL_INQUIRY]
+# How: VERIFY_ADVERSARIAL_INQUIRY_METHODOLOGY — fail bootstrap when the inherited
+# adversarial-inquiry REQ/ARCH/IMPL stack and checklist contract are incomplete.
+ADVERSARIAL_INQUIRY_METHODOLOGY_REQUIRED_FILES=(
+  "methodology/requirements/REQ-TIED_ADVERSARIAL_INQUIRY.yaml"
+  "methodology/architecture-decisions/ARCH-TIED_ADVERSARIAL_INQUIRY.yaml"
+  "methodology/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY.yaml"
+  "methodology/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY-pseudocode.md"
+  "methodology/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST.yaml"
+  "methodology/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST-pseudocode.md"
+)
+
+verify_adversarial_inquiry_methodology() {
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [REQ-TIED_ADVERSARIAL_INQUIRY]
+  # How: Require the inherited adversarial REQ/ARCH/IMPL records and pseudo-code
+  # sidecars before declaring the client inquiry contract installed.
+  local _missing=0 _relative
+  say_warn "MUST verify adversarial inquiry methodology artifacts before completion."
+  for _relative in "${ADVERSARIAL_INQUIRY_METHODOLOGY_REQUIRED_FILES[@]}"; do
+    if [[ ! -f "${TIED_DIR}/${_relative}" ]]; then
+      say_err "MISSING mandatory adversarial inquiry methodology artifact: ${TIED_DIR}/${_relative}"
+      _missing=1
+    fi
+  done
+  if [[ "${_missing}" -ne 0 ]]; then
+    say_err "Adversarial inquiry methodology verification failed; client bootstrap is incomplete."
+    return 1
+  fi
+  say_ok "MUST verify adversarial inquiry methodology artifacts: complete."
+  say_warn "CAN run the read-only inquiry: ${TIED_DIR}/docs/adversarial-inquiry-adoption.md."
+}
+
+verify_adversarial_inquiry_methodology
+
 # --- Feature orchestration methodology verification ---
 # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
 # How: Require the lightweight onboarding guide, constitution starter, vocabulary, and

@@ -1,5 +1,5 @@
-# [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-TIED_VOCABULARY_REFRESH] [ARCH-TIED_VOCABULARY_LAYERS] [REQ-TIED_VOCABULARY_OWNERSHIP] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS] [IMPL-MCP_USAGE_METRICS]
-# Summary: Bootstrap TIED layout from templates via copy_files.sh — indexes, guides, detail dirs, AGENTS.md family, layered methodology/client vocabulary ownership, managed prompt-type skills, feature-orchestration onboarding artifacts and wrappers, create-if-missing constitution example, closed publication verification, attribute-preserving copies, source-date midnight timestamps on client copies, modification warnings, implementation pseudo-code sidecars, tied-yaml skill, and opt-in MCP metrics configuration.
+# [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [REQ-TIED_ADVERSARIAL_INQUIRY] [IMPL-TIED_VOCABULARY_REFRESH] [ARCH-TIED_VOCABULARY_LAYERS] [REQ-TIED_VOCABULARY_OWNERSHIP] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS] [IMPL-MCP_USAGE_METRICS]
+# Summary: Bootstrap TIED layout from templates via copy_files.sh — indexes, guides, detail dirs, AGENTS.md family, layered methodology/client vocabulary ownership, managed prompt-type skills, feature-orchestration and adversarial-inquiry onboarding artifacts with closed verification, create-if-missing constitution example, attribute-preserving copies, source-date midnight timestamps on client copies, modification warnings, implementation pseudo-code sidecars, tied-yaml skill, and opt-in MCP metrics configuration.
 
 # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
 # How: Contract — INPUT/OUTPUT/DATA for BOOTSTRAP_TIED below; these fields define the bootstrap boundary.
@@ -11,8 +11,8 @@
 # How: DATA — project indexes; inherited methodology tree; refreshable tied/methodology/vocab/*.md; durable client tied/vocab/*.md and handoffs; feature-orchestration onboarding and constitution artifacts; IMPL-*-pseudocode.md sidecars; managed .cursor/skills/ artifacts; source-date midnight metadata applied only to client copies; modification diagnostics; and the client .cursor/mcp.json when initialized, including opt-in metrics fields.
 
 procedure BOOTSTRAP_TIED(projectRoot):
-  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
-  # How: Bootstrap or refresh the client layout while preserving client-owned project YAML, existing vocabulary, and any existing MCP configuration; managed copies retain attributes, receive source-date midnight timestamps, warn before overwriting a changed client copy, and initialize optional metrics fields only for a new MCP configuration when collection is explicitly enabled.
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [REQ-TIED_ADVERSARIAL_INQUIRY]
+  # How: Bootstrap or refresh the client layout while preserving client-owned project YAML, existing vocabulary, and any existing MCP configuration; managed copies retain attributes, receive source-date midnight timestamps, warn before overwriting a changed client copy, initialize optional metrics fields only for a new MCP configuration when collection is explicitly enabled, and fail closed if the inherited adversarial inquiry contract is incomplete.
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
   # How: Ensure tied/ exists; copy template indexes, detail YAML, and implementation pseudo-code sidecars; copy guide/schema docs from tied/docs/ in the TIED source per copy_files.sh; create detail subdirs; copy AGENTS.md, .cursorrules to project root.
   Contract:
@@ -35,6 +35,7 @@ procedure BOOTSTRAP_TIED(projectRoot):
   # How: Delegate layered vocabulary refresh so methodology files are replaced with stale-file pruning while client glossaries and absent handoffs remain durable.
   CALL REFRESH_BOOTSTRAP_VOCABULARY(projectRoot, mergeVocab)
   CALL COPY_FEATURE_ORCHESTRATION_ARTIFACTS(projectRoot)
+  CALL VERIFY_ADVERSARIAL_INQUIRY_METHODOLOGY(projectRoot)
   RETURN success
 
 procedure COPY_WITH_ATTRIBUTES(sourcePath, destinationPath, recursive):
@@ -216,6 +217,27 @@ procedure PATCH_FEATURE_WRAPPER_REPO_ROOT(projectRoot):
     IF wrapper is absent: continue
     IF wrapper contains unsubstituted marker: replace marker with realpath(TIED_SOURCE) once
     ELSE IF marker line absent: warn and skip (non-fatal)
+
+procedure VERIFY_ADVERSARIAL_INQUIRY_METHODOLOGY(projectRoot):
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [REQ-TIED_ADVERSARIAL_INQUIRY]
+  # How: Fail closed unless the inherited adversarial inquiry REQ/ARCH/IMPL records, checklist record, and both pseudo-code sidecars are present.
+  Contract:
+    INPUT: projectRoot; required adversarial inquiry methodology artifact paths
+    OUTPUT: success diagnostics or non-zero failure with missing paths
+    DATA: client methodology adversarial inquiry records and pseudo-code sidecars
+    CONTROL: require every inherited artifact; validation is read-only
+    PRE: methodology refresh has completed and projectRoot/tied is readable
+    POST: all six adversarial inquiry artifacts exist and are readable, or bootstrap exits non-zero with an actionable missing-artifact diagnostic
+    EFFECTS: File I/O — reads file existence and permissions; Diagnostics — emits completion or failure guidance
+    FAILURE_MODES: REQUIRED_ARTIFACT_MISSING; REQUIRED_ARTIFACT_UNREADABLE; ADVERSARIAL_INQUIRY_GATE_FAILED
+    DATA_TRANSITION: unknown inquiry package→verified complete|verified incomplete; client files unchanged
+    TERMINATION: total — finite required artifact list
+  FOR each required adversarial inquiry artifact:
+    IF artifact is absent or unreadable:
+      report missing path and corrective command
+      RETURN non-zero
+  report read-only inquiry adoption path
+  RETURN success
 
 procedure COPY_FEATURE_ORCHESTRATION_ARTIFACTS(projectRoot):
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [REQ-FEAT_ADOPTION_GUIDANCE] [IMPL-FEAT_ONBOARDING_COMMANDS] [ARCH-FEAT_ONBOARDING_BOUNDARY] [REQ-FEAT_ONBOARDING_COMMANDS]

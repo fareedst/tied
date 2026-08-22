@@ -29,6 +29,24 @@ The matrix is risk-triggered rather than universal. Each quality attribute or se
 
 At minimum consider `baseline-functional`; select external-input/security, data-integrity/migration, stateful-reliability, performance/scale/cost, user-facing/accessibility, regulated/privacy, and AI-enabled profiles only when their triggers are present. `tied_validate_consistency` is evidence of TIED artifact and traceability integrity only; it is not proof of runtime security, performance, usability, compliance, resilience, privacy, or product correctness.
 
+## Adversarial inquiry depth
+
+For every behavior-changing CITDP record, populate `risk_analysis.adversarial_inquiry.depth_tier`
+with one of:
+
+- `minimal`: record manual counterexamples and falsification questions; no MCP inquiry is required.
+- `integrated`: run the checklist inquiry pass with explicit scope and advisory policy, invoke
+  `tied_adversarial_inquiry_run` when MCP is available, and persist the bounded report, finding
+  ledger, gate result, and evidence provenance under `working/{REQ-TOKEN}/adversarial-inquiry/`.
+- `strict_candidate`: prepare the same bounded evidence plus negative controls, deterministic
+  execution, proof boundaries, waiver ownership and expiry, and pilot evidence. This remains
+  warn-only until strict eligibility and explicit human approval are recorded.
+
+Keep `research_profile`, `assurance_profile`, and `gate_policy` separate. The default depth for
+behavior-changing work is `minimal`; selecting `baseline-functional` does not silently activate
+integrated inquiry. A tool call without the required bounded artifacts is incomplete activation.
+Observed findings remain outside canonical TIED YAML and do not trigger LEAP until confirmed.
+
 ## Middle ground
 
 For small but real behavior changes, some teams still want a **short** CITDP record (minimal fields) rather than skipping entirely. That is valid if your validators and reviewers agree.

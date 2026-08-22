@@ -52,6 +52,27 @@ The default policy is `advisory`. `strict-candidate` remains warn-only.
 `strict-approved` can block only the declared scope after strict eligibility
 and an explicit human approval record are both valid.
 
+## Activation maturity model
+
+“Specified” and “activated” are different states. Checklist text, inherited
+tokens, and a registered MCP tool prove that the capability exists; they do not
+prove that a feature used it.
+
+| State | Meaning | Observable signals |
+|---|---|---|
+| **Specified** | The checklist, vocabulary, and MCP surface describe inquiry. | Template text and registered `tied_adversarial_inquiry_run`; no request-scoped artifacts required. |
+| **Conventional risk** | Ordinary CITDP and test planning consider normal risks without adversarial inquiry. | `baseline-functional`, risks or scenarios, but no inquiry call or finding ledger. |
+| **Activated (minimal)** | Manual adversarial thinking is recorded without requiring MCP. | Negative cases and falsification questions; `depth_tier: minimal`. |
+| **Activated (integrated)** | Tool-backed inquiry produces auditable request-scoped evidence. | An MCP inquiry call with matching `request_token`, all four bounded artifacts, and a completed checklist pass at integrated depth. |
+| **Activated (strict)** | Eligible evidence supports scoped blocking. | Integrated signals plus strict eligibility, human approval, and a scoped `gate-result.json` with blocking policy. |
+
+The default for behavior-changing work is `minimal`; `baseline-functional` is
+an assurance profile, not an activation signal. Integrated activation is
+incomplete when a `tied_adversarial_inquiry_run` call lacks the four artifacts
+under `working/{REQ-TOKEN}/adversarial-inquiry/`. Metrics should therefore
+report the MCP call and artifact presence as paired signals. Observed findings
+remain review-gated and do not trigger LEAP.
+
 ## Initial configuration
 
 ### Mode A — supported today
@@ -60,6 +81,29 @@ The currently supported MCP contract is **normalized-input inquiry (Mode A)**:
 the caller supplies the normalized `graph`, `fidelity`, and `scope` inputs.
 The analysis reads caller-provided normalized records and produces generated
 evidence; it does not scan project paths or write project YAML.
+
+For non-Ruby projects whose project-input adapter is not available, use the
+repository’s Mode A payload builder. It keeps the graph and fidelity evidence
+language-neutral while removing hand-authored JSON envelope work:
+
+```bash
+ruby scripts/build_adversarial_inquiry_mode_a.rb \
+  --graph /tmp/volumestats-graph.json \
+  --fidelity /tmp/volumestats-fidelity.json \
+  --provenance /tmp/volumestats-provenance.json \
+  --scope IMPL-VOLUMESTATS-CLI#RUN_VOLUMESTATS \
+  --project-root /absolute/path/to/project \
+  --request-token REQ-VOLUMESTATS-CLI \
+  > /tmp/volumestats-inquiry.json
+.cursor/skills/tied-yaml/scripts/tied-cli.sh \
+  tied_adversarial_inquiry_run @/tmp/volumestats-inquiry.json
+```
+
+The graph, fidelity, and provenance files remain the caller’s evidence inputs;
+the builder only assembles the normalized Mode A request. Use `policy:
+advisory` for a first pilot and inspect the four artifacts before claiming
+integrated activation. This is the documented fallback for Go and other
+stacks until a native project-input adapter exists.
 
 ### Mode B — supported bounded project-input inquiry
 

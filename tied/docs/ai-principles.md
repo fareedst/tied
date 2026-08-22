@@ -100,6 +100,14 @@ This acknowledgment confirms that the AI agent has:
     - This is **distinct** from the IMPL grammar "preferred vocabulary" (INPUT/OUTPUT/DATA/PRE/POST/EFFECTS keywords in `implementation-decisions.md`).
     - Standards: `tied/docs/vocabulary-index-analysis-and-standards.md`; client routing handoff: `tied/vocab/routing.md`; methodology routing: `tied/methodology/vocab/routing.md`; full indexes (on-demand): the matching `domain-references.md` in each layer; full process: `tied/docs/processes.md` § `[PROC-VOCABULARY_INDEX]`.
 
+14. **Adversarial Inquiry Activation** `[REQ-TIED_ADVERSARIAL_INQUIRY]`
+    - When this requirement applies, or a behavior-changing CITDP uses `depth_tier: minimal` or higher, PRELOAD `tied/vocab/fidelity-research.md` and `tied/vocab/quality-assurance.md`.
+    - At `risk-assessment`, record `depth_tier` independently from research profile, assurance profile, and gate policy.
+    - At `integrated` depth, CALL `sub-adversarial-inquiry-pass` at structural, pre-RED, and verification phases; invoke `tied_adversarial_inquiry_run` with explicit request scope and advisory policy when MCP is available.
+    - Persist the four bounded artifacts only under `working/{REQ-TOKEN}/adversarial-inquiry/`: `obligation-report.json`, `finding-ledger.jsonl`, `gate-result.json`, and `evidence-provenance.json`.
+    - Observed findings remain review-gated and do not trigger LEAP; only confirmed findings route to existing owners.
+    - Inherited checklist `execution_evidence`, checklist text, token presence, and TIED consistency are not feature activation evidence. Integrated activation requires the matching inquiry metric and all four artifacts.
+
 **Bugs vs requirements (operational rule):** Requirements describe desired behavior (WHAT and WHY). Bugs describe implementation failures. Do NOT document bugs as requirements; document bugs in architecture/implementation decisions with cross-reference to the requirement that should be satisfied. If a bug reveals missing behavior specification, add a requirement first, then fix.
 
 ---

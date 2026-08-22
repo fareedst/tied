@@ -1,0 +1,72 @@
+REQ-TIED_ADVERSARIAL_INQUIRY:
+  category: "Functional"
+  description: "Provide bounded, read-only obligation mapping and bidirectional fidelity evidence without treating structural presence as semantic or runtime proof."
+  implementation_approach:
+    details:
+      - "Checklist integration is owned by [PROC-AGENT_REQ_CHECKLIST]; no separate adversarial inquiry process token is introduced."
+      - "Generated obligation-report.json, finding-ledger.jsonl, gate-result.json, and evidence-provenance.json are bounded working artifacts under working/{REQ-TOKEN}/adversarial-inquiry and never canonical TIED intent."
+      - "Observed-only findings remain review-gated and do not trigger LEAP; confirmed findings route to existing checklist owners."
+      - "Strict blocking requires complete eligibility evidence plus explicit human CITDP approval covering reviewer, exact scope, thresholds, waiver owner and expiry, rollback criteria, and approval revision."
+      - "The existing research, assurance, and gate dimensions remain separate: integrated-agent or human-research profile; baseline-functional or specialized assurance profile; advisory, strict-candidate, or strict-approved gate policy."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-21"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-21"
+      reason: "Remove non-token process reference during token audit"
+  name: "Adversarial inquiry for obligation and fidelity evidence"
+  priority: "P0"
+  rationale:
+    benefits:
+      - "Bidirectional semantic evidence with explicit proof boundaries."
+      - "Deterministic read-only obligation projections."
+      - "Risk-triggered assurance and review-gated findings."
+    problems_solved:
+      - "Correlated token and locus presence can produce false confidence."
+      - "Missing, stale, reordered, or contradictory behavior is not represented at block level."
+      - "Strict status claims lack an evidence-scoped eligibility boundary."
+    why: "Existing fidelity analysis can report locus presence but cannot reliably distinguish complete, incomplete, unreliable, and unresolved statement-level evidence."
+  related_requirements:
+    depends_on:
+      - "REQ-MODULE_VALIDATION"
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+      - "REQ-TIED_FIDELITY_RESEARCH"
+    related_to:
+      - "REQ-TIED_SETUP"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Every changed requirement criterion maps to an architecture constraint and implementation block or an explicit unresolved diagnostic."
+      metric: "Obligation graph tests cover complete, malformed, duplicate, stale, and unresolved references."
+    - criterion: "A block receives PASS only when reliable and complete evidence exists in both directions."
+      metric: "Fidelity fixtures detect false statements, missing behavior, wrong delegation, missing errors, reordered steps, and unobserved effects."
+    - criterion: "Research analysis does not mutate audited project YAML and produces deterministic output."
+      metric: "Read-only composition tests compare canonical input bytes before and after and repeat the same snapshot/configuration."
+    - criterion: "Strict gating is limited to an eligible supported subset with negative controls, bounded execution, explicit proof boundaries, deterministic scope, and owned waivers."
+      metric: "Eligibility tests reject missing controls and accept only complete eligibility records."
+    - criterion: "The first language adapter analyzes one Ruby Minitest module and reports unsupported constructs as UNRESOLVED."
+      metric: "Minitest adapter tests cover assert, assert_equal, assert_empty, assert_raises, refute, and unsupported_adapter."
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_ADVERSARIAL_INQUIRY"
+    code_annotations:
+      - "REQ-TIED_ADVERSARIAL_INQUIRY"
+    implementation:
+      - "IMPL-TIED_ADVERSARIAL_INQUIRY"
+      - "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST"
+    tests:
+      - "mcp-server/src/adversarial-inquiry/*.test.ts"
+      - "mcp-server/src/adversarial-inquiry/checklist-integration.test.ts"
+      - "mcp-server/src/tools/adversarial-inquiry-mcp.test.ts"
+      - "tools/agentstream/checklist/checklist_test.go"
+      - "tools/agentstream/checklist/composition_coverage_test.go"
+      - "tools/agentstream/pipeline/composition_coverage_test.go"
+  validation_criteria:
+    - coverage: "Identity resolution, graph construction, and read-only projection"
+      method: "Unit and composition tests"
+    - coverage: "Statement-level reliability and completeness verdicts"
+      method: "Language-neutral conformance fixtures"
+    - coverage: "Ruby Minitest vertical slice and bounded assurance"
+      method: "Ruby and TypeScript tests with captured evidence provenance"

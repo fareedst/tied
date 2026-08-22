@@ -25,6 +25,13 @@ record_identity:
   title: "~"
 risk_analysis:
   abuse_cases: []
+  adversarial_inquiry:
+    assurance_profile: "baseline-functional"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    rationale: "~"
+    research_profile: "integrated-agent"
+    strict_eligibility_prerequisites: []
   quality_evidence_matrix:
     - applicability: "applicable"
       attribute: "baseline-functional"

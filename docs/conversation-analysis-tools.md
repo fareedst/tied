@@ -71,12 +71,16 @@ Enable collection: set **`TIED_MCP_COLLECT_METRICS=1`** in `.cursor/mcp.json` `e
 **Flags:**
 
 - `--aggregate` — After per-file YAML on stdout, print merged summary on stderr.
+- `--project-root PATH` — Add per-client inquiry counts and check whether each
+  request token has all four artifacts under
+  `working/{REQ-TOKEN}/adversarial-inquiry/`.
 
 **Examples:**
 
 ```bash
 ruby scripts/analyze_tied_mcp_metrics.rb ~/.cursor/logs/tied-mcp-metrics.jsonl
 ruby scripts/analyze_tied_mcp_metrics.rb --aggregate ~/.cursor/logs/tied-mcp-metrics.jsonl 2>/tmp/tied-mcp-summary.yaml
+ruby scripts/analyze_tied_mcp_metrics.rb --aggregate --project-root /path/to/project ~/.cursor/logs/tied-mcp-metrics.jsonl 2>/tmp/tied-mcp-summary.yaml
 ```
 
 ### `analyze_hook_log.rb`

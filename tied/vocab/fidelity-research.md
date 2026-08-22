@@ -33,6 +33,8 @@ implementation decisions and pseudo-code for the research tooling.
 | **human research profile** | manual audit | Complete evidence-rich retrospective study and adjudication mode. |
 | **fidelity research pilot** | pilot run | Concrete bounded execution path for the first slice; distinct from cross-project aggregation. |
 | **successful control change** | non-bug sample | A behavior-changing change included to estimate defect rates without selection bias. |
+| **integrated activation evidence** | activation signal, metric-only activation | Paired request-scoped inquiry metric and complete bounded artifacts demonstrating tool-backed activation. |
+| **activation artifact pairing** | artifact check, activation completeness | The rule that an inquiry metric and all four request-scoped artifacts are required together. |
 
 ## Naming bridge
 
@@ -48,6 +50,8 @@ implementation decisions and pseudo-code for the research tooling.
 | Case report | `case-report` | Promoted, adjudicated finding with origin and evidence. |
 | Evidence provenance | `evidence-provenance` | Deterministic commands, revisions, hashes, and artifact references. |
 | Research dataset | `research-dataset` / `researchDataset` | Append-only findings, duplicate links, and case reports emitted outside audited project YAML. |
+| Integrated activation evidence | `activation-evidence` | Paired metric and artifact evidence used to classify integrated activation. |
+| Activation artifact pairing | `activation-artifact-pairing` | Completeness check joining the inquiry metric to the four bounded artifacts. |
 
 ## First-slice pseudo-code block names
 
@@ -112,6 +116,7 @@ Working artifacts persist only under `working/{REQ-TOKEN}/adversarial-inquiry/`.
 
 | Term | Section |
 |---|---|
+| activation artifact pairing | Preferred terms vs synonyms |
 | artifact snapshot | Naming bridge |
 | candidate finding | Preferred terms vs synonyms |
 | case report | Naming bridge |
@@ -125,6 +130,7 @@ Working artifacts persist only under `working/{REQ-TOKEN}/adversarial-inquiry/`.
 | finding lifecycle | Preferred terms vs synonyms |
 | finding ledger | Naming bridge |
 | human research profile | Preferred terms vs synonyms |
+| integrated activation evidence | Preferred terms vs synonyms |
 | integrated agent profile | Preferred terms vs synonyms |
 | origin layer | Preferred terms vs synonyms |
 | proof boundary | Preferred terms vs synonyms |

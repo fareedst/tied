@@ -505,6 +505,46 @@ with recorded verification — not when the work "looks done."** Part F4 remains
 
 ---
 
+## Part H — Client activation pilots
+
+Part H records adoption evidence separately from the implementation-completion
+gates above. A client is not counted as integrated merely because its checklist
+contains adversarial task text or its TIED records validate.
+
+- [x] **H1. VolumeStats client `1787416567` completed a post-hoc integrated pilot.**
+  Evidence (2026-08-22): client metrics show seven successful
+  `tied_adversarial_inquiry_run` calls from `17:25:15Z` through `17:27:31Z`;
+  CITDP records `depth_tier: integrated`, `mode: normalized-input`, and
+  `gate_policy: advisory`.
+
+- [x] **H2. VolumeStats produced the paired activation artifacts.**
+  Evidence (2026-08-22): all four files exist under
+  `/Users/fareed/Documents/dev/test/1787416567/working/REQ-VOLUMESTATS-CLI/adversarial-inquiry/`:
+  `obligation-report.json`, `finding-ledger.jsonl`, `gate-result.json`, and
+  `evidence-provenance.json`. The report is read-only, the gate is warn-only,
+  and the verdict is `UNRESOLVED`.
+
+- [x] **H3. The pilot preserved review boundaries.**
+  Evidence (2026-08-22): the finding ledger contains two observed
+  semantic-fidelity findings and duplicate links; no strict blocking or
+  canonical TIED mutation was performed.
+
+- [x] **H4. The non-Ruby adapter limitation was recorded.**
+  Evidence (2026-08-22): the client CITDP records that the project-input
+  adapter is limited to explicit `adversarial_inquiry` metadata and
+  Ruby/Minitest evidence; the client used normalized input as the fallback.
+
+- [ ] **H5. A second non-Ruby client completes integrated activation without
+  hand-authoring the request envelope.**
+  Evidence: pending a second pilot using the documented Mode A builder or a
+  native non-Ruby project-input adapter.
+
+**Activation rule:** count an integrated pilot only when the matching inquiry
+metric and all four request-scoped artifacts are both present. A metric-only
+call, checklist inheritance, or TIED consistency result is insufficient.
+
+---
+
 ## Test targets (RED-first)
 
 | Test file | Function / case | What it gates |

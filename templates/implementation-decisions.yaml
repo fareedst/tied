@@ -226,6 +226,59 @@ IMPL-QUALITY_TEST_ADEQUACY:
     tests:
       - "mcp-server/src/quality-adequacy.test.ts"
       - "mcp-server/src/tools/quality-validation-mcp.test.ts"
+IMPL-TIED_ADVERSARIAL_INQUIRY:
+  cross_references:
+    - "ARCH-TIED_ADVERSARIAL_INQUIRY"
+    - "REQ-TIED_ADVERSARIAL_INQUIRY"
+  description: "Implement deterministic read-only obligation mapping, bidirectional fidelity verdicts, adapter boundaries, finding/gate projections, and bounded assurance eligibility."
+  detail_file: "implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY.yaml"
+  metadata:
+    last_updated:
+      reason: "Methodology seed for bounded adversarial inquiry and fidelity evidence"
+  name: "Obligation graph, fidelity engine, and assurance gate"
+  related_decisions:
+    depends_on:
+      - "IMPL-MODULE_VALIDATION"
+      - "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER"
+      - "IMPL-QUALITY_EVIDENCE_MANIFEST"
+      - "IMPL-QUALITY_TEST_ADEQUACY"
+      - "IMPL-TIED_FIDELITY_RESEARCH"
+    see_also:
+      - "IMPL-QUALITY_BINDING_INVENTORY"
+    supersedes: []
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_ADVERSARIAL_INQUIRY"
+    requirements:
+      - "REQ-TIED_ADVERSARIAL_INQUIRY"
+IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST:
+  cross_references:
+    - "ARCH-TIED_ADVERSARIAL_INQUIRY"
+    - "PROC-AGENT_REQ_CHECKLIST"
+    - "REQ-TIED_ADVERSARIAL_INQUIRY"
+  description: "Extend real checklist slugs and compose the registered inquiry tool with bounded working artifact persistence and scoped human-approved strict status."
+  detail_file: "implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST.yaml"
+  metadata:
+    last_updated:
+      reason: "Methodology seed for checklist inquiry integration and bounded artifacts"
+  name: "Adversarial inquiry checklist integration and evidence artifacts"
+  related_decisions:
+    depends_on:
+      - "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER"
+      - "IMPL-QUALITY_EVIDENCE_MANIFEST"
+      - "IMPL-TIED_ADVERSARIAL_INQUIRY"
+      - "IMPL-TIED_FIDELITY_RESEARCH"
+    see_also:
+      - "IMPL-QUALITY_TEST_ADEQUACY"
+      - "PROC-LEAP"
+    supersedes: []
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_ADVERSARIAL_INQUIRY"
+    requirements:
+      - "REQ-TIED_ADVERSARIAL_INQUIRY"
 IMPL-TIED_FIDELITY_RESEARCH:
   cross_references:
     - "ARCH-TIED_FIDELITY_RESEARCH"
