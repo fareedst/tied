@@ -1,0 +1,107 @@
+CITDP-REQ-TIED_ADVERSARIAL_INQUIRY_MODE_B:
+  change_definition:
+    completion_criteria:
+      focused_tests: "8 new Mode B unit tests and the Mode A plus Mode B MCP composition tests pass."
+      full_mcp_server_tests: "npm test --prefix mcp-server passes, including all adversarial-inquiry and feature-orchestration tests."
+      go_composition_tests: "go test ./checklist/... ./pipeline/... passes."
+      operator_evidence: "not_run; adoption remains non-operational until a human reloads the Cursor MCP server and performs the CLI smoke."
+      pseudocode_structural_validation: "BUILD_PROJECT_INQUIRY_INPUT is token-linked and pseudocode_validate passes with behavioral coverage references."
+      typescript_typecheck: "npm run build --prefix mcp-server and bunx tsc -b mcp-server pass."
+      yaml_consistency: "tied_validate_consistency passes after the implementation traceability update."
+    current_behavior: "The live adversarial inquiry handler accepted normalized graph, fidelity, and scope inputs only; it did not load an explicitly bounded project scope."
+    desired_behavior: "Accept a discriminated project-input request, load selected TIED records and declared source files read-only, normalize the supported Ruby Minitest evidence, and delegate to the existing checklist inquiry and bounded artifact writer."
+    impact_analysis:
+      audited_project_mutation: "none; only bounded working artifacts are written by tests."
+      files:
+        - "docs/adversarial-inquiry-adoption.md"
+        - "mcp-server/src/adversarial-inquiry/project-orchestrator.test.ts"
+        - "mcp-server/src/adversarial-inquiry/project-orchestrator.ts"
+        - "mcp-server/src/adversarial-inquiry/project-scope-loader.test.ts"
+        - "mcp-server/src/adversarial-inquiry/project-scope-loader.ts"
+        - "mcp-server/src/tools/adversarial-inquiry-mcp.test.ts"
+        - "mcp-server/src/tools/index.ts"
+        - "mcp-server/test/fixtures/adversarial-inquiry-mode-b/"
+        - "tied/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY-pseudocode.md"
+        - "tied/vocab/fidelity-research.md"
+      modules:
+        - "bounded_working_artifact_delegation"
+        - "explicit_project_scope_loader"
+        - "mcp_discriminated_dispatch"
+        - "project_input_orchestrator"
+        - "ruby_minitest_adapter_boundary"
+    next_phase: "Operator-only MCP reload and CLI smoke; no strict promotion until pilot evidence and human approval exist."
+    non_goals:
+      - "Global TIED loader refactoring or process-environment mutation"
+      - "Production runtime behavior inference from source text"
+      - "Shell execution, universal Ruby parsing, strict-mode promotion, or canonical YAML mutation"
+    proof_boundaries:
+      - "Fidelity verdicts compare declared evidence and do not prove runtime behavior."
+      - "Loader and graph results establish structural traceability only."
+      - "Operator verification is not asserted by automated tests."
+      - "Production source is a locus and revision reference, not a behavior oracle."
+    record_identity:
+      author: "AI Agent"
+      change_request_id: "REQ-TIED_ADVERSARIAL_INQUIRY"
+      date: "2026-08-21"
+      record_status: "complete"
+    risk_analysis:
+      profiles:
+        - "baseline-functional"
+        - "external-input-security"
+      risks:
+        - mitigation: "Resolve the manifest before reads; require projectRoot/tied and realpath containment; reject repository roots outside the validated project."
+          name: "wrong_project_scope"
+          severity: "high"
+        - mitigation: "The loader has no write APIs and composition tests compare all fixture TIED bytes before and after."
+          name: "canonical_mutation"
+          severity: "high"
+        - mitigation: "Require structured production observations and use production source only for evidence loci."
+          name: "overstated_production_fidelity"
+          severity: "high"
+        - mitigation: "Use direct explicit-context fs/js-yaml reads and test with a mismatched TIED_BASE_PATH."
+          name: "global_loader_cache_bleed"
+          severity: "high"
+        - mitigation: "Record operator-only status as not_run until a human reload and CLI smoke are performed."
+          name: "operator_catalog_drift"
+          severity: "medium"
+    success_criteria:
+      - "Mode A composition behavior remains backward compatible and generated artifacts remain confined to working/{REQ-TOKEN}/adversarial-inquiry/."
+      - "Mode B rejects mixed Mode A fields with a stable INVALID_INPUT diagnostic."
+      - "Production behavior enters normalized fidelity only through structured observations; production source contributes loci only."
+      - "The explicit loader enforces manifest, realpath, traversal, symlink, missing-file, and regular-file boundaries."
+      - "The three deterministic fixture cases produce the PD-004 verdict floors and no automatic PASS upgrade."
+    tdd_sequence:
+      - "Add BUILD_PROJECT_INQUIRY_INPUT pseudo-code and pass pseudocode_validate before tests."
+      - "Create the isolated three-case fixture tree."
+      - "Run full tests, lint, TIED consistency, verification, and vocabulary validation."
+      - "Write RED loader and orchestrator tests, then implement and validate each module independently."
+      - "Write RED MCP dispatch tests, then add the zod boundary and thin Mode B dispatch."
+    test_strategy:
+      composition_pending: false
+      red_before_green: true
+      testability:
+        e2e_only: []
+        integration:
+          - "runProjectInquiry"
+          - "tied_adversarial_inquiry_run Mode A and Mode B dispatch"
+        unit:
+          - "buildProjectInquiryInput"
+          - "loadProjectScope"
+          - "parseMinitestAssertions"
+      tests:
+        - "mcp-server/src/adversarial-inquiry/project-orchestrator.test.ts"
+        - "mcp-server/src/adversarial-inquiry/project-scope-loader.test.ts"
+        - "mcp-server/src/tools/adversarial-inquiry-mcp.test.ts"
+    tied_context:
+      architecture:
+        - "ARCH-TIED_ADVERSARIAL_INQUIRY"
+      implementation:
+        - "IMPL-TIED_ADVERSARIAL_INQUIRY"
+      methodology_version: "3.0.0"
+      requirements:
+        - "REQ-TIED_ADVERSARIAL_INQUIRY"
+      tied_base_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied"
+    unchanged_behavior:
+      - "Checklist integration owns policy, findings, scoped status, and bounded artifact persistence."
+      - "REQ/ARCH/IMPL remains canonical intent and audited TIED YAML is never written by inquiry."
+      - "Structural, semantic, executable, and human proof boundaries remain distinct."

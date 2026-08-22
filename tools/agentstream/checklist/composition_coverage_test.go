@@ -178,3 +178,69 @@ func TestLoadTurns_canonicalChecklistCompositionGateOrder(t *testing.T) {
 		t.Fatalf("canonical composition-integration must require UI-free tests:\n%s", compBody)
 	}
 }
+
+func TestCanonicalChecklist_subAdversarialInquiryPassCallersRender(t *testing.T) {
+	// [IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY]
+	// How: Part C4.2 — each caller step must render CALL sub-adversarial-inquiry-pass via flow.calls.
+	canonical := findCanonicalChecklist(t)
+	callers := []string{
+		"gate-pseudocode-validation",
+		"flag-insufficient-specs",
+		"flag-contradictory-specs",
+		"three-way-alignment-unit",
+		"verification-gate",
+		"traceable-commit",
+	}
+	for _, slug := range callers {
+		slug := slug
+		t.Run(slug, func(t *testing.T) {
+			turns, err := LoadTurns(canonical, Options{
+				IncludeSubProcedures: false,
+				StepFromID:           slug,
+				StepToID:             slug,
+			})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if len(turns) != 1 {
+				t.Fatalf("want 1 turn for %q, got %d", slug, len(turns))
+			}
+			body := strings.Join(turns[0].Parts, "\n")
+			if !strings.Contains(body, "- CALL sub-adversarial-inquiry-pass") {
+				t.Fatalf("caller %q missing CALL sub-adversarial-inquiry-pass in:\n%s", slug, body)
+			}
+		})
+	}
+}
+
+func TestCanonicalChecklist_inquiryRunsBeforeGreenAndComposition(t *testing.T) {
+	// [IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY]
+	// How: integrate inquiry into existing checklist slugs with bounded working artifacts and human-approved scoped strict status.
+	canonical := findCanonicalChecklist(t)
+	turns, err := LoadTurns(canonical, Options{
+		IncludeSubProcedures: false,
+		StepFromID:           "translate-sponsor-intent",
+		StepToID:             "composition-integration",
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	positions := make(map[string]int)
+	for i, turn := range turns {
+		positions[turn.StepStub] = i
+	}
+	for _, slug := range []string{"translate-sponsor-intent", "unit-test-red", "unit-test-green", "composition-integration"} {
+		if _, ok := positions[slug]; !ok {
+			t.Fatalf("bounded canonical slice missing %q: %#v", slug, positions)
+		}
+	}
+	if !(positions["translate-sponsor-intent"] < positions["unit-test-red"] &&
+		positions["unit-test-red"] < positions["unit-test-green"] &&
+		positions["unit-test-green"] < positions["composition-integration"]) {
+		t.Fatalf("inquiry/TDD/composition order violated: %#v", positions)
+	}
+	body := strings.Join(MessagesFromTurns(turns), "\n")
+	if !strings.Contains(body, "RED before GREEN") {
+		t.Fatalf("canonical checklist must expose RED-before-GREEN contract:\n%s", body)
+	}
+}

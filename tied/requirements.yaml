@@ -1333,6 +1333,13 @@ REQ-QUALITY_ASSURANCE_EVIDENCE:
       method: "Unit and composition tests"
     - coverage: "REQ to ARCH to IMPL traceability and token-commented pseudo-code."
       method: "tied_validate_consistency"
+REQ-TIED_ADVERSARIAL_INQUIRY:
+  category: "Functional"
+  description: "Provide bounded, read-only obligation mapping and bidirectional fidelity evidence without treating structural presence as semantic or runtime proof."
+  detail_file: "requirements/REQ-TIED_ADVERSARIAL_INQUIRY.yaml"
+  name: "Adversarial inquiry for obligation and fidelity evidence"
+  priority: "P0"
+  status: "Implemented"
 REQ-TIED_FIDELITY_RESEARCH:
   category: "Functional"
   detail_file: "requirements/REQ-TIED_FIDELITY_RESEARCH.yaml"

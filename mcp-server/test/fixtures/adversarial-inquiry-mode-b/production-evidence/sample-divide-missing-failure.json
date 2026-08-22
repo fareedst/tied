@@ -1,0 +1,17 @@
+[
+  {
+    "id": "production-success",
+    "direction": "production",
+    "statementId": "minitest-6-assert_equal",
+    "kind": "behavior",
+    "value": "assert_equal 3, divide(6, 2)",
+    "order": 1,
+    "reliable": true,
+    "source": {
+      "location": "lib/sample_divide.rb:5",
+      "line": 5
+    },
+    "provenance": "mode-b-fixture-production-manifest",
+    "blockRevision": "current"
+  }
+]

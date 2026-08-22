@@ -1,0 +1,108 @@
+{
+  "canonicalMutation": false,
+  "findings": [
+    {
+      "direction": "A",
+      "id": "2d0bc153cf3a9a46",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "minitest-6-assert_equal"
+    },
+    {
+      "direction": "B",
+      "id": "9427bd3779233689",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "minitest-7-assert_raises"
+    },
+    {
+      "direction": "A",
+      "id": "f0ba09599b6d88f9",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "minitest-7-assert_raises"
+    },
+    {
+      "direction": "B",
+      "id": "f14b25fdb1f777f4",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "minitest-6-assert_equal"
+    }
+  ],
+  "graph": {
+    "edges": [
+      {
+        "from": "REQ-FIXTURE-ADVERSARIAL#divide-failure",
+        "kind": "criterion_constraint",
+        "to": "constraint:divide-contract"
+      },
+      {
+        "from": "REQ-FIXTURE-ADVERSARIAL#divide-success",
+        "kind": "criterion_constraint",
+        "to": "constraint:divide-contract"
+      },
+      {
+        "from": "constraint:divide-contract",
+        "kind": "constraint_block",
+        "to": "IMPL-FIXTURE-ADVERSARIAL#BUILD_PROJECT_INQUIRY_INPUT#bc1fd0a97eb78576"
+      },
+      {
+        "from": "IMPL-FIXTURE-ADVERSARIAL#BUILD_PROJECT_INQUIRY_INPUT#bc1fd0a97eb78576",
+        "kind": "block_evidence",
+        "to": "evidence:production-locus"
+      },
+      {
+        "from": "IMPL-FIXTURE-ADVERSARIAL#BUILD_PROJECT_INQUIRY_INPUT#bc1fd0a97eb78576",
+        "kind": "block_evidence",
+        "to": "evidence:test-locus"
+      }
+    ],
+    "nodes": [
+      {
+        "id": "constraint:divide-contract",
+        "kind": "constraint"
+      },
+      {
+        "id": "evidence:production-locus",
+        "kind": "evidence",
+        "revision": "a4df20ee2aed6408"
+      },
+      {
+        "id": "evidence:test-locus",
+        "kind": "evidence",
+        "revision": "a4df20ee2aed6408"
+      },
+      {
+        "id": "IMPL-FIXTURE-ADVERSARIAL#BUILD_PROJECT_INQUIRY_INPUT#bc1fd0a97eb78576",
+        "kind": "block",
+        "revision": "d16440bce156d9eb"
+      },
+      {
+        "id": "REQ-FIXTURE-ADVERSARIAL#divide-failure",
+        "kind": "criterion",
+        "revision": "a2710ac05bbdaa71"
+      },
+      {
+        "id": "REQ-FIXTURE-ADVERSARIAL#divide-success",
+        "kind": "criterion",
+        "revision": "d002e862efe0ca59"
+      }
+    ],
+    "projectId": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/test/fixtures/adversarial-inquiry-mode-b/mini-project"
+  },
+  "projectId": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/test/fixtures/adversarial-inquiry-mode-b/mini-project",
+  "proofBoundaries": [
+    "semantic_fidelity"
+  ],
+  "readOnly": true,
+  "schemaVersion": "adversarial-inquiry-report.v1",
+  "scope": [
+    "REQ-FIXTURE-ADVERSARIAL#divide-failure",
+    "REQ-FIXTURE-ADVERSARIAL#divide-success"
+  ]
+}

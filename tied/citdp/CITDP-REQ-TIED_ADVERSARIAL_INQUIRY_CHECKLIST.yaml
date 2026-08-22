@@ -1,0 +1,103 @@
+CITDP-REQ-TIED_ADVERSARIAL_INQUIRY_CHECKLIST:
+  change_definition:
+    current_behavior: "The existing inquiry core is read-only and mostly pure, while checklist orchestration, working-artifact persistence, and human-approved strict promotion are not yet connected."
+    desired_behavior: "Integrate the inquiry into existing checklist slugs, persist bounded deterministic artifacts under the request working directory, route findings to valid owners, and keep strict blocking warn-only until explicit human approval."
+    non_goals:
+      - "Adding a new PROC token"
+      - "Editing the original adversarial inquiry CITDP"
+      - "Making strict mode global"
+      - "Mutating canonical TIED YAML from analysis"
+    success_criteria:
+      - "Artifacts are root-confined, redacted, deterministic, and append-only where required."
+      - "RED contract and composition tests precede implementation changes."
+      - "Strict blocking requires complete eligibility and a human approval record covering exact scope."
+      - "The live MCP tool is discoverable after rebuild and returns scoped read-only results."
+    unchanged_behavior:
+      - "Observed findings remain review-gated and do not trigger LEAP."
+      - "REQ/ARCH/IMPL remains canonical intent."
+      - "Unrelated obligations are never demoted."
+  completion_criteria:
+    artifact_safety: "Root confinement, atomic snapshots, append-only ledger, and redaction tests pass."
+    focused_tests: "4 checklist-integration TypeScript tests, 1 MCP composition test, and 3 Go checklist/composition tests pass"
+    lint: "bunx tsc -b and go test ./checklist/... ./pipeline/... pass"
+    live_mcp: "Rebuilt server exposes tied_adversarial_inquiry_run and smoke call passes."
+    pseudocode_structural_validation: "5 token-linked checklist contracts with behavioral coverage references; no diagnostics"
+    verification: "tied_verify and tied_validate_consistency pass."
+  impact_analysis:
+    audited_project_mutation: "none"
+    files:
+      - "docs/adversarial-inquiry-adoption.md"
+      - "mcp-server/src/adversarial-inquiry/checklist-integration.test.ts"
+      - "mcp-server/src/adversarial-inquiry/checklist-integration.ts"
+      - "mcp-server/src/tools/adversarial-inquiry-mcp.test.ts"
+      - "mcp-server/src/tools/index.ts"
+      - "tied/docs/agent-req-implementation-checklist.md"
+      - "tied/docs/agent-req-implementation-checklist.yaml"
+      - "tied/vocab/fidelity-research.md"
+      - "tools/agentstream/checklist/checklist_test.go"
+      - "tools/agentstream/checklist/composition_coverage_test.go"
+      - "tools/agentstream/pipeline/composition_coverage_test.go"
+    modules:
+      - "bounded_working_artifacts"
+      - "checklist_inquiry_orchestration"
+      - "go_checklist_rendering"
+      - "mcp_composition"
+      - "strict_eligibility_and_human_approval"
+  leap_feedback:
+    divergences_from_analysis:
+      - "Agentstream README and agent-preload-contract-template document non-normative GOTO hints and optional adversarial_inquiry_scope at persist-implementation-records."
+      - "Batch 5–6 checklist-composition scope landed in canonical checklist YAML/MD and Go slug tests without a sixth REQ satisfaction criterion; checklist integration remains owned by [PROC-AGENT_REQ_CHECKLIST] and [IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST] per REQ implementation_approach."
+      - "sub-adversarial-inquiry-pass registered as mandatory sub-procedure with six callers; advisory and strict-candidate policies never block regardless of verdict."
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    author: "AI Agent"
+    change_request_id: "REQ-TIED_ADVERSARIAL_INQUIRY_CHECKLIST"
+    date: "2026-08-21"
+    record_status: "complete"
+  risk_analysis:
+    profiles:
+      - "baseline-functional"
+      - "external-input-security"
+    risks:
+      - mitigation: "Reject traversal and roots outside repository working/{REQ-TOKEN}/adversarial-inquiry."
+        name: "artifact_escape"
+        severity: "high"
+      - mitigation: "Require complete eligibility and explicit human approval with reviewer, scope, thresholds, waiver owner/expiry, rollback criteria, and revision."
+        name: "strict_without_review"
+        severity: "high"
+      - mitigation: "Only write working artifacts and compare canonical bytes in composition tests."
+        name: "canonical_mutation"
+        severity: "high"
+      - mitigation: "Validate real slugs and Markdown/YAML parity in Go composition tests."
+        name: "checklist_drift"
+        severity: "medium"
+  test_strategy:
+    composition_pending: false
+    red_before_green: true
+    testability:
+      e2e_only: []
+      integration:
+        - "canonical checklist rendering"
+        - "tied_adversarial_inquiry_run"
+      unit:
+        - "evaluateScopedGate"
+        - "persistWorkingArtifacts"
+        - "resolveArtifactPaths"
+        - "validateStrictEligibility"
+    tests:
+      - "mcp-server/src/adversarial-inquiry/checklist-integration.test.ts"
+      - "mcp-server/src/tools/adversarial-inquiry-mcp.test.ts"
+      - "tools/agentstream/checklist/checklist_test.go"
+      - "tools/agentstream/checklist/composition_coverage_test.go"
+      - "tools/agentstream/pipeline/composition_coverage_test.go"
+  tied_context:
+    architecture:
+      - "ARCH-TIED_ADVERSARIAL_INQUIRY"
+    implementation:
+      - "IMPL-TIED_ADVERSARIAL_INQUIRY"
+      - "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST"
+    methodology_version: "3.0.0"
+    requirements:
+      - "REQ-TIED_ADVERSARIAL_INQUIRY"
+    tied_base_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied"

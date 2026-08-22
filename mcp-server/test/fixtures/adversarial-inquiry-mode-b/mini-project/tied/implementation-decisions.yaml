@@ -1,0 +1,16 @@
+IMPL-FIXTURE-ADVERSARIAL:
+  code_locations:
+    files:
+      - description: "Ruby divide production fixture"
+        path: "lib/sample_divide.rb"
+  cross_references:
+    - "ARCH-FIXTURE-ADVERSARIAL"
+    - "REQ-FIXTURE-ADVERSARIAL"
+  detail_file: "implementation-decisions/IMPL-FIXTURE-ADVERSARIAL.yaml"
+  name: "Preserve divide success and failure observations"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-FIXTURE-ADVERSARIAL"
+    requirements:
+      - "REQ-FIXTURE-ADVERSARIAL"

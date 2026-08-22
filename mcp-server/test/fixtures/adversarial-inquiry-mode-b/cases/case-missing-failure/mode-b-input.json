@@ -1,0 +1,11 @@
+{
+  "mode": "project",
+  "project_root": "__PROJECT_ROOT__",
+  "request_token": "REQ-FIXTURE-ADVERSARIAL",
+  "impl_token": "IMPL-FIXTURE-ADVERSARIAL",
+  "test_path": "test/sample_divide_missing_failure_test.rb",
+  "production_path": "lib/sample_divide.rb",
+  "production_evidence_path": "production-evidence/sample-divide-missing-failure.json",
+  "policy": "advisory",
+  "repository_root": "__PROJECT_ROOT__"
+}

@@ -1,0 +1,74 @@
+IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST:
+  code_locations:
+    files:
+      - description: "Inquiry core, artifact persistence, workflow, and strict gate integration"
+        path: "mcp-server/src/adversarial-inquiry/"
+      - description: "MCP composition handler"
+        path: "mcp-server/src/tools/index.ts"
+      - description: "Canonical checklist integration"
+        path: "tied/docs/agent-req-implementation-checklist.yaml"
+      - description: "Canonical checklist prose mirror"
+        path: "tied/docs/agent-req-implementation-checklist.md"
+    functions: []
+  cross_references:
+    - "ARCH-TIED_ADVERSARIAL_INQUIRY"
+    - "PROC-AGENT_REQ_CHECKLIST"
+    - "REQ-TIED_ADVERSARIAL_INQUIRY"
+  detail_file: "implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST.yaml"
+  implementation_approach:
+    details:
+      - "Persist report, finding ledger, gate result, and provenance only below the declared working request directory."
+      - "Require negative controls, bounded execution, explicit proof boundaries, deterministic scope, waivers, pilot evidence, and a human approval record before strict blocking."
+      - "Route confirmed findings to existing checklist owners and keep observed findings out of LEAP."
+      - "Use an optional checklist-local sub-procedure under PROC-AGENT_REQ_CHECKLIST; do not add a second process token."
+    summary: "Extend real checklist slugs and compose the registered inquiry tool with bounded working artifact persistence and scoped human-approved strict status."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-21"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-21"
+      reason: "Define checklist integration, working artifact persistence, and scoped strict gate"
+    last_validated:
+      date: "2026-08-21"
+      result: "passed with 5 token-linked contracts and no diagnostics"
+      validator: "TIED pseudo-code validator"
+  name: "Adversarial inquiry checklist integration and evidence artifacts"
+  rationale:
+    benefits:
+      - "Existing checklist remains the sole workflow."
+      - "Strict decisions are scoped, reversible, and review-gated."
+      - "Working artifacts are deterministic and auditable."
+    problems_solved:
+      - "Checklist guidance can drift from the implemented MCP contract."
+      - "Generated findings need bounded persistence without mutating canonical TIED YAML."
+      - "Strict blocking needs scoped eligibility and explicit human approval."
+    why: "Checklist integration needs a separate implementation boundary for repeated advisory/strict invocation, bounded working artifacts, and review-gated routing."
+  related_decisions:
+    depends_on:
+      - "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER"
+      - "IMPL-QUALITY_EVIDENCE_MANIFEST"
+      - "IMPL-TIED_ADVERSARIAL_INQUIRY"
+      - "IMPL-TIED_FIDELITY_RESEARCH"
+    see_also:
+      - "IMPL-QUALITY_TEST_ADEQUACY"
+      - "PROC-LEAP"
+    supersedes: []
+  status: "Active"
+  testability: "integration"
+  traceability:
+    architecture:
+      - "ARCH-TIED_ADVERSARIAL_INQUIRY"
+    code_annotations:
+      - "ARCH-TIED_ADVERSARIAL_INQUIRY"
+      - "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST"
+      - "REQ-TIED_ADVERSARIAL_INQUIRY"
+    requirements:
+      - "REQ-TIED_ADVERSARIAL_INQUIRY"
+    tests:
+      - "mcp-server/src/adversarial-inquiry/checklist-integration.test.ts"
+      - "mcp-server/src/tools/adversarial-inquiry-mcp.test.ts"
+      - "tools/agentstream/checklist/checklist_test.go"
+      - "tools/agentstream/checklist/composition_coverage_test.go"
+      - "tools/agentstream/pipeline/composition_coverage_test.go"

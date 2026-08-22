@@ -12,6 +12,15 @@ agent_preload:
     ruby_test_files_present: "false"
     semantic_tokens_present: "false"
   implementation_contract:
+    adversarial_inquiry_scope:
+      artifact_directory: ""
+      gate_policy: ""
+      report_paths:
+        evidence_provenance: ""
+        finding_ledger: ""
+        gate_result: ""
+        obligation_report: ""
+      request_token: ""
     citdp_artifact_paths: []
     invalid_input: ""
     language: ""
@@ -51,4 +60,4 @@ agent_preload:
     project_summary: ""
     top_level_entries: []
     vcs_present: "false"
-preload_instructions: "Treat agent_preload as authoritative context. If a value is present, do not spend\ntool calls rediscovering it unless a later tool result or user message contradicts it.\nPrefer preload facts over filesystem discovery. Do not search for MCP schema, server\nmetadata, `.cursor/mcp.json`, or pause to confirm MCP unavailability — especially when\nthe session is driven by Go tools/agentstream (MCP preflight there is optional; copy_files.sh\ninstalls `.cursor/skills/tied-yaml/` only). Lack of Cursor MCP tools does not block tied-cli.sh\nwhen Node and TIED_MCP_BIN (built mcp-server/dist/index.js) are available — see tied-yaml SKILL.md. Do not search project layout or target file\nexistence unless needed to resolve a contradiction. When tied_paths.TIED_BASE_PATH and\nproject_yaml_writable_globs are set,\nalign MCP TIED_BASE_PATH with them; never treat methodology_readonly_glob paths as\nwritable. Keep preload narrow and accurate; wrong preload costs more than one\ndiscovery call.\n"
+preload_instructions: "Treat agent_preload as authoritative context. If a value is present, do not spend\ntool calls rediscovering it unless a later tool result or user message contradicts it.\nPrefer preload facts over filesystem discovery. Do not search for MCP schema, server\nmetadata, `.cursor/mcp.json`, or pause to confirm MCP unavailability — especially when\nthe session is driven by Go tools/agentstream (MCP preflight there is optional; copy_files.sh\ninstalls `.cursor/skills/tied-yaml/` only). Lack of Cursor MCP tools does not block tied-cli.sh\nwhen Node and TIED_MCP_BIN (built mcp-server/dist/index.js) are available — see tied-yaml SKILL.md. Do not search project layout or target file\nexistence unless needed to resolve a contradiction. When tied_paths.TIED_BASE_PATH and\nproject_yaml_writable_globs are set,\nalign MCP TIED_BASE_PATH with them; never treat methodology_readonly_glob paths as\nwritable. Keep preload narrow and accurate; wrong preload costs more than one\ndiscovery call.\n\nOptional `implementation_contract.adversarial_inquiry_scope` (IMPL-locked): populate at\n`persist-implementation-records` when [IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST] is in scope —\nset `request_token`, `gate_policy`, `artifact_directory` (typically\n`working/{REQ-TOKEN}/adversarial-inquiry`), and `report_paths` for obligation-report.json,\nfinding-ledger.jsonl, gate-result.json, and evidence-provenance.json. Leave empty when\nadversarial inquiry is not used for the change.\n"

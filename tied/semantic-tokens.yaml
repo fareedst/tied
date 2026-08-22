@@ -464,6 +464,17 @@ ARCH-QUALITY_ASSURANCE_PROFILES:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_ADVERSARIAL_INQUIRY:
+  cross_references:
+    - "IMPL-TIED_ADVERSARIAL_INQUIRY"
+    - "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST"
+    - "REQ-TIED_ADVERSARIAL_INQUIRY"
+  description: "Language-neutral graph and fidelity boundary with bounded evidence and scoped strictness."
+  detail_file: "architecture-decisions/ARCH-TIED_ADVERSARIAL_INQUIRY.yaml"
+  name: "Read-only obligation graph and evidence gate boundary"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY:
   cross_references:
     - "IMPL-TIED_FEEDBACK_PROMOTION"
@@ -1149,6 +1160,29 @@ IMPL-QUALITY_TEST_ADEQUACY:
     last_updated: "2026-08-02"
     registered: "2026-08-02"
   name: "Risk-triggered test adequacy validator"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-TIED_ADVERSARIAL_INQUIRY:
+  cross_references:
+    - "ARCH-TIED_ADVERSARIAL_INQUIRY"
+    - "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST"
+    - "REQ-TIED_ADVERSARIAL_INQUIRY"
+  description: "Pure core analysis, adapter normalization, append-only findings, and bounded assurance eligibility."
+  detail_file: "implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY.yaml"
+  name: "Obligation graph, fidelity engine, and assurance gate"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST:
+  cross_references:
+    - "ARCH-TIED_ADVERSARIAL_INQUIRY"
+    - "IMPL-TIED_ADVERSARIAL_INQUIRY"
+    - "PROC-AGENT_REQ_CHECKLIST"
+    - "REQ-TIED_ADVERSARIAL_INQUIRY"
+  description: "Existing checklist-slug integration with bounded working artifacts and human-approved scoped strict gating."
+  detail_file: "implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST.yaml"
+  name: "Adversarial inquiry checklist integration and evidence artifacts"
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
@@ -2026,6 +2060,17 @@ REQ-QUALITY_ASSURANCE_EVIDENCE:
     last_updated: "2026-08-02"
     registered: "2026-08-02"
   name: "Risk-triggered quality assurance evidence"
+  source_index: "requirements.yaml"
+  status: "Planned"
+  type: "REQ"
+REQ-TIED_ADVERSARIAL_INQUIRY:
+  cross_references:
+    - "ARCH-TIED_ADVERSARIAL_INQUIRY"
+    - "IMPL-TIED_ADVERSARIAL_INQUIRY"
+    - "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST"
+  description: "Read-only obligation mapping, bidirectional fidelity evidence, bounded assurance, and scoped strict eligibility."
+  detail_file: "requirements/REQ-TIED_ADVERSARIAL_INQUIRY.yaml"
+  name: "Adversarial inquiry for obligation and fidelity evidence"
   source_index: "requirements.yaml"
   status: "Planned"
   type: "REQ"

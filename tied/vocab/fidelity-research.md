@@ -75,6 +75,39 @@ Use these primary origin labels exactly as defined by the research plan:
 `binding-composition-defect`, `CITDP-defect`, `LEAP-process-defect`,
 `documentation-defect`, and `environment-external-defect`.
 
+## Checklist integration
+
+Adversarial inquiry extends `[PROC-AGENT_REQ_CHECKLIST]` through existing step slugs and the
+`sub-adversarial-inquiry-pass` sub-procedure — no second process token. Canonical checklist:
+`tied/docs/agent-req-implementation-checklist.yaml`.
+
+| Step slug | Integration role |
+|---|---|
+| `session-bootstrap` | PRELOAD this glossary and `quality-assurance.md` when work touches fidelity or obligation evidence |
+| `translate-sponsor-intent` | Anti-examples, ambiguity probes, unchanged-behavior checklist |
+| `change-definition` | Counterexamples and falsification questions for success criteria |
+| `impact-discovery` | First-divergence hypotheses; obligation inventory; proof-boundary class per matrix row |
+| `author-requirement` | Positive and negative (counterexample) case per satisfaction criterion |
+| `author-architecture` | REQ criterion → ARCH constraint mapping; invalid-state analysis |
+| `catalog-pseudocode-contracts` | Closed failure/state/ordering/termination catalog per block |
+| `flag-insufficient-specs` | Counterexample-derived flags → finding ledger; CALL `sub-adversarial-inquiry-pass` (`phase: structural`) |
+| `flag-contradictory-specs` | Contradiction counterexamples → finding ledger; CALL sub-procedure (`structural`) |
+| `gate-pseudocode-validation` | CALL `sub-adversarial-inquiry-pass` (`phase: pre_red`); no runtime claim |
+| `risk-assessment` | Adversarial depth tier; strict-eligibility prerequisites when blocking desired |
+| `test-strategy` | Independent oracle sources; bounded command rows when profile-triggered |
+| `unit-test-red` | Fault matrix row with expected failure reason |
+| `unit-test-green` | Bidirectional adapter check (warn-only → `sub-leap-micro-cycle`) |
+| `three-way-alignment-unit` | Bidirectional adapter check; CALL sub-procedure (`phase: post_test`) |
+| `composition-integration` | Binding-local adversarial cases; controlled fault injection rows |
+| `verification-gate` | Full fidelity matrix; CALL sub-procedure (`phase: verification`); scoped blocking when strict-eligible |
+| `sync-tied-stack` | LEAP only for **confirmed** findings (not observed-only) |
+| `traceable-commit` | Evidence provenance, open findings, waivers, proof boundaries; CALL sub-procedure (`phase: close_out`) |
+| `persist-citdp-record` | Pilot evidence when gate policy is strict-candidate or strict-approved |
+| `sub-adversarial-inquiry-pass` | Binds `SELECT_ADVERSARIAL_INQUIRY_DEPTH` → `MAP_ADVERSARIAL_OBLIGATIONS` → `EVALUATE_ADVERSARIAL_FINDINGS` → `ROUTE_UNRESOLVED_CRITICAL_FINDINGS` → `PERSIST_WORKING_ARTIFACTS` |
+
+Working artifacts persist only under `working/{REQ-TOKEN}/adversarial-inquiry/`. See
+[`docs/adversarial-inquiry-checklist-integration-plan.md`](../../docs/adversarial-inquiry-checklist-integration-plan.md).
+
 ## Alphabetical index
 
 | Term | Section |

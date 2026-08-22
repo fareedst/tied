@@ -1,0 +1,16 @@
+REQ-FIXTURE-ADVERSARIAL:
+  category: "Functional"
+  description: "The divide fixture preserves its success and zero-divisor behavior."
+  name: "Deterministic divide fixture for project-input inquiry"
+  priority: "P0"
+  satisfaction_criteria:
+    - criterion: "A non-zero divisor returns the quotient."
+      criterion_id: "divide-success"
+    - criterion: "A zero divisor raises ZeroDivisionError."
+      criterion_id: "divide-failure"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-FIXTURE-ADVERSARIAL"
+    implementation:
+      - "IMPL-FIXTURE-ADVERSARIAL"

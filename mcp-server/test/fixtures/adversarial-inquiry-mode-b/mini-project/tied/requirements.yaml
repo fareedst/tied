@@ -1,0 +1,11 @@
+REQ-FIXTURE-ADVERSARIAL:
+  category: "Functional"
+  detail_file: "requirements/REQ-FIXTURE-ADVERSARIAL.yaml"
+  name: "Deterministic divide fixture for project-input inquiry"
+  priority: "P0"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-FIXTURE-ADVERSARIAL"
+    implementation:
+      - "IMPL-FIXTURE-ADVERSARIAL"

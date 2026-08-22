@@ -1489,6 +1489,23 @@ IMPL-QUALITY_TEST_ADEQUACY:
     tests:
       - "mcp-server/src/quality-adequacy.test.ts"
       - "mcp-server/src/tools/quality-validation-mcp.test.ts"
+IMPL-TIED_ADVERSARIAL_INQUIRY:
+  cross_references:
+    - "ARCH-TIED_ADVERSARIAL_INQUIRY"
+    - "REQ-TIED_ADVERSARIAL_INQUIRY"
+  description: "Implement deterministic read-only obligation mapping, bidirectional fidelity verdicts, adapter boundaries, finding/gate projections, and bounded assurance eligibility."
+  detail_file: "implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY.yaml"
+  name: "Obligation graph, fidelity engine, and assurance gate"
+  status: "Active"
+IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST:
+  cross_references:
+    - "ARCH-TIED_ADVERSARIAL_INQUIRY"
+    - "PROC-AGENT_REQ_CHECKLIST"
+    - "REQ-TIED_ADVERSARIAL_INQUIRY"
+  description: "Extend real checklist slugs and compose the registered inquiry tool with bounded working artifact persistence and scoped human-approved strict status."
+  detail_file: "implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST.yaml"
+  name: "Adversarial inquiry checklist integration and evidence artifacts"
+  status: "Active"
 IMPL-TIED_FEEDBACK_PROMOTION:
   code_locations:
     files:

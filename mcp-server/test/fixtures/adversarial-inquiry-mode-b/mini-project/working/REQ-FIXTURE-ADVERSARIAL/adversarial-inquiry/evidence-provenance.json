@@ -1,0 +1,38 @@
+{
+  "provenance": {
+    "adapter": "ruby-minitest",
+    "adapterDiagnostics": [
+      "unsupported_adapter"
+    ],
+    "manifest": {
+      "ignoreRules": [],
+      "languages": [
+        "ruby"
+      ],
+      "projectRoot": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/test/fixtures/adversarial-inquiry-mode-b/mini-project",
+      "testClassifiers": [
+        "minitest"
+      ],
+      "tiedBasePath": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/test/fixtures/adversarial-inquiry-mode-b/mini-project/tied",
+      "version": "mode-b-fixture"
+    },
+    "mode": "project",
+    "proofBoundaries": [
+      "traceability_structure",
+      "semantic_fidelity"
+    ],
+    "sourceRevisions": {
+      "architecture": "6b1fc845f4029d25",
+      "architectureDetail": "1f71927d30d07c58",
+      "implementation": "f82b8c26e50bdd7c",
+      "implementationDetail": "0ae238baff2e97f2",
+      "implementationPseudocode": "a4df20ee2aed6408",
+      "production": "fcfbbfba366c98b5",
+      "requirementDetail": "5a4d72c3435cc6f5",
+      "requirements": "22542a346089ac24",
+      "semanticTokens": "84b8e8b1413d12b1",
+      "test": "f309eba736b767a2"
+    }
+  },
+  "schemaVersion": "adversarial-inquiry-provenance.v1"
+}

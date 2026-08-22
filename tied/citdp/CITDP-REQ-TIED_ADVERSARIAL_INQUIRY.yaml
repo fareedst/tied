@@ -1,0 +1,123 @@
+CITDP-REQ-TIED_ADVERSARIAL_INQUIRY:
+  change_definition:
+    current_behavior: "Fidelity analysis reported test and production loci but did not compare statement-level reliability or completeness."
+    desired_behavior: "Provide deterministic read-only obligation mapping, bidirectional fidelity verdicts, bounded Ruby Minitest evidence, review-gated findings, scoped status, and strict eligibility calibration."
+    non_goals:
+      - "Canonical YAML mutation during analysis"
+      - "Universal mutation, fuzzing, formal methods, model checking, predictive risk scoring, or extra pilot languages"
+    success_criteria:
+      - "Generated reporting is deterministic, read-only, and proof-boundary labeled."
+      - "Identity and graph references are deterministic, revision-aware, and diagnostic on stale or unresolved inputs."
+      - "PASS requires complete reliable test and production evidence; locus presence alone cannot pass."
+      - "Strict promotion has negative controls, bounded execution, scope, waiver ownership, and representative evidence."
+    unchanged_behavior:
+      - "REQ/ARCH/IMPL remains canonical intent."
+      - "Structural presence remains distinct from runtime proof."
+      - "TDD, composition-before-E2E, CITDP, LEAP, and human review remain mandatory."
+  completion_criteria:
+    focused_tests: "26 TypeScript tests passed across identity, graph, fixtures, fidelity, adapter, workflow, assurance, pilot, checklist-integration, and MCP composition modules"
+    full_mcp_server_tests: "291 tests passed via npm test, including adversarial-inquiry tests"
+    lint: "no IDE diagnostics"
+    pseudocode_structural_validation: "passed with 10 token-linked contracts and no diagnostics"
+    ruby_syntax: "scripts/validate_vocab_index.rb and scripts/migrate_vocab_ownership.rb syntax checks passed"
+    ruby_tests: "scripts/validate_vocab_index_test.rb: 4 runs, 6 assertions, 0 failures"
+    tied_validate_consistency: "passed with detail files and pseudo-code enabled"
+    typescript_typecheck: "npm run build passed"
+    yaml_index_validation: "requirements, architecture, implementation, and semantic-tokens valid"
+  impact_analysis:
+    audited_project_mutation: "none"
+    files:
+      - "docs/adversarial-inquiry-adoption.md"
+      - "mcp-server/package.json"
+      - "mcp-server/src/adversarial-inquiry/"
+      - "mcp-server/src/tools/index.ts"
+      - "tied/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY.yaml"
+      - "tied/vocab/fidelity-research.md"
+    modules:
+      - "bounded_assurance_and_controlled_faults"
+      - "criterion_and_block_identity"
+      - "finding_lifecycle_and_scoped_status"
+      - "obligation_graph"
+      - "pilot_calibration"
+      - "read_only_report_projection"
+      - "ruby_minitest_adapter"
+      - "statement_level_fidelity"
+  leap_feedback:
+    divergences_from_analysis:
+      - "Generated obligations, normalized evidence, reports, and findings remain non-canonical and do not mutate audited YAML."
+      - "The first implementation used content-derived block identity with a separate semantic revision, preserving formatting stability and exposing semantic edits."
+      - "The pseudo-code validator requires token references inside procedure bodies; every procedure declaration now carries the REQ/ARCH/IMPL chain."
+    record_status: "complete"
+    tied_stack_updates_required:
+      - "REQ, ARCH, and IMPL detail traceability now references all adversarial inquiry tests."
+      - "Verification-gated status was derived by tied_verify after the full test suite."
+  next_phase: "Use the Ruby Minitest pilot against one real project module; keep semantic rules non-blocking until measured strict eligibility is reviewed."
+  proof_boundaries:
+    - "Executable assurance is bounded evidence, not universal runtime proof."
+    - "Fidelity verdicts compare supplied evidence and require review for product conclusions."
+    - "Identity and graph results prove structural traceability only."
+    - "Pilot precision and escaped-defect association do not establish causality without study design."
+  record_identity:
+    author: "AI Agent"
+    change_request_id: "REQ-TIED_ADVERSARIAL_INQUIRY"
+    date: "2026-08-21"
+    record_status: "complete"
+  risk_analysis:
+    not_applicable:
+      - "regulated-privacy"
+      - "user-facing-accessibility"
+    profiles:
+      - "baseline-functional"
+      - "external-input-security"
+      - "stateful-reliability"
+    risks:
+      - mitigation: "Use bidirectional comparisons, negative controls, and review; never treat loci as proof."
+        name: "correlated-oracle-confidence"
+        severity: "high"
+      - mitigation: "Carry project and source revisions in every graph and report and require project-bounded execution."
+        name: "wrong-project-scope"
+        severity: "high"
+      - mitigation: "Normalize content, use explicit criterion IDs, and mark legacy derivation visibly."
+        name: "identity-churn"
+        severity: "medium"
+      - mitigation: "Keep core analysis pure and generated reports outside canonical TIED YAML."
+        name: "analysis-mutation"
+        severity: "high"
+      - mitigation: "Enforce five-minute local and fifteen-minute CI budgets; stop expansion after two breaches."
+        name: "execution-cost"
+        severity: "medium"
+  tdd_sequence:
+    - "Author token-commented IMPL pseudo-code and pass structural validation."
+    - "Run full TypeScript and Ruby verification."
+    - "Run tied_verify and tied_validate_consistency before close-out."
+    - "Validate modules independently before composition and wiring."
+    - "Write RED tests before foundation and fidelity implementation."
+  test_strategy:
+    composition_pending: false
+    red_before_green: true
+    testability:
+      e2e_only: []
+      integration:
+        - "RUN_ADVERSARIAL_INQUIRY"
+        - "tied_adversarial_inquiry_run"
+      unit:
+        - "BUILD_OBLIGATION_GRAPH"
+        - "CALIBRATE_PILOT"
+        - "CLASSIFY_FIDELITY"
+        - "IDENTITY_RESOLUTION"
+        - "NORMALIZE_FIDELITY_EVIDENCE"
+        - "PARSE_MINITEST_ASSERTIONS"
+        - "RUN_BOUNDED_COMMAND"
+        - "VALIDATE_STRICT_ELIGIBILITY"
+    tests:
+      - "mcp-server/src/adversarial-inquiry/*.test.ts"
+      - "scripts/validate_vocab_index_test.rb"
+  tied_context:
+    architecture:
+      - "ARCH-TIED_ADVERSARIAL_INQUIRY"
+    implementation:
+      - "IMPL-TIED_ADVERSARIAL_INQUIRY"
+    methodology_version: "3.0.0"
+    requirements:
+      - "REQ-TIED_ADVERSARIAL_INQUIRY"
+    tied_base_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied"

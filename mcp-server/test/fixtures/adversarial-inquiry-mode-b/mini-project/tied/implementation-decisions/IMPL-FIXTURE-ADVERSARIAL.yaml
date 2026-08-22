@@ -1,0 +1,25 @@
+IMPL-FIXTURE-ADVERSARIAL:
+  adversarial_inquiry:
+    block_name: "BUILD_PROJECT_INQUIRY_INPUT"
+    semantic_content: "assert_equal 3, divide(6, 2)\nassert_raises(ZeroDivisionError)"
+    specification:
+      - id: "minitest-6-assert_equal"
+        kind: "behavior"
+        order: 1
+        value: "assert_equal 3, divide(6, 2)"
+      - id: "minitest-7-assert_raises"
+        kind: "failure"
+        order: 2
+        value: "assert_raises(ZeroDivisionError)"
+  code_locations:
+    files:
+      - description: "Ruby divide production fixture"
+        path: "lib/sample_divide.rb"
+  essence_pseudocode_path: "implementation-decisions/IMPL-FIXTURE-ADVERSARIAL-pseudocode.md"
+  name: "Preserve divide success and failure observations"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-FIXTURE-ADVERSARIAL"
+    requirements:
+      - "REQ-FIXTURE-ADVERSARIAL"

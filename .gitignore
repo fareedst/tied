@@ -17,3 +17,5 @@ scripts/prepare_readme_demo.sh
 tied/docs/.markscope-preview-cache/
 tied/requirements/REQ-FEEDBACK_TO_TIED.yaml
 TODO.md
+docs/legacy-csharp-tied-adoption-plan.md
+scripts/update_client.sh

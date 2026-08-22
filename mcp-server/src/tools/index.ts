@@ -100,6 +100,16 @@ import {
   reportPromotionStatus,
   type OperationalSource,
 } from "../feedback-promotion.js";
+import {
+  runChecklistInquiry,
+  type ChecklistInquiryInput,
+  type GatePolicy,
+  type HumanStrictApproval,
+} from "../adversarial-inquiry/checklist-integration.js";
+import {
+  runProjectInquiry,
+  type ModeBInput,
+} from "../adversarial-inquiry/project-orchestrator.js";
 
 /** LEAP proposal MCP tools: JSON envelope; catch sync throws from fs/git. [REQ-LEAP_PROPOSAL_QUEUE] */
 function leapMcpJson(payload: unknown) {
@@ -1282,6 +1292,81 @@ export const allTools = [
     handler: async (args: any) => {
       try {
         const result = runScopedAnalysis(args);
+        return textContent(JSON.stringify(result, null, 2));
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : String(e);
+        return textContent(JSON.stringify({ ok: false, error: msg }, null, 2));
+      }
+    },
+  },
+  {
+    name: "tied_adversarial_inquiry_run",
+    config: {
+      description:
+        "Run [REQ-TIED_ADVERSARIAL_INQUIRY] read-only obligation, bidirectional fidelity, and scoped status analysis. Generated reports never mutate canonical TIED YAML; unresolved evidence cannot become PASS.",
+      inputSchema: z.object({
+        mode: z.enum(["project"]).optional().describe("When project, dispatch Mode B project-input inquiry through the validated orchestrator."),
+        project_root: z.string().optional().describe("Absolute project root for Mode B."),
+        tied_base_path: z.string().optional().describe("Optional tied/ directory override for Mode B; must remain under project_root."),
+        impl_token: z.string().optional().describe("IMPL token for Mode B scope selection."),
+        test_path: z.string().optional().describe("Relative Ruby Minitest path for Mode B."),
+        production_path: z.string().optional().describe("Relative production source path for Mode B."),
+        production_evidence_path: z.string().optional().describe("Relative production evidence JSON path for Mode B."),
+        production_evidence: z.array(z.record(z.unknown())).optional().describe("Inline production evidence observations for Mode B."),
+        criterion_scope: z.array(z.string()).optional().describe("Optional criterion token subset for Mode B."),
+        graph: z.record(z.unknown()).optional().describe("Language-neutral obligation graph input with criteria, constraints, blocks, loci, and bindings."),
+        fidelity: z.record(z.unknown()).optional().describe("Normalized fidelity input with block revision, specification, test evidence, and production evidence."),
+        scope: z.array(z.string()).optional().describe("Explicit obligation IDs to project."),
+        eligibility: z.record(z.unknown()).optional().describe("Optional strict eligibility result; omit for non-strict research projection."),
+        policy: z.enum(["advisory", "strict-candidate", "strict-approved"]).optional().describe("Explicit gate policy; advisory is the default."),
+        human_approval: z.record(z.unknown()).optional().describe("Human CITDP approval required for strict-approved blocking."),
+        repository_root: z.string().optional().describe("Repository root for bounded working artifact persistence."),
+        request_token: z.string().optional().describe("REQ token selecting working/{REQ-TOKEN}/adversarial-inquiry."),
+        provenance: z.unknown().optional().describe("Evidence provenance to persist outside canonical TIED YAML."),
+        redact: z.array(z.string()).optional().describe("Sensitive values to redact from generated artifacts."),
+      }),
+    },
+    handler: async (args: {
+      mode?: "project";
+      project_root?: string;
+      tied_base_path?: string;
+      impl_token?: string;
+      test_path?: string;
+      production_path?: string;
+      production_evidence_path?: string;
+      production_evidence?: Record<string, unknown>[];
+      criterion_scope?: string[];
+      graph?: Record<string, unknown>;
+      fidelity?: Record<string, unknown>;
+      scope?: string[];
+      eligibility?: Record<string, unknown>;
+      policy?: GatePolicy;
+      human_approval?: Record<string, unknown>;
+      repository_root?: string;
+      request_token?: string;
+      provenance?: unknown;
+      redact?: string[];
+    }) => {
+      try {
+        if (args.mode === "project") {
+          const result = await runProjectInquiry(args as ModeBInput);
+          return textContent(JSON.stringify(result, null, 2));
+        }
+        if (!args.graph || !args.fidelity || !args.scope?.length) {
+          throw new Error("graph, fidelity, and non-empty scope are required unless mode is project.");
+        }
+        const result = await runChecklistInquiry({
+          graph: args.graph as ChecklistInquiryInput["graph"],
+          fidelity: args.fidelity as ChecklistInquiryInput["fidelity"],
+          scope: args.scope,
+          eligibility: args.eligibility as ChecklistInquiryInput["eligibility"],
+          policy: args.policy,
+          humanApproval: args.human_approval as unknown as HumanStrictApproval | undefined,
+          repositoryRoot: args.repository_root,
+          requestToken: args.request_token,
+          provenance: args.provenance,
+          redact: args.redact,
+        });
         return textContent(JSON.stringify(result, null, 2));
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);

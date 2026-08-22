@@ -1344,6 +1344,13 @@ ARCH-QUALITY_ASSURANCE_PROFILES:
       - "mcp-server/src/quality-security.test.ts"
       - "mcp-server/src/tools/quality-validation-mcp.test.ts"
       - "pilot/webhook-inbox/test/webhook-inbox.test.mjs"
+ARCH-TIED_ADVERSARIAL_INQUIRY:
+  cross_references:
+    - "REQ-TIED_ADVERSARIAL_INQUIRY"
+  description: "Separate canonical TIED intent from deterministic obligation projections, fidelity evidence, executable assurance, and review-gated status decisions."
+  detail_file: "architecture-decisions/ARCH-TIED_ADVERSARIAL_INQUIRY.yaml"
+  name: "Read-only obligation graph and evidence gate boundary"
+  status: "Active"
 ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY:
   cross_references:
     - "ARCH-FEEDBACK_STORAGE"

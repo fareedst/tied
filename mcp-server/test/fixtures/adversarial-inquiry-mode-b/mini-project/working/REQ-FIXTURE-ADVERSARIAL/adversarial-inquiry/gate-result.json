@@ -1,0 +1,13 @@
+{
+  "blocking": false,
+  "diagnostics": [],
+  "policy": "advisory",
+  "proofBoundary": "human_decision",
+  "schemaVersion": "adversarial-inquiry-gate.v1",
+  "scope": [
+    "REQ-FIXTURE-ADVERSARIAL#divide-failure",
+    "REQ-FIXTURE-ADVERSARIAL#divide-success"
+  ],
+  "status": "warn",
+  "verdict": "UNRESOLVED"
+}

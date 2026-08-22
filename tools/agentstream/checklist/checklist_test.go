@@ -5,6 +5,10 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
+
+	"stdd/agentstream"
+
+	"gopkg.in/yaml.v3"
 )
 
 // [IMPL-GOAGENT-CHECKLIST] [ARCH-GOAGENT-YAML-STEPS] [REQ-GOAGENT-YAML-STEP-RENDER]
@@ -379,4 +383,159 @@ steps:
 	if err == nil || !strings.Contains(err.Error(), "duplicate slug") {
 		t.Fatalf("want duplicate slug error, got %v", err)
 	}
+}
+
+func loadCanonicalSubProcedures(t *testing.T) []struct {
+	Slug      string   `yaml:"slug"`
+	InvokedBy []string `yaml:"invoked_by"`
+	Tasks     []string `yaml:"tasks"`
+} {
+	t.Helper()
+	canonical := findCanonicalChecklist(t)
+	raw, err := os.ReadFile(canonical)
+	if err != nil {
+		t.Fatal(err)
+	}
+	var doc struct {
+		SubProcedures []struct {
+			Slug      string   `yaml:"slug"`
+			InvokedBy []string `yaml:"invoked_by"`
+			Tasks     []string `yaml:"tasks"`
+		} `yaml:"sub_procedures"`
+	}
+	if err := yaml.Unmarshal(raw, &doc); err != nil {
+		t.Fatal(err)
+	}
+	return doc.SubProcedures
+}
+
+func TestCanonicalChecklist_subAdversarialInquiryPassRegistered(t *testing.T) {
+	// [IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY]
+	// How: Part C4.1 — sub-adversarial-inquiry-pass must exist with invoked_by and tasks before close-out.
+	var found bool
+	for _, sub := range loadCanonicalSubProcedures(t) {
+		if sub.Slug != "sub-adversarial-inquiry-pass" {
+			continue
+		}
+		found = true
+		if len(sub.InvokedBy) == 0 {
+			t.Fatal("sub-adversarial-inquiry-pass must list invoked_by callers")
+		}
+		if len(sub.Tasks) == 0 {
+			t.Fatal("sub-adversarial-inquiry-pass must list tasks")
+		}
+	}
+	if !found {
+		t.Fatal("canonical checklist missing sub_procedures slug sub-adversarial-inquiry-pass")
+	}
+}
+
+func TestCanonicalChecklist_adversarialInquiryStepTaskCoverage(t *testing.T) {
+	// [IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY]
+	// How: Part B0/B/D slug-coverage — each step's rendered turn must contain the adversarial marker phrase.
+	canonical := findCanonicalChecklist(t)
+	cases := []struct {
+		slug    string
+		markers []string
+	}{
+		// Part B0
+		{slug: "translate-sponsor-intent", markers: []string{"anti-example"}},
+		{slug: "impact-discovery", markers: []string{"obligation inventory"}},
+		{slug: "risk-assessment", markers: []string{"adversarial depth tier"}},
+		{slug: "test-strategy", markers: []string{"independent oracle", "argv-only"}},
+		{slug: "composition-integration", markers: []string{"binding-local adversarial case", "controlled_composition_fault"}},
+		{slug: "verification-gate", markers: []string{"fidelity matrix", "command provenance", "validatestricteligibility"}},
+		// Part B
+		{slug: "session-bootstrap", markers: []string{"fidelity-research.md"}},
+		{slug: "change-definition", markers: []string{"falsification"}},
+		{slug: "author-requirement", markers: []string{"counterexample"}},
+		{slug: "author-architecture", markers: []string{"invalid-state"}},
+		{slug: "catalog-pseudocode-contracts", markers: []string{"failure modes", "termination"}},
+		{slug: "flag-insufficient-specs", markers: []string{"finding ledger"}},
+		{slug: "flag-contradictory-specs", markers: []string{"contradiction", "finding ledger"}},
+		{slug: "gate-pseudocode-validation", markers: []string{"sub-adversarial-inquiry-pass"}},
+		{slug: "unit-test-red", markers: []string{"expected failure reason"}},
+		{slug: "unit-test-green", markers: []string{"bidirectional"}},
+		{slug: "three-way-alignment-unit", markers: []string{"bidirectional"}},
+		{slug: "traceable-commit", markers: []string{"evidence provenance", "finding count"}},
+		{slug: "persist-citdp-record", markers: []string{"calibrate_pilot"}},
+	}
+	for _, tc := range cases {
+		tc := tc
+		t.Run(tc.slug, func(t *testing.T) {
+			turns, err := LoadTurns(canonical, Options{
+				StepFromID: tc.slug,
+				StepToID:   tc.slug,
+			})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if len(turns) != 1 {
+				t.Fatalf("want 1 turn for %q, got %d", tc.slug, len(turns))
+			}
+			body := strings.ToLower(strings.Join(turns[0].Parts, "\n"))
+			for _, marker := range tc.markers {
+				if !strings.Contains(body, strings.ToLower(marker)) {
+					t.Fatalf("step %q missing marker %q in:\n%s", tc.slug, marker, strings.Join(turns[0].Parts, "\n"))
+				}
+			}
+		})
+	}
+}
+
+func TestCanonicalChecklist_adversarialInquiryUsesRealSlugsAndBoundedArtifacts(t *testing.T) {
+	// [IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY]
+	// How: integrate inquiry into existing checklist slugs with bounded working artifacts and human-approved scoped strict status.
+	canonical := findCanonicalChecklist(t)
+	turns, err := LoadTurns(canonical, Options{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	required := []string{
+		"translate-sponsor-intent",
+		"change-definition",
+		"impact-discovery",
+		"author-requirement",
+		"author-architecture",
+		"resolve-pseudocode",
+		"risk-assessment",
+		"test-strategy",
+		"unit-test-red",
+		"unit-test-green",
+		"composition-integration",
+		"verification-gate",
+		"sync-tied-stack",
+		"persist-citdp-record",
+		"traceable-commit",
+	}
+	positions := make(map[string]int)
+	for i, turn := range turns {
+		positions[turn.StepStub] = i
+	}
+	for _, slug := range required {
+		if _, ok := positions[slug]; !ok {
+			t.Fatalf("canonical checklist missing real slug %q", slug)
+		}
+	}
+	if strings.Contains(strings.Join(MessagesFromTurns(turns), "\n"), "requirements-to-test-map") {
+		t.Fatal("canonical checklist must not introduce a nonexistent requirements-to-test-map slug")
+	}
+	body := strings.Join(MessagesFromTurns(turns), "\n")
+	for _, needle := range []string{
+		"tied_adversarial_inquiry_run",
+		"working/{REQ-TOKEN}/adversarial-inquiry",
+		"strict-candidate",
+	} {
+		if !strings.Contains(body, needle) {
+			t.Fatalf("canonical checklist missing adversarial inquiry contract %q", needle)
+		}
+	}
+}
+
+func MessagesFromTurns(turns []agentstream.Turn) []string {
+	out := make([]string, 0, len(turns))
+	for _, turn := range turns {
+		out = append(out, strings.Join(turn.Parts, "\n"))
+	}
+	return out
 }

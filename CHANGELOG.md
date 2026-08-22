@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Adversarial inquiry checklist composition (Batches 5–6)** — Extended
+  `[PROC-AGENT_REQ_CHECKLIST]` with §4 adversarial task text on all parent-plan
+  slugs, mandatory `sub-adversarial-inquiry-pass`, bounded assurance rows (Batch 5),
+  strict-eligibility warn-only branch and pilot CITDP evidence (Batch 6), adoption
+  doc checklist-integration table, vocabulary subsections, agentstream GOTO hints,
+  and optional `adversarial_inquiry_scope` preload field. Go slug coverage tests
+  and extended TypeScript integration tests gate parity. Checklist-composition closes
+  via IMPL + tests + CITDP extend; no sixth REQ satisfaction criterion added.
+
 - **Layered vocabulary ownership** — `[REQ-TIED_VOCABULARY_OWNERSHIP]`,
   `[ARCH-TIED_VOCABULARY_LAYERS]`, and
   `[IMPL-TIED_VOCABULARY_REFRESH]` now keep refreshable methodology glossaries
@@ -34,6 +43,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Prompt-type payloads** — `[REQ-PROMPT_TYPE_GLOBAL_SKILLS]` / `[REQ-PROMPT_TYPE_SUBAGENT]` skills and agents consume an **invocation remainder** (text after the skill or agent name) and, for `refine-plan` / `build-plan`, a **linked plan**. They no longer use `:::` as a payload delimiter or emit composer “Prepare to process…” headers.
 
 ### Added
+
+- **Adversarial inquiry evidence tooling** — `[REQ-TIED_ADVERSARIAL_INQUIRY]`,
+  `[ARCH-TIED_ADVERSARIAL_INQUIRY]`, `[IMPL-TIED_ADVERSARIAL_INQUIRY]`, and
+  `[IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST]` add deterministic read-only
+  obligation mapping, bidirectional fidelity checks, bounded Ruby Minitest
+  evidence, review-gated findings, scoped strict eligibility, bounded working
+  artifacts under `working/{REQ-TOKEN}/adversarial-inquiry/`, agentstream
+  checklist rendering, and MCP integration through
+  `tied_adversarial_inquiry_run`. Mode B adds an explicit project-input
+  adapter (`project-scope-loader`, `project-orchestrator`) that loads declared
+  TIED records and source paths read-only before delegating to the normalized
+  core. CITDP:
+  [`tied/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY.yaml`](tied/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY.yaml),
+  [`tied/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY_CHECKLIST.yaml`](tied/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY_CHECKLIST.yaml),
+  [`tied/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY_MODE_B.yaml`](tied/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY_MODE_B.yaml).
+  Vocab: [`tied/vocab/fidelity-research.md`](tied/vocab/fidelity-research.md).
 
 - **Client orchestration publication (Option A) via `copy_files.sh`** — `[REQ-FEAT_ADOPTION_GUIDANCE]`, `[REQ-FEAT_ONBOARDING_COMMANDS]`, `[REQ-FEAT_ORCHESTRATION_SURFACE]`, `[REQ-TIED_SETUP]`, `[IMPL-TIED_FILES]`, and `[IMPL-FEAT_ONBOARDING_COMMANDS]` deliver the client distribution layer for feature orchestration onboarding. Artifacts installed copy-if-missing: `tied/constitution.example.yaml`; [`tied/docs/tied-feature-onboarding.md`](tied/docs/tied-feature-onboarding.md) (relocated from `docs/tied-feature-onboarding.md`); `tools/bundled-tied-yaml-skill/scripts/tied.sh` and `feature-orchestrator.sh` (baked `TIED_REPO_ROOT`); additive vocabulary merge for [`tied/vocab/feature-orchestration.md`](tied/vocab/feature-orchestration.md). Bootstrap gate: fail-closed `verify_feature_orchestration_methodology` with E2E coverage in `mcp-server/src/e2e/bootstrap-and-load.test.ts`. Explicit non-goals: no Batch 0–6 FEAT token promotion into methodology YAML; no npm publish; no git/worktree mutation. CITDP: [`tied/citdp/CITDP-REQ-FEAT_ONBOARDING_PUBLICATION.yaml`](tied/citdp/CITDP-REQ-FEAT_ONBOARDING_PUBLICATION.yaml). Entry point: [`tied/docs/client-development-index.md`](tied/docs/client-development-index.md).
 

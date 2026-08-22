@@ -104,6 +104,31 @@ Live checklist turns can alter the remaining turn queue only by emitting a stric
 
 Supported action: `goto`. The target must match a loaded checklist step slug. On a valid `goto`, the live runner clears configured `loop_back_clearance.<target>.clear_slugs` completion markers in the checklist YAML, replaces the remaining queue with turns starting at the target slug, and continues with normal `agentstream_new_session` / resume behavior.
 
+#### Adversarial inquiry blocking findings (non-normative driver hints)
+
+When a checklist step runs **`sub-adversarial-inquiry-pass`** with `blocking=true` and a strict-eligible policy, unresolved error-severity findings may suggest an **`agentstream_control`** GOTO target by proof boundary. These hints are **non-normative** — procedural gating remains in checklist YAML (`verification-gate`, `sub-adversarial-inquiry-pass`); driver JSON does not replace checklist branches.
+
+| Proof boundary | Typical GOTO target |
+|---|---|
+| `traceability_structure`, `pseudo_code_structure`, `semantic_fidelity` | `resolve-pseudocode` |
+| `executable_behavior` | `unit-test-red` (composition binding faults may route to `composition-integration`) |
+
+Emit targets only inside fenced `agentstream_control` JSON; prose such as “GOTO resolve-pseudocode” is ignored.
+
+```json
+{
+  "agentstream_control": {
+    "schema_version": 1,
+    "action": "goto",
+    "target": "resolve-pseudocode",
+    "reason": "Strict adversarial inquiry: unresolved semantic_fidelity finding",
+    "evidence": ["working/REQ-EXAMPLE/adversarial-inquiry/finding-ledger.jsonl"]
+  }
+}
+```
+
+For executable-behavior gaps, use `"target": "unit-test-red"` with evidence from `evidence-provenance.json` or the failing test output.
+
 ## Lead checklist placeholders (`{{KEY}}`)
 
 Static checklist YAML can include tokens such as `{{REQ_TOKEN}}` or `{{CHANGE_TITLE}}`. Pass values at invocation time:
