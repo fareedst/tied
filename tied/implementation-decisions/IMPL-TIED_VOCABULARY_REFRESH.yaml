@@ -1,0 +1,52 @@
+IMPL-TIED_VOCABULARY_REFRESH:
+  code_locations:
+    files:
+      - description: "Layered vocabulary bootstrap and methodology refresh"
+        path: "copy_files.sh"
+      - description: "Report-first legacy ownership migration"
+        path: "scripts/migrate_vocab_ownership.rb"
+      - description: "Independent methodology/client vocabulary validator"
+        path: "scripts/validate_vocab_index.rb"
+      - description: "Bootstrap and layered refresh E2E coverage"
+        path: "mcp-server/src/e2e/bootstrap-and-load.test.ts"
+      - description: "Legacy migration coverage"
+        path: "scripts/migrate_vocab_ownership_test.rb"
+      - description: "Layered vocabulary validation coverage"
+        path: "scripts/validate_vocab_index_test.rb"
+    functions: []
+  cross_references:
+    - "ARCH-TIED_VOCABULARY_LAYERS"
+    - "REQ-TIED_VOCABULARY_OWNERSHIP"
+  description: "Implement layered vocabulary bootstrap, deterministic methodology refresh, client handoffs, and report-first legacy migration."
+  implementation_approach:
+    details:
+      - "copy_files.sh creates tied/vocab/routing.md and domain-references.md handoffs only when absent; existing client files remain unchanged."
+      - "copy_files.sh refreshes tied/methodology/vocab/ from the TIED source vocabulary, excludes prompt-composer.md, and prunes stale methodology files."
+      - "scripts/migrate_vocab_ownership.rb reports mixed indexes and content differences, and --apply moves only byte-identical methodology glossaries."
+      - "scripts/validate_vocab_index.rb validates methodology and client vocabulary layers independently."
+    summary: "Separate methodology snapshot refresh from client vocabulary preservation"
+  metadata:
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-19"
+      reason: "Complete layered vocabulary implementation evidence before verification"
+  name: "Vocabulary Ownership Refresh"
+  related_decisions:
+    depends_on:
+      - "ARCH-TIED_VOCABULARY_LAYERS"
+    see_also:
+      - "IMPL-TIED_FILES"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_VOCABULARY_LAYERS"
+    code_annotations:
+      - "ARCH-TIED_VOCABULARY_LAYERS"
+      - "IMPL-TIED_VOCABULARY_REFRESH"
+      - "REQ-TIED_VOCABULARY_OWNERSHIP"
+    requirements:
+      - "REQ-TIED_VOCABULARY_OWNERSHIP"
+    tests:
+      - "mcp-server/src/e2e/bootstrap-and-load.test.ts"
+      - "scripts/migrate_vocab_ownership_test.rb"
+      - "scripts/validate_vocab_index_test.rb"

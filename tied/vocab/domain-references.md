@@ -1,10 +1,10 @@
 # Domain vocabulary index (full catalog, on-demand)
 
-> **Primary directory entry:** [`routing.md`](routing.md) (~70 lines). Agents MUST read that file at session start (PRELOAD). Do **not** read this full catalog at bootstrap. Use this file only for the Priority/Document/Scope table, authoring-guide links, and **Cross-topic** notes when a concern spans glossaries.
+> **Primary directory entry:** [`routing.md`](routing.md) (~70 lines). This is the TIED methodology catalog; in clients it is installed under `tied/methodology/vocab/` and reached through the client-owned `tied/vocab/routing.md` handoff. Agents MUST read the client handoff first during PRELOAD. Do **not** read this full catalog at bootstrap.
 
-**Scope:** Full on-demand directory for all domain vocabulary glossaries under `tied/vocab/`. Lists priority, scope, and cross-topic notes. This page is an **index only** — canonical terms live in the linked sibling files. Algorithms and step-by-step behavior stay in `tied/implementation-decisions/*-pseudocode.md`.
+**Scope:** Full on-demand directory for all TIED methodology vocabulary glossaries under the source `tied/vocab/` tree (installed in clients under `tied/methodology/vocab/`). Lists priority, scope, and cross-topic notes. This page is an **index only** — canonical terms live in the linked sibling files. Algorithms and step-by-step behavior stay in `tied/implementation-decisions/*-pseudocode.md`.
 
-**Checklist path:** [`../docs/agent-req-implementation-checklist.yaml`](../docs/agent-req-implementation-checklist.yaml) sets `VOCAB_INDEX: ./tied/vocab`. Agents **CALL** `sub-vocabulary-sync` per [`../docs/processes.md`](../docs/processes.md) § `[PROC-VOCABULARY_INDEX]` at **three touchpoints**: **RESOLVE** at prompt intake (`translate-sponsor-intent`, `change-definition`); **PRELOAD** before reading TIED/docs/code (`session-bootstrap`, `impact-discovery`); **VALIDATE** before commit (`traceable-commit`). Inline during work: RESOLVE before naming; RECORD after artifact edits.
+**Checklist path:** [`../docs/agent-req-implementation-checklist.yaml`](../docs/agent-req-implementation-checklist.yaml) sets the client handoff as the `VOCAB_INDEX` entry. Agents **CALL** `sub-vocabulary-sync` per [`../docs/processes.md`](../docs/processes.md) § `[PROC-VOCABULARY_INDEX]` at **three touchpoints**: **RESOLVE** at prompt intake (`translate-sponsor-intent`, `change-definition`); **PRELOAD** before reading TIED/docs/code (`session-bootstrap`, `impact-discovery`); **VALIDATE** before commit (`traceable-commit`). Inline during work: RESOLVE before naming; RECORD after artifact edits.
 
 **Standards:** [`../docs/vocabulary-index-analysis-and-standards.md`](../docs/vocabulary-index-analysis-and-standards.md).
 

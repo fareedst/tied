@@ -1,6 +1,6 @@
 REQ-TIED_SETUP:
   category: "Functional"
-  description: "TIED setup provides a deterministic client bootstrap: it creates the TIED structure, installs managed prompt-type skills, preserves attributes with cp -p/cp -pR, normalizes only client-copy mtimes to each source item's local calendar-date midnight, and warns before replacing destinations whose mtimes are not midnight."
+  description: "TIED setup provides a deterministic client bootstrap: it creates the TIED structure, refreshes the read-only methodology vocabulary snapshot, preserves durable client-owned vocabulary and handoffs, installs managed prompt-type skills, preserves attributes with cp -p/cp -pR, normalizes only client-copy mtimes to each source item's local calendar-date midnight, and warns before replacing destinations whose mtimes are not midnight."
   detail_file: "requirements/REQ-TIED_SETUP.yaml"
   implementation_approach:
     details:
@@ -13,8 +13,8 @@ REQ-TIED_SETUP:
       date: "2025-11-08T00:00:00.000Z"
     last_updated:
       author: "AI Agent"
-      date: "2026-08-13"
-      reason: "Stop installing prompt-type Task wrappers into client projects during bootstrap"
+      date: "2026-08-19"
+      reason: "Reconcile setup with layered vocabulary ownership and refresh behavior"
     last_validated:
       date: "2026-02-06T00:00:00.000Z"
       result: "pass"
@@ -41,8 +41,8 @@ REQ-TIED_SETUP:
       metric: "requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml, semantic-tokens.md, processes.md all present"
     - criterion: "Base files properly configured"
       metric: ".cursorrules contains TIED rules, AGENTS.md contains canonical AI agent instructions"
-    - criterion: "copy_files.sh seeds tied/vocab/ when client tied/vocab/ is missing or empty (minimum domain-references.md and tied-methodology.md)"
-      metric: "After bootstrap, tied/vocab/*.md present; existing client vocab files never overwritten"
+    - criterion: "copy_files.sh refreshes non-source-only TIED glossaries under tied/methodology/vocab/ and creates missing client routing/catalog handoffs under tied/vocab/"
+      metric: "Methodology vocabulary is replaced deterministically; existing client vocabulary and handoff bytes remain unchanged"
     - criterion: "Detail directories exist"
       metric: "requirements/, architecture-decisions/, implementation-decisions/ directories present"
     - criterion: "Domain vocabulary for TIED layout (project YAML, semantic token, TIED base path) is defined in tied/vocab/tied-methodology.md; naming uses sub-vocabulary-sync RESOLVE/RECORD per [PROC-VOCABULARY_INDEX]"
@@ -52,8 +52,8 @@ REQ-TIED_SETUP:
       metric: "Recursive lexical map ordering, ordered-list key exceptions, string-only list sorting, scalar-type preservation, and opaque block policy are documented and tested"
     - criterion: "Existing clients can follow tied/docs/methodology-migration.md when adopting a newer methodology snapshot"
       metric: "Migration guide is installed when missing and preserves client-owned project YAML and customized documentation"
-    - criterion: "copy_files.sh --merge-vocab adds absent glossary basenames without overwriting existing client vocabulary"
-      metric: "Existing client glossary contents remain unchanged while missing canonical glossaries are added"
+    - criterion: "copy_files.sh --merge-vocab adds absent client glossary basenames without overwriting existing client vocabulary"
+      metric: "Existing client glossary contents remain unchanged while missing canonical client-facing glossaries are added"
     - criterion: "Refreshing inherited methodology preserves project YAML and installs promoted quality detail files and pseudo-code sidecars"
       metric: "tied/methodology/ matches the current template snapshot and stale inherited files are pruned"
     - criterion: "When .cursor/mcp.json already exists, copy_files.sh preserves its exact bytes and does not initialize or merge tied-yaml into it"
@@ -66,15 +66,22 @@ REQ-TIED_SETUP:
   traceability:
     architecture:
       - "ARCH-TIED_STRUCTURE"
+      - "ARCH-TIED_VOCABULARY_LAYERS"
     code_annotations:
       - "ARCH-TIED_STRUCTURE"
+      - "ARCH-TIED_VOCABULARY_LAYERS"
       - "IMPL-TIED_FILES"
+      - "IMPL-TIED_VOCABULARY_REFRESH"
       - "REQ-TIED_SETUP"
+      - "REQ-TIED_VOCABULARY_OWNERSHIP"
     implementation:
       - "IMPL-TIED_FILES"
+      - "IMPL-TIED_VOCABULARY_REFRESH"
     tests:
       - "Manual verification checklists"
       - "mcp-server/src/e2e/bootstrap-and-load.test.ts"
+      - "scripts/migrate_vocab_ownership_test.rb"
+      - "scripts/validate_vocab_index_test.rb"
   validation_criteria:
     - coverage: "File existence checks for all required files and directories"
       method: "Manual verification"

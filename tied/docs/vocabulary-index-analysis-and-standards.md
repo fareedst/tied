@@ -2,11 +2,11 @@
 
 Analysis of the canonical domain vocabulary indices — what they contain, recommended authoring standards, and how their TIED integration differs from a traditional software glossary.
 
-**Client bootstrap:** Bootstrapped TIED client projects use `tied/vocab/<topic>.md` (no `-vocabulary` filename suffix) with an index at `tied/vocab/domain-references.md` and a lightweight routing index at `tied/vocab/routing.md` for session PRELOAD. Section 1 below uses Markscope `docs/*-vocabulary.md` as an **illustrative example corpus**; §2–§3 apply to all TIED clients; §4 documents the STDD/TIED repository layout.
+**Client bootstrap:** Bootstrapped TIED client projects use `tied/methodology/vocab/<topic>.md` for TIED-owned glossaries and `tied/vocab/<topic>.md` for client-owned glossaries. The client handoff at `tied/vocab/routing.md` dispatches PRELOAD to both routing layers; `tied/vocab/domain-references.md` catalogs client terms and links to the methodology catalog. Section 1 below uses Markscope `docs/*-vocabulary.md` as an **illustrative example corpus**; §2–§3 apply to all TIED clients; §4 documents the STDD/TIED repository layout.
 
 **Index of the example corpus:** [`markscope-domain-references.md`](markscope-domain-references.md). **Replication prompt:** [`tied-domain-vocabulary-research-prompt.md`](tied-domain-vocabulary-research-prompt.md). **Outreach (Vocab ↔ TIED ↔ CITDP ↔ LEAP):** [`vocabulary-layer-tied-leap-citdp.md`](vocabulary-layer-tied-leap-citdp.md).
 
-**Scope:** This is a meta-document *about* the glossaries; it is not itself a domain glossary and is not the source of canonical terms. For canonical terms in this repo, use `tied/vocab/*.md`; in Markscope-style repos, use the individual `docs/*-vocabulary.md` files.
+**Scope:** This is a meta-document *about* the glossaries; it is not itself a domain glossary and is not the source of canonical terms. For TIED methodology terms in this repo, use `tied/vocab/*.md` in the source repository and `tied/methodology/vocab/*.md` in clients; for client terms, use `tied/vocab/*.md`.
 
 ---
 
@@ -16,8 +16,8 @@ Analysis of the canonical domain vocabulary indices — what they contain, recom
 
 The vocabulary system is layered, not just the glossaries:
 
-- **One routing index (primary directory entry)** — `tied/vocab/routing.md` (~70 lines). Lightweight session bootstrap: keyword → glossary routing table; agents PRELOAD only matched files. Create this when the full index grows too large for bootstrap.
-- **One full index page** — [`markscope-domain-references.md`](markscope-domain-references.md) (example) / `tied/vocab/domain-references.md` (TIED). A directory with a `Priority | Document | Scope` table (one row per glossary), plus "Authoring guides (not glossaries)," "Behavior inventories (not glossaries)," and cross-topic notes. Read on-demand for cross-cutting concerns—not at every session start when a routing index exists.
+- **Two routing handoffs** — `tied/vocab/routing.md` is the client entry point and `tied/methodology/vocab/routing.md` is the refreshable TIED methodology route. The client entry point dispatches by ownership; agents PRELOAD only matched files.
+- **Two full index pages** — `tied/vocab/domain-references.md` catalogs client glossaries and links to `tied/methodology/vocab/domain-references.md`, which contains the TIED methodology catalog. Read full catalogs on-demand for cross-cutting concerns—not at every session start when a routing index exists.
 - **Nine canonical glossaries** (`docs/*-vocabulary.md` in the example corpus):
 
   | Glossary | Index priority | Scope |
@@ -181,18 +181,21 @@ In short: a traditional glossary *describes* the system for humans; these vocabu
 
 ## 4. STDD / TIED repository convention
 
-This **TIED methodology repository** (stdd) uses a project-local vocabulary tree distinct from the Markscope `docs/*-vocabulary.md` layout described in §1:
+This **TIED methodology repository** (stdd) owns the canonical vocabulary source tree; clients receive it under `tied/methodology/vocab/`, distinct from client-owned `tied/vocab/` and the Markscope `docs/*-vocabulary.md` layout described in §1:
 
 | Element | Location in this repo |
 |---------|------------------------|
-| Routing index (bootstrap) | [`../vocab/routing.md`](../vocab/routing.md) |
-| Full index page (on-demand) | [`../vocab/domain-references.md`](../vocab/domain-references.md) |
-| Canonical glossaries | `tied/vocab/<topic>.md` (plain Markdown; **no** `-vocabulary` suffix) |
+| Source routing index | [`../vocab/routing.md`](../vocab/routing.md) |
+| Client routing handoff | `tied/vocab/routing.md` → `tied/methodology/vocab/routing.md` |
+| Source full index page | [`../vocab/domain-references.md`](../vocab/domain-references.md) |
+| Client full index page | `tied/vocab/domain-references.md` → `tied/methodology/vocab/domain-references.md` |
+| Canonical methodology glossaries | `tied/methodology/vocab/<topic>.md` in clients; plain Markdown; **no** `-vocabulary` suffix |
+| Client glossaries | `tied/vocab/<topic>.md` (client-owned) |
 | Meta-standard (this doc) | [`vocabulary-index-analysis-and-standards.md`](vocabulary-index-analysis-and-standards.md) |
 | Replication prompt | [`tied-domain-vocabulary-research-prompt.md`](tied-domain-vocabulary-research-prompt.md) |
 | Outreach article | [`vocabulary-layer-tied-leap-citdp.md`](vocabulary-layer-tied-leap-citdp.md) |
-| Checklist pointer | `VOCAB_INDEX: ./tied/vocab` in [`agent-req-implementation-checklist.yaml`](agent-req-implementation-checklist.yaml) |
+| Checklist pointer | `VOCAB_INDEX: ./tied/vocab/routing.md` in [`agent-req-implementation-checklist.yaml`](agent-req-implementation-checklist.yaml) |
 | Process token | `[PROC-VOCABULARY_INDEX]` in [`processes.md`](processes.md) |
-| Bootstrap | `copy_files.sh` seeds `tied/vocab/` and `tied/docs/` into client projects when absent |
+| Bootstrap | `copy_files.sh` refreshes `tied/methodology/vocab/` and creates missing client routing/catalog handoffs |
 
-**Replication:** Other TIED client repos may follow [`tied-domain-vocabulary-research-prompt.md`](tied-domain-vocabulary-research-prompt.md) with `docs/*-vocabulary.md` instead; the structural standards in §2 apply to both layouts. When authoring in **this** repo, use `tied/vocab/` only. Epistemic roles are summarized in §1d; outreach framing: [`vocabulary-layer-tied-leap-citdp.md`](vocabulary-layer-tied-leap-citdp.md).
+**Replication:** Other TIED client repos may follow [`tied-domain-vocabulary-research-prompt.md`](tied-domain-vocabulary-research-prompt.md) with `docs/*-vocabulary.md` instead; the structural standards in §2 apply to both layouts. When authoring TIED methodology terms in **this** repo, use source `tied/vocab/`; when authoring client terms, use the client project's `tied/vocab/`. Epistemic roles are summarized in §1d; outreach framing: [`vocabulary-layer-tied-leap-citdp.md`](vocabulary-layer-tied-leap-citdp.md).

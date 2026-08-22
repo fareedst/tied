@@ -22,7 +22,7 @@ import {
 } from "../yaml-loader.js";
 import { getDetailPath } from "../detail-loader.js";
 
-const TOKEN_REGEX = /\[(REQ-[A-Z0-9_-]+|ARCH-[A-Z0-9_-]+|IMPL-[A-Z0-9_-]+)\]/g;
+const TOKEN_REGEX = /\[(REQ-[A-Za-z0-9_-]+|ARCH-[A-Za-z0-9_-]+|IMPL-[A-Za-z0-9_-]+)\]/g;
 
 function extractTokensFromLine(line: string): string[] {
   const out: string[] = [];

@@ -220,7 +220,7 @@ function extractTokenSet(text: string): {
   const req = new Set<string>();
   const arch = new Set<string>();
   const impl = new Set<string>();
-  const re = /\[(REQ-[A-Z0-9_-]+|ARCH-[A-Z0-9_-]+|IMPL-[A-Z0-9_-]+)\]/g;
+  const re = /\[(REQ-[A-Za-z0-9_-]+|ARCH-[A-Za-z0-9_-]+|IMPL-[A-Za-z0-9_-]+)\]/g;
   let m: RegExpExecArray | null;
   while ((m = re.exec(text)) !== null) {
     const t = m[1];

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
-# [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
-# How: Bootstrap client tied/ layout, methodology refresh, tied-yaml skill install, vocab seed, and conditional MCP config initialization.
+# [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-TIED_VOCABULARY_REFRESH] [ARCH-TIED_VOCABULARY_LAYERS] [REQ-TIED_VOCABULARY_OWNERSHIP]
+# How: Bootstrap client tied/ layout, refresh the methodology vocabulary snapshot, preserve the client vocabulary layer, install the tied-yaml skill, and conditionally initialize MCP configuration.
 #
 # copy_files.sh
 #
@@ -20,7 +20,7 @@
 #   - Base files (.cursorrules, AGENTS.md) in project root
 #     (created only if missing; never overwritten. To pick up a newer TIED `AGENTS.md`, delete
 #     or replace it, then re-run, or copy from the TIED source by hand)
-#   - tied/methodology/: index YAMLs and inherited detail files (always overwritten)
+#   - tied/methodology/: index YAMLs, inherited detail files, and methodology vocabulary (always overwritten)
 #   - tied/: project index YAMLs and requirements/, architecture-decisions/, implementation-decisions/ (create if missing, never overwrite)
 #   - Guide .md and tied/docs/ (copy when missing; never overwrite an existing `tied/docs/*.md`).
 #     Core guides and schema come from tied/docs/ in the TIED source.
@@ -31,7 +31,8 @@
 #   - .cursor/skills/: managed prompt-type skills and prompt-shared references
 #     (from tools/bundled-prompt-type-skills/; managed directories are overwritten each run).
 #     Installed tied-cli.sh bakes TIED_REPO_ROOT to this TIED source repo for TIED_MCP_BIN default.
-#   - tied/vocab/: domain vocabulary glossaries (*.md) including routing.md; seeded when missing or empty (never overwrites client files)
+#   - tied/methodology/vocab/: TIED-owned methodology glossaries (*.md), refreshed on every run
+#   - tied/vocab/: client-owned domain glossaries plus a small routing/catalog handoff (never overwritten when present)
 #   - Canonical CLI: .cursor/skills/tied-yaml/scripts/tied-cli.sh (use `tree -a` to list .cursor/ or open in the IDE).
 #   - .cursor/mcp.json: creates mcpServers.tied-yaml with stdio, absolute paths to this TIED
 #     repo's mcp-server/dist/index.js and the target project's tied/ only when the file is
@@ -51,7 +52,7 @@
 #   ./copy_files.sh /path/to/project
 #   ./copy_files.sh            # copies into the current working directory
 #   ./copy_files.sh --merge-vocab /path/to/project
-#     adds missing vocabulary files without overwriting existing client glossaries
+#     refreshes methodology vocabulary and creates missing client routing/catalog handoffs
 
 set -euo pipefail
 
@@ -105,6 +106,7 @@ mkdir -p "${CURSOR_DIR}/logs"
 mkdir -p "${METHODOLOGY_DIR}/requirements"
 mkdir -p "${METHODOLOGY_DIR}/architecture-decisions"
 mkdir -p "${METHODOLOGY_DIR}/implementation-decisions"
+mkdir -p "${METHODOLOGY_DIR}/vocab"
 
 # Portable real path (macOS has no realpath(1) by default)
 _realpath() {
@@ -442,11 +444,13 @@ install_prompt_type_skills() {
 }
 install_prompt_type_skills "${PROMPT_TYPE_SKILLS_CANONICAL}"
 
-# --- Domain vocabulary index (project-scoped; seed when absent) ---
-# [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [PROC-VOCABULARY_INDEX]
-# How: SEED_DOMAIN_VOCAB — copy client-published tied/vocab/*.md from TIED source when client has no vocab files yet; source-only glossaries remain in the TIED source tree.
+# --- Vocabulary ownership boundaries ---
+# [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-TIED_VOCABULARY_REFRESH] [ARCH-TIED_VOCABULARY_LAYERS] [REQ-TIED_VOCABULARY_OWNERSHIP] [PROC-VOCABULARY_INDEX]
+# How: Keep TIED-owned methodology glossaries in the refreshable methodology snapshot and
+# keep client-owned glossaries at tied/vocab/; never copy methodology prose into the client layer.
 VOCAB_SRC="${SCRIPT_DIR}/tied/vocab"
-VOCAB_DEST="${TIED_DIR}/vocab"
+METHODOLOGY_VOCAB_DEST="${METHODOLOGY_DIR}/vocab"
+CLIENT_VOCAB_DEST="${TIED_DIR}/vocab"
 SOURCE_ONLY_VOCAB_BASENAMES=(
   "prompt-composer.md"
 )
@@ -461,7 +465,7 @@ is_source_only_vocab() {
   return 1
 }
 _filter_client_bootstrap_doc() {
-  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [PROC-VOCABULARY_INDEX]
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-TIED_VOCABULARY_REFRESH] [ARCH-TIED_VOCABULARY_LAYERS] [REQ-TIED_VOCABULARY_OWNERSHIP] [PROC-VOCABULARY_INDEX]
   # How: Remove source-only glossary links from client-facing indexes and prompt-type documentation while preserving the canonical TIED-source files.
   local _source="$1" _destination="$2" _basename="$3"
   FILTER_SOURCE="${_source}" FILTER_DESTINATION="${_destination}" FILTER_BASENAME="${_basename}" \
@@ -473,6 +477,14 @@ destination = os.environ["FILTER_DESTINATION"]
 basename = os.environ["FILTER_BASENAME"]
 with open(destination, encoding="utf-8") as handle:
     text = handle.read()
+
+# Methodology glossaries keep links to the client-visible docs and optional
+# source tools valid after moving one directory deeper into tied/methodology/vocab/.
+if "/methodology/vocab/" in destination:
+    text = text.replace("](../docs/", "](../../docs/")
+    text = text.replace("](../../tools/", "](../../../tools/")
+    text = text.replace("](../../mcp-server/", "](../../../mcp-server/")
+    text = text.replace("](../../scripts/", "](../../../scripts/")
 
 if basename == "routing.md":
     text = "".join(
@@ -509,82 +521,85 @@ with open(destination, "w", encoding="utf-8") as handle:
 PY
   _normalize_copy_timestamps "${_source}" "${_destination}"
 }
-_seed_domain_vocab() {
-  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [PROC-VOCABULARY_INDEX]
-  # How: Seed canonical client glossaries only for a client with no existing Markdown vocabulary; exclude source-only Prompt Composer vocabulary.
-  local _src="$1" _dest="$2"
-  if [[ ! -d "${_src}" ]]; then
-    say_warn "No domain vocabulary source at ${_src}; skipped tied/vocab seed."
-    return 0
+
+# [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-TIED_VOCABULARY_REFRESH] [ARCH-TIED_VOCABULARY_LAYERS] [REQ-TIED_VOCABULARY_OWNERSHIP] [PROC-VOCABULARY_INDEX]
+# How: Create client-owned discovery handoffs only when absent; their contents point
+# to refreshable methodology indexes and leave client glossary authorship local.
+_write_client_vocab_handoffs() {
+  mkdir -p "${CLIENT_VOCAB_DEST}"
+  if [[ ! -f "${CLIENT_VOCAB_DEST}/routing.md" ]]; then
+    cat > "${CLIENT_VOCAB_DEST}/routing.md" <<'MARKDOWN'
+# Client vocabulary routing index
+
+**Ownership:** Client-owned discovery handoff. TIED methodology vocabulary is refreshed under [`../methodology/vocab/`](../methodology/vocab/).
+
+**Procedure:**
+1. Read the [TIED methodology routing index](../methodology/vocab/routing.md) for methodology terms.
+2. Read the client glossary routing table below for product terms.
+3. PRELOAD only the matched glossary for the task.
+4. Use the [client vocabulary catalog](domain-references.md) for cross-topic links.
+
+---
+
+## TIED methodology vocabulary
+
+Use [`../methodology/vocab/routing.md`](../methodology/vocab/routing.md) for TIED layout, process, validation, and tooling concepts. Do not copy methodology terms into client glossaries.
+
+## Client glossary routing table
+
+| Pri | File | Keywords / When to read |
+|-----|------|------------------------|
+| — | Add client-owned glossary files here | Product-specific concepts, UI, storage, or runtime behavior |
+
+## Ownership
+
+Files under `tied/vocab/` are client-owned. Files under `tied/methodology/vocab/` are TIED-owned and are replaced during methodology refresh.
+
+## Alphabetical index
+
+| Term | Section |
+|------|---------|
+| client vocabulary routing index | Title |
+| client glossary routing table | Client glossary routing table |
+| TIED methodology vocabulary | TIED methodology vocabulary |
+MARKDOWN
   fi
-  shopt -s nullglob
-  local _existing=( "${_dest}"/*.md )
-  shopt -u nullglob
-  if [[ ${#_existing[@]} -gt 0 ]]; then
-    say_warn "Client tied/vocab/ already has ${#_existing[@]} file(s); skipped vocab seed (preserved)."
-    return 0
-  fi
-  mkdir -p "${_dest}"
-  local _count=0 _total=0
-  for _f in "${_src}"/*.md; do
-    if [[ -f "${_f}" ]]; then
-      if is_source_only_vocab "$(basename "${_f}")"; then
-        continue
-      fi
-      (( _total++ )) || true
-      _dest_file="${_dest}/$(basename "${_f}")"
-      _copy_file "${_f}" "${_dest_file}"
-      case "$(basename "${_f}")" in
-        routing.md|domain-references.md)
-          _filter_client_bootstrap_doc "${_f}" "${_dest_file}" "$(basename "${_f}")"
-          ;;
-      esac
-      (( _count++ )) || true
-    fi
-  done
-  if [[ ${_total} -gt 0 ]]; then
-    say_x_of_y_client "${_count}" "${_total}" "Seeded ${_count} of ${_total} domain vocabulary file(s) into ${_dest}."
-  else
-    say_warn "No *.md in ${_src}; skipped tied/vocab seed."
+  if [[ ! -f "${CLIENT_VOCAB_DEST}/domain-references.md" ]]; then
+    cat > "${CLIENT_VOCAB_DEST}/domain-references.md" <<'MARKDOWN'
+# Client vocabulary catalog
+
+**Scope:** Index of client-owned domain vocabulary. TIED methodology vocabulary is cataloged separately under [`../methodology/vocab/domain-references.md`](../methodology/vocab/domain-references.md).
+
+**Procedure:** Read [`routing.md`](routing.md) first. Use the methodology catalog for TIED concepts and this catalog for client product concepts.
+
+---
+
+## TIED methodology catalog
+
+The refreshable TIED vocabulary catalog is [`../methodology/vocab/domain-references.md`](../methodology/vocab/domain-references.md).
+
+## Client canonical glossaries
+
+| Priority | Document | Scope |
+|----------|----------|-------|
+| — | Add client-owned glossary files here | Product-specific concepts |
+
+## Ownership
+
+This catalog and all non-index glossaries in `tied/vocab/` are client-owned. The methodology catalog and its linked glossaries are refreshed under `tied/methodology/vocab/`.
+
+## Alphabetical index
+
+| Term | Section |
+|------|---------|
+| client canonical glossaries | Client canonical glossaries |
+| client vocabulary catalog | Title |
+| TIED methodology catalog | TIED methodology catalog |
+MARKDOWN
   fi
 }
-_seed_domain_vocab "${VOCAB_SRC}" "${VOCAB_DEST}"
 
-if [[ "${MERGE_VOCAB}" == "true" ]]; then
-  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [PROC-VOCABULARY_INDEX]
-  # How: Add absent canonical client glossary basenames under --merge-vocab without overwriting client glossaries; source-only Prompt Composer vocabulary is never added.
-  merge_count=0
-  merge_total=0
-  merge_skipped=0
-  shopt -s nullglob
-  for _f in "${VOCAB_SRC}"/*.md; do
-    if [[ -f "${_f}" ]]; then
-      if is_source_only_vocab "$(basename "${_f}")"; then
-        continue
-      fi
-      ((merge_total++)) || true
-      _dest_file="${VOCAB_DEST}/$(basename "${_f}")"
-      if [[ -f "${_dest_file}" ]]; then
-        ((merge_skipped++)) || true
-      else
-        mkdir -p "${VOCAB_DEST}"
-        _copy_file "${_f}" "${_dest_file}"
-        case "$(basename "${_f}")" in
-          routing.md|domain-references.md)
-            _filter_client_bootstrap_doc "${_f}" "${_dest_file}" "$(basename "${_f}")"
-            ;;
-        esac
-        ((merge_count++)) || true
-      fi
-    fi
-  done
-  shopt -u nullglob
-  if [[ ${merge_total} -gt 0 ]]; then
-    say_warn "Vocabulary merge added ${merge_count} of ${merge_total} canonical file(s); preserved ${merge_skipped} existing client file(s)."
-  else
-    say_warn "No *.md in ${VOCAB_SRC}; skipped vocabulary merge."
-  fi
-fi
+_write_client_vocab_handoffs
 
 BASE_FILES=(
   ".cursorrules"
@@ -644,6 +659,34 @@ for f in "${INDEX_YAML_FILES[@]}"; do
   ((index_yaml_copied++)) || true
 done
 say_warn "Copied ${index_yaml_copied} of ${#INDEX_YAML_FILES[@]} methodology index YAMLs into ${METHODOLOGY_DIR} (overwritten)."
+
+# [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [PROC-VOCABULARY_INDEX]
+# How: Refresh TIED-owned methodology vocabulary as an exact source snapshot,
+# exclude source-only glossaries, and prune stale inherited vocabulary files.
+_warn_modified_copy_target "${METHODOLOGY_VOCAB_DEST}"
+rm -rf "${METHODOLOGY_VOCAB_DEST}"
+mkdir -p "${METHODOLOGY_VOCAB_DEST}"
+methodology_vocab_count=0
+methodology_vocab_total=0
+shopt -s nullglob
+for vocab_file in "${VOCAB_SRC}"/*.md; do
+  if [[ -f "${vocab_file}" ]]; then
+    if is_source_only_vocab "$(basename "${vocab_file}")"; then
+      continue
+    fi
+    ((methodology_vocab_total++)) || true
+    destination="${METHODOLOGY_VOCAB_DEST}/$(basename "${vocab_file}")"
+    _copy_file "${vocab_file}" "${destination}"
+    case "$(basename "${vocab_file}")" in
+      routing.md|domain-references.md)
+        _filter_client_bootstrap_doc "${vocab_file}" "${destination}" "$(basename "${vocab_file}")"
+        ;;
+    esac
+    ((methodology_vocab_count++)) || true
+  fi
+done
+shopt -u nullglob
+say_warn "Copied ${methodology_vocab_count} of ${methodology_vocab_total} methodology vocabulary file(s) into ${METHODOLOGY_VOCAB_DEST} (overwritten)."
 
 # --- Project: ensure project index YAMLs exist (CREATE IF MISSING, never overwrite) ---
 project_created=0
@@ -838,6 +881,48 @@ if [[ -d "${REQ_TEMPLATE_DIR}" ]]; then
 fi
 shopt -u nullglob
 
+# [IMPL-TIED_VOCABULARY_REFRESH] [ARCH-TIED_VOCABULARY_LAYERS] [REQ-TIED_VOCABULARY_OWNERSHIP]
+# How: After all client methodology artifacts exist, remove links to optional
+# source/project files that are not part of the inherited snapshot while
+# preserving the visible token or document label.
+_normalize_methodology_vocab_links() {
+  local _root="$1"
+  METHODOLOGY_VOCAB_ROOT="${_root}" python3 - <<'PY'
+import os
+import re
+
+root = os.environ["METHODOLOGY_VOCAB_ROOT"]
+link_pattern = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
+
+for current, _, files in os.walk(root):
+    for name in files:
+        if not name.endswith(".md"):
+            continue
+        path = os.path.join(current, name)
+        with open(path, encoding="utf-8") as handle:
+            text = handle.read()
+
+        def replace(match):
+            label, target = match.groups()
+            bare_target = target.split("#", 1)[0].split("?", 1)[0]
+            if (
+                not bare_target
+                or bare_target.startswith("#")
+                or bare_target.startswith("//")
+                or re.match(r"^[a-z][a-z0-9+.-]*:", bare_target, re.I)
+            ):
+                return match.group(0)
+            resolved = os.path.abspath(os.path.join(os.path.dirname(path), bare_target))
+            return match.group(0) if os.path.exists(resolved) else label
+
+        normalized = link_pattern.sub(replace, text)
+        if normalized != text:
+            with open(path, "w", encoding="utf-8") as handle:
+                handle.write(normalized)
+PY
+}
+_normalize_methodology_vocab_links "${METHODOLOGY_VOCAB_DEST}"
+
 # --- Fidelity research methodology verification ---
 # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [REQ-TIED_FIDELITY_RESEARCH]
 # How: VERIFY_FIDELITY_METHODOLOGY — fail bootstrap when the mandatory client
@@ -850,22 +935,17 @@ FIDELITY_METHODOLOGY_REQUIRED_FILES=(
   "methodology/implementation-decisions/IMPL-TIED_FIDELITY_RESEARCH-pseudocode.md"
   "docs/tied-fidelity-research.md"
   "docs/pseudocode-fidelity-audit-agent-prompt.md"
-  "vocab/fidelity-research.md"
+  "methodology/vocab/fidelity-research.md"
 )
 
 verify_fidelity_methodology() {
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [REQ-TIED_FIDELITY_RESEARCH]
   # How: Require the inherited guide, vocabulary, REQ/ARCH/IMPL records, and
   # pseudo-code sidecar before declaring the client methodology installed.
-  local _missing=0 _deferred_vocab=0 _relative
+  local _missing=0 _relative
   say_warn "MUST verify fidelity research methodology artifacts before completion."
   for _relative in "${FIDELITY_METHODOLOGY_REQUIRED_FILES[@]}"; do
     if [[ ! -f "${TIED_DIR}/${_relative}" ]]; then
-      if [[ "${_relative}" == "vocab/fidelity-research.md" ]] && [[ "${MERGE_VOCAB}" != "true" ]]; then
-        say_warn "MUST run ./copy_files.sh --merge-vocab ${TARGET_PROJECT_DIR} to add the fidelity research vocabulary."
-        _deferred_vocab=1
-        continue
-      fi
       say_err "MISSING mandatory fidelity methodology artifact: ${TIED_DIR}/${_relative}"
       _missing=1
     fi
@@ -874,14 +954,10 @@ verify_fidelity_methodology() {
     say_err "Fidelity research methodology verification failed; client bootstrap is incomplete."
     return 1
   fi
-  if [[ "${_deferred_vocab}" -eq 0 ]]; then
-    say_ok "MUST verify fidelity research methodology artifacts: complete."
-  else
-    say_warn "MUST complete fidelity research vocabulary installation with --merge-vocab."
-  fi
+  say_ok "MUST verify fidelity research methodology artifacts: complete."
   say_warn "CAN run structural validation: TIED_BASE_PATH=${TIED_BASE_PATH_VALUE} ${TIED_CLI_DEST:-${CURSOR_DIR}/skills/tied-yaml/scripts/tied-cli.sh} tied_validate_consistency."
   say_warn "CAN run the read-only audit: ${TIED_DIR}/docs/pseudocode-fidelity-audit-agent-prompt.md (Stages 0-4)."
-  say_warn "CAN merge new vocabulary into an existing client with: ./copy_files.sh --merge-vocab /path/to/client."
+  say_warn "CAN refresh methodology vocabulary with: ./copy_files.sh --merge-vocab /path/to/client."
 }
 
 verify_fidelity_methodology
@@ -893,15 +969,15 @@ verify_fidelity_methodology
 FEATURE_ORCHESTRATION_METHODOLOGY_REQUIRED_FILES=(
   "tied/docs/tied-feature-onboarding.md"
   "tied/constitution.example.yaml"
-  "tied/vocab/feature-orchestration.md"
+  "tied/methodology/vocab/feature-orchestration.md"
   ".cursor/skills/tied-yaml/scripts/tied.sh"
 )
 
 verify_feature_orchestration_methodology() {
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
-  # How: Fail closed for missing mandatory publication artifacts while deferring only
-  # brownfield vocabulary to the explicit additive --merge-vocab refresh path.
-  local _missing=0 _deferred_vocab=0 _relative _artifact_path
+  # How: Fail closed for missing mandatory publication artifacts after the
+  # methodology vocabulary snapshot has been refreshed.
+  local _missing=0 _relative _artifact_path
   say_warn "MUST verify feature orchestration methodology artifacts before completion."
   for _relative in "${FEATURE_ORCHESTRATION_METHODOLOGY_REQUIRED_FILES[@]}"; do
     _artifact_path="${TIED_DIR}/${_relative}"
@@ -909,11 +985,6 @@ verify_feature_orchestration_methodology() {
       _artifact_path="${TARGET_PROJECT_DIR}/${_relative}"
     fi
     if [[ ! -f "${_artifact_path}" ]]; then
-      if { [[ "${_relative}" == "vocab/feature-orchestration.md" ]] || [[ "${_relative}" == "tied/vocab/feature-orchestration.md" ]]; } && [[ "${MERGE_VOCAB}" != "true" ]]; then
-        say_warn "MUST run ./copy_files.sh --merge-vocab ${TARGET_PROJECT_DIR} to add feature orchestration vocabulary."
-        _deferred_vocab=1
-        continue
-      fi
       say_err "MISSING mandatory feature orchestration artifact: ${_artifact_path}"
       _missing=1
     fi
@@ -922,11 +993,7 @@ verify_feature_orchestration_methodology() {
     say_err "Feature orchestration methodology verification failed; client bootstrap is incomplete."
     return 1
   fi
-  if [[ "${_deferred_vocab}" -eq 0 ]]; then
-    say_ok "MUST verify feature orchestration methodology artifacts: complete."
-  else
-    say_warn "MUST complete feature orchestration vocabulary installation with --merge-vocab."
-  fi
+  say_ok "MUST verify feature orchestration methodology artifacts: complete."
   say_warn "CAN run onboarding smoke: (cd ${TARGET_PROJECT_DIR} && .cursor/skills/tied-yaml/scripts/tied.sh init)."
   say_warn "CAN run structural validation: TIED_BASE_PATH=${TIED_BASE_PATH_VALUE} ${TIED_CLI_DEST:-${CURSOR_DIR}/skills/tied-yaml/scripts/tied-cli.sh} tied_validate_consistency."
 }

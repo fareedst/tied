@@ -1657,9 +1657,13 @@ IMPL-TIED_FILES:
   cross_references:
     - "ARCH-MCP_USAGE_METRICS"
     - "ARCH-TIED_STRUCTURE"
+    - "ARCH-TIED_VOCABULARY_LAYERS"
     - "IMPL-MCP_USAGE_METRICS"
+    - "IMPL-TIED_VOCABULARY_REFRESH"
     - "REQ-MCP_USAGE_METRICS"
     - "REQ-TIED_SETUP"
+    - "REQ-TIED_VOCABULARY_OWNERSHIP"
+  description: "TIED bootstrap with layered methodology/client vocabulary refresh, durable handoffs, managed skills, and deterministic copy metadata."
   detail_file: "implementation-decisions/IMPL-TIED_FILES.yaml"
   implementation_approach:
     details:
@@ -1688,8 +1692,8 @@ IMPL-TIED_FILES:
       date: "2025-12-18T00:00:00.000Z"
     last_updated:
       author: "AI Agent"
-      date: "2026-08-13"
-      reason: "Add opt-in MCP metrics fields and project client-name fallback to new bootstrap configuration"
+      date: "2026-08-19"
+      reason: "Reconcile bootstrap implementation with layered vocabulary ownership and refresh behavior"
     last_validated:
       date: "2026-08-13"
       result: "pass"
@@ -1766,6 +1770,13 @@ IMPL-TIED_RESEARCH_RECORDS:
     tests:
       - "mcp-server/src/research-records.test.ts"
       - "mcp-server/src/tools/batch-5-mcp.test.ts"
+IMPL-TIED_VOCABULARY_REFRESH:
+  cross_references:
+    - "ARCH-TIED_VOCABULARY_LAYERS"
+    - "REQ-TIED_VOCABULARY_OWNERSHIP"
+  detail_file: "implementation-decisions/IMPL-TIED_VOCABULARY_REFRESH.yaml"
+  name: "Vocabulary Ownership Refresh"
+  status: "Active"
 IMPL-TIED_YAML_CANONICALIZER:
   cross_references:
     - "ARCH-TIED_YAML_CANONICAL_PROFILE"

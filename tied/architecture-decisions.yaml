@@ -1450,7 +1450,11 @@ ARCH-TIED_STRUCTURE:
         - "Common convention for documentation"
       rejected_reason: "./tied/ is more specific to the methodology"
   cross_references:
+    - "IMPL-TIED_FILES"
+    - "IMPL-TIED_VOCABULARY_REFRESH"
     - "REQ-TIED_SETUP"
+    - "REQ-TIED_VOCABULARY_OWNERSHIP"
+  description: "TIED project structure separates refreshable methodology vocabulary from durable client vocabulary while preserving explicit handoffs."
   detail_file: "architecture-decisions/ARCH-TIED_STRUCTURE.yaml"
   implementation_approach:
     details:
@@ -1474,8 +1478,8 @@ ARCH-TIED_STRUCTURE:
       date: "2025-12-18T00:00:00.000Z"
     last_updated:
       author: "AI Agent"
-      date: "2026-08-13"
-      reason: "Stop installing prompt-type Task wrappers into client projects during bootstrap"
+      date: "2026-08-19"
+      reason: "Reconcile structure with layered vocabulary ownership and refresh behavior"
     last_validated:
       date: "2026-02-06T00:00:00.000Z"
       result: "pass"
@@ -1510,6 +1514,13 @@ ARCH-TIED_STRUCTURE:
       - "REQ-TIED_SETUP"
     tests:
       - "TestTIEDSetup_REQ_TIED_SETUP"
+ARCH-TIED_VOCABULARY_LAYERS:
+  category: "Structural"
+  cross_references:
+    - "REQ-TIED_VOCABULARY_OWNERSHIP"
+  detail_file: "architecture-decisions/ARCH-TIED_VOCABULARY_LAYERS.yaml"
+  name: "Layered Vocabulary Ownership"
+  status: "Active"
 ARCH-TIED_YAML_CANONICAL_PROFILE:
   cross_references:
     - "ARCH-MODULE_VALIDATION"

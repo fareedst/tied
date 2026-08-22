@@ -1,0 +1,49 @@
+ARCH-TIED_VOCABULARY_LAYERS:
+  alternatives_considered:
+    - cons:
+        - "Refreshes remain unsafe and terminology forks persist"
+      name: "Keep mixed tied/vocab files"
+      pros:
+        - "No migration"
+      rejected_reason: "Does not satisfy deterministic methodology refresh."
+    - cons:
+        - "Existing mixed files cannot be updated safely"
+      name: "Copy methodology glossaries additively into tied/vocab"
+      pros:
+        - "Backward-compatible filenames"
+      rejected_reason: "Filename-only merge preserves the ownership ambiguity."
+  category: "Structural"
+  cross_references:
+    - "IMPL-TIED_VOCABULARY_REFRESH"
+    - "REQ-TIED_VOCABULARY_OWNERSHIP"
+  decision: "TIED-owned glossaries are installed under tied/methodology/vocab/ and refreshed as a read-only snapshot; client glossaries remain under tied/vocab/. Client routing.md and domain-references.md are handoff indexes that point to both layers."
+  description: "Use separate methodology and client vocabulary trees with an explicit client discovery handoff."
+  implementation_approach:
+    details:
+      - "Classify all non-source-only canonical TIED glossaries as methodology-owned in the source repository."
+      - "Keep tied/vocab/ client-owned and create missing routing/catalog handoffs only."
+      - "Refresh tied/methodology/vocab/ by replacement with stale-file pruning."
+      - "Use a report-first migration for legacy clients; never split mixed routing/catalog prose automatically."
+    summary: "Refresh methodology vocabulary independently and preserve client vocabulary"
+  metadata:
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-19"
+      reason: "Complete layered vocabulary architecture traceability before verification"
+  name: "Layered Vocabulary Ownership"
+  rationale:
+    why: "Ownership boundaries let TIED refresh canonical terminology deterministically without overwriting product vocabulary."
+  status: "Active"
+  traceability:
+    architecture: []
+    code_annotations:
+      - "ARCH-TIED_VOCABULARY_LAYERS"
+      - "IMPL-TIED_VOCABULARY_REFRESH"
+      - "REQ-TIED_VOCABULARY_OWNERSHIP"
+    implementation:
+      - "IMPL-TIED_VOCABULARY_REFRESH"
+    requirements:
+      - "REQ-TIED_VOCABULARY_OWNERSHIP"
+    tests:
+      - "mcp-server/src/e2e/bootstrap-and-load.test.ts"
+      - "scripts/validate_vocab_index_test.rb"

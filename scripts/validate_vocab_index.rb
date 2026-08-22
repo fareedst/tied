@@ -3,6 +3,8 @@
 
 require "fileutils"
 
+# [IMPL-TIED_VOCABULARY_REFRESH] [ARCH-TIED_VOCABULARY_LAYERS] [REQ-TIED_VOCABULARY_OWNERSHIP] [PROC-VOCABULARY_INDEX]
+# How: Validate methodology and client vocabulary indexes independently, including structure, catalog membership, links, and alphabetical entries.
 class VocabularyIndexValidator
   INDEX_FILES = %w[routing.md domain-references.md].freeze
   REQUIRED_MARKERS = {
@@ -15,21 +17,59 @@ class VocabularyIndexValidator
 
   def initialize(repository_root)
     @repository_root = File.expand_path(repository_root)
-    @vocab_root = File.join(@repository_root, "tied", "vocab")
+    @client_vocab_root = File.join(@repository_root, "tied", "vocab")
+    @methodology_vocab_root = File.join(@repository_root, "tied", "methodology", "vocab")
   end
 
   def validate
-    errors = []
-    paths = glossary_paths
-    errors.concat(validate_index_files)
-    errors.concat(validate_glossary_structure(paths))
-    errors.concat(validate_catalog_membership(paths))
-    errors.concat(validate_links)
-    errors.concat(validate_alphabetical_indexes(paths))
-    errors
+    return validate_legacy_layer unless File.directory?(@methodology_vocab_root)
+
+    validate_methodology_layer + validate_client_layer
   end
 
   private
+
+  def validate_legacy_layer
+    with_vocab_root(@client_vocab_root) do
+      paths = glossary_paths
+      validate_index_files +
+        validate_glossary_structure(paths) +
+        validate_catalog_membership(paths) +
+        validate_links +
+        validate_alphabetical_indexes(paths)
+    end
+  end
+
+  def validate_methodology_layer
+    with_vocab_root(@methodology_vocab_root) do
+      paths = glossary_paths
+      validate_index_files +
+        validate_glossary_structure(paths) +
+        validate_catalog_membership(paths) +
+        validate_links +
+        validate_alphabetical_indexes(paths)
+    end
+  end
+
+  def validate_client_layer
+    with_vocab_root(@client_vocab_root) do
+      paths = glossary_paths
+      errors = validate_index_files
+      errors.concat(validate_glossary_structure(paths))
+      errors.concat(validate_client_catalog_membership(paths))
+      errors.concat(validate_links)
+      errors.concat(validate_alphabetical_indexes(paths))
+      errors
+    end
+  end
+
+  def with_vocab_root(root)
+    previous = @vocab_root
+    @vocab_root = root
+    yield
+  ensure
+    @vocab_root = previous
+  end
 
   def glossary_paths
     Dir.glob(File.join(@vocab_root, "*.md")).reject do |path|
@@ -62,6 +102,21 @@ class VocabularyIndexValidator
       errors = []
       errors << "#{basename} is missing from routing.md" unless routing_paths.include?(basename)
       errors << "#{basename} is missing from domain-references.md" unless catalog_paths.include?(basename)
+      errors
+    end
+  end
+
+  def validate_client_catalog_membership(paths)
+    routing = File.join(@vocab_root, "routing.md")
+    catalog = File.join(@vocab_root, "domain-references.md")
+    routing_paths = table_link_targets(routing, "## Client glossary routing table", "## Ownership")
+    catalog_paths = table_link_targets(catalog, "## Client canonical glossaries", "## Ownership")
+
+    paths.flat_map do |path|
+      basename = File.basename(path)
+      errors = []
+      errors << "#{basename} is missing from client routing.md" unless routing_paths.include?(basename)
+      errors << "#{basename} is missing from client domain-references.md" unless catalog_paths.include?(basename)
       errors
     end
   end

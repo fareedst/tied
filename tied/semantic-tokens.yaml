@@ -508,6 +508,15 @@ ARCH-TIED_STRUCTURE:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_VOCABULARY_LAYERS:
+  cross_references:
+    - "IMPL-TIED_VOCABULARY_REFRESH"
+    - "REQ-TIED_VOCABULARY_OWNERSHIP"
+  description: "Separate methodology and client vocabulary trees with explicit handoff indexes."
+  name: "Layered Vocabulary Ownership"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_YAML_CANONICAL_PROFILE:
   cross_references:
     - "ARCH-MODULE_VALIDATION"
@@ -1184,6 +1193,15 @@ IMPL-TIED_RESEARCH_RECORDS:
     - "REQ-TIED_RESEARCH_RECORDS"
   description: "Normalizes research records, evaluates freshness, and emits read-only external evidence."
   name: "Research record schema and freshness evaluator"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-TIED_VOCABULARY_REFRESH:
+  cross_references:
+    - "ARCH-TIED_VOCABULARY_LAYERS"
+    - "REQ-TIED_VOCABULARY_OWNERSHIP"
+  description: "Refresh methodology vocabulary independently and preserve client vocabulary with report-first migration."
+  name: "Vocabulary Ownership Refresh"
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
@@ -2056,6 +2074,15 @@ REQ-TIED_SETUP:
   name: "TIED Methodology Setup"
   source_index: "requirements.yaml"
   status: "Implemented"
+  type: "REQ"
+REQ-TIED_VOCABULARY_OWNERSHIP:
+  cross_references:
+    - "ARCH-TIED_VOCABULARY_LAYERS"
+    - "IMPL-TIED_VOCABULARY_REFRESH"
+  description: "Separate refreshable methodology vocabulary from durable client vocabulary."
+  name: "Separate Vocabulary Ownership"
+  source_index: "requirements.yaml"
+  status: "Planned"
   type: "REQ"
 REQ-TIED_YAML_CANONICALIZATION:
   category: "Functional"

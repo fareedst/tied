@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Layered vocabulary ownership** — `[REQ-TIED_VOCABULARY_OWNERSHIP]`,
+  `[ARCH-TIED_VOCABULARY_LAYERS]`, and
+  `[IMPL-TIED_VOCABULARY_REFRESH]` now keep refreshable methodology glossaries
+  under `tied/methodology/vocab/`, preserve client-owned `tied/vocab/` handoffs,
+  and provide report-first legacy migration plus independent layer validation.
+  Close-out evidence is recorded in
+  [`tied/citdp/CITDP-REQ-TIED_VOCABULARY_OWNERSHIP.yaml`](tied/citdp/CITDP-REQ-TIED_VOCABULARY_OWNERSHIP.yaml).
+
 - **Source-only Prompt Composer vocabulary** — `copy_files.sh` excludes
   `tied/vocab/prompt-composer.md` from client seed and merge operations, and
   filters source-only references from client-facing vocabulary indexes and

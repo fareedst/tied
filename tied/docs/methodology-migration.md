@@ -12,6 +12,7 @@ The migration refreshes inherited methodology content without deleting or overwr
 
 - `tied/methodology/` is inherited **methodology YAML** and is refreshed by `copy_files.sh`.
 - `tied/requirements.yaml`, `tied/architecture-decisions.yaml`, `tied/implementation-decisions.yaml`, `tied/semantic-tokens.yaml`, their detail directories, `tied/citdp/`, and `tied/vocab/` are client-owned **project YAML** or domain vocabulary.
+- `tied/methodology/vocab/` is inherited **TIED methodology vocabulary** and is refreshed with the methodology snapshot; it is never a client authoring location.
 - Existing `tied/docs/` files are preserved. The bootstrap doc list is copy-when-missing, so customized documentation must be compared and merged deliberately.
 - `.cursor/mcp.json` and the installed `.cursor/skills/tied-yaml/` are tooling configuration and installation artifacts; inspect their changes after refresh.
 - Local evidence and artifacts outside the inherited methodology tree remain client-owned.
@@ -52,11 +53,11 @@ export TIED_BASE="${CLIENT}/tied"
 
 (cd "${TIED_SOURCE}/mcp-server" && npm run build)
 "${TIED_SOURCE}/copy_files.sh" "${CLIENT}"
-# For an existing non-empty vocabulary directory:
+# For an existing client with legacy vocabulary files:
 "${TIED_SOURCE}/copy_files.sh" --merge-vocab "${CLIENT}"
 ```
 
-The second command is additive. It does not replace the normal refresh; run it when missing canonical vocabulary files should be installed into a client that already has vocabulary files.
+The second command refreshes the methodology vocabulary snapshot and creates missing client routing/catalog handoffs. It does not overwrite existing client glossaries.
 
 Feature-orchestration publication follows the same non-destructive refresh rules:
 the onboarding guide and wrapper scripts are copied when missing or refreshed as
@@ -78,10 +79,10 @@ Verify after refresh:
 | Asset | Refresh behavior |
 |---|---|
 | `tied/methodology/**` | Always overwritten from inherited templates |
+| `tied/methodology/vocab/*.md` | Always overwritten from TIED methodology vocabulary; source-only glossaries are excluded |
 | Project indexes and detail directories | Never overwritten |
 | Files listed in `DOCS_TO_COPY` | Copied only when missing |
-| `tied/vocab/*.md` without `--merge-vocab` | Seeded only when the client vocabulary directory has no Markdown files |
-| `tied/vocab/*.md` with `--merge-vocab` | Copies absent filenames only; never overwrites existing files |
+| `tied/vocab/*.md` | Client-owned; preserved byte-for-byte, except missing routing/catalog handoffs are created |
 | `tied/constitution.example.yaml` | Created only when missing; client-owned constitution remains `tied/constitution.yaml` |
 | `tied/docs/tied-feature-onboarding.md` | Copied only when missing; customized client guide remains authoritative |
 | `.cursor/skills/tied-yaml/` | Refreshed from the bundled skill |
@@ -108,12 +109,13 @@ The refresh output reports how many canonical documents were copied and warns wh
 
 For vocabulary:
 
-- run `copy_files.sh --merge-vocab` to add absent glossary files;
-- if `routing.md` already exists, manually merge the quality-assurance route and any new cross-topic note;
-- reconcile terminology with [vocabulary-index-analysis-and-standards.md](vocabulary-index-analysis-and-standards.md);
-- record new concepts in the matched glossary, not only in this guide.
+1. Run `scripts/migrate_vocab_ownership.rb --fail-on-review "${CLIENT}"` in report-only mode.
+2. Review every `REVIEW:` line. Routing and catalog files are mixed discovery artifacts by definition and are never split automatically.
+3. Re-run with `--apply` to move only byte-identical TIED glossaries into `tied/methodology/vocab/`; client-specific edits remain in `tied/vocab/`.
+4. Run `copy_files.sh --merge-vocab` to refresh the methodology snapshot and create any missing client handoffs.
+5. Reconcile terminology with [vocabulary-index-analysis-and-standards.md](vocabulary-index-analysis-and-standards.md); record new product concepts in client glossaries and methodology concepts in the TIED source vocabulary.
 
-`--merge-vocab` intentionally does not merge the contents of existing files. An automatic document or routing merge belongs in a future [LEAP](LEAP.md) proposal or a separately reviewed change.
+`--merge-vocab` no longer copies canonical methodology prose into `tied/vocab/`. A `REVIEW:` result is intentionally human work: the migration never silently splits paragraphs or discards client additions.
 
 ### Quality-token packaging status
 
@@ -222,6 +224,7 @@ Rollback procedure:
 - [quality-assurance pilot](quality-assurance-pilot.md)
 - [quality evidence manifest](quality-evidence-manifest.md)
 - [TIED methodology glossary](../vocab/tied-methodology.md)
+- [Vocabulary ownership migration utility](../../scripts/migrate_vocab_ownership.rb)
 - [TIED YAML MCP glossary](../vocab/tied-yaml-mcp.md)
 - [pseudo-code and CITDP glossary](../vocab/pseudocode-and-citdp.md)
 - [quality-assurance glossary](../vocab/quality-assurance.md)

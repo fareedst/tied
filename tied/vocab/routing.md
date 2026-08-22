@@ -1,11 +1,11 @@
 # Vocab directory routing index (primary entry)
 
-**Purpose:** Primary entry for `tied/vocab/`. Lightweight bootstrap file for AI agent sessions. Read this (~70 lines) instead of the full [`domain-references.md`](domain-references.md) at session start. Identifies which glossary file(s) to PRELOAD for a given task.
+**Purpose:** Canonical TIED methodology routing index. In the TIED source repository it routes `tied/vocab/`; in clients, the snapshot lives under `tied/methodology/vocab/` and is dispatched by the client-owned `tied/vocab/routing.md` handoff. Read the client handoff first when working in a client project.
 
 **Procedure:**
 1. Read this file (once per session).
 2. Match your task keywords to the routing table below.
-3. PRELOAD only the matched glossary file(s) under `tied/vocab/`.
+3. PRELOAD only the matched methodology glossary file(s) under this tree (or the client snapshot at `tied/methodology/vocab/`).
 4. If your task spans multiple glossaries, search `domain-references.md` for cross-topic notes (or the relevant glossary names).
 
 ---

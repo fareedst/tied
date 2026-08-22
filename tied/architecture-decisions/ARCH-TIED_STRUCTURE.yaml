@@ -15,7 +15,10 @@ ARCH-TIED_STRUCTURE:
         - "Common convention for documentation"
       rejected_reason: "./tied/ is more specific to the methodology"
   cross_references:
+    - "IMPL-TIED_FILES"
+    - "IMPL-TIED_VOCABULARY_REFRESH"
     - "REQ-TIED_SETUP"
+    - "REQ-TIED_VOCABULARY_OWNERSHIP"
   detail_file: "architecture-decisions/ARCH-TIED_STRUCTURE.yaml"
   implementation_approach:
     details:
@@ -25,13 +28,14 @@ ARCH-TIED_STRUCTURE:
       - "Existing managed destinations are checked before refresh; non-midnight mtimes produce a client-modification warning, while refresh remains deterministic and source files remain unchanged."
       - "Initialize .cursor/mcp.json only when absent; preserve an existing MCP configuration byte-for-byte, including custom settings and whether tied-yaml is present."
       - "Install promoted quality REQ/ARCH/IMPL detail files and pseudo-code sidecars into the inherited methodology snapshot."
+      - "Keep TIED-owned glossaries under tied/methodology/vocab/ and preserve client-owned glossaries and handoff indexes under tied/vocab/."
       - "Managed bootstrap artifacts use cp -p/cp -pR, then normalize only client-copy mtimes to each source item's local calendar-date midnight."
       - "Never overwrite project YAML indexes or detail directories under the tied/ root during bootstrap."
       - "Populate with YAML index files: requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml"
       - "Refresh tied/methodology/ as an inherited read-only snapshot with exact template parity and stale-file pruning."
       - "The 13 leaf prompt-type Task wrappers at .cursor/agents/<prompt-type>.md remain TIED-source development artifacts; copy_files.sh installs only the managed prompt-type skill bundle into clients."
       - "Treat domain vocabulary as an agent-control layer alongside semantic tokens and IMPL pseudo-code, using RESOLVE, PRELOAD, RECORD, and VALIDATE touchpoints defined by [PROC-VOCABULARY_INDEX]."
-      - "Use copy_files.sh --merge-vocab to add absent glossary basenames without replacing existing client vocabulary."
+      - "Use copy_files.sh --merge-vocab to add absent client glossary basenames without replacing existing client vocabulary."
     summary: "Create dedicated tied/ directory with YAML indexes, domain vocabulary controls, and non-destructive bootstrap boundaries"
   metadata:
     created:
@@ -39,8 +43,8 @@ ARCH-TIED_STRUCTURE:
       date: "2025-12-18"
     last_updated:
       author: "AI Agent"
-      date: "2026-08-13"
-      reason: "Stop installing prompt-type Task wrappers into client projects during bootstrap"
+      date: "2026-08-19"
+      reason: "Reconcile structure with layered vocabulary ownership and refresh behavior"
     last_validated:
       date: "2026-02-06"
       result: "pass"
@@ -67,11 +71,18 @@ ARCH-TIED_STRUCTURE:
   traceability:
     code_annotations:
       - "ARCH-TIED_STRUCTURE"
+      - "ARCH-TIED_VOCABULARY_LAYERS"
       - "IMPL-TIED_FILES"
+      - "IMPL-TIED_VOCABULARY_REFRESH"
       - "REQ-TIED_SETUP"
+      - "REQ-TIED_VOCABULARY_OWNERSHIP"
     implementation:
       - "IMPL-TIED_FILES"
+      - "IMPL-TIED_VOCABULARY_REFRESH"
     requirements:
       - "REQ-TIED_SETUP"
+      - "REQ-TIED_VOCABULARY_OWNERSHIP"
     tests:
+      - "mcp-server/src/e2e/bootstrap-and-load.test.ts"
+      - "scripts/validate_vocab_index_test.rb"
       - "TestTIEDSetup_REQ_TIED_SETUP"

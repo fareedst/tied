@@ -1,10 +1,10 @@
 IMPL-TIED_FILES:
   code_locations:
     files:
-      - description: "Bootstrap script that sets up TIED structure, skill install, prompt-type skill bundle, TIED_REPO_ROOT patch, vocab seed"
+      - description: "Bootstrap script that sets up TIED structure, skill install, prompt-type skill bundle, TIED_REPO_ROOT patch, layered vocabulary refresh, and client handoff creation"
         lines:
           - "1"
-          - "642"
+          - "1001"
         path: "copy_files.sh"
       - description: "Canonical tracked prompt-type skill bundle"
         path: "tools/bundled-prompt-type-skills/"
@@ -26,6 +26,14 @@ IMPL-TIED_FILES:
         path: "scripts/analyze_tied_mcp_metrics.rb"
       - description: "Smoke tests for analyze_tied_mcp_metrics.rb"
         path: "scripts/analyze_tied_mcp_metrics_test.rb"
+      - description: "Report-first legacy vocabulary ownership migration"
+        path: "scripts/migrate_vocab_ownership.rb"
+      - description: "Report-first legacy vocabulary migration tests"
+        path: "scripts/migrate_vocab_ownership_test.rb"
+      - description: "Layer-aware vocabulary routing/catalog validator"
+        path: "scripts/validate_vocab_index.rb"
+      - description: "Layer-aware vocabulary validator tests"
+        path: "scripts/validate_vocab_index_test.rb"
       - description: "tied_token_rename; extra_globs/extra_extensions from client project root"
         path: "mcp-server/src/token-rename.ts"
       - description: "Unit tests for token rename including extra substitution targets"
@@ -41,15 +49,18 @@ IMPL-TIED_FILES:
   cross_references:
     - "ARCH-MCP_USAGE_METRICS"
     - "ARCH-TIED_STRUCTURE"
+    - "ARCH-TIED_VOCABULARY_LAYERS"
     - "IMPL-MCP_USAGE_METRICS"
+    - "IMPL-TIED_VOCABULARY_REFRESH"
     - "REQ-MCP_USAGE_METRICS"
     - "REQ-TIED_SETUP"
+    - "REQ-TIED_VOCABULARY_OWNERSHIP"
   detail_file: "implementation-decisions/IMPL-TIED_FILES.yaml"
   implementation_approach:
     details:
       - "[2026-08-14] Brownfield refresh preserves project YAML, existing MCP configuration, customized documentation, and vocabulary; --merge-vocab adds absent feature-orchestration.md without overwriting client glossaries."
       - "[2026-08-14] Lightweight feature-orchestration publication: copy tied/constitution.example.yaml only when absent, copy tied/docs/tied-feature-onboarding.md when absent, distribute executable tied.sh and feature-orchestrator.sh wrappers with TIED_REPO_ROOT baked by copy_files.sh, and fail closed through verify_feature_orchestration_methodology when required artifacts are missing."
-      - "Additive vocabulary merge mode: copy_files.sh --merge-vocab copies only absent TIED_SOURCE/tied/vocab/*.md filenames and reports added versus preserved files; existing client vocabulary remains authoritative."
+      - "Additive vocabulary merge mode: copy_files.sh --merge-vocab copies only absent client-facing glossary filenames and reports added versus preserved files; existing client vocabulary remains authoritative."
       - "Copy base files to project root when missing (.cursorrules, AGENTS.md). In a TIED source repository, live guide content is under tied/docs/; agents and preload use client ./tied/docs/ paths and ./tied/agent-preload-contract.yaml."
       - "Copy guide .md files, detail-files-schema.md, preload contract templates, and reference docs from TIED source tied/docs/ into client tied/docs/ when missing (per DOCS_TO_COPY in copy_files.sh)"
       - "Copy tied/docs/prompt-type-skills.md into client tied/docs/ when missing so the prompt-type distribution contract travels with the TIED documentation."
@@ -62,6 +73,7 @@ IMPL-TIED_FILES:
       - "Initialize .cursor/mcp.json only when it is absent; preserve an existing file byte-for-byte rather than merging or refreshing tied-yaml settings, including when tied-yaml is absent."
       - "Install the tied-yaml Cursor skill to .cursor/skills/tied-yaml/ (from tools/bundled-tied-yaml-skill/ in the TIED source repo; .cursor/skills/tied-yaml only if the bundle is missing; overwritten each run). The canonical stdio client on the client is .cursor/skills/tied-yaml/scripts/tied-cli.sh only; copy_files.sh does not create a project-root scripts/tied-cli.sh entry."
       - "Install the tracked tools/bundled-prompt-type-skills/ bundle into client .cursor/skills/ with an explicit managed directory list; refresh only prompt-type and prompt-shared paths while preserving unrelated skills and .cursor/mcp.json."
+      - "Layered vocabulary ownership delegates methodology snapshot replacement, stale-file pruning, client handoff creation, and report-first legacy migration to IMPL-TIED_VOCABULARY_REFRESH while preserving client-owned glossary bytes."
       - "Option A keeps Batch 0–6 FEAT tokens project-owned; publication ships runtime, docs, wrappers, and vocabulary without promoting feature tokens into client methodology YAML."
       - "Preserve the existing .cursor/mcp.json byte-for-byte regardless of the metrics environment."
       - "Publish the client-facing feature orchestration package additively: create tied/constitution.example.yaml only when absent and copy tied/docs/tied-feature-onboarding.md only when absent, preserving client-owned content during brownfield refresh."
@@ -72,15 +84,15 @@ IMPL-TIED_FILES:
       - "Treat the vocabulary layer as an agent-control layer and keep its RESOLVE, PRELOAD, RECORD, and VALIDATE touchpoints aligned with [PROC-VOCABULARY_INDEX]."
       - "WARN_ON_MODIFIED_COPY_TARGET reports non-midnight destination mtimes before managed refresh; post-processed files are re-normalized without changing source files."
       - "When initializing a new .cursor/mcp.json, include TIED_MCP_COLLECT_METRICS=1 and TIED_MCP_METRICS_CLIENT only when TIED_MCP_COLLECT_METRICS is exactly 1; use a non-empty explicit TIED_MCP_METRICS_CLIENT override or the target project directory basename."
-    summary: "Bootstrap TIED layout and managed prompt artifacts with attribute-preserving copies, destination-only source-date midnight normalization, pre-refresh non-midnight modification warnings, delegated YAML canonicalization, and conditional MCP metrics fields for new configs"
+    summary: "Bootstrap TIED layout and managed prompt artifacts with attribute-preserving copies, destination-only source-date midnight normalization, pre-refresh non-midnight modification warnings, layered methodology/client vocabulary ownership, delegated YAML canonicalization, and conditional MCP metrics fields for new configs"
   metadata:
     created:
       author: "AI Agent"
       date: "2025-12-18T00:00:00.000Z"
     last_updated:
       author: "AI Agent"
-      date: "2026-08-14"
-      reason: "Publish feature orchestration onboarding artifacts, wrappers, constitution example, and fail-closed client bootstrap verification"
+      date: "2026-08-19"
+      reason: "Reconcile bootstrap implementation with layered vocabulary ownership and refresh behavior"
     last_validated:
       date: "2026-08-13"
       result: "pass"
@@ -97,14 +109,18 @@ IMPL-TIED_FILES:
       - "Missing required TIED files and directories"
     why: "Implements ARCH-TIED_STRUCTURE and realizes REQ-TIED_SETUP by creating the foundational TIED directory structure and files"
   related_decisions:
-    depends_on: []
+    depends_on:
+      - "IMPL-TIED_VOCABULARY_REFRESH"
     see_also:
       - "ARCH-FEAT_ONBOARDING_BOUNDARY"
       - "ARCH-MCP_USAGE_METRICS"
       - "ARCH-TIED_STRUCTURE"
+      - "ARCH-TIED_VOCABULARY_LAYERS"
       - "REQ-FEAT_ADOPTION_GUIDANCE"
       - "REQ-FEAT_ONBOARDING_COMMANDS"
+      - "REQ-MCP_USAGE_METRICS"
       - "REQ-TIED_SETUP"
+      - "REQ-TIED_VOCABULARY_OWNERSHIP"
     supersedes: []
   status: "Active"
   traceability:
@@ -112,22 +128,27 @@ IMPL-TIED_FILES:
       - "ARCH-FEAT_ONBOARDING_BOUNDARY"
       - "ARCH-MCP_USAGE_METRICS"
       - "ARCH-TIED_STRUCTURE"
+      - "ARCH-TIED_VOCABULARY_LAYERS"
     code_annotations:
       - "ARCH-FEAT_ONBOARDING_BOUNDARY"
       - "ARCH-MCP_USAGE_METRICS"
       - "ARCH-TIED_STRUCTURE"
+      - "ARCH-TIED_VOCABULARY_LAYERS"
       - "IMPL-FEAT_ONBOARDING_COMMANDS"
       - "IMPL-MCP_USAGE_METRICS"
       - "IMPL-TIED_FILES"
+      - "IMPL-TIED_VOCABULARY_REFRESH"
       - "REQ-FEAT_ADOPTION_GUIDANCE"
       - "REQ-FEAT_ONBOARDING_COMMANDS"
       - "REQ-MCP_USAGE_METRICS"
       - "REQ-TIED_SETUP"
+      - "REQ-TIED_VOCABULARY_OWNERSHIP"
     requirements:
       - "REQ-FEAT_ADOPTION_GUIDANCE"
       - "REQ-FEAT_ONBOARDING_COMMANDS"
       - "REQ-MCP_USAGE_METRICS"
       - "REQ-TIED_SETUP"
+      - "REQ-TIED_VOCABULARY_OWNERSHIP"
     tests:
       - "Manual verification checklists"
       - "mcp-server/src/e2e/bootstrap-and-load.test.ts"
@@ -135,4 +156,6 @@ IMPL-TIED_FILES:
       - "mcp-server/src/token-rename.test.ts"
       - "scripts/analyze_tied_mcp_metrics_test.rb"
       - "scripts/compare_yaml_dirs_test.rb"
+      - "scripts/migrate_vocab_ownership_test.rb"
+      - "scripts/validate_vocab_index_test.rb"
       - "scripts/yaml_list_sorter_test.rb"

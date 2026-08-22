@@ -1,5 +1,5 @@
-# [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS] [IMPL-MCP_USAGE_METRICS]
-# Summary: Bootstrap TIED layout from templates via copy_files.sh — indexes, guides, detail dirs, AGENTS.md family, vocabulary seed/merge, managed prompt-type skills, feature-orchestration onboarding artifacts and wrappers, create-if-missing constitution example, closed publication verification, attribute-preserving copies, source-date midnight timestamps on client copies, modification warnings, implementation pseudo-code sidecars, tied-yaml skill, and opt-in MCP metrics configuration.
+# [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-TIED_VOCABULARY_REFRESH] [ARCH-TIED_VOCABULARY_LAYERS] [REQ-TIED_VOCABULARY_OWNERSHIP] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS] [IMPL-MCP_USAGE_METRICS]
+# Summary: Bootstrap TIED layout from templates via copy_files.sh — indexes, guides, detail dirs, AGENTS.md family, layered methodology/client vocabulary ownership, managed prompt-type skills, feature-orchestration onboarding artifacts and wrappers, create-if-missing constitution example, closed publication verification, attribute-preserving copies, source-date midnight timestamps on client copies, modification warnings, implementation pseudo-code sidecars, tied-yaml skill, and opt-in MCP metrics configuration.
 
 # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
 # How: Contract — INPUT/OUTPUT/DATA for BOOTSTRAP_TIED below; these fields define the bootstrap boundary.
@@ -8,7 +8,7 @@
 # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
 # How: OUTPUT — created or updated files under tied/ and selected root files; process exit status.
 # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
-# How: DATA — project indexes; inherited methodology tree; tied/vocab/*.md when seeded or merged; feature-orchestration onboarding and constitution artifacts; IMPL-*-pseudocode.md sidecars; managed .cursor/skills/ artifacts; source-date midnight metadata applied only to client copies; modification diagnostics; and the client .cursor/mcp.json when initialized, including opt-in metrics fields.
+# How: DATA — project indexes; inherited methodology tree; refreshable tied/methodology/vocab/*.md; durable client tied/vocab/*.md and handoffs; feature-orchestration onboarding and constitution artifacts; IMPL-*-pseudocode.md sidecars; managed .cursor/skills/ artifacts; source-date midnight metadata applied only to client copies; modification diagnostics; and the client .cursor/mcp.json when initialized, including opt-in metrics fields.
 
 procedure BOOTSTRAP_TIED(projectRoot):
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
@@ -31,8 +31,9 @@ procedure BOOTSTRAP_TIED(projectRoot):
   CALL INITIALIZE_TIED_MCP_CONFIG(projectRoot)
   CALL INSTALL_TIED_YAML_SKILL(projectRoot)
   CALL INSTALL_FEATURE_ORCHESTRATION_WRAPPERS(projectRoot)
-  CALL SEED_DOMAIN_VOCAB(projectRoot)
-  CALL MERGE_DOMAIN_VOCAB(projectRoot) WHEN --merge-vocab is supplied
+  # [IMPL-TIED_FILES] [IMPL-TIED_VOCABULARY_REFRESH] [ARCH-TIED_STRUCTURE] [ARCH-TIED_VOCABULARY_LAYERS] [REQ-TIED_SETUP] [REQ-TIED_VOCABULARY_OWNERSHIP]
+  # How: Delegate layered vocabulary refresh so methodology files are replaced with stale-file pruning while client glossaries and absent handoffs remain durable.
+  CALL REFRESH_BOOTSTRAP_VOCABULARY(projectRoot, mergeVocab)
   CALL COPY_FEATURE_ORCHESTRATION_ARTIFACTS(projectRoot)
   RETURN success
 
@@ -258,77 +259,21 @@ procedure VERIFY_FEATURE_ORCHESTRATION_METHODOLOGY(projectRoot):
   report tied init, tied feature new, tied_validate_consistency, and manual/offline corrective paths
   RETURN success
 
-procedure SEED_DOMAIN_VOCAB(projectRoot):
-  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [PROC-VOCABULARY_INDEX]
-  # How: Seed canonical client glossaries only for a client with no existing Markdown vocabulary and exclude source-only glossaries.
-  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [PROC-VOCABULARY_INDEX]
-  # How: When client tied/vocab/ is missing or has no *.md files, copy each non-source-only *.md from TIED_SOURCE/tied/vocab/ preserving basename; filter client-facing routing.md and domain-references.md links after copying; never overwrite existing client vocab files.
+procedure REFRESH_BOOTSTRAP_VOCABULARY(projectRoot, mergeVocab):
+  # [IMPL-TIED_FILES] [IMPL-TIED_VOCABULARY_REFRESH] [ARCH-TIED_STRUCTURE] [ARCH-TIED_VOCABULARY_LAYERS] [REQ-TIED_SETUP] [REQ-TIED_VOCABULARY_OWNERSHIP]
+  # How: Delegate refreshable methodology vocabulary, durable client vocabulary, handoff creation, and report-first legacy migration to the vocabulary ownership implementation.
   Contract:
-    INPUT: projectRoot; canonical vocabulary source
-    OUTPUT: seeded client tied/vocab/ or preserved existing vocabulary
-    DATA: canonical glossary files; source-only basename allowlist; client glossary files; client-facing index text
-    CONTROL: seed only when the client has no Markdown glossary; skip source-only basenames; filter copied client-facing indexes; preserve every existing client glossary
-    PRE: vocabulary source and destination may be absent; destination can be created when writable
-    POST: when source is non-empty and destination is empty, every non-source-only canonical glossary is copied and client-facing indexes contain no source-only links; otherwise client files remain unchanged
-    EFFECTS: File I/O — creates a directory, copies glossary files, and filters copied index text; Diagnostics — reports skipped or empty-source cases
-    FAILURE_MODES: VOCABULARY_SOURCE_MISSING; VOCABULARY_DESTINATION_UNWRITABLE; VOCABULARY_COPY_FAILED; VOCABULARY_INDEX_FILTER_FAILED
-    DATA_TRANSITION: vocabulary absent→seeded without source-only files; copied index text→client-filtered index text; existing client vocabulary→preserved
-    TERMINATION: total — finite canonical glossary files
-  dest := projectRoot/tied/vocab/
-  IF dest has one or more *.md files: RETURN (client extensions preserved)
-  IF TIED_SOURCE/tied/vocab/ missing or empty: warn; RETURN
-  FOR each *.md in TIED_SOURCE/tied/vocab/: copy to dest preserving basename
-    IF basename(file) is source-only: continue
-    COPY file with preserved attributes
-    IF basename(file) is routing.md or domain-references.md: FILTER_CLIENT_BOOTSTRAP_DOC(file)
-
-procedure MERGE_DOMAIN_VOCAB(projectRoot):
-  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [PROC-VOCABULARY_INDEX]
-  # How: Add absent non-source-only canonical glossary basenames under --merge-vocab without overwriting client glossaries and filter newly copied indexes.
-  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [PROC-VOCABULARY_INDEX]
-  # How: When --merge-vocab is supplied, skip source-only basenames, add only canonical glossary filenames absent from projectRoot/tied/vocab/, filter newly copied routing.md and domain-references.md, preserve every existing client glossary, and report added/preserved counts.
-  Contract:
-    INPUT: projectRoot; canonical vocabulary source; merge-vocab control
-    OUTPUT: additive vocabulary changes; added and preserved counts
-    DATA: canonical glossary files; source-only basename allowlist; client glossary files; client-facing index text; merge counters
-    CONTROL: add only absent non-source-only basenames; filter newly copied indexes; never overwrite client-owned glossary content
-    PRE: merge-vocab was explicitly supplied; source and destination paths are inspectable or creatable
-    POST: each non-source-only canonical basename is present; newly copied client-facing indexes contain no source-only links; pre-existing client files retain their original content; counts describe observed actions
-    EFFECTS: File I/O — creates destination, copies absent glossary files, and filters newly copied indexes; Diagnostics — reports added and preserved counts
-    FAILURE_MODES: VOCABULARY_SOURCE_MISSING; VOCABULARY_DESTINATION_UNWRITABLE; VOCABULARY_COPY_FAILED; VOCABULARY_INDEX_FILTER_FAILED
-    DATA_TRANSITION: client vocabulary set→union(client set, non-source-only canonical set); copied index text→client-filtered index text; existing file content unchanged
-    TERMINATION: total — finite canonical glossary files
-  dest := projectRoot/tied/vocab/
-  IF TIED_SOURCE/tied/vocab/ missing or empty: warn; RETURN
-  FOR each *.md in TIED_SOURCE/tied/vocab/:
-    IF basename(file) is source-only: continue
-    IF dest/basename(file) is absent:
-      copy file preserving basename
-      IF basename(file) is routing.md or domain-references.md: FILTER_CLIENT_BOOTSTRAP_DOC(file)
-    ELSE:
-      preserve existing client file
-
-procedure FILTER_CLIENT_BOOTSTRAP_DOC(sourcePath):
-  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [PROC-VOCABULARY_INDEX]
-  # How: Remove source-only Prompt Composer references from copied client-facing indexes and prompt-type documentation while leaving canonical TIED-source text unchanged.
-  Contract:
-    INPUT: sourcePath; copied destinationPath; destination basename
-    OUTPUT: filtered client-facing Markdown file
-    DATA: copied Markdown text; source-only glossary basename; client-facing link and guidance lines
-    CONTROL: filter routing.md and domain-references.md links; replace prompt-type-skills.md source-only guidance with client-safe wording; do not filter canonical source files
-    PRE: sourcePath and destinationPath are readable copied counterparts
-    POST: destination contains no client-facing Prompt Composer glossary link or install instruction; sourcePath remains unchanged
-    EFFECTS: File I/O — reads and rewrites destination text
-    FAILURE_MODES: SOURCE_MISSING; DESTINATION_MISSING; DESTINATION_READ_FAILED; DESTINATION_WRITE_FAILED
-    DATA_TRANSITION: copied canonical Markdown→client-safe Markdown; source unchanged
+    INPUT: projectRoot; optional mergeVocab flag
+    OUTPUT: layered vocabulary refresh result
+    DATA: methodology vocabulary snapshot; client vocabulary and handoffs
+    CONTROL: preserve client-owned files; exclude source-only glossaries; replace stale methodology files
+    PRE: projectRoot and TIED source vocabulary are readable and writable as required
+    POST: inherited methodology vocabulary is current; client vocabulary remains durable; handoffs exist when absent
+    EFFECTS: File I/O; Diagnostics
+    FAILURE_MODES: SOURCE_MISSING; DESTINATION_UNWRITABLE; COPY_FAILED; HANDOFF_WRITE_FAILED
+    DATA_TRANSITION: methodology old|absent→current snapshot; client vocabulary→preserved client layer plus absent handoffs
     TERMINATION: total
-  IF basename(destinationPath) is routing.md:
-    remove lines containing prompt-composer.md
-  ELSE IF basename(destinationPath) is domain-references.md:
-    remove Prompt Composer glossary rows and links
-  ELSE IF basename(destinationPath) is prompt-type-skills.md:
-    replace source-only glossary links and maintenance instructions with client-safe wording
-  write filtered text to destinationPath
+  CALL IMPL-TIED_VOCABULARY_REFRESH.REFRESH_VOCABULARY(projectRoot, mergeVocab)
   RETURN success
 
 procedure COPY_IMPLEMENTATION_PSEUDOCODE_SIDECARS(projectRoot):

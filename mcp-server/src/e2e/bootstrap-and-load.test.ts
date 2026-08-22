@@ -1,6 +1,6 @@
 /**
- * [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
- * How: Exercise bootstrap and refresh behavior while preserving client-owned project YAML, documentation, vocabulary, and unrelated content.
+ * [IMPL-TIED_FILES] [IMPL-TIED_VOCABULARY_REFRESH] [ARCH-TIED_STRUCTURE] [ARCH-TIED_VOCABULARY_LAYERS] [REQ-TIED_SETUP] [REQ-TIED_VOCABULARY_OWNERSHIP]
+ * How: Exercise bootstrap and layered vocabulary refresh behavior while preserving client-owned project YAML, documentation, vocabulary, and unrelated content.
  */
 
 import { describe, it, beforeEach, afterEach } from "node:test";
@@ -34,7 +34,7 @@ describe("e2e: bootstrap and load", () => {
     }
   });
 
-  it("copy_files.sh populates tied/ and loader reads requirements index from it [IMPL]", () => {
+  it("copy_files.sh populates tied/ and loader reads requirements index from it [IMPL-TIED_FILES] [REQ-TIED_SETUP]", () => {
     const copyScript = path.join(repoRoot, "copy_files.sh");
     assert.ok(fs.existsSync(copyScript), `copy_files.sh not found at ${copyScript}`);
     const bootstrapOutput = execSync(`bash "${copyScript}" "${tempDir}"`, {
@@ -126,9 +126,13 @@ describe("e2e: bootstrap and load", () => {
       "bootstrap should publish the feature onboarding guide [REQ-FEAT_ADOPTION_GUIDANCE]"
     );
     assert.ok(
-      fs.existsSync(path.join(tiedDir, "vocab", "feature-orchestration.md")),
-      "bootstrap should publish the feature orchestration vocabulary [PROC-VOCABULARY_INDEX]"
+      fs.existsSync(path.join(tiedDir, "methodology", "vocab", "feature-orchestration.md")),
+      "bootstrap should publish feature orchestration vocabulary in the methodology snapshot [PROC-VOCABULARY_INDEX]"
     );
+    execFileSync("ruby", [path.join(repoRoot, "scripts", "validate_vocab_index.rb"), tempDir], {
+      cwd: repoRoot,
+      stdio: "pipe",
+    });
 
     const rec = getRecord("requirements", "REQ-TIED_SETUP");
     assert.ok(rec !== null && typeof rec === "object", "getRecord should return REQ-TIED_SETUP");
@@ -209,24 +213,28 @@ describe("e2e: bootstrap and load", () => {
       assert.doesNotMatch(content, new RegExp(legacyMcpEnableCommand.replaceAll(" ", "\\s+")), `${label} should not retain the legacy MCP enable command [REQ-TIED_SETUP]`);
     }
 
+    // [IMPL-TIED_FILES] [IMPL-TIED_VOCABULARY_REFRESH] [ARCH-TIED_STRUCTURE] [ARCH-TIED_VOCABULARY_LAYERS] [REQ-TIED_SETUP] [REQ-TIED_VOCABULARY_OWNERSHIP]
+    // How: Verify the client handoff reaches the refreshable methodology vocabulary while source-only glossaries stay source-only.
     const vocabIndex = path.join(tiedDir, "vocab", "domain-references.md");
     const vocabRouting = path.join(tiedDir, "vocab", "routing.md");
-    const vocabMethodology = path.join(tiedDir, "vocab", "tied-methodology.md");
+    const methodologyVocabIndex = path.join(tiedDir, "methodology", "vocab", "domain-references.md");
+    const methodologyVocabRouting = path.join(tiedDir, "methodology", "vocab", "routing.md");
+    const vocabMethodology = path.join(tiedDir, "methodology", "vocab", "tied-methodology.md");
     assert.ok(
       fs.existsSync(vocabIndex),
-      "copy_files.sh should seed tied/vocab/domain-references.md [IMPL-TIED_FILES] [PROC-VOCABULARY_INDEX]"
+      "copy_files.sh should create the client vocabulary catalog handoff [IMPL-TIED_FILES] [PROC-VOCABULARY_INDEX]"
     );
     assert.ok(
       fs.existsSync(vocabRouting),
-      "copy_files.sh should seed tied/vocab/routing.md [IMPL-TIED_FILES] [PROC-VOCABULARY_INDEX]"
+      "copy_files.sh should create the client vocabulary routing handoff [IMPL-TIED_FILES] [PROC-VOCABULARY_INDEX]"
     );
     assert.ok(
       fs.existsSync(vocabMethodology),
-      "copy_files.sh should seed tied/vocab/tied-methodology.md [REQ-TIED_SETUP]"
+      "copy_files.sh should install tied-methodology.md in the methodology snapshot [REQ-TIED_SETUP]"
     );
     assert.ok(
-      fs.existsSync(path.join(tiedDir, "vocab", "fidelity-research.md")),
-      "copy_files.sh should seed tied/vocab/fidelity-research.md"
+      fs.existsSync(path.join(tiedDir, "methodology", "vocab", "fidelity-research.md")),
+      "copy_files.sh should install fidelity-research.md in the methodology snapshot"
     );
     assert.ok(
       fs.existsSync(path.join(repoRoot, "tied", "vocab", "prompt-composer.md")),
@@ -236,8 +244,32 @@ describe("e2e: bootstrap and load", () => {
       !fs.existsSync(path.join(tiedDir, "vocab", "prompt-composer.md")),
       "copy_files.sh should not publish the source-only Prompt Composer glossary to clients"
     );
+    assert.ok(
+      !fs.existsSync(path.join(tiedDir, "methodology", "vocab", "prompt-composer.md")),
+      "copy_files.sh should not publish the source-only Prompt Composer glossary in the methodology snapshot"
+    );
     const clientVocabRouting = fs.readFileSync(vocabRouting, "utf8");
     const clientVocabCatalog = fs.readFileSync(vocabIndex, "utf8");
+    assert.match(
+      clientVocabRouting,
+      /\.\.\/methodology\/vocab\/routing\.md/,
+      "client routing should dispatch to the methodology routing index"
+    );
+    assert.match(
+      clientVocabCatalog,
+      /\.\.\/methodology\/vocab\/domain-references\.md/,
+      "client catalog should dispatch to the methodology catalog"
+    );
+    assert.match(
+      fs.readFileSync(methodologyVocabRouting, "utf8"),
+      /Glossary routing table/,
+      "methodology routing should remain the canonical methodology discovery surface"
+    );
+    assert.match(
+      fs.readFileSync(methodologyVocabIndex, "utf8"),
+      /Canonical glossaries/,
+      "methodology catalog should remain the canonical methodology catalog"
+    );
     assert.doesNotMatch(
       clientVocabRouting,
       /prompt-composer\.md/,
@@ -326,9 +358,9 @@ describe("e2e: bootstrap and load", () => {
     });
   });
 
-  it("refreshes inherited methodology without overwriting client content [IMPL-TIED_FILES]", () => {
-    // [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
-    // How: Refresh the inherited methodology snapshot, add absent vocabulary files, and preserve client-owned content.
+  it("refreshes layered vocabulary without overwriting client content [IMPL-TIED_FILES] [IMPL-TIED_VOCABULARY_REFRESH] [REQ-TIED_VOCABULARY_OWNERSHIP]", () => {
+    // [IMPL-TIED_FILES] [IMPL-TIED_VOCABULARY_REFRESH] [ARCH-TIED_STRUCTURE] [ARCH-TIED_VOCABULARY_LAYERS] [REQ-TIED_SETUP] [REQ-TIED_VOCABULARY_OWNERSHIP]
+    // How: Refresh the inherited methodology snapshot, prune stale methodology vocabulary, and preserve client-owned content.
     const copyScript = path.join(repoRoot, "copy_files.sh");
     const tiedDir = path.join(tempDir, "tied");
     const projectRequirements = path.join(tiedDir, "requirements.yaml");
@@ -414,18 +446,25 @@ describe("e2e: bootstrap and load", () => {
       "# Client routing glossary\npreserve this customized glossary.\n",
       "merge must preserve customized routing vocabulary"
     );
-    assert.ok(fs.existsSync(path.join(vocabDir, "quality-assurance.md")), "merge must add an absent canonical glossary");
     assert.ok(
-      fs.existsSync(path.join(vocabDir, "fidelity-research.md")),
-      "merge must add the absent fidelity research glossary"
+      fs.existsSync(path.join(methodologyDir, "vocab", "quality-assurance.md")),
+      "refresh must add an absent methodology glossary to the methodology snapshot"
     );
     assert.ok(
-      fs.existsSync(path.join(vocabDir, "feature-orchestration.md")),
-      "merge must add the absent feature orchestration glossary"
+      fs.existsSync(path.join(methodologyDir, "vocab", "fidelity-research.md")),
+      "refresh must add the absent fidelity research glossary to the methodology snapshot"
+    );
+    assert.ok(
+      fs.existsSync(path.join(methodologyDir, "vocab", "feature-orchestration.md")),
+      "refresh must add the absent feature orchestration glossary to the methodology snapshot"
     );
     assert.ok(
       !fs.existsSync(path.join(vocabDir, "prompt-composer.md")),
       "merge must not add the source-only Prompt Composer glossary"
+    );
+    assert.ok(
+      !fs.existsSync(path.join(methodologyDir, "vocab", "prompt-composer.md")),
+      "refresh must not add the source-only Prompt Composer glossary to the methodology snapshot"
     );
     assert.doesNotMatch(
       fs.readFileSync(path.join(vocabDir, "domain-references.md"), "utf8"),
@@ -494,6 +533,9 @@ describe("e2e: bootstrap and load", () => {
       ...["requirements", "architecture-decisions", "implementation-decisions"].flatMap((directory) =>
         listRelativeFiles(path.join(repoRoot, "templates", directory)).map((file) => path.join(directory, file))
       ),
+      ...listRelativeFiles(path.join(repoRoot, "tied", "vocab"))
+        .filter((file) => file !== "prompt-composer.md")
+        .map((file) => path.join("vocab", file)),
     ].sort();
     assert.deepStrictEqual(
       listRelativeFiles(methodologyDir).sort(),

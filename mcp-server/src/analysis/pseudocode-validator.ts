@@ -63,7 +63,7 @@ export type PseudocodeValidationReport = {
   diagnostics: PseudocodeDiagnostic[];
 };
 
-const TOKEN_RE = /\[(REQ-[A-Z0-9_-]+|ARCH-[A-Z0-9_-]+|IMPL-[A-Z0-9_-]+)\]/g;
+const TOKEN_RE = /\[(REQ-[A-Za-z0-9_-]+|ARCH-[A-Za-z0-9_-]+|IMPL-[A-Za-z0-9_-]+)\]/g;
 const REQUIRED_CONTRACT_FIELDS = ["INPUT", "OUTPUT", "PRE", "POST", "EFFECTS"];
 const BUILTIN_CALLS = new Set([
   "NORMALIZE",

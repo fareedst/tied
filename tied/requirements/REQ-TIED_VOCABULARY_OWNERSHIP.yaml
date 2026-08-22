@@ -1,0 +1,32 @@
+REQ-TIED_VOCABULARY_OWNERSHIP:
+  category: "Infrastructure"
+  description: "TIED clients separate refreshable methodology vocabulary from durable client-owned vocabulary while preserving one agent-friendly discovery entry point."
+  metadata:
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-19"
+      reason: "Complete layered vocabulary ownership traceability before verification"
+  name: "Separate Vocabulary Ownership"
+  priority: "P1"
+  rationale:
+    why: "Mixed methodology and product terms in tied/vocab/ make methodology refreshes unsafe and force client forks."
+  satisfaction_criteria:
+    - criterion: "Fresh bootstrap places all non-source-only TIED glossaries under tied/methodology/vocab/ and creates client routing/catalog handoffs under tied/vocab/."
+    - criterion: "Migration reports mixed files and moves only exact methodology glossaries without silent content splitting."
+    - criterion: "Refresh replaces stale methodology glossaries, excludes source-only glossaries, and preserves client glossaries and existing routing/catalog files."
+    - criterion: "Routing and catalog links identify ownership and resolve to existing files."
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_VOCABULARY_LAYERS"
+    code_annotations:
+      - "ARCH-TIED_VOCABULARY_LAYERS"
+      - "IMPL-TIED_VOCABULARY_REFRESH"
+      - "REQ-TIED_VOCABULARY_OWNERSHIP"
+    implementation:
+      - "IMPL-TIED_VOCABULARY_REFRESH"
+    requirements: []
+    tests:
+      - "mcp-server/src/e2e/bootstrap-and-load.test.ts"
+      - "scripts/migrate_vocab_ownership_test.rb"
+      - "scripts/validate_vocab_index_test.rb"

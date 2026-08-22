@@ -52,6 +52,32 @@ procedure NORMALIZE_RESULTS(input):
     assert.equal(report.diagnostics.length, 0);
   });
 
+  it("preserves mixed-case registered token links", () => {
+    const report = validateEssencePseudocode({
+      token: "IMPL-UIManager_SCOPED_ROOT",
+      known_tokens: [
+        "REQ-SIDE_PANEL_POPUP_EQUIVALENT",
+        "ARCH-SIDE_PANEL_TABS",
+        "IMPL-UIManager_SCOPED_ROOT",
+      ],
+      pseudocode: `# [IMPL-UIManager_SCOPED_ROOT] [ARCH-SIDE_PANEL_TABS] [REQ-SIDE_PANEL_POPUP_EQUIVALENT]
+# Summary: Keep popup elements scoped to the supplied root.
+procedure CREATE_SCOPED_POPUP:
+  # [IMPL-UIManager_SCOPED_ROOT] [ARCH-SIDE_PANEL_TABS] [REQ-SIDE_PANEL_POPUP_EQUIVALENT]
+  Contract:
+    INPUT: container
+    OUTPUT: scoped_popup
+    PRE: container is present
+    POST: scoped_popup resolves elements within container
+    EFFECTS: pure
+    TERMINATION: total`,
+    });
+
+    assert.equal(report.ok, true);
+    assert.ok(report.blocks[0]?.token_refs.includes("IMPL-UIManager_SCOPED_ROOT"));
+    assert.equal(report.diagnostics.length, 0);
+  });
+
   it("diagnoses missing token linkage, contracts, and unresolved calls", () => {
     const report = validateEssencePseudocode({
       token: "ARCH-QUALITY_ASSURANCE_PROFILES",

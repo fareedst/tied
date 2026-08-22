@@ -1416,7 +1416,12 @@ REQ-TIED_RESEARCH_RECORDS:
   status: "Implemented"
 REQ-TIED_SETUP:
   category: "Functional"
-  description: "TIED setup provides a deterministic client bootstrap: it creates the TIED structure, installs managed prompt-type skills, preserves attributes with cp -p/cp -pR, normalizes only client-copy mtimes to each source item's local calendar-date midnight, and warns before replacing destinations whose mtimes are not midnight."
+  cross_references:
+    - "ARCH-TIED_STRUCTURE"
+    - "ARCH-TIED_VOCABULARY_LAYERS"
+    - "IMPL-TIED_FILES"
+    - "IMPL-TIED_VOCABULARY_REFRESH"
+  description: "Deterministic TIED bootstrap with methodology vocabulary refresh and durable client vocabulary ownership."
   detail_file: "requirements/REQ-TIED_SETUP.yaml"
   metadata:
     created:
@@ -1424,8 +1429,8 @@ REQ-TIED_SETUP:
       date: "2025-11-08T00:00:00.000Z"
     last_updated:
       author: "AI Agent"
-      date: "2026-08-13"
-      reason: "Stop installing prompt-type Task wrappers into client projects during bootstrap"
+      date: "2026-08-19"
+      reason: "Reconcile setup with layered vocabulary ownership and refresh behavior"
     last_validated:
       date: "2026-02-06T00:00:00.000Z"
       result: "pass"
@@ -1493,6 +1498,15 @@ REQ-TIED_SETUP:
       method: "AI agent acknowledgment"
     - coverage: "All index files have corresponding detail directories with proper naming"
       method: "Structure validation"
+REQ-TIED_VOCABULARY_OWNERSHIP:
+  category: "Infrastructure"
+  cross_references:
+    - "ARCH-TIED_VOCABULARY_LAYERS"
+    - "IMPL-TIED_VOCABULARY_REFRESH"
+  detail_file: "requirements/REQ-TIED_VOCABULARY_OWNERSHIP.yaml"
+  name: "Separate Vocabulary Ownership"
+  priority: "P1"
+  status: "Implemented"
 REQ-TIED_YAML_CANONICALIZATION:
   category: "Functional"
   cross_references:

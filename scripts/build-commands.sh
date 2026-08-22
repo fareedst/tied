@@ -59,7 +59,7 @@ alias build-agentstream='echo_exec --cd tools/agentstream go build -o agentstrea
 alias build-mcp='echo_exec --cd mcp-server bun install && echo_exec --cd mcp-server bun run build'
 alias test-mcp='echo_exec --cd mcp-server bun run test'
 
-test-tied-client () {
+test-new-tied-client () {
   DN=$(date +%s)
   cd ~/Documents/dev/test
   mkdir -p "$DN"

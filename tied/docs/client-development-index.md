@@ -28,7 +28,7 @@ Use these **nicknames** in tickets, PRs, and agent prompts.
 | # | Nickname | File | Read when |
 | --- | --- | --- | --- |
 | 1 | **Rules** | [`../../AGENTS.md`](../../AGENTS.md) | Session start; defines obligations, MCP base path, vocab touchpoints. |
-| 2 | **Vocabulary** | [`../vocab/routing.md`](../vocab/routing.md) → matched glossaries | **Before** reading TIED, source, or tests; resolve and preload terms, then record new names and validate before commit. |
+| 2 | **Vocabulary** | Client [`../vocab/routing.md`](../vocab/routing.md) → methodology `../methodology/vocab/routing.md` → matched glossaries | **Before** reading TIED, source, or tests; resolve and preload terms across ownership layers, then record new names and validate before commit. |
 | 3 | **Checklist** | [agent-req-implementation-checklist.md](agent-req-implementation-checklist.md) | **Every** new feature, change, or bug fix — the executable procedure. |
 | 4 | **Tracker** | [agent-req-implementation-checklist.yaml](agent-req-implementation-checklist.yaml) | Copy to a working folder per task; record step completion (see YAML header). |
 | 5 | **Processes** | [processes.md](processes.md) | Need the **definition** behind a checklist step. Read these sections only: `[PROC-CITDP]`, `[PROC-LEAP]`, `[PROC-TIED_DEV_CYCLE]`, `[PROC-IMPL_CODE_TEST_SYNC]`, `[PROC-TEST_STRATEGY]`, `[PROC-QUALITY_ASSURANCE]`, `[PROC-QUALITY_EVIDENCE_PROVENANCE]`, `[PROC-TEST_ADEQUACY]`, `[PROC-VOCABULARY_INDEX]`. |

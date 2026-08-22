@@ -93,12 +93,12 @@ This acknowledgment confirms that the AI agent has:
     - Vocabulary is equally important to pseudo-code, semantic-token, YAML, and test precision. It is the primary guide for how the agent interprets and discusses developer intent, not a passive glossary consulted after implementation.
     - **Three mandatory touchpoints** (via `sub-vocabulary-sync` in `[PROC-AGENT_REQ_CHECKLIST]`):
       - **Prompt intake (RESOLVE):** reword sponsor/user wording that names concepts before it drives REQ/ARCH/IMPL work (`translate-sponsor-intent`, `change-definition`).
-      - **Pre-read (PRELOAD):** read `tied/vocab/routing.md`; match task keywords; load only matched glossaries before reading TIED YAML, docs, source, or tests (`session-bootstrap`, `impact-discovery`).
+      - **Pre-read (PRELOAD):** read client `tied/vocab/routing.md`, dispatch to `tied/methodology/vocab/routing.md`, match task keywords across both ownership layers, and load only matched glossaries before reading TIED YAML, docs, source, or tests (`session-bootstrap`, `impact-discovery`).
       - **Pre-commit (VALIDATE):** audit names in docs, `semantic-tokens.yaml`, TIED records, tests, and code vs the index before commit (`traceable-commit`).
-    - **Inline during work:** **RESOLVE** before naming; **RECORD** when concepts appear or artifacts change — update glossary rows, naming bridges, UPPER_SNAKE block-name tables, and the alphabetical index in `tied/vocab/*.md` immediately.
+    - **Inline during work:** **RESOLVE** before naming; **RECORD** when concepts appear or artifacts change — update client glossary rows in `tied/vocab/*.md` and methodology glossary rows in the TIED source tree, keeping naming bridges, UPPER_SNAKE block-name tables, and alphabetical indexes synchronized.
     - Edit vocab files **directly** (plain Markdown, like IMPL pseudo-code sidecars); do **not** route through MCP or `lint_yaml`.
     - This is **distinct** from the IMPL grammar "preferred vocabulary" (INPUT/OUTPUT/DATA/PRE/POST/EFFECTS keywords in `implementation-decisions.md`).
-    - Standards: `tied/docs/vocabulary-index-analysis-and-standards.md`; routing index: `tied/vocab/routing.md`; full index (on-demand): `tied/vocab/domain-references.md`; full process: `tied/docs/processes.md` § `[PROC-VOCABULARY_INDEX]`.
+    - Standards: `tied/docs/vocabulary-index-analysis-and-standards.md`; client routing handoff: `tied/vocab/routing.md`; methodology routing: `tied/methodology/vocab/routing.md`; full indexes (on-demand): the matching `domain-references.md` in each layer; full process: `tied/docs/processes.md` § `[PROC-VOCABULARY_INDEX]`.
 
 **Bugs vs requirements (operational rule):** Requirements describe desired behavior (WHAT and WHY). Bugs describe implementation failures. Do NOT document bugs as requirements; document bugs in architecture/implementation decisions with cross-reference to the requirement that should be satisfied. If a bug reveals missing behavior specification, add a requirement first, then fix.
 

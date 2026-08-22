@@ -17,7 +17,7 @@ This document centralizes every instruction AI coding assistants must follow whi
    - Review `semantic-tokens.yaml` (token registry YAML index) and `tied/docs/semantic-tokens.md` (token guide)
    - Review `architecture-decisions.yaml` and `implementation-decisions.yaml` (YAML indexes)
    - Review `tied/docs/implementation-decisions.md` (implementation guide) for IMPL pseudo-code, block token rules ([PROC-IMPL_PSEUDOCODE_TOKENS]), and preferred contract vocabulary (INPUT/OUTPUT/DATA/CONTROL plus PRE/POST/EFFECTS/FAILURE_MODES/DATA_TRANSITION/TERMINATION for new/changed Active blocks)
-   - Read `tied/vocab/routing.md` (primary vocab directory entry / routing index, ~70 lines); match task keywords to the routing table; **PRELOAD** only matched glossary file(s) under `tied/vocab/` before reading TIED YAML or source (Touchpoint 2). For cross-cutting concerns, search `tied/vocab/domain-references.md` for the relevant cross-topic note. Read `tied/docs/vocabulary-index-analysis-and-standards.md` for structure and RESOLVE/RECORD/VALIDATE standards ([PROC-VOCABULARY_INDEX]). This is **distinct** from the IMPL grammar "preferred vocabulary" (INPUT/OUTPUT/DATA/PRE/POST/EFFECTS) in `tied/docs/implementation-decisions.md`.
+   - Read `tied/vocab/routing.md` (client-owned primary handoff); follow its link to `tied/methodology/vocab/routing.md` (TIED-owned methodology routing), match task keywords across both layers, and **PRELOAD** only matched glossary file(s) from the indicated ownership layer before reading TIED YAML or source (Touchpoint 2). For cross-cutting concerns, use both `tied/vocab/domain-references.md` and `tied/methodology/vocab/domain-references.md` as needed. Read `tied/docs/vocabulary-index-analysis-and-standards.md` for structure and RESOLVE/RECORD/VALIDATE standards ([PROC-VOCABULARY_INDEX]). This is **distinct** from the IMPL grammar "preferred vocabulary" (INPUT/OUTPUT/DATA/PRE/POST/EFFECTS) in `tied/docs/implementation-decisions.md`.
    - Understand priority order: Tests > Code > Basic Functions > Infrastructure
    - Note: same filename everywhere—at repo root these files are templates; in `tied/` they are the project indexes.
    - **TIED MCP target (mandatory before MCP writes):** Call the TIED MCP tool **`tied_config_get_base_path`** and confirm the effective path is the **`tied/` directory of the repository you intend to change** (not another clone or parent methodology repo). If it is wrong, edit `.cursor/mcp.json` `env.TIED_BASE_PATH` to an **absolute** path to that project’s `tied/`, or remove the file and re-run `./copy_files.sh /path/to/that/project` when a fresh default configuration is intended; `copy_files.sh` preserves an existing file byte-for-byte. Prefer **one Cursor window per implementation repo** when editing project TIED YAML via MCP; multi-root workspaces can leave a single `TIED_BASE_PATH` pointing at the wrong folder (see `tied/citdp/CITDP-REQ-LEAP_PROPOSAL_QUEUE.yaml` RISK-010).
@@ -96,7 +96,7 @@ This document centralizes every instruction AI coding assistants must follow whi
 - [ ] Understand current priorities and dependencies
 - [ ] Review existing semantic tokens, architecture decisions, and implementation decisions related to the work
 - [ ] **IMPL `essence_pseudocode`**: Every block has a comment naming REQ/ARCH/IMPL and how the block implements them ([PROC-IMPL_PSEUDOCODE_TOKENS])
-- [ ] **Domain vocabulary** ([PROC-VOCABULARY_INDEX]): **PRELOAD** — read `tied/vocab/routing.md`; match task keywords to routing table; open only matched glossaries; build a term map before reading TIED YAML or source (Touchpoint 2)
+- [ ] **Domain vocabulary** ([PROC-VOCABULARY_INDEX]): **PRELOAD** — read client `tied/vocab/routing.md`, dispatch to methodology `tied/methodology/vocab/routing.md`, match task keywords across both layers, and open only matched glossaries before reading TIED YAML or source (Touchpoint 2)
 
 ### 3.3 During Work
 - [ ] **Do not edit methodology YAML** in the client (`tied/methodology/`); add and edit REQ/ARCH/IMPL only in **project** YAML under `tied/` ([PROC-TIED_METHODOLOGY_READONLY]).
@@ -160,9 +160,11 @@ Same filename at repo root (template) and in `tied/` (project index); location d
 | `tied/docs/pseudocode-writing-and-validation.md` | Unified IMPL pseudo-code guide: new-REQ vs post-fix tracks, MCP/sidecar mechanics, literal block linkage, phases A–I, LEAP, validation layers (`[PROC-PSEUDOCODE_VALIDATION]`). Checklist: `tied/docs/pseudocode-validation-checklist.yaml`. |
 | `tied/docs/pseudocode-format-and-practices.md` | Standalone format and practices (portable); pairs with the writing doc. **Strong** sidecar preference for non-trivial or growing projects. |
 | `tied/docs/vocabulary-index-analysis-and-standards.md` | Meta-standard for domain glossary structure and TIED integration ([PROC-VOCABULARY_INDEX]) |
-| `tied/vocab/routing.md` | Primary `tied/vocab/` entry — lightweight routing index for session bootstrap; maps task keywords to glossary files (~70 lines) |
-| `tied/vocab/domain-references.md` | Full reference index with cross-topic notes (read on-demand, not at bootstrap) |
-| `tied/vocab/*.md` | Project domain vocabulary (client-owned; RESOLVE/RECORD target) |
+| `tied/vocab/routing.md` | Client-owned primary handoff — dispatches session bootstrap to client and methodology routing |
+| `tied/methodology/vocab/routing.md` | Refreshable TIED-owned methodology routing index |
+| `tied/vocab/domain-references.md` | Client full reference index with a link to the methodology catalog |
+| `tied/methodology/vocab/domain-references.md` | Refreshable TIED-owned full reference index |
+| `tied/vocab/*.md` | Client domain vocabulary (RESOLVE/RECORD target) |
 | `templates/impl-essence-pseudocode-template.md` | Canonical copy-paste `essence_pseudocode` (sidecar) body template. |
 | `.cursorrules` | IDE loader that points back to this document |
 | `.ai-agent-instructions` | Quick reminder pointing to this document |

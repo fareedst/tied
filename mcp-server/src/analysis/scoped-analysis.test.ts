@@ -77,6 +77,26 @@ describe("scoped analysis: roots + ignore patterns", () => {
     assert.ok(!reqTokens.includes("REQ-TEST_SKIP"), "should not discover token outside explicit roots");
   });
 
+  it("token_scan preserves mixed-case IMPL token occurrences", () => {
+    fs.mkdirSync(path.join(tempDir!, "src"), { recursive: true });
+    fs.writeFileSync(
+      path.join(tempDir!, "src", "mixed-case.ts"),
+      `const token = "[IMPL-UIManager_SCOPED_ROOT]";\n`,
+      "utf8"
+    );
+
+    const res = runScopedAnalysis({ mode: "token_scan", roots: ["src"] });
+    assert.strictEqual(res.ok, true);
+    assert.ok(
+      (res.token_scan?.discovered_tokens.IMPL ?? []).includes("IMPL-UIManager_SCOPED_ROOT"),
+      "should discover the registered mixed-case token"
+    );
+    assert.deepStrictEqual(
+      res.token_scan?.occurrences["IMPL-UIManager_SCOPED_ROOT"]?.files,
+      ["src/mixed-case.ts"]
+    );
+  });
+
   it("empty roots array falls back to default roots used by config/default_roots", () => {
     fs.mkdirSync(path.join(tempDir!, "src"), { recursive: true });
     fs.mkdirSync(path.join(tempDir!, "generated"), { recursive: true });

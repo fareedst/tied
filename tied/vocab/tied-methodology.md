@@ -4,7 +4,7 @@
 
 **Traceability:** [REQ-TIED_SETUP](../requirements/REQ-TIED_SETUP.yaml) · [REQ-MODULE_VALIDATION](../requirements/REQ-MODULE_VALIDATION.yaml) · [ARCH-TIED_STRUCTURE](../architecture-decisions/ARCH-TIED_STRUCTURE.yaml) · [ARCH-MODULE_VALIDATION](../architecture-decisions/ARCH-MODULE_VALIDATION.yaml) · [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) · [IMPL-MODULE_VALIDATION](../implementation-decisions/IMPL-MODULE_VALIDATION.yaml)
 
-**See also:** [`routing.md`](routing.md) (primary entry / PRELOAD) · [`domain-references.md`](domain-references.md) (full catalog, on-demand) · [`tied-yaml-mcp.md`](tied-yaml-mcp.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) · [`../docs/vocabulary-index-analysis-and-standards.md`](../docs/vocabulary-index-analysis-and-standards.md)
+**See also:** [`routing.md`](routing.md) (the Vocab directory routing index / PRELOAD) · [`domain-references.md`](domain-references.md) (full catalog, on-demand) · [`tied-yaml-mcp.md`](tied-yaml-mcp.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) · [`../docs/vocabulary-index-analysis-and-standards.md`](../docs/vocabulary-index-analysis-and-standards.md)
 
 ---
 
@@ -44,13 +44,13 @@
 | **sort map keys** | hash key sort, key normalization | Canonicalization recursively orders map keys; compatibility `--sort-keys` remains accepted by the sorter frontend; block-scalar bodies stay opaque |
 | **yaml_semantic_compare** | YAML equality check, deep YAML diff (alone) | Library: `scripts/yaml_semantic_compare.rb`; compares loaded YAML values (key order ignored; optional unordered arrays); used by **yaml_list_sorter** post-sort validation |
 | **compare_yaml_dirs** | directory YAML diff, recursive yaml compare | CLI: `scripts/compare_yaml_dirs.rb LEFT_DIR RIGHT_DIR`; relative-path pairing; reports missing files and semantic differences |
-| **routing.md** / **routing index** | `domain-references-routing.md`, bootstrap via full catalog | Primary `tied/vocab/` PRELOAD entry; keyword → glossary table. Full catalog remains [`domain-references.md`](domain-references.md) (on-demand) |
+| **routing.md** / **routing index** | `domain-references-routing.md`, bootstrap via full catalog | Source methodology PRELOAD entry; in clients, `tied/vocab/routing.md` dispatches to the refreshable `tied/methodology/vocab/routing.md` and the client glossary table |
 | **methodology migration** | client upgrade, methodology refresh (alone) | Controlled refresh of inherited methodology content that preserves project YAML and client-owned documentation |
 | **client refresh** | rerun bootstrap (alone) | A `copy_files.sh` execution against an existing client project |
 | **inherited methodology snapshot** | copied methodology, stale methodology | The exact current template-derived contents of `tied/methodology/`, refreshed as an inherited read-only tree |
 | **promoted quality record** | quality template, copied quality YAML | A quality REQ/ARCH/IMPL detail record installed into the inherited methodology view from canonical templates |
-| **vocabulary merge mode** | overwrite vocab, vocab sync (alone) | Additive `copy_files.sh --merge-vocab` behavior that copies absent glossary files without replacing existing client files |
-| **vocabulary index validator** | vocab lint script, glossary checker | Structural gate that checks routing/catalog membership, glossary markers, links, and alphabetical-index definitions in `tied/vocab/` |
+| **vocabulary merge mode** | overwrite vocab, vocab sync (alone) | `copy_files.sh --merge-vocab` refresh behavior that replaces methodology vocabulary while preserving client glossaries |
+| **vocabulary index validator** | vocab lint script, glossary checker | Layer-aware structural gate that checks methodology and client routing/catalog membership, glossary markers, links, and alphabetical-index definitions |
 | **vocabulary layer** | glossary-only documentation, terminology notes (alone) | Agent-control layer that resolves, preloads, records, and validates canonical domain terms across the TIED workflow |
 | **agent-control layer** | agent guidance (alone), vocabulary policy (alone) | Peer control layer alongside semantic tokens and IMPL pseudo-code; owned by `[PROC-VOCABULARY_INDEX]` |
 | **managed bootstrap artifact** | copied file, installed file (alone) | Canonical client artifact refreshed by `copy_files.sh` and checked for client edits before replacement |
@@ -78,10 +78,11 @@
 | Client-modification warning | client-modification warning | `copy_files.sh` diagnostics | `Client-modified managed copy detected` for non-midnight mtime | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
 | Methodology migration guide | migration guide | `tied/docs/methodology-migration.md` | Existing-client upgrade procedure | [REQ-TIED_SETUP](../requirements/REQ-TIED_SETUP.yaml) |
 | Vocabulary merge mode | copy-missing-vocab | `copy_files.sh --merge-vocab` | Additive vocabulary installation | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
-| Domain vocabulary index | vocab index | `tied/vocab/*.md` | checklist `VOCAB_INDEX` | [PROC-VOCABULARY_INDEX](../docs/processes.md) |
-| Vocab directory routing index | routing index | `tied/vocab/routing.md` | PRELOAD primary entry | [PROC-VOCABULARY_INDEX](../docs/processes.md) |
-| Domain vocabulary full catalog | full catalog | `tied/vocab/domain-references.md` | on-demand cross-topic / Priority table | [PROC-VOCABULARY_INDEX](../docs/processes.md) |
-| Vocabulary control layer | vocabulary layer / agent-control layer | `tied/vocab/*.md` plus checklist touchpoints | RESOLVE / PRELOAD / RECORD / VALIDATE | [PROC-VOCABULARY_INDEX](../docs/processes.md) |
+| Client domain vocabulary index | client vocab index | `tied/vocab/*.md` | checklist `VOCAB_INDEX` | [PROC-VOCABULARY_INDEX](../docs/processes.md) |
+| Client vocab routing handoff | routing handoff | `tied/vocab/routing.md` | PRELOAD dispatch entry | [PROC-VOCABULARY_INDEX](../docs/processes.md) |
+| Methodology vocab routing index | methodology routing index | `tied/methodology/vocab/routing.md` | PRELOAD TIED route | [PROC-VOCABULARY_INDEX](../docs/processes.md) |
+| Domain vocabulary full catalogs | full catalogs | matching `domain-references.md` in each layer | on-demand cross-topic / Priority table | [PROC-VOCABULARY_INDEX](../docs/processes.md) |
+| Vocabulary control layer | vocabulary layer / agent-control layer | both vocabulary trees plus checklist touchpoints | RESOLVE / PRELOAD / RECORD / VALIDATE | [PROC-VOCABULARY_INDEX](../docs/processes.md) |
 | Per-request checklist copy | working folder checklist | `<working_folder>/REQ-*_<timestamp>.yaml` | — | [PROC-AGENT_REQ_CHECKLIST](../docs/processes.md) |
 | Composition coverage guide | binding inventory / E2E exclusion | `tied/docs/composition-coverage.md` | checklist `composition-integration` | [REQ-MODULE_VALIDATION](../requirements/REQ-MODULE_VALIDATION.yaml) |
 | YAML canonicalization | canonical YAML profile | `scripts/yaml_tool.sh` and TIED YAML MCP | `tied-yaml-canonical-v1`; compatibility flags retained | [REQ-TIED_YAML_CANONICALIZATION](../requirements/REQ-TIED_YAML_CANONICALIZATION.yaml) |
