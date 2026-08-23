@@ -31,7 +31,7 @@ ARCH-EVIDENCE_CHAIN_REPORT:
     - "PROC-EVIDENCE_CHAIN"
     - "REQ-EVIDENCE_CHAIN_PROFILE"
     - "REQ-EVIDENCE_CHAIN_REPORT"
-  decision: "Ship a TIED-source offline aggregator that reads an evidence-chain-report-inputs.v1 manifest and already-generated evidence-chain-profile.v1 files, partitions compatible client cohorts, and emits evidence-chain-statistics-report.v1 YAML plus a deterministic Markdown projection. Do not traverse client repositories or write project YAML."
+  decision: "Ship a TIED-source offline aggregator that reads an evidence-chain-report-inputs.v1 manifest and already-generated evidence-chain-profile.v1 files, partitions compatible client cohorts, and emits evidence-chain-statistics-report.v1 (default) or v2 YAML plus deterministic Markdown. v2 adds denominator_fingerprint on each accepted input and sub-cohort partitions inside compatibility_key when denominators differ. Do not traverse client repositories or write project YAML."
   implementation_approach:
     details:
       - "CLI default mode is strict"
@@ -39,13 +39,17 @@ ARCH-EVIDENCE_CHAIN_REPORT:
       - "Reuse NORMALIZE_EVIDENCE_CHAIN_PROFILE validation rules without calling generateEvidenceChainProfile"
       - "TIED_MCP_COLLECT_METRICS remains optional tool-usage metrics only"
       - "v1 does not sum or average derived-field values"
+      - "v2 default remains v1; --report-version v2 enables denominator_fingerprint and sub-cohort partition"
+      - "v2 suppresses cohort-level incompatible-denominator residual risks when sub-cohorts isolate the mismatch"
     key_components:
       - "compatibility_key schema_version|profile_depth"
+      - "denominator subcohort partition inside compatibility_key"
+      - "denominator_fingerprint stable hash of derived and structural denominators"
       - "evidence-chain-report-inputs.v1"
       - "path-privacy artifact refs"
       - "strict and partial modes"
-      - "v1 count-only named statistics"
-    summary: "Add evidence-chain-report.ts plus a CLI that validates artifacts, partitions cohorts, counts named statistics, and writes caller-selected YAML and Markdown."
+      - "v1 and v2 count-only named statistics"
+    summary: "Add evidence-chain-report.ts plus a CLI that validates artifacts, partitions cohorts and v2 sub-cohorts, counts named statistics, and writes caller-selected YAML and Markdown."
   name: "Evidence chain statistics report architecture"
   rationale:
     benefits:

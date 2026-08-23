@@ -153,4 +153,57 @@ describe("RUN_EVIDENCE_CHAIN_REPORT_CLI [REQ-EVIDENCE_CHAIN_REPORT]", () => {
     assert.equal(code, 1);
     assert.equal(fs.readFileSync(tiedReq, "utf8"), before);
   });
+
+  it("accepts --report-version v2 and emits v2 schema [REQ-EVIDENCE_CHAIN_REPORT]", () => {
+    const dir = setupDir();
+    fs.copyFileSync(
+      path.join(fixtureDir, "client-1787461685-bare.v1.json"),
+      path.join(dir, "client-1787461685-bare.v1.json"),
+    );
+    fs.copyFileSync(
+      path.join(fixtureDir, "client-1787461685-reprofile.v1.json"),
+      path.join(dir, "client-1787461685-reprofile.v1.json"),
+    );
+    fs.copyFileSync(path.join(fixtureDir, "report-inputs-v2-golden.yaml"), path.join(dir, "inputs.yaml"));
+    const code = runEvidenceChainReportCli(
+      [
+        "--inputs",
+        path.join(dir, "inputs.yaml"),
+        "--yaml-out",
+        path.join(dir, "report.yaml"),
+        "--markdown-out",
+        path.join(dir, "report.md"),
+        "--report-version",
+        "v2",
+      ],
+      { cwd: dir, projectRoot: dir, now: "2026-08-22T18:00:00.000Z" },
+    );
+    assert.equal(code, 0);
+    const report = yaml.load(fs.readFileSync(path.join(dir, "report.yaml"), "utf8")) as { schema_version: string; cohorts: Array<{ sub_cohorts: unknown[] }> };
+    assert.equal(report.schema_version, "evidence-chain-statistics-report.v2");
+    assert.equal(report.cohorts[0]?.sub_cohorts.length, 2);
+  });
+
+  it("exits 1 on invalid --report-version [REQ-EVIDENCE_CHAIN_REPORT]", () => {
+    const dir = setupDir();
+    fs.writeFileSync(
+      path.join(dir, "inputs.yaml"),
+      ["schema_version: evidence-chain-report-inputs.v1", "inputs:", "  - profile_path: example-profile.json", ""].join("\n"),
+      "utf8",
+    );
+    const code = runEvidenceChainReportCli(
+      [
+        "--inputs",
+        path.join(dir, "inputs.yaml"),
+        "--yaml-out",
+        path.join(dir, "report.yaml"),
+        "--markdown-out",
+        path.join(dir, "report.md"),
+        "--report-version",
+        "v3",
+      ],
+      { cwd: dir, projectRoot: dir },
+    );
+    assert.equal(code, 1);
+  });
 });

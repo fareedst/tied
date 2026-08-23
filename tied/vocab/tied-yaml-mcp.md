@@ -15,7 +15,7 @@
 | **configured project identity** | project name, repo name | Opaque pseudonymous ID from `TIED_MCP_PROJECT_ID` after trim + hash |
 | **path-fallback identity** | base path id | Path-hash when env ID unset/invalid; stable only for stable canonicalized path |
 | **identity source** | id type, id origin | Profile metadata: `configured` or `path_fallback` |
-| **signature coverage** | top-k metadata | Analyzer YAML: bound/considered/emitted/omitted/status for bounded aggregation |
+| **signature coverage** | top-k metadata | Analyzer YAML: `bound` / `considered` / `emitted` / `omitted` / `status` for bounded aggregation. `exact_within_bound` means the complete visible candidate set fits the bound; `approximate` discloses per-file truncation or visible aggregate overflow and never claims hidden candidates were globally ranked. |
 | **TIED YAML MCP** | yaml mcp, project-0-stdd-tied-yaml (alone) | IDE may show project-specific label; same tool surface |
 | **tied-cli** | mcp curl, raw node invoke | Shell wrapper: `.cursor/skills/tied-yaml/scripts/tied-cli.sh` |
 | **TIED base path** | repo root, workspace | Absolute path to **`tied/`** directory; `tied_config_get_base_path` confirms |
@@ -165,7 +165,7 @@ Feedback and LEAP proposal tools are documented in sibling glossaries ([`feedbac
 
 | Preferred term | UPPER_SNAKE block | Owning IMPL |
 |----------------|-------------------|-------------|
-| (MCP core has no dedicated essence_pseudocode blocks in project IMPLs; behavior in TypeScript modules) | — | — |
+| bounded signature aggregation | `ANALYZE_TIED_MCP_METRICS` | [IMPL-MCP_USAGE_METRICS](../implementation-decisions/IMPL-MCP_USAGE_METRICS.yaml) |
 
 ---
 
@@ -173,8 +173,10 @@ Feedback and LEAP proposal tools are documented in sibling glossaries ([`feedbac
 
 | Term | Section |
 |------|---------|
+| ANALYZE_TIED_MCP_METRICS | Pseudo-code block names |
 | args_signature | MCP usage metrics |
 | bootstrap metrics configuration | Naming bridge |
+| bounded signature aggregation | Pseudo-code block names |
 | canonical YAML profile | Preferred terms |
 | citdp_record_write | MCP catalog |
 | client project root | Preferred terms |
@@ -187,6 +189,7 @@ Feedback and LEAP proposal tools are documented in sibling glossaries ([`feedbac
 | merged view | Preferred terms |
 | MCP config preservation | Preferred terms |
 | metrics JSONL | MCP usage metrics |
+| signature coverage | Preferred terms |
 | TIED base path | Preferred terms |
 | TIED methodology repository | Preferred terms |
 | TIED_REPO_ROOT | Naming bridge |

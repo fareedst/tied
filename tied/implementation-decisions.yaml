@@ -162,10 +162,26 @@ IMPL-EVIDENCE_CHAIN_PROFILE:
   detail_file: "implementation-decisions/IMPL-EVIDENCE_CHAIN_PROFILE.yaml"
   implementation_approach:
     details:
-      - "Do not call runFirstSlice or runFidelityResearchPilot"
-      - "Extend opt-in usage metrics with hashed project_id and profile_depth"
-      - "Reuse resolveProjectManifest, runStructuralAnalysis, auditImplFidelity, analyzeBindingEvidence, and analyzeSpecificationState"
-    summary: "Implement generateEvidenceChainProfile with injectable real adapters, normalizeEvidenceChainProfile, MCP tool evidence_chain_profile_generate, and a manual profile contract."
+      - "COLLECT_FILE_INVENTORY and COLLECT_VOCAB_DRIFT are dormant pseudo-code contracts only: no caller, registration, adapter type, production symbol, TypeScript implementation, test, or profile activation is authorized in this phase"
+      - "Do not hardcode metrics_opt_in false when env opt-in is active"
+      - "Dormant contract evidence has proof boundary pseudo_code_structure only and does not establish executable behavior"
+      - "EMIT_MANUAL_PROFILE_CONTRACT requires assumptions confidence and unsupported_checks"
+      - "GENERATE_EVIDENCE_CHAIN_PROFILE fail-closes on WrongTiedBasePath"
+      - "GENERATE_EVIDENCE_CHAIN_PROFILE sets operational.metrics_opt_in from isMetricsEnabled() ([IMPL-MCP_USAGE_METRICS])"
+      - "human_research without change_context does not fail"
+      - "identity.project_id and identity_source come from IMPL-TIED_PROJECT_IDENTITY resolveProjectIdentity; operational.project_id matches identity.project_id"
+      - "integrated never invokes fidelity binding or spec adapters"
+      - "Manual profiles that confirm the TIED path must declare mcp_validators_not_run in unsupported_checks."
+      - "NORMALIZE rejects maturity and score fields and requires a denominator per ratio"
+      - "Profile graph counts come from the selected TIED requirement and implementation dependency graphs; omitted file inventory and vocabulary drift are explicitly unknown or not_measured rather than zero or presence claims."
+      - "scope.file_counts remains empty and unknown, and evidence_chain.vocab_resolution remains not_measured until a separately approved implementation and wiring phase"
+      - "Structural validator exceptions return a structured failure, and human-research fidelity and composition adapter results are preserved in the profile."
+    summary: "Implement a depth-gated read-only orchestrator and deterministic normalizer for evidence-chain-profile.v1; catalog dormant file-inventory and vocabulary-drift contracts without runtime activation."
+  metadata:
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-23"
+      reason: "Catalog dormant file-inventory and vocabulary-drift adapter contracts with structural-only proof boundary"
   name: "Evidence chain profile orchestrator"
   status: "Active"
 IMPL-EVIDENCE_CHAIN_REPORT:
@@ -1204,10 +1220,12 @@ IMPL-MCP_USAGE_METRICS:
         path: "mcp-server/src/index.ts"
       - description: "Exports TIED_MCP_METRICS_CLIENT=tied-cli when collection enabled"
         path: "tools/bundled-tied-yaml-skill/scripts/tied-cli.sh"
-      - description: "Offline JSONL aggregator"
+      - description: "Offline JSONL aggregator with deterministic bounded signature coverage"
         path: "scripts/analyze_tied_mcp_metrics.rb"
-      - description: "Smoke test for aggregator"
+      - description: "Ruby module tests for coverage boundaries, deterministic aggregation, and error accounting"
         path: "scripts/analyze_tied_mcp_metrics_test.rb"
+      - description: "Bounded analyzer fixture corpus"
+        path: "scripts/fixtures/mcp-metrics/"
   cross_references:
     - "ARCH-MCP_USAGE_METRICS"
     - "REQ-MCP_USAGE_METRICS"
@@ -1215,22 +1233,26 @@ IMPL-MCP_USAGE_METRICS:
   essence_pseudocode_path: "implementation-decisions/IMPL-MCP_USAGE_METRICS-pseudocode.md"
   implementation_approach:
     details:
+      - "Aggregate candidate visibility is limited to bounded per-file top_signatures; status is approximate after any per-file truncation or visible aggregate overflow and does not claim hidden global candidates"
+      - "Aggregate schema_errors is the sum of per-file schema_errors and remains distinct from parse_errors"
+      - "ANALYZE_TIED_MCP_METRICS uses SIGNATURE_BOUND=50 and emits signature_coverage { bound, considered, emitted, omitted, status } for each file and aggregate"
       - "analyze_tied_mcp_metrics.rb: streaming counts, durations, top_signatures, --aggregate"
+      - "Deterministic ordering is descending count, then tool, then args_signature; equal-key sample_args_summary uses the lexically smallest recursively key-sorted canonical JSON representation"
       - "isMetricsEnabled(): TIED_MCP_COLLECT_METRICS in {1,true} case-insensitive"
       - "recordToolCall: append one JSON line v1 schema; swallow IO errors"
       - "resolveMetricsPath(): env override or homedir .cursor/logs/tied-mcp-metrics.jsonl"
       - "sanitizeArgs(tool, args): scalars preserved; blobs as _bytes/_keys; signature SHA-256 prefix"
       - "tied-cli.sh: export TIED_MCP_METRICS_CLIENT=tied-cli when metrics env set"
       - "wrapToolHandler: time handler; ok from throws and result.isError"
-    summary: "usage-metrics.ts module; index.ts wiring; tied-cli client tag; Ruby offline analyzer"
+    summary: "usage-metrics.ts module; index.ts wiring; tied-cli client tag; Ruby offline analyzer with deterministic bounded signature coverage"
   metadata:
     created:
       author: "AI Agent"
       date: "2026-06-25"
     last_updated:
       author: "AI Agent"
-      date: "2026-06-25"
-      reason: "Initial creation"
+      date: "2026-08-23"
+      reason: "Specify bounded deterministic signature aggregation and aggregate schema-error accounting for deferred-stats Phase 2"
     last_validated:
       date: "2026-06-25"
       result: "pass"

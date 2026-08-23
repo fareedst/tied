@@ -21,8 +21,9 @@
   - 3. CALL COLLECT_STRUCTURAL_CHAIN
   - 4. IF profile_depth is human_research THEN CALL COLLECT_HUMAN_RESEARCH_CHAIN
   - 5. CALL ATTACH_QUALITY_PARTITION
-  - 6. CALL NORMALIZE_EVIDENCE_CHAIN_PROFILE
-  - 7. IF output_mode is file THEN write only a non-intent path
+  - 6. Set operational.metrics_opt_in from isMetricsEnabled() ([IMPL-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS]); never infer opt-in from profile args alone
+  - 7. CALL NORMALIZE_EVIDENCE_CHAIN_PROFILE
+  - 8. IF output_mode is file THEN write only a non-intent path
 - ON adapter or profile-file write failure: RETURN { ok: false, stage, error } without emitting a partial profile.
 - ON WrongTiedBasePath: RETURN { ok: false, stage: "manifest", error: "WrongTiedBasePath" }
 - How (sub-block, same token set as above): Never call RUN_FIRST_SLICE, RUN_FIDELITY_RESEARCH_PILOT, appendCandidateFinding, or promoteConfirmedCase.
@@ -46,6 +47,57 @@
   - 3. Record requirement, architecture, and implementation populations from the explicit token scope
   - 4. Leave file counts empty and mark them unknown when no file inventory adapter is in scope
   - 5. Mark automated vocabulary drift checks not_measured when no drift tool is in scope
+
+## COLLECT_FILE_INVENTORY
+
+- [IMPL-EVIDENCE_CHAIN_PROFILE] [ARCH-EVIDENCE_CHAIN_PROFILE] [REQ-EVIDENCE_CHAIN_PROFILE] How: Catalog a dormant file inventory adapter contract with fail-closed scope, ignored-path accounting, explicit denominators, and no profile activation.
+- Contract:
+  - INPUT: confirmed project_root and tied_base_path; resolved roots_used and ignore_source
+  - PRE: TIED base path confirmation succeeded; every selected root is inside the read-only project boundary
+  - OUTPUT: file inventory result with counts, included denominator, ignored paths, unknown paths, and proof_boundary
+  - POST:
+    - success => every count names its included denominator and excluded ignored paths
+    - error WrongTiedBasePath or InvalidScope => no project traversal occurs outside the confirmed boundary
+    - this phase => scope.file_counts remains empty and unknown because no caller or adapter registration exists
+  - FAILURE_MODES: WrongTiedBasePath, InvalidScope, FileInventoryReadFailed
+  - CONTROL: dormant contract; no caller or registration in this phase
+  - EFFECTS: IO; read-only project inspection only
+  - DATA_TRANSITION: none; no profile, project YAML, or working-file mutation
+  - TERMINATION: total
+- PROCEDURE: COLLECT_FILE_INVENTORY
+  - 1. Fail closed unless project_root and tied_base_path identify the confirmed project.
+  - 2. Resolve selected roots without following paths outside the project boundary.
+  - 3. Apply ignore_source before counting files.
+  - 4. Record included, ignored, and unknown populations separately.
+  - 5. Attach denominator and proof_boundary to every emitted count.
+  - 6. Return a read-only adapter result without mutating project YAML or working files.
+- How (sub-block, same token set as above): GENERATE_EVIDENCE_CHAIN_PROFILE, RESOLVE_EVIDENCE_CHAIN_SCOPE, adapter types, and runtime output remain unchanged in this phase.
+
+## COLLECT_VOCAB_DRIFT
+
+- [IMPL-EVIDENCE_CHAIN_PROFILE] [ARCH-EVIDENCE_CHAIN_PROFILE] [REQ-EVIDENCE_CHAIN_PROFILE] How: Catalog a dormant vocabulary drift adapter contract with routed vocabulary scope, explicit denominators, read-only evidence, and no profile activation.
+- Contract:
+  - INPUT: confirmed project_root and tied_base_path; vocabulary routing index; selected TIED, pseudo-code, test, code, and documentation paths; ignore_source
+  - PRE: TIED base path confirmation succeeded; vocabulary routing resolves inside the read-only project boundary
+  - OUTPUT: vocabulary drift result with compared names, denominator, unresolved names, ignored paths, and proof_boundary
+  - POST:
+    - success => every drift result names the compared-name denominator and excluded ignored paths
+    - error WrongTiedBasePath or InvalidScope => no comparison runs outside the confirmed boundary
+    - this phase => evidence_chain.vocab_resolution remains not_measured because no caller or adapter registration exists
+  - FAILURE_MODES: WrongTiedBasePath, InvalidScope, VocabularyReadFailed
+  - CONTROL: dormant contract; no caller or registration in this phase
+  - EFFECTS: IO; read-only vocabulary and project artifact inspection only
+  - DATA_TRANSITION: none; no profile, finding, project YAML, or working-file mutation
+  - TERMINATION: total
+- PROCEDURE: COLLECT_VOCAB_DRIFT
+  - 1. Fail closed unless project_root and tied_base_path identify the confirmed project.
+  - 2. Resolve the routed vocabulary sources and selected artifact paths.
+  - 3. Apply ignore_source before collecting comparison names.
+  - 4. Compare preferred terms and naming bridges against selected artifact names without modifying them.
+  - 5. Record matched, unresolved, ignored, and unknown populations separately.
+  - 6. Attach denominator and proof_boundary to every emitted drift result.
+  - 7. Return a read-only adapter result without writing findings or project YAML.
+- How (sub-block, same token set as above): GENERATE_EVIDENCE_CHAIN_PROFILE, RESOLVE_EVIDENCE_CHAIN_SCOPE, adapter types, and runtime output remain unchanged in this phase.
 
 ## COLLECT_STRUCTURAL_CHAIN
 

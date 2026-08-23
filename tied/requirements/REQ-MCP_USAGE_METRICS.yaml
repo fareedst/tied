@@ -7,8 +7,8 @@ REQ-MCP_USAGE_METRICS:
       date: "2026-06-25T00:00:00.000Z"
     last_updated:
       author: "AI Agent"
-      date: "2026-08-13"
-      reason: "Record conditional bootstrap metrics configuration as a tested requirement"
+      date: "2026-08-23"
+      reason: "Add bounded signature coverage and aggregate schema-error acceptance criteria for deferred-stats Phase 2"
     last_validated:
       date: "2026-06-25T00:00:00.000Z"
       result: "pass"
@@ -34,7 +34,6 @@ REQ-MCP_USAGE_METRICS:
     - criterion: "Bootstrap seeds metrics environment fields only for an absent .cursor/mcp.json when TIED_MCP_COLLECT_METRICS is exactly 1"
       metric: "bootstrap-and-load.test.ts verifies basename and explicit client labels, non-1 opt-in behavior, and existing configuration preservation"
     - criterion: "Env vars and JSONL path documented in tied/vocab/tied-yaml-mcp.md"
-      metric: "tied-yaml-mcp.md lists TIED_MCP_PROJECT_ID and identity_source semantics"
     - criterion: "Every MCP tools/call records tool name, client, duration, ok, sanitized args"
       metric: "usage-metrics.test.ts passes; large essence_pseudocode omitted from args_summary"
     - criterion: "Metrics collection is off unless TIED_MCP_COLLECT_METRICS is set locally"
@@ -43,8 +42,14 @@ REQ-MCP_USAGE_METRICS:
       metric: "analyze_tied_mcp_metrics_test.rb passes"
     - criterion: "tied-cli tags client as tied-cli when metrics enabled"
       metric: "tied-cli.sh exports TIED_MCP_METRICS_CLIENT=tied-cli"
-    - criterion: "Relocation-stable project_id when TIED_MCP_PROJECT_ID is valid; path fallback when unset or invalid"
-      metric: "project-identity.test.ts and usage-metrics.test.ts; JSONL never contains raw path or configured string"
+    - criterion: "Offline reports expose deterministic SIGNATURE_BOUND=50 signature_coverage as exact_within_bound when a file has 0 or 50 distinct signatures and an aggregate visible candidate union is at most 50 with every input exact"
+      metric: "analyze_tied_mcp_metrics_test.rb asserts positive 0/50 per-file boundaries and exact aggregate coverage"
+    - criterion: "Offline reports expose signature_coverage as approximate when a file has 51 distinct signatures, visible aggregate candidates exceed 50, or any per-file input was already approximate; aggregate rows must not claim hidden candidates are globally ranked"
+      metric: "analyze_tied_mcp_metrics_test.rb asserts negative 51-signature, visible-overflow, per-file-truncation, and reversed-input-order cases including deterministic sample selection"
+    - criterion: "Aggregate schema_errors equals the sum of schema_errors from every input report while parse_errors remain separately accounted"
+      metric: "analyze_tied_mcp_metrics_test.rb asserts two files with one schema error each produce aggregate schema_errors=2"
+    - criterion: "Aggregate output must not report schema_errors=0 when any accepted input report contains a schema error"
+      metric: "analyze_tied_mcp_metrics_test.rb negative multi-file schema-error fixture"
   status: "Implemented"
   traceability:
     architecture:

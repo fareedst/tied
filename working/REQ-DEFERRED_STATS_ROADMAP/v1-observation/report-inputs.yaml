@@ -1,0 +1,10 @@
+include_absolute_paths: false
+inputs:
+  - client_alias: "1787461685-bare"
+    notes: "original bare integrated profile (pre attach-provenance)"
+    profile_path: "profiles/profile-integrated.v1.json"
+  - client_alias: "1787461685-reprofile"
+    notes: "reprofile with manifest attach + invoke_structural_validators"
+    profile_path: "profiles/profile-integrated-reprofile.v1.json"
+mode: "strict"
+schema_version: "evidence-chain-report-inputs.v1"

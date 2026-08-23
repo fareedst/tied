@@ -1,0 +1,7 @@
+{"v":1,"tool":"tool_b","client":"fixture","ok":true,"duration_ms":1,"args_signature":"sig_z","args_summary":{"sample":"b1"}}
+{"v":1,"tool":"tool_a","client":"fixture","ok":true,"duration_ms":1,"args_signature":"sig_b","args_summary":{"sample":"b1"}}
+{"v":1,"tool":"tool_a","client":"fixture","ok":true,"duration_ms":1,"args_signature":"sig_a","args_summary":{"sample":"a1"}}
+{"v":1,"tool":"tool_b","client":"fixture","ok":true,"duration_ms":1,"args_signature":"sig_z","args_summary":{"sample":"b2"}}
+{"v":1,"tool":"tool_a","client":"fixture","ok":true,"duration_ms":1,"args_signature":"sig_b","args_summary":{"sample":"b2"}}
+{"v":1,"tool":"tool_a","client":"fixture","ok":true,"duration_ms":1,"args_signature":"sig_a","args_summary":{"sample":"a2"}}
+{"v":1,"tool":"tool_a","client":"fixture","ok":true,"duration_ms":1,"args_signature":"sig_c","args_summary":{"sample":"c1"}}

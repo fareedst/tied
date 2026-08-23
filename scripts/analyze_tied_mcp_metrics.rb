@@ -21,6 +21,43 @@ require 'json'
 require 'optparse'
 require 'yaml'
 
+# - [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS] How: Bound deterministic per-file and aggregate signature analysis, disclose candidate visibility through signature_coverage, and sum aggregate schema errors without conflating parse errors.
+SIGNATURE_BOUND = 50
+
+def canonicalize_json_value(value)
+  case value
+  when Hash
+    value.keys.sort.to_h { |key| [key, canonicalize_json_value(value[key])] }
+  when Array
+    value.map { |item| canonicalize_json_value(item) }
+  else
+    value
+  end
+end
+
+def canonical_json(value)
+  JSON.generate(canonicalize_json_value(value))
+end
+
+def deterministic_sample(existing, candidate)
+  [existing, candidate]
+    .compact
+    .min_by { |sample| canonical_json(sample) }
+    .then { |sample| canonicalize_json_value(sample) }
+end
+
+def signature_coverage(considered, exact_inputs: true)
+  emitted = [considered, SIGNATURE_BOUND].min
+  omitted = considered - emitted
+  {
+    'bound' => SIGNATURE_BOUND,
+    'considered' => considered,
+    'emitted' => emitted,
+    'omitted' => omitted,
+    'status' => exact_inputs && omitted.zero? ? 'exact_within_bound' : 'approximate'
+  }
+end
+
 def empty_stats
   {
     lines: 0,
@@ -99,9 +136,14 @@ def ingest_line(obj, stats)
     'tool' => tool,
     'args_signature' => sig,
     'count' => 0,
-    'sample_args_summary' => obj['args_summary']
+    'sample_args_summary' => nil
   }
-  stats[:signatures][sk]['count'] += 1
+  signature = stats[:signatures][sk]
+  signature['count'] += 1
+  signature['sample_args_summary'] = deterministic_sample(
+    signature['sample_args_summary'],
+    obj['args_summary']
+  )
 end
 
 def duration_stats_to_hash(bucket)
@@ -169,7 +211,10 @@ def stats_to_report(path, stats, project_root = nil)
     durations[tool] = h if h
   end
   failures = stats[:failures].values.sort_by { |h| [-h['count'], h['tool'].to_s, h['error'].to_s] }
-  top_sigs = stats[:signatures].values.sort_by { |h| [-h['count'], h['tool'].to_s, h['args_signature'].to_s] }.first(50)
+  coverage = signature_coverage(stats[:signatures].size)
+  top_sigs = stats[:signatures].values
+    .sort_by { |h| [-h['count'], h['tool'].to_s, h['args_signature'].to_s] }
+    .first(SIGNATURE_BOUND)
   {
     'file' => path,
     'lines' => stats[:lines],
@@ -187,7 +232,8 @@ def stats_to_report(path, stats, project_root = nil)
     'client_counts' => stats[:client_counts].sort.to_h,
     'duration_by_tool' => durations.sort.to_h,
     'failures' => failures.first(30),
-    'top_signatures' => top_sigs
+    'top_signatures' => top_sigs,
+    'signature_coverage' => coverage
   }
 end
 
@@ -214,6 +260,7 @@ def build_aggregate(reports, project_root = nil)
   reports.each do |r|
     merged[:lines] += r['lines'].to_i
     merged[:parse_errors] += r['parse_errors'].to_i
+    merged[:schema_errors] += r['schema_errors'].to_i
     merged[:ok_count] += r['ok_count'].to_i
     merged[:fail_count] += r['fail_count'].to_i
     activation = r['activation'] || {}
@@ -253,11 +300,22 @@ def build_aggregate(reports, project_root = nil)
         'tool' => h['tool'],
         'args_signature' => h['args_signature'],
         'count' => 0,
-        'sample_args_summary' => h['sample_args_summary']
+        'sample_args_summary' => nil
       }
-      merged[:signatures][sk]['count'] += h['count'].to_i
+      signature = merged[:signatures][sk]
+      signature['count'] += h['count'].to_i
+      signature['sample_args_summary'] = deterministic_sample(
+        signature['sample_args_summary'],
+        h['sample_args_summary']
+      )
     end
   end
+  aggregate_coverage = signature_coverage(
+    merged[:signatures].size,
+    exact_inputs: reports.all? do |report|
+      report.dig('signature_coverage', 'status') == 'exact_within_bound'
+    end
+  )
   {
     'summary' => {
       'files' => reports.size,
@@ -276,7 +334,10 @@ def build_aggregate(reports, project_root = nil)
       'client_counts' => merged[:client_counts].sort.to_h,
       'duration_by_tool' => merged[:duration_by_tool].transform_values { |b| duration_stats_to_hash(b) }.compact.sort.to_h,
       'failures' => merged[:failures].values.sort_by { |h| [-h['count'], h['tool'].to_s, h['error'].to_s] }.first(30),
-      'top_signatures' => merged[:signatures].values.sort_by { |h| [-h['count'], h['tool'].to_s, h['args_signature'].to_s] }.first(50)
+      'top_signatures' => merged[:signatures].values
+        .sort_by { |h| [-h['count'], h['tool'].to_s, h['args_signature'].to_s] }
+        .first(SIGNATURE_BOUND),
+      'signature_coverage' => aggregate_coverage
     }
   }
 end

@@ -8,6 +8,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { resolveProjectIdentity } from "../project-identity.js";
+import { isMetricsEnabled } from "../usage-metrics.js";
 import {
   buildImplementationGraph,
   buildRequirementGraph,
@@ -716,7 +717,7 @@ export function generateEvidenceChainProfile(
     },
     change_fidelity: changeFidelity,
     operational: {
-      metrics_opt_in: false,
+      metrics_opt_in: isMetricsEnabled(),
       project_id: projectId,
       run_id: input.run_metadata?.run_id,
       profile_depth: input.profile_depth,

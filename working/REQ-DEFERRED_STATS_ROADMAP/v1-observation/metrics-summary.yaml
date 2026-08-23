@@ -1,0 +1,570 @@
+---
+summary:
+  files: 1
+  lines: 85
+  parse_errors: 0
+  schema_errors: 0
+  ok_count: 85
+  fail_count: 0
+  activation:
+    inquiry_call_count: 0
+    by_client: {}
+    request_token_counts: {}
+    artifact_status: {}
+  tool_counts:
+    pseudocode_validate: 9
+    tied_validate_consistency: 9
+    tied_scoped_analysis_run: 8
+    yaml_detail_read: 8
+    tied_token_create_with_detail: 7
+    yaml_index_insert: 7
+    yaml_detail_update: 5
+    evidence_chain_profile_generate: 4
+    tied_verify: 4
+    yaml_index_validate: 4
+    yaml_updates_apply: 4
+    binding_inventory_validate: 3
+    impl_detail_set_essence_pseudocode: 3
+    tied_config_get_base_path: 3
+    tied_backlog: 2
+    tied_cycles: 2
+    citdp_record_write: 1
+    quality_evidence_collect_manifest: 1
+    yaml_index_read: 1
+  client_counts:
+    '1787461685': 67
+    tied-cli: 18
+  duration_by_tool:
+    binding_inventory_validate:
+      min_ms: 0
+      max_ms: 2
+      avg_ms: 0.67
+      count: 3
+    citdp_record_write:
+      min_ms: 4
+      max_ms: 4
+      avg_ms: 4.0
+      count: 1
+    evidence_chain_profile_generate:
+      min_ms: 25
+      max_ms: 116
+      avg_ms: 49.25
+      count: 4
+    impl_detail_set_essence_pseudocode:
+      min_ms: 3
+      max_ms: 10
+      avg_ms: 5.67
+      count: 3
+    pseudocode_validate:
+      min_ms: 0
+      max_ms: 16
+      avg_ms: 2.11
+      count: 9
+    quality_evidence_collect_manifest:
+      min_ms: 402
+      max_ms: 402
+      avg_ms: 402.0
+      count: 1
+    tied_backlog:
+      min_ms: 4
+      max_ms: 4
+      avg_ms: 4.0
+      count: 2
+    tied_config_get_base_path:
+      min_ms: 1
+      max_ms: 2
+      avg_ms: 1.33
+      count: 3
+    tied_cycles:
+      min_ms: 5
+      max_ms: 5
+      avg_ms: 5.0
+      count: 2
+    tied_scoped_analysis_run:
+      min_ms: 4
+      max_ms: 33
+      avg_ms: 14.75
+      count: 8
+    tied_token_create_with_detail:
+      min_ms: 2
+      max_ms: 18
+      avg_ms: 5.29
+      count: 7
+    tied_validate_consistency:
+      min_ms: 55
+      max_ms: 84
+      avg_ms: 62.78
+      count: 9
+    tied_verify:
+      min_ms: 6
+      max_ms: 13
+      avg_ms: 9.5
+      count: 4
+    yaml_detail_read:
+      min_ms: 1
+      max_ms: 3
+      avg_ms: 1.63
+      count: 8
+    yaml_detail_update:
+      min_ms: 1
+      max_ms: 4
+      avg_ms: 2.6
+      count: 5
+    yaml_index_insert:
+      min_ms: 2
+      max_ms: 8
+      avg_ms: 4.14
+      count: 7
+    yaml_index_read:
+      min_ms: 1
+      max_ms: 1
+      avg_ms: 1.0
+      count: 1
+    yaml_index_validate:
+      min_ms: 1
+      max_ms: 2
+      avg_ms: 1.25
+      count: 4
+    yaml_updates_apply:
+      min_ms: 4
+      max_ms: 19
+      avg_ms: 10.75
+      count: 4
+  failures: []
+  top_signatures:
+  - tool: tied_validate_consistency
+    args_signature: 3431676a7add6979b7d37260
+    count: 9
+    sample_args_summary:
+      include_detail_files: true
+      include_pseudocode: true
+      require_detail_record: true
+  - tool: yaml_index_validate
+    args_signature: 44136fa355b3678a1146ad16
+    count: 4
+    sample_args_summary: {}
+  - tool: tied_config_get_base_path
+    args_signature: 44136fa355b3678a1146ad16
+    count: 3
+    sample_args_summary: {}
+  - tool: tied_verify
+    args_signature: 18767abd076b53e971b77613
+    count: 3
+    sample_args_summary:
+      passed_requirement_tokens:
+        _bytes: 50
+        _length: 2
+      passed_impl_tokens:
+        _bytes: 87
+        _length: 3
+      set_unpassed_reqs_to_planned: false
+      set_unpassed_impl_to_planned: false
+      dry_run: false
+  - tool: evidence_chain_profile_generate
+    args_signature: 347a07ef841438e69c8c3692
+    count: 2
+    sample_args_summary:
+      project_root: "/Users/fareed/Documents/dev/test/1787461685"
+      tied_base_path: "/Users/fareed/Documents/dev/test/1787461685/tied"
+      profile_depth: integrated
+  - tool: pseudocode_validate
+    args_signature: 0abc854eb9ed8cbebf335dd4
+    count: 2
+    sample_args_summary:
+      token: IMPL-BTREPORT-CLI-CMD
+      pseudocode: |-
+        # [IMPL-BTREPORT-CLI-CMD] [ARCH-BTREPORT-PLATFORM-ADAPTER] [ARCH-BTREPORT-OUTPUT] [REQ-BTREPORT-CLI] [REQ-BTREPORT-DEVICE-FILTERS]
+        # Orchestrate configuration, collection, filtering, and output while …
+      known_tokens:
+        _bytes: 192
+        _length: 7
+      require_contracts: true
+  - tool: pseudocode_validate
+    args_signature: 50a1e609016f85c5d9f8fe39
+    count: 2
+    sample_args_summary:
+      token: IMPL-BTREPORT-REPORT-FORMAT
+      pseudocode: |-
+        # [IMPL-BTREPORT-REPORT-FORMAT] [ARCH-BTREPORT-OUTPUT] [REQ-BTREPORT-CLI] [REQ-BTREPORT-DEVICE-FILTERS]
+        # Model, filter, and serialize the Bluetooth report independently of collection.
+
+        ## REPORT_MODE…
+      known_tokens:
+        _bytes: 192
+        _length: 7
+      require_contracts: true
+  - tool: pseudocode_validate
+    args_signature: 9c409c5815bf29dc3b888258
+    count: 2
+    sample_args_summary:
+      token: IMPL-BTREPORT-SYSTEM-PROFILER
+      pseudocode: |-
+        # [IMPL-BTREPORT-SYSTEM-PROFILER] [ARCH-BTREPORT-PLATFORM-ADAPTER] [REQ-BTREPORT-CLI] [REQ-BTREPORT-DEVICE-FILTERS]
+        # Collect Darwin Bluetooth profiler data and convert its line-oriented output into a…
+      known_tokens:
+        _bytes: 192
+        _length: 7
+      require_contracts: true
+  - tool: tied_backlog
+    args_signature: 15b6be59817138f30ac35c44
+    count: 2
+    sample_args_summary:
+      view: order
+  - tool: tied_cycles
+    args_signature: da6e97e966cfd5a33381f047
+    count: 2
+    sample_args_summary:
+      graph: requirements
+  - tool: tied_scoped_analysis_run
+    args_signature: 33ff3628a9b0dc43bab06f14
+    count: 2
+    sample_args_summary:
+      mode: walk_summary
+  - tool: tied_scoped_analysis_run
+    args_signature: 591b1e00f1e813c88faa5938
+    count: 2
+    sample_args_summary:
+      mode: token_scan
+  - tool: tied_scoped_analysis_run
+    args_signature: bc79f7efc6fa9e4d0dbbb78e
+    count: 2
+    sample_args_summary:
+      mode: gap_report
+  - tool: tied_scoped_analysis_run
+    args_signature: c8961d5775d4525823d9825f
+    count: 2
+    sample_args_summary:
+      mode: traceability_gap_report
+  - tool: yaml_detail_read
+    args_signature: 211e04769f6aa51819494547
+    count: 2
+    sample_args_summary:
+      token: REQ-BTREPORT-CLI
+  - tool: yaml_detail_read
+    args_signature: 774fae410765c86cb4f3b988
+    count: 2
+    sample_args_summary:
+      token: REQ-BTREPORT-DEVICE-FILTERS
+  - tool: yaml_detail_read
+    args_signature: d3a81bd173d4b8b7db09644f
+    count: 2
+    sample_args_summary:
+      token: IMPL-BTREPORT-CLI-CMD
+  - tool: binding_inventory_validate
+    args_signature: 226c5083882985551df78102
+    count: 1
+    sample_args_summary:
+      rows:
+        _bytes: 1973
+        _length: 5
+  - tool: binding_inventory_validate
+    args_signature: bfff905dd2399c1df18e001f
+    count: 1
+    sample_args_summary:
+      rows:
+        _bytes: 1906
+        _length: 5
+  - tool: binding_inventory_validate
+    args_signature: f605a2023dd7c1a8dad154ed
+    count: 1
+    sample_args_summary:
+      rows:
+        _bytes: 1898
+        _length: 5
+  - tool: citdp_record_write
+    args_signature: d9064bfb5a3ac7d8390368e7
+    count: 1
+    sample_args_summary:
+      filename: CITDP-REQ-BTREPORT-CLI.yaml
+      record:
+        _bytes: 9021
+      top_level_key: CITDP-REQ-BTREPORT-CLI
+  - tool: evidence_chain_profile_generate
+    args_signature: 18d503cf3afa5d934ce0b3b3
+    count: 1
+    sample_args_summary:
+      project_root: "/Users/fareed/Documents/dev/test/1787461685"
+      profile_depth: integrated
+      scope:
+        _keys:
+        - requirement_tokens
+      run_metadata:
+        _keys:
+        - commit
+        - run_id
+      manifest_reference: "/Users/fareed/Documents/dev/test/1787461685/working/evidence-chain/verification-evidence-manifest.v1.json"
+      invoke_structural_validators: true
+  - tool: evidence_chain_profile_generate
+    args_signature: b5f76301c4edc047ccdf8522
+    count: 1
+    sample_args_summary:
+      project_root: "/Users/fareed/Documents/dev/test/1787461685"
+      profile_depth: integrated
+      run_metadata:
+        _keys:
+        - commit
+        - run_id
+      manifest_reference: "/Users/fareed/Documents/dev/test/1787461685/working/evidence-chain/verification-evidence-manifest.v1.json"
+      invoke_structural_validators: false
+  - tool: impl_detail_set_essence_pseudocode
+    args_signature: 95919c56ec33ffcb873f91f9
+    count: 1
+    sample_args_summary:
+      token: IMPL-BTREPORT-REPORT-FORMAT
+      essence_pseudocode_path: implementation-decisions/IMPL-BTREPORT-REPORT-FORMAT-pseudocode.md
+      metadata_last_updated:
+        _keys:
+        - author
+        - date
+        - reason
+  - tool: impl_detail_set_essence_pseudocode
+    args_signature: a8e25409b8f35e2c63a36551
+    count: 1
+    sample_args_summary:
+      token: IMPL-BTREPORT-CLI-CMD
+      essence_pseudocode_path: implementation-decisions/IMPL-BTREPORT-CLI-CMD-pseudocode.md
+      metadata_last_updated:
+        _keys:
+        - author
+        - date
+        - reason
+  - tool: impl_detail_set_essence_pseudocode
+    args_signature: c0de6c7b6e33b5f9b4acad33
+    count: 1
+    sample_args_summary:
+      token: IMPL-BTREPORT-SYSTEM-PROFILER
+      essence_pseudocode_path: implementation-decisions/IMPL-BTREPORT-SYSTEM-PROFILER-pseudocode.md
+      metadata_last_updated:
+        _keys:
+        - author
+        - date
+        - reason
+  - tool: pseudocode_validate
+    args_signature: 232d546ada62305f2a1c9504
+    count: 1
+    sample_args_summary:
+      token: IMPL-BTREPORT-SYSTEM-PROFILER
+      pseudocode: |-
+        # [IMPL-BTREPORT-SYSTEM-PROFILER] [ARCH-BTREPORT-PLATFORM-ADAPTER] [REQ-BTREPORT-CLI] [REQ-BTREPORT-DEVICE-FILTERS]
+        # Collect Darwin Bluetooth profiler data and convert its line-oriented output into a…
+      known_tokens:
+        _bytes: 115
+        _length: 4
+      require_contracts: true
+      require_behavioral_coverage: false
+  - tool: pseudocode_validate
+    args_signature: e22176352c238db9f2996403
+    count: 1
+    sample_args_summary:
+      token: IMPL-BTREPORT-REPORT-FORMAT
+      pseudocode: |-
+        # [IMPL-BTREPORT-REPORT-FORMAT] [ARCH-BTREPORT-OUTPUT] [REQ-BTREPORT-CLI] [REQ-BTREPORT-DEVICE-FILTERS]
+        # Model, filter, and serialize the Bluetooth report independently of collection.
+
+        ## REPORT_MODE…
+      known_tokens:
+        _bytes: 103
+        _length: 4
+      require_contracts: true
+      require_behavioral_coverage: false
+  - tool: pseudocode_validate
+    args_signature: e5c1f6e9ab7a7380040bbc53
+    count: 1
+    sample_args_summary:
+      token: IMPL-BTREPORT-CLI-CMD
+      pseudocode: |-
+        # [IMPL-BTREPORT-CLI-CMD] [ARCH-BTREPORT-PLATFORM-ADAPTER] [ARCH-BTREPORT-OUTPUT] [REQ-BTREPORT-CLI] [REQ-BTREPORT-DEVICE-FILTERS]
+        # Orchestrate configuration, collection, filtering, and output while …
+      known_tokens:
+        _bytes: 130
+        _length: 5
+      require_contracts: true
+      require_behavioral_coverage: false
+  - tool: quality_evidence_collect_manifest
+    args_signature: 4e0587e637afdd833f3aec46
+    count: 1
+    sample_args_summary:
+      run_id: reprofile-1787461685
+      commit: c8a9b79
+      environment:
+        _keys: []
+      commands:
+        _bytes: 208
+        _length: 1
+      quality_rows:
+        _bytes: 521
+        _length: 1
+      covered_tokens:
+        _bytes: 50
+        _length: 2
+      proof_boundaries:
+        _bytes: 23
+        _length: 1
+  - tool: tied_token_create_with_detail
+    args_signature: 4610c150d3280b9f88cbd64e
+    count: 1
+    sample_args_summary:
+      token: REQ-BTREPORT-CLI
+      index_record:
+        _bytes: 260
+      detail_record:
+        _bytes: 1667
+      upsert_index: false
+  - tool: tied_token_create_with_detail
+    args_signature: 595a261a71471ba83f293166
+    count: 1
+    sample_args_summary:
+      token: IMPL-BTREPORT-REPORT-FORMAT
+      index_record:
+        _bytes: 153
+      detail_record:
+        _bytes: 1707
+      upsert_index: false
+  - tool: tied_token_create_with_detail
+    args_signature: 5e4891056ef77598490d3021
+    count: 1
+    sample_args_summary:
+      token: IMPL-BTREPORT-SYSTEM-PROFILER
+      index_record:
+        _bytes: 150
+      detail_record:
+        _bytes: 2045
+      upsert_index: false
+  - tool: tied_token_create_with_detail
+    args_signature: 73efdc1b79c5959ca66d0b97
+    count: 1
+    sample_args_summary:
+      token: ARCH-BTREPORT-OUTPUT
+      index_record:
+        _bytes: 151
+      detail_record:
+        _bytes: 1795
+      upsert_index: false
+  - tool: tied_token_create_with_detail
+    args_signature: 9fa6dfbfe8c3d7a37bbb5fd9
+    count: 1
+    sample_args_summary:
+      token: ARCH-BTREPORT-PLATFORM-ADAPTER
+      index_record:
+        _bytes: 147
+      detail_record:
+        _bytes: 2068
+      upsert_index: false
+  - tool: tied_token_create_with_detail
+    args_signature: aee16d2015b70f4cf4bcc62b
+    count: 1
+    sample_args_summary:
+      token: REQ-BTREPORT-DEVICE-FILTERS
+      index_record:
+        _bytes: 205
+      detail_record:
+        _bytes: 1501
+      upsert_index: false
+  - tool: tied_token_create_with_detail
+    args_signature: db9f880d17163d1f11f17efb
+    count: 1
+    sample_args_summary:
+      token: IMPL-BTREPORT-CLI-CMD
+      index_record:
+        _bytes: 175
+      detail_record:
+        _bytes: 1847
+      upsert_index: false
+  - tool: tied_verify
+    args_signature: 4af12a83ed2a2b0b7f3e7e39
+    count: 1
+    sample_args_summary:
+      passed_requirement_tokens:
+        _bytes: 50
+        _length: 2
+      passed_impl_tokens:
+        _bytes: 87
+        _length: 3
+      set_unpassed_reqs_to_planned: false
+      set_unpassed_impl_to_planned: false
+      dry_run: true
+  - tool: yaml_detail_read
+    args_signature: 5ee921dc5e7db59438d94d67
+    count: 1
+    sample_args_summary:
+      token: IMPL-BTREPORT-REPORT-FORMAT
+  - tool: yaml_detail_read
+    args_signature: ce221da2b93772bfb47d99fb
+    count: 1
+    sample_args_summary:
+      token: IMPL-BTREPORT-SYSTEM-PROFILER
+  - tool: yaml_detail_update
+    args_signature: 26eb5153e6741eb55e704f3e
+    count: 1
+    sample_args_summary:
+      token: REQ-BTREPORT-CLI
+      updates:
+        _bytes: 24
+  - tool: yaml_detail_update
+    args_signature: 60bba19f2b0a7f0ffdd27f94
+    count: 1
+    sample_args_summary:
+      token: REQ-BTREPORT-DEVICE-FILTERS
+      updates:
+        _bytes: 24
+  - tool: yaml_detail_update
+    args_signature: a49d050c5678aaca3513a530
+    count: 1
+    sample_args_summary:
+      token: IMPL-BTREPORT-CLI-CMD
+      updates:
+        _bytes: 25
+  - tool: yaml_detail_update
+    args_signature: d357cbb25f45b1b900b65c62
+    count: 1
+    sample_args_summary:
+      token: IMPL-BTREPORT-SYSTEM-PROFILER
+      updates:
+        _bytes: 25
+  - tool: yaml_detail_update
+    args_signature: dfecd910245b8146cecf0ea3
+    count: 1
+    sample_args_summary:
+      token: IMPL-BTREPORT-REPORT-FORMAT
+      updates:
+        _bytes: 25
+  - tool: yaml_index_insert
+    args_signature: 2d84f9a0d3637facb35669a2
+    count: 1
+    sample_args_summary:
+      index: semantic-tokens
+      token: REQ-BTREPORT-DEVICE-FILTERS
+      record:
+        _bytes: 252
+  - tool: yaml_index_insert
+    args_signature: 53079d4031b1b418bd40f141
+    count: 1
+    sample_args_summary:
+      index: semantic-tokens
+      token: IMPL-BTREPORT-SYSTEM-PROFILER
+      record:
+        _bytes: 287
+  - tool: yaml_index_insert
+    args_signature: 7914c83784e3cbcff6ee578c
+    count: 1
+    sample_args_summary:
+      index: semantic-tokens
+      token: IMPL-BTREPORT-CLI-CMD
+      record:
+        _bytes: 335
+  - tool: yaml_index_insert
+    args_signature: 7e0b5b938cc7e242bef4ae2e
+    count: 1
+    sample_args_summary:
+      index: semantic-tokens
+      token: REQ-BTREPORT-CLI
+      record:
+        _bytes: 357
+  - tool: yaml_index_insert
+    args_signature: 86568bcd2f842460957ef4e9
+    count: 1
+    sample_args_summary:
+      index: semantic-tokens
+      token: ARCH-BTREPORT-OUTPUT
+      record:
+        _bytes: 305

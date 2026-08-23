@@ -1,0 +1,50 @@
+cross_check:
+  note: "stdd working/evidence-chain/ profiles available for multi-project_id partition check; not required for gate III minimum"
+  stdd_pilot: "optional"
+gate_III:
+  approved_at: "2026-08-23"
+  approved_v2_scope:
+    - "CLI --report-version v2 (default v1)"
+    - "denominator_fingerprint per accepted input"
+    - "denominator_subcohort_count statistic"
+    - "evidence-chain-statistics-report.v2 schema"
+    - "metrics_opt_in wiring from isMetricsEnabled() in profile generator"
+    - "residual risk refinement when sub-cohorts isolate incompatible denominators"
+    - "sub-cohort partition inside compatibility_key"
+  approver: "sponsor"
+  status: "approved"
+generator_versions:
+  profile_generator_version: "1.0.0"
+  profile_schema: "evidence-chain-profile.v1"
+  report_generator_version: "1.0.0"
+  report_schema: "evidence-chain-statistics-report.v1"
+metrics_source:
+  aggregate: "metrics-summary.yaml"
+  extraction: "rg client=1787461685 or project_id=33f7e345569cd47b from ~/.cursor/logs/tied-mcp-metrics.jsonl"
+  kind: "client_scoped_jsonl"
+  lines: 85
+  path: "tied-mcp-metrics-client-1787461685.jsonl"
+observation_window:
+  end: "2026-08-23"
+  start: "2026-08-22"
+  timezone: "America/Los_Angeles"
+primary_client:
+  alias: "1787461685"
+  external_root: "/Users/fareed/Documents/dev/test/1787461685"
+  profiles:
+    - "profiles/profile-integrated-reprofile.v1.json"
+    - "profiles/profile-integrated.v1.json"
+  project_id: "33f7e345569cd47b"
+reviewer: "sponsor"
+sample_adequacy:
+  denominator_mismatch_observed: true
+  metrics_client_tagged: 67
+  metrics_rows: 85
+  mismatch_fields:
+    - "evidence_chain.graph: 1 vs 2"
+    - "evidence_chain.structural: 1 vs 2"
+    - "quality.command_results: not_measured vs 1"
+  note: "Sufficient to justify v2 denominator fingerprint and sub-cohort partition; not sufficient for maturity scoring (explicit non-goal)"
+  profile_count: 2
+  same_compatibility_key: true
+  same_project_id: true

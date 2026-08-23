@@ -8,6 +8,7 @@ import {
   generateEvidenceChainStatisticsReport,
   type GenerateReportResult,
   type ReportMode,
+  type ReportVersion,
 } from "../fidelity-research/evidence-chain-report.js";
 
 export type EvidenceChainReportCliDeps = {
@@ -28,7 +29,7 @@ function flagValue(argv: string[], flag: string): string | undefined {
 
 function usage(): string {
   return [
-    "Usage: evidence-chain-report --inputs <manifest.yaml> --yaml-out <report.yaml> --markdown-out <report.md> [--mode strict|partial]",
+    "Usage: evidence-chain-report --inputs <manifest.yaml> --yaml-out <report.yaml> --markdown-out <report.md> [--mode strict|partial] [--report-version v1|v2]",
     "",
     "Read-only aggregator for evidence-chain-profile.v1 artifacts.",
   ].join("\n");
@@ -45,6 +46,7 @@ export function runEvidenceChainReportCli(argv: string[], deps: EvidenceChainRep
   const yamlOut = flagValue(argv, "--yaml-out");
   const markdownOut = flagValue(argv, "--markdown-out");
   const modeRaw = flagValue(argv, "--mode");
+  const reportVersionRaw = flagValue(argv, "--report-version");
   if (!inputsPath || !yamlOut || !markdownOut) {
     writeErr(`${usage()}\n`);
     return 1;
@@ -53,11 +55,16 @@ export function runEvidenceChainReportCli(argv: string[], deps: EvidenceChainRep
     writeErr("Invalid --mode; expected strict or partial\n");
     return 1;
   }
+  if (reportVersionRaw !== undefined && reportVersionRaw !== "v1" && reportVersionRaw !== "v2") {
+    writeErr("Invalid --report-version; expected v1 or v2\n");
+    return 1;
+  }
   const result: GenerateReportResult = generateEvidenceChainStatisticsReport({
     inputsPath,
     yamlOut,
     markdownOut,
     modeOverride: modeRaw as ReportMode | undefined,
+    reportVersion: (reportVersionRaw ?? "v1") as ReportVersion,
     now: deps.now,
     cwd: deps.cwd,
     projectRoot: deps.projectRoot,

@@ -1,0 +1,10 @@
+schema_version: evidence-chain-report-inputs.v1
+mode: strict
+include_absolute_paths: false
+inputs:
+  - profile_path: client-1787461685-bare.v1.json
+    client_alias: "1787461685-bare"
+    notes: bare integrated profile (pre attach-provenance); same project_id as reprofile
+  - profile_path: client-1787461685-reprofile.v1.json
+    client_alias: "1787461685-reprofile"
+    notes: reprofile with manifest attach + invoke_structural_validators; denominator mismatch driver for v2

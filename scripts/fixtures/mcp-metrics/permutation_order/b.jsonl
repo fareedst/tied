@@ -1,0 +1,2 @@
+{"v":1,"tool":"tool_shared","client":"fixture","ok":true,"duration_ms":1,"args_signature":"sig_shared","args_summary":{"a":1}}
+{"v":1,"tool":"tool_b","client":"fixture","ok":true,"duration_ms":1,"args_signature":"sig_b_only","args_summary":{"source":"b"}}

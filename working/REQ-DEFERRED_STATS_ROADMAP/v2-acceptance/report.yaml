@@ -1,0 +1,628 @@
+cohorts:
+  - compatibility_key: evidence-chain-profile.v1|integrated
+    sub_cohorts:
+      - clients:
+          - artifact_ref: client-1787461685-reprofile.v1.json
+            client_alias: 1787461685-reprofile
+            commit: c8a9b79
+            compatibility_key: evidence-chain-profile.v1|integrated
+            denominator_fingerprint: 437b4f22d6166e9c
+            generator: mcp
+            generator_version: 1.0.0
+            profile_depth: integrated
+            profile_hash: 1874f07107dff5cf
+            project_id: 33f7e345569cd47b
+        denominator_fingerprint: 437b4f22d6166e9c
+        statistics:
+          - denominator: 2
+            method: count
+            name: denominator_subcohort_count
+            numerator: 2
+            proof_boundary: traceability_structure
+            source: PARTITION_SUBCOHORTS
+            status: observed
+          - denominator: 1
+            method: count
+            name: cohort_profile_count
+            numerator: 1
+            proof_boundary: traceability_structure
+            source: accepted_inputs
+            status: observed
+          - denominator: 1
+            method: distinct_count
+            name: unique_project_id_count
+            numerator: 1
+            proof_boundary: traceability_structure
+            source: identity.project_id
+            status: observed
+          - counted_status: observed
+            denominator: 1
+            field_path: evidence_chain.graph
+            method: status_count
+            name: measurement_status_count
+            numerator: 1
+            proof_boundary: traceability_structure
+            source: evidence_chain.graph
+            status: observed
+          - counted_status: not_measured
+            denominator: 1
+            field_path: evidence_chain.graph
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: traceability_structure
+            source: evidence_chain.graph
+            status: observed
+          - counted_status: unknown
+            denominator: 1
+            field_path: evidence_chain.graph
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: traceability_structure
+            source: evidence_chain.graph
+            status: observed
+          - counted_status: not_applicable
+            denominator: 1
+            field_path: evidence_chain.graph
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: traceability_structure
+            source: evidence_chain.graph
+            status: observed
+          - counted_status: observed
+            denominator: 1
+            field_path: evidence_chain.vocab_resolution
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: traceability_structure
+            source: evidence_chain.vocab_resolution
+            status: observed
+          - counted_status: not_measured
+            denominator: 1
+            field_path: evidence_chain.vocab_resolution
+            method: status_count
+            name: measurement_status_count
+            numerator: 1
+            proof_boundary: traceability_structure
+            source: evidence_chain.vocab_resolution
+            status: observed
+          - counted_status: unknown
+            denominator: 1
+            field_path: evidence_chain.vocab_resolution
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: traceability_structure
+            source: evidence_chain.vocab_resolution
+            status: observed
+          - counted_status: not_applicable
+            denominator: 1
+            field_path: evidence_chain.vocab_resolution
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: traceability_structure
+            source: evidence_chain.vocab_resolution
+            status: observed
+          - counted_status: observed
+            denominator: 1
+            field_path: quality.command_results
+            method: status_count
+            name: measurement_status_count
+            numerator: 1
+            proof_boundary: executable_behavior
+            source: quality.command_results
+            status: observed
+          - counted_status: not_measured
+            denominator: 1
+            field_path: quality.command_results
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: executable_behavior
+            source: quality.command_results
+            status: observed
+          - counted_status: unknown
+            denominator: 1
+            field_path: quality.command_results
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: executable_behavior
+            source: quality.command_results
+            status: observed
+          - counted_status: not_applicable
+            denominator: 1
+            field_path: quality.command_results
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: executable_behavior
+            source: quality.command_results
+            status: observed
+          - counted_status: observed
+            denominator: 1
+            field_path: quality.freshness
+            method: status_count
+            name: measurement_status_count
+            numerator: 1
+            proof_boundary: human_decision
+            source: quality.freshness
+            status: observed
+          - counted_status: not_measured
+            denominator: 1
+            field_path: quality.freshness
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: human_decision
+            source: quality.freshness
+            status: observed
+          - counted_status: unknown
+            denominator: 1
+            field_path: quality.freshness
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: human_decision
+            source: quality.freshness
+            status: observed
+          - counted_status: not_applicable
+            denominator: 1
+            field_path: quality.freshness
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: human_decision
+            source: quality.freshness
+            status: observed
+          - counted_status: observed
+            denominator: 1
+            field_path: change_fidelity
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: semantic_fidelity
+            source: change_fidelity
+            status: observed
+          - counted_status: not_measured
+            denominator: 1
+            field_path: change_fidelity
+            method: status_count
+            name: measurement_status_count
+            numerator: 1
+            proof_boundary: semantic_fidelity
+            source: change_fidelity
+            status: observed
+          - counted_status: unknown
+            denominator: 1
+            field_path: change_fidelity
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: semantic_fidelity
+            source: change_fidelity
+            status: observed
+          - counted_status: not_applicable
+            denominator: 1
+            field_path: change_fidelity
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: semantic_fidelity
+            source: change_fidelity
+            status: observed
+          - counted_status: observed
+            denominator: 7
+            field_path: evidence_chain.structural
+            method: status_count
+            name: measurement_status_count
+            numerator: 7
+            proof_boundary: traceability_structure
+            source: evidence_chain.structural
+            status: observed
+          - counted_status: not_measured
+            denominator: 7
+            field_path: evidence_chain.structural
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: traceability_structure
+            source: evidence_chain.structural
+            status: observed
+          - counted_status: unknown
+            denominator: 7
+            field_path: evidence_chain.structural
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: traceability_structure
+            source: evidence_chain.structural
+            status: observed
+          - counted_status: not_applicable
+            denominator: 7
+            field_path: evidence_chain.structural
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: traceability_structure
+            source: evidence_chain.structural
+            status: observed
+          - denominator: 4
+            method: membership_count
+            name: proof_boundary_partition_count
+            numerator: 1
+            partition: traceability_structure
+            proof_boundary: traceability_structure
+            source: quality.proof_boundary_partition
+            status: observed
+          - denominator: 4
+            method: membership_count
+            name: proof_boundary_partition_count
+            numerator: 1
+            partition: pseudo_code_structure
+            proof_boundary: traceability_structure
+            source: quality.proof_boundary_partition
+            status: observed
+          - denominator: 4
+            method: membership_count
+            name: proof_boundary_partition_count
+            numerator: 0
+            partition: semantic_fidelity
+            proof_boundary: traceability_structure
+            source: quality.proof_boundary_partition
+            status: observed
+          - denominator: 4
+            method: membership_count
+            name: proof_boundary_partition_count
+            numerator: 1
+            partition: executable_behavior
+            proof_boundary: traceability_structure
+            source: quality.proof_boundary_partition
+            status: observed
+          - denominator: 4
+            method: membership_count
+            name: proof_boundary_partition_count
+            numerator: 1
+            partition: human_decision
+            proof_boundary: traceability_structure
+            source: quality.proof_boundary_partition
+            status: observed
+      - clients:
+          - artifact_ref: client-1787461685-bare.v1.json
+            client_alias: 1787461685-bare
+            commit: unknown
+            compatibility_key: evidence-chain-profile.v1|integrated
+            denominator_fingerprint: 83a20f7f7574881f
+            generator: mcp
+            generator_version: 1.0.0
+            profile_depth: integrated
+            profile_hash: 57e5f72548c88117
+            project_id: 33f7e345569cd47b
+        denominator_fingerprint: 83a20f7f7574881f
+        statistics:
+          - denominator: 2
+            method: count
+            name: denominator_subcohort_count
+            numerator: 2
+            proof_boundary: traceability_structure
+            source: PARTITION_SUBCOHORTS
+            status: observed
+          - denominator: 1
+            method: count
+            name: cohort_profile_count
+            numerator: 1
+            proof_boundary: traceability_structure
+            source: accepted_inputs
+            status: observed
+          - denominator: 1
+            method: distinct_count
+            name: unique_project_id_count
+            numerator: 1
+            proof_boundary: traceability_structure
+            source: identity.project_id
+            status: observed
+          - counted_status: observed
+            denominator: 1
+            field_path: evidence_chain.graph
+            method: status_count
+            name: measurement_status_count
+            numerator: 1
+            proof_boundary: traceability_structure
+            source: evidence_chain.graph
+            status: observed
+          - counted_status: not_measured
+            denominator: 1
+            field_path: evidence_chain.graph
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: traceability_structure
+            source: evidence_chain.graph
+            status: observed
+          - counted_status: unknown
+            denominator: 1
+            field_path: evidence_chain.graph
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: traceability_structure
+            source: evidence_chain.graph
+            status: observed
+          - counted_status: not_applicable
+            denominator: 1
+            field_path: evidence_chain.graph
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: traceability_structure
+            source: evidence_chain.graph
+            status: observed
+          - counted_status: observed
+            denominator: 1
+            field_path: evidence_chain.vocab_resolution
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: traceability_structure
+            source: evidence_chain.vocab_resolution
+            status: observed
+          - counted_status: not_measured
+            denominator: 1
+            field_path: evidence_chain.vocab_resolution
+            method: status_count
+            name: measurement_status_count
+            numerator: 1
+            proof_boundary: traceability_structure
+            source: evidence_chain.vocab_resolution
+            status: observed
+          - counted_status: unknown
+            denominator: 1
+            field_path: evidence_chain.vocab_resolution
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: traceability_structure
+            source: evidence_chain.vocab_resolution
+            status: observed
+          - counted_status: not_applicable
+            denominator: 1
+            field_path: evidence_chain.vocab_resolution
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: traceability_structure
+            source: evidence_chain.vocab_resolution
+            status: observed
+          - counted_status: observed
+            denominator: 1
+            field_path: quality.command_results
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: executable_behavior
+            source: quality.command_results
+            status: observed
+          - counted_status: not_measured
+            denominator: 1
+            field_path: quality.command_results
+            method: status_count
+            name: measurement_status_count
+            numerator: 1
+            proof_boundary: executable_behavior
+            source: quality.command_results
+            status: observed
+          - counted_status: unknown
+            denominator: 1
+            field_path: quality.command_results
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: executable_behavior
+            source: quality.command_results
+            status: observed
+          - counted_status: not_applicable
+            denominator: 1
+            field_path: quality.command_results
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: executable_behavior
+            source: quality.command_results
+            status: observed
+          - counted_status: observed
+            denominator: 1
+            field_path: quality.freshness
+            method: status_count
+            name: measurement_status_count
+            numerator: 1
+            proof_boundary: human_decision
+            source: quality.freshness
+            status: observed
+          - counted_status: not_measured
+            denominator: 1
+            field_path: quality.freshness
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: human_decision
+            source: quality.freshness
+            status: observed
+          - counted_status: unknown
+            denominator: 1
+            field_path: quality.freshness
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: human_decision
+            source: quality.freshness
+            status: observed
+          - counted_status: not_applicable
+            denominator: 1
+            field_path: quality.freshness
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: human_decision
+            source: quality.freshness
+            status: observed
+          - counted_status: observed
+            denominator: 1
+            field_path: change_fidelity
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: semantic_fidelity
+            source: change_fidelity
+            status: observed
+          - counted_status: not_measured
+            denominator: 1
+            field_path: change_fidelity
+            method: status_count
+            name: measurement_status_count
+            numerator: 1
+            proof_boundary: semantic_fidelity
+            source: change_fidelity
+            status: observed
+          - counted_status: unknown
+            denominator: 1
+            field_path: change_fidelity
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: semantic_fidelity
+            source: change_fidelity
+            status: observed
+          - counted_status: not_applicable
+            denominator: 1
+            field_path: change_fidelity
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: semantic_fidelity
+            source: change_fidelity
+            status: observed
+          - counted_status: observed
+            denominator: 6
+            field_path: evidence_chain.structural
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: traceability_structure
+            source: evidence_chain.structural
+            status: observed
+          - counted_status: not_measured
+            denominator: 6
+            field_path: evidence_chain.structural
+            method: status_count
+            name: measurement_status_count
+            numerator: 6
+            proof_boundary: traceability_structure
+            source: evidence_chain.structural
+            status: observed
+          - counted_status: unknown
+            denominator: 6
+            field_path: evidence_chain.structural
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: traceability_structure
+            source: evidence_chain.structural
+            status: observed
+          - counted_status: not_applicable
+            denominator: 6
+            field_path: evidence_chain.structural
+            method: status_count
+            name: measurement_status_count
+            numerator: 0
+            proof_boundary: traceability_structure
+            source: evidence_chain.structural
+            status: observed
+          - denominator: 3
+            method: membership_count
+            name: proof_boundary_partition_count
+            numerator: 1
+            partition: traceability_structure
+            proof_boundary: traceability_structure
+            source: quality.proof_boundary_partition
+            status: observed
+          - denominator: 3
+            method: membership_count
+            name: proof_boundary_partition_count
+            numerator: 1
+            partition: pseudo_code_structure
+            proof_boundary: traceability_structure
+            source: quality.proof_boundary_partition
+            status: observed
+          - denominator: 3
+            method: membership_count
+            name: proof_boundary_partition_count
+            numerator: 0
+            partition: semantic_fidelity
+            proof_boundary: traceability_structure
+            source: quality.proof_boundary_partition
+            status: observed
+          - denominator: 3
+            method: membership_count
+            name: proof_boundary_partition_count
+            numerator: 0
+            partition: executable_behavior
+            proof_boundary: traceability_structure
+            source: quality.proof_boundary_partition
+            status: observed
+          - denominator: 3
+            method: membership_count
+            name: proof_boundary_partition_count
+            numerator: 1
+            partition: human_decision
+            proof_boundary: traceability_structure
+            source: quality.proof_boundary_partition
+            status: observed
+excluded_inputs: []
+generated_at: '2026-08-23T14:13:28.710Z'
+generator_version: 2.0.0
+include_absolute_paths: false
+inputs:
+  - artifact_ref: client-1787461685-reprofile.v1.json
+    client_alias: 1787461685-reprofile
+    commit: c8a9b79
+    compatibility_key: evidence-chain-profile.v1|integrated
+    denominator_fingerprint: 437b4f22d6166e9c
+    generator: mcp
+    generator_version: 1.0.0
+    profile_depth: integrated
+    profile_hash: 1874f07107dff5cf
+    project_id: 33f7e345569cd47b
+  - artifact_ref: client-1787461685-bare.v1.json
+    client_alias: 1787461685-bare
+    commit: unknown
+    compatibility_key: evidence-chain-profile.v1|integrated
+    denominator_fingerprint: 83a20f7f7574881f
+    generator: mcp
+    generator_version: 1.0.0
+    profile_depth: integrated
+    profile_hash: 57e5f72548c88117
+    project_id: 33f7e345569cd47b
+mode: strict
+residual_risks:
+  - v2 sub-cohort partition isolates denominator fingerprint mismatches; count-only statistics remain within fingerprint boundaries.
+schema_version: evidence-chain-statistics-report.v2
+statistics:
+  - denominator: 2
+    method: count
+    name: excluded_input_count
+    numerator: 0
+    proof_boundary: traceability_structure
+    source: report_input_manifest
+    status: observed
+  - denominator: 2
+    method: count
+    name: validation_error_count
+    numerator: 0
+    proof_boundary: traceability_structure
+    source: VALIDATE_PROFILE_ARTIFACT
+    status: observed
+validation_errors: []

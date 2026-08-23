@@ -168,6 +168,68 @@
   - EFFECTS: IO
   - TERMINATION: total
 - PROCEDURE: RUN_EVIDENCE_CHAIN_REPORT_CLI
-  - 1. Parse flags; default --mode to strict
+  - 1. Parse flags; default --mode to strict; default --report-version to v1
   - 2. CALL GENERATE_EVIDENCE_CHAIN_REPORT
   - 3. Map errors to exit codes without printing absolute client paths unless include_absolute_paths is true
+
+## COMPUTE_DENOMINATOR_FINGERPRINT
+
+- [IMPL-EVIDENCE_CHAIN_REPORT] [ARCH-EVIDENCE_CHAIN_REPORT] [REQ-EVIDENCE_CHAIN_REPORT] Stable hash of required derived-path denominators plus structural denominators for one accepted profile.
+- Contract:
+  - INPUT: normalized EvidenceChainProfile
+  - PRE: profile passed VALIDATE_PROFILE_ARTIFACT
+  - OUTPUT: deterministic lowercase hex fingerprint string
+  - POST:
+    - success => same profile bytes yield same fingerprint; changing any required derived denominator or structural denominator changes fingerprint
+    - fingerprint inputs are denominator values only (not derived value numbers)
+  - FAILURE_MODES: none
+  - EFFECTS: pure
+  - TERMINATION: total
+- PROCEDURE: COMPUTE_DENOMINATOR_FINGERPRINT
+  - 1. Collect denominators for REQUIRED_DERIVED_PATHS in stable path order
+  - 2. Append sorted structural field denominators from evidence_chain.structural
+  - 3. Canonicalize each entry as path + "=" + String(denominator)
+  - 4. SHA-256 the joined canonical lines; emit first 16 hex chars
+
+## PARTITION_SUBCOHORTS
+
+- [IMPL-EVIDENCE_CHAIN_REPORT] [ARCH-EVIDENCE_CHAIN_REPORT] [REQ-EVIDENCE_CHAIN_REPORT] Split one compatibility_key cohort when denominator fingerprints differ; never merge incompatible denominators into one rollup.
+- Contract:
+  - INPUT: accepted records sharing one compatibility_key
+  - PRE: every record has a computed denominator_fingerprint
+  - OUTPUT: ordered sub-cohorts keyed by (compatibility_key, denominator_fingerprint)
+  - POST:
+    - success => each sub-cohort member shares identical fingerprint; statistics never cross fingerprint boundaries
+    - v1 path unchanged when report_version is v1
+  - FAILURE_MODES: none
+  - EFFECTS: pure
+  - TERMINATION: total
+- PROCEDURE: PARTITION_SUBCOHORTS
+  - 1. Group members by denominator_fingerprint inside the compatibility_key
+  - 2. Stable-sort sub-cohorts by fingerprint then project_id, commit, profile_depth, artifact_ref
+  - 3. Attach denominator_fingerprint to each accepted input row in v2 outputs
+  - 4. Emit denominator_subcohort_count per sub-cohort (count-only; proof_boundary traceability_structure)
+
+## GENERATE_EVIDENCE_CHAIN_REPORT_V2
+
+- [IMPL-EVIDENCE_CHAIN_REPORT] [ARCH-EVIDENCE_CHAIN_REPORT] [REQ-EVIDENCE_CHAIN_REPORT] v2 emit path: sub-cohorts, refined residual risks, schema evidence-chain-statistics-report.v2.
+- Contract:
+  - INPUT: same as GENERATE_EVIDENCE_CHAIN_REPORT plus report_version v2
+  - PRE: gate III approved v2 scope; pseudo-code validated
+  - OUTPUT: evidence-chain-statistics-report.v2 YAML + Markdown
+  - POST:
+    - success => schema_version evidence-chain-statistics-report.v2; default CLI remains v1
+    - incompatible denominators isolated into separate sub-cohorts suppress cohort-level denominator mismatch residual risks
+    - v1 regression: report_version v1 or default yields byte-identical output to pre-v2 generator
+  - FAILURE_MODES: same as v1
+  - EFFECTS: IO
+  - TERMINATION: total
+- PROCEDURE: GENERATE_EVIDENCE_CHAIN_REPORT_V2
+  - 1. Follow GENERATE_EVIDENCE_CHAIN_REPORT steps 1–5 for validation and acceptance
+  - 2. CALL PARTITION_CLIENT_COHORTS (compatibility_key layer unchanged)
+  - 3. FOR each compatibility cohort CALL PARTITION_SUBCOHORTS
+  - 4. FOR each sub-cohort CALL AGGREGATE_COHORT_STATISTICS
+  - 5. Emit denominator_subcohort_count statistic per sub-cohort
+  - 6. Suppress residual risk "incompatible denominators within cohort" when v2 sub-cohorts already isolate the mismatch
+  - 7. CALL RENDER_STATISTICS_REPORT_YAML with schema_version v2
+  - 8. CALL RENDER_STATISTICS_REPORT_MARKDOWN

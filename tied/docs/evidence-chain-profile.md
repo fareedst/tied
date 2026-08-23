@@ -96,7 +96,7 @@ Two profiles are comparable only when `schema_version`, `profile_depth`, and eac
 
 ## Opt-in metrics
 
-When `TIED_MCP_COLLECT_METRICS` is enabled, records may include hashed `project_id`, `run_id`, `profile_depth`, `scope_hash`, and `commit`. Those fields are optional **tool-usage metrics** only. They are not **evidence chain statistics report** results.
+When `TIED_MCP_COLLECT_METRICS` is enabled, records may include hashed `project_id`, `run_id`, `profile_depth`, `scope_hash`, and `commit`. The profile field `operational.metrics_opt_in` must reflect `isMetricsEnabled()` at generation time (true when env opt-in is active, false otherwise). Those fields are optional **tool-usage metrics** only. They are not **evidence chain statistics report** results.
 
 ## Multi-client evidence chain statistics report
 
@@ -132,6 +132,21 @@ Duplicate key: `(project_id, commit, profile_depth, scope_hash)`. `scope_hash` c
 `compatibility_key = schema_version + "|" + profile_depth`
 
 Incompatible **evidence-chain profile depth** or `schema_version` values become separate **client cohort** partitions. v1 does **not** split on numeric denominator *values*. v1 does **not** sum or average derived-field `value` numbers. There is no cross-cohort rollup and no universal ranking.
+
+When bare and reprofile runs share a **compatibility key** but derived-field **denominators** differ (observed on client `1787461685`), v1 emits residual risks yet still rolls up under one cohort. v2 addresses this with **denominator fingerprint** sub-cohorts (gate III approved 2026-08-23).
+
+### YAML report v2 (`evidence-chain-statistics-report.v2`)
+
+Opt-in via CLI `--report-version v2` (default remains v1). Adds:
+
+- `denominator_fingerprint` on each accepted input row (stable hash of required derived-path denominators plus structural denominators)
+- **Denominator subcohort** partitions inside each **client cohort** when fingerprints differ
+- Named statistic `denominator_subcohort_count` (count-only; **proof boundary** `traceability_structure`)
+- Residual-risk refinement: suppress cohort-level "incompatible denominators" when sub-cohorts already isolate the mismatch
+
+v2 non-goals unchanged: no maturity score, no averaging derived-field values, no client-root walk, no project YAML mutation.
+
+Golden fixture: `working/evidence-chain/report-inputs-v2-golden.yaml` with `client-1787461685-bare.v1.json` and `client-1787461685-reprofile.v1.json` (same `project_id`, two sub-cohorts).
 
 ### YAML report (`evidence-chain-statistics-report.v1`)
 
@@ -175,7 +190,8 @@ node /path/to/stdd/mcp-server/dist/cli/evidence-chain-report.js \
   --inputs /path/to/report-inputs.yaml \
   --yaml-out /path/to/working/evidence-chain-report/report.yaml \
   --markdown-out /path/to/working/evidence-chain-report/report.md \
-  [--mode strict|partial]
+  [--mode strict|partial] \
+  [--report-version v1|v2]
 ```
 
 Output paths must be caller-selected non-intent files (example `working/evidence-chain-report/`). Reject writes under `tied/requirements`, `tied/architecture-decisions`, `tied/implementation-decisions`, or `tied/methodology`.

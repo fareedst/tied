@@ -1,5 +1,5 @@
 # [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS]
-# Summary: Opt-in JSONL metrics for every MCP tool call; sanitize args; wrap at registration; offline Ruby aggregator.
+# Summary: Opt-in JSONL metrics for every MCP tool call; sanitize args; wrap at registration; bounded offline Ruby aggregation with explicit signature coverage.
 
 ## Summary contract
 
@@ -54,7 +54,7 @@
     - recordToolCall(v1 record).
     - RETURN result.
 
-## Registration, CLI, and offline analysis
+## Registration and CLI
 
 - [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS] How: For each allTools entry, register exactly one handler from instrumentToolHandlers; it wraps the handler when metrics are enabled and preserves the raw handler otherwise.
 - procedure index_register_tools():
@@ -67,11 +67,42 @@
     - export TIED_MCP_METRICS_CLIENT=tied-cli.
   - spawn node tied-mcp-stdio-client.cjs.
 
-- [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS] How: Stream each line JSON.parse; count syntax and schema errors separately; accumulate tool_counts, client_counts, failures, duration stats per tool, top_signatures with deterministic tie ordering; emit YAML per file; optional --aggregate to stderr.
-- procedure analyze_tied_mcp_metrics(jsonl_paths):
+## ANALYZE_TIED_MCP_METRICS
+
+- [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS] How: Bound deterministic per-file and aggregate signature analysis, disclose candidate visibility through signature_coverage, and sum aggregate schema errors without conflating parse errors.
+- Contract:
+  - INPUT: one or more existing metrics JSONL paths; optional --aggregate; optional --project-root
+  - PRE: every input path names a readable file; file argument multiplicity retains existing CLI semantics
+  - OUTPUT: one per-file YAML report on stdout; optional aggregate YAML summary on stderr
+  - POST:
+    - every top_signatures list has at most SIGNATURE_BOUND rows ordered by descending count, then tool, then args_signature
+    - every report includes signature_coverage { bound, considered, emitted, omitted, status }
+    - per-file considered equals distinct valid (tool, args_signature) keys; status is exact_within_bound exactly when omitted is zero
+    - aggregate considered equals the visible distinct candidate-key union from bounded per-file top_signatures
+    - aggregate status is exact_within_bound exactly when every per-file status is exact_within_bound and aggregate omitted is zero; otherwise status is approximate
+    - aggregate schema_errors equals the sum of per-file schema_errors and remains distinct from parse_errors
+    - reversing distinct input-path order does not change aggregate top_signatures, including sample_args_summary
+  - FAILURE_MODES: InvalidOption, MetricsFileNotFound
+  - DATA: SIGNATURE_BOUND = 50; per-file streaming counters; visible aggregate candidate map
+  - CONTROL: per-file YAML remains on stdout; --aggregate remains on stderr; approximate discloses candidates hidden by per-file truncation
+  - EFFECTS: IO
+  - TERMINATION: total
+- PROCEDURE: ANALYZE_TIED_MCP_METRICS
+  - 1. SET SIGNATURE_BOUND to 50.
   - FOR each path:
-    - stream lines; JSON.parse each.
+    - stream lines and JSON.parse each non-empty line.
+    - count malformed JSON as parse_errors.
     - reject non-object or missing-core-field records as schema_errors.
-    - accumulate tool_counts, client_counts, failures, duration stats, top_signatures.
+    - accumulate tool_counts, client_counts, failures, duration stats, and signatures.
+    - for equal (tool, args_signature) keys retain the lexically smallest recursively key-sorted canonical JSON sample_args_summary.
+    - order signature rows by descending count, then tool, then args_signature.
+    - build signature_coverage from the complete per-file candidate set and SIGNATURE_BOUND.
     - emit YAML summary to stdout.
-  - IF --aggregate: emit combined summary to stderr.
+  - IF --aggregate:
+    - sum lines, parse_errors, schema_errors, ok_count, and fail_count from every per-file report.
+    - merge only visible per-file top_signatures by (tool, args_signature).
+    - for equal aggregate keys retain the lexically smallest recursively key-sorted canonical JSON sample_args_summary.
+    - order aggregate signature rows by descending count, then tool, then args_signature.
+    - build aggregate signature_coverage from the visible candidate union and SIGNATURE_BOUND.
+    - set aggregate status to approximate when any per-file status is approximate or aggregate omitted is nonzero; otherwise exact_within_bound.
+    - emit combined summary to stderr.

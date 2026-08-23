@@ -1,11 +1,11 @@
 REQ-EVIDENCE_CHAIN_REPORT:
   category: "Functional"
-  description: "Produce a versioned, read-only evidence-chain-statistics-report.v1 from one or more client-generated evidence-chain-profile.v1 artifacts. The aggregator is TIED-side, artifact-based, and independent of profile generation, runFirstSlice, finding-ledger append, case promotion, and live client-root traversal."
+  description: "Produce versioned read-only evidence-chain-statistics-report.v1 (default) and evidence-chain-statistics-report.v2 from one or more client-generated evidence-chain-profile.v1 artifacts. v2 adds denominator fingerprint sub-cohorts inside compatibility_key partitions. The aggregator is TIED-side, artifact-based, and independent of profile generation, runFirstSlice, finding-ledger append, case promotion, and live client-root traversal."
   metadata:
     last_updated:
       author: "AI Agent"
-      date: "2026-08-22"
-      reason: "Verification after unit and CLI tests"
+      date: "2026-08-23"
+      reason: "Gate III approved v2 scope: denominator fingerprint sub-cohorts"
   name: "Evidence chain statistics report"
   priority: "P1"
   rationale:
@@ -34,6 +34,10 @@ REQ-EVIDENCE_CHAIN_REPORT:
       metric: "MalformedProfile on those keys"
     - criterion: "Aggregator never reads or mutates client repositories or project YAML"
       metric: "Only explicit profile artifacts and the caller-selected report directory"
+    - criterion: "v2 splits incompatible denominators inside the same compatibility_key into separate sub-cohorts"
+      metric: "denominator_fingerprint differs => separate sub-cohort statistics; never merged rollup"
+    - criterion: "v1 remains default and byte-stable for unchanged inputs"
+      metric: "Default CLI and --report-version v1 yield pre-v2 output"
   status: "Implemented"
   traceability:
     architecture:

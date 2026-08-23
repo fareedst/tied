@@ -14,9 +14,12 @@ import yaml from "js-yaml";
 
 import {
   EVIDENCE_CHAIN_REPORT_SCHEMA,
+  EVIDENCE_CHAIN_REPORT_SCHEMA_V2,
   generateEvidenceChainStatisticsReport,
   loadReportInputManifest,
   type EvidenceChainStatisticsReport,
+  type EvidenceChainStatisticsReportV1,
+  type EvidenceChainStatisticsReportV2,
   type NamedStatistic,
 } from "./evidence-chain-report.js";
 
@@ -46,6 +49,14 @@ function mutateJson(filePath: string, mutator: (value: Record<string, unknown>) 
 
 function statisticNames(report: EvidenceChainStatisticsReport): string[] {
   const names = (report.statistics ?? []).map((row) => row.name);
+  if (report.schema_version === EVIDENCE_CHAIN_REPORT_SCHEMA_V2) {
+    for (const cohort of report.cohorts) {
+      for (const sub of cohort.sub_cohorts) {
+        names.push(...sub.statistics.map((row) => row.name));
+      }
+    }
+    return names;
+  }
   for (const cohort of report.cohorts) {
     names.push(...cohort.statistics.map((row) => row.name));
   }
@@ -53,7 +64,16 @@ function statisticNames(report: EvidenceChainStatisticsReport): string[] {
 }
 
 function findStats(report: EvidenceChainStatisticsReport, name: string): NamedStatistic[] {
-  const rows = [...(report.statistics ?? []), ...report.cohorts.flatMap((cohort) => cohort.statistics)];
+  const rows = [...(report.statistics ?? [])];
+  if (report.schema_version === EVIDENCE_CHAIN_REPORT_SCHEMA_V2) {
+    for (const cohort of report.cohorts) {
+      for (const sub of cohort.sub_cohorts) {
+        rows.push(...sub.statistics);
+      }
+    }
+  } else {
+    rows.push(...report.cohorts.flatMap((cohort) => cohort.statistics));
+  }
   return rows.filter((row) => row.name === name);
 }
 
@@ -61,12 +81,14 @@ function generateIn(dir: string, options: {
   manifest: string;
   modeOverride?: "strict" | "partial";
   includeAbsolute?: boolean;
+  reportVersion?: "v1" | "v2";
 }) {
   return generateEvidenceChainStatisticsReport({
     inputsPath: options.manifest,
     yamlOut: path.join(dir, "report.yaml"),
     markdownOut: path.join(dir, "report.md"),
     modeOverride: options.modeOverride,
+    reportVersion: options.reportVersion,
     now: FIXED_NOW,
     cwd: dir,
     projectRoot: dir,
@@ -96,7 +118,7 @@ describe("GENERATE_EVIDENCE_CHAIN_REPORT [REQ-EVIDENCE_CHAIN_REPORT]", () => {
     assert.equal(result.report.mode, "strict");
     assert.equal(result.report.include_absolute_paths, false);
     assert.equal(result.report.cohorts.length, 1);
-    assert.equal(result.report.cohorts[0]?.compatibility_key, "evidence-chain-profile.v1|integrated");
+    assert.equal((result.report as EvidenceChainStatisticsReportV1).cohorts[0]?.compatibility_key, "evidence-chain-profile.v1|integrated");
     const profileCount = findStats(result.report, "cohort_profile_count")[0];
     assert.equal(profileCount?.numerator, 1);
     assert.equal(profileCount?.denominator, 1);
@@ -193,8 +215,11 @@ describe("GENERATE_EVIDENCE_CHAIN_REPORT [REQ-EVIDENCE_CHAIN_REPORT]", () => {
       "evidence-chain-profile.v1|human_research",
       "evidence-chain-profile.v1|integrated",
     ]);
-    for (const cohort of result.report.cohorts) {
-      assert.equal(findStats({ ...result.report, cohorts: [cohort], statistics: [] }, "cohort_profile_count")[0]?.numerator, 1);
+    for (const cohort of (result.report as EvidenceChainStatisticsReportV1).cohorts) {
+      assert.equal(
+        findStats({ ...(result.report as EvidenceChainStatisticsReportV1), cohorts: [cohort], statistics: [] }, "cohort_profile_count")[0]?.numerator,
+        1,
+      );
     }
     const names = statisticNames(result.report);
     assert.equal(names.includes("maturity"), false);
@@ -217,7 +242,8 @@ describe("GENERATE_EVIDENCE_CHAIN_REPORT [REQ-EVIDENCE_CHAIN_REPORT]", () => {
     assert.ok(graphStatus);
     assert.equal(graphStatus?.numerator, 1);
     assert.equal(graphStatus?.status, "observed");
-    for (const row of [...(result.report.statistics ?? []), ...result.report.cohorts.flatMap((c) => c.statistics)]) {
+    const v1Report = result.report as EvidenceChainStatisticsReportV1;
+    for (const row of [...v1Report.statistics, ...v1Report.cohorts.flatMap((c) => c.statistics)]) {
       assert.notEqual(row.name, "graph_value_sum");
       assert.ok(!("average" in row));
     }
@@ -534,5 +560,78 @@ describe("GENERATE_EVIDENCE_CHAIN_REPORT [REQ-EVIDENCE_CHAIN_REPORT]", () => {
     assert.match(markdown, /cohort_profile_count/);
     assert.doesNotMatch(markdown, /maturity_score/);
     assert.doesNotMatch(markdown, /universal_score/);
+  });
+
+  it("v2 splits client 1787461685 bare and reprofile into two denominator sub-cohorts [REQ-EVIDENCE_CHAIN_REPORT]", () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ecr-v2-golden-"));
+    copyFixture(dir, "client-1787461685-bare.v1.json");
+    copyFixture(dir, "client-1787461685-reprofile.v1.json");
+    copyFixture(dir, "report-inputs-v2-golden.yaml", "inputs.yaml");
+    const result = generateIn(dir, { manifest: path.join(dir, "inputs.yaml"), reportVersion: "v2" });
+    assert.equal(result.ok, true);
+    if (!result.ok) return;
+    const report = result.report as EvidenceChainStatisticsReportV2;
+    assert.equal(report.schema_version, EVIDENCE_CHAIN_REPORT_SCHEMA_V2);
+    assert.equal(report.cohorts.length, 1);
+    assert.equal(report.cohorts[0]?.compatibility_key, "evidence-chain-profile.v1|integrated");
+    assert.equal(report.cohorts[0]?.sub_cohorts.length, 2);
+    assert.equal(new Set(report.inputs.map((row) => row.project_id)).size, 1);
+    assert.notEqual(
+      report.cohorts[0]?.sub_cohorts[0]?.denominator_fingerprint,
+      report.cohorts[0]?.sub_cohorts[1]?.denominator_fingerprint,
+    );
+    for (const sub of report.cohorts[0]?.sub_cohorts ?? []) {
+      assert.equal(findStats(report, "denominator_subcohort_count")[0]?.numerator, 2);
+      assert.equal(findStats({ ...report, cohorts: [{ ...report.cohorts[0]!, sub_cohorts: [sub] }], statistics: [] }, "cohort_profile_count")[0]?.numerator, 1);
+    }
+    assert.equal(
+      report.residual_risks.some((risk) => risk.includes("profiles in cohort") && risk.includes("incompatible denominators")),
+      false,
+    );
+  });
+
+  it("v1 default and explicit --report-version v1 stay byte-stable [REQ-EVIDENCE_CHAIN_REPORT]", () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ecr-v1-stable-"));
+    copyFixture(dir, "example-profile.json");
+    const manifest = writeManifest(
+      dir,
+      ["schema_version: evidence-chain-report-inputs.v1", "inputs:", "  - profile_path: example-profile.json", ""].join("\n"),
+    );
+    const baseline = generateEvidenceChainStatisticsReport({
+      inputsPath: manifest,
+      yamlOut: path.join(dir, "baseline.yaml"),
+      markdownOut: path.join(dir, "baseline.md"),
+      now: FIXED_NOW,
+      cwd: dir,
+      projectRoot: dir,
+    });
+    const explicit = generateEvidenceChainStatisticsReport({
+      inputsPath: manifest,
+      yamlOut: path.join(dir, "explicit.yaml"),
+      markdownOut: path.join(dir, "explicit.md"),
+      reportVersion: "v1",
+      now: FIXED_NOW,
+      cwd: dir,
+      projectRoot: dir,
+    });
+    assert.equal(baseline.ok && explicit.ok, true);
+    assert.equal(fs.readFileSync(path.join(dir, "baseline.yaml"), "utf8"), fs.readFileSync(path.join(dir, "explicit.yaml"), "utf8"));
+    assert.equal(fs.readFileSync(path.join(dir, "baseline.md"), "utf8"), fs.readFileSync(path.join(dir, "explicit.md"), "utf8"));
+  });
+
+  it("v2 rejects forbidden score keys in input profiles [REQ-EVIDENCE_CHAIN_REPORT]", () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ecr-v2-forbidden-"));
+    copyFixture(dir, "example-profile.json", "scored.json");
+    mutateJson(path.join(dir, "scored.json"), (value) => {
+      value.universal_score = 1;
+    });
+    const manifest = writeManifest(
+      dir,
+      ["schema_version: evidence-chain-report-inputs.v1", "inputs:", "  - profile_path: scored.json", ""].join("\n"),
+    );
+    const result = generateIn(dir, { manifest, reportVersion: "v2" });
+    assert.equal(result.ok, false);
+    if (result.ok) return;
+    assert.equal(result.error, "ForbiddenField");
   });
 });

@@ -9,6 +9,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Evidence chain statistics report v2** — `--report-version v2` emits
+  `evidence-chain-statistics-report.v2` with **denominator fingerprint**
+  sub-cohorts inside each **client cohort** (`[REQ-EVIDENCE_CHAIN_REPORT]`).
+  Client 1787461685 bare/reprofile golden fixture yields two sub-cohorts under
+  the same `compatibility_key`; v1 remains the default and byte-stable.
+
+- **Profile metrics opt-in field** — `operational.metrics_opt_in` on generated
+  profiles now reflects `isMetricsEnabled()` (`TIED_MCP_COLLECT_METRICS`) at
+  generation time (`[REQ-EVIDENCE_CHAIN_PROFILE]`).
+
+- **Dormant evidence-chain adapter contracts (Phase 4)** —
+  `[IMPL-EVIDENCE_CHAIN_PROFILE]` catalogs `COLLECT_FILE_INVENTORY` and
+  `COLLECT_VOCAB_DRIFT` as dormant pseudo-code contracts with
+  `pseudo_code_structure` proof boundary only; no orchestrator wiring,
+  production symbols, tests, or profile activation. CITDP:
+  `CITDP-REQ-DEFERRED_STATS_ROADMAP-adapters`.
+
 - **Shared TIED project identity (slice 1)** — `[ARCH-TIED_PROJECT_IDENTITY]` /
   `[IMPL-TIED_PROJECT_IDENTITY]` (deferred-stats roadmap slice 1 via
   `CITDP-REQ-DEFERRED_STATS_ROADMAP-identity`); env-only `TIED_MCP_PROJECT_ID`
@@ -48,6 +65,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   incompatibilities as residual risks. The metrics path now uses recursive
   signature canonicalization, hashed project identity, redacted errors, and
   schema-aware deterministic offline analysis.
+
+- **Bounded MCP metrics signature aggregation** — The offline Ruby analyzer now
+  emits deterministic top-50 rows with explicit `signature_coverage`, marks
+  aggregate results approximate after per-file truncation or visible candidate
+  overflow, selects stable canonical samples regardless of input order, and
+  sums per-file `schema_errors` without conflating parse failures
+  (`[REQ-MCP_USAGE_METRICS]` / `[IMPL-MCP_USAGE_METRICS]`). CITDP:
+  `CITDP-REQ-DEFERRED_STATS_ROADMAP-aggregation`.
 
 - **Adversarial inquiry activation close-out** — `[IMPL-TIED_FILES]` now records
   fail-closed inheritance verification, paired inquiry metrics and artifact

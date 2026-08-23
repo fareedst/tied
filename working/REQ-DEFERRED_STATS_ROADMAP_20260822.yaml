@@ -15,14 +15,24 @@ entry_points:
     start_at: "session-bootstrap"
 execution_evidence:
   close_out_evidence:
-    date: "2026-08-22"
+    date: "2026-08-23"
     deferred:
-      - "Decision gate III / v2 deferred until v1 observation packet complete"
-      - "P2 slice 2 bounded signature aggregation not started"
+      - "Maturity scoring and a universal rollup remain excluded"
+      - "Phase 4 file-inventory and vocabulary-drift orchestrator wiring, production symbols, TypeScript implementation, tests, profile activation, and runtime verification claim remain explicitly excluded"
       - "Repo-local project ID file deferred; env-only approved for slice 1"
+      - "Sibling-client pilots beyond client 1787461685 remain excluded"
     gates:
+      acceptance_v2:
+        artifacts:
+          - "working/REQ-DEFERRED_STATS_ROADMAP/v2-acceptance/report.md"
+          - "working/REQ-DEFERRED_STATS_ROADMAP/v2-acceptance/report.yaml"
+        command: "node mcp-server/dist/cli/evidence-chain-report.js --inputs working/evidence-chain/report-inputs-v2-golden.yaml --yaml-out working/REQ-DEFERRED_STATS_ROADMAP/v2-acceptance/report.yaml --markdown-out working/REQ-DEFERRED_STATS_ROADMAP/v2-acceptance/report.md --report-version v2"
+        result: "passed: schema v2; one compatibility cohort; two denominator sub-cohorts; no forbidden maturity/score keys or absolute paths"
       adversarial_inquiry:
-        result: "not_applicable: read-only identity/metrics path; no fidelity or obligation activation evidence"
+        result: "minimal manual counterexamples and proof-boundary review completed for Phase 2 and Phase 4; no integrated inquiry invocation or artifact activation"
+      commit:
+        reason: "User authorization and approved plan explicitly leave the commit gate unexecuted"
+        result: "not_executed"
       decision_gate_I:
         approved: "2026-08-22"
         approver: "sponsor"
@@ -32,44 +42,70 @@ execution_evidence:
         approver: "sponsor"
         policy: "bounded top-50 per file and aggregate; signature_coverage metadata; sum schema_errors in aggregate; args_signature usage-metrics-only"
       decision_gate_III:
-        blocker: "v1 observation packet not collected"
-        status: "deferred"
+        approved: "2026-08-23"
+        approver: "sponsor"
+        policy: "v2 scope approved from v1 observation packet (client 1787461685); denominator_fingerprint sub-cohorts; metrics_opt_in wiring; client-scoped JSONL metrics; sanitized profile copies committed under working/evidence-chain/"
+        status: "approved"
       pseudocode:
-        command: "TIED MCP pseudocode_validate for IMPL-TIED_PROJECT_IDENTITY, IMPL-EVIDENCE_CHAIN_PROFILE, IMPL-EVIDENCE_CHAIN_REPORT, IMPL-MCP_USAGE_METRICS"
-        result: "passed: all four returned ok true"
+        command: "TIED MCP pseudocode_validate post-test for IMPL-MCP_USAGE_METRICS and structural-only for IMPL-EVIDENCE_CHAIN_PROFILE dormant contracts"
+        result: "passed: both returned ok true; Phase 4 proof boundary remains pseudo_code_structure with no runtime claim"
+      red_green:
+        green:
+          command: "ruby scripts/analyze_tied_mcp_metrics_test.rb"
+          result: "passed: analyze_tied_mcp_metrics_test: ok"
+        red:
+          command: "ruby scripts/analyze_tied_mcp_metrics_test.rb"
+          result: "expected target-specific failure: KeyError missing signature_coverage at test_bounded_signature_aggregation"
       ruby_analyzer:
         command: "ruby scripts/analyze_tied_mcp_metrics_test.rb"
         result: "passed: analyze_tied_mcp_metrics_test: ok"
       tied_consistency:
         command: "TIED MCP tied_validate_consistency"
-        result: "passed: ok true; all indexes valid; traceability, detail files, and pseudo-code checks passed"
+        result: "passed before final Tracker close-out; final sweep repeats after this update"
       tied_verify:
-        command: "TIED MCP tied_verify (explicit passing parent REQs and slice IMPLs; no demotions)"
-        result: "passed: ok true; REQ-EVIDENCE_CHAIN_PROFILE, REQ-EVIDENCE_CHAIN_REPORT, REQ-MCP_USAGE_METRICS Implemented; four slice IMPLs Active"
+        command: "TIED MCP tied_verify with no demotions for observed Phase 2/3 runtime tokens only"
+        result: "passed: REQ-MCP_USAGE_METRICS, REQ-EVIDENCE_CHAIN_PROFILE, REQ-EVIDENCE_CHAIN_REPORT Implemented; IMPL-MCP_USAGE_METRICS and IMPL-EVIDENCE_CHAIN_REPORT Active; IMPL-EVIDENCE_CHAIN_PROFILE deliberately excluded after dormant-contract additions"
       typescript:
-        command: "bunx tsc -b (working_directory: mcp-server)"
-        result: "passed: exit 0"
+        command: "npm run build --prefix mcp-server; bunx tsc -b (working_directory: mcp-server)"
+        result: "passed: both exit 0"
       unit_and_composition:
         command: "npm test --prefix mcp-server"
-        result: "passed: 364 tests, 364 pass, 0 fail"
+        result: "passed: 370 tests, 370 pass, 0 fail, 117 suites"
       vocab_validate:
         command: "ruby scripts/validate_vocab_index.rb"
         result: "passed: Vocabulary index validation passed."
       yaml_lint:
-        command: "scripts/yaml_tool.sh --check (changed project YAML, CITDP, and working checklist)"
-        result: "passed: all listed project TIED YAML, CITDP, and working checklist files canonical and valid"
-    master_checklist: "Slice 1 and bundled evidence-chain/metrics hardening reconciled; all applicable implementation, validation, verification, release-note, and CITDP close-out gates completed without closing deferred roadmap work."
+        command: "scripts/yaml_tool.sh --check (all changed project TIED YAML, three deferred-roadmap CITDP records, and working Tracker)"
+        result: "passed: all changed project TIED YAML, all three deferred-roadmap CITDP records, and the working Tracker are canonical"
+    master_checklist: "Working-tree implementation complete through Phase 2 bounded signature aggregation, Phase 4 dormant contract catalog, and Phase 5 close-out. Four exclusions remain explicit; traceable-commit is intentionally not executed."
     roadmap_reference: "/Users/fareed/.cursor/plans/deferred_stats_roadmap_69de7159.plan.md"
     worktree_isolation: "Do not reset/checkout/overwrite unrelated uncommitted changes in mcp-server/, scripts/, tied/"
   completed:
-    - "Close-out gates: MCP tests 364/364; TypeScript build; Ruby analyzer; TIED consistency; safe TIED verify; four IMPL pseudo-code validations; YAML lint; vocabulary validation"
-    - "Close-out scope: identity slice and evidence-chain/metrics hardening complete; adversarial inquiry not applicable; deferred items preserved"
+    - "Close-out gates observed: MCP tests 370/370; TypeScript build/typecheck; Ruby analyzer; scoped TIED verify; pseudo-code structural gates; v2 acceptance generation"
+    - "Close-out scope: identity slice, evidence-chain report v2, bounded metrics aggregation, and dormant adapter contracts complete; four exclusions preserved"
     - "P0 baseline: TIED base path confirmed /Users/fareed/Documents/dev/chatgpt/stdd/tied; worktree isolation preserved"
     - "P2 slice 1: shared project identity resolver (ARCH-TIED_PROJECT_IDENTITY, IMPL-TIED_PROJECT_IDENTITY, project-identity.ts)"
+    - "P2 slice 2: bounded top-50 signature_coverage, deterministic aggregate samples/order, and aggregate schema_errors implemented by strict RED→GREEN Ruby TDD"
+    - "Phase 1: v1 observation packet complete; gate III approved 2026-08-23; client-scoped JSONL (85 lines)"
+    - "Phase 3a: v2 TIED stack (REQ/ARCH/IMPL), CITDP v2 draft, vocab RECORD, metrics_opt_in in scope; fixtures client-1787461685-* committed"
+    - "Phase 3b: v2 report implementation (denominator fingerprint sub-cohorts, CLI --report-version v2), metrics_opt_in wiring; 370 tests pass"
+    - "Phase 4: dormant COLLECT_FILE_INVENTORY and COLLECT_VOCAB_DRIFT contracts, IMPL metadata, vocabulary, and structural-only CITDP complete; no runtime activation"
+    - "Phase 5: three CITDP records complete, v2 acceptance artifacts generated, Tracker reconciled, and vocabulary VALIDATE completed without commit"
   operator_evidence:
-    command: "npm test --prefix mcp-server; bunx tsc -b (from mcp-server); ruby scripts/analyze_tied_mcp_metrics_test.rb; tied_validate_consistency; tied_verify; pseudocode_validate (four changed IMPLs); scripts/yaml_tool.sh --check (changed YAML); ruby scripts/validate_vocab_index.rb"
-    limitation: "TIED verify updated only the explicitly passing parent REQs and slice IMPLs; adversarial inquiry not applicable because this is a read-only identity/metrics hardening close-out with no fidelity obligation activation."
+    command: "ruby scripts/analyze_tied_mcp_metrics_test.rb; npm test --prefix mcp-server; npm run build --prefix mcp-server; bunx tsc -b; v2 acceptance CLI; pseudocode_validate Phase 2/4 scopes; yaml_index_validate; tied_validate_consistency; scoped tied_verify; scripts/yaml_tool.sh --check; ruby scripts/validate_vocab_index.rb; git diff --check"
+    limitation: "Phase 4 proves pseudo-code structure only. No runtime adapter implementation, wiring, tests, activation, or IMPL-EVIDENCE_CHAIN_PROFILE verification is claimed; no sibling-client comparability or maturity score is established."
     status: "passed"
+  plan_refinement:
+    date: "2026-08-23"
+    evidence: "Refined the remaining-completion plan against current TIED records, pseudo-code, source, tests, CITDPs, vocabulary, Tracker evidence, and staged plus unstaged diffs. No production code or tests were changed."
+    plan_path: "working/REQ-DEFERRED_STATS_ROADMAP/remaining-completion-plan.md"
+    resolved_terms:
+      - "Aggregate signature coverage is approximate after any per-file truncation"
+      - "Phase 2 CITDP persistence occurs after implementation verification rather than before RED"
+      - "Phase 4 is a dormant pseudo-code contract catalog with no runtime verification claim"
+      - "REQ-DEFERRED_STATS_ROADMAP remains a working request identifier, not a registered requirement token"
+    status: "complete"
+    unresolved_sponsor_decisions: []
   request: "REQ-DEFERRED_STATS_ROADMAP"
 feedback_loops:
   composition_and_e2e: "Missing implementation coverage returns to the specification path before evidence is accepted."
@@ -90,7 +126,7 @@ flow_control_notation:
     symbol: "RETURN"
   - meaning: "Checklist complete"
     symbol: "EXIT"
-last_updated: "2026-08-22"
+last_updated: "2026-08-23"
 loop_back_clearance:
   apply-token-comments:
     clear_slugs:
@@ -568,11 +604,11 @@ steps:
       - "Responsibility: pseudo-code owner step. This step blocks tests/code when logic intent is incomplete."
     title: "Blockers before tests or code"
     tracking:
-      consideration_before_proceeding: "Insufficient specs identified; all flagged for resolution in resolve-pseudocode."
+      consideration_before_proceeding: "Completed for reopened Phase 2 and Phase 4 scopes: bounded aggregation contract gaps were resolved before RED, and both dormant adapter contracts include closed failure, proof-boundary, and termination catalogs."
       retry_count: "0"
       returned_from: []
       state_history: []
-      status: "pending"
+      status: "completed"
   - flow:
       branches:
         - action: "Refactor (split or restructure) one IMPL before proceeding; do not paper over contradictions"
@@ -593,11 +629,11 @@ steps:
       - "Responsibility: pseudo-code owner step. Resolve logic contradictions before test/code execution continues."
     title: "Cross-IMPL conflicts"
     tracking:
-      consideration_before_proceeding: "No irreconcilable contradictions remain; or refactor completed."
+      consideration_before_proceeding: "Completed: no contradiction was found between bounded analyzer aggregation, existing opt-in/fail-open architecture, or dormant adapter no-runtime constraints."
       retry_count: "0"
       returned_from: []
       state_history: []
-      status: "pending"
+      status: "completed"
   - flow:
       branches:
         - action: "GOTO author-architecture, then return here"
@@ -625,12 +661,12 @@ steps:
       - "When resolving contracts introduces or renames logical units (procedures, UPPER_SNAKE block names) or data: CALL sub-vocabulary-sync (RESOLVE) so new names use preferred domain terms in ./tied/vocab/*.md, and CALL sub-vocabulary-sync (RECORD) to capture them immediately ([PROC-VOCABULARY_INDEX])."
     title: "Fix contracts; revisit REQ/ARCH if scope shifts"
     tracking:
-      consideration_before_proceeding: "All flagged issues resolved; new/renamed logical units resolved from and recorded in the canonical vocabulary; no scope change pending or ARCH/REQ updated and returned."
+      consideration_before_proceeding: "Completed: ANALYZE_TIED_MCP_METRICS, COLLECT_FILE_INVENTORY, and COLLECT_VOCAB_DRIFT contracts resolved; REQ-MCP_USAGE_METRICS updated through MCP; no architecture scope change."
       retry_count: "0"
       returned_from:
         - "sync-tied-stack"
       state_history: []
-      status: "pending"
+      status: "completed"
   - flow:
       branches: []
       calls:
@@ -655,12 +691,12 @@ steps:
       - "Sub-blocks (same token set): comment only the how."
     title: "Block-level IMPL/ARCH/REQ comments (Phase C)"
     tracking:
-      consideration_before_proceeding: "All blocks token-commented with canonical block names (resolved and recorded); dependencies and composition notes in place."
+      consideration_before_proceeding: "Completed: changed blocks have IMPL/ARCH/REQ leads; ANALYZE_TIED_MCP_METRICS lead is byte-identical in pseudo-code, Ruby test, and Ruby production loci; dormant blocks intentionally have no TypeScript/test loci."
       retry_count: "0"
       returned_from:
         - "composition-integration"
       state_history: []
-      status: "pending"
+      status: "completed"
   - flow:
       branches: []
       calls:
@@ -749,11 +785,11 @@ steps:
       - "Where applicable, attach tied_token_references to each risk (which REQ/ARCH/IMPL the risk affects)."
     title: "Risks, mitigations, token references"
     tracking:
-      consideration_before_proceeding: "Risks and mitigations documented; token references attached."
+      consideration_before_proceeding: "Completed in aggregation, adapters, and v2 CITDP records: minimal inquiry depth, baseline-functional applicability, proof boundaries, exclusions, and owned residual risks are explicit."
       retry_count: "0"
       returned_from: []
       state_history: []
-      status: "pending"
+      status: "completed"
   - flow:
       branches: []
       calls: []
@@ -881,11 +917,11 @@ steps:
       - "Responsibility: test/code owner step. Refactor without introducing new behavior; behavior changes require return to pseudo-code-owner steps."
     title: "Optional behavior-preserving cleanup"
     tracking:
-      consideration_before_proceeding: "Refactor done; tests and lint still pass."
+      consideration_before_proceeding: "Skipped explicitly: GREEN implementation already centralizes canonical sample and signature_coverage helpers; no further behavior-preserving refactor was needed."
       retry_count: "0"
       returned_from: []
       state_history: []
-      status: "pending"
+      status: "skipped"
   - flow:
       branches: []
       calls:
@@ -914,11 +950,11 @@ steps:
       - "When a bidirectional fidelity adapter is in scope, run the adapter check; mismatch is warn-only (same as unit-test-green); CALL sub-adversarial-inquiry-pass with phase post_test and blocking false."
     title: "Align pseudo-code, tests, code; token audit (Phase F)"
     tracking:
-      consideration_before_proceeding: "Three-way alignment verified for iteration; all tokens in semantic-tokens.yaml; canonical vocabulary reconciled (RECORD) with this iteration's terms. If all required blocks for this change are covered (optional blocks explicitly deferred per REQ/change-definition—not REQ-mandated gaps), proceed per flow to composition-integration; else loop to unit-test-red only for uncovered required blocks."
+      consideration_before_proceeding: "Completed for executable Phase 2: exact ANALYZE_TIED_MCP_METRICS lead parity and token audit pass. Phase 4 three-way copies are explicitly deferred because no implementation/test loci are authorized."
       retry_count: "0"
       returned_from: []
       state_history: []
-      status: "pending"
+      status: "completed"
   - agentstream_new_session: "true"
     flow:
       branches:
@@ -988,11 +1024,11 @@ steps:
       - "Write E2E test referencing REQ and IMPL tokens; comment justifies why composition-level testing is insufficient."
     title: "UI-only behavior with platform justification (Phase H)"
     tracking:
-      consideration_before_proceeding: "E2E-only behavior identified and documented; UI-facing terms and E2E test names resolved from and recorded in the canonical vocabulary; E2E tests written and justified."
+      consideration_before_proceeding: "Skipped explicitly: the offline Ruby analyzer has no UI boundary, Phase 3 is covered below UI, and Phase 4 has no runtime behavior."
       retry_count: "0"
       returned_from: []
       state_history: []
-      status: "pending"
+      status: "skipped"
   - agentstream_new_session: "true"
     flow:
       branches:
@@ -1082,11 +1118,11 @@ steps:
       - "Update vocab after design and implementation: CALL sub-vocabulary-sync (RECORD) so ./tied/vocab/*.md reflects the final REQ/ARCH/IMPL terms, design/UI terms, and storage names; each concept resolves to one preferred term and the naming bridge and alphabetical index are current ([PROC-VOCABULARY_INDEX]). Final VALIDATE gate is at traceable-commit (Touchpoint 3)."
     title: "TIED docs match implementation; consistency via tied-cli.sh"
     tracking:
-      consideration_before_proceeding: "TIED docs match code/tests; tied_validate_consistency reports ok true; canonical vocabulary reconciled (RECORD) with final REQ/ARCH/IMPL, design/UI, and storage terms; ./tied/agent-preload-contract.yaml re-checked or explicitly unchanged if sync did not affect preload-relevant fields."
+      consideration_before_proceeding: "Completed: REQ/IMPL records, pseudo-code sidecars, CITDP records, docs, CHANGELOG, and both vocabularies match final scope; no preload-relevant stack or platform constants changed."
       retry_count: "0"
       returned_from: []
       state_history: []
-      status: "pending"
+      status: "completed"
   - flow:
       branches: []
       calls:
@@ -1171,11 +1207,11 @@ steps:
       - "Write commit message per [PROC-COMMIT_MESSAGES]: header <type>(<scope>): <subject> (≤50 chars); type feat|fix|docs|refactor|test|build|ci|chore|perf|style; scope area affected; subject imperative present tense; body motivation/behavior; footer Closes/Fixes #issue and REQ/ARCH/IMPL tokens touched."
     title: "Commit per PROC-COMMIT_MESSAGES; no push unless asked"
     tracking:
-      consideration_before_proceeding: "sub-vocabulary-sync (VALIDATE) passed or immature-client deferral noted; commit created; format per PROC-COMMIT_MESSAGES; tokens in body/footer."
+      consideration_before_proceeding: "Skipped by explicit user authorization: vocabulary VALIDATE ran and passed, but no staging, commit, amend, or push was executed."
       retry_count: "0"
       returned_from: []
       state_history: []
-      status: "pending"
+      status: "skipped"
 sub_procedures:
   - flow:
       return_to: "caller"
@@ -1211,10 +1247,10 @@ sub_procedures:
       - "Run lint_yaml on each changed file that was direct-edited or when your workflow requires canonical formatting on disk—never raw multi-argument `yq` with multiple file arguments in one process. If validation fails, fix and repeat; file is invalid until lint_yaml succeeds."
     title: "tied-cli.sh mutations, lint_yaml, tied_validate_consistency"
     tracking:
-      consideration_before_proceeding: "tied-cli.sh mutation path honored where applicable; lint_yaml passed for any direct-edited files (per processes.md [PROC-YAML_EDIT_LOOP]); tied_validate_consistency passed when TIED files changed."
+      consideration_before_proceeding: "Completed: MCP/tied-yaml handled structured TIED writes, citdp_record_write handled all CITDP writes, changed YAML passed yaml_tool, and tied_validate_consistency passed."
       retry_count: "0"
       state_history: []
-      status: "pending"
+      status: "completed"
   - flow:
       return_to: "gate-pseudocode-validation"
     goals: "Ensure IMPL pseudo-code satisfies the application pseudo-code validation checklist before persisting or writing tests/code. Required checks are gating unless waived and documented."
@@ -1239,10 +1275,10 @@ sub_procedures:
       - "When invoked from verification-gate—evaluate full Layer B including minimum_gating_rules; behavioral/traceability rows that require executable tests must pass now that tests exist (or mark N/A with rationale). New/changed Active blocks may not use pre-contract-grammar."
     title: "Checklist-ordered passes until gating satisfied"
     tracking:
-      consideration_before_proceeding: "Gating rules pass or waiver documented; RETURN to gate-pseudocode-validation."
+      consideration_before_proceeding: "Completed: Phase 2 pre-RED and post-test validation passed; Phase 4 dormant blocks passed structural-only validation with runtime coverage explicitly not claimed."
       retry_count: "0"
       state_history: []
-      status: "pending"
+      status: "completed"
   - flow:
       branches:
         - action: "GOTO author-architecture, CALL sub-yaml-edit-loop, then return to unit-test-green"
@@ -1274,10 +1310,10 @@ sub_procedures:
       - "Verify three-way alignment for the affected block (per three-way-alignment-unit rules)."
     title: "Fix IMPL first during GREEN; revisit REQ/ARCH if scope shifts"
     tracking:
-      consideration_before_proceeding: "IMPL/test/code updated; three-way alignment verified; ARCH/REQ updated if scope changed; RETURN to unit-test-green."
+      consideration_before_proceeding: "Skipped explicitly: GREEN matched the approved pseudo-code without discovering scope or contract divergence, so no LEAP micro-cycle was required."
       retry_count: "0"
       state_history: []
-      status: "pending"
+      status: "skipped"
   - flow:
       return_to: "caller"
     goals: "Keep one controlled set of preferred domain terms so requirements, architecture, IMPL pseudo-code, tests, code, and user-facing docs name each concept identically per [PROC-VOCABULARY_INDEX]. A chosen preferred term is the literal identifier reused as the IMPL UPPER_SNAKE block name, the test/code symbol, the storage name, and the UI label."
@@ -1320,10 +1356,10 @@ sub_procedures:
       - "VALIDATE mode (Touchpoint 3 — before commit): enumerate named concepts introduced or changed this pass across ./tied/vocab/*.md, REQ/ARCH/IMPL index name fields, semantic-tokens.yaml, essence_pseudocode block names, code_locations, tests, production code symbols, and README/CHANGELOG; for each concept confirm exactly one preferred term in the index, no synonym-only usage, naming bridge matches token/storage/UI forms, alphabetical index covers every canonical term used, and REQ/ARCH/IMPL cited on new rows; emit a validation report (pass or failures with file/artifact reference); IF failures RETURN to caller with fix list—caller must RECORD or RESOLVE before re-VALIDATE."
     title: "Resolve, preload, record, and validate domain vocabulary index terms"
     tracking:
-      consideration_before_proceeding: "Caller mode satisfied (RESOLVE/PRELOAD/RECORD/VALIDATE); immature-client deferral noted when tied/vocab is absent; RETURN to caller."
+      consideration_before_proceeding: "Completed: RESOLVE/PRELOAD used routed MCP, pseudo-code/CITDP, assurance, and fidelity terms; RECORD updated both affected vocabularies; VALIDATE passed."
       retry_count: "0"
       state_history: []
-      status: "pending"
+      status: "completed"
   - flow:
       return_to: "caller"
     goals: "Run GENERATE_EVIDENCE_CHAIN_PROFILE at an explicit evidence-chain profile depth."
@@ -1345,10 +1381,10 @@ sub_procedures:
       - "RETURN the profile path and proof-boundary partition. Optional CITDP evidence.profile_reference."
     title: "Generate a read-only evidence chain profile"
     tracking:
-      consideration_before_proceeding: "Profile written only under working/evidence-chain or stdout; project intent unchanged."
+      consideration_before_proceeding: "Skipped for this remaining-completion pass: Phase 5 consumed the approved client-1787461685 profile fixtures and generated report acceptance artifacts; no new profile generation or Phase 4 activation was authorized."
       retry_count: "0"
       state_history: []
-      status: "pending"
+      status: "skipped"
   - flow:
       return_to: "caller"
     goals: "Bind SELECT_ADVERSARIAL_INQUIRY_DEPTH, MAP_ADVERSARIAL_OBLIGATIONS, EVALUATE_ADVERSARIAL_FINDINGS, ROUTE_UNRESOLVED_CRITICAL_FINDINGS, and PERSIST_WORKING_ARTIFACTS behind one checklist-callable name for bounded adversarial inquiry."
@@ -1380,10 +1416,10 @@ sub_procedures:
       - "Run SELECT_ADVERSARIAL_INQUIRY_DEPTH: resolve research profile, assurance profiles, and gate policy independently before tool invocation."
     title: "Checklist-local adversarial inquiry pass"
     tracking:
-      consideration_before_proceeding: "Report persisted under working/{REQ-TOKEN}/adversarial-inquiry; caller receives summary; blocking only when caller blocking=true, strict-eligible, and error finding unresolved."
+      consideration_before_proceeding: "Skipped by the approved minimal inquiry policy: manual counterexamples and proof boundaries were recorded; no integrated tool call or four-artifact activation was required."
       retry_count: "0"
       state_history: []
-      status: "pending"
+      status: "skipped"
 version: "3.0.0"
 vocabulary_layer:
   entry_gate: "Do not proceed with an ambiguous domain term; resolve it or record an explicit immature-client deferral."

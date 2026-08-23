@@ -1,0 +1,247 @@
+CITDP-REQ-DEFERRED_STATS_ROADMAP-aggregation:
+  change_definition:
+    current_behavior: "The offline Ruby analyzer hard-coded top-50 truncation without coverage metadata, omitted per-file schema_errors from aggregate totals, and selected equal-key samples by input order."
+    desired_behavior: "Per-file and aggregate reports expose deterministic top-50 signature rows and signature_coverage; aggregate schema_errors is summed; aggregate approximation discloses per-file information loss."
+    non_goals:
+      - "File-inventory or vocabulary-drift adapter implementation or activation"
+      - "Maturity score or universal rollup"
+      - "Repo-local project ID file"
+      - "Sibling-client pilots beyond 1787461685"
+    success_criteria:
+      - "0 and 50 distinct per-file signatures report exact_within_bound"
+      - "51 distinct per-file signatures report approximate with one omitted"
+      - "Aggregate is approximate after any per-file truncation even when the visible union fits the bound"
+      - "Aggregate is approximate when the visible candidate union exceeds 50"
+      - "Reversing distinct input paths does not change aggregate top_signatures or sample_args_summary"
+      - "Two per-file schema errors produce aggregate schema_errors 2"
+    unchanged_behavior: "Per-file YAML remains on stdout, aggregate YAML remains on stderr, parse and schema errors remain separate, activation/tool/client/failure/duration sections remain intact, and file argument multiplicity is unchanged."
+  completion_criteria:
+    retained_exclusions:
+      - "No maturity score or universal rollup"
+      - "No Phase 4 orchestrator wiring, production symbols, TypeScript implementation, tests, profile activation, or runtime verification claim"
+      - "No repo-local project ID file"
+      - "No sibling-client pilots beyond 1787461685"
+    verification_gate_notes: "PASS: Ruby syntax and analyzer suite; post-test pseudo-code validation; TIED index syntax and consistency; literal block-lead parity; vocabulary validation; tied_verify limited to REQ-MCP_USAGE_METRICS and IMPL-MCP_USAGE_METRICS with no demotions."
+  evidence:
+    commands:
+      - command: "ruby -c scripts/analyze_tied_mcp_metrics.rb"
+        result: "Syntax OK"
+      - command: "ruby -c scripts/analyze_tied_mcp_metrics_test.rb"
+        result: "Syntax OK"
+      - command: "ruby scripts/analyze_tied_mcp_metrics_test.rb"
+        result: "passed: analyze_tied_mcp_metrics_test: ok"
+      - command: "TIED MCP pseudocode_validate IMPL-MCP_USAGE_METRICS with Ruby coverage references"
+        result: "passed: ok true; structural proof boundary"
+      - command: "TIED MCP yaml_index_validate"
+        result: "passed: all four indexes valid"
+      - command: "TIED MCP tied_validate_consistency"
+        result: "passed: ok true"
+      - command: "ruby scripts/validate_vocab_index.rb"
+        result: "passed: Vocabulary index validation passed."
+    manifest_reference: null
+    profile_reference: null
+    proof_boundaries:
+      - "Aggregate considered and omitted cover the visible candidate union only after per-file bounding; approximate marks hidden information loss."
+      - "pseudocode_validate and tied_validate_consistency prove structure and traceability only, not runtime correctness."
+      - "Ruby tests prove the declared bounded fixture behavior for Phase 2."
+  impact_analysis:
+    impl_inventory_notes: "ANALYZE_TIED_MCP_METRICS in IMPL-MCP_USAGE_METRICS maps to scripts/analyze_tied_mcp_metrics.rb and scripts/analyze_tied_mcp_metrics_test.rb. Existing opt-in, fail-open, local-JSONL architecture remains unchanged."
+    modules_or_boundaries: "One offline Ruby analyzer module and its fixture-backed test harness; no new binding, composition seam, UI, or E2E boundary."
+    tied_tokens_affected:
+      - "ARCH-MCP_USAGE_METRICS"
+      - "IMPL-MCP_USAGE_METRICS"
+      - "REQ-MCP_USAGE_METRICS"
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: "none"
+    record_status: "complete"
+    tied_stack_updates_required:
+      - "conversation-analysis docs and CHANGELOG"
+      - "IMPL-MCP_USAGE_METRICS pseudo-code and metadata"
+      - "REQ-MCP_USAGE_METRICS satisfaction criteria"
+      - "tied-yaml-mcp vocabulary"
+  record_identity:
+    change_request_id: "REQ-DEFERRED_STATS_ROADMAP"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    checklist_step_completed: "persist-citdp-record"
+    recorded_at: "2026-08-23"
+    tied_context:
+      architecture:
+        - "ARCH-MCP_USAGE_METRICS"
+      implementation:
+        - "IMPL-MCP_USAGE_METRICS"
+      requirements:
+        - "REQ-MCP_USAGE_METRICS"
+    title: "Bounded MCP usage-metrics signature aggregation"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  risk_analysis:
+    abuse_cases: []
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      depth_tier: "minimal"
+      gate_policy: "advisory"
+      rationale: "Behavior changes deterministic offline aggregation only; manual counterexamples and proof boundaries are sufficient, and integrated inquiry artifacts are not activated."
+      research_profile: "integrated-agent"
+      strict_eligibility_prerequisites: []
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "ruby scripts/analyze_tied_mcp_metrics_test.rb"
+        evidence_method: "Ruby module test"
+        limitation: "Proves the bounded fixture matrix only; it cannot recover signature candidates hidden by an input file's bound."
+        owner: "TIED analyzer maintainers"
+        rationale: "Analyzer output behavior changed and is covered by fixture-backed executable tests."
+        result: "passed: analyze_tied_mcp_metrics_test: ok"
+        risk: "Incorrect bounds, approximation status, ordering, or error totals could mislead offline analysis."
+        threshold: "exit 0 and output analyze_tied_mcp_metrics_test: ok"
+        waiver:
+          expiry: null
+          owner: null
+          reason: null
+          required: "false"
+      - applicability: "not_applicable"
+        attribute: "external-input-security"
+        command_or_test: "approved plan and diff review"
+        evidence_method: "scope review"
+        limitation: "Existing file input handling is unchanged."
+        owner: "TIED analyzer maintainers"
+        rationale: "No new trust, authorization, network, path-resolution, or content-execution boundary is introduced."
+        result: "not applicable"
+        risk: "none introduced"
+        threshold: "no new trust boundary"
+        waiver:
+          expiry: null
+          owner: null
+          reason: null
+          required: "false"
+      - applicability: "not_applicable"
+        attribute: "data-integrity-migration"
+        command_or_test: "approved plan and diff review"
+        evidence_method: "scope review"
+        limitation: "Report correctness is covered under baseline-functional."
+        owner: "TIED analyzer maintainers"
+        rationale: "The change reads append-only JSONL and emits reports; it does not migrate or persist canonical data."
+        result: "not applicable"
+        risk: "none introduced"
+        threshold: "no persistence migration"
+        waiver:
+          expiry: null
+          owner: null
+          reason: null
+          required: "false"
+      - applicability: "not_applicable"
+        attribute: "stateful-reliability"
+        command_or_test: "approved plan and diff review"
+        evidence_method: "scope review"
+        limitation: "In-process accumulator behavior is baseline-functional, not durable state."
+        owner: "TIED analyzer maintainers"
+        rationale: "No retry, recovery, concurrency, restart, or durable state machine changes."
+        result: "not applicable"
+        risk: "none introduced"
+        threshold: "no stateful workflow"
+        waiver:
+          expiry: null
+          owner: null
+          reason: null
+          required: "false"
+      - applicability: "not_applicable"
+        attribute: "performance-scale-cost"
+        command_or_test: "approved plan and diff review"
+        evidence_method: "scope review"
+        limitation: "No large-scale benchmark was run."
+        owner: "TIED analyzer maintainers"
+        rationale: "The fixed output bound is a proof-boundary disclosure, not a new performance guarantee or benchmark commitment."
+        result: "not applicable"
+        risk: "none accepted as a performance claim"
+        threshold: "no performance guarantee"
+        waiver:
+          expiry: null
+          owner: null
+          reason: null
+          required: "false"
+      - applicability: "not_applicable"
+        attribute: "user-facing-accessibility"
+        command_or_test: "approved plan and diff review"
+        evidence_method: "scope review"
+        limitation: "CLI YAML fields are developer-facing and covered functionally."
+        owner: "TIED analyzer maintainers"
+        rationale: "No user interface or interaction contract changes."
+        result: "not applicable"
+        risk: "none introduced"
+        threshold: "no user-facing surface"
+        waiver:
+          expiry: null
+          owner: null
+          reason: null
+          required: "false"
+      - applicability: "not_applicable"
+        attribute: "regulated-privacy"
+        command_or_test: "approved plan and diff review"
+        evidence_method: "scope review"
+        limitation: "Existing metrics privacy policy remains outside this change."
+        owner: "TIED analyzer maintainers"
+        rationale: "No new data collection, retention, export, consent, or identity surface; existing sanitized local metrics remain unchanged."
+        result: "not applicable"
+        risk: "none introduced"
+        threshold: "no privacy boundary change"
+        waiver:
+          expiry: null
+          owner: null
+          reason: null
+          required: "false"
+      - applicability: "not_applicable"
+        attribute: "ai-enabled"
+        command_or_test: "approved plan and diff review"
+        evidence_method: "scope review"
+        limitation: "The analyzer may inspect agent-tool metrics but does not invoke a model."
+        owner: "TIED analyzer maintainers"
+        rationale: "No model, prompt, generated-content, or agent authorization boundary changes."
+        result: "not applicable"
+        risk: "none introduced"
+        threshold: "no AI boundary"
+        waiver:
+          expiry: null
+          owner: null
+          reason: null
+          required: "false"
+    quality_profiles:
+      - "baseline-functional"
+    residual_risk:
+      expiry: "2027-02-23"
+      owner: "TIED analyzer maintainers"
+      summary: "Bounded per-file reports cannot reconstruct or globally rank candidates already hidden by source truncation; approximate status discloses this limitation."
+    risks:
+      - description: "A truncated source could be presented as an exact global top-50."
+        id: "RISK-AGG-001"
+        likelihood: "Medium"
+        mitigation: "Aggregate status is approximate whenever any per-file status is approximate."
+        severity: "High"
+      - description: "Input order could choose a different sample_args_summary for the same signature key."
+        id: "RISK-AGG-002"
+        likelihood: "Medium"
+        mitigation: "Select the lexically smallest recursively key-sorted canonical JSON sample."
+        severity: "Medium"
+      - description: "Aggregate schema errors could remain zero despite invalid records in source reports."
+        id: "RISK-AGG-003"
+        likelihood: "High"
+        mitigation: "Sum per-file schema_errors and verify with two independent fixture files."
+        severity: "Medium"
+    scenarios:
+      - "A file with 51 distinct signatures must not report exact coverage."
+      - "An aggregate with one approximate source must remain approximate even when retained candidates collapse to 50."
+      - "Reversing distinct file order must not alter any top_signatures row or sample."
+      - "Two per-file schema errors must aggregate to 2."
+  tdd_sequence:
+    green:
+      command: "ruby scripts/analyze_tied_mcp_metrics_test.rb"
+      exit_code: 0
+      result: "analyze_tied_mcp_metrics_test: ok"
+    module_validation: "passed independently; no new composition binding"
+    red:
+      command: "ruby scripts/analyze_tied_mcp_metrics_test.rb"
+      exit_code: 1
+      result: "target-specific failure: KeyError key not found signature_coverage at test_bounded_signature_aggregation"
+    summary: "TIED REQ/IMPL and validated ANALYZE_TIED_MCP_METRICS contract first; RED failed on missing signature_coverage; minimal analyzer implementation then passed the complete Ruby suite."
+  test_strategy:
+    matrix_notes: "Unit/module level only. No composition or E2E work because the analyzer remains one offline executable with no new binding."
+    summary: "Strict RED-to-GREEN fixture-backed module validation for per-file boundaries, aggregate proof boundaries, deterministic ordering/sample selection, schema-error summation, malformed input, empty input, and existing activation behavior."

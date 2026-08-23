@@ -426,6 +426,32 @@ describe("GENERATE_EVIDENCE_CHAIN_PROFILE [REQ-EVIDENCE_CHAIN_PROFILE]", () => {
       else process.env.TIED_MCP_PROJECT_ID = saved;
     }
   });
+
+  it("sets operational.metrics_opt_in from isMetricsEnabled() [REQ-EVIDENCE_CHAIN_PROFILE]", () => {
+    const saved = process.env.TIED_MCP_COLLECT_METRICS;
+    const { adapters } = spyAdapters();
+    const baseArgs = {
+      project_root: projectRoot,
+      tied_base_path: tiedBasePath,
+      confirmed_tied_base_path: tiedBasePath,
+      profile_depth: "integrated" as const,
+      adapters,
+    };
+    try {
+      process.env.TIED_MCP_COLLECT_METRICS = "1";
+      const enabled = generateEvidenceChainProfile(baseArgs);
+      assert.equal(enabled.ok, true);
+      if (enabled.ok) assert.equal(enabled.profile.operational.metrics_opt_in, true);
+
+      delete process.env.TIED_MCP_COLLECT_METRICS;
+      const disabled = generateEvidenceChainProfile(baseArgs);
+      assert.equal(disabled.ok, true);
+      if (disabled.ok) assert.equal(disabled.profile.operational.metrics_opt_in, false);
+    } finally {
+      if (saved === undefined) delete process.env.TIED_MCP_COLLECT_METRICS;
+      else process.env.TIED_MCP_COLLECT_METRICS = saved;
+    }
+  });
 });
 
 describe("manual fixture shape [REQ-EVIDENCE_CHAIN_PROFILE]", () => {

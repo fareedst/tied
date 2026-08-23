@@ -1,0 +1,3 @@
+not-json
+{}
+{"v":1,"tool":"yaml_index_read","client":"fixture","ok":true,"duration_ms":1,"args_signature":"valid","args_summary":{"index":"requirements"}}

@@ -15,21 +15,26 @@ IMPL-EVIDENCE_CHAIN_PROFILE:
     - "REQ-EVIDENCE_CHAIN_PROFILE"
   implementation_approach:
     details:
+      - "COLLECT_FILE_INVENTORY and COLLECT_VOCAB_DRIFT are dormant pseudo-code contracts only: no caller, registration, adapter type, production symbol, TypeScript implementation, test, or profile activation is authorized in this phase"
+      - "Do not hardcode metrics_opt_in false when env opt-in is active"
+      - "Dormant contract evidence has proof boundary pseudo_code_structure only and does not establish executable behavior"
       - "EMIT_MANUAL_PROFILE_CONTRACT requires assumptions confidence and unsupported_checks"
       - "GENERATE_EVIDENCE_CHAIN_PROFILE fail-closes on WrongTiedBasePath"
+      - "GENERATE_EVIDENCE_CHAIN_PROFILE sets operational.metrics_opt_in from isMetricsEnabled() ([IMPL-MCP_USAGE_METRICS])"
       - "human_research without change_context does not fail"
       - "identity.project_id and identity_source come from IMPL-TIED_PROJECT_IDENTITY resolveProjectIdentity; operational.project_id matches identity.project_id"
       - "integrated never invokes fidelity binding or spec adapters"
       - "Manual profiles that confirm the TIED path must declare mcp_validators_not_run in unsupported_checks."
       - "NORMALIZE rejects maturity and score fields and requires a denominator per ratio"
       - "Profile graph counts come from the selected TIED requirement and implementation dependency graphs; omitted file inventory and vocabulary drift are explicitly unknown or not_measured rather than zero or presence claims."
+      - "scope.file_counts remains empty and unknown, and evidence_chain.vocab_resolution remains not_measured until a separately approved implementation and wiring phase"
       - "Structural validator exceptions return a structured failure, and human-research fidelity and composition adapter results are preserved in the profile."
-    summary: "Implement a depth-gated read-only orchestrator and deterministic normalizer for evidence-chain-profile.v1."
+    summary: "Implement a depth-gated read-only orchestrator and deterministic normalizer for evidence-chain-profile.v1; catalog dormant file-inventory and vocabulary-drift contracts without runtime activation."
   metadata:
     last_updated:
       author: "AI Agent"
-      date: "2026-08-22"
-      reason: "Author Phase 1 IMPL sidecar blocks"
+      date: "2026-08-23"
+      reason: "Catalog dormant file-inventory and vocabulary-drift adapter contracts with structural-only proof boundary"
   name: "Evidence chain profile orchestrator"
   rationale:
     benefits:

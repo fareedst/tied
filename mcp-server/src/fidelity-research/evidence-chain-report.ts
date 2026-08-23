@@ -20,7 +20,11 @@ import {
 
 export const REPORT_INPUT_SCHEMA = "evidence-chain-report-inputs.v1" as const;
 export const EVIDENCE_CHAIN_REPORT_SCHEMA = "evidence-chain-statistics-report.v1" as const;
+export const EVIDENCE_CHAIN_REPORT_SCHEMA_V2 = "evidence-chain-statistics-report.v2" as const;
 export const REPORT_GENERATOR_VERSION = "1.0.0";
+export const REPORT_GENERATOR_VERSION_V2 = "2.0.0";
+
+export type ReportVersion = "v1" | "v2";
 
 const FORBIDDEN_SCORE_KEYS = new Set(["maturity", "score", "maturity_score", "universal_score"]);
 const MEASUREMENT_STATUSES: MeasurementStatus[] = ["observed", "not_measured", "unknown", "not_applicable"];
@@ -64,6 +68,7 @@ export type ReportInputRow = {
   compatibility_key: string;
   generator: EvidenceChainProfile["identity"]["generator"];
   generator_version: string;
+  denominator_fingerprint?: string;
 };
 
 export type ReportCohort = {
@@ -72,13 +77,24 @@ export type ReportCohort = {
   statistics: NamedStatistic[];
 };
 
+export type ReportSubCohort = {
+  denominator_fingerprint: string;
+  clients: ReportInputRow[];
+  statistics: NamedStatistic[];
+};
+
+export type ReportCohortV2 = {
+  compatibility_key: string;
+  sub_cohorts: ReportSubCohort[];
+};
+
 export type ExcludedInput = {
   artifact_ref: string;
   reason: string;
   error: string;
 };
 
-export type EvidenceChainStatisticsReport = {
+export type EvidenceChainStatisticsReportV1 = {
   schema_version: typeof EVIDENCE_CHAIN_REPORT_SCHEMA;
   generated_at: string;
   generator_version: string;
@@ -91,6 +107,22 @@ export type EvidenceChainStatisticsReport = {
   residual_risks: string[];
   statistics: NamedStatistic[];
 };
+
+export type EvidenceChainStatisticsReportV2 = {
+  schema_version: typeof EVIDENCE_CHAIN_REPORT_SCHEMA_V2;
+  generated_at: string;
+  generator_version: string;
+  mode: ReportMode;
+  include_absolute_paths: boolean;
+  inputs: Array<ReportInputRow & { denominator_fingerprint: string }>;
+  cohorts: ReportCohortV2[];
+  excluded_inputs: ExcludedInput[];
+  validation_errors: Array<{ artifact_ref: string; error: string; message: string }>;
+  residual_risks: string[];
+  statistics: NamedStatistic[];
+};
+
+export type EvidenceChainStatisticsReport = EvidenceChainStatisticsReportV1 | EvidenceChainStatisticsReportV2;
 
 export type ReportManifestInput = {
   profile_path: string;
@@ -110,6 +142,7 @@ export type GenerateReportInput = {
   yamlOut: string;
   markdownOut: string;
   modeOverride?: ReportMode;
+  reportVersion?: ReportVersion;
   now?: Date | string;
   cwd?: string;
   projectRoot?: string;
@@ -394,6 +427,60 @@ function fieldAt(profile: EvidenceChainProfile, fieldPath: (typeof REQUIRED_DERI
   }
 }
 
+export function computeDenominatorFingerprint(profile: EvidenceChainProfile): string {
+  // [IMPL-EVIDENCE_CHAIN_REPORT] [ARCH-EVIDENCE_CHAIN_REPORT] [REQ-EVIDENCE_CHAIN_REPORT]
+  // How: Stable hash of required derived-path denominators plus structural denominators.
+  const lines: string[] = [];
+  for (const fieldPath of REQUIRED_DERIVED_PATHS) {
+    const field = fieldAt(profile, fieldPath);
+    lines.push(`${fieldPath}=${String(field?.denominator ?? "missing")}`);
+  }
+  const structuralLines = profile.evidence_chain.structural.map(
+    (row, index) => `evidence_chain.structural[${index}]=${String(row.denominator)}`,
+  );
+  lines.push(...structuralLines.sort(compareText));
+  const digest = crypto.createHash("sha256").update(lines.join("\n"), "utf8").digest("hex");
+  return digest.slice(0, 16);
+}
+
+export function partitionSubCohorts(members: AcceptedRecord[]): Map<string, AcceptedRecord[]> {
+  // [IMPL-EVIDENCE_CHAIN_REPORT] [ARCH-EVIDENCE_CHAIN_REPORT] [REQ-EVIDENCE_CHAIN_REPORT]
+  // How: Split one compatibility_key cohort when denominator fingerprints differ.
+  const groups = new Map<string, AcceptedRecord[]>();
+  for (const record of members) {
+    const fingerprint = computeDenominatorFingerprint(record.profile);
+    const list = groups.get(fingerprint) ?? [];
+    list.push(record);
+    groups.set(fingerprint, list);
+  }
+  for (const [fingerprint, list] of groups) {
+    groups.set(
+      fingerprint,
+      [...list].sort((left, right) => {
+        return (
+          compareText(left.row.project_id, right.row.project_id) ||
+          compareText(left.row.commit, right.row.commit) ||
+          compareText(left.row.profile_depth, right.row.profile_depth) ||
+          compareText(left.row.artifact_ref, right.row.artifact_ref)
+        );
+      }),
+    );
+  }
+  return groups;
+}
+
+function aggregateSubCohortStatistics(members: AcceptedRecord[], subCohortCount: number): NamedStatistic[] {
+  const stats = aggregateCohortStatistics(members);
+  stats.unshift(
+    countStatistic("denominator_subcohort_count", subCohortCount, subCohortCount, {
+      source: "PARTITION_SUBCOHORTS",
+      method: "count",
+      proof_boundary: "traceability_structure",
+    }),
+  );
+  return stats;
+}
+
 function denominatorMismatchRisks(members: AcceptedRecord[]): string[] {
   const risks: string[] = [];
   const fields = REQUIRED_DERIVED_PATHS.flatMap((fieldPath) =>
@@ -537,6 +624,10 @@ function assertNoForbiddenReportKeys(report: EvidenceChainStatisticsReport): voi
   }
 }
 
+function isV2Report(report: EvidenceChainStatisticsReport): report is EvidenceChainStatisticsReportV2 {
+  return report.schema_version === EVIDENCE_CHAIN_REPORT_SCHEMA_V2;
+}
+
 export function renderStatisticsReportYaml(report: EvidenceChainStatisticsReport): string {
   // [IMPL-EVIDENCE_CHAIN_REPORT] [ARCH-EVIDENCE_CHAIN_REPORT] [REQ-EVIDENCE_CHAIN_REPORT]
   // How: Write the authoritative evidence-chain-statistics-report.v1 document with stable key order.
@@ -567,26 +658,49 @@ export function renderStatisticsReportMarkdown(report: EvidenceChainStatisticsRe
     );
   }
   lines.push("", "## Cohorts", "");
-  for (const cohort of report.cohorts) {
-    lines.push(`### ${cohort.compatibility_key}`, "");
-    lines.push("#### Statistics", "");
-    for (const stat of cohort.statistics) {
-      const extras = [
-        stat.field_path ? `field_path=${stat.field_path}` : "",
-        stat.counted_status ? `counted_status=${stat.counted_status}` : "",
-        stat.partition ? `partition=${stat.partition}` : "",
-      ]
-        .filter(Boolean)
-        .join(" ");
-      lines.push(
-        `- ${stat.name}: ${stat.numerator}/${stat.denominator} ${stat.status} source=${stat.source} method=${stat.method} proof_boundary=${stat.proof_boundary}${extras ? ` ${extras}` : ""}`,
-      );
+  if (isV2Report(report)) {
+    for (const cohort of report.cohorts) {
+      lines.push(`### ${cohort.compatibility_key}`, "");
+      for (const sub of cohort.sub_cohorts) {
+        lines.push(`#### Sub-cohort ${sub.denominator_fingerprint}`, "");
+        lines.push("##### Statistics", "");
+        for (const stat of sub.statistics) {
+          const extras = [
+            stat.field_path ? `field_path=${stat.field_path}` : "",
+            stat.counted_status ? `counted_status=${stat.counted_status}` : "",
+            stat.partition ? `partition=${stat.partition}` : "",
+          ]
+            .filter(Boolean)
+            .join(" ");
+          lines.push(
+            `- ${stat.name}: ${stat.numerator}/${stat.denominator} ${stat.status} source=${stat.source} method=${stat.method} proof_boundary=${stat.proof_boundary}${extras ? ` ${extras}` : ""}`,
+          );
+        }
+        lines.push("");
+      }
     }
-    lines.push("", "#### Proof-boundary summary", "");
-    for (const stat of cohort.statistics.filter((row) => row.name === "proof_boundary_partition_count")) {
-      lines.push(`- ${stat.partition}: ${stat.numerator}/${stat.denominator} ${stat.status}`);
+  } else {
+    for (const cohort of report.cohorts) {
+      lines.push(`### ${cohort.compatibility_key}`, "");
+      lines.push("#### Statistics", "");
+      for (const stat of cohort.statistics) {
+        const extras = [
+          stat.field_path ? `field_path=${stat.field_path}` : "",
+          stat.counted_status ? `counted_status=${stat.counted_status}` : "",
+          stat.partition ? `partition=${stat.partition}` : "",
+        ]
+          .filter(Boolean)
+          .join(" ");
+        lines.push(
+          `- ${stat.name}: ${stat.numerator}/${stat.denominator} ${stat.status} source=${stat.source} method=${stat.method} proof_boundary=${stat.proof_boundary}${extras ? ` ${extras}` : ""}`,
+        );
+      }
+      lines.push("", "#### Proof-boundary summary", "");
+      for (const stat of cohort.statistics.filter((row) => row.name === "proof_boundary_partition_count")) {
+        lines.push(`- ${stat.partition}: ${stat.numerator}/${stat.denominator} ${stat.status}`);
+      }
+      lines.push("");
     }
-    lines.push("");
   }
   lines.push("## Excluded inputs", "");
   if (report.excluded_inputs.length === 0) {
@@ -614,8 +728,11 @@ export function renderStatisticsReportMarkdown(report: EvidenceChainStatisticsRe
   }
   lines.push("", "## Provenance", "");
   for (const row of report.inputs) {
+    const fingerprint = "denominator_fingerprint" in row && row.denominator_fingerprint
+      ? ` denominator_fingerprint=${row.denominator_fingerprint}`
+      : "";
     lines.push(
-      `- project_id=${row.project_id} commit=${row.commit} profile_depth=${row.profile_depth} artifact_ref=${row.artifact_ref} profile_hash=${row.profile_hash}`,
+      `- project_id=${row.project_id} commit=${row.commit} profile_depth=${row.profile_depth} artifact_ref=${row.artifact_ref} profile_hash=${row.profile_hash}${fingerprint}`,
     );
   }
   lines.push("");
@@ -716,45 +833,105 @@ export function generateEvidenceChainStatisticsReport(input: GenerateReportInput
     );
   }
 
+  const reportVersion = input.reportVersion ?? "v1";
   const groups = partitionClientCohorts(accepted);
-  const cohorts: ReportCohort[] = [...groups.entries()]
-    .sort(([left], [right]) => compareText(left, right))
-    .map(([compatibility_key, members]) => ({
-      compatibility_key,
-      clients: members.map((member) => member.row),
-      statistics: aggregateCohortStatistics(members),
-    }));
 
-  const residualRisks = [
-    "v1 count-only aggregation cannot detect semantic denominator-unit drift when two profiles reuse the same field path with different informal units.",
-    ...[...groups.values()].flatMap((members) => denominatorMismatchRisks(members)),
-    ...accepted.flatMap((member) => member.residual_risks),
-  ].sort(compareText);
+  let report: EvidenceChainStatisticsReport;
+  if (reportVersion === "v2") {
+    const cohortsV2: ReportCohortV2[] = [...groups.entries()]
+      .sort(([left], [right]) => compareText(left, right))
+      .map(([compatibility_key, members]) => {
+        const subGroups = partitionSubCohorts(members);
+        const subCohortCount = subGroups.size;
+        const sub_cohorts: ReportSubCohort[] = [...subGroups.entries()]
+          .sort(([left], [right]) => compareText(left, right))
+          .map(([denominator_fingerprint, subMembers]) => ({
+            denominator_fingerprint,
+            clients: subMembers.map((member) => ({
+              ...member.row,
+              denominator_fingerprint,
+            })),
+            statistics: aggregateSubCohortStatistics(subMembers, subCohortCount),
+          }));
+        return { compatibility_key, sub_cohorts };
+      });
 
-  const report: EvidenceChainStatisticsReport = {
-    schema_version: EVIDENCE_CHAIN_REPORT_SCHEMA,
-    generated_at: generatedAt(input.now),
-    generator_version: REPORT_GENERATOR_VERSION,
-    mode: manifest.mode,
-    include_absolute_paths: manifest.include_absolute_paths,
-    inputs: sortInputRows(accepted.map((member) => member.row)),
-    cohorts,
-    excluded_inputs: [...excluded].sort((left, right) => compareText(left.artifact_ref, right.artifact_ref)),
-    validation_errors: [...validationErrors].sort((left, right) => compareText(left.artifact_ref, right.artifact_ref)),
-    residual_risks: residualRisks,
-    statistics: [
-      countStatistic("excluded_input_count", excluded.length, manifest.inputs.length, {
-        source: "report_input_manifest",
-        method: "count",
-        proof_boundary: "traceability_structure",
+    const inputsV2 = sortInputRows(
+      accepted.map((member) => {
+        const fingerprint = computeDenominatorFingerprint(member.profile);
+        return { ...member.row, denominator_fingerprint: fingerprint };
       }),
-      countStatistic("validation_error_count", validationErrors.length, manifest.inputs.length, {
-        source: "VALIDATE_PROFILE_ARTIFACT",
-        method: "count",
-        proof_boundary: "traceability_structure",
-      }),
-    ],
-  };
+    ) as EvidenceChainStatisticsReportV2["inputs"];
+
+    const residualRisksV2 = [
+      "v2 sub-cohort partition isolates denominator fingerprint mismatches; count-only statistics remain within fingerprint boundaries.",
+      ...accepted.flatMap((member) => member.residual_risks),
+    ].sort(compareText);
+
+    report = {
+      schema_version: EVIDENCE_CHAIN_REPORT_SCHEMA_V2,
+      generated_at: generatedAt(input.now),
+      generator_version: REPORT_GENERATOR_VERSION_V2,
+      mode: manifest.mode,
+      include_absolute_paths: manifest.include_absolute_paths,
+      inputs: inputsV2,
+      cohorts: cohortsV2,
+      excluded_inputs: [...excluded].sort((left, right) => compareText(left.artifact_ref, right.artifact_ref)),
+      validation_errors: [...validationErrors].sort((left, right) => compareText(left.artifact_ref, right.artifact_ref)),
+      residual_risks: residualRisksV2,
+      statistics: [
+        countStatistic("excluded_input_count", excluded.length, manifest.inputs.length, {
+          source: "report_input_manifest",
+          method: "count",
+          proof_boundary: "traceability_structure",
+        }),
+        countStatistic("validation_error_count", validationErrors.length, manifest.inputs.length, {
+          source: "VALIDATE_PROFILE_ARTIFACT",
+          method: "count",
+          proof_boundary: "traceability_structure",
+        }),
+      ],
+    };
+  } else {
+    const cohorts: ReportCohort[] = [...groups.entries()]
+      .sort(([left], [right]) => compareText(left, right))
+      .map(([compatibility_key, members]) => ({
+        compatibility_key,
+        clients: members.map((member) => member.row),
+        statistics: aggregateCohortStatistics(members),
+      }));
+
+    const residualRisks = [
+      "v1 count-only aggregation cannot detect semantic denominator-unit drift when two profiles reuse the same field path with different informal units.",
+      ...[...groups.values()].flatMap((members) => denominatorMismatchRisks(members)),
+      ...accepted.flatMap((member) => member.residual_risks),
+    ].sort(compareText);
+
+    report = {
+      schema_version: EVIDENCE_CHAIN_REPORT_SCHEMA,
+      generated_at: generatedAt(input.now),
+      generator_version: REPORT_GENERATOR_VERSION,
+      mode: manifest.mode,
+      include_absolute_paths: manifest.include_absolute_paths,
+      inputs: sortInputRows(accepted.map((member) => member.row)),
+      cohorts,
+      excluded_inputs: [...excluded].sort((left, right) => compareText(left.artifact_ref, right.artifact_ref)),
+      validation_errors: [...validationErrors].sort((left, right) => compareText(left.artifact_ref, right.artifact_ref)),
+      residual_risks: residualRisks,
+      statistics: [
+        countStatistic("excluded_input_count", excluded.length, manifest.inputs.length, {
+          source: "report_input_manifest",
+          method: "count",
+          proof_boundary: "traceability_structure",
+        }),
+        countStatistic("validation_error_count", validationErrors.length, manifest.inputs.length, {
+          source: "VALIDATE_PROFILE_ARTIFACT",
+          method: "count",
+          proof_boundary: "traceability_structure",
+        }),
+      ],
+    };
+  }
 
   const yamlText = renderStatisticsReportYaml(report);
   const markdownText = renderStatisticsReportMarkdown(report);
@@ -774,7 +951,8 @@ export function generateEvidenceChainStatisticsReport(input: GenerateReportInput
   console.debug("DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] wrote statistics report", {
     yaml_out: path.basename(yamlOut),
     markdown_out: path.basename(markdownOut),
-    cohort_count: report.cohorts.length,
+    cohort_count: isV2Report(report) ? report.cohorts.length : report.cohorts.length,
+    report_version: report.schema_version,
   });
   return { ok: true, report, exit_code: 0 };
 }

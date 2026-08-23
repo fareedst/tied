@@ -68,6 +68,17 @@ ruby scripts/dedupe_transcript_yaml.rb --keep-backup ~/.cursor/logs/conv_someid.
 
 Enable collection: set **`TIED_MCP_COLLECT_METRICS=1`** in `.cursor/mcp.json` `env` (IDE MCP) and/or export before **`tied-cli.sh`**. See **`mcp-server/README.md`** and **`tied/vocab/tied-yaml-mcp.md`**.
 
+**Signature coverage proof boundary:** Per-file and aggregate `top_signatures`
+are bounded to `50` rows and include `signature_coverage` with `bound`,
+`considered`, `emitted`, `omitted`, and `status`. Per-file
+`exact_within_bound` means every distinct valid `(tool, args_signature)`
+candidate in that file was emitted. Aggregate `considered` covers only the
+candidate union visible in bounded per-file reports; aggregate status is
+`approximate` after any per-file truncation or when that visible union exceeds
+the bound. It therefore does not claim an exact global top-50 once a source
+file has hidden candidates. Aggregate `schema_errors` is the sum of per-file
+schema errors and remains separate from `parse_errors`.
+
 **Flags:**
 
 - `--aggregate` — After per-file YAML on stdout, print merged summary on stderr.

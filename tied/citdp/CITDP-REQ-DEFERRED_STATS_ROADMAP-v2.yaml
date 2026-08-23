@@ -1,0 +1,141 @@
+CITDP-REQ-DEFERRED_STATS_ROADMAP-v2:
+  change_definition:
+    current_behavior_prior: "v1 reports aggregated profiles sharing compatibility_key even when derived-field denominators differed and emitted residual risks beside combined rollup statistics; profile generation hardcoded operational.metrics_opt_in false."
+    desired_behavior: "evidence-chain-statistics-report.v2 partitions denominator sub-cohorts by denominator_fingerprint inside compatibility_key; CLI --report-version v2 opts in while v1 remains default and byte-stable; profile generation sets metrics_opt_in from isMetricsEnabled()."
+    non_goals:
+      - "args_signature in evidence-chain report output"
+      - "averaging derived-field values"
+      - "client-root walk or project YAML mutation"
+      - "Maturity score or universal rollup"
+      - "Phase 4 file-inventory or vocabulary-drift orchestrator wiring, production symbols, tests, or profile activation"
+      - "Repo-local project ID file"
+      - "Sibling-client pilots beyond 1787461685"
+    success_criteria:
+      - "Gate III observation packet complete with client-scoped JSONL metrics"
+      - "metrics_opt_in reflects isMetricsEnabled()"
+      - "pseudocode_validate passes structurally"
+      - "v1 default regression remains green"
+      - "v2 acceptance output contains no forbidden score/maturity keys or absolute paths"
+      - "v2 bare plus reprofile acceptance yields one compatibility cohort and two denominator sub-cohorts"
+    summary: "Phase 3 v2 denominator fingerprint sub-cohorts plus metrics_opt_in, evidence-driven from client 1787461685."
+    unchanged_behavior: "v1 remains the default CLI output and is covered by regression tests; the report consumes explicit manifests and generated profiles without client-root discovery or project YAML mutation."
+  completion_criteria:
+    close_out_scope: "Phase 3 v2 denominator sub-cohorts and metrics_opt_in runtime behavior."
+    retained_exclusions:
+      - "No maturity score or universal rollup"
+      - "No Phase 4 orchestrator wiring, production symbols, TypeScript implementation, tests, profile activation, or runtime verification claim"
+      - "No repo-local project ID file"
+      - "No sibling-client pilots beyond 1787461685"
+    verification_gate_notes: "PASS: npm test --prefix mcp-server reports 370 tests, 370 pass, 0 fail; build and bunx tsc -b pass; v2 acceptance report has schema v2, one cohort, two sub-cohorts, no forbidden score/maturity keys, and no absolute paths."
+  evidence:
+    artifact_paths:
+      - "working/REQ-DEFERRED_STATS_ROADMAP/v2-acceptance/report.md"
+      - "working/REQ-DEFERRED_STATS_ROADMAP/v2-acceptance/report.yaml"
+    commands:
+      - command: "npm test --prefix mcp-server"
+        result: "passed: 370 tests, 370 pass, 0 fail, 117 suites"
+      - command: "npm run build --prefix mcp-server"
+        result: "passed: tsc exit 0"
+      - command: "bunx tsc -b from mcp-server"
+        result: "passed: exit 0"
+      - command: "node dist/cli/evidence-chain-report.js --inputs ../working/evidence-chain/report-inputs-v2-golden.yaml --yaml-out ../working/REQ-DEFERRED_STATS_ROADMAP/v2-acceptance/report.yaml --markdown-out ../working/REQ-DEFERRED_STATS_ROADMAP/v2-acceptance/report.md --report-version v2"
+        result: "passed: evidence-chain-statistics-report.v2; one compatibility cohort; two denominator sub-cohorts; no forbidden score/maturity keys or absolute paths"
+    manifest_reference: "working/evidence-chain/report-inputs-v2-golden.yaml"
+    profile_reference: "working/evidence-chain/client-1787461685-bare.v1.json; working/evidence-chain/client-1787461685-reprofile.v1.json"
+    proof_boundaries:
+      - "Count-only denominator sub-cohorts are not a maturity score or universal rollup."
+      - "Node tests prove the declared v1/v2 fixture and CLI behavior."
+      - "The acceptance report proves one bounded client 1787461685 bare/reprofile cohort only, not sibling-client comparability."
+      - "TIED and pseudo-code validators prove structure and traceability only."
+  impact_analysis:
+    impl_inventory_notes: "mcp-server/src/fidelity-research/evidence-chain-report.ts and tests; evidence-chain report CLI and tests; evidence-chain-profile.ts metrics_opt_in and profile tests."
+    modules_or_boundaries: "Evidence-chain report v2 aggregation and CLI projection; evidence-chain profile operational metrics_opt_in field."
+    tied_tokens_affected:
+      - "ARCH-EVIDENCE_CHAIN_REPORT"
+      - "IMPL-EVIDENCE_CHAIN_PROFILE"
+      - "IMPL-EVIDENCE_CHAIN_REPORT"
+      - "REQ-EVIDENCE_CHAIN_PROFILE"
+      - "REQ-EVIDENCE_CHAIN_REPORT"
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: "none"
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "REQ-DEFERRED_STATS_ROADMAP"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    checklist_step_completed: "persist-citdp-record"
+    recorded_at: "2026-08-23"
+    tied_context:
+      architecture:
+        - "ARCH-EVIDENCE_CHAIN_REPORT"
+      implementation:
+        - "IMPL-EVIDENCE_CHAIN_PROFILE"
+        - "IMPL-EVIDENCE_CHAIN_REPORT"
+      requirements:
+        - "REQ-EVIDENCE_CHAIN_PROFILE"
+        - "REQ-EVIDENCE_CHAIN_REPORT"
+    title: "v2 denominator sub-cohorts and metrics_opt_in"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  risk_analysis:
+    abuse_cases: []
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      depth_tier: "minimal"
+      gate_policy: "advisory"
+      rationale: "Read-only reporting and profile metadata behavior is covered by counterexamples, fixture-backed tests, and explicit proof boundaries; integrated inquiry artifacts are not activated."
+      research_profile: "integrated-agent"
+      strict_eligibility_prerequisites: []
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "npm test --prefix mcp-server; npm run build --prefix mcp-server; bunx tsc -b from mcp-server; evidence-chain-report --report-version v2 against report-inputs-v2-golden.yaml"
+        evidence_method: "Node unit/composition/CLI tests plus generated acceptance report"
+        limitation: "The acceptance cohort is limited to bare/reprofile artifacts for client 1787461685 and is not a sibling-client pilot or universal rollup."
+        owner: "TIED evidence-chain maintainers"
+        rationale: "v2 cohort partitioning, CLI selection, metrics_opt_in wiring, and v1 regression behavior are executable changes."
+        result: "passed: 370 tests, 370 pass, 0 fail; build exit 0; typecheck exit 0; acceptance checks passed"
+        risk: "Incompatible denominators could be combined, v1 output could drift, or runtime opt-in could be misreported."
+        threshold: "370 tests pass, build and typecheck exit 0, v2 acceptance has one cohort and two sub-cohorts with no forbidden score/path output"
+        waiver:
+          expiry: null
+          owner: null
+          reason: null
+          required: "false"
+    quality_profiles:
+      - "baseline-functional"
+    residual_risk:
+      expiry: "2027-02-23"
+      owner: "TIED evidence-chain maintainers"
+      summary: "Observed acceptance covers only client 1787461685 bare/reprofile profiles; broader comparability remains unproven and no maturity inference is allowed."
+    risks:
+      - description: "v1 byte-stability regression."
+        id: "RISK-V2-001"
+        likelihood: "Medium"
+        mitigation: "Keep v1 as default and retain golden regression tests."
+        severity: "High"
+      - description: "Different denominators could be combined inside one compatibility cohort."
+        id: "RISK-V2-002"
+        likelihood: "Medium"
+        mitigation: "Partition by denominator_fingerprint and emit count-only statistics within each sub-cohort."
+        severity: "High"
+      - description: "A read-only report could be interpreted as a maturity score."
+        id: "RISK-V2-003"
+        likelihood: "Low"
+        mitigation: "Reject score/maturity fields, retain proof boundaries, and explicitly exclude universal rollup."
+        severity: "High"
+    scenarios:
+      - "Bare and reprofile artifacts with one compatibility_key but different denominator fingerprints must produce two sub-cohorts."
+      - "metrics_opt_in follows isMetricsEnabled rather than report arguments."
+      - "No output path is absolute unless explicitly enabled."
+      - "v1 remains the default when --report-version is omitted."
+  tdd_sequence:
+    green:
+      command: "npm test --prefix mcp-server"
+      exit_code: 0
+      result: "370 tests, 370 pass, 0 fail"
+    module_validation: "report, CLI, and profile modules pass the full suite before close-out"
+    summary: "Phase 3 TIED and pseudo-code preceded the existing RED/GREEN implementation; this close-out independently observed the complete 370-test green suite and generated acceptance artifacts."
+  test_strategy:
+    matrix_notes: "No UI/E2E path. Report CLI composition is covered without invoking a user interface."
+    summary: "Fixture-backed unit, composition, and CLI tests for v2 partitioning and v1 default regression; profile tests for metrics_opt_in; generated v2 acceptance artifacts checked for schema, cohort shape, path privacy, and forbidden keys."

@@ -36,10 +36,14 @@
 | event claim | worker claim, competing claim | An atomic ownership transition that allows one worker to process a due event. | `EVENT_CLAIM` |
 | evidence chain profile | chain completeness report, evidence-chain profile, maturity report (forbidden meaning) | A versioned, read-only artifact (`evidence-chain-profile.v1`) that reports completeness, provenance, denominators, and proof boundaries across vocabulary → REQ → ARCH → IMPL pseudo-code → tests → code → composition → quality evidence → change outcome. It is not an **assurance profile**, not a **read-only research profile**, and not a universal maturity score. | `EVIDENCE_CHAIN_PROFILE` |
 | evidence-chain profile depth | profile depth (alone), integrated depth, human_research depth | Generator selector `integrated` or `human_research` for how much of the chain is measured in one run. Distinct from fidelity **integrated agent profile** / **human research profile** and from **assurance profile**. | `PROFILE_DEPTH` |
+| file inventory adapter | file counter, repository inventory | Read-only future adapter contract for file populations, ignored paths, denominators, and proof boundaries. Current Phase 4 scope is dormant `COLLECT_FILE_INVENTORY` pseudo-code only: no caller, registration, production symbol, test, or profile activation. | `COLLECT_FILE_INVENTORY` |
+| vocabulary drift adapter | vocab checker, glossary drift scan | Read-only future adapter contract comparing routed preferred terms and naming bridges against selected artifacts with explicit denominators and ignored paths. Current Phase 4 scope is dormant `COLLECT_VOCAB_DRIFT` pseudo-code only: no caller, registration, production symbol, test, or profile activation. | `COLLECT_VOCAB_DRIFT` |
 | evidence chain statistics report | multi-client stats report, maturity dashboard (forbidden meaning) | A versioned, read-only batch artifact (`evidence-chain-statistics-report.v1`) produced from already-generated **evidence chain profile** files. It is not an **assurance profile**, not a **verification evidence manifest**, and not a maturity score. | `EVIDENCE_CHAIN_STATISTICS_REPORT` |
 | client cohort | reporting cohort, comparable client set | The set of accepted profile artifacts that share one `compatibility_key` (`schema_version` plus **evidence-chain profile depth**). Incompatible keys are never rolled up together. Distinct from an **assurance profile** pilot cohort. | `CLIENT_COHORT` |
 | report input manifest | batch input list, report-inputs.yaml | The `evidence-chain-report-inputs.v1` document that names profile artifacts, optional **client alias** values, mode, and path-privacy. The aggregator does not discover clients by walking repositories. | `REPORT_INPUT_MANIFEST` |
 | client alias | display name, human client name | Optional human-readable label on a **report input manifest** row. Stable identity remains the profile hashed `project_id`. | `CLIENT_ALIAS` |
+| denominator fingerprint | denominator hash, cohort denominator key | Stable hash of required derived-path denominators plus structural denominators for one profile; used in v2 to partition **denominator subcohorts** inside a **client cohort**. Distinct from **proof boundary** and from summing derived-field values. | `DENOMINATOR_FINGERPRINT` |
+| denominator subcohort | denominator partition, fingerprint cohort | A subset of a **client cohort** whose members share the same **denominator fingerprint**. v2 never rolls incompatible denominators into one sub-cohort statistic. | `DENOMINATOR_SUBCOHORT` |
 
 ## Profile applicability
 
@@ -86,11 +90,20 @@ Domain terms above are distinct from IMPL grammar keywords such as `INPUT`, `OUT
 | event claim | `claim` / `EVENT_CLAIM` | `[IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK]` |
 | evidence chain profile | `evidence-chain-profile.v1` / `evidence_chain_profile_generate` | `[REQ-EVIDENCE_CHAIN_PROFILE]` |
 | evidence-chain profile depth | `profile_depth` / `PROFILE_DEPTH` | `[ARCH-EVIDENCE_CHAIN_PROFILE]` |
+| file inventory adapter | `COLLECT_FILE_INVENTORY` (dormant contract only) | `[IMPL-EVIDENCE_CHAIN_PROFILE]` |
+| vocabulary drift adapter | `COLLECT_VOCAB_DRIFT` (dormant contract only) | `[IMPL-EVIDENCE_CHAIN_PROFILE]` |
 | evidence chain statistics report | `evidence-chain-statistics-report.v1` / `evidence-chain-report` CLI | `[REQ-EVIDENCE_CHAIN_REPORT]` |
 | client cohort | `compatibility_key` / `CLIENT_COHORT` | `[ARCH-EVIDENCE_CHAIN_REPORT]` |
 | report input manifest | `evidence-chain-report-inputs.v1` / `REPORT_INPUT_MANIFEST` | `[IMPL-EVIDENCE_CHAIN_REPORT]` |
 | client alias | `client_alias` / `CLIENT_ALIAS` | `[REQ-EVIDENCE_CHAIN_REPORT]` |
 | idempotency key | `event_id` / `IDEMPOTENCY_KEY` | `[IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK]` |
+
+## Pseudo-code block names
+
+| Preferred term | UPPER_SNAKE block | Owning IMPL |
+|---|---|---|
+| file inventory adapter | `COLLECT_FILE_INVENTORY` | `[IMPL-EVIDENCE_CHAIN_PROFILE]` |
+| vocabulary drift adapter | `COLLECT_VOCAB_DRIFT` | `[IMPL-EVIDENCE_CHAIN_PROFILE]` |
 
 ## Alphabetical index
 
@@ -101,6 +114,8 @@ Domain terms above are distinct from IMPL grammar keywords such as `INPUT`, `OUT
 | attach provenance | Canonical terms |
 | artifact reference | Canonical terms |
 | binding row fields | Naming bridge |
+| COLLECT_FILE_INVENTORY | Pseudo-code block names |
+| COLLECT_VOCAB_DRIFT | Pseudo-code block names |
 | evidence collection | Canonical terms |
 | evidence chain profile | Canonical terms |
 | evidence-chain profile depth | Canonical terms |
@@ -109,6 +124,8 @@ Domain terms above are distinct from IMPL grammar keywords such as `INPUT`, `OUT
 | report input manifest | Canonical terms |
 | client alias | Canonical terms |
 | event claim | Canonical terms |
+| file inventory adapter | Canonical terms |
 | idempotency key | Canonical terms |
 | proof boundary | Canonical terms |
 | quality command declaration | Canonical terms |
+| vocabulary drift adapter | Canonical terms |
