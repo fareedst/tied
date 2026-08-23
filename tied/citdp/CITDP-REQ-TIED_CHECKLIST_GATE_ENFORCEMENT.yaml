@@ -1,0 +1,112 @@
+CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT:
+  change_definition:
+    current_behavior: "Prompt skills, verification, and lifecycle close-out could progress on caller assertions without validated Tracker dispositions or adversarial depth evidence."
+    desired_behavior: "A shared pure validator blocks pre_implementation, verification, and close_out when Tracker or CITDP adversarial contracts are missing, malformed, stale, or unjustified."
+    non_goals:
+      - "Adding a second checklist process token"
+      - "Mutating canonical TIED YAML during gate validation"
+      - "Replacing advisory inquiry policy semantics"
+    success_criteria:
+      - "MCP tied_checklist_gate_validate exposes the shared validator read-only."
+      - "Prompt-type skills and agentstream enforce the same gate contract."
+      - "Shared validateChecklistGate covers pending, minimal, integrated, N/A, waiver, and stale identity cases."
+      - "verify and feature close_out consume gate results and fail closed."
+    unchanged_behavior:
+      - "Integrated inquiry policy remains advisory after evidence is present."
+      - "Observed adversarial findings remain review-gated and do not trigger LEAP."
+  completion_criteria:
+    checklist_gate:
+      dispositions:
+        - "completed"
+        - "not_applicable"
+        - "pending"
+        - "waived"
+      fail_closed: true
+      phases:
+        - "close_out"
+        - "pre_implementation"
+        - "verification"
+    focused_tests: "checklist-validator, citdp-writer, verify, feature-orchestration, MCP checklist-gate registration, agentstream checklist, prompt-type e2e tests pass"
+    lint: "bunx tsc -b passes for mcp-server"
+    verification: "tied_verify and tied_validate_consistency pass"
+  impact_analysis:
+    audited_project_mutation: "none during gate validation"
+    files:
+      - ".cursor/agents/"
+      - "mcp-server/src/checklist-validator.ts"
+      - "mcp-server/src/citdp-writer.ts"
+      - "mcp-server/src/feature-orchestration/commands.ts"
+      - "mcp-server/src/tools/index.ts"
+      - "mcp-server/src/verify.ts"
+      - "tools/agentstream/checklist/checklist.go"
+      - "tools/bundled-prompt-type-skills/"
+    modules:
+      - "checklist_gate_validator"
+      - "citdp_shape_validation"
+      - "lifecycle_close_out"
+      - "prompt_type_contracts"
+      - "verification_gate_integration"
+  leap_feedback:
+    divergences_from_analysis:
+      - "checklist-validator.test.ts added beyond original traceability list in REQ detail."
+      - "MCP checklist-gate composition coverage and completion-criteria activation lookup were added during close-out repair."
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    author: "AI Agent"
+    change_request_id: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    date: "2026-08-23"
+    record_status: "complete"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Caller passes checklist_gate.allowed=true without running tied_checklist_gate_validate"
+        - "Completed step with disposition skipped instead of completed/not_applicable/waived"
+        - "Integrated depth declared with only three of four bounded artifacts"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "checklist-validator.test.ts rejects skipped disposition and pending steps"
+        - "feature-orchestration commands.test.ts rejects close_out without gate evidence"
+        - "verify.test.ts blocks when shared checklist gate is missing"
+      evidence_references:
+        - "mcp-server/src/checklist-validator.test.ts"
+        - "mcp-server/src/feature-orchestration/commands.test.ts"
+        - "mcp-server/src/verify.test.ts"
+      falsification_questions:
+        - "Can close_out proceed with pending required steps?"
+        - "Can verify update status when checklist_gate is omitted?"
+        - "Does generic skip disposition pass tracker validation?"
+      gate_policy: "advisory"
+      rationale: "Gate enforcement is pure validation; minimal depth counterexamples cover bypass attempts without integrated inquiry activation."
+      research_profile: "integrated-agent"
+    profiles:
+      - "baseline-functional"
+    risks:
+      - mitigation: "Fail closed at verify, lifecycle close_out, and prompt-type contract tests."
+        name: "workflow_bypass"
+        severity: "high"
+      - mitigation: "Identity-bound artifact pairing with SHA-256 scope hashes."
+        name: "stale_activation"
+        severity: "medium"
+  test_strategy:
+    composition_pending: false
+    red_before_green: true
+    tests:
+      - "mcp-server/src/checklist-validator.test.ts"
+      - "mcp-server/src/citdp-writer.test.ts"
+      - "mcp-server/src/e2e/prompt-type-skills.test.ts"
+      - "mcp-server/src/e2e/prompt-type-subagent.test.ts"
+      - "mcp-server/src/feature-orchestration/commands.test.ts"
+      - "mcp-server/src/tools/checklist-gate-mcp.test.ts"
+      - "mcp-server/src/verify.test.ts"
+      - "tools/agentstream/checklist/checklist_test.go"
+  tied_context:
+    architecture:
+      - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    implementation:
+      - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    methodology_version: "3.0.0"
+    requirements:
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    tied_base_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied"

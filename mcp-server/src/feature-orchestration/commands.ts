@@ -4,6 +4,7 @@ import { FeatureStore } from "./store.js";
 import fs from "node:fs";
 import path from "node:path";
 import { ClarificationStore, evaluateClarificationGate } from "./clarification.js";
+import { validateChecklistGate, type GatePhase } from "../checklist-validator.js";
 
 export type LifecycleCommand = "specify" | "refine" | "plan" | "tasks" | "verify" | "close_out";
 export type CommandRequest = {
@@ -14,7 +15,7 @@ export type CommandRequest = {
 };
 export type CommandResult =
   | { ok: true; current_state: LifecyclePhase; revision: number; next_permitted_phase: LifecyclePhase | null; diagnostics: string[]; manifest: unknown }
-  | { ok: false; error: "UNKNOWN_COMMAND" | "FEATURE_NOT_FOUND" | "STALE_REVISION"; diagnostics: string[] };
+  | { ok: false; error: "UNKNOWN_COMMAND" | "FEATURE_NOT_FOUND" | "STALE_REVISION" | "CHECKLIST_GATE_BLOCKED"; diagnostics: string[] };
 
 const commandPhases: Record<LifecycleCommand, LifecyclePhase> = {
   specify: "refining",
@@ -23,6 +24,14 @@ const commandPhases: Record<LifecycleCommand, LifecyclePhase> = {
   tasks: "tasked",
   verify: "verifying",
   close_out: "closed",
+};
+
+const gatePhases: Partial<Record<LifecycleCommand, GatePhase>> = {
+  refine: "pre_implementation",
+  plan: "pre_implementation",
+  tasks: "pre_implementation",
+  verify: "verification",
+  close_out: "close_out",
 };
 
 function nextPhase(current: LifecyclePhase): LifecyclePhase | null {
@@ -69,6 +78,31 @@ export function executeLifecycleCommand(store: FeatureStore, request: CommandReq
     }
   }
   const input = request.command_input ?? {};
+  const gatePhase = gatePhases[command];
+  if (gatePhase) {
+    const gateInput = input.checklist_gate;
+    const gate = gateInput && typeof gateInput === "object"
+      ? validateChecklistGate({
+        ...(gateInput as {
+          tracker: unknown;
+          citdp: unknown;
+          activation?: unknown;
+          required_step_slugs?: readonly string[];
+        }),
+        phase: gatePhase,
+        requiredStepSlugs: (gateInput as { required_step_slugs?: readonly string[] }).required_step_slugs,
+        activation: (gateInput as { activation?: unknown }).activation as never,
+      })
+      : { allowed: false, diagnostics: ["missing_checklist_gate"] };
+    if (!gate.allowed) {
+      console.debug(`DEBUG: checklist gate blocked ${command} for ${request.feature_identifier}`);
+      return {
+        ok: false,
+        error: "CHECKLIST_GATE_BLOCKED",
+        diagnostics: ["CHECKLIST_GATE_BLOCKED", ...gate.diagnostics],
+      };
+    }
+  }
   const evidence: TransitionEvidence = {
     validated: input.validated === true,
     planned: input.planned === true,

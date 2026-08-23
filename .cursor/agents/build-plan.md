@@ -58,6 +58,13 @@ remainder alone.
 
 This prompt type omits Refine. Do not add a Refine section.
 
+Select and record `profile_depth` and gate policy before any depth-dependent
+inquiry. Call `tied_checklist_gate_validate` with `phase:
+pre_implementation` before implementation and `phase: verification` before
+status updates; pass integrated activation evidence and the validated result
+to `tied_verify`. Missing, malformed, stale, or unjustified evidence blocks
+progression.
+
 Keep project YAML changes in project-owned `tied/` records; never edit
 `tied/methodology/`. Run language lint, TIED YAML validation, the verification
 gate, and `tied_validate_consistency` before reporting completion.

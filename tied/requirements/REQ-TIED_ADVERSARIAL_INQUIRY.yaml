@@ -1,5 +1,12 @@
 REQ-TIED_ADVERSARIAL_INQUIRY:
   category: "Functional"
+  cross_references:
+    - "ARCH-TIED_ADVERSARIAL_INQUIRY"
+    - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "IMPL-TIED_ADVERSARIAL_INQUIRY"
+    - "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST"
+    - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
   description: "Provide bounded, read-only obligation mapping and bidirectional fidelity evidence without treating structural presence as semantic or runtime proof."
   implementation_approach:
     details:
@@ -36,6 +43,20 @@ REQ-TIED_ADVERSARIAL_INQUIRY:
     related_to:
       - "REQ-TIED_SETUP"
     supersedes: []
+  risk_analysis:
+    adversarial_inquiry:
+      activation_pairing: "receipt plus four identity-bound artifacts"
+      dispositions:
+        - "completed"
+        - "not_applicable"
+        - "pending"
+        - "waived"
+      generic_skip: "rejected"
+      phase_modes:
+        - "close_out"
+        - "pre_implementation"
+        - "verification"
+      sequencing: "select depth before any depth-dependent pre-RED inquiry gate"
   satisfaction_criteria:
     - criterion: "Every changed requirement criterion maps to an architecture constraint and implementation block or an explicit unresolved diagnostic."
       metric: "Obligation graph tests cover complete, malformed, duplicate, stale, and unresolved references."

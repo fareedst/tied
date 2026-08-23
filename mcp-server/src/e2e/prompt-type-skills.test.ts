@@ -153,7 +153,11 @@ describe("prompt-type skill bundle", () => {
 
     assert.match(planNewFeature, /invocation remainder/i);
     assert.match(planNewFeature, /Do not treat a linked plan as the request/);
+    assert.match(planNewFeature, /tied_checklist_gate_validate/);
+    assert.match(planNewFeature, /pre_implementation/);
     assert.match(buildPlan, /guiding-vocab\.md/);
+    assert.match(buildPlan, /phase: verification/);
+    assert.match(refinePlan, /invalidate dependent downstream/i);
     assert.doesNotMatch(buildPlan, /\*\*Refine\*\*/);
     assert.match(refinePlan, /linked plan/i);
     assert.match(refinePlan, /Improve the plan below\./);

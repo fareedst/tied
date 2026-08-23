@@ -33,11 +33,20 @@ Improve the linked plan in this order:
 2. **Plan** — [tied-plan-citdp.md](../prompt-shared/tied-plan-citdp.md)
 3. **Implement** — [tied-implement.md](../prompt-shared/tied-implement.md)
 
+When scope, depth, or gate policy changes, invalidate dependent downstream
+Tracker dispositions and evidence, then re-run the applicable gate. Select
+`profile_depth` (`minimal`, `integrated`, or `strict_candidate`) and gate policy
+before any depth-dependent inquiry.
+
 If neither a linked plan nor an in-message plan is present, stop.
 
 ## Gates
 
-Same as plan-new-feature.
+- Before continuing after refinement, call `tied_checklist_gate_validate` with
+  `phase: pre_implementation`, the updated Tracker and CITDP, and
+  identity-bound activation evidence when depth is integrated.
+- A missing, malformed, stale, or unjustified gate result blocks Plan and
+  Implement; do not carry downstream evidence across a loop-back.
 
 ## Outputs
 

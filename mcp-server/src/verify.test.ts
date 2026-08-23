@@ -14,7 +14,39 @@ beforeEach(() => {
   clearBasePathCache();
 });
 
+function validChecklistGate() {
+  return {
+    phase: "verification" as const,
+    tracker: {
+      steps: [{
+        slug: "verification-gate",
+        disposition: "completed",
+        evidence_refs: ["verify.test.ts"],
+      }],
+    },
+    citdp: {
+      risk_analysis: {
+        adversarial_inquiry: {
+          depth_tier: "minimal",
+          counterexamples: ["missing gate"],
+          falsification_questions: ["Can status update without gate evidence?"],
+          disconfirming_observations: ["missing gate is rejected"],
+          evidence_references: ["verify.test.ts"],
+        },
+      },
+    },
+  };
+}
+
 describe("updateStatusFromPassedTokens dry_run", () => {
+  it("blocks status updates when the shared checklist gate is missing", () => {
+    const result = updateStatusFromPassedTokens({
+      passed_requirement_tokens: ["REQ-ONE"],
+    });
+    assert.equal(result.ok, false);
+    assert.deepEqual(result.diagnostics, ["missing_checklist_gate"]);
+  });
+
   it("returns would_update without writing when dry_run true", () => {
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-verify-"));
     const reqPath = path.join(dir, "requirements.yaml");
@@ -44,6 +76,7 @@ REQ-TWO:
 
       const r = updateStatusFromPassedTokens({
         dry_run: true,
+        checklist_gate: validChecklistGate(),
         passed_requirement_tokens: ["REQ-ONE", "REQ-TWO"],
         passed_impl_tokens: ["IMPL-ONE"],
       });
@@ -87,6 +120,7 @@ REQ-TWO:
 
       const r = updateStatusFromPassedTokens({
         dry_run: true,
+        checklist_gate: validChecklistGate(),
         passed_requirement_tokens: [],
         passed_impl_tokens: [],
       });

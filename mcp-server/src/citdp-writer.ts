@@ -6,8 +6,22 @@ import fs from "node:fs";
 import path from "node:path";
 import { getBasePath } from "./yaml-loader.js";
 import { writeCanonicalValueAtomic, type YamlFormatMetadata } from "./yaml-canonicalizer.js";
+import { validateAdversarialContract } from "./checklist-validator.js";
 
 const CITDP_FILENAME = /^CITDP-[A-Za-z0-9_.-]+\.yaml$/;
+
+function recordActivation(record: Record<string, unknown>): unknown {
+  if (record.activation !== undefined) return record.activation;
+  const completionCriteria = record.completion_criteria;
+  if (
+    typeof completionCriteria === "object"
+    && completionCriteria !== null
+    && !Array.isArray(completionCriteria)
+  ) {
+    return (completionCriteria as Record<string, unknown>).activation;
+  }
+  return undefined;
+}
 
 export function writeCitdpRecord(params: {
   filename: string;
@@ -28,6 +42,15 @@ export function writeCitdpRecord(params: {
   const topKey = (params.top_level_key ?? stem).trim();
   if (!topKey || topKey.includes("/") || topKey.includes("..")) {
     return { ok: false, error: "top_level_key must be a single safe YAML map key" };
+  }
+  // [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: enforce depth-specific adversarial obligations before progression.
+  if ("risk_analysis" in params.record || "adversarial_inquiry" in params.record) {
+    const gate = validateAdversarialContract({
+      citdp: params.record,
+      phase: "verification",
+      activation: recordActivation(params.record) as never,
+    });
+    if (!gate.ok) return { ok: false, error: `invalid adversarial CITDP: ${gate.diagnostics.join(", ")}` };
   }
   const base = getBasePath();
   const dir = path.join(base, "citdp");

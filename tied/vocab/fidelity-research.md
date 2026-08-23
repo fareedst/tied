@@ -7,7 +7,10 @@ implementation decisions and pseudo-code for the research tooling.
 
 **Traceability:** [REQ-TIED_FIDELITY_RESEARCH](../requirements/REQ-TIED_FIDELITY_RESEARCH.yaml) ·
 [ARCH-TIED_FIDELITY_RESEARCH](../architecture-decisions/ARCH-TIED_FIDELITY_RESEARCH.yaml) ·
-[IMPL-TIED_FIDELITY_RESEARCH](../implementation-decisions/IMPL-TIED_FIDELITY_RESEARCH.yaml)
+[IMPL-TIED_FIDELITY_RESEARCH](../implementation-decisions/IMPL-TIED_FIDELITY_RESEARCH.yaml) ·
+[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT](../requirements/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml) ·
+[ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT](../architecture-decisions/ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml) ·
+[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT](../implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml)
 
 **Status:** Active design vocabulary for the first vertical slice.
 
@@ -22,6 +25,7 @@ implementation decisions and pseudo-code for the research tooling.
 |---|---|---|
 | **fidelity finding** | bug, issue, suspicion | A structured observation about behavior or translation fidelity; it is not confirmed until triage. |
 | **candidate finding** | confirmed bug | Initial lifecycle state: `observed` and awaiting triage. |
+| **checklist evidence gate** | prose-only gate, caller assertion | Shared fail-closed validation boundary for Tracker dispositions, CITDP depth, and activation evidence. |
 | **finding lifecycle** | bug workflow | `observed → triaged → confirmed / dismissed / deferred → linked → remediated → verified`. |
 | **specification state** | expected behavior version | The approved prior/current REQ, ARCH, and IMPL state used to classify behavior. |
 | **origin layer** | bug location | The first layer where meaning diverged from the approved preceding layer. |
@@ -38,6 +42,7 @@ implementation decisions and pseudo-code for the research tooling.
 | **successful control change** | non-bug sample | A behavior-changing change included to estimate defect rates without selection bias. |
 | **integrated activation evidence** | activation signal, metric-only activation | Paired request-scoped inquiry metric and complete bounded artifacts demonstrating tool-backed activation. |
 | **activation artifact pairing** | artifact check, activation completeness | The rule that an inquiry metric and all four request-scoped artifacts are required together. |
+| **Tracker disposition** | checklist status, generic skip | One of `pending`, `completed`, `not_applicable`, or `waived`, with disposition-specific evidence contracts. |
 
 ## Naming bridge
 
@@ -50,11 +55,13 @@ implementation decisions and pseudo-code for the research tooling.
 | Finding ledger | `finding-ledger` | Append-only research record for observations and evidence revisions. |
 | Fidelity audit | `fidelity-audit` | Bidirectional pseudo-code ↔ evidence analysis. |
 | Composition evidence | `composition-evidence` | UI-free proof for binding seams; distinct from unit behavior. |
+| Checklist evidence gate | `checklist-evidence-gate` / `validateChecklistGate` | Shared read-only progression check for Tracker, CITDP, and activation evidence. |
 | Case report | `case-report` | Promoted, adjudicated finding with origin and evidence. |
 | Evidence provenance | `evidence-provenance` | Deterministic commands, revisions, hashes, and artifact references. |
 | Research dataset | `research-dataset` / `researchDataset` | Append-only findings, duplicate links, and case reports emitted outside audited project YAML. |
 | Integrated activation evidence | `activation-evidence` | Paired metric and artifact evidence used to classify integrated activation. |
 | Activation artifact pairing | `activation-artifact-pairing` | Completeness check joining the inquiry metric to the four bounded artifacts. |
+| Tracker disposition | `tracker-disposition` | Machine-checked disposition and evidence contract for one checklist step. |
 
 ## First-slice pseudo-code block names
 
@@ -71,6 +78,8 @@ implementation decisions and pseudo-code for the research tooling.
 | Deterministic rerun | `VERIFY_DETERMINISTIC_RERUN` | `[IMPL-TIED_FIDELITY_RESEARCH]` | Confirm repeatability and duplicate-link behavior. |
 | First-slice orchestration | `RUN_FIRST_SLICE` | `[IMPL-TIED_FIDELITY_RESEARCH]` | Connect validated modules through one read-only composition seam. |
 | Fidelity research pilot | `RUN_FIDELITY_RESEARCH_PILOT` | `[IMPL-TIED_FIDELITY_RESEARCH]` | Connect concrete adapters through the first-slice ordering and emit bounded research-dataset records. |
+| Checklist evidence gate | `VALIDATE_CHECKLIST_GATE` | `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]` | Evaluate Tracker, CITDP, and activation contracts before progression. |
+| Activation artifact pairing | `VALIDATE_ACTIVATION_PAIRING` | `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]` | Pair a successful inquiry receipt with four identity-bound artifacts. |
 
 ## Classification terms
 
@@ -97,14 +106,14 @@ Adversarial inquiry extends `[PROC-AGENT_REQ_CHECKLIST]` through existing step s
 | `author-requirement` | Positive and negative (counterexample) case per satisfaction criterion |
 | `author-architecture` | REQ criterion → ARCH constraint mapping; invalid-state analysis |
 | `catalog-pseudocode-contracts` | Closed failure/state/ordering/termination catalog per block |
-| `flag-insufficient-specs` | Counterexample-derived flags → finding ledger; CALL `sub-adversarial-inquiry-pass` (`phase: structural`) |
+| `flag-insufficient-specs` | Counterexample-derived flags → finding ledger; CALL `sub-adversarial-inquiry-pass` (`phase: pre_implementation`) |
 | `flag-contradictory-specs` | Contradiction counterexamples → finding ledger; CALL sub-procedure (`structural`) |
-| `gate-pseudocode-validation` | CALL `sub-adversarial-inquiry-pass` (`phase: pre_red`); no runtime claim |
+| `gate-pseudocode-validation` | CALL `sub-adversarial-inquiry-pass` (`phase: pre_implementation`); no runtime claim |
 | `risk-assessment` | Adversarial depth tier; strict-eligibility prerequisites when blocking desired |
 | `test-strategy` | Independent oracle sources; bounded command rows when profile-triggered |
 | `unit-test-red` | Fault matrix row with expected failure reason |
 | `unit-test-green` | Bidirectional adapter check (warn-only → `sub-leap-micro-cycle`) |
-| `three-way-alignment-unit` | Bidirectional adapter check; CALL sub-procedure (`phase: post_test`) |
+| `three-way-alignment-unit` | Bidirectional adapter check; CALL sub-procedure (`phase: verification`) |
 | `composition-integration` | Binding-local adversarial cases; controlled fault injection rows |
 | `verification-gate` | Full fidelity matrix; CALL sub-procedure (`phase: verification`); scoped blocking when strict-eligible |
 | `sync-tied-stack` | LEAP only for **confirmed** findings (not observed-only) |
@@ -123,6 +132,7 @@ Working artifacts persist only under `working/{REQ-TOKEN}/adversarial-inquiry/`.
 | artifact snapshot | Naming bridge |
 | candidate finding | Preferred terms vs synonyms |
 | case report | Naming bridge |
+| checklist evidence gate | Preferred terms vs synonyms |
 | composition evidence | Naming bridge |
 | divergent edge | Preferred terms vs synonyms |
 | evidence provenance | Preferred terms vs synonyms |
@@ -146,3 +156,5 @@ Working artifacts persist only under `working/{REQ-TOKEN}/adversarial-inquiry/`.
 | RUN_FIDELITY_RESEARCH_PILOT | Pseudo-code block names |
 | specification state | Preferred terms vs synonyms |
 | successful control change | Preferred terms vs synonyms |
+| Tracker disposition | Preferred terms vs synonyms |
+| VALIDATE_ACTIVATION_PAIRING | Pseudo-code block names |

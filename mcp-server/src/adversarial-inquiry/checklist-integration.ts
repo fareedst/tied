@@ -1,5 +1,6 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
+import { createHash } from "node:crypto";
 
 import { runAdversarialInquiry, type AdversarialInquiryInput, type AdversarialInquiryResult } from "./core.js";
 import type { FidelityFinding, FidelityVerdict, ReadOnlyReport } from "./types.js";
@@ -9,6 +10,7 @@ import type {
   StrictEligibilityResult,
 } from "./workflow.js";
 import { appendFinding } from "./workflow.js";
+import { stableHash } from "../checklist-validator.js";
 
 export type GatePolicy = "advisory" | "strict-candidate" | "strict-approved";
 
@@ -61,6 +63,33 @@ export type PersistedArtifactReferences = {
   evidenceProvenance: string;
 };
 
+export type InquiryActivation = {
+  runId: string;
+  phase: "pre_implementation" | "verification" | "close_out";
+};
+
+export type InquiryActivationReceipt = {
+  success: true;
+  tool: "tied_adversarial_inquiry_run";
+  request_token: string;
+  project_id: string;
+  run_id: string;
+  phase: InquiryActivation["phase"];
+  scope: string[];
+  scope_hash: string;
+  artifact_hashes: Record<string, string>;
+};
+
+export type InquiryActivationArtifacts = Record<string, {
+  valid: true;
+  request_token: string;
+  project_id: string;
+  run_id: string;
+  phase: InquiryActivation["phase"];
+  scope_hash: string;
+  hash: string;
+}>;
+
 export type ChecklistInquiryInput = AdversarialInquiryInput & {
   policy?: GatePolicy;
   humanApproval?: HumanStrictApproval;
@@ -69,11 +98,16 @@ export type ChecklistInquiryInput = AdversarialInquiryInput & {
   provenance?: unknown;
   redact?: readonly string[];
   ledger?: FindingLedger;
+  activation?: InquiryActivation;
 };
 
 export type ChecklistInquiryResult = AdversarialInquiryResult & {
   gate?: ScopedGateResult;
   artifacts?: PersistedArtifactReferences;
+  activation?: {
+    receipt: InquiryActivationReceipt;
+    artifacts: InquiryActivationArtifacts;
+  };
 };
 
 const REQUEST_TOKEN_RE = /^REQ-[A-Z0-9][A-Z0-9_-]*$/u;
@@ -227,6 +261,10 @@ function stableJson(value: unknown): string {
   return `${JSON.stringify(stableValue(value), null, 2)}\n`;
 }
 
+function contentHash(value: string): string {
+  return createHash("sha256").update(value, "utf8").digest("hex");
+}
+
 async function atomicWrite(filePath: string, value: unknown): Promise<void> {
   const temporary = `${filePath}.tmp-${process.pid}`;
   await fs.writeFile(temporary, stableJson(value), { encoding: "utf8", mode: 0o600 });
@@ -342,5 +380,49 @@ export async function runChecklistInquiry(input: ChecklistInquiryInput): Promise
     },
     redact: input.redact,
   });
-  return { ...result, gate, artifacts };
+  if (!input.activation) return { ...result, gate, artifacts };
+  const requestToken = input.requestToken.trim();
+  const projectId = input.graph.projectId;
+  const scope = [...input.scope];
+  const scopeHash = stableHash(scope);
+  const files = {
+    "obligation-report.json": artifacts.obligationReport,
+    "finding-ledger.jsonl": artifacts.findingLedger,
+    "gate-result.json": artifacts.gateResult,
+    "evidence-provenance.json": artifacts.evidenceProvenance,
+  };
+  const hashes: Record<string, string> = {};
+  const activationArtifacts: InquiryActivationArtifacts = {};
+  for (const [name, filePath] of Object.entries(files)) {
+    const contents = await fs.readFile(filePath, "utf8");
+    hashes[name] = contentHash(contents);
+    activationArtifacts[name] = {
+      valid: true,
+      request_token: requestToken,
+      project_id: projectId,
+      run_id: input.activation.runId,
+      phase: input.activation.phase,
+      scope_hash: scopeHash,
+      hash: hashes[name],
+    };
+  }
+  return {
+    ...result,
+    gate,
+    artifacts,
+    activation: {
+      receipt: {
+        success: true,
+        tool: "tied_adversarial_inquiry_run",
+        request_token: requestToken,
+        project_id: projectId,
+        run_id: input.activation.runId,
+        phase: input.activation.phase,
+        scope,
+        scope_hash: scopeHash,
+        artifact_hashes: hashes,
+      },
+      artifacts: activationArtifacts,
+    },
+  };
 }

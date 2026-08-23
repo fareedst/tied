@@ -52,6 +52,11 @@ Process the request in this order:
    proposed commit message.
 3. Apply optional invocation remainder.
 
+Before writing CHANGELOG or claiming completion, call
+`tied_checklist_gate_validate` with `phase: close_out`, the final Tracker and
+CITDP, and identity-bound activation evidence when depth is integrated. A
+missing, malformed, stale, or unjustified result is a hard stop.
+
 LEAP close-out must complete. **Do not commit.** Run language lint, TIED YAML
 validation, the verification-gate, and `tied_validate_consistency` before
 reporting completion. Never edit `tied/methodology/`.

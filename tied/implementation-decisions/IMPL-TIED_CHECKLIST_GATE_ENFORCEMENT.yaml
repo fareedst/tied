@@ -1,0 +1,73 @@
+IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT:
+  code_locations:
+    files:
+      - description: "Shared Tracker, CITDP, and activation evidence validator"
+        path: "mcp-server/src/checklist-validator.ts"
+      - description: "CITDP shape validation before canonical persistence"
+        path: "mcp-server/src/citdp-writer.ts"
+      - description: "Verification status gate integration"
+        path: "mcp-server/src/verify.ts"
+      - description: "Lifecycle close-out and verification integration"
+        path: "mcp-server/src/feature-orchestration/commands.ts"
+    functions:
+      - description: "Evaluate phase-specific Tracker and adversarial evidence contracts"
+        file: "mcp-server/src/checklist-validator.ts"
+        name: "validateChecklistGate"
+      - description: "Pair inquiry receipt with four bounded artifacts"
+        file: "mcp-server/src/checklist-validator.ts"
+        name: "validateActivationPairing"
+  cross_references:
+    - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "REQ-TIED_ADVERSARIAL_INQUIRY"
+    - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+  detail_file: "implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
+  implementation_approach:
+    details:
+      - "Keep validation pure and deterministic so all callers share identical diagnostics."
+      - "Persist exactly four bounded artifact names under working/{REQ-TOKEN}/adversarial-inquiry."
+      - "Treat observed findings as review-gated; only confirmed findings route to LEAP/TDD."
+      - "Use SHA-256 identity fields for request, project, run, phase, scope, and artifact pairing."
+    summary: "Shared pure validator for Tracker, CITDP, and activation evidence consumed by MCP verification, lifecycle close-out, prompt workflows, and agentstream."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-23T00:00:00.000Z"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-23T00:00:00.000Z"
+      reason: "Define fail-closed adversarial gate contract before implementation"
+  name: "Checklist, CITDP, and activation validator"
+  rationale:
+    benefits:
+      - "Eliminates prose-only progression"
+      - "Keeps advisory policy non-blocking without excusing missing evidence"
+      - "Pairs invocation receipts to retained evidence"
+    problems_solved:
+      - "Integrated activation had no machine pairing"
+      - "Malformed CITDP depth shape was accepted"
+      - "Pending checklist steps were ignored"
+    why: "Shared validation is required so status and close-out cannot claim completion from caller assertions."
+  related_decisions:
+    depends_on:
+      - "IMPL-TIED_ADVERSARIAL_INQUIRY"
+      - "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST"
+    see_also:
+      - "IMPL-FEAT_ORCHESTRATION_COMMANDS"
+  status: "Active"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    code_annotations:
+      - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    requirements:
+      - "REQ-TIED_ADVERSARIAL_INQUIRY"
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    tests:
+      - "mcp-server/src/checklist-validator.test.ts"
+      - "mcp-server/src/citdp-writer.test.ts"
+      - "mcp-server/src/feature-orchestration/commands.test.ts"
+      - "mcp-server/src/tools/checklist-gate-mcp.test.ts"
+      - "mcp-server/src/verify.test.ts"

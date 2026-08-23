@@ -105,6 +105,7 @@ import {
   type ChecklistInquiryInput,
   type GatePolicy,
   type HumanStrictApproval,
+  type InquiryActivation,
 } from "../adversarial-inquiry/checklist-integration.js";
 import {
   runProjectInquiry,
@@ -112,6 +113,7 @@ import {
 } from "../adversarial-inquiry/project-orchestrator.js";
 import { generateEvidenceChainProfile } from "../fidelity-research/evidence-chain-profile.js";
 import { createLiveStructuralValidators } from "../fidelity-research/live-structural-validators.js";
+import { validateChecklistGate } from "../checklist-validator.js";
 
 /** LEAP proposal MCP tools: JSON envelope; catch sync throws from fs/git. [REQ-LEAP_PROPOSAL_QUEUE] */
 function leapMcpJson(payload: unknown) {
@@ -1125,6 +1127,18 @@ export const allTools = [
           .optional()
           .default(false)
           .describe("If true, no writes; returns would_update with index/token/previous_status/next_status for each row that would change"),
+        checklist_gate: z.object({
+          phase: z.enum(["pre_implementation", "verification", "close_out"]),
+          tracker: z.record(z.unknown()),
+          citdp: z.record(z.unknown()),
+          required_step_slugs: z.array(z.string()).optional(),
+          activation: z.record(z.unknown()).optional(),
+        }).optional().describe("Validated shared Tracker/CITDP/activation gate; required for every workflow status update."),
+        require_checklist_gate: z
+          .boolean()
+          .optional()
+          .default(true)
+          .describe("Deprecated compatibility field; checklist_gate is always required for status updates."),
       }),
     },
     handler: async (args: {
@@ -1133,6 +1147,14 @@ export const allTools = [
       set_unpassed_reqs_to_planned?: boolean;
       set_unpassed_impl_to_planned?: boolean;
       dry_run?: boolean;
+      checklist_gate?: {
+        phase: "pre_implementation" | "verification" | "close_out";
+        tracker: unknown;
+        citdp: unknown;
+        required_step_slugs?: string[];
+        activation?: unknown;
+      };
+      require_checklist_gate?: boolean;
     }) => {
       const result = updateStatusFromPassedTokens({
         passed_requirement_tokens: args.passed_requirement_tokens ?? [],
@@ -1140,6 +1162,16 @@ export const allTools = [
         set_unpassed_reqs_to_planned: args.set_unpassed_reqs_to_planned ?? false,
         set_unpassed_impl_to_planned: args.set_unpassed_impl_to_planned ?? false,
         dry_run: args.dry_run ?? false,
+        checklist_gate: args.checklist_gate
+          ? {
+            phase: args.checklist_gate.phase,
+            tracker: args.checklist_gate.tracker,
+            citdp: args.checklist_gate.citdp,
+            requiredStepSlugs: args.checklist_gate.required_step_slugs,
+            activation: args.checklist_gate.activation as never,
+          }
+          : undefined,
+        require_checklist_gate: args.require_checklist_gate ?? true,
       });
       return textContent(JSON.stringify(result, null, 2));
     },
@@ -1324,6 +1356,8 @@ export const allTools = [
         human_approval: z.record(z.unknown()).optional().describe("Human CITDP approval required for strict-approved blocking."),
         repository_root: z.string().optional().describe("Repository root for bounded working artifact persistence."),
         request_token: z.string().optional().describe("REQ token selecting working/{REQ-TOKEN}/adversarial-inquiry."),
+        run_id: z.string().optional().describe("Identity-bound inquiry run identifier for activation pairing."),
+        phase: z.enum(["pre_implementation", "verification", "close_out"]).optional().describe("Checklist gate phase for activation pairing."),
         provenance: z.unknown().optional().describe("Evidence provenance to persist outside canonical TIED YAML."),
         redact: z.array(z.string()).optional().describe("Sensitive values to redact from generated artifacts."),
       }),
@@ -1346,6 +1380,8 @@ export const allTools = [
       human_approval?: Record<string, unknown>;
       repository_root?: string;
       request_token?: string;
+      run_id?: string;
+      phase?: InquiryActivation["phase"];
       provenance?: unknown;
       redact?: string[];
     }) => {
@@ -1366,8 +1402,46 @@ export const allTools = [
           humanApproval: args.human_approval as unknown as HumanStrictApproval | undefined,
           repositoryRoot: args.repository_root,
           requestToken: args.request_token,
+          activation: args.run_id && args.phase
+            ? { runId: args.run_id, phase: args.phase }
+            : undefined,
           provenance: args.provenance,
           redact: args.redact,
+        });
+        return textContent(JSON.stringify(result, null, 2));
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : String(e);
+        return textContent(JSON.stringify({ ok: false, error: msg }, null, 2));
+      }
+    },
+  },
+  {
+    name: "tied_checklist_gate_validate",
+    config: {
+      description:
+        "Validate [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] Tracker, CITDP adversarial depth, and optional identity-bound activation evidence before workflow progression. This is read-only and fails closed on missing or stale evidence.",
+      inputSchema: z.object({
+        phase: z.enum(["pre_implementation", "verification", "close_out"]),
+        tracker: z.record(z.unknown()),
+        citdp: z.record(z.unknown()),
+        required_step_slugs: z.array(z.string()).optional(),
+        activation: z.record(z.unknown()).optional(),
+      }),
+    },
+    handler: async (args: {
+      phase: "pre_implementation" | "verification" | "close_out";
+      tracker: Record<string, unknown>;
+      citdp: Record<string, unknown>;
+      required_step_slugs?: string[];
+      activation?: Record<string, unknown>;
+    }) => {
+      try {
+        const result = validateChecklistGate({
+          phase: args.phase,
+          tracker: args.tracker,
+          citdp: args.citdp,
+          requiredStepSlugs: args.required_step_slugs,
+          activation: args.activation as never,
         });
         return textContent(JSON.stringify(result, null, 2));
       } catch (e) {

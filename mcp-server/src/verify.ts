@@ -5,6 +5,7 @@
 
 import { loadIndex, updateRecord } from "./yaml-loader.js";
 import { formatYamlMetadata, type YamlFormatMetadata } from "./yaml-canonicalizer.js";
+import { validateChecklistGate, type GatePhase } from "./checklist-validator.js";
 
 const REQ_IMPLEMENTED_STATUS = "Implemented";
 const REQ_PLANNED_STATUS = "Planned";
@@ -22,6 +23,27 @@ export interface VerifyUpdateOptions {
   set_unpassed_impl_to_planned?: boolean;
   /** If true, do not write; return would_update with planned index changes only */
   dry_run?: boolean;
+  /** Shared fail-closed process evidence gate for verification/close-out updates. */
+  checklist_gate?: {
+    phase: GatePhase;
+    tracker: unknown;
+    citdp: unknown;
+    requiredStepSlugs?: readonly string[];
+    activation?: {
+      receipt?: unknown;
+      artifacts?: unknown;
+      expected?: {
+        request_token: string;
+        project_id: string;
+        run_id: string;
+        phase: GatePhase;
+        scope: string[];
+        scope_hash: string;
+      };
+    };
+  };
+  /** @deprecated Gate evidence is required for every status update. */
+  require_checklist_gate?: boolean;
 }
 
 /** One index row that would change when dry_run is true */
@@ -45,6 +67,7 @@ export interface VerifyUpdateResult {
   implementation_set_active?: string[];
   implementation_set_planned?: string[];
   yaml_format?: YamlFormatMetadata;
+  diagnostics?: string[];
 }
 
 function collectVerifyChanges(options: VerifyUpdateOptions): VerifyDryRunChange[] {
@@ -129,6 +152,25 @@ export function updateStatusFromPassedTokens(options: VerifyUpdateOptions): Veri
     set_unpassed_impl_to_planned = false,
     dry_run = false,
   } = options;
+
+  // [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: select depth before evaluating phase gates and fail closed on invalid evidence.
+  if (!options.checklist_gate) {
+    return {
+      ok: false,
+      error: "CHECKLIST_GATE_BLOCKED: missing checklist gate evidence",
+      diagnostics: ["missing_checklist_gate"],
+    };
+  }
+  if (options.checklist_gate) {
+    const gate = validateChecklistGate(options.checklist_gate);
+    if (!gate.allowed) {
+      return {
+        ok: false,
+        error: "CHECKLIST_GATE_BLOCKED: process evidence did not satisfy the selected gate",
+        diagnostics: gate.diagnostics,
+      };
+    }
+  }
 
   if (dry_run) {
     const would_update = collectVerifyChanges(options);

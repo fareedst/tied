@@ -47,6 +47,22 @@ behavior-changing work is `minimal`; selecting `baseline-functional` does not si
 integrated inquiry. A tool call without the required bounded artifacts is incomplete activation.
 Observed findings remain outside canonical TIED YAML and do not trigger LEAP until confirmed.
 
+## Shared progression gate
+
+Behavior-changing workflows use the same fail-closed gate at
+`pre_implementation`, `verification`, and `close_out`. Tracker dispositions
+are limited to `pending`, `completed`, `not_applicable`, and `waived`;
+`completed` requires evidence, `not_applicable` requires policy and rationale,
+and `waived` requires owner, expiry, approval, and residual risk. A loop-back
+clears dependent downstream dispositions and evidence before re-entry.
+
+At `integrated` depth, activation is valid only when a successful
+`tied_adversarial_inquiry_run` receipt is paired with
+`obligation-report.json`, `finding-ledger.jsonl`, `gate-result.json`, and
+`evidence-provenance.json`; request, project, run, phase, scope, and artifact
+hashes must match. Missing, malformed, stale, or unjustified process evidence
+blocks progression even when the inquiry policy is advisory.
+
 ## Middle ground
 
 For small but real behavior changes, some teams still want a **short** CITDP record (minimal fields) rather than skipping entirely. That is valid if your validators and reviewers agree.

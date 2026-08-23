@@ -10,7 +10,9 @@
 2. Ask questions that RESOLVE sponsor terms to canonical meaning and intent; record new concepts in vocab when they appear.
 3. when you know the term, bold it; when you know the semantic token, bracket it; when you know the file/key, backtick it; otherwise write normally.
 
-**Gate:** Do not start plan until ambiguity is cleared or explicitly accepted.
+**Gate:** Do not start plan until ambiguity is cleared or explicitly accepted,
+the adversarial depth and gate policy are recorded, and the
+`pre_implementation` checklist gate allows the current Tracker/CITDP.
 
 ## Debug variant (section_refine_debug)
 
@@ -20,7 +22,9 @@
 2. Ask questions that RESOLVE sponsor terms to canonical meaning and intent; record new concepts in vocab when they appear.
 3. when you know the term, bold it; when you know the semantic token, bracket it; when you know the file/key, backtick it; otherwise write normally.
 
-**Gate:** Do not test or code until ambiguity is cleared or explicitly accepted.
+**Gate:** Do not test or code until ambiguity is cleared or explicitly
+accepted, the adversarial depth and gate policy are recorded, and the
+`pre_implementation` checklist gate allows the current Tracker/CITDP.
 
 ## Ad-hoc variant (section_refine_ad_hoc)
 
@@ -30,4 +34,6 @@
 2. Ask questions that reveal intent for the changes; record new concepts in vocab when they appear.
 3. when you know the term, bold it; when you know the semantic token, bracket it; when you know the file/key, backtick it; otherwise write normally.
 
-**Gate:** Do not start plan until ambiguity is cleared or explicitly accepted.
+**Gate:** Do not start plan until ambiguity is cleared or explicitly accepted,
+the adversarial depth and gate policy are recorded, and the
+`pre_implementation` checklist gate allows the current Tracker/CITDP.

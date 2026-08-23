@@ -494,6 +494,14 @@ ARCH-TIED_ADVERSARIAL_INQUIRY:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT:
+  cross_references:
+    - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+  description: "A shared fail-closed gate evaluator is the authority for Tracker dispositions, CITDP depth, activation pairing, and lifecycle evidence."
+  name: "Shared checklist evidence gate boundary"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY:
   cross_references:
     - "IMPL-TIED_FEEDBACK_PROMOTION"
@@ -1237,6 +1245,14 @@ IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST:
   detail_file: "implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST.yaml"
   name: "Adversarial inquiry checklist integration and evidence artifacts"
   source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT:
+  cross_references:
+    - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+  description: "Pure shared validator for Tracker dispositions, CITDP shape/depth, and identity-bound activation artifacts."
+  name: "Checklist, CITDP, and activation validator"
   status: "Active"
   type: "IMPL"
 IMPL-TIED_FEEDBACK_PROMOTION:
@@ -2176,6 +2192,14 @@ REQ-TIED_ADVERSARIAL_INQUIRY:
   name: "Adversarial inquiry for obligation and fidelity evidence"
   source_index: "requirements.yaml"
   status: "Planned"
+  type: "REQ"
+REQ-TIED_CHECKLIST_GATE_ENFORCEMENT:
+  cross_references:
+    - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+  description: "Checklist progression, verification, and close-out require machine-validated adversarial and execution evidence."
+  name: "Machine-enforced checklist evidence gates"
+  status: "Active"
   type: "REQ"
 REQ-TIED_FIDELITY_RESEARCH:
   category: "Functional"

@@ -58,6 +58,14 @@ Do not treat a linked plan as the request.
    pseudo-code validation must pass. Write RED tests before production code,
    then validate modules independently before composition.
 
+Before any depth-dependent inquiry, select and record `profile_depth`
+(`minimal`, `integrated`, or `strict_candidate`) and the gate policy. Before
+RED/code call `tied_checklist_gate_validate` with `phase: pre_implementation`,
+the Tracker, CITDP, and integrated activation evidence when applicable. At
+verification and close-out, pass the corresponding validated gate to
+`tied_verify`/close-out. Missing, malformed, stale, or unjustified evidence
+blocks progression.
+
 Keep project YAML changes in project-owned `tied/` records; never edit
 `tied/methodology/`. Run language lint, TIED YAML validation, the verification
 gate, and `tied_validate_consistency` before reporting completion.

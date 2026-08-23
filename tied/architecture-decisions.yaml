@@ -1397,6 +1397,15 @@ ARCH-TIED_ADVERSARIAL_INQUIRY:
   detail_file: "architecture-decisions/ARCH-TIED_ADVERSARIAL_INQUIRY.yaml"
   name: "Read-only obligation graph and evidence gate boundary"
   status: "Active"
+ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT:
+  cross_references:
+    - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "REQ-TIED_ADVERSARIAL_INQUIRY"
+    - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+  description: "A shared fail-closed gate evaluator is the authority for Tracker dispositions, CITDP depth, activation pairing, and lifecycle evidence."
+  detail_file: "architecture-decisions/ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
+  name: "Shared checklist evidence gate boundary"
+  status: "Active"
 ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY:
   cross_references:
     - "ARCH-FEEDBACK_STORAGE"

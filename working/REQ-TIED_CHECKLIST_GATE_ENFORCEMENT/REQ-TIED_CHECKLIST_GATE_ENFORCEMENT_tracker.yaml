@@ -1,0 +1,160 @@
+evidence:
+  commands:
+    - "npx tsc -b --pretty false --prefix mcp-server"
+  proof_boundaries:
+    - "executable_behavior"
+    - "human_decision"
+    - "pseudo_code_structure"
+    - "traceability_structure"
+execution_evidence:
+  close_out_evidence:
+    date: "2026-08-23"
+    gates:
+      close_out:
+        disposition: "completed"
+        evidence_refs:
+          - "mcp-server/src/checklist-validator.test.ts"
+          - "mcp-server/src/citdp-writer.test.ts"
+          - "mcp-server/src/tools/checklist-gate-mcp.test.ts"
+          - "mcp-server/src/verify.test.ts"
+          - "tied/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
+        phase: "close_out"
+      verification:
+        disposition: "completed"
+        evidence_refs:
+          - "mcp-server/src/feature-orchestration/commands.test.ts"
+          - "tools/agentstream/checklist/checklist_test.go"
+        phase: "verification"
+    master_checklist: "tied/docs/agent-req-implementation-checklist.yaml"
+  completed:
+    - "catalog-pseudocode-contracts"
+    - "change-definition"
+    - "composition-integration"
+    - "gate-pseudocode-validation"
+    - "impact-discovery"
+    - "persist-citdp-record"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "sync-tied-stack"
+    - "test-strategy"
+    - "three-way-alignment-unit"
+    - "traceable-commit"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "user-facing-release-notes"
+    - "verification-gate"
+  operator_evidence:
+    commands:
+      - "bash -n scripts/build-commands.sh scripts/yaml_tool.sh scripts/lint_yaml.sh scripts/lint.sh"
+      - "cd tools/agentstream && go test ./..."
+      - "npm test --prefix mcp-server"
+      - "ruby -c scripts/build_adversarial_inquiry_mode_a.rb"
+      - "ruby scripts/validate_vocab_index.rb"
+      - "scripts/yaml_tool.sh --check on changed TIED and Tracker YAML"
+      - "tied_checklist_gate_validate phase=close_out"
+      - "tied_validate_consistency"
+      - "tied_verify REQ-TIED_CHECKLIST_GATE_ENFORCEMENT IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "yaml_index_validate"
+    evidence_refs:
+      - "mcp-server/src/tools/checklist-gate-mcp.test.ts"
+      - "tied/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
+      - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+    limitation: "The requested close-out deliberately does not stage, unstage, commit, or push."
+    status: "complete"
+  request: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+impact_analysis:
+  modules_or_boundaries: "Checklist validator, CITDP shape validation, MCP composition, verification status, lifecycle close-out, prompt contracts, and agentstream rendering."
+  tied_tokens_affected:
+    - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "PROC-AGENT_REQ_CHECKLIST"
+    - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+leap_feedback:
+  divergences_from_analysis:
+    - "Added explicit MCP registration coverage and completion-criteria activation lookup."
+  record_status: "complete"
+  tied_stack_updates_required: []
+record_identity:
+  change_request_id: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+  record_status: "complete"
+  recorded_at: "2026-08-23"
+  title: "Close out machine-enforced checklist evidence gates"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "AGENTS.md"
+      - "tied/docs/ai-principles.md"
+    slug: "session-bootstrap"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
+    slug: "change-definition"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
+    slug: "impact-discovery"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+    slug: "catalog-pseudocode-contracts"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+    slug: "gate-pseudocode-validation"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
+    slug: "risk-assessment"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/package.json"
+      - "tied/requirements/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
+    slug: "test-strategy"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/checklist-validator.test.ts"
+      - "mcp-server/src/verify.test.ts"
+    slug: "unit-test-red"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/checklist-validator.ts"
+      - "mcp-server/src/verify.ts"
+    slug: "unit-test-green"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/checklist-validator.test.ts"
+      - "mcp-server/src/checklist-validator.ts"
+      - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+    slug: "three-way-alignment-unit"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/tools/checklist-gate-mcp.test.ts"
+      - "mcp-server/src/tools/index.ts"
+    slug: "composition-integration"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/feature-orchestration/commands.test.ts"
+      - "mcp-server/src/verify.test.ts"
+    slug: "verification-gate"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/architecture-decisions/ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
+      - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
+      - "tied/requirements/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
+    slug: "sync-tied-stack"
+  - disposition: "completed"
+    evidence_refs:
+      - "CHANGELOG.md"
+    slug: "user-facing-release-notes"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
+    slug: "persist-citdp-record"
+  - disposition: "completed"
+    evidence_refs:
+      - "git diff --cached --check"
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT_tracker.yaml"
+    slug: "traceable-commit"
+test_strategy:
+  matrix_notes: "Integrated inquiry is not activated because this close-out uses minimal depth; no activation artifacts are claimed."
+  summary: "Focused unit and composition tests cover fail-closed Tracker/CITDP validation and MCP registration; full TypeScript, Go, script, YAML, token, and consistency checks complete the close-out."

@@ -1,0 +1,43 @@
+ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT:
+  cross_references:
+    - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "REQ-TIED_ADVERSARIAL_INQUIRY"
+    - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+  decision: "Use one pure validator for Tracker/CITDP/activation evidence and call it at pre-implementation, verification, and close-out boundaries. Advisory inquiry remains warn/non-blocking only after evidence is present; absence or invalidity of required process evidence blocks progression."
+  implementation_approach:
+    details:
+      - "Bind integrated evidence to request, project, run, phase, scope, and artifact hashes."
+      - "Invalidate downstream evidence when a loop-back changes scope or depth."
+      - "Normalize step dispositions to pending, completed, not_applicable, or waived; reject generic skip values."
+      - "Select adversarial depth before any depth-dependent inquiry gate."
+    summary: "Shared pure gate evaluator with deterministic diagnostics and identity-bound artifact pairing."
+  name: "Shared checklist evidence gate boundary"
+  rationale:
+    benefits:
+      - "Deterministic diagnostics for operators"
+      - "No canonical TIED mutation during evidence validation"
+      - "One enforcement policy across prompt skills, MCP, and agentstream"
+    problems_solved:
+      - "Evidence artifacts could be stale or unpaired"
+      - "Independent workflow gates drifted"
+      - "Verification accepted assertions instead of validated process state"
+    why: "A single architecture boundary prevents workflow-specific bypasses while retaining existing advisory policy semantics."
+  related_decisions:
+    depends_on:
+      - "ARCH-FEAT_LIFECYCLE_STATE_MACHINE"
+      - "ARCH-TIED_ADVERSARIAL_INQUIRY"
+    informs:
+      - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+  traceability:
+    code_annotations:
+      - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    implementation:
+      - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    requirements:
+      - "REQ-TIED_ADVERSARIAL_INQUIRY"
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    tests:
+      - "checklist-validator.test.ts"
+      - "feature-orchestration/commands.test.ts"
+      - "tools/checklist-gate-mcp.test.ts"

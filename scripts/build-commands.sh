@@ -4,6 +4,7 @@
 #                          how build      # one section
 
 export TIED_MCP_COLLECT_METRICS=1
+export TIED_MCP_COLLECT_METRICS_VAL=1
 
 if [ -z "${BASH_VERSION:-}" ]; then
   echo "build-commands.sh: requires bash (not sh/dash). Try: bash -lc 'source scripts/build-commands.sh'" >&2
@@ -154,7 +155,7 @@ new_tied_client() {
 }
 alias new-tied-client=new_tied_client
 
-test_new_tied_client() {
+make_new_tied_client() {
   local test_root="${TIED_TEST_ROOT:-${HOME}/Documents/dev/test}"
   local source_root="${TIED_SOURCE_ROOT:-${_BUILD_COMMANDS_REPO_ROOT}}"
   local dn
@@ -163,8 +164,8 @@ test_new_tied_client() {
   _new_tied_test_client "$test_root/$dn" "$source_root"
   printf 'Disposable TIED client: %s/%s\n' "$test_root" "$dn"
 }
-alias test-new-tied-client=test_new_tied_client
-alias setx-test-new-tied-client='( set -x; test_new_tied_client ); echo "rc=$?"'
+alias test-new-tied-client=make_new_tied_client
+alias setx-test-new-tied-client='( set -x; make_new_tied_client ); echo "rc=$?"'
 
 test_tied_feature_onboarding() (
   set -euo pipefail

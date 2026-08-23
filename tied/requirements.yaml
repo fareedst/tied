@@ -1409,6 +1409,17 @@ REQ-TIED_ADVERSARIAL_INQUIRY:
   name: "Adversarial inquiry for obligation and fidelity evidence"
   priority: "P0"
   status: "Implemented"
+REQ-TIED_CHECKLIST_GATE_ENFORCEMENT:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "PROC-AGENT_REQ_CHECKLIST"
+    - "REQ-TIED_ADVERSARIAL_INQUIRY"
+  description: "Checklist progression, verification, and close-out require machine-validated adversarial and execution evidence."
+  detail_file: "requirements/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
+  name: "Machine-enforced checklist evidence gates"
+  status: "Implemented"
 REQ-TIED_FIDELITY_RESEARCH:
   category: "Functional"
   detail_file: "requirements/REQ-TIED_FIDELITY_RESEARCH.yaml"

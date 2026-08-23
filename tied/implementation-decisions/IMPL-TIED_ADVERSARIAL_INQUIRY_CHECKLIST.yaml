@@ -12,16 +12,20 @@ IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST:
     functions: []
   cross_references:
     - "ARCH-TIED_ADVERSARIAL_INQUIRY"
+    - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "IMPL-TIED_ADVERSARIAL_INQUIRY"
+    - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
     - "PROC-AGENT_REQ_CHECKLIST"
     - "REQ-TIED_ADVERSARIAL_INQUIRY"
+    - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
   detail_file: "implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST.yaml"
   implementation_approach:
     details:
-      - "Persist report, finding ledger, gate result, and provenance only below the declared working request directory."
-      - "Require negative controls, bounded execution, explicit proof boundaries, deterministic scope, waivers, pilot evidence, and a human approval record before strict blocking."
-      - "Route confirmed findings to existing checklist owners and keep observed findings out of LEAP."
-      - "Use an optional checklist-local sub-procedure under PROC-AGENT_REQ_CHECKLIST; do not add a second process token."
-    summary: "Extend real checklist slugs and compose the registered inquiry tool with bounded working artifact persistence and scoped human-approved strict status."
+      - "Expose tied_checklist_gate_validate as the shared read-only gate surface."
+      - "Keep advisory verdicts warn/non-blocking only after required evidence is valid; missing evidence remains blocking for progression."
+      - "Require integrated receipt/artifact pairing with matching identities and hashes."
+      - "Validate Tracker dispositions and CITDP adversarial depth before plan, verify, and close_out transitions."
+    summary: "Checklist integration delegates all phase, disposition, CITDP, and activation checks to the shared validator."
   metadata:
     created:
       author: "AI Agent"

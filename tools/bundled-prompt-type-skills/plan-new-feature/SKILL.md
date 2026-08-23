@@ -34,10 +34,20 @@ Process the invocation remainder in this order:
 2. **Plan** — [tied-plan-citdp.md](../prompt-shared/tied-plan-citdp.md)
 3. **Implement** — [tied-implement.md](../prompt-shared/tied-implement.md)
 
+For behavior-changing work, select `profile_depth` (`minimal`, `integrated`, or
+`strict_candidate`) and the gate policy during impact discovery, before any
+depth-dependent inquiry. Copy the per-request Tracker and preserve its
+dispositions and evidence as the authoritative process record.
+
 ## Gates
 
 - Refine: do not start plan until ambiguity cleared
-- Plan: do not start code until IMPL pseudo-code (block comments) and test strategy in place
+- Plan: before RED or code, call `tied_checklist_gate_validate` with
+  `phase: pre_implementation`, the Tracker, CITDP, and (for integrated depth)
+  identity-bound activation evidence. A missing, malformed, stale, or
+  unjustified result blocks progression.
+- Verification and close-out: pass the same validated gate to `tied_verify` and
+  close-out; never claim completion or update status from tests alone.
 
 ## Outputs
 

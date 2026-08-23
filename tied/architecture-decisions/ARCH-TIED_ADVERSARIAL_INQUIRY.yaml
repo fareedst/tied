@@ -14,6 +14,13 @@ ARCH-TIED_ADVERSARIAL_INQUIRY:
       pros:
         - "Single implementation"
       rejected_reason: "Adapters own language extraction; the core consumes normalized evidence."
+  cross_references:
+    - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "IMPL-TIED_ADVERSARIAL_INQUIRY"
+    - "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST"
+    - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "REQ-TIED_ADVERSARIAL_INQUIRY"
+    - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
   decision: "Use a language-neutral normalized evidence model and generated obligation projection outside canonical project YAML. Keep adapters language-specific, keep findings append-only and review-gated, and derive strict status only from scoped eligible evidence."
   decision_constraints:
     - "Analysis never writes audited project YAML."
@@ -22,13 +29,11 @@ ARCH-TIED_ADVERSARIAL_INQUIRY:
     - "Strict status is scoped and requires eligibility evidence."
   implementation_approach:
     details:
-      - "Checklist orchestration stays under [PROC-AGENT_REQ_CHECKLIST] and reuses [PROC-PSEUDOCODE_VALIDATION], [PROC-QUALITY_ASSURANCE], and [PROC-LEAP]."
-      - "Mode B uses a dedicated explicit-context project scope loader rather than global TIED_BASE_PATH loader state."
-      - "Research profile, assurance profile, and gate policy are orthogonal dimensions; selecting an assurance profile does not authorize strict blocking."
-      - "Strict blocking is a scoped projection only after eligibility and explicit human CITDP approval; unrelated records remain unchanged."
-      - "The live MCP registration is a composition boundary that must be rebuilt, discovered, and smoke-tested before adoption is complete."
-      - "The project orchestrator composes canonical records, the Ruby Minitest adapter, and structured production evidence into the normalized core; production source remains a locus only."
-      - "Working artifacts are project-local evidence outside canonical TIED YAML, with root confinement and atomic snapshot semantics."
+      - "Invalidate downstream evidence after scope or depth loop-back."
+      - "Pair integrated inquiry receipts with all four bounded artifacts using request, project, run, phase, scope, and artifact hashes."
+      - "Treat pending as blocking and require explicit contracts for completed, not_applicable, and waived dispositions."
+      - "Use shared phase modes pre_implementation, verification, and close_out."
+    summary: "Read-only obligation and evidence boundary consumed by one fail-closed workflow gate."
   metadata:
     created:
       author: "AI Agent"

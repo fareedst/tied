@@ -23,13 +23,15 @@ parser = OptionParser.new do |opts|
   opts.on("--scope ID", "Scoped block or obligation ID (repeatable)") { |value| options[:scope] << value }
   opts.on("--project-root PATH", "Absolute audited project root") { |value| options[:repository_root] = value }
   opts.on("--request-token TOKEN", "Request REQ token") { |value| options[:request_token] = value }
+  opts.on("--run-id ID", "Identity-bound inquiry run identifier") { |value| options[:run_id] = value }
+  opts.on("--phase PHASE", %w[pre_implementation verification close_out], "Checklist gate phase") { |value| options[:phase] = value }
   opts.on("--policy POLICY", %w[advisory strict-candidate strict-approved], "Gate policy") do |value|
     options[:policy] = value
   end
 end
 parser.parse!
 
-required = %i[graph fidelity repository_root request_token]
+required = %i[graph fidelity repository_root request_token run_id phase]
 missing = required.select { |key| options[key].to_s.empty? }
 missing << :scope if options[:scope].empty?
 abort("#{parser}\nMissing: #{missing.join(", ")}") unless missing.empty?
@@ -49,6 +51,8 @@ payload = {
   "policy" => options[:policy],
   "repository_root" => options[:repository_root],
   "request_token" => options[:request_token],
+  "run_id" => options[:run_id],
+  "phase" => options[:phase],
 }
 payload["provenance"] = read_json(options[:provenance]) if options[:provenance]
 

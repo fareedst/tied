@@ -28,7 +28,7 @@ describe("ORCHESTRATION_COMMANDS REQ-FEAT_ORCHESTRATION_COMMANDS", () => {
     }
   });
 
-  it("reports deferred Batch 2 gates without implementing them", () => {
+  it("fails closed when a planning checklist gate is missing", () => {
     const store = new FeatureStore(fs.mkdtempSync(path.join(os.tmpdir(), "feature-commands-")));
     const created = store.createIdempotently("request-1", "Chat", { mode: "greenfield" });
     assert.equal(created.ok, true);
@@ -39,7 +39,28 @@ describe("ORCHESTRATION_COMMANDS REQ-FEAT_ORCHESTRATION_COMMANDS", () => {
       expected_revision: 1,
       command_input: {},
     });
-    assert.equal(result.ok, true);
-    if (result.ok) assert.match(result.diagnostics.join(" "), /Batch 2|refining/);
+    assert.equal(result.ok, false);
+    if (!result.ok) {
+      assert.equal(result.error, "CHECKLIST_GATE_BLOCKED");
+      assert.ok(result.diagnostics.includes("missing_checklist_gate"));
+    }
+  });
+
+  it("rejects close-out before mutating a verifying feature", () => {
+    const store = new FeatureStore(fs.mkdtempSync(path.join(os.tmpdir(), "feature-commands-")));
+    const created = store.createIdempotently("request-1", "Chat", { mode: "greenfield" });
+    assert.equal(created.ok, true);
+    if (!created.ok) return;
+    const result = executeLifecycleCommand(store, {
+      command: "close_out",
+      feature_identifier: created.manifest.feature_id,
+      expected_revision: 1,
+      command_input: {},
+    });
+    assert.equal(result.ok, false);
+    if (!result.ok) assert.equal(result.error, "CHECKLIST_GATE_BLOCKED");
+    const unchanged = store.read(store.listDirectories()[0]);
+    assert.equal(unchanged.status, "draft");
+    assert.equal(unchanged.revision, 1);
   });
 });

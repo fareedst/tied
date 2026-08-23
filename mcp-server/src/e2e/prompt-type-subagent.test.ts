@@ -111,12 +111,15 @@ describe("prompt-type Task subagents [REQ-PROMPT_TYPE_SUBAGENT]", () => {
     assert.ok(refine >= 0 && refine < plan && plan < implement, "plan-new-feature must be Refine -> Plan -> Implement");
     assert.match(planNewFeature, /do not start plan until ambiguity is cleared/i);
     assert.match(planNewFeature, /do not start code until .*IMPL pseudo-code.*test strategy/i);
+    assert.match(planNewFeature, /tied_checklist_gate_validate/);
+    assert.match(planNewFeature, /pre_implementation/);
     assert.match(planNewFeature, /invocation remainder/i);
     assert.match(planNewFeature, /Do not treat a linked plan as the request/);
 
     const refinePlan = readAgent("refine-plan").body;
     assert.ok(refinePlan.indexOf("1. **Refine**") < refinePlan.indexOf("2. **Plan**"));
     assert.match(refinePlan, /do not start plan until ambiguity is cleared/i);
+    assert.match(refinePlan, /invalidate.*downstream/i);
     assert.match(refinePlan, /linked plan/i);
     assert.doesNotMatch(refinePlan, /:::/);
 
@@ -124,6 +127,7 @@ describe("prompt-type Task subagents [REQ-PROMPT_TYPE_SUBAGENT]", () => {
     assert.match(buildPlan, /Guiding vocab/);
     assert.doesNotMatch(buildPlan, /1\. \*\*Refine\*\*/);
     assert.match(buildPlan, /do not start code until .*IMPL pseudo-code.*test strategy/i);
+    assert.match(buildPlan, /phase:\s*verification/i);
     assert.match(buildPlan, /linked plan/i);
     assert.doesNotMatch(buildPlan, /:::/);
 
@@ -157,6 +161,7 @@ describe("prompt-type Task subagents [REQ-PROMPT_TYPE_SUBAGENT]", () => {
       const body = readAgent(promptType).body;
       assert.match(body, /Do not commit/i);
     }
+    assert.match(readAgent("plan-close-out").body, /phase:\s*close_out/i);
   });
 
   it("preserves safety and parent handoff contracts [REQ-PROMPT_TYPE_SUBAGENT]", () => {

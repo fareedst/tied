@@ -32,10 +32,20 @@ type Options struct {
 type yamlDoc struct {
 	Steps         []yamlStep                       `yaml:"steps"`
 	SubProcedures []yamlSub                        `yaml:"sub_procedures"`
+	GateContract  *yamlGateContract                `yaml:"gate_contract"`
 	ProcessToken  string                           `yaml:"process_token"`
 	Name          string                           `yaml:"name"`
 	Version       string                           `yaml:"version"`
 	LoopBack      map[string]yamlLoopBackClearance `yaml:"loop_back_clearance"`
+}
+
+type yamlGateContract struct {
+	Phases                        []string `yaml:"phases"`
+	Dispositions                  []string `yaml:"dispositions"`
+	RequiredArtifacts             []string `yaml:"required_artifacts"`
+	DepthSelectionBeforeInquiry   yamlBool `yaml:"depth_selection_before_inquiry"`
+	LoopBackInvalidatesDownstream yamlBool `yaml:"loop_back_invalidates_downstream_evidence"`
+	FailClosed                    yamlBool `yaml:"fail_closed"`
 }
 
 type yamlLoopBackClearance struct {
@@ -148,6 +158,9 @@ func messagesRendered(path string, opts Options) ([]renderedMessage, error) {
 		return nil, err
 	}
 	if err := validateSubsHaveSlugs(doc.SubProcedures, path); err != nil {
+		return nil, err
+	}
+	if err := validateGateContract(doc.GateContract, path); err != nil {
 		return nil, err
 	}
 	if err := validateDuplicateSlugs(doc.Steps, path); err != nil {
@@ -299,6 +312,50 @@ func validateSubsHaveSlugs(subs []yamlSub, path string) error {
 		}
 	}
 	return nil
+}
+
+func validateGateContract(contract *yamlGateContract, path string) error {
+	if contract == nil {
+		return nil
+	}
+	wantPhases := []string{"pre_implementation", "verification", "close_out"}
+	wantDispositions := []string{"pending", "completed", "not_applicable", "waived"}
+	wantArtifacts := []string{
+		"obligation-report.json",
+		"finding-ledger.jsonl",
+		"gate-result.json",
+		"evidence-provenance.json",
+	}
+	if !sameStringSet(contract.Phases, wantPhases) {
+		return fmt.Errorf("checklist gate_contract.phases must be pre_implementation, verification, close_out in %s", path)
+	}
+	if !sameStringSet(contract.Dispositions, wantDispositions) {
+		return fmt.Errorf("checklist gate_contract.dispositions must be pending, completed, not_applicable, waived in %s", path)
+	}
+	if !sameStringSet(contract.RequiredArtifacts, wantArtifacts) {
+		return fmt.Errorf("checklist gate_contract.required_artifacts is incomplete in %s", path)
+	}
+	if !bool(contract.DepthSelectionBeforeInquiry) || !bool(contract.LoopBackInvalidatesDownstream) || !bool(contract.FailClosed) {
+		return fmt.Errorf("checklist gate_contract must select depth first, invalidate loop-back evidence, and fail closed in %s", path)
+	}
+	return nil
+}
+
+func sameStringSet(got, want []string) bool {
+	if len(got) != len(want) {
+		return false
+	}
+	expected := make(map[string]struct{}, len(want))
+	for _, value := range want {
+		expected[value] = struct{}{}
+	}
+	for _, value := range got {
+		if _, ok := expected[value]; !ok {
+			return false
+		}
+		delete(expected, value)
+	}
+	return len(expected) == 0
 }
 
 // ApplyLoopBackClearance resets completion comments for the target's configured

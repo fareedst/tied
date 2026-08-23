@@ -33,11 +33,20 @@ Execute the linked plan in this order:
 2. **Plan** — [tied-plan-citdp-build.md](../prompt-shared/tied-plan-citdp-build.md)
 3. **Implement** — [tied-implement.md](../prompt-shared/tied-implement.md)
 
+Select `profile_depth` (`minimal`, `integrated`, or `strict_candidate`) and
+gate policy before depth-dependent inquiry. The linked Tracker and CITDP are
+inputs to every gate; do not substitute caller assertions for their evidence.
+
 If neither a linked plan nor an in-message plan is present, stop.
 
 ## Gates
 
-Do not start code until IMPL pseudo-code (block comments) and test strategy in place.
+- Before implementation, call `tied_checklist_gate_validate` with
+  `phase: pre_implementation`. Do not start code until it allows progression.
+- At verification, call the same validator with `phase: verification` and pass
+  its validated result to `tied_verify`; integrated depth requires the matching
+  inquiry receipt and all four bounded artifacts.
+- Missing, malformed, stale, or unjustified process evidence blocks progression.
 
 ## Outputs
 

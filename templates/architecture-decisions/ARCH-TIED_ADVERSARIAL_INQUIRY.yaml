@@ -54,8 +54,7 @@ ARCH-TIED_ADVERSARIAL_INQUIRY:
       - "ARCH-QUALITY_ASSURANCE_PROFILES"
       - "ARCH-TIED_FIDELITY_RESEARCH"
     informs: []
-    see_also:
-      - "ARCH-TIED_RESEARCH_RECORD_BOUNDARY"
+    see_also: []
     supersedes: []
   status: "Active"
   traceability:

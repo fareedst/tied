@@ -5,6 +5,25 @@ change_definition:
   success_criteria: []
   unchanged_behavior: "~"
 completion_criteria:
+  activation:
+    artifact_hashes: {}
+    phase: "verification"
+    project_id: "~"
+    request_token: "REQ-REPLACE_ME"
+    run_id: "~"
+    scope: []
+    scope_hash: "~"
+  checklist_gate:
+    dispositions:
+      - "completed"
+      - "not_applicable"
+      - "pending"
+      - "waived"
+    fail_closed: true
+    phases:
+      - "close_out"
+      - "pre_implementation"
+      - "verification"
   verification_gate_notes: "~"
 evidence:
   commands: []

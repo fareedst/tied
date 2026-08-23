@@ -58,6 +58,13 @@ in-message plan is present, stop.
    pseudo-code validation must pass. Write RED tests before production code,
    then validate modules independently before composition.
 
+Select and record `profile_depth` and gate policy before any depth-dependent
+inquiry. If scope, depth, or policy changes, invalidate and clear dependent downstream
+dispositions/evidence and re-run `tied_checklist_gate_validate` with
+`phase: pre_implementation`; integrated depth also requires identity-bound
+activation evidence. Do not proceed or carry evidence across a loop-back when
+the gate is missing, malformed, stale, or unjustified.
+
 Keep project YAML changes in project-owned `tied/` records; never edit
 `tied/methodology/`. Run language lint, TIED YAML validation, the verification
 gate, and `tied_validate_consistency` before reporting completion.

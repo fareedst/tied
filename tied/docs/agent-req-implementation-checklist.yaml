@@ -44,6 +44,24 @@ flow_control_notation:
     symbol: "RETURN"
   - meaning: "Checklist complete"
     symbol: "EXIT"
+gate_contract:
+  depth_selection_before_inquiry: true
+  dispositions:
+    - "completed"
+    - "not_applicable"
+    - "pending"
+    - "waived"
+  fail_closed: true
+  loop_back_invalidates_downstream_evidence: true
+  phases:
+    - "close_out"
+    - "pre_implementation"
+    - "verification"
+  required_artifacts:
+    - "evidence-provenance.json"
+    - "finding-ledger.jsonl"
+    - "gate-result.json"
+    - "obligation-report.json"
 last_updated: "2026-08-22"
 loop_back_clearance:
   apply-token-comments:
@@ -379,6 +397,7 @@ steps:
       - "Keep specialized profiles conditional; record an explicit N/A rationale instead of inventing tests or universal ceremony."
       - "Phase B/C scope: For catalog-pseudocode-contracts through flag-contradictory-specs, treat project/feature IMPLs tied to this REQ or change-definition as the primary IMPL set. Methodology IMPLs visible in merged index reads are inherited context only unless change-definition explicitly changes methodology—do not build large empty contract tables for them."
       - "Record first-divergence hypotheses; seed an obligation inventory for the declared scope; link each quality_evidence_matrix row to a proof-boundary class (traceability_structure, pseudo_code_structure, semantic_fidelity, executable_behavior, human_decision)."
+      - "Select the adversarial depth tier (minimal | integrated | strict_candidate) and gate policy before any depth-dependent pre-implementation inquiry. Record depth_tier independently from research_profile, assurance_profile, and gate_policy."
       - "Stop expanding when no new IMPLs share code paths, REQ/ARCH tokens, or composed_with links with the current set."
       - "Touchpoint 2 (pre-read): CALL sub-vocabulary-sync (PRELOAD) scoped to modules and concepts from change-definition — load glossaries under ./tied/vocab/ (VOCAB_INDEX) for affected subsystems so subsequent IMPL/code reads interpret symbols and paths with canonical names; produce or extend the term map before any discovery reads."
       - "Traceability vs workspace: TIED code_locations document where an IMPL is anchored; they do not require every listed path to exist in this checkout. Paths absent here (other layouts, methodology-only tooling, unrelated inherited IMPLs): note as N/A or out of scope for this pass; do not treat as missing implementation or block the checklist."
@@ -632,7 +651,7 @@ steps:
       - "tied/docs/pseudocode-writing-and-validation.md"
     slug: "gate-pseudocode-validation"
     tasks:
-      - "CALL sub-adversarial-inquiry-pass with phase pre_red and blocking false; this pass makes no runtime claim — it only checks structural and contract completeness."
+      - "CALL sub-adversarial-inquiry-pass with phase pre_implementation and blocking false; this pass makes no runtime claim — it only checks structural and contract completeness after depth selection."
       - "CALL sub-pseudocode-validation-pass. Run validation per [PROC-PSEUDOCODE_VALIDATION] using ./tied/docs/pseudocode-validation-checklist.yaml or ./docs/pseudocode-validation-checklist.yaml."
       - "Do not proceed to persist-implementation-records until pre-RED structural gating is satisfied (see pseudocode-writing-and-validation.md § Validation layers)."
       - "If no parser/tool: perform manual pass over checklist categories and document results."
@@ -1319,7 +1338,7 @@ sub_procedures:
     outcomes: "Report path, proof-boundary summary, and open-finding count returned to caller; canonical TIED YAML unchanged; observed findings remain review-gated; blocking only when caller blocking=true, strict-eligible, and error-severity finding unresolved."
     preconditions:
       - "Artifact root is working/{REQ-TOKEN}/adversarial-inquiry; generated evidence is not canonical TIED intent."
-      - "Caller supplies scope, phase (structural|pre_red|post_test|verification|close_out), proof_boundaries, blocking (default false), and profile_depth (minimal|integrated|strict_candidate)."
+      - "Caller supplies scope, phase (pre_implementation|verification|close_out), proof_boundaries, blocking (default false), and profile_depth (minimal|integrated|strict_candidate) selected before this call."
     references:
       - "mcp-server/src/adversarial-inquiry/checklist-integration.ts"
       - "tied/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST-pseudocode.md"

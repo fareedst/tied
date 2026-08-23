@@ -532,6 +532,37 @@ func TestCanonicalChecklist_adversarialInquiryUsesRealSlugsAndBoundedArtifacts(t
 	}
 }
 
+func TestCanonicalChecklist_gateContractIsMachineValidated(t *testing.T) {
+	canonical := findCanonicalChecklist(t)
+	if _, err := LoadTurns(canonical, Options{StepFromID: "impact-discovery", StepToID: "impact-discovery"}); err != nil {
+		t.Fatalf("canonical gate contract should validate: %v", err)
+	}
+}
+
+func TestMessagesFromYAML_rejectsIncompleteGateContract(t *testing.T) {
+	dir := t.TempDir()
+	p := filepath.Join(dir, "invalid-gate.yaml")
+	y := `
+name: invalid_gate
+gate_contract:
+  phases: [pre_implementation]
+  dispositions: [pending, completed, not_applicable, waived]
+  required_artifacts: [obligation-report.json]
+  depth_selection_before_inquiry: true
+  loop_back_invalidates_downstream_evidence: true
+  fail_closed: true
+steps:
+  - slug: only
+    tasks: [test]
+`
+	if err := os.WriteFile(p, []byte(strings.TrimLeft(y, "\n")), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := LoadTurns(p, Options{}); err == nil || !strings.Contains(err.Error(), "gate_contract") {
+		t.Fatalf("want gate contract validation error, got %v", err)
+	}
+}
+
 func MessagesFromTurns(turns []agentstream.Turn) []string {
 	out := make([]string, 0, len(turns))
 	for _, turn := range turns {

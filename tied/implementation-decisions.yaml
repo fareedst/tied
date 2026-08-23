@@ -1558,6 +1558,15 @@ IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST:
   detail_file: "implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST.yaml"
   name: "Adversarial inquiry checklist integration and evidence artifacts"
   status: "Active"
+IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT:
+  cross_references:
+    - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "REQ-TIED_ADVERSARIAL_INQUIRY"
+    - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+  description: "Pure shared validator for Tracker dispositions, CITDP shape/depth, and identity-bound activation artifacts, integrated with verification and close-out callers."
+  detail_file: "implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
+  name: "Checklist, CITDP, and activation validator"
+  status: "Active"
 IMPL-TIED_FEEDBACK_PROMOTION:
   code_locations:
     files:

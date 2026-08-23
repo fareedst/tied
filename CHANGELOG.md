@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Machine-enforced checklist evidence gates** — `[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]` /
+  `[ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT]` / `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]`:
+  shared pure `validateChecklistGate` for Tracker dispositions, CITDP adversarial
+  depth, and identity-bound activation pairing; MCP `tied_checklist_gate_validate`;
+  fail-closed integration in `tied_verify`, feature lifecycle close-out, CITDP
+  writer shape validation, prompt-type skills/agents, and agentstream checklist
+  rendering. CITDP: `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT`.
+
 - **Evidence chain statistics report v2** — `--report-version v2` emits
   `evidence-chain-statistics-report.v2` with **denominator fingerprint**
   sub-cohorts inside each **client cohort** (`[REQ-EVIDENCE_CHAIN_REPORT]`).

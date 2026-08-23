@@ -1,0 +1,51 @@
+REQ-TIED_CHECKLIST_GATE_ENFORCEMENT:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "PROC-AGENT_REQ_CHECKLIST"
+    - "REQ-TIED_ADVERSARIAL_INQUIRY"
+  description: "Every governed behavior-changing workflow must validate Tracker dispositions and the selected adversarial inquiry depth before progression. Minimal depth requires explicit counterexamples and falsification questions; integrated depth requires identity-matched inquiry execution and all four bounded artifacts. Missing, malformed, stale, or unjustified evidence blocks progression."
+  name: "Machine-enforced checklist evidence gates"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Makes skipped work explicit and reviewable"
+      - "Preserves advisory inquiry semantics while failing closed on missing activation evidence"
+      - "Prevents successful status claims from incomplete process evidence"
+    problems_solved:
+      - "CITDP records could omit required adversarial evidence"
+      - "Close-out could trust caller-supplied verification flags"
+      - "Prompt prose and pending Trackers could be bypassed"
+    why: "Adversarial thinking is only operationally meaningful when workflow transitions consume validated evidence rather than declarations."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_ADVERSARIAL_INQUIRY"
+    related_to:
+      - "REQ-MODULE_VALIDATION"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "A governed workflow cannot pass pre-implementation, verification, or close-out with pending required Tracker steps."
+    - criterion: "Completed, not-applicable, and waived dispositions each require their prescribed evidence or approval fields; generic skip is rejected."
+    - criterion: "Integrated adversarial depth requires a matching inquiry execution receipt and valid obligation-report.json, finding-ledger.jsonl, gate-result.json, and evidence-provenance.json artifacts."
+    - criterion: "Minimal adversarial depth requires at least one scoped counterexample, falsification question, disconfirming observation, and evidence reference."
+    - criterion: "Status verification and feature close-out consume the same gate result and cannot rely on caller-supplied booleans alone."
+  traceability:
+    architecture:
+      - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    code_annotations:
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    implementation:
+      - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    tests:
+      - "checklist-validator.test.ts"
+      - "citdp-writer.test.ts"
+      - "feature-orchestration/commands.test.ts"
+      - "tools/agentstream/checklist/checklist_test.go"
+      - "tools/checklist-gate-mcp.test.ts"
+      - "verify.test.ts"
+  validation_criteria:
+    - coverage: "Validator unit tests cover pending, minimal, integrated, N/A, waiver, stale identity, and close-out cases."
+      method: "Automated testing"
+    - coverage: "Prompt skill and agentstream tests prove the four workflow contracts contain and enforce the shared gate."
+      method: "Automated testing"
