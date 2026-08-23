@@ -110,6 +110,7 @@ import {
   runProjectInquiry,
   type ModeBInput,
 } from "../adversarial-inquiry/project-orchestrator.js";
+import { generateEvidenceChainProfile } from "../fidelity-research/evidence-chain-profile.js";
 
 /** LEAP proposal MCP tools: JSON envelope; catch sync throws from fs/git. [REQ-LEAP_PROPOSAL_QUEUE] */
 function leapMcpJson(payload: unknown) {
@@ -1570,6 +1571,96 @@ export const allTools = [
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
         return textContent(JSON.stringify({ ok: false, error: msg }, null, 2));
+      }
+    },
+  },
+  {
+    name: "evidence_chain_profile_generate",
+    config: {
+      description:
+        "Generate a read-only evidence-chain-profile.v1 for one TIED client. Depth-gated: integrated collects structural and quality partitions only; human_research also composes fidelity and binding adapters. Never mutates project YAML, never appends findings, and never promotes cases.",
+      inputSchema: z.object({
+        project_root: z.string().optional(),
+        tied_base_path: z.string().optional(),
+        profile_depth: z.enum(["integrated", "human_research"]),
+        output_mode: z.enum(["json", "file"]).optional(),
+        output_path: z.string().optional(),
+        scope: z
+          .object({
+            requirement_tokens: z.array(z.string()).optional(),
+            implementation_tokens: z.array(z.string()).optional(),
+            impl_tokens_for_pseudocode: z.array(z.string()).optional(),
+            binding_rows: z.array(z.record(z.unknown())).optional(),
+            quality_plan: z
+              .object({
+                selected_profiles: z.array(z.string()),
+                checks: z.array(z.record(z.unknown())),
+              })
+              .optional(),
+          })
+          .optional(),
+        run_metadata: z
+          .object({
+            run_id: z.string().optional(),
+            commit: z.string().optional(),
+            environment: z.record(z.unknown()).optional(),
+          })
+          .optional(),
+        change_context: z
+          .object({
+            change_id: z.string().optional(),
+            citdp_token: z.string().optional(),
+          })
+          .optional(),
+        config_path: z.string().optional(),
+        ignore_file: z.string().optional(),
+        roots: z.array(z.string()).optional(),
+        manifest_reference: z.string().optional(),
+      }),
+    },
+    handler: async (args: {
+      project_root?: string;
+      tied_base_path?: string;
+      profile_depth: "integrated" | "human_research";
+      output_mode?: "json" | "file";
+      output_path?: string;
+      scope?: {
+        requirement_tokens?: string[];
+        implementation_tokens?: string[];
+        impl_tokens_for_pseudocode?: string[];
+        binding_rows?: Record<string, unknown>[];
+        quality_plan?: { selected_profiles: string[]; checks: Record<string, unknown>[] };
+      };
+      run_metadata?: { run_id?: string; commit?: string; environment?: Record<string, unknown> };
+      change_context?: { change_id?: string; citdp_token?: string };
+      config_path?: string;
+      ignore_file?: string;
+      roots?: string[];
+      manifest_reference?: string;
+    }) => {
+      try {
+        const confirmed = getBasePath();
+        const projectRoot = args.project_root ?? path.resolve(confirmed, "..");
+        const tiedBasePath = args.tied_base_path ?? confirmed;
+        const result = generateEvidenceChainProfile({
+          project_root: projectRoot,
+          tied_base_path: tiedBasePath,
+          confirmed_tied_base_path: confirmed,
+          profile_depth: args.profile_depth,
+          output_mode: args.output_mode,
+          output_path: args.output_path,
+          scope: args.scope,
+          run_metadata: args.run_metadata,
+          change_context: args.change_context,
+          config_path: args.config_path,
+          ignore_file: args.ignore_file,
+          roots: args.roots,
+          manifest_reference: args.manifest_reference,
+        });
+        return textContent(JSON.stringify(result, null, 2));
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : String(e);
+        return textContent(JSON.stringify({ ok: false, stage: "handler", error: msg }, null, 2));
       }
     },
   },

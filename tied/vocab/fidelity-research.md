@@ -31,6 +31,9 @@ implementation decisions and pseudo-code for the research tooling.
 | **read-only research profile** | audit mode | Analysis mode that does not mutate the audited project or its project YAML. |
 | **integrated agent profile** | automatic bug detector | Lightweight warn-first observation during ordinary development. |
 | **human research profile** | manual audit | Complete evidence-rich retrospective study and adjudication mode. |
+| **evidence chain profile** | maturity report, chain score | Read-only `evidence-chain-profile.v1` artifact owned by quality-assurance vocabulary; compose existing fidelity modules, do not append findings or promote cases. |
+| **evidence-chain profile depth** | research profile (alone) | `integrated` or `human_research` measurement depth on the evidence chain profile. Not the same token as **integrated agent profile** or **human research profile**, though `human_research` depth may *read* those modules. |
+| **evidence chain statistics report** | cross-project audit, maturity dashboard | TIED-source offline batch owned by quality-assurance vocabulary; consumes profile artifacts only; does not append findings or promote cases. |
 | **fidelity research pilot** | pilot run | Concrete bounded execution path for the first slice; distinct from cross-project aggregation. |
 | **successful control change** | non-bug sample | A behavior-changing change included to estimate defect rates without selection bias. |
 | **integrated activation evidence** | activation signal, metric-only activation | Paired request-scoped inquiry metric and complete bounded artifacts demonstrating tool-backed activation. |
@@ -123,6 +126,9 @@ Working artifacts persist only under `working/{REQ-TOKEN}/adversarial-inquiry/`.
 | composition evidence | Naming bridge |
 | divergent edge | Preferred terms vs synonyms |
 | evidence provenance | Preferred terms vs synonyms |
+| evidence chain profile | Preferred terms vs synonyms |
+| evidence chain statistics report | Preferred terms vs synonyms |
+| evidence-chain profile depth | Preferred terms vs synonyms |
 | first-slice orchestration | Pseudo-code block names |
 | fidelity audit | Naming bridge |
 | fidelity finding | Preferred terms vs synonyms |

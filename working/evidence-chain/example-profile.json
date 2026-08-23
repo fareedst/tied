@@ -1,0 +1,94 @@
+{
+  "identity": {
+    "schema_version": "evidence-chain-profile.v1",
+    "project_id": "manual-example",
+    "generator": "manual",
+    "generator_version": "1.0.0",
+    "observed_at": "2026-08-22T00:00:00.000Z",
+    "commit": "unknown",
+    "tied_methodology_version": "3.0.0",
+    "tied_base_path_confirmed": true
+  },
+  "scope": {
+    "roots_used": ["."],
+    "ignore_source": "manual",
+    "config_hash": "example",
+    "languages": ["typescript"],
+    "file_counts": { "source": 1 },
+    "active_populations": { "requirements": 1, "architecture": 1, "implementation": 1 },
+    "excluded": ["methodology", "templates", "fixtures"],
+    "unknown": [],
+    "not_measured": ["vocabulary_drift_automation", "block_level_impl_test_matrix"],
+    "not_applicable": [],
+    "profile_depth": "integrated"
+  },
+  "evidence_chain": {
+    "structural": [
+      {
+        "value": { "validator": "manual_index_scan", "ok": true },
+        "source": "manual_index_scan",
+        "method": "hand_review",
+        "denominator": 1,
+        "proof_boundary": "traceability_structure",
+        "status": "observed"
+      }
+    ],
+    "graph": {
+      "value": { "nodes": 3, "edges": 2, "cycles": 0 },
+      "source": "manual",
+      "method": "not_run",
+      "denominator": 3,
+      "proof_boundary": "traceability_structure",
+      "status": "not_measured"
+    },
+    "vocab_resolution": {
+      "value": "presence_linkage_only",
+      "source": "tied/vocab",
+      "method": "hand_review",
+      "denominator": 1,
+      "proof_boundary": "traceability_structure",
+      "status": "observed"
+    }
+  },
+  "quality": {
+    "applicable_attributes": ["baseline-functional"],
+    "command_results": {
+      "value": { "status": "not_measured" },
+      "source": "quality_commands",
+      "method": "absent",
+      "denominator": "not_measured",
+      "proof_boundary": "executable_behavior",
+      "status": "not_measured"
+    },
+    "freshness": {
+      "value": "2026-08-22",
+      "source": "operator",
+      "method": "stated",
+      "denominator": 1,
+      "proof_boundary": "human_decision",
+      "status": "observed"
+    },
+    "proof_boundary_partition": {
+      "traceability_structure": ["manual_index_scan"],
+      "pseudo_code_structure": [],
+      "semantic_fidelity": [],
+      "executable_behavior": [],
+      "human_decision": ["assumptions"]
+    }
+  },
+  "change_fidelity": {
+    "value": { "status": "not_measured", "applicability": "not_applicable" },
+    "source": "change_context",
+    "method": "absent",
+    "denominator": "not_applicable",
+    "proof_boundary": "semantic_fidelity",
+    "status": "not_measured"
+  },
+  "operational": {
+    "metrics_opt_in": false,
+    "project_id": "manual-example"
+  },
+  "assumptions": ["Hand-built Path B example; MCP validators were not run"],
+  "confidence": "low",
+  "unsupported_checks": ["mcp_validators_not_run", "fidelity_audit", "binding_analysis"]
+}

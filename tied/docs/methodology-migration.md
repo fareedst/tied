@@ -134,6 +134,19 @@ The quality-assurance records are promoted into the inherited templates by this 
 
 Clients that were refreshed before this promotion should treat the quality records as explicit adoption records and compare their project YAML with the inherited methodology view. Do not duplicate a token into project YAML solely because it is now inherited.
 
+### Evidence-chain profile packaging status
+
+The one-client **evidence chain profile** generator records are promoted into the inherited templates by this methodology release:
+
+- `[REQ-EVIDENCE_CHAIN_PROFILE]`
+- `[ARCH-EVIDENCE_CHAIN_PROFILE]`
+- `[IMPL-EVIDENCE_CHAIN_PROFILE]`
+- `[PROC-EVIDENCE_CHAIN]`
+
+`tied/docs/evidence-chain-profile.md` is now in `DOCS_TO_COPY` (copy-when-missing). A fresh client whose `client-development-index.md` links that guide also receives the guide. Existing client docs stay authoritative until a human compares and merges them.
+
+`[REQ-EVIDENCE_CHAIN_REPORT]`, `[ARCH-EVIDENCE_CHAIN_REPORT]`, and `[IMPL-EVIDENCE_CHAIN_REPORT]` stay **source-repository-only**. Clients generate profiles locally and invoke the TIED-source CLI for batch statistics; they do not inherit aggregator tokens. Refresh still overwrites `tied/methodology/**`, preserves project YAML and client vocab, copies missing `tied/docs/*.md`, and does not silently rewrite an existing `.cursor/mcp.json`. Review the baked MCP binary path separately when the TIED clone moves.
+
 ## Phase 3 — TIED data and pseudo-code compatibility
 
 Preserve the client token graph while adopting the new validation surface:

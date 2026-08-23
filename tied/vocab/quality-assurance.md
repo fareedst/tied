@@ -33,6 +33,12 @@
 | evidence collection | command collection, proof collection | The composition step that executes declared quality commands before building the verification evidence manifest. | `EVIDENCE_COLLECTION` |
 | idempotency key | deduplication key, replay key | A stable event identifier used to prevent duplicate webhook inbox entries. | `IDEMPOTENCY_KEY` |
 | event claim | worker claim, competing claim | An atomic ownership transition that allows one worker to process a due event. | `EVENT_CLAIM` |
+| evidence chain profile | chain completeness report, evidence-chain profile, maturity report (forbidden meaning) | A versioned, read-only artifact (`evidence-chain-profile.v1`) that reports completeness, provenance, denominators, and proof boundaries across vocabulary → REQ → ARCH → IMPL pseudo-code → tests → code → composition → quality evidence → change outcome. It is not an **assurance profile**, not a **read-only research profile**, and not a universal maturity score. | `EVIDENCE_CHAIN_PROFILE` |
+| evidence-chain profile depth | profile depth (alone), integrated depth, human_research depth | Generator selector `integrated` or `human_research` for how much of the chain is measured in one run. Distinct from fidelity **integrated agent profile** / **human research profile** and from **assurance profile**. | `PROFILE_DEPTH` |
+| evidence chain statistics report | multi-client stats report, maturity dashboard (forbidden meaning) | A versioned, read-only batch artifact (`evidence-chain-statistics-report.v1`) produced from already-generated **evidence chain profile** files. It is not an **assurance profile**, not a **verification evidence manifest**, and not a maturity score. | `EVIDENCE_CHAIN_STATISTICS_REPORT` |
+| client cohort | reporting cohort, comparable client set | The set of accepted profile artifacts that share one `compatibility_key` (`schema_version` plus **evidence-chain profile depth**). Incompatible keys are never rolled up together. Distinct from an **assurance profile** pilot cohort. | `CLIENT_COHORT` |
+| report input manifest | batch input list, report-inputs.yaml | The `evidence-chain-report-inputs.v1` document that names profile artifacts, optional **client alias** values, mode, and path-privacy. The aggregator does not discover clients by walking repositories. | `REPORT_INPUT_MANIFEST` |
+| client alias | display name, human client name | Optional human-readable label on a **report input manifest** row. Stable identity remains the profile hashed `project_id`. | `CLIENT_ALIAS` |
 
 ## Profile applicability
 
@@ -77,6 +83,12 @@ Domain terms above are distinct from IMPL grammar keywords such as `INPUT`, `OUT
 | artifact reference | `artifacts` / `ARTIFACT_REFERENCE` | `[PROC-QUALITY_EVIDENCE_PROVENANCE]` |
 | evidence collection | `collectVerificationEvidence` / `EVIDENCE_COLLECTION` | `[IMPL-QUALITY_EVIDENCE_COLLECTION]` |
 | event claim | `claim` / `EVENT_CLAIM` | `[IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK]` |
+| evidence chain profile | `evidence-chain-profile.v1` / `evidence_chain_profile_generate` | `[REQ-EVIDENCE_CHAIN_PROFILE]` |
+| evidence-chain profile depth | `profile_depth` / `PROFILE_DEPTH` | `[ARCH-EVIDENCE_CHAIN_PROFILE]` |
+| evidence chain statistics report | `evidence-chain-statistics-report.v1` / `evidence-chain-report` CLI | `[REQ-EVIDENCE_CHAIN_REPORT]` |
+| client cohort | `compatibility_key` / `CLIENT_COHORT` | `[ARCH-EVIDENCE_CHAIN_REPORT]` |
+| report input manifest | `evidence-chain-report-inputs.v1` / `REPORT_INPUT_MANIFEST` | `[IMPL-EVIDENCE_CHAIN_REPORT]` |
+| client alias | `client_alias` / `CLIENT_ALIAS` | `[REQ-EVIDENCE_CHAIN_REPORT]` |
 | idempotency key | `event_id` / `IDEMPOTENCY_KEY` | `[IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK]` |
 
 ## Alphabetical index
@@ -88,6 +100,12 @@ Domain terms above are distinct from IMPL grammar keywords such as `INPUT`, `OUT
 | artifact reference | Canonical terms |
 | binding row fields | Naming bridge |
 | evidence collection | Canonical terms |
+| evidence chain profile | Canonical terms |
+| evidence-chain profile depth | Canonical terms |
+| evidence chain statistics report | Canonical terms |
+| client cohort | Canonical terms |
+| report input manifest | Canonical terms |
+| client alias | Canonical terms |
 | event claim | Canonical terms |
 | idempotency key | Canonical terms |
 | proof boundary | Canonical terms |

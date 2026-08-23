@@ -1,3 +1,21 @@
+REQ-EVIDENCE_CHAIN_PROFILE:
+  category: "Functional"
+  description: "Produce a versioned read-only evidence-chain-profile.v1 artifact that reports completeness, provenance, denominators, and proof boundaries."
+  detail_file: "requirements/REQ-EVIDENCE_CHAIN_PROFILE.yaml"
+  name: "Evidence chain profile"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+      - "REQ-TIED_FIDELITY_RESEARCH"
+    related_to: []
+    supersedes: []
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-EVIDENCE_CHAIN_PROFILE"
+    implementation:
+      - "IMPL-EVIDENCE_CHAIN_PROFILE"
 REQ-FEEDBACK_TO_TIED:
   category: "Functional"
   detail_file: "null"

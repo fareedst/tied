@@ -1,3 +1,23 @@
+ARCH-EVIDENCE_CHAIN_PROFILE:
+  cross_references:
+    - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    - "REQ-EVIDENCE_CHAIN_PROFILE"
+  decision: "Add a dedicated read-only evidence-chain-profile.v1 schema and depth-gated orchestrator that composes existing fidelity and quality adapters without calling runFirstSlice wholesale."
+  detail_file: "architecture-decisions/ARCH-EVIDENCE_CHAIN_PROFILE.yaml"
+  name: "Evidence chain profile architecture"
+  related_decisions:
+    depends_on:
+      - "ARCH-QUALITY_ASSURANCE_PROFILES"
+      - "ARCH-TIED_FIDELITY_RESEARCH"
+    informs:
+      - "IMPL-EVIDENCE_CHAIN_PROFILE"
+    see_also: []
+  status: "Accepted"
+  traceability:
+    implementation:
+      - "IMPL-EVIDENCE_CHAIN_PROFILE"
+    requirements:
+      - "REQ-EVIDENCE_CHAIN_PROFILE"
 ARCH-FEEDBACK_STORAGE:
   cross_references:
     - "REQ-FEEDBACK_TO_TIED"

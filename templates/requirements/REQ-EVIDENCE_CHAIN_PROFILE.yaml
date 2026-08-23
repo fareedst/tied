@@ -1,0 +1,44 @@
+REQ-EVIDENCE_CHAIN_PROFILE:
+  category: "Functional"
+  description: "Produce a versioned read-only evidence-chain-profile.v1 artifact that reports completeness, provenance, denominators, and proof boundaries across vocabulary, REQ, ARCH, IMPL pseudo-code, tests, code, composition, quality evidence, and change outcome."
+  name: "Evidence chain profile"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Deterministic comparable profiles"
+      - "Explicit proof-boundary partition"
+    problems_solved:
+      - "No unified evidence chain profile exists"
+      - "runFirstSlice always appends findings and promotes cases"
+    why: "One TIED client needs a chain-level completeness report that does not collapse into a maturity score or mutate project intent."
+  related_requirements:
+    depends_on:
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+      - "REQ-TIED_FIDELITY_RESEARCH"
+    related_to: []
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Deterministic MCP or CLI profile at both evidence-chain profile depths integrated and human_research"
+      metric: "Same inputs yield equivalent JSON"
+    - criterion: "Manual Path B schema-valid with generator manual"
+      metric: "assumptions, confidence, and unsupported_checks required"
+    - criterion: "Wrong TIED base path fails closed; generation never mutates project REQ ARCH IMPL"
+      metric: "WrongTiedBasePath and no intent YAML writes"
+    - criterion: "No finding-ledger append or case promotion from the generator"
+      metric: "Orchestrator never calls those adapters"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-EVIDENCE_CHAIN_PROFILE"
+    code_annotations:
+      - "REQ-EVIDENCE_CHAIN_PROFILE"
+    implementation:
+      - "IMPL-EVIDENCE_CHAIN_PROFILE"
+    tests:
+      - "mcp-server/src/fidelity-research/evidence-chain-profile.mcp.test.ts"
+      - "mcp-server/src/fidelity-research/evidence-chain-profile.test.ts"
+  validation_criteria:
+    - coverage: "Normalizer, depth gating, fail-closed base path, manual fixture"
+      method: "Unit and composition tests"
+    - coverage: "REQ ARCH IMPL token comments"
+      method: "tied_validate_consistency"

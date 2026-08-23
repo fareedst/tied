@@ -382,6 +382,7 @@ steps:
       - "Stop expanding when no new IMPLs share code paths, REQ/ARCH tokens, or composed_with links with the current set."
       - "Touchpoint 2 (pre-read): CALL sub-vocabulary-sync (PRELOAD) scoped to modules and concepts from change-definition — load glossaries under ./tied/vocab/ (VOCAB_INDEX) for affected subsystems so subsequent IMPL/code reads interpret symbols and paths with canonical names; produce or extend the term map before any discovery reads."
       - "Traceability vs workspace: TIED code_locations document where an IMPL is anchored; they do not require every listed path to exist in this checkout. Paths absent here (other layouts, methodology-only tooling, unrelated inherited IMPLs): note as N/A or out of scope for this pass; do not treat as missing implementation or block the checklist."
+      - "When an evidence chain profile is in scope, declare profile scope, roots, denominators, selected evidence dimensions, and the default evidence-chain profile depth (integrated or human_research). Keep profile_depth distinct from inquiry research_profile and from assurance profiles ([PROC-EVIDENCE_CHAIN])."
     title: "Blast radius, tied_context, IMPL inventory (Phase A)"
     tracking:
       consideration_before_proceeding: "Impact map complete; vocabulary term map loaded (PRELOAD) for affected subsystems; IMPL inventory table built (declared vs in-scope verified paths distinguished; discovery-only); expansion stopped per criteria."
@@ -697,6 +698,7 @@ steps:
       - "For strict-candidate or strict-approved inquiry, record negative controls, bounded execution, explicit proof boundaries, deterministic scope, waiver owner/expiry, and the human approval requirement."
       - "List risks with severity, likelihood, quality attribute, and selected profile."
       - "Record accepted residual risk only with accountable owner and expiry; record N/A rows with rationale rather than silently omitting them."
+      - "Record the selected assurance profile, proof boundaries, and which evidence-chain edges are in scope. Keep inquiry research_profile separate from evidence-chain profile depth."
       - "Select and document the adversarial depth tier (minimal | integrated | strict_candidate) and, when blocking is desired later, list every strict-eligibility prerequisite with owner."
       - "Where applicable, attach tied_token_references to each risk (which REQ/ARCH/IMPL the risk affects)."
     title: "Risks, mitigations, token references"
@@ -965,6 +967,7 @@ steps:
           target: "resolve-pseudocode"
       calls:
         - "sub-adversarial-inquiry-pass"
+        - "sub-evidence-chain-profile"
         - "sub-pseudocode-validation-pass"
         - "sub-vocabulary-sync"
         - "sub-yaml-edit-loop"
@@ -993,6 +996,7 @@ steps:
       - "The executable-evidence partition of the fidelity matrix must cite command provenance (command, revision, environment, result) from evidence-provenance.json, not a bare pass/fail flag."
       - "Update IMPL detail metadata (traceability.tests, code_locations, metadata.last_updated) via tied-cli.sh yaml_detail_update on ./tied/implementation-decisions/IMPL-{TOKEN}.yaml; CALL sub-yaml-edit-loop on each changed absolute path."
       - "Update vocab after writing tests/code: CALL sub-vocabulary-sync (RECORD) to reconcile ./tied/vocab/*.md with all terms, symbols, and storage names in the final tests and code; verify each named concept resolves to exactly one preferred term and the alphabetical index is current ([PROC-VOCABULARY_INDEX]). Final VALIDATE gate is at traceable-commit (Touchpoint 3)."
+      - "When an evidence chain profile is in scope, CALL sub-evidence-chain-profile at the tested revision after validators, tests, lint, and consistency. Write only under working/evidence-chain/."
     title: "Full suite, lint, token validation, audit, metadata (Phase I)"
     tracking:
       consideration_before_proceeding: "Full suite and lint pass; post-test sub-pseudocode-validation-pass complete; token validation ok; three-way audit done; IMPL metadata updated; module validation documented; canonical vocabulary reconciled (RECORD) with final tests/code."
@@ -1023,6 +1027,7 @@ steps:
     slug: "sync-tied-stack"
     tasks:
       - "CALL sub-yaml-edit-loop on every changed TIED YAML file."
+      - "If a profile was generated, ensure it references current token metadata; do not store generated evidence-chain output as REQ/ARCH/IMPL intent."
       - "If REQ/ARCH/IMPL status, traceability.tests, or other TIED fields changed in this pass such that they would desync a session preload (status lines, test file paths, implementation_contract hints), re-check tied/agent-preload-contract.yaml and update only as needed; do not duplicate the full author-architecture or persist-implementation-records rewrite if nothing material changed."
       - "Keep observed inquiry findings outside canonical TIED YAML; route confirmed findings to existing owners (author-requirement, author-architecture, resolve-pseudocode, unit-test-red, composition-integration, or test-strategy) and never trigger LEAP from observation alone."
       - "Run .cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency '{}' — must report ok true."
@@ -1081,6 +1086,7 @@ steps:
     tasks:
       - "CALL sub-yaml-edit-loop on the record file."
       - "For adversarial inquiry checklist integration, persist a distinct follow-up CITDP and keep any earlier completed CITDP evidence unchanged; include reviewer, approved scope, thresholds, waiver owner/expiry, rollback criteria, and approval revision before strict blocking."
+      - "Optional: set evidence.profile_reference to the caller-selected evidence-chain-profile.v1 path. Do not copy the profile body into project YAML."
       - "Populate CITDP YAML record: start from ./tied/docs/citdp-record-template.yaml (copy methodology layout); fill record identity; change definition (from change-definition); impact analysis (from impact-discovery); risk analysis (from risk-assessment); test strategy (from test-strategy); TDD sequence (from unit-test-red through end-to-end-ui); completion criteria (from verification-gate); LEAP feedback (divergences_from_analysis, tied_stack_updates_required, record_status)."
       - "Store as tied/citdp/CITDP-{change_request_id}.yaml. Must be the client project root—same repository as the project tied/ tree for this implementation. Do not persist CITDP only under a separate checkout of the TIED methodology repository when the client is another project; optional mirrors elsewhere are policy-specific and do not replace this path. Project-defined absolute path outside tied/ only when policy explicitly requires."
       - "Validate with lint_yaml on that absolute CITDP path (per [PROC-YAML_EDIT_LOOP] in processes.md; raw multi-argument `yq` merges documents—do not use that). CITDP files are outside the standard TIED index/detail paths unless project policy adds tooling for them."
@@ -1115,6 +1121,7 @@ steps:
       - "Include evidence provenance, open (unresolved) finding count, active waivers, and the proof-boundary partition in the commit body or an explicit CITDP cross-reference; this is part of the Touchpoint 3 VALIDATE gate, not optional prose."
       - "Stage relevant files. Commit."
       - "Touchpoint 3 (pre-commit): CALL sub-vocabulary-sync (VALIDATE) — audit all files changed this pass: TIED record name fields and token suffixes in semantic-tokens.yaml, UPPER_SNAKE block names in essence_pseudocode, test/code identifiers, README/CHANGELOG/UI terms; each must resolve to exactly one preferred term in ./tied/vocab/*.md with naming bridges and alphabetical index current; do not stage or commit until VALIDATE passes or immature-client deferral is explicitly noted in the per-request checklist copy."
+      - "When a profile is in scope: validate provenance, open findings, waivers, and missing-data disclosures (not_measured / unknown) against the profile artifact."
       - "Write commit message per [PROC-COMMIT_MESSAGES]: header <type>(<scope>): <subject> (≤50 chars); type feat|fix|docs|refactor|test|build|ci|chore|perf|style; scope area affected; subject imperative present tense; body motivation/behavior; footer Closes/Fixes #issue and REQ/ARCH/IMPL tokens touched."
     title: "Commit per PROC-COMMIT_MESSAGES; no push unless asked"
     tracking:
@@ -1268,6 +1275,31 @@ sub_procedures:
     title: "Resolve, preload, record, and validate domain vocabulary index terms"
     tracking:
       consideration_before_proceeding: "Caller mode satisfied (RESOLVE/PRELOAD/RECORD/VALIDATE); immature-client deferral noted when tied/vocab is absent; RETURN to caller."
+      retry_count: "0"
+      state_history: []
+      status: "pending"
+  - flow:
+      return_to: "caller"
+    goals: "Run GENERATE_EVIDENCE_CHAIN_PROFILE at an explicit evidence-chain profile depth."
+    invoked_by:
+      - "persist-citdp-record"
+      - "traceable-commit"
+      - "verification-gate"
+    outcomes: "evidence-chain-profile.v1 on disk or stdout; project intent unchanged."
+    preconditions:
+      - "Confirmed TIED base path for the client under change."
+    references:
+      - "tied/docs/evidence-chain-profile.md"
+      - "tied/docs/processes.md § [PROC-EVIDENCE_CHAIN]"
+    slug: "sub-evidence-chain-profile"
+    tasks:
+      - "CALL evidence_chain_profile_generate or Path B manual normalize. Fail closed on WrongTiedBasePath."
+      - "Do not append findings, promote cases, or write project YAML."
+      - "PRELOAD tied/vocab/quality-assurance.md; RESOLVE evidence chain profile vs assurance profile vs research profile."
+      - "RETURN the profile path and proof-boundary partition. Optional CITDP evidence.profile_reference."
+    title: "Generate a read-only evidence chain profile"
+    tracking:
+      consideration_before_proceeding: "Profile written only under working/evidence-chain or stdout; project intent unchanged."
       retry_count: "0"
       state_history: []
       status: "pending"

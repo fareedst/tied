@@ -193,6 +193,67 @@ REQ-CONFIG_DISCOVERY_LOCAL_LAYER:
       method: "TIED consistency"
     - coverage: "Conformance targets the adopting product that implements multi-file YAML config merge (e.g. backup config). tools/agentstream config.ParseAndResolve (IMPL-GOAGENT-CLI-CMD) is CLI flags plus default file discovery only unless explicitly extended; it is not the sole conformance surface for this REQ."
       method: "Product scope note"
+REQ-EVIDENCE_CHAIN_PROFILE:
+  category: "Functional"
+  detail_file: "requirements/REQ-EVIDENCE_CHAIN_PROFILE.yaml"
+  name: "Evidence chain profile"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Comparable profiles when schema and denominators match"
+      - "No false runtime or maturity claims"
+    problems_solved:
+      - "Structural evidence can be mistaken for runtime correctness"
+      - "Validators exist separately without a chain-level artifact"
+    why: "One TIED client needs a versioned read-only completeness report with provenance, denominators, and proof boundaries across the evidence chain."
+  related_requirements:
+    depends_on:
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+      - "REQ-TIED_FIDELITY_RESEARCH"
+    related_to:
+      - "REQ-EVIDENCE_CHAIN_REPORT"
+      - "REQ-MCP_USAGE_METRICS"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Deterministic MCP or CLI profile at both evidence-chain profile depths"
+      metric: "Same inputs produce equivalent evidence-chain-profile.v1 JSON"
+    - criterion: "Wrong TIED base path fails closed"
+      metric: "WrongTiedBasePath with no project YAML writes"
+    - criterion: "Every ratio has denominator and scope; missing evidence is not_measured or unknown"
+      metric: "Normalizer rejects silent zeros and maturity fields"
+  status: "Implemented"
+REQ-EVIDENCE_CHAIN_REPORT:
+  category: "Functional"
+  detail_file: "requirements/REQ-EVIDENCE_CHAIN_REPORT.yaml"
+  name: "Evidence chain statistics report"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Explicit cohorts, statuses, and path privacy"
+      - "Read-only TIED-side batch report"
+    problems_solved:
+      - "Incompatible depths and denominators must not be mixed into one rollup"
+      - "Profile generation is one-client and explicitly excludes cross-project aggregation"
+    why: "Operators need deterministic multi-client statistics from already-generated evidence-chain-profile.v1 artifacts without collapsing proof boundaries or inventing a maturity score."
+  related_requirements:
+    depends_on:
+      - "REQ-EVIDENCE_CHAIN_PROFILE"
+    related_to:
+      - "REQ-MCP_USAGE_METRICS"
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Offline CLI consumes a report input manifest and emits byte-stable YAML plus Markdown"
+      metric: "Same inputs and clock yield identical report.yaml and report.md"
+    - criterion: "Incompatible schema_version or profile_depth partitions into separate client cohorts"
+      metric: "No cross-cohort numeric rollup"
+    - criterion: "Missing evidence stays observed, not_measured, unknown, or not_applicable"
+      metric: "Never converted to zero"
+    - criterion: "Forbidden maturity and score fields are rejected"
+      metric: "MalformedProfile on those keys"
+    - criterion: "Aggregator never reads or mutates client repositories or project YAML"
+      metric: "Only explicit profile artifacts and the caller-selected report directory"
+  status: "Implemented"
 REQ-FEAT_ADOPTION_GUIDANCE:
   category: "Functional"
   cross_references:

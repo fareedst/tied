@@ -1,0 +1,13 @@
+schema_version: evidence-chain-report-inputs.v1
+mode: strict
+include_absolute_paths: false
+inputs:
+  - profile_path: example-profile.json
+    client_alias: example-manual
+    notes: Path B fixture
+  - profile_path: stdd-integrated.json
+    client_alias: stdd
+    notes: integrated depth fixture
+  - profile_path: stdd-human_research.json
+    client_alias: stdd-human
+    notes: human_research depth fixture; separate client cohort from integrated

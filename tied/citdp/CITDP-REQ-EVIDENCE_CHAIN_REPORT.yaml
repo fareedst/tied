@@ -1,0 +1,125 @@
+CITDP-REQ-EVIDENCE_CHAIN_REPORT:
+  change_definition:
+    current_behavior: "Clients can generate evidence-chain-profile.v1; [REQ-EVIDENCE_CHAIN_PROFILE] lists cross-project cohort aggregation as a non-goal and no TIED-side batch report exists."
+    desired_behavior: "A TIED-source offline CLI reads an evidence-chain-report-inputs.v1 manifest and already-generated profile artifacts, partitions client cohorts by schema_version and profile_depth, and writes evidence-chain-statistics-report.v1 YAML plus a deterministic Markdown projection."
+    non_goals:
+      - "Generate or regenerate evidence-chain-profile.v1"
+      - "Promote [REQ-EVIDENCE_CHAIN_REPORT] into templates/"
+      - "Read or mutate client repositories, project YAML, finding ledgers, or case reports"
+      - "Sum or average derived-field values in v1"
+      - "Treat TIED_MCP_COLLECT_METRICS as evidence-chain results"
+      - "Universal maturity score or cross-cohort numeric rollup"
+    success_criteria:
+      - "Byte-stable YAML and Markdown for fixed inputs and clock"
+      - "Forbidden maturity and score fields reject the artifact"
+      - "Incompatible depths remain separate client cohorts"
+      - "Missing evidence is never coerced to zero"
+      - "strict mode writes no outputs when any input is rejected"
+    unchanged_behavior: "Profile generation, fidelity first-slice, quality manifests, and opt-in usage metrics remain independent."
+  completion_criteria:
+    verification_gate_notes: "Unit, CLI composition, and bootstrap tests passed; tied_verify set REQ-EVIDENCE_CHAIN_REPORT Implemented and IMPL-EVIDENCE_CHAIN_REPORT Active. CHANGELOG updated after green tests."
+  evidence:
+    commands:
+      - "node --test dist/e2e/bootstrap-and-load.test.js"
+      - "node --test dist/fidelity-research/evidence-chain-report.test.js dist/fidelity-research/evidence-chain-report.cli.test.js dist/fidelity-research/evidence-chain-profile.test.js"
+      - "npx tsc -b --pretty false"
+      - "ruby scripts/validate_vocab_index.rb ."
+      - "tied-cli.sh pseudocode_validate IMPL-EVIDENCE_CHAIN_REPORT"
+      - "tied-cli.sh tied_validate_consistency"
+      - "tied-cli.sh tied_verify REQ-EVIDENCE_CHAIN_REPORT IMPL-EVIDENCE_CHAIN_REPORT"
+    manifest_reference: "working/evidence-chain/example-report-inputs.yaml"
+    profile_reference: "working/evidence-chain/example-profile.json; working/evidence-chain/stdd-integrated.json; working/evidence-chain/stdd-human_research.json"
+    proof_boundaries:
+      - "executable_behavior"
+      - "human_decision"
+      - "pseudo_code_structure"
+      - "traceability_structure"
+  impact_analysis:
+    impl_inventory_notes: "evidence-chain-report.ts and mcp-server/src/cli/evidence-chain-report.ts. Reuses normalizeEvidenceChainProfile only. Does not call generateEvidenceChainProfile, runFirstSlice, or live client-root walk."
+    modules_or_boundaries: "mcp-server/src/fidelity-research/evidence-chain-report.ts; mcp-server/src/cli/evidence-chain-report.ts; copy_files.sh DOCS_TO_COPY; templates PROFILE promotion; tied/docs/evidence-chain-profile.md report section"
+    tied_tokens_affected:
+      - "ARCH-EVIDENCE_CHAIN_PROFILE"
+      - "IMPL-EVIDENCE_CHAIN_PROFILE"
+      - "PROC-EVIDENCE_CHAIN"
+      - "REQ-EVIDENCE_CHAIN_PROFILE"
+    tied_tokens_new:
+      - "ARCH-EVIDENCE_CHAIN_REPORT"
+      - "IMPL-EVIDENCE_CHAIN_REPORT"
+      - "REQ-EVIDENCE_CHAIN_REPORT"
+  leap_feedback:
+    divergences_from_analysis: "Template copies of PROFILE records omit REPORT token cross-references so inherited methodology does not dangle. No locked contract change."
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "REQ-EVIDENCE_CHAIN_REPORT"
+    recorded_at: "2026-08-22"
+    title: "Multi-client evidence-chain statistics report"
+  risk_analysis:
+    abuse_cases:
+      - "malformed-oversized-input"
+      - "path-traversal-file-access"
+      - "secret-sensitive-data"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      depth_tier: "minimal"
+      gate_policy: "advisory"
+      rationale: "Read-only artifact aggregator; main abuse cases are path traversal, leaking absolute client paths, and malformed JSON."
+      research_profile: "integrated-agent"
+      strict_eligibility_prerequisites: []
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "mcp-server evidence-chain-report unit and CLI tests"
+        evidence_method: "TDD unit plus CLI composition"
+        limitation: "Does not prove live multi-org operations."
+        owner: "TIED maintainers"
+        rationale: "New CLI behavior must be tested before code."
+        result: "observed"
+        risk: "Incorrect ranking or silent zeros"
+        threshold: "All named contract tests pass"
+        waiver:
+          expiry: "~"
+          owner: "~"
+          reason: "~"
+          required: "false"
+      - applicability: "applicable"
+        attribute: "external-input-security"
+        command_or_test: "Malformed profile, forbidden fields, path-privacy, forbidden output path tests"
+        evidence_method: "Unit tests for abuse cases"
+        limitation: "Does not claim complete filesystem sandboxing of Node."
+        owner: "TIED maintainers"
+        rationale: "CLI reads caller-supplied file paths."
+        result: "observed"
+        risk: "Path traversal or absolute-path leak"
+        threshold: "Rejected unsafe outputs; default artifact_ref is basename"
+        waiver:
+          expiry: "~"
+          owner: "~"
+          reason: "~"
+          required: "false"
+    quality_profiles:
+      - "baseline-functional"
+      - "external-input-security"
+    residual_risk:
+      expiry: "2026-11-22"
+      owner: "TIED maintainers"
+      summary: "v1 count-only aggregation cannot detect semantic denominator-unit drift when two profiles reuse the same field path with different informal units. Absolute paths may appear if include_absolute_paths is requested. Live MCP/tool metrics are not evidence-chain results."
+    risks:
+      - "Converting not_measured to zero"
+      - "Emitting a maturity score"
+      - "Leaking absolute client paths by default"
+      - "Mixing incompatible profile_depth values into one statistic"
+      - "Traversing client repos instead of explicit artifacts"
+      - "Treating usage metrics as chain evidence"
+    scenarios:
+      - "Duplicate identity key"
+      - "integrated and human_research together"
+      - "Malformed and forbidden-field artifacts"
+      - "One valid profile"
+      - "strict versus partial modes"
+      - "Two compatible profiles"
+  tdd_sequence:
+    summary: "RED unit tests for validator, partition, aggregation, renderer, then CLI composition; bootstrap for copied guide and inherited PROFILE tokens. No E2E-only path."
+  test_strategy:
+    matrix_notes: "Unit: one client, many clients, input-order determinism, incompatible cohorts, missing evidence, malformed profiles, duplicates, forbidden score fields, path privacy, proof-boundary preservation, strict writes nothing. CLI: YAML/Markdown agree, exit 2 strict, exit 1 empty partial. Bootstrap: copied guide present; inherited PROFILE tokens; do not require inherited report tokens. Reuse working/evidence-chain fixtures."
+    summary: "TDD against IMPL-EVIDENCE_CHAIN_REPORT sidecar; composition tests for CLI only; no browser E2E."

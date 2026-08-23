@@ -1,0 +1,214 @@
+{
+  "identity": {
+    "schema_version": "evidence-chain-profile.v1",
+    "project_id": "cfd5bf6ad98024eb",
+    "generator": "mcp",
+    "generator_version": "1.0.0",
+    "observed_at": "2026-08-22T00:00:00.000Z",
+    "commit": "local-working-tree",
+    "tied_methodology_version": "3.0.0",
+    "tied_base_path_confirmed": true
+  },
+  "scope": {
+    "roots_used": [
+      "/Users/fareed/Documents/dev/chatgpt/stdd"
+    ],
+    "ignore_source": "default",
+    "config_hash": "721978b4a202582a",
+    "languages": [
+      "typescript"
+    ],
+    "file_counts": {
+      "source": 0,
+      "tests": 0,
+      "docs": 0
+    },
+    "active_populations": {
+      "requirements": 1,
+      "architecture": 0,
+      "implementation": 1
+    },
+    "excluded": [
+      "fixtures",
+      "methodology",
+      "templates"
+    ],
+    "unknown": [],
+    "not_measured": [
+      "block_level_impl_test_matrix",
+      "vocabulary_drift_automation"
+    ],
+    "not_applicable": [],
+    "profile_depth": "human_research"
+  },
+  "evidence_chain": {
+    "structural": [
+      {
+        "value": {
+          "validator": "binding_inventory_validate",
+          "ok": true
+        },
+        "source": "binding_inventory_validate",
+        "method": "RUN_STRUCTURAL_ANALYSIS",
+        "denominator": 3,
+        "proof_boundary": "traceability_structure",
+        "status": "observed"
+      },
+      {
+        "value": {
+          "validator": "pseudocode_validate",
+          "ok": true
+        },
+        "source": "pseudocode_validate",
+        "method": "RUN_STRUCTURAL_ANALYSIS",
+        "denominator": 3,
+        "proof_boundary": "pseudo_code_structure",
+        "status": "observed"
+      },
+      {
+        "value": {
+          "validator": "pseudocode_validate",
+          "ok": true
+        },
+        "source": "pseudocode_validate",
+        "method": "RUN_STRUCTURAL_ANALYSIS",
+        "denominator": 3,
+        "proof_boundary": "pseudo_code_structure",
+        "status": "observed"
+      },
+      {
+        "value": {
+          "validator": "pseudocode_validate",
+          "ok": true
+        },
+        "source": "pseudocode_validate",
+        "method": "RUN_STRUCTURAL_ANALYSIS",
+        "denominator": 3,
+        "proof_boundary": "pseudo_code_structure",
+        "status": "observed"
+      },
+      {
+        "value": {
+          "validator": "test_adequacy_validate",
+          "ok": true
+        },
+        "source": "test_adequacy_validate",
+        "method": "RUN_STRUCTURAL_ANALYSIS",
+        "denominator": 3,
+        "proof_boundary": "traceability_structure",
+        "status": "observed"
+      },
+      {
+        "value": {
+          "validator": "tied_cycles",
+          "ok": true
+        },
+        "source": "tied_cycles",
+        "method": "RUN_STRUCTURAL_ANALYSIS",
+        "denominator": 3,
+        "proof_boundary": "traceability_structure",
+        "status": "observed"
+      },
+      {
+        "value": {
+          "validator": "tied_validate_consistency",
+          "ok": true
+        },
+        "source": "tied_validate_consistency",
+        "method": "RUN_STRUCTURAL_ANALYSIS",
+        "denominator": 3,
+        "proof_boundary": "traceability_structure",
+        "status": "observed"
+      },
+      {
+        "value": {
+          "validator": "traceability_gap_report",
+          "ok": true
+        },
+        "source": "traceability_gap_report",
+        "method": "RUN_STRUCTURAL_ANALYSIS",
+        "denominator": 3,
+        "proof_boundary": "traceability_structure",
+        "status": "observed"
+      }
+    ],
+    "graph": {
+      "value": {
+        "nodes": 3,
+        "edges": 0,
+        "cycles": 0
+      },
+      "source": "tied_cycles",
+      "method": "structural_placeholder",
+      "denominator": 3,
+      "proof_boundary": "traceability_structure",
+      "status": "not_measured"
+    },
+    "vocab_resolution": {
+      "value": "presence_linkage_only",
+      "source": "tied/vocab",
+      "method": "registry_presence",
+      "denominator": 1,
+      "proof_boundary": "traceability_structure",
+      "status": "observed"
+    }
+  },
+  "quality": {
+    "applicable_attributes": [
+      "baseline-functional",
+      "external-input-security"
+    ],
+    "command_results": {
+      "value": {
+        "status": "not_measured"
+      },
+      "source": "quality_commands",
+      "method": "absent",
+      "denominator": "not_measured",
+      "proof_boundary": "executable_behavior",
+      "status": "not_measured"
+    },
+    "freshness": {
+      "value": "2026-08-22T00:00:00.000Z",
+      "source": "run_metadata",
+      "method": "observed_at",
+      "denominator": 1,
+      "proof_boundary": "human_decision",
+      "status": "observed"
+    },
+    "proof_boundary_partition": {
+      "traceability_structure": [
+        "COLLECT_STRUCTURAL_CHAIN"
+      ],
+      "pseudo_code_structure": [
+        "COLLECT_STRUCTURAL_CHAIN"
+      ],
+      "semantic_fidelity": [
+        "COLLECT_HUMAN_RESEARCH_CHAIN"
+      ],
+      "executable_behavior": [],
+      "human_decision": [
+        "manual_path_or_residual_risk"
+      ]
+    }
+  },
+  "change_fidelity": {
+    "value": {
+      "status": "not_measured",
+      "applicability": "not_applicable"
+    },
+    "source": "change_context",
+    "method": "absent",
+    "denominator": "not_applicable",
+    "proof_boundary": "semantic_fidelity",
+    "status": "not_measured"
+  },
+  "operational": {
+    "metrics_opt_in": false,
+    "project_id": "cfd5bf6ad98024eb",
+    "run_id": "stdd-human_research",
+    "profile_depth": "human_research",
+    "scope_hash": "b2947be13e0d63e7",
+    "commit": "local-working-tree"
+  }
+}

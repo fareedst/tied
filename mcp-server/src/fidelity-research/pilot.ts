@@ -29,6 +29,10 @@ import {
 } from "./structural-analysis.js";
 import { verifyDeterministicRerun } from "./deterministic-rerun.js";
 import { runFirstSlice, type FirstSliceAdapters } from "./first-slice.js";
+import {
+  createEvidenceChainProfileAdapters,
+  type EvidenceChainProfileAdapters,
+} from "./evidence-chain-profile.js";
 
 export interface FidelityResearchPilotInput {
   manifest: ProjectManifestInput;
@@ -89,6 +93,9 @@ export type FidelityResearchPilotResultOrFailure =
 function failure(stage: string, error: string): PilotFailure {
   return { ok: false, stage, error };
 }
+
+export { createEvidenceChainProfileAdapters };
+export type { EvidenceChainProfileAdapters };
 
 function stageValue<T>(value: unknown): T {
   return value as T;

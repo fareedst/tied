@@ -1,0 +1,86 @@
+CITDP-REQ-EVIDENCE_CHAIN_PROFILE:
+  change_definition:
+    current_behavior: "Validators and fidelity modules existed separately; no evidence_chain symbol or unified profile artifact."
+    desired_behavior: "A read-only MCP/CLI generator produces evidence-chain-profile.v1 at integrated and human_research profile depths without mutating project YAML or calling runFirstSlice wholesale."
+    non_goals:
+      - "Automatic REQ ARCH IMPL mutation"
+      - "Block-level IMPL to test matrices"
+      - "Cross-project cohort aggregation"
+      - "Finding-ledger append or case promotion from the generator"
+      - "Universal maturity score"
+    success_criteria:
+      - "Deterministic profiles at both depths"
+      - "Every ratio has a denominator"
+      - "Schema-valid generator manual Path B"
+      - "WrongTiedBasePath fail-closed"
+    unchanged_behavior: "Existing fidelity, quality, and inquiry tools remain independently callable. Usage metrics stay opt-in."
+  completion_criteria:
+    pseudocode_validate: "ok: true; Layer B structural pseudo-code shape, token linkage, and dependency diagnostics passed for IMPL-EVIDENCE_CHAIN_PROFILE."
+    tied_validate_consistency: "ok: true; index, detail, traceability, and pseudo-code token-comment checks passed."
+    verification_gate_notes: "317 MCP tests passed via npm test --prefix mcp-server, including evidence-chain unit and MCP composition tests; TypeScript build passed; tied_verify set REQ-EVIDENCE_CHAIN_PROFILE to Implemented and IMPL-EVIDENCE_CHAIN_PROFILE to Active."
+    vocabulary_validate: "ruby scripts/validate_vocab_index.rb passed."
+    yaml_index_validate: "requirements, architecture, implementation, and semantic-tokens all valid."
+    yaml_lint: "scripts/yaml_tool.sh --check passed for the canonical CITDP and changed project YAML files."
+  evidence:
+    commands:
+      - "node --test mcp-server/dist/fidelity-research/evidence-chain-profile.test.js mcp-server/dist/fidelity-research/evidence-chain-profile.mcp.test.js mcp-server/dist/usage-metrics.test.js — 25 tests passed, 0 failed"
+      - "npm run build --prefix mcp-server — passed"
+      - "npm test --prefix mcp-server — 317 tests passed, 0 failed"
+      - "pseudocode_validate IMPL-EVIDENCE_CHAIN_PROFILE — ok: true"
+      - "tied_verify REQ-EVIDENCE_CHAIN_PROFILE / IMPL-EVIDENCE_CHAIN_PROFILE — ok: true"
+      - "yaml_index_validate — requirements, architecture, implementation, semantic-tokens valid"
+    manifest_reference: "working/evidence-chain/stdd-integrated.json"
+    profile_reference: "working/evidence-chain/stdd-integrated.json; working/evidence-chain/stdd-human_research.json"
+    proof_boundaries:
+      - "executable_behavior"
+      - "human_decision"
+      - "pseudo_code_structure"
+      - "semantic_fidelity"
+      - "traceability_structure"
+  impact_analysis:
+    impl_inventory_notes: "New evidence-chain-profile.ts orchestrator composes resolveProjectManifest, runStructuralAnalysis, auditImplFidelity, analyzeBindingEvidence, analyzeSpecificationState. Does not call runFirstSlice or runFidelityResearchPilot."
+    modules_or_boundaries: "mcp-server/src/fidelity-research/evidence-chain-profile.ts; mcp-server/src/tools/index.ts; usage-metrics.ts"
+    tied_tokens_affected:
+      - "IMPL-MCP_USAGE_METRICS"
+      - "IMPL-QUALITY_EVIDENCE_MANIFEST"
+      - "IMPL-TIED_FIDELITY_RESEARCH"
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+      - "REQ-TIED_FIDELITY_RESEARCH"
+    tied_tokens_new:
+      - "ARCH-EVIDENCE_CHAIN_PROFILE"
+      - "IMPL-EVIDENCE_CHAIN_PROFILE"
+      - "PROC-EVIDENCE_CHAIN"
+      - "REQ-EVIDENCE_CHAIN_PROFILE"
+  leap_feedback:
+    divergences_from_analysis: "none; staged implementation, tests, documentation, and TIED records remain aligned with the approved IMPL pseudo-code."
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "REQ-EVIDENCE_CHAIN_PROFILE"
+    recorded_at: "2026-08-22"
+    title: "Evidence chain profile"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      depth_tier: "minimal"
+      gate_policy: "advisory"
+      rationale: "Read-only generator; path and TIED base path are the main abuse cases."
+      research_profile: "integrated-agent"
+      strict_eligibility_prerequisites: []
+    quality_profiles:
+      - "baseline-functional"
+      - "external-input-security"
+    residual_risk:
+      expiry: "2026-11-22"
+      owner: "TIED maintainers"
+      summary: "Live MCP structural validators are optional inputs; profiles may mark graph cycles not_measured."
+    risks:
+      - "Calling runFirstSlice would append findings and promote cases"
+      - "Missing change_context treated as failure"
+      - "Silent zeros instead of not_measured"
+      - "Wrong TIED base path analyzing another repo"
+  tdd_sequence:
+    summary: "Phase 1 normalize and tokens; Phase 2 generate and MCP composition; Phase 3 docs/skill/checklist; Phase 4 stdd pilots at both depths."
+  test_strategy:
+    matrix_notes: "Unit: normalize, manual fixture, depth gating, fail-closed, forbidden output, deterministic rerun. Composition: MCP handler. No E2E-only path."
+    summary: "TDD as specified in the refined linked plan; full MCP suite and focused profile tests passed."

@@ -168,6 +168,13 @@ Re-read after critical writes; on older server builds, merge client-side per `do
 | Backlog views | `tied_backlog` | `view`: `order`, `quick-wins`, `blockers`, or `critical` |
 | Scoped analysis | `tied_scoped_analysis_run` | `mode`: `walk_summary`, `token_scan`, `gap_report`, `impact_preview`, `traceability_gap_report` |
 | Git diff impact | `tied_plumb_diff_impact_preview` | optional `selection`: `staged`, `unstaged`, or `both` |
+| Evidence chain profile | `evidence_chain_profile_generate` | `profile_depth` (`integrated` \| `human_research`); optional `project_root`, `tied_base_path`, `scope`, `change_context`, `output_path`. Read-only. See `tied/docs/evidence-chain-profile.md`. |
+
+```bash
+TIED_BASE_PATH=/absolute/client/tied \
+  .cursor/skills/tied-yaml/scripts/tied-cli.sh \
+  evidence_chain_profile_generate @profile-args.json > working/evidence-chain/profile.json
+```
 
 ### Status from test results
 

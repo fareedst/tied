@@ -1,3 +1,16 @@
+ARCH-EVIDENCE_CHAIN_PROFILE:
+  cross_references:
+    - "IMPL-EVIDENCE_CHAIN_PROFILE"
+    - "REQ-EVIDENCE_CHAIN_PROFILE"
+  description: "Schema, proof-boundary model, and artifact boundary for evidence-chain-profile.v1"
+  detail_file: "architecture-decisions/ARCH-EVIDENCE_CHAIN_PROFILE.yaml"
+  metadata:
+    last_updated: "2026-08-22"
+    registered: "2026-08-22"
+  name: "Evidence chain profile architecture"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 ARCH-FEEDBACK_STORAGE:
   cross_references:
     - "IMPL-MCP_FEEDBACK_TOOLS"
@@ -77,6 +90,20 @@ ARCH-TIED_STRUCTURE:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+IMPL-EVIDENCE_CHAIN_PROFILE:
+  cross_references:
+    - "ARCH-EVIDENCE_CHAIN_PROFILE"
+    - "PROC-EVIDENCE_CHAIN"
+    - "REQ-EVIDENCE_CHAIN_PROFILE"
+  description: "Depth-gated generator and normalizer for evidence-chain-profile.v1"
+  detail_file: "implementation-decisions/IMPL-EVIDENCE_CHAIN_PROFILE.yaml"
+  metadata:
+    last_updated: "2026-08-22"
+    registered: "2026-08-22"
+  name: "Evidence chain profile orchestrator"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
 IMPL-MCP_FEEDBACK_TOOLS:
   cross_references:
     - "ARCH-FEEDBACK_STORAGE"
@@ -289,6 +316,21 @@ PROC-COMMIT_MESSAGES:
   source_index: "processes.md"
   status: "Active"
   type: "PROC"
+PROC-EVIDENCE_CHAIN:
+  cross_references:
+    - "ARCH-EVIDENCE_CHAIN_PROFILE"
+    - "IMPL-EVIDENCE_CHAIN_PROFILE"
+    - "PROC-QUALITY_EVIDENCE_PROVENANCE"
+    - "REQ-EVIDENCE_CHAIN_PROFILE"
+  description: "Collection points for evidence-chain-profile.v1"
+  detail_file: "null"
+  metadata:
+    last_updated: "2026-08-22"
+    registered: "2026-08-22"
+  name: "Evidence chain profile collection"
+  source_index: "processes.md"
+  status: "Active"
+  type: "PROC"
 PROC-IMPL_PSEUDOCODE_TOKENS:
   cross_references:
     - "PROC-TIED_DEV_CYCLE"
@@ -458,6 +500,21 @@ PROC-YAML_DB_OPERATIONS:
   source_index: "processes.md"
   status: "Active"
   type: "PROC"
+REQ-EVIDENCE_CHAIN_PROFILE:
+  category: "Functional"
+  cross_references:
+    - "ARCH-EVIDENCE_CHAIN_PROFILE"
+    - "IMPL-EVIDENCE_CHAIN_PROFILE"
+    - "PROC-EVIDENCE_CHAIN"
+  description: "Versioned read-only evidence-chain-profile.v1 completeness and provenance report"
+  detail_file: "requirements/REQ-EVIDENCE_CHAIN_PROFILE.yaml"
+  metadata:
+    last_updated: "2026-08-22"
+    registered: "2026-08-22"
+  name: "Evidence chain profile"
+  source_index: "requirements.yaml"
+  status: "Active"
+  type: "REQ"
 REQ-FEEDBACK_TO_TIED:
   category: "Functional"
   cross_references:

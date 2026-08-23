@@ -167,6 +167,7 @@ Every behavior-changing requirement or change that reaches CITDP. The baseline-f
 - `[ARCH-QUALITY_ASSURANCE_PROFILES]`
 - `[IMPL-QUALITY_EVIDENCE_MANIFEST]`
 - `[PROC-QUALITY_EVIDENCE_PROVENANCE]`
+- `[PROC-EVIDENCE_CHAIN]`
 - `[PROC-TEST_ADEQUACY]`
 
 ### Profile selectors
@@ -190,6 +191,22 @@ For each quality attribute, record: `applicability`, `rationale`, `risk`, `evide
 ### Artifacts & Metrics
 - **Artifacts** — CITDP risk/profile matrix, bounded scenario and abuse-case rows, evidence manifest reference, waiver/residual-risk decisions.
 - **Success Metrics** — Applicable quality rows have reproducible evidence or owned expiring acceptance; specialized checks remain scoped to selected profiles.
+
+---
+
+## `[PROC-EVIDENCE_CHAIN]` Evidence chain profile
+
+### Purpose
+Collect a read-only `evidence-chain-profile.v1` artifact for one TIED client at an explicit **evidence-chain profile depth** (`integrated` or `human_research`). The profile reports completeness, provenance, denominators, and proof boundaries. It does not mutate project intent and does not produce a maturity score.
+
+### Collection points
+Use checklist sub-procedure `sub-evidence-chain-profile`. Typical callers: `impact-discovery` (declare scope), `verification-gate` (generate at the tested revision), `persist-citdp-record` (optional `evidence.profile_reference`), `traceable-commit` (provenance disclosure).
+
+### Fail-closed and Path B
+Wrong **TIED base path** fails closed. Manual Path B uses `generator: manual` with `assumptions[]`, `confidence`, and `unsupported_checks[]`. See [evidence-chain-profile.md](evidence-chain-profile.md).
+
+### Offline statistics report
+`[REQ-EVIDENCE_CHAIN_REPORT]` is a TIED-source batch job. After one or more clients emit profiles, a reporting operator supplies a **report input manifest** and runs the offline CLI. The job reads only those artifacts. It partitions **client cohort** groups by `schema_version` and `profile_depth`, writes `evidence-chain-statistics-report.v1`, and does not call the profile generator.
 
 ---
 

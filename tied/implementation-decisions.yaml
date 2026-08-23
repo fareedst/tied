@@ -153,6 +153,36 @@ IMPL-ATDD-E2E-AGENT_STREAM:
       - "REQ-ATDD-E2E-AGENT_STREAM"
     tests:
       - "agent_stream_e2e_test.rb (upstream atdd)"
+IMPL-EVIDENCE_CHAIN_PROFILE:
+  cross_references:
+    - "ARCH-EVIDENCE_CHAIN_PROFILE"
+    - "IMPL-QUALITY_EVIDENCE_MANIFEST"
+    - "IMPL-TIED_FIDELITY_RESEARCH"
+    - "REQ-EVIDENCE_CHAIN_PROFILE"
+  detail_file: "implementation-decisions/IMPL-EVIDENCE_CHAIN_PROFILE.yaml"
+  implementation_approach:
+    details:
+      - "Do not call runFirstSlice or runFidelityResearchPilot"
+      - "Extend opt-in usage metrics with hashed project_id and profile_depth"
+      - "Reuse resolveProjectManifest, runStructuralAnalysis, auditImplFidelity, analyzeBindingEvidence, and analyzeSpecificationState"
+    summary: "Implement generateEvidenceChainProfile with injectable real adapters, normalizeEvidenceChainProfile, MCP tool evidence_chain_profile_generate, and a manual profile contract."
+  name: "Evidence chain profile orchestrator"
+  status: "Active"
+IMPL-EVIDENCE_CHAIN_REPORT:
+  cross_references:
+    - "ARCH-EVIDENCE_CHAIN_REPORT"
+    - "REQ-EVIDENCE_CHAIN_PROFILE"
+    - "REQ-EVIDENCE_CHAIN_REPORT"
+  detail_file: "implementation-decisions/IMPL-EVIDENCE_CHAIN_REPORT.yaml"
+  implementation_approach:
+    details:
+      - "AGGREGATE_COHORT_STATISTICS emits count-only named statistics"
+      - "PARTITION_CLIENT_COHORTS uses schema_version and profile_depth"
+      - "strict writes no report files on any rejected input"
+      - "VALIDATE_PROFILE_ARTIFACT rejects maturity and score keys"
+    summary: "Read-only batch aggregator and CLI consume profile artifacts through a manifest and emit deterministic YAML and Markdown."
+  name: "Evidence chain statistics report aggregator"
+  status: "Active"
 IMPL-FEAT_AGENTSTREAM_ADAPTER:
   cross_references:
     - "ARCH-FEAT_AGENTSTREAM_ADAPTER"

@@ -32,7 +32,7 @@
 | 4 | [`agentstream.md`](agentstream.md) | Go `agentstream` CLI: pipeline, turns, checklist render, executor, HTML format, MCP preflight |
 | 4b | [`agent-stream-ruby.md`](agent-stream-ruby.md) | Ruby ATDD runner parity with Go |
 | 5 | [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) | Domain vocab vs IMPL grammar; three-way alignment; CITDP record naming |
-| 5b | [`quality-assurance.md`](quality-assurance.md) | Quality attributes, assurance profiles, evidence matrices, evidence provenance, proof boundaries, and residual-risk decisions |
+| 5b | [`quality-assurance.md`](quality-assurance.md) | Quality attributes, assurance profiles, evidence matrices, evidence provenance, proof boundaries, residual-risk decisions, the evidence chain profile, and the evidence chain statistics report |
 | 5c | [`fidelity-research.md`](fidelity-research.md) | Fidelity findings, specification state, origin layer, divergent edge, read-only research profile, finding lifecycle, evidence provenance |
 | 5d | [`prompt-composer.md`](prompt-composer.md) | TIED-source-only Prompt Composer, prompt types, global prompt skills, explicit router, prompt envelope, shared references, and client skill installation; glossary not installed into clients |
 | 5e | [`feature-orchestration.md`](feature-orchestration.md) | Feature manifests, lifecycle, clarification and constitution gates, task graphs, generated views, onboarding, migration, and client publication |
@@ -66,6 +66,8 @@
 - **Non-canonical LEAP proposals** (`leap-proposals/`) never mutate project TIED YAML — see [`leap-proposal-queue.md`](leap-proposal-queue.md).
 - **Fidelity research** is read-only against audited projects; candidate findings and case reports belong in the research dataset, while remediation is a separately approved LEAP operation — see [`fidelity-research.md`](fidelity-research.md) and [`../docs/tied-fidelity-research-plan.md`](../../docs/tied-fidelity-research-plan.md).
 - **Adversarial inquiry vs quality-assurance profiles vs pseudo-code validation** — three distinct checklist layers: (1) `[PROC-PSEUDOCODE_VALIDATION]` / `sub-pseudocode-validation-pass` gates IMPL contract structure and traceability without runtime claims; (2) [`quality-assurance.md`](quality-assurance.md) profiles and evidence matrices select risk-triggered assurance depth at `impact-discovery` / `risk-assessment`; (3) [`fidelity-research.md`](fidelity-research.md) adversarial inquiry and `sub-adversarial-inquiry-pass` add obligation mapping, proof-boundary partitioning, finding ledgers, and scoped strict blocking at `verification-gate`. Do not conflate structural pseudo-code PASS with executable fidelity PASS or with human-approved strict status.
+- **Evidence chain profile vs assurance profile vs research profile** — the **evidence chain profile** (`evidence-chain-profile.v1`) is a read-only completeness/provenance artifact. An **assurance profile** selects risk-triggered quality evidence. **Integrated agent profile** and **human research profile** are fidelity research *modes*. **Evidence-chain profile depth** (`integrated` \| `human_research`) only selects how much of the chain one generator run measures. Canonical terms: [`quality-assurance.md`](quality-assurance.md); contrast in [`fidelity-research.md`](fidelity-research.md).
+- **Evidence chain statistics report vs evidence chain profile** — the **evidence chain statistics report** (`evidence-chain-statistics-report.v1`) is a TIED-source offline batch over already-generated profiles. A **client cohort** is a compatibility partition, not a quality **pilot**. A **report input manifest** names artifacts; it is not a **project manifest**. Canonical terms: [`quality-assurance.md`](quality-assurance.md).
 
 ---
 
@@ -88,6 +90,11 @@
 | client refresh | Cross-topic notes |
 | Domain vocabulary index | Title |
 | domain-references.md | Preferred terms (directory entry) |
+| evidence chain profile | Cross-topic notes |
+| evidence-chain profile depth | Cross-topic notes |
+| evidence chain statistics report | Cross-topic notes |
+| client cohort | Cross-topic notes |
+| report input manifest | Cross-topic notes |
 | full catalog | Preferred terms (directory entry) |
 | methodology migration | Cross-topic notes |
 | origin layer | `fidelity-research.md` |

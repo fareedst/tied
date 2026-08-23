@@ -43,6 +43,10 @@ const PRESERVED_SCALAR_KEYS = new Set([
   "sync_index",
   "include_report_snippet",
   "essence_pseudocode_path",
+  "run_id",
+  "profile_depth",
+  "scope_hash",
+  "commit",
 ]);
 
 const MAX_STRING_LEN = 200;
@@ -60,11 +64,20 @@ export interface MetricsRecord {
   tool: string;
   client: string;
   base_path: string;
+  project_id?: string;
+  run_id?: string;
+  profile_depth?: string;
+  scope_hash?: string;
+  commit?: string;
   duration_ms: number;
   ok: boolean;
   error_snippet: string | null;
   args_summary: Record<string, unknown>;
   args_signature: string;
+}
+
+export function anonymizedProjectId(basePath: string): string {
+  return crypto.createHash("sha256").update(path.resolve(basePath || "unknown")).digest("hex").slice(0, 16);
 }
 
 function envTruthy(name: string): boolean {
@@ -208,10 +221,23 @@ export function wrapToolHandler(toolName: string, handler: ToolHandler): ToolHan
       } catch {
         base_path = process.env.TIED_BASE_PATH ?? "";
       }
+      const argRecord =
+        args != null && typeof args === "object" && !Array.isArray(args)
+          ? (args as Record<string, unknown>)
+          : {};
+      const runMetadata =
+        argRecord.run_metadata != null && typeof argRecord.run_metadata === "object"
+          ? (argRecord.run_metadata as Record<string, unknown>)
+          : {};
       recordToolCall({
         tool: toolName,
         client,
         base_path,
+        project_id: anonymizedProjectId(base_path),
+        run_id: typeof argRecord.run_id === "string" ? argRecord.run_id : typeof runMetadata.run_id === "string" ? runMetadata.run_id : undefined,
+        profile_depth: typeof argRecord.profile_depth === "string" ? argRecord.profile_depth : undefined,
+        scope_hash: typeof argRecord.scope_hash === "string" ? argRecord.scope_hash : undefined,
+        commit: typeof argRecord.commit === "string" ? argRecord.commit : typeof runMetadata.commit === "string" ? runMetadata.commit : undefined,
         duration_ms,
         ok,
         error_snippet: extractErrorSnippet(result, thrown),

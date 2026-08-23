@@ -1,0 +1,61 @@
+ARCH-EVIDENCE_CHAIN_REPORT:
+  alternatives_considered:
+    - cons:
+        - "Mixes generator and aggregator satisfaction criteria"
+        - "Profile CITDP already lists cross-project aggregation as a non-goal"
+      name: "Extend REQ-EVIDENCE_CHAIN_PROFILE"
+      pros:
+        - "Fewer tokens"
+      rejected_reason: "Keep the smallest honest token set that remains independently testable."
+    - cons:
+        - "Erases denominators and proof boundaries"
+      name: "Universal rollup score"
+      pros:
+        - "Simple ranking"
+      rejected_reason: "Locked non-goal."
+    - cons:
+        - "Mutates the read-only boundary and couples to repo layout"
+      name: "Live client-root traversal"
+      pros:
+        - "No manifest"
+      rejected_reason: "Inputs are explicit artifacts only."
+    - cons:
+        - "Aggregator lives in TIED mcp-server, not client methodology"
+      name: "Promote report REQ/ARCH/IMPL into templates"
+      pros:
+        - "Clients inherit tokens"
+      rejected_reason: "Report tokens stay source-repo-only; the guide and profile-generator tokens may still be client-distributed."
+  cross_references:
+    - "ARCH-EVIDENCE_CHAIN_PROFILE"
+    - "IMPL-EVIDENCE_CHAIN_REPORT"
+    - "PROC-EVIDENCE_CHAIN"
+    - "REQ-EVIDENCE_CHAIN_PROFILE"
+    - "REQ-EVIDENCE_CHAIN_REPORT"
+  decision: "Ship a TIED-source offline aggregator that reads an evidence-chain-report-inputs.v1 manifest and already-generated evidence-chain-profile.v1 files, partitions compatible client cohorts, and emits evidence-chain-statistics-report.v1 YAML plus a deterministic Markdown projection. Do not traverse client repositories or write project YAML."
+  implementation_approach:
+    details:
+      - "CLI default mode is strict"
+      - "include_absolute_paths defaults false"
+      - "Reuse NORMALIZE_EVIDENCE_CHAIN_PROFILE validation rules without calling generateEvidenceChainProfile"
+      - "TIED_MCP_COLLECT_METRICS remains optional tool-usage metrics only"
+      - "v1 does not sum or average derived-field values"
+    key_components:
+      - "compatibility_key schema_version|profile_depth"
+      - "evidence-chain-report-inputs.v1"
+      - "path-privacy artifact refs"
+      - "strict and partial modes"
+      - "v1 count-only named statistics"
+    summary: "Add evidence-chain-report.ts plus a CLI that validates artifacts, partitions cohorts, counts named statistics, and writes caller-selected YAML and Markdown."
+  name: "Evidence chain statistics report architecture"
+  rationale:
+    benefits:
+      - "Stable identity via hashed project_id with optional client alias"
+      - "Testable aggregator versus generator boundary"
+    problems_solved:
+      - "Deferred cross-project tool had no contract"
+      - "Risk of mixing incompatible depths or inventing scores"
+    why: "Aggregation is a different actor and proof boundary from one-client profile generation."
+  related_requirements:
+    - "REQ-EVIDENCE_CHAIN_PROFILE"
+    - "REQ-EVIDENCE_CHAIN_REPORT"
+  status: "Accepted"

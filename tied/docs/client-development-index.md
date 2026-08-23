@@ -35,7 +35,7 @@ Use these **nicknames** in tickets, PRs, and agent prompts.
 | 6 | **Pseudo-code** | [pseudocode-writing-and-validation.md](pseudocode-writing-and-validation.md) | Authoring or repairing IMPL `essence_pseudocode`; three-way alignment; LEAP micro-cycle. Tracks: **new feature** (A), **post-fix** (B), **code without spec** (C). |
 | 7 | **Change records** | [citdp-policy.md](citdp-policy.md) + [citdp-record-template.yaml](citdp-record-template.yaml) | When to write a CITDP file; shape for `tied/citdp/CITDP-*.yaml`, quality evidence matrix, and residual-risk decisions. |
 
-Quality assurance references: [quality-assurance-commands.md](quality-assurance-commands.md), [quality-evidence-manifest.md](quality-evidence-manifest.md), [quality-assurance-pilot.md](quality-assurance-pilot.md), and [composition-coverage.md](composition-coverage.md).
+Quality assurance references: [quality-assurance-commands.md](quality-assurance-commands.md), [quality-evidence-manifest.md](quality-evidence-manifest.md), [quality-assurance-pilot.md](quality-assurance-pilot.md), [composition-coverage.md](composition-coverage.md), and [evidence-chain-profile.md](evidence-chain-profile.md) (`evidence_chain_profile_generate`, Path B manual, and the TIED-source offline **evidence chain statistics report** CLI).
 
 **Session pairing**: read **Rules** and [ai-principles.md](ai-principles.md) (**Principles**) together at bootstrap — Principles expands the same mandates in checklist form.
 
@@ -117,4 +117,4 @@ After writes: `lint_yaml` on changed YAML + `tied_validate_consistency` (checkli
 
 ---
 
-**TIED Methodology Version**: 3.0.0 · **Last updated**: 2026-08-04
+**TIED Methodology Version**: 3.0.0 · **Last updated**: 2026-08-22

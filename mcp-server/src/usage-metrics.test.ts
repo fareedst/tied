@@ -13,6 +13,7 @@ import os from "node:os";
 import path from "node:path";
 import { afterEach, describe, it } from "node:test";
 import {
+  anonymizedProjectId,
   isMetricsEnabled,
   recordToolCall,
   resolveMetricsPath,
@@ -139,11 +140,44 @@ describe("recordToolCall and wrapToolHandler", () => {
       ok: boolean;
       args_summary: { token: string };
       client: string;
+      project_id?: string;
     };
     assert.equal(row.tool, "yaml_detail_read");
     assert.equal(row.ok, true);
     assert.equal(row.args_summary.token, "REQ-TEST");
     assert.equal(row.client, "cursor-mcp");
+    assert.equal(row.project_id, anonymizedProjectId(tempDir));
+  });
+
+  it("preserves opt-in profile_depth and run_id without raw client identity [REQ-EVIDENCE_CHAIN_PROFILE]", async () => {
+    saved = saveEnv();
+    tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-metrics-profile-"));
+    metricsFile = path.join(tempDir, "metrics.jsonl");
+    process.env.TIED_MCP_COLLECT_METRICS = "1";
+    process.env.TIED_MCP_METRICS_PATH = metricsFile;
+    process.env.TIED_BASE_PATH = tempDir;
+    clearBasePathCache();
+
+    const handler = wrapToolHandler("evidence_chain_profile_generate", async () => ({
+      content: [{ type: "text", text: "{}" }],
+    }));
+    await handler({
+      profile_depth: "human_research",
+      run_metadata: { run_id: "run-9", commit: "cafebabe" },
+    });
+
+    const row = JSON.parse(fs.readFileSync(metricsFile, "utf8").trim()) as {
+      project_id?: string;
+      profile_depth?: string;
+      run_id?: string;
+      commit?: string;
+      base_path: string;
+    };
+    assert.equal(row.profile_depth, "human_research");
+    assert.equal(row.run_id, "run-9");
+    assert.equal(row.commit, "cafebabe");
+    assert.equal(row.project_id, anonymizedProjectId(tempDir));
+    assert.notEqual(row.project_id, row.base_path);
   });
 
   it("records ok false on throw [IMPL-MCP_USAGE_METRICS]", async () => {

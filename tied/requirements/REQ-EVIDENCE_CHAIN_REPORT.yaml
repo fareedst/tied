@@ -1,0 +1,52 @@
+REQ-EVIDENCE_CHAIN_REPORT:
+  category: "Functional"
+  description: "Produce a versioned, read-only evidence-chain-statistics-report.v1 from one or more client-generated evidence-chain-profile.v1 artifacts. The aggregator is TIED-side, artifact-based, and independent of profile generation, runFirstSlice, finding-ledger append, case promotion, and live client-root traversal."
+  metadata:
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-22"
+      reason: "Verification after unit and CLI tests"
+  name: "Evidence chain statistics report"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Explicit cohorts, statuses, and path privacy"
+      - "Read-only TIED-side batch report"
+    problems_solved:
+      - "Incompatible depths and denominators must not be mixed into one rollup"
+      - "Profile generation is one-client and explicitly excludes cross-project aggregation"
+    why: "Operators need deterministic multi-client statistics from already-generated evidence-chain-profile.v1 artifacts without collapsing proof boundaries or inventing a maturity score."
+  related_requirements:
+    depends_on:
+      - "REQ-EVIDENCE_CHAIN_PROFILE"
+    related_to:
+      - "REQ-MCP_USAGE_METRICS"
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Offline CLI consumes a report input manifest and emits byte-stable YAML plus Markdown"
+      metric: "Same inputs and clock yield identical report.yaml and report.md"
+    - criterion: "Incompatible schema_version or profile_depth partitions into separate client cohorts"
+      metric: "No cross-cohort numeric rollup"
+    - criterion: "Missing evidence stays observed, not_measured, unknown, or not_applicable"
+      metric: "Never converted to zero"
+    - criterion: "Forbidden maturity and score fields are rejected"
+      metric: "MalformedProfile on those keys"
+    - criterion: "Aggregator never reads or mutates client repositories or project YAML"
+      metric: "Only explicit profile artifacts and the caller-selected report directory"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-EVIDENCE_CHAIN_REPORT"
+    code_annotations:
+      - "REQ-EVIDENCE_CHAIN_REPORT"
+    implementation:
+      - "IMPL-EVIDENCE_CHAIN_REPORT"
+    tests:
+      - "mcp-server/src/fidelity-research/evidence-chain-report.cli.test.ts"
+      - "mcp-server/src/fidelity-research/evidence-chain-report.test.ts"
+  validation_criteria:
+    - coverage: "Manifest, cohorts, duplicates, forbidden fields, path privacy, determinism"
+      method: "Unit and CLI composition tests"
+    - coverage: "REQ ARCH IMPL token comments"
+      method: "tied_validate_consistency"

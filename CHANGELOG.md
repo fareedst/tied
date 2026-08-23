@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Evidence chain statistics report** — TIED-source offline CLI
+  `mcp-server/src/cli/evidence-chain-report.ts` consumes an
+  `evidence-chain-report-inputs.v1` manifest and already-generated
+  `evidence-chain-profile.v1` artifacts, partitions **client cohorts** by
+  `schema_version|profile_depth`, and writes count-only
+  `evidence-chain-statistics-report.v1` YAML plus a deterministic Markdown
+  projection (`[REQ-EVIDENCE_CHAIN_REPORT]`). `strict` writes nothing on
+  rejection (exit 2); `partial` excludes and continues (exit 1 if none
+  accepted). PROFILE generator tokens and `tied/docs/evidence-chain-profile.md`
+  are now inherited via `templates/` and `DOCS_TO_COPY`; REPORT tokens stay
+  source-repo-only.
+
 ### Changed
 
 - **Adversarial inquiry activation close-out** — `[IMPL-TIED_FILES]` now records
@@ -49,6 +63,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Prompt-type payloads** — `[REQ-PROMPT_TYPE_GLOBAL_SKILLS]` / `[REQ-PROMPT_TYPE_SUBAGENT]` skills and agents consume an **invocation remainder** (text after the skill or agent name) and, for `refine-plan` / `build-plan`, a **linked plan**. They no longer use `:::` as a payload delimiter or emit composer “Prepare to process…” headers.
 
 ### Added
+
+- **Evidence chain profiles** — `[REQ-EVIDENCE_CHAIN_PROFILE]` adds the
+  read-only `evidence-chain-profile.v1` generator for `integrated` and
+  `human_research` profile depths, fail-closed wrong TIED base path handling,
+  and explicit no finding-ledger append/case promotion behavior.
 
 - **Adversarial inquiry evidence tooling** — `[REQ-TIED_ADVERSARIAL_INQUIRY]`,
   `[ARCH-TIED_ADVERSARIAL_INQUIRY]`, `[IMPL-TIED_ADVERSARIAL_INQUIRY]`, and

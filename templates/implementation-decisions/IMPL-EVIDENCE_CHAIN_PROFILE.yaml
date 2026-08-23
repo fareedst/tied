@@ -1,0 +1,59 @@
+IMPL-EVIDENCE_CHAIN_PROFILE:
+  code_locations:
+    files:
+      - description: "Orchestrator types and normalizer"
+        path: "mcp-server/src/fidelity-research/evidence-chain-profile.ts"
+      - description: "Unit tests"
+        path: "mcp-server/src/fidelity-research/evidence-chain-profile.test.ts"
+      - description: "MCP composition tests"
+        path: "mcp-server/src/fidelity-research/evidence-chain-profile.mcp.test.ts"
+    functions:
+      - description: "Deterministic normalize and reject maturity fields"
+        file: "mcp-server/src/fidelity-research/evidence-chain-profile.ts"
+        name: "normalizeEvidenceChainProfile"
+      - description: "Depth-gated profile generation"
+        file: "mcp-server/src/fidelity-research/evidence-chain-profile.ts"
+        name: "generateEvidenceChainProfile"
+  cross_references:
+    - "ARCH-EVIDENCE_CHAIN_PROFILE"
+    - "PROC-EVIDENCE_CHAIN"
+    - "REQ-EVIDENCE_CHAIN_PROFILE"
+  implementation_approach:
+    details:
+      - "EMIT_MANUAL_PROFILE_CONTRACT requires assumptions confidence and unsupported_checks"
+      - "GENERATE_EVIDENCE_CHAIN_PROFILE fail-closes on WrongTiedBasePath"
+      - "human_research without change_context does not fail"
+      - "integrated never invokes fidelity binding or spec adapters"
+      - "NORMALIZE rejects maturity and score fields and requires a denominator per ratio"
+    summary: "Implement a depth-gated read-only orchestrator and deterministic normalizer for evidence-chain-profile.v1."
+  metadata:
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-22"
+      reason: "Author Phase 1 IMPL sidecar blocks"
+  name: "Evidence chain profile orchestrator"
+  rationale:
+    benefits:
+      - "Deterministic reruns"
+      - "Testable adapter spies"
+    problems_solved:
+      - "No evidence_chain symbols exist"
+    why: "The profile must compose existing modules without first-slice side effects."
+  related_decisions:
+    composed_with: []
+    depends_on:
+      - "IMPL-QUALITY_EVIDENCE_MANIFEST"
+      - "IMPL-TIED_FIDELITY_RESEARCH"
+    see_also: []
+    supersedes: []
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-EVIDENCE_CHAIN_PROFILE"
+    code_annotations:
+      - "IMPL-EVIDENCE_CHAIN_PROFILE"
+    requirements:
+      - "REQ-EVIDENCE_CHAIN_PROFILE"
+    tests:
+      - "mcp-server/src/fidelity-research/evidence-chain-profile.mcp.test.ts"
+      - "mcp-server/src/fidelity-research/evidence-chain-profile.test.ts"

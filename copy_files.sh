@@ -731,6 +731,7 @@ DOCS_TO_COPY=(
   "commit-guidelines.md"
   "composition-coverage.md"
   "detail-files-schema.md"
+  "evidence-chain-profile.md"
   "agent-req-implementation-checklist.yaml"
   "ai-agent-tied-mcp-usage.md"
   "yaml-update-mcp-runbook.md"

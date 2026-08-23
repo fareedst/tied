@@ -143,6 +143,46 @@ describe("e2e: bootstrap and load", () => {
       fs.existsSync(path.join(tiedDir, "docs", "tied-feature-onboarding.md")),
       "bootstrap should publish the feature onboarding guide [REQ-FEAT_ADOPTION_GUIDANCE]"
     );
+    const clientDevIndex = fs.readFileSync(path.join(tiedDir, "docs", "client-development-index.md"), "utf8");
+    assert.match(
+      clientDevIndex,
+      /evidence-chain-profile\.md/,
+      "client development index should link the evidence chain profile guide [REQ-EVIDENCE_CHAIN_PROFILE]"
+    );
+    assert.ok(
+      fs.existsSync(path.join(tiedDir, "docs", "evidence-chain-profile.md")),
+      "bootstrap must copy evidence-chain-profile.md whenever the index links it [REQ-EVIDENCE_CHAIN_PROFILE] [IMPL-TIED_FILES]"
+    );
+    assert.ok(
+      "REQ-EVIDENCE_CHAIN_PROFILE" in data,
+      "Copied requirements index should inherit REQ-EVIDENCE_CHAIN_PROFILE [REQ-EVIDENCE_CHAIN_PROFILE]"
+    );
+    assert.ok(
+      fs.existsSync(path.join(tiedDir, "methodology", "requirements", "REQ-EVIDENCE_CHAIN_PROFILE.yaml")),
+      "Methodology should include the evidence chain profile requirement detail"
+    );
+    assert.ok(
+      fs.existsSync(path.join(tiedDir, "methodology", "architecture-decisions", "ARCH-EVIDENCE_CHAIN_PROFILE.yaml")),
+      "Methodology should include the evidence chain profile architecture detail"
+    );
+    assert.ok(
+      fs.existsSync(path.join(tiedDir, "methodology", "implementation-decisions", "IMPL-EVIDENCE_CHAIN_PROFILE.yaml")),
+      "Methodology should include the evidence chain profile implementation detail"
+    );
+    assert.ok(
+      fs.existsSync(
+        path.join(tiedDir, "methodology", "implementation-decisions", "IMPL-EVIDENCE_CHAIN_PROFILE-pseudocode.md"),
+      ),
+      "Methodology should include the evidence chain profile pseudo-code sidecar"
+    );
+    assert.ok(
+      !("REQ-EVIDENCE_CHAIN_REPORT" in data),
+      "Copied methodology must not inherit source-only REQ-EVIDENCE_CHAIN_REPORT [REQ-EVIDENCE_CHAIN_REPORT]"
+    );
+    assert.ok(
+      !fs.existsSync(path.join(tiedDir, "methodology", "requirements", "REQ-EVIDENCE_CHAIN_REPORT.yaml")),
+      "Methodology must not include the statistics report requirement"
+    );
     assert.ok(
       fs.existsSync(path.join(tiedDir, "methodology", "vocab", "feature-orchestration.md")),
       "bootstrap should publish feature orchestration vocabulary in the methodology snapshot [PROC-VOCABULARY_INDEX]"

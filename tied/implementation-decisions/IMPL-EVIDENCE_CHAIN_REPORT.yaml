@@ -1,0 +1,58 @@
+IMPL-EVIDENCE_CHAIN_REPORT:
+  code_locations:
+    files:
+      - description: "Read-only aggregator module"
+        path: "mcp-server/src/fidelity-research/evidence-chain-report.ts"
+      - description: "Offline CLI entry"
+        path: "mcp-server/src/cli/evidence-chain-report.ts"
+      - description: "Unit tests"
+        path: "mcp-server/src/fidelity-research/evidence-chain-report.test.ts"
+      - description: "CLI composition tests"
+        path: "mcp-server/src/fidelity-research/evidence-chain-report.cli.test.ts"
+    functions:
+      - description: "Report orchestrator"
+        file: "mcp-server/src/fidelity-research/evidence-chain-report.ts"
+        name: "generateEvidenceChainStatisticsReport"
+  cross_references:
+    - "ARCH-EVIDENCE_CHAIN_REPORT"
+    - "PROC-EVIDENCE_CHAIN"
+    - "REQ-EVIDENCE_CHAIN_PROFILE"
+    - "REQ-EVIDENCE_CHAIN_REPORT"
+  implementation_approach:
+    details:
+      - "AGGREGATE_COHORT_STATISTICS emits count-only named statistics"
+      - "PARTITION_CLIENT_COHORTS uses schema_version and profile_depth"
+      - "strict writes no report files on any rejected input"
+      - "VALIDATE_PROFILE_ARTIFACT rejects maturity and score keys"
+    summary: "Read-only batch aggregator and CLI consume profile artifacts through a manifest and emit deterministic YAML and Markdown."
+  metadata:
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-22"
+      reason: "Close-out: drop Planned wording from implemented code_locations"
+  name: "Evidence chain statistics report aggregator"
+  rationale:
+    benefits:
+      - "Clear fail modes for strict versus partial"
+      - "Deterministic reruns"
+    problems_solved:
+      - "No aggregator symbols or contracts"
+    why: "Report logic must be specified in IMPL pseudo-code before RED tests."
+  related_decisions:
+    composed_with:
+      - "IMPL-MCP_USAGE_METRICS"
+    depends_on:
+      - "IMPL-EVIDENCE_CHAIN_PROFILE"
+    see_also: []
+    supersedes: []
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-EVIDENCE_CHAIN_REPORT"
+    code_annotations:
+      - "IMPL-EVIDENCE_CHAIN_REPORT"
+    requirements:
+      - "REQ-EVIDENCE_CHAIN_REPORT"
+    tests:
+      - "mcp-server/src/fidelity-research/evidence-chain-report.cli.test.ts"
+      - "mcp-server/src/fidelity-research/evidence-chain-report.test.ts"

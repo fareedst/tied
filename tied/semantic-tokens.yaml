@@ -40,6 +40,25 @@ ARCH-CONFIG_DISCOVERY_LAYERING:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-EVIDENCE_CHAIN_PROFILE:
+  cross_references:
+    - "IMPL-EVIDENCE_CHAIN_PROFILE"
+    - "REQ-EVIDENCE_CHAIN_PROFILE"
+  description: "Schema, proof-boundary model, and artifact boundary for evidence-chain-profile.v1"
+  name: "Evidence chain profile architecture"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
+ARCH-EVIDENCE_CHAIN_REPORT:
+  cross_references:
+    - "ARCH-EVIDENCE_CHAIN_PROFILE"
+    - "IMPL-EVIDENCE_CHAIN_REPORT"
+    - "REQ-EVIDENCE_CHAIN_REPORT"
+  description: "Offline aggregator, cohort partition, and report schemas"
+  name: "Evidence chain statistics report architecture"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 ARCH-FEAT_AGENTSTREAM_ADAPTER:
   cross_references:
     - "IMPL-FEAT_AGENTSTREAM_ADAPTER"
@@ -588,6 +607,26 @@ IMPL-ATDD-E2E-AGENT_STREAM:
     last_updated: "2026-03-24"
     registered: "2026-03-24"
   name: "run_agent_stream run_stream loop; testability e2e_only per docs/run-agent-stream-impl-e2e.md"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-EVIDENCE_CHAIN_PROFILE:
+  cross_references:
+    - "ARCH-EVIDENCE_CHAIN_PROFILE"
+    - "PROC-EVIDENCE_CHAIN"
+    - "REQ-EVIDENCE_CHAIN_PROFILE"
+  description: "Depth-gated generator and normalizer for evidence-chain-profile.v1"
+  name: "Evidence chain profile orchestrator"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-EVIDENCE_CHAIN_REPORT:
+  cross_references:
+    - "ARCH-EVIDENCE_CHAIN_REPORT"
+    - "IMPL-EVIDENCE_CHAIN_PROFILE"
+    - "REQ-EVIDENCE_CHAIN_REPORT"
+  description: "Read-only batch aggregator and CLI for statistics reports"
+  name: "Evidence chain statistics report aggregator"
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
@@ -1303,6 +1342,20 @@ PROC-COMMIT_MESSAGES:
   source_index: "processes.md"
   status: "Active"
   type: "PROC"
+PROC-EVIDENCE_CHAIN:
+  cross_references:
+    - "ARCH-EVIDENCE_CHAIN_PROFILE"
+    - "ARCH-EVIDENCE_CHAIN_REPORT"
+    - "IMPL-EVIDENCE_CHAIN_PROFILE"
+    - "IMPL-EVIDENCE_CHAIN_REPORT"
+    - "PROC-QUALITY_EVIDENCE_PROVENANCE"
+    - "REQ-EVIDENCE_CHAIN_PROFILE"
+    - "REQ-EVIDENCE_CHAIN_REPORT"
+  description: "Collection points for evidence-chain-profile.v1 and the offline statistics report"
+  name: "Evidence chain profile collection"
+  source_index: "processes.md"
+  status: "Active"
+  type: "PROC"
 PROC-IMPL_CODE_TEST_SYNC:
   cross_references:
     - "PROC-AGENT_REQ_CHECKLIST"
@@ -1609,6 +1662,28 @@ REQ-CONFIG_DISCOVERY_LOCAL_LAYER:
   name: "Project-local configuration replaces built-in defaults for layered discovery"
   source_index: "requirements.yaml"
   status: "Planned"
+  type: "REQ"
+REQ-EVIDENCE_CHAIN_PROFILE:
+  cross_references:
+    - "ARCH-EVIDENCE_CHAIN_PROFILE"
+    - "IMPL-EVIDENCE_CHAIN_PROFILE"
+    - "PROC-EVIDENCE_CHAIN"
+    - "REQ-EVIDENCE_CHAIN_REPORT"
+  description: "Versioned read-only evidence-chain-profile.v1 completeness and provenance report"
+  name: "Evidence chain profile"
+  source_index: "requirements.yaml"
+  status: "Active"
+  type: "REQ"
+REQ-EVIDENCE_CHAIN_REPORT:
+  cross_references:
+    - "ARCH-EVIDENCE_CHAIN_REPORT"
+    - "IMPL-EVIDENCE_CHAIN_REPORT"
+    - "PROC-EVIDENCE_CHAIN"
+    - "REQ-EVIDENCE_CHAIN_PROFILE"
+  description: "Offline multi-client evidence-chain-statistics-report.v1 from profile artifacts"
+  name: "Evidence chain statistics report"
+  source_index: "requirements.yaml"
+  status: "Active"
   type: "REQ"
 REQ-FEAT_ADOPTION_GUIDANCE:
   description: "Quickstart and advanced guidance for greenfield, brownfield, and offline paths."

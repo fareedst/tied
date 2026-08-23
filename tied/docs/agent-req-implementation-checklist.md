@@ -243,6 +243,7 @@ This section is **optional guidance** only. Checklist order and gating are uncha
    - Generate bounded scenarios from IMPL branches, PRE/POST boundaries, failure modes, mutable-state transitions, and meaningful empty/minimal/maximal/malformed/duplicate cases. Add abuse-case rows for applicable input, authorization, resource, replay, sensitive-data, and untrusted-content boundaries.
    - Keep specialized profiles conditional. A low-risk or irrelevant attribute receives an explicit N/A rationale rather than an invented test or universal ceremony.
    - Record first-divergence hypotheses; seed an obligation inventory for the declared scope; link each quality evidence matrix row to a proof-boundary class (`traceability_structure`, `pseudo_code_structure`, `semantic_fidelity`, `executable_behavior`, `human_decision`).
+   - When an **evidence chain profile** is in scope, declare profile scope, roots, denominators, selected evidence dimensions, and the default **evidence-chain profile depth** (`integrated` or `human_research`). Keep that `profile_depth` distinct from inquiry `research_profile` and from **assurance profiles**. See [evidence-chain-profile.md](evidence-chain-profile.md) and `[PROC-EVIDENCE_CHAIN]`.
 5. Build `tied_context`:
    - `tied_tokens_affected` — existing REQ/ARCH/IMPL tokens touched by the change.
    - `tied_tokens_new` — tokens to be created.
@@ -414,6 +415,7 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 5. Record accepted residual risk only with an accountable owner and expiry; record N/A rows with rationale instead of silently omitting them.
 6. For strict inquiry policy, record negative controls, bounded execution, explicit proof boundaries, deterministic scope, waiver owner/expiry, and the human approval requirement.
 7. Select and document the adversarial depth tier (`minimal` | `integrated` | `strict_candidate`) and, when blocking is desired later, list every strict-eligibility prerequisite with owner.
+8. Record the selected **assurance profile**, proof boundaries, and which evidence-chain edges are in scope. Keep inquiry `research_profile` separate from **evidence-chain profile depth**.
 
 **Outcomes**: Risks documented with token references. Mitigations identified.
 
@@ -629,6 +631,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
    - **CALL sub-yaml-edit-loop** on each changed detail file.
 6. **Module validation** per `[REQ-MODULE_VALIDATION]`: confirm each module was validated independently before integration. Document validation results.
 7. **Update vocab after writing tests/code** (`[PROC-VOCABULARY_INDEX]`): **CALL sub-vocabulary-sync** (**RECORD**) to reconcile `tied/vocab/*.md` with all terms, symbols, and storage names in the final tests and code; verify each named concept resolves to exactly one preferred term and the alphabetical index is current. Final **VALIDATE** gate is at `traceable-commit` (Touchpoint 3).
+8. When an evidence chain profile is in scope, **CALL sub-evidence-chain-profile** at the tested revision after validators, tests, lint, and consistency. Write only under `working/evidence-chain/`.
 
 **Outcomes**: All tests pass; lint clean; token validation passes; three-way alignment verified; IMPL metadata current; module validation documented; canonical vocabulary reconciled with final tests/code.
 
@@ -656,6 +659,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 4a. **Update vocab after design and implementation** (`[PROC-VOCABULARY_INDEX]`): **CALL sub-vocabulary-sync** (**RECORD**) so `tied/vocab/*.md` reflects the final REQ/ARCH/IMPL terms, design/UI terms, and storage names; each concept resolves to one preferred term and the naming bridge and alphabetical index are current. Final **VALIDATE** gate is at `traceable-commit` (Touchpoint 3).
 5. If REQ/ARCH/IMPL `status`, `traceability.tests`, or similar fields changed such that a session `agent_preload` would be stale, re-check **`tied/agent-preload-contract.yaml`** and patch only as needed; do not redo the full ARCH/IMPL preload passes unless something material changed.
 6. Keep observed inquiry findings outside canonical TIED YAML; route only confirmed findings to existing owners and never trigger LEAP from observation alone.
+7. If a profile was generated, ensure it references current token metadata. Do **not** store generated evidence-chain output as REQ/ARCH/IMPL intent.
 
 **Branch**: IF divergence between TIED docs and code/tests is detected THEN apply LEAP:
 - Update IMPL first (GOTO resolve-pseudocode scope).
@@ -704,6 +708,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
    - **LEAP feedback**: `divergences_from_analysis` (any places where implementation differed from the original analysis), `tied_stack_updates_required` (LEAP propagations triggered), `record_status`.
    - For checklist integration, use a distinct follow-up CITDP and preserve the earlier completed CITDP; strict approval must record reviewer, exact scope, thresholds, waiver owner/expiry, rollback criteria, and approval revision.
    - When gate policy is `strict-candidate` or `strict-approved`, record pilot evidence (per `CALIBRATE_PILOT` in `pilot.ts`) in the CITDP record's completion criteria, including budget-breach count and representative-evidence rationale.
+   - Optional: set `evidence.profile_reference` to the caller-selected `evidence-chain-profile.v1` path. Do not copy the profile body into project YAML.
 2. Store as `tied/citdp/CITDP-{change_request_id}.yaml` relative to the **client project workspace root**—the repository where the implementation and **project** `tied/` tree live (the same repo you commit for this work). Do **not** persist CITDP only under a separate checkout of the TIED methodology repository when the client is another project; optional mirrors or alternate paths are policy-specific and do not replace the canonical client path.
 3. **CALL sub-yaml-edit-loop** on the record file.
 
@@ -731,6 +736,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
    - **Body**: Motivation and behavior change (imperative tense). Keep lines to 100 characters.
    - **Footer**: `Closes #issue` or `Fixes #issue` if applicable. Reference main REQ/ARCH/IMPL tokens touched.
    - Include evidence provenance, open (unresolved) finding count, active waivers, and the proof-boundary partition in the commit body or an explicit CITDP cross-reference; this is part of the Touchpoint 3 VALIDATE gate, not optional prose.
+   - When a profile is in scope: validate provenance, open findings, waivers, and missing-data disclosures (`not_measured` / `unknown`) against the profile artifact.
 3. Stage relevant files. Commit.
 4. Do NOT push unless explicitly asked.
 
@@ -835,6 +841,26 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 **RETURN** to calling step.
 
 **Reference**: [vocabulary-index-analysis-and-standards.md](vocabulary-index-analysis-and-standards.md); `tied/docs/processes.md` § `[PROC-VOCABULARY_INDEX]`.
+
+---
+
+### sub-evidence-chain-profile (sub-evidence-chain-profile): Generate a read-only evidence chain profile
+
+**Invoked by**: `impact-discovery` (declare only), `verification-gate`, `persist-citdp-record`, `traceable-commit`.
+
+**Goals**: Run `GENERATE_EVIDENCE_CHAIN_PROFILE` at an explicit **evidence-chain profile depth** and persist only a caller-selected non-intent artifact.
+
+**Preconditions**: Confirmed **TIED base path** for the client under change. Caller supplies `profile_depth` (`integrated` | `human_research`) and optional `change_context`.
+
+**Tasks**:
+1. PRELOAD `tied/vocab/quality-assurance.md`; RESOLVE evidence chain profile vs assurance profile vs research profile.
+2. CALL `evidence_chain_profile_generate` (or Path B manual normalize). Fail closed on `WrongTiedBasePath`.
+3. Do not append findings, promote cases, or write project YAML.
+4. RETURN the profile path and proof-boundary partition. Optional CITDP `evidence.profile_reference`.
+
+**Outcomes**: `evidence-chain-profile.v1` on disk or stdout; project intent unchanged.
+
+**Reference**: [evidence-chain-profile.md](evidence-chain-profile.md); `[PROC-EVIDENCE_CHAIN]`.
 
 ---
 

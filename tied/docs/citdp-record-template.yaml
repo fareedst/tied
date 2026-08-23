@@ -9,6 +9,7 @@ completion_criteria:
 evidence:
   commands: []
   manifest_reference: "~"
+  profile_reference: "~"
   proof_boundaries: []
 impact_analysis:
   impl_inventory_notes: "~"
