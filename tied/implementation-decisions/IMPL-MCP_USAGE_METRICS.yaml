@@ -5,6 +5,10 @@ IMPL-MCP_USAGE_METRICS:
         path: "mcp-server/src/usage-metrics.ts"
       - description: "Unit tests for metrics module"
         path: "mcp-server/src/usage-metrics.test.ts"
+      - description: "Shared project identity resolver"
+        path: "mcp-server/src/project-identity.ts"
+      - description: "Unit tests for identity resolver"
+        path: "mcp-server/src/project-identity.test.ts"
       - description: "Registers wrapToolHandler when metrics enabled"
         path: "mcp-server/src/index.ts"
       - description: "Exports TIED_MCP_METRICS_CLIENT=tied-cli when collection enabled"
@@ -21,12 +25,15 @@ IMPL-MCP_USAGE_METRICS:
   implementation_approach:
     details:
       - "analyze_tied_mcp_metrics.rb: streaming counts, durations, top_signatures, --aggregate"
+      - "Args signatures use recursive canonicalization, and the Ruby analyzer rejects malformed records, counts schema errors, handles missing files predictably, and applies deterministic tie ordering."
       - "isMetricsEnabled(): TIED_MCP_COLLECT_METRICS in {1,true} case-insensitive"
+      - "Metrics records persist hashed project_id via IMPL-TIED_PROJECT_IDENTITY; raw base_path and configured ID omitted; absolute paths redacted from error snippets."
       - "recordToolCall: append one JSON line v1 schema; swallow IO errors"
+      - "Registration uses instrumentToolHandlers so enabled and disabled behavior is testable for every allTools entry."
       - "resolveMetricsPath(): env override or homedir .cursor/logs/tied-mcp-metrics.jsonl"
       - "sanitizeArgs(tool, args): scalars preserved; blobs as _bytes/_keys; signature SHA-256 prefix"
       - "tied-cli.sh: export TIED_MCP_METRICS_CLIENT=tied-cli when metrics env set"
-      - "wrapToolHandler: time handler; ok from throws and result.isError"
+      - "wrapToolHandler: time handler; ok from throws and result.isError; resolveProjectIdentity for project_id"
     summary: "usage-metrics.ts module; index.ts wiring; tied-cli client tag; Ruby offline analyzer"
   metadata:
     created:
@@ -60,6 +67,7 @@ IMPL-MCP_USAGE_METRICS:
   traceability:
     architecture:
       - "ARCH-MCP_USAGE_METRICS"
+      - "ARCH-TIED_PROJECT_IDENTITY"
     code_annotations:
       - "ARCH-MCP_USAGE_METRICS"
       - "IMPL-MCP_USAGE_METRICS"
@@ -68,4 +76,6 @@ IMPL-MCP_USAGE_METRICS:
       - "REQ-MCP_USAGE_METRICS"
     tests:
       - "analyze_tied_mcp_metrics_test.rb"
+      - "project-identity.composition.test.ts"
+      - "project-identity.test.ts"
       - "usage-metrics.test.ts"

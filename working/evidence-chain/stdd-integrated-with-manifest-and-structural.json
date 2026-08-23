@@ -1,0 +1,201 @@
+{
+  "ok": true,
+  "profile": {
+    "identity": {
+      "schema_version": "evidence-chain-profile.v1",
+      "project_id": "cfd5bf6ad98024eb",
+      "generator": "mcp",
+      "generator_version": "1.0.0",
+      "observed_at": "1970-01-01T00:00:00.000Z",
+      "commit": "local",
+      "tied_methodology_version": "3.0.0",
+      "tied_base_path_confirmed": true,
+      "identity_source": "path_fallback"
+    },
+    "scope": {
+      "roots_used": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd"
+      ],
+      "ignore_source": "default",
+      "config_hash": "721978b4a202582a",
+      "languages": [
+        "typescript"
+      ],
+      "file_counts": {},
+      "active_populations": {
+        "requirements": 1,
+        "architecture": 0,
+        "implementation": 0
+      },
+      "excluded": [
+        "fixtures",
+        "methodology",
+        "templates"
+      ],
+      "unknown": [
+        "file_counts"
+      ],
+      "not_measured": [
+        "block_level_impl_test_matrix",
+        "vocabulary_drift_automation"
+      ],
+      "not_applicable": [],
+      "profile_depth": "integrated"
+    },
+    "evidence_chain": {
+      "structural": [
+        {
+          "value": {
+            "validator": "binding_inventory_validate",
+            "ok": true
+          },
+          "source": "binding_inventory_validate",
+          "method": "RUN_STRUCTURAL_ANALYSIS",
+          "denominator": 1,
+          "proof_boundary": "traceability_structure",
+          "status": "observed"
+        },
+        {
+          "value": {
+            "validator": "pseudocode_validate",
+            "ok": true
+          },
+          "source": "pseudocode_validate",
+          "method": "RUN_STRUCTURAL_ANALYSIS",
+          "denominator": 1,
+          "proof_boundary": "pseudo_code_structure",
+          "status": "observed"
+        },
+        {
+          "value": {
+            "validator": "test_adequacy_validate",
+            "ok": true
+          },
+          "source": "test_adequacy_validate",
+          "method": "RUN_STRUCTURAL_ANALYSIS",
+          "denominator": 1,
+          "proof_boundary": "traceability_structure",
+          "status": "observed"
+        },
+        {
+          "value": {
+            "validator": "tied_cycles",
+            "ok": true
+          },
+          "source": "tied_cycles",
+          "method": "RUN_STRUCTURAL_ANALYSIS",
+          "denominator": 1,
+          "proof_boundary": "traceability_structure",
+          "status": "observed"
+        },
+        {
+          "value": {
+            "validator": "tied_validate_consistency",
+            "ok": true
+          },
+          "source": "tied_validate_consistency",
+          "method": "RUN_STRUCTURAL_ANALYSIS",
+          "denominator": 1,
+          "proof_boundary": "traceability_structure",
+          "status": "observed"
+        },
+        {
+          "value": {
+            "validator": "traceability_gap_report",
+            "ok": true
+          },
+          "source": "traceability_gap_report",
+          "method": "RUN_STRUCTURAL_ANALYSIS",
+          "denominator": 1,
+          "proof_boundary": "traceability_structure",
+          "status": "observed"
+        }
+      ],
+      "graph": {
+        "value": {
+          "nodes": 1,
+          "edges": 0,
+          "cycles": 0
+        },
+        "source": "tied_cycles",
+        "method": "dependency_graph",
+        "denominator": 1,
+        "proof_boundary": "traceability_structure",
+        "status": "observed"
+      },
+      "vocab_resolution": {
+        "value": {
+          "status": "not_measured",
+          "reason": "vocabulary drift adapter not configured"
+        },
+        "source": "tied/vocab",
+        "method": "adapter_absent",
+        "denominator": "not_measured",
+        "proof_boundary": "traceability_structure",
+        "status": "not_measured"
+      }
+    },
+    "quality": {
+      "applicable_attributes": [
+        "baseline-functional"
+      ],
+      "command_results": {
+        "value": {
+          "manifest_reference": "/Users/fareed/Documents/dev/chatgpt/stdd/working/evidence-chain/verification-evidence-manifest.v1.json"
+        },
+        "source": "/Users/fareed/Documents/dev/chatgpt/stdd/working/evidence-chain/verification-evidence-manifest.v1.json",
+        "method": "embed_or_reference",
+        "denominator": 1,
+        "proof_boundary": "executable_behavior",
+        "status": "observed"
+      },
+      "freshness": {
+        "value": "unknown",
+        "source": "run_metadata",
+        "method": "observed_at",
+        "denominator": 1,
+        "proof_boundary": "human_decision",
+        "status": "observed"
+      },
+      "proof_boundary_partition": {
+        "traceability_structure": [
+          "COLLECT_STRUCTURAL_CHAIN"
+        ],
+        "pseudo_code_structure": [
+          "COLLECT_STRUCTURAL_CHAIN"
+        ],
+        "semantic_fidelity": [],
+        "executable_behavior": [
+          "ATTACH_QUALITY_PARTITION"
+        ],
+        "human_decision": [
+          "manual_path_or_residual_risk"
+        ]
+      },
+      "manifest_reference": "/Users/fareed/Documents/dev/chatgpt/stdd/working/evidence-chain/verification-evidence-manifest.v1.json"
+    },
+    "change_fidelity": {
+      "value": {
+        "status": "not_measured",
+        "applicability": "not_applicable"
+      },
+      "source": "change_context",
+      "method": "absent",
+      "denominator": "not_applicable",
+      "proof_boundary": "semantic_fidelity",
+      "status": "not_measured"
+    },
+    "operational": {
+      "metrics_opt_in": false,
+      "project_id": "cfd5bf6ad98024eb",
+      "run_id": "wiring-pilot-structural",
+      "profile_depth": "integrated",
+      "scope_hash": "e4a3deb848ecca50",
+      "commit": "local"
+    }
+  },
+  "source_references": [
+    "PROJECT_MANIFEST",
+    "RUN_STRUCTURAL_ANALYSIS"
+  ]
+}

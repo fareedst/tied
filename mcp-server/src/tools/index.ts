@@ -111,6 +111,7 @@ import {
   type ModeBInput,
 } from "../adversarial-inquiry/project-orchestrator.js";
 import { generateEvidenceChainProfile } from "../fidelity-research/evidence-chain-profile.js";
+import { createLiveStructuralValidators } from "../fidelity-research/live-structural-validators.js";
 
 /** LEAP proposal MCP tools: JSON envelope; catch sync throws from fs/git. [REQ-LEAP_PROPOSAL_QUEUE] */
 function leapMcpJson(payload: unknown) {
@@ -1588,6 +1589,7 @@ export const allTools = [
         scope: z
           .object({
             requirement_tokens: z.array(z.string()).optional(),
+            architecture_tokens: z.array(z.string()).optional(),
             implementation_tokens: z.array(z.string()).optional(),
             impl_tokens_for_pseudocode: z.array(z.string()).optional(),
             binding_rows: z.array(z.record(z.unknown())).optional(),
@@ -1616,6 +1618,12 @@ export const allTools = [
         ignore_file: z.string().optional(),
         roots: z.array(z.string()).optional(),
         manifest_reference: z.string().optional(),
+        invoke_structural_validators: z
+          .boolean()
+          .optional()
+          .describe(
+            "When true, run live structural validators internally and attach results so structural rows become observed. Default false preserves backward-compatible not_measured structural rows.",
+          ),
       }),
     },
     handler: async (args: {
@@ -1626,6 +1634,7 @@ export const allTools = [
       output_path?: string;
       scope?: {
         requirement_tokens?: string[];
+        architecture_tokens?: string[];
         implementation_tokens?: string[];
         impl_tokens_for_pseudocode?: string[];
         binding_rows?: Record<string, unknown>[];
@@ -1637,11 +1646,25 @@ export const allTools = [
       ignore_file?: string;
       roots?: string[];
       manifest_reference?: string;
+      invoke_structural_validators?: boolean;
     }) => {
       try {
         const confirmed = getBasePath();
         const projectRoot = args.project_root ?? path.resolve(confirmed, "..");
         const tiedBasePath = args.tied_base_path ?? confirmed;
+        const structuralValidators = args.invoke_structural_validators
+          ? createLiveStructuralValidators({
+              requirement_tokens: args.scope?.requirement_tokens,
+              architecture_tokens: args.scope?.architecture_tokens,
+              implementation_tokens: args.scope?.implementation_tokens,
+              impl_tokens_for_pseudocode: args.scope?.impl_tokens_for_pseudocode,
+              binding_rows: args.scope?.binding_rows,
+              quality_plan: args.scope?.quality_plan,
+              config_path: args.config_path,
+              ignore_file: args.ignore_file,
+              roots: args.roots,
+            })
+          : undefined;
         const result = generateEvidenceChainProfile({
           project_root: projectRoot,
           tied_base_path: tiedBasePath,
@@ -1656,6 +1679,7 @@ export const allTools = [
           ignore_file: args.ignore_file,
           roots: args.roots,
           manifest_reference: args.manifest_reference,
+          structural_validators: structuralValidators,
         });
         return textContent(JSON.stringify(result, null, 2));
       } catch (e) {

@@ -15,16 +15,54 @@ entry_points:
     start_at: "session-bootstrap"
 execution_evidence:
   close_out_evidence:
-    date: null
-    deferred: []
-    gates: {}
-    master_checklist: ""
-  completed: []
+    date: "2026-08-22"
+    deferred:
+      - "Auto wholesale runFirstSlice at integrated depth (non-goal)"
+      - "v1 vocab_resolution adapter (non-goal)"
+      - "Checklist YAML canonical style debt pre-existing on agent-req-implementation-checklist.yaml"
+    gates:
+      adversarial_inquiry:
+        result: "not_applicable: read-only orchestration wiring; depth_tier minimal advisory"
+      pseudocode:
+        command: "validateEssencePseudocode for IMPL-EVIDENCE_CHAIN_PROFILE"
+        result: "passed: ok true including EVIDENCE_CHAIN_PROFILE_MCP_HANDLER block"
+      ruby_analyzer:
+        command: "ruby scripts/analyze_tied_mcp_metrics_test.rb"
+        result: "passed: analyze_tied_mcp_metrics_test: ok"
+      tied_consistency:
+        command: "TIED MCP tied_validate_consistency"
+        result: "passed: ok true; all indexes valid; traceability, detail files, and pseudo-code checks passed"
+      tied_verify:
+        command: "TIED MCP tied_verify dry_run (REQ-EVIDENCE_CHAIN_PROFILE, IMPL-EVIDENCE_CHAIN_PROFILE)"
+        result: "passed: ok true; would_update empty (already Implemented/Active)"
+      typescript:
+        command: "bunx tsc -b (working_directory: mcp-server)"
+        result: "passed: exit 0"
+      unit_and_composition:
+        command: "npm test --prefix mcp-server"
+        result: "passed: 364 tests, 364 pass, 0 fail"
+      vocab_validate:
+        command: "ruby scripts/validate_vocab_index.rb"
+        result: "passed: Vocabulary index validation passed."
+      yaml_lint:
+        command: "scripts/yaml_tool.sh --check (changed project YAML, CITDP, and working checklist)"
+        result: "passed: listed project TIED YAML and CITDP files canonical and valid"
+    master_checklist: "Attach-provenance wiring complete; invoke_structural_validators opt-in; pilot artifacts under working/evidence-chain/; CITDP-REQ-EVIDENCE_CHAIN_PROFILE-wiring leap_feedback complete."
+    pilot_artifacts:
+      manifest_reference: "working/evidence-chain/verification-evidence-manifest.v1.json"
+      profiles:
+        - "working/evidence-chain/stdd-integrated-with-manifest.json"
+        - "working/evidence-chain/stdd-integrated-with-manifest-and-structural.json"
+  completed:
+    - "Close-out gates: MCP tests 364/364; TypeScript build; Ruby analyzer; TIED consistency; tied_verify dry_run; IMPL-EVIDENCE_CHAIN_PROFILE pseudo-code validation; YAML lint; vocabulary validation"
+    - "Phase A docs: agent-req-implementation-checklist.yaml sub-evidence-chain-profile + verification-gate attach semantics; evidence-chain-profile.md operator prerequisites"
+    - "Phase B MCP: live-structural-validators.ts; evidence_chain_profile_generate invoke_structural_validators (default false); manifest_reference attach for quality.command_results"
+    - "CITDP: tied/citdp/CITDP-REQ-EVIDENCE_CHAIN_PROFILE-wiring.yaml record_status complete"
   operator_evidence:
-    command: ".cursor/skills/tied-yaml/scripts/tied-cli.sh tied_adversarial_inquiry_run @/tmp/inquiry-smoke.json"
-    limitation: "Requires a human-operated Cursor MCP reload and catalog check."
-    status: "not_run"
-  request: ""
+    command: "npm test --prefix mcp-server; bunx tsc -b (from mcp-server); ruby scripts/analyze_tied_mcp_metrics_test.rb; tied_validate_consistency; tied_verify dry_run; validateEssencePseudocode IMPL-EVIDENCE_CHAIN_PROFILE; scripts/yaml_tool.sh --check (changed YAML); ruby scripts/validate_vocab_index.rb"
+    limitation: "Adversarial inquiry not applicable for read-only wiring; structural rows observed only when invoke_structural_validators true."
+    status: "passed"
+  request: "REQ-EVIDENCE_CHAIN_PROFILE"
 feedback_loops:
   composition_and_e2e: "Missing implementation coverage returns to the specification path before evidence is accepted."
   leap: "Implementation evidence updates IMPL first, then tests and code, with ARCH/REQ updates when scope changes."
@@ -1293,13 +1331,10 @@ sub_procedures:
       - "tied/docs/processes.md § [PROC-EVIDENCE_CHAIN]"
     slug: "sub-evidence-chain-profile"
     tasks:
-      - "CALL evidence_chain_profile_generate with manifest_reference pointing at the saved manifest. Optional invoke_structural_validators when MCP structural wiring is available. Fail closed on WrongTiedBasePath."
+      - "CALL evidence_chain_profile_generate or Path B manual normalize. Fail closed on WrongTiedBasePath."
       - "Do not append findings, promote cases, or write project YAML."
-      - "From the request quality evidence matrix (or [PROC-QUALITY_EVIDENCE_PROVENANCE] default rows), CALL quality_evidence_collect_manifest (or quality_evidence_manifest_build plus quality_evidence_collect when the matrix commands already executed)."
-      - "Note: structural validator rows remain not_measured until invoke_structural_validators (Phase B MCP wiring) is enabled; executable_behavior becomes observed when manifest_reference is supplied."
-      - "PRELOAD tied/vocab/quality-assurance.md; RESOLVE evidence chain profile vs assurance profile vs research profile vs attach provenance (pass collected validator/manifest outputs into evidence_chain_profile_generate)."
+      - "PRELOAD tied/vocab/quality-assurance.md; RESOLVE evidence chain profile vs assurance profile vs research profile."
       - "RETURN the profile path and proof-boundary partition. Optional CITDP evidence.profile_reference."
-      - "Save the verification-evidence-manifest.v1 to working/evidence-chain/verification-evidence-manifest.v1.json (non-intent path)."
     title: "Generate a read-only evidence chain profile"
     tracking:
       consideration_before_proceeding: "Profile written only under working/evidence-chain or stdout; project intent unchanged."

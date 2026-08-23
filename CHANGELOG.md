@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Shared TIED project identity (slice 1)** — `[ARCH-TIED_PROJECT_IDENTITY]` /
+  `[IMPL-TIED_PROJECT_IDENTITY]` (deferred-stats roadmap slice 1 via
+  `CITDP-REQ-DEFERRED_STATS_ROADMAP-identity`); env-only `TIED_MCP_PROJECT_ID`
+  uses trim, validation, and hashing, with path fallback when unset. Metrics
+  JSONL and evidence-chain profiles now share opaque `project_id` values and
+  expose `identity_source`; raw paths and configured IDs remain excluded.
+
 - **Evidence chain statistics report** — TIED-source offline CLI
   `mcp-server/src/cli/evidence-chain-report.ts` consumes an
   `evidence-chain-report-inputs.v1` manifest and already-generated
@@ -22,6 +29,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   source-repo-only.
 
 ### Changed
+
+- **Evidence chain attach-provenance wiring** — Checklist `sub-evidence-chain-profile`
+  now requires quality manifest collection and `manifest_reference` attach before
+  profiling; `verification-gate` clarifies attach vs run-only semantics.
+  MCP `evidence_chain_profile_generate` accepts optional
+  `invoke_structural_validators` (default `false`) to populate observed
+  structural rows. Operator docs in `tied/docs/evidence-chain-profile.md`;
+  **attach provenance** recorded in `tied/vocab/quality-assurance.md`.
+  Close-out CITDP: `tied/citdp/CITDP-REQ-EVIDENCE_CHAIN_PROFILE-wiring.yaml`;
+  pilot artifacts under `working/evidence-chain/`.
+
+- **Evidence-chain profile and reporting hardening** — Profile graph counts now
+  use selected TIED dependency graphs, omitted inventory/vocabulary checks are
+  explicitly measured as unknown or not measured, adapter failures are
+  structured, and human-research evidence is retained. Report reruns clear
+  stale generated outputs, render validation errors, and surface denominator
+  incompatibilities as residual risks. The metrics path now uses recursive
+  signature canonicalization, hashed project identity, redacted errors, and
+  schema-aware deterministic offline analysis.
 
 - **Adversarial inquiry activation close-out** — `[IMPL-TIED_FILES]` now records
   fail-closed inheritance verification, paired inquiry metrics and artifact

@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-# [IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY]
-# How: Verify paired inquiry metrics and request-scoped artifact completeness.
+# [IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY] [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS]
+# How: Verify paired inquiry metrics, request-scoped artifact completeness, and malformed-record accounting.
 
 # Smoke test for analyze_tied_mcp_metrics.rb
 # Run: ruby scripts/analyze_tied_mcp_metrics_test.rb
@@ -25,6 +25,7 @@ def run_analyzer(args)
 end
 
 lines = [
+  { 'not' => 'a metrics record' },
   {
     'v' => 1,
     'tool' => 'yaml_detail_read',
@@ -92,6 +93,7 @@ Dir.mktmpdir('tied-metrics-project') do |project_root|
     tc = report['tool_counts'] || {}
     raise "expected yaml_detail_read count 2, got #{tc.inspect}" unless tc['yaml_detail_read'] == 2
     raise "expected tied_validate_consistency count 1" unless tc['tied_validate_consistency'] == 1
+    raise "expected one schema error" unless report['schema_errors'] == 1
     activation = report.fetch('activation')
     raise 'expected two inquiry calls' unless activation['inquiry_call_count'] == 2
     raise 'expected client-scoped inquiry count' unless activation.dig('by_client', 'volume-stats', 'inquiry_call_count') == 2
@@ -99,7 +101,7 @@ Dir.mktmpdir('tied-metrics-project') do |project_root|
 
     agg = YAML.safe_load(err, permitted_classes: [Date, Time], aliases: true)
     summary = agg['summary'] || {}
-    raise 'aggregate missing lines' unless summary['lines'] == 5
+    raise 'aggregate missing lines' unless summary['lines'] == 6
     aggregate_activation = summary.fetch('activation')
     raise 'aggregate inquiry count mismatch' unless aggregate_activation['inquiry_call_count'] == 2
     raise 'aggregate client inquiry count mismatch' unless aggregate_activation.dig('by_client', 'volume-stats', 'inquiry_call_count') == 2

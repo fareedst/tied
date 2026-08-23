@@ -1786,6 +1786,14 @@ IMPL-TIED_FILES:
       - "scripts/analyze_tied_mcp_metrics_test.rb"
       - "scripts/compare_yaml_dirs_test.rb"
       - "scripts/yaml_list_sorter_test.rb"
+IMPL-TIED_PROJECT_IDENTITY:
+  cross_references:
+    - "ARCH-TIED_PROJECT_IDENTITY"
+    - "REQ-EVIDENCE_CHAIN_PROFILE"
+    - "REQ-MCP_USAGE_METRICS"
+  detail_file: "implementation-decisions/IMPL-TIED_PROJECT_IDENTITY.yaml"
+  name: "Project identity pure module"
+  status: "Active"
 IMPL-TIED_RESEARCH_RECORDS:
   code_locations:
     files:

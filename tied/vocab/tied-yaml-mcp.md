@@ -12,6 +12,10 @@
 
 | Preferred | Avoid | Notes |
 |-----------|-------|-------|
+| **configured project identity** | project name, repo name | Opaque pseudonymous ID from `TIED_MCP_PROJECT_ID` after trim + hash |
+| **path-fallback identity** | base path id | Path-hash when env ID unset/invalid; stable only for stable canonicalized path |
+| **identity source** | id type, id origin | Profile metadata: `configured` or `path_fallback` |
+| **signature coverage** | top-k metadata | Analyzer YAML: bound/considered/emitted/omitted/status for bounded aggregation |
 | **TIED YAML MCP** | yaml mcp, project-0-stdd-tied-yaml (alone) | IDE may show project-specific label; same tool surface |
 | **tied-cli** | mcp curl, raw node invoke | Shell wrapper: `.cursor/skills/tied-yaml/scripts/tied-cli.sh` |
 | **TIED base path** | repo root, workspace | Absolute path to **`tied/`** directory; `tied_config_get_base_path` confirms |
@@ -48,6 +52,9 @@
 | Client project root | client repo | — | derived in tied-cli (`REPO_ROOT`) | default for `TIED_BASE_PATH`; `getClientProjectRoot()` for extra rename globs |
 | IDE MCP config | mcp.json | `.cursor/mcp.json` | `env.TIED_BASE_PATH` | Cursor Settings → MCP |
 | Bootstrap metrics configuration | new `.cursor/mcp.json` metrics fields | `copy_files.sh` | `TIED_MCP_COLLECT_METRICS=1`, `TIED_MCP_METRICS_CLIENT` | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) · [REQ-MCP_USAGE_METRICS](../requirements/REQ-MCP_USAGE_METRICS.yaml) |
+| Configured project identity | env project ID | — | `TIED_MCP_PROJECT_ID` | `mcp-server/src/project-identity.ts`; shared by usage metrics + evidence-chain profile |
+| Path-fallback identity | path-derived project ID | — | unset/invalid `TIED_MCP_PROJECT_ID` | SHA-256→16-hex of `path.resolve(TIED_BASE_PATH)`; not relocation-stable |
+| Identity source | identity provenance | profile `identity_source` | — | `configured` or `path_fallback`; opaque hashed `project_id` in artifacts |
 | MCP config preservation | preserve existing MCP config | `.cursor/mcp.json` | `copy_files.sh` initializes only when absent | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
 | Large CLI args | args file | temp file | `TIED_CLI_ARGS_FILE` | `@/path/to/payload.json` |
 | IMPL body from file | essence file | `IMPL-*-pseudocode.md` | `TIED_CLI_IMPL_ESSENCE_FILE` | `impl_detail_set_essence_pseudocode` |
@@ -67,8 +74,9 @@
 | `TIED_MCP_COLLECT_METRICS` | `1` or `true` locally | Default **off**; enables append-only JSONL per tool call |
 | `TIED_MCP_METRICS_PATH` | optional | Default `~/.cursor/logs/tied-mcp-metrics.jsonl` |
 | `TIED_MCP_METRICS_CLIENT` | optional | IDE default `cursor-mcp`; **tied-cli** sets `tied-cli` when collection enabled |
+| `TIED_MCP_PROJECT_ID` | optional | Relocation-stable pseudonymous identity when set; trim → SHA-256→16-hex hash. Unset, empty, or invalid → **path-fallback identity**. No silent re-key of historical path-hash records. Repo-local ID file deferred. |
 
-Offline analysis: [`scripts/analyze_tied_mcp_metrics.rb`](../../scripts/analyze_tied_mcp_metrics.rb) — see [`docs/conversation-analysis-tools.md`](../../docs/conversation-analysis-tools.md).
+Records contain a hashed `project_id`, not the raw base path or raw configured ID; error snippets redact absolute paths. Offline analysis validates record shape, reports syntax/schema errors separately, applies **bounded top-50** signature aggregation with **signature coverage** metadata (`bound`, `considered`, `emitted`, `omitted`, `status`), and deterministic tie ordering: [`scripts/analyze_tied_mcp_metrics.rb`](../../scripts/analyze_tied_mcp_metrics.rb) — see [`docs/conversation-analysis-tools.md`](../../docs/conversation-analysis-tools.md).
 
 **Traceability:** [REQ-MCP_USAGE_METRICS](../requirements/REQ-MCP_USAGE_METRICS.yaml) · [ARCH-MCP_USAGE_METRICS](../architecture-decisions/ARCH-MCP_USAGE_METRICS.yaml) · [IMPL-MCP_USAGE_METRICS](../implementation-decisions/IMPL-MCP_USAGE_METRICS.yaml)
 

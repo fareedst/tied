@@ -1,0 +1,16 @@
+{
+  "run_id": "wiring-pilot-20260822",
+  "commit": "local",
+  "environment": {},
+  "commands": [
+    {
+      "id": "noop",
+      "argv": ["node", "-e", "process.exit(0)"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "artifact_dir": "/Users/fareed/Documents/dev/chatgpt/stdd/working/evidence-chain/artifacts"
+    }
+  ],
+  "quality_rows": [],
+  "covered_tokens": ["REQ-EVIDENCE_CHAIN_PROFILE"],
+  "proof_boundaries": ["executable_behavior"]
+}

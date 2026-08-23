@@ -63,7 +63,7 @@ ARCH-MCP_USAGE_METRICS:
       - "IMPL-MCP_USAGE_METRICS"
     see_also:
       - "ARCH-FEEDBACK_STORAGE"
-  status: "Active"
+  status: "Accepted"
   traceability:
     code_annotations:
       - "ARCH-MCP_USAGE_METRICS"

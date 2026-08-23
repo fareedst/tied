@@ -10,20 +10,22 @@
   - POST:
     - success => evidence-chain-statistics-report.v1 written with no maturity or score field and no client repo mutation
     - error in strict mode => no report files written
-  - FAILURE_MODES: InvalidManifest, MissingArtifact, MalformedProfile, DuplicateInput, ForbiddenField, EmptyPartialCohort, ForbiddenOutputPath
+  - FAILURE_MODES: InvalidManifest, MissingArtifact, MalformedProfile, DuplicateInput, ForbiddenField, EmptyPartialCohort, ForbiddenOutputPath, OutputWriteFailure
   - DATA: explicit profile artifacts, caller-selected report directory
   - DATA_TRANSITION: create or overwrite only yaml_out and markdown_out
   - EFFECTS: IO
   - TERMINATION: total
 - PROCEDURE: GENERATE_EVIDENCE_CHAIN_REPORT
-  - 1. CALL LOAD_REPORT_INPUT_MANIFEST
-  - 2. FOR each input in stable sort order CALL VALIDATE_PROFILE_ARTIFACT then CALL RESOLVE_INPUT_IDENTITY
-  - 3. IF mode is strict AND any input is rejected THEN RETURN error without writing outputs
-  - 4. IF mode is partial AND accepted set is empty THEN RETURN EmptyPartialCohort
-  - 5. CALL PARTITION_CLIENT_COHORTS
-  - 6. CALL AGGREGATE_COHORT_STATISTICS
-  - 7. CALL RENDER_STATISTICS_REPORT_YAML
-  - 8. CALL RENDER_STATISTICS_REPORT_MARKDOWN
+  - 1. Resolve and validate non-intent output paths; remove stale generated files before a new attempt.
+  - 2. CALL LOAD_REPORT_INPUT_MANIFEST
+  - 3. FOR each input in stable sort order CALL VALIDATE_PROFILE_ARTIFACT then CALL RESOLVE_INPUT_IDENTITY
+  - 4. IF mode is strict AND any input is rejected THEN RETURN error without outputs
+  - 5. IF mode is partial AND accepted set is empty THEN RETURN EmptyPartialCohort
+  - 6. CALL PARTITION_CLIENT_COHORTS
+  - 7. CALL AGGREGATE_COHORT_STATISTICS
+  - 8. CALL RENDER_STATISTICS_REPORT_YAML
+  - 9. CALL RENDER_STATISTICS_REPORT_MARKDOWN including validation_errors
+- ON output write failure: remove any partial/stale report files and RETURN OutputWriteFailure.
 - How (sub-block, same token set as above): Never call GENERATE_EVIDENCE_CHAIN_PROFILE, RUN_FIRST_SLICE, appendCandidateFinding, promoteConfirmedCase, or walk a client project_root.
 
 ## LOAD_REPORT_INPUT_MANIFEST
@@ -99,6 +101,7 @@
   - 1. Group by compatibility_key
   - 2. Stable-sort cohorts and members by project_id, commit, profile_depth, artifact_ref
   - 3. Do not treat denominator numeric values as a split key; v1 does not sum those values
+  - 4. Record an explicit residual risk whenever profiles in one cohort use different denominators for the same field path
 
 ## AGGREGATE_COHORT_STATISTICS
 

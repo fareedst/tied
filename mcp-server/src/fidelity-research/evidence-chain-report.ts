@@ -394,6 +394,42 @@ function fieldAt(profile: EvidenceChainProfile, fieldPath: (typeof REQUIRED_DERI
   }
 }
 
+function denominatorMismatchRisks(members: AcceptedRecord[]): string[] {
+  const risks: string[] = [];
+  const fields = REQUIRED_DERIVED_PATHS.flatMap((fieldPath) =>
+    members.map((member) => ({ fieldPath, field: fieldAt(member.profile, fieldPath) })),
+  );
+  const fieldPaths = [...new Set(fields.map(({ fieldPath }) => fieldPath))];
+  for (const fieldPath of fieldPaths) {
+    const denominators = new Set(
+      members
+        .map((member) => fieldAt(member.profile, fieldPath)?.denominator)
+        .filter((denominator): denominator is number | string => denominator !== undefined)
+        .map((denominator) => String(denominator)),
+    );
+    if (denominators.size > 1) {
+      risks.push(
+        `profiles in cohort ${members[0]?.row.compatibility_key ?? "unknown"} use incompatible denominators for ${fieldPath}: ${[
+          ...denominators,
+        ].sort(compareText).join(", ")}`,
+      );
+    }
+  }
+  const structuralDenominators = new Set(
+    members.flatMap((member) =>
+      member.profile.evidence_chain.structural.map((field) => String(field.denominator)),
+    ),
+  );
+  if (structuralDenominators.size > 1) {
+    risks.push(
+      `profiles in cohort ${members[0]?.row.compatibility_key ?? "unknown"} use incompatible denominators for evidence_chain.structural: ${[
+        ...structuralDenominators,
+      ].sort(compareText).join(", ")}`,
+    );
+  }
+  return risks;
+}
+
 export function aggregateCohortStatistics(members: AcceptedRecord[]): NamedStatistic[] {
   // [IMPL-EVIDENCE_CHAIN_REPORT] [ARCH-EVIDENCE_CHAIN_REPORT] [REQ-EVIDENCE_CHAIN_REPORT]
   // How: Emit only named count statistics; do not sum or average derived-field value numbers in v1.
@@ -560,6 +596,14 @@ export function renderStatisticsReportMarkdown(report: EvidenceChainStatisticsRe
       lines.push(`- ${row.artifact_ref}: ${row.error} (${row.reason})`);
     }
   }
+  lines.push("", "## Validation errors", "");
+  if (report.validation_errors.length === 0) {
+    lines.push("- none");
+  } else {
+    for (const row of report.validation_errors) {
+      lines.push(`- ${row.artifact_ref}: ${row.error} (${row.message})`);
+    }
+  }
   lines.push("", "## Residual risks", "");
   if (report.residual_risks.length === 0) {
     lines.push("- none");
@@ -600,8 +644,15 @@ export function generateEvidenceChainStatisticsReport(input: GenerateReportInput
   // [IMPL-EVIDENCE_CHAIN_REPORT] [ARCH-EVIDENCE_CHAIN_REPORT] [REQ-EVIDENCE_CHAIN_REPORT]
   // How: Never call GENERATE_EVIDENCE_CHAIN_PROFILE, RUN_FIRST_SLICE, appendCandidateFinding, promoteConfirmedCase, or walk a client project_root.
   const projectRoot = input.projectRoot ?? process.cwd();
-  if (isForbiddenIntentPath(input.yamlOut, projectRoot) || isForbiddenIntentPath(input.markdownOut, projectRoot)) {
+  const yamlOut = path.resolve(input.cwd ?? process.cwd(), input.yamlOut);
+  const markdownOut = path.resolve(input.cwd ?? process.cwd(), input.markdownOut);
+  if (isForbiddenIntentPath(yamlOut, projectRoot) || isForbiddenIntentPath(markdownOut, projectRoot)) {
     return fail("RENDER_STATISTICS_REPORT_YAML", "ForbiddenOutputPath", [], [], 1);
+  }
+  for (const outputPath of [yamlOut, markdownOut]) {
+    if (fs.existsSync(outputPath) && fs.statSync(outputPath).isFile()) {
+      fs.rmSync(outputPath);
+    }
   }
 
   let manifest: ReportInputManifest;
@@ -676,6 +727,7 @@ export function generateEvidenceChainStatisticsReport(input: GenerateReportInput
 
   const residualRisks = [
     "v1 count-only aggregation cannot detect semantic denominator-unit drift when two profiles reuse the same field path with different informal units.",
+    ...[...groups.values()].flatMap((members) => denominatorMismatchRisks(members)),
     ...accepted.flatMap((member) => member.residual_risks),
   ].sort(compareText);
 
@@ -706,13 +758,22 @@ export function generateEvidenceChainStatisticsReport(input: GenerateReportInput
 
   const yamlText = renderStatisticsReportYaml(report);
   const markdownText = renderStatisticsReportMarkdown(report);
-  fs.mkdirSync(path.dirname(path.resolve(input.yamlOut)), { recursive: true });
-  fs.mkdirSync(path.dirname(path.resolve(input.markdownOut)), { recursive: true });
-  fs.writeFileSync(input.yamlOut, yamlText, "utf8");
-  fs.writeFileSync(input.markdownOut, markdownText, "utf8");
+  try {
+    fs.mkdirSync(path.dirname(yamlOut), { recursive: true });
+    fs.mkdirSync(path.dirname(markdownOut), { recursive: true });
+    fs.writeFileSync(yamlOut, yamlText, "utf8");
+    fs.writeFileSync(markdownOut, markdownText, "utf8");
+  } catch {
+    for (const outputPath of [yamlOut, markdownOut]) {
+      if (fs.existsSync(outputPath) && fs.statSync(outputPath).isFile()) {
+        fs.rmSync(outputPath);
+      }
+    }
+    return fail("RENDER_STATISTICS_REPORT_YAML", "OutputWriteFailure", [], [], 1);
+  }
   console.debug("DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] wrote statistics report", {
-    yaml_out: path.basename(input.yamlOut),
-    markdown_out: path.basename(input.markdownOut),
+    yaml_out: path.basename(yamlOut),
+    markdown_out: path.basename(markdownOut),
     cohort_count: report.cohorts.length,
   });
   return { ok: true, report, exit_code: 0 };

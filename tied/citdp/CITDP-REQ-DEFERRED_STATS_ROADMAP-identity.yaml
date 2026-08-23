@@ -1,0 +1,75 @@
+CITDP-REQ-DEFERRED_STATS_ROADMAP-identity:
+  change_definition:
+    current_behavior_prior: "Duplicate path-hash anonymizeProjectId in usage-metrics and evidence-chain-profile; no configured ID surface."
+    desired_behavior: "Single resolveProjectIdentity module; valid TIED_MCP_PROJECT_ID → SHA-256→16-hex hash; unset/empty/invalid → legacy path fallback; profile exposes identity_source; artifacts never contain raw path or configured string."
+    non_goals:
+      - "Repo-local project ID file"
+      - "Slice 2 signature aggregation changes"
+      - "v2 report cohort changes"
+    references:
+      - "mcp-server/src/project-identity.ts"
+      - "tied/architecture-decisions/ARCH-TIED_PROJECT_IDENTITY.yaml"
+      - "tied/implementation-decisions/IMPL-TIED_PROJECT_IDENTITY-pseudocode.md"
+      - "tied/implementation-decisions/IMPL-TIED_PROJECT_IDENTITY.yaml"
+    success_criteria:
+      - "No raw path or configured string in JSONL or profile JSON"
+      - "Path fallback unchanged for unset env"
+      - "project-identity.test.ts relocation and fallback matrix passes"
+      - "usage-metrics and evidence-chain-profile composition share project_id"
+    summary: "P2 slice 1 — shared project identity resolver with env-only TIED_MCP_PROJECT_ID and path fallback."
+    unchanged_behavior: "When TIED_MCP_PROJECT_ID unset, project_id remains path.resolve hash identical to pre-slice-1."
+  completion_criteria:
+    close_out_scope: "Slice 1 shared project identity plus bundled evidence-chain/metrics hardening only; adversarial inquiry not applicable."
+    deferred: "P2 slice 2 bounded signature aggregation; decision gate III/v2 cohort changes; repo-local project ID file."
+    verification_gate_notes: "PASS: npm test --prefix mcp-server (361 tests, 361 pass, 0 fail); PASS: bunx tsc -b from mcp-server (exit 0); PASS: ruby scripts/analyze_tied_mcp_metrics_test.rb (ok); PASS: TIED MCP tied_validate_consistency (ok true, indexes/detail/traceability/pseudo-code checks pass); PASS: TIED MCP tied_verify explicit parent REQs and four slice IMPLs (no demotions); PASS: pseudocode_validate for four changed IMPLs (all ok true); PASS: ruby scripts/validate_vocab_index.rb; YAML canonical-style check passed after close-out formatting."
+  impact_analysis:
+    impl_inventory_notes: "mcp-server/src/project-identity.ts, project-identity.test.ts, project-identity.composition.test.ts; usage-metrics.ts; evidence-chain-profile.ts; extended usage-metrics.test.ts and evidence-chain-profile.test.ts."
+    modules_or_boundaries: "project-identity.ts pure module; usage-metrics wrapToolHandler; evidence-chain-profile generate/normalize identity section."
+    tied_tokens_affected:
+      - "IMPL-EVIDENCE_CHAIN_PROFILE"
+      - "IMPL-MCP_USAGE_METRICS"
+      - "REQ-EVIDENCE_CHAIN_PROFILE"
+      - "REQ-MCP_USAGE_METRICS"
+    tied_tokens_new:
+      - "ARCH-TIED_PROJECT_IDENTITY"
+      - "IMPL-TIED_PROJECT_IDENTITY"
+  leap_feedback:
+    divergences_from_analysis: "none"
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "REQ-DEFERRED_STATS_ROADMAP"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    checklist_step_completed: "plan-close-out"
+    recorded_at: "2026-08-22"
+    tied_context:
+      architecture:
+        - "ARCH-EVIDENCE_CHAIN_PROFILE"
+        - "ARCH-MCP_USAGE_METRICS"
+        - "ARCH-TIED_PROJECT_IDENTITY"
+      implementation:
+        - "IMPL-EVIDENCE_CHAIN_PROFILE"
+        - "IMPL-MCP_USAGE_METRICS"
+        - "IMPL-TIED_PROJECT_IDENTITY"
+      requirements:
+        - "REQ-EVIDENCE_CHAIN_PROFILE"
+        - "REQ-MCP_USAGE_METRICS"
+    title: "Shared project identity resolver (slice 1)"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  risk_analysis:
+    risks:
+      - description: "Configured ID migration splits historical path-hash cohorts."
+        id: "RISK-ID-001"
+        likelihood: "Expected"
+        mitigation: "No silent re-key policy documented; path fallback when env unset."
+        severity: "Low"
+      - description: "Invalid env parsing accepts path-like strings."
+        id: "RISK-ID-002"
+        likelihood: "Low"
+        mitigation: "Reject separators/newlines/>128 chars; unit tests."
+        severity: "Medium"
+  tdd_sequence:
+    summary: "RED project-identity.test.ts → GREEN resolver → composition metrics+profile → update parent REQ satisfaction criteria."
+  test_strategy:
+    matrix_notes: "361 mcp-server tests pass including 11 project-identity unit + 1 composition."
+    summary: "Module validation for project-identity; composition via usage-metrics.test.ts and project-identity.composition.test.ts; profile identity_source in evidence-chain-profile.test.ts."

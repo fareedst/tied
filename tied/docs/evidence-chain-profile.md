@@ -21,13 +21,46 @@ It is not an **assurance profile**, not a **verification evidence manifest**, an
 
 ## MCP / CLI (Path A)
 
+### Prerequisites
+
+For **observed** `quality.command_results` (`executable_behavior` proof boundary), collect a **verification evidence manifest** first and pass `manifest_reference` into the generator. See [quality-evidence-manifest.md](./quality-evidence-manifest.md) and `[PROC-QUALITY_EVIDENCE_PROVENANCE]`.
+
+For **observed** structural validator rows, supply live structural validator results. MCP accepts optional `invoke_structural_validators: true` (default `false` for backward compatibility) to run the six structural validators internally and attach results. Without manifest or structural wiring, derived fields correctly remain `not_measured` (fail-closed).
+
+Typical attach-provenance flow:
+
+```bash
+TIED_BASE_PATH=/absolute/client/tied \
+  .cursor/skills/tied-yaml/scripts/tied-cli.sh \
+  quality_evidence_collect_manifest @collect-args.json \
+  > working/evidence-chain/verification-evidence-manifest.v1.json
+
+TIED_BASE_PATH=/absolute/client/tied \
+  .cursor/skills/tied-yaml/scripts/tied-cli.sh \
+  evidence_chain_profile_generate @profile-args-with-manifest-ref.json \
+  > working/evidence-chain/profile.json
+```
+
+Example `profile-args-with-manifest-ref.json`:
+
+```json
+{
+  "profile_depth": "integrated",
+  "manifest_reference": "working/evidence-chain/verification-evidence-manifest.v1.json",
+  "invoke_structural_validators": false,
+  "run_metadata": { "run_id": "pilot-001", "commit": "abc123" }
+}
+```
+
+Bare profile (no attach):
+
 ```bash
 TIED_BASE_PATH=/absolute/client/tied \
   .cursor/skills/tied-yaml/scripts/tied-cli.sh \
   evidence_chain_profile_generate @profile-args.json > working/evidence-chain/profile.json
 ```
 
-Required: `profile_depth`. Optional: `project_root`, `tied_base_path` (must match `tied_config_get_base_path`), `scope`, `change_context`, `output_mode` / `output_path`.
+Required: `profile_depth`. Optional: `project_root`, `tied_base_path` (must match `tied_config_get_base_path`), `scope`, `change_context`, `manifest_reference`, `invoke_structural_validators`, `output_mode` / `output_path`.
 
 **Fail closed** when the requested **TIED base path** is not `project_root/tied` or does not match the confirmed MCP base path (`WrongTiedBasePath`).
 
@@ -133,7 +166,7 @@ Forbidden keys anywhere in an input profile or the output report: `maturity`, `s
 
 ### Markdown contract
 
-`report.md` is a deterministic projection of the YAML values. It must not invent statistics. Sections: generated time and mode; input and cohort counts; per-cohort statistics; coverage / **proof boundary** summary; excluded inputs; residual-risk and provenance notes.
+`report.md` is a deterministic projection of the YAML values. It must not invent statistics. Sections: generated time and mode; input and cohort counts; per-cohort statistics; coverage / **proof boundary** summary; excluded inputs; validation errors; residual-risk and provenance notes. A failed rerun removes stale generated outputs before returning its error.
 
 ### CLI
 
@@ -152,6 +185,7 @@ Output paths must be caller-selected non-intent files (example `working/evidence
 - This guide is client-copied via `copy_files.sh` `DOCS_TO_COPY` (copy-when-missing).
 - `[REQ-EVIDENCE_CHAIN_PROFILE]` records are promoted into `templates/` so clients can cite generation.
 - `[REQ-EVIDENCE_CHAIN_REPORT]` records stay **source-repository-only**; clients invoke the TIED-source CLI, they do not inherit aggregator tokens.
+- Source installation contract: from a checked-out TIED source repository, run `npm ci` and `npm run build` in `mcp-server/`, then invoke `mcp-server/dist/cli/evidence-chain-report.js`. The CLI is not installed by `copy_files.sh` and is not expected to be available from a client-only checkout.
 
 ## v1 non-goals
 

@@ -5,10 +5,11 @@
 # How: Stream MCP usage records and pair adversarial inquiry calls with request-scoped artifact completeness.
 
 # Streaming analysis of TIED MCP usage metrics JSONL (~/.cursor/logs/tied-mcp-metrics.jsonl).
-# O(1) memory per line.
+# Streams input lines; bounded report sections are emitted after each file.
 #
 # Usage:
-#   ruby scripts/analyze_tied_mcp_metrics.rb FILE [FILE ...]
+#   ruby scripts/analyze_tied_mcp_metrics.rb [FILE ...]
+#   # with no FILE, use ~/.cursor/logs/tied-mcp-metrics.jsonl when present
 #   ruby scripts/analyze_tied_mcp_metrics.rb --aggregate FILE 2>summary.yaml
 #   ruby scripts/analyze_tied_mcp_metrics.rb --project-root PATH FILE
 #
@@ -24,6 +25,7 @@ def empty_stats
   {
     lines: 0,
     parse_errors: 0,
+    schema_errors: 0,
     tool_counts: Hash.new(0),
     client_counts: Hash.new(0),
     ok_count: 0,
@@ -43,7 +45,20 @@ def failure_key(tool, err)
 end
 
 def ingest_line(obj, stats)
-  stats[:lines] += 1
+  valid = obj.is_a?(Hash) &&
+    obj['v'] == 1 &&
+    obj['tool'].is_a?(String) &&
+    !obj['tool'].empty? &&
+    obj['client'].is_a?(String) &&
+    (obj['ok'].is_a?(TrueClass) || obj['ok'].is_a?(FalseClass)) &&
+    obj['duration_ms'].is_a?(Numeric) &&
+    obj['duration_ms'] >= 0 &&
+    obj['args_summary'].is_a?(Hash) &&
+    obj['args_signature'].is_a?(String)
+  unless valid
+    stats[:schema_errors] += 1
+    return
+  end
   tool = obj['tool'].to_s
   client = obj['client'].to_s
   ok = obj['ok']
@@ -153,12 +168,13 @@ def stats_to_report(path, stats, project_root = nil)
     h = duration_stats_to_hash(bucket)
     durations[tool] = h if h
   end
-  failures = stats[:failures].values.sort_by { |h| -h['count'] }
-  top_sigs = stats[:signatures].values.sort_by { |h| -h['count'] }.first(50)
+  failures = stats[:failures].values.sort_by { |h| [-h['count'], h['tool'].to_s, h['error'].to_s] }
+  top_sigs = stats[:signatures].values.sort_by { |h| [-h['count'], h['tool'].to_s, h['args_signature'].to_s] }.first(50)
   {
     'file' => path,
     'lines' => stats[:lines],
     'parse_errors' => stats[:parse_errors],
+    'schema_errors' => stats[:schema_errors],
     'ok_count' => stats[:ok_count],
     'fail_count' => stats[:fail_count],
     'activation' => {
@@ -167,7 +183,7 @@ def stats_to_report(path, stats, project_root = nil)
       'request_token_counts' => stats[:adversarial_request_counts].sort.to_h,
       'artifact_status' => artifact_status(project_root, stats[:adversarial_request_counts])
     },
-    'tool_counts' => stats[:tool_counts].sort_by { |_t, c| -c }.to_h,
+    'tool_counts' => stats[:tool_counts].sort_by { |tool, count| [-count, tool] }.to_h,
     'client_counts' => stats[:client_counts].sort.to_h,
     'duration_by_tool' => durations.sort.to_h,
     'failures' => failures.first(30),
@@ -180,6 +196,7 @@ def analyze_file(path, project_root = nil)
   stats = empty_stats
   File.foreach(path, chomp: true, encoding: 'UTF-8:UTF-8') do |line|
     next if line.strip.empty?
+    stats[:lines] += 1
 
     begin
       obj = JSON.parse(line)
@@ -246,6 +263,7 @@ def build_aggregate(reports, project_root = nil)
       'files' => reports.size,
       'lines' => merged[:lines],
       'parse_errors' => merged[:parse_errors],
+      'schema_errors' => merged[:schema_errors],
       'ok_count' => merged[:ok_count],
       'fail_count' => merged[:fail_count],
       'activation' => {
@@ -254,11 +272,11 @@ def build_aggregate(reports, project_root = nil)
         'request_token_counts' => merged[:adversarial_request_counts].sort.to_h,
         'artifact_status' => artifact_status(project_root, merged[:adversarial_request_counts])
       },
-      'tool_counts' => merged[:tool_counts].sort_by { |_t, c| -c }.to_h,
+      'tool_counts' => merged[:tool_counts].sort_by { |tool, count| [-count, tool] }.to_h,
       'client_counts' => merged[:client_counts].sort.to_h,
       'duration_by_tool' => merged[:duration_by_tool].transform_values { |b| duration_stats_to_hash(b) }.compact.sort.to_h,
-      'failures' => merged[:failures].values.sort_by { |h| -h['count'] }.first(30),
-      'top_signatures' => merged[:signatures].values.sort_by { |h| -h['count'] }.first(50)
+      'failures' => merged[:failures].values.sort_by { |h| [-h['count'], h['tool'].to_s, h['error'].to_s] }.first(30),
+      'top_signatures' => merged[:signatures].values.sort_by { |h| [-h['count'], h['tool'].to_s, h['args_signature'].to_s] }.first(50)
     }
   }
 end
@@ -277,7 +295,17 @@ parser.parse!
 
 files = ARGV
 if files.empty?
+  default_path = File.join(Dir.home, '.cursor', 'logs', 'tied-mcp-metrics.jsonl')
+  files = [default_path] if File.file?(default_path)
+end
+if files.empty?
   warn parser
+  exit 1
+end
+
+missing_files = files.reject { |file| File.file?(file) }
+unless missing_files.empty?
+  warn "Metrics file not found: #{missing_files.join(', ')}"
   exit 1
 end
 

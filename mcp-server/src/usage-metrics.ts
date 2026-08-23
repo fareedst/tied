@@ -7,7 +7,10 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import { resolveProjectIdentity, anonymizedProjectId } from "./project-identity.js";
 import { getBasePath } from "./yaml-loader.js";
+
+export { anonymizedProjectId };
 
 export const METRICS_SCHEMA_VERSION = 1;
 
@@ -63,7 +66,6 @@ export interface MetricsRecord {
   ts: string;
   tool: string;
   client: string;
-  base_path: string;
   project_id?: string;
   run_id?: string;
   profile_depth?: string;
@@ -74,10 +76,6 @@ export interface MetricsRecord {
   error_snippet: string | null;
   args_summary: Record<string, unknown>;
   args_signature: string;
-}
-
-export function anonymizedProjectId(basePath: string): string {
-  return crypto.createHash("sha256").update(path.resolve(basePath || "unknown")).digest("hex").slice(0, 16);
 }
 
 function envTruthy(name: string): boolean {
@@ -112,6 +110,20 @@ function byteLengthOf(value: unknown): number {
 function truncateString(s: string): string {
   if (s.length <= MAX_STRING_LEN) return s;
   return s.slice(0, MAX_STRING_LEN) + "…";
+}
+
+function stableSerialize(value: unknown): string {
+  if (Array.isArray(value)) {
+    return `[${value.map((item) => stableSerialize(item)).join(",")}]`;
+  }
+  if (value != null && typeof value === "object") {
+    const record = value as Record<string, unknown>;
+    return `{${Object.keys(record)
+      .sort()
+      .map((key) => `${JSON.stringify(key)}:${stableSerialize(record[key])}`)
+      .join(",")}}`;
+  }
+  return JSON.stringify(value);
 }
 
 function summarizeValue(key: string, value: unknown): unknown {
@@ -162,19 +174,23 @@ export function sanitizeArgs(
       }
     }
   }
-  const stable = JSON.stringify(summary, Object.keys(summary).sort());
+  const stable = stableSerialize(summary);
   const args_signature = crypto.createHash("sha256").update(stable).digest("hex").slice(0, 24);
   return { args_summary: summary, args_signature };
+}
+
+function redactErrorMessage(message: string): string {
+  return truncateString(message.replace(/(?:[A-Za-z]:[\\/]|\/)[^\s]+/g, "<path>"));
 }
 
 function extractErrorSnippet(result: ToolHandlerResult | undefined, thrown: unknown): string | null {
   if (thrown != null) {
     const msg = thrown instanceof Error ? thrown.message : String(thrown);
-    return truncateString(msg);
+    return redactErrorMessage(msg);
   }
   if (result?.isError) {
     const text = result.content?.map((b) => b.text ?? "").join("") ?? "";
-    return text ? truncateString(text) : "isError";
+    return text ? redactErrorMessage(text) : "isError";
   }
   return null;
 }
@@ -232,8 +248,7 @@ export function wrapToolHandler(toolName: string, handler: ToolHandler): ToolHan
       recordToolCall({
         tool: toolName,
         client,
-        base_path,
-        project_id: anonymizedProjectId(base_path),
+        project_id: resolveProjectIdentity(base_path).project_id,
         run_id: typeof argRecord.run_id === "string" ? argRecord.run_id : typeof runMetadata.run_id === "string" ? runMetadata.run_id : undefined,
         profile_depth: typeof argRecord.profile_depth === "string" ? argRecord.profile_depth : undefined,
         scope_hash: typeof argRecord.scope_hash === "string" ? argRecord.scope_hash : undefined,
@@ -246,4 +261,16 @@ export function wrapToolHandler(toolName: string, handler: ToolHandler): ToolHan
       });
     }
   };
+}
+
+/** Instrument every registered tool exactly once when metrics are enabled. [IMPL-MCP_USAGE_METRICS] */
+export function instrumentToolHandlers<T extends { name: string; handler: unknown }>(
+  tools: readonly T[],
+): Map<string, ToolHandler> {
+  const handlers = new Map<string, ToolHandler>();
+  for (const tool of tools) {
+    const handler = tool.handler as ToolHandler;
+    handlers.set(tool.name, isMetricsEnabled() ? wrapToolHandler(tool.name, handler) : handler);
+  }
+  return handlers;
 }

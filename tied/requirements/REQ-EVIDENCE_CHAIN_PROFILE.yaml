@@ -28,17 +28,22 @@ REQ-EVIDENCE_CHAIN_PROFILE:
       metric: "WrongTiedBasePath and no intent YAML writes"
     - criterion: "No finding-ledger append or case promotion from the generator"
       metric: "Orchestrator never calls those adapters"
-  status: "Planned"
+    - criterion: "Shared project identity resolver emits opaque project_id and identity_source; aligned with usage metrics"
+      metric: "evidence-chain-profile.test.ts and project-identity.test.ts; profile never contains raw path or configured string"
+  status: "Implemented"
   traceability:
     architecture:
       - "ARCH-EVIDENCE_CHAIN_PROFILE"
+      - "ARCH-TIED_PROJECT_IDENTITY"
     code_annotations:
       - "REQ-EVIDENCE_CHAIN_PROFILE"
     implementation:
       - "IMPL-EVIDENCE_CHAIN_PROFILE"
+      - "IMPL-TIED_PROJECT_IDENTITY"
     tests:
       - "mcp-server/src/fidelity-research/evidence-chain-profile.mcp.test.ts"
       - "mcp-server/src/fidelity-research/evidence-chain-profile.test.ts"
+      - "project-identity.test.ts"
   validation_criteria:
     - coverage: "Normalizer, depth gating, fail-closed base path, manual fixture"
       method: "Unit and composition tests"

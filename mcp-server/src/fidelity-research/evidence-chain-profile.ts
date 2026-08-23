@@ -7,6 +7,12 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 
+import { resolveProjectIdentity } from "../project-identity.js";
+import {
+  buildImplementationGraph,
+  buildRequirementGraph,
+  findCycles,
+} from "../dependency-graph.js";
 import {
   analyzeBindingEvidence,
   type BindingAnalysisResult,
@@ -61,6 +67,7 @@ export type EvidenceChainProfile = {
     commit: string;
     tied_methodology_version: string;
     tied_base_path_confirmed: boolean;
+    identity_source?: "configured" | "path_fallback";
   };
   scope: {
     roots_used: string[];
@@ -81,8 +88,10 @@ export type EvidenceChainProfile = {
   };
   evidence_chain: {
     structural: DerivedField<unknown>[];
-    graph: DerivedField<{ nodes: number; edges: number; cycles: number }>;
-    vocab_resolution: DerivedField<string>;
+    graph: DerivedField<unknown>;
+    vocab_resolution: DerivedField<unknown>;
+    semantic_fidelity?: DerivedField<unknown>[];
+    composition?: DerivedField<unknown>;
   };
   quality: {
     applicable_attributes: string[];
@@ -115,6 +124,7 @@ export type EvidenceChainProfileGenerateInput = {
   output_path?: string;
   scope?: {
     requirement_tokens?: string[];
+    architecture_tokens?: string[];
     implementation_tokens?: string[];
     impl_tokens_for_pseudocode?: string[];
     binding_rows?: Record<string, unknown>[];
@@ -155,10 +165,6 @@ export type EvidenceChainProfileResult =
 
 const FORBIDDEN_SCORE_KEYS = new Set(["maturity", "score", "maturity_score", "universal_score"]);
 const GENERATOR_VERSION = "1.0.0";
-
-export function anonymizeProjectId(tiedBasePath: string): string {
-  return crypto.createHash("sha256").update(path.resolve(tiedBasePath)).digest("hex").slice(0, 16);
-}
 
 export function hashScope(scope: unknown): string {
   const stable = JSON.stringify(scope ?? {}, Object.keys((scope ?? {}) as object).sort());
@@ -239,14 +245,14 @@ function defaultBindingInput(): { binding: BindingContract; evidence: BindingEvi
 }
 
 function defaultStructuralValidators(): StructuralAnalysisInput["validators"] {
-  const ok = () => ({ ok: true });
+  const notMeasured = () => ({ ok: false });
   return {
-    tiedConsistency: ok,
-    pseudocode: ok,
-    traceability: ok,
-    cycles: ok,
-    bindingInventory: ok,
-    testAdequacy: ok,
+    tiedConsistency: notMeasured,
+    pseudocode: notMeasured,
+    traceability: notMeasured,
+    cycles: notMeasured,
+    bindingInventory: notMeasured,
+    testAdequacy: notMeasured,
   };
 }
 
@@ -279,6 +285,7 @@ export function resolveEvidenceChainScope(
     return { ok: false, error: "InvalidScope" };
   }
   const requirementCount = input.scope?.requirement_tokens?.length ?? 0;
+  const architectureCount = input.scope?.architecture_tokens?.length ?? 0;
   const implementationCount = input.scope?.implementation_tokens?.length ?? 0;
   return {
     ok: true,
@@ -291,14 +298,14 @@ export function resolveEvidenceChainScope(
         roots: input.roots ?? [],
       }),
       languages: ["typescript"],
-      file_counts: { source: 0, tests: 0, docs: 0 },
+      file_counts: {},
       active_populations: {
         requirements: requirementCount,
-        architecture: 0,
+        architecture: architectureCount,
         implementation: implementationCount,
       },
       excluded: ["methodology", "templates", "fixtures"],
-      unknown: [],
+      unknown: ["file_counts"],
       not_measured: ["vocabulary_drift_automation", "block_level_impl_test_matrix"],
       not_applicable: [],
       profile_depth: input.profile_depth,
@@ -319,10 +326,9 @@ export function emitManualProfileContract(draft: unknown): EvidenceChainProfile 
   if (!Array.isArray(draft.unsupported_checks)) {
     throw new Error("MalformedProfile: manual profiles require unsupported_checks[]");
   }
-  const claimed = draft.unsupported_checks;
-  if (!claimed.includes("mcp_validators_not_run") && draft.identity.tied_base_path_confirmed === true) {
-    // Manual profiles may confirm a path they inspected; they must still list unsupported MCP checks
-    // unless they explicitly mark validators as unsupported.
+  const claimed = draft.unsupported_checks.filter((value): value is string => typeof value === "string");
+  if (draft.identity.tied_base_path_confirmed === true && !claimed.includes("mcp_validators_not_run")) {
+    throw new Error("MalformedProfile: manual profiles must list mcp_validators_not_run in unsupported_checks");
   }
   return normalizeEvidenceChainProfile(draft);
 }
@@ -374,6 +380,10 @@ export function normalizeEvidenceChainProfile(draft: unknown): EvidenceChainProf
       commit: String(draft.identity.commit ?? "unknown"),
       tied_methodology_version: String(draft.identity.tied_methodology_version ?? "unknown"),
       tied_base_path_confirmed: Boolean(draft.identity.tied_base_path_confirmed),
+      identity_source:
+        draft.identity.identity_source === "configured" || draft.identity.identity_source === "path_fallback"
+          ? draft.identity.identity_source
+          : undefined,
     },
     scope: {
       roots_used: sortedStrings((draft.scope.roots_used as string[]) ?? []),
@@ -397,7 +407,15 @@ export function normalizeEvidenceChainProfile(draft: unknown): EvidenceChainProf
         String(left.source).localeCompare(String(right.source)),
       ),
       graph: graph as DerivedField<{ nodes: number; edges: number; cycles: number }>,
-      vocab_resolution: vocab as DerivedField<string>,
+      vocab_resolution: vocab as DerivedField<unknown>,
+      semantic_fidelity: Array.isArray(draft.evidence_chain.semantic_fidelity)
+        ? draft.evidence_chain.semantic_fidelity.map((row, index) =>
+            assertDerivedField(`evidence_chain.semantic_fidelity[${index}]`, row),
+          )
+        : undefined,
+      composition: draft.evidence_chain.composition
+        ? assertDerivedField("evidence_chain.composition", draft.evidence_chain.composition)
+        : undefined,
     },
     quality: {
       applicable_attributes: sortedStrings((draft.quality.applicable_attributes as string[]) ?? []),
@@ -446,6 +464,39 @@ function derived<T>(
   return { value, source, method, denominator, proof_boundary, status };
 }
 
+function collectGraphCounts(tokens: readonly string[]): {
+  nodes: number;
+  edges: number;
+  cycles: number;
+} {
+  const requirementGraph = buildRequirementGraph();
+  const implementationGraph = buildImplementationGraph();
+  const selected = new Set(tokens);
+  const restrict = tokens.length > 0;
+  const graphs = [requirementGraph, implementationGraph];
+  let nodes = 0;
+  let edges = 0;
+  let cycles = 0;
+  for (const graph of graphs) {
+    const scoped = new Map(
+      [...graph.entries()]
+        .filter(([token]) => !restrict || selected.has(token))
+        .map(([token, dependencies]) => [
+          token,
+          dependencies.filter((dependency) => !restrict || selected.has(dependency)),
+        ]),
+    );
+    nodes += scoped.size;
+    edges += [...scoped.values()].reduce((total, dependencies) => total + dependencies.length, 0);
+    cycles += findCycles(scoped).length;
+  }
+  return { nodes, edges, cycles };
+}
+
+function errorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : String(error);
+}
+
 export function generateEvidenceChainProfile(
   input: EvidenceChainProfileGenerateInput,
 ): EvidenceChainProfileResult {
@@ -461,14 +512,19 @@ export function generateEvidenceChainProfile(
     return { ok: false, stage: "manifest", error: "WrongTiedBasePath" };
   }
 
-  const manifest = adapters.resolveManifest({
-    projectRoot: input.project_root,
-    tiedBasePath: input.tied_base_path,
-    version: "1.0.0",
-    languages: ["typescript"],
-    testClassifiers: ["unit"],
-    ignoreRules: [],
-  });
+  let manifest: ProjectManifestResult;
+  try {
+    manifest = adapters.resolveManifest({
+      projectRoot: input.project_root,
+      tiedBasePath: input.tied_base_path,
+      version: "1.0.0",
+      languages: ["typescript"],
+      testClassifiers: ["unit"],
+      ignoreRules: [],
+    });
+  } catch (error) {
+    return { ok: false, stage: "manifest", error: errorMessage(error) };
+  }
   if (!manifest.ok) {
     return { ok: false, stage: "manifest", error: manifest.error };
   }
@@ -484,23 +540,33 @@ export function generateEvidenceChainProfile(
 
   const tokens = [
     ...(input.scope?.requirement_tokens ?? []),
+    ...(input.scope?.architecture_tokens ?? []),
     ...(input.scope?.implementation_tokens ?? []),
     ...(input.scope?.impl_tokens_for_pseudocode ?? []),
   ];
-  const structural = adapters.runStructuralAnalysis({
-    snapshotId: input.run_metadata?.run_id ?? "evidence-chain",
-    tokens: tokens.length > 0 ? tokens : ["REQ-EVIDENCE_CHAIN_PROFILE"],
-    validators: input.structural_validators ?? defaultStructuralValidators(),
-  });
+  const structuralTokens = tokens.length > 0 ? tokens : ["REQ-EVIDENCE_CHAIN_PROFILE"];
+  const validatorsProvided = input.structural_validators !== undefined;
+  let structural: StructuralAnalysisResult;
+  try {
+    structural = adapters.runStructuralAnalysis({
+      snapshotId: input.run_metadata?.run_id ?? "evidence-chain",
+      tokens: structuralTokens,
+      validators: input.structural_validators ?? defaultStructuralValidators(),
+    });
+  } catch (error) {
+    return { ok: false, stage: "structural", error: errorMessage(error) };
+  }
 
   const structuralFields = structural.evidence.map((row) =>
     derived(
-      { validator: row.validator, ok: row.ok },
+      validatorsProvided
+        ? { validator: row.validator, ok: row.ok }
+        : { validator: row.validator, status: "not_measured" },
       row.validator,
       "RUN_STRUCTURAL_ANALYSIS",
-      tokens.length || 1,
+      structuralTokens.length,
       row.validator.includes("pseudocode") ? "pseudo_code_structure" : "traceability_structure",
-      "observed",
+      validatorsProvided ? "observed" : "not_measured",
     ),
   );
 
@@ -508,18 +574,22 @@ export function generateEvidenceChainProfile(
   let bindingResult: BindingAnalysisResult | undefined;
   let specificationResult: SpecificationStateResult | undefined;
   if (input.profile_depth === "human_research") {
-    fidelityResult = adapters.auditImplFidelity(
-      input.fidelity_input ?? { pseudocode: "", testLoci: [], codeLoci: [] },
-    );
-    bindingResult = adapters.analyzeBindingEvidence(input.binding_input ?? defaultBindingInput());
-    if (input.change_context) {
-      specificationResult = adapters.analyzeSpecificationState(
-        input.specification_input ?? {
-          prior: { approved: true, behavior: "not_measured" },
-          current: { approved: true, behavior: "not_measured" },
-          observedBehavior: "not_measured",
-        },
+    try {
+      fidelityResult = adapters.auditImplFidelity(
+        input.fidelity_input ?? { pseudocode: "", testLoci: [], codeLoci: [] },
       );
+      bindingResult = adapters.analyzeBindingEvidence(input.binding_input ?? defaultBindingInput());
+      if (input.change_context) {
+        specificationResult = adapters.analyzeSpecificationState(
+          input.specification_input ?? {
+            prior: { approved: true, behavior: "not_measured" },
+            current: { approved: true, behavior: "not_measured" },
+            observedBehavior: "not_measured",
+          },
+        );
+      }
+    } catch (error) {
+      return { ok: false, stage: "human_research", error: errorMessage(error) };
     }
   }
 
@@ -530,9 +600,9 @@ export function generateEvidenceChainProfile(
     console.error("DIAGNOSTIC: evidence chain profile must not promote cases");
   }
 
-  const changeFidelity = input.change_context
+  const changeFidelity = input.change_context && specificationResult
     ? derived(
-        specificationResult ?? { status: "referenced_only" },
+        specificationResult,
         "ANALYZE_SPECIFICATION_STATE",
         "reference_only",
         1,
@@ -567,7 +637,28 @@ export function generateEvidenceChainProfile(
         "not_measured",
       );
 
-  const projectId = anonymizeProjectId(input.tied_base_path);
+  const { project_id: projectId, identity_source: identitySource } = resolveProjectIdentity(input.tied_base_path);
+  let graphCounts: { nodes: number; edges: number; cycles: number };
+  try {
+    graphCounts = collectGraphCounts(structuralTokens);
+  } catch (error) {
+    return { ok: false, stage: "structural", error: errorMessage(error) };
+  }
+  const fidelityFields = fidelityResult
+    ? [
+        derived(
+          fidelityResult,
+          "AUDIT_IMPL_FIDELITY",
+          "audit",
+          fidelityResult.inventory.length || 1,
+          "semantic_fidelity",
+          "observed",
+        ),
+      ]
+    : undefined;
+  const compositionField = bindingResult
+    ? derived(bindingResult, "ANALYZE_BINDING_EVIDENCE", "binding_analysis", 1, "executable_behavior", "observed")
+    : undefined;
   const draft: EvidenceChainProfile = {
     identity: {
       schema_version: EVIDENCE_CHAIN_PROFILE_SCHEMA,
@@ -578,26 +669,29 @@ export function generateEvidenceChainProfile(
       commit: input.run_metadata?.commit ?? "unknown",
       tied_methodology_version: "3.0.0",
       tied_base_path_confirmed: true,
+      identity_source: identitySource,
     },
     scope: scoped.scope,
     evidence_chain: {
       structural: structuralFields,
       graph: derived(
-        { nodes: tokens.length, edges: 0, cycles: 0 },
+        graphCounts,
         "tied_cycles",
-        "structural_placeholder",
-        tokens.length || 1,
-        "traceability_structure",
-        "not_measured",
-      ),
-      vocab_resolution: derived(
-        "presence_linkage_only",
-        "tied/vocab",
-        "registry_presence",
-        1,
+        "dependency_graph",
+        graphCounts.nodes || structuralTokens.length,
         "traceability_structure",
         "observed",
       ),
+      vocab_resolution: derived(
+        { status: "not_measured", reason: "vocabulary drift adapter not configured" },
+        "tied/vocab",
+        "adapter_absent",
+        "not_measured",
+        "traceability_structure",
+        "not_measured",
+      ),
+      semantic_fidelity: fidelityFields,
+      composition: compositionField,
     },
     quality: {
       applicable_attributes: input.scope?.quality_plan?.selected_profiles ?? ["baseline-functional"],
@@ -644,7 +738,11 @@ export function generateEvidenceChainProfile(
       fs.mkdirSync(path.dirname(filePath), { recursive: true });
       fs.writeFileSync(filePath, contents, "utf8");
     });
-    writer(path.resolve(input.output_path), `${JSON.stringify(profile, null, 2)}\n`);
+    try {
+      writer(path.resolve(input.output_path), `${JSON.stringify(profile, null, 2)}\n`);
+    } catch (error) {
+      return { ok: false, stage: "emit", error: errorMessage(error) };
+    }
   }
 
   const source_references = [

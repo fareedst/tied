@@ -21,8 +21,11 @@ IMPL-EVIDENCE_CHAIN_REPORT:
   implementation_approach:
     details:
       - "AGGREGATE_COHORT_STATISTICS emits count-only named statistics"
+      - "Cohorts remain schema/depth keyed; incompatible denominators are retained as explicit residual risks instead of being silently combined."
+      - "Failed reruns remove stale generated report files before input validation; Markdown includes a dedicated validation-errors section."
       - "PARTITION_CLIENT_COHORTS uses schema_version and profile_depth"
       - "strict writes no report files on any rejected input"
+      - "The report CLI is source-repository-only: build mcp-server with npm ci and npm run build before invoking dist/cli/evidence-chain-report.js."
       - "VALIDATE_PROFILE_ARTIFACT rejects maturity and score keys"
     summary: "Read-only batch aggregator and CLI consume profile artifacts through a manifest and emit deterministic YAML and Markdown."
   metadata:

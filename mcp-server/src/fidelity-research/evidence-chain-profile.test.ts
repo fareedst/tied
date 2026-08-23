@@ -13,6 +13,7 @@ import {
   type EvidenceChainProfile,
   type EvidenceChainProfileAdapters,
 } from "./evidence-chain-profile.js";
+import { resolveProjectIdentity } from "../project-identity.js";
 import type { ProjectManifestResult } from "./manifest.js";
 
 function derived(
@@ -201,6 +202,22 @@ describe("EMIT_MANUAL_PROFILE_CONTRACT [REQ-EVIDENCE_CHAIN_PROFILE]", () => {
       /assumptions/,
     );
   });
+
+  it("rejects a manual profile that confirms the TIED path without declaring unsupported MCP checks", () => {
+    const identity = { ...(validDraft().identity as object), generator: "manual" };
+    assert.throws(
+      () =>
+        emitManualProfileContract(
+          validDraft({
+            identity,
+            assumptions: ["Hand review"],
+            confidence: "low",
+            unsupported_checks: ["fidelity_audit"],
+          }),
+        ),
+      /mcp_validators_not_run/,
+    );
+  });
 });
 
 describe("GENERATE_EVIDENCE_CHAIN_PROFILE [REQ-EVIDENCE_CHAIN_PROFILE]", () => {
@@ -226,6 +243,7 @@ describe("GENERATE_EVIDENCE_CHAIN_PROFILE [REQ-EVIDENCE_CHAIN_PROFILE]", () => {
     if (result.ok) {
       assert.equal(result.profile.identity.schema_version, EVIDENCE_CHAIN_PROFILE_SCHEMA);
       assert.equal(result.profile.change_fidelity.status, "not_measured");
+      assert.equal(result.profile.evidence_chain.vocab_resolution.status, "not_measured");
     }
   });
 
@@ -251,7 +269,51 @@ describe("GENERATE_EVIDENCE_CHAIN_PROFILE [REQ-EVIDENCE_CHAIN_PROFILE]", () => {
         status: "not_measured",
         applicability: "not_applicable",
       });
+      assert.equal(result.profile.evidence_chain.semantic_fidelity?.[0]?.source, "AUDIT_IMPL_FIDELITY");
+      assert.equal(result.profile.evidence_chain.composition?.source, "ANALYZE_BINDING_EVIDENCE");
     }
+  });
+
+  it("marks omitted structural validators as not measured", () => {
+    const { adapters } = spyAdapters();
+    const result = generateEvidenceChainProfile({
+      project_root: projectRoot,
+      tied_base_path: tiedBasePath,
+      confirmed_tied_base_path: tiedBasePath,
+      profile_depth: "integrated",
+      adapters,
+    });
+    assert.equal(result.ok, true);
+    if (result.ok) {
+      assert.ok(result.profile.evidence_chain.structural.every((row) => row.status === "not_measured"));
+      assert.ok(
+        result.profile.evidence_chain.structural.every(
+          (row) => (row.value as { status?: string }).status === "not_measured",
+        ),
+      );
+      assert.equal(result.profile.evidence_chain.graph.status, "observed");
+      assert.deepEqual(result.profile.scope.file_counts, {});
+      assert.ok(result.profile.scope.unknown.includes("file_counts"));
+    }
+  });
+
+  it("normalizes adapter failures into a structured result", () => {
+    const { adapters } = spyAdapters();
+    adapters.runStructuralAnalysis = () => {
+      throw new Error("validator unavailable");
+    };
+    const result = generateEvidenceChainProfile({
+      project_root: projectRoot,
+      tied_base_path: tiedBasePath,
+      confirmed_tied_base_path: tiedBasePath,
+      profile_depth: "integrated",
+      adapters,
+    });
+    assert.deepEqual(result, {
+      ok: false,
+      stage: "structural",
+      error: "validator unavailable",
+    });
   });
 
   it("fails closed on wrong TIED base path before collection", () => {
@@ -315,6 +377,53 @@ describe("GENERATE_EVIDENCE_CHAIN_PROFILE [REQ-EVIDENCE_CHAIN_PROFILE]", () => {
     assert.equal(first.ok && second.ok, true);
     if (first.ok && second.ok) {
       assert.deepEqual(first.profile, second.profile);
+    }
+  });
+
+  it("emits identity_source path_fallback by default [IMPL-TIED_PROJECT_IDENTITY]", () => {
+    const saved = process.env.TIED_MCP_PROJECT_ID;
+    delete process.env.TIED_MCP_PROJECT_ID;
+    try {
+      const result = generateEvidenceChainProfile({
+        project_root: projectRoot,
+        tied_base_path: tiedBasePath,
+        confirmed_tied_base_path: tiedBasePath,
+        profile_depth: "integrated",
+        adapters: spyAdapters().adapters,
+      });
+      assert.equal(result.ok, true);
+      if (result.ok) {
+        assert.equal(result.profile.identity.identity_source, "path_fallback");
+        assert.equal(result.profile.identity.project_id, resolveProjectIdentity(tiedBasePath).project_id);
+        assert.equal(result.profile.operational.project_id, result.profile.identity.project_id);
+        assert.equal(JSON.stringify(result.profile).includes(tiedBasePath), false);
+      }
+    } finally {
+      if (saved === undefined) delete process.env.TIED_MCP_PROJECT_ID;
+      else process.env.TIED_MCP_PROJECT_ID = saved;
+    }
+  });
+
+  it("emits configured identity_source when TIED_MCP_PROJECT_ID is valid [REQ-EVIDENCE_CHAIN_PROFILE]", () => {
+    const saved = process.env.TIED_MCP_PROJECT_ID;
+    process.env.TIED_MCP_PROJECT_ID = "profile-stable-id";
+    try {
+      const result = generateEvidenceChainProfile({
+        project_root: projectRoot,
+        tied_base_path: tiedBasePath,
+        confirmed_tied_base_path: tiedBasePath,
+        profile_depth: "integrated",
+        adapters: spyAdapters().adapters,
+      });
+      assert.equal(result.ok, true);
+      if (result.ok) {
+        assert.equal(result.profile.identity.identity_source, "configured");
+        assert.equal(result.profile.identity.project_id, resolveProjectIdentity(tiedBasePath).project_id);
+        assert.equal(result.profile.identity.project_id.includes("profile-stable-id"), false);
+      }
+    } finally {
+      if (saved === undefined) delete process.env.TIED_MCP_PROJECT_ID;
+      else process.env.TIED_MCP_PROJECT_ID = saved;
     }
   });
 });

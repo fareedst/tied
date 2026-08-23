@@ -1,0 +1,40 @@
+ARCH-TIED_PROJECT_IDENTITY:
+  cross_references:
+    - "IMPL-TIED_PROJECT_IDENTITY"
+    - "REQ-EVIDENCE_CHAIN_PROFILE"
+    - "REQ-MCP_USAGE_METRICS"
+  decision: "Single pure resolver supplies opaque 16-hex project_id for usage metrics JSONL and evidence-chain profile identity. Configured TIED_MCP_PROJECT_ID (trim, validate, hash) takes precedence; unset/empty/invalid falls back to legacy path.resolve hash without silent re-key."
+  implementation_approach:
+    details:
+      - "Artifacts emit hashed project_id only; never raw configured string or raw path"
+      - "Env-only TIED_MCP_PROJECT_ID; repo-local ID file deferred"
+      - "Invalid configured ID: length > 128, path separators, or newlines → path fallback"
+      - "Path fallback preserves historical path-hash rows when env unset"
+    summary: "Extract project-identity.ts consumed by usage-metrics and evidence-chain-profile; profile may expose identity_source metadata."
+  name: "Shared TIED project identity resolver"
+  rationale:
+    benefits:
+      - "Aligned project_id across metrics and profile"
+      - "Backward-compatible path fallback"
+      - "Relocation-stable identity when env configured"
+    problems_solved:
+      - "Duplicate anonymizeProjectId implementations"
+      - "Path-dependent project_id breaks cross-location comparison"
+    why: "Duplicate path-hash resolvers in metrics and profile are not relocation-stable; one boundary prevents drift."
+  related_decisions:
+    depends_on:
+      - "REQ-EVIDENCE_CHAIN_PROFILE"
+      - "REQ-MCP_USAGE_METRICS"
+    informs:
+      - "IMPL-TIED_PROJECT_IDENTITY"
+  status: "Accepted"
+  traceability:
+    implementation:
+      - "IMPL-TIED_PROJECT_IDENTITY"
+    requirements:
+      - "REQ-EVIDENCE_CHAIN_PROFILE"
+      - "REQ-MCP_USAGE_METRICS"
+    tests:
+      - "evidence-chain-profile.test.ts"
+      - "project-identity.test.ts"
+      - "usage-metrics.test.ts"

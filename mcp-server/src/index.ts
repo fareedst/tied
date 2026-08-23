@@ -8,7 +8,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { allTools } from "./tools/index.js";
 import { registerResources } from "./resources.js";
-import { isMetricsEnabled, wrapToolHandler } from "./usage-metrics.js";
+import { instrumentToolHandlers } from "./usage-metrics.js";
 
 const server = new McpServer(
   {
@@ -23,10 +23,12 @@ const server = new McpServer(
   }
 );
 
+const registeredHandlers = instrumentToolHandlers(
+  allTools as Array<{ name: string; handler: import("./usage-metrics.js").ToolHandler }>,
+);
 for (const tool of allTools) {
-  const handler = isMetricsEnabled()
-    ? wrapToolHandler(tool.name, tool.handler as import("./usage-metrics.js").ToolHandler)
-    : tool.handler;
+  const handler = registeredHandlers.get(tool.name);
+  if (!handler) throw new Error(`Missing registered handler for ${tool.name}`);
   server.registerTool(
     tool.name,
     tool.config,

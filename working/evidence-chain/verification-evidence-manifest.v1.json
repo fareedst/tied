@@ -1,0 +1,35 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "wiring-pilot-20260822",
+  "commit": "local",
+  "environment": {},
+  "command_results": [
+    {
+      "id": "noop",
+      "command": [
+        "node",
+        "-e",
+        "process.exit(0)"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 45,
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/working/evidence-chain/artifacts/noop.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/working/evidence-chain/artifacts/noop.stdout.txt"
+      ]
+    }
+  ],
+  "quality_rows": [],
+  "covered_tokens": [
+    "REQ-EVIDENCE_CHAIN_PROFILE"
+  ],
+  "proof_boundaries": [
+    "executable_behavior"
+  ],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": []
+  }
+}

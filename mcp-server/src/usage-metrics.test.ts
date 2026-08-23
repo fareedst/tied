@@ -2,9 +2,9 @@
  * Unit tests for usage metrics.
  * - [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS] How: Return true when TIED_MCP_COLLECT_METRICS is 1 or true (case-insensitive); else false (zero file I/O).
  * - [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS] How: Use TIED_MCP_METRICS_PATH when set; else path.join(os.homedir(), '.cursor', 'logs', 'tied-mcp-metrics.jsonl').
- * - [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS] How: Build args_summary preserving scalar keys (token, index, type, format, dry_run, view, field, value, old_token, new_token, booleans). For blob keys (record, updates, detail_record, index_record, essence_pseudocode, steps, context) emit { _bytes: N } or { _keys: [...] } only. Truncate remaining strings to 200 chars; stable JSON stringify + SHA-256 hex prefix for args_signature.
+ * - [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS] How: Build args_summary preserving scalar keys (token, index, type, format, dry_run, view, field, value, old_token, new_token, booleans). For blob keys (record, updates, detail_record, index_record, essence_pseudocode, steps, context) emit { _bytes: N } or { _keys: [...] } only. Truncate remaining strings to 200 chars; recursively key-sort before SHA-256 hashing args_signature.
  * - [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS] How: mkdir parent of metrics path; append JSON.stringify(record) + newline; ON IO error log DIAGNOSTIC to stderr and continue (non-fatal).
- * - [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS] How: If not isMetricsEnabled(), return handler unchanged. Else return async wrapper: start timer; invoke handler; catch throws as ok false; detect result.isError; getBasePath() for base_path; client from TIED_MCP_METRICS_CLIENT or cursor-mcp; recordToolCall; rethrow or return result.
+ * - [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS] How: If not isMetricsEnabled(), return handler unchanged. Else return async wrapper: start timer; invoke handler; catch throws as ok false; detect result.isError; derive hashed project_id from getBasePath() without persisting the raw path; client from TIED_MCP_METRICS_CLIENT or cursor-mcp; recordToolCall; rethrow or return result.
  */
 
 import assert from "node:assert/strict";
@@ -18,14 +18,18 @@ import {
   recordToolCall,
   resolveMetricsPath,
   sanitizeArgs,
+  instrumentToolHandlers,
   wrapToolHandler,
 } from "./usage-metrics.js";
+import { resolveProjectIdentity } from "./project-identity.js";
 import { clearBasePathCache } from "./yaml-loader.js";
+import { allTools } from "./tools/index.js";
 
 const ENV_KEYS = [
   "TIED_MCP_COLLECT_METRICS",
   "TIED_MCP_METRICS_PATH",
   "TIED_MCP_METRICS_CLIENT",
+  "TIED_MCP_PROJECT_ID",
   "TIED_BASE_PATH",
 ] as const;
 
@@ -84,6 +88,12 @@ describe("sanitizeArgs", () => {
     const b = sanitizeArgs("yaml_detail_read", { token: "REQ-A" });
     assert.equal(a.args_signature, b.args_signature);
   });
+
+  it("does not collide for distinct nested summaries [REQ-MCP_USAGE_METRICS]", () => {
+    const first = sanitizeArgs("tied_feedback_add", { context: { secret: "alpha" } });
+    const second = sanitizeArgs("tied_feedback_add", { context: { other: "beta" } });
+    assert.notEqual(first.args_signature, second.args_signature);
+  });
 });
 
 describe("recordToolCall and wrapToolHandler", () => {
@@ -108,7 +118,6 @@ describe("recordToolCall and wrapToolHandler", () => {
     recordToolCall({
       tool: "yaml_index_read",
       client: "test",
-      base_path: tempDir,
       duration_ms: 1,
       ok: true,
       error_snippet: null,
@@ -147,6 +156,50 @@ describe("recordToolCall and wrapToolHandler", () => {
     assert.equal(row.args_summary.token, "REQ-TEST");
     assert.equal(row.client, "cursor-mcp");
     assert.equal(row.project_id, anonymizedProjectId(tempDir));
+    assert.equal("base_path" in row, false);
+  });
+
+  it("uses configured TIED_MCP_PROJECT_ID hash without leaking raw values [REQ-MCP_USAGE_METRICS]", async () => {
+    saved = saveEnv();
+    tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-metrics-config-id-"));
+    metricsFile = path.join(tempDir, "metrics.jsonl");
+    process.env.TIED_MCP_COLLECT_METRICS = "1";
+    process.env.TIED_MCP_METRICS_PATH = metricsFile;
+    process.env.TIED_BASE_PATH = tempDir;
+    process.env.TIED_MCP_PROJECT_ID = "  relocation-stable-id  ";
+    clearBasePathCache();
+
+    const handler = wrapToolHandler("yaml_detail_read", async () => ({
+      content: [{ type: "text", text: "{}" }],
+    }));
+    await handler({ token: "REQ-TEST" });
+
+    const row = JSON.parse(fs.readFileSync(metricsFile, "utf8").trim()) as {
+      project_id?: string;
+    };
+    const expected = resolveProjectIdentity(tempDir).project_id;
+    assert.equal(row.project_id, expected);
+    assert.equal(row.project_id?.includes("relocation-stable-id"), false);
+    assert.equal(JSON.stringify(row).includes(tempDir), false);
+  });
+
+  it("falls back to path hash when configured ID invalid [IMPL-TIED_PROJECT_IDENTITY]", async () => {
+    saved = saveEnv();
+    tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-metrics-invalid-id-"));
+    metricsFile = path.join(tempDir, "metrics.jsonl");
+    process.env.TIED_MCP_COLLECT_METRICS = "1";
+    process.env.TIED_MCP_METRICS_PATH = metricsFile;
+    process.env.TIED_BASE_PATH = tempDir;
+    process.env.TIED_MCP_PROJECT_ID = "bad/id";
+    clearBasePathCache();
+
+    const handler = wrapToolHandler("yaml_index_read", async () => ({
+      content: [{ type: "text", text: "{}" }],
+    }));
+    await handler({ index: "requirements" });
+
+    const row = JSON.parse(fs.readFileSync(metricsFile, "utf8").trim()) as { project_id?: string };
+    assert.equal(row.project_id, anonymizedProjectId(tempDir));
   });
 
   it("preserves opt-in profile_depth and run_id without raw client identity [REQ-EVIDENCE_CHAIN_PROFILE]", async () => {
@@ -171,13 +224,12 @@ describe("recordToolCall and wrapToolHandler", () => {
       profile_depth?: string;
       run_id?: string;
       commit?: string;
-      base_path: string;
     };
     assert.equal(row.profile_depth, "human_research");
     assert.equal(row.run_id, "run-9");
     assert.equal(row.commit, "cafebabe");
     assert.equal(row.project_id, anonymizedProjectId(tempDir));
-    assert.notEqual(row.project_id, row.base_path);
+    assert.equal("base_path" in row, false);
   });
 
   it("records ok false on throw [IMPL-MCP_USAGE_METRICS]", async () => {
@@ -198,6 +250,23 @@ describe("recordToolCall and wrapToolHandler", () => {
     };
     assert.equal(row.ok, false);
     assert.match(row.error_snippet, /boom/);
+  });
+
+  it("redacts absolute paths from error snippets [REQ-MCP_USAGE_METRICS]", async () => {
+    saved = saveEnv();
+    tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-metrics-path-"));
+    metricsFile = path.join(tempDir, "metrics.jsonl");
+    process.env.TIED_MCP_COLLECT_METRICS = "1";
+    process.env.TIED_MCP_METRICS_PATH = metricsFile;
+
+    const handler = wrapToolHandler("yaml_index_read", async () => {
+      throw new Error(`failed at ${path.join(tempDir, "secret.yaml")}`);
+    });
+    await assert.rejects(() => handler({}), /failed at/);
+
+    const row = JSON.parse(fs.readFileSync(metricsFile, "utf8").trim()) as { error_snippet: string };
+    assert.equal(row.error_snippet.includes(tempDir), false);
+    assert.match(row.error_snippet, /<path>/);
   });
 
   it("records ok false when isError [IMPL-MCP_USAGE_METRICS]", async () => {
@@ -224,6 +293,25 @@ describe("resolveMetricsPath", () => {
     try {
       process.env.TIED_MCP_METRICS_PATH = "/tmp/custom-metrics.jsonl";
       assert.equal(resolveMetricsPath(), path.resolve("/tmp/custom-metrics.jsonl"));
+    } finally {
+      restoreEnv(saved);
+    }
+  });
+});
+
+describe("instrumentToolHandlers", () => {
+  it("wraps every registered tool only when metrics are enabled [REQ-MCP_USAGE_METRICS]", () => {
+    const saved = saveEnv();
+    try {
+      delete process.env.TIED_MCP_COLLECT_METRICS;
+      const disabled = instrumentToolHandlers(allTools);
+      assert.equal(disabled.size, allTools.length);
+      for (const tool of allTools) assert.equal(disabled.get(tool.name), tool.handler);
+
+      process.env.TIED_MCP_COLLECT_METRICS = "1";
+      const enabled = instrumentToolHandlers(allTools);
+      assert.equal(enabled.size, allTools.length);
+      for (const tool of allTools) assert.notEqual(enabled.get(tool.name), tool.handler);
     } finally {
       restoreEnv(saved);
     }

@@ -226,6 +226,30 @@ describe("GENERATE_EVIDENCE_CHAIN_REPORT [REQ-EVIDENCE_CHAIN_REPORT]", () => {
     assert.match(serialized, /not_measured/);
   });
 
+  it("retains an explicit residual risk for incompatible denominators [REQ-EVIDENCE_CHAIN_REPORT]", () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ecr-denominator-"));
+    copyFixture(dir, "example-profile.json", "first.json");
+    copyFixture(dir, "stdd-integrated.json", "second.json");
+    mutateJson(path.join(dir, "second.json"), (profile) => {
+      const chain = profile.evidence_chain as { structural: Array<{ denominator: number }> };
+      chain.structural[0]!.denominator = 2;
+    });
+    const manifest = writeManifest(
+      dir,
+      [
+        "schema_version: evidence-chain-report-inputs.v1",
+        "inputs:",
+        "  - profile_path: first.json",
+        "  - profile_path: second.json",
+        "",
+      ].join("\n"),
+    );
+    const result = generateIn(dir, { manifest });
+    assert.equal(result.ok, true);
+    if (!result.ok) return;
+    assert.ok(result.report.residual_risks.some((risk) => risk.includes("incompatible denominators")));
+  });
+
   it("rejects malformed profiles and forbidden score fields [REQ-EVIDENCE_CHAIN_REPORT]", () => {
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ecr-bad-"));
     fs.writeFileSync(path.join(dir, "malformed.json"), "{not-json", "utf8");
@@ -392,6 +416,7 @@ describe("GENERATE_EVIDENCE_CHAIN_REPORT [REQ-EVIDENCE_CHAIN_REPORT]", () => {
     assert.equal(excluded?.numerator, 1);
     assert.equal(errors?.numerator, 1);
     assert.equal(fs.existsSync(path.join(dir, "report.yaml")), true);
+    assert.match(fs.readFileSync(path.join(dir, "report.md"), "utf8"), /## Validation errors/);
   });
 
   it("lets CLI --mode win over the report input manifest [REQ-EVIDENCE_CHAIN_REPORT]", () => {
@@ -412,6 +437,35 @@ describe("GENERATE_EVIDENCE_CHAIN_REPORT [REQ-EVIDENCE_CHAIN_REPORT]", () => {
     if (result.ok) return;
     assert.equal(result.exit_code, 2);
     assert.equal(fs.existsSync(path.join(dir, "report.yaml")), false);
+  });
+
+  it("removes stale generated outputs when a rerun fails [REQ-EVIDENCE_CHAIN_REPORT]", () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ecr-stale-"));
+    copyFixture(dir, "example-profile.json");
+    const manifest = writeManifest(
+      dir,
+      [
+        "schema_version: evidence-chain-report-inputs.v1",
+        "inputs:",
+        "  - profile_path: missing.json",
+        "",
+      ].join("\n"),
+    );
+    const yamlOut = path.join(dir, "report.yaml");
+    const markdownOut = path.join(dir, "report.md");
+    fs.writeFileSync(yamlOut, "stale\n", "utf8");
+    fs.writeFileSync(markdownOut, "stale\n", "utf8");
+    const result = generateEvidenceChainStatisticsReport({
+      inputsPath: manifest,
+      yamlOut,
+      markdownOut,
+      now: FIXED_NOW,
+      cwd: dir,
+      projectRoot: dir,
+    });
+    assert.equal(result.ok, false);
+    assert.equal(fs.existsSync(yamlOut), false);
+    assert.equal(fs.existsSync(markdownOut), false);
   });
 
   it("rejects intent-directory output paths [REQ-EVIDENCE_CHAIN_REPORT]", () => {

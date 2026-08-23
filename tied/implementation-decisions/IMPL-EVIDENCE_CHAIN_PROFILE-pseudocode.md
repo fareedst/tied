@@ -23,6 +23,7 @@
   - 5. CALL ATTACH_QUALITY_PARTITION
   - 6. CALL NORMALIZE_EVIDENCE_CHAIN_PROFILE
   - 7. IF output_mode is file THEN write only a non-intent path
+- ON adapter or profile-file write failure: RETURN { ok: false, stage, error } without emitting a partial profile.
 - ON WrongTiedBasePath: RETURN { ok: false, stage: "manifest", error: "WrongTiedBasePath" }
 - How (sub-block, same token set as above): Never call RUN_FIRST_SLICE, RUN_FIDELITY_RESEARCH_PILOT, appendCandidateFinding, or promoteConfirmedCase.
 
@@ -30,7 +31,7 @@
 
 - [IMPL-EVIDENCE_CHAIN_PROFILE] [ARCH-EVIDENCE_CHAIN_PROFILE] [REQ-EVIDENCE_CHAIN_PROFILE] Bound roots, ignore, token scope, and profile_depth with explicit excluded, unknown, and not_measured sets.
 - Contract:
-  - INPUT: roots, ignore_file, config_path, requirement_tokens, implementation_tokens, profile_depth
+  - INPUT: roots, ignore_file, config_path, requirement_tokens, architecture_tokens, implementation_tokens, profile_depth
   - PRE: profile_depth is one of the two v1 evidence-chain profile depths
   - OUTPUT: resolved scope with excluded, unknown, not_measured
   - POST:
@@ -42,7 +43,9 @@
 - PROCEDURE: RESOLVE_EVIDENCE_CHAIN_SCOPE
   - 1. Reject unknown profile_depth
   - 2. Record roots_used and ignore_source
-  - 3. Mark automated vocabulary drift checks not_measured when no drift tool is in scope
+  - 3. Record requirement, architecture, and implementation populations from the explicit token scope
+  - 4. Leave file counts empty and mark them unknown when no file inventory adapter is in scope
+  - 5. Mark automated vocabulary drift checks not_measured when no drift tool is in scope
 
 ## COLLECT_STRUCTURAL_CHAIN
 
@@ -58,6 +61,8 @@
 - PROCEDURE: COLLECT_STRUCTURAL_CHAIN
   - 1. CALL runStructuralAnalysis with consistency, pseudo-code, cycles, binding inventory, and test adequacy validators
   - 2. Partition rows by proof_boundary without claiming executable_behavior
+  - 3. Mark all structural rows not_measured when validators were omitted by the caller
+  - 4. Compute graph nodes, edges, and cycles from the selected TIED dependency graphs
 
 ## COLLECT_HUMAN_RESEARCH_CHAIN
 
@@ -77,6 +82,7 @@
   - 2. CALL ANALYZE_BINDING_EVIDENCE
   - 3. IF change_context is present THEN CALL ANALYZE_SPECIFICATION_STATE for references only
   - 4. ELSE set change_fidelity to not_measured / not_applicable
+  - 5. Preserve fidelity and composition adapter results in semantic_fidelity and composition evidence fields
 - How (sub-block, same token set as above): Do not append fidelity findings or promote confirmed cases.
 
 ## ATTACH_QUALITY_PARTITION
@@ -130,6 +136,29 @@
 - PROCEDURE: EMIT_MANUAL_PROFILE_CONTRACT
   - 1. Require assumptions array, confidence, and unsupported_checks array
   - 2. Reject claims of MCP validator results that are not listed as run
+
+## EVIDENCE_CHAIN_PROFILE_MCP_HANDLER
+
+- [IMPL-EVIDENCE_CHAIN_PROFILE] [ARCH-EVIDENCE_CHAIN_PROFILE] [REQ-EVIDENCE_CHAIN_PROFILE] MCP tool handler for evidence_chain_profile_generate with optional attach-provenance wiring.
+- Contract:
+  - INPUT: profile_depth, project_root, tied_base_path, optional scope, change_context, output_path, manifest_reference, invoke_structural_validators (default false)
+  - PRE: TIED base path confirmed via getBasePath; invoke_structural_validators does not imply quality manifest collection
+  - OUTPUT: { ok: true, profile, source_references } | { ok: false, stage, error }
+  - POST:
+    - success with manifest_reference => quality.command_results observed when manifest resolves
+    - success with invoke_structural_validators true => structural_validators !== undefined; structural rows observed with proof boundaries preserved
+    - success without wiring => structural and executable rows remain not_measured (backward compatible)
+    - error WrongTiedBasePath => no live validator collection runs
+  - FAILURE_MODES: WrongTiedBasePath, InvalidScope, ValidatorFailure, MalformedProfile, ForbiddenOutputPath
+  - EFFECTS: IO; may invoke validateConsistency, runScopedAnalysis, validateEssencePseudocode, validateBindingInventory, validateTestAdequacyPlan when invoke_structural_validators is true
+  - TERMINATION: total
+- PROCEDURE: EVIDENCE_CHAIN_PROFILE_MCP_HANDLER
+  - 1. Resolve project_root and tied_base_path from args or getBasePath
+  - 2. IF invoke_structural_validators THEN CALL createLiveStructuralValidators(scope) and pass structural_validators to GENERATE_EVIDENCE_CHAIN_PROFILE
+  - 3. ELSE omit structural_validators so COLLECT_STRUCTURAL_CHAIN marks structural rows not_measured
+  - 4. Pass manifest_reference through to ATTACH_QUALITY_PARTITION unchanged
+  - 5. RETURN GENERATE_EVIDENCE_CHAIN_PROFILE result as JSON text content
+- How (sub-block, same token set as above): Live structural collection is opt-in; proof boundaries on each validator row remain traceability_structure or pseudo_code_structure only.
 
 ## SUB_EVIDENCE_CHAIN_PROFILE
 

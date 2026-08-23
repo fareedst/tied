@@ -31,6 +31,7 @@
 | quality command declaration | quality command, verification command | A bounded argv, working directory, limits, and artifact destination used to collect executable evidence. | `QUALITY_COMMAND_DECLARATION` |
 | artifact reference | output path, evidence artifact | A stable path or identifier pointing to command output retained as evidence provenance. | `ARTIFACT_REFERENCE` |
 | evidence collection | command collection, proof collection | The composition step that executes declared quality commands before building the verification evidence manifest. | `EVIDENCE_COLLECTION` |
+| attach provenance | wire evidence to profile, attach results to profile | Operator step: pass collected validator outputs and/or a verification evidence manifest into `evidence_chain_profile_generate` via `manifest_reference` and/or structural wiring so derived fields become `observed` instead of `not_measured`. Distinct from merely running validators during verification-gate without attaching outputs to the profile artifact. | `ATTACH_PROVENANCE` |
 | idempotency key | deduplication key, replay key | A stable event identifier used to prevent duplicate webhook inbox entries. | `IDEMPOTENCY_KEY` |
 | event claim | worker claim, competing claim | An atomic ownership transition that allows one worker to process a due event. | `EVENT_CLAIM` |
 | evidence chain profile | chain completeness report, evidence-chain profile, maturity report (forbidden meaning) | A versioned, read-only artifact (`evidence-chain-profile.v1`) that reports completeness, provenance, denominators, and proof boundaries across vocabulary → REQ → ARCH → IMPL pseudo-code → tests → code → composition → quality evidence → change outcome. It is not an **assurance profile**, not a **read-only research profile**, and not a universal maturity score. | `EVIDENCE_CHAIN_PROFILE` |
@@ -97,6 +98,7 @@ Domain terms above are distinct from IMPL grammar keywords such as `INPUT`, `OUT
 |---|---|
 | abuse case | Canonical terms |
 | accepted risk | Canonical terms |
+| attach provenance | Canonical terms |
 | artifact reference | Canonical terms |
 | binding row fields | Naming bridge |
 | evidence collection | Canonical terms |

@@ -34,6 +34,7 @@ REQ-MCP_USAGE_METRICS:
     - criterion: "Bootstrap seeds metrics environment fields only for an absent .cursor/mcp.json when TIED_MCP_COLLECT_METRICS is exactly 1"
       metric: "bootstrap-and-load.test.ts verifies basename and explicit client labels, non-1 opt-in behavior, and existing configuration preservation"
     - criterion: "Env vars and JSONL path documented in tied/vocab/tied-yaml-mcp.md"
+      metric: "tied-yaml-mcp.md lists TIED_MCP_PROJECT_ID and identity_source semantics"
     - criterion: "Every MCP tools/call records tool name, client, duration, ok, sanitized args"
       metric: "usage-metrics.test.ts passes; large essence_pseudocode omitted from args_summary"
     - criterion: "Metrics collection is off unless TIED_MCP_COLLECT_METRICS is set locally"
@@ -42,18 +43,23 @@ REQ-MCP_USAGE_METRICS:
       metric: "analyze_tied_mcp_metrics_test.rb passes"
     - criterion: "tied-cli tags client as tied-cli when metrics enabled"
       metric: "tied-cli.sh exports TIED_MCP_METRICS_CLIENT=tied-cli"
+    - criterion: "Relocation-stable project_id when TIED_MCP_PROJECT_ID is valid; path fallback when unset or invalid"
+      metric: "project-identity.test.ts and usage-metrics.test.ts; JSONL never contains raw path or configured string"
   status: "Implemented"
   traceability:
     architecture:
       - "ARCH-MCP_USAGE_METRICS"
+      - "ARCH-TIED_PROJECT_IDENTITY"
     code_annotations:
       - "ARCH-MCP_USAGE_METRICS"
       - "IMPL-MCP_USAGE_METRICS"
       - "REQ-MCP_USAGE_METRICS"
     implementation:
       - "IMPL-MCP_USAGE_METRICS"
+      - "IMPL-TIED_PROJECT_IDENTITY"
     tests:
       - "analyze_tied_mcp_metrics_test.rb"
+      - "project-identity.test.ts"
       - "usage-metrics.test.ts"
   validation_criteria:
     - coverage: "usage-metrics module and wrapToolHandler"

@@ -1157,7 +1157,7 @@ ARCH-MCP_USAGE_METRICS:
       - "IMPL-MCP_USAGE_METRICS"
     see_also:
       - "ARCH-FEEDBACK_STORAGE"
-  status: "Active"
+  status: "Accepted"
   traceability:
     code_annotations:
       - "ARCH-MCP_USAGE_METRICS"
@@ -1476,6 +1476,14 @@ ARCH-TIED_FIDELITY_RESEARCH:
       - "mcp-server/src/fidelity-research/snapshot.test.ts"
       - "mcp-server/src/fidelity-research/specification-state.test.ts"
       - "mcp-server/src/fidelity-research/structural-analysis.test.ts"
+ARCH-TIED_PROJECT_IDENTITY:
+  cross_references:
+    - "IMPL-TIED_PROJECT_IDENTITY"
+    - "REQ-EVIDENCE_CHAIN_PROFILE"
+    - "REQ-MCP_USAGE_METRICS"
+  detail_file: "architecture-decisions/ARCH-TIED_PROJECT_IDENTITY.yaml"
+  name: "Shared TIED project identity resolver"
+  status: "Accepted"
 ARCH-TIED_RESEARCH_RECORD_BOUNDARY:
   cross_references:
     - "ARCH-QUALITY_ASSURANCE_PROFILES"

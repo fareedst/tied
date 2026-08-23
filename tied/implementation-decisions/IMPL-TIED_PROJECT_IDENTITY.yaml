@@ -1,0 +1,42 @@
+IMPL-TIED_PROJECT_IDENTITY:
+  code_locations:
+    files:
+      - description: "resolveProjectIdentity, path fallback, configured env parsing [ARCH-TIED_PROJECT_IDENTITY]"
+        path: "mcp-server/src/project-identity.ts"
+      - description: "Unit tests for relocation, fallback, validation [REQ-MCP_USAGE_METRICS]"
+        path: "mcp-server/src/project-identity.test.ts"
+  cross_references:
+    - "ARCH-TIED_PROJECT_IDENTITY"
+    - "REQ-EVIDENCE_CHAIN_PROFILE"
+    - "REQ-MCP_USAGE_METRICS"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_PROJECT_IDENTITY-pseudocode.md"
+  implementation_approach:
+    details:
+      - "anonymizedProjectId deprecated alias for metrics call sites"
+      - "Invalid/unset/empty → path.resolve fallback (legacy compatible)"
+      - "No raw path or configured string in outputs"
+      - "TIED_MCP_PROJECT_ID trim → SHA-256→16-hex when valid"
+    summary: "Pure module: resolveProjectIdentity(tiedBasePath, env?) returns opaque project_id and identity_source."
+  name: "Project identity pure module"
+  rationale:
+    benefits:
+      - "Module validation before composition"
+      - "Single source of truth for project_id"
+    problems_solved:
+      - "Duplicated hash logic in usage-metrics and evidence-chain-profile"
+    why: "Implements ARCH-TIED_PROJECT_IDENTITY as independently testable pure functions."
+  related_decisions:
+    depends_on:
+      - "ARCH-TIED_PROJECT_IDENTITY"
+    see_also:
+      - "IMPL-EVIDENCE_CHAIN_PROFILE"
+      - "IMPL-MCP_USAGE_METRICS"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_PROJECT_IDENTITY"
+    requirements:
+      - "REQ-EVIDENCE_CHAIN_PROFILE"
+      - "REQ-MCP_USAGE_METRICS"
+    tests:
+      - "project-identity.test.ts"

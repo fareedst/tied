@@ -1,0 +1,71 @@
+CITDP-REQ-EVIDENCE_CHAIN_PROFILE-wiring:
+  change_definition:
+    current_behavior: "sub-evidence-chain-profile called evidence_chain_profile_generate directly; verification-gate ran validators separately without attach-provenance; MCP exposed manifest_reference but not live structural wiring."
+    desired_behavior: "Checklist pre-flow collects a verification evidence manifest and passes manifest_reference; verification-gate requires attach-provenance; MCP accepts invoke_structural_validators to populate observed structural rows when requested."
+    non_goals:
+      - "Auto wholesale runFirstSlice at integrated depth"
+      - "Changing fail-closed not_measured when inputs omitted"
+      - "New REQ token"
+      - "v1 vocab_resolution adapter"
+    success_criteria:
+      - "Bare calls without wiring keep structural and executable rows not_measured"
+      - "Checklist and evidence-chain-profile.md document prerequisites and Phase B flag"
+      - "invoke_structural_validators yields observed structural rows with proof boundaries preserved"
+      - "Manifest attach yields observed quality.command_results"
+    unchanged_behavior: "Generator fail-closed semantics, read-only profile contract, WrongTiedBasePath gate, and no project YAML mutation."
+  completion_criteria:
+    pseudocode_validate: "ok: true for IMPL-EVIDENCE_CHAIN_PROFILE including EVIDENCE_CHAIN_PROFILE_MCP_HANDLER block."
+    tied_validate_consistency: "ok: true after wiring changes."
+    verification_gate_notes: "364 MCP tests passed (npm test --prefix mcp-server); TypeScript build passed; stdd pilot with manifest_reference shows quality.command_results observed; structural observed only with invoke_structural_validators true."
+    vocabulary_validate: "ruby scripts/validate_vocab_index.rb passed; attach provenance recorded in quality-assurance.md."
+    yaml_lint: "scripts/yaml_tool.sh --check passed for tied/citdp/CITDP-REQ-EVIDENCE_CHAIN_PROFILE-wiring.yaml; agent-req-implementation-checklist.yaml remains non-canonical style (pre-existing project debt)."
+  evidence:
+    commands:
+      - "bunx tsc -b (mcp-server) — passed"
+      - "npm test --prefix mcp-server — 364 tests passed, 0 failed"
+      - "Pilot: invoke_structural_validators true — structural rows observed"
+      - "Pilot: quality_evidence_collect_manifest + evidence_chain_profile_generate with manifest_reference — quality.command_results observed"
+      - "pseudocode_validate IMPL-EVIDENCE_CHAIN_PROFILE — ok: true"
+      - "ruby scripts/validate_vocab_index.rb — passed"
+      - "tied_validate_consistency — ok: true"
+    manifest_reference: "working/evidence-chain/verification-evidence-manifest.v1.json"
+    profile_reference: "working/evidence-chain/stdd-integrated-with-manifest.json; working/evidence-chain/stdd-integrated-with-manifest-and-structural.json"
+    proof_boundaries:
+      - "executable_behavior"
+      - "pseudo_code_structure"
+      - "traceability_structure"
+  impact_analysis:
+    impl_inventory_notes: "New live-structural-validators.ts helper; evidence_chain_profile_generate MCP handler passes structural_validators when invoke_structural_validators is true."
+    modules_or_boundaries: "mcp-server/src/fidelity-research/live-structural-validators.ts; mcp-server/src/tools/index.ts; tied/docs/agent-req-implementation-checklist.yaml; tied/docs/evidence-chain-profile.md"
+    tied_tokens_affected:
+      - "IMPL-EVIDENCE_CHAIN_PROFILE"
+      - "IMPL-QUALITY_EVIDENCE_MANIFEST"
+      - "PROC-EVIDENCE_CHAIN"
+      - "REQ-EVIDENCE_CHAIN_PROFILE"
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: "none; Phase A docs and Phase B MCP wiring match approved plan defaults (B1 flag, default false)."
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "REQ-EVIDENCE_CHAIN_PROFILE-wiring"
+    recorded_at: "2026-08-22"
+    title: "Evidence chain not_measured attach-provenance wiring"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      depth_tier: "minimal"
+      gate_policy: "advisory"
+      rationale: "Read-only orchestration; path and TIED base path remain primary abuse cases."
+      research_profile: "integrated-agent"
+      strict_eligibility_prerequisites: []
+    quality_profiles:
+      - "baseline-functional"
+    residual_risk:
+      expiry: "2026-11-22"
+      owner: "TIED maintainers"
+      summary: "Live structural collection remains opt-in via invoke_structural_validators; graph cycle measurement may still be not_measured at some depths; checklist YAML canonical style debt pre-existing."
+    risks:
+      - "Auto-invoke structural validators could blur proof boundaries if mis-documented"
+      - "Operators may expect verification-gate validator runs to auto-populate profile rows without attach-provenance"

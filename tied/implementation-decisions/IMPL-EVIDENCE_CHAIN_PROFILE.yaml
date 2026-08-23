@@ -7,13 +7,8 @@ IMPL-EVIDENCE_CHAIN_PROFILE:
         path: "mcp-server/src/fidelity-research/evidence-chain-profile.test.ts"
       - description: "MCP composition tests"
         path: "mcp-server/src/fidelity-research/evidence-chain-profile.mcp.test.ts"
-    functions:
-      - description: "Deterministic normalize and reject maturity fields"
-        file: "mcp-server/src/fidelity-research/evidence-chain-profile.ts"
-        name: "normalizeEvidenceChainProfile"
-      - description: "Depth-gated profile generation"
-        file: "mcp-server/src/fidelity-research/evidence-chain-profile.ts"
-        name: "generateEvidenceChainProfile"
+      - description: "Shared project identity resolver"
+        path: "mcp-server/src/project-identity.ts"
   cross_references:
     - "ARCH-EVIDENCE_CHAIN_PROFILE"
     - "PROC-EVIDENCE_CHAIN"
@@ -23,8 +18,12 @@ IMPL-EVIDENCE_CHAIN_PROFILE:
       - "EMIT_MANUAL_PROFILE_CONTRACT requires assumptions confidence and unsupported_checks"
       - "GENERATE_EVIDENCE_CHAIN_PROFILE fail-closes on WrongTiedBasePath"
       - "human_research without change_context does not fail"
+      - "identity.project_id and identity_source come from IMPL-TIED_PROJECT_IDENTITY resolveProjectIdentity; operational.project_id matches identity.project_id"
       - "integrated never invokes fidelity binding or spec adapters"
+      - "Manual profiles that confirm the TIED path must declare mcp_validators_not_run in unsupported_checks."
       - "NORMALIZE rejects maturity and score fields and requires a denominator per ratio"
+      - "Profile graph counts come from the selected TIED requirement and implementation dependency graphs; omitted file inventory and vocabulary drift are explicitly unknown or not_measured rather than zero or presence claims."
+      - "Structural validator exceptions return a structured failure, and human-research fidelity and composition adapter results are preserved in the profile."
     summary: "Implement a depth-gated read-only orchestrator and deterministic normalizer for evidence-chain-profile.v1."
   metadata:
     last_updated:
@@ -47,10 +46,11 @@ IMPL-EVIDENCE_CHAIN_PROFILE:
       - "IMPL-TIED_FIDELITY_RESEARCH"
     see_also: []
     supersedes: []
-  status: "Planned"
+  status: "Active"
   traceability:
     architecture:
       - "ARCH-EVIDENCE_CHAIN_PROFILE"
+      - "ARCH-TIED_PROJECT_IDENTITY"
     code_annotations:
       - "IMPL-EVIDENCE_CHAIN_PROFILE"
     requirements:
@@ -58,3 +58,4 @@ IMPL-EVIDENCE_CHAIN_PROFILE:
     tests:
       - "mcp-server/src/fidelity-research/evidence-chain-profile.mcp.test.ts"
       - "mcp-server/src/fidelity-research/evidence-chain-profile.test.ts"
+      - "project-identity.test.ts"
