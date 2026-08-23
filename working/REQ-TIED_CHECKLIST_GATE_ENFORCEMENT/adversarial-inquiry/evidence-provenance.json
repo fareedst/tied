@@ -1,0 +1,10 @@
+{
+  "provenance": {
+    "phase": "close_out",
+    "runId": "batch2-slice1-close-out-20260823",
+    "scope": [
+      "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#069e46c522c9b57d"
+    ]
+  },
+  "schemaVersion": "adversarial-inquiry-provenance.v1"
+}

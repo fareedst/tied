@@ -1,0 +1,61 @@
+{
+  "canonicalMutation": false,
+  "findings": [
+    {
+      "direction": "B",
+      "id": "1924ced5f358bf6e",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "statement-1"
+    },
+    {
+      "direction": "A",
+      "id": "7fbdf477704de584",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "statement-1"
+    }
+  ],
+  "graph": {
+    "edges": [
+      {
+        "from": "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT#criterion-1",
+        "kind": "criterion_constraint",
+        "to": "constraint:constraint-1"
+      },
+      {
+        "from": "constraint:constraint-1",
+        "kind": "constraint_block",
+        "to": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#069e46c522c9b57d"
+      }
+    ],
+    "nodes": [
+      {
+        "id": "constraint:constraint-1",
+        "kind": "constraint"
+      },
+      {
+        "id": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#069e46c522c9b57d",
+        "kind": "block",
+        "revision": "14d90c6bc60c08f0"
+      },
+      {
+        "id": "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT#criterion-1",
+        "kind": "criterion",
+        "revision": "criterion-rev"
+      }
+    ],
+    "projectId": "stdd"
+  },
+  "projectId": "stdd",
+  "proofBoundaries": [
+    "semantic_fidelity"
+  ],
+  "readOnly": true,
+  "schemaVersion": "adversarial-inquiry-report.v1",
+  "scope": [
+    "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#069e46c522c9b57d"
+  ]
+}

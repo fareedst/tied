@@ -1,0 +1,146 @@
+CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-batch2:
+  change_definition:
+    current_behavior: "Integrated depth pairing works only when callers pass an activation payload and optional required_step_slugs; the validator does not derive phase-aware slug sets, read completion_criteria.activation at verification/close_out, reject cross-phase run_id reuse, or require a depth-change waiver. Agents can select integrated depth and still pass gates by omitting activation.\n"
+    desired_behavior: "When depth_tier is integrated, or strict_candidate at verification/close_out, tied_checklist_gate_validate fails closed without paired activation and the phase-aware slug set. Caller required_step_slugs unions with auto slugs and cannot subtract. completion_criteria.activation is validated on gate read at verification and close_out. Depth downgrade from integrated or strict_candidate to minimal requires prior_depth_tier plus a depth-change waiver. A verification-phase receipt cannot be submitted as close_out activation; a close-out inquiry waiver documents skip of a new close_out run_id only.\n"
+    non_goals:
+      - "Add a second checklist process token"
+      - "Force integrated depth on every REQ"
+      - "Retroactively fail closed on completed minimal clients such as 1787503424"
+      - "Universal strict-approved blocking pilots"
+      - "Ship tied_checklist_activation_collect in Slice 1"
+      - "Complete H5 integrated pilot in Slice 1"
+    success_criteria:
+      - "SLICE 1: INTEGRATED_REQUIRED_SLUGS and phase-aware slug sets enforced inside validateChecklistGate when depth is integrated."
+      - "SLICE 1: Caller required_step_slugs unions with the auto set; omitted auto slugs fail closed."
+      - "SLICE 1: completion_criteria.activation required on gate read at verification and close_out when depth is integrated, or when depth is strict_candidate at those phases."
+      - "SLICE 1: Depth downgrade without depth-change waiver fails with depth_downgrade_requires_waiver when prior_depth_tier is integrated or strict_candidate."
+      - "SLICE 1: Receipt phase must equal gate phase; cross-phase reuse fails with receipt_identity_mismatch:phase."
+      - "SLICE 1: strict_candidate requires integrated pairing at verification and close_out."
+      - "SLICE 2 (not Slice 1 acceptance): optional collector returns gate-ready activation or diagnostics."
+      - "SLICE 3 (not Slice 1 acceptance): H5 pilot records paired metric and four artifacts under working/."
+    unchanged_behavior:
+      - "Advisory gate_policy remains non-blocking after valid evidence."
+      - "Minimal depth counterexample contract unchanged; auto slugs and pairing are not required at minimal."
+      - "Observed inquiry findings do not trigger LEAP."
+      - "Batch 1 pairing-when-supplied behavior remains the regression baseline."
+  completion_criteria:
+    activation:
+      artifact_hashes: {}
+      phase: "close_out"
+      project_id: "stdd"
+      request_token: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      run_id: "batch2-slice1-close-out-20260823"
+      scope: []
+      scope_hash: "~"
+    checklist_gate:
+      dispositions:
+        - "completed"
+        - "not_applicable"
+        - "pending"
+        - "waived"
+      fail_closed: true
+      phases:
+        - "close_out"
+        - "pre_implementation"
+        - "verification"
+    focused_tests: "Slice 1: checklist-validator integrated slug, downgrade, phase-mismatch, and strict_candidate late-phase pairing tests pass; checklist-gate-mcp regression passes.\n"
+    lint: "bunx tsc -b passes for mcp-server"
+    persist_policy: "persisted to tied/citdp/ after Slice 1 implementation"
+    verification: "tied_validate_consistency after canonical TIED YAML updates"
+  impact_analysis:
+    audited_project_mutation: "Slice 1 validator, IMPL pseudo-code, citdp template A2 fields, tests"
+    files:
+      - "docs/integrated-activation-checklist-enforcement-plan.md"
+      - "mcp-server/src/checklist-validator.ts"
+      - "mcp-server/src/checklist-validator.test.ts"
+      - "tied/docs/citdp-record-template.yaml"
+      - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+      - "tied/vocab/fidelity-research.md"
+    modules:
+      - "checklist_gate_validator"
+    slice1_out_of_scope_files:
+      - "mcp-server/src/tools/index.ts"
+      - "tools/bundled-prompt-type-skills/"
+    tags:
+      - "adversarial-inquiry"
+      - "checklist-enforcement"
+      - "methodology-tooling"
+  leap_feedback:
+    divergences_from_analysis:
+      - "Added exported helper functions derivePhaseAwareSlugs, requiresIntegratedPairing, validateDepthDowngrade, validateCompletionActivation, validateReceiptPhase for unit-test isolation beyond pseudo-code block names."
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    author: "build-plan subagent"
+    batch: "batch2-integrated-enforcement"
+    change_request_id: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    date: "2026-08-23"
+    record_status: "complete"
+    refine_pass: 2
+    slice: 1
+    title: "Batch 2 integrated activation checklist enforcement — Slice 1"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Agent declares integrated depth but passes pre_implementation without activation payload"
+        - "Caller reuses one inquiry run_id across verification and close_out phases"
+        - "CITDP downgrades integrated to minimal without depth-change waiver between gate calls"
+        - "strict_candidate passes close_out with counterexamples only and no paired artifacts"
+        - "Caller required_step_slugs omits sub-adversarial-inquiry-pass and expects the gate to stay allowed"
+      depth_selected_at: "2026-08-23T17:30:00Z"
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "checklist-validator.test.ts Batch 2 Slice 1 matrix passes (22 tests including integrated fail-closed and pass fixtures)"
+        - "Dogfooding tied_adversarial_inquiry_run at pre_implementation, verification, close_out with distinct run_ids produced four artifacts and allowed gate JSON at each phase"
+        - "Minimal depth regression and Batch 1 pairing-when-supplied behavior preserved"
+      evidence_references:
+        - "mcp-server/src/checklist-validator.test.ts"
+        - "mcp-server/src/tools/checklist-gate-mcp.test.ts"
+        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/"
+        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-pre_implementation.json"
+        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-verification.json"
+        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-close_out.json"
+      falsification_questions:
+        - "Can depth_tier change from integrated to minimal mid-tracker without prior_depth_tier and a waiver field?"
+        - "Can integrated depth pass verification when required_step_slugs is omitted by the caller?"
+        - "Does one tied_adversarial_inquiry_run receipt satisfy two different gate phases?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      profile_depth: "not_measured"
+      rationale: "Slice 1 implementation complete with integrated dogfooding. CITDP depth_tier matches Tracker operator_evidence and paired artifacts under working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/.\n"
+      research_profile: "integrated-agent"
+    profiles:
+      - "baseline-functional"
+    risks:
+      - mitigation: "Phase-aware INTEGRATED_REQUIRED_SLUGS inside validator; caller slugs union-only; RED tests before GREEN."
+        name: "caller_omits_required_slugs"
+        severity: "high"
+      - mitigation: "Reject receipt.phase mismatch against gate phase; close-out inquiry waiver never accepts a verification receipt as activation."
+        name: "cross_phase_run_reuse"
+        severity: "medium"
+      - mitigation: "Require prior_depth_tier plus integrated_waiver or depth_change_waiver on downgrade; invalidate downstream evidence."
+        name: "silent_depth_downgrade"
+        severity: "high"
+  test_strategy:
+    composition_pending: false
+    red_before_green: true
+    slice1_tests:
+      - "mcp-server/src/checklist-validator.test.ts"
+      - "mcp-server/src/tools/checklist-gate-mcp.test.ts"
+    slice2_plus_deferred:
+      - "optional activation-collect composition test"
+      - "H5 working/ evidence"
+    summary: "Slice 1 complete: checklist-validator RED/GREEN matrix and MCP gate regression pass.\n"
+  tied_context:
+    architecture:
+      - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    implementation:
+      - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    methodology_version: "3.0.0"
+    requirements:
+      - "REQ-TIED_ADVERSARIAL_INQUIRY"
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    tied_base_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied"

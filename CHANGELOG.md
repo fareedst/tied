@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Integrated activation checklist enforcement (Batch 2 Slice 1)** —
+  `[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]` / `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]`:
+  `validateChecklistGate` now auto-derives phase-aware Tracker slug sets at
+  integrated depth (and `strict_candidate` at verification/close_out), validates
+  `completion_criteria.activation` on gate read, rejects silent depth downgrades
+  without waiver, binds inquiry receipts to gate phase, and requires paired
+  activation unless a valid close-out inquiry waiver applies. CITDP:
+  `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-batch2`.
+
 - **Machine-enforced checklist evidence gates** — `[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]` /
   `[ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT]` / `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]`:
   shared pure `validateChecklistGate` for Tracker dispositions, CITDP adversarial

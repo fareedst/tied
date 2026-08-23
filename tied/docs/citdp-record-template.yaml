@@ -47,8 +47,25 @@ risk_analysis:
   abuse_cases: []
   adversarial_inquiry:
     assurance_profile: "baseline-functional"
+    close_out_inquiry_waiver:
+      approval: "~"
+      expiry: "~"
+      owner: "~"
+      rationale: "~"
+      referenced_verification_run_id: "~"
+    depth_change_waiver:
+      approval: "~"
+      expiry: "~"
+      owner: "~"
+      rationale: "~"
     depth_tier: "minimal"
     gate_policy: "advisory"
+    integrated_waiver:
+      approval: "~"
+      expiry: "~"
+      owner: "~"
+      rationale: "~"
+    prior_depth_tier: null
     rationale: "~"
     research_profile: "integrated-agent"
     strict_eligibility_prerequisites: []

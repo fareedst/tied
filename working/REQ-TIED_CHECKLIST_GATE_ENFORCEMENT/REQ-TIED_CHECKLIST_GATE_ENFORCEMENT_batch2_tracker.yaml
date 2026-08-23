@@ -1,0 +1,192 @@
+copy_hygiene: "Batch 2 extension tracker for integrated activation enforcement. execution_evidence.request is REQ-TIED_CHECKLIST_GATE_ENFORCEMENT batch2; do not inherit Batch 1 close-out gates. Refreshed 2026-08-23 build-plan Slice 1."
+description: "Per-request Tracker for Batch 2 Slice 1 — operational integrated activation enforcement inside validateChecklistGate."
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: "tied/docs/agent-req-implementation-checklist.yaml"
+  completed:
+    - "session-bootstrap"
+    - "translate-sponsor-intent"
+    - "change-definition"
+    - "impact-discovery"
+    - "catalog-pseudocode-contracts"
+    - "flag-insufficient-specs"
+    - "flag-contradictory-specs"
+    - "risk-assessment"
+    - "test-strategy"
+    - "gate-pseudocode-validation"
+    - "unit-test-red"
+    - "unit-test-green"
+    - "three-way-alignment-unit"
+    - "composition-integration"
+    - "sub-adversarial-inquiry-pass"
+    - "persist-citdp-record"
+  operator_evidence:
+    commands:
+      - "bunx tsc -b (mcp-server)"
+      - "node --test dist/checklist-validator.test.js dist/tools/checklist-gate-mcp.test.js"
+      - "tied_adversarial_inquiry_run phase=pre_implementation|verification|close_out (distinct run_ids)"
+      - "tied_validate_consistency"
+    depth_tier: "integrated"
+    gate_policy: "advisory"
+    limitation: "Slice 1 complete; Slice 2 collector and Slice 3 H5 deferred."
+    prior_depth_tier: null
+    profile_depth: "not_measured"
+    status: "implementation"
+  request: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+impact_analysis:
+  modules_or_boundaries: "Checklist validator auto slug policy, optional activation collector, depth downgrade guard, H5 pilot adoption. Slice 1 build-plan scope is validator-only."
+  tied_tokens_affected:
+    - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+record_identity:
+  batch: "batch2-integrated-enforcement"
+  change_request_id: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+  record_status: "implementation"
+  recorded_at: "2026-08-23"
+  refine_pass: 2
+  title: "Batch 2 integrated activation checklist enforcement"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "AGENTS.md"
+      - "tied/docs/ai-principles.md"
+      - "tied/vocab/routing.md"
+      - "tied/vocab/fidelity-research.md"
+      - "tied/vocab/quality-assurance.md"
+      - "tied/vocab/prompt-composer.md"
+    slug: "session-bootstrap"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/integrated-activation-checklist-enforcement-plan.md"
+      - "tied/vocab/fidelity-research.md"
+    slug: "translate-sponsor-intent"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/integrated-activation-checklist-enforcement-plan.md"
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-batch2-draft.yaml"
+    slug: "change-definition"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/checklist-validator.ts"
+      - "tied/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
+      - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+    slug: "impact-discovery"
+  - disposition: "not_applicable"
+    policy: "existing-token-sufficient"
+    rationale: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT satisfaction criteria already cover pairing, dispositions, and fail-closed gates; Slice 1 extends IMPL of that REQ rather than authoring a new requirement."
+    slug: "author-requirement"
+  - disposition: "not_applicable"
+    policy: "existing-token-sufficient"
+    rationale: "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT remains the architecture token; no new ARCH is required for validator auto-enforcement."
+    slug: "author-architecture"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+      - "docs/integrated-activation-checklist-enforcement-plan.md"
+    slug: "catalog-pseudocode-contracts"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/integrated-activation-checklist-enforcement-plan.md"
+    slug: "flag-insufficient-specs"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/integrated-activation-checklist-enforcement-plan.md"
+    slug: "flag-contradictory-specs"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+    slug: "resolve-pseudocode"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+      - "mcp-server/src/checklist-validator.ts"
+    slug: "apply-token-comments"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+      - "mcp-server/dist/analysis/pseudocode-validator.js (validateEssencePseudocode ok)"
+    slug: "gate-pseudocode-validation"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+    slug: "persist-implementation-records"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/integrated-activation-checklist-enforcement-plan.md"
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-batch2-draft.yaml"
+    slug: "risk-assessment"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/integrated-activation-checklist-enforcement-plan.md"
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-batch2-draft.yaml"
+    slug: "test-strategy"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/checklist-validator.test.ts"
+    slug: "unit-test-red"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/checklist-validator.test.ts"
+      - "mcp-server/dist/checklist-validator.test.js"
+    slug: "unit-test-green"
+  - disposition: "not_applicable"
+    policy: "no-refactor-needed"
+    rationale: "Slice 1 implementation is direct GREEN without intermediate refactor pass."
+    slug: "unit-refactor"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+      - "mcp-server/src/checklist-validator.ts"
+    slug: "three-way-alignment-unit"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/tools/checklist-gate-mcp.test.ts"
+    slug: "composition-integration"
+  - disposition: "not_applicable"
+    policy: "no-ui-surface"
+    rationale: "Slice 1 is validator and MCP wiring; no user-visible UI path requires E2E."
+    slug: "end-to-end-ui"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/dist/checklist-validator.test.js"
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-verification.json"
+    slug: "verification-gate"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+      - "tied/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-batch2.yaml"
+    slug: "sync-tied-stack"
+  - disposition: "not_applicable"
+    policy: "no-user-facing-release"
+    rationale: "Methodology validator change; user-facing release notes are out of scope until a published client refresh notes Slice 1."
+    slug: "user-facing-release-notes"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-batch2.yaml"
+    slug: "persist-citdp-record"
+  - disposition: "completed"
+    evidence_refs:
+      - "CHANGELOG.md"
+      - "tied/docs/commit-guidelines.md"
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-close_out.json"
+    slug: "traceable-commit"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/obligation-report.json"
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/finding-ledger.jsonl"
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/gate-result.json"
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/evidence-provenance.json"
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-pre_implementation.json"
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-verification.json"
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-close_out.json"
+    slug: "sub-adversarial-inquiry-pass"
+  - disposition: "not_applicable"
+    policy: "profile-depth-not-measured"
+    rationale: "No evidence_chain_profile_generate run; profile_depth is not_measured. Do not record profile_depth integrated as measurement."
+    slug: "sub-evidence-chain-profile"
+test_strategy:
+  matrix_notes: "Slice 1 RED-first validator extensions only. Collector MCP and H5 remain later slices."
+  summary: "Extend checklist-validator with phase-aware slug sets, completion_criteria.activation on gate read, strict_candidate pairing at late phases, depth-change waiver, and phase-bound run_id."

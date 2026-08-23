@@ -43,6 +43,10 @@ implementation decisions and pseudo-code for the research tooling.
 | **integrated activation evidence** | activation signal, metric-only activation | Paired request-scoped inquiry metric and complete bounded artifacts demonstrating tool-backed activation. |
 | **activation artifact pairing** | artifact check, activation completeness | The rule that an inquiry metric and all four request-scoped artifacts are required together. |
 | **Tracker disposition** | checklist status, generic skip | One of `pending`, `completed`, `not_applicable`, or `waived`, with disposition-specific evidence contracts. |
+| **prior depth tier** | last depth, previous depth_tier | Snapshot of `depth_tier` before the current CITDP edit. Required for **depth-change waiver** detection; null on first selection. |
+| **depth-change waiver** | integrated_waiver, depth_change_waiver, silent downgrade exception | Owner/expiry/rationale/approval allowing `depth_tier` to drop from `integrated` or `strict_candidate` to `minimal`. |
+| **close-out inquiry waiver** | close_out re-run waiver, verification-run reuse | Owner/expiry/rationale/approval allowing `close_out` to skip a new inquiry pass when findings are unchanged; does **not** authorize passing a verification-phase receipt as the close_out `activation` payload. |
+| **phase-aware slug set** | INTEGRATED_REQUIRED_SLUGS, auto slugs | Phase-specific Tracker slugs the checklist evidence gate derives at integrated depth (and at `strict_candidate` verification/close_out). Caller slugs union with this set and cannot subtract. |
 
 ## Naming bridge
 
@@ -62,6 +66,10 @@ implementation decisions and pseudo-code for the research tooling.
 | Integrated activation evidence | `activation-evidence` | Paired metric and artifact evidence used to classify integrated activation. |
 | Activation artifact pairing | `activation-artifact-pairing` | Completeness check joining the inquiry metric to the four bounded artifacts. |
 | Tracker disposition | `tracker-disposition` | Machine-checked disposition and evidence contract for one checklist step. |
+| Prior depth tier | `prior_depth_tier` | Previous `depth_tier` used to detect a downgrade on a single CITDP snapshot. |
+| Depth-change waiver | `integrated_waiver` / `depth_change_waiver` | Required fields when lowering depth mid-request. |
+| Close-out inquiry waiver | `close_out_inquiry_waiver` | Documents why `close_out` has no new inquiry `run_id`. |
+| Phase-aware slug set | `INTEGRATED_REQUIRED_SLUGS` | Auto-required Tracker slugs inside `validateChecklistGate`. |
 
 ## First-slice pseudo-code block names
 
@@ -129,6 +137,10 @@ Working artifacts persist only under `working/{REQ-TOKEN}/adversarial-inquiry/`.
 | Term | Section |
 |---|---|
 | activation artifact pairing | Preferred terms vs synonyms |
+| close-out inquiry waiver | Preferred terms vs synonyms |
+| depth-change waiver | Preferred terms vs synonyms |
+| phase-aware slug set | Preferred terms vs synonyms |
+| prior depth tier | Preferred terms vs synonyms |
 | artifact snapshot | Naming bridge |
 | candidate finding | Preferred terms vs synonyms |
 | case report | Naming bridge |

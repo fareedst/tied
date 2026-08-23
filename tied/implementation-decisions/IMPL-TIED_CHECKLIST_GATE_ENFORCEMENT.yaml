@@ -1,4 +1,6 @@
 IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT:
+  adversarial_inquiry:
+    block_name: "VALIDATE_CHECKLIST_GATE"
   code_locations:
     files:
       - description: "Shared Tracker, CITDP, and activation evidence validator"
@@ -34,8 +36,8 @@ IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT:
       date: "2026-08-23T00:00:00.000Z"
     last_updated:
       author: "AI Agent"
-      date: "2026-08-23T00:00:00.000Z"
-      reason: "Define fail-closed adversarial gate contract before implementation"
+      date: "2026-08-23T18:00:00.000Z"
+      reason: "Declare primary inquiry block for Mode B scope loading and close-out pairing"
   name: "Checklist, CITDP, and activation validator"
   rationale:
     benefits:

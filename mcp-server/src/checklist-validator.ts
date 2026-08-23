@@ -40,6 +40,13 @@ const PHASES = new Set<GatePhase>([
   "close_out",
 ]);
 
+// [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: derive auto-required Tracker slugs from depth and gate phase.
+export const INTEGRATED_REQUIRED_SLUGS: Record<GatePhase, readonly string[]> = {
+  pre_implementation: ["risk-assessment", "sub-adversarial-inquiry-pass", "gate-pseudocode-validation"],
+  verification: ["risk-assessment", "sub-adversarial-inquiry-pass", "verification-gate"],
+  close_out: ["risk-assessment", "sub-adversarial-inquiry-pass", "verification-gate", "traceable-commit"],
+};
+
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
@@ -113,6 +120,111 @@ function hasRationale(step: Record<string, unknown>): boolean {
     || (isRecord(step.tracking) && nonEmpty(step.tracking.rationale));
 }
 
+function adversarialSection(citdp: unknown): Record<string, unknown> | undefined {
+  if (!isRecord(citdp)) return undefined;
+  if (isRecord(citdp.adversarial_inquiry)) return citdp.adversarial_inquiry;
+  const risk = isRecord(citdp.risk_analysis) ? citdp.risk_analysis : undefined;
+  if (risk && isRecord(risk.adversarial_inquiry)) return risk.adversarial_inquiry;
+  return undefined;
+}
+
+function completionCriteria(citdp: unknown): Record<string, unknown> | undefined {
+  if (!isRecord(citdp)) return undefined;
+  return isRecord(citdp.completion_criteria) ? citdp.completion_criteria : undefined;
+}
+
+function identityValue(value: unknown): string | undefined {
+  return typeof value === "string" && value.trim() ? value.trim() : undefined;
+}
+
+function hasDepthChangeWaiver(section: Record<string, unknown>): boolean {
+  for (const key of ["integrated_waiver", "depth_change_waiver"] as const) {
+    const waiver = section[key];
+    if (!isRecord(waiver)) continue;
+    if (
+      nonEmpty(waiver.owner)
+      && nonEmpty(waiver.expiry)
+      && nonEmpty(waiver.rationale)
+      && nonEmpty(waiver.approval)
+    ) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function hasValidCloseOutInquiryWaiver(section: Record<string, unknown>): boolean {
+  const waiver = section.close_out_inquiry_waiver;
+  if (!isRecord(waiver)) return false;
+  return nonEmpty(waiver.owner)
+    && nonEmpty(waiver.expiry)
+    && nonEmpty(waiver.rationale)
+    && nonEmpty(waiver.approval)
+    && nonEmpty(waiver.referenced_verification_run_id);
+}
+
+// [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: derive auto-required Tracker slugs from depth and gate phase; caller slugs union only.
+export function derivePhaseAwareSlugs(
+  depth: AdversarialDepth,
+  phase: GatePhase,
+): readonly string[] {
+  if (depth === "integrated") return INTEGRATED_REQUIRED_SLUGS[phase];
+  if (depth === "strict_candidate" && (phase === "verification" || phase === "close_out")) {
+    return INTEGRATED_REQUIRED_SLUGS[phase];
+  }
+  return [];
+}
+
+export function requiresIntegratedPairing(depth: AdversarialDepth, phase: GatePhase): boolean {
+  if (depth === "integrated") return true;
+  if (depth === "strict_candidate" && (phase === "verification" || phase === "close_out")) return true;
+  return false;
+}
+
+// [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: reject silent downgrade from integrated or strict_candidate to minimal without waiver.
+export function validateDepthDowngrade(input: {
+  citdp: unknown;
+  priorDepthTier?: AdversarialDepth | null;
+}): ValidationResult {
+  const section = adversarialSection(input.citdp);
+  const currentDepth = identityValue(section?.depth_tier) as AdversarialDepth | undefined;
+  const priorDepth = input.priorDepthTier ?? identityValue(section?.prior_depth_tier) as AdversarialDepth | undefined;
+  if (!priorDepth || priorDepth === "minimal") return { ok: true, diagnostics: [] };
+  if (priorDepth !== "integrated" && priorDepth !== "strict_candidate") return { ok: true, diagnostics: [] };
+  if (currentDepth !== "minimal") return { ok: true, diagnostics: [] };
+  if (section && hasDepthChangeWaiver(section)) return { ok: true, diagnostics: [] };
+  return { ok: false, diagnostics: ["depth_downgrade_requires_waiver"] };
+}
+
+// [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: require completion_criteria.activation on gate read at late integrated phases.
+export function validateCompletionActivation(input: {
+  citdp: unknown;
+  phase: GatePhase;
+  depth: AdversarialDepth;
+}): ValidationResult {
+  if (input.phase !== "verification" && input.phase !== "close_out") {
+    return { ok: true, diagnostics: [] };
+  }
+  if (input.depth !== "integrated" && !(input.depth === "strict_candidate")) {
+    return { ok: true, diagnostics: [] };
+  }
+  const criteria = completionCriteria(input.citdp);
+  const activation = criteria && isRecord(criteria.activation) ? criteria.activation : undefined;
+  if (activation && nonEmpty(activation.run_id)) return { ok: true, diagnostics: [] };
+  return { ok: false, diagnostics: ["missing_completion_activation"] };
+}
+
+// [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: bind each inquiry receipt to exactly one gate phase.
+export function validateReceiptPhase(input: {
+  receipt: unknown;
+  gatePhase: GatePhase;
+}): ValidationResult {
+  if (!isRecord(input.receipt)) return { ok: true, diagnostics: [] };
+  const receiptPhase = identityValue(input.receipt.phase);
+  if (!receiptPhase || receiptPhase === input.gatePhase) return { ok: true, diagnostics: [] };
+  return { ok: false, diagnostics: ["receipt_identity_mismatch:phase"] };
+}
+
 // [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: validate disposition contracts and reject generic skips.
 export function validateTracker(input: {
   tracker: unknown;
@@ -167,62 +279,6 @@ export function validateTracker(input: {
     for (const slug of required) {
       if (!seen.has(slug)) diagnostics.push(`missing_required_step:${slug}`);
     }
-  }
-  return { ok: diagnostics.length === 0, diagnostics };
-}
-
-function adversarialSection(citdp: unknown): Record<string, unknown> | undefined {
-  if (!isRecord(citdp)) return undefined;
-  if (isRecord(citdp.adversarial_inquiry)) return citdp.adversarial_inquiry;
-  const risk = isRecord(citdp.risk_analysis) ? citdp.risk_analysis : undefined;
-  if (risk && isRecord(risk.adversarial_inquiry)) return risk.adversarial_inquiry;
-  return undefined;
-}
-
-function identityValue(value: unknown): string | undefined {
-  return typeof value === "string" && value.trim() ? value.trim() : undefined;
-}
-
-// [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: enforce depth-specific adversarial obligations before progression.
-export function validateAdversarialContract(input: {
-  citdp: unknown;
-  phase: GatePhase;
-  activation?: {
-    receipt?: unknown;
-    artifacts?: unknown;
-    expected?: ActivationExpectedIdentity;
-  };
-}): ValidationResult {
-  const diagnostics: string[] = [];
-  if (!PHASES.has(input.phase)) diagnostics.push("invalid_phase");
-  const section = adversarialSection(input.citdp);
-  if (!section) {
-    diagnostics.push("malformed_citdp:adversarial_inquiry");
-    return { ok: false, diagnostics };
-  }
-  const depth = identityValue(section.depth_tier);
-  if (!depth || !["minimal", "integrated", "strict_candidate"].includes(depth)) {
-    diagnostics.push("missing_or_invalid_depth");
-    return { ok: false, diagnostics };
-  }
-  if (depth === "minimal" || depth === "strict_candidate") {
-    const requiredFields = [
-      ["counterexamples", "missing_counterexamples"],
-      ["falsification_questions", "missing_falsification_questions"],
-      ["disconfirming_observations", "missing_disconfirming_observations"],
-      ["evidence_references", "missing_adversarial_evidence_references"],
-    ] as const;
-    for (const [field, code] of requiredFields) {
-      if (!listWithValues(section[field])) diagnostics.push(code);
-    }
-  }
-  if (depth === "integrated") {
-    const pairing = validateActivationPairing({
-      receipt: input.activation?.receipt,
-      artifacts: input.activation?.artifacts,
-      expected: input.activation?.expected,
-    });
-    diagnostics.push(...pairing.diagnostics);
   }
   return { ok: diagnostics.length === 0, diagnostics };
 }
@@ -296,6 +352,53 @@ export function validateActivationPairing(input: {
   };
 }
 
+// [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: enforce depth-specific adversarial obligations before progression.
+export function validateAdversarialContract(input: {
+  citdp: unknown;
+  phase: GatePhase;
+  depth?: AdversarialDepth;
+  requiresPairing?: boolean;
+  activation?: {
+    receipt?: unknown;
+    artifacts?: unknown;
+    expected?: ActivationExpectedIdentity;
+  };
+}): ValidationResult {
+  const diagnostics: string[] = [];
+  if (!PHASES.has(input.phase)) diagnostics.push("invalid_phase");
+  const section = adversarialSection(input.citdp);
+  if (!section) {
+    diagnostics.push("malformed_citdp:adversarial_inquiry");
+    return { ok: false, diagnostics };
+  }
+  const depth = input.depth ?? identityValue(section.depth_tier) as AdversarialDepth | undefined;
+  if (!depth || !["minimal", "integrated", "strict_candidate"].includes(depth)) {
+    diagnostics.push("missing_or_invalid_depth");
+    return { ok: false, diagnostics };
+  }
+  if (depth === "minimal" || (depth === "strict_candidate" && input.phase === "pre_implementation")) {
+    const requiredFields = [
+      ["counterexamples", "missing_counterexamples"],
+      ["falsification_questions", "missing_falsification_questions"],
+      ["disconfirming_observations", "missing_disconfirming_observations"],
+      ["evidence_references", "missing_adversarial_evidence_references"],
+    ] as const;
+    for (const [field, code] of requiredFields) {
+      if (!listWithValues(section[field])) diagnostics.push(code);
+    }
+  }
+  const pairingRequired = input.requiresPairing ?? requiresIntegratedPairing(depth, input.phase);
+  if (pairingRequired && input.activation) {
+    const pairing = validateActivationPairing({
+      receipt: input.activation.receipt,
+      artifacts: input.activation.artifacts,
+      expected: input.activation.expected,
+    });
+    diagnostics.push(...pairing.diagnostics);
+  }
+  return { ok: diagnostics.length === 0, diagnostics };
+}
+
 // [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: select depth before evaluating phase gates and fail closed on invalid evidence.
 export function validateChecklistGate(input: {
   tracker: unknown;
@@ -307,13 +410,74 @@ export function validateChecklistGate(input: {
     expected?: ActivationExpectedIdentity;
   };
   requiredStepSlugs?: readonly string[];
+  priorDepthTier?: AdversarialDepth | null;
   now?: Date;
 }): ValidationResult & { allowed: boolean; blocking: boolean; depth?: AdversarialDepth } {
-  const trackerResult = validateTracker(input);
   const section = adversarialSection(input.citdp);
   const depth = identityValue(section?.depth_tier) as AdversarialDepth | undefined;
-  const adversarialResult = validateAdversarialContract(input);
-  const diagnostics = [...trackerResult.diagnostics, ...adversarialResult.diagnostics];
-  const allowed = trackerResult.ok && adversarialResult.ok;
-  return { allowed, ok: allowed, blocking: !allowed, depth, diagnostics: [...new Set(diagnostics)] };
+  const diagnostics: string[] = [];
+
+  if (!depth) {
+    const adversarialResult = validateAdversarialContract({ citdp: input.citdp, phase: input.phase });
+    diagnostics.push(...adversarialResult.diagnostics);
+    return {
+      allowed: false,
+      ok: false,
+      blocking: true,
+      depth,
+      diagnostics: [...new Set(diagnostics)],
+    };
+  }
+
+  const autoSlugs = derivePhaseAwareSlugs(depth, input.phase);
+  const requiredSlugs = [...new Set([...autoSlugs, ...(input.requiredStepSlugs ?? [])])];
+
+  const downgradeResult = validateDepthDowngrade({
+    citdp: input.citdp,
+    priorDepthTier: input.priorDepthTier,
+  });
+  diagnostics.push(...downgradeResult.diagnostics);
+
+  const completionResult = validateCompletionActivation({
+    citdp: input.citdp,
+    phase: input.phase,
+    depth,
+  });
+  diagnostics.push(...completionResult.diagnostics);
+
+  const receiptPhaseResult = validateReceiptPhase({
+    receipt: input.activation?.receipt,
+    gatePhase: input.phase,
+  });
+  diagnostics.push(...receiptPhaseResult.diagnostics);
+
+  const trackerResult = validateTracker({
+    tracker: input.tracker,
+    phase: input.phase,
+    requiredStepSlugs: requiredSlugs,
+    now: input.now,
+  });
+  diagnostics.push(...trackerResult.diagnostics);
+
+  const pairingRequired = requiresIntegratedPairing(depth, input.phase);
+  const closeOutWaiverApplies = input.phase === "close_out"
+    && section !== undefined
+    && hasValidCloseOutInquiryWaiver(section);
+
+  if (pairingRequired && !closeOutWaiverApplies && !input.activation) {
+    diagnostics.push("integrated_depth_requires_pairing");
+  }
+
+  const adversarialResult = validateAdversarialContract({
+    citdp: input.citdp,
+    phase: input.phase,
+    depth,
+    requiresPairing: pairingRequired && !closeOutWaiverApplies && Boolean(input.activation),
+    activation: input.activation,
+  });
+  diagnostics.push(...adversarialResult.diagnostics);
+
+  const uniqueDiagnostics = [...new Set(diagnostics)];
+  const allowed = uniqueDiagnostics.length === 0;
+  return { allowed, ok: allowed, blocking: !allowed, depth, diagnostics: uniqueDiagnostics };
 }
