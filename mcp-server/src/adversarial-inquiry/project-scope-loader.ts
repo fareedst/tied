@@ -4,6 +4,7 @@ import path from "node:path";
 import yaml from "js-yaml";
 
 import { resolveProjectManifest, type ProjectManifest } from "../fidelity-research/manifest.js";
+import { detectGoTestClassifier } from "./go-evidence-adapter.js";
 
 type JsonObject = Record<string, unknown>;
 
@@ -210,14 +211,33 @@ async function readPseudocode(
   return sidecar;
 }
 
+export function resolveModeBManifestProfile(testPath: string): {
+  languages: string[];
+  testClassifiers: string[];
+} | ProjectScopeError {
+  if (detectGoTestClassifier(testPath)) {
+    return { languages: ["go"], testClassifiers: ["go-test"] };
+  }
+  if (testPath.endsWith(".rb")) {
+    return { languages: ["ruby"], testClassifiers: ["minitest"] };
+  }
+  return {
+    code: "INVALID_INPUT",
+    message: "Mode B test_path must be a supported Ruby Minitest (.rb) or Go (_test.go) file.",
+    path: testPath,
+  };
+}
+
 function manifestFor(input: ProjectScopeLoaderInput): ProjectManifest | ProjectScopeError {
   const tiedBasePath = input.tiedBasePath ?? path.join(input.projectRoot, "tied");
+  const profile = resolveModeBManifestProfile(input.testPath);
+  if ("code" in profile) return profile;
   const result = resolveProjectManifest({
     projectRoot: input.projectRoot,
     tiedBasePath,
     version: "mode-b-fixture",
-    languages: ["ruby"],
-    testClassifiers: ["minitest"],
+    languages: profile.languages,
+    testClassifiers: profile.testClassifiers,
     ignoreRules: [],
   });
   return result.ok
@@ -228,7 +248,7 @@ function manifestFor(input: ProjectScopeLoaderInput): ProjectManifest | ProjectS
     };
 }
 
-// [IMPL-TIED_ADVERSARIAL_INQUIRY] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY] How: validate an explicit project boundary, load declared read-only inputs, and normalize one supported Ruby Minitest fixture into the existing inquiry core.
+// [IMPL-TIED_ADVERSARIAL_INQUIRY] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY] How: validate an explicit project boundary, load declared read-only inputs, and normalize supported Ruby Minitest or Go test fixtures into the existing inquiry core.
 export async function loadProjectScope(input: ProjectScopeLoaderInput): Promise<ProjectScopeLoadResult> {
   if (
     !input

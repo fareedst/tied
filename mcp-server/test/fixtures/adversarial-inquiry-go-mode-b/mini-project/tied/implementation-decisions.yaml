@@ -1,0 +1,12 @@
+IMPL-FIXTURE-ADVERSARIAL:
+  cross_references:
+    - "ARCH-FIXTURE-ADVERSARIAL"
+    - "REQ-FIXTURE-ADVERSARIAL"
+  detail_file: "implementation-decisions/IMPL-FIXTURE-ADVERSARIAL.yaml"
+  name: "Preserve Go divide success and failure observations"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-FIXTURE-ADVERSARIAL"
+    requirements:
+      - "REQ-FIXTURE-ADVERSARIAL"

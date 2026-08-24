@@ -130,8 +130,9 @@ evidence; it does not scan project paths or write project YAML.
 
 #### Go and non-Ruby stacks (Mode A builder from TIED)
 
-For Go and other stacks without a native **Mode B** project-input adapter,
-use `scripts/build_adversarial_inquiry_from_tied.rb` to emit normalized
+For Go stacks you may use either **Mode B** (native project-input dispatch) or
+the **Mode A builder** below when you already maintain hand-authored graph/fidelity
+mappings.
 `graph.json` and `fidelity.json` from TIED tokens, declared test/production
 paths, and an optional declarative `build-config.yaml`. The builder computes
 `projectId` from the resolved `tied/` base path (same hash as MCP metrics) and
@@ -175,9 +176,9 @@ ruby scripts/build_adversarial_inquiry_from_tied.rb \
   --output-dir working/REQ-YOUR-FEATURE/adversarial-inquiry/inputs
 ```
 
-Native Go **Mode B** remains deferred (operator friction plan §5.2); do not
-expect the MCP server to load Go tests directly until a future REQ ships that
-adapter.
+Native Go **Mode B** is available for `_test.go` paths (see §Go Mode B below).
+The Mode A builder remains the fallback when you need declarative graph/fidelity
+mapping via `build-config.yaml`.
 
 #### Mode A envelope only (pre-built graph/fidelity)
 
@@ -200,8 +201,8 @@ ruby scripts/build_adversarial_inquiry_mode_a.rb \
 The graph, fidelity, and provenance files remain the caller’s evidence inputs;
 the builder only assembles the normalized Mode A request. Use `policy:
 advisory` for a first pilot and inspect the four artifacts before claiming
-integrated activation. This is the documented fallback for Go and other
-stacks until a native project-input adapter exists.
+integrated activation. Mode A remains the fallback when you maintain external
+graph/fidelity files or need declarative `build-config.yaml` mapping.
 
 ### Mode B — supported bounded project-input inquiry
 
@@ -210,8 +211,10 @@ It accepts an explicit project boundary and declared repository-relative paths,
 loads canonical TIED data read-only, and converts those inputs into the
 existing normalized core.
 
-The first Mode B slice is limited to one deterministic Ruby Minitest fixture
-and does not promote strict status. It uses the supported assertion subset:
+The first Mode B slice supports deterministic Ruby Minitest and Go `_test.go`
+fixtures and does not promote strict status.
+
+**Ruby Minitest** supported assertion subset:
 
 - `assert`
 - `assert_equal`
@@ -222,6 +225,47 @@ and does not promote strict status. It uses the supported assertion subset:
 Unsupported assertions are `UNRESOLVED` with an `unsupported_adapter`
 diagnostic. Do not convert an unresolved result into a waiver without recording
 an owner, expiry, proof boundary, rationale, and residual risk.
+
+**Go testing** supported construct subset:
+
+- `t.Error`, `t.Errorf`, `t.Fatal`, `t.Fatalf`
+- `assert.Equal`, `assert.NoError`, `require.Equal`, `require.NoError` (testify)
+
+Unsupported constructs (`cmp.Equal`, `assert.InDelta`, bare `reflect.DeepEqual`,
+etc.) emit `unsupported_adapter` and remain `UNRESOLVED`.
+
+#### Go Mode B operator sequence
+
+1. Ensure `project_root/tied/` holds the REQ/ARCH/IMPL records for the scope.
+2. Declare repository-relative Go paths only (no absolute paths in the request).
+3. Align IMPL `adversarial_inquiry.specification` statement ids with the
+   `gotest-{line}-{construct}` ids emitted by the Go adapter (same line numbers
+   as the `_test.go` source).
+4. Provide structured production observations whose `statementId` and `value`
+   match the corresponding test/specification entries; production `.go` source
+   is a locus only.
+5. Dispatch Mode B through MCP or `tied-cli.sh`:
+
+```json
+{
+  "mode": "project",
+  "project_root": "/absolute/project",
+  "request_token": "REQ-FIXTURE-ADVERSARIAL",
+  "impl_token": "IMPL-FIXTURE-ADVERSARIAL",
+  "test_path": "internal/divide/divide_test.go",
+  "production_path": "internal/divide/divide.go",
+  "production_evidence_path": "production-evidence/sample-divide-good.json",
+  "policy": "advisory"
+}
+```
+
+Reference fixture:
+`mcp-server/test/fixtures/adversarial-inquiry-go-mode-b/` (derived from
+1787507684 layout; repo-relative paths only).
+
+For integrated activation, add `activation.runId` and `activation.phase`, then
+pair phase-scoped artifacts with `tied_checklist_activation_collect` and
+`tied_checklist_gate_validate` as documented in §Phase-scoped artifacts.
 
 A Mode B request declares `project_root`, `request_token`, `impl_token`,
 repository-relative `test_path` and `production_path`, plus either inline

@@ -49,7 +49,8 @@ implementation decisions and pseudo-code for the research tooling.
 | **phase-aware slug set** | INTEGRATED_REQUIRED_SLUGS, auto slugs | Phase-specific Tracker slugs the checklist evidence gate derives at integrated depth (and at `strict_candidate` verification/close_out). Caller slugs union with this set and cannot subtract. |
 | **phase artifact directory** | phase folder, snapshot folder | Request-scoped `working/{REQ-TOKEN}/adversarial-inquiry/phase-{phase}/` storage that prevents one inquiry phase from overwriting another; each receipt references only its own phase directory. |
 | **metrics client attribution** | client label, tied-cli tag | Operator-facing label in MCP usage JSONL; resolved from env, `--client`, or `/dev/test/{id}` auto-detect in tied-cli; supports provenance only and never gates activation alone. |
-| **Go Mode A builder** | build_adversarial_inquiry_from_tied, from-tied builder | Ruby script emitting normalized graph/fidelity for Go and language-neutral stacks from TIED tokens, declared paths, and optional build-config; defers native Go Mode B adapter. |
+| **Go Mode B adapter** | go-test adapter, PARSE_GO_TEST_EVIDENCE | Native Go project-input Mode B dispatch with realpath confinement; `_test.go` paths select the go-test manifest profile. |
+| **Go Mode A builder** | build_adversarial_inquiry_from_tied, from-tied builder | Ruby script emitting normalized graph/fidelity for Go and language-neutral stacks from TIED tokens, declared paths, and optional build-config; optional when Mode B suffices. |
 | **reference fixture** | adversarial-inquiry-go-rootjobs | Checked-in 1787507684 / REQ-ROOTJOBS graph/fidelity + build-config for CI regression; repo-relative paths only. |
 | **phase-aware activation report** | metrics activation summary | Offline analyzer view of per-phase artifact completeness plus inquiry count; phase dirs remain authoritative over root projection. |
 | **activation expected identity** | expected payload, expected fields | Gate-side identity projection derived from a valid activation receipt when omitted by the caller; it does not replace receipt/artifact pairing. |
@@ -84,7 +85,8 @@ implementation decisions and pseudo-code for the research tooling.
 | Phase artifact directory | `working/{REQ-TOKEN}/adversarial-inquiry/phase-{phase}/` | Per-phase bounded artifact storage; canonical root is reserved for the latest/close-out view. |
 | Metrics client attribution | `TIED_MCP_METRICS_CLIENT` / tied-cli `--client` | JSONL client label for operator provenance; auto-detect from `project_root` under `/dev/test/{id}` when unset. |
 | Go Mode A builder | `build_adversarial_inquiry_from_tied.rb` | Emits normalized graph/fidelity for Go stacks; optional `--build-config`; `--emit-mode-a` delegates envelope assembly. |
-| Reference fixture | `mcp-server/test/fixtures/adversarial-inquiry-go-rootjobs/` | 1787507684 REQ-ROOTJOBS pilot layout for builder regression; not a Mode B adapter. |
+| Go Mode B fixture | `mcp-server/test/fixtures/adversarial-inquiry-go-mode-b/` | Deterministic Go divide mini-project for Mode B loader/orchestrator regression. |
+| Reference fixture | `mcp-server/test/fixtures/adversarial-inquiry-go-rootjobs/` | 1787507684 REQ-ROOTJOBS pilot layout for Mode A builder regression. |
 | Phase-aware activation report | `integrated_activation_complete` in metrics analyzer | Offline completeness signal combining three phase dirs and inquiry count; does not replace checklist gate receipts. |
 | Activation expected identity | `activation.expected` / `expected` | Derived gate identity fields from `activation.receipt` when safe and complete. |
 | Placeholder waiver | `~`, `null`, or empty waiver fields | Invalid waiver input; never satisfies a waiver contract. |

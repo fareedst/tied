@@ -1,0 +1,11 @@
+ARCH-FIXTURE-ADVERSARIAL:
+  cross_references:
+    - "REQ-FIXTURE-ADVERSARIAL"
+  detail_file: "architecture-decisions/ARCH-FIXTURE-ADVERSARIAL.yaml"
+  name: "Keep Go divide behavior explicit and read-only for inquiry"
+  status: "Active"
+  traceability:
+    implementation:
+      - "IMPL-FIXTURE-ADVERSARIAL"
+    requirements:
+      - "REQ-FIXTURE-ADVERSARIAL"

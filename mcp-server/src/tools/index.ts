@@ -1344,8 +1344,8 @@ export const allTools = [
         project_root: z.string().optional().describe("Absolute project root for Mode B."),
         tied_base_path: z.string().optional().describe("Optional tied/ directory override for Mode B; must remain under project_root."),
         impl_token: z.string().optional().describe("IMPL token for Mode B scope selection."),
-        test_path: z.string().optional().describe("Relative Ruby Minitest path for Mode B."),
-        production_path: z.string().optional().describe("Relative production source path for Mode B."),
+        test_path: z.string().optional().describe("Repository-relative Ruby Minitest (.rb) or Go (_test.go) path for Mode B."),
+        production_path: z.string().optional().describe("Repository-relative Ruby or Go production source path for Mode B."),
         production_evidence_path: z.string().optional().describe("Relative production evidence JSON path for Mode B."),
         production_evidence: z.array(z.record(z.unknown())).optional().describe("Inline production evidence observations for Mode B."),
         criterion_scope: z.array(z.string()).optional().describe("Optional criterion token subset for Mode B."),
@@ -1388,7 +1388,18 @@ export const allTools = [
     }) => {
       try {
         if (args.mode === "project") {
-          const result = await runProjectInquiry(args as ModeBInput);
+          const projectArgs = args as ModeBInput & {
+            run_id?: string;
+            phase?: InquiryActivation["phase"];
+          };
+          const activation = projectArgs.activation
+            ?? (projectArgs.run_id && projectArgs.phase
+              ? { runId: projectArgs.run_id, phase: projectArgs.phase }
+              : undefined);
+          const result = await runProjectInquiry({
+            ...projectArgs,
+            activation,
+          });
           return textContent(JSON.stringify(result, null, 2));
         }
         if (!args.graph || !args.fidelity || !args.scope?.length) {

@@ -1,0 +1,14 @@
+ARCH-FIXTURE-ADVERSARIAL:
+  constraints:
+    - id: "constraint-fixture-divide"
+      implementation_block_names:
+        - "BUILD_PROJECT_INQUIRY_INPUT"
+  cross_references:
+    - "REQ-FIXTURE-ADVERSARIAL"
+  name: "Keep Go divide behavior explicit and read-only for inquiry"
+  status: "Active"
+  traceability:
+    implementation:
+      - "IMPL-FIXTURE-ADVERSARIAL"
+    requirements:
+      - "REQ-FIXTURE-ADVERSARIAL"

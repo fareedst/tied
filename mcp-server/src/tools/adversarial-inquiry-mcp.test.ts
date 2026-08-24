@@ -121,4 +121,38 @@ describe("tied_adversarial_inquiry_run composition [REQ-TIED_ADVERSARIAL_INQUIRY
     assert.ok((unsupported.diagnostics as string[]).includes("unsupported_adapter"));
     assert.deepEqual(tiedFiles.map((filePath) => fs.readFileSync(filePath, "utf8")), before);
   });
+
+  it("dispatches all Go Mode B fixture cases without mutating canonical TIED YAML", async () => {
+    const handler = toolHandler("tied_adversarial_inquiry_run");
+    const fixtureRoot = path.resolve(
+      path.dirname(new URL(import.meta.url).pathname),
+      "../../test/fixtures/adversarial-inquiry-go-mode-b",
+    );
+    const projectRoot = path.join(fixtureRoot, "mini-project");
+    const goFixture = (caseName: string): Record<string, unknown> => {
+      const inputPath = path.join(fixtureRoot, "cases", caseName, "mode-b-input.json");
+      return JSON.parse(
+        fs.readFileSync(inputPath, "utf8").replaceAll("__PROJECT_ROOT__", projectRoot),
+      ) as Record<string, unknown>;
+    };
+    const tiedFiles = [
+      "requirements.yaml",
+      "architecture-decisions.yaml",
+      "implementation-decisions.yaml",
+      "semantic-tokens.yaml",
+    ].map((name) => path.join(projectRoot, "tied", name));
+    const before = tiedFiles.map((filePath) => fs.readFileSync(filePath, "utf8"));
+
+    const good = parse(await handler(goFixture("case-good")));
+    const missingFailure = parse(await handler(goFixture("case-missing-failure")));
+    const unsupported = parse(await handler(goFixture("case-unsupported-assertion")));
+
+    assert.equal(good.mode, "project");
+    assert.equal(good.ok, true);
+    assert.equal(good.verdict, "RELIABLE_INCOMPLETE");
+    assert.equal(missingFailure.verdict, "RELIABLE_INCOMPLETE");
+    assert.equal(unsupported.verdict, "UNRESOLVED");
+    assert.ok((unsupported.diagnostics as string[]).includes("unsupported_adapter"));
+    assert.deepEqual(tiedFiles.map((filePath) => fs.readFileSync(filePath, "utf8")), before);
+  });
 });

@@ -9,6 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Native Go Mode B project-input adapter (Slice G2)** —
+  `[REQ-TIED_ADVERSARIAL_INQUIRY]` / `[IMPL-TIED_ADVERSARIAL_INQUIRY]` /
+  `[ARCH-TIED_ADVERSARIAL_INQUIRY]`: Mode B dispatch accepts Go `_test.go` and
+  production `.go` paths with realpath confinement; `PARSE_GO_TEST_EVIDENCE`
+  normalizes read-only Go test evidence; MCP `runProjectInquiry` forwards
+  activation for checklist pairing. Fixture:
+  `mcp-server/test/fixtures/adversarial-inquiry-go-mode-b/`; composition test
+  proves inquiry → collect → gate at integrated verification depth.
+  `docs/adversarial-inquiry-adoption.md` documents Go Mode B operator sequence.
+  CITDP: `CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-sliceG2`.
+
 - **Minimal waiver warn diagnostic (Batch 2 Slice A3)** —
   `[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]` / `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]`:
   `validateMinimalWaiver` / `VALIDATE_MINIMAL_WAIVER` emits warn-only

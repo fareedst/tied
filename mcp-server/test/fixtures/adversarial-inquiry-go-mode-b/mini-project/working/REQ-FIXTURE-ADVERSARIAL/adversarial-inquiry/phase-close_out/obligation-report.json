@@ -1,0 +1,84 @@
+{
+  "canonicalMutation": false,
+  "findings": [
+    {
+      "direction": "B",
+      "id": "4a3ed3285e2bb6b9",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "gotest-13-t.Errorf"
+    }
+  ],
+  "graph": {
+    "edges": [
+      {
+        "from": "REQ-FIXTURE-ADVERSARIAL#divide-failure",
+        "kind": "criterion_constraint",
+        "to": "constraint:constraint-fixture-divide"
+      },
+      {
+        "from": "REQ-FIXTURE-ADVERSARIAL#divide-success",
+        "kind": "criterion_constraint",
+        "to": "constraint:constraint-fixture-divide"
+      },
+      {
+        "from": "constraint:constraint-fixture-divide",
+        "kind": "constraint_block",
+        "to": "IMPL-FIXTURE-ADVERSARIAL#BUILD_PROJECT_INQUIRY_INPUT#cb126201ed2ab5d5"
+      },
+      {
+        "from": "IMPL-FIXTURE-ADVERSARIAL#BUILD_PROJECT_INQUIRY_INPUT#cb126201ed2ab5d5",
+        "kind": "block_evidence",
+        "to": "evidence:production-locus"
+      },
+      {
+        "from": "IMPL-FIXTURE-ADVERSARIAL#BUILD_PROJECT_INQUIRY_INPUT#cb126201ed2ab5d5",
+        "kind": "block_evidence",
+        "to": "evidence:test-locus"
+      }
+    ],
+    "nodes": [
+      {
+        "id": "constraint:constraint-fixture-divide",
+        "kind": "constraint"
+      },
+      {
+        "id": "evidence:production-locus",
+        "kind": "evidence",
+        "revision": "eb3f3a97da702ad8"
+      },
+      {
+        "id": "evidence:test-locus",
+        "kind": "evidence",
+        "revision": "eb3f3a97da702ad8"
+      },
+      {
+        "id": "IMPL-FIXTURE-ADVERSARIAL#BUILD_PROJECT_INQUIRY_INPUT#cb126201ed2ab5d5",
+        "kind": "block",
+        "revision": "542672f002d45b16"
+      },
+      {
+        "id": "REQ-FIXTURE-ADVERSARIAL#divide-failure",
+        "kind": "criterion",
+        "revision": "d3a0a050d0f6ac87"
+      },
+      {
+        "id": "REQ-FIXTURE-ADVERSARIAL#divide-success",
+        "kind": "criterion",
+        "revision": "d002e862efe0ca59"
+      }
+    ],
+    "projectId": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/test/fixtures/adversarial-inquiry-go-mode-b/mini-project"
+  },
+  "projectId": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/test/fixtures/adversarial-inquiry-go-mode-b/mini-project",
+  "proofBoundaries": [
+    "semantic_fidelity"
+  ],
+  "readOnly": true,
+  "schemaVersion": "adversarial-inquiry-report.v1",
+  "scope": [
+    "REQ-FIXTURE-ADVERSARIAL#divide-failure",
+    "REQ-FIXTURE-ADVERSARIAL#divide-success"
+  ]
+}

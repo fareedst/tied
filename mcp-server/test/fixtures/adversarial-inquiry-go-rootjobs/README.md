@@ -52,5 +52,7 @@ ruby scripts/build_adversarial_inquiry_from_tied.rb \
 
 ## Out of scope
 
-Native Go **Mode B** project-input adapter remains deferred (operator friction
-plan §5.2). Use this fixture + Mode A builder until a future REQ ships a Go loader.
+Native Go **Mode B** project-input adapter ships in MCP
+(`go-evidence-adapter.ts`, `project-scope-loader.ts`, `project-orchestrator.ts`).
+Use the Mode A builder + reference fixture when you need declarative
+`build-config.yaml` graph/fidelity mapping instead.

@@ -30,6 +30,7 @@ ARCH-TIED_ADVERSARIAL_INQUIRY:
   implementation_approach:
     details:
       - "Invalidate downstream evidence after scope or depth loop-back."
+      - "Mode B adapters remain language-specific; Go go-test and Ruby minitest profiles share the same orchestrator boundary."
       - "Pair integrated inquiry receipts with all four bounded artifacts using request, project, run, phase, scope, and artifact hashes."
       - "Treat pending as blocking and require explicit contracts for completed, not_applicable, and waived dispositions."
       - "Use shared phase modes pre_implementation, verification, and close_out."
@@ -39,9 +40,9 @@ ARCH-TIED_ADVERSARIAL_INQUIRY:
       author: "AI Agent"
       date: "2026-08-21"
     last_updated:
-      author: "AI Agent"
-      date: "2026-08-21"
-      reason: "Record Mode B explicit-context loader and orchestrator boundary"
+      author: "build-plan subagent"
+      date: "2026-08-24"
+      reason: "Record Go Mode B adapter boundary alongside Ruby Minitest Mode B"
   name: "Read-only obligation graph and evidence gate boundary"
   rationale:
     benefits:

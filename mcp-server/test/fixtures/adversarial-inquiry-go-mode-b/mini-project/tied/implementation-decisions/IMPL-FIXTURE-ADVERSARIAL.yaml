@@ -1,0 +1,25 @@
+IMPL-FIXTURE-ADVERSARIAL:
+  adversarial_inquiry:
+    block_name: "BUILD_PROJECT_INQUIRY_INPUT"
+    semantic_content: "t.Errorf(\"Divide(6, 2) = %d, want 3\", got)\nt.Errorf(\"Divide(1, 0) expected error, got nil\")"
+    specification:
+      - id: "gotest-9-t.Errorf"
+        kind: "behavior"
+        order: 1
+        value: "t.Errorf(\"Divide(6, 2) = %d, want 3\", got)"
+      - id: "gotest-13-t.Errorf"
+        kind: "failure"
+        order: 2
+        value: "t.Errorf(\"Divide(1, 0) expected error, got nil\")"
+  code_locations:
+    files:
+      - description: "Go divide production fixture"
+        path: "internal/divide/divide.go"
+  essence_pseudocode_path: "implementation-decisions/IMPL-FIXTURE-ADVERSARIAL-pseudocode.md"
+  name: "Preserve Go divide success and failure observations"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-FIXTURE-ADVERSARIAL"
+    requirements:
+      - "REQ-FIXTURE-ADVERSARIAL"

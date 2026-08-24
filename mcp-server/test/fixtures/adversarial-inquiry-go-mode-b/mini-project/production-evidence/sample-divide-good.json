@@ -1,0 +1,17 @@
+[
+  {
+    "id": "production-success",
+    "direction": "production",
+    "statementId": "gotest-9-t.Errorf",
+    "kind": "behavior",
+    "value": "t.Errorf(\"Divide(6, 2) = %d, want 3\", got)",
+    "order": 1,
+    "reliable": true,
+    "source": {
+      "location": "internal/divide/divide.go:10",
+      "line": 10
+    },
+    "provenance": "mode-b-fixture-production-manifest",
+    "blockRevision": "current"
+  }
+]

@@ -1,0 +1,24 @@
+ARCH-FIXTURE-ADVERSARIAL:
+  cross_references:
+    - "IMPL-FIXTURE-ADVERSARIAL"
+    - "REQ-FIXTURE-ADVERSARIAL"
+  description: "Fixture architecture token."
+  name: "Fixture Go divide architecture"
+  status: "Active"
+  type: "ARCH"
+IMPL-FIXTURE-ADVERSARIAL:
+  cross_references:
+    - "ARCH-FIXTURE-ADVERSARIAL"
+    - "REQ-FIXTURE-ADVERSARIAL"
+  description: "Fixture implementation token."
+  name: "Fixture Go divide implementation"
+  status: "Active"
+  type: "IMPL"
+REQ-FIXTURE-ADVERSARIAL:
+  cross_references:
+    - "ARCH-FIXTURE-ADVERSARIAL"
+    - "IMPL-FIXTURE-ADVERSARIAL"
+  description: "Fixture requirement token."
+  name: "Fixture Go divide requirement"
+  status: "Implemented"
+  type: "REQ"

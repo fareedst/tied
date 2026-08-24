@@ -1,0 +1,9 @@
+REQ-FIXTURE-ADVERSARIAL:
+  detail_file: "requirements/REQ-FIXTURE-ADVERSARIAL.yaml"
+  name: "Deterministic Go divide fixture for project-input inquiry"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-FIXTURE-ADVERSARIAL"
+    implementation:
+      - "IMPL-FIXTURE-ADVERSARIAL"

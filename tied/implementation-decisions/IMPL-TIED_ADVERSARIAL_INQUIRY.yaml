@@ -1,9 +1,11 @@
 IMPL-TIED_ADVERSARIAL_INQUIRY:
   code_locations:
     files:
-      - description: "Adversarial inquiry core, Ruby Minitest adapter boundary, workflow, assurance, and pilot modules"
+      - description: "Adversarial inquiry core, Ruby Minitest and Go test adapter boundaries, workflow, assurance, and pilot modules"
         path: "mcp-server/src/adversarial-inquiry/"
-      - description: "Explicit-context Mode B project scope loader"
+      - description: "Go test evidence adapter (read-only parse; no shell inference)"
+        path: "mcp-server/src/adversarial-inquiry/go-evidence-adapter.ts"
+      - description: "Explicit-context Mode B project scope loader with Go and Ruby manifest profiles"
         path: "mcp-server/src/adversarial-inquiry/project-scope-loader.ts"
       - description: "Mode B project-input orchestrator and normalized checklist adapter"
         path: "mcp-server/src/adversarial-inquiry/project-orchestrator.ts"
@@ -17,6 +19,8 @@ IMPL-TIED_ADVERSARIAL_INQUIRY:
       - "Bounded command results and human decisions are evidence inputs with explicit proof boundaries, not implicit PASS signals."
       - "Core modules accept normalized records and never write canonical project YAML."
       - "Executable assurance uses argv-only commands, limits, redaction, and fail-closed unsupported commands."
+      - "Go Mode B selects the go-test manifest profile from _test.go paths and dispatches PARSE_GO_TEST_EVIDENCE."
+      - "Go testing supports t.Error/t.Errorf/t.Fatal/t.Fatalf and testify assert.Equal/NoError and require.Equal/NoError; unsupported constructs are unresolved."
       - "Language adapters emit normalized test assertions and production behavior evidence."
       - "Mode B dispatch remains additive and delegates gate policy and bounded artifact persistence to checklist integration."
       - "Mode B uses an explicit project scope loader with realpath confinement and no global TIED_BASE_PATH loader state."
@@ -24,16 +28,16 @@ IMPL-TIED_ADVERSARIAL_INQUIRY:
       - "Ruby Minitest supports assert, assert_equal, assert_empty, assert_raises, and refute; unsupported constructs are unresolved."
       - "The core implementation remains language-neutral and read-only; checklist orchestration belongs to IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST."
       - "The core returns pure graph, fidelity, and scoped status results; it does not claim adapter execution or working-artifact persistence."
-      - "The project orchestrator converts one declared Ruby Minitest source and structured production evidence into ChecklistInquiryInput; production source contributes loci only."
+      - "The project orchestrator converts declared Ruby Minitest or Go test sources and structured production evidence into ChecklistInquiryInput; production source contributes loci only."
     summary: "Use pure core modules for identity, graph, fidelity, findings, and eligibility, then compose language adapters and bounded command runners."
   metadata:
     created:
       author: "AI Agent"
       date: "2026-08-21"
     last_updated:
-      author: "AI Agent"
-      date: "2026-08-21"
-      reason: "Implement Mode B project-input loader, orchestrator, fixture, and dispatch"
+      author: "build-plan subagent"
+      date: "2026-08-24"
+      reason: "Ship native Go Mode B project-input adapter (sliceG2-go-mode-b)"
   name: "Obligation graph, fidelity engine, and assurance gate"
   rationale:
     benefits:

@@ -233,12 +233,12 @@ procedure RUN_ADVERSARIAL_INQUIRY(): # [IMPL-TIED_ADVERSARIAL_INQUIRY] [ARCH-TIE
 11. RETURN all stage results and proof boundaries.
 
 ## BUILD_PROJECT_INQUIRY_INPUT
-- [IMPL-TIED_ADVERSARIAL_INQUIRY] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY] How: validate an explicit project boundary, load declared read-only inputs, and normalize one supported Ruby Minitest fixture into the existing inquiry core.
+- [IMPL-TIED_ADVERSARIAL_INQUIRY] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY] How: validate an explicit project boundary, load declared read-only inputs, and normalize supported Ruby Minitest or Go test fixtures into the existing inquiry core.
 
 Contract:
   INPUT: Mode B project root, optional matching TIED base path, REQ/IMPL tokens, criterion scope, repository-relative test and production paths, optional structured production evidence, gate policy, artifact context
-  PRE: mode is project; required fields are not mixed with Mode A fields; project root and TIED base path are absolute and resolve to projectRoot/tied; declared paths are repository-relative regular files contained by the project root; the request token and artifact root are valid for bounded working artifacts
-  OUTPUT: ChecklistInquiryInput containing a resolved project manifest, canonical obligation graph, normalized Minitest observations, explicit structured production observations, and scoped provenance
+  PRE: mode is project; required fields are not mixed with Mode A fields; project root and TIED base path are absolute and resolve to projectRoot/tied; declared paths are repository-relative regular files contained by the project root; test_path suffix selects ruby/minitest or go/go-test manifest profile; the request token and artifact root are valid for bounded working artifacts
+  OUTPUT: ChecklistInquiryInput containing a resolved project manifest, canonical obligation graph, normalized test observations from the selected adapter, explicit structured production observations, and scoped provenance
   POST: the normalized input is deterministic for the same file snapshot and request; production source contributes loci only; canonical TIED YAML and process environment remain unchanged; unsupported or insufficient evidence remains unresolved
   FAILURE_MODES: invalid_input; wrong_tied_base_path; unsafe_path; missing_file; invalid_yaml; missing_record; invalid_production_evidence; unsupported_adapter; stale_revision; unresolved_obligation
   EFFECTS: read-only filesystem access under the validated project root; no canonical YAML writes; no environment or global loader/cache mutation
@@ -248,10 +248,28 @@ Contract:
 - [IMPL-TIED_ADVERSARIAL_INQUIRY] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY] How: reject mixed contracts and path escapes before reading, preserve explicit source revisions, and pass structured diagnostics instead of guessing behavior.
 procedure BUILD_PROJECT_INQUIRY_INPUT(): # [IMPL-TIED_ADVERSARIAL_INQUIRY] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY]
 1. Validate that the Mode B discriminator is `project` and reject Mode A `graph`, `fidelity`, or `scope` fields when present.
-2. Resolve the manifest with `{ projectRoot, tiedBasePath, version: "mode-b-fixture", languages: ["ruby"], testClassifiers: ["minitest"], ignoreRules: [] }` before any project read.
+2. Resolve the manifest from test_path suffix: Ruby `.rb` -> `{ languages: ["ruby"], testClassifiers: ["minitest"] }`; Go `_test.go` -> `{ languages: ["go"], testClassifiers: ["go-test"] }`; reject other extensions before any project read.
 3. Resolve each declared repository-relative path, read its real path, and reject absolute paths, traversal, symlink escape, missing files, and non-file targets.
 4. Read only the selected REQ, ARCH, and IMPL index/detail records plus the IMPL pseudo-code sidecar from the explicit TIED base path; compute source revisions from bytes.
 5. Resolve explicit criterion and block identities, map criteria through architecture constraints to the owning IMPL block, and construct the graph with scoped evidence loci.
-6. Parse the declared Ruby Minitest assertion subset; preserve unsupported and ambiguous adapter diagnostics as unresolved evidence.
+6. Dispatch the test adapter from manifest.testClassifiers: minitest -> PARSE_MINITEST_ASSERTIONS; go-test -> PARSE_GO_TEST_EVIDENCE; preserve unsupported and ambiguous adapter diagnostics as unresolved evidence.
 7. Parse only the declared structured production evidence; attach production source as a locus and never infer runtime behavior from production source text.
 8. Return the normalized checklist input with stage diagnostics and provenance, or return a stable structured error without invoking the core or artifact writer.
+
+## PARSE_GO_TEST_EVIDENCE
+- [IMPL-TIED_ADVERSARIAL_INQUIRY] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY] How: extract only the approved Go testing.T and testify subset and emit unresolved diagnostics for unsupported adapters.
+
+Contract:
+  INPUT: Go test source text, sourceRevision, optional blockRevision, optional testCaseId path label
+  PRE: sourceRevision is non-empty; source is read-only text from a validated _test.go path
+  OUTPUT: normalized test observations and adapter diagnostics
+  POST: only supported constructs become reliable observations; unsupported constructs remain diagnostics only
+  FAILURE_MODES: invalid_source; unsupported_adapter; ambiguous_assertion
+  EFFECTS: read-only parse; no shell inference
+  TERMINATION: total over finite source lines
+
+procedure PARSE_GO_TEST_EVIDENCE(): # [IMPL-TIED_ADVERSARIAL_INQUIRY] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY]
+1. Require sourceRevision and scan each source line read-only.
+2. Normalize supported `t.Error`, `t.Errorf`, `t.Fatal`, `t.Fatalf`, and testify `assert.Equal`, `assert.NoError`, `require.Equal`, `require.NoError` calls with source locations.
+3. Emit `unsupported_adapter` for cmp, InDelta, DeepEqual-without-t.Errorf, and other non-approved constructs.
+4. RETURN observations and diagnostics without inferring runtime behavior from production source.

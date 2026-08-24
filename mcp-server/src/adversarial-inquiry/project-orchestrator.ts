@@ -12,6 +12,7 @@ import {
   type HumanStrictApproval,
 } from "./checklist-integration.js";
 import { parseMinitestAssertions } from "./minitest-adapter.js";
+import { parseGoTestEvidence } from "./go-evidence-adapter.js";
 import type {
   ArchitectureConstraint,
   EvidenceObservation,
@@ -44,6 +45,7 @@ export type ModeBInput = {
   human_approval?: Record<string, unknown>;
   provenance?: unknown;
   redact?: string[];
+  activation?: ChecklistInquiryInput["activation"];
   [key: string]: unknown;
 };
 
@@ -332,6 +334,38 @@ function humanApproval(value: Record<string, unknown> | undefined): HumanStrictA
   };
 }
 
+function parseProjectTestEvidence(
+  scope: LoadedProjectScope,
+  testPath: string,
+  blockRevision: string,
+): { observations: EvidenceObservation[]; diagnostics: string[]; adapter: string } {
+  const classifier = scope.manifest.testClassifiers[0];
+  if (classifier === "go-test") {
+    const parsed = parseGoTestEvidence({
+      source: scope.testSource,
+      sourceRevision: scope.revisions.test,
+      blockRevision,
+      testCaseId: testPath,
+    });
+    return {
+      observations: parsed.observations,
+      diagnostics: parsed.diagnostics.map((diagnostic) => diagnostic.code),
+      adapter: "go-test",
+    };
+  }
+  const parsed = parseMinitestAssertions({
+    source: scope.testSource,
+    sourceRevision: scope.revisions.test,
+    blockRevision,
+    testCaseId: testPath,
+  });
+  return {
+    observations: parsed.observations,
+    diagnostics: parsed.diagnostics.map((diagnostic) => diagnostic.code),
+    adapter: "ruby-minitest",
+  };
+}
+
 function projectInput(
   input: ModeBInput,
   scope: LoadedProjectScope,
@@ -348,12 +382,7 @@ function projectInput(
   const constraints = extractConstraints(scope, block.id, blockName);
   const criteria = extractCriteria(scope, input.criterion_scope, constraints);
   if ("error" in criteria) return criteria.error;
-  const parsedTest = parseMinitestAssertions({
-    source: scope.testSource,
-    sourceRevision: scope.revisions.test,
-    blockRevision: block.revision,
-    testCaseId: input.test_path,
-  });
+  const parsedTest = parseProjectTestEvidence(scope, input.test_path, block.revision);
   const structured = productionEvidence(scope.productionEvidence, block.revision);
   if (!structured.ok) return structured.error;
   const graph: ObligationGraphInput = {
@@ -397,8 +426,8 @@ function projectInput(
       mode: "project",
       manifest: scope.manifest,
       sourceRevisions: scope.revisions,
-      adapter: "ruby-minitest",
-      adapterDiagnostics: [],
+      adapter: parsedTest.adapter,
+      adapterDiagnostics: parsedTest.diagnostics,
       proofBoundaries: ["traceability_structure", "semantic_fidelity"],
     },
     redact: input.redact,
@@ -423,7 +452,7 @@ function validateMixedInput(input: ModeBInput): ProjectOrchestratorFailure | und
   return undefined;
 }
 
-// [IMPL-TIED_ADVERSARIAL_INQUIRY] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY] How: validate an explicit project boundary, load declared read-only inputs, and normalize one supported Ruby Minitest fixture into the existing inquiry core.
+// [IMPL-TIED_ADVERSARIAL_INQUIRY] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY] How: validate an explicit project boundary, load declared read-only inputs, and normalize supported Ruby Minitest or Go test fixtures into the existing inquiry core.
 export async function buildProjectInquiryInput(input: ModeBInput): Promise<BuildProjectInquiryResult> {
   const mixed = validateMixedInput(input);
   if (mixed) return mixed;
@@ -464,17 +493,20 @@ export async function buildProjectInquiryInput(input: ModeBInput): Promise<Build
       error: normalized,
     };
   }
-  const parsed = parseMinitestAssertions({
-    source: loaded.scope.testSource,
-    sourceRevision: loaded.scope.revisions.test,
-    blockRevision: normalized.fidelity.blockRevision,
-    testCaseId: input.test_path,
-  });
-  adapterDiagnostics.push(...parsed.diagnostics.map((diagnostic) => diagnostic.code));
+  const parsed = parseProjectTestEvidence(
+    loaded.scope,
+    input.test_path,
+    normalized.fidelity.blockRevision,
+  );
+  adapterDiagnostics.push(...parsed.diagnostics);
   const withDiagnostics = {
     ...normalized,
     provenance: isObject(normalized.provenance)
-      ? { ...normalized.provenance, adapterDiagnostics }
+      ? {
+        ...normalized.provenance,
+        adapter: parsed.adapter,
+        adapterDiagnostics: [...new Set(adapterDiagnostics)].sort(),
+      }
       : normalized.provenance,
   };
   return {
@@ -490,7 +522,10 @@ export async function buildProjectInquiryInput(input: ModeBInput): Promise<Build
 export async function runProjectInquiry(input: ModeBInput): Promise<ProjectInquiryResult> {
   const built = await buildProjectInquiryInput(input);
   if (!built.ok) return built;
-  const result = await runChecklistInquiry(built.input);
+  const result = await runChecklistInquiry({
+    ...built.input,
+    activation: input.activation,
+  });
   if (result.ok) {
     return {
       ...result,
