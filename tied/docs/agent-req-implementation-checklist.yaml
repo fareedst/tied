@@ -1008,6 +1008,7 @@ steps:
       - "IF validateStrictEligibility fails THEN take the warn-only branch — never block on a new semantic rule; state which eligibility condition is unmet."
       - "Module validation per [REQ-MODULE_VALIDATION]: confirm each module validated independently; document results."
       - "Rebuild/reload the MCP server and smoke-test live discovery and invocation of tied_adversarial_inquiry_run; source registration alone is not adoption evidence."
+      - "Record client YAML styling evidence for final on-disk TIED YAML: styling_status (configured|not_configured), resolved scalar_style and style_source from .tied-yaml.yaml or defaults, and post-style lint_yaml plus tied_validate_consistency results—not pre-style agent output alone."
       - "Responsibility: test/code owner step. Verify implementation fidelity to pseudocode; if new logic is discovered, route back to resolve-pseudocode before accepting."
       - "Run [PROC-TOKEN_VALIDATION]: run .cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency with JSON args per SKILL; fix any issues on ./tied/ via tied-cli.sh when possible."
       - "Run full test suite (unit, composition, E2E). All must pass."
@@ -1046,6 +1047,7 @@ steps:
     slug: "sync-tied-stack"
     tasks:
       - "CALL sub-yaml-edit-loop on every changed TIED YAML file."
+      - "Confirm final post-style project-owned ./tied/ YAML passed sub-client-yaml-styling (via sub-yaml-edit-loop): lint_yaml, tied_validate_consistency, and yaml_semantic_compare when client_formatter is configured; record styling_status and resolved style policy."
       - "If a profile was generated, ensure it references current token metadata; do not store generated evidence-chain output as REQ/ARCH/IMPL intent."
       - "If REQ/ARCH/IMPL status, traceability.tests, or other TIED fields changed in this pass such that they would desync a session preload (status lines, test file paths, implementation_contract hints), re-check tied/agent-preload-contract.yaml and update only as needed; do not duplicate the full author-architecture or persist-implementation-records rewrite if nothing material changed."
       - "Keep observed inquiry findings outside canonical TIED YAML; route confirmed findings to existing owners (author-requirement, author-architecture, resolve-pseudocode, unit-test-red, composition-integration, or test-strategy) and never trigger LEAP from observation alone."
@@ -1141,6 +1143,7 @@ steps:
       - "Stage relevant files. Commit."
       - "Touchpoint 3 (pre-commit): CALL sub-vocabulary-sync (VALIDATE) — audit all files changed this pass: TIED record name fields and token suffixes in semantic-tokens.yaml, UPPER_SNAKE block names in essence_pseudocode, test/code identifiers, README/CHANGELOG/UI terms; each must resolve to exactly one preferred term in ./tied/vocab/*.md with naming bridges and alphabetical index current; do not stage or commit until VALIDATE passes or immature-client deferral is explicitly noted in the per-request checklist copy."
       - "When a profile is in scope: validate provenance, open findings, waivers, and missing-data disclosures (not_measured / unknown) against the profile artifact."
+      - "When client YAML styling is configured (non-default scalar_style or client_formatter in .tied-yaml.yaml), include resolved style policy and formatter version/configuration source in validation evidence or an explicit CITDP cross-reference; styling_status not_configured requires no extra prose."
       - "Write commit message per [PROC-COMMIT_MESSAGES]: header <type>(<scope>): <subject> (≤50 chars); type feat|fix|docs|refactor|test|build|ci|chore|perf|style; scope area affected; subject imperative present tense; body motivation/behavior; footer Closes/Fixes #issue and REQ/ARCH/IMPL tokens touched."
     title: "Commit per PROC-COMMIT_MESSAGES; no push unless asked"
     tracking:
@@ -1175,16 +1178,48 @@ sub_procedures:
     slug: "sub-yaml-edit-loop"
     tasks:
       - "After yaml_detail_update or yaml_index_update: re-read affected detail/index rows; mcp-server deep-merges one level for metadata/traceability/related_* objects, but arrays (e.g. cross_references) still replace wholesale—if metadata.created or similar is missing (older server or mistaken payload), restore with one follow-up yaml_*_update—see docs/yaml-update-mcp-runbook.md §2.1."
+      - "CALL sub-client-yaml-styling for each changed project-owned ./tied/ path after baseline lint_yaml canonicalization and before tied_validate_consistency."
       - "Direct-edit exception only when no tied-cli.sh tool covers the operation: document one-line gap, edit minimal file, then run lint_yaml <absolute-path> until it passes (or one lint_yaml with multiple paths if your wrapper implements per-file safe passes per processes.md)."
       - "IF consistency check fails THEN fix the TIED stack via tied-cli.sh (prefer yaml_detail_update / yaml_index_update) and RETURN to the calling step to re-validate."
       - "IF tied-cli.sh returns an error: interpret payload, TIED_BASE_PATH, methodology vs project and retry; do not silently fall back to IDE file tools on the same paths."
       - "Mutation path: for create/update/delete under ./tied/ on project-owned YAML (indexes, requirements/*.yaml, architecture-decisions/*.yaml, implementation-decisions/*.yaml, semantic-tokens.yaml, feedback.yaml), use .cursor/skills/tied-yaml/scripts/tied-cli.sh per .cursor/skills/tied-yaml/SKILL.md. Do not use apply_patch/Write on those absolute paths when tied-cli.sh covers the operation."
       - "Never mutate ./tied/methodology/** (read-only). If a tool rejects a write as methodology-owned, fix the target token/path—do not bypass with direct file edit."
+      - "Per changed project-owned ./tied/ YAML path, enforce this order: governed tied-cli.sh mutation (when applicable) → baseline canonical formatting via lint_yaml (tied-yaml-canonical-v1 + resolved scalar_style per [PROC-YAML_EDIT_LOOP]) → CALL sub-client-yaml-styling → re-read on disk → lint_yaml syntax pass → tied_validate_consistency → semantic-equivalence acceptance (sub-client-yaml-styling or yaml_semantic_compare when client_formatter configured)."
       - "Run .cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency '{}' (required before marking TIED work complete; not optional when sub-yaml-edit-loop is invoked for TIED changes)."
       - "Run lint_yaml on each changed file that was direct-edited or when your workflow requires canonical formatting on disk—never raw multi-argument `yq` with multiple file arguments in one process. If validation fails, fix and repeat; file is invalid until lint_yaml succeeds."
-    title: "tied-cli.sh mutations, lint_yaml, tied_validate_consistency"
+    title: "tied-cli.sh mutations, lint_yaml, client styling, tied_validate_consistency"
     tracking:
-      consideration_before_proceeding: "tied-cli.sh mutation path honored where applicable; lint_yaml passed for any direct-edited files (per processes.md [PROC-YAML_EDIT_LOOP]); tied_validate_consistency passed when TIED files changed."
+      consideration_before_proceeding: "tied-cli.sh mutation path honored where applicable; baseline lint_yaml passed; sub-client-yaml-styling passed with styling_status recorded; tied_validate_consistency passed when TIED files changed."
+      retry_count: "0"
+      state_history: []
+      status: "pending"
+  - flow:
+      return_to: "caller"
+    goals: "Apply presentation-only client YAML styling after baseline canonical formatting; fail closed when semantics change or formatter misbehaves."
+    invoked_by:
+      - "sub-yaml-edit-loop"
+    outcomes: "Post-style bytes are syntactically valid and semantically equivalent to pre-style canonical output; styling_status recorded as configured or not_configured; formatter errors return to owning checklist step."
+    preconditions:
+      - "Baseline canonical formatting already applied via lint_yaml or tied-cli.sh write with tied-yaml-canonical-v1."
+      - "Caller provides absolute or repo-relative paths for changed project-owned ./tied/ YAML files only."
+    references:
+      - "./tied/docs/processes.md § [PROC-YAML_EDIT_LOOP]"
+      - ".cursor/skills/tied-yaml/SKILL.md"
+      - "scripts/yaml_semantic_compare.rb"
+      - "tied/vocab/tied-yaml-mcp.md"
+    slug: "sub-client-yaml-styling"
+    tasks:
+      - "IF client_formatter is absent or empty: record styling_status not_configured; baseline tied-yaml-canonical-v1 plus resolved scalar_style remains the effective formatter; RETURN to sub-yaml-edit-loop caller."
+      - "IF client_formatter is configured: capture a pre-style snapshot of each path; invoke the configured formatter/hook on each path under project-owned ./tied/ only—never ./tied/methodology/**."
+      - "On formatter error, unsupported construct, non-idempotent output, semantic change, or write outside project-owned ./tied/: RETURN error to sub-yaml-edit-loop caller for correction at the owning step."
+      - "Re-read each formatted file from disk; run lint_yaml for syntax validation."
+      - "Record evidence: styling_status (configured|not_configured), scalar_style, style_source, client_formatter command/version when configured."
+      - "Resolve repository style policy from .tied-yaml.yaml at the client project root (parent of TIED_BASE_PATH): scalar_style (unwrapped|wrapped) per [REQ-TIED_YAML_STYLE_CONFIGURATION]; optional client_formatter hook when present."
+      - "Run scripts/yaml_semantic_compare.rb (or equivalent) between pre-style snapshot and post-style bytes; semantic mismatch blocks acceptance and RETURNs error to the owning checklist step."
+      - "Verify idempotence: a second formatter pass on unchanged input must produce byte-identical output or fail closed."
+    title: "Client YAML presentation styling and semantic-equivalence gate"
+    tracking:
+      consideration_before_proceeding: "styling_status recorded; post-style lint_yaml passed; yaml_semantic_compare passed when client_formatter configured; no writes outside project-owned ./tied/."
       retry_count: "0"
       state_history: []
       status: "pending"

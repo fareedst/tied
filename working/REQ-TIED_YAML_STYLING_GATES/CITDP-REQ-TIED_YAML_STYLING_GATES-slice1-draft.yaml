@@ -1,0 +1,60 @@
+CITDP-REQ-TIED_YAML_STYLING_GATES:
+  change_definition:
+    current_behavior: "sub-yaml-edit-loop enforces tied-cli mutations, lint_yaml canonicalization, and tied_validate_consistency but does not explicitly govern optional client presentation styling, semantic-equivalence after hooks, or post-style evidence at verification/sync/commit."
+    requested_change: "Add sub-client-yaml-styling and wire it through sub-yaml-edit-loop and YAML mutation callers; require post-style evidence at verification-gate, sync-tied-stack, and traceable-commit."
+    scope_in:
+      - "mcp-server/src/checklist-yaml-styling-contract.test.ts"
+      - "tied/docs/agent-req-implementation-checklist.md"
+      - "tied/docs/agent-req-implementation-checklist.yaml"
+      - "tied/docs/processes.md § [PROC-YAML_EDIT_LOOP]"
+      - "tied/vocab/tied-yaml-mcp.md"
+    scope_out:
+      - "Executable client_formatter resolver and MCP hook runner (Slice 2)"
+      - "New REQ/ARCH/IMPL tokens unless Slice 2 adds executable behavior"
+      - "tied/methodology/**"
+    target_behavior: "Every project-owned ./tied/ YAML mutation follows governed write → baseline canonical → optional client_formatter → lint → consistency → semantic equivalence; styling_status not_configured when no hook; fail closed on semantic drift."
+  completion_criteria:
+    - "Changed YAML lint clean; tied_validate_consistency ok"
+    - "Checklist YAML and Markdown mirror aligned"
+    - "Static contract tests pass for invocation ordering and evidence tasks"
+  impact_analysis:
+    architecture:
+      - "ARCH-TIED_YAML_CANONICAL_PROFILE"
+      - "ARCH-TIED_YAML_STYLE_RESOLUTION"
+    implementation_decisions:
+      - "IMPL-TIED_YAML_CANONICALIZER"
+      - "IMPL-TIED_YAML_STYLE_RESOLVER"
+    processes:
+      - "PROC-AGENT_REQ_CHECKLIST"
+      - "PROC-YAML_EDIT_LOOP"
+    requirements:
+      - "REQ-TIED_YAML_CANONICALIZATION"
+      - "REQ-TIED_YAML_STYLE_CONFIGURATION"
+  record_identity:
+    citdp_id: "CITDP-REQ-TIED_YAML_STYLING_GATES"
+    created_at: "2026-08-24"
+    status: "draft"
+    title: "Client YAML styling gates in agent checklist"
+    updated_at: "2026-08-24"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      depth_tier: "minimal"
+      gate_policy: "advisory"
+      prior_depth_tier: null
+      profile_depth: "not_measured"
+      rationale: "Checklist-only Slice 1; presentation seam documented without new executable hook."
+    risks:
+      - description: "Agents treat optional client_formatter as implicit agent-chosen formatting."
+        id: "RISK-STYLE-GATE-001"
+        mitigation: "Explicit styling_status not_configured default; hook runs only when .tied-yaml.yaml declares client_formatter."
+      - description: "Presentation hook changes YAML semantics."
+        id: "RISK-STYLE-GATE-002"
+        mitigation: "Require yaml_semantic_compare before acceptance; fail closed and return to owning step."
+  test_strategy:
+    matrix_notes:
+      - "Caller coverage: author-requirement through persist-citdp-record"
+      - "Deferred Slice 2: idempotence, scalar-type preservation, invalid output rejection with live hook"
+      - "Evidence tasks at verification-gate, sync-tied-stack, traceable-commit"
+      - "Invocation ordering: sub-yaml-edit-loop → sub-client-yaml-styling"
+    summary: "Static checklist contract tests plus YAML lint and tied_validate_consistency; Slice 2 adds formatter hook fixtures."

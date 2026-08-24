@@ -18,11 +18,19 @@ function validChecklistGate() {
   return {
     phase: "verification" as const,
     tracker: {
-      steps: [{
-        slug: "verification-gate",
-        disposition: "completed",
-        evidence_refs: ["verify.test.ts"],
-      }],
+      steps: [
+        {
+          slug: "verification-gate",
+          disposition: "completed",
+          evidence_refs: ["verify.test.ts"],
+        },
+        {
+          slug: "sub-adversarial-inquiry-pass",
+          disposition: "not_applicable",
+          policy: "minimal-depth-no-inquiry",
+          rationale: "Verification status fixture uses minimal depth without inquiry.",
+        },
+      ],
     },
     citdp: {
       risk_analysis: {

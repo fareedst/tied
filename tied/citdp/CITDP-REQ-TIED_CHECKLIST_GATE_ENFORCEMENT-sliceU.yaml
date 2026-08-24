@@ -1,0 +1,103 @@
+CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-sliceU:
+  change_definition:
+    current_behavior: "citdp_record_write calls validateAdversarialContract at verification phase on every write, conflating open-record persistence with progression pairing; minimal-to-integrated upgrade requires direct YAML bypass when activation is not yet available."
+    desired_behavior: "validateCitdpOpenRecord separates persistence shape from gate pairing; integrated depth may omit activation pre-inquiry; minimal-to-integrated upgrade requires prior_depth_tier minimal and preserves it on overwrite; verification and close_out gates still fail without pairing."
+    non_goals:
+      - "Automatic upgrade_pending_inquiry state vocabulary"
+      - "Relax verification or close_out gate pairing requirements"
+      - "tied_checklist_activation_collect collector (Batch 2 Slice 2)"
+    success_criteria:
+      - "REGRESSION: checklist-validator Slice 0/1/P and citdp-writer tests remain green."
+      - "U.1: Malformed supplied activation is rejected at write time."
+      - "U.1: Minimal-to-integrated write succeeds before inquiry with activation omitted."
+      - "U.2: Upgrade from on-disk minimal requires prior_depth_tier minimal; subsequent writes preserve it."
+      - "U.3: Adoption doc and citdp-policy document the operator sequence."
+    unchanged_behavior:
+      - "Minimal depth open-record counterexample requirements unchanged."
+      - "validateChecklistGate integrated pairing at verification and close_out unchanged."
+  completion_criteria:
+    activation:
+      artifact_hashes:
+        evidence-provenance.json: "0070d13e4d6731e72e773627f7260e9b8fc52141fc74af85dbc7fd3a6417d5c5"
+        finding-ledger.jsonl: "c189e0273bb85234f7fd10b1a8a18fc6c6acd5f444e37b827941c4a5a46b1044"
+        gate-result.json: "1bbb11dffabb515ede494338dbe0082c107f51e68270c8103147f8ab2b7d494b"
+        obligation-report.json: "de5cd1ebd31f55e3e3836428d952388f30dff605ece23dcfd8f41b5af41bb232"
+      phase: "close_out"
+      project_id: "stdd"
+      request_token: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      run_id: "batch2-slice1-close-out-20260823"
+      scope:
+        - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#069e46c522c9b57d"
+      scope_hash: "e4e605e35f2b85e36e8bb7641a8d81cec946122e9764bb537348b8eca0842bef"
+    checklist_gate:
+      dispositions:
+        - "completed"
+        - "not_applicable"
+        - "pending"
+        - "waived"
+      fail_closed: true
+      phases:
+        - "close_out"
+        - "pre_implementation"
+        - "verification"
+    focused_tests: "citdp-writer Slice U fixtures; checklist-validator regression matrix."
+    lint: "bunx tsc -b passes for mcp-server"
+    persist_policy: "persist to tied/citdp/ after Slice U implementation"
+    verification: "tied_validate_consistency after canonical updates"
+  impact_analysis:
+    audited_project_mutation: "checklist-validator.ts validateCitdpOpenRecord, citdp-writer.ts, adoption doc, citdp-policy, fidelity-research vocab"
+    files:
+      - "docs/adversarial-inquiry-adoption.md"
+      - "docs/integrated-activation-enforcement-operator-friction-plan.md"
+      - "mcp-server/src/checklist-validator.ts"
+      - "mcp-server/src/citdp-writer.test.ts"
+      - "mcp-server/src/citdp-writer.ts"
+      - "tied/docs/citdp-policy.md"
+      - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+      - "tied/vocab/fidelity-research.md"
+    modules:
+      - "checklist_gate_validator"
+      - "citdp_writer"
+    tags:
+      - "adversarial-inquiry"
+      - "checklist-enforcement"
+      - "depth-upgrade"
+  leap_feedback:
+    divergences_from_analysis:
+      - "Exported validateCitdpOpenRecord and validateCitdpDepthUpgrade for unit-test and writer reuse."
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    author: "build-plan subagent"
+    batch: "operator-friction-sliceU"
+    change_request_id: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    date: "2026-08-24"
+    record_status: "complete"
+    slice: "U"
+    title: "Follow-on Slice U — CITDP depth upgrade path"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Operator upgrades to integrated via direct YAML because citdp_record_write rejects pre-inquiry integrated depth"
+        - "Partial activation receipt without artifacts passes open-record write and corrupts CITDP"
+        - "Subsequent CITDP overwrite silently drops prior_depth_tier audit trail"
+      depth_selected_at: "2026-08-24T00:00:00Z"
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "citdp-writer upgrade fixture passes before inquiry with activation omitted"
+        - "Verification gate still reports integrated_depth_requires_pairing without activation payload"
+      evidence_references:
+        - "mcp-server/src/citdp-writer.test.ts"
+        - "working/client-1787507684-activation-audit/findings-report.yaml"
+      falsification_questions:
+        - "Can integrated depth persist without prior_depth_tier when upgrading from minimal?"
+        - "Does citdp_record_write still require verification-phase pairing at write time?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: "minimal"
+      research_profile: "integrated-agent"
+    quality_evidence_matrix: []
+  tdd_sequence:
+    summary: "RED citdp-writer upgrade fixtures → GREEN validateCitdpOpenRecord → docs → verification gate."

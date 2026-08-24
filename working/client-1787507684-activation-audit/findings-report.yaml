@@ -1,0 +1,141 @@
+activation_matrix:
+  artifact_bundle:
+    evidence_provenance: "missing"
+    finding_ledger: "missing"
+    gate_result: "missing"
+    obligation_report: "missing"
+  depth_tier_selected: "minimal"
+  integrated_pairing_observed: false
+  integrated_pairing_required: false
+  mcp_inquiry_calls: 0
+  minimal_counterexamples_observed: true
+  minimal_counterexamples_required: true
+  operator_smoke_inquiry: "not_run"
+client:
+  alias: "1787507684"
+  commit: "a83f729"
+  external_root: "/Users/fareed/Documents/dev/test/1787507684"
+  project_id: "bd6908f862145619"
+  request_token: "REQ-ROOTJOBS"
+evidence_inventory:
+  citdp:
+    counterexample_ids:
+      - "CE-001"
+      - "CE-002"
+      - "CE-003"
+    path: "/Users/fareed/Documents/dev/test/1787507684/tied/citdp/CITDP-REQ-ROOTJOBS.yaml"
+  finding_ledger:
+    entries: 11
+    path: "working/client-1787507684-activation-audit/finding-ledger.jsonl"
+  mcp_metrics:
+    path: "working/client-1787507684-activation-audit/tied-mcp-metrics-client-1787507684.jsonl"
+    rows: 7
+    tools:
+      tied_checklist_gate_validate: 1
+      tied_config_get_base_path: 4
+      tied_validate_consistency: 2
+  tests:
+    ce_references_in_tests: 3
+    go_test_status: "passed"
+    path: "/Users/fareed/Documents/dev/test/1787507684/tools/rootjobs"
+findings:
+  - id: "f001-minimal-counterexamples"
+    lifecycle: "confirmed"
+    proof_boundary: "human_decision"
+    severity: "info"
+    title: "Minimal adversarial spec present"
+  - id: "f002-counterexample-tests"
+    lifecycle: "confirmed"
+    proof_boundary: "executable_behavior"
+    severity: "info"
+    title: "Counterexamples encoded in unit tests"
+  - id: "f003-integrated-waiver"
+    lifecycle: "confirmed"
+    proof_boundary: "human_decision"
+    severity: "info"
+    title: "Integrated inquiry waived by documented approval"
+  - id: "f004-no-inquiry-artifacts"
+    lifecycle: "confirmed"
+    proof_boundary: "semantic_fidelity"
+    severity: "warn"
+    title: "Integrated activation artifact bundle missing"
+  - id: "f005-zero-inquiry-mcp"
+    lifecycle: "confirmed"
+    proof_boundary: "traceability_structure"
+    severity: "warn"
+    title: "Zero MCP adversarial inquiry calls"
+  - id: "f006-operator-smoke-not-run"
+    lifecycle: "confirmed"
+    proof_boundary: "human_decision"
+    severity: "info"
+    title: "Operator smoke inquiry not run"
+  - id: "f007-sub-inquiry-pending"
+    lifecycle: "confirmed"
+    proof_boundary: "pseudo_code_structure"
+    severity: "error"
+    title: "Checklist sub-stub pending vs parent completed"
+  - id: "f008-feature-evidence"
+    lifecycle: "confirmed"
+    proof_boundary: "executable_behavior"
+    severity: "info"
+    title: "Feature delivery evidence present"
+  - id: "f009-no-evidence-chain"
+    lifecycle: "observed"
+    proof_boundary: "traceability_structure"
+    severity: "info"
+    title: "No evidence-chain profile generated"
+  - id: "f010-traceable-commit-deferred"
+    lifecycle: "confirmed"
+    proof_boundary: "human_decision"
+    severity: "warn"
+    title: "Traceable commit deferred despite completed slug"
+  - id: "f011-thin-mcp-instrumentation"
+    lifecycle: "observed"
+    proof_boundary: "traceability_structure"
+    severity: "info"
+    title: "Thin MCP metrics footprint"
+generated_at: "2026-08-23T18:30:00-07:00"
+generator: "agent-audit"
+mode: "read_only"
+prompt_pass:
+  checklist_master: "/Users/fareed/Documents/dev/test/1787507684/working/REQ-ROOTJOBS/agent-req-implementation-checklist.yaml"
+  close_out_date: "2026-08-23"
+  description: "Full checklist close-out for greenfield rootjobs CLI"
+recommendations:
+  - action: "accept_minimal"
+    note: "Current evidence is valid minimal activation; do not retroactively fail."
+    when: "Sponsor accepts minimal tier for greenfield CLI scope"
+  - action: "rerun_integrated"
+    steps:
+      - "CALL tied_adversarial_inquiry_run at pre_implementation, verification, close_out"
+      - "Persist four artifacts under working/REQ-ROOTJOBS/adversarial-inquiry/"
+      - "Set depth_tier integrated in CITDP with prior_depth_tier minimal"
+    when: "Integrated activation evidence required for H5 pilot or Batch 2 calibration"
+  - action: "fix_checklist_integrity"
+    steps:
+      - "Align traceable-commit disposition with deferred git commit"
+      - "Mark sub-adversarial-inquiry-pass waived or not_applicable with rationale at minimal depth"
+    when: "Using this client as gate-enforcement regression fixture"
+related_docs:
+  - "docs/integrated-activation-checklist-enforcement-plan.md"
+  - "working/REQ-DEFERRED_STATS_ROADMAP/v1-observation/observation-record.yaml"
+residual_risks:
+  - "Checklist disposition drift (f007, f010) weakens fail-closed gate trust until Batch 2 enforcement lands."
+  - "Integrated activation cannot be claimed for this client without re-run at depth_tier integrated or strict_candidate."
+  - "Thin MCP instrumentation limits deferred-stats and activation observability for this pass."
+schema_version: "client-activation-findings-report.v1"
+verdicts:
+  checklist_integrity:
+    status: "degraded"
+    summary: "Parent steps completed while sub-adversarial-inquiry-pass pending; traceable-commit marked complete with git commit deferred."
+  feature_delivery_evidence:
+    status: "present"
+    summary: "Go tests pass, TIED stack on disk, tied_validate_consistency ok, CITDP evidence commands documented."
+  integrated_activation_evidence:
+    status: "absent"
+    summary: "No tied_adversarial_inquiry_run receipt, no four-artifact pairing, inquiry_call_count 0."
+    valid_under_depth_tier: "minimal"
+    waiver: "integrated_waiver"
+  minimal_adversarial_thinking:
+    status: "present"
+    summary: "Counterexamples, falsification questions, and CE-* unit tests demonstrate adversarial design at spec and executable layers."

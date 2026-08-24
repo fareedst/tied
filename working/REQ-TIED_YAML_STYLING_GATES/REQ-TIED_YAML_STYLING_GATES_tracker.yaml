@@ -1,0 +1,33 @@
+copy_hygiene: "Per-request Tracker for client YAML styling gates (refine-plan pass). Clears inherited close-out evidence."
+description: "Checklist enforcement for presentation-only client YAML styling after baseline canonical formatting."
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred:
+      - "Executable client_formatter hook implementation (Slice 2)"
+      - "Persist CITDP to tied/citdp/ after Slice 1 close-out"
+    gates: {}
+    master_checklist: "tied/docs/agent-req-implementation-checklist.yaml"
+  completed:
+    - "change-definition"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "test-strategy"
+  operator_evidence:
+    commands:
+      - "bunx tsc -b (mcp-server)"
+      - "lint_yaml tied/docs/agent-req-implementation-checklist.yaml"
+      - "node --test dist/checklist-yaml-styling-contract.test.js"
+      - "tied_validate_consistency"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    prior_depth_tier: null
+    profile_depth: "not_measured"
+    status: "recorded"
+  request: "REQ-TIED_YAML_STYLING_GATES"
+risk_snapshot:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "not_measured"
+  rationale: "Checklist and static contract changes only; no executable formatter hook in Slice 1."

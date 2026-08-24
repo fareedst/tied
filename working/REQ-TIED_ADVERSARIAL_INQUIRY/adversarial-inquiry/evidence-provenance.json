@@ -1,0 +1,7 @@
+{
+  "provenance": {
+    "purpose": "final close-out gate activation",
+    "source": "staged close-out validation"
+  },
+  "schemaVersion": "adversarial-inquiry-provenance.v1"
+}

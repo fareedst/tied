@@ -83,16 +83,17 @@ procedure ROUTE_UNRESOLVED_CRITICAL_FINDINGS(): # [IMPL-TIED_ADVERSARIAL_INQUIRY
 ## PERSIST_WORKING_ARTIFACTS
 # [IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY] How: write deterministic snapshots and append-only findings below working/{REQ-TOKEN}/adversarial-inquiry without touching canonical TIED YAML.
 Contract:
-  INPUT: request token, repository root, report, gate result, ledger delta, provenance
-  PRE: request token is a valid REQ token; resolved artifact directory is inside repository working root
-  OUTPUT: four artifact references
-  POST: report, gate, and provenance snapshots are deterministic; finding ledger is append-only; canonical TIED bytes are unchanged
+  INPUT: request token, repository root, optional activation phase, report, gate result, ledger delta, provenance
+  PRE: request token is a valid REQ token; resolved artifact directory is inside repository working root and, when phase is present, under working/{REQ-TOKEN}/adversarial-inquiry/phase-{phase}/
+  OUTPUT: four artifact references for the authoritative directory (phase directory when phase is present)
+  POST: report, gate, and provenance snapshots are deterministic; finding ledger is append-only; sibling phase directories are untouched; optional root projection copies latest snapshots only and never satisfies another phase pairing; canonical TIED bytes are unchanged
   FAILURE_MODES: invalid_scope; unsafe_artifact_path; artifact_write_failure
   EFFECTS: IO
   TERMINATION: total
 procedure PERSIST_WORKING_ARTIFACTS(): # [IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY]
-1. Resolve working/{REQ-TOKEN}/adversarial-inquiry.
-2. Reject traversal and artifact roots outside the repository working directory.
-3. Atomically write obligation-report.json, gate-result.json, and evidence-provenance.json.
-4. Append new finding records and duplicate links to finding-ledger.jsonl.
-5. Return relative artifact references.
+1. When activation.phase is present, resolve working/{REQ-TOKEN}/adversarial-inquiry/phase-{phase}/ as the authoritative directory; otherwise resolve working/{REQ-TOKEN}/adversarial-inquiry/.
+2. Reject traversal and artifact roots outside the request adversarial-inquiry tree.
+3. Atomically write obligation-report.json, gate-result.json, and evidence-provenance.json to the authoritative directory.
+4. Append new finding records and duplicate links to finding-ledger.jsonl in the authoritative directory.
+5. When phase is present, optionally project-copy the four files to the adversarial-inquiry root as a latest/close-out convenience view only.
+6. Return artifact references for the authoritative directory; activation receipts reference only those paths.

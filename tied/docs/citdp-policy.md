@@ -63,6 +63,34 @@ At `integrated` depth, activation is valid only when a successful
 hashes must match. Missing, malformed, stale, or unjustified process evidence
 blocks progression even when the inquiry policy is advisory.
 
+### Waiver field hygiene
+
+Unused waiver maps (`integrated_waiver`, `depth_change_waiver`,
+`close_out_inquiry_waiver`) should be **omitted** or set to **`null`**. Never
+use tilde (`~`) or empty strings as placeholder waiver values — the checklist
+evidence gate treats those as absent and will not accept them as valid waivers.
+When a waiver applies, every required field must contain a real value (owner,
+expiry, rationale, approval, and `referenced_verification_run_id` for
+close-out inquiry waivers).
+
+At `integrated` depth, `activation.expected` may be omitted from gate payloads
+when `activation.receipt` carries a complete identity (including matching
+`scope_hash`); the gate derives expected from the receipt and still requires
+artifact pairing.
+
+At `minimal` depth, `sub-adversarial-inquiry-pass` must be `not_applicable` or
+`waived` with rationale — **`pending` fails** at every gate phase.
+
+### Open-record persistence vs progression gates
+
+`citdp_record_write` validates the **open-record shape** for persistence only.
+It is not a substitute for `tied_checklist_gate_validate`. At `integrated`
+depth, activation may be omitted while the request is pre-inquiry; upgrading
+from an on-disk `minimal` record requires `prior_depth_tier: minimal`. Partial
+or malformed activation is rejected when supplied. Verification and close-out
+gates still require paired inquiry evidence. See
+`docs/adversarial-inquiry-adoption.md` § Depth upgrade path.
+
 ## Middle ground
 
 For small but real behavior changes, some teams still want a **short** CITDP record (minimal fields) rather than skipping entirely. That is valid if your validators and reviewers agree.

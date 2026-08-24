@@ -1,0 +1,9 @@
+{
+  "allowed": false,
+  "ok": false,
+  "blocking": true,
+  "depth": "integrated",
+  "diagnostics": [
+    "integrated_depth_requires_pairing"
+  ]
+}

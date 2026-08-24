@@ -90,7 +90,8 @@ and approval revision. Observed findings do not trigger LEAP.
 | user-facing-release-notes | user-facing-release-notes | README and CHANGELOG |
 | persist-citdp-record | persist-citdp-record | CITDP YAML under client tied/citdp |
 | traceable-commit | traceable-commit | Commit per PROC-COMMIT_MESSAGES; no push unless asked |
-| sub-yaml-edit-loop | sub-yaml-edit-loop | tied-cli.sh mutations, lint_yaml, tied_validate_consistency |
+| sub-yaml-edit-loop | sub-yaml-edit-loop | tied-cli.sh mutations, lint_yaml, client styling, tied_validate_consistency |
+| sub-client-yaml-styling | sub-client-yaml-styling | Client YAML presentation styling and semantic-equivalence gate |
 | sub-pseudocode-validation-pass | sub-pseudocode-validation-pass | Checklist-ordered passes until gating satisfied |
 | sub-leap-micro-cycle | leap-micro-cycle | Fix IMPL first during GREEN; revisit REQ/ARCH if scope shifts |
 | sub-vocabulary-sync | sub-vocabulary-sync | Resolve, preload, record, validate domain vocab |
@@ -752,24 +753,59 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 
 ## Sub-Procedures
 
-### sub-yaml-edit-loop (sub-yaml-edit-loop): tied-cli.sh mutations, lint_yaml, tied_validate_consistency
+### sub-yaml-edit-loop (sub-yaml-edit-loop): tied-cli.sh mutations, lint_yaml, client styling, tied_validate_consistency
 
 **Invoked by**: Any step that creates or modifies TIED YAML (author-requirement, author-architecture, S06, three-way-alignment-unit, composition-integration, verification-gate, sync-tied-stack, persist-citdp-record).
 
 **Goals**: Ensure every TIED YAML file is syntactically valid and canonically formatted before use. **Mutations** to project-owned TIED YAML go through `.cursor/skills/tied-yaml/scripts/tied-cli.sh` per [.cursor/skills/tied-yaml/SKILL.md](../../.cursor/skills/tied-yaml/SKILL.md) (tool names and JSON args in [.cursor/skills/tied-yaml/reference.md](../../.cursor/skills/tied-yaml/reference.md)). Agents use **`lint_yaml`** per [PROC-YAML_EDIT_LOOP] (`processes.md`); it may accept multiple paths but must process each file independently—never raw multi-argument `yq` pretty-print, which merges documents and corrupts files.
 
+**Per-file order** (project-owned `./tied/` paths only):
+
+1. Governed **`tied-cli.sh`** mutation when applicable.
+2. **Baseline canonical formatting** via `lint_yaml` (`tied-yaml-canonical-v1` + resolved `scalar_style`).
+3. **CALL sub-client-yaml-styling** (optional client formatter hook when configured).
+4. Re-read on disk; **lint_yaml** syntax pass.
+5. **`tied_validate_consistency`** and semantic-equivalence acceptance.
+
 **Tasks**:
 1. **Mutation path**: IF you are creating, updating, or deleting project-owned files under the TIED base path, use the appropriate `tied-cli.sh` tool from the skill. Do not bypass with `apply_patch`/`Write` when the same operation is supported by `tied-cli.sh`.
-2. Run `lint_yaml` on each changed file, or one `lint_yaml` invocation with multiple paths if your wrapper implements per-file safe passes (required for any **direct-edited** exception file; files written via `tied-cli.sh` may still be normalized this way if your workflow runs it on all touched paths). This validates syntax and canonicalizes formatting in place.
-3. IF validation fails THEN fix the YAML error and repeat step 2. The file is not valid for use until this passes.
-4. Run `.cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency '{}'` for cross-file traceability before marking TIED work complete (and when the calling step requires it).
-5. IF consistency check fails THEN fix the issue in the TIED stack (prefer `yaml_detail_update` / `yaml_index_update` via `tied-cli.sh`) and **RETURN** to the calling step to re-validate.
+2. Run `lint_yaml` on each changed file for baseline canonical formatting (required for any **direct-edited** exception file; files written via `tied-cli.sh` may still be normalized this way if your workflow runs it on all touched paths).
+3. **CALL sub-client-yaml-styling** for each changed project-owned path after baseline canonicalization.
+4. IF validation fails THEN fix the YAML error and repeat. The file is not valid for use until this passes.
+5. Run `.cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency '{}'` for cross-file traceability before marking TIED work complete (and when the calling step requires it).
+6. IF consistency check fails THEN fix the issue in the TIED stack (prefer `yaml_detail_update` / `yaml_index_update` via `tied-cli.sh`) and **RETURN** to the calling step to re-validate.
 
-**Outcomes**: YAML file is syntactically valid, canonically formatted, consistent with the TIED graph where validated, and ready for use by `tied-cli.sh`, scripts, and downstream steps.
+**Outcomes**: YAML file is syntactically valid, canonically formatted, client-styled when configured, semantically equivalent to pre-style canonical output, consistent with the TIED graph where validated, and ready for use by `tied-cli.sh`, scripts, and downstream steps.
 
 **RETURN** to calling step.
 
 **Reference**: `tied/docs/processes.md` § `[PROC-YAML_EDIT_LOOP]`; [.cursor/skills/tied-yaml/SKILL.md](../../.cursor/skills/tied-yaml/SKILL.md); `tied/docs/methodology-diagrams.md` Diagram 6.
+
+---
+
+### sub-client-yaml-styling (sub-client-yaml-styling): Client YAML presentation styling and semantic-equivalence gate
+
+**Invoked by**: `sub-yaml-edit-loop` only (not directly from main steps).
+
+**Goals**: Apply **presentation-only** client YAML styling after baseline canonical formatting. Styling covers indentation, sequence layout, scalar quoting, multiline representation, permitted comments, and deterministic key ordering—it must not change TIED record meaning, schema, token links, ordered-list semantics, or opaque pseudo-code text.
+
+**Configuration**: Repository `.tied-yaml.yaml` at the client project root (parent of `TIED_BASE_PATH`). Baseline **`tied-yaml-canonical-v1`** plus resolved **`scalar_style`** always apply. Optional **`client_formatter`** hook runs only when explicitly configured.
+
+**Tasks**:
+1. Resolve style policy from `.tied-yaml.yaml`: `scalar_style` per [REQ-TIED_YAML_STYLE_CONFIGURATION]; optional `client_formatter` when present.
+2. IF **`client_formatter`** is absent: record **`styling_status: not_configured`**; baseline canonical remains effective; **RETURN**.
+3. IF **`client_formatter`** is configured: capture pre-style snapshot; invoke hook on each path under project-owned `./tied/` only (never `./tied/methodology/**`).
+4. Re-read formatted file; run **`lint_yaml`** for syntax.
+5. Run **`scripts/yaml_semantic_compare.rb`** between pre-style and post-style bytes; semantic mismatch blocks acceptance.
+6. Verify idempotence (second pass byte-identical or fail closed).
+7. On formatter error, semantic change, non-idempotent output, or write outside project-owned `./tied/`: **RETURN** error to `sub-yaml-edit-loop` caller.
+8. Record evidence: `styling_status`, `scalar_style`, `style_source`, formatter command/version when configured.
+
+**Outcomes**: Post-style files valid and semantically equivalent; `styling_status` recorded.
+
+**RETURN** to `sub-yaml-edit-loop`.
+
+**Reference**: `tied/docs/processes.md` § `[PROC-YAML_EDIT_LOOP]`; `scripts/yaml_semantic_compare.rb`; `tied/vocab/tied-yaml-mcp.md`.
 
 ---
 

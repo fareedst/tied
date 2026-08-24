@@ -37,6 +37,9 @@
 | **repository YAML style** | local style config | `.tied-yaml.yaml` at the parent of `TIED_BASE_PATH`; `scalar_style` is `unwrapped` or `wrapped` |
 | **wrapped** | quoted scalars | Double-quote string scalars only; preserve boolean, number, and null types |
 | **unwrapped** | plain scalars | Default plain-when-safe string emission; preserve typed scalar values |
+| **client YAML styling** | post-write formatting, YAML prettify | Presentation-only stage after baseline canonical formatting; optional `client_formatter` hook in `.tied-yaml.yaml` |
+| **styling_status** | format state, style configured flag | `configured` when `client_formatter` runs; `not_configured` when baseline canonical alone is effective |
+| **client_formatter** | yaml hook, external formatter | Optional repository hook in `.tied-yaml.yaml`; must preserve semantics and stay within project-owned `./tied/` |
 
 ---
 

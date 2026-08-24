@@ -39,6 +39,11 @@ const PHASES = new Set<GatePhase>([
   "verification",
   "close_out",
 ]);
+const PLACEHOLDER_WAIVER_VALUES = new Set(["~"]);
+const SUB_ADVERSARIAL_STUB_SLUG = "sub-adversarial-inquiry-pass";
+
+// [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: minimal depth always governs the sub-adversarial stub slug.
+export const MINIMAL_SUB_STUB_SLUGS = [SUB_ADVERSARIAL_STUB_SLUG] as const;
 
 // [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: derive auto-required Tracker slugs from depth and gate phase.
 export const INTEGRATED_REQUIRED_SLUGS: Record<GatePhase, readonly string[]> = {
@@ -53,6 +58,16 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 
 function nonEmpty(value: unknown): boolean {
   return typeof value === "string" ? value.trim().length > 0 : Boolean(value);
+}
+
+// [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: reject placeholder waiver values so close_out cannot bypass pairing with tilde or empty fields.
+function waiverFieldPresent(value: unknown): boolean {
+  if (value === null || value === undefined) return false;
+  if (typeof value === "string") {
+    const trimmed = value.trim();
+    return trimmed.length > 0 && !PLACEHOLDER_WAIVER_VALUES.has(trimmed);
+  }
+  return false;
 }
 
 function listWithValues(value: unknown): boolean {
@@ -142,10 +157,10 @@ function hasDepthChangeWaiver(section: Record<string, unknown>): boolean {
     const waiver = section[key];
     if (!isRecord(waiver)) continue;
     if (
-      nonEmpty(waiver.owner)
-      && nonEmpty(waiver.expiry)
-      && nonEmpty(waiver.rationale)
-      && nonEmpty(waiver.approval)
+      waiverFieldPresent(waiver.owner)
+      && waiverFieldPresent(waiver.expiry)
+      && waiverFieldPresent(waiver.rationale)
+      && waiverFieldPresent(waiver.approval)
     ) {
       return true;
     }
@@ -156,11 +171,11 @@ function hasDepthChangeWaiver(section: Record<string, unknown>): boolean {
 function hasValidCloseOutInquiryWaiver(section: Record<string, unknown>): boolean {
   const waiver = section.close_out_inquiry_waiver;
   if (!isRecord(waiver)) return false;
-  return nonEmpty(waiver.owner)
-    && nonEmpty(waiver.expiry)
-    && nonEmpty(waiver.rationale)
-    && nonEmpty(waiver.approval)
-    && nonEmpty(waiver.referenced_verification_run_id);
+  return waiverFieldPresent(waiver.owner)
+    && waiverFieldPresent(waiver.expiry)
+    && waiverFieldPresent(waiver.rationale)
+    && waiverFieldPresent(waiver.approval)
+    && waiverFieldPresent(waiver.referenced_verification_run_id);
 }
 
 // [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: derive auto-required Tracker slugs from depth and gate phase; caller slugs union only.
@@ -168,6 +183,7 @@ export function derivePhaseAwareSlugs(
   depth: AdversarialDepth,
   phase: GatePhase,
 ): readonly string[] {
+  if (depth === "minimal") return MINIMAL_SUB_STUB_SLUGS;
   if (depth === "integrated") return INTEGRATED_REQUIRED_SLUGS[phase];
   if (depth === "strict_candidate" && (phase === "verification" || phase === "close_out")) {
     return INTEGRATED_REQUIRED_SLUGS[phase];
@@ -283,6 +299,35 @@ export function validateTracker(input: {
   return { ok: diagnostics.length === 0, diagnostics };
 }
 
+// [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: at integrated depth a completed parent slug cannot coexist with a pending sub-adversarial-inquiry-pass.
+export function validateIntegratedParentChildSlugs(input: {
+  tracker: unknown;
+  phase: GatePhase;
+  depth: AdversarialDepth;
+}): ValidationResult {
+  if (input.depth !== "integrated" && input.depth !== "strict_candidate") {
+    return { ok: true, diagnostics: [] };
+  }
+  const steps = trackerSteps(input.tracker);
+  const bySlug = new Map(
+    steps.map((step) => [getString(step, "slug", "id") ?? "unknown", step]),
+  );
+  const subStep = bySlug.get(SUB_ADVERSARIAL_STUB_SLUG);
+  if (!subStep || disposition(subStep) !== "pending") {
+    return { ok: true, diagnostics: [] };
+  }
+  const parentSlugs = derivePhaseAwareSlugs(input.depth, input.phase).filter(
+    (slug) => slug !== SUB_ADVERSARIAL_STUB_SLUG,
+  );
+  for (const slug of parentSlugs) {
+    const step = bySlug.get(slug);
+    if (step && disposition(step) === "completed") {
+      return { ok: false, diagnostics: ["sub_stub_pending_while_parent_completed"] };
+    }
+  }
+  return { ok: true, diagnostics: [] };
+}
+
 function compareIdentity(
   actual: Record<string, unknown> | undefined,
   expected: ActivationExpectedIdentity,
@@ -296,6 +341,56 @@ function compareIdentity(
   return diagnostics;
 }
 
+// [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: phase directories are authoritative pairing locations; root projection never satisfies pairing.
+export function expectedPhaseArtifactPathPrefix(requestToken: string, phase: GatePhase): string {
+  return `working/${requestToken}/adversarial-inquiry/phase-${phase}/`;
+}
+
+function validateArtifactPath(
+  pathValue: unknown,
+  expected: ActivationExpectedIdentity,
+  label: string,
+): string[] {
+  if (pathValue === undefined || pathValue === null || pathValue === "") return [];
+  if (typeof pathValue !== "string" || !nonEmpty(pathValue)) {
+    return [`invalid_artifact_path:${label}`];
+  }
+  const normalized = pathValue.replace(/\\/g, "/");
+  const inquiryPrefix = `working/${expected.request_token}/adversarial-inquiry/`;
+  if (!normalized.includes(inquiryPrefix)) {
+    return [`artifact_path_out_of_scope:${label}`];
+  }
+  const suffix = normalized.slice(normalized.indexOf(inquiryPrefix) + inquiryPrefix.length);
+  if (suffix.startsWith(`phase-${expected.phase}/`)) return [];
+  if (!suffix.startsWith("phase-")) {
+    return [`artifact_path_root_projection_rejected:${label}`];
+  }
+  return [`artifact_path_wrong_phase:${label}`];
+}
+
+// [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: derive activation.expected from a complete receipt when the caller omits expected; never infer missing receipt fields.
+export function deriveExpectedFromReceipt(receipt: unknown): ActivationExpectedIdentity | undefined {
+  if (!isRecord(receipt)) return undefined;
+  const request_token = identityValue(receipt.request_token);
+  const project_id = identityValue(receipt.project_id);
+  const run_id = identityValue(receipt.run_id);
+  const phaseRaw = identityValue(receipt.phase);
+  const scope_hash = identityValue(receipt.scope_hash);
+  if (!request_token || !project_id || !run_id || !phaseRaw || !scope_hash) return undefined;
+  if (!PHASES.has(phaseRaw as GatePhase)) return undefined;
+  const scope = receipt.scope;
+  if (!Array.isArray(scope) || !scope.every((item) => typeof item === "string")) return undefined;
+  if (stableHash(scope) !== scope_hash) return undefined;
+  return {
+    request_token,
+    project_id,
+    run_id,
+    phase: phaseRaw as GatePhase,
+    scope,
+    scope_hash,
+  };
+}
+
 // [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: pair inquiry receipt with four bounded artifacts.
 export function validateActivationPairing(input: {
   receipt: unknown;
@@ -303,20 +398,21 @@ export function validateActivationPairing(input: {
   expected?: ActivationExpectedIdentity;
 }): ActivationPairingResult {
   const diagnostics: string[] = [];
+  const expected = input.expected ?? deriveExpectedFromReceipt(input.receipt);
   if (!isRecord(input.receipt) || input.receipt.success !== true) {
     diagnostics.push("missing_or_unsuccessful_inquiry_receipt");
   }
   if (isRecord(input.receipt) && input.receipt.tool !== "tied_adversarial_inquiry_run") {
     diagnostics.push("invalid_inquiry_tool");
   }
-  if (!input.expected) diagnostics.push("missing_expected_identity");
-  if (input.expected && isRecord(input.receipt)) {
-    diagnostics.push(...compareIdentity(input.receipt, input.expected, "receipt"));
-    if (stableHash(input.expected.scope) !== input.expected.scope_hash) {
+  if (!expected) diagnostics.push("missing_expected_identity");
+  if (expected && isRecord(input.receipt)) {
+    diagnostics.push(...compareIdentity(input.receipt, expected, "receipt"));
+    if (stableHash(expected.scope) !== expected.scope_hash) {
       diagnostics.push("expected_scope_hash_mismatch");
     }
     const receiptScope = input.receipt.scope;
-    if (!Array.isArray(receiptScope) || stableHash(receiptScope) !== input.expected.scope_hash) {
+    if (!Array.isArray(receiptScope) || stableHash(receiptScope) !== expected.scope_hash) {
       diagnostics.push("receipt_scope_hash_mismatch");
     }
   }
@@ -334,7 +430,10 @@ export function validateActivationPairing(input: {
     if (artifact.valid !== true) diagnostics.push(`invalid_activation_artifact:${name}`);
     if (!nonEmpty(artifact.hash)) diagnostics.push(`missing_artifact_hash:${name}`);
     else artifactHashes[name] = String(artifact.hash);
-    if (input.expected) diagnostics.push(...compareIdentity(artifact, input.expected, `artifact:${name}`));
+    if (expected) {
+      diagnostics.push(...compareIdentity(artifact, expected, `artifact:${name}`));
+      diagnostics.push(...validateArtifactPath(artifact.path, expected, name));
+    }
   }
   if (isRecord(input.receipt) && isRecord(input.receipt.artifact_hashes)) {
     for (const name of ARTIFACT_NAMES) {
@@ -350,6 +449,102 @@ export function validateActivationPairing(input: {
     diagnostics: [...new Set(diagnostics)],
     ...(Object.keys(artifactHashes).length ? { artifact_hashes: artifactHashes } : {}),
   };
+}
+
+function extractActivationFromCitdp(citdp: unknown): unknown {
+  if (!isRecord(citdp)) return undefined;
+  if (citdp.activation !== undefined) return citdp.activation;
+  const criteria = completionCriteria(citdp);
+  if (criteria && criteria.activation !== undefined) return criteria.activation;
+  return undefined;
+}
+
+function activationSupplied(activation: unknown): boolean {
+  if (activation === undefined || activation === null) return false;
+  if (!isRecord(activation)) return true;
+  return activation.receipt !== undefined
+    || activation.artifacts !== undefined
+    || activation.expected !== undefined;
+}
+
+function requiresMinimalOpenRecordFields(depth: AdversarialDepth): boolean {
+  return depth === "minimal" || depth === "strict_candidate";
+}
+
+// [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: require prior_depth_tier minimal when upgrading an on-disk minimal record to integrated.
+export function validateCitdpDepthUpgrade(input: {
+  citdp: unknown;
+  existingDepthTier?: AdversarialDepth | null;
+}): ValidationResult {
+  const section = adversarialSection(input.citdp);
+  const currentDepth = identityValue(section?.depth_tier) as AdversarialDepth | undefined;
+  const priorDepth = identityValue(section?.prior_depth_tier) as AdversarialDepth | undefined;
+  if (currentDepth !== "integrated") return { ok: true, diagnostics: [] };
+  if (input.existingDepthTier !== "minimal") return { ok: true, diagnostics: [] };
+  if (priorDepth === "minimal") return { ok: true, diagnostics: [] };
+  return { ok: false, diagnostics: ["depth_upgrade_requires_prior_depth_tier:minimal"] };
+}
+
+// [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: validate adversarial section shape for CITDP persistence without progression pairing.
+export function validateCitdpOpenRecord(input: {
+  citdp: unknown;
+  activation?: unknown;
+  existingDepthTier?: AdversarialDepth | null;
+}): ValidationResult {
+  const diagnostics: string[] = [];
+  const section = adversarialSection(input.citdp);
+  if (!section) {
+    diagnostics.push("malformed_citdp:adversarial_inquiry");
+    return { ok: false, diagnostics };
+  }
+  const depth = identityValue(section.depth_tier) as AdversarialDepth | undefined;
+  if (!depth || !["minimal", "integrated", "strict_candidate"].includes(depth)) {
+    diagnostics.push("missing_or_invalid_depth");
+    return { ok: false, diagnostics };
+  }
+  if (requiresMinimalOpenRecordFields(depth)) {
+    const requiredFields = [
+      ["counterexamples", "missing_counterexamples"],
+      ["falsification_questions", "missing_falsification_questions"],
+      ["disconfirming_observations", "missing_disconfirming_observations"],
+      ["evidence_references", "missing_adversarial_evidence_references"],
+    ] as const;
+    for (const [field, code] of requiredFields) {
+      if (!listWithValues(section[field])) diagnostics.push(code);
+    }
+  }
+  diagnostics.push(...validateCitdpDepthUpgrade({
+    citdp: input.citdp,
+    existingDepthTier: input.existingDepthTier,
+  }).diagnostics);
+  diagnostics.push(...validateDepthDowngrade({ citdp: input.citdp }).diagnostics);
+
+  const activation = input.activation ?? extractActivationFromCitdp(input.citdp);
+  if (!activationSupplied(activation)) {
+    return { ok: diagnostics.length === 0, diagnostics: [...new Set(diagnostics)] };
+  }
+  if (!isRecord(activation)) {
+    diagnostics.push("malformed_activation");
+    return { ok: false, diagnostics: [...new Set(diagnostics)] };
+  }
+  const hasReceipt = activation.receipt !== undefined;
+  const hasArtifacts = activation.artifacts !== undefined;
+  const hasExpected = activation.expected !== undefined;
+  if (hasReceipt !== hasArtifacts) {
+    diagnostics.push("partial_activation:receipt_artifacts_mismatch");
+  } else if (hasReceipt && hasArtifacts) {
+    const pairing = validateActivationPairing({
+      receipt: activation.receipt,
+      artifacts: activation.artifacts,
+      expected: hasExpected
+        ? activation.expected as ActivationExpectedIdentity
+        : deriveExpectedFromReceipt(activation.receipt),
+    });
+    diagnostics.push(...pairing.diagnostics);
+  } else if (hasExpected) {
+    diagnostics.push("partial_activation:expected_without_receipt");
+  }
+  return { ok: diagnostics.length === 0, diagnostics: [...new Set(diagnostics)] };
 }
 
 // [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: enforce depth-specific adversarial obligations before progression.
@@ -388,11 +583,18 @@ export function validateAdversarialContract(input: {
     }
   }
   const pairingRequired = input.requiresPairing ?? requiresIntegratedPairing(depth, input.phase);
-  if (pairingRequired && input.activation) {
+  const normalizedActivation = input.activation
+    ? {
+        ...input.activation,
+        expected: input.activation.expected
+          ?? deriveExpectedFromReceipt(input.activation.receipt),
+      }
+    : undefined;
+  if (pairingRequired && normalizedActivation) {
     const pairing = validateActivationPairing({
-      receipt: input.activation.receipt,
-      artifacts: input.activation.artifacts,
-      expected: input.activation.expected,
+      receipt: normalizedActivation.receipt,
+      artifacts: normalizedActivation.artifacts,
+      expected: normalizedActivation.expected,
     });
     diagnostics.push(...pairing.diagnostics);
   }
@@ -431,6 +633,13 @@ export function validateChecklistGate(input: {
 
   const autoSlugs = derivePhaseAwareSlugs(depth, input.phase);
   const requiredSlugs = [...new Set([...autoSlugs, ...(input.requiredStepSlugs ?? [])])];
+  const normalizedActivation = input.activation
+    ? {
+        ...input.activation,
+        expected: input.activation.expected
+          ?? deriveExpectedFromReceipt(input.activation.receipt),
+      }
+    : undefined;
 
   const downgradeResult = validateDepthDowngrade({
     citdp: input.citdp,
@@ -446,7 +655,7 @@ export function validateChecklistGate(input: {
   diagnostics.push(...completionResult.diagnostics);
 
   const receiptPhaseResult = validateReceiptPhase({
-    receipt: input.activation?.receipt,
+    receipt: normalizedActivation?.receipt,
     gatePhase: input.phase,
   });
   diagnostics.push(...receiptPhaseResult.diagnostics);
@@ -459,12 +668,19 @@ export function validateChecklistGate(input: {
   });
   diagnostics.push(...trackerResult.diagnostics);
 
+  const parentChildResult = validateIntegratedParentChildSlugs({
+    tracker: input.tracker,
+    phase: input.phase,
+    depth,
+  });
+  diagnostics.push(...parentChildResult.diagnostics);
+
   const pairingRequired = requiresIntegratedPairing(depth, input.phase);
   const closeOutWaiverApplies = input.phase === "close_out"
     && section !== undefined
     && hasValidCloseOutInquiryWaiver(section);
 
-  if (pairingRequired && !closeOutWaiverApplies && !input.activation) {
+  if (pairingRequired && !closeOutWaiverApplies && !normalizedActivation) {
     diagnostics.push("integrated_depth_requires_pairing");
   }
 
@@ -472,8 +688,8 @@ export function validateChecklistGate(input: {
     citdp: input.citdp,
     phase: input.phase,
     depth,
-    requiresPairing: pairingRequired && !closeOutWaiverApplies && Boolean(input.activation),
-    activation: input.activation,
+    requiresPairing: pairingRequired && !closeOutWaiverApplies && Boolean(normalizedActivation),
+    activation: normalizedActivation,
   });
   diagnostics.push(...adversarialResult.diagnostics);
 

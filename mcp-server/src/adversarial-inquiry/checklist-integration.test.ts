@@ -56,6 +56,15 @@ describe("CHECKLIST_INQUIRY_INTEGRATION [REQ-TIED_ADVERSARIAL_INQUIRY]", () => {
       paths.directory,
       path.join(root, "working", TOKENS.req, "adversarial-inquiry"),
     );
+    const phasePaths = resolveArtifactPaths({
+      repositoryRoot: root,
+      requestToken: TOKENS.req,
+      phase: "verification",
+    });
+    assert.equal(
+      phasePaths.directory,
+      path.join(root, "working", TOKENS.req, "adversarial-inquiry", "phase-verification"),
+    );
     assert.throws(
       () => resolveArtifactPaths({
         repositoryRoot: root,
@@ -154,5 +163,81 @@ describe("CHECKLIST_INQUIRY_INTEGRATION [REQ-TIED_ADVERSARIAL_INQUIRY]", () => {
       fs.readFileSync(first.findingLedger, "utf8").trim().split("\n").length,
       1,
     );
+  });
+
+  it("isolates phase-scoped artifact directories for the same request token [Slice P]", async () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), "adversarial-inquiry-phase-"));
+    const baseInput = {
+      repositoryRoot: root,
+      requestToken: TOKENS.req,
+      report: {
+        schemaVersion: "adversarial-inquiry-report.v1" as const,
+        projectId: "project-1",
+        scope: ["obligation-1"],
+        graph: { projectId: "project-1", nodes: [], edges: [] },
+        findings: [],
+        proofBoundaries: ["semantic_fidelity" as const],
+        readOnly: true as const,
+        canonicalMutation: false as const,
+      },
+      ledger: { findings: [], duplicateLinks: [] } as FindingLedger,
+      provenance: { schemaVersion: "adversarial-inquiry-provenance.v1", phase: "seed" },
+    };
+
+    const preImpl = await persistWorkingArtifacts({
+      ...baseInput,
+      phase: "pre_implementation",
+      gate: evaluateScopedGate({
+        policy: "advisory",
+        scope: ["obligation-1"],
+        verdict: "UNRESOLVED",
+        eligibility: eligible(),
+      }),
+    });
+    const verification = await persistWorkingArtifacts({
+      ...baseInput,
+      phase: "verification",
+      gate: evaluateScopedGate({
+        policy: "advisory",
+        scope: ["obligation-1"],
+        verdict: "PASS",
+        eligibility: eligible(),
+      }),
+    });
+    const closeOut = await persistWorkingArtifacts({
+      ...baseInput,
+      phase: "close_out",
+      gate: evaluateScopedGate({
+        policy: "advisory",
+        scope: ["obligation-1"],
+        verdict: "PASS",
+        eligibility: eligible(),
+      }),
+    });
+
+    assert.notEqual(preImpl.directory, verification.directory);
+    assert.notEqual(verification.directory, closeOut.directory);
+    assert.equal(
+      preImpl.directory,
+      path.join(root, "working", TOKENS.req, "adversarial-inquiry", "phase-pre_implementation"),
+    );
+    assert.equal(
+      verification.directory,
+      path.join(root, "working", TOKENS.req, "adversarial-inquiry", "phase-verification"),
+    );
+    assert.equal(
+      closeOut.directory,
+      path.join(root, "working", TOKENS.req, "adversarial-inquiry", "phase-close_out"),
+    );
+
+    const preGate = fs.readFileSync(preImpl.gateResult, "utf8");
+    const verificationGate = fs.readFileSync(verification.gateResult, "utf8");
+    assert.notEqual(preGate, verificationGate);
+    assert.match(preGate, /UNRESOLVED/);
+    assert.match(verificationGate, /PASS/);
+    assert.equal(fs.readFileSync(preImpl.gateResult, "utf8"), preGate);
+
+    const rootGate = path.join(root, "working", TOKENS.req, "adversarial-inquiry", "gate-result.json");
+    assert.equal(fs.readFileSync(rootGate, "utf8"), verificationGate);
   });
 });

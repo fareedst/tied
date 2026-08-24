@@ -2,10 +2,12 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
 import {
+  deriveExpectedFromReceipt,
   derivePhaseAwareSlugs,
   validateActivationPairing,
   validateChecklistGate,
   validateDepthDowngrade,
+  validateIntegratedParentChildSlugs,
   validateTracker,
   stableHash,
   type ActivationExpectedIdentity,
@@ -77,6 +79,43 @@ function completedStep(slug: string, evidence = "evidence-1") {
   return { slug, disposition: "completed", evidence_refs: [evidence] };
 }
 
+function minimalSubStubNotApplicable() {
+  return {
+    slug: "sub-adversarial-inquiry-pass",
+    disposition: "not_applicable",
+    policy: "minimal-depth-no-inquiry",
+    rationale: "Minimal depth uses counterexamples only; sub-stub is not executed.",
+  };
+}
+
+function minimalCitdp(overrides: Record<string, unknown> = {}) {
+  return {
+    risk_analysis: {
+      adversarial_inquiry: {
+        depth_tier: "minimal",
+        counterexamples: ["empty input"],
+        falsification_questions: ["Can an empty input pass?"],
+        disconfirming_observations: ["test rejects empty input"],
+        evidence_references: ["test-1"],
+        ...overrides,
+      },
+    },
+  };
+}
+
+function minimalTracker(extraSteps: Record<string, unknown>[] = []) {
+  return {
+    steps: [
+      {
+        slug: "change-definition",
+        disposition: "completed",
+        evidence_refs: ["citdp"],
+      },
+      minimalSubStubNotApplicable(),
+      ...extraSteps,
+    ],
+  };
+}
 function buildActivation(phase: GatePhase, runId: string) {
   const base: ActivationExpectedIdentity = {
     request_token: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT",
@@ -143,24 +182,8 @@ describe("VALIDATE_ADVERSARIAL_CONTRACT REQ-TIED_CHECKLIST_GATE_ENFORCEMENT", ()
   it("requires the complete minimal evidence set", () => {
     const result = validateChecklistGate({
       phase: "pre_implementation",
-      tracker: {
-        steps: [{
-          slug: "change-definition",
-          disposition: "completed",
-          evidence_refs: ["citdp"],
-        }],
-      },
-      citdp: {
-        risk_analysis: {
-          adversarial_inquiry: {
-            depth_tier: "minimal",
-            counterexamples: ["empty input"],
-            falsification_questions: ["Can an empty input pass?"],
-            disconfirming_observations: ["test rejects empty input"],
-            evidence_references: ["test-1"],
-          },
-        },
-      },
+      tracker: minimalTracker(),
+      citdp: minimalCitdp(),
     });
     assert.equal(result.allowed, true);
     assert.equal(result.depth, "minimal");
@@ -218,6 +241,70 @@ describe("VALIDATE_ACTIVATION_PAIRING REQ-TIED_CHECKLIST_GATE_ENFORCEMENT", () =
     });
     assert.equal(staleScope.ok, false);
     assert.ok(staleScope.diagnostics.includes("receipt_scope_hash_mismatch"));
+  });
+
+  it("rejects cross-phase and root-projection artifact paths [Slice P]", () => {
+    const base: ActivationExpectedIdentity = {
+      request_token: "REQ-EXAMPLE",
+      project_id: "project-1",
+      run_id: "run-1",
+      phase: "verification",
+      scope: ["block-1"],
+      scope_hash: stableHash(["block-1"]),
+    };
+    const phasePrefix = `working/${base.request_token}/adversarial-inquiry/phase-${base.phase}/`;
+    const buildArtifacts = (pathPrefix: string) => Object.fromEntries([
+      "obligation-report.json",
+      "finding-ledger.jsonl",
+      "gate-result.json",
+      "evidence-provenance.json",
+    ].map((name) => [name, {
+      valid: true,
+      request_token: base.request_token,
+      project_id: base.project_id,
+      run_id: base.run_id,
+      phase: base.phase,
+      scope_hash: base.scope_hash,
+      hash: `${name}-hash`,
+      path: `${pathPrefix}${name}`,
+    }]));
+    const receipt = {
+      ...base,
+      success: true,
+      tool: "tied_adversarial_inquiry_run",
+      scope: base.scope,
+      artifact_hashes: Object.fromEntries([
+        "obligation-report.json",
+        "finding-ledger.jsonl",
+        "gate-result.json",
+        "evidence-provenance.json",
+      ].map((name) => [name, `${name}-hash`])),
+    };
+
+    const accepted = validateActivationPairing({
+      receipt,
+      artifacts: buildArtifacts(phasePrefix),
+      expected: base,
+    });
+    assert.equal(accepted.ok, true);
+
+    const crossPhase = validateActivationPairing({
+      receipt,
+      artifacts: buildArtifacts(
+        `working/${base.request_token}/adversarial-inquiry/phase-pre_implementation/`,
+      ),
+      expected: base,
+    });
+    assert.equal(crossPhase.ok, false);
+    assert.ok(crossPhase.diagnostics.some((item) => item.startsWith("artifact_path_wrong_phase:")));
+
+    const rootProjection = validateActivationPairing({
+      receipt,
+      artifacts: buildArtifacts(`working/${base.request_token}/adversarial-inquiry/`),
+      expected: base,
+    });
+    assert.equal(rootProjection.ok, false);
+    assert.ok(rootProjection.diagnostics.some((item) => item.startsWith("artifact_path_root_projection_rejected:")));
   });
 });
 
@@ -321,25 +408,8 @@ describe("VALIDATE_CHECKLIST_GATE Batch 2 Slice 1 [REQ-TIED_CHECKLIST_GATE_ENFOR
 
     const gate = validateChecklistGate({
       phase: "pre_implementation",
-      tracker: {
-        steps: [{
-          slug: "change-definition",
-          disposition: "completed",
-          evidence_refs: ["citdp"],
-        }],
-      },
-      citdp: {
-        risk_analysis: {
-          adversarial_inquiry: {
-            depth_tier: "minimal",
-            prior_depth_tier: "integrated",
-            counterexamples: ["empty input"],
-            falsification_questions: ["Can empty input pass?"],
-            disconfirming_observations: ["test rejects empty input"],
-            evidence_references: ["test-1"],
-          },
-        },
-      },
+      tracker: minimalTracker(),
+      citdp: minimalCitdp({ prior_depth_tier: "integrated" }),
     });
     assert.equal(gate.allowed, false);
     assert.ok(gate.diagnostics.includes("depth_downgrade_requires_waiver"));
@@ -348,24 +418,8 @@ describe("VALIDATE_CHECKLIST_GATE Batch 2 Slice 1 [REQ-TIED_CHECKLIST_GATE_ENFOR
   it("skips downgrade diagnostic when prior_depth_tier is missing", () => {
     const gate = validateChecklistGate({
       phase: "pre_implementation",
-      tracker: {
-        steps: [{
-          slug: "change-definition",
-          disposition: "completed",
-          evidence_refs: ["citdp"],
-        }],
-      },
-      citdp: {
-        risk_analysis: {
-          adversarial_inquiry: {
-            depth_tier: "minimal",
-            counterexamples: ["empty input"],
-            falsification_questions: ["Can empty input pass?"],
-            disconfirming_observations: ["test rejects empty input"],
-            evidence_references: ["test-1"],
-          },
-        },
-      },
+      tracker: minimalTracker(),
+      citdp: minimalCitdp(),
     });
     assert.equal(gate.allowed, true);
     assert.ok(!gate.diagnostics.includes("depth_downgrade_requires_waiver"));
@@ -428,13 +482,7 @@ describe("VALIDATE_CHECKLIST_GATE Batch 2 Slice 1 [REQ-TIED_CHECKLIST_GATE_ENFOR
   it("allows strict_candidate at pre_implementation with counterexamples only", () => {
     const result = validateChecklistGate({
       phase: "pre_implementation",
-      tracker: {
-        steps: [{
-          slug: "change-definition",
-          disposition: "completed",
-          evidence_refs: ["citdp"],
-        }],
-      },
+      tracker: minimalTracker(),
       citdp: {
         risk_analysis: {
           adversarial_inquiry: {
@@ -478,5 +526,137 @@ describe("VALIDATE_CHECKLIST_GATE Batch 2 Slice 1 [REQ-TIED_CHECKLIST_GATE_ENFOR
       },
     });
     assert.equal(result.allowed, true);
+  });
+});
+
+// [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: Slice 0 validator hotfixes for placeholder waivers, expected auto-derive, and sub-stub disposition.
+describe("VALIDATE_CHECKLIST_GATE Slice 0 hotfixes [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]", () => {
+  it("rejects placeholder close_out inquiry waiver (1787507684 shape)", () => {
+    const result = validateChecklistGate({
+      phase: "close_out",
+      tracker: integratedTracker("close_out"),
+      citdp: integratedCitdp({
+        close_out_inquiry_waiver: {
+          owner: "~",
+          expiry: "~",
+          rationale: "~",
+          approval: "~",
+          referenced_verification_run_id: "~",
+        },
+      }),
+    });
+    assert.equal(result.allowed, false);
+    assert.ok(result.diagnostics.includes("integrated_depth_requires_pairing"));
+  });
+
+  it("derives expected from receipt when activation omits expected", () => {
+    const activation = buildActivation("verification", "verification-run-1");
+    const derived = deriveExpectedFromReceipt(activation.receipt);
+    assert.deepEqual(derived, activation.expected);
+
+    const { expected: _expected, ...receiptOnly } = activation;
+    const result = validateChecklistGate({
+      phase: "verification",
+      tracker: integratedTracker("verification"),
+      citdp: integratedCitdp(),
+      activation: receiptOnly,
+    });
+    assert.equal(result.allowed, true);
+    assert.ok(!result.diagnostics.includes("missing_expected_identity"));
+  });
+
+  it("fails when receipt is incomplete and expected is omitted", () => {
+    const activation = buildActivation("verification", "verification-run-1");
+    const incompleteReceipt = { ...activation.receipt, scope_hash: undefined };
+    delete (incompleteReceipt as { scope_hash?: string }).scope_hash;
+    const result = validateChecklistGate({
+      phase: "verification",
+      tracker: integratedTracker("verification"),
+      citdp: integratedCitdp(),
+      activation: {
+        receipt: incompleteReceipt,
+        artifacts: activation.artifacts,
+      },
+    });
+    assert.equal(result.allowed, false);
+    assert.ok(result.diagnostics.includes("missing_expected_identity"));
+  });
+
+  it("fails minimal depth when sub-adversarial-inquiry-pass is pending", () => {
+    const result = validateChecklistGate({
+      phase: "pre_implementation",
+      tracker: {
+        steps: [
+          {
+            slug: "change-definition",
+            disposition: "completed",
+            evidence_refs: ["citdp"],
+          },
+          {
+            slug: "sub-adversarial-inquiry-pass",
+            disposition: "pending",
+          },
+        ],
+      },
+      citdp: minimalCitdp(),
+    });
+    assert.equal(result.allowed, false);
+    assert.ok(result.diagnostics.includes("pending_required_step:sub-adversarial-inquiry-pass"));
+  });
+
+  it("fails integrated depth when parent slug is completed and sub-stub is pending", () => {
+    const result = validateChecklistGate({
+      phase: "pre_implementation",
+      tracker: {
+        steps: [
+          completedStep("risk-assessment"),
+          completedStep("gate-pseudocode-validation"),
+          { slug: "sub-adversarial-inquiry-pass", disposition: "pending" },
+        ],
+      },
+      citdp: integratedCitdp(),
+      activation: buildActivation("pre_implementation", "pre-impl-run-1"),
+    });
+    assert.equal(result.allowed, false);
+    assert.ok(
+      result.diagnostics.includes("sub_stub_pending_while_parent_completed")
+      || result.diagnostics.includes("pending_required_step:sub-adversarial-inquiry-pass"),
+    );
+  });
+
+  it("validateIntegratedParentChildSlugs detects parent completed with pending sub-stub", () => {
+    const result = validateIntegratedParentChildSlugs({
+      depth: "integrated",
+      phase: "pre_implementation",
+      tracker: {
+        steps: [
+          completedStep("gate-pseudocode-validation"),
+          { slug: "sub-adversarial-inquiry-pass", disposition: "pending" },
+        ],
+      },
+    });
+    assert.equal(result.ok, false);
+    assert.ok(result.diagnostics.includes("sub_stub_pending_while_parent_completed"));
+  });
+
+  it("rejects placeholder depth-change waiver on downgrade", () => {
+    const downgrade = validateDepthDowngrade({
+      citdp: {
+        risk_analysis: {
+          adversarial_inquiry: {
+            depth_tier: "minimal",
+            prior_depth_tier: "integrated",
+            integrated_waiver: {
+              owner: "~",
+              expiry: "~",
+              rationale: "~",
+              approval: "~",
+            },
+          },
+        },
+      },
+    });
+    assert.equal(downgrade.ok, false);
+    assert.ok(downgrade.diagnostics.includes("depth_downgrade_requires_waiver"));
   });
 });

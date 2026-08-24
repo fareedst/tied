@@ -10,7 +10,7 @@ import os from "node:os";
 import yaml from "js-yaml";
 import { clearBasePathCache } from "./yaml-loader.js";
 import { writeCitdpRecord } from "./citdp-writer.js";
-import { stableHash } from "./checklist-validator.js";
+import { stableHash, validateChecklistGate } from "./checklist-validator.js";
 
 beforeEach(() => {
   clearBasePathCache();
@@ -133,5 +133,202 @@ describe("writeCitdpRecord", () => {
       clearBasePathCache();
       fs.rmSync(dir, { recursive: true });
     }
+  });
+
+  it("allows minimal-to-integrated upgrade before inquiry when prior_depth_tier is minimal", () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-citdp-upgrade-"));
+    try {
+      process.env.TIED_BASE_PATH = dir;
+      clearBasePathCache();
+      const minimal = writeCitdpRecord({
+        filename: "CITDP-REQ-UPGRADE.yaml",
+        record: {
+          risk_analysis: {
+            adversarial_inquiry: {
+              depth_tier: "minimal",
+              counterexamples: ["empty input"],
+              falsification_questions: ["Can empty input pass?"],
+              disconfirming_observations: ["empty input rejected"],
+              evidence_references: ["test-1"],
+            },
+          },
+        },
+      });
+      assert.equal(minimal.ok, true);
+
+      const upgraded = writeCitdpRecord({
+        filename: "CITDP-REQ-UPGRADE.yaml",
+        record: {
+          risk_analysis: {
+            adversarial_inquiry: {
+              depth_tier: "integrated",
+              prior_depth_tier: "minimal",
+              gate_policy: "advisory",
+            },
+          },
+        },
+      });
+      assert.equal(upgraded.ok, true);
+      const data = yaml.load(fs.readFileSync((upgraded as { ok: true; path: string }).path, "utf8")) as Record<string, unknown>;
+      const inner = data["CITDP-REQ-UPGRADE"] as Record<string, unknown>;
+      const section = (inner.risk_analysis as Record<string, unknown>).adversarial_inquiry as Record<string, unknown>;
+      assert.equal(section.depth_tier, "integrated");
+      assert.equal(section.prior_depth_tier, "minimal");
+    } finally {
+      delete process.env.TIED_BASE_PATH;
+      clearBasePathCache();
+      fs.rmSync(dir, { recursive: true });
+    }
+  });
+
+  it("rejects minimal-to-integrated upgrade without prior_depth_tier minimal", () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-citdp-upgrade-missing-"));
+    try {
+      process.env.TIED_BASE_PATH = dir;
+      clearBasePathCache();
+      assert.equal(writeCitdpRecord({
+        filename: "CITDP-REQ-UPGRADE-MISSING.yaml",
+        record: {
+          risk_analysis: {
+            adversarial_inquiry: {
+              depth_tier: "minimal",
+              counterexamples: ["empty input"],
+              falsification_questions: ["Can empty input pass?"],
+              disconfirming_observations: ["empty input rejected"],
+              evidence_references: ["test-1"],
+            },
+          },
+        },
+      }).ok, true);
+
+      const upgraded = writeCitdpRecord({
+        filename: "CITDP-REQ-UPGRADE-MISSING.yaml",
+        record: {
+          risk_analysis: {
+            adversarial_inquiry: {
+              depth_tier: "integrated",
+              gate_policy: "advisory",
+            },
+          },
+        },
+      });
+      assert.equal(upgraded.ok, false);
+      if (!upgraded.ok) {
+        assert.match(upgraded.error, /depth_upgrade_requires_prior_depth_tier:minimal/);
+      }
+    } finally {
+      delete process.env.TIED_BASE_PATH;
+      clearBasePathCache();
+      fs.rmSync(dir, { recursive: true });
+    }
+  });
+
+  it("preserves prior_depth_tier on overwrite when incoming omits it", () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-citdp-preserve-"));
+    try {
+      process.env.TIED_BASE_PATH = dir;
+      clearBasePathCache();
+      assert.equal(writeCitdpRecord({
+        filename: "CITDP-REQ-PRESERVE.yaml",
+        record: {
+          risk_analysis: {
+            adversarial_inquiry: {
+              depth_tier: "integrated",
+              prior_depth_tier: "minimal",
+              gate_policy: "advisory",
+            },
+          },
+        },
+      }).ok, true);
+
+      const updated = writeCitdpRecord({
+        filename: "CITDP-REQ-PRESERVE.yaml",
+        record: {
+          change_definition: { current_behavior: "updated" },
+          risk_analysis: {
+            adversarial_inquiry: {
+              depth_tier: "integrated",
+              gate_policy: "advisory",
+            },
+          },
+        },
+      });
+      assert.equal(updated.ok, true);
+      const data = yaml.load(fs.readFileSync((updated as { ok: true; path: string }).path, "utf8")) as Record<string, unknown>;
+      const section = ((data["CITDP-REQ-PRESERVE"] as Record<string, unknown>).risk_analysis as Record<string, unknown>)
+        .adversarial_inquiry as Record<string, unknown>;
+      assert.equal(section.prior_depth_tier, "minimal");
+    } finally {
+      delete process.env.TIED_BASE_PATH;
+      clearBasePathCache();
+      fs.rmSync(dir, { recursive: true });
+    }
+  });
+
+  it("rejects malformed supplied activation at integrated depth", () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-citdp-malformed-activation-"));
+    try {
+      process.env.TIED_BASE_PATH = dir;
+      clearBasePathCache();
+      const result = writeCitdpRecord({
+        filename: "CITDP-REQ-MALFORMED-ACTIVATION.yaml",
+        record: {
+          risk_analysis: {
+            adversarial_inquiry: {
+              depth_tier: "integrated",
+              gate_policy: "advisory",
+            },
+          },
+          completion_criteria: {
+            activation: {
+              receipt: {
+                request_token: "REQ-MALFORMED",
+                project_id: "project-1",
+                run_id: "run-1",
+                phase: "verification",
+                scope: ["block-1"],
+                scope_hash: stableHash(["block-1"]),
+                success: true,
+                tool: "tied_adversarial_inquiry_run",
+              },
+            },
+          },
+        },
+      });
+      assert.equal(result.ok, false);
+      if (!result.ok) {
+        assert.match(result.error, /partial_activation:receipt_artifacts_mismatch/);
+      }
+    } finally {
+      delete process.env.TIED_BASE_PATH;
+      clearBasePathCache();
+      fs.rmSync(dir, { recursive: true });
+    }
+  });
+
+  it("keeps verification gate blocked for integrated depth without activation pairing", () => {
+    const citdp = {
+      risk_analysis: {
+        adversarial_inquiry: {
+          depth_tier: "integrated",
+          prior_depth_tier: "minimal",
+          gate_policy: "advisory",
+        },
+      },
+    };
+    const result = validateChecklistGate({
+      phase: "verification",
+      tracker: {
+        steps: [
+          { slug: "risk-assessment", disposition: "completed", evidence_refs: ["citdp"] },
+          { slug: "sub-adversarial-inquiry-pass", disposition: "completed", evidence_refs: ["inquiry"] },
+          { slug: "verification-gate", disposition: "completed", evidence_refs: ["tests"] },
+        ],
+      },
+      citdp,
+    });
+    assert.equal(result.allowed, false);
+    assert.ok(result.diagnostics.includes("integrated_depth_requires_pairing"));
+    assert.ok(result.diagnostics.includes("missing_completion_activation"));
   });
 });

@@ -47,6 +47,13 @@ implementation decisions and pseudo-code for the research tooling.
 | **depth-change waiver** | integrated_waiver, depth_change_waiver, silent downgrade exception | Owner/expiry/rationale/approval allowing `depth_tier` to drop from `integrated` or `strict_candidate` to `minimal`. |
 | **close-out inquiry waiver** | close_out re-run waiver, verification-run reuse | Owner/expiry/rationale/approval allowing `close_out` to skip a new inquiry pass when findings are unchanged; does **not** authorize passing a verification-phase receipt as the close_out `activation` payload. |
 | **phase-aware slug set** | INTEGRATED_REQUIRED_SLUGS, auto slugs | Phase-specific Tracker slugs the checklist evidence gate derives at integrated depth (and at `strict_candidate` verification/close_out). Caller slugs union with this set and cannot subtract. |
+| **phase artifact directory** | phase folder, snapshot folder | Request-scoped `working/{REQ-TOKEN}/adversarial-inquiry/phase-{phase}/` storage that prevents one inquiry phase from overwriting another; each receipt references only its own phase directory. |
+| **activation expected identity** | expected payload, expected fields | Gate-side identity projection derived from a valid activation receipt when omitted by the caller; it does not replace receipt/artifact pairing. |
+| **placeholder waiver** | empty waiver, tilde waiver | An unusable waiver value (`null`, empty string, or `~`) that must be treated as absent rather than approval evidence. |
+| **minimal sub-stub disposition** | pending sub-stub at minimal | At minimal depth, `sub-adversarial-inquiry-pass` must be `not_applicable` or `waived` with rationale; `pending` fails at every gate phase. |
+| **parent-child slug consistency** | sub-stub pending vs parent completed | At integrated depth, a completed auto-required parent slug cannot coexist with a pending `sub-adversarial-inquiry-pass`. |
+| **open-record shape** | persistence validation, citdp write shape | Adversarial section contract enforced by `citdp_record_write` / `validateCitdpOpenRecord`; allows integrated depth without activation pre-inquiry. |
+| **depth upgrade path** | minimal-to-integrated upgrade, chicken-and-egg bypass | Lawful sequence: write integrated depth with `prior_depth_tier: minimal`, run inquiry per phase, gate with pairing, then cite verification activation. |
 
 ## Naming bridge
 
@@ -70,6 +77,13 @@ implementation decisions and pseudo-code for the research tooling.
 | Depth-change waiver | `integrated_waiver` / `depth_change_waiver` | Required fields when lowering depth mid-request. |
 | Close-out inquiry waiver | `close_out_inquiry_waiver` | Documents why `close_out` has no new inquiry `run_id`. |
 | Phase-aware slug set | `INTEGRATED_REQUIRED_SLUGS` | Auto-required Tracker slugs inside `validateChecklistGate`. |
+| Phase artifact directory | `working/{REQ-TOKEN}/adversarial-inquiry/phase-{phase}/` | Per-phase bounded artifact storage; canonical root is reserved for the latest/close-out view. |
+| Activation expected identity | `activation.expected` / `expected` | Derived gate identity fields from `activation.receipt` when safe and complete. |
+| Placeholder waiver | `~`, `null`, or empty waiver fields | Invalid waiver input; never satisfies a waiver contract. |
+| Minimal sub-stub disposition | `sub-adversarial-inquiry-pass` at minimal depth | Must be `not_applicable` or `waived`; `pending` blocks every gate phase. |
+| Parent-child slug consistency | `sub_stub_pending_while_parent_completed` | Integrated-only diagnostic when parent slugs are completed while sub-stub is pending. |
+| Open-record shape | `validateCitdpOpenRecord` | Persistence-only adversarial CITDP validation; integrated depth may omit activation pre-inquiry. |
+| Depth upgrade path | `prior_depth_tier: minimal` on upgrade | Auditable minimal→integrated upgrade without `upgrade_pending_inquiry` state; progression gates unchanged. |
 
 ## First-slice pseudo-code block names
 
@@ -129,8 +143,12 @@ Adversarial inquiry extends `[PROC-AGENT_REQ_CHECKLIST]` through existing step s
 | `persist-citdp-record` | Pilot evidence when gate policy is strict-candidate or strict-approved |
 | `sub-adversarial-inquiry-pass` | Binds `SELECT_ADVERSARIAL_INQUIRY_DEPTH` → `MAP_ADVERSARIAL_OBLIGATIONS` → `EVALUATE_ADVERSARIAL_FINDINGS` → `ROUTE_UNRESOLVED_CRITICAL_FINDINGS` → `PERSIST_WORKING_ARTIFACTS` |
 
-Working artifacts persist only under `working/{REQ-TOKEN}/adversarial-inquiry/`. See
-[`docs/adversarial-inquiry-checklist-integration-plan.md`](../../docs/adversarial-inquiry-checklist-integration-plan.md).
+Working artifacts persist under `working/{REQ-TOKEN}/adversarial-inquiry/`.
+When `activation.phase` is present, the **phase artifact directory**
+(`working/{REQ-TOKEN}/adversarial-inquiry/phase-{phase}/`) is the
+authoritative pairing location; the four root files are a latest/close-out
+convenience projection only and never satisfy another phase's pairing. See
+[`docs/adversarial-inquiry-adoption.md`](../../docs/adversarial-inquiry-adoption.md).
 
 ## Alphabetical index
 
@@ -140,6 +158,9 @@ Working artifacts persist only under `working/{REQ-TOKEN}/adversarial-inquiry/`.
 | close-out inquiry waiver | Preferred terms vs synonyms |
 | depth-change waiver | Preferred terms vs synonyms |
 | phase-aware slug set | Preferred terms vs synonyms |
+| phase artifact directory | Preferred terms vs synonyms |
+| activation expected identity | Preferred terms vs synonyms |
+| placeholder waiver | Preferred terms vs synonyms |
 | prior depth tier | Preferred terms vs synonyms |
 | artifact snapshot | Naming bridge |
 | candidate finding | Preferred terms vs synonyms |

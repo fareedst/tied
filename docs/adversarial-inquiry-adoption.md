@@ -73,6 +73,42 @@ under `working/{REQ-TOKEN}/adversarial-inquiry/`. Metrics should therefore
 report the MCP call and artifact presence as paired signals. Observed findings
 remain review-gated and do not trigger LEAP.
 
+## Depth upgrade path (minimal → integrated)
+
+Integrated activation has two distinct validation surfaces:
+
+1. **Open-record persistence** (`citdp_record_write`) — records the selected
+   `depth_tier` and upgrade history. At `integrated` depth, activation may be
+   **omitted** while the request is still pre-inquiry. When upgrading from an
+   on-disk `minimal` record, set `prior_depth_tier: minimal` in
+   `risk_analysis.adversarial_inquiry`. Subsequent overwrites preserve
+   `prior_depth_tier` when the incoming payload omits it.
+2. **Progression gates** (`tied_checklist_gate_validate`) — unchanged fail-closed
+   behavior at `verification` and `close_out`. Integrated depth still requires
+   paired inquiry receipt and four phase-scoped artifacts unless a valid
+   close-out inquiry waiver applies.
+
+**Operator sequence** (matches client `1787507684` replay; avoids direct YAML bypass):
+
+1. **Write depth** — `citdp_record_write` with `depth_tier: integrated` and
+   `prior_depth_tier: minimal` when upgrading; activation omitted.
+2. **Inquiry per phase** — call `tied_adversarial_inquiry_run` with
+   `activation.phase` set to `pre_implementation`, `verification`, and
+   `close_out` as the checklist requires.
+3. **Collect/assemble** — gather `{ receipt, artifacts, expected }` from each
+   phase directory under `working/{REQ-TOKEN}/adversarial-inquiry/phase-{phase}/`
+   (collector MCP in Batch 2 Slice 2; manual assembly until then).
+4. **Gate** — `tied_checklist_gate_validate` with the phase-appropriate activation
+   payload; verification/close_out fail without pairing.
+5. **Cite verification activation** — persist `completion_criteria.activation`
+   on the CITDP only after verification pairing succeeds; close-out may reuse
+   verification findings via `close_out_inquiry_waiver` but not by submitting a
+   verification receipt as close-out activation.
+
+Do not supply partial activation (receipt without artifacts, or placeholders)
+to `citdp_record_write` — malformed activation is rejected even when omitted
+activation would have been accepted.
+
 ## Initial configuration
 
 ### Mode A — supported today
@@ -161,9 +197,28 @@ only below:
 
 `working/{REQ-TOKEN}/adversarial-inquiry/`
 
-The four stable artifacts are `obligation-report.json`,
-`finding-ledger.jsonl`, `gate-result.json`, and
-`evidence-provenance.json`. Snapshot files are atomically replaced, the
+When `activation.phase` is present on `tied_adversarial_inquiry_run`, the
+**authoritative** four artifacts are written under:
+
+`working/{REQ-TOKEN}/adversarial-inquiry/phase-{phase}/`
+
+where `{phase}` is one of `pre_implementation`, `verification`, or
+`close_out`. Each inquiry phase gets its own directory; later phases do not
+overwrite earlier ones. Receipts and `activation.artifacts` paths reference
+only that phase directory.
+
+The four files at the adversarial-inquiry **root**
+(`obligation-report.json`, `finding-ledger.jsonl`, `gate-result.json`,
+`evidence-provenance.json`) are a **latest/close-out convenience projection**
+only. They are copied from the most recent phase-scoped run and must **never**
+be used to satisfy another phase's gate pairing. Integrated activation gates
+reject artifact paths that point at the root projection or at a sibling
+`phase-{other}/` directory.
+
+When no `activation.phase` is supplied, persistence continues to use the root
+directory directly (legacy and non-integrated paths).
+
+Snapshot files in the authoritative directory are atomically replaced, the
 finding ledger is append-only with deterministic duplicate links, sensitive
 values are redacted, and canonical TIED YAML remains byte-for-byte unchanged.
 

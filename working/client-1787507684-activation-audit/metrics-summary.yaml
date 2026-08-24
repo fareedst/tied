@@ -1,0 +1,28 @@
+summary:
+  activation:
+    artifact_status:
+      evidence_provenance: "missing"
+      finding_ledger: "missing"
+      gate_result: "missing"
+      obligation_report: "missing"
+    by_client:
+      "1787507684": 0
+    inquiry_call_count: 0
+    request_token_counts: {}
+  client_counts:
+    "1787507684": 7
+  comparison_to_pilot_1787461685:
+    inquiry_call_count: 0
+    metrics_rows: 85
+    note: "1787507684 has 8.2% of pilot MCP row volume; both show inquiry_call_count 0"
+  fail_count: 0
+  failures: []
+  files: 1
+  lines: 7
+  ok_count: 7
+  parse_errors: 0
+  schema_errors: 0
+  tool_counts:
+    tied_checklist_gate_validate: 1
+    tied_config_get_base_path: 4
+    tied_validate_consistency: 2

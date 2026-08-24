@@ -1,0 +1,107 @@
+CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-slice0:
+  change_definition:
+    current_behavior: "Placeholder waiver values (~, empty string) pass hasValidCloseOutInquiryWaiver and hasDepthChangeWaiver; validateActivationPairing requires hand-authored activation.expected; minimal depth allows sub-adversarial-inquiry-pass to stay pending; integrated depth does not detect parent completed with sub-stub pending."
+    desired_behavior: "Reject placeholder waivers; derive activation.expected from a complete receipt when omitted; require minimal sub-stub not_applicable or waived; fail integrated parent-child slug inconsistency; CITDP template uses null/omit for unused waivers."
+    non_goals:
+      - "Go Mode B adapter or prompt alignment"
+      - "Re-specify Batch 2 Slice 1 enforcement core"
+      - "Slice P phase-scoped artifact persistence"
+      - "tied_checklist_activation_collect collector"
+    success_criteria:
+      - "REGRESSION: Batch 2 Slice 1 tests remain green."
+      - "SLICE 0.1: CITDP with owner ~ close_out_inquiry_waiver does not bypass pairing."
+      - "SLICE 0.2: Gate accepts complete receipt+artifacts without hand-authored expected."
+      - "SLICE 0.3: Minimal pending sub-stub fails with pending_required_step:sub-adversarial-inquiry-pass."
+      - "SLICE 0.4: Integrated completed parent + pending sub-stub fails."
+      - "SLICE 0.5: citdp-record-template.yaml uses null for unused waivers."
+    unchanged_behavior:
+      - "Advisory gate_policy remains non-blocking after valid evidence."
+      - "Batch 1 pairing-when-supplied unchanged when expected is supplied."
+  completion_criteria:
+    activation:
+      artifact_hashes:
+        evidence-provenance.json: "0070d13e4d6731e72e773627f7260e9b8fc52141fc74af85dbc7fd3a6417d5c5"
+        finding-ledger.jsonl: "c189e0273bb85234f7fd10b1a8a18fc6c6acd5f444e37b827941c4a5a46b1044"
+        gate-result.json: "1bbb11dffabb515ede494338dbe0082c107f51e68270c8103147f8ab2b7d494b"
+        obligation-report.json: "de5cd1ebd31f55e3e3836428d952388f30dff605ece23dcfd8f41b5af41bb232"
+      phase: "close_out"
+      project_id: "stdd"
+      request_token: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      run_id: "batch2-slice1-close-out-20260823"
+      scope:
+        - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#069e46c522c9b57d"
+      scope_hash: "e4e605e35f2b85e36e8bb7641a8d81cec946122e9764bb537348b8eca0842bef"
+    checklist_gate:
+      dispositions:
+        - "completed"
+        - "not_applicable"
+        - "pending"
+        - "waived"
+      fail_closed: true
+      phases:
+        - "close_out"
+        - "pre_implementation"
+        - "verification"
+    focused_tests: "checklist-validator Slice 0 + Batch 2 Slice 1 matrix; checklist-gate-mcp receipt-only test."
+    lint: "bunx tsc -b passes for mcp-server"
+    persist_policy: "persist to tied/citdp/ after Slice 0 implementation"
+    verification: "tied_validate_consistency after canonical updates"
+  impact_analysis:
+    audited_project_mutation: "checklist-validator.ts, IMPL pseudo-code, citdp template, citdp-policy.md, fidelity-research vocab"
+    files:
+      - "docs/integrated-activation-enforcement-operator-friction-plan.md"
+      - "mcp-server/src/checklist-validator.test.ts"
+      - "mcp-server/src/checklist-validator.ts"
+      - "mcp-server/src/tools/checklist-gate-mcp.test.ts"
+      - "tied/docs/citdp-policy.md"
+      - "tied/docs/citdp-record-template.yaml"
+      - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+      - "tied/vocab/fidelity-research.md"
+    modules:
+      - "checklist_gate_validator"
+    tags:
+      - "adversarial-inquiry"
+      - "checklist-enforcement"
+      - "validator-hotfix"
+  leap_feedback:
+    divergences_from_analysis:
+      - "Exported deriveExpectedFromReceipt and validateIntegratedParentChildSlugs for unit-test isolation."
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    author: "build-plan subagent"
+    batch: "batch2-slice0-validator-hotfixes"
+    change_request_id: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    date: "2026-08-24"
+    record_status: "complete"
+    slice: 0
+    title: "Batch 2 Slice 0 — checklist gate validator hotfixes"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Gate payload omits expected but receipt is incomplete and derivation silently passes"
+        - "Integrated tracker marks gate-pseudocode-validation completed while sub-stub stays pending"
+        - "Minimal checklist keeps sub-adversarial-inquiry-pass pending behind completed parents"
+        - "Operator leaves close_out_inquiry_waiver owner as tilde and expects close_out to pass without pairing"
+      depth_selected_at: "2026-08-24T00:00:00Z"
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "checklist-validator Slice 0 hotfix matrix passes (26 tests including Batch 2 Slice 1 regression)"
+        - "Placeholder waiver, receipt-only expected derive, minimal pending sub-stub, and parent-child consistency tests green"
+      evidence_references:
+        - "mcp-server/src/checklist-validator.test.ts"
+        - "mcp-server/src/tools/checklist-gate-mcp.test.ts"
+        - "working/client-1787507684-activation-audit/findings-report.yaml"
+      falsification_questions:
+        - "Can a tilde close_out_inquiry_waiver still bypass integrated pairing?"
+        - "Can minimal depth close with pending sub-adversarial-inquiry-pass?"
+        - "Does missing scope_hash on receipt still derive expected?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      research_profile: "integrated-agent"
+    quality_evidence_matrix: []
+  tdd_sequence:
+    summary: "RED Slice 0 tests → GREEN validator → MCP composition → verification gate."

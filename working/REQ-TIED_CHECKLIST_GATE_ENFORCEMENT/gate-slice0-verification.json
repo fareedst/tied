@@ -1,0 +1,10 @@
+{
+  "allowed": false,
+  "ok": false,
+  "blocking": true,
+  "depth": "integrated",
+  "diagnostics": [
+    "missing_completion_activation",
+    "integrated_depth_requires_pairing"
+  ]
+}

@@ -48,6 +48,7 @@ export type ArtifactPaths = {
 export type PersistWorkingArtifactsInput = {
   repositoryRoot: string;
   requestToken: string;
+  phase?: InquiryActivation["phase"];
   report: ReadOnlyReport;
   ledger: FindingLedger;
   gate: ScopedGateResult;
@@ -88,6 +89,7 @@ export type InquiryActivationArtifacts = Record<string, {
   phase: InquiryActivation["phase"];
   scope_hash: string;
   hash: string;
+  path?: string;
 }>;
 
 export type ChecklistInquiryInput = AdversarialInquiryInput & {
@@ -207,6 +209,7 @@ export function evaluateScopedGate(input: {
 export function resolveArtifactPaths(input: {
   repositoryRoot: string;
   requestToken: string;
+  phase?: InquiryActivation["phase"];
   artifactRoot?: string;
 }): ArtifactPaths {
   const requestToken = input.requestToken.trim();
@@ -214,10 +217,13 @@ export function resolveArtifactPaths(input: {
     throw new Error(`INVALID_SCOPE: invalid request token ${input.requestToken}`);
   }
   const repositoryRoot = path.resolve(input.repositoryRoot);
-  const expected = path.join(repositoryRoot, "working", requestToken, "adversarial-inquiry");
-  const directory = path.resolve(input.artifactRoot ?? expected);
+  const inquiryRoot = path.join(repositoryRoot, "working", requestToken, "adversarial-inquiry");
+  const directory = path.resolve(
+    input.artifactRoot
+      ?? (input.phase ? path.join(inquiryRoot, `phase-${input.phase}`) : inquiryRoot),
+  );
   const workingRoot = path.join(repositoryRoot, "working");
-  if (!isWithin(workingRoot, directory) || directory !== expected && input.artifactRoot === undefined) {
+  if (!isWithin(workingRoot, directory) || !isWithin(inquiryRoot, directory)) {
     throw new Error(`UNSAFE_ARTIFACT_PATH: ${directory}`);
   }
   return {
@@ -227,6 +233,22 @@ export function resolveArtifactPaths(input: {
     gateResult: path.join(directory, "gate-result.json"),
     evidenceProvenance: path.join(directory, "evidence-provenance.json"),
   };
+}
+
+export function relativeArtifactPath(repositoryRoot: string, filePath: string): string {
+  return path.relative(path.resolve(repositoryRoot), path.resolve(filePath)).split(path.sep).join("/");
+}
+
+async function projectArtifactsToRoot(
+  repositoryRoot: string,
+  requestToken: string,
+  phasePaths: ArtifactPaths,
+): Promise<void> {
+  const rootPaths = resolveArtifactPaths({ repositoryRoot, requestToken });
+  await fs.mkdir(rootPaths.directory, { recursive: true, mode: 0o700 });
+  for (const key of ["obligationReport", "findingLedger", "gateResult", "evidenceProvenance"] as const) {
+    await fs.copyFile(phasePaths[key], rootPaths[key]);
+  }
 }
 
 function redactValue(value: unknown, secrets: readonly string[]): unknown {
@@ -326,6 +348,14 @@ export async function persistWorkingArtifacts(
     provenance: input.provenance,
   }, secrets));
   await appendLedger(paths.findingLedger, input.ledger);
+  try {
+    await fs.access(paths.findingLedger);
+  } catch {
+    await fs.writeFile(paths.findingLedger, "", { encoding: "utf8", mode: 0o600 });
+  }
+  if (input.phase) {
+    await projectArtifactsToRoot(input.repositoryRoot, input.requestToken, paths);
+  }
   return paths;
 }
 
@@ -371,6 +401,7 @@ export async function runChecklistInquiry(input: ChecklistInquiryInput): Promise
   const artifacts = await persistWorkingArtifacts({
     repositoryRoot: input.repositoryRoot,
     requestToken: input.requestToken,
+    phase: input.activation?.phase,
     report: result.report,
     ledger,
     gate,
@@ -404,6 +435,7 @@ export async function runChecklistInquiry(input: ChecklistInquiryInput): Promise
       phase: input.activation.phase,
       scope_hash: scopeHash,
       hash: hashes[name],
+      path: relativeArtifactPath(input.repositoryRoot, filePath),
     };
   }
   return {

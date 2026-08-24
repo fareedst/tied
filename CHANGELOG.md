@@ -9,6 +9,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **CITDP depth upgrade path (Slice U)** —
+  `[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]` / `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]`:
+  `validateCitdpOpenRecord` separates open-record persistence from progression
+  gate pairing; `citdp_record_write` allows `integrated` depth with activation
+  omitted pre-inquiry, requires `prior_depth_tier: minimal` when upgrading from
+  on-disk minimal, preserves `prior_depth_tier` on overwrite, and rejects
+  partial supplied activation; verification/close_out gates unchanged. Docs:
+  `docs/adversarial-inquiry-adoption.md` § Depth upgrade path. CITDP:
+  `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-sliceU`.
+
+- **Phase-scoped adversarial-inquiry artifact persistence (Slice P)** —
+  `[REQ-TIED_ADVERSARIAL_INQUIRY]` / `[IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST]` /
+  `[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]`: when `activation.phase` is present,
+  `persistWorkingArtifacts` writes authoritative artifacts under
+  `working/{REQ}/adversarial-inquiry/phase-{phase}/`, projects latest snapshots
+  to the root for close-out convenience only, and `validateActivationPairing`
+  rejects cross-phase and root-projection artifact paths. CITDP:
+  `CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-sliceP`.
+
+- **Checklist gate validator hotfixes (Batch 2 Slice 0)** —
+  `[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]` / `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]`:
+  reject placeholder waiver values (`~`, empty, null); derive
+  `activation.expected` from a complete receipt when omitted; require minimal
+  sub-stub disposition (`not_applicable` or `waived`, not `pending`); enforce
+  integrated parent–child slug consistency when parent steps are completed while
+  `sub-adversarial-inquiry-pass` remains pending. CITDP:
+  `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-slice0`.
+
+- **Integrated activation audit findings** — records the minimal-tier evidence,
+  checklist-integrity findings, and operator-friction follow-ups for client
+  `1787507684`; makes no integrated activation claim.
+
 - **Integrated activation checklist enforcement (Batch 2 Slice 1)** —
   `[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]` / `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]`:
   `validateChecklistGate` now auto-derives phase-aware Tracker slug sets at

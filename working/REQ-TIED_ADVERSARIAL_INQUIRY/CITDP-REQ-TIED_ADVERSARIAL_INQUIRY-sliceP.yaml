@@ -1,0 +1,106 @@
+CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-sliceP:
+  change_definition:
+    current_behavior: "persistWorkingArtifacts and resolveArtifactPaths always write the four bounded artifacts to working/{REQ}/adversarial-inquiry/ root, overwriting prior inquiry runs; activation receipts omit authoritative phase paths; validateActivationPairing cannot reject cross-phase or root-projection artifact paths."
+    desired_behavior: "When activation.phase is present, authoritative artifacts persist under working/{REQ}/adversarial-inquiry/phase-{phase}/ without overwriting sibling phases; optional root projection is convenience-only; receipts and activation.artifacts reference phase-directory paths; gate pairing rejects cross-phase and root-projection paths."
+    non_goals:
+      - "Metrics, Go adapter, or prompt alignment follow-ons"
+      - "Slice U CITDP depth upgrade path"
+      - "tied_checklist_activation_collect collector (parent Batch 2 Slice 2)"
+    success_criteria:
+      - "REGRESSION: Batch 2 Slice 0/1 validator and integration tests remain green."
+      - "SLICE P.1: Three inquiry phases persist to three isolated phase-{phase}/ directories with stable pairing hashes per phase."
+      - "SLICE P.2: Gate pairing matches on-disk phase paths and rejects cross-phase and root-projection paths."
+      - "SLICE P.3: adversarial-inquiry-adoption.md documents phase directory layout and root projection policy."
+    unchanged_behavior:
+      - "Advisory gate_policy remains non-blocking after valid evidence."
+      - "Pairing without artifact path fields remains valid for legacy fixtures that omit paths."
+      - "Persistence without activation.phase continues to use the adversarial-inquiry root directory."
+  completion_criteria:
+    activation:
+      artifact_hashes:
+        evidence-provenance.json: "b527c4cd3725469eaa712fefed5815dd714d631e1d10daaaa245b2d07294e666"
+        finding-ledger.jsonl: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        gate-result.json: "6c5914f7c7547544b8d936c043f06bbf2582f8424c7f7bc7a4f2c9d1819f83bb"
+        obligation-report.json: "1effe5142d170ff32b71724ecd238860807a448be9f51bacd1982be8a3aee9e2"
+      phase: "close_out"
+      project_id: "stdd"
+      request_token: "REQ-TIED_ADVERSARIAL_INQUIRY"
+      run_id: "sliceP-close-out-20260824"
+      scope:
+        - "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST#PERSIST_WORKING_ARTIFACTS#closeout"
+      scope_hash: "e873d6bf7fea36fd64e92125217a9115ea4dec0defbb7c59f0f822e7d04acc3a"
+    checklist_gate:
+      dispositions:
+        - "completed"
+        - "not_applicable"
+        - "pending"
+        - "waived"
+      fail_closed: true
+      phases:
+        - "close_out"
+        - "pre_implementation"
+        - "verification"
+    focused_tests: "checklist-integration phase isolation tests; checklist-validator cross-phase path rejection; Batch 2 Slice 0/1 regression."
+    lint: "npm run build --prefix mcp-server passes"
+    persist_policy: "persisted to tied/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-sliceP.yaml"
+    verification: "tied_validate_consistency passed after canonical updates"
+  impact_analysis:
+    audited_project_mutation: "checklist-integration.ts, checklist-validator.ts, IMPL pseudo-code, adoption doc, fidelity-research vocab"
+    files:
+      - "docs/adversarial-inquiry-adoption.md"
+      - "docs/integrated-activation-enforcement-operator-friction-plan.md"
+      - "mcp-server/src/adversarial-inquiry/checklist-integration.test.ts"
+      - "mcp-server/src/adversarial-inquiry/checklist-integration.ts"
+      - "mcp-server/src/checklist-validator.test.ts"
+      - "mcp-server/src/checklist-validator.ts"
+      - "tied/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST-pseudocode.md"
+      - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+      - "tied/vocab/fidelity-research.md"
+    modules:
+      - "adversarial_inquiry_checklist_integration"
+      - "checklist_gate_validator"
+    tags:
+      - "adversarial-inquiry"
+      - "artifact-persistence"
+      - "integrated-activation"
+  leap_feedback:
+    divergences_from_analysis:
+      - "Ensures empty finding-ledger.jsonl exists before root projection copy."
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    author: "build-plan subagent"
+    batch: "operator-friction-sliceP"
+    change_request_id: "REQ-TIED_ADVERSARIAL_INQUIRY"
+    date: "2026-08-24"
+    record_status: "complete"
+    slice: "P"
+    title: "Follow-on Slice P — phase-scoped artifact persistence"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Operator manually snapshots phase-{phase}/ because persistence overwrites canonical root each run"
+        - "Second inquiry phase overwrites first phase directory because phase is ignored in path resolution"
+        - "Verification gate passes using pre_implementation artifact paths copied from root projection"
+      depth_selected_at: "2026-08-24T00:00:00Z"
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "Three phases with the same request_token produce distinct directories and stable hashes"
+        - "validateActivationPairing rejects verification receipt with pre_implementation phase paths and root projection paths"
+      evidence_references:
+        - "docs/integrated-activation-enforcement-operator-friction-plan.md"
+        - "mcp-server/src/adversarial-inquiry/checklist-integration.test.ts"
+        - "mcp-server/src/checklist-validator.test.ts"
+        - "working/REQ-TIED_ADVERSARIAL_INQUIRY/gate-sliceP-verification.json"
+      falsification_questions:
+        - "Can integrated pairing succeed using root-projected artifact paths?"
+        - "Does a close_out run overwrite verification phase artifacts?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      research_profile: "integrated-agent"
+    quality_evidence_matrix: []
+  tdd_sequence:
+    summary: "LEAP pseudo-code → RED phase isolation and cross-phase path tests → GREEN persistence and pairing → regression → verification gate."
