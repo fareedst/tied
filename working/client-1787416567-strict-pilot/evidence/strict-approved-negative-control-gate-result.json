@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "adversarial-inquiry-gate.v1",
+  "policy": "strict-approved",
+  "scope": [
+    "IMPL-VOLUMESTATS-CLI#RUN_VOLUMESTATS"
+  ],
+  "status": "warn",
+  "blocking": false,
+  "verdict": "UNRESOLVED",
+  "diagnostics": [
+    "missing_human_approval"
+  ],
+  "proofBoundary": "human_decision"
+}

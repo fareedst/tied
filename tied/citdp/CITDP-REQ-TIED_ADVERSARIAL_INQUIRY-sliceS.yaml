@@ -1,0 +1,144 @@
+CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-sliceS:
+  change_definition:
+    current_behavior: "strict-approved blocking is implemented in evaluateScopedGate and validateStrictEligibility but has not been piloted on a live client with recorded human approval and scoped blocking evidence."
+    desired_behavior: "One live client pilot (1787416567 / REQ-VOLUMESTATS-CLI) records strict-candidate promotion to strict-approved with sponsor human approval, negative controls, proof boundaries, and integrated activation alongside blocking:true gate-result evidence when eligibility and approval pass."
+    non_goals:
+      - "Native Go Mode B adapter (Build-plan 3)"
+      - "Retroactive strict upgrade of minimal-only clients"
+      - "Third client duplicate stack proof (Part H)"
+      - "Universal strict-approved on all REQs"
+    success_criteria:
+      - "REGRESSION: existing validateStrictEligibility and checklist-integration strict tests remain green."
+      - "SLICE S.1: CITDP records gate_policy strict-candidate at risk-assessment with promotion path to strict-approved."
+      - "SLICE S.2: Live pilot produces blocking:true in gate-result.json when strict-approved, eligibility, and human approval align."
+      - "SLICE S.3: Negative control — strict-approved without human approval does not block."
+      - "SLICE S.4: integrated_activation_complete:true alongside strict evidence on pilot client."
+      - "SLICE S.5: activation recommendation §P2 updated to reflect strict pilots shipped or limitations."
+    unchanged_behavior:
+      - "Advisory and strict-candidate policies remain warn-only at evaluateScopedGate."
+      - "Canonical TIED YAML is not mutated by inquiry."
+      - "Observed findings remain review-gated and do not trigger LEAP."
+  completion_criteria:
+    activation:
+      artifact_hashes:
+        evidence-provenance.json: "72fb59c06ad8b6b402e7e8c8e967b365b2bd9ff3da4d8dd1a283421acf323297"
+        finding-ledger.jsonl: "0959a08201201b5a851d41f94680aab177931d190c4a9eb18581665fc73930ac"
+        gate-result.json: "4119887d893affad19da7f58874458527d1591b297249763f765a2eff8fdcc60"
+        obligation-report.json: "d5f17d8f211cfbf2309fa84420e5b6aa738512da31975da09addb83bbd8ffc83"
+      phase: "close_out"
+      project_id: "stdd"
+      request_token: "REQ-TIED_ADVERSARIAL_INQUIRY"
+      run_id: "sliceS-close-001"
+      scope:
+        - "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de"
+      scope_hash: "1c9407f4fbc09e3d76f8e381d8042f8e4d2ed7ab7574c07c18bdbe822591bc62"
+    checklist_gate:
+      dispositions:
+        - "completed"
+        - "not_applicable"
+        - "pending"
+        - "waived"
+      fail_closed: true
+      phases:
+        - "close_out"
+        - "pre_implementation"
+        - "verification"
+    focused_tests: "checklist-integration strict approval tests; pilot.test.ts calibratePilot; npm test --prefix mcp-server"
+    lint: "npm test --prefix mcp-server passes"
+    persist_policy: "persisted to tied/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-sliceS.yaml"
+    verification: "tied_validate_consistency passed after persist"
+  impact_analysis:
+    audited_project_mutation: "runbook, CITDP, activation recommendation doc; no new semantic gate rules without LEAP"
+    files:
+      - "docs/adversarial-inquiry-activation-recommendation.md"
+      - "tied/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-sliceS.yaml"
+      - "working/client-1787416567-strict-pilot/replay-strict-approved-pilot.sh"
+      - "working/REQ-TIED_ADVERSARIAL_INQUIRY/REQ-TIED_ADVERSARIAL_INQUIRY_sliceS_tracker.yaml"
+    modules:
+      - "adversarial_inquiry_checklist_integration"
+      - "strict_eligibility_and_human_approval"
+    tags:
+      - "adversarial-inquiry"
+      - "integrated-activation"
+      - "strict-approved-pilot"
+  leap_feedback:
+    divergences_from_analysis: []
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    author: "build-plan subagent"
+    batch: "outstanding-work-build-plan-2"
+    change_request_id: "REQ-TIED_ADVERSARIAL_INQUIRY"
+    date: "2026-08-24"
+    record_status: "complete"
+    slice: "S"
+    title: "Slice S — strict-approved live client pilots"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Operator enables strict-approved globally without human approval record"
+        - "Pilot claims strict activation from checklist text alone without gate-result blocking:true"
+        - "Strict blocking fires without negative-control evidence"
+      depth_selected_at: "2026-08-24T00:00:00Z"
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "integrated_activation_complete:true on pilot client with phase dirs and metrics pairing"
+        - "Negative-control inquiry shows blocking:false with missing_human_approval diagnostic"
+        - "Recorded gate-result.json shows blocking:true only when eligibility and sponsor approval pass"
+      evidence_references:
+        - "docs/outstanding-work-prioritized-plan.md Build-plan 2"
+        - "mcp-server/src/adversarial-inquiry/checklist-integration.test.ts"
+        - "working/client-1787416567-strict-pilot/evidence/strict-approved-blocking-gate-result.json"
+        - "working/client-1787416567-strict-pilot/evidence/strict-approved-negative-control-gate-result.json"
+      falsification_questions:
+        - "Can strict-approved block without recorded human approval?"
+        - "Does strict-candidate ever set blocking:true?"
+      gate_policy: "strict-candidate"
+      gate_policy_promotion:
+        from: "strict-candidate"
+        requires:
+          - "calibratePilot eligibleForStrict"
+          - "human approval covering exact scope"
+          - "live pilot gate-result blocking:true with approval metadata"
+          - "validateStrictEligibility eligible"
+        to: "strict-approved"
+      human_approval:
+        approval_revision: "sliceS-rev-1"
+        citdp_record: "CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-sliceS"
+        owner: "sponsor"
+        reviewer: "sponsor"
+        rollback_criteria: "Disable strict-approved when pilot window expires or two consecutive budget breaches occur."
+        thresholds:
+          precision: 0.9
+          reviewerAgreement: 0.8
+      integrated_waiver:
+        approval: "sponsor confirmed 30-day strict-approved pilot window for client 1787416567"
+        expiry: "2026-09-30"
+        owner: "sponsor"
+        reason: "Methodology maintainer default — no explicit sponsor input; 30-day pilot window from build date"
+      negative_controls:
+        - "strict-approved without human_approval → blocking:false, missing_human_approval diagnostic"
+        - "strict-candidate with UNRESOLVED verdict → blocking:false"
+      pilot_client:
+        project_id: "1787416567"
+        project_root: "/Users/fareed/Documents/dev/test/1787416567"
+        request_token: "REQ-VOLUMESTATS-CLI"
+      prior_depth_tier: null
+      proof_boundaries:
+        - "human_decision"
+        - "semantic_fidelity"
+      research_profile: "integrated-agent"
+      strict_eligibility_prerequisites:
+        - "deterministic_scope"
+        - "explicit_proof_boundaries"
+        - "negative_controls_detected"
+        - "representative_pilot"
+        - "waiver_support"
+    quality_evidence_matrix: []
+  tdd_sequence:
+    summary: "Existing unit/composition tests cover gate semantics; live pilot records gate JSON; LEAP only if pilot exposes confirmed gap."
+  test_strategy:
+    matrix_notes: "No new semantic rules without LEAP; extend pilot.test.ts or checklist-integration only on confirmed gap."
+    summary: "Unit: validateStrictEligibility + approval negative controls. Composition: eligibility + approval → blocking:true. Pilot: recorded gate JSON with human approval metadata. Metrics: integrated_activation_complete alongside strict evidence."

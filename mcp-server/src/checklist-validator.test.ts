@@ -4,10 +4,12 @@ import { describe, it } from "node:test";
 import {
   deriveExpectedFromReceipt,
   derivePhaseAwareSlugs,
+  MINIMAL_DEPTH_MISSING_WAIVER,
   validateActivationPairing,
   validateChecklistGate,
   validateDepthDowngrade,
   validateIntegratedParentChildSlugs,
+  validateMinimalWaiver,
   validateTracker,
   stableHash,
   type ActivationExpectedIdentity,
@@ -658,5 +660,100 @@ describe("VALIDATE_CHECKLIST_GATE Slice 0 hotfixes [REQ-TIED_CHECKLIST_GATE_ENFO
     });
     assert.equal(downgrade.ok, false);
     assert.ok(downgrade.diagnostics.includes("depth_downgrade_requires_waiver"));
+  });
+});
+
+// [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: warn-only minimal_depth_missing_waiver for triggered minimal depth without integrated_waiver (Slice A3).
+describe("VALIDATE_MINIMAL_WAIVER Slice A3 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]", () => {
+  it("warns when triggered minimal depth lacks integrated_waiver", () => {
+    const result = validateChecklistGate({
+      phase: "pre_implementation",
+      tracker: minimalTracker(),
+      citdp: minimalCitdp({
+        gate_policy: "advisory",
+        eligibility_triggers_matched: ["external-input", "network"],
+      }),
+    });
+    assert.equal(result.allowed, true);
+    assert.equal(result.blocking, false);
+    assert.ok(result.diagnostics.includes(MINIMAL_DEPTH_MISSING_WAIVER));
+  });
+
+  it("is clean when triggered minimal depth has complete integrated_waiver", () => {
+    const result = validateChecklistGate({
+      phase: "pre_implementation",
+      tracker: minimalTracker(),
+      citdp: minimalCitdp({
+        gate_policy: "advisory",
+        eligibility_triggers_matched: ["persistence"],
+        integrated_waiver: {
+          owner: "sponsor",
+          expiry: "2099-01-01",
+          rationale: "Local read-only CLI; integrated inquiry not required.",
+          approval: "plan-refine",
+        },
+      }),
+    });
+    assert.equal(result.allowed, true);
+    assert.ok(!result.diagnostics.includes(MINIMAL_DEPTH_MISSING_WAIVER));
+  });
+
+  it("does not warn for non-triggered minimal depth", () => {
+    const result = validateChecklistGate({
+      phase: "pre_implementation",
+      tracker: minimalTracker(),
+      citdp: minimalCitdp({
+        gate_policy: "advisory",
+        eligibility_triggers_matched: [],
+      }),
+    });
+    assert.equal(result.allowed, true);
+    assert.ok(!result.diagnostics.includes(MINIMAL_DEPTH_MISSING_WAIVER));
+  });
+
+  it("does not warn for integrated depth even when triggers are recorded", () => {
+    const result = validateChecklistGate({
+      phase: "pre_implementation",
+      tracker: integratedTracker("pre_implementation"),
+      citdp: integratedCitdp({
+        eligibility_triggers_matched: ["network"],
+        integrated_waiver: null,
+      }),
+      activation: buildActivation("pre_implementation", "pre-impl-run-a3"),
+    });
+    assert.ok(!result.diagnostics.includes(MINIMAL_DEPTH_MISSING_WAIVER));
+  });
+
+  it("validateMinimalWaiver isolates advisory diagnostic semantics", () => {
+    const warned = validateMinimalWaiver({
+      citdp: {
+        risk_analysis: {
+          adversarial_inquiry: {
+            depth_tier: "minimal",
+            eligibility_triggers_matched: ["auth"],
+          },
+        },
+      },
+    });
+    assert.equal(warned.ok, false);
+    assert.deepEqual(warned.diagnostics, [MINIMAL_DEPTH_MISSING_WAIVER]);
+
+    const clean = validateMinimalWaiver({
+      citdp: {
+        risk_analysis: {
+          adversarial_inquiry: {
+            depth_tier: "minimal",
+            eligibility_triggers_matched: ["auth"],
+            integrated_waiver: {
+              owner: "sponsor",
+              expiry: "2099-01-01",
+              rationale: "Sponsor confirmed minimal.",
+              approval: "approved",
+            },
+          },
+        },
+      },
+    });
+    assert.equal(clean.ok, true);
   });
 });

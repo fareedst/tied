@@ -75,6 +75,21 @@ procedure DERIVE_PHASE_AWARE_SLUGS(depth, phase):
   IF depth is strict_candidate AND phase is verification or close_out: RETURN INTEGRATED_REQUIRED_SLUGS[phase]
   RETURN empty slug list
 
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: emit warn-only minimal_depth_missing_waiver when §7 eligibility triggers match, depth_tier is minimal, and integrated_waiver is incomplete.
+procedure VALIDATE_MINIMAL_WAIVER(citdp):
+  Contract:
+  INPUT: citdp
+  PRE: citdp may include risk_analysis.adversarial_inquiry and eligibility_triggers_matched recorded at risk-assessment
+  OUTPUT: validation result with diagnostics
+  POST: when eligibility_triggers_matched is non-empty, depth_tier is minimal, and integrated_waiver lacks owner, expiry, rationale, and approval, append minimal_depth_missing_waiver; when triggers empty, waiver complete, or depth is integrated or strict_candidate, no diagnostic; diagnostic is warn-only and does not fail allowed under gate_policy advisory
+  FAILURE_MODES: minimal_depth_missing_waiver
+  EFFECTS: pure
+  TERMINATION: total
+  IF depth_tier is not minimal: RETURN success
+  IF eligibility_triggers_matched is empty: RETURN success
+  IF integrated_waiver has owner, expiry, rationale, and approval: RETURN success
+  RETURN advisory diagnostic minimal_depth_missing_waiver
+
 # [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: reject silent downgrade from integrated or strict_candidate to minimal without waiver.
 procedure VALIDATE_DEPTH_DOWNGRADE(citdp, prior_depth_tier):
   Contract:
@@ -211,8 +226,11 @@ procedure VALIDATE_CHECKLIST_GATE(input): # [IMPL-TIED_CHECKLIST_GATE_ENFORCEMEN
   citdpResult := VALIDATE_ADVERSARIAL_CONTRACT(input.citdp, input.phase)
   IF depth requires integrated pairing AND close_out inquiry waiver does not apply AND activation is missing: append integrated_depth_requires_pairing
   IF depth requires integrated pairing AND activation is present: VALIDATE_ACTIVATION_PAIRING with expected
-  IF any result fails: RETURN blocked diagnostics
-  RETURN allowed result
+  minimalWaiverResult := VALIDATE_MINIMAL_WAIVER(citdp)
+  blockingDiagnostics := union of all blocking results above
+  advisoryDiagnostics := minimalWaiverResult warn-only codes
+  IF blockingDiagnostics non-empty: RETURN blocked with union(blockingDiagnostics, advisoryDiagnostics)
+  RETURN allowed with advisoryDiagnostics only when present
 
 # [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: read persisted phase artifacts and assemble gate activation payload without writing artifacts or mutating CITDP.
 procedure COLLECT_CHECKLIST_ACTIVATION(input):

@@ -1,12 +1,14 @@
 {
   "blocking": false,
-  "diagnostics": [],
-  "policy": "advisory",
+  "diagnostics": [
+    "strict_candidate_requires_human_approval"
+  ],
+  "policy": "strict-candidate",
   "proofBoundary": "human_decision",
   "schemaVersion": "adversarial-inquiry-gate.v1",
   "scope": [
-    "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST#PERSIST_WORKING_ARTIFACTS#closeout"
+    "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de"
   ],
   "status": "warn",
-  "verdict": "UNRESOLVED"
+  "verdict": "UNRELIABLE"
 }

@@ -1,0 +1,110 @@
+copy_hygiene: "Slice A3 tracker — minimal_depth_missing_waiver warn diagnostic. Sibling to shipped sliceA; do not inherit batch2 close-out gate claims."
+description: "Per-request Tracker for Batch 2 Slice A3 — warn-only minimal waiver diagnostic when eligibility triggers match minimal depth without integrated_waiver."
+execution_evidence:
+  close_out_evidence:
+    date: "2026-08-24"
+    deferred: []
+    gates:
+      close_out:
+        allowed: true
+        blocking: false
+        depth: "minimal"
+        disposition: "completed"
+        evidence_refs:
+          - "mcp-server/src/checklist-validator.test.ts"
+          - "tied/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-sliceA3.yaml"
+          - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-sliceA3-close_out.json"
+        phase: "close_out"
+      pre_implementation:
+        allowed: true
+        blocking: false
+        evidence_refs:
+          - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-sliceA3-pre_implementation.json"
+        phase: "pre_implementation"
+      verification:
+        allowed: true
+        blocking: false
+        evidence_refs:
+          - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-sliceA3-verification.json"
+        phase: "verification"
+    master_checklist: "tied/docs/agent-req-implementation-checklist.yaml"
+  completed:
+    - "change-definition"
+    - "gate-pseudocode-validation"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "translate-sponsor-intent"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "traceable-commit"
+    - "verification-gate"
+  operator_evidence:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    slice: "batch2-sliceA3"
+    status: "complete"
+  request: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+impact_analysis:
+  modules_or_boundaries: "checklist-validator minimal waiver diagnostic, CITDP eligibility_triggers_matched field, parent plan §4/§11 reconciliation."
+  tied_tokens_affected:
+    - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+record_identity:
+  batch: "batch2-sliceA3"
+  change_request_id: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+  record_status: "complete"
+  recorded_at: "2026-08-24"
+  refine_pass: 0
+  title: "Batch 2 Slice A3 — minimal_depth_missing_waiver warn diagnostic"
+risk_analysis:
+  adversarial_inquiry:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "AGENTS.md"
+      - "tied/vocab/fidelity-research.md"
+      - "tied/vocab/prompt-composer.md"
+      - "tied/vocab/quality-assurance.md"
+    slug: "session-bootstrap"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/outstanding-work-prioritized-plan.md"
+    slug: "translate-sponsor-intent"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT_sliceA3_tracker.yaml"
+    slug: "change-definition"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-sliceA3.yaml"
+    slug: "risk-assessment"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+    slug: "gate-pseudocode-validation"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/checklist-validator.test.ts"
+    slug: "unit-test-red"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/checklist-validator.test.ts"
+    slug: "unit-test-green"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-sliceA3-verification.json"
+      - "tied_validate_consistency"
+    slug: "verification-gate"
+  - disposition: "not_applicable"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Slice A3 validator diagnostic at minimal depth; no tied_adversarial_inquiry_run."
+    slug: "sub-adversarial-inquiry-pass"
+  - disposition: "completed"
+    evidence_refs:
+      - "CHANGELOG.md"
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-sliceA3-close_out.json"
+    slug: "traceable-commit"

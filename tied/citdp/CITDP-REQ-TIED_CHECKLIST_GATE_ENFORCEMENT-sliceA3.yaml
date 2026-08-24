@@ -1,0 +1,99 @@
+CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-sliceA3:
+  change_definition:
+    current_behavior: "Integrated enforcement shipped, but the validator does not emit a warn-only diagnostic when depth_tier minimal is selected for §7-eligible work without a documented integrated_waiver."
+    desired_behavior: "When eligibility_triggers_matched is non-empty at risk-assessment, depth_tier is minimal, and integrated_waiver is incomplete, tied_checklist_gate_validate emits minimal_depth_missing_waiver without fail-closed blocking under gate_policy advisory."
+    non_goals:
+      - "Add strict-approved blocking pilots"
+      - "Change minimal-client validity for 1787503424 or 1787507684"
+      - "Re-implement Batch 2 Slices 0–2, P, U, M, A, G.1, or H5"
+    success_criteria:
+      - "eligibility_triggers_matched optional CITDP field documented in template and citdp-policy"
+      - "minimal_depth_missing_waiver warn-only diagnostic in checklist-validator.ts"
+      - "Parent plan §4.1–4.3 and §11 reconciled to shipped reality"
+      - "RED fixtures: triggered minimal without waiver warns; with waiver clean; non-triggered unchanged; integrated unchanged"
+      - "VALIDATE_MINIMAL_WAIVER block in IMPL pseudo-code with PRE/POST/EFFECTS"
+    unchanged_behavior:
+      - "depth_downgrade_requires_waiver remains fail-closed"
+      - "Integrated pairing and phase-aware slug enforcement unchanged"
+      - "Minimal depth without eligibility triggers unchanged"
+  completion_criteria:
+    checklist_gate:
+      dispositions:
+        - "completed"
+        - "not_applicable"
+        - "pending"
+        - "waived"
+      fail_closed: true
+      phases:
+        - "close_out"
+        - "pre_implementation"
+        - "verification"
+    focused_tests: "mcp-server/src/checklist-validator.test.ts VALIDATE_MINIMAL_WAIVER Slice A3"
+    lint: "bunx tsc -b mcp-server; npm test --prefix mcp-server -- checklist-validator"
+    persist_policy: "persisted to tied/citdp/ after Slice A3 implementation"
+    verification: "pseudocode_validate; tied_validate_consistency"
+  evidence:
+    commands:
+      - "npm test --prefix mcp-server -- checklist-validator"
+      - "pseudocode_validate IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    proof_boundaries:
+      - "Warn diagnostic only; advisory gate_policy does not block on minimal_depth_missing_waiver alone"
+  impact_analysis:
+    audited_project_mutation: "Slice A3 validator diagnostic, IMPL pseudo-code, CITDP template field, citdp-policy note, parent plan reconciliation"
+    files:
+      - "docs/integrated-activation-checklist-enforcement-plan.md"
+      - "mcp-server/src/checklist-validator.test.ts"
+      - "mcp-server/src/checklist-validator.ts"
+      - "tied/docs/citdp-policy.md"
+      - "tied/docs/citdp-record-template.yaml"
+      - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+    modules:
+      - "checklist_gate_validator"
+    tags:
+      - "adversarial-inquiry"
+      - "checklist-enforcement"
+      - "minimal-waiver"
+  leap_feedback:
+    divergences_from_analysis: []
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    author: "build-plan subagent"
+    batch: "batch2-sliceA3"
+    change_request_id: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    date: "2026-08-24"
+    record_status: "complete"
+    slice: "A3"
+    title: "Batch 2 Slice A3 — minimal_depth_missing_waiver warn diagnostic"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Agent selects minimal on network-triggered work without recording integrated_waiver"
+        - "Operator ignores warn diagnostic and proceeds without sponsor confirmation"
+        - "Warn diagnostic incorrectly blocks minimal client 1787507684 with valid waiver"
+      depth_selected_at: "2026-08-24T00:00:00Z"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "checklist-validator.test.ts asserts allowed true with minimal_depth_missing_waiver under advisory"
+        - "Non-triggered minimal and integrated fixtures unchanged in regression tests"
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "docs/integrated-activation-checklist-enforcement-plan.md §4.4"
+        - "docs/outstanding-work-prioritized-plan.md Build-plan 1"
+        - "mcp-server/src/checklist-validator.test.ts"
+      falsification_questions:
+        - "Does integrated depth emit minimal_depth_missing_waiver?"
+        - "Does minimal_depth_missing_waiver block progression under gate_policy advisory?"
+        - "Does the diagnostic fire when integrated_waiver is complete?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      research_profile: "not_measured"
+  test_strategy:
+    regression: "Existing downgrade, pairing, and minimal counterexample fixtures unchanged"
+    unit:
+      - "integrated depth unchanged"
+      - "non-triggered minimal unchanged"
+      - "triggered minimal with complete integrated_waiver is clean"
+      - "triggered minimal without waiver emits minimal_depth_missing_waiver; allowed true; blocking false under advisory"

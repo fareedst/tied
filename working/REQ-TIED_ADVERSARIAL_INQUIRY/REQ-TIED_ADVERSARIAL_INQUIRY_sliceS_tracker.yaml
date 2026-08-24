@@ -1,0 +1,130 @@
+copy_hygiene: "Slice S tracker for strict-approved live client pilots. Separate from sliceP persistence and Batch 2 enforcement trackers."
+description: "Per-request Tracker for Build-plan 2 — strict-approved pilots on client 1787416567 with integrated inquiry gates."
+execution_evidence:
+  close_out_evidence:
+    date: "2026-08-24"
+    deferred: []
+    gates:
+      close_out: "working/REQ-TIED_ADVERSARIAL_INQUIRY/gate-sliceS-close_out.json"
+      pre_implementation: "working/REQ-TIED_ADVERSARIAL_INQUIRY/gate-sliceS-pre_implementation.json"
+      verification: "working/REQ-TIED_ADVERSARIAL_INQUIRY/gate-sliceS-verification.json"
+    master_checklist: "tied/docs/agent-req-implementation-checklist.yaml"
+  completed:
+    - "session-bootstrap"
+    - "translate-sponsor-intent"
+    - "change-definition"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "test-strategy"
+    - "unit-test-red"
+    - "unit-test-green"
+    - "sub-adversarial-inquiry-pass"
+    - "verification-gate"
+    - "gate-pseudocode-validation"
+    - "traceable-commit"
+  operator_evidence:
+    commands:
+      - "working/client-1787416567-strict-pilot/replay-strict-approved-pilot.sh"
+      - "working/client-1787416567-strict-pilot/evidence/strict-approved-blocking-gate-result.json"
+      - "working/client-1787416567-strict-pilot/evidence/strict-approved-negative-control-gate-result.json"
+    depth_tier: "integrated"
+    gate_policy: "strict-candidate"
+    gate_policy_promotion: "strict-approved (pilot)"
+    integrated_waiver:
+      expiry: "2026-09-30"
+      owner: "sponsor"
+    limitation: "MCP human_approval requires camelCase field names until LEAP maps snake_case; pilot uses camelCase in runbook."
+    pilot_client: "1787416567"
+    prior_depth_tier: null
+    profile_depth: "integrated"
+    status: "complete"
+  request: "REQ-TIED_ADVERSARIAL_INQUIRY"
+record_identity:
+  batch: "outstanding-work-build-plan-2"
+  change_request_id: "REQ-TIED_ADVERSARIAL_INQUIRY"
+  record_status: "complete"
+  recorded_at: "2026-08-24"
+  slice: "S"
+  title: "Slice S — strict-approved live client pilots"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "AGENTS.md"
+      - "tied/docs/ai-principles.md"
+      - "tied/vocab/fidelity-research.md"
+      - "tied/vocab/prompt-composer.md"
+      - "tied/vocab/quality-assurance.md"
+      - "tied/vocab/routing.md"
+    slug: "session-bootstrap"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/outstanding-work-prioritized-plan.md"
+      - "tied/vocab/fidelity-research.md"
+    slug: "translate-sponsor-intent"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/outstanding-work-prioritized-plan.md Build-plan 2"
+      - "working/REQ-TIED_ADVERSARIAL_INQUIRY/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-sliceS.yaml"
+    slug: "change-definition"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/adversarial-inquiry/checklist-integration.ts"
+      - "mcp-server/src/adversarial-inquiry/workflow.ts"
+      - "docs/adversarial-inquiry-activation-recommendation.md"
+    slug: "impact-discovery"
+  - disposition: "not_applicable"
+    policy: "existing-token-sufficient"
+    rationale: "Slice S pilots existing REQ-TIED_ADVERSARIAL_INQUIRY strict gate semantics."
+    slug: "author-requirement"
+  - disposition: "not_applicable"
+    policy: "existing-token-sufficient"
+    rationale: "No ARCH changes; pilot and runbook only."
+    slug: "author-architecture"
+  - disposition: "not_applicable"
+    policy: "no-impl-pseudocode-change"
+    rationale: "Existing evaluateScopedGate and validateStrictEligibility pseudo-code sufficient."
+    slug: "catalog-pseudocode-contracts"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/outstanding-work-prioritized-plan.md"
+    slug: "flag-insufficient-specs"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/outstanding-work-prioritized-plan.md"
+    slug: "flag-contradictory-specs"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/adversarial-inquiry/checklist-integration.test.ts"
+    slug: "gate-pseudocode-validation"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_ADVERSARIAL_INQUIRY/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-sliceS.yaml"
+    slug: "risk-assessment"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/adversarial-inquiry/checklist-integration.test.ts"
+      - "mcp-server/src/adversarial-inquiry/pilot.test.ts"
+    slug: "test-strategy"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/adversarial-inquiry/checklist-integration.test.ts"
+    slug: "unit-test-red"
+  - disposition: "completed"
+    evidence_refs:
+      - "npm test --prefix mcp-server"
+    slug: "unit-test-green"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_ADVERSARIAL_INQUIRY/adversarial-inquiry/phase-pre_implementation/"
+      - "working/REQ-TIED_ADVERSARIAL_INQUIRY/adversarial-inquiry/phase-verification/"
+      - "working/REQ-TIED_ADVERSARIAL_INQUIRY/adversarial-inquiry/phase-close_out/"
+      - "working/client-1787416567-strict-pilot/evidence/strict-approved-blocking-gate-result.json"
+    slug: "sub-adversarial-inquiry-pass"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_ADVERSARIAL_INQUIRY/gate-sliceS-verification.json"
+    slug: "verification-gate"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_ADVERSARIAL_INQUIRY/gate-sliceS-close_out.json"
+    slug: "traceable-commit"

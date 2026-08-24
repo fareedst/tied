@@ -41,6 +41,7 @@ const PHASES = new Set<GatePhase>([
 ]);
 const PLACEHOLDER_WAIVER_VALUES = new Set(["~"]);
 const SUB_ADVERSARIAL_STUB_SLUG = "sub-adversarial-inquiry-pass";
+export const MINIMAL_DEPTH_MISSING_WAIVER = "minimal_depth_missing_waiver";
 
 // [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: minimal depth always governs the sub-adversarial stub slug.
 export const MINIMAL_SUB_STUB_SLUGS = [SUB_ADVERSARIAL_STUB_SLUG] as const;
@@ -168,6 +169,24 @@ function hasDepthChangeWaiver(section: Record<string, unknown>): boolean {
   return false;
 }
 
+function hasCompleteIntegratedWaiver(section: Record<string, unknown>): boolean {
+  const waiver = section.integrated_waiver;
+  if (!isRecord(waiver)) return false;
+  return waiverFieldPresent(waiver.owner)
+    && waiverFieldPresent(waiver.expiry)
+    && waiverFieldPresent(waiver.rationale)
+    && waiverFieldPresent(waiver.approval);
+}
+
+function eligibilityTriggersMatched(citdp: unknown): string[] {
+  if (!isRecord(citdp)) return [];
+  const risk = isRecord(citdp.risk_analysis) ? citdp.risk_analysis : undefined;
+  const section = adversarialSection(citdp);
+  const raw = section?.eligibility_triggers_matched ?? risk?.eligibility_triggers_matched;
+  if (!Array.isArray(raw)) return [];
+  return raw.filter((item): item is string => typeof item === "string" && item.trim().length > 0);
+}
+
 function hasValidCloseOutInquiryWaiver(section: Record<string, unknown>): boolean {
   const waiver = section.close_out_inquiry_waiver;
   if (!isRecord(waiver)) return false;
@@ -210,6 +229,19 @@ export function validateDepthDowngrade(input: {
   if (currentDepth !== "minimal") return { ok: true, diagnostics: [] };
   if (section && hasDepthChangeWaiver(section)) return { ok: true, diagnostics: [] };
   return { ok: false, diagnostics: ["depth_downgrade_requires_waiver"] };
+}
+
+// [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: emit warn-only minimal_depth_missing_waiver when §7 eligibility triggers match, depth_tier is minimal, and integrated_waiver is incomplete.
+export function validateMinimalWaiver(input: {
+  citdp: unknown;
+}): ValidationResult {
+  const section = adversarialSection(input.citdp);
+  if (!section) return { ok: true, diagnostics: [] };
+  const depth = identityValue(section.depth_tier);
+  if (depth !== "minimal") return { ok: true, diagnostics: [] };
+  if (eligibilityTriggersMatched(input.citdp).length === 0) return { ok: true, diagnostics: [] };
+  if (hasCompleteIntegratedWaiver(section)) return { ok: true, diagnostics: [] };
+  return { ok: false, diagnostics: [MINIMAL_DEPTH_MISSING_WAIVER] };
 }
 
 // [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: require completion_criteria.activation on gate read at late integrated phases.
@@ -693,7 +725,12 @@ export function validateChecklistGate(input: {
   });
   diagnostics.push(...adversarialResult.diagnostics);
 
-  const uniqueDiagnostics = [...new Set(diagnostics)];
-  const allowed = uniqueDiagnostics.length === 0;
+  const minimalWaiverResult = validateMinimalWaiver({ citdp: input.citdp });
+  const blockingDiagnostics = [...new Set(diagnostics)];
+  const advisoryDiagnostics = minimalWaiverResult.diagnostics.filter(
+    (code) => code === MINIMAL_DEPTH_MISSING_WAIVER,
+  );
+  const uniqueDiagnostics = [...new Set([...blockingDiagnostics, ...advisoryDiagnostics])];
+  const allowed = blockingDiagnostics.length === 0;
   return { allowed, ok: allowed, blocking: !allowed, depth, diagnostics: uniqueDiagnostics };
 }

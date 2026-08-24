@@ -50,6 +50,7 @@ risk_analysis:
     close_out_inquiry_waiver: null
     depth_change_waiver: null
     depth_tier: "minimal"
+    eligibility_triggers_matched: []
     gate_policy: "advisory"
     integrated_waiver: null
     prior_depth_tier: null

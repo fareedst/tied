@@ -1,0 +1,8 @@
+{
+  "allowed": true,
+  "blocking": false,
+  "depth": "minimal",
+  "diagnostics": ["minimal_depth_missing_waiver"],
+  "phase": "pre_implementation",
+  "slice": "batch2-sliceA3"
+}

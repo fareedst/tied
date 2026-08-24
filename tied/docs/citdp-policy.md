@@ -57,6 +57,13 @@ real `owner`, `expiry`, `rationale`, and `approval` values. Agents must not sile
 integrated on triggered work; placeholder (`~`), empty, or incomplete waiver fields block
 progression at `risk-assessment` and at every checklist gate phase.
 
+Record matched triggers at `risk-assessment` in
+`risk_analysis.adversarial_inquiry.eligibility_triggers_matched` (string array). When
+this array is non-empty and `depth_tier` is `minimal` without a complete
+`integrated_waiver`, `tied_checklist_gate_validate` emits the warn-only diagnostic
+`minimal_depth_missing_waiver`. Under `gate_policy: advisory` the diagnostic does not
+block progression; it is distinct from `depth_downgrade_requires_waiver`.
+
 ## Shared progression gate
 
 Behavior-changing workflows use the same fail-closed gate at

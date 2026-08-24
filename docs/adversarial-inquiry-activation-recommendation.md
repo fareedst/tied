@@ -144,7 +144,15 @@ A call without all four bounded artifacts (or valid phase-dir pairing) is incomp
 ### P2 — remaining
 
 - Add a native Go evidence adapter (Mode B).
-- Run strict eligibility and human-approval pilots.
+- ~~Run strict eligibility and human-approval pilots.~~ **Shipped (2026-08-24):** client
+  `1787416567` strict-approved pilot with runbook at
+  `working/client-1787416567-strict-pilot/replay-strict-approved-pilot.sh`;
+  `blocking:true` evidence at
+  `working/client-1787416567-strict-pilot/evidence/strict-approved-blocking-gate-result.json`;
+  negative control at
+  `working/client-1787416567-strict-pilot/evidence/strict-approved-negative-control-gate-result.json`.
+  **Limitation:** MCP `human_approval` payload requires camelCase field names until a
+  follow-on LEAP maps snake_case (pilot uses camelCase in runbook).
 - Keep automated YAML/Markdown parity as optional hardening unless adoption
   evidence shows it is needed.
 

@@ -180,27 +180,36 @@ When `risk_analysis.adversarial_inquiry.depth_tier` is **`integrated`** (or **`s
 
 ## 4. Batch 2 — remaining gaps
 
-### 4.1 Validator auto-enforcement (Phase B + A2 — Slice 1)
+### 4.1 Validator auto-enforcement (Phase B + A2 — Slice 1) — **Shipped** (Batch 2 Slice 1, 2026-08-23)
 
-- No built-in **phase-aware slug set**; callers must pass `required_step_slugs` manually.
-- `completion_criteria.activation` validated on CITDP **write**, not on gate **read** at verification/close_out.
-- No `prior_depth_tier` / `depth_downgrade_requires_waiver`.
-- No `receipt_identity_mismatch:phase` when reusing a run across phases.
-- `strict_candidate` does not yet require pairing at verification/close_out.
-- Template lacks `prior_depth_tier`, `integrated_waiver`, and `close_out_inquiry_waiver` fields.
+- Built-in **phase-aware slug set** via `derivePhaseAwareSlugs` and `INTEGRATED_REQUIRED_SLUGS`.
+- `completion_criteria.activation` validated on gate **read** at verification/close_out.
+- `prior_depth_tier` / `depth_downgrade_requires_waiver` enforced.
+- `receipt_identity_mismatch:phase` when reusing a run across phases.
+- `strict_candidate` requires pairing at verification/close_out.
+- Template includes `prior_depth_tier`, `integrated_waiver`, and `close_out_inquiry_waiver` fields.
 
-### 4.2 Agent ergonomics (Phase C — Slice 2, optional)
+Evidence: `mcp-server/src/checklist-validator.ts`, `checklist-validator.test.ts`, `tied/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-batch2.yaml`.
 
-- No `tied_checklist_activation_collect` MCP/CLI helper; hand assembly required.
+### 4.2 Agent ergonomics (Phase C — Slice 2) — **Shipped**
 
-### 4.3 Adoption proof (Phase G — Slice 3)
+- `tied_checklist_activation_collect` MCP/CLI helper assembles gate-ready activation from phase dirs.
 
-- H5 second non-Ruby pilot pending.
+Evidence: `mcp-server/src/tools/index.ts`, `checklist-activation-collect.test.ts`, `tied/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-slice2.yaml`.
+
+### 4.3 Adoption proof (Phase G — Slice 3 / H5) — **Shipped** (2026-08-24, client `1787507684`)
+
+- H5 second non-Ruby pilot completed with paired metric and four artifacts.
 - Client `1787503424` remains valid minimal evidence only.
 
-### 4.4 Policy hardening (deferred A3)
+Evidence: `working/client-1787507684-activation-audit/`, `CITDP-REQ-ROOTJOBS` client record.
 
-- High-risk classifier warn when `depth_tier: minimal` without `integrated_waiver` — not shipped.
+### 4.4 Policy hardening (A3) — **Shipped** (Batch 2 Slice A3, 2026-08-24)
+
+- Warn-only `minimal_depth_missing_waiver` when `eligibility_triggers_matched` is non-empty, `depth_tier` is `minimal`, and `integrated_waiver` is incomplete.
+- Distinct from fail-closed `depth_downgrade_requires_waiver`; advisory `gate_policy` does not block on this diagnostic alone.
+
+Evidence: `mcp-server/src/checklist-validator.ts`, `tied/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-sliceA3.yaml`.
 
 ---
 
@@ -225,7 +234,7 @@ When `risk_analysis.adversarial_inquiry.depth_tier` is **`integrated`** (or **`s
 |---|-------------|--------|
 | A1 | Integrated depth eligibility in `tied/docs/citdp-policy.md` | **Shipped** |
 | A2 | CITDP template `prior_depth_tier`, `integrated_waiver`, `close_out_inquiry_waiver` | **Slice 1** (moved from “planned later”) |
-| A3 | High-risk minimal warn in validator | **Deferred** |
+| A3 | High-risk minimal warn in validator | **Shipped** (Slice A3, 2026-08-24) |
 | A4 | Prompt-shared depth recording text | **Shipped** (verify on change) |
 
 ### Phase B — Register integrated depth in the checklist gate (Slice 1)
@@ -354,12 +363,13 @@ Copy into per-request Tracker `operator_evidence` when running integrated pilots
 | Criterion | Status |
 |-----------|--------|
 | Shared gate validates minimal counterexamples and pairing when supplied (Batch 1) | Done |
-| Integrated depth cannot pass verification/close_out **without caller wiring** today | **Batch 2 Slice 1** |
-| Integrated depth cannot pass verification/close_out **without auto-enforced pairing** | **Batch 2 Slice 1** |
+| Integrated depth cannot pass verification/close_out **without caller wiring** today | **Shipped** (Batch 2 Slice 1) |
+| Integrated depth cannot pass verification/close_out **without auto-enforced pairing** | **Shipped** (Batch 2 Slice 1) |
 | `sub-adversarial-inquiry-pass` registered with render coverage (Batch 1) | Done |
-| Optional MCP/CLI collect path | **Batch 2 Slice 2** |
+| Optional MCP/CLI collect path | **Shipped** (Batch 2 Slice 2) |
 | Prompt skills sequence inquiry → pairing → gate (Batch 1 prose) | Done |
-| H5 pilot: second non-Ruby client with paired metric + four artifacts | **Batch 2 Slice 3** |
+| H5 pilot: second non-Ruby client with paired metric + four artifacts | **Shipped** (2026-08-24, client `1787507684`) |
+| Minimal triggered depth without waiver emits machine-visible warn diagnostic (A3) | **Shipped** (Batch 2 Slice A3, 2026-08-24) |
 | Canonical TIED YAML unchanged this refine-plan pass | Done (working artifacts + vocab + linked plan) |
 | Vocabulary RECORD | Done — pass 2 terms recorded |
 

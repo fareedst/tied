@@ -9,6 +9,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Minimal waiver warn diagnostic (Batch 2 Slice A3)** —
+  `[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]` / `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]`:
+  `validateMinimalWaiver` / `VALIDATE_MINIMAL_WAIVER` emits warn-only
+  `minimal_depth_missing_waiver` when `eligibility_triggers_matched` is
+  non-empty, `depth_tier` is `minimal`, and `integrated_waiver` is incomplete;
+  advisory `gate_policy` does not block. CITDP field
+  `eligibility_triggers_matched` documented in template and `citdp-policy.md`.
+  CITDP: `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-sliceA3`.
+
+- **Strict-approved live client pilots (Slice S)** —
+  `[REQ-TIED_ADVERSARIAL_INQUIRY]`: client `1787416567` / `REQ-VOLUMESTATS-CLI`
+  pilot runbook at
+  `working/client-1787416567-strict-pilot/replay-strict-approved-pilot.sh`
+  records strict-candidate → strict-approved promotion with sponsor human
+  approval, negative controls, and `blocking: true` gate-result evidence;
+  methodology integrated activation gates for `REQ-TIED_ADVERSARIAL_INQUIRY`
+  with phase-scoped artifacts. CITDP:
+  `CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-sliceS`. Activation recommendation §P2
+  updated.
+
 - **Record-aware YAML canonicalization** — `[REQ-TIED_YAML_CANONICALIZATION]` / `[ARCH-TIED_YAML_CANONICAL_PROFILE]` / `[IMPL-TIED_YAML_CANONICALIZER]`: recognized record lists (`satisfaction_criteria`, `validation_criteria`, `alternatives_considered`) now sort complete mapping records by configured stable fields in both TypeScript default lint and Ruby `--sort-lists` (whole-block sorting preserves optional fields). `yaml_format` metadata adds `record_list_rule`; `yaml_semantic_compare` accepts record-list reorder via fingerprint multiset compare. First bulk lint after upgrade will reorder registered record lists deterministically.
 
 - **1787507684 integrated activation replay script** —
