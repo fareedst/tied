@@ -52,6 +52,8 @@ implementation decisions and pseudo-code for the research tooling.
 | **Go Mode B adapter** | go-test adapter, PARSE_GO_TEST_EVIDENCE | Native Go project-input Mode B dispatch with realpath confinement; `_test.go` paths select the go-test manifest profile. |
 | **Go Mode A builder** | build_adversarial_inquiry_from_tied, from-tied builder | Ruby script emitting normalized graph/fidelity for Go and language-neutral stacks from TIED tokens, declared paths, and optional build-config; optional when Mode B suffices. |
 | **reference fixture** | adversarial-inquiry-go-rootjobs | Checked-in 1787507684 / REQ-ROOTJOBS graph/fidelity + build-config for CI regression; repo-relative paths only. |
+| **controlled fixture** | test client, sample project (for remediation) | Reproducible snapshot-bound project (e.g. client alias `1787603099`) with labeled negative/positive gate cases; fixture manifest is authoritative input only. |
+| **evidence corpus** | fixture corpus, regression inputs | The controlled fixture's labeled rejection cases, valid positive reference, snapshots, and replay inputs bound to corpus-manifest.json. |
 | **phase-aware activation report** | metrics activation summary | Offline analyzer view of per-phase artifact completeness plus inquiry count; phase dirs remain authoritative over root projection. |
 | **activation expected identity** | expected payload, expected fields | Gate-side identity projection derived from a valid activation receipt when omitted by the caller; it does not replace receipt/artifact pairing. |
 | **placeholder waiver** | empty waiver, tilde waiver | An unusable waiver value (`null`, empty string, or `~`) that must be treated as absent rather than approval evidence. |
@@ -78,6 +80,7 @@ implementation decisions and pseudo-code for the research tooling.
 | Integrated activation evidence | `activation-evidence` | Paired metric and artifact evidence used to classify integrated activation. |
 | Activation artifact pairing | `activation-artifact-pairing` | Completeness check joining the inquiry metric to the four bounded artifacts. |
 | Tracker disposition | `tracker-disposition` | Machine-checked disposition and evidence contract for one checklist step. |
+| Evidence remediation diagnostic | `tracker_sparse`, `tracker_not_authoritative`, `provenance_incomplete`, `finding_unresolved`, `warn_not_success`, `command_success_unproven`, `evidence_stale`, `tree_dirty_post_gate`, `activation_pairing_incomplete`, `sub_stub_pending`, `parent_child_inconsistent`, `waiver_invalid` | Stable checklist-gate diagnostics emitted alongside granular validation codes. |
 | Prior depth tier | `prior_depth_tier` | Previous `depth_tier` used to detect a downgrade on a single CITDP snapshot. |
 | Depth-change waiver | `integrated_waiver` / `depth_change_waiver` | Required fields when lowering depth mid-request. |
 | Close-out inquiry waiver | `close_out_inquiry_waiver` | Documents why `close_out` has no new inquiry `run_id`. |
@@ -94,6 +97,26 @@ implementation decisions and pseudo-code for the research tooling.
 | Parent-child slug consistency | `sub_stub_pending_while_parent_completed` | Integrated-only diagnostic when parent slugs are completed while sub-stub is pending. |
 | Open-record shape | `validateCitdpOpenRecord` | Persistence-only adversarial CITDP validation; integrated depth may omit activation pre-inquiry. |
 | Depth upgrade path | `prior_depth_tier: minimal` on upgrade | Auditable minimal→integrated upgrade without `upgrade_pending_inquiry` state; progression gates unchanged. |
+
+## Evidence remediation diagnostics
+
+The checklist evidence gate emits these stable identifiers for remediation classes. Granular
+diagnostics remain alongside them so operators can locate the precise failing field or artifact.
+
+| Diagnostic | Meaning |
+|---|---|
+| `activation_pairing_incomplete` | Inquiry receipt and required artifacts are missing or cannot be paired. |
+| `command_success_unproven` | A claimed successful command lacks retained output, manifest, or exit evidence. |
+| `evidence_stale` | Evidence is cross-phase, stale, or hash-mismatched. |
+| `finding_unresolved` | A gate result or finding ledger still contains an unresolved finding. |
+| `parent_child_inconsistent` | An auto-required parent step is complete while the inquiry sub-stub remains pending. |
+| `provenance_incomplete` | Evidence provenance lacks required identity, command, tool, or schema fields. |
+| `sub_stub_pending` | The required `sub-adversarial-inquiry-pass` step remains pending. |
+| `tracker_not_authoritative` | A synthetic Tracker projection was supplied instead of the authoritative file. |
+| `tracker_sparse` | Required phase-aware Tracker dispositions are absent. |
+| `tree_dirty_post_gate` | Dirty or untracked paths remain at close-out. |
+| `waiver_invalid` | A waiver contains placeholder or otherwise unusable approval fields. |
+| `warn_not_success` | A warning-status gate result was incorrectly presented as success. |
 
 ## First-slice pseudo-code block names
 
@@ -166,6 +189,8 @@ convenience projection only and never satisfy another phase's pairing. See
 | Term | Section |
 |---|---|
 | activation artifact pairing | Preferred terms vs synonyms |
+| activation_pairing_incomplete | Evidence remediation diagnostics |
+| command_success_unproven | Evidence remediation diagnostics |
 | close-out inquiry waiver | Preferred terms vs synonyms |
 | depth-change waiver | Preferred terms vs synonyms |
 | phase-aware slug set | Preferred terms vs synonyms |
@@ -179,6 +204,8 @@ convenience projection only and never satisfy another phase's pairing. See
 | checklist evidence gate | Preferred terms vs synonyms |
 | composition evidence | Naming bridge |
 | divergent edge | Preferred terms vs synonyms |
+| evidence remediation diagnostic | Naming bridge |
+| evidence_stale | Evidence remediation diagnostics |
 | evidence provenance | Preferred terms vs synonyms |
 | evidence chain profile | Preferred terms vs synonyms |
 | evidence chain statistics report | Preferred terms vs synonyms |
@@ -187,18 +214,27 @@ convenience projection only and never satisfy another phase's pairing. See
 | fidelity audit | Naming bridge |
 | fidelity finding | Preferred terms vs synonyms |
 | fidelity research pilot | Preferred terms vs synonyms |
+| finding_unresolved | Evidence remediation diagnostics |
 | finding lifecycle | Preferred terms vs synonyms |
 | finding ledger | Naming bridge |
 | human research profile | Preferred terms vs synonyms |
 | integrated activation evidence | Preferred terms vs synonyms |
 | integrated agent profile | Preferred terms vs synonyms |
 | origin layer | Preferred terms vs synonyms |
+| parent_child_inconsistent | Evidence remediation diagnostics |
 | proof boundary | Preferred terms vs synonyms |
+| provenance_incomplete | Evidence remediation diagnostics |
 | project manifest | Naming bridge |
 | research dataset | Naming bridge |
 | read-only research profile | Preferred terms vs synonyms |
 | RUN_FIDELITY_RESEARCH_PILOT | Pseudo-code block names |
 | specification state | Preferred terms vs synonyms |
+| sub_stub_pending | Evidence remediation diagnostics |
 | successful control change | Preferred terms vs synonyms |
 | Tracker disposition | Preferred terms vs synonyms |
+| tracker_not_authoritative | Evidence remediation diagnostics |
+| tracker_sparse | Evidence remediation diagnostics |
+| tree_dirty_post_gate | Evidence remediation diagnostics |
 | VALIDATE_ACTIVATION_PAIRING | Pseudo-code block names |
+| waiver_invalid | Evidence remediation diagnostics |
+| warn_not_success | Evidence remediation diagnostics |

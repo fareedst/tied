@@ -202,16 +202,105 @@ procedure VALIDATE_INTEGRATED_PARENT_CHILD_SLUGS(tracker, depth, phase):
   IF sub-adversarial-inquiry-pass is pending AND any other auto-required slug for the phase is completed: RETURN failure
   RETURN success
 
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: reject sparse Tracker missing phase-aware slug dispositions (remediation A1).
+procedure VALIDATE_TRACKER_SPARSE(tracker, required_slugs, depth):
+  Contract:
+  INPUT: tracker, required_slugs, depth
+  PRE: depth is integrated or strict_candidate
+  OUTPUT: validation result with diagnostics
+  POST: execution_evidence.completed without matching step dispositions fails with tracker_sparse; two or more missing auto slugs fail with tracker_sparse
+  FAILURE_MODES: tracker_sparse, missing_required_step
+  EFFECTS: pure
+  TERMINATION: total
+
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: reject synthetic Tracker projections substituted for authoritative file (remediation A2).
+procedure VALIDATE_TRACKER_AUTHORITATIVE(tracker, tracker_source):
+  Contract:
+  INPUT: tracker, tracker_source
+  PRE: tracker may include synthetic projection marker
+  OUTPUT: validation result with diagnostics
+  POST: tracker_source synthetic_projection or _synthetic_projection marker fails with tracker_not_authoritative
+  FAILURE_MODES: tracker_not_authoritative
+  EFFECTS: pure
+  TERMINATION: total
+
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: require complete evidence provenance identity and command retention (remediation A3/A6).
+procedure VALIDATE_PROVENANCE_COMPLETE(provenance):
+  Contract:
+  INPUT: provenance document
+  PRE: provenance may nest under provenance key
+  OUTPUT: validation result with diagnostics
+  POST: missing request_token, phase, run_id, command, tool_version, or schema version fails with provenance_incomplete
+  FAILURE_MODES: provenance_incomplete
+  EFFECTS: pure
+  TERMINATION: total
+
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: unresolved or warn findings cannot satisfy gate success (remediation A5).
+procedure VALIDATE_FINDING_DISPOSITION(gate_result, finding_ledger):
+  Contract:
+  INPUT: gate_result, finding_ledger
+  PRE: gate_result may include verdict UNRESOLVED or status warn
+  OUTPUT: validation result with diagnostics
+  POST: UNRESOLVED verdict or observed lifecycle in ledger fails with finding_unresolved; warn status fails with warn_not_success
+  FAILURE_MODES: finding_unresolved, warn_not_success
+  EFFECTS: pure
+  TERMINATION: total
+
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: reject self-reported command success without retained output/manifest (remediation A6).
+procedure VALIDATE_COMMAND_EVIDENCE(evidence):
+  Contract:
+  INPUT: evidence map with claimed_success flag
+  PRE: evidence may claim success without artifacts
+  OUTPUT: validation result with diagnostics
+  POST: claimed_success without manifest_ref, output path, and exit_code fails with command_success_unproven
+  FAILURE_MODES: command_success_unproven
+  EFFECTS: pure
+  TERMINATION: total
+
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: reject stale or hash-mismatched activation evidence (remediation A7).
+procedure VALIDATE_EVIDENCE_FRESHNESS(declared_hashes, computed_hashes, cross_phase_reuse):
+  Contract:
+  INPUT: declared_hashes, computed_hashes, cross_phase_reuse flag
+  PRE: hashes may be supplied by collector or gate caller
+  OUTPUT: validation result with diagnostics
+  POST: hash mismatch or cross_phase_reuse fails with evidence_stale and artifact_hash_mismatch codes
+  FAILURE_MODES: evidence_stale, artifact_hash_mismatch
+  EFFECTS: pure
+  TERMINATION: total
+
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: reject dirty or untracked post-gate tree at close_out (remediation A15).
+procedure VALIDATE_CLOSE_OUT_TREE(dirty_paths, untracked_paths):
+  Contract:
+  INPUT: dirty_paths, untracked_paths
+  PRE: close_out phase selected
+  OUTPUT: validation result with diagnostics
+  POST: any dirty or untracked path fails with tree_dirty_post_gate
+  FAILURE_MODES: tree_dirty_post_gate
+  EFFECTS: pure
+  TERMINATION: total
+
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: emit stable remediation diagnostics alongside granular codes.
+procedure NORMALIZE_REMEDIATION_DIAGNOSTICS(diagnostics):
+  Contract:
+  INPUT: granular diagnostic codes
+  PRE: diagnostics is a list
+  OUTPUT: expanded diagnostic list
+  POST: adds tracker_sparse, activation_pairing_incomplete, sub_stub_pending, parent_child_inconsistent, evidence_stale, tracker_not_authoritative, waiver_invalid aliases when matching granular codes present
+  FAILURE_MODES: none
+  EFFECTS: pure
+  TERMINATION: total
+
 ## VALIDATE_CHECKLIST_GATE
 # [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: select depth before evaluating phase gates and fail closed on invalid evidence.
 
 procedure VALIDATE_CHECKLIST_GATE(input): # [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
   Contract:
-  INPUT: tracker, citdp, activation, phase, required_step_slugs, prior_depth_tier
+  INPUT: tracker, citdp, activation, phase, required_step_slugs, prior_depth_tier, evidence
   PRE: phase is selected before this procedure is called
   OUTPUT: { allowed, diagnostics, depth, blocking }
-  POST: allowed is true only when every required contract passes; auto slugs union with caller slugs; integrated or late strict_candidate pairing is mandatory unless close_out inquiry waiver applies; advisory policy may warn only after required evidence is valid
-  FAILURE_MODES: malformed_input, tracker_failure, citdp_failure, activation_failure, integrated_depth_requires_pairing, depth_downgrade_requires_waiver, missing_completion_activation, receipt_identity_mismatch:phase
+  POST: allowed is true only when every required contract passes; auto slugs union with caller slugs; integrated or late strict_candidate pairing is mandatory unless close_out inquiry waiver applies; optional evidence payload validates provenance, findings, command output, freshness, and tree; advisory policy may warn only after required evidence is valid
+  FAILURE_MODES: malformed_input, tracker_failure, citdp_failure, activation_failure, integrated_depth_requires_pairing, activation_pairing_incomplete, depth_downgrade_requires_waiver, missing_completion_activation, receipt_identity_mismatch:phase, tracker_sparse, tracker_not_authoritative, provenance_incomplete, finding_unresolved, command_success_unproven, evidence_stale, tree_dirty_post_gate, waiver_invalid
+  DATA_TRANSITION: diagnostics accumulates contract results; allowed derives from empty blocking diagnostics
   EFFECTS: pure
   TERMINATION: total
   depth := adversarial depth_tier from citdp
@@ -222,12 +311,19 @@ procedure VALIDATE_CHECKLIST_GATE(input): # [IMPL-TIED_CHECKLIST_GATE_ENFORCEMEN
   receiptPhaseResult := VALIDATE_RECEIPT_PHASE(input.activation.receipt, input.phase)
   expected := input.activation.expected ?? DERIVE_EXPECTED_FROM_RECEIPT(input.activation.receipt)
   trackerResult := VALIDATE_TRACKER(input.tracker, input.phase, requiredSlugs)
+  sparseResult := VALIDATE_TRACKER_SPARSE(input.tracker, requiredSlugs, depth)
+  authoritativeResult := VALIDATE_TRACKER_AUTHORITATIVE(input.tracker, input.evidence.tracker_source)
+  IF input.evidence.provenance present: VALIDATE_PROVENANCE_COMPLETE
+  IF input.evidence gate_result or finding_ledger present: VALIDATE_FINDING_DISPOSITION
+  IF input.evidence command_evidence present: VALIDATE_COMMAND_EVIDENCE
+  IF input.evidence hash or cross_phase inputs present: VALIDATE_EVIDENCE_FRESHNESS
+  IF close_out AND tree paths present: VALIDATE_CLOSE_OUT_TREE
   parentChildResult := VALIDATE_INTEGRATED_PARENT_CHILD_SLUGS(input.tracker, depth, input.phase)
   citdpResult := VALIDATE_ADVERSARIAL_CONTRACT(input.citdp, input.phase)
   IF depth requires integrated pairing AND close_out inquiry waiver does not apply AND activation is missing: append integrated_depth_requires_pairing
   IF depth requires integrated pairing AND activation is present: VALIDATE_ACTIVATION_PAIRING with expected
   minimalWaiverResult := VALIDATE_MINIMAL_WAIVER(citdp)
-  blockingDiagnostics := union of all blocking results above
+  blockingDiagnostics := NORMALIZE_REMEDIATION_DIAGNOSTICS(union of all blocking results above)
   advisoryDiagnostics := minimalWaiverResult warn-only codes
   IF blockingDiagnostics non-empty: RETURN blocked with union(blockingDiagnostics, advisoryDiagnostics)
   RETURN allowed with advisoryDiagnostics only when present
@@ -241,6 +337,7 @@ procedure COLLECT_CHECKLIST_ACTIVATION(input):
   POST: when ok, receipt and artifacts match runChecklistInquiry activation shape including artifact path under working/{REQ-TOKEN}/adversarial-inquiry/phase-{phase}/; expected equals DERIVE_EXPECTED_FROM_RECEIPT(receipt); collector never writes files or mutates CITDP
   FAILURE_MODES: missing_phase_directory, missing_activation_artifact, malformed_obligation_report, run_id_provenance_mismatch, phase_provenance_mismatch, metrics_run_id_mismatch
   DATA: phase artifact paths, content hashes, optional metrics row for tied_adversarial_inquiry_run
+  DATA_TRANSITION: artifact file contents become receipt, artifacts map, and expected identity projection
   EFFECTS: read-only filesystem and optional metrics JSONL
   TERMINATION: total
   paths := resolveArtifactPaths(project_root, request_token, phase)

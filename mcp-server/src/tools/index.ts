@@ -1495,6 +1495,7 @@ export const allTools = [
         citdp: z.record(z.unknown()),
         required_step_slugs: z.array(z.string()).optional(),
         activation: z.record(z.unknown()).optional(),
+        evidence: z.record(z.unknown()).optional(),
       }),
     },
     handler: async (args: {
@@ -1503,6 +1504,7 @@ export const allTools = [
       citdp: Record<string, unknown>;
       required_step_slugs?: string[];
       activation?: Record<string, unknown>;
+      evidence?: Record<string, unknown>;
     }) => {
       try {
         const result = validateChecklistGate({
@@ -1511,6 +1513,7 @@ export const allTools = [
           citdp: args.citdp,
           requiredStepSlugs: args.required_step_slugs,
           activation: args.activation as never,
+          evidence: args.evidence as never,
         });
         return textContent(JSON.stringify(result, null, 2));
       } catch (e) {
