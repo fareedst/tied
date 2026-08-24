@@ -1,0 +1,24 @@
+{
+  "ok": true,
+  "rebuild": "npm run build --prefix mcp-server",
+  "fresh_stdio_session": true,
+  "tool_count": 66,
+  "required_tools": [
+    "tied_adversarial_inquiry_run",
+    "tied_checklist_gate_validate",
+    "tied_checklist_activation_collect",
+    "tied_client_yaml_styling_apply",
+    "tied_validate_consistency",
+    "tied_config_get_base_path"
+  ],
+  "missing_tools": [],
+  "catalog_sample": [
+    "tied_adversarial_inquiry_run",
+    "tied_checklist_activation_collect",
+    "tied_checklist_gate_validate",
+    "tied_client_yaml_styling_apply",
+    "tied_config_get_base_path",
+    "tied_validate_consistency"
+  ],
+  "timestamp": "2026-08-24T20:15:00.578Z"
+}

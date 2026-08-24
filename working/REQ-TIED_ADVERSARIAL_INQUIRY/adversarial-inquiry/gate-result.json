@@ -1,14 +1,16 @@
 {
   "blocking": false,
-  "diagnostics": [
-    "strict_candidate_requires_human_approval"
-  ],
-  "policy": "strict-candidate",
+  "diagnostics": [],
+  "policy": "advisory",
   "proofBoundary": "human_decision",
   "schemaVersion": "adversarial-inquiry-gate.v1",
   "scope": [
-    "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de"
+    "REQ-TIED_ADVERSARIAL_INQUIRY#bidirectional-fidelity",
+    "REQ-TIED_ADVERSARIAL_INQUIRY#minitest-adapter",
+    "REQ-TIED_ADVERSARIAL_INQUIRY#obligation-graph",
+    "REQ-TIED_ADVERSARIAL_INQUIRY#read-only-deterministic",
+    "REQ-TIED_ADVERSARIAL_INQUIRY#strict-eligibility"
   ],
   "status": "warn",
-  "verdict": "UNRELIABLE"
+  "verdict": "RELIABLE_INCOMPLETE"
 }

@@ -31,7 +31,7 @@ changes) → RED test → GREEN implementation. For pure checklist-text addition
 `tools/agentstream/checklist/composition_coverage_test.go` that fails until the task
 string exists — write/extend that assertion **before** editing the YAML.
 
-**Last independently verified:** 2026-08-24 (Part H5 live replay close-out; Parts A–F and required gates re-run 2026-08-22; G6 explicitly deferred by sponsor).
+**Last independently verified:** 2026-08-24 (Part H5 live replay close-out; G6 reload smoke + G2 stdd dogfood 2026-08-24; Parts A–F re-run 2026-08-22).
 
 ---
 
@@ -410,9 +410,10 @@ into checklist task text. **Depends on Part B0.4 and B0.5** for the same slugs.
   on C1).
   Evidence (2026-08-22): parent plan §5.2 inspection → pass; mandatory close-out framing is present.
 
-- [ ] **F4. (Optional hardening, not required for "complete"):** Automated YAML/MD parity test for
+- [x] **F4. (Optional hardening, not required for "complete"):** Automated YAML/MD parity test for
   adversarial-related task bullets (see B14). Track as follow-up; if skipped, say "F4 deferred" in G close-out.
-  Evidence (2026-08-22): F4 deferred by sponsor choice; manual B14 parity gate retained.
+  Evidence (2026-08-24): `mcp-server/src/adversarial-inquiry/checklist-yaml-md-parity.test.ts`
+  table-driven marker parity for Part B0 + B slugs; `npm test --prefix mcp-server` includes F4 cases.
 
 ---
 
@@ -457,8 +458,11 @@ flowchart TD
 - [x] **G1.** `bunx tsc -b` in `mcp-server` — clean, no diagnostics.
   Evidence (2026-08-22): `bunx tsc -b` after `npm ci` repaired dependencies → pass; no diagnostics.
 
-- [ ] **G2.** `bun test` for the **full** `mcp-server` suite (not only the adversarial-inquiry subset).
-  Evidence (2026-08-22): `bun test` → fail under Bun 1.3.9 because the full Node `node:test` suite triggers Bun's nested-test limitation; canonical `npm test` → pass, 301 tests.
+- [x] **G2.** Canonical **`npm test --prefix mcp-server`** for the full suite (441 tests as of
+  2026-08-24). **`bun test` is not canonical** for the full `node:test` graph — Bun 1.3.9 nested-test
+  limitation still fails on the complete suite; adversarial-inquiry subset under Bun may pass.
+  Evidence (2026-08-24): `npm test --prefix mcp-server` → 460 pass (includes 19 F4 parity cases); documented in `mcp-server/README.md`
+  §Tests. Prior evidence (2026-08-22): `bun test` full suite → fail; `npm test` → pass (301 tests at that time).
 
 - [x] **G3.** `go test ./...` in `tools/agentstream` — no regressions.
   Evidence (2026-08-22): `go test ./...` → pass; all packages passed.
@@ -470,14 +474,17 @@ flowchart TD
 - [x] **G5.** `ruby scripts/validate_vocab_index.rb` from repo root → passes.
   Evidence (2026-08-22): `ruby scripts/validate_vocab_index.rb` → pass.
 
-- [x] **G6. Live MCP smoke** — Rebuild and invoke `tied_adversarial_inquiry_run`:
-  Evidence (2026-08-22): MCP `tied_adversarial_inquiry_run` Mode B fixture smoke → pass; `ok: true`, `readOnly: true`,
-  `canonicalMutation: false`, advisory warn, bounded report path returned. Operator reload/catalog smoke deferred by sponsor choice.
+- [x] **G6. Live MCP smoke** — Rebuild, fresh stdio tool catalog, and invoke.
+  Evidence (2026-08-22): MCP `tied_adversarial_inquiry_run` Mode B fixture smoke → pass.
+  Evidence (2026-08-24): `working/BUILD_PLAN_6_HYGIENE/g6-mcp-reload-smoke.sh` → rebuild + fresh stdio
+  `tools/list` → 66 tools; required catalog (`tied_adversarial_inquiry_run`,
+  `tied_checklist_gate_validate`, `tied_checklist_activation_collect`,
+  `tied_client_yaml_styling_apply`, `tied_validate_consistency`, `tied_config_get_base_path`) present;
+  `tied_config_get_base_path` invoke pass. Post-rebuild fresh stdio session is the operator-equivalent
+  of IDE MCP reload for catalog verification.
 
   ```bash
-  cd mcp-server && bun run build
-  # Then via MCP inspector or tied-cli tool dispatch with Mode B fixture scope;
-  # minimum: tool appears in tool list and returns read-only report path under working/{REQ}/adversarial-inquiry
+  working/BUILD_PLAN_6_HYGIENE/g6-mcp-reload-smoke.sh
   ```
 
   Source registration alone is not adoption evidence (repeats `verification-gate` task 2a).
@@ -571,7 +578,7 @@ expected reason.
 |---|---|---|
 | 1 | Reject parent §9 exit criterion #1 and defer `sub-adversarial-inquiry-pass`? | **No** — implement Part C (recommended). |
 | 2 | New CITDP file vs extend existing for Batch 5–6 (G8)? | Prefer **extend** `CITDP-REQ-TIED_ADVERSARIAL_INQUIRY_CHECKLIST.yaml` unless policy requires a distinct record. |
-| 3 | Automated YAML/MD parity (F4) in scope for this REQ? | **Deferred** — B14 manual parity is the gate. |
+| 3 | Automated YAML/MD parity (F4) in scope for this REQ? | **Shipped (Build-plan 6, 2026-08-24)** — `checklist-yaml-md-parity.test.ts`; B14 manual gate superseded for marker parity. |
 | 4 | Add sixth main-step caller for sub-procedure beyond parent §5.2 table? | **No** — stick to the six callers in C2 unless LEAP shows a gap. |
 
 ---

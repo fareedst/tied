@@ -1,0 +1,22 @@
+# Build-plan 6 — optional hardening and hygiene (doc/test-only)
+# Copied from tied/docs/agent-req-implementation-checklist.yaml template; scoped tracker only.
+request: BUILD_PLAN_6_HYGIENE
+depth_tier: minimal
+gate_policy: advisory
+status: complete
+close_out_date: "2026-08-24"
+deliverables:
+  - P2 doc sync (adversarial-inquiry-activation-recommendation.md)
+  - H5 header sync (integrated-activation-checklist-enforcement-plan.md)
+  - G2 npm canonical runner docs (mcp-server/README.md, integration checklist)
+  - F4 checklist-yaml-md-parity.test.ts
+  - G6 post-rebuild MCP tool-catalog smoke (g6-mcp-reload-smoke.sh)
+  - G2 stdd-repo Go Mode B close_out dogfood (g2-dogfood/replay-g2-stdd-dogfood.sh)
+  - outstanding-work-prioritized-plan.md + CHANGELOG.md close-out
+deferred: []
+evidence:
+  npm_test: "460/460 pass (npm test --prefix mcp-server, 2026-08-24)"
+  tied_validate_consistency: ok
+  g6_reload_smoke: "working/BUILD_PLAN_6_HYGIENE/g6-reload-smoke-result.json (66 tools, 6 required)"
+  g2_dogfood: "working/REQ-TIED_ADVERSARIAL_INQUIRY/g2-dogfood/gate-close_out-result.json (allowed: true)"
+  gate_validate: "dogfood close_out gate via tied-cli tied_checklist_gate_validate"

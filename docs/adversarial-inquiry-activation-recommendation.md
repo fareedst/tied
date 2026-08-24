@@ -141,9 +141,13 @@ A call without all four bounded artifacts (or valid phase-dir pairing) is incomp
 - Part H pilots H1–H5 tracked in integration checklist.
 - Pilot client refresh via `./copy_files.sh` on `1787416567` and `1787507684`.
 
-### P2 — remaining
+### P2 — shipped / remaining
 
-- Add a native Go evidence adapter (Mode B).
+- ~~Add a native Go evidence adapter (Mode B).~~ **Shipped (2026-08-24):** Go Mode B project-input
+  evidence adapter with realpath confinement; fixture verification at
+  `mcp-server/test/fixtures/adversarial-inquiry-go-mode-b/`; tracker
+  `working/REQ-TIED_ADVERSARIAL_INQUIRY/REQ-TIED_ADVERSARIAL_INQUIRY_sliceG2_tracker.yaml`;
+  CITDP `tied/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-sliceG2.yaml`; 441/441 npm tests pass.
 - ~~Run strict eligibility and human-approval pilots.~~ **Shipped (2026-08-24):** client
   `1787416567` strict-approved pilot with runbook at
   `working/client-1787416567-strict-pilot/replay-strict-approved-pilot.sh`;
@@ -168,9 +172,9 @@ A methodology release may claim integrated adversarial inquiry is operable when:
 - [x] the metrics runbook defines inquiry calls and artifact presence as paired
   signals (`analyze_tied_mcp_metrics.rb --project-root`).
 
-**Not required for integrated claim:** native Go project-input adapter (P2);
-strict-approved blocking; retroactive upgrade of minimal-only clients such as
-`1787503424`.
+**Not required for integrated claim:** strict-approved blocking; retroactive upgrade of
+minimal-only clients such as `1787503424`. (Native Go Mode B adapter shipped in P2 for
+optional adoption; not a gate for the integrated operability claim above.)
 
 ## Related artifacts
 

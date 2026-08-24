@@ -1,11 +1,37 @@
 {
   "provenance": {
+    "adapter": "go-test",
+    "adapterDiagnostics": [],
+    "manifest": {
+      "ignoreRules": [],
+      "languages": [
+        "go"
+      ],
+      "projectRoot": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "testClassifiers": [
+        "go-test"
+      ],
+      "tiedBasePath": "/Users/fareed/Documents/dev/chatgpt/stdd/tied",
+      "version": "mode-b-fixture"
+    },
+    "mode": "project",
     "proofBoundaries": [
+      "traceability_structure",
       "semantic_fidelity"
     ],
-    "scope": [
-      "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de"
-    ]
+    "sourceRevisions": {
+      "architecture": "eef7914abd641b63",
+      "architectureDetail": "64050a2bfb845a5d",
+      "implementation": "2cbeadc03ff236c5",
+      "implementationDetail": "1874677c16f234fd",
+      "implementationPseudocode": "fa2fcee2fe9ff893",
+      "production": "d989e9335c079a6f",
+      "productionEvidence": "a2eb64bd8364748b",
+      "requirementDetail": "f13f300de3f0d3bb",
+      "requirements": "76c12468bd161390",
+      "semanticTokens": "2588b6591ed0c12a",
+      "test": "a37811d6eed3ad90"
+    }
   },
   "schemaVersion": "adversarial-inquiry-provenance.v1"
 }

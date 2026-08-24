@@ -1,4 +1,15 @@
 IMPL-TIED_ADVERSARIAL_INQUIRY:
+  adversarial_inquiry:
+    block_name: "BUILD_PROJECT_INQUIRY_INPUT"
+    specification:
+      - id: "gotest-9-t.Errorf"
+        kind: "behavior"
+        order: 1
+        value: "t.Errorf(\"Divide(6, 2) = %d, want 3\", got)"
+      - id: "gotest-13-t.Errorf"
+        kind: "failure"
+        order: 2
+        value: "t.Errorf(\"Divide(1, 0) expected error, got nil\")"
   code_locations:
     files:
       - description: "Adversarial inquiry core, Ruby Minitest and Go test adapter boundaries, workflow, assurance, and pilot modules"
@@ -35,9 +46,9 @@ IMPL-TIED_ADVERSARIAL_INQUIRY:
       author: "AI Agent"
       date: "2026-08-21"
     last_updated:
-      author: "build-plan subagent"
+      author: "AI Agent"
       date: "2026-08-24"
-      reason: "Ship native Go Mode B project-input adapter (sliceG2-go-mode-b)"
+      reason: "Dogfood Go Mode B spec for stdd-repo close_out inquiry (G2 follow-on)"
   name: "Obligation graph, fidelity engine, and assurance gate"
   rationale:
     benefits:

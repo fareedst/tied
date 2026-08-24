@@ -6,3 +6,4 @@
 {"schemaVersion":"adversarial-inquiry-finding.v1","kind":"duplicate_link","link":["5caa4b18a1d2b341","5caa4b18a1d2b341"]}
 {"schemaVersion":"adversarial-inquiry-finding.v1","kind":"duplicate_link","link":["9ae0455d94566006","9ae0455d94566006"]}
 {"schemaVersion":"adversarial-inquiry-finding.v1","kind":"duplicate_link","link":["c6ee509fd5f65a25","c6ee509fd5f65a25"]}
+{"schemaVersion":"adversarial-inquiry-finding.v1","kind":"finding","finding":{"blockRevision":"report","dimension":"semantic_fidelity","evidenceRefs":[],"id":"825d368b7ee71128","lifecycle":"observed","message":"Specification statement has no corresponding evidence.","obligationId":"REQ-TIED_ADVERSARIAL_INQUIRY#bidirectional-fidelity","proofBoundary":"semantic_fidelity","statementId":"gotest-13-t.Errorf"}}

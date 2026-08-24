@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Build-plan 6 optional hygiene (2026-08-24)** — Closes the outstanding-work prioritized plan
+  sequence (build-plans 1–6). F4 automated YAML/Markdown adversarial task marker parity test
+  (`checklist-yaml-md-parity.test.ts`, 19 cases); canonical `npm test` runner documented in
+  `mcp-server/README.md` (460 tests; Bun full-suite limitation noted); P2 Go adapter and H5 header
+  doc sync; G6 post-rebuild MCP tool-catalog smoke (`g6-mcp-reload-smoke.sh`, 66 tools); G2 live
+  stdd-repo Go Mode B close_out dogfood (`g2-dogfood/replay-g2-stdd-dogfood.sh`, integrated gate
+  allowed); REQ `criterion_id` fields and IMPL dogfood `adversarial_inquiry` spec for Mode B on the
+  methodology repo.
+
 - **Client YAML styling gates (Slice 1 + Slice 2)** —
   `[REQ-TIED_YAML_STYLE_CONFIGURATION]` / `[ARCH-TIED_YAML_STYLE_RESOLUTION]` /
   `[IMPL-TIED_YAML_STYLE_RESOLVER]`: checklist `sub-client-yaml-styling` governs

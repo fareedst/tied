@@ -3,222 +3,115 @@
   "findings": [
     {
       "direction": "B",
-      "evidenceRefs": [
-        "prod-empty-forest"
-      ],
-      "id": "2069bc9602c5c815",
-      "kind": "reliability",
-      "message": "Evidence does not match the specified statement.",
+      "id": "4a3ed3285e2bb6b9",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
       "proofBoundary": "semantic_fidelity",
-      "source": {
-        "location": "tools/rootjobs/internal/tree/tree.go:25"
-      },
-      "statementId": "stmt-empty-forest"
-    },
-    {
-      "direction": "B",
-      "evidenceRefs": [
-        "prod-pid-sort"
-      ],
-      "id": "429c69964d487cbb",
-      "kind": "reliability",
-      "message": "Evidence does not match the specified statement.",
-      "proofBoundary": "semantic_fidelity",
-      "source": {
-        "location": "tools/rootjobs/internal/tree/tree.go:62"
-      },
-      "statementId": "stmt-pid-sort"
-    },
-    {
-      "direction": "B",
-      "evidenceRefs": [
-        "prod-orphan-root"
-      ],
-      "id": "438454b0d6108f95",
-      "kind": "reliability",
-      "message": "Evidence does not match the specified statement.",
-      "proofBoundary": "semantic_fidelity",
-      "source": {
-        "location": "tools/rootjobs/internal/tree/tree.go:44"
-      },
-      "statementId": "stmt-orphan-root"
-    },
-    {
-      "direction": "A",
-      "evidenceRefs": [
-        "test-CE-003"
-      ],
-      "id": "61f3c786ddb435e7",
-      "kind": "reliability",
-      "message": "Evidence does not match the specified statement.",
-      "proofBoundary": "semantic_fidelity",
-      "source": {
-        "location": "tools/rootjobs/internal/tree/tree_test.go:83"
-      },
-      "statementId": "stmt-empty-forest"
-    },
-    {
-      "direction": "A",
-      "evidenceRefs": [
-        "test-dedupe"
-      ],
-      "id": "9dacb36312ec47a2",
-      "kind": "reliability",
-      "message": "Evidence does not match the specified statement.",
-      "proofBoundary": "semantic_fidelity",
-      "source": {
-        "location": "tools/rootjobs/internal/tree/tree_test.go:94"
-      },
-      "statementId": "stmt-dedupe"
-    },
-    {
-      "direction": "A",
-      "evidenceRefs": [
-        "test-CE-001"
-      ],
-      "id": "cd0bbff5f27319ed",
-      "kind": "reliability",
-      "message": "Evidence does not match the specified statement.",
-      "proofBoundary": "semantic_fidelity",
-      "source": {
-        "location": "tools/rootjobs/internal/tree/tree_test.go:58"
-      },
-      "statementId": "stmt-orphan-root"
-    },
-    {
-      "direction": "B",
-      "evidenceRefs": [
-        "prod-dedupe"
-      ],
-      "id": "dcd13e3468628c05",
-      "kind": "reliability",
-      "message": "Evidence does not match the specified statement.",
-      "proofBoundary": "semantic_fidelity",
-      "source": {
-        "location": "tools/rootjobs/internal/tree/tree.go:29"
-      },
-      "statementId": "stmt-dedupe"
-    },
-    {
-      "direction": "A",
-      "evidenceRefs": [
-        "test-CE-002"
-      ],
-      "id": "e52e89a63c7fb82e",
-      "kind": "reliability",
-      "message": "Evidence does not match the specified statement.",
-      "proofBoundary": "semantic_fidelity",
-      "source": {
-        "location": "tools/rootjobs/internal/tree/tree_test.go:69"
-      },
-      "statementId": "stmt-pid-sort"
+      "statementId": "gotest-13-t.Errorf"
     }
   ],
   "graph": {
     "edges": [
       {
-        "from": "REQ-ROOTJOBS_TREE#criterion-1",
+        "from": "REQ-TIED_ADVERSARIAL_INQUIRY#bidirectional-fidelity",
         "kind": "criterion_constraint",
-        "to": "constraint:constraint-rootjobs-tree"
+        "to": "constraint:constraint-REQ-TIED_ADVERSARIAL_INQUIRY"
       },
       {
-        "from": "constraint:constraint-rootjobs-tree",
+        "from": "REQ-TIED_ADVERSARIAL_INQUIRY#minitest-adapter",
+        "kind": "criterion_constraint",
+        "to": "constraint:constraint-REQ-TIED_ADVERSARIAL_INQUIRY"
+      },
+      {
+        "from": "REQ-TIED_ADVERSARIAL_INQUIRY#obligation-graph",
+        "kind": "criterion_constraint",
+        "to": "constraint:constraint-REQ-TIED_ADVERSARIAL_INQUIRY"
+      },
+      {
+        "from": "REQ-TIED_ADVERSARIAL_INQUIRY#read-only-deterministic",
+        "kind": "criterion_constraint",
+        "to": "constraint:constraint-REQ-TIED_ADVERSARIAL_INQUIRY"
+      },
+      {
+        "from": "REQ-TIED_ADVERSARIAL_INQUIRY#strict-eligibility",
+        "kind": "criterion_constraint",
+        "to": "constraint:constraint-REQ-TIED_ADVERSARIAL_INQUIRY"
+      },
+      {
+        "from": "constraint:constraint-REQ-TIED_ADVERSARIAL_INQUIRY",
         "kind": "constraint_block",
-        "to": "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de"
+        "to": "IMPL-TIED_ADVERSARIAL_INQUIRY#BUILD_PROJECT_INQUIRY_INPUT#2b546363cdeb9548"
       },
       {
-        "from": "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de",
+        "from": "IMPL-TIED_ADVERSARIAL_INQUIRY#BUILD_PROJECT_INQUIRY_INPUT#2b546363cdeb9548",
         "kind": "block_evidence",
-        "to": "evidence:prod-tree-build"
+        "to": "evidence:production-locus"
       },
       {
-        "from": "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de",
+        "from": "IMPL-TIED_ADVERSARIAL_INQUIRY#BUILD_PROJECT_INQUIRY_INPUT#2b546363cdeb9548",
         "kind": "block_evidence",
-        "to": "evidence:test-tree-empty"
-      },
-      {
-        "from": "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de",
-        "kind": "block_evidence",
-        "to": "evidence:test-tree-orphan"
-      },
-      {
-        "from": "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de",
-        "kind": "block_evidence",
-        "to": "evidence:test-tree-sort"
-      },
-      {
-        "from": "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de",
-        "kind": "block_case",
-        "to": "case:CE-001"
-      },
-      {
-        "from": "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de",
-        "kind": "block_case",
-        "to": "case:CE-002"
-      },
-      {
-        "from": "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de",
-        "kind": "block_case",
-        "to": "case:CE-003"
+        "to": "evidence:test-locus"
       }
     ],
     "nodes": [
       {
-        "id": "case:CE-001",
-        "kind": "case"
-      },
-      {
-        "id": "case:CE-002",
-        "kind": "case"
-      },
-      {
-        "id": "case:CE-003",
-        "kind": "case"
-      },
-      {
-        "id": "constraint:constraint-rootjobs-tree",
+        "id": "constraint:constraint-REQ-TIED_ADVERSARIAL_INQUIRY",
         "kind": "constraint"
       },
       {
-        "id": "evidence:prod-tree-build",
+        "id": "evidence:production-locus",
         "kind": "evidence",
-        "revision": "citdp-20260823"
+        "revision": "fa2fcee2fe9ff893"
       },
       {
-        "id": "evidence:test-tree-empty",
+        "id": "evidence:test-locus",
         "kind": "evidence",
-        "revision": "citdp-20260823"
+        "revision": "fa2fcee2fe9ff893"
       },
       {
-        "id": "evidence:test-tree-orphan",
-        "kind": "evidence",
-        "revision": "citdp-20260823"
-      },
-      {
-        "id": "evidence:test-tree-sort",
-        "kind": "evidence",
-        "revision": "citdp-20260823"
-      },
-      {
-        "id": "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de",
+        "id": "IMPL-TIED_ADVERSARIAL_INQUIRY#BUILD_PROJECT_INQUIRY_INPUT#2b546363cdeb9548",
         "kind": "block",
-        "revision": "32afaba1c1522314"
+        "revision": "625103aa89425102"
       },
       {
-        "id": "REQ-ROOTJOBS_TREE#criterion-1",
+        "id": "REQ-TIED_ADVERSARIAL_INQUIRY#bidirectional-fidelity",
         "kind": "criterion",
-        "revision": "criterion-rev-rootjobs-tree"
+        "revision": "cf93e602540932d3"
+      },
+      {
+        "id": "REQ-TIED_ADVERSARIAL_INQUIRY#minitest-adapter",
+        "kind": "criterion",
+        "revision": "ae2563f12a7e1a06"
+      },
+      {
+        "id": "REQ-TIED_ADVERSARIAL_INQUIRY#obligation-graph",
+        "kind": "criterion",
+        "revision": "cc97544b96d91724"
+      },
+      {
+        "id": "REQ-TIED_ADVERSARIAL_INQUIRY#read-only-deterministic",
+        "kind": "criterion",
+        "revision": "decaab5476d4c62d"
+      },
+      {
+        "id": "REQ-TIED_ADVERSARIAL_INQUIRY#strict-eligibility",
+        "kind": "criterion",
+        "revision": "59681bea1b23527c"
       }
     ],
-    "projectId": "bd6908f862145619"
+    "projectId": "/Users/fareed/Documents/dev/chatgpt/stdd"
   },
-  "projectId": "bd6908f862145619",
+  "projectId": "/Users/fareed/Documents/dev/chatgpt/stdd",
   "proofBoundaries": [
     "semantic_fidelity"
   ],
   "readOnly": true,
   "schemaVersion": "adversarial-inquiry-report.v1",
   "scope": [
-    "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de"
+    "REQ-TIED_ADVERSARIAL_INQUIRY#bidirectional-fidelity",
+    "REQ-TIED_ADVERSARIAL_INQUIRY#minitest-adapter",
+    "REQ-TIED_ADVERSARIAL_INQUIRY#obligation-graph",
+    "REQ-TIED_ADVERSARIAL_INQUIRY#read-only-deterministic",
+    "REQ-TIED_ADVERSARIAL_INQUIRY#strict-eligibility"
   ]
 }

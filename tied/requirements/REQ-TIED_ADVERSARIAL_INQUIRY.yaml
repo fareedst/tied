@@ -21,8 +21,8 @@ REQ-TIED_ADVERSARIAL_INQUIRY:
       date: "2026-08-21"
     last_updated:
       author: "AI Agent"
-      date: "2026-08-21"
-      reason: "Remove non-token process reference during token audit"
+      date: "2026-08-24"
+      reason: "Add criterion_id fields for Go Mode B stdd-repo dogfood (G2 follow-on)"
   name: "Adversarial inquiry for obligation and fidelity evidence"
   priority: "P0"
   rationale:
@@ -59,14 +59,19 @@ REQ-TIED_ADVERSARIAL_INQUIRY:
       sequencing: "select depth before any depth-dependent pre-RED inquiry gate"
   satisfaction_criteria:
     - criterion: "A block receives PASS only when reliable and complete evidence exists in both directions."
+      criterion_id: "bidirectional-fidelity"
       metric: "Fidelity fixtures detect false statements, missing behavior, wrong delegation, missing errors, reordered steps, and unobserved effects."
     - criterion: "Every changed requirement criterion maps to an architecture constraint and implementation block or an explicit unresolved diagnostic."
+      criterion_id: "obligation-graph"
       metric: "Obligation graph tests cover complete, malformed, duplicate, stale, and unresolved references."
     - criterion: "Research analysis does not mutate audited project YAML and produces deterministic output."
+      criterion_id: "read-only-deterministic"
       metric: "Read-only composition tests compare canonical input bytes before and after and repeat the same snapshot/configuration."
     - criterion: "Strict gating is limited to an eligible supported subset with negative controls, bounded execution, explicit proof boundaries, deterministic scope, and owned waivers."
+      criterion_id: "strict-eligibility"
       metric: "Eligibility tests reject missing controls and accept only complete eligibility records."
     - criterion: "The first language adapter analyzes one Ruby Minitest module and reports unsupported constructs as UNRESOLVED."
+      criterion_id: "minitest-adapter"
       metric: "Minitest adapter tests cover assert, assert_equal, assert_empty, assert_raises, refute, and unsupported_adapter."
   status: "Implemented"
   traceability:

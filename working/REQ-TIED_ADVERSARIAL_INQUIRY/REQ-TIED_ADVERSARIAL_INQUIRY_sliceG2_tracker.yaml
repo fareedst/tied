@@ -16,9 +16,7 @@ entry_points:
 execution_evidence:
   close_out_evidence:
     date: "2026-08-24"
-    deferred:
-      - "Live stdd-repo dogfood close_out inquiry (fixture verification path used)"
-      - "Operator MCP reload smoke (G6-class)"
+    deferred: []
     gates:
       close_out: "working/REQ-TIED_ADVERSARIAL_INQUIRY/gate-sliceG2-close_out.json"
       mcp_server_npm_test: "416 tests pass via npm test --prefix mcp-server"
@@ -46,13 +44,16 @@ execution_evidence:
     commands:
       - "npm run build --prefix mcp-server"
       - "npm test --prefix mcp-server"
-      - "tied_adversarial_inquiry_run phase=close_out run_id=sliceG2-close-001 (Go fixture REQ-FIXTURE-ADVERSARIAL)"
+      - "tied_adversarial_inquiry_run phase=close_out run_id=g2-dogfood-stdd-close-001 (stdd repo Go Mode B)"
+      - "working/REQ-TIED_ADVERSARIAL_INQUIRY/g2-dogfood/replay-g2-stdd-dogfood.sh"
+      - "working/REQ-TIED_ADVERSARIAL_INQUIRY/g2-dogfood/gate-close_out-result.json"
+      - "working/BUILD_PLAN_6_HYGIENE/g6-mcp-reload-smoke.sh"
       - "tied_checklist_activation_collect phase=close_out"
       - "tied_checklist_gate_validate phase=close_out"
       - "working/REQ-TIED_ADVERSARIAL_INQUIRY/gate-sliceG2-close_out.json"
     depth_tier: "integrated"
     gate_policy: "advisory"
-    limitation: "Go fixture activation path; no live stdd-repo dogfood close_out inquiry."
+    limitation: "Go fixture activation path used at original close-out; stdd-repo dogfood replay added 2026-08-24."
     prior_depth_tier: "minimal"
     profile_depth: "not_measured"
     status: "complete"

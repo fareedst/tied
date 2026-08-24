@@ -1,0 +1,74 @@
+{
+  "ok": true,
+  "receipt": {
+    "success": true,
+    "tool": "tied_adversarial_inquiry_run",
+    "request_token": "REQ-TIED_ADVERSARIAL_INQUIRY",
+    "project_id": "bd6908f862145619",
+    "run_id": "g2-dogfood-stdd-close-001",
+    "phase": "close_out",
+    "scope": [
+      "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de"
+    ],
+    "scope_hash": "1c9407f4fbc09e3d76f8e381d8042f8e4d2ed7ab7574c07c18bdbe822591bc62",
+    "artifact_hashes": {
+      "obligation-report.json": "d5f17d8f211cfbf2309fa84420e5b6aa738512da31975da09addb83bbd8ffc83",
+      "finding-ledger.jsonl": "0959a08201201b5a851d41f94680aab177931d190c4a9eb18581665fc73930ac",
+      "gate-result.json": "4119887d893affad19da7f58874458527d1591b297249763f765a2eff8fdcc60",
+      "evidence-provenance.json": "72fb59c06ad8b6b402e7e8c8e967b365b2bd9ff3da4d8dd1a283421acf323297"
+    }
+  },
+  "artifacts": {
+    "obligation-report.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_ADVERSARIAL_INQUIRY",
+      "project_id": "bd6908f862145619",
+      "run_id": "g2-dogfood-stdd-close-001",
+      "phase": "close_out",
+      "scope_hash": "1c9407f4fbc09e3d76f8e381d8042f8e4d2ed7ab7574c07c18bdbe822591bc62",
+      "hash": "d5f17d8f211cfbf2309fa84420e5b6aa738512da31975da09addb83bbd8ffc83",
+      "path": "working/REQ-TIED_ADVERSARIAL_INQUIRY/adversarial-inquiry/phase-close_out/obligation-report.json"
+    },
+    "finding-ledger.jsonl": {
+      "valid": true,
+      "request_token": "REQ-TIED_ADVERSARIAL_INQUIRY",
+      "project_id": "bd6908f862145619",
+      "run_id": "g2-dogfood-stdd-close-001",
+      "phase": "close_out",
+      "scope_hash": "1c9407f4fbc09e3d76f8e381d8042f8e4d2ed7ab7574c07c18bdbe822591bc62",
+      "hash": "0959a08201201b5a851d41f94680aab177931d190c4a9eb18581665fc73930ac",
+      "path": "working/REQ-TIED_ADVERSARIAL_INQUIRY/adversarial-inquiry/phase-close_out/finding-ledger.jsonl"
+    },
+    "gate-result.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_ADVERSARIAL_INQUIRY",
+      "project_id": "bd6908f862145619",
+      "run_id": "g2-dogfood-stdd-close-001",
+      "phase": "close_out",
+      "scope_hash": "1c9407f4fbc09e3d76f8e381d8042f8e4d2ed7ab7574c07c18bdbe822591bc62",
+      "hash": "4119887d893affad19da7f58874458527d1591b297249763f765a2eff8fdcc60",
+      "path": "working/REQ-TIED_ADVERSARIAL_INQUIRY/adversarial-inquiry/phase-close_out/gate-result.json"
+    },
+    "evidence-provenance.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_ADVERSARIAL_INQUIRY",
+      "project_id": "bd6908f862145619",
+      "run_id": "g2-dogfood-stdd-close-001",
+      "phase": "close_out",
+      "scope_hash": "1c9407f4fbc09e3d76f8e381d8042f8e4d2ed7ab7574c07c18bdbe822591bc62",
+      "hash": "72fb59c06ad8b6b402e7e8c8e967b365b2bd9ff3da4d8dd1a283421acf323297",
+      "path": "working/REQ-TIED_ADVERSARIAL_INQUIRY/adversarial-inquiry/phase-close_out/evidence-provenance.json"
+    }
+  },
+  "expected": {
+    "request_token": "REQ-TIED_ADVERSARIAL_INQUIRY",
+    "project_id": "bd6908f862145619",
+    "run_id": "g2-dogfood-stdd-close-001",
+    "phase": "close_out",
+    "scope": [
+      "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de"
+    ],
+    "scope_hash": "1c9407f4fbc09e3d76f8e381d8042f8e4d2ed7ab7574c07c18bdbe822591bc62"
+  },
+  "diagnostics": []
+}

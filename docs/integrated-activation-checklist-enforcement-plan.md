@@ -11,7 +11,7 @@
 - [`integrated-activation-enforcement-operator-friction-plan.md`](integrated-activation-enforcement-operator-friction-plan.md) — pilot-derived fixes for enforcement holes and operator friction (client `1787507684`)
 - [`adversarial-inquiry-activation-recommendation.md`](adversarial-inquiry-activation-recommendation.md) — maturity model and operating contract
 - [`adversarial-inquiry-checklist-integration-plan.md`](adversarial-inquiry-checklist-integration-plan.md) — step mapping (Batches 5–6)
-- [`adversarial-inquiry-checklist-integration-checklist.md`](adversarial-inquiry-checklist-integration-checklist.md) — Part H activation pilots (H5 pending)
+- [`adversarial-inquiry-checklist-integration-checklist.md`](adversarial-inquiry-checklist-integration-checklist.md) — Part H activation pilots (**H5 shipped** 2026-08-24, client `1787507684`)
 - [`tied/vocab/fidelity-research.md`](../tied/vocab/fidelity-research.md) — **integrated activation evidence**, **activation artifact pairing**, **checklist evidence gate**, **prior depth tier**, **depth-change waiver**, **close-out inquiry waiver**, **phase-aware slug set**
 
 **Working artifacts (Batch 2 planning):**

@@ -23,7 +23,19 @@ The MCP server remains in the TIED repo; your project only references it via MCP
 
 ## Tests
 
-Run `npm test` from the `mcp-server` directory. This builds the server and runs unit tests (feedback, yaml-loader, and others) and e2e tests. The e2e suite (`src/e2e/bootstrap-and-load.test.ts`) bootstraps a temp project with `copy_files.sh` and verifies the loader reads requirements and semantic-tokens indexes from the copied `tied/` directory.
+Run **`npm test`** from the `mcp-server` directory — this is the **canonical** full-suite runner
+(460 tests as of 2026-08-24, including F4 YAML/MD parity cases). The script builds the server then runs the complete Node
+`node:test` suite (unit, integration, e2e, adversarial-inquiry, feature-orchestration, and
+quality-evidence modules).
+
+**Do not use `bun test` for the full suite:** Bun 1.3.9 hits a nested-test limitation when
+executing the entire `node:test` graph; adversarial-inquiry subset runs under Bun may pass, but
+full-suite verification must use `npm test`. CI and close-out gates should record
+`npm test --prefix mcp-server` (or `cd mcp-server && npm test`).
+
+The e2e suite (`src/e2e/bootstrap-and-load.test.ts`) bootstraps a temp project with
+`copy_files.sh` and verifies the loader reads requirements and semantic-tokens indexes from the
+copied `tied/` directory.
 
 ## Configuration
 

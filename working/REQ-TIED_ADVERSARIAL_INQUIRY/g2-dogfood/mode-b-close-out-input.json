@@ -1,0 +1,15 @@
+{
+  "mode": "project",
+  "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "tied_base_path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied",
+  "request_token": "REQ-TIED_ADVERSARIAL_INQUIRY",
+  "impl_token": "IMPL-TIED_ADVERSARIAL_INQUIRY",
+  "test_path": "mcp-server/test/fixtures/adversarial-inquiry-go-mode-b/mini-project/internal/divide/divide_test.go",
+  "production_path": "mcp-server/test/fixtures/adversarial-inquiry-go-mode-b/mini-project/internal/divide/divide.go",
+  "production_evidence_path": "working/REQ-TIED_ADVERSARIAL_INQUIRY/g2-dogfood/production-evidence-stdd-good.json",
+  "policy": "advisory",
+  "activation": {
+    "runId": "g2-dogfood-stdd-close-001",
+    "phase": "close_out"
+  }
+}
