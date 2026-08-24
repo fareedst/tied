@@ -1,0 +1,107 @@
+copy_hygiene: "Slice M tracker — metrics client attribution and phase-aware analyzer. Do not inherit unrelated REQ close-out gate claims."
+description: "Per-request Tracker for Follow-on Slice M — tied-cli metrics client tag and phase-aware analyze_tied_mcp_metrics.rb."
+execution_evidence:
+  close_out_evidence:
+    date: "2026-08-24"
+    deferred: []
+    gates:
+      close_out:
+        allowed: true
+        depth: "integrated"
+        disposition: "completed"
+        evidence_refs:
+          - "mcp-server/test/tied-cli-metrics-client.test.cjs"
+          - "ruby scripts/analyze_tied_mcp_metrics_test.rb"
+          - "scripts/analyze_tied_mcp_metrics.rb"
+          - "tied/citdp/CITDP-REQ-MCP_USAGE_METRICS-sliceM.yaml"
+        phase: "close_out"
+        waiver: "close_out_inquiry_waiver referencing 1787507684-audit verification run"
+    master_checklist: "tied/docs/agent-req-implementation-checklist.yaml"
+  completed:
+    - "change-definition"
+    - "gate-pseudocode-validation"
+    - "impact-discovery"
+    - "session-bootstrap"
+    - "test-strategy"
+    - "traceable-commit"
+    - "translate-sponsor-intent"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
+  operator_evidence:
+    commands:
+      - "node --test mcp-server/test/tied-cli-metrics-client.test.cjs"
+      - "npm test --prefix mcp-server"
+      - "ruby scripts/analyze_tied_mcp_metrics_test.rb"
+      - "tied_checklist_gate_validate phase=close_out"
+      - "tied_validate_consistency"
+    depth_tier: "integrated"
+    gate_policy: "advisory"
+    limitation: "Metrics support provenance only; phase dirs remain authoritative for activation."
+    prior_depth_tier: "minimal"
+    profile_depth: "integrated"
+    status: "complete"
+  request: "REQ-MCP_USAGE_METRICS"
+impact_analysis:
+  modules_or_boundaries: "tied-cli.sh client resolution; analyze_tied_mcp_metrics.rb phase artifact completeness; supporting tests only."
+  tied_tokens_affected:
+    - "IMPL-MCP_USAGE_METRICS"
+    - "REQ-MCP_USAGE_METRICS"
+    - "REQ-TIED_ADVERSARIAL_INQUIRY"
+record_identity:
+  batch: "operator-friction-sliceM"
+  change_request_id: "REQ-MCP_USAGE_METRICS"
+  record_status: "complete"
+  recorded_at: "2026-08-24"
+  refine_pass: 0
+  title: "Follow-on Slice M — metrics and observability"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "AGENTS.md"
+      - "tied/vocab/fidelity-research.md"
+      - "tied/vocab/prompt-composer.md"
+    slug: "session-bootstrap"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/integrated-activation-enforcement-operator-friction-plan.md"
+    slug: "translate-sponsor-intent"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-MCP_USAGE_METRICS/CITDP-REQ-MCP_USAGE_METRICS-sliceM.yaml"
+    slug: "change-definition"
+  - disposition: "completed"
+    evidence_refs:
+      - "scripts/analyze_tied_mcp_metrics.rb"
+      - "tools/bundled-tied-yaml-skill/scripts/tied-cli.sh"
+    slug: "impact-discovery"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-MCP_USAGE_METRICS-pseudocode.md"
+    slug: "gate-pseudocode-validation"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/test/tied-cli-metrics-client.test.cjs"
+      - "scripts/analyze_tied_mcp_metrics_test.rb"
+    slug: "test-strategy"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/test/tied-cli-metrics-client.test.cjs"
+      - "scripts/analyze_tied_mcp_metrics_test.rb"
+    slug: "unit-test-red"
+  - disposition: "completed"
+    evidence_refs:
+      - "scripts/analyze_tied_mcp_metrics.rb"
+      - "tools/bundled-tied-yaml-skill/scripts/tied-cli.sh"
+    slug: "unit-test-green"
+  - disposition: "completed"
+    evidence_refs:
+      - "node --test mcp-server/test/tied-cli-metrics-client.test.cjs"
+      - "npm test --prefix mcp-server"
+      - "ruby scripts/analyze_tied_mcp_metrics_test.rb"
+    slug: "verification-gate"
+  - disposition: "completed"
+    evidence_refs:
+      - "CHANGELOG.md"
+      - "tied/citdp/CITDP-REQ-MCP_USAGE_METRICS-sliceM.yaml"
+    slug: "traceable-commit"

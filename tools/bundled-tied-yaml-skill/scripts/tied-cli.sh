@@ -2,13 +2,16 @@
 # tied-cli.sh -- Call any tied-yaml MCP tool from the command line.
 #
 # Usage:
-#   tied-cli.sh <tool_name> [args_json]
+#   tied-cli.sh [--client NAME] <tool_name> [args_json|@path/to.json]
 #
 # Examples:
 #   tied-cli.sh yaml_index_list_tokens '{"index":"requirements"}'
 #   tied-cli.sh tied_validate_consistency '{}'
+#   tied-cli.sh --client 1787507684 tied_validate_consistency '{}'
 #   tied-cli.sh yaml_detail_read '{"token":"REQ-MY_FEATURE"}'
 #   tied-cli.sh tied_token_create_with_detail @/path/to/payload.json
+#   tied-cli.sh tied_checklist_activation_collect '{"request_token":"REQ-EXAMPLE","phase":"verification","run_id":"run-1","project_root":"/path/to/repo"}'
+#   # When TIED_MCP_COLLECT_METRICS=1 and project_root matches .../dev/test/{id}, metrics client defaults to {id}
 #
 # Large payloads: any args other than exactly "{}" are written to a temp file and
 # passed via TIED_CLI_ARGS_FILE so they are not subject to OS environment size limits.
@@ -19,6 +22,7 @@
 #   TIED_CLI_QUIET_MCP_STDERR -- set to 0 to forward MCP server stderr (default: suppress)
 #   TIED_MCP_COLLECT_METRICS -- set to 1 or true to append usage metrics JSONL (default: off)
 #   TIED_MCP_METRICS_PATH -- optional override for metrics JSONL (default: ~/.cursor/logs/tied-mcp-metrics.jsonl)
+#   TIED_MCP_METRICS_CLIENT -- optional client label; preserved when set; else --client, dev/test auto-detect, or tied-cli
 #
 # impl_detail_set_essence_pseudocode only (optional, mutually exclusive with each other):
 #   TIED_CLI_IMPL_ESSENCE_FILE -- UTF-8 file to use as the pseudo-code body (avoids a huge JSON string).
@@ -34,7 +38,28 @@
 
 set -euo pipefail
 
-TOOL_NAME="${1:?Usage: tied-cli.sh <tool_name> [args_json|@path/to.json]}"
+TIED_CLI_METRICS_CLIENT_FLAG=""
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --client)
+      TIED_CLI_METRICS_CLIENT_FLAG="${2:?Usage: tied-cli.sh [--client NAME] <tool_name> [args_json|@path/to.json]}"
+      shift 2
+      ;;
+    --)
+      shift
+      break
+      ;;
+    -*)
+      echo "ERROR: unknown option: $1" >&2
+      exit 1
+      ;;
+    *)
+      break
+      ;;
+  esac
+done
+
+TOOL_NAME="${1:?Usage: tied-cli.sh [--client NAME] <tool_name> [args_json|@path/to.json]}"
 ARGS_JSON="${2:-{\}}"
 if [[ "${ARGS_JSON}" == @* ]]; then
   ARGS_FILE="${ARGS_JSON#@}"
@@ -71,11 +96,37 @@ fi
 
 export TIED_BASE_PATH
 
-# Tag metrics records when opt-in collection is enabled [IMPL-MCP_USAGE_METRICS]
+# Tag metrics records when opt-in collection is enabled [IMPL-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS]
+resolve_tied_cli_metrics_client() {
+  if [[ -n "${TIED_MCP_METRICS_CLIENT:-}" ]]; then
+    return 0
+  fi
+  if [[ -n "${TIED_CLI_METRICS_CLIENT_FLAG}" ]]; then
+    export TIED_MCP_METRICS_CLIENT="${TIED_CLI_METRICS_CLIENT_FLAG}"
+    return 0
+  fi
+  local _detected_client=""
+  _detected_client="$(
+    node -e '
+      const raw = process.argv[1] || "{}";
+      let args = {};
+      try { args = JSON.parse(raw); } catch { process.exit(0); }
+      const root = args.project_root || args.projectRoot || "";
+      const match = String(root).match(/\/dev\/test\/([^/]+)/);
+      if (match) process.stdout.write(match[1]);
+    ' "${ARGS_JSON}" 2>/dev/null || true
+  )"
+  if [[ -n "${_detected_client}" ]]; then
+    export TIED_MCP_METRICS_CLIENT="${_detected_client}"
+    return 0
+  fi
+  export TIED_MCP_METRICS_CLIENT=tied-cli
+}
+
 if [[ -n "${TIED_MCP_COLLECT_METRICS:-}" ]]; then
   _tied_metrics_flag="$(printf '%s' "${TIED_MCP_COLLECT_METRICS}" | tr '[:upper:]' '[:lower:]')"
   case "${_tied_metrics_flag}" in
-    1|true|yes) export TIED_MCP_METRICS_CLIENT=tied-cli ;;
+    1|true|yes) resolve_tied_cli_metrics_client ;;
   esac
   unset _tied_metrics_flag
 fi

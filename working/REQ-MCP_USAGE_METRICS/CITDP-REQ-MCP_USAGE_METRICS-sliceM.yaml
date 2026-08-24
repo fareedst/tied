@@ -1,0 +1,73 @@
+CITDP-REQ-MCP_USAGE_METRICS-sliceM:
+  change_definition:
+    current_behavior: "tied-cli.sh hardcodes TIED_MCP_METRICS_CLIENT=tied-cli when metrics collection is enabled; analyze_tied_mcp_metrics.rb --project-root checks only root adversarial-inquiry artifacts."
+    desired_behavior: "tied-cli.sh resolves metrics client from env, --client, or dev/test project_root id; analyzer reports per-phase artifact completeness and integrated_activation_complete without substituting for gate receipts."
+    non_goals:
+      - "Slice G Go operator path"
+      - "Using metrics alone to gate activation"
+      - "Changing usage-metrics.ts server-side client default beyond env passthrough"
+    success_criteria:
+      - "Metrics JSONL lines for pilot client show client 1787507684 when project_root is under dev/test/1787507684"
+      - "analyze_tied_mcp_metrics.rb reports phases, phases_complete, and integrated_activation_complete"
+      - "usage-metrics, tied-cli, and Ruby analyzer tests pass"
+    unchanged_behavior:
+      - "Metrics collection remains opt-in via TIED_MCP_COLLECT_METRICS"
+      - "Default tied-cli client tag when no hint is available"
+      - "Root projection artifact check remains available as convenience field"
+  completion_criteria:
+    focused_tests: "usage-metrics.test.ts; analyze_tied_mcp_metrics_test.rb phase fixture; tied-cli-metrics-client.test.cjs"
+    lint: "npm test --prefix mcp-server; ruby scripts/analyze_tied_mcp_metrics_test.rb"
+    persist_policy: "persist to tied/citdp/ after Slice M verification"
+    verification: "tied_validate_consistency after canonical updates"
+  impact_analysis:
+    audited_project_mutation: "tied-cli.sh (bundled + client copy), analyze_tied_mcp_metrics.rb, tests, IMPL pseudo-code, fidelity-research vocabulary"
+    files:
+      - ".cursor/skills/tied-yaml/scripts/tied-cli.sh"
+      - "tools/bundled-tied-yaml-skill/scripts/tied-cli.sh"
+      - "scripts/analyze_tied_mcp_metrics.rb"
+      - "scripts/analyze_tied_mcp_metrics_test.rb"
+      - "mcp-server/test/tied-cli-metrics-client.test.cjs"
+      - "tied/implementation-decisions/IMPL-MCP_USAGE_METRICS-pseudocode.md"
+      - "tied/vocab/fidelity-research.md"
+    modules:
+      - "tied_cli_metrics_client"
+      - "analyze_tied_mcp_metrics"
+    tags:
+      - "metrics-observability"
+      - "operator-friction"
+      - "sliceM"
+  leap_feedback:
+    divergences_from_analysis: []
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    author: "build-plan subagent"
+    batch: "operator-friction-sliceM"
+    change_request_id: "REQ-MCP_USAGE_METRICS"
+    date: "2026-08-24"
+    record_status: "complete"
+    slice: "M"
+    title: "Follow-on Slice M — metrics and observability"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Metrics client mis-attribution hides pilot client volume"
+        - "Analyzer treats root projection as integrated activation"
+      depth_selected_at: "2026-08-24T00:00:00Z"
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "Phase-aware analyzer requires all three phase dirs plus inquiry count >= 3"
+        - "tied-cli preserves explicit TIED_MCP_METRICS_CLIENT env"
+      evidence_references:
+        - "working/client-1787507684-activation-audit/tied-mcp-metrics-client-1787507684.jsonl"
+      gate_policy: "advisory"
+      prior_depth_tier: "minimal"
+    risks:
+      - description: "Auto-detect from project_root mislabels non-pilot repos."
+        id: "RISK-SM-001"
+        likelihood: "Low"
+        mitigation: "Explicit --client or TIED_MCP_METRICS_CLIENT override; fallback remains tied-cli."
+        severity: "Low"
+  test_strategy:
+    summary: "Shell stub test for tied-cli client resolution; Ruby fixture for phase dirs; regression on bounded signature aggregation."

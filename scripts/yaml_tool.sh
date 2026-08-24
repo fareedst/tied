@@ -14,6 +14,7 @@ usage() {
   printf '               Skips lists under map keys matching order / *_order / order_* / *_order_*.\n' 1>&2
   printf '               Rejects the sort when semantic comparison fails (file unchanged).\n' 1>&2
   printf '  --sort-keys   with --sort-lists, also sort sibling map keys at every indent level.\n' 1>&2
+  printf '  -q, --quiet   with --sort-lists, suppress success summaries.\n' 1>&2
   printf '  -F, --find [DIR [GLOB]]  run find internally (default DIR=. GLOB=*.yaml);\n' 1>&2
   printf '     quote GLOB to avoid shell expansion. Mutually exclusive with file args / stdin.\n' 1>&2
   printf '  Unusual find expressions: use find ... -print0 | %s -0 (paths NUL-separated).\n' "${0##*/}" 1>&2
@@ -50,7 +51,12 @@ sort_yaml_list_files() {
     sort_keys_flag=(--sort-keys)
   fi
 
-  ruby "${tool_dir}/yaml_list_sorter.rb" "${sort_keys_flag[@]}" "$@"
+  local quiet_flag=()
+  if [ "$quiet" = true ]; then
+    quiet_flag=(--quiet)
+  fi
+
+  ruby "${tool_dir}/yaml_list_sorter.rb" "${quiet_flag[@]}" "${sort_keys_flag[@]}" "$@"
   local rc=$?
   if [ "$rc" -ne 0 ]; then
     printf 'yaml_tool: --sort-lists finished with exit %s (see yaml_list_sorter summary above)\n' "$rc" 1>&2
@@ -66,6 +72,7 @@ find_mode=false
 find_base='.'
 find_name='*.yaml'
 sort_keys=false
+quiet=false
 check_mode=false
 
 while [ "$#" -gt 0 ]; do
@@ -80,6 +87,10 @@ while [ "$#" -gt 0 ]; do
       ;;
     --sort-keys)
       sort_keys=true
+      shift
+      ;;
+    -q | --quiet)
+      quiet=true
       shift
       ;;
     --check)

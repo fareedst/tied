@@ -114,6 +114,7 @@ import {
 import { generateEvidenceChainProfile } from "../fidelity-research/evidence-chain-profile.js";
 import { createLiveStructuralValidators } from "../fidelity-research/live-structural-validators.js";
 import { validateChecklistGate } from "../checklist-validator.js";
+import { collectChecklistActivation } from "../checklist-activation-collect.js";
 
 /** LEAP proposal MCP tools: JSON envelope; catch sync throws from fs/git. [REQ-LEAP_PROPOSAL_QUEUE] */
 function leapMcpJson(payload: unknown) {
@@ -1442,6 +1443,41 @@ export const allTools = [
           citdp: args.citdp,
           requiredStepSlugs: args.required_step_slugs,
           activation: args.activation as never,
+        });
+        return textContent(JSON.stringify(result, null, 2));
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : String(e);
+        return textContent(JSON.stringify({ ok: false, error: msg }, null, 2));
+      }
+    },
+  },
+  {
+    name: "tied_checklist_activation_collect",
+    config: {
+      description:
+        "Assemble [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] activation evidence from persisted phase artifacts under working/{REQ-TOKEN}/adversarial-inquiry/phase-{phase}/. Read-only; fails closed on missing files, hash or run_id mismatch, or wrong phase directory.",
+      inputSchema: z.object({
+        request_token: z.string().describe("REQ token whose working adversarial-inquiry artifacts to read."),
+        phase: z.enum(["pre_implementation", "verification", "close_out"]),
+        run_id: z.string().describe("Identity-bound inquiry run identifier that must match on-disk provenance."),
+        project_root: z.string().optional().describe("Repository root containing working/{REQ-TOKEN}/; defaults to client project root."),
+        metrics_path: z.string().optional().describe("Optional MCP metrics JSONL for supporting tied_adversarial_inquiry_run provenance lookup."),
+      }),
+    },
+    handler: async (args: {
+      request_token: string;
+      phase: InquiryActivation["phase"];
+      run_id: string;
+      project_root?: string;
+      metrics_path?: string;
+    }) => {
+      try {
+        const result = await collectChecklistActivation({
+          requestToken: args.request_token,
+          phase: args.phase,
+          runId: args.run_id,
+          projectRoot: args.project_root,
+          metricsPath: args.metrics_path,
         });
         return textContent(JSON.stringify(result, null, 2));
       } catch (e) {

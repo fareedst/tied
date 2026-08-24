@@ -95,9 +95,11 @@ Integrated activation has two distinct validation surfaces:
 2. **Inquiry per phase** — call `tied_adversarial_inquiry_run` with
    `activation.phase` set to `pre_implementation`, `verification`, and
    `close_out` as the checklist requires.
-3. **Collect/assemble** — gather `{ receipt, artifacts, expected }` from each
-   phase directory under `working/{REQ-TOKEN}/adversarial-inquiry/phase-{phase}/`
-   (collector MCP in Batch 2 Slice 2; manual assembly until then).
+3. **Collect/assemble** — call `tied_checklist_activation_collect` with
+   `request_token`, `phase`, and `run_id` (optional `project_root`,
+   `metrics_path`) to assemble `{ receipt, artifacts, expected }` from
+   `working/{REQ-TOKEN}/adversarial-inquiry/phase-{phase}/`. Manual assembly
+   from the same files remains supported when the collector is unavailable.
 4. **Gate** — `tied_checklist_gate_validate` with the phase-appropriate activation
    payload; verification/close_out fail without pairing.
 5. **Cite verification activation** — persist `completion_criteria.activation`
@@ -118,9 +120,61 @@ the caller supplies the normalized `graph`, `fidelity`, and `scope` inputs.
 The analysis reads caller-provided normalized records and produces generated
 evidence; it does not scan project paths or write project YAML.
 
-For non-Ruby projects whose project-input adapter is not available, use the
-repository’s Mode A payload builder. It keeps the graph and fidelity evidence
-language-neutral while removing hand-authored JSON envelope work:
+#### Go and non-Ruby stacks (Mode A builder from TIED)
+
+For Go and other stacks without a native **Mode B** project-input adapter,
+use `scripts/build_adversarial_inquiry_from_tied.rb` to emit normalized
+`graph.json` and `fidelity.json` from TIED tokens, declared test/production
+paths, and an optional declarative `build-config.yaml`. The builder computes
+`projectId` from the resolved `tied/` base path (same hash as MCP metrics) and
+can pipe through `build_adversarial_inquiry_mode_a.rb` with `--emit-mode-a`.
+
+Reference fixture (1787507684 / REQ-ROOTJOBS pilot):
+`mcp-server/test/fixtures/adversarial-inquiry-go-rootjobs/`.
+
+```bash
+# 1) Build normalized inputs (declarative mapping for v1)
+ruby scripts/build_adversarial_inquiry_from_tied.rb \
+  --build-config mcp-server/test/fixtures/adversarial-inquiry-go-rootjobs/build-config.yaml \
+  --project-root /absolute/path/to/your-go-project \
+  --tied-base-path /absolute/path/to/your-go-project/tied \
+  --output-dir working/REQ-ROOTJOBS/adversarial-inquiry/inputs
+
+# 2) Assemble Mode A MCP envelope and run inquiry
+ruby scripts/build_adversarial_inquiry_from_tied.rb \
+  --build-config mcp-server/test/fixtures/adversarial-inquiry-go-rootjobs/build-config.yaml \
+  --project-root /absolute/path/to/your-go-project \
+  --request-token REQ-ROOTJOBS \
+  --emit-mode-a \
+  --scope IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de \
+  --run-id rootjobs-pre-001 \
+  --phase pre_implementation \
+  > /tmp/rootjobs-inquiry.json
+.cursor/skills/tied-yaml/scripts/tied-cli.sh \
+  tied_adversarial_inquiry_run @/tmp/rootjobs-inquiry.json
+```
+
+Path-only skeleton (no `build-config`; interim until richer TIED parsing):
+
+```bash
+ruby scripts/build_adversarial_inquiry_from_tied.rb \
+  --project-root /absolute/path/to/your-go-project \
+  --request-token REQ-YOUR-FEATURE \
+  --block-id IMPL-YOUR-IMPL#YOUR_BLOCK#digest \
+  --source-revision citdp-YYYYMMDD \
+  --test-path path/to/feature_test.go \
+  --production-path path/to/feature.go \
+  --output-dir working/REQ-YOUR-FEATURE/adversarial-inquiry/inputs
+```
+
+Native Go **Mode B** remains deferred (operator friction plan §5.2); do not
+expect the MCP server to load Go tests directly until a future REQ ships that
+adapter.
+
+#### Mode A envelope only (pre-built graph/fidelity)
+
+For callers that already have hand-authored graph/fidelity files, the envelope
+builder remains available:
 
 ```bash
 ruby scripts/build_adversarial_inquiry_mode_a.rb \

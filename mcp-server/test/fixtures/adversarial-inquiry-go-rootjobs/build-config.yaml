@@ -1,0 +1,170 @@
+block_id: "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de"
+block_name: "BUILD_FOREST"
+block_revision: "32afaba1c1522314"
+fidelity:
+  blockRevision: "32afaba1c1522314"
+  productionEvidence:
+    - blockRevision: "32afaba1c1522314"
+      direction: "production"
+      id: "prod-orphan-root"
+      kind: "behavior"
+      order: 1
+      provenance: "three-way-alignment-unit"
+      reliable: true
+      source:
+        location: "tools/rootjobs/internal/tree/tree.go:44"
+      statementId: "stmt-orphan-root"
+      value: "BuildForest appends to roots when PPID missing from index"
+    - blockRevision: "32afaba1c1522314"
+      direction: "production"
+      id: "prod-pid-sort"
+      kind: "effect"
+      order: 2
+      provenance: "three-way-alignment-unit"
+      reliable: true
+      source:
+        location: "tools/rootjobs/internal/tree/tree.go:62"
+      statementId: "stmt-pid-sort"
+      value: "sortForest uses slices.SortFunc on roots and children by PID"
+    - blockRevision: "32afaba1c1522314"
+      direction: "production"
+      id: "prod-empty-forest"
+      kind: "behavior"
+      order: 3
+      provenance: "three-way-alignment-unit"
+      reliable: true
+      source:
+        location: "tools/rootjobs/internal/tree/tree.go:25"
+      statementId: "stmt-empty-forest"
+      value: "BuildForest on nil/empty input returns Forest with zero ProcessCount"
+    - blockRevision: "32afaba1c1522314"
+      direction: "production"
+      id: "prod-dedupe"
+      kind: "effect"
+      order: 4
+      provenance: "three-way-alignment-unit"
+      reliable: true
+      source:
+        location: "tools/rootjobs/internal/tree/tree.go:29"
+      statementId: "stmt-dedupe"
+      value: "BuildForest skips duplicate PID with debug log"
+  specification:
+    - id: "stmt-orphan-root"
+      kind: "behavior"
+      order: 1
+      value: "Process whose PPID is absent from snapshot is promoted to root"
+    - id: "stmt-pid-sort"
+      kind: "effect"
+      order: 2
+      value: "Roots and sibling children are sorted by PID ascending at every level"
+    - id: "stmt-empty-forest"
+      kind: "behavior"
+      order: 3
+      value: "Empty snapshot yields zero roots and process_count zero"
+    - id: "stmt-dedupe"
+      kind: "effect"
+      order: 4
+      value: "Duplicate PIDs keep first occurrence and skip subsequent entries"
+  testEvidence:
+    - blockRevision: "32afaba1c1522314"
+      direction: "test"
+      id: "test-CE-001"
+      kind: "behavior"
+      order: 1
+      provenance: "unit-test-green"
+      reliable: true
+      source:
+        location: "tools/rootjobs/internal/tree/tree_test.go:58"
+      statementId: "stmt-orphan-root"
+      value: "TestBuildForest_OrphanBecomesRoot expects orphan PID 10 as sole root"
+    - blockRevision: "32afaba1c1522314"
+      direction: "test"
+      id: "test-CE-002"
+      kind: "effect"
+      order: 2
+      provenance: "unit-test-green"
+      reliable: true
+      source:
+        location: "tools/rootjobs/internal/tree/tree_test.go:69"
+      statementId: "stmt-pid-sort"
+      value: "TestBuildForest_StablePIDSort expects sibling order [50,100]"
+    - blockRevision: "32afaba1c1522314"
+      direction: "test"
+      id: "test-CE-003"
+      kind: "behavior"
+      order: 3
+      provenance: "unit-test-green"
+      reliable: true
+      source:
+        location: "tools/rootjobs/internal/tree/tree_test.go:83"
+      statementId: "stmt-empty-forest"
+      value: "TestBuildForest_EmptyInput expects len(roots)==0 and process_count==0"
+    - blockRevision: "32afaba1c1522314"
+      direction: "test"
+      id: "test-dedupe"
+      kind: "effect"
+      order: 4
+      provenance: "unit-test-green"
+      reliable: true
+      source:
+        location: "tools/rootjobs/internal/tree/tree_test.go:94"
+      statementId: "stmt-dedupe"
+      value: "TestBuildForest_DuplicatePIDSkipped keeps first name"
+graph:
+  adversarialCases:
+    - blockId: "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de"
+      id: "CE-001"
+    - blockId: "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de"
+      id: "CE-002"
+    - blockId: "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de"
+      id: "CE-003"
+  architectureConstraints:
+    - id: "constraint-rootjobs-tree"
+      implementationBlockIds:
+        - "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de"
+  criteria:
+    - architectureConstraintIds:
+        - "constraint-rootjobs-tree"
+      identity:
+        derivation: "explicit"
+        id: "REQ-ROOTJOBS_TREE#criterion-1"
+        kind: "criterion"
+        revision: "criterion-rev-rootjobs-tree"
+        sourceRevision: "citdp-20260823"
+  evidenceLoci:
+    - blockId: "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de"
+      id: "test-tree-orphan"
+      kind: "test"
+      location: "tools/rootjobs/internal/tree/tree_test.go:58"
+      sourceRevision: "citdp-20260823"
+    - blockId: "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de"
+      id: "test-tree-sort"
+      kind: "test"
+      location: "tools/rootjobs/internal/tree/tree_test.go:69"
+      sourceRevision: "citdp-20260823"
+    - blockId: "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de"
+      id: "test-tree-empty"
+      kind: "test"
+      location: "tools/rootjobs/internal/tree/tree_test.go:83"
+      sourceRevision: "citdp-20260823"
+    - blockId: "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de"
+      id: "prod-tree-build"
+      kind: "production"
+      location: "tools/rootjobs/internal/tree/tree.go:25"
+      sourceRevision: "citdp-20260823"
+  implementationBlocks:
+    - identity:
+        derivation: "content"
+        id: "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de"
+        kind: "block"
+        name: "BUILD_FOREST"
+        revision: "32afaba1c1522314"
+        sourceRevision: "citdp-20260823"
+impl_token: "IMPL-ROOTJOBS_TREE"
+production_path: "tools/rootjobs/internal/tree/tree.go"
+request_token: "REQ-ROOTJOBS"
+scope:
+  - "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de"
+source_revision: "citdp-20260823"
+test_paths:
+  - "tools/rootjobs/internal/tree/tree_test.go"

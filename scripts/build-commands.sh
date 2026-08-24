@@ -330,7 +330,7 @@ TIED YAML
   tied-cli TOOL [JSON]       MCP tool surface via tied-cli.sh
                              e.g. tied-cli yaml_index_list_tokens '{"index":"requirements"}'
   lint-tied                  lint all project tied/**/*.yaml
-  lint-reorder [args]        scripts/lint.sh (list reorder policy)
+  lint-reorder [args]        scripts/lint.sh (list reorder policy; quiet on success)
   validate-tied              tied_validate_consistency (pseudo-code + detail checks)
                              honors TIED_BASE_PATH, TIED_MCP_BIN (defaults: ./tied, mcp-server/dist)
 EOF

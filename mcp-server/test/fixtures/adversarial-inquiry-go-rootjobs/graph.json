@@ -1,0 +1,68 @@
+{
+  "projectId": "bd6908f862145619",
+  "criteria": [
+    {
+      "identity": {
+        "id": "REQ-ROOTJOBS_TREE#criterion-1",
+        "kind": "criterion",
+        "derivation": "explicit",
+        "revision": "criterion-rev-rootjobs-tree",
+        "sourceRevision": "citdp-20260823"
+      },
+      "architectureConstraintIds": ["constraint-rootjobs-tree"]
+    }
+  ],
+  "architectureConstraints": [
+    {
+      "id": "constraint-rootjobs-tree",
+      "implementationBlockIds": ["IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de"]
+    }
+  ],
+  "implementationBlocks": [
+    {
+      "identity": {
+        "id": "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de",
+        "kind": "block",
+        "name": "BUILD_FOREST",
+        "derivation": "content",
+        "revision": "32afaba1c1522314",
+        "sourceRevision": "citdp-20260823"
+      }
+    }
+  ],
+  "evidenceLoci": [
+    {
+      "id": "test-tree-orphan",
+      "blockId": "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de",
+      "kind": "test",
+      "location": "tools/rootjobs/internal/tree/tree_test.go:58",
+      "sourceRevision": "citdp-20260823"
+    },
+    {
+      "id": "test-tree-sort",
+      "blockId": "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de",
+      "kind": "test",
+      "location": "tools/rootjobs/internal/tree/tree_test.go:69",
+      "sourceRevision": "citdp-20260823"
+    },
+    {
+      "id": "test-tree-empty",
+      "blockId": "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de",
+      "kind": "test",
+      "location": "tools/rootjobs/internal/tree/tree_test.go:83",
+      "sourceRevision": "citdp-20260823"
+    },
+    {
+      "id": "prod-tree-build",
+      "blockId": "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de",
+      "kind": "production",
+      "location": "tools/rootjobs/internal/tree/tree.go:25",
+      "sourceRevision": "citdp-20260823"
+    }
+  ],
+  "adversarialCases": [
+    { "id": "CE-001", "blockId": "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de" },
+    { "id": "CE-002", "blockId": "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de" },
+    { "id": "CE-003", "blockId": "IMPL-ROOTJOBS_TREE#BUILD_FOREST#165443cef52e47de" }
+  ]
+}

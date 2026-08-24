@@ -61,10 +61,13 @@
   - handlers = instrumentToolHandlers(allTools).
   - FOR each allTools entry: register handlers[name].
 
-- [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS] How: When TIED_MCP_COLLECT_METRICS is set, export TIED_MCP_METRICS_CLIENT=tied-cli before node tied-mcp-stdio-client.cjs.
+- [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS] How: When TIED_MCP_COLLECT_METRICS is set, resolve TIED_MCP_METRICS_CLIENT in order: preserve existing env; else --client NAME; else basename after /dev/test/ in args project_root; else tied-cli. Export before node tied-mcp-stdio-client.cjs.
 - procedure tied_cli_spawn():
   - WHEN TIED_MCP_COLLECT_METRICS is set:
-    - export TIED_MCP_METRICS_CLIENT=tied-cli.
+    - IF TIED_MCP_METRICS_CLIENT already set: preserve it.
+    - ELSE IF --client NAME provided: export TIED_MCP_METRICS_CLIENT=NAME.
+    - ELSE IF args JSON project_root matches /dev/test/{id}: export TIED_MCP_METRICS_CLIENT={id}.
+    - ELSE export TIED_MCP_METRICS_CLIENT=tied-cli.
   - spawn node tied-mcp-stdio-client.cjs.
 
 ## ANALYZE_TIED_MCP_METRICS
@@ -82,6 +85,7 @@
     - aggregate status is exact_within_bound exactly when every per-file status is exact_within_bound and aggregate omitted is zero; otherwise status is approximate
     - aggregate schema_errors equals the sum of per-file schema_errors and remains distinct from parse_errors
     - reversing distinct input-path order does not change aggregate top_signatures, including sample_args_summary
+    - when --project-root is set, activation.artifact_status includes root_projection, per-phase completeness under working/{REQ}/adversarial-inquiry/phase-{phase}/, phases_complete, inquiry_call_count, and integrated_activation_complete (all three phases complete and inquiry count >= 3); metrics support provenance only and never gate activation alone
   - FAILURE_MODES: InvalidOption, MetricsFileNotFound
   - DATA: SIGNATURE_BOUND = 50; per-file streaming counters; visible aggregate candidate map
   - CONTROL: per-file YAML remains on stdout; --aggregate remains on stderr; approximate discloses candidates hidden by per-file truncation

@@ -39,11 +39,28 @@ CITDP-REQ-TIED_YAML_STYLING_GATES:
   risk_analysis:
     adversarial_inquiry:
       assurance_profile: "baseline-functional"
+      counterexamples:
+        - "A future formatter changes scalar types or ordered-list semantics while preserving parseability."
+        - "An agent treats an absent client_formatter as permission to choose an implicit formatter."
+        - "Verification records pre-style bytes instead of the final post-style on-disk artifact."
       depth_tier: "minimal"
+      disconfirming_observations:
+        - "Checklist contract tests require post-style evidence at verification-gate, sync-tied-stack, and traceable-commit."
+        - "Checklist contract tests require the styling sub-procedure to be called only from sub-yaml-edit-loop."
+        - "Slice 1 contains no executable client_formatter hook or formatter output to compare."
+      evidence_references:
+        - "mcp-server/src/checklist-yaml-styling-contract.test.ts"
+        - "mcp-server/src/tools/checklist-gate-mcp.test.ts"
+        - "tied/docs/agent-req-implementation-checklist.yaml"
+      falsification_questions:
+        - "Can a client formatter be invoked without a client declaration?"
+        - "Can a hook change YAML meaning while passing syntax validation?"
+        - "Can post-style evidence be accepted before the final file is linted and consistency-checked?"
       gate_policy: "advisory"
       prior_depth_tier: null
       profile_depth: "not_measured"
       rationale: "Checklist-only Slice 1; presentation seam documented without new executable hook."
+      research_profile: "integrated-agent"
     risks:
       - description: "Agents treat optional client_formatter as implicit agent-chosen formatting."
         id: "RISK-STYLE-GATE-001"

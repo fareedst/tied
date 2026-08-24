@@ -97,3 +97,23 @@ procedure PERSIST_WORKING_ARTIFACTS(): # [IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIS
 4. Append new finding records and duplicate links to finding-ledger.jsonl in the authoritative directory.
 5. When phase is present, optionally project-copy the four files to the adversarial-inquiry root as a latest/close-out convenience view only.
 6. Return artifact references for the authoritative directory; activation receipts reference only those paths.
+
+## BUILD_MODE_A_FROM_TIED
+# [IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST] [IMPL-TIED_FILES] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_SETUP]
+# How: emit normalized graph and fidelity JSON for Go and other non-Ruby stacks from TIED tokens, declared paths, and optional declarative build-config; delegate envelope assembly to BUILD_MODE_A_PAYLOAD.
+Contract:
+  INPUT: project_root, tied_base_path, request_token, block_id, test_paths, production_path, optional build_config, optional Mode A pass-through (run_id, phase, policy, scope)
+  PRE: project_root and tied_base_path exist; block_id is explicit; either build_config supplies graph/fidelity or declared paths are repository-relative under project_root
+  OUTPUT: graph.json, fidelity.json, provenance.json (optional output_dir); optional Mode A envelope via emit_mode_a
+  POST: projectId derives from resolved tied_base_path hash; graph/fidelity match adversarial-inquiry normalized schema; canonical TIED YAML is read-only; Mode B Go adapter is not invoked
+  FAILURE_MODES: missing_required_input; invalid_block_id; missing_build_config_and_paths; mode_a_delegate_failure
+  EFFECTS: IO (read TIED/build-config; optional write outputs)
+  TERMINATION: total
+procedure BUILD_MODE_A_FROM_TIED(): # [IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST] [IMPL-TIED_FILES] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY]
+1. Resolve tied_base_path defaulting to project_root/tied.
+2. Compute projectId as SHA256(resolved tied_base_path)[0:16].
+3. When build_config is present, load declarative graph/fidelity mapping (interim v1) and merge CLI overrides.
+4. Otherwise derive minimal graph/fidelity from block_id, request_token, source_revision, and declared test/production paths.
+5. Write graph.json, fidelity.json, and provenance.json when output_dir is set.
+6. When emit_mode_a is requested, pass assembled records to BUILD_MODE_A_PAYLOAD with scope, run_id, phase, and policy.
+7. Return graph, fidelity, and provenance references without mutating canonical TIED YAML.

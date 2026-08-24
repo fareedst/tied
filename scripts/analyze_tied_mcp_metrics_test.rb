@@ -142,6 +142,121 @@ def test_adversarial_activation
   end
 end
 
+def test_phase_aware_activation_status
+  lines = [
+    {
+      'v' => 1,
+      'tool' => 'tied_adversarial_inquiry_run',
+      'client' => '1787507684',
+      'ok' => true,
+      'duration_ms' => 30,
+      'args_signature' => 'inquiry_sig_a',
+      'args_summary' => { 'request_token' => 'REQ-INTEGRATED' }
+    },
+    {
+      'v' => 1,
+      'tool' => 'tied_adversarial_inquiry_run',
+      'client' => '1787507684',
+      'ok' => true,
+      'duration_ms' => 31,
+      'args_signature' => 'inquiry_sig_b',
+      'args_summary' => { 'request_token' => 'REQ-INTEGRATED' }
+    },
+    {
+      'v' => 1,
+      'tool' => 'tied_adversarial_inquiry_run',
+      'client' => '1787507684',
+      'ok' => true,
+      'duration_ms' => 32,
+      'args_signature' => 'inquiry_sig_c',
+      'args_summary' => { 'request_token' => 'REQ-INTEGRATED' }
+    },
+    {
+      'v' => 1,
+      'tool' => 'tied_adversarial_inquiry_run',
+      'client' => '1787507684',
+      'ok' => true,
+      'duration_ms' => 33,
+      'args_signature' => 'inquiry_sig_d',
+      'args_summary' => { 'request_token' => 'REQ-PARTIAL' }
+    }
+  ]
+
+  Dir.mktmpdir('tied-metrics-phase-project') do |project_root|
+    %w[REQ-INTEGRATED REQ-PARTIAL].each do |request_token|
+      root_dir = File.join(project_root, 'working', request_token, 'adversarial-inquiry')
+      FileUtils.mkdir_p(root_dir)
+      %w[obligation-report.json finding-ledger.jsonl gate-result.json evidence-provenance.json].each do |name|
+        File.write(File.join(root_dir, name), "{}\n")
+      end
+    end
+
+    %w[pre_implementation verification close_out].each do |phase|
+      phase_dir = File.join(
+        project_root,
+        'working',
+        'REQ-INTEGRATED',
+        'adversarial-inquiry',
+        "phase-#{phase}"
+      )
+      FileUtils.mkdir_p(phase_dir)
+      %w[obligation-report.json finding-ledger.jsonl gate-result.json evidence-provenance.json].each do |name|
+        File.write(File.join(phase_dir, name), "{}\n")
+      end
+    end
+
+    partial_phase_dir = File.join(
+      project_root,
+      'working',
+      'REQ-PARTIAL',
+      'adversarial-inquiry',
+      'phase-pre_implementation'
+    )
+    FileUtils.mkdir_p(partial_phase_dir)
+    %w[obligation-report.json finding-ledger.jsonl gate-result.json evidence-provenance.json].each do |name|
+      File.write(File.join(partial_phase_dir, name), "{}\n")
+    end
+
+    Tempfile.create(['tied_mcp_metrics_phase', '.jsonl']) do |f|
+      lines.each { |row| f.puts(JSON.generate(row)) }
+      f.flush
+      out, err, status = run_analyzer(['--aggregate', '--project-root', project_root, f.path])
+      assert_success(status, err)
+
+      report = parse_reports(out).first
+      integrated = report.dig('activation', 'artifact_status', 'REQ-INTEGRATED')
+      partial = report.dig('activation', 'artifact_status', 'REQ-PARTIAL')
+      assert(integrated.dig('root_projection', 'complete'), 'root projection should remain complete')
+      assert_equal(3, integrated['phases_complete'], 'integrated phases complete count')
+      assert_equal(3, integrated['inquiry_call_count'], 'integrated inquiry count')
+      assert(integrated['integrated_activation_complete'], 'integrated activation should be complete')
+      assert_equal(1, partial['phases_complete'], 'partial phases complete count')
+      assert_equal(false, partial['integrated_activation_complete'], 'partial activation incomplete')
+
+      summary = parse_summary(err)
+      summary_integrated = summary.dig('activation', 'artifact_status', 'REQ-INTEGRATED')
+      assert(summary_integrated['integrated_activation_complete'], 'aggregate integrated activation complete')
+    end
+  end
+
+  pilot_metrics = File.join(
+    ROOT,
+    'working',
+    'client-1787507684-activation-audit',
+    'tied-mcp-metrics-client-1787507684.jsonl'
+  )
+  if File.file?(pilot_metrics)
+    out, err, status = run_analyzer(
+      ['--aggregate', '--project-root', '/Users/fareed/Documents/dev/test/1787507684', pilot_metrics]
+    )
+    assert_success(status, err)
+    summary = parse_summary(err)
+    assert_equal(7, summary.dig('client_counts', '1787507684'), 'pilot client tag count')
+    assert_equal(7, summary['lines'], 'pilot metrics line count')
+    assert_equal(0, summary.dig('activation', 'inquiry_call_count'), 'pilot inquiry count remains zero pre-integrated')
+  end
+end
+
 # - [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS] How: Bound deterministic per-file and aggregate signature analysis, disclose candidate visibility through signature_coverage, and sum aggregate schema errors without conflating parse errors.
 def test_bounded_signature_aggregation
   empty = fixture('within_bound', 'empty.jsonl')
@@ -242,6 +357,7 @@ def test_determinism_and_error_boundaries
 end
 
 test_adversarial_activation
+test_phase_aware_activation_status
 test_bounded_signature_aggregation
 test_determinism_and_error_boundaries
 

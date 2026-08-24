@@ -1,0 +1,132 @@
+CITDP-REQ-TIED_YAML_CANONICALIZATION-record-aware:
+  change_definition:
+    current_behavior: "The shared typed canonicalizer (mcp-server/src/yaml-canonicalizer.ts) sets string_list_rule to \"sort all-string lists except ordered-list keys\" and preserves object-list and mixed-list order (see canonicalizeValue list branch). No record-list registry exists. The Ruby yaml_list_sorter --sort-lists path sorts any 2+ consecutive '- ' lines by full line text (scripts/yaml_list_sorter.rb), which can reorder single-line satisfaction_criteria items but detaches multi-line record blocks. Post-sort validation sets unordered_arrays: groups_modified.positive? (yaml_list_sorter.rb validate_sorted_content!), masking intentional record reordering. REQ index/detail drift confirmed: index status Implemented with 6 satisfaction_criteria vs detail status Planned with 7 criteria including compatibility sorting criterion; index criterion 3 uses \"recursive lexical map ordering\" vs detail case-insensitive-primary wording."
+    requested_change: "Extend tied-yaml-canonical-v1 with an explicit recognized record-list registry. Sort complete mapping records (including optional fields) by the first configured stable field present across all items, using case-insensitive-primary ordering with original-value and canonical-record tie-breaks. Apply the same policy in TypeScript default canonicalization and Ruby --sort-lists. Fix semantic-compare validation so recognized record-list sorts are accepted without false-green masking of unrelated array drift."
+    scope_in:
+      - "ARCH-TIED_YAML_CANONICAL_PROFILE record-list registry and revised list-ordering decision"
+      - "CHANGELOG.md"
+      - "IMPL-TIED_YAML_CANONICALIZER pseudo-code blocks RECOGNIZE_RECORD_LIST, SORT_RECORD_LIST, CANONICALIZE_YAML_VALUE extension"
+      - "mcp-server/src/yaml-canonicalizer.ts and yaml-canonicalizer.test.ts"
+      - "REQ-TIED_YAML_CANONICALIZATION satisfaction_criteria LEAP update and index/detail drift resolution"
+      - "scripts/yaml_list_sorter.rb, yaml_list_sorter_test.rb (YamlSemanticCompare cases), yaml_semantic_compare.rb"
+      - "scripts/yaml_tool.sh help text for default vs --sort-lists record-list behavior"
+      - "tied/docs/detail-files-schema.md, tied/docs/processes.md"
+      - "tied/vocab/tied-methodology.md, tied/vocab/tied-yaml-mcp.md"
+    scope_out:
+      - "Automatic client_formatter hook integration (REQ-TIED_YAML_STYLING_GATES slice2)"
+      - "Changing ordered-list key semantics (order, order_*, *_order, *_order_*)"
+      - "Changing scalar-type preservation, opaque text, or atomic failure behavior"
+      - "Sorting arbitrary unregistered mapping arrays"
+      - "tied/methodology/** edits"
+      - "Unrelated working-tree changes"
+    target_behavior: "Default lint and MCP writes sort recognized record lists deterministically while preserving unrecognized object lists, mixed lists, and ordered-list keys. Ruby --sort-lists performs whole-block record sorting aligned with TypeScript. Semantic validation accepts recognized record-list reordering and still rejects true semantic drift."
+  completion_criteria:
+    - "IMPL pseudo-code blocks pass pseudocode_validate with token comments on every new/changed block"
+    - "Index and detail REQ-TIED_YAML_CANONICALIZATION status, satisfaction_criteria count (6 vs 7), and criterion 3 wording aligned before record-list criterion added"
+    - "lint_yaml on changed TIED YAML; tied_validate_consistency ok"
+    - "Persist merged CITDP to tied/citdp/ at close-out"
+    - "Record-list registry documented in ARCH and detail-files-schema.md"
+    - "RED/GREEN tests pass for TS, Ruby, and yaml_tool paths including single-line and multi-line fixtures"
+  impact_analysis:
+    architecture:
+      - "ARCH-TIED_YAML_CANONICAL_PROFILE"
+    implementation_decisions:
+      - "IMPL-TIED_YAML_CANONICALIZER"
+    processes:
+      - "PROC-YAML_EDIT_LOOP"
+    requirements:
+      - "REQ-TIED_YAML_CANONICALIZATION"
+      - "REQ-TIED_YAML_STYLE_CONFIGURATION"
+  planning_evidence:
+    gate_pre_implementation:
+      allowed: true
+      blocking: false
+      date: "2026-08-24"
+      depth: "minimal"
+      diagnostics: []
+      invoked_via: ".cursor/skills/tied-yaml/scripts/tied-cli.sh tied_checklist_gate_validate"
+      note: "Minimal depth advisory; Implement still blocked until pseudo-code validation and RED tests per checklist mandatory sequence."
+      ok: true
+  record_identity:
+    citdp_id: "CITDP-REQ-TIED_YAML_CANONICALIZATION-record-aware"
+    created_at: "2026-08-24"
+    parent_citdp: "CITDP-REQ-TIED_YAML_CANONICALIZATION"
+    status: "draft"
+    title: "Record-aware YAML formatting for recognized mapping-record lists"
+    updated_at: "2026-08-24"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "An unregistered object list is sorted because heuristics match loosely."
+        - "Default lint and --sort-lists produce different record order for the same file."
+        - "Ruby line sorter detaches metric/coverage continuation lines from parent criterion records."
+        - "Semantic compare unordered_arrays masks unrelated array reordering after a cosmetic sort."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Multi-line satisfaction_criteria fixtures round-trip with fields attached."
+        - "Semantic compare rejects scalar-type or ordered-list drift after record sort."
+        - "Unregistered object_list test vectors preserve order in both surfaces."
+      evidence_references:
+        - "/Users/fareed/.cursor/plans/record-aware_yaml_formatting_6a6c68db.plan.md"
+        - "mcp-server/src/yaml-canonicalizer.ts"
+        - "scripts/yaml_list_sorter.rb"
+        - "tied/requirements.yaml"
+        - "tied/requirements/REQ-TIED_YAML_CANONICALIZATION.yaml"
+        - "working/REQ-TIED_YAML_CANONICALIZATION/CITDP-REQ-TIED_YAML_CANONICALIZATION-record-aware-draft.yaml"
+      falsification_questions:
+        - "Can a partial record block sort pass semantic validation?"
+        - "Does TS default lint leave satisfaction_criteria unsorted while Ruby --sort-lists sorts?"
+      gate_policy: "advisory"
+      prior_depth_tier: "minimal"
+      profile_depth: "minimal"
+      rationale: "Serialization-contract LEAP on an existing REQ; cross-surface parity risk is bounded by fixture matrix and semantic compare. Integrated inquiry deferred unless registry expands beyond schema-backed keys."
+      research_profile: "integrated-agent"
+    risks:
+      - description: "TS and Ruby diverge on record recognition or sort keys."
+        id: "RISK-RECORD-LIST-001"
+        mitigation: "Shared registry table in ARCH; identical fixture corpus; cross-surface ordering assertions."
+      - description: "Line-based Ruby sorter detaches optional record fields."
+        id: "RISK-RECORD-LIST-002"
+        mitigation: "Whole-block extraction keyed by list-item indent; multi-line fixtures in RED tests."
+      - description: "unordered_arrays false-green hides semantic regressions."
+        id: "RISK-RECORD-LIST-003"
+        mitigation: "Compare using canonical record fingerprints for recognized keys; only enable global unordered_arrays for pure string-list sorts."
+      - description: "Bulk re-lint reorders historical satisfaction_criteria unexpectedly."
+        id: "RISK-RECORD-LIST-004"
+        mitigation: "Document expected normalization in CHANGELOG; optional one-time bulk lint called out in migration notes."
+      - description: "REQ-TIED_YAML_STYLING_GATES FMT-ORDERED-LISTS conflicts with record sorting."
+        id: "RISK-RECORD-LIST-005"
+        mitigation: "Clarify FMT-ORDERED-LISTS applies to ordered-list keys and workflow sequences, not recognized record lists; record order is canonical not semantic."
+  test_strategy:
+    cases:
+      - expectation: "satisfaction_criteria sorted by criterion; metric/coverage stay attached"
+        id: "REC-SAT-CRITERIA-MULTI"
+      - expectation: "Single-line satisfaction_criteria items sort without field loss"
+        id: "REC-SAT-CRITERIA-SINGLE"
+      - expectation: "validation_criteria sorted by method"
+        id: "REC-VAL-CRITERIA"
+      - expectation: "alternatives_considered sorted by name"
+        id: "REC-ALT-CONSIDERED"
+      - expectation: "Case-insensitive-primary with original-value tie-break on sort field"
+        id: "REC-TIE-BREAK"
+      - expectation: "Canonical record content tie-break when sort field equal-folded"
+        id: "REC-CANON-TIE"
+      - expectation: "object_list and mixed lists preserve order"
+        id: "REC-UNRECOGNIZED-PRESERVE"
+      - expectation: "order / *_order keys preserve list order"
+        id: "REC-ORDERED-KEY-PRESERVE"
+      - expectation: "Default yaml_tool lint and --sort-lists yield same record order"
+        id: "REC-CROSS-SURFACE"
+      - expectation: "Semantic compare accepts recognized record reorder; rejects scalar drift (yaml_list_sorter_test.rb)"
+        id: "REC-SEMANTIC-COMPARE"
+      - expectation: "Missing sort field on any record skips sort for that list"
+        id: "REC-MISSING-FIELD-SKIP"
+      - expectation: "yaml_format metadata includes record_list_rule summary"
+        id: "REC-FORMAT-METADATA"
+    matrix_notes:
+      - "Fixture YAML under mcp-server/fixtures/record-list-sort/ (new) shared by TS and Ruby"
+      - "No UI E2E; composition via yaml-canonicalization-mcp.test.ts metadata smoke"
+      - "RED-first: extend yaml-canonicalizer.test.ts before TS implementation"
+      - "RED-first: yaml_list_sorter_test.rb whole-block cases before Ruby rewrite"
+    summary: "Unit tests for TS canonicalizer and Ruby sorter; shared fixtures; semantic compare policy tests; yaml_tool integration for default and --sort-lists; LEAP stack validation."

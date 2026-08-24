@@ -9,6 +9,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Go / non-Ruby Mode A builder (Slice G)** —
+  `[REQ-TIED_ADVERSARIAL_INQUIRY]` / `[IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST]` /
+  `[IMPL-TIED_FILES]`: `scripts/build_adversarial_inquiry_from_tied.rb` emits
+  normalized graph/fidelity from TIED tokens, declared test/production paths,
+  and optional `build-config.yaml`; `--emit-mode-a` pipes through the existing
+  Mode A envelope builder. Reference fixture:
+  `mcp-server/test/fixtures/adversarial-inquiry-go-rootjobs/` (1787507684
+  REQ-ROOTJOBS pilot). Native Go Mode B adapter remains deferred. CITDP:
+  `CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-sliceG`.
+
+- **Metrics client attribution and phase-aware analyzer (Slice M)** —
+  `[REQ-MCP_USAGE_METRICS]` / `[IMPL-MCP_USAGE_METRICS]` /
+  `[REQ-TIED_ADVERSARIAL_INQUIRY]`: `tied-cli.sh` resolves
+  `TIED_MCP_METRICS_CLIENT` from env, `--client`, or `/dev/test/{id}`
+  auto-detect from JSON `project_root`; `analyze_tied_mcp_metrics.rb`
+  reports per-phase artifact completeness, `phases_complete`, and
+  `integrated_activation_complete` while keeping root projection as a
+  convenience field only. CITDP: `CITDP-REQ-MCP_USAGE_METRICS-sliceM`.
+
+- **Activation collect MCP (Batch 2 Slice 2)** —
+  `[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]` / `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]`:
+  `tied_checklist_activation_collect` read-only MCP tool and `collectChecklistActivation`
+  assemble `{ receipt, artifacts, expected }` from
+  `working/{REQ}/adversarial-inquiry/phase-{phase}/`; fails closed on missing
+  phase dir, artifact absence, or `run_id` provenance mismatch; optional
+  `metrics_path` supports inquiry metrics lookup without blocking success.
+  Runbook: `tied/vocab/tied-yaml-mcp.md`; operator sequence:
+  `docs/adversarial-inquiry-adoption.md`. CITDP:
+  `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-slice2`.
+
 - **CITDP depth upgrade path (Slice U)** —
   `[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]` / `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]`:
   `validateCitdpOpenRecord` separates open-record persistence from progression

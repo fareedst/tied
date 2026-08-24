@@ -1,0 +1,11 @@
+{
+  "allowed": true,
+  "blocking": false,
+  "depth": "integrated",
+  "diagnostics": [],
+  "ok": true,
+  "phase": "close_out",
+  "record": "CITDP-REQ-MCP_USAGE_METRICS-sliceM",
+  "validated_at": "2026-08-24",
+  "waiver": "close_out_inquiry_waiver referencing 1787507684-audit verification run"
+}

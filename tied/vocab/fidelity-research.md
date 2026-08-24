@@ -48,6 +48,10 @@ implementation decisions and pseudo-code for the research tooling.
 | **close-out inquiry waiver** | close_out re-run waiver, verification-run reuse | Owner/expiry/rationale/approval allowing `close_out` to skip a new inquiry pass when findings are unchanged; does **not** authorize passing a verification-phase receipt as the close_out `activation` payload. |
 | **phase-aware slug set** | INTEGRATED_REQUIRED_SLUGS, auto slugs | Phase-specific Tracker slugs the checklist evidence gate derives at integrated depth (and at `strict_candidate` verification/close_out). Caller slugs union with this set and cannot subtract. |
 | **phase artifact directory** | phase folder, snapshot folder | Request-scoped `working/{REQ-TOKEN}/adversarial-inquiry/phase-{phase}/` storage that prevents one inquiry phase from overwriting another; each receipt references only its own phase directory. |
+| **metrics client attribution** | client label, tied-cli tag | Operator-facing label in MCP usage JSONL; resolved from env, `--client`, or `/dev/test/{id}` auto-detect in tied-cli; supports provenance only and never gates activation alone. |
+| **Go Mode A builder** | build_adversarial_inquiry_from_tied, from-tied builder | Ruby script emitting normalized graph/fidelity for Go and language-neutral stacks from TIED tokens, declared paths, and optional build-config; defers native Go Mode B adapter. |
+| **reference fixture** | adversarial-inquiry-go-rootjobs | Checked-in 1787507684 / REQ-ROOTJOBS graph/fidelity + build-config for CI regression; repo-relative paths only. |
+| **phase-aware activation report** | metrics activation summary | Offline analyzer view of per-phase artifact completeness plus inquiry count; phase dirs remain authoritative over root projection. |
 | **activation expected identity** | expected payload, expected fields | Gate-side identity projection derived from a valid activation receipt when omitted by the caller; it does not replace receipt/artifact pairing. |
 | **placeholder waiver** | empty waiver, tilde waiver | An unusable waiver value (`null`, empty string, or `~`) that must be treated as absent rather than approval evidence. |
 | **minimal sub-stub disposition** | pending sub-stub at minimal | At minimal depth, `sub-adversarial-inquiry-pass` must be `not_applicable` or `waived` with rationale; `pending` fails at every gate phase. |
@@ -78,6 +82,10 @@ implementation decisions and pseudo-code for the research tooling.
 | Close-out inquiry waiver | `close_out_inquiry_waiver` | Documents why `close_out` has no new inquiry `run_id`. |
 | Phase-aware slug set | `INTEGRATED_REQUIRED_SLUGS` | Auto-required Tracker slugs inside `validateChecklistGate`. |
 | Phase artifact directory | `working/{REQ-TOKEN}/adversarial-inquiry/phase-{phase}/` | Per-phase bounded artifact storage; canonical root is reserved for the latest/close-out view. |
+| Metrics client attribution | `TIED_MCP_METRICS_CLIENT` / tied-cli `--client` | JSONL client label for operator provenance; auto-detect from `project_root` under `/dev/test/{id}` when unset. |
+| Go Mode A builder | `build_adversarial_inquiry_from_tied.rb` | Emits normalized graph/fidelity for Go stacks; optional `--build-config`; `--emit-mode-a` delegates envelope assembly. |
+| Reference fixture | `mcp-server/test/fixtures/adversarial-inquiry-go-rootjobs/` | 1787507684 REQ-ROOTJOBS pilot layout for builder regression; not a Mode B adapter. |
+| Phase-aware activation report | `integrated_activation_complete` in metrics analyzer | Offline completeness signal combining three phase dirs and inquiry count; does not replace checklist gate receipts. |
 | Activation expected identity | `activation.expected` / `expected` | Derived gate identity fields from `activation.receipt` when safe and complete. |
 | Placeholder waiver | `~`, `null`, or empty waiver fields | Invalid waiver input; never satisfies a waiver contract. |
 | Minimal sub-stub disposition | `sub-adversarial-inquiry-pass` at minimal depth | Must be `not_applicable` or `waived`; `pending` blocks every gate phase. |
@@ -100,6 +108,7 @@ implementation decisions and pseudo-code for the research tooling.
 | Deterministic rerun | `VERIFY_DETERMINISTIC_RERUN` | `[IMPL-TIED_FIDELITY_RESEARCH]` | Confirm repeatability and duplicate-link behavior. |
 | First-slice orchestration | `RUN_FIRST_SLICE` | `[IMPL-TIED_FIDELITY_RESEARCH]` | Connect validated modules through one read-only composition seam. |
 | Fidelity research pilot | `RUN_FIDELITY_RESEARCH_PILOT` | `[IMPL-TIED_FIDELITY_RESEARCH]` | Connect concrete adapters through the first-slice ordering and emit bounded research-dataset records. |
+| BUILD_MODE_A_FROM_TIED | `BUILD_MODE_A_FROM_TIED` | `[IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST]` | Emit normalized graph/fidelity for Go/non-Ruby Mode A from TIED tokens and declared paths. |
 | Checklist evidence gate | `VALIDATE_CHECKLIST_GATE` | `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]` | Evaluate Tracker, CITDP, and activation contracts before progression. |
 | Activation artifact pairing | `VALIDATE_ACTIVATION_PAIRING` | `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]` | Pair a successful inquiry receipt with four identity-bound artifacts. |
 

@@ -568,11 +568,14 @@ class SortYamlListsCommand
 
   def run
     $stdout.sync = true
-    options = { sort_keys: false }
+    options = { sort_keys: false, quiet: false }
     parser = OptionParser.new do |opts|
       opts.banner = "Usage: #{File.basename($PROGRAM_NAME)} [options] FILE [FILE ...]"
       opts.on("--sort-keys", "Also sort sibling map keys at every indent level") do
         options[:sort_keys] = true
+      end
+      opts.on("-q", "--quiet", "Suppress success summaries") do
+        options[:quiet] = true
       end
     end
 
@@ -602,14 +605,14 @@ class SortYamlListsCommand
         result = YamlListSorter.new(path, sort_keys: options[:sort_keys]).run
 
         # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION] [PROC-YAML_EDIT_LOOP]
-        # How: Emit normal stdout only for paths whose list or map ordering changed; retain stderr diagnostics for failures.
+        # How: Emit normal stdout only for changed paths unless quiet is selected; retain stderr diagnostics for failures.
         modified = result.groups_modified.positive? || result.maps_modified.positive?
 
-        if result.validated && modified
+        if !options[:quiet] && result.validated && modified
           puts format("%<file>s: semantic validation passed", file: result.file)
         end
 
-        if modified && result.sort_keys
+        if !options[:quiet] && modified && result.sort_keys
           puts format(
             "%<file>s: groups found=%<found>d, groups modified=%<modified>d, " \
             "maps found=%<maps_found>d, maps modified=%<maps_modified>d",
@@ -619,7 +622,7 @@ class SortYamlListsCommand
             maps_found: result.maps_found,
             maps_modified: result.maps_modified
           )
-        elsif modified
+        elsif !options[:quiet] && modified
           puts format(
             "%<file>s: groups found=%<found>d, groups modified=%<modified>d",
             file: result.file,

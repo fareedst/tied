@@ -1,0 +1,112 @@
+copy_hygiene: "Batch 2 Slice 2 tracker — activation collect MCP. Sibling to batch2 Slice 1 tracker; do not inherit Slice 1 close-out gate claims."
+description: "Per-request Tracker for Batch 2 Slice 2 — tied_checklist_activation_collect MCP + CLI + composition tests."
+execution_evidence:
+  close_out_evidence:
+    date: "2026-08-24"
+    deferred: []
+    gates:
+      close_out:
+        allowed: true
+        depth: "integrated"
+        disposition: "completed"
+        evidence_refs:
+          - "docs/adversarial-inquiry-adoption.md"
+          - "mcp-server/src/checklist-activation-collect.test.ts"
+          - "tied/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-slice2.yaml"
+          - "tied/vocab/tied-yaml-mcp.md"
+        phase: "close_out"
+        waiver: "close_out_inquiry_waiver referencing slice2-composition-gate-run verification"
+    master_checklist: "tied/docs/agent-req-implementation-checklist.yaml"
+  completed:
+    - "change-definition"
+    - "composition-integration"
+    - "gate-pseudocode-validation"
+    - "impact-discovery"
+    - "session-bootstrap"
+    - "sub-adversarial-inquiry-pass"
+    - "traceable-commit"
+    - "translate-sponsor-intent"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
+  operator_evidence:
+    commands:
+      - "node --test dist/checklist-activation-collect.test.js dist/tools/checklist-gate-mcp.test.js"
+      - "npm run build --prefix mcp-server"
+      - "npm test --prefix mcp-server"
+      - "tied_checklist_activation_collect via tied-cli.sh"
+      - "tied_checklist_gate_validate phase=close_out"
+      - "tied_validate_consistency"
+    depth_tier: "integrated"
+    gate_policy: "advisory"
+    limitation: "Slice M metrics client tag and Slice G Go path deferred."
+    prior_depth_tier: "minimal"
+    profile_depth: "integrated"
+    status: "complete"
+  request: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+impact_analysis:
+  modules_or_boundaries: "checklist-activation-collect read-only assembler; MCP registration; runbook; adoption operator sequence."
+  tied_tokens_affected:
+    - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "REQ-TIED_ADVERSARIAL_INQUIRY"
+    - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+record_identity:
+  batch: "batch2-slice2-collect"
+  change_request_id: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+  record_status: "complete"
+  recorded_at: "2026-08-24"
+  refine_pass: 0
+  title: "Batch 2 Slice 2 — activation collect MCP"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "AGENTS.md"
+      - "tied/vocab/fidelity-research.md"
+      - "tied/vocab/prompt-composer.md"
+      - "tied/vocab/quality-assurance.md"
+    slug: "session-bootstrap"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/integrated-activation-enforcement-operator-friction-plan.md"
+    slug: "translate-sponsor-intent"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-slice2.yaml"
+    slug: "change-definition"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/checklist-activation-collect.ts"
+      - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+    slug: "impact-discovery"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+    slug: "gate-pseudocode-validation"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/checklist-activation-collect.test.ts"
+    slug: "unit-test-red"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/checklist-activation-collect.ts"
+      - "mcp-server/src/tools/index.ts"
+    slug: "unit-test-green"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/checklist-activation-collect.test.ts"
+    slug: "composition-integration"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/checklist-activation-collect.test.ts"
+    slug: "sub-adversarial-inquiry-pass"
+  - disposition: "completed"
+    evidence_refs:
+      - "npm test --prefix mcp-server"
+      - "tied_checklist_gate_validate phase=close_out"
+    slug: "verification-gate"
+  - disposition: "completed"
+    evidence_refs:
+      - "CHANGELOG.md"
+      - "docs/adversarial-inquiry-adoption.md"
+      - "tied/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-slice2.yaml"
+    slug: "traceable-commit"

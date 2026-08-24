@@ -18,6 +18,7 @@
 | **signature coverage** | top-k metadata | Analyzer YAML: `bound` / `considered` / `emitted` / `omitted` / `status` for bounded aggregation. `exact_within_bound` means the complete visible candidate set fits the bound; `approximate` discloses per-file truncation or visible aggregate overflow and never claims hidden candidates were globally ranked. |
 | **TIED YAML MCP** | yaml mcp, project-0-stdd-tied-yaml (alone) | IDE may show project-specific label; same tool surface |
 | **tied-cli** | mcp curl, raw node invoke | Shell wrapper: `.cursor/skills/tied-yaml/scripts/tied-cli.sh` |
+| **activation collect** | gate JSON assembly, hand-built activation | `tied_checklist_activation_collect` — read-only assembly of `{ receipt, artifacts, expected }` from phase artifact dirs |
 | **TIED base path** | repo root, workspace | Absolute path to **`tied/`** directory; `tied_config_get_base_path` confirms |
 | **client project root** | repo root (alone), workspace | Directory containing **`tied/`**; parent of **TIED base path**; anchor for `tied_token_rename` `extra_globs` / `extra_extensions` |
 | **default TIED rename scope** | yaml rename | Built-in `tied_token_rename` targets: project YAML indexes, detail files, pseudo-code sidecars, detail filename renames |
@@ -76,7 +77,7 @@
 |-----|----------|-------|
 | `TIED_MCP_COLLECT_METRICS` | `1` or `true` locally | Default **off**; enables append-only JSONL per tool call |
 | `TIED_MCP_METRICS_PATH` | optional | Default `~/.cursor/logs/tied-mcp-metrics.jsonl` |
-| `TIED_MCP_METRICS_CLIENT` | optional | IDE default `cursor-mcp`; **tied-cli** sets `tied-cli` when collection enabled |
+| `TIED_MCP_METRICS_CLIENT` | optional | IDE default `cursor-mcp`; **tied-cli** preserves env, accepts `--client NAME`, auto-detects `/dev/test/{id}` from JSON `project_root`, else `tied-cli` when collection enabled |
 | `TIED_MCP_PROJECT_ID` | optional | Relocation-stable pseudonymous identity when set; trim → SHA-256→16-hex hash. Unset, empty, or invalid → **path-fallback identity**. No silent re-key of historical path-hash records. Repo-local ID file deferred. |
 
 Records contain a hashed `project_id`, not the raw base path or raw configured ID; error snippets redact absolute paths. Offline analysis validates record shape, reports syntax/schema errors separately, applies **bounded top-50** signature aggregation with **signature coverage** metadata (`bound`, `considered`, `emitted`, `omitted`, `status`), and deterministic tie ordering: [`scripts/analyze_tied_mcp_metrics.rb`](../../scripts/analyze_tied_mcp_metrics.rb) — see [`docs/conversation-analysis-tools.md`](../../docs/conversation-analysis-tools.md).
@@ -131,6 +132,9 @@ Exact tool names registered in `mcp-server/src/tools/index.ts`:
 | `tied_validate_consistency` | Full consistency check |
 | `tied_verify` | Verification-gated status update |
 | `tied_config_get_base_path` | Confirm effective `TIED_BASE_PATH` |
+| `tied_checklist_gate_validate` | Fail-closed Tracker + CITDP + optional activation gate |
+| `tied_checklist_activation_collect` | Read-only activation assembly from `working/{REQ}/adversarial-inquiry/phase-{phase}/` |
+| `tied_adversarial_inquiry_run` | Read-only adversarial inquiry with optional phase persistence |
 
 ### Analysis and planning
 
@@ -176,6 +180,7 @@ Feedback and LEAP proposal tools are documented in sibling glossaries ([`feedbac
 
 | Term | Section |
 |------|---------|
+| activation collect | Preferred terms |
 | ANALYZE_TIED_MCP_METRICS | Pseudo-code block names |
 | args_signature | MCP usage metrics |
 | bootstrap metrics configuration | Naming bridge |

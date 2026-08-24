@@ -1,0 +1,129 @@
+{
+  "blockRevision": "32afaba1c1522314",
+  "specification": [
+    {
+      "id": "stmt-orphan-root",
+      "kind": "behavior",
+      "value": "Process whose PPID is absent from snapshot is promoted to root",
+      "order": 1
+    },
+    {
+      "id": "stmt-pid-sort",
+      "kind": "effect",
+      "value": "Roots and sibling children are sorted by PID ascending at every level",
+      "order": 2
+    },
+    {
+      "id": "stmt-empty-forest",
+      "kind": "behavior",
+      "value": "Empty snapshot yields zero roots and process_count zero",
+      "order": 3
+    },
+    {
+      "id": "stmt-dedupe",
+      "kind": "effect",
+      "value": "Duplicate PIDs keep first occurrence and skip subsequent entries",
+      "order": 4
+    }
+  ],
+  "testEvidence": [
+    {
+      "id": "test-CE-001",
+      "direction": "test",
+      "statementId": "stmt-orphan-root",
+      "kind": "behavior",
+      "value": "TestBuildForest_OrphanBecomesRoot expects orphan PID 10 as sole root",
+      "order": 1,
+      "reliable": true,
+      "source": { "location": "tools/rootjobs/internal/tree/tree_test.go:58" },
+      "provenance": "unit-test-green",
+      "blockRevision": "32afaba1c1522314"
+    },
+    {
+      "id": "test-CE-002",
+      "direction": "test",
+      "statementId": "stmt-pid-sort",
+      "kind": "effect",
+      "value": "TestBuildForest_StablePIDSort expects sibling order [50,100]",
+      "order": 2,
+      "reliable": true,
+      "source": { "location": "tools/rootjobs/internal/tree/tree_test.go:69" },
+      "provenance": "unit-test-green",
+      "blockRevision": "32afaba1c1522314"
+    },
+    {
+      "id": "test-CE-003",
+      "direction": "test",
+      "statementId": "stmt-empty-forest",
+      "kind": "behavior",
+      "value": "TestBuildForest_EmptyInput expects len(roots)==0 and process_count==0",
+      "order": 3,
+      "reliable": true,
+      "source": { "location": "tools/rootjobs/internal/tree/tree_test.go:83" },
+      "provenance": "unit-test-green",
+      "blockRevision": "32afaba1c1522314"
+    },
+    {
+      "id": "test-dedupe",
+      "direction": "test",
+      "statementId": "stmt-dedupe",
+      "kind": "effect",
+      "value": "TestBuildForest_DuplicatePIDSkipped keeps first name",
+      "order": 4,
+      "reliable": true,
+      "source": { "location": "tools/rootjobs/internal/tree/tree_test.go:94" },
+      "provenance": "unit-test-green",
+      "blockRevision": "32afaba1c1522314"
+    }
+  ],
+  "productionEvidence": [
+    {
+      "id": "prod-orphan-root",
+      "direction": "production",
+      "statementId": "stmt-orphan-root",
+      "kind": "behavior",
+      "value": "BuildForest appends to roots when PPID missing from index",
+      "order": 1,
+      "reliable": true,
+      "source": { "location": "tools/rootjobs/internal/tree/tree.go:44" },
+      "provenance": "three-way-alignment-unit",
+      "blockRevision": "32afaba1c1522314"
+    },
+    {
+      "id": "prod-pid-sort",
+      "direction": "production",
+      "statementId": "stmt-pid-sort",
+      "kind": "effect",
+      "value": "sortForest uses slices.SortFunc on roots and children by PID",
+      "order": 2,
+      "reliable": true,
+      "source": { "location": "tools/rootjobs/internal/tree/tree.go:62" },
+      "provenance": "three-way-alignment-unit",
+      "blockRevision": "32afaba1c1522314"
+    },
+    {
+      "id": "prod-empty-forest",
+      "direction": "production",
+      "statementId": "stmt-empty-forest",
+      "kind": "behavior",
+      "value": "BuildForest on nil/empty input returns Forest with zero ProcessCount",
+      "order": 3,
+      "reliable": true,
+      "source": { "location": "tools/rootjobs/internal/tree/tree.go:25" },
+      "provenance": "three-way-alignment-unit",
+      "blockRevision": "32afaba1c1522314"
+    },
+    {
+      "id": "prod-dedupe",
+      "direction": "production",
+      "statementId": "stmt-dedupe",
+      "kind": "effect",
+      "value": "BuildForest skips duplicate PID with debug log",
+      "order": 4,
+      "reliable": true,
+      "source": { "location": "tools/rootjobs/internal/tree/tree.go:29" },
+      "provenance": "three-way-alignment-unit",
+      "blockRevision": "32afaba1c1522314"
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-slice2:
+  change_definition:
+    current_behavior: "Operators hand-assemble { receipt, artifacts, expected } from phase directories for tied_checklist_gate_validate; no read-only collector MCP exists."
+    desired_behavior: "tied_checklist_activation_collect reads working/{REQ-TOKEN}/adversarial-inquiry/phase-{phase}/ artifacts, verifies run_id against on-disk provenance, and returns gate-ready activation payload; mismatching run_id or missing phase dir fails closed."
+    non_goals:
+      - "Go agentstream gate wiring (Slice G)"
+      - "Mutating CITDP or writing artifacts from the collector"
+      - "Slice M metrics client tag defaulting"
+    success_criteria:
+      - "C1: MCP tied_checklist_activation_collect returns receipt, artifacts, expected from phase dir."
+      - "C2: tied-cli.sh invokes the same contract without custom wrapper code."
+      - "C3: Runbook documents collect inputs and example invocation."
+      - "C4: Composition test inquiry → collect → gate → allowed: true; wrong run_id fails closed."
+      - "REGRESSION: checklist-validator Slice 0/1/P/U and checklist-gate-mcp tests remain green."
+    unchanged_behavior:
+      - "Manual assembly remains valid when receipt is complete."
+      - "validateChecklistGate pairing rules unchanged."
+  completion_criteria:
+    activation:
+      artifact_hashes: {}
+      phase: "verification"
+      project_id: "stdd-project"
+      request_token: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      run_id: "slice2-composition-gate-run"
+      scope:
+        - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#069e46c522c9b57d"
+      scope_hash: "pending-composition-test"
+    checklist_gate:
+      dispositions:
+        - "completed"
+        - "pending"
+      fail_closed: true
+      phases:
+        - "pre_implementation"
+        - "verification"
+    focused_tests: "checklist-activation-collect.test.ts composition path; checklist-gate-mcp regression."
+    lint: "npm run build --prefix mcp-server"
+    persist_policy: "canonical copy in tied/citdp/"
+    verification: "tied_validate_consistency after canonical updates"
+  impact_analysis:
+    audited_project_mutation: "checklist-activation-collect.ts, tools/index.ts, tied-yaml-mcp.md, adversarial-inquiry-adoption.md, IMPL pseudo-code"
+    files:
+      - "docs/adversarial-inquiry-adoption.md"
+      - "mcp-server/src/checklist-activation-collect.test.ts"
+      - "mcp-server/src/checklist-activation-collect.ts"
+      - "mcp-server/src/tools/index.ts"
+      - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+      - "tied/vocab/tied-yaml-mcp.md"
+    modules:
+      - "checklist_activation_collect"
+      - "checklist_gate_validator"
+    tags:
+      - "activation-collect"
+      - "checklist-enforcement"
+      - "operator-friction"
+  leap_feedback:
+    divergences_from_analysis: []
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    author: "build-plan subagent"
+    batch: "operator-friction-slice2"
+    change_request_id: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    date: "2026-08-24"
+    record_status: "complete"
+    slice: "2"
+    title: "Parent Batch 2 Slice 2 — Activation collect MCP"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Collector manufactures receipt without reading on-disk artifacts"
+        - "Root-projected artifact paths satisfy pairing after collect"
+        - "Wrong run_id still passes gate when operator skips collect provenance check"
+      depth_selected_at: "2026-08-24T00:00:00Z"
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "Collected artifact paths include phase-{phase}/ prefix"
+        - "Composition test fails closed on run_id_provenance_mismatch"
+      evidence_references:
+        - "docs/integrated-activation-enforcement-operator-friction-plan.md"
+        - "mcp-server/src/checklist-activation-collect.test.ts"
+      falsification_questions:
+        - "Can collect succeed when phase directory is absent?"
+        - "Does collect write or mutate CITDP records?"
+      gate_policy: "advisory"
+      prior_depth_tier: "minimal"
+      research_profile: "integrated-agent"
+    quality_evidence_matrix: []
+  tdd_sequence:
+    summary: "RED composition tests → GREEN collectChecklistActivation → MCP registration → runbook → verification gate."

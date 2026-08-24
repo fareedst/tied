@@ -1,0 +1,87 @@
+CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-sliceG:
+  change_definition:
+    current_behavior: "Go and other non-Ruby operators must hand-author normalized graph.json and fidelity.json for Mode A inquiry; 1787507684 REQ-ROOTJOBS pilot inputs exist only in the external client working tree."
+    desired_behavior: "scripts/build_adversarial_inquiry_from_tied.rb emits normalized graph/fidelity from TIED tokens, declared test/production paths, and optional build-config.yaml; integrates with build_adversarial_inquiry_mode_a.rb via --emit-mode-a; reference fixture under mcp-server/test/fixtures/adversarial-inquiry-go-rootjobs/ documents the pilot layout for CI regression."
+    non_goals:
+      - "H5 pilot replay (Slice 3)"
+      - "Native Go Mode B project-input adapter (§5.2)"
+      - "Prompt alignment (Slice A)"
+    success_criteria:
+      - "Docs: adversarial-inquiry-adoption.md documents Go operator path; fidelity-research vocab records Go Mode A builder and reference fixture."
+      - "G interim: Fixture README, graph.json, fidelity.json, build-config.yaml checked in with repo-relative paths."
+      - "G.1: build_adversarial_inquiry_from_tied.rb emits graph/fidelity matching rootjobs fixture when driven by build-config.yaml."
+      - "Tests: ruby -c and build_adversarial_inquiry_from_tied_test.rb pass; optional emit-mode-a envelope smoke passes."
+    unchanged_behavior:
+      - "Existing build_adversarial_inquiry_mode_a.rb contract unchanged."
+      - "MCP adversarial-inquiry core tests unchanged."
+      - "Mode B remains Ruby Minitest-only."
+  completion_criteria:
+    checklist_gate:
+      dispositions:
+        - "completed"
+        - "not_applicable"
+      fail_closed: true
+      phases:
+        - "verification"
+    focused_tests: "ruby scripts/build_adversarial_inquiry_from_tied_test.rb; ruby -c scripts/build_adversarial_inquiry_from_tied.rb"
+    lint: "ruby syntax check on new script"
+    persist_policy: "persisted to tied/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-sliceG.yaml"
+    verification: "tied_validate_consistency passed after canonical updates"
+  impact_analysis:
+    audited_project_mutation: "scripts/build_adversarial_inquiry_from_tied.rb, fixture tree, adoption doc, IMPL pseudo-code block, fidelity-research vocab"
+    files:
+      - "CHANGELOG.md"
+      - "docs/adversarial-inquiry-adoption.md"
+      - "mcp-server/test/fixtures/adversarial-inquiry-go-rootjobs/"
+      - "scripts/build_adversarial_inquiry_from_tied.rb"
+      - "scripts/build_adversarial_inquiry_from_tied_test.rb"
+      - "tied/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-sliceG.yaml"
+      - "tied/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST-pseudocode.md"
+      - "tied/vocab/fidelity-research.md"
+    modules:
+      - "adversarial_inquiry_mode_a_builder"
+      - "go_mode_a_fixture"
+    tags:
+      - "adversarial-inquiry"
+      - "go-operator-path"
+      - "mode-a"
+  leap_feedback:
+    divergences_from_analysis:
+      - "v1 uses declarative build-config.yaml for full graph/fidelity until richer TIED parsing ships."
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    author: "build-plan subagent"
+    batch: "operator-friction-sliceG"
+    change_request_id: "REQ-TIED_ADVERSARIAL_INQUIRY"
+    date: "2026-08-24"
+    record_status: "complete"
+    slice: "G"
+    title: "Follow-on Slice G — Go / non-Ruby Mode A builder"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Builder emits wrong projectId when tied_base_path differs from pilot"
+        - "Operator assumes Mode B Go adapter exists because fixture lives under mcp-server"
+        - "Path-only skeleton omits fidelity statements required for meaningful inquiry"
+      depth_selected_at: "2026-08-24T00:00:00Z"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Adoption doc explicitly defers Mode B Go adapter"
+        - "Fixture regression compares built graph/fidelity to pilot golden files"
+      evidence_references:
+        - "docs/integrated-activation-enforcement-operator-friction-plan.md"
+        - "mcp-server/test/fixtures/adversarial-inquiry-go-rootjobs/"
+        - "scripts/build_adversarial_inquiry_from_tied_test.rb"
+      falsification_questions:
+        - "Does emit-mode-a produce an envelope the MCP handler accepts?"
+        - "Does path-only mode produce structurally valid graph/fidelity?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      research_profile: "integrated-agent"
+    quality_evidence_matrix: []
+  tdd_sequence:
+    summary: "LEAP BUILD_MODE_A_FROM_TIED pseudo-code → RED fixture regression test → GREEN builder + fixture → docs/vocab → tied_validate_consistency."

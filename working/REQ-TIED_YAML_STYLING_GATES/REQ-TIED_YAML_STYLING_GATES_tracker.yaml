@@ -1,11 +1,11 @@
-copy_hygiene: "Per-request Tracker for client YAML styling gates (refine-plan pass). Clears inherited close-out evidence."
-description: "Checklist enforcement for presentation-only client YAML styling after baseline canonical formatting."
+copy_hygiene: "Per-request Tracker for client YAML styling gates (refine-plan Slice 2 planning pass). Slice 1 complete; Slice 2 plan-only."
+description: "Checklist enforcement and executable client_formatter hook for presentation-only client YAML styling."
 execution_evidence:
   close_out_evidence:
     date: null
     deferred:
-      - "Executable client_formatter hook implementation (Slice 2)"
-      - "Persist CITDP to tied/citdp/ after Slice 1 close-out"
+      - "Persist merged CITDP to tied/citdp/ at close-out"
+      - "Slice 2 executable implementation (build-plan gate)"
     gates: {}
     master_checklist: "tied/docs/agent-req-implementation-checklist.yaml"
   completed:
@@ -16,18 +16,74 @@ execution_evidence:
     - "test-strategy"
   operator_evidence:
     commands:
-      - "bunx tsc -b (mcp-server)"
-      - "lint_yaml tied/docs/agent-req-implementation-checklist.yaml"
-      - "node --test dist/checklist-yaml-styling-contract.test.js"
+      - "lint_yaml working/REQ-TIED_YAML_STYLING_GATES/*.yaml"
+      - "tied-cli.sh tied_checklist_gate_validate (phase pre_implementation; Slice 2 planning refresh)"
       - "tied_validate_consistency"
     depth_tier: "minimal"
     gate_policy: "advisory"
-    prior_depth_tier: null
+    gate_result:
+      pre_implementation:
+        allowed: true
+        blocking: false
+        depth: "minimal"
+        diagnostics: []
+        evidence_references:
+          - "/Users/fareed/.cursor/plans/client_yaml_styling_gates_0fc380c5.plan.md"
+          - "working/REQ-TIED_YAML_STYLING_GATES/CITDP-REQ-TIED_YAML_STYLING_GATES-slice2-draft.yaml"
+        note: "Refreshed after Slice 2 scope definition (refine-plan 2026-08-24)."
+        ok: true
+      verification:
+        allowed: true
+        blocking: false
+        depth: "minimal"
+        diagnostics: []
+        evidence_references:
+          - "mcp-server/src/checklist-yaml-styling-contract.test.ts"
+          - "working/REQ-TIED_YAML_STYLING_GATES/CITDP-REQ-TIED_YAML_STYLING_GATES-slice1-draft.yaml"
+        note: "Slice 1 verification gate; unchanged by Slice 2 planning."
+        ok: true
+    prior_depth_tier: "minimal"
     profile_depth: "not_measured"
-    status: "recorded"
+    status: "slice2_planning"
   request: "REQ-TIED_YAML_STYLING_GATES"
+record_identity:
+  change_request_id: "REQ-TIED_YAML_STYLING_GATES"
+  record_status: "slice2_planning"
+  title: "Client YAML styling gates"
 risk_snapshot:
   depth_tier: "minimal"
   gate_policy: "advisory"
   profile_depth: "not_measured"
-  rationale: "Checklist and static contract changes only; no executable formatter hook in Slice 1."
+  rationale: "Slice 2 adds executable hook; checklist contract from Slice 1 unchanged; minimal depth retained."
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/docs/ai-principles.md"
+      - "tied/vocab/routing.md"
+      - "tied/vocab/tied-yaml-mcp.md"
+    slug: "session-bootstrap"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_YAML_STYLING_GATES/CITDP-REQ-TIED_YAML_STYLING_GATES-slice1-draft.yaml"
+      - "working/REQ-TIED_YAML_STYLING_GATES/CITDP-REQ-TIED_YAML_STYLING_GATES-slice2-draft.yaml"
+    slug: "change-definition"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_YAML_STYLING_GATES/CITDP-REQ-TIED_YAML_STYLING_GATES-slice2-draft.yaml"
+    slug: "impact-discovery"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_YAML_STYLING_GATES/CITDP-REQ-TIED_YAML_STYLING_GATES-slice2-draft.yaml"
+    slug: "risk-assessment"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-TIED_YAML_STYLE_RESOLVER-pseudocode.md"
+      - "working/REQ-TIED_YAML_STYLING_GATES/CITDP-REQ-TIED_YAML_STYLING_GATES-slice2-draft.yaml"
+    slug: "test-strategy"
+  - disposition: "not_applicable"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Minimal depth; Slice 2 hook runner covered by fixture matrix, not integrated inquiry."
+    slug: "sub-adversarial-inquiry-pass"
+test_strategy:
+  matrix_notes: "Slice 2 adds 12-case formatter fixture matrix; build-plan implements RED tests first."
+  summary: "Slice 1 static contract tests shipped; Slice 2 unit/fixture tests planned in CITDP slice2-draft."

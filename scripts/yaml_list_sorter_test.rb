@@ -665,6 +665,25 @@ if File.file?(File.join(SCRIPT_DIR, '..', 'mcp-server', 'dist', 'cli', 'yaml-can
   assert quiet_out.empty?, "yaml_tool should omit unchanged files from stdout: #{quiet_out}"
   fs_unchanged.close!
 
+  fs_quiet = write_temp_yaml!("tags:\n  - zed\n  - ant\n")
+  quiet_out, quiet_err, st = run_yaml_tool(['--quiet', '--sort-lists', fs_quiet.path])
+  assert st.success?, "yaml_tool quiet sort failed: #{quiet_err}"
+  assert quiet_out.empty?, "yaml_tool quiet sort should omit success output: #{quiet_out}"
+  assert quiet_err.empty?, "yaml_tool quiet sort should not emit stderr: #{quiet_err}"
+  fs_quiet.close!
+
+  fs_quiet_short = write_temp_yaml!("tags:\n  - zed\n  - ant\n")
+  quiet_out, quiet_err, st = run_sorter(["-q", fs_quiet_short.path])
+  assert st.success?, "yaml_list_sorter short quiet sort failed: #{quiet_err}"
+  assert quiet_out.empty?, "yaml_list_sorter short quiet sort should omit success output: #{quiet_out}"
+  assert quiet_err.empty?, "yaml_list_sorter short quiet sort should not emit stderr: #{quiet_err}"
+  fs_quiet_short.close!
+
+  missing_quiet = File.join(Dir.tmpdir, "yaml_sort_missing_#{Process.pid}.yaml")
+  quiet_out, quiet_err, st = run_yaml_tool(['--quiet', '--sort-lists', missing_quiet])
+  assert !st.success?, "yaml_tool quiet failure should fail"
+  assert quiet_err.include?(missing_quiet), "yaml_tool quiet failure should retain the file error: #{quiet_err}"
+
   fk_tool = write_temp_yaml!(<<~YAML)
     b: two
     a: one

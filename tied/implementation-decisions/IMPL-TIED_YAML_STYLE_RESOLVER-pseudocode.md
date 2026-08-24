@@ -162,3 +162,113 @@ procedure MCP_WRITER_RESPONSE(write_operation):
   result := AWAIT write_operation
   IF result failed: RETURN result error
   RETURN result with yaml_format preserved
+
+## RESOLVE_CLIENT_FORMATTER
+# [IMPL-TIED_YAML_STYLE_RESOLVER] [ARCH-TIED_YAML_STYLE_RESOLUTION] [REQ-TIED_YAML_STYLE_CONFIGURATION]
+# How: Parse optional client_formatter from repository .tied-yaml.yaml; absent hook yields styling_status not_configured.
+procedure RESOLVE_CLIENT_FORMATTER(tied_base_path, environment, filesystem):
+  Contract:
+  INPUT: tied_base_path, environment, repository config file
+  OUTPUT: styling_status, optional formatter declaration, scalar_style default
+  DATA: client_formatter {command, args[], version?}; styling_status in {configured, not_configured}
+  CONTROL: only repository .tied-yaml.yaml may declare client_formatter; no global/env fallback
+  PRE: tied_base_path identifies the target repository tied directory
+  POST: configured only when command is non-empty; malformed mapping fails without spawn
+  EFFECTS: filesystem read only
+  FAILURE_MODES: INVALID_REPOSITORY_CONFIG; CONFIG_READ_FAILED
+  DATA_TRANSITION: config bytes -> parsed mapping -> validated formatter declaration
+  TERMINATION: total
+  repo_root := PARENT_DIRECTORY(tied_base_path)
+  repo_file := JOIN(repo_root, ".tied-yaml.yaml")
+  IF NOT filesystem.exists(repo_file): RETURN {styling_status: not_configured}
+  config := PARSE_YAML_CONFIG(filesystem.read(repo_file))
+  scalar_style := config.scalar_style OR unwrapped
+  VALIDATE_YAML_STYLE(scalar_style)
+  formatter := config.client_formatter
+  IF formatter absent OR formatter.command empty: RETURN {styling_status: not_configured, scalar_style}
+  VALIDATE_FORMATTER_DECLARATION(formatter)
+  RETURN {styling_status: configured, scalar_style, formatter}
+
+## VALIDATE_FORMATTER_DECLARATION
+# [IMPL-TIED_YAML_STYLE_RESOLVER] [ARCH-TIED_YAML_STYLE_RESOLUTION] [REQ-TIED_YAML_STYLE_CONFIGURATION]
+# How: Restrict hook config to command plus optional args list and opaque version string.
+procedure VALIDATE_FORMATTER_DECLARATION(formatter):
+  Contract:
+  INPUT: untrusted client_formatter mapping
+  OUTPUT: normalized {command, args, version?}
+  PRE: formatter may be non-object or contain unknown keys
+  POST: command is non-empty string; args is string list when present; version is string when present
+  EFFECTS: pure
+  FAILURE_MODES: INVALID_FORMATTER_CONFIG
+  TERMINATION: total
+  IF formatter.command missing OR NOT string OR trimmed empty: RETURN error INVALID_FORMATTER_CONFIG
+  IF formatter.args present AND NOT string list: RETURN error INVALID_FORMATTER_CONFIG
+  IF formatter.version present AND NOT string: RETURN error INVALID_FORMATTER_CONFIG
+  RETURN normalized declaration
+
+## GUARD_PROJECT_TIED_PATH
+# [IMPL-TIED_YAML_STYLE_RESOLVER] [ARCH-TIED_YAML_STYLE_RESOLUTION] [REQ-TIED_YAML_STYLE_CONFIGURATION] [REQ-TIED_YAML_CANONICALIZATION]
+# How: Allow hook targets only under project-owned tiedBasePath and never under tied/methodology/**.
+procedure GUARD_PROJECT_TIED_PATH(absolute_path, tied_base_path):
+  Contract:
+  INPUT: candidate absolute file path, tied_base_path
+  OUTPUT: guarded path or path error
+  PRE: absolute_path is normalized
+  POST: path is strict descendant of tied_base_path and not under JOIN(tied_base_path, methodology)
+  EFFECTS: pure
+  FAILURE_MODES: PATH_OUT_OF_SCOPE; METHODOLOGY_PATH_FORBIDDEN
+  TERMINATION: total
+  normalized := CANONICALIZE_PATH(absolute_path)
+  tied_root := CANONICALIZE_PATH(tied_base_path)
+  methodology_root := JOIN(tied_root, methodology)
+  IF NOT normalized.starts_with(tied_root + separator): RETURN error PATH_OUT_OF_SCOPE
+  IF normalized.starts_with(methodology_root + separator): RETURN error METHODOLOGY_PATH_FORBIDDEN
+  RETURN normalized
+
+## RUN_CLIENT_FORMATTER_HOOK
+# [IMPL-TIED_YAML_STYLE_RESOLVER] [ARCH-TIED_YAML_STYLE_RESOLUTION] [REQ-TIED_YAML_STYLE_CONFIGURATION] [REQ-MODULE_VALIDATION]
+# How: Capture pre-hook bytes, spawn declared formatter in-place on one guarded path, then validate acceptance.
+procedure RUN_CLIENT_FORMATTER_HOOK(absolute_path, tied_base_path, environment, filesystem):
+  Contract:
+  INPUT: project YAML path, tied_base_path, resolved formatter declaration
+  OUTPUT: styling evidence {styling_status, command, version?, semantic_compare_ok, idempotent}
+  DATA: pre_hook_bytes, post_hook_bytes, spawn argv, timeout, stdout/stderr bounds
+  CONTROL: shell false; cwd client project root; append absolute_path as final argv element
+  PRE: RESOLVE_CLIENT_FORMATTER returned configured; path passes GUARD_PROJECT_TIED_PATH
+  POST: post-hook bytes parse; yaml_semantic_compare(pre, post) succeeds; second hook pass is byte-identical
+  EFFECTS: filesystem read/write on target path; child process spawn
+  FAILURE_MODES: PATH_OUT_OF_SCOPE; SPAWN_FAILED; TIMEOUT; NONZERO_EXIT; INVALID_POST_HOOK_YAML; SEMANTIC_DRIFT; NON_IDEMPOTENT_OUTPUT
+  DATA_TRANSITION: pre bytes -> hook rewrite -> validated post bytes -> idempotence check
+  TERMINATION: total
+  guarded := GUARD_PROJECT_TIED_PATH(absolute_path, tied_base_path)
+  resolved := RESOLVE_CLIENT_FORMATTER(tied_base_path, environment, filesystem)
+  IF resolved.styling_status equals not_configured: RETURN {styling_status: not_configured}
+  pre_bytes := filesystem.read(guarded)
+  argv := BUILD_FORMATTER_ARGV(resolved.formatter, guarded)
+  spawn_result := SPAWN_NO_SHELL(argv, cwd=PARENT_DIRECTORY(tied_base_path), timeout=DEFAULT_FORMATTER_TIMEOUT)
+  IF spawn_result failed: RESTORE_OR_FAIL(guarded, pre_bytes); RETURN spawn_result error
+  post_bytes := filesystem.read(guarded)
+  IF NOT PARSEABLE_YAML(post_bytes): RETURN error INVALID_POST_HOOK_YAML
+  IF yaml_semantic_compare(pre_bytes, post_bytes) failed: RETURN error SEMANTIC_DRIFT
+  second := SPAWN_NO_SHELL(argv, cwd=PARENT_DIRECTORY(tied_base_path), timeout=DEFAULT_FORMATTER_TIMEOUT)
+  IF second failed: RETURN second error
+  IF filesystem.read(guarded) != post_bytes: RETURN error NON_IDEMPOTENT_OUTPUT
+  RETURN {styling_status: configured, command: resolved.formatter.command, version: resolved.formatter.version, semantic_compare_ok: true, idempotent: true}
+
+## REPORT_STYLING_EVIDENCE
+# [IMPL-TIED_YAML_STYLE_RESOLVER] [ARCH-TIED_YAML_STYLE_RESOLUTION] [REQ-TIED_YAML_STYLE_CONFIGURATION]
+# How: Expose styling_status and formatter provenance alongside existing yaml_format metadata.
+procedure REPORT_STYLING_EVIDENCE(resolved_style, hook_result):
+  # [IMPL-TIED_YAML_STYLE_RESOLVER] [ARCH-TIED_YAML_STYLE_RESOLUTION] [REQ-TIED_YAML_STYLE_CONFIGURATION]
+  Contract:
+  INPUT: resolved scalar style, hook runner result
+  OUTPUT: styling evidence object for checklist and MCP responses
+  PRE: resolved_style valid; hook_result from RUN_CLIENT_FORMATTER_HOOK or not_configured short-circuit
+  POST: styling_status matches hook_result; configured responses include command and optional version
+  EFFECTS: pure
+  FAILURE_MODES: none
+  TERMINATION: total
+  RETURN MERGE(REPORT_YAML_FORMAT(resolved_style), {
+    styling_status: hook_result.styling_status,
+    client_formatter: WHEN configured THEN {command: hook_result.command, version: hook_result.version}
+  })

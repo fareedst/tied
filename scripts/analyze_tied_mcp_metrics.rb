@@ -23,6 +23,14 @@ require 'yaml'
 
 # - [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS] How: Bound deterministic per-file and aggregate signature analysis, disclose candidate visibility through signature_coverage, and sum aggregate schema errors without conflating parse errors.
 SIGNATURE_BOUND = 50
+INTEGRATED_REQUIRED_PHASES = %w[pre_implementation verification close_out].freeze
+INTEGRATED_REQUIRED_INQUIRY_CALLS = 3
+ARTIFACT_NAMES = %w[
+  obligation-report.json
+  finding-ledger.jsonl
+  gate-result.json
+  evidence-provenance.json
+].freeze
 
 def canonicalize_json_value(value)
   case value
@@ -157,20 +165,35 @@ def duration_stats_to_hash(bucket)
   }
 end
 
-def artifact_status(project_root, request_tokens)
-  return nil if project_root.nil?
+def artifact_files_status(artifact_dir)
+  ARTIFACT_NAMES.to_h { |name| [name, File.file?(File.join(artifact_dir, name))] }
+end
 
-  artifact_names = %w[
-    obligation-report.json
-    finding-ledger.jsonl
-    gate-result.json
-    evidence-provenance.json
-  ]
-  request_tokens.to_h do |request_token, _count|
-    unless /\AREQ-[A-Z0-9][A-Z0-9_-]*\z/.match?(request_token)
-      files = artifact_names.to_h { |name| [name, false] }
-      next [
-        request_token,
+def root_projection_status(project_root, request_token)
+  unless /\AREQ-[A-Z0-9][A-Z0-9_-]*\z/.match?(request_token)
+    files = ARTIFACT_NAMES.to_h { |name| [name, false] }
+    return {
+      'directory' => nil,
+      'files' => files,
+      'complete' => false,
+      'diagnostic' => 'invalid_request_token'
+    }
+  end
+  artifact_dir = File.join(project_root, 'working', request_token, 'adversarial-inquiry')
+  files = artifact_files_status(artifact_dir)
+  {
+    'directory' => artifact_dir,
+    'files' => files,
+    'complete' => files.values.all?
+  }
+end
+
+def phase_artifact_status(project_root, request_token)
+  unless /\AREQ-[A-Z0-9][A-Z0-9_-]*\z/.match?(request_token)
+    return INTEGRATED_REQUIRED_PHASES.to_h do |phase|
+      files = ARTIFACT_NAMES.to_h { |name| [name, false] }
+      [
+        phase,
         {
           'directory' => nil,
           'files' => files,
@@ -179,15 +202,53 @@ def artifact_status(project_root, request_tokens)
         }
       ]
     end
-    artifact_dir = File.join(project_root, 'working', request_token, 'adversarial-inquiry')
-    files = artifact_names.to_h { |name| [name, File.file?(File.join(artifact_dir, name))] }
-    [
+  end
+  INTEGRATED_REQUIRED_PHASES.to_h do |phase|
+    phase_dir = File.join(
+      project_root,
+      'working',
       request_token,
+      'adversarial-inquiry',
+      "phase-#{phase}"
+    )
+    files = artifact_files_status(phase_dir)
+    [
+      phase,
       {
-        'directory' => artifact_dir,
+        'directory' => phase_dir,
         'files' => files,
         'complete' => files.values.all?
       }
+    ]
+  end
+end
+
+def artifact_status(project_root, request_tokens, inquiry_counts = nil)
+  return nil if project_root.nil?
+
+  request_tokens.to_h do |request_token, _count|
+    inquiry_count = inquiry_counts&.fetch(request_token, 0).to_i
+    root_projection = root_projection_status(project_root, request_token)
+    phases = phase_artifact_status(project_root, request_token)
+    phases_complete = phases.values.count { |phase_status| phase_status['complete'] }
+    integrated_activation_complete =
+      phases_complete == INTEGRATED_REQUIRED_PHASES.size &&
+      inquiry_count >= INTEGRATED_REQUIRED_INQUIRY_CALLS
+    [
+      request_token,
+      {
+        'root_projection' => root_projection,
+        'directory' => root_projection['directory'],
+        'files' => root_projection['files'],
+        'complete' => root_projection['complete'],
+        'diagnostic' => root_projection['diagnostic'],
+        'phases' => phases,
+        'phases_complete' => phases_complete,
+        'phases_required' => INTEGRATED_REQUIRED_PHASES.size,
+        'inquiry_call_count' => inquiry_count,
+        'inquiry_calls_required' => INTEGRATED_REQUIRED_INQUIRY_CALLS,
+        'integrated_activation_complete' => integrated_activation_complete
+      }.compact
     ]
   end
 end
@@ -226,7 +287,11 @@ def stats_to_report(path, stats, project_root = nil)
       'inquiry_call_count' => stats[:adversarial_inquiry_count],
       'by_client' => adversarial_clients_to_hash(stats),
       'request_token_counts' => stats[:adversarial_request_counts].sort.to_h,
-      'artifact_status' => artifact_status(project_root, stats[:adversarial_request_counts])
+      'artifact_status' => artifact_status(
+        project_root,
+        stats[:adversarial_request_counts],
+        stats[:adversarial_request_counts]
+      )
     },
     'tool_counts' => stats[:tool_counts].sort_by { |tool, count| [-count, tool] }.to_h,
     'client_counts' => stats[:client_counts].sort.to_h,
@@ -328,7 +393,11 @@ def build_aggregate(reports, project_root = nil)
         'inquiry_call_count' => merged[:adversarial_inquiry_count],
         'by_client' => adversarial_clients_to_hash(merged),
         'request_token_counts' => merged[:adversarial_request_counts].sort.to_h,
-        'artifact_status' => artifact_status(project_root, merged[:adversarial_request_counts])
+        'artifact_status' => artifact_status(
+          project_root,
+          merged[:adversarial_request_counts],
+          merged[:adversarial_request_counts]
+        )
       },
       'tool_counts' => merged[:tool_counts].sort_by { |tool, count| [-count, tool] }.to_h,
       'client_counts' => merged[:client_counts].sort.to_h,

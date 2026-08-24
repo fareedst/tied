@@ -214,6 +214,29 @@ procedure VALIDATE_CHECKLIST_GATE(input): # [IMPL-TIED_CHECKLIST_GATE_ENFORCEMEN
   IF any result fails: RETURN blocked diagnostics
   RETURN allowed result
 
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: read persisted phase artifacts and assemble gate activation payload without writing artifacts or mutating CITDP.
+procedure COLLECT_CHECKLIST_ACTIVATION(input):
+  Contract:
+  INPUT: request_token, phase, run_id, optional project_root, optional metrics_path
+  PRE: phase is pre_implementation, verification, or close_out; request_token matches REQ-* pattern
+  OUTPUT: { ok, receipt, artifacts, expected, diagnostics }
+  POST: when ok, receipt and artifacts match runChecklistInquiry activation shape including artifact path under working/{REQ-TOKEN}/adversarial-inquiry/phase-{phase}/; expected equals DERIVE_EXPECTED_FROM_RECEIPT(receipt); collector never writes files or mutates CITDP
+  FAILURE_MODES: missing_phase_directory, missing_activation_artifact, malformed_obligation_report, run_id_provenance_mismatch, phase_provenance_mismatch, metrics_run_id_mismatch
+  DATA: phase artifact paths, content hashes, optional metrics row for tied_adversarial_inquiry_run
+  EFFECTS: read-only filesystem and optional metrics JSONL
+  TERMINATION: total
+  paths := resolveArtifactPaths(project_root, request_token, phase)
+  IF phase directory or any required artifact file is missing: RETURN failure
+  report := read obligation-report.json; provenance := read evidence-provenance.json
+  IF report scope or project_id missing: RETURN failure
+  IF provenance run_id present AND differs from input run_id: RETURN run_id_provenance_mismatch
+  IF provenance phase present AND differs from input phase: RETURN phase_provenance_mismatch
+  FOR each required artifact: compute content hash; build artifact descriptor with path
+  receipt := successful tied_adversarial_inquiry_run receipt with artifact_hashes
+  expected := DERIVE_EXPECTED_FROM_RECEIPT(receipt)
+  IF metrics_path supplied: locate metrics row with matching run_id; mismatch fails closed; absence is diagnostic only
+  RETURN { receipt, artifacts, expected }
+
 # [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: persist CITDP using open-record validation; progression gates remain separate.
 procedure WRITE_CITDP_RECORD(filename, record): # [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
   Contract:
