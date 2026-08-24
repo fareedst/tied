@@ -1,12 +1,6 @@
 ARCH-LEAP_PROPOSAL_QUEUE:
   alternatives_considered:
     - cons:
-        - "Conflicts with canonical-only expectation for tied/ project YAML; harder to distinguish from REQ/ARCH/IMPL"
-      name: "Store proposals under tied/proposals.yaml"
-      pros:
-        - "Versioned with methodology tree"
-      rejected_reason: "Keep proposals out of TIED base path until promoted via explicit LEAP"
-    - cons:
         - "Proposals are not requirements until approved; would flood index and confuse traceability"
       name: "New requirements.yaml rows for each proposal"
       pros:
@@ -18,6 +12,12 @@ ARCH-LEAP_PROPOSAL_QUEUE:
       pros:
         - "Richer suggestions"
       rejected_reason: "Built-in path must be deterministic and opt-in without LLM"
+    - cons:
+        - "Conflicts with canonical-only expectation for tied/ project YAML; harder to distinguish from REQ/ARCH/IMPL"
+      name: "Store proposals under tied/proposals.yaml"
+      pros:
+        - "Versioned with methodology tree"
+      rejected_reason: "Keep proposals out of TIED base path until promoted via explicit LEAP"
   cross_references:
     - "REQ-LEAP_PROPOSAL_QUEUE"
   decision: "Store optional non-canonical LEAP documentation proposals outside project TIED YAML (repo-root leap-proposals/queue.json plus append-only audit-log.jsonl). Human or explicit agent approval gates any later REQ/ARCH/IMPL edits; those edits use existing MCP yaml tools only. Optional deterministic extraction (git diff, session split) stays opt-in and never auto-writes TIED."

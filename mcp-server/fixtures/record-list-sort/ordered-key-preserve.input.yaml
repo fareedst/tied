@@ -1,0 +1,6 @@
+execution_order:
+  - criterion: "Zebra"
+  - criterion: "Alpha"
+order:
+  - criterion: "Zebra"
+  - criterion: "Alpha"

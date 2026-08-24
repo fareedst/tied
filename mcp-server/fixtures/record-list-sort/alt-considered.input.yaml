@@ -1,0 +1,11 @@
+alternatives_considered:
+  - name: "Zebra option"
+    pros:
+      - fast
+    cons:
+      - costly
+  - name: "Alpha option"
+    pros:
+      - simple
+    cons:
+      - slow

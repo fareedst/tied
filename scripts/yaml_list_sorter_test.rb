@@ -591,12 +591,125 @@ assert err.include?('failed to parse'), "stderr parse detail: #{err}"
 assert File.read(fcli.path) == cli_before, 'CLI path must not write on validation failure'
 fcli.close!
 
+FIXTURES_DIR = File.join(SCRIPT_DIR, '..', 'mcp-server', 'fixtures', 'record-list-sort')
+
+def load_record_fixture(name)
+  File.read(File.join(FIXTURES_DIR, name))
+end
+
+def run_fixture_sorter(fixture_name)
+  content = load_record_fixture(fixture_name)
+  f = write_temp_yaml!(content)
+  _out, err, st = run_sorter([f.path])
+  body = File.read(f.path)
+  f.close!
+  [st, err, body]
+end
+
+# --- REC-SAT-CRITERIA-MULTI: whole-block record sort preserves metric ---
+st, err, body = run_fixture_sorter('sat-criteria-multi.input.yaml')
+assert st.success?, "REC-SAT-CRITERIA-MULTI sort failed: #{err}"
+alpha_idx = body.index('Alpha criterion')
+zebra_idx = body.index('Zebra criterion')
+assert alpha_idx && zebra_idx && alpha_idx < zebra_idx, "criteria sorted by criterion:\n#{body}"
+assert body.include?("multi\n      line\n      metric") || body.include?("multi\nline\nmetric"),
+       "metric block must stay under Alpha criterion:\n#{body}"
+
+# --- REC-SAT-CRITERIA-SINGLE ---
+st, err, body = run_fixture_sorter('sat-criteria-single.input.yaml')
+assert st.success?, "REC-SAT-CRITERIA-SINGLE sort failed: #{err}"
+assert body.index('Alpha') < body.index('Zebra'), "single-line criteria sorted:\n#{body}"
+
+# --- REC-VAL-CRITERIA ---
+st, err, body = run_fixture_sorter('val-criteria.input.yaml')
+assert st.success?, "REC-VAL-CRITERIA sort failed: #{err}"
+assert body.index('Alpha test') < body.index('Zebra test'), "validation_criteria sorted:\n#{body}"
+assert body.include?('a coverage'), "coverage preserved:\n#{body}"
+
+# --- REC-ALT-CONSIDERED ---
+st, err, body = run_fixture_sorter('alt-considered.input.yaml')
+assert st.success?, "REC-ALT-CONSIDERED sort failed: #{err}"
+assert body.index('Alpha option') < body.index('Zebra option'), "alternatives sorted:\n#{body}"
+assert body.include?('- simple'), "nested pros preserved:\n#{body}"
+
+# --- REC-TIE-BREAK ---
+st, err, body = run_fixture_sorter('tie-break.input.yaml')
+assert st.success?, "REC-TIE-BREAK sort failed: #{err}"
+apple_pos = body.index('- criterion: Apple') || body.index('- criterion: "Apple"')
+apple_lower_pos = body.index('- criterion: apple') || body.index('- criterion: "apple"')
+zebra_pos = body.index('- criterion: zebra') || body.index('- criterion: "zebra"')
+assert apple_pos && apple_lower_pos && zebra_pos
+assert apple_pos < apple_lower_pos && apple_lower_pos < zebra_pos, "tie-break order:\n#{body}"
+
+# --- REC-UNRECOGNIZED-PRESERVE ---
+f_unrec = write_temp_yaml!(load_record_fixture('unrecognized-preserve.input.yaml'))
+before_unrec = File.read(f_unrec.path)
+_out, _err, st = run_sorter([f_unrec.path])
+assert st.success?, "REC-UNRECOGNIZED-PRESERVE sort failed: #{_err}"
+assert File.read(f_unrec.path) == before_unrec, "unrecognized object_list order preserved"
+f_unrec.close!
+
+# --- REC-ORDERED-KEY-PRESERVE ---
+f_ord = write_temp_yaml!(load_record_fixture('ordered-key-preserve.input.yaml'))
+before_ord = File.read(f_ord.path)
+_out, _err, st = run_sorter([f_ord.path])
+assert st.success?, "REC-ORDERED-KEY-PRESERVE sort failed: #{_err}"
+after_ord = File.read(f_ord.path)
+assert after_ord.index('Zebra') < after_ord.index('Alpha'), "ordered keys preserve list order:\n#{after_ord}"
+f_ord.close!
+
+# --- REC-MISSING-FIELD-SKIP ---
+f_miss = write_temp_yaml!(load_record_fixture('missing-field-skip.input.yaml'))
+before_miss = File.read(f_miss.path)
+_out, _err, st = run_sorter([f_miss.path])
+assert st.success?, "REC-MISSING-FIELD-SKIP sort failed: #{_err}"
+assert File.read(f_miss.path) == before_miss, "missing criterion field preserves order:\n#{before_miss}"
+f_miss.close!
+
+# --- REC-SEMANTIC-COMPARE: accept record reorder, reject scalar drift ---
+left_records = {
+  'satisfaction_criteria' => [
+    { 'criterion' => 'Beta', 'metric' => 'b' },
+    { 'criterion' => 'Alpha', 'metric' => 'a' }
+  ]
+}
+right_records = {
+  'satisfaction_criteria' => [
+    { 'criterion' => 'Alpha', 'metric' => 'a' },
+    { 'criterion' => 'Beta', 'metric' => 'b' }
+  ]
+}
+record_reorder = YamlSemanticCompare.compare(
+  left_records,
+  right_records,
+  record_list_keys: %w[satisfaction_criteria validation_criteria alternatives_considered]
+)
+assert record_reorder.ok, "record reorder should pass semantic compare: #{record_reorder.differences.inspect}"
+
+drift_left = {
+  'satisfaction_criteria' => [{ 'criterion' => 'Alpha', 'metric' => 'a' }]
+}
+drift_right = {
+  'satisfaction_criteria' => [{ 'criterion' => 'Alpha', 'metric' => 'changed' }]
+}
+record_drift = YamlSemanticCompare.compare(
+  drift_left,
+  drift_right,
+  record_list_keys: %w[satisfaction_criteria]
+)
+assert !record_drift.ok, 'record metric drift must fail semantic compare'
+
 # --- validate_sorted_content! rejects semantic drift ---
 fdrift = write_temp_yaml!("items:\n  - alpha\n")
 sorter = YamlListSorter.new(fdrift.path)
 failed = false
 begin
-  sorter.validate_sorted_content!("items:\n  - alpha\n", "items:\n  - beta\n", groups_modified: 1)
+  sorter.validate_sorted_content!(
+    "items:\n  - alpha\n",
+    "items:\n  - beta\n",
+    record_groups_modified: 0,
+    string_groups_modified: 1
+  )
 rescue SemanticSortValidationError => e
   failed = true
   assert e.differences.any?, "expected diff lines: #{e.differences.inspect}"
@@ -609,7 +722,12 @@ funparse = write_temp_yaml!("key: value\n")
 sorter_unparse = YamlListSorter.new(funparse.path)
 parse_failed = false
 begin
-  sorter_unparse.validate_sorted_content!("key: value\n", "key: [unclosed\n", groups_modified: 0)
+  sorter_unparse.validate_sorted_content!(
+    "key: value\n",
+    "key: [unclosed\n",
+    record_groups_modified: 0,
+    string_groups_modified: 0
+  )
 rescue SemanticSortValidationError => e
   parse_failed = true
   assert e.message.include?('sorted content failed to parse'), "expected parse error message: #{e.message}"

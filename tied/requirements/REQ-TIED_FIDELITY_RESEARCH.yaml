@@ -52,9 +52,9 @@ REQ-TIED_FIDELITY_RESEARCH:
       - "mcp-server/src/fidelity-research/specification-state.test.ts"
       - "mcp-server/src/fidelity-research/structural-analysis.test.ts"
   validation_criteria:
-    - coverage: "Manifest, finding lifecycle, specification-state classification, fidelity matrices, promotion, and deterministic rerun."
-      method: "Unit tests"
     - coverage: "Structural, fidelity, and binding adapters prove trigger, arguments, result, and proof boundary without UI."
       method: "Composition tests"
     - coverage: "Audited project source, tests, and project YAML remain unchanged."
       method: "Read-only safety checks"
+    - coverage: "Manifest, finding lifecycle, specification-state classification, fidelity matrices, promotion, and deterministic rerun."
+      method: "Unit tests"

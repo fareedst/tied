@@ -44,9 +44,9 @@ REQ-PROMPT_TYPE_GLOBAL_SKILLS:
     tests:
       - "mcp-server/src/e2e/prompt-type-skills.test.ts"
   validation_criteria:
-    - coverage: "Bundle inventory, frontmatter, names, shared links, and line limits."
-      method: "Static contract tests"
     - coverage: "Temporary TIED client receives the canonical prompt-type bundle and documentation."
       method: "Bootstrap integration test"
+    - coverage: "Bundle inventory, frontmatter, names, shared links, and line limits."
+      method: "Static contract tests"
     - coverage: "Requirement, architecture, implementation, detail files, and semantic-token references."
       method: "TIED consistency validation"

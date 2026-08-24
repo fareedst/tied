@@ -40,7 +40,7 @@ REQ-TIED_RESEARCH_RECORDS:
       - "REQ-TIED_FIDELITY_RESEARCH"
     tests: []
   validation_criteria:
-    - coverage: "Record schema, required provenance, classifications, decision links, freshness, and read-only storage boundary"
-      method: "Unit and contract tests"
     - coverage: "Research adapter and export bindings preserve evidence and never write audited project YAML"
       method: "Composition tests"
+    - coverage: "Record schema, required provenance, classifications, decision links, freshness, and read-only storage boundary"
+      method: "Unit and contract tests"

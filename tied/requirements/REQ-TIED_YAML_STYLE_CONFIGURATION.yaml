@@ -32,9 +32,9 @@ REQ-TIED_YAML_STYLE_CONFIGURATION:
     - criterion: "Wrapped mode double-quotes strings while preserving boolean, number, and null types"
     - criterion: "yaml_format reports the resolved scalar_style and configuration source"
   validation_criteria:
-    - coverage: "Configuration precedence and invalid values"
-      method: "YAML style resolver unit tests"
-    - coverage: "MCP metadata and writer bytes for both styles"
-      method: "UI-free MCP composition tests"
     - coverage: "Default lint and list-sort compatibility under both styles"
       method: "Ruby yaml_tool integration tests"
+    - coverage: "MCP metadata and writer bytes for both styles"
+      method: "UI-free MCP composition tests"
+    - coverage: "Configuration precedence and invalid values"
+      method: "YAML style resolver unit tests"

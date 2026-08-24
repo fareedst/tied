@@ -1,12 +1,6 @@
 ARCH-PROMPT_TYPE_GLOBAL_SKILLS:
   alternatives_considered:
     - cons:
-        - "Not reproducible across developers or TIED projects"
-      name: "Keep skills only under ~/.cursor/skills/"
-      pros:
-        - "No repository changes"
-      rejected_reason: "Does not satisfy ongoing shared development or client bootstrap needs."
-    - cons:
         - "No versioned source of truth and high drift risk"
       name: "Copy skills directly into each client without a TIED canonical bundle"
       pros:
@@ -18,6 +12,12 @@ ARCH-PROMPT_TYPE_GLOBAL_SKILLS:
       pros:
         - "Centralized distribution outside git"
       rejected_reason: "TIED bootstrap should remain deterministic and repository-backed."
+    - cons:
+        - "Not reproducible across developers or TIED projects"
+      name: "Keep skills only under ~/.cursor/skills/"
+      pros:
+        - "No repository changes"
+      rejected_reason: "Does not satisfy ongoing shared development or client bootstrap needs."
   decision: "Maintain one git-tracked canonical prompt-type skill bundle in the TIED methodology repository and install its managed contents into each TIED client’s .cursor/skills/ directory through copy_files.sh."
   implementation_approach:
     details:

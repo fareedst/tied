@@ -1,0 +1,24 @@
+{
+  "ok": true,
+  "requirements_updated": 1,
+  "implementation_updated": 1,
+  "requirements_set_implemented": [
+    "REQ-TIED_YAML_CANONICALIZATION"
+  ],
+  "requirements_set_planned": [],
+  "implementation_set_active": [
+    "IMPL-TIED_YAML_CANONICALIZER"
+  ],
+  "implementation_set_planned": [],
+  "yaml_format": {
+    "profile_id": "tied-yaml-canonical-v1",
+    "scalar_style": "wrapped",
+    "style_source": "repository",
+    "recursive_key_order": "case-insensitive-primary locale-independent lexical with original-value tie-break",
+    "ordered_list_key_pattern": "order|order_*|*_order|*_order_*",
+    "string_list_rule": "sort all-string lists except ordered-list keys",
+    "record_list_rule": "sort recognized mapping-record lists by registry stable fields; preserve unrecognized object/mixed lists and ordered-list keys",
+    "scalar_policy": "preserve string, boolean, number, and null types",
+    "opaque_block_policy": "preserve block-scalar bodies and IMPL pseudo-code sidecars"
+  }
+}

@@ -41,7 +41,7 @@ REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION:
       - "REQ-LEAP_PROPOSAL_QUEUE"
     tests: []
   validation_criteria:
-    - coverage: "Normalization, validation, duplicate grouping, proposal separation, review states, and no-write behavior"
-      method: "Unit and contract tests"
     - coverage: "Incident, metric, test-failure, and user-report adapter bindings to feedback and LEAP proposal surfaces"
       method: "Composition tests"
+    - coverage: "Normalization, validation, duplicate grouping, proposal separation, review states, and no-write behavior"
+      method: "Unit and contract tests"

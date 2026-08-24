@@ -26,9 +26,69 @@ export type YamlFormatMetadata = {
   recursive_key_order: string;
   ordered_list_key_pattern: string;
   string_list_rule: string;
+  record_list_rule: string;
   scalar_policy: string;
   opaque_block_policy: string;
 };
+
+// [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
+// Normative record-list registry: parent key → stable sort field priority.
+export const RECORD_LIST_REGISTRY: Record<string, readonly string[]> = {
+  satisfaction_criteria: ["criterion"],
+  validation_criteria: ["method"],
+  alternatives_considered: ["name"],
+};
+
+type RecordListRecognition = {
+  sort_field: string;
+  registry_key: string;
+};
+
+// [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
+// How: Return registry entry when every list item is a mapping with the configured stable sort field.
+function recognizeRecordList(parentKey: string | undefined, items: unknown[]): RecordListRecognition | null {
+  if (!parentKey || !(parentKey in RECORD_LIST_REGISTRY)) return null;
+  if (!items.every((item) => typeof item === "object" && item !== null && !Array.isArray(item))) return null;
+  for (const field of RECORD_LIST_REGISTRY[parentKey]) {
+    if (items.every((item) => field in (item as Record<string, unknown>))) {
+      return { sort_field: field, registry_key: parentKey };
+    }
+  }
+  return null;
+}
+
+function recordFingerprint(record: CanonicalYamlValue): string {
+  return JSON.stringify(canonicalizeRecordInner(record));
+}
+
+function canonicalizeRecordInner(value: CanonicalYamlValue): CanonicalYamlValue {
+  if (Array.isArray(value)) {
+    return value.map((item) => canonicalizeRecordInner(item));
+  }
+  if (value !== null && typeof value === "object") {
+    const result: Record<string, CanonicalYamlValue> = {};
+    for (const key of Object.keys(value).sort(compareLexical)) {
+      result[key] = canonicalizeRecordInner((value as Record<string, CanonicalYamlValue>)[key]);
+    }
+    return result;
+  }
+  return value;
+}
+
+// [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
+// How: Sort complete mapping records by COMPARE_CANONICAL_TEXT on sort field with original-value and fingerprint tie-breaks.
+function sortRecordList(items: CanonicalYamlValue[], recognition: RecordListRecognition): CanonicalYamlValue[] {
+  const field = recognition.sort_field;
+  return [...items].sort((left, right) => {
+    const leftRecord = left as Record<string, CanonicalYamlValue>;
+    const rightRecord = right as Record<string, CanonicalYamlValue>;
+    const leftKey = String(leftRecord[field] ?? "");
+    const rightKey = String(rightRecord[field] ?? "");
+    const primary = compareLexical(leftKey, rightKey);
+    if (primary !== 0) return primary;
+    return compareLexical(recordFingerprint(left), recordFingerprint(right));
+  });
+}
 
 // [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
 // How: Recursively sort maps and eligible string lists with case-insensitive-primary ordering and original-value lexical tie-breaking while preserving scalar types, ordered-list order, object-list order, mixed-list order, and opaque text structure.
@@ -38,12 +98,16 @@ export function canonicalizeValue(value: unknown, parentKey?: string): Canonical
   }
 
   if (Array.isArray(value)) {
-    const canonical = value.map((item) => canonicalizeValue(item, parentKey));
+    const mapped = value.map((item) => canonicalizeValue(item, parentKey));
+    const recognition = recognizeRecordList(parentKey, value);
+    if (recognition) {
+      return sortRecordList(mapped, recognition);
+    }
     const allStrings = value.every((item) => typeof item === "string");
     if (allStrings && !isOrderedListKey(parentKey)) {
-      return canonical.sort((left, right) => compareLexical(String(left), String(right)));
+      return mapped.sort((left, right) => compareLexical(String(left), String(right)));
     }
-    return canonical;
+    return mapped;
   }
 
   if (typeof value === "object") {
@@ -85,6 +149,8 @@ export function formatYamlMetadata(
     recursive_key_order: "case-insensitive-primary locale-independent lexical with original-value tie-break",
     ordered_list_key_pattern: "order|order_*|*_order|*_order_*",
     string_list_rule: "sort all-string lists except ordered-list keys",
+    record_list_rule:
+      "sort recognized mapping-record lists by registry stable fields; preserve unrecognized object/mixed lists and ordered-list keys",
     scalar_policy: "preserve string, boolean, number, and null types",
     opaque_block_policy: "preserve block-scalar bodies and IMPL pseudo-code sidecars",
   };

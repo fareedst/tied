@@ -7,8 +7,16 @@ import yaml from "js-yaml";
 import {
   canonicalizeValue,
   formatYamlMetadata,
+  RECORD_LIST_REGISTRY,
   writeCanonicalYamlAtomic,
 } from "./yaml-canonicalizer.js";
+
+const FIXTURES_DIR = path.join(import.meta.dirname, "..", "fixtures", "record-list-sort");
+
+function loadFixture(name: string): unknown {
+  const text = fs.readFileSync(path.join(FIXTURES_DIR, name), "utf8");
+  return yaml.load(text);
+}
 
 // [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
 // How: Recursively sort maps and eligible string lists with case-insensitive-primary ordering and original-value lexical tie-breaking while preserving scalar types, ordered-list order, object-list order, mixed-list order, and opaque text structure.
@@ -107,6 +115,10 @@ test("reports tied-yaml-canonical-v1 metadata REQ-TIED_YAML_CANONICALIZATION", (
   );
   assert.equal(metadata.ordered_list_key_pattern, "order|order_*|*_order|*_order_*");
   assert.equal(metadata.string_list_rule, "sort all-string lists except ordered-list keys");
+  assert.equal(
+    metadata.record_list_rule,
+    "sort recognized mapping-record lists by registry stable fields; preserve unrecognized object/mixed lists and ordered-list keys",
+  );
   assert.equal(metadata.scalar_policy, "preserve string, boolean, number, and null types");
   assert.equal(metadata.opaque_block_policy, "preserve block-scalar bodies and IMPL pseudo-code sidecars");
 });
@@ -123,6 +135,92 @@ test("writes atomically and preserves invalid input REQ-TIED_YAML_CANONICALIZATI
 
   assert.equal(result.ok, false);
   assert.equal(fs.readFileSync(filePath, "utf8"), original);
+});
+
+// [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
+// How: Recognized record lists sort complete mapping records; optional fields stay attached.
+test("sorts satisfaction_criteria with metric blocks REC-SAT-CRITERIA-MULTI REQ-TIED_YAML_CANONICALIZATION", () => {
+  const value = loadFixture("sat-criteria-multi.input.yaml") as Record<string, unknown>;
+  const result = canonicalizeValue(value) as any;
+  const criteria = result.satisfaction_criteria.map((item: any) => item.criterion);
+  assert.deepEqual(criteria, ["Alpha criterion", "Zebra criterion"]);
+  const alpha = result.satisfaction_criteria[0];
+  assert.equal(alpha.metric.trimEnd(), "multi\nline\nmetric");
+  const zebra = result.satisfaction_criteria[1];
+  assert.equal(zebra.metric, "z metric");
+});
+
+test("sorts single-line satisfaction_criteria REC-SAT-CRITERIA-SINGLE REQ-TIED_YAML_CANONICALIZATION", () => {
+  const value = loadFixture("sat-criteria-single.input.yaml") as Record<string, unknown>;
+  const result = canonicalizeValue(value) as any;
+  assert.deepEqual(
+    result.satisfaction_criteria.map((item: any) => item.criterion),
+    ["Alpha", "Zebra"],
+  );
+});
+
+test("sorts validation_criteria by method REC-VAL-CRITERIA REQ-TIED_YAML_CANONICALIZATION", () => {
+  const value = loadFixture("val-criteria.input.yaml") as Record<string, unknown>;
+  const result = canonicalizeValue(value) as any;
+  assert.deepEqual(
+    result.validation_criteria.map((item: any) => item.method),
+    ["Alpha test", "Zebra test"],
+  );
+  assert.equal(result.validation_criteria[0].coverage, "a coverage");
+});
+
+test("sorts alternatives_considered with nested lists REC-ALT-CONSIDERED REQ-TIED_YAML_CANONICALIZATION", () => {
+  const value = loadFixture("alt-considered.input.yaml") as Record<string, unknown>;
+  const result = canonicalizeValue(value) as any;
+  assert.deepEqual(
+    result.alternatives_considered.map((item: any) => item.name),
+    ["Alpha option", "Zebra option"],
+  );
+  assert.deepEqual(result.alternatives_considered[0].pros, ["simple"]);
+});
+
+test("record-list tie-break uses case-insensitive-primary ordering REC-TIE-BREAK REQ-TIED_YAML_CANONICALIZATION", () => {
+  const value = loadFixture("tie-break.input.yaml") as Record<string, unknown>;
+  const result = canonicalizeValue(value) as any;
+  assert.deepEqual(
+    result.satisfaction_criteria.map((item: any) => item.criterion),
+    ["Apple", "apple", "zebra"],
+  );
+});
+
+test("preserves unrecognized object lists REC-UNRECOGNIZED-PRESERVE REQ-TIED_YAML_CANONICALIZATION", () => {
+  const value = loadFixture("unrecognized-preserve.input.yaml") as Record<string, unknown>;
+  const result = canonicalizeValue(value) as any;
+  assert.deepEqual(result.object_list, [{ z: 1 }, { a: 2 }]);
+});
+
+test("preserves record lists under ordered-list keys REC-ORDERED-KEY-PRESERVE REQ-TIED_YAML_CANONICALIZATION", () => {
+  const value = loadFixture("ordered-key-preserve.input.yaml") as Record<string, unknown>;
+  const result = canonicalizeValue(value) as any;
+  assert.deepEqual(
+    result.execution_order.map((item: any) => item.criterion),
+    ["Zebra", "Alpha"],
+  );
+  assert.deepEqual(
+    result.order.map((item: any) => item.criterion),
+    ["Zebra", "Alpha"],
+  );
+});
+
+test("preserves record list order when sort field missing REC-MISSING-FIELD-SKIP REQ-TIED_YAML_CANONICALIZATION", () => {
+  const value = loadFixture("missing-field-skip.input.yaml") as Record<string, unknown>;
+  const result = canonicalizeValue(value) as any;
+  assert.deepEqual(result.satisfaction_criteria.length, 3);
+  assert.equal(result.satisfaction_criteria[0].criterion, "Beta");
+  assert.equal(result.satisfaction_criteria[1].metric, "orphan metric");
+});
+
+test("record-list registry matches ARCH contract REQ-TIED_YAML_CANONICALIZATION", () => {
+  assert.deepEqual(Object.keys(RECORD_LIST_REGISTRY).sort(), [
+    "alternatives_considered",
+    "satisfaction_criteria",
+    "validation_criteria",
+  ]);
 });
 
 test("wrapped style quotes strings and preserves typed scalar output REQ-TIED_YAML_STYLE_CONFIGURATION", () => {

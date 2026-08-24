@@ -1,17 +1,17 @@
 ARCH-TIED_VOCABULARY_LAYERS:
   alternatives_considered:
     - cons:
-        - "Refreshes remain unsafe and terminology forks persist"
-      name: "Keep mixed tied/vocab files"
-      pros:
-        - "No migration"
-      rejected_reason: "Does not satisfy deterministic methodology refresh."
-    - cons:
         - "Existing mixed files cannot be updated safely"
       name: "Copy methodology glossaries additively into tied/vocab"
       pros:
         - "Backward-compatible filenames"
       rejected_reason: "Filename-only merge preserves the ownership ambiguity."
+    - cons:
+        - "Refreshes remain unsafe and terminology forks persist"
+      name: "Keep mixed tied/vocab files"
+      pros:
+        - "No migration"
+      rejected_reason: "Does not satisfy deterministic methodology refresh."
   category: "Structural"
   cross_references:
     - "IMPL-TIED_VOCABULARY_REFRESH"

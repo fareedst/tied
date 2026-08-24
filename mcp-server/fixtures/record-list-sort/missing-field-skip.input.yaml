@@ -1,0 +1,4 @@
+satisfaction_criteria:
+  - criterion: "Beta"
+  - metric: "orphan metric"
+  - criterion: "Alpha"

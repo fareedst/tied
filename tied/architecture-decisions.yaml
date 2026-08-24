@@ -170,17 +170,17 @@ ARCH-CONFIG_DISCOVERY_LAYERING:
 ARCH-EVIDENCE_CHAIN_PROFILE:
   alternatives_considered:
     - cons:
-        - "Manifest is command-result scoped, not chain-level"
-      name: "Reuse-only existing quality manifest"
-      pros:
-        - "Less surface"
-      rejected_reason: "Need a sibling artifact with denominators and proof boundaries across the full chain."
-    - cons:
         - "Always runs fidelity, ledger append, and promotion"
       name: "Call runFirstSlice for all depths"
       pros:
         - "Reuse full pipeline"
       rejected_reason: "Violates integrated depth and read-only generation."
+    - cons:
+        - "Manifest is command-result scoped, not chain-level"
+      name: "Reuse-only existing quality manifest"
+      pros:
+        - "Less surface"
+      rejected_reason: "Need a sibling artifact with denominators and proof boundaries across the full chain."
   cross_references:
     - "ARCH-QUALITY_ASSURANCE_PROFILES"
     - "ARCH-TIED_FIDELITY_RESEARCH"
@@ -786,18 +786,18 @@ ARCH-GOAGENT-LIB-LAYERING:
 ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT:
   alternatives_considered:
     - cons:
+        - "No `agentstream` contract or traceability"
+      name: "Delegate pretty HTML entirely to a wrapper script outside agentstream"
+      pros:
+        - "Thin core"
+      rejected_reason: "REQ is in-scope for tools/agentstream"
+    - cons:
         - "Error-prone"
         - "no non-compact contract in code"
       name: "Require authors to hand-edit HTML in YAML"
       pros:
         - "No new formatter"
       rejected_reason: "REQ demands a testable, programmatic non-compact mode"
-    - cons:
-        - "No `agentstream` contract or traceability"
-      name: "Delegate pretty HTML entirely to a wrapper script outside agentstream"
-      pros:
-        - "Thin core"
-      rejected_reason: "REQ is in-scope for tools/agentstream"
   cross_references:
     - "REQ-GOAGENT-NON-COMPACT-HTML-FORMAT"
   decision: "The product SHALL support an opt-in non-compact HTML presentation of in-scope turn bodies (initially checklist- and tddloop-rendered content) as UTF-8 HTML with line breaks and stable indentation, distinct from a single minified line. Format selection SHALL be explicit (CLI flag and/or config field) and SHALL NOT change YAML step parsing or step identity; only the serialized run content passed to the agent (for example the strings assembled into Turn.Parts) changes. A shared formatter or a pipeline hook after step render and before or during Turn assembly is the preferred seam; unselected code paths remain plain/markdown and behavior-compatible with current releases."
@@ -1026,12 +1026,6 @@ ARCH-GOAGENT-YAML-STEPS:
 ARCH-LEAP_PROPOSAL_QUEUE:
   alternatives_considered:
     - cons:
-        - "Conflicts with canonical-only expectation for tied/ project YAML; harder to distinguish from REQ/ARCH/IMPL"
-      name: "Store proposals under tied/proposals.yaml"
-      pros:
-        - "Versioned with methodology tree"
-      rejected_reason: "Keep proposals out of TIED base path until promoted via explicit LEAP"
-    - cons:
         - "Proposals are not requirements until approved; would flood index and confuse traceability"
       name: "New requirements.yaml rows for each proposal"
       pros:
@@ -1043,6 +1037,12 @@ ARCH-LEAP_PROPOSAL_QUEUE:
       pros:
         - "Richer suggestions"
       rejected_reason: "Built-in path must be deterministic and opt-in without LLM"
+    - cons:
+        - "Conflicts with canonical-only expectation for tied/ project YAML; harder to distinguish from REQ/ARCH/IMPL"
+      name: "Store proposals under tied/proposals.yaml"
+      pros:
+        - "Versioned with methodology tree"
+      rejected_reason: "Keep proposals out of TIED base path until promoted via explicit LEAP"
   cross_references:
     - "REQ-LEAP_PROPOSAL_QUEUE"
   detail_file: "architecture-decisions/ARCH-LEAP_PROPOSAL_QUEUE.yaml"
@@ -1095,6 +1095,12 @@ ARCH-LEAP_PROPOSAL_QUEUE:
 ARCH-MCP_USAGE_METRICS:
   alternatives_considered:
     - cons:
+        - "Privacy and I/O overhead without explicit opt-in"
+      name: "Always-on collection"
+      pros:
+        - "Simpler for operators"
+      rejected_reason: "Default off via TIED_MCP_COLLECT_METRICS matches local-only opt-in requirement"
+    - cons:
         - "Misses tied-cli and headless MCP invocations"
         - "Requires separate hooks.json setup per project"
       name: "Cursor hook logs only"
@@ -1108,12 +1114,6 @@ ARCH-MCP_USAGE_METRICS:
       pros:
         - "Reuses existing feedback module"
       rejected_reason: "Separate append-only JSONL under ~/.cursor/logs/ keeps metrics local and out of project YAML"
-    - cons:
-        - "Privacy and I/O overhead without explicit opt-in"
-      name: "Always-on collection"
-      pros:
-        - "Simpler for operators"
-      rejected_reason: "Default off via TIED_MCP_COLLECT_METRICS matches local-only opt-in requirement"
   cross_references:
     - "IMPL-TIED_FILES"
     - "REQ-MCP_USAGE_METRICS"
@@ -1268,6 +1268,12 @@ ARCH-PROMPT_TYPE_GLOBAL_SKILLS:
 ARCH-PROMPT_TYPE_SUBAGENT:
   alternatives_considered:
     - cons:
+        - "Adds a repository-specific orchestration entry to client tooling"
+      name: "Install the agent in every client"
+      pros:
+        - "Uniform Task availability"
+      rejected_reason: "Client projects receive the canonical skill; this Task wrapper is intentionally TIED-source scoped."
+    - cons:
         - "Cannot perform Implement"
       name: "Keep the stub readonly"
       pros:
@@ -1279,12 +1285,6 @@ ARCH-PROMPT_TYPE_SUBAGENT:
       pros:
         - "More self-contained prompt"
       rejected_reason: "The wrapper should reference the canonical skill and repeat only clean-context-critical boundaries."
-    - cons:
-        - "Adds a repository-specific orchestration entry to client tooling"
-      name: "Install the agent in every client"
-      pros:
-        - "Uniform Task availability"
-      rejected_reason: "Client projects receive the canonical skill; this Task wrapper is intentionally TIED-source scoped."
   cross_references:
     - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
     - "REQ-PROMPT_TYPE_SUBAGENT"
@@ -1419,19 +1419,19 @@ ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY:
 ARCH-TIED_FIDELITY_RESEARCH:
   alternatives_considered:
     - cons:
-        - "Destroys read-only audit boundary"
-        - "Pollutes approved intent"
-      name: "Write findings directly into project TIED YAML"
-      pros:
-        - "Immediate visibility"
-      rejected_reason: "Research findings require triage and adjudication before changing project intent."
-    - cons:
         - "Cannot reliably map block-level evidence"
         - "Weak provenance"
       name: "Use only transcript-derived natural language"
       pros:
         - "Low implementation cost"
       rejected_reason: "Structured evidence must be emitted at discovery boundaries."
+    - cons:
+        - "Destroys read-only audit boundary"
+        - "Pollutes approved intent"
+      name: "Write findings directly into project TIED YAML"
+      pros:
+        - "Immediate visibility"
+      rejected_reason: "Research findings require triage and adjudication before changing project intent."
   cross_references:
     - "REQ-TIED_FIDELITY_RESEARCH"
   decision: "Separate research analysis and append-only research evidence from audited project TIED data and remediation workflows."
@@ -1506,19 +1506,19 @@ ARCH-TIED_RESEARCH_RECORD_BOUNDARY:
 ARCH-TIED_STRUCTURE:
   alternatives_considered:
     - cons:
-        - "Clutters the root directory"
-        - "No clear organization"
-      name: "Root-level files"
-      pros:
-        - "Immediately visible in repository root"
-      rejected_reason: "Creates too much clutter at project root"
-    - cons:
         - ".github is typically for GitHub workflows"
         - "Too generic for methodology-specific files"
       name: ".github or .docs folder"
       pros:
         - "Common convention for documentation"
       rejected_reason: "./tied/ is more specific to the methodology"
+    - cons:
+        - "Clutters the root directory"
+        - "No clear organization"
+      name: "Root-level files"
+      pros:
+        - "Immediately visible in repository root"
+      rejected_reason: "Creates too much clutter at project root"
   cross_references:
     - "IMPL-TIED_FILES"
     - "IMPL-TIED_VOCABULARY_REFRESH"
@@ -1598,16 +1598,27 @@ ARCH-TIED_YAML_CANONICAL_PROFILE:
     - "REQ-TIED_SETUP"
     - "REQ-TIED_YAML_CANONICALIZATION"
     - "REQ-TIED_YAML_STYLE_CONFIGURATION"
+  decision: "All TIED YAML write surfaces delegate to one typed canonicalizer with profile id tied-yaml-canonical-v1. The canonicalizer recursively orders mapping keys and eligible all-string lists using case-insensitive-primary, locale-independent lexical ordering with the original value as a case-sensitive tie-breaker; recognized record lists sort complete mapping records by registry stable fields; it preserves scalar types, opaque block text, ordered-list order, unrecognized object and mixed list order, and writes atomically while returning stable yaml_format metadata. Compatibility frontends delegate to the same profile while retaining historical flags."
   description: "A single typed tied-yaml-canonical-v1 profile governs recursive map and eligible phrase-list ordering, ordered-list exceptions, scalar preservation, opaque text, atomic writes, and yaml_format metadata. Lexical ordering is case-insensitive-primary with original-value tie-breaking and no locale dependence."
   detail_file: "architecture-decisions/ARCH-TIED_YAML_CANONICAL_PROFILE.yaml"
+  implementation_approach:
+    details:
+      - "Canonicalize token rename substitutions before replacement and preserve originals on failure"
+      - "Compatibility sorter reporting: yaml_list_sorter and yaml_tool --sort-lists emit normal stdout only for modified paths, retain validation and modification summaries for those paths, and keep failure diagnostics on stderr; unchanged paths remain silent."
+      - "Recognized record lists sort complete mapping records by configured stable fields; unrecognized object and mixed lists preserve order"
+      - "Record-list registry: satisfaction_criteria sorts by criterion; validation_criteria sorts by method; alternatives_considered sorts by name; whole-block sorting preserves optional fields attached to each record"
+      - "Return yaml_format metadata from every successful writer"
+      - "Sort only all-string lists unless owning key matches order, order_*, *_order, or *_order_*"
+      - "Treat block scalar bodies and IMPL sidecars as opaque text"
+      - "Use case-insensitive-primary locale-independent lexical ordering with original-value lexical tie-breaking for map keys and eligible string lists"
   metadata:
     created:
       author: "AI Agent"
       date: "2026-08-06"
     last_updated:
       author: "AI Agent"
-      date: "2026-08-06"
-      reason: "Align architecture index with case-insensitive-primary canonical ordering"
+      date: "2026-08-24"
+      reason: "LEAP: add record-list registry and whole-block sorting contract for recognized mapping-record lists"
   name: "Shared typed canonical YAML profile"
   status: "Active"
   type: "ARCH"

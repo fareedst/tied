@@ -1,6 +1,12 @@
 ARCH-MCP_USAGE_METRICS:
   alternatives_considered:
     - cons:
+        - "Privacy and I/O overhead without explicit opt-in"
+      name: "Always-on collection"
+      pros:
+        - "Simpler for operators"
+      rejected_reason: "Default off via TIED_MCP_COLLECT_METRICS matches local-only opt-in requirement"
+    - cons:
         - "Misses tied-cli and headless MCP invocations"
         - "Requires separate hooks.json setup per project"
       name: "Cursor hook logs only"
@@ -14,12 +20,6 @@ ARCH-MCP_USAGE_METRICS:
       pros:
         - "Reuses existing feedback module"
       rejected_reason: "Separate append-only JSONL under ~/.cursor/logs/ keeps metrics local and out of project YAML"
-    - cons:
-        - "Privacy and I/O overhead without explicit opt-in"
-      name: "Always-on collection"
-      pros:
-        - "Simpler for operators"
-      rejected_reason: "Default off via TIED_MCP_COLLECT_METRICS matches local-only opt-in requirement"
   cross_references:
     - "IMPL-TIED_FILES"
     - "REQ-MCP_USAGE_METRICS"

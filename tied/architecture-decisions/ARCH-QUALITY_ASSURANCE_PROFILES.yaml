@@ -1,17 +1,17 @@
 ARCH-QUALITY_ASSURANCE_PROFILES:
   alternatives_considered:
     - cons:
-        - "Imposes irrelevant ceremony and expensive evidence"
-      name: "Universal quality checklist"
-      pros:
-        - "Simple to describe"
-      rejected_reason: "Conflicts with risk-triggered applicability."
-    - cons:
         - "Does not exercise runtime security, performance, resilience, usability, or compliance behavior"
       name: "TIED consistency as complete quality proof"
       pros:
         - "Uses an existing gate"
       rejected_reason: "Proof boundary is technically false."
+    - cons:
+        - "Imposes irrelevant ceremony and expensive evidence"
+      name: "Universal quality checklist"
+      pros:
+        - "Simple to describe"
+      rejected_reason: "Conflicts with risk-triggered applicability."
   cross_references:
     - "REQ-QUALITY_ASSURANCE_EVIDENCE"
   decision: "Quality assurance is selected through versioned risk profiles. Each applicable quality attribute produces a measurable evidence row; N/A decisions require rationale, owner, and expiry when risk is accepted. TIED consistency validates artifact integrity but does not prove runtime quality."

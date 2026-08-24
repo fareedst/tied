@@ -1,0 +1,47 @@
+{
+  "passed_requirement_tokens": ["REQ-TIED_YAML_CANONICALIZATION"],
+  "passed_impl_tokens": ["IMPL-TIED_YAML_CANONICALIZER"],
+  "checklist_gate": {
+    "phase": "verification",
+    "tracker": {
+      "steps": [
+        {
+          "slug": "sub-adversarial-inquiry-pass",
+          "disposition": "not_applicable",
+          "policy": "minimal-depth-no-inquiry",
+          "rationale": "Minimal depth advisory; verification gate satisfied by unit tests without inquiry pairing."
+        },
+        {
+          "slug": "verification-gate",
+          "disposition": "completed",
+          "evidence_refs": [
+            "mcp-server/src/yaml-canonicalizer.test.ts (17/17)",
+            "scripts/yaml_list_sorter_test.rb (all pass)"
+          ]
+        }
+      ]
+    },
+    "citdp": {
+      "risk_analysis": {
+        "adversarial_inquiry": {
+          "depth_tier": "minimal",
+          "gate_policy": "advisory",
+          "prior_depth_tier": "minimal",
+          "counterexamples": [
+            "Ruby line sorter detaches optional record fields."
+          ],
+          "falsification_questions": [
+            "Can a partial record block sort pass semantic validation?"
+          ],
+          "disconfirming_observations": [
+            "Multi-line satisfaction_criteria fixtures round-trip with fields attached."
+          ],
+          "evidence_references": [
+            "mcp-server/fixtures/record-list-sort/",
+            "scripts/yaml_list_sorter_test.rb"
+          ]
+        }
+      }
+    }
+  }
+}

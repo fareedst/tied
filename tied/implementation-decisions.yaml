@@ -1873,14 +1873,25 @@ IMPL-TIED_YAML_CANONICALIZER:
     - "REQ-TIED_YAML_STYLE_CONFIGURATION"
   description: "Shared typed canonicalizer, atomic writer, format metadata, MCP writer integration, and compatibility frontend delegation with case-insensitive-primary locale-independent ordering and original-value tie-breaking."
   detail_file: "implementation-decisions/IMPL-TIED_YAML_CANONICALIZER.yaml"
+  implementation_approach:
+    details:
+      - "Canonicalize parsed YAML values recursively with path-aware ordered-list exceptions and record-list registry recognition"
+      - "Expose a read-only tied_yaml_format operation and add metadata to all successful YAML writes including record_list_rule"
+      - "Keep yaml_tool compatibility flags while delegating default and sorter comparison behavior to shared profile"
+      - "Recognized record lists sort complete mapping records by registry stable fields with fingerprint tie-break; unrecognized object and mixed lists preserve order"
+      - "Return yaml_format metadata from successful write operations"
+      - "Serialize using stable typed scalar rules while retaining opaque block-scalar and sidecar text"
+      - "Testability boundary: unit tests cover pure canonicalization and atomic failure; UI-free MCP composition covers handler wiring; the compatibility CLI is exercised by scripts/yaml_list_sorter_test.rb; no separate UI E2E is applicable because this feature has no UI boundary."
+      - "Use case-insensitive-primary locale-independent lexical ordering with original-value lexical tie-breaking for map keys and eligible phrase lists"
+      - "Write through temporary files and atomic rename only after successful parse and serialization"
   metadata:
     created:
       author: "AI Agent"
       date: "2026-08-06"
     last_updated:
       author: "AI Agent"
-      date: "2026-08-06"
-      reason: "Implement synchronized phrase ordering comparator across TypeScript and Ruby"
+      date: "2026-08-24"
+      reason: "LEAP: record-list recognition, whole-record sorting, and record_list_rule metadata"
   name: "Shared typed TIED YAML canonicalizer"
   status: "Active"
   type: "IMPL"

@@ -1,0 +1,3 @@
+satisfaction_criteria:
+  - { criterion: "Zebra", metric: "z" }
+  - { criterion: "Alpha", metric: "a" }

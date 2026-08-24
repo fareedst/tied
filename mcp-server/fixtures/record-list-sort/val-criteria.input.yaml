@@ -1,0 +1,5 @@
+validation_criteria:
+  - method: "Zebra test"
+    coverage: "z coverage"
+  - method: "Alpha test"
+    coverage: "a coverage"

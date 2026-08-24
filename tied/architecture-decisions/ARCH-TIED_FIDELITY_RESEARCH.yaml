@@ -1,19 +1,19 @@
 ARCH-TIED_FIDELITY_RESEARCH:
   alternatives_considered:
     - cons:
-        - "Destroys read-only audit boundary"
-        - "Pollutes approved intent"
-      name: "Write findings directly into project TIED YAML"
-      pros:
-        - "Immediate visibility"
-      rejected_reason: "Research findings require triage and adjudication before changing project intent."
-    - cons:
         - "Cannot reliably map block-level evidence"
         - "Weak provenance"
       name: "Use only transcript-derived natural language"
       pros:
         - "Low implementation cost"
       rejected_reason: "Structured evidence must be emitted at discovery boundaries."
+    - cons:
+        - "Destroys read-only audit boundary"
+        - "Pollutes approved intent"
+      name: "Write findings directly into project TIED YAML"
+      pros:
+        - "Immediate visibility"
+      rejected_reason: "Research findings require triage and adjudication before changing project intent."
   cross_references:
     - "REQ-TIED_FIDELITY_RESEARCH"
   decision: "Separate research analysis and append-only research evidence from audited project TIED data and remediation workflows."

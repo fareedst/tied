@@ -1,0 +1,8 @@
+satisfaction_criteria:
+  - criterion: "Zebra criterion"
+    metric: "z metric"
+  - criterion: "Alpha criterion"
+    metric: |
+      multi
+      line
+      metric

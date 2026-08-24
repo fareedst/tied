@@ -31,10 +31,45 @@ procedure CANONICALIZE_YAML_VALUE(value, path):
       ordered[key] := CANONICALIZE_YAML_VALUE(value[key], path + key)
     RETURN ordered
   IF value is a list:
-    mapped := FOR each item IN value: CANONICALIZE_YAML_VALUE(item, path)
+    mapped := FOR each item IN value: CANONICALIZE_YAML_VALUE(item, path + index)
+    recognition := RECOGNIZE_RECORD_LIST(path_parent_key, value)
+    IF recognition:
+      RETURN SORT_RECORD_LIST(mapped, recognition)
     IF every original element is a string AND path parent key is not an ordered-list key:
       RETURN canonical lexical sort(mapped)
     RETURN mapped
+
+## RECOGNIZE_RECORD_LIST
+# [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
+# How: Return registry entry with sort_field when parent key matches record-list registry and every item is a mapping with the configured stable field.
+procedure RECOGNIZE_RECORD_LIST(parent_key, list_items):
+  PRE: parent_key is string; list_items is array
+  POST: returns registry entry with sort_field or nil when unrecognized or fail-safe
+  EFFECTS: pure
+  FAILURE_MODES: none
+  TERMINATION: total
+  RECORD_LIST_REGISTRY := {
+    satisfaction_criteria: [criterion],
+    validation_criteria: [method],
+    alternatives_considered: [name]
+  }
+  IF parent_key not in RECORD_LIST_REGISTRY: RETURN nil
+  IF any item is not a mapping: RETURN nil
+  FOR field IN RECORD_LIST_REGISTRY[parent_key]:
+    IF every item has field: RETURN { sort_field: field, registry_key: parent_key }
+  RETURN nil
+
+## SORT_RECORD_LIST
+# [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
+# How: Sort complete mapping records by COMPARE_CANONICAL_TEXT on sort field; tie-break with original-value then canonical record fingerprint.
+procedure SORT_RECORD_LIST(list_items, recognition):
+  PRE: recognition from RECOGNIZE_RECORD_LIST; all items mappings with sort field
+  POST: records sorted by COMPARE_CANONICAL_TEXT on sort field; ties broken original-value then canonical record fingerprint
+  EFFECTS: pure
+  FAILURE_MODES: none
+  TERMINATION: total
+  mapped := FOR each item: CANONICALIZE_YAML_VALUE(item, path) preserving inner structure
+  RETURN stable_sort(mapped, comparator using COMPARE_CANONICAL_TEXT on sort field, original-value tie-break, fingerprint tie-break)
   IF value is a string, boolean, number, or null:
     RETURN value unchanged
   RETURN error UNSUPPORTED_VALUE
@@ -121,6 +156,7 @@ procedure REPORT_YAML_FORMAT():
     recursive_key_order: "case-insensitive-primary locale-independent lexical with original-value tie-break",
     ordered_list_key_pattern: "order|order_*|*_order|*_order_*",
     string_list_rule: "sort all-string lists except ordered-list keys",
+    record_list_rule: "sort recognized mapping-record lists by registry stable fields; preserve unrecognized object/mixed lists and ordered-list keys",
     scalar_policy: "preserve string, boolean, number, and null types",
     opaque_block_policy: "preserve block-scalar bodies and IMPL pseudo-code sidecars"
   }

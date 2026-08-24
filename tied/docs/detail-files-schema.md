@@ -22,8 +22,8 @@ This document describes the YAML structure for individual REQ, ARCH, and IMPL to
 | `status` | Implemented \| Planned \| Template | string |
 | `description` | Long-form "what" (replaces MD Description) | string |
 | `rationale` | why (string), problems_solved (list), benefits (list) | map |
-| `satisfaction_criteria` | list of `{ criterion, metric? }` | list of maps |
-| `validation_criteria` | list of `{ method, coverage? }` | list of maps |
+| `satisfaction_criteria` | list of `{ criterion, metric? }` | list of maps; **recognized record list** — canonical lint sorts by `criterion` |
+| `validation_criteria` | list of `{ method, coverage? }` | list of maps; **recognized record list** — canonical lint sorts by `method` |
 | `traceability` | architecture, implementation, tests, code_annotations (lists of token strings) | map of lists |
 | `related_requirements` | depends_on, related_to, supersedes (lists) | map of lists |
 | `metadata` | created, last_updated, last_validated (each: date, author, reason?, validator?, result?) | map |
@@ -43,7 +43,7 @@ This document describes the YAML structure for individual REQ, ARCH, and IMPL to
 | `cross_references` | REQ-* tokens this decision fulfills | list of strings |
 | `decision` | Short statement (replaces MD "Decision") | string |
 | `rationale` | why, problems_solved, benefits | map |
-| `alternatives_considered` | list of `{ name, pros, cons, rejected_reason }` | list of maps |
+| `alternatives_considered` | list of `{ name, pros, cons, rejected_reason }` | list of maps; **recognized record list** — canonical lint sorts by `name` |
 | `implementation_approach` | summary (string), details (list); optional key_components, integration_points | map |
 | `traceability` | requirements, implementation, tests, code_annotations | map of lists |
 | `related_decisions` | depends_on, informs, see_also | map of lists |

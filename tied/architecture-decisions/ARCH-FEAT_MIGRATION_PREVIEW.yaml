@@ -1,17 +1,17 @@
 ARCH-FEAT_MIGRATION_PREVIEW:
   alternatives_considered:
     - cons:
-        - "Data loss and hidden behavior changes"
-      name: "In-place automatic migration"
-      pros:
-        - "Fast"
-      rejected_reason: "No silent migration is permitted."
-    - cons:
         - "Competing source of truth"
       name: "Convert Markdown generated views as source"
       pros:
         - "Convenient"
       rejected_reason: "Views are not canonical intent."
+    - cons:
+        - "Data loss and hidden behavior changes"
+      name: "In-place automatic migration"
+      pros:
+        - "Fast"
+      rejected_reason: "No silent migration is permitted."
   cross_references:
     - "REQ-FEAT_LEGACY_MIGRATION"
   decision: "Normalize legacy feature-spec and ordered agentstream inputs into a non-mutating migration preview, then require explicit confirmation for backup-protected atomic publication."

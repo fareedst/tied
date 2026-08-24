@@ -61,7 +61,7 @@ REQ-QUALITY_ASSURANCE_EVIDENCE:
   validation_criteria:
     - coverage: "Applicability, risk, scenarios, abuse cases, evidence, waivers, and residual risk."
       method: "CITDP quality evidence matrix review"
-    - coverage: "Evidence and validator modules plus their bindings."
-      method: "Unit and composition tests"
     - coverage: "REQ to ARCH to IMPL traceability and token-commented pseudo-code."
       method: "tied_validate_consistency"
+    - coverage: "Evidence and validator modules plus their bindings."
+      method: "Unit and composition tests"

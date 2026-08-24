@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Record-aware YAML canonicalization** — `[REQ-TIED_YAML_CANONICALIZATION]` / `[ARCH-TIED_YAML_CANONICAL_PROFILE]` / `[IMPL-TIED_YAML_CANONICALIZER]`: recognized record lists (`satisfaction_criteria`, `validation_criteria`, `alternatives_considered`) now sort complete mapping records by configured stable fields in both TypeScript default lint and Ruby `--sort-lists` (whole-block sorting preserves optional fields). `yaml_format` metadata adds `record_list_rule`; `yaml_semantic_compare` accepts record-list reorder via fingerprint multiset compare. First bulk lint after upgrade will reorder registered record lists deterministically.
+
 - **1787507684 integrated activation replay script** —
   `[REQ-TIED_ADVERSARIAL_INQUIRY]` / `[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]` /
   `[REQ-MCP_USAGE_METRICS]`: operator runbook

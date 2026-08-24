@@ -1,18 +1,18 @@
 ARCH-TIED_YAML_STYLE_RESOLUTION:
   alternatives_considered:
     - cons:
+        - "A repository cannot enforce its checked-in style"
+      name: "Global environment always overrides repository configuration"
+      pros:
+        - "Operator override"
+      rejected_reason: "Repository style must be authoritative for reproducible lint and MCP writes."
+    - cons:
         - "Cross-surface drift"
         - "Different repository outcomes"
       name: "Independent MCP and yaml_tool style settings"
       pros:
         - "Small local changes"
       rejected_reason: "The requested guarantee requires one resolver and one serializer policy."
-    - cons:
-        - "A repository cannot enforce its checked-in style"
-      name: "Global environment always overrides repository configuration"
-      pros:
-        - "Operator override"
-      rejected_reason: "Repository style must be authoritative for reproducible lint and MCP writes."
   cross_references:
     - "ARCH-TIED_STRUCTURE"
     - "ARCH-TIED_YAML_CANONICAL_PROFILE"

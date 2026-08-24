@@ -8,12 +8,6 @@ ARCH-EVIDENCE_CHAIN_REPORT:
         - "Fewer tokens"
       rejected_reason: "Keep the smallest honest token set that remains independently testable."
     - cons:
-        - "Erases denominators and proof boundaries"
-      name: "Universal rollup score"
-      pros:
-        - "Simple ranking"
-      rejected_reason: "Locked non-goal."
-    - cons:
         - "Mutates the read-only boundary and couples to repo layout"
       name: "Live client-root traversal"
       pros:
@@ -25,6 +19,12 @@ ARCH-EVIDENCE_CHAIN_REPORT:
       pros:
         - "Clients inherit tokens"
       rejected_reason: "Report tokens stay source-repo-only; the guide and profile-generator tokens may still be client-distributed."
+    - cons:
+        - "Erases denominators and proof boundaries"
+      name: "Universal rollup score"
+      pros:
+        - "Simple ranking"
+      rejected_reason: "Locked non-goal."
   cross_references:
     - "ARCH-EVIDENCE_CHAIN_PROFILE"
     - "IMPL-EVIDENCE_CHAIN_REPORT"

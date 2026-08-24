@@ -42,7 +42,7 @@ REQ-FEAT_VIEW_STALENESS:
     tests:
       - "mcp-server/src/feature-orchestration/views.test.ts"
   validation_criteria:
-    - coverage: "Revision and hash mismatch paths"
-      method: "Stale detection tests"
     - coverage: "Fail and warn modes"
       method: "Policy tests"
+    - coverage: "Revision and hash mismatch paths"
+      method: "Stale detection tests"

@@ -31,15 +31,15 @@ REQ-LEAP_PROPOSAL_QUEUE:
       - "REQ-FEEDBACK_TO_TIED"
     supersedes: []
   satisfaction_criteria:
-    - criterion: "MCP tools list, add, reject, approve, mark applied, update pending, and snapshot the proposal queue without writing project TIED YAML"
-      metric: "tied_leap_proposal_* handlers persist only under leap-proposals/"
     - criterion: "Diff and session import require explicit_opt_in"
       metric: "explicit_opt_in false returns error and creates no proposals"
+    - criterion: "LEAP proposal queue terms and tied_leap_proposal_* tools are canonical in tied/vocab/leap-proposal-queue.md; LOAD_QUEUE block in IMPL-MCP_LEAP_PROPOSAL_QUEUE-pseudocode.md"
+    - criterion: "MCP tools list, add, reject, approve, mark applied, update pending, and snapshot the proposal queue without writing project TIED YAML"
+      metric: "tied_leap_proposal_* handlers persist only under leap-proposals/"
     - criterion: "Reject records status in queue and audit only"
       metric: "reject does not modify tied/*.yaml"
     - criterion: "Unit tests cover queue persistence and lifecycle"
       metric: "leap-proposal-queue.test.ts passes in mcp-server"
-    - criterion: "LEAP proposal queue terms and tied_leap_proposal_* tools are canonical in tied/vocab/leap-proposal-queue.md; LOAD_QUEUE block in IMPL-MCP_LEAP_PROPOSAL_QUEUE-pseudocode.md"
   status: "Implemented"
   traceability:
     architecture:
@@ -53,9 +53,9 @@ REQ-LEAP_PROPOSAL_QUEUE:
       - "leap-proposal-mcp.test.ts"
       - "leap-proposal-queue.test.ts"
   validation_criteria:
-    - coverage: "leap-proposal-queue module and schema strings"
-      method: "Unit tests"
     - coverage: "leap-proposal-mcp.test.ts (tied_leap_proposal_* handlers without MCP transport)"
       method: "Composition tests"
     - coverage: "Tools callable from tied-yaml MCP server"
       method: "Manual or MCP client"
+    - coverage: "leap-proposal-queue module and schema strings"
+      method: "Unit tests"

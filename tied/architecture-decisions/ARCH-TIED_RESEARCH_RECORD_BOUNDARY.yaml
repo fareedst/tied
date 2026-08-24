@@ -1,19 +1,19 @@
 ARCH-TIED_RESEARCH_RECORD_BOUNDARY:
   alternatives_considered:
     - cons:
-        - "Breaks read-only fidelity boundary"
-        - "Pollutes canonical intent"
-      name: "Write research directly into project TIED YAML"
-      pros:
-        - "Immediate discoverability"
-      rejected_reason: "Research evidence and uncertainty require review before canonical promotion."
-    - cons:
         - "No deterministic freshness"
         - "Weak comparison and provenance"
       name: "Store unstructured research notes only"
       pros:
         - "Low authoring cost"
       rejected_reason: "Structured fields are required for reproducible decision support."
+    - cons:
+        - "Breaks read-only fidelity boundary"
+        - "Pollutes canonical intent"
+      name: "Write research directly into project TIED YAML"
+      pros:
+        - "Immediate discoverability"
+      rejected_reason: "Research evidence and uncertainty require review before canonical promotion."
   decision: "Use a typed append-only research dataset outside audited project YAML for research records; preserve source evidence and snapshots, link records to ARCH/IMPL alternatives, and require explicit classification and freshness evaluation before records influence planning."
   implementation_approach:
     details:

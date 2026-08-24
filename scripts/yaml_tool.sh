@@ -9,6 +9,8 @@ operation=lint
 usage() {
   printf 'usage: %s [options] [(-0|--null) | (-F|--find) [DIR [GLOB]]] [--] [file ...]\n' "${0##*/}" 1>&2
   printf '  Default: canonicalize each YAML file with tied-yaml-canonical-v1, one file per invocation.\n' 1>&2
+  printf '               Sorts map keys, eligible string lists, and recognized record lists\n' 1>&2
+  printf '               (satisfaction_criteria, validation_criteria, alternatives_considered).\n' 1>&2
   printf '  --check      fail when a file is not in the resolved canonical style; do not rewrite.\n' 1>&2
   printf '  --sort-lists  sort qualifying list groups in place (Ruby); same file selection as default.\n' 1>&2
   printf '               Skips lists under map keys matching order / *_order / order_* / *_order_*.\n' 1>&2

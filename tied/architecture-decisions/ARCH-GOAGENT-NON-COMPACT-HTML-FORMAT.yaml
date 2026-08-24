@@ -1,18 +1,18 @@
 ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT:
   alternatives_considered:
     - cons:
+        - "No `agentstream` contract or traceability"
+      name: "Delegate pretty HTML entirely to a wrapper script outside agentstream"
+      pros:
+        - "Thin core"
+      rejected_reason: "REQ is in-scope for tools/agentstream"
+    - cons:
         - "Error-prone"
         - "no non-compact contract in code"
       name: "Require authors to hand-edit HTML in YAML"
       pros:
         - "No new formatter"
       rejected_reason: "REQ demands a testable, programmatic non-compact mode"
-    - cons:
-        - "No `agentstream` contract or traceability"
-      name: "Delegate pretty HTML entirely to a wrapper script outside agentstream"
-      pros:
-        - "Thin core"
-      rejected_reason: "REQ is in-scope for tools/agentstream"
   cross_references:
     - "REQ-GOAGENT-NON-COMPACT-HTML-FORMAT"
   decision: "The product SHALL support an opt-in non-compact HTML presentation of in-scope turn bodies (initially checklist- and tddloop-rendered content) as UTF-8 HTML with line breaks and stable indentation, distinct from a single minified line. Format selection SHALL be explicit (CLI flag and/or config field) and SHALL NOT change YAML step parsing or step identity; only the serialized run content passed to the agent (for example the strings assembled into Turn.Parts) changes. A shared formatter or a pipeline hook after step render and before or during Turn assembly is the preferred seam; unselected code paths remain plain/markdown and behavior-compatible with current releases."

@@ -1,0 +1,44 @@
+{
+  "phase": "verification",
+  "tracker": {
+    "steps": [
+      {
+        "slug": "sub-adversarial-inquiry-pass",
+        "disposition": "not_applicable",
+        "policy": "minimal-depth-no-inquiry",
+        "rationale": "Minimal depth advisory; verification gate satisfied by unit tests and tied_validate_consistency without inquiry pairing."
+      },
+      {
+        "slug": "verification-gate",
+        "disposition": "completed",
+        "evidence_refs": [
+          "bun test mcp-server/src/yaml-canonicalizer.test.ts",
+          "ruby scripts/yaml_list_sorter_test.rb"
+        ]
+      }
+    ]
+  },
+  "citdp": {
+    "risk_analysis": {
+      "adversarial_inquiry": {
+        "depth_tier": "minimal",
+        "gate_policy": "advisory",
+        "prior_depth_tier": "minimal",
+        "counterexamples": [
+          "Ruby line sorter detaches metric/coverage continuation lines from parent criterion records.",
+          "Semantic compare unordered_arrays masks unrelated array reordering after a cosmetic sort."
+        ],
+        "falsification_questions": [
+          "Can a partial record block sort pass semantic validation?"
+        ],
+        "disconfirming_observations": [
+          "Unregistered object_list test vectors preserve order in both surfaces."
+        ],
+        "evidence_references": [
+          "mcp-server/src/yaml-canonicalizer.test.ts",
+          "scripts/yaml_list_sorter_test.rb"
+        ]
+      }
+    }
+  }
+}

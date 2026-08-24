@@ -82,8 +82,9 @@ end
 
 # Recursively compares Ruby values produced from YAML and records path-level differences.
 class DifferenceWalker
-  def initialize(unordered_arrays: false)
+  def initialize(unordered_arrays: false, record_list_keys: [])
     @unordered_arrays = unordered_arrays
+    @record_list_keys = record_list_keys.map(&:to_s).to_set
     @canonical_value = CanonicalValue.new(unordered_arrays: unordered_arrays)
   end
 
@@ -95,7 +96,7 @@ class DifferenceWalker
 
   private
 
-  def compare(left, right, path, result, ordered_key: false)
+  def compare(left, right, path, result, ordered_key: false, record_list_key: false)
     if left.class != right.class
       result << "#{path}: type differs: left=#{type_and_value(left)}, right=#{type_and_value(right)}"
       return
@@ -105,7 +106,9 @@ class DifferenceWalker
     when Hash
       compare_hashes(left, right, path, result)
     when Array
-      if @unordered_arrays && !ordered_key
+      if record_list_key
+        compare_record_list_arrays(left, right, path, result)
+      elsif @unordered_arrays && !ordered_key
         compare_unordered_arrays(left, right, path, result)
       else
         compare_ordered_arrays(left, right, path, result)
@@ -135,9 +138,14 @@ class DifferenceWalker
         right[key],
         hash_path(path, key),
         result,
-        ordered_key: ordered_list_key?(key)
+        ordered_key: ordered_list_key?(key),
+        record_list_key: record_list_key?(key)
       )
     end
+  end
+
+  def record_list_key?(key)
+    @record_list_keys.include?(key.to_s)
   end
 
   def ordered_list_key?(key)
@@ -181,6 +189,34 @@ class DifferenceWalker
     end
   end
 
+  def compare_record_list_arrays(left, right, path, result)
+    return compare_ordered_arrays(left, right, path, result) if left.length != right.length
+
+    left_fingerprints = left.map { |item| record_fingerprint(item) }.sort
+    right_fingerprints = right.map { |item| record_fingerprint(item) }.sort
+    return if left_fingerprints == right_fingerprints
+
+    result << "#{path}: record-list multiset differs after reorder"
+  end
+
+  def record_fingerprint(value)
+    CanonicalValue.new(unordered_arrays: false).key(normalize_record(value))
+  end
+
+  def normalize_record(value)
+    case value
+    when Hash
+      normalized_pairs = value.map do |key, child_value|
+        [normalize_record(key), normalize_record(child_value)]
+      end
+      ["Hash", normalized_pairs.sort_by { |key, _child_value| Marshal.dump(key) }]
+    when Array
+      ["Array", value.map { |item| normalize_record(item) }]
+    else
+      [value.class.name, value]
+    end
+  end
+
   def group_array_values(values)
     values.each_with_object(Hash.new { |hash, key| hash[key] = [] }) do |value, groups|
       groups[@canonical_value.key(value)] << value
@@ -221,8 +257,11 @@ end
 class YamlSemanticCompare
   CompareResult = Struct.new(:ok, :differences, keyword_init: true)
 
-  def self.compare(left, right, unordered_arrays: false)
-    differences = DifferenceWalker.new(unordered_arrays: unordered_arrays).differences(left, right)
+  def self.compare(left, right, unordered_arrays: false, record_list_keys: [])
+    differences = DifferenceWalker.new(
+      unordered_arrays: unordered_arrays,
+      record_list_keys: record_list_keys
+    ).differences(left, right)
     CompareResult.new(ok: differences.empty?, differences: differences)
   end
 end

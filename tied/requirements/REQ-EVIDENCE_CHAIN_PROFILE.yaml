@@ -29,14 +29,14 @@ REQ-EVIDENCE_CHAIN_PROFILE:
       metric: "Same inputs yield equivalent JSON"
     - criterion: "Manual Path B schema-valid with generator manual"
       metric: "assumptions, confidence, and unsupported_checks required"
-    - criterion: "Wrong TIED base path fails closed; generation never mutates project REQ ARCH IMPL"
-      metric: "WrongTiedBasePath and no intent YAML writes"
     - criterion: "No finding-ledger append or case promotion from the generator"
       metric: "Orchestrator never calls those adapters"
-    - criterion: "Shared project identity resolver emits opaque project_id and identity_source; aligned with usage metrics"
-      metric: "evidence-chain-profile.test.ts and project-identity.test.ts; profile never contains raw path or configured string"
     - criterion: "operational.metrics_opt_in reflects isMetricsEnabled() at generation time"
       metric: "When TIED_MCP_COLLECT_METRICS is enabled, profile operational.metrics_opt_in is true; otherwise false"
+    - criterion: "Shared project identity resolver emits opaque project_id and identity_source; aligned with usage metrics"
+      metric: "evidence-chain-profile.test.ts and project-identity.test.ts; profile never contains raw path or configured string"
+    - criterion: "Wrong TIED base path fails closed; generation never mutates project REQ ARCH IMPL"
+      metric: "WrongTiedBasePath and no intent YAML writes"
   status: "Implemented"
   traceability:
     architecture:
@@ -52,7 +52,7 @@ REQ-EVIDENCE_CHAIN_PROFILE:
       - "mcp-server/src/fidelity-research/evidence-chain-profile.test.ts"
       - "project-identity.test.ts"
   validation_criteria:
-    - coverage: "Normalizer, depth gating, fail-closed base path, manual fixture"
-      method: "Unit and composition tests"
     - coverage: "REQ ARCH IMPL token comments"
       method: "tied_validate_consistency"
+    - coverage: "Normalizer, depth gating, fail-closed base path, manual fixture"
+      method: "Unit and composition tests"

@@ -5,6 +5,14 @@ require "optparse"
 
 require_relative "yaml_semantic_compare"
 
+# [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
+# Normative record-list registry: parent key → stable sort field priority.
+RECORD_LIST_REGISTRY = {
+  "satisfaction_criteria" => ["criterion"],
+  "validation_criteria" => ["method"],
+  "alternatives_considered" => ["name"]
+}.freeze
+
 # Raised when post-sort semantic comparison fails or sorted content does not parse.
 class SemanticSortValidationError < StandardError
   attr_reader :differences
@@ -36,6 +44,8 @@ class YamlListSorter
     :file,
     :groups_found,
     :groups_modified,
+    :record_groups_modified,
+    :string_groups_modified,
     :maps_found,
     :maps_modified,
     :sort_keys,
@@ -58,6 +68,8 @@ class YamlListSorter
 
     groups_found = 0
     groups_modified = 0
+    record_groups_modified = 0
+    string_groups_modified = 0
     maps_found = 0
     maps_modified = 0
 
@@ -67,13 +79,19 @@ class YamlListSorter
     end
 
     opaque = block_scalar_regions(lines)
-    lines, groups_found, groups_modified = sort_list_groups(lines, opaque)
+    lines, groups_found, groups_modified, record_groups_modified, string_groups_modified =
+      sort_list_groups(lines, opaque)
 
     sorted = lines.join
     validated = false
 
     if sorted != original
-      validate_sorted_content!(original, sorted, groups_modified: groups_modified)
+      validate_sorted_content!(
+        original,
+        sorted,
+        record_groups_modified: record_groups_modified,
+        string_groups_modified: string_groups_modified
+      )
       validated = true
       File.write(@path, sorted, encoding: "UTF-8")
     end
@@ -82,6 +100,8 @@ class YamlListSorter
       file: @path,
       groups_found: groups_found,
       groups_modified: groups_modified,
+      record_groups_modified: record_groups_modified,
+      string_groups_modified: string_groups_modified,
       maps_found: maps_found,
       maps_modified: maps_modified,
       sort_keys: @sort_keys,
@@ -89,14 +109,15 @@ class YamlListSorter
     )
   end
 
-  def validate_sorted_content!(original_content, sorted_content, groups_modified:)
+  def validate_sorted_content!(original_content, sorted_content, record_groups_modified:, string_groups_modified:)
     original_value = load_yaml_value(original_content, @path, label: "original")
     sorted_value = load_yaml_value(sorted_content, @path, label: "sorted")
 
     compare_result = YamlSemanticCompare.compare(
       original_value,
       sorted_value,
-      unordered_arrays: groups_modified.positive?
+      unordered_arrays: string_groups_modified.positive?,
+      record_list_keys: RECORD_LIST_REGISTRY.keys
     )
 
     return if compare_result.ok
@@ -118,6 +139,8 @@ class YamlListSorter
   def sort_list_groups(lines, opaque_regions = block_scalar_regions(lines))
     groups_found = 0
     groups_modified = 0
+    record_groups_modified = 0
+    string_groups_modified = 0
     output = []
     index = 0
 
@@ -139,7 +162,31 @@ class YamlListSorter
 
       indentation = match[1]
       group_start = index
-      group = []
+      parent_key = parent_key_for_list_group(lines, group_start, indentation)
+
+      if record_list_key?(parent_key)
+        full_span, index = collect_list_span(lines, group_start, indentation, opaque_regions)
+        item_count = full_span.count do |line|
+          line.match?(LIST_ITEM_PATTERN) && line.match(LIST_ITEM_PATTERN)[1] == indentation
+        end
+        if item_count >= 2
+          groups_found += 1
+          sorted_group, modified = sort_record_list_group(full_span, indentation, parent_key)
+          if modified
+            groups_modified += 1
+            record_groups_modified += 1
+            output.concat(sorted_group)
+          else
+            output.concat(full_span)
+          end
+        else
+          output.concat(full_span)
+        end
+        next
+      end
+
+      item_lines = [lines[index]]
+      index += 1
 
       while index < lines.length
         region = opaque_region_containing(opaque_regions, index)
@@ -148,34 +195,127 @@ class YamlListSorter
         current_match = lines[index].match(LIST_ITEM_PATTERN)
         break unless current_match && current_match[1] == indentation
 
-        group << lines[index]
+        item_lines << lines[index]
         index += 1
       end
 
-      if group.length >= 2
-        parent_key = parent_key_for_list_group(lines, group_start, indentation)
+      if item_lines.length >= 2
+        full_span, index = collect_list_span(lines, group_start, indentation, opaque_regions)
         if order_preserving_key?(parent_key)
-          output.concat(group)
-        else
+          nested_sorted = sort_nested_list_groups(full_span, indentation, opaque_regions)
+          output.concat(nested_sorted)
+        elsif item_lines.all? { |line| string_list_item_line?(line, indentation) }
           groups_found += 1
-
-          sorted_group = group.sort_by do |line|
+          sorted_items = item_lines.sort_by do |line|
             canonical_sort_key(line.sub(/^#{Regexp.escape(indentation)}- /, ""))
           end
-
-          if sorted_group != group
+          if sorted_items != item_lines
             groups_modified += 1
-            output.concat(sorted_group)
+            string_groups_modified += 1
+            output.concat(rebuild_list_span(full_span, indentation, sorted_items))
           else
-            output.concat(group)
+            output.concat(full_span)
           end
+        else
+          output.concat(full_span)
         end
       else
-        output.concat(group)
+        output << lines[group_start]
+        index = group_start + 1
       end
     end
 
-    [output, groups_found, groups_modified]
+    [output, groups_found, groups_modified, record_groups_modified, string_groups_modified]
+  end
+
+  def sort_nested_list_groups(span, list_indent, opaque_regions)
+    output = []
+    index = 0
+
+    while index < span.length
+      line = span[index]
+      list_match = line.match(LIST_ITEM_PATTERN)
+
+      unless list_match && list_match[1] == list_indent
+        output << line
+        index += 1
+        next
+      end
+
+      block, next_index = collect_block_from_span(span, index, list_indent)
+      nested_lines, = sort_list_groups(block[1..] || [], opaque_regions)
+      output << block[0]
+      output.concat(nested_lines)
+      index = next_index
+    end
+
+    output
+  end
+
+  def collect_block_from_span(span, start_index, list_indent)
+    block = [span[start_index]]
+    index = start_index + 1
+
+    while index < span.length
+      line = span[index]
+      list_match = line.match(LIST_ITEM_PATTERN)
+      break if list_match && list_match[1] == list_indent
+
+      current_indent = line_indent(line)
+      break if !blank_or_comment?(line) && current_indent.length <= list_indent.length
+
+      block << line
+      index += 1
+    end
+
+    [block, index]
+  end
+
+  def collect_list_span(lines, start_index, list_indent, opaque_regions)
+    span = []
+    index = start_index
+
+    while index < lines.length
+      region = opaque_region_containing(opaque_regions, index)
+      if region
+        span.concat(lines[index...region.end])
+        index = region.end
+        next
+      end
+
+      line = lines[index]
+      if blank_or_comment?(line)
+        span << line
+        index += 1
+        next
+      end
+
+      list_match = line.match(LIST_ITEM_PATTERN)
+      if list_match && list_match[1] == list_indent
+        span << line
+        index += 1
+        next
+      end
+
+      current_indent = line_indent(line)
+      if current_indent.length > list_indent.length
+        span << line
+        index += 1
+        next
+      end
+
+      break
+    end
+
+    [span, index]
+  end
+
+  def rebuild_list_span(group, indentation, sorted_item_lines)
+    blocks = split_list_group_into_blocks(group, indentation)
+    blocks.sort_by do |block|
+      item_line = block.find { |line| line.match?(LIST_ITEM_PATTERN) && line.match(LIST_ITEM_PATTERN)[1] == indentation }
+      sorted_item_lines.index(item_line) || 0
+    end.flatten
   end
 
   def sort_map_keys(lines, start_idx, end_idx, opaque_regions)
@@ -234,6 +374,89 @@ class YamlListSorter
     end
 
     nil
+  end
+
+  def record_list_key?(key_name)
+    RECORD_LIST_REGISTRY.key?(key_name)
+  end
+
+  def sort_record_list_group(group, indentation, parent_key)
+    blocks = split_list_group_into_blocks(group, indentation)
+    fields = RECORD_LIST_REGISTRY.fetch(parent_key)
+    sort_field = fields.find do |field|
+      blocks.all? { |block| extract_record_sort_field(block, field) }
+    end
+    return [group, false] unless sort_field
+
+    sorted_blocks = blocks.sort_by do |block|
+      canonical_sort_key(extract_record_sort_field(block, sort_field))
+    end
+    modified = sorted_blocks != blocks
+    [sorted_blocks.flatten, modified]
+  end
+
+  def split_list_group_into_blocks(group, indentation)
+    blocks = []
+    current = []
+
+    group.each do |line|
+      if line.match?(LIST_ITEM_PATTERN) && line.match(LIST_ITEM_PATTERN)[1] == indentation && !current.empty?
+        blocks << current
+        current = [line]
+      else
+        current << line
+      end
+    end
+    blocks << current unless current.empty?
+    blocks
+  end
+
+  def extract_record_sort_field(block_lines, field_name)
+    block_lines.each do |line|
+      inline_match = line.match(/^\s*- #{Regexp.escape(field_name)}:\s*(.+)$/)
+      if inline_match
+        return unquote_scalar(inline_match[1])
+      end
+
+      flow_match = line.match(/^\s*- \{\s*#{Regexp.escape(field_name)}:\s*([^,}]+)/)
+      if flow_match
+        return unquote_scalar(flow_match[1])
+      end
+
+      match = line.match(/^\s+#{Regexp.escape(field_name)}:\s*(.+)$/)
+      next unless match
+
+      unquote_scalar(match[1])
+    end
+
+    parsed = YAML.safe_load(block_lines.join)
+    if parsed.is_a?(Array) && parsed.first.is_a?(Hash) && parsed.first.key?(field_name)
+      return parsed.first[field_name].to_s
+    end
+
+    nil
+  rescue Psych::SyntaxError
+    nil
+  end
+
+  def string_list_item_line?(line, indentation)
+    content = line.sub(/^#{Regexp.escape(indentation)}- /, "").strip
+    return false if content.start_with?("{")
+    return false if content.include?(":")
+
+    true
+  end
+
+  def unquote_scalar(value)
+    value = value.strip
+    if value.start_with?('"') && value.end_with?('"')
+      return value[1..-2]
+    end
+    if value.start_with?("'") && value.end_with?("'")
+      return value[1..-2]
+    end
+
+    value
   end
 
   # True for key names: order, *_order, order_*, *_order_* (underscore-bounded "order").

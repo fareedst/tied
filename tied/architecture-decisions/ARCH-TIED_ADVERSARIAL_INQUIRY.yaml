@@ -1,19 +1,19 @@
 ARCH-TIED_ADVERSARIAL_INQUIRY:
   alternatives_considered:
     - cons:
-        - "Breaks read-only research"
-        - "Pollutes intent"
-      name: "Write generated obligations into canonical TIED YAML"
-      pros:
-        - "Immediate visibility"
-      rejected_reason: "Generated analysis is evidence, not approved intent."
-    - cons:
         - "Creates language-specific coupling"
         - "Inhibits multiple adapters"
       name: "Implement language semantics in the core analyzer"
       pros:
         - "Single implementation"
       rejected_reason: "Adapters own language extraction; the core consumes normalized evidence."
+    - cons:
+        - "Breaks read-only research"
+        - "Pollutes intent"
+      name: "Write generated obligations into canonical TIED YAML"
+      pros:
+        - "Immediate visibility"
+      rejected_reason: "Generated analysis is evidence, not approved intent."
   cross_references:
     - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
     - "IMPL-TIED_ADVERSARIAL_INQUIRY"

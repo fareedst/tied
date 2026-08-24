@@ -45,7 +45,7 @@ REQ-TIED_CHECKLIST_GATE_ENFORCEMENT:
       - "tools/checklist-gate-mcp.test.ts"
       - "verify.test.ts"
   validation_criteria:
-    - coverage: "Validator unit tests cover pending, minimal, integrated, N/A, waiver, stale identity, and close-out cases."
-      method: "Automated testing"
     - coverage: "Prompt skill and agentstream tests prove the four workflow contracts contain and enforce the shared gate."
+      method: "Automated testing"
+    - coverage: "Validator unit tests cover pending, minimal, integrated, N/A, waiver, stale identity, and close-out cases."
       method: "Automated testing"

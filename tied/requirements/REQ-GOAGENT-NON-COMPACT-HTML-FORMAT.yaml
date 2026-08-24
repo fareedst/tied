@@ -34,9 +34,9 @@ REQ-GOAGENT-NON-COMPACT-HTML-FORMAT:
       metric: "Recorded in REQ satisfaction criteria and later ARCH/IMPL; verified by unit tests"
     - criterion: "Default and existing code paths for non-HTML and non-selected modes are unchanged"
       metric: "Regression tests or explicit assertions on prior behavior"
+    - criterion: "Non-compact HTML terms are canonical in tied/vocab/agentstream.md; APPLY_TO_TURNS block in IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT-pseudocode.md"
     - criterion: "Same logical step or record content in non-compact HTML mode serializes to a stable deterministic output per the documented contract"
       metric: "Snapshot or structural tests on golden fixtures"
-    - criterion: "Non-compact HTML terms are canonical in tied/vocab/agentstream.md; APPLY_TO_TURNS block in IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT-pseudocode.md"
   status: "Implemented"
   traceability:
     architecture:

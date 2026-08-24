@@ -15,26 +15,71 @@ entry_points:
     start_at: "session-bootstrap"
 execution_evidence:
   close_out_evidence:
-    date: null
-    deferred:
-      - "Executable implementation (build-plan gate)"
-      - "Persist merged CITDP to tied/citdp/ at close-out"
-    gates: {}
+    date: "2026-08-24"
+    deferred: []
+    gates:
+      close_out:
+        allowed: true
+        blocking: false
+        depth: "minimal"
+        diagnostics: []
+        evidence_file: "working/REQ-TIED_YAML_CANONICALIZATION/gate-close_out-result.json"
+        ok: true
+      verification:
+        allowed: true
+        blocking: false
+        depth: "minimal"
+        diagnostics: []
+        evidence_file: "working/REQ-TIED_YAML_CANONICALIZATION/gate-verification-result.json"
+        ok: true
     master_checklist: "tied/docs/agent-req-implementation-checklist.yaml"
+    verification:
+      commands:
+        - "bun test mcp-server/src/yaml-canonicalizer.test.ts (17/17 pass)"
+        - "ruby scripts/yaml_list_sorter_test.rb (all pass)"
+        - "tied_validate_consistency ok"
+        - "tied_verify with checklist_gate phase verification"
+      tied_verify_result: "working/REQ-TIED_YAML_CANONICALIZATION/tied-verify-result.json"
   completed:
+    - "apply-token-comments"
+    - "author-architecture"
+    - "author-requirement"
+    - "catalog-pseudocode-contracts"
     - "change-definition"
+    - "flag-contradictory-specs"
+    - "flag-insufficient-specs"
+    - "gate-pseudocode-validation"
     - "impact-discovery"
+    - "persist-citdp-record"
+    - "persist-implementation-records"
+    - "resolve-pseudocode"
     - "risk-assessment"
     - "session-bootstrap"
+    - "sync-tied-stack"
     - "test-strategy"
+    - "three-way-alignment-unit"
     - "translate-sponsor-intent"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "user-facing-release-notes"
+    - "verification-gate"
   operator_evidence:
     commands:
       - ".cursor/skills/tied-yaml/scripts/tied-cli.sh tied_checklist_gate_validate (phase pre_implementation)"
+      - ".cursor/skills/tied-yaml/scripts/tied-cli.sh tied_checklist_gate_validate (phase verification)"
+      - ".cursor/skills/tied-yaml/scripts/tied-cli.sh tied_checklist_gate_validate (phase close_out)"
+      - ".cursor/skills/tied-yaml/scripts/tied-cli.sh tied_verify @tied-verify-record-aware.json"
       - "tied_config_get_base_path — confirmed /Users/fareed/Documents/dev/chatgpt/stdd/tied"
     depth_tier: "minimal"
     gate_policy: "advisory"
     gate_result:
+      close_out:
+        allowed: true
+        blocking: false
+        depth: "minimal"
+        diagnostics: []
+        evidence_file: "working/REQ-TIED_YAML_CANONICALIZATION/gate-close_out-result.json"
+        ok: true
       pre_implementation:
         allowed: true
         blocking: false
@@ -45,10 +90,17 @@ execution_evidence:
           - "working/REQ-TIED_YAML_CANONICALIZATION/CITDP-REQ-TIED_YAML_CANONICALIZATION-record-aware-draft.yaml"
         note: "Refine-plan 2026-08-24; Implement blocked until gate-pseudocode-validation, persist-implementation-records, and RED tests."
         ok: true
+      verification:
+        allowed: true
+        blocking: false
+        depth: "minimal"
+        diagnostics: []
+        evidence_file: "working/REQ-TIED_YAML_CANONICALIZATION/gate-verification-result.json"
+        ok: true
     limitation: "tied_checklist_gate_validate not in IDE MCP catalog; gate invoked via tied-cli.sh (mcp-server/dist/index.js built)."
     prior_depth_tier: "minimal"
     profile_depth: "minimal"
-    status: "planning_complete"
+    status: "implemented"
   request: "REQ-TIED_YAML_CANONICALIZATION"
 feedback_loops:
   composition_and_e2e: "Missing implementation coverage returns to the specification path before evidence is accepted."
@@ -87,7 +139,7 @@ gate_contract:
     - "finding-ledger.jsonl"
     - "gate-result.json"
     - "obligation-report.json"
-last_updated: "2026-08-22"
+last_updated: "2026-08-24"
 loop_back_clearance:
   apply-token-comments:
     clear_slugs:
@@ -251,7 +303,7 @@ processes_unified:
 record_identity:
   change_request_id: "REQ-TIED_YAML_CANONICALIZATION"
   citdp_id: "CITDP-REQ-TIED_YAML_CANONICALIZATION-record-aware"
-  record_status: "planning_complete"
+  record_status: "implemented"
   title: "Record-aware YAML formatting"
 references:
   - document: "./tied/docs/processes.md"
@@ -478,7 +530,7 @@ steps:
         - "sub-leap-micro-cycle"
         - "sync-tied-stack"
       state_history: []
-      status: "pending"
+      status: "completed"
   - flow:
       branches: []
       calls:
@@ -516,7 +568,7 @@ steps:
         - "sub-leap-micro-cycle"
         - "sync-tied-stack"
       state_history: []
-      status: "pending"
+      status: "completed"
   - flow:
       branches: []
       calls:
@@ -549,7 +601,7 @@ steps:
         - "sub-leap-micro-cycle"
         - "sync-tied-stack"
       state_history: []
-      status: "pending"
+      status: "completed"
   - flow:
       branches: []
       calls:
@@ -580,7 +632,7 @@ steps:
       retry_count: "0"
       returned_from: []
       state_history: []
-      status: "pending"
+      status: "completed"
   - flow:
       branches:
         - action: "Refactor (split or restructure) one IMPL before proceeding; do not paper over contradictions"
@@ -605,7 +657,7 @@ steps:
       retry_count: "0"
       returned_from: []
       state_history: []
-      status: "pending"
+      status: "completed"
   - flow:
       branches:
         - action: "GOTO author-architecture, then return here"
@@ -638,7 +690,7 @@ steps:
       returned_from:
         - "sync-tied-stack"
       state_history: []
-      status: "pending"
+      status: "completed"
   - flow:
       branches: []
       calls:
@@ -668,7 +720,7 @@ steps:
       returned_from:
         - "composition-integration"
       state_history: []
-      status: "pending"
+      status: "completed"
   - flow:
       branches: []
       calls:
@@ -700,7 +752,7 @@ steps:
       retry_count: "0"
       returned_from: []
       state_history: []
-      status: "pending"
+      status: "completed"
   - flow:
       branches: []
       calls:
@@ -733,7 +785,7 @@ steps:
       retry_count: "0"
       returned_from: []
       state_history: []
-      status: "pending"
+      status: "completed"
   - agentstream_new_session: "true"
     flow:
       branches: []
@@ -834,7 +886,7 @@ steps:
       returned_from:
         - "three-way-alignment-unit"
       state_history: []
-      status: "pending"
+      status: "completed"
   - flow:
       branches:
         - action: "GOTO flag-contradictory-specs via agentstream_control; do not continue production-code iteration until related IMPL pseudo-code is reconsidered"
@@ -872,7 +924,7 @@ steps:
       retry_count: "0"
       returned_from: []
       state_history: []
-      status: "pending"
+      status: "completed"
   - flow:
       branches: []
       calls: []
@@ -893,7 +945,7 @@ steps:
       retry_count: "0"
       returned_from: []
       state_history: []
-      status: "pending"
+      status: "not_applicable"
   - flow:
       branches: []
       calls:
@@ -926,7 +978,7 @@ steps:
       retry_count: "0"
       returned_from: []
       state_history: []
-      status: "pending"
+      status: "completed"
   - agentstream_new_session: "true"
     flow:
       branches:
@@ -968,7 +1020,7 @@ steps:
       retry_count: "0"
       returned_from: []
       state_history: []
-      status: "pending"
+      status: "not_applicable"
   - flow:
       branches:
         - action: "GOTO catalog-pseudocode-contracts to create or extend IMPL pseudo-code (IMPL phase stubs catalog-pseudocode-contracts … persist-implementation-records), then return here"
@@ -1000,7 +1052,7 @@ steps:
       retry_count: "0"
       returned_from: []
       state_history: []
-      status: "pending"
+      status: "not_applicable"
   - agentstream_new_session: "true"
     flow:
       branches:
@@ -1058,7 +1110,7 @@ steps:
       retry_count: "0"
       returned_from: []
       state_history: []
-      status: "pending"
+      status: "completed"
   - agentstream_new_session: "true"
     flow:
       branches:
@@ -1096,7 +1148,7 @@ steps:
       retry_count: "0"
       returned_from: []
       state_history: []
-      status: "pending"
+      status: "completed"
   - flow:
       branches: []
       calls:
@@ -1121,7 +1173,7 @@ steps:
       retry_count: "0"
       returned_from: []
       state_history: []
-      status: "pending"
+      status: "completed"
   - flow:
       branches:
         - action: "Fix and repeat sub-yaml-edit-loop step"
@@ -1153,7 +1205,7 @@ steps:
       retry_count: "0"
       returned_from: []
       state_history: []
-      status: "pending"
+      status: "completed"
   - flow:
       branches:
         - action: "Fix via RECORD or RESOLVE and re-run VALIDATE; or GOTO sync-tied-stack if TIED/docs drift caused failures; do not commit until VALIDATE passes"
