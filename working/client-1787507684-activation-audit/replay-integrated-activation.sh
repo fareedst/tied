@@ -75,7 +75,7 @@ BUILD_SCRIPT="${STDD_REPO_ROOT}/scripts/build_adversarial_inquiry_from_tied.rb"
 ANALYZE_SCRIPT="${STDD_REPO_ROOT}/scripts/analyze_tied_mcp_metrics.rb"
 
 log() {
-  echo "==> $*"
+  echo "==> $*" >&2
 }
 
 run_cmd() {
@@ -182,10 +182,14 @@ citdp_doc = YAML.safe_load(File.read(citdp_path, encoding: "UTF-8"), aliases: tr
 citdp_key = citdp_doc.keys.find { |key| key.to_s.start_with?("CITDP-") }
 abort("CITDP root key not found in #{citdp_path}") unless citdp_key
 
+main_steps = tracker_doc.fetch("steps", [])
+sub_steps = tracker_doc.fetch("sub_procedures", [])
+merged_steps = main_steps + sub_steps
+
 activation = JSON.parse(activation_json)
 payload = {
   "phase" => phase,
-  "tracker" => { "steps" => tracker_doc.fetch("steps") },
+  "tracker" => { "steps" => merged_steps },
   "citdp" => citdp_doc.fetch(citdp_key),
   "activation" => {
     "receipt" => activation.fetch("receipt"),

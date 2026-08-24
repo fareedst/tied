@@ -31,7 +31,7 @@ changes) → RED test → GREEN implementation. For pure checklist-text addition
 `tools/agentstream/checklist/composition_coverage_test.go` that fails until the task
 string exists — write/extend that assertion **before** editing the YAML.
 
-**Last independently verified:** 2026-08-22 (Parts A–F and required gates re-run; G6 explicitly deferred by sponsor).
+**Last independently verified:** 2026-08-24 (Part H5 live replay close-out; Parts A–F and required gates re-run 2026-08-22; G6 explicitly deferred by sponsor).
 
 ---
 
@@ -534,10 +534,9 @@ contains adversarial task text or its TIED records validate.
   adapter is limited to explicit `adversarial_inquiry` metadata and
   Ruby/Minitest evidence; the client used normalized input as the fallback.
 
-- [ ] **H5. A second non-Ruby client completes integrated activation without
+- [x] **H5. A second non-Ruby client completes integrated activation without
   hand-authoring the request envelope.**
-  Evidence: pending a second pilot using the documented Mode A builder or a
-  native non-Ruby project-input adapter.
+  Evidence (2026-08-24): `./working/client-1787507684-activation-audit/replay-integrated-activation.sh` (live, not `--dry-run`) against `/Users/fareed/Documents/dev/test/1787507684` / `REQ-ROOTJOBS` → pass; Mode A builder emits inquiry JSON; three `tied_adversarial_inquiry_run` calls with distinct `run_id`s (`rootjobs-pre-001`, `rootjobs-verify-001`, `rootjobs-close-001`); `tied_checklist_activation_collect` ×3 → `metrics_match: true`; `tied_checklist_gate_validate` ×3 → `allowed: true`; phase dirs under `working/REQ-ROOTJOBS/adversarial-inquiry/phase-{phase}/` complete; `analyze_tied_mcp_metrics.rb --project-root …` → `integrated_activation_complete: true` for `REQ-ROOTJOBS`; audit updated in `working/client-1787507684-activation-audit/findings-report.yaml`.
 
 **Activation rule:** count an integrated pilot only when the matching inquiry
 metric and all four request-scoped artifacts are both present. A metric-only

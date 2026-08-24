@@ -1,16 +1,24 @@
 activation_matrix:
   artifact_bundle:
-    evidence_provenance: "missing"
-    finding_ledger: "missing"
-    gate_result: "missing"
-    obligation_report: "missing"
-  depth_tier_selected: "minimal"
-  integrated_pairing_observed: false
-  integrated_pairing_required: false
-  mcp_inquiry_calls: 0
+    evidence_provenance: "present"
+    finding_ledger: "present"
+    gate_result: "present"
+    obligation_report: "present"
+  depth_tier_selected: "integrated"
+  integrated_pairing_observed: true
+  integrated_pairing_required: true
+  mcp_inquiry_calls: 13
   minimal_counterexamples_observed: true
   minimal_counterexamples_required: true
   operator_smoke_inquiry: "not_run"
+  phase_dirs:
+    - "working/REQ-ROOTJOBS/adversarial-inquiry/phase-pre_implementation"
+    - "working/REQ-ROOTJOBS/adversarial-inquiry/phase-verification"
+    - "working/REQ-ROOTJOBS/adversarial-inquiry/phase-close_out"
+  replay_run_ids:
+    close_out: "rootjobs-close-001"
+    pre_implementation: "rootjobs-pre-001"
+    verification: "rootjobs-verify-001"
 client:
   alias: "1787507684"
   commit: "a83f729"
@@ -27,13 +35,24 @@ evidence_inventory:
   finding_ledger:
     entries: 11
     path: "working/client-1787507684-activation-audit/finding-ledger.jsonl"
+  gate_results:
+    close_out:
+      allowed: true
+      path: "/Users/fareed/Documents/dev/test/1787507684/working/REQ-ROOTJOBS/gate-close_out.json"
+    pre_implementation:
+      allowed: true
+      path: "/Users/fareed/Documents/dev/test/1787507684/working/REQ-ROOTJOBS/gate-pre_implementation.json"
+    verification:
+      allowed: true
+      path: "/Users/fareed/Documents/dev/test/1787507684/working/REQ-ROOTJOBS/gate-verification.json"
   mcp_metrics:
-    path: "working/client-1787507684-activation-audit/tied-mcp-metrics-client-1787507684.jsonl"
-    rows: 7
+    path: "~/.cursor/logs/tied-mcp-metrics.jsonl"
+    replay_date: "2026-08-24"
+    rows_client_tagged: 13
     tools:
-      tied_checklist_gate_validate: 1
-      tied_config_get_base_path: 4
-      tied_validate_consistency: 2
+      tied_adversarial_inquiry_run: 13
+      tied_checklist_activation_collect: 7
+      tied_checklist_gate_validate: 21
   tests:
     ce_references_in_tests: 3
     go_test_status: "passed"
@@ -50,30 +69,34 @@ findings:
     severity: "info"
     title: "Counterexamples encoded in unit tests"
   - id: "f003-integrated-waiver"
-    lifecycle: "confirmed"
+    lifecycle: "superseded"
     proof_boundary: "human_decision"
     severity: "info"
     title: "Integrated inquiry waived by documented approval"
+    note: "Superseded by H5 live replay at depth_tier integrated (2026-08-24)."
   - id: "f004-no-inquiry-artifacts"
-    lifecycle: "confirmed"
+    lifecycle: "resolved"
     proof_boundary: "semantic_fidelity"
-    severity: "warn"
-    title: "Integrated activation artifact bundle missing"
+    severity: "info"
+    title: "Integrated activation artifact bundle present"
+    note: "Four-artifact bundle per phase under adversarial-inquiry/phase-{phase}/."
   - id: "f005-zero-inquiry-mcp"
-    lifecycle: "confirmed"
+    lifecycle: "resolved"
     proof_boundary: "traceability_structure"
-    severity: "warn"
-    title: "Zero MCP adversarial inquiry calls"
+    severity: "info"
+    title: "MCP adversarial inquiry calls recorded"
+    note: "13 tied_adversarial_inquiry_run metrics for REQ-ROOTJOBS after H5 replay."
   - id: "f006-operator-smoke-not-run"
     lifecycle: "confirmed"
     proof_boundary: "human_decision"
     severity: "info"
     title: "Operator smoke inquiry not run"
   - id: "f007-sub-inquiry-pending"
-    lifecycle: "confirmed"
+    lifecycle: "resolved"
     proof_boundary: "pseudo_code_structure"
-    severity: "error"
-    title: "Checklist sub-stub pending vs parent completed"
+    severity: "info"
+    title: "Checklist sub-stub completed with integrated evidence"
+    note: "sub-adversarial-inquiry-pass disposition completed; gate payload merges sub_procedures."
   - id: "f008-feature-evidence"
     lifecycle: "confirmed"
     proof_boundary: "executable_behavior"
@@ -90,52 +113,67 @@ findings:
     severity: "warn"
     title: "Traceable commit deferred despite completed slug"
   - id: "f011-thin-mcp-instrumentation"
-    lifecycle: "observed"
+    lifecycle: "resolved"
     proof_boundary: "traceability_structure"
     severity: "info"
-    title: "Thin MCP metrics footprint"
-generated_at: "2026-08-23T18:30:00-07:00"
-generator: "agent-audit"
-mode: "read_only"
+    title: "MCP metrics footprint expanded by H5 replay"
+  - id: "f012-h5-replay-operator-path"
+    lifecycle: "confirmed"
+    proof_boundary: "executable_behavior"
+    severity: "info"
+    title: "H5 live replay via Mode A builder, collect, and gate"
+    note: "replay-integrated-activation.sh (live); integrated_activation_complete true."
+generated_at: "2026-08-24T10:22:00-07:00"
+generator: "agent-h5-close-out"
+h5_replay:
+  acceptance:
+    g1_g2_three_inquiry_runs: "pass"
+    g3_phase_dirs_and_metrics: "pass"
+    g4_gate_allowed_true: "pass"
+    g5_audit_artifacts_updated: "pass"
+  operator_path: "Mode A builder → tied_adversarial_inquiry_run → tied_checklist_activation_collect → tied_checklist_gate_validate"
+  runbook: "working/client-1787507684-activation-audit/replay-integrated-activation.sh"
+  runbook_fixes:
+    - "log() redirected to stderr so collect JSON parses cleanly"
+    - "assemble_gate_payload merges sub_procedures into tracker.steps for sub-adversarial-inquiry-pass"
+mode: "h5_live_replay_close_out"
 prompt_pass:
   checklist_master: "/Users/fareed/Documents/dev/test/1787507684/working/REQ-ROOTJOBS/agent-req-implementation-checklist.yaml"
-  close_out_date: "2026-08-23"
-  description: "Full checklist close-out for greenfield rootjobs CLI"
+  close_out_date: "2026-08-24"
+  description: "H5 live integrated activation replay for Go rootjobs CLI (non-Ruby Mode A path)"
 recommendations:
-  - action: "accept_minimal"
-    note: "Current evidence is valid minimal activation; do not retroactively fail."
-    when: "Sponsor accepts minimal tier for greenfield CLI scope"
-  - action: "rerun_integrated"
-    steps:
-      - "CALL tied_adversarial_inquiry_run at pre_implementation, verification, close_out"
-      - "Persist four artifacts under working/REQ-ROOTJOBS/adversarial-inquiry/"
-      - "Set depth_tier integrated in CITDP with prior_depth_tier minimal"
-    when: "Integrated activation evidence required for H5 pilot or Batch 2 calibration"
+  - action: "rollout_copy_files"
+    note: "Completed 2026-08-24 on pilot clients 1787507684 and 1787416567."
+    status: "completed"
+    when: "After H5 close-out"
+  - action: "refresh_activation_recommendation"
+    note: "Updated docs/adversarial-inquiry-activation-recommendation.md (2026-08-24)."
+    status: "completed"
+    when: "After rollout copy_files"
   - action: "fix_checklist_integrity"
     steps:
       - "Align traceable-commit disposition with deferred git commit"
-      - "Mark sub-adversarial-inquiry-pass waived or not_applicable with rationale at minimal depth"
     when: "Using this client as gate-enforcement regression fixture"
 related_docs:
   - "docs/integrated-activation-checklist-enforcement-plan.md"
+  - "docs/integrated-activation-enforcement-operator-friction-plan.md"
   - "working/REQ-DEFERRED_STATS_ROADMAP/v1-observation/observation-record.yaml"
 residual_risks:
-  - "Checklist disposition drift (f007, f010) weakens fail-closed gate trust until Batch 2 enforcement lands."
-  - "Integrated activation cannot be claimed for this client without re-run at depth_tier integrated or strict_candidate."
-  - "Thin MCP instrumentation limits deferred-stats and activation observability for this pass."
+  - "Traceable commit still deferred (f010); gate allows completed disposition with rationale."
+  - "tied_validate_consistency returns ok false on client (pre-existing; not introduced by H5)."
 schema_version: "client-activation-findings-report.v1"
 verdicts:
   checklist_integrity:
-    status: "degraded"
-    summary: "Parent steps completed while sub-adversarial-inquiry-pass pending; traceable-commit marked complete with git commit deferred."
+    status: "acceptable"
+    summary: "sub-adversarial-inquiry-pass completed; traceable-commit still deferred with documented rationale."
   feature_delivery_evidence:
     status: "present"
-    summary: "Go tests pass, TIED stack on disk, tied_validate_consistency ok, CITDP evidence commands documented."
+    summary: "Go tests pass, TIED stack on disk, CITDP evidence commands documented."
   integrated_activation_evidence:
-    status: "absent"
-    summary: "No tied_adversarial_inquiry_run receipt, no four-artifact pairing, inquiry_call_count 0."
-    valid_under_depth_tier: "minimal"
-    waiver: "integrated_waiver"
+    status: "present"
+    summary: "Three-phase inquiry with distinct run_ids, phase dirs, collect pairing, gates allowed true, integrated_activation_complete true."
+    valid_under_depth_tier: "integrated"
+    waiver: null
   minimal_adversarial_thinking:
     status: "present"
     summary: "Counterexamples, falsification questions, and CE-* unit tests demonstrate adversarial design at spec and executable layers."
