@@ -46,6 +46,20 @@ Put `scalar_style: unwrapped` or `scalar_style: wrapped` in `.tied-yaml.yaml` at
 
 Repository configuration is authoritative. `wrapped` means double-quoted string scalars only; booleans, numbers, and null remain typed YAML scalars. Invalid explicit configuration fails rather than falling back. `yaml_tool.sh`, `tied-cli.sh`, and MCP writers use the same resolved policy; `tied_yaml_format` and successful writes expose `scalar_style` and `style_source` in `yaml_format`. Use `scripts/yaml_tool.sh --check <file>` for a read-only canonical-style gate.
 
+### Optional client_formatter hook
+
+Repository `.tied-yaml.yaml` may declare an optional presentation hook:
+
+```yaml
+scalar_style: unwrapped          # optional when file exists; defaults unwrapped if client_formatter present
+client_formatter:
+  command: "scripts/my_formatter.rb"
+  args: ["--in-place"]           # optional string list
+  version: "team-formatter-1.0"  # optional evidence string
+```
+
+When `client_formatter` is absent, record `styling_status: not_configured` and keep baseline canonical formatting. When present, run the hook explicitly via MCP `tied_client_yaml_styling_apply` or checklist `sub-client-yaml-styling` after baseline canonical bytes exist. MCP writers do **not** auto-invoke the hook. The hook runs with `shell: false` from the client project root on one guarded project-owned `./tied/` path; `tied/methodology/**` is rejected. Acceptance requires post-hook YAML parse, `scripts/yaml_semantic_compare.rb` equivalence against the pre-hook snapshot, and a byte-identical second pass.
+
 ### Do not substitute Python for TIED validation
 
 Do **not** replace `tied-cli.sh` tools (especially **`tied_validate_consistency`**) with ad-hoc **`python3` + PyYAML** parsing when the goal is TIED consistency — that skips schema and graph checks. If neither Node nor a built server is available, follow **`tied/docs/using-tied-without-mcp.md`** for the documented manual project-YAML workflow instead of inventing a parser script.

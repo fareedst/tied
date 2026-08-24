@@ -44,7 +44,7 @@ CITDP-REQ-TIED_YAML_STYLING_GATES-slice2:
     citdp_id: "CITDP-REQ-TIED_YAML_STYLING_GATES-slice2"
     created_at: "2026-08-24"
     parent_citdp: "CITDP-REQ-TIED_YAML_STYLING_GATES"
-    status: "draft"
+    status: "implemented"
     title: "Executable client_formatter hook for client YAML styling gates"
     updated_at: "2026-08-24"
   risk_analysis:

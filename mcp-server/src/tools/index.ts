@@ -53,6 +53,10 @@ import {
 import { updateStatusFromPassedTokens } from "../verify.js";
 import { applyYamlUpdates, parseYamlUpdateSteps } from "../yaml-updates-apply.js";
 import { formatYamlMetadata } from "../yaml-canonicalizer.js";
+import {
+  reportStylingEvidence,
+  runClientFormatterHook,
+} from "../yaml-client-formatter.js";
 import { resolveRequirementListStateGuide } from "./requirement-list-state-guide.js";
 import { runScopedAnalysis } from "../analysis/scoped-analysis.js";
 import { runPlumbDiffImpactPreview } from "../analysis/plumb-diff-impact-preview.js";
@@ -409,6 +413,59 @@ export const allTools = [
       inputSchema: z.object({}),
     },
     handler: async () => textContent(JSON.stringify({ yaml_format: formatYamlMetadata() }, null, 2)),
+  },
+  {
+    name: "tied_client_yaml_styling_apply",
+    config: {
+      description:
+        "Run the optional repository client_formatter hook on one project-owned ./tied/ YAML path after baseline canonical bytes exist. Does not auto-run during MCP writers. Returns styling_status configured or not_configured; fail-closed on path escape, methodology paths, spawn failures, invalid post-hook YAML, semantic drift, or non-idempotent second passes.",
+      inputSchema: z.object({
+        file_path: z
+          .string()
+          .min(1)
+          .describe("Absolute or cwd-relative path to one project-owned YAML file under TIED_BASE_PATH"),
+      }),
+    },
+    handler: async ({ file_path }: { file_path: string }) => {
+      const absolutePath = path.isAbsolute(file_path)
+        ? file_path
+        : path.resolve(process.cwd(), file_path);
+      const hookResult = await runClientFormatterHook(absolutePath);
+      if (!hookResult.ok) {
+        return textContent(
+          JSON.stringify(
+            {
+              ok: false,
+              error: hookResult.error,
+              code: hookResult.code,
+              styling: reportStylingEvidence(hookResult),
+            },
+            null,
+            2,
+          ),
+        );
+      }
+      return textContent(
+        JSON.stringify(
+          {
+            ok: true,
+            path: absolutePath,
+            styling_status: hookResult.styling_status,
+            ...(hookResult.styling_status === "configured"
+              ? {
+                  command: hookResult.command,
+                  version: hookResult.version,
+                  semantic_compare_ok: hookResult.semantic_compare_ok,
+                  idempotent: hookResult.idempotent,
+                }
+              : {}),
+            styling: reportStylingEvidence(hookResult),
+          },
+          null,
+          2,
+        ),
+      );
+    },
   },
   {
     name: "yaml_updates_apply",

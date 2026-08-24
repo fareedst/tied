@@ -1,27 +1,62 @@
-copy_hygiene: "Per-request Tracker for client YAML styling gates (refine-plan Slice 2 planning pass). Slice 1 complete; Slice 2 plan-only."
+copy_hygiene: "Per-request Tracker for client YAML styling gates. Slice 1 + Slice 2 complete; close-out 2026-08-24."
 description: "Checklist enforcement and executable client_formatter hook for presentation-only client YAML styling."
 execution_evidence:
   close_out_evidence:
-    date: null
-    deferred:
-      - "Persist merged CITDP to tied/citdp/ at close-out"
-      - "Slice 2 executable implementation (build-plan gate)"
-    gates: {}
+    date: "2026-08-24"
+    deferred: []
+    gates:
+      close_out:
+        allowed: true
+        blocking: false
+        depth: "minimal"
+        diagnostics: []
+        evidence_file: "working/REQ-TIED_YAML_STYLING_GATES/gate-close_out-result.json"
+        ok: true
+      verification:
+        allowed: true
+        blocking: false
+        depth: "minimal"
+        diagnostics: []
+        evidence_file: "working/REQ-TIED_YAML_STYLING_GATES/gate-verification-slice2.json"
+        ok: true
     master_checklist: "tied/docs/agent-req-implementation-checklist.yaml"
+    verification:
+      commands:
+        - "npm test --prefix mcp-server (441/441 pass)"
+        - "tied_validate_consistency ok"
   completed:
+    - "author-architecture"
+    - "author-requirement"
     - "change-definition"
+    - "composition-integration"
     - "impact-discovery"
+    - "persist-citdp-record"
+    - "persist-implementation-records"
     - "risk-assessment"
     - "session-bootstrap"
+    - "sync-tied-stack"
     - "test-strategy"
+    - "user-facing-release-notes"
+    - "verification-gate"
   operator_evidence:
     commands:
       - "lint_yaml working/REQ-TIED_YAML_STYLING_GATES/*.yaml"
-      - "tied-cli.sh tied_checklist_gate_validate (phase pre_implementation; Slice 2 planning refresh)"
+      - "npm test --prefix mcp-server"
+      - "tied-cli.sh tied_checklist_gate_validate (phase close_out; plan-close-out)"
+      - "tied-cli.sh tied_checklist_gate_validate (phase pre_implementation; Slice 2 build-plan)"
+      - "tied-cli.sh tied_checklist_gate_validate (phase verification; Slice 2 build-plan)"
       - "tied_validate_consistency"
     depth_tier: "minimal"
     gate_policy: "advisory"
     gate_result:
+      close_out:
+        allowed: true
+        blocking: false
+        depth: "minimal"
+        diagnostics: []
+        evidence_file: "working/REQ-TIED_YAML_STYLING_GATES/gate-close_out-result.json"
+        note: "plan-close-out 2026-08-24; merged CITDP persisted."
+        ok: true
       pre_implementation:
         allowed: true
         blocking: false
@@ -30,7 +65,8 @@ execution_evidence:
         evidence_references:
           - "/Users/fareed/.cursor/plans/client_yaml_styling_gates_0fc380c5.plan.md"
           - "working/REQ-TIED_YAML_STYLING_GATES/CITDP-REQ-TIED_YAML_STYLING_GATES-slice2-draft.yaml"
-        note: "Refreshed after Slice 2 scope definition (refine-plan 2026-08-24)."
+          - "working/REQ-TIED_YAML_STYLING_GATES/gate-pre-implementation-slice2.json"
+        note: "Refreshed at Slice 2 build-plan implementation start."
         ok: true
       verification:
         allowed: true
@@ -39,22 +75,24 @@ execution_evidence:
         diagnostics: []
         evidence_references:
           - "mcp-server/src/checklist-yaml-styling-contract.test.ts"
-          - "working/REQ-TIED_YAML_STYLING_GATES/CITDP-REQ-TIED_YAML_STYLING_GATES-slice1-draft.yaml"
-        note: "Slice 1 verification gate; unchanged by Slice 2 planning."
+          - "mcp-server/src/tools/yaml-client-styling-mcp.test.ts"
+          - "mcp-server/src/yaml-client-formatter.test.ts"
+          - "working/REQ-TIED_YAML_STYLING_GATES/gate-verification-slice2.json"
+        note: "Slice 2 verification gate after 441-test npm test pass."
         ok: true
     prior_depth_tier: "minimal"
     profile_depth: "not_measured"
-    status: "slice2_planning"
+    status: "implemented"
   request: "REQ-TIED_YAML_STYLING_GATES"
 record_identity:
   change_request_id: "REQ-TIED_YAML_STYLING_GATES"
-  record_status: "slice2_planning"
+  record_status: "implemented"
   title: "Client YAML styling gates"
 risk_snapshot:
   depth_tier: "minimal"
   gate_policy: "advisory"
   profile_depth: "not_measured"
-  rationale: "Slice 2 adds executable hook; checklist contract from Slice 1 unchanged; minimal depth retained."
+  rationale: "Slice 2 executable hook shipped with fixture matrix; minimal depth retained."
 steps:
   - disposition: "completed"
     evidence_refs:
@@ -77,13 +115,37 @@ steps:
     slug: "risk-assessment"
   - disposition: "completed"
     evidence_refs:
+      - "mcp-server/src/yaml-client-formatter.test.ts"
       - "tied/implementation-decisions/IMPL-TIED_YAML_STYLE_RESOLVER-pseudocode.md"
-      - "working/REQ-TIED_YAML_STYLING_GATES/CITDP-REQ-TIED_YAML_STYLING_GATES-slice2-draft.yaml"
     slug: "test-strategy"
   - disposition: "not_applicable"
     policy: "minimal-depth-no-inquiry"
     rationale: "Minimal depth; Slice 2 hook runner covered by fixture matrix, not integrated inquiry."
     slug: "sub-adversarial-inquiry-pass"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/requirements/REQ-TIED_YAML_STYLE_CONFIGURATION.yaml"
+    slug: "author-requirement"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/architecture-decisions/ARCH-TIED_YAML_STYLE_RESOLUTION.yaml"
+    slug: "author-architecture"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/yaml-client-formatter.ts"
+      - "mcp-server/src/yaml-style-config.ts"
+      - "tied/implementation-decisions/IMPL-TIED_YAML_STYLE_RESOLVER.yaml"
+    slug: "persist-implementation-records"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/tools/index.ts"
+      - "mcp-server/src/tools/yaml-client-styling-mcp.test.ts"
+    slug: "composition-integration"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/yaml-client-formatter.test.ts"
+      - "working/REQ-TIED_YAML_STYLING_GATES/gate-verification-slice2.json"
+    slug: "verification-gate"
 test_strategy:
-  matrix_notes: "Slice 2 adds 12-case formatter fixture matrix; build-plan implements RED tests first."
-  summary: "Slice 1 static contract tests shipped; Slice 2 unit/fixture tests planned in CITDP slice2-draft."
+  matrix_notes: "Slice 2 12-case formatter fixture matrix implemented; 441 mcp-server tests pass."
+  summary: "Slice 1 static contract tests plus Slice 2 unit/fixture hook runner tests shipped."

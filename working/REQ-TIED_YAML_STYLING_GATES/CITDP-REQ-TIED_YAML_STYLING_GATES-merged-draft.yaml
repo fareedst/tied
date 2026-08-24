@@ -1,0 +1,167 @@
+CITDP-REQ-TIED_YAML_STYLING_GATES:
+  change_definition:
+    current_behavior: "sub-yaml-edit-loop enforces tied-cli mutations, lint_yaml canonicalization, and tied_validate_consistency but does not govern optional client presentation styling, semantic-equivalence after hooks, or post-style evidence; yaml-style-config.ts resolves scalar_style only with no executable client_formatter hook runner."
+    requested_change: "Add sub-client-yaml-styling wired through sub-yaml-edit-loop and YAML mutation callers with post-style evidence at verification-gate, sync-tied-stack, and traceable-commit; extend .tied-yaml.yaml with optional client_formatter and implement fail-closed hook runner with path guards, yaml_semantic_compare acceptance, styling_status metadata, and explicit MCP tied_client_yaml_styling_apply."
+    scope_in:
+      - "mcp-server/fixtures/client-formatter/**"
+      - "mcp-server/README.md"
+      - "mcp-server/src/checklist-yaml-styling-contract.test.ts"
+      - "mcp-server/src/tools/index.ts (tied_client_yaml_styling_apply)"
+      - "mcp-server/src/tools/yaml-client-styling-mcp.test.ts"
+      - "mcp-server/src/yaml-client-formatter.test.ts"
+      - "mcp-server/src/yaml-client-formatter.ts"
+      - "mcp-server/src/yaml-style-config.ts"
+      - "tied/architecture-decisions/ARCH-TIED_YAML_STYLE_RESOLUTION.yaml"
+      - "tied/docs/agent-req-implementation-checklist.md"
+      - "tied/docs/agent-req-implementation-checklist.yaml"
+      - "tied/docs/processes.md § [PROC-YAML_EDIT_LOOP]"
+      - "tied/implementation-decisions/IMPL-TIED_YAML_STYLE_RESOLVER-pseudocode.md"
+      - "tied/implementation-decisions/IMPL-TIED_YAML_STYLE_RESOLVER.yaml"
+      - "tied/requirements/REQ-TIED_YAML_STYLE_CONFIGURATION.yaml"
+      - "tied/vocab/tied-yaml-mcp.md"
+      - "tools/bundled-tied-yaml-skill/SKILL.md"
+    scope_out:
+      - "Automatic hook invocation inside every MCP writer (checklist-governed post-write only)"
+      - "New REQ/ARCH/IMPL tokens (extend existing style-configuration stack)"
+      - "tied/methodology/**"
+    target_behavior: "Every project-owned ./tied/ YAML mutation follows governed write → baseline canonical → optional client_formatter → lint → consistency → semantic equivalence; styling_status not_configured when no hook; when client_formatter is declared, tied-cli/MCP can run the hook on a single project-owned path with fail-closed guards for path escape, methodology paths, spawn failures, invalid YAML, semantic drift, and non-idempotent second passes."
+  completion_criteria:
+    - "Checklist YAML and Markdown mirror aligned for sub-client-yaml-styling"
+    - "IMPL pseudo-code blocks RESOLVE_CLIENT_FORMATTER, RUN_CLIENT_FORMATTER_HOOK, GUARD_PROJECT_TIED_PATH pass pseudocode_validate"
+    - "LEAP extensions to REQ-TIED_YAML_STYLE_CONFIGURATION, ARCH-TIED_YAML_STYLE_RESOLUTION, IMPL-TIED_YAML_STYLE_RESOLVER recorded"
+    - "lint_yaml on changed YAML; tied_validate_consistency ok"
+    - "Merged CITDP persisted to tied/citdp/ at close-out"
+    - "Optional MCP tied_client_yaml_styling_apply returns styling_status and fail-closed errors"
+    - "resolveClientFormatter and runClientFormatterHook unit/fixture tests pass"
+    - "Static contract tests pass for invocation ordering and evidence tasks"
+  impact_analysis:
+    architecture:
+      - "ARCH-TIED_YAML_CANONICAL_PROFILE"
+      - "ARCH-TIED_YAML_STYLE_RESOLUTION"
+    implementation_decisions:
+      - "IMPL-TIED_YAML_CANONICALIZER"
+      - "IMPL-TIED_YAML_STYLE_RESOLVER"
+    processes:
+      - "PROC-AGENT_REQ_CHECKLIST"
+      - "PROC-YAML_EDIT_LOOP"
+    requirements:
+      - "REQ-TIED_YAML_CANONICALIZATION"
+      - "REQ-TIED_YAML_STYLE_CONFIGURATION"
+  leap_feedback:
+    divergence: "Presentation-only client_formatter hook extends scalar-style configuration without new REQ/ARCH/IMPL tokens."
+    propagation: "Extended REQ-TIED_YAML_STYLE_CONFIGURATION satisfaction criteria, ARCH-TIED_YAML_STYLE_RESOLUTION decision, IMPL-TIED_YAML_STYLE_RESOLVER pseudo-code and code_locations; checklist sub-client-yaml-styling governs agent invocation order."
+    status: "applied"
+  planning_evidence:
+    gate_pre_implementation:
+      allowed: true
+      blocking: false
+      depth: "minimal"
+      diagnostics: []
+      evidence_file: "working/REQ-TIED_YAML_STYLING_GATES/gate-pre-implementation-slice2.json"
+      invoked_via: ".cursor/skills/tied-yaml/scripts/tied-cli.sh tied_checklist_gate_validate"
+      note: "Slice 2 build-plan pre_implementation gate; minimal depth advisory."
+      ok: true
+    gate_verification:
+      allowed: true
+      blocking: false
+      depth: "minimal"
+      diagnostics: []
+      evidence_file: "working/REQ-TIED_YAML_STYLING_GATES/gate-verification-slice2.json"
+      note: "441 mcp-server tests pass after Slice 2 hook runner."
+      ok: true
+  record_identity:
+    citdp_id: "CITDP-REQ-TIED_YAML_STYLING_GATES"
+    created_at: "2026-08-24"
+    status: "implemented"
+    title: "Client YAML styling gates (checklist enforcement and executable hook)"
+    updated_at: "2026-08-24"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "A future formatter changes scalar types or ordered-list semantics while preserving parseability."
+        - "A hook preserves parseability but changes ordered-list or scalar-type semantics."
+        - "A hook succeeds once but emits different bytes on a second pass, breaking idempotence assumptions."
+        - "A malicious or misconfigured hook rewrites files outside project-owned ./tied/."
+        - "Agents invoke a hook without repository declaration because MCP exposes an implicit default formatter."
+        - "An agent treats an absent client_formatter as permission to choose an implicit formatter."
+        - "Verification records pre-style bytes instead of the final post-style on-disk artifact."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Checklist contract tests require post-style evidence at verification-gate, sync-tied-stack, and traceable-commit."
+        - "Checklist contract tests require the styling sub-procedure to be called only from sub-yaml-edit-loop."
+        - "Invalid client_formatter schema fails at resolve time without running the hook."
+        - "not_configured path performs zero spawns."
+        - "Path guard tests reject methodology paths and paths outside tiedBasePath."
+        - "yaml_semantic_compare runs between pre-hook snapshot and post-hook bytes before acceptance."
+      evidence_references:
+        - "/Users/fareed/.cursor/plans/client_yaml_styling_gates_0fc380c5.plan.md"
+        - "mcp-server/fixtures/client-formatter/"
+        - "mcp-server/src/checklist-yaml-styling-contract.test.ts"
+        - "mcp-server/src/tools/yaml-client-styling-mcp.test.ts"
+        - "mcp-server/src/yaml-client-formatter.test.ts"
+        - "scripts/yaml_semantic_compare.rb"
+        - "tied/docs/agent-req-implementation-checklist.yaml"
+      falsification_questions:
+        - "Can a client formatter be invoked without a client declaration?"
+        - "Can a hook change YAML meaning while passing syntax validation?"
+        - "Can a second hook pass change bytes while still semantically equivalent?"
+        - "Can post-style evidence be accepted before the final file is linted and consistency-checked?"
+        - "Can semantic drift pass when post-hook YAML parses cleanly?"
+        - "Can the hook run on tied/methodology/** when declared?"
+      gate_policy: "advisory"
+      prior_depth_tier: "minimal"
+      profile_depth: "not_measured"
+      rationale: "Checklist Slice 1 plus executable hook Slice 2; fixture matrix and static contract tests bound presentation seam risk at minimal depth."
+      research_profile: "integrated-agent"
+    risks:
+      - description: "Agents treat optional client_formatter as implicit agent-chosen formatting."
+        id: "RISK-STYLE-GATE-001"
+        mitigation: "Explicit styling_status not_configured default; hook runs only when .tied-yaml.yaml declares client_formatter."
+      - description: "Presentation hook changes YAML semantics."
+        id: "RISK-STYLE-GATE-002"
+        mitigation: "Require yaml_semantic_compare before acceptance; fail closed and return to owning step."
+      - description: "Hook command executes arbitrary process declared in repository config."
+        id: "RISK-STYLE-GATE-005"
+        mitigation: "spawn with shell:false; cwd locked to client project root; argv from config only; timeout and output bounds; path allowlist under tiedBasePath excluding methodology."
+      - description: "scalar_style validation breaks repositories that declare client_formatter only."
+        id: "RISK-STYLE-GATE-006"
+        mitigation: "When .tied-yaml.yaml exists, treat missing scalar_style as unwrapped default if client_formatter is present; reject unknown keys and malformed client_formatter mapping."
+      - description: "MCP auto-invokes hook on every write, bypassing checklist evidence timing."
+        id: "RISK-STYLE-GATE-007"
+        mitigation: "Slice 2 exposes explicit tied_client_yaml_styling_apply; MCP writers remain baseline-canonical only until a future slice approves writer integration."
+  test_strategy:
+    cases:
+      - expectation: "styling_status not_configured; no process spawn"
+        id: "FMT-NOT-CONFIGURED"
+      - expectation: "Deterministic post-hook bytes across repeated runs on canonical input"
+        id: "FMT-STABLE-OUTPUT"
+      - expectation: "Second hook pass leaves bytes unchanged"
+        id: "FMT-IDEMPOTENT"
+      - expectation: "Boolean, number, and null nodes remain semantically equal"
+        id: "FMT-SCALAR-TYPES"
+      - expectation: "Sequence order preserved per yaml_semantic_compare"
+        id: "FMT-ORDERED-LISTS"
+      - expectation: "Block-scalar bodies preserved for IMPL sidecar-like fixtures"
+        id: "FMT-BLOCK-SCALARS"
+      - expectation: "Post-hook lint/parse failure rejects with fail-closed error"
+        id: "FMT-INVALID-YAML"
+      - expectation: "yaml_semantic_compare non-zero exit rejects acceptance"
+        id: "FMT-SEMANTIC-DRIFT"
+      - expectation: "Paths outside tiedBasePath rejected before spawn"
+        id: "FMT-PATH-ESCAPE"
+      - expectation: "tied/methodology/** paths rejected before spawn"
+        id: "FMT-METHODOLOGY-BLOCK"
+      - expectation: "Malformed client_formatter mapping fails at resolve"
+        id: "FMT-INVALID-CONFIG"
+      - expectation: "Absent client_formatter preserves Slice 1 baseline behavior"
+        id: "FMT-DISABLED-DEFAULT"
+    matrix_notes:
+      - "Caller coverage: author-requirement through persist-citdp-record"
+      - "Deferred: end-to-end tied-cli checklist sub-procedure automation"
+      - "Evidence tasks at verification-gate, sync-tied-stack, traceable-commit"
+      - "Fixture stub formatters: noop, stable-indent, break-semantics, invalid-yaml, non-idempotent"
+      - "Invocation ordering: sub-yaml-edit-loop → sub-client-yaml-styling"
+      - "MCP composition smoke for tied_client_yaml_styling_apply registration"
+      - "Static checklist contract tests plus YAML lint and tied_validate_consistency"
+    summary: "Slice 1 static checklist contract tests plus Slice 2 unit/fixture hook runner tests; 441 mcp-server tests; LEAP stack validated by tied_validate_consistency."

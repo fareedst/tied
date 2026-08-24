@@ -12,6 +12,23 @@ export type ResolvedYamlStyle = {
   config_path?: string;
 };
 
+export type StylingStatus = "configured" | "not_configured";
+
+export type ClientFormatterDeclaration = {
+  command: string;
+  args: string[];
+  version?: string;
+};
+
+export type ResolvedClientFormatter = {
+  styling_status: StylingStatus;
+  scalar_style?: YamlScalarStyle;
+  formatter?: ClientFormatterDeclaration;
+  config_path?: string;
+};
+
+const CLIENT_FORMATTER_ALLOWED_KEYS = new Set(["command", "args", "version"]);
+
 export class YamlStyleConfigurationError extends Error {
   constructor(message: string) {
     super(message);
@@ -54,19 +71,100 @@ function styleFromValue(value: unknown, sourcePath: string): YamlScalarStyle {
   );
 }
 
-function styleFromConfig(config: unknown, sourcePath: string): YamlScalarStyle {
+function repoConfigRecord(config: unknown, sourcePath: string): Record<string, unknown> {
   if (config === null || typeof config !== "object" || Array.isArray(config)) {
     throw new YamlStyleConfigurationError(
-      `Invalid YAML style configuration ${sourcePath}: expected a mapping with scalar_style.`,
+      `Invalid YAML style configuration ${sourcePath}: expected a mapping.`,
     );
   }
-  const scalarStyle = (config as Record<string, unknown>).scalar_style;
+  return config as Record<string, unknown>;
+}
+
+function scalarStyleFromRepoConfig(record: Record<string, unknown>, sourcePath: string): YamlScalarStyle {
+  const scalarStyle = record.scalar_style;
   if (scalarStyle === undefined) {
+    // [REQ-TIED_YAML_STYLE_CONFIGURATION] RISK-STYLE-GATE-006: formatter-only repo config defaults unwrapped.
+    if (record.client_formatter !== undefined) {
+      return "unwrapped";
+    }
     throw new YamlStyleConfigurationError(
       `Invalid YAML style configuration ${sourcePath}: missing scalar_style.`,
     );
   }
   return styleFromValue(scalarStyle, sourcePath);
+}
+
+function styleFromConfig(config: unknown, sourcePath: string): YamlScalarStyle {
+  return scalarStyleFromRepoConfig(repoConfigRecord(config, sourcePath), sourcePath);
+}
+
+// [IMPL-TIED_YAML_STYLE_RESOLVER] [ARCH-TIED_YAML_STYLE_RESOLUTION] [REQ-TIED_YAML_STYLE_CONFIGURATION]
+// How: Restrict hook config to command plus optional args list and opaque version string.
+export function validateFormatterDeclaration(formatter: unknown): ClientFormatterDeclaration {
+  if (formatter === null || typeof formatter !== "object" || Array.isArray(formatter)) {
+    throw new YamlStyleConfigurationError(
+      "Invalid client_formatter: expected a mapping with command.",
+    );
+  }
+  const record = formatter as Record<string, unknown>;
+  for (const key of Object.keys(record)) {
+    if (!CLIENT_FORMATTER_ALLOWED_KEYS.has(key)) {
+      throw new YamlStyleConfigurationError(
+        `Invalid client_formatter: unknown key ${JSON.stringify(key)}.`,
+      );
+    }
+  }
+  const command = record.command;
+  if (typeof command !== "string" || command.trim().length === 0) {
+    throw new YamlStyleConfigurationError(
+      "Invalid client_formatter: command must be a non-empty string.",
+    );
+  }
+  let args: string[] = [];
+  if (record.args !== undefined) {
+    if (!Array.isArray(record.args) || record.args.some((item) => typeof item !== "string")) {
+      throw new YamlStyleConfigurationError(
+        "Invalid client_formatter: args must be a string list when present.",
+      );
+    }
+    args = record.args as string[];
+  }
+  const version = record.version;
+  if (version !== undefined && typeof version !== "string") {
+    throw new YamlStyleConfigurationError(
+      "Invalid client_formatter: version must be a string when present.",
+    );
+  }
+  return version === undefined
+    ? { command: command.trim(), args }
+    : { command: command.trim(), args, version };
+}
+
+// [IMPL-TIED_YAML_STYLE_RESOLVER] [ARCH-TIED_YAML_STYLE_RESOLUTION] [REQ-TIED_YAML_STYLE_CONFIGURATION]
+// How: Parse optional client_formatter from repository .tied-yaml.yaml only; absent hook yields not_configured.
+export function resolveClientFormatter(
+  tiedBasePath: string = getDefaultTiedBasePath(),
+): ResolvedClientFormatter {
+  const repoConfigPath = path.join(path.dirname(tiedBasePath), ".tied-yaml.yaml");
+  if (!fs.existsSync(repoConfigPath)) {
+    return { styling_status: "not_configured" };
+  }
+  const record = repoConfigRecord(parseConfigFile(repoConfigPath), repoConfigPath);
+  const scalarStyle = scalarStyleFromRepoConfig(record, repoConfigPath);
+  const formatterValue = record.client_formatter;
+  if (formatterValue === undefined) {
+    return { styling_status: "not_configured", scalar_style: scalarStyle, config_path: repoConfigPath };
+  }
+  const formatter = validateFormatterDeclaration(formatterValue);
+  if (formatter.command.length === 0) {
+    return { styling_status: "not_configured", scalar_style: scalarStyle, config_path: repoConfigPath };
+  }
+  return {
+    styling_status: "configured",
+    scalar_style: scalarStyle,
+    formatter,
+    config_path: repoConfigPath,
+  };
 }
 
 function globalConfigPath(environment: NodeJS.ProcessEnv): string {

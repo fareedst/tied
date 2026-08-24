@@ -17,15 +17,24 @@ IMPL-TIED_YAML_STYLE_RESOLVER:
       path: "mcp-server/src/tools/yaml-canonicalization-mcp.test.ts"
     - description: "Wrapped CLI and list-sort compatibility coverage"
       path: "scripts/yaml_list_sorter_test.rb"
+    - description: "client_formatter hook runner with path guards and semantic compare"
+      path: "mcp-server/src/yaml-client-formatter.ts"
+    - description: "12-case formatter fixture matrix and hook contract tests"
+      path: "mcp-server/src/yaml-client-formatter.test.ts"
+    - description: "Explicit MCP tied_client_yaml_styling_apply tool registration"
+      path: "mcp-server/src/tools/index.ts"
   cross_references:
     - "ARCH-TIED_YAML_STYLE_RESOLUTION"
     - "IMPL-TIED_YAML_CANONICALIZER"
     - "REQ-MODULE_VALIDATION"
     - "REQ-TIED_YAML_STYLE_CONFIGURATION"
-  description: "Provide one resolver and serializer options contract for all typed YAML writes. Repository .tied-yaml.yaml overrides TIED_YAML_STYLE and XDG global configuration; unconfigured repositories use unwrapped. Wrapped uses double-quoted strings only and preserves typed booleans, numbers, and nulls. Opaque block scalars and IMPL pseudo-code sidecars retain existing preservation rules."
+  description: "Provide one resolver and serializer options contract for all typed YAML writes, plus optional client_formatter hook resolution and fail-closed runner for presentation-only post-canonical styling. Repository .tied-yaml.yaml overrides TIED_YAML_STYLE and XDG global configuration; unconfigured repositories use unwrapped. Wrapped uses double-quoted strings only and preserves typed booleans, numbers, and nulls. Opaque block scalars and IMPL pseudo-code sidecars retain existing preservation rules."
   implementation_approach:
     details:
+      - "Add resolveClientFormatter and validateFormatterDeclaration to yaml-style-config.ts."
+      - "Add yaml-client-formatter.ts with runClientFormatterHook, guardProjectTiedPath, and reportStylingEvidence."
       - "Add yaml-style-config.ts beside yaml-canonicalizer.ts with scalar_style validation, repository-root discovery, and precedence resolution."
+      - "Expose tied_client_yaml_styling_apply MCP tool; writers remain baseline-canonical only."
       - "Extend canonical profile metadata with scalar_style and style_source."
       - "Reject invalid repository configuration without falling back to global values; preserve atomic failure behavior."
       - "Route yaml_tool and --sort-lists through the same CLI resolver contract and canonical output."
@@ -37,8 +46,8 @@ IMPL-TIED_YAML_STYLE_RESOLVER:
       date: "2026-08-06"
     last_updated:
       author: "AI Agent"
-      date: "2026-08-06"
-      reason: "Complete contract fields and validator-approved style resolver pseudocode"
+      date: "2026-08-24"
+      reason: "Slice 2 LEAP: client_formatter hook code_locations and approach"
   name: "Shared YAML scalar style resolver"
   rationale:
     benefits:
@@ -71,5 +80,6 @@ IMPL-TIED_YAML_STYLE_RESOLVER:
     tests:
       - "mcp-server/src/tools/yaml-canonicalization-mcp.test.ts"
       - "mcp-server/src/yaml-canonicalizer.test.ts"
+      - "mcp-server/src/yaml-client-formatter.test.ts"
       - "mcp-server/src/yaml-style-config.test.ts"
       - "scripts/yaml_list_sorter_test.rb"

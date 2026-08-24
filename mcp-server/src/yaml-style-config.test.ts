@@ -3,7 +3,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
-import { resolveYamlStyle, YamlStyleConfigurationError } from "./yaml-style-config.js";
+import { resolveYamlStyle, resolveClientFormatter, validateFormatterDeclaration, YamlStyleConfigurationError } from "./yaml-style-config.js";
 
 function makeProject(): { root: string; tied: string } {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "tied-yaml-style-"));
@@ -101,4 +101,51 @@ test("invalid explicit repository style fails without fallback", () => {
   } finally {
     fs.rmSync(project.root, { recursive: true, force: true });
   }
+});
+
+test("formatter-only repository config defaults scalar_style to unwrapped", () => {
+  const project = makeProject();
+  try {
+    fs.writeFileSync(
+      path.join(project.root, ".tied-yaml.yaml"),
+      "client_formatter:\n  command: scripts/noop.sh\n",
+    );
+    const style = resolveYamlStyle(project.tied, {
+      ...withoutStyle(process.env),
+      XDG_CONFIG_HOME: path.join(project.root, "missing-xdg"),
+      HOME: path.join(project.root, "missing-home"),
+    });
+    assert.equal(style.scalar_style, "unwrapped");
+    assert.equal(style.style_source, "repository");
+    const formatter = resolveClientFormatter(project.tied);
+    assert.equal(formatter.styling_status, "configured");
+    assert.equal(formatter.scalar_style, "unwrapped");
+  } finally {
+    fs.rmSync(project.root, { recursive: true, force: true });
+  }
+});
+
+test("resolveClientFormatter returns not_configured when command absent", () => {
+  const project = makeProject();
+  try {
+    fs.writeFileSync(path.join(project.root, ".tied-yaml.yaml"), "scalar_style: wrapped\n");
+    const resolved = resolveClientFormatter(project.tied);
+    assert.equal(resolved.styling_status, "not_configured");
+    assert.equal(resolved.scalar_style, "wrapped");
+  } finally {
+    fs.rmSync(project.root, { recursive: true, force: true });
+  }
+});
+
+test("validateFormatterDeclaration normalizes command and args", () => {
+  const normalized = validateFormatterDeclaration({
+    command: " scripts/format.rb ",
+    args: ["--in-place"],
+    version: "fixture-1.0",
+  });
+  assert.deepEqual(normalized, {
+    command: "scripts/format.rb",
+    args: ["--in-place"],
+    version: "fixture-1.0",
+  });
 });

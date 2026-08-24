@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Client YAML styling gates (Slice 1 + Slice 2)** —
+  `[REQ-TIED_YAML_STYLE_CONFIGURATION]` / `[ARCH-TIED_YAML_STYLE_RESOLUTION]` /
+  `[IMPL-TIED_YAML_STYLE_RESOLVER]`: checklist `sub-client-yaml-styling` governs
+  optional `client_formatter` presentation after baseline canonical writes with
+  post-style evidence at verification-gate, sync-tied-stack, and traceable-commit;
+  executable fail-closed hook runner (`yaml-client-formatter.ts`) with path guards,
+  `yaml_semantic_compare` acceptance, 12-case fixture matrix, and MCP
+  `tied_client_yaml_styling_apply`. CITDP: `CITDP-REQ-TIED_YAML_STYLING_GATES`.
+
 - **Native Go Mode B project-input adapter (Slice G2)** —
   `[REQ-TIED_ADVERSARIAL_INQUIRY]` / `[IMPL-TIED_ADVERSARIAL_INQUIRY]` /
   `[ARCH-TIED_ADVERSARIAL_INQUIRY]`: Mode B dispatch accepts Go `_test.go` and
