@@ -34,7 +34,10 @@ Git-context + TIED — [tied-boundary.md](../prompt-shared/tied-boundary.md).
 Before writing CHANGELOG or making completion claims, select/confirm the
 recorded `profile_depth` and gate policy, then call
 `tied_checklist_gate_validate` with `phase: close_out`, the final Tracker and
-CITDP, and identity-bound activation evidence when depth is integrated.
+CITDP, and identity-bound activation evidence when `depth_tier` is
+`integrated` or `strict_candidate` (prefer `tied_checklist_activation_collect`
+when phase artifact dirs exist). If the gate returns `allowed: false`, label
+the work **incomplete** in the parent handoff — do not claim completion.
 Missing, malformed, stale, or unjustified process evidence is a hard stop.
 
 ## Gates

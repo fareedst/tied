@@ -88,6 +88,14 @@ Integrated activation has two distinct validation surfaces:
    paired inquiry receipt and four phase-scoped artifacts unless a valid
    close-out inquiry waiver applies.
 
+**Operator replay script** (1787507684 / REQ-ROOTJOBS; working folder, not CI):
+`working/client-1787507684-activation-audit/replay-integrated-activation.sh`
+supports `--dry-run` and `--check`, runs three phases (inquiry → collect → gate)
+with distinct `run_id`s, and optionally aggregates metrics. H5 completion still
+requires a human-verified live run and audit findings update — see
+[`integrated-activation-enforcement-operator-friction-plan.md`](integrated-activation-enforcement-operator-friction-plan.md)
+§9 rollout.
+
 **Operator sequence** (matches client `1787507684` replay; avoids direct YAML bypass):
 
 1. **Write depth** — `citdp_record_write` with `depth_tier: integrated` and

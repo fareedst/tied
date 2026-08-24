@@ -54,7 +54,10 @@ Process the request in this order:
 
 Before writing CHANGELOG or claiming completion, call
 `tied_checklist_gate_validate` with `phase: close_out`, the final Tracker and
-CITDP, and identity-bound activation evidence when depth is integrated. A
+CITDP, and identity-bound activation evidence when `depth_tier` is
+`integrated` or `strict_candidate` (prefer `tied_checklist_activation_collect`
+when phase artifact dirs exist). If the gate returns `allowed: false`, label
+the work **incomplete** in the parent handoff — do not claim completion. A
 missing, malformed, stale, or unjustified result is a hard stop.
 
 LEAP close-out must complete. **Do not commit.** Run language lint, TIED YAML

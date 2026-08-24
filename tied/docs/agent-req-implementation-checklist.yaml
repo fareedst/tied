@@ -21,8 +21,8 @@ execution_evidence:
     master_checklist: ""
   completed: []
   operator_evidence:
-    command: ".cursor/skills/tied-yaml/scripts/tied-cli.sh tied_adversarial_inquiry_run @/tmp/inquiry-smoke.json"
-    limitation: "Requires a human-operated Cursor MCP reload and catalog check."
+    integrated_pilot_template: "depth_tier: integrated\ngate_policy: advisory\nprior_depth_tier: null\nphase_artifact_dir: working/{REQ-TOKEN}/adversarial-inquiry/phase-{phase}/  # authoritative\ncollect: tied_checklist_activation_collect request_token, phase, run_id, project_root\ngate: tied_checklist_gate_validate with activation payload (receipt + four artifacts)\nchecklist: docs/integrated-activation-checklist-enforcement-plan.md §8\n"
+    limitation: "Replace {REQ-TOKEN} and {phase}; prefer collect when phase dirs exist; see §8 for pre_implementation, verification, and close_out sequence."
     status: "not_run"
   request: ""
 feedback_loops:
@@ -712,6 +712,7 @@ steps:
       - "tied/docs/processes.md § [PROC-CITDP] step 4"
     slug: "risk-assessment"
     tasks:
+      - "Apply the eligibility table at docs/integrated-activation-checklist-enforcement-plan.md §7: external input, auth, network, persistence, or strict close-out defaults depth_tier to integrated."
       - "Confirm impact-discovery selected baseline-functional and any triggered assurance profiles before REQ/ARCH/IMPL design; if missing, return to impact-discovery."
       - "Document mitigation strategies, evidence owner, limitation, and failure action."
       - "For strict-candidate or strict-approved inquiry, record negative controls, bounded execution, explicit proof boundaries, deterministic scope, waiver owner/expiry, and the human approval requirement."
@@ -719,6 +720,8 @@ steps:
       - "Record accepted residual risk only with accountable owner and expiry; record N/A rows with rationale rather than silently omitting them."
       - "Record the selected assurance profile, proof boundaries, and which evidence-chain edges are in scope. Keep inquiry research_profile separate from evidence-chain profile depth."
       - "Select and document the adversarial depth tier (minimal | integrated | strict_candidate) and, when blocking is desired later, list every strict-eligibility prerequisite with owner."
+      - "When any eligibility trigger matches, block progression on minimal depth or integrated_waiver without sponsor confirmation; risk_analysis.adversarial_inquiry.integrated_waiver must record real owner, expiry, rationale, and approval in CITDP (never placeholder ~ or empty strings)."
+      - "When no trigger matches, omit integrated_waiver or set null; do not record a waiver to bypass integrated on triggered work."
       - "Where applicable, attach tied_token_references to each risk (which REQ/ARCH/IMPL the risk affects)."
     title: "Risks, mitigations, token references"
     tracking:

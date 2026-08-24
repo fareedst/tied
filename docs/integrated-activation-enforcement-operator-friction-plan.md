@@ -357,7 +357,9 @@ These criteria are program goals, not prerequisites for the first handoff:
    changes land; **do not** retroactively fail completed minimal work.
 4. Ship phase persistence and, when approved, the collector; then re-run
    1787507684 integrated replay using phase dirs and collect when available
-   (manual assembly remains valid before Slice 2).
+   (manual assembly remains valid before Slice 2). Operator runbook:
+   `working/client-1787507684-activation-audit/replay-integrated-activation.sh`
+   (`--dry-run`, `--check`; not CI-required initially).
 5. Update `working/client-1787507684-activation-audit/findings-report.yaml`
    only after that replay; Part H5 becomes complete only when its acceptance
    table passes.

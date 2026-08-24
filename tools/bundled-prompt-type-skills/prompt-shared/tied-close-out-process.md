@@ -8,8 +8,11 @@
 4. Tests: Confirm unit, composition, and E2E coverage for the staged work.
 5. Before writing CHANGELOG or claiming completion, call
    `tied_checklist_gate_validate` with `phase: close_out`, the final Tracker,
-   CITDP, and integrated activation evidence when applicable. A failed or
-   missing gate is a hard stop.
+   CITDP, and identity-bound activation evidence when `depth_tier` is
+   `integrated` or `strict_candidate` (prefer `tied_checklist_activation_collect`
+   when phase artifact dirs exist). If the gate returns `allowed: false`, label
+   the work **incomplete** in the parent handoff — do not claim completion. A
+   failed or missing gate is a hard stop.
 
 ## Prologue (standard close-out / diff-promote)
 

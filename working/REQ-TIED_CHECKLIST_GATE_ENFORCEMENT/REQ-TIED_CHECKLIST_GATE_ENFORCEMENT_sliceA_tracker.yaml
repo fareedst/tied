@@ -1,0 +1,101 @@
+copy_hygiene: "Follow-on Slice A tracker — prompt-type and checklist process alignment. Sibling to batch2/slice2 trackers; do not inherit their close-out gate claims."
+description: "Per-request Tracker for Follow-on Slice A — integrated waiver blocking, operator_evidence template, build-plan/plan-close-out fail-handoff contracts."
+execution_evidence:
+  close_out_evidence:
+    date: "2026-08-24"
+    deferred: []
+    gates:
+      close_out:
+        allowed: true
+        depth: "minimal"
+        disposition: "completed"
+        evidence_refs:
+          - "docs/integrated-activation-enforcement-operator-friction-plan.md"
+          - "mcp-server/src/e2e/prompt-type-subagent.test.ts"
+          - "tied/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-sliceA.yaml"
+          - "tied/docs/agent-req-implementation-checklist.yaml"
+          - "tools/bundled-prompt-type-skills/build-plan/SKILL.md"
+          - "tools/bundled-prompt-type-skills/plan-close-out/SKILL.md"
+          - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-sliceA-close_out.json"
+        phase: "close_out"
+    master_checklist: "tied/docs/agent-req-implementation-checklist.yaml"
+  completed:
+    - "change-definition"
+    - "gate-pseudocode-validation"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "translate-sponsor-intent"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
+  operator_evidence:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    integrated_pilot_template: "see agent-req-implementation-checklist.yaml execution_evidence.operator_evidence"
+    status: "complete"
+  request: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+impact_analysis:
+  modules_or_boundaries: "Checklist prose, citdp-policy, prompt-shared plan/implement/close-out, build-plan and plan-close-out agents/skills, e2e agent contract tests."
+  tied_tokens_affected:
+    - "IMPL-PROMPT_TYPE_SUBAGENT"
+    - "REQ-TIED_ADVERSARIAL_INQUIRY"
+    - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+record_identity:
+  batch: "operator-friction-sliceA"
+  change_request_id: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+  record_status: "complete"
+  recorded_at: "2026-08-24"
+  refine_pass: 0
+  title: "Follow-on Slice A — prompt-type and checklist alignment"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "AGENTS.md"
+      - "tied/vocab/fidelity-research.md"
+      - "tied/vocab/prompt-composer.md"
+    slug: "session-bootstrap"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/integrated-activation-enforcement-operator-friction-plan.md"
+    slug: "translate-sponsor-intent"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-sliceA.yaml"
+    slug: "change-definition"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/docs/agent-req-implementation-checklist.yaml"
+      - "tied/docs/citdp-policy.md"
+      - "tools/bundled-prompt-type-skills/prompt-shared/tied-plan-citdp-build.md"
+    slug: "impact-discovery"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/integrated-activation-checklist-enforcement-plan.md"
+      - "tied/docs/agent-req-implementation-checklist.yaml"
+    slug: "risk-assessment"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/e2e/prompt-type-subagent.test.ts"
+    slug: "unit-test-red"
+  - disposition: "completed"
+    evidence_refs:
+      - ".cursor/agents/build-plan.md"
+      - ".cursor/agents/plan-close-out.md"
+      - "tools/bundled-prompt-type-skills/build-plan/SKILL.md"
+      - "tools/bundled-prompt-type-skills/plan-close-out/SKILL.md"
+      - "tools/bundled-prompt-type-skills/prompt-shared/tied-close-out-process.md"
+      - "tools/bundled-prompt-type-skills/prompt-shared/tied-implement.md"
+    slug: "unit-test-green"
+  - disposition: "completed"
+    evidence_refs:
+      - "npm test --prefix mcp-server -- prompt-type-subagent"
+    slug: "verification-gate"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied_validate_consistency"
+    slug: "traceable-commit"
+  - disposition: "not_applicable"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Slice A prose alignment at minimal depth; no tied_adversarial_inquiry_run."
+    slug: "sub-adversarial-inquiry-pass"

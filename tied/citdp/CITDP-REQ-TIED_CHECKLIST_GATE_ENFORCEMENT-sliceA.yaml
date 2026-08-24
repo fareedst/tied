@@ -1,0 +1,89 @@
+CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-sliceA:
+  change_definition:
+    current_behavior: "risk-assessment selects depth_tier but does not block silent integrated_waiver on triggered eligibility; operator_evidence lacks phase dirs and collect command; build-plan/plan-close-out agents lack explicit fail-handoff when integrated gate returns allowed: false."
+    desired_behavior: "Eligibility triggers block minimal/integrated_waiver without sponsor confirmation; Tracker operator_evidence template includes phase paths and collect/gate commands; build-plan and plan-close-out fail handoff when integrated-depth gates disallow progression."
+    non_goals:
+      - "Code enforcement in validateCitdpOpenRecord unless prose insufficient"
+      - "H5 pilot replay (Slice 3)"
+      - "New MCP tools"
+    success_criteria:
+      - "A1: risk-assessment checklist tasks and citdp-policy block silent integrated_waiver on triggered work."
+      - "A2: agent-req-implementation-checklist.yaml operator_evidence template includes phase subdirs and tied_checklist_activation_collect."
+      - "A3: build-plan/plan-close-out agents and bundled skills require activation at verification/close_out and fail handoff when allowed: false."
+      - "E2E: prompt-type-subagent.test.ts asserts integrated fail-handoff contracts."
+    unchanged_behavior:
+      - "Existing gate validator pairing rules unchanged."
+      - "Minimal depth workflows unchanged when no eligibility trigger matches."
+  completion_criteria:
+    checklist_gate:
+      dispositions:
+        - "completed"
+        - "pending"
+      fail_closed: true
+      phases:
+        - "close_out"
+        - "pre_implementation"
+        - "verification"
+    focused_tests: "mcp-server/src/e2e/prompt-type-subagent.test.ts"
+    lint: "npm test --prefix mcp-server -- prompt-type-subagent"
+    persist_policy: "persist to tied/citdp/ after Slice A verification"
+    verification: "tied_validate_consistency after canonical updates"
+  impact_analysis:
+    audited_project_mutation: "checklist yaml header, citdp-policy, prompt-shared plan/implement/close-out, build-plan and plan-close-out agents/skills, e2e contract tests"
+    files:
+      - ".cursor/agents/build-plan.md"
+      - ".cursor/agents/plan-close-out.md"
+      - "docs/integrated-activation-enforcement-operator-friction-plan.md"
+      - "mcp-server/src/e2e/prompt-type-subagent.test.ts"
+      - "tied/docs/agent-req-implementation-checklist.yaml"
+      - "tied/docs/citdp-policy.md"
+      - "tools/bundled-prompt-type-skills/build-plan/SKILL.md"
+      - "tools/bundled-prompt-type-skills/plan-close-out/SKILL.md"
+      - "tools/bundled-prompt-type-skills/prompt-shared/tied-close-out-process.md"
+      - "tools/bundled-prompt-type-skills/prompt-shared/tied-implement.md"
+      - "tools/bundled-prompt-type-skills/prompt-shared/tied-plan-citdp-build.md"
+      - "tools/bundled-prompt-type-skills/prompt-shared/tied-plan-citdp.md"
+    modules:
+      - "checklist_gate_enforcement"
+      - "prompt_type_subagent"
+    tags:
+      - "integrated-waiver"
+      - "operator-friction"
+      - "prompt-type-alignment"
+  leap_feedback:
+    divergences_from_analysis: []
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    author: "build-plan subagent"
+    batch: "operator-friction-sliceA"
+    change_request_id: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    date: "2026-08-24"
+    record_status: "complete"
+    slice: "A"
+    title: "Follow-on Slice A — prompt-type and checklist process alignment"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Agent records integrated_waiver with placeholder approval on triggered MCP/network work"
+        - "build-plan claims success when verification gate returns allowed: false"
+        - "Operator copies smoke inquiry command instead of phase-aware collect template"
+      depth_selected_at: "2026-08-24T00:00:00Z"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "prompt-type-subagent e2e asserts allowed: false fail-handoff language"
+        - "risk-assessment tasks reference eligibility table and sponsor confirmation"
+      evidence_references:
+        - "docs/integrated-activation-checklist-enforcement-plan.md §7"
+        - "docs/integrated-activation-checklist-enforcement-plan.md §8"
+      falsification_questions:
+        - "Can build-plan claim completion when verification gate returns allowed: false?"
+        - "Does risk-assessment still allow silent integrated_waiver on triggered eligibility?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      research_profile: "not_measured"
+  test_strategy:
+    composition: "Extend prompt-type-subagent e2e contract tests for build-plan and plan-close-out integrated fail-handoff prose."
+    unit: "No new validator code; prose-first enforcement per plan."

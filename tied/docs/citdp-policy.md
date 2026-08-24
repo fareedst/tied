@@ -47,6 +47,16 @@ behavior-changing work is `minimal`; selecting `baseline-functional` does not si
 integrated inquiry. A tool call without the required bounded artifacts is incomplete activation.
 Observed findings remain outside canonical TIED YAML and do not trigger LEAP until confirmed.
 
+### Eligibility triggers and integrated waiver
+
+When behavior-changing work matches an eligibility trigger (external input, auth, network,
+persistence, strict close-out — see `docs/integrated-activation-checklist-enforcement-plan.md`
+§7), default `depth_tier` is `integrated`. Selecting `minimal` on triggered work requires
+**sponsor confirmation** recorded as `risk_analysis.adversarial_inquiry.integrated_waiver` with
+real `owner`, `expiry`, `rationale`, and `approval` values. Agents must not silently waive
+integrated on triggered work; placeholder (`~`), empty, or incomplete waiver fields block
+progression at `risk-assessment` and at every checklist gate phase.
+
 ## Shared progression gate
 
 Behavior-changing workflows use the same fail-closed gate at

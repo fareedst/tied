@@ -9,6 +9,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **1787507684 integrated activation replay script** —
+  `[REQ-TIED_ADVERSARIAL_INQUIRY]` / `[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]` /
+  `[REQ-MCP_USAGE_METRICS]`: operator runbook
+  `working/client-1787507684-activation-audit/replay-integrated-activation.sh`
+  re-runs three-phase inquiry → collect → gate for client 1787507684 /
+  REQ-ROOTJOBS using shipped Mode A builder and `tied-cli.sh` (`--dry-run`,
+  `--check`). Wire `test/tied-cli-metrics-client.test.cjs` into `npm test`.
+  H5 live pilot and `findings-report.yaml` update remain operator-owned.
+  Working CITDP: `working/client-1787507684-activation-audit/CITDP-replay-script.yaml`.
+
+- **Prompt-type and checklist alignment (Slice A)** —
+  `[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]` / `[REQ-TIED_ADVERSARIAL_INQUIRY]` /
+  `[REQ-PROMPT_TYPE_SUBAGENT]`: block silent `integrated_waiver` on eligibility
+  triggers at `risk-assessment`; expand Tracker `operator_evidence` template
+  with phase subdirs and `tied_checklist_activation_collect`; require
+  build-plan/plan-close-out to fail handoff when integrated-depth gates return
+  `allowed: false`. CITDP:
+  `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-sliceA`.
+
 - **Go / non-Ruby Mode A builder (Slice G)** —
   `[REQ-TIED_ADVERSARIAL_INQUIRY]` / `[IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST]` /
   `[IMPL-TIED_FILES]`: `scripts/build_adversarial_inquiry_from_tied.rb` emits

@@ -129,6 +129,9 @@ describe("prompt-type Task subagents [REQ-PROMPT_TYPE_SUBAGENT]", () => {
     assert.match(buildPlan, /do not start code until .*IMPL pseudo-code.*test strategy/i);
     assert.match(buildPlan, /phase:\s*verification/i);
     assert.match(buildPlan, /linked plan/i);
+    assert.match(buildPlan, /allowed:\s*false/i, "build-plan must fail handoff when integrated gate disallowed");
+    assert.match(buildPlan, /tied_checklist_activation_collect|activation evidence when phase/i);
+    assert.match(buildPlan, /close_out/i, "build-plan must document close_out gate expectation for integrated depth");
     assert.doesNotMatch(buildPlan, /:::/);
 
     const debug = readAgent("debug").body;
@@ -162,6 +165,11 @@ describe("prompt-type Task subagents [REQ-PROMPT_TYPE_SUBAGENT]", () => {
       assert.match(body, /Do not commit/i);
     }
     assert.match(readAgent("plan-close-out").body, /phase:\s*close_out/i);
+    assert.match(
+      readAgent("plan-close-out").body,
+      /allowed:\s*false/i,
+      "plan-close-out must fail handoff when close_out gate disallowed"
+    );
   });
 
   it("preserves safety and parent handoff contracts [REQ-PROMPT_TYPE_SUBAGENT]", () => {

@@ -62,8 +62,13 @@ Select and record `profile_depth` and gate policy before any depth-dependent
 inquiry. Call `tied_checklist_gate_validate` with `phase:
 pre_implementation` before implementation and `phase: verification` before
 status updates; pass integrated activation evidence and the validated result
-to `tied_verify`. Missing, malformed, stale, or unjustified evidence blocks
-progression.
+to `tied_verify`. When `depth_tier` is `integrated` or `strict_candidate`,
+prefer `tied_checklist_activation_collect` when phase artifact dirs exist, and
+document that close_out must call the gate with `phase: close_out` and
+activation (or a valid close-out inquiry waiver). If the verification gate
+returns `allowed: false`, label the work **incomplete** in the parent handoff
+— do not claim success. Missing, malformed, stale, or unjustified evidence
+blocks progression.
 
 Keep project YAML changes in project-owned `tied/` records; never edit
 `tied/methodology/`. Run language lint, TIED YAML validation, the verification

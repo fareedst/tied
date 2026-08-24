@@ -7,7 +7,11 @@
 3. Read task-relevant IMPL pseudo-code (`./tied/implementation-decisions/IMPL-*-pseudocode.md` in scope from impact discovery).
 4. Perform CITDP **analysis** (`change-definition`, impact, **`risk-assessment`**, **`test-strategy`**). Persist `tied/citdp/CITDP-*.yaml` **after** implementation (see **Change records** / `citdp-policy.md`).
    During impact discovery, select and record `profile_depth` and `gate_policy`
-   independently from research and assurance profiles. Run the
+   independently from research and assurance profiles. At **`risk-assessment`**, apply the
+   eligibility table (`docs/integrated-activation-checklist-enforcement-plan.md` §7): when
+   any trigger matches (external input, auth, network, persistence, strict close-out), default
+   `depth_tier` is `integrated` — do not set `minimal` or record `integrated_waiver` without
+   sponsor confirmation with real owner, expiry, rationale, and approval in CITDP. Run the
    `pre_implementation` checklist gate before any RED test or code.
 5. Design tests and security mitigations per **Checklist** / **`test-strategy`**. If behavior changes, write RED (failing) tests that lock the **desired** behavior--not silent preservation of the old behavior unless that is the explicit goal.
 6. If a change is recommended but out of scope, capture it in `leap-proposals/` (if the project uses it) or a dated note in the task working folder for a future CITDP evaluation.

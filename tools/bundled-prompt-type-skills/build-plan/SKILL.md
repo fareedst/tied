@@ -44,8 +44,14 @@ If neither a linked plan nor an in-message plan is present, stop.
 - Before implementation, call `tied_checklist_gate_validate` with
   `phase: pre_implementation`. Do not start code until it allows progression.
 - At verification, call the same validator with `phase: verification` and pass
-  its validated result to `tied_verify`; integrated depth requires the matching
-  inquiry receipt and all four bounded artifacts.
+  its validated result to `tied_verify`. When `depth_tier` is `integrated` or
+  `strict_candidate`, supply identity-bound activation evidence (prefer
+  `tied_checklist_activation_collect` when phase artifact dirs exist).
+- Before parent handoff, when `depth_tier` is `integrated` or
+  `strict_candidate`, require verification gate `allowed: true` and document
+  that close_out must call `tied_checklist_gate_validate` with activation (or
+  a valid close-out inquiry waiver). If the gate returns `allowed: false`,
+  label the work **incomplete** — do not claim success.
 - Missing, malformed, stale, or unjustified process evidence blocks progression.
 
 ## Outputs
