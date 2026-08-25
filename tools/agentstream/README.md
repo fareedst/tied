@@ -22,7 +22,8 @@ Run **`agentstream --help`** for the full option list. Highlights:
 | `-f`, `--first-turn N` | 1-based first turn to run (mid-batch resume). |
 | `-o`, `--select-order` | Feature-spec batch filter: single `N` or inclusive `N-M`. |
 | `-w`, `--workspace` | Workspace root (default: current directory). |
-| `-c`, `--lead-checklist-yaml` | Lead checklist YAML; default resolves to repo `tied/docs/agent-req-implementation-checklist.yaml` when present. |
+| `-c`, `--lead-checklist-yaml` | Read-only lead checklist definition YAML; default resolves to repo `tied/docs/agent-req-implementation-checklist.yaml` when present. |
+| `--checklist-tracker-yaml PATH` | Writable per-request **Authoritative Tracker** (`checklist-tracker.v1`). Requires `-c`. Must not equal the definition path. When missing on disk, agentstream materializes clean pending state including `sub-adversarial-inquiry-pass` as a top-level step row. |
 | `--lead-checklist-before-feature` | With both `-b` and `-c`, emit all checklist steps before all feature-spec records (default is feature-spec first). |
 | `--checklist-var KEY=VALUE` | Repeatable (synonym: `--lead-checklist-var`). Substitutes **`{{KEY}}`** in rendered lead checklist text (`goals`, `tasks`, step `title`, flow branch prose, etc.). Split on the **first** `=` so values may contain `=`. Missing keys leave `{{KEY}}` unchanged unless strict mode applies. |
 | `--checklist-var-strict`, `AGENTSTREAM_CHECKLIST_VAR_STRICT=1` | Fail rendering if any `{{NAME}}` remains after substitution (forgotten vars). |
@@ -128,6 +129,34 @@ Emit targets only inside fenced `agentstream_control` JSON; prose such as “GOT
 ```
 
 For executable-behavior gaps, use `"target": "unit-test-red"` with evidence from `evidence-provenance.json` or the failing test output.
+
+## Authoritative Tracker and completion receipts (`--checklist-tracker-yaml`)
+
+The checklist definition (`-c`) is read-only. Per-request workflow state lives in a separate **Authoritative Tracker** file passed to `--checklist-tracker-yaml`. Each checklist turn with a `StepStub` must end with a strict fenced JSON envelope (subprocess success alone never advances the run):
+
+```json
+{
+  "agentstream_tracker": {
+    "schema_version": 1,
+    "slug": "change-definition",
+    "disposition": "completed",
+    "evidence_refs": ["working/REQ-X/change-definition.md"]
+  }
+}
+```
+
+Supported dispositions: `completed` (requires `evidence_refs`), `not_applicable` (`policy` + `rationale`), `waived` (`owner`, `expiry`, `approval`, `residual_risk`). Generic `skipped` is rejected. On `agentstream_control` **goto**, the runner invalidates configured downstream Tracker rows from `loop_back_clearance` before rerouting; it does not mutate the checklist definition bytes.
+
+**Migration:** legacy full checklist copies remain readable by the shared gate during a transition window, but new writer output uses top-level `steps` with `disposition`. Materialize a clean tracker with `--checklist-tracker-yaml` on a new path when `--lead-checklist-yaml` points at the canonical definition. Preview only—do not rewrite existing client state automatically.
+
+Example:
+
+```bash
+agentstream -w /path/to/repo \
+  -c tied/docs/agent-req-implementation-checklist.yaml \
+  --checklist-tracker-yaml working/REQ-EXAMPLE/REQ-EXAMPLE_tracker.yaml \
+  --checklist-var REQUEST=REQ-EXAMPLE
+```
 
 ## Lead checklist placeholders (`{{KEY}}`)
 

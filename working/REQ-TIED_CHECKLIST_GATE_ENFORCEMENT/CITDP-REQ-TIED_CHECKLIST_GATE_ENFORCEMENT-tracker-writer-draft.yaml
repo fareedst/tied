@@ -1,0 +1,127 @@
+CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-tracker-writer:
+  change_definition:
+    current_behavior: "Agentstream renders checklist Turns and captures assistant transcripts but does not persist disposition-bearing per-request Tracker state. Raw checklist copies can omit a top-level sub-adversarial-inquiry-pass state row, while execution_evidence.completed cannot satisfy the checklist evidence gate."
+    desired_behavior: "Agentstream materializes a state-only Authoritative Tracker, requires a strict current-step completion receipt, atomically writes disposition evidence, invalidates downstream state on loop-back, and emits output accepted by the existing shared checklist gate and tied_verify boundary."
+    non_goals:
+      - "Add UI E2E coverage for a process-composition boundary."
+      - "Infer completion from subprocess exit status, prose, token presence, TIED consistency, or execution_evidence.completed."
+      - "Reimplement activation pairing or finding lifecycle in Go."
+    success_criteria:
+      - "A checklist Turn cannot advance without a valid matching completion receipt."
+      - "Fresh materialization includes every main step and sub-adversarial-inquiry-pass."
+      - "Invalid gate input causes tied_verify to report no status updates."
+      - "Loop-back clears configured downstream dispositions and evidence before rerouting."
+      - "Writer output passes or fails the existing shared gate for the expected reasons."
+    unchanged_behavior:
+      - "agentstream_control remains the routing protocol."
+      - "The canonical checklist remains a read-only procedure definition."
+      - "The TypeScript checklist validator remains the progression authority."
+      - "tied_verify remains the status-promotion writer and revalidates gate input before mutation."
+  completion_criteria:
+    activation: null
+    plan_ready_status: "ready"
+    plan_ready_when:
+      - "The implementation plan defines module boundaries, RED-first tests, composition seams, rollout, migration, and objective acceptance evidence."
+      - "The refine-plan pre_implementation checklist gate returns allowed true at minimal depth."
+    refine_plan_gate_receipt: "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-checklist-adherence-plan-refinement-pre-implementation.json"
+  impact_analysis:
+    files:
+      - "docs/checklist-adherence-improvement-plan.md"
+      - "mcp-server/src/checklist-validator.test.ts"
+      - "mcp-server/src/verify.test.ts"
+      - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+      - "tied/vocab/agentstream.md"
+      - "tied/vocab/fidelity-research.md"
+      - "tools/agentstream/checklist/tracker.go"
+      - "tools/agentstream/checklist/tracker_receipt.go"
+      - "tools/agentstream/checklist/tracker_writer.go"
+      - "tools/agentstream/cmd/agentstream/main.go"
+      - "tools/agentstream/config/"
+      - "tools/agentstream/README.md"
+    modules_or_boundaries:
+      - "assistant transcript to Tracker completion receipt"
+      - "checklist definition to per-request Tracker materialization"
+      - "Go writer fixture to TypeScript checklist gate and tied_verify dry-run"
+      - "loop-back routing to downstream state invalidation"
+      - "receipt to atomic Tracker state transition"
+    tied_tokens_affected:
+      - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST"
+      - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-TIED_ADVERSARIAL_INQUIRY"
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+  leap_feedback:
+    divergences_from_analysis: "none"
+    record_status: "draft"
+    tied_stack_updates_required:
+      - "Extend IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT pseudo-code before RED."
+      - "Update ARCH wording only if producer authority changes the existing shared gate boundary."
+      - "Update IMPL detail code/test locations through tied-yaml tooling."
+  record_identity:
+    change_request_id: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    record_status: "draft_deferred_until_implementation"
+    recorded_at: {}
+    title: "Authoritative Tracker writer and gate composition"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "A loop-back reruns earlier work while stale downstream evidence remains completed."
+        - "A raw checklist copy omits sub-adversarial-inquiry-pass from top-level steps."
+        - "A successful agent subprocess advances without a Tracker completion receipt."
+        - "A writer partially overwrites the Tracker and leaves invalid YAML."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Go unit and process-composition tests pass for materialization, receipt validation, atomic writes, and loop-back invalidation."
+        - "TypeScript composition fixtures accept valid writer output and reject sparse, pending, or unpaired output."
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "docs/checklist-adherence-improvement-plan.md"
+        - "mcp-server/src/checklist-validator.ts"
+        - "mcp-server/src/verify.ts"
+      falsification_questions:
+        - "Can a failed write or conflicting replay alter the prior Tracker?"
+        - "Can a mismatched receipt slug update a different step?"
+        - "Can execution_evidence.completed make a sparse Tracker pass?"
+        - "Can tied_verify mutate status when the writer output fails the checklist gate?"
+      gate_policy: "advisory"
+      prior_depth_tier: null
+      profile_depth: "not_measured"
+    planned_implementation:
+      depth_tier: "integrated"
+      gate_policy: "advisory"
+      rationale: "The build-plan changes persistent workflow state from external agent output and protects verification and close-out boundaries."
+    risks:
+      - id: "RISK-TRACKER-001"
+        mitigation: "Fail closed on missing or invalid receipt before turn N+1."
+        severity: "high"
+        summary: "Writer advances the pipeline without authoritative state."
+      - id: "RISK-TRACKER-002"
+        mitigation: "Same-directory temporary write, validation, close/fsync, atomic rename, and failure-injection tests."
+        severity: "high"
+        summary: "Atomic update failure corrupts or truncates the Tracker."
+      - id: "RISK-TRACKER-003"
+        mitigation: "Clear dispositions, evidence, waivers, and gate summaries before queue replacement."
+        severity: "high"
+        summary: "Loop-back preserves stale downstream evidence."
+      - id: "RISK-TRACKER-004"
+        mitigation: "Preserve legacy gate reads and provide explicit materialize/migrate preview without automatic rewrites."
+        severity: "medium"
+        summary: "New state schema rejects legacy full checklist copies."
+  test_strategy:
+    commands:
+      - "./scripts/validate_tokens.sh"
+      - "go test ./tools/agentstream/..."
+      - "node --test mcp-server/dist/checklist-validator.test.js mcp-server/dist/verify.test.js"
+      - "npm run build --prefix mcp-server"
+    composition_tests:
+      - "Fake cursor agent transcript updates the current StepStub before turn N+1."
+      - "Go-emitted Tracker fixture is consumed by validateChecklistGate and tied_verify dry-run."
+      - "Missing or malformed receipt exits before the next-turn sentinel."
+      - "Valid goto invalidates Tracker state before pipeline queue replacement."
+    e2e_rationale: "No UI boundary exists; subprocess and cross-language contract composition provide the required proof."
+    e2e_tests: []
+    unit_tests:
+      - "Go atomic writer, idempotent replay, conflicting replay, and failure-injection tests."
+      - "Go materializer inventory, copy hygiene, path refusal, and legacy import tests."
+      - "Go strict completion receipt schema and disposition-contract table tests."
+      - "TypeScript shared gate and tied_verify dry-run fixture tests."

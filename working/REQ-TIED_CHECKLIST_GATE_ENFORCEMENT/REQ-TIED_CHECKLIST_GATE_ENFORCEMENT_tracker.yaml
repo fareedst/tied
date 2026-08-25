@@ -105,6 +105,11 @@ steps:
     evidence_refs:
       - "tied/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
     slug: "risk-assessment"
+  - disposition: "not_applicable"
+    kind: "sub_procedure"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Close-out uses minimal adversarial depth; integrated inquiry artifacts are not claimed for this gate pass."
+    slug: "sub-adversarial-inquiry-pass"
   - disposition: "completed"
     evidence_refs:
       - "mcp-server/package.json"

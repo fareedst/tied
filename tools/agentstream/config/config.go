@@ -18,8 +18,9 @@ type Config struct {
 	Workspace            string
 	Model                string
 	OrderFilterRaw       string
-	LeadChecklistYAML    string
-	LeadChecklistSkipSub bool
+	LeadChecklistYAML     string
+	ChecklistTrackerYAML  string
+	LeadChecklistSkipSub  bool
 	// LeadChecklistStepFromID / LeadChecklistStepToID: inclusive main-step bounds by YAML step slug (--lead-checklist-*-step).
 	LeadChecklistStepFromID     string
 	LeadChecklistStepToID       string
@@ -194,6 +195,12 @@ func parseFlags(args []string, c *Config) error {
 					return err
 				}
 				c.LeadChecklistYAML = val
+			case k == "--checklist-tracker-yaml":
+				val, err := needVal(k, v, ok, args, &i)
+				if err != nil {
+					return err
+				}
+				c.ChecklistTrackerYAML = val
 			case k == "--lead-checklist-from-step":
 				val, err := needVal(k, v, ok, args, &i)
 				if err != nil {
@@ -435,6 +442,22 @@ func validate(c *Config) error {
 	if c.LeadChecklistYAML != "" && !fileReadable(c.LeadChecklistYAML) {
 		return fmt.Errorf("lead checklist yaml is not a readable file: %s", c.LeadChecklistYAML)
 	}
+	if c.ChecklistTrackerYAML != "" {
+		if strings.TrimSpace(c.LeadChecklistYAML) == "" {
+			return fmt.Errorf("--checklist-tracker-yaml requires --lead-checklist-yaml")
+		}
+		def, err := filepath.Abs(filepath.Clean(c.LeadChecklistYAML))
+		if err != nil {
+			return err
+		}
+		track, err := filepath.Abs(filepath.Clean(c.ChecklistTrackerYAML))
+		if err != nil {
+			return err
+		}
+		if def == track {
+			return fmt.Errorf("--checklist-tracker-yaml must not equal --lead-checklist-yaml")
+		}
+	}
 	hasStepBound := strings.TrimSpace(c.LeadChecklistStepFromID) != "" || strings.TrimSpace(c.LeadChecklistStepToID) != ""
 	if hasStepBound && strings.TrimSpace(c.LeadChecklistYAML) == "" {
 		return fmt.Errorf("--lead-checklist-from-step and --lead-checklist-to-step require --lead-checklist-yaml")
@@ -463,6 +486,7 @@ Options:
   -w, --workspace PATH     (default: current directory)
   -m, --model MODEL        (default: Auto)
   -c, --lead-checklist-yaml PATH
+      --checklist-tracker-yaml PATH  (writable per-request Authoritative Tracker; must differ from -c)
       --lead-checklist-from-step ID-or-slug   (optional inclusive lower; main steps only)
       --lead-checklist-to-step ID-or-slug     (optional inclusive upper; main steps only)
       --lead-checklist-skip-sub

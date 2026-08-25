@@ -1,0 +1,17 @@
+[
+  {
+    "id": "production-apply-disposition",
+    "direction": "production",
+    "statementId": "gotest-ApplyTrackerDisposition",
+    "kind": "behavior",
+    "value": "ApplyTrackerDisposition atomically merges one validated receipt into Tracker state",
+    "order": 1,
+    "reliable": true,
+    "source": {
+      "location": "tools/agentstream/checklist/tracker_writer.go:45",
+      "line": 45
+    },
+    "provenance": "checklist-gate-enforcement-dogfood",
+    "blockRevision": "current"
+  }
+]

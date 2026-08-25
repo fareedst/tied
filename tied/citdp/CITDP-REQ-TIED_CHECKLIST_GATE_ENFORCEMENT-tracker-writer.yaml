@@ -1,0 +1,73 @@
+CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-tracker-writer:
+  change_definition:
+    current_behavior: "Agentstream renders checklist Turns and captures assistant transcripts but does not persist disposition-bearing per-request Tracker state. Raw checklist copies can omit a top-level sub-adversarial-inquiry-pass state row, while execution_evidence.completed cannot satisfy the checklist evidence gate."
+    desired_behavior: "Agentstream materializes a state-only Authoritative Tracker, requires a strict current-step completion receipt, atomically writes disposition evidence, invalidates downstream state on loop-back, and emits output accepted by the existing shared checklist gate and tied_verify boundary."
+    success_criteria:
+      - "A checklist Turn cannot advance without a valid matching completion receipt."
+      - "Fresh materialization includes every main step and sub-adversarial-inquiry-pass."
+      - "Invalid gate input causes tied_verify to report no status updates."
+      - "Loop-back clears configured downstream dispositions and evidence before rerouting."
+      - "Writer output passes or fails the existing shared gate for the expected reasons."
+  completion_criteria:
+    activation:
+      phase: "verification"
+      request_token: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      run_id: "build-plan-verification-20260824"
+    build_plan_gate_receipt: "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/gate-build-plan-pre_implementation.json"
+    close_out_gate_receipt: "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/gate-build-plan-close_out.json"
+    implementation_complete_when:
+      - "Go writer modules and runner composition land with passing unit and composition tests."
+      - "Integrated inquiry runs complete for pre_implementation, verification, and close_out with distinct run_ids."
+      - "TypeScript gate and tied_verify dry-run consume Go writer fixture."
+    plan_ready_status: "implemented"
+    verification_gate_receipt: "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/gate-build-plan-verification.json"
+  record_identity:
+    change_request_id: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    record_status: "complete"
+    title: "Authoritative Tracker writer and gate composition"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "A loop-back reruns earlier work while stale downstream evidence remains completed."
+        - "A raw checklist copy omits sub-adversarial-inquiry-pass from top-level steps."
+        - "A successful agent subprocess advances without a Tracker completion receipt."
+        - "A writer partially overwrites the Tracker and leaves invalid YAML."
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "Go unit and process-composition tests pass for materialization, receipt validation, atomic writes, and loop-back invalidation."
+        - "tied_checklist_activation_collect and tied_checklist_gate_validate pass for all three integrated phases."
+        - "TypeScript composition fixtures accept valid writer output and reject sparse, pending, or unpaired output."
+      evidence_references:
+        - "docs/checklist-adherence-improvement-plan.md"
+        - "mcp-server/src/checklist-validator.test.ts"
+        - "mcp-server/src/verify.test.ts"
+        - "tools/agentstream/checklist/tracker_test.go"
+        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-close_out/"
+        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-pre_implementation/"
+        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-verification/"
+      falsification_questions:
+        - "Can a failed write or conflicting replay alter the prior Tracker?"
+        - "Can a mismatched receipt slug update a different step?"
+        - "Can execution_evidence.completed make a sparse Tracker pass?"
+        - "Can tied_verify mutate status when the writer output fails the checklist gate?"
+      gate_policy: "advisory"
+      inquiry_runs:
+        - artifact_dir: "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-pre_implementation/"
+          phase: "pre_implementation"
+          run_id: "build-plan-pre-impl-20260824"
+        - artifact_dir: "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-verification/"
+          phase: "verification"
+          run_id: "build-plan-verification-20260824"
+        - artifact_dir: "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-close_out/"
+          phase: "close_out"
+          run_id: "build-plan-close-out-20260824"
+      prior_depth_tier: "minimal"
+      profile_depth: "not_measured"
+  test_strategy:
+    commands:
+      - "go test ./tools/agentstream/..."
+      - "node --test mcp-server/dist/checklist-validator.test.js mcp-server/dist/verify.test.js"
+      - "npm run build --prefix mcp-server"
+    composition_tests:
+      - "Fake cursor agent transcript updates the current StepStub before turn N+1."
+      - "Go-emitted Tracker fixture is consumed by validateChecklistGate and tied_verify dry-run."

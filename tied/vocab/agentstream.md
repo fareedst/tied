@@ -21,6 +21,10 @@
 | **ParseAndResolve** | parse argv | Entry config resolution in `config` package |
 | **dry-run** | preview run | `-d` / `--dry-run`; prints argv per turn, no subprocess |
 | **agentstream_control** | control json | Explicit fenced JSON schema for checklist routing ([REQ-GOAGENT-CHECKLIST-CONTROL](../requirements/REQ-GOAGENT-CHECKLIST-CONTROL.yaml)) |
+| **Authoritative Tracker** | copied checklist, completion list | Persisted per-request `checklist-tracker.v1` state supplied to the checklist evidence gate; distinct from the read-only checklist definition and from a synthetic projection |
+| **Tracker completion receipt** | completion prose, successful turn | Strict fenced `agentstream_tracker` JSON emitted for the current `StepStub`; carries one disposition and its evidence contract |
+| **Tracker writer** | checklist updater, status writer | Agentstream component that validates one Tracker completion receipt and atomically updates the explicit per-request Tracker without mutating the checklist definition |
+| **`--checklist-tracker-yaml`** | checklist state path | Writable per-request Authoritative Tracker path; distinct from read-only `--lead-checklist-yaml` definition |
 | **run-feature-batch-agentstream** | tasd (alone) | Shell driver: `scripts/run-feature-batch-agentstream.sh` |
 
 ---
@@ -83,7 +87,8 @@ Default **`pipeline.Build`** concatenation (see [IMPL-GOAGENT-PIPELINE-pseudocod
 | `-s`, `--session-id` | `SessionID` | Required when `-f` > 1 |
 | `-f`, `--first-turn` | `FirstTurn` | 1-based slice after Build |
 | `-w`, `--workspace` | `Workspace` | Default cwd |
-| `-c`, `--lead-checklist-yaml` | `LeadChecklistYAML` | Lead checklist path |
+| `-c`, `--lead-checklist-yaml` | `LeadChecklistYAML` | Read-only lead checklist definition path |
+| `--checklist-tracker-yaml` | `ChecklistTrackerYAML` | Writable per-request Authoritative Tracker path (planned; build-plan Stage D) |
 | `--lead-checklist-from-step` | `LeadChecklistStepFromID` | Inclusive lower bound (slug or id) |
 | `--lead-checklist-to-step` | `LeadChecklistStepToID` | Inclusive upper bound |
 | `--lead-checklist-skip-sub` | `LeadChecklistSkipSub` | Omit `sub_procedures` |
@@ -145,6 +150,11 @@ const VerifySessionPrompt = "what was the most recent prompt?"
 | Parse control JSON | `PARSE_CONTROL` | [IMPL-GOAGENT-CHECKLIST-CONTROL](../implementation-decisions/IMPL-GOAGENT-CHECKLIST-CONTROL.yaml) |
 | Validate control | `VALIDATE_CONTROL` | [IMPL-GOAGENT-CHECKLIST-CONTROL](../implementation-decisions/IMPL-GOAGENT-CHECKLIST-CONTROL.yaml) |
 | Apply control | `APPLY_CONTROL` | [IMPL-GOAGENT-CHECKLIST-CONTROL](../implementation-decisions/IMPL-GOAGENT-CHECKLIST-CONTROL.yaml) |
+| Authoritative Tracker materialization | `MATERIALIZE_AUTHORITATIVE_TRACKER` | [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT](../implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml) |
+| Tracker completion receipt parsing | `PARSE_TRACKER_COMPLETION_RECEIPT` | [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT](../implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml) |
+| Tracker disposition write | `APPLY_TRACKER_DISPOSITION` | [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT](../implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml) |
+| Tracker loop-back invalidation | `INVALIDATE_TRACKER_DOWNSTREAM` | [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT](../implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml) |
+| Runner Tracker composition | `COMPOSE_TRACKER_WITH_CHECKLIST_GATE` | [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT](../implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml) · wired from [IMPL-GOAGENT-CLI-CMD](../implementation-decisions/IMPL-GOAGENT-CLI-CMD.yaml) |
 
 ---
 
@@ -155,6 +165,8 @@ const VerifySessionPrompt = "what was the most recent prompt?"
 | agentstream | Preferred terms |
 | agentstream_control | Preferred terms |
 | ApplyPromptFilePreload | Pseudo-code blocks |
+| Authoritative Tracker | Preferred terms |
+| `--checklist-tracker-yaml` | Preferred terms |
 | ChainFromPrevious | Preferred terms |
 | checklist_messages | Pseudo-code blocks |
 | dry-run | Preferred terms |
@@ -165,5 +177,7 @@ const VerifySessionPrompt = "what was the most recent prompt?"
 | pipeline Build | Preferred terms |
 | pipeline_Build | Pseudo-code blocks |
 | ReadPromptFilePreload | Pseudo-code blocks |
+| Tracker completion receipt | Preferred terms |
+| Tracker writer | Preferred terms |
 | Turn | Preferred terms |
 | VerifySessionPrompt | Core types |

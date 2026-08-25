@@ -1,0 +1,51 @@
+gate_contract:
+  depth_selection_before_inquiry: true
+  dispositions:
+    - "completed"
+    - "not_applicable"
+    - "pending"
+    - "waived"
+  fail_closed: true
+  loop_back_invalidates_downstream_evidence: true
+  phases:
+    - "close_out"
+    - "pre_implementation"
+    - "verification"
+  required_artifacts:
+    - "evidence-provenance.json"
+    - "finding-ledger.jsonl"
+    - "gate-result.json"
+    - "obligation-report.json"
+name: "gate_fixture_checklist"
+process_token: "[PROC-TEST]"
+steps:
+  - slug: "session-bootstrap"
+    tasks:
+      - "boot"
+    title: "Bootstrap"
+  - slug: "translate-sponsor-intent"
+    tasks:
+      - "translate"
+    title: "Translate"
+  - slug: "change-definition"
+    tasks:
+      - "change"
+    title: "Change"
+  - slug: "impact-discovery"
+    tasks:
+      - "impact"
+    title: "Impact"
+  - slug: "risk-assessment"
+    tasks:
+      - "risk"
+    title: "Risk"
+  - slug: "test-strategy"
+    tasks:
+      - "strategy"
+    title: "Test strategy"
+sub_procedures:
+  - slug: "sub-adversarial-inquiry-pass"
+    tasks:
+      - "inquiry"
+    title: "Inquiry"
+version: "0"

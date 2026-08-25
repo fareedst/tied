@@ -6,6 +6,11 @@ REQ-TIED_CHECKLIST_GATE_ENFORCEMENT:
     - "PROC-AGENT_REQ_CHECKLIST"
     - "REQ-TIED_ADVERSARIAL_INQUIRY"
   description: "Every governed behavior-changing workflow must validate Tracker dispositions and the selected adversarial inquiry depth before progression. Minimal depth requires explicit counterexamples and falsification questions; integrated depth requires identity-matched inquiry execution and all four bounded artifacts. Missing, malformed, stale, or unjustified evidence blocks progression."
+  metadata:
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-24"
+      reason: "Add criterion_id fields for Mode B integrated inquiry dogfood (A8 blocker fix)"
   name: "Machine-enforced checklist evidence gates"
   priority: "P1"
   rationale:
@@ -26,10 +31,15 @@ REQ-TIED_CHECKLIST_GATE_ENFORCEMENT:
     supersedes: []
   satisfaction_criteria:
     - criterion: "A governed workflow cannot pass pre-implementation, verification, or close-out with pending required Tracker steps."
+      criterion_id: "pending-tracker-steps-blocked"
     - criterion: "Completed, not-applicable, and waived dispositions each require their prescribed evidence or approval fields; generic skip is rejected."
+      criterion_id: "disposition-evidence-contracts"
     - criterion: "Integrated adversarial depth requires a matching inquiry execution receipt and valid obligation-report.json, finding-ledger.jsonl, gate-result.json, and evidence-provenance.json artifacts."
+      criterion_id: "integrated-activation-pairing"
     - criterion: "Minimal adversarial depth requires at least one scoped counterexample, falsification question, disconfirming observation, and evidence reference."
+      criterion_id: "minimal-adversarial-evidence"
     - criterion: "Status verification and feature close-out consume the same gate result and cannot rely on caller-supplied booleans alone."
+      criterion_id: "verify-consumes-gate-result"
   traceability:
     architecture:
       - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"

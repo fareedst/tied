@@ -1,0 +1,39 @@
+gate_contract:
+  depth_selection_before_inquiry: true
+  dispositions:
+    - "completed"
+    - "not_applicable"
+    - "pending"
+    - "waived"
+  fail_closed: true
+  loop_back_invalidates_downstream_evidence: true
+  phases:
+    - "close_out"
+    - "pre_implementation"
+    - "verification"
+  required_artifacts:
+    - "evidence-provenance.json"
+    - "finding-ledger.jsonl"
+    - "gate-result.json"
+    - "obligation-report.json"
+loop_back_clearance:
+  step-one:
+    clear_slugs:
+      - "step-two"
+name: "tracker_receipt_fixture"
+process_token: "[PROC-TEST]"
+steps:
+  - slug: "step-one"
+    tasks:
+      - "Complete step one and emit agentstream_tracker receipt."
+    title: "First step"
+  - slug: "step-two"
+    tasks:
+      - "This turn proves turn N+1 ran after a valid receipt on step-one."
+    title: "Second step sentinel"
+sub_procedures:
+  - slug: "sub-adversarial-inquiry-pass"
+    tasks:
+      - "CALL when integrated depth requires inquiry."
+    title: "Adversarial inquiry"
+version: "0"

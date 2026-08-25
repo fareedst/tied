@@ -1,0 +1,52 @@
+depth_tier: minimal
+execution_evidence:
+    completed:
+        - session-bootstrap
+        - translate-sponsor-intent
+        - change-definition
+        - impact-discovery
+        - risk-assessment
+        - test-strategy
+    request: REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+gate_policy: advisory
+name: writer-gate-minimal-fixture
+request_token: REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+schema_version: checklist-tracker.v1
+source_document: tools/agentstream/checklist/testdata/gate-fixture-checklist.yaml
+state_history: []
+steps:
+    - disposition: completed
+      evidence_refs:
+        - tools/agentstream/checklist/tracker_test.go
+      kind: main
+      slug: session-bootstrap
+    - disposition: completed
+      evidence_refs:
+        - tools/agentstream/checklist/tracker_test.go
+      kind: main
+      slug: translate-sponsor-intent
+    - disposition: completed
+      evidence_refs:
+        - tools/agentstream/checklist/tracker_test.go
+      kind: main
+      slug: change-definition
+    - disposition: completed
+      evidence_refs:
+        - tools/agentstream/checklist/tracker_test.go
+      kind: main
+      slug: impact-discovery
+    - disposition: completed
+      evidence_refs:
+        - tools/agentstream/checklist/tracker_test.go
+      kind: main
+      slug: risk-assessment
+    - disposition: completed
+      evidence_refs:
+        - tools/agentstream/checklist/tracker_test.go
+      kind: main
+      slug: test-strategy
+    - disposition: not_applicable
+      kind: sub_procedure
+      policy: minimal-depth-no-inquiry
+      rationale: Go writer fixture for minimal pre_implementation gate composition.
+      slug: sub-adversarial-inquiry-pass

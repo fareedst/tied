@@ -23,6 +23,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   UI-free: A12, A15, and A17 are unit-only, macOS UI visibility is not established, and
   `REQ-LISTENING_PORT_REPORT` remains out of scope.
 
+- **Authoritative Tracker writer ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  agentstream materializes state-only `checklist-tracker.v1` Authoritative Trackers,
+  requires strict per-turn completion receipts before advancing checklist Turns,
+  atomically merges disposition evidence via `ApplyTrackerDisposition`, invalidates
+  downstream rows on loop-back, and composes with the existing shared
+  `tied_checklist_gate_validate` / `tied_verify` boundary without a second gate
+  evaluator. Go modules: `tracker.go`, `tracker_writer.go`, `tracker_receipt.go`;
+  composition tests in `tracker_composition_test.go`; TypeScript fixtures consume
+  `gate-writer-minimal-tracker.yaml`. CITDP:
+  `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-tracker-writer`.
+
 - **Build-plan 6 optional hygiene (2026-08-24)** — Closes the outstanding-work prioritized plan
   sequence (build-plans 1–6). F4 automated YAML/Markdown adversarial task marker parity test
   (`checklist-yaml-md-parity.test.ts`, 19 cases); canonical `npm test` runner documented in

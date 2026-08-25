@@ -7,6 +7,8 @@ import assert from "node:assert";
 import fs from "node:fs";
 import path from "node:path";
 import os from "node:os";
+import { fileURLToPath } from "node:url";
+import yaml from "js-yaml";
 import { updateStatusFromPassedTokens } from "./verify.js";
 import { clearBasePathCache } from "./yaml-loader.js";
 
@@ -137,6 +139,97 @@ REQ-TWO:
       assert.strictEqual(r.dry_run, true);
       assert.deepStrictEqual(r.would_update, []);
 
+      const disk = fs.readFileSync(reqPath, "utf8");
+      assert.ok(disk.includes("status: Planned"));
+    } finally {
+      delete process.env.TIED_BASE_PATH;
+      clearBasePathCache();
+      fs.rmSync(dir, { recursive: true });
+    }
+  });
+
+  it("A9 dry_run rejects invalid Go writer tracker input with no would_update", () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-verify-writer-invalid-"));
+    const reqPath = path.join(dir, "requirements.yaml");
+    fs.writeFileSync(
+      reqPath,
+      `REQ-TIED_CHECKLIST_GATE_ENFORCEMENT:
+  status: Planned
+  name: Gate enforcement
+`,
+      "utf8",
+    );
+    try {
+      process.env.TIED_BASE_PATH = dir;
+      clearBasePathCache();
+      const result = updateStatusFromPassedTokens({
+        dry_run: true,
+        checklist_gate: {
+          phase: "verification",
+          tracker: {
+            execution_evidence: { completed: ["verification-gate"] },
+          },
+          citdp: {
+            risk_analysis: {
+              adversarial_inquiry: {
+                depth_tier: "integrated",
+                gate_policy: "advisory",
+                counterexamples: ["sparse tracker"],
+                falsification_questions: ["Can status update without step rows?"],
+                disconfirming_observations: ["verify revalidates gate input"],
+                evidence_references: ["verify.test.ts"],
+              },
+            },
+          },
+        },
+        passed_requirement_tokens: ["REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"],
+      });
+      assert.equal(result.ok, false);
+      assert.ok(result.diagnostics?.includes("tracker_sparse"));
+      assert.strictEqual(result.would_update, undefined);
+      const disk = fs.readFileSync(reqPath, "utf8");
+      assert.ok(disk.includes("status: Planned"));
+    } finally {
+      delete process.env.TIED_BASE_PATH;
+      clearBasePathCache();
+      fs.rmSync(dir, { recursive: true });
+    }
+  });
+
+  it("A9 dry_run accepts valid Go writer gate input and reports would_update only", () => {
+    const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
+    const writerFixturePath = path.join(
+      repoRoot,
+      "tools/agentstream/checklist/testdata/gate-writer-minimal-tracker.yaml",
+    );
+    const tracker = yaml.load(fs.readFileSync(writerFixturePath, "utf8")) as Record<string, unknown>;
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-verify-writer-valid-"));
+    const reqPath = path.join(dir, "requirements.yaml");
+    fs.writeFileSync(
+      reqPath,
+      `REQ-TIED_CHECKLIST_GATE_ENFORCEMENT:
+  status: Planned
+  name: Gate enforcement
+`,
+      "utf8",
+    );
+    try {
+      process.env.TIED_BASE_PATH = dir;
+      clearBasePathCache();
+      const result = updateStatusFromPassedTokens({
+        dry_run: true,
+        checklist_gate: {
+          phase: "pre_implementation",
+          tracker,
+          citdp: validChecklistGate().citdp,
+        },
+        passed_requirement_tokens: ["REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"],
+      });
+      assert.equal(result.ok, true);
+      assert.strictEqual(result.dry_run, true);
+      assert.ok(Array.isArray(result.would_update));
+      assert.equal(result.would_update!.length, 1);
+      assert.strictEqual(result.would_update![0]!.token, "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT");
       const disk = fs.readFileSync(reqPath, "utf8");
       assert.ok(disk.includes("status: Planned"));
     } finally {

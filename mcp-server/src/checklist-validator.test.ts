@@ -1,5 +1,9 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { describe, it } from "node:test";
+import yaml from "js-yaml";
 
 import {
   deriveExpectedFromReceipt,
@@ -755,5 +759,93 @@ describe("VALIDATE_MINIMAL_WAIVER Slice A3 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
       },
     });
     assert.equal(clean.ok, true);
+  });
+});
+
+// [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: Go writer fixture consumed by shared checklist gate (Stage E).
+describe("Go writer fixture gate composition [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]", () => {
+  const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
+  const writerFixturePath = path.join(
+    repoRoot,
+    "tools/agentstream/checklist/testdata/gate-writer-minimal-tracker.yaml",
+  );
+
+  function loadWriterFixture(): Record<string, unknown> {
+    return yaml.load(fs.readFileSync(writerFixturePath, "utf8")) as Record<string, unknown>;
+  }
+
+  const minimalCitdp = {
+    risk_analysis: {
+      adversarial_inquiry: {
+        depth_tier: "minimal",
+        counterexamples: ["sparse tracker"],
+        falsification_questions: ["Can execution_evidence.completed substitute for steps?"],
+        disconfirming_observations: ["writer emits authoritative step rows"],
+        evidence_references: ["tools/agentstream/checklist/tracker_test.go"],
+      },
+    },
+  };
+
+  it("A1 rejects sparse legacy summary without matching step rows", () => {
+    const sparse = validateChecklistGate({
+      phase: "verification",
+      tracker: {
+        execution_evidence: { completed: ["change-definition", "impact-discovery"] },
+      },
+      citdp: {
+        risk_analysis: {
+          adversarial_inquiry: {
+            depth_tier: "integrated",
+            gate_policy: "advisory",
+            counterexamples: ["sparse tracker"],
+            falsification_questions: ["Can execution_evidence.completed substitute for steps?"],
+            disconfirming_observations: ["writer emits authoritative step rows"],
+            evidence_references: ["tools/agentstream/checklist/tracker_test.go"],
+          },
+        },
+      },
+    });
+    assert.equal(sparse.allowed, false);
+    assert.ok(sparse.diagnostics.includes("tracker_sparse"));
+  });
+
+  it("A6 passes minimal pre_implementation gate for Go writer fixture", () => {
+    const result = validateChecklistGate({
+      phase: "pre_implementation",
+      tracker: loadWriterFixture(),
+      citdp: minimalCitdp,
+    });
+    assert.equal(result.allowed, true);
+    assert.equal(result.depth, "minimal");
+  });
+
+  it("A7 fails integrated writer output without activation under advisory policy", () => {
+    const tracker = loadWriterFixture();
+    const steps = (tracker.steps as Record<string, unknown>[]).map((row) => ({ ...row }));
+    for (const row of steps) {
+      if (row.slug === "sub-adversarial-inquiry-pass") {
+        row.disposition = "pending";
+        delete row.policy;
+        delete row.rationale;
+      }
+    }
+    const result = validateChecklistGate({
+      phase: "verification",
+      tracker: { ...tracker, steps },
+      citdp: {
+        risk_analysis: {
+          adversarial_inquiry: {
+            depth_tier: "integrated",
+            gate_policy: "advisory",
+            counterexamples: ["missing activation"],
+            falsification_questions: ["Can integrated pass without pairing?"],
+            disconfirming_observations: ["gate requires activation"],
+            evidence_references: ["checklist-validator.test.ts"],
+          },
+        },
+      },
+    });
+    assert.equal(result.allowed, false);
+    assert.ok(result.diagnostics.includes("integrated_depth_requires_pairing"));
   });
 });

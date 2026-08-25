@@ -352,6 +352,101 @@ procedure COLLECT_CHECKLIST_ACTIVATION(input):
   IF metrics_path supplied: locate metrics row with matching run_id; mismatch fails closed; absence is diagnostic only
   RETURN { receipt, artifacts, expected }
 
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: convert read-only checklist definition into clean per-request Authoritative Tracker state including gate-governed sub-procedures.
+procedure MATERIALIZE_AUTHORITATIVE_TRACKER(definition_path, tracker_path, request_token):
+  Contract:
+  INPUT: definition_path, tracker_path, optional request_token
+  PRE: definition_path is readable checklist YAML; tracker_path is not the canonical definition path; tracker_path differs from definition_path
+  OUTPUT: materialized tracker map or error
+  POST: every main step slug and sub-adversarial-inquiry-pass appear exactly once as pending rows with kind main or sub_procedure; execution_evidence.completed is empty; inherited dispositions, gate receipts, and close_out evidence are cleared; schema_version is checklist-tracker.v1; source_document equals definition_path
+  FAILURE_MODES: definition_not_readable, tracker_path_is_definition, duplicate_slug, missing_gate_sub_procedure, invalid_definition
+  DATA_TRANSITION: checklist definition steps and sub_procedures become tracker.steps pending rows; execution_evidence.request set from request_token when supplied
+  EFFECTS: writes tracker_path atomically when materializing to disk
+  TERMINATION: total
+  IF tracker_path equals definition_path OR tracker_path is canonical definition: RETURN tracker_path_is_definition
+  slugs := collect main step slugs from definition in document order
+  IF sub-adversarial-inquiry-pass missing from sub_procedures: RETURN missing_gate_sub_procedure
+  append sub-adversarial-inquiry-pass as sub_procedure row when not already present as main slug
+  IF duplicate slug detected: RETURN duplicate_slug
+  initialize every row disposition pending with no evidence, waiver, or gate fields
+  set execution_evidence.completed to empty derived-compatible list
+  WRITE tracker atomically
+
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: parse strict agentstream_tracker completion receipt from captured assistant transcript without mutating routing semantics.
+procedure PARSE_TRACKER_COMPLETION_RECEIPT(transcript, expected_slug):
+  Contract:
+  INPUT: transcript text, expected_slug current StepStub
+  PRE: expected_slug is non-empty when receipt is required
+  OUTPUT: parsed receipt or absent; validation diagnostics on malformed input
+  POST: when present, receipt slug equals expected_slug; disposition is completed, not_applicable, or waived with matching evidence contract; schema_version is 1; unknown fields rejected; generic skipped is invalid
+  FAILURE_MODES: missing_receipt, malformed_receipt, wrong_slug, unsupported_schema, unknown_field, invalid_disposition, missing_disposition_evidence, skipped_disposition_rejected
+  EFFECTS: pure
+  TERMINATION: total
+  scan fenced JSON blocks latest-first for agentstream_tracker envelope
+  IF envelope missing: RETURN missing_receipt
+  IF schema_version is not 1 OR unknown keys present: RETURN unsupported_schema or unknown_field
+  IF slug differs from expected_slug: RETURN wrong_slug
+  IF disposition is skipped: RETURN skipped_disposition_rejected
+  validate disposition-specific evidence identically to VALIDATE_TRACKER row contract
+  RETURN normalized receipt
+
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: merge one validated receipt into exactly one Tracker step and recompute derived compatibility summary only after authoritative write succeeds.
+procedure APPLY_TRACKER_DISPOSITION(tracker_path, receipt, turn_identity):
+  Contract:
+  INPUT: tracker_path, validated receipt, turn_identity
+  PRE: receipt passed PARSE_TRACKER_COMPLETION_RECEIPT; tracker_path exists and is writable
+  OUTPUT: updated tracker or error
+  POST: exactly one matching step changes disposition and evidence fields; unrelated tracker fields remain semantically equal; state_history appends bounded audit entry unless idempotent replay; execution_evidence.completed is derived from completed step slugs after write; prior file bytes remain valid on any failure
+  FAILURE_MODES: tracker_not_found, step_not_found, conflicting_replay, write_failure, validation_failure
+  DATA_TRANSITION: receipt fields merge into matching steps row; execution_evidence.completed regenerated from steps
+  EFFECTS: atomic filesystem write via same-directory temp file, fsync, rename
+  TERMINATION: total
+  prior := read tracker_path
+  IF prior state_history contains same turn_identity and receipt hash: RETURN success idempotent
+  IF prior state_history contains same turn_identity and different receipt hash: RETURN conflicting_replay
+  updated := merge receipt into exactly one step row
+  updated.execution_evidence.completed := derive completed slugs from steps only
+  append state_history entry with turn_identity, receipt hash, updated_at
+  WRITE updated atomically; on failure leave prior unchanged
+
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: apply loop_back_clearance target slugs by resetting downstream dispositions and evidence before queue replacement.
+procedure INVALIDATE_TRACKER_DOWNSTREAM(tracker_path, definition_path, goto_target):
+  Contract:
+  INPUT: tracker_path, definition_path, goto_target slug
+  PRE: definition_path exposes loop_back_clearance for goto_target; tracker_path is Authoritative Tracker
+  OUTPUT: updated tracker or error
+  POST: every configured clear_slug row returns to pending with disposition evidence, waiver fields, gate summaries, and derived execution_evidence.completed entries cleared; checklist definition bytes never change
+  FAILURE_MODES: missing_clear_target, missing_state_row, write_failure
+  DATA_TRANSITION: listed step rows reset to pending; execution_evidence.completed and close_out gate summaries cleared for affected slugs
+  EFFECTS: atomic filesystem write
+  TERMINATION: total
+  clear_slugs := definition.loop_back_clearance[goto_target].clear_slugs
+  IF clear_slugs missing or empty: RETURN missing_clear_target
+  FOR each slug in clear_slugs: IF tracker row missing THEN RETURN missing_state_row; reset row to pending and clear evidence
+  recompute execution_evidence.completed from remaining completed rows
+  WRITE tracker atomically; on failure leave prior unchanged
+
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: wire executor transcript through receipt parser and writer before advancing checklist turns; route goto through downstream invalidation first.
+procedure COMPOSE_TRACKER_WITH_CHECKLIST_GATE(cfg, turn, transcript):
+  Contract:
+  INPUT: cfg with definition_path and tracker_path, current turn, captured transcript
+  PRE: when turn.StepStub is non-empty and control action is not goto, a valid current-step receipt is required; tracker_path must not equal definition_path
+  OUTPUT: progression allowed or process exit non-zero
+  POST: checklist turn N+1 never runs without successful APPLY_TRACKER_DISPOSITION for turn N unless goto invalidated downstream first; non-checklist turns skip receipt requirement; canonical checklist bytes remain unchanged; writer output is consumable by VALIDATE_CHECKLIST_GATE without synthetic adapter
+  FAILURE_MODES: missing_receipt, malformed_receipt, wrong_slug, tracker_write_failure, loop_back_persistence_failure, tracker_path_is_definition
+  DATA_TRANSITION: transcript to receipt to tracker state; goto replaces remaining queue after INVALIDATE_TRACKER_DOWNSTREAM succeeds
+  EFFECTS: mutates tracker_path only; never mutates definition_path
+  TERMINATION: total
+  IF tracker_path missing on disk: MATERIALIZE_AUTHORITATIVE_TRACKER
+  IF existing tracker: validate source_document and request_token identity against cfg
+  decision := PARSE agentstream_control from transcript when present
+  IF decision.action is goto: INVALIDATE_TRACKER_DOWNSTREAM then allow routing without current-step completion receipt
+  ELSE IF turn.StepStub is non-empty:
+    receipt := PARSE_TRACKER_COMPLETION_RECEIPT(transcript, turn.StepStub)
+    APPLY_TRACKER_DISPOSITION with turn identity
+  ELSE: allow progression without receipt
+  RETURN allow next turn
+
 # [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: persist CITDP using open-record validation; progression gates remain separate.
 procedure WRITE_CITDP_RECORD(filename, record): # [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
   Contract:

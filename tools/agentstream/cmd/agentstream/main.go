@@ -122,6 +122,13 @@ func main() {
 		os.Exit(0)
 	}
 
+	if strings.TrimSpace(cfg.ChecklistTrackerYAML) != "" {
+		if err := checklist.EnsureTracker(cfg.LeadChecklistYAML, cfg.ChecklistTrackerYAML, trackerRequestToken(cfg)); err != nil {
+			fmt.Fprintf(os.Stderr, "agentstream: tracker ensure failed: %v\n", err)
+			os.Exit(1)
+		}
+	}
+
 	ctx := context.Background()
 	running := ""
 	knownSlugs := pipeline.KnownStepStubs(turns)
@@ -153,12 +160,19 @@ func main() {
 		}
 		fmt.Fprintf(os.Stderr, "session_id=%s\n", sid)
 		running = string(sid)
-		decision, ok, err := control.Parse(transcript)
+		decision, controlOK, err := control.Parse(transcript)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "agentstream: control parse error: %v\n", err)
 			os.Exit(1)
 		}
-		if !ok {
+		usingTracker := strings.TrimSpace(cfg.ChecklistTrackerYAML) != ""
+		if usingTracker {
+			if err := handleTrackerTurn(cfg, i, t, transcript, decision, controlOK, string(sid)); err != nil {
+				fmt.Fprintf(os.Stderr, "agentstream: tracker composition failed: %v\n", err)
+				os.Exit(1)
+			}
+		}
+		if !controlOK {
 			continue
 		}
 		if err := control.Validate(decision, knownSlugs); err != nil {
@@ -166,7 +180,16 @@ func main() {
 			os.Exit(1)
 		}
 		if decision.Action == control.ActionGoto {
-			if cfg.LeadChecklistYAML != "" {
+			if usingTracker {
+				cleared, err := checklist.InvalidateTrackerDownstream(cfg.ChecklistTrackerYAML, cfg.LeadChecklistYAML, decision.Target)
+				if err != nil {
+					fmt.Fprintf(os.Stderr, "agentstream: tracker loop-back invalidation failed: %v\n", err)
+					os.Exit(1)
+				}
+				if len(cleared) > 0 {
+					fmt.Fprintf(os.Stderr, "DIAGNOSTIC: agentstream_control goto %s; cleared tracker slugs: %s\n", decision.Target, strings.Join(cleared, ", "))
+				}
+			} else if cfg.LeadChecklistYAML != "" {
 				cleared, err := checklist.ApplyLoopBackClearance(cfg.LeadChecklistYAML, decision.Target)
 				if err != nil {
 					fmt.Fprintf(os.Stderr, "agentstream: loop-back clearance failed: %v\n", err)
@@ -186,6 +209,37 @@ func main() {
 			fmt.Fprintf(os.Stderr, "DIAGNOSTIC: agentstream_control goto %s: %s\n", decision.Target, decision.Reason)
 		}
 	}
+}
+
+func trackerRequestToken(cfg *config.Config) string {
+	for _, key := range []string{"REQUEST", "REQ_TOKEN", "REQUEST_TOKEN"} {
+		if v := strings.TrimSpace(cfg.ChecklistVars[key]); v != "" {
+			return v
+		}
+	}
+	return ""
+}
+
+func handleTrackerTurn(cfg *config.Config, turnIndex int, turn agentstream.Turn, transcript string, decision control.Decision, controlOK bool, sessionID string) error {
+	if controlOK && decision.Action == control.ActionGoto {
+		return nil
+	}
+	if strings.TrimSpace(turn.StepStub) == "" {
+		return nil
+	}
+	receipt, ok, err := checklist.ParseTrackerCompletionReceipt(transcript, turn.StepStub)
+	if err != nil {
+		return err
+	}
+	if !ok {
+		return fmt.Errorf("missing_receipt for step %q", turn.StepStub)
+	}
+	identity := checklist.TurnIdentity{
+		TurnIndex: turnIndex + cfg.FirstTurn,
+		StepStub:  turn.StepStub,
+		SessionID: sessionID,
+	}
+	return checklist.ApplyTrackerDisposition(cfg.ChecklistTrackerYAML, receipt, identity)
 }
 
 func runDryRun(cfg *config.Config, turns []agentstream.Turn, chain []bool, firstTurn, originalTotal int) {

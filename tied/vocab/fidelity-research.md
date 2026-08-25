@@ -42,6 +42,7 @@ implementation decisions and pseudo-code for the research tooling.
 | **successful control change** | non-bug sample | A behavior-changing change included to estimate defect rates without selection bias. |
 | **integrated activation evidence** | activation signal, metric-only activation | Paired request-scoped inquiry metric and complete bounded artifacts demonstrating tool-backed activation. |
 | **activation artifact pairing** | artifact check, activation completeness | The rule that an inquiry metric and all four request-scoped artifacts are required together. |
+| **Authoritative Tracker** | copied checklist, execution_evidence list, synthetic tracker | Persisted per-request state artifact whose `steps` rows carry gate-readable dispositions and evidence; distinct from the canonical checklist definition and any synthetic projection. |
 | **Tracker disposition** | checklist status, generic skip | One of `pending`, `completed`, `not_applicable`, or `waived`, with disposition-specific evidence contracts. |
 | **prior depth tier** | last depth, previous depth_tier | Snapshot of `depth_tier` before the current CITDP edit. Required for **depth-change waiver** detection; null on first selection. |
 | **depth-change waiver** | integrated_waiver, depth_change_waiver, silent downgrade exception | Owner/expiry/rationale/approval allowing `depth_tier` to drop from `integrated` or `strict_candidate` to `minimal`. |
@@ -79,6 +80,7 @@ implementation decisions and pseudo-code for the research tooling.
 | Research dataset | `research-dataset` / `researchDataset` | Append-only findings, duplicate links, and case reports emitted outside audited project YAML. |
 | Integrated activation evidence | `activation-evidence` | Paired metric and artifact evidence used to classify integrated activation. |
 | Activation artifact pairing | `activation-artifact-pairing` | Completeness check joining the inquiry metric to the four bounded artifacts. |
+| Authoritative Tracker | `checklist-tracker.v1` | Per-request `steps` state consumed directly by `validateChecklistGate`; `execution_evidence.completed` is compatibility-only. |
 | Tracker disposition | `tracker-disposition` | Machine-checked disposition and evidence contract for one checklist step. |
 | Evidence remediation diagnostic | `tracker_sparse`, `tracker_not_authoritative`, `provenance_incomplete`, `finding_unresolved`, `warn_not_success`, `command_success_unproven`, `evidence_stale`, `tree_dirty_post_gate`, `activation_pairing_incomplete`, `sub_stub_pending`, `parent_child_inconsistent`, `waiver_invalid` | Stable checklist-gate diagnostics emitted alongside granular validation codes. |
 | Prior depth tier | `prior_depth_tier` | Previous `depth_tier` used to detect a downgrade on a single CITDP snapshot. |
@@ -196,6 +198,7 @@ convenience projection only and never satisfy another phase's pairing. See
 | phase-aware slug set | Preferred terms vs synonyms |
 | phase artifact directory | Preferred terms vs synonyms |
 | activation expected identity | Preferred terms vs synonyms |
+| Authoritative Tracker | Preferred terms vs synonyms |
 | placeholder waiver | Preferred terms vs synonyms |
 | prior depth tier | Preferred terms vs synonyms |
 | artifact snapshot | Naming bridge |
