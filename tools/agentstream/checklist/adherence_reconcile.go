@@ -181,7 +181,7 @@ func validateAdherenceRow(row map[string]interface{}) error {
 			}
 		}
 	case "action_attempted":
-		for _, key := range []string{"request_token", "turn_index", "step_slug", "instruction_hash", "receipt_hash"} {
+		for _, key := range []string{"request_token", "turn_index", "step_slug", "instruction_hash", "instruction_nonce"} {
 			if _, ok := corr[key]; !ok {
 				return fmt.Errorf("missing_correlation_field: %s", key)
 			}
@@ -274,8 +274,11 @@ func reconcileAckAttempt(tracker map[string]interface{}, events []AdherenceEvent
 		if len(refs) == 0 {
 			continue
 		}
-		key := attemptCorrelationKey(ev.Correlation)
+		key := liveAttemptCorrelationKey(ev.Correlation)
 		covered := attempts[key]
+		if covered == nil {
+			covered = attempts[attemptCorrelationKey(ev.Correlation)]
+		}
 		for _, ref := range refs {
 			if !covered[ref] {
 				out = append(out, ReconcileFinding{
@@ -594,22 +597,37 @@ func attemptCorrelationKey(corr map[string]interface{}) string {
 	return strings.Join(parts, "|")
 }
 
+func liveAttemptCorrelationKey(corr map[string]interface{}) string {
+	parts := []string{
+		fmt.Sprint(corr["turn_index"]),
+		strings.TrimSpace(fmt.Sprint(corr["step_slug"])),
+		strings.TrimSpace(fmt.Sprint(corr["instruction_nonce"])),
+		strings.TrimSpace(fmt.Sprint(corr["instruction_hash"])),
+	}
+	return strings.Join(parts, "|")
+}
+
 func indexActionAttempts(events []AdherenceEvent) map[string]map[string]bool {
 	out := map[string]map[string]bool{}
 	for _, ev := range events {
 		if ev.EventClass != "action_attempted" {
 			continue
 		}
-		key := attemptCorrelationKey(ev.Correlation)
-		if out[key] == nil {
-			out[key] = map[string]bool{}
+		keys := []string{liveAttemptCorrelationKey(ev.Correlation)}
+		if receipt := strings.TrimSpace(fmt.Sprint(ev.Correlation["receipt_hash"])); receipt != "" && receipt != "<nil>" {
+			keys = append(keys, attemptCorrelationKey(ev.Correlation))
 		}
-		refs, _ := ev.Raw["evidence_refs"].([]interface{})
-		for _, item := range refs {
-			ref, _ := item.(string)
-			ref = strings.TrimSpace(ref)
-			if ref != "" {
-				out[key][ref] = true
+		for _, key := range keys {
+			if out[key] == nil {
+				out[key] = map[string]bool{}
+			}
+			refs, _ := ev.Raw["evidence_refs"].([]interface{})
+			for _, item := range refs {
+				ref, _ := item.(string)
+				ref = strings.TrimSpace(ref)
+				if ref != "" {
+					out[key][ref] = true
+				}
 			}
 		}
 	}

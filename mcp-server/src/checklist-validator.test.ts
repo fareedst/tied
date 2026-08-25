@@ -849,3 +849,27 @@ describe("Go writer fixture gate composition [REQ-TIED_CHECKLIST_GATE_ENFORCEMEN
     assert.ok(result.diagnostics.includes("integrated_depth_requires_pairing"));
   });
 });
+
+// [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: Stage P normative trigger — gate must accept unresolved refs from non-agentstream Tracker writers.
+describe("Stage P trigger: non-agentstream unresolved evidence_refs", () => {
+  it("A32 trigger fires when gate accepts manual Tracker with nonexistent evidence_refs", () => {
+    const manualTracker = {
+      steps: [
+        completedStep("change-definition", "manual/nonexistent/file-that-go-would-reject.go"),
+        completedStep("impact-discovery", "another/fake/path/evidence.txt"),
+        minimalSubStubNotApplicable(),
+      ],
+    };
+    const result = validateChecklistGate({
+      phase: "verification",
+      tracker: manualTracker,
+      citdp: minimalCitdp(),
+    });
+    assert.equal(
+      result.allowed,
+      true,
+      "Stage P trigger: shared gate accepts unresolved refs bypassing Go producer resolution",
+    );
+    assert.equal(result.depth, "minimal");
+  });
+});

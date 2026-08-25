@@ -21,6 +21,7 @@ type Config struct {
 	LeadChecklistYAML     string
 	ChecklistTrackerYAML  string
 	AdherenceLedger       string
+	PreviewChecklistTrackerYAML string
 	RunID                 string
 	LeadChecklistSkipSub  bool
 	// LeadChecklistStepFromID / LeadChecklistStepToID: inclusive main-step bounds by YAML step slug (--lead-checklist-*-step).
@@ -209,6 +210,12 @@ func parseFlags(args []string, c *Config) error {
 					return err
 				}
 				c.AdherenceLedger = val
+			case k == "--checklist-tracker-preview":
+				val, err := needVal(k, v, ok, args, &i)
+				if err != nil {
+					return err
+				}
+				c.PreviewChecklistTrackerYAML = val
 			case k == "--lead-checklist-from-step":
 				val, err := needVal(k, v, ok, args, &i)
 				if err != nil {
@@ -443,6 +450,18 @@ func validate(c *Config) error {
 		}
 		return nil
 	}
+	if c.PreviewChecklistTrackerYAML != "" {
+		if strings.TrimSpace(c.LeadChecklistYAML) == "" {
+			return fmt.Errorf("--checklist-tracker-preview requires --lead-checklist-yaml")
+		}
+		if !fileReadable(c.LeadChecklistYAML) {
+			return fmt.Errorf("lead checklist yaml is not a readable file: %s", c.LeadChecklistYAML)
+		}
+		if !fileReadable(c.PreviewChecklistTrackerYAML) {
+			return fmt.Errorf("tracker preview file is not a readable file: %s", c.PreviewChecklistTrackerYAML)
+		}
+		return nil
+	}
 	st, err := os.Stat(c.Workspace)
 	if err != nil || !st.IsDir() {
 		return fmt.Errorf("workspace is not a directory: %s", c.Workspace)
@@ -524,6 +543,7 @@ Options:
   -m, --model MODEL        (default: Auto)
   -c, --lead-checklist-yaml PATH
       --checklist-tracker-yaml PATH  (writable per-request Authoritative Tracker; must differ from -c)
+      --checklist-tracker-preview PATH  (read-only slug diff vs -c definition; prints JSON and exits)
       --adherence-ledger PATH        (append-only agent-adherence-event.v1 JSONL; default working/{REQ-TOKEN}/adherence/events.jsonl when tracker mode is on)
       --lead-checklist-from-step ID-or-slug   (optional inclusive lower; main steps only)
       --lead-checklist-to-step ID-or-slug     (optional inclusive upper; main steps only)

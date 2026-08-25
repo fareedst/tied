@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 )
 
@@ -96,6 +97,79 @@ func TestRunControlledClientPilot_rolloutStopOnBlockingFinding(t *testing.T) {
 	if !stop.ShouldStop || !containsReason(stop.Reasons, stopCompletedWithUnresolvedEvidence) {
 		t.Fatalf("expected rollout stop on unresolved evidence: %#v", stop)
 	}
+}
+
+func TestRunControlledClientPilot_stageQSecondPilot(t *testing.T) {
+	repoRoot := findRepoRoot(t)
+	requestToken := "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+	input, err := BuildStageQPilotControlledClientFixture(repoRoot, requestToken)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	report, err := RunControlledClientPilot(input)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if report.PilotClient != stageQPilotClientName {
+		t.Fatalf("pilot client: got %q want %q", report.PilotClient, stageQPilotClientName)
+	}
+	for _, class := range []string{
+		"instruction_rendered",
+		"agent_acknowledged",
+		"action_attempted",
+		"outcome_verified",
+		"gate_decided",
+		"status_mutated",
+	} {
+		if !report.EventClasses[class] {
+			t.Fatalf("stage Q pilot missing event class %s: %#v", class, report.EventClasses)
+		}
+	}
+	if report.RolloutStop.ShouldStop {
+		t.Fatalf("stage Q pilot should not stop rollout: %#v", report.RolloutStop)
+	}
+	if report.BlockingFindingCount != 0 {
+		t.Fatalf("expected zero blocking findings, got %d: %#v", report.BlockingFindingCount, report.Reconcile.Findings)
+	}
+	for _, phase := range []string{"pre_implementation", "verification", "close_out"} {
+		runID := input.PhaseRunIDs[phase]
+		if !strings.HasPrefix(runID, "stage-q-") {
+			t.Fatalf("phase %s run_id must use stage-q prefix: %q", phase, runID)
+		}
+	}
+	if _, err := os.Stat(input.ReportPath); err != nil {
+		t.Fatalf("stage Q pilot report not written: %v", err)
+	}
+
+	events, errs := LoadAdherenceLedger(input.LedgerPath)
+	if len(errs) > 0 {
+		t.Fatalf("ledger errors: %v", errs)
+	}
+	order := make([]string, 0, len(events))
+	for _, ev := range events {
+		order = append(order, ev.EventClass)
+	}
+	want := []string{"instruction_rendered", "action_attempted", "outcome_verified", "agent_acknowledged"}
+	if !hasEventSubsequence(order, want) {
+		t.Fatalf("stage Q ledger order %v must contain %v (live action_attempted before ack)", order, want)
+	}
+}
+
+func hasEventSubsequence(haystack, needle []string) bool {
+	if len(needle) == 0 {
+		return true
+	}
+	i := 0
+	for _, item := range haystack {
+		if item == needle[i] {
+			i++
+			if i == len(needle) {
+				return true
+			}
+		}
+	}
+	return false
 }
 
 func TestWritePilotReport_roundTrip(t *testing.T) {

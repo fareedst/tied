@@ -66,6 +66,9 @@ func resolveOneEvidenceRef(ref, workspace string) (ResolvedRef, error) {
 	if ref == "" {
 		return ResolvedRef{}, fmt.Errorf("unresolved_evidence_ref: empty ref")
 	}
+	if doc, ok := tryParseCommandEvidence(ref); ok {
+		return resolveCommandEvidenceRef(ref, doc, workspace)
+	}
 	if isGenericProse(ref) {
 		return ResolvedRef{}, fmt.Errorf("unresolved_evidence_ref: generic prose %q", ref)
 	}
@@ -103,6 +106,101 @@ func resolveOneEvidenceRef(ref, workspace string) (ResolvedRef, error) {
 		ArtifactRef:  ref,
 		ArtifactHash: hash,
 	}, nil
+}
+
+func tryParseCommandEvidence(ref string) (map[string]interface{}, bool) {
+	trimmed := strings.TrimSpace(ref)
+	if strings.HasPrefix(trimmed, "command_evidence:") {
+		trimmed = strings.TrimSpace(strings.TrimPrefix(trimmed, "command_evidence:"))
+	}
+	if !strings.HasPrefix(trimmed, "{") {
+		return nil, false
+	}
+	var doc map[string]interface{}
+	if json.Unmarshal([]byte(trimmed), &doc) != nil {
+		return nil, false
+	}
+	return doc, true
+}
+
+func resolveCommandEvidenceRef(ref string, doc map[string]interface{}, workspace string) (ResolvedRef, error) {
+	if err := validateCommandEvidenceMap(doc); err != nil {
+		return ResolvedRef{}, err
+	}
+	claimed, _ := doc["claimed_success"].(bool)
+	if !claimed {
+		return ResolvedRef{
+			Ref:          ref,
+			Kind:         "command_evidence",
+			ArtifactRef:  ref,
+			ArtifactHash: fileContentHash([]byte(ref)),
+		}, nil
+	}
+	manifestRef := stringField(doc, "manifest_ref", "manifest_reference")
+	manifestResolved, err := resolveManifestPathRef(manifestRef, workspace)
+	if err != nil {
+		return ResolvedRef{}, err
+	}
+	outputRef := stringField(doc, "stdout_ref", "stderr_ref", "output_path")
+	outputResolved, err := resolveFilePathRef(outputRef, workspace)
+	if err != nil {
+		return ResolvedRef{}, err
+	}
+	combined := manifestResolved.ArtifactHash + "|" + outputResolved.ArtifactHash
+	return ResolvedRef{
+		Ref:          ref,
+		Kind:         "command_evidence",
+		ArtifactRef:  manifestRef,
+		ArtifactHash: fileContentHash([]byte(combined)),
+	}, nil
+}
+
+func validateCommandEvidenceMap(doc map[string]interface{}) error {
+	claimed, ok := doc["claimed_success"].(bool)
+	if !ok || !claimed {
+		return nil
+	}
+	if stringField(doc, "manifest_ref", "manifest_reference") == "" {
+		return fmt.Errorf("command_success_unproven: missing manifest_ref")
+	}
+	if stringField(doc, "stdout_ref", "stderr_ref", "output_path") == "" {
+		return fmt.Errorf("command_success_unproven: missing output ref")
+	}
+	if _, ok := doc["exit_code"]; !ok {
+		return fmt.Errorf("command_success_unproven: missing exit_code")
+	}
+	return nil
+}
+
+func stringField(doc map[string]interface{}, keys ...string) string {
+	for _, key := range keys {
+		if v, ok := doc[key].(string); ok && strings.TrimSpace(v) != "" {
+			return strings.TrimSpace(v)
+		}
+	}
+	return ""
+}
+
+func resolveManifestPathRef(ref, workspace string) (ResolvedRef, error) {
+	resolved, err := resolveOneEvidenceRef(ref, workspace)
+	if err != nil {
+		return ResolvedRef{}, err
+	}
+	if resolved.Kind != "manifest_ref" {
+		return ResolvedRef{}, fmt.Errorf("command_success_unproven: manifest_ref %q is not a valid manifest", ref)
+	}
+	return resolved, nil
+}
+
+func resolveFilePathRef(ref, workspace string) (ResolvedRef, error) {
+	resolved, err := resolveOneEvidenceRef(ref, workspace)
+	if err != nil {
+		return ResolvedRef{}, err
+	}
+	if resolved.Kind != "file_path" {
+		return ResolvedRef{}, fmt.Errorf("command_success_unproven: output ref %q is not a readable file", ref)
+	}
+	return resolved, nil
 }
 
 func isGenericProse(ref string) bool {

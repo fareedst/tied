@@ -1,0 +1,184 @@
+CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-m-q-close-out:
+  change_definition:
+    current_behavior: "Stages M-Q are implemented and individually evidenced, but no consolidated close-out CITDP or M-Q Authoritative Tracker binds the final integrated close-out gate to the complete A21-A34 chain."
+    desired_behavior: "A consolidated M-Q close-out record and Authoritative Tracker bind the integrated close_out gate to identity-matched activation evidence, all required Tracker dispositions, verification results, and final traceable release documentation without mutating methodology YAML."
+    non_goals:
+      - "Implementing deferred TypeScript Option B evidence resolution"
+      - "Refreshing tied/methodology through copy_files.sh"
+      - "Reopening or changing the completed Stage M-Q implementation"
+      - "Reopening the G-L gate validator or Batch 2 activation scope"
+    success_criteria:
+      - "A21-A25: live action_attempted capture is correlated through the active-turn marker and bounded hook evidence."
+      - "A26-A28: Go reconcile CLI and MCP subprocess surface produce parity reports with zero blocking findings on the controlled pilot."
+      - "A29-A31: Tracker migration preview is read-only and operator documentation covers the shipped flags and runbook."
+      - "A32: producer-side command_evidence resolution is covered while the deferred TypeScript Option B remains explicit."
+      - "A33-A34: inquiry sub-turn composition and the second controlled-client pilot pass with six event classes linked and rollout_stop should_stop false."
+      - "All M-Q stage Trackers and the consolidated Tracker finish traceable-commit as completed with the final gate receipt and CHANGELOG references."
+      - "The integrated close_out gate passes using the consolidated Tracker, this CITDP completion activation, and phase-close_out identity-bound artifacts."
+    unchanged_behavior:
+      - "Advisory inquiry policy remains advisory after required activation evidence is valid."
+      - "No TIED methodology YAML is modified."
+      - "Observed findings remain review-gated and do not trigger LEAP."
+      - "The existing REQ, ARCH, and IMPL scope remains unchanged."
+  completion_criteria:
+    activation:
+      artifact_hashes: {}
+      phase: "close_out"
+      project_id: "/Users/fareed/Documents/dev/chatgpt/stdd"
+      request_token: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      run_id: "adherence-chain-m-q-close-out-20260825"
+      scope:
+        - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT#disposition-evidence-contracts"
+        - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT#integrated-activation-pairing"
+        - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT#pending-tracker-steps-blocked"
+        - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT#verify-consumes-gate-result"
+      scope_hash: ""
+    checklist_gate:
+      dispositions:
+        - "completed"
+        - "not_applicable"
+        - "pending"
+        - "waived"
+      fail_closed: true
+      phases:
+        - "close_out"
+        - "pre_implementation"
+        - "verification"
+    traceable_commit: "Final gate receipt, CHANGELOG, and staged M-Q implementation set are the traceability evidence; no commit is created by this worker."
+    verification_gate_notes: "Close-out gate must consume the consolidated Authoritative Tracker, this CITDP, and activation collected from working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-close_out/. Status verification follows the same allowed gate result."
+  evidence:
+    commands:
+      - "go test ./... (from tools/agentstream)"
+      - "node --test mcp-server/dist/tools/adherence-reconcile-mcp.test.js"
+      - "npm run build --prefix mcp-server"
+      - "npm test (from mcp-server)"
+      - "ruby -c scripts/adherence_append_action_attempted.rb"
+      - "ruby -Iscripts/test scripts/test/adherence_append_action_attempted_test.rb"
+      - "scripts/lint_yaml.sh"
+      - "tied-cli.sh pseudocode_validate IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "tied-cli.sh tied_validate_consistency {}"
+      - "tied-cli.sh tied_verify REQ-TIED_CHECKLIST_GATE_ENFORCEMENT IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "tied-cli.sh yaml_index_validate {}"
+    manifest_reference: "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/pilot-report-stage-q.json"
+    profile_reference: "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-close_out/evidence-provenance.json"
+    proof_boundaries:
+      - "runtime_test_results do not establish universal security, performance, or usability claims"
+      - "semantic_fidelity"
+      - "traceability_structure"
+  impact_analysis:
+    impl_inventory_notes: "Stages M-Q extend the existing IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT blocks ACTIVE_TURN_MARKER, APPEND_ACTION_ATTEMPTED, RECONCILE_ADHERENCE_CHAIN, EXPOSE_RECONCILE_OPERATOR_SURFACE, PREVIEW_TRACKER_MIGRATION, RESOLVE_EVIDENCE_REFS, and the inquiry composition/pilot path."
+    modules_or_boundaries: "Go checklist ledger, active-turn marker, evidence resolver, reconcile operator surface, tracker migration preview, agentstream composition, Ruby hook bridge, MCP subprocess wrapper, controlled pilot artifacts, and TIED close-out gate."
+    tied_tokens_affected:
+      - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: "none observed; M-Q code, tests, staged pseudo-code, and existing vocabulary are aligned."
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    recorded_at: "2026-08-25"
+    title: "Checklist adherence Stages M-Q consolidated close-out"
+  risk_analysis:
+    abuse_cases:
+      - "canonical checklist or methodology tree mutation during close-out"
+      - "cross-phase inquiry receipt reuse"
+      - "generic prose or unresolved command evidence presented as success"
+      - "malformed or stale phase activation artifacts"
+      - "pending or sparse integrated Tracker dispositions"
+      - "status mutation without a current gate receipt"
+    adversarial_inquiry:
+      counterexamples:
+        - "A close_out gate passes with a pending integrated auto-required Tracker slug."
+        - "A completed disposition cites generic prose instead of bounded evidence."
+        - "A final status promotion is claimed without a gate_decided and status_mutated evidence edge."
+        - "A phase-close_out receipt is assembled from root-projected or cross-phase artifacts."
+        - "A warning or UNRESOLVED inquiry result is treated as successful activation."
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "phase-close_out collector returns identity-bound activation artifacts for the requested run_id."
+        - "Pilot report has six event classes, zero reconcile findings, and rollout_stop should_stop false."
+        - "The close_out gate returns allowed true with no blocking diagnostics."
+        - "The consolidated Tracker contains every close_out auto-required slug with a valid disposition."
+        - "The verification battery is green across Go, Ruby, TypeScript/MCP, build, reconcile parity, and YAML checks; the repository token-validation script is unavailable."
+        - "tied_verify and tied_validate_consistency complete without traceability errors."
+      eligibility_triggers_matched:
+        - "CLI"
+        - "external-input"
+        - "MCP"
+        - "persistence"
+        - "stateful-workflow"
+        - "strict-close-out"
+      evidence_references:
+        - "docs/checklist-adherence-remaining-work-plan.md"
+        - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-close_out/"
+        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/"
+        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/pilot-report-stage-q.json"
+      falsification_questions:
+        - "Can activation_collect pair a receipt with artifacts from another phase or run?"
+        - "Can final tracker evidence claim closure without the new gate receipt?"
+        - "Can the integrated close_out gate pass if risk-assessment, sub-adversarial-inquiry-pass, verification-gate, or traceable-commit is pending?"
+        - "Can the verification battery pass while token or YAML validation fails?"
+        - "Does any close-out edit write under tied/methodology/?"
+      gate_policy: "advisory"
+      prior_depth_tier: "integrated"
+      profile_depth: "not_measured"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "Verification battery listed in evidence.commands"
+        evidence_method: "Automated unit, composition, integration, build, token, and YAML validation"
+        limitation: "Evidence establishes the listed behavior and traceability only; it is not universal proof of unrelated quality attributes."
+        owner: "close-out operator"
+        rationale: "Stages M-Q change runtime producer, operator, and persistence-adjacent paths."
+        result: "passed: Go, Ruby, TypeScript/MCP, build, reconcile parity, and YAML lint passed; validate_tokens.sh is unavailable in this repository"
+        risk: "Incomplete stage-chain closure could leave a gate bypass or misleading release record."
+        threshold: "All required commands exit zero and TIED gates return allowed/ok true."
+        waiver:
+          expiry: ""
+          owner: ""
+          reason: ""
+          required: "false"
+    quality_profiles:
+      - "baseline-functional"
+      - "external-input-security"
+      - "stateful-reliability"
+    residual_risk:
+      expiry: "2026-09-25"
+      owner: "close-out operator"
+      summary: "Methodology snapshots in downstream clients still require the explicitly documented operator refresh; deferred TypeScript Option B and broader quality domains remain outside this close-out."
+    risks:
+      - mitigation: "Materialize all close_out auto-required and requested dispositions in the consolidated Authoritative Tracker."
+        name: "sparse-tracker-or-pending-auto-slug"
+        severity: "high"
+      - mitigation: "Run the close_out gate before writing the final gate receipt and use only retained evidence references."
+        name: "false-success-evidence"
+        severity: "high"
+      - mitigation: "Use project TIED YAML tools and keep tied/methodology read-only."
+        name: "methodology-tree-mutation"
+        severity: "medium"
+      - mitigation: "Use tied_checklist_activation_collect with the new close_out run_id and phase-aware artifact directory."
+        name: "stale-or-cross-phase-activation"
+        severity: "high"
+    scenarios:
+      - "Denied close-out with a pending or sparse Tracker."
+      - "Denied close-out with missing or stale activation evidence."
+      - "Successful advisory close-out with valid artifacts and non-blocking advisory diagnostics."
+      - "Successful integrated close-out with phase-bound activation and zero blocking diagnostics."
+  test_strategy:
+    commands:
+      - "go test ./... (from tools/agentstream)"
+      - "node --test mcp-server/dist/tools/adherence-reconcile-mcp.test.js"
+      - "npm run build --prefix mcp-server"
+      - "npm test (from mcp-server)"
+      - "ruby -c scripts/adherence_append_action_attempted.rb"
+      - "ruby -Iscripts/test scripts/test/adherence_append_action_attempted_test.rb"
+      - "scripts/lint_yaml.sh"
+      - "tied-cli.sh pseudocode_validate IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "tied-cli.sh tied_validate_consistency {}"
+      - "tied-cli.sh tied_verify REQ-TIED_CHECKLIST_GATE_ENFORCEMENT IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "tied-cli.sh yaml_index_validate {}"
+    summary: "Run the complete M-Q close-out verification battery, then validate pseudocode, project YAML consistency, and verification-gated TIED status using the same consolidated gate inputs."

@@ -1,0 +1,31 @@
+gate_contract:
+  depth_selection_before_inquiry: true
+  dispositions:
+    - "completed"
+    - "not_applicable"
+    - "pending"
+    - "waived"
+  fail_closed: true
+  loop_back_invalidates_downstream_evidence: true
+  phases:
+    - "close_out"
+    - "pre_implementation"
+    - "verification"
+  required_artifacts:
+    - "evidence-provenance.json"
+    - "finding-ledger.jsonl"
+    - "gate-result.json"
+    - "obligation-report.json"
+name: "inquiry_subturn_fixture"
+process_token: "[PROC-TEST]"
+steps:
+  - slug: "inquiry-caller"
+    tasks:
+      - "CALL sub-adversarial-inquiry-pass when integrated depth requires inquiry."
+    title: "Inquiry caller"
+sub_procedures:
+  - slug: "sub-adversarial-inquiry-pass"
+    tasks:
+      - "Run tied_adversarial_inquiry_run and persist four phase artifacts."
+    title: "Adversarial inquiry"
+version: "0"

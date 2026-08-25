@@ -1,0 +1,48 @@
+CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-n:
+  change_definition:
+    current_behavior: "ReconcileAdherenceChain is Go library + table tests only; operators must go test or import package to reconcile."
+    desired_behavior: "adherence-reconcile CLI and MCP tied_adherence_reconcile_run return identical ReconcileReport JSON; MCP invokes Go subprocess with no TypeScript finding logic port."
+    success_criteria:
+      - "Go CLI adherence-reconcile emits ReconcileReport matching library (A26)."
+      - "MCP tied_adherence_reconcile_run returns same findings as CLI for Stage L pilot corpus (A27)."
+      - "Operator reconciles pilot with zero blocking findings when chain complete (A28)."
+  completion_criteria:
+    activation:
+      phase: "close_out"
+      project_id: "/Users/fareed/Documents/dev/chatgpt/stdd"
+      request_token: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      run_id: "stage-n-close-out-20260825"
+  record_identity:
+    change_request_id: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    record_status: "complete"
+    title: "Stage N operator reconciliation surface"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "CLI exit non-zero when findings present blocks observational operator workflows."
+        - "MCP reconcile tool mutates Tracker or TIED YAML despite read_only contract."
+        - "TypeScript duplicate of reconcile finding emitters diverges from Go library."
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "CLI and MCP table parity tests mirror adherence_reconcile_test.go cases."
+        - "Report always includes read_only true."
+        - "Stage L pilot corpus reconciles with zero blocking findings post-M."
+      evidence_references:
+        - "/Users/fareed/.cursor/plans/checklist_adherence_remaining_eb852d26.plan.md"
+        - "mcp-server/src/tools/adherence-reconcile-mcp.test.ts"
+        - "tools/agentstream/checklist/adherence_reconcile.go"
+        - "tools/agentstream/cmd/adherence-reconcile/main.go"
+      falsification_questions:
+        - "Can MCP reconcile write to Tracker or TIED YAML paths?"
+        - "Do CLI and MCP emit different finding codes for the same fixture?"
+        - "Does CLI exit non-zero when findings are present?"
+      gate_policy: "advisory"
+      prior_depth_tier: "integrated"
+      profile_depth: "not_measured"
+  test_strategy:
+    commands:
+      - "go test ./tools/agentstream/checklist/..."
+      - "go test ./tools/agentstream/cmd/adherence-reconcile/... -count=1"
+      - "node --test mcp-server/dist/tools/adherence-reconcile-mcp.test.js"
+      - "npm run build --prefix mcp-server"
+      - "tied_validate_consistency"

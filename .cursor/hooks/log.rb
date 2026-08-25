@@ -11,6 +11,7 @@ require 'yaml'
 
 require_relative '../../scripts/transcript_long_text_dedupe'
 require_relative '../../scripts/transcript_yaml_prune'
+require_relative '../../scripts/adherence_append_action_attempted'
 
 ##
 # Transcript embedding policy for hook YAML logs.
@@ -611,6 +612,22 @@ class CursorHookLogger
       record = { 'epoch' => Time.now.utc.to_f }.merge(record)
       file.write([record].to_yaml.sub(/\A---\s*\n?/, ''))
     end
+    line_number = count_yaml_records(path)
+    AdherenceAppendActionAttempted.call(
+      record,
+      hook_log_path: path.to_s,
+      hook_log_line: line_number
+    )
+  end
+
+  def count_yaml_records(path)
+    return 1 unless File.exist?(path)
+
+    count = 0
+    File.foreach(path, mode: 'r:utf-8') do |line|
+      count += 1 if line.start_with?('- epoch:') || line.start_with?('- cursor_version:')
+    end
+    count.positive? ? count : 1
   end
 end
 

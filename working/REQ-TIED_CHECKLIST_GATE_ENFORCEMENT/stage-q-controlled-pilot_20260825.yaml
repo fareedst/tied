@@ -1,0 +1,8 @@
+request_token: REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+schema_version: checklist-tracker.v1
+source_document: /Users/fareed/Documents/dev/chatgpt/stdd/tied/docs/agent-req-implementation-checklist.yaml
+steps:
+    - disposition: completed
+      evidence_refs:
+        - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adherence/pilot-evidence-stage-q.txt
+      slug: change-definition

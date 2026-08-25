@@ -238,6 +238,116 @@ func TestAgentstreamOutcomeVerifiedLedgerAfterEvidenceResolution(t *testing.T) {
 	}
 }
 
+func TestTrackerComposition_actionAttemptedDuringTurnBeforeAck(t *testing.T) {
+	t.Helper()
+	if _, err := exec.LookPath("ruby"); err != nil {
+		t.Skipf("ruby not available: %v", err)
+	}
+	wd, err := os.Getwd()
+	if err != nil {
+		t.Fatal(err)
+	}
+	moduleRoot, err := goModRootFrom(wd)
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Chdir(moduleRoot)
+
+	checklist, err := filepath.Abs(filepath.Join(wd, "testdata", "tracker-checklist.yaml"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	fakeAgent, err := filepath.Abs(filepath.Join(wd, "testdata", "fake_tracker_agent.rb"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	ws := t.TempDir()
+	trackerPath := filepath.Join(ws, "tracker.yaml")
+	ledgerPath := filepath.Join(ws, "adherence", "events.jsonl")
+	if err := writeCompositionEvidenceFiles(ws); err != nil {
+		t.Fatal(err)
+	}
+
+	cmd := exec.Command(
+		"go", "run", "./cmd/agentstream",
+		"--workspace", ws,
+		"--lead-checklist-yaml", checklist,
+		"--checklist-tracker-yaml", trackerPath,
+		"--adherence-ledger", ledgerPath,
+		"--lead-checklist-skip-sub",
+		"--checklist-var", "REQUEST=REQ-TRACKER-COMPOSITION",
+		"--agent-path", fakeAgent,
+		"--skip-tied-mcp-preflight",
+	)
+	cmd.Dir = moduleRoot
+	cmd.Env = append(os.Environ(), "PWD="+moduleRoot, "ADHERENCE_SIMULATE_EVIDENCE_REF=1")
+	var stdout, stderr bytes.Buffer
+	cmd.Stdout = &stdout
+	cmd.Stderr = &stderr
+	if err := cmd.Run(); err != nil {
+		t.Fatalf("agentstream run failed: %v\nstdout:\n%s\nstderr:\n%s", err, stdout.String(), stderr.String())
+	}
+	markerPath := filepath.Join(ws, "working", "REQ-TRACKER-COMPOSITION", "adherence", "active-turn.json")
+	if _, err := os.Stat(markerPath); err == nil {
+		t.Fatalf("active-turn marker must be cleared after turn: %s still exists", markerPath)
+	}
+	events, errs := checklistpkg.LoadAdherenceLedger(ledgerPath)
+	if len(errs) > 0 {
+		t.Fatalf("ledger errors: %v", errs)
+	}
+	order := eventClassOrder(events)
+	want := []string{"instruction_rendered", "action_attempted", "outcome_verified", "agent_acknowledged"}
+	if !hasSubsequence(order, want) {
+		t.Fatalf("event order %v must contain subsequence %v", order, want)
+	}
+	firstAction := firstIndex(order, "action_attempted")
+	firstOutcome := firstIndex(order, "outcome_verified")
+	firstAck := firstIndex(order, "agent_acknowledged")
+	firstRendered := firstIndex(order, "instruction_rendered")
+	if firstAction <= firstRendered {
+		t.Fatalf("action_attempted must follow instruction_rendered: order=%v", order)
+	}
+	if firstOutcome > 0 && firstAction >= firstOutcome {
+		t.Fatalf("action_attempted must precede outcome_verified: order=%v", order)
+	}
+	if firstAck > 0 && firstAction >= firstAck {
+		t.Fatalf("action_attempted must precede agent_acknowledged: order=%v", order)
+	}
+}
+
+func eventClassOrder(events []checklistpkg.AdherenceEvent) []string {
+	out := make([]string, 0, len(events))
+	for _, ev := range events {
+		out = append(out, ev.EventClass)
+	}
+	return out
+}
+
+func hasSubsequence(haystack, needle []string) bool {
+	if len(needle) == 0 {
+		return true
+	}
+	i := 0
+	for _, item := range haystack {
+		if item == needle[i] {
+			i++
+			if i == len(needle) {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+func firstIndex(values []string, target string) int {
+	for i, v := range values {
+		if v == target {
+			return i
+		}
+	}
+	return -1
+}
+
 func writeCompositionEvidenceFiles(workspace string) error {
 	for _, step := range []string{"step-one", "step-two"} {
 		path := filepath.Join(workspace, "evidence", step+".md")

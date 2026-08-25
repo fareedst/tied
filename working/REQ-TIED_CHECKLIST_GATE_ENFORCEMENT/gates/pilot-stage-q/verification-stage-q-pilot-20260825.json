@@ -1,0 +1,9 @@
+{
+  "allowed": true,
+  "input_hashes": {
+    "citdp_hash": "sha256:f86dbe9e9d0e63dcb45f34a06ec5e01803ccd8882f35cc0f0d2e01d948c69415",
+    "tracker_hash": "sha256:b5e09bb014569e2b15666c64f1e9ddf1570b906a22406c4cb6964217aae49d8d"
+  },
+  "phase": "verification",
+  "schema_version": "checklist-gate-receipt.v1"
+}

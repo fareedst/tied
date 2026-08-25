@@ -2,6 +2,8 @@
 // [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
 package checklist
 
+import "strings"
+
 func minimalTracker(requestToken string) map[string]interface{} {
 	return map[string]interface{}{
 		"request_token":  requestToken,
@@ -43,24 +45,34 @@ func agentAcknowledgedRow(turn int, slug, nonce, hash, receiptHash string) map[s
 	}
 }
 
-func actionAttemptedRow(turn int, slug, hash, receiptHash string, refs []string) map[string]interface{} {
+func actionAttemptedRow(turn int, slug, nonce, hash, receiptHash string, refs []string) map[string]interface{} {
 	evidenceRefs := make([]interface{}, len(refs))
 	for i, ref := range refs {
 		evidenceRefs[i] = ref
 	}
+	corr := map[string]interface{}{
+		"request_token":    "REQ-TEST",
+		"run_id":           "run-1",
+		"turn_index":       turn,
+		"step_slug":        slug,
+		"instruction_hash": hash,
+	}
+	if strings.TrimSpace(nonce) != "" {
+		corr["instruction_nonce"] = nonce
+	}
+	if strings.TrimSpace(receiptHash) != "" {
+		corr["receipt_hash"] = receiptHash
+	}
 	return map[string]interface{}{
 		"schema_version": adherenceEventSchemaVersion,
 		"event_class":    "action_attempted",
-		"correlation": map[string]interface{}{
-			"request_token":    "REQ-TEST",
-			"run_id":           "run-1",
-			"turn_index":       turn,
-			"step_slug":        slug,
-			"instruction_hash": hash,
-			"receipt_hash":     receiptHash,
+		"correlation":    corr,
+		"evidence_refs":  evidenceRefs,
+		"hook_log_ref": map[string]interface{}{
+			"path": "/tmp/synthetic-hook.yaml",
+			"line": 1,
 		},
-		"evidence_refs": evidenceRefs,
-		"source":        map[string]interface{}{"kind": "cursor_hook"},
+		"source": map[string]interface{}{"kind": "cursor_hook", "hook_event": "postToolUse"},
 	}
 }
 

@@ -9,6 +9,66 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Checklist adherence Stage Q — inquiry sub-turn + rollout ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  Process-composition test `TestTrackerComposition_inquirySubTurn` exercises
+  `sub-adversarial-inquiry-pass` through agentstream subprocess with
+  `fake_tracker_inquiry_agent.rb`. Second controlled-client pilot via
+  `BuildStageQPilotControlledClientFixture` writes `pilot-report-stage-q.json`
+  (`pilot_client: stdd-stage-q`, stage-q phase run_ids); `EvaluateRolloutStop`
+  passes (`should_stop: false`). Tests: `TestRunControlledClientPilot_stageQSecondPilot`.
+  CITDP `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-q`. Acceptance A33–A34.
+  Closes post–Stage L remaining-work plan (Stages M–Q).
+
+- **Checklist adherence Stages M–Q — integrated close-out ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  Consolidated capstone CITDP and Authoritative Tracker bind the complete
+  A21–A34 chain to the integrated `close_out` gate. All five stage Trackers
+  and the consolidated Tracker now complete `traceable-commit` with
+  `CHANGELOG.md` and `gate-adherence-chain-m-q-close-out.json` evidence.
+  The identity-bound close-out gate passed with `allowed: true`, and the
+  verification battery passed across Go, Ruby, TypeScript/MCP, build,
+  reconcile parity, and YAML lint; `scripts/validate_tokens.sh` is not
+  present in this repository.
+
+- **Checklist adherence Stage P — command_evidence ref hardening ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  Stage P trigger composition test (`A32 trigger fires when gate accepts manual Tracker with
+  nonexistent evidence_refs`) documents that the shared TS gate accepts unresolved refs from
+  non-agentstream writers; Go `ResolveEvidenceRefs` extended for inline JSON and
+  `command_evidence:` prefix refs aligned with `validateCommandEvidence`. Tests:
+  `TestResolveEvidenceRefs_CommandEvidence_*`. TS Option B (`validateTrackerEvidenceRefs`)
+  deferred. CITDP `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-p`. Acceptance A32.
+
+- **Checklist adherence Stage O — migration preview + doc hygiene ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  `PreviewTrackerMigration` in `tracker_migration_preview.go` emits read-only
+  `tracker-migration-preview.v1` JSON (slug diff, stale dispositions; no Tracker mutation).
+  CLI flag `--checklist-tracker-preview` in `config.go` / `main.go`. Operator doc
+  `docs/checklist-adherence-remaining-work-plan.md`; parent improvement plan §1 historical
+  annotation and §10 links updated. README expanded with hook bridge, reconcile CLI/MCP runbook,
+  and full flag catalog. Static contract test `config_docs_test.go` (`TestREADMEDocumentsAllConfigFlags`).
+  IMPL block `PREVIEW_TRACKER_MIGRATION`. Vocabulary `PreviewTrackerMigration` in
+  `tied/vocab/agentstream.md`. CITDP `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-o`.
+  Acceptance A29–A31.
+
+- **Checklist adherence Stage N — operator reconciliation surface ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  Go `cmd/adherence-reconcile` emits read-only `ReconcileReport` JSON on stdout (parity with
+  `adherence_reconcile.go`); MCP `tied_adherence_reconcile_run` spawns the Go binary via
+  `adherence-reconcile-runner.ts` with no TypeScript finding-logic port. Tests:
+  `cmd/adherence-reconcile/main_test.go`, `adherence-reconcile-mcp.test.ts` (Stage L pilot corpus
+  parity). CITDP `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-n`. Acceptance A26–A28.
+  Closes Stage K deferral for optional MCP reconcile tool.
+
+- **Checklist adherence Stage M — live `action_attempted` capture ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  `AppendActionAttempted` in `adherence_ledger.go`; `adherence_active_turn.go` writes/clears
+  `active-turn-marker.v1` around checklist subprocess; `main.go` wires marker lifecycle after
+  `instruction_rendered`. Hook bridge: `.cursor/hooks/log.rb` →
+  `scripts/adherence_append_action_attempted.rb` (append-only, fail-silent without marker).
+  Bounded `evidence_refs` and `hook_log_ref` only — no prompt/tool bodies in ledger. Tests:
+  `adherence_ledger_test.go`, `adherence_active_turn_test.go`,
+  `adherence_append_action_attempted_test.rb`, `tracker_composition_test.go` (turn order A21),
+  `adherence_reconcile_test.go` (live fixture A25). Vocabulary in `tied/vocab/agentstream.md`.
+  IMPL blocks `ACTIVE_TURN_MARKER`, `APPEND_ACTION_ATTEMPTED`. CITDP
+  `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-m`. Acceptance A21–A25.
+  Closes Stage K deferral for live `action_attempted` hook capture.
+
 - **Checklist adherence Stage L — controlled-client pilot + rollout stop ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
   Go `rollout_stop.go` implements observational `EvaluateRolloutStop` (writer corruption,
   unbound receipt advance, blocking reconcile findings, canonical checklist byte drift);
@@ -28,8 +88,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `status_change_without_verification_receipt`, `legacy_no_adherence_chain`) without
   mutating Tracker or TIED YAML. Reuses `ResolveEvidenceRefs` and `StableHash`
   (gate receipt parity). Tests: table-driven `adherence_reconcile_test.go` plus
-  six-class linked synthetic fixture (A19). **Deferred:** Stage L pilot; optional
-  MCP `tied_adherence_reconcile_run` tool; `action_attempted` hook capture.
+  six-class linked synthetic fixture (A19). Pilot and live hook capture shipped in Stages L and M;
+  operator MCP reconcile shipped in Stage N.
 
 - **Checklist adherence Stage J — gate/status durable receipts ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
   MCP Stage J slice: `gate-receipt.ts` implements `PERSIST_GATE_DECISION_RECEIPT`

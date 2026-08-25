@@ -16,6 +16,7 @@ import (
 const (
 	pilotReportSchemaVersion = "adherence-pilot-report.v1"
 	pilotClientName          = "stdd"
+	stageQPilotClientName    = "stdd-stage-q"
 )
 
 // PilotInput configures a controlled-client adherence pilot run.
@@ -53,10 +54,14 @@ type PilotReport struct {
 
 // RunControlledClientPilot assembles pilot inputs, reconciles adherence, and optionally writes the report.
 func RunControlledClientPilot(input PilotInput) (PilotReport, error) {
+	pilotClient := pilotClientName
+	if strings.Contains(filepath.Base(input.ReportPath), "stage-q") {
+		pilotClient = stageQPilotClientName
+	}
 	report := PilotReport{
 		SchemaVersion:        pilotReportSchemaVersion,
 		RequestToken:         strings.TrimSpace(input.RequestToken),
-		PilotClient:          pilotClientName,
+		PilotClient:          pilotClient,
 		ControlledClientPath: filepath.Clean(input.RepoRoot),
 		DepthTier:            "integrated",
 		PhaseRunIDs:          input.PhaseRunIDs,
@@ -157,6 +162,134 @@ func WritePilotReport(path string, report PilotReport) error {
 	return nil
 }
 
+// BuildStageQPilotControlledClientFixture materializes the Stage Q second controlled-client pilot (A34).
+func BuildStageQPilotControlledClientFixture(rootDir, requestToken string) (PilotInput, error) {
+	rootDir = filepath.Clean(rootDir)
+	adherenceDir := filepath.Join(rootDir, "working", requestToken, "adherence")
+	gatesDir := filepath.Join(rootDir, "working", requestToken, "gates", "pilot-stage-q")
+	if err := os.MkdirAll(adherenceDir, 0o755); err != nil {
+		return PilotInput{}, err
+	}
+	if err := os.MkdirAll(gatesDir, 0o755); err != nil {
+		return PilotInput{}, err
+	}
+
+	evidencePath := filepath.Join(adherenceDir, "pilot-evidence-stage-q.txt")
+	evidenceBody := []byte("Stage Q second controlled-client pilot evidence for " + requestToken + "\n")
+	if err := os.WriteFile(evidencePath, evidenceBody, 0o644); err != nil {
+		return PilotInput{}, err
+	}
+	evidenceRef := filepath.Join("working", requestToken, "adherence", "pilot-evidence-stage-q.txt")
+	evidenceHash := fileContentHash(evidenceBody)
+
+	trackerPath := filepath.Join(rootDir, "working", requestToken, "stage-q-controlled-pilot_20260825.yaml")
+	citdpPath := filepath.Join(rootDir, "working", requestToken, "CITDP-"+requestToken+"-stage-q.yaml")
+	definitionPath := filepath.Join(rootDir, "tied", "docs", "agent-req-implementation-checklist.yaml")
+	citdpRecordKey := "CITDP-" + requestToken + "-stage-q"
+
+	tracker := map[string]interface{}{
+		"schema_version":  TrackerSchemaVersion,
+		"request_token":   requestToken,
+		"source_document": definitionPath,
+		"steps": []interface{}{
+			map[string]interface{}{
+				"slug":        "change-definition",
+				"disposition": "completed",
+				"evidence_refs": []interface{}{
+					evidenceRef,
+				},
+			},
+		},
+	}
+	citdpDoc := map[string]interface{}{
+		citdpRecordKey: map[string]interface{}{
+			"record_identity": map[string]interface{}{
+				"change_request_id": requestToken,
+				"title":             "Stage Q rollout — inquiry sub-turn + second pilot",
+			},
+			"risk_analysis": map[string]interface{}{
+				"adversarial_inquiry": map[string]interface{}{
+					"depth_tier":  "integrated",
+					"gate_policy": "advisory",
+				},
+			},
+		},
+	}
+	if err := atomicWriteYAML(trackerPath, tracker); err != nil {
+		return PilotInput{}, err
+	}
+	if err := atomicWriteYAML(citdpPath, citdpDoc); err != nil {
+		return PilotInput{}, err
+	}
+	citdp, err := loadYAMLMap(citdpPath)
+	if err != nil {
+		return PilotInput{}, err
+	}
+
+	receiptBody := map[string]interface{}{
+		"schema_version": gateReceiptSchemaVersion,
+		"phase":          "verification",
+		"allowed":        true,
+		"input_hashes": map[string]interface{}{
+			"tracker_hash": "sha256:" + StableHash(tracker),
+			"citdp_hash":   "sha256:" + StableHash(citdp),
+		},
+	}
+	receiptPath := filepath.Join(gatesDir, "verification-stage-q-pilot-20260825.json")
+	receiptBytes, err := json.MarshalIndent(receiptBody, "", "  ")
+	if err != nil {
+		return PilotInput{}, err
+	}
+	receiptBytesWithNL := append(receiptBytes, '\n')
+	if err := os.WriteFile(receiptPath, receiptBytesWithNL, 0o644); err != nil {
+		return PilotInput{}, err
+	}
+	receiptHash := fileContentHash(receiptBytesWithNL)
+
+	phaseRunIDs := map[string]string{
+		"pre_implementation": "stage-q-pre-implementation-20260825",
+		"verification":       "stage-q-verification-20260825",
+		"close_out":          "stage-q-close-out-20260825",
+	}
+
+	rows := []map[string]interface{}{
+		pilotInstructionRenderedRow(requestToken, phaseRunIDs["pre_implementation"], 1, "change-definition", "nonce-stage-q", "sha256:stage-q"),
+		pilotActionAttemptedRow(requestToken, phaseRunIDs["pre_implementation"], 1, "change-definition", "nonce-stage-q", "sha256:stage-q", "receipt-stage-q", []string{evidenceRef}),
+		pilotOutcomeVerifiedRow(requestToken, phaseRunIDs["pre_implementation"], 1, "change-definition", "receipt-stage-q", evidenceRef, evidenceHash),
+		pilotAgentAcknowledgedRow(requestToken, phaseRunIDs["pre_implementation"], 1, "change-definition", "nonce-stage-q", "sha256:stage-q", "receipt-stage-q"),
+		gateDecidedRow(requestToken, "verification", receiptPath, receiptHash),
+		statusMutatedRow(requestToken, receiptPath, receiptHash),
+	}
+	ledgerPath := filepath.Join(adherenceDir, "pilot-events-stage-q.jsonl")
+	if err := writePilotLedger(ledgerPath, rows); err != nil {
+		return PilotInput{}, err
+	}
+
+	baselineHash, err := DefinitionContentHash(definitionPath)
+	if err != nil {
+		return PilotInput{}, err
+	}
+
+	return PilotInput{
+		RepoRoot:               rootDir,
+		RequestToken:           requestToken,
+		TrackerPath:            trackerPath,
+		CITDPPath:              citdpPath,
+		LedgerPath:             ledgerPath,
+		GatesDir:               gatesDir,
+		DefinitionPath:         definitionPath,
+		BaselineDefinitionHash: baselineHash,
+		ReportPath:             filepath.Join(rootDir, "working", requestToken, "pilot-report-stage-q.json"),
+		Workspace:              rootDir,
+		TiedIndexes: TiedIndexSnapshot{
+			Requirements: map[string]interface{}{
+				requestToken: map[string]interface{}{"status": "Implemented"},
+			},
+		},
+		PhaseRunIDs: phaseRunIDs,
+	}, nil
+}
+
 // BuildPilotControlledClientFixture materializes a controlled-client pilot corpus for REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.
 func BuildPilotControlledClientFixture(rootDir, requestToken string) (PilotInput, error) {
 	rootDir = filepath.Clean(rootDir)
@@ -250,7 +383,7 @@ func BuildPilotControlledClientFixture(rootDir, requestToken string) (PilotInput
 	rows := []map[string]interface{}{
 		pilotInstructionRenderedRow(requestToken, phaseRunIDs["pre_implementation"], 1, "change-definition", "nonce-stage-l", "sha256:stage-l"),
 		pilotAgentAcknowledgedRow(requestToken, phaseRunIDs["pre_implementation"], 1, "change-definition", "nonce-stage-l", "sha256:stage-l", "receipt-stage-l"),
-		pilotActionAttemptedRow(requestToken, phaseRunIDs["pre_implementation"], 1, "change-definition", "sha256:stage-l", "receipt-stage-l", []string{evidenceRef}),
+		pilotActionAttemptedRow(requestToken, phaseRunIDs["pre_implementation"], 1, "change-definition", "nonce-stage-l", "sha256:stage-l", "receipt-stage-l", []string{evidenceRef}),
 		pilotOutcomeVerifiedRow(requestToken, phaseRunIDs["pre_implementation"], 1, "change-definition", "receipt-stage-l", evidenceRef, evidenceHash),
 		gateDecidedRow(requestToken, "verification", receiptPath, receiptHash),
 		statusMutatedRow(requestToken, receiptPath, receiptHash),
@@ -345,8 +478,8 @@ func pilotAgentAcknowledgedRow(requestToken, runID string, turn int, slug, nonce
 	return row
 }
 
-func pilotActionAttemptedRow(requestToken, runID string, turn int, slug, hash, receiptHash string, refs []string) map[string]interface{} {
-	row := actionAttemptedRow(turn, slug, hash, receiptHash, refs)
+func pilotActionAttemptedRow(requestToken, runID string, turn int, slug, nonce, hash, receiptHash string, refs []string) map[string]interface{} {
+	row := actionAttemptedRow(turn, slug, nonce, hash, receiptHash, refs)
 	corr := row["correlation"].(map[string]interface{})
 	corr["request_token"] = requestToken
 	corr["run_id"] = runID

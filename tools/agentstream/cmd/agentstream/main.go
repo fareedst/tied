@@ -8,6 +8,7 @@ import (
 	"context"
 	"crypto/rand"
 	"encoding/hex"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"os"
@@ -54,6 +55,21 @@ func main() {
 		}
 		opts := &featurespec.Options{OrderFilter: fo}
 		if err := featurespec.Preview(cfg.PreviewFeatureSpecBatchYAML, opts, os.Stdout); err != nil {
+			fmt.Fprintf(os.Stderr, "agentstream: %v\n", err)
+			os.Exit(1)
+		}
+		os.Exit(0)
+	}
+
+	if cfg.PreviewChecklistTrackerYAML != "" {
+		report, err := checklist.PreviewTrackerMigration(cfg.LeadChecklistYAML, cfg.PreviewChecklistTrackerYAML)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "agentstream: %v\n", err)
+			os.Exit(1)
+		}
+		enc := json.NewEncoder(os.Stdout)
+		enc.SetIndent("", "  ")
+		if err := enc.Encode(report); err != nil {
 			fmt.Fprintf(os.Stderr, "agentstream: %v\n", err)
 			os.Exit(1)
 		}
@@ -154,6 +170,7 @@ func main() {
 
 		var issued checklist.IssuedInstruction
 		var correlation checklist.InstructionCorrelation
+		var activeTurnMarkerPath string
 		usingTracker := strings.TrimSpace(cfg.ChecklistTrackerYAML) != ""
 		if usingTracker && strings.TrimSpace(t.StepStub) != "" {
 			requestToken := trackerRequestToken(cfg)
@@ -178,13 +195,40 @@ func main() {
 					fmt.Fprintf(os.Stderr, "agentstream: adherence ledger write failed: %v\n", err)
 					os.Exit(1)
 				}
+				activeTurnMarkerPath = checklist.ActiveTurnMarkerPath(cfg.Workspace, requestToken)
+				if err := checklist.WriteActiveTurnMarker(activeTurnMarkerPath, checklist.ActiveTurnMarker{
+					RequestToken:        requestToken,
+					RunID:               cfg.RunID,
+					TurnIndex:           cfg.FirstTurn + i,
+					StepSlug:            t.StepStub,
+					InstructionNonce:    instructionNonce,
+					InstructionHash:     instructionHash,
+					AdherenceLedgerPath: cfg.AdherenceLedger,
+					SourceRevision:      sourceRevision(cfg.Workspace),
+					WorkspaceRoot:       cfg.Workspace,
+				}); err != nil {
+					fmt.Fprintf(os.Stderr, "agentstream: active-turn marker write failed: %v\n", err)
+					os.Exit(1)
+				}
 			}
+		}
+		clearActiveTurnMarker := func() {
+			if activeTurnMarkerPath == "" {
+				return
+			}
+			if err := checklist.ClearActiveTurnMarker(activeTurnMarkerPath); err != nil {
+				fmt.Fprintf(os.Stderr, "DIAGNOSTIC: active-turn marker clear failed: %v\n", err)
+			}
+			activeTurnMarkerPath = ""
 		}
 
 		argv := executor.AgentArgv(cfg.AgentPath, cfg.Workspace, cfg.Model, sess, t.Parts)
 		var extraEnv []string
 		if usingTracker && strings.TrimSpace(t.StepStub) != "" {
 			extraEnv = bindingEnv(issued)
+			if strings.TrimSpace(cfg.AdherenceLedger) != "" {
+				extraEnv = append(extraEnv, "ADHERENCE_WORKSPACE="+cfg.Workspace)
+			}
 		}
 		runResult, code, err := executor.Run(ctx, argv, os.Stdout, os.Stderr, extraEnv...)
 		if err != nil {
@@ -211,6 +255,7 @@ func main() {
 			}
 		}
 		if !controlOK {
+			clearActiveTurnMarker()
 			continue
 		}
 		if err := control.Validate(decision, knownSlugs); err != nil {
@@ -246,6 +291,7 @@ func main() {
 			knownSlugs = pipeline.KnownStepStubs(turns)
 			fmt.Fprintf(os.Stderr, "DIAGNOSTIC: agentstream_control goto %s: %s\n", decision.Target, decision.Reason)
 		}
+		clearActiveTurnMarker()
 	}
 }
 

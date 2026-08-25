@@ -1,0 +1,27 @@
+{
+  "schema_version": "checklist-gate-receipt.v1",
+  "phase": "pre_implementation",
+  "timestamp": "2026-08-25T18:31:00.000Z",
+  "allowed": false,
+  "diagnostics": [
+    "pending_required_step:sub-adversarial-inquiry-pass",
+    "sub_stub_pending_while_parent_completed",
+    "sub_stub_pending",
+    "parent_child_inconsistent"
+  ],
+  "depth": "integrated",
+  "note": "Receipt captured after inquiry run; sub-adversarial-inquiry-pass disposition updated before implementation proceeded.",
+  "gate_result": {
+    "allowed": false,
+    "ok": false,
+    "blocking": true,
+    "depth": "integrated",
+    "phase": "pre_implementation",
+    "diagnostics": [
+      "pending_required_step:sub-adversarial-inquiry-pass",
+      "sub_stub_pending_while_parent_completed",
+      "sub_stub_pending",
+      "parent_child_inconsistent"
+    ]
+  }
+}

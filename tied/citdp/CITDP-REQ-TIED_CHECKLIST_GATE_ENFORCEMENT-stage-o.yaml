@@ -1,0 +1,47 @@
+CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-o:
+  change_definition:
+    current_behavior: "No PreviewTrackerMigration; parent §1 gap table partially annotated; README lacks hook bridge and reconcile runbook; no static flag contract test."
+    desired_behavior: "PreviewTrackerMigration emits read-only tracker-migration-preview.v1 report; operator doc materialized; README documents hook bridge, reconcile CLI/MCP, and all config flags; static README ↔ config.go contract test."
+    success_criteria:
+      - "Parent §1 gap table annotated historical; link to remaining-work doc (A30)."
+      - "PreviewTrackerMigration reports slug diff without mutating Tracker (A29)."
+      - "README documents hook bridge, reconcile CLI/MCP, all tracker/adherence flags (A31)."
+  completion_criteria:
+    activation:
+      phase: "close_out"
+      project_id: "/Users/fareed/Documents/dev/chatgpt/stdd"
+      request_token: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      run_id: "stage-o-close-out-20260825"
+  record_identity:
+    change_request_id: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    record_status: "complete"
+    title: "Stage O migration preview and doc hygiene"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "PreviewTrackerMigration mutates Tracker file despite read_only contract."
+        - "README contract test drifts when new flags ship without doc update."
+        - "Stale disposition detection misses orphan completed slugs."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Before/after tracker file hash unchanged in PreviewTrackerMigration tests."
+        - "Report always includes read_only true and would_materialize_fresh false."
+        - "Static test fails when config.go flag missing from README."
+      evidence_references:
+        - "/Users/fareed/.cursor/plans/checklist_adherence_remaining_eb852d26.plan.md"
+        - "docs/checklist-adherence-remaining-work-plan.md"
+        - "tools/agentstream/checklist/tracker_migration_preview_test.go"
+        - "tools/agentstream/config/config_docs_test.go"
+      falsification_questions:
+        - "Are extra_in_tracker slugs with completed disposition flagged as stale?"
+        - "Does preview write to the Tracker path?"
+        - "Does README omit any parseFlags option?"
+      gate_policy: "advisory"
+      prior_depth_tier: "minimal"
+      profile_depth: "not_measured"
+  test_strategy:
+    commands:
+      - "go test ./tools/agentstream/checklist/..."
+      - "go test ./tools/agentstream/checklist/... -run PreviewTrackerMigration -count=1"
+      - "go test ./tools/agentstream/config/... -run READMEDocuments -count=1"
+      - "tied_validate_consistency"

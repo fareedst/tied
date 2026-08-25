@@ -93,7 +93,7 @@ func TestReconcileAdherenceChain_attemptWithoutVerifiedOutcome(t *testing.T) {
 	path := writeFixtureLedger(t, dir, []map[string]interface{}{
 		instructionRenderedRow(1, "change-definition", "nonce-a", "sha256:one"),
 		agentAcknowledgedRow(1, "change-definition", "nonce-a", "sha256:one", "receipt-1"),
-		actionAttemptedRow(1, "change-definition", "sha256:one", "receipt-1", []string{"docs/plan.md"}),
+		actionAttemptedRow(1, "change-definition", "nonce-a", "sha256:one", "receipt-1", []string{"docs/plan.md"}),
 	})
 	tracker := minimalTracker("REQ-TEST")
 	tracker["steps"] = []interface{}{
@@ -299,7 +299,7 @@ func buildSixClassLinkedFixture(t *testing.T) (fixtureDir, ledgerPath string, tr
 	rows := []map[string]interface{}{
 		instructionRenderedRow(1, "change-definition", "nonce-pilot", "sha256:pilot"),
 		agentAcknowledgedRow(1, "change-definition", "nonce-pilot", "sha256:pilot", "receipt-pilot"),
-		actionAttemptedRow(1, "change-definition", "sha256:pilot", "receipt-pilot", []string{evidenceRef}),
+		actionAttemptedRow(1, "change-definition", "nonce-pilot", "sha256:pilot", "receipt-pilot", []string{evidenceRef}),
 		outcomeVerifiedRow(1, "change-definition", "receipt-pilot", evidenceRef, evidenceHash),
 		gateDecidedRow("REQ-SYNTHETIC-PILOT", "verification", receiptPath, receiptHash),
 		statusMutatedRow("REQ-SYNTHETIC-PILOT", receiptPath, receiptHash),
@@ -325,6 +325,74 @@ func copyFile(t *testing.T, src, dst string) {
 	}
 	if err := os.WriteFile(dst, data, 0o644); err != nil {
 		t.Fatal(err)
+	}
+}
+
+func TestReconcileAdherenceChain_liveActionAttemptedNoAckWithoutAttempt(t *testing.T) {
+	dir := t.TempDir()
+	evidenceRef := "evidence/live-step.md"
+	if err := os.MkdirAll(filepath.Join(dir, "evidence"), 0o755); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(dir, evidenceRef), []byte("live capture evidence\n"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	nonce := "run-live:1:abc"
+	hash := "sha256:live"
+	rows := []map[string]interface{}{
+		instructionRenderedRow(1, "change-definition", nonce, hash),
+		map[string]interface{}{
+			"schema_version": adherenceEventSchemaVersion,
+			"event_class":    "action_attempted",
+			"correlation": map[string]interface{}{
+				"request_token":     "REQ-LIVE",
+				"run_id":            "run-live",
+				"turn_index":        float64(1),
+				"step_slug":         "change-definition",
+				"instruction_hash":  hash,
+				"instruction_nonce": nonce,
+			},
+			"evidence_refs": []interface{}{evidenceRef},
+			"hook_log_ref": map[string]interface{}{
+				"path": "/tmp/live-hook.yaml",
+				"line": 12,
+			},
+			"source": map[string]interface{}{
+				"kind":       "cursor_hook",
+				"hook_event": "postToolUse",
+			},
+		},
+		outcomeVerifiedRow(1, "change-definition", "receipt-live", evidenceRef, fileContentHash([]byte("live capture evidence\n"))),
+		agentAcknowledgedRow(1, "change-definition", nonce, hash, "receipt-live"),
+	}
+	ledgerPath := writeFixtureLedger(t, dir, rows)
+	tracker := map[string]interface{}{
+		"request_token":  "REQ-LIVE",
+		"schema_version": TrackerSchemaVersion,
+		"steps": []interface{}{
+			map[string]interface{}{
+				"slug":        "change-definition",
+				"disposition": "completed",
+				"evidence_refs": []interface{}{
+					evidenceRef,
+				},
+			},
+		},
+	}
+	report, err := ReconcileAdherenceChain(ReconcileInput{
+		LedgerPath: ledgerPath,
+		Tracker:    tracker,
+		Workspace:  dir,
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if hasFindingCode(report.Findings, findingAcknowledgedWithoutAttempt) {
+		t.Fatalf("A25: live action_attempted must clear acknowledged_without_attempt: %#v", report.Findings)
+	}
+	body, _ := json.Marshal(rows[1])
+	if strings.Contains(string(body), "prompt") || strings.Contains(string(body), "tool_input") {
+		t.Fatalf("live row must not contain bodies: %s", body)
 	}
 }
 

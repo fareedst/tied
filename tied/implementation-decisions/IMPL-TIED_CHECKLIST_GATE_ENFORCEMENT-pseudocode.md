@@ -524,11 +524,16 @@ procedure RESOLVE_EVIDENCE_REFS(receipt, project_root):
   EFFECTS: read-only filesystem and manifest inspection
   TERMINATION: total
   FOR each ref in evidence_refs:
+    IF ref is inline JSON object or command_evidence: prefix map:
+      WHEN claimed_success: VALIDATE_COMMAND_EVIDENCE requires manifest_ref, output ref, exit_code
+      RESOLVE manifest_ref as manifest_ref kind and output ref as file_path kind
+      RECORD kind command_evidence with combined artifact_hash
+      WHEN claimed_success is false or absent: accept map without filesystem proof
     IF ref matches generic prose pattern: RETURN unresolved_evidence_ref
-    IF ref is file path: require exists; record sha256
-    IF ref is manifest reference: load verification-evidence-manifest.v1; reject exit_code != 0
-    IF ref is command evidence map: VALIDATE_COMMAND_EVIDENCE
+    IF ref is file path: require exists; record sha256 as file_path kind
+    IF ref is manifest reference: load verification-evidence-manifest.v1; reject exit_code != 0 as manifest_ref kind
   RETURN resolved_refs for outcome_verified ledger append
+  NOTE: Stage P trigger (2026-08-25): shared TS gate accepts non-empty evidence_refs without filesystem resolution; Go producer remains authoritative resolver at write time; TS Option B validateTrackerEvidenceRefs deferred unless gate-time hardening required
 
 # [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: persist raw checklist evidence gate decision with input Tracker/CITDP hash for reconciliation.
 procedure PERSIST_GATE_DECISION_RECEIPT(gate_result, input_hashes, gates_dir):
@@ -586,3 +591,74 @@ procedure RECONCILE_ADHERENCE_CHAIN(ledger_path, tracker_path, tied_indexes, gat
   FOR each gate_decided receipt whose input hash differs from current Tracker/CITDP: RECORD gate_without_current_evidence finding
   FOR each TIED status change without status_mutated row referencing gate receipt: RECORD status_change_without_verification_receipt finding
   RETURN findings report
+
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: expose read-only ReconcileReport via Go CLI stdout JSON and MCP subprocess wrapper without TypeScript finding logic.
+procedure EXPOSE_RECONCILE_OPERATOR_SURFACE(ledger_path, tracker_path, gates_dir, workspace, citdp_path, tied_indexes):
+  Contract:
+  INPUT: adherence ledger path, Authoritative Tracker path, gates directory, workspace root, optional CITDP and TIED index paths
+  PRE: tracker_path readable; reconcile operator surface is read-only
+  OUTPUT: ReconcileReport JSON on stdout (CLI) or MCP tool response
+  POST: report.read_only is always true; finding codes match RECONCILE_ADHERENCE_CHAIN closed set; CLI exits 0 even when findings present; no Tracker or TIED YAML mutation
+  FAILURE_MODES: tracker_not_readable, invalid_yaml, subprocess_spawn_failure, stdout_parse_failure
+  DATA: ReconcileReport with findings[], ledger_rows, request_token, read_only
+  DATA_TRANSITION: filesystem paths delegate to RECONCILE_ADHERENCE_CHAIN; CLI/MCP only serialize report
+  EFFECTS: read-only; MCP spawns built Go binary (ADHERENCE_RECONCILE_BIN or go run fallback)
+  TERMINATION: total
+  report := RECONCILE_ADHERENCE_CHAIN(ledger_path, tracker_path, tied_indexes, gates_dir)
+  CLI: PRINT json.Marshal(report) to stdout; EXIT 0 on success
+  MCP tied_adherence_reconcile_run: SPAWN Go binary with flag args; PARSE stdout JSON; ASSERT report.read_only == true; RETURN report
+
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: write and clear active-turn-marker.v1 around checklist subprocess so hooks correlate ledger rows without parsing prompts.
+procedure ACTIVE_TURN_MARKER(workspace, request_token, correlation, ledger_path):
+  Contract:
+  INPUT: workspace root, request_token, instruction correlation fields, adherence ledger path
+  PRE: tracker mode with non-empty step slug and adherence ledger configured
+  OUTPUT: marker path written before subprocess and cleared after turn handler
+  POST: file exists at working/{REQ-TOKEN}/adherence/active-turn.json between RENDER_INSTRUCTION_EVIDENCE and handleTrackerTurn completion; schema active-turn-marker.v1; hooks fail-silent when marker absent
+  FAILURE_MODES: active_turn_marker_write_failure, active_turn_marker_clear_failure
+  DATA: active-turn-marker.v1 JSON with instruction_nonce, instruction_hash, adherence_ledger_path, source_revision
+  DATA_TRANSITION: correlation fields become short-lived marker file then removed
+  EFFECTS: atomic write and remove under working/{REQ-TOKEN}/adherence/
+  TERMINATION: total
+  path := working/{REQ-TOKEN}/adherence/active-turn.json
+  WRITE marker atomically after instruction_rendered append
+  spawn subprocess while marker present
+  CLEAR marker on turn success or failure exit before next turn
+
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: append live action_attempted rows from hook bridge with bounded evidence_refs and hook_log_ref only.
+procedure APPEND_ACTION_ATTEMPTED(ledger_path, marker, hook_event, bounded_refs, hook_log_ref): # [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+  Contract:
+  INPUT: ledger path, active-turn marker, allowlisted hook event, bounded evidence_refs, hook_log_ref path+line
+  PRE: marker present with instruction_nonce and instruction_hash; hook_event in postToolUse, afterShellExecution, afterMCPExecution
+  OUTPUT: append-only agent-adherence-event.v1 action_attempted row or fail-silent when marker absent
+  POST: row correlation matches marker; evidence_refs are bounded identifiers not raw bodies; hook_log_ref records YAML pointer only; append-only preserved; row never implies outcome_verified or gate pass
+  FAILURE_MODES: action_attempted_validation_failure, ledger_write_failure
+  DATA: evidence_refs entries tool:{name}, shell:sha256:{digest}, or mcp:{server}.{tool}
+  DATA_TRANSITION: hook observation becomes append-only JSONL row correlated by instruction_nonce
+  EFFECTS: append-only ledger write; no prompt/tool/shell bodies inlined
+  TERMINATION: total
+  IF marker absent or unreadable: RETURN fail-silent without error to caller
+  IF hook_event not allowlisted: RETURN without append
+  VALIDATE bounded_refs non-empty and hook_log_ref path+line present
+  APPEND action_attempted row atomically to marker.adherence_ledger_path
+  RETURN success
+
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: read-only slug inventory diff between checklist definition and existing Tracker without mutating Tracker bytes.
+procedure PREVIEW_TRACKER_MIGRATION(definition_path, tracker_path): # [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+  Contract:
+  INPUT: read-only checklist definition path, existing Authoritative Tracker path
+  PRE: tracker_path must not equal definition_path; both paths readable
+  OUTPUT: tracker-migration-preview.v1 report JSON
+  POST: report includes definition_slugs, tracker_slugs, missing_in_tracker, extra_in_tracker, stale_dispositions; read_only is true; would_materialize_fresh is false; Tracker file bytes unchanged
+  FAILURE_MODES: definition_not_readable, tracker_not_readable, invalid_definition, malformed_tracker
+  DATA: slug inventories, stale disposition rows with reason step_removed_from_definition
+  DATA_TRANSITION: definition and Tracker YAML project into read-only diff report
+  EFFECTS: read-only filesystem reads; no Tracker or definition writes
+  TERMINATION: total
+  IF tracker_path equals definition_path: RETURN path_refusal
+  definition_slugs := inventory from definition main steps plus gate sub when absent from main
+  tracker_slugs := ordered slugs from Tracker steps rows
+  missing_in_tracker := definition_slugs minus tracker_slugs
+  extra_in_tracker := tracker_slugs minus definition_slugs
+  FOR each slug in extra_in_tracker with non-pending disposition: RECORD stale_dispositions entry reason step_removed_from_definition
+  RETURN tracker-migration-preview.v1 report

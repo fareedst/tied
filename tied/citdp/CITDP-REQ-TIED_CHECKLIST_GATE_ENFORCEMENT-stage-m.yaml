@@ -1,0 +1,49 @@
+CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-m:
+  change_definition:
+    current_behavior: "Reconciliation emits acknowledged_without_attempt when receipts exist without observed actions; Stage L pilot used synthetic action_attempted rows only; hooks log YAML but do not append ledger rows."
+    desired_behavior: "During each checklist turn subprocess window hooks append live action_attempted rows correlated via active-turn marker; ledger rows include bounded evidence_refs and hook_log_ref; reconciliation shows no acknowledged_without_attempt for turns with matching hook refs."
+    success_criteria:
+      - "AppendActionAttempted rejects malformed rows; append-only preserved (A23)."
+      - "Hook bridge fail-silent without marker (A22)."
+      - "hook_log_ref present; no prompt/tool bodies in ledger (A24)."
+      - "Live action_attempted appended after instruction_rendered and before outcome_verified (A21)."
+      - "Live-capture reconcile fixture emits no acknowledged_without_attempt (A25)."
+  completion_criteria:
+    activation:
+      phase: "close_out"
+      project_id: "/Users/fareed/Documents/dev/chatgpt/stdd"
+      request_token: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      run_id: "stage-m-close-out-20260825"
+  record_identity:
+    change_request_id: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    record_status: "complete"
+    title: "Stage M live action_attempted capture"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "Hook append races after marker cleared and action_attempted lands after agent_acknowledged."
+        - "Hook transport success treated as outcome_verified or gate pass."
+        - "Ledger rows inline prompt or shell output violating privacy contract."
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "Composition test enforces instruction_rendered → action_attempted → outcome_verified → agent_acknowledged order."
+        - "Ledger row fixture grep rejects prompt/tool bodies."
+        - "Ruby bridge test proves fail-silent when active-turn marker absent."
+      evidence_references:
+        - ".cursor/hooks/log.rb"
+        - "/Users/fareed/.cursor/plans/checklist_adherence_remaining_eb852d26.plan.md"
+        - "scripts/adherence_append_action_attempted.rb"
+        - "tools/agentstream/checklist/adherence_ledger.go"
+      falsification_questions:
+        - "Can action_attempted appear before instruction_rendered in composition ledger?"
+        - "Does hook bridge write when marker file is missing?"
+        - "Does reconcile still emit acknowledged_without_attempt when live refs match tracker evidence?"
+      gate_policy: "advisory"
+      prior_depth_tier: "integrated"
+      profile_depth: "not_measured"
+  test_strategy:
+    commands:
+      - "go test ./tools/agentstream/checklist/..."
+      - "go test ./tools/agentstream/cmd/agentstream/..."
+      - "ruby -Iscripts/test scripts/test/adherence_append_action_attempted_test.rb"
+      - "tied_validate_consistency"

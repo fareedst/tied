@@ -95,6 +95,90 @@ func TestAdherenceLedgerAppendOutcomeVerified_schema(t *testing.T) {
 	}
 }
 
+func TestAppendActionAttempted_validRow(t *testing.T) {
+	dir := t.TempDir()
+	path := filepath.Join(dir, "events.jsonl")
+	fields := InstructionCorrelation{
+		RequestToken:     "REQ-TEST",
+		RunID:            "run-1",
+		TurnIndex:        3,
+		StepSlug:         "unit-test-red",
+		InstructionHash:  "sha256:abc123",
+		InstructionNonce: "run-1:3:deadbeef",
+	}
+	input := ActionAttemptedInput{
+		Correlation:  fields,
+		EvidenceRefs: []string{"tool:Shell", "evidence/step-one.md"},
+		HookLogRef: HookLogRef{
+			Path: filepath.Join(dir, "hook.yaml"),
+			Line: 42,
+		},
+		SourceKind: "cursor_hook",
+		HookEvent:  "postToolUse",
+		ToolUseID:  "tool-use-1",
+	}
+	if err := AppendActionAttempted(path, input); err != nil {
+		t.Fatal(err)
+	}
+	row, err := readLastLedgerRow(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if row["event_class"] != "action_attempted" {
+		t.Fatalf("event_class: %#v", row)
+	}
+	hookRef, ok := row["hook_log_ref"].(map[string]interface{})
+	if !ok || hookRef["line"] != float64(42) {
+		t.Fatalf("hook_log_ref: %#v", row["hook_log_ref"])
+	}
+	corr, ok := row["correlation"].(map[string]interface{})
+	if !ok || corr["instruction_nonce"] != "run-1:3:deadbeef" {
+		t.Fatalf("correlation: %#v", corr)
+	}
+	body, _ := json.Marshal(row)
+	text := string(body)
+	for _, forbidden := range []string{"prompt", "tool_input", "tool_output", "command output"} {
+		if strings.Contains(strings.ToLower(text), forbidden) {
+			t.Fatalf("ledger must not store bodies (%s): %s", forbidden, text)
+		}
+	}
+}
+
+func TestAppendActionAttempted_appendOnly(t *testing.T) {
+	dir := t.TempDir()
+	path := filepath.Join(dir, "events.jsonl")
+	fields := InstructionCorrelation{
+		RequestToken:     "REQ-TEST",
+		RunID:            "run-1",
+		TurnIndex:        1,
+		StepSlug:         "alpha",
+		InstructionHash:  "sha256:one",
+		InstructionNonce: "nonce-a",
+	}
+	input := ActionAttemptedInput{
+		Correlation:  fields,
+		EvidenceRefs: []string{"tool:Read"},
+		HookLogRef:   HookLogRef{Path: "/tmp/hook.yaml", Line: 1},
+		SourceKind:   "cursor_hook",
+		HookEvent:  "postToolUse",
+	}
+	if err := AppendActionAttempted(path, input); err != nil {
+		t.Fatal(err)
+	}
+	bad := input
+	bad.EvidenceRefs = nil
+	if err := AppendActionAttempted(path, bad); err == nil {
+		t.Fatal("expected validation error for malformed row")
+	}
+	lines, err := readLedgerLines(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(lines) != 1 {
+		t.Fatalf("expected append-only single row, got %d", len(lines))
+	}
+}
+
 func TestAdherenceLedgerAppendOnly(t *testing.T) {
 	dir := t.TempDir()
 	path := filepath.Join(dir, "events.jsonl")

@@ -1,0 +1,53 @@
+CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-p:
+  change_definition:
+    current_behavior: "evidence_resolve.go supports file_path and manifest_ref only; inline command_evidence JSON refs deferred since Stage H; shared TS gate accepts non-empty evidence_refs without filesystem resolution from non-agentstream Tracker writers."
+    desired_behavior: "When Stage P trigger fires, Go RESOLVE_EVIDENCE_REFS resolves inline command_evidence JSON refs aligned with validateCommandEvidence; composition test documents trigger; TS Option B remains deferred."
+    success_criteria:
+      - "Composition test A32 trigger fires: gate accepts manual Tracker with nonexistent evidence_refs."
+      - "Go resolver resolves inline JSON and command_evidence: prefix refs (A32)."
+      - "validateCommandEvidence semantics enforced at producer boundary for claimed_success."
+    trigger_evaluation:
+      rationale: "validateChecklistGate allowed:true for completed steps with fake paths bypassing Go producer; hardening warranted at producer only."
+      result: "trigger_fired"
+      test_file: "mcp-server/src/checklist-validator.test.ts"
+      test_name: "A32 trigger fires when gate accepts manual Tracker with nonexistent evidence_refs"
+  completion_criteria:
+    activation:
+      phase: "close_out"
+      project_id: "/Users/fareed/Documents/dev/chatgpt/stdd"
+      request_token: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      run_id: "stage-p-close-out-20260825"
+  record_identity:
+    change_request_id: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    record_status: "complete"
+    title: "Stage P optional evidence ref hardening (command_evidence)"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "command_evidence prefix parsing misclassifies file paths."
+        - "Gate accepts fake paths from manual Tracker edits indefinitely."
+        - "Inline JSON ref accepted without manifest or output files when claimed_success true."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Go producer still blocks bad refs before Tracker write via agentstream."
+        - "Stage P trigger composition test documents non-agentstream gap."
+        - "TestResolveEvidenceRefs_CommandEvidence_successUnproven rejects missing manifest/output."
+      evidence_references:
+        - "/Users/fareed/.cursor/plans/checklist_adherence_remaining_eb852d26.plan.md"
+        - "mcp-server/src/checklist-validator.test.ts"
+        - "tools/agentstream/checklist/evidence_resolve.go"
+        - "tools/agentstream/checklist/evidence_resolve_test.go"
+      falsification_questions:
+        - "Does claimed_success true pass without manifest_ref and output ref?"
+        - "Does JSON detection break existing file_path resolution?"
+        - "Does the gate reject manual Tracker with fake paths?"
+      gate_policy: "advisory"
+      prior_depth_tier: "minimal"
+      profile_depth: "not_measured"
+      sub_adversarial_inquiry_pass: "not_applicable"
+  test_strategy:
+    commands:
+      - "go test ./tools/agentstream/checklist/..."
+      - "go test ./tools/agentstream/checklist/... -run CommandEvidence -count=1"
+      - "node --test mcp-server/dist/checklist-validator.test.js --test-name-pattern 'Stage P trigger'"
+      - "tied_validate_consistency"

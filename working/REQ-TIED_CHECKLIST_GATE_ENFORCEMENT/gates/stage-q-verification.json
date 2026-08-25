@@ -1,0 +1,15 @@
+{
+  "schema_version": "checklist-gate-receipt.v1",
+  "phase": "verification",
+  "allowed": true,
+  "diagnostics": [],
+  "depth": "integrated",
+  "gate_result": {
+    "allowed": true,
+    "ok": true,
+    "blocking": false,
+    "depth": "integrated",
+    "phase": "verification",
+    "diagnostics": []
+  }
+}

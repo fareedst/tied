@@ -35,6 +35,11 @@
 | **outcome_verified event** | verified outcome, evidence verified | Adherence ledger `event_class` appended after successful evidence ref resolution; records `artifact_ref` + `artifact_hash` |
 | **adherence event class** | lifecycle stage, event type | One of six non-interchangeable classes: `instruction_rendered`, `agent_acknowledged`, `action_attempted`, `outcome_verified`, `gate_decided`, `status_mutated` |
 | **adherence reconciliation** | reconcile report, adherence audit | Read-only report emitting finding codes (`rendered_without_acknowledgment`, etc.); never mutates Tracker or TIED YAML |
+| **reconcile operator surface** | reconcile CLI, reconcile MCP | Read-only `ReconcileReport` via Go **`adherence-reconcile`** CLI and MCP **`tied_adherence_reconcile_run`**; MCP spawns Go subprocess only — no TypeScript port of finding logic |
+| **active-turn marker** | turn marker, subprocess marker | Short-lived `active-turn-marker.v1` JSON at `working/{REQ-TOKEN}/adherence/active-turn.json`; written after `instruction_rendered`, cleared after turn handler; hooks read for ledger correlation |
+| **append-only bridge** | hook bridge, adherence hook bridge | Ruby helper `scripts/adherence_append_action_attempted.rb` plus `.cursor/hooks/log.rb` wiring; appends `action_attempted` rows fail-silent when marker absent |
+| **hook_log_ref** | hook yaml pointer | Ledger `{ path, line }` pointer into hook YAML logs; never inlines prompt, tool payloads, or shell output |
+| **PreviewTrackerMigration** | tracker migration preview, slug diff preview | Read-only `tracker-migration-preview.v1` report comparing checklist definition slug inventory to an existing Tracker; flags stale dispositions; CLI `--checklist-tracker-preview`; never mutates Tracker bytes |
 | **run-feature-batch-agentstream** | tasd (alone) | Shell driver: `scripts/run-feature-batch-agentstream.sh` |
 
 ---
@@ -99,7 +104,8 @@ Default **`pipeline.Build`** concatenation (see [IMPL-GOAGENT-PIPELINE-pseudocod
 | `-w`, `--workspace` | `Workspace` | Default cwd |
 | `-c`, `--lead-checklist-yaml` | `LeadChecklistYAML` | Read-only lead checklist definition path |
 | `--checklist-tracker-yaml` | `ChecklistTrackerYAML` | Writable per-request Authoritative Tracker path |
-| `--adherence-ledger` | `AdherenceLedger` | Writable adherence ledger path (planned Stage G) |
+| `--adherence-ledger` | `AdherenceLedger` | Writable adherence ledger path (Stage G committed) |
+| **`--checklist-tracker-preview`** | `PreviewChecklistTrackerYAML` | Read-only migration preview path; requires `-c`; prints JSON and exits |
 | `--lead-checklist-from-step` | `LeadChecklistStepFromID` | Inclusive lower bound (slug or id) |
 | `--lead-checklist-to-step` | `LeadChecklistStepToID` | Inclusive upper bound |
 | `--lead-checklist-skip-sub` | `LeadChecklistSkipSub` | Omit `sub_procedures` |
@@ -173,6 +179,9 @@ const VerifySessionPrompt = "what was the most recent prompt?"
 | Gate decision receipt persistence | `PERSIST_GATE_DECISION_RECEIPT` | [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT](../implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml) |
 | Status mutation receipt persistence | `PERSIST_STATUS_MUTATION_RECEIPT` | [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT](../implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml) |
 | Adherence chain reconciliation | `RECONCILE_ADHERENCE_CHAIN` | [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT](../implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml) |
+| Active turn marker lifecycle | `ACTIVE_TURN_MARKER` | [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT](../implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml) |
+| Live action attempted append | `APPEND_ACTION_ATTEMPTED` | [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT](../implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml) |
+| Tracker migration preview | `PREVIEW_TRACKER_MIGRATION` | [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT](../implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml) |
 
 ---
 
@@ -183,6 +192,10 @@ const VerifySessionPrompt = "what was the most recent prompt?"
 | adherence event class | Preferred terms |
 | adherence ledger | Preferred terms |
 | adherence reconciliation | Preferred terms |
+| active-turn marker | Preferred terms |
+| append-only bridge | Preferred terms |
+| hook_log_ref | Preferred terms |
+| PreviewTrackerMigration | Preferred terms |
 | agentstream | Preferred terms |
 | agentstream_control | Preferred terms |
 | ApplyPromptFilePreload | Pseudo-code blocks |

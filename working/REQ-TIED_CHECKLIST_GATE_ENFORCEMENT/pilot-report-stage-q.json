@@ -1,0 +1,34 @@
+{
+  "schema_version": "adherence-pilot-report.v1",
+  "request_token": "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT",
+  "pilot_client": "stdd-stage-q",
+  "controlled_client_path": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "depth_tier": "integrated",
+  "phase_run_ids": {
+    "close_out": "stage-q-close-out-20260825",
+    "pre_implementation": "stage-q-pre-implementation-20260825",
+    "verification": "stage-q-verification-20260825"
+  },
+  "event_classes": {
+    "action_attempted": true,
+    "agent_acknowledged": true,
+    "gate_decided": true,
+    "instruction_rendered": true,
+    "outcome_verified": true,
+    "status_mutated": true
+  },
+  "ledger_path": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adherence/pilot-events-stage-q.jsonl",
+  "tracker_path": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/stage-q-controlled-pilot_20260825.yaml",
+  "reconcile": {
+    "request_token": "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT",
+    "findings": [],
+    "ledger_rows": 6,
+    "read_only": true
+  },
+  "rollout_stop": {
+    "should_stop": false,
+    "reasons": []
+  },
+  "blocking_finding_count": 0,
+  "read_only": true
+}

@@ -20,39 +20,76 @@ Run **`agentstream --help`** for the full option list. Highlights:
 | `-d`, `--dry-run` | Print turns, prompt parts, and the `cursor agent` argv per turn; exit 0 (no subprocess, no preflight prompt). |
 | `-s`, `--session-id` | Resume token for turn 1 when continuing a session; **required** when `-f` / `--first-turn` is greater than 1. |
 | `-f`, `--first-turn N` | 1-based first turn to run (mid-batch resume). |
-| `-o`, `--select-order` | Feature-spec batch filter: single `N` or inclusive `N-M`. |
+| `-o`, `--select-order` | Feature-spec batch filter: single `N` or inclusive `N-M` (synonym: `--feature-spec-batch-order`). |
 | `-w`, `--workspace` | Workspace root (default: current directory). |
+| `-m`, `--model MODEL` | Cursor agent model (default: `Auto`). |
 | `-c`, `--lead-checklist-yaml` | Read-only lead checklist definition YAML; default resolves to repo `tied/docs/agent-req-implementation-checklist.yaml` when present. |
 | `--checklist-tracker-yaml PATH` | Writable per-request **Authoritative Tracker** (`checklist-tracker.v1`). Requires `-c`. Must not equal the definition path. When missing on disk, agentstream materializes clean pending state including `sub-adversarial-inquiry-pass` as a top-level step row. |
+| `--checklist-tracker-preview PATH` | Read-only **Tracker migration preview** (`tracker-migration-preview.v1`): slug diff vs `-c` definition; prints JSON and exits (no Tracker mutation). Requires `-c`. |
 | `--adherence-ledger PATH` | Append-only **adherence ledger** (`agent-adherence-event.v1` JSONL). Default: `working/{REQ-TOKEN}/adherence/events.jsonl` when `--checklist-tracker-yaml` is set and `REQUEST` resolves a token. Stores hash/reference edges only (no prompt or response bodies). |
+| `--lead-checklist-from-step`, `--lead-checklist-to-step` | Inclusive main-step bounds by slug (require `-c`). |
+| `--lead-checklist-skip-sub` | Omit trailing `sub_procedures` turns. |
+| `--lead-checklist-before-feature` | With both `-b` and `-c`, emit all checklist steps before all feature-spec records. |
+| `--checklist-var KEY=VALUE` | Repeatable (synonym: `--lead-checklist-var`). Substitutes `{{KEY}}` in rendered checklist text. |
+| `--checklist-var-strict`, `AGENTSTREAM_CHECKLIST_VAR_STRICT=1` | Fail rendering if any `{{NAME}}` remains after substitution. |
+| `--skip-workspace-preload`, `AGENTSTREAM_SKIP_WORKSPACE_PRELOAD=1` | Skip prepending workspace `tied/agent-preload-contract.yaml`. |
+| `-p`, `--prompt-file` | Repeatable session preload (merged with workspace preload; not a separate turn). |
+| `--prompts-file`, `--tdd-yaml`, `-b` / `--feature-spec-batch-yaml` | Repeatable prompt sources. |
+| `--preview-feature-spec-batch-yaml PATH` | Print expanded batch records and exit (no agent). |
+| `--verify-session` | Append sentinel verification turn when supported. |
+| `--agent-path PATH` | Explicit `cursor agent` binary (default: `agent` on PATH). |
+| `--tied-mcp-preflight`, `AGENTSTREAM_TIED_MCP_PREFLIGHT=1` | Opt in: validate `.cursor/mcp.json` for `tied-yaml` before spawning `cursor agent` (off by default). |
+| `--skip-tied-mcp-preflight`, `AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1` | Force skip when preflight is enabled (default is already skip). |
+| `-y`, `--yes` | Non-interactive: auto-continue after preflight warnings/blocks when preflight is enabled. |
+| `--mcp-json PATH` | Explicit `.cursor/mcp.json` when the workspace has multiple nested projects. |
+| `--non-compact-html` | Opt-in: emit non–single-line HTML in turn body strings after load. |
+| `--non-compact-html-indent N` | Stable spaces for wrapped continuation lines when `--non-compact-html` is on (0 = default). |
+| `-h`, `--help` | Print usage and exit. |
+| `--` then words | Extra argv words forwarded as prompt fragments. |
 
-### Adherence reconciliation, pilot, and rollout stop (Stage K–L)
+Positional **`FEATURE_SPEC_BATCH_YAML`** is accepted as a shorthand for `-b` (mutually exclusive with `-b`).
 
-Read-only library helpers in `checklist/` (no CLI subcommand yet):
+## Adherence operator runbook (Stages M–O)
+
+### Active-turn marker and hook bridge
+
+When `--checklist-tracker-yaml` and `--adherence-ledger` are set, agentstream writes `working/{REQ-TOKEN}/adherence/active-turn.json` (`active-turn-marker.v1`) after each `instruction_rendered` row and clears it after the turn handler completes. Cursor hooks (`.cursor/hooks/log.rb`) call `scripts/adherence_append_action_attempted.rb` to append **`action_attempted`** ledger rows during the subprocess window.
+
+- **Fail-silent** when the marker is absent (non-checklist sessions unaffected).
+- **Append-only** — prior ledger rows are never rewritten.
+- **Privacy:** ledger stores bounded `evidence_refs` and `hook_log_ref` `{ path, line }` only — no prompt text, tool payloads, or shell output.
+- **Non-implication:** `action_attempted` never proves `outcome_verified` or gate pass; hook transport success ≠ product success.
+
+Turn order: `instruction_rendered` → `action_attempted` (hooks) → `outcome_verified` (completed) → `agent_acknowledged`.
+
+### Reconcile CLI and MCP
+
+Read-only adherence chain audit (`ReconcileReport`; never mutates Tracker or TIED YAML):
+
+```bash
+go build -o adherence-reconcile ./cmd/adherence-reconcile
+
+./adherence-reconcile \
+  --ledger working/REQ-TOKEN/adherence/events.jsonl \
+  --tracker working/REQ-TOKEN/REQ-TOKEN_tracker.yaml \
+  --gates working/REQ-TOKEN/gates \
+  --workspace /path/to/repo
+```
+
+MCP tool **`tied_adherence_reconcile_run`** spawns the same Go binary (no TypeScript finding-logic port). Exit 0 even when findings are present; inspect `findings[]` in the JSON report.
+
+Library helpers (also used by pilot/stop evaluators):
 
 | API | Role |
 |-----|------|
-| `ReconcileAdherenceChain` | Emits deterministic finding codes from ledger + Tracker + gates + TIED indexes; never mutates inputs. |
-| `RunControlledClientPilot` | Assembles controlled-client pilot report (`adherence-pilot-report.v1`); stdd pilot corpus under `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/`. |
-| `EvaluateRolloutStop` | Observational stop evaluator: writer corruption, unbound receipt, blocking reconcile findings, checklist byte drift. |
+| `ReconcileAdherenceChain` | Deterministic finding codes from ledger + Tracker + gates + TIED indexes. |
+| `RunControlledClientPilot` | Controlled-client pilot report (`adherence-pilot-report.v1`). |
+| `EvaluateRolloutStop` | Observational stop evaluator (writer corruption, unbound receipt, blocking reconcile findings, checklist byte drift). |
+| `PreviewTrackerMigration` | Read-only slug diff (`tracker-migration-preview.v1`) vs checklist definition. |
 
-Tests: `go test ./tools/agentstream/checklist/... -run 'Reconcile|Rollout|Pilot|gotoClears'`
-| `--lead-checklist-before-feature` | With both `-b` and `-c`, emit all checklist steps before all feature-spec records (default is feature-spec first). |
-| `--checklist-var KEY=VALUE` | Repeatable (synonym: `--lead-checklist-var`). Substitutes **`{{KEY}}`** in rendered lead checklist text (`goals`, `tasks`, step `title`, flow branch prose, etc.). Split on the **first** `=` so values may contain `=`. Missing keys leave `{{KEY}}` unchanged unless strict mode applies. |
-| `--checklist-var-strict`, `AGENTSTREAM_CHECKLIST_VAR_STRICT=1` | Fail rendering if any `{{NAME}}` remains after substitution (forgotten vars). |
-| (no flag) + optional file | **`--workspace`/`tied/agent-preload-contract.yaml`:** if that file **exists** (e.g. after the lead checklist’s ARCH/IMPL steps create it), the CLI **always** prepends it as the first session preload, **before** any explicit `-p` paths, so a generated contract is not skipped by passing other prompt files. If the file does not exist (early in a TIED run), no default preload is added. |
-| `--skip-workspace-preload`, `AGENTSTREAM_SKIP_WORKSPACE_PRELOAD=1` | Skip prepending the workspace `tied/agent-preload-contract.yaml` even when present (e.g. tests, tooling). |
-| `-p` / `--prompt-file` | Repeatable, **merged after** the workspace `tied/agent-preload-contract.yaml` when that file exists (deduplicated if you pass the same path again). Each file’s contents are **prepended** (one `agent` argv part per file) on **every turn that starts a new Cursor session** (no effective `--resume`), including after a feature-spec record that breaks the chain. Not a separate pipeline turn (turn counts omit prompt-only steps). |
-| `--prompts-file`, `--tdd-yaml`, `-b` / `--feature-spec-batch-yaml` | Repeatable prompt sources (same roles as Ruby runner). |
-| `--preview-feature-spec-batch-yaml PATH` | Print expanded batch records and exit (no agent). |
-| `--verify-session` | Pass-through for agent session verification when supported. |
-| `--tied-mcp-preflight`, `AGENTSTREAM_TIED_MCP_PREFLIGHT=1` | Opt in: validate `.cursor/mcp.json` for `tied-yaml` before spawning `cursor agent` (off by default). |
-| `--skip-tied-mcp-preflight`, `AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1` | Force skip when preflight is enabled (default is already skip). |
-| `-y` / `--yes` | Non-interactive: auto-continue after preflight warnings/blocks when preflight is enabled. |
-| `--mcp-json PATH` | Explicit `.cursor/mcp.json` when the workspace has multiple nested projects (only used with preflight). |
-| `--` then words | Extra argv words forwarded as prompt fragments (after other sources are merged). |
+Tests: `go test ./tools/agentstream/checklist/... -run 'Reconcile|Rollout|Pilot|PreviewTracker|gotoClears'`
 
-Positional **`FEATURE_SPEC_BATCH_YAML`** is accepted as a shorthand for `-b` (mutually exclusive with `-b`).
+Further operator detail: [`docs/checklist-adherence-remaining-work-plan.md`](../../docs/checklist-adherence-remaining-work-plan.md).
 
 ## Library usage
 
@@ -166,7 +203,7 @@ When tracker mode is on (`--checklist-tracker-yaml`), binding fields are **requi
 
 Supported dispositions: `completed` (requires `evidence_refs`), `not_applicable` (`policy` + `rationale`), `waived` (`owner`, `expiry`, `approval`, `residual_risk`). Generic `skipped` is rejected. On `agentstream_control` **goto**, the runner invalidates configured downstream Tracker rows from `loop_back_clearance` before rerouting; it does not mutate the checklist definition bytes.
 
-**Migration:** legacy full checklist copies remain readable by the shared gate during a transition window, but new writer output uses top-level `steps` with `disposition`. Materialize a clean tracker with `--checklist-tracker-yaml` on a new path when `--lead-checklist-yaml` points at the canonical definition. Preview only—do not rewrite existing client state automatically.
+**Migration:** legacy full checklist copies remain readable by the shared gate during a transition window, but new writer output uses top-level `steps` with `disposition`. Materialize a clean tracker with `--checklist-tracker-yaml` on a new path when `--lead-checklist-yaml` points at the canonical definition. Preview slug drift (including stale dispositions) with `--checklist-tracker-preview` — **read-only**; do not rewrite existing client state automatically.
 
 Example:
 

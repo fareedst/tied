@@ -1,6 +1,6 @@
 # Checklist Adherence Improvement Plan
 
-**Status:** Stages G–L complete (2026-08-25); the planned checklist adherence improvement sequence is closed
+**Status:** Stages G–L complete (2026-08-25); Stages M–N complete (2026-08-25 post–Stage L backlog); Stage O complete (2026-08-25). The original G–L improvement sequence is closed; remaining deferred work (Stages P–Q) lives in [`docs/checklist-adherence-remaining-work-plan.md`](checklist-adherence-remaining-work-plan.md).
 **Scope:** Producer-side Tracker state and its integration with existing TIED checklist gates
 **Primary tokens:** `[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]`, `[ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT]`, `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]`, `[REQ-TIED_ADVERSARIAL_INQUIRY]`, `[ARCH-TIED_ADVERSARIAL_INQUIRY]`, `[IMPL-TIED_ADVERSARIAL_INQUIRY]`, `[IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST]`, `[PROC-AGENT_REQ_CHECKLIST]`, `[PROC-TIED_VERIFICATION_GATED]`, `[PROC-TOKEN_AUDIT]`, `[PROC-TOKEN_VALIDATION]`
 **Motivation:** Client `1787626480` claimed checklist completion, but the authoritative checklist evidence gate returned `tracker_sparse` and `missing_required_step:sub-adversarial-inquiry-pass`.
@@ -79,17 +79,22 @@ Raw `tied_checklist_gate_validate` output for `phase: pre_implementation` with t
 | Runner blocks turn N+1 without valid receipt | **done** | `main.go`, `tools/agentstream/cmd/agentstream/tracker_composition_test.go` |
 | Go→TS gate fixture composition | **done** | `tools/agentstream/checklist/tracker_gate_fixture_test.go` + TypeScript tests |
 
-### Remaining producer/test gaps (honest partials)
+### Remaining producer/test gaps — **historical (superseded by G–L, 2026-08-25)**
 
-- `ValidateTrackerIdentity` request-token mismatch: code exists, **no test**.
-- `ApplyTrackerDisposition` for `not_applicable` / `waived`: parser tested, **writer untested**.
-- `clearCloseOutGateSummaries` on loop-back: **code only, no test**.
-- Composition: **no E2E for `goto` invalidation**; no adversarial-inquiry sub turn.
-- Receipt scans **combined** thinking + assistant transcript (`tools/agentstream/executor/executor.go` merges both into one stream).
+The rows below predated Stages G–L and are retained for archaeology only. Stage I closed identity-mismatch, `not_applicable`/`waived` writer, and goto invalidation test debt; Stage G closed thinking-stream receipt separation.
 
-### Remaining evidence-chain gaps
+| Former gap claim | Superseded by |
+|---|---|
+| `ValidateTrackerIdentity` request-token mismatch untested | Stage I — identity mismatch tests |
+| `ApplyTrackerDisposition` for `not_applicable` / `waived` writer untested | Stage I — writer apply tests |
+| `clearCloseOutGateSummaries` on loop-back untested | Stage I — goto composition test |
+| No E2E for `goto` invalidation | Stage I — `fake_tracker_goto_agent.rb` composition |
+| Receipt scans combined thinking + assistant transcript | Stage G — `FinalText` separation (A14) |
+| No adversarial-inquiry sub turn | **Open — optional Stage Q** (remaining-work plan) |
 
-The six stage names below are **design targets**, not code identifiers today. They are **orthogonal** to `[REQ-EVIDENCE_CHAIN_PROFILE]` / `evidence-chain-profile.v1`, which measures TIED structural completeness. The new `agent-adherence-event.v1` ledger measures session/checklist adherence lifecycle.
+### Remaining evidence-chain gaps — **historical (superseded by G–L + M–N, 2026-08-25)**
+
+The six stage names below were **design targets** before Stages G–L shipped. They are **orthogonal** to `[REQ-EVIDENCE_CHAIN_PROFILE]` / `evidence-chain-profile.v1`. Post–Stage M/N, live `action_attempted` capture and operator reconcile CLI/MCP are **done**; see remaining-work plan for Stage O–Q deferrals.
 
 ```mermaid
 flowchart LR
@@ -105,16 +110,16 @@ flowchart LR
   GD -.->|"non-implication"| SM
 ```
 
-| Stage | Current closest machinery | Gap |
+| Stage | Former gap (pre–G–L) | Status after G–L / M–N |
 |---|---|---|
-| `instruction_rendered` | `checklist.LoadTurns` renders turns; hooks log `beforeSubmitPrompt` | No instruction hash persisted; no link to turn identity |
-| `agent_acknowledged` | Docs require "Observing AI principles!"; hooks log `afterAgentResponse` | No machine verification; not in Tracker or gate |
-| `action_attempted` | Cursor hooks (tool/shell/MCP); receipt parse attempt | Hooks not wired to agentstream/gate; no attempt ledger |
-| `outcome_verified` | Stage G ledger (`instruction_rendered`, `agent_acknowledged`); gate optional validators | **`RESOLVE_EVIDENCE_REFS` not wired**; `evidence_refs` accepted without existence/hash checks |
-| `gate_decided` | `validateChecklistGate` returns decision | Gate JSON not auto-persisted with input hash |
-| `status_mutated` | `tied_verify` dry_run/writes | No post-mutation receipt linking gate → token changes |
+| `instruction_rendered` | No instruction hash persisted | **Done** — Stage G `RENDER_INSTRUCTION_EVIDENCE` |
+| `agent_acknowledged` | No machine verification | **Done** — Stage G ledger + receipt binding |
+| `action_attempted` | Hooks not wired; no attempt ledger | **Done** — Stage M live capture + hook bridge |
+| `outcome_verified` | `RESOLVE_EVIDENCE_REFS` not wired | **Done** — Stage H resolution + ledger rows |
+| `gate_decided` | Gate JSON not auto-persisted | **Done** — Stage J `PERSIST_GATE_DECISION_RECEIPT` |
+| `status_mutated` | No post-mutation receipt | **Done** — Stage J `PERSIST_STATUS_MUTATION_RECEIPT` |
 
-The next implementation target is the **six-stage adherence evidence chain** (Stages G–L), not another validator rewrite.
+Operator reconcile: **Done** — Stage K library + Stage N CLI/MCP (`tied_adherence_reconcile_run`). Migration preview and operator doc: **Done** — Stage O (`PreviewTrackerMigration`, [`docs/checklist-adherence-remaining-work-plan.md`](checklist-adherence-remaining-work-plan.md)). Optional deferrals: evidence hardening (Stage P), rollout depth (Stage Q).
 
 ## 2. Change definition
 
@@ -664,9 +669,11 @@ proof_boundary:
 
 ## 10. Monitoring, reconciliation, retention, and migration
 
+**Post–Stage O (2026-08-25):** Operator reconcile (Stage N) and migration preview/docs (Stage O) are live. Acceptance A26–A31 satisfied. Deferred backlog (Stages P–Q): optional `command_evidence` hardening, optional inquiry sub-turn rollout — tracked in [`docs/checklist-adherence-remaining-work-plan.md`](checklist-adherence-remaining-work-plan.md).
+
 ### Deterministic reconciliation findings (read-only)
 
-Implement `adherence-reconcile` (Go CLI or MCP read tool) emitting diagnostics:
+`adherence-reconcile` CLI and `tied_adherence_reconcile_run` MCP tool emit diagnostics:
 
 | Finding code | Meaning |
 |---|---|

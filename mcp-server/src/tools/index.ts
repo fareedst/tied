@@ -120,6 +120,7 @@ import { createLiveStructuralValidators } from "../fidelity-research/live-struct
 import { validateChecklistGate } from "../checklist-validator.js";
 import { persistGateDecisionReceipt } from "../gate-receipt.js";
 import { collectChecklistActivation } from "../checklist-activation-collect.js";
+import { runAdherenceReconcile } from "./adherence-reconcile-runner.js";
 
 /** LEAP proposal MCP tools: JSON envelope; catch sync throws from fs/git. [REQ-LEAP_PROPOSAL_QUEUE] */
 function leapMcpJson(payload: unknown) {
@@ -1569,6 +1570,48 @@ export const allTools = [
           gateReceipt = { path: persisted.path, hash: persisted.hash };
         }
         return textContent(JSON.stringify({ ...result, ...(gateReceipt ? { gate_receipt: gateReceipt } : {}) }, null, 2));
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : String(e);
+        return textContent(JSON.stringify({ ok: false, error: msg }, null, 2));
+      }
+    },
+  },
+  {
+    name: "tied_adherence_reconcile_run",
+    config: {
+      description:
+        "Run read-only [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] adherence chain reconciliation via Go subprocess. Returns ReconcileReport JSON; never mutates Tracker or TIED YAML.",
+      inputSchema: z.object({
+        ledger_path: z.string().describe("Path to agent-adherence-event.v1 JSONL ledger."),
+        tracker_path: z.string().describe("Path to Authoritative Tracker YAML."),
+        gates_dir: z.string().describe("Directory containing checklist-gate-receipt.v1 JSON files."),
+        workspace: z.string().optional().describe("Repository workspace root; defaults to process.cwd()."),
+        citdp_path: z.string().optional().describe("Optional CITDP YAML path for gate hash correlation."),
+        requirements_index: z.string().optional().describe("Optional requirements.yaml path; defaults from TIED_BASE_PATH."),
+        implementation_index: z.string().optional().describe("Optional implementation-decisions.yaml path."),
+      }),
+    },
+    handler: async (args: {
+      ledger_path: string;
+      tracker_path: string;
+      gates_dir: string;
+      workspace?: string;
+      citdp_path?: string;
+      requirements_index?: string;
+      implementation_index?: string;
+    }) => {
+      try {
+        const workspace = args.workspace?.trim() || process.cwd();
+        const result = await runAdherenceReconcile({
+          ledger_path: args.ledger_path,
+          tracker_path: args.tracker_path,
+          gates_dir: args.gates_dir,
+          workspace,
+          citdp_path: args.citdp_path,
+          requirements_index: args.requirements_index?.trim() || undefined,
+          implementation_index: args.implementation_index?.trim() || undefined,
+        });
+        return textContent(JSON.stringify(result, null, 2));
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
         return textContent(JSON.stringify({ ok: false, error: msg }, null, 2));

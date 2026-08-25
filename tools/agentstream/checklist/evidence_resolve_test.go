@@ -130,3 +130,96 @@ func TestApplyReceiptWithEvidenceResolution_blocksBeforeTrackerWrite(t *testing.
 		t.Fatal("tracker mutated despite unresolved evidence ref")
 	}
 }
+
+// [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: A32 inline command_evidence JSON refs resolve like validateCommandEvidence.
+func TestResolveEvidenceRefs_CommandEvidence_inlineJsonOk(t *testing.T) {
+	dir := t.TempDir()
+	manifestBody := []byte(`{"schema_version":"verification-evidence-manifest.v1","command_results":[{"id":"go-test","exit_code":0}]}`)
+	manifestPath := filepath.Join(dir, "working", "evidence", "manifest.json")
+	outputPath := filepath.Join(dir, "working", "evidence", "stdout.txt")
+	for _, p := range []string{manifestPath, outputPath} {
+		if err := os.MkdirAll(filepath.Dir(p), 0o755); err != nil {
+			t.Fatal(err)
+		}
+	}
+	if err := os.WriteFile(manifestPath, manifestBody, 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(outputPath, []byte("ok\n"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	ref := `{"claimed_success":true,"manifest_ref":"working/evidence/manifest.json","stdout_ref":"working/evidence/stdout.txt","exit_code":0}`
+	receipt := CompletionReceipt{
+		Disposition:  "completed",
+		EvidenceRefs: []string{ref},
+	}
+	resolved, err := ResolveEvidenceRefs(receipt, dir)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(resolved) != 1 || resolved[0].Kind != "command_evidence" {
+		t.Fatalf("unexpected resolved: %#v err=%v", resolved, err)
+	}
+	if !strings.HasPrefix(resolved[0].ArtifactHash, "sha256:") {
+		t.Fatalf("hash: %#v", resolved[0].ArtifactHash)
+	}
+}
+
+func TestResolveEvidenceRefs_CommandEvidence_prefixOk(t *testing.T) {
+	dir := t.TempDir()
+	manifestBody := []byte(`{"schema_version":"verification-evidence-manifest.v1","command_results":[{"id":"go-test","exit_code":0}]}`)
+	manifestPath := filepath.Join(dir, "working", "evidence", "manifest.json")
+	outputPath := filepath.Join(dir, "working", "evidence", "out.txt")
+	for _, p := range []string{manifestPath, outputPath} {
+		if err := os.MkdirAll(filepath.Dir(p), 0o755); err != nil {
+			t.Fatal(err)
+		}
+	}
+	if err := os.WriteFile(manifestPath, manifestBody, 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(outputPath, []byte("output\n"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	ref := `command_evidence:{"claimed_success":true,"manifest_ref":"working/evidence/manifest.json","output_path":"working/evidence/out.txt","exit_code":0}`
+	receipt := CompletionReceipt{
+		Disposition:  "completed",
+		EvidenceRefs: []string{ref},
+	}
+	resolved, err := ResolveEvidenceRefs(receipt, dir)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(resolved) != 1 || resolved[0].Kind != "command_evidence" {
+		t.Fatalf("unexpected resolved: %#v", resolved)
+	}
+}
+
+func TestResolveEvidenceRefs_CommandEvidence_successUnproven(t *testing.T) {
+	dir := t.TempDir()
+	ref := `{"claimed_success":true,"exit_code":0}`
+	receipt := CompletionReceipt{
+		Disposition:  "completed",
+		EvidenceRefs: []string{ref},
+	}
+	_, err := ResolveEvidenceRefs(receipt, dir)
+	if err == nil || !strings.Contains(err.Error(), "command_success_unproven") {
+		t.Fatalf("expected command_success_unproven, got %v", err)
+	}
+}
+
+func TestResolveEvidenceRefs_CommandEvidence_notClaimedSkipsStrictProof(t *testing.T) {
+	dir := t.TempDir()
+	ref := `{"claimed_success":false,"exit_code":1}`
+	receipt := CompletionReceipt{
+		Disposition:  "completed",
+		EvidenceRefs: []string{ref},
+	}
+	resolved, err := ResolveEvidenceRefs(receipt, dir)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(resolved) != 1 || resolved[0].Kind != "command_evidence" {
+		t.Fatalf("unexpected resolved: %#v", resolved)
+	}
+}
