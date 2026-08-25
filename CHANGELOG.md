@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Checklist adherence Stage H — evidence ref resolution ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  agentstream Stage H slice: `evidence_resolve.go` runs `ResolveEvidenceRefs` after
+  receipt binding and before Tracker write (A16); rejects generic prose, missing
+  files, and invalid manifests; `AppendOutcomeVerified` emits `outcome_verified`
+  ledger rows with artifact hashes. Wired in `main.go` via
+  `ApplyReceiptWithEvidenceResolution`. Tests: `evidence_resolve_test.go`,
+  `adherence_ledger_test.go` (`AppendOutcomeVerified`),
+  `tracker_composition_test.go` (composition with temp file + manifest fixture).
+  CITDP `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-h`.
+  **Deferred:** Stages I–L (goto/NA/waived writer, gate/status receipts,
+  reconciliation, full chain); inline `command_evidence` JSON refs; TS-side
+  duplicate resolution (Option A).
+
 - **Checklist adherence Stage G — instruction binding ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
   agentstream Stage G slice: `adherence_ledger.go` emits `instruction_rendered`
   JSONL rows before subprocess; `executor.RunResult.FinalText` excludes thinking
@@ -18,7 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `tracker_receipt_test.go`, `tracker_composition_test.go`. Expanded
   `docs/checklist-adherence-improvement-plan.md` evidence model (§9–§10) and
   Stages G–L sequence; CITDP `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-g`.
-  **Deferred:** Stages H–L (evidence ref resolution, reconciliation, full chain).
+  **Deferred:** Stages I–L (reconciliation, full chain).
 
 - **Checklist gate close-out enforcement ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
   restored the authoritative `tied_checklist_gate_validate` MCP surface and completed

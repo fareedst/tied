@@ -43,6 +43,9 @@ func runTrackerComposition(t *testing.T, omitReceipt, wantStepTwo bool) {
 	}
 	ws := t.TempDir()
 	trackerPath := filepath.Join(ws, "tracker.yaml")
+	if err := writeCompositionEvidenceFiles(ws); err != nil {
+		t.Fatal(err)
+	}
 	defBefore, err := os.ReadFile(checklist)
 	if err != nil {
 		t.Fatal(err)
@@ -131,6 +134,9 @@ func TestAgentstreamInstructionRenderedLedgerBeforeSubprocess(t *testing.T) {
 	ws := t.TempDir()
 	trackerPath := filepath.Join(ws, "tracker.yaml")
 	ledgerPath := filepath.Join(ws, "adherence", "events.jsonl")
+	if err := writeCompositionEvidenceFiles(ws); err != nil {
+		t.Fatal(err)
+	}
 
 	cmd := exec.Command(
 		"go", "run", "./cmd/agentstream",
@@ -166,4 +172,80 @@ func TestAgentstreamInstructionRenderedLedgerBeforeSubprocess(t *testing.T) {
 	if strings.Contains(text, "fake tracker agent processed") {
 		t.Fatalf("ledger must not contain prompt/response bodies")
 	}
+}
+
+func TestAgentstreamOutcomeVerifiedLedgerAfterEvidenceResolution(t *testing.T) {
+	t.Helper()
+	if _, err := exec.LookPath("ruby"); err != nil {
+		t.Skipf("ruby not available: %v", err)
+	}
+	wd, err := os.Getwd()
+	if err != nil {
+		t.Fatal(err)
+	}
+	moduleRoot, err := goModRootFrom(wd)
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Chdir(moduleRoot)
+
+	checklist, err := filepath.Abs(filepath.Join(wd, "testdata", "tracker-checklist.yaml"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	fakeAgent, err := filepath.Abs(filepath.Join(wd, "testdata", "fake_tracker_agent.rb"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	ws := t.TempDir()
+	trackerPath := filepath.Join(ws, "tracker.yaml")
+	ledgerPath := filepath.Join(ws, "adherence", "events.jsonl")
+	if err := writeCompositionEvidenceFiles(ws); err != nil {
+		t.Fatal(err)
+	}
+
+	cmd := exec.Command(
+		"go", "run", "./cmd/agentstream",
+		"--workspace", ws,
+		"--lead-checklist-yaml", checklist,
+		"--checklist-tracker-yaml", trackerPath,
+		"--adherence-ledger", ledgerPath,
+		"--lead-checklist-skip-sub",
+		"--checklist-var", "REQUEST=REQ-TRACKER-COMPOSITION",
+		"--agent-path", fakeAgent,
+		"--skip-tied-mcp-preflight",
+	)
+	cmd.Dir = moduleRoot
+	cmd.Env = append(os.Environ(), "PWD="+moduleRoot)
+	var stdout, stderr bytes.Buffer
+	cmd.Stdout = &stdout
+	cmd.Stderr = &stderr
+	if err := cmd.Run(); err != nil {
+		t.Fatalf("agentstream run failed: %v\nstdout:\n%s\nstderr:\n%s", err, stdout.String(), stderr.String())
+	}
+	data, err := os.ReadFile(ledgerPath)
+	if err != nil {
+		t.Fatalf("ledger missing: %v", err)
+	}
+	text := string(data)
+	if !strings.Contains(text, "outcome_verified") {
+		t.Fatalf("missing outcome_verified row:\n%s", text)
+	}
+	if !strings.Contains(text, "artifact_hash") || !strings.Contains(text, "ref_kind") {
+		t.Fatalf("missing outcome_verified artifact fields:\n%s", text)
+	}
+}
+
+func writeCompositionEvidenceFiles(workspace string) error {
+	for _, step := range []string{"step-one", "step-two"} {
+		path := filepath.Join(workspace, "evidence", step+".md")
+		if err := os.MkdirAll(filepath.Dir(path), 0o755); err != nil {
+			return err
+		}
+		body := []byte("composition evidence for " + step + "\n")
+		if err := os.WriteFile(path, body, 0o644); err != nil {
+			return err
+		}
+	}
+	return nil
 }

@@ -53,6 +53,48 @@ func TestAdherenceLedgerAppendInstructionRendered_schema(t *testing.T) {
 	}
 }
 
+func TestAdherenceLedgerAppendOutcomeVerified_schema(t *testing.T) {
+	dir := t.TempDir()
+	path := filepath.Join(dir, "events.jsonl")
+	fields := InstructionCorrelation{
+		RequestToken:     "REQ-TEST",
+		RunID:            "run-1",
+		TurnIndex:        2,
+		StepSlug:         "change-definition",
+		InstructionHash:  "sha256:abc123",
+		InstructionNonce: "nonce-1",
+	}
+	resolved := ResolvedRef{
+		Ref:          "working/REQ-TEST/evidence.md",
+		Kind:         "file_path",
+		ArtifactRef:  "working/REQ-TEST/evidence.md",
+		ArtifactHash: "sha256:deadbeef",
+	}
+	if err := AppendOutcomeVerified(path, fields, resolved, "receipt-hash-1"); err != nil {
+		t.Fatal(err)
+	}
+	row, err := readLastLedgerRow(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if row["event_class"] != "outcome_verified" {
+		t.Fatalf("event_class: %#v", row)
+	}
+	if row["artifact_ref"] != resolved.ArtifactRef || row["artifact_hash"] != resolved.ArtifactHash {
+		t.Fatalf("artifact fields: %#v", row)
+	}
+	if row["ref_kind"] != "file_path" {
+		t.Fatalf("ref_kind: %#v", row["ref_kind"])
+	}
+	corr, ok := row["correlation"].(map[string]interface{})
+	if !ok {
+		t.Fatalf("missing correlation: %#v", row)
+	}
+	if corr["receipt_hash"] != "receipt-hash-1" {
+		t.Fatalf("receipt_hash: %#v", corr["receipt_hash"])
+	}
+}
+
 func TestAdherenceLedgerAppendOnly(t *testing.T) {
 	dir := t.TempDir()
 	path := filepath.Join(dir, "events.jsonl")

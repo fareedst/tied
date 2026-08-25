@@ -26,8 +26,13 @@
 | **Tracker writer** | checklist updater, status writer | Agentstream component that validates one Tracker completion receipt and atomically updates the explicit per-request Tracker without mutating the checklist definition |
 | **`--checklist-tracker-yaml`** | checklist state path | Writable per-request Authoritative Tracker path; distinct from read-only `--lead-checklist-yaml` definition |
 | **Adherence ledger** | adherence events, event log | Append-only `agent-adherence-event.v1` JSONL under `working/{REQ-TOKEN}/adherence/`; hash/reference edges for six lifecycle event classes; distinct from **evidence chain profile** |
-| **`--adherence-ledger`** | adherence path | Writable adherence ledger path; defaults to `working/{REQ-TOKEN}/adherence/events.jsonl` (planned Stage G) |
+| **`--adherence-ledger`** | adherence path | Writable adherence ledger path; defaults to `working/{REQ-TOKEN}/adherence/events.jsonl` (Stage G committed) |
 | **instruction binding** | nonce binding, instruction hash | Per-turn `instruction_nonce` + `instruction_hash` issued before subprocess; receipt must match both |
+| **evidence ref resolution** | resolve evidence refs, RESOLVE_EVIDENCE_REFS | Machine verification of each `evidence_refs[]` entry for `completed` dispositions before Tracker write; implements `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]` block `RESOLVE_EVIDENCE_REFS` |
+| **resolved evidence ref** | verified ref, artifact hash edge | Successfully resolved ref with `ref`, `kind` (`file_path` \| `manifest_ref` \| `command_evidence`), and `artifact_hash`; input to `outcome_verified` ledger rows |
+| **generic prose ref** | prose evidence, self-reported success | Non-path evidence string (e.g. "tests passed", "build ok") rejected with `unresolved_evidence_ref` |
+| **manifest ref** | verification manifest path | `evidence_refs[]` entry pointing to `verification-evidence-manifest.v1`; all command exit codes must be zero |
+| **outcome_verified event** | verified outcome, evidence verified | Adherence ledger `event_class` appended after successful evidence ref resolution; records `artifact_ref` + `artifact_hash` |
 | **adherence event class** | lifecycle stage, event type | One of six non-interchangeable classes: `instruction_rendered`, `agent_acknowledged`, `action_attempted`, `outcome_verified`, `gate_decided`, `status_mutated` |
 | **adherence reconciliation** | reconcile report, adherence audit | Read-only report emitting finding codes (`rendered_without_acknowledgment`, etc.); never mutates Tracker or TIED YAML |
 | **run-feature-batch-agentstream** | tasd (alone) | Shell driver: `scripts/run-feature-batch-agentstream.sh` |
@@ -182,8 +187,11 @@ const VerifySessionPrompt = "what was the most recent prompt?"
 | agentstream_control | Preferred terms |
 | ApplyPromptFilePreload | Pseudo-code blocks |
 | Authoritative Tracker | Preferred terms |
-| instruction binding | Preferred terms |
-| `--adherence-ledger` | Preferred terms |
+| evidence ref resolution | Preferred terms |
+| generic prose ref | Preferred terms |
+| manifest ref | Preferred terms |
+| outcome_verified event | Preferred terms |
+| resolved evidence ref | Preferred terms |
 | ChainFromPrevious | Preferred terms |
 | checklist_messages | Pseudo-code blocks |
 | dry-run | Preferred terms |

@@ -1,0 +1,24 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "stage-h-fixture",
+  "commit": "fixture",
+  "environment": {},
+  "command_results": [
+    {
+      "id": "go-test",
+      "command": "go test ./checklist/...",
+      "cwd": ".",
+      "exit_code": 0,
+      "result": "passed",
+      "threshold": "all pass",
+      "artifacts": []
+    }
+  ],
+  "quality_rows": [],
+  "covered_tokens": ["REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"],
+  "proof_boundaries": [],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": []
+  }
+}

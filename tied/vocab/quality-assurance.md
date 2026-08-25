@@ -47,6 +47,11 @@
 | adherence ledger | adherence event log, session ledger (forbidden: evidence chain profile) | Append-only `agent-adherence-event.v1` JSONL storing hash/reference edges for six checklist lifecycle event classes; distinct from **evidence chain profile** and **verification evidence manifest**. | `ADHERENCE_LEDGER` |
 | adherence event class | lifecycle event, stage event | One of six non-interchangeable classes: `instruction_rendered`, `agent_acknowledged`, `action_attempted`, `outcome_verified`, `gate_decided`, `status_mutated`. Each class has explicit non-implication rules vs adjacent stages. | `ADHERENCE_EVENT_CLASS` |
 | adherence reconciliation | adherence audit, chain reconcile | Read-only report comparing ledger rows, Tracker, gate receipts, and TIED indexes; emits deterministic finding codes without mutating state. | `ADHERENCE_RECONCILIATION` |
+| evidence ref resolution | resolve evidence refs, RESOLVE_EVIDENCE_REFS | Producer-side verification of Tracker `evidence_refs[]` before `completed` write; classifies refs as `file_path`, `manifest_ref`, or rejects `generic_prose`. | `EVIDENCE_REF_RESOLUTION` |
+| resolved evidence ref | verified ref, artifact hash edge | One resolved entry with original ref, kind, and content hash used for `outcome_verified` correlation. | `RESOLVED_EVIDENCE_REF` |
+| generic prose ref | prose evidence, self-reported success | Non-path evidence string rejected with `unresolved_evidence_ref` (e.g. "tests passed"). | `GENERIC_PROSE_REF` |
+| manifest ref | verification manifest path | Tracker evidence ref pointing to `verification-evidence-manifest.v1` with all command exit codes zero. | `MANIFEST_REF` |
+| outcome_verified event | verified outcome, evidence verified | Adherence ledger event class after successful ref resolution; does not authorize gate pass alone (non-implication rule). | `OUTCOME_VERIFIED_EVENT` |
 | non-implication rule | stage non-implication, proof non-implication | Normative rule that one adherence event class never proves the next (e.g. acknowledgment never proves action). | `NON_IMPLICATION_RULE` |
 | instruction binding | nonce binding, instruction hash binding | Per-turn `instruction_nonce` and `instruction_hash` tying rendered prompt bytes to Tracker completion receipt. | `INSTRUCTION_BINDING` |
 

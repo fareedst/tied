@@ -1,0 +1,44 @@
+CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-h:
+  change_definition:
+    current_behavior: "Completed tracker dispositions accept any non-empty evidence_refs string without existence or content checks; handleTrackerTurn writes Tracker after binding only."
+    desired_behavior: "ResolveEvidenceRefs runs after ValidateReceiptBinding and before ApplyTrackerDisposition for completed dispositions; append outcome_verified ledger rows; reject generic prose and missing artifacts."
+    success_criteria:
+      - "file_path refs require existing workspace-relative files with sha256 hash."
+      - "Generic prose denylist rejects tests passed, build ok, single-word refs."
+      - "manifest_ref refs require verification-evidence-manifest.v1 with all exit_code zero."
+      - "No completed disposition with unresolved evidence_refs (A16)."
+  completion_criteria:
+    activation:
+      phase: "close_out"
+      project_id: "/Users/fareed/Documents/dev/chatgpt/stdd"
+      request_token: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      run_id: "stage-h-close-out-20260825"
+  record_identity:
+    change_request_id: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    record_status: "complete"
+    title: "Stage H evidence ref resolution"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "Completed disposition accepts generic prose evidence_refs without filesystem validation."
+        - "Manifest with nonzero exit_code passes as completed evidence."
+        - "Missing evidence file still writes Tracker when binding passes."
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "Composition test proves outcome_verified ledger rows with artifact hashes."
+        - "ResolveEvidenceRefs unit tests reject denylisted prose and missing files."
+      evidence_references:
+        - "docs/checklist-adherence-improvement-plan.md"
+        - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+        - "tools/agentstream/checklist/evidence_resolve.go"
+      falsification_questions:
+        - "Can a single-word ref pass as file_path evidence?"
+        - "Can handleTrackerTurn write completed without resolvable evidence_refs?"
+        - "Does manifest_ref accept exit_code != 0?"
+      gate_policy: "advisory"
+      prior_depth_tier: "minimal"
+      profile_depth: "not_measured"
+  test_strategy:
+    commands:
+      - "go test ./tools/agentstream/..."
+      - "tied_validate_consistency"

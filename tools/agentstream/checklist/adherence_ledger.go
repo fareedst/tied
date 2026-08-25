@@ -84,6 +84,31 @@ func AppendAgentAcknowledged(ledgerPath string, fields InstructionCorrelation, r
 	return appendLedgerRow(ledgerPath, row)
 }
 
+// AppendOutcomeVerified appends outcome_verified after evidence ref resolution.
+func AppendOutcomeVerified(ledgerPath string, fields InstructionCorrelation, resolved ResolvedRef, receiptHash string) error {
+	row := map[string]interface{}{
+		"schema_version": adherenceEventSchemaVersion,
+		"event_class":    "outcome_verified",
+		"correlation": map[string]interface{}{
+			"request_token":     strings.TrimSpace(fields.RequestToken),
+			"run_id":            strings.TrimSpace(fields.RunID),
+			"turn_index":        fields.TurnIndex,
+			"step_slug":         strings.TrimSpace(fields.StepSlug),
+			"instruction_hash":  strings.TrimSpace(fields.InstructionHash),
+			"instruction_nonce": strings.TrimSpace(fields.InstructionNonce),
+			"receipt_hash":      strings.TrimSpace(receiptHash),
+		},
+		"artifact_ref":  strings.TrimSpace(resolved.ArtifactRef),
+		"artifact_hash": strings.TrimSpace(resolved.ArtifactHash),
+		"ref_kind":      strings.TrimSpace(resolved.Kind),
+		"source": map[string]interface{}{
+			"kind": "agentstream",
+			"path": ledgerPath,
+		},
+	}
+	return appendLedgerRow(ledgerPath, row)
+}
+
 func appendLedgerRow(ledgerPath string, row map[string]interface{}) error {
 	if strings.TrimSpace(ledgerPath) == "" {
 		return fmt.Errorf("ledger_path_required")

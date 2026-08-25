@@ -14,12 +14,18 @@ step =
 
 text = +"fake tracker agent processed #{step}\n"
 unless ENV["OMIT_TRACKER_RECEIPT"] == "1"
+  evidence_refs =
+    if ENV["EVIDENCE_REFS"] && !ENV["EVIDENCE_REFS"].empty?
+      JSON.parse(ENV["EVIDENCE_REFS"])
+    else
+      ["evidence/#{step}.md"]
+    end
   receipt = {
     agentstream_tracker: {
       schema_version: 1,
       slug: step,
       disposition: "completed",
-      evidence_refs: ["working/REQ-TEST/#{step}.md"]
+      evidence_refs: evidence_refs
     }
   }
   %w[instruction_nonce instruction_hash request_token run_id].each do |key|

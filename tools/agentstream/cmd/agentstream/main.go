@@ -280,6 +280,20 @@ func handleTrackerTurn(cfg *config.Config, turnIndex int, turn agentstream.Turn,
 		StepStub:  turn.StepStub,
 		SessionID: sessionID,
 	}
+	if receipt.Disposition == "completed" {
+		resolved, err := checklist.ResolveEvidenceRefs(receipt, cfg.Workspace)
+		if err != nil {
+			return err
+		}
+		if strings.TrimSpace(cfg.AdherenceLedger) != "" {
+			receiptHash := checklist.ReceiptHash(receipt)
+			for _, r := range resolved {
+				if err := checklist.AppendOutcomeVerified(cfg.AdherenceLedger, correlation, r, receiptHash); err != nil {
+					return err
+				}
+			}
+		}
+	}
 	if err := checklist.ApplyTrackerDisposition(cfg.ChecklistTrackerYAML, receipt, identity); err != nil {
 		return err
 	}

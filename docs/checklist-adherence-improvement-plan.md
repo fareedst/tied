@@ -1,6 +1,6 @@
 # Checklist Adherence Improvement Plan
 
-**Status:** Stage G instruction render + receipt binding complete (A13–A15, 2026-08-25); Stages H–L remain deferred to the next integrated build-plan
+**Status:** Stage H evidence ref resolution complete (A16, 2026-08-25); Stage G instruction render + receipt binding committed (A13–A15); Stages I–L remain deferred after H
 **Scope:** Producer-side Tracker state and its integration with existing TIED checklist gates
 **Primary tokens:** `[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]`, `[ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT]`, `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]`, `[REQ-TIED_ADVERSARIAL_INQUIRY]`, `[ARCH-TIED_ADVERSARIAL_INQUIRY]`, `[IMPL-TIED_ADVERSARIAL_INQUIRY]`, `[IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST]`, `[PROC-AGENT_REQ_CHECKLIST]`, `[PROC-TIED_VERIFICATION_GATED]`, `[PROC-TOKEN_AUDIT]`, `[PROC-TOKEN_VALIDATION]`
 **Motivation:** Client `1787626480` claimed checklist completion, but the authoritative checklist evidence gate returned `tracker_sparse` and `missing_required_step:sub-adversarial-inquiry-pass`.
@@ -21,33 +21,43 @@
 | adherence ledger | Append-only `agent-adherence-event.v1` JSONL storing six lifecycle event classes; distinct from **evidence chain profile** |
 | adherence event class | One of `instruction_rendered`, `agent_acknowledged`, `action_attempted`, `outcome_verified`, `gate_decided`, `status_mutated`; governed by non-implication rules |
 | instruction binding | Per-turn `instruction_nonce` + `instruction_hash` tying rendered prompt bytes to Tracker completion receipt |
+| evidence ref resolution | **`RESOLVE_EVIDENCE_REFS`**: machine verification of each `evidence_refs[]` entry before accepting a `completed` disposition; distinct from gate-time optional validators |
+| resolved evidence ref | One successfully resolved entry with recorded `artifact_hash`; input ref string plus kind and hash stored for ledger correlation |
+| generic prose ref | Non-path evidence string matching denylist patterns (e.g. "tests passed", "build ok", single words without path separators); fails with `unresolved_evidence_ref` |
+| outcome_verified event | Adherence ledger row (`event_class: outcome_verified`) appended after successful ref resolution; records `artifact_ref` + `artifact_hash` per resolved ref |
+| manifest ref | `evidence_refs[]` entry pointing to a file with `schema_version: verification-evidence-manifest.v1`; all `command_results[].exit_code` must be `0` |
 
-Vocabulary ownership and names are defined in `tied/vocab/agentstream.md`, `tied/vocab/fidelity-research.md`, and `tied/vocab/quality-assurance.md`. No new REQ/ARCH/IMPL token is required for this plan: the producer behavior completes the existing machine-enforced checklist evidence contract; the evidence-chain blocks extend `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]`.
+Vocabulary ownership and names are defined in `tied/vocab/agentstream.md`, `tied/vocab/fidelity-research.md`, and `tied/vocab/quality-assurance.md`. No new REQ/ARCH/IMPL token is required for this plan: the producer behavior completes the existing machine-enforced checklist evidence contract; the evidence-chain blocks extend `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]`. Stage G is committed; Stage H is the next build-plan slice.
 
 ### Depth and gate policy
 
 | Context | `depth_tier` | `gate_policy` | `profile_depth` | Reason |
 |---|---|---|---|---|
-| This documentation + pseudo-code build-plan pass | `minimal` | `advisory` | `not_measured` | No Stages G–L production code; updates plan doc, IMPL pseudo-code, and vocabulary only |
-| Next behavior-changing build-plan (Stages G–L) | `integrated` | `advisory` | Selected independently if measured | Adherence ledger, instruction binding, evidence resolution, and durable gate/status receipts mutate persistent workflow evidence |
+| This Stage H refine-plan pass (documentation only) | `minimal` | `advisory` | `not_measured` | Expands plan doc and vocabulary; no production code |
+| Stage G build-plan (committed) | `integrated` | `advisory` | Selected independently if measured | Instruction binding, FinalText separation, adherence ledger `instruction_rendered` / `agent_acknowledged` |
+| **Stage H build-plan (committed)** | **`integrated`** | **`advisory`** | Selected independently if measured | **`RESOLVE_EVIDENCE_REFS`**, `outcome_verified` ledger rows, fake-agent fixture hardening |
+| Stages I–L build-plans (after H) | `integrated` | `advisory` | Selected independently if measured | Tracker hardening, gate/status receipts, reconciliation, pilot; J/K depend on H resolved refs |
 
-For this pass, `sub-adversarial-inquiry-pass` is `not_applicable` with policy and rationale in the per-request Tracker. The later build-plan must run distinct integrated inquiry passes at `pre_implementation`, `verification`, and `close_out`.
+For this refine pass, `sub-adversarial-inquiry-pass` is `not_applicable` with policy and rationale in the per-request Tracker. The Stage H build-plan must run distinct integrated inquiry passes at `pre_implementation`, `verification`, and `close_out`.
 
 ### Workflow artifacts
 
-- Per-request Tracker (refine-plan): `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT_checklist-adherence-plan-refinement_20260824.yaml`
-- Per-request Tracker (this build-plan): `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/checklist-adherence-evidence-build_20260824.yaml`
-- CITDP draft: `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-tracker-writer-draft.yaml`
-- Build-plan gate receipt: `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-adherence-evidence-build-pre-implementation.json`
-- CITDP persistence is deferred until the integrated behavior-changing build-plan, per `tied/docs/citdp-policy.md`.
+- Per-request Tracker (Stage H refine-plan): `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/stage-h-evidence-resolution-refine_20260825.yaml`
+- Per-request Tracker (Stage H build-plan, at build-plan time): `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/stage-h-evidence-resolution_YYYYMMDD.yaml`
+- Per-request Tracker (Stage G build-plan, committed): `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/stage-g-instruction-binding_20260825.yaml`
+- CITDP (extend at Stage H build-plan): `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-h.yaml` (new or extend tracker-writer draft with evidence-resolution change definition)
+- Prior CITDP draft: `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-tracker-writer-draft.yaml`
+- Refine-plan gate receipt (this pass): `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-stage-h-refine-pre-implementation.json`
+- Stage H build-plan must run `tied_checklist_gate_validate` with `phase: pre_implementation` at **`integrated`** depth before RED tests.
 
-### Refine-plan gate result (2026-08-24)
+### Refine-plan gate result (2026-08-25, Stage H refine)
 
-Raw `tied_checklist_gate_validate` output for `phase: pre_implementation` with the Tracker and CITDP above:
+Raw `tied_checklist_gate_validate` output for `phase: pre_implementation` with the Stage H refine Tracker and CITDP draft:
 
 - `allowed: true`, `blocking: false`, `depth: minimal`, `diagnostics: []`
-- At minimal depth the gate auto-requires only `sub-adversarial-inquiry-pass` (as `not_applicable` or `waived` with policy/rationale); pending implementation steps such as `unit-test-red` are out of scope for this documentation-only pass and do not block pre-implementation progression.
-- Vocabulary RECORD/VALIDATE: terms in §0 resolved terms align with `tied/vocab/agentstream.md` and `tied/vocab/fidelity-research.md`; no new REQ/ARCH/IMPL token required.
+- Receipt: `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-stage-h-refine-pre-implementation.json`
+- At minimal depth the gate auto-requires only `sub-adversarial-inquiry-pass` (as `not_applicable` with policy/rationale); pending implementation steps such as `unit-test-red` are out of scope for this documentation-only pass and do not block pre-implementation progression.
+- Vocabulary RECORD/VALIDATE: Stage H terms in §0 recorded in `tied/vocab/agentstream.md` and `tied/vocab/quality-assurance.md`; no new REQ/ARCH/IMPL token required.
 
 ## 1. Current state and confirmed gap
 
@@ -100,7 +110,7 @@ flowchart LR
 | `instruction_rendered` | `checklist.LoadTurns` renders turns; hooks log `beforeSubmitPrompt` | No instruction hash persisted; no link to turn identity |
 | `agent_acknowledged` | Docs require "Observing AI principles!"; hooks log `afterAgentResponse` | No machine verification; not in Tracker or gate |
 | `action_attempted` | Cursor hooks (tool/shell/MCP); receipt parse attempt | Hooks not wired to agentstream/gate; no attempt ledger |
-| `outcome_verified` | `verification-evidence-manifest.v1`; gate optional evidence validators | `evidence_refs` not resolved against manifests/commands |
+| `outcome_verified` | Stage G ledger (`instruction_rendered`, `agent_acknowledged`); gate optional validators | **`RESOLVE_EVIDENCE_REFS` not wired**; `evidence_refs` accepted without existence/hash checks |
 | `gate_decided` | `validateChecklistGate` returns decision | Gate JSON not auto-persisted with input hash |
 | `status_mutated` | `tied_verify` dry_run/writes | No post-mutation receipt linking gate → token changes |
 
@@ -315,8 +325,8 @@ Before each checklist turn in `tools/agentstream/cmd/agentstream/main.go`:
 | Runner composition | Connect executor transcript → receipt parser → writer before advancing; route `goto` through Tracker invalidation | `tools/agentstream/cmd/agentstream/main.go`, `tools/agentstream/config/` | Fake-agent composition — **done**; goto invalidation E2E — Stage I |
 | Gate compatibility | Prove writer output is accepted/rejected by the existing shared gate and by `tied_verify` dry-run | `mcp-server/src/checklist-validator.test.ts`, `mcp-server/src/verify.test.ts` | TypeScript contract tests — **done** |
 | Executor | Separate final vs thinking text for receipt scan | `tools/agentstream/executor/executor.go` | `executor_test.go` — **done** (Stage G) |
-| Adherence ledger | Append-only JSONL writer for six event classes | **new** `tools/agentstream/checklist/adherence_ledger.go` | Stage G `instruction_rendered` tests — **done**; remaining event classes and reconciliation — Stage K |
-| Evidence resolver | Resolve refs → manifests/artifacts | **new** `tools/agentstream/checklist/evidence_resolve.go` + TS hook in validator | Writer + validator rejection — Stage H |
+| Adherence ledger | Append-only JSONL writer for six event classes | **new** `tools/agentstream/checklist/adherence_ledger.go` | Stage G `instruction_rendered` / `agent_acknowledged` — **done**; Stage H `AppendOutcomeVerified` — **done**; reconciliation — Stage K |
+| Evidence resolver | Resolve refs → manifests/artifacts | **new** `tools/agentstream/checklist/evidence_resolve.go` + TS hook in validator | Writer + validator rejection — **done** (Stage H) |
 | Reconciliation | Read-only adherence chain report | **new** `tools/agentstream/checklist/adherence_reconcile.go` or MCP read tool | Table-driven finding codes — Stage K |
 | Gate/status receipts | Persist gate and verify decisions | extend `mcp-server/src/verify.ts`, gate callers | `verify.test.ts` fixtures — Stage J |
 | Procedure and operator docs | Define Tracker path, receipt contract, adherence ledger, migration | `tools/agentstream/README.md`, this plan | Static contract tests — Stage F partial |
@@ -369,26 +379,146 @@ Go-emitted Tracker fixtures consumed by TypeScript `validateChecklistGate` and `
 6. Full test/lint/validation — **done** for Stage G; Stages H–L pending.
 7. Stop rollout conditions defined — see Stage L.
 
-### Stage G — complete: instruction render + receipt binding
+### Stage G — complete: instruction render + receipt binding (committed)
 
-**Tests first:**
+**Committed baseline (2026-08-25):**
 
-- `tools/agentstream/executor/executor_test.go`: thinking excluded from `FinalText`; receipt in thinking-only stream fails.
+- `tools/agentstream/checklist/adherence_ledger.go`: `AppendInstructionRendered`, `AppendAgentAcknowledged`
+- `tools/agentstream/executor/executor.go`: `RunResult` with `FinalText` / `ThinkingText` / `Transcript`
+- `tools/agentstream/checklist/tracker_receipt.go`: binding fields + `ValidateReceiptBinding`
+- `tools/agentstream/cmd/agentstream/main.go` `handleTrackerTurn`: binding before `ApplyTrackerDisposition`; **no evidence ref resolution yet**
+- `tools/agentstream/checklist/evidence_resolve.go`: **does not exist** (planned in IMPL pseudo-code only)
+- Pseudo-code `RESOLVE_EVIDENCE_REFS` exists in `tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md`
+
+**Tests (RED → GREEN, committed):**
+
+- `tools/agentstream/executor/executor_binding_test.go`: thinking excluded from receipt scan; receipt in thinking-only stream fails.
 - `tools/agentstream/checklist/tracker_receipt_test.go`: nonce/hash mismatch, stale nonce, missing binding fields.
 - `tools/agentstream/cmd/agentstream/tracker_composition_test.go`: `instruction_rendered` JSONL row written before subprocess.
 
-Evidence-supported acceptance rows: A13, A14, and A15 are complete. A16–A20
-remain deferred with Stages H–L; integrated pilot rollout is not claimed.
+Evidence-supported acceptance rows: **A13, A14, and A15 complete.** **A16 complete** (Stage H, 2026-08-25).
 
-### Stage H — RED: evidence ref resolution
+### Stage H — complete: evidence ref resolution (2026-08-25)
 
-**Tests first:**
+#### Change definition
 
-- Go unit: reject generic evidence strings; accept manifest path with matching hash.
-- TypeScript unit: extend checklist-validator with `evidence_refs` resolution hook (or composition test calling shared fixture).
-- Writer test: `completed` with unresolvable ref fails before Tracker write.
+| Aspect | Detail |
+|---|---|
+| **Current** | `completed` dispositions accept any non-empty `evidence_refs[]` string. Parser requires non-empty refs but does not verify existence or content. Fake agent emits paths like `working/REQ-TEST/step.md` without creating files. Writer tests use placeholder paths that need not exist on disk. |
+| **Desired** | `RESOLVE_EVIDENCE_REFS` runs after `BIND_RECEIPT_TO_INSTRUCTION` and before `APPLY_TRACKER_DISPOSITION` when disposition is `completed`. Each ref is classified, resolved, and hashed. On success append `outcome_verified` ledger rows. On failure return error **before** Tracker write. Generic prose and unresolvable refs fail with `unresolved_evidence_ref`. |
+| **Unchanged** | Shared TypeScript gate remains progression authority for phase-aware slugs, activation pairing, and disposition contracts. Non-`completed` dispositions skip ref resolution. Instruction binding and receipt parse order from Stage G unchanged. |
+| **Non-goals (Stage H)** | Full `command_evidence` JSON-in-string resolution (document boundary; defer complex cases). TS-side duplicate resolution in `validateTracker` (Option A below). Reconciliation report (Stage K). Gate/status receipt persistence (Stage J). |
 
-### Stage I — RED: Tracker hardening (close remaining gaps)
+#### Ref kind taxonomy (normative)
+
+| Ref kind | Pattern / detection | Resolution rule |
+|---|---|---|
+| `file_path` | Relative path under workspace root; contains `/` or file extension; not whitespace-only prose | Must exist on disk relative to workspace; record `sha256:` content hash |
+| `manifest_ref` | Path ending in `.json` or `.yaml` whose parsed document has `schema_version: verification-evidence-manifest.v1` | Parse manifest; every `command_results[].exit_code` must be `0`; record manifest file hash |
+| `command_evidence` | JSON object or structured map embedded in ref (e.g. fenced JSON or `command_evidence:` prefix) | Align with `validateCommandEvidence` semantics: `claimed_success: true` requires `manifest_ref`, output ref, and `exit_code`. **Stage H boundary:** defer inline JSON refs unless trivially detectable; document as follow-up if RED tests do not require them |
+| `generic_prose` | Denylist patterns: case-insensitive phrases such as `tests passed`, `build ok`, `done`, `success`; single tokens without `/`; strings with only spaces | Reject with `unresolved_evidence_ref`; never write Tracker or ledger |
+
+Detection order: trim ref → if matches generic prose denylist → reject; else if path exists and parses as manifest → `manifest_ref`; else if path exists → `file_path`; else if structured command evidence → `command_evidence` (deferred boundary); else → `unresolved_evidence_ref`.
+
+#### Wire point (`main.go`)
+
+In `handleTrackerTurn`, after `ValidateReceiptBinding` and **before** `ApplyTrackerDisposition`:
+
+```go
+if receipt.Disposition == "completed" {
+    resolved, err := checklist.ResolveEvidenceRefs(receipt, cfg.Workspace)
+    if err != nil {
+        return err // blocks turn; Tracker unchanged
+    }
+    if strings.TrimSpace(cfg.AdherenceLedger) != "" {
+        for _, r := range resolved {
+            if err := checklist.AppendOutcomeVerified(cfg.AdherenceLedger, correlation, r); err != nil {
+                return err
+            }
+        }
+    }
+}
+// then ApplyTrackerDisposition ...
+// then AppendAgentAcknowledged (existing Stage G)
+```
+
+Ordering invariant: `instruction_rendered` (pre-subprocess) → receipt parse + binding → **evidence resolution + `outcome_verified`** → Tracker write → `agent_acknowledged`.
+
+#### New Go module: `tools/agentstream/checklist/evidence_resolve.go`
+
+```go
+type ResolvedRef struct {
+    Ref          string // original evidence_refs entry
+    Kind         string // file_path | manifest_ref | command_evidence
+    ArtifactHash string // sha256:… of resolved artifact or manifest file
+}
+
+func ResolveEvidenceRefs(receipt CompletionReceipt, workspace string) ([]ResolvedRef, error)
+```
+
+Reuse manifest shape from `tied/docs/quality-evidence-manifest.md`. Failure modes align with IMPL pseudo-code: `unresolved_evidence_ref`, `manifest_exit_nonzero`, `missing_artifact`.
+
+#### New ledger method: `AppendOutcomeVerified`
+
+Add to `tools/agentstream/checklist/adherence_ledger.go`:
+
+- `event_class: outcome_verified`
+- Correlation: existing `InstructionCorrelation` fields plus `receipt_hash` when available
+- Payload: `artifact_ref` (original ref or resolved path), `artifact_hash`, `ref_kind`
+- Append-only; same `appendLedgerRow` path as Stage G events
+
+#### TypeScript boundary (Stage H)
+
+**Option A (preferred):** Go producer rejects bad refs before Tracker write. `validateTracker` in `mcp-server/src/checklist-validator.ts` remains unchanged for path-string `evidence_refs` (non-empty check only). Gate composition test proves Go-emitted Tracker whose refs were resolved at write time still passes the shared gate. Rationale: single authoritative resolution at producer boundary avoids duplicate filesystem logic in TS and matches fail-closed writer semantics.
+
+**Option B (deferred):** Add `validateTrackerEvidenceRefs` in `checklist-validator.ts` mirroring Go taxonomy. Only choose if composition tests show gate accepts unresolved refs from non-agentstream producers. Document choice in CITDP at build-plan time.
+
+Existing TS helpers remain gate-time optional validators only: `validateCommandEvidence`, `validateProvenanceComplete`, `validateEvidenceFreshness` — not invoked for per-step `evidence_refs[]` strings today.
+
+#### Fake agent update
+
+`tools/agentstream/cmd/agentstream/testdata/fake_tracker_agent.rb` must emit `evidence_refs` pointing to **real** files:
+
+- Composition test creates temp evidence files under the test workspace before subprocess.
+- Or use a checked-in manifest fixture at e.g. `tools/agentstream/checklist/testdata/verification-evidence-manifest-pass.json` with `schema_version: verification-evidence-manifest.v1` and all `exit_code: 0`.
+
+Remove reliance on non-existent `working/REQ-TEST/#{step}.md` paths without fixture creation.
+
+#### Stage H test matrix (RED first)
+
+| Test file | Target | Cases |
+|---|---|---|
+| `tools/agentstream/checklist/evidence_resolve_test.go` | `ResolveEvidenceRefs` table | `file_path` ok + missing file; `manifest_ref` ok + nonzero exit; `generic_prose` rejected (`tests passed`, `build ok`, single word); empty workspace-relative path |
+| `tools/agentstream/checklist/tracker_writer_test.go` or `main` integration | Write guard | `completed` with unresolvable ref fails **before** Tracker mutation; prior Tracker bytes unchanged |
+| `tools/agentstream/checklist/adherence_ledger_test.go` | `AppendOutcomeVerified` | Schema: `event_class`, correlation fields, `artifact_ref`, `artifact_hash`, `ref_kind` |
+| `tools/agentstream/cmd/agentstream/tracker_composition_test.go` | End-to-end slice | Temp evidence file + manifest fixture; subprocess completes; ledger contains `outcome_verified` row with matching hash |
+| `tools/agentstream/checklist/tracker_gate_fixture_test.go` | Go→TS composition | Go-emitted Tracker with resolved refs passes `validateChecklistGate` minimal fixture |
+| `mcp-server/src/checklist-validator.test.ts` | Optional (Option B only) | Fixture proving TS-side ref resolution if Option B selected |
+
+**RED command targets:**
+
+```bash
+go test ./tools/agentstream/checklist/ -run 'TestResolveEvidenceRefs|TestAppendOutcomeVerified'
+go test ./tools/agentstream/cmd/agentstream/ -run 'TestAgentstream.*Composition|TestTracker'
+```
+
+#### Stage H acceptance
+
+**A16** (see §6): no `completed` disposition with unresolved `evidence_refs`; proven by unit + composition tests above.
+
+#### Stage H build-plan entry
+
+1. Copy Tracker template to `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/stage-h-evidence-resolution_YYYYMMDD.yaml`.
+2. Extend or create `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-h.yaml` with evidence-resolution change definition.
+3. Run `tied_checklist_gate_validate` `phase: pre_implementation` at **`integrated`** depth with identity-bound activation before RED.
+4. RED tests per matrix → implement `evidence_resolve.go`, `AppendOutcomeVerified`, `main.go` wire point, fake-agent fixture.
+5. GREEN + composition + `tied_validate_consistency`; LEAP only if IMPL pseudo-code drift discovered.
+
+### Stage I — RED: Tracker hardening (depends on H for honest evidence fixtures)
+
+Close remaining producer test debt **after** Stage H so composition tests use resolvable evidence refs.
+
+**Dependency:** Stage I goto/NA/waived writer tests may reuse Stage H temp-file patterns for `evidence_refs`.
 
 **Tests first:**
 
@@ -397,25 +527,31 @@ remain deferred with Stages H–L; integrated pilot rollout is not claimed.
 - `clearCloseOutGateSummaries` (`tracker_writer_test.go`)
 - goto composition invalidation (`tracker_composition_test.go`)
 
-### Stage J — RED: gate/status durable receipts
+### Stage J — RED: gate/status durable receipts (after H; before K reconciliation)
+
+Persist raw gate JSON and `tied_verify` mutation receipts. Reconciliation (Stage K) compares gate input hashes to current Tracker — resolved ref hashes from Stage H improve `gate_without_current_evidence` signal quality.
 
 **Tests first:**
 
 - `mcp-server/src/verify.test.ts`: gate receipt persisted on dry_run; status mutation records gate hash.
 - New fixture: gate JSON under `working/.../gates/` consumed by reconciliation.
 
-### Stage K — RED: adherence ledger + reconciliation report
+### Stage K — RED: adherence ledger + reconciliation report (requires H resolved refs)
+
+`RECONCILE_ADHERENCE_CHAIN` finding `completed_with_unresolved_evidence` assumes producer ran `RESOLVE_EVIDENCE_REFS`. Stage K must not run before Stage H.
 
 **Tests first:**
 
-- JSONL schema validation; correlation field completeness.
-- Reconciliation table-driven tests for all six finding codes.
-- End fixture: all six event classes linked for one synthetic request.
+- JSONL schema validation; correlation field completeness for all six event classes.
+- Reconciliation table-driven tests for all finding codes.
+- End fixture: all six event classes linked for one synthetic request including `outcome_verified`.
 
-### Stage L — Controlled-client pilot + rollout stop conditions
+### Stage L — Controlled-client pilot + rollout stop conditions (after H–K)
+
+**Dependency order:** H → I (parallel-safe with J after H) → J → K → L.
 
 - Pilot one client at `depth_tier: integrated` with distinct phase `run_id`s.
-- **Stop rollout if:** writer corrupts Tracker; turn advances without bound receipt; reconciliation shows `status_change_without_verification_receipt`; canonical checklist bytes change.
+- **Stop rollout if:** writer corrupts Tracker; turn advances without bound receipt; reconciliation shows `status_change_without_verification_receipt` or `completed_with_unresolved_evidence`; canonical checklist bytes change.
 
 ## 6. Objective acceptance matrix
 
@@ -430,13 +566,13 @@ remain deferred with Stages H–L; integrated pilot rollout is not claimed.
 | A7 | Integrated writer output without activation fails under advisory policy | TypeScript gate test with `integrated_depth_requires_pairing` |
 | A8 | Each integrated phase uses a distinct identity-bound run and four phase-local artifacts | Three activation receipts plus artifact hashes |
 | A9 | Verification gate runs before and inside `tied_verify`; invalid input causes no status diff | `tied_verify` dry-run rejection and unchanged index assertions |
-| A10 | Completed step evidence names exact commands, reports, decisions, or resolvable artifact refs | Tracker fixture audit; generic prose and unresolvable refs rejected |
+| A10 | Completed step evidence names exact commands, reports, decisions, or resolvable artifact refs | Stage H: `ResolveEvidenceRefs` unit tests; generic prose and missing files rejected before write |
 | A11 | No REQ/detail status drift after successful verification | `tied_verify` result followed by `tied_validate_consistency` |
 | A12 | Vocabulary, pseudo-code, tests, and code retain token/name alignment | `[PROC-TOKEN_AUDIT]`, `[PROC-TOKEN_VALIDATION]`, vocabulary VALIDATE |
 | A13 | Each checklist turn emits `instruction_rendered` before subprocess | ✅ Composition test + JSONL fixture |
 | A14 | Receipt parsed only from final assistant text | ✅ `executor_test` with thinking+assistant streams |
 | A15 | Receipt bound to issued nonce + instruction hash | ✅ `tracker_receipt` table test |
-| A16 | No `completed` disposition with unresolved `evidence_refs` | Writer + validator rejection test |
+| A16 | No `completed` disposition with unresolved `evidence_refs` | **Stage H complete (2026-08-25).** Go `ResolveEvidenceRefs` rejects generic prose (`tests passed`, `build ok`, single-word refs) and missing files with `unresolved_evidence_ref`. Manifest refs require `verification-evidence-manifest.v1` and all `command_results[].exit_code == 0`. `handleTrackerTurn` calls resolution after binding and before `ApplyTrackerDisposition`; failure leaves Tracker unchanged. Ledger receives one `outcome_verified` row per resolved ref with `artifact_hash`. Evidence: `evidence_resolve_test.go`, writer/integration guard test, `adherence_ledger_test.go` `AppendOutcomeVerified`, composition test with temp file + manifest fixture. TS gate unchanged (Option A); `tracker_gate_fixture_test.go` proves resolved Go output passes shared validator. |
 | A17 | Gate decision persisted with input hash | Gate JSON fixture + `verify.test` |
 | A18 | Status mutation references gate receipt | `tied_verify` result + reconciliation pass |
 | A19 | Reconciliation report links all six classes for pilot request | Controlled-client report artifact |
@@ -462,9 +598,18 @@ None of these alone proves integrated activation; that requires the phase-specif
 
 Use `--checklist-tracker-yaml PATH` for the explicit writable per-request Tracker. `--lead-checklist-yaml` continues to identify the read-only checklist definition. When the Tracker path does not exist, agentstream materializes `checklist-tracker.v1`; when it exists, agentstream validates its request/source identity before execution. Resolving both flags to the same file is an error.
 
-**Proposed (Stage G):** `--adherence-ledger PATH` defaulting to `working/{REQ-TOKEN}/adherence/events.jsonl`.
+**Proposed (Stage G, committed):** `--adherence-ledger PATH` defaulting to `working/{REQ-TOKEN}/adherence/events.jsonl`.
 
-Build-plan pre-implementation gate: `allowed: true` at minimal depth (receipt at `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-adherence-evidence-build-pre-implementation.json`). **Stage G is complete:** its integrated pre-implementation, verification, and close-out inquiry passes use distinct identity-bound run IDs and four phase-local artifacts, and the close-out gate is allowed. Stages H–L remain deferred; future behavior changes must select `depth_tier: integrated` and run distinct inquiry passes per phase.
+**Stage H build-plan entry contract:**
+
+- Scope: `evidence_resolve.go`, `AppendOutcomeVerified`, `handleTrackerTurn` wire point, fake-agent fixture, test matrix in §5 Stage H.
+- Tracker: `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/stage-h-evidence-resolution_YYYYMMDD.yaml`
+- CITDP: `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-h.yaml`
+- Pre-implementation gate: **`depth_tier: integrated`**, `gate_policy: advisory`, distinct identity-bound inquiry passes per phase before RED.
+- Verification: `go test ./tools/agentstream/checklist/...`, composition test, optional `npm test --prefix mcp-server` for gate fixture only.
+- Close-out: A16 evidence recorded; Stages I–L remain explicitly deferred.
+
+Build-plan pre-implementation gate (Stage G): **complete** — integrated inquiry passes and close-out gate allowed. **Stage H complete (2026-08-25).** Stages I–L remain deferred after H.
 
 ## 9. Six-stage adherence evidence model
 
