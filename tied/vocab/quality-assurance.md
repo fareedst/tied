@@ -43,7 +43,12 @@
 | report input manifest | batch input list, report-inputs.yaml | The `evidence-chain-report-inputs.v1` document that names profile artifacts, optional **client alias** values, mode, and path-privacy. The aggregator does not discover clients by walking repositories. | `REPORT_INPUT_MANIFEST` |
 | client alias | display name, human client name | Optional human-readable label on a **report input manifest** row. Stable identity remains the profile hashed `project_id`. | `CLIENT_ALIAS` |
 | denominator fingerprint | denominator hash, cohort denominator key | Stable hash of required derived-path denominators plus structural denominators for one profile; used in v2 to partition **denominator subcohorts** inside a **client cohort**. Distinct from **proof boundary** and from summing derived-field values. | `DENOMINATOR_FINGERPRINT` |
-| denominator subcohort | denominator partition, fingerprint cohort | A subset of a **client cohort** whose members share the same **denominator fingerprint**. v2 never rolls incompatible denominators into one sub-cohort statistic. | `DENOMINATOR_SUBCOHORT` |
+| denominator subcohort | A subset of a **client cohort** whose members share the same **denominator fingerprint**. v2 never rolls incompatible denominators into one sub-cohort statistic. | `DENOMINATOR_SUBCOHORT` |
+| adherence ledger | adherence event log, session ledger (forbidden: evidence chain profile) | Append-only `agent-adherence-event.v1` JSONL storing hash/reference edges for six checklist lifecycle event classes; distinct from **evidence chain profile** and **verification evidence manifest**. | `ADHERENCE_LEDGER` |
+| adherence event class | lifecycle event, stage event | One of six non-interchangeable classes: `instruction_rendered`, `agent_acknowledged`, `action_attempted`, `outcome_verified`, `gate_decided`, `status_mutated`. Each class has explicit non-implication rules vs adjacent stages. | `ADHERENCE_EVENT_CLASS` |
+| adherence reconciliation | adherence audit, chain reconcile | Read-only report comparing ledger rows, Tracker, gate receipts, and TIED indexes; emits deterministic finding codes without mutating state. | `ADHERENCE_RECONCILIATION` |
+| non-implication rule | stage non-implication, proof non-implication | Normative rule that one adherence event class never proves the next (e.g. acknowledgment never proves action). | `NON_IMPLICATION_RULE` |
+| instruction binding | nonce binding, instruction hash binding | Per-turn `instruction_nonce` and `instruction_hash` tying rendered prompt bytes to Tracker completion receipt. | `INSTRUCTION_BINDING` |
 
 ## Profile applicability
 
@@ -93,6 +98,11 @@ Domain terms above are distinct from IMPL grammar keywords such as `INPUT`, `OUT
 | file inventory adapter | `COLLECT_FILE_INVENTORY` (dormant contract only) | `[IMPL-EVIDENCE_CHAIN_PROFILE]` |
 | vocabulary drift adapter | `COLLECT_VOCAB_DRIFT` (dormant contract only) | `[IMPL-EVIDENCE_CHAIN_PROFILE]` |
 | evidence chain statistics report | `evidence-chain-statistics-report.v1` / `evidence-chain-report` CLI | `[REQ-EVIDENCE_CHAIN_REPORT]` |
+| adherence ledger | `agent-adherence-event.v1` / `ADHERENCE_LEDGER` | `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]` |
+| adherence event class | `event_class` / `ADHERENCE_EVENT_CLASS` | `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]` |
+| adherence reconciliation | `adherence-reconcile` / `RECONCILE_ADHERENCE_CHAIN` | `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]` |
+| non-implication rule | non-implication / `NON_IMPLICATION_RULE` | `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]` |
+| instruction binding | `instruction_nonce` + `instruction_hash` / `INSTRUCTION_BINDING` | `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]` |
 | client cohort | `compatibility_key` / `CLIENT_COHORT` | `[ARCH-EVIDENCE_CHAIN_REPORT]` |
 | report input manifest | `evidence-chain-report-inputs.v1` / `REPORT_INPUT_MANIFEST` | `[IMPL-EVIDENCE_CHAIN_REPORT]` |
 | client alias | `client_alias` / `CLIENT_ALIAS` | `[REQ-EVIDENCE_CHAIN_REPORT]` |
@@ -104,12 +114,18 @@ Domain terms above are distinct from IMPL grammar keywords such as `INPUT`, `OUT
 |---|---|---|
 | file inventory adapter | `COLLECT_FILE_INVENTORY` | `[IMPL-EVIDENCE_CHAIN_PROFILE]` |
 | vocabulary drift adapter | `COLLECT_VOCAB_DRIFT` | `[IMPL-EVIDENCE_CHAIN_PROFILE]` |
+| adherence chain reconciliation | `RECONCILE_ADHERENCE_CHAIN` | `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]` |
+| gate decision receipt persistence | `PERSIST_GATE_DECISION_RECEIPT` | `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]` |
+| status mutation receipt persistence | `PERSIST_STATUS_MUTATION_RECEIPT` | `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]` |
 
 ## Alphabetical index
 
 | Term | Section |
 |---|---|
 | abuse case | Canonical terms |
+| adherence event class | Canonical terms |
+| adherence ledger | Canonical terms |
+| adherence reconciliation | Canonical terms |
 | accepted risk | Canonical terms |
 | attach provenance | Canonical terms |
 | artifact reference | Canonical terms |
@@ -125,7 +141,8 @@ Domain terms above are distinct from IMPL grammar keywords such as `INPUT`, `OUT
 | client alias | Canonical terms |
 | event claim | Canonical terms |
 | file inventory adapter | Canonical terms |
-| idempotency key | Canonical terms |
+| instruction binding | Canonical terms |
+| non-implication rule | Canonical terms |
 | proof boundary | Canonical terms |
 | quality command declaration | Canonical terms |
 | vocabulary drift adapter | Canonical terms |

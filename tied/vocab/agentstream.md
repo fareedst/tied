@@ -25,6 +25,11 @@
 | **Tracker completion receipt** | completion prose, successful turn | Strict fenced `agentstream_tracker` JSON emitted for the current `StepStub`; carries one disposition and its evidence contract |
 | **Tracker writer** | checklist updater, status writer | Agentstream component that validates one Tracker completion receipt and atomically updates the explicit per-request Tracker without mutating the checklist definition |
 | **`--checklist-tracker-yaml`** | checklist state path | Writable per-request Authoritative Tracker path; distinct from read-only `--lead-checklist-yaml` definition |
+| **Adherence ledger** | adherence events, event log | Append-only `agent-adherence-event.v1` JSONL under `working/{REQ-TOKEN}/adherence/`; hash/reference edges for six lifecycle event classes; distinct from **evidence chain profile** |
+| **`--adherence-ledger`** | adherence path | Writable adherence ledger path; defaults to `working/{REQ-TOKEN}/adherence/events.jsonl` (planned Stage G) |
+| **instruction binding** | nonce binding, instruction hash | Per-turn `instruction_nonce` + `instruction_hash` issued before subprocess; receipt must match both |
+| **adherence event class** | lifecycle stage, event type | One of six non-interchangeable classes: `instruction_rendered`, `agent_acknowledged`, `action_attempted`, `outcome_verified`, `gate_decided`, `status_mutated` |
+| **adherence reconciliation** | reconcile report, adherence audit | Read-only report emitting finding codes (`rendered_without_acknowledgment`, etc.); never mutates Tracker or TIED YAML |
 | **run-feature-batch-agentstream** | tasd (alone) | Shell driver: `scripts/run-feature-batch-agentstream.sh` |
 
 ---
@@ -88,7 +93,8 @@ Default **`pipeline.Build`** concatenation (see [IMPL-GOAGENT-PIPELINE-pseudocod
 | `-f`, `--first-turn` | `FirstTurn` | 1-based slice after Build |
 | `-w`, `--workspace` | `Workspace` | Default cwd |
 | `-c`, `--lead-checklist-yaml` | `LeadChecklistYAML` | Read-only lead checklist definition path |
-| `--checklist-tracker-yaml` | `ChecklistTrackerYAML` | Writable per-request Authoritative Tracker path (planned; build-plan Stage D) |
+| `--checklist-tracker-yaml` | `ChecklistTrackerYAML` | Writable per-request Authoritative Tracker path |
+| `--adherence-ledger` | `AdherenceLedger` | Writable adherence ledger path (planned Stage G) |
 | `--lead-checklist-from-step` | `LeadChecklistStepFromID` | Inclusive lower bound (slug or id) |
 | `--lead-checklist-to-step` | `LeadChecklistStepToID` | Inclusive upper bound |
 | `--lead-checklist-skip-sub` | `LeadChecklistSkipSub` | Omit `sub_procedures` |
@@ -155,6 +161,13 @@ const VerifySessionPrompt = "what was the most recent prompt?"
 | Tracker disposition write | `APPLY_TRACKER_DISPOSITION` | [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT](../implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml) |
 | Tracker loop-back invalidation | `INVALIDATE_TRACKER_DOWNSTREAM` | [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT](../implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml) |
 | Runner Tracker composition | `COMPOSE_TRACKER_WITH_CHECKLIST_GATE` | [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT](../implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml) · wired from [IMPL-GOAGENT-CLI-CMD](../implementation-decisions/IMPL-GOAGENT-CLI-CMD.yaml) |
+| Instruction evidence render | `RENDER_INSTRUCTION_EVIDENCE` | [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT](../implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml) |
+| Final assistant text separation | `SEPARATE_FINAL_ASSISTANT_TEXT` | [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT](../implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml) · [IMPL-GOAGENT-EXECUTOR](../implementation-decisions/IMPL-GOAGENT-EXECUTOR.yaml) |
+| Receipt instruction binding | `BIND_RECEIPT_TO_INSTRUCTION` | [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT](../implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml) |
+| Evidence ref resolution | `RESOLVE_EVIDENCE_REFS` | [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT](../implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml) |
+| Gate decision receipt persistence | `PERSIST_GATE_DECISION_RECEIPT` | [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT](../implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml) |
+| Status mutation receipt persistence | `PERSIST_STATUS_MUTATION_RECEIPT` | [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT](../implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml) |
+| Adherence chain reconciliation | `RECONCILE_ADHERENCE_CHAIN` | [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT](../implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml) |
 
 ---
 
@@ -162,11 +175,15 @@ const VerifySessionPrompt = "what was the most recent prompt?"
 
 | Term | Section |
 |------|---------|
+| adherence event class | Preferred terms |
+| adherence ledger | Preferred terms |
+| adherence reconciliation | Preferred terms |
 | agentstream | Preferred terms |
 | agentstream_control | Preferred terms |
 | ApplyPromptFilePreload | Pseudo-code blocks |
 | Authoritative Tracker | Preferred terms |
-| `--checklist-tracker-yaml` | Preferred terms |
+| instruction binding | Preferred terms |
+| `--adherence-ledger` | Preferred terms |
 | ChainFromPrevious | Preferred terms |
 | checklist_messages | Pseudo-code blocks |
 | dry-run | Preferred terms |

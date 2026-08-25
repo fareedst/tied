@@ -22,15 +22,21 @@ printf '%s\n' '{"session_id":"s-1","type":"assistant","message":{"content":[{"ty
 	}
 	var out bytes.Buffer
 	var errOut bytes.Buffer
-	sid, transcript, code, err := Run(context.Background(), []string{agent}, &out, &errOut)
+	result, code, err := Run(context.Background(), []string{agent}, &out, &errOut)
 	if err != nil {
 		t.Fatal(err)
 	}
-	if code != 0 || sid != "s-1" {
-		t.Fatalf("code/sid mismatch: code=%d sid=%q stderr=%s", code, sid, errOut.String())
+	if code != 0 || result.SessionID != "s-1" {
+		t.Fatalf("code/sid mismatch: code=%d sid=%q stderr=%s", code, result.SessionID, errOut.String())
 	}
-	if out.String() != "hello world" || transcript != out.String() {
-		t.Fatalf("stream/capture mismatch: out=%q transcript=%q", out.String(), transcript)
+	if result.FinalText != "hello world" {
+		t.Fatalf("FinalText=%q", result.FinalText)
+	}
+	if strings.Contains(result.FinalText, "thinking") {
+		t.Fatalf("thinking leaked into FinalText: %q", result.FinalText)
+	}
+	if out.String() != "hello world" || result.Transcript != out.String() {
+		t.Fatalf("stream/capture mismatch: out=%q transcript=%q", out.String(), result.Transcript)
 	}
 	if strings.TrimSpace(errOut.String()) != "" {
 		t.Fatalf("unexpected stderr: %s", errOut.String())

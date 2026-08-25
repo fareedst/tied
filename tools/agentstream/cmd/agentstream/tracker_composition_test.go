@@ -104,3 +104,66 @@ func runTrackerComposition(t *testing.T, omitReceipt, wantStepTwo bool) {
 func TestAgentstreamCanonicalChecklistUnchangedWithTracker(t *testing.T) {
 	TestAgentstreamRequiresTrackerReceiptBeforeNextTurn(t)
 }
+
+func TestAgentstreamInstructionRenderedLedgerBeforeSubprocess(t *testing.T) {
+	t.Helper()
+	if _, err := exec.LookPath("ruby"); err != nil {
+		t.Skipf("ruby not available: %v", err)
+	}
+	wd, err := os.Getwd()
+	if err != nil {
+		t.Fatal(err)
+	}
+	moduleRoot, err := goModRootFrom(wd)
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Chdir(moduleRoot)
+
+	checklist, err := filepath.Abs(filepath.Join(wd, "testdata", "tracker-checklist.yaml"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	fakeAgent, err := filepath.Abs(filepath.Join(wd, "testdata", "fake_tracker_agent.rb"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	ws := t.TempDir()
+	trackerPath := filepath.Join(ws, "tracker.yaml")
+	ledgerPath := filepath.Join(ws, "adherence", "events.jsonl")
+
+	cmd := exec.Command(
+		"go", "run", "./cmd/agentstream",
+		"--workspace", ws,
+		"--lead-checklist-yaml", checklist,
+		"--checklist-tracker-yaml", trackerPath,
+		"--adherence-ledger", ledgerPath,
+		"--lead-checklist-skip-sub",
+		"--checklist-var", "REQUEST=REQ-TRACKER-COMPOSITION",
+		"--agent-path", fakeAgent,
+		"--skip-tied-mcp-preflight",
+	)
+	cmd.Dir = moduleRoot
+	cmd.Env = append(os.Environ(), "PWD="+moduleRoot)
+	var stdout, stderr bytes.Buffer
+	cmd.Stdout = &stdout
+	cmd.Stderr = &stderr
+	if err := cmd.Run(); err != nil {
+		t.Fatalf("agentstream run failed: %v\nstdout:\n%s\nstderr:\n%s", err, stdout.String(), stderr.String())
+	}
+	data, err := os.ReadFile(ledgerPath)
+	if err != nil {
+		t.Fatalf("ledger missing: %v", err)
+	}
+	text := string(data)
+	if !strings.Contains(text, `"event_class":"instruction_rendered"`) && !strings.Contains(text, `"event_class": "instruction_rendered"`) {
+		t.Fatalf("missing instruction_rendered row:\n%s", text)
+	}
+	firstLine := strings.Split(strings.TrimSpace(text), "\n")[0]
+	if !strings.Contains(firstLine, "instruction_rendered") {
+		t.Fatalf("first row should be instruction_rendered, got: %s", firstLine)
+	}
+	if strings.Contains(text, "fake tracker agent processed") {
+		t.Fatalf("ledger must not contain prompt/response bodies")
+	}
+}

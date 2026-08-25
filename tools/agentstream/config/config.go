@@ -20,6 +20,8 @@ type Config struct {
 	OrderFilterRaw       string
 	LeadChecklistYAML     string
 	ChecklistTrackerYAML  string
+	AdherenceLedger       string
+	RunID                 string
 	LeadChecklistSkipSub  bool
 	// LeadChecklistStepFromID / LeadChecklistStepToID: inclusive main-step bounds by YAML step slug (--lead-checklist-*-step).
 	LeadChecklistStepFromID     string
@@ -201,6 +203,12 @@ func parseFlags(args []string, c *Config) error {
 					return err
 				}
 				c.ChecklistTrackerYAML = val
+			case k == "--adherence-ledger":
+				val, err := needVal(k, v, ok, args, &i)
+				if err != nil {
+					return err
+				}
+				c.AdherenceLedger = val
 			case k == "--lead-checklist-from-step":
 				val, err := needVal(k, v, ok, args, &i)
 				if err != nil {
@@ -372,6 +380,26 @@ func resolveDefaults(cwd string, c *Config) error {
 	if os.Getenv("AGENTSTREAM_CHECKLIST_VAR_STRICT") == "1" {
 		c.ChecklistVarStrict = true
 	}
+	if c.RunID == "" {
+		for _, key := range []string{"RUN_ID", "AGENTSTREAM_RUN_ID"} {
+			if v := strings.TrimSpace(c.ChecklistVars[key]); v != "" {
+				c.RunID = v
+				break
+			}
+		}
+		if c.RunID == "" {
+			if v := strings.TrimSpace(os.Getenv("AGENTSTREAM_RUN_ID")); v != "" {
+				c.RunID = v
+			}
+		}
+	}
+	if c.ChecklistTrackerYAML != "" && strings.TrimSpace(c.AdherenceLedger) == "" {
+		if token := trackerRequestTokenFromVars(c.ChecklistVars); token != "" {
+			if root, ok := FindRepoRoot(c.Workspace); ok {
+				c.AdherenceLedger = filepath.Join(root, "working", token, "adherence", "events.jsonl")
+			}
+		}
+	}
 	// Default: do not validate .cursor/mcp.json before cursor agent (opt in with --tied-mcp-preflight).
 	if !c.tiedMCPPreflightUserSet {
 		c.SkipTiedMCPPreflight = true
@@ -473,6 +501,15 @@ func validate(c *Config) error {
 	return nil
 }
 
+func trackerRequestTokenFromVars(vars map[string]string) string {
+	for _, key := range []string{"REQUEST", "REQ_TOKEN", "REQUEST_TOKEN"} {
+		if v := strings.TrimSpace(vars[key]); v != "" {
+			return v
+		}
+	}
+	return ""
+}
+
 // UsageText is printed for --help. REQ-GOAGENT-CLI-CONFIG.
 func UsageText(program string) string {
 	return fmt.Sprintf(`Usage:
@@ -487,6 +524,7 @@ Options:
   -m, --model MODEL        (default: Auto)
   -c, --lead-checklist-yaml PATH
       --checklist-tracker-yaml PATH  (writable per-request Authoritative Tracker; must differ from -c)
+      --adherence-ledger PATH        (append-only agent-adherence-event.v1 JSONL; default working/{REQ-TOKEN}/adherence/events.jsonl when tracker mode is on)
       --lead-checklist-from-step ID-or-slug   (optional inclusive lower; main steps only)
       --lead-checklist-to-step ID-or-slug     (optional inclusive upper; main steps only)
       --lead-checklist-skip-sub

@@ -1,0 +1,97 @@
+depth_tier: integrated
+execution_evidence:
+  completed: []
+  request: REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+gate_policy: advisory
+name: stage-g-instruction-binding
+profile_depth: not_measured
+request_token: REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+schema_version: checklist-tracker.v1
+scope: Stage G only — instruction render, FinalText separation, receipt binding
+source_document: tied/docs/agent-req-implementation-checklist.yaml
+steps:
+  - disposition: completed
+    evidence_refs:
+      - AGENTS.md
+      - tied/vocab/agentstream.md
+      - tied/vocab/quality-assurance.md
+    kind: main
+    slug: session-bootstrap
+  - disposition: completed
+    evidence_refs:
+      - docs/checklist-adherence-improvement-plan.md#0-refine-and-plan-gates
+    kind: main
+    slug: translate-sponsor-intent
+  - disposition: completed
+    evidence_refs:
+      - docs/checklist-adherence-improvement-plan.md#5-implementation-sequence
+    kind: main
+    slug: change-definition
+  - disposition: completed
+    evidence_refs:
+      - docs/checklist-adherence-improvement-plan.md#4-module-boundaries-and-impact
+      - tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md
+    kind: main
+    slug: impact-discovery
+  - disposition: completed
+    evidence_refs:
+      - docs/checklist-adherence-improvement-plan.md#depth-and-gate-policy
+      - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-tracker-writer-draft.yaml
+    kind: main
+    slug: risk-assessment
+  - disposition: completed
+    evidence_refs:
+      - tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md
+    kind: main
+    slug: gate-pseudocode-validation
+  - disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-pre_implementation/obligation-report.json
+      - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-verification/gate-result.json
+      - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-verification/obligation-report.json
+    kind: sub_procedure
+    slug: sub-adversarial-inquiry-pass
+  - disposition: completed
+    evidence_refs:
+      - tools/agentstream/checklist/adherence_ledger_test.go
+      - tools/agentstream/checklist/tracker_receipt_test.go
+      - tools/agentstream/cmd/agentstream/tracker_composition_test.go
+      - tools/agentstream/executor/executor_binding_test.go
+    kind: main
+    slug: unit-test-red
+  - disposition: completed
+    evidence_refs:
+      - tools/agentstream/checklist/adherence_ledger.go
+      - tools/agentstream/checklist/tracker_receipt.go
+      - tools/agentstream/cmd/agentstream/main.go
+      - tools/agentstream/config/config.go
+      - tools/agentstream/executor/executor.go
+    kind: main
+    slug: unit-test-green
+  - disposition: completed
+    evidence_refs:
+      - go test ./tools/agentstream/... (all packages ok)
+    kind: main
+    slug: composition-integration
+  - disposition: not_applicable
+    kind: main
+    policy: stage-g-scope-deferred
+    rationale: Stage G defers three-way-alignment-unit; no IMPL pseudo-code drift in this slice.
+    slug: three-way-alignment-unit
+- disposition: completed
+  evidence_refs:
+  - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-stage-g-verification.json
+  kind: main
+  slug: verification-gate
+  - disposition: completed
+    evidence_refs:
+      - tied_validate_consistency ok:true
+    kind: main
+    slug: sync-tied-stack
+- disposition: completed
+  evidence_refs:
+  - CHANGELOG.md#unreleased
+  - tied/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-g.yaml
+  - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-stage-g-close-out.json
+  kind: main
+  slug: traceable-commit

@@ -24,6 +24,7 @@ Run **`agentstream --help`** for the full option list. Highlights:
 | `-w`, `--workspace` | Workspace root (default: current directory). |
 | `-c`, `--lead-checklist-yaml` | Read-only lead checklist definition YAML; default resolves to repo `tied/docs/agent-req-implementation-checklist.yaml` when present. |
 | `--checklist-tracker-yaml PATH` | Writable per-request **Authoritative Tracker** (`checklist-tracker.v1`). Requires `-c`. Must not equal the definition path. When missing on disk, agentstream materializes clean pending state including `sub-adversarial-inquiry-pass` as a top-level step row. |
+| `--adherence-ledger PATH` | Append-only **adherence ledger** (`agent-adherence-event.v1` JSONL). Default: `working/{REQ-TOKEN}/adherence/events.jsonl` when `--checklist-tracker-yaml` is set and `REQUEST` resolves a token. Stores hash/reference edges only (no prompt or response bodies). |
 | `--lead-checklist-before-feature` | With both `-b` and `-c`, emit all checklist steps before all feature-spec records (default is feature-spec first). |
 | `--checklist-var KEY=VALUE` | Repeatable (synonym: `--lead-checklist-var`). Substitutes **`{{KEY}}`** in rendered lead checklist text (`goals`, `tasks`, step `title`, flow branch prose, etc.). Split on the **first** `=` so values may contain `=`. Missing keys leave `{{KEY}}` unchanged unless strict mode applies. |
 | `--checklist-var-strict`, `AGENTSTREAM_CHECKLIST_VAR_STRICT=1` | Fail rendering if any `{{NAME}}` remains after substitution (forgotten vars). |
@@ -140,10 +141,16 @@ The checklist definition (`-c`) is read-only. Per-request workflow state lives i
     "schema_version": 1,
     "slug": "change-definition",
     "disposition": "completed",
-    "evidence_refs": ["working/REQ-X/change-definition.md"]
+    "evidence_refs": ["working/REQ-X/change-definition.md"],
+    "instruction_nonce": "run-1:3:a1b2c3d4e5f67890",
+    "instruction_hash": "sha256:…",
+    "request_token": "REQ-X",
+    "run_id": "run-1"
   }
 }
 ```
+
+When tracker mode is on (`--checklist-tracker-yaml`), binding fields are **required** on every receipt. Agentstream hashes rendered turn `Parts` before spawning the agent, appends an `instruction_rendered` ledger row, exports `INSTRUCTION_NONCE`, `INSTRUCTION_HASH`, `REQUEST_TOKEN`, and `RUN_ID` to the agent subprocess environment, parses receipts from **final assistant text only** (thinking deltas are excluded), validates binding, then appends `agent_acknowledged` on success.
 
 Supported dispositions: `completed` (requires `evidence_refs`), `not_applicable` (`policy` + `rationale`), `waived` (`owner`, `expiry`, `approval`, `residual_risk`). Generic `skipped` is rejected. On `agentstream_control` **goto**, the runner invalidates configured downstream Tracker rows from `loop_back_clearance` before rerouting; it does not mutate the checklist definition bytes.
 

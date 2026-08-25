@@ -1,0 +1,1052 @@
+{
+  "schema_version": "layer-b-pseudocode-validator.v1",
+  "ok": true,
+  "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+  "blocks": [
+    {
+      "name": "VALIDATE_TRACKER",
+      "line": 5,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "VALIDATE_CITDP_OPEN_RECORD",
+      "line": 16,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "VALIDATE_ADVERSARIAL_CONTRACT",
+      "line": 33,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "VALIDATE_ACTIVATION_PAIRING",
+      "line": 44,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "DATA",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "DERIVE_PHASE_AWARE_SLUGS",
+      "line": 65,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "VALIDATE_MINIMAL_WAIVER",
+      "line": 79,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "VALIDATE_DEPTH_DOWNGRADE",
+      "line": 94,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "VALIDATE_COMPLETION_ACTIVATION",
+      "line": 110,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "VALIDATE_RECEIPT_PHASE",
+      "line": 125,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "VALIDATE_WAIVER_FIELD",
+      "line": 139,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "HAS_VALID_CLOSE_OUT_INQUIRY_WAIVER",
+      "line": 152,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "DERIVE_EXPECTED_FROM_RECEIPT",
+      "line": 165,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "DATA",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "VALIDATE_MINIMAL_SUB_STUB_DISPOSITION",
+      "line": 180,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "VALIDATE_INTEGRATED_PARENT_CHILD_SLUGS",
+      "line": 193,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "VALIDATE_TRACKER_SPARSE",
+      "line": 206,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "VALIDATE_TRACKER_AUTHORITATIVE",
+      "line": 217,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "VALIDATE_PROVENANCE_COMPLETE",
+      "line": 228,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "VALIDATE_FINDING_DISPOSITION",
+      "line": 239,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "VALIDATE_COMMAND_EVIDENCE",
+      "line": 250,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "VALIDATE_EVIDENCE_FRESHNESS",
+      "line": 261,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "VALIDATE_CLOSE_OUT_TREE",
+      "line": 272,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "NORMALIZE_REMEDIATION_DIAGNOSTICS",
+      "line": 283,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "VALIDATE_CHECKLIST_GATE",
+      "line": 296,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "DATA_TRANSITION",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "COLLECT_CHECKLIST_ACTIVATION",
+      "line": 332,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "DATA",
+        "DATA_TRANSITION",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "MATERIALIZE_AUTHORITATIVE_TRACKER",
+      "line": 356,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "DATA_TRANSITION",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "PARSE_TRACKER_COMPLETION_RECEIPT",
+      "line": 376,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "APPLY_TRACKER_DISPOSITION",
+      "line": 394,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "DATA_TRANSITION",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "INVALIDATE_TRACKER_DOWNSTREAM",
+      "line": 413,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "DATA_TRANSITION",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "COMPOSE_TRACKER_WITH_CHECKLIST_GATE",
+      "line": 430,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "DATA_TRANSITION",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "WRITE_CITDP_RECORD",
+      "line": 451,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "RENDER_INSTRUCTION_EVIDENCE",
+      "line": 468,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "DATA",
+        "DATA_TRANSITION",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "SEPARATE_FINAL_ASSISTANT_TEXT",
+      "line": 487,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "BIND_RECEIPT_TO_INSTRUCTION",
+      "line": 500,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "RESOLVE_EVIDENCE_REFS",
+      "line": 516,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "DATA",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "PERSIST_GATE_DECISION_RECEIPT",
+      "line": 534,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "DATA",
+        "DATA_TRANSITION",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "PERSIST_STATUS_MUTATION_RECEIPT",
+      "line": 552,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "DATA",
+        "DATA_TRANSITION",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "RECONCILE_ADHERENCE_CHAIN",
+      "line": 569,
+      "token_refs": [
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "DATA",
+        "DATA_TRANSITION",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    }
+  ],
+  "dependencies": [],
+  "coverage": [
+    {
+      "block": "VALIDATE_TRACKER",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "VALIDATE_CITDP_OPEN_RECORD",
+      "branch_lines": [
+        25,
+        26,
+        27,
+        28,
+        29
+      ],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "VALIDATE_ADVERSARIAL_CONTRACT",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "VALIDATE_ACTIVATION_PAIRING",
+      "branch_lines": [
+        54,
+        55,
+        57,
+        58,
+        59,
+        60,
+        61
+      ],
+      "failure_modes": [
+        "IF receipt is missing or receipt.success is not true: RETURN failure missing_or_unsuccessful_inquiry_receipt",
+        "IF receipt.tool is not tied_adversarial_inquiry_run: RETURN failure invalid_inquiry_tool",
+        "IF artifact is missing or artifact.valid is not true or artifact.hash is empty: RETURN failure"
+      ],
+      "references": []
+    },
+    {
+      "block": "DERIVE_PHASE_AWARE_SLUGS",
+      "branch_lines": [
+        74,
+        75
+      ],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "VALIDATE_MINIMAL_WAIVER",
+      "branch_lines": [
+        88,
+        89,
+        90
+      ],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "VALIDATE_DEPTH_DOWNGRADE",
+      "branch_lines": [
+        103,
+        104,
+        105,
+        106
+      ],
+      "failure_modes": [
+        "RETURN failure depth_downgrade_requires_waiver"
+      ],
+      "references": []
+    },
+    {
+      "block": "VALIDATE_COMPLETION_ACTIVATION",
+      "branch_lines": [
+        119,
+        120,
+        121
+      ],
+      "failure_modes": [
+        "RETURN failure missing_completion_activation"
+      ],
+      "references": []
+    },
+    {
+      "block": "VALIDATE_RECEIPT_PHASE",
+      "branch_lines": [
+        134,
+        135
+      ],
+      "failure_modes": [
+        "RETURN failure receipt_identity_mismatch:phase"
+      ],
+      "references": []
+    },
+    {
+      "block": "VALIDATE_WAIVER_FIELD",
+      "branch_lines": [
+        148
+      ],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "HAS_VALID_CLOSE_OUT_INQUIRY_WAIVER",
+      "branch_lines": [
+        161
+      ],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "DERIVE_EXPECTED_FROM_RECEIPT",
+      "branch_lines": [
+        175,
+        176
+      ],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "VALIDATE_MINIMAL_SUB_STUB_DISPOSITION",
+      "branch_lines": [
+        189,
+        190
+      ],
+      "failure_modes": [
+        "IF sub-adversarial-inquiry-pass disposition is pending: RETURN failure pending_required_step"
+      ],
+      "references": []
+    },
+    {
+      "block": "VALIDATE_INTEGRATED_PARENT_CHILD_SLUGS",
+      "branch_lines": [
+        202
+      ],
+      "failure_modes": [
+        "IF sub-adversarial-inquiry-pass is pending AND any other auto-required slug for the phase is completed: RETURN failure"
+      ],
+      "references": []
+    },
+    {
+      "block": "VALIDATE_TRACKER_SPARSE",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "VALIDATE_TRACKER_AUTHORITATIVE",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "VALIDATE_PROVENANCE_COMPLETE",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "VALIDATE_FINDING_DISPOSITION",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "VALIDATE_COMMAND_EVIDENCE",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "VALIDATE_EVIDENCE_FRESHNESS",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "VALIDATE_CLOSE_OUT_TREE",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "NORMALIZE_REMEDIATION_DIAGNOSTICS",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "VALIDATE_CHECKLIST_GATE",
+      "branch_lines": [
+        316,
+        317,
+        318,
+        319,
+        320,
+        323,
+        324,
+        328
+      ],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "COLLECT_CHECKLIST_ACTIVATION",
+      "branch_lines": [
+        344,
+        346,
+        347,
+        348,
+        352
+      ],
+      "failure_modes": [
+        "IF phase directory or any required artifact file is missing: RETURN failure",
+        "IF report scope or project_id missing: RETURN failure"
+      ],
+      "references": []
+    },
+    {
+      "block": "MATERIALIZE_AUTHORITATIVE_TRACKER",
+      "branch_lines": [
+        366,
+        368,
+        370
+      ],
+      "failure_modes": [
+        "OUTPUT: materialized tracker map or error"
+      ],
+      "references": []
+    },
+    {
+      "block": "PARSE_TRACKER_COMPLETION_RECEIPT",
+      "branch_lines": [
+        386,
+        387,
+        388,
+        389
+      ],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "APPLY_TRACKER_DISPOSITION",
+      "branch_lines": [
+        405,
+        406
+      ],
+      "failure_modes": [
+        "OUTPUT: updated tracker or error",
+        "POST: exactly one matching step changes disposition and evidence fields; unrelated tracker fields remain semantically equal; state_history appends bounded audit entry unless idempotent replay; execution_evidence.completed is derived from completed step slugs after write; prior file bytes remain valid on any failure",
+        "WRITE updated atomically; on failure leave prior unchanged"
+      ],
+      "references": []
+    },
+    {
+      "block": "INVALIDATE_TRACKER_DOWNSTREAM",
+      "branch_lines": [
+        424,
+        425
+      ],
+      "failure_modes": [
+        "OUTPUT: updated tracker or error",
+        "WRITE tracker atomically; on failure leave prior unchanged"
+      ],
+      "references": []
+    },
+    {
+      "block": "COMPOSE_TRACKER_WITH_CHECKLIST_GATE",
+      "branch_lines": [
+        440,
+        441,
+        443,
+        444,
+        447
+      ],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "WRITE_CITDP_RECORD",
+      "branch_lines": [
+        463
+      ],
+      "failure_modes": [
+        "OUTPUT: write result or error",
+        "IF openResult fails: RETURN error"
+      ],
+      "references": []
+    },
+    {
+      "block": "RENDER_INSTRUCTION_EVIDENCE",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "SEPARATE_FINAL_ASSISTANT_TEXT",
+      "branch_lines": [
+        496
+      ],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "BIND_RECEIPT_TO_INSTRUCTION",
+      "branch_lines": [
+        509,
+        510,
+        511,
+        512
+      ],
+      "failure_modes": [
+        "OUTPUT: bound receipt or error"
+      ],
+      "references": []
+    },
+    {
+      "block": "RESOLVE_EVIDENCE_REFS",
+      "branch_lines": [
+        527,
+        528,
+        529,
+        530
+      ],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "PERSIST_GATE_DECISION_RECEIPT",
+      "branch_lines": [
+        545
+      ],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "PERSIST_STATUS_MUTATION_RECEIPT",
+      "branch_lines": [
+        563,
+        564
+      ],
+      "failure_modes": [
+        "OUTPUT: status mutation receipt or error"
+      ],
+      "references": []
+    },
+    {
+      "block": "RECONCILE_ADHERENCE_CHAIN",
+      "branch_lines": [
+        580
+      ],
+      "failure_modes": [],
+      "references": []
+    }
+  ],
+  "diagnostics": []
+}

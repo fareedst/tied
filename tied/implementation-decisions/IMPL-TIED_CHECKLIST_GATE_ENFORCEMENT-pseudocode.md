@@ -463,3 +463,126 @@ procedure WRITE_CITDP_RECORD(filename, record): # [IMPL-TIED_CHECKLIST_GATE_ENFO
   IF openResult fails: RETURN error
   WRITE canonical YAML atomically
   RETURN success
+
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: hash rendered turn prompt bytes and append instruction_rendered adherence event before subprocess.
+procedure RENDER_INSTRUCTION_EVIDENCE(turn, cfg, ledger_path):
+  Contract:
+  INPUT: turn with Parts, cfg with request_token and run_id, ledger_path
+  PRE: turn.StepStub is non-empty for checklist turns; ledger_path is writable under working/{REQ-TOKEN}/adherence/
+  OUTPUT: instruction_nonce and instruction_hash for current turn
+  POST: instruction_hash equals stable hash of rendered Parts bytes; instruction_nonce is unique per turn_index; agent-adherence-event.v1 row with event_class instruction_rendered appended before executor.Run
+  FAILURE_MODES: ledger_write_failure, missing_request_token, empty_turn_parts
+  DATA: instruction_nonce, instruction_hash, rendered_bytes
+  DATA_TRANSITION: rendered Parts become hashed correlation fields and append-only JSONL row
+  EFFECTS: append-only write to ledger_path
+  TERMINATION: total
+  rendered := join turn.Parts with canonical separator
+  instruction_hash := sha256(rendered)
+  instruction_nonce := issue UUID or monotonic counter scoped to run_id and turn_index
+  event := agent-adherence-event.v1 row with correlation request_token, run_id, turn_index, step_slug, instruction_hash, instruction_nonce, source_revision
+  APPEND event to ledger_path atomically
+  RETURN instruction_nonce, instruction_hash
+
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: separate final assistant text from thinking stream so receipt scan excludes non-final content.
+procedure SEPARATE_FINAL_ASSISTANT_TEXT(run_result):
+  Contract:
+  INPUT: executor RunResult with FinalText, ThinkingText, Transcript
+  PRE: RunResult produced by stream-json executor
+  OUTPUT: receipt_scan_text bucket
+  POST: receipt_scan_text equals FinalText only; ThinkingText and reasoning blocks are excluded; Transcript retains full audit trail unchanged
+  FAILURE_MODES: missing_final_text
+  EFFECTS: pure projection
+  TERMINATION: total
+  IF FinalText is empty AND Transcript contains no assistant content: RETURN missing_final_text
+  RETURN FinalText as receipt_scan_text
+
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: validate Tracker completion receipt binding fields against issued instruction for current turn.
+procedure BIND_RECEIPT_TO_INSTRUCTION(receipt, issued_nonce, issued_hash, turn_identity):
+  Contract:
+  INPUT: parsed agentstream_tracker receipt, issued instruction_nonce and instruction_hash, turn_identity
+  PRE: receipt passed PARSE_TRACKER_COMPLETION_RECEIPT shape validation
+  OUTPUT: bound receipt or error
+  POST: receipt instruction_nonce equals issued_nonce; receipt instruction_hash equals issued_hash; receipt request_token and run_id match cfg; stale nonce or copied prior-turn hash fails
+  FAILURE_MODES: missing_binding_fields, stale_instruction_nonce, instruction_hash_mismatch, request_token_mismatch, run_id_mismatch, copied_prior_hash
+  EFFECTS: pure
+  TERMINATION: total
+  IF receipt lacks instruction_nonce or instruction_hash: RETURN missing_binding_fields
+  IF receipt instruction_nonce differs from issued_nonce: RETURN stale_instruction_nonce
+  IF receipt instruction_hash differs from issued_hash: RETURN instruction_hash_mismatch
+  IF receipt hash matches prior turn but nonce differs or vice versa: RETURN copied_prior_hash
+  RETURN bound receipt
+
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: resolve completed disposition evidence_refs to files, manifests, or command receipts before Tracker write.
+procedure RESOLVE_EVIDENCE_REFS(receipt, project_root):
+  Contract:
+  INPUT: validated receipt with evidence_refs[], project_root
+  PRE: receipt disposition is completed; evidence_refs is non-empty
+  OUTPUT: resolution result with artifact hashes or diagnostics
+  POST: every ref resolves to existing file with recorded hash, valid verification-evidence-manifest.v1 with exit_code zero, or command evidence passing VALIDATE_COMMAND_EVIDENCE; generic prose refs fail
+  FAILURE_MODES: unresolved_evidence_ref, manifest_exit_nonzero, command_success_unproven, missing_artifact
+  DATA: resolved_refs with artifact_ref and artifact_hash
+  EFFECTS: read-only filesystem and manifest inspection
+  TERMINATION: total
+  FOR each ref in evidence_refs:
+    IF ref matches generic prose pattern: RETURN unresolved_evidence_ref
+    IF ref is file path: require exists; record sha256
+    IF ref is manifest reference: load verification-evidence-manifest.v1; reject exit_code != 0
+    IF ref is command evidence map: VALIDATE_COMMAND_EVIDENCE
+  RETURN resolved_refs for outcome_verified ledger append
+
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: persist raw checklist evidence gate decision with input Tracker/CITDP hash for reconciliation.
+procedure PERSIST_GATE_DECISION_RECEIPT(gate_result, input_hashes, gates_dir):
+  Contract:
+  INPUT: gate_result from tied_checklist_gate_validate, input_hashes for tracker and citdp, gates_dir
+  PRE: phase is pre_implementation, verification, or close_out; gates_dir is under working/{REQ-TOKEN}/gates/
+  OUTPUT: persisted gate receipt path and content hash
+  POST: JSON file written atomically with phase, timestamp, allowed, diagnostics, depth, input tracker_hash and citdp_hash; agent-adherence-event.v1 gate_decided row appended with artifact_ref pointing to file
+  FAILURE_MODES: gate_receipt_write_failure, missing_input_hash
+  DATA: gate_receipt_path, gate_receipt_hash
+  DATA_TRANSITION: gate_result plus input_hashes become durable JSON and ledger correlation edge
+  EFFECTS: atomic filesystem write and ledger append
+  TERMINATION: total
+  IF tracker_hash or citdp_hash missing: RETURN missing_input_hash
+  path := gates_dir/{phase}-{timestamp}.json
+  WRITE gate_result and input_hashes atomically to path
+  APPEND gate_decided adherence event with artifact_ref path and gate_receipt_hash
+  RETURN path, gate_receipt_hash
+
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: persist tied_verify status mutation receipt linking previous and next statuses to gate receipt.
+procedure PERSIST_STATUS_MUTATION_RECEIPT(verify_result, gate_receipt_ref, ledger_path):
+  Contract:
+  INPUT: tied_verify dry_run or apply result, gate_receipt_ref path/hash, ledger_path
+  PRE: verify_result includes previous_status to next_status map per token; gate_receipt_ref points to persisted gate JSON
+  OUTPUT: status mutation receipt or error
+  POST: status_mutated adherence event records token-level diffs and gate_receipt_ref; no status write occurs without prior gate_decided receipt reference when mutation applied
+  FAILURE_MODES: missing_gate_receipt_ref, verify_no_op, ledger_write_failure
+  DATA: status_mutation_map, gate_receipt_ref
+  DATA_TRANSITION: verify_result diff becomes status_mutated ledger row with gate correlation
+  EFFECTS: append-only ledger write; verify apply may mutate TIED indexes separately
+  TERMINATION: total
+  IF verify_result would_update is empty: RETURN verify_no_op
+  IF mutation applied AND gate_receipt_ref missing: RETURN missing_gate_receipt_ref
+  APPEND status_mutated event with previous/next map and gate_receipt_ref
+  RETURN success
+
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: read-only reconciliation comparing six event classes and emitting deterministic findings without mutating Tracker or TIED YAML.
+procedure RECONCILE_ADHERENCE_CHAIN(ledger_path, tracker_path, tied_indexes, gates_dir): # [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+  Contract:
+  INPUT: adherence ledger JSONL, Authoritative Tracker, TIED index snapshots, gates directory
+  PRE: ledger_path may be absent for legacy requests
+  OUTPUT: reconciliation report with finding codes and correlation gaps
+  POST: emits rendered_without_acknowledgment, acknowledged_without_attempt, attempt_without_verified_outcome, completed_with_unresolved_evidence, gate_without_current_evidence, status_change_without_verification_receipt, or legacy_no_adherence_chain; report is observational only and never mutates inputs
+  FAILURE_MODES: malformed_ledger_row, missing_correlation_field
+  DATA: findings list with codes and turn/slug correlation
+  DATA_TRANSITION: ledger rows, Tracker steps, gate receipts, and TIED index snapshots project into read-only findings list
+  EFFECTS: read-only filesystem inspection; no Tracker or TIED YAML writes
+  TERMINATION: total
+  IF ledger_path absent: RECORD legacy_no_adherence_chain finding for request
+  rows := load and validate agent-adherence-event.v1 rows
+  FOR each instruction_rendered without matching agent_acknowledged: RECORD rendered_without_acknowledgment finding
+  FOR each agent_acknowledged without action_attempted for declared evidence_refs: RECORD acknowledged_without_attempt finding
+  FOR each action_attempted without outcome_verified hash match: RECORD attempt_without_verified_outcome finding
+  FOR each Tracker completed step with failed RESOLVE_EVIDENCE_REFS: RECORD completed_with_unresolved_evidence finding
+  FOR each gate_decided receipt whose input hash differs from current Tracker/CITDP: RECORD gate_without_current_evidence finding
+  FOR each TIED status change without status_mutated row referencing gate receipt: RECORD status_change_without_verification_receipt finding
+  RETURN findings report

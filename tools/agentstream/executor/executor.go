@@ -9,11 +9,21 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"os"
 	"os/exec"
 	"strings"
 
 	"stdd/agentstream"
 )
+
+// RunResult separates final assistant text from thinking for receipt binding.
+// [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+type RunResult struct {
+	SessionID    agentstream.SessionID
+	FinalText    string
+	ThinkingText string
+	Transcript   string
+}
 
 // AgentArgv builds argv for one agent invocation (argv[0] is the agent binary). REQ-GOAGENT-EXECUTOR.
 func AgentArgv(agentPath, workspace, model, resumeID string, parts []string) []string {
@@ -39,19 +49,22 @@ func AgentArgv(agentPath, workspace, model, resumeID string, parts []string) []s
 }
 
 // Run executes agent with argv, streams text to out, forwards stderr, and
-// returns session ID, captured assistant text, and exit code. REQ-GOAGENT-EXECUTOR.
-func Run(ctx context.Context, argv []string, out io.Writer, errOut io.Writer) (agentstream.SessionID, string, int, error) {
+// returns RunResult, exit code, and error. Optional extraEnv entries are appended to os.Environ().
+func Run(ctx context.Context, argv []string, out io.Writer, errOut io.Writer, extraEnv ...string) (RunResult, int, error) {
 	cmd := exec.CommandContext(ctx, argv[0], argv[1:]...)
+	if len(extraEnv) > 0 {
+		cmd.Env = append(os.Environ(), extraEnv...)
+	}
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
-		return "", "", -1, err
+		return RunResult{}, -1, err
 	}
 	stderr, err := cmd.StderrPipe()
 	if err != nil {
-		return "", "", -1, err
+		return RunResult{}, -1, err
 	}
 	if err := cmd.Start(); err != nil {
-		return "", "", -1, err
+		return RunResult{}, -1, err
 	}
 
 	errDone := make(chan struct{})
@@ -64,7 +77,7 @@ func Run(ctx context.Context, argv []string, out io.Writer, errOut io.Writer) (a
 	}()
 
 	var captured agentstream.SessionID
-	var transcript strings.Builder
+	var finalText, thinkingText, transcript strings.Builder
 	sc := bufio.NewScanner(stdout)
 	for sc.Scan() {
 		line := strings.TrimSpace(sc.Text())
@@ -80,6 +93,12 @@ func Run(ctx context.Context, argv []string, out io.Writer, errOut io.Writer) (a
 			captured = agentstream.SessionID(sid)
 		}
 		for _, f := range extractTextFragments(obj) {
+			typ, _ := obj["type"].(string)
+			if typ == "thinking" {
+				thinkingText.WriteString(f)
+			} else {
+				finalText.WriteString(f)
+			}
 			_, _ = out.Write([]byte(f))
 			transcript.WriteString(f)
 		}
@@ -93,15 +112,21 @@ func Run(ctx context.Context, argv []string, out io.Writer, errOut io.Writer) (a
 	<-errDone
 	waitErr := cmd.Wait()
 	exit := 0
+	result := RunResult{
+		SessionID:    captured,
+		FinalText:    finalText.String(),
+		ThinkingText: thinkingText.String(),
+		Transcript:   transcript.String(),
+	}
 	if waitErr != nil {
 		exit = 1
 		if ee, ok := waitErr.(*exec.ExitError); ok {
 			exit = ee.ExitCode()
 		}
 		_, _ = fmt.Fprintf(errOut, "agent exited with status %d\n", exit)
-		return captured, transcript.String(), exit, waitErr
+		return result, exit, waitErr
 	}
-	return captured, transcript.String(), exit, nil
+	return result, exit, nil
 }
 
 func extractTextFragments(obj map[string]interface{}) []string {

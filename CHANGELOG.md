@@ -9,6 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Checklist adherence Stage G — instruction binding ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  agentstream Stage G slice: `adherence_ledger.go` emits `instruction_rendered`
+  JSONL rows before subprocess; `executor.RunResult.FinalText` excludes thinking
+  stream (A14); receipt binding validates nonce/hash/request_token/run_id before
+  Tracker write (A15). CLI `--adherence-ledger` wired in `main.go`/`config.go`.
+  Tests: `adherence_ledger_test.go`, `executor_binding_test.go`,
+  `tracker_receipt_test.go`, `tracker_composition_test.go`. Expanded
+  `docs/checklist-adherence-improvement-plan.md` evidence model (§9–§10) and
+  Stages G–L sequence; CITDP `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-g`.
+  **Deferred:** Stages H–L (evidence ref resolution, reconciliation, full chain).
+
 - **Checklist gate close-out enforcement ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
   restored the authoritative `tied_checklist_gate_validate` MCP surface and completed
   file-backed verification/close-out inquiry evidence with phase-bound activation pairing

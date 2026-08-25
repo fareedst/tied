@@ -1,6 +1,6 @@
 # Checklist Adherence Improvement Plan
 
-**Status:** Refined implementation plan (2026-08-24)
+**Status:** Evidence-chain design + IMPL pseudo-code (2026-08-24 build-plan); Stages G–L production code deferred to next integrated build-plan
 **Scope:** Producer-side Tracker state and its integration with existing TIED checklist gates
 **Primary tokens:** `[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]`, `[ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT]`, `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]`, `[REQ-TIED_ADVERSARIAL_INQUIRY]`, `[ARCH-TIED_ADVERSARIAL_INQUIRY]`, `[IMPL-TIED_ADVERSARIAL_INQUIRY]`, `[IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST]`, `[PROC-AGENT_REQ_CHECKLIST]`, `[PROC-TIED_VERIFICATION_GATED]`, `[PROC-TOKEN_AUDIT]`, `[PROC-TOKEN_VALIDATION]`
 **Motivation:** Client `1787626480` claimed checklist completion, but the authoritative checklist evidence gate returned `tracker_sparse` and `missing_required_step:sub-adversarial-inquiry-pass`.
@@ -18,24 +18,28 @@
 | activation evidence | **Integrated activation evidence**: one successful inquiry receipt paired with all four identity-bound artifacts for the same request, project, run, phase, scope, and hashes |
 | phase artifacts | Exactly the four bounded files under a **phase artifact directory**: `obligation-report.json`, `finding-ledger.jsonl`, `gate-result.json`, and `evidence-provenance.json` |
 | advisory | Finding policy only; it never permits missing Tracker dispositions, missing activation pairing, stale evidence, or status mutation before a successful checklist gate |
+| adherence ledger | Append-only `agent-adherence-event.v1` JSONL storing six lifecycle event classes; distinct from **evidence chain profile** |
+| adherence event class | One of `instruction_rendered`, `agent_acknowledged`, `action_attempted`, `outcome_verified`, `gate_decided`, `status_mutated`; governed by non-implication rules |
+| instruction binding | Per-turn `instruction_nonce` + `instruction_hash` tying rendered prompt bytes to Tracker completion receipt |
 
-Vocabulary ownership and names are defined in `tied/vocab/agentstream.md`, `tied/vocab/fidelity-research.md`, and `tied/vocab/quality-assurance.md`. No new REQ/ARCH/IMPL token is required for this plan: the producer behavior completes the existing machine-enforced checklist evidence contract.
+Vocabulary ownership and names are defined in `tied/vocab/agentstream.md`, `tied/vocab/fidelity-research.md`, and `tied/vocab/quality-assurance.md`. No new REQ/ARCH/IMPL token is required for this plan: the producer behavior completes the existing machine-enforced checklist evidence contract; the evidence-chain blocks extend `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]`.
 
 ### Depth and gate policy
 
 | Context | `depth_tier` | `gate_policy` | `profile_depth` | Reason |
 |---|---|---|---|---|
-| This documentation-only refine-plan pass | `minimal` | `advisory` | `not_measured` | No runtime behavior, persistence schema, production code, or status changes are implemented in this pass |
-| Later behavior-changing build-plan | `integrated` | `advisory` | Selected independently if measured | Agent output is external input, the writer mutates persistent workflow state, and the change protects strict verification/close-out boundaries |
+| This documentation + pseudo-code build-plan pass | `minimal` | `advisory` | `not_measured` | No Stages G–L production code; updates plan doc, IMPL pseudo-code, and vocabulary only |
+| Next behavior-changing build-plan (Stages G–L) | `integrated` | `advisory` | Selected independently if measured | Adherence ledger, instruction binding, evidence resolution, and durable gate/status receipts mutate persistent workflow evidence |
 
 For this pass, `sub-adversarial-inquiry-pass` is `not_applicable` with policy and rationale in the per-request Tracker. The later build-plan must run distinct integrated inquiry passes at `pre_implementation`, `verification`, and `close_out`.
 
 ### Workflow artifacts
 
-- Per-request Tracker: `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT_checklist-adherence-plan-refinement_20260824.yaml`
+- Per-request Tracker (refine-plan): `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT_checklist-adherence-plan-refinement_20260824.yaml`
+- Per-request Tracker (this build-plan): `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/checklist-adherence-evidence-build_20260824.yaml`
 - CITDP draft: `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-tracker-writer-draft.yaml`
-- Refine-plan gate receipt: `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-checklist-adherence-plan-refinement-pre-implementation.json`
-- CITDP persistence is deferred until the behavior-changing build-plan, per `tied/docs/citdp-policy.md`.
+- Build-plan gate receipt: `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-adherence-evidence-build-pre-implementation.json`
+- CITDP persistence is deferred until the integrated behavior-changing build-plan, per `tied/docs/citdp-policy.md`.
 
 ### Refine-plan gate result (2026-08-24)
 
@@ -47,41 +51,88 @@ Raw `tied_checklist_gate_validate` output for `phase: pre_implementation` with t
 
 ## 1. Current state and confirmed gap
 
-The validator and status boundary already enforce the consumer side:
+### Already implemented — consumer side
 
 - `mcp-server/src/checklist-validator.ts` reads `steps`, accepts only `pending`, `completed`, `not_applicable`, or `waived`, requires evidence by disposition, derives phase-aware slugs, rejects sparse/synthetic Trackers, and validates activation pairing.
 - `mcp-server/src/verify.ts` rejects status updates without `checklist_gate` and calls `validateChecklistGate` before writing REQ/IMPL status.
 - `mcp-server/src/feature-orchestration/commands.ts` blocks gated lifecycle commands when the shared validator rejects their evidence.
-- Existing acceptance tests prove `tracker_sparse`, `tracker_not_authoritative`, activation, provenance, finding, freshness, waiver, and close-out diagnostics.
+- Existing acceptance tests prove `tracker_sparse`, `tracker_not_authoritative`, activation, provenance, finding, freshness, waiver, and close-out diagnostics (A6/A7 in `checklist-validator.test.ts`; A9 in `verify.test.ts`).
 
-The missing producer contract is in `tools/agentstream`:
+### Already implemented — producer side (Tracker writer Stages B–E)
 
-1. `checklist.LoadTurns` renders the canonical checklist but does not materialize a separate state-only Tracker.
-2. `executor.Run` returns captured assistant text, but the runner parses only `agentstream_control` routing.
-3. No strict completion receipt records the current step disposition and evidence.
-4. `ApplyLoopBackClearance` clears legacy comment markers in the checklist file; it does not reset dispositions and evidence in an authoritative Tracker.
-5. The canonical `sub-adversarial-inquiry-pass` is a `sub_procedures` entry, while the gate reads the Tracker's top-level `steps`. A raw checklist copy can therefore omit the gate-required state row.
-6. `execution_evidence.completed` can describe intent, but it cannot substitute for step records and their evidence contracts.
+| Capability | Status | Evidence |
+|---|---|---|
+| Authoritative Tracker materialization incl. `sub-adversarial-inquiry-pass` | **done** | `tools/agentstream/checklist/tracker.go` — `MaterializeAuthoritativeTracker`, `EnsureTracker` |
+| Strict `agentstream_tracker` receipt parse (latest fenced JSON wins) | **done** | `tools/agentstream/checklist/tracker_receipt.go` |
+| Atomic disposition write + idempotent/conflicting replay | **done** | `tools/agentstream/checklist/tracker_writer.go` — `ApplyTrackerDisposition` |
+| Loop-back downstream invalidation on `goto` | **done** | `InvalidateTrackerDownstream`, wired in `tools/agentstream/cmd/agentstream/main.go` |
+| Runner blocks turn N+1 without valid receipt | **done** | `main.go`, `tools/agentstream/cmd/agentstream/tracker_composition_test.go` |
+| Go→TS gate fixture composition | **done** | `tools/agentstream/checklist/tracker_gate_fixture_test.go` + TypeScript tests |
 
-The first implementation target is therefore the producer and composition seam, not another validator rewrite.
+### Remaining producer/test gaps (honest partials)
+
+- `ValidateTrackerIdentity` request-token mismatch: code exists, **no test**.
+- `ApplyTrackerDisposition` for `not_applicable` / `waived`: parser tested, **writer untested**.
+- `clearCloseOutGateSummaries` on loop-back: **code only, no test**.
+- Composition: **no E2E for `goto` invalidation**; no adversarial-inquiry sub turn.
+- Receipt scans **combined** thinking + assistant transcript (`tools/agentstream/executor/executor.go` merges both into one stream).
+
+### Remaining evidence-chain gaps
+
+The six stage names below are **design targets**, not code identifiers today. They are **orthogonal** to `[REQ-EVIDENCE_CHAIN_PROFILE]` / `evidence-chain-profile.v1`, which measures TIED structural completeness. The new `agent-adherence-event.v1` ledger measures session/checklist adherence lifecycle.
+
+```mermaid
+flowchart LR
+  IR[instruction_rendered] --> AA[agent_acknowledged]
+  AA --> AT[action_attempted]
+  AT --> OV[outcome_verified]
+  OV --> GD[gate_decided]
+  GD --> SM[status_mutated]
+  IR -.->|"non-implication"| AA
+  AA -.->|"non-implication"| AT
+  AT -.->|"non-implication"| OV
+  OV -.->|"non-implication"| GD
+  GD -.->|"non-implication"| SM
+```
+
+| Stage | Current closest machinery | Gap |
+|---|---|---|
+| `instruction_rendered` | `checklist.LoadTurns` renders turns; hooks log `beforeSubmitPrompt` | No instruction hash persisted; no link to turn identity |
+| `agent_acknowledged` | Docs require "Observing AI principles!"; hooks log `afterAgentResponse` | No machine verification; not in Tracker or gate |
+| `action_attempted` | Cursor hooks (tool/shell/MCP); receipt parse attempt | Hooks not wired to agentstream/gate; no attempt ledger |
+| `outcome_verified` | `verification-evidence-manifest.v1`; gate optional evidence validators | `evidence_refs` not resolved against manifests/commands |
+| `gate_decided` | `validateChecklistGate` returns decision | Gate JSON not auto-persisted with input hash |
+| `status_mutated` | `tied_verify` dry_run/writes | No post-mutation receipt linking gate → token changes |
+
+The next implementation target is the **six-stage adherence evidence chain** (Stages G–L), not another validator rewrite.
 
 ## 2. Change definition
 
-### Current behavior
+### Achieved behavior (Tracker producer Stages B–E)
 
-A lead-checklist run can advance after a successful agent subprocess without producing machine-readable completion state. Operators may manually edit a copied checklist or populate `execution_evidence.completed`, creating a sparse Tracker that the existing gate correctly rejects.
+For each lead-checklist Turn, agentstream now:
 
-### Desired behavior
+1. materializes or validates a per-request **Authoritative Tracker** including `sub-adversarial-inquiry-pass`;
+2. renders a strict **Tracker completion receipt** contract in the turn prompt;
+3. parses the receipt from the captured assistant transcript;
+4. validates slug, disposition contract, and replay identity;
+5. atomically updates exactly one Tracker step;
+6. refuses to advance when the receipt is missing, malformed, stale, mismatched, or unsupported;
+7. clears downstream dispositions and evidence on a validated `goto`;
+8. produces Tracker state consumable by the existing checklist evidence gate and `tied_verify` without a synthetic adapter.
 
-For each lead-checklist Turn, agentstream must:
+### Remaining evidence controls (Stages G–L)
 
-1. render a strict **Tracker completion receipt** contract;
-2. parse the receipt from the captured assistant text;
-3. validate that its slug is the current `StepStub` and that its disposition contract is complete;
-4. atomically update the per-request **Authoritative Tracker**;
-5. refuse to advance when the receipt is missing, malformed, stale, mismatched, or unsupported;
-6. clear downstream dispositions and evidence on a validated `goto`;
-7. produce Tracker state that the existing checklist evidence gate and `tied_verify` consume without a synthetic adapter.
+1. **Instruction binding** — hash rendered turn bytes, issue per-turn `instruction_nonce`, append `instruction_rendered` events before subprocess.
+2. **Final-text separation** — parse receipts from final assistant text only; exclude thinking stream.
+3. **Receipt hardening** — bind `instruction_nonce`, `instruction_hash`, `request_token`, and `run_id` in `agentstream_tracker` schema.
+4. **Evidence ref resolution** — resolve `evidence_refs[]` to files, manifests, or command receipts before accepting `completed`.
+5. **Durable gate/status receipts** — persist `tied_checklist_gate_validate` and `tied_verify` mutation receipts with input hashes.
+6. **Adherence ledger and reconciliation** — append-only `agent-adherence-event.v1` JSONL and read-only reconciliation findings.
+
+### Current behavior (pre-evidence-chain)
+
+A lead-checklist run can still advance on a valid receipt without proving that observed actions match declared evidence, that gate decisions were persisted, or that status mutations reference the gate chain. Operators may supply generic prose in `evidence_refs` that the writer accepts but the evidence chain cannot verify.
 
 ### Unchanged behavior
 
@@ -90,7 +141,7 @@ For each lead-checklist Turn, agentstream must:
 - The shared TypeScript validator remains the authority for progression.
 - `tied_verify` remains the only status-promotion writer and revalidates its `checklist_gate` payload before mutation.
 - Advisory inquiry does not mutate canonical TIED YAML and only confirmed findings may trigger LEAP.
-- Legacy full checklist copies remain readable during migration.
+- Legacy full checklist copies and Trackers without adherence events remain readable during migration.
 
 ### Non-goals
 
@@ -100,7 +151,9 @@ For each lead-checklist Turn, agentstream must:
 - Making every adversarial finding blocking.
 - Adding UI/E2E coverage where unit and process-composition tests can prove the behavior.
 - Retrofitting or promoting statuses in existing client Trackers.
-- Editing production code in this refine-plan pass.
+- Merging `agent-adherence-event.v1` into `evidence-chain-profile.v1`.
+- Elevating hook transport success to product/checklist success.
+- Editing Stages G–L production code in this build-plan pass.
 
 ## 3. Authoritative contracts
 
@@ -132,10 +185,18 @@ Each successful lead-checklist Turn must end with one strict fenced JSON envelop
     "schema_version": 1,
     "slug": "change-definition",
     "disposition": "completed",
-    "evidence_refs": ["working/REQ-X/change-definition.md"]
+    "evidence_refs": ["working/REQ-X/change-definition.md"],
+    "instruction_nonce": "550e8400-e29b-41d4-a716-446655440000",
+    "instruction_hash": "sha256:…",
+    "request_token": "REQ-X",
+    "run_id": "20260824-pre-implementation"
   }
 }
 ```
+
+**Schema v1 (current):** `schema_version`, `slug`, `disposition`, and disposition-specific evidence fields.
+
+**Schema v1 extension (design; Stage G):** add required `instruction_nonce`, `instruction_hash`, `request_token`, and `run_id` with a migration window where v1 without binding fields remains accepted for legacy runs only.
 
 Rules:
 
@@ -145,7 +206,21 @@ Rules:
 - generic `skipped` is invalid;
 - unknown fields are rejected for schema version 1;
 - a byte-equivalent replay is idempotent; a conflicting replay for the same turn identity fails;
-- when `agentstream_control.action` is `goto`, the runner applies loop-back invalidation and does not require the current step to be marked complete.
+- when `agentstream_control.action` is `goto`, the runner applies loop-back invalidation and does not require the current step to be marked complete;
+- **receipt parse source (Stage G):** parse from **final assistant text only**; receipts found only in the thinking stream are rejected;
+- **binding rejection (Stage G):** reject missing receipt, multiple valid receipts, stale `instruction_nonce`, copied `instruction_hash` from a prior turn, or binding fields that do not match the issued instruction for the current turn.
+
+**Executor separation (design only):**
+
+```go
+// tools/agentstream/executor/executor.go — proposed RunResult buckets
+type RunResult struct {
+  SessionID    string
+  FinalText    string // assistant message.content text only — receipt scan target
+  ThinkingText string // optional; excluded from receipt scan
+  Transcript   string // full audit trail
+}
+```
 
 ### 3.3 Tracker writer
 
@@ -213,106 +288,138 @@ Under advisory policy:
 
 Strict blocking remains limited to strict-eligible, explicitly approved scope.
 
+### 3.8 Evidence lifecycle (provable controls)
+
+Before each checklist turn in `tools/agentstream/cmd/agentstream/main.go`:
+
+1. **Instruction binding** — hash rendered `t.Parts` → `instruction_hash`; issue per-turn `instruction_nonce`; append `instruction_rendered` event to `working/{REQ-TOKEN}/adherence/events.jsonl`.
+2. **Receipt hardening** — extend `agentstream_tracker` with binding fields (§3.2); parse from `FinalText` only.
+3. **Evidence ref resolution** — when disposition is `completed`, resolve each `evidence_refs[]` entry:
+   - **File path** → must exist; hash recorded in `outcome_verified`.
+   - **Manifest reference** → must match `verification-evidence-manifest.v1` (`tied/docs/quality-evidence-manifest.md`); `exit_code != 0` rejected.
+   - **Generic prose** ("tests passed") → reject at writer or pre-gate validator.
+   Reuse gate helpers: `validateCommandEvidence`, `validateProvenanceComplete`, `validateEvidenceFreshness` in `mcp-server/src/checklist-validator.ts`.
+4. **Gate and status receipts** — persist raw `tied_checklist_gate_validate` JSON to `working/{REQ-TOKEN}/gates/{phase}-{timestamp}.json` with input Tracker/CITDP hash; persist `tied_verify` dry_run/apply result with `previous_status` → `next_status` map and gate receipt pointer; reconciliation compares ledger `status_mutated` rows to canonical TIED YAML indexes.
+5. **Hook integration (reference only, bounded proof)** — document proof boundaries for `.cursor/hooks/log.rb`:
+   - `postToolUse` / `afterShellExecution` / `afterMCPExecution` → candidate `action_attempted` sources.
+   - Hook transport success ≠ product success.
+   - Hooks are **supplementary**; runner-observed commands remain authoritative for checklist evidence.
+
 ## 4. Module boundaries and impact
 
-| Module | Responsibility | Planned files | Independent validation |
+| Module | Responsibility | Files | Independent validation |
 |---|---|---|---|
-| Tracker materializer | Convert checklist definition to clean per-request state; include gate-governed sub-procedures | `tools/agentstream/checklist/tracker.go` | Go unit tests for slug inventory, clean state, path refusal, legacy import |
-| Receipt parser | Parse and validate `agentstream_tracker` without changing routing semantics | `tools/agentstream/checklist/tracker_receipt.go` | Table tests for malformed, mismatched, disposition-specific, unknown-field, and replay cases |
-| Atomic Tracker writer | Apply one receipt or loop-back invalidation without corrupting state | `tools/agentstream/checklist/tracker_writer.go` | Temp-directory tests, write-failure test doubles, idempotency and preservation tests |
-| Runner composition | Connect executor transcript → receipt parser → writer before advancing; route `goto` through Tracker invalidation | `tools/agentstream/cmd/agentstream/main.go`, `tools/agentstream/config/` | Fake-agent process composition tests |
-| Gate compatibility | Prove writer output is accepted/rejected by the existing shared gate and by `tied_verify` dry-run | `mcp-server/src/checklist-validator.test.ts`, `mcp-server/src/verify.test.ts`, shared fixtures | TypeScript contract/composition tests; no duplicate validator implementation |
-| Procedure and operator docs | Define explicit Tracker path, receipt contract, migration, and evidence locations | `tools/agentstream/README.md`, canonical checklist docs, prompt-shared contracts if needed | Static contract tests and YAML lint |
-| TIED logic | Add producer blocks and code/test locations before RED | `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]` pseudo-code sidecar/detail | `pseudocode_validate`, token audit, `tied_validate_consistency` |
+| Tracker materializer | Convert checklist definition to clean per-request state; include gate-governed sub-procedures | `tools/agentstream/checklist/tracker.go` | Go unit tests — **done** |
+| Receipt parser | Parse and validate `agentstream_tracker` without changing routing semantics | `tools/agentstream/checklist/tracker_receipt.go` | Table tests — **done**; binding tests — Stage G |
+| Atomic Tracker writer | Apply one receipt or loop-back invalidation without corrupting state | `tools/agentstream/checklist/tracker_writer.go` | Temp-directory tests — **done**; `not_applicable`/`waived` writer tests — Stage I |
+| Runner composition | Connect executor transcript → receipt parser → writer before advancing; route `goto` through Tracker invalidation | `tools/agentstream/cmd/agentstream/main.go`, `tools/agentstream/config/` | Fake-agent composition — **done**; goto invalidation E2E — Stage I |
+| Gate compatibility | Prove writer output is accepted/rejected by the existing shared gate and by `tied_verify` dry-run | `mcp-server/src/checklist-validator.test.ts`, `mcp-server/src/verify.test.ts` | TypeScript contract tests — **done** |
+| Executor | Separate final vs thinking text for receipt scan | `tools/agentstream/executor/executor.go` | `executor_test.go` — Stage G |
+| Adherence ledger | Append-only JSONL writer for six event classes | **new** `tools/agentstream/checklist/adherence_ledger.go` | Schema + correlation tests — Stage K |
+| Evidence resolver | Resolve refs → manifests/artifacts | **new** `tools/agentstream/checklist/evidence_resolve.go` + TS hook in validator | Writer + validator rejection — Stage H |
+| Reconciliation | Read-only adherence chain report | **new** `tools/agentstream/checklist/adherence_reconcile.go` or MCP read tool | Table-driven finding codes — Stage K |
+| Gate/status receipts | Persist gate and verify decisions | extend `mcp-server/src/verify.ts`, gate callers | `verify.test.ts` fixtures — Stage J |
+| Procedure and operator docs | Define Tracker path, receipt contract, adherence ledger, migration | `tools/agentstream/README.md`, this plan | Static contract tests — Stage F partial |
+| TIED logic | Producer + evidence-chain Active blocks | `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]` pseudo-code sidecar/detail | `pseudocode_validate`, `tied_validate_consistency` |
+| Vocabulary | RECORD adherence ledger and event-class terms | `tied/vocab/agentstream.md`, `tied/vocab/quality-assurance.md` | `[PROC-VOCABULARY_INDEX]` VALIDATE |
 
 No UI boundary exists; E2E is not required. The fake `cursor agent` subprocess test is a process-composition test, not UI E2E.
 
 ## 5. Implementation sequence
 
-### Stage A — LEAP and pseudo-code gate
+### Stage A — LEAP and pseudo-code gate (**complete for producer; extended for evidence chain**)
 
 1. Extend `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]` with token-commented Active blocks:
-   - `MATERIALIZE_AUTHORITATIVE_TRACKER`
-   - `PARSE_TRACKER_COMPLETION_RECEIPT`
-   - `APPLY_TRACKER_DISPOSITION`
-   - `INVALIDATE_TRACKER_DOWNSTREAM`
-   - `COMPOSE_TRACKER_WITH_CHECKLIST_GATE`
+   - Producer (implemented): `MATERIALIZE_AUTHORITATIVE_TRACKER`, `PARSE_TRACKER_COMPLETION_RECEIPT`, `APPLY_TRACKER_DISPOSITION`, `INVALIDATE_TRACKER_DOWNSTREAM`, `COMPOSE_TRACKER_WITH_CHECKLIST_GATE`
+   - Evidence chain (this build-plan): `RENDER_INSTRUCTION_EVIDENCE`, `SEPARATE_FINAL_ASSISTANT_TEXT`, `BIND_RECEIPT_TO_INSTRUCTION`, `RESOLVE_EVIDENCE_REFS`, `PERSIST_GATE_DECISION_RECEIPT`, `PERSIST_STATUS_MUTATION_RECEIPT`, `RECONCILE_ADHERENCE_CHAIN`
 2. Add PRE/POST/EFFECTS, failure modes, state transitions, and termination contracts.
-3. Update IMPL code locations/tests and any required architecture wording through the TIED YAML tooling.
-4. RECORD the finalized names in vocabulary.
-5. Run pseudo-code validation. Do not start RED until it passes.
+3. Update IMPL code locations/tests through TIED YAML tooling.
+4. RECORD finalized names in vocabulary.
+5. Run pseudo-code validation. **Stage G RED unblocked after pseudocode_validate passes.**
 
-### Stage B — RED: materializer and receipt parser
+### Stage B — RED: materializer and receipt parser (**complete**)
 
-Write failing Go tests first:
+Implemented with Go unit tests: materialization inventory, path refusal, receipt schema/disposition table tests, idempotent/conflicting replay.
 
-- materialization includes every main slug and `sub-adversarial-inquiry-pass`;
-- duplicate slugs or a missing gate-governed sub-procedure fail;
-- canonical definition path cannot be a writer target;
-- copy hygiene clears inherited dispositions, evidence, gates, and request identity;
-- valid `completed`, `not_applicable`, and `waived` receipts parse;
-- missing evidence, generic `skipped`, wrong slug, unsupported schema, and unknown fields fail;
-- missing receipt blocks advancement;
-- identical replay is idempotent; conflicting replay fails.
+**Residual test debt:** see Stage I.
 
-Then implement the minimum parser/materializer code to make those tests green and run Go lint/test checks.
+### Stage C — RED: atomic write and loop-back state (**complete**)
 
-### Stage C — RED: atomic write and loop-back state
+Implemented with temp-directory tests, idempotency, write-failure doubles, and loop-back invalidation code.
 
-Write failing Go tests first:
+**Residual test debt:** `not_applicable`/`waived` writer tests; `clearCloseOutGateSummaries` test — see Stage I.
 
-- exactly one step changes for a valid receipt;
-- unrelated fields remain semantically equal;
-- failed validation or simulated write failure leaves the original file unchanged;
-- a `goto` clears all configured downstream dispositions, evidence, waivers, and gate summaries;
-- routing does not proceed if clearance persistence fails;
-- `execution_evidence.completed` is derived after the authoritative write and cannot override it.
+### Stage D — RED: runner composition (**complete**)
 
-Then implement the minimum writer/invalidation code and validate the module independently.
+Fake-agent composition tests prove receipt-before-turn-N+1, malformed receipt exit, and canonical checklist byte preservation.
 
-### Stage D — RED: runner composition
+**Residual test debt:** goto invalidation composition — see Stage I.
 
-Use a fake `cursor agent` executable and temporary Tracker:
+### Stage E — RED: shared gate/status composition (**complete**)
 
-- valid receipt updates the current `StepStub` before turn N+1;
-- absent/malformed/mismatched receipt exits non-zero before turn N+1;
-- valid `goto` invalidates Tracker state before replacing the remaining queue;
-- non-checklist Turns do not require Tracker receipts;
-- the canonical checklist remains byte-identical;
-- resume/replay does not duplicate state history.
+Go-emitted Tracker fixtures consumed by TypeScript `validateChecklistGate` and `tied_verify` dry-run tests.
 
-Then wire `executor.Run` transcript output to the parser/writer in `main.go`.
+### Stage F — Documentation, rollout, and verification (**partial**)
 
-### Stage E — RED: shared gate/status composition
+1. Writable Tracker argument documented in `tools/agentstream/README.md` — **done**.
+2. Legacy gate reads of `status`/`tracking.status` preserved — **done**.
+3. Materialize/migrate preview for old copies — **partial**.
+4. Controlled-client pilot — deferred to Stage L.
+5. Methodology refresh via `copy_files.sh` — ongoing operator step.
+6. Full test/lint/validation — **done** for Stages B–E; Stages G–L pending.
+7. Stop rollout conditions defined — see Stage L.
 
-Create one language-neutral Tracker fixture emitted by the Go writer and consume it in TypeScript tests:
+### Stage G — RED: instruction render + receipt binding
 
-- sparse legacy summary without step rows returns `tracker_sparse`;
-- writer output with `sub-adversarial-inquiry-pass: pending` fails;
-- minimal output with policy-backed `not_applicable` passes the pre-implementation gate;
-- integrated output without activation fails even under advisory policy;
-- integrated output with phase-matched pairing passes;
-- `tied_verify` dry-run rejects invalid Tracker input and reports no `would_update`;
-- `tied_verify` dry-run accepts valid gate input and reports only the expected status changes.
+**Tests first:**
 
-Do not add a second Go gate evaluator. The composition seam ends at the existing TIED YAML MCP/TypeScript authority.
+- `tools/agentstream/executor/executor_test.go`: thinking excluded from `FinalText`; receipt in thinking-only stream fails.
+- `tools/agentstream/checklist/tracker_receipt_test.go`: nonce/hash mismatch, stale nonce, missing binding fields.
+- `tools/agentstream/cmd/agentstream/tracker_composition_test.go`: `instruction_rendered` JSONL row written before subprocess.
 
-### Stage F — Documentation, rollout, and verification
+### Stage H — RED: evidence ref resolution
 
-1. Document an explicit writable Tracker argument/path; never infer that the canonical checklist is writable.
-2. Preserve legacy gate reads of `status` and `tracking.status` for one migration window; new writer output uses `disposition`.
-3. Provide an explicit materialize/migrate preview for old full checklist copies; do not rewrite existing client state automatically.
-4. Pilot on one controlled client at integrated depth with distinct phase runs.
-5. Refresh client methodology with `copy_files.sh`; do not edit client methodology snapshots.
-6. Run full Go and TypeScript tests, build/lint, token validation, vocabulary validation, verification gate, and `tied_validate_consistency`.
-7. Stop rollout if the writer corrupts a Tracker, advances without a receipt, changes the canonical checklist, or produces output rejected by the shared gate.
+**Tests first:**
+
+- Go unit: reject generic evidence strings; accept manifest path with matching hash.
+- TypeScript unit: extend checklist-validator with `evidence_refs` resolution hook (or composition test calling shared fixture).
+- Writer test: `completed` with unresolvable ref fails before Tracker write.
+
+### Stage I — RED: Tracker hardening (close remaining gaps)
+
+**Tests first:**
+
+- request_token mismatch (`tracker_test.go`)
+- `not_applicable` / `waived` apply (`tracker_writer_test.go`)
+- `clearCloseOutGateSummaries` (`tracker_writer_test.go`)
+- goto composition invalidation (`tracker_composition_test.go`)
+
+### Stage J — RED: gate/status durable receipts
+
+**Tests first:**
+
+- `mcp-server/src/verify.test.ts`: gate receipt persisted on dry_run; status mutation records gate hash.
+- New fixture: gate JSON under `working/.../gates/` consumed by reconciliation.
+
+### Stage K — RED: adherence ledger + reconciliation report
+
+**Tests first:**
+
+- JSONL schema validation; correlation field completeness.
+- Reconciliation table-driven tests for all six finding codes.
+- End fixture: all six event classes linked for one synthetic request.
+
+### Stage L — Controlled-client pilot + rollout stop conditions
+
+- Pilot one client at `depth_tier: integrated` with distinct phase `run_id`s.
+- **Stop rollout if:** writer corrupts Tracker; turn advances without bound receipt; reconciliation shows `status_change_without_verification_receipt`; canonical checklist bytes change.
 
 ## 6. Objective acceptance matrix
 
 | ID | Acceptance | Required evidence |
 |---|---|---|
 | A1 | Fresh materialization produces a non-sparse Tracker with all main slugs plus `sub-adversarial-inquiry-pass` | Go unit fixture and semantic YAML assertion |
-| A2 | No checklist Turn advances without a valid current-step receipt | Fake-agent composition test with turn-N+1 sentinel absent |
+| A2 | No checklist Turn advances without a valid current-step receipt bound to issued instruction | Fake-agent composition test; instruction_nonce/hash table test |
 | A3 | Every non-pending disposition satisfies its evidence contract | Parser/writer table tests and shared validator fixture |
 | A4 | Loop-back invalidates all configured downstream state before rerouting | Go composition test and before/after Tracker fixture |
 | A5 | Canonical checklist bytes never change | Snapshot/hash assertion |
@@ -320,20 +427,31 @@ Do not add a second Go gate evaluator. The composition seam ends at the existing
 | A7 | Integrated writer output without activation fails under advisory policy | TypeScript gate test with `integrated_depth_requires_pairing` |
 | A8 | Each integrated phase uses a distinct identity-bound run and four phase-local artifacts | Three activation receipts plus artifact hashes |
 | A9 | Verification gate runs before and inside `tied_verify`; invalid input causes no status diff | `tied_verify` dry-run rejection and unchanged index assertions |
-| A10 | Completed step evidence names exact commands, reports, decisions, or tool receipts | Tracker fixture audit; generic “test/build evidence” rejected by policy test |
+| A10 | Completed step evidence names exact commands, reports, decisions, or resolvable artifact refs | Tracker fixture audit; generic prose and unresolvable refs rejected |
 | A11 | No REQ/detail status drift after successful verification | `tied_verify` result followed by `tied_validate_consistency` |
 | A12 | Vocabulary, pseudo-code, tests, and code retain token/name alignment | `[PROC-TOKEN_AUDIT]`, `[PROC-TOKEN_VALIDATION]`, vocabulary VALIDATE |
+| A13 | Each checklist turn emits `instruction_rendered` before subprocess | Composition test + JSONL fixture |
+| A14 | Receipt parsed only from final assistant text | `executor_test` with thinking+assistant streams |
+| A15 | Receipt bound to issued nonce + instruction hash | `tracker_receipt` table test |
+| A16 | No `completed` disposition with unresolved `evidence_refs` | Writer + validator rejection test |
+| A17 | Gate decision persisted with input hash | Gate JSON fixture + `verify.test` |
+| A18 | Status mutation references gate receipt | `tied_verify` result + reconciliation pass |
+| A19 | Reconciliation report links all six classes for pilot request | Controlled-client report artifact |
+| A20 | Replay-safe loop-back clears adherence downstream hashes | Goto composition + reconcile finding absent |
 
 ## 7. Required commands and proof boundaries
 
 Planned build-plan verification:
 
 - `go test ./tools/agentstream/...` — Go unit and process-composition behavior only.
+- `go test ./tools/agentstream/checklist/...` — adherence ledger, evidence resolver, and reconciliation when implemented (Stages G–K).
 - `npm run build --prefix mcp-server` — TypeScript build/type boundary.
 - targeted Node test commands for checklist validator and verify composition — shared gate/status behavior only.
 - `./scripts/validate_tokens.sh` — token existence/annotation consistency only.
 - TIED YAML lint for changed structured records — YAML/schema formatting only.
+- `pseudocode_validate` — IMPL pseudo-code structural validation only.
 - `tied_validate_consistency` — REQ→ARCH→IMPL/detail/pseudo-code consistency only.
+- `adherence-reconcile` (planned Go CLI or MCP read tool) — read-only reconciliation report; observational only.
 
 None of these alone proves integrated activation; that requires the phase-specific inquiry receipt and four paired artifacts.
 
@@ -341,4 +459,93 @@ None of these alone proves integrated activation; that requires the phase-specif
 
 Use `--checklist-tracker-yaml PATH` for the explicit writable per-request Tracker. `--lead-checklist-yaml` continues to identify the read-only checklist definition. When the Tracker path does not exist, agentstream materializes `checklist-tracker.v1`; when it exists, agentstream validates its request/source identity before execution. Resolving both flags to the same file is an error.
 
-Refine-plan pre-implementation gate: `allowed: true` at minimal depth (receipt path above). **Stage A (build-plan) is unblocked.** Production code remains out of scope for this refine-plan pass; build-plan must select `depth_tier: integrated` and run distinct inquiry passes per phase.
+**Proposed (Stage G):** `--adherence-ledger PATH` defaulting to `working/{REQ-TOKEN}/adherence/events.jsonl`.
+
+Build-plan pre-implementation gate: `allowed: true` at minimal depth (receipt at `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-adherence-evidence-build-pre-implementation.json`). **Stage G RED is unblocked after IMPL pseudo-code extension and `pseudocode_validate`.** Production code for Stages G–L remains out of scope for this documentation + pseudo-code pass; the next build-plan must select `depth_tier: integrated` and run distinct inquiry passes per phase.
+
+## 9. Six-stage adherence evidence model
+
+Store events in derived ledger **`agent-adherence-event.v1`** (append-only JSONL under `working/{REQ-TOKEN}/adherence/`). Each record is a **hash/reference edge**, not a copy of prompts, transcripts, Tracker YAML, manifests, or TIED indexes. **Do not conflate** with `[REQ-EVIDENCE_CHAIN_PROFILE]` / `evidence-chain-profile.v1`.
+
+### Six non-interchangeable event classes
+
+| Event class | Meaning | Authoritative source |
+|---|---|---|
+| `instruction_rendered` | Exact turn prompt bytes issued to agent | agentstream pre-`executor.Run` |
+| `agent_acknowledged` | Agent attestation only (Tracker receipt) | `agentstream_tracker` fenced JSON |
+| `action_attempted` | Runner/hook-observed tool/shell/MCP/command | Cursor hooks + optional runner capture |
+| `outcome_verified` | Machine-verified result for an evidence ref | verification manifest, gate receipts, artifact hashes |
+| `gate_decided` | Checklist evidence gate decision | persisted `tied_checklist_gate_validate` output |
+| `status_mutated` | REQ/IMPL status promotion | `tied_verify` previous→next diff receipt |
+
+### Non-implication rules (normative)
+
+- Acknowledgment (`agent_acknowledged`) **never** proves action.
+- Action (`action_attempted`) **never** proves success.
+- Success (`outcome_verified`) **never** authorizes progression without a passing gate.
+- Gate pass (`gate_decided`) **never** proves status mutation occurred.
+- Status mutation (`status_mutated`) **never** retroactively validates earlier missing links.
+
+### Correlation contract (required on every ledger row)
+
+Bind these across all six classes (hash or stable ID where bodies are excluded):
+
+- `request_token`, `project_id`, `run_id`, `phase`, `turn_index`, `step_slug`
+- `session_id_hash`, `instruction_hash`, `receipt_hash`, `tool_use_id` (when applicable)
+- `source_revision` (git commit or `dirty:<hash>`)
+- `artifact_ref` + `artifact_hash` (pointer into existing files, not inline bodies)
+
+### Ledger row shape (sketch)
+
+```yaml
+schema_version: agent-adherence-event.v1
+event_class: instruction_rendered | agent_acknowledged | action_attempted | outcome_verified | gate_decided | status_mutated
+correlation:
+  request_token: REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+  run_id: "~"
+  turn_index: 1
+  step_slug: change-definition
+  instruction_hash: sha256:…
+source:
+  kind: agentstream | cursor_hook | mcp_gate | tied_verify
+  path: working/REQ-X/adherence/events.jsonl
+  line: 42
+proof_boundary:
+  - "Does not prove agent followed unstated instructions"
+```
+
+**Privacy:** store hashed session/project identities; keep prompt/response bodies outside the ledger; ledger rows reference hook YAML paths and line offsets only.
+
+## 10. Monitoring, reconciliation, retention, and migration
+
+### Deterministic reconciliation findings (read-only)
+
+Implement `adherence-reconcile` (Go CLI or MCP read tool) emitting diagnostics:
+
+| Finding code | Meaning |
+|---|---|
+| `rendered_without_acknowledgment` | `instruction_rendered` exists; no matching `agent_acknowledged` for turn/slug |
+| `acknowledged_without_attempt` | receipt present; no observed action for declared `evidence_refs` |
+| `attempt_without_verified_outcome` | hook/runner action logged; no manifest/hash match |
+| `completed_with_unresolved_evidence` | Tracker `completed` but ref resolution failed |
+| `gate_without_current_evidence` | gate receipt hashes stale vs current Tracker |
+| `status_change_without_verification_receipt` | TIED status changed without matching gate+verify chain |
+| `legacy_no_adherence_chain` | Tracker predates adherence ledger; non-blocking during migration window |
+
+The report is **observational** — it cannot mutate Tracker or TIED YAML.
+
+### Retention policy
+
+- Ledger + gate receipts: immutable append-only for request lifetime.
+- Tracker `state_history`: bounded (e.g. last N turns); prune only unreferenced rows.
+- Hook YAML: follow existing `~/.cursor/logs/` rotation; ledger stores path+hash only.
+
+### Migration
+
+- Legacy Trackers without adherence events remain valid; reconciliation marks `legacy_no_adherence_chain` (non-blocking during window).
+- Schema v1 receipts without binding fields accepted for legacy runs only during migration window.
+- Do not retroactively claim adherence for legacy client Trackers.
+
+### Controlled-client pilot stop conditions (Stage L)
+
+Stop rollout if: writer corrupts Tracker; turn advances without bound receipt; reconciliation shows `status_change_without_verification_receipt`; canonical checklist bytes change.

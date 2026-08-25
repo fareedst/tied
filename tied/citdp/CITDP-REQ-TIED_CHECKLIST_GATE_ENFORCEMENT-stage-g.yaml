@@ -1,0 +1,28 @@
+CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-g:
+  change_definition:
+    current_behavior: "Agentstream merged thinking and assistant streams for receipt parsing; no instruction hash/nonce binding; no adherence ledger."
+    desired_behavior: "Separate FinalText from thinking; hash rendered turn Parts; append instruction_rendered and agent_acknowledged ledger rows; require receipt binding fields when tracker mode is on."
+    success_criteria:
+      - "Binding nonce/hash/request_token/run_id validated before Tracker write."
+      - "instruction_rendered JSONL row written before subprocess."
+      - "Receipt parsed from FinalText only; thinking-only receipts rejected."
+  completion_criteria:
+    activation:
+      phase: "close_out"
+      project_id: "/Users/fareed/Documents/dev/chatgpt/stdd"
+      request_token: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      run_id: "stage-g-close-out-20260825"
+  record_identity:
+    change_request_id: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    record_status: "complete"
+    title: "Stage G instruction render and receipt binding"
+  risk_analysis:
+    adversarial_inquiry:
+      depth_tier: "integrated"
+      gate_policy: "advisory"
+      prior_depth_tier: "minimal"
+      profile_depth: "not_measured"
+  test_strategy:
+    commands:
+      - "go test ./... (from tools/agentstream)"
+      - "tied_validate_consistency"

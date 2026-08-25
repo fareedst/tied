@@ -6,9 +6,12 @@ package main
 import (
 	"bufio"
 	"context"
+	"crypto/rand"
+	"encoding/hex"
 	"errors"
 	"fmt"
 	"os"
+	"os/exec"
 	"strconv"
 	"strings"
 
@@ -128,6 +131,9 @@ func main() {
 			os.Exit(1)
 		}
 	}
+	if cfg.RunID == "" {
+		cfg.RunID = newRunID()
+	}
 
 	ctx := context.Background()
 	running := ""
@@ -146,28 +152,60 @@ func main() {
 		}
 		fmt.Fprintf(os.Stderr, "\n--- turn %d/%d%s%s ---\n", cfg.FirstTurn+i, len(turns), label, stub)
 
+		var issued checklist.IssuedInstruction
+		var correlation checklist.InstructionCorrelation
+		usingTracker := strings.TrimSpace(cfg.ChecklistTrackerYAML) != ""
+		if usingTracker && strings.TrimSpace(t.StepStub) != "" {
+			requestToken := trackerRequestToken(cfg)
+			if requestToken == "" {
+				fmt.Fprintf(os.Stderr, "agentstream: tracker mode requires REQUEST checklist var\n")
+				os.Exit(1)
+			}
+			instructionHash := checklist.HashRenderedInstructionParts(t.Parts)
+			instructionNonce := issueInstructionNonce(cfg.RunID, cfg.FirstTurn+i)
+			issued = checklist.IssuedInstruction{
+				Nonce: instructionNonce, Hash: instructionHash,
+				RequestToken: requestToken, RunID: cfg.RunID,
+			}
+			correlation = checklist.InstructionCorrelation{
+				RequestToken: requestToken, RunID: cfg.RunID,
+				TurnIndex: cfg.FirstTurn + i, StepSlug: t.StepStub,
+				InstructionHash: instructionHash, InstructionNonce: instructionNonce,
+				SourceRevision: sourceRevision(cfg.Workspace),
+			}
+			if strings.TrimSpace(cfg.AdherenceLedger) != "" {
+				if err := checklist.AppendInstructionRendered(cfg.AdherenceLedger, correlation); err != nil {
+					fmt.Fprintf(os.Stderr, "agentstream: adherence ledger write failed: %v\n", err)
+					os.Exit(1)
+				}
+			}
+		}
+
 		argv := executor.AgentArgv(cfg.AgentPath, cfg.Workspace, cfg.Model, sess, t.Parts)
-		sid, transcript, code, err := executor.Run(ctx, argv, os.Stdout, os.Stderr)
+		var extraEnv []string
+		if usingTracker && strings.TrimSpace(t.StepStub) != "" {
+			extraEnv = bindingEnv(issued)
+		}
+		runResult, code, err := executor.Run(ctx, argv, os.Stdout, os.Stderr, extraEnv...)
 		if err != nil {
 			if code != 0 {
 				os.Exit(code)
 			}
 			os.Exit(1)
 		}
-		if sid == "" {
+		if runResult.SessionID == "" {
 			fmt.Fprintf(os.Stderr, "No session_id in stream; cannot continue with --resume\n")
 			os.Exit(1)
 		}
-		fmt.Fprintf(os.Stderr, "session_id=%s\n", sid)
-		running = string(sid)
-		decision, controlOK, err := control.Parse(transcript)
+		fmt.Fprintf(os.Stderr, "session_id=%s\n", runResult.SessionID)
+		running = string(runResult.SessionID)
+		decision, controlOK, err := control.Parse(runResult.Transcript)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "agentstream: control parse error: %v\n", err)
 			os.Exit(1)
 		}
-		usingTracker := strings.TrimSpace(cfg.ChecklistTrackerYAML) != ""
 		if usingTracker {
-			if err := handleTrackerTurn(cfg, i, t, transcript, decision, controlOK, string(sid)); err != nil {
+			if err := handleTrackerTurn(cfg, i, t, runResult.FinalText, decision, controlOK, string(runResult.SessionID), issued, correlation); err != nil {
 				fmt.Fprintf(os.Stderr, "agentstream: tracker composition failed: %v\n", err)
 				os.Exit(1)
 			}
@@ -220,26 +258,80 @@ func trackerRequestToken(cfg *config.Config) string {
 	return ""
 }
 
-func handleTrackerTurn(cfg *config.Config, turnIndex int, turn agentstream.Turn, transcript string, decision control.Decision, controlOK bool, sessionID string) error {
+func handleTrackerTurn(cfg *config.Config, turnIndex int, turn agentstream.Turn, finalText string, decision control.Decision, controlOK bool, sessionID string, issued checklist.IssuedInstruction, correlation checklist.InstructionCorrelation) error {
 	if controlOK && decision.Action == control.ActionGoto {
 		return nil
 	}
 	if strings.TrimSpace(turn.StepStub) == "" {
 		return nil
 	}
-	receipt, ok, err := checklist.ParseTrackerCompletionReceipt(transcript, turn.StepStub)
+	receipt, ok, err := checklist.ParseTrackerCompletionReceipt(finalText, turn.StepStub)
 	if err != nil {
 		return err
 	}
 	if !ok {
 		return fmt.Errorf("missing_receipt for step %q", turn.StepStub)
 	}
+	if err := checklist.ValidateReceiptBinding(receipt, issued); err != nil {
+		return err
+	}
 	identity := checklist.TurnIdentity{
 		TurnIndex: turnIndex + cfg.FirstTurn,
 		StepStub:  turn.StepStub,
 		SessionID: sessionID,
 	}
-	return checklist.ApplyTrackerDisposition(cfg.ChecklistTrackerYAML, receipt, identity)
+	if err := checklist.ApplyTrackerDisposition(cfg.ChecklistTrackerYAML, receipt, identity); err != nil {
+		return err
+	}
+	if strings.TrimSpace(cfg.AdherenceLedger) != "" {
+		return checklist.AppendAgentAcknowledged(
+			cfg.AdherenceLedger,
+			correlation,
+			checklist.ReceiptHash(receipt),
+			checklist.HashSessionID(sessionID),
+		)
+	}
+	return nil
+}
+
+func issueInstructionNonce(runID string, turnIndex int) string {
+	var b [8]byte
+	_, _ = rand.Read(b[:])
+	return fmt.Sprintf("%s:%d:%s", strings.TrimSpace(runID), turnIndex, hex.EncodeToString(b[:]))
+}
+
+func bindingEnv(issued checklist.IssuedInstruction) []string {
+	return []string{
+		"INSTRUCTION_NONCE=" + issued.Nonce,
+		"INSTRUCTION_HASH=" + issued.Hash,
+		"REQUEST_TOKEN=" + issued.RequestToken,
+		"RUN_ID=" + issued.RunID,
+	}
+}
+
+func newRunID() string {
+	var b [8]byte
+	_, _ = rand.Read(b[:])
+	return "agentstream-" + hex.EncodeToString(b[:])
+}
+
+func sourceRevision(workspace string) string {
+	cmd := exec.Command("git", "-C", workspace, "rev-parse", "HEAD")
+	out, err := cmd.Output()
+	if err != nil {
+		sum := checklist.HashRenderedInstructionParts([]string{workspace})
+		return "dirty:" + strings.TrimPrefix(sum, "sha256:")
+	}
+	rev := strings.TrimSpace(string(out))
+	if rev == "" {
+		return "unknown"
+	}
+	statusCmd := exec.Command("git", "-C", workspace, "status", "--porcelain")
+	statusOut, _ := statusCmd.Output()
+	if len(strings.TrimSpace(string(statusOut))) > 0 {
+		return "dirty:" + rev[:12]
+	}
+	return rev
 }
 
 func runDryRun(cfg *config.Config, turns []agentstream.Turn, chain []bool, firstTurn, originalTotal int) {

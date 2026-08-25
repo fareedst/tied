@@ -15,16 +15,28 @@ const trackerReceiptSchemaVersion = 1
 
 // CompletionReceipt is the strict agentstream_tracker completion envelope.
 type CompletionReceipt struct {
-	SchemaVersion int      `json:"schema_version"`
-	Slug          string   `json:"slug"`
-	Disposition   string   `json:"disposition"`
-	EvidenceRefs  []string `json:"evidence_refs,omitempty"`
-	Policy        string   `json:"policy,omitempty"`
-	Rationale     string   `json:"rationale,omitempty"`
-	Owner         string   `json:"owner,omitempty"`
-	Expiry        string   `json:"expiry,omitempty"`
-	Approval      string   `json:"approval,omitempty"`
-	ResidualRisk  string   `json:"residual_risk,omitempty"`
+	SchemaVersion    int      `json:"schema_version"`
+	Slug             string   `json:"slug"`
+	Disposition      string   `json:"disposition"`
+	EvidenceRefs     []string `json:"evidence_refs,omitempty"`
+	Policy           string   `json:"policy,omitempty"`
+	Rationale        string   `json:"rationale,omitempty"`
+	Owner            string   `json:"owner,omitempty"`
+	Expiry           string   `json:"expiry,omitempty"`
+	Approval         string   `json:"approval,omitempty"`
+	ResidualRisk     string   `json:"residual_risk,omitempty"`
+	InstructionNonce string   `json:"instruction_nonce,omitempty"`
+	InstructionHash  string   `json:"instruction_hash,omitempty"`
+	RequestToken     string   `json:"request_token,omitempty"`
+	RunID            string   `json:"run_id,omitempty"`
+}
+
+// IssuedInstruction captures the instruction binding issued for the current turn.
+type IssuedInstruction struct {
+	Nonce        string
+	Hash         string
+	RequestToken string
+	RunID        string
 }
 
 type trackerEnvelope struct {
@@ -41,7 +53,11 @@ var allowedReceiptFields = map[string]struct{}{
 	"owner":          {},
 	"expiry":         {},
 	"approval":       {},
-	"residual_risk":  {},
+	"residual_risk":    {},
+	"instruction_nonce": {},
+	"instruction_hash":  {},
+	"request_token":     {},
+	"run_id":            {},
 }
 
 var allowedDispositions = map[string]struct{}{
@@ -135,6 +151,26 @@ func ValidateCompletionReceipt(receipt CompletionReceipt, expectedSlug string) e
 				return fmt.Errorf("missing_disposition_evidence: waived requires %s", field.name)
 			}
 		}
+	}
+	return nil
+}
+
+// ValidateReceiptBinding checks receipt binding fields against the issued instruction for the current turn.
+func ValidateReceiptBinding(receipt CompletionReceipt, issued IssuedInstruction) error {
+	if strings.TrimSpace(receipt.InstructionNonce) == "" || strings.TrimSpace(receipt.InstructionHash) == "" {
+		return fmt.Errorf("missing_binding_fields")
+	}
+	if strings.TrimSpace(receipt.InstructionNonce) != strings.TrimSpace(issued.Nonce) {
+		return fmt.Errorf("stale_instruction_nonce")
+	}
+	if strings.TrimSpace(receipt.InstructionHash) != strings.TrimSpace(issued.Hash) {
+		return fmt.Errorf("instruction_hash_mismatch")
+	}
+	if strings.TrimSpace(receipt.RequestToken) != strings.TrimSpace(issued.RequestToken) {
+		return fmt.Errorf("request_token_mismatch")
+	}
+	if strings.TrimSpace(receipt.RunID) != strings.TrimSpace(issued.RunID) {
+		return fmt.Errorf("run_id_mismatch")
 	}
 	return nil
 }

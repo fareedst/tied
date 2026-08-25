@@ -22,6 +22,10 @@ unless ENV["OMIT_TRACKER_RECEIPT"] == "1"
       evidence_refs: ["working/REQ-TEST/#{step}.md"]
     }
   }
+  %w[instruction_nonce instruction_hash request_token run_id].each do |key|
+    env_key = key.upcase
+    receipt[:agentstream_tracker][key.to_sym] = ENV[env_key] if ENV[env_key] && !ENV[env_key].empty?
+  end
   text << "```json\n"
   text << JSON.generate(receipt)
   text << "\n```\n"
