@@ -1,0 +1,104 @@
+{
+  "canonicalMutation": false,
+  "findings": [
+    {
+      "direction": "A",
+      "id": "6c3ba5c74645c962",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "stmt-fail-closed"
+    },
+    {
+      "direction": "B",
+      "id": "8f27c8de1f9b7542",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "stmt-listen-filter"
+    },
+    {
+      "direction": "B",
+      "id": "a3dfc0d8a3df3abb",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "stmt-fail-closed"
+    },
+    {
+      "direction": "A",
+      "id": "af1c6a71a7fa4e8c",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "stmt-sort"
+    },
+    {
+      "direction": "B",
+      "id": "c5636d499b007571",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "stmt-sort"
+    },
+    {
+      "direction": "A",
+      "id": "f33242ad1534b2fd",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "stmt-listen-filter"
+    }
+  ],
+  "graph": {
+    "edges": [
+      {
+        "from": "REQ-LISTENING_PORT_REPORT#json-listening-sockets",
+        "kind": "criterion_constraint",
+        "to": "constraint:constraint-listening-port-cli"
+      },
+      {
+        "from": "constraint:constraint-listening-port-cli",
+        "kind": "constraint_block",
+        "to": "IMPL-LISTENING_PORT_COLLECT#COLLECT_LISTENING#block1"
+      },
+      {
+        "from": "constraint:constraint-listening-port-cli",
+        "kind": "constraint_block",
+        "to": "IMPL-LISTENING_PORT_JSON#ENCODE_REPORT#block2"
+      }
+    ],
+    "nodes": [
+      {
+        "id": "constraint:constraint-listening-port-cli",
+        "kind": "constraint"
+      },
+      {
+        "id": "IMPL-LISTENING_PORT_COLLECT#COLLECT_LISTENING#block1",
+        "kind": "block",
+        "revision": "collect-block-rev-1"
+      },
+      {
+        "id": "IMPL-LISTENING_PORT_JSON#ENCODE_REPORT#block2",
+        "kind": "block",
+        "revision": "json-block-rev-1"
+      },
+      {
+        "id": "REQ-LISTENING_PORT_REPORT#json-listening-sockets",
+        "kind": "criterion",
+        "revision": "criterion-rev-1"
+      }
+    ],
+    "projectId": "listening-port-report-v1"
+  },
+  "projectId": "listening-port-report-v1",
+  "proofBoundaries": [
+    "semantic_fidelity"
+  ],
+  "readOnly": true,
+  "schemaVersion": "adversarial-inquiry-report.v1",
+  "scope": [
+    "IMPL-LISTENING_PORT_COLLECT#COLLECT_LISTENING#block1",
+    "IMPL-LISTENING_PORT_JSON#ENCODE_REPORT#block2"
+  ]
+}

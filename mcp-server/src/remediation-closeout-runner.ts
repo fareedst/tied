@@ -204,15 +204,25 @@ function gatePathFor(phase: GatePhase, root: string): string {
 }
 
 export async function runRemediationCloseout(root = repoRoot()) {
+  const preImplementationRunId = "remediation-structural-20260824";
   const verificationRunId = "remediation-verification-20260824";
   const closeOutRunId = "remediation-close-out-20260824";
 
+  const preImplementation = await runRemediationPhaseGate(
+    "pre_implementation",
+    preImplementationRunId,
+    root,
+  );
   const verification = await runRemediationPhaseGate("verification", verificationRunId, root);
   const closeOut = await runRemediationPhaseGate("close_out", closeOutRunId, root);
 
   const evidenceManifestPath = path.join(workingDir(root), "evidence-manifest.json");
   const evidence = JSON.parse(readFileSync(evidenceManifestPath, "utf8")) as Record<string, unknown>;
   const gateReceipts = (evidence.gate_receipts ?? {}) as Record<string, Record<string, unknown>>;
+  gateReceipts.pre_implementation = {
+    path: path.relative(root, preImplementation.gatePath),
+    allowed: preImplementation.allowed,
+  };
   gateReceipts.verification = {
     path: path.relative(root, verification.gatePath),
     allowed: verification.allowed,
@@ -223,19 +233,26 @@ export async function runRemediationCloseout(root = repoRoot()) {
   };
   evidence.gate_receipts = gateReceipts;
   evidence.adversarial_inquiry_runs = [
+    {
+      phase: "pre_implementation",
+      run_id: preImplementationRunId,
+      proof_boundary: "traceability_structure,pseudo_code_structure",
+    },
     { phase: "verification", run_id: verificationRunId },
     { phase: "close_out", run_id: closeOutRunId },
   ];
   writeFileSync(evidenceManifestPath, `${JSON.stringify(evidence, null, 2)}\n`, "utf8");
 
-  return { verification, closeOut };
+  return { preImplementation, verification, closeOut };
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
   runRemediationCloseout()
     .then((result) => {
       process.stdout.write(`${JSON.stringify(result, null, 2)}\n`);
-      if (!result.verification.allowed || !result.closeOut.allowed) {
+      if (!result.preImplementation.allowed
+        || !result.verification.allowed
+        || !result.closeOut.allowed) {
         process.exitCode = 1;
       }
     })

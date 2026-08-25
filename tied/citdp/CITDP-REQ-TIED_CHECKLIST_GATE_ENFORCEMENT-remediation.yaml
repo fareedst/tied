@@ -24,6 +24,7 @@ CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-remediation:
       - "node --test dist/checklist-remediation-acceptance.test.js dist/fixture-corpus-regression.test.js"
       - "npm run build --prefix mcp-server"
     manifest_reference: "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence-manifest.json"
+    profile_reference: "working/evidence-chain/evidence-chain-profile.v1.json"
     proof_boundaries:
       - "close_out_gate"
       - "fixture_regression"
@@ -69,6 +70,7 @@ CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-remediation:
         - "Does advisory gate_policy bypass missing activation at integrated depth?"
       gate_policy: "advisory"
       prior_depth_tier: null
+      profile_depth: "integrated"
     close_out_inquiry_waiver: null
     depth_change_waiver: null
     depth_tier: "integrated"
@@ -79,7 +81,7 @@ CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-remediation:
     gate_policy: "advisory"
     integrated_waiver: null
     prior_depth_tier: null
-    profile_depth: "not_measured"
+    profile_depth: "integrated"
     rationale: "Remediation uses controlled fixture with external inquiry artifacts, provenance gaps, and strict close-out\nevidence requirements per integrated-activation enforcement plan §7.\n"
     risks:
       - id: "RISK-REM-001"
@@ -90,6 +92,12 @@ CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-remediation:
         mitigation: "normalizeRemediationDiagnostics preserves granular and stable codes together"
         severity: "low"
         summary: "Diagnostic alias drift from granular codes"
+    structural_inquiry_disposition:
+      artifact_dir: "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-pre_implementation/"
+      mapped_mcp_phase: "pre_implementation"
+      rationale: "Structural proof boundaries covered by pre_implementation inquiry artifacts; plan phase-structural alias maps to MCP phase-pre_implementation directory naming."
+      run_id: "remediation-structural-20260824"
+      status: "complete"
   test_strategy:
     composition_tests:
       - "mcp-server/src/tools/checklist-gate-mcp.test.ts"

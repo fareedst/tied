@@ -1,7 +1,8 @@
 .cursor/mcp.json
 .cursor/debug-*.log
-# .cursor/skills/tied-yaml/
-# .cursor/work
+.cursor/skills/tied-yaml/
+.cursor/work
+.DS_Store
 .markscope-preview-cache
 .markscope-preview/
 docs/*26-??-??*.md
@@ -19,4 +20,32 @@ tied/requirements/REQ-FEEDBACK_TO_TIED.yaml
 TODO.md
 docs/legacy-csharp-tied-adoption-plan.md
 scripts/update_client.sh
+
+# Ephemeral working/ generated evidence — not canonical TIED intent
+# (tied/vocab/fidelity-research.md, quality-assurance.md; keep locally under working/)
+working/**/adversarial-inquiry/
+working/**/gate-*.json
+working/**/g*-dogfood/
+working/client-*/
+working/**/tied-mcp-metrics*.jsonl
+working/**/evidence-manifest.json
+
+# Evidence-chain command outputs and operator-run profiles (regenerate per tied/docs/evidence-chain-profile.md)
+working/evidence-chain/artifacts/
+working/evidence-chain/collect-args.json
+working/evidence-chain/profile-args*.json
+working/evidence-chain/evidence-chain-profile.v1.json
+working/evidence-chain/verification-evidence-manifest.v1.json
+working/evidence-chain/stdd-integrated-with-manifest*.json
+
+# Controlled fixture corpus + golden evidence-chain inputs (keep tracked)
 working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/fixture-*
+!working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/fixture-1787603099/
+!working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/fixture-1787603099/**
+!working/evidence-chain/report-inputs-v2-golden.yaml
+!working/evidence-chain/client-1787461685-bare.v1.json
+!working/evidence-chain/client-1787461685-reprofile.v1.json
+!working/evidence-chain/example-profile.json
+!working/evidence-chain/example-report-inputs.yaml
+!working/evidence-chain/stdd-integrated.json
+!working/evidence-chain/stdd-human_research.json

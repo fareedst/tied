@@ -1,0 +1,12 @@
+{
+  "provenance": {
+    "proofBoundaries": [
+      "semantic_fidelity"
+    ],
+    "scope": [
+      "IMPL-LISTENING_PORT_COLLECT#COLLECT_LISTENING#block1",
+      "IMPL-LISTENING_PORT_JSON#ENCODE_REPORT#block2"
+    ]
+  },
+  "schemaVersion": "adversarial-inquiry-provenance.v1"
+}

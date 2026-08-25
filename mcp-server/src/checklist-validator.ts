@@ -858,7 +858,7 @@ export function validateChecklistGate(input: {
   priorDepthTier?: AdversarialDepth | null;
   now?: Date;
   evidence?: ChecklistGateEvidenceInput;
-}): ValidationResult & { allowed: boolean; blocking: boolean; depth?: AdversarialDepth } {
+}): ValidationResult & { allowed: boolean; blocking: boolean; depth?: AdversarialDepth; phase: GatePhase } {
   const section = adversarialSection(input.citdp);
   const depth = identityValue(section?.depth_tier) as AdversarialDepth | undefined;
   const diagnostics: string[] = [];
@@ -871,6 +871,7 @@ export function validateChecklistGate(input: {
       ok: false,
       blocking: true,
       depth,
+      phase: input.phase,
       diagnostics: [...new Set(diagnostics)],
     };
   }
@@ -986,5 +987,5 @@ export function validateChecklistGate(input: {
   );
   const uniqueDiagnostics = [...new Set([...blockingDiagnostics, ...advisoryDiagnostics])];
   const allowed = blockingDiagnostics.length === 0;
-  return { allowed, ok: allowed, blocking: !allowed, depth, diagnostics: uniqueDiagnostics };
+  return { allowed, ok: allowed, blocking: !allowed, depth, phase: input.phase, diagnostics: uniqueDiagnostics };
 }

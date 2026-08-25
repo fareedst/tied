@@ -11,14 +11,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Checklist gate close-out enforcement ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
   restored the authoritative `tied_checklist_gate_validate` MCP surface and completed
-  file-backed verification/close-out inquiry evidence with phase-bound activation pairing,
-  tracker dispositions, and fail-closed provenance checks. The remediation adds stable
-  diagnostics for sparse or synthetic Trackers, incomplete provenance, unresolved findings,
-  unproven command success, stale evidence, invalid waivers, and dirty close-out trees;
-  validates the A1–A18 acceptance matrix and replays 15/15 controlled evidence-corpus
-  cases. Full validation passed with 480 tests, the verification and close-out inquiry
-  runs are identity-bound, and the proof boundary remains UI-free: A12, A15, and A17
-  are unit-only, macOS UI visibility is not established, and
+  file-backed verification/close-out inquiry evidence with phase-bound activation pairing
+  (distinct run_ids and gate receipts per phase), tracker dispositions, and fail-closed
+  provenance checks. The remediation adds stable diagnostics for sparse or synthetic
+  Trackers, incomplete provenance, unresolved findings, unproven command success, stale
+  evidence, invalid waivers, and dirty close-out trees; validates the A1–A18 acceptance
+  matrix and replays 15/15 controlled evidence-corpus cases. Retained remediation tests:
+  20 tests across acceptance matrix and fixture corpus regression (2-suite command).
+  Verification and close_out checklist gates allowed; close_out adversarial inquiry is
+  advisory `status: warn` with `verdict: PASS` (non-blocking). Proof boundary remains
+  UI-free: A12, A15, and A17 are unit-only, macOS UI visibility is not established, and
   `REQ-LISTENING_PORT_REPORT` remains out of scope.
 
 - **Build-plan 6 optional hygiene (2026-08-24)** — Closes the outstanding-work prioritized plan

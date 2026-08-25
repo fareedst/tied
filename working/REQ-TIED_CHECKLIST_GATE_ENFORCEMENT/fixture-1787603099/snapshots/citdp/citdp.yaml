@@ -1,0 +1,135 @@
+change_definition:
+  current_behavior: "No application code; only inherited TIED methodology under tied/methodology/."
+  desired_behavior: "Standalone Go CLI binary `portreport` enumerates local listening TCP and UDP sockets\n(bind address + port + protocol) and prints a JSON envelope to stdout.\n"
+  non_goals:
+    - "Connection tracking (ESTABLISHED and other non-LISTEN states)"
+    - "Human-readable table output mode"
+    - "Port-range or address filtering beyond --protocol tcp|udp|all"
+    - "Process/PID lookup"
+    - "Remote host enumeration"
+  success_criteria:
+    - "Each listener entry includes protocol, address, and port (integer 1–65535)"
+    - "Exit code 0 on success; non-zero on fatal collection or JSON encode errors"
+    - "Output is stably sorted by protocol, address, port"
+    - "Running the binary on macOS prints valid JSON listing every listening TCP and UDP socket visible to gopsutil without root"
+    - "Unit tests lock LISTEN filtering, protocol filter, dedupe/sort, and JSON shape without root"
+  unchanged_behavior: "Inherited methodology YAML under tied/methodology/ remains read-only."
+completion_criteria:
+  activation:
+    artifact_hashes: {}
+    phase: "verification"
+    project_id: "pending"
+    request_token: "REQ-LISTENING_PORT_REPORT"
+    run_id: "pending"
+    scope: []
+    scope_hash: "pending"
+  checklist_gate:
+    dispositions:
+      - "completed"
+      - "not_applicable"
+      - "pending"
+      - "waived"
+    fail_closed: true
+    phases:
+      - "close_out"
+      - "pre_implementation"
+      - "verification"
+  verification_gate_notes: "pending"
+evidence:
+  commands:
+    - "go test ./..."
+    - "go vet ./..."
+  manifest_reference: "pending"
+  profile_reference: "pending"
+  proof_boundaries:
+    - "executable_behavior"
+    - "pseudo_code_structure"
+    - "traceability_structure"
+impact_analysis:
+  impl_inventory_notes: "Greenfield; three modules (collector, output, CLI) behind Collector interface."
+  modules_or_boundaries: "internal/listener (OS I/O), internal/output (pure JSON), cmd/portreport (wiring/flags/exit codes).\n"
+  tied_tokens_affected: []
+  tied_tokens_new:
+    - "ARCH-LISTENING_PORT_CLI"
+    - "IMPL-LISTENING_PORT_COLLECT"
+    - "IMPL-LISTENING_PORT_JSON"
+    - "REQ-LISTENING_PORT_REPORT"
+leap_feedback:
+  divergences_from_analysis: "none"
+  record_status: "draft"
+  tied_stack_updates_required: []
+record_identity:
+  change_request_id: "REQ-LISTENING_PORT_REPORT"
+  recorded_at: "2026-08-24"
+  title: "Go CLI listening-port JSON report"
+risk_analysis:
+  abuse_cases: []
+  adversarial_inquiry:
+    assurance_profile: "baseline-functional"
+    close_out_inquiry_waiver: null
+    depth_change_waiver: null
+    depth_tier: "integrated"
+    eligibility_triggers_matched:
+      - "network"
+    gate_policy: "advisory"
+    integrated_waiver: null
+    prior_depth_tier: null
+    rationale: "Feature reads host network state via OS APIs (gopsutil Connections). Network eligibility\ntrigger matched per integrated-activation §7; integrated depth with advisory gate policy.\n"
+    research_profile: "integrated-agent"
+    strict_eligibility_prerequisites: []
+  quality_evidence_matrix:
+    - applicability: "applicable"
+      attribute: "baseline-functional"
+      command_or_test: "go test ./... && go vet ./..."
+      evidence_method: "go test and go vet"
+      limitation: "Does not prove parity with lsof on every edge bind address"
+      owner: "implementer"
+      rationale: "Behavior-changing greenfield CLI with unit TDD and composition wiring"
+      result: "pending"
+      risk: "medium"
+      threshold: "exit 0"
+      waiver:
+        expiry: null
+        owner: null
+        reason: null
+        required: "false"
+  quality_profiles:
+    - "baseline-functional"
+  residual_risk:
+    expiry: "2026-12-31"
+    owner: "implementer"
+    summary: "Platform-specific socket visibility and UDP listen semantics may differ from lsof"
+  risks:
+    - id: "RISK-001"
+      likelihood: "medium"
+      mitigation: "Document limitation in REQ detail; fail only on total collection failure"
+      quality_attribute: "baseline-functional"
+      severity: "medium"
+      summary: "OS APIs may omit sockets without elevated privileges"
+    - id: "RISK-002"
+      likelihood: "medium"
+      mitigation: "Normalize ::ffff:x.x.x.x to IPv4 string; preserve 0.0.0.0 and :: as bind-all markers"
+      quality_attribute: "baseline-functional"
+      severity: "low"
+      summary: "IPv6 mapped addresses and wildcard binds normalize inconsistently across platforms"
+    - id: "RISK-003"
+      likelihood: "medium"
+      mitigation: "Treat gopsutil-reported UDP bind rows as listening; document platform variance in REQ"
+      quality_attribute: "baseline-functional"
+      severity: "medium"
+      summary: "UDP has no TCP-style LISTEN status on some platforms; gopsutil may use heuristics"
+  scenarios:
+    - expected: "JSON with listeners [] and count 0"
+      id: "SCN-001"
+      summary: "Machine has no listening sockets"
+    - expected: "Deduped stable output"
+      id: "SCN-002"
+      summary: "Duplicate bind rows from OS tables"
+    - expected: "Non-zero exit; error on stderr; no partial JSON"
+      id: "SCN-003"
+      summary: "gopsutil.Connections returns error"
+tdd_sequence:
+  summary: "IMPL pseudo-code with block token comments → gate-pseudocode-validation → persist TIED →\nRED unit tests (collector, output) → GREEN implementation → composition test (main_test) →\nmanual darwin cross-check → verification gate.\n"
+test_strategy:
+  matrix_notes: "See plan Test strategy section for file-level matrix. Test names embed REQ/IMPL tokens.\n"
+  summary: "Unit-first TDD behind injectable connectionsFunc; composition test wires fake collector;\nno E2E UI; manual QA compares subset to lsof on macOS.\n"

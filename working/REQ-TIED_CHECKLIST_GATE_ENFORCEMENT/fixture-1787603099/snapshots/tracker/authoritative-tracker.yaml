@@ -15,42 +15,22 @@ entry_points:
     start_at: "session-bootstrap"
 execution_evidence:
   close_out_evidence:
-    date: "2026-08-24"
-    deferred:
-      - "traceable-commit: commit intentionally deferred to caller by plan-close-out policy"
-    gates:
-      close_out: "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-close_out.json"
-      pre_implementation: "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-pre-implementation.json"
-      verification: "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-verification.json"
-    master_checklist: "tied/docs/agent-req-implementation-checklist.yaml"
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: ""
   completed:
     - "change-definition"
-    - "gate-pseudocode-validation"
     - "impact-discovery"
-    - "persist-citdp-record"
     - "risk-assessment"
     - "session-bootstrap"
-    - "sync-tied-stack"
     - "test-strategy"
     - "translate-sponsor-intent"
-    - "unit-test-green"
-    - "unit-test-red"
-    - "user-facing-release-notes"
-    - "verification-gate"
   operator_evidence:
-    client_alias: "1787603099"
-    depth_tier: "integrated"
-    gate_policy: "advisory"
-    prior_depth_tier: null
-    profile_depth: "integrated"
-    status: "close_out"
-    structural_inquiry_disposition:
-      artifact_dir: "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-pre_implementation/"
-      mapped_phase: "pre_implementation"
-      note: "Integrated structural obligations satisfied via tied_adversarial_inquiry_run at MCP phase pre_implementation (checklist structural alias)."
-      run_id: "remediation-structural-20260824"
-      status: "complete"
-  request: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    integrated_pilot_template: "depth_tier: integrated\ngate_policy: advisory\nprior_depth_tier: null\nphase_artifact_dir: working/REQ-LISTENING_PORT_REPORT/adversarial-inquiry/phase-{phase}/  # authoritative\ncollect: tied_checklist_activation_collect request_token, phase, run_id, project_root\ngate: tied_checklist_gate_validate with activation payload (receipt + four artifacts)\nchecklist: docs/integrated-activation-checklist-enforcement-plan.md §8\n"
+    limitation: "Replace {REQ-TOKEN} and {phase}; prefer collect when phase dirs exist; see §8 for pre_implementation, verification, and close_out sequence."
+    status: "not_run"
+  request: "REQ-LISTENING_PORT_REPORT"
 feedback_loops:
   composition_and_e2e: "Missing implementation coverage returns to the specification path before evidence is accepted."
   leap: "Implementation evidence updates IMPL first, then tests and code, with ARCH/REQ updates when scope changes."
@@ -88,7 +68,7 @@ gate_contract:
     - "finding-ledger.jsonl"
     - "gate-result.json"
     - "obligation-report.json"
-last_updated: "2026-08-24"
+last_updated: "2026-08-22"
 loop_back_clearance:
   apply-token-comments:
     clear_slugs:
@@ -322,9 +302,8 @@ steps:
       consideration_before_proceeding: "All governing documents read; session context established; vocabulary term map loaded (PRELOAD) or deferral noted; mandatory IMPL→validation→persist→RED→GREEN sequence and implementation freeze understood."
       retry_count: "0"
       returned_from: []
-      state_history:
-        - "2026-08-24: reconciled during full evidence-chain close-out."
-      status: "completed"
+      state_history: []
+      status: "pending"
   - flow:
       branches: []
       calls:
@@ -353,9 +332,8 @@ steps:
       consideration_before_proceeding: "Sponsor intent mapped to checklist phases in writing using canonical vocabulary (fuzzy terms reworded; new concepts recorded); no implementation or test artifacts introduced; ready for formal change-definition."
       retry_count: "0"
       returned_from: []
-      state_history:
-        - "2026-08-24: reconciled during full evidence-chain close-out."
-      status: "completed"
+      state_history: []
+      status: "pending"
   - flow:
       branches:
         - action: "GOTO author-requirement first, then return here to define the fix"
@@ -387,9 +365,8 @@ steps:
       consideration_before_proceeding: "Change definition documented using canonical vocabulary (fuzzy terms reworded; new concepts recorded); current, desired, unchanged, non-goals, and success criteria stated; no implementation or test artifacts introduced in this step."
       retry_count: "0"
       returned_from: []
-      state_history:
-        - "2026-08-24: reconciled during full evidence-chain close-out."
-      status: "completed"
+      state_history: []
+      status: "pending"
   - flow:
       branches:
         - action: "Consider whether IMPLs need decomposition before proceeding"
@@ -436,9 +413,8 @@ steps:
       consideration_before_proceeding: "Impact map complete; vocabulary term map loaded (PRELOAD) for affected subsystems; IMPL inventory table built (declared vs in-scope verified paths distinguished; discovery-only); expansion stopped per criteria."
       retry_count: "0"
       returned_from: []
-      state_history:
-        - "2026-08-24: reconciled during full evidence-chain close-out."
-      status: "completed"
+      state_history: []
+      status: "pending"
   - flow:
       branches: []
       calls:
@@ -472,9 +448,8 @@ steps:
         - "resolve-pseudocode"
         - "sub-leap-micro-cycle"
         - "sync-tied-stack"
-      state_history:
-        - "2026-08-24: prerequisite satisfied for gate-pseudocode-validation and TDD phases."
-      status: "completed"
+      state_history: []
+      status: "pending"
   - flow:
       branches: []
       calls:
@@ -511,9 +486,8 @@ steps:
         - "resolve-pseudocode"
         - "sub-leap-micro-cycle"
         - "sync-tied-stack"
-      state_history:
-        - "2026-08-24: prerequisite satisfied for gate-pseudocode-validation and TDD phases."
-      status: "completed"
+      state_history: []
+      status: "pending"
   - flow:
       branches: []
       calls:
@@ -545,9 +519,8 @@ steps:
         - "resolve-pseudocode"
         - "sub-leap-micro-cycle"
         - "sync-tied-stack"
-      state_history:
-        - "2026-08-24: prerequisite satisfied for gate-pseudocode-validation and TDD phases."
-      status: "completed"
+      state_history: []
+      status: "pending"
   - flow:
       branches: []
       calls:
@@ -577,9 +550,8 @@ steps:
       consideration_before_proceeding: "Insufficient specs identified; all flagged for resolution in resolve-pseudocode."
       retry_count: "0"
       returned_from: []
-      state_history:
-        - "2026-08-24: prerequisite satisfied for gate-pseudocode-validation and TDD phases."
-      status: "completed"
+      state_history: []
+      status: "pending"
   - flow:
       branches:
         - action: "Refactor (split or restructure) one IMPL before proceeding; do not paper over contradictions"
@@ -603,9 +575,8 @@ steps:
       consideration_before_proceeding: "No irreconcilable contradictions remain; or refactor completed."
       retry_count: "0"
       returned_from: []
-      state_history:
-        - "2026-08-24: prerequisite satisfied for gate-pseudocode-validation and TDD phases."
-      status: "completed"
+      state_history: []
+      status: "pending"
   - flow:
       branches:
         - action: "GOTO author-architecture, then return here"
@@ -637,9 +608,8 @@ steps:
       retry_count: "0"
       returned_from:
         - "sync-tied-stack"
-      state_history:
-        - "2026-08-24: prerequisite satisfied for gate-pseudocode-validation and TDD phases."
-      status: "completed"
+      state_history: []
+      status: "pending"
   - flow:
       branches: []
       calls:
@@ -668,9 +638,8 @@ steps:
       retry_count: "0"
       returned_from:
         - "composition-integration"
-      state_history:
-        - "2026-08-24: prerequisite satisfied for gate-pseudocode-validation and TDD phases."
-      status: "completed"
+      state_history: []
+      status: "pending"
   - flow:
       branches: []
       calls:
@@ -699,15 +668,10 @@ steps:
     title: "Pseudo-code validation pass and gating before persist"
     tracking:
       consideration_before_proceeding: "sub-pseudocode-validation-pass returned; pre-RED structural gate satisfied; test-dependent rows documented N/A if tests do not exist yet."
-      evidence_refs:
-        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-pre_implementation/obligation-report.json"
-        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence-manifest.json"
       retry_count: "0"
       returned_from: []
-      state_history:
-        - "2026-08-24: reconciled during full evidence-chain close-out."
-        - "2026-08-24: structural inquiry obligations mapped to MCP phase pre_implementation; see adversarial-inquiry disposition in CITDP."
-      status: "completed"
+      state_history: []
+      status: "pending"
   - flow:
       branches: []
       calls:
@@ -739,9 +703,8 @@ steps:
       consideration_before_proceeding: "IMPL index and detail files persisted; IMPL token and storage (code_locations/file/folder/schema) names resolved from and recorded in the canonical vocabulary; tokens registered; sub-yaml-edit-loop passed for all changed files; ./tied/agent-preload-contract.yaml updated or reconciled for IMPL-locked paths and constants."
       retry_count: "0"
       returned_from: []
-      state_history:
-        - "2026-08-24: prerequisite satisfied for gate-pseudocode-validation and TDD phases."
-      status: "completed"
+      state_history: []
+      status: "pending"
   - agentstream_new_session: "true"
     flow:
       branches: []
@@ -769,15 +732,10 @@ steps:
     title: "Risks, mitigations, token references"
     tracking:
       consideration_before_proceeding: "Risks and mitigations documented; token references attached."
-      evidence_refs:
-        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-remediation.yaml"
-        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/reliable-evidence-remediation-tracker.yaml"
       retry_count: "0"
       returned_from: []
-      state_history:
-        - "2026-08-24: integrated depth and strict-close-out triggers confirmed in remediation CITDP."
-        - "2026-08-24: reconciled during full evidence-chain close-out."
-      status: "completed"
+      state_history: []
+      status: "pending"
   - flow:
       branches: []
       calls: []
@@ -808,9 +766,8 @@ steps:
       consideration_before_proceeding: "Test matrix and TDD plan complete; module boundaries identified."
       retry_count: "0"
       returned_from: []
-      state_history:
-        - "2026-08-24: reconciled during full evidence-chain close-out."
-      status: "completed"
+      state_history: []
+      status: "pending"
   - agentstream_new_session: "true"
     flow:
       branches: []
@@ -850,9 +807,8 @@ steps:
       retry_count: "0"
       returned_from:
         - "three-way-alignment-unit"
-      state_history:
-        - "2026-08-24: reconciled during full evidence-chain close-out."
-      status: "completed"
+      state_history: []
+      status: "pending"
   - flow:
       branches:
         - action: "GOTO flag-contradictory-specs via agentstream_control; do not continue production-code iteration until related IMPL pseudo-code is reconsidered"
@@ -889,9 +845,8 @@ steps:
       consideration_before_proceeding: "Test passes; lint clean; new code symbols/storage names resolved from and recorded in the canonical vocabulary; block lead in production matches IMPL and test; token comments match pseudo-code block."
       retry_count: "0"
       returned_from: []
-      state_history:
-        - "2026-08-24: reconciled during full evidence-chain close-out."
-      status: "completed"
+      state_history: []
+      status: "pending"
   - flow:
       branches: []
       calls: []
@@ -911,9 +866,8 @@ steps:
       consideration_before_proceeding: "Refactor done; tests and lint still pass."
       retry_count: "0"
       returned_from: []
-      state_history:
-        - "2026-08-24: Optional behavior-preserving refactor skipped; tests and lint already green."
-      status: "not_applicable"
+      state_history: []
+      status: "pending"
   - flow:
       branches: []
       calls:
@@ -943,14 +897,10 @@ steps:
     title: "Align pseudo-code, tests, code; token audit (Phase F)"
     tracking:
       consideration_before_proceeding: "Three-way alignment verified for iteration; all tokens in semantic-tokens.yaml; canonical vocabulary reconciled (RECORD) with this iteration's terms. If all required blocks for this change are covered (optional blocks explicitly deferred per REQ/change-definition—not REQ-mandated gaps), proceed per flow to composition-integration; else loop to unit-test-red only for uncovered required blocks."
-      evidence_refs:
-        - "mcp-server/src/checklist-remediation-acceptance.test.ts"
-        - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
       retry_count: "0"
       returned_from: []
-      state_history:
-        - "2026-08-24: IMPL block leads, token comments, and tests aligned in checklist-remediation-acceptance.test.ts and fixture-corpus-regression.test.ts."
-      status: "completed"
+      state_history: []
+      status: "pending"
   - agentstream_new_session: "true"
     flow:
       branches:
@@ -989,14 +939,10 @@ steps:
     title: "Bindings without UI; test-first wiring (Phase G)"
     tracking:
       consideration_before_proceeding: "All bindings have IMPL coverage and composition tests; binding/channel/test names resolved from and recorded in the canonical vocabulary; tests and lint pass."
-      evidence_refs:
-        - "mcp-server/src/checklist-activation-collect.test.ts"
-        - "mcp-server/src/tools/checklist-gate-mcp.test.ts"
       retry_count: "0"
       returned_from: []
-      state_history:
-        - "2026-08-24: MCP composition covered by checklist-gate-mcp.test.ts and checklist-activation-collect.test.ts; UI-free binding evidence."
-      status: "completed"
+      state_history: []
+      status: "pending"
   - flow:
       branches:
         - action: "GOTO catalog-pseudocode-contracts to create or extend IMPL pseudo-code (IMPL phase stubs catalog-pseudocode-contracts … persist-implementation-records), then return here"
@@ -1027,9 +973,8 @@ steps:
       consideration_before_proceeding: "E2E-only behavior identified and documented; UI-facing terms and E2E test names resolved from and recorded in the canonical vocabulary; E2E tests written and justified."
       retry_count: "0"
       returned_from: []
-      state_history:
-        - "2026-08-24: UI-free remediation scope per CITDP non_goals; macOS visibility not proven."
-      status: "not_applicable"
+      state_history: []
+      status: "pending"
   - agentstream_new_session: "true"
     flow:
       branches:
@@ -1084,16 +1029,10 @@ steps:
     title: "Full suite, lint, token validation, audit, metadata (Phase I)"
     tracking:
       consideration_before_proceeding: "Full suite and lint pass; post-test sub-pseudocode-validation-pass complete; token validation ok; three-way audit done; IMPL metadata updated; module validation documented; canonical vocabulary reconciled (RECORD) with final tests/code."
-      evidence_refs:
-        - "mcp-server/src/checklist-remediation-acceptance.test.ts"
-        - "mcp-server/src/fixture-corpus-regression.test.ts"
-        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-verification.json"
       retry_count: "0"
       returned_from: []
-      state_history:
-        - "2026-08-24: authoritative TypeScript tests and build passed; inquiry artifacts regenerated for verification."
-        - "2026-08-24: reconciled during full evidence-chain close-out."
-      status: "completed"
+      state_history: []
+      status: "pending"
   - agentstream_new_session: "true"
     flow:
       branches:
@@ -1128,16 +1067,10 @@ steps:
     title: "TIED docs match implementation; consistency via tied-cli.sh"
     tracking:
       consideration_before_proceeding: "TIED docs match code/tests; tied_validate_consistency reports ok true; canonical vocabulary reconciled (RECORD) with final REQ/ARCH/IMPL, design/UI, and storage terms; ./tied/agent-preload-contract.yaml re-checked or explicitly unchanged if sync did not affect preload-relevant fields."
-      evidence_refs:
-        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence-manifest.json"
-        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-close_out.json"
-        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-verification.json"
       retry_count: "0"
       returned_from: []
-      state_history:
-        - "2026-08-24: reconciled during full evidence-chain close-out."
-        - "2026-08-24: TIED indexes and detail records validated; REQ/IMPL statuses verified from passing tests."
-      status: "completed"
+      state_history: []
+      status: "pending"
   - flow:
       branches: []
       calls:
@@ -1159,14 +1092,10 @@ steps:
     title: "README and CHANGELOG"
     tracking:
       consideration_before_proceeding: "README/CHANGELOG updated when policy or goal requires (UI/release terms resolved from and recorded in the canonical vocabulary); otherwise explicitly skipped."
-      evidence_refs:
-        - "CHANGELOG.md"
       retry_count: "0"
       returned_from: []
-      state_history:
-        - "2026-08-24: CHANGELOG updated with remediation behavior, evidence, and proof-boundary limitations."
-        - "2026-08-24: reconciled during full evidence-chain close-out."
-      status: "completed"
+      state_history: []
+      status: "pending"
   - flow:
       branches:
         - action: "Fix and repeat sub-yaml-edit-loop step"
@@ -1195,14 +1124,10 @@ steps:
     title: "CITDP YAML under client docs/citdp"
     tracking:
       consideration_before_proceeding: "CITDP record written and sub-yaml-edit-loop passed. Policy for when to create vs skip: ./tied/docs/citdp-policy.md."
-      evidence_refs:
-        - "tied/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-remediation.yaml"
       retry_count: "0"
       returned_from: []
-      state_history:
-        - "2026-08-24: CITDP remediation record persisted with verification activation and lint_yaml pass."
-        - "2026-08-24: reconciled during full evidence-chain close-out."
-      status: "completed"
+      state_history: []
+      status: "pending"
   - flow:
       branches:
         - action: "Fix via RECORD or RESOLVE and re-run VALIDATE; or GOTO sync-tied-stack if TIED/docs drift caused failures; do not commit until VALIDATE passes"
@@ -1232,36 +1157,10 @@ steps:
     title: "Commit per PROC-COMMIT_MESSAGES; no push unless asked"
     tracking:
       consideration_before_proceeding: "sub-vocabulary-sync (VALIDATE) passed or immature-client deferral noted; commit created; format per PROC-COMMIT_MESSAGES; tokens in body/footer."
-      evidence_refs:
-        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence-manifest.json"
-        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-close_out.json"
       retry_count: "0"
       returned_from: []
-      state_history:
-        - "2026-08-24: close-out evidence validated; commit intentionally deferred to caller."
-      status: "completed"
-  - flow:
-      branches: []
-      calls: []
-      next: "caller"
-    goals: "Run the bounded adversarial inquiry for the selected integrated phase."
-    outcomes: "Phase-scoped inquiry artifacts and activation evidence are persisted."
-    preconditions:
-      - "Integrated depth and an explicit inquiry phase are selected."
-    references:
-      - "mcp-server/src/adversarial-inquiry/checklist-integration.ts"
-      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/"
-    slug: "sub-adversarial-inquiry-pass"
-    tracking:
-      consideration_before_proceeding: "Verification and close-out inquiry artifacts are persisted with phase-bound identities."
-      evidence_refs:
-        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-close_out/"
-        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-verification/"
-      retry_count: "0"
-      returned_from: []
-      state_history:
-        - "2026-08-24: verification and close-out inquiry passes regenerated from the built MCP implementation."
-      status: "completed"
+      state_history: []
+      status: "pending"
 sub_procedures:
   - flow:
       return_to: "caller"
@@ -1300,11 +1199,9 @@ sub_procedures:
     title: "tied-cli.sh mutations, lint_yaml, client styling, tied_validate_consistency"
     tracking:
       consideration_before_proceeding: "tied-cli.sh mutation path honored where applicable; baseline lint_yaml passed; sub-client-yaml-styling passed with styling_status recorded; tied_validate_consistency passed when TIED files changed."
-      evidence_refs:
-        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-close_out.json"
       retry_count: "0"
       state_history: []
-      status: "completed"
+      status: "pending"
   - flow:
       return_to: "caller"
     goals: "Apply presentation-only client YAML styling after baseline canonical formatting; fail closed when semantics change or formatter misbehaves."
@@ -1331,13 +1228,10 @@ sub_procedures:
       - "Verify idempotence: a second formatter pass on unchanged input must produce byte-identical output or fail closed."
     title: "Client YAML presentation styling and semantic-equivalence gate"
     tracking:
-      consideration_before_proceeding: "styling_status not_configured recorded; baseline canonical lint_yaml applied via sub-yaml-edit-loop; no client_formatter invocation required."
-      evidence_refs:
-        - ".tied-yaml.yaml"
+      consideration_before_proceeding: "styling_status recorded; post-style lint_yaml passed; yaml_semantic_compare passed when client_formatter configured; no writes outside project-owned ./tied/."
       retry_count: "0"
-      state_history:
-        - "2026-08-24: styling_status not_configured — .tied-yaml.yaml has scalar_style wrapped only; no client_formatter hook."
-      status: "not_applicable"
+      state_history: []
+      status: "pending"
   - flow:
       return_to: "gate-pseudocode-validation"
     goals: "Ensure IMPL pseudo-code satisfies the application pseudo-code validation checklist before persisting or writing tests/code. Required checks are gating unless waived and documented."
@@ -1363,13 +1257,9 @@ sub_procedures:
     title: "Checklist-ordered passes until gating satisfied"
     tracking:
       consideration_before_proceeding: "Gating rules pass or waiver documented; RETURN to gate-pseudocode-validation."
-      evidence_refs:
-        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence-manifest.json"
       retry_count: "0"
-      state_history:
-        - "2026-08-24: post-test Layer B pseudocode_validate pass with full coverage_references."
-        - "2026-08-24: post-test Layer B validation scheduled in close-out plan."
-      status: "completed"
+      state_history: []
+      status: "pending"
   - flow:
       branches:
         - action: "GOTO author-architecture, CALL sub-yaml-edit-loop, then return to unit-test-green"
@@ -1401,13 +1291,10 @@ sub_procedures:
       - "Verify three-way alignment for the affected block (per three-way-alignment-unit rules)."
     title: "Fix IMPL first during GREEN; revisit REQ/ARCH if scope shifts"
     tracking:
-      consideration_before_proceeding: "Sub applies only when unit-test-green detects pseudo-code drift; no drift event in this remediation pass."
-      evidence_refs:
-        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence-manifest.json"
+      consideration_before_proceeding: "IMPL/test/code updated; three-way alignment verified; ARCH/REQ updated if scope changed; RETURN to unit-test-green."
       retry_count: "0"
-      state_history:
-        - "2026-08-24: No GREEN drift during remediation; LEAP micro-cycle not triggered."
-      status: "not_applicable"
+      state_history: []
+      status: "pending"
   - flow:
       return_to: "caller"
     goals: "Keep one controlled set of preferred domain terms so requirements, architecture, IMPL pseudo-code, tests, code, and user-facing docs name each concept identically per [PROC-VOCABULARY_INDEX]. A chosen preferred term is the literal identifier reused as the IMPL UPPER_SNAKE block name, the test/code symbol, the storage name, and the UI label."
@@ -1451,13 +1338,9 @@ sub_procedures:
     title: "Resolve, preload, record, and validate domain vocabulary index terms"
     tracking:
       consideration_before_proceeding: "Caller mode satisfied (RESOLVE/PRELOAD/RECORD/VALIDATE); immature-client deferral noted when tied/vocab is absent; RETURN to caller."
-      evidence_refs:
-        - "tied/vocab/fidelity-research.md"
-        - "tied/vocab/quality-assurance.md"
       retry_count: "0"
-      state_history:
-        - "2026-08-24: Touchpoint 3 VALIDATE pass — remediation terms resolve to fidelity-research.md and quality-assurance.md preferred terms; no synonym-only drift in changed artifacts."
-      status: "completed"
+      state_history: []
+      status: "pending"
   - flow:
       return_to: "caller"
     goals: "Run GENERATE_EVIDENCE_CHAIN_PROFILE at an explicit evidence-chain profile depth."
@@ -1483,13 +1366,9 @@ sub_procedures:
     title: "Generate a read-only evidence chain profile"
     tracking:
       consideration_before_proceeding: "Profile written only under working/evidence-chain or stdout; project intent unchanged."
-      evidence_refs:
-        - "working/evidence-chain/evidence-chain-profile.v1.json"
-        - "working/evidence-chain/verification-evidence-manifest.v1.json"
       retry_count: "0"
-      state_history:
-        - "2026-08-24: quality_evidence_collect_manifest and evidence_chain_profile_generate completed."
-      status: "completed"
+      state_history: []
+      status: "pending"
   - flow:
       return_to: "caller"
     goals: "Bind SELECT_ADVERSARIAL_INQUIRY_DEPTH, MAP_ADVERSARIAL_OBLIGATIONS, EVALUATE_ADVERSARIAL_FINDINGS, ROUTE_UNRESOLVED_CRITICAL_FINDINGS, and PERSIST_WORKING_ARTIFACTS behind one checklist-callable name for bounded adversarial inquiry."
@@ -1522,12 +1401,9 @@ sub_procedures:
     title: "Checklist-local adversarial inquiry pass"
     tracking:
       consideration_before_proceeding: "Report persisted under working/{REQ-TOKEN}/adversarial-inquiry; caller receives summary; blocking only when caller blocking=true, strict-eligible, and error finding unresolved."
-      evidence_refs:
-        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-close_out/gate-result.json"
-        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-verification/gate-result.json"
       retry_count: "0"
       state_history: []
-      status: "completed"
+      status: "pending"
 version: "3.0.0"
 vocabulary_layer:
   entry_gate: "Do not proceed with an ambiguous domain term; resolve it or record an explicit immature-client deferral."

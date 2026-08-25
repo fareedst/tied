@@ -1,0 +1,13 @@
+{
+  "blocking": false,
+  "diagnostics": [],
+  "policy": "advisory",
+  "proofBoundary": "human_decision",
+  "schemaVersion": "adversarial-inquiry-gate.v1",
+  "scope": [
+    "IMPL-LISTENING_PORT_COLLECT#COLLECT_LISTENING#block1",
+    "IMPL-LISTENING_PORT_JSON#ENCODE_REPORT#block2"
+  ],
+  "status": "warn",
+  "verdict": "UNRESOLVED"
+}

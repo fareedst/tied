@@ -1,0 +1,236 @@
+{
+  "schema_version": "regression-manifest.v1",
+  "stdd_revision": "b2dad0dfef99c5ead1a5dd73cb14428d0a197795",
+  "corpus_manifest_ref": "848ea2bf9298dde880977af20ef68c67aa36ca18fef65ef7c848e9a67dedc259",
+  "gate_receipts": [
+    {
+      "phase": "pre_implementation",
+      "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-pre-implementation.json",
+      "hash": "ca3f02ddf837c414f79eaa632de67788e5048c56b28e2b870a871fbd20e11372"
+    },
+    {
+      "phase": "verification",
+      "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-verification.json",
+      "hash": "bef27da8d83962513bfd593e82945f2babc754124482554d76448aaeaba1e0d2"
+    },
+    {
+      "phase": "close_out",
+      "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-close_out.json",
+      "hash": "343cd6baa8c12bd14b2c35926f41a01a5a32fe3c022a73144c8f41898e807e19"
+    }
+  ],
+  "case_results": [
+    {
+      "case_id": "A1-sparse-tracker",
+      "acceptance_row": "A1",
+      "actual_allowed": false,
+      "actual_diagnostics": [
+        "tracker_sparse",
+        "pending_required_step:risk-assessment",
+        "pending_required_step:verification-gate",
+        "missing_required_step:sub-adversarial-inquiry-pass",
+        "integrated_depth_requires_pairing",
+        "activation_pairing_incomplete"
+      ],
+      "matches_expected": true,
+      "classification": "stdd_guard_confirmed"
+    },
+    {
+      "case_id": "A2-root-projection",
+      "acceptance_row": "A2",
+      "actual_allowed": false,
+      "actual_diagnostics": [
+        "artifact_path_root_projection_rejected:obligation-report.json",
+        "artifact_hash_mismatch:obligation-report.json",
+        "evidence_stale",
+        "tracker_not_authoritative"
+      ],
+      "matches_expected": true,
+      "classification": "stdd_guard_confirmed"
+    },
+    {
+      "case_id": "A3-incomplete-provenance",
+      "acceptance_row": "A3",
+      "actual_allowed": false,
+      "actual_diagnostics": [
+        "provenance_incomplete",
+        "provenance_incomplete:request_token",
+        "provenance_incomplete:phase",
+        "provenance_incomplete:run_id",
+        "provenance_incomplete:command",
+        "provenance_incomplete:tool_version",
+        "provenance_incomplete:schema_version",
+        "integrated_depth_requires_pairing",
+        "activation_pairing_incomplete"
+      ],
+      "matches_expected": true,
+      "classification": "stdd_guard_confirmed"
+    },
+    {
+      "case_id": "A4-missing-pairing",
+      "acceptance_row": "A4",
+      "actual_allowed": false,
+      "actual_diagnostics": [
+        "integrated_depth_requires_pairing",
+        "activation_pairing_incomplete"
+      ],
+      "matches_expected": true,
+      "classification": "stdd_guard_confirmed"
+    },
+    {
+      "case_id": "A5-unresolved-findings",
+      "acceptance_row": "A5",
+      "actual_allowed": false,
+      "actual_diagnostics": [
+        "finding_unresolved",
+        "warn_not_success",
+        "integrated_depth_requires_pairing",
+        "activation_pairing_incomplete"
+      ],
+      "matches_expected": true,
+      "classification": "stdd_guard_confirmed"
+    },
+    {
+      "case_id": "A6-unproven-command",
+      "acceptance_row": "A6",
+      "actual_allowed": false,
+      "actual_diagnostics": [
+        "tracker_sparse",
+        "pending_required_step:risk-assessment",
+        "pending_required_step:verification-gate",
+        "missing_required_step:sub-adversarial-inquiry-pass",
+        "command_success_unproven",
+        "integrated_depth_requires_pairing",
+        "activation_pairing_incomplete"
+      ],
+      "matches_expected": true,
+      "classification": "stdd_guard_confirmed"
+    },
+    {
+      "case_id": "A7-stale-phase-copy",
+      "acceptance_row": "A7",
+      "actual_allowed": false,
+      "actual_diagnostics": [
+        "artifact_hash_mismatch:gate-result.json",
+        "evidence_stale"
+      ],
+      "matches_expected": true,
+      "classification": "stdd_guard_confirmed"
+    },
+    {
+      "case_id": "A8-placeholder-waiver",
+      "acceptance_row": "A8",
+      "actual_allowed": false,
+      "actual_diagnostics": [
+        "waiver_invalid",
+        "integrated_depth_requires_pairing",
+        "activation_pairing_incomplete"
+      ],
+      "matches_expected": true,
+      "classification": "stdd_guard_confirmed"
+    },
+    {
+      "case_id": "A9-pending-sub-stub",
+      "acceptance_row": "A9",
+      "actual_allowed": false,
+      "actual_diagnostics": [
+        "missing_required_step:gate-pseudocode-validation",
+        "pending_required_step:sub-adversarial-inquiry-pass",
+        "sub_stub_pending_while_parent_completed",
+        "sub_stub_pending",
+        "parent_child_inconsistent"
+      ],
+      "matches_expected": true,
+      "classification": "stdd_guard_confirmed"
+    },
+    {
+      "case_id": "A10-parent-child-inconsistent",
+      "acceptance_row": "A10",
+      "actual_allowed": false,
+      "actual_diagnostics": [
+        "missing_required_step:risk-assessment",
+        "pending_required_step:sub-adversarial-inquiry-pass",
+        "sub_stub_pending_while_parent_completed",
+        "sub_stub_pending",
+        "parent_child_inconsistent"
+      ],
+      "matches_expected": true,
+      "classification": "stdd_guard_confirmed"
+    },
+    {
+      "case_id": "A13-wrong-phase-receipt",
+      "acceptance_row": "A13",
+      "actual_allowed": false,
+      "actual_diagnostics": [
+        "receipt_identity_mismatch:phase",
+        "evidence_stale"
+      ],
+      "matches_expected": true,
+      "classification": "stdd_guard_confirmed"
+    },
+    {
+      "case_id": "A14-verification-at-close-out",
+      "acceptance_row": "A14",
+      "actual_allowed": false,
+      "actual_diagnostics": [
+        "receipt_identity_mismatch:phase",
+        "evidence_stale"
+      ],
+      "matches_expected": true,
+      "classification": "stdd_guard_confirmed"
+    },
+    {
+      "case_id": "A16-depth-downgrade",
+      "acceptance_row": "A16",
+      "actual_allowed": false,
+      "actual_diagnostics": [
+        "depth_downgrade_requires_waiver"
+      ],
+      "matches_expected": true,
+      "classification": "stdd_guard_confirmed"
+    },
+    {
+      "case_id": "A18-advisory-missing-activation",
+      "acceptance_row": "A18",
+      "actual_allowed": false,
+      "actual_diagnostics": [
+        "integrated_depth_requires_pairing",
+        "activation_pairing_incomplete"
+      ],
+      "matches_expected": true,
+      "classification": "stdd_guard_confirmed"
+    },
+    {
+      "case_id": "A11-valid-integrated-verification",
+      "acceptance_row": "A11",
+      "actual_allowed": true,
+      "actual_diagnostics": [],
+      "matches_expected": true,
+      "classification": "stdd_guard_confirmed"
+    }
+  ],
+  "adversarial_inquiry_runs": [
+    {
+      "phase": "pre_implementation",
+      "run_id": "remediation-structural-20260824",
+      "proof_boundary": "traceability_structure,pseudo_code_structure"
+    },
+    {
+      "phase": "verification",
+      "run_id": "remediation-verification-20260824"
+    },
+    {
+      "phase": "close_out",
+      "run_id": "remediation-close-out-20260824"
+    }
+  ],
+  "classification_summary": {
+    "stdd_guard_confirmed": 15,
+    "needs_review": 0
+  },
+  "residual_risks": [
+    "Fixture positive path blocked by incomplete evidence-provenance.json until fixture preparation or STDD reference positive.",
+    "macOS UI visibility not proven by UI-free gate checks.",
+    "Corpus defines inputs only; STDD safeguard behavior proven in Track 3 regression manifest."
+  ]
+}

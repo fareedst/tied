@@ -1,9 +1,0 @@
-{
-  "schemaVersion": "adversarial-inquiry-provenance.v1",
-  "runId": "placeholder",
-  "phase": "placeholder",
-  "policy": "strict-approved",
-  "note": "VolumeStats strict-approved pilot; normalized-input Mode A; no canonical mutation.",
-  "proofBoundary": "semantic_fidelity",
-  "revision": "working-tree-2026-08-24"
-}

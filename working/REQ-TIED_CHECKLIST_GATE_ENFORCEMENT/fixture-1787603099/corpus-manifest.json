@@ -1,0 +1,177 @@
+{
+  "schema_version": "fixture-corpus-manifest.v1",
+  "client_alias": "1787603099",
+  "fixture_project_root": "/Users/fareed/Documents/dev/test/1787603099",
+  "fixture_tied_base_path": "/Users/fareed/Documents/dev/test/1787603099/tied",
+  "request_token": "REQ-LISTENING_PORT_REPORT",
+  "stdd_governing_token": "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT",
+  "fixture_revision": "d364f6d9c291354850a7653cc2da1837c13c8402",
+  "snapshot_hashes": {
+    "tracker": "1ce1eae34a3bfed733a78f37b59c28804365408f939c9de963f14829e5c22e2c",
+    "citdp": "9d9d043788ca87819695a010fc16856f414e6fc88f1244c45af021b653242cbc",
+    "adversarial_inquiry_root_projection": "0985222cd65ea93c6c077d347e3d523eec5dc4a45a46bb27bda9c63bb389e283",
+    "adversarial_inquiry_phase_verification": "0985222cd65ea93c6c077d347e3d523eec5dc4a45a46bb27bda9c63bb389e283"
+  },
+  "tool_versions": {
+    "node": "v25.9.0",
+    "mcp-server": "1.0.0"
+  },
+  "evidence_gap_inventory": [
+    "sparse_tracker_execution_evidence_only_six_completed_slugs",
+    "root_adversarial_inquiry_projection_parallel_to_phase_directories",
+    "evidence_provenance_missing_request_token_phase_run_id_command",
+    "gate_result_verdict_unresolved_status_warn",
+    "finding_ledger_observed_lifecycle_unresolved_entries",
+    "operator_evidence_status_not_run_with_completed_markers",
+    "identical_hashes_across_phases_suggest_stale_copy_not_fresh_runs"
+  ],
+  "negative_cases": [
+    {
+      "id": "A1-sparse-tracker",
+      "acceptance_row": "A1",
+      "input_refs": ["snapshots/tracker/authoritative-tracker.yaml"],
+      "expected_gate_phase": "verification",
+      "expected_allowed": false,
+      "expected_diagnostics": ["tracker_sparse"],
+      "proof_boundary": "Proves sparse Tracker fails; does not prove STDD guard until Track 3 regression."
+    },
+    {
+      "id": "A2-root-projection",
+      "acceptance_row": "A2",
+      "input_refs": ["snapshots/adversarial-inquiry-root/"],
+      "expected_gate_phase": "verification",
+      "expected_allowed": false,
+      "expected_diagnostics": ["tracker_not_authoritative", "artifact_path_root_projection_rejected"],
+      "proof_boundary": "Root projection must not substitute phase-bound authoritative artifacts."
+    },
+    {
+      "id": "A3-incomplete-provenance",
+      "acceptance_row": "A3",
+      "input_refs": ["snapshots/adversarial-inquiry-phase-verification/evidence-provenance.json"],
+      "expected_gate_phase": "verification",
+      "expected_allowed": false,
+      "expected_diagnostics": ["provenance_incomplete"],
+      "proof_boundary": "Missing identity/command fields cannot satisfy evidence provenance contract."
+    },
+    {
+      "id": "A4-missing-pairing",
+      "acceptance_row": "A4",
+      "input_refs": ["snapshots/adversarial-inquiry-phase-verification/obligation-report.json"],
+      "expected_gate_phase": "verification",
+      "expected_allowed": false,
+      "expected_diagnostics": ["activation_pairing_incomplete"],
+      "proof_boundary": "Receipt or artifacts alone cannot satisfy integrated pairing."
+    },
+    {
+      "id": "A5-unresolved-findings",
+      "acceptance_row": "A5",
+      "input_refs": [
+        "snapshots/adversarial-inquiry-phase-verification/gate-result.json",
+        "snapshots/adversarial-inquiry-phase-verification/finding-ledger.jsonl"
+      ],
+      "expected_gate_phase": "verification",
+      "expected_allowed": false,
+      "expected_diagnostics": ["finding_unresolved"],
+      "proof_boundary": "UNRESOLVED/warn gate results cannot satisfy success at integrated depth."
+    },
+    {
+      "id": "A6-unproven-command",
+      "acceptance_row": "A6",
+      "input_refs": ["snapshots/tracker/authoritative-tracker.yaml"],
+      "expected_gate_phase": "verification",
+      "expected_allowed": false,
+      "expected_diagnostics": ["command_success_unproven"],
+      "proof_boundary": "operator_evidence.status not_run without retained command output is not proof."
+    },
+    {
+      "id": "A7-stale-phase-copy",
+      "acceptance_row": "A7",
+      "input_refs": [
+        "snapshots/adversarial-inquiry-phase-pre_implementation/",
+        "snapshots/adversarial-inquiry-phase-verification/"
+      ],
+      "expected_gate_phase": "verification",
+      "expected_allowed": false,
+      "expected_diagnostics": ["evidence_stale"],
+      "proof_boundary": "Identical content hashes across phases indicate stale cross-phase reuse."
+    },
+    {
+      "id": "A8-placeholder-waiver",
+      "acceptance_row": "A8",
+      "input_refs": ["synthetic:integrated_waiver_tilde"],
+      "expected_gate_phase": "close_out",
+      "expected_allowed": false,
+      "expected_diagnostics": ["waiver_invalid"],
+      "proof_boundary": "Placeholder waiver values are treated as absent."
+    },
+    {
+      "id": "A9-pending-sub-stub",
+      "acceptance_row": "A9",
+      "input_refs": ["synthetic:integrated_pending_sub_stub"],
+      "expected_gate_phase": "pre_implementation",
+      "expected_allowed": false,
+      "expected_diagnostics": ["sub_stub_pending"],
+      "proof_boundary": "Integrated depth requires sub-adversarial-inquiry-pass disposition."
+    },
+    {
+      "id": "A10-parent-child-inconsistent",
+      "acceptance_row": "A10",
+      "input_refs": ["synthetic:parent_completed_sub_pending"],
+      "expected_gate_phase": "pre_implementation",
+      "expected_allowed": false,
+      "expected_diagnostics": ["parent_child_inconsistent"],
+      "proof_boundary": "Completed parent slug cannot coexist with pending sub-stub."
+    },
+    {
+      "id": "A13-wrong-phase-receipt",
+      "acceptance_row": "A13",
+      "input_refs": ["synthetic:verification_receipt_at_close_out"],
+      "expected_gate_phase": "close_out",
+      "expected_allowed": false,
+      "expected_diagnostics": ["receipt_identity_mismatch:phase"],
+      "proof_boundary": "Phase-bound receipt identity must match gate phase."
+    },
+    {
+      "id": "A14-verification-at-close-out",
+      "acceptance_row": "A14",
+      "input_refs": ["synthetic:verification_receipt_at_close_out"],
+      "expected_gate_phase": "close_out",
+      "expected_allowed": false,
+      "expected_diagnostics": ["receipt_identity_mismatch:phase"],
+      "proof_boundary": "Verification receipt is not valid close_out activation."
+    },
+    {
+      "id": "A16-depth-downgrade",
+      "acceptance_row": "A16",
+      "input_refs": ["snapshots/citdp/citdp.yaml"],
+      "expected_gate_phase": "pre_implementation",
+      "expected_allowed": false,
+      "expected_diagnostics": ["depth_downgrade_requires_waiver"],
+      "proof_boundary": "Synthetic downgrade scenario uses prior_depth_tier integrated without waiver."
+    },
+    {
+      "id": "A18-advisory-missing-activation",
+      "acceptance_row": "A18",
+      "input_refs": ["snapshots/citdp/citdp.yaml"],
+      "expected_gate_phase": "verification",
+      "expected_allowed": false,
+      "expected_diagnostics": ["activation_pairing_incomplete"],
+      "proof_boundary": "Advisory gate_policy does not bypass fail-closed activation pairing."
+    }
+  ],
+  "positive_case": {
+    "id": "A11-valid-integrated-verification",
+    "acceptance_row": "A11",
+    "input_refs": ["stdd:working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-verification/"],
+    "expected_gate_phase": "verification",
+    "expected_allowed": true,
+    "expected_diagnostics": [],
+    "proof_boundary": "STDD dogfooding phase-verification artifacts with complete pairing; fixture lacks complete provenance for positive path."
+  },
+  "fixture_preparation_changes": [],
+  "limitations": [
+    "Fixture positive path blocked by incomplete evidence-provenance.json until fixture preparation or STDD reference positive.",
+    "macOS UI visibility not proven by UI-free gate checks.",
+    "Corpus defines inputs only; STDD safeguard behavior proven in Track 3 regression manifest."
+  ]
+}

@@ -1,7 +1,0 @@
-{
-  "profile_depth": "integrated",
-  "manifest_reference": "/Users/fareed/Documents/dev/chatgpt/stdd/working/evidence-chain/verification-evidence-manifest.v1.json",
-  "invoke_structural_validators": true,
-  "scope": { "requirement_tokens": ["REQ-EVIDENCE_CHAIN_PROFILE"] },
-  "run_metadata": { "run_id": "wiring-pilot-structural", "commit": "local" }
-}
