@@ -51,6 +51,11 @@ CITDP-REQ-MCP_USAGE_METRICS:
     workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
   risk_analysis:
     risks:
+      - description: "Metrics wrap alters handler error propagation."
+        id: "RISK-MET-003"
+        likelihood: "Low"
+        mitigation: "Wrapper rethrows; IO errors swallowed after DIAGNOSTIC stderr; wrapToolHandler unit tests."
+        severity: "Medium"
       - description: "Operators accidentally enable metrics and grow a large JSONL on disk."
         id: "RISK-MET-001"
         likelihood: "Low"
@@ -60,11 +65,6 @@ CITDP-REQ-MCP_USAGE_METRICS:
         id: "RISK-MET-002"
         likelihood: "Low"
         mitigation: "BLOB_KEYS redact essence_pseudocode/record/updates; string truncate 200; unit tests for sanitizeArgs."
-        severity: "Medium"
-      - description: "Metrics wrap alters handler error propagation."
-        id: "RISK-MET-003"
-        likelihood: "Low"
-        mitigation: "Wrapper rethrows; IO errors swallowed after DIAGNOSTIC stderr; wrapToolHandler unit tests."
         severity: "Medium"
   tdd_sequence:
     summary: "unit-test-red/green: usage-metrics.test.ts for isMetricsEnabled, resolveMetricsPath, sanitizeArgs, wrapToolHandler, recordToolCall. Ruby smoke for aggregator. composition: index.ts registers wrapToolHandler when enabled (covered via module + bootstrap load). end-to-end-ui: N/A."

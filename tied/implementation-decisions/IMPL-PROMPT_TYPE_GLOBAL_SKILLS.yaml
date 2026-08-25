@@ -3,10 +3,10 @@ IMPL-PROMPT_TYPE_GLOBAL_SKILLS:
     files:
       - description: "Canonical tracked prompt-type skill bundle"
         path: "tools/bundled-prompt-type-skills/"
-      - description: "Installs the managed prompt-type skill bundle into client .cursor/skills"
-        path: "copy_files.sh"
       - description: "Distribution, traceability, and maintenance documentation"
         path: "tied/docs/prompt-type-skills.md"
+      - description: "Installs the managed prompt-type skill bundle into client .cursor/skills"
+        path: "copy_files.sh"
       - description: "Static bundle contract and bootstrap installation tests"
         path: "mcp-server/src/e2e/prompt-type-skills.test.ts"
     functions:

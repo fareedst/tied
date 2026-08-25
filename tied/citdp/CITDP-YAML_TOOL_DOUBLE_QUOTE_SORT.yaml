@@ -81,6 +81,11 @@ CITDP-YAML_TOOL_DOUBLE_QUOTE_SORT:
     workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
   risk_analysis:
     risks:
+      - description: "A failed parse, serialization, temporary write, or rename could leave a partial project YAML file."
+        id: "RISK-YAML-CANONICAL-003"
+        likelihood: "Low"
+        mitigation: "Atomic temporary-file writes and invalid-input tests preserve original bytes on failure."
+        severity: "High"
       - description: "Consumers requiring typed YAML scalars must now receive preserved boolean, number, null, and string types."
         id: "RISK-YAML-CANONICAL-001"
         likelihood: "Medium"
@@ -90,11 +95,6 @@ CITDP-YAML_TOOL_DOUBLE_QUOTE_SORT:
         id: "RISK-YAML-CANONICAL-002"
         likelihood: "Medium"
         mitigation: "Exact, prefix, suffix, and combined ordered-list key patterns preserve document order."
-        severity: "High"
-      - description: "A failed parse, serialization, temporary write, or rename could leave a partial project YAML file."
-        id: "RISK-YAML-CANONICAL-003"
-        likelihood: "Low"
-        mitigation: "Atomic temporary-file writes and invalid-input tests preserve original bytes on failure."
         severity: "High"
     tdd_sequence: "unit: yaml-canonicalizer.test.ts covers pure canonicalization and atomic failure. composition: yaml-canonicalization-mcp.test.ts covers tied_yaml_format, index insert, and detail create/update metadata. compatibility: scripts/yaml_list_sorter_test.rb and ruby -c cover yaml_tool and semantic compare. end-to-end-ui: e2e_only false — no UI surface."
     test_strategy:

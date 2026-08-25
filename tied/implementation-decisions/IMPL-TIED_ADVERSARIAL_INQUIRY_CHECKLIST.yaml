@@ -1,14 +1,14 @@
 IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST:
   code_locations:
     files:
-      - description: "Inquiry core, artifact persistence, workflow, and strict gate integration"
-        path: "mcp-server/src/adversarial-inquiry/"
-      - description: "MCP composition handler"
-        path: "mcp-server/src/tools/index.ts"
       - description: "Canonical checklist integration"
         path: "tied/docs/agent-req-implementation-checklist.yaml"
       - description: "Canonical checklist prose mirror"
         path: "tied/docs/agent-req-implementation-checklist.md"
+      - description: "Inquiry core, artifact persistence, workflow, and strict gate integration"
+        path: "mcp-server/src/adversarial-inquiry/"
+      - description: "MCP composition handler"
+        path: "mcp-server/src/tools/index.ts"
     functions: []
   cross_references:
     - "ARCH-TIED_ADVERSARIAL_INQUIRY"

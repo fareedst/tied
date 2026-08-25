@@ -1,0 +1,6 @@
+code_locations:
+  functions:
+    - description: Zebra handler
+      name: HandleZebra
+    - description: Alpha handler
+      name: HandleAlpha

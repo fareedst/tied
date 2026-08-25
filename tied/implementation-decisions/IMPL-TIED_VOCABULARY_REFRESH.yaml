@@ -1,18 +1,18 @@
 IMPL-TIED_VOCABULARY_REFRESH:
   code_locations:
     files:
-      - description: "Layered vocabulary bootstrap and methodology refresh"
-        path: "copy_files.sh"
-      - description: "Report-first legacy ownership migration"
-        path: "scripts/migrate_vocab_ownership.rb"
-      - description: "Independent methodology/client vocabulary validator"
-        path: "scripts/validate_vocab_index.rb"
       - description: "Bootstrap and layered refresh E2E coverage"
         path: "mcp-server/src/e2e/bootstrap-and-load.test.ts"
-      - description: "Legacy migration coverage"
-        path: "scripts/migrate_vocab_ownership_test.rb"
+      - description: "Independent methodology/client vocabulary validator"
+        path: "scripts/validate_vocab_index.rb"
+      - description: "Layered vocabulary bootstrap and methodology refresh"
+        path: "copy_files.sh"
       - description: "Layered vocabulary validation coverage"
         path: "scripts/validate_vocab_index_test.rb"
+      - description: "Legacy migration coverage"
+        path: "scripts/migrate_vocab_ownership_test.rb"
+      - description: "Report-first legacy ownership migration"
+        path: "scripts/migrate_vocab_ownership.rb"
     functions: []
   cross_references:
     - "ARCH-TIED_VOCABULARY_LAYERS"

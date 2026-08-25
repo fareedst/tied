@@ -3,10 +3,10 @@ IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK:
     files:
       - description: "Authenticated HTTP webhook handler and retry worker"
         path: "pilot/webhook-inbox/src/server.mjs"
-      - description: "SQLite CLI inbox persistence and state transitions"
-        path: "pilot/webhook-inbox/src/sqlite-store.mjs"
       - description: "Pilot authentication, idempotency, and retry tests"
         path: "pilot/webhook-inbox/test/webhook-inbox.test.mjs"
+      - description: "SQLite CLI inbox persistence and state transitions"
+        path: "pilot/webhook-inbox/src/sqlite-store.mjs"
     functions:
       - description: "Create bounded authenticated webhook HTTP server"
         file: "pilot/webhook-inbox/src/server.mjs"

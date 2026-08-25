@@ -1,0 +1,4 @@
+code_locations:
+  functions:
+    - HandleZebra
+    - HandleAlpha

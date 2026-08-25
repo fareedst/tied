@@ -74,12 +74,12 @@ CITDP-REQ-TIED_YAML_STYLE_CONFIGURATION:
       - description: "A writer bypasses the shared serializer and emits a different style."
         id: "RISK-STYLE-001"
         mitigation: "Route all typed YAML writers through writeCanonicalValueAtomic or safeDumpTiedDetailDoc with the resolved style; test MCP composition and CLI parity."
-      - description: "Wrapped mode coerces typed scalars to strings."
-        id: "RISK-STYLE-002"
-        mitigation: "Use js-yaml forceQuotes for string emission only and assert parsed boolean, number, and null types."
       - description: "Invalid repository configuration silently falls through to a global value."
         id: "RISK-STYLE-003"
         mitigation: "Resolver rejects invalid explicit repository settings before any write."
+      - description: "Wrapped mode coerces typed scalars to strings."
+        id: "RISK-STYLE-002"
+        mitigation: "Use js-yaml forceQuotes for string emission only and assert parsed boolean, number, and null types."
   test_strategy:
     compatibility:
       - "scripts/yaml_list_sorter_test.rb"

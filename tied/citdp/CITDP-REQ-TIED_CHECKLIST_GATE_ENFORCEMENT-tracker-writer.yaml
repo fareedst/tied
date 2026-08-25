@@ -52,15 +52,15 @@ CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-tracker-writer:
         - "Can tied_verify mutate status when the writer output fails the checklist gate?"
       gate_policy: "advisory"
       inquiry_runs:
+        - artifact_dir: "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-close_out/"
+          phase: "close_out"
+          run_id: "build-plan-close-out-20260824"
         - artifact_dir: "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-pre_implementation/"
           phase: "pre_implementation"
           run_id: "build-plan-pre-impl-20260824"
         - artifact_dir: "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-verification/"
           phase: "verification"
           run_id: "build-plan-verification-20260824"
-        - artifact_dir: "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-close_out/"
-          phase: "close_out"
-          run_id: "build-plan-close-out-20260824"
       prior_depth_tier: "minimal"
       profile_depth: "not_measured"
   test_strategy:

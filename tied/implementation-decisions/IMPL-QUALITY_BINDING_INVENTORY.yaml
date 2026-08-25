@@ -3,10 +3,10 @@ IMPL-QUALITY_BINDING_INVENTORY:
     files:
       - description: "Binding inventory row validator"
         path: "mcp-server/src/analysis/binding-inventory.ts"
-      - description: "Unit coverage for valid, duplicate, malformed, and unsupported bindings"
-        path: "mcp-server/src/analysis/binding-inventory.test.ts"
       - description: "MCP binding_inventory_validate handler"
         path: "mcp-server/src/tools/index.ts"
+      - description: "Unit coverage for valid, duplicate, malformed, and unsupported bindings"
+        path: "mcp-server/src/analysis/binding-inventory.test.ts"
     functions:
       - description: "Validate composition binding inventory rows and diagnostics"
         file: "mcp-server/src/analysis/binding-inventory.ts"

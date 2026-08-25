@@ -1,21 +1,21 @@
 IMPL-MCP_LEAP_PROPOSAL_QUEUE:
   code_locations:
     files:
-      - description: "Queue, audit, extractDiffProposalCandidates, parseSessionExportSegments [REQ-LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [IMPL-MCP_LEAP_PROPOSAL_QUEUE]"
-        path: "mcp-server/src/analysis/leap-proposal-queue.ts"
-      - description: "Unit tests for queue and session parsing"
-        path: "mcp-server/src/analysis/leap-proposal-queue.test.ts"
-      - description: "tied_leap_proposal_* handlers and safeLeapCall"
-        path: "mcp-server/src/tools/index.ts"
       - description: "Composition tests — MCP handler wiring to leap-proposal-queue (no UI) [REQ-LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [IMPL-MCP_LEAP_PROPOSAL_QUEUE]"
         path: "mcp-server/src/tools/leap-proposal-mcp.test.ts"
+      - description: "Queue, audit, extractDiffProposalCandidates, parseSessionExportSegments [REQ-LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [IMPL-MCP_LEAP_PROPOSAL_QUEUE]"
+        path: "mcp-server/src/analysis/leap-proposal-queue.ts"
+      - description: "tied_leap_proposal_* handlers and safeLeapCall"
+        path: "mcp-server/src/tools/index.ts"
+      - description: "Unit tests for queue and session parsing"
+        path: "mcp-server/src/analysis/leap-proposal-queue.test.ts"
     functions:
-      - description: "Read queue.json or empty default; strip UTF-8 BOM before parse; DIAGNOSTIC on parse failure"
-        file: "mcp-server/src/analysis/leap-proposal-queue.ts"
-        name: "loadQueue"
       - description: "Deterministic git + line scan; outer catch returns error field"
         file: "mcp-server/src/analysis/leap-proposal-queue.ts"
         name: "extractDiffProposalCandidates"
+      - description: "Read queue.json or empty default; strip UTF-8 BOM before parse; DIAGNOSTIC on parse failure"
+        file: "mcp-server/src/analysis/leap-proposal-queue.ts"
+        name: "loadQueue"
   cross_references:
     - "ARCH-LEAP_PROPOSAL_QUEUE"
     - "REQ-LEAP_PROPOSAL_QUEUE"

@@ -65,6 +65,11 @@ CITDP-REQ-TIED_SETUP-VOCABULARY_LAYER:
     workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
   risk_analysis:
     risks:
+      - description: "IMPL pseudo-code, source comments, tests, and REQ/ARCH/IMPL records can drift during version alignment."
+        id: "RISK-TRACEABILITY-001"
+        likelihood: "Medium"
+        mitigation: "Apply block-lead comments, perform LEAP reconciliation, and run pseudo-code plus TIED consistency validation."
+        severity: "High"
       - description: "New methodology terms are used without canonical glossary ownership."
         id: "RISK-VOCABULARY-001"
         likelihood: "Medium"
@@ -75,11 +80,6 @@ CITDP-REQ-TIED_SETUP-VOCABULARY_LAYER:
         likelihood: "Medium"
         mitigation: "Treat whole-file preservation as the selected contract and cover it byte-for-byte in the bootstrap fixture."
         severity: "Medium"
-      - description: "IMPL pseudo-code, source comments, tests, and REQ/ARCH/IMPL records can drift during version alignment."
-        id: "RISK-TRACEABILITY-001"
-        likelihood: "Medium"
-        mitigation: "Apply block-lead comments, perform LEAP reconciliation, and run pseudo-code plus TIED consistency validation."
-        severity: "High"
     summary: "The change is documentation- and bootstrap-focused; the main risks are vocabulary ambiguity, intentional MCP config preservation, and three-way traceability drift."
   tdd_sequence:
     summary: "Updated IMPL pseudo-code and vocabulary contracts first, aligned source/test comments and REQ/ARCH/IMPL records, added preservation assertions, then executed validation gates. No UI E2E was required."

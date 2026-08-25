@@ -1,0 +1,100 @@
+CITDP-REQ-TIED_FIDELITY_RESEARCH-reddit-post:
+  change_definition:
+    current_behavior: "Informal technical-debt hypothesis about TIED without publishable outreach artifact, falsification criteria, proof boundaries, or separated execution plan."
+    desired_behavior: "Dual-purpose refined plan: Reddit-ready post (honest operational hypothesis) plus team execution plan with evidence classes, smallest experiments, post variants, subreddit targeting, and counterarguments aligned with REQ-TIED_FIDELITY_RESEARCH."
+    non_goals:
+      - "Mutate REQ/ARCH/IMPL YAML or run fidelity pilot in this pass."
+      - "Promote repository or tool without sponsor-approved link policy."
+      - "Prove TIED reduces technical debt scientifically."
+      - "Treat Reddit engagement as fidelity evidence."
+    success_criteria:
+      - "Execution plan defines evidence that counts vs does not count."
+      - "pre_implementation checklist gate returns allowed true at minimal depth."
+      - "Publishable post (section 2) separates hypothesis from proof and includes falsification hooks."
+      - "Section 0 refine gates document resolved terms, depth policy, and workflow artifacts."
+      - "Three community falsification experiments documented with disconfirming criteria."
+    unchanged_behavior:
+      - "CITDP persistence to tied/citdp/ remains deferred per citdp-policy for docs-only work."
+      - "No methodology code, MCP behavior, or checklist gate implementation changes."
+      - "REQ-TIED_FIDELITY_RESEARCH requirement scope and fidelity research plan structure."
+  completion_criteria:
+    activation: null
+    plan_ready_status: "ready"
+    plan_ready_when:
+      - "Per-request Tracker and CITDP draft under working/REQ-TIED_FIDELITY_RESEARCH/."
+      - "pre_implementation gate receipt stored."
+      - "Refined plan document complete with sections 0-6."
+      - "Vocabulary RECORD for outreach terms in fidelity-research.md."
+    refine_plan_gate_receipt: "working/REQ-TIED_FIDELITY_RESEARCH/gate-reddit-post-refinement-pre-implementation.json"
+  impact_analysis:
+    files:
+      - "docs/social/reddit-post-tied-technical-debt-investigation.md"
+      - "tied/vocab/fidelity-research.md"
+      - "working/REQ-TIED_FIDELITY_RESEARCH/CITDP-REQ-TIED_FIDELITY_RESEARCH-reddit-post-draft.yaml"
+      - "working/REQ-TIED_FIDELITY_RESEARCH/REQ-TIED_FIDELITY_RESEARCH_reddit-post-refinement_20260825.yaml"
+    modules_or_boundaries:
+      - "community falsification experiment vs fidelity research pilot"
+      - "operational hypothesis vs proof boundary claims"
+      - "publishable outreach artifact vs internal execution plan"
+    tied_tokens_affected:
+      - "REQ-TIED_FIDELITY_RESEARCH"
+  leap_feedback:
+    divergences_from_analysis: "none"
+    record_status: "draft"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "REQ-TIED_FIDELITY_RESEARCH"
+    record_status: "draft_deferred_until_implementation"
+    recorded_at: {}
+    title: "Reddit post and operational-hypothesis outreach framing"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "Agent completes checklist steps in prose without gate receipts."
+        - "Explicit deferrals accumulate without expiry or revisit."
+        - "Public post overclaims beyond proof boundary."
+        - "Repository appears disciplined while binding seams lack composition evidence."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Community falsification experiment A adds no failure modes beyond verbal review."
+        - "Gate receipts show prose-only agent completion at same rate as ungated workflow."
+        - "Pilot shows unchanged integration-defect rate and ambiguous-rework time vs control."
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "docs/social/reddit-post-tied-technical-debt-investigation.md"
+        - "docs/tied-fidelity-research-plan.md"
+        - "tied/vocab/fidelity-research.md"
+      falsification_questions:
+        - "Do checklist gates block agent prose-only completion in practice?"
+        - "Does binding inventory plus composition test reduce first integration defect vs prior changes?"
+        - "Does explicit failure-mode classification surface issues reviewers would not raise anyway?"
+        - "Where does TIED still allow invisible debt while the repo looks complete?"
+      gate_policy: "advisory"
+      prior_depth_tier: null
+      profile_depth: "not_measured"
+    planned_follow_on:
+      depth_tier: "integrated"
+      gate_policy: "advisory"
+      rationale: "Fidelity pilot build-plan compares with/without method on bounded change set with finding ledger."
+    risks:
+      - id: "RISK-OUTREACH-002"
+        mitigation: "Explicit does-not-count column for engagement metrics; require pilot for quantitative claims."
+        severity: "medium"
+        summary: "Reddit engagement conflated with fidelity evidence."
+      - id: "RISK-OUTREACH-003"
+        mitigation: "Require successful control changes in pilot design."
+        severity: "medium"
+        summary: "Anecdotal case studies introduce selection bias."
+      - id: "RISK-OUTREACH-001"
+        mitigation: "Sponsor review; operational hypothesis framing; section 3 proof boundaries."
+        severity: "high"
+        summary: "Public post overclaims TIED efficacy."
+  test_strategy:
+    commands: []
+    composition_tests: []
+    documentation_checks:
+      - "Manual review: sections 0-6 present and Reddit post readable standalone."
+      - "tied_checklist_gate_validate phase pre_implementation with Tracker and CITDP."
+      - "Vocabulary RECORD in fidelity-research.md for outreach terms."
+    unit_tests: []
+    verification_notes: "No code tests; documentation pass only."

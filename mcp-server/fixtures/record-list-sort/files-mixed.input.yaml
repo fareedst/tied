@@ -1,0 +1,5 @@
+code_locations:
+  files:
+    - tools/zeta/main.go
+    - description: CITDP module
+      path: tied/citdp/module.go

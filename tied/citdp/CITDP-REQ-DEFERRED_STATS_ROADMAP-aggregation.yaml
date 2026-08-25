@@ -30,14 +30,14 @@ CITDP-REQ-DEFERRED_STATS_ROADMAP-aggregation:
         result: "Syntax OK"
       - command: "ruby scripts/analyze_tied_mcp_metrics_test.rb"
         result: "passed: analyze_tied_mcp_metrics_test: ok"
-      - command: "TIED MCP pseudocode_validate IMPL-MCP_USAGE_METRICS with Ruby coverage references"
-        result: "passed: ok true; structural proof boundary"
-      - command: "TIED MCP yaml_index_validate"
-        result: "passed: all four indexes valid"
-      - command: "TIED MCP tied_validate_consistency"
-        result: "passed: ok true"
       - command: "ruby scripts/validate_vocab_index.rb"
         result: "passed: Vocabulary index validation passed."
+      - command: "TIED MCP pseudocode_validate IMPL-MCP_USAGE_METRICS with Ruby coverage references"
+        result: "passed: ok true; structural proof boundary"
+      - command: "TIED MCP tied_validate_consistency"
+        result: "passed: ok true"
+      - command: "TIED MCP yaml_index_validate"
+        result: "passed: all four indexes valid"
     manifest_reference: null
     profile_reference: null
     proof_boundaries:
@@ -100,15 +100,15 @@ CITDP-REQ-DEFERRED_STATS_ROADMAP-aggregation:
           reason: null
           required: "false"
       - applicability: "not_applicable"
-        attribute: "external-input-security"
+        attribute: "ai-enabled"
         command_or_test: "approved plan and diff review"
         evidence_method: "scope review"
-        limitation: "Existing file input handling is unchanged."
+        limitation: "The analyzer may inspect agent-tool metrics but does not invoke a model."
         owner: "TIED analyzer maintainers"
-        rationale: "No new trust, authorization, network, path-resolution, or content-execution boundary is introduced."
+        rationale: "No model, prompt, generated-content, or agent authorization boundary changes."
         result: "not applicable"
         risk: "none introduced"
-        threshold: "no new trust boundary"
+        threshold: "no AI boundary"
         waiver:
           expiry: null
           owner: null
@@ -130,15 +130,15 @@ CITDP-REQ-DEFERRED_STATS_ROADMAP-aggregation:
           reason: null
           required: "false"
       - applicability: "not_applicable"
-        attribute: "stateful-reliability"
+        attribute: "external-input-security"
         command_or_test: "approved plan and diff review"
         evidence_method: "scope review"
-        limitation: "In-process accumulator behavior is baseline-functional, not durable state."
+        limitation: "Existing file input handling is unchanged."
         owner: "TIED analyzer maintainers"
-        rationale: "No retry, recovery, concurrency, restart, or durable state machine changes."
+        rationale: "No new trust, authorization, network, path-resolution, or content-execution boundary is introduced."
         result: "not applicable"
         risk: "none introduced"
-        threshold: "no stateful workflow"
+        threshold: "no new trust boundary"
         waiver:
           expiry: null
           owner: null
@@ -160,21 +160,6 @@ CITDP-REQ-DEFERRED_STATS_ROADMAP-aggregation:
           reason: null
           required: "false"
       - applicability: "not_applicable"
-        attribute: "user-facing-accessibility"
-        command_or_test: "approved plan and diff review"
-        evidence_method: "scope review"
-        limitation: "CLI YAML fields are developer-facing and covered functionally."
-        owner: "TIED analyzer maintainers"
-        rationale: "No user interface or interaction contract changes."
-        result: "not applicable"
-        risk: "none introduced"
-        threshold: "no user-facing surface"
-        waiver:
-          expiry: null
-          owner: null
-          reason: null
-          required: "false"
-      - applicability: "not_applicable"
         attribute: "regulated-privacy"
         command_or_test: "approved plan and diff review"
         evidence_method: "scope review"
@@ -190,15 +175,30 @@ CITDP-REQ-DEFERRED_STATS_ROADMAP-aggregation:
           reason: null
           required: "false"
       - applicability: "not_applicable"
-        attribute: "ai-enabled"
+        attribute: "stateful-reliability"
         command_or_test: "approved plan and diff review"
         evidence_method: "scope review"
-        limitation: "The analyzer may inspect agent-tool metrics but does not invoke a model."
+        limitation: "In-process accumulator behavior is baseline-functional, not durable state."
         owner: "TIED analyzer maintainers"
-        rationale: "No model, prompt, generated-content, or agent authorization boundary changes."
+        rationale: "No retry, recovery, concurrency, restart, or durable state machine changes."
         result: "not applicable"
         risk: "none introduced"
-        threshold: "no AI boundary"
+        threshold: "no stateful workflow"
+        waiver:
+          expiry: null
+          owner: null
+          reason: null
+          required: "false"
+      - applicability: "not_applicable"
+        attribute: "user-facing-accessibility"
+        command_or_test: "approved plan and diff review"
+        evidence_method: "scope review"
+        limitation: "CLI YAML fields are developer-facing and covered functionally."
+        owner: "TIED analyzer maintainers"
+        rationale: "No user interface or interaction contract changes."
+        result: "not applicable"
+        risk: "none introduced"
+        threshold: "no user-facing surface"
         waiver:
           expiry: null
           owner: null
@@ -216,15 +216,15 @@ CITDP-REQ-DEFERRED_STATS_ROADMAP-aggregation:
         likelihood: "Medium"
         mitigation: "Aggregate status is approximate whenever any per-file status is approximate."
         severity: "High"
-      - description: "Input order could choose a different sample_args_summary for the same signature key."
-        id: "RISK-AGG-002"
-        likelihood: "Medium"
-        mitigation: "Select the lexically smallest recursively key-sorted canonical JSON sample."
-        severity: "Medium"
       - description: "Aggregate schema errors could remain zero despite invalid records in source reports."
         id: "RISK-AGG-003"
         likelihood: "High"
         mitigation: "Sum per-file schema_errors and verify with two independent fixture files."
+        severity: "Medium"
+      - description: "Input order could choose a different sample_args_summary for the same signature key."
+        id: "RISK-AGG-002"
+        likelihood: "Medium"
+        mitigation: "Select the lexically smallest recursively key-sorted canonical JSON sample."
         severity: "Medium"
     scenarios:
       - "A file with 51 distinct signatures must not report exact coverage."

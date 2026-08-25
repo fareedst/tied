@@ -44,8 +44,8 @@ test("canonicalizes nested maps and eligible string lists without changing scala
   ]);
   assert.deepEqual((result as any).names, ["alpha", "zeta"]);
   assert.deepEqual((result as any).order, ["step-2", "step-1"]);
-  assert.deepEqual((result as any).object_list, [{ z: 1 }, { a: 2 }]);
-  assert.deepEqual((result as any).mixed, ["z", 1]);
+  assert.deepEqual((result as any).object_list, [{ a: 2 }, { z: 1 }]);
+  assert.deepEqual((result as any).mixed, [1, "z"]);
   assert.equal(typeof (result as any).z, "number");
   assert.equal(typeof (result as any).nested.beta, "boolean");
   assert.equal((result as any).nullable, null);
@@ -73,13 +73,14 @@ test("canonicalizes mixed-case phrase lists and map keys deterministically REQ-T
 });
 
 // [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
-// How: Protect workflow order lists for exact key, prefix, suffix, and combined ordered-key naming patterns.
+// How: Protect workflow order and step lists for exact key, prefix, suffix, and combined ordered-key naming patterns.
 test("preserves every ordered-list key variant REQ-TIED_YAML_CANONICALIZATION", () => {
   const value = {
     order: ["b", "a"],
     order_steps: ["b", "a"],
     recommended_order: ["b", "a"],
     recommended_order_steps: ["b", "a"],
+    steps: ["b", "a"],
     ordinary: ["b", "a"],
   };
 
@@ -89,6 +90,7 @@ test("preserves every ordered-list key variant REQ-TIED_YAML_CANONICALIZATION", 
   assert.deepEqual(result.order_steps, ["b", "a"]);
   assert.deepEqual(result.recommended_order, ["b", "a"]);
   assert.deepEqual(result.recommended_order_steps, ["b", "a"]);
+  assert.deepEqual(result.steps, ["b", "a"]);
   assert.deepEqual(result.ordinary, ["a", "b"]);
 });
 
@@ -113,11 +115,11 @@ test("reports tied-yaml-canonical-v1 metadata REQ-TIED_YAML_CANONICALIZATION", (
     metadata.recursive_key_order,
     "case-insensitive-primary locale-independent lexical with original-value tie-break",
   );
-  assert.equal(metadata.ordered_list_key_pattern, "order|order_*|*_order|*_order_*");
+  assert.equal(metadata.ordered_list_key_pattern, "order|order_*|*_order|*_order_*|steps|steps_*|*_steps|*_steps_*");
   assert.equal(metadata.string_list_rule, "sort all-string lists except ordered-list keys");
   assert.equal(
     metadata.record_list_rule,
-    "sort recognized mapping-record lists by registry stable fields; preserve unrecognized object/mixed lists and ordered-list keys",
+    "tier-0/tier-1 heterogeneous list sorting: strings/arrays/keyless maps before keyed maps; registry and heuristic map lists sort by fieldName.fieldValue; ordered-list keys preserve document order",
   );
   assert.equal(metadata.scalar_policy, "preserve string, boolean, number, and null types");
   assert.equal(metadata.opaque_block_policy, "preserve block-scalar bodies and IMPL pseudo-code sidecars");
@@ -188,10 +190,10 @@ test("record-list tie-break uses case-insensitive-primary ordering REC-TIE-BREAK
   );
 });
 
-test("preserves unrecognized object lists REC-UNRECOGNIZED-PRESERVE REQ-TIED_YAML_CANONICALIZATION", () => {
+test("sorts unrecognized homogeneous map lists by canonical fingerprint REC-UNRECOGNIZED-PRESERVE REQ-TIED_YAML_CANONICALIZATION", () => {
   const value = loadFixture("unrecognized-preserve.input.yaml") as Record<string, unknown>;
   const result = canonicalizeValue(value) as any;
-  assert.deepEqual(result.object_list, [{ z: 1 }, { a: 2 }]);
+  assert.deepEqual(result.object_list, [{ a: 2 }, { z: 1 }]);
 });
 
 test("preserves record lists under ordered-list keys REC-ORDERED-KEY-PRESERVE REQ-TIED_YAML_CANONICALIZATION", () => {
@@ -207,20 +209,79 @@ test("preserves record lists under ordered-list keys REC-ORDERED-KEY-PRESERVE RE
   );
 });
 
-test("preserves record list order when sort field missing REC-MISSING-FIELD-SKIP REQ-TIED_YAML_CANONICALIZATION", () => {
+test("missing registry sort field stays tier 0 before keyed records REC-MISSING-FIELD-SKIP REQ-TIED_YAML_CANONICALIZATION", () => {
   const value = loadFixture("missing-field-skip.input.yaml") as Record<string, unknown>;
   const result = canonicalizeValue(value) as any;
   assert.deepEqual(result.satisfaction_criteria.length, 3);
-  assert.equal(result.satisfaction_criteria[0].criterion, "Beta");
-  assert.equal(result.satisfaction_criteria[1].metric, "orphan metric");
+  assert.equal(result.satisfaction_criteria[0].metric, "orphan metric");
+  assert.deepEqual(
+    result.satisfaction_criteria.slice(1).map((item: any) => item.criterion),
+    ["Alpha", "Beta"],
+  );
 });
 
 test("record-list registry matches ARCH contract REQ-TIED_YAML_CANONICALIZATION", () => {
   assert.deepEqual(Object.keys(RECORD_LIST_REGISTRY).sort(), [
     "alternatives_considered",
+    "files",
+    "functions",
+    "risks",
     "satisfaction_criteria",
     "validation_criteria",
   ]);
+});
+
+test("sorts files by description with CITDP before Shared REC-FILES-DESCRIPTION REQ-TIED_YAML_CANONICALIZATION", () => {
+  const value = loadFixture("files-description.input.yaml") as Record<string, unknown>;
+  const result = canonicalizeValue(value) as any;
+  assert.deepEqual(
+    result.code_locations.files.map((item: any) => item.description),
+    ["CITDP analysis module", "Shared utilities"],
+  );
+});
+
+test("sorts files string-only shorthand by path REC-FILES-STRING REQ-TIED_YAML_CANONICALIZATION", () => {
+  const value = loadFixture("files-string-only.input.yaml") as Record<string, unknown>;
+  const result = canonicalizeValue(value) as any;
+  assert.deepEqual(result.code_locations.files, ["tools/alpha/main.go", "tools/zeta/main.go"]);
+});
+
+test("sorts mixed files with string paths before keyed maps REC-FILES-MIXED REQ-TIED_YAML_CANONICALIZATION", () => {
+  const value = loadFixture("files-mixed.input.yaml") as Record<string, unknown>;
+  const result = canonicalizeValue(value) as any;
+  assert.equal(result.code_locations.files[0], "tools/zeta/main.go");
+  assert.equal(result.code_locations.files[1].description, "CITDP module");
+});
+
+test("sorts functions by description REC-FUNCTIONS-DESCRIPTION REQ-TIED_YAML_CANONICALIZATION", () => {
+  const value = loadFixture("functions-description.input.yaml") as Record<string, unknown>;
+  const result = canonicalizeValue(value) as any;
+  assert.deepEqual(
+    result.code_locations.functions.map((item: any) => item.description),
+    ["Alpha handler", "Zebra handler"],
+  );
+});
+
+test("sorts functions string-only shorthand by name REC-FUNCTIONS-STRING REQ-TIED_YAML_CANONICALIZATION", () => {
+  const value = loadFixture("functions-string-only.input.yaml") as Record<string, unknown>;
+  const result = canonicalizeValue(value) as any;
+  assert.deepEqual(result.code_locations.functions, ["HandleAlpha", "HandleZebra"]);
+});
+
+test("sorts heterogeneous checklist with strings before keyed maps REC-HETEROGENEOUS-CHECKLIST REQ-TIED_YAML_CANONICALIZATION", () => {
+  const value = loadFixture("heterogeneous-checklist.input.yaml") as Record<string, unknown>;
+  const result = canonicalizeValue(value) as any;
+  assert.equal(result.checklist_notes[0], "zebra note");
+  assert.equal(result.checklist_notes[1].note, "alpha detail");
+});
+
+test("preserves implementation_order files list under *_order key REC-ORDERED-KEY-FILES REQ-TIED_YAML_CANONICALIZATION", () => {
+  const value = loadFixture("ordered-key-files-preserve.input.yaml") as Record<string, unknown>;
+  const result = canonicalizeValue(value) as any;
+  assert.deepEqual(
+    result.implementation_order.map((item: any) => item.description),
+    ["Zebra file", "Alpha file"],
+  );
 });
 
 test("wrapped style quotes strings and preserves typed scalar output REQ-TIED_YAML_STYLE_CONFIGURATION", () => {

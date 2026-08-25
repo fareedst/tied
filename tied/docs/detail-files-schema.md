@@ -65,7 +65,7 @@ This document describes the YAML structure for individual REQ, ARCH, and IMPL to
 | `decision` | Short statement | string |
 | `rationale` | why, problems_solved, benefits | map |
 | `implementation_approach` | summary, details (list); optional phases, task_structure | map |
-| `code_locations` | files (path, description, lines?), functions (name, file, description) | map |
+| `code_locations` | files (path, description, lines?), functions (name, file, description) | map; **`files`** and **`functions`** are **recognized record lists** — canonical lint sorts map items by `description` (fallback `path` / `name`) and accepts string shorthand items in tier 0 |
 | `traceability` | architecture, requirements, tests, code_annotations | map of lists |
 | `related_decisions` | depends_on, supersedes, see_also (optional composed_with) | map of lists |
 | `essence_pseudocode` | Language-agnostic step-wise pseudo-code (main steps, data flow, control flow). Mandatory when project mandates it; used for collision detection and token-ref validation. In project IMPL detail, the body is stored in **`tied/implementation-decisions/IMPL-{TOKEN}-pseudocode.md`**; MCP/load merges it as this logical field. Legacy layouts may still inline it in YAML. | string (multiline) |

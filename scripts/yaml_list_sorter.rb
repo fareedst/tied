@@ -10,7 +10,10 @@ require_relative "yaml_semantic_compare"
 RECORD_LIST_REGISTRY = {
   "satisfaction_criteria" => ["criterion"],
   "validation_criteria" => ["method"],
-  "alternatives_considered" => ["name"]
+  "alternatives_considered" => ["name"],
+  "files" => ["description", "path"],
+  "functions" => ["description", "name"],
+  "risks" => ["description", "mitigation"]
 }.freeze
 
 # Raised when post-sort semantic comparison fails or sorted content does not parse.
@@ -28,8 +31,8 @@ end
 # optional --sort-keys recursively sorts sibling map keys at every indent level.
 # Block-scalar bodies (| or >) and multiline quoted scalars (' or ") are opaque: string content
 # is never sorted as keys or lists.
-# Lists whose owning map key matches order / *_order / order_* / *_order_* (e.g.
-# recommended_validation_order, order_steps) are left in document order and are not
+# Lists whose owning map key matches order / *_order / order_* / *_order_* / steps / *_steps / steps_* / *_steps_*
+# (e.g. recommended_validation_order, order_steps, checklist steps) are left in document order and are not
 # treated as qualifying sortable groups.
 #
 # Sorts YAML list groups in one or more files.
@@ -116,7 +119,7 @@ class YamlListSorter
     compare_result = YamlSemanticCompare.compare(
       original_value,
       sorted_value,
-      unordered_arrays: string_groups_modified.positive?,
+      unordered_arrays: string_groups_modified.positive? || record_groups_modified.positive?,
       record_list_keys: RECORD_LIST_REGISTRY.keys
     )
 
@@ -217,7 +220,15 @@ class YamlListSorter
             output.concat(full_span)
           end
         else
-          output.concat(full_span)
+          groups_found += 1
+          sorted_group, modified = sort_heterogeneous_list_group(full_span, indentation, parent_key)
+          if modified
+            groups_modified += 1
+            record_groups_modified += 1
+            output.concat(sorted_group)
+          else
+            output.concat(full_span)
+          end
         end
       else
         output << lines[group_start]
@@ -381,18 +392,109 @@ class YamlListSorter
   end
 
   def sort_record_list_group(group, indentation, parent_key)
-    blocks = split_list_group_into_blocks(group, indentation)
-    fields = RECORD_LIST_REGISTRY.fetch(parent_key)
-    sort_field = fields.find do |field|
-      blocks.all? { |block| extract_record_sort_field(block, field) }
-    end
-    return [group, false] unless sort_field
+    sort_heterogeneous_list_group(group, indentation, parent_key, registry_fields: RECORD_LIST_REGISTRY.fetch(parent_key))
+  end
 
-    sorted_blocks = blocks.sort_by do |block|
-      canonical_sort_key(extract_record_sort_field(block, sort_field))
+  # [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
+  # How: Tier-0/tier-1 heterogeneous list sorting for unregistered map lists and mixed string/map blocks.
+  def sort_heterogeneous_list_group(group, indentation, parent_key, registry_fields: RECORD_LIST_REGISTRY[parent_key])
+    blocks = split_list_group_into_blocks(group, indentation)
+
+    tiered_blocks = blocks.map do |block|
+      if string_list_block?(block, indentation)
+        value = extract_string_list_item_value(block, indentation)
+        { tier: 0, sort_key: canonical_sort_key(value), block: block }
+      else
+        sort_field = resolve_map_sort_field(block, registry_fields)
+        if sort_field
+          value = extract_record_sort_field(block, sort_field)
+          { tier: 1, sort_key: canonical_sort_key("#{sort_field}.#{value}"), block: block }
+        else
+          { tier: 0, sort_key: canonical_sort_key(block_fingerprint(block, indentation)), block: block }
+        end
+      end
     end
+
+    tier0 = tiered_blocks.select { |entry| entry[:tier] == 0 }.sort_by { |entry| entry[:sort_key] }
+    tier1 = tiered_blocks.select { |entry| entry[:tier] == 1 }.sort_by { |entry| entry[:sort_key] }
+    sorted_blocks = (tier0 + tier1).map { |entry| entry[:block] }
     modified = sorted_blocks != blocks
     [sorted_blocks.flatten, modified]
+  end
+
+  def resolve_map_sort_field(block_lines, registry_fields)
+    return infer_heuristic_sort_field(block_lines) unless registry_fields
+
+    registry_fields.find { |field| extract_record_sort_field(block_lines, field) }
+  end
+
+  def infer_heuristic_sort_field(block_lines)
+    item_line = block_lines.find { |line| line.match?(LIST_ITEM_PATTERN) }
+    if item_line
+      item_content = item_line.sub(/^\s*- /, "").strip
+      unless item_content.start_with?('"', "'")
+        inline_match = item_line.match(/^\s*- ([^:]+):\s*(.+)$/)
+        if inline_match && !inline_match[1].strip.start_with?("{")
+          return inline_match[1].strip
+        end
+      end
+    end
+
+    record = parsed_map_record(block_lines)
+    return nil unless record
+
+    record.keys
+          .select { |key| record[key].is_a?(String) }
+          .map(&:to_s)
+          .sort_by { |key| canonical_sort_key(key) }
+          .first
+  rescue Psych::SyntaxError
+    nil
+  end
+
+  def parsed_map_record(block_lines)
+    parsed = parse_block_item(block_lines)
+    case parsed
+    when Hash
+      parsed
+    when Array
+      parsed.length == 1 && parsed.first.is_a?(Hash) ? parsed.first : nil
+    end
+  end
+
+  def parse_block_item(block_lines)
+    YAML.safe_load(block_lines.join)
+  end
+
+  def block_fingerprint(block_lines, indentation)
+    parsed = parse_block_item(block_lines)
+    canonical_fingerprint(parsed)
+  rescue Psych::SyntaxError
+    block_lines.join
+  end
+
+  def canonical_fingerprint(value)
+    case value
+    when Hash
+      pairs = value.map { |key, child| [key.to_s, canonical_fingerprint(child)] }
+      pairs.sort_by { |key, _child| canonical_sort_key(key) }.map { |key, child| "#{key}:#{child}" }.join("|")
+    when Array
+      value.map { |item| canonical_fingerprint(item) }.join(",")
+    else
+      value.to_s
+    end
+  end
+
+  def string_list_block?(block, indentation)
+    item_line = block.find { |line| line.match?(LIST_ITEM_PATTERN) && line.match(LIST_ITEM_PATTERN)[1] == indentation }
+    return false unless item_line
+
+    string_list_item_line?(item_line, indentation)
+  end
+
+  def extract_string_list_item_value(block, indentation)
+    item_line = block.find { |line| line.match?(LIST_ITEM_PATTERN) && line.match(LIST_ITEM_PATTERN)[1] == indentation }
+    unquote_scalar(item_line.sub(/^#{Regexp.escape(indentation)}- /, "").strip)
   end
 
   def split_list_group_into_blocks(group, indentation)
@@ -459,14 +561,18 @@ class YamlListSorter
     value
   end
 
-  # True for key names: order, *_order, order_*, *_order_* (underscore-bounded "order").
+  # True for key names: order, *_order, order_*, *_order_*, steps, *_steps, steps_*, *_steps_*.
   def order_preserving_key?(key_name)
     return false if key_name.nil?
 
     key_name == "order" ||
       key_name.start_with?("order_") ||
       key_name.end_with?("_order") ||
-      key_name.include?("_order_")
+      key_name.include?("_order_") ||
+      key_name == "steps" ||
+      key_name.start_with?("steps_") ||
+      key_name.end_with?("_steps") ||
+      key_name.include?("_steps_")
   end
 
   def walk_for_block_scalars(lines, start_idx, end_idx, regions)

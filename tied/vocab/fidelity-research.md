@@ -149,6 +149,17 @@ Use these primary origin labels exactly as defined by the research plan:
 `binding-composition-defect`, `CITDP-defect`, `LEAP-process-defect`,
 `documentation-defect`, and `environment-external-defect`.
 
+## Social and community research
+
+Outreach and public hypothesis tests use the same **proof boundary** discipline as formal fidelity research, but they do not substitute community engagement for measured evidence.
+
+| Preferred | Avoid | Notes |
+|---|---|---|
+| **operational hypothesis** | proven methodology, scientific result | Tentative claim with falsification criteria; distinct from confirmed finding or case report |
+| **community falsification experiment** | Reddit poll, engagement metric | Smallest bounded test a reader or team can run without full TIED adoption |
+| **publishable outreach artifact** | marketing post, proof announcement | Public-facing invitation to criticize the hypothesis; not an evidence corpus |
+| **social research pass** | fidelity pilot | Documentation-only planning (e.g. refine-plan for outreach); no behavior change |
+
 ## Checklist integration
 
 Adversarial inquiry extends `[PROC-AGENT_REQ_CHECKLIST]` through existing step slugs and the
@@ -190,6 +201,10 @@ convenience projection only and never satisfy another phase's pairing. See
 
 | Term | Section |
 |---|---|
+| **community falsification experiment** | Social and community research |
+| **operational hypothesis** | Social and community research |
+| **publishable outreach artifact** | Social and community research |
+| **social research pass** | Social and community research |
 | activation artifact pairing | Preferred terms vs synonyms |
 | activation_pairing_incomplete | Evidence remediation diagnostics |
 | command_success_unproven | Evidence remediation diagnostics |

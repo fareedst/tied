@@ -1,10 +1,10 @@
 IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS:
   code_locations:
     files:
-      - description: "Export pipeline [REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS]"
-        path: "tools/agent-stream/lib/atdd_export_tdd_prompts.rb"
       - description: "CLI entry for export"
         path: "tools/agent-stream/export_tdd_prompts.rb"
+      - description: "Export pipeline [REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS]"
+        path: "tools/agent-stream/lib/atdd_export_tdd_prompts.rb"
       - description: "Shared step parsing"
         path: "tools/agent-stream/lib/tdd_loop_prompts.rb"
   cross_references:

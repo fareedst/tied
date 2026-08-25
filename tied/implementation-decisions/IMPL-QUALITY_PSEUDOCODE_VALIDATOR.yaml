@@ -3,10 +3,10 @@ IMPL-QUALITY_PSEUDOCODE_VALIDATOR:
     files:
       - description: "Layer B pseudo-code structure and contract validator"
         path: "mcp-server/src/analysis/pseudocode-validator.ts"
-      - description: "Unit coverage for parser, contracts, symbols, and coverage references"
-        path: "mcp-server/src/analysis/pseudocode-validator.test.ts"
       - description: "MCP pseudocode_validate handler"
         path: "mcp-server/src/tools/index.ts"
+      - description: "Unit coverage for parser, contracts, symbols, and coverage references"
+        path: "mcp-server/src/analysis/pseudocode-validator.test.ts"
     functions:
       - description: "Validate token linkage, contracts, symbols, dependencies, and optional coverage references"
         file: "mcp-server/src/analysis/pseudocode-validator.ts"

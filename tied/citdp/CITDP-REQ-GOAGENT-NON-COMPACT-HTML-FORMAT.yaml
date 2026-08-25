@@ -47,16 +47,16 @@ CITDP-REQ-GOAGENT-NON-COMPACT-HTML-FORMAT:
     workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
   risk_analysis:
     risks:
-      - description: "Operators enable non-compact HTML in automation that assumed single-line bodies; diffs or log parsers break.\n"
-        id: "RISK-NC-001"
-        likelihood: "Low"
-        mitigation: "Default off; document flags; regression tests for disabled path."
-        severity: "Medium"
       - description: "Formatter or indent rules produce non-deterministic or surprising HTML on edge-case UTF-8.\n"
         id: "RISK-NC-002"
         likelihood: "Low"
         mitigation: "Unit tests; CONTRACT in IMPL; stable-indent option bounded."
         severity: "Low"
+      - description: "Operators enable non-compact HTML in automation that assumed single-line bodies; diffs or log parsers break.\n"
+        id: "RISK-NC-001"
+        likelihood: "Low"
+        mitigation: "Default off; document flags; regression tests for disabled path."
+        severity: "Medium"
   tdd_sequence:
     summary: "unit-test-red: failing tests in htmlformat_test.go (and shims as per checklist). unit-test-green: implement htmlformat, config, cmd.\ncomposition-integration: compose_noncompact_test. end-to-end-ui: not applicable; Phase H documents composition authority.\n"
   test_strategy:

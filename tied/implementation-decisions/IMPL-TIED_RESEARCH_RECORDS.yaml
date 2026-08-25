@@ -1,21 +1,21 @@
 IMPL-TIED_RESEARCH_RECORDS:
   code_locations:
     files:
-      - description: "Research record normalization, freshness, and external dataset boundary"
-        path: "mcp-server/src/research-records.ts"
-      - description: "Research record unit validation"
-        path: "mcp-server/src/research-records.test.ts"
       - description: "Research record MCP composition handler"
         path: "mcp-server/src/tools/index.ts"
       - description: "Research record MCP composition test"
         path: "mcp-server/src/tools/batch-5-mcp.test.ts"
+      - description: "Research record normalization, freshness, and external dataset boundary"
+        path: "mcp-server/src/research-records.ts"
+      - description: "Research record unit validation"
+        path: "mcp-server/src/research-records.test.ts"
     functions:
       - file: "mcp-server/src/research-records.ts"
-        name: "normalizeResearchRecord"
+        name: "emitResearchDatasetRecord"
       - file: "mcp-server/src/research-records.ts"
         name: "evaluateResearchFreshness"
       - file: "mcp-server/src/research-records.ts"
-        name: "emitResearchDatasetRecord"
+        name: "normalizeResearchRecord"
   cross_references:
     - "ARCH-TIED_RESEARCH_RECORD_BOUNDARY"
     - "IMPL-TIED_FIDELITY_RESEARCH"

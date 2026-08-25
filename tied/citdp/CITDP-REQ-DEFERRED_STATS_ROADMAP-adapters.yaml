@@ -25,16 +25,16 @@ CITDP-REQ-DEFERRED_STATS_ROADMAP-adapters:
     verification_gate_notes: "PASS structural-only gates. No tied_verify call for IMPL-EVIDENCE_CHAIN_PROFILE and no runtime verification claim."
   evidence:
     commands:
-      - command: "TIED MCP pseudocode_validate IMPL-EVIDENCE_CHAIN_PROFILE dormant blocks with require_contracts true and require_behavioral_coverage false"
-        result: "passed: ok true; structural proof boundary only"
-      - command: "TIED MCP yaml_index_validate"
-        result: "passed: all four indexes valid"
-      - command: "TIED MCP tied_validate_consistency"
-        result: "passed: ok true"
       - command: "ruby scripts/validate_vocab_index.rb"
         result: "passed: Vocabulary index validation passed."
       - command: "search mcp-server/src for COLLECT_FILE_INVENTORY or COLLECT_VOCAB_DRIFT"
         result: "passed: no matches"
+      - command: "TIED MCP pseudocode_validate IMPL-EVIDENCE_CHAIN_PROFILE dormant blocks with require_contracts true and require_behavioral_coverage false"
+        result: "passed: ok true; structural proof boundary only"
+      - command: "TIED MCP tied_validate_consistency"
+        result: "passed: ok true"
+      - command: "TIED MCP yaml_index_validate"
+        result: "passed: all four indexes valid"
     manifest_reference: null
     profile_reference: null
     proof_boundaries:

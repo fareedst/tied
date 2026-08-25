@@ -82,7 +82,7 @@ end
 
 # Recursively compares Ruby values produced from YAML and records path-level differences.
 class DifferenceWalker
-  def initialize(unordered_arrays: false, record_list_keys: [])
+  def initialize(unordered_arrays: false, record_list_keys: YamlSemanticCompare::DEFAULT_RECORD_LIST_KEYS)
     @unordered_arrays = unordered_arrays
     @record_list_keys = record_list_keys.map(&:to_s).to_set
     @canonical_value = CanonicalValue.new(unordered_arrays: unordered_arrays)
@@ -106,9 +106,11 @@ class DifferenceWalker
     when Hash
       compare_hashes(left, right, path, result)
     when Array
-      if record_list_key
+      if ordered_key
+        compare_ordered_arrays(left, right, path, result)
+      elsif record_list_key || homogeneous_map_array?(left)
         compare_record_list_arrays(left, right, path, result)
-      elsif @unordered_arrays && !ordered_key
+      elsif @unordered_arrays
         compare_unordered_arrays(left, right, path, result)
       else
         compare_ordered_arrays(left, right, path, result)
@@ -142,6 +144,10 @@ class DifferenceWalker
         record_list_key: record_list_key?(key)
       )
     end
+  end
+
+  def homogeneous_map_array?(values)
+    values.is_a?(Array) && !values.empty? && values.all? { |item| item.is_a?(Hash) }
   end
 
   def record_list_key?(key)
@@ -253,11 +259,21 @@ class DifferenceWalker
   end
 end
 
+# Default parent keys whose mapping-record lists accept tier-aware reorder during semantic validation.
+DEFAULT_RECORD_LIST_KEYS = %w[
+  satisfaction_criteria
+  validation_criteria
+  alternatives_considered
+  files
+  functions
+  risks
+].freeze
+
 # Facade for comparing parsed YAML values.
 class YamlSemanticCompare
   CompareResult = Struct.new(:ok, :differences, keyword_init: true)
 
-  def self.compare(left, right, unordered_arrays: false, record_list_keys: [])
+  def self.compare(left, right, unordered_arrays: false, record_list_keys: DEFAULT_RECORD_LIST_KEYS)
     differences = DifferenceWalker.new(
       unordered_arrays: unordered_arrays,
       record_list_keys: record_list_keys

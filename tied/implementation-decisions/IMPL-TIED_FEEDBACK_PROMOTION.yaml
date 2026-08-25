@@ -1,23 +1,23 @@
 IMPL-TIED_FEEDBACK_PROMOTION:
   code_locations:
     files:
-      - description: "Operational source normalization, duplicate grouping, and reviewed proposal boundary"
-        path: "mcp-server/src/feedback-promotion.ts"
-      - description: "Operational feedback unit validation"
-        path: "mcp-server/src/feedback-promotion.test.ts"
       - description: "Additive operational feedback fields"
         path: "mcp-server/src/feedback.ts"
-      - description: "Operational feedback and promotion MCP handlers"
-        path: "mcp-server/src/tools/index.ts"
       - description: "Feedback MCP composition tests"
         path: "mcp-server/src/tools/batch-5-mcp.test.ts"
+      - description: "Operational feedback and promotion MCP handlers"
+        path: "mcp-server/src/tools/index.ts"
+      - description: "Operational feedback unit validation"
+        path: "mcp-server/src/feedback-promotion.test.ts"
+      - description: "Operational source normalization, duplicate grouping, and reviewed proposal boundary"
+        path: "mcp-server/src/feedback-promotion.ts"
     functions:
       - file: "mcp-server/src/feedback-promotion.ts"
-        name: "normalizeOperationalSource"
+        name: "createReviewedLeapProposal"
       - file: "mcp-server/src/feedback-promotion.ts"
         name: "groupDuplicateFeedback"
       - file: "mcp-server/src/feedback-promotion.ts"
-        name: "createReviewedLeapProposal"
+        name: "normalizeOperationalSource"
       - file: "mcp-server/src/feedback-promotion.ts"
         name: "reportPromotionStatus"
   cross_references:

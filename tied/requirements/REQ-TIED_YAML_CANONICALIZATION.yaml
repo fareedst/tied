@@ -15,8 +15,8 @@ REQ-TIED_YAML_CANONICALIZATION:
       date: "2026-08-06"
     last_updated:
       author: "AI Agent"
-      date: "2026-08-24"
-      reason: "LEAP: record-aware sorting for recognized mapping-record lists; align index/detail drift and propagate unchanged-path reporting contract"
+      date: "2026-08-25"
+      reason: "LEAP: heterogeneous tier policy and expanded record-list registry for code_locations files/functions"
   name: "Deterministic typed TIED YAML canonicalization"
   priority: "P0"
   rationale:
@@ -42,8 +42,9 @@ REQ-TIED_YAML_CANONICALIZATION:
     - criterion: "Compatibility sorting omits unchanged paths from normal stdout, retains summaries for modified paths, and keeps failure diagnostics on stderr"
     - criterion: "Every successful YAML write reports yaml_format metadata"
     - criterion: "MCP, yaml_tool, yaml_list_sorter, and yaml_semantic_compare share conformance fixtures"
-    - criterion: "Recognized record lists (satisfaction_criteria, validation_criteria, alternatives_considered) sort complete mapping records by configured stable fields; unrecognized object and mixed lists preserve order"
+    - criterion: "Recognized record lists (satisfaction_criteria, validation_criteria, alternatives_considered, files, functions, risks) sort complete mapping records by configured stable fields using tier-0/tier-1 heterogeneous ordering; string shorthand items in files and functions lists sort in tier 0"
     - criterion: "String-only lists sort except under ordered-list keys"
+    - criterion: "Unregistered homogeneous map lists sort by inferred first string-valued key; ordered-list keys preserve document order"
   status: "Implemented"
   traceability:
     architecture:

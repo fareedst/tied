@@ -84,14 +84,14 @@ CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-remediation:
     profile_depth: "integrated"
     rationale: "Remediation uses controlled fixture with external inquiry artifacts, provenance gaps, and strict close-out\nevidence requirements per integrated-activation enforcement plan §7.\n"
     risks:
-      - id: "RISK-REM-001"
-        mitigation: "Reference STDD dogfooding positive case in corpus manifest; classify limitation explicitly"
-        severity: "medium"
-        summary: "Fixture positive path blocked by incomplete provenance"
       - id: "RISK-REM-002"
         mitigation: "normalizeRemediationDiagnostics preserves granular and stable codes together"
         severity: "low"
         summary: "Diagnostic alias drift from granular codes"
+      - id: "RISK-REM-001"
+        mitigation: "Reference STDD dogfooding positive case in corpus manifest; classify limitation explicitly"
+        severity: "medium"
+        summary: "Fixture positive path blocked by incomplete provenance"
     structural_inquiry_disposition:
       artifact_dir: "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-pre_implementation/"
       mapped_mcp_phase: "pre_implementation"

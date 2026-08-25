@@ -1,0 +1,4 @@
+code_locations:
+  files:
+    - tools/zeta/main.go
+    - tools/alpha/main.go

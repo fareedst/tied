@@ -192,6 +192,46 @@ assert border_block.index('- alpha') < border_block.index('- zebra'),
        "border must still sort (not an order token):\n#{prefix_body}"
 forder_prefix.close!
 
+# --- steps / *_steps order-preserving (align with TS isOrderedListKey) ---
+fsteps = write_temp_yaml!(<<~YAML)
+  steps:
+    - slug: zebra
+      title: Zebra
+    - slug: alpha
+      title: Alpha
+  checklist_notes:
+    - zebra
+    - alpha
+YAML
+_out, _err, st = run_sorter([fsteps.path])
+assert st.success?, "steps order key: #{_err}"
+steps_body = File.read(fsteps.path)
+steps_block = steps_body[/steps:\n(.*?)\nchecklist_notes:/m, 1]
+assert steps_block.index('slug: zebra') < steps_block.index('slug: alpha'),
+       "steps list preserved:\n#{steps_body}"
+notes_block = steps_body[/checklist_notes:\n(.*)\z/m, 1]
+assert notes_block.index('- alpha') < notes_block.index('- zebra'),
+       "checklist_notes still sorted:\n#{steps_body}"
+fsteps.close!
+
+# --- heterogeneous tasks: inline map keys with spaces stay tier 1 after strings ---
+ftasks = write_temp_yaml!(<<~YAML)
+  tasks:
+    - "Identify affected modules, tokens, code, tests; build tied_context."
+    - "Stop expansion when set stabilizes."
+    - IMPL Discovery A1–A3: "load IMPL details, discover related IMPLs, build IMPL inventory table."
+YAML
+_out, _err, st = run_sorter([ftasks.path])
+assert st.success?, "heterogeneous tasks inline map key: #{_err}"
+tasks_body = File.read(ftasks.path)
+identify_idx = tasks_body.index('Identify affected modules')
+stop_idx = tasks_body.index('Stop expansion when set stabilizes')
+impl_idx = tasks_body.index('IMPL Discovery A1')
+assert identify_idx && stop_idx && impl_idx, "expected task lines:\n#{tasks_body}"
+assert identify_idx < stop_idx && stop_idx < impl_idx,
+       "map task must remain after string tasks:\n#{tasks_body}"
+ftasks.close!
+
 # --- nested non-order list under order-keyed maps still sorts ---
 forder_nested = write_temp_yaml!(<<~YAML)
   recommended_validation_order:
@@ -642,12 +682,9 @@ assert apple_pos && apple_lower_pos && zebra_pos
 assert apple_pos < apple_lower_pos && apple_lower_pos < zebra_pos, "tie-break order:\n#{body}"
 
 # --- REC-UNRECOGNIZED-PRESERVE ---
-f_unrec = write_temp_yaml!(load_record_fixture('unrecognized-preserve.input.yaml'))
-before_unrec = File.read(f_unrec.path)
-_out, _err, st = run_sorter([f_unrec.path])
-assert st.success?, "REC-UNRECOGNIZED-PRESERVE sort failed: #{_err}"
-assert File.read(f_unrec.path) == before_unrec, "unrecognized object_list order preserved"
-f_unrec.close!
+st, err, body = run_fixture_sorter('unrecognized-preserve.input.yaml')
+assert st.success?, "REC-UNRECOGNIZED-PRESERVE sort failed: #{err}"
+assert body.index('a: 2') < body.index('z: 1'), "unrecognized object_list sorted by fingerprint:\n#{body}"
 
 # --- REC-ORDERED-KEY-PRESERVE ---
 f_ord = write_temp_yaml!(load_record_fixture('ordered-key-preserve.input.yaml'))
@@ -659,12 +696,59 @@ assert after_ord.index('Zebra') < after_ord.index('Alpha'), "ordered keys preser
 f_ord.close!
 
 # --- REC-MISSING-FIELD-SKIP ---
-f_miss = write_temp_yaml!(load_record_fixture('missing-field-skip.input.yaml'))
-before_miss = File.read(f_miss.path)
-_out, _err, st = run_sorter([f_miss.path])
-assert st.success?, "REC-MISSING-FIELD-SKIP sort failed: #{_err}"
-assert File.read(f_miss.path) == before_miss, "missing criterion field preserves order:\n#{before_miss}"
-f_miss.close!
+st, err, body = run_fixture_sorter('missing-field-skip.input.yaml')
+assert st.success?, "REC-MISSING-FIELD-SKIP sort failed: #{err}"
+orphan_idx = body.index('orphan metric')
+alpha_idx = body.index('criterion: Alpha') || body.index('criterion: "Alpha"')
+beta_idx = body.index('criterion: Beta') || body.index('criterion: "Beta"')
+assert orphan_idx && alpha_idx && beta_idx, "expected tiered missing-field output:\n#{body}"
+assert orphan_idx < alpha_idx && alpha_idx < beta_idx, "orphan tier 0 before sorted criteria:\n#{body}"
+
+# --- REC-FILES-DESCRIPTION ---
+st, err, body = run_fixture_sorter('files-description.input.yaml')
+assert st.success?, "REC-FILES-DESCRIPTION sort failed: #{err}"
+assert body.index('CITDP analysis module') < body.index('Shared utilities'),
+       "files sorted by description:\n#{body}"
+
+# --- REC-FILES-STRING ---
+st, err, body = run_fixture_sorter('files-string-only.input.yaml')
+assert st.success?, "REC-FILES-STRING sort failed: #{err}"
+assert body.index('tools/alpha/main.go') < body.index('tools/zeta/main.go'),
+       "files string shorthand sorted:\n#{body}"
+
+# --- REC-FILES-MIXED ---
+st, err, body = run_fixture_sorter('files-mixed.input.yaml')
+assert st.success?, "REC-FILES-MIXED sort failed: #{err}"
+assert body.index('tools/zeta/main.go') < body.index('CITDP module'),
+       "mixed files: string tier before keyed map:\n#{body}"
+
+# --- REC-FUNCTIONS-DESCRIPTION ---
+st, err, body = run_fixture_sorter('functions-description.input.yaml')
+assert st.success?, "REC-FUNCTIONS-DESCRIPTION sort failed: #{err}"
+assert body.index('Alpha handler') < body.index('Zebra handler'),
+       "functions sorted by description:\n#{body}"
+
+# --- REC-FUNCTIONS-STRING ---
+st, err, body = run_fixture_sorter('functions-string-only.input.yaml')
+assert st.success?, "REC-FUNCTIONS-STRING sort failed: #{err}"
+assert body.index('HandleAlpha') < body.index('HandleZebra'),
+       "functions string shorthand sorted:\n#{body}"
+
+# --- REC-HETEROGENEOUS-CHECKLIST ---
+st, err, body = run_fixture_sorter('heterogeneous-checklist.input.yaml')
+assert st.success?, "REC-HETEROGENEOUS-CHECKLIST sort failed: #{err}"
+assert body.index('zebra note') < body.index('alpha detail'),
+       "heterogeneous checklist sorted:\n#{body}"
+
+# --- REC-ORDERED-KEY-FILES ---
+f_ord_files = write_temp_yaml!(load_record_fixture('ordered-key-files-preserve.input.yaml'))
+before_ord_files = File.read(f_ord_files.path)
+_out, _err, st = run_sorter([f_ord_files.path])
+assert st.success?, "REC-ORDERED-KEY-FILES sort failed: #{_err}"
+after_ord_files = File.read(f_ord_files.path)
+assert after_ord_files.index('Zebra file') < after_ord_files.index('Alpha file'),
+       "implementation_order preserves list order:\n#{after_ord_files}"
+f_ord_files.close!
 
 # --- REC-SEMANTIC-COMPARE: accept record reorder, reject scalar drift ---
 left_records = {
@@ -682,7 +766,10 @@ right_records = {
 record_reorder = YamlSemanticCompare.compare(
   left_records,
   right_records,
-  record_list_keys: %w[satisfaction_criteria validation_criteria alternatives_considered]
+  record_list_keys: %w[
+    satisfaction_criteria validation_criteria alternatives_considered
+    files functions risks
+  ]
 )
 assert record_reorder.ok, "record reorder should pass semantic compare: #{record_reorder.differences.inspect}"
 

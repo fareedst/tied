@@ -1,10 +1,10 @@
 IMPL-FEAT_ORCHESTRATION_MCP:
   code_locations:
     files:
-      - description: "Thin shared orchestration MCP router"
-        path: "mcp-server/src/feature-orchestration/mcp.ts"
       - description: "Registered feature orchestration MCP tools and canonical delegation"
         path: "mcp-server/src/tools/index.ts"
+      - description: "Thin shared orchestration MCP router"
+        path: "mcp-server/src/feature-orchestration/mcp.ts"
     functions:
       - file: "mcp-server/src/feature-orchestration/mcp.ts"
         name: "handleOrchestrationTool"

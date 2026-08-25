@@ -31,13 +31,50 @@ procedure CANONICALIZE_YAML_VALUE(value, path):
       ordered[key] := CANONICALIZE_YAML_VALUE(value[key], path + key)
     RETURN ordered
   IF value is a list:
+    IF IS_ORDERED_LIST_KEY(path parent key):
+      mapped := FOR each item IN value: CANONICALIZE_YAML_VALUE(item, path + index)
+      RETURN mapped
     mapped := FOR each item IN value: CANONICALIZE_YAML_VALUE(item, path + index)
     recognition := RECOGNIZE_RECORD_LIST(path_parent_key, value)
     IF recognition:
       RETURN SORT_RECORD_LIST(mapped, recognition)
-    IF every original element is a string AND path parent key is not an ordered-list key:
+    IF every original element is a string:
       RETURN canonical lexical sort(mapped)
-    RETURN mapped
+    RETURN SORT_HETEROGENEOUS_LIST(mapped, path_parent_key)
+
+## RESOLVE_LIST_ITEM_TIER
+# [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
+# How: Classify each list item as tier 0 (strings, arrays, keyless maps) or tier 1 (maps with resolved registry or heuristic sort field).
+procedure RESOLVE_LIST_ITEM_TIER(item, parent_key):
+  PRE: item is a canonicalized list element
+  POST: returns tier 0 or 1 and a canonical lexical sort key
+  EFFECTS: pure
+  FAILURE_MODES: none
+  TERMINATION: total
+  IF item is string: RETURN { tier: 0, sort_key: item }
+  IF item is array: RETURN { tier: 0, sort_key: canonical fingerprint(item) }
+  IF item is mapping:
+    sort_field := first configured registry field present on item when parent_key is registered
+    IF sort_field missing AND parent_key unregistered:
+      sort_field := lexicographically first string-valued key in item
+    IF sort_field present:
+      RETURN { tier: 1, sort_key: sort_field + "." + string value of sort_field }
+    RETURN { tier: 0, sort_key: canonical fingerprint(item) }
+  RETURN { tier: 0, sort_key: string(item) }
+
+## SORT_HETEROGENEOUS_LIST
+# [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
+# How: Sort tier 0 items before tier 1 items; within each tier sort by canonical lexical sort key with fingerprint tie-break.
+procedure SORT_HETEROGENEOUS_LIST(list_items, parent_key):
+  PRE: list_items is array; parent_key is not an ordered-list key
+  POST: tier 0 items precede tier 1 items; each tier sorted by COMPARE_CANONICAL_TEXT on sort key
+  EFFECTS: pure
+  FAILURE_MODES: none
+  TERMINATION: total
+  tiered := FOR each item: RESOLVE_LIST_ITEM_TIER(item, parent_key)
+  tier0 := stable_sort(items where tier == 0)
+  tier1 := stable_sort(items where tier == 1)
+  RETURN tier0 concatenated with tier1
 
 ## RECOGNIZE_RECORD_LIST
 # [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
@@ -51,7 +88,10 @@ procedure RECOGNIZE_RECORD_LIST(parent_key, list_items):
   RECORD_LIST_REGISTRY := {
     satisfaction_criteria: [criterion],
     validation_criteria: [method],
-    alternatives_considered: [name]
+    alternatives_considered: [name],
+    files: [description, path],
+    functions: [description, name],
+    risks: [description, mitigation]
   }
   IF parent_key not in RECORD_LIST_REGISTRY: RETURN nil
   IF any item is not a mapping: RETURN nil
@@ -154,9 +194,9 @@ procedure REPORT_YAML_FORMAT():
   RETURN {
     profile_id: "tied-yaml-canonical-v1",
     recursive_key_order: "case-insensitive-primary locale-independent lexical with original-value tie-break",
-    ordered_list_key_pattern: "order|order_*|*_order|*_order_*",
+    ordered_list_key_pattern: "order|order_*|*_order|*_order_*|steps|steps_*|*_steps|*_steps_*",
     string_list_rule: "sort all-string lists except ordered-list keys",
-    record_list_rule: "sort recognized mapping-record lists by registry stable fields; preserve unrecognized object/mixed lists and ordered-list keys",
+    record_list_rule: "tier-0/tier-1 heterogeneous list sorting: strings/arrays/keyless maps before keyed maps; registry and heuristic map lists sort by fieldName.fieldValue; ordered-list keys preserve document order",
     scalar_policy: "preserve string, boolean, number, and null types",
     opaque_block_policy: "preserve block-scalar bodies and IMPL pseudo-code sidecars"
   }

@@ -1,0 +1,6 @@
+code_locations:
+  files:
+    - description: Shared utilities
+      path: lib/shared.go
+    - description: CITDP analysis module
+      path: tied/citdp/module.go

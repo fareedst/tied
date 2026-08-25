@@ -1,14 +1,14 @@
 IMPL-EVIDENCE_CHAIN_PROFILE:
   code_locations:
     files:
-      - description: "Orchestrator types and normalizer"
-        path: "mcp-server/src/fidelity-research/evidence-chain-profile.ts"
-      - description: "Unit tests"
-        path: "mcp-server/src/fidelity-research/evidence-chain-profile.test.ts"
       - description: "MCP composition tests"
         path: "mcp-server/src/fidelity-research/evidence-chain-profile.mcp.test.ts"
+      - description: "Orchestrator types and normalizer"
+        path: "mcp-server/src/fidelity-research/evidence-chain-profile.ts"
       - description: "Shared project identity resolver"
         path: "mcp-server/src/project-identity.ts"
+      - description: "Unit tests"
+        path: "mcp-server/src/fidelity-research/evidence-chain-profile.test.ts"
   cross_references:
     - "ARCH-EVIDENCE_CHAIN_PROFILE"
     - "PROC-EVIDENCE_CHAIN"

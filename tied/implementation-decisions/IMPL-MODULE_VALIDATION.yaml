@@ -1,16 +1,16 @@
 IMPL-MODULE_VALIDATION:
   code_locations:
     files:
-      - description: "Module validation test files"
-        path: "*_module_test.[ext]"
-      - description: "Module validation test files (alternate pattern)"
-        path: "*_validation_test.[ext]"
-      - description: "Integration / composition test files"
-        path: "*_integration_test.[ext]"
       - description: "Binding inventory shape and composition vs E2E exclusion rule"
         path: "tied/docs/composition-coverage.md"
       - description: "Checklist ordering and composition instruction coverage"
         path: "tools/agentstream/checklist/*_test.go"
+      - description: "Integration / composition test files"
+        path: "*_integration_test.[ext]"
+      - description: "Module validation test files"
+        path: "*_module_test.[ext]"
+      - description: "Module validation test files (alternate pattern)"
+        path: "*_validation_test.[ext]"
       - description: "Pipeline binding composition coverage"
         path: "tools/agentstream/pipeline/*_test.go"
     functions:

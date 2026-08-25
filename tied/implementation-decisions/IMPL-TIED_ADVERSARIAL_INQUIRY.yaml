@@ -2,26 +2,26 @@ IMPL-TIED_ADVERSARIAL_INQUIRY:
   adversarial_inquiry:
     block_name: "BUILD_PROJECT_INQUIRY_INPUT"
     specification:
-      - id: "gotest-9-t.Errorf"
-        kind: "behavior"
-        order: 1
-        value: "t.Errorf(\"Divide(6, 2) = %d, want 3\", got)"
       - id: "gotest-13-t.Errorf"
         kind: "failure"
         order: 2
         value: "t.Errorf(\"Divide(1, 0) expected error, got nil\")"
+      - id: "gotest-9-t.Errorf"
+        kind: "behavior"
+        order: 1
+        value: "t.Errorf(\"Divide(6, 2) = %d, want 3\", got)"
   code_locations:
     files:
       - description: "Adversarial inquiry core, Ruby Minitest and Go test adapter boundaries, workflow, assurance, and pilot modules"
         path: "mcp-server/src/adversarial-inquiry/"
-      - description: "Go test evidence adapter (read-only parse; no shell inference)"
-        path: "mcp-server/src/adversarial-inquiry/go-evidence-adapter.ts"
-      - description: "Explicit-context Mode B project scope loader with Go and Ruby manifest profiles"
-        path: "mcp-server/src/adversarial-inquiry/project-scope-loader.ts"
-      - description: "Mode B project-input orchestrator and normalized checklist adapter"
-        path: "mcp-server/src/adversarial-inquiry/project-orchestrator.ts"
       - description: "Client configuration and offline adoption guidance"
         path: "docs/adversarial-inquiry-adoption.md"
+      - description: "Explicit-context Mode B project scope loader with Go and Ruby manifest profiles"
+        path: "mcp-server/src/adversarial-inquiry/project-scope-loader.ts"
+      - description: "Go test evidence adapter (read-only parse; no shell inference)"
+        path: "mcp-server/src/adversarial-inquiry/go-evidence-adapter.ts"
+      - description: "Mode B project-input orchestrator and normalized checklist adapter"
+        path: "mcp-server/src/adversarial-inquiry/project-orchestrator.ts"
   cross_references:
     - "ARCH-TIED_ADVERSARIAL_INQUIRY"
     - "REQ-TIED_ADVERSARIAL_INQUIRY"

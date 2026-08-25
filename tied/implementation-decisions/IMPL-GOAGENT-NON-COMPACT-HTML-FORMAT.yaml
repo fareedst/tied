@@ -1,14 +1,14 @@
 IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT:
   code_locations:
     files:
+      - description: "APPLY_TO_TURNS, FormatNonCompactHTML, addNonCompactLineBreaks, applyStableIndentLines, IntegrateWithMain (htmlformat); REQ/ARCH/IMPL: IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT"
+        path: "tools/agentstream/htmlformat/htmlformat.go"
       - description: "Integration: applyPostPreloadNonCompactHTML after ApplyPromptFilePreload (IMPL-GOAGENT-CLI-CMD + IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT composition)"
         path: "tools/agentstream/cmd/agentstream/main.go"
       - description: "MAP_CONFIG_TO_HTMLFORMAT_OPTIONS + call IntegrateWithMain; REQ/ARCH/IMPL: IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT; CLI via config.Config"
         path: "tools/agentstream/cmd/agentstream/compose_noncompact.go"
       - description: "NonCompactHTML, NonCompactHTMLStableIndent; --non-compact-html / --non-compact-html-indent (ARCH-GOAGENT-CLI / REQ-GOAGENT-CLI-CONFIG)"
         path: "tools/agentstream/config/config.go"
-      - description: "APPLY_TO_TURNS, FormatNonCompactHTML, addNonCompactLineBreaks, applyStableIndentLines, IntegrateWithMain (htmlformat); REQ/ARCH/IMPL: IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT"
-        path: "tools/agentstream/htmlformat/htmlformat.go"
     functions: []
   cross_references:
     - "ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT"

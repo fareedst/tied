@@ -1,10 +1,10 @@
 IMPL-FEAT_ORCHESTRATION_CLI:
   code_locations:
     files:
-      - description: "Thin feature-orchestrator argument adapter"
-        path: "mcp-server/src/feature-orchestration/cli.ts"
       - description: "Standalone binary entry point"
         path: "mcp-server/src/feature-orchestration/entry.ts"
+      - description: "Thin feature-orchestrator argument adapter"
+        path: "mcp-server/src/feature-orchestration/cli.ts"
     functions:
       - file: "mcp-server/src/feature-orchestration/cli.ts"
         name: "runFeatureOrchestrator"

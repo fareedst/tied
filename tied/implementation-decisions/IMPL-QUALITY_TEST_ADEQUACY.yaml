@@ -1,12 +1,12 @@
 IMPL-QUALITY_TEST_ADEQUACY:
   code_locations:
     files:
+      - description: "MCP test_adequacy_validate handler"
+        path: "mcp-server/src/tools/index.ts"
       - description: "Risk-triggered test adequacy plan validator"
         path: "mcp-server/src/quality-adequacy.ts"
       - description: "Unit coverage for profile requirements, boundaries, failures, and waivers"
         path: "mcp-server/src/quality-adequacy.test.ts"
-      - description: "MCP test_adequacy_validate handler"
-        path: "mcp-server/src/tools/index.ts"
     functions:
       - description: "Validate quality profile test-plan adequacy metadata"
         file: "mcp-server/src/quality-adequacy.ts"

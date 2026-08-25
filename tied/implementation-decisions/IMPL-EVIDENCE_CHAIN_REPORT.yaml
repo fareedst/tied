@@ -1,14 +1,14 @@
 IMPL-EVIDENCE_CHAIN_REPORT:
   code_locations:
     files:
-      - description: "Read-only aggregator module"
-        path: "mcp-server/src/fidelity-research/evidence-chain-report.ts"
-      - description: "Offline CLI entry"
-        path: "mcp-server/src/cli/evidence-chain-report.ts"
-      - description: "Unit tests"
-        path: "mcp-server/src/fidelity-research/evidence-chain-report.test.ts"
       - description: "CLI composition tests"
         path: "mcp-server/src/fidelity-research/evidence-chain-report.cli.test.ts"
+      - description: "Offline CLI entry"
+        path: "mcp-server/src/cli/evidence-chain-report.ts"
+      - description: "Read-only aggregator module"
+        path: "mcp-server/src/fidelity-research/evidence-chain-report.ts"
+      - description: "Unit tests"
+        path: "mcp-server/src/fidelity-research/evidence-chain-report.test.ts"
     functions:
       - description: "Report orchestrator"
         file: "mcp-server/src/fidelity-research/evidence-chain-report.ts"

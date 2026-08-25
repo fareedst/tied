@@ -3,10 +3,10 @@ IMPL-QUALITY_EVIDENCE_COLLECTION:
     files:
       - description: "Command execution and manifest composition"
         path: "mcp-server/src/quality-evidence-collection.ts"
-      - description: "Unit and composition coverage for collection and failure propagation"
-        path: "mcp-server/src/quality-evidence-collection.test.ts"
       - description: "MCP quality_evidence_collect handler"
         path: "mcp-server/src/tools/index.ts"
+      - description: "Unit and composition coverage for collection and failure propagation"
+        path: "mcp-server/src/quality-evidence-collection.test.ts"
     functions:
       - description: "Compose declared command execution with manifest generation"
         file: "mcp-server/src/quality-evidence-collection.ts"
