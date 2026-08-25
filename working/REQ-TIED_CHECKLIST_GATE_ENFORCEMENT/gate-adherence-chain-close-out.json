@@ -1,10 +1,20 @@
 {
-  "allowed": true,
-  "ok": true,
-  "blocking": false,
-  "depth": "integrated",
+  "schema_version": "checklist-gate-receipt.v1",
   "phase": "close_out",
+  "timestamp": "2026-08-25T18:18:40.924Z",
+  "allowed": true,
   "diagnostics": [],
-  "run_id": "adherence-chain-close-out-20260825",
-  "request_token": "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+  "depth": "integrated",
+  "input_hashes": {
+    "tracker_hash": "sha256:ed91a04b260dbfa7cc6e95a00a21dbe93d3f2b158a5301693ce5753cec272372",
+    "citdp_hash": "sha256:29d5389f6249be9b6d5dbe96b68cb72d29432d8ece093523a129c4189ed21ea4"
+  },
+  "gate_result": {
+    "allowed": true,
+    "ok": true,
+    "blocking": false,
+    "depth": "integrated",
+    "phase": "close_out",
+    "diagnostics": []
+  }
 }
