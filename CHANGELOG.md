@@ -9,6 +9,44 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Checklist adherence Stage L — controlled-client pilot + rollout stop ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  Go `rollout_stop.go` implements observational `EvaluateRolloutStop` (writer corruption,
+  unbound receipt advance, blocking reconcile findings, canonical checklist byte drift);
+  `adherence_pilot.go` runs `RunControlledClientPilot` and writes
+  `adherence-pilot-report.v1` JSON. Controlled-client corpus under
+  `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/` (`pilot-report.json`,
+  `adherence/pilot-events.jsonl`, `gates/pilot/`). Acceptance A19/A20 covered by
+  `adherence_pilot_test.go` and `TestReconcileAdherenceChain_gotoClearsCompletedWithUnresolvedFinding`.
+  Final planned slice of the adherence improvement plan (Stages G–L).
+
+- **Checklist adherence Stage K — reconciliation report ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  Go `adherence_reconcile.go` implements read-only `RECONCILE_ADHERENCE_CHAIN`:
+  loads `agent-adherence-event.v1` JSONL, validates correlation fields for all
+  six event classes, emits deterministic finding codes (`rendered_without_acknowledgment`,
+  `acknowledged_without_attempt`, `attempt_without_verified_outcome`,
+  `completed_with_unresolved_evidence`, `gate_without_current_evidence`,
+  `status_change_without_verification_receipt`, `legacy_no_adherence_chain`) without
+  mutating Tracker or TIED YAML. Reuses `ResolveEvidenceRefs` and `StableHash`
+  (gate receipt parity). Tests: table-driven `adherence_reconcile_test.go` plus
+  six-class linked synthetic fixture (A19). **Deferred:** Stage L pilot; optional
+  MCP `tied_adherence_reconcile_run` tool; `action_attempted` hook capture.
+
+- **Checklist adherence Stage J — gate/status durable receipts ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  MCP Stage J slice: `gate-receipt.ts` implements `PERSIST_GATE_DECISION_RECEIPT`
+  (atomic gate JSON with `tracker_hash`/`citdp_hash` under
+  `working/{REQ-TOKEN}/gates/` plus `gate_decided` ledger row); `adherence-ledger.ts`
+  adds `appendGateDecided` and `appendStatusMutated`; `verify.ts` wires
+  `PERSIST_STATUS_MUTATION_RECEIPT` on `tied_verify` dry_run/apply with fail-closed
+  `missing_gate_receipt_ref`. Acceptance A17/A18 covered by
+  `gate-receipt.test.ts` and `verify.test.ts`.
+
+- **Checklist adherence Stage I — tracker hardening ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  closes residual producer test debt: `request_token` mismatch on
+  `ValidateTrackerIdentity`/`EnsureTracker`; `not_applicable` and `waived`
+  writer apply tests; `clearCloseOutGateSummaries` on goto invalidation;
+  composition test with `fake_tracker_goto_agent.rb` proving tracker-mode goto
+  calls `InvalidateTrackerDownstream`.
+
 - **Checklist adherence Stage H — evidence ref resolution ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
   agentstream Stage H slice: `evidence_resolve.go` runs `ResolveEvidenceRefs` after
   receipt binding and before Tracker write (A16); rejects generic prose, missing
@@ -18,9 +56,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `adherence_ledger_test.go` (`AppendOutcomeVerified`),
   `tracker_composition_test.go` (composition with temp file + manifest fixture).
   CITDP `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-h`.
-  **Deferred:** Stages I–L (goto/NA/waived writer, gate/status receipts,
-  reconciliation, full chain); inline `command_evidence` JSON refs; TS-side
-  duplicate resolution (Option A).
+  **Deferred:** inline `command_evidence` JSON refs; TS-side duplicate resolution (Option A).
 
 - **Checklist adherence Stage G — instruction binding ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
   agentstream Stage G slice: `adherence_ledger.go` emits `instruction_rendered`
@@ -31,7 +67,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `tracker_receipt_test.go`, `tracker_composition_test.go`. Expanded
   `docs/checklist-adherence-improvement-plan.md` evidence model (§9–§10) and
   Stages G–L sequence; CITDP `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-g`.
-  **Deferred:** Stages I–L (reconciliation, full chain).
+  **Deferred:** inline `command_evidence` JSON refs; TS-side duplicate resolution (Option A).
 
 - **Checklist gate close-out enforcement ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
   restored the authoritative `tied_checklist_gate_validate` MCP surface and completed

@@ -1,0 +1,10 @@
+{
+  "allowed": true,
+  "ok": true,
+  "blocking": false,
+  "depth": "integrated",
+  "phase": "close_out",
+  "diagnostics": [],
+  "run_id": "adherence-chain-close-out-20260825",
+  "request_token": "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+}

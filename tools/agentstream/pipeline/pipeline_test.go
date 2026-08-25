@@ -122,13 +122,13 @@ steps:
 }
 
 // [IMPL-GOAGENT-CHECKLIST-CONTROL] [ARCH-GOAGENT-CHECKLIST-CONTROL] [REQ-GOAGENT-CHECKLIST-CONTROL]
-// How: Canonical checklist slice from flag-contradictory-specs through unit-refactor includes control target and emitter steps.
+// How: Canonical checklist slice from unit-test-green through unit-refactor includes control emitter, target, and refactor steps (YAML order bounds).
 func TestBuild_canonicalChecklistControlSliceIncludesTargetAndEmitter(t *testing.T) {
 	checklistPath := findCanonicalChecklist(t)
 	turns, err := Build(Input{
 		LeadChecklistYAML:       checklistPath,
 		LeadChecklistSkipSub:    true,
-		LeadChecklistStepFromID: "flag-contradictory-specs",
+		LeadChecklistStepFromID: "unit-test-green",
 		LeadChecklistStepToID:   "unit-refactor",
 	})
 	if err != nil {
@@ -140,7 +140,7 @@ func TestBuild_canonicalChecklistControlSliceIncludesTargetAndEmitter(t *testing
 			t.Fatalf("canonical control smoke slice missing %q; loaded=%v", slug, known)
 		}
 	}
-	if turns[0].StepStub != "flag-contradictory-specs" || turns[len(turns)-1].StepStub != "unit-refactor" {
+	if turns[0].StepStub != "unit-test-green" || turns[len(turns)-1].StepStub != "unit-refactor" {
 		t.Fatalf("unexpected bounded slice edges: first=%q last=%q", turns[0].StepStub, turns[len(turns)-1].StepStub)
 	}
 }

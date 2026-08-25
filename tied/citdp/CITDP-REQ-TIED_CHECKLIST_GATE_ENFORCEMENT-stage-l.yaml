@@ -1,0 +1,46 @@
+CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-l:
+  change_definition:
+    current_behavior: "Individual stages H-K proven in isolation; no controlled-client pilot harness ties the producer adherence chain with rollout stop conditions; A19 lacks controlled-client report artifact; A20 lacks goto+reconcile finding-absent proof."
+    desired_behavior: "Controlled-client pilot at depth_tier integrated with distinct phase run_ids; EVALUATE_ROLLOUT_STOP fails rollout on writer corruption, unbound receipt advance, blocking reconcile findings, and checklist byte drift; pilot report links all six event classes for REQ-TIED_CHECKLIST_GATE_ENFORCEMENT."
+    success_criteria:
+      - "Goto invalidation clears completed_with_unresolved_evidence for downstream slug (A20)."
+      - "Pilot report at working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/pilot-report.json links six event classes with zero blocking findings (A19)."
+      - "Rollout stop evaluator triggers on each plan §10 stop condition deterministically."
+  completion_criteria:
+    activation:
+      phase: "close_out"
+      project_id: "/Users/fareed/Documents/dev/chatgpt/stdd"
+      request_token: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      run_id: "adherence-chain-close-out-20260825"
+  record_identity:
+    change_request_id: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    record_status: "complete"
+    title: "Stage L controlled-client pilot and rollout stop conditions"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "Pilot report claims six-class linkage while reconcile emits blocking findings."
+        - "Rollout stop evaluator mutates Tracker or TIED YAML despite observational contract."
+        - "Shared gates directory stale receipts cause false pilot pass or false stop."
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "rollout_stop_test.go covers all five stop conditions."
+        - "TestReconcileAdherenceChain_gotoClearsCompletedWithUnresolvedFinding proves A20 finding absent for cleared slug."
+        - "TestRunControlledClientPilot_sixClassesLinkedZeroBlocking writes pilot-report.json with should_stop false."
+      evidence_references:
+        - "docs/checklist-adherence-improvement-plan.md"
+        - "tools/agentstream/checklist/adherence_pilot.go"
+        - "tools/agentstream/checklist/rollout_stop.go"
+        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/pilot-report.json"
+      falsification_questions:
+        - "Can rollout stop pass when reconcile emits status_change_without_verification_receipt?"
+        - "Does goto invalidation leave completed_with_unresolved_evidence for cleared downstream slug?"
+        - "Does pilot use isolated gates/pilot directory to avoid stale Stage J/K receipt noise?"
+      gate_policy: "advisory"
+      prior_depth_tier: "minimal"
+      profile_depth: "not_measured"
+  test_strategy:
+    commands:
+      - "go test ./tools/agentstream/..."
+      - "go test ./tools/agentstream/checklist/... -run 'Rollout|Pilot|gotoClears'"
+      - "tied_validate_consistency"

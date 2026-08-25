@@ -118,6 +118,7 @@ import {
 import { generateEvidenceChainProfile } from "../fidelity-research/evidence-chain-profile.js";
 import { createLiveStructuralValidators } from "../fidelity-research/live-structural-validators.js";
 import { validateChecklistGate } from "../checklist-validator.js";
+import { persistGateDecisionReceipt } from "../gate-receipt.js";
 import { collectChecklistActivation } from "../checklist-activation-collect.js";
 
 /** LEAP proposal MCP tools: JSON envelope; catch sync throws from fs/git. [REQ-LEAP_PROPOSAL_QUEUE] */
@@ -1197,6 +1198,15 @@ export const allTools = [
           .optional()
           .default(true)
           .describe("Deprecated compatibility field; checklist_gate is always required for status updates."),
+        receipt_persistence: z.object({
+          request_token: z.string(),
+          gates_dir: z.string(),
+          ledger_path: z.string(),
+          run_id: z.string().optional(),
+          gate_receipt_ref: z.string().optional(),
+          gate_receipt_hash: z.string().optional(),
+          persist_gate: z.boolean().optional(),
+        }).optional().describe("Persist gate decision and status mutation receipts (Stage J)."),
       }),
     },
     handler: async (args: {
@@ -1213,6 +1223,15 @@ export const allTools = [
         activation?: unknown;
       };
       require_checklist_gate?: boolean;
+      receipt_persistence?: {
+        request_token: string;
+        gates_dir: string;
+        ledger_path: string;
+        run_id?: string;
+        gate_receipt_ref?: string;
+        gate_receipt_hash?: string;
+        persist_gate?: boolean;
+      };
     }) => {
       const result = updateStatusFromPassedTokens({
         passed_requirement_tokens: args.passed_requirement_tokens ?? [],
@@ -1230,6 +1249,7 @@ export const allTools = [
           }
           : undefined,
         require_checklist_gate: args.require_checklist_gate ?? true,
+        receipt_persistence: args.receipt_persistence,
       });
       return textContent(JSON.stringify(result, null, 2));
     },
@@ -1496,6 +1516,12 @@ export const allTools = [
         required_step_slugs: z.array(z.string()).optional(),
         activation: z.record(z.unknown()).optional(),
         evidence: z.record(z.unknown()).optional(),
+        receipt_persistence: z.object({
+          request_token: z.string(),
+          gates_dir: z.string(),
+          ledger_path: z.string(),
+          run_id: z.string().optional(),
+        }).optional().describe("Persist gate decision receipt with input Tracker/CITDP hashes (Stage J)."),
       }),
     },
     handler: async (args: {
@@ -1505,6 +1531,12 @@ export const allTools = [
       required_step_slugs?: string[];
       activation?: Record<string, unknown>;
       evidence?: Record<string, unknown>;
+      receipt_persistence?: {
+        request_token: string;
+        gates_dir: string;
+        ledger_path: string;
+        run_id?: string;
+      };
     }) => {
       try {
         const result = validateChecklistGate({
@@ -1515,7 +1547,28 @@ export const allTools = [
           activation: args.activation as never,
           evidence: args.evidence as never,
         });
-        return textContent(JSON.stringify(result, null, 2));
+        let gateReceipt: { path: string; hash: string } | undefined;
+        if (args.receipt_persistence) {
+          const persisted = persistGateDecisionReceipt({
+            gateResult: result,
+            phase: args.phase,
+            tracker: args.tracker,
+            citdp: args.citdp,
+            gatesDir: args.receipt_persistence.gates_dir,
+            ledgerPath: args.receipt_persistence.ledger_path,
+            requestToken: args.receipt_persistence.request_token,
+            runId: args.receipt_persistence.run_id,
+          });
+          if (!persisted.ok) {
+            return textContent(JSON.stringify({
+              ...result,
+              gate_receipt_error: persisted.error,
+              diagnostics: [...result.diagnostics, ...persisted.diagnostics],
+            }, null, 2));
+          }
+          gateReceipt = { path: persisted.path, hash: persisted.hash };
+        }
+        return textContent(JSON.stringify({ ...result, ...(gateReceipt ? { gate_receipt: gateReceipt } : {}) }, null, 2));
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
         return textContent(JSON.stringify({ ok: false, error: msg }, null, 2));

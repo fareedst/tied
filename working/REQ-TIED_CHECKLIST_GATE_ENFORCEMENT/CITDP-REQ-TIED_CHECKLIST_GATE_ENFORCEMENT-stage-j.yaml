@@ -1,0 +1,44 @@
+CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-j:
+  change_definition:
+    current_behavior: "tied_checklist_gate_validate returns gate JSON in-memory only; gate JSON not auto-persisted with input Tracker/CITDP hashes. tied_verify mutates status without durable gate→mutation receipt linking."
+    desired_behavior: "PERSIST_GATE_DECISION_RECEIPT atomically writes gate result plus input hashes to working/{REQ-TOKEN}/gates/{phase}-{timestamp}.json and appends gate_decided ledger row. PERSIST_STATUS_MUTATION_RECEIPT appends status_mutated row with previous→next map and gate_receipt_ref; fails closed when mutation applied without gate receipt ref."
+    success_criteria:
+      - "Apply path rejects mutation when gate_receipt_ref missing."
+      - "Gate receipt JSON includes tracker_hash and citdp_hash (A17)."
+      - "Status mutation ledger row references persisted gate receipt path and hash (A18)."
+  completion_criteria:
+    activation:
+      phase: "close_out"
+      project_id: "/Users/fareed/Documents/dev/chatgpt/stdd"
+      request_token: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      run_id: "stage-j-close-out-20260825"
+  record_identity:
+    change_request_id: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    record_status: "complete"
+    title: "Stage J gate/status durable receipts"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "Dry-run verify reports would_update but leaves no durable mutation receipt."
+        - "Gate decision lost after MCP session ends; reconciliation cannot compare input hashes."
+        - "Status promotion occurs without ledger row linking to gate receipt."
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "status_mutated ledger row includes gate_receipt_ref matching gates fixture."
+        - "verify.test.ts proves gate receipt persisted on dry_run with input hashes."
+      evidence_references:
+        - "docs/checklist-adherence-improvement-plan.md"
+        - "mcp-server/src/gate-receipt.ts"
+        - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+      falsification_questions:
+        - "Can gate receipt be written without tracker_hash or citdp_hash?"
+        - "Can tied_verify apply status changes without gate_receipt_ref?"
+        - "Does dry_run skip status_mutated ledger append when would_update is non-empty?"
+      gate_policy: "advisory"
+      prior_depth_tier: "minimal"
+      profile_depth: "not_measured"
+  test_strategy:
+    commands:
+      - "node --test mcp-server/dist/adherence-ledger.test.js mcp-server/dist/verify.test.js"
+      - "npm run build --prefix mcp-server"
+      - "tied_validate_consistency"

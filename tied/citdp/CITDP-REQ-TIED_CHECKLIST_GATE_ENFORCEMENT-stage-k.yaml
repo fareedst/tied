@@ -1,0 +1,43 @@
+CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-k:
+  change_definition:
+    current_behavior: "No read-only reconciliation tool compares six adherence event classes against Tracker, gate receipts, and TIED indexes. A18 requires reconciliation pass; A19 requires linked six-class fixture."
+    desired_behavior: "RECONCILE_ADHERENCE_CHAIN emits deterministic finding codes read-only; never mutates Tracker or TIED YAML. Validates instruction_rendered→agent_acknowledged→action_attempted→outcome_verified→gate_decided→status_mutated chain."
+    success_criteria:
+      - "status_mutated rows reference gate receipts and reconciliation validates chain (A18)."
+      - "Synthetic pilot fixture links all six event classes including outcome_verified (A19)."
+      - "Table-driven reconciliation tests cover all seven finding codes including legacy_no_adherence_chain."
+  completion_criteria:
+    activation:
+      phase: "close_out"
+      project_id: "/Users/fareed/Documents/dev/chatgpt/stdd"
+      request_token: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      run_id: "stage-k-close-out-20260825"
+  record_identity:
+    change_request_id: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    record_status: "complete"
+    title: "Stage K adherence ledger reconciliation report"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "Gate receipt hash comparison diverges from Stage J stableHash semantics."
+        - "Missing action_attempted class silently passes acknowledged_without_attempt check."
+        - "Reconciliation mutates Tracker or TIED indexes despite read-only contract."
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "Six-class synthetic fixture produces zero blocking findings when chain is complete."
+        - "Table-driven tests fail when any finding code regresses."
+      evidence_references:
+        - "docs/checklist-adherence-improvement-plan.md#stage-k-red-adherence-ledger--reconciliation-report-requires-h-resolved-refs"
+        - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+        - "tools/agentstream/checklist/adherence_reconcile.go"
+      falsification_questions:
+        - "Can reconciliation write to Tracker or TIED YAML paths?"
+        - "Does gate_without_current_evidence detect stale tracker_hash vs current Tracker?"
+        - "Does legacy_no_adherence_chain emit when ledger path is absent?"
+      gate_policy: "advisory"
+      prior_depth_tier: "minimal"
+      profile_depth: "not_measured"
+  test_strategy:
+    commands:
+      - "go test ./tools/agentstream/checklist/... -run Reconcile"
+      - "tied_validate_consistency"

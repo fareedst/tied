@@ -25,6 +25,18 @@ Run **`agentstream --help`** for the full option list. Highlights:
 | `-c`, `--lead-checklist-yaml` | Read-only lead checklist definition YAML; default resolves to repo `tied/docs/agent-req-implementation-checklist.yaml` when present. |
 | `--checklist-tracker-yaml PATH` | Writable per-request **Authoritative Tracker** (`checklist-tracker.v1`). Requires `-c`. Must not equal the definition path. When missing on disk, agentstream materializes clean pending state including `sub-adversarial-inquiry-pass` as a top-level step row. |
 | `--adherence-ledger PATH` | Append-only **adherence ledger** (`agent-adherence-event.v1` JSONL). Default: `working/{REQ-TOKEN}/adherence/events.jsonl` when `--checklist-tracker-yaml` is set and `REQUEST` resolves a token. Stores hash/reference edges only (no prompt or response bodies). |
+
+### Adherence reconciliation, pilot, and rollout stop (Stage K–L)
+
+Read-only library helpers in `checklist/` (no CLI subcommand yet):
+
+| API | Role |
+|-----|------|
+| `ReconcileAdherenceChain` | Emits deterministic finding codes from ledger + Tracker + gates + TIED indexes; never mutates inputs. |
+| `RunControlledClientPilot` | Assembles controlled-client pilot report (`adherence-pilot-report.v1`); stdd pilot corpus under `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/`. |
+| `EvaluateRolloutStop` | Observational stop evaluator: writer corruption, unbound receipt, blocking reconcile findings, checklist byte drift. |
+
+Tests: `go test ./tools/agentstream/checklist/... -run 'Reconcile|Rollout|Pilot|gotoClears'`
 | `--lead-checklist-before-feature` | With both `-b` and `-c`, emit all checklist steps before all feature-spec records (default is feature-spec first). |
 | `--checklist-var KEY=VALUE` | Repeatable (synonym: `--lead-checklist-var`). Substitutes **`{{KEY}}`** in rendered lead checklist text (`goals`, `tasks`, step `title`, flow branch prose, etc.). Split on the **first** `=` so values may contain `=`. Missing keys leave `{{KEY}}` unchanged unless strict mode applies. |
 | `--checklist-var-strict`, `AGENTSTREAM_CHECKLIST_VAR_STRICT=1` | Fail rendering if any `{{NAME}}` remains after substitution (forgotten vars). |

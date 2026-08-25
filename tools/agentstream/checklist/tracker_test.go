@@ -134,6 +134,34 @@ func TestValidateTrackerIdentity_sourceMismatch(t *testing.T) {
 	}
 }
 
+func TestValidateTrackerIdentity_requestTokenMismatch(t *testing.T) {
+	def := writeTrackerTestDefinition(t, nil)
+	trackerPath := filepath.Join(t.TempDir(), "tracker.yaml")
+	if err := MaterializeAuthoritativeTracker(def, trackerPath, MaterializeOptions{RequestToken: "REQ-A"}); err != nil {
+		t.Fatal(err)
+	}
+	doc, err := LoadTrackerYAML(trackerPath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	err = ValidateTrackerIdentity(doc, def, "REQ-B")
+	if err == nil || !strings.Contains(err.Error(), "request_token mismatch") {
+		t.Fatalf("expected request_token mismatch, got %v", err)
+	}
+}
+
+func TestEnsureTracker_requestTokenMismatch(t *testing.T) {
+	def := writeTrackerTestDefinition(t, nil)
+	trackerPath := filepath.Join(t.TempDir(), "tracker.yaml")
+	if err := MaterializeAuthoritativeTracker(def, trackerPath, MaterializeOptions{RequestToken: "REQ-A"}); err != nil {
+		t.Fatal(err)
+	}
+	err := EnsureTracker(def, trackerPath, "REQ-B")
+	if err == nil || !strings.Contains(err.Error(), "request_token mismatch") {
+		t.Fatalf("expected request_token mismatch from EnsureTracker, got %v", err)
+	}
+}
+
 func TestCanonicalChecklistMaterialization_A1(t *testing.T) {
 	root, ok := FindRepoRootForTest(t)
 	if !ok {

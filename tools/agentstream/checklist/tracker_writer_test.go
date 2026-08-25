@@ -1,6 +1,7 @@
 package checklist
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
@@ -180,6 +181,116 @@ func TestExecutionEvidenceCompletedIsDerivedOnly(t *testing.T) {
 	completed := ee["completed"].([]interface{})
 	if len(completed) != 1 {
 		t.Fatalf("derived completed should reflect one completed step, got %#v", completed)
+	}
+}
+
+func TestApplyTrackerDisposition_notApplicable(t *testing.T) {
+	_, trackerPath := setupTrackerFixture(t)
+	receipt := CompletionReceipt{
+		SchemaVersion: 1,
+		Slug:          "alpha",
+		Disposition:   "not_applicable",
+		Policy:        "existing-coverage",
+		Rationale:     "REQ already covers scope",
+	}
+	if err := ApplyTrackerDisposition(trackerPath, receipt, TurnIdentity{TurnIndex: 1, StepStub: "alpha"}); err != nil {
+		t.Fatal(err)
+	}
+	doc, err := LoadTrackerYAML(trackerPath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	alpha := doc["steps"].([]interface{})[0].(map[string]interface{})
+	if alpha["disposition"] != "not_applicable" {
+		t.Fatalf("disposition: %#v", alpha["disposition"])
+	}
+	if alpha["policy"] != "existing-coverage" || alpha["rationale"] != "REQ already covers scope" {
+		t.Fatalf("policy/rationale not applied: %#v", alpha)
+	}
+	if _, ok := alpha["evidence_refs"]; ok {
+		t.Fatalf("completed evidence should be cleared: %#v", alpha)
+	}
+	completed := DerivedCompletedFromTracker(doc)
+	if len(completed) != 0 {
+		t.Fatalf("not_applicable must not derive completed: %#v", completed)
+	}
+}
+
+func TestApplyTrackerDisposition_waived(t *testing.T) {
+	_, trackerPath := setupTrackerFixture(t)
+	receipt := CompletionReceipt{
+		SchemaVersion: 1,
+		Slug:          "alpha",
+		Disposition:   "waived",
+		Owner:         "sponsor",
+		Expiry:        "2026-12-31",
+		Approval:      "lead",
+		ResidualRisk:  "low",
+	}
+	if err := ApplyTrackerDisposition(trackerPath, receipt, TurnIdentity{TurnIndex: 1, StepStub: "alpha"}); err != nil {
+		t.Fatal(err)
+	}
+	doc, err := LoadTrackerYAML(trackerPath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	alpha := doc["steps"].([]interface{})[0].(map[string]interface{})
+	if alpha["disposition"] != "waived" {
+		t.Fatalf("disposition: %#v", alpha["disposition"])
+	}
+	for _, key := range []string{"owner", "expiry", "approval", "residual_risk"} {
+		if strings.TrimSpace(fmt.Sprint(alpha[key])) == "" {
+			t.Fatalf("missing waived field %q: %#v", key, alpha)
+		}
+	}
+	completed := DerivedCompletedFromTracker(doc)
+	if len(completed) != 0 {
+		t.Fatalf("waived must not derive completed: %#v", completed)
+	}
+}
+
+func TestInvalidateTrackerDownstream_clearsCloseOutGateSummaries(t *testing.T) {
+	defPath, trackerPath := setupTrackerFixture(t)
+	for _, slug := range []string{"alpha", "beta"} {
+		receipt := CompletionReceipt{
+			SchemaVersion: 1,
+			Slug:          slug,
+			Disposition:   "completed",
+			EvidenceRefs:  []string{"working/REQ-TEST/" + slug + ".md"},
+		}
+		if err := ApplyTrackerDisposition(trackerPath, receipt, TurnIdentity{TurnIndex: 1, StepStub: slug}); err != nil {
+			t.Fatal(err)
+		}
+	}
+	doc, err := LoadTrackerYAML(trackerPath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	ee := doc["execution_evidence"].(map[string]interface{})
+	ee["close_out_evidence"] = map[string]interface{}{
+		"gates": map[string]interface{}{
+			"beta": map[string]interface{}{"allowed": true},
+			"alpha": map[string]interface{}{"allowed": true},
+		},
+	}
+	if err := atomicWriteYAML(trackerPath, doc); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := InvalidateTrackerDownstream(trackerPath, defPath, "alpha"); err != nil {
+		t.Fatal(err)
+	}
+	doc, err = LoadTrackerYAML(trackerPath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	ee = doc["execution_evidence"].(map[string]interface{})
+	closeOut := ee["close_out_evidence"].(map[string]interface{})
+	gates := closeOut["gates"].(map[string]interface{})
+	if _, ok := gates["beta"]; ok {
+		t.Fatalf("beta gate summary should be cleared after goto invalidation: %#v", gates)
+	}
+	if _, ok := gates["alpha"]; !ok {
+		t.Fatalf("alpha gate summary should remain: %#v", gates)
 	}
 }
 

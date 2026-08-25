@@ -8,6 +8,8 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
+
+	checklistpkg "stdd/agentstream/checklist"
 )
 
 func TestAgentstreamRequiresTrackerReceiptBeforeNextTurn(t *testing.T) {
@@ -248,4 +250,90 @@ func writeCompositionEvidenceFiles(workspace string) error {
 		}
 	}
 	return nil
+}
+
+func TestAgentstreamGotoInvalidatesTrackerDownstream(t *testing.T) {
+	t.Helper()
+	if _, err := exec.LookPath("ruby"); err != nil {
+		t.Skipf("ruby not available: %v", err)
+	}
+	wd, err := os.Getwd()
+	if err != nil {
+		t.Fatal(err)
+	}
+	moduleRoot, err := goModRootFrom(wd)
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Chdir(moduleRoot)
+
+	checklist, err := filepath.Abs(filepath.Join(wd, "testdata", "tracker-checklist.yaml"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	fakeAgent, err := filepath.Abs(filepath.Join(wd, "testdata", "fake_tracker_goto_agent.rb"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	ws := t.TempDir()
+	trackerPath := filepath.Join(ws, "tracker.yaml")
+	gotoMarker := filepath.Join(ws, ".goto_marker")
+	if err := writeCompositionEvidenceFiles(ws); err != nil {
+		t.Fatal(err)
+	}
+
+	cmd := exec.Command(
+		"go", "run", "./cmd/agentstream",
+		"--workspace", ws,
+		"--lead-checklist-yaml", checklist,
+		"--checklist-tracker-yaml", trackerPath,
+		"--lead-checklist-skip-sub",
+		"--checklist-var", "REQUEST=REQ-TRACKER-GOTO",
+		"--agent-path", fakeAgent,
+		"--skip-tied-mcp-preflight",
+	)
+	cmd.Dir = moduleRoot
+	cmd.Env = append(os.Environ(), "PWD="+moduleRoot, "GOTO_MARKER="+gotoMarker)
+	var stdout, stderr bytes.Buffer
+	cmd.Stdout = &stdout
+	cmd.Stderr = &stderr
+	if err := cmd.Run(); err != nil {
+		t.Fatalf("agentstream run failed: %v\nstdout:\n%s\nstderr:\n%s", err, stdout.String(), stderr.String())
+	}
+	errText := stderr.String()
+	if !strings.Contains(errText, "DIAGNOSTIC: agentstream_control goto step-one") {
+		t.Fatalf("missing goto diagnostic:\n%s", errText)
+	}
+	if !strings.Contains(errText, "cleared tracker slugs: step-two") {
+		t.Fatalf("missing tracker invalidation diagnostic:\n%s", errText)
+	}
+	doc, err := checklistpkg.LoadTrackerYAML(trackerPath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if dispositionForSlug(doc, "step-one") != "completed" {
+		t.Fatalf("step-one should remain completed: %#v", doc)
+	}
+	// step-two is completed again after rerouted turn; invalidation is proven by diagnostic + unit test.
+	if dispositionForSlug(doc, "step-two") != "completed" {
+		t.Fatalf("step-two should be completed after rerouted turn: %#v", doc)
+	}
+}
+
+func dispositionForSlug(doc map[string]interface{}, slug string) string {
+	steps, ok := doc["steps"].([]interface{})
+	if !ok {
+		return ""
+	}
+	for _, item := range steps {
+		row, ok := item.(map[string]interface{})
+		if !ok {
+			continue
+		}
+		if row["slug"] == slug {
+			d, _ := row["disposition"].(string)
+			return d
+		}
+	}
+	return ""
 }

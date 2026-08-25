@@ -11,6 +11,7 @@ import { fileURLToPath } from "node:url";
 import yaml from "js-yaml";
 import { updateStatusFromPassedTokens } from "./verify.js";
 import { clearBasePathCache } from "./yaml-loader.js";
+import { stableHash } from "./checklist-validator.js";
 
 beforeEach(() => {
   clearBasePathCache();
@@ -232,6 +233,102 @@ REQ-TWO:
       assert.strictEqual(result.would_update![0]!.token, "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT");
       const disk = fs.readFileSync(reqPath, "utf8");
       assert.ok(disk.includes("status: Planned"));
+    } finally {
+      delete process.env.TIED_BASE_PATH;
+      clearBasePathCache();
+      fs.rmSync(dir, { recursive: true });
+    }
+  });
+
+  it("A17 persists gate receipt on dry_run with tracker_hash and citdp_hash", () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-verify-gate-receipt-"));
+    const reqPath = path.join(dir, "requirements.yaml");
+    const gatesDir = path.join(dir, "gates");
+    const ledgerPath = path.join(dir, "adherence", "events.jsonl");
+    fs.writeFileSync(
+      reqPath,
+      `REQ-ONE:
+  status: Planned
+  name: One
+`,
+      "utf8",
+    );
+    const gate = validChecklistGate();
+    try {
+      process.env.TIED_BASE_PATH = dir;
+      clearBasePathCache();
+
+      const r = updateStatusFromPassedTokens({
+        dry_run: true,
+        checklist_gate: gate,
+        passed_requirement_tokens: ["REQ-ONE"],
+        receipt_persistence: {
+          request_token: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT",
+          gates_dir: gatesDir,
+          ledger_path: ledgerPath,
+        },
+      });
+
+      assert.strictEqual(r.ok, true);
+      assert.ok(r.gate_receipt?.path);
+      assert.ok(r.gate_receipt?.hash.startsWith("sha256:"));
+      assert.strictEqual(r.status_mutation_receipt, true);
+      assert.ok(fs.existsSync(r.gate_receipt!.path));
+
+      const receipt = JSON.parse(fs.readFileSync(r.gate_receipt!.path, "utf8")) as Record<string, unknown>;
+      const inputHashes = receipt.input_hashes as Record<string, string>;
+      assert.equal(inputHashes.tracker_hash, `sha256:${stableHash(gate.tracker)}`);
+      assert.equal(inputHashes.citdp_hash, `sha256:${stableHash(gate.citdp)}`);
+
+      const ledgerLines = fs.readFileSync(ledgerPath, "utf8").trim().split("\n");
+      assert.equal(ledgerLines.length, 2, "expected gate_decided and status_mutated rows");
+      const statusRow = JSON.parse(ledgerLines[1]!) as Record<string, unknown>;
+      assert.equal(statusRow.event_class, "status_mutated");
+      assert.equal(statusRow.gate_receipt_ref, r.gate_receipt!.path);
+      assert.equal(statusRow.gate_receipt_hash, r.gate_receipt!.hash);
+    } finally {
+      delete process.env.TIED_BASE_PATH;
+      clearBasePathCache();
+      fs.rmSync(dir, { recursive: true });
+    }
+  });
+
+  it("A18 status mutation records gate receipt ref on dry_run", () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-verify-status-receipt-"));
+    const reqPath = path.join(dir, "requirements.yaml");
+    const gatesDir = path.join(dir, "gates");
+    const ledgerPath = path.join(dir, "adherence", "events.jsonl");
+    fs.writeFileSync(
+      reqPath,
+      `REQ-TIED_CHECKLIST_GATE_ENFORCEMENT:
+  status: Planned
+  name: Gate enforcement
+`,
+      "utf8",
+    );
+    try {
+      process.env.TIED_BASE_PATH = dir;
+      clearBasePathCache();
+      const r = updateStatusFromPassedTokens({
+        dry_run: true,
+        checklist_gate: validChecklistGate(),
+        passed_requirement_tokens: ["REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"],
+        receipt_persistence: {
+          request_token: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT",
+          gates_dir: gatesDir,
+          ledger_path: ledgerPath,
+        },
+      });
+      assert.strictEqual(r.ok, true);
+      assert.ok(r.would_update?.length);
+      assert.ok(r.gate_receipt);
+      assert.strictEqual(r.status_mutation_receipt, true);
+      const statusRow = JSON.parse(
+        fs.readFileSync(ledgerPath, "utf8").trim().split("\n")[1]!,
+      ) as Record<string, unknown>;
+      const mutations = statusRow.status_mutations as Array<Record<string, unknown>>;
+      assert.equal(mutations[0]!.token, "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT");
+      assert.equal(statusRow.gate_receipt_ref, r.gate_receipt!.path);
     } finally {
       delete process.env.TIED_BASE_PATH;
       clearBasePathCache();
