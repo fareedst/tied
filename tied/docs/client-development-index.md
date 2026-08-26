@@ -93,6 +93,8 @@ Guides for YAML shapes: [requirements.md](requirements.md), [architecture-decisi
 
 After writes: `lint_yaml` on changed YAML + `tied_validate_consistency` (checklist `sub-yaml-edit-loop`).
 
+On a fresh bootstrap with no project-specific REQ/ARCH/IMPL tokens, `tied_validate_consistency` should report `ok: true` once inherited methodology detail files resolve under `tied/methodology/`.
+
 ---
 
 ## Supporting docs (installed by bootstrap; not in core six)

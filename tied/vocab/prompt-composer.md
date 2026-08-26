@@ -24,6 +24,7 @@ files and the implementation pseudo-code.
 | **prompt envelope** | prompt wrapper | Optional `prompt-type:` and `git-condition:` fields on a generated prompt; not required for Cursor skill or agent invocation |
 | **invocation remainder** | ::: body, request after ::: | Text after the named skill or agent (or the Task prompt body). For `plan-new-feature` this is the requirement, not a plan document. |
 | **linked plan** | ::: plan body, in-document plan | The attached Cursor plan or an in-message plan. Primary payload for `refine-plan` and `build-plan`. |
+| **plan-close-out (commit deferred)** | close-out commit, merge now | `plan-close-out` prepares Tracker, gates, CHANGELOG, and a proposed commit message; it must not `git add`, `git commit`, or `git push`. |
 | **prompt-shared bundle** | shared skill docs | Direct one-level Markdown references used by leaf skills |
 | **TIED applicability boundary** | inferred TIED mode | Explicit choice of full TIED, TIED-client-local, or minimal workflow |
 | **TIED-client-local development** | non-TIED project | Development that reads context but intentionally avoids TIED synchronization |
@@ -86,6 +87,7 @@ unknown or ambiguous input.
 | global prompt skill | Preferred terms vs synonyms |
 | invocation remainder | Preferred terms vs synonyms |
 | linked plan | Preferred terms vs synonyms |
+| plan-close-out (commit deferred) | Preferred terms vs synonyms |
 | prompt envelope | Preferred terms vs synonyms |
 | Prompt Composer | Preferred terms vs synonyms |
 | prompt-shared bundle | Preferred terms vs synonyms |

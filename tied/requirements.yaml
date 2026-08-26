@@ -1409,6 +1409,22 @@ REQ-TIED_ADVERSARIAL_INQUIRY:
   name: "Adversarial inquiry for obligation and fidelity evidence"
   priority: "P0"
   status: "Implemented"
+REQ-TIED_BOOTSTRAP_DETAIL_INTEGRITY:
+  category: "Functional"
+  detail_file: "requirements/REQ-TIED_BOOTSTRAP_DETAIL_INTEGRITY.yaml"
+  name: "Bootstrap inherited detail-file integrity"
+  priority: "P0"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_SETUP"
+    related_to: []
+    supersedes: []
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_STRUCTURE"
+    implementation:
+      - "IMPL-TIED_FILES"
 REQ-TIED_CHECKLIST_GATE_ENFORCEMENT:
   category: "Tooling"
   cross_references:
@@ -1576,7 +1592,6 @@ REQ-TIED_SETUP:
     implementation:
       - "IMPL-TIED_FILES"
     tests:
-      - "Manual verification checklists"
       - "mcp-server/src/e2e/bootstrap-and-load.test.ts"
   validation_criteria:
     - coverage: "Agent responds with 'Observing AI principles!' confirming rules are loaded"

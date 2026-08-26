@@ -1,0 +1,35 @@
+REQ-TIED_BOOTSTRAP_DETAIL_INTEGRITY:
+  category: "Functional"
+  description: "After copy_files.sh, every inherited methodology index record with a bootstrap-critical token must reference a usable detail_file path and the referenced artifact must exist under tied/methodology/."
+  name: "Bootstrap inherited detail-file integrity"
+  priority: "P0"
+  rationale:
+    benefits:
+      - "Fail-closed copy_files.sh gate prevents regression"
+      - "Fresh bootstrap passes tied_validate_consistency on empty project tree"
+    problems_solved:
+      - "detail_file string null treated as a path"
+      - "Feedback stack indexes without template detail files"
+      - "SETUP and MODULE_VALIDATION index path desync"
+    why: "Clients fail tied_validate_consistency when inherited indexes declare sentinel detail_file values or reference missing template detail artifacts."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_SETUP"
+    related_to: []
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Fresh copy_files.sh leaves REQ-TIED_SETUP, REQ-MODULE_VALIDATION, REQ-FEEDBACK_TO_TIED, ARCH-FEEDBACK_STORAGE, and IMPL-MCP_FEEDBACK_TOOLS resolvable under tied/methodology/"
+      metric: "verify_inherited_detail_files and smoke-client tied_validate_consistency ok:true"
+    - criterion: "Loader preserves methodology-first read, project fallback, and project-only writes"
+      metric: "detail-loader unit tests"
+    - criterion: "Sentinel detail_file values (null, \"null\", \"~\", whitespace) are not reported as with_detail_file"
+      metric: "consistency-validator unit tests"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_STRUCTURE"
+    implementation:
+      - "IMPL-TIED_FILES"
+    tests:
+      - "mcp-server/src/detail-file-path.test.ts"
+      - "mcp-server/src/e2e/bootstrap-and-load.test.ts"

@@ -117,6 +117,16 @@ For vocabulary:
 
 `--merge-vocab` no longer copies canonical methodology prose into `tied/vocab/`. A `REVIEW:` result is intentionally human work: the migration never silently splits paragraphs or discards client additions.
 
+### Feedback token packaging status
+
+The feedback stack records are promoted into the inherited templates by this methodology release:
+
+- `[REQ-FEEDBACK_TO_TIED]`
+- `[ARCH-FEEDBACK_STORAGE]`
+- `[IMPL-MCP_FEEDBACK_TOOLS]`
+
+Refresh overwrites `tied/methodology/**`; no project YAML duplication is required. Clients use MCP tools `tied_feedback_add` and `tied_feedback_export` against project-owned `tied/feedback.yaml`.
+
 ### Quality-token packaging status
 
 The quality-assurance records are promoted into the inherited templates by this methodology release:

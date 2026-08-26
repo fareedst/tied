@@ -41,6 +41,7 @@ implementation decisions and pseudo-code for the research tooling.
 | **fidelity research pilot** | pilot run | Concrete bounded execution path for the first slice; distinct from cross-project aggregation. |
 | **successful control change** | non-bug sample | A behavior-changing change included to estimate defect rates without selection bias. |
 | **integrated activation evidence** | activation signal, metric-only activation | Paired request-scoped inquiry metric and complete bounded artifacts demonstrating tool-backed activation. |
+| **identity-bound activation** | reused receipt, cross-phase activation | Same pairing as **integrated activation evidence**, with `run_id` and `phase` bound to one **phase artifact directory**; a verification receipt is never valid `close_out` activation. |
 | **activation artifact pairing** | artifact check, activation completeness | The rule that an inquiry metric and all four request-scoped artifacts are required together. |
 | **Authoritative Tracker** | copied checklist, execution_evidence list, synthetic tracker | Persisted per-request state artifact whose `steps` rows carry gate-readable dispositions and evidence; distinct from the canonical checklist definition and any synthetic projection. |
 | **Tracker disposition** | checklist status, generic skip | One of `pending`, `completed`, `not_applicable`, or `waived`, with disposition-specific evidence contracts. |
@@ -236,6 +237,7 @@ convenience projection only and never satisfy another phase's pairing. See
 | finding lifecycle | Preferred terms vs synonyms |
 | finding ledger | Naming bridge |
 | human research profile | Preferred terms vs synonyms |
+| identity-bound activation | Preferred terms vs synonyms |
 | integrated activation evidence | Preferred terms vs synonyms |
 | integrated agent profile | Preferred terms vs synonyms |
 | origin layer | Preferred terms vs synonyms |

@@ -17,6 +17,12 @@
 | **project YAML** | client YAML, root yaml | Writable REQ/ARCH/IMPL under `tied/` root (not `tied/methodology/`) |
 | **methodology YAML** | template yaml, inherited yaml | Read-only under `tied/methodology/`; refreshed by `copy_files.sh` |
 | **detail file** | sidecar yaml (for REQ/ARCH/IMPL index rows) | YAML under `tied/requirements/`, `tied/architecture-decisions/`, `tied/implementation-decisions/` |
+| **usable detail path** | resolvable path, real detail path | A `detail_file` value that is a non-sentinel relative path to an on-disk YAML (or IMPL sidecar) under the inherited or project tree |
+| **sentinel** | null string, tilde path, placeholder detail | Unusable `detail_file` values (`null`, `"null"`, `"~"`, whitespace) treated as absent, never as `with_detail_file` |
+| **inherited detail** | copied detail, template detail (alone) | Methodology-owned detail artifact installed under `tied/methodology/` (or source `templates/`) by `copy_files.sh` |
+| **methodology-first** | methodology then project | Read order: inherited methodology detail, then project fallback when the inherited path is absent or a **sentinel** |
+| **project fallback** | client override read | Second-choice read of a project-owned detail file when methodology-first does not yield a **usable detail path** |
+| **project-only writes** | write to methodology | MCP and agents mutate only project YAML; inherited methodology files remain read-only |
 | **pseudo-code sidecar** | essence in index body | Plain Markdown `IMPL-*-pseudocode.md`; not YAML |
 | **module validation** | unit testing (alone) | Independent validation before integration per [REQ-MODULE_VALIDATION](../requirements/REQ-MODULE_VALIDATION.yaml) |
 | **binding inventory** | glue list, wiring notes (alone) | Table of trigger→callee→arguments→effect seams; see [`../docs/composition-coverage.md`](../docs/composition-coverage.md) |
@@ -190,7 +196,9 @@ Exact spellings for checklist and docs cross-reference:
 | domain-references.md | Naming bridge |
 | full catalog | Naming bridge |
 | format metadata | Preferred terms |
+| inherited detail | Preferred terms |
 | inherited methodology snapshot | Preferred terms |
+| methodology-first | Preferred terms |
 | lint_yaml | Preferred terms |
 | methodology YAML | Preferred terms |
 | methodology migration | Preferred terms |
@@ -199,7 +207,10 @@ Exact spellings for checklist and docs cross-reference:
 | promoted quality record | Preferred terms |
 | PROC-AGENT_REQ_CHECKLIST | PROC catalog |
 | PROC-VOCABULARY_INDEX | PROC catalog |
+| project fallback | Preferred terms |
+| project-only writes | Preferred terms |
 | project YAML | Preferred terms |
+| sentinel | Preferred terms |
 | qualifying list group | Preferred terms |
 | modified path reporting | Preferred terms |
 | opaque text | Preferred terms |
@@ -208,6 +219,7 @@ Exact spellings for checklist and docs cross-reference:
 | routing index | Preferred terms |
 | routing.md | Preferred terms |
 | semantic token | Preferred terms |
+| usable detail path | Preferred terms |
 | unchanged path reporting | Preferred terms |
 | scalar-type preservation | Preferred terms |
 | sort map keys | Preferred terms |

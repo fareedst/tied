@@ -2193,6 +2193,19 @@ REQ-TIED_ADVERSARIAL_INQUIRY:
   source_index: "requirements.yaml"
   status: "Planned"
   type: "REQ"
+REQ-TIED_BOOTSTRAP_DETAIL_INTEGRITY:
+  cross_references:
+    - "ARCH-TIED_STRUCTURE"
+    - "IMPL-TIED_FILES"
+  description: "Inherited methodology indexes must resolve usable detail paths after bootstrap"
+  detail_file: "requirements/REQ-TIED_BOOTSTRAP_DETAIL_INTEGRITY.yaml"
+  metadata:
+    last_updated: "2026-08-25"
+    registered: "2026-08-25"
+  name: "Bootstrap inherited detail-file integrity"
+  source_index: "requirements.yaml"
+  status: "Active"
+  type: "REQ"
 REQ-TIED_CHECKLIST_GATE_ENFORCEMENT:
   cross_references:
     - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"

@@ -339,6 +339,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   are now inherited via `templates/` and `DOCS_TO_COPY`; REPORT tokens stay
   source-repo-only.
 
+### Fixed
+
+- **Bootstrap inherited methodology detail-file integrity** —
+  `[REQ-TIED_BOOTSTRAP_DETAIL_INTEGRITY]` now promotes the required feedback
+  detail files, verifies inherited detail artifacts during `copy_files.sh`,
+  and treats sentinel paths as absent across the MCP path resolver and detail
+  loader. Unit, composition, bootstrap-smoke, and TIED consistency checks pass.
+
 ### Changed
 
 - **Evidence chain attach-provenance wiring** — Checklist `sub-evidence-chain-profile`

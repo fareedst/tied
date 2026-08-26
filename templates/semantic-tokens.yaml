@@ -15,8 +15,8 @@ ARCH-FEEDBACK_STORAGE:
   cross_references:
     - "IMPL-MCP_FEEDBACK_TOOLS"
     - "REQ-FEEDBACK_TO_TIED"
-  description: "Index stub; see checklist when building feedback path"
-  detail_file: "null"
+  description: "Single-file feedback storage under tied/feedback.yaml for MCP export"
+  detail_file: "architecture-decisions/ARCH-FEEDBACK_STORAGE.yaml"
   metadata:
     last_updated: "2026-04-21"
     registered: "2026-03-03"
@@ -108,8 +108,8 @@ IMPL-MCP_FEEDBACK_TOOLS:
   cross_references:
     - "ARCH-FEEDBACK_STORAGE"
     - "REQ-FEEDBACK_TO_TIED"
-  description: "Index stub; TIED mcp-server tools when adopted"
-  detail_file: "null"
+  description: "MCP tools tied_feedback_add and tied_feedback_export"
+  detail_file: "implementation-decisions/IMPL-MCP_FEEDBACK_TOOLS.yaml"
   metadata:
     last_updated: "2026-04-21"
     registered: "2026-03-03"
@@ -520,8 +520,8 @@ REQ-FEEDBACK_TO_TIED:
   cross_references:
     - "ARCH-FEEDBACK_STORAGE"
     - "IMPL-MCP_FEEDBACK_TOOLS"
-  description: "Index stub; optional feedback tooling; see checklist when building"
-  detail_file: "null"
+  description: "Structured feedback to TIED via MCP tools tied_feedback_add and tied_feedback_export"
+  detail_file: "requirements/REQ-FEEDBACK_TO_TIED.yaml"
   metadata:
     last_updated: "2026-04-21"
     registered: "2026-03-03"
@@ -534,8 +534,8 @@ REQ-MODULE_VALIDATION:
   cross_references:
     - "ARCH-MODULE_VALIDATION"
     - "IMPL-MODULE_VALIDATION"
-  description: "Index stub; procedure in agent-req-implementation-checklist.yaml"
-  detail_file: "null"
+  description: "Independent module validation before integration"
+  detail_file: "requirements/REQ-MODULE_VALIDATION.yaml"
   metadata:
     last_updated: "2026-04-21"
     registered: "2025-01-27"
@@ -591,8 +591,8 @@ REQ-TIED_SETUP:
   cross_references:
     - "ARCH-TIED_STRUCTURE"
     - "IMPL-TIED_FILES"
-  description: "Index stub; procedure in agent-req-implementation-checklist.yaml"
-  detail_file: "null"
+  description: "TIED methodology setup and client bootstrap"
+  detail_file: "requirements/REQ-TIED_SETUP.yaml"
   metadata:
     last_updated: "2026-04-21"
     registered: "2025-11-08"

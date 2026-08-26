@@ -1,0 +1,115 @@
+CITDP-REQ-TIED_BOOTSTRAP_DETAIL_INTEGRITY:
+  change_definition:
+    current_behavior_prior: "Inherited methodology indexes reference bootstrap-critical tokens with detail_file sentinels or missing template detail files; tied_validate_consistency fails on fresh clients."
+    desired_behavior: "Templates promote feedback stack detail files, indexes use usable paths, copy_files.sh verifies inherited detail integrity, and MCP validator/loader treat sentinels as absent."
+    non_goals:
+      - "Bulk cleanup of unrelated semantic-token null rows"
+      - "Edit client project YAML for methodology tokens"
+      - "Execute plan-close-out commit during refine-plan"
+      - "Extend listDetailTokens to scan methodology dirs"
+      - "Refresh client 1787691672 as source-repo close-out"
+    references:
+      - "copy_files.sh"
+      - "docs/methodology-detail-files-bootstrap-fix-plan.md"
+      - "mcp-server/src/consistency-validator.ts"
+      - "mcp-server/src/detail-file-path.ts"
+      - "mcp-server/src/detail-loader.ts"
+      - "templates/"
+    success_criteria:
+      - "Bootstrap detail-integrity gate passes"
+      - "Five bootstrap-critical tokens resolve under tied/methodology/"
+      - "Smoke client tied_validate_consistency ok:true"
+  completion_criteria:
+    activation:
+      phase: "close_out"
+      project_id: "stdd-bootstrap-detail-integrity"
+      request_token: "REQ-TIED_BOOTSTRAP_DETAIL_INTEGRITY"
+      run_id: "plan-close-out-20260826"
+    record_status: "complete"
+    verification_gate_notes: "Close-out 2026-08-26: mcp-server tsc -b and npm test (497 pass); copy_files.sh smoke with verify_inherited_detail_files complete; source and smoke-client tied_validate_consistency ok:true; lint_yaml passed; close_out inquiry plan-close-out-20260826 advisory warn (2 open semantic_fidelity findings, non-blocking); tied_checklist_gate_validate close_out allowed:true."
+  impact_analysis:
+    modules_or_boundaries: "templates/, copy_files.sh bootstrap gates, MCP detail loader and consistency validator"
+    tied_tokens_affected:
+      - "ARCH-FEEDBACK_STORAGE"
+      - "ARCH-TIED_STRUCTURE"
+      - "IMPL-MCP_FEEDBACK_TOOLS"
+      - "IMPL-MODULE_VALIDATION"
+      - "IMPL-TIED_FILES"
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-MODULE_VALIDATION"
+      - "REQ-TIED_SETUP"
+    tied_tokens_new:
+      - "REQ-TIED_BOOTSTRAP_DETAIL_INTEGRITY"
+  record_identity:
+    change_request_id: "REQ-TIED_BOOTSTRAP_DETAIL_INTEGRITY"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    checklist_step_completed: "risk-assessment"
+    checklist_version: "agent_req_implementation_checklist v3.0.0"
+    recorded_at: "2026-08-25"
+    refined_at: "2026-08-26"
+    tied_context:
+      architecture:
+        - "ARCH-TIED_STRUCTURE"
+      implementation:
+        - "IMPL-TIED_FILES"
+      requirements:
+        - "REQ-TIED_BOOTSTRAP_DETAIL_INTEGRITY"
+        - "REQ-TIED_SETUP"
+    title: "Bootstrap inherited methodology detail-file integrity"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_path: "new_close_out_run"
+      close_out_inquiry_waiver: null
+      depth_change_waiver: null
+      depth_tier: "integrated"
+      eligibility_triggers_matched:
+        - "persistence"
+        - "strict-close-out"
+      gate_policy: "fail closed for missing or escaping inherited detail artifacts"
+      inquiry_policy: "advisory"
+      integrated_waiver: null
+      planned_close_out_phase: "close_out"
+      planned_close_out_run_id: "plan-close-out-20260826"
+      prior_depth_tier: "integrated"
+      profile_depth: "not_measured"
+      rationale: "Bootstrap filesystem behavior and inherited/project boundary changes require integrated verification. Close-out uses a new identity-bound inquiry run because no verification-phase artifacts exist; a close-out inquiry waiver is forbidden on this request."
+      research_profile: "integrated-agent"
+      strict_eligibility_prerequisites: []
+      structural_inquiry_disposition:
+        artifact_dir: "working/REQ-TIED_BOOTSTRAP_DETAIL_INTEGRITY/adversarial-inquiry/phase-pre_implementation/"
+        mapped_mcp_phase: "pre_implementation"
+        run_id: "refine-plan-pre-impl-20260826"
+        status: "complete"
+    close_out_inquiry_waiver: null
+    depth_change_waiver: null
+    depth_tier: "integrated"
+    gate_policy: "fail closed for missing or escaping inherited detail artifacts"
+    integrated_waiver: null
+    prior_depth_tier: "integrated"
+    profile_depth: "not_measured"
+    risks:
+      - description: "Close-out gate fails closed if Tracker remains unreconciled or close_out pairing is missing"
+        id: "RISK-BOOTSTRAP-002"
+        likelihood: "High"
+        mitigation: "plan-close-out must reconcile Tracker, run identity-bound close_out inquiry, persist gate-close_out.json, and hard-stop on allowed false"
+        severity: "High"
+      - description: "Template promotion drift leaves clients with unresolved detail paths"
+        id: "RISK-BOOTSTRAP-001"
+        likelihood: "Medium"
+        mitigation: "verify_inherited_detail_files gate and bootstrap e2e tests"
+        severity: "High"
+  test_strategy:
+    close_out_verification:
+      - "(cd mcp-server && bunx tsc -b)"
+      - "(cd mcp-server && npm run build && npm test)"
+      - "./copy_files.sh /tmp/tied-bootstrap-smoke-integrity"
+      - "lint_yaml on changed CITDP, REQ, and Tracker YAML"
+      - "TIED_BASE_PATH=/tmp/tied-bootstrap-smoke-integrity/tied tied-cli.sh tied_validate_consistency"
+    composition_tests:
+      - "mcp-server/src/e2e/bootstrap-and-load.test.ts"
+    summary: "Unit tests for sentinel classification and loader boundaries; composition bootstrap gate; smoke-client tied_validate_consistency. Close-out verification battery is executed only by plan-close-out, not refine-plan."
+    unit_tests:
+      - "mcp-server/src/detail-file-path.test.ts"
+      - "mcp-server/src/detail-loader-sentinel.test.ts"

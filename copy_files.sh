@@ -1035,3 +1035,88 @@ verify_feature_orchestration_methodology() {
 }
 
 verify_feature_orchestration_methodology
+
+# --- Inherited detail-file integrity verification ---
+# [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_BOOTSTRAP_DETAIL_INTEGRITY] [REQ-TIED_SETUP]
+# How: VERIFY_INHERITED_DETAIL_FILES — fail bootstrap when bootstrap-critical
+# methodology detail artifacts are missing or indexed usable paths do not resolve.
+INHERITED_DETAIL_REQUIRED=(
+  "methodology/requirements/REQ-TIED_SETUP.yaml"
+  "methodology/requirements/REQ-MODULE_VALIDATION.yaml"
+  "methodology/requirements/REQ-FEEDBACK_TO_TIED.yaml"
+  "methodology/architecture-decisions/ARCH-FEEDBACK_STORAGE.yaml"
+  "methodology/architecture-decisions/ARCH-MODULE_VALIDATION.yaml"
+  "methodology/implementation-decisions/IMPL-MCP_FEEDBACK_TOOLS.yaml"
+  "methodology/implementation-decisions/IMPL-MCP_FEEDBACK_TOOLS-pseudocode.md"
+  "methodology/implementation-decisions/IMPL-MODULE_VALIDATION.yaml"
+  "methodology/implementation-decisions/IMPL-MODULE_VALIDATION-pseudocode.md"
+)
+
+_is_usable_detail_file() {
+  local value="$1"
+  [[ -n "${value}" ]] || return 1
+  value="${value#"${value%%[![:space:]]*}"}"
+  value="${value%"${value##*[![:space:]]}"}"
+  [[ -n "${value}" ]] || return 1
+  case "${value}" in
+    null|~ ) return 1 ;;
+  esac
+  return 0
+}
+
+verify_inherited_detail_files() {
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_BOOTSTRAP_DETAIL_INTEGRITY] [REQ-TIED_SETUP]
+  # How: Require bootstrap-critical artifacts and verify usable indexed detail_file paths resolve under tied/methodology/.
+  local _missing=0 _relative _index _token _detail_file _resolved
+  say_warn "MUST verify inherited methodology detail-file integrity before completion."
+  for _relative in "${INHERITED_DETAIL_REQUIRED[@]}"; do
+    if [[ ! -f "${TIED_DIR}/${_relative}" ]]; then
+      say_err "MISSING mandatory inherited detail artifact: ${TIED_DIR}/${_relative}"
+      _missing=1
+    fi
+  done
+  for _index in requirements architecture-decisions implementation-decisions; do
+    local _index_path="${TIED_DIR}/methodology/${_index}.yaml"
+    [[ -f "${_index_path}" ]] || continue
+    while IFS=$'\t' read -r _token _detail_file; do
+      [[ -n "${_token}" ]] || continue
+      if ! _is_usable_detail_file "${_detail_file}"; then
+        continue
+      fi
+      _resolved="${TIED_DIR}/methodology/${_detail_file}"
+      case "${_resolved}" in
+        "${TIED_DIR}/methodology"/*) ;;
+        *)
+          say_err "INDEX detail_file escapes methodology boundary: ${_index}.yaml ${_token} -> ${_detail_file}"
+          _missing=1
+          continue
+          ;;
+      esac
+      if [[ "${_detail_file}" == *".."* ]]; then
+        say_err "INDEX detail_file traversal rejected: ${_index}.yaml ${_token} -> ${_detail_file}"
+        _missing=1
+        continue
+      fi
+      if [[ ! -f "${_resolved}" ]]; then
+        say_err "INDEX detail_file unresolved: ${_index}.yaml ${_token} -> ${TIED_DIR}/methodology/${_detail_file}"
+        _missing=1
+      fi
+    done < <(ruby -ryaml -e '
+      index = ARGV[0]
+      data = YAML.load_file(index)
+      data.each do |token, rec|
+        next unless rec.is_a?(Hash)
+        df = rec["detail_file"]
+        puts [token, df.to_s].join("\t")
+      end
+    ' "${_index_path}")
+  done
+  if [[ "${_missing}" -ne 0 ]]; then
+    say_err "Inherited detail-file integrity verification failed; client bootstrap is incomplete."
+    return 1
+  fi
+  say_ok "MUST verify inherited methodology detail-file integrity: complete."
+  say_warn "CAN run structural validation: TIED_BASE_PATH=${TIED_BASE_PATH_VALUE} ${TIED_CLI_DEST:-${CURSOR_DIR}/skills/tied-yaml/scripts/tied-cli.sh} tied_validate_consistency."
+}
+
+verify_inherited_detail_files

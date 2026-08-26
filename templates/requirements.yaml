@@ -18,7 +18,7 @@ REQ-EVIDENCE_CHAIN_PROFILE:
       - "IMPL-EVIDENCE_CHAIN_PROFILE"
 REQ-FEEDBACK_TO_TIED:
   category: "Functional"
-  detail_file: "null"
+  detail_file: "requirements/REQ-FEEDBACK_TO_TIED.yaml"
   metadata:
     last_updated:
       reason: "Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml"
@@ -29,7 +29,7 @@ REQ-FEEDBACK_TO_TIED:
     related_to:
       - "REQ-TIED_SETUP"
     supersedes: []
-  status: "Planned"
+  status: "Implemented"
   traceability:
     architecture:
       - "ARCH-FEEDBACK_STORAGE"
@@ -37,7 +37,7 @@ REQ-FEEDBACK_TO_TIED:
       - "IMPL-MCP_FEEDBACK_TOOLS"
 REQ-MODULE_VALIDATION:
   category: "Functional"
-  detail_file: "null"
+  detail_file: "requirements/REQ-MODULE_VALIDATION.yaml"
   metadata:
     last_updated:
       reason: "Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml"
@@ -126,7 +126,7 @@ REQ-TIED_FIDELITY_RESEARCH:
       - "IMPL-TIED_FIDELITY_RESEARCH"
 REQ-TIED_SETUP:
   category: "Functional"
-  detail_file: "null"
+  detail_file: "requirements/REQ-TIED_SETUP.yaml"
   metadata:
     last_updated:
       reason: "Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml"

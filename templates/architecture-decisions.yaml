@@ -21,7 +21,7 @@ ARCH-EVIDENCE_CHAIN_PROFILE:
 ARCH-FEEDBACK_STORAGE:
   cross_references:
     - "REQ-FEEDBACK_TO_TIED"
-  detail_file: "null"
+  detail_file: "architecture-decisions/ARCH-FEEDBACK_STORAGE.yaml"
   metadata:
     last_updated:
       reason: "Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml"

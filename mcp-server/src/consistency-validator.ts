@@ -15,6 +15,7 @@ import {
   type IndexName,
 } from "./yaml-loader.js";
 import { loadDetail, getDetailPath, listDetailTokens, DETAIL_FORMAT } from "./detail-loader.js";
+import { isUsableDetailFilePath, resolveDetailFileUnderBase } from "./detail-file-path.js";
 
 const INDEX_NAMES: IndexName[] = [
   "requirements",
@@ -214,14 +215,15 @@ export function validateConsistency(options: ValidateConsistencyOptions = {}): C
     const detailFileExists: string[] = [];
     for (const token of tokens) {
       const rec = data?.[token] as Record<string, unknown> | undefined;
-      if (rec?.detail_file) {
+      const detailFile = rec?.detail_file;
+      if (isUsableDetailFilePath(detailFile)) {
         withDetailFile.push(token);
         const basePath =
           getMethodologyBasePath() && isTokenInMethodology(indexName, token)
             ? getMethodologyBasePath()!
             : getBasePath();
-        const detailPath = path.join(basePath, String(rec.detail_file));
-        if (fs.existsSync(detailPath)) detailFileExists.push(token);
+        const detailPath = resolveDetailFileUnderBase(basePath, detailFile);
+        if (detailPath && fs.existsSync(detailPath)) detailFileExists.push(token);
       }
     }
     report.index_tokens[indexName] = { tokens, with_detail_file: withDetailFile, detail_file_exists: detailFileExists };

@@ -56,6 +56,11 @@ describe("e2e: bootstrap and load", () => {
       /MUST verify feature orchestration methodology artifacts/,
       "bootstrap should report the mandatory feature orchestration methodology gate [REQ-FEAT_ONBOARDING_COMMANDS]"
     );
+    assert.match(
+      bootstrapOutput,
+      /MUST verify inherited methodology detail-file integrity: complete\./,
+      "bootstrap should report the inherited detail-file integrity gate [REQ-TIED_BOOTSTRAP_DETAIL_INTEGRITY]"
+    );
     const tiedDir = path.join(tempDir, "tied");
     assert.ok(fs.existsSync(tiedDir), "tied/ should exist after copy_files.sh");
     assert.ok(
@@ -192,10 +197,39 @@ describe("e2e: bootstrap and load", () => {
       stdio: "pipe",
     });
 
+    assert.ok(
+      fs.existsSync(
+        path.join(tiedDir, "methodology", "requirements", "REQ-FEEDBACK_TO_TIED.yaml")
+      ),
+      "Methodology should include the feedback requirement detail [REQ-FEEDBACK_TO_TIED]"
+    );
+    assert.ok(
+      fs.existsSync(
+        path.join(tiedDir, "methodology", "architecture-decisions", "ARCH-FEEDBACK_STORAGE.yaml")
+      ),
+      "Methodology should include the feedback architecture detail [ARCH-FEEDBACK_STORAGE]"
+    );
+    assert.ok(
+      fs.existsSync(
+        path.join(tiedDir, "methodology", "implementation-decisions", "IMPL-MCP_FEEDBACK_TOOLS.yaml")
+      ),
+      "Methodology should include the feedback implementation detail [IMPL-MCP_FEEDBACK_TOOLS]"
+    );
     const rec = getRecord("requirements", "REQ-TIED_SETUP");
     assert.ok(rec !== null && typeof rec === "object", "getRecord should return REQ-TIED_SETUP");
     const recObj = rec as Record<string, unknown>;
     assert.strictEqual(recObj.name, "TIED Methodology Setup");
+    assert.strictEqual(
+      recObj.detail_file,
+      "requirements/REQ-TIED_SETUP.yaml",
+      "inherited REQ-TIED_SETUP index must reference usable detail_file path"
+    );
+    const moduleRec = getRecord("requirements", "REQ-MODULE_VALIDATION") as Record<string, unknown>;
+    assert.strictEqual(
+      moduleRec.detail_file,
+      "requirements/REQ-MODULE_VALIDATION.yaml",
+      "inherited REQ-MODULE_VALIDATION index must reference usable detail_file path"
+    );
 
     const tiedCli = path.join(tempDir, ".cursor", "skills", "tied-yaml", "scripts", "tied-cli.sh");
     assert.ok(

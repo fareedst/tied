@@ -20,6 +20,7 @@ import { safeDumpTiedDetailDoc } from "./yaml-dump.js";
 import { mergeRecordUpdate } from "./record-merge.js";
 import { writeAtomicText, type YamlFormatMetadata } from "./yaml-canonicalizer.js";
 import { getDefaultTiedBasePath, resolveYamlStyle } from "./yaml-style-config.js";
+import { isUsableDetailFilePath } from "./detail-file-path.js";
 
 export type DetailType = "requirement" | "architecture" | "implementation";
 
@@ -75,7 +76,7 @@ export function getDetailPath(token: string): string | null {
     if (indexName) {
       const record = getRecord(indexName, token) as Record<string, unknown> | null;
       const detailFile = record?.detail_file;
-      if (typeof detailFile === "string" && detailFile.trim()) {
+      if (isUsableDetailFilePath(detailFile)) {
         const fromIndex = path.join(base, detailFile);
         if (fs.existsSync(fromIndex)) return fromIndex;
       }
@@ -211,7 +212,13 @@ export function listDetailTokens(type: DetailType): string[] {
   const indexData = loadIndex(indexName);
   if (indexData) {
     for (const [token, record] of Object.entries(indexData)) {
-      if (typeof record === "object" && record !== null && (record as Record<string, unknown>).detail_file) seen.add(token);
+      if (
+        typeof record === "object" &&
+        record !== null &&
+        isUsableDetailFilePath((record as Record<string, unknown>).detail_file)
+      ) {
+        seen.add(token);
+      }
     }
   }
   const dir = path.join(base, subdir);

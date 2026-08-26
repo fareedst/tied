@@ -204,3 +204,26 @@ procedure LINT_YAML_PATHS(paths):
     st := CALL CANONICALIZE_YAML_FILE(path)
     IF st != 0: rc := st
   RETURN rc
+
+procedure VERIFY_INHERITED_DETAIL_FILES(client_tied_dir):
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
+  # How: After methodology copy, require bootstrap-critical detail artifacts and verify every usable indexed detail_file resolves under tied/methodology/ without traversal.
+  Contract:
+    INPUT: client tied/ directory with refreshed methodology snapshot
+    OUTPUT: exit status 0 when complete; diagnostic messages on failure
+    DATA: methodology index YAML rows; required artifact relative paths
+    CONTROL: fail closed; skip sentinel detail_file values; reject .. traversal
+    PRE: copy_files.sh has populated tied/methodology/ indexes and detail trees
+    POST: required artifacts exist; every usable indexed path resolves in-bound
+    EFFECTS: Process — read-only verification; no client project YAML mutation
+    FAILURE_MODES: MISSING_REQUIRED_ARTIFACT; UNRESOLVED_INDEX_PATH; TRAVERSAL_REJECTED
+    DATA_TRANSITION: copied methodology→verified integrity or bootstrap abort
+    TERMINATION: total — finite required list plus finite index scan
+  FOR each required relative path in INHERITED_DETAIL_REQUIRED:
+    IF file missing under client_tied_dir/methodology: RETURN error
+  FOR each methodology index in [requirements, architecture-decisions, implementation-decisions]:
+    FOR each token row with usable detail_file:
+      IF resolved path escapes methodology boundary OR contains ..: RETURN error
+      IF resolved file missing: RETURN error
+  EMIT completion guidance for tied_validate_consistency
+  RETURN success
