@@ -140,7 +140,7 @@ Exact tool names registered in `mcp-server/src/tools/index.ts`:
 
 | Tool | Purpose |
 |------|---------|
-| `tied_cycles` | Dependency cycle report |
+| `tied_cycles` | Dependency cycle report; response includes `ok` where `ok === !has_cycles` |
 | `tied_backlog` | Backlog view |
 | `tied_scoped_analysis_run` | Scoped analysis pass |
 | `tied_plumb_diff_impact_preview` | Diff impact preview |

@@ -260,6 +260,14 @@ Detect cycles in the dependency graph.
 |-------|------|----------|-------------|
 | `graph` | string | no | `requirements` (default) or `implementation` |
 
+**Response fields:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `cycles` | array | List of cycles; each cycle is an array of tokens |
+| `has_cycles` | boolean | `true` when `cycles.length > 0` |
+| `ok` | boolean | Pass/fail for the check; `ok === !has_cycles` (equivalently `cycles.length === 0`) |
+
 ### `tied_backlog`
 
 Backlog views from the requirement dependency graph.

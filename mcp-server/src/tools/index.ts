@@ -1274,8 +1274,9 @@ export const allTools = [
           ? buildImplementationGraph()
           : buildRequirementGraph();
       const cycles = findCycles(g);
+      const has_cycles = cycles.length > 0;
       return textContent(
-        JSON.stringify({ cycles, has_cycles: cycles.length > 0 }, null, 2)
+        JSON.stringify({ cycles, has_cycles, ok: !has_cycles }, null, 2)
       );
     },
   },

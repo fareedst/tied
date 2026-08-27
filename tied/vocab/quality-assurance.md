@@ -44,6 +44,10 @@
 | client alias | display name, human client name | Optional human-readable label on a **report input manifest** row. Stable identity remains the profile hashed `project_id`. | `CLIENT_ALIAS` |
 | denominator fingerprint | denominator hash, cohort denominator key | Stable hash of required derived-path denominators plus structural denominators for one profile; used in v2 to partition **denominator subcohorts** inside a **client cohort**. Distinct from **proof boundary** and from summing derived-field values. | `DENOMINATOR_FINGERPRINT` |
 | denominator subcohort | A subset of a **client cohort** whose members share the same **denominator fingerprint**. v2 never rolls incompatible denominators into one sub-cohort statistic. | `DENOMINATOR_SUBCOHORT` |
+| evaluation corpus | Versioned `evaluation-corpus.v1` registry of control-project rows, including analysis scope, execution policy, privacy tier, and fixed commit; distinct from a fidelity project manifest and a report input manifest. | `EVALUATION_CORPUS` |
+| comparable arms | Versioned `comparable-arms.v1` per-field comparison outputs with explicit denominators and proof boundaries; never a maturity score or universal ranking. | `COMPARABLE_ARMS` |
+| execution policy | Corpus-row policy `live_ok`, `static_only`, or `live_attempted`, always paired with a recorded outcome and `live`/`static` label. | `EXECUTION_POLICY` |
+| privacy tier | Corpus-row export boundary: `operator_local`, `shareable_hashed`, or `forbidden_export`; shareable output defaults to hashed identity without absolute paths or source trees. | `PRIVACY_TIER` |
 | adherence ledger | adherence event log, session ledger (forbidden: evidence chain profile) | Append-only `agent-adherence-event.v1` JSONL storing hash/reference edges for six checklist lifecycle event classes; distinct from **evidence chain profile** and **verification evidence manifest**. | `ADHERENCE_LEDGER` |
 | adherence event class | lifecycle event, stage event | One of six non-interchangeable classes: `instruction_rendered`, `agent_acknowledged`, `action_attempted`, `outcome_verified`, `gate_decided`, `status_mutated`. Each class has explicit non-implication rules vs adjacent stages. | `ADHERENCE_EVENT_CLASS` |
 | adherence reconciliation | adherence audit, chain reconcile | Read-only report comparing ledger rows, Tracker, gate receipts, and TIED indexes; emits deterministic finding codes without mutating state. | `ADHERENCE_RECONCILIATION` |
@@ -111,6 +115,10 @@ Domain terms above are distinct from IMPL grammar keywords such as `INPUT`, `OUT
 | client cohort | `compatibility_key` / `CLIENT_COHORT` | `[ARCH-EVIDENCE_CHAIN_REPORT]` |
 | report input manifest | `evidence-chain-report-inputs.v1` / `REPORT_INPUT_MANIFEST` | `[IMPL-EVIDENCE_CHAIN_REPORT]` |
 | client alias | `client_alias` / `CLIENT_ALIAS` | `[REQ-EVIDENCE_CHAIN_REPORT]` |
+| evaluation corpus | `working/evaluation/evaluation-corpus.v1.yaml` / `evaluation-corpus.v1` | `[REQ-EVIDENCE_CHAIN_REPORT]` |
+| comparable arms | `comparable-arms.v1` | `[REQ-EVIDENCE_CHAIN_REPORT]` |
+| execution policy | `execution_policy` | `[REQ-EVIDENCE_CHAIN_REPORT]` |
+| privacy tier | `privacy_tier` | `[REQ-EVIDENCE_CHAIN_REPORT]` |
 | idempotency key | `event_id` / `IDEMPOTENCY_KEY` | `[IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK]` |
 
 ## Pseudo-code block names
@@ -142,6 +150,9 @@ Domain terms above are distinct from IMPL grammar keywords such as `INPUT`, `OUT
 | evidence-chain profile depth | Canonical terms |
 | evidence chain statistics report | Canonical terms |
 | client cohort | Canonical terms |
+| comparable arms | Canonical terms |
+| evaluation corpus | Canonical terms |
+| execution policy | Canonical terms |
 | report input manifest | Canonical terms |
 | client alias | Canonical terms |
 | event claim | Canonical terms |
@@ -151,3 +162,4 @@ Domain terms above are distinct from IMPL grammar keywords such as `INPUT`, `OUT
 | proof boundary | Canonical terms |
 | quality command declaration | Canonical terms |
 | vocabulary drift adapter | Canonical terms |
+| privacy tier | Canonical terms |

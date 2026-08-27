@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **MCP tool `tied_cycles`** — Response now includes `ok` aligned with `has_cycles` (`ok === !has_cycles`) for evidence-chain structural validator parity. Additive contract change; existing `cycles` and `has_cycles` fields unchanged.
+
 ### Added
 
 - **Checklist adherence Stage Q — inquiry sub-turn + rollout ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —

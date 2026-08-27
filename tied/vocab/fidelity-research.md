@@ -40,6 +40,8 @@ implementation decisions and pseudo-code for the research tooling.
 | **evidence chain statistics report** | cross-project audit, maturity dashboard | TIED-source offline batch owned by quality-assurance vocabulary; consumes profile artifacts only; does not append findings or promote cases. |
 | **fidelity research pilot** | pilot run | Concrete bounded execution path for the first slice; distinct from cross-project aggregation. |
 | **successful control change** | non-bug sample | A behavior-changing change included to estimate defect rates without selection bias. |
+| **control project** | incident-only control, comparison repository | A non-TIED repository or matched successful-change sample included to estimate comparison rates; it is not itself a confirmed finding or a fidelity case report. |
+| **historical defect proxy** | defect rate, confirmed defect (forbidden alone) | A non-TIED revert, hotfix, or defect-labeled issue counted with `proof_boundary: human_decision`; it is not a confirmed finding. |
 | **integrated activation evidence** | activation signal, metric-only activation | Paired request-scoped inquiry metric and complete bounded artifacts demonstrating tool-backed activation. |
 | **identity-bound activation** | reused receipt, cross-phase activation | Same pairing as **integrated activation evidence**, with `run_id` and `phase` bound to one **phase artifact directory**; a verification receipt is never valid `close_out` activation. |
 | **activation artifact pairing** | artifact check, activation completeness | The rule that an inquiry metric and all four request-scoped artifacts are required together. |
@@ -251,6 +253,8 @@ convenience projection only and never satisfy another phase's pairing. See
 | specification state | Preferred terms vs synonyms |
 | sub_stub_pending | Evidence remediation diagnostics |
 | successful control change | Preferred terms vs synonyms |
+| control project | Preferred terms vs synonyms |
+| historical defect proxy | Preferred terms vs synonyms |
 | Tracker disposition | Preferred terms vs synonyms |
 | tracker_not_authoritative | Evidence remediation diagnostics |
 | tracker_sparse | Evidence remediation diagnostics |

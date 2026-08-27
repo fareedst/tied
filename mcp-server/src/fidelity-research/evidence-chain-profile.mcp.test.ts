@@ -89,6 +89,16 @@ describe("evidence_chain_profile_generate MCP binding [REQ-EVIDENCE_CHAIN_PROFIL
     assert.ok(structural.length > 0);
     assert.ok(structural.every((row) => row.status === "observed"));
     assert.ok(structural.every((row) => typeof row.proof_boundary === "string" && row.proof_boundary.length > 0));
+
+    const tiedCyclesRow = structural.find(
+      (row) => (row as { value?: { validator?: string } }).value?.validator === "tied_cycles",
+    ) as { value?: { validator?: string; ok?: boolean } } | undefined;
+    assert.ok(tiedCyclesRow, "expected structural row for tied_cycles validator");
+    assert.equal(tiedCyclesRow.value?.ok, true);
+
+    const graph = (result.profile as { evidence_chain?: { graph?: { value?: { cycles?: number } } } })
+      .evidence_chain?.graph?.value;
+    assert.equal(graph?.cycles, 0);
   });
 
   it("keeps structural rows not_measured without invoke_structural_validators", async () => {

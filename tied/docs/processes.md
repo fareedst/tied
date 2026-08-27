@@ -1432,7 +1432,7 @@ Applies to `related_requirements.depends_on` in the requirements index and `rela
 Active
 
 ### Core Activities
-1. **Cycle detection**: Build a directed graph from `related_requirements.depends_on` (and optionally IMPL `depends_on`). Run cycle detection (e.g. MCP tool `tied_cycles` or equivalent). If cycles exist, report them and resolve before using dependency order. Document in this process: "Resolve circular dependencies before ordering is meaningful."
+1. **Cycle detection**: Build a directed graph from `related_requirements.depends_on` (and optionally IMPL `depends_on`). Run cycle detection (e.g. MCP tool `tied_cycles` or equivalent). The `tied_cycles` MCP response includes `ok` alongside `has_cycles` (`ok === !has_cycles`). If cycles exist, report them and resolve before using dependency order. Document in this process: "Resolve circular dependencies before ordering is meaningful."
 2. **Topological order**: List REQs (or IMPLs) in dependency order (roots first, then dependents). Use for implementation order: implement roots first, then dependents.
 3. **Backlog views**: Provide views such as: **blockers** — items whose dependents are not satisfied; **critical** — high priority + dependency chain; **quick-wins** — no dependents or leaf nodes. Use MCP tool `tied_backlog` with a view parameter (e.g. `critical`, `blockers`, `quick-wins`) or a script that reads the requirements index and dependency graph.
 
