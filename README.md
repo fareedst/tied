@@ -169,7 +169,49 @@ Run one selected spec with the Ruby driver:
 
 The Go alternative is `scripts/run-feature-batch-agentstream.sh`, backed by `tools/agentstream`. Its optional TIED MCP preflight is enabled with `--tied-mcp-preflight` or `AGENTSTREAM_TIED_MCP_PREFLIGHT=1`; it is off by default. See [tools/agentstream/README.md](tools/agentstream/README.md) for the Go runner and [tools/agent-stream/README.md](tools/agent-stream/README.md) for the Ruby runner.
 
-## Getting started with a new project
+## TIED source repository setup
+
+These steps prepare **this TIED checkout** (MCP server, bootstrap engine, optional Go runner). They are separate from bootstrapping a **client project** with `copy_files`.
+
+**Prerequisites**
+
+| Tool | Version | Required for |
+| --- | --- | --- |
+| Node.js | 18+ | `copy_files`, MCP server, bootstrap verification gates |
+| Go | 1.22+ | `agentstream` binary only (batch/checklist driver) |
+
+**Unix / Git Bash** (from the TIED repository root):
+
+```bash
+cd mcp-server && npm install && npm run build
+cd ../tools/bootstrap && npm install
+cd ../tools/agentstream && go build -o agentstream ./cmd/agentstream
+```
+
+**Windows (`cmd.exe`)** (from the TIED repository root):
+
+```cmd
+cd mcp-server && npm install && npm run build && cd ..\tools\bootstrap && npm install && cd ..
+cd tools\agentstream && go build -o agentstream .\cmd\agentstream && cd ..\..
+```
+
+What each step enables:
+
+| Step | Produces | Used by |
+| --- | --- | --- |
+| `mcp-server` build | `mcp-server/dist/index.js` | TIED YAML MCP, `tied-cli`, `copy_files` (hard prerequisite), YAML lint |
+| `tools/bootstrap` install | `js-yaml` for verification gates | `copy_files.sh` / `copy-files.mjs` completion checks |
+| `tools/agentstream` build | `tools/agentstream/agentstream` | `scripts/run-feature-batch-agentstream.sh` (or set `AGENTSTREAM` to that path) |
+
+Notes:
+
+- `npm install` in `mcp-server` also runs `prepare` → `npm run build`, so an explicit `npm run build` is optional but documents intent.
+- `scripts/run-feature-batch-agentstream.sh` can fall back to `go run` when no binary is built, but a local `go build` is preferred for repeatable runs.
+- See [tools/bootstrap/README.md](tools/bootstrap/README.md) for Windows entry points (`copy_files.cmd`, `scripts\test-new-tied-client`).
+
+## Getting started with a new client project
+
+Complete [TIED source repository setup](#tied-source-repository-setup) first. `copy_files` fails without a built MCP server and bootstrap dependencies.
 
 ### 1. Copy the methodology
 
@@ -199,13 +241,7 @@ Methodology-owned YAML under `tied/methodology/` is read-only in the client and 
 
 ### 2. Optionally enable the MCP server
 
-The MCP server stays in this TIED repository; it is not copied into the client. Build it once from the TIED repository root:
-
-```bash
-cd mcp-server && npm install && npm run build
-```
-
-The resulting `mcp-server/dist/index.js` can serve a client. `copy_files.sh` creates `.cursor/mcp.json` with the `tied-yaml` entry when that file is missing, and preserves an existing file byte-for-byte. For manual configuration or details, see [adding TIED MCP and invoking passes](tied/docs/adding-tied-mcp-and-invoking-passes.md). From the client project root, the recommended Cursor flow is:
+The MCP server stays in this TIED repository; it is not copied into the client. After [source setup](#tied-source-repository-setup), `mcp-server/dist/index.js` serves any client. `copy_files.sh` creates `.cursor/mcp.json` with the `tied-yaml` entry when that file is missing, and preserves an existing file byte-for-byte. For manual configuration or details, see [adding TIED MCP and invoking passes](tied/docs/adding-tied-mcp-and-invoking-passes.md). From the client project root, the recommended Cursor flow is:
 
 ```bash
 agent mcp enable tied-yaml
