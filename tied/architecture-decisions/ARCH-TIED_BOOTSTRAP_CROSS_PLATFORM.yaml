@@ -1,0 +1,45 @@
+ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM:
+  cross_references:
+    - "ARCH-TIED_STRUCTURE"
+    - "IMPL-TIED_FILES"
+    - "REQ-TIED_SETUP"
+  implementation_approach:
+    details:
+      - "copy_files.cmd resolves via PATHEXT for neighboring-repo invocation."
+      - "copy_files.sh is a thin bash wrapper exec node tools/bootstrap/copy-files.mjs."
+      - "scripts/lint_yaml.cmd provides Windows -F tied lint parity via tools/bootstrap/lint-yaml.mjs."
+      - "scripts/new-tied-client.cmd and scripts/test-new-tied-client.cmd delegate to tools/bootstrap/new-tied-client.mjs for disposable client smoke."
+      - "tools/bootstrap/manifest.json is the single source for file lists and verify artifacts."
+    summary: "Shared Node bootstrap engine under tools/bootstrap/; platform entry points are thin shims for bootstrap and client-factory pipelines."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-09-02"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-09-02"
+      reason: "Windows-compatible bootstrap via shared Node engine"
+  name: "Cross-platform TIED bootstrap engine"
+  rationale:
+    benefits:
+      - "Manifest prevents list drift between platforms"
+      - "Platform entry points are thin shims only"
+      - "Single Node engine owns bootstrap behavior"
+    problems_solved:
+      - "Bash-only bootstrap on Windows"
+      - "Duplicated DOCS_TO_COPY and verify lists"
+    why: "Windows developers need the same BOOTSTRAP_TIED contract as Unix without maintaining parallel bash logic."
+  status: "Active"
+  traceability:
+    code_annotations:
+      - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
+      - "IMPL-TIED_FILES"
+      - "REQ-TIED_SETUP"
+    implementation:
+      - "IMPL-TIED_FILES"
+    requirements:
+      - "REQ-TIED_SETUP"
+    tests:
+      - "mcp-server/src/e2e/bootstrap-and-load.test.ts"
+      - "mcp-server/src/e2e/new-tied-client.test.ts"
+      - "mcp-server/src/e2e/prompt-type-skills.test.ts"

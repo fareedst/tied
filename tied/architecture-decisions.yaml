@@ -1397,6 +1397,14 @@ ARCH-TIED_ADVERSARIAL_INQUIRY:
   detail_file: "architecture-decisions/ARCH-TIED_ADVERSARIAL_INQUIRY.yaml"
   name: "Read-only obligation graph and evidence gate boundary"
   status: "Active"
+ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM:
+  cross_references:
+    - "ARCH-TIED_STRUCTURE"
+    - "IMPL-TIED_FILES"
+    - "REQ-TIED_SETUP"
+  detail_file: "architecture-decisions/ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM.yaml"
+  name: "Cross-platform TIED bootstrap engine"
+  status: "Active"
 ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT:
   cross_references:
     - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"

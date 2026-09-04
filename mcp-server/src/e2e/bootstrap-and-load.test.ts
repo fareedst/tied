@@ -16,6 +16,74 @@ import {
   resolveIndexPath,
 } from "../yaml-loader.js";
 
+type BootstrapEntrypoint = "node" | "bash";
+
+function runBootstrap(
+  repoRoot: string,
+  options: {
+    entrypoint?: BootstrapEntrypoint;
+    target: string;
+    args?: string[];
+    env?: NodeJS.ProcessEnv;
+  }
+): string {
+  const entrypoint = options.entrypoint ?? "node";
+  const extraArgs = options.args ?? [];
+  const env = { ...process.env, ...options.env };
+  if (entrypoint === "node") {
+    const nodeCli = path.join(repoRoot, "tools", "bootstrap", "copy-files.mjs");
+    return execFileSync(process.execPath, [nodeCli, ...extraArgs, options.target], {
+      stdio: "pipe",
+      cwd: repoRoot,
+      env,
+    }).toString();
+  }
+  const copyScript = path.join(repoRoot, "copy_files.sh");
+  return execFileSync("bash", [copyScript, ...extraArgs, options.target], {
+    stdio: "pipe",
+    cwd: repoRoot,
+    env,
+  }).toString();
+}
+
+function tiedRepoRootForAssertions(repoRoot: string): string {
+  const rp = fs.realpathSync.native ?? fs.realpathSync.bind(fs);
+  return rp(repoRoot).split(path.sep).join("/");
+}
+
+function jsonSafeAbsoluteForTest(p: string): string {
+  const rp = fs.realpathSync.native ?? fs.realpathSync.bind(fs);
+  return rp(p).split(path.sep).join("/");
+}
+
+function bashAvailable(): boolean {
+  try {
+    execFileSync("bash", ["--version"], { stdio: "ignore" });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function execShellScript(scriptPath: string, args: string[], options: { cwd: string; env: NodeJS.ProcessEnv }): string {
+  return execFileSync("bash", [scriptPath, ...args], { ...options, stdio: "pipe" }).toString();
+}
+
+function runValidateVocabIndexIfAvailable(repoRoot: string, projectRoot: string): void {
+  try {
+    execFileSync("ruby", [path.join(repoRoot, "scripts", "validate_vocab_index.rb"), projectRoot], {
+      cwd: repoRoot,
+      stdio: "pipe",
+    });
+  } catch (e) {
+    const err = e as NodeJS.ErrnoException;
+    if (err.code === "ENOENT") {
+      return;
+    }
+    throw e;
+  }
+}
+
 describe("e2e: bootstrap and load", () => {
   let tempDir: string;
   let repoRoot: string;
@@ -34,13 +102,12 @@ describe("e2e: bootstrap and load", () => {
     }
   });
 
-  it("copy_files.sh populates tied/ and loader reads requirements index from it [IMPL-TIED_FILES] [REQ-TIED_SETUP]", () => {
+  it("copy_files populates tied/ and loader reads requirements index from it [IMPL-TIED_FILES] [REQ-TIED_SETUP]", () => {
     const copyScript = path.join(repoRoot, "copy_files.sh");
+    const nodeCli = path.join(repoRoot, "tools", "bootstrap", "copy-files.mjs");
     assert.ok(fs.existsSync(copyScript), `copy_files.sh not found at ${copyScript}`);
-    const bootstrapOutput = execSync(`bash "${copyScript}" "${tempDir}"`, {
-      stdio: "pipe",
-      cwd: repoRoot,
-    }).toString();
+    assert.ok(fs.existsSync(nodeCli), `copy-files.mjs not found at ${nodeCli}`);
+    const bootstrapOutput = runBootstrap(repoRoot, { target: tempDir, entrypoint: "node" });
     assert.match(
       bootstrapOutput,
       /MUST verify fidelity research methodology artifacts/,
@@ -192,10 +259,7 @@ describe("e2e: bootstrap and load", () => {
       fs.existsSync(path.join(tiedDir, "methodology", "vocab", "feature-orchestration.md")),
       "bootstrap should publish feature orchestration vocabulary in the methodology snapshot [PROC-VOCABULARY_INDEX]"
     );
-    execFileSync("ruby", [path.join(repoRoot, "scripts", "validate_vocab_index.rb"), tempDir], {
-      cwd: repoRoot,
-      stdio: "pipe",
-    });
+    runValidateVocabIndexIfAvailable(repoRoot, tempDir);
 
     assert.ok(
       fs.existsSync(
@@ -237,7 +301,7 @@ describe("e2e: bootstrap and load", () => {
       "copy_files.sh should install the canonical tied-cli at .cursor/skills/tied-yaml/scripts/tied-cli.sh [IMPL-TIED_FILES]"
     );
     const tiedCliText = fs.readFileSync(tiedCli, "utf8");
-    const tiedRepoRootReal = fs.realpathSync(repoRoot);
+    const tiedRepoRootReal = tiedRepoRootForAssertions(repoRoot);
     assert.ok(
       tiedCliText.includes(`TIED_REPO_ROOT:=${tiedRepoRootReal}`),
       "installed tied-cli.sh should bake TIED_REPO_ROOT default from the TIED repo used for copy_files.sh"
@@ -251,10 +315,12 @@ describe("e2e: bootstrap and load", () => {
       fs.existsSync(tiedOnboarding),
       "copy_files.sh should install the feature onboarding wrapper [REQ-FEAT_ONBOARDING_COMMANDS]"
     );
-    assert.ok(
-      (fs.statSync(tiedOnboarding).mode & 0o111) !== 0,
-      "installed tied.sh should be executable [IMPL-TIED_FILES]"
-    );
+    if (process.platform !== "win32") {
+      assert.ok(
+        (fs.statSync(tiedOnboarding).mode & 0o111) !== 0,
+        "installed tied.sh should be executable [IMPL-TIED_FILES]"
+      );
+    }
     const tiedOnboardingText = fs.readFileSync(tiedOnboarding, "utf8");
     assert.ok(
       tiedOnboardingText.includes(`TIED_REPO_ROOT:=${tiedRepoRootReal}`),
@@ -274,18 +340,18 @@ describe("e2e: bootstrap and load", () => {
       fs.readFileSync(featureOrchestrator, "utf8").includes(`TIED_REPO_ROOT:=${tiedRepoRootReal}`),
       "installed feature-orchestrator.sh should bake TIED_REPO_ROOT from the TIED repo used for copy_files.sh"
     );
-    const onboardingResult = execFileSync(tiedOnboarding, ["init"], {
-      cwd: tempDir,
-      env: { ...process.env, TIED_BASE_PATH: tiedDir },
-      stdio: "pipe",
-    }).toString();
-    assert.match(onboardingResult, /"delegate": "feature-orchestrator bootstrap boundary"/);
-    const featureResult = execFileSync(tiedOnboarding, ["feature", "new", "Fresh client smoke"], {
-      cwd: tempDir,
-      env: { ...process.env, TIED_BASE_PATH: tiedDir },
-      stdio: "pipe",
-    }).toString();
-    assert.match(featureResult, /"delegate": "FeatureStore\.createIdempotently"/);
+    if (bashAvailable()) {
+      const onboardingResult = execShellScript(tiedOnboarding, ["init"], {
+        cwd: tempDir,
+        env: { ...process.env, TIED_BASE_PATH: tiedDir },
+      });
+      assert.match(onboardingResult, /"delegate": "feature-orchestrator bootstrap boundary"/);
+      const featureResult = execShellScript(tiedOnboarding, ["feature", "new", "Fresh client smoke"], {
+        cwd: tempDir,
+        env: { ...process.env, TIED_BASE_PATH: tiedDir },
+      });
+      assert.match(featureResult, /"delegate": "FeatureStore\.createIdempotently"/);
+    }
     const rootScriptsTiedCli = path.join(tempDir, "scripts", "tied-cli.sh");
     assert.ok(
       !fs.existsSync(rootScriptsTiedCli),
@@ -408,18 +474,13 @@ describe("e2e: bootstrap and load", () => {
   it("initializes opt-in MCP metrics fields with an override or project basename [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS]", () => {
     // [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS]
     // How: Create the default TIED MCP configuration only when the client has no .cursor/mcp.json; when TIED_MCP_COLLECT_METRICS is exactly 1, add metrics fields and derive the client label from an explicit override or the project basename; preserve an existing configuration byte-for-byte.
-    const copyScript = path.join(repoRoot, "copy_files.sh");
-    const runBootstrap = (target: string, metricsValue?: string, clientValue?: string) => {
-      const env = { ...process.env };
+    const runBootstrapMetrics = (target: string, metricsValue?: string, clientValue?: string) => {
+      const env: NodeJS.ProcessEnv = { ...process.env };
       delete env.TIED_MCP_COLLECT_METRICS;
       delete env.TIED_MCP_METRICS_CLIENT;
       if (metricsValue !== undefined) env.TIED_MCP_COLLECT_METRICS = metricsValue;
       if (clientValue !== undefined) env.TIED_MCP_METRICS_CLIENT = clientValue;
-      execFileSync("bash", [copyScript, target], {
-        stdio: "pipe",
-        cwd: repoRoot,
-        env,
-      });
+      runBootstrap(repoRoot, { target, entrypoint: "node", env });
       return JSON.parse(fs.readFileSync(path.join(target, ".cursor", "mcp.json"), "utf8")) as {
         mcpServers: { "tied-yaml": { env: Record<string, string> } };
       };
@@ -427,16 +488,16 @@ describe("e2e: bootstrap and load", () => {
 
     const basenameTarget = path.join(tempDir, "basename-client");
     fs.mkdirSync(basenameTarget);
-    const basenameConfig = runBootstrap(basenameTarget, "1");
+    const basenameConfig = runBootstrapMetrics(basenameTarget, "1");
     assert.deepStrictEqual(basenameConfig.mcpServers["tied-yaml"].env, {
-      TIED_BASE_PATH: fs.realpathSync(path.join(basenameTarget, "tied")),
+      TIED_BASE_PATH: jsonSafeAbsoluteForTest(path.join(basenameTarget, "tied")),
       TIED_MCP_COLLECT_METRICS: "1",
       TIED_MCP_METRICS_CLIENT: "basename-client",
     });
 
     const overrideTarget = path.join(tempDir, "override-client");
     fs.mkdirSync(overrideTarget);
-    const overrideConfig = runBootstrap(overrideTarget, "1", "explicit-client");
+    const overrideConfig = runBootstrapMetrics(overrideTarget, "1", "explicit-client");
     assert.strictEqual(
       overrideConfig.mcpServers["tied-yaml"].env.TIED_MCP_METRICS_CLIENT,
       "explicit-client"
@@ -444,16 +505,15 @@ describe("e2e: bootstrap and load", () => {
 
     const nonOneTarget = path.join(tempDir, "non-one-client");
     fs.mkdirSync(nonOneTarget);
-    const nonOneConfig = runBootstrap(nonOneTarget, "true");
+    const nonOneConfig = runBootstrapMetrics(nonOneTarget, "true");
     assert.deepStrictEqual(nonOneConfig.mcpServers["tied-yaml"].env, {
-      TIED_BASE_PATH: fs.realpathSync(path.join(nonOneTarget, "tied")),
+      TIED_BASE_PATH: jsonSafeAbsoluteForTest(path.join(nonOneTarget, "tied")),
     });
   });
 
   it("refreshes layered vocabulary without overwriting client content [IMPL-TIED_FILES] [IMPL-TIED_VOCABULARY_REFRESH] [REQ-TIED_VOCABULARY_OWNERSHIP]", () => {
     // [IMPL-TIED_FILES] [IMPL-TIED_VOCABULARY_REFRESH] [ARCH-TIED_STRUCTURE] [ARCH-TIED_VOCABULARY_LAYERS] [REQ-TIED_SETUP] [REQ-TIED_VOCABULARY_OWNERSHIP]
     // How: Refresh the inherited methodology snapshot, prune stale methodology vocabulary, and preserve client-owned content.
-    const copyScript = path.join(repoRoot, "copy_files.sh");
     const tiedDir = path.join(tempDir, "tied");
     const projectRequirements = path.join(tiedDir, "requirements.yaml");
     const customRequirement = path.join(tiedDir, "requirements", "REQ-CLIENT_ONLY.yaml");
@@ -475,7 +535,7 @@ describe("e2e: bootstrap and load", () => {
     fs.writeFileSync(customVocab, "# Client-only glossary\n");
     fs.writeFileSync(unrelatedClientFile, "unrelated client content\n");
 
-    execSync(`bash "${copyScript}" "${tempDir}"`, { stdio: "pipe", cwd: repoRoot });
+    runBootstrap(repoRoot, { target: tempDir, entrypoint: "node" });
     const preservedMcpConfig = [
       "{",
       '  "customSetting": "preserve me",',
@@ -503,15 +563,16 @@ describe("e2e: bootstrap and load", () => {
 
     // [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
     // How: Refresh inherited methodology and vocabulary while preserving an existing client MCP configuration byte-for-byte.
-    const refreshOutput = execSync(`bash "${copyScript}" --merge-vocab "${tempDir}"`, {
-      stdio: "pipe",
-      cwd: repoRoot,
+    const refreshOutput = runBootstrap(repoRoot, {
+      target: tempDir,
+      entrypoint: "node",
+      args: ["--merge-vocab"],
       env: {
         ...process.env,
         TIED_MCP_COLLECT_METRICS: "1",
         TIED_MCP_METRICS_CLIENT: "should-not-rewrite",
       },
-    }).toString();
+    });
     assert.match(
       refreshOutput,
       /Preserved \d+ existing methodology document\(s\); compare them with/,
@@ -637,11 +698,7 @@ describe("e2e: bootstrap and load", () => {
   });
 
   it("loader reads semantic-tokens index from bootstrapped tied/ [IMPL]", () => {
-    const copyScript = path.join(repoRoot, "copy_files.sh");
-    execSync(`bash "${copyScript}" "${tempDir}"`, {
-      stdio: "pipe",
-      cwd: repoRoot,
-    });
+    runBootstrap(repoRoot, { target: tempDir, entrypoint: "node" });
     const tiedDir = path.join(tempDir, "tied");
     process.env.TIED_BASE_PATH = tiedDir;
     clearBasePathCache();

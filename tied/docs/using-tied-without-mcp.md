@@ -6,11 +6,29 @@ TIED is designed for **MCP-based generation and management**: the primary way to
 
 Run from your project root:
 
+**Unix / Git Bash:**
+
 ```bash
 ./bootstrap_without_mcp.sh /path/to/project
 ```
 
-Or use `./copy_files.sh /path/to/project` — you get the same result. Your project will have a `tied/` directory with:
+Or use `./copy_files.sh /path/to/project` — you get the same result.
+
+**Windows (Node 18+ required):**
+
+```cmd
+bootstrap_without_mcp.cmd
+```
+
+Or from a neighboring TIED checkout (PATHEXT resolves `copy_files` to `copy_files.cmd`):
+
+```cmd
+..\tied\copy_files
+```
+
+Both entry points delegate to the shared Node engine at `tools/bootstrap/copy-files.mjs`. Build the MCP server first: `cd mcp-server && npm install && npm run build`.
+
+Your project will have a `tied/` directory with:
 
 - **Methodology** (read-only): `tied/methodology/` contains index YAMLs and inherited detail files from TIED. Do not edit these; they are overwritten when you re-run `copy_files.sh` to refresh the methodology.
 - **Project** (your data): `tied/requirements.yaml`, `tied/architecture-decisions.yaml`, `tied/implementation-decisions.yaml`, `tied/semantic-tokens.yaml`, and `tied/requirements/`, `tied/architecture-decisions/`, `tied/implementation-decisions/` hold only your project's tokens. These are never overwritten by `copy_files.sh`.

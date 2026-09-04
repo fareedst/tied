@@ -368,6 +368,12 @@ Feature-orchestration smoke (disposable clients)
   test-tied-feature-onboarding CLIENT_DIR
   test-tied-feature-lifecycle CLIENT_DIR
 
+  Windows (from TIED repo):
+    copy_files.cmd               bootstrap cwd (PATHEXT: copy_files from sibling repo)
+    scripts\test-new-tied-client
+    test-new-tied-client.cmd     repo-root shim for --disposable
+    scripts\lint_yaml.cmd -F tied
+
   Typical sequence:
     DEMO=$(mktemp -d "${TMPDIR:-/tmp}/tied-feature-demo.XXXXXX")
     new-tied-client "$DEMO"
@@ -380,7 +386,10 @@ _how_drivers() {
   cat <<'EOF'
 Related repo scripts (not wrapped here)
   ./copy_files.sh TARGET       bootstrap TIED into a client project
+  copy_files.cmd               Windows bootstrap (thin Node delegate)
+  node tools/bootstrap/copy-files.mjs   direct cross-platform bootstrap CLI
   scripts/lint_yaml.sh FILE    canonicalize/lint one or more YAML paths
+  scripts/lint_yaml.cmd -F tied  Windows tied YAML lint parity
   scripts/yaml_semantic_compare.rb
   scripts/analyze_tied_mcp_metrics.rb   offline MCP metrics JSONL analysis
   scripts/run-feature-batch.sh          Ruby agent-stream batch runner

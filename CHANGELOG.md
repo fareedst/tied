@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Cross-platform TIED bootstrap ([ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM])** — Shared Node engine under `tools/bootstrap/` with `manifest.json` as the single list source; thin `copy_files.sh`, `copy_files.cmd`, and `bootstrap_without_mcp.cmd` entry points delegate to `copy-files.mjs`; Windows `scripts/new-tied-client.cmd`, `scripts/test-new-tied-client.cmd`, and `scripts/lint_yaml.cmd` parity; disposable client pipeline (`CREATE_DISPOSABLE_TIED_CLIENT`, `RUN_NEW_TIED_CLIENT_PIPELINE`) via `tools/bootstrap/new-tied-client.mjs`; manual Windows smoke runbook under `working/REQ-TIED_SETUP-windows-bootstrap/`; IMPL-TIED_FILES pseudo-code blocks `LOAD_BOOTSTRAP_MANIFEST`, `BOOTSTRAP_TIED_NODE`, `RUN_BOOTSTRAP_ENTRYPOINT`, and disposable-client pipeline blocks; 15/15 bootstrap E2E tests pass; minimal-depth `close_out` gate passed (CITDP-REQ-TIED_SETUP-windows-bootstrap, CITDP-REQ-TIED_SETUP-new-tied-client).
+
 - **Offline vocabulary explorer ([REQ-VOCABULARY_EXPLORER])** —
   Read-only `mcp-server/src/vocabulary-explorer/` pipeline produces
   `vocabulary-explorer.v1` JSON and self-contained offline HTML from scoped

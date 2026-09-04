@@ -1,0 +1,59 @@
+CITDP-REQ-TIED_SETUP-windows-bootstrap:
+  change_definition:
+    current_behavior: "copy_files.sh (~1122 lines bash) is the sole BOOTSTRAP_TIED implementation; Windows developers need bash."
+    desired_behavior: "Shared Node engine under tools/bootstrap/ implements BOOTSTRAP_TIED; copy_files.cmd and thin copy_files.sh delegate to copy-files.mjs with manifest-driven lists."
+    non_goals:
+      - "Changing bootstrap overwrite policies"
+      - "PowerShell-native duplicate bootstrap"
+    success_criteria:
+      - "All bootstrap-and-load E2E tests pass via node entrypoint"
+      - "copy_files.cmd bootstraps cwd from neighboring client repo"
+      - "tied_validate_consistency passes"
+  impact_analysis:
+    architecture:
+      - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
+      - "ARCH-TIED_STRUCTURE"
+    implementation_decisions:
+      - "IMPL-TIED_FILES"
+    requirements:
+      - "REQ-TIED_SETUP"
+  record_identity:
+    citdp_id: "CITDP-REQ-TIED_SETUP-windows-bootstrap"
+    created_at: "2026-09-02"
+    status: "implemented"
+    title: "Windows-compatible TIED bootstrap via shared Node engine"
+    updated_at: "2026-09-04"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Incomplete port misses verification gates or preservation rules."
+        - "Node and bash outputs drift when lists are duplicated instead of manifest-driven."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "E2E bootstrap-and-load.test.ts runs with entrypoint node and existing assertions."
+        - "manifest.json is single source for DOCS_TO_COPY and verify lists."
+      evidence_references:
+        - "mcp-server/src/e2e/bootstrap-and-load.test.ts"
+        - "mcp-server/src/e2e/prompt-type-skills.test.ts"
+        - "tools/bootstrap/manifest.json"
+      falsification_questions:
+        - "Can platform entry points diverge when manifest is updated in one place only?"
+        - "Does Node bootstrap skip any verify gate that bash performed?"
+      gate_policy: "advisory"
+      prior_depth_tier: "minimal"
+      profile_depth: "not_measured"
+      rationale: "File-copy tooling at minimal depth; no runtime auth or network in bootstrap itself."
+      research_profile: "integrated-agent"
+    risks:
+      - description: "Incomplete port of bash edge cases"
+        id: "RISK-WIN-BOOT-002"
+        likelihood: "Medium"
+        mitigation: "Procedure-by-procedure port against existing E2E"
+      - description: "Node/bash output drift"
+        id: "RISK-WIN-BOOT-001"
+        likelihood: "Medium"
+        mitigation: "Parameterized E2E over node entrypoint; manifest single source"
+  test_strategy:
+    matrix_notes: "8/8 bootstrap-related E2E tests pass on Windows with node entrypoint."
+    summary: "bootstrap-and-load and prompt-type-skills E2E via node; manual Windows smoke from sibling repo."

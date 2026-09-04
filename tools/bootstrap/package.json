@@ -1,0 +1,13 @@
+{
+  "name": "@tied/bootstrap",
+  "version": "1.0.0",
+  "description": "Cross-platform TIED bootstrap engine (BOOTSTRAP_TIED contract)",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  }
+}

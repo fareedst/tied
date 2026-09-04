@@ -179,6 +179,20 @@ From a TIED repository clone, run:
 ./copy_files.sh /path/to/your/project
 ```
 
+**Windows disposable client smoke** (from the TIED repo):
+
+```cmd
+scripts\test-new-tied-client
+```
+
+Or from repo root: `test-new-tied-client.cmd`
+
+**Windows:** from a neighboring client repo (PATHEXT resolves `copy_files.cmd`):
+
+```cmd
+..\dev\tied\copy_files
+```
+
 The script copies the inherited methodology from `templates/` into the client’s `tied/methodology/`, creates missing project indexes under `tied/`, and copies the canonical guides into `tied/docs/`. It does not overwrite an existing `AGENTS.md` or `.cursorrules`.
 
 Methodology-owned YAML under `tied/methodology/` is read-only in the client and can be refreshed by running `copy_files.sh` again. Project-owned REQ/ARCH/IMPL indexes and detail files live at the root of the client’s `tied/` directory and are not overwritten.

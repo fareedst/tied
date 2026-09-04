@@ -125,21 +125,20 @@ describe("prompt-type skill bundle", () => {
   });
 
   it("uses attribute-preserving copy invocations for managed bootstrap artifacts [REQ-TIED_SETUP] [IMPL-TIED_FILES]", () => {
-    // [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] — How: route managed file and tree copies through cp -p/cp -pR with destination-only source-date midnight normalization.
+    // [IMPL-TIED_FILES] [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM] [REQ-TIED_SETUP] — How: route managed file and tree copies through copy-managed.mjs with destination-only source-date midnight normalization.
+    const copyManaged = fs.readFileSync(
+      path.join(repoRoot, "tools", "bootstrap", "lib", "copy-managed.mjs"),
+      "utf8"
+    );
+    assert.match(copyManaged, /copyFileWithAttributes/);
+    assert.match(copyManaged, /copyTreeWithAttributes/);
+    assert.match(copyManaged, /normalizeCopiedPathTimestamps/);
+    assert.match(copyManaged, /Client-modified managed copy detected/);
+    assert.doesNotMatch(copyManaged, /2000-01-01T00:00:00Z/);
+    assert.match(copyManaged, /sourceDateMidnightSeconds/);
     const copyScript = fs.readFileSync(path.join(repoRoot, "copy_files.sh"), "utf8");
-    const copyInvocations = copyScript
-      .split(/\r?\n/)
-      .map((line) => line.trim())
-      .filter((line) => line.startsWith("cp "));
-    assert.ok(copyInvocations.length > 0, "copy_files.sh should contain explicit cp helper invocations");
-    for (const invocation of copyInvocations) {
-      assert.match(invocation, /^cp -pR?\s/, `copy must preserve attributes: ${invocation}`);
-    }
+    assert.match(copyScript, /tools\/bootstrap\/copy-files\.mjs/);
     assert.doesNotMatch(copyScript, /\.cursor\/agents\/"\*\.md/);
-    assert.match(copyScript, /Client-modified managed copy detected/);
-    assert.doesNotMatch(copyScript, /2000-01-01T00:00:00Z/);
-    assert.match(copyScript, /normalize_copy_timestamps/);
-    assert.match(copyScript, /local calendar-date midnight/);
   });
 
   it("preserves prompt-type workflow-specific contracts [REQ-PROMPT_TYPE_GLOBAL_SKILLS]", () => {

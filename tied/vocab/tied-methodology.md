@@ -67,6 +67,12 @@
 | **managed bootstrap artifact** | copied file, installed file (alone) | Canonical client artifact refreshed by `copy_files.sh` and checked for client edits before replacement |
 | **copy timestamp normalization** | artificial timestamp, fixed copy time | Apply the source item's local calendar-date midnight only to the managed client copy after `cp -p`/`cp -pR`; source mtimes remain unchanged |
 | **client-modification warning** | refresh warning (alone) | Diagnostic emitted when an existing managed destination mtime is not truncated to local calendar-date midnight |
+| **Windows bootstrap entry point** | copy_files.bat, Windows shell script (alone) | `copy_files.cmd` at TIED repo root; PATHEXT resolves `copy_files` for neighboring client repos |
+| **shared bootstrap engine** | Node copy script (alone) | `tools/bootstrap/` Node implementation of BOOTSTRAP_TIED; sole bootstrap logic owner |
+| **bootstrap manifest** | inline bash arrays (alone) | `tools/bootstrap/manifest.json` single source for DOCS_TO_COPY, skill dirs, verify lists |
+| **disposable TIED client** | throwaway demo project (alone) | Timestamped bootstrapped client under `TIED_TEST_ROOT/<unix-seconds>` for smoke and feature demos |
+| **new-tied-client** | make client script (alone) | Windows `scripts/new-tied-client.cmd` or Node `tools/bootstrap/new-tied-client.mjs`; explicit client directory pipeline |
+| **test-new-tied-client** | disposable client alias (alone) | Windows `scripts/test-new-tied-client.cmd`; creates disposable client via `CREATE_DISPOSABLE_TIED_CLIENT` |
 
 ---
 
@@ -82,7 +88,10 @@
 | Methodology merge view | merged TIED view | read via MCP resources | `tied://requirements` etc. | [PROC-TIED_METHODOLOGY_READONLY](../docs/processes.md) |
 | Agent operating guide | AGENTS | `AGENTS.md` | — | [REQ-TIED_SETUP](../requirements/REQ-TIED_SETUP.yaml) |
 | Client development index | core seven | `tied/docs/client-development-index.md` | minimal CITDP+LEAP+TIED doc set, including domain vocabulary | [PROC-AGENT_REQ_CHECKLIST](../docs/processes.md) |
-| Bootstrap script | copy_files | `copy_files.sh` | `./copy_files.sh /path/to/client` | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
+| Bootstrap script | copy_files | `copy_files.sh` / `copy_files.cmd` | `./copy_files.sh` or `..\tied\copy_files` | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
+| Windows bootstrap entry point | copy_files.cmd | `copy_files.cmd` | PATHEXT `copy_files` from sibling checkout | [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM](../architecture-decisions/ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM.yaml) |
+| Shared bootstrap engine | Node bootstrap | `tools/bootstrap/` | `node tools/bootstrap/copy-files.mjs` | [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM](../architecture-decisions/ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM.yaml) |
+| Bootstrap manifest | manifest.json | `tools/bootstrap/manifest.json` | read at engine startup | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
 | Prompt-type skill installation | managed bootstrap artifact | `.cursor/skills/<prompt-type>/SKILL.md` | source-date midnight + pre-refresh warning | [REQ-PROMPT_TYPE_GLOBAL_SKILLS](../requirements/REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml) |
 | Prompt-type Task wrapper (TIED source) | TIED-source development artifact | `.cursor/agents/<prompt-type>.md` | static contract tests only; not installed into clients | [REQ-PROMPT_TYPE_SUBAGENT](../requirements/REQ-PROMPT_TYPE_SUBAGENT.yaml) |
 | Copy timestamp normalization | copy timestamp normalization | managed bootstrap paths | source-date local midnight | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |

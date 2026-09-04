@@ -1,0 +1,10 @@
+@echo off
+setlocal
+where node >nul 2>&1
+if errorlevel 1 (
+  echo ERROR: Node.js is required but was not found on PATH.
+  echo Install Node.js 18+ from https://nodejs.org/ and re-run test-new-tied-client.
+  exit /b 1
+)
+node "%~dp0tools\bootstrap\new-tied-client.mjs" --disposable %*
+exit /b %ERRORLEVEL%

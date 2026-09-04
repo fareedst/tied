@@ -494,6 +494,19 @@ ARCH-TIED_ADVERSARIAL_INQUIRY:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM:
+  cross_references:
+    - "ARCH-TIED_STRUCTURE"
+    - "IMPL-TIED_FILES"
+    - "REQ-TIED_SETUP"
+  description: "Shared Node BOOTSTRAP_TIED engine; platform files are entry points only"
+  metadata:
+    last_updated: "2026-09-04"
+    registered: "2026-09-04"
+  name: "Cross-platform TIED bootstrap engine"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT:
   cross_references:
     - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"

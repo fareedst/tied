@@ -395,3 +395,117 @@ procedure REPORT_MODIFIED_PATHS(result):
   IF result.validated:
     EMIT semantic validation passed
   EMIT modification summary
+
+procedure LOAD_BOOTSTRAP_MANIFEST():
+  # [IMPL-TIED_FILES] [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM] [REQ-TIED_SETUP]
+  # How: Read tools/bootstrap/manifest.json as the single source for DOCS_TO_COPY, skill dirs, verify lists, and TIED_CLI_REPO_ROOT_MARKER.
+  Contract:
+    INPUT: TIED source repository root
+    OUTPUT: parsed manifest object
+    DATA: manifest.json file lists and marker constants
+    PRE: tools/bootstrap/manifest.json exists and is readable JSON
+    POST: engine uses manifest values for all bootstrap list-driven steps
+    EFFECTS: File I/O — read manifest once per bootstrap invocation
+    FAILURE_MODES: MANIFEST_MISSING; MANIFEST_PARSE_FAILED
+    TERMINATION: total
+  READ tools/bootstrap/manifest.json relative to TIED source root
+  RETURN manifest
+
+procedure BOOTSTRAP_TIED_NODE(projectRoot, mergeVocab):
+  # [IMPL-TIED_FILES] [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM] [REQ-TIED_SETUP]
+  # How: Node >=18 implementation of BOOTSTRAP_TIED with parity to the legacy bash contract; uses manifest-driven lists and copy-managed.mjs helpers.
+  Contract:
+    INPUT: projectRoot; optional mergeVocab flag; process environment for MCP metrics
+    OUTPUT: bootstrapped or refreshed client layout; process exit status
+    DATA: same as BOOTSTRAP_TIED
+    CONTROL: preserve client project YAML, existing vocabulary, and existing .cursor/mcp.json byte-for-byte; overwrite inherited methodology and managed skill content
+    PRE: Node >=18 available; mcp-server/dist/index.js built; projectRoot writable
+    POST: same as BOOTSTRAP_TIED
+    EFFECTS: File I/O and subprocess-free bootstrap on Windows and Unix
+    FAILURE_MODES: same as BOOTSTRAP_TIED plus NODE_MISSING; MANIFEST_MISSING
+    TERMINATION: total
+  CALL LOAD_BOOTSTRAP_MANIFEST()
+  CALL bootstrap orchestration in tools/bootstrap/lib/bootstrap.mjs using manifest lists
+  RETURN success
+
+procedure RUN_BOOTSTRAP_ENTRYPOINT(platform, projectRoot, mergeVocab):
+  # [IMPL-TIED_FILES] [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM] [REQ-TIED_SETUP]
+  # How: Platform entry points (copy_files.cmd, copy_files.sh) delegate to BOOTSTRAP_TIED_NODE; bash is not a second implementation.
+  Contract:
+    INPUT: platform in {node, bash, cmd}; projectRoot; optional mergeVocab
+    OUTPUT: bootstrap result via shared Node engine
+    DATA: entrypoint script path; Node CLI path tools/bootstrap/copy-files.mjs
+    CONTROL: bash and cmd wrappers exec Node; no duplicate bootstrap logic in shell
+    PRE: Node on PATH for all entrypoints
+    POST: identical bootstrap outputs regardless of entrypoint when Node engine succeeds
+    EFFECTS: Process — exec node copy-files.mjs with parsed argv
+    FAILURE_MODES: NODE_MISSING; ENTRYPOINT_SCRIPT_MISSING
+    TERMINATION: total
+  IF platform is cmd OR bash:
+    EXEC node tools/bootstrap/copy-files.mjs with projectRoot and flags
+  ELSE IF platform is node:
+    CALL BOOTSTRAP_TIED_NODE(projectRoot, mergeVocab)
+  ELSE:
+    RETURN unsupported platform error
+  RETURN success
+
+procedure CREATE_DISPOSABLE_TIED_CLIENT(testRoot, sourceRoot):
+  # [IMPL-TIED_FILES] [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM] [REQ-TIED_SETUP]
+  # How: Allocate testRoot/<unix-seconds> using Math.floor(Date.now()/1000) and run the full new-client pipeline.
+  Contract:
+    INPUT: testRoot; sourceRoot; optional skip flags for lint, MCP enable, git
+    OUTPUT: disposable client directory path; process exit status
+    DATA: timestamp directory name; bootstrapped client tree
+    CONTROL: default testRoot is %USERPROFILE%/Documents/dev/test or $HOME/Documents/dev/test; timestamp is seconds not milliseconds
+    PRE: testRoot parent is writable; sourceRoot contains bootstrap entry points
+    POST: client directory exists with bootstrapped tied/ layout; stdout prints Disposable TIED client path on success
+    EFFECTS: File I/O; Process — invokes RUN_NEW_TIED_CLIENT_PIPELINE
+    FAILURE_MODES: UNWRITABLE_TEST_ROOT; PIPELINE_STEP_FAILED
+    TERMINATION: total
+  LET timestamp = floor(now_ms / 1000) as decimal string
+  LET clientDir = join(testRoot, timestamp)
+  CALL RUN_NEW_TIED_CLIENT_PIPELINE(clientDir, sourceRoot)
+  PRINT "Disposable TIED client: {testRoot}/{timestamp}"
+  RETURN clientDir
+
+procedure RUN_NEW_TIED_CLIENT_PIPELINE(clientDir, sourceRoot):
+  # [IMPL-TIED_FILES] [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM] [REQ-TIED_SETUP]
+  # How: Mirror scripts/build-commands.sh _new_tied_test_client — mkdir parent, bootstrap cwd, lint tied YAML, optional agent MCP enable, git init/commit.
+  Contract:
+    INPUT: clientDir; sourceRoot; optional skipLint; skipMcpEnable; skipGit; forceMcpEnable
+    OUTPUT: bootstrapped disposable or explicit client; process exit status
+    DATA: client project tree; git repository; linted tied/**/*.yaml files
+    CONTROL: fail-fast on any step; auto-skip agent mcp enable on non-TTY unless forceMcpEnable; git commit message exactly TIED
+    PRE: clientDir writable; sourceRoot contains copy_files entry and built yaml-canonicalizer when lint enabled
+    POST: tied/ bootstrapped; tied YAML canonicalized when lint enabled; git commit TIED when git enabled
+    EFFECTS: File I/O; Process — spawn copy_files entry, lint helper, agent CLI, git
+    FAILURE_MODES: COPY_FILES_FAILED; LINT_FAILED; AGENT_MISSING; GIT_FAILED; CANONICALIZER_MISSING
+    DATA_TRANSITION: empty|explicit clientDir→bootstrapped client with optional git repo
+    TERMINATION: total — finite pipeline steps
+  CALL mkdir -p dirname(clientDir) and create empty clientDir when disposable
+  RUN copy_files entry with cwd=clientDir and no args
+  CALL LINT_CLIENT_TIED_YAML(clientDir, sourceRoot) unless skipLint
+  IF not skipMcpEnable AND (stdin is TTY OR forceMcpEnable):
+    RUN agent mcp enable tied-yaml with cwd=clientDir
+  ELSE IF not skipMcpEnable:
+    WARN auto-skip agent mcp enable on non-TTY
+  UNLESS skipGit:
+    RUN git init; git add .; git commit -m TIED with cwd=clientDir
+  RETURN success
+
+procedure LINT_CLIENT_TIED_YAML(clientDir, sourceRoot):
+  # [IMPL-TIED_FILES] [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM] [REQ-TIED_SETUP]
+  # How: lint_yaml.sh -F tied parity — glob tied/**/*.yaml under client cwd; node mcp-server/dist/cli/yaml-canonicalizer.js per file.
+  Contract:
+    INPUT: clientDir; sourceRoot
+    OUTPUT: canonicalized tied YAML files; process exit status
+    DATA: tied/**/*.yaml paths under clientDir
+    CONTROL: fail if canonicalizer missing; process each file independently
+    PRE: mcp-server/dist/cli/yaml-canonicalizer.js exists under sourceRoot
+    POST: every tied/**/*.yaml file canonicalized in place
+    EFFECTS: File I/O; Process — node canonicalizer per YAML path
+    FAILURE_MODES: CANONICALIZER_MISSING; LINT_FILE_FAILED
+    TERMINATION: total — finite YAML file list
+  FOR each yamlPath in glob(clientDir/tied/**/*.yaml):
+    RUN node sourceRoot/mcp-server/dist/cli/yaml-canonicalizer.js yamlPath
+  RETURN success

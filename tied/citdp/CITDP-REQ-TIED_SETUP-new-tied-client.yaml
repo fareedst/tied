@@ -1,0 +1,62 @@
+CITDP-REQ-TIED_SETUP-new-tied-client:
+  change_definition:
+    current_behavior: "Windows developers can bootstrap via copy_files.cmd but lack test-new-tied-client disposable smoke workflow."
+    desired_behavior: "scripts/test-new-tied-client.cmd and tools/bootstrap/new-tied-client.mjs mirror bash _new_tied_test_client with unix-seconds disposable paths, lint, MCP enable, and git init."
+    non_goals:
+      - "Compiled .exe distribution"
+      - "Full build-commands.sh Windows port"
+      - "test-tied-feature-onboarding chain"
+    success_criteria:
+      - "mcp-server/src/e2e/new-tied-client.test.ts passes"
+      - "Pipeline order matches bash: copy_files, lint, agent mcp enable, git"
+      - "scripts/test-new-tied-client creates disposable client under TIED_TEST_ROOT"
+  impact_analysis:
+    architecture:
+      - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
+    implementation_decisions:
+      - "IMPL-TIED_FILES"
+    requirements:
+      - "REQ-TIED_SETUP"
+  record_identity:
+    citdp_id: "CITDP-REQ-TIED_SETUP-new-tied-client"
+    created_at: "2026-09-03"
+    status: "implemented"
+    title: "Windows test-new-tied-client disposable smoke pipeline"
+    updated_at: "2026-09-04"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Disposable path uses millisecond timestamp and breaks bash parity."
+        - "Pipeline skips lint or git while claiming full parity."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "new-tied-client.test.ts asserts 10-digit unix-seconds directory names."
+        - "Pipeline order test verifies copy_files runs first with client cwd."
+      evidence_references:
+        - "mcp-server/src/e2e/new-tied-client.test.ts"
+        - "tools/bootstrap/lib/new-tied-client-pipeline.mjs"
+      falsification_questions:
+        - "Can lint run without built yaml-canonicalizer and still claim success?"
+        - "Does Windows disposable client use milliseconds instead of seconds?"
+      gate_policy: "advisory"
+      prior_depth_tier: null
+      profile_depth: "minimal"
+      rationale: "Local dev helper; no auth/network/persistence."
+      research_profile: "integrated-agent"
+    risks:
+      - description: "Git identity unset on Windows"
+        id: "RISK-NTC-003"
+        likelihood: "Medium"
+        mitigation: "Catch commit failure; print git config hint"
+      - description: "Lint without built canonicalizer"
+        id: "RISK-NTC-002"
+        likelihood: "Medium"
+        mitigation: "Fail with build hint; --skip-lint for CI"
+      - description: "Timestamp milliseconds vs seconds"
+        id: "RISK-NTC-001"
+        likelihood: "Low"
+        mitigation: "Math.floor(Date.now()/1000) plus test assertion"
+  test_strategy:
+    matrix_notes: "mcp-server/src/e2e/new-tied-client.test.ts"
+    summary: "new-tied-client E2E tests for timestamp and pipeline order; integration with skip-mcp-enable; manual Windows smoke checklist."
