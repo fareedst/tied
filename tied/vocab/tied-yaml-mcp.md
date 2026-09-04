@@ -41,6 +41,15 @@
 | **client YAML styling** | post-write formatting, YAML prettify | Presentation-only stage after baseline canonical formatting; optional `client_formatter` hook in `.tied-yaml.yaml` |
 | **styling_status** | format state, style configured flag | `configured` when `client_formatter` runs; `not_configured` when baseline canonical alone is effective |
 | **client_formatter** | yaml hook, external formatter | Optional repository hook in `.tied-yaml.yaml`; must preserve semantics and stay within project-owned `./tied/` |
+| **vocabulary explorer** | term browser, glossary explorer | Read-only analysis + offline HTML viewer; not domain glossary authoring ([PROC-VOCABULARY_INDEX]) · [REQ-VOCABULARY_EXPLORER](../requirements/REQ-VOCABULARY_EXPLORER.yaml) |
+| **significant term** | important term, keyword | Identifier or TIED token included after policy filters · [REQ-VOCABULARY_ANALYSIS](../requirements/REQ-VOCABULARY_ANALYSIS.yaml) |
+| **normalized vocabulary** | merged terms, term list | Merged, sorted, versioned in-memory model before HTML projection · [ARCH-VOCABULARY_DATA_CONTRACT](../architecture-decisions/ARCH-VOCABULARY_DATA_CONTRACT.yaml) |
+| **offline HTML artifact** | static HTML export | Single self-contained `.html` generated view with explicit proof boundary · [ARCH-VOCABULARY_OFFLINE_VIEW](../architecture-decisions/ARCH-VOCABULARY_OFFLINE_VIEW.yaml) |
+| **vocabulary-explorer.v1** | explorer schema v1 | Versioned envelope schema for explorer JSON and golden tests · [ARCH-VOCABULARY_DATA_CONTRACT](../architecture-decisions/ARCH-VOCABULARY_DATA_CONTRACT.yaml) |
+| **methodology-only record** | methodology token | Token in `tied/methodology/` index absent from project index; `isMethodologyOnlyIndexToken` |
+| **scoped walk** | file walk, directory scan | Reuse `.tiedanalysis.yaml` roots, `.tiedignore`, symlink policy from `scoped-analysis.ts` · [IMPL-VOCABULARY_ANALYSIS](../implementation-decisions/IMPL-VOCABULARY_ANALYSIS.yaml) |
+| **AST identifier extraction** | language-server extraction, parse tree | TypeScript compiler API extraction for `.ts`/`.tsx`/`.js`/`.jsx`/`.mjs`; lexical fallback for other extensions · [REQ-VOCABULARY_ANALYSIS](../requirements/REQ-VOCABULARY_ANALYSIS.yaml) |
+| **tied_vocabulary_explorer_run** | vocabulary MCP tool | Read-only MCP tool returning `vocabulary-explorer.v1` envelope and optional HTML · [REQ-VOCABULARY_EXPLORER](../requirements/REQ-VOCABULARY_EXPLORER.yaml) |
 
 ---
 
@@ -173,6 +182,11 @@ Feedback and LEAP proposal tools are documented in sibling glossaries ([`feedbac
 | Preferred term | UPPER_SNAKE block | Owning IMPL |
 |----------------|-------------------|-------------|
 | bounded signature aggregation | `ANALYZE_TIED_MCP_METRICS` | [IMPL-MCP_USAGE_METRICS](../implementation-decisions/IMPL-MCP_USAGE_METRICS.yaml) |
+| scoped source file collection | `COLLECT_SCOPED_SOURCE_FILES` | [IMPL-VOCABULARY_ANALYSIS](../implementation-decisions/IMPL-VOCABULARY_ANALYSIS.yaml) |
+| source term analysis | `ANALYZE_SOURCE_TERMS` | [IMPL-VOCABULARY_ANALYSIS](../implementation-decisions/IMPL-VOCABULARY_ANALYSIS.yaml) |
+| v1 envelope projection | `PROJECT_VOCABULARY_EXPLORER_V1` | [IMPL-VOCABULARY_PROJECTION](../implementation-decisions/IMPL-VOCABULARY_PROJECTION.yaml) |
+| offline HTML render | `RENDER_VOCABULARY_EXPLORER_HTML` | [IMPL-VOCABULARY_HTML_RENDERER](../implementation-decisions/IMPL-VOCABULARY_HTML_RENDERER.yaml) |
+| MCP vocabulary explorer | `RUN_VOCABULARY_EXPLORER_MCP` | [IMPL-VOCABULARY_ANALYSIS](../implementation-decisions/IMPL-VOCABULARY_ANALYSIS.yaml) |
 
 ---
 
@@ -211,6 +225,20 @@ Feedback and LEAP proposal tools are documented in sibling glossaries ([`feedbac
 | tied_validate_consistency | MCP catalog |
 | tied_verify | MCP catalog |
 | usage metrics | MCP usage metrics |
+| vocabulary explorer | Preferred terms |
+| significant term | Preferred terms |
+| normalized vocabulary | Preferred terms |
+| offline HTML artifact | Preferred terms |
+| vocabulary-explorer.v1 | Preferred terms |
+| methodology-only record | Preferred terms |
+| scoped walk | Preferred terms |
+| AST identifier extraction | Preferred terms |
+| tied_vocabulary_explorer_run | Preferred terms |
+| COLLECT_SCOPED_SOURCE_FILES | Pseudo-code block names |
+| ANALYZE_SOURCE_TERMS | Pseudo-code block names |
+| PROJECT_VOCABULARY_EXPLORER_V1 | Pseudo-code block names |
+| RENDER_VOCABULARY_EXPLORER_HTML | Pseudo-code block names |
+| RUN_VOCABULARY_EXPLORER_MCP | Pseudo-code block names |
 | yaml_detail_update | MCP catalog |
 | yaml_index_insert | MCP catalog |
 | yaml_semantic_compare | Preferred terms |

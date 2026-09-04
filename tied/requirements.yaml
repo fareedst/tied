@@ -1707,3 +1707,21 @@ REQ-TIED_YAML_STYLE_CONFIGURATION:
       - "mcp-server/src/tools/yaml-canonicalization-mcp.test.ts"
       - "mcp-server/src/yaml-style-config.test.ts"
       - "scripts/yaml_list_sorter_test.rb"
+REQ-VOCABULARY_ANALYSIS:
+  category: "Functional"
+  detail_file: "requirements/REQ-VOCABULARY_ANALYSIS.yaml"
+  name: "Deterministic vocabulary term analysis"
+  priority: "P1"
+  status: "Implemented"
+REQ-VOCABULARY_EXPLORER:
+  category: "Functional"
+  detail_file: "requirements/REQ-VOCABULARY_EXPLORER.yaml"
+  name: "Offline vocabulary explorer"
+  priority: "P1"
+  status: "Implemented"
+REQ-VOCABULARY_VIEWER_STATE:
+  category: "Functional"
+  detail_file: "requirements/REQ-VOCABULARY_VIEWER_STATE.yaml"
+  name: "Fragment-encoded viewer state"
+  priority: "P1"
+  status: "Implemented"

@@ -1,0 +1,149 @@
+{
+  "ok": true,
+  "report": {
+    "schemaVersion": "adversarial-inquiry-report.v1",
+    "projectId": "stdd-vocabulary-explorer",
+    "scope": [
+      "IMPL-VOCABULARY_HTML_RENDERER#Single-file_HTML_render#block"
+    ],
+    "graph": {
+      "projectId": "stdd-vocabulary-explorer",
+      "nodes": [
+        {
+          "id": "constraint:constraint-offline-view",
+          "kind": "constraint"
+        },
+        {
+          "id": "IMPL-VOCABULARY_HTML_RENDERER#Single-file_HTML_render#block",
+          "kind": "block",
+          "revision": "block-rev"
+        },
+        {
+          "id": "REQ-VOCABULARY_EXPLORER#html-injection-safety",
+          "kind": "criterion",
+          "revision": "criterion-rev"
+        }
+      ],
+      "edges": [
+        {
+          "from": "REQ-VOCABULARY_EXPLORER#html-injection-safety",
+          "to": "constraint:constraint-offline-view",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "constraint:constraint-offline-view",
+          "to": "IMPL-VOCABULARY_HTML_RENDERER#Single-file_HTML_render#block",
+          "kind": "constraint_block"
+        }
+      ]
+    },
+    "findings": [
+      {
+        "id": "1924ced5f358bf6e",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-1",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "7fbdf477704de584",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-1",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      }
+    ],
+    "proofBoundaries": [
+      "semantic_fidelity"
+    ],
+    "readOnly": true,
+    "canonicalMutation": false
+  },
+  "verdict": "UNRESOLVED",
+  "status": {
+    "IMPL-VOCABULARY_HTML_RENDERER#Single-file_HTML_render#block": "UNRESOLVED"
+  },
+  "gate": {
+    "schemaVersion": "adversarial-inquiry-gate.v1",
+    "policy": "advisory",
+    "scope": [
+      "IMPL-VOCABULARY_HTML_RENDERER#Single-file_HTML_render#block"
+    ],
+    "status": "warn",
+    "blocking": false,
+    "verdict": "UNRESOLVED",
+    "diagnostics": [],
+    "proofBoundary": "human_decision"
+  },
+  "artifacts": {
+    "directory": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-VOCABULARY_EXPLORER/adversarial-inquiry/phase-close_out",
+    "obligationReport": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-VOCABULARY_EXPLORER/adversarial-inquiry/phase-close_out/obligation-report.json",
+    "findingLedger": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-VOCABULARY_EXPLORER/adversarial-inquiry/phase-close_out/finding-ledger.jsonl",
+    "gateResult": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-VOCABULARY_EXPLORER/adversarial-inquiry/phase-close_out/gate-result.json",
+    "evidenceProvenance": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-VOCABULARY_EXPLORER/adversarial-inquiry/phase-close_out/evidence-provenance.json"
+  },
+  "activation": {
+    "receipt": {
+      "success": true,
+      "tool": "tied_adversarial_inquiry_run",
+      "request_token": "REQ-VOCABULARY_EXPLORER",
+      "project_id": "stdd-vocabulary-explorer",
+      "run_id": "ve-closeout-20260904",
+      "phase": "close_out",
+      "scope": [
+        "IMPL-VOCABULARY_HTML_RENDERER#Single-file_HTML_render#block"
+      ],
+      "scope_hash": "2e96ac992d7abdeb7abdb3520f6de008ef71874bc640180c9c4c325a4ff179aa",
+      "artifact_hashes": {
+        "obligation-report.json": "76f891452f923fa9afd34d63bcd939dc35b36a1c047759e983ddfb567b7239a6",
+        "finding-ledger.jsonl": "af036c778ca85f23d3fe3b90544ad2cf8e73ef4b1825de47d73c3c92a3b240bf",
+        "gate-result.json": "2c291a8ff92f75cae662d492d7421f589859fa4d78501e9f92814799a08e63ec",
+        "evidence-provenance.json": "0c390ce9d29c5b1dfc64b9a0d654faea1889a09f0ac6f4f0b4e19b65ad5503e9"
+      }
+    },
+    "artifacts": {
+      "obligation-report.json": {
+        "valid": true,
+        "request_token": "REQ-VOCABULARY_EXPLORER",
+        "project_id": "stdd-vocabulary-explorer",
+        "run_id": "ve-closeout-20260904",
+        "phase": "close_out",
+        "scope_hash": "2e96ac992d7abdeb7abdb3520f6de008ef71874bc640180c9c4c325a4ff179aa",
+        "hash": "76f891452f923fa9afd34d63bcd939dc35b36a1c047759e983ddfb567b7239a6",
+        "path": "working/REQ-VOCABULARY_EXPLORER/adversarial-inquiry/phase-close_out/obligation-report.json"
+      },
+      "finding-ledger.jsonl": {
+        "valid": true,
+        "request_token": "REQ-VOCABULARY_EXPLORER",
+        "project_id": "stdd-vocabulary-explorer",
+        "run_id": "ve-closeout-20260904",
+        "phase": "close_out",
+        "scope_hash": "2e96ac992d7abdeb7abdb3520f6de008ef71874bc640180c9c4c325a4ff179aa",
+        "hash": "af036c778ca85f23d3fe3b90544ad2cf8e73ef4b1825de47d73c3c92a3b240bf",
+        "path": "working/REQ-VOCABULARY_EXPLORER/adversarial-inquiry/phase-close_out/finding-ledger.jsonl"
+      },
+      "gate-result.json": {
+        "valid": true,
+        "request_token": "REQ-VOCABULARY_EXPLORER",
+        "project_id": "stdd-vocabulary-explorer",
+        "run_id": "ve-closeout-20260904",
+        "phase": "close_out",
+        "scope_hash": "2e96ac992d7abdeb7abdb3520f6de008ef71874bc640180c9c4c325a4ff179aa",
+        "hash": "2c291a8ff92f75cae662d492d7421f589859fa4d78501e9f92814799a08e63ec",
+        "path": "working/REQ-VOCABULARY_EXPLORER/adversarial-inquiry/phase-close_out/gate-result.json"
+      },
+      "evidence-provenance.json": {
+        "valid": true,
+        "request_token": "REQ-VOCABULARY_EXPLORER",
+        "project_id": "stdd-vocabulary-explorer",
+        "run_id": "ve-closeout-20260904",
+        "phase": "close_out",
+        "scope_hash": "2e96ac992d7abdeb7abdb3520f6de008ef71874bc640180c9c4c325a4ff179aa",
+        "hash": "0c390ce9d29c5b1dfc64b9a0d654faea1889a09f0ac6f4f0b4e19b65ad5503e9",
+        "path": "working/REQ-VOCABULARY_EXPLORER/adversarial-inquiry/phase-close_out/evidence-provenance.json"
+      }
+    }
+  }
+}

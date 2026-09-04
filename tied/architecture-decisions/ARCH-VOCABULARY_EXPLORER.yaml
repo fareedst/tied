@@ -1,0 +1,34 @@
+ARCH-VOCABULARY_EXPLORER:
+  alternatives_considered:
+    - cons:
+        - "Unstable contract"
+      name: "MCP tool as primary surface"
+      pros:
+        - "IDE integration"
+      rejected_reason: "Deferred until CLI contract stable; now exposed as tied_vocabulary_explorer_run after CLI golden stabilization"
+  category: "Architecture"
+  cross_references:
+    - "REQ-VOCABULARY_EXPLORER"
+  decision: "Separate read-only modules for scoped walk adapter, term analysis (AST + lexical), TIED record normalization, v1 projection, pure viewer state, and single-file HTML renderer; thin CLI and MCP tied_vocabulary_explorer_run surfaces mirror traceability-gap pattern."
+  name: "Vocabulary explorer module boundaries"
+  rationale:
+    benefits:
+      - "Read-only TIED YAML boundary"
+      - "Shared scoped walk export prevents drift"
+    problems_solved:
+      - "Duplicated traversal"
+      - "Monolithic explorer logic"
+    why: "Clear boundaries enable independent module validation before composition."
+  status: "Active"
+  traceability:
+    implementation:
+      - "IMPL-VOCABULARY_ANALYSIS"
+      - "IMPL-VOCABULARY_HTML_RENDERER"
+      - "IMPL-VOCABULARY_PROJECTION"
+      - "IMPL-VOCABULARY_VIEWER_STATE"
+    requirements:
+      - "REQ-VOCABULARY_EXPLORER"
+    tests:
+      - "vocabulary-explorer-mcp.test.ts"
+      - "vocabulary-explorer.composition.test.ts"
+      - "vocabulary-explorer.smoke.test.ts"

@@ -13,6 +13,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Offline vocabulary explorer ([REQ-VOCABULARY_EXPLORER])** —
+  Read-only `mcp-server/src/vocabulary-explorer/` pipeline produces
+  `vocabulary-explorer.v1` JSON and self-contained offline HTML from scoped
+  source walk and merged TIED indexes. Surfaces: CLI (`npm run
+  vocabulary-explorer`) and MCP `tied_vocabulary_explorer_run`. Golden
+  byte-stable tests, hostile-input HTML renderer tests, composition and MCP
+  tests, offline HTML smoke tests. TIED stack: REQ-VOCABULARY_ANALYSIS,
+  REQ-VOCABULARY_VIEWER_STATE, ARCH-VOCABULARY_*, IMPL-VOCABULARY_*.
+  Integrated `close_out` gate passed with `external-input-security` profile.
+
 - **Checklist adherence Stage Q — inquiry sub-turn + rollout ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
   Process-composition test `TestTrackerComposition_inquirySubTurn` exercises
   `sub-adversarial-inquiry-pass` through agentstream subprocess with

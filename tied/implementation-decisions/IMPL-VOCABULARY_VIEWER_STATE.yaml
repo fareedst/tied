@@ -1,0 +1,30 @@
+IMPL-VOCABULARY_VIEWER_STATE:
+  category: "Implementation"
+  cross_references:
+    - "ARCH-VOCABULARY_OFFLINE_VIEW"
+    - "REQ-VOCABULARY_VIEWER_STATE"
+  essence_pseudocode_path: "implementation-decisions/IMPL-VOCABULARY_VIEWER_STATE-pseudocode.md"
+  implementation_approach:
+    details:
+      - "Filter, search, selection in hash fragment"
+      - "Round-trip and popstate simulation"
+    summary: "state.ts pure fragment encode/decode and history transitions"
+  name: "Pure viewer state encode/decode"
+  rationale:
+    benefits:
+      - "Deterministic unit tests"
+    problems_solved:
+      - "Stateful HTML-only logic"
+    why: "Viewer state must be pure and testable without DOM."
+  related_architecture:
+    - "ARCH-VOCABULARY_OFFLINE_VIEW"
+  related_requirements:
+    - "REQ-VOCABULARY_VIEWER_STATE"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-VOCABULARY_OFFLINE_VIEW"
+    requirements:
+      - "REQ-VOCABULARY_VIEWER_STATE"
+    tests:
+      - "state.test.ts"

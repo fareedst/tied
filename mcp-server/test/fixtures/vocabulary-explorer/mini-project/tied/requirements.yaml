@@ -1,0 +1,4 @@
+REQ-TIED_SETUP:
+  name: "TIED setup fixture"
+  status: "Implemented"
+  detail_file: "requirements/REQ-TIED_SETUP.yaml"

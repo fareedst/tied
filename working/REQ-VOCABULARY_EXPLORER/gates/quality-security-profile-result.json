@@ -1,0 +1,17 @@
+{
+  "schema_version": "external-input-security-profile-validator.v1",
+  "applicable": true,
+  "ok": true,
+  "required_cases": [
+    "malformed-oversized-input",
+    "authentication-authorization",
+    "injection-unsafe-content",
+    "path-traversal-file-access",
+    "replay-duplicate",
+    "secret-sensitive-data",
+    "resource-exhaustion-timeout-rate-limit",
+    "dependency-vulnerability-review"
+  ],
+  "diagnostics": [],
+  "proof_boundary": "Plan completeness only; this does not prove runtime security."
+}

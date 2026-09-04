@@ -1,0 +1,129 @@
+{
+  "change_definition": {
+    "current_behavior_prior": "No unified offline navigation for significant terms and TIED relationships.",
+    "desired_behavior": "Read-only pipeline emits vocabulary-explorer.v1 JSON and self-contained HTML with interactive filters, proof boundary, and fragment state.",
+    "non_goals": [
+      "AST parsing",
+      "Live reload"
+    ],
+    "references": [
+      "mcp-server/src/vocabulary-explorer/",
+      "mcp-server/src/tools/index.ts",
+      "tied/requirements/REQ-VOCABULARY_EXPLORER.yaml",
+      "tied/vocab/tied-yaml-mcp.md"
+    ],
+    "success_criteria": [
+      "Byte-stable golden tests for fixture corpus",
+      "html-renderer hostile string tests pass",
+      "Methodology-only tokens labeled in artifact",
+      "No TIED YAML mutation during explorer run",
+      "tied_vocabulary_explorer_run MCP composition tests pass"
+    ],
+    "summary": "Deterministic CLI and MCP tool produce offline HTML vocabulary explorer from scoped source walk and merged TIED indexes without mutating TIED YAML."
+  },
+  "completion_criteria": {
+    "activation": {
+      "close_out_run_id": "ve-closeout-20260904",
+      "request_token": "REQ-VOCABULARY_EXPLORER",
+      "verification_run_id": "ve-verify-20260904"
+    },
+    "gate_evidence": {
+      "close_out": "working/REQ-VOCABULARY_EXPLORER/gates/gate-close_out-result.json",
+      "quality_security": "working/REQ-VOCABULARY_EXPLORER/gates/quality-security-profile-result.json",
+      "verification": "working/REQ-VOCABULARY_EXPLORER/gates/gate-verification-result.json"
+    },
+    "token_validation": "scripts/validate_tokens.sh unavailable; tied_validate_consistency substituted per repo policy",
+    "verification_gate_notes": "mcp-server npm test 527/527 pass; tied_validate_consistency ok; pseudocode_validate pass for four IMPL tokens; quality_security_profile_validate ok (external-input-security); tied_checklist_gate_validate allowed verification and close_out with integrated activation; tied_verify set REQ Implemented and IMPL Active."
+  },
+  "impact_analysis": {
+    "modules_or_boundaries": "mcp-server/src/vocabulary-explorer/*; export collectScopedSourceFiles in scoped-analysis.ts; cli/vocabulary-explorer.ts; mcp-server/src/tools/index.ts (tied_vocabulary_explorer_run); mcp-server/src/tools/vocabulary-explorer-mcp.test.ts; package.json script",
+    "tied_tokens_new": [
+      "ARCH-VOCABULARY_DATA_CONTRACT",
+      "ARCH-VOCABULARY_EXPLORER",
+      "ARCH-VOCABULARY_OFFLINE_VIEW",
+      "IMPL-VOCABULARY_ANALYSIS",
+      "IMPL-VOCABULARY_HTML_RENDERER",
+      "IMPL-VOCABULARY_PROJECTION",
+      "IMPL-VOCABULARY_VIEWER_STATE",
+      "REQ-VOCABULARY_ANALYSIS",
+      "REQ-VOCABULARY_EXPLORER",
+      "REQ-VOCABULARY_VIEWER_STATE"
+    ]
+  },
+  "record_identity": {
+    "change_request_id": "REQ-VOCABULARY_EXPLORER",
+    "checklist_process": "[PROC-AGENT_REQ_CHECKLIST]",
+    "checklist_step_completed": "verification-gate-close-out",
+    "record_status": "implemented",
+    "recorded_at": "2026-09-04",
+    "tied_context": {
+      "architecture": [
+        "ARCH-VOCABULARY_DATA_CONTRACT",
+        "ARCH-VOCABULARY_EXPLORER",
+        "ARCH-VOCABULARY_OFFLINE_VIEW"
+      ],
+      "implementation": [
+        "IMPL-VOCABULARY_ANALYSIS",
+        "IMPL-VOCABULARY_HTML_RENDERER",
+        "IMPL-VOCABULARY_PROJECTION",
+        "IMPL-VOCABULARY_VIEWER_STATE"
+      ],
+      "requirements": [
+        "REQ-VOCABULARY_ANALYSIS",
+        "REQ-VOCABULARY_EXPLORER",
+        "REQ-VOCABULARY_VIEWER_STATE"
+      ]
+    },
+    "title": "Offline vocabulary explorer CLI and HTML artifact",
+    "workspace_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "risk_analysis": {
+    "adversarial_inquiry": {
+      "counterexamples": [
+        "HTML injection via hostile source",
+        "Path leakage in artifact"
+      ],
+      "depth_tier": "integrated",
+      "disconfirming_observations": [
+        "scoped walk respects .tiedignore",
+        "scriptSafeJson and escapeHtml tests pass"
+      ],
+      "evidence_references": [
+        "html-renderer.test.ts",
+        "term-analysis.test.ts",
+        "vocabulary-explorer.composition.test.ts",
+        "vocabulary-explorer-mcp.test.ts"
+      ],
+      "falsification_questions": [
+        "Are .env files included in walk?",
+        "Can embedded JSON break out of script tag?"
+      ],
+      "gate_policy": "advisory"
+    },
+    "depth_tier": "integrated",
+    "gate_policy": "advisory",
+    "risks": [
+      {
+        "description": "HTML/JSON injection from hostile source content",
+        "id": "RISK-VE-001",
+        "likelihood": "Medium",
+        "mitigation": "Context-aware escape; script-safe JSON embed; hostile fixtures in html-renderer.test.ts",
+        "severity": "High"
+      },
+      {
+        "description": "Secret/path leakage in generated artifact",
+        "id": "RISK-VE-002",
+        "likelihood": "Low",
+        "mitigation": "Relative paths only; excerpt redaction; ignore patterns",
+        "severity": "High"
+      }
+    ]
+  },
+  "tdd_sequence": {
+    "summary": "Phase 0 TIED stack; RED→GREEN unit modules; composition; MCP wiring; validation close-out."
+  },
+  "test_strategy": {
+    "matrix_notes": "term-analysis, tied-records, view-model, state, html-renderer unit tests; vocabulary-explorer.composition.test.ts CLI boundary; vocabulary-explorer-mcp.test.ts MCP tool.",
+    "summary": "[REQ-MODULE_VALIDATION]: unit tests per module; composition golden test; MCP composition test; npm test in mcp-server."
+  }
+}

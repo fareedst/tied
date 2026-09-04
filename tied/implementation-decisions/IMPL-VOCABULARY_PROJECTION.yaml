@@ -1,0 +1,31 @@
+IMPL-VOCABULARY_PROJECTION:
+  category: "Implementation"
+  cross_references:
+    - "ARCH-VOCABULARY_DATA_CONTRACT"
+    - "REQ-VOCABULARY_EXPLORER"
+  essence_pseudocode_path: "implementation-decisions/IMPL-VOCABULARY_PROJECTION-pseudocode.md"
+  implementation_approach:
+    details:
+      - "Sorted terms, occurrences, relationships"
+      - "Stable term IDs from kind+normalized_key hash"
+      - "Walk summary and truncation metadata"
+    summary: "view-model.ts builds deterministic vocabulary-explorer.v1 envelope"
+  name: "vocabulary-explorer.v1 projection"
+  rationale:
+    benefits:
+      - "Golden test comparability"
+    problems_solved:
+      - "Unstable ordering"
+    why: "Merges analysis outputs into byte-stable v1 contract."
+  related_architecture:
+    - "ARCH-VOCABULARY_DATA_CONTRACT"
+  related_requirements:
+    - "REQ-VOCABULARY_EXPLORER"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-VOCABULARY_DATA_CONTRACT"
+    requirements:
+      - "REQ-VOCABULARY_EXPLORER"
+    tests:
+      - "view-model.test.ts"

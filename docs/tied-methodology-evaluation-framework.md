@@ -512,6 +512,7 @@ Use when starting or re-running an evaluation cycle:
 | 2026-08-27 | AI Agent | Phase 1 fixture-grounded cohort report: v2 aggregator on five archived profiles; insufficient-sample subcohorts documented; operator pilot deferred |
 | 2026-08-27 | AI Agent | Phase 1 operator pilot: four TIED clients (nsync, treegrep, panorama, indescript) at HEAD; cross-client and within-repo v2 reports |
 | 2026-08-27 | AI Agent | E0 approval: alignment recommendations and client remediation handoffs published |
+| 2026-08-27 | AI Agent | Post-alignment re-profile: four pinned TIED 3.0 structural arms, four manifest-attached executable arms, per-client E0→E4 comparisons, and v2 cross-client/within-repo reports; isolated worktree identity and stale-manifest limits recorded |
 
 ---
 

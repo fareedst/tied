@@ -1,0 +1,26 @@
+ARCH-VOCABULARY_DATA_CONTRACT:
+  alternatives_considered: []
+  category: "Architecture"
+  cross_references:
+    - "REQ-VOCABULARY_ANALYSIS"
+    - "REQ-VOCABULARY_EXPLORER"
+  decision: "Versioned vocabulary-explorer.v1 envelope with deterministic IDs (hash of kind+normalized_key), sorted arrays, relationship kinds, walk_summary, policy metadata, and truncation block."
+  name: "vocabulary-explorer.v1 data contract"
+  rationale:
+    benefits:
+      - "Comparable golden JSON"
+      - "Deterministic projection IDs"
+    problems_solved:
+      - "Ambiguous relationship derivation"
+      - "Unstable term ordering"
+    why: "Byte-stable golden tests require explicit schema and ordering rules."
+  status: "Active"
+  traceability:
+    implementation:
+      - "IMPL-VOCABULARY_ANALYSIS"
+      - "IMPL-VOCABULARY_PROJECTION"
+    requirements:
+      - "REQ-VOCABULARY_ANALYSIS"
+      - "REQ-VOCABULARY_EXPLORER"
+    tests:
+      - "view-model.test.ts"

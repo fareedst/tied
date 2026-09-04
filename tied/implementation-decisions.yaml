@@ -1927,3 +1927,23 @@ IMPL-TIED_YAML_STYLE_RESOLVER:
       - "mcp-server/src/yaml-canonicalizer.test.ts"
       - "mcp-server/src/yaml-style-config.test.ts"
       - "scripts/yaml_list_sorter_test.rb"
+IMPL-VOCABULARY_ANALYSIS:
+  category: "Implementation"
+  detail_file: "implementation-decisions/IMPL-VOCABULARY_ANALYSIS.yaml"
+  name: "Term analysis and TIED record modules"
+  status: "Active"
+IMPL-VOCABULARY_HTML_RENDERER:
+  category: "Implementation"
+  detail_file: "implementation-decisions/IMPL-VOCABULARY_HTML_RENDERER.yaml"
+  name: "Single-file HTML renderer"
+  status: "Active"
+IMPL-VOCABULARY_PROJECTION:
+  category: "Implementation"
+  detail_file: "implementation-decisions/IMPL-VOCABULARY_PROJECTION.yaml"
+  name: "vocabulary-explorer.v1 projection"
+  status: "Active"
+IMPL-VOCABULARY_VIEWER_STATE:
+  category: "Implementation"
+  detail_file: "implementation-decisions/IMPL-VOCABULARY_VIEWER_STATE.yaml"
+  name: "Pure viewer state encode/decode"
+  status: "Active"

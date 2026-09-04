@@ -1652,3 +1652,18 @@ ARCH-TIED_YAML_STYLE_RESOLUTION:
       - "mcp-server/src/tools/yaml-canonicalization-mcp.test.ts"
       - "mcp-server/src/yaml-style-config.test.ts"
       - "scripts/yaml_list_sorter_test.rb"
+ARCH-VOCABULARY_DATA_CONTRACT:
+  category: "Architecture"
+  detail_file: "architecture-decisions/ARCH-VOCABULARY_DATA_CONTRACT.yaml"
+  name: "vocabulary-explorer.v1 data contract"
+  status: "Active"
+ARCH-VOCABULARY_EXPLORER:
+  category: "Architecture"
+  detail_file: "architecture-decisions/ARCH-VOCABULARY_EXPLORER.yaml"
+  name: "Vocabulary explorer module boundaries"
+  status: "Active"
+ARCH-VOCABULARY_OFFLINE_VIEW:
+  category: "Architecture"
+  detail_file: "architecture-decisions/ARCH-VOCABULARY_OFFLINE_VIEW.yaml"
+  name: "Offline HTML proof boundary"
+  status: "Active"

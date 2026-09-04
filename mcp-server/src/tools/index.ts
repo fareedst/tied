@@ -59,6 +59,7 @@ import {
 } from "../yaml-client-formatter.js";
 import { resolveRequirementListStateGuide } from "./requirement-list-state-guide.js";
 import { runScopedAnalysis } from "../analysis/scoped-analysis.js";
+import { runVocabularyExplorer } from "../vocabulary-explorer/pipeline.js";
 import { runPlumbDiffImpactPreview } from "../analysis/plumb-diff-impact-preview.js";
 import { validateBindingInventory } from "../analysis/binding-inventory.js";
 import { validateEssencePseudocode } from "../analysis/pseudocode-validator.js";
@@ -1407,6 +1408,96 @@ export const allTools = [
       try {
         const result = runScopedAnalysis(args);
         return textContent(JSON.stringify(result, null, 2));
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : String(e);
+        return textContent(JSON.stringify({ ok: false, error: msg }, null, 2));
+      }
+    },
+  },
+  {
+    name: "tied_vocabulary_explorer_run",
+    config: {
+      description:
+        "Run read-only vocabulary explorer over scoped roots and merged TIED indexes. Returns vocabulary-explorer.v1 envelope JSON and optional offline HTML. Does not mutate TIED YAML or invoke write tools.",
+      inputSchema: z.object({
+        roots: z
+          .array(z.string())
+          .optional()
+          .describe("Explicit analysis roots. If omitted, uses .tiedanalysis.yaml defaults."),
+        config_path: z
+          .string()
+          .optional()
+          .describe("Path to .tiedanalysis.yaml (cwd-relative unless absolute). Default: .tiedanalysis.yaml"),
+        min_frequency: z
+          .number()
+          .optional()
+          .describe("Minimum distinct files/scopes for source identifiers (default 2). TIED tokens bypass."),
+        max_terms: z.number().optional().describe("Maximum terms after deterministic truncation (default 10000)."),
+        include_extensions: z
+          .array(z.string())
+          .optional()
+          .describe("File extensions to include, e.g. [.ts, .md]."),
+        identifier_mode: z
+          .enum(["ast", "lexical"])
+          .optional()
+          .describe("Source identifier extraction: ast (JS/TS compiler API) or lexical heuristic (default ast)."),
+        include_html: z
+          .boolean()
+          .optional()
+          .describe("Include rendered offline HTML string in the JSON response (default false)."),
+        out_html_path: z
+          .string()
+          .optional()
+          .describe("Optional path to write the HTML artifact (cwd-relative unless absolute)."),
+        emit_json_path: z
+          .string()
+          .optional()
+          .describe("Optional path to write the envelope JSON (cwd-relative unless absolute)."),
+      }),
+    },
+    handler: async (args: {
+      roots?: string[];
+      config_path?: string;
+      min_frequency?: number;
+      max_terms?: number;
+      include_extensions?: string[];
+      identifier_mode?: "ast" | "lexical";
+      include_html?: boolean;
+      out_html_path?: string;
+      emit_json_path?: string;
+    }) => {
+      try {
+        const result = runVocabularyExplorer({
+          config_path: args.config_path,
+          roots: args.roots,
+          min_frequency: args.min_frequency,
+          max_terms: args.max_terms,
+          include_extensions: args.include_extensions,
+          identifier_mode: args.identifier_mode,
+        });
+        if (!result.ok) {
+          return textContent(JSON.stringify({ ok: false, error: result.error ?? "unknown" }, null, 2));
+        }
+        const payload: Record<string, unknown> = {
+          ok: true,
+          envelope: result.envelope,
+        };
+        if (args.include_html) payload.html = result.html;
+        if (args.out_html_path && result.html) {
+          const outAbs = path.isAbsolute(args.out_html_path)
+            ? args.out_html_path
+            : path.resolve(process.cwd(), args.out_html_path);
+          fs.writeFileSync(outAbs, result.html, "utf8");
+          payload.out_html_path = outAbs;
+        }
+        if (args.emit_json_path && result.envelope) {
+          const jsonAbs = path.isAbsolute(args.emit_json_path)
+            ? args.emit_json_path
+            : path.resolve(process.cwd(), args.emit_json_path);
+          fs.writeFileSync(jsonAbs, `${JSON.stringify(result.envelope, null, 2)}\n`, "utf8");
+          payload.emit_json_path = jsonAbs;
+        }
+        return textContent(JSON.stringify(payload, null, 2));
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
         return textContent(JSON.stringify({ ok: false, error: msg }, null, 2));

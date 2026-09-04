@@ -1,0 +1,29 @@
+REQ-VOCABULARY_VIEWER_STATE:
+  category: "Functional"
+  description: "Pure encode/decode of viewer filters, search, selection, and history in URL hash fragments for offline HTML restore and popstate navigation."
+  name: "Fragment-encoded viewer state"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Deterministic fragment round-trip"
+      - "Keyboard-focusable controls with visible focus rings"
+    problems_solved:
+      - "No back/forward for filter changes"
+      - "No persistent selection across reloads"
+    why: "Offline HTML must restore interactive state via file:// without server round-trips."
+  related_requirements:
+    depends_on:
+      - "REQ-VOCABULARY_EXPLORER"
+    related_to: []
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Fragment round-trip preserves filters, search, and selection"
+    - criterion: "History transitions simulate popstate back/forward"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-VOCABULARY_OFFLINE_VIEW"
+    implementation:
+      - "IMPL-VOCABULARY_VIEWER_STATE"
+    tests:
+      - "state.test.ts"

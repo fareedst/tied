@@ -1,0 +1,43 @@
+REQ-VOCABULARY_EXPLORER:
+  category: "Functional"
+  description: "Deterministic CLI and MCP tool produce a self-contained offline HTML vocabulary explorer from configured source roots and merged TIED indexes without mutating TIED YAML."
+  name: "Offline vocabulary explorer"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Read-only TIED boundary preserves canonical intent"
+      - "Single byte-stable HTML artifact for exploration"
+    problems_solved:
+      - "Fragmented discovery via token_scan or manual search"
+      - "No unified offline navigation for source identifiers and TIED tokens"
+    why: "Teams need unified navigation of significant terms, TIED relationships, and occurrences without ad-hoc search or traceability gap tooling."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-TIED_VOCABULARY_OWNERSHIP"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "CLI and tied_vocabulary_explorer_run MCP tool emit vocabulary-explorer.v1 envelope and offline HTML from configured roots"
+    - criterion: "Explorer run does not invoke MCP write tools or mutate tied/ YAML"
+    - criterion: "Offline HTML smoke tests confirm self-contained file:// artifact with fragment viewer contract"
+    - criterion: "Same fixture inputs produce byte-identical JSON and HTML golden outputs"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-VOCABULARY_EXPLORER"
+    implementation:
+      - "IMPL-VOCABULARY_ANALYSIS"
+      - "IMPL-VOCABULARY_HTML_RENDERER"
+      - "IMPL-VOCABULARY_PROJECTION"
+      - "IMPL-VOCABULARY_VIEWER_STATE"
+    tests:
+      - "html-renderer.test.ts"
+      - "identifier-ast.test.ts"
+      - "state.test.ts"
+      - "term-analysis.test.ts"
+      - "tied-records.test.ts"
+      - "view-model.test.ts"
+      - "vocabulary-explorer-mcp.test.ts"
+      - "vocabulary-explorer.composition.test.ts"
+      - "vocabulary-explorer.smoke.test.ts"

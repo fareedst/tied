@@ -1,0 +1,6 @@
+REQ-TIED_SETUP:
+  name: "TIED setup fixture"
+  status: "Implemented"
+  description: "Fixture requirement for vocabulary explorer composition test."
+  category: "Functional"
+  priority: "P3"

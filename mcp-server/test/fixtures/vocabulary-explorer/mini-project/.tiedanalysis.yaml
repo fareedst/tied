@@ -1,0 +1,15 @@
+default_roots:
+  - project_root
+follow_symlinks: false
+token_scan:
+  include_extensions:
+    - ".ts"
+  max_file_bytes: 250000
+  max_files: 100
+traceability_gap:
+  methodology_path_markers:
+    - "tied/methodology/"
+  non_production_path_markers:
+    - "templates/"
+    - "examples/"
+    - "testdata/"

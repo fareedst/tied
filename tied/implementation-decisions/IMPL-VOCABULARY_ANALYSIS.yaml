@@ -1,0 +1,40 @@
+IMPL-VOCABULARY_ANALYSIS:
+  category: "Implementation"
+  cross_references:
+    - "ARCH-VOCABULARY_DATA_CONTRACT"
+    - "ARCH-VOCABULARY_EXPLORER"
+    - "REQ-VOCABULARY_ANALYSIS"
+  essence_pseudocode_path: "implementation-decisions/IMPL-VOCABULARY_ANALYSIS-pseudocode.md"
+  implementation_approach:
+    details:
+      - "AST identifier extraction for JS/TS in identifier-ast.ts"
+      - "Conservative identifier grammar and redaction in term-analysis.ts"
+      - "Merged index load and methodology-only labeling in tied-records.ts"
+      - "Reuse collectScopedSourceFiles from scoped-analysis.ts"
+    summary: "term-analysis.ts and tied-records.ts under mcp-server/src/vocabulary-explorer/"
+  name: "Term analysis and TIED record modules"
+  rationale:
+    benefits:
+      - "Independent module validation"
+      - "Shared walk adapter"
+    problems_solved:
+      - "Duplicated traversal"
+      - "Missing methodology-only labels"
+    why: "Implements REQ-VOCABULARY_ANALYSIS extraction and TIED record normalization."
+  related_architecture:
+    - "ARCH-VOCABULARY_DATA_CONTRACT"
+    - "ARCH-VOCABULARY_EXPLORER"
+  related_requirements:
+    - "REQ-VOCABULARY_ANALYSIS"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-VOCABULARY_DATA_CONTRACT"
+      - "ARCH-VOCABULARY_EXPLORER"
+    requirements:
+      - "REQ-VOCABULARY_ANALYSIS"
+    tests:
+      - "identifier-ast.test.ts"
+      - "term-analysis.test.ts"
+      - "tied-records.test.ts"
+      - "vocabulary-explorer-mcp.test.ts"

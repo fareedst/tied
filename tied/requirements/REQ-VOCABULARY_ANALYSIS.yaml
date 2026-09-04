@@ -1,0 +1,33 @@
+REQ-VOCABULARY_ANALYSIS:
+  category: "Functional"
+  description: "Extract significant TIED tokens and source identifiers from scoped file walks using AST extraction for JS/TS, lexical heuristics for other extensions, frequency policy, redaction, and truncation."
+  name: "Deterministic vocabulary term analysis"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Policy-driven significant-term filtering"
+      - "Shared scoped walk with traceability gap"
+    problems_solved:
+      - "Ad-hoc identifier discovery"
+      - "Inconsistent frequency and stop-word handling"
+    why: "Normalized vocabulary requires deterministic extraction separate from TIED index loading."
+  related_requirements:
+    depends_on:
+      - "REQ-VOCABULARY_EXPLORER"
+    related_to: []
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Excerpts redact secrets and cap line/character limits"
+    - criterion: "JS/TS files use AST identifier extraction by default; lexical mode available for parity"
+    - criterion: "TIED tokens always significant; source identifiers respect min_frequency and stop words"
+    - criterion: "Truncation metadata emitted when max_terms exceeded"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-VOCABULARY_DATA_CONTRACT"
+    implementation:
+      - "IMPL-VOCABULARY_ANALYSIS"
+    tests:
+      - "identifier-ast.test.ts"
+      - "term-analysis.test.ts"
+      - "tied-records.test.ts"

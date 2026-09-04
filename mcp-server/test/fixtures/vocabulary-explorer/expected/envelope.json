@@ -1,0 +1,104 @@
+{
+  "schema": "vocabulary-explorer.v1",
+  "generated_at": "2026-06-01T12:00:00.000Z",
+  "project_root_label": "mini-project",
+  "proof_boundary": "offline_navigation_aid",
+  "walk_summary": {
+    "roots_used": [
+      "mini-project"
+    ],
+    "files_scanned": 2,
+    "skipped_paths_count": 0,
+    "truncation": {
+      "applied": false,
+      "max_terms": 500,
+      "dropped_count": 0
+    }
+  },
+  "policy": {
+    "min_frequency": 2,
+    "max_terms": 500,
+    "include_extensions": [
+      ".ts"
+    ],
+    "identifier_mode": "ast"
+  },
+  "terms": [
+    {
+      "id": "21c0a887ff73c243",
+      "kind": "tied_token",
+      "display": "REQ-TIED_SETUP",
+      "normalized_key": "req-tied_setup",
+      "frequency": 2,
+      "ownership": "project",
+      "tied_layer": "REQ",
+      "description": "Fixture requirement for vocabulary explorer composition test.",
+      "relationships": [
+        {
+          "kind": "co_occurrence",
+          "target_id": "c3e2fc5fc6a7f58f"
+        }
+      ],
+      "occurrences": [
+        {
+          "path": "src/alpha.ts",
+          "line": 1,
+          "excerpt": "/** [REQ-TIED_SETUP] fixture shared identifier */\nexport function widgetHandler(): string {",
+          "file_kind": "production"
+        },
+        {
+          "path": "src/beta.ts",
+          "line": 1,
+          "excerpt": "/** Implements [REQ-TIED_SETUP] with shared widgetHandler */\nexport const widgetHandler = 42;",
+          "file_kind": "production"
+        }
+      ]
+    },
+    {
+      "id": "c3e2fc5fc6a7f58f",
+      "kind": "source_identifier",
+      "display": "widgetHandler",
+      "normalized_key": "widgethandler",
+      "frequency": 2,
+      "ownership": "n/a",
+      "tied_layer": null,
+      "description": "",
+      "relationships": [
+        {
+          "kind": "co_occurrence",
+          "target_id": "21c0a887ff73c243"
+        }
+      ],
+      "occurrences": [
+        {
+          "path": "src/alpha.ts",
+          "line": 2,
+          "excerpt": "/** [REQ-TIED_SETUP] fixture shared identifier */\nexport function widgetHandler(): string {\n  return \"alpha\";",
+          "file_kind": "production"
+        },
+        {
+          "path": "src/beta.ts",
+          "line": 2,
+          "excerpt": "/** Implements [REQ-TIED_SETUP] with shared widgetHandler */\nexport const widgetHandler = 42;\nexport const uniqueBeta = true;",
+          "file_kind": "production"
+        }
+      ]
+    }
+  ],
+  "filters_catalog": {
+    "directories": [
+      "src"
+    ],
+    "languages": [
+      "typescript"
+    ],
+    "file_kinds": [
+      "production"
+    ]
+  },
+  "views_catalog": [
+    "frequency",
+    "relationships",
+    "semantic_tokens"
+  ]
+}

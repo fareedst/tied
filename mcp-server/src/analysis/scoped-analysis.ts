@@ -32,7 +32,8 @@ export type ScopedAnalysisMode =
   | "token_scan"
   | "gap_report"
   | "impact_preview"
-  | "traceability_gap_report";
+  | "traceability_gap_report"
+  | "vocabulary_file_walk";
 
 export type RootKind = "project_root" | "TIED_BASE_PATH";
 
@@ -64,6 +65,11 @@ export type ScopedAnalysisArgs = {
    * Paths may be absolute or cwd-relative (relative to the MCP server process cwd).
    */
   roots?: string[];
+  /**
+   * Client project root for config, ignore, and relative roots.
+   * Default: auto-resolved from cwd (walk up for `.tiedanalysis.yaml`) or TIED_BASE_PATH.
+   */
+  project_root?: string;
   /**
    * Optional project config file (cwd-relative unless absolute).
    * Default: `.tiedanalysis.yaml`
@@ -188,6 +194,28 @@ function loadConfig(configPathAbs: string): AnalysisConfig {
   return {};
 }
 
+/** Exported for vocabulary explorer pipeline config reads. */
+export function loadAnalysisConfig(configPathAbs: string): AnalysisConfig {
+  return loadConfig(configPathAbs);
+}
+
+/**
+ * Resolve client project root by walking up from startDir for project markers,
+ * else use startDir (matches legacy runScopedAnalysis cwd-as-root behavior).
+ * TIED_BASE_PATH is for YAML loading only — not project root for file walks.
+ */
+export function resolveClientProjectRootFromCwd(startDir: string = process.cwd()): string {
+  let dir = path.resolve(startDir);
+  while (true) {
+    if (fs.existsSync(path.join(dir, DEFAULT_CONFIG_PATH))) return dir;
+    if (fs.existsSync(path.join(dir, "tied", "requirements.yaml"))) return dir;
+    const parent = path.dirname(dir);
+    if (parent === dir) break;
+    dir = parent;
+  }
+  return path.resolve(startDir);
+}
+
 function readIgnoreFilePatterns(ignoreFileAbs: string): string[] {
   if (!fs.existsSync(ignoreFileAbs)) return [];
   try {
@@ -298,6 +326,78 @@ type WalkWalkFilesResult = {
   scanned_files: string[];
 };
 
+export type ScopedSourceFile = {
+  relPosix: string;
+  absPath: string;
+};
+
+export type CollectScopedSourceFilesResult = {
+  ok: boolean;
+  summary: RunSummary;
+  files: ScopedSourceFile[];
+  error?: string;
+};
+
+/** [IMPL-VOCABULARY_ANALYSIS] [ARCH-VOCABULARY_EXPLORER] [REQ-VOCABULARY_ANALYSIS] Shared walk for vocabulary explorer. */
+export function collectScopedSourceFiles(args: ScopedAnalysisArgs): CollectScopedSourceFilesResult {
+  const projectRoot = args.project_root
+    ? path.resolve(args.project_root)
+    : resolveClientProjectRootFromCwd(process.cwd());
+  const configPath = args.config_path ?? DEFAULT_CONFIG_PATH;
+  const configPathAbs = resolveAbsolutePath(configPath, projectRoot);
+  const config = loadConfig(configPathAbs);
+
+  const followSymlinks =
+    typeof args.follow_symlinks === "boolean" ? args.follow_symlinks : config.follow_symlinks ?? false;
+
+  const { roots_used, default_roots_used } = resolveScopedRoots(args, config, projectRoot);
+
+  const ignoreFile = args.ignore_file ?? config.ignore_file ?? DEFAULT_IGNORE_FILE;
+  const ignoreFileAbs = resolveAbsolutePath(ignoreFile, projectRoot);
+
+  const filePatterns = readIgnoreFilePatterns(ignoreFileAbs);
+  const inlinePatterns = [...(config.ignore_inline ?? []), ...(args.ignore_patterns ?? [])];
+  const builtInInline = ["node_modules/", ".git/", "dist/"];
+  const effectivePatterns = [...filePatterns, ...inlinePatterns, ...builtInInline];
+  const ig = buildIgnoreFilter(effectivePatterns);
+
+  const includeExtensions = resolveIncludeExtensions(args, config);
+  const maxFiles = resolveMaxFiles(args, config);
+
+  const walk = walkFilesUnderRoots({
+    rootsAbs: roots_used,
+    projectRootAbs: projectRoot,
+    ig,
+    followSymlinks,
+    includeExtensions,
+    maxFiles,
+  });
+
+  const ignoreSource =
+    filePatterns.length > 0 && inlinePatterns.length > 0
+      ? { type: "file_and_inline" as const, path: ignoreFileAbs }
+      : filePatterns.length > 0
+        ? { type: "file" as const, path: ignoreFileAbs }
+        : { type: "inline" as const, path: undefined };
+
+  const summary: RunSummary = {
+    roots_used,
+    default_roots_used,
+    ignore_source: ignoreSource,
+    skipped_paths_count: walk.skipped_paths_count,
+    followed_symlinks: followSymlinks,
+  };
+
+  const files: ScopedSourceFile[] = walk.scanned_files
+    .map((absPath) => ({
+      relPosix: toPosix(path.relative(projectRoot, absPath)),
+      absPath,
+    }))
+    .sort((a, b) => a.relPosix.localeCompare(b.relPosix));
+
+  return { ok: true, summary, files };
+}
+
 function walkFilesUnderRoots(params: {
   rootsAbs: string[];
   projectRootAbs: string;
@@ -388,7 +488,9 @@ function walkFilesUnderRoots(params: {
 
 export function runScopedAnalysis(args: ScopedAnalysisArgs): ScopedAnalysisResult {
   const mode: ScopedAnalysisMode = args.mode ?? "token_scan";
-  const projectRoot = process.cwd();
+  const projectRoot = args.project_root
+    ? path.resolve(args.project_root)
+    : resolveClientProjectRootFromCwd(process.cwd());
 
   const configPath = args.config_path ?? DEFAULT_CONFIG_PATH;
   const configPathAbs = resolveAbsolutePath(configPath, projectRoot);
@@ -443,12 +545,18 @@ export function runScopedAnalysis(args: ScopedAnalysisArgs): ScopedAnalysisResul
     followed_symlinks: followSymlinks,
   };
 
-  if (mode === "walk_summary") {
+  if (mode === "walk_summary" || mode === "vocabulary_file_walk") {
+    const relFiles =
+      mode === "vocabulary_file_walk"
+        ? walk.scanned_files
+            .map((p) => toPosix(path.relative(projectRoot, p)))
+            .sort((a, b) => a.localeCompare(b))
+        : walk.scanned_files.map((p) => path.relative(projectRoot, p));
     return {
       ok: true,
       summary,
       scanned_files: walk.scanned_files.length,
-      files_scanned: walk.scanned_files.map((p) => path.relative(projectRoot, p)),
+      files_scanned: relFiles,
     };
   }
 

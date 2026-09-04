@@ -1,0 +1,27 @@
+ARCH-VOCABULARY_OFFLINE_VIEW:
+  alternatives_considered: []
+  category: "Architecture"
+  cross_references:
+    - "REQ-VOCABULARY_EXPLORER"
+    - "REQ-VOCABULARY_VIEWER_STATE"
+  decision: "Single self-contained HTML with context-aware escaping, script-safe JSON embed via JSON.stringify plus Unicode escapes, visible proof-boundary banner, and fragment-encoded viewer state."
+  name: "Offline HTML proof boundary"
+  rationale:
+    benefits:
+      - "file:// compatible evergreen browsers"
+      - "Hostile string fixtures pass structural tests"
+    problems_solved:
+      - "HTML/JSON injection"
+      - "Misinterpreting generated view as canonical"
+    why: "Generated HTML is a navigation aid not canonical TIED intent; injection surfaces must be hardened."
+  status: "Active"
+  traceability:
+    implementation:
+      - "IMPL-VOCABULARY_HTML_RENDERER"
+      - "IMPL-VOCABULARY_VIEWER_STATE"
+    requirements:
+      - "REQ-VOCABULARY_EXPLORER"
+      - "REQ-VOCABULARY_VIEWER_STATE"
+    tests:
+      - "html-renderer.test.ts"
+      - "state.test.ts"
