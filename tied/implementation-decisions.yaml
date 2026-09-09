@@ -1435,6 +1435,14 @@ IMPL-PROMPT_TYPE_SUBAGENT:
       - "REQ-PROMPT_TYPE_SUBAGENT"
     tests:
       - "mcp-server/src/e2e/prompt-type-subagent.test.ts"
+IMPL-PSEUDOCODE_ANALYSIS_ENGINE:
+  cross_references:
+    - "ARCH-PSEUDOCODE_ANALYSIS_PIPELINE"
+    - "IMPL-QUALITY_PSEUDOCODE_VALIDATOR"
+    - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+  detail_file: "implementation-decisions/IMPL-PSEUDOCODE_ANALYSIS_ENGINE.yaml"
+  name: "Pseudo-code static analysis engine"
+  status: "Active"
 IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK:
   cross_references:
     - "ARCH-QUALITY_ASSURANCE_PROFILES"

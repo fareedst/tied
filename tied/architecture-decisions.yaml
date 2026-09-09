@@ -1337,6 +1337,13 @@ ARCH-PROMPT_TYPE_SUBAGENT:
       - "REQ-PROMPT_TYPE_SUBAGENT"
     tests:
       - "mcp-server/src/e2e/prompt-type-subagent.test.ts"
+ARCH-PSEUDOCODE_ANALYSIS_PIPELINE:
+  cross_references:
+    - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+  detail_file: "architecture-decisions/ARCH-PSEUDOCODE_ANALYSIS_PIPELINE.yaml"
+  name: "Pseudo-code static analysis pipeline"
+  status: "Active"
 ARCH-QUALITY_ASSURANCE_PROFILES:
   cross_references:
     - "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK"

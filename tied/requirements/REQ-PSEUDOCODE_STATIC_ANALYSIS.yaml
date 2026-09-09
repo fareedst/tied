@@ -1,0 +1,38 @@
+REQ-PSEUDOCODE_STATIC_ANALYSIS:
+  category: "Functional"
+  description: "Deterministic read-only static analysis of IMPL essence_pseudocode sidecars providing CFG, call graph, bounded abstract facts, and obligation characterization before RED tests."
+  name: "Contract-aware static analysis for IMPL essence_pseudocode"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Explicit proof boundaries separate from Layer B validator"
+      - "Richer pre-RED signal without runtime execution"
+    problems_solved:
+      - "No bounded abstract analysis or obligation characterization for sidecars"
+      - "No CFG or call-graph signal for pseudo-code before implementation"
+    why: "Layer B structural validation cannot answer control-flow, bounded data-flow, nullability, or semantic-path characterization needs sponsors expect before tests."
+  related_requirements:
+    depends_on:
+      - "REQ-MODULE_VALIDATION"
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Analysis is read-only with explicit unknown and budget disclosure"
+      metric: "Handler never mutates TIED YAML; truncated and unknown sections present when applicable"
+    - criterion: "pseudocode_analyze returns deterministic pseudocode-analysis-report.v1 for fixture corpus"
+      metric: "Byte-stable JSON for fixed inputs within analyzer_version"
+    - criterion: "pseudocode_validate behavior and schema unchanged"
+      metric: "Golden regression tests pass unchanged"
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-PSEUDOCODE_ANALYSIS_PIPELINE"
+    code_annotations:
+      - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+    implementation:
+      - "IMPL-PSEUDOCODE_ANALYSIS_ENGINE"
+    tests:
+      - "mcp-server/src/analysis/pseudocode-analyzer.test.ts"
+      - "mcp-server/src/tools/pseudocode-analyze-mcp.test.ts"

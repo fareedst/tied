@@ -1,0 +1,79 @@
+import assert from "node:assert/strict";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import { describe, it } from "node:test";
+import { allTools } from "./index.js";
+
+type TextContent = { content: Array<{ type: "text"; text: string }> };
+
+function handler(name: string): (args: Record<string, unknown>) => Promise<TextContent> {
+  const tool = allTools.find((candidate) => candidate.name === name);
+  if (!tool) throw new Error(`MCP tool not registered: ${name}`);
+  return tool.handler as (args: Record<string, unknown>) => Promise<TextContent>;
+}
+
+function body(result: TextContent): Record<string, unknown> {
+  return JSON.parse(result.content[0]?.text ?? "{}") as Record<string, unknown>;
+}
+
+describe("pseudocode_analyze MCP [REQ-PSEUDOCODE_STATIC_ANALYSIS]", () => {
+  it("returns analysis report for inline pseudocode", async () => {
+    // [IMPL-PSEUDOCODE_ANALYSIS_ENGINE] [ARCH-PSEUDOCODE_ANALYSIS_PIPELINE] [REQ-PSEUDOCODE_STATIC_ANALYSIS]
+    const result = await handler("pseudocode_analyze")({
+      token: "IMPL-PSEUDOCODE_ANALYSIS_ENGINE",
+      pseudocode: `# [IMPL-PSEUDOCODE_ANALYSIS_ENGINE]\nprocedure MAIN:\n  Contract:\n    INPUT: x\n    OUTPUT: y\n    PRE: x\n    POST: y\n    EFFECTS: pure\n  RETURN y`,
+      known_tokens: ["IMPL-PSEUDOCODE_ANALYSIS_ENGINE"],
+    });
+    const value = body(result);
+    assert.equal(value.schema_version, "pseudocode-analysis-report.v1");
+    assert.equal(value.grammar_version, "pseudocode-grammar.v1");
+    assert.ok(value.proof_boundary);
+  });
+
+  it("rejects ambiguous inline and path input", async () => {
+    // [IMPL-PSEUDOCODE_ANALYSIS_ENGINE] [ARCH-PSEUDOCODE_ANALYSIS_PIPELINE] [REQ-PSEUDOCODE_STATIC_ANALYSIS]
+    const result = await handler("pseudocode_analyze")({
+      token: "IMPL-PSEUDOCODE_ANALYSIS_ENGINE",
+      pseudocode: "procedure X:",
+      essence_pseudocode_path: "implementation-decisions/x.md",
+    });
+    const value = body(result);
+    assert.equal(value.ok, false);
+    assert.equal(value.error, "AMBIGUOUS_INPUT");
+  });
+
+  it("rejects path escape outside TIED base", async () => {
+    // [IMPL-PSEUDOCODE_ANALYSIS_ENGINE] [ARCH-PSEUDOCODE_ANALYSIS_PIPELINE] [REQ-PSEUDOCODE_STATIC_ANALYSIS]
+    const outside = fs.mkdtempSync(path.join(os.tmpdir(), "pseudo-out-"));
+    const f = path.join(outside, "escape.md");
+    fs.writeFileSync(f, "procedure X:", "utf8");
+    try {
+      const result = await handler("pseudocode_analyze")({
+        token: "IMPL-PSEUDOCODE_ANALYSIS_ENGINE",
+        essence_pseudocode_path: f,
+      });
+      const value = body(result);
+      assert.equal(value.ok, false);
+      assert.equal(value.error, "PATH_NOT_UNDER_TIED_BASE");
+    } finally {
+      fs.rmSync(outside, { recursive: true, force: true });
+    }
+  });
+
+  it("coexists with pseudocode_validate unchanged schema", async () => {
+    // [IMPL-PSEUDOCODE_ANALYSIS_ENGINE] [ARCH-PSEUDOCODE_ANALYSIS_PIPELINE] [REQ-PSEUDOCODE_STATIC_ANALYSIS]
+    const pseudo = `# [IMPL-QUALITY_PSEUDOCODE_VALIDATOR]\nprocedure RUN:\n  Contract:\n    INPUT: x\n    OUTPUT: y\n    PRE: x\n    POST: y\n    EFFECTS: pure\n  RETURN y`;
+    const validate = body(await handler("pseudocode_validate")({
+      token: "IMPL-QUALITY_PSEUDOCODE_VALIDATOR",
+      pseudocode: pseudo,
+    }));
+    const analyze = body(await handler("pseudocode_analyze")({
+      token: "IMPL-QUALITY_PSEUDOCODE_VALIDATOR",
+      pseudocode: pseudo,
+      analyses: ["parse"],
+    }));
+    assert.equal(validate.schema_version, "layer-b-pseudocode-validator.v1");
+    assert.equal(analyze.schema_version, "pseudocode-analysis-report.v1");
+  });
+});

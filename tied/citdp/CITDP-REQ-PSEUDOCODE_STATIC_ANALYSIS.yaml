@@ -1,0 +1,88 @@
+CITDP-REQ-PSEUDOCODE_STATIC_ANALYSIS:
+  change_definition:
+    current_behavior: "Layer B pseudocode_validate proves structural shape only; no CFG, call graph, bounded abstract analysis, or obligation characterization."
+    desired_behavior: "Additive pseudocode_analyze MCP tool returns deterministic pseudocode-analysis-report.v1 with parser/IR, symbols, CFG, call graph, abstract facts, obligations, and block-level traceability projections under explicit budgets and proof boundaries."
+    non_goals:
+      - "Automatic LEAP promotion"
+      - "Breaking pseudocode_validate or layer-b-pseudocode-validator.v1"
+      - "Runtime or test execution claims"
+      - "Shared-parser migration inside validator v1"
+    success_criteria:
+      - "All analysis modules have unit tests; MCP composition tests prove read-only path safety"
+      - "pseudocode_analyze returns deterministic report for fixture corpus"
+      - "pseudocode_validate regression unchanged"
+      - "TIED consistency passes for REQ/ARCH/IMPL chain"
+    unchanged_behavior: "pseudocode_validate contract, schema, and golden behavior preserved."
+  completion_criteria:
+    activation:
+      close_out_run_id: "psa-closeout-20260908"
+      phase: "verification"
+      request_token: "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+      run_id: "psa-verify-20260908"
+    critical_high_unaccepted: "false"
+    verification_gate_notes: "mcp-server npm run build and npm test passed 567 tests; pseudocode_validate sidecar ok; tied_validate_consistency ok; integrated adversarial inquiry gates allowed at verification and close_out; tied_verify close_out gate passed."
+  evidence:
+    commands:
+      - command: "npm test"
+        cwd: "mcp-server"
+        exit_code: "0"
+        proof_boundary: "MCP unit/composition tests only"
+        result: "passed"
+      - command: "pseudocode_validate IMPL-PSEUDOCODE_ANALYSIS_ENGINE sidecar"
+        cwd: "."
+        exit_code: "0"
+        proof_boundary: "Structural pseudo-code only"
+        result: "passed"
+      - command: "tied_checklist_gate_validate phase=verification|close_out"
+        cwd: "."
+        exit_code: "0"
+        proof_boundary: "Checklist gate enforcement only"
+        result: "passed"
+      - command: "tied_validate_consistency"
+        cwd: "."
+        exit_code: "0"
+        proof_boundary: "TIED artifact integrity only"
+        result: "passed"
+    proof_boundaries:
+      - "Adversarial inquiry findings are advisory and review-gated; not LEAP triggers"
+      - "Combined use provides richer pre-RED signal when sponsor opts in — not a substitute for tied_validate_consistency or human review"
+      - "pseudocode_analyze proves bounded static analysis within pseudocode-grammar.v1 and declared budgets — not runtime execution, test execution, or complete path coverage"
+      - "pseudocode_validate proves structural pseudo-code shape, token linkage, contract presence, and dependency diagnostics only — not CFG, data-flow, or runtime behavior"
+  impact_analysis:
+    impl_inventory_notes: "Single IMPL-PSEUDOCODE_ANALYSIS_ENGINE owns parser through MCP handler."
+    modules_or_boundaries: "mcp-server/src/analysis/* new modules; mcp-server/src/tools/index.ts additive handler; package.json test list extended."
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "False confidence from analysis report treated as runtime proof"
+        - "Path traversal via essence_pseudocode_path"
+      depth_selected_at: "2026-09-08T00:00:00Z"
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "pseudocode_analyze rejects paths outside TIED_BASE_PATH"
+        - "Report includes explicit proof_boundary and unknowns[]"
+      evidence_references:
+        - "mcp-server/src/tools/pseudocode-analyze-mcp.test.ts"
+        - "working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/"
+        - "working/REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/"
+      gate_policy: "advisory"
+      prior_depth_tier: "minimal"
+      proof_boundary: "Advisory inquiry at integrated depth for MCP external pseudo-code input; findings are review-gated, not LEAP triggers."
+      research_profile: "external-input-security"
+    risks:
+      - description: "Breaking pseudocode_validate consumers"
+        id: "RISK-PSA-001"
+        likelihood: "Low"
+        mitigation: "Separate tool/schema; golden regression tests"
+        severity: "High"
+      - description: "False confidence from runtime claims"
+        id: "RISK-PSA-002"
+        likelihood: "Medium"
+        mitigation: "Mandatory proof_boundary and unknown/budget flags"
+        severity: "High"
+  test_strategy:
+    composition: "pseudocode-analyze-mcp.test.ts path safety and coexistence with pseudocode_validate"
+    e2e: "N/A — no UI; documented in CITDP"
+    regression: "Full mcp-server npm test including pseudocode-validator.test.ts"
+    unit: "RED/GREEN per module under mcp-server/src/analysis/"

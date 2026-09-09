@@ -1324,6 +1324,15 @@ REQ-PROMPT_TYPE_SUBAGENT:
       method: "Static contract test"
     - coverage: "TIED traceability"
       method: "tied_validate_consistency"
+REQ-PSEUDOCODE_STATIC_ANALYSIS:
+  category: "Functional"
+  cross_references:
+    - "ARCH-PSEUDOCODE_ANALYSIS_PIPELINE"
+    - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+  detail_file: "requirements/REQ-PSEUDOCODE_STATIC_ANALYSIS.yaml"
+  name: "Contract-aware static analysis for IMPL essence_pseudocode"
+  priority: "P1"
+  status: "Implemented"
 REQ-QUALITY_ASSURANCE_EVIDENCE:
   category: "Non-Functional"
   cross_references:

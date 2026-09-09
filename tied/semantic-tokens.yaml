@@ -470,6 +470,15 @@ ARCH-PROMPT_TYPE_SUBAGENT:
   name: "Plan-New-Feature Task Subagent Boundary"
   status: "Active"
   type: "ARCH"
+ARCH-PSEUDOCODE_ANALYSIS_PIPELINE:
+  cross_references:
+    - "IMPL-PSEUDOCODE_ANALYSIS_ENGINE"
+    - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+  description: "Versioned parser-to-report architecture for read-only pseudo-code static analysis."
+  detail_file: "architecture-decisions/ARCH-PSEUDOCODE_ANALYSIS_PIPELINE.yaml"
+  name: "Pseudo-code static analysis pipeline"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
 ARCH-QUALITY_ASSURANCE_PROFILES:
   cross_references:
     - "IMPL-QUALITY_EVIDENCE_MANIFEST"
@@ -1146,6 +1155,16 @@ IMPL-PROMPT_TYPE_SUBAGENT:
   name: "Plan-New-Feature Task Subagent Contract"
   status: "Active"
   type: "IMPL"
+IMPL-PSEUDOCODE_ANALYSIS_ENGINE:
+  cross_references:
+    - "ARCH-PSEUDOCODE_ANALYSIS_PIPELINE"
+    - "IMPL-QUALITY_PSEUDOCODE_VALIDATOR"
+    - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+  description: "TypeScript analysis modules and MCP pseudocode_analyze handler."
+  detail_file: "implementation-decisions/IMPL-PSEUDOCODE_ANALYSIS_ENGINE.yaml"
+  name: "Pseudo-code static analysis engine"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
 IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK:
   cross_references:
     - "ARCH-QUALITY_ASSURANCE_PROFILES"
@@ -2206,6 +2225,15 @@ REQ-PROMPT_TYPE_SUBAGENT:
   name: "Plan-New-Feature Prompt-Type Subagent"
   status: "Implemented"
   type: "REQ"
+REQ-PSEUDOCODE_STATIC_ANALYSIS:
+  cross_references:
+    - "ARCH-PSEUDOCODE_ANALYSIS_PIPELINE"
+    - "IMPL-PSEUDOCODE_ANALYSIS_ENGINE"
+  description: "Deterministic read-only CFG, call graph, abstract analysis, and obligations for pseudo-code sidecars."
+  detail_file: "requirements/REQ-PSEUDOCODE_STATIC_ANALYSIS.yaml"
+  name: "Contract-aware static analysis for IMPL essence_pseudocode"
+  source_index: "requirements.yaml"
+  status: "Active"
 REQ-QUALITY_ASSURANCE_EVIDENCE:
   cross_references:
     - "ARCH-QUALITY_ASSURANCE_PROFILES"

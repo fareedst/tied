@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Contract-aware pseudo-code static analysis ([REQ-PSEUDOCODE_STATIC_ANALYSIS])** — Additive MCP `pseudocode_analyze` (schema `pseudocode-analysis-report.v1`); parser/IR, symbols, CFG, call graph, bounded abstract analysis, obligations under [IMPL-PSEUDOCODE_ANALYSIS_ENGINE]; preserves `pseudocode_validate` / `layer-b-pseudocode-validator.v1`; integrated close_out gate (`psa-closeout-20260908`, advisory, external-input-security); 567/567 mcp-server tests.
+
 - **Claims and Evidence Review Profile slice 1 ([REQ-TIED_CLAIMS_EVIDENCE_REVIEW])** —
   Read-only evaluation of frozen claim surfaces with `shown` / `unsettled` /
   `not_examined` dispositions, proof boundaries, and append-only artifacts under

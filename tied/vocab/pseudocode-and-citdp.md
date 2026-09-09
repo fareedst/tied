@@ -45,6 +45,13 @@ Checklist **`sub-vocabulary-sync`** uses **domain** vocab. Do not conflate with 
 | **sub-vocabulary-sync PRELOAD** | read full catalog at bootstrap | Before reading TIED/docs/code: read [`routing.md`](routing.md), match keywords, open only matched glossaries ([PROC-VOCABULARY_INDEX] Touchpoint 2) |
 | **sub-vocabulary-sync RECORD** | update vocab | After artifacts change: add preferred-term rows, naming bridges, alphabetical index entries |
 | **sub-vocabulary-sync VALIDATE** | skip vocab audit | Before commit: audit names in docs/tokens/code against `tied/vocab/` ([PROC-VOCABULARY_INDEX] Touchpoint 3) |
+| **pseudo-code static analysis** | static analysis (alone), deep validator | Deterministic read-only CFG/call-graph/abstract pipeline via `pseudocode_analyze`; distinct from Layer B `pseudocode_validate` ([REQ-PSEUDOCODE_STATIC_ANALYSIS]) |
+| **analysis report** | analyze output (alone) | Versioned `pseudocode-analysis-report.v1` from `pseudocode_analyze` |
+| **grammar version** | parser version (alone) | Declared closed subset key e.g. `pseudocode-grammar.v1` |
+| **program CFG** | CFG (alone) | Per-procedure control-flow graph from pseudo-code IR; not TIED dependency graph |
+| **pseudo-code call graph** | call graph (alone) | CALL/RUN edges between pseudo-code procedures; distinct from TIED dep graph and GRAPH-001 checklist row |
+| **proof boundary** | proof limit (alone) | Explicit claim limit per report section; mandatory on analysis reports |
+| **unknown policy** | unknown handling (alone) | First-class unknown/truncation disclosure with cause and span; never implicit success |
 
 ---
 
@@ -145,5 +152,12 @@ Prefer in `essence_pseudocode` (not domain terms):
 | TERMINATION | IMPL grammar keywords |
 | three-way alignment | Preferred terms |
 | UPPER_SNAKE block name | Preferred terms |
+| analysis report | Preferred terms |
+| grammar version | Preferred terms |
+| program CFG | Preferred terms |
+| proof boundary | Preferred terms |
+| pseudo-code call graph | Preferred terms |
+| pseudo-code static analysis | Preferred terms |
+| unknown policy | Preferred terms |
 | Vocab routing index | Naming bridge |
 | vocabulary layer | Preferred terms |

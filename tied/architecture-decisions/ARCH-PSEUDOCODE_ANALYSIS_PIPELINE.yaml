@@ -1,0 +1,25 @@
+ARCH-PSEUDOCODE_ANALYSIS_PIPELINE:
+  cross_references:
+    - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    - "IMPL-QUALITY_PSEUDOCODE_VALIDATOR"
+    - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+  description: "Versioned parser-to-report pipeline for deterministic read-only pseudo-code static analysis with bounded budgets and explicit proof boundaries."
+  name: "Pseudo-code static analysis pipeline"
+  rationale:
+    decisions:
+      - "Additive MCP pseudocode_analyze preserving pseudocode_validate"
+      - "Bounded fixed-point abstract analysis with explicit unknown policy"
+      - "Read-only evidence with no automatic LEAP promotion"
+      - "Separate program CFG and pseudo-code call graph distinct from TIED dependency graph"
+      - "Versioned grammar pseudocode-grammar.v1 with IR boundary"
+    why: "Static analysis needs a separate architectural boundary from Layer B structural validation to preserve distinct proof claims."
+  status: "Planned"
+  traceability:
+    code_annotations:
+      - "ARCH-PSEUDOCODE_ANALYSIS_PIPELINE"
+    implementation:
+      - "IMPL-PSEUDOCODE_ANALYSIS_ENGINE"
+    requirements:
+      - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+    tests:
+      - "mcp-server/src/analysis/pseudocode-analyzer.test.ts"

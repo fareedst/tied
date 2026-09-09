@@ -524,6 +524,18 @@ Validation is **two layers**, complementary: **Layer A (TIED)** = repository/tra
 
 **Layer B — [pseudocode-validation-checklist.yaml](pseudocode-validation-checklist.yaml)** — Use the executable `pseudocode_validate` MCP/CLI handler for deterministic parsing, source-located diagnostics, block discovery, schema/contract shape, token linkage, symbol closure, and dependency graph; then apply the checklist for behavioral coverage, traceability, optional lint/simulation/generation, and reporting. Apply to **`IMPL-{TOKEN}-pseudocode.md`** or merged `yaml_detail_read` text. The executable validator proves structural pseudo-code properties only, not runtime correctness or complete behavioral coverage.
 
+### Static analysis vs Layer B validation
+
+Optional **pseudo-code static analysis** (`pseudocode_analyze`, owned by [IMPL-PSEUDOCODE_ANALYSIS_ENGINE](../implementation-decisions/IMPL-PSEUDOCODE_ANALYSIS_ENGINE.yaml)) complements Layer B without replacing it. The analysis tool returns schema `pseudocode-analysis-report.v1` with parser/IR, symbols, per-procedure CFG, pseudo-code call graph, bounded abstract facts, obligations, and block-level traceability projections under explicit budgets and proof boundaries. See [REQ-PSEUDOCODE_STATIC_ANALYSIS](../requirements/REQ-PSEUDOCODE_STATIC_ANALYSIS.yaml).
+
+| Tool | Schema | Proves | Does not prove |
+|------|--------|--------|----------------|
+| **Layer B** — `pseudocode_validate` ([IMPL-QUALITY_PSEUDOCODE_VALIDATOR](../implementation-decisions/IMPL-QUALITY_PSEUDOCODE_VALIDATOR.yaml)) | `layer-b-pseudocode-validator.v1` | Structural pseudo-code shape, token linkage, contract presence, dependency diagnostics | CFG, data-flow, runtime behavior, complete path coverage |
+| **Static analysis** — `pseudocode_analyze` | `pseudocode-analysis-report.v1` | Bounded static analysis within `pseudocode-grammar.v1` and declared budgets | Runtime execution, test execution, complete path coverage |
+| **Combined (sponsor opt-in)** | Both reports | Richer pre-RED signal when both are run | Substitute for `tied_validate_consistency` or human review |
+
+**v1 note:** `pseudocode_analyze` does **not** share a parser with `pseudocode_validate`; structural compat is an optional read-only summary flag, not a shared implementation.
+
 ### Pre-RED vs post-test
 
 The same checklist file applies in two **invocation contexts** (no YAML profiles). See [agent-req-implementation-checklist.yaml](agent-req-implementation-checklist.yaml) for caller slugs.

@@ -1,0 +1,76 @@
+IMPL-PSEUDOCODE_ANALYSIS_ENGINE:
+  code_locations:
+    files:
+      - description: "Bounded abstract analysis"
+        path: "mcp-server/src/analysis/pseudocode-abstract-analysis.ts"
+      - description: "Grammar v1 parser"
+        path: "mcp-server/src/analysis/pseudocode-parser.ts"
+      - description: "MCP pseudocode_analyze handler"
+        path: "mcp-server/src/tools/index.ts"
+      - description: "Normalized IR types"
+        path: "mcp-server/src/analysis/pseudocode-ir.ts"
+      - description: "Obligation extraction"
+        path: "mcp-server/src/analysis/pseudocode-obligations.ts"
+      - description: "Orchestrator"
+        path: "mcp-server/src/analysis/pseudocode-analyzer.ts"
+      - description: "Per-procedure CFG"
+        path: "mcp-server/src/analysis/pseudocode-cfg.ts"
+      - description: "Pseudo-code call graph"
+        path: "mcp-server/src/analysis/pseudocode-call-graph.ts"
+      - description: "Report schema helpers"
+        path: "mcp-server/src/analysis/pseudocode-analyze-report.ts"
+      - description: "Symbol and contract analysis"
+        path: "mcp-server/src/analysis/pseudocode-symbols.ts"
+    functions:
+      - description: "Run selected analysis passes and emit report"
+        file: "mcp-server/src/analysis/pseudocode-analyzer.ts"
+        name: "analyzeEssencePseudocode"
+  cross_references:
+    - "ARCH-PSEUDOCODE_ANALYSIS_PIPELINE"
+    - "IMPL-QUALITY_PSEUDOCODE_VALIDATOR"
+    - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+  description: "TypeScript analysis modules and MCP pseudocode_analyze handler composing parser, symbols, CFG, call graph, abstract analysis, obligations, and report emission."
+  implementation_approach:
+    details:
+      - "Keep pseudocode_validate unchanged"
+      - "Register pseudocode_analyze as additive MCP tool"
+      - "Reuse impl-pseudocode-input path safety"
+    summary: "Parse grammar v1 into IR, run symbol/contract checks, build CFG and call graph, run bounded abstract passes, emit pseudocode-analysis-report.v1."
+  metadata:
+    last_updated:
+      author: "AI Agent"
+      date: "2026-09-08"
+      reason: "Link sidecar after static analysis engine implementation"
+  name: "Pseudo-code static analysis engine"
+  rationale:
+    benefits:
+      - "Deterministic budgeted analysis with explicit unknowns"
+      - "Modular validation before composition"
+    problems_solved:
+      - "No dedicated engine for pseudo-code CFG and abstract analysis"
+      - "No versioned analysis report schema for sidecars"
+    why: "Implementation ownership for the static analysis pipeline must be traceable separately from Layer B structural validation."
+  related_decisions:
+    depends_on: []
+    see_also:
+      - "IMPL-QUALITY_PSEUDOCODE_VALIDATOR"
+    supersedes: []
+  status: "Active"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-PSEUDOCODE_ANALYSIS_PIPELINE"
+    code_annotations:
+      - "IMPL-PSEUDOCODE_ANALYSIS_ENGINE"
+    requirements:
+      - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+    tests:
+      - "mcp-server/src/analysis/pseudocode-abstract-analysis.test.ts"
+      - "mcp-server/src/analysis/pseudocode-analyze-report.test.ts"
+      - "mcp-server/src/analysis/pseudocode-analyzer.test.ts"
+      - "mcp-server/src/analysis/pseudocode-call-graph.test.ts"
+      - "mcp-server/src/analysis/pseudocode-cfg.test.ts"
+      - "mcp-server/src/analysis/pseudocode-obligations.test.ts"
+      - "mcp-server/src/analysis/pseudocode-parser.test.ts"
+      - "mcp-server/src/analysis/pseudocode-symbols.test.ts"
+      - "mcp-server/src/tools/pseudocode-analyze-mcp.test.ts"

@@ -63,6 +63,8 @@ import { runVocabularyExplorer } from "../vocabulary-explorer/pipeline.js";
 import { runPlumbDiffImpactPreview } from "../analysis/plumb-diff-impact-preview.js";
 import { validateBindingInventory } from "../analysis/binding-inventory.js";
 import { validateEssencePseudocode } from "../analysis/pseudocode-validator.js";
+import { analyzeEssencePseudocode } from "../analysis/pseudocode-analyzer.js";
+import { ALL_ANALYSIS_PASSES } from "../analysis/pseudocode-ir.js";
 import { validateTestAdequacyPlan } from "../quality-adequacy.js";
 import { readTextFromPseudocodePath, resolvePseudocodePathUnderTiedBase } from "../impl-pseudocode-input.js";
 import {
@@ -2109,6 +2111,103 @@ export const allTools = [
     },
     handler: async (args: Parameters<typeof validateEssencePseudocode>[0]) => {
       return textContent(JSON.stringify(validateEssencePseudocode(args), null, 2));
+    },
+  },
+  {
+    name: "pseudocode_analyze",
+    config: {
+      description:
+        "Run contract-aware static analysis on essence_pseudocode: parser/IR, symbols, CFG, call graph, bounded abstract analysis, obligations, and traceability projections. Read-only; does not mutate TIED YAML. Schema: pseudocode-analysis-report.v1.",
+      inputSchema: z.object({
+        token: z.string(),
+        pseudocode: z.string().optional(),
+        essence_pseudocode_path: z.string().optional(),
+        known_tokens: z.array(z.string()).optional(),
+        analyses: z
+          .array(
+            z.enum([
+              "parse",
+              "symbols",
+              "cfg",
+              "call_graph",
+              "abstract",
+              "obligations",
+              "traceability",
+            ]),
+          )
+          .optional(),
+        budgets: z
+          .object({
+            max_parse_nodes: z.number().optional(),
+            max_procedures: z.number().optional(),
+            max_cfg_blocks_per_procedure: z.number().optional(),
+            max_call_graph_edges: z.number().optional(),
+            max_fixed_point_iterations: z.number().optional(),
+            max_path_conditions: z.number().optional(),
+            max_report_diagnostics: z.number().optional(),
+            max_source_bytes: z.number().optional(),
+          })
+          .optional(),
+        include_structural_compat: z.boolean().optional(),
+        strict_paths: z.boolean().optional(),
+      }),
+    },
+    handler: async (args: {
+      token: string;
+      pseudocode?: string;
+      essence_pseudocode_path?: string;
+      known_tokens?: string[];
+      analyses?: typeof ALL_ANALYSIS_PASSES;
+      budgets?: Record<string, number>;
+      include_structural_compat?: boolean;
+      strict_paths?: boolean;
+    }) => {
+      const hasInline = typeof args.pseudocode === "string" && args.pseudocode.length > 0;
+      const hasPath = typeof args.essence_pseudocode_path === "string" && args.essence_pseudocode_path.length > 0;
+      if (hasInline && hasPath) {
+        return textContent(
+          JSON.stringify({ ok: false, stage: "input", error: "AMBIGUOUS_INPUT" }, null, 2),
+        );
+      }
+      if (!hasInline && !hasPath) {
+        return textContent(
+          JSON.stringify({ ok: false, stage: "input", error: "MISSING_INPUT" }, null, 2),
+        );
+      }
+
+      let source = args.pseudocode ?? "";
+      if (hasPath) {
+        const resolved = resolvePseudocodePathUnderTiedBase(args.essence_pseudocode_path!, getBasePath());
+        if (!resolved.ok) {
+          return textContent(
+            JSON.stringify(
+              {
+                ok: false,
+                stage: "input",
+                error: resolved.error.includes("TIED_BASE_PATH") ? "PATH_NOT_UNDER_TIED_BASE" : resolved.error,
+              },
+              null,
+              2,
+            ),
+          );
+        }
+        const read = readTextFromPseudocodePath(resolved.absolutePath);
+        if (!read.ok) {
+          return textContent(JSON.stringify({ ok: false, stage: "input", error: read.error }, null, 2));
+        }
+        source = read.content;
+      }
+
+      const report = analyzeEssencePseudocode({
+        token: args.token,
+        pseudocode: source,
+        known_tokens: args.known_tokens,
+        analyses: args.analyses,
+        budgets: args.budgets,
+        include_structural_compat: args.include_structural_compat,
+        strict_paths: args.strict_paths,
+      });
+      return textContent(JSON.stringify(report, null, 2));
     },
   },
   {
