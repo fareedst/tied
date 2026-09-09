@@ -515,6 +515,19 @@ ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT:
   name: "Shared checklist evidence gate boundary"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_CLAIMS_EVIDENCE_REVIEW:
+  cross_references:
+    - "IMPL-TIED_CLAIMS_EVIDENCE_REVIEW"
+    - "REQ-TIED_CLAIMS_EVIDENCE_REVIEW"
+  description: "Profile composition, artifact schemas, and separation from adversarial-inquiry and evidence-chain generators."
+  detail_file: "architecture-decisions/ARCH-TIED_CLAIMS_EVIDENCE_REVIEW.yaml"
+  metadata:
+    last_updated: "2026-09-08"
+    registered: "2026-09-08"
+  name: "Claims and Evidence Review Profile Architecture"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY:
   cross_references:
     - "IMPL-TIED_FEEDBACK_PROMOTION"
@@ -1266,6 +1279,20 @@ IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT:
     - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
   description: "Pure shared validator for Tracker dispositions, CITDP shape/depth, and identity-bound activation artifacts."
   name: "Checklist, CITDP, and activation validator"
+  status: "Active"
+  type: "IMPL"
+IMPL-TIED_CLAIMS_EVIDENCE_REVIEW:
+  cross_references:
+    - "ARCH-TIED_CLAIMS_EVIDENCE_REVIEW"
+    - "IMPL-TIED_FIDELITY_RESEARCH"
+    - "REQ-TIED_CLAIMS_EVIDENCE_REVIEW"
+  description: "Modules, pseudo-code blocks, ledger append semantics, generator, MCP orchestration, and pilot for read-only claims review."
+  detail_file: "implementation-decisions/IMPL-TIED_CLAIMS_EVIDENCE_REVIEW.yaml"
+  metadata:
+    last_updated: "2026-09-08"
+    registered: "2026-09-08"
+  name: "Claims and Evidence Review Implementation"
+  source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
 IMPL-TIED_FEEDBACK_PROMOTION:
@@ -2225,6 +2252,20 @@ REQ-TIED_CHECKLIST_GATE_ENFORCEMENT:
     - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
   description: "Checklist progression, verification, and close-out require machine-validated adversarial and execution evidence."
   name: "Machine-enforced checklist evidence gates"
+  status: "Active"
+  type: "REQ"
+REQ-TIED_CLAIMS_EVIDENCE_REVIEW:
+  category: "Functional"
+  cross_references:
+    - "ARCH-TIED_CLAIMS_EVIDENCE_REVIEW"
+    - "IMPL-TIED_CLAIMS_EVIDENCE_REVIEW"
+  description: "Read-only evaluation of a frozen claim surface with dispositions, proof boundaries, and human-gated promotion."
+  detail_file: "requirements/REQ-TIED_CLAIMS_EVIDENCE_REVIEW.yaml"
+  metadata:
+    last_updated: "2026-09-08"
+    registered: "2026-09-08"
+  name: "TIED Claims and Evidence Review"
+  source_index: "requirements.yaml"
   status: "Active"
   type: "REQ"
 REQ-TIED_FIDELITY_RESEARCH:

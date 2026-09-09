@@ -66,7 +66,7 @@ export type PersistedArtifactReferences = {
 
 export type InquiryActivation = {
   runId: string;
-  phase: "pre_implementation" | "verification" | "close_out";
+  phase: "pre_implementation" | "verification" | "close_out" | "post_test";
 };
 
 export type InquiryActivationReceipt = {

@@ -163,6 +163,42 @@ Outreach and public hypothesis tests use the same **proof boundary** discipline 
 | **publishable outreach artifact** | marketing post, proof announcement | Public-facing invitation to criticize the hypothesis; not an evidence corpus |
 | **social research pass** | fidelity pilot | Documentation-only planning (e.g. refine-plan for outreach); no behavior change |
 
+## Claims and evidence review
+
+Read-only evaluation of a **frozen claim surface** against bounded static evidence. Claims are
+assertions derived from or supplied alongside TIED material; they are **not** `[REQ-*]` records.
+Artifacts live under `working/{SCOPE}/claims-evidence-review/` and must never share the
+adversarial-inquiry `finding-ledger.jsonl`.
+
+| Preferred | Avoid | Notes |
+|---|---|---|
+| **claim record** | seller claim, REQ alias | One assertion row with id, text, source, scope; distinct from **event claim** (webhook) and **operational hypothesis** |
+| **claim surface** | assertion inventory | Frozen `claim-surface.v1` input; not audited project YAML |
+| **claim disposition** | verdict, confirmed | `shown` \| `unsettled` \| `not_examined`; not lifecycle `confirmed` until human promotion |
+| **demonstrated gap** | materiality score | Evidence-backed gap within the frozen claim surface only |
+| **unresolved exposure** | residual risk (alone) | Claim still open after bounded search; distinct from post-control **residual risk** |
+| **unsettled question** | evidence-gap ticket | Append-only sponsor/operator follow-up backlog row |
+| **independent check record** | blind retest log | Second reviewer or retest disagreement; append-only |
+| **observation outside claim surface** | unclaimed finding | Append-only; does not auto-enter claim disposition |
+
+**Non-implication rules:** `not_examined` ⇏ defect; `unsettled` ⇏ confirmed finding; `shown` ⇏
+runtime correctness; ledger append ⇏ LEAP ⇏ REQ mutation.
+
+**Traceability:** [REQ-TIED_CLAIMS_EVIDENCE_REVIEW](../requirements/REQ-TIED_CLAIMS_EVIDENCE_REVIEW.yaml) ·
+[ARCH-TIED_CLAIMS_EVIDENCE_REVIEW](../architecture-decisions/ARCH-TIED_CLAIMS_EVIDENCE_REVIEW.yaml) ·
+[IMPL-TIED_CLAIMS_EVIDENCE_REVIEW](../implementation-decisions/IMPL-TIED_CLAIMS_EVIDENCE_REVIEW.yaml)
+
+| Preferred term | UPPER_SNAKE block | Role |
+|---|---|---|
+| Claim surface generation | `GENERATE_CLAIM_SURFACE_FROM_TIED` | Map TIED tokens to claim rows |
+| Evidence stubs | `EMIT_EVIDENCE_STUBS` | Static stub paths and validator templates |
+| Claim surface freeze | `FREEZE_CLAIM_SURFACE` | Immutable snapshot reference |
+| Evidence collection | `COLLECT_CLAIM_EVIDENCE` | Bounded static reads and provenance |
+| Disposition | `CLASSIFY_CLAIM_STATUS` | shown / unsettled / not_examined plus gap dimensions |
+| Proof boundary | `RECORD_PROOF_BOUNDARY` | Canonical boundary on every row |
+| Profile run | `RUN_CLAIMS_EVIDENCE_REVIEW` | MCP/CLI orchestration |
+| Pilot run | `RUN_CLAIMS_EVIDENCE_PILOT` | tied-generated fixture orchestration |
+
 ## Checklist integration
 
 Adversarial inquiry extends `[PROC-AGENT_REQ_CHECKLIST]` through existing step slugs and the
@@ -204,7 +240,15 @@ convenience projection only and never satisfy another phase's pairing. See
 
 | Term | Section |
 |---|---|
+| **claim disposition** | Claims and evidence review |
+| **claim record** | Claims and evidence review |
+| **claim surface** | Claims and evidence review |
 | **community falsification experiment** | Social and community research |
+| **demonstrated gap** | Claims and evidence review |
+| **independent check record** | Claims and evidence review |
+| **observation outside claim surface** | Claims and evidence review |
+| **unsettled question** | Claims and evidence review |
+| **unresolved exposure** | Claims and evidence review |
 | **operational hypothesis** | Social and community research |
 | **publishable outreach artifact** | Social and community research |
 | **social research pass** | Social and community research |

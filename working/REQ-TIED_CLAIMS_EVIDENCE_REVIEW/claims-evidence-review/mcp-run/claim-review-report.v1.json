@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "claim-review-report.v1",
+  "summary": {
+    "shown": 7,
+    "unsettled": 1,
+    "notExamined": 1
+  },
+  "rows": [
+    {
+      "claimId": "0c94ee5c55b18e94",
+      "disposition": "unsettled",
+      "reason": "Bounded static search did not locate declared evidence.",
+      "proofBoundary": "static_analysis",
+      "demonstratedGap": false,
+      "unresolvedExposure": true,
+      "evidenceRefs": []
+    },
+    {
+      "claimId": "2dfb5e70e24f860d",
+      "disposition": "not_examined",
+      "reason": "Claim requires runtime proof; static_only slice cannot examine.",
+      "proofBoundary": "out_of_scope_static_slice",
+      "demonstratedGap": false,
+      "unresolvedExposure": true,
+      "evidenceRefs": []
+    },
+    {
+      "claimId": "549b3789f3317428",
+      "disposition": "shown",
+      "reason": "Static evidence located with content hash.",
+      "proofBoundary": "static_analysis",
+      "demonstratedGap": false,
+      "unresolvedExposure": false,
+      "evidenceRefs": [
+        "tied/requirements/REQ-TIED_CLAIMS_EVIDENCE_REVIEW.yaml"
+      ]
+    },
+    {
+      "claimId": "90c7dfb034ac8d10",
+      "disposition": "shown",
+      "reason": "Static evidence located with content hash.",
+      "proofBoundary": "static_analysis",
+      "demonstratedGap": false,
+      "unresolvedExposure": false,
+      "evidenceRefs": [
+        "tied/requirements/REQ-TIED_CLAIMS_EVIDENCE_REVIEW.yaml"
+      ]
+    },
+    {
+      "claimId": "95f97c05054803d1",
+      "disposition": "shown",
+      "reason": "Static evidence located with content hash.",
+      "proofBoundary": "static_analysis",
+      "demonstratedGap": false,
+      "unresolvedExposure": false,
+      "evidenceRefs": [
+        "tied/requirements/REQ-TIED_CLAIMS_EVIDENCE_REVIEW.yaml"
+      ]
+    },
+    {
+      "claimId": "9e14a5dad866cd52",
+      "disposition": "shown",
+      "reason": "Static evidence located with content hash.",
+      "proofBoundary": "static_analysis",
+      "demonstratedGap": false,
+      "unresolvedExposure": false,
+      "evidenceRefs": [
+        "tied/implementation-decisions/IMPL-TIED_CLAIMS_EVIDENCE_REVIEW.yaml"
+      ]
+    },
+    {
+      "claimId": "a3582331c7cc6e00",
+      "disposition": "shown",
+      "reason": "Static evidence located with content hash.",
+      "proofBoundary": "static_analysis",
+      "demonstratedGap": false,
+      "unresolvedExposure": false,
+      "evidenceRefs": [
+        "tied/implementation-decisions/IMPL-TIED_CLAIMS_EVIDENCE_REVIEW.yaml"
+      ]
+    },
+    {
+      "claimId": "dcab8c90344a8c63",
+      "disposition": "shown",
+      "reason": "Static evidence located with content hash.",
+      "proofBoundary": "static_analysis",
+      "demonstratedGap": false,
+      "unresolvedExposure": false,
+      "evidenceRefs": [
+        "tied/requirements/REQ-TIED_CLAIMS_EVIDENCE_REVIEW.yaml"
+      ]
+    },
+    {
+      "claimId": "e03e141808bffa00",
+      "disposition": "shown",
+      "reason": "Static evidence located with content hash.",
+      "proofBoundary": "static_analysis",
+      "demonstratedGap": false,
+      "unresolvedExposure": false,
+      "evidenceRefs": [
+        "tied/architecture-decisions/ARCH-TIED_CLAIMS_EVIDENCE_REVIEW.yaml"
+      ]
+    }
+  ]
+}

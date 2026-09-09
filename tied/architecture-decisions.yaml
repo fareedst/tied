@@ -1414,6 +1414,22 @@ ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT:
   detail_file: "architecture-decisions/ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
   name: "Shared checklist evidence gate boundary"
   status: "Active"
+ARCH-TIED_CLAIMS_EVIDENCE_REVIEW:
+  cross_references:
+    architecture: []
+    implementation:
+      - "IMPL-TIED_CLAIMS_EVIDENCE_REVIEW"
+    requirements:
+      - "REQ-TIED_CLAIMS_EVIDENCE_REVIEW"
+  description: "Profile composition, artifact schemas, and separation from adversarial-inquiry and evidence-chain generators."
+  detail_file: "architecture-decisions/ARCH-TIED_CLAIMS_EVIDENCE_REVIEW.yaml"
+  name: "Claims and Evidence Review Profile Architecture"
+  rationale:
+    consequences:
+      - "Evidence chain profile remains read-only consumer only"
+      - "No shared finding-ledger with adversarial-inquiry"
+    decision: "Dedicated claim-review artifact family under working scope; read-only consumer of evidence manifests."
+  status: "Active"
 ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY:
   cross_references:
     - "ARCH-FEEDBACK_STORAGE"

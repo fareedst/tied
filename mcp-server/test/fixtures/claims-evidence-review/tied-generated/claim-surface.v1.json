@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "claim-surface.v1",
+  "revision": "25a61b065f164383",
+  "sourceRevision": "working",
+  "requestToken": "REQ-TIED_CLAIMS_EVIDENCE_REVIEW",
+  "claims": [
+    {
+      "id": "0c94ee5c55b18e94",
+      "text": "External deployment manifest matches declared service endpoints.",
+      "source": "slice-boundary-unsettled",
+      "scope": "REQ-TIED_CLAIMS_EVIDENCE_REVIEW",
+      "materialityHint": "unsettled-regression"
+    },
+    {
+      "id": "2dfb5e70e24f860d",
+      "text": "Runtime behavior matches production deployment configuration.",
+      "source": "slice-boundary",
+      "scope": "REQ-TIED_CLAIMS_EVIDENCE_REVIEW",
+      "requiresRuntimeProof": true
+    },
+    {
+      "id": "549b3789f3317428",
+      "text": "Classify each claim as shown, unsettled, or not_examined with proof boundaries and gap dimensions.",
+      "source": "REQ-TIED_CLAIMS_EVIDENCE_REVIEW",
+      "scope": "REQ-TIED_CLAIMS_EVIDENCE_REVIEW"
+    },
+    {
+      "id": "90c7dfb034ac8d10",
+      "text": "Evaluate a frozen claim surface in read-only mode without mutating audited project YAML.",
+      "source": "REQ-TIED_CLAIMS_EVIDENCE_REVIEW",
+      "scope": "REQ-TIED_CLAIMS_EVIDENCE_REVIEW"
+    },
+    {
+      "id": "95f97c05054803d1",
+      "text": "Promote only human-confirmed cases via existing fidelity case-report path.",
+      "source": "REQ-TIED_CLAIMS_EVIDENCE_REVIEW",
+      "scope": "REQ-TIED_CLAIMS_EVIDENCE_REVIEW"
+    },
+    {
+      "id": "9e14a5dad866cd52",
+      "text": "Modules, pseudo-code blocks, ledger append semantics, generator, and pilot orchestration for read-only claims review.",
+      "source": "IMPL-TIED_CLAIMS_EVIDENCE_REVIEW",
+      "scope": "REQ-TIED_CLAIMS_EVIDENCE_REVIEW"
+    },
+    {
+      "id": "a3582331c7cc6e00",
+      "text": "IMPL pseudo-code sidecar is present for IMPL-TIED_CLAIMS_EVIDENCE_REVIEW.",
+      "source": "IMPL-TIED_CLAIMS_EVIDENCE_REVIEW",
+      "scope": "REQ-TIED_CLAIMS_EVIDENCE_REVIEW"
+    },
+    {
+      "id": "dcab8c90344a8c63",
+      "text": "Persist append-only review artifacts under working scope distinct from adversarial-inquiry ledgers.",
+      "source": "REQ-TIED_CLAIMS_EVIDENCE_REVIEW",
+      "scope": "REQ-TIED_CLAIMS_EVIDENCE_REVIEW"
+    },
+    {
+      "id": "e03e141808bffa00",
+      "text": "Profile composition, artifact schemas, and separation from adversarial-inquiry and evidence-chain generators.",
+      "source": "ARCH-TIED_CLAIMS_EVIDENCE_REVIEW",
+      "scope": "REQ-TIED_CLAIMS_EVIDENCE_REVIEW"
+    }
+  ]
+}

@@ -1567,6 +1567,23 @@ IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT:
   detail_file: "implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
   name: "Checklist, CITDP, and activation validator"
   status: "Active"
+IMPL-TIED_CLAIMS_EVIDENCE_REVIEW:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_CLAIMS_EVIDENCE_REVIEW"
+    implementation:
+      - "IMPL-TIED_FIDELITY_RESEARCH"
+    requirements:
+      - "REQ-TIED_CLAIMS_EVIDENCE_REVIEW"
+  description: "Modules, pseudo-code blocks, ledger append semantics, generator, and pilot orchestration."
+  detail_file: "implementation-decisions/IMPL-TIED_CLAIMS_EVIDENCE_REVIEW.yaml"
+  name: "Claims and Evidence Review Implementation"
+  rationale:
+    consequences:
+      - "Promotion delegates to promoteConfirmedCase"
+      - "Static-only pilot via build_claims_evidence_from_tied"
+    decision: "Pure modules with append-only ledger; MCP tool as primary operator surface."
+  status: "Active"
 IMPL-TIED_FEEDBACK_PROMOTION:
   code_locations:
     files:

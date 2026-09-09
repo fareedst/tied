@@ -1,0 +1,108 @@
+CITDP-REQ-TIED_CLAIMS_EVIDENCE_REVIEW:
+  change_definition:
+    current_behavior: "No read-only claims and evidence review profile existed."
+    desired_behavior: "Evaluate frozen claim surfaces with dispositions, proof boundaries, and human-gated promotion via tied_claims_evidence_review_run."
+    non_goals:
+      - "Automatic external-claim to REQ conversion"
+      - "Evidence chain profile generator changes"
+      - "HTML/chat delivery adapter"
+    success_criteria:
+      - "Claim review artifacts remain separate from adversarial-inquiry ledgers."
+      - "MCP tool and pilot produce ledger and provenance on tied-generated fixture."
+      - "Promotion requires human-confirmed case path only."
+    unchanged_behavior:
+      - "Audited project YAML and methodology YAML remain unchanged."
+  completion_criteria:
+    focused_tests: "9 passed claims-evidence-review tests"
+    pilot_acceptance: "dispositions, outside observation, unsettled question, independent check"
+    tied_validate_consistency: "passed"
+    typescript_typecheck: "npm run build passed"
+  decision_log:
+    adapt:
+      - "Materiality renamed to demonstrated gap vs unresolved exposure"
+    adopt:
+      - "Claim to evidence to verdict with proof boundary workflow"
+      - "Shown / unsettled / not-examined dispositions"
+      - "TIED-derived claim surface generator for slice 1 pilot"
+    reject:
+      - "Automatic LEAP from unsettled claims"
+      - "External report document ingestion in slice 1"
+  impact_analysis:
+    audited_project_mutation: "none"
+    files:
+      - "mcp-server/src/claims-evidence-review/"
+      - "scripts/build_claims_evidence_from_tied.rb"
+    modules:
+      - "claim-surface-freeze"
+      - "disposition-classification"
+      - "evidence-collection"
+      - "ledger-append"
+      - "mcp-orchestration"
+  record_identity:
+    author: "AI Agent"
+    change_request_id: "REQ-TIED_CLAIMS_EVIDENCE_REVIEW"
+    date: "2026-09-08"
+    record_status: "complete"
+    title: "Claims and Evidence Review Profile slice 1"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      depth_tier: "integrated"
+      eligibility_triggers_matched:
+        - "external-input"
+      gate_policy: "advisory"
+      prior_depth_tier: null
+      rationale: "Frozen external claim surface input with append-only review artifacts."
+      research_profile: "integrated-agent"
+    not_applicable:
+      - "data-integrity-migration"
+    profiles:
+      - "baseline-functional"
+      - "external-input-security"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "mcp-server/dist/claims-evidence-review/*.test.js"
+        evidence_method: "unit and composition tests"
+        limitation: "Static-only slice; no runtime proof."
+        owner: "AI Agent"
+        rationale: "Behavior-changing profile modules and MCP tool."
+        result: "passed"
+        waiver:
+          required: false
+      - applicability: "applicable"
+        attribute: "external-input-security"
+        command_or_test: "path traversal and schema rejection tests"
+        evidence_method: "abuse-case unit tests"
+        limitation: "Slice 1 static boundary only."
+        owner: "AI Agent"
+        rationale: "Malformed paths and oversized claim surface inputs."
+        result: "passed"
+        waiver:
+          required: false
+    risks:
+      - mitigation: "Distinct claim-review-ledger path."
+        name: "duplicate-ledgers"
+        severity: "high"
+      - mitigation: "Separate claim record vocabulary; no YAML mutation."
+        name: "claim-req-confusion"
+        severity: "high"
+  tdd_sequence:
+    - "Author token-commented IMPL pseudo-code sidecar."
+    - "Composition and pilot under working/claims-evidence-review/pilot-from-tied/."
+    - "GREEN modules and MCP tool."
+    - "Implement generator and tied-generated fixture."
+    - "RED unit tests for schema, freeze, classify, ledger."
+  test_strategy:
+    composition_pending: false
+    red_before_green: true
+    tests:
+      - "mcp-server/src/claims-evidence-review/*.test.ts"
+  tied_context:
+    architecture:
+      - "ARCH-TIED_CLAIMS_EVIDENCE_REVIEW"
+    implementation:
+      - "IMPL-TIED_CLAIMS_EVIDENCE_REVIEW"
+    requirements:
+      - "REQ-TIED_CLAIMS_EVIDENCE_REVIEW"
+    tied_base_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied"

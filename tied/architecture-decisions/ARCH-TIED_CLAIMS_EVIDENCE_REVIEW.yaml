@@ -1,0 +1,28 @@
+ARCH-TIED_CLAIMS_EVIDENCE_REVIEW:
+  cross_references:
+    architecture: []
+    implementation:
+      - "IMPL-TIED_CLAIMS_EVIDENCE_REVIEW"
+    requirements:
+      - "REQ-TIED_CLAIMS_EVIDENCE_REVIEW"
+  decisions:
+    - id: "artifact-separation"
+      rationale: "Claims review evaluates external assertions; adversarial inquiry evaluates obligation graphs."
+      status: "accepted"
+      title: "Separate claim-review ledger from adversarial-inquiry"
+    - id: "integrated-agent-mode"
+      rationale: "Agent may classify during run; human adjudication at promotion only."
+      status: "accepted"
+      title: "Integrated agent research profile for slice 1"
+    - id: "read-only-boundary"
+      rationale: "All outputs under working/{SCOPE}/claims-evidence-review/."
+      status: "accepted"
+      title: "No audited project mutation"
+  description: "Profile composition, artifact schemas, and separation from adversarial-inquiry and evidence-chain generators."
+  metadata:
+    last_updated:
+      author: "AI Agent"
+      date: "2026-09-08"
+      reason: "Slice 1 build-plan implementation"
+  name: "Claims and Evidence Review Profile Architecture"
+  status: "Active"

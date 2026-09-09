@@ -1436,6 +1436,49 @@ REQ-TIED_CHECKLIST_GATE_ENFORCEMENT:
   detail_file: "requirements/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
   name: "Machine-enforced checklist evidence gates"
   status: "Implemented"
+REQ-TIED_CLAIMS_EVIDENCE_REVIEW:
+  category: "Functional"
+  description: "Read-only evaluation of a frozen claim surface with dispositions, proof boundaries, and human-gated promotion."
+  detail_file: "requirements/REQ-TIED_CLAIMS_EVIDENCE_REVIEW.yaml"
+  name: "TIED Claims and Evidence Review"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Bounded static evidence collection"
+      - "Explicit claim dispositions"
+      - "Human-gated promotion only"
+    problems_solved:
+      - "Missing evidence is mistaken for defects."
+      - "Static review is mistaken for runtime proof."
+    why: "External assertions must be reviewable without conflating claims with REQs or automatic LEAP."
+  related_requirements:
+    depends_on:
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+      - "REQ-TIED_FIDELITY_RESEARCH"
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-EVIDENCE_CHAIN_PROFILE"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Classify each claim as shown, unsettled, or not_examined with proof boundaries and gap dimensions."
+    - criterion: "Evaluate a frozen claim surface in read-only mode without mutating audited project YAML."
+    - criterion: "Persist append-only review artifacts under working scope distinct from adversarial-inquiry ledgers."
+    - criterion: "Promote only human-confirmed cases via existing fidelity case-report path."
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_CLAIMS_EVIDENCE_REVIEW"
+    code_annotations:
+      - "REQ-TIED_CLAIMS_EVIDENCE_REVIEW"
+    implementation:
+      - "IMPL-TIED_CLAIMS_EVIDENCE_REVIEW"
+    tests:
+      - "mcp-server/src/claims-evidence-review/*.test.ts"
+  validation_criteria:
+    - coverage: "MCP tool and pilot orchestration on tied-generated fixture."
+      method: "Composition tests"
+    - coverage: "Schema, freeze boundary, classification, ledger append-only semantics."
+      method: "Unit tests"
 REQ-TIED_FIDELITY_RESEARCH:
   category: "Functional"
   detail_file: "requirements/REQ-TIED_FIDELITY_RESEARCH.yaml"

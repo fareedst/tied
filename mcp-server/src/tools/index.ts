@@ -120,6 +120,7 @@ import { generateEvidenceChainProfile } from "../fidelity-research/evidence-chai
 import { createLiveStructuralValidators } from "../fidelity-research/live-structural-validators.js";
 import { validateChecklistGate } from "../checklist-validator.js";
 import { persistGateDecisionReceipt } from "../gate-receipt.js";
+import { runClaimsEvidenceReviewMcp } from "../claims-evidence-review/mcp-handler.js";
 import { collectChecklistActivation } from "../checklist-activation-collect.js";
 import { runAdherenceReconcile } from "./adherence-reconcile-runner.js";
 
@@ -1528,7 +1529,7 @@ export const allTools = [
         repository_root: z.string().optional().describe("Repository root for bounded working artifact persistence."),
         request_token: z.string().optional().describe("REQ token selecting working/{REQ-TOKEN}/adversarial-inquiry."),
         run_id: z.string().optional().describe("Identity-bound inquiry run identifier for activation pairing."),
-        phase: z.enum(["pre_implementation", "verification", "close_out"]).optional().describe("Checklist gate phase for activation pairing."),
+        phase: z.enum(["pre_implementation", "verification", "close_out", "post_test"]).optional().describe("Checklist gate phase or mid-TDD post_test for activation pairing."),
         provenance: z.unknown().optional().describe("Evidence provenance to persist outside canonical TIED YAML."),
         redact: z.array(z.string()).optional().describe("Sensitive values to redact from generated artifacts."),
       }),
@@ -1590,6 +1591,41 @@ export const allTools = [
           provenance: args.provenance,
           redact: args.redact,
         });
+        return textContent(JSON.stringify(result, null, 2));
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : String(e);
+        return textContent(JSON.stringify({ ok: false, error: msg }, null, 2));
+      }
+    },
+  },
+  {
+    name: "tied_claims_evidence_review_run",
+    config: {
+      description:
+        "Run [REQ-TIED_CLAIMS_EVIDENCE_REVIEW] read-only claims and evidence review on a frozen claim surface with static_only execution policy. Never mutates audited project YAML.",
+      inputSchema: z.object({
+        tied_base_path: z.string().describe("Absolute path to tied/ directory."),
+        project_root: z.string().optional().describe("Audited project root; defaults to parent of tied_base_path."),
+        request_token: z.string().optional().describe("REQ scope token; defaults to REQ-TIED_CLAIMS_EVIDENCE_REVIEW."),
+        claim_surface_path: z.string().optional().describe("Optional frozen claim-surface.v1.json path within fixture boundary."),
+        fixture_root: z.string().optional().describe("Fixture root containing claim-surface.v1.json and evidence-stubs.json."),
+        output_dir: z.string().describe("Output directory under working/.../claims-evidence-review/."),
+        execution_policy: z.enum(["static_only"]).optional().describe("Execution policy; slice 1 supports static_only only."),
+        run_id: z.string().optional().describe("Run identifier for provenance."),
+      }),
+    },
+    handler: async (args: {
+      tied_base_path: string;
+      project_root?: string;
+      request_token?: string;
+      claim_surface_path?: string;
+      fixture_root?: string;
+      output_dir: string;
+      execution_policy?: "static_only";
+      run_id?: string;
+    }) => {
+      try {
+        const result = await runClaimsEvidenceReviewMcp(args);
         return textContent(JSON.stringify(result, null, 2));
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);

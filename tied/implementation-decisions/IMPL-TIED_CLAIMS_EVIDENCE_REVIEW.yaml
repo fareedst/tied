@@ -1,0 +1,39 @@
+IMPL-TIED_CLAIMS_EVIDENCE_REVIEW:
+  code_locations:
+    files:
+      - description: "Append-only ledger"
+        path: "mcp-server/src/claims-evidence-review/claim-review-ledger.ts"
+      - description: "Claim surface and ledger types"
+        path: "mcp-server/src/claims-evidence-review/types.ts"
+      - description: "CLASSIFY_CLAIM_STATUS"
+        path: "mcp-server/src/claims-evidence-review/classify-claim-status.ts"
+      - description: "COLLECT_CLAIM_EVIDENCE"
+        path: "mcp-server/src/claims-evidence-review/collect-claim-evidence.ts"
+      - description: "FREEZE_CLAIM_SURFACE"
+        path: "mcp-server/src/claims-evidence-review/claim-surface.ts"
+      - description: "GENERATE_CLAIM_SURFACE_FROM_TIED generator"
+        path: "scripts/build_claims_evidence_from_tied.rb"
+      - description: "RUN_CLAIMS_EVIDENCE_PILOT"
+        path: "mcp-server/src/claims-evidence-review/run-claims-evidence-pilot.ts"
+      - description: "RUN_CLAIMS_EVIDENCE_REVIEW orchestrator"
+        path: "mcp-server/src/claims-evidence-review/run-claims-evidence-review.ts"
+    functions:
+      - description: "Primary profile orchestration"
+        file: "mcp-server/src/claims-evidence-review/run-claims-evidence-review.ts"
+        name: "runClaimsEvidenceReview"
+  cross_references:
+    architecture:
+      - "ARCH-TIED_CLAIMS_EVIDENCE_REVIEW"
+    implementation:
+      - "IMPL-TIED_FIDELITY_RESEARCH"
+    requirements:
+      - "REQ-TIED_CLAIMS_EVIDENCE_REVIEW"
+  description: "Modules, pseudo-code blocks, ledger append semantics, generator, and pilot orchestration for read-only claims review."
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_CLAIMS_EVIDENCE_REVIEW-pseudocode.md"
+  metadata:
+    last_updated:
+      author: "AI Agent"
+      date: "2026-09-08"
+      reason: "Slice 1 build-plan implementation"
+  name: "Claims and Evidence Review Implementation"
+  status: "Active"
