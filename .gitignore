@@ -21,6 +21,9 @@ TODO.md
 docs/legacy-csharp-tied-adoption-plan.md
 scripts/update_client.sh
 
+# Local feature-orchestration scratch (feature_create / onboarding demos; not canonical TIED intent)
+tied/features/
+
 # Ephemeral working/ generated evidence — not canonical TIED intent
 # (tied/vocab/fidelity-research.md, quality-assurance.md; keep locally under working/)
 working/**/adversarial-inquiry/

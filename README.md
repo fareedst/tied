@@ -191,7 +191,7 @@ cd ../tools/agentstream && go build -o agentstream ./cmd/agentstream
 **Windows (`cmd.exe`)** (from the TIED repository root):
 
 ```cmd
-cd mcp-server && npm install && npm run build && cd ..\tools\bootstrap && npm install && cd ..
+cd mcp-server && npm install && npm run build && cd ..\tools\bootstrap && npm install && cd ..\..
 cd tools\agentstream && go build -o agentstream .\cmd\agentstream && cd ..\..
 ```
 
