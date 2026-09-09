@@ -3,6 +3,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { describe, it } from "node:test";
+import { DEFAULT_PROOF_BOUNDARY } from "../analysis/pseudocode-ir.js";
 import { allTools } from "./index.js";
 
 type TextContent = { content: Array<{ type: "text"; text: string }> };
@@ -28,7 +29,20 @@ describe("pseudocode_analyze MCP [REQ-PSEUDOCODE_STATIC_ANALYSIS]", () => {
     const value = body(result);
     assert.equal(value.schema_version, "pseudocode-analysis-report.v1");
     assert.equal(value.grammar_version, "pseudocode-grammar.v1");
-    assert.ok(value.proof_boundary);
+    assert.equal(value.proof_boundary, DEFAULT_PROOF_BOUNDARY);
+  });
+
+  it("does not mutate project TIED YAML when invoked", async () => {
+    // [IMPL-PSEUDOCODE_ANALYSIS_ENGINE] [ARCH-PSEUDOCODE_ANALYSIS_PIPELINE] [REQ-PSEUDOCODE_STATIC_ANALYSIS]
+    const tiedBase = path.resolve(import.meta.dirname, "../../../tied");
+    const requirementsPath = path.join(tiedBase, "requirements.yaml");
+    const before = fs.readFileSync(requirementsPath, "utf8");
+    await handler("pseudocode_analyze")({
+      token: "IMPL-PSEUDOCODE_ANALYSIS_ENGINE",
+      pseudocode: `# [IMPL-PSEUDOCODE_ANALYSIS_ENGINE]\nprocedure MAIN:\n  Contract:\n    INPUT: x\n    OUTPUT: y\n    PRE: x\n    POST: y\n    EFFECTS: pure\n  RETURN y`,
+    });
+    const after = fs.readFileSync(requirementsPath, "utf8");
+    assert.equal(before, after);
   });
 
   it("rejects ambiguous inline and path input", async () => {

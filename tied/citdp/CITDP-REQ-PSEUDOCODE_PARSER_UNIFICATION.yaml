@@ -1,0 +1,83 @@
+CITDP-REQ-PSEUDOCODE_PARSER_UNIFICATION:
+  change_definition:
+    current_behavior: "pseudocode-validator.ts and pseudocode-parser.ts each own TOKEN_RE, procedure scan, and contract-field regexes; drift risk on RISK-PSA-001."
+    desired_behavior: "pseudocode-shared.ts owns extractSemanticTokens, scanProcedureBlocks, and parseContractFields; validator and parser consume shared primitives while layer-b-pseudocode-validator.v1 output remains byte-stable."
+    follow_up_deferred:
+      behavior: "Validator consumes full parser IR"
+      handoff: "Separate future C3 plan; prerequisite parser/validator integration with golden tests; not implemented in this close-out."
+      phase: "C3"
+    non_goals:
+      - "Automatic LEAP from inquiry findings"
+      - "Breaking layer-b-pseudocode-validator.v1 schema or golden snapshots"
+      - "Validator consuming full parser IR or CFG (Phase C3 deferred)"
+    success_criteria:
+      - "No circular dependency between parser, validator, and shared module"
+      - "pseudocode-validator.test.ts and quality-validation-mcp.test.ts pass unchanged"
+      - "pseudocode_analyze and live structural validator paths pass"
+    unchanged_behavior: "layer-b-pseudocode-validator.v1 report shape and diagnostic ordering preserved."
+  completion_criteria:
+    activation:
+      close_out_run_id: "parser-unification-closeout-20260908"
+      phase: "close_out"
+      request_token: "REQ-PSEUDOCODE_PARSER_UNIFICATION"
+      run_id: "parser-unification-closeout-20260908"
+    verification_gate_notes: "574/574 mcp-server tests; layer-b-pseudocode-validator.v1 goldens preserved; C1+C2 complete; C3 explicitly deferred."
+  evidence:
+    commands:
+      - command: "npm test"
+        cwd: "mcp-server"
+        exit_code: "0"
+        proof_boundary: "MCP unit/composition regression including validator goldens"
+        result: "574 passed"
+      - command: "pseudocode_validate IMPL-PSEUDOCODE_SHARED_PRIMITIVES sidecar"
+        cwd: "."
+        exit_code: "0"
+        proof_boundary: "Structural pseudo-code only"
+        result: "passed"
+      - command: "tied_validate_consistency"
+        cwd: "."
+        exit_code: "0"
+        proof_boundary: "TIED artifact integrity only"
+        result: "passed"
+    proof_boundaries:
+      - "Rollback to C1-only extraction if C2 changes validator diagnostics"
+      - "Shared primitives reduce drift risk only; they do not change Layer B proof claims"
+    track_b_prerequisite:
+      - "working/evidence-chain/psa-analyze-pilot-20260908-summary.json"
+      - "working/evidence-chain/psa-analyze-pilot-off.json"
+      - "working/evidence-chain/psa-analyze-pilot-on.json"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "Parser IR block boundaries diverge from validator after C2"
+        - "Shared refactor silently changes validator diagnostic ordering"
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "574/574 mcp-server tests pass including validator and analyze suites"
+        - "pseudocode-shared.ts imports neither parser nor validator"
+      evidence_references:
+        - "mcp-server/src/analysis/pseudocode-shared.test.ts"
+        - "mcp-server/src/analysis/pseudocode-validator.test.ts"
+        - "working/evidence-chain/psa-analyze-pilot-20260908-summary.json"
+        - "working/REQ-PSEUDOCODE_PARSER_UNIFICATION/adversarial-inquiry/phase-close_out/"
+        - "working/REQ-PSEUDOCODE_PARSER_UNIFICATION/track-c-close-out-evidence.json"
+      falsification_questions:
+        - "Do pseudocode-validator.test.ts assertions still match pre-C2 reports byte-for-byte on golden inputs?"
+        - "Does pseudocode-shared import parser or validator creating a cycle?"
+      gate_policy: "advisory"
+      prior_depth_tier: "minimal"
+      profile_depth: "integrated"
+      proof_boundary: "Track C is structural refactor only; C3 deferred to separate future plan."
+    depth_tier: "integrated"
+    gate_policy: "advisory"
+    profile_depth: "integrated"
+    risks:
+      - description: "Breaking pseudocode_validate consumers via shared-parser refactor"
+        id: "RISK-PSA-001"
+        likelihood: "Low"
+        mitigation: "Golden regression tests; rollback to C1 if C2 changes diagnostics; separate tool/schema preserved"
+        severity: "High"
+  test_strategy:
+    composition: "quality-validation-mcp.test.ts; live structural validator via evidence-chain pilot path"
+    regression: "Full mcp-server npm test; pseudocode_analyze tests unchanged"
+    unit: "pseudocode-shared.test.ts RED/GREEN; existing pseudocode-validator.test.ts goldens"

@@ -56,6 +56,7 @@ implementation decisions and pseudo-code for the research tooling.
 | **Go Mode B adapter** | go-test adapter, PARSE_GO_TEST_EVIDENCE | Native Go project-input Mode B dispatch with realpath confinement; `_test.go` paths select the go-test manifest profile. |
 | **Go Mode A builder** | build_adversarial_inquiry_from_tied, from-tied builder | Ruby script emitting normalized graph/fidelity for Go and language-neutral stacks from TIED tokens, declared paths, and optional build-config; optional when Mode B suffices. |
 | **reference fixture** | adversarial-inquiry-go-rootjobs | Checked-in 1787507684 / REQ-ROOTJOBS graph/fidelity + build-config for CI regression; repo-relative paths only. |
+| **PSA reference fixture** | adversarial-inquiry-psa | Checked-in REQ-PSEUDOCODE_STATIC_ANALYSIS Mode A graph/fidelity + build-config aligned to DEFAULT_PROOF_BOUNDARY, read-only, and path-safety evidence. |
 | **controlled fixture** | test client, sample project (for remediation) | Reproducible snapshot-bound project (e.g. client alias `1787603099`) with labeled negative/positive gate cases; fixture manifest is authoritative input only. |
 | **evidence corpus** | fixture corpus, regression inputs | The controlled fixture's labeled rejection cases, valid positive reference, snapshots, and replay inputs bound to corpus-manifest.json. |
 | **phase-aware activation report** | metrics activation summary | Offline analyzer view of per-phase artifact completeness plus inquiry count; phase dirs remain authoritative over root projection. |

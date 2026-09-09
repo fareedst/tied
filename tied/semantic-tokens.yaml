@@ -479,6 +479,16 @@ ARCH-PSEUDOCODE_ANALYSIS_PIPELINE:
   name: "Pseudo-code static analysis pipeline"
   source_index: "architecture-decisions.yaml"
   status: "Active"
+ARCH-PSEUDOCODE_PARSER_UNIFICATION:
+  cross_references:
+    - "IMPL-PSEUDOCODE_SHARED_PRIMITIVES"
+    - "REQ-PSEUDOCODE_PARSER_UNIFICATION"
+  description: "Shared pseudo-code parser primitive module boundary for validator and analyzer."
+  detail_file: "architecture-decisions/ARCH-PSEUDOCODE_PARSER_UNIFICATION.yaml"
+  name: "Shared pseudo-code parser primitive boundary"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 ARCH-QUALITY_ASSURANCE_PROFILES:
   cross_references:
     - "IMPL-QUALITY_EVIDENCE_MANIFEST"
@@ -1165,6 +1175,16 @@ IMPL-PSEUDOCODE_ANALYSIS_ENGINE:
   name: "Pseudo-code static analysis engine"
   source_index: "implementation-decisions.yaml"
   status: "Active"
+IMPL-PSEUDOCODE_SHARED_PRIMITIVES:
+  cross_references:
+    - "ARCH-PSEUDOCODE_PARSER_UNIFICATION"
+    - "REQ-PSEUDOCODE_PARSER_UNIFICATION"
+  description: "Shared token, procedure-range, and contract-field parsing primitives."
+  detail_file: "implementation-decisions/IMPL-PSEUDOCODE_SHARED_PRIMITIVES.yaml"
+  name: "Shared pseudo-code parsing primitives"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
 IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK:
   cross_references:
     - "ARCH-QUALITY_ASSURANCE_PROFILES"
@@ -2223,6 +2243,16 @@ REQ-PROMPT_TYPE_SUBAGENT:
     last_updated: "2026-08-12"
     registered: "2026-08-12"
   name: "Plan-New-Feature Prompt-Type Subagent"
+  status: "Implemented"
+  type: "REQ"
+REQ-PSEUDOCODE_PARSER_UNIFICATION:
+  cross_references:
+    - "ARCH-PSEUDOCODE_PARSER_UNIFICATION"
+    - "IMPL-PSEUDOCODE_SHARED_PRIMITIVES"
+  description: "Shared parser primitives unify validator and analysis parser scan logic without drift."
+  detail_file: "requirements/REQ-PSEUDOCODE_PARSER_UNIFICATION.yaml"
+  name: "Unify pseudo-code parser primitives across validator and analyzer"
+  source_index: "requirements.yaml"
   status: "Implemented"
   type: "REQ"
 REQ-PSEUDOCODE_STATIC_ANALYSIS:

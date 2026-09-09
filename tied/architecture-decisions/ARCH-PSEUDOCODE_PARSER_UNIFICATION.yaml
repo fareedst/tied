@@ -1,0 +1,22 @@
+ARCH-PSEUDOCODE_PARSER_UNIFICATION:
+  cross_references:
+    - "ARCH-PSEUDOCODE_ANALYSIS_PIPELINE"
+    - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    - "REQ-PSEUDOCODE_PARSER_UNIFICATION"
+  name: "Shared pseudo-code parser primitive boundary"
+  rationale:
+    benefits:
+      - "Explicit module boundary with rollback path to C1-only extraction"
+    problems_solved:
+      - "Duplicated regex ownership across validator and parser"
+    why: "Structural validator and analysis parser must share scan primitives without coupling IR generation to Layer B diagnostics."
+  status: "Active"
+  traceability:
+    code_annotations:
+      - "ARCH-PSEUDOCODE_PARSER_UNIFICATION"
+    implementation:
+      - "IMPL-PSEUDOCODE_ANALYSIS_ENGINE"
+      - "IMPL-PSEUDOCODE_SHARED_PRIMITIVES"
+      - "IMPL-QUALITY_PSEUDOCODE_VALIDATOR"
+    requirements:
+      - "REQ-PSEUDOCODE_PARSER_UNIFICATION"

@@ -2,11 +2,13 @@ CITDP-REQ-PSEUDOCODE_STATIC_ANALYSIS:
   change_definition:
     current_behavior: "Layer B pseudocode_validate proves structural shape only; no CFG, call graph, bounded abstract analysis, or obligation characterization."
     desired_behavior: "Additive pseudocode_analyze MCP tool returns deterministic pseudocode-analysis-report.v1 with parser/IR, symbols, CFG, call graph, abstract facts, obligations, and block-level traceability projections under explicit budgets and proof boundaries."
+    follow_up_completed:
+      - note: "Shared-parser migration deferred at PSA close-out; shipped under separate REQ."
+        token: "REQ-PSEUDOCODE_PARSER_UNIFICATION"
     non_goals:
       - "Automatic LEAP promotion"
       - "Breaking pseudocode_validate or layer-b-pseudocode-validator.v1"
       - "Runtime or test execution claims"
-      - "Shared-parser migration inside validator v1"
     success_criteria:
       - "All analysis modules have unit tests; MCP composition tests prove read-only path safety"
       - "pseudocode_analyze returns deterministic report for fixture corpus"
@@ -15,12 +17,13 @@ CITDP-REQ-PSEUDOCODE_STATIC_ANALYSIS:
     unchanged_behavior: "pseudocode_validate contract, schema, and golden behavior preserved."
   completion_criteria:
     activation:
-      close_out_run_id: "psa-closeout-20260908"
-      phase: "verification"
+      close_out_run_id: "psa-followup-closeout-20260908"
+      phase: "close_out"
       request_token: "REQ-PSEUDOCODE_STATIC_ANALYSIS"
-      run_id: "psa-verify-20260908"
+      run_id: "psa-followup-closeout-20260908"
+      verification_run_id: "psa-fidelity-rerun-20260908"
     critical_high_unaccepted: "false"
-    verification_gate_notes: "mcp-server npm run build and npm test passed 567 tests; pseudocode_validate sidecar ok; tied_validate_consistency ok; integrated adversarial inquiry gates allowed at verification and close_out; tied_verify close_out gate passed."
+    verification_gate_notes: "574/574 mcp-server tests; tied_validate_consistency ok; follow-up close-out reuses psa-fidelity-rerun-20260908 PASS via close_out_inquiry_waiver."
   evidence:
     commands:
       - command: "npm test"
@@ -54,6 +57,18 @@ CITDP-REQ-PSEUDOCODE_STATIC_ANALYSIS:
   risk_analysis:
     adversarial_inquiry:
       assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver:
+        approval: "psa-followup-close-out-plan"
+        artifact_identities:
+          - "mcp-server/src/adversarial-inquiry/psa-fixture.test.ts"
+          - "mcp-server/test/fixtures/adversarial-inquiry-psa/fidelity.json"
+          - "mcp-server/test/fixtures/adversarial-inquiry-psa/graph.json"
+        expiry: "2026-12-31"
+        owner: "TIED maintainers"
+        rationale: "Follow-up close-out reuses identity-bound PASS inquiry evidence from psa-fidelity-rerun-20260908; findings unchanged; no inquiry rerun."
+        referenced_verification_run_id: "psa-fidelity-rerun-20260908"
+        request_token: "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+        scope: "Mode A fidelity PASS for adversarial-inquiry-psa fixture alignment"
       counterexamples:
         - "False confidence from analysis report treated as runtime proof"
         - "Path traversal via essence_pseudocode_path"
@@ -63,9 +78,12 @@ CITDP-REQ-PSEUDOCODE_STATIC_ANALYSIS:
         - "pseudocode_analyze rejects paths outside TIED_BASE_PATH"
         - "Report includes explicit proof_boundary and unknowns[]"
       evidence_references:
+        - "mcp-server/src/adversarial-inquiry/psa-fixture.test.ts"
         - "mcp-server/src/tools/pseudocode-analyze-mcp.test.ts"
-        - "working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/"
-        - "working/REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/"
+        - "mcp-server/test/fixtures/adversarial-inquiry-psa/"
+        - "working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-close_out/"
+      follow_up_inquiry_run_id: "psa-fidelity-rerun-20260908"
+      follow_up_verdict: "PASS"
       gate_policy: "advisory"
       prior_depth_tier: "minimal"
       proof_boundary: "Advisory inquiry at integrated depth for MCP external pseudo-code input; findings are review-gated, not LEAP triggers."
@@ -74,7 +92,7 @@ CITDP-REQ-PSEUDOCODE_STATIC_ANALYSIS:
       - description: "Breaking pseudocode_validate consumers"
         id: "RISK-PSA-001"
         likelihood: "Low"
-        mitigation: "Separate tool/schema; golden regression tests"
+        mitigation: "Separate tool/schema; golden regression tests; REQ-PSEUDOCODE_PARSER_UNIFICATION shared primitives"
         severity: "High"
       - description: "False confidence from runtime claims"
         id: "RISK-PSA-002"

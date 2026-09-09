@@ -1,0 +1,79 @@
+{
+  "projectId": "cfd5bf6ad98024eb",
+  "criteria": [
+    {
+      "identity": {
+        "id": "REQ-PSEUDOCODE_STATIC_ANALYSIS#criterion-1",
+        "kind": "criterion",
+        "derivation": "explicit",
+        "revision": "criterion-rev-psa",
+        "sourceRevision": "citdp-20260908"
+      },
+      "architectureConstraintIds": ["constraint-psa-analysis-engine"]
+    }
+  ],
+  "architectureConstraints": [
+    {
+      "id": "constraint-psa-analysis-engine",
+      "implementationBlockIds": [
+        "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e"
+      ]
+    }
+  ],
+  "implementationBlocks": [
+    {
+      "identity": {
+        "id": "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e",
+        "kind": "block",
+        "name": "ANALYZE_ESSENCE_PSEUDOCODE",
+        "derivation": "content",
+        "revision": "4aa2bce358521ab8",
+        "sourceRevision": "citdp-20260908"
+      }
+    }
+  ],
+  "evidenceLoci": [
+    {
+      "id": "test-proof-boundary",
+      "blockId": "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e",
+      "kind": "test",
+      "location": "mcp-server/src/analysis/pseudocode-analyzer.test.ts:49",
+      "sourceRevision": "citdp-20260908"
+    },
+    {
+      "id": "test-read-only",
+      "blockId": "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e",
+      "kind": "test",
+      "location": "mcp-server/src/tools/pseudocode-analyze-mcp.test.ts:82",
+      "sourceRevision": "citdp-20260908"
+    },
+    {
+      "id": "test-path-safety",
+      "blockId": "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e",
+      "kind": "test",
+      "location": "mcp-server/src/tools/pseudocode-analyze-mcp.test.ts:58",
+      "sourceRevision": "citdp-20260908"
+    },
+    {
+      "id": "prod-proof-boundary",
+      "blockId": "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e",
+      "kind": "production",
+      "location": "mcp-server/src/analysis/pseudocode-ir.ts:10",
+      "sourceRevision": "citdp-20260908"
+    }
+  ],
+  "adversarialCases": [
+    {
+      "id": "CE-001",
+      "blockId": "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e"
+    },
+    {
+      "id": "CE-002",
+      "blockId": "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e"
+    },
+    {
+      "id": "CE-003",
+      "blockId": "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e"
+    }
+  ]
+}

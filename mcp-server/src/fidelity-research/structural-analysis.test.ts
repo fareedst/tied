@@ -31,6 +31,10 @@ describe("RUN_STRUCTURAL_ANALYSIS REQ-TIED_FIDELITY_RESEARCH", () => {
           calls.push("binding");
           return { ok: true };
         },
+        pseudocodeAnalyze: (token) => {
+          calls.push(`analyze:${token}`);
+          return { ok: true };
+        },
         testAdequacy: () => {
           calls.push("adequacy");
           return { ok: true };
@@ -41,12 +45,16 @@ describe("RUN_STRUCTURAL_ANALYSIS REQ-TIED_FIDELITY_RESEARCH", () => {
     assert.deepEqual(calls, [
       "tied:IMPL-TIED_FIDELITY_RESEARCH",
       "pseudo:IMPL-TIED_FIDELITY_RESEARCH",
+      "analyze:IMPL-TIED_FIDELITY_RESEARCH",
       "traceability",
       "cycles",
       "binding",
       "adequacy",
     ]);
-    assert.equal(result.evidence.length, 6);
+    assert.equal(result.evidence.length, 7);
+    const analyzeRow = result.evidence.find((row) => row.validator === "pseudocode_analyze");
+    assert.ok(analyzeRow);
+    assert.equal(analyzeRow?.proofBoundary.includes("not runtime execution"), true);
     assert.equal(
       result.proofBoundary,
       "Structural artifact consistency only; not runtime correctness.",

@@ -25,7 +25,7 @@ It is not an **assurance profile**, not a **verification evidence manifest**, an
 
 For **observed** `quality.command_results` (`executable_behavior` proof boundary), collect a **verification evidence manifest** first and pass `manifest_reference` into the generator. See [quality-evidence-manifest.md](./quality-evidence-manifest.md) and `[PROC-QUALITY_EVIDENCE_PROVENANCE]`.
 
-For **observed** structural validator rows, supply live structural validator results. MCP accepts optional `invoke_structural_validators: true` (default `false` for backward compatibility) to run the six structural validators internally and attach results. Without manifest or structural wiring, derived fields correctly remain `not_measured` (fail-closed).
+For **observed** structural validator rows, supply live structural validator results. MCP accepts optional `invoke_structural_validators: true` (default `false` for backward compatibility) to run the six structural validators internally and attach results. Optional `invoke_pseudocode_analyze: true` (default `false`) adds bounded `pseudocode_analyze` rows for scoped `IMPL-*` tokens when structural wiring is active; proof boundary is bounded static analysis only, distinct from Layer B `pseudocode_validate`. Without manifest or structural wiring, derived fields correctly remain `not_measured` (fail-closed).
 
 Typical attach-provenance flow:
 
@@ -48,6 +48,7 @@ Example `profile-args-with-manifest-ref.json`:
   "profile_depth": "integrated",
   "manifest_reference": "working/evidence-chain/verification-evidence-manifest.v1.json",
   "invoke_structural_validators": false,
+  "invoke_pseudocode_analyze": false,
   "run_metadata": { "run_id": "pilot-001", "commit": "abc123" }
 }
 ```
@@ -60,7 +61,7 @@ TIED_BASE_PATH=/absolute/client/tied \
   evidence_chain_profile_generate @profile-args.json > working/evidence-chain/profile.json
 ```
 
-Required: `profile_depth`. Optional: `project_root`, `tied_base_path` (must match `tied_config_get_base_path`), `scope`, `change_context`, `manifest_reference`, `invoke_structural_validators`, `output_mode` / `output_path`.
+Required: `profile_depth`. Optional: `project_root`, `tied_base_path` (must match `tied_config_get_base_path`), `scope`, `change_context`, `manifest_reference`, `invoke_structural_validators`, `invoke_pseudocode_analyze`, `output_mode` / `output_path`.
 
 **Fail closed** when the requested **TIED base path** is not `project_root/tied` or does not match the confirmed MCP base path (`WrongTiedBasePath`).
 

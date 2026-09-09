@@ -1,9 +1,13 @@
+export const PSEUDOCODE_ANALYZE_PROOF_BOUNDARY =
+  "Deterministic static analysis of essence_pseudocode within declared grammar and budgets; not runtime execution, not test execution, not complete behavioral verification.";
+
 export interface StructuralAnalysisInput {
   snapshotId: string;
   tokens: readonly string[];
   validators: {
     tiedConsistency: (tokens: readonly string[]) => { ok: boolean };
     pseudocode: (token: string) => { ok: boolean };
+    pseudocodeAnalyze?: (token: string) => { ok: boolean };
     traceability: () => { ok: boolean };
     cycles: () => { ok: boolean };
     bindingInventory: () => { ok: boolean };
@@ -15,6 +19,7 @@ export interface StructuralEvidence {
   validator:
     | "tied_validate_consistency"
     | "pseudocode_validate"
+    | "pseudocode_analyze"
     | "traceability_gap_report"
     | "tied_cycles"
     | "binding_inventory_validate"
@@ -53,6 +58,15 @@ export function runStructuralAnalysis(
       snapshotId: input.snapshotId,
       proofBoundary,
     });
+    if (input.validators.pseudocodeAnalyze && token.startsWith("IMPL-")) {
+      const analyze = input.validators.pseudocodeAnalyze(token);
+      evidence.push({
+        validator: "pseudocode_analyze",
+        ok: analyze.ok,
+        snapshotId: input.snapshotId,
+        proofBoundary: PSEUDOCODE_ANALYZE_PROOF_BOUNDARY,
+      });
+    }
   }
 
   const additionalValidators: Array<

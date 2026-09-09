@@ -3,6 +3,7 @@
  * Live structural validator callbacks for evidence chain profile generation.
  */
 import { validateBindingInventory } from "../analysis/binding-inventory.js";
+import { analyzeEssencePseudocode } from "../analysis/pseudocode-analyzer.js";
 import { validateEssencePseudocode } from "../analysis/pseudocode-validator.js";
 import { runScopedAnalysis } from "../analysis/scoped-analysis.js";
 import { validateConsistency } from "../consistency-validator.js";
@@ -84,6 +85,25 @@ export function createLiveStructuralValidators(
           known_tokens: knownTokens,
         });
         return { ok: report.ok === true };
+      } catch {
+        return { ok: false };
+      }
+    },
+    pseudocodeAnalyze: (token: string) => {
+      if (!token.startsWith("IMPL-")) return { ok: true };
+      try {
+        const detail = loadDetail(token) as { essence_pseudocode?: string } | null;
+        const pseudocode = detail?.essence_pseudocode;
+        if (typeof pseudocode !== "string" || !pseudocode.trim()) {
+          return { ok: false };
+        }
+        const report = analyzeEssencePseudocode({
+          token,
+          pseudocode,
+          known_tokens: knownTokens,
+          analyses: ["parse"],
+        });
+        return { ok: "schema_version" in report && report.ok === true };
       } catch {
         return { ok: false };
       }

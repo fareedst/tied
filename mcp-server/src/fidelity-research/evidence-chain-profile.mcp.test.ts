@@ -101,6 +101,50 @@ describe("evidence_chain_profile_generate MCP binding [REQ-EVIDENCE_CHAIN_PROFIL
     assert.equal(graph?.cycles, 0);
   });
 
+  it("omits pseudocode_analyze rows unless invoke_pseudocode_analyze is true", async () => {
+    // [IMPL-EVIDENCE_CHAIN_PROFILE] [ARCH-EVIDENCE_CHAIN_PROFILE] [REQ-EVIDENCE_CHAIN_PROFILE]
+    const tiedBasePath = getBasePath();
+    const projectRoot = path.resolve(tiedBasePath, "..");
+    const generate = handler("evidence_chain_profile_generate");
+    const withoutAnalyze = body(
+      await generate({
+        project_root: projectRoot,
+        tied_base_path: tiedBasePath,
+        profile_depth: "integrated",
+        invoke_structural_validators: true,
+        scope: { impl_tokens_for_pseudocode: ["IMPL-EVIDENCE_CHAIN_PROFILE"] },
+        run_metadata: { run_id: "mcp-no-analyze", commit: "abc" },
+      }),
+    );
+    assert.equal(withoutAnalyze.ok, true);
+    const structuralWithout = (withoutAnalyze.profile as {
+      evidence_chain?: { structural?: Array<{ value?: { validator?: string } }> };
+    }).evidence_chain?.structural ?? [];
+    assert.equal(
+      structuralWithout.some((row) => row.value?.validator === "pseudocode_analyze"),
+      false,
+    );
+
+    const withAnalyze = body(
+      await generate({
+        project_root: projectRoot,
+        tied_base_path: tiedBasePath,
+        profile_depth: "integrated",
+        invoke_structural_validators: true,
+        invoke_pseudocode_analyze: true,
+        scope: { impl_tokens_for_pseudocode: ["IMPL-EVIDENCE_CHAIN_PROFILE"] },
+        run_metadata: { run_id: "mcp-with-analyze", commit: "abc" },
+      }),
+    );
+    assert.equal(withAnalyze.ok, true);
+    const structuralWith = (withAnalyze.profile as {
+      evidence_chain?: { structural?: Array<{ status?: string; value?: { validator?: string } }> };
+    }).evidence_chain?.structural ?? [];
+    const analyzeRow = structuralWith.find((row) => row.value?.validator === "pseudocode_analyze");
+    assert.ok(analyzeRow);
+    assert.equal(analyzeRow.status, "observed");
+  });
+
   it("keeps structural rows not_measured without invoke_structural_validators", async () => {
     const tiedBasePath = getBasePath();
     const projectRoot = path.resolve(tiedBasePath, "..");

@@ -7,7 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **`REQ-PSEUDOCODE_PARSER_UNIFICATION`** — shared `pseudocode-shared.ts` primitives; validator/parser refactor preserving `layer-b-pseudocode-validator.v1` goldens; integrated close_out gate (`parser-unification-closeout-20260908`).
+
 ### Changed
+
+- **PSA follow-up Mode A fidelity** — adversarial-inquiry-psa fixture; inquiry PASS reused via close-out waiver (`psa-fidelity-rerun-20260908`); follow-up gate `psa-followup-closeout-20260908`.
+- **Evidence-chain profile** — opt-in `invoke_pseudocode_analyze` flag (default off) with pilot evidence (path/identity refs); minimal close_out gate (`ecp-psa-analyze-closeout-20260908`).
+- **PSA CITDP LEAP** — shared-parser migration moved from non_goals to `follow_up_completed` under `REQ-PSEUDOCODE_PARSER_UNIFICATION`.
+- **`.gitignore`** — ignore local PSA pilot outputs and per-track close-out evidence receipts.
+
+### Deferred
+
+- **Phase C3 (validator consumes parser IR)** — deferred to a separate future C3 plan; close-out records the handoff only.
 
 - **MCP tool `tied_cycles`** — Response now includes `ok` aligned with `has_cycles` (`ok === !has_cycles`) for evidence-chain structural validator parity. Additive contract change; existing `cycles` and `has_cycles` fields unchanged.
 

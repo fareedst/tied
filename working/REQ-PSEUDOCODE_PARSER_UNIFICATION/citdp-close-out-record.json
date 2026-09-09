@@ -1,0 +1,94 @@
+{
+  "change_definition": {
+    "current_behavior_prior": "pseudocode-validator.ts and pseudocode-parser.ts each owned duplicated TOKEN_RE, procedure scan, and contract-field regexes.",
+    "desired_behavior": "pseudocode-shared.ts owns extractSemanticTokens, scanProcedureBlocks, and parseContractFields; validator and parser consume shared primitives while layer-b-pseudocode-validator.v1 output remains byte-stable.",
+    "non_goals": [
+      "Phase C3 validator consumes parser IR (deferred to separate future plan)",
+      "Automatic LEAP from inquiry findings",
+      "Breaking layer-b-pseudocode-validator.v1 golden snapshots"
+    ],
+    "success_criteria": [
+      "574/574 mcp-server tests pass",
+      "pseudocode_validate IMPL-PSEUDOCODE_SHARED_PRIMITIVES ok",
+      "tied_validate_consistency ok",
+      "integrated close_out gate allowed with identity-bound activation"
+    ],
+    "summary": "Shared parser primitives (C1+C2) close-out; C3 explicitly deferred."
+  },
+  "completion_criteria": {
+    "activation": {
+      "close_out_run_id": "parser-unification-closeout-20260908",
+      "phase": "close_out",
+      "request_token": "REQ-PSEUDOCODE_PARSER_UNIFICATION",
+      "run_id": "parser-unification-closeout-20260908"
+    },
+    "gate_evidence": {
+      "close_out": "working/REQ-PSEUDOCODE_PARSER_UNIFICATION/gates/gate-close_out-parser-unification-closeout-20260908-result.json"
+    },
+    "token_validation": "tied_validate_consistency substituted for scripts/validate_tokens.sh",
+    "verification_gate_notes": "574/574 mcp-server tests; tied_verify promoted REQ-PSEUDOCODE_PARSER_UNIFICATION to Implemented and IMPL-PSEUDOCODE_SHARED_PRIMITIVES to Active."
+  },
+  "impact_analysis": {
+    "modules_or_boundaries": "mcp-server/src/analysis/pseudocode-shared.ts; pseudocode-validator.ts; pseudocode-parser.ts",
+    "tied_tokens_new": [
+      "ARCH-PSEUDOCODE_PARSER_UNIFICATION",
+      "IMPL-PSEUDOCODE_SHARED_PRIMITIVES",
+      "REQ-PSEUDOCODE_PARSER_UNIFICATION"
+    ]
+  },
+  "record_identity": {
+    "change_request_id": "REQ-PSEUDOCODE_PARSER_UNIFICATION",
+    "checklist_process": "[PROC-AGENT_REQ_CHECKLIST]",
+    "checklist_step_completed": "verification-gate-close-out",
+    "record_status": "implemented",
+    "recorded_at": "2026-09-08",
+    "tied_context": {
+      "architecture": ["ARCH-PSEUDOCODE_PARSER_UNIFICATION"],
+      "implementation": ["IMPL-PSEUDOCODE_SHARED_PRIMITIVES"],
+      "requirements": ["REQ-PSEUDOCODE_PARSER_UNIFICATION"]
+    },
+    "title": "Shared pseudo-code parser primitives (C1+C2)",
+    "workspace_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "risk_analysis": {
+    "adversarial_inquiry": {
+      "depth_tier": "integrated",
+      "gate_policy": "advisory",
+      "profile_depth": "integrated",
+      "evidence_references": [
+        "working/REQ-PSEUDOCODE_PARSER_UNIFICATION/adversarial-inquiry/phase-close_out/",
+        "mcp-server/src/analysis/pseudocode-shared.test.ts"
+      ],
+      "summary": "Mode A aligned fidelity PASS at close_out; advisory policy; C3 deferred.",
+      "verdict": "PASS"
+    },
+    "depth_tier": "integrated",
+    "gate_policy": "advisory"
+  },
+  "tdd_sequence": {
+    "summary": "C1 extract shared primitives; C2 route validator block detection; golden regression; integrated close_out inquiry and gate."
+  },
+  "test_strategy": {
+    "summary": "pseudocode-shared.test.ts RED/GREEN; pseudocode-validator.test.ts goldens unchanged; full npm test regression."
+  },
+  "tied_verify": {
+    "close_out_run_id": "parser-unification-closeout-20260908",
+    "dry_run": "working/REQ-PSEUDOCODE_PARSER_UNIFICATION/tied-verify-dry-run.json",
+    "ok": true,
+    "result": "working/REQ-PSEUDOCODE_PARSER_UNIFICATION/tied-verify-result.json",
+    "would_update": [
+      {
+        "index": "requirements",
+        "token": "REQ-PSEUDOCODE_PARSER_UNIFICATION",
+        "previous_status": "Planned",
+        "next_status": "Implemented"
+      },
+      {
+        "index": "implementation",
+        "token": "IMPL-PSEUDOCODE_SHARED_PRIMITIVES",
+        "previous_status": "Planned",
+        "next_status": "Active"
+      }
+    ]
+  }
+}

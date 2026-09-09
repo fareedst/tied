@@ -1,0 +1,37 @@
+REQ-PSEUDOCODE_PARSER_UNIFICATION:
+  category: "Functional"
+  description: "Extract shared token, procedure-range, and contract-field parsing primitives so Layer B validator and analysis parser cannot drift."
+  name: "Unify pseudo-code parser primitives across validator and analyzer"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Golden Layer B output preserved while reducing drift risk"
+      - "Single source of truth for structural scan primitives"
+    problems_solved:
+      - "Duplicated TOKEN_RE, procedure scan, and contract-field parsing"
+      - "Validator and parser block boundaries can diverge silently"
+    why: "Parallel regex and scan logic in pseudocode-validator.ts and pseudocode-parser.ts risks diagnostic and IR drift (RISK-PSA-001)."
+  related_requirements:
+    depends_on:
+      - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+    related_to:
+      - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+  satisfaction_criteria:
+    - criterion: "layer-b-pseudocode-validator.v1 golden output unchanged"
+      metric: "pseudocode-validator.test.ts and quality-validation-mcp.test.ts pass without snapshot changes"
+    - criterion: "No circular dependency between parser, validator, and shared module"
+      metric: "shared imports neither parser nor validator"
+    - criterion: "Shared module owns duplicated regex and scan logic"
+      metric: "pseudocode-shared.ts is the only owner of token/procedure/contract primitives"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-PSEUDOCODE_PARSER_UNIFICATION"
+    code_annotations:
+      - "REQ-PSEUDOCODE_PARSER_UNIFICATION"
+    implementation:
+      - "IMPL-PSEUDOCODE_SHARED_PRIMITIVES"
+    tests:
+      - "mcp-server/src/analysis/pseudocode-shared.test.ts"
+      - "mcp-server/src/analysis/pseudocode-validator.test.ts"

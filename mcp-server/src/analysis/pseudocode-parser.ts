@@ -13,11 +13,12 @@ import {
   type SourceSpan,
   type UnsupportedSyntax,
 } from "./pseudocode-ir.js";
-
-const TOKEN_RE = /\[(REQ-[A-Za-z0-9_-]+|ARCH-[A-Za-z0-9_-]+|IMPL-[A-Za-z0-9_-]+)\]/g;
-const PROCEDURE_RE = /^\s*(procedure|function|block)\s+([A-Z][A-Z0-9_]*)\b/i;
-const CONTRACT_FIELD_RE =
-  /^\s*(INPUT|OUTPUT|DATA|CONTROL|PRE|POST|EFFECTS|FAILURE_MODES|DATA_TRANSITION|TERMINATION)\s*:/;
+import {
+  CONTRACT_FIELD_PATTERN,
+  extractSemanticTokens,
+  PROCEDURE_HEADING_PATTERN,
+  scanProcedureBlocks,
+} from "./pseudocode-shared.js";
 const ASSIGNMENT_RE = /^\s*([A-Za-z_][A-Za-z0-9_]*)\s*:=\s*(.+)$/;
 const IF_RE = /^\s*IF\s+(.+?)\s*:\s*$/i;
 const ELSE_RE = /^\s*ELSE\s*:\s*$/i;
@@ -45,17 +46,11 @@ function spanAt(lineIndex: number, line: string, startCol = 0): SourceSpan {
   };
 }
 
-function tokensIn(text: string): string[] {
-  return [...new Set([...text.matchAll(TOKEN_RE)].map((m) => m[1]))].sort((a, b) =>
-    a.localeCompare(b),
-  );
-}
-
 function contractFieldsIn(lines: string[]): ContractFields {
   const fields: string[] = [];
   let firstLine = -1;
   for (let i = 0; i < lines.length; i += 1) {
-    const match = lines[i].match(CONTRACT_FIELD_RE);
+    const match = lines[i].match(CONTRACT_FIELD_PATTERN);
     if (match) {
       fields.push(match[1]);
       if (firstLine < 0) firstLine = i;
@@ -81,7 +76,7 @@ function parseStatements(
     const line = lines[i];
     if (!line.trim() || line.match(/^\s*#/) || line.match(/^\s*Contract\s*:/i)) continue;
 
-    const procMatch = line.match(PROCEDURE_RE);
+    const procMatch = line.match(PROCEDURE_HEADING_PATTERN);
     if (procMatch) break;
 
     nodeCounter.count += 1;
@@ -166,18 +161,7 @@ export function parsePseudocodeToIr(
   const lines = source.split(/\r?\n/);
   const unsupported: UnsupportedSyntax[] = [];
   const nodeCounter = { count: 0 };
-  const procedureRanges: Array<{ name: string; kind: "procedure" | "function" | "block"; start: number }> = [];
-
-  for (let i = 0; i < lines.length; i += 1) {
-    const match = lines[i].match(PROCEDURE_RE);
-    if (match) {
-      procedureRanges.push({
-        name: match[2],
-        kind: match[1].toLowerCase() as "procedure" | "function" | "block",
-        start: i,
-      });
-    }
-  }
+  const procedureRanges = scanProcedureBlocks(lines);
 
   if (procedureRanges.length > budgets.max_procedures) {
     return {
@@ -207,10 +191,8 @@ export function parsePseudocodeToIr(
       : { fields: [] };
 
   const procedures: IrProcedure[] = [];
-  for (let idx = 0; idx < procedureRanges.length; idx += 1) {
-    const range = procedureRanges[idx];
-    const end = procedureRanges[idx + 1]?.start ?? lines.length;
-    const bodyLines = lines.slice(range.start, end);
+  for (const range of procedureRanges) {
+    const bodyLines = lines.slice(range.start, range.end);
     const bodyText = bodyLines.join("\n");
 
     const contractStart = bodyLines.findIndex((line) => /^\s*Contract\s*:/i.test(line));
@@ -220,11 +202,11 @@ export function parsePseudocodeToIr(
       let endIdx = contractStart + 1;
       for (let li = contractStart + 1; li < bodyLines.length; li += 1) {
         const line = bodyLines[li];
-        if (PROCEDURE_RE.test(line)) {
+        if (PROCEDURE_HEADING_PATTERN.test(line)) {
           endIdx = li;
           break;
         }
-        if (/^\s*Contract\s*:/i.test(line) || CONTRACT_FIELD_RE.test(line) || /^\s*#/.test(line)) {
+        if (/^\s*Contract\s*:/i.test(line) || CONTRACT_FIELD_PATTERN.test(line) || /^\s*#/.test(line)) {
           endIdx = li + 1;
           continue;
         }
@@ -255,7 +237,7 @@ export function parsePseudocodeToIr(
       name: range.name,
       kind: range.kind,
       span: spanAt(range.start, lines[range.start]),
-      token_refs: tokensIn(bodyText),
+      token_refs: extractSemanticTokens(bodyText, { unique: true }),
       contract,
       statements,
     });
@@ -267,7 +249,7 @@ export function parsePseudocodeToIr(
     grammar_version: GRAMMAR_VERSION,
     procedures,
     global_contract: globalContract,
-    token_refs: tokensIn(source),
+    token_refs: extractSemanticTokens(source, { unique: true }),
     unsupported_syntax: unsupported.sort((a, b) => a.span.line - b.span.line || a.span.column - b.span.column),
     parse_node_count: nodeCounter.count,
     truncated_parse: truncatedParse,

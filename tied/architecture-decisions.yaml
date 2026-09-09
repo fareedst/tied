@@ -1344,6 +1344,14 @@ ARCH-PSEUDOCODE_ANALYSIS_PIPELINE:
   detail_file: "architecture-decisions/ARCH-PSEUDOCODE_ANALYSIS_PIPELINE.yaml"
   name: "Pseudo-code static analysis pipeline"
   status: "Active"
+ARCH-PSEUDOCODE_PARSER_UNIFICATION:
+  cross_references:
+    - "ARCH-PSEUDOCODE_ANALYSIS_PIPELINE"
+    - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    - "REQ-PSEUDOCODE_PARSER_UNIFICATION"
+  detail_file: "architecture-decisions/ARCH-PSEUDOCODE_PARSER_UNIFICATION.yaml"
+  name: "Shared pseudo-code parser primitive boundary"
+  status: "Active"
 ARCH-QUALITY_ASSURANCE_PROFILES:
   cross_references:
     - "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK"

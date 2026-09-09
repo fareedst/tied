@@ -1,0 +1,145 @@
+block_id: "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e"
+block_name: "ANALYZE_ESSENCE_PSEUDOCODE"
+block_revision: "4aa2bce358521ab8"
+fidelity:
+  blockRevision: "4aa2bce358521ab8"
+  productionEvidence:
+    - blockRevision: "4aa2bce358521ab8"
+      direction: "production"
+      id: "prod-proof-boundary"
+      kind: "effect"
+      order: 1
+      provenance: "three-way-alignment-unit"
+      reliable: true
+      source:
+        location: "mcp-server/src/analysis/pseudocode-ir.ts:10"
+      statementId: "stmt-proof-boundary"
+      value: "Deterministic static analysis of essence_pseudocode within declared grammar and budgets; not runtime execution, not test execution, not complete behavioral verification."
+    - blockRevision: "4aa2bce358521ab8"
+      direction: "production"
+      id: "prod-read-only"
+      kind: "behavior"
+      order: 2
+      provenance: "three-way-alignment-unit"
+      reliable: true
+      source:
+        location: "mcp-server/src/tools/index.ts:2117"
+      statementId: "stmt-read-only"
+      value: "pseudocode_analyze returns JSON without writing project REQ/ARCH/IMPL YAML or invoking TIED YAML mutation tools"
+    - blockRevision: "4aa2bce358521ab8"
+      direction: "production"
+      id: "prod-path-safety"
+      kind: "behavior"
+      order: 3
+      provenance: "three-way-alignment-unit"
+      reliable: true
+      source:
+        location: "mcp-server/src/impl-pseudocode-input.ts:11"
+      statementId: "stmt-path-safety"
+      value: "resolvePseudocodePathUnderTiedBase rejects paths outside TIED_BASE_PATH and pseudocode_analyze surfaces PATH_NOT_UNDER_TIED_BASE"
+  specification:
+    - id: "stmt-proof-boundary"
+      kind: "effect"
+      order: 1
+      value: "Deterministic static analysis of essence_pseudocode within declared grammar and budgets; not runtime execution, not test execution, not complete behavioral verification."
+    - id: "stmt-read-only"
+      kind: "behavior"
+      order: 2
+      value: "pseudocode_analyze returns JSON without writing project REQ/ARCH/IMPL YAML or invoking TIED YAML mutation tools"
+    - id: "stmt-path-safety"
+      kind: "behavior"
+      order: 3
+      value: "resolvePseudocodePathUnderTiedBase rejects paths outside TIED_BASE_PATH and pseudocode_analyze surfaces PATH_NOT_UNDER_TIED_BASE"
+  testEvidence:
+    - blockRevision: "4aa2bce358521ab8"
+      direction: "test"
+      id: "test-proof-boundary"
+      kind: "effect"
+      order: 1
+      provenance: "unit-test-green"
+      reliable: true
+      source:
+        location: "mcp-server/src/analysis/pseudocode-analyzer.test.ts:49"
+      statementId: "stmt-proof-boundary"
+      value: "Deterministic static analysis of essence_pseudocode within declared grammar and budgets; not runtime execution, not test execution, not complete behavioral verification."
+    - blockRevision: "4aa2bce358521ab8"
+      direction: "test"
+      id: "test-read-only"
+      kind: "behavior"
+      order: 2
+      provenance: "composition-test-green"
+      reliable: true
+      source:
+        location: "mcp-server/src/tools/pseudocode-analyze-mcp.test.ts:82"
+      statementId: "stmt-read-only"
+      value: "pseudocode_analyze returns JSON without writing project REQ/ARCH/IMPL YAML or invoking TIED YAML mutation tools"
+    - blockRevision: "4aa2bce358521ab8"
+      direction: "test"
+      id: "test-path-safety"
+      kind: "behavior"
+      order: 3
+      provenance: "composition-test-green"
+      reliable: true
+      source:
+        location: "mcp-server/src/tools/pseudocode-analyze-mcp.test.ts:58"
+      statementId: "stmt-path-safety"
+      value: "resolvePseudocodePathUnderTiedBase rejects paths outside TIED_BASE_PATH and pseudocode_analyze surfaces PATH_NOT_UNDER_TIED_BASE"
+graph:
+  adversarialCases:
+    - blockId: "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e"
+      id: "CE-001"
+    - blockId: "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e"
+      id: "CE-002"
+    - blockId: "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e"
+      id: "CE-003"
+  architectureConstraints:
+    - id: "constraint-psa-analysis-engine"
+      implementationBlockIds:
+        - "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e"
+  criteria:
+    - architectureConstraintIds:
+        - "constraint-psa-analysis-engine"
+      identity:
+        derivation: "explicit"
+        id: "REQ-PSEUDOCODE_STATIC_ANALYSIS#criterion-1"
+        kind: "criterion"
+        revision: "criterion-rev-psa"
+        sourceRevision: "citdp-20260908"
+  evidenceLoci:
+    - blockId: "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e"
+      id: "test-proof-boundary"
+      kind: "test"
+      location: "mcp-server/src/analysis/pseudocode-analyzer.test.ts:49"
+      sourceRevision: "citdp-20260908"
+    - blockId: "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e"
+      id: "test-read-only"
+      kind: "test"
+      location: "mcp-server/src/tools/pseudocode-analyze-mcp.test.ts:82"
+      sourceRevision: "citdp-20260908"
+    - blockId: "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e"
+      id: "test-path-safety"
+      kind: "test"
+      location: "mcp-server/src/tools/pseudocode-analyze-mcp.test.ts:58"
+      sourceRevision: "citdp-20260908"
+    - blockId: "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e"
+      id: "prod-proof-boundary"
+      kind: "production"
+      location: "mcp-server/src/analysis/pseudocode-ir.ts:10"
+      sourceRevision: "citdp-20260908"
+  implementationBlocks:
+    - identity:
+        derivation: "content"
+        id: "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e"
+        kind: "block"
+        name: "ANALYZE_ESSENCE_PSEUDOCODE"
+        revision: "4aa2bce358521ab8"
+        sourceRevision: "citdp-20260908"
+impl_token: "IMPL-PSEUDOCODE_ANALYSIS_ENGINE"
+production_path: "mcp-server/src/analysis/pseudocode-analyzer.ts"
+request_token: "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+scope:
+  - "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e"
+source_revision: "citdp-20260908"
+test_paths:
+  - "mcp-server/src/analysis/pseudocode-analyzer.test.ts"
+  - "mcp-server/src/tools/pseudocode-analyze-mcp.test.ts"

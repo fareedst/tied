@@ -2031,6 +2031,12 @@ export const allTools = [
           .describe(
             "When true, run live structural validators internally and attach results so structural rows become observed. Default false preserves backward-compatible not_measured structural rows.",
           ),
+        invoke_pseudocode_analyze: z
+          .boolean()
+          .optional()
+          .describe(
+            "When true with invoke_structural_validators, attach pseudocode_analyze structural rows for scoped IMPL tokens. Default false preserves backward-compatible structural output.",
+          ),
       }),
     },
     handler: async (args: {
@@ -2054,23 +2060,31 @@ export const allTools = [
       roots?: string[];
       manifest_reference?: string;
       invoke_structural_validators?: boolean;
+      invoke_pseudocode_analyze?: boolean;
     }) => {
       try {
         const confirmed = getBasePath();
         const projectRoot = args.project_root ?? path.resolve(confirmed, "..");
         const tiedBasePath = args.tied_base_path ?? confirmed;
         const structuralValidators = args.invoke_structural_validators
-          ? createLiveStructuralValidators({
-              requirement_tokens: args.scope?.requirement_tokens,
-              architecture_tokens: args.scope?.architecture_tokens,
-              implementation_tokens: args.scope?.implementation_tokens,
-              impl_tokens_for_pseudocode: args.scope?.impl_tokens_for_pseudocode,
-              binding_rows: args.scope?.binding_rows,
-              quality_plan: args.scope?.quality_plan,
-              config_path: args.config_path,
-              ignore_file: args.ignore_file,
-              roots: args.roots,
-            })
+          ? (() => {
+              const validators = createLiveStructuralValidators({
+                requirement_tokens: args.scope?.requirement_tokens,
+                architecture_tokens: args.scope?.architecture_tokens,
+                implementation_tokens: args.scope?.implementation_tokens,
+                impl_tokens_for_pseudocode: args.scope?.impl_tokens_for_pseudocode,
+                binding_rows: args.scope?.binding_rows,
+                quality_plan: args.scope?.quality_plan,
+                config_path: args.config_path,
+                ignore_file: args.ignore_file,
+                roots: args.roots,
+              });
+              if (!args.invoke_pseudocode_analyze) {
+                const { pseudocodeAnalyze: _omit, ...withoutAnalyze } = validators;
+                return withoutAnalyze;
+              }
+              return validators;
+            })()
           : undefined;
         const result = generateEvidenceChainProfile({
           project_root: projectRoot,

@@ -1,0 +1,99 @@
+{
+  "blockRevision": "4aa2bce358521ab8",
+  "specification": [
+    {
+      "id": "stmt-proof-boundary",
+      "kind": "effect",
+      "value": "Deterministic static analysis of essence_pseudocode within declared grammar and budgets; not runtime execution, not test execution, not complete behavioral verification.",
+      "order": 1
+    },
+    {
+      "id": "stmt-read-only",
+      "kind": "behavior",
+      "value": "pseudocode_analyze returns JSON without writing project REQ/ARCH/IMPL YAML or invoking TIED YAML mutation tools",
+      "order": 2
+    },
+    {
+      "id": "stmt-path-safety",
+      "kind": "behavior",
+      "value": "resolvePseudocodePathUnderTiedBase rejects paths outside TIED_BASE_PATH and pseudocode_analyze surfaces PATH_NOT_UNDER_TIED_BASE",
+      "order": 3
+    }
+  ],
+  "testEvidence": [
+    {
+      "id": "test-proof-boundary",
+      "direction": "test",
+      "statementId": "stmt-proof-boundary",
+      "kind": "effect",
+      "value": "Deterministic static analysis of essence_pseudocode within declared grammar and budgets; not runtime execution, not test execution, not complete behavioral verification.",
+      "order": 1,
+      "reliable": true,
+      "source": { "location": "mcp-server/src/analysis/pseudocode-analyzer.test.ts:49" },
+      "provenance": "unit-test-green",
+      "blockRevision": "4aa2bce358521ab8"
+    },
+    {
+      "id": "test-read-only",
+      "direction": "test",
+      "statementId": "stmt-read-only",
+      "kind": "behavior",
+      "value": "pseudocode_analyze returns JSON without writing project REQ/ARCH/IMPL YAML or invoking TIED YAML mutation tools",
+      "order": 2,
+      "reliable": true,
+      "source": { "location": "mcp-server/src/tools/pseudocode-analyze-mcp.test.ts:82" },
+      "provenance": "composition-test-green",
+      "blockRevision": "4aa2bce358521ab8"
+    },
+    {
+      "id": "test-path-safety",
+      "direction": "test",
+      "statementId": "stmt-path-safety",
+      "kind": "behavior",
+      "value": "resolvePseudocodePathUnderTiedBase rejects paths outside TIED_BASE_PATH and pseudocode_analyze surfaces PATH_NOT_UNDER_TIED_BASE",
+      "order": 3,
+      "reliable": true,
+      "source": { "location": "mcp-server/src/tools/pseudocode-analyze-mcp.test.ts:58" },
+      "provenance": "composition-test-green",
+      "blockRevision": "4aa2bce358521ab8"
+    }
+  ],
+  "productionEvidence": [
+    {
+      "id": "prod-proof-boundary",
+      "direction": "production",
+      "statementId": "stmt-proof-boundary",
+      "kind": "effect",
+      "value": "Deterministic static analysis of essence_pseudocode within declared grammar and budgets; not runtime execution, not test execution, not complete behavioral verification.",
+      "order": 1,
+      "reliable": true,
+      "source": { "location": "mcp-server/src/analysis/pseudocode-ir.ts:10" },
+      "provenance": "three-way-alignment-unit",
+      "blockRevision": "4aa2bce358521ab8"
+    },
+    {
+      "id": "prod-read-only",
+      "direction": "production",
+      "statementId": "stmt-read-only",
+      "kind": "behavior",
+      "value": "pseudocode_analyze returns JSON without writing project REQ/ARCH/IMPL YAML or invoking TIED YAML mutation tools",
+      "order": 2,
+      "reliable": true,
+      "source": { "location": "mcp-server/src/tools/index.ts:2117" },
+      "provenance": "three-way-alignment-unit",
+      "blockRevision": "4aa2bce358521ab8"
+    },
+    {
+      "id": "prod-path-safety",
+      "direction": "production",
+      "statementId": "stmt-path-safety",
+      "kind": "behavior",
+      "value": "resolvePseudocodePathUnderTiedBase rejects paths outside TIED_BASE_PATH and pseudocode_analyze surfaces PATH_NOT_UNDER_TIED_BASE",
+      "order": 3,
+      "reliable": true,
+      "source": { "location": "mcp-server/src/impl-pseudocode-input.ts:11" },
+      "provenance": "three-way-alignment-unit",
+      "blockRevision": "4aa2bce358521ab8"
+    }
+  ]
+}

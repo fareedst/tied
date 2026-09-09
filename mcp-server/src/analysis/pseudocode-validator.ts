@@ -6,6 +6,12 @@
  * This module checks the pseudo-code body itself and deliberately does not
  * claim behavioral test coverage.
  */
+import {
+  extractSemanticTokens,
+  hasContractHeading,
+  parseContractFields,
+  scanProcedureBlocks,
+} from "./pseudocode-shared.js";
 
 export type PseudocodeDiagnostic = {
   severity: "error" | "warning";
@@ -63,7 +69,6 @@ export type PseudocodeValidationReport = {
   diagnostics: PseudocodeDiagnostic[];
 };
 
-const TOKEN_RE = /\[(REQ-[A-Za-z0-9_-]+|ARCH-[A-Za-z0-9_-]+|IMPL-[A-Za-z0-9_-]+)\]/g;
 const REQUIRED_CONTRACT_FIELDS = ["INPUT", "OUTPUT", "PRE", "POST", "EFFECTS"];
 const BUILTIN_CALLS = new Set([
   "NORMALIZE",
@@ -72,25 +77,8 @@ const BUILTIN_CALLS = new Set([
   "SORT",
 ]);
 
-function tokensIn(text: string): string[] {
-  return [...text.matchAll(TOKEN_RE)].map((match) => match[1]);
-}
-
 function uniqueSorted(values: string[]): string[] {
   return [...new Set(values)].sort((left, right) => left.localeCompare(right));
-}
-
-function contractFields(lines: string[]): string[] {
-  const fields = new Set<string>();
-  for (const line of lines) {
-    const match = line.match(/^\s*(INPUT|OUTPUT|DATA|CONTROL|PRE|POST|EFFECTS|FAILURE_MODES|DATA_TRANSITION|TERMINATION)\s*:/);
-    if (match) fields.add(match[1]);
-  }
-  return [...fields];
-}
-
-function hasContractHeading(lines: string[]): boolean {
-  return lines.some((line) => /^\s*Contract\s*:/i.test(line));
 }
 
 /**
@@ -101,13 +89,14 @@ export function validateEssencePseudocode(
   input: PseudocodeValidationInput,
 ): PseudocodeValidationReport {
   // [IMPL-QUALITY_PSEUDOCODE_VALIDATOR] [ARCH-QUALITY_ASSURANCE_PROFILES] [REQ-QUALITY_ASSURANCE_EVIDENCE]
-  // How: Parse source-located blocks, validate contracts and symbols, then emit structural-only diagnostics.
+  // [IMPL-PSEUDOCODE_SHARED_PRIMITIVES] [ARCH-PSEUDOCODE_PARSER_UNIFICATION] [REQ-PSEUDOCODE_PARSER_UNIFICATION]
+  // How: Parse source-located blocks via shared scan primitives, validate contracts and symbols, then emit structural-only diagnostics.
   const lines = input.pseudocode.split(/\r?\n/);
   const diagnostics: PseudocodeDiagnostic[] = [];
-  const allTokens = uniqueSorted(tokensIn(input.pseudocode));
+  const allTokens = uniqueSorted(extractSemanticTokens(input.pseudocode, { unique: true }));
   const knownTokens = new Set(input.known_tokens ?? []);
   const blocks: PseudocodeBlock[] = [];
-  const procedureRanges: Array<{ name: string; start: number; end: number }> = [];
+  const procedureRanges = scanProcedureBlocks(lines);
 
   if (!allTokens.includes(input.token)) {
     diagnostics.push({
@@ -129,28 +118,20 @@ export function validateEssencePseudocode(
     }
   }
 
-  for (let index = 0; index < lines.length; index += 1) {
-    const match = lines[index].match(/^\s*(?:procedure|function|block)\s+([A-Z][A-Z0-9_]*)\b/i);
-    if (match) procedureRanges.push({ name: match[1], start: index, end: lines.length });
-  }
-  procedureRanges.forEach((range, index) => {
-    range.end = procedureRanges[index + 1]?.start ?? lines.length;
-  });
-
   const globalContractStart = lines.findIndex((line) => /^\s*Contract\s*:/i.test(line));
   const globalContractEnd =
     globalContractStart >= 0
       ? procedureRanges.find((range) => range.start > globalContractStart)?.start ?? lines.length
       : -1;
   const globalContract = globalContractStart >= 0
-    ? contractFields(lines.slice(globalContractStart, globalContractEnd))
+    ? parseContractFields(lines.slice(globalContractStart, globalContractEnd))
     : [];
 
   for (const range of procedureRanges) {
     const body = lines.slice(range.start, range.end);
     const bodyText = body.join("\n");
-    const refs = uniqueSorted(tokensIn(bodyText));
-    const fields = contractFields(body);
+    const refs = uniqueSorted(extractSemanticTokens(bodyText, { unique: true }));
+    const fields = parseContractFields(body);
     const effectiveFields = uniqueSorted([...globalContract, ...fields]);
     const block: PseudocodeBlock = {
       name: range.name,

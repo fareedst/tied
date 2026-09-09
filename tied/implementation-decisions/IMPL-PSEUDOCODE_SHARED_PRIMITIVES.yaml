@@ -1,0 +1,44 @@
+IMPL-PSEUDOCODE_SHARED_PRIMITIVES:
+  code_locations:
+    files:
+      - description: "Shared token, procedure-range, and contract-field helpers"
+        path: "mcp-server/src/analysis/pseudocode-shared.ts"
+      - description: "Unit tests for shared primitives"
+        path: "mcp-server/src/analysis/pseudocode-shared.test.ts"
+    functions:
+      - file: "mcp-server/src/analysis/pseudocode-shared.ts"
+        name: "extractSemanticTokens"
+      - file: "mcp-server/src/analysis/pseudocode-shared.ts"
+        name: "parseContractFields"
+      - file: "mcp-server/src/analysis/pseudocode-shared.ts"
+        name: "scanProcedureBlocks"
+  cross_references:
+    - "ARCH-PSEUDOCODE_PARSER_UNIFICATION"
+    - "IMPL-PSEUDOCODE_ANALYSIS_ENGINE"
+    - "IMPL-QUALITY_PSEUDOCODE_VALIDATOR"
+    - "REQ-PSEUDOCODE_PARSER_UNIFICATION"
+  implementation_approach:
+    details:
+      - "C1 extracts primitives without behavior change."
+      - "C2 routes validator block detection through shared scan helpers."
+      - "Rollback to C1 if C2 changes diagnostics or golden output."
+    summary: "Pure shared module consumed by Layer B validator and analysis parser; C2 preserves layer-b-pseudocode-validator.v1 output."
+  name: "Shared pseudo-code parsing primitives"
+  rationale:
+    benefits:
+      - "Deterministic shared helpers with no imports from parser or validator"
+    problems_solved:
+      - "Regex and scan drift between pseudocode-validator.ts and pseudocode-parser.ts"
+    why: "Own extractSemanticTokens, scanProcedureBlocks, and parseContractFields as the single primitive source for validator and parser."
+  status: "Active"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-PSEUDOCODE_PARSER_UNIFICATION"
+    code_annotations:
+      - "IMPL-PSEUDOCODE_SHARED_PRIMITIVES"
+    requirements:
+      - "REQ-PSEUDOCODE_PARSER_UNIFICATION"
+    tests:
+      - "mcp-server/src/analysis/pseudocode-shared.test.ts"
+      - "mcp-server/src/analysis/pseudocode-validator.test.ts"

@@ -44,6 +44,10 @@ working/evidence-chain/profile-args*.json
 working/evidence-chain/evidence-chain-profile.v1.json
 working/evidence-chain/verification-evidence-manifest.v1.json
 working/evidence-chain/stdd-integrated-with-manifest*.json
+# PSA pilot outputs (regenerate from the evidence-chain pilot)
+working/evidence-chain/psa-analyze-pilot-*.json
+# Per-track close-out evidence receipts (regenerate during close-out)
+working/**/track-*-close-out-evidence.json
 
 # Controlled fixture corpus + golden evidence-chain inputs (keep tracked)
 working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/fixture-*

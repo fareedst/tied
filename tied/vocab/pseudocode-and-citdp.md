@@ -52,6 +52,8 @@ Checklist **`sub-vocabulary-sync`** uses **domain** vocab. Do not conflate with 
 | **pseudo-code call graph** | call graph (alone) | CALL/RUN edges between pseudo-code procedures; distinct from TIED dep graph and GRAPH-001 checklist row |
 | **proof boundary** | proof limit (alone) | Explicit claim limit per report section; mandatory on analysis reports |
 | **unknown policy** | unknown handling (alone) | First-class unknown/truncation disclosure with cause and span; never implicit success |
+| **evidence-chain analyze opt-in** | analyze structural row (alone) | `invoke_pseudocode_analyze` on `evidence_chain_profile_generate` adds bounded `pseudocode_analyze` rows for scoped `IMPL-*` tokens when `invoke_structural_validators` is true; default false preserves prior structural snapshots |
+| **shared parser primitives** | parser unification (alone) | `pseudocode-shared.ts` owns token/procedure/contract scan helpers consumed by Layer B validator and analysis parser ([REQ-PSEUDOCODE_PARSER_UNIFICATION]) |
 
 ---
 

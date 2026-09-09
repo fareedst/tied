@@ -1324,6 +1324,26 @@ REQ-PROMPT_TYPE_SUBAGENT:
       method: "Static contract test"
     - coverage: "TIED traceability"
       method: "tied_validate_consistency"
+REQ-PSEUDOCODE_PARSER_UNIFICATION:
+  category: "Functional"
+  description: "Extract shared token, procedure-range, and contract-field parsing primitives so Layer B validator and analysis parser cannot drift."
+  detail_file: "requirements/REQ-PSEUDOCODE_PARSER_UNIFICATION.yaml"
+  name: "Unify pseudo-code parser primitives across validator and analyzer"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+    related_to:
+      - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+  satisfaction_criteria:
+    - criterion: "layer-b-pseudocode-validator.v1 golden output unchanged"
+      metric: "pseudocode-validator.test.ts and quality-validation-mcp.test.ts pass without snapshot changes"
+    - criterion: "No circular dependency between parser, validator, and shared module"
+      metric: "shared imports neither parser nor validator"
+    - criterion: "Shared module owns duplicated regex and scan logic"
+      metric: "pseudocode-shared.ts is the only owner of token/procedure/contract primitives"
+  status: "Implemented"
 REQ-PSEUDOCODE_STATIC_ANALYSIS:
   category: "Functional"
   cross_references:

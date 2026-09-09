@@ -1443,6 +1443,16 @@ IMPL-PSEUDOCODE_ANALYSIS_ENGINE:
   detail_file: "implementation-decisions/IMPL-PSEUDOCODE_ANALYSIS_ENGINE.yaml"
   name: "Pseudo-code static analysis engine"
   status: "Active"
+IMPL-PSEUDOCODE_SHARED_PRIMITIVES:
+  cross_references:
+    - "ARCH-PSEUDOCODE_PARSER_UNIFICATION"
+    - "IMPL-PSEUDOCODE_ANALYSIS_ENGINE"
+    - "IMPL-QUALITY_PSEUDOCODE_VALIDATOR"
+    - "REQ-PSEUDOCODE_PARSER_UNIFICATION"
+  detail_file: "implementation-decisions/IMPL-PSEUDOCODE_SHARED_PRIMITIVES.yaml"
+  name: "Shared pseudo-code parsing primitives"
+  status: "Active"
+  testability: "unit"
 IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK:
   cross_references:
     - "ARCH-QUALITY_ASSURANCE_PROFILES"

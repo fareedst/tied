@@ -6,7 +6,7 @@ import {
   serializeAnalysisReport,
   sortDiagnostics,
 } from "./pseudocode-analyze-report.js";
-import { REPORT_SCHEMA_VERSION } from "./pseudocode-ir.js";
+import { DEFAULT_PROOF_BOUNDARY, REPORT_SCHEMA_VERSION } from "./pseudocode-ir.js";
 import { analyzeEssencePseudocode } from "./pseudocode-analyzer.js";
 
 describe("pseudocode-analyze-report [REQ-PSEUDOCODE_STATIC_ANALYSIS]", () => {
@@ -46,7 +46,7 @@ describe("pseudocode-analyzer orchestrator [REQ-PSEUDOCODE_STATIC_ANALYSIS]", ()
     assert.equal("schema_version" in report && report.schema_version, REPORT_SCHEMA_VERSION);
     if (!("schema_version" in report)) return;
     assert.ok(report.sections.parse);
-    assert.ok(report.proof_boundary.length > 0);
+    assert.equal(report.proof_boundary, DEFAULT_PROOF_BOUNDARY);
     assert.equal(serializeAnalysisReport(report), serializeAnalysisReport(report));
   });
 
