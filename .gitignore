@@ -28,6 +28,10 @@ tied/features/
 # (tied/vocab/fidelity-research.md, quality-assurance.md; keep locally under working/)
 working/**/adversarial-inquiry/
 working/**/gate-*.json
+# Gate receipts and activation collect outputs (regenerate per close-out run)
+working/**/gates/
+# tied_verify dry-run and apply receipts (regenerate per verification gate)
+working/**/tied-verify-*.json
 working/**/g*-dogfood/
 working/client-*/
 working/**/tied-mcp-metrics*.jsonl
