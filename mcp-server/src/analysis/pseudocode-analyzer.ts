@@ -37,6 +37,7 @@ export type AnalyzeEssencePseudocodeInput = {
   budgets?: Partial<PseudocodeAnalysisBudgets>;
   include_structural_compat?: boolean;
   strict_paths?: boolean;
+  gate_mode?: boolean;
 };
 
 export type AnalyzeInputError = {
@@ -159,13 +160,22 @@ export function analyzeEssencePseudocode(
   diagnostics = sortDiagnostics(diagnostics);
   const capped = capDiagnostics(diagnostics, effective.max_report_diagnostics);
 
-  const hasError =
+  const gateModeApplied = input.gate_mode === true;
+  const hasStrictPathError =
     input.strict_paths === true &&
     capped.diagnostics.some((d) => d.severity === "error" && d.code === "CONTRADICTORY_PATH");
-  const ok = !hasError && !capped.diagnostics.some((d) => d.severity === "error" && d.code === "INPUT_TOO_LARGE");
+  const hasInputTooLarge =
+    capped.diagnostics.some((d) => d.severity === "error" && d.code === "INPUT_TOO_LARGE");
+  const hasGateModeError =
+    gateModeApplied &&
+    (truncated || capped.diagnostics.some((d) => d.severity === "error"));
+  const ok = gateModeApplied
+    ? !hasGateModeError && !hasInputTooLarge
+    : !hasStrictPathError && !hasInputTooLarge;
 
   return {
     ok,
+    ...(gateModeApplied ? { gate_mode_applied: true as const } : {}),
     schema_version: REPORT_SCHEMA_VERSION,
     grammar_version: GRAMMAR_VERSION,
     analyzer_version: ANALYZER_VERSION,

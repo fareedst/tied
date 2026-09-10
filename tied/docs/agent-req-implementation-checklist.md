@@ -830,6 +830,25 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 
 ---
 
+### sub-pseudocode-static-analysis-pass (sub-pseudocode-static-analysis-pass): Layer C static analysis gate (gate_mode)
+
+**Invoked by**: `gate-pseudocode-validation` (mandatory pre-RED for changed in-scope IMPLs) and `verification-gate` (re-run when `input_identity.hash` differs).
+
+**Goals**: Run mandatory Layer C `pseudocode_analyze` with `gate_mode: true` on complete sidecars for changed Active project IMPLs; persist gate evidence before RED tests.
+
+**Tasks**:
+1. Load [pseudocode-static-analysis-checklist.yaml](pseudocode-static-analysis-checklist.yaml).
+2. For each changed in-scope IMPL in Tracker `execution_evidence.impl_inventory`, run `pseudocode_analyze` with `essence_pseudocode_path`, `gate_mode: true`, and scoped `known_tokens`.
+3. Persist `working/{REQ-TOKEN}/pseudocode-analysis/{IMPL-TOKEN}.v1.json`; require `ok: true` and `gate_mode_applied: true`.
+4. IF gate fails, remediate grammar (`procedure NAME:` headings, CALL targets) or document truncation waiver on `gate-pseudocode-validation`.
+5. **RETURN** when PSA-GATE-001..004 satisfied for each changed IMPL.
+
+**Outcomes**: Layer C artifacts with stable `input_identity.hash` until sidecar edits.
+
+**Reference**: [pseudocode-grammar.v1.md](pseudocode-grammar.v1.md); [pseudocode-writing-and-validation.md#layer-c-static-analysis-gate](pseudocode-writing-and-validation.md#layer-c-static-analysis-gate).
+
+---
+
 ### sub-leap-micro-cycle (leap-micro-cycle): Fix IMPL first during GREEN; revisit REQ/ARCH if scope shifts
 
 **Invoked by**: unit-test-green when production code reveals the pseudo-code is incomplete, wrong, or missing a dependency.

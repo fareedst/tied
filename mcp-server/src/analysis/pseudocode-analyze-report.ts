@@ -42,6 +42,7 @@ export type AnalysisReportSections = {
 
 export type PseudocodeAnalysisReport = {
   ok: boolean;
+  gate_mode_applied?: true;
   schema_version: typeof REPORT_SCHEMA_VERSION;
   grammar_version: typeof GRAMMAR_VERSION;
   analyzer_version: typeof ANALYZER_VERSION;

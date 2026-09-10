@@ -124,4 +124,25 @@ describe("CHECKLIST_CLIENT_YAML_STYLING [PROC-AGENT_REQ_CHECKLIST]", () => {
       assert.match(markdown, new RegExp(`### ${slug} \\(${slug}\\)`));
     }
   });
+
+  it("wires Layer C sub-pseudocode-static-analysis-pass at gate-pseudocode-validation [REQ-PSEUDOCODE_STATIC_ANALYSIS]", () => {
+    // [IMPL-PSEUDOCODE_ANALYSIS_ENGINE] [ARCH-PSEUDOCODE_ANALYSIS_PIPELINE] [REQ-PSEUDOCODE_STATIC_ANALYSIS]
+    const doc = loadChecklist();
+    const gate = stepBySlug(doc, "gate-pseudocode-validation");
+    const psa = subBySlug(doc, "sub-pseudocode-static-analysis-pass");
+    assert.ok(gate, "gate-pseudocode-validation must exist");
+    assert.ok(psa, "sub-pseudocode-static-analysis-pass must exist");
+    assert.ok(
+      (gate?.tasks ?? []).some((task) => task.includes("CALL sub-pseudocode-static-analysis-pass")),
+      "gate-pseudocode-validation must CALL sub-pseudocode-static-analysis-pass",
+    );
+    assert.ok(
+      psa?.invoked_by?.includes("gate-pseudocode-validation"),
+      "sub-pseudocode-static-analysis-pass invoked_by must include gate-pseudocode-validation",
+    );
+    assert.ok(
+      psa?.invoked_by?.includes("verification-gate"),
+      "sub-pseudocode-static-analysis-pass invoked_by must include verification-gate",
+    );
+  });
 });

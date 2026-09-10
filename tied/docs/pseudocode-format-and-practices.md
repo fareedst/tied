@@ -99,11 +99,17 @@ The **single** maintained copy of the hand-authored template body is the file **
 
 ---
 
-## 6. Two validation layers
+## 6. Three validation layers
 
 **Layer A — TIED (mandatory for changed essence):** Run **`tied_validate_consistency`** with default options so **`include_pseudocode`** runs. This checks the **merged** `essence_pseudocode` (sidecar + YAML) against indexes, token references, and TIED’s pseudo-code rules. Do this after any edit to the sidecar or after setting essence via API/CLI.
 
-**Layer B — Application (optional depth, project-scaled):** A checklist covering parsing, schema/shape, contracts, dependency/coverage, traceability to tests, and optional lint/simulation. If the project has **no** custom grammar parser, treat each **H2 section** (or the project’s defined “block”) as one unit for **manual** Layer B review. A minimal Layer B should still require: **TIED-POE-001** (do not use Layer B alone; Layer A must pass for the same text).
+**Layer B — Application checklist:** Parsing, schema/shape, contracts, dependency/coverage, traceability to tests via `pseudocode_validate` and [pseudocode-validation-checklist.yaml](pseudocode-validation-checklist.yaml). Minimal Layer B still requires **TIED-POE-001** (Layer A must pass for the same text).
+
+**Layer C — Static analysis gate (mandatory for changed Active IMPLs):** `pseudocode_analyze` with **`gate_mode: true`** after Layers A and B at `gate-pseudocode-validation`. See [pseudocode-static-analysis-checklist.yaml](pseudocode-static-analysis-checklist.yaml).
+
+### 6a. Grammar reference
+
+Author-facing grammar v1: [pseudocode-grammar.v1.md](pseudocode-grammar.v1.md). Use `procedure NAME:` headings — not list-item `PROCEDURE:`.
 
 ```mermaid
 flowchart LR
@@ -111,9 +117,12 @@ flowchart LR
   merge[merged_essence_pseudocode]
   A[tied_validate_consistency]
   B[Layer_B_checklist]
+  C[pseudocode_analyze_gate_mode]
   sidecar --> merge
   merge --> A
   merge --> B
+  sidecar --> C
+  B --> C
 ```
 
 **Recommended order for a full application pass (when you run Layer B as a process):** tied data → parsing → schema → symbol resolution → contract validation → dependency graph → behavioral coverage → traceability → optional lint / semantic simulation / generation readiness → reporting. **Tailor** which categories are gating (e.g. pre-code vs after tests) per project policy.

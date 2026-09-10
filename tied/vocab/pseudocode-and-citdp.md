@@ -47,6 +47,10 @@ Checklist **`sub-vocabulary-sync`** uses **domain** vocab. Do not conflate with 
 | **sub-vocabulary-sync VALIDATE** | skip vocab audit | Before commit: audit names in docs/tokens/code against `tied/vocab/` ([PROC-VOCABULARY_INDEX] Touchpoint 3) |
 | **pseudo-code static analysis** | static analysis (alone), deep validator | Deterministic read-only CFG/call-graph/abstract pipeline via `pseudocode_analyze`; distinct from Layer B `pseudocode_validate` ([REQ-PSEUDOCODE_STATIC_ANALYSIS]) |
 | **analysis report** | analyze output (alone) | Versioned `pseudocode-analysis-report.v1` from `pseudocode_analyze` |
+| **Layer C static analysis gate** | PSA gate, mandatory static analysis | Mandatory `pseudocode_analyze` invocation with `gate_mode: true` after Layers A and B and before RED tests |
+| **gate_mode** | strict analysis mode | Analyzer control that makes error diagnostics and truncation fail the report; it does not change parse/input fatal shapes |
+| **pre-psa-grammar** | PSA grammar waiver | N/A disposition for unchanged legacy procedure blocks; it is not a waiver for a changed file submitted to the file-scoped gate |
+| **file-scoped analysis input** | block-only gate input | Current Layer C submits a complete sidecar per changed IMPL; deterministic block extraction is a separate follow-on |
 | **grammar version** | parser version (alone) | Declared closed subset key e.g. `pseudocode-grammar.v1` |
 | **program CFG** | CFG (alone) | Per-procedure control-flow graph from pseudo-code IR; not TIED dependency graph |
 | **pseudo-code call graph** | call graph (alone) | CALL/RUN edges between pseudo-code procedures; distinct from TIED dep graph and GRAPH-001 checklist row |
@@ -67,6 +71,8 @@ Checklist **`sub-vocabulary-sync`** uses **domain** vocab. Do not conflate with 
 | Pseudo-code template | `templates/impl-essence-pseudocode-template.md` | [PROC-PSEUDOCODE_VALIDATION](../docs/processes.md) |
 | CITDP record | `tied/citdp/CITDP-REQ-{TOKEN}.yaml` (pattern) | [PROC-CITDP](../docs/processes.md) |
 | Validation checklist | `tied/docs/pseudocode-validation-checklist.yaml` | [PROC-PSEUDOCODE_VALIDATION](../docs/processes.md) |
+| Static analysis checklist | `tied/docs/pseudocode-static-analysis-checklist.yaml` | [PROC-PSEUDOCODE_VALIDATION](../docs/processes.md) |
+| Grammar v1 guide | `tied/docs/pseudocode-grammar.v1.md` | [REQ-PSEUDOCODE_STATIC_ANALYSIS](../requirements/REQ-PSEUDOCODE_STATIC_ANALYSIS.yaml) |
 | Composition coverage guide | `tied/docs/composition-coverage.md` | [REQ-MODULE_VALIDATION](../requirements/REQ-MODULE_VALIDATION.yaml) / [PROC-TEST_STRATEGY](../docs/processes.md) |
 | Domain vocab index | `tied/vocab/*.md` | [PROC-VOCABULARY_INDEX](../docs/processes.md) |
 | Vocab routing index (PRELOAD) | `tied/vocab/routing.md` | [PROC-VOCABULARY_INDEX](../docs/processes.md) |
@@ -90,7 +96,13 @@ Prefer in `essence_pseudocode` (not domain terms):
 | `FOR` / `WHILE` | Iteration |
 | `RETURN` / `ON error` | Step-level outcomes (names must match `FAILURE_MODES` when required) |
 | `AWAIT` / `Promise` | Async boundary (also reflect `Async` in `EFFECTS` when awaiting) |
-| `procedure NAME` | Named procedure (often maps to domain UPPER_SNAKE block) |
+| `procedure NAME` | Named procedure heading (`procedure` / `function` / `block` + `UPPER_SNAKE:`) — **not** list-item `PROCEDURE:` |
+| `SWITCH` / `CASE` | Multi-way branch (`SWITCH expr:` / `CASE label:`) |
+| `CALL UPPER_SNAKE(...)` | Internal pseudo-code call; callee must resolve for Layer C gate pass |
+| `RUN external_target` | External target invocation (not resolved to internal procedures) |
+| `target := value` | Assignment step |
+| `Layer C static analysis checklist` | [pseudocode-static-analysis-checklist.yaml](../docs/pseudocode-static-analysis-checklist.yaml) — PSA-GATE-001..004 |
+| `grammar v1 author guide` | [pseudocode-grammar.v1.md](../docs/pseudocode-grammar.v1.md) |
 
 **Migration:** Untouched legacy Active blocks may omit precision keywords with Layer B N/A `pre-contract-grammar` until next edit. See [`../docs/implementation-decisions.md`](../docs/implementation-decisions.md) and [`../docs/pseudocode-validation-checklist.yaml`](../docs/pseudocode-validation-checklist.yaml).
 
@@ -161,5 +173,9 @@ Prefer in `essence_pseudocode` (not domain terms):
 | pseudo-code call graph | Preferred terms |
 | pseudo-code static analysis | Preferred terms |
 | unknown policy | Preferred terms |
+| Layer C static analysis gate | Preferred terms |
+| gate_mode | Preferred terms |
+| pre-psa-grammar | Preferred terms |
+| file-scoped analysis input | Preferred terms |
 | Vocab routing index | Naming bridge |
 | vocabulary layer | Preferred terms |

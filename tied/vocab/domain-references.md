@@ -58,6 +58,7 @@
 - **STDD / TIED repository layout:** canonical domain glossaries live at `tied/vocab/<topic>.md` (no `-vocabulary` filename suffix). Meta-standard: [`../docs/vocabulary-index-analysis-and-standards.md`](../docs/vocabulary-index-analysis-and-standards.md) § STDD convention. Other TIED client repos may use `docs/*-vocabulary.md` per the replication prompt; this repo uses `tied/vocab/`.
 - **agentstream** (Go product/CLI name) vs **agent-stream** (Ruby directory/package) vs **run-feature-batch** driver scripts — define once in [`agentstream.md`](agentstream.md) and [`agent-stream-ruby.md`](agent-stream-ruby.md); link from both.
 - **Domain vocabulary** (this tree) vs **IMPL grammar vocabulary** (INPUT/OUTPUT/DATA/PRE/POST/EFFECTS keywords) — define once in [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md).
+- **Pseudo-code Layer C gate** vs **Layer B validation** — `pseudocode_analyze` with `gate_mode: true` is a file-scoped, bounded static-analysis gate after Layer B and before RED tests; `pre-psa-grammar` may classify untouched legacy blocks but does not suppress errors in a changed sidecar submitted to Layer C. Define terms in [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md).
 - **Vocabulary layer** / **agent-control layer** — the peer control layer that resolves, preloads, records, and validates domain terms; canonical terms live in [`tied-methodology.md`](tied-methodology.md), while touchpoints are defined by `[PROC-VOCABULARY_INDEX]`.
 - **Prompt Composer / prompt-type skills** — canonical source-only terms for the versioned bundle and explicit router live in [`prompt-composer.md`](prompt-composer.md); distribution behavior for client skills is defined by [ARCH-PROMPT_TYPE_GLOBAL_SKILLS](../architecture-decisions/ARCH-PROMPT_TYPE_GLOBAL_SKILLS.yaml) and [IMPL-PROMPT_TYPE_GLOBAL_SKILLS](../implementation-decisions/IMPL-PROMPT_TYPE_GLOBAL_SKILLS.yaml).
 - **YAML canonicalization** / **format metadata** — the canonical domain terms live in [`tied-methodology.md`](tied-methodology.md); MCP-specific `tied_yaml_format` and `yaml_format` terms live in [`tied-yaml-mcp.md`](tied-yaml-mcp.md). The typed `tied-yaml-canonical-v1` profile supersedes double-quoted scalar lint as the default `yaml_tool` behavior while retaining compatibility frontends. The repository scalar-style policy selects `wrapped` or `unwrapped` with repository-over-global precedence.
@@ -96,6 +97,8 @@
 | client cohort | Cross-topic notes |
 | report input manifest | Cross-topic notes |
 | full catalog | Preferred terms (directory entry) |
+| gate_mode | Cross-topic notes |
+| Layer C static analysis gate | Cross-topic notes |
 | methodology migration | Cross-topic notes |
 | origin layer | `fidelity-research.md` |
 | proof boundary | `fidelity-research.md` |

@@ -75,6 +75,26 @@ describe("pseudocode_analyze MCP [REQ-PSEUDOCODE_STATIC_ANALYSIS]", () => {
     }
   });
 
+  it("propagates gate_mode and sets gate_mode_applied on success", async () => {
+    // [IMPL-PSEUDOCODE_ANALYSIS_ENGINE] [ARCH-PSEUDOCODE_ANALYSIS_PIPELINE] [REQ-PSEUDOCODE_STATIC_ANALYSIS]
+    const failing = body(await handler("pseudocode_analyze")({
+      token: "IMPL-PSEUDOCODE_ANALYSIS_ENGINE",
+      pseudocode: "procedure MAIN:\n  Contract:\n    INPUT: x\n    OUTPUT: y\n    PRE: x\n    POST: y\n    EFFECTS: pure\n  CALL MISSING()\n  RETURN y",
+      gate_mode: true,
+    }));
+    assert.equal(failing.ok, false);
+    assert.equal(failing.gate_mode_applied, true);
+
+    const passing = body(await handler("pseudocode_analyze")({
+      token: "IMPL-PSEUDOCODE_ANALYSIS_ENGINE",
+      pseudocode: "# [IMPL-PSEUDOCODE_ANALYSIS_ENGINE]\nprocedure MAIN:\n  Contract:\n    INPUT: x\n    OUTPUT: y\n    PRE: x\n    POST: y\n    EFFECTS: pure\n  RETURN y",
+      known_tokens: ["IMPL-PSEUDOCODE_ANALYSIS_ENGINE"],
+      gate_mode: true,
+    }));
+    assert.equal(passing.ok, true);
+    assert.equal(passing.gate_mode_applied, true);
+  });
+
   it("coexists with pseudocode_validate unchanged schema", async () => {
     // [IMPL-PSEUDOCODE_ANALYSIS_ENGINE] [ARCH-PSEUDOCODE_ANALYSIS_PIPELINE] [REQ-PSEUDOCODE_STATIC_ANALYSIS]
     const pseudo = `# [IMPL-QUALITY_PSEUDOCODE_VALIDATOR]\nprocedure RUN:\n  Contract:\n    INPUT: x\n    OUTPUT: y\n    PRE: x\n    POST: y\n    EFFECTS: pure\n  RETURN y`;

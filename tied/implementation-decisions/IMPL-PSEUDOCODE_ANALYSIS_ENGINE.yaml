@@ -32,6 +32,7 @@ IMPL-PSEUDOCODE_ANALYSIS_ENGINE:
   description: "TypeScript analysis modules and MCP pseudocode_analyze handler composing parser, symbols, CFG, call graph, abstract analysis, obligations, and report emission."
   implementation_approach:
     details:
+      - "gate_mode true sets gate_mode_applied and fails ok on error diagnostics or truncated"
       - "Keep pseudocode_validate unchanged"
       - "Register pseudocode_analyze as additive MCP tool"
       - "Reuse impl-pseudocode-input path safety"

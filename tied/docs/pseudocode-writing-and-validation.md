@@ -516,25 +516,33 @@ During GREEN (Phase E), if pseudo-code is incomplete or wrong: **stop** coding; 
 
 ## Validation layers
 
-Validation is **two layers**, complementary: **Layer A (TIED)** = repository/traceability on merged essence; **Layer B (application checklist)** = shape, contracts, coverage, traceability to tests.
+Validation is **three complementary layers**: **Layer A (TIED)** = repository/traceability on merged essence; **Layer B (application checklist)** = shape, contracts, coverage, traceability to tests; **Layer C (static analysis gate)** = mandatory `pseudocode_analyze` with `gate_mode: true` for changed in-scope Active IMPLs before RED tests.
 
-**Order:** Run **Layer A** when essence changes, then **Layer B** (full checklist or structural subset per invocation context below).
+**Order:** Run **Layer A** when essence changes, then **Layer B** (full checklist or structural subset per invocation context), then **Layer C** at `gate-pseudocode-validation` for changed IMPLs listed in the Tracker IMPL inventory.
 
 **Layer A — `tied_validate_consistency`** — After editing the sidecar or merged essence, with default **`include_pseudocode`**. Validates token comments and cross-references. See [mcp-server README](../mcp-server/README.md).
 
 **Layer B — [pseudocode-validation-checklist.yaml](pseudocode-validation-checklist.yaml)** — Use the executable `pseudocode_validate` MCP/CLI handler for deterministic parsing, source-located diagnostics, block discovery, schema/contract shape, token linkage, symbol closure, and dependency graph; then apply the checklist for behavioral coverage, traceability, optional lint/simulation/generation, and reporting. Apply to **`IMPL-{TOKEN}-pseudocode.md`** or merged `yaml_detail_read` text. The executable validator proves structural pseudo-code properties only, not runtime correctness or complete behavioral coverage.
 
-### Static analysis vs Layer B validation
+<a id="layer-c-static-analysis-gate"></a>
 
-Optional **pseudo-code static analysis** (`pseudocode_analyze`, owned by [IMPL-PSEUDOCODE_ANALYSIS_ENGINE](../implementation-decisions/IMPL-PSEUDOCODE_ANALYSIS_ENGINE.yaml)) complements Layer B without replacing it. The analysis tool returns schema `pseudocode-analysis-report.v1` with parser/IR, symbols, per-procedure CFG, pseudo-code call graph, bounded abstract facts, obligations, and block-level traceability projections under explicit budgets and proof boundaries. See [REQ-PSEUDOCODE_STATIC_ANALYSIS](../requirements/REQ-PSEUDOCODE_STATIC_ANALYSIS.yaml).
+### Layer C — static analysis gate
+
+Mandatory for **changed in-scope Active project IMPLs** at `gate-pseudocode-validation` (after Layers A and B): `sub-pseudocode-static-analysis-pass` runs `pseudocode_analyze` with **`gate_mode: true`**, persists `working/{REQ-TOKEN}/pseudocode-analysis/{IMPL-TOKEN}.v1.json`, and requires `ok: true` with `gate_mode_applied: true`. Gate scope comes from the per-request Tracker **IMPL inventory**, not git diff alone. The analyzer submits the **complete sidecar** per changed IMPL (file-scoped); block-level `pre-psa-grammar` N/A cannot hide parse errors inside that file.
+
+Checklist: [pseudocode-static-analysis-checklist.yaml](pseudocode-static-analysis-checklist.yaml). Grammar: [pseudocode-grammar.v1.md](pseudocode-grammar.v1.md).
+
+### Layer B vs Layer C tools
+
+**Layer C** — `pseudocode_analyze` ([IMPL-PSEUDOCODE_ANALYSIS_ENGINE](../implementation-decisions/IMPL-PSEUDOCODE_ANALYSIS_ENGINE.yaml)) complements Layer B; under `gate_mode: true`, any error-severity diagnostic or `truncated: true` fails `ok`. See [REQ-PSEUDOCODE_STATIC_ANALYSIS](../requirements/REQ-PSEUDOCODE_STATIC_ANALYSIS.yaml).
 
 | Tool | Schema | Proves | Does not prove |
 |------|--------|--------|----------------|
 | **Layer B** — `pseudocode_validate` ([IMPL-QUALITY_PSEUDOCODE_VALIDATOR](../implementation-decisions/IMPL-QUALITY_PSEUDOCODE_VALIDATOR.yaml)) | `layer-b-pseudocode-validator.v1` | Structural pseudo-code shape, token linkage, contract presence, dependency diagnostics | CFG, data-flow, runtime behavior, complete path coverage |
-| **Static analysis** — `pseudocode_analyze` | `pseudocode-analysis-report.v1` | Bounded static analysis within `pseudocode-grammar.v1` and declared budgets | Runtime execution, test execution, complete path coverage |
-| **Combined (sponsor opt-in)** | Both reports | Richer pre-RED signal when both are run | Substitute for `tied_validate_consistency` or human review |
+| **Layer C** — `pseudocode_analyze` (`gate_mode: true` at pre-RED gate) | `pseudocode-analysis-report.v1` | Bounded static analysis within [pseudocode-grammar.v1.md](pseudocode-grammar.v1.md) and declared budgets; strict pass/fail for gate | Runtime execution, test execution, complete path coverage |
+| **Profile opt-in** — `evidence_chain_profile_generate` with `invoke_pseudocode_analyze` | Parse-only structural row today | Bounded parse pass for profile scope | Full Layer C default pass list or gate_mode semantics |
 
-**v1 note:** `pseudocode_analyze` does **not** share a parser with `pseudocode_validate`; structural compat is an optional read-only summary flag, not a shared implementation.
+**Shared primitives:** Layer B and Layer C consume **`pseudocode-shared.ts`** scan helpers ([REQ-PSEUDOCODE_PARSER_UNIFICATION](../requirements/REQ-PSEUDOCODE_PARSER_UNIFICATION.yaml)). Optional `include_structural_compat` attaches a read-only Layer B summary — not a substitute for either gate.
 
 ### Pre-RED vs post-test
 
@@ -542,7 +550,7 @@ The same checklist file applies in two **invocation contexts** (no YAML profiles
 
 | Invocation | When | Layer A | Layer B scope | Gating |
 |------------|------|---------|---------------|--------|
-| `gate-pseudocode-validation` → `sub-pseudocode-validation-pass` | Before RED; no executable tests yet | Required (`TIED-POE-001`) | parsing, schema (including SHAPE-003..006), symbol_resolution, contract_validation, dependency_graph, reporting | Structural rows must pass; **behavioral_coverage** and **traceability** rows that require test artifacts → mark **N/A** with rationale ("no tests yet"), not ad-hoc waivers. Precision-contract rows: N/A only for `status Template`, or unchanged legacy Active blocks with rationale `pre-contract-grammar` |
+| `gate-pseudocode-validation` → `sub-pseudocode-validation-pass` then `sub-pseudocode-static-analysis-pass` | Before RED; no executable tests yet | Required (`TIED-POE-001`) | Layer B: parsing, schema (including SHAPE-003..006), symbol_resolution, contract_validation, dependency_graph, reporting; Layer C: full sidecar via `pseudocode_analyze` + `gate_mode: true` for changed IMPLs | Layer B structural rows must pass; **behavioral_coverage** and **traceability** rows that require test artifacts → **N/A** with rationale. Layer C: `ok: true`, `gate_mode_applied: true`, no error diagnostics; file-scoped — changed sidecar must pass as a whole |
 | `verification-gate` → `sub-pseudocode-validation-pass` | After unit/composition tests exist | Re-run if essence changed | Full checklist including **minimum_gating_rules** | All required rows + minimum gating rules must pass or be documented N/A with rationale. New/changed Active blocks may not use `pre-contract-grammar` |
 
 A pre-RED pass does **not** replace **[PROC-LEAP]** when pseudo-code changes alter REQ or ARCH scope.
@@ -590,7 +598,8 @@ Manual walk of checklist categories in order; document pass/fail/waived per item
 
 - **Layer A** — After any change to **`IMPL-*-pseudocode.md`** or merged essence; before commits affecting TIED.
 - **Layer B** — Pre-RED structural pass at `gate-pseudocode-validation` using `pseudocode_validate` plus the checklist; full pass at `verification-gate` when tests exist.
-- **Agent flow** — After authoring/updating pseudo-code and token comments: Layer A + pre-RED structural Layer B **before** RED tests (`gate-pseudocode-validation`).
+- **Layer C** — Mandatory static analysis gate at `gate-pseudocode-validation` for changed in-scope IMPLs; re-run at `verification-gate` only when `input_identity.hash` differs.
+- **Agent flow** — After authoring/updating pseudo-code and token comments: Layer A + Layer B + Layer C **before** RED tests (`gate-pseudocode-validation`).
 - **Post-fix** — Re-run Layer A after IMPL edits; full Layer B at verification-gate when tests exist.
 
 ---

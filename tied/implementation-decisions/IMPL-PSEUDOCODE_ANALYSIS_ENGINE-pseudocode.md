@@ -12,7 +12,7 @@ Contract:
   EFFECTS: pure
   TERMINATION: total
   DATA_TRANSITION: none
-  CONTROL: strict_paths and include_structural_compat are caller flags; analysis never mutates TIED YAML
+  CONTROL: strict_paths, gate_mode, and include_structural_compat are caller flags; analysis never mutates TIED YAML
 
 # [IMPL-PSEUDOCODE_ANALYSIS_ENGINE] [ARCH-PSEUDOCODE_ANALYSIS_PIPELINE] [REQ-PSEUDOCODE_STATIC_ANALYSIS]
 # How: Resolve and validate input without reading or writing project YAML beyond the requested sidecar body.
@@ -143,13 +143,14 @@ procedure ANALYZE_ESSENCE_PSEUDOCODE(input):
     INPUT: resolved source, token, pass list, budgets, flags
     OUTPUT: pseudocode-analysis-report.v1
     PRE: RESOLVE_ANALYSIS_INPUT succeeded
-    POST: diagnostics sorted stably; truncated and unknown disclosures accurate; no TIED mutation
+    POST: diagnostics sorted stably; truncated and unknown disclosures accurate; gate_mode_applied true when gate_mode requested; ok false when gate_mode and any error diagnostic or truncated; no TIED mutation
     FAILURE_MODES: inherited from sub-procedures
     EFFECTS: pure
     TERMINATION: total
   CALL RESOLVE_ANALYSIS_INPUT
   FOR each selected pass in order: parse, symbols, cfg, call_graph, abstract, obligations, traceability
   IF include_structural_compat: CALL validateEssencePseudocode read-only for optional section
+  IF gate_mode: SET gate_mode_applied; FAIL ok on error-severity diagnostics or truncated
   ASSEMBLE report with proof_boundary and analyzer_version
   SORT diagnostics and cap at max_report_diagnostics
   RETURN report

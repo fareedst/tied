@@ -50,6 +50,62 @@ describe("pseudocode-analyzer orchestrator [REQ-PSEUDOCODE_STATIC_ANALYSIS]", ()
     assert.equal(serializeAnalysisReport(report), serializeAnalysisReport(report));
   });
 
+  it("gate_mode: UNRESOLVED_CALL fails ok", () => {
+    // [IMPL-PSEUDOCODE_ANALYSIS_ENGINE] [ARCH-PSEUDOCODE_ANALYSIS_PIPELINE] [REQ-PSEUDOCODE_STATIC_ANALYSIS]
+    const source = `procedure MAIN:\n  Contract:\n    INPUT: x\n    OUTPUT: y\n    PRE: x\n    POST: y\n    EFFECTS: pure\n  CALL MISSING()\n  RETURN y`;
+    const report = analyzeEssencePseudocode({
+      token: "IMPL-PSEUDOCODE_ANALYSIS_ENGINE",
+      pseudocode: source,
+      gate_mode: true,
+    });
+    if (!("schema_version" in report)) return;
+    assert.equal(report.ok, false);
+    assert.equal(report.gate_mode_applied, true);
+    assert.ok(report.diagnostics.some((d) => d.code === "UNRESOLVED_CALL" && d.severity === "error"));
+  });
+
+  it("gate_mode: truncated report fails ok", () => {
+    // [IMPL-PSEUDOCODE_ANALYSIS_ENGINE] [ARCH-PSEUDOCODE_ANALYSIS_PIPELINE] [REQ-PSEUDOCODE_STATIC_ANALYSIS]
+    const source = `procedure MAIN:\n  Contract:\n    INPUT: x\n    OUTPUT: y\n    PRE: x\n    POST: y\n    EFFECTS: pure\n  IF x:\n    CALL HELPER()\n  IF y:\n    CALL HELPER()\n  RETURN y\nprocedure HELPER:\n  Contract:\n    INPUT: a\n    OUTPUT: b\n    PRE: a\n    POST: b\n    EFFECTS: pure\n  RETURN b`;
+    const report = analyzeEssencePseudocode({
+      token: "IMPL-PSEUDOCODE_ANALYSIS_ENGINE",
+      pseudocode: source,
+      gate_mode: true,
+      budgets: { max_parse_nodes: 2 },
+    });
+    if (!("schema_version" in report)) return;
+    assert.equal(report.truncated, true);
+    assert.equal(report.ok, false);
+    assert.equal(report.gate_mode_applied, true);
+  });
+
+  it("gate_mode: warning-only diagnostics pass ok", () => {
+    // [IMPL-PSEUDOCODE_ANALYSIS_ENGINE] [ARCH-PSEUDOCODE_ANALYSIS_PIPELINE] [REQ-PSEUDOCODE_STATIC_ANALYSIS]
+    const source = `# [IMPL-PSEUDOCODE_ANALYSIS_ENGINE]\nprocedure MAIN:\n  Contract:\n    INPUT: x\n    OUTPUT: y\n    PRE: x\n    POST: y\n    EFFECTS: pure\n  IF x:\n    RETURN y\n  RETURN y`;
+    const report = analyzeEssencePseudocode({
+      token: "IMPL-PSEUDOCODE_ANALYSIS_ENGINE",
+      pseudocode: source,
+      known_tokens: ["IMPL-PSEUDOCODE_ANALYSIS_ENGINE"],
+      gate_mode: true,
+    });
+    if (!("schema_version" in report)) return;
+    assert.equal(report.ok, true);
+    assert.equal(report.gate_mode_applied, true);
+    assert.ok(!report.diagnostics.some((d) => d.severity === "error"));
+  });
+
+  it("non-gate_mode: UNRESOLVED_CALL does not fail ok by default", () => {
+    // [IMPL-PSEUDOCODE_ANALYSIS_ENGINE] [ARCH-PSEUDOCODE_ANALYSIS_PIPELINE] [REQ-PSEUDOCODE_STATIC_ANALYSIS]
+    const source = `procedure MAIN:\n  Contract:\n    INPUT: x\n    OUTPUT: y\n    PRE: x\n    POST: y\n    EFFECTS: pure\n  CALL MISSING()\n  RETURN y`;
+    const report = analyzeEssencePseudocode({
+      token: "IMPL-PSEUDOCODE_ANALYSIS_ENGINE",
+      pseudocode: source,
+    });
+    if (!("schema_version" in report)) return;
+    assert.equal(report.ok, true);
+    assert.equal(report.gate_mode_applied, undefined);
+  });
+
   it("mutation: inverted branch changes obligations", () => {
     // [IMPL-PSEUDOCODE_ANALYSIS_ENGINE] [ARCH-PSEUDOCODE_ANALYSIS_PIPELINE] [REQ-PSEUDOCODE_STATIC_ANALYSIS]
     const base = `procedure MAIN:\n  Contract:\n    INPUT: x\n    OUTPUT: y\n    PRE: x\n    POST: y\n    EFFECTS: pure\n  IF x > 0:\n    RETURN y`;

@@ -464,6 +464,7 @@ steps:
         - "sub-adversarial-inquiry-pass"
         - "sub-evidence-chain-profile"
         - "sub-pseudocode-validation-pass"
+        - "sub-pseudocode-static-analysis-pass"
         - "sub-vocabulary-sync"
         - "sub-yaml-edit-loop"
       next: "sync-tied-stack"
@@ -480,6 +481,7 @@ steps:
     tasks:
       - "Build the full fidelity matrix with an executable evidence partition; CALL sub-adversarial-inquiry-pass with phase verification and profile-dependent blocking (strict-eligible only)."
       - "CALL sub-pseudocode-validation-pass: re-run full pseudo-code validation (Layer B including minimum_gating_rules) now that executable tests exist; document findings by category and severity. IF unresolved gaps THEN GOTO resolve-pseudocode or unit-test-red per findings."
+      - "CALL sub-pseudocode-static-analysis-pass when input_identity.hash differs from the pre-RED Layer C report for any changed in-scope IMPL; otherwise cite the existing report path in evidence_refs."
       - "Final three-way alignment audit: for every IMPL touched, verify pseudo-code/test/code same token set; document e2e_only blocks and e2e_only_reason."
       - "IF validateStrictEligibility fails THEN take the warn-only branch — never block on a new semantic rule; state which eligibility condition is unmet."
       - "Module validation per [REQ-MODULE_VALIDATION]: confirm each module validated independently; document results."
@@ -872,6 +874,7 @@ steps:
       calls:
         - "sub-adversarial-inquiry-pass"
         - "sub-pseudocode-validation-pass"
+        - "sub-pseudocode-static-analysis-pass"
       next: "persist-implementation-records"
     goals: "Ensure IMPL pseudo-code satisfies validation checklist before persisting or writing tests/code."
     outcomes: "Pseudo-code validation run; pre-RED structural gating satisfied; coverage/traceability rows documented N/A until verification-gate re-run after tests exist."
@@ -886,6 +889,7 @@ steps:
     tasks:
       - "CALL sub-adversarial-inquiry-pass with phase pre_implementation and blocking false; this pass makes no runtime claim — it only checks structural and contract completeness after depth selection."
       - "CALL sub-pseudocode-validation-pass. Run validation per [PROC-PSEUDOCODE_VALIDATION] using ./tied/docs/pseudocode-validation-checklist.yaml or ./docs/pseudocode-validation-checklist.yaml."
+      - "CALL sub-pseudocode-static-analysis-pass for each changed in-scope Active project IMPL listed in the per-request Tracker IMPL inventory. Submit the complete sidecar file per IMPL (file-scoped Layer C); pre-psa-grammar N/A cannot suppress errors inside that submitted file."
       - "Do not proceed to persist-implementation-records until pre-RED structural gating is satisfied (see pseudocode-writing-and-validation.md § Validation layers)."
       - "If no parser/tool: perform manual pass over checklist categories and document results."
       - "Pre-RED structural gate (before unit-test-red): satisfy parsing/schema (including SHAPE-003..006)/symbol/contract/graph/reporting checks applicable to IMPL-only pseudo-code; mark behavioral_coverage and traceability rows that require executable tests as N/A with rationale (no tests yet)—not ad-hoc waiver IDs."
@@ -894,7 +898,7 @@ steps:
       - "Run validation passes in recommended order; record findings with severity and source location."
     title: "Pseudo-code validation pass and gating before persist"
     tracking:
-      consideration_before_proceeding: "sub-pseudocode-validation-pass returned; pre-RED structural gate satisfied; test-dependent rows documented N/A if tests do not exist yet."
+      consideration_before_proceeding: "sub-pseudocode-validation-pass and sub-pseudocode-static-analysis-pass returned for changed in-scope IMPLs; pre-RED Layer B+C gates satisfied; test-dependent Layer B rows documented N/A if tests do not exist yet."
       retry_count: "0"
       returned_from: []
       state_history: []
@@ -1286,6 +1290,37 @@ sub_procedures:
     title: "Checklist-ordered passes until gating satisfied"
     tracking:
       consideration_before_proceeding: "Gating rules pass or waiver documented; RETURN to gate-pseudocode-validation."
+      retry_count: "0"
+      state_history: []
+      status: "pending"
+  - flow:
+      return_to: "caller"
+    goals: "Run mandatory Layer C static analysis with gate_mode for changed in-scope Active IMPL sidecars before RED tests (and re-run at verification when input_identity.hash differs)."
+    invoked_by:
+      - "gate-pseudocode-validation"
+      - "verification-gate"
+    outcomes: "pseudocode-analysis-report.v1 artifacts under working/{REQ-TOKEN}/pseudocode-analysis/ with ok true, gate_mode_applied true, and stable input_identity.hash until sidecar edits."
+    preconditions:
+      - "Phase 4 gate_mode engine shipped (pseudocode_analyze accepts gate_mode and sets gate_mode_applied)."
+      - "Changed IMPL set from per-request Tracker execution_evidence.impl_inventory (not git diff alone)."
+      - "Layer B sub-pseudocode-validation-pass completed or running in same gate-pseudocode-validation sequence before Layer C."
+    references:
+      - "tied/docs/pseudocode-static-analysis-checklist.yaml"
+      - "tied/docs/pseudocode-grammar.v1.md"
+      - "tied/docs/pseudocode-writing-and-validation.md#layer-c-static-analysis-gate"
+      - "tied/docs/processes.md § [PROC-PSEUDOCODE_VALIDATION]"
+    slug: "sub-pseudocode-static-analysis-pass"
+    tasks:
+      - "Load Layer C checklist from tied/docs/pseudocode-static-analysis-checklist.yaml."
+      - "For each changed in-scope Active project IMPL in Tracker impl_inventory, run pseudocode_analyze via tied-cli.sh with essence_pseudocode_path, gate_mode true, and known_tokens from scope."
+      - "Persist reports to working/{REQ-TOKEN}/pseudocode-analysis/{IMPL-TOKEN}.v1.json; record paths in gate step evidence_refs."
+      - "IF report ok is false OR gate_mode_applied is not true THEN fix sidecar grammar (procedure headings, CALL targets) or document explicit truncation waiver on gate-pseudocode-validation; repeat until gate passes for each changed IMPL."
+      - "Untouched Active IMPLs outside impl_inventory may use block-level N/A pre-psa-grammar until next edit; do not submit their sidecars in this pass."
+      - "When invoked from verification-gate, re-run only when input_identity.hash differs from the stored pre-RED report; otherwise cite existing artifact."
+      - "RETURN to caller when PSA-GATE-001..004 satisfied or waived per checklist."
+    title: "Layer C static analysis gate (gate_mode)"
+    tracking:
+      consideration_before_proceeding: "Layer C reports persisted with ok true and gate_mode_applied for each changed in-scope IMPL; RETURN to gate-pseudocode-validation or verification-gate."
       retry_count: "0"
       state_history: []
       status: "pending"

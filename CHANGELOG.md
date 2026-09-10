@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **PSA Layer C mandatory gate ([REQ-PSEUDOCODE_STATIC_ANALYSIS])** — `gate_mode` on `pseudocode_analyze` fails `ok` on error diagnostics and truncation; mandatory `sub-pseudocode-static-analysis-pass` at `gate-pseudocode-validation`; grammar v1 author guide and Layer C checklist; integrated close_out gate (`doc-psa-full-update-closeout-20260909`).
 - **PSA follow-up Mode A fidelity** — adversarial-inquiry-psa fixture; inquiry PASS reused via close-out waiver (`psa-fidelity-rerun-20260908`); follow-up gate `psa-followup-closeout-20260908`.
 - **Evidence-chain profile** — opt-in `invoke_pseudocode_analyze` flag (default off) with pilot evidence (path/identity refs); minimal close_out gate (`ecp-psa-analyze-closeout-20260908`).
 - **PSA CITDP LEAP** — shared-parser migration moved from non_goals to `follow_up_completed` under `REQ-PSEUDOCODE_PARSER_UNIFICATION`.

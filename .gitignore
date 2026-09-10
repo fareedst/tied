@@ -30,6 +30,20 @@ working/**/adversarial-inquiry/
 working/**/gate-*.json
 # Gate receipts and activation collect outputs (regenerate per close-out run)
 working/**/gates/
+# Close-out operator scratch (regenerate per plan-close-out / tied_verify run)
+working/**/gate-ledger.jsonl
+working/**/citdp-doc-*.json
+working/**/citdp-write-payload.json
+working/**/doc-*-checklist.yaml
+working/**/pre_implementation-*.json
+# Build-plan change-ID scratch (tracker, CITDP, gate receipts, remediation — regenerate per build-plan)
+working/DOC-*/
+# Layer C pseudo-code static analysis gate reports (regenerate per gate run)
+working/**/pseudocode-analysis/
+# Integrated activation collect receipts (regenerate per phase gate; distinct from gate-*.json)
+working/**/activation-*.json
+# Scoped remediation logs from static-analysis / grammar close-out (regenerate per build)
+working/**/*-remediation-log.yaml
 # tied_verify dry-run and apply receipts (regenerate per verification gate)
 working/**/tied-verify-*.json
 working/**/g*-dogfood/

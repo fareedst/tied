@@ -1200,14 +1200,17 @@ Active
    - **verification-gate** (post-test): full Layer B including **minimum_gating_rules** once executable tests exist.
 5. Treat **required** checks as **gating** for the active context; document N/A rows with rationale—do not ad-hoc waive.
 6. If no parser or tool exists, perform a manual pass over the checklist categories and document results.
+7. **Layer C (static analysis gate):** At `gate-pseudocode-validation`, after Layer B, invoke `sub-pseudocode-static-analysis-pass` for each **changed in-scope Active project IMPL** in the per-request Tracker IMPL inventory. Run `pseudocode_analyze` with `gate_mode: true` on the complete sidecar; persist reports under `working/{REQ-TOKEN}/pseudocode-analysis/{IMPL-TOKEN}.v1.json`. Require `ok: true` and `gate_mode_applied: true`. Re-run at `verification-gate` only when `input_identity.hash` differs. Evidence-chain `invoke_pseudocode_analyze` remains parse-only and is not the mandatory gate path.
 
 ### Artifacts & Metrics
-- **Artifacts**: Validation report (findings by category, severity, location); N/A log for pre-RED test-dependent rows; optional waiver log only when policy allows explicit waiver (prefer N/A with rationale pre-RED).
-- **Success Metrics**: Pre-RED structural gate satisfied before persist; full minimum_gating_rules satisfied at verification-gate; diagnostics include source locations where available.
+- **Artifacts**: Layer B validation report (findings by category, severity, location); N/A log for pre-RED test-dependent rows; Layer C `pseudocode-analysis-report.v1` JSON per changed IMPL; optional waiver log only when policy allows explicit waiver (prefer N/A with rationale pre-RED).
+- **Success Metrics**: Pre-RED Layer B structural gate and Layer C gate satisfied before persist; full Layer B minimum_gating_rules satisfied at verification-gate; Layer C artifacts current or hash-stable; diagnostics include source locations where available.
 
 ### Procedure and checklist documents
-- `tied/docs/pseudocode-writing-and-validation.md` — how to write and validate; pre-RED vs post-test contexts; minimum gating rules.
-- `tied/docs/pseudocode-validation-checklist.yaml` — canonical checklist (categories, required/optional checks, recommended order, minimum_gating_rules; tailoring.notes for project extensions).
+- `tied/docs/pseudocode-writing-and-validation.md` — how to write and validate; three layers; pre-RED vs post-test contexts; minimum gating rules.
+- `tied/docs/pseudocode-validation-checklist.yaml` — Layer B canonical checklist.
+- `tied/docs/pseudocode-static-analysis-checklist.yaml` — Layer C gate checklist (`gate_mode`, PSA-GATE-001..004).
+- `tied/docs/pseudocode-grammar.v1.md` — author grammar for Layer C parser subset.
 
 ---
 

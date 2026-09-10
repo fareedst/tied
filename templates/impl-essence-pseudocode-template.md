@@ -42,9 +42,15 @@
   - EFFECTS: {pure | IO | Http | State | Async | DB | Exn | Random | Diverge | …}
   - TERMINATION: {total | may_diverge with justification — prefer total; required when recursion/WHILE/open wait}
   - CONTROL: {optional: env, feature flags, ordering constraints}
-- PROCEDURE: UPPER_SNAKE_NAME
-  - 1. {One action.}
-  - 2. {One action.}
+procedure UPPER_SNAKE_NAME:
+  # [IMPL-{TOKEN}] [ARCH-{TOKEN}] [REQ-{TOKEN}] How: {one-line summary}
+  Contract:
+    INPUT: {inputs}
+    OUTPUT: {outputs}
+    PRE: {preconditions}
+    POST: {postconditions}
+    EFFECTS: pure
+  {One action step per line — CALL OTHER(...), IF/ELSE, RETURN, etc.}
 - IF {condition} THEN
   - {sub-steps}
 - ELSE
