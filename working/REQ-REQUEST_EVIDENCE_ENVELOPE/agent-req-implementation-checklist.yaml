@@ -24,7 +24,7 @@ execution_evidence:
     deferred:
       - "Slice 5: backfill pilot on /dev/test/1788547701 and /dev/test/1787603099; flip corpus rows to require_envelope after pilot"
     slice4:
-      commit: "48cdd1f"
+      commit: "a9db8a2"
       completed_at: "2026-09-10"
       report: "working/evaluation/envelope-gap-report.v1.yaml"
       tools:
