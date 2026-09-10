@@ -16,15 +16,15 @@ entry_points:
 execution_evidence:
   close_out_evidence:
     commit:
-      hash: "48cdd1fe22de7f2bbe6b0264670fe5e67c904c0e"
-      short: "48cdd1f"
+      hash: "a9db8a23423d9cbc760c51ccddb3773550067d1f"
+      short: "a9db8a2"
       message: "feat(tied): add request evidence envelope Slice 4 batch collect"
       prior_slices_commit: "1f4ee7bdc62e74b531662a180c0a702951a7ae4d"
     date: "2026-09-10"
     deferred:
       - "Slice 5: backfill pilot on /dev/test/1788547701 and /dev/test/1787603099; flip corpus rows to require_envelope after pilot"
     slice4:
-      commit: "509c01a"
+      commit: "48cdd1f"
       completed_at: "2026-09-10"
       report: "working/evaluation/envelope-gap-report.v1.yaml"
       tools:
