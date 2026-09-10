@@ -16,8 +16,8 @@ entry_points:
 execution_evidence:
   close_out_evidence:
     commit:
-      hash: "7a9e83ab4ceca14796cd463abe7d21e6fad2419f"
-      short: "7a9e83a"
+      hash: "1a656ee134a98332d4c5029fc5089ceac0899664"
+      short: "1a656ee"
       message: "feat(analysis): add constraint-language pass and grammar v2 close-out"
     date: "2026-09-10"
     deferred: []

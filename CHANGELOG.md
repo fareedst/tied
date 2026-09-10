@@ -51,6 +51,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `gate_mode && typed_flow && constraint_flow`; explicit `false` opts out;
   sponsor approved 2026-09-10.
 
+- **REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE plan-close-out** — Tracker reconciled to
+  committed state (`1a656ee`); formal close-out complete; integrated `close_out`
+  gate revalidated (`cl-closeout-20260910`).
+
 - **`.gitignore`** — constraint-language qualification per-entry sweep patterns
   and token-payloads; ignore TypeScript `*.tsbuildinfo`, typed-flow qualification
   baseline per-entry reports, pilot/snapshots dirs, ephemeral
