@@ -9,22 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **Request evidence envelope Slice 4 batch collect ([REQ-REQUEST_EVIDENCE_ENVELOPE], [IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH])** —
-  `request_evidence_envelope_batch_collect` MCP tool and CLI; `batch-collect.ts`
-  emits `envelope-gap-report.v1.yaml` with per-kind denominators and no score
-  field; evaluation-corpus row extension (`legacy_infer` / `require_envelope`);
-  10/10 batch tests; 679/679 mcp-server tests; integrated gates revalidated
-  (`ree-*-20260910`, advisory). Operator report at
-  `working/evaluation/envelope-gap-report.v1.yaml` (gitignored). **Deferred:**
-  Slice 5 backfill CLI and `/dev/test/*` pilot.
-
-- **Request evidence envelope Slices 0–3 ([REQ-REQUEST_EVIDENCE_ENVELOPE])** — Per-REQ
-  `request-evidence-envelope.v1.json` machine index with read-only
-  `request_evidence_envelope_build` / `validate` MCP tools, producer hooks
-  (`TIED_ENVELOPE_HOOKS=1`), agentstream dual-write and typed `evidence_refs`;
-  TIED stack REQ/ARCH/IMPL + vocabulary; 17/17 envelope tests; integrated
-  `pre_implementation`, `verification`, and `close_out` gates
-  (`ree-*-20260910`, advisory).
+- **Request evidence envelope Slices 0–5 complete ([REQ-REQUEST_EVIDENCE_ENVELOPE])** —
+  Per-REQ `request-evidence-envelope.v1.json` machine index with read-only
+  `request_evidence_envelope_build` / `validate`, producer hooks
+  (`TIED_ENVELOPE_HOOKS=1`), agentstream dual-write, typed `evidence_refs`,
+  `request_evidence_envelope_batch_collect` (gap report, no score field),
+  and `request_evidence_envelope_backfill` MCP+CLI for legacy timestamp repos;
+  operator guide at `tied/docs/request-evidence-envelope.md`; evaluation-corpus
+  `/dev/test/*` rows flipped to `require_envelope`; pilots on 1788547701
+  (minimal, zero gaps) and 1787603099 (integrated, gap codes documented);
+  35/35 envelope tests; integrated gates revalidated (`ree-*-20260910`,
+  advisory). Operator report at `working/evaluation/envelope-gap-report.v1.yaml`
+  (gitignored).
 
 - **Gitignore close-out hygiene ([REQ-PROMPT_TYPE_GLOBAL_SKILLS], [PROC-GITIGNORE_CLOSE_OUT])** — Advisory close-out step in `tied-close-out-process.md` and checklist slug `gitignore-close-out-hygiene` (before `traceable-commit`); shared reference `gitignore-close-out-hygiene.md`; plan-close-out handoff bullet for patterns proposed/applied unstaged or explicit N/A.
 
@@ -63,10 +59,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   revalidated (`tf-closeout-20260910`).
 
 ### Deferred
-
-- **REQ-REQUEST_EVIDENCE_ENVELOPE Slice 5** — backfill CLI and pilot on
-  `/dev/test/1788547701` and `/dev/test/1787603099`; flip evaluation-corpus
-  rows to `require_envelope` after backfill pilot.
 
 - **Phase C3 (validator consumes parser IR)** — deferred to a separate future C3 plan; close-out records the handoff only.
 

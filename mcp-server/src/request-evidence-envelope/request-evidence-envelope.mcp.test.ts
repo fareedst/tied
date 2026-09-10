@@ -24,6 +24,7 @@ describe("request_evidence_envelope MCP tools [REQ-REQUEST_EVIDENCE_ENVELOPE]", 
     assert.ok(allTools.some((tool) => tool.name === "request_evidence_envelope_build"));
     assert.ok(allTools.some((tool) => tool.name === "request_evidence_envelope_validate"));
     assert.ok(allTools.some((tool) => tool.name === "request_evidence_envelope_batch_collect"));
+    assert.ok(allTools.some((tool) => tool.name === "request_evidence_envelope_backfill"));
   });
 
   it("build returns envelope JSON read-only", async () => {

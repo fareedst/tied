@@ -248,8 +248,12 @@ export function loadRowsFromEvaluationCorpus(corpusPath: string, projectRoot: st
         : notes.includes("/dev/test/") || clientAlias.match(/^\d+$/)
           ? DEFAULT_REQUIRE_MODE
           : DEFAULT_REQUIRE_MODE;
+    const rowProjectRoot =
+      typeof project.project_root === "string" && project.project_root.trim()
+        ? project.project_root
+        : projectRoot;
     rows.push({
-      project_root: projectRoot,
+      project_root: rowProjectRoot,
       request_token: requestToken,
       client_alias: clientAlias,
       envelope_require_mode: requireMode,
@@ -257,6 +261,10 @@ export function loadRowsFromEvaluationCorpus(corpusPath: string, projectRoot: st
         typeof project.envelope_artifact === "string"
           ? project.envelope_artifact
           : defaultEnvelopeArtifact(requestToken),
+      tied_base_path:
+        typeof project.tied_base_path === "string"
+          ? project.tied_base_path
+          : path.join(path.resolve(rowProjectRoot), "tied"),
     });
   }
   return rows;

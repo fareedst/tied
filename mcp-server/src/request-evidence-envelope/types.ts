@@ -133,3 +133,28 @@ export type PatchRequestEvidenceEnvelopeInput = {
 export type PatchRequestEvidenceEnvelopeResult =
   | { ok: true; envelope: RequestEvidenceEnvelope; revision: number; envelope_path: string }
   | { ok: false; gaps: EnvelopeGap[]; error?: string };
+
+export type BackfillRequestEvidenceEnvelopeInput = {
+  request_token: string;
+  project_root: string;
+  tied_base_path: string;
+  confirmed_tied_base_path: string;
+  depth_tier?: DepthTier;
+  gate_policy?: string;
+  write_not_applicable_receipts?: boolean;
+  generated_at?: string;
+};
+
+export type BackfillRequestEvidenceEnvelopeResult =
+  | {
+      ok: true;
+      envelope: RequestEvidenceEnvelope;
+      envelope_path: string;
+      not_applicable_receipt_path: string | null;
+      not_applicable_receipt_hash: string | null;
+      depth_tier: DepthTier;
+      gaps_summary: Record<string, number>;
+      gap_codes: string[];
+      legacy_json_in_json_wrapper: boolean;
+    }
+  | { ok: false; stage: string; error: string };

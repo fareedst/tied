@@ -125,6 +125,7 @@ import { persistGateDecisionReceipt } from "../gate-receipt.js";
 import { runClaimsEvidenceReviewMcp } from "../claims-evidence-review/mcp-handler.js";
 import { collectChecklistActivation } from "../checklist-activation-collect.js";
 import { collectEnvelopeGapReport } from "../request-evidence-envelope/batch-collect.js";
+import { backfillRequestEvidenceEnvelope } from "../request-evidence-envelope/backfill.js";
 import { buildRequestEvidenceEnvelope } from "../request-evidence-envelope/build.js";
 import { patchRequestEvidenceEnvelope } from "../request-evidence-envelope/patch.js";
 import { validateRequestEvidenceEnvelope } from "../request-evidence-envelope/validate.js";
@@ -2808,6 +2809,48 @@ export const allTools = [
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
         return textContent(JSON.stringify({ ok: false, gaps: [], error: msg }, null, 2));
+      }
+    },
+  },
+  {
+    name: "request_evidence_envelope_backfill",
+    config: {
+      description:
+        "Backfill request-evidence-envelope.v1.json for legacy timestamp client repos; writes not-applicable-receipt.v1.json stubs at minimal depth when inferable from CITDP.",
+      inputSchema: z.object({
+        request_token: z.string().min(1),
+        project_root: z.string().optional(),
+        tied_base_path: z.string().optional(),
+        depth_tier: z.enum(["minimal", "integrated", "strict_candidate"]).optional(),
+        gate_policy: z.string().optional(),
+        write_not_applicable_receipts: z.boolean().optional(),
+      }),
+    },
+    handler: async (args: {
+      request_token: string;
+      project_root?: string;
+      tied_base_path?: string;
+      depth_tier?: "minimal" | "integrated" | "strict_candidate";
+      gate_policy?: string;
+      write_not_applicable_receipts?: boolean;
+    }) => {
+      try {
+        const confirmed = getBasePath();
+        const projectRoot = args.project_root ?? path.resolve(confirmed, "..");
+        const tiedBasePath = args.tied_base_path ?? path.join(projectRoot, "tied");
+        const result = await backfillRequestEvidenceEnvelope({
+          request_token: args.request_token,
+          project_root: projectRoot,
+          tied_base_path: tiedBasePath,
+          confirmed_tied_base_path: tiedBasePath,
+          depth_tier: args.depth_tier,
+          gate_policy: args.gate_policy,
+          write_not_applicable_receipts: args.write_not_applicable_receipts,
+        });
+        return textContent(JSON.stringify(result, null, 2));
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : String(e);
+        return textContent(JSON.stringify({ ok: false, stage: "backfill", error: msg }, null, 2));
       }
     },
   },

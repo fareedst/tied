@@ -27,19 +27,17 @@ CITDP-REQ-REQUEST_EVIDENCE_ENVELOPE:
         - "close_out"
         - "pre_implementation"
         - "verification"
-    deferred_slices:
-      - id: "slice5-backfill"
-        rationale: "Backfill CLI and pilot on /dev/test/* timestamp repos; flip corpus rows to require_envelope after pilot."
-    verification_gate_notes: "27/27 envelope tests (17 core + 10 batch); 679/679 mcp-server tests; go test ./tools/agentstream/... pass; request_evidence_envelope_batch_collect MCP+CLI; dogfood envelope-gap-report at working/evaluation/envelope-gap-report.v1.yaml (gitignored operator dir)."
+    verification_gate_notes: "Slice 5 complete: request_evidence_envelope_backfill MCP+CLI; pilot on /dev/test/1788547701 and /dev/test/1787603099; evaluation-corpus rows flipped to require_envelope; envelope tests green."
   evidence:
     commands:
       - "go test ./tools/agentstream/... (pass)"
-      - "node --test dist/request-evidence-envelope/*.test.js (27/27 pass)"
+      - "node --test dist/request-evidence-envelope/*.test.js (35/35 pass)"
       - "node working/REQ-REQUEST_EVIDENCE_ENVELOPE/run-close-out-gates.mjs"
       - "npm run request-evidence-envelope-batch-collect -- --corpus ../working/evaluation/evaluation-corpus.v1.yaml --yaml-out ../working/evaluation/envelope-gap-report.v1.yaml"
-      - "npm test --prefix mcp-server (679/679 pass)"
+      - "npm run request-evidence-envelope-backfill -- --project-root PATH --request-token REQ-TOKEN"
+      - "npm test --prefix mcp-server"
     proof_boundaries:
-      - "Backfill CLI and require_envelope corpus flip deferred to Slice 5"
+      - "Backfill writes envelope and optional not-applicable receipt only; inner artifacts unchanged"
       - "Batch gap report is read-only toward inner artifacts; writes envelope-gap-report.v1.yaml only"
       - "Envelope indexes working-folder artifacts; does not mutate inner schemas or project YAML"
   execution_evidence:
@@ -49,6 +47,14 @@ CITDP-REQ-REQUEST_EVIDENCE_ENVELOPE:
       impl_token: "IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH"
       tools:
         - "request_evidence_envelope_batch_collect (MCP + CLI)"
+    slice5:
+      backfill_tool: "request_evidence_envelope_backfill (MCP + CLI)"
+      pilot_clients:
+        - client_alias: "1788547701"
+          request_token: "REQ-BT_BATTERY_DISPLAY"
+        - client_alias: "1787603099"
+          request_token: "REQ-LISTENING_PORT_REPORT"
+      operator_doc: "tied/docs/request-evidence-envelope.md"
   impact_analysis:
     modules_or_boundaries: "mcp-server request-evidence-envelope package; tied-stack; quality-assurance vocabulary"
     tied_tokens_affected:
@@ -61,9 +67,10 @@ CITDP-REQ-REQUEST_EVIDENCE_ENVELOPE:
       - "IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH"
       - "REQ-REQUEST_EVIDENCE_ENVELOPE"
   leap_feedback:
-    divergences_from_analysis: "none — Slice 4 batch collect matches IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH sidecar; Slice 5 deferred per plan"
-    record_status: "partial"
+    divergences_from_analysis: "none — Slice 5 backfill matches IMPL BACKFILL block; corpus require_envelope flip per sponsor decision"
+    record_status: "final"
     slice4_completed: "2026-09-10"
+    slice5_completed: "2026-09-10"
     tied_stack_updates_required: []
   record_identity:
     change_request_id: "REQ-REQUEST_EVIDENCE_ENVELOPE"
@@ -81,10 +88,10 @@ CITDP-REQ-REQUEST_EVIDENCE_ENVELOPE:
   risk_analysis:
     adversarial_inquiry:
       close_out_inquiry_waiver:
-        approval: "ree-closeout-partial-20260910"
+        approval: "ree-closeout-final-20260910"
         expiry: "2026-12-31"
         owner: "REQ-REQUEST_EVIDENCE_ENVELOPE"
-        rationale: "Slice 4 batch collect close-out reuses verification inquiry artifacts; Slice 5 backfill deferred."
+        rationale: "Final close-out reuses verification inquiry artifacts; Slice 5 backfill complete."
         referenced_verification_run_id: "ree-verify-20260910"
       counterexamples:
         - "Batch report emits maturity or ranking fields (RISK-004)"
@@ -129,6 +136,7 @@ CITDP-REQ-REQUEST_EVIDENCE_ENVELOPE:
       - "Unit schema and gap classification"
     slices:
       - "agentstream"
+      - "backfill-pilot"
       - "batch-collect"
       - "producer-hooks"
       - "schema-builder"

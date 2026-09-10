@@ -165,6 +165,30 @@
   - 4. Emit not_applicable_receipt_missing for minimal depth silent slots
   - 5. Sort gaps[] deterministically by code, phase, artifact_kind
 
+## BACKFILL_REQUEST_EVIDENCE_ENVELOPE
+
+- [IMPL-REQUEST_EVIDENCE_ENVELOPE] [ARCH-REQUEST_EVIDENCE_ENVELOPE] [REQ-REQUEST_EVIDENCE_ENVELOPE] Legacy migration write path for timestamp client repos without producer hooks.
+- Contract:
+  - INPUT: backfill args including request_token, project_root, tied_base_path, optional depth_tier override, write_not_applicable_receipts default true
+  - PRE: TIED base path confirmation; working/{REQ-TOKEN}/ exists
+  - OUTPUT: { ok: true, envelope_path, not_applicable_receipt_path?, gaps_summary } | { ok: false, stage, error }
+  - POST:
+    - success => envelope written at working/{REQ-TOKEN}/evidence/request-evidence-envelope.v1.json with envelope_meta.generator request_evidence_envelope_backfill
+    - minimal depth => not-applicable-receipt.v1.json stub when inquiry slots absent and CITDP/checklist depth_tier is minimal
+    - legacy citdp-closeout.json => legacy_json_in_json_wrapper gap; cross_links.citdp_path points to flat YAML
+  - FAILURE_MODES: WrongTiedBasePath, WorkingFolderMissing, EnvelopeValidationFailed
+  - DATA_TRANSITION: writes envelope and optional not-applicable receipt only; inner producer artifacts unchanged
+  - EFFECTS: IO write envelope + optional receipt
+  - TERMINATION: total
+- PROCEDURE: BACKFILL_REQUEST_EVIDENCE_ENVELOPE
+  - 1. CALL RESOLVE_DEPTH_TIER_FROM_CITDP (override wins)
+  - 2. IF minimal AND write_not_applicable_receipts THEN CALL WRITE_NOT_APPLICABLE_RECEIPT_STUBS
+  - 3. CALL BUILD_REQUEST_EVIDENCE_ENVELOPE with output_mode file
+  - 4. Set envelope_meta.generator to request_evidence_envelope_backfill; prefer flat citdp_path in cross_links
+  - 5. CALL VALIDATE_REQUEST_EVIDENCE_ENVELOPE on written path
+  - 6. RETURN gaps_summary and gap_codes for operator batch registration
+- How (sub-block, same token set): Read-only toward inner artifacts; backfill is the lawful bootstrap for pre-hook timestamp repos (Slice 5).
+
 ## NORMALIZE_ENVELOPE_JSON
 
 - [IMPL-REQUEST_EVIDENCE_ENVELOPE] [ARCH-REQUEST_EVIDENCE_ENVELOPE] [REQ-REQUEST_EVIDENCE_ENVELOPE] Deterministic JSON bytes for same project tree inputs.

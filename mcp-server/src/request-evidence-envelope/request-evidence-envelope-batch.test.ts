@@ -16,7 +16,6 @@ import {
   loadRowsFromEvaluationCorpus,
   type EnvelopeGapReport,
 } from "./batch-collect.js";
-import { buildRequestEvidenceEnvelope } from "./build.js";
 import { serializeEnvelope } from "./normalize.js";
 import type { RequestEvidenceEnvelope } from "./types.js";
 import { ENVELOPE_SCHEMA_VERSION } from "./types.js";
@@ -281,7 +280,32 @@ describe("request evidence envelope batch collect [IMPL-REQUEST_EVIDENCE_ENVELOP
     const corpusPath = path.join(REPO_ROOT, "working/evaluation/evaluation-corpus.v1.yaml");
     const rows = loadRowsFromEvaluationCorpus(corpusPath, REPO_ROOT);
     assert.ok(rows.some((row) => row.request_token === "REQ-REQUEST_EVIDENCE_ENVELOPE"));
+    assert.ok(rows.some((row) => row.client_alias === "1788547701"));
+    assert.ok(rows.some((row) => row.client_alias === "1787603099"));
     assert.ok(rows.every((row) => row.envelope_require_mode === "legacy_infer" || row.envelope_require_mode === "require_envelope"));
+  });
+
+  it("preserves per-row project_root from evaluation corpus", () => {
+    const tempRoot = mkdtempSync(path.join(os.tmpdir(), "ree-batch-corpus-root-"));
+    const corpusPath = path.join(tempRoot, "evaluation-corpus.v1.yaml");
+    writeFileSync(
+      corpusPath,
+      yaml.dump({
+        schema_version: "evaluation-corpus.v1",
+        projects: [
+          {
+            client_alias: "1788547701",
+            request_token: "REQ-BT_BATTERY_DISPLAY",
+            project_root: "/Users/fareed/Documents/dev/test/1788547701",
+            envelope_require_mode: "require_envelope",
+          },
+        ],
+      }),
+      "utf8",
+    );
+    const rows = loadRowsFromEvaluationCorpus(corpusPath, REPO_ROOT);
+    assert.equal(rows[0]?.project_root, "/Users/fareed/Documents/dev/test/1788547701");
+    assert.equal(rows[0]?.envelope_require_mode, "require_envelope");
   });
 
   it("strips absolute paths in shareable_hashed mode", async () => {
@@ -336,7 +360,7 @@ describe("request evidence envelope batch collect [IMPL-REQUEST_EVIDENCE_ENVELOP
     assert.ok(result.report.rows.some((row) => row.request_token === "REQ-REQUEST_EVIDENCE_ENVELOPE"));
   });
 
-  it("optional integration: external 1787603099 legacy_infer scan", async () => {
+  it("optional integration: external 1787603099 batch row after backfill", async () => {
     const projectRoot = EXTERNAL_FIXTURE;
     try {
       readFileSync(path.join(projectRoot, "working", REQUEST_TOKEN, "agent-req-implementation-checklist.yaml"));
@@ -344,21 +368,21 @@ describe("request evidence envelope batch collect [IMPL-REQUEST_EVIDENCE_ENVELOP
       return;
     }
     const tempRoot = mkdtempSync(path.join(os.tmpdir(), "ree-batch-external-"));
-    const build = await buildRequestEvidenceEnvelope({
-      request_token: REQUEST_TOKEN,
-      project_root: projectRoot,
-      tied_base_path: path.join(projectRoot, "tied"),
-      confirmed_tied_base_path: path.join(projectRoot, "tied"),
-      generated_at: GENERATED_AT,
-    });
-    assert.equal(build.ok, true);
+    const envelopePath = path.join(
+      projectRoot,
+      "working",
+      REQUEST_TOKEN,
+      "evidence",
+      "request-evidence-envelope.v1.json",
+    );
+    const hasEnvelope = existsSync(envelopePath);
     const result = await collectEnvelopeGapReport({
       rows: [
         {
           project_root: projectRoot,
           request_token: REQUEST_TOKEN,
           client_alias: "1787603099",
-          envelope_require_mode: "legacy_infer",
+          envelope_require_mode: hasEnvelope ? "require_envelope" : "legacy_infer",
           tied_base_path: path.join(projectRoot, "tied"),
         },
       ],
@@ -368,6 +392,9 @@ describe("request evidence envelope batch collect [IMPL-REQUEST_EVIDENCE_ENVELOP
     });
     assert.equal(result.ok, true);
     if (!result.ok) return;
-    assert.equal(result.report.rows[0]?.envelope_source, "legacy_inferred");
+    assert.equal(
+      result.report.rows[0]?.envelope_source,
+      hasEnvelope ? "envelope_file" : "legacy_inferred",
+    );
   });
 });
