@@ -2177,6 +2177,12 @@ export const allTools = [
           .describe(
             "When true, run typed-flow analysis after abstract pass and emit sections.typed_flow. Default false preserves legacy report shape.",
           ),
+        typed_gate_errors: z
+          .boolean()
+          .optional()
+          .describe(
+            "When gate_mode and typed_flow are true, promote proven typed violations on annotated procedures to error-severity gate diagnostics. Defaults to true; set false for warnings-only typed diagnostics.",
+          ),
       }),
     },
     handler: async (args: {
@@ -2190,6 +2196,7 @@ export const allTools = [
       strict_paths?: boolean;
       gate_mode?: boolean;
       typed_flow?: boolean;
+      typed_gate_errors?: boolean;
     }) => {
       const hasInline = typeof args.pseudocode === "string" && args.pseudocode.length > 0;
       const hasPath = typeof args.essence_pseudocode_path === "string" && args.essence_pseudocode_path.length > 0;
@@ -2237,6 +2244,7 @@ export const allTools = [
         strict_paths: args.strict_paths,
         gate_mode: args.gate_mode,
         typed_flow: args.typed_flow,
+        typed_gate_errors: args.typed_gate_errors,
       });
       return textContent(JSON.stringify(report, null, 2));
     },

@@ -1,0 +1,15 @@
+{
+  "run_at": "2026-09-10T15:27:43.009Z",
+  "mode": "phase3",
+  "typed_flow": true,
+  "typed_gate_errors": true,
+  "gate_mode": true,
+  "total": 124,
+  "parse_ok": 124,
+  "gate_pass": 96,
+  "r1_regression_typed_flow_false_unchanged": 124,
+  "r2_prose_only_new_gate_failures": [],
+  "new_gate_failures_vs_pilot": [],
+  "new_gate_failures_annotated": [],
+  "failures": []
+}

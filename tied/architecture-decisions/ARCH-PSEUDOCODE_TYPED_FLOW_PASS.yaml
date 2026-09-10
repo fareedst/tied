@@ -1,5 +1,5 @@
 ARCH-PSEUDOCODE_TYPED_FLOW_PASS:
-  description: "Architectural boundary for bounded intraprocedural typed-flow: expression parser, typed IR lattice, CFG transfer/join, CALL arg slot matching, and report section emission behind typed_flow opt-in."
+  description: "Architectural boundary for bounded intraprocedural typed-flow: expression parser, typed IR lattice, CFG transfer/join, CALL arg slot matching, and report section emission behind typed_flow opt-in. Phase 3 severity promotion policy: proven TYPE_MISMATCH/NULL_FLOW/SHAPE_MISMATCH/CALL_TYPE_MISMATCH/JOIN_INCOMPATIBLE promote to error on annotated procedures when gate_mode && typed_flow && typed_gate_errors; prose-only guard and opaque/unsupported codes remain non-gating; rollout sub-phases 3a opt-in through 3d default flip sponsor-gated."
   status: "Active"
   traceability:
     code_annotations:

@@ -6,6 +6,7 @@ import type { ManifestEntry } from "./manifest.ts";
 export type AnalyzerSweepOptions = {
   gate_mode: boolean;
   typed_flow?: boolean;
+  typed_gate_errors?: boolean;
 };
 
 export type SweepResult = {
@@ -46,6 +47,9 @@ export async function analyzeSidecarEntry(
   };
   if (options.typed_flow === true) {
     input.typed_flow = true;
+  }
+  if (options.typed_gate_errors === true) {
+    input.typed_gate_errors = true;
   }
 
   const report = analyzeEssencePseudocode(

@@ -12,7 +12,7 @@
   - EFFECTS: pure
   - TERMINATION: total
   - DATA_TRANSITION: none
-  - CONTROL: gate_mode applies to legacy diagnostics only during pilot; typed diagnostics are warnings until Phase 3 sponsor approval
+  - CONTROL: gate_mode applies to legacy diagnostics always; typed diagnostics promote to error only when typed_gate_errors true on annotated procedures (Phase 3 sub-phase 3a–3c)
 
 procedure TYPED_FLOW_CONTROLS:
   # [IMPL-PSEUDOCODE_TYPED_FLOW] [ARCH-PSEUDOCODE_TYPED_FLOW_PASS] [REQ-PSEUDOCODE_TYPED_FLOW] How: Skip typed pass entirely unless caller sets typed_flow true.
@@ -142,7 +142,7 @@ procedure EMIT_TYPED_DIAGNOSTICS(findings):
     INPUT: finding list with spans
     OUTPUT: diagnostics[] sorted stably
     PRE: typed_flow pass completed or partial with unknowns
-    POST: severity warning until Phase 3; never mutates TIED YAML
+    POST: severity warning by default; PROMOTE_TYPED_DIAGNOSTIC_SEVERITY may raise gating codes to error on annotated procedures when typed_gate_errors true; never mutates TIED YAML
     DATA_TRANSITION: none
     EFFECTS: pure
     TERMINATION: total
@@ -171,7 +171,7 @@ procedure ANALYZE_ESSENCE_PSEUDOCODE_TYPED(input):
     INPUT: standard analyze input plus typed_flow flag
     OUTPUT: pseudocode-analysis-report.v1
     PRE: inherited ANALYZE_ESSENCE_PSEUDOCODE preconditions
-    POST: when typed_flow false, identical to legacy orchestrator; when true, sections.typed_flow present; gate_mode does not fail ok on typed warnings during pilot
+    POST: when typed_flow false, identical to legacy orchestrator; when true, sections.typed_flow present; gate_mode fails ok on promoted typed errors when typed_gate_errors true on annotated procedures
     FAILURE_MODES: inherited
     EFFECTS: pure
     TERMINATION: total
@@ -222,3 +222,65 @@ procedure QUALIFY_AGAINST_MANIFEST(manifest):
   CALL run-baseline.ts with gate_mode true typed_flow false
   CALL run-pilot.ts with typed_flow true and regression false pass
   CALL compare-reports.ts for threshold checks
+
+## Phase 3 — scoped typed gate errors (3d default flip sponsor-approved 2026-09-10)
+
+procedure TYPED_GATE_ERRORS_FLAG:
+  # [IMPL-PSEUDOCODE_TYPED_FLOW] [ARCH-PSEUDOCODE_TYPED_FLOW_PASS] [REQ-PSEUDOCODE_TYPED_FLOW] How: typed_gate_errors defaults true when gate_mode && typed_flow; explicit false opts out to warnings-only (pilot behavior).
+  Contract:
+    INPUT: typed_flow, gate_mode, typed_gate_errors flags on analyzer input
+    OUTPUT: typed_gate_errors_effective boolean
+    PRE: parse succeeded
+    POST: ignored when typed_flow false or gate_mode false; explicit typed_gate_errors false preserves warnings-only; absent defaults to effective true when both gate flags true
+    EFFECTS: pure
+    TERMINATION: total
+  IF typed_flow false OR gate_mode false: RETURN effective false
+  IF typed_gate_errors explicitly false: RETURN effective false
+  RETURN effective true
+
+procedure ANNOTATED_PROCEDURE_DETECTION(proc):
+  # [IMPL-PSEUDOCODE_TYPED_FLOW] [ARCH-PSEUDOCODE_TYPED_FLOW_PASS] [REQ-PSEUDOCODE_TYPED_FLOW] How: Classify procedure as typed-annotated when ≥1 contract TypeTag or ≥1 body assignment/IF/CALL parsed to typed expression AST.
+  Contract:
+    INPUT: IrProcedure with contract entries and statements
+    OUTPUT: is_annotated boolean
+    PRE: procedure parsed
+    POST: prose-only procedures (no TypeTag, no structured typed expr) return false; mixed contract rows with any TypeTag return true
+    EFFECTS: pure
+    TERMINATION: total
+  FOR each contract entry: IF TypeTag present on value or binding: RETURN true
+  FOR each assignment, IF, CALL statement: IF expression parser succeeds on relevant subexpression: RETURN true
+  RETURN false
+
+procedure PROMOTE_TYPED_DIAGNOSTIC_SEVERITY(program, typed_section, flags):
+  # [IMPL-PSEUDOCODE_TYPED_FLOW] [ARCH-PSEUDOCODE_TYPED_FLOW_PASS] [REQ-PSEUDOCODE_TYPED_FLOW] How: Promote proven gating codes to error-severity on annotated procedures when TYPED_GATE_ERRORS_FLAG effective; merge into top-level diagnostics for gate_mode ok aggregation.
+  Contract:
+    INPUT: program IR, sections.typed_flow diagnostics, gate_mode and typed_gate_errors flags
+    OUTPUT: updated typed_section, gate_diagnostics[] for top-level merge
+    PRE: typed_flow pass completed
+    POST: TYPE_MISMATCH, NULL_FLOW, SHAPE_MISMATCH, CALL_TYPE_MISMATCH, JOIN_INCOMPATIBLE become error only when all activation predicate clauses hold; TYPED_OPAQUE_EXPR and TYPED_UNSUPPORTED_SYNTAX remain non-gating; prose-only procedures keep warning severity; default typed_gate_errors false leaves pilot behavior unchanged
+    FAILURE_MODES: none
+    EFFECTS: pure
+    TERMINATION: total
+    DATA_TRANSITION: typed_section.diagnostics severities updated; error-severity copies appended to report.diagnostics
+  IF NOT TYPED_GATE_ERRORS_FLAG effective: RETURN typed_section unchanged with empty gate_diagnostics
+  BUILD annotated_set from ANNOTATED_PROCEDURE_DETECTION for each procedure
+  FOR each diagnostic in typed_section.diagnostics:
+    IF code NOT IN gating set: LEAVE severity warning
+    IF procedure NOT IN annotated_set: LEAVE severity warning
+    ELSE: SET severity error
+  MAP error-severity typed diagnostics to AnalysisDiagnostic and APPEND to gate_diagnostics
+  RETURN updated typed_section and gate_diagnostics
+
+procedure PHASE_3_QUALIFICATION(manifest):
+  # [IMPL-PSEUDOCODE_TYPED_FLOW] [ARCH-PSEUDOCODE_TYPED_FLOW_PASS] [REQ-PSEUDOCODE_TYPED_FLOW] How: Re-run 124-entry harness with typed_gate_errors true; prove R1/R2 zero new failures on prose-only and typed_flow false cohorts.
+  Contract:
+    INPUT: qualification manifest, pilot baseline reports
+    OUTPUT: phase3/ reports and phase3-measurement-report.md metrics
+    PRE: sub-phase 3a implementation green; corpus fixtures 18–24+ present
+    POST: R1 typed_flow false unchanged vs pilot; R2 prose-only panel unchanged; annotated delta documented; sponsor approval NOT recorded until sub-phase 3c
+    DATA_TRANSITION: phase3/ dir populated read-only; external client corpus unchanged
+    EFFECTS: IO
+    TERMINATION: total
+  CALL run-phase3.ts with gate_mode true typed_flow true typed_gate_errors true
+  COMPARE baseline and phase3 summaries for R1/R2/R4 thresholds
+  DRAFT phase3-measurement-report.md without sponsor approval record

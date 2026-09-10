@@ -41,7 +41,19 @@ Individual steps:
 ./scripts/run-harness.sh baseline  # Step 1 — typed_flow: false, gate_mode: true
 ./scripts/run-harness.sh pilot     # Step 6 — typed_flow: true + regression false
 ./scripts/run-harness.sh compare   # threshold diff baseline vs pilot
+./scripts/run-phase3.ts            # Phase 3 — typed_gate_errors: true + R1/R2 checks
 ```
+
+Phase 3 re-run (after `npm run build --prefix mcp-server`):
+
+```bash
+cd working/PSEUDOCODE-CONSTRAINT-STUDY/qualification
+npx tsx scripts/run-phase3.ts
+```
+
+Writes per-entry reports under `phase3/` (gitignored except `phase3/summary.json`) and
+`*.phase3.snapshot.json` under `snapshots/` (gitignored). See `.gitignore` qualification
+section for ephemeral vs trackable artifacts.
 
 ## TIED_BASE_PATH rotation (MCP spot-check only)
 
@@ -53,17 +65,19 @@ For 2–3 Tier A clients, rotate `TIED_BASE_PATH` to `{client_root}/tied/` in a 
 - Writing to client `tied/` except read-only analyze on copied content
 - Layer B validator changes
 - Methodology sidecar retrofits
-- Production `gate_mode: true` typed blocking (Phase 3)
+- Mutating client trees under the external corpus
 
 ## Layout
 
 ```
 qualification/
   manifest.yaml
-  baseline/           # Step 1 reports (typed_flow: false)
-  pilot/              # Step 6 reports
-  snapshots/          # byte-stable JSON subsets
-  metrics/            # aggregated compare output
+  baseline/           # Step 1 reports (typed_flow: false); *.report.json gitignored
+  pilot/              # Step 6 warning-only sweep (gitignored)
+  phase3/             # Phase 3 typed_gate_errors sweep (gitignored except summary.json)
+  snapshots/          # byte-stable JSON subsets (gitignored)
+  metrics/            # aggregated compare output (summary.json, tier results tracked)
   annotation-study/   # copied sidecars only (Step 6)
   scripts/
+    run-phase3.ts     # Phase 3 qualification + R1/R2
 ```

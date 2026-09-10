@@ -62,7 +62,12 @@ Checklist **`sub-vocabulary-sync`** uses **domain** vocab. Do not conflate with 
 | **type environment** | type map (alone) | Per-procedure map of names to `TypeFact` during typed-flow transfer |
 | **CFG join** | merge at join point (alone) | Typed-flow merge of predecessor type facts at control-flow join points |
 | **shape tag** | record shape (alone) | Tier-2 structural tag on DATA/contract values (record fields, `list of T`) |
-| **typed diagnostic** | type error (alone) | Warning-level codes in `sections.typed_flow.diagnostics` (pilot); not top-level gate errors until Phase 3 |
+| **typed diagnostic** | type error (alone) | Codes in `sections.typed_flow.diagnostics`; warning by default, error when Phase 3 promotion applies |
+| **typed gate error** | typed blocking diagnostic (alone) | Error-severity typed diagnostic that fails `gate_mode` on an annotated procedure only |
+| **annotated procedure** | typed procedure (alone) | Procedure with ≥1 Tier-2 contract TypeTag or structured typed expression in body |
+| **typed_gate_errors flag** | typed blocking flag (alone) | Analyzer/MCP flag: defaults **effective true** when `gate_mode && typed_flow`; explicit `false` opts out to warnings-only |
+| **severity promotion** | typed error promotion (alone) | Warning→error for proven TYPE_MISMATCH/NULL_FLOW/SHAPE_MISMATCH/CALL_TYPE_MISMATCH/JOIN_INCOMPATIBLE on annotated procedures |
+| **prose-only guard** | unannotated guard (alone) | Prose-only procedures never emit typed gate errors; warnings and unknowns only |
 | **pilot corpus** | typed fixtures (alone) | Labeled cases 1–17 under `mcp-server/src/analysis/fixtures/typed-flow/` |
 | **Tier-1 behavioral** | behavioral contract (alone) | Authoritative PRE/POST/EFFECTS/control flow; typed-flow never replaces |
 | **Tier-2 optional types** | type annotation (alone) | Additive `: type` clauses on contract values; prose-only rows valid |

@@ -35,7 +35,10 @@ working/**/gate-ledger.jsonl
 working/**/citdp-doc-*.json
 working/**/citdp-write-payload.json
 working/**/doc-*-checklist.yaml
+# Timestamped gate receipts (regenerate via run-*-gates.mjs)
 working/**/pre_implementation-*.json
+working/**/verification-*.json
+working/**/close_out-*.json
 # Build-plan change-ID scratch (tracker, CITDP, gate receipts, remediation — regenerate per build-plan)
 working/DOC-*/
 # Layer C pseudo-code static analysis gate reports (regenerate per gate run)
@@ -84,12 +87,19 @@ mcp-server/explorer.html
 # TypeScript incremental build cache (regenerate on `tsc -b`)
 *.tsbuildinfo
 
-# Typed-flow qualification harness — per-entry reports (regenerate via qualification/scripts/run-harness.sh)
+# Typed-flow qualification harness — per-entry reports (regenerate via qualification/scripts/)
 working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/baseline/*.report.json
 working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/pilot/
 working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/snapshots/
+# Phase 3 sweep (run-phase3.ts): per-entry reports; keep aggregate summary trackable
+working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/phase3/*
+!working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/phase3/summary.json
+# Stray analyzer sweep reports outside pilot/phase3/ dirs (defensive)
+working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/**/*.regression-false.report.json
+working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/**/*.typed-true.report.json
+working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/**/*.typed-gate-errors.report.json
 # Ephemeral compare output (aggregates live under qualification/metrics/)
 working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/metrics/compare-summary.json
 
-# Per-REQ integrated gate runner scripts (regenerate per build-plan / close-out)
+# Per-REQ integrated gate runner scripts (regenerate per build-plan / close-out; includes run-phase3-gates.mjs)
 working/**/run-*-gates.mjs

@@ -1,5 +1,5 @@
 REQ-PSEUDOCODE_TYPED_FLOW:
-  description: "Add bounded, opt-in typed-flow analysis composing after the existing abstract pass. Types are optional Tier-2 evidence on PRE/POST/EFFECTS and contract rows; Tier-1 behavioral semantics remain authoritative. Pilot scope includes expression parsing, nullable/shape lattice, CFG transfer/join, local CALL slot matching, namespaced report section, labeled corpus 1-17, and read-only client qualification."
+  description: "Add bounded, opt-in typed-flow analysis composing after the existing abstract pass. Types are optional Tier-2 evidence on PRE/POST/EFFECTS and contract rows; Tier-1 behavioral semantics remain authoritative. Pilot scope includes expression parsing, nullable/shape lattice, CFG transfer/join, local CALL slot matching, namespaced report section, labeled corpus 1-17, and read-only client qualification. Phase 3: scoped typed gate errors on annotated procedures; typed_gate_errors defaults effective true when gate_mode && typed_flow (explicit false opts out); sponsor approved 2026-09-10."
   status: "In Progress"
   traceability:
     architecture:

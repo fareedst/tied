@@ -154,7 +154,27 @@ describe("pseudocode-analyzer orchestrator [REQ-PSEUDOCODE_STATIC_ANALYSIS]", ()
     assert.equal(report.ok, true);
   });
 
-  it("gate_mode: typed_flow warnings do not fail ok during pilot", () => {
+  it("gate_mode: typed_gate_errors false keeps warnings-only on annotated procedures", () => {
+    // [IMPL-PSEUDOCODE_TYPED_FLOW] [ARCH-PSEUDOCODE_TYPED_FLOW_PASS] [REQ-PSEUDOCODE_TYPED_FLOW]
+    const source = `procedure EXAMPLE:\n  Contract:\n    INPUT: x: int\n    OUTPUT: y: int\n    PRE: true\n    POST: true\n    EFFECTS: pure\n  x := "hello"`;
+    const report = analyzeEssencePseudocode({
+      token: "IMPL-PSEUDOCODE_TYPED_FLOW",
+      pseudocode: source,
+      typed_flow: true,
+      gate_mode: true,
+      typed_gate_errors: false,
+    });
+    if (!("schema_version" in report)) return;
+    assert.equal(report.ok, true);
+    assert.equal(report.gate_mode_applied, true);
+    assert.ok(report.sections.typed_flow!.diagnostics.length > 0);
+    assert.equal(
+      report.diagnostics.some((d) => d.code === "TYPE_MISMATCH" && d.severity === "error"),
+      false,
+    );
+  });
+
+  it("gate_mode: default typed_gate_errors promotes annotated TYPE_MISMATCH to gate failure (Phase 3d)", () => {
     // [IMPL-PSEUDOCODE_TYPED_FLOW] [ARCH-PSEUDOCODE_TYPED_FLOW_PASS] [REQ-PSEUDOCODE_TYPED_FLOW]
     const source = `procedure EXAMPLE:\n  Contract:\n    INPUT: x: int\n    OUTPUT: y: int\n    PRE: true\n    POST: true\n    EFFECTS: pure\n  x := "hello"`;
     const report = analyzeEssencePseudocode({
@@ -164,8 +184,25 @@ describe("pseudocode-analyzer orchestrator [REQ-PSEUDOCODE_STATIC_ANALYSIS]", ()
       gate_mode: true,
     });
     if (!("schema_version" in report)) return;
-    assert.equal(report.ok, true);
+    assert.equal(report.ok, false);
     assert.equal(report.gate_mode_applied, true);
-    assert.ok(report.sections.typed_flow!.diagnostics.length > 0);
+    assert.ok(
+      report.diagnostics.some((d) => d.code === "TYPE_MISMATCH" && d.severity === "error"),
+    );
+  });
+
+  it("gate_mode: typed_flow false ignores typed_gate_errors (F8 regression)", () => {
+    // [IMPL-PSEUDOCODE_TYPED_FLOW] [ARCH-PSEUDOCODE_TYPED_FLOW_PASS] [REQ-PSEUDOCODE_TYPED_FLOW]
+    const source = `procedure EXAMPLE:\n  Contract:\n    INPUT: x: int\n    OUTPUT: y: int\n    PRE: true\n    POST: true\n    EFFECTS: pure\n  x := "hello"`;
+    const report = analyzeEssencePseudocode({
+      token: "IMPL-PSEUDOCODE_TYPED_FLOW",
+      pseudocode: source,
+      typed_flow: false,
+      gate_mode: true,
+      typed_gate_errors: true,
+    });
+    if (!("schema_version" in report)) return;
+    assert.equal(report.ok, true);
+    assert.equal(report.sections.typed_flow, undefined);
   });
 });

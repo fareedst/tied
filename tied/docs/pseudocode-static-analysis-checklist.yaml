@@ -82,8 +82,37 @@ checklist:
     verify:
       - "working/{REQ-TOKEN}/pseudocode-analysis/{IMPL-TOKEN}.v1.json exists"
       - "input_identity.hash stable until sidecar content changes"
+  - category: typed_flow
+    id: PSA-TYPED-001
+    required: false
+    severity_on_failure: error
+    title: "Typed gate errors promote proven violations on annotated procedures"
+    verify:
+      - "when typed_gate_errors true with gate_mode and typed_flow, TYPE_MISMATCH/NULL_FLOW/SHAPE_MISMATCH/CALL_TYPE_MISMATCH/JOIN_INCOMPATIBLE are error-severity on annotated procedures"
+  - category: typed_flow
+    id: PSA-TYPED-002
+    required: false
+    severity_on_failure: error
+    title: "Prose-only procedures emit no typed gate errors"
+    verify:
+      - "prose-only procedures keep typed diagnostics at warning severity under gate_mode"
+  - category: typed_flow
+    id: PSA-TYPED-003
+    required: false
+    severity_on_failure: warning
+    title: "sections.typed_flow lists severity per diagnostic code"
+    verify:
+      - "sections.typed_flow.diagnostics include severity field for each typed diagnostic"
+  - category: typed_flow
+    id: PSA-TYPED-004
+    required: false
+    severity_on_failure: error
+    title: "Opaque and unsupported typed constructs remain non-gating"
+    verify:
+      - "TYPED_OPAQUE_EXPR and TYPED_UNSUPPORTED_SYNTAX never promote to error-severity gate diagnostics"
 notes:
   - "abstract pass is recommended in default MCP pass list; warnings from abstract do not fail gate_mode ok unless promoted to error severity"
   - "strict_paths is not required at pre-RED; CONTRADICTORY_PATH fails ok only when strict_paths true"
   - "file-scoped gate submits complete sidecar for each changed IMPL; pre-psa-grammar N/A does not apply inside that submitted file"
   - "evidence-chain invoke_pseudocode_analyze live validator remains parse-only; do not conflate with this mandatory gate path"
+  - "typed_gate_errors defaults false; Phase 3 production blocking requires explicit opt-in until sponsor approves sub-phase 3d default flip"

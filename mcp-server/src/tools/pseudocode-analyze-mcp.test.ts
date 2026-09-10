@@ -131,6 +131,22 @@ describe("pseudocode_analyze MCP [REQ-PSEUDOCODE_STATIC_ANALYSIS]", () => {
     assert.equal(typed.proof_boundary, extendProofBoundaryForTypedFlow(DEFAULT_PROOF_BOUNDARY));
   });
 
+  it("propagates typed_gate_errors and fails gate on annotated typed violations", async () => {
+    // [IMPL-PSEUDOCODE_TYPED_FLOW] [ARCH-PSEUDOCODE_TYPED_FLOW_PASS] [REQ-PSEUDOCODE_TYPED_FLOW]
+    const source = `procedure EXAMPLE:\n  Contract:\n    INPUT: x: int\n    OUTPUT: y: int\n    PRE: true\n    POST: true\n    EFFECTS: pure\n  x := "hello"`;
+    const promoted = body(await handler("pseudocode_analyze")({
+      token: "IMPL-PSEUDOCODE_TYPED_FLOW",
+      pseudocode: source,
+      typed_flow: true,
+      gate_mode: true,
+      typed_gate_errors: true,
+    }));
+    assert.equal(promoted.ok, false);
+    assert.equal(promoted.gate_mode_applied, true);
+    const diagnostics = promoted.diagnostics as Array<{ code: string; severity: string }>;
+    assert.ok(diagnostics.some((d) => d.code === "TYPE_MISMATCH" && d.severity === "error"));
+  });
+
   it("typed_flow true does not mutate project TIED YAML", async () => {
     // [IMPL-PSEUDOCODE_TYPED_FLOW] [ARCH-PSEUDOCODE_TYPED_FLOW_PASS] [REQ-PSEUDOCODE_TYPED_FLOW]
     const tiedBase = path.resolve(import.meta.dirname, "../../../tied");

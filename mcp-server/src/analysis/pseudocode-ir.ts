@@ -203,7 +203,12 @@ export type AnalysisDiagnosticCode =
   | "DUPLICATE_SYMBOL"
   | "READ_BEFORE_WRITE"
   | "MISSING_CONTRACT_FIELD"
-  | "UNKNOWN_TOKEN";
+  | "UNKNOWN_TOKEN"
+  | "TYPE_MISMATCH"
+  | "NULL_FLOW"
+  | "SHAPE_MISMATCH"
+  | "CALL_TYPE_MISMATCH"
+  | "JOIN_INCOMPATIBLE";
 
 export type AnalysisDiagnostic = {
   severity: "error" | "warning" | "info";

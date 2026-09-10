@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, it } from "node:test";
+import { analyzeEssencePseudocode } from "./pseudocode-analyzer.js";
 import { buildCfg } from "./pseudocode-cfg.js";
 import { DEFAULT_BUDGETS } from "./pseudocode-ir.js";
 import { parsePseudocodeToIr, serializeIrProgram } from "./pseudocode-parser.js";
@@ -27,6 +28,9 @@ type CorpusExpectation = {
   forbidDiagnostic?: TypedDiagnosticCode;
   f1bEntryCount?: number;
   f8LegacyCompare?: boolean;
+  gateModeError?: TypedDiagnosticCode | TypedDiagnosticCode[];
+  gateModePass?: boolean;
+  proseOnlyGuard?: boolean;
 };
 
 const DEFINITE_ERROR_CODES: TypedDiagnosticCode[] = [
@@ -68,6 +72,74 @@ const CORPUS: CorpusExpectation[] = [
     forbidDiagnostic: "NULL_FLOW",
   },
   { id: "17", file: "corpus-df-17-multi-procedure-budget.pseudocode.md" },
+  {
+    id: "18",
+    file: "corpus-df-18-gate-mode-error-scalar.pseudocode.md",
+    definiteError: "TYPE_MISMATCH",
+    gateModeError: "TYPE_MISMATCH",
+  },
+  {
+    id: "19",
+    file: "corpus-df-19-gate-mode-warning-prose-only.pseudocode.md",
+    proseOnlyGuard: true,
+    gateModePass: true,
+  },
+  {
+    id: "20",
+    file: "corpus-df-20-gate-mode-error-null-flow.pseudocode.md",
+    definiteError: "NULL_FLOW",
+    allowUnknownInstead: true,
+    gateModeError: "NULL_FLOW",
+  },
+  {
+    id: "21",
+    file: "corpus-df-21-gate-mode-error-call-mismatch.pseudocode.md",
+    definiteError: "CALL_TYPE_MISMATCH",
+    gateModeError: "CALL_TYPE_MISMATCH",
+  },
+  {
+    id: "22",
+    file: "corpus-df-22-gate-mode-pass-compatible-call.pseudocode.md",
+    forbidDiagnostic: "CALL_TYPE_MISMATCH",
+    gateModePass: true,
+  },
+  {
+    id: "23",
+    file: "corpus-df-23-gate-mode-pass-guarded-nullable.pseudocode.md",
+    forbidDiagnostic: "NULL_FLOW",
+    gateModePass: true,
+  },
+  {
+    id: "24",
+    file: "corpus-df-24-interprocedural-stub-unknown.pseudocode.md",
+    requireUnknown: true,
+    gateModePass: true,
+  },
+  {
+    id: "25",
+    file: "corpus-df-25-alias-policy-unknown.pseudocode.md",
+    requireUnknown: true,
+    forbidDefiniteError: true,
+    gateModePass: true,
+  },
+  {
+    id: "26",
+    file: "corpus-df-26-refinement-policy-unknown.pseudocode.md",
+    requireUnknown: true,
+    gateModePass: true,
+  },
+  {
+    id: "27",
+    file: "corpus-df-27-mixed-file-annotated-and-prose.pseudocode.md",
+    definiteError: "TYPE_MISMATCH",
+    gateModeError: "TYPE_MISMATCH",
+  },
+  {
+    id: "28",
+    file: "corpus-df-28-immutable-mutation-unknown.pseudocode.md",
+    forbidDefiniteError: true,
+    gateModePass: true,
+  },
 ];
 
 function loadFixture(name: string): string {
@@ -104,12 +176,22 @@ function hasExpectedDetection(section: TypedFlowSection, expectation: CorpusExpe
   return false;
 }
 
+function analyzeGateFixture(source: string, typedGateErrors: boolean) {
+  return analyzeEssencePseudocode({
+    token: "IMPL-PSEUDOCODE_TYPED_FLOW",
+    pseudocode: source,
+    gate_mode: true,
+    typed_flow: true,
+    typed_gate_errors: typedGateErrors,
+  });
+}
+
 describe("pseudocode-typed-flow corpus [REQ-PSEUDOCODE_TYPED_FLOW]", () => {
-  it("loads all 17 labeled fixtures (F1)", () => {
+  it("loads all 28 labeled fixtures (F1)", () => {
     // [IMPL-PSEUDOCODE_TYPED_FLOW] [ARCH-PSEUDOCODE_TYPED_FLOW_PASS] [REQ-PSEUDOCODE_TYPED_FLOW]
     const files = fs.readdirSync(fixtureDir).filter((name) => name.endsWith(".pseudocode.md"));
-    assert.equal(files.length, 17);
-    assert.equal(CORPUS.length, 17);
+    assert.equal(files.length, 28);
+    assert.equal(CORPUS.length, 28);
     for (const entry of CORPUS) {
       assert.ok(files.includes(entry.file), `missing fixture ${entry.file}`);
       const { parsed } = analyzeFixture(loadFixture(entry.file));
@@ -205,7 +287,7 @@ describe("pseudocode-typed-flow corpus [REQ-PSEUDOCODE_TYPED_FLOW]", () => {
     }
   });
 
-  it("F10: zero budget_exceeded on fixtures 01-17 at default budgets", () => {
+  it("F10: zero budget_exceeded on fixtures 01-28 at default budgets", () => {
     // [IMPL-PSEUDOCODE_TYPED_FLOW] [ARCH-PSEUDOCODE_TYPED_FLOW_PASS] [REQ-PSEUDOCODE_TYPED_FLOW]
     for (const entry of CORPUS) {
       const { section } = analyzeFixture(loadFixture(entry.file));
@@ -218,10 +300,10 @@ describe("pseudocode-typed-flow corpus [REQ-PSEUDOCODE_TYPED_FLOW]", () => {
     }
   });
 
-  it("F12: 100% recall on definite-error cases 01-05 and 07", () => {
+  it("F12: 100% recall on definite-error cases 01-05, 07, and 18-21", () => {
     // [IMPL-PSEUDOCODE_TYPED_FLOW] [ARCH-PSEUDOCODE_TYPED_FLOW_PASS] [REQ-PSEUDOCODE_TYPED_FLOW]
     const recallCases = CORPUS.filter((entry) =>
-      ["01", "02", "03", "04", "05", "07"].includes(entry.id),
+      ["01", "02", "03", "04", "05", "07", "18", "20", "21"].includes(entry.id),
     );
     const missed = recallCases.filter((entry) => !hasExpectedDetection(analyzeFixture(loadFixture(entry.file)).section, entry));
     assert.deepEqual(
@@ -257,4 +339,45 @@ describe("pseudocode-typed-flow corpus [REQ-PSEUDOCODE_TYPED_FLOW]", () => {
       false,
     );
   });
+
+  for (const entry of CORPUS.filter((item) => item.gateModeError || item.gateModePass || item.proseOnlyGuard)) {
+    it(`Phase 3 gate_mode case ${entry.id} typed_gate_errors snapshot`, () => {
+      // [IMPL-PSEUDOCODE_TYPED_FLOW] [ARCH-PSEUDOCODE_TYPED_FLOW_PASS] [REQ-PSEUDOCODE_TYPED_FLOW]
+      const source = loadFixture(entry.file);
+      const pilot = analyzeGateFixture(source, false);
+      if (!("schema_version" in pilot)) throw new Error("expected report");
+      assert.equal(pilot.ok, true, `case ${entry.id}: pilot warnings must not fail gate`);
+
+      const promoted = analyzeGateFixture(source, true);
+      if (!("schema_version" in promoted)) throw new Error("expected report");
+      assert.equal(promoted.gate_mode_applied, true);
+
+      if (entry.gateModePass || entry.proseOnlyGuard) {
+        assert.equal(promoted.ok, true, `case ${entry.id}: must pass gate under typed_gate_errors`);
+        const topErrors = promoted.diagnostics.filter((d) => d.severity === "error");
+        const typedErrors =
+          promoted.sections.typed_flow?.diagnostics.filter((d) => d.severity === "error") ?? [];
+        assert.equal(topErrors.length, 0, `case ${entry.id}: no top-level gate errors`);
+        assert.equal(typedErrors.length, 0, `case ${entry.id}: no promoted typed errors`);
+        return;
+      }
+
+      assert.equal(promoted.ok, false, `case ${entry.id}: must fail gate under typed_gate_errors`);
+      const expected = Array.isArray(entry.gateModeError)
+        ? entry.gateModeError
+        : [entry.gateModeError!];
+      for (const code of expected) {
+        assert.ok(
+          promoted.diagnostics.some((d) => d.severity === "error" && d.code === code),
+          `case ${entry.id}: expected top-level error ${code}`,
+        );
+        assert.ok(
+          promoted.sections.typed_flow?.diagnostics.some(
+            (d) => d.severity === "error" && d.code === code,
+          ),
+          `case ${entry.id}: expected typed_flow error ${code}`,
+        );
+      }
+    });
+  }
 });

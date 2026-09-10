@@ -34,15 +34,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Phase 3 typed gate errors ([REQ-PSEUDOCODE_TYPED_FLOW])** — `typed_gate_errors`
+  defaults effective **true** when `gate_mode && typed_flow`; explicit `false`
+  preserves warnings-only typed diagnostics; scoped to annotated procedures;
+  sponsor approved 2026-09-10 (`phase3-measurement-report.md`).
+
 - **REQ-PSEUDOCODE_TYPED_FLOW plan-close-out** — Tracker reconciled to committed
   state (`c28211f`); formal close-out complete; integrated `close_out` gate
   revalidated (`tf-closeout-20260910`).
 
 ### Deferred
-
-- **Phase 3 typed blocking under `gate_mode` ([REQ-PSEUDOCODE_TYPED_FLOW])** —
-  warnings-only typed diagnostics remain default; production typed gate errors
-  require sponsor review of pilot measurement report before enablement.
 
 - **Phase C3 (validator consumes parser IR)** — deferred to a separate future C3 plan; close-out records the handoff only.
 

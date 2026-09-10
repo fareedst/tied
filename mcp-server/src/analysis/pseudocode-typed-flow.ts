@@ -6,6 +6,7 @@ import type { Expr } from "./pseudocode-expression-parser.js";
 import { parseCallArgExpressions, parseExpression } from "./pseudocode-expression-parser.js";
 import type { CfgSection, ProcedureCfg } from "./pseudocode-cfg.js";
 import type {
+  AnalysisDiagnostic,
   AnalysisUnknown,
   IrAssignment,
   IrCall,
@@ -36,14 +37,25 @@ export type TypedDiagnosticCode =
   | "TYPED_OPAQUE_EXPR"
   | "TYPED_UNSUPPORTED_SYNTAX";
 
+export type TypedDiagnosticSeverity = "warning" | "error";
+
 export type TypedDiagnostic = {
-  severity: "warning";
+  severity: TypedDiagnosticSeverity;
   code: TypedDiagnosticCode;
   message: string;
   line: number;
+  procedure?: string;
   block?: string;
   span?: SourceSpan;
 };
+
+export const GATING_TYPED_DIAGNOSTIC_CODES: readonly TypedDiagnosticCode[] = [
+  "TYPE_MISMATCH",
+  "NULL_FLOW",
+  "SHAPE_MISMATCH",
+  "CALL_TYPE_MISMATCH",
+  "JOIN_INCOMPATIBLE",
+];
 
 export type TypedFlowSection = {
   procedures_analyzed: number;
@@ -70,6 +82,9 @@ export const DEFAULT_TYPED_FLOW_BUDGETS: TypedFlowBudgets = {
 
 export const TYPED_FLOW_PROOF_BOUNDARY_SUPPLEMENT =
   "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification.";
+
+export const TYPED_GATE_ERRORS_PROOF_BOUNDARY_SUPPLEMENT =
+  "Phase 3 gate errors apply only to proven typed violations in annotated procedures when typed_gate_errors is true.";
 
 type TypeEnv = Map<string, TypeFact>;
 
@@ -110,6 +125,7 @@ function literalType(value: Expr & { kind: "literal" }): TypeFact {
 type InferExprContext = {
   diagnostics?: TypedDiagnostic[];
   line?: number;
+  procedure?: string;
 };
 
 function inferExprType(
@@ -136,6 +152,7 @@ function inferExprType(
             code: "SHAPE_MISMATCH",
             message: `Field ${expr.field} missing on record shape`,
             line: ctx.line ?? 0,
+            procedure: ctx.procedure,
           });
           return unknownFact("missing_field");
         }
@@ -150,6 +167,7 @@ function inferExprType(
           code: "SHAPE_MISMATCH",
           message: `Field ${expr.field} missing on named shape ${base.tag.name}`,
           line: ctx.line ?? 0,
+          procedure: ctx.procedure,
         });
       }
       return unknownFact("shape_unknown");
@@ -209,11 +227,11 @@ function transferStatement(
   unknowns: AnalysisUnknown[],
 ): void {
   if (stmt.kind === "assignment") {
-    transferAssignment(stmt, env, diagnostics, unknowns);
+    transferAssignment(stmt, env, proc.name, diagnostics, unknowns);
     return;
   }
   if (stmt.kind === "if") {
-    transferIf(stmt, env, diagnostics, unknowns);
+    transferIf(stmt, env, proc.name, diagnostics, unknowns);
     return;
   }
   if (stmt.kind === "call") {
@@ -234,6 +252,7 @@ function transferStatement(
 function transferAssignment(
   stmt: IrAssignment,
   env: TypeEnv,
+  procedure: string,
   diagnostics: TypedDiagnostic[],
   unknowns: AnalysisUnknown[],
 ): void {
@@ -242,7 +261,7 @@ function transferAssignment(
     unknowns.push({
       cause: parsed.reason === "unsupported" ? "TYPED_UNSUPPORTED_SYNTAX" : "TYPED_OPAQUE_EXPR",
       message: `Opaque assignment RHS for ${stmt.target}`,
-      procedure: undefined,
+      procedure,
       line: stmt.span.line,
       proof_boundary: TYPED_FLOW_PROOF_BOUNDARY_SUPPLEMENT,
     });
@@ -252,6 +271,7 @@ function transferAssignment(
   const rhsType = inferExprType(parsed.expr, env, undefined, {
     diagnostics,
     line: stmt.span.line,
+    procedure,
   });
   const targetFact = env.get(stmt.target);
   if (targetFact?.status === "known" && rhsType.status === "known" && !typesCompatible(targetFact.tag, rhsType.tag)) {
@@ -264,6 +284,7 @@ function transferAssignment(
         ? `Nullable value assigned to ${stmt.target} without null guard`
         : `Assignment to ${stmt.target} incompatible with inferred RHS type`,
       line: stmt.span.line,
+      procedure,
       span: stmt.span,
     });
   }
@@ -273,6 +294,7 @@ function transferAssignment(
 function transferIf(
   stmt: IrIf,
   env: TypeEnv,
+  procedure: string,
   diagnostics: TypedDiagnostic[],
   unknowns: AnalysisUnknown[],
 ): void {
@@ -300,6 +322,7 @@ function transferIf(
           code: "NULL_FLOW",
           message: `Non-null guard on ${operand.name} that is not nullable`,
           line: stmt.span.line,
+          procedure,
           span: stmt.span,
         });
       }
@@ -334,6 +357,7 @@ function transferCall(
     const actual = inferExprType(expr, env, undefined, {
       diagnostics,
       line: stmt.span.line,
+      procedure: proc.name,
     });
     if (actual.status === "known" && !typesCompatible(expected, actual.tag)) {
       diagnostics.push({
@@ -341,6 +365,7 @@ function transferCall(
         code: "CALL_TYPE_MISMATCH",
         message: `CALL ${stmt.callee} arg ${index + 1} type incompatible with callee INPUT`,
         line: stmt.span.line,
+        procedure: proc.name,
         block: proc.name,
         span: stmt.span,
       });
@@ -376,6 +401,7 @@ function joinEnvs(envs: TypeEnv[], diagnostics: TypedDiagnostic[], line: number,
           code: "JOIN_INCOMPATIBLE",
           message: `Incompatible types for ${key} at join point`,
           line,
+          procedure: block,
           block,
         });
       }
@@ -443,7 +469,7 @@ function analyzeProcedure(
 
     if (stmt.kind === "if") {
       const thenEnv = cloneEnv(env);
-      transferIf(stmt, thenEnv, diagnostics, unknowns);
+      transferIf(stmt, thenEnv, proc.name, diagnostics, unknowns);
       branch = { kind: "then", env: thenEnv };
       continue;
     }
@@ -534,4 +560,90 @@ export function runTypedFlowAnalysis(
   };
 
   return { section };
+}
+
+/**
+ * [IMPL-PSEUDOCODE_TYPED_FLOW] [ARCH-PSEUDOCODE_TYPED_FLOW_PASS] [REQ-PSEUDOCODE_TYPED_FLOW]
+ * How: Classify procedure as typed-annotated when contract has TypeTag or body has structured typed expression.
+ */
+export function isAnnotatedProcedure(proc: IrProcedure): boolean {
+  for (const entry of proc.contract.entries ?? []) {
+    if (entry.type_tag) return true;
+    const binding = extractContractBinding(entry.value);
+    if (binding.type_tag) return true;
+  }
+  for (const stmt of proc.statements) {
+    if (stmt.kind === "assignment") {
+      const parsed = parseExpression(stmt.value);
+      if (parsed.ok) return true;
+    }
+    if (stmt.kind === "if") {
+      const parsed = parseExpression(stmt.condition);
+      if (parsed.ok) return true;
+    }
+    if (stmt.kind === "call") {
+      const argExprs = stmt.arg_exprs ?? parseCallArgExpressions(stmt.args);
+      if (argExprs.length > 0) return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * [IMPL-PSEUDOCODE_TYPED_FLOW] [ARCH-PSEUDOCODE_TYPED_FLOW_PASS] [REQ-PSEUDOCODE_TYPED_FLOW]
+ * How: Promote proven gating typed codes to error on annotated procedures when typed_gate_errors is effective.
+ */
+export function applyTypedGateSeverityPromotion(
+  program: IrProgram,
+  section: TypedFlowSection,
+): TypedFlowSection {
+  const annotated = new Set(
+    program.procedures.filter(isAnnotatedProcedure).map((candidate) => candidate.name),
+  );
+  const diagnostics = section.diagnostics.map((diagnostic) => {
+    if (!GATING_TYPED_DIAGNOSTIC_CODES.includes(diagnostic.code)) {
+      return diagnostic;
+    }
+    const procName = diagnostic.procedure ?? diagnostic.block;
+    if (!procName || !annotated.has(procName)) {
+      return diagnostic;
+    }
+    return { ...diagnostic, severity: "error" as const };
+  });
+  return {
+    ...section,
+    diagnostics: diagnostics.sort(diagnosticSort),
+  };
+}
+
+/**
+ * [IMPL-PSEUDOCODE_TYPED_FLOW] [ARCH-PSEUDOCODE_TYPED_FLOW_PASS] [REQ-PSEUDOCODE_TYPED_FLOW]
+ * How: Map error-severity typed diagnostics into top-level gate diagnostics for gate_mode ok aggregation.
+ */
+export function typedGateDiagnosticsToAnalysis(section: TypedFlowSection): AnalysisDiagnostic[] {
+  return section.diagnostics
+    .filter(
+      (diagnostic) =>
+        diagnostic.severity === "error" &&
+        GATING_TYPED_DIAGNOSTIC_CODES.includes(diagnostic.code),
+    )
+    .map((diagnostic) => ({
+      severity: "error" as const,
+      code: diagnostic.code as AnalysisDiagnostic["code"],
+      message: diagnostic.message,
+      line: diagnostic.line,
+      block: diagnostic.procedure ?? diagnostic.block,
+      span: diagnostic.span,
+    }));
+}
+
+export function isTypedGateErrorsEffective(input: {
+  gate_mode?: boolean;
+  typed_flow?: boolean;
+  typed_gate_errors?: boolean;
+}): boolean {
+  if (input.gate_mode !== true || input.typed_flow !== true) return false;
+  // Phase 3d: default true when gate_mode && typed_flow; explicit false opts out (warnings-only).
+  if (input.typed_gate_errors === false) return false;
+  return true;
 }

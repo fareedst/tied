@@ -18,7 +18,13 @@ import {
   sortDiagnostics,
   type PseudocodeAnalysisReport,
 } from "./pseudocode-analyze-report.js";
-import { runTypedFlowAnalysis } from "./pseudocode-typed-flow.js";
+import {
+  applyTypedGateSeverityPromotion,
+  isTypedGateErrorsEffective,
+  runTypedFlowAnalysis,
+  TYPED_GATE_ERRORS_PROOF_BOUNDARY_SUPPLEMENT,
+  typedGateDiagnosticsToAnalysis,
+} from "./pseudocode-typed-flow.js";
 import {
   ANALYZER_VERSION,
   DEFAULT_PROOF_BOUNDARY,
@@ -41,6 +47,7 @@ export type AnalyzeEssencePseudocodeInput = {
   strict_paths?: boolean;
   gate_mode?: boolean;
   typed_flow?: boolean;
+  typed_gate_errors?: boolean;
 };
 
 export type AnalyzeInputError = {
@@ -148,8 +155,16 @@ export function analyzeEssencePseudocode(
       sections.cfg = cfg;
     }
     const typed = runTypedFlowAnalysis(program, cfg, effective);
-    sections.typed_flow = typed.section;
+    let typedSection = typed.section;
+    if (isTypedGateErrorsEffective(input)) {
+      typedSection = applyTypedGateSeverityPromotion(program, typedSection);
+      diagnostics.push(...typedGateDiagnosticsToAnalysis(typedSection));
+    }
+    sections.typed_flow = typedSection;
     proofBoundary = extendProofBoundaryForTypedFlow(proofBoundary);
+    if (isTypedGateErrorsEffective(input)) {
+      proofBoundary = `${proofBoundary} ${TYPED_GATE_ERRORS_PROOF_BOUNDARY_SUPPLEMENT}`;
+    }
   }
 
   if (passes.includes("obligations") || passes.includes("traceability")) {
