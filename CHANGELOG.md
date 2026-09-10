@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Gitignore close-out hygiene ([REQ-PROMPT_TYPE_GLOBAL_SKILLS], [PROC-GITIGNORE_CLOSE_OUT])** — Advisory close-out step in `tied-close-out-process.md` and checklist slug `gitignore-close-out-hygiene` (before `traceable-commit`); shared reference `gitignore-close-out-hygiene.md`; plan-close-out handoff bullet for patterns proposed/applied unstaged or explicit N/A.
+
 - **Bounded typed-flow Layer C pilot ([REQ-PSEUDOCODE_TYPED_FLOW])** — Optional
   `typed_flow` pass on `pseudocode_analyze` emitting `sections.typed_flow`;
   expression parser, typed IR, and CFG join transfer

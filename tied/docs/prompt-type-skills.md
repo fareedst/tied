@@ -175,7 +175,7 @@ types. It:
 
 ### [IMPL-PROMPT_TYPE_GLOBAL_SKILLS] Tracked prompt-type skill bundle and router
 
-The completed implementation contains 14 tracked skills and 14 shared
+The completed implementation contains 14 tracked skills and 15 shared
 references. The bootstrap process installs the same managed skill files into
 each client project. Prompt-type Task wrappers under `.cursor/agents/` remain
 TIED-source development artifacts and are not installed by `copy_files.sh`.
@@ -219,6 +219,7 @@ Every leaf has:
 - `tied-capture-failure.md`
 - `tied-read-ad-hoc.md`
 - `tied-close-out-process.md`
+- `gitignore-close-out-hygiene.md`
 - `non-tied-refine.md`
 - `non-tied-plan.md`
 - `git-context-templates.md`

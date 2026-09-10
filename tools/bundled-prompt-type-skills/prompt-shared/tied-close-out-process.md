@@ -6,7 +6,8 @@
 2. TIED: Update related IMPL pseudocode (block token comments); mirror reasoning in staged code and tests. Guides: `pseudocode-writing-and-validation.md`, `pseudocode-validation-checklist.yaml`.
 3. LEAP: Propagate IMPL -> ARCH -> REQ -> Vocab for any drift (`LEAP.md`). Changes to IMPL, ARCH, REQ must be accounted for in an existing CITDP plan or one is created and executed.
 4. Tests: Confirm unit, composition, and E2E coverage for the staged work.
-5. Before writing CHANGELOG or claiming completion, call
+5. Gitignore close-out hygiene — [gitignore-close-out-hygiene.md](gitignore-close-out-hygiene.md) ([PROC-GITIGNORE_CLOSE_OUT]): from caller git context only (no agent-initiated git), review ephemeral untracked artifacts; apply unstaged `.gitignore` additions or propose patterns; record N/A when clean.
+6. Before writing CHANGELOG or claiming completion, call
    `tied_checklist_gate_validate` with `phase: close_out`, the final Tracker,
    CITDP, and identity-bound activation evidence when `depth_tier` is
    `integrated` or `strict_candidate` (prefer `tied_checklist_activation_collect`
@@ -16,10 +17,10 @@
 
 ## Prologue (standard close-out / diff-promote)
 
-6. `./CHANGELOG.md`: brief summary.
-7. Propose a commit message per `commit-guidelines.md`. **Do not commit.**
+7. `./CHANGELOG.md`: brief summary.
+8. Propose a commit message per `commit-guidelines.md`. **Do not commit.**
 
 ## Prologue (ammend-commit)
 
-6. `./CHANGELOG.md`: brief summary.
-7. Propose a commit message per `commit-guidelines.md` for the ammended commit. **Do not commit.**
+7. `./CHANGELOG.md`: brief summary.
+8. Propose a commit message per `commit-guidelines.md` for the ammended commit. **Do not commit.**

@@ -12,7 +12,7 @@ Contract:
   TERMINATION: total
 
 procedure INVENTORY_PROMPT_TYPE_SKILLS(source_root):
-  # [IMPL-PROMPT_TYPE_GLOBAL_SKILLS] [ARCH-PROMPT_TYPE_GLOBAL_SKILLS] [REQ-PROMPT_TYPE_GLOBAL_SKILLS] — How: declare the exact 13 leaf skills, router, and 14 direct shared references so omissions fail deterministically.
+  # [IMPL-PROMPT_TYPE_GLOBAL_SKILLS] [ARCH-PROMPT_TYPE_GLOBAL_SKILLS] [REQ-PROMPT_TYPE_GLOBAL_SKILLS] — How: declare the exact 13 leaf skills, router, and 15 direct shared references (includes gitignore-close-out-hygiene.md for [PROC-GITIGNORE_CLOSE_OUT]) so omissions fail deterministically.
   INPUT: source_root
   PRE: source_root is a readable directory
   OUTPUT: inventory of relative source paths

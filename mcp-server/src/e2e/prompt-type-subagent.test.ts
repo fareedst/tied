@@ -167,6 +167,11 @@ describe("prompt-type Task subagents [REQ-PROMPT_TYPE_SUBAGENT]", () => {
     assert.match(readAgent("plan-close-out").body, /phase:\s*close_out/i);
     assert.match(
       readAgent("plan-close-out").body,
+      /gitignore close-out hygiene|\[PROC-GITIGNORE_CLOSE_OUT\]/i,
+      "plan-close-out must mention gitignore close-out hygiene"
+    );
+    assert.match(
+      readAgent("plan-close-out").body,
       /allowed:\s*false/i,
       "plan-close-out must fail handoff when close_out gate disallowed"
     );

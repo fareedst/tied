@@ -89,6 +89,7 @@ and approval revision. Observed findings do not trigger LEAP.
 | sync-tied-stack | sync-tied-stack | TIED docs match implementation; consistency via tied-cli.sh |
 | user-facing-release-notes | user-facing-release-notes | README and CHANGELOG |
 | persist-citdp-record | persist-citdp-record | CITDP YAML under client tied/citdp |
+| gitignore-close-out-hygiene | gitignore-close-out-hygiene | Gitignore close-out hygiene (advisory) |
 | traceable-commit | traceable-commit | Commit per PROC-COMMIT_MESSAGES; no push unless asked |
 | sub-yaml-edit-loop | sub-yaml-edit-loop | tied-cli.sh mutations, lint_yaml, client styling, tied_validate_consistency |
 | sub-client-yaml-styling | sub-client-yaml-styling | Client YAML presentation styling and semantic-equivalence gate |
@@ -127,8 +128,8 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 | `three-way-alignment-unit` → `unit-test-red` (per iteration) | Tests and code for prior blocks; IMPL may have been updated via `sub-leap-micro-cycle` / LEAP. | Very large REQs/IMPLs: a **narrow** session per block or per RED/green/align loop without earlier failure-transcript context. |
 | `three-way-alignment-unit` → `composition-integration` (when all required unit blocks are done) | Unit-level TDD and alignment are stable. | **Composition** and wiring are a different kind of work than unit TDD. |
 | `end-to-end-ui` | E2E and lower layers addressed per scope. | A dedicated **`verification-gate`**: full suite, post-test pseudo-code validation, token validation, audit. |
-| `verification-gate` | Suite, lint, and post-test validation green for the pass. | **Close-out** without debug narrative: `sync-tied-stack`, `user-facing-release-notes` (if in scope), `persist-citdp-record`, `traceable-commit`. |
-| `persist-citdp-record` | `CITDP-*.yaml` on disk. | Short **commit** session: `traceable-commit` (see the `traceable-commit` and `session-bootstrap` notes on `CALL` / `RETURN` for driver-appended sub-procedure turns). |
+| `verification-gate` | Suite, lint, and post-test validation green for the pass. | **Close-out** without debug narrative: `sync-tied-stack`, `user-facing-release-notes` (if in scope), `persist-citdp-record`, `gitignore-close-out-hygiene`, `traceable-commit`. |
+| `persist-citdp-record` | `CITDP-*.yaml` on disk. | **Gitignore hygiene** then commit: `gitignore-close-out-hygiene`, then `traceable-commit` (see the `traceable-commit` and `session-bootstrap` notes on `CALL` / `RETURN` for driver-appended sub-procedure turns). |
 
 **Agentstream (`--lead-checklist-yaml` in the consumer repo’s `tools/agentstream` and `tools/agent-stream`):** The executable YAML sets `agentstream_new_session: true` on the main steps that begin a handoff in the table (for example `risk-assessment` through to `sync-tied-stack` per the canonical `tied/docs/agent-req-implementation-checklist.yaml` in the TIED repository). The driver then issues that turn without `--resume` (a new Cursor agent session). Missing or `false` keeps chaining from the previous turn. This key is a **driver hint**; the procedural checklist and gating do not depend on it, and other clients may ignore it. Mid-run new sessions are independent of a prior turn’s `session_id`; `--session-id` (when supported) still applies to **turn 1** of the run only.
 
@@ -721,6 +722,24 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 
 ---
 
+## gitignore-close-out-hygiene (gitignore-close-out-hygiene): Gitignore close-out hygiene (advisory)
+
+**Goals**: Prevent ephemeral local-dev artifacts from polluting the commit.
+
+**Tasks**:
+1. Apply `[PROC-GITIGNORE_CLOSE_OUT]` per `tools/bundled-prompt-type-skills/prompt-shared/gitignore-close-out-hygiene.md`.
+2. MAY run read-only `git status` or `git diff --name-only`; do NOT `git add` or `git commit`.
+3. Review untracked and ephemeral paths; classify **ignore** / **track** / **delete**.
+4. Apply unstaged `.gitignore` pattern additions using repository comment-block conventions, or record propose-only items in handoff when ambiguous.
+5. When patterns already cover observed paths, record **N/A** citing existing rules.
+6. Prefer convention patterns over one-off paths; use `!` negation when aggregates must remain trackable.
+
+**Outcomes**: Handoff lists `.gitignore` patterns proposed or applied (unstaged) or explicit N/A with rationale.
+
+**Reference**: `tied/docs/processes.md` § `[PROC-GITIGNORE_CLOSE_OUT]`; `.gitignore`.
+
+---
+
 ## traceable-commit (traceable-commit): Commit per PROC-COMMIT_MESSAGES; no push unless asked
 
 **Goals**: Create a traceable commit with proper format and token references.
@@ -984,10 +1003,11 @@ flowchart TD
     sync-tied-stack["sync-tied-stack sync-tied-stack\nConsistency tied-cli.sh"]
     user-facing-release-notes["user-facing-release-notes user-facing-release-notes"]
     persist-citdp-record["persist-citdp-record persist-citdp-record"]
+    gitignore-close-out-hygiene["gitignore-close-out-hygiene gitignore-close-out-hygiene"]
     traceable-commit["traceable-commit traceable-commit"]
 
     SYNC -->|"All blocks done"| composition-integration
-    composition-integration --> e2e_ui --> verification-gate --> sync-tied-stack --> user-facing-release-notes --> persist-citdp-record --> traceable-commit
+    composition-integration --> e2e_ui --> verification-gate --> sync-tied-stack --> user-facing-release-notes --> persist-citdp-record --> gitignore-close-out-hygiene --> traceable-commit
 
     composition-integration -.->|"No IMPL covers\nbinding: create/extend"| S06
     e2e_ui -.->|"E2E reveals\nmissing IMPL"| S06
@@ -1018,6 +1038,7 @@ flowchart TD
 | sync-tied-stack | sync-tied-stack | TIED docs synced | `tied_validate_consistency` must pass |
 | user-facing-release-notes | user-facing-release-notes | README + CHANGELOG | Document user/release-facing deltas |
 | persist-citdp-record | persist-citdp-record | CITDP record | Validated YAML under client `docs/citdp` |
+| gitignore-close-out-hygiene | gitignore-close-out-hygiene | Gitignore review | PROC-GITIGNORE_CLOSE_OUT; patterns proposed/applied unstaged or N/A |
 | traceable-commit | traceable-commit | Git commit | PROC-COMMIT_MESSAGES; VALIDATE vocab (Touchpoint 3); tokens in body/footer |
 
 ### Vocabulary touchpoints (quick reference)

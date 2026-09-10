@@ -10,7 +10,7 @@ Cursor skills used by TIED projects.
   `question`, `use-skill`, `ammend-commit`, `non-tied-plan`, `non-tied-debug`,
   `leap-ad-hoc`, `leap-diff-promote`, and `other`.
 - One explicit-only `prompt-type-router` skill.
-- 14 direct Markdown references under `prompt-shared/`.
+- 15 direct Markdown references under `prompt-shared/` (includes `gitignore-close-out-hygiene.md`).
 
 The source files are copied from the personal Cursor skill bundle during
 development, but clients must consume the version committed here.

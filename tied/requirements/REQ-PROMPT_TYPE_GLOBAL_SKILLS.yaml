@@ -7,8 +7,8 @@ REQ-PROMPT_TYPE_GLOBAL_SKILLS:
       date: "2026-08-12"
     last_updated:
       author: "AI Agent"
-      date: "2026-08-13"
-      reason: "Replace triple-colon payload delimiter with invocation remainder and linked plan"
+      date: "2026-09-10"
+      reason: "Add close-out gitignore hygiene satisfaction criterion"
   name: "Global Prompt-Type Skills"
   priority: "P1"
   rationale:
@@ -31,6 +31,7 @@ REQ-PROMPT_TYPE_GLOBAL_SKILLS:
     - criterion: "Leaf skills and the router do not use a triple-colon payload delimiter. plan-new-feature treats the invocation remainder as the requirement. refine-plan and build-plan require a linked or in-message plan."
     - criterion: "The bundle and bootstrap behavior are covered by deterministic static and integration tests."
     - criterion: "The canonical TIED repository contains all 13 prompt-type leaf skills, one prompt-type router, and all direct shared references."
+    - criterion: "Close-out workflows include advisory gitignore hygiene per [PROC-GITIGNORE_CLOSE_OUT]: plan-close-out shared process step and checklist slug gitignore-close-out-hygiene review ephemeral artifacts against .gitignore, apply or propose unstaged patterns using repository comment-block conventions, and record handoff evidence of patterns proposed/applied or explicit N/A when clean."
   status: "Implemented"
   traceability:
     architecture:

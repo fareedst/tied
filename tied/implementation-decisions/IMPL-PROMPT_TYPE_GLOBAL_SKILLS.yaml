@@ -22,7 +22,7 @@ IMPL-PROMPT_TYPE_GLOBAL_SKILLS:
     details:
       - "Canonical source: tools/bundled-prompt-type-skills/."
       - "Managed leaf directories: plan-new-feature, refine-plan, build-plan, plan-close-out, debug, question, use-skill, ammend-commit, non-tied-plan, non-tied-debug, leap-ad-hoc, leap-diff-promote, other, and prompt-type-router."
-      - "Managed shared directory: prompt-shared with the 14 direct Markdown references used by the leaf skills."
+      - "Managed shared directory: prompt-shared with the 15 direct Markdown references used by the leaf skills (includes gitignore-close-out-hygiene.md)."
       - "The documentation contract and static tests define source provenance, exact inventory, explicit activation, link resolution, and line limits."
       - "The installer removes and recreates only those managed prompt-type directories, preserving unrelated client skills."
       - "VALIDATE_PROMPT_TYPE_SKILL_CONTRACT rejects a triple-colon payload delimiter and requires invocation remainder and linked plan naming on the applicable leaves."
@@ -33,8 +33,8 @@ IMPL-PROMPT_TYPE_GLOBAL_SKILLS:
       date: "2026-08-12"
     last_updated:
       author: "AI Agent"
-      date: "2026-08-13"
-      reason: "Validate invocation remainder and linked plan payload naming"
+      date: "2026-09-10"
+      reason: "Add gitignore-close-out-hygiene shared reference to bundle inventory"
   name: "Prompt-Type Skill Bundle and Bootstrap Installer"
   rationale:
     benefits:

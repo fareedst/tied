@@ -47,7 +47,10 @@ LEAP close-out complete only after the `close_out` gate allows progression;
 
 ## Outputs
 
-Updated IMPL/ARCH/REQ as needed; CHANGELOG entry; proposed commit message.
+Updated IMPL/ARCH/REQ as needed; gitignore hygiene handoff bullet per
+[gitignore-close-out-hygiene.md](../prompt-shared/gitignore-close-out-hygiene.md)
+(patterns proposed/applied unstaged or explicit N/A); CHANGELOG entry; proposed
+commit message.
 
 ## Forbidden
 

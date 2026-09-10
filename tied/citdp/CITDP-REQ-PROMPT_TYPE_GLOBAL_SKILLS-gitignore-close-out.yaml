@@ -1,0 +1,80 @@
+CITDP-REQ-PROMPT_TYPE_GLOBAL_SKILLS-gitignore-close-out:
+  change_definition:
+    current_behavior_prior: "Close-out (plan-close-out and checklist) has no gitignore hygiene step; ephemeral local-dev artifacts under working/ may appear untracked until operators manually update .gitignore."
+    desired_behavior: "Advisory gitignore close-out hygiene per [PROC-GITIGNORE_CLOSE_OUT]: plan-close-out process step 5, checklist slug gitignore-close-out-hygiene before traceable-commit, shared reference gitignore-close-out-hygiene.md, and handoff evidence for patterns proposed/applied unstaged or explicit N/A."
+    non_goals:
+      - "Automated gitignore lint MCP tool"
+      - "Blocking tied_checklist_gate_validate integration for hygiene"
+      - "Client installation of .cursor/agents/plan-close-out.md"
+      - "Bulk retroactive .gitignore rewrite unrelated to current conventions"
+    references:
+      - "tools/bundled-prompt-type-skills/prompt-shared/gitignore-close-out-hygiene.md"
+      - "tools/bundled-prompt-type-skills/prompt-shared/tied-close-out-process.md"
+      - "tied/docs/agent-req-implementation-checklist.yaml"
+      - "tied/docs/processes.md"
+    success_criteria:
+      - "tied-close-out-process.md step 5 is gitignore hygiene; close_out gate renumbered to step 6"
+      - "Checklist slug gitignore-close-out-hygiene between persist-citdp-record and traceable-commit"
+      - "SHARED_REFERENCES includes gitignore-close-out-hygiene.md (15 entries)"
+      - "prompt-type-skills and subagent contract tests pass"
+      - "tied_validate_consistency ok:true"
+  completion_criteria:
+    activation:
+      phase: "close_out"
+      project_id: "stdd-prompt-type-global-skills"
+      request_token: "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      run_id: "ptgs-gitignore-closeout-20260910"
+    record_status: "complete"
+    verification_gate_notes: "mcp-server npm test 651/651 pass; tied_validate_consistency ok:true; depth_tier minimal; tied_checklist_gate_validate pre_implementation, verification, close_out allowed:true."
+  impact_analysis:
+    modules_or_boundaries: "prompt-type skill bundle, agent-req-implementation-checklist, processes.md"
+    tied_tokens_affected:
+      - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+    tied_tokens_new:
+      - "PROC-GITIGNORE_CLOSE_OUT"
+  record_identity:
+    change_request_id: "REQ-PROMPT_TYPE_GLOBAL_SKILLS-gitignore-close-out"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    checklist_version: "agent_req_implementation_checklist v3.0.0"
+    recorded_at: "2026-09-10"
+    tied_context:
+      architecture:
+        - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+      implementation:
+        - "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
+      requirements:
+        - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+    title: "Gitignore close-out hygiene for prompt-type workflows"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "Broad working/** gitignore hides trackable phase3/summary.json without ! negation"
+        - "plan-close-out runs git status despite forbidden automatic git inspection"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Static bundle tests pass without gitignore hygiene shared reference"
+        - "Gate allows minimal depth without integrated activation pairing"
+      evidence_references:
+        - "mcp-server/src/e2e/prompt-type-skills.test.ts"
+        - "mcp-server/src/e2e/prompt-type-subagent.test.ts"
+        - "tools/bundled-prompt-type-skills/prompt-shared/gitignore-close-out-hygiene.md"
+      falsification_questions:
+        - "Does close_out fail when gitignore-close-out-hygiene.md is missing from SHARED_REFERENCES?"
+        - "Can plan-close-out claim completion without a hygiene handoff bullet?"
+      gate_policy: "advisory"
+      inquiry_policy: "advisory"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    risks:
+      - mitigation: "Require track classification and ! negation template for aggregates"
+        risk: "Over-broad gitignore patterns hide trackable summary files"
+      - mitigation: "Mandatory handoff bullet; N/A requires explicit rationale"
+        risk: "Agents skip hygiene step silently"
+  test_strategy:
+    methods:
+      - "mcp-server/src/e2e/prompt-type-skills.test.ts static bundle contract"
+      - "mcp-server/src/e2e/prompt-type-subagent.test.ts plan-close-out handoff contract"
+    notes: "Documentation-driven procedure; no unit tests for hygiene logic"

@@ -712,6 +712,25 @@ Active
 
 ---
 
+## `[PROC-GITIGNORE_CLOSE_OUT]` Gitignore close-out hygiene (advisory)
+
+Advisory close-out review of ephemeral local-dev artifacts against `.gitignore`.
+
+**When:** plan-close-out (`tools/bundled-prompt-type-skills/prompt-shared/tied-close-out-process.md` step 5) and checklist slug `gitignore-close-out-hygiene` (after `persist-citdp-record`, before `traceable-commit`).
+
+**Inputs:** Caller git context (plan-close-out) or read-only `git status` / `git diff --name-only` (checklist); current `.gitignore` comment blocks as pattern catalog.
+
+**Procedure:** Classify paths as ignore / track / delete; propose or apply unstaged grouped patterns; use `!` negation for trackable aggregates; output handoff bullet per `tools/bundled-prompt-type-skills/prompt-shared/gitignore-close-out-hygiene.md`.
+
+**Constraints:** plan-close-out forbids agent-initiated git commands. No `git add`/`git commit` at this step. Not a blocking checklist gate.
+
+**Cross-refs:** [PROC-AGENT_REQ_CHECKLIST], [PROC-COMMIT_MESSAGES] (staging at traceable-commit).
+
+### Status
+Active
+
+---
+
 ## `[PROC-COMMIT_MESSAGES]` Commit message format and guidelines
 
 ### Purpose

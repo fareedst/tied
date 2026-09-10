@@ -1,0 +1,40 @@
+{
+  "change_definition": {
+    "desired_behavior": "Advisory gitignore close-out hygiene per PROC-GITIGNORE_CLOSE_OUT"
+  },
+  "completion_criteria": {
+    "activation": {
+      "phase": "close_out",
+      "project_id": "stdd-prompt-type-global-skills",
+      "request_token": "REQ-PROMPT_TYPE_GLOBAL_SKILLS",
+      "run_id": "ptgs-gitignore-closeout-20260910"
+    },
+    "record_status": "complete"
+  },
+  "risk_analysis": {
+    "adversarial_inquiry": {
+      "counterexamples": [
+        "Broad working/** gitignore hides trackable phase3/summary.json without ! negation",
+        "plan-close-out runs git status despite forbidden automatic git inspection"
+      ],
+      "depth_tier": "minimal",
+      "disconfirming_observations": [
+        "Static bundle tests pass without gitignore hygiene shared reference",
+        "Gate allows minimal depth without integrated activation pairing"
+      ],
+      "evidence_references": [
+        "mcp-server/src/e2e/prompt-type-skills.test.ts",
+        "mcp-server/src/e2e/prompt-type-subagent.test.ts",
+        "tools/bundled-prompt-type-skills/prompt-shared/gitignore-close-out-hygiene.md"
+      ],
+      "falsification_questions": [
+        "Does close_out fail when gitignore-close-out-hygiene.md is missing from SHARED_REFERENCES?",
+        "Can plan-close-out claim completion without a hygiene handoff bullet?"
+      ],
+      "gate_policy": "advisory",
+      "inquiry_policy": "advisory"
+    },
+    "depth_tier": "minimal",
+    "gate_policy": "advisory"
+  }
+}

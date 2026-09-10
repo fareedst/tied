@@ -25,6 +25,11 @@ files and the implementation pseudo-code.
 | **invocation remainder** | ::: body, request after ::: | Text after the named skill or agent (or the Task prompt body). For `plan-new-feature` this is the requirement, not a plan document. |
 | **linked plan** | ::: plan body, in-document plan | The attached Cursor plan or an in-message plan. Primary payload for `refine-plan` and `build-plan`. |
 | **plan-close-out (commit deferred)** | close-out commit, merge now | `plan-close-out` prepares Tracker, gates, CHANGELOG, and a proposed commit message; it must not `git add`, `git commit`, or `git push`. |
+| **gitignore close-out hygiene** | git cleanup, ignore sweep | Advisory close-out review per `[PROC-GITIGNORE_CLOSE_OUT]`; classify ephemeral artifacts; propose or apply unstaged `.gitignore` patterns |
+| **ephemeral artifact** | temp file, junk | Regenerable local-dev output not canonical TIED intent |
+| **aggregate artifact** | summary file | Intentionally trackable rollup; may require `!` negation in `.gitignore` |
+| **caller git context** | auto git | Pasted git preamble or untracked path list; no agent-initiated git in plan-close-out |
+| **advisory close-out step** | blocking gate | Required procedure with handoff evidence; explicit N/A when clean |
 | **prompt-shared bundle** | shared skill docs | Direct one-level Markdown references used by leaf skills |
 | **TIED applicability boundary** | inferred TIED mode | Explicit choice of full TIED, TIED-client-local, or minimal workflow |
 | **TIED-client-local development** | non-TIED project | Development that reads context but intentionally avoids TIED synchronization |
@@ -47,6 +52,7 @@ files and the implementation pseudo-code.
 | Prompt-type sequence subagent | `.cursor/agents/plan-refine-build.md` (TIED source only) | [ARCH-PROMPT_TYPE_SUBAGENT](../architecture-decisions/ARCH-PROMPT_TYPE_SUBAGENT.yaml) · [IMPL-PROMPT_TYPE_SUBAGENT](../implementation-decisions/IMPL-PROMPT_TYPE_SUBAGENT.yaml) |
 | Bootstrap installer | `copy_files.sh` (skills only) | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
 | Explicit activation | `disable-model-invocation: true` | [REQ-PROMPT_TYPE_GLOBAL_SKILLS](../requirements/REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml) |
+| Gitignore close-out hygiene | `gitignore-close-out-hygiene.md` | [PROC-GITIGNORE_CLOSE_OUT](../docs/processes.md) |
 
 ---
 
@@ -82,7 +88,12 @@ unknown or ambiguous input.
 
 | Term | Section |
 |------|---------|
+| advisory close-out step | Preferred terms vs synonyms |
+| aggregate artifact | Preferred terms vs synonyms |
+| caller git context | Preferred terms vs synonyms |
 | canonical bundle | Preferred terms vs synonyms |
+| ephemeral artifact | Preferred terms vs synonyms |
+| gitignore close-out hygiene | Preferred terms vs synonyms |
 | client installation | Preferred terms vs synonyms |
 | global prompt skill | Preferred terms vs synonyms |
 | invocation remainder | Preferred terms vs synonyms |

@@ -36,6 +36,7 @@ const SHARED_REFERENCES = [
   "tied-implement.md",
   "tied-capture-failure.md",
   "tied-read-ad-hoc.md",
+  "gitignore-close-out-hygiene.md",
   "tied-close-out-process.md",
   "non-tied-refine.md",
   "non-tied-plan.md",

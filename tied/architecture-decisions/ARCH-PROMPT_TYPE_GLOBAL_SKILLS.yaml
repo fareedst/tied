@@ -23,7 +23,7 @@ ARCH-PROMPT_TYPE_GLOBAL_SKILLS:
     details:
       - "Copy tied/docs/prompt-type-skills.md when missing so clients receive the distribution contract and maintenance guidance."
       - "Install only the managed prompt-type directories and prompt-shared directory; preserve unrelated client skills."
-      - "Keep the 13 leaf SKILL.md files, prompt-type-router/SKILL.md, and 14 prompt-shared Markdown references in the canonical bundle."
+      - "Keep the 13 leaf SKILL.md files, prompt-type-router/SKILL.md, and 15 prompt-shared Markdown references in the canonical bundle (includes gitignore-close-out-hygiene.md for [PROC-GITIGNORE_CLOSE_OUT])."
       - "Leaf skills take an invocation remainder; refine-plan and build-plan take a linked or in-message plan. Skills do not use a triple-colon payload delimiter or emit composer headers."
       - "Treat installed prompt skills as refreshable tooling artifacts, analogous to the bundled tied-yaml skill."
     summary: "Use tools/bundled-prompt-type-skills as the canonical source and copy its explicit managed file set into client .cursor/skills during copy_files.sh refresh."
@@ -33,8 +33,8 @@ ARCH-PROMPT_TYPE_GLOBAL_SKILLS:
       date: "2026-08-12"
     last_updated:
       author: "AI Agent"
-      date: "2026-08-13"
-      reason: "Name invocation remainder and linked plan as skill payloads"
+      date: "2026-09-10"
+      reason: "Document fifteenth prompt-shared reference for gitignore close-out hygiene"
   name: "Hybrid Prompt-Type Skill Bundle"
   rationale:
     benefits:

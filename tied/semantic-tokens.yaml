@@ -1447,6 +1447,7 @@ IMPL-TIED_YAML_STYLE_RESOLVER:
   type: "IMPL"
 PROC-AGENT_REQ_CHECKLIST:
   cross_references:
+    - "PROC-GITIGNORE_CLOSE_OUT"
     - "PROC-IMPL_PSEUDOCODE_TOKENS"
     - "PROC-TIED_DEV_CYCLE"
     - "PROC-TOKEN_AUDIT"
@@ -1496,6 +1497,20 @@ PROC-EVIDENCE_CHAIN:
     - "REQ-EVIDENCE_CHAIN_REPORT"
   description: "Collection points for evidence-chain-profile.v1 and the offline statistics report"
   name: "Evidence chain profile collection"
+  source_index: "processes.md"
+  status: "Active"
+  type: "PROC"
+PROC-GITIGNORE_CLOSE_OUT:
+  cross_references:
+    - "PROC-AGENT_REQ_CHECKLIST"
+    - "PROC-COMMIT_MESSAGES"
+    - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+  description: "Advisory close-out review of ephemeral local-dev artifacts against .gitignore; plan-close-out and checklist gitignore-close-out-hygiene slug"
+  detail_file: "null"
+  metadata:
+    last_updated: "2026-09-10T00:00:00.000Z"
+    registered: "2026-09-10T00:00:00.000Z"
+  name: "Gitignore close-out hygiene (advisory)"
   source_index: "processes.md"
   status: "Active"
   type: "PROC"

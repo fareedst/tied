@@ -48,8 +48,9 @@ Process the request in this order:
 1. Apply the caller-supplied git preamble (close-out variant from
    `git-context-templates.md`).
 2. **Process** — follow canonical `tied-close-out-process.md` (standard
-   prologue): sync IMPL, ARCH, and REQ as needed; update CHANGELOG; draft a
-   proposed commit message.
+   prologue): sync IMPL, ARCH, and REQ as needed; run gitignore close-out
+   hygiene per `[PROC-GITIGNORE_CLOSE_OUT]` (caller git context only); update
+   CHANGELOG; draft a proposed commit message.
 3. Apply optional invocation remainder.
 
 Before writing CHANGELOG or claiming completion, call
@@ -83,6 +84,8 @@ reporting completion. Never edit `tied/methodology/`.
 End with a concise handoff containing:
 
 - resolved terms and vocabulary RECORD/VALIDATE status;
+- gitignore hygiene handoff bullet ([PROC-GITIGNORE_CLOSE_OUT]: patterns
+  proposed/applied unstaged or explicit N/A);
 - files changed, CHANGELOG entry, and the proposed commit message;
 - tests, lint, verification-gate, and `tied_validate_consistency` results;
 - remaining risks, blocked gates, or follow-up work.
