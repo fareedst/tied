@@ -16,8 +16,8 @@ entry_points:
 execution_evidence:
   close_out_evidence:
     commit:
-      hash: "PENDING_SLICE5_COMMIT"
-      short: "PENDING"
+      hash: "c0b50c106128f002297d69a653ef7c6e2e429b5c"
+      short: "c0b50c1"
       message: "feat(tied): add request evidence envelope Slice 5 backfill pilot"
       prior_slices_commit: "1f4ee7bdc62e74b531662a180c0a702951a7ae4d"
       slice4_commit: "a9db8a23423d9cbc760c51ccddb3773550067d1f"
