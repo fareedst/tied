@@ -23,6 +23,10 @@ import type { CfgSection } from "./pseudocode-cfg.js";
 import type { ObligationsSection, TraceabilitySection } from "./pseudocode-obligations.js";
 import type { SymbolsSection } from "./pseudocode-symbols.js";
 import type { PseudocodeValidationReport } from "./pseudocode-validator.js";
+import {
+  TYPED_FLOW_PROOF_BOUNDARY_SUPPLEMENT,
+  type TypedFlowSection,
+} from "./pseudocode-typed-flow.js";
 
 export type AnalysisReportSections = {
   parse?: {
@@ -38,7 +42,15 @@ export type AnalysisReportSections = {
   obligations?: ObligationsSection;
   traceability?: TraceabilitySection;
   structural_compat?: PseudocodeValidationReport;
+  typed_flow?: TypedFlowSection;
 };
+
+/** [IMPL-PSEUDOCODE_TYPED_FLOW] Extend base proof boundary when typed_flow pass runs. */
+export function extendProofBoundaryForTypedFlow(
+  base: string = DEFAULT_PROOF_BOUNDARY,
+): string {
+  return `${base} ${TYPED_FLOW_PROOF_BOUNDARY_SUPPLEMENT}`;
+}
 
 export type PseudocodeAnalysisReport = {
   ok: boolean;

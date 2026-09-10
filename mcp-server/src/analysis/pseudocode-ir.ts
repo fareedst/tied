@@ -2,6 +2,8 @@
  * [IMPL-PSEUDOCODE_ANALYSIS_ENGINE] [ARCH-PSEUDOCODE_ANALYSIS_PIPELINE] [REQ-PSEUDOCODE_STATIC_ANALYSIS]
  * Summary: Normalized IR types for pseudo-code static analysis grammar v1.
  */
+import type { Expr } from "./pseudocode-expression-parser.js";
+import type { TypeTag } from "./pseudocode-typed-ir.js";
 
 export const GRAMMAR_VERSION = "pseudocode-grammar.v1" as const;
 export const REPORT_SCHEMA_VERSION = "pseudocode-analysis-report.v1" as const;
@@ -26,6 +28,8 @@ export type PseudocodeAnalysisBudgets = {
   max_path_conditions: number;
   max_report_diagnostics: number;
   max_source_bytes: number;
+  /** [IMPL-PSEUDOCODE_TYPED_FLOW] D14: iterate-until-stable on CFG join/back-edges (distinct from abstract pass counter). */
+  max_cfg_join_iterations: number;
 };
 
 export const DEFAULT_BUDGETS: PseudocodeAnalysisBudgets = {
@@ -37,6 +41,7 @@ export const DEFAULT_BUDGETS: PseudocodeAnalysisBudgets = {
   max_path_conditions: 64,
   max_report_diagnostics: 500,
   max_source_bytes: 512_000,
+  max_cfg_join_iterations: 32,
 };
 
 export type AnalysisPass =
@@ -58,8 +63,17 @@ export const ALL_ANALYSIS_PASSES: AnalysisPass[] = [
   "traceability",
 ];
 
+export type ContractFieldEntry = {
+  field: string;
+  value: string;
+  type_tag?: TypeTag;
+};
+
 export type ContractFields = {
   fields: string[];
+  entries?: ContractFieldEntry[];
+  values?: Record<string, string>;
+  type_tags?: Record<string, TypeTag>;
   span?: SourceSpan;
 };
 
@@ -108,6 +122,8 @@ export type IrCase = {
 export type IrCall = {
   kind: "call";
   callee: string;
+  args: string[];
+  arg_exprs?: Array<Expr | null>;
   span: SourceSpan;
 };
 

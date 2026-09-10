@@ -489,6 +489,16 @@ ARCH-PSEUDOCODE_PARSER_UNIFICATION:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-PSEUDOCODE_TYPED_FLOW_PASS:
+  cross_references:
+    - "ARCH-PSEUDOCODE_ANALYSIS_PIPELINE"
+    - "IMPL-PSEUDOCODE_TYPED_FLOW"
+    - "REQ-PSEUDOCODE_TYPED_FLOW"
+  description: "Architectural boundary for typed CFG transfer/join and sections.typed_flow report extension."
+  detail_file: "architecture-decisions/ARCH-PSEUDOCODE_TYPED_FLOW_PASS.yaml"
+  name: "Optional typed-flow pass composing after abstract analysis"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
 ARCH-QUALITY_ASSURANCE_PROFILES:
   cross_references:
     - "IMPL-QUALITY_EVIDENCE_MANIFEST"
@@ -1185,6 +1195,16 @@ IMPL-PSEUDOCODE_SHARED_PRIMITIVES:
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
+IMPL-PSEUDOCODE_TYPED_FLOW:
+  cross_references:
+    - "ARCH-PSEUDOCODE_TYPED_FLOW_PASS"
+    - "IMPL-PSEUDOCODE_ANALYSIS_ENGINE"
+    - "REQ-PSEUDOCODE_TYPED_FLOW"
+  description: "Expression parser, typed IR, CFG transfer/join, parser extensions, phased MCP wiring."
+  detail_file: "implementation-decisions/IMPL-PSEUDOCODE_TYPED_FLOW.yaml"
+  name: "Bounded typed-flow analysis modules and report section"
+  source_index: "implementation-decisions.yaml"
+  status: "In Progress"
 IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK:
   cross_references:
     - "ARCH-QUALITY_ASSURANCE_PROFILES"
@@ -2264,6 +2284,16 @@ REQ-PSEUDOCODE_STATIC_ANALYSIS:
   name: "Contract-aware static analysis for IMPL essence_pseudocode"
   source_index: "requirements.yaml"
   status: "Active"
+REQ-PSEUDOCODE_TYPED_FLOW:
+  cross_references:
+    - "ARCH-PSEUDOCODE_TYPED_FLOW_PASS"
+    - "IMPL-PSEUDOCODE_TYPED_FLOW"
+    - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+  description: "Opt-in Tier-2 typed-flow pass composing after abstract analysis with client qualification pilot."
+  detail_file: "requirements/REQ-PSEUDOCODE_TYPED_FLOW.yaml"
+  name: "Bounded optional typed-flow analysis for IMPL essence_pseudocode"
+  source_index: "requirements.yaml"
+  status: "In Progress"
 REQ-QUALITY_ASSURANCE_EVIDENCE:
   cross_references:
     - "ARCH-QUALITY_ASSURANCE_PROFILES"

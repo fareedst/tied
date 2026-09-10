@@ -1,0 +1,13 @@
+ARCH-PSEUDOCODE_TYPED_FLOW_PASS:
+  description: "Architectural boundary for bounded intraprocedural typed-flow: expression parser, typed IR lattice, CFG transfer/join, CALL arg slot matching, and report section emission behind typed_flow opt-in."
+  status: "Active"
+  traceability:
+    code_annotations:
+      - "ARCH-PSEUDOCODE_TYPED_FLOW_PASS"
+    implementation:
+      - "IMPL-PSEUDOCODE_TYPED_FLOW"
+    requirements:
+      - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+      - "REQ-PSEUDOCODE_TYPED_FLOW"
+    tests:
+      - "mcp-server/src/analysis/pseudocode-typed-flow.test.ts"

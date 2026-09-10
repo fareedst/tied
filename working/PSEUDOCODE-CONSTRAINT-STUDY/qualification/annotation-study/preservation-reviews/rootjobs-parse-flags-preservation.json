@@ -1,0 +1,14 @@
+{
+  "study_id": "rootjobs-parse-flags",
+  "procedure": "PARSE_FLAGS",
+  "sp_checks": {
+    "SP-1_input_identity_whitelist": true,
+    "SP-2_layer_b_unchanged_on_copy": true,
+    "SP-3_control_flow_unchanged": true,
+    "SP-4_contract_meaning_preserved": true,
+    "SP-5_token_refs_unchanged": true,
+    "SP-6_no_silent_unknown_removal": true,
+    "SP-7_tier2_additive_only": true
+  },
+  "pass": true
+}

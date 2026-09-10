@@ -2160,6 +2160,7 @@ export const allTools = [
             max_path_conditions: z.number().optional(),
             max_report_diagnostics: z.number().optional(),
             max_source_bytes: z.number().optional(),
+            max_cfg_join_iterations: z.number().optional(),
           })
           .optional(),
         include_structural_compat: z.boolean().optional(),
@@ -2169,6 +2170,12 @@ export const allTools = [
           .optional()
           .describe(
             "When true, report ok is false on any error-severity diagnostic or truncated parse/analysis.",
+          ),
+        typed_flow: z
+          .boolean()
+          .optional()
+          .describe(
+            "When true, run typed-flow analysis after abstract pass and emit sections.typed_flow. Default false preserves legacy report shape.",
           ),
       }),
     },
@@ -2182,6 +2189,7 @@ export const allTools = [
       include_structural_compat?: boolean;
       strict_paths?: boolean;
       gate_mode?: boolean;
+      typed_flow?: boolean;
     }) => {
       const hasInline = typeof args.pseudocode === "string" && args.pseudocode.length > 0;
       const hasPath = typeof args.essence_pseudocode_path === "string" && args.essence_pseudocode_path.length > 0;
@@ -2228,6 +2236,7 @@ export const allTools = [
         include_structural_compat: args.include_structural_compat,
         strict_paths: args.strict_paths,
         gate_mode: args.gate_mode,
+        typed_flow: args.typed_flow,
       });
       return textContent(JSON.stringify(report, null, 2));
     },

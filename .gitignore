@@ -63,8 +63,8 @@ working/evidence-chain/psa-analyze-pilot-*.json
 # Per-track close-out evidence receipts (regenerate during close-out)
 working/**/track-*-close-out-evidence.json
 # Multi-track close-out orchestration (regenerate per close-out run)
-working/run-*-close-out*.mjs
-working/sync-*-close-out*.mjs
+working/**/run-*-close-out*.mjs
+working/**/sync-*-close-out*.mjs
 working/*-close-out-summary.json
 
 # Controlled fixture corpus + golden evidence-chain inputs (keep tracked)
@@ -80,3 +80,16 @@ working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/fixture-*
 !working/evidence-chain/stdd-human_research.json
 working/evaluation
 mcp-server/explorer.html
+
+# TypeScript incremental build cache (regenerate on `tsc -b`)
+*.tsbuildinfo
+
+# Typed-flow qualification harness — per-entry reports (regenerate via qualification/scripts/run-harness.sh)
+working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/baseline/*.report.json
+working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/pilot/
+working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/snapshots/
+# Ephemeral compare output (aggregates live under qualification/metrics/)
+working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/metrics/compare-summary.json
+
+# Per-REQ integrated gate runner scripts (regenerate per build-plan / close-out)
+working/**/run-*-gates.mjs

@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
   computeInputIdentity,
+  extendProofBoundaryForTypedFlow,
   mergeBudgets,
   serializeAnalysisReport,
   sortDiagnostics,
@@ -116,5 +117,55 @@ describe("pseudocode-analyzer orchestrator [REQ-PSEUDOCODE_STATIC_ANALYSIS]", ()
     const o1 = JSON.stringify(r1.sections.obligations);
     const o2 = JSON.stringify(r2.sections.obligations);
     assert.notEqual(o1, o2);
+  });
+
+  it("F8: typed_flow false is byte-identical to legacy default report", () => {
+    // [IMPL-PSEUDOCODE_TYPED_FLOW] [ARCH-PSEUDOCODE_TYPED_FLOW_PASS] [REQ-PSEUDOCODE_TYPED_FLOW]
+    const source = `# [IMPL-PSEUDOCODE_ANALYSIS_ENGINE]\nprocedure MAIN:\n  Contract:\n    INPUT: x\n    OUTPUT: y\n    PRE: x\n    POST: y\n    EFFECTS: pure\n  IF x:\n    RETURN y\n  RETURN y`;
+    const legacy = analyzeEssencePseudocode({
+      token: "IMPL-PSEUDOCODE_ANALYSIS_ENGINE",
+      pseudocode: source,
+      known_tokens: ["IMPL-PSEUDOCODE_ANALYSIS_ENGINE"],
+    });
+    const explicitFalse = analyzeEssencePseudocode({
+      token: "IMPL-PSEUDOCODE_ANALYSIS_ENGINE",
+      pseudocode: source,
+      known_tokens: ["IMPL-PSEUDOCODE_ANALYSIS_ENGINE"],
+      typed_flow: false,
+    });
+    if (!("schema_version" in legacy) || !("schema_version" in explicitFalse)) return;
+    assert.equal(serializeAnalysisReport(legacy), serializeAnalysisReport(explicitFalse));
+    assert.equal(legacy.proof_boundary, DEFAULT_PROOF_BOUNDARY);
+    assert.equal(explicitFalse.sections.typed_flow, undefined);
+  });
+
+  it("typed_flow true emits sections.typed_flow and extends proof_boundary", () => {
+    // [IMPL-PSEUDOCODE_TYPED_FLOW] [ARCH-PSEUDOCODE_TYPED_FLOW_PASS] [REQ-PSEUDOCODE_TYPED_FLOW]
+    const source = `procedure EXAMPLE:\n  Contract:\n    INPUT: x: int\n    OUTPUT: y: int\n    PRE: true\n    POST: true\n    EFFECTS: pure\n  x := "hello"`;
+    const report = analyzeEssencePseudocode({
+      token: "IMPL-PSEUDOCODE_TYPED_FLOW",
+      pseudocode: source,
+      typed_flow: true,
+    });
+    if (!("schema_version" in report)) return;
+    assert.ok(report.sections.typed_flow);
+    assert.ok(report.sections.typed_flow!.diagnostics.some((d) => d.code === "TYPE_MISMATCH"));
+    assert.equal(report.proof_boundary, extendProofBoundaryForTypedFlow(DEFAULT_PROOF_BOUNDARY));
+    assert.equal(report.ok, true);
+  });
+
+  it("gate_mode: typed_flow warnings do not fail ok during pilot", () => {
+    // [IMPL-PSEUDOCODE_TYPED_FLOW] [ARCH-PSEUDOCODE_TYPED_FLOW_PASS] [REQ-PSEUDOCODE_TYPED_FLOW]
+    const source = `procedure EXAMPLE:\n  Contract:\n    INPUT: x: int\n    OUTPUT: y: int\n    PRE: true\n    POST: true\n    EFFECTS: pure\n  x := "hello"`;
+    const report = analyzeEssencePseudocode({
+      token: "IMPL-PSEUDOCODE_TYPED_FLOW",
+      pseudocode: source,
+      typed_flow: true,
+      gate_mode: true,
+    });
+    if (!("schema_version" in report)) return;
+    assert.equal(report.ok, true);
+    assert.equal(report.gate_mode_applied, true);
+    assert.ok(report.sections.typed_flow!.diagnostics.length > 0);
   });
 });

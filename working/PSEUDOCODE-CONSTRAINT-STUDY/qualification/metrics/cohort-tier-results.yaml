@@ -1,0 +1,21 @@
+# [REQ-PSEUDOCODE_TYPED_FLOW] qualification tier results
+{
+  "run_at": "2026-09-10T14:48:45.941Z",
+  "tier_A": {
+    "pass": true,
+    "new_gate_failures": 0
+  },
+  "tier_B": {
+    "pass": true,
+    "regression": true
+  },
+  "tier_C": {
+    "pass": true,
+    "report_only": true
+  },
+  "tier_D": {
+    "pass": true,
+    "optional": true
+  },
+  "f11": true
+}

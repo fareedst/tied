@@ -1,6 +1,6 @@
 {
   "schema_version": "regression-manifest.v1",
-  "stdd_revision": "8a25dc7201f22ae4d98a8bb8d6d89fd6c50188d4",
+  "stdd_revision": "7f3d5b078e1a6be572c645fbed7f6ef30e5a91aa",
   "corpus_manifest_ref": "848ea2bf9298dde880977af20ef68c67aa36ca18fef65ef7c848e9a67dedc259",
   "gate_receipts": [
     {

@@ -1453,6 +1453,28 @@ IMPL-PSEUDOCODE_SHARED_PRIMITIVES:
   name: "Shared pseudo-code parsing primitives"
   status: "Active"
   testability: "unit"
+IMPL-PSEUDOCODE_TYPED_FLOW:
+  cross_references:
+    - "ARCH-PSEUDOCODE_TYPED_FLOW_PASS"
+    - "IMPL-PSEUDOCODE_ANALYSIS_ENGINE"
+    - "REQ-PSEUDOCODE_TYPED_FLOW"
+  detail_file: "implementation-decisions/IMPL-PSEUDOCODE_TYPED_FLOW.yaml"
+  implementation_approach:
+    details:
+      - "Extend IrCall with args and optional argExprs; contract.values TypeTag extraction (F1b)"
+      - "No pseudocode-shared.ts edits unless mandatory with Layer B regression (D13)"
+      - "Phase 1a: modules + fixtures only; Phase 1b: analyzer + MCP flag"
+      - "Qualification harness under working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/"
+    summary: "Parse optional Tier-2 type tags from contract values and structured expressions; run CFG transfer/join with nullable/shape lattice; emit sections.typed_flow on pseudocode-analysis-report.v1 when typed_flow true."
+  name: "Bounded typed-flow analysis modules and report section"
+  related_decisions:
+    depends_on:
+      - "IMPL-PSEUDOCODE_ANALYSIS_ENGINE"
+    see_also:
+      - "IMPL-PSEUDOCODE_SHARED_PRIMITIVES"
+    supersedes: []
+  status: "In Progress"
+  testability: "unit"
 IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK:
   cross_references:
     - "ARCH-QUALITY_ASSURANCE_PROFILES"

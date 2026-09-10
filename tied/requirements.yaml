@@ -1353,6 +1353,39 @@ REQ-PSEUDOCODE_STATIC_ANALYSIS:
   name: "Contract-aware static analysis for IMPL essence_pseudocode"
   priority: "P1"
   status: "Implemented"
+REQ-PSEUDOCODE_TYPED_FLOW:
+  category: "Functional"
+  detail_file: "requirements/REQ-PSEUDOCODE_TYPED_FLOW.yaml"
+  name: "Bounded optional typed-flow analysis for IMPL essence_pseudocode"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Deterministic typed-flow section on existing report schema"
+      - "Optional Tier-2 annotations on behavioral pseudocode"
+      - "Read-only client qualification harness before production gate"
+    problems_solved:
+      - "CALL args and contract values discarded at parse time"
+      - "No measured pilot for authoring burden vs diagnostic precision"
+      - "No typed data-flow validation on annotated sidecars"
+    why: "Layer C abstract analysis treats contract values and CALL arguments as opaque; sponsors need optional Tier-2 type evidence with CFG join without breaking grammar v1 or legacy gate behavior."
+  related_requirements:
+    depends_on:
+      - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+    related_to:
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Authoring burden and semantic preservation measured before Phase 3 gate_mode typed errors"
+      metric: "annotation study SP-1..SP-7 and F11 stop criteria"
+    - criterion: "Client qualification baseline vs pilot archived with zero new gate failures"
+      metric: "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/"
+    - criterion: "Pilot corpus cases 1-17 meet F1-F12 thresholds"
+      metric: "mcp-server/src/analysis/fixtures/typed-flow/"
+    - criterion: "typed_flow false preserves legacy parse and gate outcomes"
+      metric: "F8 regression on fixtures and qualification Tier A/B"
+    - criterion: "typed_flow true emits sections.typed_flow without schema version bump"
+      metric: "pseudocode-analysis-report.v1 snapshot tests"
+  status: "In Progress"
 REQ-QUALITY_ASSURANCE_EVIDENCE:
   category: "Non-Functional"
   cross_references:

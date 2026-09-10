@@ -1,0 +1,34 @@
+IMPL-PSEUDOCODE_TYPED_FLOW:
+  code_locations:
+    files:
+      - description: "CALL arg capture and contract.values parsing"
+        path: "mcp-server/src/analysis/pseudocode-parser.ts"
+      - description: "CFG transfer/join and typed diagnostics"
+        path: "mcp-server/src/analysis/pseudocode-typed-flow.ts"
+      - description: "Closed expression subset parser"
+        path: "mcp-server/src/analysis/pseudocode-expression-parser.ts"
+      - description: "Orchestrate typed pass when typed_flow true"
+        path: "mcp-server/src/analysis/pseudocode-analyzer.ts"
+      - description: "sections.typed_flow emission"
+        path: "mcp-server/src/analysis/pseudocode-analyze-report.ts"
+      - description: "Type tags, nullable lattice, shapes"
+        path: "mcp-server/src/analysis/pseudocode-typed-ir.ts"
+    functions:
+      - description: "Run typed CFG transfer/join pass"
+        file: "mcp-server/src/analysis/pseudocode-typed-flow.ts"
+        name: "runTypedFlowAnalysis"
+  description: "TypeScript modules pseudocode-expression-parser, pseudocode-typed-ir, pseudocode-typed-flow; parser extensions for CALL args and contract values; report section and phased MCP wiring."
+  essence_pseudocode_path: "implementation-decisions/IMPL-PSEUDOCODE_TYPED_FLOW-pseudocode.md"
+  status: "In Progress"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-PSEUDOCODE_TYPED_FLOW_PASS"
+    code_annotations:
+      - "IMPL-PSEUDOCODE_TYPED_FLOW"
+    requirements:
+      - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+      - "REQ-PSEUDOCODE_TYPED_FLOW"
+    tests:
+      - "mcp-server/src/analysis/fixtures/typed-flow/"
+      - "mcp-server/src/analysis/pseudocode-typed-flow.test.ts"

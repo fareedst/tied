@@ -58,6 +58,17 @@ Checklist **`sub-vocabulary-sync`** uses **domain** vocab. Do not conflate with 
 | **unknown policy** | unknown handling (alone) | First-class unknown/truncation disclosure with cause and span; never implicit success |
 | **evidence-chain analyze opt-in** | analyze structural row (alone) | `invoke_pseudocode_analyze` on `evidence_chain_profile_generate` adds bounded `pseudocode_analyze` rows for scoped `IMPL-*` tokens when `invoke_structural_validators` is true; default false preserves prior structural snapshots |
 | **shared parser primitives** | parser unification (alone) | `pseudocode-shared.ts` owns token/procedure/contract scan helpers consumed by Layer B validator and analysis parser ([REQ-PSEUDOCODE_PARSER_UNIFICATION]) |
+| **typed-flow** | type checking pass (alone) | Optional Layer C pass after abstract analysis when `typed_flow: true`; emits `sections.typed_flow` ([REQ-PSEUDOCODE_TYPED_FLOW]) |
+| **type environment** | type map (alone) | Per-procedure map of names to `TypeFact` during typed-flow transfer |
+| **CFG join** | merge at join point (alone) | Typed-flow merge of predecessor type facts at control-flow join points |
+| **shape tag** | record shape (alone) | Tier-2 structural tag on DATA/contract values (record fields, `list of T`) |
+| **typed diagnostic** | type error (alone) | Warning-level codes in `sections.typed_flow.diagnostics` (pilot); not top-level gate errors until Phase 3 |
+| **pilot corpus** | typed fixtures (alone) | Labeled cases 1–17 under `mcp-server/src/analysis/fixtures/typed-flow/` |
+| **Tier-1 behavioral** | behavioral contract (alone) | Authoritative PRE/POST/EFFECTS/control flow; typed-flow never replaces |
+| **Tier-2 optional types** | type annotation (alone) | Additive `: type` clauses on contract values; prose-only rows valid |
+| **qualification manifest** | client cohort registry (alone) | `working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/manifest.yaml` read-only client panel |
+| **input_identity** | sidecar hash (alone) | SHA-256 of sidecar bytes in analysis report and qualification manifest |
+| **annotation burden gate** | F11 gate (alone) | Stop criteria on annotation lines/decisions and semantic preservation (SP-1..SP-7) |
 
 ---
 
@@ -177,5 +188,16 @@ Prefer in `essence_pseudocode` (not domain terms):
 | gate_mode | Preferred terms |
 | pre-psa-grammar | Preferred terms |
 | file-scoped analysis input | Preferred terms |
+| typed-flow | Preferred terms |
+| type environment | Preferred terms |
+| CFG join | Preferred terms |
+| shape tag | Preferred terms |
+| typed diagnostic | Preferred terms |
+| pilot corpus | Preferred terms |
+| Tier-1 behavioral | Preferred terms |
+| Tier-2 optional types | Preferred terms |
+| qualification manifest | Preferred terms |
+| input_identity | Preferred terms |
+| annotation burden gate | Preferred terms |
 | Vocab routing index | Naming bridge |
 | vocabulary layer | Preferred terms |

@@ -1,0 +1,34 @@
+{
+  "run_at": "2026-09-10T14:48:45.940Z",
+  "qualification_step": 6,
+  "baseline": {
+    "total": 124,
+    "parse_ok": 124,
+    "gate_pass": 96
+  },
+  "pilot": {
+    "total": 124,
+    "parse_ok": 124,
+    "gate_pass": 96,
+    "regression_gate_unchanged": 124,
+    "new_gate_failures": 0
+  },
+  "compare": {
+    "legacy_regression_pass": true,
+    "new_gate_failures": [],
+    "snapshot_drift": []
+  },
+  "f11_annotation_burden": {
+    "procedures_studied": 4,
+    "annotation_lines_median": 2.5,
+    "authoring_decisions_median": 2.5,
+    "gate_pass": true,
+    "recommendation": "proceed"
+  },
+  "tier_results": {
+    "A": "pass",
+    "B": "pass",
+    "C": "pass",
+    "D": "optional_pass"
+  }
+}

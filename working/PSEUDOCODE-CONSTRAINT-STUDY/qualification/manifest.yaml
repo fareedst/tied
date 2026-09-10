@@ -1,0 +1,1664 @@
+schema_version: qualification-manifest.v1
+generated_at: '2026-09-10T14:04:32.031Z'
+baseline_anchor_commit: 7f3d5b0
+corpus_root: /Users/fareed/Documents/dev/test
+stdd_sidecars_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions
+entries:
+  - id: tier-a-1787416567-IMPL-VOLUMESTATS-CLI
+    tier: A
+    client_id: '1787416567'
+    client_root: /Users/fareed/Documents/dev/test/1787416567
+    sidecar_path: /Users/fareed/Documents/dev/test/1787416567/tied/implementation-decisions/IMPL-VOLUMESTATS-CLI-pseudocode.md
+    token: IMPL-VOLUMESTATS-CLI
+    input_identity:
+      algorithm: sha256
+      hash: f39da73aa55768e1b95f25daf509174ecb32d7f5cefeaf7ab73e2141334d6eab
+      byte_length: 2102
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787416567-IMPL-VOLUMESTATS-DISCOVER
+    tier: A
+    client_id: '1787416567'
+    client_root: /Users/fareed/Documents/dev/test/1787416567
+    sidecar_path: /Users/fareed/Documents/dev/test/1787416567/tied/implementation-decisions/IMPL-VOLUMESTATS-DISCOVER-pseudocode.md
+    token: IMPL-VOLUMESTATS-DISCOVER
+    input_identity:
+      algorithm: sha256
+      hash: 5636e44d60b2847647fb7ecc9a88d990c013066d8a2957716ff7cdd27bda5a35
+      byte_length: 1713
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787416567-IMPL-VOLUMESTATS-REPORT
+    tier: A
+    client_id: '1787416567'
+    client_root: /Users/fareed/Documents/dev/test/1787416567
+    sidecar_path: /Users/fareed/Documents/dev/test/1787416567/tied/implementation-decisions/IMPL-VOLUMESTATS-REPORT-pseudocode.md
+    token: IMPL-VOLUMESTATS-REPORT
+    input_identity:
+      algorithm: sha256
+      hash: 66b71ca78b56ecf8827d741f2fddc331f6e506b9a7cb54fc29d41d3ade5a5fdd
+      byte_length: 1939
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787416567-IMPL-VOLUMESTATS-STATS
+    tier: A
+    client_id: '1787416567'
+    client_root: /Users/fareed/Documents/dev/test/1787416567
+    sidecar_path: /Users/fareed/Documents/dev/test/1787416567/tied/implementation-decisions/IMPL-VOLUMESTATS-STATS-pseudocode.md
+    token: IMPL-VOLUMESTATS-STATS
+    input_identity:
+      algorithm: sha256
+      hash: 7203c8cd2875803e43b525aa24c77231d95aaccbe754fbdbf3c8d3b46a86c1aa
+      byte_length: 2003
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787421852-IMPL-VOLUME_MOUNT_DISCOVERY
+    tier: A
+    client_id: '1787421852'
+    client_root: /Users/fareed/Documents/dev/test/1787421852
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/test/1787421852/tied/implementation-decisions/IMPL-VOLUME_MOUNT_DISCOVERY-pseudocode.md
+    token: IMPL-VOLUME_MOUNT_DISCOVERY
+    input_identity:
+      algorithm: sha256
+      hash: c2a96472243fd45a53da5950e6fa3b6bdcd52b45fae620b91489a7d9ffbbae2b
+      byte_length: 1335
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787421852-IMPL-VOLUME_REPORT_FORMAT
+    tier: A
+    client_id: '1787421852'
+    client_root: /Users/fareed/Documents/dev/test/1787421852
+    sidecar_path: /Users/fareed/Documents/dev/test/1787421852/tied/implementation-decisions/IMPL-VOLUME_REPORT_FORMAT-pseudocode.md
+    token: IMPL-VOLUME_REPORT_FORMAT
+    input_identity:
+      algorithm: sha256
+      hash: 55f24c6d6af4f6ee72710cf5f36a051eb58200ac41c40da83abddc12003eb7e2
+      byte_length: 2147
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787421852-IMPL-VOLUME_STATS_CALC
+    tier: A
+    client_id: '1787421852'
+    client_root: /Users/fareed/Documents/dev/test/1787421852
+    sidecar_path: /Users/fareed/Documents/dev/test/1787421852/tied/implementation-decisions/IMPL-VOLUME_STATS_CALC-pseudocode.md
+    token: IMPL-VOLUME_STATS_CALC
+    input_identity:
+      algorithm: sha256
+      hash: f07c538e34d90a679cfec4a0392806de59f2263ae2c8951daa448374775403c0
+      byte_length: 1629
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787461685-IMPL-BTREPORT-CLI-CMD
+    tier: A
+    client_id: '1787461685'
+    client_root: /Users/fareed/Documents/dev/test/1787461685
+    sidecar_path: /Users/fareed/Documents/dev/test/1787461685/tied/implementation-decisions/IMPL-BTREPORT-CLI-CMD-pseudocode.md
+    token: IMPL-BTREPORT-CLI-CMD
+    input_identity:
+      algorithm: sha256
+      hash: 19be93c37650b3382372f0bbcaa39dcc6a82aaa3e8da75a6e504ac2f2b4c1dba
+      byte_length: 2650
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787461685-IMPL-BTREPORT-REPORT-FORMAT
+    tier: A
+    client_id: '1787461685'
+    client_root: /Users/fareed/Documents/dev/test/1787461685
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/test/1787461685/tied/implementation-decisions/IMPL-BTREPORT-REPORT-FORMAT-pseudocode.md
+    token: IMPL-BTREPORT-REPORT-FORMAT
+    input_identity:
+      algorithm: sha256
+      hash: 764efd1704537c7a0fc09bc04cbf36fb46d52869e50e72da091c9f490354b245
+      byte_length: 3086
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787461685-IMPL-BTREPORT-SYSTEM-PROFILER
+    tier: A
+    client_id: '1787461685'
+    client_root: /Users/fareed/Documents/dev/test/1787461685
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/test/1787461685/tied/implementation-decisions/IMPL-BTREPORT-SYSTEM-PROFILER-pseudocode.md
+    token: IMPL-BTREPORT-SYSTEM-PROFILER
+    input_identity:
+      algorithm: sha256
+      hash: d1634e6b5cae57a0ee5dbdce084f2754babe70ef42fa54749f4141acfbb4ae6e
+      byte_length: 5767
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787495576-IMPL-NETIF_CLI
+    tier: A
+    client_id: '1787495576'
+    client_root: /Users/fareed/Documents/dev/test/1787495576
+    sidecar_path: /Users/fareed/Documents/dev/test/1787495576/tied/implementation-decisions/IMPL-NETIF_CLI-pseudocode.md
+    token: IMPL-NETIF_CLI
+    input_identity:
+      algorithm: sha256
+      hash: c91d59fc50834c4f047a85740cb772583c12b6f98e86da2c0020c9907684e9ce
+      byte_length: 4218
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787495576-IMPL-NETIF_DISCOVERY
+    tier: A
+    client_id: '1787495576'
+    client_root: /Users/fareed/Documents/dev/test/1787495576
+    sidecar_path: /Users/fareed/Documents/dev/test/1787495576/tied/implementation-decisions/IMPL-NETIF_DISCOVERY-pseudocode.md
+    token: IMPL-NETIF_DISCOVERY
+    input_identity:
+      algorithm: sha256
+      hash: b7c32254fb5ac1e7fa19b55fe69efb2c1d80d073794de8abb1507106119319ab
+      byte_length: 4725
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787495576-IMPL-NETIF_FORMAT
+    tier: A
+    client_id: '1787495576'
+    client_root: /Users/fareed/Documents/dev/test/1787495576
+    sidecar_path: /Users/fareed/Documents/dev/test/1787495576/tied/implementation-decisions/IMPL-NETIF_FORMAT-pseudocode.md
+    token: IMPL-NETIF_FORMAT
+    input_identity:
+      algorithm: sha256
+      hash: 25f0e6213f0ed2c0403565c6186e052f6459bb2b5470aac1b2874688de1f691d
+      byte_length: 4325
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787507684-IMPL-ROOTJOBS_CLI
+    tier: A
+    client_id: '1787507684'
+    client_root: /Users/fareed/Documents/dev/test/1787507684
+    sidecar_path: /Users/fareed/Documents/dev/test/1787507684/tied/implementation-decisions/IMPL-ROOTJOBS_CLI-pseudocode.md
+    token: IMPL-ROOTJOBS_CLI
+    input_identity:
+      algorithm: sha256
+      hash: 8370d8b94b667224b3086c1457eb4dae16f4e5493b82c932ab16b628c4f4fb15
+      byte_length: 2210
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787507684-IMPL-ROOTJOBS_COLLECT
+    tier: A
+    client_id: '1787507684'
+    client_root: /Users/fareed/Documents/dev/test/1787507684
+    sidecar_path: /Users/fareed/Documents/dev/test/1787507684/tied/implementation-decisions/IMPL-ROOTJOBS_COLLECT-pseudocode.md
+    token: IMPL-ROOTJOBS_COLLECT
+    input_identity:
+      algorithm: sha256
+      hash: 7b7ac2e054444f5f5c586f8b82b7faca683c9565bc175b7fb4cfea33bfcf5d24
+      byte_length: 2169
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787507684-IMPL-ROOTJOBS_RENDER
+    tier: A
+    client_id: '1787507684'
+    client_root: /Users/fareed/Documents/dev/test/1787507684
+    sidecar_path: /Users/fareed/Documents/dev/test/1787507684/tied/implementation-decisions/IMPL-ROOTJOBS_RENDER-pseudocode.md
+    token: IMPL-ROOTJOBS_RENDER
+    input_identity:
+      algorithm: sha256
+      hash: ebe94c9e96ad6d30576bb659067b1bbd1084683d71ef50d46964c9db2561959b
+      byte_length: 1539
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787507684-IMPL-ROOTJOBS_TREE
+    tier: A
+    client_id: '1787507684'
+    client_root: /Users/fareed/Documents/dev/test/1787507684
+    sidecar_path: /Users/fareed/Documents/dev/test/1787507684/tied/implementation-decisions/IMPL-ROOTJOBS_TREE-pseudocode.md
+    token: IMPL-ROOTJOBS_TREE
+    input_identity:
+      algorithm: sha256
+      hash: 4b3525bf92b4a29132b0f5c92189e71701edb2b451fd7d9bb6e4e50c934795c4
+      byte_length: 2520
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787603099-IMPL-LISTENING_PORT_CLI_MAIN
+    tier: A
+    client_id: '1787603099'
+    client_root: /Users/fareed/Documents/dev/test/1787603099
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/test/1787603099/tied/implementation-decisions/IMPL-LISTENING_PORT_CLI_MAIN-pseudocode.md
+    token: IMPL-LISTENING_PORT_CLI_MAIN
+    input_identity:
+      algorithm: sha256
+      hash: 7e11f2ce4b538625a3ad133409af22851d79b1d9279a14c15f5ff54678cb50d9
+      byte_length: 951
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787603099-IMPL-LISTENING_PORT_COLLECT
+    tier: A
+    client_id: '1787603099'
+    client_root: /Users/fareed/Documents/dev/test/1787603099
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/test/1787603099/tied/implementation-decisions/IMPL-LISTENING_PORT_COLLECT-pseudocode.md
+    token: IMPL-LISTENING_PORT_COLLECT
+    input_identity:
+      algorithm: sha256
+      hash: 3fb07b09316e8052413de65b9e8755b14a729038ab0fe77d2029691755da33c8
+      byte_length: 2932
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787603099-IMPL-LISTENING_PORT_JSON
+    tier: A
+    client_id: '1787603099'
+    client_root: /Users/fareed/Documents/dev/test/1787603099
+    sidecar_path: /Users/fareed/Documents/dev/test/1787603099/tied/implementation-decisions/IMPL-LISTENING_PORT_JSON-pseudocode.md
+    token: IMPL-LISTENING_PORT_JSON
+    input_identity:
+      algorithm: sha256
+      hash: a52ef35112efb39c94d17d347672780dea0e8423aa10246f8b6da0d78782ed10
+      byte_length: 927
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787626480-IMPL-ARCHIVEINFO-CLI-CMD
+    tier: A
+    client_id: '1787626480'
+    client_root: /Users/fareed/Documents/dev/test/1787626480
+    sidecar_path: /Users/fareed/Documents/dev/test/1787626480/tied/implementation-decisions/IMPL-ARCHIVEINFO-CLI-CMD-pseudocode.md
+    token: IMPL-ARCHIVEINFO-CLI-CMD
+    input_identity:
+      algorithm: sha256
+      hash: ba6b9b97961dadaeb4d9646cde240ff76375596b46b14627124d74a1bbe6a58f
+      byte_length: 1399
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787626480-IMPL-ARCHIVEINFO-CONFIG
+    tier: A
+    client_id: '1787626480'
+    client_root: /Users/fareed/Documents/dev/test/1787626480
+    sidecar_path: /Users/fareed/Documents/dev/test/1787626480/tied/implementation-decisions/IMPL-ARCHIVEINFO-CONFIG-pseudocode.md
+    token: IMPL-ARCHIVEINFO-CONFIG
+    input_identity:
+      algorithm: sha256
+      hash: 7b7464e342bddea91ac3097a6fa3a7f577c7ac9e2816ffa2a337f6d8d1cfd66d
+      byte_length: 774
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787626480-IMPL-ARCHIVEINFO-FORMAT-DETECT
+    tier: A
+    client_id: '1787626480'
+    client_root: /Users/fareed/Documents/dev/test/1787626480
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/test/1787626480/tied/implementation-decisions/IMPL-ARCHIVEINFO-FORMAT-DETECT-pseudocode.md
+    token: IMPL-ARCHIVEINFO-FORMAT-DETECT
+    input_identity:
+      algorithm: sha256
+      hash: f06a976927df81a49e43e6f08558bd18baca363e0ee2a31efe0e584e09db315e
+      byte_length: 676
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787626480-IMPL-ARCHIVEINFO-FORMAT-OUT
+    tier: A
+    client_id: '1787626480'
+    client_root: /Users/fareed/Documents/dev/test/1787626480
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/test/1787626480/tied/implementation-decisions/IMPL-ARCHIVEINFO-FORMAT-OUT-pseudocode.md
+    token: IMPL-ARCHIVEINFO-FORMAT-OUT
+    input_identity:
+      algorithm: sha256
+      hash: 329d7c0fd18dd3dac7634a4c6ae85332dd2205706b2d7b1ecfda40182ee97dd6
+      byte_length: 851
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787626480-IMPL-ARCHIVEINFO-GLOB
+    tier: A
+    client_id: '1787626480'
+    client_root: /Users/fareed/Documents/dev/test/1787626480
+    sidecar_path: /Users/fareed/Documents/dev/test/1787626480/tied/implementation-decisions/IMPL-ARCHIVEINFO-GLOB-pseudocode.md
+    token: IMPL-ARCHIVEINFO-GLOB
+    input_identity:
+      algorithm: sha256
+      hash: 2614d6d287ebcbfb052bd66bef4796faa95253f4334b2ec802b26dbf373f08ba
+      byte_length: 637
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787626480-IMPL-ARCHIVEINFO-READ
+    tier: A
+    client_id: '1787626480'
+    client_root: /Users/fareed/Documents/dev/test/1787626480
+    sidecar_path: /Users/fareed/Documents/dev/test/1787626480/tied/implementation-decisions/IMPL-ARCHIVEINFO-READ-pseudocode.md
+    token: IMPL-ARCHIVEINFO-READ
+    input_identity:
+      algorithm: sha256
+      hash: d1c52640fb478eca7db023d90f3f777d3ea8f42eb15730d12e3a279aa0f83e2a
+      byte_length: 1260
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787638699-IMPL-WININFO_CLI
+    tier: A
+    client_id: '1787638699'
+    client_root: /Users/fareed/Documents/dev/test/1787638699
+    sidecar_path: /Users/fareed/Documents/dev/test/1787638699/tied/implementation-decisions/IMPL-WININFO_CLI-pseudocode.md
+    token: IMPL-WININFO_CLI
+    input_identity:
+      algorithm: sha256
+      hash: ad071a6a8acc1bfb302234e0070fa58adae59493bd960e98a28141b4da6ecab7
+      byte_length: 859
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787638699-IMPL-WININFO_ENUMERATE
+    tier: A
+    client_id: '1787638699'
+    client_root: /Users/fareed/Documents/dev/test/1787638699
+    sidecar_path: /Users/fareed/Documents/dev/test/1787638699/tied/implementation-decisions/IMPL-WININFO_ENUMERATE-pseudocode.md
+    token: IMPL-WININFO_ENUMERATE
+    input_identity:
+      algorithm: sha256
+      hash: 9b4949d15710cb735bf7a5acc223e0736719c74698cea67207d439f74d8568c0
+      byte_length: 1506
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787638699-IMPL-WININFO_FILTER
+    tier: A
+    client_id: '1787638699'
+    client_root: /Users/fareed/Documents/dev/test/1787638699
+    sidecar_path: /Users/fareed/Documents/dev/test/1787638699/tied/implementation-decisions/IMPL-WININFO_FILTER-pseudocode.md
+    token: IMPL-WININFO_FILTER
+    input_identity:
+      algorithm: sha256
+      hash: bbc40e66a470bcafe54be5ab8d4a1203b873267205c3b19c9d1ec36a35f9c6f1
+      byte_length: 791
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787638699-IMPL-WININFO_RENDER
+    tier: A
+    client_id: '1787638699'
+    client_root: /Users/fareed/Documents/dev/test/1787638699
+    sidecar_path: /Users/fareed/Documents/dev/test/1787638699/tied/implementation-decisions/IMPL-WININFO_RENDER-pseudocode.md
+    token: IMPL-WININFO_RENDER
+    input_identity:
+      algorithm: sha256
+      hash: 497ac21031327e61ffb258848f4a8a53f43d86d82c6a734d6c1f1281d70819d6
+      byte_length: 1178
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787691672-IMPL-LAUNCHD_COLLECTOR
+    tier: A
+    client_id: '1787691672'
+    client_root: /Users/fareed/Documents/dev/test/1787691672
+    sidecar_path: /Users/fareed/Documents/dev/test/1787691672/tied/implementation-decisions/IMPL-LAUNCHD_COLLECTOR-pseudocode.md
+    token: IMPL-LAUNCHD_COLLECTOR
+    input_identity:
+      algorithm: sha256
+      hash: 4cf8a45e4d0843b0f8a55cad04a9706dc581ea02401655e86c2b11772fbb79a2
+      byte_length: 856
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787691672-IMPL-NETWORK_LISTENER_COLLECTOR
+    tier: A
+    client_id: '1787691672'
+    client_root: /Users/fareed/Documents/dev/test/1787691672
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/test/1787691672/tied/implementation-decisions/IMPL-NETWORK_LISTENER_COLLECTOR-pseudocode.md
+    token: IMPL-NETWORK_LISTENER_COLLECTOR
+    input_identity:
+      algorithm: sha256
+      hash: 7ba6884cb64183f338d0110901f8b4a993ecd7b12204ddfea565bda525dc50e1
+      byte_length: 879
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787691672-IMPL-PROCESS_RUNNER
+    tier: A
+    client_id: '1787691672'
+    client_root: /Users/fareed/Documents/dev/test/1787691672
+    sidecar_path: /Users/fareed/Documents/dev/test/1787691672/tied/implementation-decisions/IMPL-PROCESS_RUNNER-pseudocode.md
+    token: IMPL-PROCESS_RUNNER
+    input_identity:
+      algorithm: sha256
+      hash: 35b626b6be4709990d8152bc6f8607fd78ff5ea77b90f14d6d3a9ecd985fa101
+      byte_length: 742
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787691672-IMPL-REPORT_FORMATTER
+    tier: A
+    client_id: '1787691672'
+    client_root: /Users/fareed/Documents/dev/test/1787691672
+    sidecar_path: /Users/fareed/Documents/dev/test/1787691672/tied/implementation-decisions/IMPL-REPORT_FORMATTER-pseudocode.md
+    token: IMPL-REPORT_FORMATTER
+    input_identity:
+      algorithm: sha256
+      hash: 1e16eacc263dc12e686f6e6100f0a562d2488282526c6eeb63d48bd62da1c476
+      byte_length: 652
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1787691672-IMPL-SERVICE_REPORT_CLI
+    tier: A
+    client_id: '1787691672'
+    client_root: /Users/fareed/Documents/dev/test/1787691672
+    sidecar_path: /Users/fareed/Documents/dev/test/1787691672/tied/implementation-decisions/IMPL-SERVICE_REPORT_CLI-pseudocode.md
+    token: IMPL-SERVICE_REPORT_CLI
+    input_identity:
+      algorithm: sha256
+      hash: 59e5e0c5d1912b156414cf4f03b8f9a48e5736a45d3e67c884f881e19f43574b
+      byte_length: 876
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1788547701-IMPL-BT_CLI_FORMATTER
+    tier: A
+    client_id: '1788547701'
+    client_root: /Users/fareed/Documents/dev/test/1788547701
+    sidecar_path: /Users/fareed/Documents/dev/test/1788547701/tied/implementation-decisions/IMPL-BT_CLI_FORMATTER-pseudocode.md
+    token: IMPL-BT_CLI_FORMATTER
+    input_identity:
+      algorithm: sha256
+      hash: cd155e99a04fcd32231970c3c1292eec5a9dc7dda59dc1b4eb82f8de6b3b5d0c
+      byte_length: 1034
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-a-1788547701-IMPL-BT_DARWIN_COLLECTOR
+    tier: A
+    client_id: '1788547701'
+    client_root: /Users/fareed/Documents/dev/test/1788547701
+    sidecar_path: /Users/fareed/Documents/dev/test/1788547701/tied/implementation-decisions/IMPL-BT_DARWIN_COLLECTOR-pseudocode.md
+    token: IMPL-BT_DARWIN_COLLECTOR
+    input_identity:
+      algorithm: sha256
+      hash: 97cb9f2fd969b4bd84fec621a997900fb11ffccffa609f57d27716a3f8db027d
+      byte_length: 2463
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV-pseudocode.md
+    token: IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
+    input_identity:
+      algorithm: sha256
+      hash: 7e55426462e9000c8090db5e20d5ce62ca9a1930d3de0dc828ffc7fe9b1f7491
+      byte_length: 1190
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS-pseudocode.md
+    token: IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS
+    input_identity:
+      algorithm: sha256
+      hash: 9649c3e5e8e574f2b60193ab9a8b0757633796a656b1e152afeb13d1cd4d29df
+      byte_length: 1282
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-ATDD-E2E-AGENT_STREAM
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-ATDD-E2E-AGENT_STREAM-pseudocode.md
+    token: IMPL-ATDD-E2E-AGENT_STREAM
+    input_identity:
+      algorithm: sha256
+      hash: 8a3c0860d93c4493caa9fe65c5a31e03dc77e630ce05046da0841197ae5a0f0f
+      byte_length: 1805
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-EVIDENCE_CHAIN_PROFILE
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-EVIDENCE_CHAIN_PROFILE-pseudocode.md
+    token: IMPL-EVIDENCE_CHAIN_PROFILE
+    input_identity:
+      algorithm: sha256
+      hash: df68a5f3b1e39f9777c3dcde8d187b46f0a61c24ba375f9d8582b7db35132d5f
+      byte_length: 15098
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-EVIDENCE_CHAIN_REPORT
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-EVIDENCE_CHAIN_REPORT-pseudocode.md
+    token: IMPL-EVIDENCE_CHAIN_REPORT
+    input_identity:
+      algorithm: sha256
+      hash: 4ff1a8e922be7a433f04666925ba5220fb7cbcf21d80a2adc4de7cddb7d07ffd
+      byte_length: 13573
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-FEAT_AGENTSTREAM_ADAPTER
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_AGENTSTREAM_ADAPTER-pseudocode.md
+    token: IMPL-FEAT_AGENTSTREAM_ADAPTER
+    input_identity:
+      algorithm: sha256
+      hash: d9108b25cac9968c34e0b5a3959cf603c4e136af387a2954d7025666eddc5108
+      byte_length: 1827
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-FEAT_ATOMIC_MUTATION
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_ATOMIC_MUTATION-pseudocode.md
+    token: IMPL-FEAT_ATOMIC_MUTATION
+    input_identity:
+      algorithm: sha256
+      hash: bbc604e2faf0c18a5c9518f832105c922a438e08d707996702a377dd133f84f2
+      byte_length: 2204
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-FEAT_CLARIFICATION_GATE
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_CLARIFICATION_GATE-pseudocode.md
+    token: IMPL-FEAT_CLARIFICATION_GATE
+    input_identity:
+      algorithm: sha256
+      hash: 03dba1ef8fb7c2eee8952d9277fd74d3205ed80a6d4a332d1f33ae33e8d90808
+      byte_length: 2343
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-FEAT_CLARIFICATION_LIFECYCLE_ADAPTER
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_CLARIFICATION_LIFECYCLE_ADAPTER-pseudocode.md
+    token: IMPL-FEAT_CLARIFICATION_LIFECYCLE_ADAPTER
+    input_identity:
+      algorithm: sha256
+      hash: 2d61d61d006d65db4e0e7d0e8d1e385034f0df5f57c2f8cd78869abd4a95114b
+      byte_length: 1652
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-FEAT_CLARIFICATION_STORE
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_CLARIFICATION_STORE-pseudocode.md
+    token: IMPL-FEAT_CLARIFICATION_STORE
+    input_identity:
+      algorithm: sha256
+      hash: eed7211d2fbf7de428ebfda2a0821503707e7c3d82eaad79b96a6649dfeef881
+      byte_length: 2677
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-FEAT_CONSTITUTION_ANALYZER
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_CONSTITUTION_ANALYZER-pseudocode.md
+    token: IMPL-FEAT_CONSTITUTION_ANALYZER
+    input_identity:
+      algorithm: sha256
+      hash: 7cf09225d5d8e6ea4ba978bc8d861d862f02f99a64c6e839f7d72ae42055c491
+      byte_length: 1516
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-FEAT_CONSTITUTION_DIAGNOSTICS
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_CONSTITUTION_DIAGNOSTICS-pseudocode.md
+    token: IMPL-FEAT_CONSTITUTION_DIAGNOSTICS
+    input_identity:
+      algorithm: sha256
+      hash: 43e1c2cf409d3ab14cfb561650ea573ea24c992312756c41ae352a819229e0da
+      byte_length: 1559
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-FEAT_CONSTITUTION_STORE
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_CONSTITUTION_STORE-pseudocode.md
+    token: IMPL-FEAT_CONSTITUTION_STORE
+    input_identity:
+      algorithm: sha256
+      hash: 7e2e1098b00a74a83db7a420a2043091a4712f993a1d951a063432c5f75bc44b
+      byte_length: 2030
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-FEAT_CONSTITUTION_VALIDATOR
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_CONSTITUTION_VALIDATOR-pseudocode.md
+    token: IMPL-FEAT_CONSTITUTION_VALIDATOR
+    input_identity:
+      algorithm: sha256
+      hash: 8ef9fd007bee746f62b18ab43789a7e0b7186e408c37190c8aa344c070fb0fed
+      byte_length: 1593
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-FEAT_FIXTURE_VALIDATORS
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_FIXTURE_VALIDATORS-pseudocode.md
+    token: IMPL-FEAT_FIXTURE_VALIDATORS
+    input_identity:
+      algorithm: sha256
+      hash: 0095175d7b61eedd5fb02a3e5f3a5748f073713c9fae3bee8b10542fa80f16e2
+      byte_length: 1989
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-FEAT_IDEMPOTENT_CREATE
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_IDEMPOTENT_CREATE-pseudocode.md
+    token: IMPL-FEAT_IDEMPOTENT_CREATE
+    input_identity:
+      algorithm: sha256
+      hash: 0291a14cc123f409db88e209957988deee8fb5e4fc46c3b37e6b3e0dda2c4d49
+      byte_length: 2102
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-FEAT_IDENTIFIER_ALLOCATOR
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_IDENTIFIER_ALLOCATOR-pseudocode.md
+    token: IMPL-FEAT_IDENTIFIER_ALLOCATOR
+    input_identity:
+      algorithm: sha256
+      hash: da23150c89e3f26f272767c50bb0f802e376be16f5022c04b4fc9ee013693830
+      byte_length: 2124
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-FEAT_LIFECYCLE_ENGINE
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_LIFECYCLE_ENGINE-pseudocode.md
+    token: IMPL-FEAT_LIFECYCLE_ENGINE
+    input_identity:
+      algorithm: sha256
+      hash: 2a9ec8126e81f622dbe4ef5c45ea59fc2ced35897c791db3029b84638091623f
+      byte_length: 2647
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-FEAT_LOCAL_DEFAULTS
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_LOCAL_DEFAULTS-pseudocode.md
+    token: IMPL-FEAT_LOCAL_DEFAULTS
+    input_identity:
+      algorithm: sha256
+      hash: da15b246f4fb5ccad664af832c756b98d419b853fdf44ac8d7de30acf45cd845
+      byte_length: 2261
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-FEAT_MANIFEST_VALIDATOR
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_MANIFEST_VALIDATOR-pseudocode.md
+    token: IMPL-FEAT_MANIFEST_VALIDATOR
+    input_identity:
+      algorithm: sha256
+      hash: 6715325723a1518a158e937d1109f5694ff719f0814163d5e882706368cb01f1
+      byte_length: 2262
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-FEAT_MIGRATION_APPLY
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_MIGRATION_APPLY-pseudocode.md
+    token: IMPL-FEAT_MIGRATION_APPLY
+    input_identity:
+      algorithm: sha256
+      hash: 4a5f4eab6a24af34e0ad655c07fdac37f9de7202cf956e4bcc867ef1126d684f
+      byte_length: 2458
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-FEAT_MIGRATION_PREVIEW
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_MIGRATION_PREVIEW-pseudocode.md
+    token: IMPL-FEAT_MIGRATION_PREVIEW
+    input_identity:
+      algorithm: sha256
+      hash: d7f986c478e7db8f6427c4fc838d9c5640f9ec2d585400e284b1356c8a3c5862
+      byte_length: 2168
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-FEAT_OFFLINE_FALLBACK
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_OFFLINE_FALLBACK-pseudocode.md
+    token: IMPL-FEAT_OFFLINE_FALLBACK
+    input_identity:
+      algorithm: sha256
+      hash: 1713104e119795dfbee04439524a7663d978da744c6f5a0c9cc9bb90f64f8346
+      byte_length: 1617
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-FEAT_ONBOARDING_COMMANDS
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_ONBOARDING_COMMANDS-pseudocode.md
+    token: IMPL-FEAT_ONBOARDING_COMMANDS
+    input_identity:
+      algorithm: sha256
+      hash: 10b69ab5d2143fb8f074a8add041b381903c6a1d5584fa13000146b9ce45557e
+      byte_length: 3593
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-FEAT_ORCHESTRATION_CLI
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_ORCHESTRATION_CLI-pseudocode.md
+    token: IMPL-FEAT_ORCHESTRATION_CLI
+    input_identity:
+      algorithm: sha256
+      hash: 9827c21009a06623181d2432f6f10952ffa665e1533f3aa1be93a124236f81d4
+      byte_length: 1399
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-FEAT_ORCHESTRATION_COMMANDS
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_ORCHESTRATION_COMMANDS-pseudocode.md
+    token: IMPL-FEAT_ORCHESTRATION_COMMANDS
+    input_identity:
+      algorithm: sha256
+      hash: 487224d0cbdbfc81408d868f0c96c55e2cea53d4913944f7e93fab3b335fc7c8
+      byte_length: 2657
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-FEAT_ORCHESTRATION_MCP
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_ORCHESTRATION_MCP-pseudocode.md
+    token: IMPL-FEAT_ORCHESTRATION_MCP
+    input_identity:
+      algorithm: sha256
+      hash: ea1d4b329a6cd5c1b58f607de23a54fbcd3530b5b2861acb353dda754ac41adf
+      byte_length: 1520
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-FEAT_READINESS_DIAGNOSTICS
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_READINESS_DIAGNOSTICS-pseudocode.md
+    token: IMPL-FEAT_READINESS_DIAGNOSTICS
+    input_identity:
+      algorithm: sha256
+      hash: ec8df2d0848837f4cc174f7c78dad0d186a4eb4868b03cec94ab2e5478a6cf6f
+      byte_length: 2088
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-FEAT_REFERENCE_LINKER
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_REFERENCE_LINKER-pseudocode.md
+    token: IMPL-FEAT_REFERENCE_LINKER
+    input_identity:
+      algorithm: sha256
+      hash: d294d35d205200e7baab22efb2f4cfe76fba12e4f11d4dcd097a41e9122d9733
+      byte_length: 2030
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-FEAT_STORE
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_STORE-pseudocode.md
+    token: IMPL-FEAT_STORE
+    input_identity:
+      algorithm: sha256
+      hash: 0ff6ffae604088d02c2c4e5173fe9bfd7266328065133cfa8ba0a9262de2d517
+      byte_length: 2954
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-FEAT_TASK_DERIVATION
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_TASK_DERIVATION-pseudocode.md
+    token: IMPL-FEAT_TASK_DERIVATION
+    input_identity:
+      algorithm: sha256
+      hash: 85eb7fe96f02f9f27e5f762509cd04d019cb9f1915389bfaefdc0f24fb73565c
+      byte_length: 2189
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-FEAT_TASK_EXECUTION_STATE
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_TASK_EXECUTION_STATE-pseudocode.md
+    token: IMPL-FEAT_TASK_EXECUTION_STATE
+    input_identity:
+      algorithm: sha256
+      hash: c1e6b0ae8b97ca0a88683e7a7b08cae015c2bbaef6a475da7fa76ae539524c0c
+      byte_length: 1763
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-FEAT_TASK_GRAPH_SCHEDULER
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_TASK_GRAPH_SCHEDULER-pseudocode.md
+    token: IMPL-FEAT_TASK_GRAPH_SCHEDULER
+    input_identity:
+      algorithm: sha256
+      hash: 519e78168206040cf34bd519dadc07a9943e7ccf75bd59c8766de4521bc073fb
+      byte_length: 1532
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-FEAT_VIEW_PROJECTION
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_VIEW_PROJECTION-pseudocode.md
+    token: IMPL-FEAT_VIEW_PROJECTION
+    input_identity:
+      algorithm: sha256
+      hash: 2707e9475e9f3518c4f673eaec360744a82de38c060b0bdbac5db62bf628a0cd
+      byte_length: 2275
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-FEAT_VIEW_RENDERER
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_VIEW_RENDERER-pseudocode.md
+    token: IMPL-FEAT_VIEW_RENDERER
+    input_identity:
+      algorithm: sha256
+      hash: 4418dd8bd8c383aa3661e16eb1d0f50b6d2881c76448be63c8c18d02b5c56020
+      byte_length: 2343
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-FEAT_VIEW_STALE_DETECTION
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_VIEW_STALE_DETECTION-pseudocode.md
+    token: IMPL-FEAT_VIEW_STALE_DETECTION
+    input_identity:
+      algorithm: sha256
+      hash: d7a0b610e2524a1585a3d712394cf24eecd0df574431de702937316e83fe34c2
+      byte_length: 2223
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-GOAGENT-CHECKLIST
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-GOAGENT-CHECKLIST-pseudocode.md
+    token: IMPL-GOAGENT-CHECKLIST
+    input_identity:
+      algorithm: sha256
+      hash: df768206b82d2b0a153b6f050d85a01ab24abb4de31b102b7c415be040f7aea0
+      byte_length: 1324
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-GOAGENT-CHECKLIST-CONTROL
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-GOAGENT-CHECKLIST-CONTROL-pseudocode.md
+    token: IMPL-GOAGENT-CHECKLIST-CONTROL
+    input_identity:
+      algorithm: sha256
+      hash: 6fa3a5eedeb81a1b3198f685feb8bfde5b9e3f735fdf6722e0bbf0192b9502b5
+      byte_length: 1346
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-GOAGENT-CLI-CMD
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-GOAGENT-CLI-CMD-pseudocode.md
+    token: IMPL-GOAGENT-CLI-CMD
+    input_identity:
+      algorithm: sha256
+      hash: 0b190f5b5ad44c2bd5094f8f6945a4578591a727c3508bc19ad12c18d9cce25a
+      byte_length: 2619
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-GOAGENT-EXECUTOR
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-GOAGENT-EXECUTOR-pseudocode.md
+    token: IMPL-GOAGENT-EXECUTOR
+    input_identity:
+      algorithm: sha256
+      hash: f7b7f8f37e971e06f4237391978ba36038c6020fbe6a9151201e001d278c23c0
+      byte_length: 1074
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-GOAGENT-FEATURESPEC
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-GOAGENT-FEATURESPEC-pseudocode.md
+    token: IMPL-GOAGENT-FEATURESPEC
+    input_identity:
+      algorithm: sha256
+      hash: 99d4d236662f478fd6eda8110b34f520baefcc35f4bb0d0f261e41861d5b9c6a
+      byte_length: 1160
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-GOAGENT-LIB-TYPES
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-GOAGENT-LIB-TYPES-pseudocode.md
+    token: IMPL-GOAGENT-LIB-TYPES
+    input_identity:
+      algorithm: sha256
+      hash: f84e5036956abedd789a239681d93f81f23e6b87ab7631feb4330bc2fd44ea60
+      byte_length: 1021
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT-pseudocode.md
+    token: IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT
+    input_identity:
+      algorithm: sha256
+      hash: 6b1d6984838b44e6bbab0a8dde8117d1c42e01beba3ff01313945ecf2cf426ae
+      byte_length: 6707
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-GOAGENT-PIPELINE
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-GOAGENT-PIPELINE-pseudocode.md
+    token: IMPL-GOAGENT-PIPELINE
+    input_identity:
+      algorithm: sha256
+      hash: f17c457c9f3cf5554b3d08d407f960b1794e8af958242dbd0f4775dd5222ec6f
+      byte_length: 2741
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-GOAGENT-TDDLOOP
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-GOAGENT-TDDLOOP-pseudocode.md
+    token: IMPL-GOAGENT-TDDLOOP
+    input_identity:
+      algorithm: sha256
+      hash: 428282da7f9d39350ec43986d6802fd2e114aebcc48b4fb07492b2cfe62a1592
+      byte_length: 850
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-GOAGENT-TEXT-SOURCES
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-GOAGENT-TEXT-SOURCES-pseudocode.md
+    token: IMPL-GOAGENT-TEXT-SOURCES
+    input_identity:
+      algorithm: sha256
+      hash: afd3fa8d13edce0399d494d1940cc18f54fa271cae446de1a441c8e4020cfc99
+      byte_length: 962
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-MCP_FEEDBACK_TOOLS
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-MCP_FEEDBACK_TOOLS-pseudocode.md
+    token: IMPL-MCP_FEEDBACK_TOOLS
+    input_identity:
+      algorithm: sha256
+      hash: 5e04904e63a38abc02840e356b2a112d37aa50992d5b29eda9601d8203889f6b
+      byte_length: 1728
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-MCP_LEAP_PROPOSAL_QUEUE
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-MCP_LEAP_PROPOSAL_QUEUE-pseudocode.md
+    token: IMPL-MCP_LEAP_PROPOSAL_QUEUE
+    input_identity:
+      algorithm: sha256
+      hash: 77fcb209538a9b5da437f6e6e6e2f32b92b4dff2709be8f671cbde07d78a7ea9
+      byte_length: 5676
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-MCP_USAGE_METRICS
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-MCP_USAGE_METRICS-pseudocode.md
+    token: IMPL-MCP_USAGE_METRICS
+    input_identity:
+      algorithm: sha256
+      hash: 3da32c9d8bbcbefaff6f196812a1edaa80fa8e1756bf2445a19b430bc1cb8eb1
+      byte_length: 8600
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-MODULE_VALIDATION
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-MODULE_VALIDATION-pseudocode.md
+    token: IMPL-MODULE_VALIDATION
+    input_identity:
+      algorithm: sha256
+      hash: 92f708504223d98213c3020a3ba74a3cd6120a394a01126ad59f7feffe0391bd
+      byte_length: 8844
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-PROMPT_TYPE_GLOBAL_SKILLS
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-PROMPT_TYPE_GLOBAL_SKILLS-pseudocode.md
+    token: IMPL-PROMPT_TYPE_GLOBAL_SKILLS
+    input_identity:
+      algorithm: sha256
+      hash: 72b3908e6eae25b4662c3612fd2ee4da5515dac87d5b0c30b3e264245bf9f50d
+      byte_length: 3670
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-PROMPT_TYPE_SUBAGENT
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-PROMPT_TYPE_SUBAGENT-pseudocode.md
+    token: IMPL-PROMPT_TYPE_SUBAGENT
+    input_identity:
+      algorithm: sha256
+      hash: fe1f6fd3b8a5a86dbbcd0400994467e44baf6a994255aec858d404c92aaf7dd4
+      byte_length: 5663
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-PSEUDOCODE_ANALYSIS_ENGINE
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-PSEUDOCODE_ANALYSIS_ENGINE-pseudocode.md
+    token: IMPL-PSEUDOCODE_ANALYSIS_ENGINE
+    input_identity:
+      algorithm: sha256
+      hash: 964d715a40a12c1b998e6b074674898de414d1a5b66567579cec59eae964e267
+      byte_length: 9336
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-PSEUDOCODE_SHARED_PRIMITIVES
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-PSEUDOCODE_SHARED_PRIMITIVES-pseudocode.md
+    token: IMPL-PSEUDOCODE_SHARED_PRIMITIVES
+    input_identity:
+      algorithm: sha256
+      hash: ba526c54655fac24579dbdf5b11baa5e1713dcc2bcdb05a0ad102e1cd90aa816
+      byte_length: 3007
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK-pseudocode.md
+    token: IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK
+    input_identity:
+      algorithm: sha256
+      hash: 92443ac26941720167ac5ecc675bb8726250d18ac7e6da150e7e52b1b64a6339
+      byte_length: 5950
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-QUALITY_BINDING_INVENTORY
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-QUALITY_BINDING_INVENTORY-pseudocode.md
+    token: IMPL-QUALITY_BINDING_INVENTORY
+    input_identity:
+      algorithm: sha256
+      hash: 42ff29604086245d34d66fdc60533a43b3a04bac6c415a1f1a0d8615053dd484
+      byte_length: 3126
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-QUALITY_EVIDENCE_COLLECTION
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-QUALITY_EVIDENCE_COLLECTION-pseudocode.md
+    token: IMPL-QUALITY_EVIDENCE_COLLECTION
+    input_identity:
+      algorithm: sha256
+      hash: a17f5fd5e9eaa56f4d37a3abc547d7bec33684c596350559d50bbae028335061
+      byte_length: 3622
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER-pseudocode.md
+    token: IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER
+    input_identity:
+      algorithm: sha256
+      hash: fb9a86bde5549525730ad809f917b10499f3bf9e86fc06e3b9e48d9cf6f31607
+      byte_length: 4245
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-QUALITY_EVIDENCE_MANIFEST
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-QUALITY_EVIDENCE_MANIFEST-pseudocode.md
+    token: IMPL-QUALITY_EVIDENCE_MANIFEST
+    input_identity:
+      algorithm: sha256
+      hash: ec49ef9b0db38f387ea3b975cfb3638edffc9377765921ce5c0ba3761d4c13d3
+      byte_length: 2953
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-QUALITY_PSEUDOCODE_VALIDATOR
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-QUALITY_PSEUDOCODE_VALIDATOR-pseudocode.md
+    token: IMPL-QUALITY_PSEUDOCODE_VALIDATOR
+    input_identity:
+      algorithm: sha256
+      hash: 31dfa42877edb29a01643ed2f03a73df9f59c54f05a45901c393da3703a7c4e7
+      byte_length: 3556
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-QUALITY_SECURITY_PROFILE_VALIDATION
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-QUALITY_SECURITY_PROFILE_VALIDATION-pseudocode.md
+    token: IMPL-QUALITY_SECURITY_PROFILE_VALIDATION
+    input_identity:
+      algorithm: sha256
+      hash: 2de43db388a98bc74f253e7cc3baf49ae95209e21e25d8cc70473ea6dd114b33
+      byte_length: 3568
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-QUALITY_TEST_ADEQUACY
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-QUALITY_TEST_ADEQUACY-pseudocode.md
+    token: IMPL-QUALITY_TEST_ADEQUACY
+    input_identity:
+      algorithm: sha256
+      hash: 077f93bbe4fa825be2ee7bacb43ca34a2fdcd940eab430ef452921e3a7c675ea
+      byte_length: 3351
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-TIED_ADVERSARIAL_INQUIRY
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY-pseudocode.md
+    token: IMPL-TIED_ADVERSARIAL_INQUIRY
+    input_identity:
+      algorithm: sha256
+      hash: fa2fcee2fe9ff89363a41ac39dbf7d65f16e537712a5280193cb7af2186165c9
+      byte_length: 20646
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST-pseudocode.md
+    token: IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST
+    input_identity:
+      algorithm: sha256
+      hash: f1d07e1481e91186261b052ee6e9f7303ffd8f9b902716913eb60736d3a5e07d
+      byte_length: 10009
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md
+    token: IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT
+    input_identity:
+      algorithm: sha256
+      hash: 4dd1cd761c253759d3cefc1709843351deca59d2065724319dd28eca45c6b21c
+      byte_length: 51196
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-TIED_CLAIMS_EVIDENCE_REVIEW
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-TIED_CLAIMS_EVIDENCE_REVIEW-pseudocode.md
+    token: IMPL-TIED_CLAIMS_EVIDENCE_REVIEW
+    input_identity:
+      algorithm: sha256
+      hash: 280df438b3eae6e78a9a12a15e4b79f556e1d112003510d6eeec9fa68dd15e0c
+      byte_length: 13592
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-TIED_FEEDBACK_PROMOTION
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-TIED_FEEDBACK_PROMOTION-pseudocode.md
+    token: IMPL-TIED_FEEDBACK_PROMOTION
+    input_identity:
+      algorithm: sha256
+      hash: 535abd8f621f035e95815c838dfa60a5fa52936442cb62bf1a7f030668e04101
+      byte_length: 4934
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-TIED_FIDELITY_RESEARCH
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-TIED_FIDELITY_RESEARCH-pseudocode.md
+    token: IMPL-TIED_FIDELITY_RESEARCH
+    input_identity:
+      algorithm: sha256
+      hash: 8d4ecf4bb9c515042ce58be92a5ddd95e8bad201a9f16793673ed50e495c6797
+      byte_length: 13262
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-TIED_FILES
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-TIED_FILES-pseudocode.md
+    token: IMPL-TIED_FILES
+    input_identity:
+      algorithm: sha256
+      hash: a10a297fb8eaf9616e1a8abb2e6b2523540d1e32e9d0dd7b99b06084dadfa04b
+      byte_length: 39136
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-TIED_PROJECT_IDENTITY
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-TIED_PROJECT_IDENTITY-pseudocode.md
+    token: IMPL-TIED_PROJECT_IDENTITY
+    input_identity:
+      algorithm: sha256
+      hash: b48dff54519c5dd71848add7c2f69064a13fb16bcdc6af933c53f5788bc94083
+      byte_length: 3351
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-TIED_RESEARCH_RECORDS
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-TIED_RESEARCH_RECORDS-pseudocode.md
+    token: IMPL-TIED_RESEARCH_RECORDS
+    input_identity:
+      algorithm: sha256
+      hash: 47b953edf612823fa83653a558fc6fbcec477ddc6d74b289236dbcd14db3e55c
+      byte_length: 4161
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-TIED_VOCABULARY_REFRESH
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-TIED_VOCABULARY_REFRESH-pseudocode.md
+    token: IMPL-TIED_VOCABULARY_REFRESH
+    input_identity:
+      algorithm: sha256
+      hash: 1d5bb4680687b2aab30fc508729d14a5ddaa5740e9786ce228a7fa0bfe576708
+      byte_length: 5262
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-TIED_YAML_CANONICALIZER
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-TIED_YAML_CANONICALIZER-pseudocode.md
+    token: IMPL-TIED_YAML_CANONICALIZER
+    input_identity:
+      algorithm: sha256
+      hash: dd9453262672c1317e7ca7447196d72b149acdf7b9d662d6144d3b2647f3a753
+      byte_length: 13573
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-TIED_YAML_STYLE_RESOLVER
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-TIED_YAML_STYLE_RESOLVER-pseudocode.md
+    token: IMPL-TIED_YAML_STYLE_RESOLVER
+    input_identity:
+      algorithm: sha256
+      hash: a97547e73aa96ba8a317261e36d96a405ef913dc87c022b6a3a33fc8dc3e8812
+      byte_length: 15897
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-VOCABULARY_ANALYSIS
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-VOCABULARY_ANALYSIS-pseudocode.md
+    token: IMPL-VOCABULARY_ANALYSIS
+    input_identity:
+      algorithm: sha256
+      hash: 6aa2375a851dcc92a897ecb0aba5e196dd8c50aeb1fd419c0cf6d977fe6c8ab6
+      byte_length: 3839
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-VOCABULARY_HTML_RENDERER
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-VOCABULARY_HTML_RENDERER-pseudocode.md
+    token: IMPL-VOCABULARY_HTML_RENDERER
+    input_identity:
+      algorithm: sha256
+      hash: a5c72bb2548428f308d6b5133e2782f3c3da5e704a12e37d70378fbb9012c3e9
+      byte_length: 1090
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-VOCABULARY_PROJECTION
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-VOCABULARY_PROJECTION-pseudocode.md
+    token: IMPL-VOCABULARY_PROJECTION
+    input_identity:
+      algorithm: sha256
+      hash: da29b79eafdab4562be50dd756fbb2a57f7fe004969038d69802bdc83e072ae1
+      byte_length: 1176
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-b-stdd-IMPL-VOCABULARY_VIEWER_STATE
+    tier: B
+    client_id: stdd
+    client_root: /Users/fareed/Documents/dev/chatgpt/stdd/tied
+    sidecar_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-VOCABULARY_VIEWER_STATE-pseudocode.md
+    token: IMPL-VOCABULARY_VIEWER_STATE
+    input_identity:
+      algorithm: sha256
+      hash: abfe4463e1bfc54e0b80317af1074e966878a9088a17f4dbf336843f5a087a0a
+      byte_length: 1409
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-c-1786636023-IMPL-PRIME_PRINTER
+    tier: C
+    client_id: '1786636023'
+    client_root: /Users/fareed/Documents/dev/test/1786636023
+    sidecar_path: /Users/fareed/Documents/dev/test/1786636023/tied/implementation-decisions/IMPL-PRIME_PRINTER-pseudocode.md
+    token: IMPL-PRIME_PRINTER
+    input_identity:
+      algorithm: sha256
+      hash: 2642de08232727939e8d022ac73a779a7a3358324049ca59be652f150d37c92a
+      byte_length: 3090
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-c-1786637086-IMPL-FIRST_FIVE_PRIMES
+    tier: C
+    client_id: '1786637086'
+    client_root: /Users/fareed/Documents/dev/test/1786637086
+    sidecar_path: /Users/fareed/Documents/dev/test/1786637086/tied/implementation-decisions/IMPL-FIRST_FIVE_PRIMES-pseudocode.md
+    token: IMPL-FIRST_FIVE_PRIMES
+    input_identity:
+      algorithm: sha256
+      hash: c35fa921d9980de2936ec417a61821028adebad73eeae8705acdae424044cf68
+      byte_length: 5652
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-c-1786637885-IMPL-FIRST_N_PRIMES
+    tier: C
+    client_id: '1786637885'
+    client_root: /Users/fareed/Documents/dev/test/1786637885
+    sidecar_path: /Users/fareed/Documents/dev/test/1786637885/tied/implementation-decisions/IMPL-FIRST_N_PRIMES-pseudocode.md
+    token: IMPL-FIRST_N_PRIMES
+    input_identity:
+      algorithm: sha256
+      hash: 3d346fd0ec5bfddffffb1c8387890a099f40995e2cc044a8a361960078961046
+      byte_length: 2655
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-c-1786637885-IMPL-PRINT_FIRST_FIVE_PRIMES
+    tier: C
+    client_id: '1786637885'
+    client_root: /Users/fareed/Documents/dev/test/1786637885
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/test/1786637885/tied/implementation-decisions/IMPL-PRINT_FIRST_FIVE_PRIMES-pseudocode.md
+    token: IMPL-PRINT_FIRST_FIVE_PRIMES
+    input_identity:
+      algorithm: sha256
+      hash: 297dc070614996c554ce0d69a162892e2a88809cfab5121a88c595125ca00299
+      byte_length: 1636
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-c-1786643714-IMPL-FIBONACCI_CLI
+    tier: C
+    client_id: '1786643714'
+    client_root: /Users/fareed/Documents/dev/test/1786643714
+    sidecar_path: /Users/fareed/Documents/dev/test/1786643714/tied/implementation-decisions/IMPL-FIBONACCI_CLI-pseudocode.md
+    token: IMPL-FIBONACCI_CLI
+    input_identity:
+      algorithm: sha256
+      hash: 7d1d414839362811c47aaa896bfdc268853cf33d478485e8ac294b8e56653696
+      byte_length: 1491
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-c-1786643714-IMPL-FIBONACCI_GENERATE_SEQUENCE
+    tier: C
+    client_id: '1786643714'
+    client_root: /Users/fareed/Documents/dev/test/1786643714
+    sidecar_path: >-
+      /Users/fareed/Documents/dev/test/1786643714/tied/implementation-decisions/IMPL-FIBONACCI_GENERATE_SEQUENCE-pseudocode.md
+    token: IMPL-FIBONACCI_GENERATE_SEQUENCE
+    input_identity:
+      algorithm: sha256
+      hash: 70962a1d2c153956ed609ec6ad360cb7d03ad632e15c99f22159cc4b736aa60a
+      byte_length: 1162
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-c-1786666674-IMPL-SORT_THREE_INTEGERS
+    tier: C
+    client_id: '1786666674'
+    client_root: /Users/fareed/Documents/dev/test/1786666674
+    sidecar_path: /Users/fareed/Documents/dev/test/1786666674/tied/implementation-decisions/IMPL-SORT_THREE_INTEGERS-pseudocode.md
+    token: IMPL-SORT_THREE_INTEGERS
+    input_identity:
+      algorithm: sha256
+      hash: 708cd6e6183391a344e4a541d5cf8c6ed76d806ebeb71b78857cc22199721440
+      byte_length: 453
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-c-1787503424-IMPL-DESKTOP_WINDOW_REPORT
+    tier: C
+    client_id: '1787503424'
+    client_root: /Users/fareed/Documents/dev/test/1787503424
+    sidecar_path: /Users/fareed/Documents/dev/test/1787503424/tied/implementation-decisions/IMPL-DESKTOP_WINDOW_REPORT-pseudocode.md
+    token: IMPL-DESKTOP_WINDOW_REPORT
+    input_identity:
+      algorithm: sha256
+      hash: 04b6085e9108b69565c3f8b2f58301e6dc0eac872eb7ed531f3bab92440f8ea0
+      byte_length: 4746
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+  - id: tier-d-tied-win-diff-IMPL-TIED_FILES
+    tier: D
+    client_id: tied-win-diff
+    client_root: /Users/fareed/Documents/dev/test/tied-win-diff
+    sidecar_path: /Users/fareed/Documents/dev/test/tied-win-diff/tied/implementation-decisions/IMPL-TIED_FILES-pseudocode.md
+    token: IMPL-TIED_FILES
+    input_identity:
+      algorithm: sha256
+      hash: a10a297fb8eaf9616e1a8abb2e6b2523540d1e32e9d0dd7b99b06084dadfa04b
+      byte_length: 39136
+    lineage_tag: primary
+    exclusion_reason: null
+    included: true
+stats:
+  total_discovered: 124
+  included: 124
+  excluded: 0
+  by_tier:
+    A: 37
+    B: 78
+    C: 8
+    D: 1

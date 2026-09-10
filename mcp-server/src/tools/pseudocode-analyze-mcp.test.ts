@@ -4,6 +4,7 @@ import os from "node:os";
 import path from "node:path";
 import { describe, it } from "node:test";
 import { DEFAULT_PROOF_BOUNDARY } from "../analysis/pseudocode-ir.js";
+import { extendProofBoundaryForTypedFlow } from "../analysis/pseudocode-analyze-report.js";
 import { allTools } from "./index.js";
 
 type TextContent = { content: Array<{ type: "text"; text: string }> };
@@ -109,5 +110,38 @@ describe("pseudocode_analyze MCP [REQ-PSEUDOCODE_STATIC_ANALYSIS]", () => {
     }));
     assert.equal(validate.schema_version, "layer-b-pseudocode-validator.v1");
     assert.equal(analyze.schema_version, "pseudocode-analysis-report.v1");
+  });
+
+  it("propagates typed_flow flag and emits sections.typed_flow when true", async () => {
+    // [IMPL-PSEUDOCODE_TYPED_FLOW] [ARCH-PSEUDOCODE_TYPED_FLOW_PASS] [REQ-PSEUDOCODE_TYPED_FLOW]
+    const source = `procedure EXAMPLE:\n  Contract:\n    INPUT: x: int\n    OUTPUT: y: int\n    PRE: true\n    POST: true\n    EFFECTS: pure\n  x := "hello"`;
+    const legacy = body(await handler("pseudocode_analyze")({
+      token: "IMPL-PSEUDOCODE_TYPED_FLOW",
+      pseudocode: source,
+      typed_flow: false,
+    }));
+    const typed = body(await handler("pseudocode_analyze")({
+      token: "IMPL-PSEUDOCODE_TYPED_FLOW",
+      pseudocode: source,
+      typed_flow: true,
+    }));
+    assert.equal(legacy.proof_boundary, DEFAULT_PROOF_BOUNDARY);
+    assert.equal((legacy.sections as Record<string, unknown> | undefined)?.typed_flow, undefined);
+    assert.ok((typed.sections as Record<string, unknown>).typed_flow);
+    assert.equal(typed.proof_boundary, extendProofBoundaryForTypedFlow(DEFAULT_PROOF_BOUNDARY));
+  });
+
+  it("typed_flow true does not mutate project TIED YAML", async () => {
+    // [IMPL-PSEUDOCODE_TYPED_FLOW] [ARCH-PSEUDOCODE_TYPED_FLOW_PASS] [REQ-PSEUDOCODE_TYPED_FLOW]
+    const tiedBase = path.resolve(import.meta.dirname, "../../../tied");
+    const requirementsPath = path.join(tiedBase, "requirements.yaml");
+    const before = fs.readFileSync(requirementsPath, "utf8");
+    await handler("pseudocode_analyze")({
+      token: "IMPL-PSEUDOCODE_TYPED_FLOW",
+      pseudocode: `procedure EXAMPLE:\n  Contract:\n    INPUT: x: int\n    OUTPUT: y: int\n    PRE: true\n    POST: true\n    EFFECTS: pure\n  x := "hello"`,
+      typed_flow: true,
+    });
+    const after = fs.readFileSync(requirementsPath, "utf8");
+    assert.equal(before, after);
   });
 });

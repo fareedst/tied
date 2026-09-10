@@ -1352,6 +1352,24 @@ ARCH-PSEUDOCODE_PARSER_UNIFICATION:
   detail_file: "architecture-decisions/ARCH-PSEUDOCODE_PARSER_UNIFICATION.yaml"
   name: "Shared pseudo-code parser primitive boundary"
   status: "Active"
+ARCH-PSEUDOCODE_TYPED_FLOW_PASS:
+  cross_references:
+    - "ARCH-PSEUDOCODE_ANALYSIS_PIPELINE"
+    - "IMPL-PSEUDOCODE_ANALYSIS_ENGINE"
+    - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+    - "REQ-PSEUDOCODE_TYPED_FLOW"
+  detail_file: "architecture-decisions/ARCH-PSEUDOCODE_TYPED_FLOW_PASS.yaml"
+  name: "Optional typed-flow pass composing after abstract analysis"
+  rationale:
+    decisions:
+      - "Compose typed-flow after existing abstract pass; abstract unchanged when typed_flow false"
+      - "D14 budget semantics: iterate-until-stable on loop back-edges or max_cfg_join_iterations knob for typed pass"
+      - "Extend pseudocode-analysis-report.v1 with namespaced sections.typed_flow — no schema version bump during pilot"
+      - "Nest Tier-2 type clauses inside keyword-colon contract values without pseudocode-shared.ts regex edits (D13)"
+      - "Phased MCP exposure: Phase 1a internal module + fixtures; Phase 1b pseudocode_analyze typed_flow flag"
+      - "Typed diagnostics warnings until sponsor Phase 3 gate_mode approval"
+    why: "Typed data-flow needs a separate pass boundary from heuristic abstract analysis to preserve legacy behavior when typed_flow is false and to namespace proof claims in sections.typed_flow."
+  status: "Active"
 ARCH-QUALITY_ASSURANCE_PROFILES:
   cross_references:
     - "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK"

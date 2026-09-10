@@ -1,0 +1,10 @@
+{
+  "run_at": "2026-09-10T14:04:32.126Z",
+  "mode": "baseline",
+  "typed_flow": false,
+  "gate_mode": true,
+  "total": 124,
+  "parse_ok": 124,
+  "gate_pass": 96,
+  "failures": []
+}

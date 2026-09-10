@@ -14,11 +14,16 @@ import {
   type UnsupportedSyntax,
 } from "./pseudocode-ir.js";
 import {
+  parseCallArgExpressions,
+  splitCallArgs,
+} from "./pseudocode-expression-parser.js";
+import {
   CONTRACT_FIELD_PATTERN,
   extractSemanticTokens,
   PROCEDURE_HEADING_PATTERN,
   scanProcedureBlocks,
 } from "./pseudocode-shared.js";
+import { extractContractBinding } from "./pseudocode-typed-ir.js";
 const ASSIGNMENT_RE = /^\s*([A-Za-z_][A-Za-z0-9_]*)\s*:=\s*(.+)$/;
 const IF_RE = /^\s*IF\s+(.+?)\s*:\s*$/i;
 const ELSE_RE = /^\s*ELSE\s*:\s*$/i;
@@ -26,7 +31,8 @@ const WHILE_RE = /^\s*WHILE\s+(.+?)\s*:\s*$/i;
 const FOR_RE = /^\s*FOR\s+(.+?)\s*:\s*$/i;
 const SWITCH_RE = /^\s*SWITCH\s+(.+?)\s*:\s*$/i;
 const CASE_RE = /^\s*CASE\s+(.+?)\s*:\s*$/i;
-const CALL_RE = /^\s*CALL\s+([A-Z][A-Z0-9_]*)\s*\(/;
+const CALL_WITH_ARGS_RE = /^\s*CALL\s+([A-Z][A-Z0-9_]*)\s*\(([^)]*)\)\s*$/;
+const CALL_NO_ARGS_RE = /^\s*CALL\s+([A-Z][A-Z0-9_]*)\s*$/;
 const RUN_RE = /^\s*RUN\s+(.+?)\s*$/i;
 const RETURN_RE = /^\s*RETURN(?:\s+(.+))?\s*$/i;
 const ERROR_RE = /^\s*(?:RAISE|RETURN)\s+(?:error|failure)\b/i;
@@ -46,20 +52,56 @@ function spanAt(lineIndex: number, line: string, startCol = 0): SourceSpan {
   };
 }
 
+function contractValueFromLine(line: string): string {
+  const match = line.match(/^\s*(?:INPUT|OUTPUT|DATA|CONTROL|PRE|POST|EFFECTS|FAILURE_MODES|DATA_TRANSITION|TERMINATION)\s*:\s*(.*)$/i);
+  return match?.[1]?.trim() ?? "";
+}
+
 function contractFieldsIn(lines: string[]): ContractFields {
   const fields: string[] = [];
+  const entries: ContractFields["entries"] = [];
+  const values: Record<string, string> = {};
+  const type_tags: ContractFields["type_tags"] = {};
   let firstLine = -1;
   for (let i = 0; i < lines.length; i += 1) {
     const match = lines[i].match(CONTRACT_FIELD_PATTERN);
-    if (match) {
-      fields.push(match[1]);
-      if (firstLine < 0) firstLine = i;
+    if (!match) continue;
+    const field = match[1];
+    const value = contractValueFromLine(lines[i]);
+    const binding = extractContractBinding(value);
+    if (firstLine < 0) firstLine = i;
+    if (!fields.includes(field)) fields.push(field);
+    entries!.push({
+      field,
+      value,
+      type_tag: binding.type_tag,
+    });
+    values[field] = value;
+    if (binding.name && binding.type_tag) {
+      type_tags![binding.name] = binding.type_tag;
+    } else if (binding.type_tag && !binding.name) {
+      type_tags![field.toLowerCase()] = binding.type_tag;
     }
   }
   return {
-    fields: [...new Set(fields)],
+    fields,
+    entries,
+    values,
+    type_tags,
     span: firstLine >= 0 ? spanAt(firstLine, lines[firstLine]) : undefined,
   };
+}
+
+function parseCallStatement(line: string): { callee: string; args: string[] } | null {
+  const withArgs = line.match(CALL_WITH_ARGS_RE);
+  if (withArgs) {
+    return { callee: withArgs[1], args: splitCallArgs(withArgs[2]) };
+  }
+  const noArgs = line.match(CALL_NO_ARGS_RE);
+  if (noArgs) {
+    return { callee: noArgs[1], args: [] };
+  }
+  return null;
 }
 
 function parseStatements(
@@ -82,6 +124,7 @@ function parseStatements(
     nodeCounter.count += 1;
 
     let match: RegExpMatchArray | null;
+    let call: ReturnType<typeof parseCallStatement>;
     if ((match = line.match(IF_RE))) {
       statements.push({ kind: "if", condition: match[1].trim(), span: spanAt(i, line) });
     } else if (ELSE_RE.test(line)) {
@@ -94,8 +137,14 @@ function parseStatements(
       statements.push({ kind: "switch", expression: match[1].trim(), span: spanAt(i, line) });
     } else if ((match = line.match(CASE_RE))) {
       statements.push({ kind: "case", label: match[1].trim(), span: spanAt(i, line) });
-    } else if ((match = line.match(CALL_RE))) {
-      statements.push({ kind: "call", callee: match[1], span: spanAt(i, line) });
+    } else if ((call = parseCallStatement(line))) {
+      statements.push({
+        kind: "call",
+        callee: call.callee,
+        args: call.args,
+        arg_exprs: parseCallArgExpressions(call.args),
+        span: spanAt(i, line),
+      });
     } else if ((match = line.match(RUN_RE))) {
       statements.push({ kind: "run", target: match[1].trim(), span: spanAt(i, line) });
     } else if ((match = line.match(RETURN_RE))) {

@@ -9,9 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Bounded typed-flow Layer C pilot ([REQ-PSEUDOCODE_TYPED_FLOW])** — Optional
+  `typed_flow` pass on `pseudocode_analyze` emitting `sections.typed_flow`;
+  expression parser, typed IR, and CFG join transfer
+  ([IMPL-PSEUDOCODE_TYPED_FLOW], [ARCH-PSEUDOCODE_TYPED_FLOW_PASS]); parser
+  extensions for CALL args and `contract.values`; corpus fixtures 1–17; client
+  qualification harness under `working/PSEUDOCODE-CONSTRAINT-STUDY/`; grammar
+  v1 typed-flow extension doc; pilot measurement report (F1–F12 proceed); 626/626
+  mcp-server tests; integrated `close_out` gate (`tf-closeout-20260910`, advisory).
+
 - **`REQ-PSEUDOCODE_PARSER_UNIFICATION`** — shared `pseudocode-shared.ts` primitives; validator/parser refactor preserving `layer-b-pseudocode-validator.v1` goldens; integrated close_out gate (`parser-unification-closeout-20260908`).
 
 ### Changed
+
+- **`.gitignore`** — ignore TypeScript `*.tsbuildinfo`, typed-flow qualification
+  baseline per-entry reports, pilot/snapshots dirs, ephemeral
+  `compare-summary.json`, and per-REQ `run-pre-implementation-gates.mjs`.
 
 - **PSA Layer C mandatory gate ([REQ-PSEUDOCODE_STATIC_ANALYSIS])** — `gate_mode` on `pseudocode_analyze` fails `ok` on error diagnostics and truncation; mandatory `sub-pseudocode-static-analysis-pass` at `gate-pseudocode-validation`; grammar v1 author guide and Layer C checklist; integrated close_out gate (`doc-psa-full-update-closeout-20260909`).
 - **PSA follow-up Mode A fidelity** — adversarial-inquiry-psa fixture; inquiry PASS reused via close-out waiver (`psa-fidelity-rerun-20260908`); follow-up gate `psa-followup-closeout-20260908`.
@@ -20,6 +33,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`.gitignore`** — ignore local PSA pilot outputs and per-track close-out evidence receipts.
 
 ### Deferred
+
+- **Phase 3 typed blocking under `gate_mode` ([REQ-PSEUDOCODE_TYPED_FLOW])** —
+  warnings-only typed diagnostics remain default; production typed gate errors
+  require sponsor review of pilot measurement report before enablement.
 
 - **Phase C3 (validator consumes parser IR)** — deferred to a separate future C3 plan; close-out records the handoff only.
 

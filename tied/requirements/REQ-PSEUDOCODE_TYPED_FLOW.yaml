@@ -1,0 +1,13 @@
+REQ-PSEUDOCODE_TYPED_FLOW:
+  description: "Add bounded, opt-in typed-flow analysis composing after the existing abstract pass. Types are optional Tier-2 evidence on PRE/POST/EFFECTS and contract rows; Tier-1 behavioral semantics remain authoritative. Pilot scope includes expression parsing, nullable/shape lattice, CFG transfer/join, local CALL slot matching, namespaced report section, labeled corpus 1-17, and read-only client qualification."
+  status: "In Progress"
+  traceability:
+    architecture:
+      - "ARCH-PSEUDOCODE_TYPED_FLOW_PASS"
+    code_annotations:
+      - "REQ-PSEUDOCODE_TYPED_FLOW"
+    implementation:
+      - "IMPL-PSEUDOCODE_TYPED_FLOW"
+    tests:
+      - "mcp-server/src/analysis/fixtures/typed-flow/"
+      - "mcp-server/src/analysis/pseudocode-typed-flow.test.ts"

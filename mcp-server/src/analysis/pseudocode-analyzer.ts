@@ -12,11 +12,13 @@ import {
   buildParseSection,
   capDiagnostics,
   computeInputIdentity,
+  extendProofBoundaryForTypedFlow,
   mergeBudgets,
   normalizePasses,
   sortDiagnostics,
   type PseudocodeAnalysisReport,
 } from "./pseudocode-analyze-report.js";
+import { runTypedFlowAnalysis } from "./pseudocode-typed-flow.js";
 import {
   ANALYZER_VERSION,
   DEFAULT_PROOF_BOUNDARY,
@@ -38,6 +40,7 @@ export type AnalyzeEssencePseudocodeInput = {
   include_structural_compat?: boolean;
   strict_paths?: boolean;
   gate_mode?: boolean;
+  typed_flow?: boolean;
 };
 
 export type AnalyzeInputError = {
@@ -138,6 +141,17 @@ export function analyzeEssencePseudocode(
     unknowns.push(...abs.unknowns);
   }
 
+  let proofBoundary = DEFAULT_PROOF_BOUNDARY;
+  if (input.typed_flow === true) {
+    const cfg = cfgSection ?? buildCfg(program, effective).section;
+    if (!cfgSection) {
+      sections.cfg = cfg;
+    }
+    const typed = runTypedFlowAnalysis(program, cfg, effective);
+    sections.typed_flow = typed.section;
+    proofBoundary = extendProofBoundaryForTypedFlow(proofBoundary);
+  }
+
   if (passes.includes("obligations") || passes.includes("traceability")) {
     const abs =
       abstractSection ??
@@ -179,7 +193,7 @@ export function analyzeEssencePseudocode(
     schema_version: REPORT_SCHEMA_VERSION,
     grammar_version: GRAMMAR_VERSION,
     analyzer_version: ANALYZER_VERSION,
-    proof_boundary: DEFAULT_PROOF_BOUNDARY,
+    proof_boundary: proofBoundary,
     token: input.token,
     input_identity: inputIdentity,
     budgets_applied: { requested, effective },
