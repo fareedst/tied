@@ -147,6 +147,57 @@ describe("pseudocode_analyze MCP [REQ-PSEUDOCODE_STATIC_ANALYSIS]", () => {
     assert.ok(diagnostics.some((d) => d.code === "TYPE_MISMATCH" && d.severity === "error"));
   });
 
+  it("propagates constraint_flow flag and emits sections.constraint_language when true", async () => {
+    // [IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE] [ARCH-PSEUDOCODE_CONSTRAINT_LANGUAGE_PASS] [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE]
+    const source = `Grammar-Version: v2\nprocedure COUNT_NEGATIVE:\n  Contract:\n    INPUT: items: list of int\n    OUTPUT: count: int\n    PRE: true\n    POST: count >= 1\n    EFFECTS: pure\n  count := 0\n  RETURN count`;
+    const legacy = body(await handler("pseudocode_analyze")({
+      token: "IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE",
+      pseudocode: source,
+      typed_flow: true,
+      constraint_flow: false,
+    }));
+    const constraint = body(await handler("pseudocode_analyze")({
+      token: "IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE",
+      pseudocode: source,
+      typed_flow: true,
+      constraint_flow: true,
+    }));
+    assert.equal((legacy.sections as Record<string, unknown> | undefined)?.constraint_language, undefined);
+    assert.ok((constraint.sections as Record<string, unknown>).constraint_language);
+  });
+
+  it("propagates constraint_gate_errors and fails gate on proven constraint violations", async () => {
+    // [IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE] [ARCH-PSEUDOCODE_CONSTRAINT_LANGUAGE_PASS] [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE]
+    const source = `Grammar-Version: v2\nprocedure COUNT_NEGATIVE:\n  Contract:\n    INPUT: items: list of int\n    OUTPUT: count: int\n    PRE: true\n    POST: count >= 1\n    EFFECTS: pure\n  count := 0\n  RETURN count`;
+    const promoted = body(await handler("pseudocode_analyze")({
+      token: "IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE",
+      pseudocode: source,
+      typed_flow: true,
+      constraint_flow: true,
+      gate_mode: true,
+      constraint_gate_errors: true,
+    }));
+    assert.equal(promoted.ok, false);
+    assert.equal(promoted.gate_mode_applied, true);
+    const diagnostics = promoted.diagnostics as Array<{ code: string; severity: string }>;
+    assert.ok(diagnostics.some((d) => d.code === "REFINEMENT_VIOLATION" && d.severity === "error"));
+  });
+
+  it("defaults constraint_gate_errors effective true under gate_mode when flags omitted (sub-phase 3d)", async () => {
+    // [IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE] [ARCH-PSEUDOCODE_CONSTRAINT_LANGUAGE_PASS] [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE]
+    const source = `Grammar-Version: v2\nprocedure COUNT_NEGATIVE:\n  Contract:\n    INPUT: items: list of int\n    OUTPUT: count: int\n    PRE: true\n    POST: count >= 1\n    EFFECTS: pure\n  count := 0\n  RETURN count`;
+    const promoted = body(await handler("pseudocode_analyze")({
+      token: "IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE",
+      pseudocode: source,
+      typed_flow: true,
+      constraint_flow: true,
+      gate_mode: true,
+    }));
+    assert.equal(promoted.ok, false);
+    const diagnostics = promoted.diagnostics as Array<{ code: string; severity: string }>;
+    assert.ok(diagnostics.some((d) => d.code === "REFINEMENT_VIOLATION" && d.severity === "error"));
+  });
+
   it("typed_flow true does not mutate project TIED YAML", async () => {
     // [IMPL-PSEUDOCODE_TYPED_FLOW] [ARCH-PSEUDOCODE_TYPED_FLOW_PASS] [REQ-PSEUDOCODE_TYPED_FLOW]
     const tiedBase = path.resolve(import.meta.dirname, "../../../tied");

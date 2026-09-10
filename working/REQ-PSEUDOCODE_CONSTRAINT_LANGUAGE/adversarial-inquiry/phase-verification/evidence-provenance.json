@@ -1,0 +1,14 @@
+{
+  "provenance": {
+    "command": "node working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/run-close-out-gates.mjs",
+    "phase": "verification",
+    "request_token": "REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE",
+    "run_id": "cl-verify-20260910",
+    "schema_version": "evidence-provenance.v1",
+    "scope": [
+      "IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE#CONSTRAINT_GATE_ERRORS_FLAG#slice8"
+    ],
+    "tool_version": "stdd-mcp-local"
+  },
+  "schemaVersion": "adversarial-inquiry-provenance.v1"
+}

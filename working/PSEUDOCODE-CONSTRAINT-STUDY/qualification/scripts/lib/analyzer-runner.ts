@@ -7,6 +7,8 @@ export type AnalyzerSweepOptions = {
   gate_mode: boolean;
   typed_flow?: boolean;
   typed_gate_errors?: boolean;
+  constraint_flow?: boolean;
+  constraint_gate_errors?: boolean;
 };
 
 export type SweepResult = {
@@ -50,6 +52,12 @@ export async function analyzeSidecarEntry(
   }
   if (options.typed_gate_errors === true) {
     input.typed_gate_errors = true;
+  }
+  if (options.constraint_flow === true) {
+    input.constraint_flow = true;
+  }
+  if (options.constraint_gate_errors === true) {
+    input.constraint_gate_errors = true;
   }
 
   const report = analyzeEssencePseudocode(

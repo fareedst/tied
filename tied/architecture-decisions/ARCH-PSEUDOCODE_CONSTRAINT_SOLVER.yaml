@@ -1,0 +1,23 @@
+ARCH-PSEUDOCODE_CONSTRAINT_SOLVER:
+  cross_references:
+    - "ARCH-PSEUDOCODE_ANALYSIS_PIPELINE"
+    - "ARCH-PSEUDOCODE_TYPED_FLOW_PASS"
+  description: "Architectural boundary for fixed-point interprocedural solver with max_solver_steps, max_summary_depth, max_predicate_nodes; summary propagation at CALL/RETURN; solver truncation disclosed in report metadata."
+  name: "Constraint solver and procedure summaries"
+  rationale:
+    decisions:
+      - "Budget exceed disclosed in solver_metadata"
+      - "Missing summary yields unknown not silent pass"
+      - "Separate ConstraintAnalysisBudgets from max_fixed_point_iterations (D14)"
+    why: "Full constraint-language requires interproc propagation beyond typed-flow local CALL slot matching."
+  status: "Draft"
+  traceability:
+    code_annotations:
+      - "ARCH-PSEUDOCODE_CONSTRAINT_SOLVER"
+    implementation:
+      - "IMPL-PSEUDOCODE_ALIAS_MUTATION_POLICY"
+      - "IMPL-PSEUDOCODE_CONSTRAINT_SOLVER"
+    requirements:
+      - "REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE"
+    tests:
+      - "mcp-server/src/analysis/pseudocode-constraint-solver.test.ts"

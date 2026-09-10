@@ -1324,6 +1324,10 @@ REQ-PROMPT_TYPE_SUBAGENT:
       method: "Static contract test"
     - coverage: "TIED traceability"
       method: "tied_validate_consistency"
+REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE:
+  description: "Opt-in full constraint-language and grammar v2 for pseudo-code static analysis. Composes after typed-flow. Includes refinements, interprocedural summaries, alias/mutation policy, fixed-point solver with budget disclosure, grammar v2 with v1 migration boundary, sections.constraint_language on report v1, 40+ corpus fixtures, and qualification with F11 authoring burden gate before production constraint gate errors."
+  detail_file: "requirements/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE.yaml"
+  status: "Complete"
 REQ-PSEUDOCODE_PARSER_UNIFICATION:
   category: "Functional"
   description: "Extract shared token, procedure-range, and contract-field parsing primitives so Layer B validator and analysis parser cannot drift."

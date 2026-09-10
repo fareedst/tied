@@ -74,6 +74,19 @@ Checklist **`sub-vocabulary-sync`** uses **domain** vocab. Do not conflate with 
 | **qualification manifest** | client cohort registry (alone) | `working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/manifest.yaml` read-only client panel |
 | **input_identity** | sidecar hash (alone) | SHA-256 of sidecar bytes in analysis report and qualification manifest |
 | **annotation burden gate** | F11 gate (alone) | Stop criteria on annotation lines/decisions and semantic preservation (SP-1..SP-7) |
+| **constraint-language** | full constraints (alone) | Design class B pass after typed-flow; refinements, summaries, alias/mut policy, solver ([REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE]) |
+| **grammar v2** | pseudocode v2 (alone) | Opt-in surface syntax in `pseudocode-grammar.v2.md`; header `Grammar-Version: v2` |
+| **grammar version boundary** | v2 opt-in (alone) | Declarative header selects v2 parser; v1 default when absent |
+| **refinement predicate** | refinement (alone) | Boolean constraint on types/values; case 12 unlock |
+| **procedure summary** | interproc summary (alone) | Compact CALL/RETURN effect description for fixed-point solver |
+| **constraint solver** | fixed-point solver (alone) | Interprocedural iteration with `ConstraintAnalysisBudgets` and truncation disclosure |
+| **alias policy** | aliasing policy (alone) | Declared reference-equality rules; unknown when absent (case 11) |
+| **immutability policy** | mutation policy (alone) | `(immutable)` / `(mutable)` on DATA rows; case 8 |
+| **constraint_flow flag** | constraint analyze flag (alone) | Analyzer/MCP opt-in; requires `typed_flow: true` (Q7) |
+| **constraint_gate_errors flag** | constraint blocking flag (alone) | Phased 3a–3d promotion; defaults **effective true** when `gate_mode && typed_flow && constraint_flow`; explicit `false` opts out (Slice 8 close-out) |
+| **constraint-annotated procedure** | constraint procedure (alone) | Procedure with refinement/summary/alias/immutability/predicate annotations |
+| **solver truncation unknown** | solver budget unknown (alone) | Budget-exceeded disclosure in `sections.constraint_language.solver_metadata` |
+| **constraint corpus** | CL fixtures (alone) | ≥40 labeled fixtures under `fixtures/constraint-language/` |
 
 ---
 
@@ -204,5 +217,18 @@ Prefer in `essence_pseudocode` (not domain terms):
 | qualification manifest | Preferred terms |
 | input_identity | Preferred terms |
 | annotation burden gate | Preferred terms |
+| alias policy | Preferred terms |
+| constraint corpus | Preferred terms |
+| constraint solver | Preferred terms |
+| constraint-annotated procedure | Preferred terms |
+| constraint_flow flag | Preferred terms |
+| constraint_gate_errors flag | Preferred terms |
+| constraint-language | Preferred terms |
+| grammar v2 | Preferred terms |
+| grammar version boundary | Preferred terms |
+| immutability policy | Preferred terms |
+| procedure summary | Preferred terms |
+| refinement predicate | Preferred terms |
+| solver truncation unknown | Preferred terms |
 | Vocab routing index | Naming bridge |
 | vocabulary layer | Preferred terms |

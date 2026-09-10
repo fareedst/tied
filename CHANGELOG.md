@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Full constraint-language + grammar v2 ([REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE])** —
+  Opt-in `constraint_flow` composes after typed-flow; grammar v2 via
+  `Grammar-Version: v2` header; refinements, interproc summaries, alias/mutation
+  policy, fixed-point solver; `sections.constraint_language` on report v1; 40
+  corpus fixtures; qualification harness (`run-constraint-*.ts`);
+  PSA-CONSTRAINT-001..004; F11 pass (median 5 lines); evidence envelope;
+  integrated gates (`cl-pre-impl-20260910`, `cl-verify-20260910`,
+  `cl-closeout-20260910`, advisory).
+
 - **Request evidence envelope Slices 0–5 complete ([REQ-REQUEST_EVIDENCE_ENVELOPE])** —
   Per-REQ `request-evidence-envelope.v1.json` machine index with read-only
   `request_evidence_envelope_build` / `validate`, producer hooks
@@ -37,7 +46,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **`.gitignore`** — ignore TypeScript `*.tsbuildinfo`, typed-flow qualification
+- **Sub-phase 3d constraint gate errors ([REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE])** —
+  `constraint_gate_errors` defaults effective **true** when
+  `gate_mode && typed_flow && constraint_flow`; explicit `false` opts out;
+  sponsor approved 2026-09-10.
+
+- **`.gitignore`** — constraint-language qualification per-entry sweep patterns
+  and token-payloads; ignore TypeScript `*.tsbuildinfo`, typed-flow qualification
   baseline per-entry reports, pilot/snapshots dirs, ephemeral
   `compare-summary.json`, and per-REQ `run-pre-implementation-gates.mjs`.
 

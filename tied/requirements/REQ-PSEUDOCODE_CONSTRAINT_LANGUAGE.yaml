@@ -1,0 +1,48 @@
+REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE:
+  category: "Functional"
+  description: "Opt-in full constraint-language and grammar v2 composing after completed typed-flow. Unlocks study cases 8, 11, 12 via refinements, interprocedural summaries, alias/mutation policy, and fixed-point solver with explicit budget disclosure."
+  name: "Full constraint-language and grammar v2 for pseudo-code static analysis"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Explicit alias/mutation policy with unknown-when-absent"
+      - "Grammar v2 opt-in preserves v1 and typed-flow compatibility"
+      - "Refinement predicates and interproc summaries beyond bounded typed-flow"
+    problems_solved:
+      - "Cases 8, 11, 12 deferred as unknown under typed-flow"
+      - "No grammar v2 surface for refinements and summaries"
+      - "No interprocedural summary propagation or constraint solver"
+    why: "Typed-flow pilot completed; Design class B constraint-language is the planned follow-on with grammar v2 opt-in boundary and phased constraint_gate_errors rollout."
+  related_requirements:
+    depends_on:
+      - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+      - "REQ-PSEUDOCODE_TYPED_FLOW"
+    related_to:
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "40+ labeled constraint corpus covering DF-* catalog"
+      metric: "fixtures/constraint-language/ with CL-* factors"
+    - criterion: "constraint_flow composes after typed_flow and emits sections.constraint_language"
+      metric: "Composition tests and corpus fixtures in Slice 6–7"
+    - criterion: "F11 authoring burden gate passed before constraint_gate_errors production default"
+      metric: "constraint-measurement-report.md median ≤15 lines/procedure"
+    - criterion: "Grammar v2 spec and migration guide published with v1 backward compatibility"
+      metric: "tied/docs/pseudocode-grammar.v2.md and pseudocode-grammar-v2-migration.md; F8 analog with constraint flags false"
+    - criterion: "Qualification R1/R2 vs typed-flow Phase 3 baseline 9438d1f"
+      metric: "124/124 unchanged with constraint_flow false; zero prose-only new failures"
+  status: "Complete"
+  traceability:
+    architecture:
+      - "ARCH-PSEUDOCODE_CONSTRAINT_LANGUAGE_PASS"
+      - "ARCH-PSEUDOCODE_CONSTRAINT_SOLVER"
+      - "ARCH-PSEUDOCODE_GRAMMAR_V2"
+    code_annotations:
+      - "REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE"
+    implementation:
+      - "IMPL-PSEUDOCODE_ALIAS_MUTATION_POLICY"
+      - "IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE"
+      - "IMPL-PSEUDOCODE_CONSTRAINT_SOLVER"
+      - "IMPL-PSEUDOCODE_GRAMMAR_V2"
+    tests:
+      - "mcp-server/src/analysis/fixtures/constraint-language/"

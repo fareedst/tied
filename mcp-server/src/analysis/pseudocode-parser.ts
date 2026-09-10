@@ -5,7 +5,9 @@
 import {
   DEFAULT_BUDGETS,
   GRAMMAR_VERSION,
+  GRAMMAR_VERSION_V2,
   type ContractFields,
+  type GrammarVersion,
   type IrProcedure,
   type IrProgram,
   type IrStatement,
@@ -13,6 +15,13 @@ import {
   type SourceSpan,
   type UnsupportedSyntax,
 } from "./pseudocode-ir.js";
+import {
+  detectGrammarVersion,
+  findV2ContractEnd,
+  parseV2ContractSection,
+  type DetectGrammarVersionOptions,
+  type GrammarVersionOverride,
+} from "./pseudocode-grammar-v2.js";
 import {
   parseCallArgExpressions,
   splitCallArgs,
@@ -37,9 +46,13 @@ const RUN_RE = /^\s*RUN\s+(.+?)\s*$/i;
 const RETURN_RE = /^\s*RETURN(?:\s+(.+))?\s*$/i;
 const ERROR_RE = /^\s*(?:RAISE|RETURN)\s+(?:error|failure)\b/i;
 
+export type ParseOptions = DetectGrammarVersionOptions;
+
 export type ParseResult =
   | { ok: true; program: IrProgram }
   | { ok: false; error: string; diagnostics: Array<{ code: string; message: string; line: number }> };
+
+export { detectGrammarVersion, type GrammarVersionOverride };
 
 function spanAt(lineIndex: number, line: string, startCol = 0): SourceSpan {
   const trimmed = line.trimStart();
@@ -192,7 +205,10 @@ function parseStatements(
 export function parsePseudocodeToIr(
   source: string,
   budgets: PseudocodeAnalysisBudgets = DEFAULT_BUDGETS,
+  options: ParseOptions = {},
 ): ParseResult {
+  const grammarVersion: GrammarVersion = detectGrammarVersion(source, options);
+  const isV2 = grammarVersion === GRAMMAR_VERSION_V2;
   if (source.length > budgets.max_source_bytes) {
     return {
       ok: false,
@@ -236,7 +252,9 @@ export function parsePseudocodeToIr(
         : -1;
   const globalContract =
     globalContractStart >= 0
-      ? contractFieldsIn(lines.slice(globalContractStart, globalContractEnd))
+      ? isV2
+        ? parseV2ContractSection(lines, globalContractStart, globalContractEnd).contract
+        : contractFieldsIn(lines.slice(globalContractStart, globalContractEnd))
       : { fields: [] };
 
   const procedures: IrProcedure[] = [];
@@ -246,27 +264,48 @@ export function parsePseudocodeToIr(
 
     const contractStart = bodyLines.findIndex((line) => /^\s*Contract\s*:/i.test(line));
     let contract: ContractFields = { fields: [] };
+    let summaries: IrProcedure["summaries"];
+    let alias_policy: IrProcedure["alias_policy"];
     let stmtStart = 1;
     if (contractStart >= 0) {
-      let endIdx = contractStart + 1;
-      for (let li = contractStart + 1; li < bodyLines.length; li += 1) {
-        const line = bodyLines[li];
-        if (PROCEDURE_HEADING_PATTERN.test(line)) {
-          endIdx = li;
-          break;
-        }
-        if (/^\s*Contract\s*:/i.test(line) || CONTRACT_FIELD_PATTERN.test(line) || /^\s*#/.test(line)) {
-          endIdx = li + 1;
-          continue;
-        }
-        if (!line.trim()) {
-          endIdx = li + 1;
-          continue;
-        }
-        endIdx = li;
-        break;
+      const endIdx = isV2
+        ? findV2ContractEnd(bodyLines, contractStart)
+        : (() => {
+            let end = contractStart + 1;
+            for (let li = contractStart + 1; li < bodyLines.length; li += 1) {
+              const line = bodyLines[li];
+              if (PROCEDURE_HEADING_PATTERN.test(line)) {
+                end = li;
+                break;
+              }
+              if (
+                /^\s*Contract\s*:/i.test(line) ||
+                CONTRACT_FIELD_PATTERN.test(line) ||
+                /^\s*#/.test(line)
+              ) {
+                end = li + 1;
+                continue;
+              }
+              if (!line.trim()) {
+                end = li + 1;
+                continue;
+              }
+              end = li;
+              break;
+            }
+            return end;
+          })();
+
+      if (isV2) {
+        const absoluteStart = range.start + contractStart;
+        const absoluteEnd = range.start + endIdx;
+        const parsed = parseV2ContractSection(lines, absoluteStart, absoluteEnd);
+        contract = parsed.contract;
+        summaries = parsed.summaries.length > 0 ? parsed.summaries : undefined;
+        alias_policy = parsed.alias_policy;
+      } else {
+        contract = contractFieldsIn(bodyLines.slice(contractStart, endIdx));
       }
-      contract = contractFieldsIn(bodyLines.slice(contractStart, endIdx));
       stmtStart = endIdx;
     }
 
@@ -289,13 +328,15 @@ export function parsePseudocodeToIr(
       token_refs: extractSemanticTokens(bodyText, { unique: true }),
       contract,
       statements,
+      ...(summaries ? { summaries } : {}),
+      ...(alias_policy ? { alias_policy } : {}),
     });
   }
 
   const truncatedParse = nodeCounter.count >= budgets.max_parse_nodes;
 
   const program: IrProgram = {
-    grammar_version: GRAMMAR_VERSION,
+    grammar_version: grammarVersion,
     procedures,
     global_contract: globalContract,
     token_refs: extractSemanticTokens(source, { unique: true }),

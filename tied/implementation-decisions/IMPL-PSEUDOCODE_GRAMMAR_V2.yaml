@@ -1,0 +1,13 @@
+IMPL-PSEUDOCODE_GRAMMAR_V2:
+  description: "TypeScript parser path for grammar v2: DETECT_GRAMMAR_VERSION, PARSE_PROGRAM_V2; blocks documented in IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE sidecar."
+  status: "Draft"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-PSEUDOCODE_GRAMMAR_V2"
+    code_annotations:
+      - "IMPL-PSEUDOCODE_GRAMMAR_V2"
+    requirements:
+      - "REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE"
+    tests:
+      - "mcp-server/src/analysis/pseudocode-grammar-v2.test.ts"

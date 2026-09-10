@@ -8,7 +8,7 @@ import {
   ANALYZER_VERSION,
   DEFAULT_BUDGETS,
   DEFAULT_PROOF_BOUNDARY,
-  GRAMMAR_VERSION,
+  type GrammarVersion,
   REPORT_SCHEMA_VERSION,
   type AnalysisDiagnostic,
   type AnalysisPass,
@@ -23,6 +23,8 @@ import type { CfgSection } from "./pseudocode-cfg.js";
 import type { ObligationsSection, TraceabilitySection } from "./pseudocode-obligations.js";
 import type { SymbolsSection } from "./pseudocode-symbols.js";
 import type { PseudocodeValidationReport } from "./pseudocode-validator.js";
+import { CONSTRAINT_FLOW_PROOF_BOUNDARY_SUPPLEMENT } from "./pseudocode-constraint-language.js";
+import type { ConstraintFlowSection } from "./pseudocode-constraint-ir.js";
 import {
   TYPED_FLOW_PROOF_BOUNDARY_SUPPLEMENT,
   type TypedFlowSection,
@@ -43,6 +45,7 @@ export type AnalysisReportSections = {
   traceability?: TraceabilitySection;
   structural_compat?: PseudocodeValidationReport;
   typed_flow?: TypedFlowSection;
+  constraint_language?: ConstraintFlowSection;
 };
 
 /** [IMPL-PSEUDOCODE_TYPED_FLOW] Extend base proof boundary when typed_flow pass runs. */
@@ -52,11 +55,18 @@ export function extendProofBoundaryForTypedFlow(
   return `${base} ${TYPED_FLOW_PROOF_BOUNDARY_SUPPLEMENT}`;
 }
 
+/** [IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE] Extend proof boundary when constraint_flow pass runs. */
+export function extendProofBoundaryForConstraintFlow(
+  base: string = DEFAULT_PROOF_BOUNDARY,
+): string {
+  return `${base} ${CONSTRAINT_FLOW_PROOF_BOUNDARY_SUPPLEMENT}`;
+}
+
 export type PseudocodeAnalysisReport = {
   ok: boolean;
   gate_mode_applied?: true;
   schema_version: typeof REPORT_SCHEMA_VERSION;
-  grammar_version: typeof GRAMMAR_VERSION;
+  grammar_version: GrammarVersion;
   analyzer_version: typeof ANALYZER_VERSION;
   proof_boundary: string;
   token: string;

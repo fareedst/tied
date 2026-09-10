@@ -259,6 +259,7 @@ See generated [`docs/citdp-evidence-hook-log-correlation.md`](citdp-evidence-hoo
 | --- | --- |
 | `strip_transcripts.rb`, `dedupe_transcript_yaml.rb` | Hook YAML files (in-place writers) |
 | `analyze_tied_mcp_metrics.rb` | TIED MCP metrics JSONL (`tied-mcp-metrics.jsonl`) |
+| `tied-post-session.sh` | Chains metrics, envelope gap report, evidence-chain profile, reconcile for one `/dev/test` client |
 | `analyze_hook_log.rb`, `extract_*.rb` (except `extract_queries`) | Hook YAML (`conv_*.yaml`) |
 | `extract_queries.rb` | Full transcript YAML with `<user_query>` tags |
 | `citdp_hook_log_evidence_build.rb` | Repo `tied/citdp/` + optional hook glob on disk |

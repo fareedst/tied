@@ -12,6 +12,7 @@ import {
   buildParseSection,
   capDiagnostics,
   computeInputIdentity,
+  extendProofBoundaryForConstraintFlow,
   extendProofBoundaryForTypedFlow,
   mergeBudgets,
   normalizePasses,
@@ -19,16 +20,24 @@ import {
   type PseudocodeAnalysisReport,
 } from "./pseudocode-analyze-report.js";
 import {
+  applyConstraintGateSeverityPromotion,
+  constraintGateDiagnosticsToAnalysis,
+  CONSTRAINT_GATE_ERRORS_PROOF_BOUNDARY_SUPPLEMENT,
+  isConstraintGateErrorsEffective,
+  resolveConstraintBudgets,
+  runConstraintAnalysis,
+} from "./pseudocode-constraint-language.js";
+import {
   applyTypedGateSeverityPromotion,
   isTypedGateErrorsEffective,
   runTypedFlowAnalysis,
   TYPED_GATE_ERRORS_PROOF_BOUNDARY_SUPPLEMENT,
   typedGateDiagnosticsToAnalysis,
+  type TypedFlowSection,
 } from "./pseudocode-typed-flow.js";
 import {
   ANALYZER_VERSION,
   DEFAULT_PROOF_BOUNDARY,
-  GRAMMAR_VERSION,
   REPORT_SCHEMA_VERSION,
   type AnalysisDiagnostic,
   type AnalysisPass,
@@ -48,6 +57,8 @@ export type AnalyzeEssencePseudocodeInput = {
   gate_mode?: boolean;
   typed_flow?: boolean;
   typed_gate_errors?: boolean;
+  constraint_flow?: boolean;
+  constraint_gate_errors?: boolean;
 };
 
 export type AnalyzeInputError = {
@@ -148,22 +159,64 @@ export function analyzeEssencePseudocode(
     unknowns.push(...abs.unknowns);
   }
 
+  const effectiveTypedFlow = input.typed_flow === true || input.constraint_flow === true;
+  const constraintGateInput = {
+    gate_mode: input.gate_mode,
+    typed_flow: effectiveTypedFlow,
+    constraint_flow: input.constraint_flow,
+    constraint_gate_errors: input.constraint_gate_errors,
+  };
+
   let proofBoundary = DEFAULT_PROOF_BOUNDARY;
-  if (input.typed_flow === true) {
+  let typedSection: TypedFlowSection | undefined;
+  if (effectiveTypedFlow) {
     const cfg = cfgSection ?? buildCfg(program, effective).section;
     if (!cfgSection) {
       sections.cfg = cfg;
+      cfgSection = cfg;
     }
     const typed = runTypedFlowAnalysis(program, cfg, effective);
-    let typedSection = typed.section;
-    if (isTypedGateErrorsEffective(input)) {
+    typedSection = typed.section;
+    if (isTypedGateErrorsEffective({ ...input, typed_flow: true })) {
       typedSection = applyTypedGateSeverityPromotion(program, typedSection);
       diagnostics.push(...typedGateDiagnosticsToAnalysis(typedSection));
     }
     sections.typed_flow = typedSection;
     proofBoundary = extendProofBoundaryForTypedFlow(proofBoundary);
-    if (isTypedGateErrorsEffective(input)) {
+    if (isTypedGateErrorsEffective({ ...input, typed_flow: true })) {
       proofBoundary = `${proofBoundary} ${TYPED_GATE_ERRORS_PROOF_BOUNDARY_SUPPLEMENT}`;
+    }
+  }
+
+  if (input.constraint_flow === true && typedSection) {
+    const cfg = cfgSection ?? buildCfg(program, effective).section;
+    if (!cfgSection) {
+      sections.cfg = cfg;
+      cfgSection = cfg;
+    }
+    const callGraph =
+      sections.call_graph ?? buildCallGraph(program, effective).section;
+    if (!sections.call_graph) {
+      sections.call_graph = callGraph;
+    }
+    const constraintBudgets = resolveConstraintBudgets();
+    const constraint = runConstraintAnalysis(
+      program,
+      callGraph,
+      cfg,
+      typedSection,
+      constraintBudgets,
+    );
+    let constraintSection = constraint.section;
+    if (isConstraintGateErrorsEffective(constraintGateInput)) {
+      constraintSection = applyConstraintGateSeverityPromotion(program, constraintSection);
+      diagnostics.push(...constraintGateDiagnosticsToAnalysis(constraintSection));
+    }
+    sections.constraint_language = constraintSection;
+    unknowns.push(...constraintSection.unknowns);
+    proofBoundary = extendProofBoundaryForConstraintFlow(proofBoundary);
+    if (isConstraintGateErrorsEffective(constraintGateInput)) {
+      proofBoundary = `${proofBoundary} ${CONSTRAINT_GATE_ERRORS_PROOF_BOUNDARY_SUPPLEMENT}`;
     }
   }
 
@@ -206,7 +259,7 @@ export function analyzeEssencePseudocode(
     ok,
     ...(gateModeApplied ? { gate_mode_applied: true as const } : {}),
     schema_version: REPORT_SCHEMA_VERSION,
-    grammar_version: GRAMMAR_VERSION,
+    grammar_version: program.grammar_version,
     analyzer_version: ANALYZER_VERSION,
     proof_boundary: proofBoundary,
     token: input.token,

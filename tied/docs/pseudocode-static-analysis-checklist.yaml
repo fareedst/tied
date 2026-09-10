@@ -110,9 +110,39 @@ checklist:
     title: "Opaque and unsupported typed constructs remain non-gating"
     verify:
       - "TYPED_OPAQUE_EXPR and TYPED_UNSUPPORTED_SYNTAX never promote to error-severity gate diagnostics"
+  - category: constraint_language
+    id: PSA-CONSTRAINT-001
+    required: false
+    severity_on_failure: error
+    title: "Constraint gate errors promote proven violations on constraint-annotated procedures"
+    verify:
+      - "when constraint_gate_errors true with gate_mode typed_flow and constraint_flow, REFINEMENT_VIOLATION/MUTATION_VIOLATION/ALIAS_VIOLATION/SUMMARY_CONFLICT are error-severity on constraint-annotated procedures"
+  - category: constraint_language
+    id: PSA-CONSTRAINT-002
+    required: false
+    severity_on_failure: error
+    title: "Prose-only and v1-only procedures emit no constraint gate errors"
+    verify:
+      - "prose-only and v1-only procedures keep constraint diagnostics at warning severity under gate_mode"
+  - category: constraint_language
+    id: PSA-CONSTRAINT-003
+    required: false
+    severity_on_failure: warning
+    title: "sections.constraint_language lists severity and solver metadata"
+    verify:
+      - "sections.constraint_language.diagnostics include severity field for each constraint diagnostic"
+      - "solver truncation disclosed in sections.constraint_language.solver_metadata when budget exceeded"
+  - category: constraint_language
+    id: PSA-CONSTRAINT-004
+    required: false
+    severity_on_failure: error
+    title: "Opaque and unsupported constraint constructs remain non-gating"
+    verify:
+      - "CONSTRAINT_UNSUPPORTED_SYNTAX and solver truncation unknowns never promote to error-severity gate diagnostics"
 notes:
   - "abstract pass is recommended in default MCP pass list; warnings from abstract do not fail gate_mode ok unless promoted to error severity"
   - "strict_paths is not required at pre-RED; CONTRADICTORY_PATH fails ok only when strict_paths true"
   - "file-scoped gate submits complete sidecar for each changed IMPL; pre-psa-grammar N/A does not apply inside that submitted file"
   - "evidence-chain invoke_pseudocode_analyze live validator remains parse-only; do not conflate with this mandatory gate path"
   - "typed_gate_errors defaults false; Phase 3 production blocking requires explicit opt-in until sponsor approves sub-phase 3d default flip"
+  - "constraint_gate_errors defaults false (sub-phase 3a); production default flip deferred to Slice 8 sponsor gate"

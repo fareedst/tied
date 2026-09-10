@@ -1,0 +1,15 @@
+{
+  "run_at": "2026-09-10T19:19:30.387Z",
+  "mode": "constraint-phase-gate",
+  "typed_flow": true,
+  "constraint_flow": true,
+  "constraint_gate_errors": true,
+  "gate_mode": true,
+  "total": 124,
+  "parse_ok": 124,
+  "gate_pass": 96,
+  "new_gate_failures_vs_pilot": [],
+  "new_gate_failures_annotated": [],
+  "new_gate_failures_prose_only": [],
+  "failures": []
+}

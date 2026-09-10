@@ -392,6 +392,7 @@ Related repo scripts (not wrapped here)
   scripts/lint_yaml.cmd -F tied  Windows tied YAML lint parity
   scripts/yaml_semantic_compare.rb
   scripts/analyze_tied_mcp_metrics.rb   offline MCP metrics JSONL analysis
+  scripts/tied-post-session.sh CLIENT   post-session metrics + envelope + profile + reconcile
   scripts/run-feature-batch.sh          Ruby agent-stream batch runner
 
   Client onboarding CLI (inside a bootstrapped project):

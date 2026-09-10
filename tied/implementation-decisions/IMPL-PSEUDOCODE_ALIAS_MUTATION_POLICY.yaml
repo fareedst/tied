@@ -1,0 +1,13 @@
+IMPL-PSEUDOCODE_ALIAS_MUTATION_POLICY:
+  description: "TypeScript alias/mutation policy module: ENFORCE_ALIAS_MUTATION_POLICY; blocks in orchestration sidecar."
+  status: "Draft"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-PSEUDOCODE_CONSTRAINT_SOLVER"
+    code_annotations:
+      - "IMPL-PSEUDOCODE_ALIAS_MUTATION_POLICY"
+    requirements:
+      - "REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE"
+    tests:
+      - "mcp-server/src/analysis/pseudocode-constraint-alias-mutation.test.ts"

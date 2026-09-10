@@ -27,9 +27,15 @@ tied/features/
 # Ephemeral working/ generated evidence — not canonical TIED intent
 # (tied/vocab/fidelity-research.md, quality-assurance.md; keep locally under working/)
 working/**/adversarial-inquiry/
+!working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-pre_implementation/
+!working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-pre_implementation/**
+!working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-verification/
+!working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-verification/**
 working/**/gate-*.json
 # Gate receipts and activation collect outputs (regenerate per close-out run)
 working/**/gates/
+!working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/gates/
+!working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/gates/**
 # Close-out operator scratch (regenerate per plan-close-out / tied_verify run)
 working/**/gate-ledger.jsonl
 working/**/citdp-doc-*.json
@@ -100,6 +106,27 @@ working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/**/*.typed-true.report.json
 working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/**/*.typed-gate-errors.report.json
 # Ephemeral compare output (aggregates live under qualification/metrics/)
 working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/metrics/compare-summary.json
+
+# Constraint-language qualification — per-entry reports (regenerate via run-constraint-*.ts)
+working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/qualification/baseline/*.report.json
+working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/qualification/pilot/*
+!working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/qualification/pilot/summary.json
+working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/qualification/snapshots/
+working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/qualification/phase-gate/*
+!working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/qualification/phase-gate/summary.json
+working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/qualification/**/*.regression-off.report.json
+working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/qualification/**/*.constraint-true.report.json
+working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/qualification/**/*.constraint-gate-errors.report.json
+working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/qualification/metrics/compare-constraint-summary.json
+# MCP token-creation payloads (regenerate via tied_token_create_with_detail)
+working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/token-payloads/
+# Stale root-level adversarial inquiry copies (phase dirs are canonical)
+working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/obligation-report.json
+working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/evidence-provenance.json
+working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/gate-result.json
+working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/finding-ledger.jsonl
+# Working CITDP duplicate (canonical copy under tied/citdp/)
+working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/CITDP-REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE.yaml
 
 # Per-REQ integrated gate runner scripts (regenerate per build-plan / close-out; includes run-phase3-gates.mjs)
 working/**/run-*-gates.mjs

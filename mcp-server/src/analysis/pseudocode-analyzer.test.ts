@@ -1,7 +1,11 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { describe, it } from "node:test";
 import {
   computeInputIdentity,
+  extendProofBoundaryForConstraintFlow,
   extendProofBoundaryForTypedFlow,
   mergeBudgets,
   serializeAnalysisReport,
@@ -204,5 +208,144 @@ describe("pseudocode-analyzer orchestrator [REQ-PSEUDOCODE_STATIC_ANALYSIS]", ()
     if (!("schema_version" in report)) return;
     assert.equal(report.ok, true);
     assert.equal(report.sections.typed_flow, undefined);
+  });
+});
+
+const constraintFixtureDir = path.join(
+  path.dirname(fileURLToPath(import.meta.url)),
+  "..",
+  "..",
+  "src",
+  "analysis",
+  "fixtures",
+  "constraint-language",
+);
+
+function loadConstraintFixture(name: string): string {
+  return fs.readFileSync(path.join(constraintFixtureDir, name), "utf8");
+}
+
+describe("pseudocode-analyzer constraint_flow [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE]", () => {
+  it("F8: constraint_flow false is byte-identical to typed-flow Phase 3 baseline", () => {
+    // [IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE] [ARCH-PSEUDOCODE_CONSTRAINT_LANGUAGE_PASS] [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE]
+    const source = loadConstraintFixture("corpus-cl-05-v1-compat-no-header.pseudocode.md");
+    const typedBaseline = analyzeEssencePseudocode({
+      token: "IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE",
+      pseudocode: source,
+      typed_flow: true,
+    });
+    const constraintOff = analyzeEssencePseudocode({
+      token: "IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE",
+      pseudocode: source,
+      typed_flow: true,
+      constraint_flow: false,
+    });
+    if (!("schema_version" in typedBaseline) || !("schema_version" in constraintOff)) return;
+    assert.equal(serializeAnalysisReport(typedBaseline), serializeAnalysisReport(constraintOff));
+    assert.equal(constraintOff.sections.constraint_language, undefined);
+  });
+
+  it("constraint_flow true coerces typed_flow and emits sections.constraint_language", () => {
+    // [IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE] [ARCH-PSEUDOCODE_CONSTRAINT_LANGUAGE_PASS] [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE]
+    const source = loadConstraintFixture("corpus-cl-08-refinement-violation-neg.pseudocode.md");
+    const report = analyzeEssencePseudocode({
+      token: "IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE",
+      pseudocode: source,
+      constraint_flow: true,
+    });
+    if (!("schema_version" in report)) return;
+    assert.ok(report.sections.typed_flow);
+    assert.ok(report.sections.constraint_language);
+    assert.ok(
+      report.sections.constraint_language!.diagnostics.some((d) => d.code === "REFINEMENT_VIOLATION"),
+    );
+    assert.equal(
+      report.proof_boundary,
+      extendProofBoundaryForConstraintFlow(extendProofBoundaryForTypedFlow(DEFAULT_PROOF_BOUNDARY)),
+    );
+  });
+
+  it("CL-6: v1 sidecar with constraint_flow true emits zero constraint diagnostics", () => {
+    // [IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE] [ARCH-PSEUDOCODE_CONSTRAINT_LANGUAGE_PASS] [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE]
+    const source = loadConstraintFixture("corpus-cl-05-v1-compat-no-header.pseudocode.md");
+    const report = analyzeEssencePseudocode({
+      token: "IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE",
+      pseudocode: source,
+      typed_flow: true,
+      constraint_flow: true,
+    });
+    if (!("schema_version" in report)) return;
+    assert.ok(report.sections.constraint_language);
+    assert.equal(report.sections.constraint_language!.diagnostics.length, 0);
+    assert.equal(report.sections.constraint_language!.unknowns.length, 0);
+  });
+
+  it("gate_mode: constraint_gate_errors false keeps warnings-only on constraint violations", () => {
+    // [IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE] [ARCH-PSEUDOCODE_CONSTRAINT_LANGUAGE_PASS] [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE]
+    const source = loadConstraintFixture("corpus-cl-08-refinement-violation-neg.pseudocode.md");
+    const report = analyzeEssencePseudocode({
+      token: "IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE",
+      pseudocode: source,
+      typed_flow: true,
+      constraint_flow: true,
+      gate_mode: true,
+      constraint_gate_errors: false,
+    });
+    if (!("schema_version" in report)) return;
+    assert.equal(report.ok, true);
+    assert.equal(
+      report.diagnostics.some((d) => d.code === "REFINEMENT_VIOLATION" && d.severity === "error"),
+      false,
+    );
+  });
+
+  it("gate_mode: default constraint_gate_errors promotes REFINEMENT_VIOLATION to gate failure (sub-phase 3d)", () => {
+    // [IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE] [ARCH-PSEUDOCODE_CONSTRAINT_LANGUAGE_PASS] [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE]
+    const source = loadConstraintFixture("corpus-cl-08-refinement-violation-neg.pseudocode.md");
+    const report = analyzeEssencePseudocode({
+      token: "IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE",
+      pseudocode: source,
+      typed_flow: true,
+      constraint_flow: true,
+      gate_mode: true,
+    });
+    if (!("schema_version" in report)) return;
+    assert.equal(report.ok, false);
+    assert.ok(
+      report.diagnostics.some((d) => d.code === "REFINEMENT_VIOLATION" && d.severity === "error"),
+    );
+  });
+
+  it("gate_mode: constraint_gate_errors true promotes REFINEMENT_VIOLATION to gate failure", () => {
+    // [IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE] [ARCH-PSEUDOCODE_CONSTRAINT_LANGUAGE_PASS] [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE]
+    const source = loadConstraintFixture("corpus-cl-08-refinement-violation-neg.pseudocode.md");
+    const report = analyzeEssencePseudocode({
+      token: "IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE",
+      pseudocode: source,
+      typed_flow: true,
+      constraint_flow: true,
+      gate_mode: true,
+      constraint_gate_errors: true,
+    });
+    if (!("schema_version" in report)) return;
+    assert.equal(report.ok, false);
+    assert.ok(
+      report.diagnostics.some((d) => d.code === "REFINEMENT_VIOLATION" && d.severity === "error"),
+    );
+  });
+
+  it("F9: constraint_flow report serialization is deterministic", () => {
+    // [IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE] [ARCH-PSEUDOCODE_CONSTRAINT_LANGUAGE_PASS] [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE]
+    const source = loadConstraintFixture("corpus-cl-08-refinement-violation-neg.pseudocode.md");
+    const input = {
+      token: "IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE",
+      pseudocode: source,
+      typed_flow: true as const,
+      constraint_flow: true as const,
+    };
+    const first = analyzeEssencePseudocode(input);
+    const second = analyzeEssencePseudocode(input);
+    if (!("schema_version" in first) || !("schema_version" in second)) return;
+    assert.equal(serializeAnalysisReport(first), serializeAnalysisReport(second));
   });
 });

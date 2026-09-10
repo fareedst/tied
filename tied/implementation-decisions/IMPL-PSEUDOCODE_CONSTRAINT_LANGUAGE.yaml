@@ -1,0 +1,19 @@
+IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE:
+  description: "Orchestration IMPL: constraint_flow controls, report section, severity promotion, MCP wiring (Slice 6), qualification harness integration."
+  essence_pseudocode_path: "implementation-decisions/IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE-pseudocode.md"
+  status: "Draft"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-PSEUDOCODE_CONSTRAINT_LANGUAGE_PASS"
+      - "ARCH-PSEUDOCODE_CONSTRAINT_SOLVER"
+      - "ARCH-PSEUDOCODE_GRAMMAR_V2"
+    code_annotations:
+      - "IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE"
+    requirements:
+      - "REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE"
+      - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+      - "REQ-PSEUDOCODE_TYPED_FLOW"
+    tests:
+      - "mcp-server/src/analysis/fixtures/constraint-language/"
+      - "mcp-server/src/analysis/pseudocode-constraint-language.test.ts"

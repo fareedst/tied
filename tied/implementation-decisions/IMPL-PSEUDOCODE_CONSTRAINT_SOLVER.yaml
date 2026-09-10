@@ -1,0 +1,13 @@
+IMPL-PSEUDOCODE_CONSTRAINT_SOLVER:
+  description: "TypeScript modules for constraint solver: RESOLVE_CONSTRAINT_BUDGETS, CHECK_REFINEMENT_ENTAILMENT, RUN_CONSTRAINT_SOLVER; blocks in orchestration sidecar."
+  status: "Draft"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-PSEUDOCODE_CONSTRAINT_SOLVER"
+    code_annotations:
+      - "IMPL-PSEUDOCODE_CONSTRAINT_SOLVER"
+    requirements:
+      - "REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE"
+    tests:
+      - "mcp-server/src/analysis/pseudocode-constraint-solver.test.ts"

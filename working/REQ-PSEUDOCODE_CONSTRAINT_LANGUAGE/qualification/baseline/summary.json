@@ -1,0 +1,15 @@
+{
+  "run_at": "2026-09-10T19:19:18.630Z",
+  "mode": "constraint-baseline",
+  "typed_flow": true,
+  "typed_gate_errors": true,
+  "constraint_flow": false,
+  "constraint_gate_errors": false,
+  "gate_mode": true,
+  "total": 124,
+  "parse_ok": 124,
+  "gate_pass": 96,
+  "r1_unchanged_vs_phase3": 124,
+  "r1_failures": [],
+  "failures": []
+}

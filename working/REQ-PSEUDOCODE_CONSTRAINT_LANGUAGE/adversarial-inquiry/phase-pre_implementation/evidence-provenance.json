@@ -1,0 +1,14 @@
+{
+  "provenance": {
+    "command": "node working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/run-pre-implementation-gates.mjs",
+    "phase": "pre_implementation",
+    "request_token": "REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE",
+    "run_id": "cl-pre-impl-20260910",
+    "schema_version": "evidence-provenance.v1",
+    "scope": [
+      "IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE#CONSTRAINT_FLOW_CONTROLS#slice1"
+    ],
+    "tool_version": "stdd-mcp-local"
+  },
+  "schemaVersion": "adversarial-inquiry-provenance.v1"
+}

@@ -1,0 +1,125 @@
+{
+  "canonicalMutation": false,
+  "findings": [
+    {
+      "direction": "B",
+      "id": "0108b139229f78bc",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "statement-f8"
+    },
+    {
+      "direction": "A",
+      "id": "2cd53e888b5c77a4",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "statement-qualification-r1-r2"
+    },
+    {
+      "direction": "A",
+      "id": "2fff0c42a3a581da",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "statement-prose-only-guard"
+    },
+    {
+      "direction": "A",
+      "id": "4256c27f6b994406",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "statement-f8"
+    },
+    {
+      "direction": "B",
+      "id": "436db7b05877340a",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "statement-f11"
+    },
+    {
+      "direction": "B",
+      "id": "4761b0c9880e8569",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "statement-prose-only-guard"
+    },
+    {
+      "direction": "B",
+      "id": "757dc79f72a2fc64",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "statement-qualification-r1-r2"
+    },
+    {
+      "direction": "A",
+      "id": "8d397027dda339b7",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "statement-3d-default"
+    },
+    {
+      "direction": "A",
+      "id": "aa3000871868a061",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "statement-f11"
+    },
+    {
+      "direction": "B",
+      "id": "ea251167c7552ced",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "statement-3d-default"
+    }
+  ],
+  "graph": {
+    "edges": [
+      {
+        "from": "REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE#criterion-constraint-gate-3d",
+        "kind": "criterion_constraint",
+        "to": "constraint:constraint-gate-errors-3d"
+      },
+      {
+        "from": "constraint:constraint-gate-errors-3d",
+        "kind": "constraint_block",
+        "to": "IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE#CONSTRAINT_GATE_ERRORS_FLAG#slice8"
+      }
+    ],
+    "nodes": [
+      {
+        "id": "constraint:constraint-gate-errors-3d",
+        "kind": "constraint"
+      },
+      {
+        "id": "IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE#CONSTRAINT_GATE_ERRORS_FLAG#slice8",
+        "kind": "block",
+        "revision": "sidecar-slice8"
+      },
+      {
+        "id": "REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE#criterion-constraint-gate-3d",
+        "kind": "criterion",
+        "revision": "slice8-rev"
+      }
+    ],
+    "projectId": "constraint-language-slice8"
+  },
+  "projectId": "constraint-language-slice8",
+  "proofBoundaries": [
+    "semantic_fidelity"
+  ],
+  "readOnly": true,
+  "schemaVersion": "adversarial-inquiry-report.v1",
+  "scope": [
+    "IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE#CONSTRAINT_GATE_ERRORS_FLAG#slice8"
+  ]
+}

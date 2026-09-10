@@ -1344,6 +1344,18 @@ ARCH-PSEUDOCODE_ANALYSIS_PIPELINE:
   detail_file: "architecture-decisions/ARCH-PSEUDOCODE_ANALYSIS_PIPELINE.yaml"
   name: "Pseudo-code static analysis pipeline"
   status: "Active"
+ARCH-PSEUDOCODE_CONSTRAINT_LANGUAGE_PASS:
+  description: "Layer C constraint-language pass composing after typed-flow; sections.constraint_language; constraint-annotated procedure gate scoping; phased constraint_gate_errors 3a–3d."
+  detail_file: "architecture-decisions/ARCH-PSEUDOCODE_CONSTRAINT_LANGUAGE_PASS.yaml"
+  status: "Draft"
+ARCH-PSEUDOCODE_CONSTRAINT_SOLVER:
+  description: "Fixed-point interprocedural constraint solver, procedure summaries, ConstraintAnalysisBudgets, and truncation disclosure policy."
+  detail_file: "architecture-decisions/ARCH-PSEUDOCODE_CONSTRAINT_SOLVER.yaml"
+  status: "Draft"
+ARCH-PSEUDOCODE_GRAMMAR_V2:
+  description: "Grammar v2 surface syntax, Grammar-Version header opt-in boundary, and v1 compatibility contract."
+  detail_file: "architecture-decisions/ARCH-PSEUDOCODE_GRAMMAR_V2.yaml"
+  status: "Draft"
 ARCH-PSEUDOCODE_PARSER_UNIFICATION:
   cross_references:
     - "ARCH-PSEUDOCODE_ANALYSIS_PIPELINE"

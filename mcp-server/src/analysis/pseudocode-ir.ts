@@ -2,10 +2,13 @@
  * [IMPL-PSEUDOCODE_ANALYSIS_ENGINE] [ARCH-PSEUDOCODE_ANALYSIS_PIPELINE] [REQ-PSEUDOCODE_STATIC_ANALYSIS]
  * Summary: Normalized IR types for pseudo-code static analysis grammar v1.
  */
+import type { AliasPolicy, MutabilityTag, ProcedureSummary } from "./pseudocode-constraint-ir.js";
 import type { Expr } from "./pseudocode-expression-parser.js";
 import type { TypeTag } from "./pseudocode-typed-ir.js";
 
 export const GRAMMAR_VERSION = "pseudocode-grammar.v1" as const;
+export const GRAMMAR_VERSION_V2 = "pseudocode-grammar.v2" as const;
+export type GrammarVersion = typeof GRAMMAR_VERSION | typeof GRAMMAR_VERSION_V2;
 export const REPORT_SCHEMA_VERSION = "pseudocode-analysis-report.v1" as const;
 export const ANALYZER_VERSION = "1.0.0" as const;
 
@@ -67,6 +70,10 @@ export type ContractFieldEntry = {
   field: string;
   value: string;
   type_tag?: TypeTag;
+  /** [IMPL-PSEUDOCODE_GRAMMAR_V2] Refinement predicate text from where clause. */
+  refinement?: string;
+  /** [IMPL-PSEUDOCODE_GRAMMAR_V2] Immutability annotation on DATA rows. */
+  mutability?: MutabilityTag;
 };
 
 export type ContractFields = {
@@ -165,6 +172,10 @@ export type IrProcedure = {
   token_refs: string[];
   contract: ContractFields;
   statements: IrStatement[];
+  /** [IMPL-PSEUDOCODE_GRAMMAR_V2] Interprocedural summary declarations. */
+  summaries?: ProcedureSummary[];
+  /** [IMPL-PSEUDOCODE_GRAMMAR_V2] Alias policy block when declared. */
+  alias_policy?: AliasPolicy;
 };
 
 export type UnsupportedSyntax = {
@@ -174,7 +185,7 @@ export type UnsupportedSyntax = {
 };
 
 export type IrProgram = {
-  grammar_version: typeof GRAMMAR_VERSION;
+  grammar_version: GrammarVersion;
   procedures: IrProcedure[];
   global_contract: ContractFields;
   token_refs: string[];
@@ -208,7 +219,12 @@ export type AnalysisDiagnosticCode =
   | "NULL_FLOW"
   | "SHAPE_MISMATCH"
   | "CALL_TYPE_MISMATCH"
-  | "JOIN_INCOMPATIBLE";
+  | "JOIN_INCOMPATIBLE"
+  | "REFINEMENT_VIOLATION"
+  | "MUTATION_VIOLATION"
+  | "ALIAS_VIOLATION"
+  | "SUMMARY_CONFLICT"
+  | "CONSTRAINT_UNSUPPORTED_SYNTAX";
 
 export type AnalysisDiagnostic = {
   severity: "error" | "warning" | "info";

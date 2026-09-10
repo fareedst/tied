@@ -1,0 +1,15 @@
+{
+  "run_at": "2026-09-10T19:19:24.465Z",
+  "mode": "constraint-pilot",
+  "typed_flow": true,
+  "constraint_flow": true,
+  "constraint_gate_errors": false,
+  "gate_mode": true,
+  "total": 124,
+  "parse_ok": 124,
+  "gate_pass": 96,
+  "r1_regression_constraint_off_unchanged": 124,
+  "r2_prose_only_new_gate_failures": [],
+  "new_gate_failures_vs_phase3": [],
+  "failures": []
+}

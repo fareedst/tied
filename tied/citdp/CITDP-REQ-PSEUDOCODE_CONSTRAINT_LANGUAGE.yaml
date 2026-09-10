@@ -1,0 +1,114 @@
+CITDP-REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE:
+  change_definition:
+    current_behavior: "Layer C provides bounded typed-flow when typed_flow true; grammar v1 + typed-flow extension; cases 8, 11, 12 unknown by policy; no refinements, interproc summaries, or alias/mutation enforcement."
+    desired_behavior: "Opt-in constraint-language with grammar v2 header boundary; constraint_flow composes after typed_flow; sections.constraint_language on report v1; 40+ corpus; F11 gate before constraint_gate_errors production default."
+    non_goals:
+      - "Client tree mutation under /Users/fareed/Documents/dev/test"
+      - "Global report schema v2 bump without measured need"
+      - "Maturity score / weighted adoption index"
+      - "pseudocode-shared.ts regex edits without Layer B regression (D13)"
+      - "Re-implement typed-flow (expression parser, CFG join, local CALL matching)"
+    success_criteria:
+      - "40+ constraint corpus fixtures (Slice 7)"
+      - "F11 median ≤15 lines/procedure before constraint_gate_errors 3d"
+      - "F8/R1/R2 vs typed-flow Phase 3 baseline 9438d1f"
+      - "Grammar v2 spec and migration guide published (Slice 1)"
+    unchanged_behavior: "constraint_flow false and all constraint flags false preserve typed-flow Phase 3 outcomes."
+  completion_criteria:
+    activation:
+      phase: "close_out"
+      request_token: "REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE"
+      run_id: "cl-closeout-20260910"
+    checklist_gate:
+      dispositions:
+        - "completed"
+        - "not_applicable"
+        - "pending"
+        - "waived"
+      fail_closed: true
+      phases:
+        - "close_out"
+        - "pre_implementation"
+        - "verification"
+    verification_gate_notes: "739/740 tests pass; R1 124/124 R2 0; F11 pass; constraint_gate_errors 3d enabled with sponsor approval."
+  evidence:
+    commands:
+      - "bun run working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/run-constraint-annotation-study.ts"
+      - "node working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/run-close-out-gates.mjs"
+    proof_boundaries:
+      - "Constraint checks apply only where v2/constraint annotations and structured predicates are present"
+      - "Not runtime execution or complete behavioral verification"
+  impact_analysis:
+    modules_or_boundaries: "mcp-server/src/analysis/pseudocode-constraint-*.ts; pseudocode-grammar-v2.ts; pseudocode-analyzer.ts; pseudocode-analyze-report.ts; tools/index.ts"
+    tied_tokens_affected:
+      - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+      - "REQ-PSEUDOCODE_TYPED_FLOW"
+    tied_tokens_new:
+      - "ARCH-PSEUDOCODE_CONSTRAINT_LANGUAGE_PASS"
+      - "ARCH-PSEUDOCODE_CONSTRAINT_SOLVER"
+      - "ARCH-PSEUDOCODE_GRAMMAR_V2"
+      - "IMPL-PSEUDOCODE_ALIAS_MUTATION_POLICY"
+      - "IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE"
+      - "IMPL-PSEUDOCODE_CONSTRAINT_SOLVER"
+      - "IMPL-PSEUDOCODE_GRAMMAR_V2"
+      - "REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE"
+  leap_feedback:
+    divergences_from_analysis: "Sub-phase 3d default flip applied after F11 pass and sponsor approval; isConstraintGateErrorsEffective mirrors typed_gate_errors Phase 3d"
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE"
+    recorded_at: "2026-09-10"
+    title: "Full constraint-language and grammar v2"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver:
+        approval: "constraint-3d-sponsor-approved-20260910"
+        expiry: "2026-12-31"
+        owner: "REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE"
+        rationale: "Verification inquiry unchanged after 3d default flip and measurement report; close_out inquiry waived."
+        referenced_verification_run_id: "cl-verify-20260910"
+      counterexamples:
+        - "constraint_flow false changes typed-flow Phase 3 gate outcomes"
+        - "Solver truncation treated as proven violation"
+        - "v2 header forces constraint errors on prose-only procedures"
+      depth_change_waiver: null
+      depth_selected_at: "2026-09-10T18:00:00Z"
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "40 constraint fixtures; FP cap 0%"
+        - "F11 median 5 lines/procedure; 739/740 mcp-server tests pass"
+        - "F8/R1 124/124 unchanged with constraint_flow false"
+        - "Qualification R2 zero prose-only new gate failures"
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/constraint-measurement-report.md"
+        - "working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/qualification/metrics/annotation-overhead-constraint.yaml"
+        - "working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/qualification/metrics/compare-constraint-summary.json"
+      gate_policy: "advisory"
+      prior_depth_tier: null
+      profile_depth: "integrated"
+      research_profile: "read-only"
+      stop_criteria:
+        - "F11 median >15 lines/procedure"
+        - "F8 regression with constraint flags false"
+        - "R1/R2 qualification failure vs Phase 3 baseline"
+    risks:
+      - id: "scope-creep"
+        impact: "high"
+        likelihood: "high"
+        mitigation: "8 phased slices with per-slice gates"
+      - id: "authoring-burden"
+        impact: "high"
+        likelihood: "high"
+        mitigation: "F11 gate; warnings-first constraint_gate_errors 3a-3d"
+  status: "complete"
+  test_strategy:
+    layers:
+      - focus: "124-entry manifest R1-R6 analog vs Phase 3 baseline"
+        layer: "qualification"
+      - focus: "40+ DF-* fixtures (Slice 7)"
+        layer: "corpus"
+      - focus: "Grammar v2 parse, solver, alias/mut domains (Slices 2-5)"
+        layer: "unit"

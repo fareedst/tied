@@ -1,0 +1,23 @@
+ARCH-PSEUDOCODE_GRAMMAR_V2:
+  cross_references:
+    - "ARCH-PSEUDOCODE_ANALYSIS_PIPELINE"
+    - "REQ-PSEUDOCODE_TYPED_FLOW"
+  description: "Architectural boundary for grammar v2 opt-in via Grammar-Version: v2 header; v1 and v1 typed-flow extension parse unchanged without header; optional SHAPE-007 for v2 Active blocks."
+  name: "Grammar v2 surface and migration boundary"
+  rationale:
+    decisions:
+      - "File extension alone rejected"
+      - "Header Grammar-Version: v2 is authoritative (Q1)"
+      - "v2 parser fork path preferred over pseudocode-shared.ts regex edits"
+    why: "Constraint-language requires new surface syntax without breaking legacy sidecars or D13 shared-regex isolation."
+  status: "Draft"
+  traceability:
+    code_annotations:
+      - "ARCH-PSEUDOCODE_GRAMMAR_V2"
+    implementation:
+      - "IMPL-PSEUDOCODE_GRAMMAR_V2"
+    requirements:
+      - "REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE"
+      - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+    tests:
+      - "mcp-server/src/analysis/pseudocode-grammar-v2.test.ts"

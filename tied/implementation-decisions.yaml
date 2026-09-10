@@ -1435,6 +1435,10 @@ IMPL-PROMPT_TYPE_SUBAGENT:
       - "REQ-PROMPT_TYPE_SUBAGENT"
     tests:
       - "mcp-server/src/e2e/prompt-type-subagent.test.ts"
+IMPL-PSEUDOCODE_ALIAS_MUTATION_POLICY:
+  description: "Alias and immutability policy domains; cases 8 and 11; unknown when policy absent."
+  detail_file: "implementation-decisions/IMPL-PSEUDOCODE_ALIAS_MUTATION_POLICY.yaml"
+  status: "Draft"
 IMPL-PSEUDOCODE_ANALYSIS_ENGINE:
   cross_references:
     - "ARCH-PSEUDOCODE_ANALYSIS_PIPELINE"
@@ -1443,6 +1447,18 @@ IMPL-PSEUDOCODE_ANALYSIS_ENGINE:
   detail_file: "implementation-decisions/IMPL-PSEUDOCODE_ANALYSIS_ENGINE.yaml"
   name: "Pseudo-code static analysis engine"
   status: "Active"
+IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE:
+  description: "Constraint-language orchestration, MCP flags, report emission, gate integration, qualification baseline."
+  detail_file: "implementation-decisions/IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE.yaml"
+  status: "Draft"
+IMPL-PSEUDOCODE_CONSTRAINT_SOLVER:
+  description: "Fixed-point solver, refinement entailment, procedure summaries, ConstraintAnalysisBudgets resolution."
+  detail_file: "implementation-decisions/IMPL-PSEUDOCODE_CONSTRAINT_SOLVER.yaml"
+  status: "Draft"
+IMPL-PSEUDOCODE_GRAMMAR_V2:
+  description: "Parser extensions, grammar version detection, and v2 IR for refinements, summaries, alias/mut annotations."
+  detail_file: "implementation-decisions/IMPL-PSEUDOCODE_GRAMMAR_V2.yaml"
+  status: "Draft"
 IMPL-PSEUDOCODE_SHARED_PRIMITIVES:
   cross_references:
     - "ARCH-PSEUDOCODE_PARSER_UNIFICATION"

@@ -2188,6 +2188,18 @@ export const allTools = [
           .describe(
             "When gate_mode and typed_flow are true, promote proven typed violations on annotated procedures to error-severity gate diagnostics. Defaults to true; set false for warnings-only typed diagnostics.",
           ),
+        constraint_flow: z
+          .boolean()
+          .optional()
+          .describe(
+            "When true, run constraint-language analysis after typed-flow and emit sections.constraint_language. Requires typed_flow (coerced when omitted). Default false preserves legacy report shape.",
+          ),
+        constraint_gate_errors: z
+          .boolean()
+          .optional()
+          .describe(
+            "When gate_mode, typed_flow, and constraint_flow are true, promote proven constraint violations on constraint-annotated procedures to error-severity gate diagnostics. Defaults to false (sub-phase 3a warnings-only).",
+          ),
       }),
     },
     handler: async (args: {
@@ -2202,6 +2214,8 @@ export const allTools = [
       gate_mode?: boolean;
       typed_flow?: boolean;
       typed_gate_errors?: boolean;
+      constraint_flow?: boolean;
+      constraint_gate_errors?: boolean;
     }) => {
       const hasInline = typeof args.pseudocode === "string" && args.pseudocode.length > 0;
       const hasPath = typeof args.essence_pseudocode_path === "string" && args.essence_pseudocode_path.length > 0;
@@ -2250,6 +2264,8 @@ export const allTools = [
         gate_mode: args.gate_mode,
         typed_flow: args.typed_flow,
         typed_gate_errors: args.typed_gate_errors,
+        constraint_flow: args.constraint_flow,
+        constraint_gate_errors: args.constraint_gate_errors,
       });
       return textContent(JSON.stringify(report, null, 2));
     },

@@ -479,6 +479,36 @@ ARCH-PSEUDOCODE_ANALYSIS_PIPELINE:
   name: "Pseudo-code static analysis pipeline"
   source_index: "architecture-decisions.yaml"
   status: "Active"
+ARCH-PSEUDOCODE_CONSTRAINT_LANGUAGE_PASS:
+  cross_references:
+    - "ARCH-PSEUDOCODE_TYPED_FLOW_PASS"
+    - "IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE"
+    - "REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE"
+  description: "Opt-in constraint pass after typed-flow; sections.constraint_language; PSA-CONSTRAINT gate scoping."
+  detail_file: "architecture-decisions/ARCH-PSEUDOCODE_CONSTRAINT_LANGUAGE_PASS.yaml"
+  name: "Constraint-language Layer C pass"
+  source_index: "architecture-decisions.yaml"
+  status: "Draft"
+ARCH-PSEUDOCODE_CONSTRAINT_SOLVER:
+  cross_references:
+    - "IMPL-PSEUDOCODE_ALIAS_MUTATION_POLICY"
+    - "IMPL-PSEUDOCODE_CONSTRAINT_SOLVER"
+    - "REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE"
+  description: "Fixed-point interprocedural solver with ConstraintAnalysisBudgets and truncation disclosure."
+  detail_file: "architecture-decisions/ARCH-PSEUDOCODE_CONSTRAINT_SOLVER.yaml"
+  name: "Constraint solver and procedure summaries"
+  source_index: "architecture-decisions.yaml"
+  status: "Draft"
+ARCH-PSEUDOCODE_GRAMMAR_V2:
+  cross_references:
+    - "ARCH-PSEUDOCODE_ANALYSIS_PIPELINE"
+    - "IMPL-PSEUDOCODE_GRAMMAR_V2"
+    - "REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE"
+  description: "Grammar v2 opt-in via Grammar-Version header; v1 compatibility contract."
+  detail_file: "architecture-decisions/ARCH-PSEUDOCODE_GRAMMAR_V2.yaml"
+  name: "Grammar v2 surface and migration boundary"
+  source_index: "architecture-decisions.yaml"
+  status: "Draft"
 ARCH-PSEUDOCODE_PARSER_UNIFICATION:
   cross_references:
     - "IMPL-PSEUDOCODE_SHARED_PRIMITIVES"
@@ -1184,6 +1214,15 @@ IMPL-PROMPT_TYPE_SUBAGENT:
   name: "Plan-New-Feature Task Subagent Contract"
   status: "Active"
   type: "IMPL"
+IMPL-PSEUDOCODE_ALIAS_MUTATION_POLICY:
+  cross_references:
+    - "ARCH-PSEUDOCODE_CONSTRAINT_SOLVER"
+    - "REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE"
+  description: "Alias/mutation domains; cases 8 and 11; unknown when policy absent."
+  detail_file: "implementation-decisions/IMPL-PSEUDOCODE_ALIAS_MUTATION_POLICY.yaml"
+  name: "Alias and immutability policy module"
+  source_index: "implementation-decisions.yaml"
+  status: "Draft"
 IMPL-PSEUDOCODE_ANALYSIS_ENGINE:
   cross_references:
     - "ARCH-PSEUDOCODE_ANALYSIS_PIPELINE"
@@ -1194,6 +1233,36 @@ IMPL-PSEUDOCODE_ANALYSIS_ENGINE:
   name: "Pseudo-code static analysis engine"
   source_index: "implementation-decisions.yaml"
   status: "Active"
+IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE:
+  cross_references:
+    - "ARCH-PSEUDOCODE_CONSTRAINT_LANGUAGE_PASS"
+    - "IMPL-PSEUDOCODE_ALIAS_MUTATION_POLICY"
+    - "IMPL-PSEUDOCODE_CONSTRAINT_SOLVER"
+    - "IMPL-PSEUDOCODE_GRAMMAR_V2"
+    - "REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE"
+  description: "Orchestration, MCP flags, gate integration, qualification baseline."
+  detail_file: "implementation-decisions/IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE.yaml"
+  name: "Constraint-language orchestration and report emission"
+  source_index: "implementation-decisions.yaml"
+  status: "Draft"
+IMPL-PSEUDOCODE_CONSTRAINT_SOLVER:
+  cross_references:
+    - "ARCH-PSEUDOCODE_CONSTRAINT_SOLVER"
+    - "REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE"
+  description: "Fixed-point solver, refinement entailment, summary propagation."
+  detail_file: "implementation-decisions/IMPL-PSEUDOCODE_CONSTRAINT_SOLVER.yaml"
+  name: "Constraint solver modules"
+  source_index: "implementation-decisions.yaml"
+  status: "Draft"
+IMPL-PSEUDOCODE_GRAMMAR_V2:
+  cross_references:
+    - "ARCH-PSEUDOCODE_GRAMMAR_V2"
+    - "REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE"
+  description: "Parser extensions for v2 syntax, version boundary, v2 IR."
+  detail_file: "implementation-decisions/IMPL-PSEUDOCODE_GRAMMAR_V2.yaml"
+  name: "Grammar v2 parser and version detection"
+  source_index: "implementation-decisions.yaml"
+  status: "Draft"
 IMPL-PSEUDOCODE_SHARED_PRIMITIVES:
   cross_references:
     - "ARCH-PSEUDOCODE_PARSER_UNIFICATION"
@@ -2307,6 +2376,22 @@ REQ-PROMPT_TYPE_SUBAGENT:
   name: "Plan-New-Feature Prompt-Type Subagent"
   status: "Implemented"
   type: "REQ"
+REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE:
+  cross_references:
+    - "ARCH-PSEUDOCODE_CONSTRAINT_LANGUAGE_PASS"
+    - "ARCH-PSEUDOCODE_CONSTRAINT_SOLVER"
+    - "ARCH-PSEUDOCODE_GRAMMAR_V2"
+    - "IMPL-PSEUDOCODE_ALIAS_MUTATION_POLICY"
+    - "IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE"
+    - "IMPL-PSEUDOCODE_CONSTRAINT_SOLVER"
+    - "IMPL-PSEUDOCODE_GRAMMAR_V2"
+    - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+    - "REQ-PSEUDOCODE_TYPED_FLOW"
+  description: "Opt-in constraint-language composing after typed-flow with grammar v2, solver, alias/mut policy, and phased gate rollout."
+  detail_file: "requirements/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE.yaml"
+  name: "Full constraint-language and grammar v2 for pseudo-code static analysis"
+  source_index: "requirements.yaml"
+  status: "Draft"
 REQ-PSEUDOCODE_PARSER_UNIFICATION:
   cross_references:
     - "ARCH-PSEUDOCODE_PARSER_UNIFICATION"
