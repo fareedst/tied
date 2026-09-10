@@ -214,12 +214,12 @@ procedure VALIDATE_TRACKER_SPARSE(tracker, required_slugs, depth):
   TERMINATION: total
 
 # [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: reject synthetic Tracker projections substituted for authoritative file (remediation A2).
-procedure VALIDATE_TRACKER_AUTHORITATIVE(tracker, tracker_source):
+procedure VALIDATE_TRACKER_AUTHORITATIVE(tracker, tracker_source, phase, depth):
   Contract:
-  INPUT: tracker, tracker_source
+  INPUT: tracker, tracker_source, phase, depth
   PRE: tracker may include synthetic projection marker
   OUTPUT: validation result with diagnostics
-  POST: tracker_source synthetic_projection or _synthetic_projection marker fails with tracker_not_authoritative
+  POST: synthetic_projection or _synthetic_projection fails; at verification/close_out when depth is integrated or strict_candidate, tracker_source must be authoritative_file (Wave 1 W1-D5)
   FAILURE_MODES: tracker_not_authoritative
   EFFECTS: pure
   TERMINATION: total
@@ -235,15 +235,26 @@ procedure VALIDATE_PROVENANCE_COMPLETE(provenance):
   EFFECTS: pure
   TERMINATION: total
 
-# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: unresolved or warn findings cannot satisfy gate success (remediation A5).
-procedure VALIDATE_FINDING_DISPOSITION(gate_result, finding_ledger):
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: unresolved or warn findings block under strict policy; advisory policy keeps them visible but non-blocking (Wave 1 W1-D2).
+procedure VALIDATE_FINDING_DISPOSITION(gate_result, finding_ledger, gate_policy):
   Contract:
-  INPUT: gate_result, finding_ledger
+  INPUT: gate_result, finding_ledger, gate_policy
   PRE: gate_result may include verdict UNRESOLVED or status warn
-  OUTPUT: validation result with diagnostics
-  POST: UNRESOLVED verdict or observed lifecycle in ledger fails with finding_unresolved; warn status fails with warn_not_success
+  OUTPUT: validation result with diagnostics and optional advisoryDiagnostics
+  POST: strict policy — UNRESOLVED or observed lifecycle fails with finding_unresolved; warn status fails with warn_not_success; advisory policy — same codes returned as advisoryDiagnostics without blocking allowed
   FAILURE_MODES: finding_unresolved, warn_not_success
   EFFECTS: pure
+  TERMINATION: total
+
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: load phase inquiry artifacts into gate evidence when activation supplies paths (Wave 1 W1-D1).
+procedure HYDRATE_GATE_EVIDENCE_FROM_ACTIVATION(phase, activation, evidence, project_root):
+  Contract:
+  INPUT: phase, activation artifacts map, optional evidence seed, project_root
+  PRE: phase is verification or close_out when auto-hydration applies
+  OUTPUT: merged evidence with provenance, gate_result, finding_ledger when readable
+  POST: reads evidence-provenance.json, gate-result.json, finding-ledger.jsonl from activation artifact paths; never mutates source files
+  FAILURE_MODES: hydration_missing_path, hydration_read_failed
+  EFFECTS: read-only filesystem
   TERMINATION: total
 
 # [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: reject self-reported command success without retained output/manifest (remediation A6).
@@ -318,6 +329,10 @@ procedure VALIDATE_CHECKLIST_GATE(input): # [IMPL-TIED_CHECKLIST_GATE_ENFORCEMEN
   IF input.evidence command_evidence present: VALIDATE_COMMAND_EVIDENCE
   IF input.evidence hash or cross_phase inputs present: VALIDATE_EVIDENCE_FRESHNESS
   IF close_out AND tree paths present: VALIDATE_CLOSE_OUT_TREE
+  slugResult := VALIDATE_CANONICAL_SLUGS(input.tracker)
+  IF depth is integrated or strict_candidate AND phase is verification or close_out:
+    pseudocodeHistoryResult := VALIDATE_PSEUDOCODE_GATE_HISTORY(input.tracker, input.phase, depth)
+    psaResult := VALIDATE_PSEUDOCODE_ANALYSIS_EVIDENCE(input.tracker, input.citdp, input.evidence.pseudocode_reports)
   parentChildResult := VALIDATE_INTEGRATED_PARENT_CHILD_SLUGS(input.tracker, depth, input.phase)
   citdpResult := VALIDATE_ADVERSARIAL_CONTRACT(input.citdp, input.phase)
   IF depth requires integrated pairing AND close_out inquiry waiver does not apply AND activation is missing: append integrated_depth_requires_pairing
@@ -662,3 +677,47 @@ procedure PREVIEW_TRACKER_MIGRATION(definition_path, tracker_path): # [IMPL-TIED
   extra_in_tracker := tracker_slugs minus definition_slugs
   FOR each slug in extra_in_tracker with non-pending disposition: RECORD stale_dispositions entry reason step_removed_from_definition
   RETURN tracker-migration-preview.v1 report
+
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-PSEUDOCODE_STATIC_ANALYSIS] — How: reject unknown checklist slugs in tracker steps and execution_evidence.completed.
+procedure VALIDATE_CANONICAL_SLUGS(tracker):
+  Contract:
+  INPUT: tracker
+  PRE: canonical slug registry loaded from agent-req-implementation-checklist.yaml
+  OUTPUT: validation result with invalid_slug diagnostics
+  POST: every slug in tracker steps and execution_evidence.completed is in the registry; unknown slugs fail closed
+  FAILURE_MODES: invalid_slug
+  EFFECTS: pure
+  TERMINATION: total
+  FOR each slug in tracker steps and execution_evidence.completed:
+    IF slug not in registry: RETURN invalid_slug
+
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-PSEUDOCODE_STATIC_ANALYSIS] — How: verification and close_out require gate-pseudocode-validation completed in tracker history.
+procedure VALIDATE_PSEUDOCODE_GATE_HISTORY(tracker, phase, depth):
+  Contract:
+  INPUT: tracker, phase, depth
+  PRE: depth is integrated or strict_candidate
+  OUTPUT: validation result
+  POST: verification and close_out pass only when gate-pseudocode-validation disposition is completed or listed in execution_evidence.completed
+  FAILURE_MODES: missing_pseudocode_gate_history
+  EFFECTS: pure
+  TERMINATION: total
+  IF phase is not verification or close_out: RETURN success
+  IF gate-pseudocode-validation not completed in tracker history: RETURN missing_pseudocode_gate_history
+
+# [IMPL-QUALITY_PSEUDOCODE_VALIDATOR] [REQ-PSEUDOCODE_STATIC_ANALYSIS] [REQ-QUALITY_ASSURANCE_EVIDENCE] — How: enforce impl_inventory PSA JSON with ok, gate_mode_applied, and identity match.
+procedure VALIDATE_PSEUDOCODE_ANALYSIS_EVIDENCE(tracker, citdp, pseudocode_reports):
+  Contract:
+  INPUT: tracker, optional citdp, optional parsed pseudocode-analysis-report.v1 map keyed by IMPL token
+  PRE: impl_inventory is authoritative changed IMPL set for the request
+  OUTPUT: validation result with psa_* and impl_inventory_empty diagnostics
+  POST: each in-scope IMPL has report with ok true and gate_mode_applied true; sidecar hash and request token match when supplied; empty inventory when claimed fails closed
+  FAILURE_MODES: impl_inventory_empty, psa_missing, psa_not_ok, psa_gate_mode_not_applied, psa_sidecar_hash_mismatch, psa_token_mismatch, psa_request_token_mismatch
+  EFFECTS: pure
+  TERMINATION: total
+  inventory := union tracker.execution_evidence.impl_inventory and citdp.impact_analysis.impl_inventory
+  IF inventory claimed AND empty: RETURN impl_inventory_empty
+  FOR each IMPL in inventory:
+    REQUIRE pseudocode_reports[IMPL] with schema pseudocode-analysis-report.v1
+    REQUIRE ok true AND gate_mode_applied true
+    REQUIRE report.token equals IMPL AND input_identity.hash matches sidecar when hash supplied
+  RETURN success

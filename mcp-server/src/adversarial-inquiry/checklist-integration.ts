@@ -4,6 +4,7 @@ import { createHash } from "node:crypto";
 
 import { runAdversarialInquiry, type AdversarialInquiryInput, type AdversarialInquiryResult } from "./core.js";
 import type { FidelityFinding, FidelityVerdict, ReadOnlyReport } from "./types.js";
+import { validateModeAInquiryScope, inferScopeMode } from "./scope-validation.js";
 import type {
   FindingLedger,
   FindingObservation,
@@ -243,18 +244,6 @@ export function relativeArtifactPath(repositoryRoot: string, filePath: string): 
   return path.relative(path.resolve(repositoryRoot), path.resolve(filePath)).split(path.sep).join("/");
 }
 
-async function projectArtifactsToRoot(
-  repositoryRoot: string,
-  requestToken: string,
-  phasePaths: ArtifactPaths,
-): Promise<void> {
-  const rootPaths = resolveArtifactPaths({ repositoryRoot, requestToken });
-  await fs.mkdir(rootPaths.directory, { recursive: true, mode: 0o700 });
-  for (const key of ["obligationReport", "findingLedger", "gateResult", "evidenceProvenance"] as const) {
-    await fs.copyFile(phasePaths[key], rootPaths[key]);
-  }
-}
-
 function redactValue(value: unknown, secrets: readonly string[]): unknown {
   if (typeof value === "string") {
     return secrets.filter(Boolean).reduce(
@@ -440,9 +429,6 @@ export async function persistWorkingArtifacts(
   } catch {
     await fs.writeFile(paths.findingLedger, "", { encoding: "utf8", mode: 0o600 });
   }
-  if (input.phase) {
-    await projectArtifactsToRoot(input.repositoryRoot, input.requestToken, paths);
-  }
   await patchInquiryEnvelopeArtifacts(input, paths);
   return paths;
 }
@@ -461,6 +447,16 @@ function findingObservation(finding: FidelityFinding, scope: readonly string[]):
 
 // [IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY] How: invoke the existing read-only analyzer for the declared checklist scope and preserve its proof boundaries.
 export async function runChecklistInquiry(input: ChecklistInquiryInput): Promise<ChecklistInquiryResult> {
+  const scopeMode = inferScopeMode(input.scope);
+  if (scopeMode === "mixed") {
+    throw new Error("INVALID_SCOPE: Scope mixes criterion IDs and block identities.");
+  }
+  if (scopeMode === "block") {
+    const scopeValidation = validateModeAInquiryScope(input.scope, input.graph);
+    if (!scopeValidation.ok) {
+      throw new Error(`${scopeValidation.error.code}: ${scopeValidation.error.message}`);
+    }
+  }
   const result = runAdversarialInquiry(input);
   if (!result.ok) return result;
   const policy = input.policy ?? "advisory";

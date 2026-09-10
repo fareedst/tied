@@ -20,6 +20,7 @@ export type ArtifactKind =
   | "citdp_record"
   | "not_applicable_receipt"
   | "request_evidence_envelope"
+  | "pseudocode_analysis_report"
   | "unknown";
 
 export type ArtifactStatus = "present" | "not_applicable" | "expected_missing" | "stale_projection";
@@ -99,12 +100,16 @@ export type ValidateRequestEvidenceEnvelopeInput = {
   envelope?: RequestEvidenceEnvelope;
   envelope_path?: string;
   project_root?: string;
+  /** When true, any gap with severity error fails validation (close-out blocking mode). */
+  fail_on_error_gaps?: boolean;
 };
 
 export type ValidateRequestEvidenceEnvelopeResult = {
   ok: boolean;
   envelope?: RequestEvidenceEnvelope;
   diagnostics: string[];
+  blocking_gap_count?: number;
+  advisory_gap_count?: number;
 };
 
 export type PatchArtifactEntry = {

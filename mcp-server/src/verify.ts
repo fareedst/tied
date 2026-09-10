@@ -6,6 +6,7 @@
 import { loadIndex, updateRecord } from "./yaml-loader.js";
 import { formatYamlMetadata, type YamlFormatMetadata } from "./yaml-canonicalizer.js";
 import { validateChecklistGate, type GatePhase } from "./checklist-validator.js";
+import { validateRequestEvidenceEnvelope } from "./request-evidence-envelope/validate.js";
 import {
   persistGateDecisionReceipt,
   persistStatusMutationReceipt,
@@ -49,6 +50,11 @@ export interface VerifyUpdateOptions {
   };
   /** @deprecated Gate evidence is required for every status update. */
   require_checklist_gate?: boolean;
+  /** Optional envelope path; when consult_envelope_blocking is true, blocking gaps fail verify. */
+  envelope_path?: string;
+  /** Default false — when true with envelope_path, validate envelope with fail_on_error_gaps. */
+  consult_envelope_blocking?: boolean;
+  project_root?: string;
   /** Optional durable receipt persistence for gate and status mutation (Stage J). */
   receipt_persistence?: {
     request_token: string;
@@ -165,7 +171,9 @@ function collectVerifyChanges(options: VerifyUpdateOptions): VerifyDryRunChange[
  * Update requirement and optionally implementation index status from passed tokens.
  * Use after running tests and collecting which REQ/IMPL tokens are covered by passing tests.
  */
-export function updateStatusFromPassedTokens(options: VerifyUpdateOptions): VerifyUpdateResult {
+export async function updateStatusFromPassedTokens(
+  options: VerifyUpdateOptions,
+): Promise<VerifyUpdateResult> {
   const {
     passed_requirement_tokens = [],
     passed_impl_tokens = [],
@@ -189,6 +197,21 @@ export function updateStatusFromPassedTokens(options: VerifyUpdateOptions): Veri
       error: "CHECKLIST_GATE_BLOCKED: process evidence did not satisfy the selected gate",
       diagnostics: gate.diagnostics,
     };
+  }
+
+  if (options.consult_envelope_blocking && options.envelope_path) {
+    const envelopeResult = await validateRequestEvidenceEnvelope({
+      envelope_path: options.envelope_path,
+      project_root: options.project_root,
+      fail_on_error_gaps: true,
+    });
+    if (!envelopeResult.ok) {
+      return {
+        ok: false,
+        error: "ENVELOPE_BLOCKED: request evidence envelope has blocking error gaps",
+        diagnostics: envelopeResult.diagnostics,
+      };
+    }
   }
 
   let gateReceiptRef = options.receipt_persistence?.gate_receipt_ref;

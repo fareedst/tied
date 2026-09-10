@@ -47,3 +47,17 @@ procedure VALIDATE_ESSENCE_PSEUDOCODE(input):
   IF require_contracts is false: do not require procedure contracts
   IF require_behavioral_coverage is false: report no coverage-reference diagnostics
   RETURN report with proof boundary structural-only
+
+# [IMPL-QUALITY_PSEUDOCODE_VALIDATOR] [REQ-PSEUDOCODE_STATIC_ANALYSIS] [REQ-QUALITY_ASSURANCE_EVIDENCE]
+# How: Gate-time Layer C evidence validates PSA reports for tracker impl_inventory before verification/close_out progression.
+procedure VALIDATE_PSEUDOCODE_ANALYSIS_EVIDENCE(tracker, citdp, pseudocode_reports):
+  Contract:
+  INPUT: tracker, optional citdp, optional parsed pseudocode-analysis-report.v1 map keyed by IMPL token
+  PRE: impl_inventory lists changed in-scope IMPL tokens for the request
+  OUTPUT: validation result with psa_* diagnostics
+  POST: each inventory IMPL has ok true and gate_mode_applied true report; mismatched token, request, or sidecar hash fails closed
+  FAILURE_MODES: impl_inventory_empty, psa_missing, psa_not_ok, psa_gate_mode_not_applied, psa_sidecar_hash_mismatch
+  EFFECTS: pure
+  TERMINATION: total
+  DELEGATE inventory extraction and per-report checks to checklist gate VALIDATE_PSEUDOCODE_ANALYSIS_EVIDENCE contract
+  RETURN validation result

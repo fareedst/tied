@@ -2,36 +2,12 @@
   "canonicalMutation": false,
   "findings": [
     {
-      "direction": "A",
-      "id": "2d0bc153cf3a9a46",
-      "kind": "completeness",
-      "message": "Specification statement has no corresponding evidence.",
-      "proofBoundary": "semantic_fidelity",
-      "statementId": "minitest-6-assert_equal"
-    },
-    {
       "direction": "B",
       "id": "9427bd3779233689",
       "kind": "completeness",
       "message": "Specification statement has no corresponding evidence.",
       "proofBoundary": "semantic_fidelity",
       "statementId": "minitest-7-assert_raises"
-    },
-    {
-      "direction": "A",
-      "id": "f0ba09599b6d88f9",
-      "kind": "completeness",
-      "message": "Specification statement has no corresponding evidence.",
-      "proofBoundary": "semantic_fidelity",
-      "statementId": "minitest-7-assert_raises"
-    },
-    {
-      "direction": "B",
-      "id": "f14b25fdb1f777f4",
-      "kind": "completeness",
-      "message": "Specification statement has no corresponding evidence.",
-      "proofBoundary": "semantic_fidelity",
-      "statementId": "minitest-6-assert_equal"
     }
   ],
   "graph": {

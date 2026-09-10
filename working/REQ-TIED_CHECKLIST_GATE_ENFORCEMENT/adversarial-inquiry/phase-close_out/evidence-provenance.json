@@ -1,0 +1,21 @@
+{
+  "provenance": {
+    "block_id": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#8103ac98e7e59baa",
+    "builder": "build_adversarial_inquiry_from_tied.rb",
+    "command": "tied_adversarial_inquiry_run",
+    "phase": "close_out",
+    "production_path": "mcp-server/src/checklist-validator.ts",
+    "project_id": "cfd5bf6ad98024eb",
+    "request_token": "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT",
+    "run_id": "mci-closeout-20260910",
+    "source_revision": "mci-closeout-20260910",
+    "test_paths": [
+      "mcp-server/src/checklist-validator.test.ts",
+      "mcp-server/src/checklist-gate-evidence-hydration.test.ts",
+      "mcp-server/src/tools/checklist-gate-mcp.test.ts"
+    ],
+    "tied_base_path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied",
+    "tool_version": "1.0.0"
+  },
+  "schemaVersion": "adversarial-inquiry-provenance.v1"
+}

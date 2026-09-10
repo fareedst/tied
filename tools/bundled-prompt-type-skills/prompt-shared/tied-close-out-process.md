@@ -11,9 +11,13 @@
    `tied_checklist_gate_validate` with `phase: close_out`, the final Tracker,
    CITDP, and identity-bound activation evidence when `depth_tier` is
    `integrated` or `strict_candidate` (prefer `tied_checklist_activation_collect`
-   when phase artifact dirs exist). If the gate returns `allowed: false`, label
-   the work **incomplete** in the parent handoff — do not claim completion. A
-   failed or missing gate is a hard stop.
+   when phase artifact dirs exist). **Unified close-out (Wave 1):** also run
+   `request_evidence_envelope_validate` with `fail_on_error_gaps: true` on
+   `working/{REQ-TOKEN}/evidence/request-evidence-envelope.v1.json`, or use
+   `tools/bootstrap/templates/run-close-out-gates.mjs --envelope-blocking`.
+   Completion requires gate `allowed: true` **and** zero blocking envelope
+   error gaps; advisory findings stay visible as warn-severity gaps. If either
+   check fails, label the work **incomplete** — do not claim completion.
 
 ## Prologue (standard close-out / diff-promote)
 

@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Methodology close-out integrity program — Waves 1–4 ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT], [REQ-PSEUDOCODE_STATIC_ANALYSIS], [REQ-TIED_ADVERSARIAL_INQUIRY], [REQ-TIED_SETUP])** —
+  Unified gate receipts and request evidence envelopes; auto-hydration of phase
+  inquiry artifacts and PSA reports in `run-close-out-gates.mjs`; envelope
+  `fail_on_error_gaps` blocking mode; canonical slug registry and
+  `validatePseudocodeAnalysisEvidence`; procedure-aware inquiry scope
+  (`scope-validation.ts`, `STALE_BLOCK_NAME`); bootstrap provenance integrity
+  and `ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM`; evidence-chain profile on primary
+  REQ. Integrated close-out gates: `mci-pre-20260910`, `mci-verify-20260910`,
+  `mci-closeout-20260910` (advisory). Regression: 51 Node tests + agentstream
+  checklist suite green; `tied_validate_consistency` ok. Demo client
+  `1789069630` documented-only (not patched). Limitation: `IMPL-TIED_FILES`
+  PSA reports unresolved-call diagnostics under gate_mode (legacy grammar).
+
 - **Full constraint-language + grammar v2 ([REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE])** —
   Opt-in `constraint_flow` composes after typed-flow; grammar v2 via
   `Grammar-Version: v2` header; refinements, interproc summaries, alias/mutation

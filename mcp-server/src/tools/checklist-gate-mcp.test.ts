@@ -114,6 +114,9 @@ describe("tied_checklist_gate_validate composition [REQ-TIED_CHECKLIST_GATE_ENFO
         receipt,
         artifacts,
       },
+      evidence: {
+        trackerSource: "authoritative_file",
+      },
     });
 
     const payload = JSON.parse(result.content[0]?.text ?? "{}") as {

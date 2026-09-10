@@ -31,11 +31,19 @@ working/**/adversarial-inquiry/
 !working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-pre_implementation/**
 !working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-verification/
 !working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-verification/**
+!working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-pre_implementation/
+!working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-pre_implementation/**
+!working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-verification/
+!working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-verification/**
+!working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-close_out/
+!working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-close_out/**
 working/**/gate-*.json
 # Gate receipts and activation collect outputs (regenerate per close-out run)
 working/**/gates/
 !working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/gates/
 !working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/gates/**
+!working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/
+!working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/**
 # Close-out operator scratch (regenerate per plan-close-out / tied_verify run)
 working/**/gate-ledger.jsonl
 working/**/citdp-doc-*.json

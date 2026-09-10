@@ -96,6 +96,7 @@
     "methodology/requirements/REQ-MODULE_VALIDATION.yaml",
     "methodology/requirements/REQ-FEEDBACK_TO_TIED.yaml",
     "methodology/architecture-decisions/ARCH-FEEDBACK_STORAGE.yaml",
+    "methodology/architecture-decisions/ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM.yaml",
     "methodology/architecture-decisions/ARCH-MODULE_VALIDATION.yaml",
     "methodology/implementation-decisions/IMPL-MCP_FEEDBACK_TOOLS.yaml",
     "methodology/implementation-decisions/IMPL-MCP_FEEDBACK_TOOLS-pseudocode.md",

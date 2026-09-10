@@ -1,0 +1,32 @@
+{
+  "ok": true,
+  "phases": [
+    {
+      "phase": "pre_implementation",
+      "run_id": "mci-pre-20260910",
+      "allowed": true,
+      "blocking": false,
+      "diagnostics": []
+    },
+    {
+      "phase": "verification",
+      "run_id": "mci-verify-20260910",
+      "allowed": true,
+      "blocking": false,
+      "diagnostics": [
+        "warn_not_success",
+        "finding_unresolved"
+      ]
+    },
+    {
+      "phase": "close_out",
+      "run_id": "mci-closeout-20260910",
+      "allowed": true,
+      "blocking": false,
+      "diagnostics": [
+        "warn_not_success",
+        "finding_unresolved"
+      ]
+    }
+  ]
+}

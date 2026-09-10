@@ -227,6 +227,26 @@ procedure VERIFY_INHERITED_DETAIL_FILES(client_tied_dir):
       IF resolved file missing: RETURN error
   EMIT completion guidance for tied_validate_consistency
   RETURN success
+
+procedure VERIFY_METHODOLOGY_PSEUDOCODE_TOKEN_REFS(client_tied_dir):
+  # [IMPL-TIED_FILES] [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM] [REQ-TIED_SETUP]
+  # How: Scan inherited methodology IMPL sidecars for [REQ-*]/[ARCH-*]/[IMPL-*] references and fail closed when any token is absent from the matching methodology index.
+  Contract:
+    INPUT: client tied/ directory with refreshed methodology snapshot
+    OUTPUT: exit status 0 when every referenced token resolves; deterministic missing-token diagnostics on failure
+    DATA: methodology requirements/architecture/implementation index keys; IMPL-*-pseudocode.md sidecar bodies
+    CONTROL: validate REQ/ARCH/IMPL bracket tokens only; dedupe repeated references per sidecar
+    PRE: methodology indexes and sidecars copied under client_tied_dir/methodology/
+    POST: every referenced methodology token exists in the appropriate index or bootstrap exits non-zero naming token and sidecar path
+    EFFECTS: Process — read-only verification; no client project YAML mutation
+    FAILURE_MODES: MISSING_INDEX_TOKEN; SIDECAR_UNREADABLE; METHODOLOGY_PSEUDOCODE_TOKEN_GATE_FAILED
+    DATA_TRANSITION: copied methodology→verified token refs or bootstrap abort
+    TERMINATION: total — finite sidecar list
+  FOR each IMPL sidecar under client_tied_dir/methodology/implementation-decisions:
+    FOR each unique [REQ-*]/[ARCH-*]/[IMPL-*] token reference in sidecar body:
+      IF token absent from matching methodology index: RETURN error naming token and sidecar path
+  RETURN success
+
 procedure LOAD_BOOTSTRAP_MANIFEST():
   # [IMPL-TIED_FILES] [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM] [REQ-TIED_SETUP]
   # How: Read tools/bootstrap/manifest.json as the single source for DOCS_TO_COPY, skill dirs, verify lists, and TIED_CLI_REPO_ROOT_MARKER.

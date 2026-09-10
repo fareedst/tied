@@ -1,0 +1,128 @@
+copy_hygiene: Wave 1 tracker for docs/methodology-closeout-integrity-plan.md §3 unified completion signals.
+request: REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+source_plan: docs/methodology-closeout-integrity-plan.md
+wave: wave1-unified-closeout
+status: in_progress
+profile:
+  depth_tier: integrated
+  gate_policy: advisory
+  research_profile: read-only research profile
+  assurance_profiles:
+    - baseline-functional
+    - data-integrity-migration
+    - stateful-reliability
+  note: Advisory applies only to observed/unresolved inquiry findings; structural and evidence-contract failures remain blocking.
+steps:
+  - slug: session-bootstrap
+    disposition: completed
+    evidence_refs:
+      - AGENTS.md
+      - tied/docs/ai-principles.md
+      - tied/vocab/routing.md
+      - tied/vocab/pseudocode-and-citdp.md
+      - tied/vocab/quality-assurance.md
+      - tied/vocab/fidelity-research.md
+  - slug: translate-sponsor-intent
+    disposition: completed
+    rationale: Wave 1 resolves dual completion signals between gate receipts and request evidence envelope.
+    evidence_refs:
+      - docs/methodology-closeout-integrity-plan.md#3-wave-1--unify-completion-signals-p0
+  - slug: change-definition
+    disposition: completed
+    evidence_refs:
+      - docs/methodology-closeout-integrity-plan.md#refinement-decision-and-gate-posture
+  - slug: impact-discovery
+    disposition: completed
+    evidence_refs:
+      - docs/methodology-closeout-integrity-plan.md#1-confirmed-gaps-evidence
+      - mcp-server/src/checklist-validator.ts
+      - mcp-server/src/request-evidence-envelope/validate.ts
+  - slug: risk-assessment
+    disposition: completed
+    evidence_refs:
+      - docs/methodology-closeout-integrity-plan.md#refinement-decision-and-gate-posture
+      - 'eligibility_triggers_matched: strict-close-out, methodology-tooling-change, persistence, external-input'
+  - slug: test-strategy
+    disposition: completed
+    evidence_refs:
+      - docs/methodology-closeout-integrity-plan.md#32-acceptance-criteria
+      - docs/methodology-closeout-integrity-plan.md#72-wave-verification-commands
+  - slug: persist-citdp-record
+    disposition: completed
+    evidence_refs:
+      - tied/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-wave1-unified-closeout.yaml
+  - slug: catalog-pseudocode-contracts
+    disposition: completed
+    evidence_refs:
+      - tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md
+      - tied/implementation-decisions/IMPL-REQUEST_EVIDENCE_ENVELOPE-pseudocode.md
+  - slug: gate-pseudocode-validation
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/pseudocode-analysis/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.v1.json
+      - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/pseudocode-analysis/IMPL-REQUEST_EVIDENCE_ENVELOPE.v1.json
+      - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/pseudocode-validate-adherence-evidence-build.json
+  - slug: unit-test-red
+    disposition: completed
+    evidence_refs:
+      - mcp-server/src/checklist-remediation-acceptance.test.ts
+      - mcp-server/src/checklist-gate-evidence-hydration.test.ts
+  - slug: unit-test-green
+    disposition: completed
+    evidence_refs:
+      - mcp-server/dist/checklist-remediation-acceptance.test.js
+      - mcp-server/dist/checklist-gate-evidence-hydration.test.js
+  - slug: composition-integration
+    disposition: completed
+    evidence_refs:
+      - mcp-server/src/tools/checklist-gate-mcp.test.ts
+      - mcp-server/dist/request-evidence-envelope/request-evidence-envelope.test.js
+  - slug: verification-gate
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/mci-gate-receipts-result.json
+      - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/gate-verification-mci-verify-20260910-result.json
+  - slug: traceable-commit
+    disposition: completed
+    evidence_refs:
+      - CHANGELOG.md
+  - slug: sub-adversarial-inquiry-pass
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json
+      - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-verification/evidence-provenance.json
+      - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-close_out/evidence-provenance.json
+      - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/mci-inquiry-phases-result.json
+execution_evidence:
+  request: REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+  completed: []
+  close_out_evidence:
+    status: complete
+    commit_hash: 34fb5af
+    gates:
+      pre_implementation:
+        run_id: mci-pre-20260910
+        allowed: true
+      verification:
+        run_id: mci-verify-20260910
+        allowed: true
+      close_out:
+        run_id: mci-closeout-20260910
+        allowed: true
+    master_checklist: tied/docs/agent-req-implementation-checklist.yaml
+  envelope_path: working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/request-evidence-envelope.v1.json
+  operator_evidence:
+    status: wave1_closeout
+    demo_regression: "Demo client 1789069630 document-only; 10 envelope error gaps baseline per docs/methodology-closeout-integrity-plan.md §8"
+    inquiry_run_ids:
+      - mci-pre-20260910
+      - mci-verify-20260910
+      - mci-closeout-20260910
+    pre_implementation_gate:
+      allowed: true
+      run_id: mci-pre-20260910
+      recorded_at: "2026-09-10"
+feedback_loops:
+  specification: Contract ambiguity returns to plan refinement before CITDP finalization.
+  validation_and_sync: Failed Wave 1 regression returns to owning pseudo-code or test step.
+  leap: Implementation divergence updates IMPL first, then ARCH/REQ when scope changes.

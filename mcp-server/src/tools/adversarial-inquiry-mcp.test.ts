@@ -89,6 +89,94 @@ describe("tied_adversarial_inquiry_run composition [REQ-TIED_ADVERSARIAL_INQUIRY
     assert.equal(fs.readFileSync(canonical, "utf8"), before);
   });
 
+  it("rejects Mode A scope entries that do not match graph block identities", async () => {
+    const handler = toolHandler("tied_adversarial_inquiry_run");
+    const blockId = "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST#RUN#block";
+    const result = parse(await handler({
+      graph: {
+        projectId: "project-1",
+        criteria: [{
+          identity: {
+            id: "REQ-TIED_ADVERSARIAL_INQUIRY#criterion-1",
+            kind: "criterion",
+            derivation: "explicit",
+            revision: "criterion-rev",
+            sourceRevision: "source-rev",
+          },
+          architectureConstraintIds: ["constraint-1"],
+        }],
+        architectureConstraints: [{ id: "constraint-1", implementationBlockIds: [blockId] }],
+        implementationBlocks: [{
+          identity: {
+            id: blockId,
+            kind: "block",
+            name: "RUN",
+            derivation: "content",
+            revision: "block-rev",
+            sourceRevision: "source-rev",
+          },
+        }],
+        evidenceLoci: [],
+      },
+      fidelity: {
+        blockRevision: "block-rev",
+        specification: [{ id: "statement-1", kind: "behavior", value: "accept input", order: 1 }],
+        testEvidence: [],
+        productionEvidence: [],
+      },
+      scope: ["IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST#PHANTOM#closeout"],
+      policy: "advisory",
+    }));
+    assert.equal(result.ok, false);
+    assert.match(String(result.error), /INVALID_SCOPE/);
+  });
+
+  it("persists block-scoped report scope for Mode A", async () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), "adversarial-inquiry-mode-a-"));
+    const handler = toolHandler("tied_adversarial_inquiry_run");
+    const blockId = "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST#RUN#block";
+    const result = parse(await handler({
+      graph: {
+        projectId: "project-1",
+        criteria: [{
+          identity: {
+            id: "REQ-TIED_ADVERSARIAL_INQUIRY#criterion-1",
+            kind: "criterion",
+            derivation: "explicit",
+            revision: "criterion-rev",
+            sourceRevision: "source-rev",
+          },
+          architectureConstraintIds: ["constraint-1"],
+        }],
+        architectureConstraints: [{ id: "constraint-1", implementationBlockIds: [blockId] }],
+        implementationBlocks: [{
+          identity: {
+            id: blockId,
+            kind: "block",
+            name: "RUN",
+            derivation: "content",
+            revision: "block-rev",
+            sourceRevision: "source-rev",
+          },
+        }],
+        evidenceLoci: [],
+      },
+      fidelity: {
+        blockRevision: "block-rev",
+        specification: [{ id: "statement-1", kind: "behavior", value: "accept input", order: 1 }],
+        testEvidence: [],
+        productionEvidence: [],
+      },
+      scope: [blockId],
+      policy: "advisory",
+      repository_root: root,
+      request_token: "REQ-TIED_ADVERSARIAL_INQUIRY",
+    }));
+    assert.equal(result.ok, true);
+    const report = result.report as { scope: string[] };
+    assert.deepEqual(report.scope, [blockId]);
+  });
+
   // [IMPL-TIED_ADVERSARIAL_INQUIRY] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY] How: dispatch an explicit project-input inquiry through the validated orchestrator and existing checklist persistence.
   it("dispatches all Mode B fixture cases without changing Mode A", async () => {
     const handler = toolHandler("tied_adversarial_inquiry_run");

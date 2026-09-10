@@ -13,7 +13,7 @@ import {
   type ChecklistInquiryInput,
 } from "./adversarial-inquiry/checklist-integration.js";
 import { validateStrictEligibility } from "./adversarial-inquiry/workflow.js";
-import { derivePhaseAwareSlugs, stableHash } from "./checklist-validator.js";
+import { derivePhaseAwareSlugs, stableHash, withPseudocodeGateHistory } from "./checklist-validator.js";
 import { allTools } from "./tools/index.js";
 
 type TextContent = { content: Array<{ type: "text"; text: string }> };
@@ -84,13 +84,17 @@ function inquiryInput(
 }
 
 function integratedTracker(phase: "pre_implementation" | "verification" | "close_out") {
-  return {
+  const tracker = {
     steps: derivePhaseAwareSlugs("integrated", phase).map((slug) => ({
       slug,
       disposition: "completed",
       evidence_refs: ["checklist-activation-collect.test.ts"],
     })),
   };
+  if (phase === "verification" || phase === "close_out") {
+    return withPseudocodeGateHistory(tracker);
+  }
+  return tracker;
 }
 
 function integratedCitdp(runId: string, phase: "verification" | "close_out") {

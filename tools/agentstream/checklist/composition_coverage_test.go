@@ -5,6 +5,8 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
+
+	"gopkg.in/yaml.v3"
 )
 
 // [IMPL-MODULE_VALIDATION] [ARCH-MODULE_VALIDATION] [REQ-MODULE_VALIDATION]
@@ -176,6 +178,47 @@ func TestLoadTurns_canonicalChecklistCompositionGateOrder(t *testing.T) {
 	}
 	if !strings.Contains(compBody, "does not invoke UI") && !strings.Contains(compBody, "without invoking the UI") {
 		t.Fatalf("canonical composition-integration must require UI-free tests:\n%s", compBody)
+	}
+}
+
+func TestCanonicalChecklist_pseudocodeChainBeforeUnitTestRed(t *testing.T) {
+	// [REQ-PSEUDOCODE_STATIC_ANALYSIS] [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]
+	// How: pseudocode chain is wired via flow.next and unit-test-red preconditions before RED tests.
+	canonical := findCanonicalChecklist(t)
+	raw, err := os.ReadFile(canonical)
+	if err != nil {
+		t.Fatal(err)
+	}
+	var doc yamlDoc
+	if err := yaml.Unmarshal(raw, &doc); err != nil {
+		t.Fatal(err)
+	}
+	bySlug := map[string]yamlStep{}
+	for _, step := range doc.Steps {
+		bySlug[strings.TrimSpace(step.Slug)] = step
+	}
+	for _, slug := range []string{
+		"gate-pseudocode-validation",
+		"persist-implementation-records",
+		"test-strategy",
+		"unit-test-red",
+	} {
+		if _, ok := bySlug[slug]; !ok {
+			t.Fatalf("canonical checklist missing pseudocode chain slug %q", slug)
+		}
+	}
+	gate := bySlug["gate-pseudocode-validation"]
+	if next, _ := gate.Flow["next"].(string); strings.TrimSpace(next) != "persist-implementation-records" {
+		t.Fatalf("gate-pseudocode-validation next want persist-implementation-records got %q", next)
+	}
+	strategy := bySlug["test-strategy"]
+	if next, _ := strategy.Flow["next"].(string); strings.TrimSpace(next) != "unit-test-red" {
+		t.Fatalf("test-strategy next want unit-test-red got %q", next)
+	}
+	red := bySlug["unit-test-red"]
+	redPre := strings.Join(red.Preconditions, "\n")
+	if !strings.Contains(redPre, "gate-pseudocode-validation") {
+		t.Fatalf("unit-test-red preconditions must require gate-pseudocode-validation: %q", redPre)
 	}
 }
 

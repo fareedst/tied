@@ -216,8 +216,10 @@ async function discoverWorkingArtifacts(
 
   const evidenceDir = path.join(workingRoot, "evidence");
   try {
-    const evidenceFiles = await fs.readdir(evidenceDir);
-    for (const name of evidenceFiles) {
+    const evidenceEntries = await fs.readdir(evidenceDir, { withFileTypes: true });
+    for (const entry of evidenceEntries) {
+      if (!entry.isFile()) continue;
+      const name = entry.name;
       const absolute = path.join(evidenceDir, name);
       let kind: ArtifactKind = "unknown";
       if (name === "request-evidence-envelope.v1.json") kind = "request_evidence_envelope";
@@ -232,6 +234,26 @@ async function discoverWorkingArtifacts(
         status: "present",
         proof_boundaries: kind === "unknown" ? ["discovery_only"] : ["artifact_presence_only"],
       });
+    }
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
+  }
+
+  const psaRoot = path.join(workingRoot, "pseudocode-analysis");
+  try {
+    const psaEntries = await fs.readdir(psaRoot);
+    for (const name of psaEntries.filter((item) => item.endsWith(".v1.json"))) {
+      const absolute = path.join(psaRoot, name);
+      if (await readOptional(absolute)) {
+        discovered.push({
+          absolute,
+          relative: relPath(projectRoot, absolute),
+          kind: "pseudocode_analysis_report",
+          phase: null,
+          status: "present",
+          proof_boundaries: ["pseudocode_gate_only"],
+        });
+      }
     }
   } catch (error) {
     if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
@@ -290,6 +312,7 @@ async function detectGaps(input: {
   requestToken: string;
   artifacts: EnvelopeArtifact[];
   depthTier: DepthTier;
+  gatePolicy?: string;
   corpusInventory?: string[];
 }): Promise<EnvelopeGap[]> {
   const gaps: EnvelopeGap[] = [];
@@ -389,15 +412,18 @@ async function detectGaps(input: {
       const findingResult = validateFindingDisposition({
         gateResult,
         findingLedger: ledgerContents ?? undefined,
+        gatePolicy: input.gatePolicy,
       });
-      if (!findingResult.ok) {
-        for (const diagnostic of findingResult.diagnostics) {
+      const findingDiagnostics = findingResult.advisoryDiagnostics ?? findingResult.diagnostics;
+      if (!findingResult.ok || findingResult.advisoryDiagnostics?.length) {
+        for (const diagnostic of findingDiagnostics) {
           if (diagnostic === "finding_unresolved" || diagnostic === "warn_not_success") {
             gaps.push(
               gapFromCode("finding_unresolved", diagnostic, {
                 artifact_kind: "adversarial_inquiry_gate",
                 phase,
                 source: "A5",
+                severity: input.gatePolicy === "advisory" ? "warn" : "error",
               }),
             );
           }
@@ -412,6 +438,18 @@ async function detectGaps(input: {
       gaps.push(
         gapFromCode("not_applicable_receipt_missing", "Minimal depth without not-applicable-receipt", {
           source: "depth-contract",
+        }),
+      );
+    }
+  }
+
+  const profileArtifact = input.artifacts.find((a) => a.kind === "evidence_chain_profile");
+  if (input.depthTier === "integrated" || input.depthTier === "strict_candidate") {
+    if (!profileArtifact) {
+      gaps.push(
+        gapFromCode("expected_artifact_missing", "Integrated depth expects evidence-chain-profile artifact", {
+          artifact_kind: "evidence_chain_profile",
+          source: "profile-cross-link",
         }),
       );
     }
@@ -468,6 +506,7 @@ export async function buildRequestEvidenceEnvelope(
     requestToken: input.request_token,
     artifacts,
     depthTier,
+    gatePolicy: input.gate_policy,
     corpusInventory: input.corpus_inventory,
   });
 

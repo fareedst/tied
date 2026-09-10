@@ -128,6 +128,24 @@ the caller supplies the normalized `graph`, `fidelity`, and `scope` inputs.
 The analysis reads caller-provided normalized records and produces generated
 evidence; it does not scan project paths or write project YAML.
 
+**Scope convention (Mode A):** `scope` lists **block identities**
+(`IMPL-TOKEN#PROCEDURE_NAME#contentDigest` or phase aliases such as
+`IMPL-TOKEN#PROCEDURE_NAME#closeout`). The validator rejects entries that do
+not match any `implementationBlocks[].identity` in the supplied graph.
+Reports, gate results, and activation receipts therefore remain **block-scoped**.
+
+**Scope convention (Mode B):** the orchestrator derives obligations from live
+sidecar procedures via shared `scanProcedureBlocks`. Reports use **criterion
+IDs** (`REQ-TOKEN#criterion-id`) in `scope`, while provenance records the
+resolved `blockScope` procedure list. Optional `block_scope` (request field or
+IMPL `adversarial_inquiry.block_scope`) lists multiple changed procedures for
+integrated `close_out`; entries may carry a `#closeout` phase tag suffix
+(`OPEN_TCC_READONLY#closeout`) that strips to the procedure name before
+validation. Stale `block_name` values fail fast with `STALE_BLOCK_NAME` and
+list available sidecar procedures — this eliminates phantom obligations such as
+demo client `READ_TCC#closeout` when the live sidecar declares
+`OPEN_TCC_READONLY` and `MERGE_RESULTS`.
+
 #### Go and non-Ruby stacks (Mode A builder from TIED)
 
 For Go stacks you may use either **Mode B** (native project-input dispatch) or
@@ -270,9 +288,11 @@ pair phase-scoped artifacts with `tied_checklist_activation_collect` and
 A Mode B request declares `project_root`, `request_token`, `impl_token`,
 repository-relative `test_path` and `production_path`, plus either inline
 `production_evidence` or a repository-relative
-`production_evidence_path`. The loader validates the project/TIED boundary and
-realpath confinement before reading. Production source supplies a locus only;
-runtime behavior enters the core only through structured observations.
+`production_evidence_path`. Optional `block_scope` lists multiple sidecar
+procedures for integrated close_out (supports `#closeout` tag suffix). The
+loader validates the project/TIED boundary and realpath confinement before
+reading. Production source supplies a locus only; runtime behavior enters the
+core only through structured observations.
 
 ```json
 {
@@ -313,16 +333,17 @@ where `{phase}` is one of `pre_implementation`, `verification`, or
 overwrite earlier ones. Receipts and `activation.artifacts` paths reference
 only that phase directory.
 
-The four files at the adversarial-inquiry **root**
-(`obligation-report.json`, `finding-ledger.jsonl`, `gate-result.json`,
-`evidence-provenance.json`) are a **latest/close-out convenience projection**
-only. They are copied from the most recent phase-scoped run and must **never**
-be used to satisfy another phase's gate pairing. Integrated activation gates
-reject artifact paths that point at the root projection or at a sibling
-`phase-{other}/` directory.
+When `activation.phase` is supplied, **do not write** root-level copies of the
+four inquiry artifacts. Authoritative paths are only under
+`phase-{phase}/`. Existing root projections from older runs are **stale**;
+remove them before close-out or accept envelope
+`artifact_path_root_projection_rejected` gaps until migrated.
 
 When no `activation.phase` is supplied, persistence continues to use the root
 directory directly (legacy and non-integrated paths).
+
+Integrated activation gates reject artifact paths that point at the root
+projection or at a sibling `phase-{other}/` directory.
 
 Snapshot files in the authoritative directory are atomically replaced, the
 finding ledger is append-only with deterministic duplicate links, sensitive
@@ -381,3 +402,20 @@ bytes before and after. Replace `status: not_run` with
 
 Keep local execution within five minutes and CI execution within fifteen
 minutes. Two consecutive budget breaches stop subset expansion.
+
+## Demo regression — inquiry scope alignment (Wave 3)
+
+Document-only replay for demo client `1789069630` (`mac-perms-report`); do **not**
+patch the demo client in isolation before methodology waves land.
+
+1. Read live procedures from `IMPL-TCC_DB_READER` sidecar (e.g.
+   `OPEN_TCC_READONLY`, `MERGE_RESULTS`) via `scanProcedureBlocks`.
+2. Set Mode B `block_scope` (or aligned `block_name`) from those procedures;
+   use `#closeout` tags only when phase-specific aliases are required.
+3. Re-run `tied_adversarial_inquiry_run` at `verification` and `close_out` with
+   distinct `run_id`s and phase artifact directories.
+4. Expect: no `semantic_fidelity` completeness finding for phantom `READ_TCC`
+   block; stale `READ_TCC#closeout` scope fails fast with `STALE_BLOCK_NAME`
+   before producing misleading completeness gaps.
+
+Reference: `docs/methodology-closeout-integrity-plan.md` §5.3.

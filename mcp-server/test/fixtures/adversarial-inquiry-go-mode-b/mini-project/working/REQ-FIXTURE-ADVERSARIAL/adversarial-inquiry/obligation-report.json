@@ -8,6 +8,30 @@
       "message": "Specification statement has no corresponding evidence.",
       "proofBoundary": "semantic_fidelity",
       "statementId": "gotest-13-t.Errorf"
+    },
+    {
+      "direction": "B",
+      "id": "7e4c277374b921ad",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "gotest-9-t.Errorf"
+    },
+    {
+      "direction": "A",
+      "id": "d28e41c0b319fcb1",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "gotest-13-t.Errorf"
+    },
+    {
+      "direction": "A",
+      "id": "fc7ecebb7ddf896d",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "gotest-9-t.Errorf"
     }
   ],
   "graph": {

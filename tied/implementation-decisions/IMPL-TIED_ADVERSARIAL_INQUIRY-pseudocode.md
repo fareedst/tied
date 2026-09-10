@@ -251,10 +251,11 @@ procedure BUILD_PROJECT_INQUIRY_INPUT(): # [IMPL-TIED_ADVERSARIAL_INQUIRY] [ARCH
 2. Resolve the manifest from test_path suffix: Ruby `.rb` -> `{ languages: ["ruby"], testClassifiers: ["minitest"] }`; Go `_test.go` -> `{ languages: ["go"], testClassifiers: ["go-test"] }`; reject other extensions before any project read.
 3. Resolve each declared repository-relative path, read its real path, and reject absolute paths, traversal, symlink escape, missing files, and non-file targets.
 4. Read only the selected REQ, ARCH, and IMPL index/detail records plus the IMPL pseudo-code sidecar from the explicit TIED base path; compute source revisions from bytes.
-5. Resolve explicit criterion and block identities, map criteria through architecture constraints to the owning IMPL block, and construct the graph with scoped evidence loci.
-6. Dispatch the test adapter from manifest.testClassifiers: minitest -> PARSE_MINITEST_ASSERTIONS; go-test -> PARSE_GO_TEST_EVIDENCE; preserve unsupported and ambiguous adapter diagnostics as unresolved evidence.
-7. Parse only the declared structured production evidence; attach production source as a locus and never infer runtime behavior from production source text.
-8. Return the normalized checklist input with stage diagnostics and provenance, or return a stable structured error without invoking the core or artifact writer.
+5. Discover sidecar procedures with shared scanProcedureBlocks; prefer explicit block_name, optional block_scope list, else all procedures; reject stale block_name with available-procedure diagnostics.
+6. Resolve explicit criterion and block identities, validate scope entries against live procedures and resolveBlockIdentity output, map criteria through architecture constraints to owning IMPL blocks, and construct the graph with scoped evidence loci.
+7. Dispatch the test adapter from manifest.testClassifiers: minitest -> PARSE_MINITEST_ASSERTIONS; go-test -> PARSE_GO_TEST_EVIDENCE; preserve unsupported and ambiguous adapter diagnostics as unresolved evidence.
+8. Parse only the declared structured production evidence; attach production source as a locus and never infer runtime behavior from production source text.
+9. Return the normalized checklist input with criterion-scoped report scope, stage diagnostics, and provenance, or return a stable structured error without invoking the core or artifact writer.
 
 ## PARSE_GO_TEST_EVIDENCE
 - [IMPL-TIED_ADVERSARIAL_INQUIRY] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY] How: extract only the approved Go testing.T and testify subset and emit unresolved diagnostics for unsupported adapters.

@@ -1,5 +1,11 @@
 import { createHash } from "node:crypto";
 
+import { REPORT_SCHEMA_VERSION } from "./analysis/pseudocode-ir.js";
+import {
+  loadCanonicalChecklistSlugs,
+  PSEUDOCODE_GATE_SLUG,
+} from "./checklist-slug-registry.js";
+
 export type GatePhase = "pre_implementation" | "verification" | "close_out";
 export type AdversarialDepth = "minimal" | "integrated" | "strict_candidate";
 export type StepDisposition = "pending" | "completed" | "not_applicable" | "waived";
@@ -647,6 +653,10 @@ function readProvenanceEnvelope(provenance: unknown): Record<string, unknown> | 
   return provenance;
 }
 
+function readProvenanceWrapper(provenance: unknown): Record<string, unknown> | undefined {
+  return isRecord(provenance) ? provenance : undefined;
+}
+
 // [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: reject sparse Tracker missing phase-aware slug dispositions.
 export function validateTrackerSparse(input: {
   tracker: unknown;
@@ -674,10 +684,12 @@ export function validateTrackerSparse(input: {
   return { ok: true, diagnostics: [] };
 }
 
-// [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: reject synthetic Tracker projections substituted for authoritative file.
+// [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: reject synthetic or in-memory Tracker projections substituted for authoritative file at late integrated phases.
 export function validateTrackerAuthoritative(input: {
   tracker: unknown;
-  trackerSource?: "authoritative_file" | "synthetic_projection";
+  trackerSource?: "authoritative_file" | "synthetic_projection" | "in_memory";
+  phase?: GatePhase;
+  depth?: AdversarialDepth;
 }): ValidationResult {
   if (input.trackerSource === "synthetic_projection") {
     return { ok: false, diagnostics: ["tracker_not_authoritative"] };
@@ -685,11 +697,17 @@ export function validateTrackerAuthoritative(input: {
   if (isRecord(input.tracker) && input.tracker._synthetic_projection === true) {
     return { ok: false, diagnostics: ["tracker_not_authoritative"] };
   }
+  const latePhase = input.phase === "verification" || input.phase === "close_out";
+  const integratedDepth = input.depth === "integrated" || input.depth === "strict_candidate";
+  if (latePhase && integratedDepth && input.trackerSource !== "authoritative_file") {
+    return { ok: false, diagnostics: ["tracker_not_authoritative"] };
+  }
   return { ok: true, diagnostics: [] };
 }
 
 // [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: require complete evidence provenance identity and command retention.
 export function validateProvenanceComplete(provenance: unknown): ValidationResult {
+  const wrapper = readProvenanceWrapper(provenance);
   const envelope = readProvenanceEnvelope(provenance);
   if (!envelope) {
     return { ok: false, diagnostics: ["provenance_incomplete"] };
@@ -700,7 +718,11 @@ export function validateProvenanceComplete(provenance: unknown): ValidationResul
     const value = envelope[field] ?? envelope[camel];
     if (!nonEmpty(value)) diagnostics.push(`provenance_incomplete:${field}`);
   }
-  const schemaVersion = envelope.schemaVersion ?? envelope.schema_version;
+  // [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [IMPL-REQUEST_EVIDENCE_ENVELOPE] [REQ-TIED_SETUP] — How: schemaVersion may live on the root wrapper while identity fields stay in inner provenance (W4-D1 backward compat).
+  const schemaVersion = envelope.schemaVersion
+    ?? envelope.schema_version
+    ?? wrapper?.schemaVersion
+    ?? wrapper?.schema_version;
   if (!nonEmpty(schemaVersion)) diagnostics.push("provenance_incomplete:schema_version");
   if (diagnostics.length > 0) {
     return { ok: false, diagnostics: ["provenance_incomplete", ...diagnostics] };
@@ -708,12 +730,14 @@ export function validateProvenanceComplete(provenance: unknown): ValidationResul
   return { ok: true, diagnostics: [] };
 }
 
-// [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: unresolved or warn findings cannot satisfy gate success.
+const ADVISORY_FINDING_DIAGNOSTICS = new Set(["finding_unresolved", "warn_not_success"]);
+
+// [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: unresolved or warn findings block under strict policy; advisory policy keeps them visible but non-blocking.
 export function validateFindingDisposition(input: {
   gateResult?: unknown;
   findingLedger?: unknown;
   gatePolicy?: string;
-}): ValidationResult {
+}): ValidationResult & { advisoryDiagnostics?: string[] } {
   const diagnostics: string[] = [];
   if (isRecord(input.gateResult)) {
     const verdict = identityValue(input.gateResult.verdict);
@@ -736,7 +760,18 @@ export function validateFindingDisposition(input: {
       }
     }
   }
-  return { ok: diagnostics.length === 0, diagnostics: [...new Set(diagnostics)] };
+  const uniqueDiagnostics = [...new Set(diagnostics)];
+  const advisoryOnly = input.gatePolicy === "advisory"
+    && uniqueDiagnostics.length > 0
+    && uniqueDiagnostics.every((code) => ADVISORY_FINDING_DIAGNOSTICS.has(code));
+  if (advisoryOnly) {
+    return {
+      ok: true,
+      diagnostics: uniqueDiagnostics,
+      advisoryDiagnostics: uniqueDiagnostics,
+    };
+  }
+  return { ok: uniqueDiagnostics.length === 0, diagnostics: uniqueDiagnostics };
 }
 
 // [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: reject self-reported command success without retained output/manifest.
@@ -824,6 +859,15 @@ export function normalizeRemediationDiagnostics(diagnostics: readonly string[]):
   if (diagnostics.some((item) => item.startsWith("artifact_path_root_projection_rejected:"))) {
     out.add("tracker_not_authoritative");
   }
+  if (diagnostics.some((item) => item.startsWith("invalid_slug:"))) {
+    out.add("invalid_slug");
+  }
+  if (diagnostics.includes("missing_pseudocode_gate_history")) {
+    out.add("missing_pseudocode_gate_history");
+  }
+  if (diagnostics.some((item) => item.startsWith("psa_") || item === "impl_inventory_empty")) {
+    out.add("pseudocode_analysis_incomplete");
+  }
   if (diagnostics.includes("depth_downgrade_requires_waiver")
     && diagnostics.some((item) => item.includes("~"))) {
     out.add("waiver_invalid");
@@ -832,7 +876,7 @@ export function normalizeRemediationDiagnostics(diagnostics: readonly string[]):
 }
 
 export type ChecklistGateEvidenceInput = {
-  trackerSource?: "authoritative_file" | "synthetic_projection";
+  trackerSource?: "authoritative_file" | "synthetic_projection" | "in_memory";
   provenance?: unknown;
   gateResult?: unknown;
   findingLedger?: unknown;
@@ -842,7 +886,206 @@ export type ChecklistGateEvidenceInput = {
   crossPhaseReuse?: boolean;
   dirtyPaths?: readonly string[];
   untrackedPaths?: readonly string[];
+  /** Parsed pseudocode-analysis-report.v1 keyed by IMPL token. */
+  pseudocodeReports?: Record<string, unknown>;
+  /** Sidecar sha256 hex (no prefix) keyed by IMPL token for hash match. */
+  sidecarHashes?: Record<string, string>;
+  requestToken?: string;
 };
+
+const IMPL_TOKEN_RE = /^IMPL-[A-Z0-9][A-Z0-9_-]*$/u;
+
+function extractImplInventoryTokens(tracker: unknown, citdp?: unknown): string[] {
+  const tokens = new Set<string>();
+  if (isRecord(tracker) && isRecord(tracker.execution_evidence)) {
+    const inventory = tracker.execution_evidence.impl_inventory;
+    if (Array.isArray(inventory)) {
+      for (const item of inventory) {
+        if (typeof item === "string" && IMPL_TOKEN_RE.test(item)) tokens.add(item);
+        if (isRecord(item)) {
+          const token = getString(item, "impl_token", "token", "impl");
+          if (token && IMPL_TOKEN_RE.test(token)) tokens.add(token);
+        }
+      }
+    }
+  }
+  if (isRecord(citdp) && isRecord(citdp.impact_analysis)) {
+    const citdpInventory = citdp.impact_analysis.impl_inventory;
+    if (Array.isArray(citdpInventory)) {
+      for (const item of citdpInventory) {
+        if (typeof item === "string" && IMPL_TOKEN_RE.test(item)) tokens.add(item);
+      }
+    }
+  }
+  return [...tokens];
+}
+
+function trackerRequestToken(tracker: unknown): string | undefined {
+  if (!isRecord(tracker)) return undefined;
+  if (isRecord(tracker.execution_evidence)) {
+    const fromEvidence = identityValue(tracker.execution_evidence.request);
+    if (fromEvidence) return fromEvidence;
+  }
+  return identityValue(tracker.request);
+}
+
+export function withPseudocodeGateHistory<T extends Record<string, unknown>>(tracker: T): T {
+  if (slugCompletedInTracker(tracker, PSEUDOCODE_GATE_SLUG)) return tracker;
+  const steps = trackerSteps(tracker);
+  return {
+    ...tracker,
+    steps: [
+      ...steps,
+      {
+        slug: PSEUDOCODE_GATE_SLUG,
+        disposition: "completed",
+        evidence_refs: ["gate-pseudocode-validation-evidence"],
+      },
+    ],
+  };
+}
+
+function slugCompletedInTracker(tracker: unknown, slug: string): boolean {
+  for (const step of trackerSteps(tracker)) {
+    const stepSlug = getString(step, "slug", "id");
+    if (stepSlug === slug && disposition(step) === "completed") return true;
+  }
+  if (isRecord(tracker) && isRecord(tracker.execution_evidence)) {
+    const completed = tracker.execution_evidence.completed;
+    if (Array.isArray(completed) && completed.some((item) => item === slug)) return true;
+  }
+  return false;
+}
+
+function collectTrackerSlugs(tracker: unknown): string[] {
+  const slugs: string[] = [];
+  for (const step of trackerSteps(tracker)) {
+    const slug = getString(step, "slug", "id");
+    if (slug) slugs.push(slug);
+  }
+  if (isRecord(tracker) && isRecord(tracker.execution_evidence)) {
+    const completed = tracker.execution_evidence.completed;
+    if (Array.isArray(completed)) {
+      for (const item of completed) {
+        if (typeof item === "string" && item.trim()) slugs.push(item.trim());
+      }
+    }
+  }
+  return slugs;
+}
+
+// [IMPL-QUALITY_PSEUDOCODE_VALIDATOR] [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-PSEUDOCODE_STATIC_ANALYSIS] — How: reject unknown checklist slugs in tracker steps and execution_evidence.completed.
+export function validateCanonicalSlugs(input: {
+  tracker: unknown;
+  canonicalSlugs?: Set<string>;
+}): ValidationResult {
+  const registry = input.canonicalSlugs ?? loadCanonicalChecklistSlugs();
+  if (registry.size === 0) return { ok: true, diagnostics: [] };
+  const diagnostics: string[] = [];
+  for (const slug of collectTrackerSlugs(input.tracker)) {
+    if (!registry.has(slug)) diagnostics.push(`invalid_slug:${slug}`);
+  }
+  const unique = [...new Set(diagnostics)];
+  return { ok: unique.length === 0, diagnostics: unique };
+}
+
+// [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-PSEUDOCODE_STATIC_ANALYSIS] — How: verification/close_out require gate-pseudocode-validation completed in tracker history.
+export function validatePseudocodeGateHistory(input: {
+  tracker: unknown;
+  phase: GatePhase;
+  depth: AdversarialDepth;
+}): ValidationResult {
+  if (input.depth !== "integrated" && input.depth !== "strict_candidate") {
+    return { ok: true, diagnostics: [] };
+  }
+  if (input.phase !== "verification" && input.phase !== "close_out") {
+    return { ok: true, diagnostics: [] };
+  }
+  if (slugCompletedInTracker(input.tracker, PSEUDOCODE_GATE_SLUG)) {
+    return { ok: true, diagnostics: [] };
+  }
+  return { ok: false, diagnostics: ["missing_pseudocode_gate_history"] };
+}
+
+function validateOnePseudocodeReport(
+  implToken: string,
+  report: unknown,
+  requestToken: string,
+  sidecarHash?: string,
+): string[] {
+  const diagnostics: string[] = [];
+  if (!isRecord(report)) {
+    diagnostics.push(`psa_missing:${implToken}`);
+    return diagnostics;
+  }
+  if (report.schema_version !== REPORT_SCHEMA_VERSION) {
+    diagnostics.push(`psa_invalid_schema:${implToken}`);
+  }
+  const token = identityValue(report.token);
+  if (token !== implToken) diagnostics.push(`psa_token_mismatch:${implToken}`);
+  if (report.ok !== true) diagnostics.push(`psa_not_ok:${implToken}`);
+  if (report.gate_mode_applied !== true) diagnostics.push(`psa_gate_mode_not_applied:${implToken}`);
+  const inputIdentity = isRecord(report.input_identity) ? report.input_identity : undefined;
+  const reportHash = inputIdentity ? identityValue(inputIdentity.hash) : undefined;
+  if (sidecarHash && reportHash && reportHash !== sidecarHash) {
+    diagnostics.push(`psa_sidecar_hash_mismatch:${implToken}`);
+  }
+  const pathHint = identityValue(report.request_token);
+  if (pathHint && pathHint !== requestToken) {
+    diagnostics.push(`psa_request_token_mismatch:${implToken}`);
+  }
+  return diagnostics;
+}
+
+// [IMPL-QUALITY_PSEUDOCODE_VALIDATOR] [REQ-PSEUDOCODE_STATIC_ANALYSIS] [REQ-QUALITY_ASSURANCE_EVIDENCE] — How: enforce impl_inventory PSA JSON with ok, gate_mode_applied, and identity match.
+export function validatePseudocodeAnalysisEvidence(input: {
+  tracker: unknown;
+  citdp?: unknown;
+  requestToken?: string;
+  pseudocodeReports?: Record<string, unknown>;
+  sidecarHashes?: Record<string, string>;
+}): ValidationResult {
+  const inventory = extractImplInventoryTokens(input.tracker, input.citdp);
+  const requestToken = input.requestToken ?? trackerRequestToken(input.tracker);
+  const diagnostics: string[] = [];
+
+  const claimsInventory = (isRecord(input.tracker)
+    && isRecord(input.tracker.execution_evidence)
+    && input.tracker.execution_evidence.impl_inventory !== undefined)
+    || (isRecord(input.citdp)
+      && isRecord(input.citdp.impact_analysis)
+      && input.citdp.impact_analysis.impl_inventory !== undefined);
+
+  if (claimsInventory && inventory.length === 0) {
+    diagnostics.push("impl_inventory_empty");
+  }
+
+  if (inventory.length === 0) {
+    return { ok: diagnostics.length === 0, diagnostics };
+  }
+
+  if (!requestToken) {
+    diagnostics.push("psa_missing_request_token");
+    return { ok: false, diagnostics };
+  }
+
+  const reports = input.pseudocodeReports ?? {};
+  for (const implToken of inventory) {
+    if (!(implToken in reports)) {
+      diagnostics.push(`psa_missing:${implToken}`);
+      continue;
+    }
+    diagnostics.push(...validateOnePseudocodeReport(
+      implToken,
+      reports[implToken],
+      requestToken,
+      input.sidecarHashes?.[implToken],
+    ));
+  }
+
+  const unique = [...new Set(diagnostics)];
+  return { ok: unique.length === 0, diagnostics: unique };
+}
 
 // [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: select depth before evaluating phase gates and fail closed on invalid evidence.
 export function validateChecklistGate(input: {
@@ -908,6 +1151,8 @@ export function validateChecklistGate(input: {
   diagnostics.push(...validateTrackerAuthoritative({
     tracker: input.tracker,
     trackerSource: input.evidence?.trackerSource,
+    phase: input.phase,
+    depth,
   }).diagnostics);
 
   const sparseResult = validateTrackerSparse({
@@ -925,15 +1170,22 @@ export function validateChecklistGate(input: {
   });
   diagnostics.push(...trackerResult.diagnostics);
 
+  const gatePolicy = identityValue(section?.gate_policy);
+  let findingAdvisoryDiagnostics: string[] = [];
   if (input.evidence?.provenance !== undefined) {
     diagnostics.push(...validateProvenanceComplete(input.evidence.provenance).diagnostics);
   }
   if (input.evidence?.gateResult !== undefined || input.evidence?.findingLedger !== undefined) {
-    diagnostics.push(...validateFindingDisposition({
+    const findingResult = validateFindingDisposition({
       gateResult: input.evidence.gateResult,
       findingLedger: input.evidence.findingLedger,
-      gatePolicy: identityValue(section?.gate_policy),
-    }).diagnostics);
+      gatePolicy,
+    });
+    if (!findingResult.ok) {
+      diagnostics.push(...findingResult.diagnostics);
+    } else if (findingResult.advisoryDiagnostics?.length) {
+      findingAdvisoryDiagnostics = findingResult.advisoryDiagnostics;
+    }
   }
   if (input.evidence?.commandEvidence !== undefined) {
     diagnostics.push(...validateCommandEvidence(input.evidence.commandEvidence).diagnostics);
@@ -953,6 +1205,26 @@ export function validateChecklistGate(input: {
       untrackedPaths: input.evidence.untrackedPaths,
     }).diagnostics);
   }
+
+  diagnostics.push(...validateCanonicalSlugs({ tracker: input.tracker }).diagnostics);
+
+  if (depth === "integrated" || depth === "strict_candidate") {
+    diagnostics.push(...validatePseudocodeGateHistory({
+      tracker: input.tracker,
+      phase: input.phase,
+      depth,
+    }).diagnostics);
+    if (input.phase === "verification" || input.phase === "close_out") {
+      diagnostics.push(...validatePseudocodeAnalysisEvidence({
+        tracker: input.tracker,
+        citdp: input.citdp,
+        requestToken: input.evidence?.requestToken ?? trackerRequestToken(input.tracker),
+        pseudocodeReports: input.evidence?.pseudocodeReports,
+        sidecarHashes: input.evidence?.sidecarHashes,
+      }).diagnostics);
+    }
+  }
+
   diagnostics.push(...waiverDiagnosticsInvalid(section));
 
   const parentChildResult = validateIntegratedParentChildSlugs({
@@ -982,9 +1254,12 @@ export function validateChecklistGate(input: {
 
   const minimalWaiverResult = validateMinimalWaiver({ citdp: input.citdp });
   const blockingDiagnostics = normalizeRemediationDiagnostics([...new Set(diagnostics)]);
-  const advisoryDiagnostics = minimalWaiverResult.diagnostics.filter(
-    (code) => code === MINIMAL_DEPTH_MISSING_WAIVER,
-  );
+  const advisoryDiagnostics = [
+    ...minimalWaiverResult.diagnostics.filter(
+      (code) => code === MINIMAL_DEPTH_MISSING_WAIVER,
+    ),
+    ...findingAdvisoryDiagnostics,
+  ];
   const uniqueDiagnostics = [...new Set([...blockingDiagnostics, ...advisoryDiagnostics])];
   const allowed = blockingDiagnostics.length === 0;
   return { allowed, ok: allowed, blocking: !allowed, depth, phase: input.phase, diagnostics: uniqueDiagnostics };

@@ -99,6 +99,56 @@ export function verifyFeatureOrchestrationMethodology(projectRoot, tiedDir, tied
   );
 }
 
+const METHODOLOGY_PSEUDOCODE_TOKEN_RE = /\[(REQ|ARCH|IMPL)-([A-Z0-9][A-Z0-9_-]*)\]/gu;
+
+function loadMethodologyIndexKeys(tiedDir, indexName) {
+  const indexPath = path.join(tiedDir, "methodology", `${indexName}.yaml`);
+  if (!fs.existsSync(indexPath)) return new Set();
+  const data = yaml.load(fs.readFileSync(indexPath, "utf8"));
+  if (!data || typeof data !== "object") return new Set();
+  return new Set(Object.keys(data));
+}
+
+// [IMPL-TIED_FILES] [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM] [REQ-TIED_SETUP] — How: fail closed when inherited methodology pseudo-code references tokens absent from methodology indexes (W4-D6).
+export function verifyMethodologyPseudocodeTokenRefs(tiedDir) {
+  sayWarn("MUST verify inherited methodology pseudo-code token references before completion.");
+  const indexKeys = {
+    REQ: loadMethodologyIndexKeys(tiedDir, "requirements"),
+    ARCH: loadMethodologyIndexKeys(tiedDir, "architecture-decisions"),
+    IMPL: loadMethodologyIndexKeys(tiedDir, "implementation-decisions"),
+  };
+  const sidecarDir = path.join(tiedDir, "methodology", "implementation-decisions");
+  if (!fs.existsSync(sidecarDir)) {
+    sayErr(`MISSING methodology implementation-decisions directory: ${sidecarDir}`);
+    throw new Error("METHODOLOGY_PSEUDOCODE_TOKEN_GATE_FAILED");
+  }
+  let missing = 0;
+  for (const name of fs.readdirSync(sidecarDir)) {
+    if (!name.endsWith("-pseudocode.md")) continue;
+    const sidecarPath = path.join(sidecarDir, name);
+    const content = fs.readFileSync(sidecarPath, "utf8");
+    const seen = new Set();
+    for (const match of content.matchAll(METHODOLOGY_PSEUDOCODE_TOKEN_RE)) {
+      const prefix = match[1];
+      const token = `${prefix}-${match[2]}`;
+      if (seen.has(token)) continue;
+      seen.add(token);
+      const index = indexKeys[prefix];
+      if (!index?.has(token)) {
+        sayErr(
+          `MISSING methodology index token ${token} referenced in ${path.join("methodology", "implementation-decisions", name)}`,
+        );
+        missing = 1;
+      }
+    }
+  }
+  if (missing) {
+    sayErr("Methodology pseudo-code token reference verification failed; client bootstrap is incomplete.");
+    throw new Error("METHODOLOGY_PSEUDOCODE_TOKEN_GATE_FAILED");
+  }
+  sayOk("MUST verify inherited methodology pseudo-code token references: complete.");
+}
+
 export function verifyInheritedDetailFiles(tiedDir, manifestRequired) {
   sayWarn("MUST verify inherited methodology detail-file integrity before completion.");
   let missing = 0;

@@ -1,0 +1,96 @@
+copy_hygiene: Wave 4 tracker for docs/methodology-closeout-integrity-plan.md §6. Cleared inherited close-out evidence; request set to REQ-TIED_SETUP.
+request: REQ-TIED_SETUP
+source_plan: docs/methodology-closeout-integrity-plan.md#6-wave-4--artifact-contracts-and-bootstrap-integrity-p1p2
+status: in_progress
+profile:
+  depth_tier: integrated
+  gate_policy: advisory
+  research_profile: read-only research profile
+  assurance_profiles:
+    - baseline-functional
+    - data-integrity-migration
+    - stateful-reliability
+  note: Advisory applies only to observed/unresolved inquiry findings; structural and evidence-contract failures remain blocking.
+steps:
+  - slug: session-bootstrap
+    disposition: completed
+    evidence_refs:
+      - AGENTS.md
+      - tied/docs/ai-principles.md
+      - tied/vocab/routing.md
+      - tied/vocab/quality-assurance.md
+      - tied/vocab/fidelity-research.md
+      - tied/vocab/prompt-composer.md
+  - slug: translate-sponsor-intent
+    disposition: completed
+    evidence_refs:
+      - docs/methodology-closeout-integrity-plan.md#61-deliverables
+  - slug: change-definition
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_SETUP/CITDP-wave4-bootstrap-integrity.yaml
+  - slug: impact-discovery
+    disposition: completed
+    evidence_refs:
+      - docs/methodology-closeout-integrity-plan.md#12-methodology-repo-self-check
+  - slug: risk-assessment
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_SETUP/CITDP-wave4-bootstrap-integrity.yaml#risk_analysis
+  - slug: persist-citdp-record
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_SETUP/CITDP-wave4-bootstrap-integrity.yaml
+  - slug: catalog-pseudocode-contracts
+    disposition: completed
+    evidence_refs:
+      - tied/implementation-decisions/IMPL-TIED_FILES-pseudocode.md
+      - templates/implementation-decisions/IMPL-TIED_FILES-pseudocode.md
+  - slug: gate-pseudocode-validation
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/pseudocode-analysis/IMPL-TIED_FILES.v1.json
+  - slug: test-strategy
+    disposition: completed
+    evidence_refs:
+      - docs/methodology-closeout-integrity-plan.md#62-acceptance-criteria
+  - slug: unit-test-red
+    disposition: completed
+    evidence_refs:
+      - mcp-server/src/checklist-remediation-acceptance.test.ts
+      - mcp-server/src/request-evidence-envelope/request-evidence-envelope.test.ts
+      - tools/bootstrap/lib/verify.test.mjs
+  - slug: unit-test-green
+    disposition: completed
+    evidence_refs:
+      - mcp-server/dist/checklist-remediation-acceptance.test.js
+      - tools/bootstrap/lib/verify.test.mjs
+  - slug: composition-integration
+    disposition: completed
+    evidence_refs:
+      - tools/bootstrap/templates/run-close-out-gates.mjs
+      - mcp-server/src/adversarial-inquiry/checklist-integration.ts
+  - slug: verification-gate
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/mci-gate-receipts-result.json
+  - slug: traceable-commit
+    disposition: completed
+    evidence_refs:
+      - CHANGELOG.md
+  - slug: sub-adversarial-inquiry-pass
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/mci-inquiry-phases-result.json
+execution_evidence:
+  request: REQ-TIED_SETUP
+  completed: []
+  close_out_evidence:
+    status: complete
+    gates:
+      cross_wave_primary: mci-closeout-20260910
+    master_checklist: tied/docs/agent-req-implementation-checklist.yaml
+  envelope_path: working/REQ-TIED_SETUP/evidence/request-evidence-envelope.v1.json
+  operator_evidence:
+    status: wave4_implementation
+    limitation: Wave 4 deliverables W4-D1..W4-D6; demo client regression documented only.

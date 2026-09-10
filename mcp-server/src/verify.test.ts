@@ -50,15 +50,15 @@ function validChecklistGate() {
 }
 
 describe("updateStatusFromPassedTokens dry_run", () => {
-  it("blocks status updates when the shared checklist gate is missing", () => {
-    const result = updateStatusFromPassedTokens({
+  it("blocks status updates when the shared checklist gate is missing", async () => {
+    const result = await updateStatusFromPassedTokens({
       passed_requirement_tokens: ["REQ-ONE"],
     });
     assert.equal(result.ok, false);
     assert.deepEqual(result.diagnostics, ["missing_checklist_gate"]);
   });
 
-  it("returns would_update without writing when dry_run true", () => {
+  it("returns would_update without writing when dry_run true", async () => {
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-verify-"));
     const reqPath = path.join(dir, "requirements.yaml");
     const implPath = path.join(dir, "implementation-decisions.yaml");
@@ -85,7 +85,7 @@ REQ-TWO:
       process.env.TIED_BASE_PATH = dir;
       clearBasePathCache();
 
-      const r = updateStatusFromPassedTokens({
+      const r = await updateStatusFromPassedTokens({
         dry_run: true,
         checklist_gate: validChecklistGate(),
         passed_requirement_tokens: ["REQ-ONE", "REQ-TWO"],
@@ -114,7 +114,7 @@ REQ-TWO:
     }
   });
 
-  it("dry_run with empty passed lists returns empty would_update and unchanged disk", () => {
+  it("dry_run with empty passed lists returns empty would_update and unchanged disk", async () => {
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-verify-empty-"));
     const reqPath = path.join(dir, "requirements.yaml");
     fs.writeFileSync(
@@ -129,7 +129,7 @@ REQ-TWO:
       process.env.TIED_BASE_PATH = dir;
       clearBasePathCache();
 
-      const r = updateStatusFromPassedTokens({
+      const r = await updateStatusFromPassedTokens({
         dry_run: true,
         checklist_gate: validChecklistGate(),
         passed_requirement_tokens: [],
@@ -149,7 +149,7 @@ REQ-TWO:
     }
   });
 
-  it("A9 dry_run rejects invalid Go writer tracker input with no would_update", () => {
+  it("A9 dry_run rejects invalid Go writer tracker input with no would_update", async () => {
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-verify-writer-invalid-"));
     const reqPath = path.join(dir, "requirements.yaml");
     fs.writeFileSync(
@@ -163,7 +163,7 @@ REQ-TWO:
     try {
       process.env.TIED_BASE_PATH = dir;
       clearBasePathCache();
-      const result = updateStatusFromPassedTokens({
+      const result = await updateStatusFromPassedTokens({
         dry_run: true,
         checklist_gate: {
           phase: "verification",
@@ -197,7 +197,7 @@ REQ-TWO:
     }
   });
 
-  it("A9 dry_run accepts valid Go writer gate input and reports would_update only", () => {
+  it("A9 dry_run accepts valid Go writer gate input and reports would_update only", async () => {
     const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
     const writerFixturePath = path.join(
       repoRoot,
@@ -217,7 +217,7 @@ REQ-TWO:
     try {
       process.env.TIED_BASE_PATH = dir;
       clearBasePathCache();
-      const result = updateStatusFromPassedTokens({
+      const result = await updateStatusFromPassedTokens({
         dry_run: true,
         checklist_gate: {
           phase: "pre_implementation",
@@ -240,7 +240,7 @@ REQ-TWO:
     }
   });
 
-  it("A17 persists gate receipt on dry_run with tracker_hash and citdp_hash", () => {
+  it("A17 persists gate receipt on dry_run with tracker_hash and citdp_hash", async () => {
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-verify-gate-receipt-"));
     const reqPath = path.join(dir, "requirements.yaml");
     const gatesDir = path.join(dir, "gates");
@@ -258,7 +258,7 @@ REQ-TWO:
       process.env.TIED_BASE_PATH = dir;
       clearBasePathCache();
 
-      const r = updateStatusFromPassedTokens({
+      const r = await updateStatusFromPassedTokens({
         dry_run: true,
         checklist_gate: gate,
         passed_requirement_tokens: ["REQ-ONE"],
@@ -293,7 +293,7 @@ REQ-TWO:
     }
   });
 
-  it("A18 status mutation records gate receipt ref on dry_run", () => {
+  it("A18 status mutation records gate receipt ref on dry_run", async () => {
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-verify-status-receipt-"));
     const reqPath = path.join(dir, "requirements.yaml");
     const gatesDir = path.join(dir, "gates");
@@ -309,7 +309,7 @@ REQ-TWO:
     try {
       process.env.TIED_BASE_PATH = dir;
       clearBasePathCache();
-      const r = updateStatusFromPassedTokens({
+      const r = await updateStatusFromPassedTokens({
         dry_run: true,
         checklist_gate: validChecklistGate(),
         passed_requirement_tokens: ["REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"],

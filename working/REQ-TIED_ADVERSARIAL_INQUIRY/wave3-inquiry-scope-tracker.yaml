@@ -1,0 +1,101 @@
+copy_hygiene: Wave 3 tracker for docs/methodology-closeout-integrity-plan.md §5 inquiry scope alignment.
+request: REQ-TIED_ADVERSARIAL_INQUIRY
+source_plan: docs/methodology-closeout-integrity-plan.md
+wave: wave3-inquiry-scope
+status: in_progress
+profile:
+  depth_tier: integrated
+  gate_policy: advisory
+  research_profile: read-only research profile
+  assurance_profiles:
+    - baseline-functional
+    - stateful-reliability
+  note: Advisory applies only to observed/unresolved inquiry findings; stale scope and phantom block IDs remain blocking.
+steps:
+  - slug: session-bootstrap
+    disposition: completed
+    evidence_refs:
+      - AGENTS.md
+      - tied/docs/ai-principles.md
+      - tied/vocab/routing.md
+      - tied/vocab/fidelity-research.md
+      - tied/vocab/pseudocode-and-citdp.md
+      - tied/vocab/quality-assurance.md
+      - tied/vocab/prompt-composer.md
+  - slug: translate-sponsor-intent
+    disposition: completed
+    rationale: Wave 3 aligns inquiry obligations with live sidecar procedures and validates scope IDs at run time.
+    evidence_refs:
+      - docs/methodology-closeout-integrity-plan.md#5-wave-3--inquiry-scope-alignment-p1
+  - slug: change-definition
+    disposition: completed
+    evidence_refs:
+      - docs/methodology-closeout-integrity-plan.md#51-deliverables
+  - slug: impact-discovery
+    disposition: completed
+    evidence_refs:
+      - mcp-server/src/adversarial-inquiry/project-orchestrator.ts
+      - mcp-server/src/adversarial-inquiry/scope-validation.ts
+  - slug: risk-assessment
+    disposition: completed
+    evidence_refs:
+      - docs/methodology-closeout-integrity-plan.md#refinement-decision-and-gate-posture
+      - 'eligibility_triggers_matched: strict-close-out, methodology-tooling-change, external-input'
+  - slug: test-strategy
+    disposition: completed
+    evidence_refs:
+      - docs/methodology-closeout-integrity-plan.md#52-acceptance-criteria
+      - docs/methodology-closeout-integrity-plan.md#72-wave-verification-commands
+  - slug: persist-citdp-record
+    disposition: completed
+    evidence_refs:
+      - tied/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-wave3-inquiry-scope.yaml
+  - slug: catalog-pseudocode-contracts
+    disposition: completed
+    evidence_refs:
+      - tied/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY-pseudocode.md
+      - tied/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST-pseudocode.md
+  - slug: gate-pseudocode-validation
+    disposition: completed
+    evidence_refs:
+      - tied/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY-pseudocode.md
+      - tied/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST-pseudocode.md
+  - slug: unit-test-red
+    disposition: completed
+    evidence_refs:
+      - mcp-server/src/adversarial-inquiry/scope-validation.test.ts
+      - mcp-server/src/adversarial-inquiry/project-orchestrator.test.ts
+  - slug: unit-test-green
+    disposition: completed
+    evidence_refs:
+      - mcp-server/dist/adversarial-inquiry/scope-validation.test.js
+      - mcp-server/dist/adversarial-inquiry/project-orchestrator.test.js
+  - slug: composition-integration
+    disposition: completed
+    evidence_refs:
+      - mcp-server/src/adversarial-inquiry/checklist-integration.test.ts
+      - mcp-server/src/tools/adversarial-inquiry-mcp.test.ts
+  - slug: verification-gate
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/mci-gate-receipts-result.json
+  - slug: traceable-commit
+    disposition: completed
+    evidence_refs:
+      - CHANGELOG.md
+  - slug: sub-adversarial-inquiry-pass
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/mci-inquiry-phases-result.json
+execution_evidence:
+  request: REQ-TIED_ADVERSARIAL_INQUIRY
+  completed: []
+  close_out_evidence:
+    status: complete
+    gates:
+      cross_wave_primary: mci-closeout-20260910
+    master_checklist: tied/docs/agent-req-implementation-checklist.yaml
+  envelope_path: working/REQ-TIED_ADVERSARIAL_INQUIRY/evidence/request-evidence-envelope.v1.json
+  operator_evidence:
+    demo_regression: docs/adversarial-inquiry-adoption.md#demo-regression--inquiry-scope-alignment-wave-3
+    status: not_run

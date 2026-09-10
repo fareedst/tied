@@ -1,0 +1,97 @@
+CITDP-REQ-PSEUDOCODE_STATIC_ANALYSIS-wave2-pseudocode-enforcement:
+  change_definition:
+    current_behavior: "Layer C pseudocode-analysis reports are checklist prose requirements but not validated by tied_checklist_gate_validate; invented slugs pass gates; envelope omits pseudocode_analysis_report kind; agentstream tracker writer accepts unknown slugs."
+    desired_behavior: "validatePseudocodeAnalysisEvidence enforces impl_inventory PSA JSON with ok and gate_mode_applied; verification/close_out require gate-pseudocode-validation history; canonical slug registry rejects invalid_slug; envelope discovers pseudocode_analysis_report with pseudocode_gate_only proof boundary; agentstream validates slugs; backfill script generates gate_mode reports."
+    non_goals:
+      - "Demo client 1789069630 manual repair"
+      - "Wave 3 inquiry scope alignment"
+      - "Wave 4 provenance schema producer changes"
+    success_criteria:
+      - "Gate fails on missing PSA, ok false, gate_mode_applied false, invalid slug"
+      - "stdd dogfood includes at least one pseudocode-analysis artifact for REQ-PSEUDOCODE_STATIC_ANALYSIS"
+      - "W2-D1 through W2-D6 deliverables ship with RED tests green"
+    unchanged_behavior:
+      - "Minimal depth gate contracts unchanged"
+      - "Wave 1 auto-hydration and advisory policy unchanged"
+  completion_criteria:
+    activation:
+      phase: "close_out"
+      request_token: "REQ-PSEUDOCODE_STATIC_ANALYSIS-"
+      run_id: "mci-closeout-20260910"
+    checklist_gate:
+      dispositions:
+        - "completed"
+        - "not_applicable"
+        - "pending"
+        - "waived"
+      fail_closed: true
+      phases:
+        - "close_out"
+        - "pre_implementation"
+        - "verification"
+  evidence:
+    commands:
+      - "go test ./tools/agentstream/checklist/... -run Pseudocode"
+      - "node --test mcp-server/dist/checklist-pseudocode-gate.test.js"
+      - "node --test mcp-server/dist/checklist-validator.test.js"
+      - "node --test mcp-server/dist/request-evidence-envelope/request-evidence-envelope.test.js"
+      - "node --test mcp-server/dist/tools/pseudocode-analyze-mcp.test.js"
+      - "node scripts/backfill-pseudocode-analysis.mjs --help"
+      - "npm run build --prefix mcp-server"
+    manifest_reference: "working/REQ-PSEUDOCODE_STATIC_ANALYSIS/evidence/request-evidence-envelope.v1.json"
+    proof_boundaries:
+      - "pseudocode_gate_only"
+      - "traceability_structure"
+  impact_analysis:
+    impl_inventory:
+      - "IMPL-QUALITY_PSEUDOCODE_VALIDATOR"
+      - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    modules_or_boundaries: "checklist-validator, checklist-slug-registry, request-evidence-envelope build, agentstream tracker writer, backfill script"
+    tied_tokens_affected:
+      - "IMPL-QUALITY_PSEUDOCODE_VALIDATOR"
+      - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "PROC-PSEUDOCODE_VALIDATION"
+      - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: "none"
+    record_status: "applied"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+    recorded_at: "2026-09-10"
+    title: "Wave 2 — enforce pseudocode pipeline (PSA gate + slug registry)"
+  risk_analysis:
+    abuse_cases:
+      - "Invented slug author-implementation substitutes canonical chain"
+      - "PSA report with gate_mode_applied false passes close_out"
+      - "Verification passes without gate-pseudocode-validation history"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Close_out passes with ok false PSA report"
+        - "Gate passes at verification with author-implementation slug"
+      depth_change_waiver: null
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "Wave 2 unit tests pass for PSA inventory and slug rejection"
+      eligibility_triggers_matched:
+        - "methodology-tooling-change"
+        - "strict-close-out"
+      evidence_references:
+        - "docs/methodology-closeout-integrity-plan.md"
+        - "tied/docs/pseudocode-writing-and-validation.md"
+      falsification_questions:
+        - "Can verification pass without gate-pseudocode-validation completed?"
+        - "Does envelope include pseudocode_analysis_report when PSA files exist?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Wave 2 changes pseudocode gate enforcement and slug registry contracts."
+      research_profile: "integrated-agent"
+    quality_profiles:
+      - "baseline-functional"
+      - "data-integrity-migration"

@@ -26,6 +26,9 @@ func (id TurnIdentity) String() string {
 
 // ApplyTrackerDisposition merges one validated receipt into exactly one Tracker step.
 func ApplyTrackerDisposition(trackerPath string, receipt CompletionReceipt, identity TurnIdentity) error {
+	if err := ValidateCanonicalSlug(trackerPath, receipt.Slug); err != nil {
+		return err
+	}
 	tracker, err := LoadTrackerYAML(trackerPath)
 	if err != nil {
 		return fmt.Errorf("tracker_not_found: %w", err)

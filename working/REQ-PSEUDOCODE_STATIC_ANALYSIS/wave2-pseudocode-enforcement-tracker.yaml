@@ -1,0 +1,111 @@
+copy_hygiene: Wave 2 tracker for docs/methodology-closeout-integrity-plan.md §4 pseudocode pipeline enforcement.
+request: REQ-PSEUDOCODE_STATIC_ANALYSIS
+source_plan: docs/methodology-closeout-integrity-plan.md
+wave: wave2-pseudocode-enforcement
+status: in_progress
+profile:
+  depth_tier: integrated
+  gate_policy: advisory
+  research_profile: read-only research profile
+  assurance_profiles:
+    - baseline-functional
+    - data-integrity-migration
+  note: Advisory applies only to observed/unresolved inquiry findings; PSA, slug, and inventory contract failures remain blocking.
+steps:
+  - slug: session-bootstrap
+    disposition: completed
+    evidence_refs:
+      - AGENTS.md
+      - tied/docs/ai-principles.md
+      - tied/vocab/routing.md
+      - tied/vocab/pseudocode-and-citdp.md
+      - tied/vocab/quality-assurance.md
+  - slug: translate-sponsor-intent
+    disposition: completed
+    rationale: Wave 2 enforces Layer C PSA artifacts and canonical checklist slugs at integrated gates.
+    evidence_refs:
+      - docs/methodology-closeout-integrity-plan.md#4-wave-2--enforce-pseudocode-pipeline-p0
+  - slug: change-definition
+    disposition: completed
+    evidence_refs:
+      - docs/methodology-closeout-integrity-plan.md#45-psa-scope-contract
+  - slug: impact-discovery
+    disposition: completed
+    evidence_refs:
+      - mcp-server/src/checklist-validator.ts
+      - mcp-server/src/request-evidence-envelope/build.ts
+  - slug: risk-assessment
+    disposition: completed
+    evidence_refs:
+      - docs/methodology-closeout-integrity-plan.md#refinement-decision-and-gate-posture
+      - 'eligibility_triggers_matched: strict-close-out, methodology-tooling-change'
+  - slug: test-strategy
+    disposition: completed
+    evidence_refs:
+      - docs/methodology-closeout-integrity-plan.md#42-acceptance-criteria
+      - docs/methodology-closeout-integrity-plan.md#72-wave-verification-commands
+  - slug: persist-citdp-record
+    disposition: completed
+    evidence_refs:
+      - tied/citdp/CITDP-REQ-PSEUDOCODE_STATIC_ANALYSIS-wave2-pseudocode-enforcement.yaml
+  - slug: catalog-pseudocode-contracts
+    disposition: completed
+    evidence_refs:
+      - tied/implementation-decisions/IMPL-QUALITY_PSEUDOCODE_VALIDATOR-pseudocode.md
+      - tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md
+  - slug: gate-pseudocode-validation
+    disposition: completed
+    evidence_refs:
+      - working/REQ-PSEUDOCODE_STATIC_ANALYSIS/pseudocode-analysis/IMPL-QUALITY_PSEUDOCODE_VALIDATOR.v1.json
+      - working/REQ-PSEUDOCODE_STATIC_ANALYSIS/pseudocode-analysis/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.v1.json
+  - slug: unit-test-red
+    disposition: completed
+    evidence_refs:
+      - mcp-server/src/checklist-pseudocode-gate.test.ts
+  - slug: unit-test-green
+    disposition: completed
+    evidence_refs:
+      - mcp-server/dist/checklist-pseudocode-gate.test.js
+  - slug: composition-integration
+    disposition: completed
+    evidence_refs:
+      - tools/agentstream/checklist/slug_registry_test.go
+      - scripts/backfill-pseudocode-analysis.mjs
+  - slug: verification-gate
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/mci-gate-receipts-result.json
+  - slug: traceable-commit
+    disposition: completed
+    evidence_refs:
+      - CHANGELOG.md
+  - slug: sub-adversarial-inquiry-pass
+    disposition: completed
+    rationale: Cross-wave evidence via Wave 1 primary REQ mci-* inquiry phases.
+    evidence_refs:
+      - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/mci-inquiry-phases-result.json
+execution_evidence:
+  request: REQ-PSEUDOCODE_STATIC_ANALYSIS
+  impl_inventory:
+    - impl_token: IMPL-QUALITY_PSEUDOCODE_VALIDATOR
+      sidecar: tied/implementation-decisions/IMPL-QUALITY_PSEUDOCODE_VALIDATOR-pseudocode.md
+    - impl_token: IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT
+      sidecar: tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md
+  completed: []
+  close_out_evidence:
+    status: complete
+    gates:
+      cross_wave_primary: mci-closeout-20260910
+    master_checklist: tied/docs/agent-req-implementation-checklist.yaml
+  envelope_path: working/REQ-PSEUDOCODE_STATIC_ANALYSIS/evidence/request-evidence-envelope.v1.json
+  operator_evidence:
+    status: wave2_build_plan
+    pre_implementation_gate:
+      allowed: false
+      blocking: true
+      recorded_at: "2026-09-10"
+      rationale: Awaiting identity-bound pre_implementation inquiry activation pairing.
+feedback_loops:
+  specification: Contract ambiguity returns to plan refinement before CITDP finalization.
+  validation_and_sync: Failed Wave 2 regression returns to owning pseudo-code or test step.
+  leap: Implementation divergence updates IMPL first, then ARCH/REQ when scope changes.

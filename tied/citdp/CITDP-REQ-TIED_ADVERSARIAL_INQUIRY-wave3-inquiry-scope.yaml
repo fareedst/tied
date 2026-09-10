@@ -1,0 +1,94 @@
+CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-wave3-inquiry-scope:
+  change_definition:
+    current_behavior: "Mode B block discovery uses first ## heading or unchecked block_name; caller scope IDs are not validated against live sidecar procedures; phantom READ_TCC obligations persist after procedure renames."
+    desired_behavior: "Procedure-aware discovery via shared scanProcedureBlocks; stale block_name fails with STALE_BLOCK_NAME; Mode A scope validated against graph block identities; Mode B reports criterion-scoped scope with optional multi-block block_scope and #closeout tag aliases."
+    non_goals:
+      - "Demo client 1789069630 manual repair in isolation"
+      - "Wave 2 PSA gate enforcement"
+      - "Wave 4 provenance schema alignment"
+    success_criteria:
+      - "Mode B criterion-scoped vs Mode A block-scoped reports documented and tested"
+      - "Stale block_name rejected with available procedure diagnostic"
+      - "W3-D1 through W3-D4 deliverables ship with RED tests green"
+    unchanged_behavior:
+      - "Advisory gate_policy remains non-blocking for observed findings"
+      - "Wave 1 auto-hydration and envelope blocking unchanged"
+  completion_criteria:
+    activation:
+      phase: "close_out"
+      request_token: "REQ-TIED_ADVERSARIAL_INQUIRY-"
+      run_id: "mci-closeout-20260910"
+    checklist_gate:
+      dispositions:
+        - "completed"
+        - "not_applicable"
+        - "pending"
+        - "waived"
+      fail_closed: true
+      phases:
+        - "close_out"
+        - "pre_implementation"
+        - "verification"
+  evidence:
+    commands:
+      - "node --test mcp-server/dist/adversarial-inquiry/checklist-integration.test.js"
+      - "node --test mcp-server/dist/adversarial-inquiry/project-orchestrator.test.js"
+      - "node --test mcp-server/dist/adversarial-inquiry/psa-fixture.test.js"
+      - "node --test mcp-server/dist/adversarial-inquiry/scope-validation.test.js"
+      - "node --test mcp-server/dist/tools/adversarial-inquiry-mcp.test.js"
+      - "npm run build --prefix mcp-server"
+    manifest_reference: "working/REQ-TIED_ADVERSARIAL_INQUIRY/evidence/request-evidence-envelope.v1.json"
+    proof_boundaries:
+      - "semantic_fidelity"
+      - "traceability_structure"
+  impact_analysis:
+    impl_inventory:
+      - "IMPL-TIED_ADVERSARIAL_INQUIRY"
+      - "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST"
+    modules_or_boundaries: "project-orchestrator, scope-validation, checklist-integration, MCP tied_adversarial_inquiry_run"
+    tied_tokens_affected:
+      - "IMPL-TIED_ADVERSARIAL_INQUIRY"
+      - "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST"
+      - "REQ-TIED_ADVERSARIAL_INQUIRY"
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: "none"
+    record_status: "applied"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "REQ-TIED_ADVERSARIAL_INQUIRY"
+    recorded_at: "2026-09-10"
+    title: "Wave 3 — inquiry scope alignment (procedure-aware discovery)"
+  risk_analysis:
+    abuse_cases:
+      - "close_out omits changed procedures when block_scope is omitted"
+      - "Mode A scope lists block IDs absent from supplied graph"
+      - "Phantom READ_TCC block produces semantic_fidelity completeness finding after sidecar rename"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Inquiry runs with READ_TCC block_name after OPEN_TCC_READONLY rename"
+        - "Mode A scope uses IMPL token block ID not present in graph"
+      depth_change_waiver: null
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "scope-validation and project-orchestrator tests pass for STALE_BLOCK_NAME and scope modes"
+      eligibility_triggers_matched:
+        - "external-input"
+        - "methodology-tooling-change"
+        - "strict-close-out"
+      evidence_references:
+        - "docs/adversarial-inquiry-adoption.md"
+        - "docs/methodology-closeout-integrity-plan.md"
+      falsification_questions:
+        - "Does Mode B report scope use criterion IDs while Mode A uses block IDs?"
+        - "Does stale block_name fail before producing completeness findings?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Wave 3 fixes inquiry scope fragility exposed by demo client phantom READ_TCC obligations."
+      research_profile: "integrated-agent"
+    quality_profiles:
+      - "baseline-functional"
+      - "stateful-reliability"

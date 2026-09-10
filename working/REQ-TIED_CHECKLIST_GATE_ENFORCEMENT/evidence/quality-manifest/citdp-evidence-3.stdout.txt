@@ -1,0 +1,32 @@
+▶ remediation acceptance matrix A1–A18 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+  ✔ A1 sparse Tracker → tracker_sparse (0.503083ms)
+  ✔ A2 synthetic projection → tracker_not_authoritative (0.053667ms)
+  ✔ A3 missing provenance fields → provenance_incomplete (0.104167ms)
+  ✔ A3 root wrapper schemaVersion with inner provenance identity passes [REQ-TIED_SETUP] (0.55775ms)
+  ✔ A4 missing activation pairing → activation_pairing_incomplete (4.895083ms)
+  ✔ A5 unresolved finding → finding_unresolved under strict policy (0.105792ms)
+  ✔ W1-D2 advisory policy surfaces finding diagnostics without blocking (0.048916ms)
+  ✔ W1-D2 integrated gate allows advisory findings with waiver visibility (0.4785ms)
+  ✔ W1-D5 in-memory tracker rejected at close_out integrated depth (0.053042ms)
+  ✔ A6 self-reported command success → command_success_unproven (0.077208ms)
+  ✔ A7 stale hash mismatch → evidence_stale (0.061042ms)
+  ✔ A8 placeholder waiver → waiver_invalid (0.107667ms)
+  ✔ A9 pending sub-stub at integrated depth → sub_stub_pending (0.103625ms)
+  ✔ A10 parent completed with pending sub-stub → parent_child_inconsistent (0.106875ms)
+  ✔ A11 valid integrated verification evidence → allowed (0.115709ms)
+  ✔ A12 valid waiver excludes waived obligation only (0.518916ms)
+  ✔ A13 wrong phase receipt → receipt_identity_mismatch:phase (0.097625ms)
+  ✔ A14 verification receipt at close_out → receipt_identity_mismatch:phase (0.080042ms)
+  ✔ A15 dirty post-gate tree → tree_dirty_post_gate (0.082833ms)
+  ✔ A16 depth downgrade without waiver → depth_downgrade_requires_waiver (0.061333ms)
+  ✔ A17 caller cannot subtract auto-required slugs (0.062834ms)
+  ✔ A18 advisory policy still fail-closed without activation at integrated depth (0.039791ms)
+✔ remediation acceptance matrix A1–A18 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (8.966541ms)
+ℹ tests 22
+ℹ suites 1
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 79.361708

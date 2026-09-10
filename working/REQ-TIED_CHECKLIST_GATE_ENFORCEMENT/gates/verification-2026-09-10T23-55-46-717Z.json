@@ -1,0 +1,32 @@
+{
+  "schema_version": "checklist-gate-receipt.v1",
+  "phase": "verification",
+  "timestamp": "2026-09-10T23:55:46.717Z",
+  "allowed": false,
+  "diagnostics": [
+    "psa_missing:IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+    "psa_missing:IMPL-REQUEST_EVIDENCE_ENVELOPE",
+    "pseudocode_analysis_incomplete",
+    "warn_not_success",
+    "finding_unresolved"
+  ],
+  "depth": "integrated",
+  "input_hashes": {
+    "tracker_hash": "sha256:d4fa774f42cc8cdc0dce9ed66b1ecfc6e959196a73020e12c3f573fd132102bc",
+    "citdp_hash": "sha256:b912d5d6593c4c9aac3efcc5c7eab76f203e2a9a180d3dafdf2001e9083269a2"
+  },
+  "gate_result": {
+    "allowed": false,
+    "ok": false,
+    "blocking": true,
+    "depth": "integrated",
+    "phase": "verification",
+    "diagnostics": [
+      "psa_missing:IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+      "psa_missing:IMPL-REQUEST_EVIDENCE_ENVELOPE",
+      "pseudocode_analysis_incomplete",
+      "warn_not_success",
+      "finding_unresolved"
+    ]
+  }
+}

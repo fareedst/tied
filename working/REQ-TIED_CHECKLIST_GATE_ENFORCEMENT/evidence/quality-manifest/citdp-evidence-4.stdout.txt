@@ -1,0 +1,12 @@
+▶ hydrateGateEvidenceFromActivation [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+  ✔ loads gate, ledger, and provenance at verification when activation supplies paths (7.275875ms)
+  ✔ skips hydration at pre_implementation (0.076375ms)
+✔ hydrateGateEvidenceFromActivation [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (7.828292ms)
+ℹ tests 2
+ℹ suites 1
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 72.610666

@@ -120,6 +120,7 @@ import {
 } from "../adversarial-inquiry/project-orchestrator.js";
 import { generateEvidenceChainProfile } from "../fidelity-research/evidence-chain-profile.js";
 import { createLiveStructuralValidators } from "../fidelity-research/live-structural-validators.js";
+import { hydrateGateEvidenceFromActivation } from "../checklist-gate-evidence-hydration.js";
 import { validateChecklistGate } from "../checklist-validator.js";
 import { persistGateDecisionReceipt } from "../gate-receipt.js";
 import { runClaimsEvidenceReviewMcp } from "../claims-evidence-review/mcp-handler.js";
@@ -1208,6 +1209,13 @@ export const allTools = [
           .optional()
           .default(true)
           .describe("Deprecated compatibility field; checklist_gate is always required for status updates."),
+        envelope_path: z.string().optional().describe(
+          "Optional request-evidence-envelope.v1.json path for close-out blocking consult.",
+        ),
+        consult_envelope_blocking: z.boolean().optional().default(false).describe(
+          "When true with envelope_path, reject verify when envelope has severity:error gaps.",
+        ),
+        project_root: z.string().optional().describe("Project root for envelope_path resolution."),
         receipt_persistence: z.object({
           request_token: z.string(),
           gates_dir: z.string(),
@@ -1233,6 +1241,9 @@ export const allTools = [
         activation?: unknown;
       };
       require_checklist_gate?: boolean;
+      envelope_path?: string;
+      consult_envelope_blocking?: boolean;
+      project_root?: string;
       receipt_persistence?: {
         request_token: string;
         gates_dir: string;
@@ -1243,7 +1254,7 @@ export const allTools = [
         persist_gate?: boolean;
       };
     }) => {
-      const result = updateStatusFromPassedTokens({
+      const result = await updateStatusFromPassedTokens({
         passed_requirement_tokens: args.passed_requirement_tokens ?? [],
         passed_impl_tokens: args.passed_impl_tokens ?? [],
         set_unpassed_reqs_to_planned: args.set_unpassed_reqs_to_planned ?? false,
@@ -1259,6 +1270,9 @@ export const allTools = [
           }
           : undefined,
         require_checklist_gate: args.require_checklist_gate ?? true,
+        envelope_path: args.envelope_path,
+        consult_envelope_blocking: args.consult_envelope_blocking ?? false,
+        project_root: args.project_root,
         receipt_persistence: args.receipt_persistence,
       });
       return textContent(JSON.stringify(result, null, 2));
@@ -1527,6 +1541,7 @@ export const allTools = [
         production_evidence_path: z.string().optional().describe("Relative production evidence JSON path for Mode B."),
         production_evidence: z.array(z.record(z.unknown())).optional().describe("Inline production evidence observations for Mode B."),
         criterion_scope: z.array(z.string()).optional().describe("Optional criterion token subset for Mode B."),
+        block_scope: z.array(z.string()).optional().describe("Optional procedure names for Mode B multi-block close_out; supports #closeout tag suffix."),
         graph: z.record(z.unknown()).optional().describe("Language-neutral obligation graph input with criteria, constraints, blocks, loci, and bindings."),
         fidelity: z.record(z.unknown()).optional().describe("Normalized fidelity input with block revision, specification, test evidence, and production evidence."),
         scope: z.array(z.string()).optional().describe("Explicit obligation IDs to project."),
@@ -1551,6 +1566,7 @@ export const allTools = [
       production_evidence_path?: string;
       production_evidence?: Record<string, unknown>[];
       criterion_scope?: string[];
+      block_scope?: string[];
       graph?: Record<string, unknown>;
       fidelity?: Record<string, unknown>;
       scope?: string[];
@@ -1647,11 +1663,15 @@ export const allTools = [
         "Validate [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] Tracker, CITDP adversarial depth, and optional identity-bound activation evidence before workflow progression. This is read-only and fails closed on missing or stale evidence.",
       inputSchema: z.object({
         phase: z.enum(["pre_implementation", "verification", "close_out"]),
-        tracker: z.record(z.unknown()),
+        tracker: z.record(z.unknown()).optional(),
         citdp: z.record(z.unknown()),
         required_step_slugs: z.array(z.string()).optional(),
         activation: z.record(z.unknown()).optional(),
         evidence: z.record(z.unknown()).optional(),
+        tracker_path: z.string().optional().describe(
+          "Authoritative Tracker YAML path; when set, loads tracker and marks trackerSource authoritative_file.",
+        ),
+        project_root: z.string().optional().describe("Project root for tracker_path and evidence hydration."),
         receipt_persistence: z.object({
           request_token: z.string(),
           gates_dir: z.string(),
@@ -1662,11 +1682,13 @@ export const allTools = [
     },
     handler: async (args: {
       phase: "pre_implementation" | "verification" | "close_out";
-      tracker: Record<string, unknown>;
+      tracker?: Record<string, unknown>;
       citdp: Record<string, unknown>;
       required_step_slugs?: string[];
       activation?: Record<string, unknown>;
       evidence?: Record<string, unknown>;
+      tracker_path?: string;
+      project_root?: string;
       receipt_persistence?: {
         request_token: string;
         gates_dir: string;
@@ -1675,20 +1697,42 @@ export const allTools = [
       };
     }) => {
       try {
+        const projectRoot = args.project_root
+          ? path.resolve(args.project_root)
+          : path.resolve(getBasePath(), "..");
+        let evidence = (args.evidence ?? {}) as Record<string, unknown>;
+        let tracker: Record<string, unknown>;
+        if (args.tracker_path) {
+          const trackerAbsolute = path.isAbsolute(args.tracker_path)
+            ? args.tracker_path
+            : path.join(projectRoot, args.tracker_path);
+          tracker = yaml.load(fs.readFileSync(trackerAbsolute, "utf8")) as Record<string, unknown>;
+          evidence = { ...evidence, trackerSource: "authoritative_file" };
+        } else if (args.tracker) {
+          tracker = args.tracker;
+        } else {
+          return textContent(JSON.stringify({ ok: false, error: "missing tracker or tracker_path" }, null, 2));
+        }
+        const hydration = await hydrateGateEvidenceFromActivation({
+          phase: args.phase,
+          activation: args.activation as never,
+          evidence: evidence as never,
+          projectRoot,
+        });
         const result = validateChecklistGate({
           phase: args.phase,
-          tracker: args.tracker,
+          tracker,
           citdp: args.citdp,
           requiredStepSlugs: args.required_step_slugs,
           activation: args.activation as never,
-          evidence: args.evidence as never,
+          evidence: hydration.evidence,
         });
         let gateReceipt: { path: string; hash: string } | undefined;
         if (args.receipt_persistence) {
           const persisted = persistGateDecisionReceipt({
             gateResult: result,
             phase: args.phase,
-            tracker: args.tracker,
+            tracker,
             citdp: args.citdp,
             gatesDir: args.receipt_persistence.gates_dir,
             ledgerPath: args.receipt_persistence.ledger_path,
@@ -1704,7 +1748,12 @@ export const allTools = [
           }
           gateReceipt = { path: persisted.path, hash: persisted.hash };
         }
-        return textContent(JSON.stringify({ ...result, ...(gateReceipt ? { gate_receipt: gateReceipt } : {}) }, null, 2));
+        return textContent(JSON.stringify({
+          ...result,
+          ...(hydration.hydrated.length > 0 ? { evidence_hydrated: hydration.hydrated } : {}),
+          ...(hydration.diagnostics.length > 0 ? { hydration_diagnostics: hydration.diagnostics } : {}),
+          ...(gateReceipt ? { gate_receipt: gateReceipt } : {}),
+        }, null, 2));
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
         return textContent(JSON.stringify({ ok: false, error: msg }, null, 2));
@@ -2760,18 +2809,23 @@ export const allTools = [
         envelope: z.record(z.unknown()).optional(),
         envelope_path: z.string().optional(),
         project_root: z.string().optional(),
+        fail_on_error_gaps: z.boolean().optional().default(false).describe(
+          "When true, severity:error gaps fail validation (close-out blocking mode).",
+        ),
       }),
     },
     handler: async (args: {
       envelope?: Record<string, unknown>;
       envelope_path?: string;
       project_root?: string;
+      fail_on_error_gaps?: boolean;
     }) => {
       try {
         const result = await validateRequestEvidenceEnvelope({
           envelope: args.envelope as Parameters<typeof validateRequestEvidenceEnvelope>[0]["envelope"],
           envelope_path: args.envelope_path,
           project_root: args.project_root,
+          fail_on_error_gaps: args.fail_on_error_gaps ?? false,
         });
         return textContent(JSON.stringify(result, null, 2));
       } catch (e) {

@@ -40,9 +40,10 @@ Contract:
   EFFECTS: pure
   TERMINATION: total
 procedure MAP_ADVERSARIAL_OBLIGATIONS(): # [IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY]
-1. Run the existing graph and fidelity composition.
-2. Preserve structural, pseudo-code, semantic, executable, and human proof boundaries.
-3. Return the report, verdict, and scope-limited status.
+1. Validate Mode A scope entries against supplied block identities; reject phantom block IDs with INVALID_SCOPE diagnostics.
+2. Run the existing graph and fidelity composition.
+3. Preserve structural, pseudo-code, semantic, executable, and human proof boundaries.
+4. Return the report, verdict, and scope-limited status.
 
 ## EVALUATE_ADVERSARIAL_FINDINGS
 # [IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY] How: append observed findings and deterministic duplicate links without promoting them to canonical intent or LEAP actions.

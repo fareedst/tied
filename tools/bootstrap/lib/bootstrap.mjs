@@ -24,6 +24,7 @@ import {
   verifyAdversarialInquiryMethodology,
   verifyFeatureOrchestrationMethodology,
   verifyInheritedDetailFiles,
+  verifyMethodologyPseudocodeTokenRefs,
   tiedCliDestFor,
   tiedBasePathValueFor,
 } from "./verify.mjs";
@@ -213,6 +214,7 @@ export function bootstrapTied(projectRoot, options = {}) {
   verifyAdversarialInquiryMethodology(tiedDir);
   verifyFeatureOrchestrationMethodology(projectRoot, tiedDir, tiedBasePathValue, tiedCliDest);
   verifyInheritedDetailFiles(tiedDir, paths.INHERITED_DETAIL_REQUIRED);
+  verifyMethodologyPseudocodeTokenRefs(tiedDir);
 
   return { projectRoot, tiedDir, tiedBasePathValue };
 }

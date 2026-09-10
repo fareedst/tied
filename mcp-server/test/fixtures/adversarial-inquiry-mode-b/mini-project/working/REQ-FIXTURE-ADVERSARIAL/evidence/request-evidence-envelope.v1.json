@@ -1,0 +1,69 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-09-10T23:27:21.732Z",
+    "generator": "request_evidence_envelope_patch",
+    "revision": 35
+  },
+  "identity": {
+    "request_token": "REQ-FIXTURE-ADVERSARIAL",
+    "project_id": "af8451e933f573ec",
+    "depth_tier": "integrated",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [],
+  "artifacts": [
+    {
+      "kind": "adversarial_inquiry_gate",
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "path": "working/REQ-FIXTURE-ADVERSARIAL/adversarial-inquiry/gate-result.json",
+      "content_hash": "sha256:9d6580d5e0ca2c64bfd489ceb317e39f08fd527b194071b3881a4e149440841b",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_ledger",
+      "schema_version": "adversarial-inquiry-finding.v1",
+      "path": "working/REQ-FIXTURE-ADVERSARIAL/adversarial-inquiry/finding-ledger.jsonl",
+      "content_hash": "sha256:b944d1b2d2ff2b053d18fdb189a667baef3c9c1717b61648af9a20cfd270db66",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_obligation",
+      "schema_version": "adversarial-inquiry-report.v1",
+      "path": "working/REQ-FIXTURE-ADVERSARIAL/adversarial-inquiry/obligation-report.json",
+      "content_hash": "sha256:10ce5186cd87c21b32218d674fe8bfecb19a06dc59f11aab5c0c219dd6fada7b",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_provenance",
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "path": "working/REQ-FIXTURE-ADVERSARIAL/adversarial-inquiry/evidence-provenance.json",
+      "content_hash": "sha256:db38e50bfc3cd7d3c76eaff6713305cd8f9ac4b7bf21a39c6938337910bb608e",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "provenance_identity"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": null,
+    "tracker_hash": null,
+    "citdp_path": null,
+    "evidence_chain_profile_path": null
+  },
+  "gaps": []
+}

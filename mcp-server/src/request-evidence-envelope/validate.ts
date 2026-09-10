@@ -104,9 +104,31 @@ export async function validateRequestEvidenceEnvelope(
   if (diagnostics.length > 0) {
     return { ok: false, diagnostics };
   }
+
+  const normalized = normalizeEnvelope(envelope);
+  const errorGaps = normalized.gaps.filter((gap) => gap.severity === "error");
+  const warnGaps = normalized.gaps.filter((gap) => gap.severity === "warn");
+  const blockingGapCount = errorGaps.length;
+  const advisoryGapCount = warnGaps.length;
+
+  if (input.fail_on_error_gaps && blockingGapCount > 0) {
+    return {
+      ok: false,
+      envelope: normalized,
+      diagnostics: [
+        ...diagnostics,
+        ...errorGaps.map((gap) => `envelope_blocking_gap:${gap.code}`),
+      ],
+      blocking_gap_count: blockingGapCount,
+      advisory_gap_count: advisoryGapCount,
+    };
+  }
+
   return {
     ok: true,
-    envelope: normalizeEnvelope(envelope),
+    envelope: normalized,
     diagnostics,
+    blocking_gap_count: blockingGapCount,
+    advisory_gap_count: advisoryGapCount,
   };
 }

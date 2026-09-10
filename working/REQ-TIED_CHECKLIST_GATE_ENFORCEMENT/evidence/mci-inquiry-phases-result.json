@@ -1,0 +1,26 @@
+{
+  "ok": true,
+  "phases": [
+    {
+      "phase": "pre_implementation",
+      "run_id": "mci-pre-20260910",
+      "verdict": "UNRELIABLE",
+      "artifacts": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-pre_implementation",
+      "metrics_match": true
+    },
+    {
+      "phase": "verification",
+      "run_id": "mci-verify-20260910",
+      "verdict": "UNRELIABLE",
+      "artifacts": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-verification",
+      "metrics_match": true
+    },
+    {
+      "phase": "close_out",
+      "run_id": "mci-closeout-20260910",
+      "verdict": "UNRELIABLE",
+      "artifacts": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-close_out",
+      "metrics_match": true
+    }
+  ]
+}

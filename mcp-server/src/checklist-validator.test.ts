@@ -15,6 +15,7 @@ import {
   validateIntegratedParentChildSlugs,
   validateMinimalWaiver,
   validateTracker,
+  withPseudocodeGateHistory,
   stableHash,
   type ActivationExpectedIdentity,
   type GatePhase,
@@ -159,7 +160,13 @@ function buildActivation(phase: GatePhase, runId: string) {
 
 function integratedTracker(phase: GatePhase) {
   const slugs = derivePhaseAwareSlugs("integrated", phase);
-  return { steps: slugs.map((slug) => completedStep(slug, `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/${slug}`)) };
+  const tracker = {
+    steps: slugs.map((slug) => completedStep(slug, `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/${slug}`)),
+  };
+  if (phase === "verification" || phase === "close_out") {
+    return withPseudocodeGateHistory(tracker);
+  }
+  return tracker;
 }
 
 function integratedCitdp(overrides: Record<string, unknown> = {}) {
@@ -367,6 +374,7 @@ describe("VALIDATE_CHECKLIST_GATE Batch 2 Slice 1 [REQ-TIED_CHECKLIST_GATE_ENFOR
       tracker: integratedTracker("verification"),
       citdp: integratedCitdp(),
       activation,
+      evidence: { trackerSource: "authoritative_file" },
     });
     assert.equal(result.allowed, true);
     assert.equal(result.depth, "integrated");
@@ -530,6 +538,7 @@ describe("VALIDATE_CHECKLIST_GATE Batch 2 Slice 1 [REQ-TIED_CHECKLIST_GATE_ENFOR
           },
         },
       },
+      evidence: { trackerSource: "authoritative_file" },
     });
     assert.equal(result.allowed, true);
   });
@@ -566,6 +575,7 @@ describe("VALIDATE_CHECKLIST_GATE Slice 0 hotfixes [REQ-TIED_CHECKLIST_GATE_ENFO
       tracker: integratedTracker("verification"),
       citdp: integratedCitdp(),
       activation: receiptOnly,
+      evidence: { trackerSource: "authoritative_file" },
     });
     assert.equal(result.allowed, true);
     assert.ok(!result.diagnostics.includes("missing_expected_identity"));

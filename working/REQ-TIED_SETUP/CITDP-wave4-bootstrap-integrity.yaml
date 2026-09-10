@@ -1,0 +1,95 @@
+CITDP-wave4-bootstrap-integrity:
+  change_definition:
+    current_behavior: "Provenance validator reads schemaVersion from inner provenance while producer writes it at file root; phase inquiry persistence copies root projections; bootstrap omits ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM from inherited detail required list; envelope lacks integrated-depth profile gap and gate runner skips quality manifest collection."
+    desired_behavior: "Validator accepts root wrapper schemaVersion; phase persistence writes only phase-{phase}/ artifacts; bootstrap ships ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM and verifies methodology pseudo-code token refs; envelope cross-links profile and reports expected_artifact_missing at integrated depth; canonical gate runner collects verification evidence manifest from CITDP commands."
+    non_goals:
+      - "Demo client 1789069630 manual repair in isolation"
+      - "Wave 1–3 re-implementation"
+      - "Strict-approved inquiry blocking policy"
+    success_criteria:
+      - "Zero provenance_incomplete:schema_version on producer fixture re-run"
+      - "Bootstrap verify fails deterministically on missing inherited pseudo-code token refs"
+      - "Disposable client inherits ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM in methodology indexes"
+    unchanged_behavior:
+      - "Advisory gate_policy remains non-blocking for observed findings"
+      - "Phase-scoped adversarial inquiry directories remain authoritative pairing locations"
+  completion_criteria:
+    activation:
+      phase: pre_implementation
+      project_id: stdd-project
+      request_token: REQ-TIED_SETUP
+      run_id: wave4-pre-implementation-20260910
+      scope: []
+      scope_hash: ""
+      artifact_hashes: {}
+    checklist_gate:
+      dispositions:
+        - completed
+        - not_applicable
+        - pending
+        - waived
+      fail_closed: true
+      phases:
+        - close_out
+        - pre_implementation
+        - verification
+  evidence:
+    commands:
+      - npm run build --prefix mcp-server
+      - node --test mcp-server/dist/checklist-remediation-acceptance.test.js
+      - node --test mcp-server/dist/request-evidence-envelope/request-evidence-envelope.test.js
+      - node --test mcp-server/dist/adversarial-inquiry/checklist-integration.test.js
+      - node --test tools/bootstrap/lib/verify.test.mjs
+      - node tools/bootstrap/templates/run-close-out-gates.mjs --project-root . --request-token REQ-TIED_SETUP --tracker-path working/REQ-TIED_SETUP/wave4-bootstrap-integrity-tracker.yaml --citdp-path working/REQ-TIED_SETUP/CITDP-wave4-bootstrap-integrity.yaml --phase verification --skip-manifest
+    manifest_reference: working/REQ-TIED_SETUP/evidence/request-evidence-envelope.v1.json
+    proof_boundaries:
+      - traceability_structure
+      - provenance_identity
+      - command result only
+  impact_analysis:
+    impl_inventory:
+      - IMPL-TIED_FILES
+      - IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT
+      - IMPL-REQUEST_EVIDENCE_ENVELOPE
+      - IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST
+    modules_or_boundaries: "checklist-validator, checklist-integration, request-evidence-envelope build, bootstrap verify, gate runner template"
+    tied_tokens_affected:
+      - REQ-TIED_SETUP
+      - REQ-QUALITY_ASSURANCE_EVIDENCE
+      - REQ-EVIDENCE_CHAIN_PROFILE
+      - ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM
+      - IMPL-TIED_FILES
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: none
+    record_status: draft
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: REQ-TIED_SETUP
+    recorded_at: "2026-09-10"
+    title: "Wave 4 — artifact contracts and bootstrap integrity"
+  risk_analysis:
+    abuse_cases:
+      - "Clients inherit pseudo-code referencing tokens absent from methodology indexes"
+      - "Envelope passes provenance while schemaVersion remains on wrapper only"
+      - "Root inquiry projections mask stale phase pairing"
+    adversarial_inquiry:
+      assurance_profile: baseline-functional
+      close_out_inquiry_waiver: null
+      depth_change_waiver: null
+      depth_tier: integrated
+      eligibility_triggers_matched:
+        - strict-close-out
+        - methodology-tooling-change
+        - persistence
+        - external-input
+      gate_policy: advisory
+      prior_depth_tier: null
+      research_profile: read-only research profile
+    quality_profiles:
+      - baseline-functional
+      - data-integrity-migration
+      - stateful-reliability
+    residual_risks:
+      - "Legacy root inquiry projections remain until clients delete them"
+      - "Integrated depth profile gap remains until evidence_chain_profile_generate runs"

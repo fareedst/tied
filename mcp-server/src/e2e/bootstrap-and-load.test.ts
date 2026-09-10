@@ -275,6 +275,21 @@ describe("e2e: bootstrap and load", () => {
     );
     assert.ok(
       fs.existsSync(
+        path.join(tiedDir, "methodology", "architecture-decisions", "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM.yaml"),
+      ),
+      "Methodology should include cross-platform bootstrap architecture detail [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM]",
+    );
+    const methodologyArchRaw = fs.readFileSync(
+      path.join(tiedDir, "methodology", "architecture-decisions.yaml"),
+      "utf8",
+    );
+    assert.match(
+      methodologyArchRaw,
+      /^ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM:/m,
+      "Methodology architecture index should inherit ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM [REQ-TIED_SETUP]",
+    );
+    assert.ok(
+      fs.existsSync(
         path.join(tiedDir, "methodology", "implementation-decisions", "IMPL-MCP_FEEDBACK_TOOLS.yaml")
       ),
       "Methodology should include the feedback implementation detail [IMPL-MCP_FEEDBACK_TOOLS]"

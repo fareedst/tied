@@ -68,6 +68,52 @@ describe("request evidence envelope [REQ-REQUEST_EVIDENCE_ENVELOPE]", () => {
     assert.ok(result.diagnostics.some((item) => item.startsWith("envelope_schema_invalid")));
   });
 
+  it("W1-D3 fail_on_error_gaps blocks when severity:error gaps present", async () => {
+    const envelope: RequestEvidenceEnvelope = {
+      schema_version: ENVELOPE_SCHEMA_VERSION,
+      envelope_meta: { generated_at: "2026-01-01T00:00:00Z", generator: "test", revision: 1 },
+      identity: {
+        request_token: "REQ-X",
+        project_id: "abc",
+        depth_tier: "integrated",
+        gate_policy: "advisory",
+        methodology_snapshot_id: "3.0.0",
+      },
+      runs: [],
+      artifacts: [],
+      cross_links: {
+        tracker_path: null,
+        tracker_hash: null,
+        citdp_path: null,
+        evidence_chain_profile_path: null,
+      },
+      gaps: [
+        {
+          code: "finding_unresolved",
+          artifact_kind: "adversarial_inquiry_gate",
+          phase: "close_out",
+          detail: "observed finding",
+          severity: "error",
+        },
+        {
+          code: "finding_unresolved",
+          artifact_kind: "adversarial_inquiry_gate",
+          phase: "close_out",
+          detail: "advisory observation",
+          severity: "warn",
+        },
+      ],
+    };
+    const permissive = await validateRequestEvidenceEnvelope({ envelope });
+    assert.equal(permissive.ok, true);
+    assert.equal(permissive.blocking_gap_count, 1);
+    assert.equal(permissive.advisory_gap_count, 1);
+
+    const blocking = await validateRequestEvidenceEnvelope({ envelope, fail_on_error_gaps: true });
+    assert.equal(blocking.ok, false);
+    assert.ok(blocking.diagnostics.some((item) => item === "envelope_blocking_gap:finding_unresolved"));
+  });
+
   it("rejects forbidden maturity score fields", async () => {
     const invalid = {
       schema_version: ENVELOPE_SCHEMA_VERSION,
@@ -184,6 +230,90 @@ describe("request evidence envelope [REQ-REQUEST_EVIDENCE_ENVELOPE]", () => {
     assert.equal(result.ok, false);
     if (result.ok) return;
     assert.equal(result.error, "WrongTiedBasePath");
+  });
+
+  it("W4-D1 omits provenance_incomplete:schema_version for root wrapper fixtures", async () => {
+    const tempRoot = mkdtempSync(path.join(os.tmpdir(), "ree-provenance-wrapper-"));
+    const req = "REQ-FIXTURE-ADVERSARIAL";
+    const phaseDir = path.join(tempRoot, "working", req, "adversarial-inquiry", "phase-verification");
+    mkdirSync(phaseDir, { recursive: true });
+    const fixtureProvenance = path.join(
+      REPO_ROOT,
+      "mcp-server/test/fixtures/adversarial-inquiry-go-mode-b/mini-project/working/REQ-FIXTURE-ADVERSARIAL/adversarial-inquiry/phase-verification/evidence-provenance.json",
+    );
+    writeFileSync(
+      path.join(phaseDir, "evidence-provenance.json"),
+      readFileSync(fixtureProvenance, "utf8"),
+      "utf8",
+    );
+    mkdirSync(path.join(tempRoot, "tied"), { recursive: true });
+    const result = await buildRequestEvidenceEnvelope({
+      request_token: req,
+      project_root: tempRoot,
+      tied_base_path: TIED_BASE_PATH,
+      confirmed_tied_base_path: TIED_BASE_PATH,
+      depth_tier: "integrated",
+      generated_at: "2026-09-10T16:00:00.000Z",
+    });
+    assert.equal(result.ok, true);
+    if (!result.ok) return;
+    assert.ok(
+      !result.envelope.gaps.some((gap) => gap.detail.includes("provenance_incomplete:schema_version")),
+      "root wrapper schemaVersion must satisfy A3 provenance contract",
+    );
+  });
+
+  it("W4-D4 reports expected_artifact_missing for integrated depth without profile", async () => {
+    const tempRoot = mkdtempSync(path.join(os.tmpdir(), "ree-profile-gap-"));
+    const req = "REQ-EVIDENCE_CHAIN_PROFILE";
+    mkdirSync(path.join(tempRoot, "working", req), { recursive: true });
+    mkdirSync(path.join(tempRoot, "tied"), { recursive: true });
+    const result = await buildRequestEvidenceEnvelope({
+      request_token: req,
+      project_root: tempRoot,
+      tied_base_path: TIED_BASE_PATH,
+      confirmed_tied_base_path: TIED_BASE_PATH,
+      depth_tier: "integrated",
+      generated_at: "2026-09-10T16:00:00.000Z",
+    });
+    assert.equal(result.ok, true);
+    if (!result.ok) return;
+    assert.ok(
+      result.envelope.gaps.some(
+        (gap) => gap.code === "expected_artifact_missing" && gap.artifact_kind === "evidence_chain_profile",
+      ),
+    );
+    assert.equal(result.envelope.cross_links.evidence_chain_profile_path, null);
+  });
+
+  it("W2-D4 discovers pseudocode_analysis_report with pseudocode_gate_only boundary", async () => {
+    const tempRoot = mkdtempSync(path.join(os.tmpdir(), "ree-psa-"));
+    const req = "REQ-PSEUDOCODE_STATIC_ANALYSIS";
+    const psaDir = path.join(tempRoot, "working", req, "pseudocode-analysis");
+    mkdirSync(psaDir, { recursive: true });
+    writeFileSync(
+      path.join(psaDir, "IMPL-PSEUDOCODE_ANALYSIS_ENGINE.v1.json"),
+      JSON.stringify({
+        schema_version: "pseudocode-analysis-report.v1",
+        ok: true,
+        gate_mode_applied: true,
+        token: "IMPL-PSEUDOCODE_ANALYSIS_ENGINE",
+      }),
+      "utf8",
+    );
+    mkdirSync(path.join(tempRoot, "tied"), { recursive: true });
+    const result = await buildRequestEvidenceEnvelope({
+      request_token: req,
+      project_root: tempRoot,
+      tied_base_path: TIED_BASE_PATH,
+      confirmed_tied_base_path: TIED_BASE_PATH,
+      generated_at: "2026-09-10T16:00:00.000Z",
+    });
+    assert.equal(result.ok, true);
+    if (!result.ok) return;
+    const psa = result.envelope.artifacts.find((item) => item.kind === "pseudocode_analysis_report");
+    assert.ok(psa, "expected pseudocode_analysis_report artifact");
+    assert.ok(psa.proof_boundaries.includes("pseudocode_gate_only"));
   });
 
   it("optional integration: readonly scan of external 1787603099 fixture", async () => {

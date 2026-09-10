@@ -47,7 +47,9 @@
   - 3. Validate artifacts[] shape and allowed status values
   - 4. Validate gaps[] shape and known diagnostic codes
   - 5. Reject forbidden maturity or ranking fields if present
-  - 6. RETURN validation result with sorted diagnostics
+  - 6. WHEN fail_on_error_gaps is true AND any gap has severity error THEN RETURN ok false with envelope_blocking_gap diagnostics (Wave 1 W1-D3)
+  - 7. RETURN validation result with blocking_gap_count and advisory_gap_count tallies
+- How (sub-block, same token set): Close-out completion requires gate allowed AND envelope zero blocking error gaps unless a waiver registry entry covers each gap code.
 
 ## PATCH_REQUEST_EVIDENCE_ENVELOPE
 

@@ -69,4 +69,52 @@ describe("BUILD_PROJECT_INQUIRY_INPUT project orchestrator REQ-TIED_ADVERSARIAL_
       assert.equal(result.error.code, "INVALID_INPUT");
     }
   });
+
+  it("produces criterion-scoped report scope for Mode B REQ-TIED_ADVERSARIAL_INQUIRY", async () => {
+    const result = await runProjectInquiry(fixtureInput("case-good"));
+    assert.equal(result.ok, true);
+    if (!result.ok) return;
+    assert.ok(result.report.scope.every((entry) => entry.startsWith("REQ-FIXTURE-ADVERSARIAL#")));
+    assert.ok(result.report.scope.length >= 1);
+  });
+
+  it("rejects stale block_name when sidecar procedure names changed REQ-TIED_ADVERSARIAL_INQUIRY", async () => {
+    const input = {
+      ...fixtureInput("case-good"),
+      impl_token: "IMPL-FIXTURE-ADVERSARIAL",
+    };
+    const implPath = path.join(
+      projectRoot,
+      "tied/implementation-decisions/IMPL-FIXTURE-ADVERSARIAL.yaml",
+    );
+    const pseudocodePath = path.join(
+      projectRoot,
+      "tied/implementation-decisions/IMPL-FIXTURE-ADVERSARIAL-pseudocode.md",
+    );
+    const beforeImpl = fs.readFileSync(implPath, "utf8");
+    const beforePseudocode = fs.readFileSync(pseudocodePath, "utf8");
+    try {
+      fs.writeFileSync(
+        implPath,
+        beforeImpl.replace("BUILD_PROJECT_INQUIRY_INPUT", "READ_TCC"),
+        "utf8",
+      );
+      fs.writeFileSync(
+        pseudocodePath,
+        beforePseudocode.replaceAll("BUILD_PROJECT_INQUIRY_INPUT", "OPEN_TCC_READONLY"),
+        "utf8",
+      );
+      const result = await buildProjectInquiryInput(input);
+      assert.equal(result.ok, false);
+      if (!result.ok) {
+        assert.equal(result.stage, "project-orchestrator");
+        assert.equal(result.error.code, "STALE_BLOCK_NAME");
+        assert.match(result.error.message, /READ_TCC/);
+        assert.match(result.error.message, /OPEN_TCC_READONLY/);
+      }
+    } finally {
+      fs.writeFileSync(implPath, beforeImpl, "utf8");
+      fs.writeFileSync(pseudocodePath, beforePseudocode, "utf8");
+    }
+  });
 });

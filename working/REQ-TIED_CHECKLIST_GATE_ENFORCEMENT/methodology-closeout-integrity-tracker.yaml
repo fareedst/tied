@@ -1,0 +1,100 @@
+copy_hygiene: Plan-level tracker for docs/methodology-closeout-integrity-plan.md. Before implementation, copy into the selected wave REQ folder, set request to that wave REQ, and clear inherited evidence.
+request: REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+source_plan: docs/methodology-closeout-integrity-plan.md
+status: planning
+profile:
+  depth_tier: integrated
+  gate_policy: advisory
+  research_profile: read-only research profile
+  assurance_profiles:
+    - baseline-functional
+    - data-integrity-migration
+    - stateful-reliability
+  note: Advisory applies only to observed/unresolved inquiry findings; structural and evidence-contract failures remain blocking.
+steps:
+  - slug: session-bootstrap
+    disposition: completed
+    evidence_refs:
+      - AGENTS.md
+      - tied/docs/ai-principles.md
+      - tied/vocab/routing.md
+      - tied/vocab/pseudocode-and-citdp.md
+      - tied/vocab/quality-assurance.md
+      - tied/vocab/fidelity-research.md
+  - slug: translate-sponsor-intent
+    disposition: completed
+    rationale: Sponsor wording resolved to gate receipt, request evidence envelope, Layer C artifact, canonical slug registry, and phase artifact directory.
+    evidence_refs:
+      - docs/methodology-closeout-integrity-plan.md#0-resolved-terms
+  - slug: change-definition
+    disposition: completed
+    evidence_refs:
+      - docs/methodology-closeout-integrity-plan.md#refinement-decision-and-gate-posture
+  - slug: impact-discovery
+    disposition: completed
+    evidence_refs:
+      - docs/methodology-closeout-integrity-plan.md#1-confirmed-gaps-evidence
+      - docs/methodology-closeout-integrity-plan.md#7-implementation-sequence
+  - slug: risk-assessment
+    disposition: completed
+    evidence_refs:
+      - docs/methodology-closeout-integrity-plan.md#refinement-decision-and-gate-posture
+      - 'eligibility_triggers_matched: strict-close-out, methodology-tooling-change, persistence, external-input'
+      - docs/integrated-activation-checklist-enforcement-plan.md#7
+  - slug: test-strategy
+    disposition: completed
+    evidence_refs:
+      - docs/methodology-closeout-integrity-plan.md#refinement-acceptance-criteria
+      - docs/methodology-closeout-integrity-plan.md#7-implementation-sequence
+      - docs/methodology-closeout-integrity-plan.md#72-wave-verification-commands
+  - slug: persist-citdp-record
+    disposition: pending
+    rationale: Deferred until sponsor approval and wave selection; final behavior-changing CITDP follows the repository policy.
+  - slug: catalog-pseudocode-contracts
+    disposition: pending
+    rationale: Wave-specific IMPL scope is selected after sponsor approval.
+  - slug: gate-pseudocode-validation
+    disposition: pending
+    rationale: Layer B/C evidence is produced per wave before RED tests.
+  - slug: unit-test-red
+    disposition: pending
+    rationale: Implementation is not authorized by this plan refinement.
+  - slug: unit-test-green
+    disposition: pending
+  - slug: composition-integration
+    disposition: pending
+  - slug: verification-gate
+    disposition: pending
+  - slug: traceable-commit
+    disposition: pending
+  - slug: sub-adversarial-inquiry-pass
+    disposition: pending
+    rationale: Distinct identity-bound passes are required at pre_implementation, verification, and close_out; no activation evidence exists yet.
+execution_evidence:
+  request: REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+  completed: []
+  close_out_evidence:
+    status: not_run
+    gates: {}
+    master_checklist: tied/docs/agent-req-implementation-checklist.yaml
+  envelope_path: working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/request-evidence-envelope.v1.json
+  operator_evidence:
+    status: plan_refinement_pass_2
+    pre_implementation_gate:
+      allowed: false
+      blocking: true
+      expected: true
+      recorded_at: "2026-09-10"
+      rationale: No wave CITDP, identity-bound integrated inquiry receipt, or activation pairing yet.
+      command: MCP tied_checklist_gate_validate phase=pre_implementation
+      diagnostics:
+        - tracker_sparse
+        - pending_required_step:sub-adversarial-inquiry-pass
+        - missing_required_step:gate-pseudocode-validation
+        - integrated_depth_requires_pairing
+        - activation_pairing_incomplete
+    limitation: Plan refinement pass 2; implementation blocked until Wave 1 CITDP and inquiry activation exist.
+feedback_loops:
+  specification: Unresolved contract or policy ambiguity returns to refinement before a wave CITDP is written.
+  validation_and_sync: A failed wave validation returns to its owning pseudo-code, test, or artifact-contract step.
+  leap: Implementation divergence updates IMPL first, then ARCH/REQ when scope changes.

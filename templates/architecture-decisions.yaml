@@ -150,6 +150,29 @@ ARCH-TIED_FIDELITY_RESEARCH:
       - "IMPL-TIED_FIDELITY_RESEARCH"
     requirements:
       - "REQ-TIED_FIDELITY_RESEARCH"
+ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM:
+  cross_references:
+    - "ARCH-TIED_STRUCTURE"
+    - "IMPL-TIED_FILES"
+    - "REQ-TIED_SETUP"
+  detail_file: "architecture-decisions/ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM.yaml"
+  metadata:
+    last_updated:
+      reason: "Methodology seed for cross-platform bootstrap; procedure: tools/bootstrap/README.md"
+  name: "Cross-platform TIED bootstrap engine"
+  related_decisions:
+    depends_on:
+      - "ARCH-TIED_STRUCTURE"
+      - "REQ-TIED_SETUP"
+    informs:
+      - "IMPL-TIED_FILES"
+    see_also: []
+  status: "Active"
+  traceability:
+    implementation:
+      - "IMPL-TIED_FILES"
+    requirements:
+      - "REQ-TIED_SETUP"
 ARCH-TIED_STRUCTURE:
   cross_references:
     - "REQ-TIED_SETUP"

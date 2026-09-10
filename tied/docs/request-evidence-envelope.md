@@ -61,11 +61,18 @@ npm run request-evidence-envelope-batch-collect -- \
 ## Validate
 
 ```bash
-# MCP or tied-cli equivalent
+# MCP or tied-cli equivalent — schema-only (non-blocking gaps allowed)
 request_evidence_envelope_validate --envelope-path working/REQ-X/evidence/request-evidence-envelope.v1.json
+
+# Close-out blocking mode (Wave 1 W1-D3) — fails when any gap has severity:error
+request_evidence_envelope_validate \
+  --envelope-path working/REQ-X/evidence/request-evidence-envelope.v1.json \
+  --fail-on-error-gaps true
 ```
 
-Close-out (post Slice 2 hooks): integrated REQs require a valid envelope; minimal depth requires at least one `not_applicable_receipt` artifact entry, not silent absence.
+**Unified close-out:** integrated REQs require gate `allowed: true` **and** envelope validate with `fail_on_error_gaps: true` (zero blocking error gaps). Advisory policy records observed/unresolved findings as `severity: warn`, not blocking `error`. Minimal depth requires at least one `not_applicable_receipt` artifact entry, not silent absence.
+
+Canonical replay: `node tools/bootstrap/templates/run-close-out-gates.mjs --envelope-blocking` (see `--help`).
 
 ## Comparable arms (no rollup score)
 

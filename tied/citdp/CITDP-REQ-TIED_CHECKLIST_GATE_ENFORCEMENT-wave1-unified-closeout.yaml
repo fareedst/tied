@@ -1,0 +1,131 @@
+CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-wave1-unified-closeout:
+  change_definition:
+    current_behavior: "Checklist gate receipts and request evidence envelope disagree on close-out completeness; validateFindingDisposition ignores gate_policy; gate callers must manually pass phase evidence; in-memory trackers pass late integrated gates; envelope validate has no blocking mode."
+    desired_behavior: "Gate auto-hydrates phase inquiry artifacts at verification/close_out; advisory policy non-blocks observed findings consistently in gate and envelope; envelope fail_on_error_gaps blocks close-out; authoritative tracker file required at late integrated phases; canonical bootstrap gate runner unifies gate+envelope replay."
+    non_goals:
+      - "Demo client 1789069630 manual repair"
+      - "Wave 2 pseudocode PSA gate enforcement"
+      - "Wave 4 provenance schema producer changes"
+    success_criteria:
+      - "Envelope fail_on_error_gaps tested; tied_verify consult_envelope_blocking default-off"
+      - "In-memory tracker rejected at close_out integrated depth"
+      - "Strict policy blocks UNRESOLVED; advisory passes with visible waiver diagnostics"
+      - "W1-D1 through W1-D6 deliverables ship with RED tests green"
+    unchanged_behavior:
+      - "Advisory does not waive structural or provenance failures"
+      - "Minimal depth gate contracts unchanged"
+  completion_criteria:
+    activation:
+      phase: "close_out"
+      request_token: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-"
+      run_id: "mci-closeout-20260910"
+    checklist_gate:
+      dispositions:
+        - "completed"
+        - "not_applicable"
+        - "pending"
+        - "waived"
+      fail_closed: true
+      phases:
+        - "close_out"
+        - "pre_implementation"
+        - "verification"
+    verification_gate_notes: "Close-out requires gate allowed true AND envelope zero blocking error gaps (or documented waiver per gap code)."
+  evidence:
+    commands:
+      - "node --test mcp-server/dist/checklist-gate-evidence-hydration.test.js"
+      - "node --test mcp-server/dist/checklist-remediation-acceptance.test.js"
+      - "node --test mcp-server/dist/checklist-validator.test.js"
+      - "node --test mcp-server/dist/request-evidence-envelope/request-evidence-envelope.test.js"
+      - "node tools/bootstrap/templates/run-close-out-gates.mjs --help"
+      - "npm run build --prefix mcp-server"
+    manifest_reference: "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/request-evidence-envelope.v1.json"
+    proof_boundaries:
+      - "semantic_fidelity"
+      - "traceability_structure"
+  impact_analysis:
+    impl_inventory:
+      - "IMPL-REQUEST_EVIDENCE_ENVELOPE"
+      - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    modules_or_boundaries: "checklist-validator, gate MCP wrapper, envelope validate/build, tied_verify, bootstrap gate runner template"
+    tied_tokens_affected:
+      - "ARCH-REQUEST_EVIDENCE_ENVELOPE"
+      - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "IMPL-REQUEST_EVIDENCE_ENVELOPE"
+      - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-REQUEST_EVIDENCE_ENVELOPE"
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: "none"
+    record_status: "applied"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    recorded_at: "2026-09-10"
+    title: "Wave 1 — unify completion signals (gate + envelope)"
+  risk_analysis:
+    abuse_cases:
+      - "Advisory policy claimed but findings still block progression"
+      - "Gate-only close-out while envelope lists blocking error gaps"
+      - "In-memory tracker substituted at verification/close_out"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Envelope lists error gaps while gate receipt shows allowed true"
+        - "Gate passes with UNRESOLVED verdict under claimed advisory policy"
+      depth_change_waiver: null
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "Wave 1 unit tests pass for advisory/strict matrix and tracker authority"
+      eligibility_triggers_matched:
+        - "external-input"
+        - "methodology-tooling-change"
+        - "persistence"
+        - "strict-close-out"
+      evidence_references:
+        - "docs/methodology-closeout-integrity-plan.md"
+        - "mcp-server/src/checklist-remediation-acceptance.test.ts"
+      falsification_questions:
+        - "Can verification pass with in-memory tracker at integrated depth?"
+        - "Does fail_on_error_gaps reject envelopes with structural error gaps?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Wave 1 changes gate/envelope close-out contracts and phase artifact hydration."
+      research_profile: "integrated-agent"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "node --test mcp-server/dist/checklist-remediation-acceptance.test.js"
+        evidence_method: "unit regression"
+        limitation: "stdd primary; demo client 1789069630 documented separately"
+        owner: "wave1-build-plan"
+        rationale: "Gate and envelope policy matrix"
+        result: "pending"
+        risk: "dual-signal regression"
+        threshold: "all Wave 1 acceptance tests pass"
+        waiver:
+          expiry: "~"
+          owner: "~"
+          reason: "~"
+          required: "false"
+    quality_profiles:
+      - "baseline-functional"
+      - "data-integrity-migration"
+      - "stateful-reliability"
+    residual_risk:
+      expiry: "2026-12-31"
+      owner: "methodology-team"
+      summary: "Demo client replay deferred until Wave 1 template lands; root inquiry projections remain blocking until Wave 4."
+  test_strategy:
+    composition_tests:
+      - "mcp-server/src/tools/checklist-gate-mcp.test.ts"
+    unit_tests:
+      - "mcp-server/src/checklist-gate-evidence-hydration.test.ts"
+      - "mcp-server/src/checklist-remediation-acceptance.test.ts"
+      - "mcp-server/src/request-evidence-envelope/request-evidence-envelope.test.js"
+    verification_commands:
+      - "node --test mcp-server/dist/checklist-remediation-acceptance.test.js"
+      - "npm run build --prefix mcp-server"

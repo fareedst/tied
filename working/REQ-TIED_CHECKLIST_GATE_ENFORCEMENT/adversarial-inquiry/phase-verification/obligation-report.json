@@ -1,0 +1,192 @@
+{
+  "canonicalMutation": false,
+  "findings": [
+    {
+      "direction": "B",
+      "id": "0a5204ae980ded14",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "stmt-path-3"
+    },
+    {
+      "direction": "A",
+      "evidenceRefs": [
+        "test-path-1"
+      ],
+      "id": "10afc8ce38e5c812",
+      "kind": "reliability",
+      "message": "Evidence does not match the specified statement.",
+      "proofBoundary": "semantic_fidelity",
+      "source": {
+        "location": "mcp-server/src/checklist-validator.test.ts"
+      },
+      "statementId": "stmt-path-1"
+    },
+    {
+      "direction": "A",
+      "evidenceRefs": [
+        "test-path-2"
+      ],
+      "id": "3c09568763cb7713",
+      "kind": "reliability",
+      "message": "Evidence does not match the specified statement.",
+      "proofBoundary": "semantic_fidelity",
+      "source": {
+        "location": "mcp-server/src/checklist-gate-evidence-hydration.test.ts"
+      },
+      "statementId": "stmt-path-2"
+    },
+    {
+      "direction": "A",
+      "evidenceRefs": [
+        "test-path-3"
+      ],
+      "id": "7132bb41d80a3b62",
+      "kind": "reliability",
+      "message": "Evidence does not match the specified statement.",
+      "proofBoundary": "semantic_fidelity",
+      "source": {
+        "location": "mcp-server/src/tools/checklist-gate-mcp.test.ts"
+      },
+      "statementId": "stmt-path-3"
+    },
+    {
+      "direction": "B",
+      "id": "7efd52eb1e6610e6",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "stmt-path-1"
+    },
+    {
+      "direction": "B",
+      "id": "9e2ad7f45cc384b0",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "stmt-path-2"
+    },
+    {
+      "direction": "B",
+      "evidenceRefs": [
+        "prod-path-1"
+      ],
+      "id": "d5bb3dd958b6f6ba",
+      "kind": "reliability",
+      "message": "Evidence describes behavior not represented in the specification.",
+      "proofBoundary": "semantic_fidelity",
+      "source": {
+        "location": "mcp-server/src/checklist-validator.ts"
+      },
+      "statementId": "stmt-path-prod"
+    }
+  ],
+  "graph": {
+    "edges": [
+      {
+        "from": "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT#criterion-1",
+        "kind": "criterion_constraint",
+        "to": "constraint:constraint-tied_checklist_gate_enforcement"
+      },
+      {
+        "from": "constraint:constraint-tied_checklist_gate_enforcement",
+        "kind": "constraint_block",
+        "to": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#8103ac98e7e59baa"
+      },
+      {
+        "from": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#8103ac98e7e59baa",
+        "kind": "block_evidence",
+        "to": "evidence:prod-1"
+      },
+      {
+        "from": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#8103ac98e7e59baa",
+        "kind": "block_evidence",
+        "to": "evidence:test-1"
+      },
+      {
+        "from": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#8103ac98e7e59baa",
+        "kind": "block_evidence",
+        "to": "evidence:test-2"
+      },
+      {
+        "from": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#8103ac98e7e59baa",
+        "kind": "block_evidence",
+        "to": "evidence:test-3"
+      },
+      {
+        "from": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#8103ac98e7e59baa",
+        "kind": "block_case",
+        "to": "case:CE-001"
+      },
+      {
+        "from": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#8103ac98e7e59baa",
+        "kind": "block_case",
+        "to": "case:CE-002"
+      },
+      {
+        "from": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#8103ac98e7e59baa",
+        "kind": "block_case",
+        "to": "case:CE-003"
+      }
+    ],
+    "nodes": [
+      {
+        "id": "case:CE-001",
+        "kind": "case"
+      },
+      {
+        "id": "case:CE-002",
+        "kind": "case"
+      },
+      {
+        "id": "case:CE-003",
+        "kind": "case"
+      },
+      {
+        "id": "constraint:constraint-tied_checklist_gate_enforcement",
+        "kind": "constraint"
+      },
+      {
+        "id": "evidence:prod-1",
+        "kind": "evidence",
+        "revision": "mci-closeout-20260910"
+      },
+      {
+        "id": "evidence:test-1",
+        "kind": "evidence",
+        "revision": "mci-closeout-20260910"
+      },
+      {
+        "id": "evidence:test-2",
+        "kind": "evidence",
+        "revision": "mci-closeout-20260910"
+      },
+      {
+        "id": "evidence:test-3",
+        "kind": "evidence",
+        "revision": "mci-closeout-20260910"
+      },
+      {
+        "id": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#8103ac98e7e59baa",
+        "kind": "block",
+        "revision": "64983d22420e39a9"
+      },
+      {
+        "id": "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT#criterion-1",
+        "kind": "criterion",
+        "revision": "criterion-rev-tied_checklist_gate_enforcement"
+      }
+    ],
+    "projectId": "cfd5bf6ad98024eb"
+  },
+  "projectId": "cfd5bf6ad98024eb",
+  "proofBoundaries": [
+    "semantic_fidelity"
+  ],
+  "readOnly": true,
+  "schemaVersion": "adversarial-inquiry-report.v1",
+  "scope": [
+    "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#8103ac98e7e59baa"
+  ]
+}

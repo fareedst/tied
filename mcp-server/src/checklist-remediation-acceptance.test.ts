@@ -12,6 +12,7 @@ import {
   validateProvenanceComplete,
   validateTrackerAuthoritative,
   validateTrackerSparse,
+  withPseudocodeGateHistory,
 } from "./checklist-validator.js";
 
 // [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: acceptance matrix A1–A18 stable diagnostics for remediation corpus.
@@ -47,6 +48,16 @@ describe("remediation acceptance matrix A1–A18 [REQ-TIED_CHECKLIST_GATE_ENFORC
       ),
     };
     return { receipt, artifacts, expected: base };
+  }
+
+  function integratedVerificationTracker(phase: "verification" | "close_out") {
+    return withPseudocodeGateHistory({
+      steps: derivePhaseAwareSlugs("integrated", phase).map((slug) => ({
+        slug,
+        disposition: "completed",
+        evidence_refs: ["checklist-remediation-acceptance.test.ts"],
+      })),
+    });
   }
 
   function integratedCitdp(overrides: Record<string, unknown> = {}) {
@@ -99,6 +110,21 @@ describe("remediation acceptance matrix A1–A18 [REQ-TIED_CHECKLIST_GATE_ENFORC
     assert.ok(result.diagnostics.includes("provenance_incomplete"));
   });
 
+  it("A3 root wrapper schemaVersion with inner provenance identity passes [REQ-TIED_SETUP]", () => {
+    const result = validateProvenanceComplete({
+      schemaVersion: "adversarial-inquiry-provenance.v1",
+      provenance: {
+        request_token: "REQ-FIXTURE",
+        phase: "verification",
+        run_id: "run-verification",
+        command: "tied_adversarial_inquiry_run",
+        tool_version: "1.0.0",
+      },
+    });
+    assert.equal(result.ok, true);
+    assert.deepEqual(result.diagnostics, []);
+  });
+
   it("A4 missing activation pairing → activation_pairing_incomplete", () => {
     const result = validateChecklistGate({
       phase: "verification",
@@ -115,14 +141,53 @@ describe("remediation acceptance matrix A1–A18 [REQ-TIED_CHECKLIST_GATE_ENFORC
     assert.ok(result.diagnostics.includes("activation_pairing_incomplete"));
   });
 
-  it("A5 unresolved finding → finding_unresolved", () => {
+  it("A5 unresolved finding → finding_unresolved under strict policy", () => {
     const result = validateFindingDisposition({
       gateResult: { verdict: "UNRESOLVED", status: "warn" },
       findingLedger: "{\"finding\":{\"lifecycle\":\"observed\"}}\n",
+      gatePolicy: "strict",
     });
     assert.equal(result.ok, false);
     assert.ok(result.diagnostics.includes("finding_unresolved"));
     assert.ok(result.diagnostics.includes("warn_not_success"));
+  });
+
+  it("W1-D2 advisory policy surfaces finding diagnostics without blocking", () => {
+    const result = validateFindingDisposition({
+      gateResult: { verdict: "UNRESOLVED", status: "warn" },
+      gatePolicy: "advisory",
+    });
+    assert.equal(result.ok, true);
+    assert.ok(result.advisoryDiagnostics?.includes("finding_unresolved"));
+    assert.ok(result.advisoryDiagnostics?.includes("warn_not_success"));
+  });
+
+  it("W1-D2 integrated gate allows advisory findings with waiver visibility", () => {
+    const activation = buildActivation("verification", "wave1-advisory-run");
+    const result = validateChecklistGate({
+      phase: "verification",
+      tracker: integratedVerificationTracker("verification"),
+      citdp: integratedCitdp({ gate_policy: "advisory" }),
+      activation,
+      evidence: {
+        trackerSource: "authoritative_file",
+        gateResult: { verdict: "UNRESOLVED", status: "warn" },
+      },
+    });
+    assert.equal(result.allowed, true);
+    assert.ok(result.diagnostics.includes("finding_unresolved"));
+    assert.ok(result.diagnostics.includes("warn_not_success"));
+  });
+
+  it("W1-D5 in-memory tracker rejected at close_out integrated depth", () => {
+    const result = validateTrackerAuthoritative({
+      tracker: { steps: [] },
+      trackerSource: "in_memory",
+      phase: "close_out",
+      depth: "integrated",
+    });
+    assert.equal(result.ok, false);
+    assert.ok(result.diagnostics.includes("tracker_not_authoritative"));
   });
 
   it("A6 self-reported command success → command_success_unproven", () => {
@@ -199,15 +264,10 @@ describe("remediation acceptance matrix A1–A18 [REQ-TIED_CHECKLIST_GATE_ENFORC
   it("A11 valid integrated verification evidence → allowed", () => {
     const result = validateChecklistGate({
       phase: "verification",
-      tracker: {
-        steps: derivePhaseAwareSlugs("integrated", "verification").map((slug) => ({
-          slug,
-          disposition: "completed",
-          evidence_refs: ["checklist-remediation-acceptance.test.ts"],
-        })),
-      },
+      tracker: integratedVerificationTracker("verification"),
       citdp: integratedCitdp(),
       activation: buildActivation("verification", "verification-run-remediation"),
+      evidence: { trackerSource: "authoritative_file" },
     });
     assert.equal(result.allowed, true);
   });

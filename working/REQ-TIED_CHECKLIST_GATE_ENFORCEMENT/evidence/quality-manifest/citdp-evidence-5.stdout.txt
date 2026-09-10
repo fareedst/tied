@@ -1,0 +1,21 @@
+▶ request evidence envelope [REQ-REQUEST_EVIDENCE_ENVELOPE]
+  ✔ rejects invalid envelope schema (0.519667ms)
+  ✔ W1-D3 fail_on_error_gaps blocks when severity:error gaps present (5.0835ms)
+  ✔ rejects forbidden maturity score fields (0.096ms)
+  ✔ maps corpus-manifest inventory strings to envelope gap codes (A1-A18 subset) (0.46225ms)
+  ✔ classifies fixture snapshots and flags root projection stale (13.016958ms)
+  ✔ produces byte-stable envelope for same inputs (11.836459ms)
+  ✔ fails closed on WrongTiedBasePath (3.285083ms)
+  ✔ W4-D1 omits provenance_incomplete:schema_version for root wrapper fixtures (2.280292ms)
+  ✔ W4-D4 reports expected_artifact_missing for integrated depth without profile (1.043334ms)
+  ✔ W2-D4 discovers pseudocode_analysis_report with pseudocode_gate_only boundary (1.377291ms)
+  ✔ optional integration: readonly scan of external 1787603099 fixture (7.967792ms)
+✔ request evidence envelope [REQ-REQUEST_EVIDENCE_ENVELOPE] (47.709542ms)
+ℹ tests 11
+ℹ suites 1
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 118.405042

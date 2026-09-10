@@ -281,6 +281,6 @@ describe("CHECKLIST_INQUIRY_INTEGRATION [REQ-TIED_ADVERSARIAL_INQUIRY]", () => {
     assert.equal(fs.readFileSync(preImpl.gateResult, "utf8"), preGate);
 
     const rootGate = path.join(root, "working", TOKENS.req, "adversarial-inquiry", "gate-result.json");
-    assert.equal(fs.readFileSync(rootGate, "utf8"), verificationGate);
+    assert.equal(fs.existsSync(rootGate), false, "phase-scoped persistence must not write root projections [REQ-TIED_ADVERSARIAL_INQUIRY]");
   });
 });

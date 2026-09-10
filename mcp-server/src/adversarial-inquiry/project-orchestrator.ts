@@ -25,6 +25,12 @@ import {
   type ProjectScopeError,
   type ProjectScopeLoaderInput,
 } from "./project-scope-loader.js";
+import {
+  discoverSidecarProcedures,
+  extractProcedureSemanticContent,
+  resolveModeBBlockNames,
+  type ScopeValidationErrorCode,
+} from "./scope-validation.js";
 
 type JsonObject = Record<string, unknown>;
 
@@ -35,6 +41,7 @@ export type ModeBInput = {
   request_token: string;
   impl_token: string;
   criterion_scope?: string[];
+  block_scope?: string[];
   test_path: string;
   production_path: string;
   production_evidence_path?: string;
@@ -54,6 +61,9 @@ export type ProjectOrchestratorErrorCode =
   | "UNSAFE_ARTIFACT_PATH"
   | "MISSING_CRITERION"
   | "MISSING_BLOCK"
+  | "STALE_BLOCK_NAME"
+  | "UNKNOWN_PROCEDURE"
+  | "INVALID_SCOPE"
   | "INVALID_PRODUCTION_EVIDENCE"
   | "INVALID_CANONICAL_RECORD"
   | "GRAPH_INPUT_INVALID";
@@ -150,22 +160,41 @@ function statementFrom(value: unknown, index: number): FidelityStatement | undef
   };
 }
 
-function extractBlockName(scope: LoadedProjectScope): string | undefined {
+function resolveProjectBlockNames(
+  input: ModeBInput,
+  scope: LoadedProjectScope,
+): { ok: true; names: string[]; primary: string } | ProjectOrchestratorError {
   const inquiry = implementationInquiry(scope.implementation);
+  const procedures = discoverSidecarProcedures(scope.implementationPseudocode);
+  const inputScope = stringArray(input.block_scope);
+  const yamlScope = stringArray(inquiry.block_scope ?? inquiry.blockScope);
+  const blockScope = inputScope.length > 0 ? inputScope : yamlScope;
   const explicit = stringValue(inquiry.block_name) ?? stringValue(inquiry.blockName);
-  if (explicit) return explicit;
-  const match = scope.implementationPseudocode.match(/^##\s+([A-Z][A-Z0-9_]*)\s*$/mu);
-  return match?.[1];
+  const resolved = resolveModeBBlockNames({
+    implToken: scope.implToken,
+    procedures,
+    explicitBlockName: explicit,
+    blockScope: blockScope.length > 0 ? blockScope : undefined,
+  });
+  if (!resolved.ok) {
+    return {
+      code: resolved.error.code as ScopeValidationErrorCode,
+      message: resolved.error.message,
+    };
+  }
+  return resolved;
 }
 
-function extractSemanticContent(scope: LoadedProjectScope, blockName: string): string {
+function extractSemanticContent(
+  scope: LoadedProjectScope,
+  blockName: string,
+  procedures: ReturnType<typeof discoverSidecarProcedures>,
+): string {
   const inquiry = implementationInquiry(scope.implementation);
   const explicit = stringValue(inquiry.semantic_content) ?? stringValue(inquiry.semanticContent);
   if (explicit) return explicit;
-  const section = scope.implementationPseudocode.match(
-    new RegExp(`^##\\s+${blockName}\\s*$([\\s\\S]*?)(?=^##\\s+|$)`, "mu"),
-  );
-  return section?.[1]?.trim() || scope.implementationPseudocode;
+  return extractProcedureSemanticContent(scope.implementationPseudocode, blockName, procedures)
+    || scope.implementationPseudocode;
 }
 
 function extractSpecification(
@@ -370,40 +399,61 @@ function projectInput(
   input: ModeBInput,
   scope: LoadedProjectScope,
 ): ChecklistInquiryInput | ProjectOrchestratorError {
-  const blockName = extractBlockName(scope);
-  if (!blockName) return { code: "MISSING_BLOCK", message: `Implementation ${scope.implToken} has no pseudo-code block.` };
-  const semanticContent = extractSemanticContent(scope, blockName);
-  const block = resolveBlockIdentity({
-    implementationToken: scope.implToken,
-    blockName,
-    semanticContent,
-    sourceRevision: scope.revisions.implementationPseudocode,
+  const procedures = discoverSidecarProcedures(scope.implementationPseudocode);
+  const blockNames = resolveProjectBlockNames(input, scope);
+  if ("code" in blockNames) return blockNames;
+  const blocks = blockNames.names.map((blockName) => {
+    const semanticContent = extractSemanticContent(scope, blockName, procedures);
+    return resolveBlockIdentity({
+      implementationToken: scope.implToken,
+      blockName,
+      semanticContent,
+      sourceRevision: scope.revisions.implementationPseudocode,
+    });
   });
-  const constraints = extractConstraints(scope, block.id, blockName);
-  const criteria = extractCriteria(scope, input.criterion_scope, constraints);
+  const primaryBlock = blocks.find((block) => block.name === blockNames.primary) ?? blocks[0];
+  const constraintMap = new Map<string, ArchitectureConstraint>();
+  for (const block of blocks) {
+    for (const constraint of extractConstraints(scope, block.id, block.name)) {
+      const existing = constraintMap.get(constraint.id);
+      if (!existing) {
+        constraintMap.set(constraint.id, constraint);
+        continue;
+      }
+      constraintMap.set(constraint.id, {
+        id: constraint.id,
+        implementationBlockIds: [...new Set([
+          ...existing.implementationBlockIds,
+          ...constraint.implementationBlockIds,
+        ])],
+      });
+    }
+  }
+  const uniqueConstraints = [...constraintMap.values()];
+  const criteria = extractCriteria(scope, input.criterion_scope, uniqueConstraints);
   if ("error" in criteria) return criteria.error;
-  const parsedTest = parseProjectTestEvidence(scope, input.test_path, block.revision);
-  const structured = productionEvidence(scope.productionEvidence, block.revision);
+  const parsedTest = parseProjectTestEvidence(scope, input.test_path, primaryBlock.revision);
+  const structured = productionEvidence(scope.productionEvidence, primaryBlock.revision);
   if (!structured.ok) return structured.error;
   const graph: ObligationGraphInput = {
     projectId: scope.manifest.projectRoot,
     criteria,
-    architectureConstraints: constraints,
-    implementationBlocks: [{ identity: block }],
+    architectureConstraints: uniqueConstraints,
+    implementationBlocks: blocks.map((identity) => ({ identity })),
     evidenceLoci: [
       {
         id: "test-locus",
-        blockId: block.id,
+        blockId: primaryBlock.id,
         kind: "test",
         location: input.test_path,
-        sourceRevision: block.sourceRevision,
+        sourceRevision: primaryBlock.sourceRevision,
       },
       {
         id: "production-locus",
-        blockId: block.id,
+        blockId: primaryBlock.id,
         kind: "production",
         location: input.production_path,
-        sourceRevision: block.sourceRevision,
+        sourceRevision: primaryBlock.sourceRevision,
       },
     ],
   };
@@ -411,7 +461,7 @@ function projectInput(
   return {
     graph,
     fidelity: {
-      blockRevision: block.revision,
+      blockRevision: primaryBlock.revision,
       specification: extractSpecification(scope),
       testEvidence: parsedTest.observations,
       productionEvidence: structured.evidence,
@@ -424,6 +474,9 @@ function projectInput(
     requestToken: input.request_token,
     provenance: input.provenance ?? {
       mode: "project",
+      scopeMode: "criterion",
+      blockScope: blockNames.names,
+      primaryBlock: primaryBlock.name,
       manifest: scope.manifest,
       sourceRevisions: scope.revisions,
       adapter: parsedTest.adapter,

@@ -712,6 +712,27 @@ Active
 
 ---
 
+## `[PROC-UNIFIED_CLOSE_OUT]` Unified close-out (gate + envelope)
+
+**Tokens:** `[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]`, `[REQ-REQUEST_EVIDENCE_ENVELOPE]`
+
+**When:** Integrated or strict_candidate depth at `verification` and `close_out`; `traceable-commit`; `plan-close-out`.
+
+**Procedure:**
+
+1. Run `tied_checklist_gate_validate` with authoritative tracker file (`tracker_path`), CITDP, and identity-bound activation (prefer `tied_checklist_activation_collect` when `working/{REQ-TOKEN}/adversarial-inquiry/phase-{phase}/` exists). Gate auto-hydrates phase inquiry artifacts at verification/close_out.
+2. Build or refresh `working/{REQ-TOKEN}/evidence/request-evidence-envelope.v1.json`.
+3. Validate envelope with `fail_on_error_gaps: true` — zero blocking `severity: error` gaps required. Advisory policy records observed/unresolved findings as `severity: warn`.
+4. Optional: `tied_verify` with `consult_envelope_blocking: true` when envelope path is supplied (default-off until regression green).
+
+**Canonical runner:** `tools/bootstrap/templates/run-close-out-gates.mjs` (`--envelope-blocking` for step 3).
+
+**Completion:** gate `allowed: true` **and** envelope blocking validate passes (or documented waiver per gap code).
+
+**Cross-refs:** [PROC-AGENT_REQ_CHECKLIST] (`traceable-commit`), `tied/docs/request-evidence-envelope.md`, `docs/methodology-closeout-integrity-plan.md` §3.
+
+---
+
 ## `[PROC-GITIGNORE_CLOSE_OUT]` Gitignore close-out hygiene (advisory)
 
 Advisory close-out review of ephemeral local-dev artifacts against `.gitignore`.
