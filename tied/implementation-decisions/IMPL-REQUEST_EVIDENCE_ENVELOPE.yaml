@@ -1,0 +1,30 @@
+IMPL-REQUEST_EVIDENCE_ENVELOPE:
+  category: "Implementation"
+  description: "Implement request-evidence-envelope package with BUILD, VALIDATE, and PATCH envelope procedures. Slice 1 ships read-only builder and MCP tools; Slice 2 adds producer hooks."
+  implementation_approach:
+    details:
+      - "Read-only in Slice 1: no producer hooks"
+      - "Revision monotonic with merge key (kind, phase, path)"
+      - "Root adversarial-inquiry projection flagged artifact_path_root_projection_rejected"
+    key_components:
+      - "build.ts discovery"
+      - "MCP tool registration"
+      - "types.ts schema"
+      - "validate.ts schema gate"
+    summary: "TDD read-only builder scanning working/{REQ-TOKEN}/; classify artifact kinds; compute sha256 content hashes; populate gaps[] from depth contract and corpus-manifest mappings."
+  name: "Request evidence envelope implementation"
+  priority: "P1"
+  related_architecture:
+    - "ARCH-REQUEST_EVIDENCE_ENVELOPE"
+  related_requirements:
+    - "REQ-REQUEST_EVIDENCE_ENVELOPE"
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-REQUEST_EVIDENCE_ENVELOPE"
+    code_annotations:
+      - "IMPL-REQUEST_EVIDENCE_ENVELOPE"
+    requirements:
+      - "REQ-REQUEST_EVIDENCE_ENVELOPE"
+    tests:
+      - "mcp-server/src/request-evidence-envelope/request-evidence-envelope.test.ts"

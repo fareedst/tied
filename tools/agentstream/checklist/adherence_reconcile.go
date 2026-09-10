@@ -339,7 +339,7 @@ func reconcileCompletedEvidence(tracker map[string]interface{}, workspace string
 			continue
 		}
 		slug, _ := step["slug"].(string)
-		refs := stringListField(step, "evidence_refs")
+		refs := evidenceRefsFromTrackerStep(step)
 		if len(refs) == 0 {
 			continue
 		}

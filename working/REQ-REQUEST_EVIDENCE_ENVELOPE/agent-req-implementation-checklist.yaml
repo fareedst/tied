@@ -15,33 +15,67 @@ entry_points:
     start_at: "session-bootstrap"
 execution_evidence:
   close_out_evidence:
-    date: null
-    deferred: []
-    gates: {}
-    master_checklist: ""
-  completed: []
-  envelope_path: working/{REQ-TOKEN}/evidence/request-evidence-envelope.v1.json
-  evidence_refs_format: |
-    Typed evidence_refs for completed dispositions (RESOLVE_EVIDENCE_REFS at write time):
-      - kind: manifest_ref
-        path: working/{REQ-TOKEN}/evidence/verification-evidence-manifest.v1.json
-      - kind: gate_receipt
-        path: working/{REQ-TOKEN}/gates/verification-2026-08-24T16-46-08-642Z.json
-      - kind: envelope_ref
-        path: working/{REQ-TOKEN}/evidence/request-evidence-envelope.v1.json
-      - kind: file_path
-        path: working/{REQ-TOKEN}/evidence/step-artifact.md
-      - kind: command_evidence
-        claimed_success: true
-        manifest_ref: working/{REQ-TOKEN}/evidence/verification-evidence-manifest.v1.json
-        stdout_ref: working/{REQ-TOKEN}/evidence/stdout.txt
-        exit_code: 0
-    Legacy string paths remain accepted; generic prose (e.g. "tests passed") is rejected as unresolved_evidence_ref.
+    date: "2026-09-10"
+    deferred:
+      - "Slice 4: IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH batch collect + evaluation-corpus extension"
+      - "Slice 5: backfill pilot on /dev/test/1788547701 and /dev/test/1787603099"
+    gates:
+      pre_implementation:
+        allowed: true
+        blocking: false
+        depth: "integrated"
+        diagnostics: []
+        evidence_file: "working/REQ-REQUEST_EVIDENCE_ENVELOPE/gates/gate-pre_implementation-ree-pre-impl-20260910-result.json"
+        ok: true
+        run_id: "ree-pre-impl-20260910"
+      verification:
+        allowed: true
+        blocking: false
+        depth: "integrated"
+        diagnostics: []
+        evidence_file: "working/REQ-REQUEST_EVIDENCE_ENVELOPE/gates/gate-verification-ree-verify-20260910-result.json"
+        ok: true
+        run_id: "ree-verify-20260910"
+      close_out:
+        allowed: true
+        blocking: false
+        depth: "integrated"
+        diagnostics: []
+        evidence_file: "working/REQ-REQUEST_EVIDENCE_ENVELOPE/gates/gate-close_out-ree-closeout-20260910-result.json"
+        ok: true
+        run_id: "ree-closeout-20260910"
+    master_checklist: "tied/docs/agent-req-implementation-checklist.yaml"
+    verification:
+      commands:
+        - "node --test dist/request-evidence-envelope/*.test.js (17/17 pass)"
+        - "go test ./tools/agentstream/... (pass)"
+        - "bunx tsc -b mcp-server (pass)"
+        - "tied_validate_consistency ok: true"
+  completed:
+    - "session-bootstrap"
+    - "change-definition"
+    - "impact-discovery"
+    - "author-requirement"
+    - "author-architecture"
+    - "catalog-pseudocode-contracts"
+    - "apply-token-comments"
+    - "gate-pseudocode-validation"
+    - "persist-implementation-records"
+    - "test-strategy"
+    - "risk-assessment"
+    - "unit-test-red"
+    - "unit-test-green"
+    - "composition-integration"
+    - "verification-gate"
+    - "sync-tied-stack"
+    - "persist-citdp-record"
+    - "gitignore-close-out-hygiene"
   operator_evidence:
     integrated_pilot_template: "depth_tier: integrated\ngate_policy: advisory\nprior_depth_tier: null\nphase_artifact_dir: working/{REQ-TOKEN}/adversarial-inquiry/phase-{phase}/  # authoritative\ncollect: tied_checklist_activation_collect request_token, phase, run_id, project_root\ngate: tied_checklist_gate_validate with activation payload (receipt + four artifacts)\nchecklist: docs/integrated-activation-checklist-enforcement-plan.md §8\n"
     limitation: "Replace {REQ-TOKEN} and {phase}; prefer collect when phase dirs exist; see §8 for pre_implementation, verification, and close_out sequence."
-    status: "not_run"
-  request: ""
+    status: "completed"
+  request: "REQ-REQUEST_EVIDENCE_ENVELOPE"
+  envelope_path: working/REQ-REQUEST_EVIDENCE_ENVELOPE/evidence/request-evidence-envelope.v1.json
 feedback_loops:
   composition_and_e2e: "Missing implementation coverage returns to the specification path before evidence is accepted."
   leap: "Implementation evidence updates IMPL first, then tests and code, with ARCH/REQ updates when scope changes."

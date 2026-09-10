@@ -12,11 +12,22 @@ import {
   runDeclaredQualityCommands,
   type QualityCommandDeclaration,
 } from "./quality-command-runner.js";
+import {
+  hashStringContents,
+  tryPatchRequestEvidenceEnvelope,
+} from "./request-evidence-envelope/hooks.js";
+
+export type EnvelopePatchContext = {
+  request_token: string;
+  project_root: string;
+  manifest_relative_path: string;
+};
 
 export type QualityEvidenceCollectionInput = Omit<VerificationEvidenceInput, "command_results"> & {
   commands: QualityCommandDeclaration[];
   default_timeout_ms?: number;
   default_max_output_bytes?: number;
+  envelope_patch?: EnvelopePatchContext;
 };
 
 // [IMPL-QUALITY_EVIDENCE_COLLECTION] [ARCH-QUALITY_ASSURANCE_PROFILES] [REQ-QUALITY_ASSURANCE_EVIDENCE]
@@ -62,7 +73,7 @@ export async function collectVerificationEvidence(
   });
   // [IMPL-QUALITY_EVIDENCE_COLLECTION] [IMPL-QUALITY_EVIDENCE_MANIFEST] [ARCH-QUALITY_ASSURANCE_PROFILES] [REQ-QUALITY_ASSURANCE_EVIDENCE]
   // How: Delegate normalized command results and collection metadata to deterministic manifest generation.
-  return buildVerificationEvidenceManifest({
+  const manifest = buildVerificationEvidenceManifest({
     run_id: input.run_id,
     commit: input.commit,
     environment: input.environment,
@@ -72,4 +83,26 @@ export async function collectVerificationEvidence(
     proof_boundaries: input.proof_boundaries,
     decision_references: input.decision_references,
   });
+  if (input.envelope_patch) {
+    const serialized = `${JSON.stringify(manifest, null, 2)}\n`;
+    await tryPatchRequestEvidenceEnvelope({
+      request_token: input.envelope_patch.request_token,
+      project_root: input.envelope_patch.project_root,
+      artifact: {
+        kind: "verification_evidence_manifest",
+        path: input.envelope_patch.manifest_relative_path,
+        content_hash: await hashStringContents(serialized),
+        phase: null,
+        schema_version: manifest.schema_version,
+        proof_boundaries: ["artifact_presence_only"],
+      },
+      run: {
+        run_id: input.run_id,
+        phase: "verification",
+        started_at: null,
+        generator: "quality_evidence_collect_manifest",
+      },
+    });
+  }
+  return manifest;
 }

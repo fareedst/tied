@@ -1423,6 +1423,13 @@ ARCH-QUALITY_ASSURANCE_PROFILES:
       - "mcp-server/src/quality-security.test.ts"
       - "mcp-server/src/tools/quality-validation-mcp.test.ts"
       - "pilot/webhook-inbox/test/webhook-inbox.test.mjs"
+ARCH-REQUEST_EVIDENCE_ENVELOPE:
+  category: "Architecture"
+  description: "Envelope-as-index architecture: append-only patch semantics, inner artifacts unchanged, read-only builder before producer hooks."
+  detail_file: "architecture-decisions/ARCH-REQUEST_EVIDENCE_ENVELOPE.yaml"
+  name: "Request evidence envelope architecture"
+  priority: "P1"
+  status: "Accepted"
 ARCH-TIED_ADVERSARIAL_INQUIRY:
   cross_references:
     - "REQ-TIED_ADVERSARIAL_INQUIRY"

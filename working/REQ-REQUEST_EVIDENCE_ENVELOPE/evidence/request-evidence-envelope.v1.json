@@ -1,0 +1,47 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-09-10T16:30:00.000Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-REQUEST_EVIDENCE_ENVELOPE",
+    "project_id": "cfd5bf6ad98024eb",
+    "depth_tier": "integrated",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [],
+  "artifacts": [
+    {
+      "kind": "checklist_tracker",
+      "schema_version": null,
+      "path": "working/REQ-REQUEST_EVIDENCE_ENVELOPE/agent-req-implementation-checklist.yaml",
+      "content_hash": "sha256:2cafbea82fb81f6254f9a5e4477a64d51e5afd2fc7406ff8b5282e3e75889683",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "tracker_disposition_only"
+      ]
+    },
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "tied/citdp/CITDP-REQ-REQUEST_EVIDENCE_ENVELOPE.yaml",
+      "content_hash": "sha256:b064fbab81e9641c1c2405c2338e8ab1dcd0120b8820d6ebb5ed1f506bddbf3c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": "working/REQ-REQUEST_EVIDENCE_ENVELOPE/agent-req-implementation-checklist.yaml",
+    "tracker_hash": "sha256:2cafbea82fb81f6254f9a5e4477a64d51e5afd2fc7406ff8b5282e3e75889683",
+    "citdp_path": null,
+    "evidence_chain_profile_path": null
+  },
+  "gaps": []
+}

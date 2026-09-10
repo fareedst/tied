@@ -512,6 +512,15 @@ ARCH-QUALITY_ASSURANCE_PROFILES:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-REQUEST_EVIDENCE_ENVELOPE:
+  cross_references:
+    - "IMPL-REQUEST_EVIDENCE_ENVELOPE"
+    - "REQ-REQUEST_EVIDENCE_ENVELOPE"
+  description: "Envelope-as-index with append-only patch semantics; inner artifacts unchanged in v1"
+  name: "Request evidence envelope architecture"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_ADVERSARIAL_INQUIRY:
   cross_references:
     - "IMPL-TIED_ADVERSARIAL_INQUIRY"
@@ -1306,6 +1315,24 @@ IMPL-QUALITY_TEST_ADEQUACY:
     last_updated: "2026-08-02"
     registered: "2026-08-02"
   name: "Risk-triggered test adequacy validator"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-REQUEST_EVIDENCE_ENVELOPE:
+  cross_references:
+    - "ARCH-REQUEST_EVIDENCE_ENVELOPE"
+    - "REQ-REQUEST_EVIDENCE_ENVELOPE"
+  description: "Schema, read-only builder, validator, and patch contract for request-evidence-envelope.v1"
+  name: "Request evidence envelope implementation"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH:
+  cross_references:
+    - "ARCH-REQUEST_EVIDENCE_ENVELOPE"
+    - "REQ-REQUEST_EVIDENCE_ENVELOPE"
+  description: "Evaluation corpus extension and envelope-gap-report.v1 batch collector"
+  name: "Request evidence envelope batch collector"
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
@@ -2324,6 +2351,16 @@ REQ-QUALITY_ASSURANCE_EVIDENCE:
   name: "Risk-triggered quality assurance evidence"
   source_index: "requirements.yaml"
   status: "Planned"
+  type: "REQ"
+REQ-REQUEST_EVIDENCE_ENVELOPE:
+  cross_references:
+    - "ARCH-REQUEST_EVIDENCE_ENVELOPE"
+    - "IMPL-REQUEST_EVIDENCE_ENVELOPE"
+    - "IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH"
+  description: "Per-REQ request-evidence-envelope.v1 index for batch artifact coverage analysis"
+  name: "Request evidence envelope"
+  source_index: "requirements.yaml"
+  status: "Active"
   type: "REQ"
 REQ-TIED_ADVERSARIAL_INQUIRY:
   cross_references:

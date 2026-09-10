@@ -1,5 +1,6 @@
 // Evidence ref resolution before Tracker write for completed dispositions.
 // [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+// [IMPL-REQUEST_EVIDENCE_ENVELOPE] [ARCH-REQUEST_EVIDENCE_ENVELOPE] [REQ-REQUEST_EVIDENCE_ENVELOPE]
 // How: RESOLVE_EVIDENCE_REFS classifies refs, verifies artifacts, and records hashes for outcome_verified ledger rows.
 package checklist
 
@@ -15,7 +16,10 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-const verificationEvidenceManifestSchema = "verification-evidence-manifest.v1"
+const (
+	verificationEvidenceManifestSchema = "verification-evidence-manifest.v1"
+	envelopeSchemaVersion              = "request-evidence-envelope.v1"
+)
 
 // ResolvedRef is one resolved evidence_refs entry with artifact hash metadata.
 type ResolvedRef struct {
@@ -37,13 +41,13 @@ func ResolveEvidenceRefs(receipt CompletionReceipt, workspace string) ([]Resolve
 	if strings.TrimSpace(receipt.Disposition) != "completed" {
 		return nil, fmt.Errorf("evidence_resolution_skipped: disposition %q", receipt.Disposition)
 	}
-	if !nonEmptyStringList(receipt.EvidenceRefs) {
+	if !nonEmptyEvidenceRefs(receipt.EvidenceRefs) {
 		return nil, fmt.Errorf("missing_disposition_evidence: completed requires evidence_refs")
 	}
 	ws := filepath.Clean(workspace)
 	var resolved []ResolvedRef
 	for _, ref := range receipt.EvidenceRefs {
-		item, err := resolveOneEvidenceRef(strings.TrimSpace(ref), ws)
+		item, err := resolveOneEvidenceRefEntry(ref, ws)
 		if err != nil {
 			return nil, err
 		}
@@ -59,7 +63,75 @@ func ApplyReceiptWithEvidenceResolution(trackerPath string, receipt CompletionRe
 			return err
 		}
 	}
-	return ApplyTrackerDisposition(trackerPath, receipt, identity)
+	if err := ApplyTrackerDisposition(trackerPath, receipt, identity); err != nil {
+		return err
+	}
+	tryPatchTrackerAfterDisposition(trackerPath, workspace, receipt)
+	return nil
+}
+
+func tryPatchTrackerAfterDisposition(trackerPath, workspace string, receipt CompletionReceipt) {
+	requestToken := strings.TrimSpace(receipt.RequestToken)
+	if requestToken == "" {
+		if tracker, err := LoadTrackerYAML(trackerPath); err == nil {
+			requestToken = RequestTokenFromTracker(tracker)
+		}
+	}
+	TryPatchTrackerEnvelope(PatchTrackerEnvelopeInput{
+		ProjectRoot:  workspace,
+		RequestToken: requestToken,
+		TrackerPath:  trackerPath,
+		TiedBasePath: TiedBasePathFromWorkspace(workspace),
+	})
+}
+
+func resolveOneEvidenceRefEntry(ref EvidenceRef, workspace string) (ResolvedRef, error) {
+	text, doc, err := evidenceRefResolutionInput(ref)
+	if err != nil {
+		return ResolvedRef{}, err
+	}
+	if doc != nil {
+		if kind := parseEvidenceRefKind(doc); kind == "command_evidence" || doc["claimed_success"] != nil {
+			return resolveCommandEvidenceRef(text, doc, workspace)
+		}
+		if kind := parseEvidenceRefKind(doc); kind != "" {
+			return resolveTypedPathRef(text, doc, workspace, kind)
+		}
+	}
+	return resolveOneEvidenceRef(text, workspace)
+}
+
+func resolveTypedPathRef(path string, doc map[string]interface{}, workspace, kind string) (ResolvedRef, error) {
+	resolved, err := resolveOneEvidenceRef(path, workspace)
+	if err != nil {
+		return ResolvedRef{}, err
+	}
+	switch kind {
+	case "manifest_ref":
+		if resolved.Kind != "manifest_ref" {
+			return ResolvedRef{}, fmt.Errorf("unresolved_evidence_ref: manifest_ref %q is not a valid manifest", path)
+		}
+		resolved.Kind = "manifest_ref"
+	case "gate_receipt":
+		if err := requireSchemaVersion(path, workspace, gateReceiptSchemaVersion); err != nil {
+			return ResolvedRef{}, err
+		}
+		resolved.Kind = "gate_receipt"
+	case "envelope_ref":
+		if err := requireSchemaVersion(path, workspace, envelopeSchemaVersion); err != nil {
+			return ResolvedRef{}, err
+		}
+		resolved.Kind = "envelope_ref"
+	case "file_path":
+		if resolved.Kind != "file_path" && resolved.Kind != "manifest_ref" {
+			return ResolvedRef{}, fmt.Errorf("unresolved_evidence_ref: file_path %q is not readable", path)
+		}
+		resolved.Kind = "file_path"
+	default:
+		return ResolvedRef{}, fmt.Errorf("unresolved_evidence_ref: unknown kind %q", kind)
+	}
+	_ = doc
+	return resolved, nil
 }
 
 func resolveOneEvidenceRef(ref, workspace string) (ResolvedRef, error) {
@@ -100,12 +172,55 @@ func resolveOneEvidenceRef(ref, workspace string) (ResolvedRef, error) {
 			ArtifactHash: hash,
 		}, nil
 	}
+	if schemaVersionFromJSON(data) == gateReceiptSchemaVersion {
+		return ResolvedRef{
+			Ref:          ref,
+			Kind:         "gate_receipt",
+			ArtifactRef:  ref,
+			ArtifactHash: hash,
+		}, nil
+	}
+	if schemaVersionFromJSON(data) == envelopeSchemaVersion {
+		return ResolvedRef{
+			Ref:          ref,
+			Kind:         "envelope_ref",
+			ArtifactRef:  ref,
+			ArtifactHash: hash,
+		}, nil
+	}
 	return ResolvedRef{
 		Ref:          ref,
 		Kind:         "file_path",
 		ArtifactRef:  ref,
 		ArtifactHash: hash,
 	}, nil
+}
+
+func requireSchemaVersion(ref, workspace, expected string) error {
+	absPath := ref
+	if !filepath.IsAbs(ref) {
+		absPath = filepath.Join(workspace, ref)
+	}
+	data, err := os.ReadFile(filepath.Clean(absPath))
+	if err != nil {
+		if os.IsNotExist(err) {
+			return fmt.Errorf("missing_artifact: %q", ref)
+		}
+		return fmt.Errorf("missing_artifact: %w", err)
+	}
+	if schemaVersionFromJSON(data) != expected {
+		return fmt.Errorf("unresolved_evidence_ref: %q schema_version must be %s", ref, expected)
+	}
+	return nil
+}
+
+func schemaVersionFromJSON(data []byte) string {
+	var doc map[string]interface{}
+	if json.Unmarshal(data, &doc) != nil {
+		return ""
+	}
+	sv, _ := doc["schema_version"].(string)
+	return strings.TrimSpace(sv)
 }
 
 func tryParseCommandEvidence(ref string) (map[string]interface{}, bool) {

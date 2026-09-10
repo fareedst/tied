@@ -77,7 +77,7 @@ func applyReceiptToRow(row map[string]interface{}, receipt CompletionReceipt) {
 	row["updated_at"] = time.Now().UTC().Format(time.RFC3339)
 	switch receipt.Disposition {
 	case "completed":
-		row["evidence_refs"] = stringListToInterface(receipt.EvidenceRefs)
+		row["evidence_refs"] = evidenceRefsToInterface(receipt.EvidenceRefs)
 	case "not_applicable":
 		row["policy"] = receipt.Policy
 		row["rationale"] = receipt.Rationale

@@ -89,7 +89,7 @@ func TestReceiptHash_idempotentReplay(t *testing.T) {
 		SchemaVersion: 1,
 		Slug:          "alpha",
 		Disposition:   "completed",
-		EvidenceRefs:  []string{"working/REQ-X/alpha.md"},
+		EvidenceRefs: []EvidenceRef{EvidenceRefFromString("working/REQ-X/alpha.md")},
 	}
 	h1 := ReceiptHash(receipt)
 	h2 := ReceiptHash(receipt)
@@ -108,7 +108,7 @@ func TestValidateReceiptBinding_ok(t *testing.T) {
 	}
 	receipt := CompletionReceipt{
 		SchemaVersion: 1, Slug: "alpha", Disposition: "completed",
-		EvidenceRefs: []string{"x"}, InstructionNonce: "nonce-1", InstructionHash: "sha256:abc",
+		EvidenceRefs: []EvidenceRef{EvidenceRefFromString("x")}, InstructionNonce: "nonce-1", InstructionHash: "sha256:abc",
 		RequestToken: "REQ-X", RunID: "run-1",
 	}
 	if err := ValidateReceiptBinding(receipt, issued); err != nil {
@@ -118,7 +118,7 @@ func TestValidateReceiptBinding_ok(t *testing.T) {
 
 func TestValidateReceiptBinding_missingFields(t *testing.T) {
 	receipt := CompletionReceipt{
-		SchemaVersion: 1, Slug: "alpha", Disposition: "completed", EvidenceRefs: []string{"x"},
+		SchemaVersion: 1, Slug: "alpha", Disposition: "completed", EvidenceRefs: []EvidenceRef{EvidenceRefFromString("x")},
 	}
 	issued := IssuedInstruction{Nonce: "n", Hash: "h", RequestToken: "REQ-X", RunID: "run-1"}
 	err := ValidateReceiptBinding(receipt, issued)
@@ -129,7 +129,7 @@ func TestValidateReceiptBinding_missingFields(t *testing.T) {
 
 func TestValidateReceiptBinding_staleNonce(t *testing.T) {
 	receipt := CompletionReceipt{
-		SchemaVersion: 1, Slug: "alpha", Disposition: "completed", EvidenceRefs: []string{"x"},
+		SchemaVersion: 1, Slug: "alpha", Disposition: "completed", EvidenceRefs: []EvidenceRef{EvidenceRefFromString("x")},
 		InstructionNonce: "old-nonce", InstructionHash: "sha256:abc",
 		RequestToken: "REQ-X", RunID: "run-1",
 	}
@@ -142,7 +142,7 @@ func TestValidateReceiptBinding_staleNonce(t *testing.T) {
 
 func TestValidateReceiptBinding_hashMismatch(t *testing.T) {
 	receipt := CompletionReceipt{
-		SchemaVersion: 1, Slug: "alpha", Disposition: "completed", EvidenceRefs: []string{"x"},
+		SchemaVersion: 1, Slug: "alpha", Disposition: "completed", EvidenceRefs: []EvidenceRef{EvidenceRefFromString("x")},
 		InstructionNonce: "nonce-1", InstructionHash: "sha256:wrong",
 		RequestToken: "REQ-X", RunID: "run-1",
 	}
@@ -155,7 +155,7 @@ func TestValidateReceiptBinding_hashMismatch(t *testing.T) {
 
 func TestValidateReceiptBinding_requestTokenMismatch(t *testing.T) {
 	receipt := CompletionReceipt{
-		SchemaVersion: 1, Slug: "alpha", Disposition: "completed", EvidenceRefs: []string{"x"},
+		SchemaVersion: 1, Slug: "alpha", Disposition: "completed", EvidenceRefs: []EvidenceRef{EvidenceRefFromString("x")},
 		InstructionNonce: "nonce-1", InstructionHash: "sha256:abc",
 		RequestToken: "REQ-OTHER", RunID: "run-1",
 	}
@@ -173,7 +173,8 @@ func TestParseTrackerCompletionReceipt_latestBlockWins(t *testing.T) {
 	if err != nil || !ok {
 		t.Fatal(err)
 	}
-	if got.EvidenceRefs[0] != "second" {
+	second, ok := got.EvidenceRefs[0].StringValue()
+	if !ok || second != "second" {
 		t.Fatalf("expected latest block, got %#v", got.EvidenceRefs)
 	}
 }

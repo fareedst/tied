@@ -1464,6 +1464,13 @@ REQ-QUALITY_ASSURANCE_EVIDENCE:
       method: "tied_validate_consistency"
     - coverage: "Evidence and validator modules plus their bindings."
       method: "Unit and composition tests"
+REQ-REQUEST_EVIDENCE_ENVELOPE:
+  category: "Functional"
+  description: "Every closed REQ has a valid request-evidence-envelope.v1 index wrapping producer artifacts with stable identity, typed cross-references, and explicit gaps or not-applicable receipts for batch analysis."
+  detail_file: "requirements/REQ-REQUEST_EVIDENCE_ENVELOPE.yaml"
+  name: "Request evidence envelope"
+  priority: "P1"
+  status: "Planned"
 REQ-TIED_ADVERSARIAL_INQUIRY:
   category: "Functional"
   description: "Provide bounded, read-only obligation mapping and bidirectional fidelity evidence without treating structural presence as semantic or runtime proof."

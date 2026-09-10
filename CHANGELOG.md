@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Request evidence envelope Slices 0–3 ([REQ-REQUEST_EVIDENCE_ENVELOPE])** — Per-REQ
+  `request-evidence-envelope.v1.json` machine index with read-only
+  `request_evidence_envelope_build` / `validate` MCP tools, producer hooks
+  (`TIED_ENVELOPE_HOOKS=1`), agentstream dual-write and typed `evidence_refs`;
+  TIED stack REQ/ARCH/IMPL + vocabulary; 17/17 envelope tests; integrated
+  `pre_implementation`, `verification`, and `close_out` gates
+  (`ree-*-20260910`, advisory). **Deferred:** Slice 4 batch collect
+  (`IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH`); Slice 5 backfill pilot on
+  `/dev/test/*` timestamp repos.
+
 - **Gitignore close-out hygiene ([REQ-PROMPT_TYPE_GLOBAL_SKILLS], [PROC-GITIGNORE_CLOSE_OUT])** — Advisory close-out step in `tied-close-out-process.md` and checklist slug `gitignore-close-out-hygiene` (before `traceable-commit`); shared reference `gitignore-close-out-hygiene.md`; plan-close-out handoff bullet for patterns proposed/applied unstaged or explicit N/A.
 
 - **Bounded typed-flow Layer C pilot ([REQ-PSEUDOCODE_TYPED_FLOW])** — Optional
@@ -46,6 +56,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   revalidated (`tf-closeout-20260910`).
 
 ### Deferred
+
+- **REQ-REQUEST_EVIDENCE_ENVELOPE Slices 4–5** — batch envelope collect +
+  evaluation-corpus row extension (`IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH`);
+  backfill CLI and pilot on `/dev/test/1788547701` and `/dev/test/1787603099`.
 
 - **Phase C3 (validator consumes parser IR)** — deferred to a separate future C3 plan; close-out records the handoff only.
 

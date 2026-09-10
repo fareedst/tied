@@ -343,6 +343,16 @@ func handleTrackerTurn(cfg *config.Config, turnIndex int, turn agentstream.Turn,
 	if err := checklist.ApplyTrackerDisposition(cfg.ChecklistTrackerYAML, receipt, identity); err != nil {
 		return err
 	}
+	requestToken := strings.TrimSpace(receipt.RequestToken)
+	if requestToken == "" {
+		requestToken = trackerRequestToken(cfg)
+	}
+	checklist.TryPatchTrackerEnvelope(checklist.PatchTrackerEnvelopeInput{
+		ProjectRoot:  cfg.Workspace,
+		RequestToken: requestToken,
+		TrackerPath:  cfg.ChecklistTrackerYAML,
+		TiedBasePath: checklist.TiedBasePathFromWorkspace(cfg.Workspace),
+	})
 	if strings.TrimSpace(cfg.AdherenceLedger) != "" {
 		return checklist.AppendAgentAcknowledged(
 			cfg.AdherenceLedger,

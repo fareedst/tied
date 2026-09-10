@@ -19,7 +19,7 @@ func TestResolveEvidenceRefs_filePathOk(t *testing.T) {
 	}
 	receipt := CompletionReceipt{
 		Disposition:  "completed",
-		EvidenceRefs: []string{"working/REQ-TEST/alpha.md"},
+		EvidenceRefs: []EvidenceRef{EvidenceRefFromString("working/REQ-TEST/alpha.md")},
 	}
 	resolved, err := ResolveEvidenceRefs(receipt, dir)
 	if err != nil {
@@ -40,7 +40,7 @@ func TestResolveEvidenceRefs_missingFile(t *testing.T) {
 	dir := t.TempDir()
 	receipt := CompletionReceipt{
 		Disposition:  "completed",
-		EvidenceRefs: []string{"working/REQ-TEST/missing.md"},
+		EvidenceRefs: []EvidenceRef{EvidenceRefFromString("working/REQ-TEST/missing.md")},
 	}
 	_, err := ResolveEvidenceRefs(receipt, dir)
 	if err == nil || !strings.Contains(err.Error(), "missing_artifact") {
@@ -64,7 +64,7 @@ func TestResolveEvidenceRefs_manifestOk(t *testing.T) {
 	}
 	receipt := CompletionReceipt{
 		Disposition:  "completed",
-		EvidenceRefs: []string{"working/evidence/manifest.json"},
+		EvidenceRefs: []EvidenceRef{EvidenceRefFromString("working/evidence/manifest.json")},
 	}
 	resolved, err := ResolveEvidenceRefs(receipt, dir)
 	if err != nil {
@@ -84,7 +84,7 @@ func TestResolveEvidenceRefs_manifestNonzeroExit(t *testing.T) {
 	}
 	receipt := CompletionReceipt{
 		Disposition:  "completed",
-		EvidenceRefs: []string{"manifest.json"},
+		EvidenceRefs: []EvidenceRef{EvidenceRefFromString("manifest.json")},
 	}
 	_, err := ResolveEvidenceRefs(receipt, dir)
 	if err == nil || !strings.Contains(err.Error(), "manifest_exit_nonzero") {
@@ -97,7 +97,7 @@ func TestResolveEvidenceRefs_genericProseRejected(t *testing.T) {
 	for _, ref := range []string{"tests passed", "build ok", "done", "success", "x"} {
 		receipt := CompletionReceipt{
 			Disposition:  "completed",
-			EvidenceRefs: []string{ref},
+			EvidenceRefs: []EvidenceRef{EvidenceRefFromString(ref)},
 		}
 		_, err := ResolveEvidenceRefs(receipt, dir)
 		if err == nil || !strings.Contains(err.Error(), "unresolved_evidence_ref") {
@@ -116,7 +116,7 @@ func TestApplyReceiptWithEvidenceResolution_blocksBeforeTrackerWrite(t *testing.
 		SchemaVersion: 1,
 		Slug:          "alpha",
 		Disposition:   "completed",
-		EvidenceRefs:  []string{"tests passed"},
+		EvidenceRefs: []EvidenceRef{EvidenceRefFromString("tests passed")},
 	}
 	err = ApplyReceiptWithEvidenceResolution(trackerPath, receipt, TurnIdentity{TurnIndex: 1, StepStub: "alpha"}, t.TempDir())
 	if err == nil || !strings.Contains(err.Error(), "unresolved_evidence_ref") {
@@ -151,7 +151,7 @@ func TestResolveEvidenceRefs_CommandEvidence_inlineJsonOk(t *testing.T) {
 	ref := `{"claimed_success":true,"manifest_ref":"working/evidence/manifest.json","stdout_ref":"working/evidence/stdout.txt","exit_code":0}`
 	receipt := CompletionReceipt{
 		Disposition:  "completed",
-		EvidenceRefs: []string{ref},
+		EvidenceRefs: []EvidenceRef{EvidenceRefFromString(ref)},
 	}
 	resolved, err := ResolveEvidenceRefs(receipt, dir)
 	if err != nil {
@@ -184,7 +184,7 @@ func TestResolveEvidenceRefs_CommandEvidence_prefixOk(t *testing.T) {
 	ref := `command_evidence:{"claimed_success":true,"manifest_ref":"working/evidence/manifest.json","output_path":"working/evidence/out.txt","exit_code":0}`
 	receipt := CompletionReceipt{
 		Disposition:  "completed",
-		EvidenceRefs: []string{ref},
+		EvidenceRefs: []EvidenceRef{EvidenceRefFromString(ref)},
 	}
 	resolved, err := ResolveEvidenceRefs(receipt, dir)
 	if err != nil {
@@ -200,7 +200,7 @@ func TestResolveEvidenceRefs_CommandEvidence_successUnproven(t *testing.T) {
 	ref := `{"claimed_success":true,"exit_code":0}`
 	receipt := CompletionReceipt{
 		Disposition:  "completed",
-		EvidenceRefs: []string{ref},
+		EvidenceRefs: []EvidenceRef{EvidenceRefFromString(ref)},
 	}
 	_, err := ResolveEvidenceRefs(receipt, dir)
 	if err == nil || !strings.Contains(err.Error(), "command_success_unproven") {
@@ -213,7 +213,7 @@ func TestResolveEvidenceRefs_CommandEvidence_notClaimedSkipsStrictProof(t *testi
 	ref := `{"claimed_success":false,"exit_code":1}`
 	receipt := CompletionReceipt{
 		Disposition:  "completed",
-		EvidenceRefs: []string{ref},
+		EvidenceRefs: []EvidenceRef{EvidenceRefFromString(ref)},
 	}
 	resolved, err := ResolveEvidenceRefs(receipt, dir)
 	if err != nil {

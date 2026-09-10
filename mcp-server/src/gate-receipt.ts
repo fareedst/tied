@@ -6,6 +6,7 @@ import path from "node:path";
 
 import { appendGateDecided, appendStatusMutated } from "./adherence-ledger.js";
 import { stableHash, type GatePhase } from "./checklist-validator.js";
+import { tryPatchArtifactFile } from "./request-evidence-envelope/hooks.js";
 
 export const GATE_RECEIPT_SCHEMA_VERSION = "checklist-gate-receipt.v1";
 
@@ -91,6 +92,24 @@ export function persistGateDecisionReceipt(
     receiptPath,
     hash,
   );
+
+  void tryPatchArtifactFile({
+    request_token: input.requestToken,
+    project_root: path.resolve(input.gatesDir, "..", "..", ".."),
+    absolute_path: receiptPath,
+    kind: "checklist_gate_receipt",
+    phase: input.phase,
+    schema_version: GATE_RECEIPT_SCHEMA_VERSION,
+    proof_boundaries: ["gate_decision_only"],
+    run: input.runId
+      ? {
+          run_id: input.runId,
+          phase: input.phase,
+          started_at: null,
+          generator: "persistGateDecisionReceipt",
+        }
+      : undefined,
+  });
 
   return { ok: true, path: receiptPath, hash };
 }

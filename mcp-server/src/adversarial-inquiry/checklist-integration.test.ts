@@ -159,10 +159,53 @@ describe("CHECKLIST_INQUIRY_INTEGRATION [REQ-TIED_ADVERSARIAL_INQUIRY]", () => {
     assert.equal(fs.readFileSync(canonical, "utf8"), before);
     assert.match(fs.readFileSync(first.obligationReport, "utf8"), /adversarial-inquiry-report\.v1/);
     assert.doesNotMatch(fs.readFileSync(first.evidenceProvenance, "utf8"), /secret-token/);
+    const provenanceDoc = JSON.parse(fs.readFileSync(first.evidenceProvenance, "utf8")) as {
+      provenance: Record<string, string>;
+    };
+    assert.equal(provenanceDoc.provenance.request_token, TOKENS.req);
+    assert.equal(provenanceDoc.provenance.command, "tied_adversarial_inquiry_run");
+    assert.ok(provenanceDoc.provenance.run_id);
     assert.equal(
       fs.readFileSync(first.findingLedger, "utf8").trim().split("\n").length,
       1,
     );
+  });
+
+  it("writes complete provenance identity for phase-scoped artifacts [REQ-REQUEST_EVIDENCE_ENVELOPE]", async () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), "adversarial-inquiry-provenance-"));
+    const paths = await persistWorkingArtifacts({
+      repositoryRoot: root,
+      requestToken: TOKENS.req,
+      phase: "verification",
+      runId: "run-verification-test",
+      command: "tied_adversarial_inquiry_run",
+      report: {
+        schemaVersion: "adversarial-inquiry-report.v1" as const,
+        projectId: "project-1",
+        scope: ["obligation-1"],
+        graph: { projectId: "project-1", nodes: [], edges: [] },
+        findings: [],
+        proofBoundaries: ["semantic_fidelity" as const],
+        readOnly: true as const,
+        canonicalMutation: false as const,
+      },
+      ledger: { findings: [], duplicateLinks: [] },
+      gate: evaluateScopedGate({
+        policy: "advisory",
+        scope: ["obligation-1"],
+        verdict: "PASS",
+        eligibility: eligible(),
+      }),
+      provenance: { observations: [{ id: "test-1" }] },
+    });
+    const provenanceDoc = JSON.parse(fs.readFileSync(paths.evidenceProvenance, "utf8")) as {
+      provenance: Record<string, string>;
+    };
+    assert.equal(provenanceDoc.provenance.request_token, TOKENS.req);
+    assert.equal(provenanceDoc.provenance.phase, "verification");
+    assert.equal(provenanceDoc.provenance.run_id, "run-verification-test");
+    assert.equal(provenanceDoc.provenance.command, "tied_adversarial_inquiry_run");
+    assert.ok(provenanceDoc.provenance.tool_version);
   });
 
   it("isolates phase-scoped artifact directories for the same request token [Slice P]", async () => {

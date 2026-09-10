@@ -11,6 +11,11 @@ import {
   validateCitdpOpenRecord,
   type AdversarialDepth,
 } from "./checklist-validator.js";
+import {
+  projectRootFromTiedBase,
+  requestTokenFromCitdpFilename,
+  tryPatchArtifactFile,
+} from "./request-evidence-envelope/hooks.js";
 
 const CITDP_FILENAME = /^CITDP-[A-Za-z0-9_.-]+\.yaml$/;
 
@@ -140,6 +145,16 @@ export function writeCitdpRecord(params: {
     // How: Apply the resolved repository scalar style through the shared canonical writer.
     const result = writeCanonicalValueAtomic(filePath, { [topKey]: mergedRecord });
     if (!result.ok) return result;
+    const requestToken = requestTokenFromCitdpFilename(filename);
+    if (requestToken) {
+      void tryPatchArtifactFile({
+        request_token: requestToken,
+        project_root: projectRootFromTiedBase(base),
+        absolute_path: filePath,
+        kind: "citdp_record",
+        proof_boundaries: ["citdp_snapshot_only"],
+      });
+    }
     return { ok: true, path: filePath, yaml_format: result.yaml_format };
   } catch (e) {
     const message = e instanceof Error ? e.message : String(e);

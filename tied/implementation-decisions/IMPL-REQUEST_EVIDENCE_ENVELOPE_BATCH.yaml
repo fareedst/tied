@@ -1,0 +1,29 @@
+IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH:
+  category: "Implementation"
+  description: "Extend evaluation-corpus.v1 rows with envelope_artifact and envelope_require_mode; implement request_evidence_envelope_batch_collect producing envelope-gap-report.v1.yaml with denominators and no score field."
+  implementation_approach:
+    details:
+      - "legacy_infer tags legacy_inferred gaps until Slice 5 backfill"
+      - "Shareable output uses privacy_tier shareable_hashed defaults"
+    key_components:
+      - "Batch collector CLI/MCP"
+      - "Corpus row extension"
+      - "envelope-gap-report.v1 schema"
+    summary: "Deferred to Slice 4: batch collect over pre-generated envelopes with require_envelope vs legacy_infer modes."
+  name: "Request evidence envelope batch collector"
+  priority: "P2"
+  related_architecture:
+    - "ARCH-REQUEST_EVIDENCE_ENVELOPE"
+  related_requirements:
+    - "REQ-EVIDENCE_CHAIN_REPORT"
+    - "REQ-REQUEST_EVIDENCE_ENVELOPE"
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-REQUEST_EVIDENCE_ENVELOPE"
+    code_annotations:
+      - "IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH"
+    requirements:
+      - "REQ-REQUEST_EVIDENCE_ENVELOPE"
+    tests:
+      - "mcp-server/src/request-evidence-envelope/request-evidence-envelope-batch.test.ts"

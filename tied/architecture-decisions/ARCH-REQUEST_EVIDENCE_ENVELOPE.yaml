@@ -1,0 +1,47 @@
+ARCH-REQUEST_EVIDENCE_ENVELOPE:
+  alternatives_considered:
+    - cons:
+        - "Large migration"
+      name: "Rewrite inner artifact schemas"
+      pros:
+        - "Uniform naming"
+      rejected_reason: "v1 preserves inner schemas; envelope wraps only."
+    - cons:
+        - "Forbidden non-goal"
+      name: "Universal maturity score rollup"
+      pros:
+        - "Simple ranking"
+      rejected_reason: "Locked non-goal per evaluation charter."
+  category: "Architecture"
+  cross_references:
+    - "ARCH-EVIDENCE_CHAIN_PROFILE"
+    - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "IMPL-REQUEST_EVIDENCE_ENVELOPE"
+    - "REQ-REQUEST_EVIDENCE_ENVELOPE"
+  decision: "Deliver request-evidence-envelope.v1 as a per-REQ machine index at working/{REQ-TOKEN}/evidence/request-evidence-envelope.v1.json. v1 preserves inner artifact schemas; envelope records kind, phase, path, content_hash, status, and proof_boundaries. Producer hooks patch atomically with monotonic revision; concurrent patches merge artifacts[] by (kind, phase, path) and emit envelope_revision_conflict on content_hash mismatch."
+  implementation_approach:
+    details:
+      - "Batch legacy_infer until backfill pilot completes"
+      - "gaps[] reuse fidelity gate diagnostics where applicable"
+      - "Snake_case throughout envelope JSON"
+    key_components:
+      - "Append-only patch contract"
+      - "Gap diagnostic enum"
+      - "Read-only discovery builder"
+      - "request-evidence-envelope.v1 schema"
+    summary: "Register request_evidence_envelope_build and request_evidence_envelope_validate MCP tools; read-only scan in Slice 1; additive producer hooks in Slice 2."
+  name: "Request evidence envelope architecture"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Append-only envelope patch contract"
+      - "Comparable arm to evidence chain statistics report"
+    problems_solved:
+      - "No explicit gap catalog for batch tools"
+      - "Scattered producer outputs"
+    why: "Batch analysis needs a stable artifact-in artifact-out entry point distinct from evidence chain profile completeness."
+  related_requirements:
+    - "REQ-EVIDENCE_CHAIN_REPORT"
+    - "REQ-REQUEST_EVIDENCE_ENVELOPE"
+    - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+  status: "Accepted"

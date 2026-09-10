@@ -18,7 +18,7 @@ type CompletionReceipt struct {
 	SchemaVersion    int      `json:"schema_version"`
 	Slug             string   `json:"slug"`
 	Disposition      string   `json:"disposition"`
-	EvidenceRefs     []string `json:"evidence_refs,omitempty"`
+	EvidenceRefs     []EvidenceRef `json:"evidence_refs,omitempty"`
 	Policy           string   `json:"policy,omitempty"`
 	Rationale        string   `json:"rationale,omitempty"`
 	Owner            string   `json:"owner,omitempty"`
@@ -130,7 +130,7 @@ func ValidateCompletionReceipt(receipt CompletionReceipt, expectedSlug string) e
 	}
 	switch disp {
 	case "completed":
-		if !nonEmptyStringList(receipt.EvidenceRefs) {
+		if !nonEmptyEvidenceRefs(receipt.EvidenceRefs) {
 			return fmt.Errorf("missing_disposition_evidence: completed requires evidence_refs")
 		}
 	case "not_applicable":

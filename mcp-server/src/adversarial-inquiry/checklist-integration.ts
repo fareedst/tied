@@ -11,6 +11,8 @@ import type {
 } from "./workflow.js";
 import { appendFinding } from "./workflow.js";
 import { stableHash } from "../checklist-validator.js";
+import { tryPatchArtifactFile } from "../request-evidence-envelope/hooks.js";
+import type { GatePhase } from "../request-evidence-envelope/types.js";
 
 export type GatePolicy = "advisory" | "strict-candidate" | "strict-approved";
 
@@ -49,6 +51,8 @@ export type PersistWorkingArtifactsInput = {
   repositoryRoot: string;
   requestToken: string;
   phase?: InquiryActivation["phase"];
+  runId?: string;
+  command?: string;
   report: ReadOnlyReport;
   ledger: FindingLedger;
   gate: ScopedGateResult;
@@ -334,6 +338,85 @@ async function appendLedger(filePath: string, ledger: FindingLedger): Promise<vo
   if (additions.length > 0) await fs.appendFile(filePath, `${additions.join("\n")}\n`, "utf8");
 }
 
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+// [IMPL-REQUEST_EVIDENCE_ENVELOPE] [ARCH-REQUEST_EVIDENCE_ENVELOPE] [REQ-REQUEST_EVIDENCE_ENVELOPE] How: A3 provenance identity at write time.
+function enrichProvenanceIdentity(input: {
+  provenance: unknown;
+  requestToken: string;
+  phase?: InquiryActivation["phase"];
+  runId?: string;
+  command?: string;
+}): Record<string, unknown> {
+  const envelope = isRecord(input.provenance) ? structuredClone(input.provenance) : {};
+  const inner = isRecord(envelope.provenance)
+    ? structuredClone(envelope.provenance)
+    : envelope;
+  const provenanceBody = isRecord(inner) ? inner : {};
+  provenanceBody.request_token = provenanceBody.request_token ?? input.requestToken;
+  if (input.phase) {
+    provenanceBody.phase = provenanceBody.phase ?? input.phase;
+  }
+  provenanceBody.run_id = provenanceBody.run_id ?? input.runId ?? (input.phase ? `run-${input.phase}` : "run-unknown");
+  provenanceBody.command = provenanceBody.command ?? input.command ?? "tied_adversarial_inquiry_run";
+  provenanceBody.tool_version = provenanceBody.tool_version ?? "1.0.0";
+  return {
+    schemaVersion: "adversarial-inquiry-provenance.v1",
+    provenance: provenanceBody,
+  };
+}
+
+async function patchInquiryEnvelopeArtifacts(
+  input: PersistWorkingArtifactsInput,
+  paths: PersistedArtifactReferences,
+): Promise<void> {
+  const phase = input.phase as GatePhase | undefined;
+  const run = phase
+    ? {
+        run_id: input.runId ?? `run-${phase}`,
+        phase,
+        started_at: null,
+        generator: "tied_adversarial_inquiry_run",
+      }
+    : undefined;
+  const patchArgs = {
+    request_token: input.requestToken,
+    project_root: input.repositoryRoot,
+    phase,
+    run,
+  };
+  await tryPatchArtifactFile({
+    ...patchArgs,
+    absolute_path: paths.obligationReport,
+    kind: "adversarial_inquiry_obligation",
+    schema_version: "adversarial-inquiry-report.v1",
+    proof_boundaries: ["gate_decision_only"],
+  });
+  await tryPatchArtifactFile({
+    ...patchArgs,
+    absolute_path: paths.gateResult,
+    kind: "adversarial_inquiry_gate",
+    schema_version: "adversarial-inquiry-gate.v1",
+    proof_boundaries: ["gate_decision_only"],
+  });
+  await tryPatchArtifactFile({
+    ...patchArgs,
+    absolute_path: paths.evidenceProvenance,
+    kind: "adversarial_inquiry_provenance",
+    schema_version: "adversarial-inquiry-provenance.v1",
+    proof_boundaries: ["provenance_identity"],
+  });
+  await tryPatchArtifactFile({
+    ...patchArgs,
+    absolute_path: paths.findingLedger,
+    kind: "adversarial_inquiry_ledger",
+    schema_version: "adversarial-inquiry-finding.v1",
+    proof_boundaries: ["gate_decision_only"],
+  });
+}
+
 // [IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY] How: write deterministic snapshots and append-only findings below working/{REQ-TOKEN}/adversarial-inquiry without touching canonical TIED YAML.
 export async function persistWorkingArtifacts(
   input: PersistWorkingArtifactsInput,
@@ -341,12 +424,16 @@ export async function persistWorkingArtifacts(
   const paths = resolveArtifactPaths(input);
   await fs.mkdir(paths.directory, { recursive: true, mode: 0o700 });
   const secrets = input.redact ?? [];
+  const provenanceDocument = enrichProvenanceIdentity({
+    provenance: input.provenance,
+    requestToken: input.requestToken,
+    phase: input.phase,
+    runId: input.runId,
+    command: input.command,
+  });
   await atomicWrite(paths.obligationReport, redactValue(input.report, secrets));
   await atomicWrite(paths.gateResult, redactValue(input.gate, secrets));
-  await atomicWrite(paths.evidenceProvenance, redactValue({
-    schemaVersion: "adversarial-inquiry-provenance.v1",
-    provenance: input.provenance,
-  }, secrets));
+  await atomicWrite(paths.evidenceProvenance, redactValue(provenanceDocument, secrets));
   await appendLedger(paths.findingLedger, input.ledger);
   try {
     await fs.access(paths.findingLedger);
@@ -356,6 +443,7 @@ export async function persistWorkingArtifacts(
   if (input.phase) {
     await projectArtifactsToRoot(input.repositoryRoot, input.requestToken, paths);
   }
+  await patchInquiryEnvelopeArtifacts(input, paths);
   return paths;
 }
 
@@ -402,6 +490,8 @@ export async function runChecklistInquiry(input: ChecklistInquiryInput): Promise
     repositoryRoot: input.repositoryRoot,
     requestToken: input.requestToken,
     phase: input.activation?.phase,
+    runId: input.activation?.runId,
+    command: "tied_adversarial_inquiry_run",
     report: result.report,
     ledger,
     gate,

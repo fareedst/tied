@@ -231,7 +231,7 @@ func TestLegacyImportPreservesUnrelatedFields(t *testing.T) {
 		SchemaVersion: 1,
 		Slug:          "alpha",
 		Disposition:   "completed",
-		EvidenceRefs:  []string{"working/REQ-X/alpha.md"},
+		EvidenceRefs: []EvidenceRef{EvidenceRefFromString("working/REQ-X/alpha.md")},
 	}
 	if err := ApplyTrackerDisposition(trackerPath, receipt, TurnIdentity{TurnIndex: 1, StepStub: "alpha"}); err != nil {
 		t.Fatal(err)

@@ -1581,6 +1581,20 @@ IMPL-QUALITY_TEST_ADEQUACY:
     tests:
       - "mcp-server/src/quality-adequacy.test.ts"
       - "mcp-server/src/tools/quality-validation-mcp.test.ts"
+IMPL-REQUEST_EVIDENCE_ENVELOPE:
+  category: "Implementation"
+  description: "Schema, read-only builder, validator, and producer hook patch contract for request-evidence-envelope.v1."
+  detail_file: "implementation-decisions/IMPL-REQUEST_EVIDENCE_ENVELOPE.yaml"
+  name: "Request evidence envelope implementation"
+  priority: "P1"
+  status: "Planned"
+IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH:
+  category: "Implementation"
+  description: "Evaluation corpus row extension and envelope-gap-report.v1 batch collector (Slice 4)."
+  detail_file: "implementation-decisions/IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH.yaml"
+  name: "Request evidence envelope batch collector"
+  priority: "P2"
+  status: "Planned"
 IMPL-TIED_ADVERSARIAL_INQUIRY:
   cross_references:
     - "ARCH-TIED_ADVERSARIAL_INQUIRY"

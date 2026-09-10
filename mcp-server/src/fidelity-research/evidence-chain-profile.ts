@@ -10,6 +10,11 @@ import path from "node:path";
 import { resolveProjectIdentity } from "../project-identity.js";
 import { isMetricsEnabled } from "../usage-metrics.js";
 import {
+  projectRootFromTiedBase,
+  requestTokenFromCitdpFilename,
+  tryPatchArtifactFile,
+} from "../request-evidence-envelope/hooks.js";
+import {
   buildImplementationGraph,
   buildRequirementGraph,
   findCycles,
@@ -743,6 +748,27 @@ export function generateEvidenceChainProfile(
       writer(path.resolve(input.output_path), `${JSON.stringify(profile, null, 2)}\n`);
     } catch (error) {
       return { ok: false, stage: "emit", error: errorMessage(error) };
+    }
+    const requestToken = input.change_context?.citdp_token
+      ? requestTokenFromCitdpFilename(`${input.change_context.citdp_token}.yaml`)
+      : input.scope?.requirement_tokens?.[0] ?? null;
+    if (requestToken) {
+      void tryPatchArtifactFile({
+        request_token: requestToken,
+        project_root: input.project_root ?? projectRootFromTiedBase(input.tied_base_path),
+        absolute_path: path.resolve(input.output_path),
+        kind: "evidence_chain_profile",
+        schema_version: EVIDENCE_CHAIN_PROFILE_SCHEMA,
+        proof_boundaries: ["artifact_presence_only"],
+        run: input.run_metadata?.run_id
+          ? {
+              run_id: input.run_metadata.run_id,
+              phase: "verification",
+              started_at: null,
+              generator: "evidence_chain_profile_generate",
+            }
+          : undefined,
+      });
     }
   }
 

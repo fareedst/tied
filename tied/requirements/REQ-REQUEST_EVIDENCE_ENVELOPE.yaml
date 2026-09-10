@@ -1,0 +1,44 @@
+REQ-REQUEST_EVIDENCE_ENVELOPE:
+  category: "Functional"
+  description: "Introduce request-evidence-envelope.v1 as the machine entry point for per-REQ evidence artifact coverage. Inner artifact schemas remain unchanged in v1. Batch tools consume pre-generated envelopes; no maturity score or cross-client ranking."
+  name: "Request evidence envelope"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Comparable arm to evidence chain statistics report"
+      - "Deterministic batch artifact coverage reporting"
+      - "Explicit envelope gaps replace silent absence"
+    problems_solved:
+      - "Heterogeneous tracker evidence_refs"
+      - "No unified per-REQ evidence index"
+      - "Silent absence at minimal depth"
+    why: "Eight or more independent evidence producers lack a canonical per-REQ index; batch gap detection across evaluation corpus rows and timestamp client repos is manual."
+  related_requirements:
+    depends_on:
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+      - "REQ-TIED_ADVERSARIAL_INQUIRY"
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    related_to:
+      - "REQ-EVIDENCE_CHAIN_PROFILE"
+      - "REQ-EVIDENCE_CHAIN_REPORT"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Batch comparable arm emits envelope-gap-report without score field"
+      metric: "IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH tests assert no maturity or ranking fields"
+    - criterion: "No inner artifact schema mutation in v1"
+      metric: "Producer artifacts retain existing schema_version values inside envelope artifacts[]"
+    - criterion: "Read-only builder produces valid request-evidence-envelope.v1 from working folder scan"
+      metric: "request_evidence_envelope_build returns ok:true with classified artifacts and gaps[]"
+    - criterion: "Schema validation rejects invalid envelope JSON"
+      metric: "request_evidence_envelope_validate returns ok:false for missing required fields"
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-REQUEST_EVIDENCE_ENVELOPE"
+    code_annotations:
+      - "REQ-REQUEST_EVIDENCE_ENVELOPE"
+    implementation:
+      - "IMPL-REQUEST_EVIDENCE_ENVELOPE"
+      - "IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH"
+    tests:
+      - "mcp-server/src/request-evidence-envelope/request-evidence-envelope.test.ts"

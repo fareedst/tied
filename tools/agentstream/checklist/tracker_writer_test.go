@@ -33,7 +33,7 @@ func TestApplyTrackerDisposition_singleStepChange(t *testing.T) {
 		SchemaVersion: 1,
 		Slug:          "alpha",
 		Disposition:   "completed",
-		EvidenceRefs:  []string{"working/REQ-TEST/alpha.md"},
+		EvidenceRefs: []EvidenceRef{EvidenceRefFromString("working/REQ-TEST/alpha.md")},
 	}
 	id := TurnIdentity{TurnIndex: 1, StepStub: "alpha", SessionID: "sess-1"}
 	if err := ApplyTrackerDisposition(trackerPath, receipt, id); err != nil {
@@ -65,7 +65,7 @@ func TestApplyTrackerDisposition_idempotentReplay(t *testing.T) {
 		SchemaVersion: 1,
 		Slug:          "alpha",
 		Disposition:   "completed",
-		EvidenceRefs:  []string{"working/REQ-TEST/alpha.md"},
+		EvidenceRefs: []EvidenceRef{EvidenceRefFromString("working/REQ-TEST/alpha.md")},
 	}
 	id := TurnIdentity{TurnIndex: 1, StepStub: "alpha", SessionID: "sess-1"}
 	if err := ApplyTrackerDisposition(trackerPath, receipt, id); err != nil {
@@ -87,14 +87,14 @@ func TestApplyTrackerDisposition_conflictingReplay(t *testing.T) {
 		SchemaVersion: 1,
 		Slug:          "alpha",
 		Disposition:   "completed",
-		EvidenceRefs:  []string{"working/REQ-TEST/alpha.md"},
+		EvidenceRefs: []EvidenceRef{EvidenceRefFromString("working/REQ-TEST/alpha.md")},
 	}
 	id := TurnIdentity{TurnIndex: 1, StepStub: "alpha", SessionID: "sess-1"}
 	if err := ApplyTrackerDisposition(trackerPath, receipt, id); err != nil {
 		t.Fatal(err)
 	}
 	conflict := receipt
-	conflict.EvidenceRefs = []string{"working/REQ-TEST/other.md"}
+	conflict.EvidenceRefs = []EvidenceRef{EvidenceRefFromString("working/REQ-TEST/other.md")}
 	err := ApplyTrackerDisposition(trackerPath, conflict, id)
 	if err == nil || !strings.Contains(err.Error(), "conflicting_replay") {
 		t.Fatalf("expected conflicting_replay, got %v", err)
@@ -108,7 +108,7 @@ func TestApplyTrackerDisposition_failureLeavesFileUnchanged(t *testing.T) {
 		SchemaVersion: 1,
 		Slug:          "missing-slug",
 		Disposition:   "completed",
-		EvidenceRefs:  []string{"x"},
+		EvidenceRefs: []EvidenceRef{EvidenceRefFromString("x")},
 	}
 	err := ApplyTrackerDisposition(trackerPath, receipt, TurnIdentity{TurnIndex: 1, StepStub: "missing-slug"})
 	if err == nil {
@@ -128,7 +128,7 @@ func TestInvalidateTrackerDownstream_clearsConfiguredSlugs(t *testing.T) {
 			SchemaVersion: 1,
 			Slug:          slug,
 			Disposition:   "completed",
-			EvidenceRefs:  []string{"working/REQ-TEST/" + slug + ".md"},
+			EvidenceRefs: []EvidenceRef{EvidenceRefFromString("working/REQ-TEST/" + slug + ".md")},
 		}
 		if err := ApplyTrackerDisposition(trackerPath, receipt, TurnIdentity{TurnIndex: 1, StepStub: slug}); err != nil {
 			t.Fatal(err)
@@ -171,7 +171,7 @@ func TestExecutionEvidenceCompletedIsDerivedOnly(t *testing.T) {
 		SchemaVersion: 1,
 		Slug:          "alpha",
 		Disposition:   "completed",
-		EvidenceRefs:  []string{"working/REQ-TEST/alpha.md"},
+		EvidenceRefs: []EvidenceRef{EvidenceRefFromString("working/REQ-TEST/alpha.md")},
 	}
 	if err := ApplyTrackerDisposition(trackerPath, receipt, TurnIdentity{TurnIndex: 1, StepStub: "alpha"}); err != nil {
 		t.Fatal(err)
@@ -256,7 +256,7 @@ func TestInvalidateTrackerDownstream_clearsCloseOutGateSummaries(t *testing.T) {
 			SchemaVersion: 1,
 			Slug:          slug,
 			Disposition:   "completed",
-			EvidenceRefs:  []string{"working/REQ-TEST/" + slug + ".md"},
+			EvidenceRefs: []EvidenceRef{EvidenceRefFromString("working/REQ-TEST/" + slug + ".md")},
 		}
 		if err := ApplyTrackerDisposition(trackerPath, receipt, TurnIdentity{TurnIndex: 1, StepStub: slug}); err != nil {
 			t.Fatal(err)
@@ -306,7 +306,7 @@ func TestAtomicWriteFailureLeavesOriginal(t *testing.T) {
 		SchemaVersion: 1,
 		Slug:          "alpha",
 		Disposition:   "completed",
-		EvidenceRefs:  []string{"working/REQ-TEST/alpha.md"},
+		EvidenceRefs: []EvidenceRef{EvidenceRefFromString("working/REQ-TEST/alpha.md")},
 	}
 	err := ApplyTrackerDisposition(trackerPath, receipt, TurnIdentity{TurnIndex: 1, StepStub: "alpha"})
 	if err == nil {

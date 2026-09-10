@@ -51,13 +51,20 @@
 | adherence ledger | adherence event log, session ledger (forbidden: evidence chain profile) | Append-only `agent-adherence-event.v1` JSONL storing hash/reference edges for six checklist lifecycle event classes; distinct from **evidence chain profile** and **verification evidence manifest**. | `ADHERENCE_LEDGER` |
 | adherence event class | lifecycle event, stage event | One of six non-interchangeable classes: `instruction_rendered`, `agent_acknowledged`, `action_attempted`, `outcome_verified`, `gate_decided`, `status_mutated`. Each class has explicit non-implication rules vs adjacent stages. | `ADHERENCE_EVENT_CLASS` |
 | adherence reconciliation | adherence audit, chain reconcile | Read-only report comparing ledger rows, Tracker, gate receipts, and TIED indexes; emits deterministic finding codes without mutating state. | `ADHERENCE_RECONCILIATION` |
-| evidence ref resolution | resolve evidence refs, RESOLVE_EVIDENCE_REFS | Producer-side verification of Tracker `evidence_refs[]` before `completed` write; classifies refs as `file_path`, `manifest_ref`, or rejects `generic_prose`. | `EVIDENCE_REF_RESOLUTION` |
+| evidence ref resolution | resolve evidence refs, RESOLVE_EVIDENCE_REFS | Producer-side verification of Tracker `evidence_refs[]` before `completed` write; accepts typed maps (`manifest_ref`, `gate_receipt`, `envelope_ref`, `file_path`, `command_evidence`) or legacy path strings; rejects `generic_prose`. | `EVIDENCE_REF_RESOLUTION` |
+| envelope ref | envelope evidence ref | Typed Tracker `evidence_refs[]` entry with `kind: envelope_ref` pointing at `request-evidence-envelope.v1.json`; schema validated at write time. | `ENVELOPE_REF` |
+| gate receipt ref | gate evidence ref | Typed Tracker `evidence_refs[]` entry with `kind: gate_receipt` pointing at `checklist-gate-receipt.v1` JSON under `working/{REQ-TOKEN}/gates/`. | `GATE_RECEIPT_REF` |
 | resolved evidence ref | verified ref, artifact hash edge | One resolved entry with original ref, kind, and content hash used for `outcome_verified` correlation. | `RESOLVED_EVIDENCE_REF` |
 | generic prose ref | prose evidence, self-reported success | Non-path evidence string rejected with `unresolved_evidence_ref` (e.g. "tests passed"). | `GENERIC_PROSE_REF` |
 | manifest ref | verification manifest path | Tracker evidence ref pointing to `verification-evidence-manifest.v1` with all command exit codes zero. | `MANIFEST_REF` |
 | outcome_verified event | verified outcome, evidence verified | Adherence ledger event class after successful ref resolution; does not authorize gate pass alone (non-implication rule). | `OUTCOME_VERIFIED_EVENT` |
 | non-implication rule | stage non-implication, proof non-implication | Normative rule that one adherence event class never proves the next (e.g. acknowledgment never proves action). | `NON_IMPLICATION_RULE` |
 | instruction binding | nonce binding, instruction hash binding | Per-turn `instruction_nonce` and `instruction_hash` tying rendered prompt bytes to Tracker completion receipt. | `INSTRUCTION_BINDING` |
+| request evidence envelope | evidence wrapper, per-REQ index | Per-REQ machine index at `working/{REQ-TOKEN}/evidence/request-evidence-envelope.v1.json` wrapping producer artifacts with stable identity, typed cross-references, and explicit gaps or not-applicable receipts; distinct from **evidence chain profile** and **verification evidence manifest**. | `REQUEST_EVIDENCE_ENVELOPE` |
+| artifact kind | artifact type, producer kind | Typed enum entry in envelope `artifacts[].kind` classifying a producer artifact (e.g. checklist_gate_receipt, adversarial_inquiry_provenance). | `ARTIFACT_KIND` |
+| envelope gap | missing artifact gap, coverage gap | Explicit expected-but-missing or anomalous row in envelope `gaps[]` with a stable diagnostic code; distinct from a **fidelity finding**. | `ENVELOPE_GAP` |
+| not applicable receipt | N/A receipt, intentional skip receipt | `not-applicable-receipt.v1.json` proving intentional skip at minimal depth instead of silent absence. | `NOT_APPLICABLE_RECEIPT` |
+| envelope gap report | batch gap report, artifact coverage report | Batch artifact `envelope-gap-report.v1.yaml` measuring per-kind present/waived/N/A/missing counts with explicit denominators; comparable arm to **evidence chain statistics report**; never a maturity score. | `ENVELOPE_GAP_REPORT` |
 
 ## Profile applicability
 
@@ -120,6 +127,11 @@ Domain terms above are distinct from IMPL grammar keywords such as `INPUT`, `OUT
 | execution policy | `execution_policy` | `[REQ-EVIDENCE_CHAIN_REPORT]` |
 | privacy tier | `privacy_tier` | `[REQ-EVIDENCE_CHAIN_REPORT]` |
 | idempotency key | `event_id` / `IDEMPOTENCY_KEY` | `[IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK]` |
+| request evidence envelope | `request-evidence-envelope.v1.json` / `request_evidence_envelope_build` | `[REQ-REQUEST_EVIDENCE_ENVELOPE]` |
+| artifact kind | `artifacts[].kind` / `ARTIFACT_KIND` | `[IMPL-REQUEST_EVIDENCE_ENVELOPE]` |
+| envelope gap | `gaps[].code` / `ENVELOPE_GAP` | `[IMPL-REQUEST_EVIDENCE_ENVELOPE]` |
+| not applicable receipt | `not-applicable-receipt.v1.json` / `NOT_APPLICABLE_RECEIPT` | `[REQ-REQUEST_EVIDENCE_ENVELOPE]` |
+| envelope gap report | `envelope-gap-report.v1.yaml` / `ENVELOPE_GAP_REPORT` | `[IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH]` |
 
 ## Pseudo-code block names
 
@@ -130,6 +142,9 @@ Domain terms above are distinct from IMPL grammar keywords such as `INPUT`, `OUT
 | adherence chain reconciliation | `RECONCILE_ADHERENCE_CHAIN` | `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]` |
 | gate decision receipt persistence | `PERSIST_GATE_DECISION_RECEIPT` | `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]` |
 | status mutation receipt persistence | `PERSIST_STATUS_MUTATION_RECEIPT` | `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]` |
+| build request evidence envelope | `BUILD_REQUEST_EVIDENCE_ENVELOPE` | `[IMPL-REQUEST_EVIDENCE_ENVELOPE]` |
+| validate request evidence envelope | `VALIDATE_REQUEST_EVIDENCE_ENVELOPE` | `[IMPL-REQUEST_EVIDENCE_ENVELOPE]` |
+| patch request evidence envelope | `PATCH_REQUEST_EVIDENCE_ENVELOPE` | `[IMPL-REQUEST_EVIDENCE_ENVELOPE]` |
 
 ## Alphabetical index
 
@@ -141,10 +156,14 @@ Domain terms above are distinct from IMPL grammar keywords such as `INPUT`, `OUT
 | adherence reconciliation | Canonical terms |
 | accepted risk | Canonical terms |
 | attach provenance | Canonical terms |
+| artifact kind | Canonical terms |
 | artifact reference | Canonical terms |
+| BUILD_REQUEST_EVIDENCE_ENVELOPE | Pseudo-code block names |
 | binding row fields | Naming bridge |
 | COLLECT_FILE_INVENTORY | Pseudo-code block names |
 | COLLECT_VOCAB_DRIFT | Pseudo-code block names |
+| envelope gap | Canonical terms |
+| envelope gap report | Canonical terms |
 | evidence collection | Canonical terms |
 | evidence chain profile | Canonical terms |
 | evidence-chain profile depth | Canonical terms |
@@ -158,8 +177,12 @@ Domain terms above are distinct from IMPL grammar keywords such as `INPUT`, `OUT
 | event claim | Canonical terms |
 | file inventory adapter | Canonical terms |
 | instruction binding | Canonical terms |
+| not applicable receipt | Canonical terms |
+| PATCH_REQUEST_EVIDENCE_ENVELOPE | Pseudo-code block names |
 | non-implication rule | Canonical terms |
 | proof boundary | Canonical terms |
 | quality command declaration | Canonical terms |
 | vocabulary drift adapter | Canonical terms |
 | privacy tier | Canonical terms |
+| request evidence envelope | Canonical terms |
+| VALIDATE_REQUEST_EVIDENCE_ENVELOPE | Pseudo-code block names |

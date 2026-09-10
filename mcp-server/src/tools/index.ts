@@ -124,6 +124,9 @@ import { validateChecklistGate } from "../checklist-validator.js";
 import { persistGateDecisionReceipt } from "../gate-receipt.js";
 import { runClaimsEvidenceReviewMcp } from "../claims-evidence-review/mcp-handler.js";
 import { collectChecklistActivation } from "../checklist-activation-collect.js";
+import { buildRequestEvidenceEnvelope } from "../request-evidence-envelope/build.js";
+import { patchRequestEvidenceEnvelope } from "../request-evidence-envelope/patch.js";
+import { validateRequestEvidenceEnvelope } from "../request-evidence-envelope/validate.js";
 import { runAdherenceReconcile } from "./adherence-reconcile-runner.js";
 
 /** LEAP proposal MCP tools: JSON envelope; catch sync throws from fs/git. [REQ-LEAP_PROPOSAL_QUEUE] */
@@ -2684,5 +2687,127 @@ export const allTools = [
       null,
       2,
     )),
+  },
+  {
+    name: "request_evidence_envelope_build",
+    config: {
+      description:
+        "Read-only scan of working/{REQ-TOKEN}/ to build request-evidence-envelope.v1 with classified artifacts and explicit gaps[]. Does not mutate inner producer artifacts.",
+      inputSchema: z.object({
+        request_token: z.string().min(1),
+        project_root: z.string().optional(),
+        tied_base_path: z.string().optional(),
+        depth_tier: z.enum(["minimal", "integrated", "strict_candidate"]).optional(),
+        gate_policy: z.string().optional(),
+        output_mode: z.enum(["json", "file"]).optional(),
+        corpus_inventory: z.array(z.string()).optional(),
+      }),
+    },
+    handler: async (args: {
+      request_token: string;
+      project_root?: string;
+      tied_base_path?: string;
+      depth_tier?: "minimal" | "integrated" | "strict_candidate";
+      gate_policy?: string;
+      output_mode?: "json" | "file";
+      corpus_inventory?: string[];
+    }) => {
+      try {
+        const confirmed = getBasePath();
+        const projectRoot = args.project_root ?? path.resolve(confirmed, "..");
+        const tiedBasePath = args.tied_base_path ?? confirmed;
+        const result = await buildRequestEvidenceEnvelope({
+          request_token: args.request_token,
+          project_root: projectRoot,
+          tied_base_path: tiedBasePath,
+          confirmed_tied_base_path: confirmed,
+          depth_tier: args.depth_tier,
+          gate_policy: args.gate_policy,
+          output_mode: args.output_mode,
+          corpus_inventory: args.corpus_inventory,
+        });
+        return textContent(JSON.stringify(result, null, 2));
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : String(e);
+        return textContent(JSON.stringify({ ok: false, stage: "build", error: msg }, null, 2));
+      }
+    },
+  },
+  {
+    name: "request_evidence_envelope_validate",
+    config: {
+      description:
+        "Validate request-evidence-envelope.v1 JSON or path. Rejects forbidden maturity or ranking fields.",
+      inputSchema: z.object({
+        envelope: z.record(z.unknown()).optional(),
+        envelope_path: z.string().optional(),
+        project_root: z.string().optional(),
+      }),
+    },
+    handler: async (args: {
+      envelope?: Record<string, unknown>;
+      envelope_path?: string;
+      project_root?: string;
+    }) => {
+      try {
+        const result = await validateRequestEvidenceEnvelope({
+          envelope: args.envelope as Parameters<typeof validateRequestEvidenceEnvelope>[0]["envelope"],
+          envelope_path: args.envelope_path,
+          project_root: args.project_root,
+        });
+        return textContent(JSON.stringify(result, null, 2));
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : String(e);
+        return textContent(JSON.stringify({ ok: false, diagnostics: [msg] }, null, 2));
+      }
+    },
+  },
+  {
+    name: "request_evidence_envelope_patch",
+    config: {
+      description:
+        "Append-only patch of request-evidence-envelope.v1 after a producer write. Monotonic revision with merge key (kind, phase, path).",
+      inputSchema: z.object({
+        request_token: z.string().min(1),
+        project_root: z.string().optional(),
+        tied_base_path: z.string().optional(),
+        depth_tier: z.enum(["minimal", "integrated", "strict_candidate"]).optional(),
+        gate_policy: z.string().optional(),
+        generated_at: z.string().optional(),
+        expected_revision: z.number().int().nonnegative().optional(),
+        artifact: z.object({
+          kind: z.string().min(1),
+          path: z.string().min(1),
+          content_hash: z.string().min(1),
+          phase: z.enum(["pre_implementation", "verification", "close_out"]).nullable().optional(),
+          schema_version: z.string().nullable().optional(),
+          status: z.enum(["present", "not_applicable", "expected_missing", "stale_projection"]).optional(),
+          proof_boundaries: z.array(z.string()).optional(),
+        }),
+        run: z.object({
+          run_id: z.string().min(1),
+          phase: z.enum(["pre_implementation", "verification", "close_out"]),
+          started_at: z.string().nullable().optional(),
+          generator: z.string().min(1),
+        }).optional(),
+      }),
+    },
+    handler: async (args: Parameters<typeof patchRequestEvidenceEnvelope>[0]) => {
+      try {
+        const confirmed = getBasePath();
+        const projectRoot = args.project_root ?? path.resolve(confirmed, "..");
+        const tiedBasePath = args.tied_base_path ?? confirmed;
+        const result = await patchRequestEvidenceEnvelope({
+          ...args,
+          project_root: projectRoot,
+          tied_base_path: tiedBasePath,
+          confirmed_tied_base_path: confirmed,
+        });
+        return textContent(JSON.stringify(result, null, 2));
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : String(e);
+        return textContent(JSON.stringify({ ok: false, gaps: [], error: msg }, null, 2));
+      }
+    },
   },
 ];

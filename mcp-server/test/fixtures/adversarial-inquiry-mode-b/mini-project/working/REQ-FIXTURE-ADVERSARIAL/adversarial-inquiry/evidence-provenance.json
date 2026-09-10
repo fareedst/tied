@@ -4,6 +4,7 @@
     "adapterDiagnostics": [
       "unsupported_adapter"
     ],
+    "command": "tied_adversarial_inquiry_run",
     "manifest": {
       "ignoreRules": [],
       "languages": [
@@ -21,6 +22,8 @@
       "traceability_structure",
       "semantic_fidelity"
     ],
+    "request_token": "REQ-FIXTURE-ADVERSARIAL",
+    "run_id": "run-unknown",
     "sourceRevisions": {
       "architecture": "6b1fc845f4029d25",
       "architectureDetail": "1f71927d30d07c58",
@@ -32,7 +35,8 @@
       "requirements": "22542a346089ac24",
       "semanticTokens": "84b8e8b1413d12b1",
       "test": "f309eba736b767a2"
-    }
+    },
+    "tool_version": "1.0.0"
   },
   "schemaVersion": "adversarial-inquiry-provenance.v1"
 }
