@@ -32,6 +32,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **PSA CITDP LEAP** — shared-parser migration moved from non_goals to `follow_up_completed` under `REQ-PSEUDOCODE_PARSER_UNIFICATION`.
 - **`.gitignore`** — ignore local PSA pilot outputs and per-track close-out evidence receipts.
 
+### Changed
+
+- **REQ-PSEUDOCODE_TYPED_FLOW plan-close-out** — Tracker reconciled to committed
+  state (`c28211f`); formal close-out complete; integrated `close_out` gate
+  revalidated (`tf-closeout-20260910`).
+
 ### Deferred
 
 - **Phase 3 typed blocking under `gate_mode` ([REQ-PSEUDOCODE_TYPED_FLOW])** —

@@ -15,6 +15,10 @@ entry_points:
     start_at: "session-bootstrap"
 execution_evidence:
   close_out_evidence:
+    commit:
+      hash: "c28211f6ac4d98bfca182c02109abc4614160a04"
+      short: "c28211f"
+      message: "feat(tied): add bounded typed-flow Layer C pilot"
     date: "2026-09-10"
     deferred:
       - phase: "Phase 3 production typed gate_mode errors"
@@ -82,7 +86,7 @@ execution_evidence:
   operator_evidence:
     integrated_pilot_template: "depth_tier: integrated\ngate_policy: advisory\nprior_depth_tier: null\nphase_artifact_dir: working/REQ-PSEUDOCODE_TYPED_FLOW/adversarial-inquiry/phase-pre_implementation/\ncollect: tied_checklist_activation_collect request_token, phase, run_id, project_root\ngate: tied_checklist_gate_validate with activation payload (receipt + four artifacts)\nchecklist: docs/integrated-activation-checklist-enforcement-plan.md §8\n"
     limitation: "Pre-RED structural inquiry only; behavioral_coverage and executable_behavior rows N/A until verification-gate."
-    status: "close_out_complete_uncommitted"
+    status: "close_out_complete_committed"
     depth_tier: "integrated"
     gate_policy: "advisory"
     commands:
@@ -143,7 +147,7 @@ gate_contract:
     - "finding-ledger.jsonl"
     - "gate-result.json"
     - "obligation-report.json"
-last_updated: "2026-08-22"
+last_updated: "2026-09-10"
 loop_back_clearance:
   apply-token-comments:
     clear_slugs:
