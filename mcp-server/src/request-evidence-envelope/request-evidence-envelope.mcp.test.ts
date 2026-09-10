@@ -23,6 +23,7 @@ describe("request_evidence_envelope MCP tools [REQ-REQUEST_EVIDENCE_ENVELOPE]", 
   it("registers build and validate handlers", () => {
     assert.ok(allTools.some((tool) => tool.name === "request_evidence_envelope_build"));
     assert.ok(allTools.some((tool) => tool.name === "request_evidence_envelope_validate"));
+    assert.ok(allTools.some((tool) => tool.name === "request_evidence_envelope_batch_collect"));
   });
 
   it("build returns envelope JSON read-only", async () => {

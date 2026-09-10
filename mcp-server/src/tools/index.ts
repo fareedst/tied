@@ -124,6 +124,7 @@ import { validateChecklistGate } from "../checklist-validator.js";
 import { persistGateDecisionReceipt } from "../gate-receipt.js";
 import { runClaimsEvidenceReviewMcp } from "../claims-evidence-review/mcp-handler.js";
 import { collectChecklistActivation } from "../checklist-activation-collect.js";
+import { collectEnvelopeGapReport } from "../request-evidence-envelope/batch-collect.js";
 import { buildRequestEvidenceEnvelope } from "../request-evidence-envelope/build.js";
 import { patchRequestEvidenceEnvelope } from "../request-evidence-envelope/patch.js";
 import { validateRequestEvidenceEnvelope } from "../request-evidence-envelope/validate.js";
@@ -2807,6 +2808,70 @@ export const allTools = [
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
         return textContent(JSON.stringify({ ok: false, gaps: [], error: msg }, null, 2));
+      }
+    },
+  },
+  {
+    name: "request_evidence_envelope_batch_collect",
+    config: {
+      description:
+        "Collect envelope gap coverage across batch manifest rows or evaluation-corpus extension rows; emits envelope-gap-report.v1.yaml with per-kind denominators and no score field.",
+      inputSchema: z.object({
+        manifest_path: z.string().optional(),
+        corpus_path: z.string().optional(),
+        yaml_out: z.string().min(1),
+        project_root: z.string().optional(),
+        privacy_tier: z.enum(["shareable_hashed", "operator_local"]).optional(),
+        include_absolute_paths: z.boolean().optional(),
+        rows: z
+          .array(
+            z.object({
+              project_root: z.string().min(1),
+              request_token: z.string().min(1),
+              client_alias: z.string().optional(),
+              envelope_require_mode: z.enum(["legacy_infer", "require_envelope"]).optional(),
+              envelope_artifact: z.string().optional(),
+              tied_base_path: z.string().optional(),
+            }),
+          )
+          .optional(),
+      }),
+    },
+    handler: async (args: {
+      manifest_path?: string;
+      corpus_path?: string;
+      yaml_out: string;
+      project_root?: string;
+      privacy_tier?: "shareable_hashed" | "operator_local";
+      include_absolute_paths?: boolean;
+      rows?: Array<{
+        project_root: string;
+        request_token: string;
+        client_alias?: string;
+        envelope_require_mode?: "legacy_infer" | "require_envelope";
+        envelope_artifact?: string;
+        tied_base_path?: string;
+      }>;
+    }) => {
+      try {
+        const confirmed = getBasePath();
+        const projectRoot = args.project_root ?? path.resolve(confirmed, "..");
+        const result = await collectEnvelopeGapReport({
+          manifestPath: args.manifest_path,
+          corpusPath: args.corpus_path,
+          rows: args.rows,
+          yamlOut: path.isAbsolute(args.yaml_out) ? args.yaml_out : path.join(projectRoot, args.yaml_out),
+          projectRoot,
+          defaultTiedBasePath: confirmed,
+          privacyTier: args.privacy_tier,
+          includeAbsolutePaths: args.include_absolute_paths,
+        });
+        return textContent(JSON.stringify(result, null, 2));
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : String(e);
+        return textContent(
+          JSON.stringify({ ok: false, error: msg, validation_errors: [msg], exit_code: 1 }, null, 2),
+        );
       }
     },
   },

@@ -9,7 +9,7 @@ IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH:
       - "Batch collector CLI/MCP"
       - "Corpus row extension"
       - "envelope-gap-report.v1 schema"
-    summary: "Deferred to Slice 4: batch collect over pre-generated envelopes with require_envelope vs legacy_infer modes."
+    summary: "Slice 4 complete: batch collect over pre-generated envelopes or legacy_infer scans; emits envelope-gap-report.v1.yaml with per-kind denominators and no score field."
   name: "Request evidence envelope batch collector"
   priority: "P2"
   related_architecture:
@@ -17,7 +17,7 @@ IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH:
   related_requirements:
     - "REQ-EVIDENCE_CHAIN_REPORT"
     - "REQ-REQUEST_EVIDENCE_ENVELOPE"
-  status: "Planned"
+  status: "Completed"
   traceability:
     architecture:
       - "ARCH-REQUEST_EVIDENCE_ENVELOPE"

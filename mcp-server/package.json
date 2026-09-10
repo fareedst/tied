@@ -17,6 +17,7 @@
     "vocabulary-explorer": "node dist/cli/vocabulary-explorer.js",
     "plumb-audit-gate": "node dist/cli/plumb-audit-gate.js",
     "evidence-chain-report": "node dist/cli/evidence-chain-report.js",
+    "request-evidence-envelope-batch-collect": "node dist/cli/request-evidence-envelope-batch-collect.js",
     "prepare": "npm run build"
   },
   "engines": {

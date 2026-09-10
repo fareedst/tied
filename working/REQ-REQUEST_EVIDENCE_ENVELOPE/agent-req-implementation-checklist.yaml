@@ -16,13 +16,23 @@ entry_points:
 execution_evidence:
   close_out_evidence:
     commit:
-      hash: "1f4ee7bdc62e74b531662a180c0a702951a7ae4d"
-      short: "1f4ee7b"
-      message: "feat(tied): add request evidence envelope Slices 0-3"
+      hash: "48cdd1fe22de7f2bbe6b0264670fe5e67c904c0e"
+      short: "48cdd1f"
+      message: "feat(tied): add request evidence envelope Slice 4 batch collect"
+      prior_slices_commit: "1f4ee7bdc62e74b531662a180c0a702951a7ae4d"
     date: "2026-09-10"
     deferred:
-      - "Slice 4: IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH batch collect + evaluation-corpus extension"
-      - "Slice 5: backfill pilot on /dev/test/1788547701 and /dev/test/1787603099"
+      - "Slice 5: backfill pilot on /dev/test/1788547701 and /dev/test/1787603099; flip corpus rows to require_envelope after pilot"
+    slice4:
+      commit: "509c01a"
+      completed_at: "2026-09-10"
+      report: "working/evaluation/envelope-gap-report.v1.yaml"
+      tools:
+        - "request_evidence_envelope_batch_collect (MCP + CLI)"
+      verification:
+        - "node --test dist/request-evidence-envelope/request-evidence-envelope-batch.test.js (10/10 pass)"
+        - "npm test mcp-server (679/679 pass)"
+        - "tied_validate_consistency ok: true"
     gates:
       pre_implementation:
         allowed: true
@@ -51,10 +61,13 @@ execution_evidence:
     master_checklist: "tied/docs/agent-req-implementation-checklist.yaml"
     verification:
       commands:
-        - "node --test dist/request-evidence-envelope/*.test.js (17/17 pass)"
+        - "node --test dist/request-evidence-envelope/*.test.js (27/27 pass)"
+        - "node --test dist/request-evidence-envelope/request-evidence-envelope-batch.test.js (10/10 pass)"
         - "go test ./tools/agentstream/... (pass)"
+        - "npm test --prefix mcp-server (679/679 pass)"
         - "bunx tsc -b mcp-server (pass)"
         - "tied_validate_consistency ok: true"
+        - "working/evaluation/envelope-gap-report.v1.yaml (operator, gitignored)"
   completed:
     - "session-bootstrap"
     - "change-definition"

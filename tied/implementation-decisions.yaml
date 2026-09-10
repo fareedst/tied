@@ -1592,9 +1592,19 @@ IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH:
   category: "Implementation"
   description: "Evaluation corpus row extension and envelope-gap-report.v1 batch collector (Slice 4)."
   detail_file: "implementation-decisions/IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH.yaml"
+  implementation_approach:
+    details:
+      - "legacy_infer tags legacy_inferred gaps until Slice 5 backfill"
+      - "require_envelope excludes rows with envelope_missing"
+      - "Shareable output uses privacy_tier shareable_hashed defaults"
+    key_components:
+      - "Batch collector CLI/MCP request_evidence_envelope_batch_collect"
+      - "Corpus row extension in evaluation-corpus.v1.yaml"
+      - "envelope-gap-report.v1 schema"
+    summary: "Batch collect over pre-generated envelopes or legacy_infer scans; emits envelope-gap-report.v1.yaml with per-kind denominators and no score field."
   name: "Request evidence envelope batch collector"
   priority: "P2"
-  status: "Planned"
+  status: "Completed"
 IMPL-TIED_ADVERSARIAL_INQUIRY:
   cross_references:
     - "ARCH-TIED_ADVERSARIAL_INQUIRY"
