@@ -1,0 +1,76 @@
+CITDP-track-c-validator-hardening:
+  change_definition:
+    current_behavior: "scanProcedureBlocks half-open ranges attach inter-procedure block-leads to the previous procedure and ignore external pre-procedure leads; mutat substring heuristic flags negated prose."
+    desired_behavior: "tokenScanStart/tokenScanEnd attribute block-leads to owning procedures; negated mutat* phrases do not emit MISSING_DATA_TRANSITION; CFG [start,end) unchanged for Layer C parser."
+    non_goals:
+      - "Track B sidecar sweep"
+      - "Track A grammar v2 default"
+      - "constraint_flow activation"
+    success_criteria:
+      - "pseudocode-shared and pseudocode-validator Track C tests green"
+      - "305 analysis unit tests green"
+      - "pseudocode_validate ok on IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT sidecar"
+    unchanged_behavior:
+      - "Layer C parser procedure ranges"
+      - "constraint-language fixtures"
+  completion_criteria:
+    checklist_gate:
+      dispositions:
+        - completed
+        - not_applicable
+        - pending
+        - waived
+      fail_closed: true
+      phases:
+        - pre_implementation
+        - verification
+  evidence:
+    commands:
+      - npm run build --prefix mcp-server
+      - node --test mcp-server/dist/analysis/pseudocode-shared.test.js mcp-server/dist/analysis/pseudocode-validator.test.js
+      - node --test mcp-server/dist/analysis/*.test.js
+    proof_boundaries:
+      - structural-only Layer B
+  impact_analysis:
+    impl_inventory:
+      - IMPL-PSEUDOCODE_SHARED_PRIMITIVES
+      - IMPL-QUALITY_PSEUDOCODE_VALIDATOR
+    modules_or_boundaries: "pseudocode-shared token scan bounds; pseudocode-validator heuristics"
+    tied_tokens_affected:
+      - REQ-PSEUDOCODE_STATIC_ANALYSIS
+      - REQ-PSEUDOCODE_PARSER_UNIFICATION
+      - IMPL-PSEUDOCODE_SHARED_PRIMITIVES
+      - IMPL-QUALITY_PSEUDOCODE_VALIDATOR
+  leap_feedback:
+    record_status: draft
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: REQ-PSEUDOCODE_STATIC_ANALYSIS
+    recorded_at: "2026-09-11"
+    title: "Track C — Layer B validator hardening (tokenScan + negated mutates)"
+  risk_analysis:
+    abuse_cases:
+      - "Token scan trim hides legitimate missing token links inside procedure bodies"
+      - "Negation heuristic suppresses real mutation without DATA_TRANSITION"
+    adversarial_inquiry:
+      assurance_profile: baseline-functional
+      close_out_inquiry_waiver: inquiry_not_required_validator_only
+      counterexamples:
+        - "External block-lead on wrong procedure still passes if token appears only in inter-procedure comment"
+        - "Affirmative mutates hidden after negated phrase on same line bypasses heuristic"
+      depth_tier: minimal
+      disconfirming_observations:
+        - "Track C unit tests cover external lead, inter-procedure trim, and negated mutates"
+        - "Checklist gate sidecar passes Layer B without comment relocation"
+      evidence_references:
+        - docs/pseudocode-grammar-v2-and-hygiene-plan.md
+        - docs/layerb-sidecar-fix-close-out.md
+        - mcp-server/src/analysis/pseudocode-shared.test.ts
+        - mcp-server/src/analysis/pseudocode-validator.test.ts
+      falsification_questions:
+        - "Does tokenScanEnd trim remove in-body block-leads before Contract?"
+        - "Does Layer C parser range drift when tokenScan fields added?"
+        - "Do constraint-language corpus tests regress?"
+      gate_policy: advisory
+      integrated_waiver: null
+      note: "Minimal depth validator-only change; inquiry waiver documented."

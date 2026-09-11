@@ -14,8 +14,8 @@ Contract:
   TERMINATION: total
 
 ## SELECT_OFFLINE_PATH
-# [IMPL-FEAT_OFFLINE_FALLBACK] [ARCH-FEAT_OFFLINE_COMPATIBILITY] [REQ-FEAT_OFFLINE_WORKFLOW_PRESERVATION] — choose the strongest available explicit path without replacing established tools.
 procedure SELECT_OFFLINE_PATH(capability_probe, project_root):
+# [IMPL-FEAT_OFFLINE_FALLBACK] [ARCH-FEAT_OFFLINE_COMPATIBILITY] [REQ-FEAT_OFFLINE_WORKFLOW_PRESERVATION] — choose the strongest available explicit path without replacing established tools.
   # [IMPL-FEAT_OFFLINE_FALLBACK] [ARCH-FEAT_OFFLINE_COMPATIBILITY] [REQ-FEAT_OFFLINE_WORKFLOW_PRESERVATION] — select an explicit path without mutation.
   DATA_TRANSITION: capability and project data remain unchanged; only a path report is returned.
   IF feature-orchestrator is available: RETURN primary onboarding path.

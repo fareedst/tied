@@ -1,0 +1,1 @@
+bash: line 1: tied_adversarial_inquiry_run: command not found

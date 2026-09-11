@@ -1,0 +1,59 @@
+IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP:
+  code_locations:
+    files:
+      - description: "Inventory and normalize CLI (planned)"
+        path: "scripts/normalize-sidecar-block-leads.mjs"
+      - description: "RED tests for detection and edit behavior (planned)"
+        path: "scripts/normalize-sidecar-block-leads.test.mjs"
+      - description: "Shared detection and edit helpers (planned)"
+        path: "scripts/lib/normalize-sidecar-block-leads.mjs"
+      - description: "Wave B4 authoring guidance sync"
+        path: "tied/docs/pseudocode-format-and-practices.md"
+      - description: "Wave B4 template example verification"
+        path: "templates/impl-essence-pseudocode-template.md"
+    functions:
+      - description: "Apply external and inter normalization with verbatim preservation"
+        name: "normalizeSidecarBlockLeads"
+        path: "scripts/lib/normalize-sidecar-block-leads.mjs"
+      - description: "Emit external-only and inter-procedure inventory"
+        name: "scanBlockLeadPlacement"
+        path: "scripts/lib/normalize-sidecar-block-leads.mjs"
+  cross_references:
+    - "ARCH-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP"
+    - "REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP"
+  description: "Implement inventory, external/inter normalization, wave orchestration, and B4 authoring sync for internal block-lead placement."
+  essence_pseudocode_path: "implementation-decisions/IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP-pseudocode.md"
+  implementation_approach:
+    details:
+      - "Detection aligns with pseudocode-shared isBlockLeadCommentLine and tokenScan bounds."
+      - "Track C validator behavior is unchanged; this is sidecar hygiene only."
+      - "Verbatim lead text is preserved; only placement changes."
+      - "Wave file lists are explicit and version-controlled in the hygiene plan."
+    summary: "Build normalize-sidecar-block-leads.mjs with check/write modes, run waves B1-B4 with per-file pseudocode_validate and per-wave tied_validate_consistency, then sync format guide and template."
+  name: "Normalize sidecar block-lead placement in phased waves"
+  rationale:
+    benefits:
+      - "Phased gates reduce regression risk"
+      - "Repeatable inventory JSON for audit and CI"
+    problems_solved:
+      - "29 sidecars currently show external or inter-procedure leak patterns"
+      - "Manual one-off fixes do not scale to 90 sidecars"
+    why: "A script-backed sweep generalizes the manual Layer B close-out pattern across all stdd sidecars."
+  related_decisions:
+    depends_on:
+      - "IMPL-PSEUDOCODE_SHARED_PRIMITIVES"
+      - "IMPL-QUALITY_PSEUDOCODE_VALIDATOR"
+    see_also:
+      - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    supersedes: []
+  status: "Implemented"
+  testability: "integration"
+  traceability:
+    architecture:
+      - "ARCH-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP"
+    code_annotations:
+      - "IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP"
+    requirements:
+      - "REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP"
+    tests:
+      - "scripts/normalize-sidecar-block-leads.test.mjs"

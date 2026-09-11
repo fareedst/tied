@@ -1,0 +1,201 @@
+CITDP-REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP:
+  change_definition:
+    current_behavior: 90 sidecar files under tied/implementation-decisions/ contain external pre-procedure block-leads and inter-procedure block-lead leaks; Track C validator hardening accepts external leads for Layer B but authors and literal-copy alignment still expect internal placement.
+    desired_behavior: A normalize-sidecar-block-leads script inventories and moves block-leads inside procedure bodies in phased waves B1-B4 with per-file pseudocode_validate and per-wave tied_validate_consistency gates; repo audit reaches zero external-only and inter-procedure leaks without changing validator behavior or grammar version policy.
+    falsification_questions:
+      - Can --write mutate non-lead prose or grammar headers?
+      - Can a wave pass while external-only leads remain in unscanned files?
+      - Can inter-procedure leads attach to the wrong procedure after normalization?
+      - Does Track B change Track C tokenScan behavior or Track A grammar defaults?
+    non_goals:
+      - constraint_flow activation
+      - Mass grammar v2 constraint-language migration
+      - Single big-bang edit of all sidecars without wave gates
+      - Track A grammar v2 default changes
+      - Track C validator behavior changes
+    success_criteria:
+      - Every swept sidecar passes pseudocode_validate in its wave
+      - normalize-sidecar-block-leads --check reports zero external-only and inter-procedure leads after waves B1-B3
+      - pseudocode-format-and-practices.md mandates internal placement after wave B4
+      - Tracker, CITDP, inquiry evidence, and pre-implementation gate paths are explicit without claiming script or sweep implementation
+    unchanged_behavior:
+      - Layer C parser procedure ranges
+      - Sidecar grammar version headers and constraint_flow opt-in
+      - Track A new-project grammar v2 default policy
+      - Track C tokenScanStart/tokenScanEnd validator semantics
+  completion_criteria:
+    activation:
+      phase: close_out
+      request_token: REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP
+      run_id: track-b-closeout-20260911
+    checklist_gate:
+      dispositions:
+        - completed
+        - not_applicable
+        - pending
+        - waived
+      fail_closed: true
+      phases:
+        - close_out
+        - pre_implementation
+        - verification
+    proof_boundaries:
+      - No completion claim for script implementation, sidecar --write, or wave sweep is made by this CITDP.
+    verification_gate_notes: 'Track B close-out 2026-09-11: 6/6 normalize CLI tests; full-repo --check 0/0 leaks; verification inquiry run_id track-b-verification-20260911; close_out track-b-closeout-20260911; advisory warn only.'
+  evidence:
+    commands:
+      - node scripts/normalize-sidecar-block-leads.mjs --check
+      - node scripts/normalize-sidecar-block-leads.mjs --write --wave B1
+      - pseudocode_analyze gate_mode=true
+      - pseudocode_validate
+      - tied_adversarial_inquiry_run phase=pre_implementation policy=advisory
+      - tied_checklist_activation_collect phase=pre_implementation
+      - tied_checklist_gate_validate phase=pre_implementation
+      - tied_validate_consistency
+      - yaml_index_validate
+    proof_boundaries:
+      - Inventory JSON proves placement detection only, not runtime behavior.
+      - Layer B proves structure after each swept file; wave gate proves zero leak-risk for the wave scope only.
+  impact_analysis:
+    first_divergence_hypotheses:
+      - Doc sync (B4) may lag sidecar edits and reintroduce external-only examples.
+      - Script detection may diverge from pseudocode-shared scan bounds.
+      - Wave file list drift may leave unscanned sidecars with leaks.
+    impl_inventory:
+      - IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP
+    impl_inventory_notes: Only IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP is in scope for this refine pass; script, tests, and sidecar writes are later /build-plan targets.
+    modules_or_boundaries:
+      detection_module: scanBlockLeadPlacement aligned with isBlockLeadCommentLine and tokenScan bounds
+      doc_sync_module: SYNC_AUTHORING_GUIDANCE for wave B4 only after B1-B3 zero inventory
+      normalization_module: external and inter-procedure movers with verbatim lead preservation
+      orchestration_module: APPLY_WAVE_SWEEP with explicit B1-B4 file lists and receipts
+    tied_tokens_affected:
+      - ARCH-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP
+      - IMPL-PSEUDOCODE_SHARED_PRIMITIVES
+      - IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP
+      - IMPL-QUALITY_PSEUDOCODE_VALIDATOR
+      - IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT
+      - REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT
+      - REQ-PSEUDOCODE_PARSER_UNIFICATION
+      - REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP
+      - REQ-PSEUDOCODE_STATIC_ANALYSIS
+    tied_tokens_new:
+      - ARCH-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP
+      - IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP
+      - REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP
+  leap_feedback:
+    divergences_from_analysis: []
+    record_status: final
+    tied_stack_updates_required: []
+  record_identity:
+    author: refine-plan subagent
+    change_request_id: REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP
+    citdp_id: CITDP-REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP
+    created_at: "2026-09-11"
+    status: final
+    title: Track B — sidecar block-lead placement sweep
+    updated_at: "2026-09-11"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: baseline-functional
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - B4 doc sync mandates internal placement while template still shows external example
+        - 'Script moves a lead before Contract: anchor is missing and corrupts procedure body'
+        - Verbatim preservation duplicates a lead inside and outside the body
+        - Wave B2 runs before Track C safety net is deployed
+      depth_tier: integrated
+      eligibility_triggers_matched:
+        - data-integrity-migration
+        - strict close-out
+      evidence_references:
+        - docs/layerb-sidecar-fix-close-out.md
+        - docs/pseudocode-grammar-v2-and-hygiene-plan.md
+        - mcp-server/src/analysis/pseudocode-shared.ts
+        - tied/implementation-decisions/IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP-pseudocode.md
+      falsification_questions:
+        - Do wave gates fail when any file in the wave retains leaks?
+        - Does --check mode guarantee zero byte mutation?
+        - Does detection match pseudocode-shared external and inter-procedure classification?
+      gate_policy: advisory
+      integrated_waiver: null
+      prior_depth_tier: null
+      profile_depth: integrated
+      proof_boundary: Advisory structural and data-integrity inquiry only; no proof that all 90 sidecars were swept until build-plan wave execution.
+      rationale: Bulk sidecar edits across 90 files with data-integrity-migration profile warrant integrated pre-implementation design; advisory policy keeps observations review-gated.
+      research_profile: integrated-agent
+    quality_evidence_matrix:
+      - applicability: applicable
+        attribute: baseline-functional
+        command_or_test: Deferred to /build-plan normalize-sidecar-block-leads.test.mjs and per-wave pseudocode_validate
+        evidence_method: RED unit tests for detection and edit; per-file Layer B after each wave.
+        limitation: No script or sweep exists in this refine pass.
+        owner: TIED implementation owner
+        rationale: Placement normalization is behavior-changing for sidecar bytes and must be test-gated.
+        result: planned
+        risk: Detection diverges from shared scan or corrupts non-lead prose.
+        threshold: Fixtures cover external-only, inter-procedure, verbatim preservation, and dry-run no-op.
+      - applicability: applicable
+        attribute: data-integrity-migration
+        command_or_test: Deferred to /build-plan wave inventory before/after JSON and git diff review
+        evidence_method: --check inventory, wave receipts, and byte-preservation checks on non-lead lines.
+        limitation: Sidecar content migration assurance, not database migration.
+        owner: TIED implementation owner
+        rationale: 90 sidecar files require phased edits with rollback-friendly wave commits.
+        result: planned
+        risk: Big-bang or wrong-wave edits cause merge conflicts or token linkage loss.
+        threshold: Only block-lead lines move; non-lead bytes unchanged; zero leak inventory after each wave.
+    quality_profiles:
+      - baseline-functional
+      - data-integrity-migration
+    risks:
+      - description: Bulk sidecar edits cause merge conflicts or accidental prose mutation.
+        id: RISK-BLOCK-LEAD-002
+        likelihood: High
+        mitigation: Phased waves with explicit file lists; --check inventory JSON committed per wave; dry-run default.
+        quality_attribute: data-integrity
+        severity: High
+      - description: Script detection diverges from pseudocode-shared tokenScan bounds and misclassifies in-body leads.
+        id: RISK-BLOCK-LEAD-001
+        likelihood: Medium
+        mitigation: Reuse isBlockLeadCommentLine pattern; unit tests mirror shared fixtures; independent module validation before sweep.
+        quality_attribute: correctness
+        severity: High
+      - description: Track B scope absorbs Track C validator or Track A grammar changes.
+        id: RISK-BLOCK-LEAD-003
+        likelihood: Medium
+        mitigation: Explicit non-goals in CITDP and plan; no pseudocode-shared edits in Track B build-plan without new scope.
+        quality_attribute: scope-control
+        severity: Medium
+      - description: Wave gate passes while unscanned sidecars retain leaks.
+        id: RISK-BLOCK-LEAD-004
+        likelihood: Medium
+        mitigation: Full-repo --check audit after B3; wave file lists versioned in plan doc.
+        quality_attribute: completeness
+        severity: Medium
+    scenarios:
+      - Infrastructure wave B2 normalizes MCP and pseudocode engine sidecars
+      - Pilot wave B1 normalizes checklist and quality sidecars with zero post-wave leaks
+      - Remaining wave B3 clears all other sidecars
+      - Track C safety net remains deployed before B1 write pass
+      - Wave B4 syncs format guide without changing validator behavior
+  tdd_sequence:
+    order:
+      - Complete refined plan and authoritative Tracker/CITDP.
+      - Run integrated advisory pre_implementation inquiry.
+      - Validate pre_implementation gate.
+      - 'Later /build-plan: RED tests for detection and normalization.'
+      - 'Later /build-plan: B1-B3 wave --write passes with per-file and per-wave gates.'
+      - 'Later /build-plan: B4 doc/template sync.'
+      - Verification gate and close-out in a later workflow.
+    summary: Refine/CITDP then pre-implementation inquiry and gate, then later /build-plan script TDD, phased sweep, B4 doc sync, verification, and close-out.
+  test_strategy:
+    composition: Wave orchestration contract test wiring scan, normalize, and validate helpers without UI.
+    e2e: not_applicable - file/CLI tooling only; no UI invocation required.
+    proof_boundaries:
+      - Adversarial inquiry is advisory and review-gated.
+      - Inventory JSON does not prove all 90 files were edited until build-plan waves complete.
+      - Layer B per file proves structure only after that file is swept.
+    regression: Full pseudocode analysis suite after script module lands; Track C tests must remain green.
+    summary: Pre-RED validates IMPL Layer A/B/C; later /build-plan writes RED tests for scan/normalize modules, then wave integration tests, then B4 doc sync. No E2E.
+    unit: External-only detection, inter-procedure detection, verbatim move, dry-run no-op, missing Contract anchor failure.

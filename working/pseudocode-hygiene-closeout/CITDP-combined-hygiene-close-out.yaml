@@ -1,0 +1,77 @@
+CITDP-combined-hygiene-close-out:
+  record_identity:
+    change_request_id: PROCESS-PSEUDOCODE_HYGIENE_CLOSEOUT
+    recorded_at: "2026-09-11"
+    title: "Step 7 — combined hygiene close-out (process orchestration)"
+  change_definition:
+    current_behavior: "Tracks A/C/B shipped independently; Track A machine-closed with stale proposed commit text; Track C implemented with draft CITDP and deferred close_out; Track B implemented with verification gate blocked (missing verification activation)."
+    desired_behavior: "One combined close-out pass finishes Track B integrated gates and capstone envelope, Track C minimal close_out with persisted CITDP, Track A reconcile; one CHANGELOG narrative and one proposed commit message; commit_deferred."
+    non_goals:
+      - "New product REQ/ARCH/IMPL tokens"
+      - "New production code or sidecar --write"
+      - "git add, commit, or push"
+      - "Integrated inquiry for Track C (waiver inquiry_not_required_validator_only)"
+    success_criteria:
+      - "Track B close_out gate allowed and capstone envelope zero blocking gaps"
+      - "Track C CITDP persisted under tied/citdp/ and close_out gate allowed"
+      - "Three REQ trackers synced; single proposed-commit-message.txt"
+    unchanged_behavior:
+      - "Track A runtime/bootstrap behavior"
+      - "Track C validator tokenScan semantics"
+      - "Track B sidecar bytes after B3"
+  impact_analysis:
+    tied_tokens_affected:
+      - REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT
+      - REQ-PSEUDOCODE_STATIC_ANALYSIS
+      - REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP
+    impl_inventory: []
+    modules_or_boundaries: "Process-only; delegates to per-REQ trackers and CITDPs listed in docs/pseudocode-grammar-v2-and-hygiene-plan.md §Step 7"
+    linked_trackers:
+      - working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/agent-req-implementation-checklist.yaml
+      - working/REQ-PSEUDOCODE_STATIC_ANALYSIS/agent-req-implementation-checklist-track-c.yaml
+      - working/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP/agent-req-implementation-checklist.yaml
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: baseline-functional
+      close_out_inquiry_waiver: inquiry_not_required_process_orchestration_only
+      counterexamples:
+        - "Combined close-out skips Track B verification activation and claims machine close-out"
+        - "Track C draft CITDP never persisted but close_out gate marked complete"
+      depth_tier: minimal
+      disconfirming_observations:
+        - "Per-REQ trackers and sponsor plan define blocking vs minimal paths explicitly"
+      evidence_references:
+        - docs/pseudocode-grammar-v2-and-hygiene-plan.md
+        - working/pseudocode-hygiene-closeout/agent-req-implementation-checklist.yaml
+      falsification_questions:
+        - "Does process orchestration mutate product TIED YAML without citdp_record_write on Track C?"
+      gate_policy: advisory
+      integrated_waiver: null
+      prior_depth_tier: null
+      profile_depth: minimal
+      proof_boundary: "Process addendum only; product inquiry runs on Track B at close-out."
+    abuse_cases:
+      - "Verification activation reused from pre_implementation on Track B"
+      - "Separate commits despite sponsor single-commit policy"
+  evidence:
+    proof_boundaries:
+      - "Process addendum does not prove product behavior; product proof remains per-track evidence"
+    commands:
+      - "Delegated to plan-close-out preflight (read-only re-runs)"
+  completion_criteria:
+    checklist_gate:
+      dispositions:
+        - completed
+        - not_applicable
+        - pending
+        - waived
+      phases:
+        - pre_implementation
+        - verification
+        - close_out
+      fail_closed: true
+    proof_boundaries:
+      - "No product implementation claim; close-out gates run on linked REQ trackers."
+  leap_feedback:
+    record_status: draft
+    tied_stack_updates_required: []

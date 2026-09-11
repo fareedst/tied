@@ -87,6 +87,16 @@ Checklist **`sub-vocabulary-sync`** uses **domain** vocab. Do not conflate with 
 | **constraint-annotated procedure** | constraint procedure (alone) | Procedure with refinement/summary/alias/immutability/predicate annotations |
 | **solver truncation unknown** | solver budget unknown (alone) | Budget-exceeded disclosure in `sections.constraint_language.solver_metadata` |
 | **constraint corpus** | CL fixtures (alone) | ≥40 labeled fixtures under `fixtures/constraint-language/` |
+| **new-project grammar v2 default** | grammar v2 everywhere | Policy that newly generated TIED sidecars include `Grammar-Version: v2`; legacy sidecars remain v1-compatible |
+| **grammar_v2_header audit dimension** | header check | Independent cohort/audit result for generated header presence; not proof of Layer B, Layer C, or runtime behavior |
+| **sidecar block-lead sweep** | comment cleanup (alone) | Phased normalization of procedure block-lead comments to internal placement across `tied/implementation-decisions/` ([REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP]) |
+| **external block-lead** | pre-procedure comment | `# [IMPL\|ARCH\|REQ` lines immediately above a `procedure` heading; invisible to naive block scanners |
+| **inter-procedure block-lead leak** | between-procedure comment | Trailing `# [IMPL\|ARCH\|REQ` in the gap before the next procedure; attaches to wrong body under half-open scan |
+| **block-lead inventory** | placement audit JSON | Machine-readable `--check` output from `normalize-sidecar-block-leads.mjs` listing `external_only` and `inter_procedure` counts per file |
+| **internal block-lead placement** | in-body comment rule | Block-lead must appear inside the procedure body after the heading and before `Contract:` |
+| **combined hygiene close-out** | multi-track close-out (alone) | Step 7 process orchestration closing Tracks A/C/B under one proposed commit; no new product REQ ([docs/pseudocode-grammar-v2-and-hygiene-plan.md](../../docs/pseudocode-grammar-v2-and-hygiene-plan.md) §Step 7) |
+| **capstone envelope** | integrated envelope (alone) | Track B `request-evidence-envelope.v1.json` after verification + close_out inquiry runs; `--envelope-blocking` unified runner target |
+| **single combined commit** | one feat commit (alone) | Sponsor policy: one proposed commit message spanning grammar-v2 default, validator hardening, and sidecar sweep; `commit_deferred` in close-out handoff |
 
 ---
 
@@ -102,6 +112,13 @@ Checklist **`sub-vocabulary-sync`** uses **domain** vocab. Do not conflate with 
 | Validation checklist | `tied/docs/pseudocode-validation-checklist.yaml` | [PROC-PSEUDOCODE_VALIDATION](../docs/processes.md) |
 | Static analysis checklist | `tied/docs/pseudocode-static-analysis-checklist.yaml` | [PROC-PSEUDOCODE_VALIDATION](../docs/processes.md) |
 | Grammar v1 guide | `tied/docs/pseudocode-grammar.v1.md` | [REQ-PSEUDOCODE_STATIC_ANALYSIS](../requirements/REQ-PSEUDOCODE_STATIC_ANALYSIS.yaml) |
+| Grammar v2 default requirement | `REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT` | [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT](../requirements/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml) |
+| Grammar v2 default sidecar | `tied/implementation-decisions/IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT-pseudocode.md` | [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT](../implementation-decisions/IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml) |
+| Sidecar block-lead sweep requirement | `REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP` | [REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP](../requirements/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP.yaml) |
+| Block-lead sweep sidecar | `tied/implementation-decisions/IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP-pseudocode.md` | [IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP](../implementation-decisions/IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP.yaml) |
+| Normalize sidecar block-leads script | `scripts/normalize-sidecar-block-leads.mjs` | [IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP](../implementation-decisions/IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP.yaml) |
+| Combined hygiene close-out orchestration | `working/pseudocode-hygiene-closeout/agent-req-implementation-checklist.yaml` | Process-only; [PROC-AGENT_REQ_CHECKLIST](../docs/processes.md) |
+| Combined close-out CITDP addendum (draft) | `working/pseudocode-hygiene-closeout/CITDP-combined-hygiene-close-out.yaml` | Non-product process record; not `tied/citdp/CITDP-REQ-*` |
 | Composition coverage guide | `tied/docs/composition-coverage.md` | [REQ-MODULE_VALIDATION](../requirements/REQ-MODULE_VALIDATION.yaml) / [PROC-TEST_STRATEGY](../docs/processes.md) |
 | Domain vocab index | `tied/vocab/*.md` | [PROC-VOCABULARY_INDEX](../docs/processes.md) |
 | Vocab routing index (PRELOAD) | `tied/vocab/routing.md` | [PROC-VOCABULARY_INDEX](../docs/processes.md) |
@@ -153,6 +170,14 @@ Prefer in `essence_pseudocode` (not domain terms):
 | Preferred term | UPPER_SNAKE block | Owning PROC/IMPL |
 |----------------|-------------------|------------------|
 | Vocabulary resolve | `sub-vocabulary-sync` (checklist sub-procedure slug) | [PROC-VOCABULARY_INDEX](../docs/processes.md) |
+| New-project grammar default selection | `SELECT_NEW_PROJECT_GRAMMAR_DEFAULT` | [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT](../implementation-decisions/IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml) |
+| Sidecar version classification | `CLASSIFY_SIDECAR_VERSION` | [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT](../implementation-decisions/IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml) |
+| New-client grammar audit | `AUDIT_NEW_CLIENT_GRAMMAR` | [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT](../implementation-decisions/IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml) |
+| Block-lead placement inventory | `SCAN_BLOCK_LEAD_PLACEMENT` | [IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP](../implementation-decisions/IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP.yaml) |
+| External block-lead normalization | `NORMALIZE_EXTERNAL_BLOCK_LEAD` | [IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP](../implementation-decisions/IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP.yaml) |
+| Inter-procedure block-lead normalization | `NORMALIZE_INTER_PROCEDURE_BLOCK_LEAD` | [IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP](../implementation-decisions/IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP.yaml) |
+| Wave sweep orchestration | `APPLY_WAVE_SWEEP` | [IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP](../implementation-decisions/IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP.yaml) |
+| Authoring guidance sync | `SYNC_AUTHORING_GUIDANCE` | [IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP](../implementation-decisions/IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP.yaml) |
 | (domain-specific blocks live in sibling glossaries) | — | — |
 
 ---
@@ -217,6 +242,7 @@ Prefer in `essence_pseudocode` (not domain terms):
 | qualification manifest | Preferred terms |
 | input_identity | Preferred terms |
 | annotation burden gate | Preferred terms |
+| AUDIT_NEW_CLIENT_GRAMMAR | Pseudo-code blocks |
 | alias policy | Preferred terms |
 | constraint corpus | Preferred terms |
 | constraint solver | Preferred terms |
@@ -226,9 +252,26 @@ Prefer in `essence_pseudocode` (not domain terms):
 | constraint-language | Preferred terms |
 | grammar v2 | Preferred terms |
 | grammar version boundary | Preferred terms |
+| grammar_v2_header audit dimension | Preferred terms |
 | immutability policy | Preferred terms |
+| new-project grammar v2 default | Preferred terms |
 | procedure summary | Preferred terms |
 | refinement predicate | Preferred terms |
 | solver truncation unknown | Preferred terms |
+| SELECT_NEW_PROJECT_GRAMMAR_DEFAULT | Pseudo-code blocks |
+| CLASSIFY_SIDECAR_VERSION | Pseudo-code blocks |
+| APPLY_WAVE_SWEEP | Pseudo-code blocks |
+| capstone envelope | Preferred terms |
+| combined hygiene close-out | Preferred terms |
+| block-lead inventory | Preferred terms |
+| external block-lead | Preferred terms |
+| inter-procedure block-lead leak | Preferred terms |
+| internal block-lead placement | Preferred terms |
+| NORMALIZE_EXTERNAL_BLOCK_LEAD | Pseudo-code blocks |
+| NORMALIZE_INTER_PROCEDURE_BLOCK_LEAD | Pseudo-code blocks |
+| SCAN_BLOCK_LEAD_PLACEMENT | Pseudo-code blocks |
+| sidecar block-lead sweep | Preferred terms |
+| single combined commit | Preferred terms |
+| SYNC_AUTHORING_GUIDANCE | Pseudo-code blocks |
 | Vocab routing index | Naming bridge |
 | vocabulary layer | Preferred terms |

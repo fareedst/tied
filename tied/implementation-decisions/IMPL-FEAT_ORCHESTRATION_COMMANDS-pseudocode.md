@@ -14,7 +14,6 @@ Contract:
   TERMINATION: total
 
 ## EXECUTE_LIFECYCLE_COMMAND
-# [IMPL-FEAT_ORCHESTRATION_COMMANDS] [ARCH-FEAT_ORCHESTRATION_COMMANDS] [REQ-FEAT_ORCHESTRATION_COMMANDS] — How: map the command to a Batch 0 transition and delegate persistence.
 procedure EXECUTE_LIFECYCLE_COMMAND(command, feature_identifier, expected_revision, command_input):
   # [IMPL-FEAT_ORCHESTRATION_COMMANDS] [ARCH-FEAT_ORCHESTRATION_COMMANDS] [REQ-FEAT_ORCHESTRATION_COMMANDS] — How: map the command to a Batch 0 transition and delegate persistence.
   Resolve the command to a requested lifecycle phase.
@@ -27,7 +26,6 @@ procedure EXECUTE_LIFECYCLE_COMMAND(command, feature_identifier, expected_revisi
   Return current state, new revision, diagnostics, and next permitted phase.
 
 ## REPORT_NEXT_PERMITTED_PHASE
-# [IMPL-FEAT_ORCHESTRATION_COMMANDS] [ARCH-FEAT_ORCHESTRATION_COMMANDS] [REQ-FEAT_ORCHESTRATION_COMMANDS] — How: expose the next actionable lifecycle phase without inventing later-batch gates.
 procedure REPORT_NEXT_PERMITTED_PHASE(manifest, evidence):
   # [IMPL-FEAT_ORCHESTRATION_COMMANDS] [ARCH-FEAT_ORCHESTRATION_COMMANDS] [REQ-FEAT_ORCHESTRATION_COMMANDS] — How: expose the next actionable lifecycle phase without inventing later-batch gates.
   Evaluate each legal successor in matrix order.

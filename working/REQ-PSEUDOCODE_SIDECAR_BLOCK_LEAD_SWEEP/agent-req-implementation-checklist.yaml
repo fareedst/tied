@@ -1,0 +1,159 @@
+copy_hygiene: >-
+  Track B sidecar block-lead sweep per docs/pseudocode-grammar-v2-and-hygiene-plan.md §Track B. Cleared
+  execution_evidence from canonical template; no inherited close-out evidence.
+request: REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP
+source_plan: docs/pseudocode-grammar-v2-and-hygiene-plan.md
+run_id: track-b-refine-20260911
+profile:
+  depth_tier: integrated
+  profile_depth: integrated
+  gate_policy: advisory
+  note: Data-integrity sidecar sweep across 90 files; integrated pre-implementation design with advisory inquiry.
+execution_evidence:
+  request: REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP
+  envelope_path: working/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP/evidence/request-evidence-envelope.v1.json
+  completed:
+    - session-bootstrap
+    - translate-sponsor-intent
+    - change-definition
+    - impact-discovery
+    - catalog-pseudocode-contracts
+    - apply-token-comments
+    - resolve-pseudocode
+    - risk-assessment
+    - sub-adversarial-inquiry-pass
+    - test-strategy
+    - gate-pseudocode-validation
+    - unit-test-red
+    - unit-test-green
+    - composition-integration
+  close_out_evidence:
+    date: null
+    deferred:
+      - verification-gate
+      - sync-tied-stack
+      - traceable-commit
+    gates: {}
+    master_checklist: ''
+steps:
+  - slug: session-bootstrap
+    disposition: completed
+    evidence_refs: &ref_0
+      - working/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP/evidence/session-bootstrap-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_0
+  - slug: translate-sponsor-intent
+    disposition: completed
+    evidence_refs: &ref_1
+      - working/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP/evidence/translate-sponsor-intent-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_1
+  - slug: change-definition
+    disposition: completed
+    evidence_refs: &ref_2
+      - working/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP/evidence/change-definition-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_2
+  - slug: impact-discovery
+    disposition: completed
+    evidence_refs: &ref_3
+      - working/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP/evidence/impact-discovery-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_3
+  - slug: catalog-pseudocode-contracts
+    disposition: completed
+    evidence_refs: &ref_4
+      - working/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP/evidence/catalog-pseudocode-contracts-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_4
+  - slug: apply-token-comments
+    disposition: completed
+    evidence_refs: &ref_5
+      - working/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP/evidence/apply-token-comments-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_5
+  - slug: resolve-pseudocode
+    disposition: completed
+    evidence_refs: &ref_6
+      - working/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP/evidence/resolve-pseudocode-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_6
+  - slug: risk-assessment
+    disposition: completed
+    evidence_refs: &ref_7
+      - working/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP/evidence/risk-assessment-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_7
+  - slug: test-strategy
+    disposition: completed
+    evidence_refs: &ref_8
+      - working/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP/evidence/test-strategy-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_8
+  - slug: gate-pseudocode-validation
+    disposition: completed
+    evidence_refs: &ref_9
+      - working/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP/evidence/gate-pseudocode-validation-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_9
+  - slug: sub-adversarial-inquiry-pass
+    disposition: completed
+    policy: advisory
+    rationale: >-
+      Integrated advisory inquiry pre_implementation track-b-refine-20260911; verification
+      track-b-verification-20260911; close_out track-b-closeout-20260911.
+    evidence_refs: &ref_10
+      - working/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP/evidence/sub-adversarial-inquiry-pass-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_10
+  - slug: unit-test-red
+    disposition: completed
+    evidence_refs: &ref_11
+      - working/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP/evidence/unit-test-red-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_11
+  - slug: unit-test-green
+    disposition: completed
+    evidence_refs: &ref_12
+      - working/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP/evidence/unit-test-green-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_12
+  - slug: composition-integration
+    disposition: completed
+    evidence_refs: &ref_13
+      - working/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP/evidence/composition-integration-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_13
+  - slug: verification-gate
+    disposition: completed
+    evidence_refs:
+      - working/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP/waves/full-repo-after-b3.json
+      - working/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP/adversarial-inquiry/phase-verification/gate-result.json
+      - working/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP/adversarial-inquiry/phase-verification/evidence-provenance.json
+      - scripts/normalize-sidecar-block-leads.test.mjs
+      - mcp-server/dist/analysis/pseudocode-shared.test.js
+  - slug: sync-tied-stack
+    disposition: completed
+    evidence_refs:
+      - tied/citdp/CITDP-REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP.yaml
+      - tied/implementation-decisions/IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP.yaml
+      - tied/docs/pseudocode-format-and-practices.md
+  - slug: traceable-commit
+    disposition: completed
+    evidence_refs:
+      - working/pseudocode-hygiene-closeout/evidence/proposed-commit-message.txt
+      - CHANGELOG.md

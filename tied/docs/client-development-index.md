@@ -32,7 +32,7 @@ Use these **nicknames** in tickets, PRs, and agent prompts.
 | 3 | **Checklist** | [agent-req-implementation-checklist.md](agent-req-implementation-checklist.md) | **Every** new feature, change, or bug fix — the executable procedure. |
 | 4 | **Tracker** | [agent-req-implementation-checklist.yaml](agent-req-implementation-checklist.yaml) | Copy to a working folder per task; record step completion (see YAML header). |
 | 5 | **Processes** | [processes.md](processes.md) | Need the **definition** behind a checklist step. Read these sections only: `[PROC-CITDP]`, `[PROC-LEAP]`, `[PROC-TIED_DEV_CYCLE]`, `[PROC-IMPL_CODE_TEST_SYNC]`, `[PROC-TEST_STRATEGY]`, `[PROC-QUALITY_ASSURANCE]`, `[PROC-QUALITY_EVIDENCE_PROVENANCE]`, `[PROC-TEST_ADEQUACY]`, `[PROC-VOCABULARY_INDEX]`. |
-| 6 | **Pseudo-code** | [pseudocode-writing-and-validation.md](pseudocode-writing-and-validation.md) | Authoring or repairing IMPL `essence_pseudocode`; three layers A/B/C; three-way alignment; LEAP micro-cycle. Optional grammar read: [pseudocode-grammar.v1.md](pseudocode-grammar.v1.md). |
+| 6 | **Pseudo-code** | [pseudocode-writing-and-validation.md](pseudocode-writing-and-validation.md) | Authoring or repairing IMPL `essence_pseudocode`; three layers A/B/C; three-way alignment; LEAP micro-cycle. **New client projects** default to `Grammar-Version: v2` in the canonical sidecar template ([pseudocode-grammar-v2-migration.md](pseudocode-grammar-v2-migration.md)); optional grammar reads: [pseudocode-grammar.v1.md](pseudocode-grammar.v1.md), [pseudocode-grammar.v2.md](pseudocode-grammar.v2.md). |
 | 7 | **Change records** | [citdp-policy.md](citdp-policy.md) + [citdp-record-template.yaml](citdp-record-template.yaml) | When to write a CITDP file; shape for `tied/citdp/CITDP-*.yaml`, quality evidence matrix, and residual-risk decisions. |
 
 Quality assurance references: [quality-assurance-commands.md](quality-assurance-commands.md), [quality-evidence-manifest.md](quality-evidence-manifest.md), [quality-assurance-pilot.md](quality-assurance-pilot.md), [composition-coverage.md](composition-coverage.md), and [evidence-chain-profile.md](evidence-chain-profile.md) (`evidence_chain_profile_generate`, Path B manual, and the TIED-source offline **evidence chain statistics report** CLI).
@@ -108,7 +108,7 @@ On a fresh bootstrap with no project-specific REQ/ARCH/IMPL tokens, `tied_valida
 | Automation | `req-impl-state-guide-agent-workflow.md`, `requirement-list-state-guide-agent-workflow.md` |
 | Preload contract | `agent-preload-contract-template.yaml` → client `tied/agent-preload-contract.yaml` |
 | Fidelity research | `tied-fidelity-research.md`, `pseudocode-fidelity-audit-agent-prompt.md` |
-| Pseudo-code extras | `pseudocode-format-and-practices.md`, `pseudocode-validation-checklist.yaml`, `pseudocode-static-analysis-checklist.yaml`, `pseudocode-grammar.v1.md`, `templates/impl-essence-pseudocode-template.md` |
+| Pseudo-code extras | `pseudocode-format-and-practices.md`, `pseudocode-validation-checklist.yaml`, `pseudocode-static-analysis-checklist.yaml`, `pseudocode-grammar.v1.md`, `pseudocode-grammar.v2.md`, `pseudocode-grammar-v2-migration.md`, `templates/impl-essence-pseudocode-template.md`, `scripts/audit-grammar-v2-default.mjs` |
 | Vocab meta | `vocabulary-index-analysis-and-standards.md` |
 
 ---

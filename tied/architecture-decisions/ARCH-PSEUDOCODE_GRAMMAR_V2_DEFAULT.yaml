@@ -1,0 +1,41 @@
+ARCH-PSEUDOCODE_GRAMMAR_V2_DEFAULT:
+  alternatives_considered:
+    - cons:
+        - "Would reinterpret legacy sidecars"
+      name: "Change the parser default globally"
+      pros:
+        - "Less template work"
+      rejected_reason: "Violates the v1 compatibility boundary."
+    - cons:
+        - "Adds authoring burden and changes the constraint rollout"
+      name: "Require constraint_flow for every v2 sidecar"
+      pros:
+        - "Maximizes static analysis"
+      rejected_reason: "Header default is policy-only; constraint_flow remains opt-in."
+  cross_references:
+    - "ARCH-PSEUDOCODE_GRAMMAR_V2"
+    - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
+    - "REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+  decision: "Make the template preamble the single source for the new-project default, propagate it through copy_files.sh and disposable-client smoke, and keep parser version selection header-based."
+  description: "The canonical template and bootstrap policy select Grammar-Version: v2 for newly generated IMPL sidecars; parser compatibility keeps absent-header legacy sidecars on v1."
+  name: "New-project grammar v2 default boundary"
+  rationale:
+    benefits:
+      - "A disposable client can verify the policy at the actual bootstrap boundary"
+      - "No mass migration of legacy stdd or client sidecars"
+      - "One authoritative generated default"
+    problems_solved:
+      - "Cohort grading lacks a dedicated generated-header signal"
+      - "Template and migration guidance currently describe v1 as the new-sidecar default"
+    why: "A template-owned policy gives fresh clients an explicit grammar contract without changing the meaning of existing sidecars."
+  status: "Accepted"
+  traceability:
+    code_annotations:
+      - "ARCH-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+    implementation:
+      - "IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+    requirements:
+      - "REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+    tests:
+      - "mcp-server/src/analysis/pseudocode-grammar-v2-default.test.ts"
+      - "scripts/audit-grammar-v2-default.test.mjs"

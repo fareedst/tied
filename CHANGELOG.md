@@ -9,6 +9,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Track A — Grammar v2 default for new TIED projects ([REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT])** —
+  Canonical template and `copy_files.sh` bootstrap emit `Grammar-Version: v2`;
+  `selectNewProjectGrammarDefault` / `classifySidecarVersion` modules with 12 unit
+  tests; disposable-client audit CLI with independent dimensions (header, Layer B,
+  Layer C, constraint_flow=false, legacy-v1) and composition tests; migration and
+  client-development docs updated. Close-out `grammar-v2-closeout-20260911`:
+  verification + close_out gates allowed; envelope zero blocking gaps; 15/15
+  targeted tests pass. Combined Step 7 with Tracks C and B per
+  `docs/pseudocode-grammar-v2-and-hygiene-plan.md`.
+
+- **Track C — Layer B validator hardening ([REQ-PSEUDOCODE_STATIC_ANALYSIS])** —
+  `tokenScanStart` / `tokenScanEnd` attribute block-leads to owning procedures;
+  negated `mutat*` prose no longer emits `MISSING_DATA_TRANSITION`; CFG
+  `[start,end)` unchanged. CITDP persisted as
+  `tied/citdp/CITDP-REQ-PSEUDOCODE_STATIC_ANALYSIS-track-c-validator-hardening.yaml`;
+  minimal-depth close_out gate allowed; analysis regression guard 304/305
+  (one plumb-diff preview env flake).
+
+- **Track B — Sidecar block-lead sweep ([REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP])** —
+  `normalize-sidecar-block-leads` CLI (6/6 unit tests), waves B1–B3 with receipts,
+  full-repo `--check` zero external-only / inter-procedure leaks; B4 internal-placement
+  mandate in `pseudocode-format-and-practices.md`. Integrated close-out
+  `track-b-verification-20260911` + `track-b-closeout-20260911`; envelope
+  blocking gaps zero; advisory inquiry warn only.
+
 - **Wave 8 — Adherence realignment ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
   W8-D1 PSA auto-load for gate validate (`checklist-gate-evidence-hydration.ts`);
   W8-D2 sync emits `outcome_verified` ledger rows (`sync-tracker-dispositions.mjs`,

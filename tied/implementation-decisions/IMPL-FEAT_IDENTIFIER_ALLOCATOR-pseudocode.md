@@ -12,7 +12,6 @@ Contract:
   TERMINATION: total
 
 ## GENERATE_FEATURE_SLUG
-# [IMPL-FEAT_IDENTIFIER_ALLOCATOR] [ARCH-FEAT_IDENTIFIER_ALLOCATION] [REQ-FEAT_IDENTIFIER_ALLOCATION] — How: apply one stable normalization pipeline to equivalent titles.
 procedure GENERATE_FEATURE_SLUG(title):
   # [IMPL-FEAT_IDENTIFIER_ALLOCATOR] [ARCH-FEAT_IDENTIFIER_ALLOCATION] [REQ-FEAT_IDENTIFIER_ALLOCATION] — How: apply one stable normalization pipeline to equivalent titles.
   Trim surrounding whitespace.
@@ -24,7 +23,6 @@ procedure GENERATE_FEATURE_SLUG(title):
   RETURN slug.
 
 ## ALLOCATE_FEATURE_IDENTIFIER
-# [IMPL-FEAT_IDENTIFIER_ALLOCATOR] [ARCH-FEAT_IDENTIFIER_ALLOCATION] [REQ-FEAT_IDENTIFIER_ALLOCATION] — How: scan existing directories and choose the lowest unused FEAT number.
 procedure ALLOCATE_FEATURE_IDENTIFIER(title, existing_feature_directories):
   # [IMPL-FEAT_IDENTIFIER_ALLOCATOR] [ARCH-FEAT_IDENTIFIER_ALLOCATION] [REQ-FEAT_IDENTIFIER_ALLOCATION] — How: scan existing directories and choose the lowest unused FEAT number.
   Generate slug.

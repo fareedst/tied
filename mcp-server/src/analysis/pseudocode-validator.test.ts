@@ -78,6 +78,88 @@ procedure CREATE_SCOPED_POPUP:
     assert.equal(report.diagnostics.length, 0);
   });
 
+  it("accepts external-only block-leads for token linkage on the following procedure", () => {
+    // [IMPL-QUALITY_PSEUDOCODE_VALIDATOR] [REQ-PSEUDOCODE_STATIC_ANALYSIS] — How: tokenScanStart includes external block-leads.
+    const report = validateEssencePseudocode({
+      token: "IMPL-TRACK-C",
+      known_tokens: ["REQ-TRACK-C", "ARCH-TRACK-C", "IMPL-TRACK-C"],
+      pseudocode: `# [IMPL-TRACK-C] [ARCH-TRACK-C] [REQ-TRACK-C]
+procedure FIRST:
+  Contract:
+    INPUT: x
+    OUTPUT: y
+    PRE: x
+    POST: y
+    EFFECTS: pure
+    TERMINATION: total
+  RETURN y
+# [IMPL-TRACK-C] [ARCH-TRACK-C] [REQ-TRACK-C]
+procedure SECOND:
+  Contract:
+    INPUT: x
+    OUTPUT: y
+    PRE: x
+    POST: y
+    EFFECTS: pure
+    TERMINATION: total
+  RETURN y`,
+    });
+
+    assert.equal(report.ok, true);
+    assert.ok(report.blocks[1]?.token_refs.includes("IMPL-TRACK-C"));
+    assert.equal(
+      report.diagnostics.filter((diagnostic) => diagnostic.code === "MISSING_BLOCK_TOKEN_LINK").length,
+      0,
+    );
+  });
+
+  it("does not flag MISSING_DATA_TRANSITION for negated mutation prose", () => {
+    // [IMPL-QUALITY_PSEUDOCODE_VALIDATOR] [REQ-PSEUDOCODE_STATIC_ANALYSIS] — How: ignore never/does not/do not before mutat.
+    const report = validateEssencePseudocode({
+      token: "IMPL-TRACK-C",
+      known_tokens: ["REQ-TRACK-C", "ARCH-TRACK-C", "IMPL-TRACK-C"],
+      pseudocode: `# [IMPL-TRACK-C] [ARCH-TRACK-C] [REQ-TRACK-C]
+procedure READ_ONLY:
+  # [IMPL-TRACK-C] [ARCH-TRACK-C] [REQ-TRACK-C]
+  Contract:
+    INPUT: source
+    OUTPUT: report
+    PRE: source is present
+    POST: report is observational only and never mutates inputs
+    EFFECTS: pure
+    TERMINATION: total
+  RETURN report`,
+    });
+
+    assert.equal(report.ok, true);
+    assert.equal(
+      report.diagnostics.filter((diagnostic) => diagnostic.code === "MISSING_DATA_TRANSITION").length,
+      0,
+    );
+  });
+
+  it("still flags MISSING_DATA_TRANSITION for affirmative mutation without DATA_TRANSITION", () => {
+    // [IMPL-QUALITY_PSEUDOCODE_VALIDATOR] [REQ-PSEUDOCODE_STATIC_ANALYSIS]
+    const report = validateEssencePseudocode({
+      token: "IMPL-TRACK-C",
+      known_tokens: ["REQ-TRACK-C", "ARCH-TRACK-C", "IMPL-TRACK-C"],
+      pseudocode: `# [IMPL-TRACK-C] [ARCH-TRACK-C] [REQ-TRACK-C]
+procedure WRITER:
+  # [IMPL-TRACK-C] [ARCH-TRACK-C] [REQ-TRACK-C]
+  Contract:
+    INPUT: target
+    OUTPUT: target
+    PRE: target is present
+    POST: target is updated
+    EFFECTS: State
+    TERMINATION: total
+  mutates target`,
+    });
+
+    assert.equal(report.ok, false);
+    assert.ok(report.diagnostics.some((diagnostic) => diagnostic.code === "MISSING_DATA_TRANSITION"));
+  });
+
   it("diagnoses missing token linkage, contracts, and unresolved calls", () => {
     const report = validateEssencePseudocode({
       token: "ARCH-QUALITY_ASSURANCE_PROFILES",

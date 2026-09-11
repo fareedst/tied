@@ -33,11 +33,13 @@ procedure VALIDATE_ESSENCE_PSEUDOCODE(input):
   # How: Collect and validate every semantic token reference against the known registry.
   COLLECT semantic token references from the text
   REPORT missing target or unknown token references
-  # [IMPL-QUALITY_PSEUDOCODE_VALIDATOR] [ARCH-QUALITY_ASSURANCE_PROFILES] [REQ-QUALITY_ASSURANCE_EVIDENCE]
-  # How: Check each procedure for block linkage and applicable contract precision.
+  # [IMPL-QUALITY_PSEUDOCODE_VALIDATOR] [ARCH-QUALITY_ASSURANCE_PROFILES] [REQ-QUALITY_ASSURANCE_EVIDENCE] [REQ-PSEUDOCODE_STATIC_ANALYSIS]
+  # How: Check each procedure for block linkage and applicable contract precision using tokenScan bounds from shared scan.
   FOR each procedure range:
-    REPORT missing token linkage or required contract fields
+    EXTRACT token refs from [tokenScanStart, tokenScanEnd) so external block-leads count and inter-procedure leads do not leak
+    REPORT missing token linkage or required contract fields on the procedure body through tokenScanEnd
     REPORT missing failure, state-transition, or termination declarations when the body requires them
+    WHEN mutation heuristic matches: IGNORE negated phrases (`never|does not|do not` before `mutat`) and honor declared DATA_TRANSITION
   # [IMPL-QUALITY_PSEUDOCODE_VALIDATOR] [ARCH-QUALITY_ASSURANCE_PROFILES] [REQ-QUALITY_ASSURANCE_EVIDENCE]
   # How: Resolve local calls while treating cross-IMPL RUN references as external composition.
   RESOLVE CALL dependencies against defined procedures and built-ins; RUN IMPL references are not dependency edges

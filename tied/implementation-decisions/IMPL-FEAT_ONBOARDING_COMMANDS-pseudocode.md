@@ -13,8 +13,8 @@ Contract:
   TERMINATION: total
 
 ## DISPATCH_ONBOARDING_COMMAND
-# [IMPL-FEAT_ONBOARDING_COMMANDS] [ARCH-FEAT_ONBOARDING_BOUNDARY] [REQ-FEAT_ONBOARDING_COMMANDS] — classify the safe top-level command and route it to one validated delegate.
 procedure DISPATCH_ONBOARDING_COMMAND(argv, environment, project_root):
+# [IMPL-FEAT_ONBOARDING_COMMANDS] [ARCH-FEAT_ONBOARDING_BOUNDARY] [REQ-FEAT_ONBOARDING_COMMANDS] — classify the safe top-level command and route it to one validated delegate.
   # [IMPL-FEAT_ONBOARDING_COMMANDS] [ARCH-FEAT_ONBOARDING_BOUNDARY] [REQ-FEAT_ONBOARDING_COMMANDS] — route one command to one validated delegate.
   DATA_TRANSITION: configuration remains unchanged unless an explicit delegated create/init path succeeds; readiness diagnostics never mutate project state.
   Resolve argv to tied init, tied feature new, or tied feature build.
@@ -33,15 +33,15 @@ procedure DISPATCH_ONBOARDING_COMMAND(argv, environment, project_root):
   Return delegated result and next corrective action.
 
 ## REPORT_ADVANCED_PATHS
-# [IMPL-FEAT_ONBOARDING_COMMANDS] [ARCH-FEAT_ONBOARDING_BOUNDARY] [REQ-FEAT_ADOPTION_GUIDANCE] — keep direct TIED and agentstream surfaces discoverable rather than replacing them.
 procedure REPORT_ADVANCED_PATHS():
+# [IMPL-FEAT_ONBOARDING_COMMANDS] [ARCH-FEAT_ONBOARDING_BOUNDARY] [REQ-FEAT_ADOPTION_GUIDANCE] — keep direct TIED and agentstream surfaces discoverable rather than replacing them.
   # [IMPL-FEAT_ONBOARDING_COMMANDS] [ARCH-FEAT_ONBOARDING_BOUNDARY] [REQ-FEAT_ADOPTION_GUIDANCE] — expose direct tooling and offline references.
   DATA_TRANSITION: no project or configuration mutation; only reference paths are returned.
   Return tied-cli, TIED YAML MCP, agentstream, and manual/offline references.
 
 ## MAIN_ONBOARDING
-# [IMPL-FEAT_ONBOARDING_COMMANDS] [ARCH-FEAT_ONBOARDING_BOUNDARY] [REQ-FEAT_ONBOARDING_COMMANDS] — emit JSON and exit without mutating configuration when an offline fallback is actionable.
 procedure MAIN_ONBOARDING(argv):
+# [IMPL-FEAT_ONBOARDING_COMMANDS] [ARCH-FEAT_ONBOARDING_BOUNDARY] [REQ-FEAT_ONBOARDING_COMMANDS] — emit JSON and exit without mutating configuration when an offline fallback is actionable.
   # [IMPL-FEAT_ONBOARDING_COMMANDS] [ARCH-FEAT_ONBOARDING_BOUNDARY] [REQ-FEAT_ONBOARDING_COMMANDS] — treat actionable fallback as a successful demo/operator handoff exit.
   PRE: argv is parsed from process arguments
   POST: stdout contains the delegated onboarding_result or readiness_diagnostic JSON

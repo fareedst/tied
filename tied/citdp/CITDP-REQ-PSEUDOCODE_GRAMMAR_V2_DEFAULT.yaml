@@ -1,0 +1,203 @@
+CITDP-REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT:
+  change_definition:
+    current_behavior: "New TIED sidecar generation and authoring guidance still describe v1 as the default when the Grammar-Version header is absent; the linked plan combines a new-project policy change with later validator and sidecar-hygiene work."
+    desired_behavior: "Adopt an explicit Grammar-Version v2 default for newly generated TIED client sidecars at the template/bootstrap boundary, preserve v1 behavior for existing headerless sidecars, and keep Track C validator hardening and Track B sidecar cleanup separately sequenced for later implementation."
+    falsification_questions:
+      - "Can a fresh client still generate a sidecar without the exact v2 header?"
+      - "Can a headerless sidecar accidentally be reinterpreted as v2?"
+      - "Can an audit report claim runtime or constraint proof from header presence alone?"
+      - "Can Track C or Track B changes be pulled into Track A without a new build-plan scope decision?"
+    non_goals:
+      - "Global parser-default change"
+      - "Implementing Track C validator hardening or Track B sidecar sweep"
+      - "Mandatory constraint_flow activation"
+      - "Mass migration of existing stdd or client sidecars"
+      - "Runtime product behavior beyond template/bootstrap and audit policy"
+    success_criteria:
+      - "Canonical new-sidecar template and bootstrap path are specified as the authoritative source of Grammar-Version v2 for new clients."
+      - "Plan distinguishes header presence, Layer B, Layer C gate_mode, constraint_flow=false compatibility, and legacy-v1 compatibility as separate evidence dimensions."
+      - "Refined plan identifies generation, audit, and parser-compatibility module boundaries and requires independent validation before composition."
+      - "Tracker, CITDP, inquiry evidence, and pre-implementation gate paths are explicit without claiming implementation or verification completion."
+    unchanged_behavior:
+      - "Existing headerless sidecars remain v1-compatible and are not mass migrated."
+      - "Grammar v2 remains additive; constraint_flow stays opt-in and is not required by the default header."
+      - "This refine pass does not implement bootstrap scripts, validator code, cohort audit tooling, or sidecar migration."
+  completion_criteria:
+    activation:
+      phase: close_out
+      request_token: REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT
+      run_id: grammar-v2-closeout-20260911
+    checklist_gate:
+      dispositions:
+        - "completed"
+        - "not_applicable"
+        - "pending"
+        - "waived"
+      fail_closed: true
+      phases:
+        - "close_out"
+        - "pre_implementation"
+        - "verification"
+    proof_boundaries:
+      - "No completion claim for implementation or verification is made by this CITDP."
+    verification_gate_notes: "Track A close-out 2026-09-11: 12/12 grammar-v2-default unit tests, 3/3 audit composition tests, audit CLI smoke pass; advisory verification inquiry warn; envelope blocking gaps zero at integrated depth."
+  evidence:
+    commands:
+      - "pseudocode_analyze gate_mode=true"
+      - "pseudocode_validate"
+      - "tied_adversarial_inquiry_run phase=pre_implementation policy=advisory"
+      - "tied_checklist_activation_collect phase=pre_implementation"
+      - "tied_checklist_gate_validate phase=pre_implementation"
+      - "tied_config_get_base_path"
+      - "tied_validate_consistency"
+      - "yaml_index_validate"
+    proof_boundaries:
+      - "Commands prove only their named structural/configuration or gate behavior; they do not prove runtime implementation."
+  impact_analysis:
+    first_divergence_hypotheses:
+      - "Header audit may be mistaken for Layer B/C or runtime proof."
+      - "Legacy compatibility may be lost if parser default selection changes globally."
+      - "Template or migration documentation policy may diverge from bootstrap output."
+    impl_inventory:
+      - "IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+    impl_inventory_notes: "Only IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT is changed/in scope; declared bootstrap/template/audit/test paths are later /build-plan targets and no production or test files are created here."
+    modules_or_boundaries:
+      - audit_module: "disposable-client audit with independent header, Layer B, Layer C, constraint_flow, and legacy dimensions"
+      - composition_boundary: "later bootstrap-to-audit wiring, validated only after the three modules pass independently"
+      - generation_module: "canonical template and new-client bootstrap preservation of Grammar-Version v2"
+      - parser_compatibility_module: "header-based classification preserving legacy-v1 behavior without global default changes"
+    tied_tokens_affected:
+      - "ARCH-PSEUDOCODE_GRAMMAR_V2"
+      - "ARCH-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+      - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
+      - "IMPL-PSEUDOCODE_ANALYSIS_ENGINE"
+      - "IMPL-PSEUDOCODE_GRAMMAR_V2"
+      - "IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+      - "IMPL-QUALITY_PSEUDOCODE_VALIDATOR"
+      - "IMPL-TIED_FILES"
+      - "REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE"
+      - "REQ-PSEUDOCODE_PARSER_UNIFICATION"
+      - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+      - "REQ-TIED_SETUP"
+    tied_tokens_new:
+      - "ARCH-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+      - "IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+      - "REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+  leap_feedback:
+    divergences_from_analysis: []
+    record_status: "final"
+    tied_stack_updates_required: []
+  record_identity:
+    author: "refine-plan subagent"
+    change_request_id: "REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+    citdp_id: "CITDP-REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+    created_at: "2026-09-11"
+    status: "final"
+    title: "New-project grammar v2 default and pseudocode hygiene plan refinement"
+    updated_at: "2026-09-11"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Generated template omits or relocates the v2 header."
+        - "Header audit reports pass while Layer B or Layer C is missing or failing."
+        - "Legacy headerless sidecar is rewritten or parsed as v2."
+        - "Track A silently expands into Track B migration or Track C validator behavior."
+      depth_change_waiver: null
+      depth_tier: "integrated"
+      eligibility_triggers_matched:
+        - "strict close-out"
+      evidence_references:
+        - "docs/pseudocode-grammar-v2-and-hygiene-plan.md"
+        - "tied/docs/pseudocode-writing-and-validation.md"
+        - "tied/implementation-decisions/IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT-pseudocode.md"
+      falsification_questions:
+        - "Does a headerless sidecar remain classified as legacy_v1?"
+        - "Does the audit keep header, Layer B, Layer C, constraint_flow, and legacy evidence independent?"
+        - "Does the generated sidecar contain the exact v2 header as the first non-comment preamble line?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      profile_depth: "integrated"
+      proof_boundary: "Advisory structural and specification-fidelity inquiry only; no runtime correctness, test execution, or production implementation proof."
+      rationale: "The plan changes a tested bootstrap/template policy and explicitly requests integrated pre-implementation evidence. Advisory policy keeps observations review-gated and non-blocking; integrated inquiry is independent from assurance and evidence-chain measurement."
+      research_profile: "integrated-agent"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "Deferred to /build-plan targeted grammar-v2-default tests and disposable-client audit"
+        evidence_method: "Unit/contract tests for header selection and audit classification; disposable-client smoke at bootstrap boundary."
+        limitation: "No runtime implementation or executable test exists in this refine pass."
+        owner: "TIED implementation owner"
+        rationale: "Behavior-changing policy must be tested at template/bootstrap and audit boundaries."
+        result: "planned"
+        risk: "Incorrect generated default or incomplete audit dimensions."
+        threshold: "Header, Layer B, Layer C, constraint_flow=false, and legacy dimensions are independently reported; expected cases pass."
+      - applicability: "applicable"
+        attribute: "data-integrity-migration"
+        command_or_test: "Deferred to /build-plan legacy fixture regression and disposable-client smoke"
+        evidence_method: "Content-preservation checks for legacy fixtures plus explicit-v2/legacy-v1 parser regression tests and exact generated-header inspection."
+        limitation: "Compatibility/data-preservation assurance, not database migration or runtime persistence proof."
+        owner: "TIED implementation owner"
+        rationale: "No database migration is proposed, but generated sidecar content and legacy compatibility must preserve existing files and grammar semantics."
+        result: "planned"
+        risk: "Template/bootstrap changes rewrite or corrupt existing sidecars or alter headerless parsing."
+        threshold: "Existing sidecars unchanged; absent header remains v1; new sidecars contain exact v2 header; no unrelated body loss."
+    quality_profiles:
+      - "baseline-functional"
+      - "data-integrity-migration"
+    risks:
+      - description: "Changing the generated default could break legacy sidecar interpretation if parser selection becomes global rather than header-based."
+        id: "RISK-GRAMMAR-V2-001"
+        likelihood: "Medium"
+        mitigation: "Keep header-based classification; test explicit v2 and absent-header v1 fixtures separately; no mass migration."
+        quality_attribute: "reliability"
+        severity: "High"
+      - description: "Header presence could be overclaimed as proof of Layer B, Layer C, or runtime behavior."
+        id: "RISK-GRAMMAR-V2-002"
+        likelihood: "Medium"
+        mitigation: "Emit separate audit dimensions with explicit proof boundaries and advisory inquiry findings."
+        quality_attribute: "correctness"
+        severity: "High"
+      - description: "Template/bootstrap output could be inconsistent across fresh-client paths."
+        id: "RISK-GRAMMAR-V2-003"
+        likelihood: "Medium"
+        mitigation: "Treat canonical template/bootstrap as authoritative; use disposable-client smoke and exact header inspection."
+        quality_attribute: "data-integrity"
+        severity: "Medium"
+      - description: "Track A could absorb deferred validator hardening or mass sidecar cleanup."
+        id: "RISK-GRAMMAR-V2-004"
+        likelihood: "Medium"
+        mitigation: "Keep Track C/B as separate follow-on /build-plan work with explicit non-goals and tracker dispositions."
+        quality_attribute: "scope-control"
+        severity: "Medium"
+    scenarios:
+      - "Audit receives independent Layer B and Layer C reports."
+      - "Existing headerless legacy sidecar is classified as v1 and left unchanged."
+      - "Explicit v2 sidecar is accepted without constraint_flow."
+      - "Fresh client bootstrap creates a new sidecar from the canonical template."
+      - "Malformed or unsupported grammar header is reported as InvalidVersionHeader."
+      - "Track C and Track B remain deferred and do not modify Track A scope."
+  tdd_sequence:
+    order:
+      - "Complete refined plan and authoritative Tracker/CITDP."
+      - "Run integrated advisory pre_implementation inquiry."
+      - "Validate pre_implementation gate."
+      - Later /build-plan: "Layer A/B/C gate and persist implementation records."
+      - Later /build-plan: "RED unit tests."
+      - Later /build-plan: "independent module validation."
+      - Later /build-plan: "composition RED tests then composition code."
+      - "Verification gate and close-out in a later workflow."
+    summary: "Refine/CITDP then pre-implementation inquiry and gate, then later /build-plan IMPL validation, RED tests, GREEN modules, composition, verification, and close-out; implementation and verification remain pending in this pass."
+  test_strategy:
+    composition: "Fresh-client bootstrap-to-audit contract and disposable-client smoke without UI invocation."
+    e2e: "not_applicable - no UI-only behavior; file/bootstrap and MCP composition boundaries are programmatically testable."
+    proof_boundaries:
+      - "Adversarial inquiry is advisory and review-gated; observations are not confirmed defects or LEAP triggers."
+      - "Header audit proves generated-policy/header dimensions only, not runtime behavior or complete path coverage."
+      - "Layer B proves pseudo-code structure, token linkage, contracts, and dependency diagnostics only."
+      - "Layer C proves bounded static analysis under declared grammar/budgets with gate_mode semantics only."
+    regression: "Existing v1/v2 grammar and pseudocode_validate regressions; full relevant MCP/tooling suite in /build-plan."
+    summary: "Pre-RED validates IMPL Layer A, Layer B, and Layer C gate_mode; later /build-plan writes RED tests for generation, audit dimensions, and legacy compatibility before implementation. Composition tests cover bootstrap-to-audit wiring only after independent modules pass. No E2E is required because scope is CLI/file/tooling and UI-free."
+    unit: "Generation selection and legacy classification; audit dimension validation; malformed header and body-preservation cases."

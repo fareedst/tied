@@ -80,4 +80,4 @@ See `working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/constraint-measurement-report.md
 
 ## Template note
 
-`templates/impl-essence-pseudocode-template.md` notes v2 as **optional**; v1 remains the default for new IMPL sidecars unless constraint-language precision is required.
+`templates/impl-essence-pseudocode-template.md` declares **`Grammar-Version: v2`** for **new TIED client projects** and newly generated sidecars copied from that template. Existing headerless sidecars remain **legacy v1**; constraint-language precision (`constraint_flow`) stays opt-in and is not required by the header alone.

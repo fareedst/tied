@@ -47,6 +47,7 @@ TIED uses bracket tokens in plain text. **Every block** in `essence_pseudocode` 
 
 ## 3a. Block lead comments in source and tests (literal copy)
 
+- **Procedure block-lead placement (mandatory for new/changed procedures):** For every `procedure` / `function` / `block` heading, the semantic block-lead comment (`# [IMPL-*] [ARCH-*] [REQ-*] …`) **must appear inside the procedure body**—immediately after the heading and before the first `Contract:` row (or before the first body step when no contract is declared). Do **not** place block-leads on lines above the procedure heading or in the gap between procedures; external-only and inter-procedure placement breaks literal-copy alignment even when Layer B validation tolerates the pattern. Audit with `node scripts/normalize-sidecar-block-leads.mjs --check`.
 - **IMPL grammar** in `essence_pseudocode` is defined by the TIED vocabulary in §2 and §4—not by any product programming language.
 - For **each** logical block, the **block lead** line(s) that satisfy `[PROC-IMPL_PSEUDOCODE_TOKENS]` (REQ/ARCH/IMPL naming + *how* / one-line summary per block rules) **must be copied literally** into:
   - the test locus for that block, and

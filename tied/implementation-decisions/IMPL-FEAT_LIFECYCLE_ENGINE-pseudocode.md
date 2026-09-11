@@ -12,8 +12,8 @@ Contract:
   TERMINATION: total
 
 ## LIFECYCLE_TRANSITION_MATRIX
-# [IMPL-FEAT_LIFECYCLE_ENGINE] [ARCH-FEAT_LIFECYCLE_STATE_MACHINE] [REQ-FEAT_LIFECYCLE] — How: encode draft → refining → specified → planned → tasked → verifying → closed and terminal abandoned.
 procedure EVALUATE_TRANSITION(current_phase, requested_phase, validation_evidence, approval_context):
+# [IMPL-FEAT_LIFECYCLE_ENGINE] [ARCH-FEAT_LIFECYCLE_STATE_MACHINE] [REQ-FEAT_LIFECYCLE] — How: encode draft → refining → specified → planned → tasked → verifying → closed and terminal abandoned.
   Contract:
     INPUT: current_phase; requested_phase; validation_evidence; approval_context
     PRE: phases are known
@@ -29,7 +29,6 @@ procedure EVALUATE_TRANSITION(current_phase, requested_phase, validation_evidenc
   RETURN allow requested_phase
 
 ## APPLY_ACCEPTED_TRANSITION
-# [IMPL-FEAT_LIFECYCLE_ENGINE] [ARCH-FEAT_LIFECYCLE_STATE_MACHINE] [REQ-FEAT_LIFECYCLE] — How: apply an allowed transition as one immutable revision.
 procedure APPLY_ACCEPTED_TRANSITION(manifest, transition_result):
   # [IMPL-FEAT_LIFECYCLE_ENGINE] [ARCH-FEAT_LIFECYCLE_STATE_MACHINE] [REQ-FEAT_LIFECYCLE] — How: apply an allowed transition as one immutable revision.
   Contract:

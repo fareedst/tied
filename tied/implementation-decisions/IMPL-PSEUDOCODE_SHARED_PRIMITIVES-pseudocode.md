@@ -28,19 +28,22 @@ procedure EXTRACT_SEMANTIC_TOKENS(text, options):
   IF options.unique: RETURN sorted distinct tokens
   RETURN tokens in match order
 
-# [IMPL-PSEUDOCODE_SHARED_PRIMITIVES] [ARCH-PSEUDOCODE_PARSER_UNIFICATION] [REQ-PSEUDOCODE_PARSER_UNIFICATION]
-# How: Scan procedure/function/block headings and derive half-open line ranges.
+# [IMPL-PSEUDOCODE_SHARED_PRIMITIVES] [ARCH-PSEUDOCODE_PARSER_UNIFICATION] [REQ-PSEUDOCODE_PARSER_UNIFICATION] [REQ-PSEUDOCODE_STATIC_ANALYSIS]
+# How: Scan procedure/function/block headings and derive half-open [start, end) CFG ranges plus tokenScanStart/tokenScanEnd for Layer B token linkage.
 procedure SCAN_PROCEDURE_BLOCKS(lines):
-  # [IMPL-PSEUDOCODE_SHARED_PRIMITIVES] [ARCH-PSEUDOCODE_PARSER_UNIFICATION] [REQ-PSEUDOCODE_PARSER_UNIFICATION]
+  # [IMPL-PSEUDOCODE_SHARED_PRIMITIVES] [ARCH-PSEUDOCODE_PARSER_UNIFICATION] [REQ-PSEUDOCODE_PARSER_UNIFICATION] [REQ-PSEUDOCODE_STATIC_ANALYSIS]
   Contract:
     INPUT: source lines
-    OUTPUT: ordered procedure ranges with kind and [start, end) bounds
+    OUTPUT: ordered procedure ranges with kind, [start, end) CFG bounds, and [tokenScanStart, tokenScanEnd) token bounds
     PRE: lines is an array
-    POST: ranges preserve source order; empty input yields empty output
+    POST: ranges preserve source order; contiguous external `# [TOKEN]` block-leads above a heading attach to that procedure; trailing inter-procedure block-leads are excluded from the previous procedure token scan; CFG ranges remain half-open between headings
     EFFECTS: pure
     TERMINATION: total
   FOR each line: IF heading matches procedure/function/block THEN record start index
-  FOR each recorded start: SET end to next start or line count
+  FOR each recorded start:
+    SET end to next start or line count
+    WALK upward from start while lines are contiguous block-lead comments matching `# [REQ|ARCH|IMPL-` and SET tokenScanStart
+    WALK backward from end while lines before end are inter-procedure block-lead comments and SET tokenScanEnd
   RETURN ranges
 
 # [IMPL-PSEUDOCODE_SHARED_PRIMITIVES] [ARCH-PSEUDOCODE_PARSER_UNIFICATION] [REQ-PSEUDOCODE_PARSER_UNIFICATION]

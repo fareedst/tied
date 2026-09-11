@@ -1,0 +1,604 @@
+{
+  "schema_version": "block-lead-inventory.v1",
+  "generated_at": "2026-09-11T20:06:35.008Z",
+  "file_count": 5,
+  "totals": {
+    "external_only": 43,
+    "inter_procedure": 42
+  },
+  "files": {
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md": {
+      "impl_token": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+      "external_only": [
+        {
+          "line_index": 3,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: validate disposition contracts and reject generic skips.",
+          "procedure": "VALIDATE_TRACKER",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 14,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: validate adversarial section shape for CITDP persistence without progression pairing.",
+          "procedure": "VALIDATE_CITDP_OPEN_RECORD",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 31,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: enforce depth-specific adversarial obligations before progression.",
+          "procedure": "VALIDATE_ADVERSARIAL_CONTRACT",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 42,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: pair the successful inquiry receipt with all four identity-bound artifacts.",
+          "procedure": "VALIDATE_ACTIVATION_PAIRING",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 63,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: derive auto-required Tracker slugs from depth and gate phase; caller slugs union only.",
+          "procedure": "DERIVE_PHASE_AWARE_SLUGS",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 77,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: emit warn-only minimal_depth_missing_waiver when §7 eligibility triggers match, depth_tier is minimal, and integrated_waiver is incomplete.",
+          "procedure": "VALIDATE_MINIMAL_WAIVER",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 92,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: reject silent downgrade from integrated or strict_candidate to minimal without waiver.",
+          "procedure": "VALIDATE_DEPTH_DOWNGRADE",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 108,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: require completion_criteria.activation on gate read at late integrated phases.",
+          "procedure": "VALIDATE_COMPLETION_ACTIVATION",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 123,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: bind each inquiry receipt to exactly one gate phase.",
+          "procedure": "VALIDATE_RECEIPT_PHASE",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 137,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: reject placeholder waiver values so close_out cannot bypass pairing with tilde or empty fields.",
+          "procedure": "VALIDATE_WAIVER_FIELD",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 150,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: depth-change and close-out inquiry waivers require real owner, expiry, rationale, approval, and referenced run_id fields.",
+          "procedure": "HAS_VALID_CLOSE_OUT_INQUIRY_WAIVER",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 163,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: derive activation.expected from a complete receipt when the caller omits expected; never infer missing receipt fields.",
+          "procedure": "DERIVE_EXPECTED_FROM_RECEIPT",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 178,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: at minimal depth require sub-adversarial-inquiry-pass to be not_applicable or waived; pending fails at every gate phase.",
+          "procedure": "VALIDATE_MINIMAL_SUB_STUB_DISPOSITION",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 191,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: at integrated depth a completed parent slug cannot coexist with a pending sub-adversarial-inquiry-pass.",
+          "procedure": "VALIDATE_INTEGRATED_PARENT_CHILD_SLUGS",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 204,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: reject sparse Tracker missing phase-aware slug dispositions (remediation A1).",
+          "procedure": "VALIDATE_TRACKER_SPARSE",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 215,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: reject synthetic Tracker projections substituted for authoritative file (remediation A2).",
+          "procedure": "VALIDATE_TRACKER_AUTHORITATIVE",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 226,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: require complete evidence provenance identity and command retention (remediation A3/A6).",
+          "procedure": "VALIDATE_PROVENANCE_COMPLETE",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 237,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: unresolved or warn findings block under strict policy; advisory policy keeps them visible but non-blocking (Wave 1 W1-D2).",
+          "procedure": "VALIDATE_FINDING_DISPOSITION",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 248,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: load phase inquiry artifacts into gate evidence when activation supplies paths (Wave 1 W1-D1).",
+          "procedure": "HYDRATE_GATE_EVIDENCE_FROM_ACTIVATION",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 260,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: reject self-reported command success without retained output/manifest (remediation A6).",
+          "procedure": "VALIDATE_COMMAND_EVIDENCE",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 271,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: reject stale or hash-mismatched activation evidence (remediation A7).",
+          "procedure": "VALIDATE_EVIDENCE_FRESHNESS",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 282,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: reject dirty or untracked post-gate tree at close_out (remediation A15).",
+          "procedure": "VALIDATE_CLOSE_OUT_TREE",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 293,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: emit stable remediation diagnostics alongside granular codes.",
+          "procedure": "NORMALIZE_REMEDIATION_DIAGNOSTICS",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 304,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-REQUEST_EVIDENCE_ENVELOPE] [REQ-PSEUDOCODE_STATIC_ANALYSIS] — How: W7-D5 fail verification/close_out when envelope reports PSA expected_artifact_missing and gate-pseudocode-validation is completed without hydrated reports.",
+          "procedure": "VALIDATE_ENVELOPE_PSA_HYDRATION",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 366,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: read persisted phase artifacts and assemble gate activation payload without writing artifacts or mutating CITDP.",
+          "procedure": "COLLECT_CHECKLIST_ACTIVATION",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 390,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: convert read-only checklist definition into clean per-request Authoritative Tracker state including gate-governed sub-procedures.",
+          "procedure": "MATERIALIZE_AUTHORITATIVE_TRACKER",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 410,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: parse strict agentstream_tracker completion receipt from captured assistant transcript without mutating routing semantics.",
+          "procedure": "PARSE_TRACKER_COMPLETION_RECEIPT",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 428,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: merge one validated receipt into exactly one Tracker step and recompute derived compatibility summary only after authoritative write succeeds.",
+          "procedure": "APPLY_TRACKER_DISPOSITION",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 447,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: apply loop_back_clearance target slugs by resetting downstream dispositions and evidence before queue replacement.",
+          "procedure": "INVALIDATE_TRACKER_DOWNSTREAM",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 464,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: wire executor transcript through receipt parser and writer before advancing checklist turns; route goto through downstream invalidation first.",
+          "procedure": "COMPOSE_TRACKER_WITH_CHECKLIST_GATE",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 485,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: persist CITDP using open-record validation; progression gates remain separate.",
+          "procedure": "WRITE_CITDP_RECORD",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 502,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: hash rendered turn prompt bytes and append instruction_rendered adherence event before subprocess.",
+          "procedure": "RENDER_INSTRUCTION_EVIDENCE",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 521,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: separate final assistant text from thinking stream so receipt scan excludes non-final content.",
+          "procedure": "SEPARATE_FINAL_ASSISTANT_TEXT",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 534,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: validate Tracker completion receipt binding fields against issued instruction for current turn.",
+          "procedure": "BIND_RECEIPT_TO_INSTRUCTION",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 550,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: resolve completed disposition evidence_refs to files, manifests, or command receipts before Tracker write.",
+          "procedure": "RESOLVE_EVIDENCE_REFS",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 573,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: persist raw checklist evidence gate decision with input Tracker/CITDP hash for reconciliation.",
+          "procedure": "PERSIST_GATE_DECISION_RECEIPT",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 591,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: persist tied_verify status mutation receipt linking previous and next statuses to gate receipt.",
+          "procedure": "PERSIST_STATUS_MUTATION_RECEIPT",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 608,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: read-only reconciliation comparing six event classes and emitting deterministic findings without mutating Tracker or TIED YAML.",
+          "procedure": "RECONCILE_ADHERENCE_CHAIN",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 630,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: expose read-only ReconcileReport via Go CLI stdout JSON and MCP subprocess wrapper without TypeScript finding logic.",
+          "procedure": "EXPOSE_RECONCILE_OPERATOR_SURFACE",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 647,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: reject dual-write tracker updates at close-out producers.",
+          "procedure": "REJECT_TRACKER_DUAL_WRITE",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 659,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: write and clear active-turn-marker.v1 around checklist subprocess so hooks correlate ledger rows without parsing prompts.",
+          "procedure": "ACTIVE_TURN_MARKER",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 676,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: append live action_attempted rows from hook bridge with bounded evidence_refs and hook_log_ref only.",
+          "procedure": "APPEND_ACTION_ATTEMPTED",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 694,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: read-only slug inventory diff between checklist definition and existing Tracker without mutating Tracker bytes.",
+          "procedure": "PREVIEW_TRACKER_MIGRATION",
+          "kind": "external_only"
+        }
+      ],
+      "inter_procedure": [
+        {
+          "line_index": 14,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: validate adversarial section shape for CITDP persistence without progression pairing.",
+          "from_procedure": "VALIDATE_TRACKER",
+          "to_procedure": "VALIDATE_CITDP_OPEN_RECORD",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 31,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: enforce depth-specific adversarial obligations before progression.",
+          "from_procedure": "VALIDATE_CITDP_OPEN_RECORD",
+          "to_procedure": "VALIDATE_ADVERSARIAL_CONTRACT",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 42,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: pair the successful inquiry receipt with all four identity-bound artifacts.",
+          "from_procedure": "VALIDATE_ADVERSARIAL_CONTRACT",
+          "to_procedure": "VALIDATE_ACTIVATION_PAIRING",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 63,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: derive auto-required Tracker slugs from depth and gate phase; caller slugs union only.",
+          "from_procedure": "VALIDATE_ACTIVATION_PAIRING",
+          "to_procedure": "DERIVE_PHASE_AWARE_SLUGS",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 77,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: emit warn-only minimal_depth_missing_waiver when §7 eligibility triggers match, depth_tier is minimal, and integrated_waiver is incomplete.",
+          "from_procedure": "DERIVE_PHASE_AWARE_SLUGS",
+          "to_procedure": "VALIDATE_MINIMAL_WAIVER",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 92,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: reject silent downgrade from integrated or strict_candidate to minimal without waiver.",
+          "from_procedure": "VALIDATE_MINIMAL_WAIVER",
+          "to_procedure": "VALIDATE_DEPTH_DOWNGRADE",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 108,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: require completion_criteria.activation on gate read at late integrated phases.",
+          "from_procedure": "VALIDATE_DEPTH_DOWNGRADE",
+          "to_procedure": "VALIDATE_COMPLETION_ACTIVATION",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 123,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: bind each inquiry receipt to exactly one gate phase.",
+          "from_procedure": "VALIDATE_COMPLETION_ACTIVATION",
+          "to_procedure": "VALIDATE_RECEIPT_PHASE",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 137,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: reject placeholder waiver values so close_out cannot bypass pairing with tilde or empty fields.",
+          "from_procedure": "VALIDATE_RECEIPT_PHASE",
+          "to_procedure": "VALIDATE_WAIVER_FIELD",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 150,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: depth-change and close-out inquiry waivers require real owner, expiry, rationale, approval, and referenced run_id fields.",
+          "from_procedure": "VALIDATE_WAIVER_FIELD",
+          "to_procedure": "HAS_VALID_CLOSE_OUT_INQUIRY_WAIVER",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 163,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: derive activation.expected from a complete receipt when the caller omits expected; never infer missing receipt fields.",
+          "from_procedure": "HAS_VALID_CLOSE_OUT_INQUIRY_WAIVER",
+          "to_procedure": "DERIVE_EXPECTED_FROM_RECEIPT",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 178,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: at minimal depth require sub-adversarial-inquiry-pass to be not_applicable or waived; pending fails at every gate phase.",
+          "from_procedure": "DERIVE_EXPECTED_FROM_RECEIPT",
+          "to_procedure": "VALIDATE_MINIMAL_SUB_STUB_DISPOSITION",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 191,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: at integrated depth a completed parent slug cannot coexist with a pending sub-adversarial-inquiry-pass.",
+          "from_procedure": "VALIDATE_MINIMAL_SUB_STUB_DISPOSITION",
+          "to_procedure": "VALIDATE_INTEGRATED_PARENT_CHILD_SLUGS",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 204,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: reject sparse Tracker missing phase-aware slug dispositions (remediation A1).",
+          "from_procedure": "VALIDATE_INTEGRATED_PARENT_CHILD_SLUGS",
+          "to_procedure": "VALIDATE_TRACKER_SPARSE",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 215,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: reject synthetic Tracker projections substituted for authoritative file (remediation A2).",
+          "from_procedure": "VALIDATE_TRACKER_SPARSE",
+          "to_procedure": "VALIDATE_TRACKER_AUTHORITATIVE",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 226,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: require complete evidence provenance identity and command retention (remediation A3/A6).",
+          "from_procedure": "VALIDATE_TRACKER_AUTHORITATIVE",
+          "to_procedure": "VALIDATE_PROVENANCE_COMPLETE",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 237,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: unresolved or warn findings block under strict policy; advisory policy keeps them visible but non-blocking (Wave 1 W1-D2).",
+          "from_procedure": "VALIDATE_PROVENANCE_COMPLETE",
+          "to_procedure": "VALIDATE_FINDING_DISPOSITION",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 248,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: load phase inquiry artifacts into gate evidence when activation supplies paths (Wave 1 W1-D1).",
+          "from_procedure": "VALIDATE_FINDING_DISPOSITION",
+          "to_procedure": "HYDRATE_GATE_EVIDENCE_FROM_ACTIVATION",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 260,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: reject self-reported command success without retained output/manifest (remediation A6).",
+          "from_procedure": "HYDRATE_GATE_EVIDENCE_FROM_ACTIVATION",
+          "to_procedure": "VALIDATE_COMMAND_EVIDENCE",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 271,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: reject stale or hash-mismatched activation evidence (remediation A7).",
+          "from_procedure": "VALIDATE_COMMAND_EVIDENCE",
+          "to_procedure": "VALIDATE_EVIDENCE_FRESHNESS",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 282,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: reject dirty or untracked post-gate tree at close_out (remediation A15).",
+          "from_procedure": "VALIDATE_EVIDENCE_FRESHNESS",
+          "to_procedure": "VALIDATE_CLOSE_OUT_TREE",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 293,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: emit stable remediation diagnostics alongside granular codes.",
+          "from_procedure": "VALIDATE_CLOSE_OUT_TREE",
+          "to_procedure": "NORMALIZE_REMEDIATION_DIAGNOSTICS",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 304,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-REQUEST_EVIDENCE_ENVELOPE] [REQ-PSEUDOCODE_STATIC_ANALYSIS] — How: W7-D5 fail verification/close_out when envelope reports PSA expected_artifact_missing and gate-pseudocode-validation is completed without hydrated reports.",
+          "from_procedure": "NORMALIZE_REMEDIATION_DIAGNOSTICS",
+          "to_procedure": "VALIDATE_ENVELOPE_PSA_HYDRATION",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 366,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: read persisted phase artifacts and assemble gate activation payload without writing artifacts or mutating CITDP.",
+          "from_procedure": "VALIDATE_CHECKLIST_GATE",
+          "to_procedure": "COLLECT_CHECKLIST_ACTIVATION",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 390,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: convert read-only checklist definition into clean per-request Authoritative Tracker state including gate-governed sub-procedures.",
+          "from_procedure": "COLLECT_CHECKLIST_ACTIVATION",
+          "to_procedure": "MATERIALIZE_AUTHORITATIVE_TRACKER",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 410,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: parse strict agentstream_tracker completion receipt from captured assistant transcript without mutating routing semantics.",
+          "from_procedure": "MATERIALIZE_AUTHORITATIVE_TRACKER",
+          "to_procedure": "PARSE_TRACKER_COMPLETION_RECEIPT",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 428,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: merge one validated receipt into exactly one Tracker step and recompute derived compatibility summary only after authoritative write succeeds.",
+          "from_procedure": "PARSE_TRACKER_COMPLETION_RECEIPT",
+          "to_procedure": "APPLY_TRACKER_DISPOSITION",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 447,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: apply loop_back_clearance target slugs by resetting downstream dispositions and evidence before queue replacement.",
+          "from_procedure": "APPLY_TRACKER_DISPOSITION",
+          "to_procedure": "INVALIDATE_TRACKER_DOWNSTREAM",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 464,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: wire executor transcript through receipt parser and writer before advancing checklist turns; route goto through downstream invalidation first.",
+          "from_procedure": "INVALIDATE_TRACKER_DOWNSTREAM",
+          "to_procedure": "COMPOSE_TRACKER_WITH_CHECKLIST_GATE",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 485,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: persist CITDP using open-record validation; progression gates remain separate.",
+          "from_procedure": "COMPOSE_TRACKER_WITH_CHECKLIST_GATE",
+          "to_procedure": "WRITE_CITDP_RECORD",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 502,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: hash rendered turn prompt bytes and append instruction_rendered adherence event before subprocess.",
+          "from_procedure": "WRITE_CITDP_RECORD",
+          "to_procedure": "RENDER_INSTRUCTION_EVIDENCE",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 521,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: separate final assistant text from thinking stream so receipt scan excludes non-final content.",
+          "from_procedure": "RENDER_INSTRUCTION_EVIDENCE",
+          "to_procedure": "SEPARATE_FINAL_ASSISTANT_TEXT",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 534,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: validate Tracker completion receipt binding fields against issued instruction for current turn.",
+          "from_procedure": "SEPARATE_FINAL_ASSISTANT_TEXT",
+          "to_procedure": "BIND_RECEIPT_TO_INSTRUCTION",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 550,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: resolve completed disposition evidence_refs to files, manifests, or command receipts before Tracker write.",
+          "from_procedure": "BIND_RECEIPT_TO_INSTRUCTION",
+          "to_procedure": "RESOLVE_EVIDENCE_REFS",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 573,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: persist raw checklist evidence gate decision with input Tracker/CITDP hash for reconciliation.",
+          "from_procedure": "RESOLVE_EVIDENCE_REFS",
+          "to_procedure": "PERSIST_GATE_DECISION_RECEIPT",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 591,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: persist tied_verify status mutation receipt linking previous and next statuses to gate receipt.",
+          "from_procedure": "PERSIST_GATE_DECISION_RECEIPT",
+          "to_procedure": "PERSIST_STATUS_MUTATION_RECEIPT",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 608,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: read-only reconciliation comparing six event classes and emitting deterministic findings without mutating Tracker or TIED YAML.",
+          "from_procedure": "PERSIST_STATUS_MUTATION_RECEIPT",
+          "to_procedure": "RECONCILE_ADHERENCE_CHAIN",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 630,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: expose read-only ReconcileReport via Go CLI stdout JSON and MCP subprocess wrapper without TypeScript finding logic.",
+          "from_procedure": "RECONCILE_ADHERENCE_CHAIN",
+          "to_procedure": "EXPOSE_RECONCILE_OPERATOR_SURFACE",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 647,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: reject dual-write tracker updates at close-out producers.",
+          "from_procedure": "EXPOSE_RECONCILE_OPERATOR_SURFACE",
+          "to_procedure": "REJECT_TRACKER_DUAL_WRITE",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 659,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: write and clear active-turn-marker.v1 around checklist subprocess so hooks correlate ledger rows without parsing prompts.",
+          "from_procedure": "REJECT_TRACKER_DUAL_WRITE",
+          "to_procedure": "ACTIVE_TURN_MARKER",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 676,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: append live action_attempted rows from hook bridge with bounded evidence_refs and hook_log_ref only.",
+          "from_procedure": "ACTIVE_TURN_MARKER",
+          "to_procedure": "APPEND_ACTION_ATTEMPTED",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 694,
+          "line": "# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: read-only slug inventory diff between checklist definition and existing Tracker without mutating Tracker bytes.",
+          "from_procedure": "APPEND_ACTION_ATTEMPTED",
+          "to_procedure": "PREVIEW_TRACKER_MIGRATION",
+          "kind": "inter_procedure"
+        }
+      ],
+      "external_only_count": 43,
+      "inter_procedure_count": 42
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-REQUEST_EVIDENCE_ENVELOPE-pseudocode.md": {
+      "impl_token": "IMPL-REQUEST_EVIDENCE_ENVELOPE",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-QUALITY_PSEUDOCODE_VALIDATOR-pseudocode.md": {
+      "impl_token": "IMPL-QUALITY_PSEUDOCODE_VALIDATOR",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER-pseudocode.md": {
+      "impl_token": "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-QUALITY_BINDING_INVENTORY-pseudocode.md": {
+      "impl_token": "IMPL-QUALITY_BINDING_INVENTORY",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    }
+  },
+  "ok": false,
+  "mode": "check",
+  "wave": "B1",
+  "root": "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions"
+}

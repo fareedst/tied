@@ -1,0 +1,41 @@
+ARCH-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP:
+  alternatives_considered:
+    - cons:
+        - "Authors still see misleading placement"
+        - "Three-way alignment and literal-copy remain broken"
+      name: "Rely on Track C validator acceptance only"
+      pros:
+        - "No sidecar edits required"
+      rejected_reason: "Track B hygiene goal is author clarity and alignment, not validator tolerance."
+    - cons:
+        - "Hard to gate and roll back"
+        - "High merge conflict risk"
+      name: "Single big-bang edit of all 90 sidecars"
+      pros:
+        - "One pass"
+      rejected_reason: "Phased waves with per-wave gates are safer for stdd hygiene."
+  cross_references:
+    - "ARCH-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+    - "REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP"
+  decision: "Use a dedicated normalize-sidecar-block-leads script with check/write modes, explicit wave file lists, and per-wave Layer B plus TIED consistency gates; defer doc/template sync to wave B4."
+  description: "A phased inventory-and-normalize script moves block-leads inside procedure bodies while Track C validator ranges remain unchanged and grammar version policy stays separate."
+  name: "Sidecar block-lead normalization boundary"
+  rationale:
+    benefits:
+      - "Clear separation from Track C validator behavior and Track A grammar policy"
+      - "Deterministic normalization with auditable JSON inventory"
+      - "Phased rollout limits merge conflicts"
+    problems_solved:
+      - "Author confusion when Track C accepts external leads but literal-copy expects internal placement"
+      - "Inconsistent external and inter-procedure block-lead placement across sidecars"
+    why: "Bulk manual edits across 90 sidecars are error-prone; a deterministic script with verbatim lead preservation and wave gates reduces merge risk without altering validator semantics."
+  status: "Draft"
+  traceability:
+    code_annotations:
+      - "ARCH-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP"
+    implementation:
+      - "IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP"
+    requirements:
+      - "REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP"
+    tests:
+      - "scripts/normalize-sidecar-block-leads.test.mjs"

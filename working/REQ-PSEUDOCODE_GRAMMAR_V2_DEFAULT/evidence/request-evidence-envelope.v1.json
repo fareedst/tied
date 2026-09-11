@@ -1,0 +1,385 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-09-11T20:56:14.019Z",
+    "generator": "request_evidence_envelope_patch",
+    "revision": 2
+  },
+  "identity": {
+    "request_token": "REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT",
+    "project_id": "af8451e933f573ec",
+    "depth_tier": "integrated",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [
+    {
+      "run_id": "run-close_out",
+      "phase": "close_out",
+      "started_at": null,
+      "generator": "request_evidence_envelope_build"
+    },
+    {
+      "run_id": "run-pre_implementation",
+      "phase": "pre_implementation",
+      "started_at": null,
+      "generator": "request_evidence_envelope_build"
+    },
+    {
+      "run_id": "run-verification",
+      "phase": "verification",
+      "started_at": null,
+      "generator": "request_evidence_envelope_build"
+    },
+    {
+      "run_id": "track-b-closeout-20260911",
+      "phase": "verification",
+      "started_at": null,
+      "generator": "evidence_chain_profile_generate"
+    }
+  ],
+  "artifacts": [
+    {
+      "kind": "adversarial_inquiry_gate",
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/adversarial-inquiry/phase-close_out/gate-result.json",
+      "content_hash": "sha256:196c677e7dabc7f9101a4afeed7a5c3bc93c77164afa1889a1073a70ea5c092a",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_gate",
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+      "content_hash": "sha256:63214cf123165b074d6c1f91227e1a3554f2456f6f9a0823cb0e804ca55a80e3",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_gate",
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/adversarial-inquiry/phase-verification/gate-result.json",
+      "content_hash": "sha256:196c677e7dabc7f9101a4afeed7a5c3bc93c77164afa1889a1073a70ea5c092a",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_ledger",
+      "schema_version": null,
+      "path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/adversarial-inquiry/phase-close_out/finding-ledger.jsonl",
+      "content_hash": "sha256:7e09378cc70afa297d4dc7275304c5c87f33e98caf164c197d54d0e045c156f6",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_ledger",
+      "schema_version": null,
+      "path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl",
+      "content_hash": "sha256:066de64a26c35fc21bc53eaede4af158494c6c6dc2b1a8ee02893adba314afc1",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_ledger",
+      "schema_version": null,
+      "path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
+      "content_hash": "sha256:7e09378cc70afa297d4dc7275304c5c87f33e98caf164c197d54d0e045c156f6",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_obligation",
+      "schema_version": "adversarial-inquiry-report.v1",
+      "path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/adversarial-inquiry/phase-close_out/obligation-report.json",
+      "content_hash": "sha256:0d9db9b0cb7f15bb0f2bcfffc91fc60b529ee9e8cb7e7a7f6b3de2e5f371d703",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_obligation",
+      "schema_version": "adversarial-inquiry-report.v1",
+      "path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+      "content_hash": "sha256:4e4ed78fb486a3a92cdf3802ca89184d0c5af0f5107ba3a0d8c3c0460a99e8ee",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_obligation",
+      "schema_version": "adversarial-inquiry-report.v1",
+      "path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/adversarial-inquiry/phase-verification/obligation-report.json",
+      "content_hash": "sha256:0d9db9b0cb7f15bb0f2bcfffc91fc60b529ee9e8cb7e7a7f6b3de2e5f371d703",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_provenance",
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/adversarial-inquiry/phase-close_out/evidence-provenance.json",
+      "content_hash": "sha256:c87888cbc3c4f7fd4fc67da0741d84d8bf2aa5bef1efcae452c0695d2e23100f",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "provenance_identity"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_provenance",
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json",
+      "content_hash": "sha256:db2f9600a15d5ad07e0e5de6d063251c0b9dd5009b919b9f64f1c1091248851f",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "provenance_identity"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_provenance",
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/adversarial-inquiry/phase-verification/evidence-provenance.json",
+      "content_hash": "sha256:e5e10c1691e75cf7e23400af68a1c2370377249e57bf9d46852b8ee664c5b478",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "provenance_identity"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": null,
+      "path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/gates/gate-pre_implementation-build-plan-result.json",
+      "content_hash": "sha256:051207e5acc7220504755c21070b98e5174d9581d6dc744702b38d758e8ef55f",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": null,
+      "path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/gates/gate-verification-build-plan-step2-result.json",
+      "content_hash": "sha256:c52c6576eeedf508ea2ce9849b86143e161743ab89370f294a369ce841241f23",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_tracker",
+      "schema_version": null,
+      "path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/agent-req-implementation-checklist.yaml",
+      "content_hash": "sha256:6ed2a557a79bf5bb12764cea7dd825275e37a743eb79250e7f9275c48c0f5c1d",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "tracker_disposition_only"
+      ]
+    },
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "tied/citdp/CITDP-REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml",
+      "content_hash": "sha256:3f132c0eb694d933f0fcb663533b4625d3026dc82035a08a8739c00b39731222",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    },
+    {
+      "kind": "evidence_chain_profile",
+      "schema_version": null,
+      "path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/evidence/evidence-chain-profile.v1.json",
+      "content_hash": "sha256:728ec1efe7f432dd86e1e210ac3c8dc78620ea0ada1fdda1397badf240af2c2b",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "evidence_chain_profile",
+      "schema_version": "evidence-chain-profile.v1",
+      "path": "working/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP/evidence/evidence-chain-profile.v1.json",
+      "content_hash": "sha256:0146a74bbe1a2f9238410e8f73b01cfceb3c350da722e8b5e5fa75ce6f7224c3",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "pseudocode_analysis_report",
+      "schema_version": "pseudocode-analysis-report.v1",
+      "path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/pseudocode-analysis/IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT.v1.json",
+      "content_hash": "sha256:ee507cefcc70dd76c10c90503bd739f1ee9ea97348d2e1ebb6fc950f9dc057ab",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "pseudocode_gate_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:0947885062e956bc376412d5b41217f931605eec185185e6eedfaa61e83b110b",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/evidence/composition-integration-evidence.md",
+      "content_hash": "sha256:1d464bb949dd1cd97e3ca1eb520012589a6536d405ec73a06ee01f7897c84c22",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/evidence/proposed-commit-message.txt",
+      "content_hash": "sha256:9f33c1615f102e48b8bb99cd98ffc0a9b49be765d4c7b4af2fd6c18059a3d7c6",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/evidence/test-strategy-evidence.md",
+      "content_hash": "sha256:e24ba43f757c64a1680ceb19a8f4f41b0cc22a1b3d3eb81dd2ebc0804874ad51",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/evidence/unit-test-green-evidence.md",
+      "content_hash": "sha256:7bfe752c5795a877d47ea448453fe962bfff7e541cab5d15f559bced5f968da8",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/evidence/unit-test-red-evidence.md",
+      "content_hash": "sha256:78a5ae6de728e05970268a2f0a33f72308115ffcbc3dd1553674c8f3891b6b73",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "verification_evidence_manifest",
+      "schema_version": "verification-evidence-manifest.v1",
+      "path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/evidence/verification-evidence-manifest.v1.json",
+      "content_hash": "sha256:f2bf64c6a18c87cca7520195f413fca68abf7b72d6293faeb2429146fddd5480",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/agent-req-implementation-checklist.yaml",
+    "tracker_hash": "sha256:6ed2a557a79bf5bb12764cea7dd825275e37a743eb79250e7f9275c48c0f5c1d",
+    "citdp_path": null,
+    "evidence_chain_profile_path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/evidence/evidence-chain-profile.v1.json"
+  },
+  "gaps": [
+    {
+      "code": "finding_unresolved",
+      "artifact_kind": "adversarial_inquiry_gate",
+      "phase": "close_out",
+      "detail": "finding_unresolved",
+      "severity": "warn",
+      "source": "A5"
+    },
+    {
+      "code": "finding_unresolved",
+      "artifact_kind": "adversarial_inquiry_gate",
+      "phase": "close_out",
+      "detail": "warn_not_success",
+      "severity": "warn",
+      "source": "A5"
+    },
+    {
+      "code": "finding_unresolved",
+      "artifact_kind": "adversarial_inquiry_gate",
+      "phase": "pre_implementation",
+      "detail": "finding_unresolved",
+      "severity": "warn",
+      "source": "A5"
+    },
+    {
+      "code": "finding_unresolved",
+      "artifact_kind": "adversarial_inquiry_gate",
+      "phase": "pre_implementation",
+      "detail": "warn_not_success",
+      "severity": "warn",
+      "source": "A5"
+    },
+    {
+      "code": "finding_unresolved",
+      "artifact_kind": "adversarial_inquiry_gate",
+      "phase": "verification",
+      "detail": "finding_unresolved",
+      "severity": "warn",
+      "source": "A5"
+    },
+    {
+      "code": "finding_unresolved",
+      "artifact_kind": "adversarial_inquiry_gate",
+      "phase": "verification",
+      "detail": "warn_not_success",
+      "severity": "warn",
+      "source": "A5"
+    }
+  ]
+}

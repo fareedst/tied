@@ -1,0 +1,64 @@
+IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT:
+  code_locations:
+    files:
+      - description: "Bootstrap entry point for new clients"
+        path: "copy_files.sh"
+      - description: "Bootstrap sidecar template copy for new clients"
+        path: "tools/bootstrap/lib/sidecar-template.mjs"
+      - description: "Canonical generated sidecar template header"
+        path: "templates/impl-essence-pseudocode-template.md"
+      - description: "Disposable-client grammar default audit (planned)"
+        path: "scripts/audit-grammar-v2-default.mjs"
+      - description: "New-project grammar default selection module"
+        path: "mcp-server/src/analysis/pseudocode-grammar-v2-default.ts"
+    functions:
+      - description: "Copy canonical sidecar template into new client projects"
+        name: "copySidecarTemplate"
+        path: "tools/bootstrap/lib/sidecar-template.mjs"
+      - description: "Select grammar v2 header for newly generated sidecar bodies"
+        name: "selectNewProjectGrammarDefault"
+        path: "mcp-server/src/analysis/pseudocode-grammar-v2-default.ts"
+  cross_references:
+    - "ARCH-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+    - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
+    - "REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+  essence_pseudocode_path: "implementation-decisions/IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT-pseudocode.md"
+  implementation_approach:
+    details:
+      - "Audit output distinguishes header presence, Layer B validation, Layer C gate_mode, and constraint_flow=false compatibility."
+      - "Legacy sidecars without the header remain v1; no mass migration is in scope."
+      - "Module validation is split between generation, audit, and parser-compatibility modules before composition."
+      - "Template and bootstrap are the authoritative generation path."
+    summary: "Put the header in the canonical sidecar template, preserve it through bootstrap, expose a deterministic audit dimension, and validate Layer B plus Layer C without enabling constraint_flow."
+  name: "Bootstrap and validate the new-project grammar v2 default"
+  rationale:
+    benefits:
+      - "Deterministic generated sidecar contract"
+      - "No constraint-language activation required for a v2 header"
+      - "Read-only audit evidence at the client boundary"
+    problems_solved:
+      - "Bootstrap and cohort evidence do not currently prove the generated-header policy"
+      - "Fresh sidecars do not state the intended grammar version"
+    why: "The new-project policy belongs at the template/bootstrap boundary, while parser selection remains header-based and legacy-compatible."
+  related_decisions:
+    depends_on:
+      - "IMPL-PSEUDOCODE_GRAMMAR_V2"
+      - "IMPL-TIED_FILES"
+    see_also:
+      - "IMPL-PSEUDOCODE_ANALYSIS_ENGINE"
+      - "IMPL-QUALITY_PSEUDOCODE_VALIDATOR"
+    supersedes: []
+  status: "Active"
+  testability: "integration"
+  traceability:
+    architecture:
+      - "ARCH-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+      - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
+    code_annotations:
+      - "IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+    requirements:
+      - "REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+    tests:
+      - "mcp-server/src/analysis/pseudocode-grammar-v2-default.test.ts"
+      - "scripts/audit-grammar-v2-default.mjs"
+      - "scripts/audit-grammar-v2-default.test.mjs"

@@ -575,6 +575,17 @@ ARCH-PSEUDOCODE_GRAMMAR_V2:
   name: "Grammar v2 surface and migration boundary"
   source_index: "architecture-decisions.yaml"
   status: "Draft"
+ARCH-PSEUDOCODE_GRAMMAR_V2_DEFAULT:
+  cross_references:
+    - "ARCH-PSEUDOCODE_GRAMMAR_V2"
+    - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
+    - "IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+    - "REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+  description: "Template-owned grammar v2 default boundary for newly generated sidecars with v1 compatibility for legacy sidecars."
+  detail_file: "architecture-decisions/ARCH-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml"
+  name: "New-project grammar v2 default boundary"
+  source_index: "architecture-decisions.yaml"
+  status: "Draft"
 ARCH-PSEUDOCODE_PARSER_UNIFICATION:
   cross_references:
     - "IMPL-PSEUDOCODE_SHARED_PRIMITIVES"
@@ -585,6 +596,15 @@ ARCH-PSEUDOCODE_PARSER_UNIFICATION:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP:
+  cross_references:
+    - "IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP"
+    - "REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP"
+  description: "Phased normalize script boundary with wave gates."
+  detail_file: "architecture-decisions/ARCH-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP.yaml"
+  name: "Sidecar block-lead normalization boundary"
+  source_index: "architecture-decisions.yaml"
+  status: "Draft"
 ARCH-PSEUDOCODE_TYPED_FLOW_PASS:
   cross_references:
     - "ARCH-PSEUDOCODE_ANALYSIS_PIPELINE"
@@ -1407,6 +1427,16 @@ IMPL-PSEUDOCODE_GRAMMAR_V2:
   name: "Grammar v2 parser and version detection"
   source_index: "implementation-decisions.yaml"
   status: "Draft"
+IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT:
+  cross_references:
+    - "ARCH-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+    - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
+    - "REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+  description: "Template/bootstrap implementation and audit contract for Grammar-Version: v2 defaults in new TIED sidecars."
+  detail_file: "implementation-decisions/IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml"
+  name: "Bootstrap and validate grammar v2 default"
+  source_index: "implementation-decisions.yaml"
+  status: "Draft"
 IMPL-PSEUDOCODE_SHARED_PRIMITIVES:
   cross_references:
     - "ARCH-PSEUDOCODE_PARSER_UNIFICATION"
@@ -1417,6 +1447,15 @@ IMPL-PSEUDOCODE_SHARED_PRIMITIVES:
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
+IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP:
+  cross_references:
+    - "ARCH-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP"
+    - "REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP"
+  description: "Script and wave orchestration for internal block-lead placement."
+  detail_file: "implementation-decisions/IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP.yaml"
+  name: "Normalize sidecar block-leads"
+  source_index: "implementation-decisions.yaml"
+  status: "Draft"
 IMPL-PSEUDOCODE_TYPED_FLOW:
   cross_references:
     - "ARCH-PSEUDOCODE_TYPED_FLOW_PASS"
@@ -2602,6 +2641,15 @@ REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE:
   name: "Full constraint-language and grammar v2 for pseudo-code static analysis"
   source_index: "requirements.yaml"
   status: "Draft"
+REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT:
+  cross_references:
+    - "ARCH-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+    - "IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+  description: "New TIED clients generate Grammar-Version: v2 sidecars while legacy sidecars remain v1-compatible."
+  detail_file: "requirements/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml"
+  name: "New-project grammar v2 default headers"
+  source_index: "requirements.yaml"
+  status: "Draft"
 REQ-PSEUDOCODE_PARSER_UNIFICATION:
   cross_references:
     - "ARCH-PSEUDOCODE_PARSER_UNIFICATION"
@@ -2612,6 +2660,15 @@ REQ-PSEUDOCODE_PARSER_UNIFICATION:
   source_index: "requirements.yaml"
   status: "Implemented"
   type: "REQ"
+REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP:
+  cross_references:
+    - "ARCH-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP"
+    - "IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP"
+  description: "Internal block-lead placement for IMPL sidecars across phased waves."
+  detail_file: "requirements/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP.yaml"
+  name: "Sidecar block-lead placement sweep"
+  source_index: "requirements.yaml"
+  status: "Draft"
 REQ-PSEUDOCODE_STATIC_ANALYSIS:
   cross_references:
     - "ARCH-PSEUDOCODE_ANALYSIS_PIPELINE"

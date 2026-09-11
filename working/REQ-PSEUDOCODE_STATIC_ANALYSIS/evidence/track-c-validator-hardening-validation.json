@@ -1,0 +1,30 @@
+{
+  "request_token": "REQ-PSEUDOCODE_STATIC_ANALYSIS",
+  "run_id": "track-c-validator-20260911",
+  "scope": "Track C — Layer B validator hardening (tokenScan bounds + negated mutates)",
+  "validated_at": "2026-09-11T20:00:00Z",
+  "before_diagnostics_resolved": [
+    {
+      "code": "MISSING_BLOCK_TOKEN_LINK",
+      "pattern": "external pre-procedure block-leads invisible to previous procedure scan"
+    },
+    {
+      "code": "MISSING_BLOCK_TOKEN_LINK",
+      "pattern": "inter-procedure block-leads leaked into previous procedure token refs"
+    },
+    {
+      "code": "MISSING_DATA_TRANSITION",
+      "pattern": "negated mutat* prose (never mutates) false positive"
+    }
+  ],
+  "checklist_gate_sidecar": {
+    "token": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+    "ok": true,
+    "error_diagnostics": 0
+  },
+  "tests": {
+    "pseudocode_shared": "7/7 pass",
+    "pseudocode_validator": "6/6 pass",
+    "analysis_suite": "305/305 pass"
+  }
+}

@@ -14,7 +14,6 @@ Contract:
   TERMINATION: total
 
 ## RUN_FEATURE_ORCHESTRATOR
-# [IMPL-FEAT_ORCHESTRATION_CLI] [ARCH-FEAT_ORCHESTRATION_BOUNDARY] [REQ-FEAT_ORCHESTRATION_SURFACE] — How: parse lifecycle arguments and delegate without mutating tied-cli.sh.
 procedure RUN_FEATURE_ORCHESTRATOR(argv):
   # [IMPL-FEAT_ORCHESTRATION_CLI] [ARCH-FEAT_ORCHESTRATION_BOUNDARY] [REQ-FEAT_ORCHESTRATION_SURFACE] — How: parse lifecycle arguments and delegate without mutating tied-cli.sh.
   Parse argv into an orchestration service request.

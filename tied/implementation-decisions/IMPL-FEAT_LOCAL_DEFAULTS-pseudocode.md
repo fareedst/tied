@@ -14,8 +14,8 @@ Contract:
   TERMINATION: total
 
 ## RESOLVE_LOCAL_DEFAULTS
-# [IMPL-FEAT_LOCAL_DEFAULTS] [ARCH-FEAT_LOCAL_DEFAULT_RESOLUTION] [REQ-FEAT_LOCAL_DEFAULTS] — apply explicit-over-environment-over-local precedence and preserve configuration ownership.
 procedure RESOLVE_LOCAL_DEFAULTS(explicit_options, environment, project_root):
+# [IMPL-FEAT_LOCAL_DEFAULTS] [ARCH-FEAT_LOCAL_DEFAULT_RESOLUTION] [REQ-FEAT_LOCAL_DEFAULTS] — apply explicit-over-environment-over-local precedence and preserve configuration ownership.
   # [IMPL-FEAT_LOCAL_DEFAULTS] [ARCH-FEAT_LOCAL_DEFAULT_RESOLUTION] [REQ-FEAT_LOCAL_DEFAULTS] — apply precedence and return diagnostics without mutation.
   DATA_TRANSITION: configuration remains unchanged; only an in-memory resolution is returned.
   Resolve TIED_MCP_BIN from explicit option, then TIED_MCP_BIN, then local mcp-server/dist/index.js.
@@ -27,7 +27,7 @@ procedure RESOLVE_LOCAL_DEFAULTS(explicit_options, environment, project_root):
   RETURN resolved defaults without mutation.
 
 ## FORMAT_DEFAULT_SOURCE_REPORT
-# [IMPL-FEAT_LOCAL_DEFAULTS] [ARCH-FEAT_LOCAL_DEFAULT_RESOLUTION] [REQ-FEAT_LOCAL_DEFAULTS] — make implicit discovery visible and reproducible.
 procedure FORMAT_DEFAULT_SOURCE_REPORT(resolved_defaults):
+# [IMPL-FEAT_LOCAL_DEFAULTS] [ARCH-FEAT_LOCAL_DEFAULT_RESOLUTION] [REQ-FEAT_LOCAL_DEFAULTS] — make implicit discovery visible and reproducible.
   # [IMPL-FEAT_LOCAL_DEFAULTS] [ARCH-FEAT_LOCAL_DEFAULT_RESOLUTION] [REQ-FEAT_LOCAL_DEFAULTS] — expose source and corrective-command fields.
   Return stable path, source, existence, and corrective-command fields.

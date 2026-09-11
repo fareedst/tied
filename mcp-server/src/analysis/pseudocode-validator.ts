@@ -82,6 +82,26 @@ function uniqueSorted(values: string[]): string[] {
 }
 
 /**
+ * [IMPL-QUALITY_PSEUDOCODE_VALIDATOR] [REQ-PSEUDOCODE_STATIC_ANALYSIS] [IMPL-PSEUDOCODE_SHARED_PRIMITIVES]
+ * How: Detect affirmative mutation prose while ignoring negated mutat* phrases and declared DATA_TRANSITION rows.
+ */
+function suggestsStateMutation(bodyText: string): boolean {
+  for (const line of bodyText.split(/\r?\n/)) {
+    if (/^\s*DATA_TRANSITION\s*:/i.test(line)) continue;
+    if (!/\b(?:mutat\w*|state transition)\b/i.test(line)) continue;
+    const withoutNegated = line.replace(/\b(?:never|does not|do not)\s+mutat\w*/gi, "");
+    if (/\bmutat\w*\b/i.test(withoutNegated)) return true;
+    if (/\bstate transition\b/i.test(line) && !/\b(?:no|without)\s+state transition\b/i.test(line)) {
+      return true;
+    }
+  }
+  if (/\bDATA_TRANSITION\b/i.test(bodyText) && !/^\s*DATA_TRANSITION\s*:/im.test(bodyText)) {
+    return true;
+  }
+  return false;
+}
+
+/**
  * [IMPL-QUALITY_PSEUDOCODE_VALIDATOR] [ARCH-QUALITY_ASSURANCE_PROFILES] [REQ-QUALITY_ASSURANCE_EVIDENCE]
  * How: Parse blocks, validate token linkage and contract shape, resolve dependencies, and report structural findings.
  */
@@ -129,9 +149,11 @@ export function validateEssencePseudocode(
 
   for (const range of procedureRanges) {
     const body = lines.slice(range.start, range.end);
-    const bodyText = body.join("\n");
-    const refs = uniqueSorted(extractSemanticTokens(bodyText, { unique: true }));
-    const fields = parseContractFields(body);
+    const structuralBody = lines.slice(range.start, range.tokenScanEnd);
+    const tokenScanText = lines.slice(range.tokenScanStart, range.tokenScanEnd).join("\n");
+    const structuralText = structuralBody.join("\n");
+    const refs = uniqueSorted(extractSemanticTokens(tokenScanText, { unique: true }));
+    const fields = parseContractFields(structuralBody);
     const effectiveFields = uniqueSorted([...globalContract, ...fields]);
     const block: PseudocodeBlock = {
       name: range.name,
@@ -153,7 +175,7 @@ export function validateEssencePseudocode(
 
     if (input.require_contracts !== false) {
       const missing = REQUIRED_CONTRACT_FIELDS.filter((field) => !effectiveFields.includes(field));
-      if (missing.length > 0 || (!hasContractHeading(body) && globalContractStart < 0)) {
+      if (missing.length > 0 || (!hasContractHeading(structuralBody) && globalContractStart < 0)) {
         diagnostics.push({
           severity: "error",
           code: "MISSING_CONTRACT",
@@ -164,7 +186,7 @@ export function validateEssencePseudocode(
       }
     }
 
-    if (/\b(?:RETURN|RAISE)\s+(?:error|failure)|\berror\b|\bFAILURE_MODE\b/i.test(bodyText)
+    if (/\b(?:RETURN|RAISE)\s+(?:error|failure)|\berror\b|\bFAILURE_MODE\b/i.test(structuralText)
       && !effectiveFields.includes("FAILURE_MODES")) {
       diagnostics.push({
         severity: "error",
@@ -174,8 +196,7 @@ export function validateEssencePseudocode(
         block: range.name,
       });
     }
-    if (/\b(?:mutat|state transition|DATA_TRANSITION)\w*/i.test(bodyText)
-      && !effectiveFields.includes("DATA_TRANSITION")) {
+    if (suggestsStateMutation(structuralText) && !effectiveFields.includes("DATA_TRANSITION")) {
       diagnostics.push({
         severity: "error",
         code: "MISSING_DATA_TRANSITION",
@@ -184,7 +205,7 @@ export function validateEssencePseudocode(
         block: range.name,
       });
     }
-    if (/\b(?:WHILE|AWAIT|WAIT|RECURS|open-ended)\b/i.test(bodyText)
+    if (/\b(?:WHILE|AWAIT|WAIT|RECURS|open-ended)\b/i.test(structuralText)
       && !effectiveFields.includes("TERMINATION")) {
       diagnostics.push({
         severity: "error",

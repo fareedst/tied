@@ -23,6 +23,8 @@
 
 # [IMPL-{TOKEN}] [ARCH-{…}] [REQ-{…}] [REQ-…] — {One line: what this sidecar specifies; optional: cross-IMPL or generator note.}
 
+Grammar-Version: v2
+
 ## {Block title — e.g. feature area, symbol group, or `mod::test_name`}
 
 *Optional: Source: `path/to/file.ext` (lines a–b)*

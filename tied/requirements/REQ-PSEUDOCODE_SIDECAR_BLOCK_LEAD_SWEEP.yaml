@@ -1,0 +1,43 @@
+REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP:
+  category: "Functional"
+  description: "All procedure block-lead comments in IMPL pseudo-code sidecars SHALL appear inside procedure bodies for author clarity and literal-copy alignment."
+  name: "Internal block-lead placement for IMPL sidecars"
+  priority: "P2"
+  rationale:
+    benefits:
+      - "Author-visible token linkage on every procedure"
+      - "Consistent three-way alignment between sidecar, tests, and code"
+      - "Zero leak-risk inventory after phased sweep"
+    problems_solved:
+      - "External pre-procedure block-leads are invisible to naive block scanners"
+      - "Inter-procedure block-leads attach to the wrong procedure body"
+      - "Layer B close-out convention requires internal placement for literal-copy"
+    why: "External and inter-procedure block-leads hide token linkage from authors and break three-way alignment even when Track C validator hardening accepts them."
+  related_requirements:
+    depends_on:
+      - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+      - "REQ-PSEUDOCODE_PARSER_UNIFICATION"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Authoring guidance mandates internal placement for new/changed procedures"
+      criterion_id: "authoring-guidance-internal-placement"
+      metric: "pseudocode-format-and-practices.md and template examples agree"
+    - criterion: "Every swept sidecar passes pseudocode_validate after its wave"
+      criterion_id: "per-file-layer-b-green"
+      metric: "per-file Layer B green receipts per wave"
+    - criterion: "Repo audit reports zero external-only block-leads and zero inter-procedure leaks in scoped sidecars"
+      criterion_id: "zero-leak-inventory"
+      metric: "normalize-sidecar-block-leads --check inventory counts are zero after waves B1-B3"
+  status: "Draft"
+  traceability:
+    architecture:
+      - "ARCH-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP"
+    code_annotations:
+      - "REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP"
+    implementation:
+      - "IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP"
+    tests:
+      - "scripts/normalize-sidecar-block-leads.test.mjs"

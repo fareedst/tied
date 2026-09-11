@@ -14,7 +14,6 @@ Contract:
   TERMINATION: total
 
 ## RESOLVE_FEATURE_PATH
-# [IMPL-FEAT_STORE] [ARCH-FEAT_STORE_PERSISTENCE] [REQ-FEAT_STORE_PERSISTENCE] — How: constrain feature paths to the configured feature store root.
 procedure RESOLVE_FEATURE_PATH(feature_directory):
   # [IMPL-FEAT_STORE] [ARCH-FEAT_STORE_PERSISTENCE] [REQ-FEAT_STORE_PERSISTENCE] — How: constrain feature paths to the configured feature store root.
   Contract:
@@ -30,7 +29,6 @@ procedure RESOLVE_FEATURE_PATH(feature_directory):
   RETURN joined path.
 
 ## READ_FEATURE_MANIFEST
-# [IMPL-FEAT_STORE] [ARCH-FEAT_STORE_PERSISTENCE] [REQ-FEAT_STORE_PERSISTENCE] — How: read and parse the feature-local manifest as the orchestration source.
 procedure READ_FEATURE_MANIFEST(feature_directory):
   # [IMPL-FEAT_STORE] [ARCH-FEAT_STORE_PERSISTENCE] [REQ-FEAT_STORE_PERSISTENCE] — How: read and parse the feature-local manifest as the orchestration source.
   Resolve feature path.
@@ -41,7 +39,6 @@ procedure READ_FEATURE_MANIFEST(feature_directory):
   RETURN manifest.
 
 ## PUBLISH_FEATURE_MANIFEST
-# [IMPL-FEAT_STORE] [ARCH-FEAT_STORE_PERSISTENCE] [REQ-FEAT_STORE_PERSISTENCE] — How: publish a complete serialized manifest through the atomic mutation implementation.
 procedure PUBLISH_FEATURE_MANIFEST(feature_directory, manifest):
   # [IMPL-FEAT_STORE] [ARCH-FEAT_STORE_PERSISTENCE] [REQ-FEAT_STORE_PERSISTENCE] — How: publish a complete serialized manifest through the atomic mutation implementation.
   Resolve feature path.

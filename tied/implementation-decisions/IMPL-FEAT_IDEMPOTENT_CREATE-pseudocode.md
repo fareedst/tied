@@ -14,7 +14,6 @@ Contract:
   TERMINATION: total
 
 ## CREATE_FEATURE_IDEMPOTENTLY
-# [IMPL-FEAT_IDEMPOTENT_CREATE] [ARCH-FEAT_IDEMPOTENT_CREATION] [REQ-FEAT_IDEMPOTENT_CREATION] — How: lock the request key before lookup, allocation, and complete publication.
 procedure CREATE_FEATURE_IDEMPOTENTLY(request_key, title, initial_references):
   # [IMPL-FEAT_IDEMPOTENT_CREATE] [ARCH-FEAT_IDEMPOTENT_CREATION] [REQ-FEAT_IDEMPOTENT_CREATION] — How: lock the request key before lookup, allocation, and complete publication.
   IF request_key is empty: RETURN REQUEST_KEY_REQUIRED.

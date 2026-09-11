@@ -13,8 +13,8 @@ Contract:
   TERMINATION: total
 
 ## BUILD_MIGRATION_PREVIEW
-# [IMPL-FEAT_MIGRATION_PREVIEW] [ARCH-FEAT_MIGRATION_PREVIEW] [REQ-FEAT_LEGACY_MIGRATION] — parse additive legacy sources and preserve their ordered behavior.
 procedure BUILD_MIGRATION_PREVIEW(legacy_inputs, feature_spec_batches, agentstream_order):
+# [IMPL-FEAT_MIGRATION_PREVIEW] [ARCH-FEAT_MIGRATION_PREVIEW] [REQ-FEAT_LEGACY_MIGRATION] — parse additive legacy sources and preserve their ordered behavior.
   # [IMPL-FEAT_MIGRATION_PREVIEW] [ARCH-FEAT_MIGRATION_PREVIEW] [REQ-FEAT_LEGACY_MIGRATION] — normalize sources while guaranteeing a no-write preview.
   Read legacy feature-spec records without modifying them.
   Read ordered agentstream batch records and retain source order.
@@ -25,7 +25,7 @@ procedure BUILD_MIGRATION_PREVIEW(legacy_inputs, feature_spec_batches, agentstre
   Return candidates, source order, conflicts, and writes_planned=false.
 
 ## REPORT_MIGRATION_CONFLICTS
-# [IMPL-FEAT_MIGRATION_PREVIEW] [ARCH-FEAT_MIGRATION_PREVIEW] [REQ-FEAT_LEGACY_MIGRATION] — expose stable correction information for review before confirmation.
 procedure REPORT_MIGRATION_CONFLICTS(preview):
+# [IMPL-FEAT_MIGRATION_PREVIEW] [ARCH-FEAT_MIGRATION_PREVIEW] [REQ-FEAT_LEGACY_MIGRATION] — expose stable correction information for review before confirmation.
   # [IMPL-FEAT_MIGRATION_PREVIEW] [ARCH-FEAT_MIGRATION_PREVIEW] [REQ-FEAT_LEGACY_MIGRATION] — expose deterministic conflict corrections.
   Return deterministic conflict code, source path, record identity, field, reason, and corrective action.

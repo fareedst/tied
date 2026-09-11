@@ -1,0 +1,713 @@
+{
+  "schema_version": "block-lead-inventory.v1",
+  "generated_at": "2026-09-11T20:07:50.424Z",
+  "file_count": 60,
+  "totals": {
+    "external_only": 28,
+    "inter_procedure": 12
+  },
+  "files": {
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-ASYNC_BINDING_VALIDATOR-pseudocode.md": {
+      "impl_token": "IMPL-ASYNC_BINDING_VALIDATOR",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-ASYNC_BOUNDARY_ANALYZER-pseudocode.md": {
+      "impl_token": "IMPL-ASYNC_BOUNDARY_ANALYZER",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-ASYNC_CHECKLIST_DISPOSITIONS-pseudocode.md": {
+      "impl_token": "IMPL-ASYNC_CHECKLIST_DISPOSITIONS",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-ASYNC_CITDP_PROFILE_WIRING-pseudocode.md": {
+      "impl_token": "IMPL-ASYNC_CITDP_PROFILE_WIRING",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-ASYNC_PSEUDOCODE_GRAMMAR-pseudocode.md": {
+      "impl_token": "IMPL-ASYNC_PSEUDOCODE_GRAMMAR",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-ASYNC_REQ_ARCH_GUIDANCE-pseudocode.md": {
+      "impl_token": "IMPL-ASYNC_REQ_ARCH_GUIDANCE",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-ASYNC_VOCABULARY-pseudocode.md": {
+      "impl_token": "IMPL-ASYNC_VOCABULARY",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV-pseudocode.md": {
+      "impl_token": "IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS-pseudocode.md": {
+      "impl_token": "IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-ATDD-E2E-AGENT_STREAM-pseudocode.md": {
+      "impl_token": "IMPL-ATDD-E2E-AGENT_STREAM",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_AGENTSTREAM_ADAPTER-pseudocode.md": {
+      "impl_token": "IMPL-FEAT_AGENTSTREAM_ADAPTER",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_ATOMIC_MUTATION-pseudocode.md": {
+      "impl_token": "IMPL-FEAT_ATOMIC_MUTATION",
+      "external_only": [
+        {
+          "line_index": 16,
+          "line": "# [IMPL-FEAT_ATOMIC_MUTATION] [ARCH-FEAT_REVISION_SAFE_MUTATION] [REQ-FEAT_REVISION_SAFE_MUTATION] — How: serialize mutation, compare revision, and publish with a same-directory atomic replacement.",
+          "procedure": "APPLY_ATOMIC_MUTATION",
+          "kind": "external_only"
+        }
+      ],
+      "inter_procedure": [],
+      "external_only_count": 1,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_CLARIFICATION_GATE-pseudocode.md": {
+      "impl_token": "IMPL-FEAT_CLARIFICATION_GATE",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_CLARIFICATION_LIFECYCLE_ADAPTER-pseudocode.md": {
+      "impl_token": "IMPL-FEAT_CLARIFICATION_LIFECYCLE_ADAPTER",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_CLARIFICATION_STORE-pseudocode.md": {
+      "impl_token": "IMPL-FEAT_CLARIFICATION_STORE",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_CONSTITUTION_ANALYZER-pseudocode.md": {
+      "impl_token": "IMPL-FEAT_CONSTITUTION_ANALYZER",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_CONSTITUTION_DIAGNOSTICS-pseudocode.md": {
+      "impl_token": "IMPL-FEAT_CONSTITUTION_DIAGNOSTICS",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_CONSTITUTION_STORE-pseudocode.md": {
+      "impl_token": "IMPL-FEAT_CONSTITUTION_STORE",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_CONSTITUTION_VALIDATOR-pseudocode.md": {
+      "impl_token": "IMPL-FEAT_CONSTITUTION_VALIDATOR",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_FIXTURE_VALIDATORS-pseudocode.md": {
+      "impl_token": "IMPL-FEAT_FIXTURE_VALIDATORS",
+      "external_only": [
+        {
+          "line_index": 15,
+          "line": "# [IMPL-FEAT_FIXTURE_VALIDATORS] [ARCH-FEAT_FIXTURE_CORPUS] [REQ-FEAT_FIXTURE_VALIDATION] — How: cover greenfield, brownfield, ambiguous, multi-module, multi-approach, stale-view, partial-write, migration, and invalid cases.",
+          "procedure": "VALIDATE_FIXTURE_CORPUS",
+          "kind": "external_only"
+        }
+      ],
+      "inter_procedure": [],
+      "external_only_count": 1,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_IDEMPOTENT_CREATE-pseudocode.md": {
+      "impl_token": "IMPL-FEAT_IDEMPOTENT_CREATE",
+      "external_only": [
+        {
+          "line_index": 16,
+          "line": "# [IMPL-FEAT_IDEMPOTENT_CREATE] [ARCH-FEAT_IDEMPOTENT_CREATION] [REQ-FEAT_IDEMPOTENT_CREATION] — How: lock the request key before lookup, allocation, and complete publication.",
+          "procedure": "CREATE_FEATURE_IDEMPOTENTLY",
+          "kind": "external_only"
+        }
+      ],
+      "inter_procedure": [],
+      "external_only_count": 1,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_IDENTIFIER_ALLOCATOR-pseudocode.md": {
+      "impl_token": "IMPL-FEAT_IDENTIFIER_ALLOCATOR",
+      "external_only": [
+        {
+          "line_index": 14,
+          "line": "# [IMPL-FEAT_IDENTIFIER_ALLOCATOR] [ARCH-FEAT_IDENTIFIER_ALLOCATION] [REQ-FEAT_IDENTIFIER_ALLOCATION] — How: apply one stable normalization pipeline to equivalent titles.",
+          "procedure": "GENERATE_FEATURE_SLUG",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 26,
+          "line": "# [IMPL-FEAT_IDENTIFIER_ALLOCATOR] [ARCH-FEAT_IDENTIFIER_ALLOCATION] [REQ-FEAT_IDENTIFIER_ALLOCATION] — How: scan existing directories and choose the lowest unused FEAT number.",
+          "procedure": "ALLOCATE_FEATURE_IDENTIFIER",
+          "kind": "external_only"
+        }
+      ],
+      "inter_procedure": [
+        {
+          "line_index": 26,
+          "line": "# [IMPL-FEAT_IDENTIFIER_ALLOCATOR] [ARCH-FEAT_IDENTIFIER_ALLOCATION] [REQ-FEAT_IDENTIFIER_ALLOCATION] — How: scan existing directories and choose the lowest unused FEAT number.",
+          "from_procedure": "GENERATE_FEATURE_SLUG",
+          "to_procedure": "ALLOCATE_FEATURE_IDENTIFIER",
+          "kind": "inter_procedure"
+        }
+      ],
+      "external_only_count": 2,
+      "inter_procedure_count": 1
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_LIFECYCLE_ENGINE-pseudocode.md": {
+      "impl_token": "IMPL-FEAT_LIFECYCLE_ENGINE",
+      "external_only": [
+        {
+          "line_index": 14,
+          "line": "# [IMPL-FEAT_LIFECYCLE_ENGINE] [ARCH-FEAT_LIFECYCLE_STATE_MACHINE] [REQ-FEAT_LIFECYCLE] — How: encode draft → refining → specified → planned → tasked → verifying → closed and terminal abandoned.",
+          "procedure": "EVALUATE_TRANSITION",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 31,
+          "line": "# [IMPL-FEAT_LIFECYCLE_ENGINE] [ARCH-FEAT_LIFECYCLE_STATE_MACHINE] [REQ-FEAT_LIFECYCLE] — How: apply an allowed transition as one immutable revision.",
+          "procedure": "APPLY_ACCEPTED_TRANSITION",
+          "kind": "external_only"
+        }
+      ],
+      "inter_procedure": [
+        {
+          "line_index": 31,
+          "line": "# [IMPL-FEAT_LIFECYCLE_ENGINE] [ARCH-FEAT_LIFECYCLE_STATE_MACHINE] [REQ-FEAT_LIFECYCLE] — How: apply an allowed transition as one immutable revision.",
+          "from_procedure": "EVALUATE_TRANSITION",
+          "to_procedure": "APPLY_ACCEPTED_TRANSITION",
+          "kind": "inter_procedure"
+        }
+      ],
+      "external_only_count": 2,
+      "inter_procedure_count": 1
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_LOCAL_DEFAULTS-pseudocode.md": {
+      "impl_token": "IMPL-FEAT_LOCAL_DEFAULTS",
+      "external_only": [
+        {
+          "line_index": 16,
+          "line": "# [IMPL-FEAT_LOCAL_DEFAULTS] [ARCH-FEAT_LOCAL_DEFAULT_RESOLUTION] [REQ-FEAT_LOCAL_DEFAULTS] — apply explicit-over-environment-over-local precedence and preserve configuration ownership.",
+          "procedure": "RESOLVE_LOCAL_DEFAULTS",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 29,
+          "line": "# [IMPL-FEAT_LOCAL_DEFAULTS] [ARCH-FEAT_LOCAL_DEFAULT_RESOLUTION] [REQ-FEAT_LOCAL_DEFAULTS] — make implicit discovery visible and reproducible.",
+          "procedure": "FORMAT_DEFAULT_SOURCE_REPORT",
+          "kind": "external_only"
+        }
+      ],
+      "inter_procedure": [
+        {
+          "line_index": 29,
+          "line": "# [IMPL-FEAT_LOCAL_DEFAULTS] [ARCH-FEAT_LOCAL_DEFAULT_RESOLUTION] [REQ-FEAT_LOCAL_DEFAULTS] — make implicit discovery visible and reproducible.",
+          "from_procedure": "RESOLVE_LOCAL_DEFAULTS",
+          "to_procedure": "FORMAT_DEFAULT_SOURCE_REPORT",
+          "kind": "inter_procedure"
+        }
+      ],
+      "external_only_count": 2,
+      "inter_procedure_count": 1
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_MANIFEST_VALIDATOR-pseudocode.md": {
+      "impl_token": "IMPL-FEAT_MANIFEST_VALIDATOR",
+      "external_only": [
+        {
+          "line_index": 14,
+          "line": "# [IMPL-FEAT_MANIFEST_VALIDATOR] [ARCH-FEAT_MANIFEST_CONTRACT] [REQ-FEAT_MANIFEST_SCHEMA] — How: enforce version, identity, mode, lifecycle, references, revision, and ownership.",
+          "procedure": "VALIDATE_MANIFEST",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 32,
+          "line": "# [IMPL-FEAT_MANIFEST_VALIDATOR] [ARCH-FEAT_MANIFEST_CONTRACT] [REQ-FEAT_MANIFEST_SCHEMA] — How: produce stable comparison data while preserving semantic values and ownership.",
+          "procedure": "NORMALIZE_MANIFEST",
+          "kind": "external_only"
+        }
+      ],
+      "inter_procedure": [
+        {
+          "line_index": 32,
+          "line": "# [IMPL-FEAT_MANIFEST_VALIDATOR] [ARCH-FEAT_MANIFEST_CONTRACT] [REQ-FEAT_MANIFEST_SCHEMA] — How: produce stable comparison data while preserving semantic values and ownership.",
+          "from_procedure": "VALIDATE_MANIFEST",
+          "to_procedure": "NORMALIZE_MANIFEST",
+          "kind": "inter_procedure"
+        }
+      ],
+      "external_only_count": 2,
+      "inter_procedure_count": 1
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_MIGRATION_APPLY-pseudocode.md": {
+      "impl_token": "IMPL-FEAT_MIGRATION_APPLY",
+      "external_only": [
+        {
+          "line_index": 16,
+          "line": "# [IMPL-FEAT_MIGRATION_APPLY] [ARCH-FEAT_MIGRATION_PREVIEW] [REQ-FEAT_LEGACY_MIGRATION] — enforce review and recovery gates before publication.",
+          "procedure": "APPLY_CONFIRMED_MIGRATION",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 29,
+          "line": "# [IMPL-FEAT_MIGRATION_APPLY] [ARCH-FEAT_MIGRATION_PREVIEW] [REQ-FEAT_LEGACY_MIGRATION] — restore only migration-owned destinations and leave project TIED YAML untouched.",
+          "procedure": "RESTORE_MIGRATION_BACKUP",
+          "kind": "external_only"
+        }
+      ],
+      "inter_procedure": [
+        {
+          "line_index": 29,
+          "line": "# [IMPL-FEAT_MIGRATION_APPLY] [ARCH-FEAT_MIGRATION_PREVIEW] [REQ-FEAT_LEGACY_MIGRATION] — restore only migration-owned destinations and leave project TIED YAML untouched.",
+          "from_procedure": "APPLY_CONFIRMED_MIGRATION",
+          "to_procedure": "RESTORE_MIGRATION_BACKUP",
+          "kind": "inter_procedure"
+        }
+      ],
+      "external_only_count": 2,
+      "inter_procedure_count": 1
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_MIGRATION_PREVIEW-pseudocode.md": {
+      "impl_token": "IMPL-FEAT_MIGRATION_PREVIEW",
+      "external_only": [
+        {
+          "line_index": 15,
+          "line": "# [IMPL-FEAT_MIGRATION_PREVIEW] [ARCH-FEAT_MIGRATION_PREVIEW] [REQ-FEAT_LEGACY_MIGRATION] — parse additive legacy sources and preserve their ordered behavior.",
+          "procedure": "BUILD_MIGRATION_PREVIEW",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 27,
+          "line": "# [IMPL-FEAT_MIGRATION_PREVIEW] [ARCH-FEAT_MIGRATION_PREVIEW] [REQ-FEAT_LEGACY_MIGRATION] — expose stable correction information for review before confirmation.",
+          "procedure": "REPORT_MIGRATION_CONFLICTS",
+          "kind": "external_only"
+        }
+      ],
+      "inter_procedure": [
+        {
+          "line_index": 27,
+          "line": "# [IMPL-FEAT_MIGRATION_PREVIEW] [ARCH-FEAT_MIGRATION_PREVIEW] [REQ-FEAT_LEGACY_MIGRATION] — expose stable correction information for review before confirmation.",
+          "from_procedure": "BUILD_MIGRATION_PREVIEW",
+          "to_procedure": "REPORT_MIGRATION_CONFLICTS",
+          "kind": "inter_procedure"
+        }
+      ],
+      "external_only_count": 2,
+      "inter_procedure_count": 1
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_OFFLINE_FALLBACK-pseudocode.md": {
+      "impl_token": "IMPL-FEAT_OFFLINE_FALLBACK",
+      "external_only": [
+        {
+          "line_index": 16,
+          "line": "# [IMPL-FEAT_OFFLINE_FALLBACK] [ARCH-FEAT_OFFLINE_COMPATIBILITY] [REQ-FEAT_OFFLINE_WORKFLOW_PRESERVATION] — choose the strongest available explicit path without replacing established tools.",
+          "procedure": "SELECT_OFFLINE_PATH",
+          "kind": "external_only"
+        }
+      ],
+      "inter_procedure": [],
+      "external_only_count": 1,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_ONBOARDING_COMMANDS-pseudocode.md": {
+      "impl_token": "IMPL-FEAT_ONBOARDING_COMMANDS",
+      "external_only": [
+        {
+          "line_index": 15,
+          "line": "# [IMPL-FEAT_ONBOARDING_COMMANDS] [ARCH-FEAT_ONBOARDING_BOUNDARY] [REQ-FEAT_ONBOARDING_COMMANDS] — classify the safe top-level command and route it to one validated delegate.",
+          "procedure": "DISPATCH_ONBOARDING_COMMAND",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 35,
+          "line": "# [IMPL-FEAT_ONBOARDING_COMMANDS] [ARCH-FEAT_ONBOARDING_BOUNDARY] [REQ-FEAT_ADOPTION_GUIDANCE] — keep direct TIED and agentstream surfaces discoverable rather than replacing them.",
+          "procedure": "REPORT_ADVANCED_PATHS",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 42,
+          "line": "# [IMPL-FEAT_ONBOARDING_COMMANDS] [ARCH-FEAT_ONBOARDING_BOUNDARY] [REQ-FEAT_ONBOARDING_COMMANDS] — emit JSON and exit without mutating configuration when an offline fallback is actionable.",
+          "procedure": "MAIN_ONBOARDING",
+          "kind": "external_only"
+        }
+      ],
+      "inter_procedure": [
+        {
+          "line_index": 35,
+          "line": "# [IMPL-FEAT_ONBOARDING_COMMANDS] [ARCH-FEAT_ONBOARDING_BOUNDARY] [REQ-FEAT_ADOPTION_GUIDANCE] — keep direct TIED and agentstream surfaces discoverable rather than replacing them.",
+          "from_procedure": "DISPATCH_ONBOARDING_COMMAND",
+          "to_procedure": "REPORT_ADVANCED_PATHS",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 42,
+          "line": "# [IMPL-FEAT_ONBOARDING_COMMANDS] [ARCH-FEAT_ONBOARDING_BOUNDARY] [REQ-FEAT_ONBOARDING_COMMANDS] — emit JSON and exit without mutating configuration when an offline fallback is actionable.",
+          "from_procedure": "REPORT_ADVANCED_PATHS",
+          "to_procedure": "MAIN_ONBOARDING",
+          "kind": "inter_procedure"
+        }
+      ],
+      "external_only_count": 3,
+      "inter_procedure_count": 2
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_ORCHESTRATION_CLI-pseudocode.md": {
+      "impl_token": "IMPL-FEAT_ORCHESTRATION_CLI",
+      "external_only": [
+        {
+          "line_index": 16,
+          "line": "# [IMPL-FEAT_ORCHESTRATION_CLI] [ARCH-FEAT_ORCHESTRATION_BOUNDARY] [REQ-FEAT_ORCHESTRATION_SURFACE] — How: parse lifecycle arguments and delegate without mutating tied-cli.sh.",
+          "procedure": "RUN_FEATURE_ORCHESTRATOR",
+          "kind": "external_only"
+        }
+      ],
+      "inter_procedure": [],
+      "external_only_count": 1,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_ORCHESTRATION_COMMANDS-pseudocode.md": {
+      "impl_token": "IMPL-FEAT_ORCHESTRATION_COMMANDS",
+      "external_only": [
+        {
+          "line_index": 16,
+          "line": "# [IMPL-FEAT_ORCHESTRATION_COMMANDS] [ARCH-FEAT_ORCHESTRATION_COMMANDS] [REQ-FEAT_ORCHESTRATION_COMMANDS] — How: map the command to a Batch 0 transition and delegate persistence.",
+          "procedure": "EXECUTE_LIFECYCLE_COMMAND",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 29,
+          "line": "# [IMPL-FEAT_ORCHESTRATION_COMMANDS] [ARCH-FEAT_ORCHESTRATION_COMMANDS] [REQ-FEAT_ORCHESTRATION_COMMANDS] — How: expose the next actionable lifecycle phase without inventing later-batch gates.",
+          "procedure": "REPORT_NEXT_PERMITTED_PHASE",
+          "kind": "external_only"
+        }
+      ],
+      "inter_procedure": [
+        {
+          "line_index": 29,
+          "line": "# [IMPL-FEAT_ORCHESTRATION_COMMANDS] [ARCH-FEAT_ORCHESTRATION_COMMANDS] [REQ-FEAT_ORCHESTRATION_COMMANDS] — How: expose the next actionable lifecycle phase without inventing later-batch gates.",
+          "from_procedure": "EXECUTE_LIFECYCLE_COMMAND",
+          "to_procedure": "REPORT_NEXT_PERMITTED_PHASE",
+          "kind": "inter_procedure"
+        }
+      ],
+      "external_only_count": 2,
+      "inter_procedure_count": 1
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_READINESS_DIAGNOSTICS-pseudocode.md": {
+      "impl_token": "IMPL-FEAT_READINESS_DIAGNOSTICS",
+      "external_only": [
+        {
+          "line_index": 15,
+          "line": "# [IMPL-FEAT_READINESS_DIAGNOSTICS] [ARCH-FEAT_READINESS_DIAGNOSTICS] [REQ-FEAT_READINESS_DIAGNOSTICS] — classify each unmet prerequisite using existing projections and preserve proof boundaries.",
+          "procedure": "BUILD_READINESS_REPORT",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 25,
+          "line": "# [IMPL-FEAT_READINESS_DIAGNOSTICS] [ARCH-FEAT_READINESS_DIAGNOSTICS] [REQ-FEAT_READINESS_DIAGNOSTICS] — produce stable operator-facing fields without executing remediation.",
+          "procedure": "FORMAT_READINESS_DIAGNOSTIC",
+          "kind": "external_only"
+        }
+      ],
+      "inter_procedure": [
+        {
+          "line_index": 25,
+          "line": "# [IMPL-FEAT_READINESS_DIAGNOSTICS] [ARCH-FEAT_READINESS_DIAGNOSTICS] [REQ-FEAT_READINESS_DIAGNOSTICS] — produce stable operator-facing fields without executing remediation.",
+          "from_procedure": "BUILD_READINESS_REPORT",
+          "to_procedure": "FORMAT_READINESS_DIAGNOSTIC",
+          "kind": "inter_procedure"
+        }
+      ],
+      "external_only_count": 2,
+      "inter_procedure_count": 1
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_REFERENCE_LINKER-pseudocode.md": {
+      "impl_token": "IMPL-FEAT_REFERENCE_LINKER",
+      "external_only": [
+        {
+          "line_index": 14,
+          "line": "# [IMPL-FEAT_REFERENCE_LINKER] [ARCH-FEAT_CANONICAL_LINK_BOUNDARY] [REQ-FEAT_CANONICAL_LINKS] — How: resolve references, enforce token type, and validate the REQ→ARCH→IMPL graph.",
+          "procedure": "RESOLVE_CANONICAL_REFERENCES",
+          "kind": "external_only"
+        }
+      ],
+      "inter_procedure": [],
+      "external_only_count": 1,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_STORE-pseudocode.md": {
+      "impl_token": "IMPL-FEAT_STORE",
+      "external_only": [
+        {
+          "line_index": 16,
+          "line": "# [IMPL-FEAT_STORE] [ARCH-FEAT_STORE_PERSISTENCE] [REQ-FEAT_STORE_PERSISTENCE] — How: constrain feature paths to the configured feature store root.",
+          "procedure": "RESOLVE_FEATURE_PATH",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 32,
+          "line": "# [IMPL-FEAT_STORE] [ARCH-FEAT_STORE_PERSISTENCE] [REQ-FEAT_STORE_PERSISTENCE] — How: read and parse the feature-local manifest as the orchestration source.",
+          "procedure": "READ_FEATURE_MANIFEST",
+          "kind": "external_only"
+        },
+        {
+          "line_index": 43,
+          "line": "# [IMPL-FEAT_STORE] [ARCH-FEAT_STORE_PERSISTENCE] [REQ-FEAT_STORE_PERSISTENCE] — How: publish a complete serialized manifest through the atomic mutation implementation.",
+          "procedure": "PUBLISH_FEATURE_MANIFEST",
+          "kind": "external_only"
+        }
+      ],
+      "inter_procedure": [
+        {
+          "line_index": 32,
+          "line": "# [IMPL-FEAT_STORE] [ARCH-FEAT_STORE_PERSISTENCE] [REQ-FEAT_STORE_PERSISTENCE] — How: read and parse the feature-local manifest as the orchestration source.",
+          "from_procedure": "RESOLVE_FEATURE_PATH",
+          "to_procedure": "READ_FEATURE_MANIFEST",
+          "kind": "inter_procedure"
+        },
+        {
+          "line_index": 43,
+          "line": "# [IMPL-FEAT_STORE] [ARCH-FEAT_STORE_PERSISTENCE] [REQ-FEAT_STORE_PERSISTENCE] — How: publish a complete serialized manifest through the atomic mutation implementation.",
+          "from_procedure": "READ_FEATURE_MANIFEST",
+          "to_procedure": "PUBLISH_FEATURE_MANIFEST",
+          "kind": "inter_procedure"
+        }
+      ],
+      "external_only_count": 3,
+      "inter_procedure_count": 2
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_TASK_DERIVATION-pseudocode.md": {
+      "impl_token": "IMPL-FEAT_TASK_DERIVATION",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_TASK_EXECUTION_STATE-pseudocode.md": {
+      "impl_token": "IMPL-FEAT_TASK_EXECUTION_STATE",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_TASK_GRAPH_SCHEDULER-pseudocode.md": {
+      "impl_token": "IMPL-FEAT_TASK_GRAPH_SCHEDULER",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_VIEW_PROJECTION-pseudocode.md": {
+      "impl_token": "IMPL-FEAT_VIEW_PROJECTION",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_VIEW_RENDERER-pseudocode.md": {
+      "impl_token": "IMPL-FEAT_VIEW_RENDERER",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_VIEW_STALE_DETECTION-pseudocode.md": {
+      "impl_token": "IMPL-FEAT_VIEW_STALE_DETECTION",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-GOAGENT-CHECKLIST-CONTROL-pseudocode.md": {
+      "impl_token": "IMPL-GOAGENT-CHECKLIST-CONTROL",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-GOAGENT-CLI-CMD-pseudocode.md": {
+      "impl_token": "IMPL-GOAGENT-CLI-CMD",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-GOAGENT-LIB-TYPES-pseudocode.md": {
+      "impl_token": "IMPL-GOAGENT-LIB-TYPES",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-GOAGENT-TDDLOOP-pseudocode.md": {
+      "impl_token": "IMPL-GOAGENT-TDDLOOP",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-GOAGENT-TEXT-SOURCES-pseudocode.md": {
+      "impl_token": "IMPL-GOAGENT-TEXT-SOURCES",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-MODULE_VALIDATION-pseudocode.md": {
+      "impl_token": "IMPL-MODULE_VALIDATION",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK-pseudocode.md": {
+      "impl_token": "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-QUALITY_EVIDENCE_COLLECTION-pseudocode.md": {
+      "impl_token": "IMPL-QUALITY_EVIDENCE_COLLECTION",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-QUALITY_EVIDENCE_MANIFEST-pseudocode.md": {
+      "impl_token": "IMPL-QUALITY_EVIDENCE_MANIFEST",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-QUALITY_SECURITY_PROFILE_VALIDATION-pseudocode.md": {
+      "impl_token": "IMPL-QUALITY_SECURITY_PROFILE_VALIDATION",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-QUALITY_TEST_ADEQUACY-pseudocode.md": {
+      "impl_token": "IMPL-QUALITY_TEST_ADEQUACY",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH-pseudocode.md": {
+      "impl_token": "IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-TIED_FEEDBACK_PROMOTION-pseudocode.md": {
+      "impl_token": "IMPL-TIED_FEEDBACK_PROMOTION",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-TIED_FIDELITY_RESEARCH-pseudocode.md": {
+      "impl_token": "IMPL-TIED_FIDELITY_RESEARCH",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-TIED_PROJECT_IDENTITY-pseudocode.md": {
+      "impl_token": "IMPL-TIED_PROJECT_IDENTITY",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-TIED_RESEARCH_RECORDS-pseudocode.md": {
+      "impl_token": "IMPL-TIED_RESEARCH_RECORDS",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-TIED_VOCABULARY_REFRESH-pseudocode.md": {
+      "impl_token": "IMPL-TIED_VOCABULARY_REFRESH",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-VOCABULARY_HTML_RENDERER-pseudocode.md": {
+      "impl_token": "IMPL-VOCABULARY_HTML_RENDERER",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-VOCABULARY_PROJECTION-pseudocode.md": {
+      "impl_token": "IMPL-VOCABULARY_PROJECTION",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-VOCABULARY_VIEWER_STATE-pseudocode.md": {
+      "impl_token": "IMPL-VOCABULARY_VIEWER_STATE",
+      "external_only": [],
+      "inter_procedure": [],
+      "external_only_count": 0,
+      "inter_procedure_count": 0
+    }
+  },
+  "ok": false,
+  "mode": "check",
+  "wave": "B3",
+  "root": "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions"
+}

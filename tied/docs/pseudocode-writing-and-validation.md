@@ -136,6 +136,8 @@ The merged field is the **primary and authoritative source of implementation log
 
 Hand-authored IMPL bodies usually start from [templates/impl-essence-pseudocode-template.md](../../templates/impl-essence-pseudocode-template.md) (copy the Markdown after the `---` separator into `IMPL-{TOKEN}-pseudocode.md`). For a standalone summary of vocabulary and validation, see [pseudocode-format-and-practices.md](pseudocode-format-and-practices.md).
 
+**New TIED client projects:** The canonical template and `copy_files.sh` bootstrap path emit `Grammar-Version: v2` as the **first non-comment preamble line** after the H1. That header selects the v2 parser boundary without requiring `constraint_flow: true`. Existing headerless sidecars remain **legacy v1**; see [pseudocode-grammar-v2-migration.md](pseudocode-grammar-v2-migration.md). Disposable-client grading uses `scripts/audit-grammar-v2-default.mjs`, which reports header, Layer B, Layer C (`gate_mode_applied`), `constraint_flow: false`, and legacy-v1 compatibility as **independent** audit dimensions ([REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT](../requirements/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml)).
+
 **markdown_exec project conventions (this repo):** File title uses H1 with bracket tokens in order **IMPL, ARCH, REQ** (stay consistent with [implementation-decisions.md](implementation-decisions.md) top-level naming). Open with `## Summary contract` when the IMPL needs file-level INPUT/OUTPUT/DATA (and PRE/POST/EFFECTS when documenting a shared Active contract) before the first runtime H2. Under `## EMBEDDED_MINITEST: …`, express each block lead as a **list item** (`- [IMPL-…] [ARCH-…] [REQ-…] …`), not a second H1. Prefer **language-agnostic** steps in CONTRACT/CONTROL/EFFECTS.
 
 ### Writing rules (summary)

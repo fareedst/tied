@@ -28,6 +28,7 @@ import {
   tiedCliDestFor,
   tiedBasePathValueFor,
 } from "./verify.mjs";
+import { copySidecarTemplate } from "./sidecar-template.mjs";
 
 function resolveTemplateFile(templatesDir, scriptDir, filename) {
   const fromTemplates = path.join(templatesDir, filename);
@@ -169,6 +170,7 @@ export function bootstrapTied(projectRoot, options = {}) {
   }
 
   copyDocs(paths.DOCS_TO_COPY, tiedSourceDir, tiedDir);
+  copySidecarTemplate(projectRoot, TIED_REPO_ROOT);
 
   const implTemplateDir = resolveTemplateDir(templatesDir, TIED_REPO_ROOT, "implementation-decisions");
   const implResult = copyDetailFiles(

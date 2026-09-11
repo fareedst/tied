@@ -917,6 +917,7 @@ steps:
       - "Do not proceed to persist-implementation-records until pre-RED structural gating is satisfied (see pseudocode-writing-and-validation.md § Validation layers)."
       - "If no parser/tool: perform manual pass over checklist categories and document results."
       - "Pre-RED structural gate (before unit-test-red): satisfy parsing/schema (including SHAPE-003..006)/symbol/contract/graph/reporting checks applicable to IMPL-only pseudo-code; mark behavioral_coverage and traceability rows that require executable tests as N/A with rationale (no tests yet)—not ad-hoc waiver IDs."
+      - "New TIED client project IMPLs: newly authored sidecars copied from the canonical template MUST declare `Grammar-Version: v2` as the first non-comment preamble line after the H1 ([REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT]); header presence does not require `constraint_flow: true`. Optional Layer B SHAPE-007 applies only when the v2 header is declared ([pseudocode-grammar.v2.md](pseudocode-grammar.v2.md))."
       - "Precision-contract rows (SHAPE-003..006 and related): N/A only for Template stubs, applicability skips, or unchanged legacy Active blocks with rationale pre-contract-grammar; new/changed Active blocks must satisfy PRE/POST/EFFECTS and applicable FAILURE_MODES/DATA_TRANSITION/TERMINATION."
       - "Responsibility: pseudo-code owner step. This is the final logic-intent gate before tests/code steps may proceed."
       - "Run validation passes in recommended order; record findings with severity and source location."

@@ -1,0 +1,339 @@
+{
+  "schema_version": "block-lead-write-result.v1",
+  "mode": "write",
+  "wave": "B2",
+  "root": "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions",
+  "file_count": 25,
+  "changed_count": 1,
+  "results": {
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-PSEUDOCODE_ANALYSIS_ENGINE-pseudocode.md": {
+      "changed": false
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-PSEUDOCODE_SHARED_PRIMITIVES-pseudocode.md": {
+      "changed": false
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE-pseudocode.md": {
+      "changed": false
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-PSEUDOCODE_TYPED_FLOW-pseudocode.md": {
+      "changed": false
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT-pseudocode.md": {
+      "changed": false
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-TIED_YAML_CANONICALIZER-pseudocode.md": {
+      "changed": false
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-TIED_YAML_STYLE_RESOLVER-pseudocode.md": {
+      "changed": false
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-TIED_FILES-pseudocode.md": {
+      "changed": false
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-MCP_LEAP_PROPOSAL_QUEUE-pseudocode.md": {
+      "changed": false
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-MCP_FEEDBACK_TOOLS-pseudocode.md": {
+      "changed": false
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-MCP_USAGE_METRICS-pseudocode.md": {
+      "changed": false
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-GOAGENT-PIPELINE-pseudocode.md": {
+      "changed": false
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-GOAGENT-EXECUTOR-pseudocode.md": {
+      "changed": false
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-GOAGENT-CHECKLIST-pseudocode.md": {
+      "changed": false
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-GOAGENT-FEATURESPEC-pseudocode.md": {
+      "changed": false
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT-pseudocode.md": {
+      "changed": false
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY-pseudocode.md": {
+      "changed": false
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST-pseudocode.md": {
+      "changed": false
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-TIED_CLAIMS_EVIDENCE_REVIEW-pseudocode.md": {
+      "changed": false
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-EVIDENCE_CHAIN_PROFILE-pseudocode.md": {
+      "changed": false
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-EVIDENCE_CHAIN_REPORT-pseudocode.md": {
+      "changed": false
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-PROMPT_TYPE_GLOBAL_SKILLS-pseudocode.md": {
+      "changed": false
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-PROMPT_TYPE_SUBAGENT-pseudocode.md": {
+      "changed": false
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-VOCABULARY_ANALYSIS-pseudocode.md": {
+      "changed": false
+    },
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_ORCHESTRATION_MCP-pseudocode.md": {
+      "changed": true,
+      "before": {
+        "external_only": [
+          {
+            "line_index": 14,
+            "line": "# [IMPL-FEAT_ORCHESTRATION_MCP] [ARCH-FEAT_ORCHESTRATION_BOUNDARY] [REQ-FEAT_ORCHESTRATION_SURFACE] — How: route requests to shared services and preserve one canonical YAML validation path.",
+            "procedure": "HANDLE_ORCHESTRATION_TOOL",
+            "kind": "external_only"
+          }
+        ],
+        "inter_procedure": [],
+        "procedures": [
+          {
+            "name": "HANDLE_ORCHESTRATION_TOOL",
+            "kind": "procedure",
+            "start": 15,
+            "end": 24,
+            "tokenScanStart": 14,
+            "tokenScanEnd": 24
+          }
+        ]
+      },
+      "after": {
+        "external_only": [],
+        "inter_procedure": [],
+        "procedures": [
+          {
+            "name": "HANDLE_ORCHESTRATION_TOOL",
+            "kind": "procedure",
+            "start": 14,
+            "end": 23,
+            "tokenScanStart": 14,
+            "tokenScanEnd": 23
+          }
+        ]
+      },
+      "diff_lines": [
+        "@@ line 15",
+        "- # [IMPL-FEAT_ORCHESTRATION_MCP] [ARCH-FEAT_ORCHESTRATION_BOUNDARY] [REQ-FEAT_ORCHESTRATION_SURFACE] — How: route requests to shared services and preserve one canonical YAML validation path.",
+        "+ procedure HANDLE_ORCHESTRATION_TOOL(tool_name, request):",
+        "@@ line 16",
+        "- procedure HANDLE_ORCHESTRATION_TOOL(tool_name, request):",
+        "+   # [IMPL-FEAT_ORCHESTRATION_MCP] [ARCH-FEAT_ORCHESTRATION_BOUNDARY] [REQ-FEAT_ORCHESTRATION_SURFACE] — How: route requests to shared services and preserve one canonical YAML validation path.",
+        "@@ line 17",
+        "-   # [IMPL-FEAT_ORCHESTRATION_MCP] [ARCH-FEAT_ORCHESTRATION_BOUNDARY] [REQ-FEAT_ORCHESTRATION_SURFACE] — How: route requests to shared services and preserve one canonical YAML validation path.",
+        "+   Validate the tool name and request shape.",
+        "@@ line 18",
+        "-   Validate the tool name and request shape.",
+        "+   IF the operation is feature-local: invoke the shared orchestration service.",
+        "@@ line 19",
+        "-   IF the operation is feature-local: invoke the shared orchestration service.",
+        "+   IF the operation creates or updates REQ, ARCH, or IMPL records:",
+        "@@ line 20",
+        "-   IF the operation creates or updates REQ, ARCH, or IMPL records:",
+        "+     Delegate CRUD to the existing TIED YAML tooling.",
+        "@@ line 21",
+        "-     Delegate CRUD to the existing TIED YAML tooling.",
+        "+     Delegate consistency validation to the existing TIED validation tool.",
+        "@@ line 22",
+        "-     Delegate consistency validation to the existing TIED validation tool.",
+        "+   Return the shared orchestration result schema.",
+        "@@ line 23",
+        "-   Return the shared orchestration result schema.",
+        "+ ",
+        "@@ line 24",
+        "- "
+      ]
+    }
+  },
+  "inventory_after": {
+    "schema_version": "block-lead-inventory.v1",
+    "generated_at": "2026-09-11T20:07:29.817Z",
+    "file_count": 25,
+    "totals": {
+      "external_only": 0,
+      "inter_procedure": 0
+    },
+    "files": {
+      "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-PSEUDOCODE_ANALYSIS_ENGINE-pseudocode.md": {
+        "impl_token": "IMPL-PSEUDOCODE_ANALYSIS_ENGINE",
+        "external_only": [],
+        "inter_procedure": [],
+        "external_only_count": 0,
+        "inter_procedure_count": 0
+      },
+      "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-PSEUDOCODE_SHARED_PRIMITIVES-pseudocode.md": {
+        "impl_token": "IMPL-PSEUDOCODE_SHARED_PRIMITIVES",
+        "external_only": [],
+        "inter_procedure": [],
+        "external_only_count": 0,
+        "inter_procedure_count": 0
+      },
+      "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE-pseudocode.md": {
+        "impl_token": "IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE",
+        "external_only": [],
+        "inter_procedure": [],
+        "external_only_count": 0,
+        "inter_procedure_count": 0
+      },
+      "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-PSEUDOCODE_TYPED_FLOW-pseudocode.md": {
+        "impl_token": "IMPL-PSEUDOCODE_TYPED_FLOW",
+        "external_only": [],
+        "inter_procedure": [],
+        "external_only_count": 0,
+        "inter_procedure_count": 0
+      },
+      "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT-pseudocode.md": {
+        "impl_token": "IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT",
+        "external_only": [],
+        "inter_procedure": [],
+        "external_only_count": 0,
+        "inter_procedure_count": 0
+      },
+      "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-TIED_YAML_CANONICALIZER-pseudocode.md": {
+        "impl_token": "IMPL-TIED_YAML_CANONICALIZER",
+        "external_only": [],
+        "inter_procedure": [],
+        "external_only_count": 0,
+        "inter_procedure_count": 0
+      },
+      "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-TIED_YAML_STYLE_RESOLVER-pseudocode.md": {
+        "impl_token": "IMPL-TIED_YAML_STYLE_RESOLVER",
+        "external_only": [],
+        "inter_procedure": [],
+        "external_only_count": 0,
+        "inter_procedure_count": 0
+      },
+      "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-TIED_FILES-pseudocode.md": {
+        "impl_token": "IMPL-TIED_FILES",
+        "external_only": [],
+        "inter_procedure": [],
+        "external_only_count": 0,
+        "inter_procedure_count": 0
+      },
+      "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-MCP_LEAP_PROPOSAL_QUEUE-pseudocode.md": {
+        "impl_token": "IMPL-MCP_LEAP_PROPOSAL_QUEUE",
+        "external_only": [],
+        "inter_procedure": [],
+        "external_only_count": 0,
+        "inter_procedure_count": 0
+      },
+      "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-MCP_FEEDBACK_TOOLS-pseudocode.md": {
+        "impl_token": "IMPL-MCP_FEEDBACK_TOOLS",
+        "external_only": [],
+        "inter_procedure": [],
+        "external_only_count": 0,
+        "inter_procedure_count": 0
+      },
+      "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-MCP_USAGE_METRICS-pseudocode.md": {
+        "impl_token": "IMPL-MCP_USAGE_METRICS",
+        "external_only": [],
+        "inter_procedure": [],
+        "external_only_count": 0,
+        "inter_procedure_count": 0
+      },
+      "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-GOAGENT-PIPELINE-pseudocode.md": {
+        "impl_token": "IMPL-GOAGENT-PIPELINE",
+        "external_only": [],
+        "inter_procedure": [],
+        "external_only_count": 0,
+        "inter_procedure_count": 0
+      },
+      "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-GOAGENT-EXECUTOR-pseudocode.md": {
+        "impl_token": "IMPL-GOAGENT-EXECUTOR",
+        "external_only": [],
+        "inter_procedure": [],
+        "external_only_count": 0,
+        "inter_procedure_count": 0
+      },
+      "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-GOAGENT-CHECKLIST-pseudocode.md": {
+        "impl_token": "IMPL-GOAGENT-CHECKLIST",
+        "external_only": [],
+        "inter_procedure": [],
+        "external_only_count": 0,
+        "inter_procedure_count": 0
+      },
+      "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-GOAGENT-FEATURESPEC-pseudocode.md": {
+        "impl_token": "IMPL-GOAGENT-FEATURESPEC",
+        "external_only": [],
+        "inter_procedure": [],
+        "external_only_count": 0,
+        "inter_procedure_count": 0
+      },
+      "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT-pseudocode.md": {
+        "impl_token": "IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT",
+        "external_only": [],
+        "inter_procedure": [],
+        "external_only_count": 0,
+        "inter_procedure_count": 0
+      },
+      "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY-pseudocode.md": {
+        "impl_token": "IMPL-TIED_ADVERSARIAL_INQUIRY",
+        "external_only": [],
+        "inter_procedure": [],
+        "external_only_count": 0,
+        "inter_procedure_count": 0
+      },
+      "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST-pseudocode.md": {
+        "impl_token": "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST",
+        "external_only": [],
+        "inter_procedure": [],
+        "external_only_count": 0,
+        "inter_procedure_count": 0
+      },
+      "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-TIED_CLAIMS_EVIDENCE_REVIEW-pseudocode.md": {
+        "impl_token": "IMPL-TIED_CLAIMS_EVIDENCE_REVIEW",
+        "external_only": [],
+        "inter_procedure": [],
+        "external_only_count": 0,
+        "inter_procedure_count": 0
+      },
+      "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-EVIDENCE_CHAIN_PROFILE-pseudocode.md": {
+        "impl_token": "IMPL-EVIDENCE_CHAIN_PROFILE",
+        "external_only": [],
+        "inter_procedure": [],
+        "external_only_count": 0,
+        "inter_procedure_count": 0
+      },
+      "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-EVIDENCE_CHAIN_REPORT-pseudocode.md": {
+        "impl_token": "IMPL-EVIDENCE_CHAIN_REPORT",
+        "external_only": [],
+        "inter_procedure": [],
+        "external_only_count": 0,
+        "inter_procedure_count": 0
+      },
+      "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-PROMPT_TYPE_GLOBAL_SKILLS-pseudocode.md": {
+        "impl_token": "IMPL-PROMPT_TYPE_GLOBAL_SKILLS",
+        "external_only": [],
+        "inter_procedure": [],
+        "external_only_count": 0,
+        "inter_procedure_count": 0
+      },
+      "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-PROMPT_TYPE_SUBAGENT-pseudocode.md": {
+        "impl_token": "IMPL-PROMPT_TYPE_SUBAGENT",
+        "external_only": [],
+        "inter_procedure": [],
+        "external_only_count": 0,
+        "inter_procedure_count": 0
+      },
+      "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-VOCABULARY_ANALYSIS-pseudocode.md": {
+        "impl_token": "IMPL-VOCABULARY_ANALYSIS",
+        "external_only": [],
+        "inter_procedure": [],
+        "external_only_count": 0,
+        "inter_procedure_count": 0
+      },
+      "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-FEAT_ORCHESTRATION_MCP-pseudocode.md": {
+        "impl_token": "IMPL-FEAT_ORCHESTRATION_MCP",
+        "external_only": [],
+        "inter_procedure": [],
+        "external_only_count": 0,
+        "inter_procedure_count": 0
+      }
+    },
+    "ok": true
+  },
+  "ok": true
+}

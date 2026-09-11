@@ -13,8 +13,8 @@ Contract:
   TERMINATION: total
 
 ## FIXTURE_CORPUS
-# [IMPL-FEAT_FIXTURE_VALIDATORS] [ARCH-FEAT_FIXTURE_CORPUS] [REQ-FEAT_FIXTURE_VALIDATION] — How: cover greenfield, brownfield, ambiguous, multi-module, multi-approach, stale-view, partial-write, migration, and invalid cases.
 procedure VALIDATE_FIXTURE_CORPUS(fixture_cases, validator_modules):
+# [IMPL-FEAT_FIXTURE_VALIDATORS] [ARCH-FEAT_FIXTURE_CORPUS] [REQ-FEAT_FIXTURE_VALIDATION] — How: cover greenfield, brownfield, ambiguous, multi-module, multi-approach, stale-view, partial-write, migration, and invalid cases.
   # [IMPL-FEAT_FIXTURE_VALIDATORS] [ARCH-FEAT_FIXTURE_CORPUS] [REQ-FEAT_FIXTURE_VALIDATION] — How: execute each fixture against its isolated validator and compare deterministic evidence.
   Contract:
     INPUT: fixture_cases; validator_modules

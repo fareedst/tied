@@ -12,8 +12,8 @@ Contract:
   TERMINATION: total
 
 ## CANONICAL_REFERENCE_LINKER
-# [IMPL-FEAT_REFERENCE_LINKER] [ARCH-FEAT_CANONICAL_LINK_BOUNDARY] [REQ-FEAT_CANONICAL_LINKS] — How: resolve references, enforce token type, and validate the REQ→ARCH→IMPL graph.
 procedure RESOLVE_CANONICAL_REFERENCES(manifest_references, canonical_tied_indexes):
+# [IMPL-FEAT_REFERENCE_LINKER] [ARCH-FEAT_CANONICAL_LINK_BOUNDARY] [REQ-FEAT_CANONICAL_LINKS] — How: resolve references, enforce token type, and validate the REQ→ARCH→IMPL graph.
   # [IMPL-FEAT_REFERENCE_LINKER] [ARCH-FEAT_CANONICAL_LINK_BOUNDARY] [REQ-FEAT_CANONICAL_LINKS] — How: resolve each typed reference and preserve canonical ownership.
   Contract:
     INPUT: manifest_references; canonical_tied_indexes

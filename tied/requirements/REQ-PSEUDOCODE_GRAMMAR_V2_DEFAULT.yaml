@@ -1,0 +1,43 @@
+REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT:
+  category: "Functional"
+  description: "New TIED client projects SHALL generate new IMPL pseudo-code sidecars with Grammar-Version: v2 while preserving v1 parsing compatibility for existing sidecars and legacy clients."
+  name: "Default grammar v2 headers for new TIED sidecars"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Disposable-client grading can verify the bootstrap policy"
+      - "Existing sidecars remain v1-compatible"
+      - "New client sidecars declare their parser contract explicitly"
+    problems_solved:
+      - "Bootstrap, authoring guidance, and cohort grading can disagree about the intended grammar version"
+      - "Fresh clients silently start with the legacy v1 default"
+    why: "The grammar v2 parser and migration guide already define an opt-in version boundary; new projects need a deterministic default without forcing legacy sidecar migration."
+  related_requirements:
+    depends_on:
+      - "REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE"
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-PSEUDOCODE_PARSER_UNIFICATION"
+      - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Disposable client audit reports the header, Layer B, and Layer C pre-RED outcomes separately"
+      metric: "audit script emits a stable grammar_v2_header dimension"
+    - criterion: "Fresh TIED client bootstrap emits Grammar-Version: v2 in the canonical IMPL sidecar template"
+      metric: "copy_files.sh smoke and template inspection pass"
+    - criterion: "Legacy sidecars without the header continue to use v1 behavior"
+      metric: "existing v1 and v2 parser regression tests pass unchanged"
+    - criterion: "New sidecar authoring guidance and checklist policy require the v2 header without requiring constraint_flow"
+      metric: "migration, writing/validation, client-development, and checklist docs agree"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+    code_annotations:
+      - "REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+    implementation:
+      - "IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+    tests:
+      - "mcp-server/src/analysis/pseudocode-grammar-v2-default.test.ts"
+      - "scripts/audit-grammar-v2-default.mjs"
+      - "scripts/audit-grammar-v2-default.test.mjs"

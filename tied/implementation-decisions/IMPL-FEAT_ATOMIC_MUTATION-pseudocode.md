@@ -14,7 +14,6 @@ Contract:
   TERMINATION: total
 
 ## APPLY_ATOMIC_MUTATION
-# [IMPL-FEAT_ATOMIC_MUTATION] [ARCH-FEAT_REVISION_SAFE_MUTATION] [REQ-FEAT_REVISION_SAFE_MUTATION] — How: serialize mutation, compare revision, and publish with a same-directory atomic replacement.
 procedure APPLY_ATOMIC_MUTATION(feature_identifier, expected_revision, candidate_manifest):
   # [IMPL-FEAT_ATOMIC_MUTATION] [ARCH-FEAT_REVISION_SAFE_MUTATION] [REQ-FEAT_REVISION_SAFE_MUTATION] — How: serialize mutation, compare revision, and publish with a same-directory atomic replacement.
   Acquire the feature mutation lock.

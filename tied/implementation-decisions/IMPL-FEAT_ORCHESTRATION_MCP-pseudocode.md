@@ -12,7 +12,6 @@ Contract:
   TERMINATION: total
 
 ## HANDLE_ORCHESTRATION_TOOL
-# [IMPL-FEAT_ORCHESTRATION_MCP] [ARCH-FEAT_ORCHESTRATION_BOUNDARY] [REQ-FEAT_ORCHESTRATION_SURFACE] — How: route requests to shared services and preserve one canonical YAML validation path.
 procedure HANDLE_ORCHESTRATION_TOOL(tool_name, request):
   # [IMPL-FEAT_ORCHESTRATION_MCP] [ARCH-FEAT_ORCHESTRATION_BOUNDARY] [REQ-FEAT_ORCHESTRATION_SURFACE] — How: route requests to shared services and preserve one canonical YAML validation path.
   Validate the tool name and request shape.

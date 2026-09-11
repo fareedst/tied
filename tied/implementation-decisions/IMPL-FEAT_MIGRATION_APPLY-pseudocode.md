@@ -14,8 +14,8 @@ Contract:
   TERMINATION: total
 
 ## APPLY_CONFIRMED_MIGRATION
-# [IMPL-FEAT_MIGRATION_APPLY] [ARCH-FEAT_MIGRATION_PREVIEW] [REQ-FEAT_LEGACY_MIGRATION] — enforce review and recovery gates before publication.
 procedure APPLY_CONFIRMED_MIGRATION(migration_preview, confirmation, destination):
+# [IMPL-FEAT_MIGRATION_APPLY] [ARCH-FEAT_MIGRATION_PREVIEW] [REQ-FEAT_LEGACY_MIGRATION] — enforce review and recovery gates before publication.
   # [IMPL-FEAT_MIGRATION_APPLY] [ARCH-FEAT_MIGRATION_PREVIEW] [REQ-FEAT_LEGACY_MIGRATION] — enforce confirmation, backup, atomic publication, and rollback.
   IF confirmation is absent: RETURN CONFIRMATION_REQUIRED.
   IF preview is stale or contains conflicts: RETURN the corresponding diagnostic without writes.
@@ -27,8 +27,8 @@ procedure APPLY_CONFIRMED_MIGRATION(migration_preview, confirmation, destination
   Return success with backup reference, preserved source order, and changed manifests.
 
 ## RESTORE_MIGRATION_BACKUP
-# [IMPL-FEAT_MIGRATION_APPLY] [ARCH-FEAT_MIGRATION_PREVIEW] [REQ-FEAT_LEGACY_MIGRATION] — restore only migration-owned destinations and leave project TIED YAML untouched.
 procedure RESTORE_MIGRATION_BACKUP(backup, destination):
+# [IMPL-FEAT_MIGRATION_APPLY] [ARCH-FEAT_MIGRATION_PREVIEW] [REQ-FEAT_LEGACY_MIGRATION] — restore only migration-owned destinations and leave project TIED YAML untouched.
   # [IMPL-FEAT_MIGRATION_APPLY] [ARCH-FEAT_MIGRATION_PREVIEW] [REQ-FEAT_LEGACY_MIGRATION] — restore migration-owned destinations and verify hashes.
   Restore backed-up files atomically.
   Verify destination hashes against backup metadata.

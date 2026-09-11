@@ -12,8 +12,8 @@ Contract:
   TERMINATION: total
 
 ## MANIFEST_SCHEMA_CONTRACT
-# [IMPL-FEAT_MANIFEST_VALIDATOR] [ARCH-FEAT_MANIFEST_CONTRACT] [REQ-FEAT_MANIFEST_SCHEMA] — How: enforce version, identity, mode, lifecycle, references, revision, and ownership.
 procedure VALIDATE_MANIFEST(raw_manifest):
+# [IMPL-FEAT_MANIFEST_VALIDATOR] [ARCH-FEAT_MANIFEST_CONTRACT] [REQ-FEAT_MANIFEST_SCHEMA] — How: enforce version, identity, mode, lifecycle, references, revision, and ownership.
   Contract:
     INPUT: raw_manifest
     PRE: raw_manifest is parseable
@@ -30,8 +30,8 @@ procedure VALIDATE_MANIFEST(raw_manifest):
   RETURN NORMALIZE_MANIFEST(raw_manifest)
 
 ## NORMALIZE_MANIFEST
-# [IMPL-FEAT_MANIFEST_VALIDATOR] [ARCH-FEAT_MANIFEST_CONTRACT] [REQ-FEAT_MANIFEST_SCHEMA] — How: produce stable comparison data while preserving semantic values and ownership.
 procedure NORMALIZE_MANIFEST(manifest):
+# [IMPL-FEAT_MANIFEST_VALIDATOR] [ARCH-FEAT_MANIFEST_CONTRACT] [REQ-FEAT_MANIFEST_SCHEMA] — How: produce stable comparison data while preserving semantic values and ownership.
   # [IMPL-FEAT_MANIFEST_VALIDATOR] [ARCH-FEAT_MANIFEST_CONTRACT] [REQ-FEAT_MANIFEST_SCHEMA] — How: normalize accepted manifest data for deterministic comparison.
   Contract:
     INPUT: validated manifest

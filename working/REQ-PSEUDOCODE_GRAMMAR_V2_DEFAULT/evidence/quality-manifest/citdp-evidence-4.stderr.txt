@@ -1,0 +1,1 @@
+bash: line 1: tied_checklist_activation_collect: command not found
