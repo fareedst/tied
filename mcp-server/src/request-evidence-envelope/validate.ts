@@ -6,6 +6,8 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
 
+import { PROCESS_ADHERENCE_GAP_CODE_SET } from "./gap-codes.js";
+import { PROCESS_WARN_GAP_CODES } from "./process-adherence-gaps.js";
 import { normalizeEnvelope } from "./normalize.js";
 import type {
   RequestEvidenceEnvelope,
@@ -108,10 +110,27 @@ export async function validateRequestEvidenceEnvelope(
   const normalized = normalizeEnvelope(envelope);
   const errorGaps = normalized.gaps.filter((gap) => gap.severity === "error");
   const warnGaps = normalized.gaps.filter((gap) => gap.severity === "warn");
-  const blockingGapCount = errorGaps.length;
+  const processWarnGaps = warnGaps.filter(
+    (gap) => PROCESS_WARN_GAP_CODES.has(gap.code) || PROCESS_ADHERENCE_GAP_CODE_SET.has(gap.code),
+  );
+  let blockingGapCount = errorGaps.length;
   const advisoryGapCount = warnGaps.length;
 
-  if (input.fail_on_error_gaps && blockingGapCount > 0) {
+  if (input.fail_on_process_gaps && processWarnGaps.length > 0) {
+    blockingGapCount += processWarnGaps.length;
+    return {
+      ok: false,
+      envelope: normalized,
+      diagnostics: [
+        ...diagnostics,
+        ...processWarnGaps.map((gap) => `envelope_process_gap:${gap.code}`),
+      ],
+      blocking_gap_count: blockingGapCount,
+      advisory_gap_count: advisoryGapCount,
+    };
+  }
+
+  if (input.fail_on_error_gaps && errorGaps.length > 0) {
     return {
       ok: false,
       envelope: normalized,

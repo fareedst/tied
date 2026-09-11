@@ -6,6 +6,7 @@
 import { createHash } from "node:crypto";
 import { promises as fs } from "node:fs";
 import path from "node:path";
+import yaml from "js-yaml";
 
 import {
   validateFindingDisposition,
@@ -14,6 +15,7 @@ import {
 } from "../checklist-validator.js";
 import { resolveProjectIdentity } from "../project-identity.js";
 import { mapCorpusInventoryString } from "./gap-codes.js";
+import { detectProcessAdherenceGaps } from "./process-adherence-gaps.js";
 import { normalizeEnvelope, serializeEnvelope } from "./normalize.js";
 import type {
   ArtifactKind,
@@ -104,6 +106,55 @@ type DiscoveredFile = {
   status: ArtifactStatus;
   proof_boundaries: string[];
 };
+
+const INQUIRY_ARTIFACT_KINDS = new Set<ArtifactKind>([
+  "adversarial_inquiry_gate",
+  "adversarial_inquiry_ledger",
+  "adversarial_inquiry_provenance",
+  "adversarial_inquiry_obligation",
+]);
+
+function inferGateReceiptPhase(filename: string): GatePhase | null {
+  if (filename.includes("verification")) return "verification";
+  if (filename.includes("close_out")) return "close_out";
+  if (filename.includes("pre_implementation") || filename.includes("pre-implementation")) {
+    return "pre_implementation";
+  }
+  return null;
+}
+
+function gateReceiptPreferenceScore(relativePath: string): number {
+  const base = path.basename(relativePath);
+  if (base.startsWith("wave5-")) return 100;
+  return 0;
+}
+
+async function dedupeGateReceiptDiscoveries(discovered: DiscoveredFile[]): Promise<DiscoveredFile[]> {
+  const gateReceipts = discovered.filter(
+    (item) => item.kind === "checklist_gate_receipt" && item.phase != null,
+  );
+  const others = discovered.filter(
+    (item) => !(item.kind === "checklist_gate_receipt" && item.phase != null),
+  );
+  const byPhase = new Map<GatePhase, DiscoveredFile[]>();
+  for (const item of gateReceipts) {
+    const phase = item.phase as GatePhase;
+    const list = byPhase.get(phase) ?? [];
+    list.push(item);
+    byPhase.set(phase, list);
+  }
+  const kept: DiscoveredFile[] = [];
+  for (const items of byPhase.values()) {
+    const ranked = await Promise.all(items.map(async (item) => ({
+      item,
+      score: gateReceiptPreferenceScore(item.relative),
+      mtime: (await fs.stat(item.absolute)).mtimeMs,
+    })));
+    ranked.sort((a, b) => b.score - a.score || b.mtime - a.mtime);
+    kept.push(ranked[0].item);
+  }
+  return [...others, ...kept];
+}
 
 async function discoverWorkingArtifacts(
   projectRoot: string,
@@ -199,13 +250,7 @@ async function discoverWorkingArtifacts(
         absolute,
         relative: relPath(projectRoot, absolute),
         kind: "checklist_gate_receipt",
-        phase: name.includes("verification")
-          ? "verification"
-          : name.includes("close_out")
-            ? "close_out"
-            : name.includes("pre_implementation")
-              ? "pre_implementation"
-              : null,
+        phase: inferGateReceiptPhase(name),
         status: "present",
         proof_boundaries: ["gate_decision_only"],
       });
@@ -271,7 +316,7 @@ async function discoverWorkingArtifacts(
     });
   }
 
-  return discovered;
+  return dedupeGateReceiptDiscoveries(discovered);
 }
 
 async function toEnvelopeArtifacts(discovered: DiscoveredFile[]): Promise<EnvelopeArtifact[]> {
@@ -347,21 +392,55 @@ async function detectGaps(input: {
     }
   }
 
-  const phaseArtifacts = input.artifacts.filter((a) => a.phase != null);
-  const hashByKindPhase = new Map<string, string>();
-  for (const artifact of phaseArtifacts) {
-    const key = `${artifact.kind}:${artifact.phase}`;
-    const prior = hashByKindPhase.get(key);
-    if (prior && prior === artifact.content_hash) {
-      gaps.push(
-        gapFromCode("evidence_stale", `Identical hash across phases for ${artifact.kind}`, {
-          artifact_kind: artifact.kind,
-          phase: artifact.phase,
-          source: "hash-compare",
-        }),
-      );
+  async function readInquiryRunId(phase: GatePhase): Promise<string | null> {
+    const provenancePath = path.join(
+      workingRoot,
+      "adversarial-inquiry",
+      `phase-${phase}`,
+      "evidence-provenance.json",
+    );
+    const contents = await readOptional(provenancePath);
+    if (!contents) return null;
+    try {
+      const doc = JSON.parse(contents) as Record<string, unknown>;
+      const envelope = isRecord(doc.provenance) ? doc.provenance : doc;
+      const runId = envelope.run_id ?? envelope.runId;
+      return typeof runId === "string" && runId.trim().length > 0 ? runId.trim() : null;
+    } catch {
+      return null;
     }
-    hashByKindPhase.set(key, artifact.content_hash);
+  }
+
+  const phaseArtifacts = input.artifacts.filter((a) => a.phase != null);
+  const hashByInquiryKind = new Map<string, { hash: string; phase: GatePhase }>();
+  const inquiryRunIdCache = new Map<GatePhase, string | null>();
+  const cachedInquiryRunId = async (phase: GatePhase): Promise<string | null> => {
+    if (!inquiryRunIdCache.has(phase)) {
+      inquiryRunIdCache.set(phase, await readInquiryRunId(phase));
+    }
+    return inquiryRunIdCache.get(phase) ?? null;
+  };
+  for (const artifact of phaseArtifacts) {
+    if (!INQUIRY_ARTIFACT_KINDS.has(artifact.kind) || artifact.phase == null) continue;
+    const prior = hashByInquiryKind.get(artifact.kind);
+    if (prior && prior.hash === artifact.content_hash && prior.phase !== artifact.phase) {
+      const priorRunId = await cachedInquiryRunId(prior.phase);
+      const currentRunId = await cachedInquiryRunId(artifact.phase);
+      const distinctRuns = priorRunId && currentRunId && priorRunId !== currentRunId;
+      if (!distinctRuns) {
+        gaps.push(
+          gapFromCode("evidence_stale", `Identical hash across phases for ${artifact.kind}`, {
+            artifact_kind: artifact.kind,
+            phase: artifact.phase,
+            source: "hash-compare",
+          }),
+        );
+      }
+    }
+    hashByInquiryKind.set(artifact.kind, {
+      hash: artifact.content_hash,
+      phase: artifact.phase,
+    });
   }
 
   for (const phase of ["pre_implementation", "verification", "close_out"] as GatePhase[]) {
@@ -454,6 +533,28 @@ async function detectGaps(input: {
       );
     }
   }
+
+  const trackerPath = path.join(workingRoot, "agent-req-implementation-checklist.yaml");
+  const trackerContents = await readOptional(trackerPath);
+  let trackerDoc: Record<string, unknown> | null = null;
+  if (trackerContents) {
+    try {
+      const parsed = yaml.load(trackerContents);
+      trackerDoc = isRecord(parsed) ? parsed : null;
+    } catch {
+      trackerDoc = null;
+    }
+  }
+  const trackerArtifact = input.artifacts.find((a) => a.kind === "checklist_tracker");
+  const processGaps = await detectProcessAdherenceGaps({
+    projectRoot: input.projectRoot,
+    requestToken: input.requestToken,
+    tracker: trackerDoc,
+    artifacts: input.artifacts,
+    currentTrackerHash: trackerArtifact?.content_hash ?? null,
+    depthTier: input.depthTier,
+  });
+  gaps.push(...processGaps);
 
   const seen = new Set<string>();
   return gaps.filter((gap) => {

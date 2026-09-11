@@ -7,7 +7,12 @@
 3. LEAP: Propagate IMPL -> ARCH -> REQ -> Vocab for any drift (`LEAP.md`). Changes to IMPL, ARCH, REQ must be accounted for in an existing CITDP plan or one is created and executed.
 4. Tests: Confirm unit, composition, and E2E coverage for the staged work.
 5. Gitignore close-out hygiene — [gitignore-close-out-hygiene.md](gitignore-close-out-hygiene.md) ([PROC-GITIGNORE_CLOSE_OUT]): from caller git context only (no agent-initiated git), review ephemeral untracked artifacts; apply unstaged `.gitignore` additions or propose patterns; record N/A when clean.
-6. Before writing CHANGELOG or claiming completion, call
+6. **CALL `sub-close-out-evidence-sync`** (Wave 5): sync dispositions from
+   `execution_evidence.completed`, collect verification manifest when tests ran,
+   reconcile with `include_process_grade: true`, then rebuild/validate envelope.
+   Do not write naked `execution_evidence.completed` updates without matching
+   `steps[].tracking.status` dispositions in the same pass.
+7. Before writing CHANGELOG or claiming completion, call
    `tied_checklist_gate_validate` with `phase: close_out`, the final Tracker,
    CITDP, and identity-bound activation evidence when `depth_tier` is
    `integrated` or `strict_candidate` (prefer `tied_checklist_activation_collect`
@@ -15,9 +20,10 @@
    `request_evidence_envelope_validate` with `fail_on_error_gaps: true` on
    `working/{REQ-TOKEN}/evidence/request-evidence-envelope.v1.json`, or use
    `tools/bootstrap/templates/run-close-out-gates.mjs --envelope-blocking`.
-   Completion requires gate `allowed: true` **and** zero blocking envelope
-   error gaps; advisory findings stay visible as warn-severity gaps. If either
-   check fails, label the work **incomplete** — do not claim completion.
+   Process-strict sponsors may add `--fail-on-process-gaps`. Completion requires
+   gate `allowed: true` **and** zero blocking envelope error gaps; process gaps
+   remain visible as warn-severity unless process-strict. If either check fails,
+   label the work **incomplete** — do not claim completion.
 
 ## Prologue (standard close-out / diff-promote)
 

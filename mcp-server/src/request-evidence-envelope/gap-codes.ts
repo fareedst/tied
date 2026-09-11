@@ -23,7 +23,18 @@ export const ENVELOPE_SPECIFIC_GAP_CODES = [
   "dual_write_divergence",
   "legacy_inferred",
   "unknown_artifact_unclassified",
+  "tracker_dual_write",
+  "thin_ledger",
 ] as const;
+
+/** Wave 5 process-adherence codes (default warn at minimal depth). */
+export const PROCESS_ADHERENCE_GAP_CODE_SET = new Set<string>([
+  "tracker_dual_write",
+  "tracker_sparse",
+  "expected_artifact_missing",
+  "evidence_stale",
+  "thin_ledger",
+]);
 
 export function mapCorpusInventoryString(inventory: string): string {
   return CORPUS_INVENTORY_TO_GAP_CODE[inventory] ?? "unknown_artifact_unclassified";

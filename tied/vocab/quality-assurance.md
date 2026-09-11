@@ -58,6 +58,10 @@
 | generic prose ref | prose evidence, self-reported success | Non-path evidence string rejected with `unresolved_evidence_ref` (e.g. "tests passed"). | `GENERIC_PROSE_REF` |
 | manifest ref | verification manifest path | Tracker evidence ref pointing to `verification-evidence-manifest.v1` with all command exit codes zero. | `MANIFEST_REF` |
 | outcome_verified event | verified outcome, evidence verified | Adherence ledger event class after successful ref resolution; does not authorize gate pass alone (non-implication rule). | `OUTCOME_VERIFIED_EVENT` |
+| process grade | process adherence score, process contract score | Weighted 0–100 summary (`process_grade.score`, band A–D) from reconcile extension and envelope process gaps; distinct from machine close-out. | `PROCESS_GRADE` |
+| tracker dual-write | naked completed list, hollow tracker | Process gap when `execution_evidence.completed` lacks matching non-pending step dispositions; code `tracker_dual_write`. | `TRACKER_DUAL_WRITE` |
+| process-strict | fail_on_process_gaps | Envelope validate mode promoting process warn gaps to blocking errors. | `PROCESS_STRICT` |
+| sub-close-out-evidence-sync | close-out sync, evidence sync sub | Checklist sub_procedure syncing dispositions, manifest collection, and reconcile before close-out gates. | `SUB_CLOSE_OUT_EVIDENCE_SYNC` |
 | non-implication rule | stage non-implication, proof non-implication | Normative rule that one adherence event class never proves the next (e.g. acknowledgment never proves action). | `NON_IMPLICATION_RULE` |
 | instruction binding | nonce binding, instruction hash binding | Per-turn `instruction_nonce` and `instruction_hash` tying rendered prompt bytes to Tracker completion receipt. | `INSTRUCTION_BINDING` |
 | request evidence envelope | evidence wrapper, per-REQ index | Per-REQ machine index at `working/{REQ-TOKEN}/evidence/request-evidence-envelope.v1.json` wrapping producer artifacts with stable identity, typed cross-references, and explicit gaps or not-applicable receipts; distinct from **evidence chain profile** and **verification evidence manifest**. | `REQUEST_EVIDENCE_ENVELOPE` |

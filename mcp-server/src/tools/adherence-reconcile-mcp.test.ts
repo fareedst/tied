@@ -111,4 +111,39 @@ describe("tied_adherence_reconcile_run [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]", (
       assert.ok(!hasFindingCode(mcp.report?.findings ?? [], code), `A28: unexpected blocking finding ${code}`);
     }
   });
+
+  it("W5-D11 include_process_grade attaches process_grade matching CLI", async () => {
+    const root = repoRoot();
+    const trackerPath = path.join(root, "working", REQUEST_TOKEN, "agent-req-implementation-checklist-wave5-process-adherence.yaml");
+    if (!fs.existsSync(trackerPath)) {
+      return;
+    }
+    const cli = await runAdherenceReconcile({
+      ledger_path: path.join(root, "working", REQUEST_TOKEN, "gates", "ledger.jsonl"),
+      tracker_path: trackerPath,
+      gates_dir: path.join(root, "working", REQUEST_TOKEN, "gates"),
+      workspace: root,
+      include_process_grade: true,
+      repo_root: root,
+    });
+    assert.equal(cli.ok, true);
+    assert.ok(cli.report?.process_grade);
+    assert.ok(typeof cli.report?.process_grade?.score === "number");
+    assert.ok(cli.report?.process_grade?.band);
+
+    const handler = toolHandler("tied_adherence_reconcile_run");
+    const mcp = JSON.parse((await handler({
+      ledger_path: path.join(root, "working", REQUEST_TOKEN, "gates", "ledger.jsonl"),
+      tracker_path: trackerPath,
+      gates_dir: path.join(root, "working", REQUEST_TOKEN, "gates"),
+      workspace: root,
+      include_process_grade: true,
+    })).content[0]?.text ?? "{}") as {
+      ok?: boolean;
+      report?: { process_grade?: { score: number; band: string } };
+    };
+    assert.equal(mcp.ok, true);
+    assert.equal(mcp.report?.process_grade?.band, cli.report?.process_grade?.band);
+    assert.equal(mcp.report?.process_grade?.score, cli.report?.process_grade?.score);
+  });
 });

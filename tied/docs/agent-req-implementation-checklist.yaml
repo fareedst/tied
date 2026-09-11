@@ -786,6 +786,7 @@ steps:
           condition: "VALIDATE reports unresolved vocabulary mismatches"
           target: "sync-tied-stack"
       calls:
+        - "sub-close-out-evidence-sync"
         - "sub-adversarial-inquiry-pass"
         - "sub-vocabulary-sync"
       next: "EXIT"
@@ -802,6 +803,7 @@ steps:
       - "IF the driver emits additional turns for sub-yaml-edit-loop, sub-pseudocode-validation-pass, or sub-leap-micro-cycle after this step, those subs were already invoked via CALL during earlier steps—unless you have new mutations, reply with one-line RETURN; do not repeat full procedures."
       - "Include evidence provenance, open (unresolved) finding count, active waivers, and the proof-boundary partition in the commit body or an explicit CITDP cross-reference; this is part of the Touchpoint 3 VALIDATE gate, not optional prose."
       - "Unified close-out: traceable-commit requires checklist gate allowed true AND request-evidence-envelope validate with fail_on_error_gaps (zero blocking error gaps) unless each gap code has a documented waiver registry entry; advisory findings remain visible as warn-severity envelope gaps."
+      - "CALL sub-close-out-evidence-sync before close-out gates: never write execution_evidence.completed without matching step dispositions in the same pass (tracker_dual_write is a process gap)."
       - "Stage relevant files. Commit."
       - "Touchpoint 3 (pre-commit): CALL sub-vocabulary-sync (VALIDATE) — audit all files changed this pass: TIED record name fields and token suffixes in semantic-tokens.yaml, UPPER_SNAKE block names in essence_pseudocode, test/code identifiers, README/CHANGELOG/UI terms; each must resolve to exactly one preferred term in ./tied/vocab/*.md with naming bridges and alphabetical index current; do not stage or commit until VALIDATE passes or immature-client deferral is explicitly noted in the per-request checklist copy."
       - "When a profile is in scope: validate provenance, open findings, waivers, and missing-data disclosures (not_measured / unknown) against the profile artifact."
@@ -1266,6 +1268,31 @@ sub_procedures:
     title: "Checklist-local adversarial inquiry pass"
     tracking:
       consideration_before_proceeding: "Report persisted under working/{REQ-TOKEN}/adversarial-inquiry; caller receives summary; blocking only when caller blocking=true, strict-eligible, and error finding unresolved."
+      retry_count: "0"
+      state_history: []
+      status: "pending"
+  - flow:
+      return_to: "caller"
+    goals: "Synchronize baseline-functional checklist evidence before close-out gates: disposition sync, verification manifest collection, and adherence reconciliation."
+    invoked_by:
+      - "traceable-commit"
+    outcomes: "Every slug in execution_evidence.completed has matching non-pending step disposition with typed evidence_refs; verification-evidence-manifest.v1.json present when tests ran; reconcile report recorded before gate validate."
+    preconditions:
+      - "Authoritative Tracker at working/{REQ-TOKEN}/agent-req-implementation-checklist.yaml."
+      - "Close-out producers distinguish machine close-out, process contract, and adherence ledger correlation."
+    references:
+      - "docs/process-adherence-evidence-grade-plan.md"
+      - "tools/bootstrap/templates/sync-tracker-dispositions.mjs"
+      - "tools/bootstrap/templates/run-close-out-gates.mjs"
+    slug: "sub-close-out-evidence-sync"
+    tasks:
+      - "Sync dispositions: run tools/bootstrap/templates/sync-tracker-dispositions.mjs --tracker working/{REQ-TOKEN}/agent-req-implementation-checklist.yaml so every execution_evidence.completed slug has matching steps[].tracking.status completed (or documented N/A) plus typed evidence_refs."
+      - "Collect manifest: when verification-gate or test slugs are completed, run quality_evidence_collect to working/{REQ-TOKEN}/evidence/verification-evidence-manifest.v1.json or record not-applicable receipt."
+      - "Reconcile before gates: run tied_adherence_reconcile_run with include_process_grade true; re-run gates if tracker hash changed after sync."
+      - "Rebuild request-evidence-envelope.v1.json; validate with fail_on_error_gaps for machine close-out; optionally fail_on_process_gaps for process-strict sponsors."
+    title: "Close-out evidence sync (Wave 5 process contract)"
+    tracking:
+      consideration_before_proceeding: "Dual-write cleared; manifest or N/A receipt present when required; reconcile process_grade recorded; envelope process gaps visible."
       retry_count: "0"
       state_history: []
       status: "pending"

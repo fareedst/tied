@@ -23,6 +23,7 @@ func main() {
 	citdpPath := flag.String("citdp", "", "Optional CITDP YAML path")
 	reqIndex := flag.String("requirements-index", "", "Optional requirements.yaml path")
 	implIndex := flag.String("implementation-index", "", "Optional implementation-decisions.yaml path")
+	includeProcessGrade := flag.Bool("include-process-grade", false, "Attach process_grade summary (Wave 5)")
 	flag.Parse()
 
 	if strings.TrimSpace(*tracker) == "" {
@@ -64,19 +65,24 @@ func main() {
 		tiedIndexes.Implementation = doc
 	}
 
-	report, err := checklist.ReconcileAdherenceChain(checklist.ReconcileInput{
+	reconcileInput := checklist.ReconcileInput{
 		LedgerPath:  strings.TrimSpace(*ledger),
 		TrackerPath: strings.TrimSpace(*tracker),
 		CITDP:       citdp,
 		GatesDir:    strings.TrimSpace(*gatesDir),
 		Workspace:   ws,
 		TiedIndexes: tiedIndexes,
-	})
+	}
+	report, err := checklist.ReconcileAdherenceChain(reconcileInput)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "DIAGNOSTIC: reconcile failed: %v\n", err)
 		os.Exit(2)
 	}
 	report.ReadOnly = true
+	if *includeProcessGrade {
+		grade := checklist.ComputeProcessGrade(reconcileInput, report)
+		report.ProcessGrade = &grade
+	}
 
 	body, err := json.Marshal(report)
 	if err != nil {

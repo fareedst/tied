@@ -1,0 +1,254 @@
+copy_hygiene: Wave 5 tracker for process-adherence evidence grade.
+request: REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+source_plan: docs/process-adherence-evidence-grade-plan.md
+status: close_out_complete_pending_envelope
+profile:
+  depth_tier: integrated
+  gate_policy: advisory
+  research_profile: read-only research profile
+  assurance_profiles:
+    - baseline-functional
+    - data-integrity-migration
+    - stateful-reliability
+  note: Advisory applies only to observed/unresolved inquiry findings; process-adherence gaps default warn at minimal unless fail_on_process_gaps is true.
+steps:
+  - slug: session-bootstrap
+    disposition: completed
+    evidence_refs:
+      - AGENTS.md
+      - tied/docs/ai-principles.md
+      - tied/vocab/routing.md
+      - tied/vocab/quality-assurance.md
+      - tied/vocab/fidelity-research.md
+    tracking:
+      status: completed
+      evidence_refs:
+        - AGENTS.md
+        - tied/docs/ai-principles.md
+  - slug: translate-sponsor-intent
+    disposition: completed
+    rationale: Sponsor wording resolved to machine close-out, process contract, adherence ledger, tracker_dual_write, and three completion signals.
+    evidence_refs:
+      - docs/process-adherence-evidence-grade-plan.md
+    tracking:
+      status: completed
+      evidence_refs:
+        - docs/process-adherence-evidence-grade-plan.md
+  - slug: change-definition
+    disposition: completed
+    evidence_refs:
+      - docs/process-adherence-evidence-grade-plan.md
+    tracking:
+      status: completed
+      evidence_refs:
+        - docs/process-adherence-evidence-grade-plan.md
+  - slug: impact-discovery
+    disposition: completed
+    evidence_refs:
+      - docs/process-adherence-evidence-grade-plan.md
+      - mcp-server/src/request-evidence-envelope/process-adherence-gaps.ts
+    tracking:
+      status: completed
+      evidence_refs:
+        - docs/process-adherence-evidence-grade-plan.md
+  - slug: risk-assessment
+    disposition: completed
+    rationale: 'eligibility_triggers_matched: strict-close-out, methodology-tooling-change, persistence, external-input'
+    evidence_refs:
+      - docs/process-adherence-evidence-grade-plan.md
+      - docs/integrated-activation-checklist-enforcement-plan.md
+    tracking:
+      status: completed
+      evidence_refs:
+        - docs/process-adherence-evidence-grade-plan.md
+  - slug: test-strategy
+    disposition: completed
+    evidence_refs:
+      - docs/process-adherence-evidence-grade-plan.md
+    tracking:
+      status: completed
+      evidence_refs:
+        - docs/process-adherence-evidence-grade-plan.md
+  - slug: persist-citdp-record
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-wave5-process-adherence.yaml
+    tracking:
+      status: completed
+      evidence_refs:
+        - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-wave5-process-adherence.yaml
+  - slug: catalog-pseudocode-contracts
+    disposition: completed
+    evidence_refs:
+      - tied/implementation-decisions/IMPL-REQUEST_EVIDENCE_ENVELOPE-pseudocode.md
+      - tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md
+    tracking:
+      status: completed
+      evidence_refs:
+        - tied/implementation-decisions/IMPL-REQUEST_EVIDENCE_ENVELOPE-pseudocode.md
+  - slug: gate-pseudocode-validation
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json
+      - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-pre_implementation/gate-result.json
+    tracking:
+      status: completed
+      evidence_refs:
+        - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-pre_implementation/gate-result.json
+  - slug: unit-test-red
+    disposition: completed
+    evidence_refs:
+      - mcp-server/src/request-evidence-envelope/process-adherence-gaps.test.ts
+    tracking:
+      status: completed
+      evidence_refs:
+        - mcp-server/src/request-evidence-envelope/process-adherence-gaps.test.ts
+  - slug: unit-test-green
+    disposition: completed
+    evidence_refs:
+      - mcp-server/dist/request-evidence-envelope/process-adherence-gaps.test.js
+    tracking:
+      status: completed
+      evidence_refs:
+        - mcp-server/dist/request-evidence-envelope/process-adherence-gaps.test.js
+  - slug: composition-integration
+    disposition: completed
+    evidence_refs:
+      - mcp-server/dist/tools/adherence-reconcile-mcp.test.js
+      - tools/agentstream/checklist/process_grade_test.go
+    tracking:
+      status: completed
+      evidence_refs:
+        - mcp-server/dist/tools/adherence-reconcile-mcp.test.js
+  - slug: verification-gate
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/verification-evidence-manifest.v1.json
+      - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/wave5-inquiry-phases-result.json
+      - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/wave5-verification-20260910.json
+    tracking:
+      status: completed
+      evidence_refs:
+        - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/verification-evidence-manifest.v1.json
+        - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/wave5-verification-20260910.json
+  - slug: sub-close-out-evidence-sync
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/wave5-reconcile-summary.json
+      - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/verification-evidence-manifest.v1.json
+      - tools/bootstrap/templates/sync-tracker-dispositions.mjs
+    tracking:
+      status: completed
+      evidence_refs:
+        - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/wave5-reconcile-summary.json
+  - slug: traceable-commit
+    disposition: completed
+    policy:
+      commit_deferred: true
+      skill: plan-close-out
+      rationale: "Sponsor reviews CHANGELOG + proposed message; git commit forbidden in plan-close-out skill."
+    evidence_refs:
+      - CHANGELOG.md
+      - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/proposed-commit-message.txt
+      - tools/bundled-prompt-type-skills/prompt-shared/gitignore-close-out-hygiene.md
+    tracking:
+      status: completed
+      evidence_refs:
+        - CHANGELOG.md
+        - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/proposed-commit-message.txt
+  - slug: sub-adversarial-inquiry-pass
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json
+      - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-verification/evidence-provenance.json
+      - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-close_out/evidence-provenance.json
+      - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/wave5-inquiry-phases-result.json
+    tracking:
+      status: completed
+      evidence_refs:
+        - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/wave5-inquiry-phases-result.json
+execution_evidence:
+  request: REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+  completed:
+    - session-bootstrap
+    - translate-sponsor-intent
+    - change-definition
+    - impact-discovery
+    - risk-assessment
+    - test-strategy
+    - persist-citdp-record
+    - catalog-pseudocode-contracts
+    - gate-pseudocode-validation
+    - unit-test-red
+    - unit-test-green
+    - composition-integration
+    - verification-gate
+    - sub-adversarial-inquiry-pass
+    - sub-close-out-evidence-sync
+    - traceable-commit
+  close_out_evidence:
+    status: gate_pass_envelope_blocked
+    gates:
+      pre_implementation:
+        run_id: wave5-pre-20260910
+        allowed: true
+      verification:
+        run_id: wave5-verify-20260910
+        allowed: true
+      close_out:
+        run_id: wave5-closeout-20260910
+        allowed: true
+    master_checklist: tied/docs/agent-req-implementation-checklist.yaml
+  envelope_path: working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/request-evidence-envelope.v1.json
+  operator_evidence:
+    status: wave5_closeout_in_progress
+    inquiry_run_ids:
+      - wave5-pre-20260910
+      - wave5-verify-20260910
+      - wave5-closeout-20260910
+    pre_implementation_gate:
+      allowed: true
+      run_id: wave5-pre-20260910
+      recorded_at: "2026-09-10"
+      receipt_path: working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/wave5-pre-implementation-build.json
+    verification_gate:
+      allowed: true
+      run_id: wave5-verify-20260910
+      recorded_at: "2026-09-10"
+      receipt_path: working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/wave5-verification-20260910.json
+      diagnostics:
+        - warn_not_success
+        - finding_unresolved
+    process_grade:
+      band: D
+      score: 57
+      gap_codes:
+        - expected_artifact_missing
+        - evidence_stale
+      note: Warn-only at stdd dogfood; manifest on disk; B band target not met on stdd corpus.
+    close_out_signals:
+      machine_close_out:
+        status: blocked
+        check: "tied_checklist_gate_validate allowed:true AND envelope zero blocking error gaps"
+        result: "gates allowed:true; envelope has 2 blocking evidence_stale (hash-compare identical receipt hash across phases)"
+        evidence:
+          - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/wave5-close_out-20260910.json
+          - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/request-evidence-envelope.v1.json
+      process_contract:
+        status: partial
+        check: "baseline-functional dispositions + manifest when tests ran"
+        result: "manifest written; process_grade band D (target B)"
+        evidence:
+          - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/verification-evidence-manifest.v1.json
+          - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/wave5-reconcile-summary.json
+      adherence_ledger:
+        status: improved
+        check: "gate_decided rows resolvable; Stage J legacy-archive paths fixed"
+        result: "Stage J paths fixed; wave5 verification/close_out receipts appended"
+        evidence:
+          - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adherence/events.jsonl
+          - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/ledger.jsonl
+feedback_loops:
+  specification: Unresolved contract ambiguity returns to refinement before wave CITDP is finalized.
+  validation_and_sync: Failed wave validation returns to owning pseudo-code or test step.
+  leap: Implementation divergence updates IMPL first, then ARCH/REQ when scope changes.

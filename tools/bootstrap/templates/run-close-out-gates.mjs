@@ -35,6 +35,10 @@ Options:
   --phase PHASE             pre_implementation | verification | close_out (default: close_out)
   --run-id ID               Inquiry run_id for activation collect (optional)
   --envelope-blocking       Validate envelope with fail_on_error_gaps after build
+  --fail-on-process-gaps    Validate envelope with fail_on_process_gaps (Wave 5 process-strict)
+  --sync-dispositions       Run sync-tracker-dispositions.mjs before gates
+  --reconcile               Run tied_adherence_reconcile_run (read-only) before gates
+  --rebuild-envelope-only   Build/validate envelope only; skip gate validate
   --skip-manifest           Skip quality evidence manifest collection
   --help                    Show this help
 `);
@@ -57,6 +61,10 @@ Options:
     phase: get("--phase") ?? "close_out",
     runId: get("--run-id"),
     envelopeBlocking: argv.includes("--envelope-blocking"),
+    failOnProcessGaps: argv.includes("--fail-on-process-gaps"),
+    syncDispositions: argv.includes("--sync-dispositions"),
+    reconcile: argv.includes("--reconcile"),
+    rebuildEnvelopeOnly: argv.includes("--rebuild-envelope-only"),
     skipManifest: argv.includes("--skip-manifest"),
   };
 }
@@ -171,8 +179,18 @@ async function loadModules() {
   const activation = await import(pathToFileURL(path.join(MCP_DIST, "checklist-activation-collect.js")).href);
   const envelopeBuild = await import(pathToFileURL(path.join(MCP_DIST, "request-evidence-envelope/build.js")).href);
   const envelopeValidate = await import(pathToFileURL(path.join(MCP_DIST, "request-evidence-envelope/validate.js")).href);
+  const reconcileRunner = await import(pathToFileURL(path.join(MCP_DIST, "tools/adherence-reconcile-runner.js")).href);
   const yamlLoader = await import(pathToFileURL(path.join(MCP_DIST, "yaml-loader.js")).href);
-  return { validator, hydration, activation, envelopeBuild, envelopeValidate, yamlLoader };
+  return { validator, hydration, activation, envelopeBuild, envelopeValidate, reconcileRunner, yamlLoader };
+}
+
+function runSyncDispositions(trackerAbsolute) {
+  const script = path.join(REPO_ROOT, "tools/bootstrap/templates/sync-tracker-dispositions.mjs");
+  execFileSync(process.execPath, [script, "--tracker", trackerAbsolute], {
+    cwd: REPO_ROOT,
+    encoding: "utf8",
+    stdio: ["ignore", "pipe", "pipe"],
+  });
 }
 
 async function main() {
@@ -183,20 +201,44 @@ async function main() {
     activation,
     envelopeBuild,
     envelopeValidate,
+    reconcileRunner,
     yamlLoader,
   } = await loadModules();
 
-  if (!args.trackerPath || !args.citdpPath) {
-    throw new Error("missing --tracker-path or --citdp-path");
+  if (!args.trackerPath) {
+    throw new Error("missing --tracker-path");
+  }
+  if (!args.rebuildEnvelopeOnly && !args.citdpPath) {
+    throw new Error("missing --citdp-path");
   }
 
   const trackerAbsolute = path.isAbsolute(args.trackerPath)
     ? args.trackerPath
     : path.join(args.projectRoot, args.trackerPath);
-  const tracker = yaml.load(readFileSync(trackerAbsolute, "utf8"));
-  const citdp = loadCitdpRecord(args.citdpPath, args.projectRoot);
+  if (args.syncDispositions) {
+    runSyncDispositions(trackerAbsolute);
+  }
+  let tracker = yaml.load(readFileSync(trackerAbsolute, "utf8"));
+  const citdp = args.citdpPath ? loadCitdpRecord(args.citdpPath, args.projectRoot) : {};
   const depth = citdp?.risk_analysis?.adversarial_inquiry?.depth_tier ?? "integrated";
   const requiredStepSlugs = validator.derivePhaseAwareSlugs(depth, args.phase);
+
+  let reconcileResult = { ok: false, skipped: true };
+  if (args.reconcile) {
+    const ledgerPath = path.join(args.projectRoot, "working", args.requestToken, "gates", "ledger.jsonl");
+    const gatesDir = path.join(args.projectRoot, "working", args.requestToken, "gates");
+    reconcileResult = await reconcileRunner.runAdherenceReconcile({
+      ledger_path: ledgerPath,
+      tracker_path: trackerAbsolute,
+      gates_dir: gatesDir,
+      workspace: args.projectRoot,
+      citdp_path: args.citdpPath
+        ? (path.isAbsolute(args.citdpPath) ? args.citdpPath : path.join(args.projectRoot, args.citdpPath))
+        : undefined,
+      include_process_grade: true,
+      repo_root: REPO_ROOT,
+    });
+  }
 
   let activationPayload;
   if (args.runId) {
@@ -217,30 +259,34 @@ async function main() {
   }
 
   const pseudocodeReports = loadPseudocodeReports(args.projectRoot, args.requestToken, citdp);
-  const hydrationResult = await hydration.hydrateGateEvidenceFromActivation({
-    phase: args.phase,
-    activation: activationPayload,
-    evidence: {
-      trackerSource: "authoritative_file",
-      requestToken: args.requestToken,
-      pseudocodeReports,
-    },
-    projectRoot: args.projectRoot,
-  });
 
   let manifestResult = { ok: false, skipped: true, reason: "not_requested" };
   if (!args.skipManifest) {
     manifestResult = await collectQualityManifest(args, citdp);
   }
 
-  const gate = validator.validateChecklistGate({
-    phase: args.phase,
-    tracker,
-    citdp,
-    requiredStepSlugs,
-    activation: activationPayload,
-    evidence: hydrationResult.evidence,
-  });
+  let gate = { allowed: true, blocking: false, diagnostics: [], evidence_hydrated: false };
+  let hydrationResult = { evidence: {}, hydrated: false };
+  if (!args.rebuildEnvelopeOnly) {
+    hydrationResult = await hydration.hydrateGateEvidenceFromActivation({
+      phase: args.phase,
+      activation: activationPayload,
+      evidence: {
+        trackerSource: "authoritative_file",
+        requestToken: args.requestToken,
+        pseudocodeReports,
+      },
+      projectRoot: args.projectRoot,
+    });
+    gate = validator.validateChecklistGate({
+      phase: args.phase,
+      tracker,
+      citdp,
+      requiredStepSlugs,
+      activation: activationPayload,
+      evidence: hydrationResult.evidence,
+    });
+  }
 
   const tiedBase = yamlLoader.getBasePath?.() ?? path.join(args.projectRoot, "tied");
   const buildResult = await envelopeBuild.buildRequestEvidenceEnvelope({
@@ -258,11 +304,13 @@ async function main() {
     envelopeValidation = await envelopeValidate.validateRequestEvidenceEnvelope({
       envelope: buildResult.envelope,
       fail_on_error_gaps: args.envelopeBlocking,
+      fail_on_process_gaps: args.failOnProcessGaps,
     });
   }
 
   const summary = {
     phase: args.phase,
+    reconcile: reconcileResult,
     quality_manifest: manifestResult,
     gate: {
       allowed: gate.allowed,
@@ -282,7 +330,12 @@ async function main() {
   };
 
   process.stdout.write(`${JSON.stringify(summary, null, 2)}\n`);
-  if (!gate.allowed || !buildResult.ok || !envelopeValidation.ok) {
+  if (
+    (!args.rebuildEnvelopeOnly && !gate.allowed)
+    || !buildResult.ok
+    || !envelopeValidation.ok
+    || (args.reconcile && reconcileResult.ok === false && !reconcileResult.skipped)
+  ) {
     process.exitCode = 1;
   }
 }

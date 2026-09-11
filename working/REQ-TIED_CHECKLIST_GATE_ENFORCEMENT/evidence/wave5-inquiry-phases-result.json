@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "phases": [
+    {
+      "phase": "verification",
+      "run_id": "wave5-verify-20260910",
+      "verdict": "UNRELIABLE",
+      "artifacts": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-verification",
+      "metrics_match": true
+    },
+    {
+      "phase": "close_out",
+      "run_id": "wave5-closeout-20260910",
+      "verdict": "UNRELIABLE",
+      "artifacts": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-close_out",
+      "metrics_match": true
+    }
+  ]
+}

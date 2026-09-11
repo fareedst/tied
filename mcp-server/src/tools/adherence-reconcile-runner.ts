@@ -12,11 +12,26 @@ export type ReconcileFinding = {
   detail?: Record<string, unknown>;
 };
 
+export type ProcessGradeDimension = {
+  name: string;
+  score: number;
+  weight: number;
+  gap_codes?: string[];
+};
+
+export type ProcessGrade = {
+  score: number;
+  band: string;
+  dimensions: ProcessGradeDimension[];
+  gap_codes: string[];
+};
+
 export type ReconcileReport = {
   request_token?: string;
   findings: ReconcileFinding[];
   ledger_rows: number;
   read_only: true;
+  process_grade?: ProcessGrade;
 };
 
 export type ReconcileRunInput = {
@@ -28,6 +43,7 @@ export type ReconcileRunInput = {
   requirements_index?: string;
   implementation_index?: string;
   repo_root?: string;
+  include_process_grade?: boolean;
 };
 
 type ProcessCapture = {
@@ -117,6 +133,7 @@ export async function runAdherenceReconcile(input: ReconcileRunInput): Promise<{
   if (input.citdp_path?.trim()) args.push("--citdp", input.citdp_path);
   if (input.requirements_index?.trim()) args.push("--requirements-index", input.requirements_index);
   if (input.implementation_index?.trim()) args.push("--implementation-index", input.implementation_index);
+  if (input.include_process_grade) args.push("--include-process-grade");
 
   const capture = await captureProcess(argv, cwd, args);
   const diagnostics: string[] = [];

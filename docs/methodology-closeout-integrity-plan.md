@@ -547,6 +547,10 @@ catalog-pseudocode-contracts
 
 Compressed substitutes (`author-implementation`, `unit-code`, `close-out`) are **invalid** after Wave 2.
 
+## Appendix C — Wave 5 process-adherence extension
+
+See [`process-adherence-evidence-grade-plan.md`](process-adherence-evidence-grade-plan.md) for dual-write detection (`tracker_dual_write`), process grade rubric, `sub-close-out-evidence-sync`, and `fail_on_process_gaps` envelope validate (shipped 2026-09-10).
+
 ---
 
 **Last updated:** 2026-09-10 (refinement pass 2)

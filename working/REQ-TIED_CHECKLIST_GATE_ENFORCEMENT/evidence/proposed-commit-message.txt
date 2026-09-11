@@ -1,0 +1,8 @@
+feat(checklist): Wave 5 process-adherence evidence grade
+
+Close machine/process completion gap at minimal depth: envelope detects
+tracker_dual_write and related process gaps; reconcile emits process_grade;
+close-out skills CALL sub-close-out-evidence-sync.
+
+REQ-TIED_CHECKLIST_GATE_ENFORCEMENT REQ-REQUEST_EVIDENCE_ENVELOPE
+PROC-AGENT_REQ_CHECKLIST

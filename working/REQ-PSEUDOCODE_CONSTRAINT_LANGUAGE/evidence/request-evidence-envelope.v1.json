@@ -1,1 +1,301 @@
-undefined
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-09-10T19:46:07.529Z",
+    "generator": "request_evidence_envelope_backfill",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE",
+    "project_id": "cfd5bf6ad98024eb",
+    "depth_tier": "integrated",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [
+    {
+      "run_id": "run-pre_implementation",
+      "phase": "pre_implementation",
+      "started_at": null,
+      "generator": "request_evidence_envelope_build"
+    },
+    {
+      "run_id": "run-verification",
+      "phase": "verification",
+      "started_at": null,
+      "generator": "request_evidence_envelope_build"
+    }
+  ],
+  "artifacts": [
+    {
+      "kind": "adversarial_inquiry_gate",
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "path": "working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+      "content_hash": "sha256:540af1a67e2d2706d10bca5b6a6f3468a210254f5bfdee821d8dbbef1f2706e4",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_gate",
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "path": "working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-verification/gate-result.json",
+      "content_hash": "sha256:a14280a622175c43cfbe600e481ad69de93c0c9ff794392b058545c17209d48d",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_gate",
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "path": "working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/gate-result.json",
+      "content_hash": "sha256:a14280a622175c43cfbe600e481ad69de93c0c9ff794392b058545c17209d48d",
+      "phase": null,
+      "status": "stale_projection",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_ledger",
+      "schema_version": null,
+      "path": "working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl",
+      "content_hash": "sha256:ab6f174136e787b25e39677d72338a46a7502a3c18dcb2a2c43786b11e6db472",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_ledger",
+      "schema_version": null,
+      "path": "working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
+      "content_hash": "sha256:8fc079d0b0b0164fec221c157efbf35c41821328246d38ce4feae48a5b280c3e",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_ledger",
+      "schema_version": null,
+      "path": "working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/finding-ledger.jsonl",
+      "content_hash": "sha256:8fc079d0b0b0164fec221c157efbf35c41821328246d38ce4feae48a5b280c3e",
+      "phase": null,
+      "status": "stale_projection",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_obligation",
+      "schema_version": "adversarial-inquiry-report.v1",
+      "path": "working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+      "content_hash": "sha256:5069d66513eb7d12fc4bc3081f940e34f224d7b8fe34a51f9163d395677fe641",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_obligation",
+      "schema_version": "adversarial-inquiry-report.v1",
+      "path": "working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-verification/obligation-report.json",
+      "content_hash": "sha256:585792d5f56d8fcbcfde1fe01d8bac23883be389615609697325d5cec4ebb272",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_obligation",
+      "schema_version": "adversarial-inquiry-report.v1",
+      "path": "working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/obligation-report.json",
+      "content_hash": "sha256:585792d5f56d8fcbcfde1fe01d8bac23883be389615609697325d5cec4ebb272",
+      "phase": null,
+      "status": "stale_projection",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_provenance",
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "path": "working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json",
+      "content_hash": "sha256:76f270bd8b81f5618e9258b9f357626ff6efb9d0e4dba5c86495a8b106815c8f",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "provenance_identity"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_provenance",
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "path": "working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-verification/evidence-provenance.json",
+      "content_hash": "sha256:2d1efe1c14eb560f9ce86fb7d84b853109c87a3df8ebf61ee141be84b8ddb2ee",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "provenance_identity"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_provenance",
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "path": "working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/evidence-provenance.json",
+      "content_hash": "sha256:2d1efe1c14eb560f9ce86fb7d84b853109c87a3df8ebf61ee141be84b8ddb2ee",
+      "phase": null,
+      "status": "stale_projection",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": null,
+      "path": "working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/gates/gate-close_out-cl-closeout-20260910-result.json",
+      "content_hash": "sha256:343cd6baa8c12bd14b2c35926f41a01a5a32fe3c022a73144c8f41898e807e19",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": null,
+      "path": "working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/gates/gate-pre_implementation-cl-pre-impl-20260910-result.json",
+      "content_hash": "sha256:ca3f02ddf837c414f79eaa632de67788e5048c56b28e2b870a871fbd20e11372",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": null,
+      "path": "working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/gates/gate-verification-cl-verify-20260910-result.json",
+      "content_hash": "sha256:bef27da8d83962513bfd593e82945f2babc754124482554d76448aaeaba1e0d2",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_tracker",
+      "schema_version": null,
+      "path": "working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/agent-req-implementation-checklist.yaml",
+      "content_hash": "sha256:775405b920326c464a6864689db004f8acda67c20c2cfdfe134a36cbab0aa19a",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "tracker_disposition_only"
+      ]
+    },
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "tied/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE.yaml",
+      "content_hash": "sha256:3d88167edcb87c7a7cea9176ace0581afd7165e75f4f1118daf3c9d636f6e6dd",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    },
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/CITDP-REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE.yaml",
+      "content_hash": "sha256:1bf7b0438c2cd85879f3fafcf3808a86071df458a8634bd94a2f013a409bb194",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": "working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/agent-req-implementation-checklist.yaml",
+    "tracker_hash": "sha256:775405b920326c464a6864689db004f8acda67c20c2cfdfe134a36cbab0aa19a",
+    "citdp_path": "working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/CITDP-REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE.yaml",
+    "evidence_chain_profile_path": null
+  },
+  "gaps": [
+    {
+      "code": "artifact_path_root_projection_rejected",
+      "artifact_kind": "adversarial_inquiry_gate",
+      "phase": null,
+      "detail": "Root projection stale: working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/gate-result.json",
+      "severity": "error",
+      "source": "discovery"
+    },
+    {
+      "code": "artifact_path_root_projection_rejected",
+      "artifact_kind": "adversarial_inquiry_ledger",
+      "phase": null,
+      "detail": "Root projection stale: working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/finding-ledger.jsonl",
+      "severity": "error",
+      "source": "discovery"
+    },
+    {
+      "code": "artifact_path_root_projection_rejected",
+      "artifact_kind": "adversarial_inquiry_obligation",
+      "phase": null,
+      "detail": "Root projection stale: working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/obligation-report.json",
+      "severity": "error",
+      "source": "discovery"
+    },
+    {
+      "code": "artifact_path_root_projection_rejected",
+      "artifact_kind": "adversarial_inquiry_provenance",
+      "phase": null,
+      "detail": "Root projection stale: working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/evidence-provenance.json",
+      "severity": "error",
+      "source": "discovery"
+    },
+    {
+      "code": "finding_unresolved",
+      "artifact_kind": "adversarial_inquiry_gate",
+      "phase": "pre_implementation",
+      "detail": "finding_unresolved",
+      "severity": "error",
+      "source": "A5"
+    },
+    {
+      "code": "finding_unresolved",
+      "artifact_kind": "adversarial_inquiry_gate",
+      "phase": "pre_implementation",
+      "detail": "warn_not_success",
+      "severity": "error",
+      "source": "A5"
+    },
+    {
+      "code": "finding_unresolved",
+      "artifact_kind": "adversarial_inquiry_gate",
+      "phase": "verification",
+      "detail": "finding_unresolved",
+      "severity": "error",
+      "source": "A5"
+    },
+    {
+      "code": "finding_unresolved",
+      "artifact_kind": "adversarial_inquiry_gate",
+      "phase": "verification",
+      "detail": "warn_not_success",
+      "severity": "error",
+      "source": "A5"
+    }
+  ]
+}

@@ -102,6 +102,8 @@ export type ValidateRequestEvidenceEnvelopeInput = {
   project_root?: string;
   /** When true, any gap with severity error fails validation (close-out blocking mode). */
   fail_on_error_gaps?: boolean;
+  /** When true, process-adherence warn gaps become blocking (Wave 5 W5-D4). */
+  fail_on_process_gaps?: boolean;
 };
 
 export type ValidateRequestEvidenceEnvelopeResult = {

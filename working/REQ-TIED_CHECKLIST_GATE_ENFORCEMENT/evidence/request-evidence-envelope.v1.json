@@ -1,7 +1,7 @@
 {
   "schema_version": "request-evidence-envelope.v1",
   "envelope_meta": {
-    "generated_at": "2026-09-10T23:56:57.534Z",
+    "generated_at": "2026-09-11T02:16:41.426Z",
     "generator": "request_evidence_envelope_build",
     "revision": 1
   },
@@ -70,7 +70,7 @@
       "kind": "adversarial_inquiry_ledger",
       "schema_version": null,
       "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-close_out/finding-ledger.jsonl",
-      "content_hash": "sha256:98897d2e18dcdacfe23f3f3fdc0fd9e58e07a405974b33c4741a1bb87b970806",
+      "content_hash": "sha256:b1d419d26f23d64462b2ca8b8f00ff48a81230c197e11b900e8be174d5fd12b3",
       "phase": "close_out",
       "status": "present",
       "proof_boundaries": [
@@ -92,7 +92,7 @@
       "kind": "adversarial_inquiry_ledger",
       "schema_version": null,
       "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
-      "content_hash": "sha256:dfee23781f32a0a840aa57deb23d63549672d8e85021ce3208d5bbe32875c7ff",
+      "content_hash": "sha256:331ea502f7a0ee9318c694625f92e8c47d191a12edb34ec938d210372339ad44",
       "phase": "verification",
       "status": "present",
       "proof_boundaries": [
@@ -103,7 +103,7 @@
       "kind": "adversarial_inquiry_obligation",
       "schema_version": "adversarial-inquiry-report.v1",
       "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-close_out/obligation-report.json",
-      "content_hash": "sha256:d7fd255bf11ab2543f14a3d3d79808e8f997bfddbf698230a5af8a9d9651d1b5",
+      "content_hash": "sha256:112cc67904b927e1d498b50b30e5c3e853d8d19fce5786ae60ca2b397f002491",
       "phase": "close_out",
       "status": "present",
       "proof_boundaries": [
@@ -114,7 +114,7 @@
       "kind": "adversarial_inquiry_obligation",
       "schema_version": "adversarial-inquiry-report.v1",
       "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
-      "content_hash": "sha256:d7fd255bf11ab2543f14a3d3d79808e8f997bfddbf698230a5af8a9d9651d1b5",
+      "content_hash": "sha256:614b160f0939e9059da21ca45a44573f4894d819c8bd90be5300a3852325485a",
       "phase": "pre_implementation",
       "status": "present",
       "proof_boundaries": [
@@ -125,7 +125,7 @@
       "kind": "adversarial_inquiry_obligation",
       "schema_version": "adversarial-inquiry-report.v1",
       "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-verification/obligation-report.json",
-      "content_hash": "sha256:d7fd255bf11ab2543f14a3d3d79808e8f997bfddbf698230a5af8a9d9651d1b5",
+      "content_hash": "sha256:112cc67904b927e1d498b50b30e5c3e853d8d19fce5786ae60ca2b397f002491",
       "phase": "verification",
       "status": "present",
       "proof_boundaries": [
@@ -136,7 +136,7 @@
       "kind": "adversarial_inquiry_provenance",
       "schema_version": "adversarial-inquiry-provenance.v1",
       "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-close_out/evidence-provenance.json",
-      "content_hash": "sha256:ce5b43a290ed3788128516f0147e90eb1961f6848b76670ce666cbc3a4c256fb",
+      "content_hash": "sha256:ce2acbcf794af059b933ea8d47426add6d5fa9ddf15ae092e9e356b0a1099eb9",
       "phase": "close_out",
       "status": "present",
       "proof_boundaries": [
@@ -147,7 +147,7 @@
       "kind": "adversarial_inquiry_provenance",
       "schema_version": "adversarial-inquiry-provenance.v1",
       "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json",
-      "content_hash": "sha256:34d590ff3ad9da2b85b838077cfad05bf0fd920f5fda950a2075347ae1ad156c",
+      "content_hash": "sha256:fd69694efd2335336a787b040731048b50853ff6f4fd7673d1a7f155fe4df81f",
       "phase": "pre_implementation",
       "status": "present",
       "proof_boundaries": [
@@ -158,7 +158,7 @@
       "kind": "adversarial_inquiry_provenance",
       "schema_version": "adversarial-inquiry-provenance.v1",
       "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-verification/evidence-provenance.json",
-      "content_hash": "sha256:cd188ccbf587cd5bf4aa1bdb56e50456435bd0075735396a8da5f6994c3b997a",
+      "content_hash": "sha256:be5dee2a90ec2308e9349482615f1ce78b609a45e3e77b91b400a1688b352ee8",
       "phase": "verification",
       "status": "present",
       "proof_boundaries": [
@@ -168,8 +168,8 @@
     {
       "kind": "checklist_gate_receipt",
       "schema_version": "checklist-gate-receipt.v1",
-      "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/close_out-2026-09-10T23-56-23-256Z.json",
-      "content_hash": "sha256:bc72fe11b4fb31307cf9425eeb6fd366fceaddb2709187438e2988675dcd1d19",
+      "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/wave5-close_out-20260910.json",
+      "content_hash": "sha256:05fdd7950cc0f3e32d6df5b5be228cac564ce54c7c40c484d9998fa102eff13c",
       "phase": "close_out",
       "status": "present",
       "proof_boundaries": [
@@ -178,9 +178,9 @@
     },
     {
       "kind": "checklist_gate_receipt",
-      "schema_version": "checklist-gate-receipt.v1",
-      "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/pre_implementation-2026-09-10T23-55-32-311Z.json",
-      "content_hash": "sha256:122a2d22ca128f06ecef08acd8f81f37bbcd528a2481f990529eba073e71745a",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/wave5-pre-implementation-build.json",
+      "content_hash": "sha256:f125dfd5eb136c8d5d9eca0e557d26dd6c06db3eaff49338e2f0b886ab2c65c6",
       "phase": "pre_implementation",
       "status": "present",
       "proof_boundaries": [
@@ -190,30 +190,8 @@
     {
       "kind": "checklist_gate_receipt",
       "schema_version": "checklist-gate-receipt.v1",
-      "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/pre_implementation-2026-09-10T23-55-46-711Z.json",
-      "content_hash": "sha256:fc3a9be9e635b1aa69134cb9a52a3f8041a42cc6b4948319a7ff40d030d57703",
-      "phase": "pre_implementation",
-      "status": "present",
-      "proof_boundaries": [
-        "gate_decision_only"
-      ]
-    },
-    {
-      "kind": "checklist_gate_receipt",
-      "schema_version": "checklist-gate-receipt.v1",
-      "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/pre_implementation-2026-09-10T23-56-23-246Z.json",
-      "content_hash": "sha256:a1e304943b45dc3d647f006df07bd971043feb25df1a6d620726d4a9fc9fb03d",
-      "phase": "pre_implementation",
-      "status": "present",
-      "proof_boundaries": [
-        "gate_decision_only"
-      ]
-    },
-    {
-      "kind": "checklist_gate_receipt",
-      "schema_version": "checklist-gate-receipt.v1",
-      "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/verification-2026-09-10T23-55-46-717Z.json",
-      "content_hash": "sha256:d1a0e4db86e2539a23d3e1f9ba8f641f58022efb5f9e46179efff5ba39e27f8a",
+      "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/wave5-verification-20260910.json",
+      "content_hash": "sha256:2e1bf22df3658b57aeecdb350746891d35f1fb2c4a30c354d90e1f3c4f3bbc87",
       "phase": "verification",
       "status": "present",
       "proof_boundaries": [
@@ -221,14 +199,14 @@
       ]
     },
     {
-      "kind": "checklist_gate_receipt",
-      "schema_version": "checklist-gate-receipt.v1",
-      "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/verification-2026-09-10T23-56-23-253Z.json",
-      "content_hash": "sha256:67f153e2ce70743c66929753da15e6da87eb006c239d3086cd95ceef498b45ce",
-      "phase": "verification",
+      "kind": "checklist_tracker",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/agent-req-implementation-checklist.yaml",
+      "content_hash": "sha256:c68a9cd36df5cdd31f23b7bdb17fa90c1598b84e44a02040d39f07bab56777d5",
+      "phase": null,
       "status": "present",
       "proof_boundaries": [
-        "gate_decision_only"
+        "tracker_disposition_only"
       ]
     },
     {
@@ -323,7 +301,7 @@
       "kind": "request_evidence_envelope",
       "schema_version": "request-evidence-envelope.v1",
       "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/request-evidence-envelope.v1.json",
-      "content_hash": "sha256:41ae7e92a04d8044e5ae227638804e1aec2bb3e6ecb27c0cc3f85a2768b70de0",
+      "content_hash": "sha256:d760eac4d53d24ad657373d4ea30fee64bd4b4d54fcde8fdf9f4247355e0ad3e",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -351,11 +329,77 @@
       "proof_boundaries": [
         "discovery_only"
       ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/proposed-commit-message.txt",
+      "content_hash": "sha256:0dbaf0a30a4e8859d7648b2566770f481594120a5ced10902155faeee4daa83a",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/wave5-external-fixture-replay.json",
+      "content_hash": "sha256:7850a8509b423386c607fd6dbf113abc0db4a574bbbc5d481fbc489e3ddc6eb3",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/wave5-gate-receipts-result.json",
+      "content_hash": "sha256:76fee61b66caefdcd54d773483801595056bd33e9140cfb0abd0f8103cd32896",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/wave5-inquiry-phases-result.json",
+      "content_hash": "sha256:4b14bcf3a0fa4b1fe46a967c01611d70743ff9ba7ed41715617a1b84eef2c0a9",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/wave5-reconcile-summary.json",
+      "content_hash": "sha256:9164be6c24bd26604cb86429c9ee344e0b1248a1cf19ed7a01b53eadaad59c22",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "verification_evidence_manifest",
+      "schema_version": "verification-evidence-manifest.v1",
+      "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/verification-evidence-manifest.v1.json",
+      "content_hash": "sha256:2deecc70ece084f7b736891753977e56760a279f5e2ad125e568d917765ae82d",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
     }
   ],
   "cross_links": {
-    "tracker_path": null,
-    "tracker_hash": null,
+    "tracker_path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/agent-req-implementation-checklist.yaml",
+    "tracker_hash": "sha256:c68a9cd36df5cdd31f23b7bdb17fa90c1598b84e44a02040d39f07bab56777d5",
     "citdp_path": null,
     "evidence_chain_profile_path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/evidence-chain-profile.v1.json"
   },
@@ -407,6 +451,14 @@
       "detail": "warn_not_success",
       "severity": "warn",
       "source": "A5"
+    },
+    {
+      "code": "thin_ledger",
+      "artifact_kind": null,
+      "phase": null,
+      "detail": "Completed slugs without outcome_verified ledger rows: session-bootstrap, translate-sponsor-intent, change-definition, impact-discovery, risk-assessment, test-strategy, persist-citdp-record, catalog-pseudocode-contracts, gate-pseudocode-validation, unit-test-red, unit-test-green, composition-integration, verification-gate, sub-adversarial-inquiry-pass, sub-close-out-evidence-sync, traceable-commit",
+      "severity": "warn",
+      "source": "ledger-correlation"
     }
   ]
 }

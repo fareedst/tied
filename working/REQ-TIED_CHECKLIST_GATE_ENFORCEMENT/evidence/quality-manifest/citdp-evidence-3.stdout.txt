@@ -1,32 +1,58 @@
-▶ remediation acceptance matrix A1–A18 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
-  ✔ A1 sparse Tracker → tracker_sparse (0.503083ms)
-  ✔ A2 synthetic projection → tracker_not_authoritative (0.053667ms)
-  ✔ A3 missing provenance fields → provenance_incomplete (0.104167ms)
-  ✔ A3 root wrapper schemaVersion with inner provenance identity passes [REQ-TIED_SETUP] (0.55775ms)
-  ✔ A4 missing activation pairing → activation_pairing_incomplete (4.895083ms)
-  ✔ A5 unresolved finding → finding_unresolved under strict policy (0.105792ms)
-  ✔ W1-D2 advisory policy surfaces finding diagnostics without blocking (0.048916ms)
-  ✔ W1-D2 integrated gate allows advisory findings with waiver visibility (0.4785ms)
-  ✔ W1-D5 in-memory tracker rejected at close_out integrated depth (0.053042ms)
-  ✔ A6 self-reported command success → command_success_unproven (0.077208ms)
-  ✔ A7 stale hash mismatch → evidence_stale (0.061042ms)
-  ✔ A8 placeholder waiver → waiver_invalid (0.107667ms)
-  ✔ A9 pending sub-stub at integrated depth → sub_stub_pending (0.103625ms)
-  ✔ A10 parent completed with pending sub-stub → parent_child_inconsistent (0.106875ms)
-  ✔ A11 valid integrated verification evidence → allowed (0.115709ms)
-  ✔ A12 valid waiver excludes waived obligation only (0.518916ms)
-  ✔ A13 wrong phase receipt → receipt_identity_mismatch:phase (0.097625ms)
-  ✔ A14 verification receipt at close_out → receipt_identity_mismatch:phase (0.080042ms)
-  ✔ A15 dirty post-gate tree → tree_dirty_post_gate (0.082833ms)
-  ✔ A16 depth downgrade without waiver → depth_downgrade_requires_waiver (0.061333ms)
-  ✔ A17 caller cannot subtract auto-required slugs (0.062834ms)
-  ✔ A18 advisory policy still fail-closed without activation at integrated depth (0.039791ms)
-✔ remediation acceptance matrix A1–A18 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (8.966541ms)
-ℹ tests 22
-ℹ suites 1
-ℹ pass 22
+▶ VALIDATE_TRACKER REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+  ✔ blocks pending steps and generic skip dispositions (0.492292ms)
+  ✔ requires every explicitly governed step to be present (0.072042ms)
+  ✔ requires evidence, rationale, and waiver ownership by disposition (0.560333ms)
+✔ VALIDATE_TRACKER REQ-TIED_CHECKLIST_GATE_ENFORCEMENT (1.591083ms)
+▶ VALIDATE_ADVERSARIAL_CONTRACT REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+  ✔ requires the complete minimal evidence set (6.062334ms)
+✔ VALIDATE_ADVERSARIAL_CONTRACT REQ-TIED_CHECKLIST_GATE_ENFORCEMENT (6.11625ms)
+▶ VALIDATE_ACTIVATION_PAIRING REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+  ✔ rejects stale identities and accepts a complete matching pair (0.465584ms)
+  ✔ rejects cross-phase and root-projection artifact paths [Slice P] (0.196708ms)
+✔ VALIDATE_ACTIVATION_PAIRING REQ-TIED_CHECKLIST_GATE_ENFORCEMENT (0.726834ms)
+▶ VALIDATE_CHECKLIST_GATE Batch 2 Slice 1 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+  ✔ fails closed when integrated depth omits activation (0.273042ms)
+  ✔ requires auto sub-adversarial slug even when caller omits required_step_slugs (0.164917ms)
+  ✔ unions caller slugs with auto slugs and cannot subtract auto slugs (0.082166ms)
+  ✔ passes integrated verification with VolumeStats-style fixture (0.137792ms)
+  ✔ rejects the same run_id when receipt phase differs from gate phase (0.092959ms)
+  ✔ rejects verification receipt submitted as close_out activation even with citation (0.071167ms)
+  ✔ requires depth-change waiver when downgrading from integrated to minimal (0.079666ms)
+  ✔ skips downgrade diagnostic when prior_depth_tier is missing (0.04975ms)
+  ✔ requires completion_criteria.activation at verification and close_out (0.096083ms)
+  ✔ fails strict_candidate at close_out without pairing (0.047875ms)
+  ✔ allows strict_candidate at pre_implementation with counterexamples only (0.033292ms)
+  ✔ allows close_out with close-out inquiry waiver instead of pairing (0.064083ms)
+✔ VALIDATE_CHECKLIST_GATE Batch 2 Slice 1 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (1.315083ms)
+▶ VALIDATE_CHECKLIST_GATE Slice 0 hotfixes [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+  ✔ rejects placeholder close_out inquiry waiver (1787507684 shape) (0.059583ms)
+  ✔ derives expected from receipt when activation omits expected (0.593667ms)
+  ✔ fails when receipt is incomplete and expected is omitted (0.057791ms)
+  ✔ fails minimal depth when sub-adversarial-inquiry-pass is pending (0.034875ms)
+  ✔ fails integrated depth when parent slug is completed and sub-stub is pending (0.059458ms)
+  ✔ validateIntegratedParentChildSlugs detects parent completed with pending sub-stub (0.028792ms)
+  ✔ rejects placeholder depth-change waiver on downgrade (0.0295ms)
+✔ VALIDATE_CHECKLIST_GATE Slice 0 hotfixes [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (0.919375ms)
+▶ VALIDATE_MINIMAL_WAIVER Slice A3 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+  ✔ warns when triggered minimal depth lacks integrated_waiver (0.077ms)
+  ✔ is clean when triggered minimal depth has complete integrated_waiver (0.037041ms)
+  ✔ does not warn for non-triggered minimal depth (0.027958ms)
+  ✔ does not warn for integrated depth even when triggers are recorded (0.045125ms)
+  ✔ validateMinimalWaiver isolates advisory diagnostic semantics (0.044625ms)
+✔ VALIDATE_MINIMAL_WAIVER Slice A3 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (0.270333ms)
+▶ Go writer fixture gate composition [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+  ✔ A1 rejects sparse legacy summary without matching step rows (0.066375ms)
+  ✔ A6 passes minimal pre_implementation gate for Go writer fixture (0.546583ms)
+  ✔ A7 fails integrated writer output without activation under advisory policy (0.17ms)
+✔ Go writer fixture gate composition [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (0.816375ms)
+▶ Stage P trigger: non-agentstream unresolved evidence_refs
+  ✔ A32 trigger fires when gate accepts manual Tracker with nonexistent evidence_refs (0.037709ms)
+✔ Stage P trigger: non-agentstream unresolved evidence_refs (0.056125ms)
+ℹ tests 34
+ℹ suites 8
+ℹ pass 34
 ℹ fail 0
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 79.361708
+ℹ duration_ms 87.837875

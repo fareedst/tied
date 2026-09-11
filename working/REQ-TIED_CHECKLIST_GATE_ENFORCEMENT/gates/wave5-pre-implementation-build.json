@@ -1,0 +1,12 @@
+{
+  "allowed": true,
+  "ok": true,
+  "blocking": false,
+  "depth": "integrated",
+  "phase": "pre_implementation",
+  "diagnostics": [],
+  "gate_receipt": {
+    "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/pre_implementation-2026-09-11T01-25-12-581Z.json",
+    "hash": "sha256:63454d40f794203d002c4c27f6155bb7c3adac80396e45585ba495601a51549e"
+  }
+}

@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Wave 5 — Process-adherence evidence grade ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT], [REQ-REQUEST_EVIDENCE_ENVELOPE])** —
+  Envelope dedupes gate receipts per phase and treats inquiry byte-identical artifacts
+  as fresh when provenance run_ids differ; auto-detects dual-write trackers, manifest
+  gaps, hash drift, and thin ledger;
+  `fail_on_process_gaps` validate flag; `sub-close-out-evidence-sync` checklist sub_procedure;
+  `sync-tracker-dispositions.mjs`; extended `run-close-out-gates.mjs`;
+  `process_grade` extension on `tied_adherence_reconcile_run`.
+  Docs: `docs/process-adherence-evidence-grade-plan.md`.
+  Integrated close-out gates: `wave5-verify-20260910`, `wave5-closeout-20260910` (advisory).
+
 - **Methodology close-out integrity program — Waves 1–4 ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT], [REQ-PSEUDOCODE_STATIC_ANALYSIS], [REQ-TIED_ADVERSARIAL_INQUIRY], [REQ-TIED_SETUP])** —
   Unified gate receipts and request evidence envelopes; auto-hydration of phase
   inquiry artifacts and PSA reports in `run-close-out-gates.mjs`; envelope

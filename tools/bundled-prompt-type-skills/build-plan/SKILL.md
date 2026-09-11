@@ -41,6 +41,8 @@ If neither a linked plan nor an in-message plan is present, stop.
 
 ## Gates
 
+- Before close-out or verification claims, **CALL `sub-close-out-evidence-sync`**
+  (sync dispositions, collect manifest, reconcile with `include_process_grade`).
 - Before implementation, call `tied_checklist_gate_validate` with
   `phase: pre_implementation`. Do not start code until it allows progression.
 - At verification, call the same validator with `phase: verification` and pass

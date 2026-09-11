@@ -1773,6 +1773,9 @@ export const allTools = [
         citdp_path: z.string().optional().describe("Optional CITDP YAML path for gate hash correlation."),
         requirements_index: z.string().optional().describe("Optional requirements.yaml path; defaults from TIED_BASE_PATH."),
         implementation_index: z.string().optional().describe("Optional implementation-decisions.yaml path."),
+        include_process_grade: z.boolean().optional().describe(
+          "When true, attach process_grade summary (Wave 5 W5-D11) to ReconcileReport.",
+        ),
       }),
     },
     handler: async (args: {
@@ -1783,6 +1786,7 @@ export const allTools = [
       citdp_path?: string;
       requirements_index?: string;
       implementation_index?: string;
+      include_process_grade?: boolean;
     }) => {
       try {
         const workspace = args.workspace?.trim() || process.cwd();
@@ -1792,6 +1796,7 @@ export const allTools = [
           gates_dir: args.gates_dir,
           workspace,
           citdp_path: args.citdp_path,
+          include_process_grade: args.include_process_grade,
           requirements_index: args.requirements_index?.trim() || undefined,
           implementation_index: args.implementation_index?.trim() || undefined,
         });
@@ -2812,6 +2817,9 @@ export const allTools = [
         fail_on_error_gaps: z.boolean().optional().default(false).describe(
           "When true, severity:error gaps fail validation (close-out blocking mode).",
         ),
+        fail_on_process_gaps: z.boolean().optional().default(false).describe(
+          "When true, process-adherence warn gaps fail validation (Wave 5 process-strict mode).",
+        ),
       }),
     },
     handler: async (args: {
@@ -2819,6 +2827,7 @@ export const allTools = [
       envelope_path?: string;
       project_root?: string;
       fail_on_error_gaps?: boolean;
+      fail_on_process_gaps?: boolean;
     }) => {
       try {
         const result = await validateRequestEvidenceEnvelope({
@@ -2826,6 +2835,7 @@ export const allTools = [
           envelope_path: args.envelope_path,
           project_root: args.project_root,
           fail_on_error_gaps: args.fail_on_error_gaps ?? false,
+          fail_on_process_gaps: args.fail_on_process_gaps ?? false,
         });
         return textContent(JSON.stringify(result, null, 2));
       } catch (e) {

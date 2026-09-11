@@ -1,0 +1,27 @@
+{
+  "ok": true,
+  "phases": [
+    {
+      "phase": "verification",
+      "run_id": "wave5-verify-20260910",
+      "allowed": true,
+      "blocking": false,
+      "diagnostics": [
+        "warn_not_success",
+        "finding_unresolved"
+      ],
+      "receipt_path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/wave5-verification-20260910.json"
+    },
+    {
+      "phase": "close_out",
+      "run_id": "wave5-closeout-20260910",
+      "allowed": true,
+      "blocking": false,
+      "diagnostics": [
+        "warn_not_success",
+        "finding_unresolved"
+      ],
+      "receipt_path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/wave5-close_out-20260910.json"
+    }
+  ]
+}

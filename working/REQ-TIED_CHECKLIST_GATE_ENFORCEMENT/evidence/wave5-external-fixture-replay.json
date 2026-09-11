@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "project_root": "/Users/fareed/Documents/dev/test/1789087315",
+  "request_token": "REQ-DUPCOMPARE",
+  "envelope_path": "working/REQ-DUPCOMPARE/evidence/request-evidence-envelope.v1.json",
+  "blocking_gap_count": 1,
+  "advisory_gap_count": 4,
+  "note": "Read-only replay; client not patched. Expected warn gaps include tracker_dual_write, evidence_stale."
+}

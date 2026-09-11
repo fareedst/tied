@@ -48,7 +48,8 @@
   - 4. Validate gaps[] shape and known diagnostic codes
   - 5. Reject forbidden maturity or ranking fields if present
   - 6. WHEN fail_on_error_gaps is true AND any gap has severity error THEN RETURN ok false with envelope_blocking_gap diagnostics (Wave 1 W1-D3)
-  - 7. RETURN validation result with blocking_gap_count and advisory_gap_count tallies
+  - 7. WHEN fail_on_process_gaps is true AND any process-adherence gap has severity warn THEN RETURN ok false with envelope_process_gap diagnostics (Wave 5 W5-D4)
+  - 8. RETURN validation result with blocking_gap_count and advisory_gap_count tallies
 - How (sub-block, same token set): Close-out completion requires gate allowed AND envelope zero blocking error gaps unless a waiver registry entry covers each gap code.
 
 ## PATCH_REQUEST_EVIDENCE_ENVELOPE
@@ -166,6 +167,23 @@
   - 3. Emit artifact_path_root_projection_rejected for root-only inquiry copies
   - 4. Emit not_applicable_receipt_missing for minimal depth silent slots
   - 5. Sort gaps[] deterministically by code, phase, artifact_kind
+
+## DETECT_PROCESS_ADHERENCE_GAPS
+
+- [IMPL-REQUEST_EVIDENCE_ENVELOPE] [ARCH-REQUEST_EVIDENCE_ENVELOPE] [REQ-REQUEST_EVIDENCE_ENVELOPE] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] Wave 5 process-adherence diagnostics (W5-D1–D3).
+- Contract:
+  - INPUT: Authoritative Tracker YAML, classified artifacts[], current tracker content_hash, project_root, request_token
+  - OUTPUT: gaps[] with process codes tracker_dual_write, expected_artifact_missing (manifest), evidence_stale (hash drift), thin_ledger
+  - POST: default severity warn at minimal depth; severe all-pending dual-write may also emit tracker_sparse
+  - EFFECTS: pure read of tracker and gate receipts
+  - TERMINATION: total
+- PROCEDURE: DETECT_PROCESS_ADHERENCE_GAPS
+  - 1. FOR each slug in execution_evidence.completed: IF steps[].tracking.status remains pending THEN emit tracker_dual_write
+  - 2. IF verification-gate or test slugs completed AND no verification_evidence_manifest artifact THEN emit expected_artifact_missing
+  - 3. IF cross_links.tracker_hash differs from latest gate receipt input_hashes.tracker_hash THEN emit evidence_stale
+  - 4. IF completed slugs lack outcome_verified ledger rows THEN emit thin_ledger
+  - 5. CALL from DETECT_ENVELOPE_GAPS after corpus and inquiry diagnostics
+- How (sub-block, same token set): Process gaps are visible for grading; fail_on_process_gaps promotes warn gaps to blocking at validate time.
 
 ## BACKFILL_REQUEST_EVIDENCE_ENVELOPE
 

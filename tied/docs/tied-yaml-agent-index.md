@@ -37,6 +37,7 @@
 | Topic | Document |
 |--------|----------|
 | `sub-yaml-edit-loop`, `sync-tied-stack`, verification, explicit skill links | [agent-req-implementation-checklist.md](agent-req-implementation-checklist.md) |
+| Tracker dual-write policy: never update `execution_evidence.completed` without matching step dispositions; CALL `sub-close-out-evidence-sync` | [process-adherence-evidence-grade-plan.md](../../docs/process-adherence-evidence-grade-plan.md) |
 | TIED-first implementation flow | [tied-first-implementation-procedure.md](tied-first-implementation-procedure.md) |
 | Session bootstrap, MCP-first access, `tied_config_get_base_path` | [AGENTS.md](../../AGENTS.md) |
 

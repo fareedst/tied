@@ -39,6 +39,7 @@ type ReconcileReport struct {
 	Findings     []ReconcileFinding `json:"findings"`
 	LedgerRows   int                `json:"ledger_rows"`
 	ReadOnly     bool               `json:"read_only"`
+	ProcessGrade *ProcessGrade      `json:"process_grade,omitempty"`
 }
 
 // TiedIndexSnapshot holds parsed TIED index records for status correlation.

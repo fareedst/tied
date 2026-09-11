@@ -58,6 +58,10 @@ implementation decisions and pseudo-code for the research tooling.
 | **reference fixture** | adversarial-inquiry-go-rootjobs | Checked-in 1787507684 / REQ-ROOTJOBS graph/fidelity + build-config for CI regression; repo-relative paths only. |
 | **PSA reference fixture** | adversarial-inquiry-psa | Checked-in REQ-PSEUDOCODE_STATIC_ANALYSIS Mode A graph/fidelity + build-config aligned to DEFAULT_PROOF_BOUNDARY, read-only, and path-safety evidence. |
 | **controlled fixture** | test client, sample project (for remediation) | Reproducible snapshot-bound project (e.g. client alias `1787603099`) with labeled negative/positive gate cases; fixture manifest is authoritative input only. |
+| **machine close-out** | close-out pass, gate pass alone | Gate `allowed: true` plus envelope zero blocking `severity: error` gaps; distinct from process contract satisfaction. |
+| **process contract** | baseline-functional close-out, honor-system checklist | Authoritative `steps[].tracking.status` plus typed `evidence_refs` for completed work; measured separately from machine close-out. |
+| **tracker dual-write** | execution_evidence escape hatch, completed list only | `execution_evidence.completed` lists slugs whose `steps[].tracking.status` remains `pending`; envelope gap code `tracker_dual_write`. |
+| **process grade** | process score, adherence score | Weighted 0–100 rubric from reconcile `process_grade` extension and envelope process warn gaps; bands A/B/C/D. |
 | **evidence corpus** | fixture corpus, regression inputs | The controlled fixture's labeled rejection cases, valid positive reference, snapshots, and replay inputs bound to corpus-manifest.json. |
 | **phase-aware activation report** | metrics activation summary | Offline analyzer view of per-phase artifact completeness plus inquiry count; phase dirs remain authoritative over root projection. |
 | **activation expected identity** | expected payload, expected fields | Gate-side identity projection derived from a valid activation receipt when omitted by the caller; it does not replace receipt/artifact pairing. |

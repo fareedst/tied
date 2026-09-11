@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "process_grade": {
+    "score": 57,
+    "band": "D",
+    "gap_codes": [
+      "expected_artifact_missing",
+      "evidence_stale"
+    ],
+    "note": "Manifest file written; envelope hash drift remains until close_out gate refreshes receipts. Process contract target B band deferred — warn-only at stdd dogfood."
+  },
+  "manifest_path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/verification-evidence-manifest.v1.json",
+  "ledger_path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adherence/events.jsonl"
+}

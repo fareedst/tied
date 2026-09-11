@@ -1,0 +1,18 @@
+{
+  "allowed": false,
+  "ok": false,
+  "blocking": true,
+  "depth": "integrated",
+  "phase": "pre_implementation",
+  "diagnostics": [
+    "pending_required_step:gate-pseudocode-validation",
+    "pending_required_step:sub-adversarial-inquiry-pass",
+    "invalid_slug:sub-close-out-evidence-sync",
+    "sub_stub_pending_while_parent_completed",
+    "integrated_depth_requires_pairing",
+    "activation_pairing_incomplete",
+    "sub_stub_pending",
+    "parent_child_inconsistent",
+    "invalid_slug"
+  ]
+}

@@ -3,53 +3,17 @@
   "findings": [
     {
       "direction": "B",
-      "id": "0a5204ae980ded14",
-      "kind": "completeness",
-      "message": "Specification statement has no corresponding evidence.",
-      "proofBoundary": "semantic_fidelity",
-      "statementId": "stmt-path-3"
-    },
-    {
-      "direction": "A",
       "evidenceRefs": [
-        "test-path-1"
+        "prod-path-1"
       ],
-      "id": "10afc8ce38e5c812",
+      "id": "7e1620b2efc1165c",
       "kind": "reliability",
-      "message": "Evidence does not match the specified statement.",
+      "message": "Evidence describes behavior not represented in the specification.",
       "proofBoundary": "semantic_fidelity",
       "source": {
-        "location": "mcp-server/src/checklist-validator.test.ts"
+        "location": "mcp-server/src/request-evidence-envelope/build.ts"
       },
-      "statementId": "stmt-path-1"
-    },
-    {
-      "direction": "A",
-      "evidenceRefs": [
-        "test-path-2"
-      ],
-      "id": "3c09568763cb7713",
-      "kind": "reliability",
-      "message": "Evidence does not match the specified statement.",
-      "proofBoundary": "semantic_fidelity",
-      "source": {
-        "location": "mcp-server/src/checklist-gate-evidence-hydration.test.ts"
-      },
-      "statementId": "stmt-path-2"
-    },
-    {
-      "direction": "A",
-      "evidenceRefs": [
-        "test-path-3"
-      ],
-      "id": "7132bb41d80a3b62",
-      "kind": "reliability",
-      "message": "Evidence does not match the specified statement.",
-      "proofBoundary": "semantic_fidelity",
-      "source": {
-        "location": "mcp-server/src/tools/checklist-gate-mcp.test.ts"
-      },
-      "statementId": "stmt-path-3"
+      "statementId": "stmt-path-prod"
     },
     {
       "direction": "B",
@@ -68,18 +32,32 @@
       "statementId": "stmt-path-2"
     },
     {
-      "direction": "B",
+      "direction": "A",
       "evidenceRefs": [
-        "prod-path-1"
+        "test-path-1"
       ],
-      "id": "d5bb3dd958b6f6ba",
+      "id": "a2b5164617f6954e",
       "kind": "reliability",
-      "message": "Evidence describes behavior not represented in the specification.",
+      "message": "Evidence does not match the specified statement.",
       "proofBoundary": "semantic_fidelity",
       "source": {
-        "location": "mcp-server/src/checklist-validator.ts"
+        "location": "mcp-server/src/request-evidence-envelope/process-adherence-gaps.test.ts"
       },
-      "statementId": "stmt-path-prod"
+      "statementId": "stmt-path-1"
+    },
+    {
+      "direction": "A",
+      "evidenceRefs": [
+        "test-path-2"
+      ],
+      "id": "eba372cf82346c23",
+      "kind": "reliability",
+      "message": "Evidence does not match the specified statement.",
+      "proofBoundary": "semantic_fidelity",
+      "source": {
+        "location": "mcp-server/src/checklist-validator.test.ts"
+      },
+      "statementId": "stmt-path-2"
     }
   ],
   "graph": {
@@ -108,11 +86,6 @@
         "from": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#8103ac98e7e59baa",
         "kind": "block_evidence",
         "to": "evidence:test-2"
-      },
-      {
-        "from": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#8103ac98e7e59baa",
-        "kind": "block_evidence",
-        "to": "evidence:test-3"
       },
       {
         "from": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#8103ac98e7e59baa",
@@ -150,22 +123,17 @@
       {
         "id": "evidence:prod-1",
         "kind": "evidence",
-        "revision": "mci-closeout-20260910"
+        "revision": "wave5-process-adherence-20260910"
       },
       {
         "id": "evidence:test-1",
         "kind": "evidence",
-        "revision": "mci-closeout-20260910"
+        "revision": "wave5-process-adherence-20260910"
       },
       {
         "id": "evidence:test-2",
         "kind": "evidence",
-        "revision": "mci-closeout-20260910"
-      },
-      {
-        "id": "evidence:test-3",
-        "kind": "evidence",
-        "revision": "mci-closeout-20260910"
+        "revision": "wave5-process-adherence-20260910"
       },
       {
         "id": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#8103ac98e7e59baa",

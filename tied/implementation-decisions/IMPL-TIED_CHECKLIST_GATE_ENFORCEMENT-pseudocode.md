@@ -622,6 +622,19 @@ procedure EXPOSE_RECONCILE_OPERATOR_SURFACE(ledger_path, tracker_path, gates_dir
   report := RECONCILE_ADHERENCE_CHAIN(ledger_path, tracker_path, tied_indexes, gates_dir)
   CLI: PRINT json.Marshal(report) to stdout; EXIT 0 on success
   MCP tied_adherence_reconcile_run: SPAWN Go binary with flag args; PARSE stdout JSON; ASSERT report.read_only == true; RETURN report
+  WHEN include_process_grade is true: attach process_grade { score, band, dimensions[], gap_codes[] } from weighted rubric (Wave 5 W5-D11)
+
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: reject dual-write tracker updates at close-out producers.
+procedure REJECT_TRACKER_DUAL_WRITE(tracker):
+  Contract:
+  INPUT: tracker with execution_evidence.completed and steps[]
+  OUTPUT: validation result; dual-write slugs listed
+  POST: every completed slug has matching non-pending step disposition or tracker_dual_write gap is emitted at envelope build
+  EFFECTS: pure
+  TERMINATION: total
+  FOR each slug in execution_evidence.completed:
+    IF steps[].tracking.status for slug is pending THEN RECORD tracker_dual_write process gap
+  RETURN result
 
 # [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: write and clear active-turn-marker.v1 around checklist subprocess so hooks correlate ledger rows without parsing prompts.
 procedure ACTIVE_TURN_MARKER(workspace, request_token, correlation, ledger_path):
