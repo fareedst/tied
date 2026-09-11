@@ -20,6 +20,33 @@ IMPL-ASYNC_CHECKLIST_DISPOSITIONS:
       - "REQ-ASYNC_CHECKLIST_CATALOG"
     tests:
       - "mcp-server/src/checklist-async-dispositions.test.ts"
+IMPL-ASYNC_CITDP_PROFILE_WIRING:
+  cross_references:
+    - "ARCH-ASYNC_CITDP_EVIDENCE"
+    - "REQ-ASYNC_CITDP_TRIGGERS"
+  decision: "Implement citdp-async-triggers module: deriveAsyncCitdpTriggers, validateAsyncCitdpActivation, evidence matrix helper; consume W2 async_in_scope output."
+  detail_file: "implementation-decisions/IMPL-ASYNC_CITDP_PROFILE_WIRING.yaml"
+  name: "Async CITDP Profile Wiring"
+  rationale:
+    benefits:
+      - "Candidate triggers without silent inquiry"
+      - "Identity-bound disposition gate before inquiry MCP"
+    why: "Executable W3 trigger wiring with RED tests and activation contract enforcement."
+  related_decisions:
+    depends_on:
+      - "IMPL-ASYNC_CHECKLIST_DISPOSITIONS"
+    see_also: []
+    supersedes: []
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-ASYNC_CITDP_EVIDENCE"
+    code_annotations:
+      - "IMPL-ASYNC_CITDP_PROFILE_WIRING"
+    requirements:
+      - "REQ-ASYNC_CITDP_TRIGGERS"
+    tests:
+      - "mcp-server/src/citdp-async-triggers.test.ts"
 IMPL-ASYNC_PSEUDOCODE_GRAMMAR:
   cross_references:
     - "ARCH-ASYNC_CONTRACT_GRAMMAR"

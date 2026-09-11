@@ -1,0 +1,46 @@
+REQ-ASYNC_CITDP_TRIGGERS:
+  category: "Non-Functional"
+  description: "When async_in_scope is true, CITDP shall emit candidate trigger dispositions and required evidence rows per the W3 trigger table; async_in_scope alone shall never authorize adversarial inquiry."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-09-10"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-09-10"
+      reason: "W3 registration"
+  name: "Async CITDP Triggers"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "ASYNC-001..006 case selection before inquiry"
+      - "Recorded disposition per candidate trigger"
+    problems_solved:
+      - "Implicit inquiry from async markers"
+      - "Missing CITDP trigger wiring"
+    why: "W3 closes the gap between W2 marker disposition and integrated inquiry activation."
+  related_requirements:
+    depends_on:
+      - "REQ-ASYNC_CHECKLIST_CATALOG"
+      - "REQ-TIED_ASYNC_METHODOLOGY"
+    related_to:
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "async_in_scope alone never authorizes inquiry (preserve W2 test contract)"
+    - criterion: "deriveAsyncCitdpTriggers consumes async_in_scope and matched_semantic_classes from W2"
+    - criterion: "Every plan § W3 trigger yields a candidate disposition row"
+    - criterion: "validateAsyncCitdpActivation blocks tied_adversarial_inquiry_run without identity-bound disposition"
+  status: "In Progress"
+  traceability:
+    architecture:
+      - "ARCH-ASYNC_CITDP_EVIDENCE"
+    code_annotations:
+      - "REQ-ASYNC_CITDP_TRIGGERS"
+    implementation:
+      - "IMPL-ASYNC_CITDP_PROFILE_WIRING"
+    tests:
+      - "mcp-server/src/citdp-async-triggers.test.ts"
+  validation_criteria:
+    - coverage: "trigger derivation, activation contract, evidence matrix, fixtures"
+      method: "citdp-async-triggers unit tests"

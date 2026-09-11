@@ -1,0 +1,27 @@
+{
+  "scenario": "full-activation-allowed",
+  "description": "Identity-bound disposition with depth, profiles, policy, owner, expiry, and selected ASYNC cases authorizes inquiry",
+  "async_in_scope": true,
+  "inquiry_requested": true,
+  "disposition": {
+    "depth_tier": "integrated",
+    "research_profile": "baseline-functional",
+    "assurance_profile": "baseline-functional",
+    "gate_policy": "advisory",
+    "matched_triggers": [
+      "async-boundary-catalog",
+      "timeout-cancellation-evidence",
+      "retry-idempotency-evidence"
+    ],
+    "selected_cases": [
+      "ASYNC-001",
+      "ASYNC-003",
+      "ASYNC-005"
+    ],
+    "owner": "stdd methodology sponsor",
+    "expiry": "2026-12-31"
+  },
+  "expected": {
+    "inquiry_allowed": true
+  }
+}

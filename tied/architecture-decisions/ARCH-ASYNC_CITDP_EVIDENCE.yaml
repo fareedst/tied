@@ -1,0 +1,43 @@
+ARCH-ASYNC_CITDP_EVIDENCE:
+  code_locations:
+    files:
+      - description: "Evidence matrix and lookup helper"
+        path: "mcp-server/src/citdp-async-triggers.ts"
+    functions:
+      - "getAsyncEvidenceMatrixRow"
+  cross_references:
+    - "REQ-ASYNC_CITDP_TRIGGERS"
+  decision: "ASYNC_CITDP_EVIDENCE_MATRIX in citdp-async-triggers.ts maps async-boundary-catalog, async-await-sequencing, async-delivery, async-cancellation, async-timeout-recovery, async-retry-idempotency, async-shared-data, async-termination, and async-composition-seam to artifact, proof_boundary, and minimum_acceptance."
+  implementation_approach:
+    details:
+      - "Does not replace REQ-QUALITY_ASSURANCE_EVIDENCE global rules"
+      - "Proof boundaries remain structural unless separately approved"
+    summary: "Shared evidence matrix constant consumed by trigger derivation and CITDP disposition helpers."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-09-10"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-09-10"
+      reason: "W3 registration"
+  name: "Async CITDP Evidence Matrix"
+  rationale:
+    benefits:
+      - "Single source for async CITDP evidence row shape"
+    why: "W3 evidence matrix additions per tied-async-methodology-plan § W3."
+  related_decisions:
+    depends_on:
+      - "ARCH-ASYNC_CHECKLIST_INTEGRATION"
+    see_also: []
+    supersedes: []
+  status: "Active"
+  traceability:
+    code_annotations:
+      - "ARCH-ASYNC_CITDP_EVIDENCE"
+    implementation:
+      - "IMPL-ASYNC_CITDP_PROFILE_WIRING"
+    requirements:
+      - "REQ-ASYNC_CITDP_TRIGGERS"
+    tests:
+      - "mcp-server/src/citdp-async-triggers.test.ts"

@@ -1,0 +1,163 @@
+CITDP-REQ-TIED_ASYNC_METHODOLOGY-w3:
+  change_definition:
+    current_behavior: "W2 delivers async_in_scope Tracker disposition and checklist catalog/contradiction gating; CITDP has no candidate trigger wiring or inquiry activation contract."
+    desired_behavior: "W3 emits candidate CITDP trigger dispositions and evidence matrix rows when async_in_scope; validateAsyncCitdpActivation blocks tied_adversarial_inquiry_run without identity-bound disposition."
+    non_goals:
+      - "Agent preload / agentstream render (W6)"
+      - "Binding inventory async columns (W5)"
+      - "Layer C async_boundary analyzer pass (W4)"
+      - "Race-freedom, deadlock-freedom, or happens-before proof"
+      - "Running tied_adversarial_inquiry_run during W3 build unless activation complete"
+    sponsor_decisions:
+      D2: "C — candidate trigger only; no silent inquiry"
+      D5: "W3 authorized; W4 deferred until W3 exit gates pass"
+      D6: "explicit activation contract before tied_adversarial_inquiry_run"
+      integrated_inquiry_expiry: "2026-12-31"
+      integrated_inquiry_owner: "stdd methodology sponsor"
+    success_criteria:
+      - "ASYNC-001..006 documented and wired for case selection"
+      - "async_in_scope alone never authorizes inquiry"
+      - "deriveAsyncCitdpTriggers consumes W2 async_in_scope and matched_semantic_classes"
+      - "Every plan § W3 trigger yields recorded candidate disposition"
+      - "REQ-ASYNC_CITDP_TRIGGERS, ARCH-ASYNC_CITDP_EVIDENCE, IMPL-ASYNC_CITDP_PROFILE_WIRING registered"
+      - "validateAsyncCitdpActivation blocks inquiry without identity-bound disposition"
+    unchanged_behavior:
+      - "checklist-async-dispositions catalog and contradiction helpers unchanged"
+      - "Legacy non-async checklist output unchanged"
+      - "W2 validateAsyncInScopeTracker contract preserved"
+  completion_criteria:
+    close_out_gate: "deferred to parent close-out after W3 verification"
+    depth_reconciliation: "Gate depth minimal for W3 build; prior_depth_tier integrated records integrated inquiry case documentation; activation MCP not invoked in build"
+    envelope_path: "working/REQ-TIED_ASYNC_METHODOLOGY/evidence/request-evidence-envelope.v1.json"
+    lint_yaml: "required pass on changed project YAML"
+    pilot_artifacts: "pilot/after-w3 for GOAGENT-EXECUTOR CITDP evidence rows"
+    pre_implementation_gate: "allowed true at minimal gate depth with integrated waiver and W3 CITDP adversarial section"
+    tied_validate_consistency: "required pass"
+    verification_gate: "allowed true at minimal gate depth with citdp-async-triggers test evidence"
+    w3_exit_gates:
+      - "async_in_scope still does not auto-activate inquiry"
+      - "every candidate trigger yields recorded disposition"
+      - "evidence matrix rows have owner proof boundary acceptance threshold"
+      - "no inquiry without activation evidence"
+      - "waivers owner expiry rationale bound"
+  evidence:
+    commands:
+      - "node --test mcp-server/dist/citdp-async-triggers.test.js"
+      - "npm run build --prefix mcp-server"
+    manifest_reference: "working/REQ-TIED_ASYNC_METHODOLOGY/evidence/request-evidence-envelope.v1.json"
+    proof_boundaries:
+      - "baseline-functional"
+      - "structural async CITDP dispositions only"
+  impact_analysis:
+    async_in_scope: true
+    async_matched_semantic_classes:
+      - "await_sequencing"
+      - "cancellation"
+      - "message_event_delivery"
+      - "retry_idempotency"
+      - "shared_data"
+      - "termination"
+      - "timeout"
+    files:
+      - "mcp-server/src/citdp-async-triggers.test.ts"
+      - "mcp-server/src/citdp-async-triggers.ts"
+      - "tied/architecture-decisions/ARCH-ASYNC_CITDP_EVIDENCE.yaml"
+      - "tied/implementation-decisions/IMPL-ASYNC_CITDP_PROFILE_WIRING-pseudocode.md"
+      - "tied/implementation-decisions/IMPL-ASYNC_CITDP_PROFILE_WIRING.yaml"
+      - "tied/requirements/REQ-ASYNC_CITDP_TRIGGERS.yaml"
+      - "working/REQ-TIED_ASYNC_METHODOLOGY/fixtures/citdp-triggers/"
+      - "working/REQ-TIED_ASYNC_METHODOLOGY/pilot/after-w3/"
+    modules:
+      - "async evidence matrix"
+      - "citdp async trigger wiring"
+  leap_feedback:
+    divergences_from_analysis: "none"
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    author: "AI Agent"
+    change_request_id: "REQ-TIED_ASYNC_METHODOLOGY"
+    date: "2026-09-10"
+    plan_reference: "docs/tied-async-methodology-plan.md § W3"
+    record_status: "complete"
+    title: "TIED Async Methodology W3 — CITDP triggers, evidence matrix, activation contract"
+    wave_scope: "W3"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "async_in_scope silently activates inquiry"
+        - "Candidate trigger skipped without disposition row"
+        - "Inquiry runs without owner or expiry"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "deriveAsyncCitdpTriggers sets candidate_only true on every trigger"
+        - "validateAsyncCitdpActivation rejects async_in_scope alone"
+        - "W2 validateAsyncInScopeTracker still forbids async_inquiry_activated"
+      eligibility_triggers_matched:
+        - "citdp-behavior-change"
+        - "methodology-tooling-change"
+      evidence_references:
+        - "docs/tied-async-methodology-plan.md"
+        - "mcp-server/src/citdp-async-triggers.test.ts"
+        - "working/REQ-TIED_ASYNC_METHODOLOGY/fixtures/citdp-triggers/"
+        - "working/REQ-TIED_ASYNC_METHODOLOGY/pilot/after-w3/"
+      falsification_questions:
+        - "Can tied_adversarial_inquiry_run pass with only async_in_scope?"
+        - "Does every matched semantic class produce a trigger disposition?"
+      gate_policy: "advisory"
+      inquiry_activation_contract:
+        expiry: "2026-12-31"
+        owner: "stdd methodology sponsor"
+        required_fields:
+          - "assurance_profile"
+          - "depth_tier"
+          - "expiry"
+          - "gate_policy"
+          - "matched_triggers"
+          - "owner"
+          - "research_profile"
+          - "selected_cases"
+      close_out_inquiry_waiver:
+        approval: "sponsor authorized W3 tranche 2026-09-10"
+        expiry: "2026-12-31"
+        owner: "stdd methodology sponsor"
+        rationale: "W3 wires validateAsyncCitdpActivation and ASYNC-001..006; tied_adversarial_inquiry_run not executed; findings unchanged from W3 verification."
+        referenced_verification_run_id: "w3-verify-20260910"
+      integrated_waiver:
+        approval: "sponsor authorized W3 tranche 2026-09-10"
+        expiry: "2026-12-31"
+        owner: "stdd methodology sponsor"
+        policy: "activation-contract-wiring-only"
+        rationale: "W3 wires ASYNC-001..006 case selection and validateAsyncCitdpActivation; tied_adversarial_inquiry_run not executed in W3 build."
+      prior_depth_tier: "integrated"
+      selected_inquiry_cases:
+        - "ASYNC-001"
+        - "ASYNC-002"
+        - "ASYNC-003"
+        - "ASYNC-004"
+        - "ASYNC-005"
+        - "ASYNC-006"
+    async_citdp_triggers:
+      candidate_triggers:
+        - evidence_attributes:
+            - "async-await-sequencing"
+            - "async-boundary-catalog"
+            - "async-termination"
+          profile_recommendation: "integrated"
+          trigger_id: "async-boundary-catalog"
+        - evidence_attributes:
+            - "async-delivery"
+            - "async-retry-idempotency"
+          trigger_id: "retry-idempotency-evidence"
+        - evidence_attributes:
+            - "async-cancellation"
+            - "async-timeout-recovery"
+          trigger_id: "timeout-cancellation-evidence"
+  test_strategy:
+    fixtures:
+      - "working/REQ-TIED_ASYNC_METHODOLOGY/fixtures/citdp-triggers/full-activation-allowed.json"
+      - "working/REQ-TIED_ASYNC_METHODOLOGY/fixtures/citdp-triggers/marker-only-no-inquiry.json"
+      - "working/REQ-TIED_ASYNC_METHODOLOGY/fixtures/citdp-triggers/missing-disposition-blocked.json"
+    red_first:
+      - "mcp-server/src/citdp-async-triggers.test.ts"

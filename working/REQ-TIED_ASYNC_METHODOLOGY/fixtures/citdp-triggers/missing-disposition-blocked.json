@@ -1,0 +1,10 @@
+{
+  "scenario": "missing-disposition-blocked",
+  "description": "Inquiry requested with async_in_scope but no activation disposition is blocked",
+  "async_in_scope": true,
+  "inquiry_requested": true,
+  "expected": {
+    "inquiry_allowed": false,
+    "diagnostics_required": true
+  }
+}

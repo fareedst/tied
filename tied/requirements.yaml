@@ -26,6 +26,37 @@ REQ-ASYNC_CHECKLIST_CATALOG:
       - "IMPL-ASYNC_CHECKLIST_DISPOSITIONS"
     tests:
       - "mcp-server/src/checklist-async-dispositions.test.ts"
+REQ-ASYNC_CITDP_TRIGGERS:
+  category: "Non-Functional"
+  detail_file: "requirements/REQ-ASYNC_CITDP_TRIGGERS.yaml"
+  name: "Async CITDP Triggers"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Deterministic candidate triggers from impact-discovery"
+      - "Explicit activation contract before tied_adversarial_inquiry_run"
+    problems_solved:
+      - "Author memory for async CITDP evidence"
+      - "Marker-only inquiry activation"
+    why: "W2 async_in_scope is candidate-only; W3 must emit proportionate CITDP trigger dispositions and evidence rows without silent inquiry."
+  related_requirements:
+    depends_on:
+      - "REQ-ASYNC_CHECKLIST_CATALOG"
+      - "REQ-TIED_ASYNC_METHODOLOGY"
+    related_to:
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+      - "REQ-TIED_ADVERSARIAL_INQUIRY"
+    supersedes: []
+  status: "In Progress"
+  traceability:
+    architecture:
+      - "ARCH-ASYNC_CITDP_EVIDENCE"
+    code_annotations:
+      - "REQ-ASYNC_CITDP_TRIGGERS"
+    implementation:
+      - "IMPL-ASYNC_CITDP_PROFILE_WIRING"
+    tests:
+      - "mcp-server/src/citdp-async-triggers.test.ts"
 REQ-ASYNC_PSEUDOCODE_CONTRACTS:
   category: "Non-Functional"
   detail_file: "requirements/REQ-ASYNC_PSEUDOCODE_CONTRACTS.yaml"

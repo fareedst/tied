@@ -1,0 +1,11 @@
+{
+  "scenario": "marker-only-no-inquiry",
+  "description": "async_in_scope yields candidate triggers; inquiry_requested without disposition is blocked",
+  "async_in_scope": true,
+  "inquiry_requested": true,
+  "expected": {
+    "candidate_triggers_present": true,
+    "inquiry_allowed": false,
+    "diagnostic": "async_in_scope_alone_does_not_authorize_inquiry"
+  }
+}

@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **TIED Async Methodology W3 ([REQ-TIED_ASYNC_METHODOLOGY])** —
+  CITDP candidate trigger wiring (deriveAsyncCitdpTriggers), nine-row evidence
+  matrix, ASYNC-001..006 activation contract, validateAsyncCitdpActivation;
+  REQ-ASYNC_CITDP_TRIGGERS / ARCH-ASYNC_CITDP_EVIDENCE /
+  IMPL-ASYNC_CITDP_PROFILE_WIRING; citdp-async-triggers module + tests;
+  pilot after-w3 for IMPL-GOAGENT-EXECUTOR. Close-out gate
+  (w3-closeout-20260910, advisory). W4–W6 deferred.
+
 - **TIED Async Methodology T0+W2 ([REQ-TIED_ASYNC_METHODOLOGY], [REQ-ASYNC_REQ_ARCH_TEMPLATES], [REQ-ASYNC_PSEUDOCODE_CONTRACTS], [REQ-ASYNC_CHECKLIST_CATALOG])** —
   T0 (W0–W1): seven-class async glossary, REQ/ARCH authoring guidance, optional v1
   contract rows (ASYNC_BOUNDARY, TIMEOUT, CANCELLATION, SEQUENCING, MESSAGE_CONTRACT,

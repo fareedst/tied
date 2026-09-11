@@ -8,7 +8,7 @@ REQ-TIED_ASYNC_METHODOLOGY:
     last_updated:
       author: "AI Agent"
       date: "2026-09-10"
-      reason: "T0 build-plan registration"
+      reason: "W3 close-out satisfaction criteria"
   name: "TIED Async Methodology"
   priority: "P1"
   rationale:
@@ -31,19 +31,24 @@ REQ-TIED_ASYNC_METHODOLOGY:
     - criterion: "No race/deadlock/liveness proof claims in T0 artifacts"
     - criterion: "REQ/ARCH guidance includes complete and N/A examples per class"
     - criterion: "W1 grammar docs cover all optional async rows with legacy compatibility"
+    - criterion: "W2: async_in_scope disposition, catalog-async-boundaries, flag-async-contradictions wired in checklist-async-dispositions"
+    - criterion: "W3: deriveAsyncCitdpTriggers, nine-row evidence matrix, ASYNC-001..006, validateAsyncCitdpActivation; async_in_scope alone never authorizes inquiry"
     - criterion: "≥14 structural fixtures green plus legacy no-async corpus"
   status: "In Progress"
   traceability:
     architecture:
+      - "ARCH-ASYNC_CITDP_EVIDENCE"
       - "ARCH-ASYNC_CONTRACT_GRAMMAR"
       - "ARCH-ASYNC_REQ_ARCH_CONTRACT"
     code_annotations:
       - "REQ-TIED_ASYNC_METHODOLOGY"
     implementation:
+      - "IMPL-ASYNC_CITDP_PROFILE_WIRING"
       - "IMPL-ASYNC_PSEUDOCODE_GRAMMAR"
       - "IMPL-ASYNC_REQ_ARCH_GUIDANCE"
       - "IMPL-ASYNC_VOCABULARY"
     tests:
+      - "mcp-server/src/citdp-async-triggers.test.ts"
       - "mcp-server/src/tools/tied-async-contract-fixtures.test.ts"
   validation_criteria:
     - coverage: "Proof-boundary wording in glossary and grammar"

@@ -1,0 +1,16 @@
+feat(tied): add async methodology W3 CITDP trigger wiring
+
+Wire CITDP candidate trigger derivation (deriveAsyncCitdpTriggers),
+nine-row evidence matrix, ASYNC-001..006 activation contract, and
+validateAsyncCitdpActivation. async_in_scope alone never authorizes
+inquiry; explicit disposition required before tied_adversarial_inquiry_run.
+
+Proof boundary: structural async CITDP dispositions only; no
+race/deadlock/liveness proof. Gate depth minimal with integrated waiver;
+MCP inquiry not executed in W3 build. W4–W6 deferred.
+
+REQ-TIED_ASYNC_METHODOLOGY REQ-ASYNC_CITDP_TRIGGERS
+ARCH-ASYNC_CITDP_EVIDENCE IMPL-ASYNC_CITDP_PROFILE_WIRING
+
+Close-out: w3-closeout-20260910; envelope zero blocking gaps (advisory).
+Tests: 37/37 citdp-async-triggers + checklist-async-dispositions.

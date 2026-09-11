@@ -1,0 +1,48 @@
+IMPL-ASYNC_CITDP_PROFILE_WIRING:
+  code_locations:
+    files:
+      - description: "Trigger derivation and activation validation"
+        path: "mcp-server/src/citdp-async-triggers.ts"
+      - description: "Unit tests"
+        path: "mcp-server/src/citdp-async-triggers.test.ts"
+    functions:
+      - "deriveAsyncCitdpTriggers"
+      - "getAsyncEvidenceMatrixRow"
+      - "validateAsyncCitdpActivation"
+  cross_references:
+    - "ARCH-ASYNC_CITDP_EVIDENCE"
+    - "REQ-ASYNC_CITDP_TRIGGERS"
+  decision: "Provide deriveAsyncCitdpTriggers, validateAsyncCitdpActivation, ASYNC_CITDP_EVIDENCE_MATRIX, and ASYNC_INQUIRY_CASES in mcp-server/src/citdp-async-triggers.ts; essence_pseudocode documents impact-discovery trigger emission and inquiry activation contract."
+  implementation_approach:
+    details:
+      - "No Layer C async_boundary pass (W4)"
+      - "No tied_adversarial_inquiry_run execution in W3 build unless activation complete"
+    summary: "New module consuming W2 dispositions; RED fixtures under working/REQ-TIED_ASYNC_METHODOLOGY/fixtures/citdp-triggers/."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-09-10"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-09-10"
+      reason: "W3 pseudo-code sidecar"
+  name: "Async CITDP Profile Wiring"
+  rationale:
+    benefits:
+      - "TDD coverage for marker-only vs full activation vs blocked paths"
+    why: "W3 deliverable for CITDP profile wiring."
+  related_decisions:
+    depends_on:
+      - "IMPL-ASYNC_CHECKLIST_DISPOSITIONS"
+    see_also: []
+    supersedes: []
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-ASYNC_CITDP_EVIDENCE"
+    code_annotations:
+      - "IMPL-ASYNC_CITDP_PROFILE_WIRING"
+    requirements:
+      - "REQ-ASYNC_CITDP_TRIGGERS"
+    tests:
+      - "mcp-server/src/citdp-async-triggers.test.ts"

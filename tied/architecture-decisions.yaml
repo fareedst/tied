@@ -20,6 +20,34 @@ ARCH-ASYNC_CHECKLIST_INTEGRATION:
       - "REQ-ASYNC_CHECKLIST_CATALOG"
     tests:
       - "mcp-server/src/checklist-async-dispositions.test.ts"
+ARCH-ASYNC_CITDP_EVIDENCE:
+  cross_references:
+    - "ARCH-ASYNC_CHECKLIST_INTEGRATION"
+    - "REQ-ASYNC_CITDP_TRIGGERS"
+  decision: "Define nine async attribute evidence rows with artifact, proof_boundary, and minimum_acceptance per plan § W3."
+  detail_file: "architecture-decisions/ARCH-ASYNC_CITDP_EVIDENCE.yaml"
+  name: "Async CITDP Evidence Matrix"
+  rationale:
+    benefits:
+      - "Minimum acceptance thresholds for CITDP rows"
+      - "Traceable proof boundaries per async attribute"
+    why: "Quality assurance needs a stable async evidence matrix layout independent of author memory."
+  related_decisions:
+    depends_on:
+      - "ARCH-ASYNC_CHECKLIST_INTEGRATION"
+    see_also:
+      - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    supersedes: []
+  status: "Active"
+  traceability:
+    code_annotations:
+      - "ARCH-ASYNC_CITDP_EVIDENCE"
+    implementation:
+      - "IMPL-ASYNC_CITDP_PROFILE_WIRING"
+    requirements:
+      - "REQ-ASYNC_CITDP_TRIGGERS"
+    tests:
+      - "mcp-server/src/citdp-async-triggers.test.ts"
 ARCH-ASYNC_CONTRACT_GRAMMAR:
   cross_references:
     - "REQ-ASYNC_PSEUDOCODE_CONTRACTS"

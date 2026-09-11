@@ -11,6 +11,19 @@ ARCH-ASYNC_CHECKLIST_INTEGRATION:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-ASYNC_CITDP_EVIDENCE:
+  cross_references:
+    - "IMPL-ASYNC_CITDP_PROFILE_WIRING"
+    - "REQ-ASYNC_CITDP_TRIGGERS"
+  description: "W3 async CITDP evidence matrix layout token"
+  detail_file: "architecture-decisions/ARCH-ASYNC_CITDP_EVIDENCE.yaml"
+  metadata:
+    last_updated: "2026-09-10"
+    registered: "2026-09-10"
+  name: "Async CITDP Evidence Matrix"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 ARCH-ASYNC_CONTRACT_GRAMMAR:
   cross_references:
     - "IMPL-ASYNC_PSEUDOCODE_GRAMMAR"
@@ -737,6 +750,19 @@ IMPL-ASYNC_CHECKLIST_DISPOSITIONS:
     last_updated: "2026-09-10"
     registered: "2026-09-10"
   name: "Async Checklist Dispositions"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-ASYNC_CITDP_PROFILE_WIRING:
+  cross_references:
+    - "ARCH-ASYNC_CITDP_EVIDENCE"
+    - "REQ-ASYNC_CITDP_TRIGGERS"
+  description: "W3 async CITDP profile wiring implementation token"
+  detail_file: "implementation-decisions/IMPL-ASYNC_CITDP_PROFILE_WIRING.yaml"
+  metadata:
+    last_updated: "2026-09-10"
+    registered: "2026-09-10"
+  name: "Async CITDP Profile Wiring"
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
@@ -1960,6 +1986,19 @@ REQ-ASYNC_CHECKLIST_CATALOG:
   name: "Async Checklist Catalog"
   source_index: "requirements.yaml"
   status: "Implemented"
+  type: "REQ"
+REQ-ASYNC_CITDP_TRIGGERS:
+  cross_references:
+    - "ARCH-ASYNC_CITDP_EVIDENCE"
+    - "IMPL-ASYNC_CITDP_PROFILE_WIRING"
+  description: "W3 TIED async CITDP trigger and activation contract token"
+  detail_file: "requirements/REQ-ASYNC_CITDP_TRIGGERS.yaml"
+  metadata:
+    last_updated: "2026-09-10"
+    registered: "2026-09-10"
+  name: "Async CITDP Triggers"
+  source_index: "requirements.yaml"
+  status: "In Progress"
   type: "REQ"
 REQ-ASYNC_PSEUDOCODE_CONTRACTS:
   cross_references:
