@@ -1,0 +1,47 @@
+{
+  "request_token": "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT",
+  "run_id": "layerb-sidecar-fix-20260911",
+  "scope": "Layer B pseudocode diagnostics remediation (minimal depth, sidecar-only)",
+  "depth_tier": "minimal",
+  "validated_at": "2026-09-11T18:56:00Z",
+  "before_diagnostics": [
+    {
+      "severity": "error",
+      "code": "MISSING_DATA_TRANSITION",
+      "message": "Block HYDRATE_GATE_EVIDENCE_FROM_ACTIVATION mutates state without DATA_TRANSITION.",
+      "line": 250,
+      "block": "HYDRATE_GATE_EVIDENCE_FROM_ACTIVATION"
+    },
+    {
+      "severity": "error",
+      "code": "MISSING_BLOCK_TOKEN_LINK",
+      "message": "Block VALIDATE_PSEUDOCODE_GATE_HISTORY does not reference IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.",
+      "line": 728,
+      "block": "VALIDATE_PSEUDOCODE_GATE_HISTORY"
+    },
+    {
+      "severity": "error",
+      "code": "MISSING_BLOCK_TOKEN_LINK",
+      "message": "Block VALIDATE_ENVELOPE_BLOCKING_CROSS_READ does not reference IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.",
+      "line": 774,
+      "block": "VALIDATE_ENVELOPE_BLOCKING_CROSS_READ"
+    }
+  ],
+  "after_diagnostics": [],
+  "pseudocode_validate_ok": true,
+  "pseudocode_validate_diagnostics_count": 0,
+  "tied_validate_consistency_ok": true,
+  "blocks_changed": [
+    "HYDRATE_GATE_EVIDENCE_FROM_ACTIVATION",
+    "VALIDATE_CANONICAL_SLUGS",
+    "VALIDATE_PSEUDOCODE_GATE_HISTORY",
+    "VALIDATE_PSEUDOCODE_ANALYSIS_EVIDENCE",
+    "HYDRATE_PSEUDOCODE_REPORTS_FROM_DISK",
+    "VALIDATE_ENVELOPE_BLOCKING_CROSS_READ"
+  ],
+  "ripple_note": "Moving block-lead comments inside procedure bodies required fixing three adjacent Wave-8 PSA blocks that previously relied on comment-leak token linkage.",
+  "receipts": {
+    "pseudocode_validate": "mcp-server/dist/analysis/pseudocode-validator.js — ok: true, diagnostics: []",
+    "tied_validate_consistency": "MCP tied_validate_consistency — ok: true"
+  }
+}

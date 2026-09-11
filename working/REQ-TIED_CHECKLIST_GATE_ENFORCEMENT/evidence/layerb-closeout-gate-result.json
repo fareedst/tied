@@ -1,0 +1,27 @@
+{
+  "phase": "close_out",
+  "run_id": "layerb-sidecar-fix-20260911",
+  "depth_tier": "minimal",
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "gate": {
+    "allowed": true,
+    "blocking": false,
+    "diagnostics": [],
+    "evidence_hydrated": true,
+    "receipt_path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/layerb-sidecar-fix-20260911.json"
+  },
+  "envelope": {
+    "ok": true,
+    "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 0,
+    "advisory_gap_count": 6,
+    "advisory_gap_codes": ["finding_unresolved"]
+  },
+  "activation_note": "Minimal depth with inquiry_not_required_sidecar_only; activation collect skipped (Wave 8 inquiry run_id wave8-closeout-20260911 retained for history).",
+  "runner_note": "Unified runner executed without --run-id to avoid run_id_provenance_mismatch against Wave 8 inquiry artifacts; gate validate at minimal depth does not require activation pairing."
+}

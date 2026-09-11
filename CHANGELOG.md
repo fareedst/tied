@@ -33,6 +33,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Layer B sidecar hygiene — post-W8 follow-up ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  Six procedure blocks in `IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT` sidecar: declare
+  `DATA_TRANSITION: none` on read-only `HYDRATE_GATE_EVIDENCE_FROM_ACTIVATION`;
+  move block-lead token comments inside procedure bodies for Wave-8-adjacent
+  validators. Clears three post-W8 `pseudocode_validate` diagnostics without
+  behavior change. Close-out `layerb-sidecar-fix-20260911`: minimal depth;
+  inquiry waiver `inquiry_not_required_sidecar_only`; PSA Layer C refreshed;
+  envelope zero blocking gaps. Docs: `docs/layerb-sidecar-fix-close-out.md`.
+
 - **LEAP close-out — REQ/IMPL status reconciliation (2026-09-10)** —
   Promoted `[REQ-PSEUDOCODE_TYPED_FLOW]` and `[IMPL-PSEUDOCODE_TYPED_FLOW]` to
   **Implemented** / **Active** after pilot + Phase 3 close-out. Promoted async

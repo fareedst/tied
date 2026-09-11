@@ -1,0 +1,16 @@
+{
+  "run_id": "layerb-sidecar-fix-20260911",
+  "reconcile": {
+    "ok": true,
+    "read_only": true,
+    "ledger_rows": 28,
+    "process_grade": {
+      "score": 88,
+      "band": "B",
+      "gap_codes": ["evidence_stale"]
+    },
+    "finding_count": 15,
+    "finding_codes": ["gate_without_current_evidence"]
+  },
+  "note": "Reconcile findings are advisory for prior-wave gate receipts; not blocking at minimal depth Layer B follow-up close_out."
+}

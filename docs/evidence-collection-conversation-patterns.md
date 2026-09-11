@@ -698,6 +698,28 @@ Unified LEAP close-out for Wave 8 is documented in [`adherence-realignment-wave8
 
 **Delegation:** Invoke **plan-close-out** subagent with the close-out document linked; follow [`tied-close-out-process.md`](../tools/bundled-prompt-type-skills/prompt-shared/tied-close-out-process.md).
 
+### 13.2 Layer B sidecar fix — post-W8 follow-up (close-out complete)
+
+**Goal:** Close out uncommitted Layer B contract-precision fixes on `IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT` sidecar after Wave 8 commit `bb73e43` — no production code change.
+
+**Status:** Close-out complete 2026-09-11 (`run_id: layerb-sidecar-fix-20260911`); `close_out` `merged_decision.allowed: true`; envelope zero blocking gaps; committed.
+
+**Close-out procedure:** [`layerb-sidecar-fix-close-out.md`](layerb-sidecar-fix-close-out.md)
+
+| Item | Value |
+|---|---|
+| **depth_tier** | `minimal` |
+| **Inquiry** | Skip — waiver `inquiry_not_required_sidecar_only` |
+| **Run identity** | `run_id: layerb-sidecar-fix-20260911` |
+| **Tracker** | Follow-up `agent-req-implementation-checklist-layerb-sidecar-fix.yaml` (Wave 8 tracker unchanged) |
+| **Unified runner** | Executed at `close_out` with `--envelope-blocking --sync-dispositions --reconcile` |
+| **Gate receipt** | `gates/layerb-sidecar-fix-20260911.json` |
+| **Sidecar blocks** | Six procedure blocks — comment placement + `DATA_TRANSITION: none` on hydrate |
+
+**Not required:** disposable FILEHASH smoke, full regression suite, Wave 8 tracker mutation, fresh adversarial inquiry.
+
+**Advisory:** Unified runner omitted `--run-id` for activation collect at minimal depth (Wave 8 inquiry artifacts retain `wave8-closeout-20260911` run_id); `not-applicable-receipt.v1.json` documents inquiry waiver.
+
 ---
 
-**Last updated:** 2026-09-11 (Wave 8 close-out complete §13; Wave 7+8 combined commit)
+**Last updated:** 2026-09-11 (§13.2 Layer B sidecar follow-up close-out complete)

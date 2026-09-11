@@ -1,0 +1,11 @@
+fix(pseudocode): Layer B sidecar hygiene for checklist gate enforcement
+
+Declare DATA_TRANSITION: none on read-only HYDRATE block; move block-lead
+token comments inside procedure bodies for six Wave-8-adjacent validators.
+Clears post-W8 pseudocode_validate diagnostics without behavior change.
+
+Close-out: layerb-sidecar-fix-20260911 — minimal depth; inquiry waiver
+inquiry_not_required_sidecar_only; close_out merged_decision.allowed true;
+envelope zero blocking gaps.
+
+Refs: IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT REQ-TIED_CHECKLIST_GATE_ENFORCEMENT

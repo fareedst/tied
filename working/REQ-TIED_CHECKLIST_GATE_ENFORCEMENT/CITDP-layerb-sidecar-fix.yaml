@@ -1,0 +1,89 @@
+CITDP-layerb-sidecar-fix:
+  change_definition:
+    current_behavior: "Post-Wave 8 commit bb73e43, IMPL sidecar retained three Layer B diagnostics (MISSING_DATA_TRANSITION, two MISSING_BLOCK_TOKEN_LINK) from external block-lead comments and read-only hydrate block lacking DATA_TRANSITION."
+    desired_behavior: "Six procedure blocks updated for Layer B contract precision; pseudocode_validate green; PSA and envelope refreshed to post-fix sidecar hash; close_out unified runner passes with zero blocking envelope gaps."
+    non_goals:
+      - "Production code changes"
+      - "New REQ or ARCH tokens"
+      - "Fresh adversarial inquiry phases"
+      - "Wave 8 tracker mutation"
+      - "Full sidecar hygiene sweep across all blocks"
+      - "Disposable FILEHASH smoke or full regression suite"
+    success_criteria:
+      - "pseudocode_validate ok true with zero diagnostics on IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT sidecar"
+      - "tied_validate_consistency ok true"
+      - "PSA Layer C refreshed at authoritative paths with gate_mode_applied true"
+      - "close_out merged_decision.allowed true with envelope zero blocking gaps"
+    unchanged_behavior:
+      - "Wave 8 W8-D1–D7 runtime behavior"
+      - "Checklist gate enforcement semantics"
+      - "Advisory gate policy"
+  completion_criteria:
+    checklist_gate:
+      dispositions:
+        - completed
+        - not_applicable
+        - pending
+        - waived
+      fail_closed: true
+      phases:
+        - close_out
+        - pre_implementation
+    close_out_gate_notes: "Minimal depth follow-up. Unified runner required at close_out with run_id layerb-sidecar-fix-20260911. No verification phase or inquiry four-pack required. Finalize CITDP at persist-citdp-record."
+    verification_gate_notes: "Not required — no code changed."
+  evidence:
+    commands:
+      - "pseudocode_validate IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT (MCP)"
+      - "tied_validate_consistency (MCP)"
+      - node scripts/backfill-pseudocode-analysis.mjs --req REQ-TIED_CHECKLIST_GATE_ENFORCEMENT --gate-mode --impl IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT
+      - node tools/bootstrap/templates/run-close-out-gates.mjs --phase close_out --run-id layerb-sidecar-fix-20260911 --envelope-blocking --sync-dispositions --reconcile
+    manifest_reference: null
+    proof_boundaries:
+      - baseline-functional
+  impact_analysis:
+    impl_inventory:
+      - IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT
+    modules_or_boundaries: "essence_pseudocode sidecar only — six procedure blocks"
+    tied_tokens_affected:
+      - REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+      - IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT
+      - PROC-AGENT_REQ_CHECKLIST
+  leap_feedback:
+    divergences_from_analysis: "Unified runner skipped activation collect at minimal depth (Wave 8 inquiry run_id retained); not-applicable-receipt written for inquiry waiver."
+    record_status: final
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+    recorded_at: "2026-09-11"
+    title: "Layer B sidecar fix — post-W8 follow-up close-out"
+  risk_analysis:
+    abuse_cases:
+      - "Comment placement fix masks missing token links in unmodified blocks"
+      - "Envelope refresh skipped leaving stale sidecar hash in manifest"
+    adversarial_inquiry:
+      assurance_profile: baseline-functional
+      close_out_inquiry_waiver: inquiry_not_required_sidecar_only
+      counterexamples:
+        - "External block-lead comment still passes Layer B while hiding missing token link inside procedure body"
+        - "DATA_TRANSITION none on hydrate block masks actual state mutation elsewhere in sidecar"
+        - "Skipping unified runner leaves envelope referencing pre-fix sidecar hash"
+      depth_tier: minimal
+      disconfirming_observations:
+        - "pseudocode_validate reports zero diagnostics after six-block fix"
+        - "layerb-sidecar-fix-20260911-validation.json records before/after diagnostic delta"
+        - "Wave 8 runtime tests unchanged — no production code in scope"
+      evidence_references:
+        - docs/layerb-sidecar-fix-close-out.md
+        - tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md
+        - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/layerb-sidecar-fix-20260911-validation.json
+      falsification_questions:
+        - "Does moving comments inside bodies introduce new Layer B contract violations?"
+        - "Does envelope still report stale sidecar hash if close_out runner is skipped?"
+        - "Do remaining external pre-procedure comments elsewhere still fail on next edit?"
+      gate_policy: advisory
+      integrated_waiver: null
+      note: "At minimal depth, sub-adversarial-inquiry-pass is not required for sidecar-only contract precision. Document waiver in CITDP and tracker disposition not_applicable."
+    eligibility_triggers: []
+    residual_risks:
+      - "Remaining external pre-procedure comments elsewhere in sidecar may still fail Layer B on future edits"
+      - "Unified runner requires omitting --run-id at minimal depth when Wave 8 inquiry artifacts exist with different run_id"

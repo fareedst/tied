@@ -252,9 +252,10 @@ procedure HYDRATE_GATE_EVIDENCE_FROM_ACTIVATION(phase, activation, evidence, pro
   INPUT: phase, activation artifacts map, optional evidence seed, project_root
   PRE: phase is verification or close_out when auto-hydration applies
   OUTPUT: merged evidence with provenance, gate_result, finding_ledger when readable
-  POST: reads evidence-provenance.json, gate-result.json, finding-ledger.jsonl from activation artifact paths; never mutates source files
+  POST: reads evidence-provenance.json, gate-result.json, finding-ledger.jsonl from activation artifact paths; does not modify source files
   FAILURE_MODES: hydration_missing_path, hydration_read_failed
   EFFECTS: read-only filesystem
+  DATA_TRANSITION: none
   TERMINATION: total
 
 # [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: reject self-reported command success without retained output/manifest (remediation A6).
@@ -711,8 +712,8 @@ procedure PREVIEW_TRACKER_MIGRATION(definition_path, tracker_path): # [IMPL-TIED
   FOR each slug in extra_in_tracker with non-pending disposition: RECORD stale_dispositions entry reason step_removed_from_definition
   RETURN tracker-migration-preview.v1 report
 
-# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-PSEUDOCODE_STATIC_ANALYSIS] — How: reject unknown checklist slugs in tracker steps and execution_evidence.completed.
 procedure VALIDATE_CANONICAL_SLUGS(tracker):
+  # [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-PSEUDOCODE_STATIC_ANALYSIS] — How: reject unknown checklist slugs in tracker steps and execution_evidence.completed.
   Contract:
   INPUT: tracker
   PRE: canonical slug registry loaded from agent-req-implementation-checklist.yaml
@@ -724,8 +725,8 @@ procedure VALIDATE_CANONICAL_SLUGS(tracker):
   FOR each slug in tracker steps and execution_evidence.completed:
     IF slug not in registry: RETURN invalid_slug
 
-# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-PSEUDOCODE_STATIC_ANALYSIS] — How: verification and close_out require gate-pseudocode-validation completed in tracker history.
 procedure VALIDATE_PSEUDOCODE_GATE_HISTORY(tracker, phase, depth):
+  # [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-PSEUDOCODE_STATIC_ANALYSIS] — How: verification and close_out require gate-pseudocode-validation completed in tracker history.
   Contract:
   INPUT: tracker, phase, depth
   PRE: depth is integrated or strict_candidate
@@ -737,8 +738,8 @@ procedure VALIDATE_PSEUDOCODE_GATE_HISTORY(tracker, phase, depth):
   IF phase is not verification or close_out: RETURN success
   IF gate-pseudocode-validation not completed in tracker history: RETURN missing_pseudocode_gate_history
 
-# [IMPL-QUALITY_PSEUDOCODE_VALIDATOR] [REQ-PSEUDOCODE_STATIC_ANALYSIS] [REQ-QUALITY_ASSURANCE_EVIDENCE] — How: enforce impl_inventory PSA JSON with ok, gate_mode_applied, and identity match.
 procedure VALIDATE_PSEUDOCODE_ANALYSIS_EVIDENCE(tracker, citdp, pseudocode_reports):
+  # [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [IMPL-QUALITY_PSEUDOCODE_VALIDATOR] [REQ-PSEUDOCODE_STATIC_ANALYSIS] [REQ-QUALITY_ASSURANCE_EVIDENCE] — How: enforce impl_inventory PSA JSON with ok, gate_mode_applied, and identity match.
   Contract:
   INPUT: tracker, optional citdp, optional parsed pseudocode-analysis-report.v1 map keyed by IMPL token
   PRE: impl_inventory is authoritative changed IMPL set for the request
@@ -755,8 +756,8 @@ procedure VALIDATE_PSEUDOCODE_ANALYSIS_EVIDENCE(tracker, citdp, pseudocode_repor
     REQUIRE report.token equals IMPL AND input_identity.hash matches sidecar when hash supplied
   RETURN success
 
-# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-PSEUDOCODE_STATIC_ANALYSIS] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: W8-D1 auto-load Layer C PSA from canonical paths before VALIDATE_PSEUDOCODE_ANALYSIS_EVIDENCE.
 procedure HYDRATE_PSEUDOCODE_REPORTS_FROM_DISK(phase, project_root, request_token, existing_reports):
+  # [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-PSEUDOCODE_STATIC_ANALYSIS] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: W8-D1 auto-load Layer C PSA from canonical paths before VALIDATE_PSEUDOCODE_ANALYSIS_EVIDENCE.
   Contract:
   INPUT: gate phase, project root, request token, optional existing pseudocodeReports map
   PRE: phase is verification or close_out
@@ -770,8 +771,8 @@ procedure HYDRATE_PSEUDOCODE_REPORTS_FROM_DISK(phase, project_root, request_toke
   FOR each canonical PSA path on disk: merge into reports when IMPL key absent
   RETURN merged reports
 
-# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-REQUEST_EVIDENCE_ENVELOPE] — How: W8-D4 merge envelope blocking gaps into gate allowed at verification/close_out when envelopeBlocking true.
 procedure VALIDATE_ENVELOPE_BLOCKING_CROSS_READ(phase, envelope_gaps, envelope_blocking):
+  # [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-REQUEST_EVIDENCE_ENVELOPE] — How: W8-D4 merge envelope blocking gaps into gate allowed at verification/close_out when envelopeBlocking true.
   Contract:
   INPUT: phase, envelope gap list, envelopeBlocking flag
   PRE: phase is verification or close_out when blocking applies

@@ -4,8 +4,8 @@
     "project_id": "af8451e933f573ec",
     "generator": "mcp",
     "generator_version": "1.0.0",
-    "observed_at": "2026-09-11T18:38:34.979Z",
-    "commit": "4e7b94906b99ffee3327908dc17856128c6e1591",
+    "observed_at": "2026-09-11T18:58:47.065Z",
+    "commit": "bb73e43c4c8c69e00e03d5302e8befa11c79f390",
     "tied_methodology_version": "3.0.0",
     "tied_base_path_confirmed": true,
     "identity_source": "configured"
@@ -21,9 +21,9 @@
     ],
     "file_counts": {},
     "active_populations": {
-      "requirements": 6,
+      "requirements": 1,
       "architecture": 0,
-      "implementation": 3
+      "implementation": 1
     },
     "excluded": [
       "fixtures",
@@ -49,7 +49,7 @@
         },
         "source": "binding_inventory_validate",
         "method": "RUN_STRUCTURAL_ANALYSIS",
-        "denominator": 12,
+        "denominator": 3,
         "proof_boundary": "traceability_structure",
         "status": "observed"
       },
@@ -60,7 +60,7 @@
         },
         "source": "pseudocode_analyze",
         "method": "RUN_STRUCTURAL_ANALYSIS",
-        "denominator": 12,
+        "denominator": 3,
         "proof_boundary": "pseudo_code_structure",
         "status": "observed"
       },
@@ -71,51 +71,7 @@
         },
         "source": "pseudocode_analyze",
         "method": "RUN_STRUCTURAL_ANALYSIS",
-        "denominator": 12,
-        "proof_boundary": "pseudo_code_structure",
-        "status": "observed"
-      },
-      {
-        "value": {
-          "validator": "pseudocode_analyze",
-          "ok": true
-        },
-        "source": "pseudocode_analyze",
-        "method": "RUN_STRUCTURAL_ANALYSIS",
-        "denominator": 12,
-        "proof_boundary": "pseudo_code_structure",
-        "status": "observed"
-      },
-      {
-        "value": {
-          "validator": "pseudocode_analyze",
-          "ok": true
-        },
-        "source": "pseudocode_analyze",
-        "method": "RUN_STRUCTURAL_ANALYSIS",
-        "denominator": 12,
-        "proof_boundary": "pseudo_code_structure",
-        "status": "observed"
-      },
-      {
-        "value": {
-          "validator": "pseudocode_analyze",
-          "ok": true
-        },
-        "source": "pseudocode_analyze",
-        "method": "RUN_STRUCTURAL_ANALYSIS",
-        "denominator": 12,
-        "proof_boundary": "pseudo_code_structure",
-        "status": "observed"
-      },
-      {
-        "value": {
-          "validator": "pseudocode_analyze",
-          "ok": true
-        },
-        "source": "pseudocode_analyze",
-        "method": "RUN_STRUCTURAL_ANALYSIS",
-        "denominator": 12,
+        "denominator": 3,
         "proof_boundary": "pseudo_code_structure",
         "status": "observed"
       },
@@ -126,7 +82,7 @@
         },
         "source": "pseudocode_validate",
         "method": "RUN_STRUCTURAL_ANALYSIS",
-        "denominator": 12,
+        "denominator": 3,
         "proof_boundary": "pseudo_code_structure",
         "status": "observed"
       },
@@ -137,7 +93,7 @@
         },
         "source": "pseudocode_validate",
         "method": "RUN_STRUCTURAL_ANALYSIS",
-        "denominator": 12,
+        "denominator": 3,
         "proof_boundary": "pseudo_code_structure",
         "status": "observed"
       },
@@ -148,106 +104,7 @@
         },
         "source": "pseudocode_validate",
         "method": "RUN_STRUCTURAL_ANALYSIS",
-        "denominator": 12,
-        "proof_boundary": "pseudo_code_structure",
-        "status": "observed"
-      },
-      {
-        "value": {
-          "validator": "pseudocode_validate",
-          "ok": true
-        },
-        "source": "pseudocode_validate",
-        "method": "RUN_STRUCTURAL_ANALYSIS",
-        "denominator": 12,
-        "proof_boundary": "pseudo_code_structure",
-        "status": "observed"
-      },
-      {
-        "value": {
-          "validator": "pseudocode_validate",
-          "ok": true
-        },
-        "source": "pseudocode_validate",
-        "method": "RUN_STRUCTURAL_ANALYSIS",
-        "denominator": 12,
-        "proof_boundary": "pseudo_code_structure",
-        "status": "observed"
-      },
-      {
-        "value": {
-          "validator": "pseudocode_validate",
-          "ok": true
-        },
-        "source": "pseudocode_validate",
-        "method": "RUN_STRUCTURAL_ANALYSIS",
-        "denominator": 12,
-        "proof_boundary": "pseudo_code_structure",
-        "status": "observed"
-      },
-      {
-        "value": {
-          "validator": "pseudocode_validate",
-          "ok": false
-        },
-        "source": "pseudocode_validate",
-        "method": "RUN_STRUCTURAL_ANALYSIS",
-        "denominator": 12,
-        "proof_boundary": "pseudo_code_structure",
-        "status": "observed"
-      },
-      {
-        "value": {
-          "validator": "pseudocode_validate",
-          "ok": true
-        },
-        "source": "pseudocode_validate",
-        "method": "RUN_STRUCTURAL_ANALYSIS",
-        "denominator": 12,
-        "proof_boundary": "pseudo_code_structure",
-        "status": "observed"
-      },
-      {
-        "value": {
-          "validator": "pseudocode_validate",
-          "ok": true
-        },
-        "source": "pseudocode_validate",
-        "method": "RUN_STRUCTURAL_ANALYSIS",
-        "denominator": 12,
-        "proof_boundary": "pseudo_code_structure",
-        "status": "observed"
-      },
-      {
-        "value": {
-          "validator": "pseudocode_validate",
-          "ok": false
-        },
-        "source": "pseudocode_validate",
-        "method": "RUN_STRUCTURAL_ANALYSIS",
-        "denominator": 12,
-        "proof_boundary": "pseudo_code_structure",
-        "status": "observed"
-      },
-      {
-        "value": {
-          "validator": "pseudocode_validate",
-          "ok": true
-        },
-        "source": "pseudocode_validate",
-        "method": "RUN_STRUCTURAL_ANALYSIS",
-        "denominator": 12,
-        "proof_boundary": "pseudo_code_structure",
-        "status": "observed"
-      },
-      {
-        "value": {
-          "validator": "pseudocode_validate",
-          "ok": true
-        },
-        "source": "pseudocode_validate",
-        "method": "RUN_STRUCTURAL_ANALYSIS",
-        "denominator": 12,
+        "denominator": 3,
         "proof_boundary": "pseudo_code_structure",
         "status": "observed"
       },
@@ -258,7 +115,7 @@
         },
         "source": "test_adequacy_validate",
         "method": "RUN_STRUCTURAL_ANALYSIS",
-        "denominator": 12,
+        "denominator": 3,
         "proof_boundary": "traceability_structure",
         "status": "observed"
       },
@@ -269,7 +126,7 @@
         },
         "source": "tied_cycles",
         "method": "RUN_STRUCTURAL_ANALYSIS",
-        "denominator": 12,
+        "denominator": 3,
         "proof_boundary": "traceability_structure",
         "status": "observed"
       },
@@ -280,7 +137,7 @@
         },
         "source": "tied_validate_consistency",
         "method": "RUN_STRUCTURAL_ANALYSIS",
-        "denominator": 12,
+        "denominator": 3,
         "proof_boundary": "traceability_structure",
         "status": "observed"
       },
@@ -291,20 +148,20 @@
         },
         "source": "traceability_gap_report",
         "method": "RUN_STRUCTURAL_ANALYSIS",
-        "denominator": 12,
+        "denominator": 3,
         "proof_boundary": "traceability_structure",
         "status": "observed"
       }
     ],
     "graph": {
       "value": {
-        "nodes": 9,
-        "edges": 1,
+        "nodes": 2,
+        "edges": 0,
         "cycles": 0
       },
       "source": "tied_cycles",
       "method": "dependency_graph",
-      "denominator": 9,
+      "denominator": 2,
       "proof_boundary": "traceability_structure",
       "status": "observed"
     },
@@ -335,7 +192,7 @@
       "status": "observed"
     },
     "freshness": {
-      "value": "2026-09-11T18:38:34.979Z",
+      "value": "2026-09-11T18:58:47.065Z",
       "source": "run_metadata",
       "method": "observed_at",
       "denominator": 1,
@@ -373,9 +230,9 @@
   "operational": {
     "metrics_opt_in": true,
     "project_id": "af8451e933f573ec",
-    "run_id": "wave8-closeout-20260911",
+    "run_id": "close-out-profile-1789153127065",
     "profile_depth": "integrated",
-    "scope_hash": "de9c27d7773e7b05",
-    "commit": "4e7b94906b99ffee3327908dc17856128c6e1591"
+    "scope_hash": "ac32b97f40b89c0c",
+    "commit": "bb73e43c4c8c69e00e03d5302e8befa11c79f390"
   }
 }

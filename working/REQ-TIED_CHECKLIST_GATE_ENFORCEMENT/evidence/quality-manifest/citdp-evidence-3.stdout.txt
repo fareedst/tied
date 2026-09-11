@@ -1,14 +1,1 @@
-▶ hydrateGateEvidenceFromActivation [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
-  ✔ loads gate, ledger, and provenance at verification when activation supplies paths (3.552917ms)
-  ✔ skips hydration at pre_implementation (0.099ms)
-  ✔ hydrates pseudocodeReports from pseudocode-analysis and psa alias at verification (1.663167ms)
-  ✔ preserves existing pseudocodeReports entries without overwrite (0.694917ms)
-✔ hydrateGateEvidenceFromActivation [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (6.544584ms)
-ℹ tests 4
-ℹ suites 1
-ℹ pass 4
-ℹ fail 0
-ℹ cancelled 0
-ℹ skipped 0
-ℹ todo 0
-ℹ duration_ms 70.160333
+WROTE /Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/pseudocode-analysis/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.v1.json ok=true gate_mode_applied=true

@@ -1,0 +1,23 @@
+{
+  "allowed": true,
+  "ok": true,
+  "blocking": false,
+  "depth": "minimal",
+  "phase": "pre_implementation",
+  "run_id": "layerb-pre-implementation-refine",
+  "activation_ok": null,
+  "diagnostics": [],
+  "gate": {
+    "allowed": true,
+    "ok": true,
+    "blocking": false,
+    "depth": "minimal",
+    "phase": "pre_implementation",
+    "diagnostics": [],
+    "gate_receipt": {
+      "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/pre_implementation-2026-09-11T18-54-58-656Z.json",
+      "hash": "sha256:faf91648c32f25d4068c5f91541b8260508009355cc01f8024840fb772756e60"
+    }
+  },
+  "refine_scope_note": "Refine-plan pass — pre_implementation allowed at minimal depth with inquiry waiver inquiry_not_required_sidecar_only; close-out slugs remain pending for plan-close-out execution."
+}

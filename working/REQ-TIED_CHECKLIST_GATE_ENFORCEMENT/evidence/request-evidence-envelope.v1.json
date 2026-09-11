@@ -1,14 +1,14 @@
 {
   "schema_version": "request-evidence-envelope.v1",
   "envelope_meta": {
-    "generated_at": "2026-09-11T18:38:36.623Z",
+    "generated_at": "2026-09-11T18:58:48.825Z",
     "generator": "request_evidence_envelope_build",
     "revision": 1
   },
   "identity": {
     "request_token": "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT",
     "project_id": "af8451e933f573ec",
-    "depth_tier": "integrated",
+    "depth_tier": "minimal",
     "gate_policy": "advisory",
     "methodology_snapshot_id": "3.0.0"
   },
@@ -199,6 +199,17 @@
       ]
     },
     {
+      "kind": "checklist_gate_receipt",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/wave8-closeout-20260911.json",
+      "content_hash": "sha256:a9379b070b37a754961d9daad46f76bd49236796eac71c870aac6964298f104a",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
       "kind": "checklist_tracker",
       "schema_version": null,
       "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/agent-req-implementation-checklist.yaml",
@@ -224,7 +235,18 @@
       "kind": "evidence_chain_profile",
       "schema_version": null,
       "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/evidence-chain-profile.v1.json",
-      "content_hash": "sha256:49979c03d101c9b15b2ba54b2b7d0e2d4c18b32b77ce51158b5e41102a5fd162",
+      "content_hash": "sha256:90341d2b7a8e7d5a2e498bae06292506836432e6e0c47de153d2bf6083c58832",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "not_applicable_receipt",
+      "schema_version": "not-applicable-receipt.v1",
+      "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/not-applicable-receipt.v1.json",
+      "content_hash": "sha256:04fcb8f84bf900a51966b7f1a60edf324bace0a2e9c28d099d98b3039c8ed433",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -290,7 +312,7 @@
       "kind": "pseudocode_analysis_report",
       "schema_version": "pseudocode-analysis-report.v1",
       "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/pseudocode-analysis/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.v1.json",
-      "content_hash": "sha256:b2ef65ad48860f57ac3634bf34ed6d6a62072cec2ac5f3dfabcc7e30a8381a32",
+      "content_hash": "sha256:dae4c73da5b16362d585e97389f2140c71560c7ca6b12c694507c85fd14d8293",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -312,11 +334,22 @@
       "kind": "request_evidence_envelope",
       "schema_version": "request-evidence-envelope.v1",
       "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/request-evidence-envelope.v1.json",
-      "content_hash": "sha256:5bfa0e28feba3fffc7aae0639c09f3590e8cb5b4236b09dd3af1ddeebc1e3be3",
+      "content_hash": "sha256:f47cf05e7e343af6a592c8f45402855107225a9cb540e463140030ddf395bf57",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
         "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/layerb-sidecar-fix-20260911-validation.json",
+      "content_hash": "sha256:789084d0d9dde3881e11f46ad74a0b6725636513ae68178a2ec17bc66c5b751f",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
       ]
     },
     {
@@ -345,7 +378,18 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/proposed-commit-message.txt",
-      "content_hash": "sha256:2b5eb2faee76c17315109f3dff8014a91bbeccabf33844d1c1400dbcd4fcdb07",
+      "content_hash": "sha256:b7953930741b3b3160cf96bb844847e33b7b04bc73c7c5bb575902e8f0b04b5c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": "pseudocode-analysis-report.v1",
+      "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/psa-IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.json",
+      "content_hash": "sha256:dae4c73da5b16362d585e97389f2140c71560c7ca6b12c694507c85fd14d8293",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -466,7 +510,18 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/wave8-closeout-gate-result.json",
-      "content_hash": "sha256:3aa047e252477bdae9fe8de86b08a6efdc57ea66fcb6a1c4f8f0bd0fe53a153d",
+      "content_hash": "sha256:af112a6f13f257d2b4790123fcafe9e1028880098cb3c7b6327c90f459b5c049",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/wave8-closeout-reconcile-summary.json",
+      "content_hash": "sha256:ca94095d70a3850ab111673baa79b410c1c9d58f29d792a83cd38c9d448482ba",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -477,7 +532,7 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/wave8-filehash-smoke-result.json",
-      "content_hash": "sha256:d465df546d00de5d93927fdd2824b255b54082f3a1d76d81d6b15c0e2df4cf6c",
+      "content_hash": "sha256:c4d6a5855adc607e88283a6f553bc1e2f3713d0c0b358a8d285e93786d79030b",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -499,7 +554,7 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/wave8-verification-gate-result.json",
-      "content_hash": "sha256:cdfcea82e8b1bf44158dc9c8be3ff0624287264fcc2c12eced8d0f995d8f46d9",
+      "content_hash": "sha256:b1e6b2a7cd7e8b738319e2badff2c74d15be19f0b5431222a689b4b64a68d2ed",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
