@@ -1,0 +1,11 @@
+▶ scoped analysis impact_preview async summary [REQ-TIED_ASYNC_METHODOLOGY]
+  ✔ includes async_diagnostic_summary when async tokens are discovered (2.969542ms)
+✔ scoped analysis impact_preview async summary [REQ-TIED_ASYNC_METHODOLOGY] (3.597708ms)
+ℹ tests 1
+ℹ suites 1
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 73.272625

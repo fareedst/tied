@@ -26,15 +26,40 @@ If the trigger can be fired programmatically (function call, message, synthetic 
 
 Maintain one row per binding in scope (CITDP `test_strategy`, IMPL notes, or this project's inventory for the change). Columns:
 
-| Binding ID | Trigger | Callee / collaborator | Arguments asserted | Effect asserted | Ordering / PRE | Failure mode | Composition test | E2E? |
-|---|---|---|---|---|---|---|---|---|
-| *(example)* `CLI→pipeline.Build` | `main` after parse | `pipeline.Build` | argv paths, checklist path | turns assembled | parse before build | invalid YAML → exit | `pipeline_test.go` / cmd composition | no |
+| Binding ID | Trigger | Callee / collaborator | Arguments asserted | Effect asserted | Ordering / PRE | Failure mode | Async semantics | Cancellation | Composition test | E2E? |
+|---|---|---|---|---|---|---|---|---|---|---|
+| *(example)* `CLI→pipeline.Build` | `main` after parse | `pipeline.Build` | argv paths, checklist path | turns assembled | parse before build | invalid YAML → exit | *(omit for sync)* | *(omit)* | `pipeline_test.go` / cmd composition | no |
+| *(async example)* `IPC→routeMessage` | message received on channel | `routeMessage` | payload bytes | handler invoked once | subscribe before publish | invalid payload nack | `request-response` | caller cancel → nack | `binding-inventory-composition.test.ts` | no |
+| *(async example)* `emitter→onLine` | event emitted | `onLine` | line text | parser state updated | listener registered before emit | emit before subscribe dropped | `fire-and-forget` | unsubscribe on close | composition test | no |
+| *(async example)* `spawn→stdout` | subprocess stdout chunk | `parseLine` | line buffer | record appended | subscription active before bytes | `TIMEOUT_EXCEEDED` after 30s | `streaming` | parent cancel closes stream | composition test | no |
 
 **Done when:** every binding in the change has a composition test that carries IMPL block token comments and verifies trigger → callee → arguments → effect. Missing rows are gaps under `[PROC-TEST_STRATEGY]`.
 
 ### Machine validation contract
 
 The `binding_inventory_validate` validator accepts the same rows as structured data. Every row must contain non-empty `id`, `trigger`, `callee`, `arguments`, `effect`, `ordering`, and `failure_behavior`. A composition-testable row must also contain `composition_test`. A row may set `e2e_only: true` only when `e2e_only_reason` names a platform constraint such as native OS, window-server, visual, browser, file-dialog, or filesystem behavior.
+
+**Async seam columns (W5, optional for legacy sync bindings):**
+
+| Column | When required | Example |
+|---|---|---|
+| `async_semantics` | Required when `trigger` names an **event** or **message**; optional otherwise | `fire-and-forget`, `request-response`, `streaming`, `at-least-once` |
+| `cancellation` | Recommended when cancel paths exist | `caller cancel → nack in-flight; POST no state change` |
+| `idempotency_evidence` | Required when `failure_behavior` or `async_semantics` declares **retry** or **at-least-once** | `message_id dedup; POST single DATA transition` |
+
+When `async_semantics` is present, `ordering` and `failure_behavior` must be non-empty. The validator reports missing async columns; it does **not** certify runtime ordering, delivery guarantees, or race-freedom.
+
+### CONTROLLED_COMPOSITION_FAULT patterns (UI-free)
+
+Use these fault injections in composition tests (not E2E) to prove binding PRE/POST without claiming concurrency proofs:
+
+| Fault | Injection | Deterministic expected outcome | Inventory columns exercised |
+|---|---|---|---|
+| **Ordering fault** | Fire trigger before listener registered | Handler not invoked; test fails closed | `ordering`, `async_semantics`, `composition_test` |
+| **Timeout fault** | Slow callee exceeds IMPL `TIMEOUT` | Named failure mode; no partial success POST | `failure_behavior`, `async_semantics`, `composition_test` |
+| **Duplicate delivery fault** | Deliver the same message twice | Idempotency POST asserts single DATA transition | `idempotency_evidence`, `async_semantics`, `composition_test` |
+
+Evidence from these tests means **binding exercised** in test design — never “system is race-free.”
 
 The validator proves inventory completeness and E2E justification only. It does not prove that the callee works, that arguments are semantically correct, or that the composition test passes.
 

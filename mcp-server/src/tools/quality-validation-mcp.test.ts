@@ -96,6 +96,7 @@ describe("quality validation MCP bindings [PROC-QUALITY_ASSURANCE]", () => {
           effect: "state updated",
           ordering: "receive before update",
           failure_behavior: "invalid message rejected",
+          async_semantics: "request-response",
           composition_test: "mcp-server/src/tools/quality-validation-mcp.test.ts",
         },
       ],

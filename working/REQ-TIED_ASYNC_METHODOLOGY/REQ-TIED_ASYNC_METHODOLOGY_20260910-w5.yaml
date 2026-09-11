@@ -1,0 +1,207 @@
+async_in_scope: true
+async_matched_semantic_classes:
+  - cancellation
+  - message_event_delivery
+  - retry_idempotency
+  - timeout
+copy_hygiene: W5 tracker; W2 catalog and W3 evidence rows stable as entry gates.
+execution_evidence:
+  close_out_evidence:
+    date: "2026-09-10"
+    deferred:
+      - git commit deferred to parent plan-close-out invocation
+    gates:
+      close_out:
+        allowed: true
+        receipt_path: "working/REQ-TIED_ASYNC_METHODOLOGY/gates/close_out-w5-closeout-20260910.json"
+        run_id: "w5-closeout-20260910"
+      verification:
+        allowed: true
+        run_id: "w5-verify-20260910"
+    master_checklist: tied/docs/agent-req-implementation-checklist.yaml
+    w5_exit_gates:
+      - "every async binding row has semantic category ordering failure behavior test reference"
+      - "duplicate timeout cancellation listener-order faults have deterministic expected outcomes"
+      - "non-async inventory remains compatible"
+      - "evidence says binding exercised never system is race-free"
+  completed:
+    - author-architecture
+    - author-requirement
+    - change-definition
+    - composition-integration
+    - gate-pseudocode-validation
+    - gitignore-close-out-hygiene
+    - impact-discovery
+    - persist-citdp-record
+    - persist-implementation-records
+    - risk-assessment
+    - session-bootstrap
+    - sub-close-out-evidence-sync
+    - sync-tied-stack
+    - test-strategy
+    - three-way-alignment-unit
+    - traceable-commit
+    - unit-test-green
+    - unit-test-red
+    - verification-gate
+  envelope_path: working/REQ-TIED_ASYNC_METHODOLOGY/evidence/request-evidence-envelope.v1.json
+  operator_evidence:
+    depth_tier: minimal
+    gate_policy: advisory
+    inquiry_waiver:
+      approval: W5 binding inventory only — sub-adversarial-inquiry-pass not_applicable
+      policy: async-composition-inventory
+      rationale: W5 extends binding inventory validator; no tied_adversarial_inquiry_run.
+    prior_depth_tier: integrated
+    status: verification_complete
+  request: REQ-TIED_ASYNC_METHODOLOGY
+steps:
+  - disposition: completed
+    evidence_refs:
+      - AGENTS.md
+      - tied/vocab/async-methodology.md
+      - tied/vocab/pseudocode-and-citdp.md
+      - tied/vocab/routing.md
+    slug: session-bootstrap
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - docs/tied-async-methodology-plan.md
+      - working/REQ-TIED_ASYNC_METHODOLOGY/CITDP-REQ-TIED_ASYNC_METHODOLOGY-w5.yaml
+    slug: change-definition
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - mcp-server/src/analysis/binding-inventory.ts
+      - tied/docs/composition-coverage.md
+    slug: impact-discovery
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - tied/requirements/REQ-ASYNC_COMPOSITION_INVENTORY.yaml
+    slug: author-requirement
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - tied/architecture-decisions/ARCH-ASYNC_COMPOSITION_BINDING.yaml
+    slug: author-architecture
+    tracking:
+      status: completed
+  - disposition: not_applicable
+    policy: async-composition-inventory
+    rationale: W5 binding inventory validator; no tied_adversarial_inquiry_run.
+    slug: sub-adversarial-inquiry-pass
+    tracking:
+      status: not_applicable
+  - disposition: completed
+    evidence_refs:
+      - tied/implementation-decisions/IMPL-ASYNC_BINDING_VALIDATOR-pseudocode.md
+    slug: gate-pseudocode-validation
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - tied/implementation-decisions/IMPL-ASYNC_BINDING_VALIDATOR.yaml
+    slug: persist-implementation-records
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - mcp-server/src/analysis/binding-inventory-composition.test.ts
+    slug: test-strategy
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - mcp-server/src/analysis/binding-inventory.test.ts
+    slug: unit-test-red
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - mcp-server/src/analysis/binding-inventory.test.ts
+      - mcp-server/src/analysis/binding-inventory-composition.test.ts
+    slug: unit-test-green
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - mcp-server/src/analysis/binding-inventory.ts
+    slug: three-way-alignment-unit
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - mcp-server/src/analysis/binding-inventory-composition.test.ts
+      - tied/docs/composition-coverage.md
+    slug: composition-integration
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_ASYNC_METHODOLOGY/CITDP-REQ-TIED_ASYNC_METHODOLOGY-w5.yaml
+    slug: verification-gate
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - tied/requirements/REQ-ASYNC_COMPOSITION_INVENTORY.yaml
+      - tied/architecture-decisions/ARCH-ASYNC_COMPOSITION_BINDING.yaml
+      - tied/implementation-decisions/IMPL-ASYNC_BINDING_VALIDATOR.yaml
+    slug: sync-tied-stack
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_ASYNC_METHODOLOGY/CITDP-REQ-TIED_ASYNC_METHODOLOGY-w5.yaml
+    slug: persist-citdp-record
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_ASYNC_METHODOLOGY/CITDP-REQ-TIED_ASYNC_METHODOLOGY-w5.yaml
+    slug: risk-assessment
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - tools/bundled-prompt-type-skills/prompt-shared/gitignore-close-out-hygiene.md
+    policy: >-
+      N/A — W5 deliverables are track artifacts; gates/ covered by .gitignore:42; token-payloads
+      under working/REQ-TIED_ASYNC_METHODOLOGY/ are track
+    slug: gitignore-close-out-hygiene
+    tracking:
+      status: completed
+      evidence_refs:
+        - tools/bundled-prompt-type-skills/prompt-shared/gitignore-close-out-hygiene.md
+  - disposition: completed
+    evidence_refs:
+      - tools/bootstrap/templates/sync-tracker-dispositions.mjs
+      - tools/bootstrap/templates/run-close-out-gates.mjs
+      - working/REQ-TIED_ASYNC_METHODOLOGY/evidence/request-evidence-envelope.v1.json
+      - working/REQ-TIED_ASYNC_METHODOLOGY/evidence/verification-evidence-manifest.v1.json
+    slug: sub-close-out-evidence-sync
+    tracking:
+      status: completed
+      evidence_refs:
+        - working/REQ-TIED_ASYNC_METHODOLOGY/evidence/request-evidence-envelope.v1.json
+        - working/REQ-TIED_ASYNC_METHODOLOGY/evidence/verification-evidence-manifest.v1.json
+  - disposition: completed
+    evidence_refs:
+      - CHANGELOG.md
+      - working/REQ-TIED_ASYNC_METHODOLOGY/evidence/proposed-commit-message-w5-w6.txt
+    policy:
+      commit_deferred: true
+      rationale: plan-close-out prepares commit; parent stages after gate handoff
+      skill: plan-close-out
+    slug: traceable-commit
+    tracking:
+      status: completed
+      evidence_refs:
+        - CHANGELOG.md
+        - working/REQ-TIED_ASYNC_METHODOLOGY/evidence/proposed-commit-message-w5-w6.txt
+wave_scope: W5

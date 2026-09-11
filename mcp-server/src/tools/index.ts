@@ -2344,7 +2344,7 @@ export const allTools = [
     name: "binding_inventory_validate",
     config: {
       description:
-        "Validate binding inventory rows for trigger, callee, arguments, effect, ordering, failure behavior, UI-free composition evidence, and named E2E platform constraints.",
+        "Validate binding inventory rows for trigger, callee, arguments, effect, ordering, failure behavior, optional async_semantics/cancellation/idempotency_evidence (W5 async seams), UI-free composition evidence, and named E2E platform constraints. Reports missing fields only; does not certify runtime ordering or race-freedom.",
       inputSchema: z.object({
         rows: z.array(z.record(z.unknown())),
       }),

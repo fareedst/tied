@@ -1,0 +1,36 @@
+IMPL-ASYNC_BINDING_VALIDATOR:
+  category: "Implementation"
+  description: "Extend binding-inventory.ts validateBindingInventory: when async_semantics present require ordering and failure_behavior; when trigger is event or message require async_semantics; when retry or at-least-once declared require idempotency evidence; update proof_boundary."
+  essence_pseudocode_path: "tied/implementation-decisions/IMPL-ASYNC_BINDING_VALIDATOR-pseudocode.md"
+  implementation_approach: "TDD: RED unit tests, validator implementation, composition fault tests, MCP test extension."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-09-10"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-09-10"
+      reason: "W5 registration"
+  name: "Async Binding Inventory Validator"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "MCP binding_inventory_validate inherits extensions"
+    problems_solved:
+      - "Missing async column enforcement"
+    why: "Static inventory validation before composition wiring."
+  related_decisions:
+    depends_on:
+      - "IMPL-QUALITY_BINDING_INVENTORY"
+    related_to: []
+    supersedes: []
+  status: "In Progress"
+  traceability:
+    architecture:
+      - "ARCH-ASYNC_COMPOSITION_BINDING"
+    code_annotations:
+      - "IMPL-ASYNC_BINDING_VALIDATOR"
+    requirements:
+      - "REQ-ASYNC_COMPOSITION_INVENTORY"
+    tests:
+      - "mcp-server/src/analysis/binding-inventory-composition.test.ts"

@@ -9,14 +9,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **TIED Async Methodology W5+W6 ([REQ-TIED_ASYNC_METHODOLOGY])** —
+  W5: optional async_semantics and cancellation columns on binding inventory,
+  async seam validation rules, CONTROLLED_COMPOSITION_FAULT composition tests,
+  and composition-coverage.md fault patterns; proof boundary binding exercised
+  never race-free. REQ-ASYNC_COMPOSITION_INVENTORY /
+  ARCH-ASYNC_COMPOSITION_BINDING / IMPL-ASYNC_BINDING_VALIDATOR.
+  W6: advisory agent-preload-contract async_methodology section, agentstream
+  Phase B/G async highlights, scoped analysis async_diagnostic_summary in
+  impact_preview; copy_files.sh compatibility documented. Close-out gates
+  (w5-closeout-20260910, w6-closeout-20260910, advisory). Envelope zero
+  blocking gaps. Tests: 12/12 binding inventory + 7/7 quality-validation MCP +
+  1/1 scoped preview + agentstream highlight green.
+
 - **TIED Async Methodology W4 ([REQ-TIED_ASYNC_METHODOLOGY])** —
   Layer C async_boundary opt-in pass with seven structural diagnostics,
   24-fixture corpus, MCP async_boundary/async_gate_errors flags, and D7
   gate promotion for ASYNC_EFFECTS_WITHOUT_BOUNDARY only;
   REQ-ASYNC_BOUNDARY_ANALYSIS / ARCH-ASYNC_ANALYSIS_PASS /
   IMPL-ASYNC_BOUNDARY_ANALYZER; pilot after-w4 Layer C summary for
-  IMPL-GOAGENT-EXECUTOR. Close-out gate (w4-closeout-20260910, advisory).
-  W5–W6 deferred.
+  IMPL-GOAGENT-EXECUTOR.   Close-out gate (w4-closeout-20260910, advisory).
 
 - **TIED Async Methodology W3 ([REQ-TIED_ASYNC_METHODOLOGY])** —
   CITDP candidate trigger wiring (deriveAsyncCitdpTriggers), nine-row evidence

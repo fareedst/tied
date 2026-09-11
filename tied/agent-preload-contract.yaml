@@ -3,6 +3,19 @@ agent_preload:
     checklist_step_id: ""
     checklist_token: ""
     primary_query_summary: ""
+  async_methodology:
+    async_in_scope: "false"
+    layer_c_flags:
+      async_boundary:
+        available_when: "pseudocode_analyze accepts async_boundary flag and analyzer capability is built"
+        opt_in: "true"
+      typed_flow:
+        force_on_async_detection_alone: "false"
+        note: "Never force typed_flow true merely because async was detected"
+    preload_glossary_when_async_in_scope:
+      - "./tied/methodology/vocab/async-methodology.md"
+      - "./tied/vocab/async-methodology.md"
+    proof_boundary: "Structural async contracts and binding inventory completeness only; no race/deadlock freedom claims"
   discovery_already_done:
     gemfile_present: "false"
     grep_patterns_satisfied:
@@ -52,4 +65,4 @@ agent_preload:
     project_summary: "TIED methodology repository (stdd); project YAML under tied/"
     top_level_entries: []
     vcs_present: "true"
-preload_instructions: "Treat agent_preload as authoritative context. If a value is present, do not spend\ntool calls rediscovering it unless a later tool result or user message contradicts it.\nAlign MCP TIED_BASE_PATH with tied_paths (this repo: tied/). Do not treat methodology/**\nas writable. Prefer tied-cli.sh when IDE MCP tools are unavailable and Node + built\nmcp-server/dist/index.js are present. Clear active_user_intent and implementation_contract\nwhen switching to a new REQ/session.\n"
+preload_instructions: "Treat agent_preload as authoritative context. If a value is present, do not spend\ntool calls rediscovering it unless a later tool result or user message contradicts it.\nAlign MCP TIED_BASE_PATH with tied_paths (this repo: tied/). Do not treat methodology/**\nas writable. Prefer tied-cli.sh when IDE MCP tools are unavailable and Node + built\nmcp-server/dist/index.js are present. Clear active_user_intent and implementation_contract\nwhen switching to a new REQ/session.\n\nWhen async_methodology.async_in_scope is true for an authorized session, PRELOAD the\nlisted async glossary paths before reading project TIED YAML or source. Expose Layer C\nasync_boundary only when the selected analyzer capability is available; never force\ntyped_flow true on async detection alone. async_in_scope is advisory and must not\nauto-activate adversarial inquiry.\n"

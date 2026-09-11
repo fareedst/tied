@@ -1,9 +1,9 @@
 {
   "schema_version": "request-evidence-envelope.v1",
   "envelope_meta": {
-    "generated_at": "2026-09-11T04:57:41.555Z",
-    "generator": "request_evidence_envelope_build",
-    "revision": 1
+    "generated_at": "2026-09-11T05:24:16.565Z",
+    "generator": "request_evidence_envelope_patch",
+    "revision": 3
   },
   "identity": {
     "request_token": "REQ-TIED_ASYNC_METHODOLOGY",
@@ -12,13 +12,46 @@
     "gate_policy": "advisory",
     "methodology_snapshot_id": "3.0.0"
   },
-  "runs": [],
+  "runs": [
+    {
+      "run_id": "w5-closeout-20260910",
+      "phase": "close_out",
+      "generator": "plan-close-out"
+    },
+    {
+      "run_id": "w6-closeout-20260910",
+      "phase": "close_out",
+      "generator": "plan-close-out"
+    }
+  ],
   "artifacts": [
     {
       "kind": "checklist_gate_receipt",
       "schema_version": "checklist-gate-receipt.v1",
-      "path": "working/REQ-TIED_ASYNC_METHODOLOGY/gates/close_out-w4-closeout-20260910.json",
-      "content_hash": "sha256:003bf69b4a9fa0533748663f7c1e6ea922f8e766e791e1257dbb7972d7be61aa",
+      "path": "working/REQ-TIED_ASYNC_METHODOLOGY/gates/close_out-2026-09-11T05-23-22-015Z.json",
+      "content_hash": "sha256:934c3103ffb87cbd3588c56e9406933ea8aad0e515aa5fe4a0d1180fcaba1320",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "working/REQ-TIED_ASYNC_METHODOLOGY/gates/close_out-w5-closeout-20260910.json",
+      "content_hash": "sha256:0ef108b7a7aed1e44434ce7f57b31ceaea8c85c51a2e0e8aad41a275aa9b6ce7",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "working/REQ-TIED_ASYNC_METHODOLOGY/gates/close_out-w6-closeout-20260910.json",
+      "content_hash": "sha256:a3c346dbf716c183161d53da6875095d81ee6315a3b46ff5149c09f431726d86",
       "phase": "close_out",
       "status": "present",
       "proof_boundaries": [
@@ -73,7 +106,7 @@
       "kind": "request_evidence_envelope",
       "schema_version": "request-evidence-envelope.v1",
       "path": "working/REQ-TIED_ASYNC_METHODOLOGY/evidence/request-evidence-envelope.v1.json",
-      "content_hash": "sha256:25a855bc7309a8d4197bc0b28834d6f7a62c875d07f035cabec3cd8c304367da",
+      "content_hash": "sha256:6da9da662bc9ab746ca6a85a30b02ed24854c77764616932b704412196b10f65",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -117,7 +150,7 @@
       "kind": "verification_evidence_manifest",
       "schema_version": "verification-evidence-manifest.v1",
       "path": "working/REQ-TIED_ASYNC_METHODOLOGY/evidence/verification-evidence-manifest.v1.json",
-      "content_hash": "sha256:8eb26164a92142dfee917068cad11b74c13248a9a97d48e7e15fd3f5ce6c306c",
+      "content_hash": "sha256:94c3b9a18bec5a0ff1e5bbf0daa4ff6f259ccd4e64d42d94301e7646b5b7503a",
       "phase": null,
       "status": "present",
       "proof_boundaries": [

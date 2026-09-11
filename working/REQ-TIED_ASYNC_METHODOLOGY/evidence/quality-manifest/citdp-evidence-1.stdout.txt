@@ -1,0 +1,24 @@
+▶ binding inventory composition faults [IMPL-ASYNC_BINDING_VALIDATOR] [REQ-ASYNC_COMPOSITION_INVENTORY]
+  ✔ documents CONTROLLED_COMPOSITION_FAULT patterns with deterministic outcomes (0.343209ms)
+  ✔ accepts async IPC binding with complete seam columns (0.299291ms)
+  ✔ ordering_fault inventory row fails when listener-order PRE violated in test design (0.14725ms)
+  ✔ timeout_fault inventory requires failure_behavior naming timeout outcome (0.053458ms)
+  ✔ duplicate_delivery_fault inventory requires idempotency evidence for at-least-once (0.092917ms)
+✔ binding inventory composition faults [IMPL-ASYNC_BINDING_VALIDATOR] [REQ-ASYNC_COMPOSITION_INVENTORY] (1.447916ms)
+▶ binding inventory validation [IMPL-ASYNC_BINDING_VALIDATOR] [IMPL-QUALITY_BINDING_INVENTORY] [REQ-ASYNC_COMPOSITION_INVENTORY] [REQ-MODULE_VALIDATION]
+  ✔ accepts a composition-testable binding with the complete contract (0.519916ms)
+  ✔ rejects missing composition evidence and vague E2E claims (0.189709ms)
+  ✔ rejects duplicate binding identifiers (0.052334ms)
+  ✔ reports missing binding fields and accepts a named platform constraint (0.08675ms)
+  ✔ requires async_semantics for event or message triggers (0.054958ms)
+  ✔ requires idempotency evidence when retry or at-least-once is declared (0.089709ms)
+  ✔ keeps legacy non-async inventories valid without optional columns (0.039416ms)
+✔ binding inventory validation [IMPL-ASYNC_BINDING_VALIDATOR] [IMPL-QUALITY_BINDING_INVENTORY] [REQ-ASYNC_COMPOSITION_INVENTORY] [REQ-MODULE_VALIDATION] (1.535458ms)
+ℹ tests 12
+ℹ suites 2
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 65.839666

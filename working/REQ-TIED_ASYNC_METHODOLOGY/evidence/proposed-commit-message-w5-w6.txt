@@ -1,0 +1,20 @@
+feat(tied): add async methodology W5+W6 binding inventory and preload advisory
+
+W5 extends binding inventory with optional async_semantics and cancellation
+columns, async seam validation rules, CONTROLLED_COMPOSITION_FAULT composition
+tests, and composition-coverage.md fault patterns. Legacy non-async inventories
+remain valid without optional columns. Proof boundary: binding exercised, never
+race-free.
+
+W6 adds advisory agent-preload-contract async_methodology section, agentstream
+Phase B/G async highlights, and scoped analysis async_diagnostic_summary in
+impact_preview. Never forces typed_flow on async detection alone; async_in_scope
+does not auto-activate inquiry. copy_files.sh compatibility documented.
+
+REQ-TIED_ASYNC_METHODOLOGY REQ-ASYNC_COMPOSITION_INVENTORY
+ARCH-ASYNC_COMPOSITION_BINDING IMPL-ASYNC_BINDING_VALIDATOR
+
+Close-out: w5-closeout-20260910, w6-closeout-20260910; envelope zero blocking
+gaps (advisory). sub-adversarial-inquiry-pass not_applicable (minimal depth).
+Tests: 12/12 binding inventory + 7/7 quality-validation MCP + 1/1 scoped preview
++ agentstream highlight green.

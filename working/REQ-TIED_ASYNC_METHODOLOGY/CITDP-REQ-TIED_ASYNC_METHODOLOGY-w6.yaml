@@ -1,0 +1,86 @@
+CITDP-REQ-TIED_ASYNC_METHODOLOGY-w6:
+  change_definition:
+    current_behavior: "agent-preload-contract has no async_in_scope guidance; checklist render does not highlight Phase B/G async columns; impact_preview lacks async diagnostic summary."
+    desired_behavior: "W6 adds advisory preload contract async_methodology section, agentstream async highlights for catalog-pseudocode-contracts and composition-integration, and scoped analysis async_diagnostic_summary in impact_preview."
+    non_goals:
+      - "New REQ/ARCH/IMPL umbrella tokens"
+      - "Force typed_flow on async detection alone"
+      - "Auto-activate adversarial inquiry from async_in_scope"
+      - "E2E UI tests for preload"
+    sponsor_decisions:
+      D8: "W6 authorized with W5 in build-plan invocation 2026-09-10"
+      w6_advisory: "optional tranche; not on critical path for T0 correctness"
+    success_criteria:
+      - "agent-preload-contract.yaml async_methodology section with layer_c_flags"
+      - "agentstream highlights Phase B and Phase G async guidance"
+      - "tied_scoped_analysis_run impact_preview includes async_diagnostic_summary"
+      - "copy_files.sh compatibility documented"
+    unchanged_behavior:
+      - "Default async_in_scope false in preload contract"
+      - "Legacy impact_preview fields unchanged"
+  completion_criteria:
+    close_out_gate: "allowed true at minimal depth with w6-closeout-20260910 receipt"
+    copy_files_compatibility: "methodology vocab installed via tools/bootstrap/copy-files.mjs --merge-vocab; client tied/vocab/ project-owned; agent-preload-contract.yaml not overwritten by bootstrap"
+    lint_yaml: "required pass on changed project YAML"
+    verification_gate: "allowed true at minimal depth with async preload and scoped preview tests"
+    w6_exit_gates:
+      - "never force typed_flow on async detection alone"
+      - "async_in_scope does not auto-activate inquiry"
+      - "advisory optional tranche complete"
+  evidence:
+    commands:
+      - "go test ./checklist/ -run TestLoadTurns_asyncMethodologyHighlightForPhaseBAndG"
+      - "node --test mcp-server/dist/analysis/scoped-analysis-async-preview.test.js"
+      - "npm run build --prefix mcp-server"
+    proof_boundaries:
+      - "advisory preload and preview only"
+  impact_analysis:
+    async_in_scope: true
+    files:
+      - "tied/agent-preload-contract.yaml"
+      - "tools/agentstream/checklist/checklist.go"
+      - "tools/agentstream/checklist/async_highlight_test.go"
+      - "mcp-server/src/analysis/scoped-analysis.ts"
+      - "mcp-server/src/analysis/scoped-analysis-async-preview.test.ts"
+  leap_feedback:
+    divergences_from_analysis: "none"
+    record_status: "complete"
+  record_identity:
+    author: "AI Agent"
+    change_request_id: "REQ-TIED_ASYNC_METHODOLOGY"
+    date: "2026-09-10"
+    plan_reference: "docs/tied-async-methodology-plan.md § W6"
+    wave_scope: "W6"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver:
+        approval: "W6 advisory preload only — sub-adversarial-inquiry-pass not_applicable"
+        expiry: "2026-12-31"
+        owner: "stdd methodology sponsor"
+        policy: "async-agent-preload-advisory"
+        rationale: "No inquiry MCP invocation in W6."
+      counterexamples:
+        - "async_in_scope auto-activates tied_adversarial_inquiry_run"
+        - "typed_flow forced true on async detection alone"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "preload contract sets force_on_async_detection_alone false"
+        - "impact_preview async summary is advisory only"
+      eligibility_triggers_matched:
+        - "methodology-tooling-change"
+      evidence_references:
+        - "tied/agent-preload-contract.yaml"
+        - "tools/agentstream/checklist/async_highlight_test.go"
+        - "mcp-server/src/analysis/scoped-analysis-async-preview.test.ts"
+      falsification_questions:
+        - "Does async_in_scope alone authorize inquiry?"
+        - "Does impact_preview force typed_flow?"
+      gate_policy: "advisory"
+      integrated_waiver:
+        approval: "W6 advisory preload only"
+        expiry: "2026-12-31"
+        owner: "stdd methodology sponsor"
+        policy: "async-agent-preload-advisory"
+        rationale: "No inquiry MCP invocation in W6."
+      prior_depth_tier: "integrated"

@@ -449,6 +449,24 @@ func sliceMainSteps(steps []yamlStep, path, fromID, toID string) ([]yamlStep, er
 	return steps[start : end+1], nil
 }
 
+// appendAsyncMethodologyHighlight adds Phase B catalog and Phase G composition async column guidance (W6 advisory).
+func appendAsyncMethodologyHighlight(lines []string, slug string) []string {
+	switch slug {
+	case "catalog-pseudocode-contracts":
+		return append(lines, "",
+			"### Async methodology highlight (Phase B)",
+			"When async_in_scope is true, CALL catalog-async-boundaries: produce the closed eight-column async catalog per async-marked block (Boundary kind, Await/message/event, Timeout, Cancellation, Retry/idempotency, Shared DATA, Termination/order). Missing rows block RED. Proof boundary: structural contracts only — not race-freedom.",
+		)
+	case "composition-integration":
+		return append(lines, "",
+			"### Async methodology highlight (Phase G)",
+			"For async seams, binding inventory rows must include async_semantics, ordering, failure_behavior, cancellation when applicable, and composition_test. Event/message triggers require async_semantics; retry/at-least-once requires idempotency evidence. Use CONTROLLED_COMPOSITION_FAULT patterns (ordering, timeout, duplicate delivery) in UI-free tests. Evidence means binding exercised — never system is race-free.",
+		)
+	default:
+		return lines
+	}
+}
+
 func formatMainStep(doc *yamlDoc, step yamlStep, token string, vars map[string]string, stubMap map[string]string, stubKeys []string) string {
 	lines := []string{
 		"Execute this LEAD+TIED agent requirement implementation checklist step in the current workspace.",
@@ -462,7 +480,9 @@ func formatMainStep(doc *yamlDoc, step yamlStep, token string, vars map[string]s
 		title = expandThenStub(title, vars, stubMap, stubKeys)
 	}
 	stepHead := fmt.Sprintf("## Step %s: %s", stepPrimaryLabel(step), title)
-	lines = append(lines, "", stepHead, "", "### Goals")
+	lines = append(lines, "", stepHead)
+	lines = appendAsyncMethodologyHighlight(lines, stepPrimaryLabel(step))
+	lines = append(lines, "", "### Goals")
 	if step.Goals != "" {
 		lines = append(lines, trimExpandThenStub(step.Goals, vars, stubMap, stubKeys))
 	}

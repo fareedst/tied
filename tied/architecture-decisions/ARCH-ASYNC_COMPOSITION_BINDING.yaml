@@ -1,0 +1,39 @@
+ARCH-ASYNC_COMPOSITION_BINDING:
+  category: "Architecture"
+  consequences:
+    - "binding_inventory_validate gains async-specific diagnostic codes"
+    - "CONTROLLED_COMPOSITION_FAULT patterns documented for ordering, timeout, duplicate delivery"
+  decision: "Optional backward-compatible columns on BindingInventoryRow; validator extends IMPL-QUALITY_BINDING_INVENTORY without replacing it."
+  description: "Extend binding inventory with optional async_semantics (fire-and-forget, request-response, streaming, or declared delivery category), cancellation (actor and post-cancel behavior), and idempotency_evidence when retry or at-least-once is declared."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-09-10"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-09-10"
+      reason: "W5 registration"
+  name: "Async Composition Binding Schema"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "IPC, event emitter, subprocess stdout stream examples in composition-coverage.md"
+    problems_solved:
+      - "Composition tests lack async PRE/POST contract"
+    why: "Async seams need first-class inventory columns distinct from sync bindings."
+  related_decisions:
+    depends_on:
+      - "ARCH-MODULE_VALIDATION"
+    related_to:
+      - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    supersedes: []
+  status: "In Progress"
+  traceability:
+    code_annotations:
+      - "ARCH-ASYNC_COMPOSITION_BINDING"
+    implementation:
+      - "IMPL-ASYNC_BINDING_VALIDATOR"
+    requirements:
+      - "REQ-ASYNC_COMPOSITION_INVENTORY"
+    tests:
+      - "mcp-server/src/analysis/binding-inventory-composition.test.ts"

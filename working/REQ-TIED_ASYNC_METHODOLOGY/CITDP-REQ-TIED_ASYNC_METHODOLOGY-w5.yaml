@@ -1,0 +1,113 @@
+CITDP-REQ-TIED_ASYNC_METHODOLOGY-w5:
+  change_definition:
+    current_behavior: "binding_inventory_validate checks base columns only; BindingInventoryRow lacks async_semantics and cancellation; composition-coverage.md has no async seam examples or CONTROLLED_COMPOSITION_FAULT patterns."
+    desired_behavior: "W5 extends binding inventory with optional async_semantics and cancellation columns, async seam validation rules, fault-injection documentation, and UI-free composition tests; evidence says binding exercised never race-free."
+    non_goals:
+      - "Agent preload / agentstream render (W6)"
+      - "Layer C async_boundary pass changes (W4 owns)"
+      - "Race-freedom, deadlock-freedom, or happens-before proof"
+      - "Breaking required base columns for legacy non-async inventories"
+    sponsor_decisions:
+      D8: "W5 authorized via separate build-plan invocation 2026-09-10 after W3 exit"
+      D5_context: "W3+W4 pre-authorized in refinement plan; W5-W6 deferred until this invocation"
+    success_criteria:
+      - "REQ-ASYNC_COMPOSITION_INVENTORY, ARCH-ASYNC_COMPOSITION_BINDING, IMPL-ASYNC_BINDING_VALIDATOR registered"
+      - "event/message triggers require async_semantics"
+      - "retry/at-least-once declarations require idempotency evidence"
+      - "CONTROLLED_COMPOSITION_FAULT patterns documented with deterministic expected outcomes"
+      - "Non-async inventory rows remain valid without optional async columns"
+    unchanged_behavior:
+      - "Legacy binding rows without async_semantics pass when base columns complete"
+      - "W4 async_boundary analyzer unchanged"
+      - "E2E-only platform constraint rules unchanged"
+  completion_criteria:
+    close_out_gate: "allowed true at minimal depth with w5-closeout-20260910 receipt"
+    depth_reconciliation: "Gate depth minimal for W5 build; sub-adversarial-inquiry-pass not_applicable"
+    envelope_path: "working/REQ-TIED_ASYNC_METHODOLOGY/evidence/request-evidence-envelope.v1.json"
+    lint_yaml: "required pass on changed project YAML"
+    pre_implementation_gate: "allowed true at minimal gate depth with W5 CITDP and W2/W3 entry evidence"
+    tied_validate_consistency: "required pass"
+    verification_gate: "allowed true at minimal gate depth with binding-inventory test evidence"
+    w5_exit_gates:
+      - "every async binding row has semantic category ordering failure behavior test reference"
+      - "duplicate timeout cancellation listener-order faults have deterministic expected outcomes"
+      - "non-async inventory remains compatible"
+      - "evidence says binding exercised never system is race-free"
+  evidence:
+    commands:
+      - "node --test mcp-server/dist/analysis/binding-inventory.test.js mcp-server/dist/analysis/binding-inventory-composition.test.js"
+      - "npm run build --prefix mcp-server"
+    manifest_reference: "working/REQ-TIED_ASYNC_METHODOLOGY/evidence/request-evidence-envelope.v1.json"
+    proof_boundaries:
+      - "baseline-functional"
+      - "binding inventory completeness only; no runtime ordering delivery or race-freedom claims"
+  impact_analysis:
+    async_in_scope: true
+    async_matched_semantic_classes:
+      - message_event_delivery
+      - cancellation
+      - retry_idempotency
+      - timeout
+    files:
+      - "mcp-server/src/analysis/binding-inventory.ts"
+      - "mcp-server/src/analysis/binding-inventory.test.ts"
+      - "mcp-server/src/analysis/binding-inventory-composition.test.ts"
+      - "tied/docs/composition-coverage.md"
+      - "tied/architecture-decisions/ARCH-ASYNC_COMPOSITION_BINDING.yaml"
+      - "tied/implementation-decisions/IMPL-ASYNC_BINDING_VALIDATOR-pseudocode.md"
+      - "tied/implementation-decisions/IMPL-ASYNC_BINDING_VALIDATOR.yaml"
+      - "tied/requirements/REQ-ASYNC_COMPOSITION_INVENTORY.yaml"
+    modules:
+      - "async binding inventory validator"
+      - "composition fault pattern tests"
+  leap_feedback:
+    divergences_from_analysis: "none"
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    author: "AI Agent"
+    change_request_id: "REQ-TIED_ASYNC_METHODOLOGY"
+    date: "2026-09-10"
+    plan_reference: "docs/tied-async-methodology-plan.md § W5"
+    record_status: "complete"
+    title: "TIED Async Methodology W5 — composition binding inventory"
+    wave_scope: "W5"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver:
+        approval: "W5 binding inventory only — sub-adversarial-inquiry-pass not_applicable"
+        expiry: "2026-12-31"
+        owner: "stdd methodology sponsor"
+        policy: "async-composition-inventory"
+        rationale: "W5 extends binding inventory validator; no tied_adversarial_inquiry_run."
+      counterexamples:
+        - "Validator claims race-freedom or runtime ordering guarantee"
+        - "async_semantics required for non-event/message triggers"
+        - "Legacy inventories fail when optional columns absent"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "proof_boundary states binding exercised not race-free"
+        - "optional async columns backward compatible"
+      eligibility_triggers_matched:
+        - "methodology-tooling-change"
+      evidence_references:
+        - "mcp-server/src/analysis/binding-inventory.test.ts"
+        - "mcp-server/src/analysis/binding-inventory-composition.test.ts"
+      falsification_questions:
+        - "Does validator certify runtime delivery ordering?"
+        - "Do sync-only binding rows fail without async_semantics?"
+      gate_policy: "advisory"
+      integrated_waiver:
+        approval: "sponsor authorized W5 tranche via build-plan invocation 2026-09-10"
+        expiry: "2026-12-31"
+        owner: "stdd methodology sponsor"
+        policy: "async-composition-inventory"
+        rationale: "W5 is binding inventory schema extension at minimal depth."
+      prior_depth_tier: "integrated"
+  test_strategy:
+    red_first:
+      - "mcp-server/src/analysis/binding-inventory.test.ts"
+      - "mcp-server/src/analysis/binding-inventory-composition.test.ts"
+    fixtures:
+      - "CONTROLLED_COMPOSITION_FAULT ordering timeout duplicate-delivery patterns in composition tests"

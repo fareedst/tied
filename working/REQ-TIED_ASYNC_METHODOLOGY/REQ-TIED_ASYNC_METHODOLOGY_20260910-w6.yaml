@@ -1,0 +1,100 @@
+async_in_scope: true
+copy_hygiene: W6 tracker; advisory optional tranche after W5 exit.
+execution_evidence:
+  close_out_evidence:
+    date: "2026-09-10"
+    deferred:
+      - git commit deferred to parent plan-close-out invocation
+    gates:
+      close_out:
+        allowed: true
+        receipt_path: "working/REQ-TIED_ASYNC_METHODOLOGY/gates/close_out-w6-closeout-20260910.json"
+        run_id: "w6-closeout-20260910"
+      verification:
+        allowed: true
+        run_id: "w6-verify-20260910"
+    w6_exit_gates:
+      - "never force typed_flow on async detection alone"
+      - "async_in_scope does not auto-activate inquiry"
+      - "advisory optional tranche complete"
+  completed:
+    - change-definition
+    - gitignore-close-out-hygiene
+    - session-bootstrap
+    - sub-close-out-evidence-sync
+    - traceable-commit
+    - verification-gate
+  envelope_path: working/REQ-TIED_ASYNC_METHODOLOGY/evidence/request-evidence-envelope.v1.json
+  operator_evidence:
+    copy_files_compatibility: "tools/bootstrap/copy-files.mjs installs methodology vocab via --merge-vocab; client tied/vocab/ project-owned; agent-preload-contract.yaml not overwritten by bootstrap"
+    depth_tier: minimal
+    gate_policy: advisory
+    inquiry_waiver:
+      approval: W6 advisory preload only — sub-adversarial-inquiry-pass not_applicable
+      policy: async-agent-preload-advisory
+      rationale: No inquiry MCP invocation in W6.
+    status: verification_complete
+  request: REQ-TIED_ASYNC_METHODOLOGY
+steps:
+  - disposition: completed
+    evidence_refs:
+      - tied/agent-preload-contract.yaml
+      - tools/agentstream/checklist/checklist.go
+    slug: session-bootstrap
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_ASYNC_METHODOLOGY/CITDP-REQ-TIED_ASYNC_METHODOLOGY-w6.yaml
+    slug: change-definition
+    tracking:
+      status: completed
+  - disposition: not_applicable
+    policy: async-agent-preload-advisory
+    rationale: W6 advisory preload; no tied_adversarial_inquiry_run.
+    slug: sub-adversarial-inquiry-pass
+    tracking:
+      status: not_applicable
+  - disposition: completed
+    evidence_refs:
+      - tools/agentstream/checklist/async_highlight_test.go
+      - mcp-server/src/analysis/scoped-analysis-async-preview.test.ts
+    slug: verification-gate
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - tools/bundled-prompt-type-skills/prompt-shared/gitignore-close-out-hygiene.md
+    policy: >-
+      N/A — W6 advisory deliverables are track artifacts; gates/ covered by .gitignore:42
+    slug: gitignore-close-out-hygiene
+    tracking:
+      status: completed
+      evidence_refs:
+        - tools/bundled-prompt-type-skills/prompt-shared/gitignore-close-out-hygiene.md
+  - disposition: completed
+    evidence_refs:
+      - tools/bootstrap/templates/run-close-out-gates.mjs
+      - working/REQ-TIED_ASYNC_METHODOLOGY/evidence/request-evidence-envelope.v1.json
+      - working/REQ-TIED_ASYNC_METHODOLOGY/evidence/verification-evidence-manifest.v1.json
+    slug: sub-close-out-evidence-sync
+    tracking:
+      status: completed
+      evidence_refs:
+        - working/REQ-TIED_ASYNC_METHODOLOGY/evidence/request-evidence-envelope.v1.json
+        - working/REQ-TIED_ASYNC_METHODOLOGY/evidence/verification-evidence-manifest.v1.json
+  - disposition: completed
+    evidence_refs:
+      - CHANGELOG.md
+      - working/REQ-TIED_ASYNC_METHODOLOGY/evidence/proposed-commit-message-w5-w6.txt
+    policy:
+      commit_deferred: true
+      rationale: plan-close-out prepares commit; parent stages after gate handoff
+      skill: plan-close-out
+    slug: traceable-commit
+    tracking:
+      status: completed
+      evidence_refs:
+        - CHANGELOG.md
+        - working/REQ-TIED_ASYNC_METHODOLOGY/evidence/proposed-commit-message-w5-w6.txt
+wave_scope: W6

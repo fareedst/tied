@@ -90,6 +90,38 @@ REQ-ASYNC_CITDP_TRIGGERS:
       - "IMPL-ASYNC_CITDP_PROFILE_WIRING"
     tests:
       - "mcp-server/src/citdp-async-triggers.test.ts"
+REQ-ASYNC_COMPOSITION_INVENTORY:
+  category: "Non-Functional"
+  detail_file: "requirements/REQ-ASYNC_COMPOSITION_INVENTORY.yaml"
+  name: "Async Composition Binding Inventory"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Backward-compatible optional async columns"
+      - "UI-free CONTROLLED_COMPOSITION_FAULT patterns"
+    problems_solved:
+      - "No async_semantics or cancellation columns in binding inventory"
+      - "No validator rules for event/message triggers or retry/idempotency evidence"
+    why: "W5 makes async seams first-class in Phase G binding inventory with validated semantic columns and fault-injection patterns."
+  related_requirements:
+    depends_on:
+      - "REQ-MODULE_VALIDATION"
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+      - "REQ-TIED_ASYNC_METHODOLOGY"
+    related_to:
+      - "REQ-ASYNC_CHECKLIST_CATALOG"
+    supersedes: []
+  status: "In Progress"
+  traceability:
+    architecture:
+      - "ARCH-ASYNC_COMPOSITION_BINDING"
+    code_annotations:
+      - "REQ-ASYNC_COMPOSITION_INVENTORY"
+    implementation:
+      - "IMPL-ASYNC_BINDING_VALIDATOR"
+    tests:
+      - "mcp-server/src/analysis/binding-inventory-composition.test.ts"
+      - "mcp-server/src/analysis/binding-inventory.test.ts"
 REQ-ASYNC_PSEUDOCODE_CONTRACTS:
   category: "Non-Functional"
   detail_file: "requirements/REQ-ASYNC_PSEUDOCODE_CONTRACTS.yaml"

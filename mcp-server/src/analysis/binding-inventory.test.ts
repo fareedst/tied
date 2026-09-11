@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 
 import { validateBindingInventory } from "./binding-inventory.js";
 
-describe("binding inventory validation [IMPL-QUALITY_BINDING_INVENTORY] [REQ-MODULE_VALIDATION]", () => {
+describe("binding inventory validation [IMPL-ASYNC_BINDING_VALIDATOR] [IMPL-QUALITY_BINDING_INVENTORY] [REQ-ASYNC_COMPOSITION_INVENTORY] [REQ-MODULE_VALIDATION]", () => {
   it("accepts a composition-testable binding with the complete contract", () => {
     // [IMPL-QUALITY_BINDING_INVENTORY] [ARCH-QUALITY_ASSURANCE_PROFILES] [ARCH-MODULE_VALIDATION]
     // [REQ-QUALITY_ASSURANCE_EVIDENCE] [REQ-MODULE_VALIDATION]
@@ -106,5 +106,64 @@ describe("binding inventory validation [IMPL-QUALITY_BINDING_INVENTORY] [REQ-MOD
     assert.equal(incomplete.ok, false);
     assert.ok(incomplete.diagnostics.some((diagnostic) => diagnostic.code === "MISSING_BINDING_FIELD"));
     assert.equal(platformOnly.ok, true);
+  });
+
+  it("requires async_semantics for event or message triggers", () => {
+    // [IMPL-ASYNC_BINDING_VALIDATOR] [ARCH-ASYNC_COMPOSITION_BINDING] [REQ-ASYNC_COMPOSITION_INVENTORY]
+    const report = validateBindingInventory([
+      {
+        id: "bus->handler",
+        trigger: "message received",
+        callee: "handler",
+        arguments: "payload",
+        effect: "state updated",
+        ordering: "subscribe before publish",
+        failure_behavior: "invalid message rejected",
+        composition_test: "binding-inventory.test.ts",
+      },
+    ]);
+
+    assert.equal(report.ok, false);
+    assert.ok(
+      report.diagnostics.some((d) => d.code === "ASYNC_SEMANTICS_REQUIRED_FOR_EVENT_MESSAGE"),
+    );
+  });
+
+  it("requires idempotency evidence when retry or at-least-once is declared", () => {
+    // [IMPL-ASYNC_BINDING_VALIDATOR] [REQ-ASYNC_COMPOSITION_INVENTORY]
+    const report = validateBindingInventory([
+      {
+        id: "retry->worker",
+        trigger: "job dispatch",
+        callee: "worker",
+        arguments: "job id",
+        effect: "job processed",
+        ordering: "dispatch after worker ready",
+        failure_behavior: "retry twice on timeout",
+        async_semantics: "request-response",
+        composition_test: "binding-inventory.test.ts",
+      },
+    ]);
+
+    assert.equal(report.ok, false);
+    assert.ok(report.diagnostics.some((d) => d.code === "IDEMPOTENCY_EVIDENCE_REQUIRED"));
+  });
+
+  it("keeps legacy non-async inventories valid without optional columns", () => {
+    const report = validateBindingInventory([
+      {
+        id: "CLI->pipeline.Build",
+        trigger: "main after parse",
+        callee: "pipeline.Build",
+        arguments: "argv paths and checklist path",
+        effect: "turns assembled",
+        ordering: "parse before build",
+        failure_behavior: "invalid YAML returns an exit error",
+        composition_test: "pipeline/composition_coverage_test.go",
+        e2e_only: false,
+      },
+    ]);
+
+    assert.equal(report.ok, true);
   });
 });

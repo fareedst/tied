@@ -1,0 +1,43 @@
+REQ-ASYNC_COMPOSITION_INVENTORY:
+  category: "Non-Functional"
+  description: "Phase G binding inventory rows for async seams shall declare async_semantics, ordering, failure_behavior, cancellation when applicable, and composition_test; validation reports missing fields without certifying runtime ordering or race-freedom."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-09-10"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-09-10"
+      reason: "W5 registration"
+  name: "Async Composition Binding Inventory"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Deterministic fault-injection expected outcomes documented"
+    problems_solved:
+      - "Async IPC/event/message bindings lack inventory schema"
+    why: "W5 closes the composition gap between W2 async catalog and UI-free binding proof."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_ASYNC_METHODOLOGY"
+    related_to:
+      - "REQ-MODULE_VALIDATION"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "event or message triggers require async_semantics"
+    - criterion: "Evidence states binding exercised never system is race-free"
+    - criterion: "Non-async inventories remain valid with optional columns absent"
+    - criterion: "retry or at-least-once declarations require idempotency/deduplication evidence"
+  status: "In Progress"
+  traceability:
+    architecture:
+      - "ARCH-ASYNC_COMPOSITION_BINDING"
+    code_annotations:
+      - "REQ-ASYNC_COMPOSITION_INVENTORY"
+    implementation:
+      - "IMPL-ASYNC_BINDING_VALIDATOR"
+    tests:
+      - "mcp-server/src/analysis/binding-inventory-composition.test.ts"
+  validation_criteria:
+    - coverage: "async columns, fault patterns, MCP wiring, legacy compatibility"
+      method: "binding-inventory unit and composition tests"

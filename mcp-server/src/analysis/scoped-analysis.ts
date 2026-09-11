@@ -134,6 +134,17 @@ export type GapReportResult = {
   missing_count: number;
 };
 
+export type AsyncDiagnosticSummary = {
+  async_in_scope_likely: boolean;
+  matched_async_requirements: string[];
+  matched_async_implementation: string[];
+  layer_c_flags: {
+    async_boundary: { available: boolean; opt_in: boolean; note: string };
+    typed_flow: { force_on_async_detection_alone: boolean; note: string };
+  };
+  proof_boundary: string;
+};
+
 export type ImpactPreviewResult = {
   discovered_tokens: { REQ: string[]; ARCH: string[]; IMPL: string[] };
   impacted_requirements: string[];
@@ -142,6 +153,7 @@ export type ImpactPreviewResult = {
   decisions_by_requirement: {
     [requirement_token: string]: { architecture: string[]; implementation: string[] };
   };
+  async_diagnostic_summary?: AsyncDiagnosticSummary;
 };
 
 export type ScopedAnalysisResult = {
@@ -675,6 +687,17 @@ export function runScopedAnalysis(args: ScopedAnalysisArgs): ScopedAnalysisResul
       for (const t of reqs.requirementTokens) impactedRequirements.add(t);
     }
 
+    const asyncReqTokens = [...impactedRequirements]
+      .filter((t) => t.includes("ASYNC") || t === "REQ-TIED_ASYNC_METHODOLOGY")
+      .sort();
+    const asyncImplTokens = [...impactedImplementation]
+      .filter((t) => t.includes("ASYNC"))
+      .sort();
+    const asyncInScopeLikely =
+      asyncReqTokens.length > 0 ||
+      asyncImplTokens.length > 0 ||
+      discoveredReq.some((t) => t.includes("ASYNC"));
+
     return {
       ok: true,
       summary,
@@ -687,6 +710,24 @@ export function runScopedAnalysis(args: ScopedAnalysisArgs): ScopedAnalysisResul
         impacted_architecture: [...impactedArchitecture].sort(),
         impacted_implementation: [...impactedImplementation].sort(),
         decisions_by_requirement: decisionsByRequirement,
+        async_diagnostic_summary: {
+          async_in_scope_likely: asyncInScopeLikely,
+          matched_async_requirements: asyncReqTokens,
+          matched_async_implementation: asyncImplTokens,
+          layer_c_flags: {
+            async_boundary: {
+              available: true,
+              opt_in: true,
+              note: "Expose async_boundary on pseudocode_analyze when analyzer capability is available; default off preserves legacy reports.",
+            },
+            typed_flow: {
+              force_on_async_detection_alone: false,
+              note: "Never force typed_flow true merely because async was detected.",
+            },
+          },
+          proof_boundary:
+            "Structural async diagnostics and binding inventory completeness only; no race-freedom or runtime ordering claims.",
+        },
       },
     };
   }

@@ -76,6 +76,33 @@ ARCH-ASYNC_CITDP_EVIDENCE:
       - "REQ-ASYNC_CITDP_TRIGGERS"
     tests:
       - "mcp-server/src/citdp-async-triggers.test.ts"
+ARCH-ASYNC_COMPOSITION_BINDING:
+  category: "Architecture"
+  detail_file: "architecture-decisions/ARCH-ASYNC_COMPOSITION_BINDING.yaml"
+  name: "Async Composition Binding Schema"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Maps to seven semantic classes via async_semantics and cancellation"
+    problems_solved:
+      - "Unclear async seam inventory shape"
+    why: "Architecture defines extended BindingInventoryRow optional columns and validation contract for async seams."
+  related_decisions:
+    depends_on:
+      - "ARCH-MODULE_VALIDATION"
+    related_to:
+      - "ARCH-ASYNC_CHECKLIST_INTEGRATION"
+    supersedes: []
+  status: "In Progress"
+  traceability:
+    code_annotations:
+      - "ARCH-ASYNC_COMPOSITION_BINDING"
+    implementation:
+      - "IMPL-ASYNC_BINDING_VALIDATOR"
+    requirements:
+      - "REQ-ASYNC_COMPOSITION_INVENTORY"
+    tests:
+      - "mcp-server/src/analysis/binding-inventory.test.ts"
 ARCH-ASYNC_CONTRACT_GRAMMAR:
   cross_references:
     - "REQ-ASYNC_PSEUDOCODE_CONTRACTS"
