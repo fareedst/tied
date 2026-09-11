@@ -49,7 +49,7 @@ CITDP-layerb-sidecar-fix:
       - IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT
       - PROC-AGENT_REQ_CHECKLIST
   leap_feedback:
-    divergences_from_analysis: "Unified runner skipped activation collect at minimal depth (Wave 8 inquiry run_id retained); not-applicable-receipt written for inquiry waiver."
+    divergences_from_analysis: "Initial close-out omitted --run-id to avoid activation mismatch; follow-up run-close-out-gates-activation.mjs skips collect at minimal depth while preserving run_id for manifest."
     record_status: final
     tied_stack_updates_required: []
   record_identity:
@@ -86,4 +86,3 @@ CITDP-layerb-sidecar-fix:
     eligibility_triggers: []
     residual_risks:
       - "Remaining external pre-procedure comments elsewhere in sidecar may still fail Layer B on future edits"
-      - "Unified runner requires omitting --run-id at minimal depth when Wave 8 inquiry artifacts exist with different run_id"

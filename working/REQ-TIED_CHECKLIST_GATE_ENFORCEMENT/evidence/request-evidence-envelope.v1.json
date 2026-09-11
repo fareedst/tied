@@ -1,7 +1,7 @@
 {
   "schema_version": "request-evidence-envelope.v1",
   "envelope_meta": {
-    "generated_at": "2026-09-11T18:58:48.825Z",
+    "generated_at": "2026-09-11T19:02:55.413Z",
     "generator": "request_evidence_envelope_build",
     "revision": 1
   },
@@ -201,6 +201,17 @@
     {
       "kind": "checklist_gate_receipt",
       "schema_version": null,
+      "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/layerb-sidecar-fix-20260911.json",
+      "content_hash": "sha256:d9ec8e850bb464e19f284a94e6d78d655f571b8eaf57ed8594aebf078353af25",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": null,
       "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/wave8-closeout-20260911.json",
       "content_hash": "sha256:a9379b070b37a754961d9daad46f76bd49236796eac71c870aac6964298f104a",
       "phase": null,
@@ -235,7 +246,7 @@
       "kind": "evidence_chain_profile",
       "schema_version": null,
       "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/evidence-chain-profile.v1.json",
-      "content_hash": "sha256:90341d2b7a8e7d5a2e498bae06292506836432e6e0c47de153d2bf6083c58832",
+      "content_hash": "sha256:0e22d51d36bb1a2217d2041c06010e1e72bb93f02b23a2d7b06c589287f966f0",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -334,11 +345,33 @@
       "kind": "request_evidence_envelope",
       "schema_version": "request-evidence-envelope.v1",
       "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/request-evidence-envelope.v1.json",
-      "content_hash": "sha256:f47cf05e7e343af6a592c8f45402855107225a9cb540e463140030ddf395bf57",
+      "content_hash": "sha256:5b7ed296c075b1177c5d87ecb41b90da715db23d536ea8126c3b3d3092e40915",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
         "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/layerb-closeout-gate-result.json",
+      "content_hash": "sha256:4238b8020014776532efd79a44ae0876f10bb02e5ea0da2b22a434b2b8eaa591",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/layerb-closeout-reconcile-summary.json",
+      "content_hash": "sha256:320b23b957917b33fb41da0941d086b0f564d0d163dcf7307cb11fcb403dc7f5",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
       ]
     },
     {
@@ -368,6 +401,17 @@
       "schema_version": null,
       "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/mci-inquiry-phases-result.json",
       "content_hash": "sha256:ae44864c9f5a8eb32c3b974d1576c92b62ac9e993c4368f9f7613ca454048f00",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/proposed-commit-message-layerb.txt",
+      "content_hash": "sha256:c6873634fa8da8684cbc30dadd99494195a2c300422dfd34b0bb28d83784d983",
       "phase": null,
       "status": "present",
       "proof_boundaries": [

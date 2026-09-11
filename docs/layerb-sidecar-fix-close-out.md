@@ -338,7 +338,8 @@ Refs: IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
 | Inquiry gate blocks minimal tracker | Document waiver `inquiry_not_required_sidecar_only` in CITDP |
 | PSA path mismatch | Use authoritative paths in §2 |
 | Unrelated untracked gates | `gitignore-close-out-hygiene` — exclude `working/REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/*` |
+| `--run-id` with minimal depth + Wave 8 inquiry on disk | `run-close-out-gates-activation.mjs` skips activation collect; `run_id` still used for manifest identity |
 
 ---
 
-**Last updated:** 2026-09-11 (refine-plan pass — close-out procedure materialized; execution not authorized)
+**Last updated:** 2026-09-11 (close-out complete; runner minimal-depth activation skip follow-up)

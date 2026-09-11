@@ -18,6 +18,10 @@ import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import yaml from "js-yaml";
+import {
+  resolveDepthTier,
+  shouldCollectActivation,
+} from "./run-close-out-gates-activation.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, "../../..");
@@ -310,8 +314,7 @@ async function main() {
     tracker = yaml.load(readFileSync(trackerAbsolute, "utf8"));
   }
   const citdp = args.citdpPath ? loadCitdpRecord(args.citdpPath, args.projectRoot) : {};
-  const depth = citdp?.risk_analysis?.adversarial_inquiry?.depth_tier ?? "integrated";
-  const integratedDepth = depth === "integrated" || depth === "strict_candidate";
+  const depth = resolveDepthTier(citdp, tracker);
   const failOnProcessGaps = args.failOnProcessGaps;
   const requiredStepSlugs = validator.derivePhaseAwareSlugs(depth, args.phase);
 
@@ -333,7 +336,18 @@ async function main() {
   }
 
   let activationPayload;
-  if (args.runId) {
+  const activationDecision = shouldCollectActivation({
+    runId: args.runId,
+    depth,
+    citdp,
+    tracker,
+  });
+  let activationCollect = {
+    skipped: !activationDecision.collect,
+    reason: activationDecision.reason,
+    run_id: activationDecision.run_id,
+  };
+  if (activationDecision.collect) {
     const collected = await activation.collectChecklistActivation({
       requestToken: args.requestToken,
       phase: args.phase,
@@ -348,6 +362,7 @@ async function main() {
       artifacts: collected.artifacts,
       expected: collected.expected,
     };
+    activationCollect = { skipped: false, reason: "collect", run_id: args.runId };
   }
 
   const pseudocodeReports = loadPseudocodeReports(args.projectRoot, args.requestToken, citdp);
@@ -413,6 +428,8 @@ async function main() {
 
   const summary = {
     phase: args.phase,
+    depth_tier: depth,
+    activation_collect: activationCollect,
     reconcile: reconcileResult,
     quality_manifest: manifestResult,
     evidence_chain_profile: profileResult,

@@ -33,6 +33,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Unified close-out runner — minimal depth activation skip ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  `run-close-out-gates-activation.mjs` skips `tied_checklist_activation_collect`
+  when `depth_tier` is `minimal` or inquiry waiver applies, while `--run-id` remains
+  valid for manifest and runner identity (fixes `run_id_provenance_mismatch` on
+  post-W8 sidecar follow-up).
+
 - **Layer B sidecar hygiene — post-W8 follow-up ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
   Six procedure blocks in `IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT` sidecar: declare
   `DATA_TRANSITION: none` on read-only `HYDRATE_GATE_EVIDENCE_FROM_ACTIVATION`;

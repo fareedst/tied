@@ -1,7 +1,7 @@
 copy_hygiene: Layer B sidecar fix follow-up tracker — post-W8 contract precision; do not mutate Wave 8 tracker.
 request: REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
 source_plan: docs/layerb-sidecar-fix-close-out.md
-status: closeout_pending_commit
+status: committed
 profile:
   depth_tier: minimal
   gate_policy: advisory

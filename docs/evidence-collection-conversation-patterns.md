@@ -718,7 +718,7 @@ Unified LEAP close-out for Wave 8 is documented in [`adherence-realignment-wave8
 
 **Not required:** disposable FILEHASH smoke, full regression suite, Wave 8 tracker mutation, fresh adversarial inquiry.
 
-**Advisory:** Unified runner omitted `--run-id` for activation collect at minimal depth (Wave 8 inquiry artifacts retain `wave8-closeout-20260911` run_id); `not-applicable-receipt.v1.json` documents inquiry waiver.
+**Follow-up (post-commit):** `run-close-out-gates-activation.mjs` skips activation collect at `depth_tier: minimal` (or inquiry waiver) while still accepting `--run-id` for manifest/runner identity; `not-applicable-receipt.v1.json` documents inquiry waiver.
 
 ---
 
