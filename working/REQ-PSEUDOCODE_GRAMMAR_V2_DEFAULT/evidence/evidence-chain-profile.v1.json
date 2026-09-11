@@ -4,8 +4,8 @@
     "project_id": "af8451e933f573ec",
     "generator": "mcp",
     "generator_version": "1.0.0",
-    "observed_at": "2026-09-11T19:47:29.469Z",
-    "commit": "c1681a391f448404d3aace4b7fe12ac8de27c14c",
+    "observed_at": "2026-09-11T21:49:22.024Z",
+    "commit": "d3787ca07272954b03d06ebc4d3ea2e662c8c5d2",
     "tied_methodology_version": "3.0.0",
     "tied_base_path_confirmed": true,
     "identity_source": "configured"
@@ -226,7 +226,7 @@
       "status": "observed"
     },
     "freshness": {
-      "value": "2026-09-11T19:47:29.469Z",
+      "value": "2026-09-11T21:49:22.024Z",
       "source": "run_metadata",
       "method": "observed_at",
       "denominator": 1,
@@ -267,6 +267,6 @@
     "run_id": "grammar-v2-closeout-20260911",
     "profile_depth": "integrated",
     "scope_hash": "64bf013d90416af6",
-    "commit": "c1681a391f448404d3aace4b7fe12ac8de27c14c"
+    "commit": "d3787ca07272954b03d06ebc4d3ea2e662c8c5d2"
   }
 }

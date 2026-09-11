@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # [IMPL-MCP_USAGE_METRICS] [IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH] [IMPL-EVIDENCE_CHAIN_PROFILE]
-# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-MCP_USAGE_METRICS] [REQ-REQUEST_EVIDENCE_ENVELOPE]
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] [REQ-MCP_USAGE_METRICS]
+# [REQ-REQUEST_EVIDENCE_ENVELOPE] [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT]
 #
 # Offline post-session analysis for a TIED client (especially ~/Documents/dev/test/{id}).
 # Chains MCP metrics analysis, envelope gap report, evidence-chain profiles, and optional
@@ -21,6 +22,7 @@
 #   --skip-envelope          Skip envelope-gap-report batch collect
 #   --skip-profile           Skip evidence_chain_profile_generate per REQ
 #   --skip-reconcile         Skip adherence-reconcile when ledger exists
+#   --skip-grammar-v2        Skip grammar v2 audit when corpus row expects pass
 #   --with-hook-log          Analyze newest ~/.cursor/logs/conv_*.yaml (can be slow)
 #   -h, --help               Show help
 #
@@ -51,6 +53,7 @@ SKIP_METRICS=0
 SKIP_ENVELOPE=0
 SKIP_PROFILE=0
 SKIP_RECONCILE=0
+SKIP_GRAMMAR_V2=0
 WITH_HOOK_LOG=0
 declare -a REQ_TOKENS=()
 
@@ -88,6 +91,7 @@ while [[ $# -gt 0 ]]; do
     --skip-envelope) SKIP_ENVELOPE=1; shift ;;
     --skip-profile) SKIP_PROFILE=1; shift ;;
     --skip-reconcile) SKIP_RECONCILE=1; shift ;;
+    --skip-grammar-v2) SKIP_GRAMMAR_V2=1; shift ;;
     --with-hook-log) WITH_HOOK_LOG=1; shift ;;
     --)
       shift
@@ -374,6 +378,25 @@ step_reconcile() {
   done
 }
 
+step_grammar_v2() {
+  if [[ -z "${CORPUS_PATH}" ]]; then
+    echo "DIAGNOSTIC: no --corpus; skipping grammar v2 audit" >&2
+    return 0
+  fi
+  local corpus_abs="${CORPUS_PATH}"
+  if [[ "${corpus_abs}" != /* ]]; then
+    corpus_abs="${TIED_SOURCE_ROOT}/${corpus_abs}"
+  fi
+  if [[ ! -f "${corpus_abs}" ]]; then
+    echo "ERROR: corpus not found: ${corpus_abs}" >&2
+    return 1
+  fi
+  node "${TIED_SOURCE_ROOT}/scripts/run-corpus-grammar-v2-audit.mjs" \
+    --corpus "${corpus_abs}" \
+    --client-alias "${CLIENT_ALIAS}" \
+    >"${OUT_DIR}/grammar-v2-cohort-audit.json"
+}
+
 step_hook_log() {
   if [[ ! -f "${HOOK_ANALYZER}" ]]; then
     echo "ERROR: missing ${HOOK_ANALYZER}" >&2
@@ -438,6 +461,10 @@ fi
 
 if [[ "${SKIP_ENVELOPE}" -eq 0 ]]; then
   run_step "Envelope gap report" step_envelope
+fi
+
+if [[ "${SKIP_GRAMMAR_V2}" -eq 0 && -n "${CORPUS_PATH}" ]]; then
+  run_step "Grammar v2 cohort audit" step_grammar_v2
 fi
 
 if [[ "${SKIP_PROFILE}" -eq 0 && ${#REQ_TOKENS[@]} -gt 0 ]]; then

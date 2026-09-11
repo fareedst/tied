@@ -4,9 +4,12 @@ import fs from "node:fs";
 import path from "node:path";
 import os from "node:os";
 import child_process from "node:child_process";
+import { fileURLToPath } from "node:url";
 
 import { runPlumbDiffImpactPreview } from "./plumb-diff-impact-preview.js";
 import { clearBasePathCache } from "../yaml-loader.js";
+
+const REPO_ROOT_ABS = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 
 describe("plumb diff impact preview (deterministic)", () => {
   let tempDir: string | null = null;
@@ -16,8 +19,7 @@ describe("plumb diff impact preview (deterministic)", () => {
 
   beforeEach(() => {
     origCwd = process.cwd();
-    // Tests run from `mcp-server/`, but the real `tied/` folder lives one level up.
-    repoRootAbs = path.resolve(origCwd, "..");
+    repoRootAbs = REPO_ROOT_ABS;
     realTiedBasePathAbs = path.join(repoRootAbs, "tied");
 
     tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-plumb-diff-impact-"));
@@ -39,12 +41,12 @@ describe("plumb diff impact preview (deterministic)", () => {
   });
 
   afterEach(() => {
+    process.chdir(origCwd);
     if (tempDir && fs.existsSync(tempDir)) {
       fs.rmSync(tempDir, { recursive: true, force: true });
     }
     delete process.env.TIED_BASE_PATH;
     clearBasePathCache();
-    process.chdir(origCwd);
   });
 
   it("flags unregistered token + suggests missing detail file", () => {
@@ -56,6 +58,7 @@ describe("plumb diff impact preview (deterministic)", () => {
       selection: "staged",
       include_removed: true,
       max_files: 50,
+      tied_base_path: realTiedBasePathAbs,
     });
 
     assert.strictEqual(report.schema_version, "impact-preview.v1");
@@ -79,6 +82,7 @@ describe("plumb diff impact preview (deterministic)", () => {
       selection: "staged",
       include_removed: true,
       max_files: 50,
+      tied_base_path: realTiedBasePathAbs,
     });
 
     assert.ok(report.tokens_detected.added.REQ.includes(token));

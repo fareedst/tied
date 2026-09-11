@@ -29,6 +29,8 @@ REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT:
       metric: "existing v1 and v2 parser regression tests pass unchanged"
     - criterion: "New sidecar authoring guidance and checklist policy require the v2 header without requiring constraint_flow"
       metric: "migration, writing/validation, client-development, and checklist docs agree"
+    - criterion: "Evaluation-corpus rows with grammar_v2_header_expect pass replay Track A header enforcement without conflating cohort replay with client close-out"
+      metric: "corpus-grammar-v2-replay and replay-adherence-fixtures tests pass on fixtures"
   status: "Implemented"
   traceability:
     architecture:
@@ -41,3 +43,6 @@ REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT:
       - "mcp-server/src/analysis/pseudocode-grammar-v2-default.test.ts"
       - "scripts/audit-grammar-v2-default.mjs"
       - "scripts/audit-grammar-v2-default.test.mjs"
+      - "scripts/corpus-grammar-v2-replay.test.mjs"
+      - "scripts/lib/corpus-grammar-v2-replay.mjs"
+      - "scripts/replay-adherence-fixtures.mjs"

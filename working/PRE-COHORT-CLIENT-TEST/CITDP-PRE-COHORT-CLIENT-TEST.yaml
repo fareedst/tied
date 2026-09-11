@@ -1,0 +1,93 @@
+CITDP-PRE-COHORT-CLIENT-TEST:
+  record_identity:
+    change_request_id: PROCESS-PRE-COHORT-CLIENT-TEST
+    recorded_at: "2026-09-11"
+    title: "Pre-cohort client test — grammar v2 + evidence grading (operator runbook)"
+  change_definition:
+    current_behavior: "Tracks A/C/B and envelope Wave 6–8 tooling ship in stdd at d3787ca; operator runbook exists but lacks explicit acceptance criteria, integrated client-REQ gate sequence, dependency matrix, and TIED traceability for the two comparable proof arms."
+    desired_behavior: "An actionable, verifiable operator runbook grades the next disposable or dev/test client on (1) grammar v2 bootstrap policy via Track A audit dimensions and (2) integrated request evidence via envelope + checklist gates — without conflating proof boundaries."
+    falsification_questions:
+      - "Can an operator treat grammar_v2_header pass as close_out or envelope completion?"
+      - "Can a client REQ close integrated without verification activation and envelope blocking_gaps zero?"
+      - "Can cohort replay pass while a new client fails bootstrap audit because corpus row omits grammar_v2_header_expect?"
+      - "Can stdd preflight pass on one machine while copy_files.sh is stale on another?"
+    non_goals:
+      - "New stdd REQ/ARCH/IMPL tokens for operator execution alone"
+      - "Mass v2 migration of legacy client sidecars"
+      - "constraint_flow: true as a cohort gate"
+      - "Re-running §E machine close-out (shipped on REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT 2026-09-11)"
+      - "Product code changes in this refine pass"
+    success_criteria:
+      - "Runbook lists verifiable pass/fail for stdd preflight, corpus registration, bootstrap audit, and client integrated close_out."
+      - "Proof boundaries separate envelope arm, grammar arm, Layer B/C, and client REQ close-out."
+      - "Dependencies on shipped REQs and related plans are explicit with cross-links."
+      - "Operator tracker and working CITDP exist; pre_implementation gate allows plan refinement without claiming client test completion."
+    unchanged_behavior:
+      - "Shipped Track A audit CLI and evaluation-corpus template fields"
+      - "Integrated client REQ still owns CITDP, inquiry, and envelope under working/{REQ}/"
+      - "Legacy headerless sidecars remain v1-compatible"
+  impact_analysis:
+    tied_tokens_affected:
+      - REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT
+      - REQ-REQUEST_EVIDENCE_ENVELOPE
+      - REQ-EVIDENCE_CHAIN_PROFILE
+      - REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+      - REQ-PSEUDOCODE_STATIC_ANALYSIS
+      - REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE
+    impl_inventory: []
+    modules_or_boundaries:
+      stdd_preflight: "Methodology pin, MCP build, audit + analysis smoke — read-only on stdd"
+      operator_corpus: "Gitignored evaluation-corpus.v1.yaml row registration"
+      grammar_arm: "Disposable client bootstrap + audit-grammar-v2-default.mjs JSON"
+      evidence_arm: "Client-owned REQ integrated lifecycle + envelope + gate receipts"
+    linked_plans:
+      - docs/pseudocode-grammar-v2-and-hygiene-plan.md
+      - docs/evidence-collection-conversation-patterns.md
+      - docs/layerb-sidecar-fix-close-out.md
+      - tied/docs/request-evidence-envelope.md
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: baseline-functional
+      close_out_inquiry_waiver: inquiry_runs_on_client_req_not_operator_runbook
+      counterexamples:
+        - "Grammar header pass substituted for envelope blocking_gaps zero"
+        - "Batch collect gap report treated as unified close-out"
+      depth_tier: minimal
+      disconfirming_observations:
+        - "Two-arm table and §14 independent dimensions document separation"
+      evidence_references:
+        - docs/pre-cohort-client-test-grammar-v2-and-evidence.md
+        - working/PRE-COHORT-CLIENT-TEST/agent-req-implementation-checklist.yaml
+      falsification_questions:
+        - "Does operator runbook authorize skipping client verification activation at integrated depth?"
+      gate_policy: advisory
+      integrated_waiver: null
+      prior_depth_tier: null
+      profile_depth: minimal
+      proof_boundary: "Runbook refinement only; integrated inquiry and activation evidence belong to the client REQ tracker."
+    abuse_cases:
+      - "Corpus row missing grammar_v2_header_expect while sponsor expects Track A grade"
+      - "replay-adherence-fixtures-only regression without manual audit CLI"
+  evidence:
+    proof_boundaries:
+      - "This CITDP does not prove a client test passed; it proves the runbook is actionable and gate-ready."
+    commands:
+      - "Operator preflight commands in docs/pre-cohort-client-test-grammar-v2-and-evidence.md §A"
+      - "Client lifecycle gates delegated to client working/{REQ}/"
+  completion_criteria:
+    checklist_gate:
+      dispositions:
+        - completed
+        - not_applicable
+        - pending
+        - waived
+      phases:
+        - pre_implementation
+        - verification
+        - close_out
+      fail_closed: true
+    proof_boundaries:
+      - "Client test execution and product verification remain operator-deferred after this refine."
+  leap_feedback:
+    record_status: draft
+    tied_stack_updates_required: []

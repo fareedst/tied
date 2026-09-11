@@ -1,0 +1,31 @@
+▶ grammar-v2-default audit modules [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT]
+  ✔ validates the smoke fixture independently for Layer B and Layer C [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] (9.041375ms)
+  ✔ preserves legacy-v1 compatibility on the headerless IMPL fixture [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] (0.275791ms)
+✔ grammar-v2-default audit modules [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT] (9.866625ms)
+▶ bootstrap-to-audit composition [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT]
+  ✔ wires copy_files.sh output into independent audit dimensions [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] (133.289792ms)
+✔ bootstrap-to-audit composition [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT] (133.361708ms)
+▶ corpus grammar v2 replay helpers [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT]
+  ✔ normalizes corpus.projects and corpus.rows (0.486ms)
+  ✔ detects grammar_v2_header_expect pass (0.088917ms)
+  ✔ resolves operator-local audit artifact paths against stdd root (0.128875ms)
+  ✔ fails evaluation when header dimension is not pass (0.120291ms)
+✔ corpus grammar v2 replay helpers [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT] (1.545584ms)
+▶ runCorpusGrammarV2Audit composition [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT]
+  ✔ writes grammar_v2_audit_artifact for bootstrapped client (146.536166ms)
+✔ runCorpusGrammarV2Audit composition [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT] (146.5965ms)
+▶ replay-adherence-fixtures corpus registration [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+  ✔ treats grammar_v2_header_expect pass as enforceable cohort dimension (0.359625ms)
+  ✔ registers four Wave 8 cohort rows with project_root and request_token (0.089834ms)
+✔ replay-adherence-fixtures corpus registration [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (0.93475ms)
+▶ tiedBaselineCommitMessage [REQ-TIED_SETUP]
+  ✔ includes methodology version from AGENTS.md (0.573708ms)
+✔ tiedBaselineCommitMessage [REQ-TIED_SETUP] (1.076167ms)
+ℹ tests 11
+ℹ suites 6
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 228.752042

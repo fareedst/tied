@@ -50,8 +50,10 @@ entry_points:
     start_at: session-bootstrap
 execution_evidence:
   close_out_evidence:
-    date: null
-    deferred: []
+    date: "2026-09-11"
+    deferred:
+      - "Operator pre-cohort §A–D live client execution (PROCESS-PRE-COHORT-CLIENT-TEST)"
+      - "Evaluation-corpus client row registration on operator machine"
     gates: {}
     master_checklist: ''
   completed:

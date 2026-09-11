@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **§E — Pre-cohort grammar v2 automation ([REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT], [REQ-TIED_SETUP])** —
+  Evaluation-corpus grammar v2 replay driver and audit runner; adherence replay extension;
+  post-session hook; plumb-diff impact preview test stability; disposable-client baseline
+  git commit message derived from AGENTS.md methodology version. Incremental integrated
+  close-out `grammar-v2-section-e-closeout-20260911`: analysis 305/305, §E script tests,
+  bootstrap E2E 7/7; envelope blocking gaps zero. Operator runbook:
+  `docs/pre-cohort-client-test-grammar-v2-and-evidence.md`; §14 sync in
+  `docs/evidence-collection-conversation-patterns.md`.
+
 - **Track A — Grammar v2 default for new TIED projects ([REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT])** —
   Canonical template and `copy_files.sh` bootstrap emit `Grammar-Version: v2`;
   `selectNewProjectGrammarDefault` / `classifySidecarVersion` modules with 12 unit

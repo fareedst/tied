@@ -123,6 +123,10 @@ export type PlumbDiffImpactPreviewArgs = {
    * Default: 2000000.
    */
   max_total_patch_bytes?: number;
+  /**
+   * Explicit TIED base path for token registry lookups (deterministic when cwd is a temp git repo).
+   */
+  tied_base_path?: string;
 };
 
 export type PlumbDiffImpactPreviewReport = z.infer<typeof PlumbDiffImpactPreviewReportSchema>;
@@ -229,9 +233,31 @@ export const PlumbDiffImpactPreviewReportSchema = z.object({
 });
 
 export function runPlumbDiffImpactPreview(args: PlumbDiffImpactPreviewArgs): PlumbDiffImpactPreviewReport {
-  // Keep base_path deterministic within a single report build.
-  clearBasePathCache();
+  const previousTiedBasePath = process.env.TIED_BASE_PATH;
+  const scopedTiedBasePath =
+    args.tied_base_path && args.tied_base_path.trim()
+      ? path.resolve(args.tied_base_path.trim())
+      : undefined;
+  try {
+    if (scopedTiedBasePath) {
+      process.env.TIED_BASE_PATH = scopedTiedBasePath;
+    }
+    // Keep base_path deterministic within a single report build.
+    clearBasePathCache();
+    return buildPlumbDiffImpactPreviewReport(args);
+  } finally {
+    if (scopedTiedBasePath) {
+      if (previousTiedBasePath === undefined) {
+        delete process.env.TIED_BASE_PATH;
+      } else {
+        process.env.TIED_BASE_PATH = previousTiedBasePath;
+      }
+      clearBasePathCache();
+    }
+  }
+}
 
+function buildPlumbDiffImpactPreviewReport(args: PlumbDiffImpactPreviewArgs): PlumbDiffImpactPreviewReport {
   const projectCwd = process.cwd();
   const projectRootAbs = gitTopLevel(projectCwd);
   const selection: PlumbDiffImpactPreviewSelection = args.selection ?? "both";

@@ -29,7 +29,7 @@ From the TIED repo:
 scripts\test-new-tied-client
 ```
 
-Creates `%USERPROFILE%\Documents\dev\test\<unix-seconds>` with bootstrap, lint, optional `cursor mcp enable tied-yaml` (Windows; `agent` on Unix when on PATH), and `git commit -m TIED`.
+Creates `%USERPROFILE%\Documents\dev\test\<unix-seconds>` with bootstrap, lint, optional `cursor mcp enable tied-yaml` (Windows; `agent` on Unix when on PATH), and `git commit -m "TIED {methodology version from AGENTS.md}"` (e.g. `TIED 3.0.0`).
 
 Explicit directory:
 

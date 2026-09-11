@@ -444,9 +444,9 @@ procedure RUN_NEW_TIED_CLIENT_PIPELINE(clientDir, sourceRoot):
     INPUT: clientDir; sourceRoot; optional skipLint; skipMcpEnable; skipGit; forceMcpEnable
     OUTPUT: bootstrapped disposable or explicit client; process exit status
     DATA: client project tree; git repository; linted tied/**/*.yaml files
-    CONTROL: fail-fast on any step; auto-skip agent mcp enable on non-TTY unless forceMcpEnable; git commit message exactly TIED
-    PRE: clientDir writable; sourceRoot contains copy_files entry and built yaml-canonicalizer when lint enabled
-    POST: tied/ bootstrapped; tied YAML canonicalized when lint enabled; git commit TIED when git enabled
+    CONTROL: fail-fast on any step; auto-skip agent mcp enable on non-TTY unless forceMcpEnable; git commit message is tiedBaselineCommitMessage(sourceRoot) e.g. TIED 3.0.0 from AGENTS.md methodology version
+    PRE: clientDir writable; sourceRoot contains copy_files entry, AGENTS.md version line, and built yaml-canonicalizer when lint enabled
+    POST: tied/ bootstrapped; tied YAML canonicalized when lint enabled; git commit uses versioned baseline message when git enabled
     EFFECTS: File I/O; Process — spawn copy_files entry, lint helper, agent CLI, git
     FAILURE_MODES: COPY_FILES_FAILED; LINT_FAILED; AGENT_MISSING; GIT_FAILED; CANONICALIZER_MISSING
     DATA_TRANSITION: empty|explicit clientDir→bootstrapped client with optional git repo
@@ -459,7 +459,8 @@ procedure RUN_NEW_TIED_CLIENT_PIPELINE(clientDir, sourceRoot):
   ELSE IF not skipMcpEnable:
     WARN auto-skip agent mcp enable on non-TTY
   UNLESS skipGit:
-    RUN git init; git add .; git commit -m TIED with cwd=clientDir
+    LET baselineMessage = tiedBaselineCommitMessage(sourceRoot)
+    RUN git init; git add .; git commit -m baselineMessage with cwd=clientDir
   RETURN success
 
 

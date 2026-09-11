@@ -722,4 +722,51 @@ Unified LEAP close-out for Wave 8 is documented in [`adherence-realignment-wave8
 
 ---
 
-**Last updated:** 2026-09-11 (§13.2 Layer B sidecar follow-up close-out complete)
+## 14. Track A — grammar v2 default audit dimension
+
+**Goal:** Grade disposable TIED clients for the new-project `Grammar-Version: v2` bootstrap policy without conflating header presence with Layer B, Layer C, runtime, or `constraint_flow` proof.
+
+**Status:** Track A machine close-out includes §E automation (2026-09-11): evaluation-corpus `grammar_v2_header` replay (`scripts/lib/corpus-grammar-v2-replay.mjs`, `scripts/run-corpus-grammar-v2-audit.mjs`), extended adherence replay fixtures, post-session hook, plumb-diff preview stability, and versioned disposable-client baseline git message (`tools/bootstrap/lib/tied-baseline-commit-message.mjs`). Cohort rows still opt in via `grammar_v2_header_expect` on `evaluation-corpus.v1` rows; operator live grading remains deferred to `docs/pre-cohort-client-test-grammar-v2-and-evidence.md`.
+
+| Item | Value |
+|---|---|
+| **Requirement** | `REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT` |
+| **Audit script** | `node scripts/audit-grammar-v2-default.mjs [--client-root PATH] [--json-out PATH]` |
+| **Composition lib** | `scripts/lib/audit-grammar-v2-default.mjs` |
+| **Smoke fixture** | `scripts/fixtures/grammar-v2-default-smoke.sidecar.md` |
+| **Report schema** | `grammar-v2-default-audit.v1` |
+
+### 14.1 Independent dimensions
+
+The audit emits **separate** evidence dimensions:
+
+| Dimension | Proves | Does not prove |
+|---|---|---|
+| `grammar_v2_header` | Generated template copyable body has exact `Grammar-Version: v2` as first non-comment preamble line | Layer B/C, runtime, constraints |
+| `layer_b` | Smoke sidecar passes `pseudocode_validate` structural gate | Behavioral coverage, tests |
+| `layer_c` | Smoke sidecar passes `pseudocode_analyze` with `gate_mode_applied: true` and `constraint_flow: false` | Complete path coverage, production behavior |
+| `constraint_flow` | Default smoke remains `false` | Constraint-language precision |
+| `legacy_v1_compatibility` | Headerless stdd IMPL fixture classifies as `legacy_v1` | Mass migration safety for every client tree |
+
+### 14.2 Cohort registration
+
+Extend operator-local `working/evaluation/evaluation-corpus.v1.yaml` rows (template: `evaluation-corpus.v1.template.yaml`):
+
+```yaml
+grammar_v2_header_expect: pass   # pass | fail | not_measured
+grammar_v2_audit_artifact: working/evaluation/grammar-v2-default-audit.json
+```
+
+Run against disposable bootstrap output or an existing `/dev/test/{alias}` client root. Do not treat header pass as envelope or close-out completion.
+
+### 14.3 Pass criteria (Track A)
+
+- Fresh `copy_files.sh` client: template copyable body passes `grammar_v2_header`.
+- Audit JSON: all dimensions present; `audit.ok: true` for pilot/disposable clients targeted by the cohort row.
+- Legacy headerless sidecars continue to classify as `legacy_v1` without parser default changes.
+
+**Delegation:** Track A integrated close-out on `REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT` re-gated for the §E delta; this section records cohort grading boundaries and shipped replay tooling—not operator disposable-client execution.
+
+---
+
+**Last updated:** 2026-09-11 (§14 Track A grammar v2 default audit dimension)

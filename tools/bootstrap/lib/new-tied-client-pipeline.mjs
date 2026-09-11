@@ -9,6 +9,7 @@ import { spawnSync } from "node:child_process";
 import { TIED_REPO_ROOT } from "./constants.mjs";
 import { sayErr, sayOk, sayWarn } from "./console.mjs";
 import { lintClientTiedYaml } from "./lint-client-yaml.mjs";
+import { tiedBaselineCommitMessage } from "./tied-baseline-commit-message.mjs";
 
 export function resolveSourceRoot(env = process.env, fallback = TIED_REPO_ROOT) {
   const raw = env.TIED_SOURCE_ROOT;
@@ -169,10 +170,11 @@ export function runNewTiedClientPipeline(options) {
   }
 
   if (!skipGit) {
+    const baselineMessage = tiedBaselineCommitMessage(sourceRoot);
     const gitSteps = [
       ["git", ["init"]],
       ["git", ["add", "."]],
-      ["git", ["commit", "-m", "TIED"]],
+      ["git", ["commit", "-m", baselineMessage]],
     ];
     for (const [cmd, args] of gitSteps) {
       step = runStep(`${cmd} ${args.join(" ")}`, () => {

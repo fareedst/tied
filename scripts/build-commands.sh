@@ -145,7 +145,12 @@ _new_tied_test_client() {
   agent mcp enable tied-yaml
   git init
   git add .
-  git commit -m TIED
+  local _baseline_msg
+  _baseline_msg="$(
+    cd -- "${source_root}" && node --input-type=module -e \
+      "import { tiedBaselineCommitMessage } from './tools/bootstrap/lib/tied-baseline-commit-message.mjs'; console.log(tiedBaselineCommitMessage());"
+  )"
+  git commit -m "${_baseline_msg:-TIED 3.0.0}"
 }
 
 new_tied_client() {

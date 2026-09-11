@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /**
  * [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+ * [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT]
  * W8-D6: Parameterized cohort replay against evaluation corpus disposable clients.
  *
  * Usage:
@@ -15,6 +16,12 @@ import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import yaml from "js-yaml";
+
+import {
+  corpusProjects,
+  grammarV2HeaderExpectPass,
+  runCorpusGrammarV2Audit,
+} from "./lib/corpus-grammar-v2-replay.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const STDD_ROOT = path.resolve(__dirname, "..");
@@ -188,7 +195,7 @@ function evaluateExpectations(alias, result) {
 function main() {
   const args = parseArgs(process.argv.slice(2));
   const corpus = yaml.load(readFileSync(args.corpusPath, "utf8"));
-  const projects = (corpus.projects ?? []).filter((row) => row.project_root && row.request_token);
+  const projects = corpusProjects(corpus);
   const selected = args.filter
     ? projects.filter((row) => row.client_alias === args.filter || row.project_root.includes(args.filter))
     : projects.filter((row) => FIXTURE_EXPECTATIONS[row.client_alias]);
@@ -209,7 +216,18 @@ function main() {
     }
     const evaluation = evaluateExpectations(alias, replay);
     if (!evaluation.ok) failed += 1;
-    results.push({ alias, request_token: row.request_token, evaluation });
+
+    let grammar = { ok: true, skipped: true, reason: "grammar_v2_header_expect_not_pass" };
+    if (grammarV2HeaderExpectPass(row)) {
+      if (args.skipRun || args.dryRun) {
+        grammar = { ok: true, skipped: true, reason: "skip_run_or_dry_run" };
+      } else {
+        grammar = runCorpusGrammarV2Audit(row, { stdRoot: STDD_ROOT, writeArtifact: true });
+        if (!grammar.ok) failed += 1;
+      }
+    }
+
+    results.push({ alias, request_token: row.request_token, evaluation, grammar_v2: grammar });
   }
 
   const report = { ok: failed === 0, replayed: results.length, failed, results };

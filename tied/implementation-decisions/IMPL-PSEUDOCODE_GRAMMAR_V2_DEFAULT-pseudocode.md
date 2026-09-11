@@ -92,3 +92,36 @@ procedure AUDIT_NEW_CLIENT_GRAMMAR(client_root, reports):
   IF reports.constraint_flow is true: RETURN error LayerCFailed
   IF reports.legacy_v1 is not compatible: RETURN error LegacyCompatibilityFailed
   RETURN { grammar_v2_header: pass, layer_b: reports.layer_b, layer_c: reports.layer_c, constraint_flow: false }
+
+## COHORT_GRAMMAR_V2_REPLAY
+
+- [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] [ARCH-PSEUDOCODE_GRAMMAR_V2_DEFAULT] [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT] How: Replay Track A audit expectations across evaluation-corpus rows without treating cohort replay as client close-out.
+- Contract:
+  - INPUT: evaluation-corpus row, stdd repo root, optional writeArtifact flag
+  - PRE: row declares project_root and request_token; when grammar_v2_header_expect is pass the audit artifact path resolves under stdd or absolute operator storage
+  - OUTPUT: per-row replay result with independent grammar_v2_header dimension only
+  - POST:
+    - rows with grammar_v2_header_expect pass fail when audit.ok is false or dimensions.grammar_v2_header is not pass
+    - optional artifact write does not substitute for envelope or integrated gate completion
+    - rows without pass expectation are skipped by replay driver
+  - EFFECTS: IO
+  - TERMINATION: total
+  - FAILURE_MODES: MissingProjectRoot, AuditFailed, ArtifactReadBackFailed
+procedure REPLAY_CORPUS_GRAMMAR_V2_ROW(row, std_root, options):
+  # [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] [ARCH-PSEUDOCODE_GRAMMAR_V2_DEFAULT] [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT] How: Run audit on registered client root and enforce header dimension when cohort row opts in.
+  Contract:
+    INPUT: corpus row, stdd root, writeArtifact default true
+    OUTPUT: replay ok | error: MissingProjectRoot | AuditFailed | ArtifactReadBackFailed
+    PRE: grammar_v2_header_expect is pass when enforcement applies
+    POST: header dimension pass is necessary and sufficient for replay ok; Layer B/C remain audit-internal only
+    FAILURE_MODES: MissingProjectRoot, AuditFailed, ArtifactReadBackFailed
+    EFFECTS: IO
+    TERMINATION: total
+  IF row.project_root is missing on disk: RETURN error MissingProjectRoot
+  report = RUN grammar v2 default audit on row.project_root
+  IF options.writeArtifact AND row.grammar_v2_audit_artifact:
+    WRITE JSON report to resolved artifact path under std_root
+    IF read-back JSON differs: RETURN error ArtifactReadBackFailed
+  IF report.ok is not true OR report.dimensions.grammar_v2_header is not pass:
+    RETURN error AuditFailed
+  RETURN replay ok

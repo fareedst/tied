@@ -1,9 +1,9 @@
 {
   "schema_version": "request-evidence-envelope.v1",
   "envelope_meta": {
-    "generated_at": "2026-09-11T20:56:14.019Z",
-    "generator": "request_evidence_envelope_patch",
-    "revision": 2
+    "generated_at": "2026-09-11T21:49:23.962Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
   },
   "identity": {
     "request_token": "REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT",
@@ -30,12 +30,6 @@
       "phase": "verification",
       "started_at": null,
       "generator": "request_evidence_envelope_build"
-    },
-    {
-      "run_id": "track-b-closeout-20260911",
-      "phase": "verification",
-      "started_at": null,
-      "generator": "evidence_chain_profile_generate"
     }
   ],
   "artifacts": [
@@ -197,7 +191,7 @@
       "kind": "checklist_tracker",
       "schema_version": null,
       "path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/agent-req-implementation-checklist.yaml",
-      "content_hash": "sha256:6ed2a557a79bf5bb12764cea7dd825275e37a743eb79250e7f9275c48c0f5c1d",
+      "content_hash": "sha256:1936215e35d82c8f1f2e82e86abb747508b670386a120f54c4415a9dba4116d1",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -208,7 +202,7 @@
       "kind": "citdp_record",
       "schema_version": null,
       "path": "tied/citdp/CITDP-REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml",
-      "content_hash": "sha256:3f132c0eb694d933f0fcb663533b4625d3026dc82035a08a8739c00b39731222",
+      "content_hash": "sha256:166fb2f1d8ca708b0604eecdd9745f5559b0ac7e76dfd90c63efe0d8b117a0b7",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -219,18 +213,7 @@
       "kind": "evidence_chain_profile",
       "schema_version": null,
       "path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/evidence/evidence-chain-profile.v1.json",
-      "content_hash": "sha256:728ec1efe7f432dd86e1e210ac3c8dc78620ea0ada1fdda1397badf240af2c2b",
-      "phase": null,
-      "status": "present",
-      "proof_boundaries": [
-        "artifact_presence_only"
-      ]
-    },
-    {
-      "kind": "evidence_chain_profile",
-      "schema_version": "evidence-chain-profile.v1",
-      "path": "working/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP/evidence/evidence-chain-profile.v1.json",
-      "content_hash": "sha256:0146a74bbe1a2f9238410e8f73b01cfceb3c350da722e8b5e5fa75ce6f7224c3",
+      "content_hash": "sha256:403a60af24cfc0132d292531e22770e31853d370cab4c220c910c8ac0ff0cf16",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -252,7 +235,7 @@
       "kind": "request_evidence_envelope",
       "schema_version": "request-evidence-envelope.v1",
       "path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/evidence/request-evidence-envelope.v1.json",
-      "content_hash": "sha256:0947885062e956bc376412d5b41217f931605eec185185e6eedfaa61e83b110b",
+      "content_hash": "sha256:275cac274ff8e6ef70017bdb09056126321756adc974439b98c97f9c1d5a66cb",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -274,7 +257,18 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/evidence/proposed-commit-message.txt",
-      "content_hash": "sha256:9f33c1615f102e48b8bb99cd98ffc0a9b49be765d4c7b4af2fd6c18059a3d7c6",
+      "content_hash": "sha256:5ee86a4ab056232fcaf1dc15c4de64976b87cd2596641c465d9b50a7de1eb244",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/evidence/sync-tied-stack-evidence.md",
+      "content_hash": "sha256:9d0eb6126d7cacc527d17895003678feb3ca5fd871ae8000cd13a6b7566a365e",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -286,6 +280,17 @@
       "schema_version": null,
       "path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/evidence/test-strategy-evidence.md",
       "content_hash": "sha256:e24ba43f757c64a1680ceb19a8f4f41b0cc22a1b3d3eb81dd2ebc0804874ad51",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/evidence/traceable-commit-evidence.md",
+      "content_hash": "sha256:ac73a0de468aaa7c5e96263a5f6d0c1e33addbb18529926c1289f009b86139aa",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -318,7 +323,7 @@
       "kind": "verification_evidence_manifest",
       "schema_version": "verification-evidence-manifest.v1",
       "path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/evidence/verification-evidence-manifest.v1.json",
-      "content_hash": "sha256:f2bf64c6a18c87cca7520195f413fca68abf7b72d6293faeb2429146fddd5480",
+      "content_hash": "sha256:0a978ff040380392ab9651a0174bb2e8f334a9783341526ccf6fc14c8ce97552",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -328,7 +333,7 @@
   ],
   "cross_links": {
     "tracker_path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/agent-req-implementation-checklist.yaml",
-    "tracker_hash": "sha256:6ed2a557a79bf5bb12764cea7dd825275e37a743eb79250e7f9275c48c0f5c1d",
+    "tracker_hash": "sha256:1936215e35d82c8f1f2e82e86abb747508b670386a120f54c4415a9dba4116d1",
     "citdp_path": null,
     "evidence_chain_profile_path": "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/evidence/evidence-chain-profile.v1.json"
   },
