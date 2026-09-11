@@ -1,0 +1,47 @@
+IMPL-ASYNC_CHECKLIST_DISPOSITIONS:
+  code_locations:
+    files:
+      - description: "Checklist prose"
+        path: "tied/docs/agent-req-implementation-checklist.md"
+      - description: "Disposition helpers"
+        path: "mcp-server/src/checklist-async-dispositions.ts"
+      - description: "Executable checklist"
+        path: "tied/docs/agent-req-implementation-checklist.yaml"
+    functions: []
+  cross_references:
+    - "ARCH-ASYNC_CHECKLIST_INTEGRATION"
+    - "REQ-ASYNC_CHECKLIST_CATALOG"
+  decision: "Provide validateAsyncCatalogTable, detectAsyncContradictions, detectAsyncInScope, and validateAsyncInScopeTracker in mcp-server/src/checklist-async-dispositions.ts; essence_pseudocode documents disposition routing."
+  implementation_approach:
+    details:
+      - "No CITDP MCP trigger wiring in W2"
+      - "No Layer C async_boundary pass in W2"
+    summary: "Checklist MD/YAML updates plus TypeScript disposition helpers and tests."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-09-10"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-09-10"
+      reason: "W2 registration"
+  name: "Async Checklist Dispositions"
+  rationale:
+    benefits:
+      - "RED tests before checklist text merge"
+    why: "W2 deliverable for gating async comprehension."
+  related_decisions:
+    depends_on:
+      - "IMPL-ASYNC_PSEUDOCODE_GRAMMAR"
+    see_also: []
+    supersedes: []
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-ASYNC_CHECKLIST_INTEGRATION"
+    code_annotations:
+      - "IMPL-ASYNC_CHECKLIST_DISPOSITIONS"
+    requirements:
+      - "REQ-ASYNC_CHECKLIST_CATALOG"
+    tests:
+      - "mcp-server/src/checklist-async-dispositions.test.ts"

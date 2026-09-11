@@ -1,0 +1,290 @@
+async_in_scope: true
+async_matched_semantic_classes:
+  - "await_sequencing"
+  - "cancellation"
+  - "message_event_delivery"
+  - "retry_idempotency"
+  - "shared_data"
+  - "termination"
+  - "timeout"
+copy_hygiene: "T0+W2 combined close-out tracker; evidence_refs use real file paths (not sync placeholder stubs)."
+execution_evidence:
+  close_out_evidence:
+    date: "2026-09-10"
+    deferred:
+      - "git commit deferred to parent per plan-close-out skill"
+    gates:
+      close_out:
+        allowed: true
+        receipt_path: "working/REQ-TIED_ASYNC_METHODOLOGY/gates/close_out-t0w2-gate-receipt.json"
+        run_id: "t0w2-closeout-20260910"
+      pre_implementation:
+        allowed: true
+        run_id: "w2-pre-impl-20260910"
+      verification:
+        allowed: true
+        run_id: "w2-verify-20260910"
+    master_checklist: "tied/docs/agent-req-implementation-checklist.yaml"
+  completed:
+    - "author-architecture"
+    - "author-requirement"
+    - "catalog-pseudocode-contracts"
+    - "change-definition"
+    - "gate-pseudocode-validation"
+    - "gitignore-close-out-hygiene"
+    - "impact-discovery"
+    - "persist-citdp-record"
+    - "persist-implementation-records"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "sub-close-out-evidence-sync"
+    - "sync-tied-stack"
+    - "test-strategy"
+    - "three-way-alignment-unit"
+    - "traceable-commit"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
+  envelope_path: "working/REQ-TIED_ASYNC_METHODOLOGY/evidence/request-evidence-envelope.v1.json"
+  operator_evidence:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    inquiry_waiver:
+      approval: "sponsor authorized W2 tranche 2026-09-10"
+      expiry: "2026-12-31"
+      owner: "stdd methodology sponsor"
+      policy: "checklist-text-only-inquiry"
+      rationale: "W2 documents four integrated async inquiry cases in checklist text; tied_adversarial_inquiry_run MCP activation deferred to W3."
+    pre_implementation_gate:
+      allowed: true
+      receipt_path: "working/REQ-TIED_ASYNC_METHODOLOGY/gates/pre_implementation-w2-gate-receipt.json"
+      run_id: "w2-pre-impl-20260910"
+    prior_depth_tier: "integrated"
+    close_out_gate:
+      allowed: true
+      receipt_path: "working/REQ-TIED_ASYNC_METHODOLOGY/gates/close_out-t0w2-gate-receipt.json"
+      run_id: "t0w2-closeout-20260910"
+    status: "close_out_complete"
+    verification_gate:
+      allowed: true
+      receipt_path: "working/REQ-TIED_ASYNC_METHODOLOGY/gates/verification-w2-gate-receipt.json"
+      run_id: "w2-verify-20260910"
+  request: "REQ-TIED_ASYNC_METHODOLOGY"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "AGENTS.md"
+      - "tied/docs/ai-principles.md"
+      - "tied/vocab/async-methodology.md"
+      - "tied/vocab/prompt-composer.md"
+      - "tied/vocab/quality-assurance.md"
+      - "tied/vocab/routing.md"
+    slug: "session-bootstrap"
+    tracking:
+      status: "completed"
+      evidence_refs:
+        - "AGENTS.md"
+        - "tied/docs/ai-principles.md"
+        - "tied/vocab/async-methodology.md"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/tied-async-methodology-plan.md"
+      - "working/REQ-TIED_ASYNC_METHODOLOGY/CITDP-REQ-TIED_ASYNC_METHODOLOGY.yaml"
+    slug: "change-definition"
+    tracking:
+      status: "completed"
+      evidence_refs:
+        - "docs/tied-async-methodology-plan.md"
+        - "working/REQ-TIED_ASYNC_METHODOLOGY/CITDP-REQ-TIED_ASYNC_METHODOLOGY.yaml"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/vocab/async-methodology.md"
+      - "working/REQ-TIED_ASYNC_METHODOLOGY/CITDP-REQ-TIED_ASYNC_METHODOLOGY.yaml"
+    slug: "impact-discovery"
+    tracking:
+      status: "completed"
+      evidence_refs:
+        - "tied/vocab/async-methodology.md"
+        - "working/REQ-TIED_ASYNC_METHODOLOGY/CITDP-REQ-TIED_ASYNC_METHODOLOGY.yaml"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/requirements/REQ-ASYNC_CHECKLIST_CATALOG.yaml"
+      - "tied/requirements/REQ-TIED_ASYNC_METHODOLOGY.yaml"
+    slug: "author-requirement"
+    tracking:
+      status: "completed"
+      evidence_refs:
+        - "tied/requirements/REQ-ASYNC_CHECKLIST_CATALOG.yaml"
+        - "tied/requirements/REQ-TIED_ASYNC_METHODOLOGY.yaml"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/architecture-decisions/ARCH-ASYNC_CHECKLIST_INTEGRATION.yaml"
+    slug: "author-architecture"
+    tracking:
+      status: "completed"
+      evidence_refs:
+        - "tied/architecture-decisions/ARCH-ASYNC_CHECKLIST_INTEGRATION.yaml"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/docs/agent-req-implementation-checklist.md"
+      - "tied/docs/agent-req-implementation-checklist.yaml"
+      - "working/REQ-TIED_ASYNC_METHODOLOGY/pilot/after-w2/catalog-table-IMPL-GOAGENT-EXECUTOR.md"
+    slug: "catalog-pseudocode-contracts"
+    tracking:
+      status: "completed"
+      evidence_refs:
+        - "tied/docs/agent-req-implementation-checklist.md"
+        - "working/REQ-TIED_ASYNC_METHODOLOGY/pilot/after-w2/catalog-table-IMPL-GOAGENT-EXECUTOR.md"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/tied-async-methodology-plan.md"
+      - "working/REQ-TIED_ASYNC_METHODOLOGY/CITDP-REQ-TIED_ASYNC_METHODOLOGY.yaml"
+    slug: "risk-assessment"
+    tracking:
+      status: "completed"
+      evidence_refs:
+        - "docs/tied-async-methodology-plan.md"
+        - "working/REQ-TIED_ASYNC_METHODOLOGY/CITDP-REQ-TIED_ASYNC_METHODOLOGY.yaml"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "working/REQ-TIED_ASYNC_METHODOLOGY/evidence/not-applicable-receipt.v1.json"
+    policy: "checklist-text-only-inquiry"
+    rationale: "W2 documents four integrated async cases at gate-pseudocode-validation; tied_adversarial_inquiry_run MCP activation deferred to W3; async_in_scope alone does not authorize inquiry."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      status: "not_applicable"
+      evidence_refs:
+        - "working/REQ-TIED_ASYNC_METHODOLOGY/evidence/not-applicable-receipt.v1.json"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/docs/agent-req-implementation-checklist.md"
+      - "tied/docs/agent-req-implementation-checklist.yaml"
+      - "working/REQ-TIED_ASYNC_METHODOLOGY/pilot/after-w2/catalog-table-IMPL-GOAGENT-EXECUTOR.md"
+      - "working/REQ-TIED_ASYNC_METHODOLOGY/pilot/after-w2/contradiction-report-IMPL-GOAGENT-EXECUTOR.md"
+      - "working/REQ-TIED_ASYNC_METHODOLOGY/pilot/after-w2/README.md"
+    slug: "gate-pseudocode-validation"
+    tracking:
+      status: "completed"
+      evidence_refs:
+        - "working/REQ-TIED_ASYNC_METHODOLOGY/pilot/after-w2/contradiction-report-IMPL-GOAGENT-EXECUTOR.md"
+        - "working/REQ-TIED_ASYNC_METHODOLOGY/pilot/after-w2/README.md"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-ASYNC_CHECKLIST_DISPOSITIONS-pseudocode.md"
+      - "tied/implementation-decisions/IMPL-ASYNC_CHECKLIST_DISPOSITIONS.yaml"
+    slug: "persist-implementation-records"
+    tracking:
+      status: "completed"
+      evidence_refs:
+        - "tied/implementation-decisions/IMPL-ASYNC_CHECKLIST_DISPOSITIONS.yaml"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/checklist-async-dispositions.test.ts"
+      - "mcp-server/src/tools/tied-async-contract-fixtures.test.ts"
+    slug: "test-strategy"
+    tracking:
+      status: "completed"
+      evidence_refs:
+        - "mcp-server/src/checklist-async-dispositions.test.ts"
+        - "mcp-server/src/tools/tied-async-contract-fixtures.test.ts"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/checklist-async-dispositions.test.ts"
+    slug: "unit-test-red"
+    tracking:
+      status: "completed"
+      evidence_refs:
+        - "mcp-server/src/checklist-async-dispositions.test.ts"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/checklist-async-dispositions.test.ts"
+      - "mcp-server/src/checklist-async-dispositions.ts"
+      - "mcp-server/src/tools/tied-async-contract-fixtures.test.ts"
+    slug: "unit-test-green"
+    tracking:
+      status: "completed"
+      evidence_refs:
+        - "mcp-server/src/checklist-async-dispositions.ts"
+        - "mcp-server/src/tools/tied-async-contract-fixtures.test.ts"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/checklist-async-dispositions.ts"
+      - "tied/implementation-decisions/IMPL-ASYNC_CHECKLIST_DISPOSITIONS-pseudocode.md"
+    slug: "three-way-alignment-unit"
+    tracking:
+      status: "completed"
+      evidence_refs:
+        - "mcp-server/src/checklist-async-dispositions.ts"
+        - "tied/implementation-decisions/IMPL-ASYNC_CHECKLIST_DISPOSITIONS-pseudocode.md"
+  - disposition: "not_applicable"
+    policy: "w2-no-composition-scope"
+    rationale: "W2 delivers checklist disposition helpers and methodology docs only; async composition binding inventory columns deferred to W5."
+    slug: "composition-integration"
+    tracking:
+      status: "not_applicable"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/checklist-async-dispositions.test.ts"
+      - "mcp-server/src/tools/tied-async-contract-fixtures.test.ts"
+      - "working/REQ-TIED_ASYNC_METHODOLOGY/evidence/verification-evidence-manifest.v1.json"
+    slug: "verification-gate"
+    tracking:
+      status: "completed"
+      evidence_refs:
+        - "working/REQ-TIED_ASYNC_METHODOLOGY/evidence/verification-evidence-manifest.v1.json"
+        - "working/REQ-TIED_ASYNC_METHODOLOGY/gates/verification-w2-gate-receipt.json"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/architecture-decisions/ARCH-ASYNC_CHECKLIST_INTEGRATION.yaml"
+      - "tied/implementation-decisions/IMPL-ASYNC_CHECKLIST_DISPOSITIONS.yaml"
+      - "tied/requirements/REQ-ASYNC_CHECKLIST_CATALOG.yaml"
+    slug: "sync-tied-stack"
+    tracking:
+      status: "completed"
+      evidence_refs:
+        - "tied/requirements/REQ-ASYNC_CHECKLIST_CATALOG.yaml"
+        - "tied/architecture-decisions/ARCH-ASYNC_CHECKLIST_INTEGRATION.yaml"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_ASYNC_METHODOLOGY/CITDP-REQ-TIED_ASYNC_METHODOLOGY.yaml"
+    slug: "persist-citdp-record"
+    tracking:
+      status: "completed"
+      evidence_refs:
+        - "working/REQ-TIED_ASYNC_METHODOLOGY/CITDP-REQ-TIED_ASYNC_METHODOLOGY.yaml"
+  - disposition: "completed"
+    evidence_refs:
+      - "tools/bundled-prompt-type-skills/prompt-shared/gitignore-close-out-hygiene.md"
+    policy: "N/A — working/REQ-TIED_ASYNC_METHODOLOGY deliverables are track artifacts; gates/ covered by .gitignore:42"
+    slug: "gitignore-close-out-hygiene"
+    tracking:
+      status: "completed"
+      evidence_refs:
+        - "tools/bundled-prompt-type-skills/prompt-shared/gitignore-close-out-hygiene.md"
+  - disposition: "completed"
+    evidence_refs:
+      - "tools/bootstrap/templates/sync-tracker-dispositions.mjs"
+      - "tools/bootstrap/templates/run-close-out-gates.mjs"
+      - "working/REQ-TIED_ASYNC_METHODOLOGY/evidence/request-evidence-envelope.v1.json"
+      - "working/REQ-TIED_ASYNC_METHODOLOGY/evidence/verification-evidence-manifest.v1.json"
+    slug: "sub-close-out-evidence-sync"
+    tracking:
+      status: "completed"
+      evidence_refs:
+        - "working/REQ-TIED_ASYNC_METHODOLOGY/evidence/request-evidence-envelope.v1.json"
+        - "working/REQ-TIED_ASYNC_METHODOLOGY/evidence/verification-evidence-manifest.v1.json"
+  - disposition: "completed"
+    evidence_refs:
+      - "CHANGELOG.md"
+      - "working/REQ-TIED_ASYNC_METHODOLOGY/evidence/proposed-commit-message.txt"
+    policy:
+      commit_deferred: true
+      rationale: "plan-close-out prepares commit; parent stages after gate handoff"
+      skill: "plan-close-out"
+    slug: "traceable-commit"
+    tracking:
+      status: "completed"
+      evidence_refs:
+        - "CHANGELOG.md"
+        - "working/REQ-TIED_ASYNC_METHODOLOGY/evidence/proposed-commit-message.txt"
+wave_scope: "T0+W2"

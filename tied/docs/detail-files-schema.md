@@ -30,6 +30,8 @@ This document describes the YAML structure for individual REQ, ARCH, and IMPL to
 
 **Optional:** `behavioral_contracts` (invariants / configurable lists) and `dependencies` (depends_on, used_by, affects) for richer documentation (see `tied/docs/ai-principles.md`).
 
+**Optional async acceptance (T0):** When a REQ change is async-in-scope, `satisfaction_criteria` may include grouped criteria for the seven async semantic classes (await sequencing, delivery, cancellation, timeout, retry/idempotency, shared DATA, termination/open wait) with either measurable outcomes or explicit `N/A` rationale. No new top-level schema field is required — use `criterion` text with a stable prefix (e.g. `async_timeout:`). Authoring guide: [requirements.md](requirements.md) § Async acceptance criteria; glossary: [async-methodology.md](../vocab/async-methodology.md).
+
 ---
 
 ## 2. ARCH detail file (`architecture-decisions/ARCH-*.yaml`)

@@ -1,0 +1,19 @@
+feat(tied): add async methodology T0+W2 vocabulary and checklist gating
+
+Introduce explicit async comprehension across REQ, ARCH, IMPL grammar,
+vocabulary, structural fixtures (T0), and checklist disposition gating
+(W2): async_in_scope tracker disposition, catalog-async-boundaries,
+flag-async-contradictions, and checklist-async-dispositions tests.
+
+Proof boundary: structural async contracts only; no race/deadlock proof.
+Gate depth minimal with integrated checklist-text inquiry waiver; MCP
+inquiry activation deferred W3.
+
+REQ-TIED_ASYNC_METHODOLOGY REQ-ASYNC_REQ_ARCH_TEMPLATES
+REQ-ASYNC_PSEUDOCODE_CONTRACTS REQ-ASYNC_CHECKLIST_CATALOG
+ARCH-ASYNC_REQ_ARCH_CONTRACT ARCH-ASYNC_CONTRACT_GRAMMAR
+ARCH-ASYNC_CHECKLIST_INTEGRATION
+IMPL-ASYNC_VOCABULARY IMPL-ASYNC_REQ_ARCH_GUIDANCE
+IMPL-ASYNC_PSEUDOCODE_GRAMMAR IMPL-ASYNC_CHECKLIST_DISPOSITIONS
+
+Close-out: t0w2-closeout-20260910; envelope zero blocking gaps.

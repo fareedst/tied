@@ -9,6 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **TIED Async Methodology T0+W2 ([REQ-TIED_ASYNC_METHODOLOGY], [REQ-ASYNC_REQ_ARCH_TEMPLATES], [REQ-ASYNC_PSEUDOCODE_CONTRACTS], [REQ-ASYNC_CHECKLIST_CATALOG])** —
+  T0 (W0–W1): seven-class async glossary, REQ/ARCH authoring guidance, optional v1
+  contract rows (ASYNC_BOUNDARY, TIMEOUT, CANCELLATION, SEQUENCING, MESSAGE_CONTRACT,
+  RETRY, IDEMPOTENCY), 14+ structural fixtures, and pre-async-contract legacy grace.
+  W2: checklist gating via `async_in_scope` disposition (candidate trigger only),
+  `catalog-async-boundaries` closed table, `flag-async-contradictions` routing,
+  `checklist-async-dispositions` module, and pilot catalog/contradiction artifacts
+  for IMPL-GOAGENT-EXECUTOR. Eleven ASYNC tokens registered; 37/37 async tests green;
+  minimal gate depth with integrated checklist-text inquiry waiver (MCP inquiry W3).
+  Close-out: `t0w2-closeout-20260910`, envelope zero blocking gaps (advisory).
+
 - **Wave 5 — Process-adherence evidence grade ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT], [REQ-REQUEST_EVIDENCE_ENVELOPE])** —
   Envelope dedupes gate receipts per phase and treats inquiry byte-identical artifacts
   as fresh when provenance run_ids differ; auto-detects dual-write trackers, manifest

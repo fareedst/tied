@@ -1,0 +1,61 @@
+▶ ASYNC_CATALOG_COLUMNS [REQ-ASYNC_CHECKLIST_CATALOG]
+  ✔ defines the W2 closed catalog table columns (0.96325ms)
+✔ ASYNC_CATALOG_COLUMNS [REQ-ASYNC_CHECKLIST_CATALOG] (1.428375ms)
+▶ detectAsyncInScope [REQ-ASYNC_CHECKLIST_CATALOG]
+  ✔ returns false for legacy sync-only pseudocode (0.133625ms)
+  ✔ returns true with matched semantic classes for async pilot (0.299542ms)
+✔ detectAsyncInScope [REQ-ASYNC_CHECKLIST_CATALOG] (0.507708ms)
+▶ validateAsyncCatalogTable [REQ-ASYNC_CHECKLIST_CATALOG]
+  ✔ passes when every async block has a closed catalog row (0.445292ms)
+  ✔ fails when an async block is missing a catalog row (0.069167ms)
+  ✔ does not require catalog rows when async is not in scope (0.102542ms)
+✔ validateAsyncCatalogTable [REQ-ASYNC_CHECKLIST_CATALOG] (0.697708ms)
+▶ detectAsyncContradictions [REQ-ASYNC_CHECKLIST_CATALOG]
+  ✔ flags AWAIT without Async EFFECTS when typed evidence is available (0.363958ms)
+  ✔ flags Async EFFECTS without boundary rationale (0.219209ms)
+  ✔ flags retry without idempotency (0.086458ms)
+  ✔ warns on REQ timeout missing from IMPL at Phase B and errors at verification (0.284542ms)
+  ✔ routes SEQUENCING mismatch to resolve-pseudocode (0.139125ms)
+✔ detectAsyncContradictions [REQ-ASYNC_CHECKLIST_CATALOG] (1.1995ms)
+▶ validateAsyncInScopeTracker [ARCH-ASYNC_CHECKLIST_INTEGRATION]
+  ✔ requires async_in_scope boolean on Tracker (0.134792ms)
+  ✔ requires matched semantic classes when async_in_scope is true and forbids inquiry activation (0.041917ms)
+✔ validateAsyncInScopeTracker [ARCH-ASYNC_CHECKLIST_INTEGRATION] (0.211459ms)
+▶ CHECKLIST_ASYNC_YAML_MD_PARITY [REQ-ASYNC_CHECKLIST_CATALOG]
+  ✔ keeps async marker parity for impact-discovery (0.176333ms)
+  ✔ keeps async marker parity for catalog-pseudocode-contracts (0.133334ms)
+  ✔ keeps async marker parity for flag-insufficient-specs (0.09275ms)
+  ✔ keeps async marker parity for flag-contradictory-specs (0.121875ms)
+  ✔ keeps async marker parity for gate-pseudocode-validation (0.123167ms)
+✔ CHECKLIST_ASYNC_YAML_MD_PARITY [REQ-ASYNC_CHECKLIST_CATALOG] (0.687ms)
+▶ legacy regression [REQ-ASYNC_CHECKLIST_CATALOG]
+  ✔ buildEmptyAsyncCatalogRows returns no rows for sync-only pseudocode (0.050375ms)
+  ✔ documents integrated inquiry cases without MCP wiring (0.016459ms)
+✔ legacy regression [REQ-ASYNC_CHECKLIST_CATALOG] (0.086125ms)
+▶ T0 async contract fixtures [REQ-ASYNC_PSEUDOCODE_CONTRACTS]
+  ✔ manifest covers seven classes with pos and neg fixtures (0.65625ms)
+  ✔ positive await_sequencing (corpus-ac-01-sequencing-pos.pseudocode.md) (6.172875ms)
+  ✔ negative await_sequencing (corpus-ac-02-sequencing-neg.pseudocode.md) (0.366625ms)
+  ✔ positive message_event_delivery (corpus-ac-03-delivery-pos.pseudocode.md) (0.432042ms)
+  ✔ negative message_event_delivery (corpus-ac-04-delivery-neg.pseudocode.md) (0.459875ms)
+  ✔ positive cancellation (corpus-ac-05-cancellation-pos.pseudocode.md) (0.491959ms)
+  ✔ negative cancellation (corpus-ac-06-cancellation-neg.pseudocode.md) (0.278834ms)
+  ✔ positive timeout (corpus-ac-07-timeout-pos.pseudocode.md) (0.213459ms)
+  ✔ negative timeout (corpus-ac-08-timeout-neg.pseudocode.md) (0.149833ms)
+  ✔ positive retry_idempotency (corpus-ac-09-retry-pos.pseudocode.md) (0.185459ms)
+  ✔ negative retry_idempotency (corpus-ac-10-retry-neg.pseudocode.md) (0.242042ms)
+  ✔ positive shared_data (corpus-ac-11-shared-data-pos.pseudocode.md) (0.1735ms)
+  ✔ negative shared_data (corpus-ac-12-shared-data-neg.pseudocode.md) (0.140875ms)
+  ✔ positive termination_open_wait (corpus-ac-13-termination-pos.pseudocode.md) (0.186334ms)
+  ✔ negative termination_open_wait (corpus-ac-14-termination-neg.pseudocode.md) (0.221042ms)
+  ✔ legacy no-async fixture passes Layer B (pre-async-contract compatible) (0.187792ms)
+  ✔ existing constraint-language legacy corpus remains green (0.351417ms)
+✔ T0 async contract fixtures [REQ-ASYNC_PSEUDOCODE_CONTRACTS] (11.825416ms)
+ℹ tests 37
+ℹ suites 8
+ℹ pass 37
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 83.685917

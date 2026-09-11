@@ -1,0 +1,41 @@
+REQ-ASYNC_REQ_ARCH_TEMPLATES:
+  category: "Non-Functional"
+  description: "REQ and ARCH records shall include async acceptance criteria or documented N/A for each applicable semantic class when async is in scope."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-09-10"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-09-10"
+      reason: "T0 W0 registration"
+  name: "Async REQ/ARCH Templates"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Traceable timeout/cancel/order requirements"
+    problems_solved:
+      - "Missing sponsor-facing async criteria"
+    why: "Async depth is profile-gated and opt-in today."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_ASYNC_METHODOLOGY"
+    related_to: []
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "architecture-decisions.md documents async architecture prompts with complete and N/A examples"
+    - criterion: "detail-files-schema.md documents optional async satisfaction_criteria pattern"
+    - criterion: "requirements.md documents async acceptance criteria with complete and N/A examples"
+  status: "In Progress"
+  traceability:
+    architecture:
+      - "ARCH-ASYNC_REQ_ARCH_CONTRACT"
+    code_annotations:
+      - "REQ-ASYNC_REQ_ARCH_TEMPLATES"
+    implementation:
+      - "IMPL-ASYNC_REQ_ARCH_GUIDANCE"
+      - "IMPL-ASYNC_VOCABULARY"
+    tests: []
+  validation_criteria:
+    - coverage: "Seven classes represented in REQ and ARCH guides"
+      method: "Documentation review"

@@ -1,0 +1,42 @@
+REQ-ASYNC_PSEUDOCODE_CONTRACTS:
+  category: "Non-Functional"
+  description: "IMPL grammar shall support optional v1 async contract rows: ASYNC_BOUNDARY, TIMEOUT, CANCELLATION, SEQUENCING, MESSAGE_CONTRACT, RETRY, IDEMPOTENCY. Documents without rows remain valid."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-09-10"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-09-10"
+      reason: "T0 W1 registration"
+  name: "Async Pseudocode Contracts"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Structural fixtures and future W2 catalog mapping"
+    problems_solved:
+      - "Implicit async contracts"
+    why: "AWAIT/EFFECTS alone do not capture delivery, timeout, or idempotency obligations."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_ASYNC_METHODOLOGY"
+    related_to: []
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "implementation-decisions.md and template include optional async section"
+    - criterion: "pre-async-contract migration N/A documented for untouched legacy blocks"
+    - criterion: "pseudocode-format-and-practices.md §4a defines all rows with valid and insufficient examples"
+    - criterion: "≥14 structural fixtures (pos+neg per semantic class)"
+  status: "In Progress"
+  traceability:
+    architecture:
+      - "ARCH-ASYNC_CONTRACT_GRAMMAR"
+    code_annotations:
+      - "REQ-ASYNC_PSEUDOCODE_CONTRACTS"
+    implementation:
+      - "IMPL-ASYNC_PSEUDOCODE_GRAMMAR"
+    tests:
+      - "mcp-server/src/tools/tied-async-contract-fixtures.test.ts"
+  validation_criteria:
+    - coverage: "async-contract corpus and legacy compatibility"
+      method: "Fixture tests"

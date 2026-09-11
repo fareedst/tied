@@ -249,6 +249,26 @@ touch tied/architecture-decisions/ARCH-YOUR_TOKEN.yaml
 
 ---
 
+## Async architecture decisions (when async is in scope)
+
+When architecture covers async boundaries or composition **async seams**, record decisions for the same **seven semantic classes** (or explicit N/A). See [async-methodology.md](../vocab/async-methodology.md) and [ARCH-ASYNC_REQ_ARCH_CONTRACT](../architecture-decisions/ARCH-ASYNC_REQ_ARCH_CONTRACT.yaml).
+
+| Prompt | Record in ARCH |
+|--------|----------------|
+| Concurrency model | Promise/await vs message vs stream; use **CONTROL: ordering** as v1 sequencing vehicle |
+| Message vs promise boundary | Where SEND/handler semantics end and AWAIT begins |
+| Backpressure | Whether producer may outrun consumer; handler completion before ack |
+| Failure propagation | Timeout/cancel/retry propagation across seams |
+| Shared DATA ownership | Which component owns mutable DATA across yields |
+
+**Complete example (timeout):** "executor_Run applies 30s wall-clock deadline; timeout maps to TIMEOUT_EXCEEDED; no partial POST on timeout."
+
+**N/A example (retry):** "Single subprocess invocation; retry/idempotency N/A at ARCH layer."
+
+**Proof boundary:** ARCH documents structural intent and binding assumptions — not runtime race or liveness proofs.
+
+---
+
 ## Grouping by Domain (Optional)
 
 For very large projects, organize detail files by domain:

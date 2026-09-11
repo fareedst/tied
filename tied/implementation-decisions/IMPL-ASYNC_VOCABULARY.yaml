@@ -1,0 +1,48 @@
+IMPL-ASYNC_VOCABULARY:
+  code_locations:
+    files:
+      - description: "Async keyword routes"
+        path: "tied/vocab/routing.md"
+      - description: "Canonical async methodology glossary"
+        path: "tied/vocab/async-methodology.md"
+      - description: "Catalog entry 5f"
+        path: "tied/vocab/domain-references.md"
+    functions: []
+  cross_references:
+    - "ARCH-ASYNC_REQ_ARCH_CONTRACT"
+    - "REQ-ASYNC_REQ_ARCH_TEMPLATES"
+  decision: "Maintain tied/vocab/async-methodology.md with seven semantic classes, synonyms, naming bridges, and proof-boundary disclaimers."
+  implementation_approach:
+    details:
+      - "Client tied/vocab/ remains project-owned for extensions"
+      - "copy_files.sh refreshes to client tied/methodology/vocab/"
+    summary: "Create glossary; update routing and domain-references indexes."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-09-10"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-09-10"
+      reason: "T0 W0"
+  name: "Async Methodology Vocabulary"
+  rationale:
+    benefits:
+      - "Consistent RESOLVE across agents"
+    problems_solved:
+      - "No dedicated async glossary"
+    why: "PRELOAD target for async tasks per routing.md."
+  related_decisions:
+    depends_on: []
+    see_also:
+      - "IMPL-ASYNC_REQ_ARCH_GUIDANCE"
+    supersedes: []
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-ASYNC_REQ_ARCH_CONTRACT"
+    code_annotations:
+      - "IMPL-ASYNC_VOCABULARY"
+    requirements:
+      - "REQ-ASYNC_REQ_ARCH_TEMPLATES"
+    tests: []

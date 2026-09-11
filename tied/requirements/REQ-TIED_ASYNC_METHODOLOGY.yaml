@@ -1,0 +1,54 @@
+REQ-TIED_ASYNC_METHODOLOGY:
+  category: "Non-Functional"
+  description: "TIED shall provide explicit async comprehension across REQ, ARCH, IMPL grammar, vocabulary, and structural fixtures. T0 (W0–W1) is documentation-only; checklist gating and Layer C analyzer are deferred to W2+."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-09-10"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-09-10"
+      reason: "T0 build-plan registration"
+  name: "TIED Async Methodology"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Optional v1 contract rows without breaking legacy"
+      - "Seven semantic classes with proof boundaries"
+    problems_solved:
+      - "Implicit async assumptions"
+      - "No unified async glossary"
+    why: "Agents can pass structural gates while leaving async ordering, cancellation, and timeout contracts implicit."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-ASYNC_PSEUDOCODE_CONTRACTS"
+      - "REQ-ASYNC_REQ_ARCH_TEMPLATES"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Glossary defines seven semantic classes with naming bridges and non-claims"
+    - criterion: "No race/deadlock/liveness proof claims in T0 artifacts"
+    - criterion: "REQ/ARCH guidance includes complete and N/A examples per class"
+    - criterion: "W1 grammar docs cover all optional async rows with legacy compatibility"
+    - criterion: "≥14 structural fixtures green plus legacy no-async corpus"
+  status: "In Progress"
+  traceability:
+    architecture:
+      - "ARCH-ASYNC_CONTRACT_GRAMMAR"
+      - "ARCH-ASYNC_REQ_ARCH_CONTRACT"
+    code_annotations:
+      - "REQ-TIED_ASYNC_METHODOLOGY"
+    implementation:
+      - "IMPL-ASYNC_PSEUDOCODE_GRAMMAR"
+      - "IMPL-ASYNC_REQ_ARCH_GUIDANCE"
+      - "IMPL-ASYNC_VOCABULARY"
+    tests:
+      - "mcp-server/src/tools/tied-async-contract-fixtures.test.ts"
+  validation_criteria:
+    - coverage: "Proof-boundary wording in glossary and grammar"
+      method: "Documentation review"
+    - coverage: "Positive and negative async-contract corpus"
+      method: "Fixture tests"
+    - coverage: "All T0 tokens and cross-references"
+      method: "TIED consistency"

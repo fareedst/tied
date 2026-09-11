@@ -1,3 +1,89 @@
+IMPL-ASYNC_CHECKLIST_DISPOSITIONS:
+  cross_references:
+    - "ARCH-ASYNC_CHECKLIST_INTEGRATION"
+    - "REQ-ASYNC_CHECKLIST_CATALOG"
+  decision: "Implement checklist-async-dispositions module and update agent-req-implementation-checklist MD/YAML with catalog-async-boundaries and flag-async-contradictions."
+  detail_file: "implementation-decisions/IMPL-ASYNC_CHECKLIST_DISPOSITIONS.yaml"
+  name: "Async Checklist Dispositions"
+  rationale:
+    benefits:
+      - "Regression guard for legacy sync IMPLs"
+      - "Testable catalog validation"
+    why: "Executable dispositions back checklist gating with tests."
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-ASYNC_CHECKLIST_INTEGRATION"
+    code_annotations:
+      - "IMPL-ASYNC_CHECKLIST_DISPOSITIONS"
+    requirements:
+      - "REQ-ASYNC_CHECKLIST_CATALOG"
+    tests:
+      - "mcp-server/src/checklist-async-dispositions.test.ts"
+IMPL-ASYNC_PSEUDOCODE_GRAMMAR:
+  cross_references:
+    - "ARCH-ASYNC_CONTRACT_GRAMMAR"
+    - "REQ-ASYNC_PSEUDOCODE_CONTRACTS"
+  detail_file: "implementation-decisions/IMPL-ASYNC_PSEUDOCODE_GRAMMAR.yaml"
+  name: "Async Pseudocode Grammar"
+  rationale:
+    benefits:
+      - "Future W2 Phase B catalog mapping documented"
+    problems_solved:
+      - "Non-comparable async assumptions"
+    why: "Grammar docs and fixtures encode optional v1 rows for structural validation."
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-ASYNC_CONTRACT_GRAMMAR"
+    code_annotations:
+      - "IMPL-ASYNC_PSEUDOCODE_GRAMMAR"
+    requirements:
+      - "REQ-ASYNC_PSEUDOCODE_CONTRACTS"
+    tests:
+      - "mcp-server/src/tools/tied-async-contract-fixtures.test.ts"
+IMPL-ASYNC_REQ_ARCH_GUIDANCE:
+  cross_references:
+    - "ARCH-ASYNC_REQ_ARCH_CONTRACT"
+    - "REQ-ASYNC_REQ_ARCH_TEMPLATES"
+  detail_file: "implementation-decisions/IMPL-ASYNC_REQ_ARCH_GUIDANCE.yaml"
+  name: "Async REQ/ARCH Guidance"
+  rationale:
+    benefits:
+      - "Sponsor-traceable acceptance criteria"
+    problems_solved:
+      - "Ad hoc async criteria in prose"
+    why: "Authors need normative guidance with complete and N/A examples."
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-ASYNC_REQ_ARCH_CONTRACT"
+    code_annotations:
+      - "IMPL-ASYNC_REQ_ARCH_GUIDANCE"
+    requirements:
+      - "REQ-ASYNC_REQ_ARCH_TEMPLATES"
+    tests: []
+IMPL-ASYNC_VOCABULARY:
+  cross_references:
+    - "ARCH-ASYNC_REQ_ARCH_CONTRACT"
+    - "REQ-ASYNC_REQ_ARCH_TEMPLATES"
+  detail_file: "implementation-decisions/IMPL-ASYNC_VOCABULARY.yaml"
+  name: "Async Methodology Vocabulary"
+  rationale:
+    benefits:
+      - "RESOLVE/RECORD target for async work"
+    problems_solved:
+      - "Scattered async terminology"
+    why: "Domain terms must bridge sponsor language and IMPL grammar."
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-ASYNC_REQ_ARCH_CONTRACT"
+    code_annotations:
+      - "IMPL-ASYNC_VOCABULARY"
+    requirements:
+      - "REQ-ASYNC_REQ_ARCH_TEMPLATES"
+    tests: []
 IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV:
   code_locations:
     files:

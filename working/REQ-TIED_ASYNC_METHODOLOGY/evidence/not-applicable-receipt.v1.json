@@ -1,0 +1,14 @@
+{
+  "schema_version": "not-applicable-receipt.v1",
+  "request_token": "REQ-TIED_ASYNC_METHODOLOGY",
+  "artifact_kind": "adversarial_inquiry",
+  "depth_tier": "minimal",
+  "phases": [
+    "close_out",
+    "pre_implementation",
+    "verification"
+  ],
+  "reason": "Adversarial inquiry not applicable at minimal depth_tier; W2 checklist-text-only inquiry waiver; MCP activation deferred W3",
+  "generated_at": "2026-09-10T21:10:00.000Z",
+  "source": "request-evidence-envelope-backfill.v1"
+}

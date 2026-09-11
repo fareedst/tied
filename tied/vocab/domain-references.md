@@ -36,6 +36,7 @@
 | 5c | [`fidelity-research.md`](fidelity-research.md) | Fidelity findings, specification state, origin layer, divergent edge, read-only research profile, finding lifecycle, evidence provenance |
 | 5d | [`prompt-composer.md`](prompt-composer.md) | TIED-source-only Prompt Composer, prompt types, global prompt skills, explicit router, prompt envelope, shared references, and client skill installation; glossary not installed into clients |
 | 5e | [`feature-orchestration.md`](feature-orchestration.md) | Feature manifests, lifecycle, clarification and constitution gates, task graphs, generated views, onboarding, migration, and client publication |
+| 5f | [`async-methodology.md`](async-methodology.md) | Async methodology: seven semantic classes, optional v1 contract rows, REQ/ARCH/IMPL naming bridges, proof boundaries |
 | — | [`config-discovery.md`](config-discovery.md) | Planned layered YAML config (stub; `(proposed)` terms) |
 
 ---

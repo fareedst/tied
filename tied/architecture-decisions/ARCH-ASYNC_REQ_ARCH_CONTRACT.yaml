@@ -1,0 +1,50 @@
+ARCH-ASYNC_REQ_ARCH_CONTRACT:
+  alternatives_considered:
+    - cons:
+        - "Drift across clients"
+      name: "Client-owned glossary only"
+      pros:
+        - "Per-project terms"
+      rejected_reason: "Methodology-wide async semantics require canonical source"
+  cross_references:
+    - "REQ-ASYNC_REQ_ARCH_TEMPLATES"
+    - "REQ-TIED_ASYNC_METHODOLOGY"
+  decision: "Methodology source owns async glossary and authoring guides; client projects record project-specific async REQ/ARCH in project YAML only."
+  implementation_approach:
+    details:
+      - "Domain index entry in domain-references.md"
+      - "No checklist or analyzer behavior in T0"
+      - "Routing keywords in tied/vocab/routing.md"
+    summary: "Publish tied/vocab/async-methodology.md and REQ/ARCH guide sections in tied/docs/."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-09-10"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-09-10"
+      reason: "T0 W0"
+  name: "Async REQ/ARCH Authoring Contract"
+  rationale:
+    benefits:
+      - "Stable refresh path for async-methodology.md"
+    problems_solved:
+      - "Client vs methodology vocabulary confusion"
+    why: "TIED methodology enhancements ship via copy_files.sh to client tied/methodology/."
+  related_decisions:
+    depends_on: []
+    informs:
+      - "IMPL-ASYNC_VOCABULARY"
+    see_also:
+      - "ARCH-ASYNC_CONTRACT_GRAMMAR"
+  status: "Active"
+  traceability:
+    code_annotations:
+      - "ARCH-ASYNC_REQ_ARCH_CONTRACT"
+    implementation:
+      - "IMPL-ASYNC_REQ_ARCH_GUIDANCE"
+      - "IMPL-ASYNC_VOCABULARY"
+    requirements:
+      - "REQ-ASYNC_REQ_ARCH_TEMPLATES"
+      - "REQ-TIED_ASYNC_METHODOLOGY"
+    tests: []

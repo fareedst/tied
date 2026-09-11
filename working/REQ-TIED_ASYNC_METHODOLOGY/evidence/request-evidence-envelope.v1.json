@@ -1,0 +1,113 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-09-11T04:07:45.510Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-TIED_ASYNC_METHODOLOGY",
+    "project_id": "af8451e933f573ec",
+    "depth_tier": "minimal",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [],
+  "artifacts": [
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "working/REQ-TIED_ASYNC_METHODOLOGY/gates/close_out-t0w2-gate-receipt.json",
+      "content_hash": "sha256:ed5be211ef9544a440d3a9d579e70ab5778d1064edcc51085928d735d8e0066e",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "working/REQ-TIED_ASYNC_METHODOLOGY/gates/pre_implementation-w2-gate-receipt.json",
+      "content_hash": "sha256:d340eb7a8b24c6a733432fcc7aac5d10a3bf870bf2b60c7ce15e0e1338bc250b",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "working/REQ-TIED_ASYNC_METHODOLOGY/gates/verification-w2-gate-receipt.json",
+      "content_hash": "sha256:a0931d25cce2ecf719502cf4821f5497b5d117c74ba704c883c492b68629f731",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "working/REQ-TIED_ASYNC_METHODOLOGY/CITDP-REQ-TIED_ASYNC_METHODOLOGY.yaml",
+      "content_hash": "sha256:80307569a1781775e77e1cbbb4f841d16518426a5d9127e28be7bef1e940e5e0",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    },
+    {
+      "kind": "not_applicable_receipt",
+      "schema_version": "not-applicable-receipt.v1",
+      "path": "working/REQ-TIED_ASYNC_METHODOLOGY/evidence/not-applicable-receipt.v1.json",
+      "content_hash": "sha256:54ab50d6c2b34e13bb3ed52b128856ea744ca96bec2dc94614495c6b71cc18a5",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "working/REQ-TIED_ASYNC_METHODOLOGY/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:5932a3c5b362c9301282b91146f3fd01c7b6418318af7335aa1a48bbe7312b2d",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_ASYNC_METHODOLOGY/evidence/proposed-commit-message.txt",
+      "content_hash": "sha256:1f47853faad6dc4ef03760a19c31b07a5718f061904008d4c68ece5eb3d9880a",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "verification_evidence_manifest",
+      "schema_version": "verification-evidence-manifest.v1",
+      "path": "working/REQ-TIED_ASYNC_METHODOLOGY/evidence/verification-evidence-manifest.v1.json",
+      "content_hash": "sha256:6c22b78add8af22e97d5b540e6d617e4e388d91f421f15a2f1b888d8f0e763ab",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": null,
+    "tracker_hash": null,
+    "citdp_path": "working/REQ-TIED_ASYNC_METHODOLOGY/CITDP-REQ-TIED_ASYNC_METHODOLOGY.yaml",
+    "evidence_chain_profile_path": null
+  },
+  "gaps": []
+}

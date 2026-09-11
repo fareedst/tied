@@ -1,3 +1,43 @@
+ARCH-ASYNC_CHECKLIST_INTEGRATION:
+  cross_references:
+    - "IMPL-ASYNC_CHECKLIST_DISPOSITIONS"
+    - "REQ-ASYNC_CHECKLIST_CATALOG"
+  description: "W0-W2 TIED async methodology token"
+  detail_file: "architecture-decisions/ARCH-ASYNC_CHECKLIST_INTEGRATION.yaml"
+  metadata:
+    last_updated: "2026-09-10"
+    registered: "2026-09-10"
+  name: "Async Checklist Integration"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
+ARCH-ASYNC_CONTRACT_GRAMMAR:
+  cross_references:
+    - "IMPL-ASYNC_PSEUDOCODE_GRAMMAR"
+    - "REQ-ASYNC_PSEUDOCODE_CONTRACTS"
+  description: "W0-W2 TIED async methodology token"
+  detail_file: "architecture-decisions/ARCH-ASYNC_CONTRACT_GRAMMAR.yaml"
+  metadata:
+    last_updated: "2026-09-10"
+    registered: "2026-09-10"
+  name: "Async Contract Grammar"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
+ARCH-ASYNC_REQ_ARCH_CONTRACT:
+  cross_references:
+    - "IMPL-ASYNC_REQ_ARCH_GUIDANCE"
+    - "IMPL-ASYNC_VOCABULARY"
+    - "REQ-ASYNC_REQ_ARCH_TEMPLATES"
+  description: "W0-W2 TIED async methodology token"
+  detail_file: "architecture-decisions/ARCH-ASYNC_REQ_ARCH_CONTRACT.yaml"
+  metadata:
+    last_updated: "2026-09-10"
+    registered: "2026-09-10"
+  name: "Async REQ/ARCH Contract"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS:
   cross_references:
     - "IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV"
@@ -687,6 +727,58 @@ ARCH-TIED_YAML_STYLE_RESOLUTION:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+IMPL-ASYNC_CHECKLIST_DISPOSITIONS:
+  cross_references:
+    - "ARCH-ASYNC_CHECKLIST_INTEGRATION"
+    - "REQ-ASYNC_CHECKLIST_CATALOG"
+  description: "W0-W2 TIED async methodology token"
+  detail_file: "implementation-decisions/IMPL-ASYNC_CHECKLIST_DISPOSITIONS.yaml"
+  metadata:
+    last_updated: "2026-09-10"
+    registered: "2026-09-10"
+  name: "Async Checklist Dispositions"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-ASYNC_PSEUDOCODE_GRAMMAR:
+  cross_references:
+    - "ARCH-ASYNC_CONTRACT_GRAMMAR"
+    - "REQ-ASYNC_PSEUDOCODE_CONTRACTS"
+  description: "W0-W2 TIED async methodology token"
+  detail_file: "implementation-decisions/IMPL-ASYNC_PSEUDOCODE_GRAMMAR.yaml"
+  metadata:
+    last_updated: "2026-09-10"
+    registered: "2026-09-10"
+  name: "Async Pseudocode Grammar"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-ASYNC_REQ_ARCH_GUIDANCE:
+  cross_references:
+    - "ARCH-ASYNC_REQ_ARCH_CONTRACT"
+    - "REQ-ASYNC_REQ_ARCH_TEMPLATES"
+  description: "W0-W2 TIED async methodology token"
+  detail_file: "implementation-decisions/IMPL-ASYNC_REQ_ARCH_GUIDANCE.yaml"
+  metadata:
+    last_updated: "2026-09-10"
+    registered: "2026-09-10"
+  name: "Async REQ/ARCH Guidance"
+  source_index: "implementation-decisions.yaml"
+  status: "In Progress"
+  type: "IMPL"
+IMPL-ASYNC_VOCABULARY:
+  cross_references:
+    - "ARCH-ASYNC_REQ_ARCH_CONTRACT"
+    - "REQ-ASYNC_REQ_ARCH_TEMPLATES"
+  description: "W0-W2 TIED async methodology token"
+  detail_file: "implementation-decisions/IMPL-ASYNC_VOCABULARY.yaml"
+  metadata:
+    last_updated: "2026-09-10"
+    registered: "2026-09-10"
+  name: "Async Methodology Vocabulary"
+  source_index: "implementation-decisions.yaml"
+  status: "In Progress"
+  type: "IMPL"
 IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV:
   cross_references:
     - "ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS"
@@ -1856,6 +1948,46 @@ PROC-YAML_EDIT_LOOP:
   source_index: "processes.md"
   status: "Active"
   type: "PROC"
+REQ-ASYNC_CHECKLIST_CATALOG:
+  cross_references:
+    - "ARCH-ASYNC_CHECKLIST_INTEGRATION"
+    - "IMPL-ASYNC_CHECKLIST_DISPOSITIONS"
+  description: "W0-W2 TIED async methodology token"
+  detail_file: "requirements/REQ-ASYNC_CHECKLIST_CATALOG.yaml"
+  metadata:
+    last_updated: "2026-09-10"
+    registered: "2026-09-10"
+  name: "Async Checklist Catalog"
+  source_index: "requirements.yaml"
+  status: "Implemented"
+  type: "REQ"
+REQ-ASYNC_PSEUDOCODE_CONTRACTS:
+  cross_references:
+    - "ARCH-ASYNC_CONTRACT_GRAMMAR"
+    - "IMPL-ASYNC_PSEUDOCODE_GRAMMAR"
+  description: "W0-W2 TIED async methodology token"
+  detail_file: "requirements/REQ-ASYNC_PSEUDOCODE_CONTRACTS.yaml"
+  metadata:
+    last_updated: "2026-09-10"
+    registered: "2026-09-10"
+  name: "Async Pseudocode Contracts"
+  source_index: "requirements.yaml"
+  status: "Implemented"
+  type: "REQ"
+REQ-ASYNC_REQ_ARCH_TEMPLATES:
+  cross_references:
+    - "ARCH-ASYNC_REQ_ARCH_CONTRACT"
+    - "IMPL-ASYNC_REQ_ARCH_GUIDANCE"
+    - "IMPL-ASYNC_VOCABULARY"
+  description: "W0-W2 TIED async methodology token"
+  detail_file: "requirements/REQ-ASYNC_REQ_ARCH_TEMPLATES.yaml"
+  metadata:
+    last_updated: "2026-09-10"
+    registered: "2026-09-10"
+  name: "Async REQ/ARCH Templates"
+  source_index: "requirements.yaml"
+  status: "In Progress"
+  type: "REQ"
 REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML:
   category: "Tooling"
   cross_references:
@@ -2457,6 +2589,20 @@ REQ-TIED_ADVERSARIAL_INQUIRY:
   name: "Adversarial inquiry for obligation and fidelity evidence"
   source_index: "requirements.yaml"
   status: "Planned"
+  type: "REQ"
+REQ-TIED_ASYNC_METHODOLOGY:
+  cross_references:
+    - "ARCH-ASYNC_CHECKLIST_INTEGRATION"
+    - "ARCH-ASYNC_CONTRACT_GRAMMAR"
+    - "ARCH-ASYNC_REQ_ARCH_CONTRACT"
+  description: "W0-W2 TIED async methodology token"
+  detail_file: "requirements/REQ-TIED_ASYNC_METHODOLOGY.yaml"
+  metadata:
+    last_updated: "2026-09-10"
+    registered: "2026-09-10"
+  name: "TIED Async Methodology"
+  source_index: "requirements.yaml"
+  status: "Implemented"
   type: "REQ"
 REQ-TIED_BOOTSTRAP_DETAIL_INTEGRITY:
   cross_references:

@@ -247,6 +247,26 @@ When using subdirectories, update the Detail File column in the index:
 
 ---
 
+## Async acceptance criteria (when async is in scope)
+
+When a requirement introduces or modifies **async boundaries** (await, promise, message/event, open wait, or shared DATA across yields), satisfaction criteria should address the **seven semantic classes** or document explicit **N/A** with rationale. See [async-methodology.md](../vocab/async-methodology.md) and [REQ-ASYNC_REQ_ARCH_TEMPLATES](../requirements/REQ-ASYNC_REQ_ARCH_TEMPLATES.yaml).
+
+| Class | Author when applicable | Explicit N/A example |
+|-------|------------------------|----------------------|
+| **Await sequencing** | Order of awaited steps and failure continuations | "Single AWAIT; no ordering constraint beyond spawn→wait." |
+| **Message/event delivery** | Delivery category, ack, duplicate/loss handling | "No SEND or external message channel in scope." |
+| **Cancellation** | Who may cancel and POST/DATA outcome | "No caller-initiated cancellation." |
+| **Timeout** | Deadline and named failure mode | "Best-effort; no wall-clock deadline requirement." |
+| **Retry/idempotency** | Retry policy and deduplication key | "Single attempt; no retry." |
+| **Shared DATA** | Ownership and transitions across yields | "No mutable shared DATA across yields." |
+| **Termination/open wait** | Close condition or `may_diverge` rationale | "TERMINATION: total; process exit bounds stream read." |
+
+**Proof boundary:** REQ criteria describe observable obligations. They must not claim race-freedom, deadlock-freedom, or happens-before proof unless a separate formal-methods REQ exists.
+
+**Detail file pattern:** Add bullets under `satisfaction_criteria` using prefixes such as `async_timeout:` or a grouped `async_acceptance:` criterion listing each class as satisfied or N/A.
+
+---
+
 ## Future Enhancements (Out of Scope)
 
 The following features are documented but marked as future enhancements:

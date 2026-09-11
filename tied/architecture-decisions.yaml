@@ -1,3 +1,69 @@
+ARCH-ASYNC_CHECKLIST_INTEGRATION:
+  cross_references:
+    - "REQ-ASYNC_CHECKLIST_CATALOG"
+    - "REQ-TIED_ASYNC_METHODOLOGY"
+  decision: "Wire Phase A impact-discovery async_in_scope disposition and Phase B/G catalog-async-boundaries and flag-async-contradictions into agent-req-implementation-checklist without CITDP MCP trigger automation."
+  detail_file: "architecture-decisions/ARCH-ASYNC_CHECKLIST_INTEGRATION.yaml"
+  name: "Async Checklist Integration"
+  rationale:
+    benefits:
+      - "Candidate trigger only at impact-discovery"
+      - "Integrated inquiry cases documented at pre_implementation"
+    why: "Async markers need structured checklist hooks without silent inquiry."
+  status: "Active"
+  traceability:
+    code_annotations:
+      - "ARCH-ASYNC_CHECKLIST_INTEGRATION"
+    implementation:
+      - "IMPL-ASYNC_CHECKLIST_DISPOSITIONS"
+    requirements:
+      - "REQ-ASYNC_CHECKLIST_CATALOG"
+    tests:
+      - "mcp-server/src/checklist-async-dispositions.test.ts"
+ARCH-ASYNC_CONTRACT_GRAMMAR:
+  cross_references:
+    - "REQ-ASYNC_PSEUDOCODE_CONTRACTS"
+  detail_file: "architecture-decisions/ARCH-ASYNC_CONTRACT_GRAMMAR.yaml"
+  name: "Async Contract Grammar v1"
+  rationale:
+    benefits:
+      - "Comparable rows without breaking legacy"
+    problems_solved:
+      - "Prose-only async contracts"
+    why: "Extend grammar v1 with optional rows before any grammar v2 actor notation."
+  status: "Active"
+  traceability:
+    code_annotations:
+      - "ARCH-ASYNC_CONTRACT_GRAMMAR"
+    implementation:
+      - "IMPL-ASYNC_PSEUDOCODE_GRAMMAR"
+    requirements:
+      - "REQ-ASYNC_PSEUDOCODE_CONTRACTS"
+    tests:
+      - "mcp-server/src/tools/tied-async-contract-fixtures.test.ts"
+ARCH-ASYNC_REQ_ARCH_CONTRACT:
+  cross_references:
+    - "REQ-ASYNC_REQ_ARCH_TEMPLATES"
+    - "REQ-TIED_ASYNC_METHODOLOGY"
+  detail_file: "architecture-decisions/ARCH-ASYNC_REQ_ARCH_CONTRACT.yaml"
+  name: "Async REQ/ARCH Authoring Contract"
+  rationale:
+    benefits:
+      - "Clear copy_files.sh refresh boundary"
+    problems_solved:
+      - "Ambiguous vocabulary ownership"
+    why: "Methodology-owned authoring contract separates source vocabulary from client project YAML."
+  status: "Active"
+  traceability:
+    code_annotations:
+      - "ARCH-ASYNC_REQ_ARCH_CONTRACT"
+    implementation:
+      - "IMPL-ASYNC_REQ_ARCH_GUIDANCE"
+      - "IMPL-ASYNC_VOCABULARY"
+    requirements:
+      - "REQ-ASYNC_REQ_ARCH_TEMPLATES"
+      - "REQ-TIED_ASYNC_METHODOLOGY"
+    tests: []
 ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS:
   alternatives_considered:
     - cons:

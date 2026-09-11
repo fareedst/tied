@@ -111,6 +111,8 @@ Using a consistent vocabulary keeps blocks comparable and gives a stable descrip
 - **Loops:** `FOR item IN collection`, `FOR each (key, value) IN map` (or equivalent). Prefer `FOR ... IN` for iteration; add `WHILE condition` only if needed for clarity.
 - **Errors and failure paths:** `ON error`, `ON failure` (event-style); `RETURN error` or `RETURN { error, ... }` for error results; `EXIT failure` for abort; `CATCH e RETURN ...` for caught exceptions. Use one consistent pattern per IMPL (e.g. all `ON error` or all `RETURN error`). Step-level error names must appear in contract **FAILURE_MODES** when that set is required.
 - **Async:** `AWAIT` for awaiting a promise; `Promise` in OUTPUT when the result is async; include `Async` in **EFFECTS** when the block awaits; `SEND` implies async message send. Callers may `AWAIT` the result when relevant.
+- **Optional async contract rows (v1):** `ASYNC_BOUNDARY:`, `TIMEOUT:`, `CANCELLATION:`, `SEQUENCING:`, `MESSAGE_CONTRACT:`, `RETRY:`, `IDEMPOTENCY:` — optional on Active blocks; see [pseudocode-format-and-practices.md](pseudocode-format-and-practices.md) §4a and [async-methodology.md](../vocab/async-methodology.md). `DATA`, `DATA_TRANSITION`, and `TERMINATION` remain authoritative for shared state and completion.
+- **Async migration grace:** Untouched legacy Active blocks may omit optional async rows with Layer B N/A rationale **`pre-async-contract`** until next edit (parallel to `pre-contract-grammar`).
 - **Data structures (optional):** Prefer `(list)`, `(array)`, `(set)`, `(map)` or key–value; object shapes as `{ key, key? }` or `{ key: type }`. Keep language-agnostic; no need to list every type.
 
 **Contract precision keywords (language-agnostic; not host-language or Vera syntax):**
@@ -123,7 +125,14 @@ Using a consistent vocabulary keeps blocks comparable and gives a stable descrip
 | `EFFECTS` | Effect row: `pure` or named effects (`IO`, `Http`, `State`, `Async`, `DB`, `Exn`, `Random`, `Diverge`, …) | Always. |
 | `DATA_TRANSITION` | Before→after rules for mutable DATA | When DATA is mutated or EFFECTS includes `State`. |
 | `TERMINATION` | `total` or `may_diverge` (with justification) | When recursion / `WHILE` / open-ended wait; otherwise prefer `TERMINATION: total`. |
-| `CONTROL` | Env, feature flags, ordering constraints | Optional when relevant — **not** replaced by EFFECTS. |
+| `CONTROL` | Env, feature flags, ordering constraints | Optional when relevant — **not** replaced by EFFECTS. Primary v1 vehicle for documented await/message ordering when `SEQUENCING:` is omitted. |
+| `ASYNC_BOUNDARY` | Boundary kind (`await`, `send`, `stream`, …) | Optional when async is in scope; recommended when `Async` in EFFECTS. |
+| `TIMEOUT` | Deadline → named FAILURE_MODE | Optional; required when REQ declares timeout. |
+| `CANCELLATION` | Actor → cancel outcome / POST | Optional; required when REQ declares cancellation. |
+| `SEQUENCING` | Documented local order across yields | Optional; complements `CONTROL: ordering`. |
+| `MESSAGE_CONTRACT` | Delivery category and handler/dedup policy | Optional; recommended for SEND/event/stream handlers. |
+| `RETRY` | Retry count, backoff, retryable failures | Optional; pair with `IDEMPOTENCY` when DATA may repeat. |
+| `IDEMPOTENCY` | Dedup key and POST on duplicate | Optional; required when retry or at-least-once delivery mutates DATA. |
 
 Predicates in PRE/POST/DATA_TRANSITION stay prose/Algol-ish (no host-language snippets, no slot indices).
 

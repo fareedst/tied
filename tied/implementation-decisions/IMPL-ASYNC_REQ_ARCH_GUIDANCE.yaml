@@ -1,0 +1,48 @@
+IMPL-ASYNC_REQ_ARCH_GUIDANCE:
+  code_locations:
+    files:
+      - description: "Async acceptance criteria section"
+        path: "tied/docs/requirements.md"
+      - description: "Async architecture decisions section"
+        path: "tied/docs/architecture-decisions.md"
+      - description: "Optional async satisfaction criteria note"
+        path: "tied/docs/detail-files-schema.md"
+    functions: []
+  cross_references:
+    - "ARCH-ASYNC_REQ_ARCH_CONTRACT"
+    - "REQ-ASYNC_REQ_ARCH_TEMPLATES"
+  decision: "Extend requirements.md and architecture-decisions.md with async sections covering seven semantic classes."
+  implementation_approach:
+    details:
+      - "Optional async satisfaction_criteria pattern in detail-files-schema.md"
+      - "Proof-boundary wording in every example table"
+    summary: "Add async acceptance criteria and architecture decision prompt tables to tied/docs/."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-09-10"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-09-10"
+      reason: "T0 W0"
+  name: "Async REQ/ARCH Guidance"
+  rationale:
+    benefits:
+      - "Authors express all classes without ad-hoc prose"
+    problems_solved:
+      - "No REQ/ARCH async templates"
+    why: "W0 deliverable per tied-async-methodology-plan."
+  related_decisions:
+    depends_on:
+      - "IMPL-ASYNC_VOCABULARY"
+    see_also: []
+    supersedes: []
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-ASYNC_REQ_ARCH_CONTRACT"
+    code_annotations:
+      - "IMPL-ASYNC_REQ_ARCH_GUIDANCE"
+    requirements:
+      - "REQ-ASYNC_REQ_ARCH_TEMPLATES"
+    tests: []

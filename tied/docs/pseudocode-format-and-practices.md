@@ -72,10 +72,33 @@ Use these keywords consistently so different IMPLs and tooling stay comparable.
 | Procedures | **UPPER_SNAKE** (e.g. `NORMALIZE_INPUT`); **camelCase** is acceptable when mirroring real API names |
 | Loops | `FOR item IN collection`, or `FOR each (k, v) IN map` |
 | Errors | **ON error** / **ON failure**; **RETURN error**; **EXIT failure**; **CATCH e RETURN …** — pick **one** style per IMPL; names must match **FAILURE_MODES** when that set is required |
-| Async | **AWAIT**; name **Promise** in OUTPUT when async; include `Async` in **EFFECTS** when the block awaits; **SEND** for message-style async |
+| Async | **AWAIT**; name **Promise** in OUTPUT when async; include `Async` in **EFFECTS** when the block awaits; **SEND** for message-style async; optional v1 rows below when async is in scope |
+| Async contract rows (optional v1) | **ASYNC_BOUNDARY:**, **TIMEOUT:**, **CANCELLATION:**, **SEQUENCING:**, **MESSAGE_CONTRACT:**, **RETRY:**, **IDEMPOTENCY:** — see §4a |
 | Shapes (optional) | **(list)**, **(map)**, `{ key, key? }` — stay language-agnostic |
 
 **Requiredness (Active, non-stub procedure blocks — new or changed):** Always **PRE**, **POST**, **EFFECTS** (with **INPUT**/**OUTPUT**). Add **FAILURE_MODES** when errors are possible; **DATA_TRANSITION** when DATA is mutated or EFFECTS includes `State`; **TERMINATION** when recursion/`WHILE`/open wait (else prefer `total`). **CONTROL** remains optional. Untouched legacy Active blocks may use Layer B N/A `pre-contract-grammar` until next edit. Full table: [implementation-decisions.md](implementation-decisions.md) § Preferred vocabulary.
+
+### 4a. Optional async contract rows (grammar v1)
+
+When a block has `Async` in **EFFECTS**, an **AWAIT**, **Promise** OUTPUT, **SEND**, or an open wait, authors **should** add applicable optional rows. Documents without these rows remain valid (legacy compatibility). Untouched legacy blocks may use N/A rationale **`pre-async-contract`** until next edit.
+
+| Row | When to use | Valid example | Insufficient (negative) example |
+|-----|-------------|---------------|--------------------------------|
+| `ASYNC_BOUNDARY:` | Declare boundary kind | `ASYNC_BOUNDARY: await` | `Async` in EFFECTS with no boundary row and no rationale |
+| `TIMEOUT:` | Wall-clock or logical deadline | `TIMEOUT: 30s → TIMEOUT_EXCEEDED` | `TIMEOUT: soon` without FAILURE_MODE |
+| `CANCELLATION:` | Caller/controller may stop work | `CANCELLATION: caller → CANCELLED; POST: discard partial` | Names caller but no POST outcome |
+| `SEQUENCING:` | Local order across yields | `SEQUENCING: parse_lines before wait_process` | Multiple AWAITs on shared DATA with no order |
+| `MESSAGE_CONTRACT:` | SEND/event/stream delivery | `MESSAGE_CONTRACT: at-least-once; dedupe by line_id` | SEND with no delivery category |
+| `RETRY:` | Retries on named failures | `RETRY: 2; timeout only; exponential backoff` | RETRY without idempotency when DATA mutates |
+| `IDEMPOTENCY:` | Safe duplicate execution/delivery | `IDEMPOTENCY: request_id; POST: one transition` | At-least-once delivery without dedup key |
+
+**CONTROL: ordering** is the primary v1 vehicle when `SEQUENCING:` is omitted (e.g. `CONTROL: ordering spawn before wait`).
+
+**Proof boundary:** Rows document assumptions for comprehension and structural validation only — not race/deadlock/liveness proof.
+
+**Future checklist (W2):** Phase B will catalog rows per async block; T0 documents mapping only — checklist execution is unchanged.
+
+**Fixtures:** `working/REQ-TIED_ASYNC_METHODOLOGY/fixtures/async-contract/` (positive/negative per class); tests: `mcp-server/src/tools/tied-async-contract-fixtures.test.ts`.
 
 **Sequence:** Use numbered steps `1.`, `2.`, … for fixed order; indent under a procedure or **ON** / **WHEN** for the body. Start substantive blocks with a **Contract** that includes the precision fields above so two IMPLs can be compared by contract.
 

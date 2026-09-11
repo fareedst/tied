@@ -265,8 +265,13 @@ This section is **optional guidance** only. Checklist order and gating are uncha
      Code files and Test files list **existing** artifacts for discovery only — not permission to create new files. Do not add or modify production source or automated tests in this step; new or changed implementation artifacts begin at `unit-test-red` (tests) and `unit-test-green` (production code) after pseudo-code is validated and persisted.
 
 6. **Stop expanding** when no new IMPLs share code paths, REQ/ARCH tokens, or `composed_with` links with the current set.
+7. **Async in scope disposition (`async_in_scope`)** — W2 introduces this Tracker field; it does **not** exist before W2 authorization:
+   - IF any in-scope file, sponsor text, or IMPL pseudo-code suggests async (`AWAIT`, `Promise` OUTPUT, `Async` in EFFECTS, `SEND`, open wait, or optional async contract rows) THEN set **`async_in_scope: true`** on the per-request Tracker and record **`async_matched_semantic_classes`** (one or more of: `await_sequencing`, `message_event_delivery`, `cancellation`, `timeout`, `retry_idempotency`, `shared_data`, `termination`).
+   - ELSE set **`async_in_scope: false`**.
+   - This is a **candidate trigger marker only** — it is **not** inquiry activation, does **not** call `tied_adversarial_inquiry_run`, and does **not** wire CITDP MCP trigger automation (W3). Never set `async_inquiry_activated: true` from `async_in_scope` alone.
+   - PRELOAD `tied/vocab/async-methodology.md` when `async_in_scope: true`.
 
-**Outcomes**: Complete impact map; vocabulary term map loaded (PRELOAD) for affected subsystems; risk/profile selection and an initial quality evidence matrix exist before REQ/ARCH/IMPL design; bounded scenarios and applicable abuse cases are recorded; IMPL inventory table ready; all affected and related tokens identified.
+**Outcomes**: Complete impact map; vocabulary term map loaded (PRELOAD) for affected subsystems; risk/profile selection and an initial quality evidence matrix exist before REQ/ARCH/IMPL design; bounded scenarios and applicable abuse cases are recorded; IMPL inventory table ready; all affected and related tokens identified; **`async_in_scope` and matched semantic classes recorded on Tracker when async is detected**.
 
 **Branch**: IF the IMPL set is large (signal of high coupling) THEN consider whether IMPLs need decomposition before proceeding.
 
@@ -337,6 +342,18 @@ This section is **optional guidance** only. Checklist order and gating are uncha
    - **Name logical units from canonical vocabulary** (`[PROC-VOCABULARY_INDEX]`): **CALL sub-vocabulary-sync** (RESOLVE) so procedure names and UPPER_SNAKE block names map to the preferred domain term in `tied/vocab/*.md` (the preferred term **is** the block name); **CALL sub-vocabulary-sync** (RECORD) for any new block-name/procedure term.
    - Build a closed catalog of failure modes, state transitions, ordering assumptions, and termination conditions per block; flag any block missing an entry.
 
+#### catalog-async-boundaries (catalog-async-boundaries): Closed async catalog table per IMPL (Phase B)
+
+When **`async_in_scope: true`** on the Tracker (or when any changed in-scope IMPL declares an async boundary), **CALL catalog-async-boundaries** after the general contract catalog above. For each async-marked block in each changed in-scope IMPL, produce **one closed catalog row** with these columns (no empty cells — use explicit N/A when a semantic class does not apply):
+
+| Block | Boundary kind | Await/message/event | Timeout | Cancellation | Retry/idempotency | Shared DATA | Termination/order |
+|-------|---------------|---------------------|---------|--------------|-------------------|-------------|-------------------|
+
+- **Boundary kind** — `await`, `message/event`, `open wait`, or documented N/A with rationale.
+- Map each row to the seven semantic classes in `tied/vocab/async-methodology.md`; do not conflate classes.
+- **Missing row** for an async-marked changed block is a **blocking** insufficient-spec at Phase B; route to **resolve-pseudocode** before RED.
+- Legacy non-async IMPLs with no async markers: **no async catalog table required** (regression: checklist output unchanged).
+
 ### flag-insufficient-specs (flag-insufficient-specs): Blockers before tests or code
 
 2. Flag any of the following as incomplete (resolution required before tests or code):
@@ -349,7 +366,24 @@ This section is **optional guidance** only. Checklist order and gating are uncha
    - Branches without error handling on a fallible path.
    - Stub or template pseudo-code on an IMPL with `status: Active`.
    - Blocks with no token comment (violates `[PROC-IMPL_PSEUDOCODE_TOKENS]`).
+   - **Async catalog insufficiency (when `async_in_scope: true`)** — missing closed **async catalog row** for an async-marked changed block; incomplete async catalog column; route to **catalog-async-boundaries** then **resolve-pseudocode** before RED.
    - Derive flags from explicit counterexamples (not only omission-scanning); append warn-level findings to the per-request finding ledger when a counterexample reveals a gap.
+
+#### flag-async-contradictions (flag-async-contradictions): Async-specific contradictions (extends flag-insufficient-specs / flag-contradictory-specs)
+
+When **`async_in_scope: true`**, evaluate these deterministic outcomes (each routes to **resolve-pseudocode** before RED unless noted):
+
+| Condition | Disposition | Phase |
+|-----------|-------------|-------|
+| AWAIT on a procedure whose OUTPUT is not Promise-typed or whose EFFECTS omits `Async` when typed evidence is available | Error → resolve-pseudocode | Phase B |
+| `Async` in EFFECTS without AWAIT/SEND/Promise OUTPUT or explicit boundary rationale (documented W1 flag) | Error → resolve-pseudocode | Phase B |
+| SEQUENCING/`CONTROL: ordering` mismatch between caller and callee IMPLs | Error → resolve-pseudocode | Phase B |
+| Message/event delivery assumptions disagree with handler/ack or duplicate handling | Error → resolve-pseudocode | Phase B |
+| RETRY declared without idempotency/deduplication outcome for repeated DATA transitions | Error → resolve-pseudocode | Phase B |
+| Open wait without close/unsubscribe or `TERMINATION: may_diverge` rationale | Warning at Phase B; error at verification if still open | B / verification |
+| Timeout in REQ not reflected in IMPL `TIMEOUT` row | Warning at Phase B; **error at verification** when REQ declares timeout | B / verification |
+
+Full typed-flow enforcement of AWAIT/Promise consistency is deferred to W4; document the checklist disposition when typed evidence is unavailable.
 
 ### flag-contradictory-specs (flag-contradictory-specs): Cross-IMPL conflicts
 
@@ -386,7 +420,9 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 
 ### gate-pseudocode-validation (gate-pseudocode-validation): sub-pseudocode-validation-pass and gating before persist
 
-**CALL sub-pseudocode-validation-pass.** Run pseudo-code validation per `[PROC-PSEUDOCODE_VALIDATION]` using `tied/docs/pseudocode-validation-checklist.yaml` (or `docs/pseudocode-validation-checklist.yaml` at repo root). The adversarial depth tier and gate policy must already be selected during `impact-discovery`, independently from research and assurance profiles. **CALL sub-adversarial-inquiry-pass** with `phase: pre_implementation` and `blocking: false`; this pass makes **no runtime claim** — it only checks structural and contract completeness. **Pre-RED context** (before executable tests): Layer A (`tied_validate_consistency`) plus structural Layer B (parsing, schema including SHAPE-003..006, symbol resolution, contract validation, dependency graph, reporting). Mark **behavioral_coverage** and **traceability** rows that require test artifacts as **N/A** with rationale ("no tests yet")—not ad-hoc waivers. Precision-contract rows: N/A only for Template stubs, applicability skips, or unchanged legacy Active blocks with rationale `pre-contract-grammar`; new/changed Active blocks must satisfy PRE/POST/EFFECTS and applicable FAILURE_MODES/DATA_TRANSITION/TERMINATION. Run validation passes in the recommended order; record findings with severity and source location. Do not proceed to persist-implementation-records until pre-RED structural gating is satisfied. If the project has no parser or tool yet, perform a **manual pass** over the applicable checklist categories and document results.
+**CALL sub-pseudocode-validation-pass.** Run pseudo-code validation per `[PROC-PSEUDOCODE_VALIDATION]` using `tied/docs/pseudocode-validation-checklist.yaml` (or `docs/pseudocode-validation-checklist.yaml` at repo root). The adversarial depth tier and gate policy must already be selected during `impact-discovery`, independently from research and assurance profiles. **CALL sub-adversarial-inquiry-pass** with `phase: pre_implementation` and `blocking: false`; this pass makes **no runtime claim** — it only checks structural and contract completeness.
+
+**Async adversarial inquiry binding (checklist text only — W2):** When `depth_tier` is **`integrated`** and **`async_in_scope: true`**, document request for these four bounded cases at `pre_implementation` (do **not** silently run inquiry; W3 owns MCP activation wiring): (1) timeout without FAILURE_MODE, (2) double AWAIT on non-idempotent DATA, (3) missing ordering between SEND and AWAIT, (4) retry without duplicate protection. When profile is `minimal` or N/A, record narrower evidence and rationale instead. **`async_in_scope` alone never authorizes inquiry.** **Pre-RED context** (before executable tests): Layer A (`tied_validate_consistency`) plus structural Layer B (parsing, schema including SHAPE-003..006, symbol resolution, contract validation, dependency graph, reporting). Mark **behavioral_coverage** and **traceability** rows that require test artifacts as **N/A** with rationale ("no tests yet")—not ad-hoc waivers. Precision-contract rows: N/A only for Template stubs, applicability skips, or unchanged legacy Active blocks with rationale `pre-contract-grammar`; new/changed Active blocks must satisfy PRE/POST/EFFECTS and applicable FAILURE_MODES/DATA_TRANSITION/TERMINATION. Run validation passes in the recommended order; record findings with severity and source location. Do not proceed to persist-implementation-records until pre-RED structural gating is satisfied. If the project has no parser or tool yet, perform a **manual pass** over the applicable checklist categories and document results.
 
 ### persist-implementation-records (persist-implementation-records): IMPL index/detail via tied-cli.sh; sub-yaml-edit-loop
 

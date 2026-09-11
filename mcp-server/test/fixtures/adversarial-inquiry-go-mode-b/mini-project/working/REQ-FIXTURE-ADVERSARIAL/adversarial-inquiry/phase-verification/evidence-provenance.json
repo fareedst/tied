@@ -2,6 +2,9 @@
   "provenance": {
     "adapter": "go-test",
     "adapterDiagnostics": [],
+    "blockScope": [
+      "BUILD_PROJECT_INQUIRY_INPUT"
+    ],
     "command": "tied_adversarial_inquiry_run",
     "manifest": {
       "ignoreRules": [],
@@ -17,12 +20,14 @@
     },
     "mode": "project",
     "phase": "verification",
+    "primaryBlock": "BUILD_PROJECT_INQUIRY_INPUT",
     "proofBoundaries": [
       "traceability_structure",
       "semantic_fidelity"
     ],
     "request_token": "REQ-FIXTURE-ADVERSARIAL",
     "run_id": "go-mode-b-composition-run",
+    "scopeMode": "criterion",
     "sourceRevisions": {
       "architecture": "8a1d88abf64f4184",
       "architectureDetail": "64bab37eac7590d7",

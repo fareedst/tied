@@ -1,0 +1,36 @@
+ARCH-ASYNC_CHECKLIST_INTEGRATION:
+  alternatives_considered:
+    - option: "Silent inquiry on Async marker"
+      rejected_because: "Violates D2 candidate-trigger-only policy"
+  cross_references:
+    - "REQ-ASYNC_CHECKLIST_CATALOG"
+    - "REQ-TIED_ASYNC_METHODOLOGY"
+  decision: "Phase A records async_in_scope and async_matched_semantic_classes on Tracker; Phase B requires catalog-async-boundaries closed table; flag-insufficient-specs and flag-contradictory-specs invoke flag-async-contradictions when async_in_scope; gate-pseudocode-validation documents four integrated inquiry cases without MCP wiring (W3)."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-09-10"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-09-10"
+      reason: "W2 registration"
+  name: "Async Checklist Integration"
+  rationale:
+    benefits:
+      - "Deterministic loop-back to resolve-pseudocode"
+    why: "W2 owns checklist disposition wiring; W3 consumes async_in_scope for CITDP."
+  related_decisions:
+    depends_on:
+      - "ARCH-ASYNC_CONTRACT_GRAMMAR"
+    see_also: []
+    supersedes: []
+  status: "Active"
+  traceability:
+    code_annotations:
+      - "ARCH-ASYNC_CHECKLIST_INTEGRATION"
+    implementation:
+      - "IMPL-ASYNC_CHECKLIST_DISPOSITIONS"
+    requirements:
+      - "REQ-ASYNC_CHECKLIST_CATALOG"
+    tests:
+      - "mcp-server/src/checklist-async-dispositions.test.ts"

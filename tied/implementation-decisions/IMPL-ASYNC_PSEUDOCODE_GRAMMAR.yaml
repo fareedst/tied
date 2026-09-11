@@ -1,0 +1,51 @@
+IMPL-ASYNC_PSEUDOCODE_GRAMMAR:
+  code_locations:
+    files:
+      - description: "Optional async section"
+        path: "templates/impl-essence-pseudocode-template.md"
+      - description: "Preferred vocabulary async rows"
+        path: "tied/docs/implementation-decisions.md"
+      - description: "Structural fixture corpus"
+        path: "working/REQ-TIED_ASYNC_METHODOLOGY/fixtures/async-contract/"
+      - description: "§4a optional async rows"
+        path: "tied/docs/pseudocode-format-and-practices.md"
+    functions: []
+  cross_references:
+    - "ARCH-ASYNC_CONTRACT_GRAMMAR"
+    - "REQ-ASYNC_PSEUDOCODE_CONTRACTS"
+  decision: "Document optional v1 async contract rows in format guide, implementation-decisions preferred vocabulary, template, and fixture corpus."
+  implementation_approach:
+    details:
+      - "No checklist YAML changes in T0"
+      - "No mcp-server/src/analysis changes in T0"
+    summary: "Update pseudocode-format-and-practices §4a, implementation-decisions table, impl template, and fixture tests."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-09-10"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-09-10"
+      reason: "T0 W1"
+  name: "Async Pseudocode Grammar"
+  rationale:
+    benefits:
+      - "14+ structural fixtures; pre-async-contract grace"
+    problems_solved:
+      - "Implicit timeout/cancel/delivery"
+    why: "W1 deliverable; legacy compatibility mandatory."
+  related_decisions:
+    depends_on: []
+    see_also:
+      - "IMPL-ASYNC_REQ_ARCH_GUIDANCE"
+    supersedes: []
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-ASYNC_CONTRACT_GRAMMAR"
+    code_annotations:
+      - "IMPL-ASYNC_PSEUDOCODE_GRAMMAR"
+    requirements:
+      - "REQ-ASYNC_PSEUDOCODE_CONTRACTS"
+    tests:
+      - "mcp-server/src/tools/tied-async-contract-fixtures.test.ts"

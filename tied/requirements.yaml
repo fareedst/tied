@@ -1,3 +1,86 @@
+REQ-ASYNC_CHECKLIST_CATALOG:
+  category: "Non-Functional"
+  detail_file: "requirements/REQ-ASYNC_CHECKLIST_CATALOG.yaml"
+  name: "Async Checklist Catalog"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Deterministic contradiction routing"
+      - "Gating catalog table per async block"
+    problems_solved:
+      - "Implicit async boundaries at checklist Phase B"
+    why: "Phase B async catalog and contradiction steps are scattered; agents can pass gates without closed async rows."
+  related_requirements:
+    depends_on:
+      - "REQ-ASYNC_PSEUDOCODE_CONTRACTS"
+      - "REQ-TIED_ASYNC_METHODOLOGY"
+    related_to: []
+    supersedes: []
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-ASYNC_CHECKLIST_INTEGRATION"
+    code_annotations:
+      - "REQ-ASYNC_CHECKLIST_CATALOG"
+    implementation:
+      - "IMPL-ASYNC_CHECKLIST_DISPOSITIONS"
+    tests:
+      - "mcp-server/src/checklist-async-dispositions.test.ts"
+REQ-ASYNC_PSEUDOCODE_CONTRACTS:
+  category: "Non-Functional"
+  detail_file: "requirements/REQ-ASYNC_PSEUDOCODE_CONTRACTS.yaml"
+  name: "Async Pseudocode Contracts"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Legacy compatibility preserved"
+      - "Optional comparable v1 rows"
+    problems_solved:
+      - "No dedicated async contract rows"
+    why: "Cancellation and timeout live in prose; tooling cannot compare async assumptions."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_ASYNC_METHODOLOGY"
+    related_to:
+      - "REQ-ASYNC_REQ_ARCH_TEMPLATES"
+    supersedes: []
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-ASYNC_CONTRACT_GRAMMAR"
+    code_annotations:
+      - "REQ-ASYNC_PSEUDOCODE_CONTRACTS"
+    implementation:
+      - "IMPL-ASYNC_PSEUDOCODE_GRAMMAR"
+    tests:
+      - "mcp-server/src/tools/tied-async-contract-fixtures.test.ts"
+REQ-ASYNC_REQ_ARCH_TEMPLATES:
+  category: "Non-Functional"
+  detail_file: "requirements/REQ-ASYNC_REQ_ARCH_TEMPLATES.yaml"
+  name: "Async REQ/ARCH Templates"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Structured acceptance criteria per semantic class"
+    problems_solved:
+      - "REQ/ARCH rarely async-first"
+    why: "Sponsors cannot specify timeout, retry, or ordering requirements traceably without async-first REQ/ARCH guidance."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_ASYNC_METHODOLOGY"
+    related_to: []
+    supersedes: []
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-ASYNC_REQ_ARCH_CONTRACT"
+    code_annotations:
+      - "REQ-ASYNC_REQ_ARCH_TEMPLATES"
+    implementation:
+      - "IMPL-ASYNC_REQ_ARCH_GUIDANCE"
+      - "IMPL-ASYNC_VOCABULARY"
+    tests:
+      - "mcp-server/src/tools/tied-async-contract-fixtures.test.ts"
 REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML:
   category: "Functional"
   detail_file: "requirements/REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML.yaml"
@@ -1482,6 +1565,45 @@ REQ-TIED_ADVERSARIAL_INQUIRY:
   name: "Adversarial inquiry for obligation and fidelity evidence"
   priority: "P0"
   status: "Implemented"
+REQ-TIED_ASYNC_METHODOLOGY:
+  category: "Non-Functional"
+  detail_file: "requirements/REQ-TIED_ASYNC_METHODOLOGY.yaml"
+  name: "TIED Async Methodology"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Explicit async comprehension across stack layers"
+      - "Foundation for W2+ checklist and analyzer waves"
+      - "Traceable seven semantic classes"
+    problems_solved:
+      - "No comparable async contract rows in grammar v1"
+      - "No REQ/ARCH async-first templates"
+      - "Scattered implicit async hooks"
+    why: "Async logic is first-class in real systems but second-class in TIED documentation flow."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-ASYNC_CHECKLIST_CATALOG"
+      - "REQ-ASYNC_PSEUDOCODE_CONTRACTS"
+      - "REQ-ASYNC_REQ_ARCH_TEMPLATES"
+    supersedes: []
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-ASYNC_CHECKLIST_INTEGRATION"
+      - "ARCH-ASYNC_CONTRACT_GRAMMAR"
+      - "ARCH-ASYNC_REQ_ARCH_CONTRACT"
+    code_annotations:
+      - "REQ-TIED_ASYNC_METHODOLOGY"
+    implementation:
+      - "IMPL-ASYNC_CHECKLIST_DISPOSITIONS"
+      - "IMPL-ASYNC_PSEUDOCODE_GRAMMAR"
+      - "IMPL-ASYNC_REQ_ARCH_GUIDANCE"
+      - "IMPL-ASYNC_VOCABULARY"
+    tests:
+      - "mcp-server/src/checklist-async-dispositions.test.ts"
+      - "mcp-server/src/tools/tied-async-contract-fixtures.test.ts"
 REQ-TIED_BOOTSTRAP_DETAIL_INTEGRITY:
   category: "Functional"
   detail_file: "requirements/REQ-TIED_BOOTSTRAP_DETAIL_INTEGRITY.yaml"

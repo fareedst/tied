@@ -1,0 +1,96 @@
+{
+  "schema_version": "async-contract-fixtures.v1",
+  "req_token": "REQ-ASYNC_PSEUDOCODE_CONTRACTS",
+  "proof_boundary": "Structural row presence and shape only; no race or liveness claims.",
+  "legacy": {
+    "file": "corpus-ac-legacy-no-async-rows.pseudocode.md",
+    "expect_layer_b_ok": true,
+    "rationale": "pre-async-contract N/A for untouched legacy-style block without optional rows"
+  },
+  "fixtures": [
+    {
+      "file": "corpus-ac-01-sequencing-pos.pseudocode.md",
+      "class": "await_sequencing",
+      "polarity": "positive",
+      "required_row": "SEQUENCING:"
+    },
+    {
+      "file": "corpus-ac-02-sequencing-neg.pseudocode.md",
+      "class": "await_sequencing",
+      "polarity": "negative",
+      "insufficiency": "multiple AWAIT on shared DATA without SEQUENCING or CONTROL ordering"
+    },
+    {
+      "file": "corpus-ac-03-delivery-pos.pseudocode.md",
+      "class": "message_event_delivery",
+      "polarity": "positive",
+      "required_row": "MESSAGE_CONTRACT:"
+    },
+    {
+      "file": "corpus-ac-04-delivery-neg.pseudocode.md",
+      "class": "message_event_delivery",
+      "polarity": "negative",
+      "insufficiency": "SEND without MESSAGE_CONTRACT delivery category"
+    },
+    {
+      "file": "corpus-ac-05-cancellation-pos.pseudocode.md",
+      "class": "cancellation",
+      "polarity": "positive",
+      "required_row": "CANCELLATION:"
+    },
+    {
+      "file": "corpus-ac-06-cancellation-neg.pseudocode.md",
+      "class": "cancellation",
+      "polarity": "negative",
+      "insufficiency": "CANCELLATION names caller without POST outcome"
+    },
+    {
+      "file": "corpus-ac-07-timeout-pos.pseudocode.md",
+      "class": "timeout",
+      "polarity": "positive",
+      "required_row": "TIMEOUT:"
+    },
+    {
+      "file": "corpus-ac-08-timeout-neg.pseudocode.md",
+      "class": "timeout",
+      "polarity": "negative",
+      "insufficiency": "TIMEOUT without named FAILURE_MODE reference"
+    },
+    {
+      "file": "corpus-ac-09-retry-pos.pseudocode.md",
+      "class": "retry_idempotency",
+      "polarity": "positive",
+      "required_rows": ["RETRY:", "IDEMPOTENCY:"]
+    },
+    {
+      "file": "corpus-ac-10-retry-neg.pseudocode.md",
+      "class": "retry_idempotency",
+      "polarity": "negative",
+      "insufficiency": "RETRY declared without IDEMPOTENCY when DATA may repeat"
+    },
+    {
+      "file": "corpus-ac-11-shared-data-pos.pseudocode.md",
+      "class": "shared_data",
+      "polarity": "positive",
+      "required_row": "DATA_TRANSITION:"
+    },
+    {
+      "file": "corpus-ac-12-shared-data-neg.pseudocode.md",
+      "class": "shared_data",
+      "polarity": "negative",
+      "insufficiency": "mutable DATA across AWAIT without DATA_TRANSITION"
+    },
+    {
+      "file": "corpus-ac-13-termination-pos.pseudocode.md",
+      "class": "termination_open_wait",
+      "polarity": "positive",
+      "required_row": "TERMINATION:"
+    },
+    {
+      "file": "corpus-ac-14-termination-neg.pseudocode.md",
+      "class": "termination_open_wait",
+      "polarity": "negative",
+      "insufficiency": "open stream wait without TERMINATION or may_diverge rationale"
+    }
+  ]
+}

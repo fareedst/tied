@@ -1,0 +1,48 @@
+ARCH-ASYNC_CONTRACT_GRAMMAR:
+  alternatives_considered:
+    - cons:
+        - "Breaking change risk"
+      name: "Grammar v2 actor blocks"
+      pros:
+        - "Rich concurrency notation"
+      rejected_reason: "Deferred until post-T0 review"
+  cross_references:
+    - "REQ-ASYNC_PSEUDOCODE_CONTRACTS"
+  decision: "Optional v1 async contract rows supplement existing DATA, DATA_TRANSITION, TERMINATION, and CONTROL. CONTROL: ordering is the primary v1 sequencing vehicle. Grammar v2 actor notation is deferred."
+  implementation_approach:
+    details:
+      - "No Layer C pass in T0"
+      - "pre-async-contract N/A for untouched legacy"
+      - "Structural fixtures in working/ corpus"
+    summary: "Document rows in pseudocode-format-and-practices §4a, implementation-decisions, and template."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-09-10"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-09-10"
+      reason: "T0 W1"
+  name: "Async Contract Grammar v1"
+  rationale:
+    benefits:
+      - "Legacy documents validate unchanged when rows absent"
+    problems_solved:
+      - "Grammar fragmentation risk"
+    why: "D4 sponsor default: v1 optional rows only."
+  related_decisions:
+    depends_on:
+      - "ARCH-ASYNC_REQ_ARCH_CONTRACT"
+    informs:
+      - "IMPL-ASYNC_PSEUDOCODE_GRAMMAR"
+    see_also: []
+  status: "Active"
+  traceability:
+    code_annotations:
+      - "ARCH-ASYNC_CONTRACT_GRAMMAR"
+    implementation:
+      - "IMPL-ASYNC_PSEUDOCODE_GRAMMAR"
+    requirements:
+      - "REQ-ASYNC_PSEUDOCODE_CONTRACTS"
+    tests:
+      - "mcp-server/src/tools/tied-async-contract-fixtures.test.ts"

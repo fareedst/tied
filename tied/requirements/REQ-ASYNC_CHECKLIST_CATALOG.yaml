@@ -1,0 +1,45 @@
+REQ-ASYNC_CHECKLIST_CATALOG:
+  category: "Non-Functional"
+  description: "Checklist shall catalog async boundaries in a closed table per changed IMPL and flag async-specific insufficiency/contradiction with resolve-pseudocode routing before RED."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-09-10"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-09-10"
+      reason: "W2 registration"
+  name: "Async Checklist Catalog"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "async_in_scope Tracker disposition"
+      - "One closed row per async block"
+    problems_solved:
+      - "Late async contradiction discovery"
+      - "Missing async catalog rows"
+    why: "W2 makes async comprehension gating at catalog and contradiction checklist steps."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_ASYNC_METHODOLOGY"
+    related_to:
+      - "REQ-ASYNC_PSEUDOCODE_CONTRACTS"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "catalog-async-boundaries closed table with eight columns when async_in_scope"
+    - criterion: "Findings route to resolve-pseudocode before RED"
+    - criterion: "flag-async-contradictions deterministic outcomes per semantic class"
+    - criterion: "Legacy non-async checklist output unchanged"
+  status: "In Progress"
+  traceability:
+    architecture:
+      - "ARCH-ASYNC_CHECKLIST_INTEGRATION"
+    code_annotations:
+      - "REQ-ASYNC_CHECKLIST_CATALOG"
+    implementation:
+      - "IMPL-ASYNC_CHECKLIST_DISPOSITIONS"
+    tests:
+      - "mcp-server/src/checklist-async-dispositions.test.ts"
+  validation_criteria:
+    - coverage: "catalog, contradiction, async_in_scope, YAML/MD parity"
+      method: "checklist-async-dispositions tests"

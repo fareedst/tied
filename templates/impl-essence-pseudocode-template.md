@@ -42,6 +42,14 @@
   - EFFECTS: {pure | IO | Http | State | Async | DB | Exn | Random | Diverge | …}
   - TERMINATION: {total | may_diverge with justification — prefer total; required when recursion/WHILE/open wait}
   - CONTROL: {optional: env, feature flags, ordering constraints}
+  - *Optional async contract rows (v1 — omit when N/A or pre-async-contract legacy):*
+  - ASYNC_BOUNDARY: {await | send | stream | open_wait — when Async in EFFECTS or AWAIT/SEND present}
+  - TIMEOUT: {deadline → FAILURE_MODE — when REQ declares timeout}
+  - CANCELLATION: {actor → outcome; POST on cancel — when cancellable}
+  - SEQUENCING: {local order across yields — or use CONTROL: ordering}
+  - MESSAGE_CONTRACT: {delivery category; dedup/ack — for SEND/events/streams}
+  - RETRY: {count; backoff; retryable failures — when retries apply}
+  - IDEMPOTENCY: {dedup key; POST on duplicate — when retry or at-least-once delivery}
 procedure UPPER_SNAKE_NAME:
   # [IMPL-{TOKEN}] [ARCH-{TOKEN}] [REQ-{TOKEN}] How: {one-line summary}
   Contract:

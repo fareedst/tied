@@ -1,0 +1,6 @@
+# DEPRECATED — auxiliary gate input superseded by authoritative W2 Tracker.
+# Use working/REQ-TIED_ASYNC_METHODOLOGY/REQ-TIED_ASYNC_METHODOLOGY_20260910-w2.yaml
+# with working/REQ-TIED_ASYNC_METHODOLOGY/CITDP-REQ-TIED_ASYNC_METHODOLOGY.yaml for gate validation.
+superseded_by: "working/REQ-TIED_ASYNC_METHODOLOGY/REQ-TIED_ASYNC_METHODOLOGY_20260910-w2.yaml"
+superseded_at: "2026-09-10"
+note: "Prior T0/minimal sub-adversarial rationale was inconsistent with reconciled CITDP; do not use for gate input."
