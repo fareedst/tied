@@ -19,7 +19,7 @@ REQ-ASYNC_BOUNDARY_ANALYSIS:
       - "REQ-ASYNC_PSEUDOCODE_CONTRACTS"
       - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
     supersedes: []
-  status: "In Progress"
+  status: "Implemented"
   traceability:
     architecture:
       - "ARCH-ASYNC_ANALYSIS_PASS"
@@ -80,7 +80,7 @@ REQ-ASYNC_CITDP_TRIGGERS:
       - "REQ-QUALITY_ASSURANCE_EVIDENCE"
       - "REQ-TIED_ADVERSARIAL_INQUIRY"
     supersedes: []
-  status: "In Progress"
+  status: "Implemented"
   traceability:
     architecture:
       - "ARCH-ASYNC_CITDP_EVIDENCE"
@@ -111,7 +111,7 @@ REQ-ASYNC_COMPOSITION_INVENTORY:
     related_to:
       - "REQ-ASYNC_CHECKLIST_CATALOG"
     supersedes: []
-  status: "In Progress"
+  status: "Implemented"
   traceability:
     architecture:
       - "ARCH-ASYNC_COMPOSITION_BINDING"
@@ -1568,7 +1568,7 @@ REQ-PSEUDOCODE_TYPED_FLOW:
       metric: "F8 regression on fixtures and qualification Tier A/B"
     - criterion: "typed_flow true emits sections.typed_flow without schema version bump"
       metric: "pseudocode-analysis-report.v1 snapshot tests"
-  status: "In Progress"
+  status: "Implemented"
 REQ-QUALITY_ASSURANCE_EVIDENCE:
   category: "Non-Functional"
   cross_references:

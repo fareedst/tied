@@ -47,17 +47,17 @@
 | Capability matrix tri-class | Yes | `05-capability-matrix.md` |
 | Rubric + cost bands | Yes | `06-evidence-rubric-and-cost-bands.md` |
 | Grammar v1 backward compatibility respected | Yes | Bounded design optional extensions; full deferred |
-| Sponsor review | **Pending** | Sign-off below |
+| Sponsor review | **Approved** | Sign-off below (2026-09-10) |
 
 ---
 
 ## Required follow-on artifacts (if proceeding)
 
-- [ ] Separate approved **feature plan** (`plan-new-feature`) with REQ/ARCH/IMPL for bounded typed-flow pilot
-- [ ] Grammar extension spec (v1-compatible optional annotations) or explicit v2 boundary document
-- [ ] Corpus fixtures + analyzer tests (12+ labeled cases from `04-corpus`)
-- [ ] Doc updates: `pseudocode-grammar.v1.md`, writing guide, static-analysis checklist rows
-- [ ] Measured pilot report: precision/recall/unknown-rate on prototype
+- [x] Separate approved **feature plan** (`plan-new-feature`) with REQ/ARCH/IMPL for bounded typed-flow pilot — `[REQ-PSEUDOCODE_TYPED_FLOW]` shipped (`c28211f`, Phase 3 `9438d1f`)
+- [x] Grammar extension spec (v1-compatible optional annotations) or explicit v2 boundary document — `tied/docs/pseudocode-grammar.v1-typed-flow-extension.md`
+- [x] Corpus fixtures + analyzer tests (12+ labeled cases from `04-corpus`) — 28 fixtures under `mcp-server/src/analysis/fixtures/typed-flow/`
+- [x] Doc updates: `pseudocode-grammar.v1.md`, writing guide, static-analysis checklist rows — PSA-TYPED-001..004 rows; grammar extension doc
+- [x] Measured pilot report: precision/recall/unknown-rate on prototype — `working/REQ-PSEUDOCODE_TYPED_FLOW/pilot-measurement-report.md`, `phase3-measurement-report.md`
 
 **Do not proceed:** Full constraint-language investment until bounded pilot completes and unknown rate / authoring cost measured.
 
@@ -83,4 +83,6 @@
 
 ## Sponsor sign-off
 
-- Name / date / decision: _________________________
+- **Decision:** Adopt bounded typed-flow first; measured pilot complete; proceed to scoped Phase 3 typed gate errors on annotated procedures only; defer full constraint-language, grammar v2, interprocedural solver, and global production auto-enablement.
+- **Date:** 2026-09-10
+- **Evidence:** qualification harness (124 entries, 0 new gate failures), F11 annotation study (median 2.5 lines), pilot + Phase 3 measurement reports, `[REQ-PSEUDOCODE_TYPED_FLOW]` status **Implemented**.

@@ -79,7 +79,7 @@ execution_evidence:
   operator_evidence:
     integrated_pilot_template: "depth_tier: minimal\ngate_policy: advisory\nstudy_only: true\n"
     limitation: "Read-only decision study; integrated inquiry and TDD gates not required."
-    status: "study_complete_pending_sponsor_signoff"
+    status: "study_complete_sponsor_signed_off"
   request: "PSEUDOCODE-CONSTRAINT-STUDY"
 feedback_loops:
   composition_and_e2e: "Missing implementation coverage returns to the specification path before evidence is accepted."

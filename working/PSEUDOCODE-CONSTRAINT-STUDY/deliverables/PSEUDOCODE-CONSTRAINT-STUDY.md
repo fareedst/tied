@@ -104,7 +104,7 @@ See [07-go-no-go-decision-record.md](./07-go-no-go-decision-record.md).
 
 **Decision:** Bounded typed-flow first + **measured pilot** before TIED feature plan. Full constraint-language deferred.
 
-**Next step:** `plan-new-feature` for pilot scope only after sponsor sign-off.
+**Next step:** Complete — sponsor signed off 2026-09-10; `[REQ-PSEUDOCODE_TYPED_FLOW]` pilot + Phase 3 shipped. Full constraint-language remains deferred.
 
 ---
 

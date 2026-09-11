@@ -19,7 +19,7 @@ IMPL-PSEUDOCODE_TYPED_FLOW:
         name: "runTypedFlowAnalysis"
   description: "TypeScript modules pseudocode-expression-parser, pseudocode-typed-ir, pseudocode-typed-flow; parser extensions for CALL args and contract values; report section and phased MCP wiring."
   essence_pseudocode_path: "implementation-decisions/IMPL-PSEUDOCODE_TYPED_FLOW-pseudocode.md"
-  status: "In Progress"
+  status: "Active"
   testability: "unit"
   traceability:
     architecture:

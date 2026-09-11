@@ -1,6 +1,6 @@
 REQ-TIED_ASYNC_METHODOLOGY:
   category: "Non-Functional"
-  description: "TIED shall provide explicit async comprehension across REQ, ARCH, IMPL grammar, vocabulary, and structural fixtures. T0 (W0–W1) is documentation-only; checklist gating and Layer C analyzer are deferred to W2+."
+  description: "TIED shall provide explicit async comprehension across REQ, ARCH, IMPL grammar, vocabulary, checklist, CITDP triggers, Layer C analysis, composition inventory, and advisory agent preload. Waves W0–W6 are delivered through W5 binding inventory and W6 advisory preload; no race/deadlock/liveness proof claims."
   metadata:
     created:
       author: "AI Agent"
@@ -8,7 +8,7 @@ REQ-TIED_ASYNC_METHODOLOGY:
     last_updated:
       author: "AI Agent"
       date: "2026-09-10"
-      reason: "W4 close-out satisfaction criteria"
+      reason: "LEAP close-out: W5+W6 Implemented; index/detail status reconciliation"
   name: "TIED Async Methodology"
   priority: "P1"
   rationale:
@@ -34,28 +34,40 @@ REQ-TIED_ASYNC_METHODOLOGY:
     - criterion: "W2: async_in_scope disposition, catalog-async-boundaries, flag-async-contradictions wired in checklist-async-dispositions"
     - criterion: "W3: deriveAsyncCitdpTriggers, nine-row evidence matrix, ASYNC-001..006, validateAsyncCitdpActivation; async_in_scope alone never authorizes inquiry"
     - criterion: "W4: async_boundary opt-in Layer C pass with seven diagnostics, 24-fixture corpus, MCP async_boundary/async_gate_errors flags; D7 gate promotion for ASYNC_EFFECTS_WITHOUT_BOUNDARY only"
+    - criterion: "W5: binding inventory async_semantics/cancellation columns, fault patterns, legacy compatibility; evidence states binding exercised never race-free"
+    - criterion: "W6: advisory agent-preload-contract async_methodology, agentstream async highlights, scoped analysis async_diagnostic_summary; never force typed_flow on async detection alone"
     - criterion: "≥14 structural fixtures green plus legacy no-async corpus"
-  status: "In Progress"
+  status: "Implemented"
   traceability:
     architecture:
       - "ARCH-ASYNC_ANALYSIS_PASS"
+      - "ARCH-ASYNC_CHECKLIST_INTEGRATION"
       - "ARCH-ASYNC_CITDP_EVIDENCE"
+      - "ARCH-ASYNC_COMPOSITION_BINDING"
       - "ARCH-ASYNC_CONTRACT_GRAMMAR"
       - "ARCH-ASYNC_REQ_ARCH_CONTRACT"
     code_annotations:
       - "REQ-TIED_ASYNC_METHODOLOGY"
     implementation:
+      - "IMPL-ASYNC_BINDING_VALIDATOR"
       - "IMPL-ASYNC_BOUNDARY_ANALYZER"
+      - "IMPL-ASYNC_CHECKLIST_DISPOSITIONS"
       - "IMPL-ASYNC_CITDP_PROFILE_WIRING"
       - "IMPL-ASYNC_PSEUDOCODE_GRAMMAR"
       - "IMPL-ASYNC_REQ_ARCH_GUIDANCE"
       - "IMPL-ASYNC_VOCABULARY"
     tests:
+      - "mcp-server/src/analysis/binding-inventory-composition.test.ts"
+      - "mcp-server/src/analysis/binding-inventory.test.ts"
       - "mcp-server/src/analysis/pseudocode-async-boundary-corpus.test.ts"
       - "mcp-server/src/analysis/pseudocode-async-boundary.test.ts"
+      - "mcp-server/src/analysis/scoped-analysis-async-preview.test.ts"
+      - "mcp-server/src/checklist-async-dispositions.test.ts"
       - "mcp-server/src/citdp-async-triggers.test.ts"
       - "mcp-server/src/tools/pseudocode-analyze-mcp.test.ts"
+      - "mcp-server/src/tools/quality-validation-mcp.test.ts"
       - "mcp-server/src/tools/tied-async-contract-fixtures.test.ts"
+      - "tools/agentstream/checklist/async_highlight_test.go"
   validation_criteria:
     - coverage: "Proof-boundary wording in glossary and grammar"
       method: "Documentation review"

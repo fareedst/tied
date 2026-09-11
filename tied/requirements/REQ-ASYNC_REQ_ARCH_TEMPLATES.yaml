@@ -26,7 +26,7 @@ REQ-ASYNC_REQ_ARCH_TEMPLATES:
     - criterion: "architecture-decisions.md documents async architecture prompts with complete and N/A examples"
     - criterion: "detail-files-schema.md documents optional async satisfaction_criteria pattern"
     - criterion: "requirements.md documents async acceptance criteria with complete and N/A examples"
-  status: "In Progress"
+  status: "Implemented"
   traceability:
     architecture:
       - "ARCH-ASYNC_REQ_ARCH_CONTRACT"

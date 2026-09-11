@@ -31,7 +31,7 @@ REQ-ASYNC_BOUNDARY_ANALYSIS:
     - criterion: "async_gate_errors promotes only ASYNC_EFFECTS_WITHOUT_BOUNDARY per D7"
     - criterion: "Every W4 diagnostic has positive, negative, and unknown/truncated corpus coverage where applicable"
     - criterion: "Reports state structural-only proof boundary without race/deadlock claims"
-  status: "In Progress"
+  status: "Implemented"
   traceability:
     architecture:
       - "ARCH-ASYNC_ANALYSIS_PASS"

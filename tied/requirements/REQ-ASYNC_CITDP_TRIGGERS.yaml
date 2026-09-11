@@ -31,7 +31,7 @@ REQ-ASYNC_CITDP_TRIGGERS:
     - criterion: "deriveAsyncCitdpTriggers consumes async_in_scope and matched_semantic_classes from W2"
     - criterion: "Every plan § W3 trigger yields a candidate disposition row"
     - criterion: "validateAsyncCitdpActivation blocks tied_adversarial_inquiry_run without identity-bound disposition"
-  status: "In Progress"
+  status: "Implemented"
   traceability:
     architecture:
       - "ARCH-ASYNC_CITDP_EVIDENCE"

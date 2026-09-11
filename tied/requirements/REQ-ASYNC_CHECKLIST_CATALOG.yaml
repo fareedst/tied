@@ -30,7 +30,7 @@ REQ-ASYNC_CHECKLIST_CATALOG:
     - criterion: "Findings route to resolve-pseudocode before RED"
     - criterion: "flag-async-contradictions deterministic outcomes per semantic class"
     - criterion: "Legacy non-async checklist output unchanged"
-  status: "In Progress"
+  status: "Implemented"
   traceability:
     architecture:
       - "ARCH-ASYNC_CHECKLIST_INTEGRATION"

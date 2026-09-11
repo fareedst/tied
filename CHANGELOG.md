@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **LEAP close-out — REQ/IMPL status reconciliation (2026-09-10)** —
+  Promoted `[REQ-PSEUDOCODE_TYPED_FLOW]` and `[IMPL-PSEUDOCODE_TYPED_FLOW]` to
+  **Implemented** / **Active** after pilot + Phase 3 close-out. Promoted async
+  methodology stack (`[REQ-TIED_ASYNC_METHODOLOGY]`, `[REQ-ASYNC_*]` W0–W6
+  child REQs) to **Implemented**; `[IMPL-ASYNC_BINDING_VALIDATOR]` and
+  `[IMPL-ASYNC_BOUNDARY_ANALYZER]` to **Active**. Updated
+  `[REQ-TIED_ASYNC_METHODOLOGY]` satisfaction criteria for W5/W6. Formalized
+  PSEUDOCODE-CONSTRAINT-STUDY go/no-go sponsor sign-off (bounded typed-flow
+  adopted; full constraint-language deferred).
+
 ### Added
 
 - **TIED Async Methodology W5+W6 ([REQ-TIED_ASYNC_METHODOLOGY])** —

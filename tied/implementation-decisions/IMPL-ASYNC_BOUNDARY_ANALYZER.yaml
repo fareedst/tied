@@ -25,7 +25,7 @@ IMPL-ASYNC_BOUNDARY_ANALYZER:
     related_to:
       - "IMPL-ASYNC_PSEUDOCODE_GRAMMAR"
     supersedes: []
-  status: "In Progress"
+  status: "Active"
   traceability:
     architecture:
       - "ARCH-ASYNC_ANALYSIS_PASS"

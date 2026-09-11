@@ -27,7 +27,7 @@ REQ-ASYNC_PSEUDOCODE_CONTRACTS:
     - criterion: "pre-async-contract migration N/A documented for untouched legacy blocks"
     - criterion: "pseudocode-format-and-practices.md §4a defines all rows with valid and insufficient examples"
     - criterion: "≥14 structural fixtures (pos+neg per semantic class)"
-  status: "In Progress"
+  status: "Implemented"
   traceability:
     architecture:
       - "ARCH-ASYNC_CONTRACT_GRAMMAR"

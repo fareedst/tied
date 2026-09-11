@@ -28,7 +28,7 @@ REQ-ASYNC_COMPOSITION_INVENTORY:
     - criterion: "Evidence states binding exercised never system is race-free"
     - criterion: "Non-async inventories remain valid with optional columns absent"
     - criterion: "retry or at-least-once declarations require idempotency/deduplication evidence"
-  status: "In Progress"
+  status: "Implemented"
   traceability:
     architecture:
       - "ARCH-ASYNC_COMPOSITION_BINDING"

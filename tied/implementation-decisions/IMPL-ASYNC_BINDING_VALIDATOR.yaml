@@ -24,7 +24,7 @@ IMPL-ASYNC_BINDING_VALIDATOR:
       - "IMPL-QUALITY_BINDING_INVENTORY"
     related_to: []
     supersedes: []
-  status: "In Progress"
+  status: "Active"
   traceability:
     architecture:
       - "ARCH-ASYNC_COMPOSITION_BINDING"
