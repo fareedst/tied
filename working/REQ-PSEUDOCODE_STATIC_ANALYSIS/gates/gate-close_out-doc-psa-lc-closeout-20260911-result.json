@@ -1,0 +1,32 @@
+{
+  "phase": "close_out",
+  "reconcile": {
+    "ok": false,
+    "skipped": true
+  },
+  "quality_manifest": {
+    "ok": true,
+    "manifest_path": "working/REQ-PSEUDOCODE_STATIC_ANALYSIS/evidence/verification-evidence-manifest.v1.json",
+    "schema_version": "verification-evidence-manifest.v1"
+  },
+  "gate": {
+    "allowed": true,
+    "blocking": false,
+    "diagnostics": [
+      "warn_not_success",
+      "finding_unresolved"
+    ],
+    "evidence_hydrated": [
+      "evidence-provenance.json",
+      "gate-result.json",
+      "finding-ledger.jsonl"
+    ]
+  },
+  "envelope": {
+    "ok": true,
+    "path": "working/REQ-PSEUDOCODE_STATIC_ANALYSIS/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 0,
+    "advisory_gap_count": 10,
+    "diagnostics": []
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "blocking": false,
+  "diagnostics": [],
+  "policy": "advisory",
+  "proofBoundary": "human_decision",
+  "schemaVersion": "adversarial-inquiry-gate.v1",
+  "scope": [
+    "IMPL-TIED_FILES#BOOTSTRAP_TIED#bb19e2c292dde6a1"
+  ],
+  "status": "warn",
+  "verdict": "UNRELIABLE"
+}

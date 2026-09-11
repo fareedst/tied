@@ -5,6 +5,8 @@ CITDP-REQ-PSEUDOCODE_STATIC_ANALYSIS:
     follow_up_completed:
       - change_id: "DOC-PSA-PSEUDOCODE-FULL-UPDATE"
         note: "DOC-PSA-PSEUDOCODE-FULL-UPDATE: gate_mode semantics, Layer C checklist, grammar v1 docs, sub-pseudocode-static-analysis-pass wiring."
+      - change_id: "DOC-PSA-LAYER-C-CLOSEOUT"
+        note: "IMPL-TIED_FILES Layer C remediation; identity-bound inquiry doc-psa-lc-*; PSA backfill ok; envelope zero blocking gaps."
       - note: "Shared-parser migration deferred at PSA close-out; shipped under separate REQ."
         token: "REQ-PSEUDOCODE_PARSER_UNIFICATION"
     non_goals:

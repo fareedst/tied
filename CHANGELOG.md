@@ -81,8 +81,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   REQ. Integrated close-out gates: `mci-pre-20260910`, `mci-verify-20260910`,
   `mci-closeout-20260910` (advisory). Regression: 51 Node tests + agentstream
   checklist suite green; `tied_validate_consistency` ok. Demo client
-  `1789069630` documented-only (not patched). Limitation: `IMPL-TIED_FILES`
-  PSA reports unresolved-call diagnostics under gate_mode (legacy grammar).
+  `1789069630` documented-only (not patched).
+
+- **PSA Layer C close-out — IMPL-TIED_FILES remediation ([REQ-PSEUDOCODE_STATIC_ANALYSIS], DOC-PSA-LAYER-C-CLOSEOUT)** —
+  Remediated `IMPL-TIED_FILES-pseudocode.md` via procedure reorder (callees
+  before callers) and legacy CALL→RUN grammar fixes; all impl_inventory PSA
+  reports pass with `gate_mode_applied: true`. Identity-bound integrated inquiry
+  pairing: `doc-psa-lc-pre-20260911`, `doc-psa-lc-verify-20260911`,
+  `doc-psa-lc-closeout-20260911`. Envelope zero blocking gaps at close_out
+  (advisory).
 
 - **Full constraint-language + grammar v2 ([REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE])** —
   Opt-in `constraint_flow` composes after typed-flow; grammar v2 via

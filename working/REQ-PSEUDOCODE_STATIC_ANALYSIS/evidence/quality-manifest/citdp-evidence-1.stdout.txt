@@ -1,0 +1,4 @@
+
+> tied-yaml-mcp-server@1.0.0 build
+> tsc
+

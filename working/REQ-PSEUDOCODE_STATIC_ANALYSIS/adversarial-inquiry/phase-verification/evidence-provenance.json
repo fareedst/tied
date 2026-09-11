@@ -1,0 +1,20 @@
+{
+  "provenance": {
+    "block_id": "IMPL-TIED_FILES#BOOTSTRAP_TIED#bb19e2c292dde6a1",
+    "builder": "build_adversarial_inquiry_from_tied.rb",
+    "command": "tied_adversarial_inquiry_run",
+    "phase": "verification",
+    "production_path": "scripts/backfill-pseudocode-analysis.mjs",
+    "project_id": "cfd5bf6ad98024eb",
+    "request_token": "REQ-PSEUDOCODE_STATIC_ANALYSIS",
+    "run_id": "doc-psa-lc-verify-20260911",
+    "source_revision": "doc-psa-lc-closeout-20260911",
+    "test_paths": [
+      "mcp-server/src/checklist-pseudocode-gate.test.ts",
+      "mcp-server/dist/checklist-pseudocode-gate.test.js"
+    ],
+    "tied_base_path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied",
+    "tool_version": "1.0.0"
+  },
+  "schemaVersion": "adversarial-inquiry-provenance.v1"
+}

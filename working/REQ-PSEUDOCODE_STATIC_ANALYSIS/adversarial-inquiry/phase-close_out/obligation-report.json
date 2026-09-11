@@ -1,0 +1,160 @@
+{
+  "canonicalMutation": false,
+  "findings": [
+    {
+      "direction": "A",
+      "evidenceRefs": [
+        "test-path-2"
+      ],
+      "id": "0ef3b87d942a3242",
+      "kind": "reliability",
+      "message": "Evidence does not match the specified statement.",
+      "proofBoundary": "semantic_fidelity",
+      "source": {
+        "location": "mcp-server/dist/checklist-pseudocode-gate.test.js"
+      },
+      "statementId": "stmt-path-2"
+    },
+    {
+      "direction": "A",
+      "evidenceRefs": [
+        "test-path-1"
+      ],
+      "id": "1741f8eeb6360d03",
+      "kind": "reliability",
+      "message": "Evidence does not match the specified statement.",
+      "proofBoundary": "semantic_fidelity",
+      "source": {
+        "location": "mcp-server/src/checklist-pseudocode-gate.test.ts"
+      },
+      "statementId": "stmt-path-1"
+    },
+    {
+      "direction": "B",
+      "evidenceRefs": [
+        "prod-path-1"
+      ],
+      "id": "354b58def37bb985",
+      "kind": "reliability",
+      "message": "Evidence describes behavior not represented in the specification.",
+      "proofBoundary": "semantic_fidelity",
+      "source": {
+        "location": "scripts/backfill-pseudocode-analysis.mjs"
+      },
+      "statementId": "stmt-path-prod"
+    },
+    {
+      "direction": "B",
+      "id": "7efd52eb1e6610e6",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "stmt-path-1"
+    },
+    {
+      "direction": "B",
+      "id": "9e2ad7f45cc384b0",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "stmt-path-2"
+    }
+  ],
+  "graph": {
+    "edges": [
+      {
+        "from": "REQ-PSEUDOCODE_STATIC_ANALYSIS#criterion-1",
+        "kind": "criterion_constraint",
+        "to": "constraint:constraint-pseudocode_static_analysis"
+      },
+      {
+        "from": "constraint:constraint-pseudocode_static_analysis",
+        "kind": "constraint_block",
+        "to": "IMPL-TIED_FILES#BOOTSTRAP_TIED#bb19e2c292dde6a1"
+      },
+      {
+        "from": "IMPL-TIED_FILES#BOOTSTRAP_TIED#bb19e2c292dde6a1",
+        "kind": "block_evidence",
+        "to": "evidence:prod-1"
+      },
+      {
+        "from": "IMPL-TIED_FILES#BOOTSTRAP_TIED#bb19e2c292dde6a1",
+        "kind": "block_evidence",
+        "to": "evidence:test-1"
+      },
+      {
+        "from": "IMPL-TIED_FILES#BOOTSTRAP_TIED#bb19e2c292dde6a1",
+        "kind": "block_evidence",
+        "to": "evidence:test-2"
+      },
+      {
+        "from": "IMPL-TIED_FILES#BOOTSTRAP_TIED#bb19e2c292dde6a1",
+        "kind": "block_case",
+        "to": "case:CE-001"
+      },
+      {
+        "from": "IMPL-TIED_FILES#BOOTSTRAP_TIED#bb19e2c292dde6a1",
+        "kind": "block_case",
+        "to": "case:CE-002"
+      },
+      {
+        "from": "IMPL-TIED_FILES#BOOTSTRAP_TIED#bb19e2c292dde6a1",
+        "kind": "block_case",
+        "to": "case:CE-003"
+      }
+    ],
+    "nodes": [
+      {
+        "id": "case:CE-001",
+        "kind": "case"
+      },
+      {
+        "id": "case:CE-002",
+        "kind": "case"
+      },
+      {
+        "id": "case:CE-003",
+        "kind": "case"
+      },
+      {
+        "id": "constraint:constraint-pseudocode_static_analysis",
+        "kind": "constraint"
+      },
+      {
+        "id": "evidence:prod-1",
+        "kind": "evidence",
+        "revision": "doc-psa-lc-closeout-20260911"
+      },
+      {
+        "id": "evidence:test-1",
+        "kind": "evidence",
+        "revision": "doc-psa-lc-closeout-20260911"
+      },
+      {
+        "id": "evidence:test-2",
+        "kind": "evidence",
+        "revision": "doc-psa-lc-closeout-20260911"
+      },
+      {
+        "id": "IMPL-TIED_FILES#BOOTSTRAP_TIED#bb19e2c292dde6a1",
+        "kind": "block",
+        "revision": "c3efc7fa6ecee7ba"
+      },
+      {
+        "id": "REQ-PSEUDOCODE_STATIC_ANALYSIS#criterion-1",
+        "kind": "criterion",
+        "revision": "criterion-rev-pseudocode_static_analysis"
+      }
+    ],
+    "projectId": "cfd5bf6ad98024eb"
+  },
+  "projectId": "cfd5bf6ad98024eb",
+  "proofBoundaries": [
+    "semantic_fidelity"
+  ],
+  "readOnly": true,
+  "schemaVersion": "adversarial-inquiry-report.v1",
+  "scope": [
+    "IMPL-TIED_FILES#BOOTSTRAP_TIED#bb19e2c292dde6a1"
+  ]
+}

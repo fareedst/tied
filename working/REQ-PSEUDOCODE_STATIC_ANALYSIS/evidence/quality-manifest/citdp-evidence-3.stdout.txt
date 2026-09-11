@@ -1,0 +1,58 @@
+▶ VALIDATE_TRACKER REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+  ✔ blocks pending steps and generic skip dispositions (0.471833ms)
+  ✔ requires every explicitly governed step to be present (0.066167ms)
+  ✔ requires evidence, rationale, and waiver ownership by disposition (0.544833ms)
+✔ VALIDATE_TRACKER REQ-TIED_CHECKLIST_GATE_ENFORCEMENT (1.554166ms)
+▶ VALIDATE_ADVERSARIAL_CONTRACT REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+  ✔ requires the complete minimal evidence set (4.735583ms)
+✔ VALIDATE_ADVERSARIAL_CONTRACT REQ-TIED_CHECKLIST_GATE_ENFORCEMENT (4.797959ms)
+▶ VALIDATE_ACTIVATION_PAIRING REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+  ✔ rejects stale identities and accepts a complete matching pair (0.479625ms)
+  ✔ rejects cross-phase and root-projection artifact paths [Slice P] (0.204916ms)
+✔ VALIDATE_ACTIVATION_PAIRING REQ-TIED_CHECKLIST_GATE_ENFORCEMENT (0.75175ms)
+▶ VALIDATE_CHECKLIST_GATE Batch 2 Slice 1 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+  ✔ fails closed when integrated depth omits activation (0.282333ms)
+  ✔ requires auto sub-adversarial slug even when caller omits required_step_slugs (0.170541ms)
+  ✔ unions caller slugs with auto slugs and cannot subtract auto slugs (0.082667ms)
+  ✔ passes integrated verification with VolumeStats-style fixture (0.1135ms)
+  ✔ rejects the same run_id when receipt phase differs from gate phase (0.097333ms)
+  ✔ rejects verification receipt submitted as close_out activation even with citation (0.069334ms)
+  ✔ requires depth-change waiver when downgrading from integrated to minimal (0.073417ms)
+  ✔ skips downgrade diagnostic when prior_depth_tier is missing (0.049625ms)
+  ✔ requires completion_criteria.activation at verification and close_out (0.112542ms)
+  ✔ fails strict_candidate at close_out without pairing (0.046208ms)
+  ✔ allows strict_candidate at pre_implementation with counterexamples only (0.032667ms)
+  ✔ allows close_out with close-out inquiry waiver instead of pairing (0.067458ms)
+✔ VALIDATE_CHECKLIST_GATE Batch 2 Slice 1 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (1.317708ms)
+▶ VALIDATE_CHECKLIST_GATE Slice 0 hotfixes [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+  ✔ rejects placeholder close_out inquiry waiver (1787507684 shape) (0.063708ms)
+  ✔ derives expected from receipt when activation omits expected (0.865ms)
+  ✔ fails when receipt is incomplete and expected is omitted (0.072584ms)
+  ✔ fails minimal depth when sub-adversarial-inquiry-pass is pending (0.04ms)
+  ✔ fails integrated depth when parent slug is completed and sub-stub is pending (0.072ms)
+  ✔ validateIntegratedParentChildSlugs detects parent completed with pending sub-stub (0.03375ms)
+  ✔ rejects placeholder depth-change waiver on downgrade (0.030625ms)
+✔ VALIDATE_CHECKLIST_GATE Slice 0 hotfixes [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (1.241458ms)
+▶ VALIDATE_MINIMAL_WAIVER Slice A3 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+  ✔ warns when triggered minimal depth lacks integrated_waiver (0.066125ms)
+  ✔ is clean when triggered minimal depth has complete integrated_waiver (0.046459ms)
+  ✔ does not warn for non-triggered minimal depth (0.027875ms)
+  ✔ does not warn for integrated depth even when triggers are recorded (0.043916ms)
+  ✔ validateMinimalWaiver isolates advisory diagnostic semantics (0.043916ms)
+✔ VALIDATE_MINIMAL_WAIVER Slice A3 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (0.264583ms)
+▶ Go writer fixture gate composition [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+  ✔ A1 rejects sparse legacy summary without matching step rows (0.06725ms)
+  ✔ A6 passes minimal pre_implementation gate for Go writer fixture (0.582458ms)
+  ✔ A7 fails integrated writer output without activation under advisory policy (0.189875ms)
+✔ Go writer fixture gate composition [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (0.87ms)
+▶ Stage P trigger: non-agentstream unresolved evidence_refs
+  ✔ A32 trigger fires when gate accepts manual Tracker with nonexistent evidence_refs (0.03775ms)
+✔ Stage P trigger: non-agentstream unresolved evidence_refs (0.056625ms)
+ℹ tests 34
+ℹ suites 8
+ℹ pass 34
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 84.707125

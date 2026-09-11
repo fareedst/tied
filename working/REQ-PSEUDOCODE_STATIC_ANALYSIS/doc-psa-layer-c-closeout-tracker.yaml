@@ -1,0 +1,132 @@
+copy_hygiene: "DOC-PSA-LAYER-C-CLOSEOUT tracker — Phases 6–7 scoped remediation and identity-bound gate pairing."
+change_id: DOC-PSA-LAYER-C-CLOSEOUT
+request: REQ-PSEUDOCODE_STATIC_ANALYSIS
+source_plan: docs/pseudocode-static-analysis-docs-and-gate-plan.md
+status: complete
+profile:
+  depth_tier: integrated
+  gate_policy: advisory
+  research_profile: integrated-agent
+  assurance_profiles:
+    - baseline-functional
+  note: Advisory applies to inquiry findings only; PSA gate_mode and impl_inventory contract failures remain blocking.
+steps:
+  - slug: session-bootstrap
+    disposition: completed
+    evidence_refs:
+      - AGENTS.md
+      - tied/docs/ai-principles.md
+      - tied/vocab/routing.md
+      - tied/vocab/pseudocode-and-citdp.md
+      - tied/vocab/quality-assurance.md
+      - tied/vocab/fidelity-research.md
+  - slug: change-definition
+    disposition: completed
+    evidence_refs:
+      - working/REQ-PSEUDOCODE_STATIC_ANALYSIS/CITDP-doc-psa-layer-c-closeout.yaml
+  - slug: impact-discovery
+    disposition: completed
+    evidence_refs:
+      - working/REQ-PSEUDOCODE_STATIC_ANALYSIS/psa-remediation-log.yaml
+      - tied/implementation-decisions/IMPL-TIED_FILES-pseudocode.md
+  - slug: risk-assessment
+    disposition: completed
+    evidence_refs:
+      - working/REQ-PSEUDOCODE_STATIC_ANALYSIS/CITDP-doc-psa-layer-c-closeout.yaml
+      - "eligibility_triggers_matched: strict-close-out, methodology-tooling-change, persistence"
+  - slug: persist-citdp-record
+    disposition: completed
+    evidence_refs:
+      - working/REQ-PSEUDOCODE_STATIC_ANALYSIS/CITDP-doc-psa-layer-c-closeout.yaml
+  - slug: catalog-pseudocode-contracts
+    disposition: completed
+    evidence_refs:
+      - tied/implementation-decisions/IMPL-TIED_FILES-pseudocode.md
+      - tied/implementation-decisions/IMPL-QUALITY_PSEUDOCODE_VALIDATOR-pseudocode.md
+      - tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md
+  - slug: gate-pseudocode-validation
+    disposition: completed
+    evidence_refs:
+      - working/REQ-PSEUDOCODE_STATIC_ANALYSIS/pseudocode-analysis/IMPL-TIED_FILES.v1.json
+      - working/REQ-PSEUDOCODE_STATIC_ANALYSIS/pseudocode-analysis/IMPL-QUALITY_PSEUDOCODE_VALIDATOR.v1.json
+      - working/REQ-PSEUDOCODE_STATIC_ANALYSIS/pseudocode-analysis/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.v1.json
+  - slug: sub-adversarial-inquiry-pass
+    disposition: completed
+    rationale: Identity-bound inquiry pairing for DOC-PSA-LAYER-C-CLOSEOUT.
+    evidence_refs:
+      - working/REQ-PSEUDOCODE_STATIC_ANALYSIS/evidence/doc-psa-lc-inquiry-phases-result.json
+  - slug: verification-gate
+    disposition: completed
+    evidence_refs:
+      - working/REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/gate-verification-doc-psa-lc-verify-20260911-result.json
+      - mcp-server/dist/checklist-pseudocode-gate.test.js
+      - mcp-server/dist/checklist-validator.test.js
+      - mcp-server/dist/request-evidence-envelope/request-evidence-envelope.test.js
+  - slug: traceable-commit
+    disposition: completed
+    evidence_refs:
+      - CHANGELOG.md
+      - working/REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/gate-close_out-doc-psa-lc-closeout-20260911-result.json
+      - working/REQ-PSEUDOCODE_STATIC_ANALYSIS/evidence/request-evidence-envelope.v1.json
+execution_evidence:
+  request: REQ-PSEUDOCODE_STATIC_ANALYSIS
+  impl_inventory:
+    - impl_token: IMPL-TIED_FILES
+      sidecar: tied/implementation-decisions/IMPL-TIED_FILES-pseudocode.md
+      action: remediate
+    - impl_token: IMPL-QUALITY_PSEUDOCODE_VALIDATOR
+      sidecar: tied/implementation-decisions/IMPL-QUALITY_PSEUDOCODE_VALIDATOR-pseudocode.md
+      action: revalidate
+    - impl_token: IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT
+      sidecar: tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md
+      action: revalidate
+  completed:
+    - slug: gate-pseudocode-validation
+      run_id: doc-psa-lc-closeout-20260911
+    - slug: sub-adversarial-inquiry-pass
+      run_id: doc-psa-lc-closeout-20260911
+    - slug: verification-gate
+      run_id: doc-psa-lc-verify-20260911
+    - slug: traceable-commit
+      run_id: doc-psa-lc-closeout-20260911
+  close_out_evidence:
+    status: complete
+    gates:
+      pre_implementation:
+        run_id: doc-psa-lc-pre-20260911
+        allowed: true
+        evidence_ref: working/REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/gate-pre_implementation-doc-psa-lc-pre-20260911-result.json
+      verification:
+        run_id: doc-psa-lc-verify-20260911
+        allowed: true
+        evidence_ref: working/REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/gate-verification-doc-psa-lc-verify-20260911-result.json
+      close_out:
+        run_id: doc-psa-lc-closeout-20260911
+        allowed: true
+        evidence_ref: working/REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/gate-close_out-doc-psa-lc-closeout-20260911-result.json
+    master_checklist: tied/docs/agent-req-implementation-checklist.yaml
+  envelope_path: working/REQ-PSEUDOCODE_STATIC_ANALYSIS/evidence/request-evidence-envelope.v1.json
+  operator_evidence:
+    status: doc_psa_layer_c_closeout
+    pre_implementation_gate:
+      allowed: true
+      blocking: false
+      recorded_at: "2026-09-11"
+      run_id: doc-psa-lc-pre-20260911
+      evidence_ref: working/REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/gate-pre_implementation-doc-psa-lc-pre-20260911-result.json
+    verification_gate:
+      allowed: true
+      blocking: false
+      recorded_at: "2026-09-11"
+      run_id: doc-psa-lc-verify-20260911
+      evidence_ref: working/REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/gate-verification-doc-psa-lc-verify-20260911-result.json
+    close_out_gate:
+      allowed: true
+      blocking: false
+      recorded_at: "2026-09-11"
+      run_id: doc-psa-lc-closeout-20260911
+      evidence_ref: working/REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/gate-close_out-doc-psa-lc-closeout-20260911-result.json
+feedback_loops:
+  specification: Contract ambiguity returns to pseudo-code resolution before tests or code.
+  validation_and_sync: Failed PSA or gate returns to owning remediation step.
+  leap: Sidecar divergence updates IMPL first, then ARCH/REQ when scope changes.
