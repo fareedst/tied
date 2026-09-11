@@ -1,7 +1,7 @@
 {
   "schema_version": "request-evidence-envelope.v1",
   "envelope_meta": {
-    "generated_at": "2026-09-11T04:33:13.270Z",
+    "generated_at": "2026-09-11T04:57:41.555Z",
     "generator": "request_evidence_envelope_build",
     "revision": 1
   },
@@ -17,8 +17,8 @@
     {
       "kind": "checklist_gate_receipt",
       "schema_version": "checklist-gate-receipt.v1",
-      "path": "working/REQ-TIED_ASYNC_METHODOLOGY/gates/close_out-2026-09-11T04-33-04-845Z.json",
-      "content_hash": "sha256:1a3ab3f66fe41c45e2d34711f687531c098072f933d4353e23f3591143d25381",
+      "path": "working/REQ-TIED_ASYNC_METHODOLOGY/gates/close_out-w4-closeout-20260910.json",
+      "content_hash": "sha256:003bf69b4a9fa0533748663f7c1e6ea922f8e766e791e1257dbb7972d7be61aa",
       "phase": "close_out",
       "status": "present",
       "proof_boundaries": [
@@ -62,7 +62,7 @@
       "kind": "not_applicable_receipt",
       "schema_version": "not-applicable-receipt.v1",
       "path": "working/REQ-TIED_ASYNC_METHODOLOGY/evidence/not-applicable-receipt.v1.json",
-      "content_hash": "sha256:54ab50d6c2b34e13bb3ed52b128856ea744ca96bec2dc94614495c6b71cc18a5",
+      "content_hash": "sha256:a92b5c4776b09e30f8d2744a404c7ddb1a44d3311e991d3dd1b8c083fc07c4a5",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -73,7 +73,7 @@
       "kind": "request_evidence_envelope",
       "schema_version": "request-evidence-envelope.v1",
       "path": "working/REQ-TIED_ASYNC_METHODOLOGY/evidence/request-evidence-envelope.v1.json",
-      "content_hash": "sha256:2730c5e798282f1c565d8fd60c6ca8a1eabc42205f0d29322e08640c2318cbc1",
+      "content_hash": "sha256:25a855bc7309a8d4197bc0b28834d6f7a62c875d07f035cabec3cd8c304367da",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -85,6 +85,17 @@
       "schema_version": null,
       "path": "working/REQ-TIED_ASYNC_METHODOLOGY/evidence/proposed-commit-message-w3.txt",
       "content_hash": "sha256:4cebbbac99e8694c3002a397a672e12f418855e7b2b82ebba0f1445fc11ae873",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_ASYNC_METHODOLOGY/evidence/proposed-commit-message-w4.txt",
+      "content_hash": "sha256:09281e188254427bd145823b3db2e2fc5a54f32a8f80d5902c206369ccf9fb98",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -106,7 +117,7 @@
       "kind": "verification_evidence_manifest",
       "schema_version": "verification-evidence-manifest.v1",
       "path": "working/REQ-TIED_ASYNC_METHODOLOGY/evidence/verification-evidence-manifest.v1.json",
-      "content_hash": "sha256:9cf707969944c0b7004654a41d8a9e1ed879cc7a4d9c143f782f30d024a0e95a",
+      "content_hash": "sha256:8eb26164a92142dfee917068cad11b74c13248a9a97d48e7e15fd3f5ce6c306c",
       "phase": null,
       "status": "present",
       "proof_boundaries": [

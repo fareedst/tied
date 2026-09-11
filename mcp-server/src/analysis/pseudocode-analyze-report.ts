@@ -26,6 +26,10 @@ import type { PseudocodeValidationReport } from "./pseudocode-validator.js";
 import { CONSTRAINT_FLOW_PROOF_BOUNDARY_SUPPLEMENT } from "./pseudocode-constraint-language.js";
 import type { ConstraintFlowSection } from "./pseudocode-constraint-ir.js";
 import {
+  ASYNC_BOUNDARY_PROOF_BOUNDARY_SUPPLEMENT,
+  type AsyncBoundarySection,
+} from "./pseudocode-async-boundary.js";
+import {
   TYPED_FLOW_PROOF_BOUNDARY_SUPPLEMENT,
   type TypedFlowSection,
 } from "./pseudocode-typed-flow.js";
@@ -45,8 +49,16 @@ export type AnalysisReportSections = {
   traceability?: TraceabilitySection;
   structural_compat?: PseudocodeValidationReport;
   typed_flow?: TypedFlowSection;
+  async_boundary?: AsyncBoundarySection;
   constraint_language?: ConstraintFlowSection;
 };
+
+/** [IMPL-ASYNC_BOUNDARY_ANALYZER] Extend base proof boundary when async_boundary pass runs. */
+export function extendProofBoundaryForAsyncBoundary(
+  base: string = DEFAULT_PROOF_BOUNDARY,
+): string {
+  return `${base} ${ASYNC_BOUNDARY_PROOF_BOUNDARY_SUPPLEMENT}`;
+}
 
 /** [IMPL-PSEUDOCODE_TYPED_FLOW] Extend base proof boundary when typed_flow pass runs. */
 export function extendProofBoundaryForTypedFlow(

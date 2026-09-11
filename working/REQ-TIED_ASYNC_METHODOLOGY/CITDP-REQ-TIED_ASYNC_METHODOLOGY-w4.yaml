@@ -1,0 +1,134 @@
+CITDP-REQ-TIED_ASYNC_METHODOLOGY-w4:
+  change_definition:
+    current_behavior: "W3 delivers CITDP trigger wiring; pseudocode_analyze has typed-flow and constraint passes but no async_boundary Layer C pass."
+    desired_behavior: "W4 adds opt-in async_boundary static analysis with seven diagnostics, 24-fixture corpus, MCP flags, and D7 gate promotion for ASYNC_EFFECTS_WITHOUT_BOUNDARY only."
+    non_goals:
+      - "Agent preload / agentstream render (W6)"
+      - "Automatic async_boundary activation without explicit flag"
+      - "Binding inventory async columns (W5)"
+      - "Promoting AWAIT_NON_PROMISE_OUTPUT via async_gate_errors (typed-flow owns when enabled)"
+      - "Race-freedom, deadlock-freedom, or happens-before proof"
+    sponsor_decisions:
+      D5: "W4 authorized after W3 exit"
+      D7: "default warn for all async_boundary diagnostics; ASYNC_EFFECTS_WITHOUT_BOUNDARY only promotable via async_gate_errors"
+      typed_flow_phase3: "sponsor approved 2026-09-10 per working/REQ-PSEUDOCODE_TYPED_FLOW/phase3-measurement-report.md"
+    success_criteria:
+      - "24 labeled fixtures under mcp-server/src/analysis/fixtures/async-boundary/"
+      - "analyzer-off behavior unchanged when async_boundary false"
+      - "pseudocode_analyze accepts async_boundary and async_gate_errors"
+      - "REQ-ASYNC_BOUNDARY_ANALYSIS, ARCH-ASYNC_ANALYSIS_PASS, IMPL-ASYNC_BOUNDARY_ANALYZER registered"
+      - "runAsyncBoundaryAnalysis returns AsyncBoundarySection with seven diagnostic codes"
+    unchanged_behavior:
+      - "Checklist async dispositions unchanged"
+      - "Legacy pseudocode_analyze reports without async_boundary flag"
+      - "W3 CITDP trigger wiring unchanged"
+  completion_criteria:
+    close_out_gate: "allowed true at minimal depth with w4-closeout-20260910 receipt"
+    depth_reconciliation: "Gate depth minimal for W4 build; sub-adversarial-inquiry-pass not_applicable (Layer C only)"
+    envelope_path: "working/REQ-TIED_ASYNC_METHODOLOGY/evidence/request-evidence-envelope.v1.json"
+    lint_yaml: "required pass on changed project YAML"
+    pilot_artifacts: "pilot/after-w4 Layer C report sample for IMPL-GOAGENT-EXECUTOR"
+    pre_implementation_gate: "allowed true at minimal gate depth with W4 CITDP and W3 exit evidence"
+    tied_validate_consistency: "required pass"
+    verification_gate: "allowed true at minimal gate depth with async-boundary corpus test evidence"
+    w4_exit_gates:
+      - "analyzer-off behavior unchanged"
+      - "every diagnostic has pos/neg/unknown cases in corpus"
+      - "gate promotion only for ASYNC_EFFECTS_WITHOUT_BOUNDARY per D7"
+      - "no race/deadlock freedom claims"
+      - "reports state structural-only proof boundary"
+  evidence:
+    commands:
+      - "node --test dist/analysis/pseudocode-async-boundary.test.js dist/analysis/pseudocode-async-boundary-corpus.test.js"
+      - "node --test dist/tools/pseudocode-analyze-mcp.test.js"
+      - "npm run build --prefix mcp-server"
+    manifest_reference: "working/REQ-TIED_ASYNC_METHODOLOGY/evidence/request-evidence-envelope.v1.json"
+    proof_boundaries:
+      - "baseline-functional"
+      - "Layer C async pass validates declared structure and type consistency only"
+      - "structural async Layer C only"
+  impact_analysis:
+    async_in_scope: true
+    async_matched_semantic_classes:
+      - "await_sequencing"
+      - "retry_idempotency"
+      - "shared_data"
+      - "termination"
+      - "timeout"
+    files:
+      - "mcp-server/src/analysis/fixtures/async-boundary/"
+      - "mcp-server/src/analysis/pseudocode-analyze-report.ts"
+      - "mcp-server/src/analysis/pseudocode-analyzer.ts"
+      - "mcp-server/src/analysis/pseudocode-async-boundary-corpus.test.ts"
+      - "mcp-server/src/analysis/pseudocode-async-boundary.test.ts"
+      - "mcp-server/src/analysis/pseudocode-async-boundary.ts"
+      - "mcp-server/src/tools/index.ts"
+      - "mcp-server/src/tools/pseudocode-analyze-mcp.test.ts"
+      - "tied/architecture-decisions/ARCH-ASYNC_ANALYSIS_PASS.yaml"
+      - "tied/implementation-decisions/IMPL-ASYNC_BOUNDARY_ANALYZER-pseudocode.md"
+      - "tied/implementation-decisions/IMPL-ASYNC_BOUNDARY_ANALYZER.yaml"
+      - "tied/requirements/REQ-ASYNC_BOUNDARY_ANALYSIS.yaml"
+    modules:
+      - "async boundary static analysis"
+      - "pseudocode analyze MCP"
+  leap_feedback:
+    divergences_from_analysis: "none"
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    author: "AI Agent"
+    change_request_id: "REQ-TIED_ASYNC_METHODOLOGY"
+    date: "2026-09-10"
+    plan_reference: "docs/tied-async-methodology-plan.md § W4"
+    record_status: "complete"
+    title: "TIED Async Methodology W4 — Layer C async_boundary pass"
+    wave_scope: "W4"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver:
+        approval: "W4 Layer C only — sub-adversarial-inquiry-pass not_applicable"
+        expiry: "2026-12-31"
+        owner: "stdd methodology sponsor"
+        policy: "layer-c-static-analysis"
+        rationale: "W4 delivers async_boundary analyzer pass; no tied_adversarial_inquiry_run in W4 build."
+        referenced_verification_run_id: "w4-verify-20260910"
+      counterexamples:
+        - "async_boundary pass claims race-freedom or deadlock-freedom"
+        - "AWAIT_NON_PROMISE_OUTPUT duplicated when typed_flow enabled"
+        - "Gate promotion applies to non-ASYNC_EFFECTS_WITHOUT_BOUNDARY codes"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "async_gate_errors promotes only ASYNC_EFFECTS_WITHOUT_BOUNDARY per D7"
+        - "proof_boundary supplement states structural-only scope"
+        - "typed_flow deferral suppresses AWAIT_NON_PROMISE_OUTPUT in async_boundary pass"
+      eligibility_triggers_matched:
+        - "methodology-tooling-change"
+      evidence_references:
+        - "mcp-server/src/analysis/pseudocode-async-boundary-corpus.test.ts"
+        - "working/REQ-PSEUDOCODE_TYPED_FLOW/phase3-measurement-report.md"
+        - "working/REQ-TIED_ASYNC_METHODOLOGY/pilot/after-w4/"
+      falsification_questions:
+        - "Can async_gate_errors promote AWAIT_NON_PROMISE_OUTPUT in W4?"
+        - "Does async_boundary true change legacy report when flag false?"
+      gate_policy: "advisory"
+      integrated_waiver:
+        approval: "sponsor authorized W4 tranche 2026-09-10"
+        expiry: "2026-12-31"
+        owner: "stdd methodology sponsor"
+        policy: "layer-c-static-analysis"
+        rationale: "W4 is Layer C async_boundary pass at minimal depth; no integrated inquiry MCP invocation."
+      prior_depth_tier: "integrated"
+    async_gate_promotion:
+      default_severity: "warn"
+      deferral: "AWAIT_NON_PROMISE_OUTPUT deferred to typed-flow when typed_flow enabled"
+      non_promotable_in_w4:
+        - "AWAIT_NON_PROMISE_OUTPUT"
+      promotable_codes:
+        - "ASYNC_EFFECTS_WITHOUT_BOUNDARY"
+  test_strategy:
+    fixtures:
+      - "mcp-server/src/analysis/fixtures/async-boundary/fixture-manifest.json"
+    red_first:
+      - "mcp-server/src/analysis/pseudocode-async-boundary-corpus.test.ts"
+      - "mcp-server/src/analysis/pseudocode-async-boundary.test.ts"

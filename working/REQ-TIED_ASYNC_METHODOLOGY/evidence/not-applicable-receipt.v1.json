@@ -8,7 +8,7 @@
     "pre_implementation",
     "verification"
   ],
-  "reason": "Adversarial inquiry not applicable at minimal depth_tier; W2 checklist-text-only inquiry waiver; MCP activation deferred W3",
-  "generated_at": "2026-09-10T21:10:00.000Z",
-  "source": "request-evidence-envelope-backfill.v1"
+  "reason": "Adversarial inquiry not applicable at minimal depth_tier for W4 Layer C async_boundary pass; sub-adversarial-inquiry-pass not_applicable with layer-c-static-analysis waiver; async_inquiry_activated not set",
+  "generated_at": "2026-09-10T21:57:00.000Z",
+  "source": "plan-close-out-w4"
 }

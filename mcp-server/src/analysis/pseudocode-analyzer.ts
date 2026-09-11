@@ -12,6 +12,7 @@ import {
   buildParseSection,
   capDiagnostics,
   computeInputIdentity,
+  extendProofBoundaryForAsyncBoundary,
   extendProofBoundaryForConstraintFlow,
   extendProofBoundaryForTypedFlow,
   mergeBudgets,
@@ -27,6 +28,14 @@ import {
   resolveConstraintBudgets,
   runConstraintAnalysis,
 } from "./pseudocode-constraint-language.js";
+import {
+  applyAsyncGateSeverityPromotion,
+  ASYNC_GATE_ERRORS_PROOF_BOUNDARY_SUPPLEMENT,
+  asyncGateDiagnosticsToAnalysis,
+  isAsyncGateErrorsEffective,
+  runAsyncBoundaryAnalysis,
+  type AsyncBoundarySection,
+} from "./pseudocode-async-boundary.js";
 import {
   applyTypedGateSeverityPromotion,
   isTypedGateErrorsEffective,
@@ -57,6 +66,8 @@ export type AnalyzeEssencePseudocodeInput = {
   gate_mode?: boolean;
   typed_flow?: boolean;
   typed_gate_errors?: boolean;
+  async_boundary?: boolean;
+  async_gate_errors?: boolean;
   constraint_flow?: boolean;
   constraint_gate_errors?: boolean;
 };
@@ -185,6 +196,33 @@ export function analyzeEssencePseudocode(
     proofBoundary = extendProofBoundaryForTypedFlow(proofBoundary);
     if (isTypedGateErrorsEffective({ ...input, typed_flow: true })) {
       proofBoundary = `${proofBoundary} ${TYPED_GATE_ERRORS_PROOF_BOUNDARY_SUPPLEMENT}`;
+    }
+  }
+
+  let asyncSection: AsyncBoundarySection | undefined;
+  if (input.async_boundary === true) {
+    const cfg = cfgSection ?? buildCfg(program, effective).section;
+    if (!cfgSection) {
+      sections.cfg = cfg;
+      cfgSection = cfg;
+    }
+    const asyncResult = runAsyncBoundaryAnalysis(program, cfg, {
+      source: input.pseudocode,
+      typed_flow: effectiveTypedFlow,
+      gate_mode: input.gate_mode,
+      async_gate_errors: input.async_gate_errors,
+      budgets: effective,
+    });
+    asyncSection = asyncResult.section;
+    if (isAsyncGateErrorsEffective(input)) {
+      asyncSection = applyAsyncGateSeverityPromotion(asyncSection);
+      diagnostics.push(...asyncGateDiagnosticsToAnalysis(asyncSection));
+    }
+    sections.async_boundary = asyncSection;
+    proofBoundary = extendProofBoundaryForAsyncBoundary(proofBoundary);
+    unknowns.push(...asyncSection.unknowns);
+    if (isAsyncGateErrorsEffective(input)) {
+      proofBoundary = `${proofBoundary} ${ASYNC_GATE_ERRORS_PROOF_BOUNDARY_SUPPLEMENT}`;
     }
   }
 

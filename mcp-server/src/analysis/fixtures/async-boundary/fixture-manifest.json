@@ -1,0 +1,29 @@
+{
+  "proof_boundary": "Layer C async pass validates declared structure and type consistency only. It does not prove freedom from deadlock, livelock, or data races.",
+  "fixtures": [
+    { "id": "01", "file": "corpus-ab-01-async-effects-without-boundary-pos.pseudocode.md", "diagnostic": "ASYNC_EFFECTS_WITHOUT_BOUNDARY", "polarity": "positive" },
+    { "id": "02", "file": "corpus-ab-02-async-effects-with-boundary-neg.pseudocode.md", "diagnostic": "ASYNC_EFFECTS_WITHOUT_BOUNDARY", "polarity": "negative", "forbidDiagnostic": "ASYNC_EFFECTS_WITHOUT_BOUNDARY" },
+    { "id": "03", "file": "corpus-ab-03-unresolved-callee-unknown.pseudocode.md", "requireUnknown": true },
+    { "id": "04", "file": "corpus-ab-04-await-non-promise-pos.pseudocode.md", "diagnostic": "AWAIT_NON_PROMISE_OUTPUT", "polarity": "positive" },
+    { "id": "05", "file": "corpus-ab-05-await-promise-output-neg.pseudocode.md", "diagnostic": "AWAIT_NON_PROMISE_OUTPUT", "polarity": "negative", "forbidDiagnostic": "AWAIT_NON_PROMISE_OUTPUT" },
+    { "id": "06", "file": "corpus-ab-06-missing-timeout-failure-pos.pseudocode.md", "diagnostic": "MISSING_TIMEOUT_FAILURE_MODE", "polarity": "positive" },
+    { "id": "07", "file": "corpus-ab-07-timeout-failure-linked-neg.pseudocode.md", "diagnostic": "MISSING_TIMEOUT_FAILURE_MODE", "polarity": "negative", "forbidDiagnostic": "MISSING_TIMEOUT_FAILURE_MODE" },
+    { "id": "08", "file": "corpus-ab-08-no-timeout-clean.pseudocode.md", "forbidDiagnostic": "MISSING_TIMEOUT_FAILURE_MODE" },
+    { "id": "09", "file": "corpus-ab-09-sequencing-shared-data-pos.pseudocode.md", "diagnostic": "SEQUENCING_UNDEFINED_SHARED_DATA", "polarity": "positive" },
+    { "id": "10", "file": "corpus-ab-10-sequencing-declared-neg.pseudocode.md", "diagnostic": "SEQUENCING_UNDEFINED_SHARED_DATA", "polarity": "negative", "forbidDiagnostic": "SEQUENCING_UNDEFINED_SHARED_DATA" },
+    { "id": "11", "file": "corpus-ab-11-single-await-shared-unknown.pseudocode.md", "forbidDiagnostic": "SEQUENCING_UNDEFINED_SHARED_DATA", "requireUnknown": false },
+    { "id": "12", "file": "corpus-ab-12-call-across-async-pos.pseudocode.md", "diagnostic": "CALL_ACROSS_ASYNC_BOUNDARY", "polarity": "positive" },
+    { "id": "13", "file": "corpus-ab-13-call-with-await-neg.pseudocode.md", "diagnostic": "CALL_ACROSS_ASYNC_BOUNDARY", "polarity": "negative", "forbidDiagnostic": "CALL_ACROSS_ASYNC_BOUNDARY" },
+    { "id": "14", "file": "corpus-ab-14-retry-without-idempotency-pos.pseudocode.md", "diagnostic": "RETRY_WITHOUT_IDEMPOTENCY", "polarity": "positive" },
+    { "id": "15", "file": "corpus-ab-15-retry-with-idempotency-neg.pseudocode.md", "diagnostic": "RETRY_WITHOUT_IDEMPOTENCY", "polarity": "negative", "forbidDiagnostic": "RETRY_WITHOUT_IDEMPOTENCY" },
+    { "id": "16", "file": "corpus-ab-16-open-wait-pos.pseudocode.md", "diagnostic": "OPEN_WAIT_WITHOUT_TERMINATION", "polarity": "positive" },
+    { "id": "17", "file": "corpus-ab-17-termination-declared-neg.pseudocode.md", "diagnostic": "OPEN_WAIT_WITHOUT_TERMINATION", "polarity": "negative", "forbidDiagnostic": "OPEN_WAIT_WITHOUT_TERMINATION" },
+    { "id": "18", "file": "corpus-ab-18-open-wait-may-diverge-unknown.pseudocode.md", "forbidDiagnostic": "OPEN_WAIT_WITHOUT_TERMINATION" },
+    { "id": "19", "file": "corpus-ab-19-gate-async-effects-error.pseudocode.md", "diagnostic": "ASYNC_EFFECTS_WITHOUT_BOUNDARY", "gateModeError": "ASYNC_EFFECTS_WITHOUT_BOUNDARY" },
+    { "id": "20", "file": "corpus-ab-20-gate-mode-pass.pseudocode.md", "gateModePass": true },
+    { "id": "21", "file": "corpus-ab-21-send-boundary-neg.pseudocode.md", "forbidDiagnostic": "ASYNC_EFFECTS_WITHOUT_BOUNDARY" },
+    { "id": "22", "file": "corpus-ab-22-control-ordering-neg.pseudocode.md", "forbidDiagnostic": "SEQUENCING_UNDEFINED_SHARED_DATA" },
+    { "id": "23", "file": "corpus-ab-23-message-at-least-once-clean.pseudocode.md", "gateModePass": true },
+    { "id": "24", "file": "corpus-ab-24-pure-procedure-clean.pseudocode.md", "forbidAllAsyncDiagnostics": true }
+  ]
+}

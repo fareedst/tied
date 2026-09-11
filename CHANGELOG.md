@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **TIED Async Methodology W4 ([REQ-TIED_ASYNC_METHODOLOGY])** —
+  Layer C async_boundary opt-in pass with seven structural diagnostics,
+  24-fixture corpus, MCP async_boundary/async_gate_errors flags, and D7
+  gate promotion for ASYNC_EFFECTS_WITHOUT_BOUNDARY only;
+  REQ-ASYNC_BOUNDARY_ANALYSIS / ARCH-ASYNC_ANALYSIS_PASS /
+  IMPL-ASYNC_BOUNDARY_ANALYZER; pilot after-w4 Layer C summary for
+  IMPL-GOAGENT-EXECUTOR. Close-out gate (w4-closeout-20260910, advisory).
+  W5–W6 deferred.
+
 - **TIED Async Methodology W3 ([REQ-TIED_ASYNC_METHODOLOGY])** —
   CITDP candidate trigger wiring (deriveAsyncCitdpTriggers), nine-row evidence
   matrix, ASYNC-001..006 activation contract, validateAsyncCitdpActivation;

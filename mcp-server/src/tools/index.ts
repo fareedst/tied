@@ -2254,6 +2254,18 @@ export const allTools = [
           .describe(
             "When gate_mode, typed_flow, and constraint_flow are true, promote proven constraint violations on constraint-annotated procedures to error-severity gate diagnostics. Defaults to false (sub-phase 3a warnings-only).",
           ),
+        async_boundary: z
+          .boolean()
+          .optional()
+          .describe(
+            "When true, run async_boundary analysis after typed-flow and emit sections.async_boundary. Default false preserves legacy report shape.",
+          ),
+        async_gate_errors: z
+          .boolean()
+          .optional()
+          .describe(
+            "When gate_mode and async_boundary are true, promote ASYNC_EFFECTS_WITHOUT_BOUNDARY to error-severity gate diagnostics. Defaults to false; set true to fail gate on missing async boundary rationale.",
+          ),
       }),
     },
     handler: async (args: {
@@ -2270,6 +2282,8 @@ export const allTools = [
       typed_gate_errors?: boolean;
       constraint_flow?: boolean;
       constraint_gate_errors?: boolean;
+      async_boundary?: boolean;
+      async_gate_errors?: boolean;
     }) => {
       const hasInline = typeof args.pseudocode === "string" && args.pseudocode.length > 0;
       const hasPath = typeof args.essence_pseudocode_path === "string" && args.essence_pseudocode_path.length > 0;
@@ -2320,6 +2334,8 @@ export const allTools = [
         typed_gate_errors: args.typed_gate_errors,
         constraint_flow: args.constraint_flow,
         constraint_gate_errors: args.constraint_gate_errors,
+        async_boundary: args.async_boundary,
+        async_gate_errors: args.async_gate_errors,
       });
       return textContent(JSON.stringify(report, null, 2));
     },

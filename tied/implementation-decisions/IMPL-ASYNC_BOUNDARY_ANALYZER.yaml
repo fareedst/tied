@@ -1,0 +1,37 @@
+IMPL-ASYNC_BOUNDARY_ANALYZER:
+  category: "Implementation"
+  description: "Implement pseudocode-async-boundary.ts with seven diagnostic codes, isAsyncGateErrorsEffective, applyAsyncGateSeverityPromotion, and asyncGateDiagnosticsToAnalysis; integrate in pseudocode-analyzer.ts and MCP pseudocode_analyze schema."
+  essence_pseudocode_path: "tied/implementation-decisions/IMPL-ASYNC_BOUNDARY_ANALYZER-pseudocode.md"
+  implementation_approach: "TDD: RED corpus tests, module implementation, analyzer/MCP wiring, gate receipts."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-09-10"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-09-10"
+      reason: "W4 registration"
+  name: "Async Boundary Analyzer Implementation"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Static report sections for agentstream/scoped analysis preview (W6 deferred)"
+    problems_solved:
+      - "Checklist-only async contradiction detection"
+    why: "Layer C enforcement for async contract rows introduced in W1."
+  related_decisions:
+    depends_on:
+      - "IMPL-PSEUDOCODE_ANALYSIS_ENGINE"
+    related_to:
+      - "IMPL-ASYNC_PSEUDOCODE_GRAMMAR"
+    supersedes: []
+  status: "In Progress"
+  traceability:
+    architecture:
+      - "ARCH-ASYNC_ANALYSIS_PASS"
+    code_annotations:
+      - "IMPL-ASYNC_BOUNDARY_ANALYZER"
+    requirements:
+      - "REQ-ASYNC_BOUNDARY_ANALYSIS"
+    tests:
+      - "mcp-server/src/analysis/pseudocode-async-boundary-corpus.test.ts"

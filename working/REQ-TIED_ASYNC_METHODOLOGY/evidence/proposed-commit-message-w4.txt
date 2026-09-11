@@ -1,0 +1,17 @@
+feat(tied): add async methodology W4 async_boundary pass
+
+Add opt-in Layer C async_boundary static analysis with seven structural
+diagnostics, 24-fixture corpus, MCP async_boundary/async_gate_errors flags,
+and D7 gate promotion for ASYNC_EFFECTS_WITHOUT_BOUNDARY only. Analyzer-off
+behavior unchanged when async_boundary false; typed-flow deferral suppresses
+AWAIT_NON_PROMISE_OUTPUT duplication.
+
+Proof boundary: structural async Layer C only; no race/deadlock/liveness
+proof. Gate depth minimal with integrated waiver; sub-adversarial-inquiry-pass
+not_applicable (layer-c-static-analysis). W5–W6 deferred.
+
+REQ-TIED_ASYNC_METHODOLOGY REQ-ASYNC_BOUNDARY_ANALYSIS
+ARCH-ASYNC_ANALYSIS_PASS IMPL-ASYNC_BOUNDARY_ANALYZER
+
+Close-out: w4-closeout-20260910; envelope zero blocking gaps (advisory).
+Tests: 57/57 async-boundary unit + corpus + pseudocode_analyze MCP.

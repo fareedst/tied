@@ -1,0 +1,208 @@
+async_in_scope: true
+async_matched_semantic_classes:
+  - await_sequencing
+  - retry_idempotency
+  - shared_data
+  - termination
+  - timeout
+copy_hygiene: W4 tracker; evidence_refs use real file paths; W3 exit gate satisfied as entry prerequisite.
+execution_evidence:
+  close_out_evidence:
+    date: "2026-09-10"
+    deferred:
+      - git commit deferred to parent per plan-close-out skill
+    gates:
+      close_out:
+        allowed: true
+        receipt_path: "working/REQ-TIED_ASYNC_METHODOLOGY/gates/close_out-w4-closeout-20260910.json"
+        run_id: "w4-closeout-20260910"
+    master_checklist: tied/docs/agent-req-implementation-checklist.yaml
+  completed:
+    - author-architecture
+    - author-requirement
+    - change-definition
+    - gate-pseudocode-validation
+    - gitignore-close-out-hygiene
+    - impact-discovery
+    - persist-citdp-record
+    - persist-implementation-records
+    - risk-assessment
+    - session-bootstrap
+    - sub-close-out-evidence-sync
+    - sync-tied-stack
+    - test-strategy
+    - three-way-alignment-unit
+    - traceable-commit
+    - unit-test-green
+    - unit-test-red
+    - verification-gate
+  envelope_path: working/REQ-TIED_ASYNC_METHODOLOGY/evidence/request-evidence-envelope.v1.json
+  operator_evidence:
+    depth_tier: minimal
+    gate_policy: advisory
+    inquiry_waiver:
+      approval: W4 Layer C only — sub-adversarial-inquiry-pass not_applicable
+      policy: layer-c-static-analysis
+      rationale: W4 delivers async_boundary analyzer pass; no adversarial inquiry MCP invocation.
+    prior_depth_tier: integrated
+    status: verification_complete
+    typed_flow_phase3_evidence: working/REQ-PSEUDOCODE_TYPED_FLOW/phase3-measurement-report.md
+  request: REQ-TIED_ASYNC_METHODOLOGY
+steps:
+  - disposition: completed
+    evidence_refs:
+      - AGENTS.md
+      - tied/vocab/async-methodology.md
+      - tied/vocab/prompt-composer.md
+      - tied/vocab/quality-assurance.md
+      - tied/vocab/routing.md
+    slug: session-bootstrap
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - docs/tied-async-methodology-plan.md
+      - working/REQ-PSEUDOCODE_TYPED_FLOW/phase3-measurement-report.md
+      - working/REQ-TIED_ASYNC_METHODOLOGY/CITDP-REQ-TIED_ASYNC_METHODOLOGY-w4.yaml
+    slug: change-definition
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - mcp-server/src/analysis/pseudocode-async-boundary.ts
+      - tied/vocab/async-methodology.md
+    slug: impact-discovery
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - tied/requirements/REQ-ASYNC_BOUNDARY_ANALYSIS.yaml
+    slug: author-requirement
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - tied/architecture-decisions/ARCH-ASYNC_ANALYSIS_PASS.yaml
+    slug: author-architecture
+    tracking:
+      status: completed
+  - disposition: not_applicable
+    evidence_refs:
+      - working/REQ-TIED_ASYNC_METHODOLOGY/CITDP-REQ-TIED_ASYNC_METHODOLOGY-w4.yaml
+    policy: layer-c-static-analysis
+    rationale: W4 is Layer C analyzer pass; no tied_adversarial_inquiry_run.
+    slug: sub-adversarial-inquiry-pass
+    tracking:
+      status: not_applicable
+  - disposition: completed
+    evidence_refs:
+      - tied/implementation-decisions/IMPL-ASYNC_BOUNDARY_ANALYZER-pseudocode.md
+    slug: gate-pseudocode-validation
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - tied/implementation-decisions/IMPL-ASYNC_BOUNDARY_ANALYZER-pseudocode.md
+      - tied/implementation-decisions/IMPL-ASYNC_BOUNDARY_ANALYZER.yaml
+    slug: persist-implementation-records
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - mcp-server/src/analysis/fixtures/async-boundary/fixture-manifest.json
+      - mcp-server/src/analysis/pseudocode-async-boundary-corpus.test.ts
+    slug: test-strategy
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - mcp-server/src/analysis/pseudocode-async-boundary-corpus.test.ts
+    slug: unit-test-red
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - mcp-server/src/analysis/pseudocode-async-boundary-corpus.test.ts
+      - mcp-server/src/analysis/pseudocode-async-boundary.test.ts
+    slug: unit-test-green
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - mcp-server/src/analysis/pseudocode-async-boundary.ts
+      - tied/implementation-decisions/IMPL-ASYNC_BOUNDARY_ANALYZER-pseudocode.md
+    slug: three-way-alignment-unit
+    tracking:
+      status: completed
+  - disposition: not_applicable
+    policy: w4-no-composition-scope
+    rationale: W4 delivers Layer C analyzer only; composition binding inventory deferred to W5.
+    slug: composition-integration
+    tracking:
+      status: not_applicable
+  - disposition: completed
+    evidence_refs:
+      - mcp-server/src/analysis/pseudocode-async-boundary-corpus.test.ts
+      - mcp-server/src/tools/pseudocode-analyze-mcp.test.ts
+    slug: verification-gate
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - tied/architecture-decisions/ARCH-ASYNC_ANALYSIS_PASS.yaml
+      - tied/implementation-decisions/IMPL-ASYNC_BOUNDARY_ANALYZER.yaml
+      - tied/requirements/REQ-ASYNC_BOUNDARY_ANALYSIS.yaml
+    slug: sync-tied-stack
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_ASYNC_METHODOLOGY/CITDP-REQ-TIED_ASYNC_METHODOLOGY-w4.yaml
+    slug: persist-citdp-record
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - tools/bundled-prompt-type-skills/prompt-shared/gitignore-close-out-hygiene.md
+    policy: >-
+      N/A — W4 deliverables are track artifacts; gates/ covered by .gitignore:42; exclude unrelated adversarial fixture
+      envelopes
+    slug: gitignore-close-out-hygiene
+    tracking:
+      status: completed
+      evidence_refs:
+        - tools/bundled-prompt-type-skills/prompt-shared/gitignore-close-out-hygiene.md
+  - disposition: completed
+    evidence_refs:
+      - tools/bootstrap/templates/sync-tracker-dispositions.mjs
+      - tools/bootstrap/templates/run-close-out-gates.mjs
+      - working/REQ-TIED_ASYNC_METHODOLOGY/evidence/request-evidence-envelope.v1.json
+      - working/REQ-TIED_ASYNC_METHODOLOGY/evidence/verification-evidence-manifest.v1.json
+    slug: sub-close-out-evidence-sync
+    tracking:
+      status: completed
+      evidence_refs:
+        - working/REQ-TIED_ASYNC_METHODOLOGY/evidence/request-evidence-envelope.v1.json
+        - working/REQ-TIED_ASYNC_METHODOLOGY/evidence/verification-evidence-manifest.v1.json
+  - disposition: completed
+    evidence_refs:
+      - CHANGELOG.md
+      - working/REQ-TIED_ASYNC_METHODOLOGY/evidence/proposed-commit-message-w4.txt
+    policy:
+      commit_deferred: true
+      rationale: plan-close-out prepares commit; parent stages after gate handoff
+      skill: plan-close-out
+    slug: traceable-commit
+    tracking:
+      status: completed
+      evidence_refs:
+        - CHANGELOG.md
+        - working/REQ-TIED_ASYNC_METHODOLOGY/evidence/proposed-commit-message-w4.txt
+  - slug: risk-assessment
+    tracking:
+      status: completed
+      evidence_refs: &ref_0
+        - working/REQ-TIED_ASYNC_METHODOLOGY/CITDP-REQ-TIED_ASYNC_METHODOLOGY-w4.yaml
+    disposition: completed
+    evidence_refs: *ref_0
+wave_scope: W4

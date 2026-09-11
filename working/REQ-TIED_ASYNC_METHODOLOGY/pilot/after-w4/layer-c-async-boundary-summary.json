@@ -1,0 +1,7 @@
+{
+  "ok": true,
+  "proof_boundary": "Deterministic static analysis of essence_pseudocode within declared grammar and budgets; not runtime execution, not test execution, not complete behavioral verification. Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification. Layer C async pass validates declared structure and type consistency only. It does not prove freedom from deadlock, livelock, or data races.",
+  "async_diagnostics": [],
+  "async_unknowns": 0,
+  "procedures_analyzed": 1
+}

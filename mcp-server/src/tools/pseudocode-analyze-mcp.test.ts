@@ -4,7 +4,10 @@ import os from "node:os";
 import path from "node:path";
 import { describe, it } from "node:test";
 import { DEFAULT_PROOF_BOUNDARY } from "../analysis/pseudocode-ir.js";
-import { extendProofBoundaryForTypedFlow } from "../analysis/pseudocode-analyze-report.js";
+import {
+  extendProofBoundaryForAsyncBoundary,
+  extendProofBoundaryForTypedFlow,
+} from "../analysis/pseudocode-analyze-report.js";
 import { allTools } from "./index.js";
 
 type TextContent = { content: Array<{ type: "text"; text: string }> };
@@ -196,6 +199,86 @@ describe("pseudocode_analyze MCP [REQ-PSEUDOCODE_STATIC_ANALYSIS]", () => {
     assert.equal(promoted.ok, false);
     const diagnostics = promoted.diagnostics as Array<{ code: string; severity: string }>;
     assert.ok(diagnostics.some((d) => d.code === "REFINEMENT_VIOLATION" && d.severity === "error"));
+  });
+
+  it("propagates async_boundary flag and emits sections.async_boundary when true", async () => {
+    // [IMPL-ASYNC_BOUNDARY_ANALYZER] [ARCH-ASYNC_ANALYSIS_PASS] [REQ-ASYNC_BOUNDARY_ANALYSIS]
+    const source = `# [IMPL-ASYNC_BOUNDARY_ANALYZER]
+procedure FIXTURE:
+  Contract:
+    INPUT: x
+    OUTPUT: y
+    PRE: true
+    POST: true
+    EFFECTS: Async
+  RETURN y`;
+    const legacy = body(await handler("pseudocode_analyze")({
+      token: "IMPL-ASYNC_BOUNDARY_ANALYZER",
+      pseudocode: source,
+      async_boundary: false,
+    }));
+    const asyncReport = body(await handler("pseudocode_analyze")({
+      token: "IMPL-ASYNC_BOUNDARY_ANALYZER",
+      pseudocode: source,
+      async_boundary: true,
+    }));
+    assert.equal((legacy.sections as Record<string, unknown> | undefined)?.async_boundary, undefined);
+    assert.ok((asyncReport.sections as Record<string, unknown>).async_boundary);
+    assert.equal(asyncReport.proof_boundary, extendProofBoundaryForAsyncBoundary(DEFAULT_PROOF_BOUNDARY));
+  });
+
+  it("propagates async_gate_errors and fails gate on ASYNC_EFFECTS_WITHOUT_BOUNDARY", async () => {
+    // [IMPL-ASYNC_BOUNDARY_ANALYZER] [ARCH-ASYNC_ANALYSIS_PASS] [REQ-ASYNC_BOUNDARY_ANALYSIS]
+    const source = `# [IMPL-ASYNC_BOUNDARY_ANALYZER]
+procedure FIXTURE:
+  Contract:
+    INPUT: x
+    OUTPUT: y
+    PRE: true
+    POST: true
+    EFFECTS: Async
+  RETURN y`;
+    const promoted = body(await handler("pseudocode_analyze")({
+      token: "IMPL-ASYNC_BOUNDARY_ANALYZER",
+      pseudocode: source,
+      async_boundary: true,
+      gate_mode: true,
+      async_gate_errors: true,
+    }));
+    assert.equal(promoted.ok, false);
+    const diagnostics = promoted.diagnostics as Array<{ code: string; severity: string }>;
+    assert.ok(
+      diagnostics.some(
+        (d) => d.code === "ASYNC_EFFECTS_WITHOUT_BOUNDARY" && d.severity === "error",
+      ),
+    );
+  });
+
+  it("async_boundary composes with typed_flow without duplicating AWAIT_NON_PROMISE_OUTPUT", async () => {
+    // [IMPL-ASYNC_BOUNDARY_ANALYZER] [REQ-ASYNC_BOUNDARY_ANALYSIS] [REQ-PSEUDOCODE_TYPED_FLOW]
+    const source = `# [IMPL-ASYNC_BOUNDARY_ANALYZER]
+procedure FIXTURE:
+  Contract:
+    INPUT: x
+    OUTPUT: y: int
+    PRE: true
+    POST: true
+    EFFECTS: Async
+    ASYNC_BOUNDARY: await
+  AWAIT step_one`;
+    const report = body(await handler("pseudocode_analyze")({
+      token: "IMPL-ASYNC_BOUNDARY_ANALYZER",
+      pseudocode: source,
+      typed_flow: true,
+      async_boundary: true,
+    }));
+    const asyncSection = (report.sections as { async_boundary?: { diagnostics: Array<{ code: string }> } })
+      .async_boundary;
+    assert.ok(asyncSection);
+    assert.equal(
+      asyncSection!.diagnostics.some((d) => d.code === "AWAIT_NON_PROMISE_OUTPUT"),
+      false,
+    );
   });
 
   it("typed_flow true does not mutate project TIED YAML", async () => {

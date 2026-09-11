@@ -1,3 +1,36 @@
+REQ-ASYNC_BOUNDARY_ANALYSIS:
+  category: "Non-Functional"
+  detail_file: "requirements/REQ-ASYNC_BOUNDARY_ANALYSIS.yaml"
+  name: "Async Boundary Static Analysis"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "D7 gate promotion for ASYNC_EFFECTS_WITHOUT_BOUNDARY only"
+      - "Opt-in async_boundary pass with labeled corpus"
+    problems_solved:
+      - "Missing static async contract checks in pseudocode_analyze"
+      - "Undetected Async EFFECTS without boundary"
+    why: "W4 Layer C must catch structural async contract mismatches before RED tests without claiming concurrency proofs."
+  related_requirements:
+    depends_on:
+      - "REQ-PSEUDOCODE_TYPED_FLOW"
+      - "REQ-TIED_ASYNC_METHODOLOGY"
+    related_to:
+      - "REQ-ASYNC_PSEUDOCODE_CONTRACTS"
+      - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+    supersedes: []
+  status: "In Progress"
+  traceability:
+    architecture:
+      - "ARCH-ASYNC_ANALYSIS_PASS"
+    code_annotations:
+      - "REQ-ASYNC_BOUNDARY_ANALYSIS"
+    implementation:
+      - "IMPL-ASYNC_BOUNDARY_ANALYZER"
+    tests:
+      - "mcp-server/src/analysis/pseudocode-async-boundary-corpus.test.ts"
+      - "mcp-server/src/analysis/pseudocode-async-boundary.test.ts"
+      - "mcp-server/src/tools/pseudocode-analyze-mcp.test.ts"
 REQ-ASYNC_CHECKLIST_CATALOG:
   category: "Non-Functional"
   detail_file: "requirements/REQ-ASYNC_CHECKLIST_CATALOG.yaml"

@@ -1,3 +1,31 @@
+ARCH-ASYNC_ANALYSIS_PASS:
+  category: "Architecture"
+  detail_file: "architecture-decisions/ARCH-ASYNC_ANALYSIS_PASS.yaml"
+  name: "Async Analysis Pass Architecture"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Deterministic sections.async_boundary schema"
+      - "Explicit D7 gate promotion boundary"
+    problems_solved:
+      - "Unspecified async Layer C placement"
+    why: "W4 requires an opt-in analyzer pass slot after typed-flow with proof-boundary extension and gate_mode composition."
+  related_decisions:
+    depends_on:
+      - "ARCH-PSEUDOCODE_ANALYSIS_PIPELINE"
+    related_to:
+      - "ARCH-PSEUDOCODE_TYPED_FLOW_PASS"
+    supersedes: []
+  status: "In Progress"
+  traceability:
+    code_annotations:
+      - "ARCH-ASYNC_ANALYSIS_PASS"
+    implementation:
+      - "IMPL-ASYNC_BOUNDARY_ANALYZER"
+    requirements:
+      - "REQ-ASYNC_BOUNDARY_ANALYSIS"
+    tests:
+      - "mcp-server/src/analysis/pseudocode-analyzer.test.ts"
 ARCH-ASYNC_CHECKLIST_INTEGRATION:
   cross_references:
     - "REQ-ASYNC_CHECKLIST_CATALOG"
