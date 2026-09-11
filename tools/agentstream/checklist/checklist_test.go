@@ -457,7 +457,7 @@ func TestCanonicalChecklist_adversarialInquiryStepTaskCoverage(t *testing.T) {
 		{slug: "unit-test-red", markers: []string{"expected failure reason"}},
 		{slug: "unit-test-green", markers: []string{"bidirectional"}},
 		{slug: "three-way-alignment-unit", markers: []string{"bidirectional"}},
-		{slug: "traceable-commit", markers: []string{"evidence provenance", "finding count"}},
+		{slug: "traceable-commit", markers: []string{"evidence provenance", "finding count", "sub-close-out-evidence-sync", "completion signals"}},
 		{slug: "persist-citdp-record", markers: []string{"calibrate_pilot"}},
 	}
 	for _, tc := range cases {

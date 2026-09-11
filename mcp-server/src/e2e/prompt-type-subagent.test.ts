@@ -213,7 +213,9 @@ describe("prompt-type Task subagents [REQ-PROMPT_TYPE_SUBAGENT]", () => {
       assert.match(body, /CHANGELOG/);
       assert.match(body, /tied_validate_consistency/i);
       assert.match(body, /verification-gate/i);
+      assert.match(body, /completion signals/i, `${promptType} must separate completion signals in handoff`);
     }
+    assert.match(readAgent("build-plan").body, /completion signals/i, "build-plan must document completion signals in handoff");
     assert.match(readAgent("ammend-commit").body, /git commit --amend/);
 
     for (const promptType of NON_TIED_LEAVES) {

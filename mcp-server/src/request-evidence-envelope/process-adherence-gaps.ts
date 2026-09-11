@@ -32,6 +32,13 @@ const MANIFEST_TRIGGER_SLUGS = new Set([
   "composition-integration",
 ]);
 
+const PSA_TRIGGER_SLUGS = new Set([
+  "gate-pseudocode-validation",
+  "verification-gate",
+]);
+
+const IMPL_TOKEN_RE = /^IMPL-[A-Z0-9][A-Z0-9_-]*$/u;
+
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
@@ -132,6 +139,62 @@ export function detectDualWriteGaps(tracker: Record<string, unknown>): EnvelopeG
   }
 
   return gaps;
+}
+
+function extractImplInventoryTokens(tracker: Record<string, unknown>): string[] {
+  const tokens = new Set<string>();
+  const executionEvidence = isRecord(tracker.execution_evidence) ? tracker.execution_evidence : null;
+  const inventory = executionEvidence?.impl_inventory;
+  if (!Array.isArray(inventory)) return [];
+  for (const item of inventory) {
+    if (typeof item === "string" && IMPL_TOKEN_RE.test(item)) {
+      tokens.add(item);
+      continue;
+    }
+    if (isRecord(item)) {
+      const token = getString(item, "impl_token", "token", "impl");
+      if (token && IMPL_TOKEN_RE.test(token)) tokens.add(token);
+    }
+  }
+  return [...tokens];
+}
+
+function pseudocodeAnalysisReportTokens(artifacts: EnvelopeArtifact[]): Set<string> {
+  const tokens = new Set<string>();
+  for (const artifact of artifacts) {
+    if (artifact.kind !== "pseudocode_analysis_report") continue;
+    const base = path.basename(artifact.path);
+    const implToken = base.replace(/\.v1\.json$/u, "");
+    if (IMPL_TOKEN_RE.test(implToken)) tokens.add(implToken);
+  }
+  return tokens;
+}
+
+/** Wave 6: expect Layer C PSA reports when IMPL inventory is non-empty and PSA gates ran. */
+export function detectPsaExpectationGaps(
+  tracker: Record<string, unknown>,
+  artifacts: EnvelopeArtifact[],
+  depthTier: string,
+): EnvelopeGap[] {
+  const implTokens = extractImplInventoryTokens(tracker);
+  if (implTokens.length === 0) return [];
+
+  const completed = extractCompletedSlugs(tracker);
+  const psaSlugCompleted = completed.some((slug) => PSA_TRIGGER_SLUGS.has(slug));
+  const integratedDepth = depthTier === "integrated" || depthTier === "strict_candidate";
+  if (!psaSlugCompleted && !integratedDepth) return [];
+
+  const present = pseudocodeAnalysisReportTokens(artifacts);
+  const missing = implTokens.filter((token) => !present.has(token));
+  if (missing.length === 0) return [];
+
+  return [
+    processGap(
+      "expected_artifact_missing",
+      `IMPL inventory requires pseudocode-analysis reports for: ${missing.join(", ")}`,
+      { artifact_kind: "pseudocode_analysis_report", source: "psa-expectation" },
+    ),
+  ];
 }
 
 /** W5-D2: expect verification manifest when test/verification slugs are completed. */
@@ -294,6 +357,7 @@ export async function detectProcessAdherenceGaps(
   const gaps: EnvelopeGap[] = [
     ...detectDualWriteGaps(input.tracker),
     ...detectManifestExpectationGaps(input.tracker, input.artifacts),
+    ...detectPsaExpectationGaps(input.tracker, input.artifacts, input.depthTier),
     ...(await detectGateHashDriftGaps(input.projectRoot, input.requestToken, input.currentTrackerHash)),
     ...(await detectThinLedgerGaps(input.projectRoot, input.requestToken, input.tracker)),
   ];

@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Wave 7 — Conversation adherence measurement and operator adoption ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  W7-D1 transcript scoring CLI (`scripts/conversation-adherence-score.mjs`) with seven
+  dimension rubric and fixture corpus; W7-D2 operator backfill script
+  (`scripts/backfill-client-envelopes.mjs`); W7-D3 evaluation corpus
+  `require_envelope` adoption; W7-D4 agentstream `--enforce-envelope` warn/enforce pilot
+  at traceable-commit; W7-D5 PSA gate hydration when envelope reports
+  `expected_artifact_missing`. Integrated depth inquiry (advisory); verification gate
+  `wave7-verification-20260911` allowed; close-out reuses Wave 5 inquiry activation
+  (`wave5-closeout-20260910`). Docs: `docs/evidence-collection-conversation-patterns.md`,
+  `tied/docs/conversation-analysis-tools.md`.
+
 ### Changed
 
 - **LEAP close-out — REQ/IMPL status reconciliation (2026-09-10)** —

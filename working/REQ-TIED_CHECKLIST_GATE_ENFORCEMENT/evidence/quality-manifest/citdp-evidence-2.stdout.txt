@@ -1,16 +1,16 @@
-▶ request evidence envelope [REQ-REQUEST_EVIDENCE_ENVELOPE]
-  ✔ rejects invalid envelope schema (0.706417ms)
-  ✔ W1-D3 fail_on_error_gaps blocks when severity:error gaps present (5.346542ms)
-  ✔ rejects forbidden maturity score fields (0.09925ms)
-  ✔ maps corpus-manifest inventory strings to envelope gap codes (A1-A18 subset) (0.555916ms)
-  ✔ classifies fixture snapshots and flags root projection stale (17.842041ms)
-  ✔ produces byte-stable envelope for same inputs (14.504208ms)
-  ✔ fails closed on WrongTiedBasePath (2.691042ms)
-  ✔ W4-D1 omits provenance_incomplete:schema_version for root wrapper fixtures (1.87825ms)
-  ✔ W4-D4 reports expected_artifact_missing for integrated depth without profile (0.910167ms)
-  ✔ W2-D4 discovers pseudocode_analysis_report with pseudocode_gate_only boundary (1.622709ms)
-  ✔ optional integration: readonly scan of external 1787603099 fixture (10.212458ms)
-✔ request evidence envelope [REQ-REQUEST_EVIDENCE_ENVELOPE] (57.186959ms)
+▶ process-adherence gaps [REQ-REQUEST_EVIDENCE_ENVELOPE] Wave 5
+  ✔ W5-D1 dual-write detection emits tracker_dual_write with severity warn (0.537166ms)
+  ✔ W5-D1 dual-write cleared after disposition sync (0.048917ms)
+  ✔ W5-D2 manifest expectation when verification-gate completed without manifest (0.058417ms)
+  ✔ Wave 6 PSA expectation when gate-pseudocode-validation completed without reports (0.125958ms)
+  ✔ Wave 6 PSA expectation clean when reports present for inventory (0.086375ms)
+  ✔ Wave 6 PSA expectation skipped at minimal depth without PSA slug completed (0.03575ms)
+  ✔ W5-D2 manifest expectation clean when manifest artifact present (0.041917ms)
+  ✔ W5-D3 hash drift emits evidence_stale (12.306291ms)
+  ✔ W5-D4 fail_on_process_gaps blocks validate while default passes (0.275792ms)
+  ✔ dedupes duplicate checklist gate receipts per phase (prefers wave5 alias) (2.714625ms)
+  ✔ integration: dual-write fixture tracker builds envelope gaps (2.000208ms)
+✔ process-adherence gaps [REQ-REQUEST_EVIDENCE_ENVELOPE] Wave 5 (18.859542ms)
 ℹ tests 11
 ℹ suites 1
 ℹ pass 11
@@ -18,4 +18,4 @@
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 135.828541
+ℹ duration_ms 87.326042

@@ -20,10 +20,12 @@
    `request_evidence_envelope_validate` with `fail_on_error_gaps: true` on
    `working/{REQ-TOKEN}/evidence/request-evidence-envelope.v1.json`, or use
    `tools/bootstrap/templates/run-close-out-gates.mjs --envelope-blocking`.
-   Process-strict sponsors may add `--fail-on-process-gaps`. Completion requires
-   gate `allowed: true` **and** zero blocking envelope error gaps; process gaps
-   remain visible as warn-severity unless process-strict. If either check fails,
-   label the work **incomplete** — do not claim completion.
+   At integrated depth, `--envelope-blocking` also applies process-strict validate
+   (Wave 6). Completion requires gate `allowed: true` **and** zero blocking
+   envelope gaps (structural errors always; process warn gaps at integrated
+   close-out). Return the three completion signals per
+   [completion-signals-handoff.md](completion-signals-handoff.md). If either
+   check fails, label the work **incomplete** — do not claim completion.
 
 ## Prologue (standard close-out / diff-promote)
 

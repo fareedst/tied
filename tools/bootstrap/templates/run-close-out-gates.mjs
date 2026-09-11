@@ -221,6 +221,9 @@ async function main() {
   let tracker = yaml.load(readFileSync(trackerAbsolute, "utf8"));
   const citdp = args.citdpPath ? loadCitdpRecord(args.citdpPath, args.projectRoot) : {};
   const depth = citdp?.risk_analysis?.adversarial_inquiry?.depth_tier ?? "integrated";
+  const integratedDepth = depth === "integrated" || depth === "strict_candidate";
+  const failOnProcessGaps = args.failOnProcessGaps
+    || (args.envelopeBlocking && integratedDepth);
   const requiredStepSlugs = validator.derivePhaseAwareSlugs(depth, args.phase);
 
   let reconcileResult = { ok: false, skipped: true };
@@ -304,7 +307,7 @@ async function main() {
     envelopeValidation = await envelopeValidate.validateRequestEvidenceEnvelope({
       envelope: buildResult.envelope,
       fail_on_error_gaps: args.envelopeBlocking,
-      fail_on_process_gaps: args.failOnProcessGaps,
+      fail_on_process_gaps: failOnProcessGaps,
     });
   }
 

@@ -8,6 +8,7 @@ import { buildRequestEvidenceEnvelope } from "./build.js";
 import {
   detectDualWriteGaps,
   detectManifestExpectationGaps,
+  detectPsaExpectationGaps,
   extractCompletedSlugs,
 } from "./process-adherence-gaps.js";
 import type { EnvelopeArtifact } from "./types.js";
@@ -68,6 +69,50 @@ describe("process-adherence gaps [REQ-REQUEST_EVIDENCE_ENVELOPE] Wave 5", () => 
     const gaps = detectManifestExpectationGaps(tracker, []);
     assert.ok(gaps.some((gap) => gap.code === "expected_artifact_missing"));
     assert.equal(gaps[0]?.severity, "warn");
+  });
+
+  it("Wave 6 PSA expectation when gate-pseudocode-validation completed without reports", () => {
+    const tracker = {
+      execution_evidence: {
+        completed: ["gate-pseudocode-validation"],
+        impl_inventory: ["IMPL-EXAMPLE_A", "IMPL-EXAMPLE_B"],
+      },
+    };
+    const gaps = detectPsaExpectationGaps(tracker, [], "integrated");
+    assert.ok(gaps.some((gap) => gap.code === "expected_artifact_missing"));
+    assert.equal(gaps[0]?.artifact_kind, "pseudocode_analysis_report");
+    assert.equal(gaps[0]?.severity, "warn");
+  });
+
+  it("Wave 6 PSA expectation clean when reports present for inventory", () => {
+    const tracker = {
+      execution_evidence: {
+        completed: ["verification-gate"],
+        impl_inventory: ["IMPL-EXAMPLE_A"],
+      },
+    };
+    const artifacts: EnvelopeArtifact[] = [{
+      kind: "pseudocode_analysis_report",
+      schema_version: "pseudocode-analysis-report.v1",
+      path: "working/REQ-X/pseudocode-analysis/IMPL-EXAMPLE_A.v1.json",
+      content_hash: "sha256:abc",
+      phase: null,
+      status: "present",
+      proof_boundaries: ["pseudocode_gate_only"],
+    }];
+    const gaps = detectPsaExpectationGaps(tracker, artifacts, "integrated");
+    assert.equal(gaps.length, 0);
+  });
+
+  it("Wave 6 PSA expectation skipped at minimal depth without PSA slug completed", () => {
+    const tracker = {
+      execution_evidence: {
+        completed: ["session-bootstrap"],
+        impl_inventory: ["IMPL-EXAMPLE_A"],
+      },
+    };
+    const gaps = detectPsaExpectationGaps(tracker, [], "minimal");
+    assert.equal(gaps.length, 0);
   });
 
   it("W5-D2 manifest expectation clean when manifest artifact present", () => {

@@ -1,0 +1,10 @@
+{
+  "ok": false,
+  "error": "CHECKLIST_GATE_BLOCKED: process evidence did not satisfy the selected gate",
+  "diagnostics": [
+    "tracker_not_authoritative",
+    "psa_missing:IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+    "psa_missing:IMPL-REQUEST_EVIDENCE_ENVELOPE",
+    "pseudocode_analysis_incomplete"
+  ]
+}

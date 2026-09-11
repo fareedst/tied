@@ -40,9 +40,12 @@ when phase artifact dirs exist). **Unified close-out:** also validate
 `request-evidence-envelope.v1.json` with `fail_on_error_gaps: true` (or run
 `tools/bootstrap/templates/run-close-out-gates.mjs --envelope-blocking`).
 Completion requires gate `allowed: true` **and** zero blocking envelope error
-gaps (advisory/warn gaps remain visible). If either check fails, label the work
-**incomplete** in the parent handoff — do not claim completion. Missing,
-malformed, stale, or unjustified process evidence is a hard stop.
+gaps (advisory/warn gaps remain visible). At integrated depth,
+`fail_on_error_gaps: true` also blocks process-adherence warn gaps (Wave 6).
+If either check fails, label the work **incomplete** in the parent handoff — do
+not claim completion. Missing, malformed, stale, or unjustified process evidence
+is a hard stop. Return the three completion signals per
+[completion-signals-handoff.md](../prompt-shared/completion-signals-handoff.md).
 
 ## Gates
 

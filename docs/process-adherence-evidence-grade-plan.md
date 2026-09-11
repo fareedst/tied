@@ -48,7 +48,7 @@ Never conflate these in skills, CHANGELOG, or completion claims.
 
 ## Blocking policy (minimal depth default)
 
-Process-adherence gaps default to **warn** unless `fail_on_process_gaps: true`. Structural and activation failures remain **error**.
+Process-adherence gaps default to **warn** unless `fail_on_process_gaps: true`. At integrated close-out, `fail_on_error_gaps: true` implicitly enables process-strict validate (Wave 6) unless `fail_on_process_gaps: false` is set explicitly. Structural and activation failures remain **error**.
 
 ## Producer contract (W5-D6)
 

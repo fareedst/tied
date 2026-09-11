@@ -1,0 +1,2 @@
+{"role":"assistant","message":{"content":[{"type":"text","text":"Gate allowed: true at verification."},{"type":"tool_use","name":"CallDynamicTool","input":{"namespace":"project-0-stdd-tied-yaml","toolName":"request_evidence_envelope_validate"}}]}}
+{"role":"assistant","message":{"content":[{"type":"text","text":"Ran run-close-out-gates.mjs --envelope-blocking --sync-dispositions."}]}}

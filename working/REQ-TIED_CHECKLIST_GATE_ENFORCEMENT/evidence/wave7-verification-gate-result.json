@@ -1,0 +1,12 @@
+{
+  "ok": true,
+  "phase": "verification",
+  "run_id": "wave5-verify-20260910",
+  "allowed": true,
+  "diagnostics": [
+    "warn_not_success",
+    "finding_unresolved"
+  ],
+  "receipt_path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/verification-2026-09-11T16-23-43-634Z.json",
+  "alias": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/wave7-verification-20260911.json"
+}

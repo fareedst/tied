@@ -78,8 +78,10 @@ End with a concise handoff containing:
 - resolved terms and vocabulary RECORD/VALIDATE status;
 - files changed, CHANGELOG entry, and the proposed amend message;
 - tests, lint, verification-gate, and `tied_validate_consistency` results;
+- the three completion signals (machine close-out, process contract, adherence
+  ledger) per `tools/bundled-prompt-type-skills/prompt-shared/completion-signals-handoff.md`;
 - remaining risks, blocked gates, or follow-up work.
 
 If any required validation failed, label the work incomplete and report the
 failure evidence instead of claiming success. Do not claim that a commit or
-amend was created.
+amend was created. Gate `allowed: true` alone is not machine close-out.

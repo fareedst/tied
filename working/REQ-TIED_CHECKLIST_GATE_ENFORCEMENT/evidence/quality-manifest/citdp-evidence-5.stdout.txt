@@ -1,2 +1,1 @@
-FAIL	./tools/agentstream/cmd/adherence-reconcile/... [setup failed]
-FAIL
+ok  	stdd/agentstream/checklist	0.153s

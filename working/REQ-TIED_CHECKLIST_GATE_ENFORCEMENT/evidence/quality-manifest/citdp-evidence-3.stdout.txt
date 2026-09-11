@@ -1,58 +1,15 @@
-▶ VALIDATE_TRACKER REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
-  ✔ blocks pending steps and generic skip dispositions (0.492292ms)
-  ✔ requires every explicitly governed step to be present (0.072042ms)
-  ✔ requires evidence, rationale, and waiver ownership by disposition (0.560333ms)
-✔ VALIDATE_TRACKER REQ-TIED_CHECKLIST_GATE_ENFORCEMENT (1.591083ms)
-▶ VALIDATE_ADVERSARIAL_CONTRACT REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
-  ✔ requires the complete minimal evidence set (6.062334ms)
-✔ VALIDATE_ADVERSARIAL_CONTRACT REQ-TIED_CHECKLIST_GATE_ENFORCEMENT (6.11625ms)
-▶ VALIDATE_ACTIVATION_PAIRING REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
-  ✔ rejects stale identities and accepts a complete matching pair (0.465584ms)
-  ✔ rejects cross-phase and root-projection artifact paths [Slice P] (0.196708ms)
-✔ VALIDATE_ACTIVATION_PAIRING REQ-TIED_CHECKLIST_GATE_ENFORCEMENT (0.726834ms)
-▶ VALIDATE_CHECKLIST_GATE Batch 2 Slice 1 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
-  ✔ fails closed when integrated depth omits activation (0.273042ms)
-  ✔ requires auto sub-adversarial slug even when caller omits required_step_slugs (0.164917ms)
-  ✔ unions caller slugs with auto slugs and cannot subtract auto slugs (0.082166ms)
-  ✔ passes integrated verification with VolumeStats-style fixture (0.137792ms)
-  ✔ rejects the same run_id when receipt phase differs from gate phase (0.092959ms)
-  ✔ rejects verification receipt submitted as close_out activation even with citation (0.071167ms)
-  ✔ requires depth-change waiver when downgrading from integrated to minimal (0.079666ms)
-  ✔ skips downgrade diagnostic when prior_depth_tier is missing (0.04975ms)
-  ✔ requires completion_criteria.activation at verification and close_out (0.096083ms)
-  ✔ fails strict_candidate at close_out without pairing (0.047875ms)
-  ✔ allows strict_candidate at pre_implementation with counterexamples only (0.033292ms)
-  ✔ allows close_out with close-out inquiry waiver instead of pairing (0.064083ms)
-✔ VALIDATE_CHECKLIST_GATE Batch 2 Slice 1 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (1.315083ms)
-▶ VALIDATE_CHECKLIST_GATE Slice 0 hotfixes [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
-  ✔ rejects placeholder close_out inquiry waiver (1787507684 shape) (0.059583ms)
-  ✔ derives expected from receipt when activation omits expected (0.593667ms)
-  ✔ fails when receipt is incomplete and expected is omitted (0.057791ms)
-  ✔ fails minimal depth when sub-adversarial-inquiry-pass is pending (0.034875ms)
-  ✔ fails integrated depth when parent slug is completed and sub-stub is pending (0.059458ms)
-  ✔ validateIntegratedParentChildSlugs detects parent completed with pending sub-stub (0.028792ms)
-  ✔ rejects placeholder depth-change waiver on downgrade (0.0295ms)
-✔ VALIDATE_CHECKLIST_GATE Slice 0 hotfixes [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (0.919375ms)
-▶ VALIDATE_MINIMAL_WAIVER Slice A3 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
-  ✔ warns when triggered minimal depth lacks integrated_waiver (0.077ms)
-  ✔ is clean when triggered minimal depth has complete integrated_waiver (0.037041ms)
-  ✔ does not warn for non-triggered minimal depth (0.027958ms)
-  ✔ does not warn for integrated depth even when triggers are recorded (0.045125ms)
-  ✔ validateMinimalWaiver isolates advisory diagnostic semantics (0.044625ms)
-✔ VALIDATE_MINIMAL_WAIVER Slice A3 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (0.270333ms)
-▶ Go writer fixture gate composition [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
-  ✔ A1 rejects sparse legacy summary without matching step rows (0.066375ms)
-  ✔ A6 passes minimal pre_implementation gate for Go writer fixture (0.546583ms)
-  ✔ A7 fails integrated writer output without activation under advisory policy (0.17ms)
-✔ Go writer fixture gate composition [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (0.816375ms)
-▶ Stage P trigger: non-agentstream unresolved evidence_refs
-  ✔ A32 trigger fires when gate accepts manual Tracker with nonexistent evidence_refs (0.037709ms)
-✔ Stage P trigger: non-agentstream unresolved evidence_refs (0.056125ms)
-ℹ tests 34
-ℹ suites 8
-ℹ pass 34
+▶ conversation-adherence dimensions [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+  ✔ parses jsonl transcript lines with tool_use names (0.705792ms)
+  ✔ flags early_exit_at_gate when gate success has no envelope validate (0.502ms)
+  ✔ does not flag early_exit when close-out sync tools appear after gate (0.189917ms)
+  ✔ flags call_mention_without_execution when CALL text lacks tool/script (0.38175ms)
+  ✔ returns all seven dimensions with denominators (1.151291ms)
+✔ conversation-adherence dimensions [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (3.442375ms)
+ℹ tests 5
+ℹ suites 1
+ℹ pass 5
 ℹ fail 0
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 87.837875
+ℹ duration_ms 67.116041

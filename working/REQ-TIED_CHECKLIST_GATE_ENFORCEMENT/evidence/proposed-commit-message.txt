@@ -1,8 +1,8 @@
-feat(checklist): Wave 5 process-adherence evidence grade
+feat(checklist): Wave 7 conversation adherence measurement and operator adoption
 
-Close machine/process completion gap at minimal depth: envelope detects
-tracker_dual_write and related process gaps; reconcile emits process_grade;
-close-out skills CALL sub-close-out-evidence-sync.
+Ship transcript scoring rubric, operator envelope backfill, evaluation corpus
+require_envelope adoption, agentstream envelope enforcement pilot, and PSA gate
+hydration when envelope reports missing Layer C artifacts.
 
 REQ-TIED_CHECKLIST_GATE_ENFORCEMENT REQ-REQUEST_EVIDENCE_ENVELOPE
 PROC-AGENT_REQ_CHECKLIST

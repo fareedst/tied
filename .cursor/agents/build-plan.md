@@ -96,7 +96,12 @@ End with a concise handoff containing:
 - CITDP path, or explicit deferred status when policy defers persistence;
 - files changed and the tests, lint, verification-gate, and
   `tied_validate_consistency` results;
+- the three completion signals (machine close-out, process contract, adherence
+  ledger) per `tools/bundled-prompt-type-skills/prompt-shared/completion-signals-handoff.md`;
 - remaining risks, blocked gates, or follow-up work.
+
+Label close-out **deferred** when only the verification gate has run; do not
+claim machine close-out without envelope validate and `sub-close-out-evidence-sync`.
 
 If any required validation failed, label the work incomplete and report the
 failure evidence instead of claiming success.

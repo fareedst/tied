@@ -12,6 +12,7 @@ import {
   validateActivationPairing,
   validateChecklistGate,
   validateDepthDowngrade,
+  validateEnvelopePsaHydration,
   validateIntegratedParentChildSlugs,
   validateMinimalWaiver,
   validateTracker,
@@ -857,6 +858,60 @@ describe("Go writer fixture gate composition [REQ-TIED_CHECKLIST_GATE_ENFORCEMEN
     });
     assert.equal(result.allowed, false);
     assert.ok(result.diagnostics.includes("integrated_depth_requires_pairing"));
+  });
+});
+
+// [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-REQUEST_EVIDENCE_ENVELOPE] W7-D5 envelope PSA hydration cross-read.
+describe("validateEnvelopePsaHydration W7-D5", () => {
+  const integratedTracker = {
+    steps: [
+      { slug: "gate-pseudocode-validation", disposition: "completed", evidence_refs: ["missing-psa.json"] },
+    ],
+    execution_evidence: { impl_inventory: ["IMPL-EXAMPLE"] },
+  };
+
+  it("fails verification when envelope reports PSA expected_artifact_missing without reports", () => {
+    const result = validateEnvelopePsaHydration({
+      tracker: integratedTracker,
+      phase: "verification",
+      depth: "integrated",
+      envelopeGaps: [{
+        code: "expected_artifact_missing",
+        artifact_kind: "pseudocode_analysis_report",
+      }],
+      pseudocodeReports: {},
+    });
+    assert.equal(result.ok, false);
+    assert.ok(result.diagnostics.some((d) => d.startsWith("psa_envelope_hydration_required")));
+  });
+
+  it("passes when pseudocode reports are hydrated for impl inventory", () => {
+    const result = validateEnvelopePsaHydration({
+      tracker: integratedTracker,
+      phase: "verification",
+      depth: "integrated",
+      envelopeGaps: [{
+        code: "expected_artifact_missing",
+        artifact_kind: "pseudocode_analysis_report",
+      }],
+      pseudocodeReports: {
+        "IMPL-EXAMPLE": { ok: true, gate_mode_applied: true, request_token: "REQ-X" },
+      },
+    });
+    assert.equal(result.ok, true);
+  });
+
+  it("skips when gate-pseudocode-validation is not completed", () => {
+    const result = validateEnvelopePsaHydration({
+      tracker: { steps: [{ slug: "gate-pseudocode-validation", disposition: "pending" }] },
+      phase: "verification",
+      depth: "integrated",
+      envelopeGaps: [{
+        code: "expected_artifact_missing",
+        artifact_kind: "pseudocode_analysis_report",
+      }],
+    });
+    assert.equal(result.ok, true);
   });
 });
 

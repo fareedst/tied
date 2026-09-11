@@ -1,2 +1,63 @@
-FAIL	./tools/agentstream/checklist/... [setup failed]
-FAIL
+▶ VALIDATE_TRACKER REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+  ✔ blocks pending steps and generic skip dispositions (0.456209ms)
+  ✔ requires every explicitly governed step to be present (0.076166ms)
+  ✔ requires evidence, rationale, and waiver ownership by disposition (0.557291ms)
+✔ VALIDATE_TRACKER REQ-TIED_CHECKLIST_GATE_ENFORCEMENT (1.562708ms)
+▶ VALIDATE_ADVERSARIAL_CONTRACT REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+  ✔ requires the complete minimal evidence set (4.470417ms)
+✔ VALIDATE_ADVERSARIAL_CONTRACT REQ-TIED_CHECKLIST_GATE_ENFORCEMENT (4.523333ms)
+▶ VALIDATE_ACTIVATION_PAIRING REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+  ✔ rejects stale identities and accepts a complete matching pair (0.446083ms)
+  ✔ rejects cross-phase and root-projection artifact paths [Slice P] (0.189625ms)
+✔ VALIDATE_ACTIVATION_PAIRING REQ-TIED_CHECKLIST_GATE_ENFORCEMENT (0.695167ms)
+▶ VALIDATE_CHECKLIST_GATE Batch 2 Slice 1 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+  ✔ fails closed when integrated depth omits activation (0.32ms)
+  ✔ requires auto sub-adversarial slug even when caller omits required_step_slugs (0.147125ms)
+  ✔ unions caller slugs with auto slugs and cannot subtract auto slugs (0.083792ms)
+  ✔ passes integrated verification with VolumeStats-style fixture (0.127625ms)
+  ✔ rejects the same run_id when receipt phase differs from gate phase (0.293709ms)
+  ✔ rejects verification receipt submitted as close_out activation even with citation (0.0985ms)
+  ✔ requires depth-change waiver when downgrading from integrated to minimal (0.092ms)
+  ✔ skips downgrade diagnostic when prior_depth_tier is missing (0.049208ms)
+  ✔ requires completion_criteria.activation at verification and close_out (0.1185ms)
+  ✔ fails strict_candidate at close_out without pairing (0.055ms)
+  ✔ allows strict_candidate at pre_implementation with counterexamples only (0.044458ms)
+  ✔ allows close_out with close-out inquiry waiver instead of pairing (0.06625ms)
+✔ VALIDATE_CHECKLIST_GATE Batch 2 Slice 1 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (1.629125ms)
+▶ VALIDATE_CHECKLIST_GATE Slice 0 hotfixes [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+  ✔ rejects placeholder close_out inquiry waiver (1787507684 shape) (0.107083ms)
+  ✔ derives expected from receipt when activation omits expected (0.616458ms)
+  ✔ fails when receipt is incomplete and expected is omitted (0.058667ms)
+  ✔ fails minimal depth when sub-adversarial-inquiry-pass is pending (0.047083ms)
+  ✔ fails integrated depth when parent slug is completed and sub-stub is pending (0.062458ms)
+  ✔ validateIntegratedParentChildSlugs detects parent completed with pending sub-stub (0.027166ms)
+  ✔ rejects placeholder depth-change waiver on downgrade (0.038583ms)
+✔ VALIDATE_CHECKLIST_GATE Slice 0 hotfixes [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (1.014666ms)
+▶ VALIDATE_MINIMAL_WAIVER Slice A3 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+  ✔ warns when triggered minimal depth lacks integrated_waiver (0.071791ms)
+  ✔ is clean when triggered minimal depth has complete integrated_waiver (0.036709ms)
+  ✔ does not warn for non-triggered minimal depth (0.027583ms)
+  ✔ does not warn for integrated depth even when triggers are recorded (0.045625ms)
+  ✔ validateMinimalWaiver isolates advisory diagnostic semantics (0.046791ms)
+✔ VALIDATE_MINIMAL_WAIVER Slice A3 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (0.266792ms)
+▶ Go writer fixture gate composition [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+  ✔ A1 rejects sparse legacy summary without matching step rows (0.080708ms)
+  ✔ A6 passes minimal pre_implementation gate for Go writer fixture (2.354958ms)
+  ✔ A7 fails integrated writer output without activation under advisory policy (0.1755ms)
+✔ Go writer fixture gate composition [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (2.644917ms)
+▶ validateEnvelopePsaHydration W7-D5
+  ✔ fails verification when envelope reports PSA expected_artifact_missing without reports (0.077958ms)
+  ✔ passes when pseudocode reports are hydrated for impl inventory (0.047667ms)
+  ✔ skips when gate-pseudocode-validation is not completed (0.023875ms)
+✔ validateEnvelopePsaHydration W7-D5 (0.1775ms)
+▶ Stage P trigger: non-agentstream unresolved evidence_refs
+  ✔ A32 trigger fires when gate accepts manual Tracker with nonexistent evidence_refs (0.040333ms)
+✔ Stage P trigger: non-agentstream unresolved evidence_refs (0.056459ms)
+ℹ tests 37
+ℹ suites 9
+ℹ pass 37
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 86.786208

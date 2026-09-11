@@ -1,0 +1,135 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "wave5-verify-20260910",
+  "commit": "65d60945a54baa13a070781b710a7143f00b8ddb",
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "command_results": [
+    {
+      "id": "citdp-evidence-1",
+      "command": [
+        "bash",
+        "-lc",
+        "npm run build --prefix mcp-server"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 2944,
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/quality-manifest/citdp-evidence-1.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/quality-manifest/citdp-evidence-1.stdout.txt"
+      ]
+    },
+    {
+      "id": "citdp-evidence-2",
+      "command": [
+        "bash",
+        "-lc",
+        "node --test mcp-server/dist/request-evidence-envelope/request-evidence-envelope.test.js"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 611,
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/quality-manifest/citdp-evidence-2.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/quality-manifest/citdp-evidence-2.stdout.txt"
+      ]
+    },
+    {
+      "id": "citdp-evidence-3",
+      "command": [
+        "bash",
+        "-lc",
+        "node --test mcp-server/dist/checklist-validator.test.js"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 552,
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/quality-manifest/citdp-evidence-3.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/quality-manifest/citdp-evidence-3.stdout.txt"
+      ]
+    },
+    {
+      "id": "citdp-evidence-4",
+      "command": [
+        "bash",
+        "-lc",
+        "go test ./tools/agentstream/checklist/... -count=1"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 1,
+      "result": "failed",
+      "duration_ms": 434,
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/quality-manifest/citdp-evidence-4.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/quality-manifest/citdp-evidence-4.stdout.txt"
+      ]
+    },
+    {
+      "id": "citdp-evidence-5",
+      "command": [
+        "bash",
+        "-lc",
+        "go test ./tools/agentstream/cmd/adherence-reconcile/... -count=1"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 1,
+      "result": "failed",
+      "duration_ms": 418,
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/quality-manifest/citdp-evidence-5.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/quality-manifest/citdp-evidence-5.stdout.txt"
+      ]
+    }
+  ],
+  "quality_rows": [
+    {
+      "id": "baseline-functional",
+      "attribute": "baseline-functional",
+      "applicability": "applicable",
+      "rationale": "CITDP quality profile matrix",
+      "evidence_method": "command",
+      "result": "passed"
+    },
+    {
+      "id": "data-integrity-migration",
+      "attribute": "data-integrity-migration",
+      "applicability": "applicable",
+      "rationale": "CITDP quality profile matrix",
+      "evidence_method": "command",
+      "result": "passed"
+    },
+    {
+      "id": "stateful-reliability",
+      "attribute": "stateful-reliability",
+      "applicability": "applicable",
+      "rationale": "CITDP quality profile matrix",
+      "evidence_method": "command",
+      "result": "passed"
+    }
+  ],
+  "covered_tokens": [
+    "ARCH-REQUEST_EVIDENCE_ENVELOPE",
+    "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+    "IMPL-REQUEST_EVIDENCE_ENVELOPE",
+    "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+    "PROC-AGENT_REQ_CHECKLIST",
+    "REQ-QUALITY_ASSURANCE_EVIDENCE",
+    "REQ-REQUEST_EVIDENCE_ENVELOPE",
+    "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+  ],
+  "proof_boundaries": [
+    "baseline-functional",
+    "data-integrity-migration",
+    "stateful-reliability"
+  ],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": []
+  }
+}

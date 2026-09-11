@@ -1203,6 +1203,7 @@ export const allTools = [
           citdp: z.record(z.unknown()),
           required_step_slugs: z.array(z.string()).optional(),
           activation: z.record(z.unknown()).optional(),
+          evidence: z.record(z.unknown()).optional(),
         }).optional().describe("Validated shared Tracker/CITDP/activation gate; required for every workflow status update."),
         require_checklist_gate: z
           .boolean()
@@ -1239,6 +1240,7 @@ export const allTools = [
         citdp: unknown;
         required_step_slugs?: string[];
         activation?: unknown;
+        evidence?: Record<string, unknown>;
       };
       require_checklist_gate?: boolean;
       envelope_path?: string;
@@ -1267,6 +1269,7 @@ export const allTools = [
             citdp: args.checklist_gate.citdp,
             requiredStepSlugs: args.checklist_gate.required_step_slugs,
             activation: args.checklist_gate.activation as never,
+            evidence: args.checklist_gate.evidence as never,
           }
           : undefined,
         require_checklist_gate: args.require_checklist_gate ?? true,
@@ -1712,6 +1715,15 @@ export const allTools = [
           tracker = args.tracker;
         } else {
           return textContent(JSON.stringify({ ok: false, error: "missing tracker or tracker_path" }, null, 2));
+        }
+        if (!evidence.requestToken) {
+          const ee = tracker.execution_evidence;
+          if (ee && typeof ee === "object" && !Array.isArray(ee)) {
+            const token = (ee as Record<string, unknown>).request;
+            if (typeof token === "string" && token.trim()) {
+              evidence.requestToken = token.trim();
+            }
+          }
         }
         const hydration = await hydrateGateEvidenceFromActivation({
           phase: args.phase,

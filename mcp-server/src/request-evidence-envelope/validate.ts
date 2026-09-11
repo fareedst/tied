@@ -115,8 +115,12 @@ export async function validateRequestEvidenceEnvelope(
   );
   let blockingGapCount = errorGaps.length;
   const advisoryGapCount = warnGaps.length;
+  const depthTier = normalized.identity?.depth_tier;
+  const integratedDepth = depthTier === "integrated" || depthTier === "strict_candidate";
+  const failOnProcessGaps = input.fail_on_process_gaps
+    ?? (integratedDepth && Boolean(input.fail_on_error_gaps));
 
-  if (input.fail_on_process_gaps && processWarnGaps.length > 0) {
+  if (failOnProcessGaps && processWarnGaps.length > 0) {
     blockingGapCount += processWarnGaps.length;
     return {
       ok: false,

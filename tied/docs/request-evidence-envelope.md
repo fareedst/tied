@@ -70,7 +70,17 @@ request_evidence_envelope_validate \
   --fail-on-error-gaps true
 ```
 
-**Unified close-out:** integrated REQs require gate `allowed: true` **and** envelope validate with `fail_on_error_gaps: true` (zero blocking error gaps). Advisory policy records observed/unresolved findings as `severity: warn`, not blocking `error`. Minimal depth requires at least one `not_applicable_receipt` artifact entry, not silent absence.
+**Unified close-out:** integrated REQs require gate `allowed: true` **and** envelope validate with `fail_on_error_gaps: true` (zero blocking error gaps). At integrated depth, `fail_on_error_gaps: true` also treats process-adherence warn gaps as blocking unless `fail_on_process_gaps: false` is set explicitly (Wave 6). Advisory policy records observed/unresolved findings as `severity: warn`, not blocking `error`. Minimal depth requires at least one `not_applicable_receipt` artifact entry, not silent absence.
+
+**Wave 6 artifact expectations (warn unless process-strict):**
+
+| Trigger | Expected artifact | Gap code |
+|---|---|---|
+| Completed verification/test slugs | `verification-evidence-manifest.v1.json` | `expected_artifact_missing` |
+| Integrated depth | `evidence-chain-profile.v1.json` | `expected_artifact_missing` |
+| Non-empty IMPL inventory + PSA slug completed or integrated depth | `pseudocode-analysis/{IMPL}.v1.json` | `expected_artifact_missing` |
+
+Parent handoff must report machine close-out, process contract, and adherence ledger separately — see `tools/bundled-prompt-type-skills/prompt-shared/completion-signals-handoff.md`.
 
 Canonical replay: `node tools/bootstrap/templates/run-close-out-gates.mjs --envelope-blocking` (see `--help`).
 
@@ -82,3 +92,35 @@ Canonical replay: `node tools/bootstrap/templates/run-close-out-gates.mjs --enve
 | Chain completeness | `evidence-chain-profile.v1` | `evidence-chain-statistics-report.v2` |
 
 Envelope `present` does not imply profile field `observed`.
+
+## Wave 7 operator backfill (tracker-only clients)
+
+When mature `/dev/test` clients have trackers but no `request-evidence-envelope.v1.json`, run the batch wrapper (W7-D2). It invokes `request_evidence_envelope_backfill` per row and **does not** mutate inner producer artifacts (manifest, profile, inquiry packs, PSA files).
+
+From repository root after `npm run build --prefix mcp-server`:
+
+```bash
+# Discover all 178* timestamp clients with trackers; skip rows that already have envelopes
+node scripts/backfill-client-envelopes.mjs \
+  --dev-test-root /Users/fareed/Documents/dev/test \
+  --json-out working/evaluation/backfill-client-envelopes-summary.v1.json
+
+# Single client
+node scripts/backfill-client-envelopes.mjs \
+  --project-root /Users/fareed/Documents/dev/test/1789087315 \
+  --request-token REQ-DUPCOMPARE
+
+# Dry-run against evaluation corpus rows
+node scripts/backfill-client-envelopes.mjs \
+  --corpus working/evaluation/evaluation-corpus.v1.yaml \
+  --dry-run
+```
+
+**Operator steps:**
+
+1. Confirm `npm run build --prefix mcp-server` so `dist/cli/request-evidence-envelope-backfill.js` exists.
+2. Run batch backfill with `--continue-on-error` when piloting a mixed cohort.
+3. Re-run `request_evidence_envelope_batch_collect` to refresh `envelope-gap-report.v1.yaml`.
+4. Do **not** treat backfill alone as unified close-out — live sessions must still CALL `sub-close-out-evidence-sync`.
+
+See [conversation-analysis-tools.md](./conversation-analysis-tools.md) for W7-D1 transcript scoring (observation-only, not a gate substitute).

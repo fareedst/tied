@@ -168,6 +168,22 @@ func main() {
 		}
 		fmt.Fprintf(os.Stderr, "\n--- turn %d/%d%s%s ---\n", cfg.FirstTurn+i, len(turns), label, stub)
 
+		if usingTracker := strings.TrimSpace(cfg.ChecklistTrackerYAML) != ""; usingTracker && strings.TrimSpace(t.StepStub) != "" {
+			envelopeEval := checklist.EvaluateTraceableCommitEnvelope(checklist.TraceableCommitEnvelopeInput{
+				ProjectRoot:     cfg.Workspace,
+				RequestToken:    trackerRequestToken(cfg),
+				StepSlug:        t.StepStub,
+				EnforceEnvelope: cfg.EnforceEnvelope,
+			})
+			if envelopeEval.Warn {
+				fmt.Fprintf(os.Stderr, "DIAGNOSTIC: envelope pilot warn: %s\n", envelopeEval.Message)
+			}
+			if envelopeEval.Block {
+				fmt.Fprintf(os.Stderr, "agentstream: %s\n", envelopeEval.Message)
+				os.Exit(1)
+			}
+		}
+
 		var issued checklist.IssuedInstruction
 		var correlation checklist.InstructionCorrelation
 		var activeTurnMarkerPath string

@@ -5,7 +5,11 @@
 
 import { loadIndex, updateRecord } from "./yaml-loader.js";
 import { formatYamlMetadata, type YamlFormatMetadata } from "./yaml-canonicalizer.js";
-import { validateChecklistGate, type GatePhase } from "./checklist-validator.js";
+import {
+  validateChecklistGate,
+  type ChecklistGateEvidenceInput,
+  type GatePhase,
+} from "./checklist-validator.js";
 import { validateRequestEvidenceEnvelope } from "./request-evidence-envelope/validate.js";
 import {
   persistGateDecisionReceipt,
@@ -47,6 +51,7 @@ export interface VerifyUpdateOptions {
         scope_hash: string;
       };
     };
+    evidence?: ChecklistGateEvidenceInput;
   };
   /** @deprecated Gate evidence is required for every status update. */
   require_checklist_gate?: boolean;

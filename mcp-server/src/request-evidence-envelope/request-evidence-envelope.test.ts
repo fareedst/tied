@@ -114,6 +114,40 @@ describe("request evidence envelope [REQ-REQUEST_EVIDENCE_ENVELOPE]", () => {
     assert.ok(blocking.diagnostics.some((item) => item === "envelope_blocking_gap:finding_unresolved"));
   });
 
+  it("Wave 6 defaults fail_on_process_gaps when integrated and fail_on_error_gaps", async () => {
+    const envelope: RequestEvidenceEnvelope = {
+      schema_version: ENVELOPE_SCHEMA_VERSION,
+      envelope_meta: { generated_at: "2026-01-01T00:00:00Z", generator: "test", revision: 1 },
+      identity: {
+        request_token: "REQ-X",
+        project_id: "abc",
+        depth_tier: "integrated",
+        gate_policy: "advisory",
+        methodology_snapshot_id: "3.0.0",
+      },
+      runs: [],
+      artifacts: [],
+      cross_links: {
+        tracker_path: null,
+        tracker_hash: null,
+        citdp_path: null,
+        evidence_chain_profile_path: null,
+      },
+      gaps: [{
+        code: "expected_artifact_missing",
+        artifact_kind: "verification_evidence_manifest",
+        phase: null,
+        detail: "manifest missing",
+        severity: "warn",
+      }],
+    };
+    const permissive = await validateRequestEvidenceEnvelope({ envelope });
+    assert.equal(permissive.ok, true);
+    const closeOut = await validateRequestEvidenceEnvelope({ envelope, fail_on_error_gaps: true });
+    assert.equal(closeOut.ok, false);
+    assert.ok(closeOut.diagnostics.some((item) => item === "envelope_process_gap:expected_artifact_missing"));
+  });
+
   it("rejects forbidden maturity score fields", async () => {
     const invalid = {
       schema_version: ENVELOPE_SCHEMA_VERSION,

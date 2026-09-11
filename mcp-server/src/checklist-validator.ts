@@ -875,6 +875,12 @@ export function normalizeRemediationDiagnostics(diagnostics: readonly string[]):
   return [...out];
 }
 
+export type EnvelopeGapEvidence = {
+  code: string;
+  artifact_kind?: string;
+  severity?: string;
+};
+
 export type ChecklistGateEvidenceInput = {
   trackerSource?: "authoritative_file" | "synthetic_projection" | "in_memory";
   provenance?: unknown;
@@ -891,6 +897,8 @@ export type ChecklistGateEvidenceInput = {
   /** Sidecar sha256 hex (no prefix) keyed by IMPL token for hash match. */
   sidecarHashes?: Record<string, string>;
   requestToken?: string;
+  /** Cross-read from request-evidence-envelope gaps (Wave 7-D5 PSA hydration). */
+  envelopeGaps?: readonly EnvelopeGapEvidence[];
 };
 
 const IMPL_TOKEN_RE = /^IMPL-[A-Z0-9][A-Z0-9_-]*$/u;
@@ -1087,6 +1095,51 @@ export function validatePseudocodeAnalysisEvidence(input: {
   return { ok: unique.length === 0, diagnostics: unique };
 }
 
+function stepCompleted(tracker: unknown, slug: string): boolean {
+  if (!isRecord(tracker) || !Array.isArray(tracker.steps)) return false;
+  for (const step of tracker.steps) {
+    if (!isRecord(step)) continue;
+    if (identityValue(step.slug) !== slug) continue;
+    return identityValue(step.disposition) === "completed";
+  }
+  return false;
+}
+
+// [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-REQUEST_EVIDENCE_ENVELOPE] [REQ-PSEUDOCODE_STATIC_ANALYSIS] — How: W7-D5 fail verification when envelope reports PSA expected_artifact_missing and gate-pseudocode-validation is completed without hydrated reports or waiver.
+export function validateEnvelopePsaHydration(input: {
+  tracker: unknown;
+  phase: GatePhase;
+  depth?: AdversarialDepth;
+  envelopeGaps?: readonly EnvelopeGapEvidence[];
+  pseudocodeReports?: Record<string, unknown>;
+}): ValidationResult {
+  const diagnostics: string[] = [];
+  if (input.phase !== "verification" && input.phase !== "close_out") {
+    return { ok: true, diagnostics };
+  }
+  if (input.depth !== "integrated" && input.depth !== "strict_candidate") {
+    return { ok: true, diagnostics };
+  }
+  if (!stepCompleted(input.tracker, PSEUDOCODE_GATE_SLUG)) {
+    return { ok: true, diagnostics };
+  }
+  const gaps = input.envelopeGaps ?? [];
+  const psaMissing = gaps.some(
+    (gap) => gap.code === "expected_artifact_missing"
+      && gap.artifact_kind === "pseudocode_analysis_report",
+  );
+  if (!psaMissing) {
+    return { ok: true, diagnostics };
+  }
+  const inventory = extractImplInventoryTokens(input.tracker);
+  const reports = input.pseudocodeReports ?? {};
+  const missingReports = inventory.filter((token) => !(token in reports));
+  if (missingReports.length > 0) {
+    diagnostics.push(`psa_envelope_hydration_required:${missingReports.join(",")}`);
+  }
+  return { ok: diagnostics.length === 0, diagnostics };
+}
+
 // [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: select depth before evaluating phase gates and fail closed on invalid evidence.
 export function validateChecklistGate(input: {
   tracker: unknown;
@@ -1221,6 +1274,13 @@ export function validateChecklistGate(input: {
         requestToken: input.evidence?.requestToken ?? trackerRequestToken(input.tracker),
         pseudocodeReports: input.evidence?.pseudocodeReports,
         sidecarHashes: input.evidence?.sidecarHashes,
+      }).diagnostics);
+      diagnostics.push(...validateEnvelopePsaHydration({
+        tracker: input.tracker,
+        phase: input.phase,
+        depth,
+        envelopeGaps: input.evidence?.envelopeGaps,
+        pseudocodeReports: input.evidence?.pseudocodeReports,
       }).diagnostics);
     }
   }

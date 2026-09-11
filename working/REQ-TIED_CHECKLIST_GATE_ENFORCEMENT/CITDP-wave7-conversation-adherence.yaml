@@ -1,0 +1,124 @@
+CITDP-wave7-conversation-adherence:
+  change_definition:
+    current_behavior: "Wave 6 shipped unified close-out skill contracts, but cohort analysis shows path-dependent evidence collection: agents stop at gate success, 7/12 mature client trackers lack envelopes, Tier 3 artifacts (manifest, profile, PSA) rarely produced, and §9 transcript hypotheses are unvalidated manual research."
+    desired_behavior: "Wave 7 delivers executable transcript scoring (W7-D1), operator backfill and evaluation corpus adoption (W7-D2/D3), optional agentstream envelope enforcement at traceable-commit (W7-D4), and PSA gate hydration when envelope reports expected_artifact_missing (W7-D5). Operator runs produce before/after gap reports; behavior-changing deliverables have RED tests and integrated depth inquiry."
+    non_goals:
+      - "Manual repair of demo client 1789069630 as methodology evidence"
+      - "W5-D12/D13 minimal gate tightening until W7-D1 corpus proves warn-only ignored"
+      - "Bootstrap semantic-tokens.yaml seeding (separate REQ-TIED_SETUP track)"
+      - "Async-boundaries-catalog envelope kind (future extension)"
+      - "Transcript rubric as a gate substitute or maturity score"
+    success_criteria:
+      - "W7-D1 through W7-D5 deliverables ship with RED tests green per plan §10.3"
+      - "Evaluation corpus registers all twelve mature /dev/test trackers with require_envelope"
+      - "Backfill produces envelopes for tracker-only clients without mutating inner producers"
+      - "Transcript rubric scores seven dimensions with explicit denominators on fixture corpus"
+      - "Agentstream --enforce-envelope remains opt-in; default warn-only"
+    unchanged_behavior:
+      - "Wave 6 unified close-out skill contracts and completion-signals handoff"
+      - "Advisory inquiry policy for observed findings"
+      - "Operator-local evaluation corpus privacy (gitignored working/evaluation/)"
+  completion_criteria:
+    activation:
+      artifact_hashes: {}
+      phase: pre_implementation
+      project_id: stdd-project
+      request_token: REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+      run_id: wave7-pre-implementation-refine
+      scope: []
+      scope_hash: ""
+    checklist_gate:
+      dispositions:
+        - completed
+        - not_applicable
+        - pending
+        - waived
+      fail_closed: true
+      phases:
+        - close_out
+        - pre_implementation
+        - verification
+    verification_gate_notes: "Build-plan 2026-09-11: verification gate allowed=true after run-wave7-gates PSA hydration + Layer C refresh; advisory diagnostics only (finding_unresolved, warn_not_success). Machine close-out still requires close_out gate allowed AND envelope zero blocking gaps under --envelope-blocking (thin_ledger blocks at integrated depth until reconcile). W7-D1 transcript report is observation-only."
+  evidence:
+    commands:
+      - npm run build --prefix mcp-server
+      - node --test mcp-server/dist/request-evidence-envelope/process-adherence-gaps.test.js
+      - node --test scripts/conversation-adherence-score.test.mjs
+      - node --test mcp-server/dist/checklist-validator.test.js
+      - cd tools/agentstream && go test ./checklist/... -run 'TestTraceableCommitEnvelope|TestCanonicalChecklist_stepMarkers' -count=1
+      - "OMITTED (pre-existing env): node --test mcp-server/dist/e2e/prompt-type-subagent.test.js — agents path reads parent /dev/chatgpt/, not stdd/"
+    manifest_reference: working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/request-evidence-envelope.v1.json
+    proof_boundaries:
+      - baseline-functional
+      - data-integrity-migration
+      - stateful-reliability
+  impact_analysis:
+    impl_inventory:
+      - IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT
+      - IMPL-REQUEST_EVIDENCE_ENVELOPE
+    modules_or_boundaries: "transcript scoring CLI, checklist-validator PSA hydration, agentstream traceable-commit envelope flag, operator backfill scripts, evaluation corpus batch collect"
+    tied_tokens_affected:
+      - REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+      - REQ-REQUEST_EVIDENCE_ENVELOPE
+      - REQ-QUALITY_ASSURANCE_EVIDENCE
+      - REQ-EVIDENCE_CHAIN_PROFILE
+      - ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT
+      - ARCH-REQUEST_EVIDENCE_ENVELOPE
+      - IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT
+      - IMPL-REQUEST_EVIDENCE_ENVELOPE
+      - PROC-AGENT_REQ_CHECKLIST
+  leap_feedback:
+    divergences_from_analysis: "W7-D1–D5 shipped 2026-09-11; plan-close-out 2026-09-11 completed sub-close-out-evidence-sync, envelope zero blocking gaps, close_out gate with Wave 5 inquiry reuse (wave5-closeout-20260910). Git commit deferred per plan-close-out skill."
+    record_status: final
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+    recorded_at: "2026-09-11"
+    title: "Wave 7 — conversation adherence measurement and operator adoption"
+  risk_analysis:
+    abuse_cases:
+      - "Transcript rubric misread as gate substitute blocking legitimate close-out"
+      - "Operator backfill upgrades close-out claim without live sub-close-out-evidence-sync"
+      - "Agentstream hard block breaks agentstream-driven sessions before envelope exists"
+      - "PSA hydration gate fails legacy clients with documented pre-psa-grammar waiver"
+    adversarial_inquiry:
+      assurance_profile: baseline-functional
+      close_out_inquiry_waiver: null
+      depth_tier: integrated
+      gate_policy: advisory
+      integrated_waiver: null
+      note: "Identity-bound activation required before pre_implementation gate for W7-D1/D4/D5 slices."
+    eligibility_triggers:
+      - strict-close-out
+      - methodology-tooling-change
+      - external-input
+    residual_risks:
+      - "Small cohort (5 client envelopes) limits statistical confidence until W7-D3 expands denominators"
+      - "Transcript exports may omit tool invocation detail needed for CALL execution scoring"
+      - "Adoption lag after Wave 6 may depress early W7-D1 scores independent of tooling quality"
+  test_strategy:
+    unit:
+      - "W7-D1 dimension detectors on fixture transcript snippets"
+      - "W7-D5 gate hydration when envelope lists expected_artifact_missing for PSA"
+    composition:
+      - "W7-D4 agentstream traceable-commit with --enforce-envelope flag"
+    operator:
+      - "W7-D2 backfill on tracker-only /dev/test clients"
+      - "W7-D3 batch collect before/after require_envelope flip"
+    e2e: "Not required — offline/operator paths"
+  deliverables:
+    - id: W7-D1
+      slice: A
+      summary: Transcript scoring rubric CLI → conversation-adherence-report.v1.yaml
+    - id: W7-D2
+      slice: B
+      summary: Operator backfill runbook + batch script
+    - id: W7-D3
+      slice: B
+      summary: Evaluation corpus require_envelope adoption + gap report
+    - id: W7-D4
+      slice: C
+      summary: Agentstream envelope warn/enforce at traceable-commit
+    - id: W7-D5
+      slice: C
+      summary: PSA gate hydration cross-read with envelope gaps

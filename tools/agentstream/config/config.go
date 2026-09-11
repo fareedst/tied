@@ -46,6 +46,8 @@ type Config struct {
 	ChecklistVarStrict bool
 	// LeadChecklistBeforeFeatureSpec: when set with both -b and -c, emit checklist turns before feature-spec turns.
 	LeadChecklistBeforeFeatureSpec bool
+	// EnforceEnvelope: W7-D4 opt-in hard block at traceable-commit when envelope path is missing.
+	EnforceEnvelope bool
 
 	// NonCompactHTML: when set, reformat each Turn part to non–single-line UTF-8 HTML after pipeline preload (req IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT).
 	NonCompactHTML bool
@@ -146,6 +148,8 @@ func parseFlags(args []string, c *Config) error {
 				c.LeadChecklistSkipSub = true
 			case k == "--lead-checklist-before-feature":
 				c.LeadChecklistBeforeFeatureSpec = true
+			case k == "--enforce-envelope":
+				c.EnforceEnvelope = true
 			case k == "--verify-session":
 				c.VerifySession = true
 			case k == "-s" || k == "--session-id":
@@ -550,6 +554,8 @@ Options:
       --lead-checklist-skip-sub
       --lead-checklist-before-feature
                     (with -b and -c: lead checklist steps before feature-spec records; default is feature-spec first)
+      --enforce-envelope
+                    (W7-D4: hard block at traceable-commit when request-evidence-envelope path is missing; default warn-only)
       --checklist-var KEY=VALUE   (repeatable; synonym: --lead-checklist-var; expands {{KEY}} in lead checklist YAML)
       --checklist-var-strict      (error if any {{NAME}} remains after expansion; env: AGENTSTREAM_CHECKLIST_VAR_STRICT=1)
   -p, --prompt-file PATH   (repeatable; prepended on each new session, not a separate turn; merged with workspace preload)

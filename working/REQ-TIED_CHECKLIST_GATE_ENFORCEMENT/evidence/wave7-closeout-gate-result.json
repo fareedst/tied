@@ -1,0 +1,22 @@
+{
+  "phase": "close_out",
+  "run_id": "wave5-closeout-20260910",
+  "activation_ok": true,
+  "gate": {
+    "allowed": true,
+    "ok": true,
+    "blocking": false,
+    "depth": "integrated",
+    "phase": "close_out",
+    "diagnostics": [
+      "warn_not_success",
+      "finding_unresolved"
+    ],
+    "evidence_hydrated": [
+      "evidence-provenance.json",
+      "gate-result.json",
+      "finding-ledger.jsonl",
+      "request-evidence-envelope.v1.json:gaps"
+    ]
+  }
+}

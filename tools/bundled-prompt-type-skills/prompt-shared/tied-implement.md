@@ -20,3 +20,12 @@ Follow **Rules**, run **Checklist** steps from the **Tracker** copy, author/repa
    `phase: close_out` and activation (or a valid close-out inquiry waiver). If
    the gate returns `allowed: false`, label the work **incomplete** — do not
    claim success.
+7. **Unified close-out is mandatory for completion claims.** Gate success alone
+   is not machine close-out. Before any “complete” or “ready to commit” handoff,
+   CALL `sub-close-out-evidence-sync` or run
+   `tools/bootstrap/templates/run-close-out-gates.mjs --envelope-blocking
+   --sync-dispositions`, then validate the envelope with `fail_on_error_gaps:
+   true`. Report the three completion signals per
+   [completion-signals-handoff.md](completion-signals-handoff.md) — never
+   collapse machine close-out, process contract, and adherence ledger into a
+   single “done.”

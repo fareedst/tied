@@ -551,7 +551,31 @@ Compressed substitutes (`author-implementation`, `unit-code`, `close-out`) are *
 
 See [`process-adherence-evidence-grade-plan.md`](process-adherence-evidence-grade-plan.md) for dual-write detection (`tracker_dual_write`), process grade rubric, `sub-close-out-evidence-sync`, and `fail_on_process_gaps` envelope validate (shipped 2026-09-10).
 
+## Appendix D — Wave 6 conversation-pattern alignment (2026-09-11)
+
+**Analysis source:** [`evidence-collection-conversation-patterns.md`](evidence-collection-conversation-patterns.md)
+
+Wave 6 closes the gap between **checklist prose** and **conversation exit behavior**:
+
+| W6-D | Deliverable | Status |
+|---|---|---|
+| W6-D1 | `completion-signals-handoff.md` — three-signal parent handoff contract | Shipped |
+| W6-D2 | Skills/agents require unified close-out before completion claims | Shipped |
+| W6-D3 | Integrated close-out defaults process-strict when `fail_on_error_gaps: true` | Shipped |
+| W6-D4 | Envelope `detectPsaExpectationGaps` for non-empty IMPL inventory | Shipped |
+| W6-D5 | Evaluation corpus template with `require_envelope` on pilot rows | Shipped |
+| W6-D6 | Transcript scoring rubric from §9 hypotheses | Deferred |
+
+**Wave 6 verification:**
+
+```bash
+npm run build --prefix mcp-server
+node --test mcp-server/dist/request-evidence-envelope/process-adherence-gaps.test.js
+node --test mcp-server/dist/e2e/prompt-type-subagent.test.js
+go test ./tools/agentstream/checklist/... -run TestCanonicalChecklist_stepMarkers -count=1
+```
+
 ---
 
-**Last updated:** 2026-09-10 (refinement pass 2)
+**Last updated:** 2026-09-11 (Wave 6 appendix)
 **Authoring context:** Analysis of demo client `1789069630` adherence review; drills into gate validator, envelope builder, adversarial inquiry orchestrator, bootstrap manifest, and stdd working-folder dogfood state. Refinement pass 2 adds eligibility triggers, CITDP minimum fields, wave verification commands, and plan-level gate replay evidence.

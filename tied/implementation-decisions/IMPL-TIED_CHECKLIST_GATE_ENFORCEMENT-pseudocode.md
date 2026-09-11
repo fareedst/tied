@@ -301,6 +301,25 @@ procedure NORMALIZE_REMEDIATION_DIAGNOSTICS(diagnostics):
   EFFECTS: pure
   TERMINATION: total
 
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-REQUEST_EVIDENCE_ENVELOPE] [REQ-PSEUDOCODE_STATIC_ANALYSIS] — How: W7-D5 fail verification/close_out when envelope reports PSA expected_artifact_missing and gate-pseudocode-validation is completed without hydrated reports.
+procedure VALIDATE_ENVELOPE_PSA_HYDRATION(tracker, phase, depth, envelope_gaps, pseudocode_reports):
+  Contract:
+  INPUT: tracker, phase, depth, optional envelope_gaps, optional pseudocode_reports map
+  PRE: phase is verification or close_out; depth is integrated or strict_candidate
+  OUTPUT: validation result with psa_envelope_hydration_required diagnostics
+  POST: when gate-pseudocode-validation is completed and envelope gaps include expected_artifact_missing for pseudocode_analysis_report, every impl_inventory IMPL must appear in pseudocode_reports; otherwise success
+  FAILURE_MODES: psa_envelope_hydration_required
+  EFFECTS: pure
+  TERMINATION: total
+  IF phase is not verification or close_out: RETURN success
+  IF depth is not integrated or strict_candidate: RETURN success
+  IF gate-pseudocode-validation is not completed in tracker: RETURN success
+  IF envelope_gaps lacks expected_artifact_missing for pseudocode_analysis_report: RETURN success
+  inventory := union tracker.execution_evidence.impl_inventory
+  missing := inventory IMPL tokens absent from pseudocode_reports
+  IF missing non-empty: RETURN psa_envelope_hydration_required for missing tokens
+  RETURN success
+
 ## VALIDATE_CHECKLIST_GATE
 # [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: select depth before evaluating phase gates and fail closed on invalid evidence.
 
@@ -333,6 +352,7 @@ procedure VALIDATE_CHECKLIST_GATE(input): # [IMPL-TIED_CHECKLIST_GATE_ENFORCEMEN
   IF depth is integrated or strict_candidate AND phase is verification or close_out:
     pseudocodeHistoryResult := VALIDATE_PSEUDOCODE_GATE_HISTORY(input.tracker, input.phase, depth)
     psaResult := VALIDATE_PSEUDOCODE_ANALYSIS_EVIDENCE(input.tracker, input.citdp, input.evidence.pseudocode_reports)
+    envelopePsaResult := VALIDATE_ENVELOPE_PSA_HYDRATION(input.tracker, input.phase, depth, input.evidence.envelope_gaps, input.evidence.pseudocode_reports)
   parentChildResult := VALIDATE_INTEGRATED_PARENT_CHILD_SLUGS(input.tracker, depth, input.phase)
   citdpResult := VALIDATE_ADVERSARIAL_CONTRACT(input.citdp, input.phase)
   IF depth requires integrated pairing AND close_out inquiry waiver does not apply AND activation is missing: append integrated_depth_requires_pairing
