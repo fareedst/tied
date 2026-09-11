@@ -12,6 +12,7 @@ import {
   validateActivationPairing,
   validateChecklistGate,
   validateDepthDowngrade,
+  validateEnvelopeBlockingCrossRead,
   validateEnvelopePsaHydration,
   validateIntegratedParentChildSlugs,
   validateMinimalWaiver,
@@ -910,6 +911,28 @@ describe("validateEnvelopePsaHydration W7-D5", () => {
         code: "expected_artifact_missing",
         artifact_kind: "pseudocode_analysis_report",
       }],
+    });
+    assert.equal(result.ok, true);
+  });
+});
+
+// [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] W8-D4 envelope blocking cross-read at verification/close_out.
+describe("validateEnvelopeBlockingCrossRead [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]", () => {
+  it("blocks when envelopeBlocking and error-severity gap present", () => {
+    const result = validateEnvelopeBlockingCrossRead({
+      phase: "close_out",
+      envelopeBlocking: true,
+      envelopeGaps: [{ code: "thin_ledger", severity: "error" }],
+    });
+    assert.equal(result.ok, false);
+    assert.ok(result.diagnostics.includes("envelope_blocking_gap:thin_ledger"));
+  });
+
+  it("allows warn-severity gaps when envelopeBlocking", () => {
+    const result = validateEnvelopeBlockingCrossRead({
+      phase: "verification",
+      envelopeBlocking: true,
+      envelopeGaps: [{ code: "evidence_stale", severity: "warn" }],
     });
     assert.equal(result.ok, true);
   });

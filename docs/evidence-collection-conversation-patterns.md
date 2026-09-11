@@ -666,4 +666,38 @@ Current helper supports `pre_implementation` (default) and `--verification` only
 
 ---
 
-**Last updated:** 2026-09-11 (refine-plan pass — Wave 7 shipped, close-out procedure §12, gate status refresh)
+## 13. Wave 8 — adherence realignment (close-out complete)
+
+**Goal:** Make unified close-out **dependable by default** via producer/consumer alignment (PSA hydration, ledger automation, profile substance, single completion entrypoint).
+
+**Status:** Close-out complete 2026-09-11. W8-D1–D7 shipped; verification + close_out gates `wave8-closeout-20260911` allowed; envelope zero blocking gaps under `--envelope-blocking`; disposable FILEHASH smoke pass (`run_id: filehash-closeout-close`); combined Wave 7+8 git commit.
+
+**Plan document:** [`adherence-realignment-wave8-plan.md`](adherence-realignment-wave8-plan.md)
+
+**Prerequisite:** §12 Wave 7 close-out (machine close-out complete; git commit may remain pending).
+
+**Empirical motivation:** Parent-session grading of `1789136889` (TCP post-remediation, gate pass) vs `1789147101` (FILEHASH, 4/4 PSA on disk but gate `psa_missing`, `thin_ledger`, profile `not_measured`).
+
+**Deliverables:** W8-D1–D7 (PSA auto-load, sync `outcome_verified`, profile substance, single entrypoint, skill defaults, cohort replay, agentstream enforce promotion).
+
+**Tracker / CITDP:** `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/agent-req-implementation-checklist-wave8-adherence-realignment.yaml`, `CITDP-wave8-adherence-realignment.yaml`
+
+Do not duplicate §1–8 analysis corpus here; Wave 8 plan references fixtures and failure modes only.
+
+### 13.1 Wave 8 close-out procedure
+
+Unified LEAP close-out for Wave 8 is documented in [`adherence-realignment-wave8-close-out.md`](adherence-realignment-wave8-close-out.md) (mirrors §12 Wave 7 template).
+
+| Item | Value |
+|---|---|
+| **Run identity** | `run_id: wave8-closeout-20260911` |
+| **Tracker** | Expand `agent-req-implementation-checklist-wave8-adherence-realignment.yaml` (mirror Wave 7 close-out slugs) |
+| **Unified runner** | `run-close-out-gates.mjs --envelope-blocking --sync-dispositions --reconcile` |
+| **Acceptance smoke** | Disposable FILEHASH client (`/Users/fareed/Documents/dev/test/1789147101`) — not stdd dogfood |
+| **Commit posture** | Combined Wave 7+8 commit created 2026-09-11 (sponsor-requested) |
+
+**Delegation:** Invoke **plan-close-out** subagent with the close-out document linked; follow [`tied-close-out-process.md`](../tools/bundled-prompt-type-skills/prompt-shared/tied-close-out-process.md).
+
+---
+
+**Last updated:** 2026-09-11 (Wave 8 close-out complete §13; Wave 7+8 combined commit)

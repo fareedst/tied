@@ -1,0 +1,155 @@
+CITDP-wave8-adherence-realignment:
+  change_definition:
+    current_behavior: "Wave 7 made adherence measurable (transcript rubric, corpus require_envelope, PSA hydration when envelope reports missing) but cohort grading shows path-dependent close-out: FILEHASH has 4/4 PSA on disk yet gate reports psa_missing; thin_ledger persists after sync; profile validators remain not_measured; agents still exit at gate-only success."
+    desired_behavior: "Wave 8 aligns producers and consumers: auto-load PSA for gate validate (W8-D1), sync emits outcome_verified ledger rows (W8-D2), profile substance chain after collect (W8-D3), single completion entrypoint merging gate+envelope (W8-D4), skill defaults requiring unified runner (W8-D5), cohort replay regression (W8-D6), and corpus-backed agentstream enforce default (W8-D7)."
+    non_goals:
+      - "Wave 8 implementation in refine-plan pass (plan document + tracker/CITDP draft only)"
+      - "Manual repair of demo client 1789069630 as methodology evidence"
+      - "New REQ token unless sponsor requests REQ-ADHERENCE_REALIGNMENT"
+      - "Async-boundaries-catalog envelope kind"
+      - "Grammar v2 adoption"
+    success_criteria:
+      - "W8-D1 through W8-D7 deliverables ship with RED tests green per plan §3.1"
+      - "FILEHASH replay close_out allowed true with zero blocking envelope gaps"
+      - "Four-fixture regression suite green after each behavior-changing slice"
+      - "Unified runner is documented and skill-mandatory as single close-out API"
+    unchanged_behavior:
+      - "Wave 6 three completion signals handoff contract"
+      - "Wave 7 transcript rubric (observation-only, not a gate)"
+      - "Advisory inquiry policy for observed findings"
+  completion_criteria:
+    activation:
+      artifact_hashes:
+        obligation-report.json: a6e98b00648031526981c9fd5adac45e711729e086cb737dff3ac249766cac61
+        finding-ledger.jsonl: d91a4513775a35f4b716de408585cdbeeb72c762d8316f1644ff8ea93884c606
+        gate-result.json: 2b5a1345972339b45f0180dd53b80995986432a0bb83d6895f7e1cede71f5296
+        evidence-provenance.json: cd298331b930b479f27113e970b8da51b9438ad87eadb9b77041e92517860286
+      phase: close_out
+      project_id: stdd-project
+      request_token: REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+      run_id: wave8-closeout-20260911
+      scope:
+        - W8-D1
+        - W8-D2
+        - W8-D3
+        - W8-D4
+        - W8-D5
+        - W8-D6
+        - W8-D7
+      scope_hash: c664c35ec91a4e62c4a4068a9f313de8d5cfa5d27cbbdb6eaeabb538ec99f35e
+    checklist_gate:
+      dispositions:
+        - completed
+        - not_applicable
+        - pending
+        - waived
+      fail_closed: true
+      phases:
+        - close_out
+        - pre_implementation
+        - verification
+    verification_gate_notes: "Build-plan 2026-09-11: W8-D1–D7 shipped. Plan-close-out must expand tracker, run fresh wave8 inquiry (run_id wave8-closeout-20260911), refresh PSA Layer C, then verification + close_out via run-close-out-gates.mjs --envelope-blocking --sync-dispositions --reconcile. Machine close-out requires merged_decision.allowed true AND envelope zero blocking gaps. See docs/adherence-realignment-wave8-close-out.md."
+    close_out_gate_notes: "Finalize at plan-close-out: sub-close-out-evidence-sync via unified runner; disposable FILEHASH smoke pass; CITDP record_status final; traceable-commit with commit_deferred true. Advisory finding_unresolved and legacy process_grade band D do not block when envelope has zero blocking error gaps."
+  evidence:
+    commands:
+      - npm run build --prefix mcp-server
+      - node --test mcp-server/dist/checklist-validator.test.js
+      - node --test mcp-server/dist/checklist-gate-evidence-hydration.test.js
+      - node --test mcp-server/dist/request-evidence-envelope/process-adherence-gaps.test.js
+      - go test ./tools/agentstream/checklist/... -count=1
+      - go test ./tools/agentstream/cmd/adherence-reconcile/... -count=1
+      - node scripts/replay-adherence-fixtures.mjs --corpus working/evaluation/evaluation-corpus.v1.yaml
+      - node tools/bootstrap/templates/run-close-out-gates.mjs --phase verification --run-id wave8-closeout-20260911 --envelope-blocking --sync-dispositions --reconcile
+      - node tools/bootstrap/templates/run-close-out-gates.mjs --phase close_out --run-id wave8-closeout-20260911 --envelope-blocking --sync-dispositions --reconcile
+    manifest_reference: working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/verification-evidence-manifest.v1.json
+    proof_boundaries:
+      - baseline-functional
+      - data-integrity-migration
+      - stateful-reliability
+  impact_analysis:
+    impl_inventory:
+      - IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT
+      - IMPL-REQUEST_EVIDENCE_ENVELOPE
+      - IMPL-EVIDENCE_CHAIN_PROFILE
+    modules_or_boundaries: "checklist-gate-evidence-hydration, sync-tracker-dispositions outcome_verified emission, evidence chain profile substance chain, unified gate+envelope entrypoint, prompt-type skills, adherence fixture replay, agentstream traceable-commit enforce default"
+    tied_tokens_affected:
+      - REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+      - REQ-REQUEST_EVIDENCE_ENVELOPE
+      - REQ-QUALITY_ASSURANCE_EVIDENCE
+      - REQ-EVIDENCE_CHAIN_PROFILE
+      - REQ-PSEUDOCODE_STATIC_ANALYSIS
+      - REQ-PROMPT_TYPE_GLOBAL_SKILLS
+      - ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT
+      - ARCH-REQUEST_EVIDENCE_ENVELOPE
+      - ARCH-EVIDENCE_CHAIN_PROFILE
+      - IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT
+      - IMPL-REQUEST_EVIDENCE_ENVELOPE
+      - IMPL-EVIDENCE_CHAIN_PROFILE
+      - IMPL-PROMPT_TYPE_GLOBAL_SKILLS
+      - PROC-AGENT_REQ_CHECKLIST
+  leap_feedback:
+    divergences_from_analysis: "Refine-plan pass materializes plan only; no production code changes."
+    record_status: final
+    tied_stack_updates_required:
+      - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT pseudo-code for PSA auto-load and single entrypoint (build-plan)"
+      - "IMPL-REQUEST_EVIDENCE_ENVELOPE pseudo-code for envelope cross-read in gate validate (build-plan)"
+  record_identity:
+    change_request_id: REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+    recorded_at: "2026-09-11"
+    title: "Wave 8 — adherence realignment (dependable unified close-out)"
+  risk_analysis:
+    abuse_cases:
+      - "PSA auto-load masks corrupt PSA JSON by loading wrong alias path"
+      - "Automated outcome_verified rows claim verification without RESOLVE_EVIDENCE_REFS"
+      - "Profile substance chain runs validators against wrong project_root"
+      - "Default agentstream enforce breaks immature clients without envelope"
+      - "Fixture replay passes on stale snapshot while live clients regress"
+    adversarial_inquiry:
+      assurance_profile: baseline-functional
+      close_out_inquiry_waiver: null
+      depth_tier: integrated
+      gate_policy: advisory
+      integrated_waiver: null
+      note: "Identity-bound activation required before build-plan pre_implementation re-run with implementation scope."
+    eligibility_triggers:
+      - strict-close-out
+      - methodology-tooling-change
+      - persistence
+      - external-input
+    residual_risks:
+      - "Wave 7 sponsor commit pending may block Wave 8 authorization timing"
+      - "FILEHASH fixture may drift if operator mutates /dev/test/1789147101"
+      - "W8-D7 enforce default may require immature-client opt-out documentation"
+  test_strategy:
+    unit:
+      - "W8-D1 PSA hydration from canonical paths"
+      - "W8-D2 outcome_verified JSONL emission per completed slug"
+      - "W8-D4 merged gate+envelope blocking decision"
+    composition:
+      - "W8-D3 profile substance chain in run-close-out-gates.mjs"
+      - "W8-D5 skill CALL contract for unified runner flags"
+    operator:
+      - "W8-D6 replay-adherence-fixtures against evaluation corpus rows"
+    e2e: "Not required — fixture replay and CLI paths suffice"
+  deliverables:
+    - id: W8-D1
+      slice: A
+      summary: PSA auto-load for gate validate from canonical paths
+    - id: W8-D2
+      slice: B
+      summary: Sync emits outcome_verified ledger rows
+    - id: W8-D3
+      slice: B
+      summary: Profile substance chain after manifest + PSA
+    - id: W8-D4
+      slice: C
+      summary: Single completion entrypoint merging gate and envelope
+    - id: W8-D5
+      slice: C
+      summary: Skill default tightening for unified runner
+    - id: W8-D6
+      slice: D
+      summary: Cohort replay regression suite
+    - id: W8-D7
+      slice: D
+      summary: Promote agentstream enforce to integrated default

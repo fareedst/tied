@@ -184,13 +184,102 @@ async function loadModules() {
   return { validator, hydration, activation, envelopeBuild, envelopeValidate, reconcileRunner, yamlLoader };
 }
 
-function runSyncDispositions(trackerAbsolute) {
+function runSyncDispositions(trackerAbsolute, projectRoot, requestToken, runId) {
   const script = path.join(REPO_ROOT, "tools/bootstrap/templates/sync-tracker-dispositions.mjs");
-  execFileSync(process.execPath, [script, "--tracker", trackerAbsolute], {
+  const ledgerPath = path.join("working", requestToken, "gates", "ledger.jsonl");
+  execFileSync(process.execPath, [
+    script,
+    "--tracker",
+    trackerAbsolute,
+    "--project-root",
+    projectRoot,
+    "--ledger-path",
+    ledgerPath,
+    "--run-id",
+    runId ?? `close-out-sync-${Date.now()}`,
+  ], {
     cwd: REPO_ROOT,
     encoding: "utf8",
     stdio: ["ignore", "pipe", "pipe"],
   });
+}
+
+async function generateSubstanceProfile(args, citdp, manifestResult, pseudocodeReports) {
+  const psaCount = Object.keys(pseudocodeReports ?? {}).length;
+  if (!manifestResult.ok || psaCount === 0) {
+    return { ok: false, skipped: true, reason: psaCount === 0 ? "no_psa_reports" : "manifest_not_collected" };
+  }
+  const profileModule = await import(
+    pathToFileURL(path.join(MCP_DIST, "fidelity-research/evidence-chain-profile.js")).href
+  );
+  const liveValidators = await import(
+    pathToFileURL(path.join(MCP_DIST, "fidelity-research/live-structural-validators.js")).href
+  );
+  const outputPath = path.join(
+    args.projectRoot,
+    "working",
+    args.requestToken,
+    "evidence",
+    "evidence-chain-profile.v1.json",
+  );
+  mkdirSync(path.dirname(outputPath), { recursive: true });
+  const tiedBase = path.join(args.projectRoot, "tied");
+  const tokens = citdp?.impact_analysis?.tied_tokens_affected ?? [args.requestToken];
+  const result = profileModule.generateEvidenceChainProfile({
+    project_root: args.projectRoot,
+    tied_base_path: tiedBase,
+    confirmed_tied_base_path: tiedBase,
+    profile_depth: "integrated",
+    output_mode: "file",
+    output_path: outputPath,
+    observed_at: new Date().toISOString(),
+    run_metadata: {
+      run_id: args.runId ?? `close-out-profile-${Date.now()}`,
+      commit: resolveGitCommit(args.projectRoot),
+    },
+    scope: {
+      requirement_tokens: tokens.filter((t) => String(t).startsWith("REQ-")),
+      implementation_tokens: (citdp?.impact_analysis?.impl_inventory ?? [])
+        .map((entry) => (typeof entry === "string" ? entry : entry?.impl_token))
+        .filter(Boolean),
+      impl_tokens_for_pseudocode: Object.keys(pseudocodeReports),
+      quality_plan: {
+        selected_profiles: citdp?.risk_analysis?.quality_profiles ?? ["baseline-functional"],
+        checks: [],
+      },
+    },
+    structural_validators: liveValidators.createLiveStructuralValidators({
+      requirement_tokens: tokens.filter((t) => String(t).startsWith("REQ-")),
+      implementation_tokens: (citdp?.impact_analysis?.impl_inventory ?? [])
+        .map((entry) => (typeof entry === "string" ? entry : entry?.impl_token))
+        .filter(Boolean),
+      impl_tokens_for_pseudocode: Object.keys(pseudocodeReports),
+    }),
+    manifest_reference: manifestResult.manifest_path,
+  });
+  return result.ok
+    ? { ok: true, path: path.relative(args.projectRoot, outputPath), validators_observed: true }
+    : { ok: false, error: result.error, stage: result.stage };
+}
+
+function envelopeGapsFromEnvelope(envelope) {
+  if (!envelope || !Array.isArray(envelope.gaps)) return [];
+  return envelope.gaps.map((gap) => ({
+    code: gap.code,
+    artifact_kind: gap.artifact_kind,
+    severity: gap.severity,
+  }));
+}
+
+function mergeCloseOutDecision(gate, envelopeValidation) {
+  const gateAllowed = gate?.allowed !== false;
+  const envelopeOk = envelopeValidation?.ok !== false;
+  return {
+    allowed: gateAllowed && envelopeOk,
+    gate_allowed: gateAllowed,
+    envelope_ok: envelopeOk,
+    blocking: !(gateAllowed && envelopeOk),
+  };
 }
 
 async function main() {
@@ -215,15 +304,15 @@ async function main() {
   const trackerAbsolute = path.isAbsolute(args.trackerPath)
     ? args.trackerPath
     : path.join(args.projectRoot, args.trackerPath);
-  if (args.syncDispositions) {
-    runSyncDispositions(trackerAbsolute);
-  }
   let tracker = yaml.load(readFileSync(trackerAbsolute, "utf8"));
+  if (args.syncDispositions) {
+    runSyncDispositions(trackerAbsolute, args.projectRoot, args.requestToken, args.runId);
+    tracker = yaml.load(readFileSync(trackerAbsolute, "utf8"));
+  }
   const citdp = args.citdpPath ? loadCitdpRecord(args.citdpPath, args.projectRoot) : {};
   const depth = citdp?.risk_analysis?.adversarial_inquiry?.depth_tier ?? "integrated";
   const integratedDepth = depth === "integrated" || depth === "strict_candidate";
-  const failOnProcessGaps = args.failOnProcessGaps
-    || (args.envelopeBlocking && integratedDepth);
+  const failOnProcessGaps = args.failOnProcessGaps;
   const requiredStepSlugs = validator.derivePhaseAwareSlugs(depth, args.phase);
 
   let reconcileResult = { ok: false, skipped: true };
@@ -268,8 +357,35 @@ async function main() {
     manifestResult = await collectQualityManifest(args, citdp);
   }
 
+  let profileResult = { ok: false, skipped: true, reason: "not_requested" };
+  if (!args.rebuildEnvelopeOnly) {
+    profileResult = await generateSubstanceProfile(args, citdp, manifestResult, pseudocodeReports);
+  }
+
+  const tiedBase = path.join(args.projectRoot, "tied");
+  const buildResult = await envelopeBuild.buildRequestEvidenceEnvelope({
+    request_token: args.requestToken,
+    project_root: args.projectRoot,
+    tied_base_path: tiedBase,
+    confirmed_tied_base_path: tiedBase,
+    gate_policy: citdp?.risk_analysis?.adversarial_inquiry?.gate_policy ?? "advisory",
+    depth_tier: depth,
+    output_mode: "file",
+  });
+
+  let envelopeValidation = { ok: true, diagnostics: [], blocking_gap_count: 0, advisory_gap_count: 0 };
+  if (buildResult.ok) {
+    envelopeValidation = await envelopeValidate.validateRequestEvidenceEnvelope({
+      envelope: buildResult.envelope,
+      fail_on_error_gaps: args.envelopeBlocking,
+      fail_on_process_gaps: failOnProcessGaps,
+    });
+  }
+
+  const envelopeGaps = buildResult.ok ? envelopeGapsFromEnvelope(buildResult.envelope) : [];
+
   let gate = { allowed: true, blocking: false, diagnostics: [], evidence_hydrated: false };
-  let hydrationResult = { evidence: {}, hydrated: false };
+  let hydrationResult = { evidence: {}, hydrated: [], diagnostics: [] };
   if (!args.rebuildEnvelopeOnly) {
     hydrationResult = await hydration.hydrateGateEvidenceFromActivation({
       phase: args.phase,
@@ -278,6 +394,8 @@ async function main() {
         trackerSource: "authoritative_file",
         requestToken: args.requestToken,
         pseudocodeReports,
+        envelopeGaps,
+        envelopeBlocking: args.envelopeBlocking,
       },
       projectRoot: args.projectRoot,
     });
@@ -291,35 +409,20 @@ async function main() {
     });
   }
 
-  const tiedBase = yamlLoader.getBasePath?.() ?? path.join(args.projectRoot, "tied");
-  const buildResult = await envelopeBuild.buildRequestEvidenceEnvelope({
-    request_token: args.requestToken,
-    project_root: args.projectRoot,
-    tied_base_path: tiedBase,
-    confirmed_tied_base_path: tiedBase,
-    gate_policy: citdp?.risk_analysis?.adversarial_inquiry?.gate_policy ?? "advisory",
-    depth_tier: depth,
-    output_mode: "file",
-  });
-
-  let envelopeValidation = { ok: true, diagnostics: [] };
-  if (buildResult.ok) {
-    envelopeValidation = await envelopeValidate.validateRequestEvidenceEnvelope({
-      envelope: buildResult.envelope,
-      fail_on_error_gaps: args.envelopeBlocking,
-      fail_on_process_gaps: failOnProcessGaps,
-    });
-  }
+  const mergedDecision = mergeCloseOutDecision(gate, envelopeValidation);
 
   const summary = {
     phase: args.phase,
     reconcile: reconcileResult,
     quality_manifest: manifestResult,
+    evidence_chain_profile: profileResult,
+    merged_decision: mergedDecision,
     gate: {
       allowed: gate.allowed,
       blocking: gate.blocking,
       diagnostics: gate.diagnostics,
-      evidence_hydrated: hydrationResult.hydrated,
+      evidence_hydrated: hydrationResult.hydrated?.length > 0,
+      hydration_diagnostics: hydrationResult.diagnostics,
     },
     envelope: buildResult.ok
       ? {
@@ -334,9 +437,8 @@ async function main() {
 
   process.stdout.write(`${JSON.stringify(summary, null, 2)}\n`);
   if (
-    (!args.rebuildEnvelopeOnly && !gate.allowed)
+    (!args.rebuildEnvelopeOnly && !mergedDecision.allowed)
     || !buildResult.ok
-    || !envelopeValidation.ok
     || (args.reconcile && reconcileResult.ok === false && !reconcileResult.skipped)
   ) {
     process.exitCode = 1;

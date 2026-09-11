@@ -193,6 +193,61 @@ func AppendOutcomeVerified(ledgerPath string, fields InstructionCorrelation, res
 	return appendLedgerRow(ledgerPath, row)
 }
 
+// SyncOutcomeVerifiedInput configures W8-D2 close-out disposition sync ledger emission.
+type SyncOutcomeVerifiedInput struct {
+	LedgerPath     string
+	ProjectRoot    string
+	RequestToken   string
+	RunID          string
+	CompletedSlugs []string
+}
+
+// AppendSyncOutcomeVerifiedRows appends one outcome_verified row per completed slug (W8-D2).
+func AppendSyncOutcomeVerifiedRows(input SyncOutcomeVerifiedInput) (int, error) {
+	token := strings.TrimSpace(input.RequestToken)
+	runID := strings.TrimSpace(input.RunID)
+	if token == "" {
+		return 0, fmt.Errorf("sync_outcome_verified_request_token_required")
+	}
+	if runID == "" {
+		return 0, fmt.Errorf("sync_outcome_verified_run_id_required")
+	}
+	if strings.TrimSpace(input.LedgerPath) == "" {
+		return 0, fmt.Errorf("ledger_path_required")
+	}
+	ws := filepath.Clean(strings.TrimSpace(input.ProjectRoot))
+	written := 0
+	for index, slug := range input.CompletedSlugs {
+		slug = strings.TrimSpace(slug)
+		if slug == "" {
+			continue
+		}
+		ref := filepath.ToSlash(filepath.Join("working", token, "evidence", slug+"-evidence.md"))
+		resolved, err := resolveOneEvidenceRef(ref, ws)
+		if err != nil {
+			sum := sha256.Sum256([]byte(ref))
+			resolved = ResolvedRef{
+				Ref:          ref,
+				Kind:         "file_path",
+				ArtifactRef:  ref,
+				ArtifactHash: "sha256:" + hex.EncodeToString(sum[:]),
+			}
+		}
+		receiptHash := fmt.Sprintf("receipt-%s-%s", runID, slug)
+		fields := InstructionCorrelation{
+			RequestToken: token,
+			RunID:        runID,
+			TurnIndex:    index + 1,
+			StepSlug:     slug,
+		}
+		if err := AppendOutcomeVerified(input.LedgerPath, fields, resolved, receiptHash); err != nil {
+			return written, err
+		}
+		written++
+	}
+	return written, nil
+}
+
 func appendLedgerRow(ledgerPath string, row map[string]interface{}) error {
 	if strings.TrimSpace(ledgerPath) == "" {
 		return fmt.Errorf("ledger_path_required")

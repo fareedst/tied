@@ -1,17 +1,22 @@
 {
   "provenance": {
-    "block_id": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#8103ac98e7e59baa",
+    "block_id": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#5ceaf919328c3c83",
     "builder": "build_adversarial_inquiry_from_tied.rb",
     "command": "tied_adversarial_inquiry_run",
     "phase": "pre_implementation",
-    "production_path": "mcp-server/src/request-evidence-envelope/build.ts",
+    "production_path": "tools/bootstrap/templates/run-close-out-gates.mjs",
     "project_id": "cfd5bf6ad98024eb",
     "request_token": "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT",
-    "run_id": "wave5-pre-20260910",
-    "source_revision": "wave5-process-adherence-20260910",
+    "run_id": "wave8-closeout-20260911",
+    "source_revision": "wave8-adherence-realignment-closeout-20260911",
     "test_paths": [
+      "mcp-server/src/checklist-validator.test.ts",
+      "mcp-server/src/checklist-gate-evidence-hydration.test.ts",
+      "mcp-server/src/tools/checklist-gate-mcp.test.ts",
       "mcp-server/src/request-evidence-envelope/process-adherence-gaps.test.ts",
-      "mcp-server/src/checklist-validator.test.ts"
+      "tools/agentstream/checklist/adherence_ledger_test.go",
+      "tools/agentstream/checklist/traceable_commit_envelope_test.go",
+      "scripts/replay-adherence-fixtures.test.mjs"
     ],
     "tied_base_path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied",
     "tool_version": "1.0.0"

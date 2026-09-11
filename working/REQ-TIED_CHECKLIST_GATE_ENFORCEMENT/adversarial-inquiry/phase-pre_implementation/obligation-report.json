@@ -3,17 +3,97 @@
   "findings": [
     {
       "direction": "B",
+      "id": "0a5204ae980ded14",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "stmt-path-3"
+    },
+    {
+      "direction": "A",
       "evidenceRefs": [
-        "prod-path-1"
+        "test-path-1"
       ],
-      "id": "7e1620b2efc1165c",
+      "id": "10afc8ce38e5c812",
       "kind": "reliability",
-      "message": "Evidence describes behavior not represented in the specification.",
+      "message": "Evidence does not match the specified statement.",
       "proofBoundary": "semantic_fidelity",
       "source": {
-        "location": "mcp-server/src/request-evidence-envelope/build.ts"
+        "location": "mcp-server/src/checklist-validator.test.ts"
       },
-      "statementId": "stmt-path-prod"
+      "statementId": "stmt-path-1"
+    },
+    {
+      "direction": "B",
+      "id": "12f4cac80ef2c0c8",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "stmt-path-6"
+    },
+    {
+      "direction": "A",
+      "evidenceRefs": [
+        "test-path-7"
+      ],
+      "id": "39d5e85ec04946ac",
+      "kind": "reliability",
+      "message": "Evidence does not match the specified statement.",
+      "proofBoundary": "semantic_fidelity",
+      "source": {
+        "location": "scripts/replay-adherence-fixtures.test.mjs"
+      },
+      "statementId": "stmt-path-7"
+    },
+    {
+      "direction": "A",
+      "evidenceRefs": [
+        "test-path-2"
+      ],
+      "id": "3c09568763cb7713",
+      "kind": "reliability",
+      "message": "Evidence does not match the specified statement.",
+      "proofBoundary": "semantic_fidelity",
+      "source": {
+        "location": "mcp-server/src/checklist-gate-evidence-hydration.test.ts"
+      },
+      "statementId": "stmt-path-2"
+    },
+    {
+      "direction": "A",
+      "evidenceRefs": [
+        "test-path-5"
+      ],
+      "id": "6b0dc8cd293da69b",
+      "kind": "reliability",
+      "message": "Evidence does not match the specified statement.",
+      "proofBoundary": "semantic_fidelity",
+      "source": {
+        "location": "tools/agentstream/checklist/adherence_ledger_test.go"
+      },
+      "statementId": "stmt-path-5"
+    },
+    {
+      "direction": "A",
+      "evidenceRefs": [
+        "test-path-3"
+      ],
+      "id": "7132bb41d80a3b62",
+      "kind": "reliability",
+      "message": "Evidence does not match the specified statement.",
+      "proofBoundary": "semantic_fidelity",
+      "source": {
+        "location": "mcp-server/src/tools/checklist-gate-mcp.test.ts"
+      },
+      "statementId": "stmt-path-3"
+    },
+    {
+      "direction": "B",
+      "id": "75c6acdd9ce3f25a",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "stmt-path-5"
     },
     {
       "direction": "B",
@@ -22,6 +102,14 @@
       "message": "Specification statement has no corresponding evidence.",
       "proofBoundary": "semantic_fidelity",
       "statementId": "stmt-path-1"
+    },
+    {
+      "direction": "B",
+      "id": "83e469927841af38",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "stmt-path-7"
     },
     {
       "direction": "B",
@@ -34,30 +122,52 @@
     {
       "direction": "A",
       "evidenceRefs": [
-        "test-path-1"
+        "test-path-4"
       ],
-      "id": "a2b5164617f6954e",
+      "id": "c4701996377ce543",
       "kind": "reliability",
       "message": "Evidence does not match the specified statement.",
       "proofBoundary": "semantic_fidelity",
       "source": {
         "location": "mcp-server/src/request-evidence-envelope/process-adherence-gaps.test.ts"
       },
-      "statementId": "stmt-path-1"
+      "statementId": "stmt-path-4"
     },
     {
       "direction": "A",
       "evidenceRefs": [
-        "test-path-2"
+        "test-path-6"
       ],
-      "id": "eba372cf82346c23",
+      "id": "c9cd19bae0cd36af",
       "kind": "reliability",
       "message": "Evidence does not match the specified statement.",
       "proofBoundary": "semantic_fidelity",
       "source": {
-        "location": "mcp-server/src/checklist-validator.test.ts"
+        "location": "tools/agentstream/checklist/traceable_commit_envelope_test.go"
       },
-      "statementId": "stmt-path-2"
+      "statementId": "stmt-path-6"
+    },
+    {
+      "direction": "B",
+      "evidenceRefs": [
+        "prod-path-1"
+      ],
+      "id": "d7e66d5632e97818",
+      "kind": "reliability",
+      "message": "Evidence describes behavior not represented in the specification.",
+      "proofBoundary": "semantic_fidelity",
+      "source": {
+        "location": "tools/bootstrap/templates/run-close-out-gates.mjs"
+      },
+      "statementId": "stmt-path-prod"
+    },
+    {
+      "direction": "B",
+      "id": "f2c4c4220a05299b",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "stmt-path-4"
     }
   ],
   "graph": {
@@ -70,35 +180,60 @@
       {
         "from": "constraint:constraint-tied_checklist_gate_enforcement",
         "kind": "constraint_block",
-        "to": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#8103ac98e7e59baa"
+        "to": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#5ceaf919328c3c83"
       },
       {
-        "from": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#8103ac98e7e59baa",
+        "from": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#5ceaf919328c3c83",
         "kind": "block_evidence",
         "to": "evidence:prod-1"
       },
       {
-        "from": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#8103ac98e7e59baa",
+        "from": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#5ceaf919328c3c83",
         "kind": "block_evidence",
         "to": "evidence:test-1"
       },
       {
-        "from": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#8103ac98e7e59baa",
+        "from": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#5ceaf919328c3c83",
         "kind": "block_evidence",
         "to": "evidence:test-2"
       },
       {
-        "from": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#8103ac98e7e59baa",
+        "from": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#5ceaf919328c3c83",
+        "kind": "block_evidence",
+        "to": "evidence:test-3"
+      },
+      {
+        "from": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#5ceaf919328c3c83",
+        "kind": "block_evidence",
+        "to": "evidence:test-4"
+      },
+      {
+        "from": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#5ceaf919328c3c83",
+        "kind": "block_evidence",
+        "to": "evidence:test-5"
+      },
+      {
+        "from": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#5ceaf919328c3c83",
+        "kind": "block_evidence",
+        "to": "evidence:test-6"
+      },
+      {
+        "from": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#5ceaf919328c3c83",
+        "kind": "block_evidence",
+        "to": "evidence:test-7"
+      },
+      {
+        "from": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#5ceaf919328c3c83",
         "kind": "block_case",
         "to": "case:CE-001"
       },
       {
-        "from": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#8103ac98e7e59baa",
+        "from": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#5ceaf919328c3c83",
         "kind": "block_case",
         "to": "case:CE-002"
       },
       {
-        "from": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#8103ac98e7e59baa",
+        "from": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#5ceaf919328c3c83",
         "kind": "block_case",
         "to": "case:CE-003"
       }
@@ -123,22 +258,47 @@
       {
         "id": "evidence:prod-1",
         "kind": "evidence",
-        "revision": "wave5-process-adherence-20260910"
+        "revision": "wave8-adherence-realignment-closeout-20260911"
       },
       {
         "id": "evidence:test-1",
         "kind": "evidence",
-        "revision": "wave5-process-adherence-20260910"
+        "revision": "wave8-adherence-realignment-closeout-20260911"
       },
       {
         "id": "evidence:test-2",
         "kind": "evidence",
-        "revision": "wave5-process-adherence-20260910"
+        "revision": "wave8-adherence-realignment-closeout-20260911"
       },
       {
-        "id": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#8103ac98e7e59baa",
+        "id": "evidence:test-3",
+        "kind": "evidence",
+        "revision": "wave8-adherence-realignment-closeout-20260911"
+      },
+      {
+        "id": "evidence:test-4",
+        "kind": "evidence",
+        "revision": "wave8-adherence-realignment-closeout-20260911"
+      },
+      {
+        "id": "evidence:test-5",
+        "kind": "evidence",
+        "revision": "wave8-adherence-realignment-closeout-20260911"
+      },
+      {
+        "id": "evidence:test-6",
+        "kind": "evidence",
+        "revision": "wave8-adherence-realignment-closeout-20260911"
+      },
+      {
+        "id": "evidence:test-7",
+        "kind": "evidence",
+        "revision": "wave8-adherence-realignment-closeout-20260911"
+      },
+      {
+        "id": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#5ceaf919328c3c83",
         "kind": "block",
-        "revision": "64983d22420e39a9"
+        "revision": "7e0e2d91d320028c"
       },
       {
         "id": "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT#criterion-1",
@@ -155,6 +315,8 @@
   "readOnly": true,
   "schemaVersion": "adversarial-inquiry-report.v1",
   "scope": [
-    "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#8103ac98e7e59baa"
-  ]
+    "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#5ceaf919328c3c83"
+  ],
+  "phase": "pre_implementation",
+  "run_id": "wave8-closeout-20260911"
 }

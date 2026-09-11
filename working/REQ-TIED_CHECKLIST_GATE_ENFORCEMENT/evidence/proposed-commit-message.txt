@@ -1,8 +1,11 @@
-feat(checklist): Wave 7 conversation adherence measurement and operator adoption
+feat(checklist): Wave 8 adherence realignment with dependable close-out
 
-Ship transcript scoring rubric, operator envelope backfill, evaluation corpus
-require_envelope adoption, agentstream envelope enforcement pilot, and PSA gate
-hydration when envelope reports missing Layer C artifacts.
+PSA auto-load for gate validate, outcome_verified ledger sync, profile substance
+chain, merged gate+envelope decision, skill unified-runner defaults, cohort replay
+fixtures, and agentstream enforce default at integrated depth.
 
-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT REQ-REQUEST_EVIDENCE_ENVELOPE
+Close-out run_id wave8-closeout-20260911: verification + close_out allowed;
+envelope zero blocking gaps; FILEHASH disposable smoke pass.
+
+Refs: REQ-TIED_CHECKLIST_GATE_ENFORCEMENT REQ-REQUEST_EVIDENCE_ENVELOPE
 PROC-AGENT_REQ_CHECKLIST

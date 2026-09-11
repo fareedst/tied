@@ -899,6 +899,8 @@ export type ChecklistGateEvidenceInput = {
   requestToken?: string;
   /** Cross-read from request-evidence-envelope gaps (Wave 7-D5 PSA hydration). */
   envelopeGaps?: readonly EnvelopeGapEvidence[];
+  /** When true at verification/close_out, error-severity envelope gaps block gate allowed (W8-D4). */
+  envelopeBlocking?: boolean;
 };
 
 const IMPL_TOKEN_RE = /^IMPL-[A-Z0-9][A-Z0-9_-]*$/u;
@@ -1140,6 +1142,28 @@ export function validateEnvelopePsaHydration(input: {
   return { ok: diagnostics.length === 0, diagnostics };
 }
 
+// [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-REQUEST_EVIDENCE_ENVELOPE] — How: W8-D4 merge envelope blocking gaps into gate allowed at verification/close_out.
+export function validateEnvelopeBlockingCrossRead(input: {
+  phase: GatePhase;
+  envelopeGaps?: readonly EnvelopeGapEvidence[];
+  envelopeBlocking?: boolean;
+}): ValidationResult {
+  if (input.phase !== "verification" && input.phase !== "close_out") {
+    return { ok: true, diagnostics: [] };
+  }
+  if (!input.envelopeBlocking) {
+    return { ok: true, diagnostics: [] };
+  }
+  const diagnostics: string[] = [];
+  for (const gap of input.envelopeGaps ?? []) {
+    const severity = gap.severity ?? "warn";
+    if (severity === "error") {
+      diagnostics.push(`envelope_blocking_gap:${gap.code}`);
+    }
+  }
+  return { ok: diagnostics.length === 0, diagnostics };
+}
+
 // [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: select depth before evaluating phase gates and fail closed on invalid evidence.
 export function validateChecklistGate(input: {
   tracker: unknown;
@@ -1281,6 +1305,11 @@ export function validateChecklistGate(input: {
         depth,
         envelopeGaps: input.evidence?.envelopeGaps,
         pseudocodeReports: input.evidence?.pseudocodeReports,
+      }).diagnostics);
+      diagnostics.push(...validateEnvelopeBlockingCrossRead({
+        phase: input.phase,
+        envelopeGaps: input.evidence?.envelopeGaps,
+        envelopeBlocking: input.evidence?.envelopeBlocking,
       }).diagnostics);
     }
   }

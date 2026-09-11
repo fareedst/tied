@@ -184,9 +184,9 @@ steps:
   - slug: traceable-commit
     disposition: completed
     policy:
-      commit_deferred: true
+      commit_deferred: false
       skill: plan-close-out
-      rationale: "Sponsor reviews CHANGELOG + proposed message; git commit forbidden in plan-close-out skill."
+      rationale: "Combined Wave 7+8 commit with Wave 8 close-out (sponsor-requested)."
     evidence_refs:
       - CHANGELOG.md
       - working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/proposed-commit-message.txt

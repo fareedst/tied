@@ -40,6 +40,33 @@ func TestTraceableCommitEnvelope_enforceBlocksWhenMissing(t *testing.T) {
 	}
 }
 
+func TestTraceableCommitEnvelope_integratedDepthEnforcesByDefault(t *testing.T) {
+	root := t.TempDir()
+	result := EvaluateTraceableCommitEnvelope(TraceableCommitEnvelopeInput{
+		ProjectRoot:     root,
+		RequestToken:    "REQ-INTEGRATED",
+		StepSlug:        traceableCommitSlug,
+		IntegratedDepth: true,
+	})
+	if !result.Block {
+		t.Fatalf("expected integrated depth default enforce, got %+v", result)
+	}
+}
+
+func TestTraceableCommitEnvelope_allowMissingEnvelopeOptOut(t *testing.T) {
+	root := t.TempDir()
+	result := EvaluateTraceableCommitEnvelope(TraceableCommitEnvelopeInput{
+		ProjectRoot:          root,
+		RequestToken:         "REQ-OPT-OUT",
+		StepSlug:             traceableCommitSlug,
+		IntegratedDepth:      true,
+		AllowMissingEnvelope: true,
+	})
+	if !result.Warn || result.Block {
+		t.Fatalf("expected warn-only with allow-missing-envelope, got %+v", result)
+	}
+}
+
 func TestTraceableCommitEnvelope_passesWhenPresent(t *testing.T) {
 	root := t.TempDir()
 	token := "REQ-PRESENT"

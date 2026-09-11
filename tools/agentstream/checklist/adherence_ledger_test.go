@@ -208,6 +208,47 @@ func TestAdherenceLedgerAppendOnly(t *testing.T) {
 	}
 }
 
+func TestAppendSyncOutcomeVerifiedRows_emitsPerCompletedSlug(t *testing.T) {
+	dir := t.TempDir()
+	token := "REQ-SYNC-OUTCOME"
+	evidenceDir := filepath.Join(dir, "working", token, "evidence")
+	if err := os.MkdirAll(evidenceDir, 0o755); err != nil {
+		t.Fatal(err)
+	}
+	for _, slug := range []string{"alpha", "beta", "gamma"} {
+		path := filepath.Join(evidenceDir, slug+"-evidence.md")
+		if err := os.WriteFile(path, []byte("evidence for "+slug), 0o644); err != nil {
+			t.Fatal(err)
+		}
+	}
+	ledgerPath := filepath.Join(dir, "working", token, "gates", "ledger.jsonl")
+	written, err := AppendSyncOutcomeVerifiedRows(SyncOutcomeVerifiedInput{
+		LedgerPath:     ledgerPath,
+		ProjectRoot:    dir,
+		RequestToken:   token,
+		RunID:          "wave8-sync-test",
+		CompletedSlugs: []string{"alpha", "beta", "gamma"},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if written != 3 {
+		t.Fatalf("written = %d, want 3", written)
+	}
+	lines, err := readLedgerLines(ledgerPath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(lines) != 3 {
+		t.Fatalf("expected 3 outcome_verified rows, got %d", len(lines))
+	}
+	for _, row := range lines {
+		if row["event_class"] != "outcome_verified" {
+			t.Fatalf("unexpected event_class: %#v", row)
+		}
+	}
+}
+
 func readLastLedgerRow(path string) (map[string]interface{}, error) {
 	lines, err := readLedgerLines(path)
 	if err != nil {

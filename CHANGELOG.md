@@ -9,6 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Wave 8 — Adherence realignment ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  W8-D1 PSA auto-load for gate validate (`checklist-gate-evidence-hydration.ts`);
+  W8-D2 sync emits `outcome_verified` ledger rows (`sync-tracker-dispositions.mjs`,
+  `adherence_ledger.go`); W8-D3 profile substance chain in unified close-out runner;
+  W8-D4 merged gate+envelope blocking decision; W8-D5 skill defaults requiring
+  `--envelope-blocking --sync-dispositions --reconcile`; W8-D6 cohort replay fixtures
+  (`scripts/replay-adherence-fixtures.mjs`); W8-D7 agentstream enforce default at
+  integrated depth. Close-out `wave8-closeout-20260911`: verification + close_out gates
+  allowed; envelope zero blocking gaps; FILEHASH disposable smoke pass. Docs:
+  `docs/adherence-realignment-wave8-plan.md`, `docs/adherence-realignment-wave8-close-out.md`.
+
 - **Wave 7 — Conversation adherence measurement and operator adoption ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
   W7-D1 transcript scoring CLI (`scripts/conversation-adherence-score.mjs`) with seven
   dimension rubric and fixture corpus; W7-D2 operator backfill script

@@ -170,10 +170,12 @@ func main() {
 
 		if usingTracker := strings.TrimSpace(cfg.ChecklistTrackerYAML) != ""; usingTracker && strings.TrimSpace(t.StepStub) != "" {
 			envelopeEval := checklist.EvaluateTraceableCommitEnvelope(checklist.TraceableCommitEnvelopeInput{
-				ProjectRoot:     cfg.Workspace,
-				RequestToken:    trackerRequestToken(cfg),
-				StepSlug:        t.StepStub,
-				EnforceEnvelope: cfg.EnforceEnvelope,
+				ProjectRoot:          cfg.Workspace,
+				RequestToken:         trackerRequestToken(cfg),
+				StepSlug:             t.StepStub,
+				EnforceEnvelope:      cfg.EnforceEnvelope,
+				AllowMissingEnvelope: cfg.AllowMissingEnvelope,
+				IntegratedDepth:      cfg.IntegratedDepth,
 			})
 			if envelopeEval.Warn {
 				fmt.Fprintf(os.Stderr, "DIAGNOSTIC: envelope pilot warn: %s\n", envelopeEval.Message)

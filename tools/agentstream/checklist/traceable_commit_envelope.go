@@ -13,13 +13,15 @@ const traceableCommitSlug = "traceable-commit"
 
 // TraceableCommitEnvelopeInput configures envelope presence check before traceable-commit turn.
 type TraceableCommitEnvelopeInput struct {
-	ProjectRoot   string
-	RequestToken  string
-	StepSlug      string
-	EnforceEnvelope bool
+	ProjectRoot          string
+	RequestToken         string
+	StepSlug             string
+	EnforceEnvelope      bool
+	AllowMissingEnvelope bool
+	IntegratedDepth      bool
 }
 
-// TraceableCommitEnvelopeResult is warn-only by default; EnforceEnvelope promotes missing path to hard block.
+// TraceableCommitEnvelopeResult is warn-only at minimal depth; integrated depth enforces by default (W8-D7).
 type TraceableCommitEnvelopeResult struct {
 	StepSlug      string `json:"step_slug"`
 	EnvelopePath  string `json:"envelope_path"`
@@ -42,11 +44,12 @@ func EvaluateTraceableCommitEnvelope(input TraceableCommitEnvelopeInput) Traceab
 	if result.StepSlug != traceableCommitSlug {
 		return result
 	}
+	enforce := effectiveEnvelopeEnforce(input)
 	token := strings.TrimSpace(input.RequestToken)
 	if token == "" {
 		msg := "traceable-commit requires REQUEST checklist var for envelope check"
-		result.Warn = !input.EnforceEnvelope
-		result.Block = input.EnforceEnvelope
+		result.Warn = !enforce
+		result.Block = enforce
 		result.Message = msg
 		return result
 	}
@@ -61,10 +64,20 @@ func EvaluateTraceableCommitEnvelope(input TraceableCommitEnvelopeInput) Traceab
 	)
 	result.EnvelopeExists = false
 	result.Message = msg
-	if input.EnforceEnvelope {
+	if enforce {
 		result.Block = true
 	} else {
 		result.Warn = true
 	}
 	return result
+}
+
+func effectiveEnvelopeEnforce(input TraceableCommitEnvelopeInput) bool {
+	if input.AllowMissingEnvelope {
+		return false
+	}
+	if input.EnforceEnvelope {
+		return true
+	}
+	return input.IntegratedDepth
 }

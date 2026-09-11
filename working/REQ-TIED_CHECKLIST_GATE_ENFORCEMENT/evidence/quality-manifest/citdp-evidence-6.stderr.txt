@@ -1,2 +1,2 @@
-bash: -c: line 1: syntax error near unexpected token `pre-existing'
-bash: -c: line 1: `OMITTED (pre-existing env): node --test mcp-server/dist/e2e/prompt-type-subagent.test.js — agents path reads parent /dev/chatgpt/, not stdd/'
+# ./tools/agentstream/cmd/adherence-reconcile/...
+pattern ./tools/agentstream/cmd/adherence-reconcile/...: directory prefix tools/agentstream/cmd/adherence-reconcile does not contain main module or its selected dependencies

@@ -5,8 +5,10 @@
   "proofBoundary": "human_decision",
   "schemaVersion": "adversarial-inquiry-gate.v1",
   "scope": [
-    "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#8103ac98e7e59baa"
+    "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#VALIDATE_CHECKLIST_GATE#5ceaf919328c3c83"
   ],
   "status": "warn",
-  "verdict": "UNRELIABLE"
+  "verdict": "UNRELIABLE",
+  "phase": "verification",
+  "run_id": "wave8-closeout-20260911"
 }

@@ -114,7 +114,7 @@ describe("request evidence envelope [REQ-REQUEST_EVIDENCE_ENVELOPE]", () => {
     assert.ok(blocking.diagnostics.some((item) => item === "envelope_blocking_gap:finding_unresolved"));
   });
 
-  it("Wave 6 defaults fail_on_process_gaps when integrated and fail_on_error_gaps", async () => {
+  it("Wave 8 integrated envelope-blocking promotes thin_ledger not evidence_stale", async () => {
     const envelope: RequestEvidenceEnvelope = {
       schema_version: ENVELOPE_SCHEMA_VERSION,
       envelope_meta: { generated_at: "2026-01-01T00:00:00Z", generator: "test", revision: 1 },
@@ -133,19 +133,34 @@ describe("request evidence envelope [REQ-REQUEST_EVIDENCE_ENVELOPE]", () => {
         citdp_path: null,
         evidence_chain_profile_path: null,
       },
-      gaps: [{
-        code: "expected_artifact_missing",
-        artifact_kind: "verification_evidence_manifest",
-        phase: null,
-        detail: "manifest missing",
-        severity: "warn",
-      }],
+      gaps: [
+        {
+          code: "evidence_stale",
+          artifact_kind: null,
+          phase: null,
+          detail: "hash drift",
+          severity: "warn",
+        },
+        {
+          code: "thin_ledger",
+          artifact_kind: null,
+          phase: null,
+          detail: "missing outcome_verified",
+          severity: "warn",
+        },
+      ],
     };
-    const permissive = await validateRequestEvidenceEnvelope({ envelope });
-    assert.equal(permissive.ok, true);
-    const closeOut = await validateRequestEvidenceEnvelope({ envelope, fail_on_error_gaps: true });
-    assert.equal(closeOut.ok, false);
-    assert.ok(closeOut.diagnostics.some((item) => item === "envelope_process_gap:expected_artifact_missing"));
+    const staleOnly = await validateRequestEvidenceEnvelope({ envelope, fail_on_error_gaps: true });
+    assert.equal(staleOnly.ok, false);
+    assert.ok(staleOnly.diagnostics.some((item) => item === "envelope_process_gap:thin_ledger"));
+    assert.ok(!staleOnly.diagnostics.some((item) => item === "envelope_process_gap:evidence_stale"));
+
+    const explicitProcess = await validateRequestEvidenceEnvelope({
+      envelope,
+      fail_on_process_gaps: true,
+    });
+    assert.equal(explicitProcess.ok, false);
+    assert.ok(explicitProcess.diagnostics.some((item) => item === "envelope_process_gap:evidence_stale"));
   });
 
   it("rejects forbidden maturity score fields", async () => {

@@ -1,0 +1,38 @@
+{
+  "allowed": false,
+  "ok": false,
+  "blocking": true,
+  "depth": "integrated",
+  "phase": "pre_implementation",
+  "run_id": "wave8-pre-implementation-refine",
+  "activation_ok": false,
+  "diagnostics": [
+    "pending_required_step:gate-pseudocode-validation",
+    "pending_required_step:sub-adversarial-inquiry-pass",
+    "sub_stub_pending_while_parent_completed",
+    "integrated_depth_requires_pairing",
+    "activation_pairing_incomplete",
+    "sub_stub_pending",
+    "parent_child_inconsistent"
+  ],
+  "gate": {
+    "allowed": false,
+    "ok": false,
+    "blocking": true,
+    "depth": "integrated",
+    "phase": "pre_implementation",
+    "diagnostics": [
+      "pending_required_step:gate-pseudocode-validation",
+      "pending_required_step:sub-adversarial-inquiry-pass",
+      "sub_stub_pending_while_parent_completed",
+      "integrated_depth_requires_pairing",
+      "activation_pairing_incomplete",
+      "sub_stub_pending",
+      "parent_child_inconsistent"
+    ],
+    "gate_receipt": {
+      "path": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/pre_implementation-2026-09-11T18-19-50-441Z.json",
+      "hash": "sha256:b6ad93844affe43d1e4db9ce180f5ad2d0f26b501d3861bdf1bafd24c3c2ce95"
+    }
+  }
+}

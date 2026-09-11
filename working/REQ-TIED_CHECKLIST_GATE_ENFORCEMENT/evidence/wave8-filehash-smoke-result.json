@@ -1,0 +1,160 @@
+{
+  "phase": "close_out",
+  "reconcile": {
+    "ok": true,
+    "report": {
+      "findings": [
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "error": "missing_artifact: \"working/REQ-FILEHASH/evidence/sub-adversarial-inquiry-pass-evidence.md\"",
+            "step_slug": "sub-adversarial-inquiry-pass"
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "error": "missing_artifact: \"working/REQ-FILEHASH/evidence/sub-client-yaml-styling-evidence.md\"",
+            "step_slug": "sub-client-yaml-styling"
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "error": "missing_artifact: \"working/REQ-FILEHASH/evidence/sub-close-out-evidence-sync-evidence.md\"",
+            "step_slug": "sub-close-out-evidence-sync"
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "error": "missing_artifact: \"working/REQ-FILEHASH/evidence/sub-evidence-chain-profile-evidence.md\"",
+            "step_slug": "sub-evidence-chain-profile"
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "error": "missing_artifact: \"working/REQ-FILEHASH/evidence/sub-pseudocode-static-analysis-pass-evidence.md\"",
+            "step_slug": "sub-pseudocode-static-analysis-pass"
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "error": "missing_artifact: \"working/REQ-FILEHASH/evidence/sub-pseudocode-validation-pass-evidence.md\"",
+            "step_slug": "sub-pseudocode-validation-pass"
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "error": "missing_artifact: \"working/REQ-FILEHASH/evidence/sub-vocabulary-sync-evidence.md\"",
+            "step_slug": "sub-vocabulary-sync"
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "error": "missing_artifact: \"working/REQ-FILEHASH/evidence/sub-yaml-edit-loop-evidence.md\"",
+            "step_slug": "sub-yaml-edit-loop"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "current_citdp_hash": "sha256:ff2a042e7297e84d8f528e6f1cd8f4d61531e5daec25fa5c6ee2d5ff6ef0e54e",
+            "current_tracker_hash": "sha256:4ae0de54d523d2a1d68334c0cb9398b4f31ea52edc707398b4052f029d719057",
+            "gate_receipt": "/Users/fareed/Documents/dev/test/1789147101/working/REQ-FILEHASH/gates/verification-2026-09-11T17-36-46-922Z.json",
+            "stored_citdp_hash": "sha256:b57b8bf79dc0d5e06868ff34ff0e7ff0ff60cfbd40ef7cdbfefd480864d8dab3",
+            "stored_tracker_hash": "sha256:d4de05cac95c415d1da90b1180c3674b6771ab69a7a344bfd1806a54a7110768"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "artifact_ref": "working/REQ-FILEHASH/gates/verification-2026-09-11T17-36-46-922Z.json",
+            "error": "missing_gate_receipt_file",
+            "gate_decided_line": 1
+          }
+        }
+      ],
+      "ledger_rows": 29,
+      "read_only": true,
+      "process_grade": {
+        "score": 57,
+        "band": "D",
+        "dimensions": [
+          {
+            "name": "tracker_integrity",
+            "score": 100,
+            "weight": 0.3
+          },
+          {
+            "name": "verification_manifest",
+            "score": 0,
+            "weight": 0.25,
+            "gap_codes": [
+              "expected_artifact_missing"
+            ]
+          },
+          {
+            "name": "hash_alignment",
+            "score": 40,
+            "weight": 0.2,
+            "gap_codes": [
+              "evidence_stale"
+            ]
+          },
+          {
+            "name": "ledger_correlation",
+            "score": 100,
+            "weight": 0.15
+          },
+          {
+            "name": "typed_evidence_refs",
+            "score": 40,
+            "weight": 0.1
+          }
+        ],
+        "gap_codes": [
+          "expected_artifact_missing",
+          "evidence_stale"
+        ]
+      }
+    }
+  },
+  "quality_manifest": {
+    "ok": false,
+    "skipped": true,
+    "reason": "no_citdp_commands"
+  },
+  "evidence_chain_profile": {
+    "ok": false,
+    "skipped": true,
+    "reason": "manifest_not_collected"
+  },
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "gate": {
+    "allowed": true,
+    "blocking": false,
+    "diagnostics": [
+      "finding_unresolved",
+      "warn_not_success"
+    ],
+    "evidence_hydrated": true,
+    "hydration_diagnostics": []
+  },
+  "envelope": {
+    "ok": true,
+    "path": "working/REQ-FILEHASH/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 0,
+    "advisory_gap_count": 6,
+    "diagnostics": []
+  }
+}

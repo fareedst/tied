@@ -1,0 +1,52 @@
+{
+  "ok": true,
+  "run_id": "wave8-closeout-20260911",
+  "process_grade": {
+    "score": 57,
+    "band": "D",
+    "dimensions": [
+      {
+        "name": "tracker_integrity",
+        "score": 100,
+        "weight": 0.3
+      },
+      {
+        "name": "verification_manifest",
+        "score": 0,
+        "weight": 0.25,
+        "gap_codes": [
+          "expected_artifact_missing"
+        ]
+      },
+      {
+        "name": "hash_alignment",
+        "score": 40,
+        "weight": 0.2,
+        "gap_codes": [
+          "evidence_stale"
+        ]
+      },
+      {
+        "name": "ledger_correlation",
+        "score": 100,
+        "weight": 0.15
+      },
+      {
+        "name": "typed_evidence_refs",
+        "score": 40,
+        "weight": 0.1
+      }
+    ],
+    "gap_codes": [
+      "expected_artifact_missing",
+      "evidence_stale"
+    ]
+  },
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "envelope_blocking_gap_count": 0
+}

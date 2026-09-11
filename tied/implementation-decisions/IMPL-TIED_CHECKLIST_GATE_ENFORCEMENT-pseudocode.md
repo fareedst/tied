@@ -754,3 +754,32 @@ procedure VALIDATE_PSEUDOCODE_ANALYSIS_EVIDENCE(tracker, citdp, pseudocode_repor
     REQUIRE ok true AND gate_mode_applied true
     REQUIRE report.token equals IMPL AND input_identity.hash matches sidecar when hash supplied
   RETURN success
+
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-PSEUDOCODE_STATIC_ANALYSIS] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: W8-D1 auto-load Layer C PSA from canonical paths before VALIDATE_PSEUDOCODE_ANALYSIS_EVIDENCE.
+procedure HYDRATE_PSEUDOCODE_REPORTS_FROM_DISK(phase, project_root, request_token, existing_reports):
+  Contract:
+  INPUT: gate phase, project root, request token, optional existing pseudocodeReports map
+  PRE: phase is verification or close_out
+  OUTPUT: merged pseudocodeReports map and hydration diagnostics
+  POST: scans working/{REQ}/pseudocode-analysis/{IMPL}.v1.json and evidence/psa-{IMPL}.json without overwriting supplied entries
+  FAILURE_MODES: hydration_psa_missing_request_token, hydration_psa_read_failed
+  EFFECTS: read-only disk
+  TERMINATION: total
+  IF phase not verification or close_out: RETURN existing_reports unchanged
+  IF request_token missing: RETURN hydration_psa_missing_request_token
+  FOR each canonical PSA path on disk: merge into reports when IMPL key absent
+  RETURN merged reports
+
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-REQUEST_EVIDENCE_ENVELOPE] — How: W8-D4 merge envelope blocking gaps into gate allowed at verification/close_out when envelopeBlocking true.
+procedure VALIDATE_ENVELOPE_BLOCKING_CROSS_READ(phase, envelope_gaps, envelope_blocking):
+  Contract:
+  INPUT: phase, envelope gap list, envelopeBlocking flag
+  PRE: phase is verification or close_out when blocking applies
+  OUTPUT: validation result
+  POST: error-severity envelope gaps block when envelopeBlocking; warn gaps remain advisory
+  FAILURE_MODES: envelope_blocking_gap
+  EFFECTS: pure
+  TERMINATION: total
+  IF NOT envelope_blocking OR phase not verification or close_out: RETURN success
+  FOR each gap with severity error: EMIT envelope_blocking_gap diagnostic
+  RETURN success when no error gaps

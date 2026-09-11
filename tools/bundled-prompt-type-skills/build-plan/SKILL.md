@@ -45,6 +45,8 @@ If neither a linked plan nor an in-message plan is present, stop.
   (sync dispositions, collect manifest, reconcile with `include_process_grade`,
   rebuild/validate envelope). Gate-only handoffs are **incomplete** at integrated
   depth — see [completion-signals-handoff.md](../prompt-shared/completion-signals-handoff.md).
+  **Required flags:** `--envelope-blocking --sync-dispositions --reconcile` on
+  `tools/bootstrap/templates/run-close-out-gates.mjs` at verification-gate and close-out.
 - Before implementation, call `tied_checklist_gate_validate` with
   `phase: pre_implementation`. Do not start code until it allows progression.
 - At verification, call the same validator with `phase: verification` and pass

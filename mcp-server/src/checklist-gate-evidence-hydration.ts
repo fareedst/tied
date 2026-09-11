@@ -92,7 +92,89 @@ export async function hydrateGateEvidenceFromActivation(
   hydrated.push(...envelopeHydration.hydrated);
   diagnostics.push(...envelopeHydration.diagnostics);
 
+  const psaHydration = await hydratePseudocodeReportsFromDisk({
+    phase: input.phase,
+    projectRoot,
+    requestToken: evidence.requestToken,
+    existingReports: evidence.pseudocodeReports,
+  });
+  if (Object.keys(psaHydration.pseudocodeReports).length > 0) {
+    evidence.pseudocodeReports = psaHydration.pseudocodeReports;
+  }
+  hydrated.push(...psaHydration.hydrated);
+  diagnostics.push(...psaHydration.diagnostics);
+
   return { evidence, hydrated, diagnostics };
+}
+
+const IMPL_TOKEN_RE = /^IMPL-[A-Z0-9][A-Z0-9_-]*$/u;
+
+function implTokenFromPsaFilename(name: string): string | null {
+  const canonical = name.match(/^(IMPL-[A-Z0-9][A-Z0-9_-]*)\.v1\.json$/u);
+  if (canonical) return canonical[1];
+  const alias = name.match(/^psa-(IMPL-[A-Z0-9][A-Z0-9_-]*)\.json$/u);
+  if (alias) return alias[1];
+  return null;
+}
+
+async function readJsonFile(filePath: string): Promise<unknown | null> {
+  try {
+    const contents = await fs.readFile(filePath, "utf8");
+    return JSON.parse(contents) as unknown;
+  } catch {
+    return null;
+  }
+}
+
+// [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-PSEUDOCODE_STATIC_ANALYSIS] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: W8-D1 auto-load Layer C PSA from canonical paths before validatePseudocodeAnalysisEvidence.
+export async function hydratePseudocodeReportsFromDisk(input: {
+  phase: GatePhase;
+  projectRoot: string;
+  requestToken?: string;
+  existingReports?: Record<string, unknown>;
+}): Promise<{ pseudocodeReports: Record<string, unknown>; hydrated: string[]; diagnostics: string[] }> {
+  const hydrated: string[] = [];
+  const diagnostics: string[] = [];
+  const reports: Record<string, unknown> = { ...(input.existingReports ?? {}) };
+
+  if (!HYDRATION_PHASES.has(input.phase)) {
+    return { pseudocodeReports: reports, hydrated, diagnostics };
+  }
+
+  const token = input.requestToken?.trim();
+  if (!token) {
+    diagnostics.push("hydration_psa_missing_request_token");
+    return { pseudocodeReports: reports, hydrated, diagnostics };
+  }
+
+  const workingRoot = path.join(input.projectRoot, "working", token);
+  const scanDirs = [
+    path.join(workingRoot, "pseudocode-analysis"),
+    path.join(workingRoot, "evidence"),
+  ];
+
+  for (const dir of scanDirs) {
+    let names: string[];
+    try {
+      names = await fs.readdir(dir);
+    } catch {
+      continue;
+    }
+    for (const name of names) {
+      const implToken = implTokenFromPsaFilename(name);
+      if (!implToken || !IMPL_TOKEN_RE.test(implToken)) continue;
+      if (implToken in reports) continue;
+      const parsed = await readJsonFile(path.join(dir, name));
+      if (parsed === null) {
+        diagnostics.push(`hydration_psa_read_failed:${implToken}`);
+        continue;
+      }
+      reports[implToken] = parsed;
+      hydrated.push(`${path.relative(input.projectRoot, path.join(dir, name))}:${implToken}`);
+    }
+  }
+
+  return { pseudocodeReports: reports, hydrated, diagnostics };
 }
 
 function envelopeGapFromRecord(value: unknown): EnvelopeGapEvidence | null {

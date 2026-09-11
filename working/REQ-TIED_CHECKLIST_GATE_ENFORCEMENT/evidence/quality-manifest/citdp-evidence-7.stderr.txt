@@ -1,0 +1,1 @@
+bash: line 1: FINALIZE_AT_CLOSE_OUT:: command not found

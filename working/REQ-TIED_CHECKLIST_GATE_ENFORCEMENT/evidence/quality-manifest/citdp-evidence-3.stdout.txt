@@ -1,15 +1,14 @@
-▶ conversation-adherence dimensions [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
-  ✔ parses jsonl transcript lines with tool_use names (0.705792ms)
-  ✔ flags early_exit_at_gate when gate success has no envelope validate (0.502ms)
-  ✔ does not flag early_exit when close-out sync tools appear after gate (0.189917ms)
-  ✔ flags call_mention_without_execution when CALL text lacks tool/script (0.38175ms)
-  ✔ returns all seven dimensions with denominators (1.151291ms)
-✔ conversation-adherence dimensions [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (3.442375ms)
-ℹ tests 5
+▶ hydrateGateEvidenceFromActivation [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+  ✔ loads gate, ledger, and provenance at verification when activation supplies paths (3.552917ms)
+  ✔ skips hydration at pre_implementation (0.099ms)
+  ✔ hydrates pseudocodeReports from pseudocode-analysis and psa alias at verification (1.663167ms)
+  ✔ preserves existing pseudocodeReports entries without overwrite (0.694917ms)
+✔ hydrateGateEvidenceFromActivation [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (6.544584ms)
+ℹ tests 4
 ℹ suites 1
-ℹ pass 5
+ℹ pass 4
 ℹ fail 0
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 67.116041
+ℹ duration_ms 70.160333

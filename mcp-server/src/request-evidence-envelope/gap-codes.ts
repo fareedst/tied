@@ -36,6 +36,13 @@ export const PROCESS_ADHERENCE_GAP_CODE_SET = new Set<string>([
   "thin_ledger",
 ]);
 
+/** Process gaps that block under integrated --envelope-blocking (W8); evidence_stale stays warn. */
+export const INTEGRATED_ENVELOPE_BLOCKING_PROCESS_GAPS = new Set<string>([
+  "thin_ledger",
+  "tracker_dual_write",
+  "tracker_sparse",
+]);
+
 export function mapCorpusInventoryString(inventory: string): string {
   return CORPUS_INVENTORY_TO_GAP_CODE[inventory] ?? "unknown_artifact_unclassified";
 }

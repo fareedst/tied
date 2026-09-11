@@ -6,7 +6,7 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
 
-import { PROCESS_ADHERENCE_GAP_CODE_SET } from "./gap-codes.js";
+import { INTEGRATED_ENVELOPE_BLOCKING_PROCESS_GAPS, PROCESS_ADHERENCE_GAP_CODE_SET } from "./gap-codes.js";
 import { PROCESS_WARN_GAP_CODES } from "./process-adherence-gaps.js";
 import { normalizeEnvelope } from "./normalize.js";
 import type {
@@ -117,17 +117,24 @@ export async function validateRequestEvidenceEnvelope(
   const advisoryGapCount = warnGaps.length;
   const depthTier = normalized.identity?.depth_tier;
   const integratedDepth = depthTier === "integrated" || depthTier === "strict_candidate";
-  const failOnProcessGaps = input.fail_on_process_gaps
-    ?? (integratedDepth && Boolean(input.fail_on_error_gaps));
+  const failOnProcessGaps = input.fail_on_process_gaps === true;
+  const integratedEnvelopeBlocking = integratedDepth && Boolean(input.fail_on_error_gaps);
+  const blockingProcessGaps = processWarnGaps.filter((gap) => {
+    if (failOnProcessGaps) return true;
+    if (integratedEnvelopeBlocking && INTEGRATED_ENVELOPE_BLOCKING_PROCESS_GAPS.has(gap.code)) {
+      return true;
+    }
+    return false;
+  });
 
-  if (failOnProcessGaps && processWarnGaps.length > 0) {
-    blockingGapCount += processWarnGaps.length;
+  if (blockingProcessGaps.length > 0) {
+    blockingGapCount += blockingProcessGaps.length;
     return {
       ok: false,
       envelope: normalized,
       diagnostics: [
         ...diagnostics,
-        ...processWarnGaps.map((gap) => `envelope_process_gap:${gap.code}`),
+        ...blockingProcessGaps.map((gap) => `envelope_process_gap:${gap.code}`),
       ],
       blocking_gap_count: blockingGapCount,
       advisory_gap_count: advisoryGapCount,

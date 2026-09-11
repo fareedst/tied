@@ -1,1 +1,2 @@
-ok  	stdd/agentstream/checklist	0.153s
+FAIL	./tools/agentstream/checklist/... [setup failed]
+FAIL
