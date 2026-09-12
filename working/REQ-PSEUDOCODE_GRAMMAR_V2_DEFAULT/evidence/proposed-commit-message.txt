@@ -1,9 +1,0 @@
-feat(grammar-v2): cohort replay audit and versioned bootstrap commit
-
-Wire evaluation-corpus grammar_v2_header enforcement into replay and
-post-session; fix plumb-diff impact preview tests; baseline git commit
-uses TIED version from AGENTS.md. Document pre-cohort operator runbook
-and sync evidence-collection §14 Track A status with shipped §E.
-
-REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT REQ-TIED_SETUP
-IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT IMPL-TIED_FILES

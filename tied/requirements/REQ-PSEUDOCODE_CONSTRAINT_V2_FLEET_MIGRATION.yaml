@@ -1,0 +1,49 @@
+REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION:
+  category: "Functional"
+  description: "Every TIED client repository SHALL migrate through controlled, evidence-backed phases until fleet-migrated-client or a time-bounded migration waiver. Phase 1 establishes product contract, governance schemas, and gate promotion policy without fleet sidecar migration or blocking constraint_flow CI."
+  name: "Fleet constraint-language v2 migration program"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Falsifiable per-client migration states and proof boundaries"
+      - "Machine-readable inventory and waiver schemas"
+      - "Traceable phase gates from policy through enforcement"
+    problems_solved:
+      - "Clients may remain header-only-v2 while being misread as fully migrated"
+      - "Fleet rollout lacks shared migration states, waiver contract, and gate promotion timeline"
+      - "Grammar v2 default REQ scope stops at new-project headers without an orchestrated migration roadmap"
+    why: "Header-only v2 is necessary but not sufficient for full constraint-language v2; the fleet program supersedes prior mass-migration non-goals with phased governance."
+  related_requirements:
+    depends_on:
+      - "REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE"
+      - "REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+      - "REQ-REQUEST_EVIDENCE_ENVELOPE"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Each client migration state defines a falsifiable evidence boundary independent of grammar_v2_header alone"
+      id: "SC-FLEET-001"
+      metric: "REQ and ARCH text plus docs/pseudocode-constraint-v2-fleet-migration-phase-1-plan.md state machine"
+    - criterion: "Gate promotion stages G0–G4 are documented and linked from REQ/ARCH with OD-2 verification-first blocking for constraint_gate_errors"
+      id: "SC-FLEET-003"
+      metric: "gate-promotion-stages.v1.yaml and Phase 1 plan Annex A align"
+    - criterion: "Governance ARCH references frozen client-inventory-manifest.v1 and migration-waiver.v1 schema identities"
+      id: "SC-FLEET-002"
+      metric: "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE cross-references working/fleet-constraint-v2/*.v1.* paths"
+    - criterion: "No satisfaction criterion equates grammar_v2_header pass with fleet-migrated-client"
+      id: "SC-FLEET-004"
+      metric: "Falsification questions in CITDP and REQ satisfaction criteria"
+    - criterion: "Phase 1–5 exit criteria are traceable from REQ without requiring sidecar migration in Phase 1"
+      id: "SC-FLEET-005"
+      metric: "Grand plan phase exit criteria referenced from REQ rationale and linked plan doc"
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+    code_annotations:
+      - "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
+    implementation:
+      - "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION"
+    tests: []

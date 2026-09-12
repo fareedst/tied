@@ -97,6 +97,14 @@ Checklist **`sub-vocabulary-sync`** uses **domain** vocab. Do not conflate with 
 | **combined hygiene close-out** | multi-track close-out (alone) | Step 7 process orchestration closing Tracks A/C/B under one proposed commit; no new product REQ ([docs/pseudocode-grammar-v2-and-hygiene-plan.md](../../docs/pseudocode-grammar-v2-and-hygiene-plan.md) §Step 7) |
 | **capstone envelope** | integrated envelope (alone) | Track B `request-evidence-envelope.v1.json` after verification + close_out inquiry runs; `--envelope-blocking` unified runner target |
 | **single combined commit** | one feat commit (alone) | Sponsor policy: one proposed commit message spanning grammar-v2 default, validator hardening, and sidecar sweep; `commit_deferred` in close-out handoff |
+| **fleet constraint v2 migration** | mass migration (alone) | Phased program elevating all TIED clients from header-only v2 to full constraint-language v2; see [`docs/pseudocode-constraint-v2-fleet-migration-grand-plan.md`](../../docs/pseudocode-constraint-v2-fleet-migration-grand-plan.md) |
+| **legacy-v1 client sidecar** | headerless sidecar | Active sidecar without `Grammar-Version: v2`; v1-compatible parser path |
+| **header-only-v2 client sidecar** | v2 header only | v2 header present; `constraint_flow` not required for this state |
+| **constraint-ready-v2 client sidecar** | advisory constraint | v2 + contract precision + typed_flow; `constraint_flow` advisory with disclosed unknowns |
+| **constraint-enforced-v2 client sidecar** | blocking constraint | `constraint_flow: true` with `constraint_gate_errors` per fleet policy on annotated procedures |
+| **fleet-migrated-client** | migration complete (client) | All active sidecars at constraint-enforced-v2 or time-bounded waiver; auditable evidence—not header audit alone |
+| **migration waiver** | constraint exception | Owner, reason, expiry, and next migration action for procedures/clients not yet enforceable |
+| **annotation profile** | constraint tier target | Per-procedure target: contract-only, refinement, summary, alias/mutation, immutability |
 
 ---
 
@@ -119,6 +127,13 @@ Checklist **`sub-vocabulary-sync`** uses **domain** vocab. Do not conflate with 
 | Normalize sidecar block-leads script | `scripts/normalize-sidecar-block-leads.mjs` | [IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP](../implementation-decisions/IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP.yaml) |
 | Combined hygiene close-out orchestration | `working/pseudocode-hygiene-closeout/agent-req-implementation-checklist.yaml` | Process-only; [PROC-AGENT_REQ_CHECKLIST](../docs/processes.md) |
 | Combined close-out CITDP addendum (draft) | `working/pseudocode-hygiene-closeout/CITDP-combined-hygiene-close-out.yaml` | Non-product process record; not `tied/citdp/CITDP-REQ-*` |
+| Fleet client inventory manifest schema | `working/fleet-constraint-v2/client-inventory-manifest.v1.schema.json` | Phase 1 P1-D; [fleet migration phase 1 plan](../../docs/pseudocode-constraint-v2-fleet-migration-phase-1-plan.md) |
+| Fleet client inventory template | `working/fleet-constraint-v2/client-inventory-manifest.v1.template.yaml` | Same; not evaluation-corpus.v1 (OD-8) |
+| Fleet migration waiver schema | `working/fleet-constraint-v2/migration-waiver.v1.schema.json` | Same |
+| Fleet migration waiver example | `working/fleet-constraint-v2/migration-waiver.v1.example.yaml` | P1-D fixture; not a populated registry |
+| Fleet gate promotion stages | `working/fleet-constraint-v2/gate-promotion-stages.v1.yaml` | Same; OD-2 verification-first blocking |
+| Fleet migration orchestration IMPL | `tied/implementation-decisions/IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION-pseudocode.md` | [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION](../requirements/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml) Phase 1 governance |
+| Fleet migration CITDP | `tied/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml` | Integrated advisory pre_implementation 2026-09-12 |
 | Composition coverage guide | `tied/docs/composition-coverage.md` | [REQ-MODULE_VALIDATION](../requirements/REQ-MODULE_VALIDATION.yaml) / [PROC-TEST_STRATEGY](../docs/processes.md) |
 | Domain vocab index | `tied/vocab/*.md` | [PROC-VOCABULARY_INDEX](../docs/processes.md) |
 | Vocab routing index (PRELOAD) | `tied/vocab/routing.md` | [PROC-VOCABULARY_INDEX](../docs/processes.md) |
@@ -186,7 +201,15 @@ Prefer in `essence_pseudocode` (not domain terms):
 
 | Term | Section |
 |------|---------|
+| annotation profile | Preferred terms |
 | binding inventory | Preferred terms |
+| constraint-enforced-v2 client sidecar | Preferred terms |
+| constraint-ready-v2 client sidecar | Preferred terms |
+| fleet constraint v2 migration | Preferred terms |
+| fleet-migrated-client | Preferred terms |
+| header-only-v2 client sidecar | Preferred terms |
+| legacy-v1 client sidecar | Preferred terms |
+| migration waiver | Preferred terms |
 | agent-control layer | Preferred terms |
 | block lead comment | Preferred terms |
 | block-lead bracket format | Preferred terms |

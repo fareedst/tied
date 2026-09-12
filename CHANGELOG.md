@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Fleet constraint v2 migration — Phase 1 close-out ([REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION])** —
+  Grand and Phase 1 program plans; frozen `working/fleet-constraint-v2/` inventory and waiver schemas;
+  **REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION**, **ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE**,
+  **IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION**, CITDP, and Tracker; LEAP amend to
+  [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT]; vocab naming bridge. Integrated advisory `close_out` gate allowed with
+  evidence-chain profile and verification manifest (policy-only executable partition).
+
+### Changed
+
+- **Working evidence gitignore hygiene** — Expand `.gitignore` for ephemeral `working/**/evidence/` artifacts;
+  remove previously tracked close-out scratch from multiple REQ folders (regenerate locally per close-out run).
+
 ### Fixed
 
 - **Diff-or-stage close-out (envelope hooks, checklist tests, agentstream preflight)** —

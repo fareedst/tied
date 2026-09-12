@@ -1,2 +1,0 @@
-bash: -c: line 1: syntax error near unexpected token `('
-bash: -c: line 1: `node --test dist/request-evidence-envelope/*.test.js (35/35 pass)'

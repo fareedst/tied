@@ -1,0 +1,87 @@
+# Machine-readable gate promotion stages (Phase 1 policy annex).
+# Authoritative prose: docs/pseudocode-constraint-v2-fleet-migration-phase-1-plan.md § Annex A
+# OD-2: constraint_gate_errors blocks at verification first; pre-RED advisory until Phase 3 pilots.
+
+schema_version: gate-promotion-stages.v1
+program_gate_policy: advisory
+updated_at: "2026-09-12T00:00:00Z"
+notes: |
+  Stages describe promotion intent. CI wiring for G4 is Phase 5 unless explicitly scoped earlier.
+  grammar_v2_header pass does not imply any stage beyond header-only-v2.
+
+stages:
+  - id: G0
+    label: Today — cohort and new projects
+    phase: baseline
+    scope: Cohort grading and new-project bootstrap (Track A Implemented)
+    layer_c:
+      gate_mode: true
+      constraint_flow: false
+      typed_flow: optional
+    constraint_gate_errors:
+      pre_red: not_applicable
+      verification: not_applicable
+      close_out: not_applicable
+
+  - id: G1
+    label: Phase 1–2 — policy and qualification
+    phase: "1-2"
+    scope: Policy artifacts and analyzer qualification fixtures
+    layer_c:
+      gate_mode: true
+      constraint_flow: advisory
+      typed_flow: advisory
+    constraint_gate_errors:
+      pre_red: advisory
+      verification: advisory
+      close_out: advisory
+    prerequisites:
+      - F11 and false-positive thresholds met before G2 promotion (Phase 2 exit)
+
+  - id: G2
+    label: Phase 3 — pilots
+    phase: "3"
+    scope: stdd first pilot repo then representative external clients
+    layer_c:
+      gate_mode: true
+      constraint_flow: advisory_default
+      typed_flow: advisory
+    constraint_gate_errors:
+      pre_red: advisory
+      verification: blocking
+      close_out: blocking
+    prerequisites:
+      - Rollback exercise from advisory constraint run accepted
+      - Pilot selection rubric applied (final list in Phase 3)
+
+  - id: G3
+    label: Phase 4 — fleet waves
+    phase: "4"
+    scope: All TIED clients in risk-based waves
+    layer_c:
+      gate_mode: true
+      constraint_flow: true
+      typed_flow: true
+    constraint_gate_errors:
+      pre_red: advisory
+      verification: blocking
+      close_out: blocking
+    waiver_policy:
+      unknown_truncation_unsupported: require_active_waiver_or_receipt
+      max_duration_days_default: 90
+
+  - id: G4
+    label: Phase 5 — default enforcement
+    phase: "5"
+    scope: New-client bootstrap and continuous governance
+    layer_c:
+      gate_mode: true
+      constraint_flow: true
+      typed_flow: true
+    constraint_gate_errors:
+      pre_red: blocking_on_qualifying_paths
+      verification: blocking
+      close_out: blocking
+    ci_expectations:
+      - stale_waiver_checks
+      - header_and_contract_defaults_for_new_clients

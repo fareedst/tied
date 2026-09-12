@@ -1501,6 +1501,10 @@ ARCH-PSEUDOCODE_CONSTRAINT_SOLVER:
   description: "Fixed-point interprocedural constraint solver, procedure summaries, ConstraintAnalysisBudgets, and truncation disclosure policy."
   detail_file: "architecture-decisions/ARCH-PSEUDOCODE_CONSTRAINT_SOLVER.yaml"
   status: "Draft"
+ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE:
+  detail_file: "architecture-decisions/ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE.yaml"
+  name: "Fleet pseudocode migration governance"
+  status: "Accepted"
 ARCH-PSEUDOCODE_GRAMMAR_V2:
   description: "Grammar v2 surface syntax, Grammar-Version header opt-in boundary, and v1 compatibility contract."
   detail_file: "architecture-decisions/ARCH-PSEUDOCODE_GRAMMAR_V2.yaml"

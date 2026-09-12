@@ -1,0 +1,37 @@
+ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE:
+  alternatives_considered:
+    - cons:
+        - "Conflates new-project header policy with fleet orchestration"
+      name: "Amend REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT only"
+      pros:
+        - "Smaller token surface"
+      rejected_reason: "OD-1 split orchestrator REQ plus LEAP amend GRAMMAR_V2_DEFAULT."
+  cross_references:
+    - "ARCH-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+    - "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
+  decision: "Persist policy and schema contracts in stdd; defer migration CLI and fleet sidecar edits to Phase 3+; keep program gate_policy advisory through Phase 2 exit; apply OD-2 verification-first blocking for constraint_gate_errors from Phase 3 pilots onward."
+  description: "Architecture for phased fleet migration: migration states, migration waves, time-bounded waivers, client inventory manifest schema, gate promotion stages, and separation of stdd orchestrator REQ from client-owned migration REQs."
+  governance_artifacts:
+    client_inventory_manifest_schema: "working/fleet-constraint-v2/client-inventory-manifest.v1.schema.json"
+    client_inventory_template: "working/fleet-constraint-v2/client-inventory-manifest.v1.template.yaml"
+    gate_promotion_stages: "working/fleet-constraint-v2/gate-promotion-stages.v1.yaml"
+    migration_waiver_schema: "working/fleet-constraint-v2/migration-waiver.v1.schema.json"
+    phase_plan_doc: "docs/pseudocode-constraint-v2-fleet-migration-phase-1-plan.md"
+  name: "Fleet pseudocode migration governance"
+  rationale:
+    benefits:
+      - "Explicit wave and waiver semantics"
+      - "Frozen schema IDs for ARCH traceability"
+    problems_solved:
+      - "No shared waiver or inventory contract"
+      - "Operator steps could be mistaken for product REQs"
+    why: "Fleet migration needs governance artifacts distinct from bootstrap header policy."
+  status: "Accepted"
+  traceability:
+    code_annotations:
+      - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+    implementation:
+      - "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION"
+    requirements:
+      - "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
+    tests: []

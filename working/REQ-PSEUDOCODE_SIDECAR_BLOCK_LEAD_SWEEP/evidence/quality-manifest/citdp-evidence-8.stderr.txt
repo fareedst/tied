@@ -1,1 +1,0 @@
-bash: line 1: tied_validate_consistency: command not found

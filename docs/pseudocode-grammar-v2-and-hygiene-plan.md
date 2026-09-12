@@ -2,7 +2,8 @@
 
 **Status:** Refined plan 2026-09-11 — Tracks A/C/B implementation complete; Step 7 combined hygiene close-out refined (execution deferred to `/plan-close-out`)  
 **Priority order:** Track A (P0) → Track C (P1) → Track B (P2)  
-**Parent context:** Layer B close-out [`layerb-sidecar-fix-close-out.md`](layerb-sidecar-fix-close-out.md); cohort grading (FILEHASH v1 grammar); Wave 8 adherence realignment
+**Parent context:** Layer B close-out [`layerb-sidecar-fix-close-out.md`](layerb-sidecar-fix-close-out.md); cohort grading (FILEHASH v1 grammar); Wave 8 adherence realignment  
+**Next product program (fleet):** [`pseudocode-constraint-v2-fleet-migration-grand-plan.md`](pseudocode-constraint-v2-fleet-migration-grand-plan.md) — full constraint-language v2 migration for all TIED clients (grand plan 2026-09-12; supersedes mass-migration non-goals **for that program only**)
 
 ---
 
@@ -467,3 +468,5 @@ flowchart TD
 ---
 
 **Delegation:** Tracks A, C, and B implementation and Step 7 combined close-out are complete (2026-09-11). Canonical proposed commit message: [`working/pseudocode-hygiene-closeout/evidence/proposed-commit-message.txt`](../working/pseudocode-hygiene-closeout/evidence/proposed-commit-message.txt).
+
+**Next graded client test:** Prior stdd vs operator work — [`pre-client-test-prior-work-plan.md`](pre-client-test-prior-work-plan.md); execution runbook — [`pre-cohort-client-test-grammar-v2-and-evidence.md`](pre-cohort-client-test-grammar-v2-and-evidence.md). Pin stdd at **`48d1fbb+`** before disposable bootstrap.

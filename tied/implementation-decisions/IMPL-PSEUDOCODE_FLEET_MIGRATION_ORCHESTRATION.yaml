@@ -1,0 +1,21 @@
+IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION:
+  cross_references:
+    - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+    - "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
+  description: "Orchestrates validation of governance schema references and gate promotion record alignment for Phase 1 policy; excludes migration CLI and sidecar rewrite."
+  essence_pseudocode_path: "implementation-decisions/IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION-pseudocode.md"
+  implementation_approach:
+    details:
+      - "No fleet sidecar migration in Phase 1"
+      - "No populated client inventory in Phase 1"
+    summary: "Validate schema artifact paths and gate promotion stages against committed OD decisions before fleet execution phases."
+  name: "Fleet migration governance orchestration"
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+    code_annotations:
+      - "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION"
+    requirements:
+      - "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
+    tests: []

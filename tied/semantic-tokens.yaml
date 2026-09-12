@@ -565,6 +565,14 @@ ARCH-PSEUDOCODE_CONSTRAINT_SOLVER:
   name: "Constraint solver and procedure summaries"
   source_index: "architecture-decisions.yaml"
   status: "Draft"
+ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE:
+  cross_references:
+    - "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
+  description: "Waves, waivers, inventory manifest schema, and gate promotion for fleet constraint v2 migration."
+  detail_file: "architecture-decisions/ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE.yaml"
+  name: "Fleet pseudocode migration governance"
+  source_index: "architecture-decisions.yaml"
+  status: "Draft"
 ARCH-PSEUDOCODE_GRAMMAR_V2:
   cross_references:
     - "ARCH-PSEUDOCODE_ANALYSIS_PIPELINE"
@@ -1416,6 +1424,15 @@ IMPL-PSEUDOCODE_CONSTRAINT_SOLVER:
   description: "Fixed-point solver, refinement entailment, summary propagation."
   detail_file: "implementation-decisions/IMPL-PSEUDOCODE_CONSTRAINT_SOLVER.yaml"
   name: "Constraint solver modules"
+  source_index: "implementation-decisions.yaml"
+  status: "Draft"
+IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION:
+  cross_references:
+    - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+    - "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
+  description: "Validate governance schema refs and gate promotion alignment for fleet program Phase 1."
+  detail_file: "implementation-decisions/IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION.yaml"
+  name: "Fleet migration governance orchestration"
   source_index: "implementation-decisions.yaml"
   status: "Draft"
 IMPL-PSEUDOCODE_GRAMMAR_V2:
@@ -2639,6 +2656,14 @@ REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE:
   description: "Opt-in constraint-language composing after typed-flow with grammar v2, solver, alias/mut policy, and phased gate rollout."
   detail_file: "requirements/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE.yaml"
   name: "Full constraint-language and grammar v2 for pseudo-code static analysis"
+  source_index: "requirements.yaml"
+  status: "Draft"
+REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION:
+  cross_references:
+    - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+  description: "Phased fleet migration from header-only v2 to constraint-enforced-v2 with governance schemas and gate promotion."
+  detail_file: "requirements/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml"
+  name: "Fleet constraint-language v2 migration program"
   source_index: "requirements.yaml"
   status: "Draft"
 REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT:

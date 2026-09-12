@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "client-inventory-manifest.v1",
+  "title": "TIED fleet constraint v2 client inventory manifest",
+  "description": "Registry of per-client migration state for the fleet program. Schema contract only in Phase 1; not a populated fleet-wide inventory.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "manifest_id", "updated_at", "clients"],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1,
+      "description": "Must match client-inventory-manifest.v1 schema identity."
+    },
+    "$schema": {
+      "type": "string",
+      "description": "Optional path or URI to this JSON Schema file."
+    },
+    "manifest_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Stable identifier for this manifest instance (e.g. stdd-fleet-inventory-draft)."
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "clients": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/clientRow" }
+    }
+  },
+  "$defs": {
+    "migrationState": {
+      "type": "string",
+      "enum": [
+        "legacy-v1",
+        "header-only-v2",
+        "constraint-ready-v2",
+        "constraint-enforced-v2",
+        "fleet-migrated-client"
+      ]
+    },
+    "sidecarCountsByState": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "legacy-v1": { "type": "integer", "minimum": 0 },
+        "header-only-v2": { "type": "integer", "minimum": 0 },
+        "constraint-ready-v2": { "type": "integer", "minimum": 0 },
+        "constraint-enforced-v2": { "type": "integer", "minimum": 0 },
+        "unknown-or-mixed": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Active sidecars not yet classified to a single state."
+        }
+      }
+    },
+    "clientRow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "client_id",
+        "repository_root",
+        "methodology_pin",
+        "aggregate_migration_state",
+        "sidecar_counts_by_state",
+        "updated_at"
+      ],
+      "properties": {
+        "client_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Operator alias or stable repo label (not necessarily git remote name)."
+        },
+        "repository_root": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Absolute or workspace-relative path to client repository root."
+        },
+        "methodology_pin": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Minimum stdd/copy_files.sh lineage (e.g. 48d1fbb+)."
+        },
+        "aggregate_migration_state": { "$ref": "#/$defs/migrationState" },
+        "sidecar_counts_by_state": { "$ref": "#/$defs/sidecarCountsByState" },
+        "active_waiver_ids": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "description": "References to migration-waiver.v1 waiver_id values."
+        },
+        "last_receipt_path": {
+          "type": "string",
+          "description": "Relative path to latest machine-readable migration receipt for this client."
+        },
+        "client_migration_req": {
+          "type": "string",
+          "pattern": "^REQ-[A-Z0-9_]+$",
+          "description": "Client-owned migration REQ when present (Phase 3+)."
+        },
+        "updated_at": { "type": "string", "format": "date-time" },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}

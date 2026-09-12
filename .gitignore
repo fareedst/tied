@@ -83,6 +83,17 @@ working/**/g*-dogfood/
 working/client-*/
 working/**/tied-mcp-metrics*.jsonl
 working/**/evidence-manifest.json
+# Per-REQ close-out evidence (regenerate via run-close-out-gates.mjs / quality_evidence_collect; local only)
+working/**/evidence/quality-manifest/
+working/**/evidence/*-evidence.md
+working/**/evidence/not-applicable-receipt.v1.json
+working/**/evidence/proposed-commit-message.txt
+working/**/evidence/evidence-chain-profile.v1.json
+working/**/evidence/request-evidence-envelope.v1.json
+# CITDP pre-persist scratch (canonical record under tied/citdp/)
+working/**/CITDP-REQ-*-diff-or-stage.yaml
+# Quality profile gate receipts (regenerate per quality_security_profile_validate)
+working/**/gates/quality-*-profile-result.json
 
 # Evidence-chain command outputs and operator-run profiles (regenerate per tied/docs/evidence-chain-profile.md)
 working/evidence-chain/artifacts/

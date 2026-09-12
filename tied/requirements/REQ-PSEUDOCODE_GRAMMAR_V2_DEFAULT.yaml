@@ -7,30 +7,34 @@ REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT:
     benefits:
       - "Disposable-client grading can verify the bootstrap policy"
       - "Existing sidecars remain v1-compatible"
-      - "New client sidecars declare their parser contract explicitly"
+      - "Fleet program can LEAP-link header policy to migration states without silent reinterpretation"
     problems_solved:
       - "Bootstrap, authoring guidance, and cohort grading can disagree about the intended grammar version"
       - "Fresh clients silently start with the legacy v1 default"
-    why: "The grammar v2 parser and migration guide already define an opt-in version boundary; new projects need a deterministic default without forcing legacy sidecar migration."
+      - "Header presence can be misread as fleet-migrated or constraint-enforced proof"
+    why: "The grammar v2 parser and migration guide define an opt-in version boundary; new projects need a deterministic default. The fleet migration program extends GRAMMAR_V2 from header-only new-project policy to a phased enforcement roadmap without changing Implemented bootstrap behavior until Phase 5."
   related_requirements:
     depends_on:
       - "REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE"
       - "REQ-TIED_SETUP"
     related_to:
+      - "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
       - "REQ-PSEUDOCODE_PARSER_UNIFICATION"
       - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
     supersedes: []
   satisfaction_criteria:
     - criterion: "Disposable client audit reports the header, Layer B, and Layer C pre-RED outcomes separately"
       metric: "audit script emits a stable grammar_v2_header dimension"
+    - criterion: "Documentation and related REQ links state that grammar_v2_header pass is necessary but not sufficient for fleet-migrated-client"
+      metric: "REQ related_to REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION and fleet phase plan supersession table"
+    - criterion: "Evaluation-corpus rows with grammar_v2_header_expect pass replay Track A header enforcement without conflating cohort replay with client close-out"
+      metric: "corpus-grammar-v2-replay and replay-adherence-fixtures tests pass on fixtures"
     - criterion: "Fresh TIED client bootstrap emits Grammar-Version: v2 in the canonical IMPL sidecar template"
       metric: "copy_files.sh smoke and template inspection pass"
     - criterion: "Legacy sidecars without the header continue to use v1 behavior"
       metric: "existing v1 and v2 parser regression tests pass unchanged"
     - criterion: "New sidecar authoring guidance and checklist policy require the v2 header without requiring constraint_flow"
       metric: "migration, writing/validation, client-development, and checklist docs agree"
-    - criterion: "Evaluation-corpus rows with grammar_v2_header_expect pass replay Track A header enforcement without conflating cohort replay with client close-out"
-      metric: "corpus-grammar-v2-replay and replay-adherence-fixtures tests pass on fixtures"
   status: "Implemented"
   traceability:
     architecture:

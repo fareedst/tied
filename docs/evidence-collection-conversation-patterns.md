@@ -726,7 +726,7 @@ Unified LEAP close-out for Wave 8 is documented in [`adherence-realignment-wave8
 
 **Goal:** Grade disposable TIED clients for the new-project `Grammar-Version: v2` bootstrap policy without conflating header presence with Layer B, Layer C, runtime, or `constraint_flow` proof.
 
-**Status:** Track A machine close-out includes §E automation (2026-09-11): evaluation-corpus `grammar_v2_header` replay (`scripts/lib/corpus-grammar-v2-replay.mjs`, `scripts/run-corpus-grammar-v2-audit.mjs`), extended adherence replay fixtures, post-session hook, plumb-diff preview stability, and versioned disposable-client baseline git message (`tools/bootstrap/lib/tied-baseline-commit-message.mjs`). Cohort rows still opt in via `grammar_v2_header_expect` on `evaluation-corpus.v1` rows; operator live grading remains deferred to `docs/pre-cohort-client-test-grammar-v2-and-evidence.md`.
+**Status:** Track A **shipped** in stdd at **`48d1fbb+`** (machine close-out + §E automation, 2026-09-11): evaluation-corpus `grammar_v2_header` replay (`scripts/lib/corpus-grammar-v2-replay.mjs`, `scripts/run-corpus-grammar-v2-audit.mjs`), adherence replay fixtures, post-session hook, plumb-diff preview stability, and versioned disposable baseline commit (`tools/bootstrap/lib/tied-baseline-commit-message.mjs`). Cohort rows opt in via `grammar_v2_header_expect` on `evaluation-corpus.v1` rows. **Operator grading** (preflight, bootstrap audit, evidence arm) is documented in [`pre-client-test-prior-work-plan.md`](pre-client-test-prior-work-plan.md) and [`pre-cohort-client-test-grammar-v2-and-evidence.md`](pre-cohort-client-test-grammar-v2-and-evidence.md)—not a deferred stdd implementation track.
 
 | Item | Value |
 |---|---|

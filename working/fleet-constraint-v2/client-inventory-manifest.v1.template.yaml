@@ -1,0 +1,15 @@
+# Fleet constraint v2 client inventory manifest (template).
+# [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION] Phase 1 schema P1-D — not fleet-populated in Phase 1.
+#
+# Copy and fill when operating a registry instance; do not extend evaluation-corpus.v1 for this purpose (OD-8).
+# JSON Schema: working/fleet-constraint-v2/client-inventory-manifest.v1.schema.json
+
+schema_version: 1
+$schema: working/fleet-constraint-v2/client-inventory-manifest.v1.schema.json
+manifest_id: stdd-fleet-inventory-template
+updated_at: "2026-09-12T00:00:00Z"
+notes: |
+  Empty client list. aggregate_migration_state and sidecar_counts_by_state must not
+  be inferred from grammar_v2_header audit alone. See docs/pseudocode-constraint-v2-fleet-migration-phase-1-plan.md.
+
+clients: []

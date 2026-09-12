@@ -1,6 +1,0 @@
-fix(envelope): guard patch hooks; agentstream preflight CLI precedence
-
-Envelope patch respects hooks disable flag and logs diagnostics on failure.
-Agentstream SkipTiedMCPPreflightEffective honors CLI over env. Gate tests
-aligned with authoritative tracker source evidence; fixture manifest updated
-for Slice 5 pilot 1787603099.

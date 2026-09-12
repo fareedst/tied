@@ -1,0 +1,116 @@
+CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION:
+  change_definition:
+    current_behavior: "New TIED clients receive Grammar-Version v2 headers only; constraint language is Complete but opt-in; clients may remain legacy-v1 or header-only-v2; cohort tests forbid conflating header audit with constraint_flow or fleet-migrated proof."
+    desired_behavior: "Persisted fleet orchestrator REQ and governance ARCH document phased migration states, OD-1..OD-8 decisions, frozen client-inventory-manifest.v1 and migration-waiver.v1 schemas, gate promotion stages G0–G4, and LEAP-linked extension of REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT without Phase 1 sidecar migration or blocking CI."
+    falsification_questions:
+      - "Can a client claim fleet-migrated-client on grammar_v2_header pass alone?"
+      - "Can constraint_flow pass with truncation treated as success once enforcement is on?"
+      - "Does Phase 1 CITDP imply migration CLI or sidecar edits without a scoped REQ?"
+    non_goals:
+      - "Blocking constraint_flow in production CI"
+      - "Fleet sidecar migration in Phase 1"
+      - "IMPL token for prose-only policy"
+      - "Migration CLI implementation"
+      - "Per-client wave assignments or final pilot list"
+      - "Populated fleet-wide inventory"
+    success_criteria:
+      - "CITDP and Tracker reference integrated depth and advisory gate_policy"
+      - "No satisfaction criterion equates grammar_v2_header with fleet-migrated-client"
+      - "Pre-implementation gate allowed with inquiry artifacts or documented policy-only waiver path"
+      - "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION and ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE persisted with traceability"
+      - "Schema paths under working/fleet-constraint-v2/ referenced from ARCH"
+    unchanged_behavior: "v1 parser compatibility; REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE analyzer semantics unless later amended; Tracks A/C/B shipped artifacts; Implemented bootstrap behavior for GRAMMAR_V2_DEFAULT until Phase 5."
+  completion_criteria:
+    activation:
+      phase: "pre_implementation"
+      request_token: "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
+      run_id: "fleet-migration-pre-implementation-20260912"
+    checklist_gate:
+      dispositions:
+        - "completed"
+        - "not_applicable"
+        - "pending"
+        - "waived"
+      fail_closed: true
+      phases:
+        - "close_out"
+        - "pre_implementation"
+        - "verification"
+    proof_boundaries:
+      - "Phase 1 persist proves policy and schema contract documentation only, not fleet migration completeness or runtime behavior."
+  impact_analysis:
+    impl_inventory:
+      - "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION"
+    impl_inventory_notes: "Governance orchestration IMPL documents schema/gate validation procedures; no migration CLI or executable fleet behavior in Phase 1."
+    modules_or_boundaries:
+      - orchestrator_module: "stdd REQ/ARCH/CITDP; client-owned migration REQs deferred Phase 3+"
+      - policy_module: "Migration states, waivers, gate promotion, and supersession prose"
+      - schema_module: "client-inventory-manifest.v1 and migration-waiver.v1 contracts"
+    tied_tokens_affected:
+      - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+      - "REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE"
+      - "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
+      - "REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+    tied_tokens_new:
+      - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+      - "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
+  linked_plans:
+    - "docs/pseudocode-constraint-v2-fleet-migration-grand-plan.md"
+    - "docs/pseudocode-constraint-v2-fleet-migration-phase-1-plan.md"
+  record_identity:
+    author: "plan-new-feature P1-C"
+    change_request_id: "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
+    citdp_id: "CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
+    created_at: "2026-09-12"
+    status: "final"
+    title: "Fleet constraint-language v2 migration — Phase 1 policy persist"
+    updated_at: "2026-09-12"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      depth_tier: "integrated"
+      eligibility_triggers_matched:
+        - "strict close-out"
+      evidence_references:
+        - "docs/pseudocode-constraint-v2-fleet-migration-phase-1-plan.md"
+        - "working/fleet-constraint-v2/gate-promotion-stages.v1.yaml"
+      falsification_questions:
+        - "Can header-only-v2 clients be mislabeled fleet-migrated?"
+        - "Can schema templates be mistaken for populated registry?"
+      gate_policy: "advisory"
+      prior_depth_tier: null
+      profile_depth: "integrated"
+      proof_boundary: "Advisory specification-fidelity inquiry on policy and governance artifacts; not fleet migration execution proof."
+      rationale: "Fleet program integrated pre-implementation evidence per OD-7; advisory until Phase 3 blocking program policy."
+      research_profile: "integrated-agent"
+    quality_profiles:
+      - "baseline-functional"
+      - "data-integrity-migration"
+    risks:
+      - description: "Header pass conflated with fleet-migrated-client"
+        id: "RISK-FLEET-001"
+        likelihood: "Medium"
+        mitigation: "State machine in REQ; falsification questions; separate audit dimensions"
+        quality_attribute: "correctness"
+        severity: "High"
+      - description: "Policy drift vs pre-cohort grammar arm"
+        id: "RISK-FLEET-002"
+        likelihood: "Medium"
+        mitigation: "Supersession table; OD-6 parallel sequencing"
+        quality_attribute: "scope-control"
+        severity: "Medium"
+  tdd_sequence:
+    order:
+      - "Persist REQ/ARCH/CITDP/Tracker"
+      - "Run integrated advisory pre_implementation inquiry"
+      - "Validate pre_implementation checklist gate"
+      - "Phase 2 build-plan: analyzer qualification"
+    summary: "Phase 1: TIED persist, integrated advisory inquiry, pre-implementation gate. Phase 2+: analyzer qualification."
+  test_strategy:
+    composition: "not_applicable until Phase 3 migration tooling"
+    e2e: "not_applicable"
+    proof_boundaries:
+      - "Advisory inquiry observations are review-gated, not LEAP triggers."
+      - "Schema JSON validates structurally; empty inventory template is not fleet population proof."
+    regression: "Existing grammar v2 and constraint-language suites unchanged in Phase 1."
+    summary: "Phase 1: tied_validate_consistency and checklist gate; no RED tests for policy-only scope."

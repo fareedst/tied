@@ -1,7 +1,8 @@
 # Pre–cohort client test: grammar v2 + request evidence
 
 **Status:** Refined operator runbook (2026-09-11) — Refine + CITDP Plan gates complete; client execution deferred  
-**Context:** Post–hygiene close-out commit `d3787ca` ([`pseudocode-grammar-v2-and-hygiene-plan.md`](pseudocode-grammar-v2-and-hygiene-plan.md))  
+**Prior-work plan:** [`pre-client-test-prior-work-plan.md`](pre-client-test-prior-work-plan.md) — stdd vs operator gates before bootstrap  
+**Context:** Post–hygiene close-out **`48d1fbb+`** (`d3787ca` hygiene bundle + `4deb586` §E automation + `48d1fbb` close-out hooks; see [`pseudocode-grammar-v2-and-hygiene-plan.md`](pseudocode-grammar-v2-and-hygiene-plan.md))  
 **Authoritative working copy:** [`working/PRE-COHORT-CLIENT-TEST/`](../working/PRE-COHORT-CLIENT-TEST/) (Tracker + CITDP; not a product REQ)
 
 ---
@@ -62,7 +63,8 @@ Vocabulary is aligned with [`tied/vocab/quality-assurance.md`](../tied/vocab/qua
 
 **Related plans (cross-read, do not duplicate):**
 
-- [`pseudocode-grammar-v2-and-hygiene-plan.md`](pseudocode-grammar-v2-and-hygiene-plan.md) — Tracks A/C/B sequencing; Step 7 hygiene close-out complete at `d3787ca`
+- [`pre-client-test-prior-work-plan.md`](pre-client-test-prior-work-plan.md) — S/O/D prior-work gates and pin rule (Refine gate authoritative for sequencing)
+- [`pseudocode-grammar-v2-and-hygiene-plan.md`](pseudocode-grammar-v2-and-hygiene-plan.md) — Tracks A/C/B sequencing; Step 7 hygiene close-out complete (`48d1fbb+`)
 - [`layerb-sidecar-fix-close-out.md`](layerb-sidecar-fix-close-out.md) — Layer B SHAPE context for validator hardening (Track C)
 - [`docs/tied-async-methodology-plan.md`](tied-async-methodology-plan.md) — Only if client REQ introduces async boundaries (preload [`tied/vocab/async-methodology.md`](../tied/vocab/async-methodology.md))
 
@@ -75,7 +77,7 @@ Vocabulary is aligned with [`tied/vocab/quality-assurance.md`](../tied/vocab/qua
 | Integrated | Audit dimensions independent in JSON | Gates + activation + envelope validate |
 | Regression | Optional corpus batch collect | `replay-adherence-fixtures.mjs` for mature `/dev/test` rows |
 
-**Pre_implementation gate:** `tied_checklist_gate_validate` → **`allowed: true`**, `depth: minimal`, receipt at [`working/PRE-COHORT-CLIENT-TEST/gates/gate-pre_implementation-result.json`](../working/PRE-COHORT-CLIENT-TEST/gates/gate-pre_implementation-result.json).
+**Pre_implementation gate:** `tied_checklist_gate_validate` → **`allowed: true`**, `depth: minimal`, receipt at [`working/PRE-COHORT-CLIENT-TEST/gates/pre_implementation-2026-09-12T01-09-47-399Z.json`](../working/PRE-COHORT-CLIENT-TEST/gates/pre_implementation-2026-09-12T01-09-47-399Z.json) (`run_id: pre-cohort-prior-work-refine-20260911`).
 
 **Implement gate (this document):** **Not authorized.** Operator executes §A–D; stdd §E requires a scoped `/build-plan` if automation is prioritized.
 
@@ -88,7 +90,7 @@ Vocabulary is aligned with [`tied/vocab/quality-assurance.md`](../tied/vocab/qua
 | **Evidence** ([`request-evidence-envelope.md`](../tied/docs/request-evidence-envelope.md)) | Tracker, inquiry (integrated), verification + close_out gates **`allowed: true`**, envelope **`blocking_gaps: 0`**, manifest/profile/PSA as required by depth | Grammar v2 bootstrap policy |
 | **Grammar v2** (§14, `REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT`) | Template copyable body has `Grammar-Version: v2`; audit JSON with **independent** dimensions | Client REQ close-out, mass v2 migration |
 
-Tracks A/C/B are **shipped in stdd** at commit `d3787ca`. The next client test is mostly **operator + client tree** work; stdd needs only light preflight.
+Tracks A/C/B are **shipped in stdd** at **`48d1fbb+`**. The next client test is mostly **operator + client tree** work; stdd needs only light preflight (see [`pre-client-test-prior-work-plan.md`](pre-client-test-prior-work-plan.md)).
 
 ```mermaid
 flowchart TB
@@ -134,7 +136,7 @@ The client cohort row **passes** only when **all** of the following hold:
 
 | Task | Why | Pass criterion |
 |------|-----|----------------|
-| **Pin methodology at `d3787ca+`** | Template, bootstrap, audit script, validator hardening | `git log -1` shows `d3787ca` or later; push or pin for multi-machine `copy_files.sh` |
+| **Pin methodology at `48d1fbb+`** | Hygiene A/C/B + §E cohort replay + close-out hooks | `git log -1` shows `48d1fbb` or later; push or pin for multi-machine `copy_files.sh` |
 | **Build MCP** | Audit, envelope, validate/analyze | `npm run build --prefix mcp-server` succeeds |
 | **Smoke stdd** | Catch regressions before client bootstrap | Commands below exit 0 (or OQ-1 documented waiver) |
 | **Optional doc hygiene** | Align §14 status with shipped Track A | Update [`evidence-collection-conversation-patterns.md`](evidence-collection-conversation-patterns.md) if prose still says audit deferred |
@@ -145,7 +147,7 @@ The client cohort row **passes** only when **all** of the following hold:
 
 ```bash
 cd /path/to/stdd
-git log -1 --oneline   # expect d3787ca or later
+git log -1 --oneline   # expect 48d1fbb or later
 npm run build --prefix mcp-server
 node --test scripts/normalize-sidecar-block-leads.test.mjs
 node scripts/audit-grammar-v2-default.mjs
@@ -293,7 +295,7 @@ Repeat-cohort automation shipped in stdd (2026-09-11 §E build); operator §A–
 
 ### Stdd (once)
 
-- [ ] Methodology at `d3787ca+`; MCP built
+- [ ] Methodology at `48d1fbb+`; MCP built
 - [ ] `audit-grammar-v2-default.mjs` exit 0 on stdd smoke (and disposable bootstrap spot-check)
 - [ ] Analysis tests green (or OQ-1 waiver documented)
 - [ ] `tied_config_get_base_path` → intended `stdd/tied` when using MCP from stdd
@@ -330,7 +332,7 @@ Repeat-cohort automation shipped in stdd (2026-09-11 §E build); operator §A–
 
 | Field | Value |
 |-------|--------|
-| `source_commit` | `d3787ca` (grammar v2 default, validator hardening, sidecar sweep) |
+| `source_commit` | `48d1fbb+` (hygiene A/C/B, §E replay, close-out hooks) |
 | `operator_process_id` | `PROCESS-PRE-COHORT-CLIENT-TEST` |
 | `working_citdp` | `working/PRE-COHORT-CLIENT-TEST/CITDP-PRE-COHORT-CLIENT-TEST.yaml` |
 | `operator_tracker` | `working/PRE-COHORT-CLIENT-TEST/agent-req-implementation-checklist.yaml` |

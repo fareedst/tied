@@ -4,9 +4,10 @@ copy_hygiene: >-
   evidence from client REQ trackers; links only.
 request: PROCESS-PRE-COHORT-CLIENT-TEST
 source_plan: docs/pre-cohort-client-test-grammar-v2-and-evidence.md
+prior_work_plan: docs/pre-client-test-prior-work-plan.md
 run_id: pre-cohort-refine-20260911
 profile:
-  depth_tier: null
+  depth_tier: minimal
   gate_policy: advisory
   note: >-
     Doc/runbook refinement only. Client-owned REQ-* tracker runs integrated
@@ -34,7 +35,11 @@ execution_evidence:
       - operator-client-bootstrap-audit
       - client-req-integrated-lifecycle
       - operator-section-e-live-cohort-row
-    gates: {}
+    gates:
+      pre_implementation:
+        allowed: true
+        run_id: pre-cohort-prior-work-refine-20260911
+        evidence_file: working/PRE-COHORT-CLIENT-TEST/gates/pre_implementation-2026-09-12T01-09-47-399Z.json
     master_checklist: ""
     note: Execution deferred to operator; this tracker records refine-plan gates only.
 steps:
@@ -51,8 +56,13 @@ steps:
       - docs/pre-cohort-client-test-grammar-v2-and-evidence.md
   - slug: change-definition
     disposition: completed
+    run_id: pre-cohort-prior-work-refine-20260911
+    rationale: >-
+      Includes prior-work plan refine (docs/pre-client-test-prior-work-plan.md);
+      CITDP linked_plans and 48d1fbb+ pin updated; run_id records this refine pass.
     evidence_refs:
       - docs/pre-cohort-client-test-grammar-v2-and-evidence.md
+      - docs/pre-client-test-prior-work-plan.md
       - working/PRE-COHORT-CLIENT-TEST/CITDP-PRE-COHORT-CLIENT-TEST.yaml
   - slug: impact-discovery
     disposition: completed
@@ -71,6 +81,7 @@ steps:
       no new stdd RED tests in this refine pass.
     evidence_refs:
       - docs/pre-cohort-client-test-grammar-v2-and-evidence.md
+      - docs/pre-client-test-prior-work-plan.md
   - slug: sub-adversarial-inquiry-pass
     disposition: not_applicable
     policy: minimal-depth-no-inquiry

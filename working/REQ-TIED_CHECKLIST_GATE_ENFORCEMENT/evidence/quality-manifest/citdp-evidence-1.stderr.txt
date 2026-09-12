@@ -1,2 +1,0 @@
-bash: -c: line 1: syntax error near unexpected token `('
-bash: -c: line 1: `pseudocode_validate IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT (MCP)'

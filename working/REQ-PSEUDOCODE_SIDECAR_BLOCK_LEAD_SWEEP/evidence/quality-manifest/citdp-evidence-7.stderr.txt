@@ -1,1 +1,0 @@
-bash: line 1: tied_checklist_gate_validate: command not found
