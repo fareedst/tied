@@ -98,7 +98,10 @@ describe("resolveProjectIdentity [IMPL-TIED_PROJECT_IDENTITY]", () => {
 describe("anonymizedProjectId alias [IMPL-TIED_PROJECT_IDENTITY]", () => {
   it("returns project_id from resolver", () => {
     const tiedPath = "/tmp/tied";
-    assert.equal(anonymizedProjectId(tiedPath), resolveProjectIdentity(tiedPath, {}).project_id);
+    assert.equal(
+      anonymizedProjectId(tiedPath, {}),
+      resolveProjectIdentity(tiedPath, {}).project_id,
+    );
   });
 });
 

@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
 import { allTools } from "./index.js";
-import { stableHash } from "../checklist-validator.js";
+import { stableHash, withPseudocodeGateHistory } from "../checklist-validator.js";
 
 type TextContent = { content: Array<{ type: "text"; text: string }> };
 
@@ -85,7 +85,7 @@ describe("tied_checklist_gate_validate composition [REQ-TIED_CHECKLIST_GATE_ENFO
     );
     const result = await toolHandler("tied_checklist_gate_validate")({
       phase: "verification",
-      tracker: {
+      tracker: withPseudocodeGateHistory({
         steps: [
           "risk-assessment",
           "sub-adversarial-inquiry-pass",
@@ -95,7 +95,7 @@ describe("tied_checklist_gate_validate composition [REQ-TIED_CHECKLIST_GATE_ENFO
           disposition: "completed",
           evidence_refs: ["checklist-gate-mcp.test.ts"],
         })),
-      },
+      }),
       citdp: {
         risk_analysis: {
           adversarial_inquiry: {

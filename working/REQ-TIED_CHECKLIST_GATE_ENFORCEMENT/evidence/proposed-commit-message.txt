@@ -1,11 +1,6 @@
-feat(checklist): Wave 8 adherence realignment with dependable close-out
+fix(envelope): guard patch hooks; agentstream preflight CLI precedence
 
-PSA auto-load for gate validate, outcome_verified ledger sync, profile substance
-chain, merged gate+envelope decision, skill unified-runner defaults, cohort replay
-fixtures, and agentstream enforce default at integrated depth.
-
-Close-out run_id wave8-closeout-20260911: verification + close_out allowed;
-envelope zero blocking gaps; FILEHASH disposable smoke pass.
-
-Refs: REQ-TIED_CHECKLIST_GATE_ENFORCEMENT REQ-REQUEST_EVIDENCE_ENVELOPE
-PROC-AGENT_REQ_CHECKLIST
+Envelope patch respects hooks disable flag and logs diagnostics on failure.
+Agentstream SkipTiedMCPPreflightEffective honors CLI over env. Gate tests
+aligned with authoritative tracker source evidence; fixture manifest updated
+for Slice 5 pilot 1787603099.

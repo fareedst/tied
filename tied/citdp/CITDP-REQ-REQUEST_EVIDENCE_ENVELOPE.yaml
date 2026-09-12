@@ -56,6 +56,9 @@ CITDP-REQ-REQUEST_EVIDENCE_ENVELOPE:
           request_token: "REQ-LISTENING_PORT_REPORT"
       operator_doc: "tied/docs/request-evidence-envelope.md"
   impact_analysis:
+    impl_inventory:
+      - IMPL-REQUEST_EVIDENCE_ENVELOPE
+      - IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH
     modules_or_boundaries: "mcp-server request-evidence-envelope package; tied-stack; quality-assurance vocabulary"
     tied_tokens_affected:
       - "REQ-EVIDENCE_CHAIN_REPORT"
@@ -117,6 +120,8 @@ CITDP-REQ-REQUEST_EVIDENCE_ENVELOPE:
       prior_depth_tier: null
     depth_tier: "integrated"
     gate_policy: "advisory"
+    quality_profiles:
+      - baseline-functional
     risks:
       - id: "RISK-001"
         mitigation: "Additive hooks only; Slice 1 read-only"

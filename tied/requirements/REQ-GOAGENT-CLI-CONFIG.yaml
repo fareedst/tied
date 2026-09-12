@@ -5,6 +5,7 @@ REQ-GOAGENT-CLI-CONFIG:
   priority: "P1"
   satisfaction_criteria:
     - criterion: "CLI flag and config terms are canonical in tied/vocab/agentstream.md; ParseAndResolve block in IMPL-GOAGENT-CLI-CMD-pseudocode.md"
+    - criterion: "SkipTiedMCPPreflightEffective honors explicit --tied-mcp-preflight / --skip-tied-mcp-preflight over AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT and AGENTSTREAM_TIED_MCP_PREFLIGHT env; covered by TestSkipTiedMCPPreflightEffectiveCLIOverridesEnv in config_test.go"
   status: "Implemented"
   traceability:
     architecture:

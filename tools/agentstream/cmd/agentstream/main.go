@@ -466,20 +466,9 @@ func formatShellArgv(argv []string) string {
 	return b.String()
 }
 
-// effectiveSkipTiedMCPPreflight resolves CLI defaults and env overrides (preflight is off by default).
-func effectiveSkipTiedMCPPreflight(cfg *config.Config) bool {
-	if os.Getenv("AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT") == "1" {
-		return true
-	}
-	if os.Getenv("AGENTSTREAM_TIED_MCP_PREFLIGHT") == "1" {
-		return false
-	}
-	return cfg.SkipTiedMCPPreflight
-}
-
 // runTiedPreflight optionally validates .cursor/mcp.json before invoking cursor agent (REQ-GOAGENT-CLI-CONFIG).
 func runTiedPreflight(cfg *config.Config) int {
-	if effectiveSkipTiedMCPPreflight(cfg) {
+	if cfg.SkipTiedMCPPreflightEffective() {
 		return 0
 	}
 	res, err := tiedpreflight.Run(cfg.Workspace, cfg.MCPJSONPath)

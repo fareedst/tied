@@ -67,6 +67,21 @@ type Config struct {
 	tiedMCPPreflightUserSet   bool
 }
 
+// SkipTiedMCPPreflightEffective reports whether tied-yaml MCP preflight should be skipped after CLI and env resolution.
+// Explicit --skip-tied-mcp-preflight / --tied-mcp-preflight wins over AGENTSTREAM_* env (REQ-GOAGENT-CLI-CONFIG).
+func (c *Config) SkipTiedMCPPreflightEffective() bool {
+	if c.tiedMCPPreflightUserSet {
+		return c.SkipTiedMCPPreflight
+	}
+	if os.Getenv("AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT") == "1" {
+		return true
+	}
+	if os.Getenv("AGENTSTREAM_TIED_MCP_PREFLIGHT") == "1" {
+		return false
+	}
+	return c.SkipTiedMCPPreflight
+}
+
 // FindRepoRoot walks parents from start looking for tied/docs/agent-req-implementation-checklist.yaml. REQ-GOAGENT-CLI-CONFIG.
 func FindRepoRoot(start string) (string, bool) {
 	dir := start

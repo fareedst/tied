@@ -5,7 +5,7 @@ import { describe, it } from "node:test";
 
 import { collectChecklistActivation } from "./checklist-activation-collect.js";
 import { runProjectInquiry, type ModeBInput } from "./adversarial-inquiry/project-orchestrator.js";
-import { derivePhaseAwareSlugs } from "./checklist-validator.js";
+import { derivePhaseAwareSlugs, withPseudocodeGateHistory } from "./checklist-validator.js";
 import { allTools } from "./tools/index.js";
 
 type TextContent = { content: Array<{ type: "text"; text: string }> };
@@ -52,13 +52,13 @@ describe("Go Mode B inquiry → collect → gate composition [REQ-TIED_ADVERSARI
     const gateHandler = toolHandler("tied_checklist_gate_validate");
     const gate = JSON.parse((await gateHandler({
       phase: "verification",
-      tracker: {
+      tracker: withPseudocodeGateHistory({
         steps: derivePhaseAwareSlugs("integrated", "verification").map((slug) => ({
           slug,
           disposition: "completed",
           evidence_refs: ["go-mode-b-composition.test.ts"],
         })),
-      },
+      }),
       citdp: {
         risk_analysis: {
           adversarial_inquiry: {
@@ -78,6 +78,9 @@ describe("Go Mode B inquiry → collect → gate composition [REQ-TIED_ADVERSARI
         receipt: collected.receipt,
         artifacts: collected.artifacts,
         expected: collected.expected,
+      },
+      evidence: {
+        trackerSource: "authoritative_file",
       },
     })).content[0]?.text ?? "{}") as { allowed?: boolean; diagnostics?: string[] };
 

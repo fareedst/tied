@@ -204,6 +204,9 @@ describe("tied_checklist_activation_collect composition [REQ-TIED_CHECKLIST_GATE
         artifacts: collected.artifacts,
         expected: collected.expected,
       },
+      evidence: {
+        trackerSource: "authoritative_file",
+      },
     })).content[0]?.text ?? "{}") as { allowed?: boolean; diagnostics?: string[] };
 
     assert.equal(gate.allowed, true, gate.diagnostics?.join(", "));

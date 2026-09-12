@@ -1,12 +1,12 @@
-# Async methodology glossary
+# Async methodology (canonical)
 
 **Scope:** TIED methodology terms for **asynchronous logic documentation** — not host-language async runtimes or product application features. Canonical source lives in `tied/vocab/`; clients receive a read-only snapshot under `tied/methodology/vocab/` via `copy_files.sh`.
 
 **Traceability:** [REQ-TIED_ASYNC_METHODOLOGY], [REQ-ASYNC_REQ_ARCH_TEMPLATES], [REQ-ASYNC_PSEUDOCODE_CONTRACTS], [REQ-ASYNC_CHECKLIST_CATALOG], [ARCH-ASYNC_REQ_ARCH_CONTRACT], [ARCH-ASYNC_CONTRACT_GRAMMAR], [ARCH-ASYNC_CHECKLIST_INTEGRATION], [IMPL-ASYNC_VOCABULARY], [IMPL-ASYNC_REQ_ARCH_GUIDANCE], [IMPL-ASYNC_PSEUDOCODE_GRAMMAR], [IMPL-ASYNC_CHECKLIST_DISPOSITIONS].
 
-**Proof boundary (mandatory):** TIED documents and statically checks **structural** async contracts (declared boundaries, contract rows, shared DATA declarations, termination claims). TIED does **not** prove freedom from deadlock, livelock, data races, fairness, or complete happens-before ordering unless a separately approved formal-methods scope exists.
+**See also:** [`routing.md`](routing.md) · [`domain-references.md`](domain-references.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) · [`quality-assurance.md`](quality-assurance.md) · [`tied-methodology.md`](tied-methodology.md)
 
-**Related glossaries:** [pseudocode-and-citdp.md](pseudocode-and-citdp.md) (domain vocab vs IMPL grammar), [quality-assurance.md](quality-assurance.md) (evidence matrices, proof boundaries).
+**Proof boundary (mandatory):** TIED documents and statically checks **structural** async contracts (declared boundaries, contract rows, shared DATA declarations, termination claims). TIED does **not** prove freedom from deadlock, livelock, data races, fairness, or complete happens-before ordering unless a separately approved formal-methods scope exists.
 
 ---
 
@@ -158,3 +158,19 @@ Untouched legacy Active IMPL blocks without optional async rows remain valid. Au
 - Architecture prompts: [architecture-decisions.md](../docs/architecture-decisions.md) § Async architecture decisions
 - Grammar: [pseudocode-format-and-practices.md](../docs/pseudocode-format-and-practices.md) § Optional async contract rows
 - Plan: [tied-async-methodology-plan.md](../../docs/tied-async-methodology-plan.md)
+
+## Alphabetical index
+
+| Term | Section |
+|------|---------|
+| async boundary | Preferred terms vs synonyms |
+| async contract | Preferred terms vs synonyms |
+| async seam | Preferred terms vs synonyms |
+| async_in_scope | Checklist terms (W2) |
+| await sequencing | Preferred terms vs synonyms |
+| catalog-async-boundaries | Checklist terms (W2) |
+| flag-async-contradictions | Checklist terms (W2) |
+| message/event delivery | Preferred terms vs synonyms |
+| open wait | Preferred terms vs synonyms |
+| pre-async-contract | Preferred terms vs synonyms |
+| proof boundary | Proof boundary (mandatory) |

@@ -8,6 +8,7 @@ import {
   derivePhaseAwareSlugs,
   stableHash,
   validateChecklistGate,
+  withPseudocodeGateHistory,
   type ActivationExpectedIdentity,
   type ChecklistGateEvidenceInput,
   type GatePhase,
@@ -127,13 +128,13 @@ function integratedCitdp(overrides: Record<string, unknown> = {}) {
 }
 
 function integratedTracker(phase: GatePhase) {
-  return {
+  return withPseudocodeGateHistory({
     steps: derivePhaseAwareSlugs("integrated", phase).map((slug) => ({
       slug,
       disposition: "completed",
       evidence_refs: ["fixture-corpus-regression.ts"],
     })),
-  };
+  });
 }
 
 function fixtureCitdp(root = repoRoot()) {
@@ -253,6 +254,7 @@ export function buildGateInputForCase(testCase: CorpusCase, root = repoRoot()) {
   } else if (testCase.id === "A11-valid-integrated-verification") {
     tracker = integratedTracker("verification");
     activation = buildActivation("verification", "verification-run-remediation");
+    evidence.trackerSource = "authoritative_file";
   }
 
   return {

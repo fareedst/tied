@@ -38,6 +38,10 @@ function runTiedCliWithStub(stubBody, cliArgs, extraEnv = {}, deleteEnv = []) {
     TIED_MCP_COLLECT_METRICS: "1",
     ...extraEnv,
   };
+  // IDE / shell often sets TIED_MCP_METRICS_CLIENT (e.g. from .cursor/mcp.json); only honor it when the test sets it explicitly.
+  if (!Object.prototype.hasOwnProperty.call(extraEnv, "TIED_MCP_METRICS_CLIENT")) {
+    delete env.TIED_MCP_METRICS_CLIENT;
+  }
   for (const key of deleteEnv) {
     delete env[key];
   }

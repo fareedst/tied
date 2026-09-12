@@ -23,7 +23,7 @@ procedure main:
   chain := pipeline.ChainBetween(turns)
   # [tiedpreflight] Optional validation of .cursor/mcp.json for tied-yaml before cursor agent or dry-run.
   # Default OFF: resolveDefaults sets SkipTiedMCPPreflight=true unless user set --tied-mcp-preflight or --skip-tied-mcp-preflight.
-  # effectiveSkipTiedMCPPreflight (main.go): AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1 forces skip; AGENTSTREAM_TIED_MCP_PREFLIGHT=1 forces run.
+  # cfg.SkipTiedMCPPreflightEffective(): explicit CLI flags win over AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1 / AGENTSTREAM_TIED_MCP_PREFLIGHT=1 env.
   # When enabled: TTY may prompt; non-TTY may exit non-zero unless -y/--yes or skip env.
   if runTiedPreflight(cfg) != 0:
     exit with code from preflight

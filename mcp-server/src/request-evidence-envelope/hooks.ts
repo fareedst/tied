@@ -73,21 +73,29 @@ export async function tryPatchArtifactFile(input: {
   run?: EnvelopeRun;
   status?: PatchArtifactEntry["status"];
 }): Promise<void> {
+  if (!isEnvelopeHooksEnabled()) return;
   const projectRoot = path.resolve(input.project_root);
-  await tryPatchRequestEvidenceEnvelope({
-    request_token: input.request_token,
-    project_root: projectRoot,
-    artifact: {
-      kind: input.kind,
-      path: relPath(projectRoot, input.absolute_path),
-      content_hash: await hashFileAt(input.absolute_path),
-      phase: input.phase ?? null,
-      schema_version: input.schema_version ?? null,
-      proof_boundaries: input.proof_boundaries,
-      status: input.status,
-    },
-    run: input.run,
-  });
+  const artifactPath = relPath(projectRoot, input.absolute_path);
+  try {
+    const content_hash = await hashFileAt(input.absolute_path);
+    await tryPatchRequestEvidenceEnvelope({
+      request_token: input.request_token,
+      project_root: projectRoot,
+      artifact: {
+        kind: input.kind,
+        path: artifactPath,
+        content_hash,
+        phase: input.phase ?? null,
+        schema_version: input.schema_version ?? null,
+        proof_boundaries: input.proof_boundaries,
+        status: input.status,
+      },
+      run: input.run,
+    });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.warn(`DIAGNOSTIC: envelope patch threw for ${artifactPath}: ${message}`);
+  }
 }
 
 export function requestTokenFromCitdpFilename(filename: string): string | null {

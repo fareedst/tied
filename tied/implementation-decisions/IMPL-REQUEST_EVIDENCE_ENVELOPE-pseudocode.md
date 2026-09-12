@@ -74,6 +74,42 @@
   - 5. Persist normalized envelope bytes
 - How (sub-block, same token set): Producer hooks in hooks.ts call tryPatchRequestEvidenceEnvelope when TIED_ENVELOPE_HOOKS=1; inner artifact writes succeed even if patch fails (RISK-001 warn-only).
 
+## TRY_PATCH_REQUEST_EVIDENCE_ENVELOPE
+
+- [IMPL-REQUEST_EVIDENCE_ENVELOPE] [ARCH-REQUEST_EVIDENCE_ENVELOPE] [REQ-REQUEST_EVIDENCE_ENVELOPE] Fail-safe wrapper around PATCH_REQUEST_EVIDENCE_ENVELOPE for producer paths (hooks.ts).
+- Contract:
+  - INPUT: same as PATCH_REQUEST_EVIDENCE_ENVELOPE minus tied_base_path defaults
+  - PRE: isEnvelopeHooksEnabled() true (TIED_ENVELOPE_HOOKS=1); else no-op return
+  - OUTPUT: void
+  - POST: inner artifact write path never throws; patch failure emits DIAGNOSTIC console.warn with gap codes or thrown message
+  - FAILURE_MODES: none propagate to caller (RISK-001)
+  - EFFECTS: optional envelope IO via PATCH_REQUEST_EVIDENCE_ENVELOPE
+  - TERMINATION: total
+- PROCEDURE: TRY_PATCH_REQUEST_EVIDENCE_ENVELOPE
+  - 1. IF NOT isEnvelopeHooksEnabled() THEN RETURN
+  - 2. TRY CALL PATCH_REQUEST_EVIDENCE_ENVELOPE with resolved tied_base_path
+  - 3. IF result.ok false THEN warn DIAGNOSTIC with gap codes
+  - 4. CATCH any error THEN warn DIAGNOSTIC with message
+- How (sub-block, same token set): Guards hook disable flag before patch; swallow errors so producer writes remain authoritative.
+
+## TRY_PATCH_ARTIFACT_FILE
+
+- [IMPL-REQUEST_EVIDENCE_ENVELOPE] [ARCH-REQUEST_EVIDENCE_ENVELOPE] [REQ-REQUEST_EVIDENCE_ENVELOPE] Hash on-disk artifact then invoke TRY_PATCH_REQUEST_EVIDENCE_ENVELOPE.
+- Contract:
+  - INPUT: request_token, project_root, absolute_path, kind, optional phase/schema_version/proof_boundaries/run/status
+  - PRE: isEnvelopeHooksEnabled() true; else no-op return
+  - OUTPUT: void
+  - POST: artifact path stored project-relative; content_hash from file bytes; patch failures warn-only
+  - FAILURE_MODES: hash/read errors warn-only; no throw to caller
+  - EFFECTS: read artifact file; optional envelope patch
+  - TERMINATION: total
+- PROCEDURE: TRY_PATCH_ARTIFACT_FILE
+  - 1. IF NOT isEnvelopeHooksEnabled() THEN RETURN
+  - 2. TRY compute content_hash via hashFileAt(absolute_path)
+  - 3. CALL TRY_PATCH_REQUEST_EVIDENCE_ENVELOPE with relPath artifact entry
+  - 4. CATCH errors THEN warn DIAGNOSTIC with project-relative path
+- How (sub-block, same token set): tryPatchArtifactFile in hooks.ts implements guard + try/catch parity with TRY_PATCH_REQUEST_EVIDENCE_ENVELOPE.
+
 ## PATCH_TRACKER_ENVELOPE_AGENTSTREAM
 
 - [IMPL-REQUEST_EVIDENCE_ENVELOPE] [ARCH-REQUEST_EVIDENCE_ENVELOPE] [REQ-REQUEST_EVIDENCE_ENVELOPE] agentstream dual-write path patches checklist_tracker artifact after ApplyTrackerDisposition when TIED_ENVELOPE_HOOKS=1.

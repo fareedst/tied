@@ -1,0 +1,149 @@
+CITDP-REQ-REQUEST_EVIDENCE_ENVELOPE:
+  change_definition:
+    current_behavior: "Eight or more independent evidence producers with no canonical per-REQ index; batch gap detection across evaluation corpus and timestamp client repos is manual."
+    desired_behavior: "request-evidence-envelope.v1 as machine entry point with explicit gaps[] and not-applicable receipts; read-only builder in Slice 1; producer hooks in Slice 2; batch gap report in Slice 4."
+    non_goals:
+      - "Inner artifact schema rewrites in v1"
+      - "Methodology YAML mutation from envelope tools"
+      - "Universal maturity score or cross-client ranking"
+    success_criteria:
+      - "Fixture-1787603099 gap classification regression"
+      - "request_evidence_envelope_batch_collect emits envelope-gap-report.v1 without score field"
+      - "request_evidence_envelope_build and validate MCP tools"
+      - "TIED stack REQ/ARCH/IMPL with token-commented pseudocode"
+  completion_criteria:
+    activation:
+      phase: "verification"
+      request_token: "REQ-REQUEST_EVIDENCE_ENVELOPE"
+      run_id: "ree-verify-20260910"
+    checklist_gate:
+      dispositions:
+        - "completed"
+        - "not_applicable"
+        - "pending"
+        - "waived"
+      fail_closed: true
+      phases:
+        - "close_out"
+        - "pre_implementation"
+        - "verification"
+    verification_gate_notes: "Slice 5 complete: request_evidence_envelope_backfill MCP+CLI; pilot on /dev/test/1788547701 and /dev/test/1787603099; evaluation-corpus rows flipped to require_envelope; envelope tests green."
+  evidence:
+    commands:
+      - "node --test mcp-server/dist/request-evidence-envelope/request-evidence-envelope.test.js"
+    close_out_replay_notes: >-
+      Full unified close-out (manifest+profile+gate) is heavy; use
+      working/REQ-REQUEST_EVIDENCE_ENVELOPE/run-close-out-gates.mjs for fast
+      envelope refresh when manifest and profile exist, or pass --full for
+      --sync-dispositions --reconcile. Historical verification commands remain
+      in test_strategy.methods and execution_evidence.verification.commands.
+    proof_boundaries:
+      - "Backfill writes envelope and optional not-applicable receipt only; inner artifacts unchanged"
+      - "Batch gap report is read-only toward inner artifacts; writes envelope-gap-report.v1.yaml only"
+      - "Envelope indexes working-folder artifacts; does not mutate inner schemas or project YAML"
+  execution_evidence:
+    envelope_path: "working/REQ-REQUEST_EVIDENCE_ENVELOPE/evidence/request-evidence-envelope.v1.json"
+    slice4:
+      batch_report: "working/evaluation/envelope-gap-report.v1.yaml"
+      impl_token: "IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH"
+      tools:
+        - "request_evidence_envelope_batch_collect (MCP + CLI)"
+    slice5:
+      backfill_tool: "request_evidence_envelope_backfill (MCP + CLI)"
+      pilot_clients:
+        - client_alias: "1788547701"
+          request_token: "REQ-BT_BATTERY_DISPLAY"
+        - client_alias: "1787603099"
+          request_token: "REQ-LISTENING_PORT_REPORT"
+      operator_doc: "tied/docs/request-evidence-envelope.md"
+  impact_analysis:
+    impl_inventory:
+      - IMPL-REQUEST_EVIDENCE_ENVELOPE
+      - IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH
+    modules_or_boundaries: "mcp-server request-evidence-envelope package; tied-stack; quality-assurance vocabulary"
+    tied_tokens_affected:
+      - "REQ-EVIDENCE_CHAIN_REPORT"
+      - "REQ-TIED_ADVERSARIAL_INQUIRY"
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    tied_tokens_new:
+      - "ARCH-REQUEST_EVIDENCE_ENVELOPE"
+      - "IMPL-REQUEST_EVIDENCE_ENVELOPE"
+      - "IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH"
+      - "REQ-REQUEST_EVIDENCE_ENVELOPE"
+  leap_feedback:
+    divergences_from_analysis: "none — Slice 5 backfill matches IMPL BACKFILL block; corpus require_envelope flip per sponsor decision"
+    record_status: "final"
+    slice4_completed: "2026-09-10"
+    slice5_completed: "2026-09-10"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "REQ-REQUEST_EVIDENCE_ENVELOPE"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    tied_context:
+      architecture:
+        - "ARCH-REQUEST_EVIDENCE_ENVELOPE"
+      implementation:
+        - "IMPL-REQUEST_EVIDENCE_ENVELOPE"
+        - "IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH"
+      requirements:
+        - "REQ-REQUEST_EVIDENCE_ENVELOPE"
+    title: "Unified request evidence envelope for batch analysis"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  risk_analysis:
+    adversarial_inquiry:
+      close_out_inquiry_waiver:
+        approval: "ree-closeout-final-20260910"
+        expiry: "2026-12-31"
+        owner: "REQ-REQUEST_EVIDENCE_ENVELOPE"
+        rationale: "Final close-out reuses verification inquiry artifacts; Slice 5 backfill complete."
+        referenced_verification_run_id: "ree-verify-20260910"
+      counterexamples:
+        - "Batch report emits maturity or ranking fields (RISK-004)"
+        - "Dual-write divergence between agentstream and MCP producer hooks (RISK-002)"
+        - "Envelope patch failure rolls back inner artifact write (RISK-001)"
+        - "Revision conflict silent overwrite instead of envelope_revision_conflict gap (RISK-003)"
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "hooks.composition.test.ts dual-write parity passes"
+        - "patch.test.ts revision conflict emits gap code"
+        - "Producer hook fail-safe test passes"
+        - "request-evidence-envelope-batch.test.ts rejects forbidden score fields"
+      evidence_references:
+        - "mcp-server/src/request-evidence-envelope/hooks.composition.test.ts"
+        - "mcp-server/src/request-evidence-envelope/patch.test.ts"
+        - "mcp-server/src/request-evidence-envelope/request-evidence-envelope-batch.test.ts"
+        - "tools/agentstream/checklist/envelope_patch_test.go"
+      falsification_questions:
+        - "Can concurrent patches corrupt envelope without envelope_revision_conflict?"
+        - "Does agentstream envelope patch diverge from MCP hook for same disposition?"
+        - "Does batch collect emit score or ranking fields?"
+      gate_policy: "advisory"
+      prior_depth_tier: null
+    depth_tier: "integrated"
+    gate_policy: "advisory"
+    quality_profiles:
+      - baseline-functional
+    risks:
+      - id: "RISK-001"
+        mitigation: "Additive hooks only; Slice 1 read-only"
+        risk: "Producer hook regression"
+      - id: "RISK-004"
+        mitigation: "legacy_infer until Slice 5 backfill pilot; tests assert no score field"
+        risk: "Legacy batch false negatives"
+  test_strategy:
+    fixtures:
+      - "/dev/test/1787603099"
+      - "/dev/test/1788547701"
+      - "fixture-1787603099"
+    methods:
+      - "Batch collect legacy_infer and require_envelope modes"
+      - "Integration read-only build"
+      - "MCP tool registration tests"
+      - "Unit schema and gap classification"
+    slices:
+      - "agentstream"
+      - "backfill-pilot"
+      - "batch-collect"
+      - "producer-hooks"
+      - "schema-builder"
+      - "tied-stack"

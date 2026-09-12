@@ -1,6 +1,6 @@
 {
   "schema_version": "regression-manifest.v1",
-  "stdd_revision": "19608b1a149941ac92a99770d217165c68991fe9",
+  "stdd_revision": "4deb5864f1cb141e8e495bcbbea7dc0483dcf090",
   "corpus_manifest_ref": "848ea2bf9298dde880977af20ef68c67aa36ca18fef65ef7c848e9a67dedc259",
   "gate_receipts": [
     {
@@ -25,10 +25,12 @@
       "acceptance_row": "A1",
       "actual_allowed": false,
       "actual_diagnostics": [
+        "tracker_not_authoritative",
         "tracker_sparse",
         "pending_required_step:risk-assessment",
         "pending_required_step:verification-gate",
         "missing_required_step:sub-adversarial-inquiry-pass",
+        "missing_pseudocode_gate_history",
         "integrated_depth_requires_pairing",
         "activation_pairing_incomplete"
       ],
@@ -40,10 +42,10 @@
       "acceptance_row": "A2",
       "actual_allowed": false,
       "actual_diagnostics": [
+        "tracker_not_authoritative",
         "artifact_path_root_projection_rejected:obligation-report.json",
         "artifact_hash_mismatch:obligation-report.json",
-        "evidence_stale",
-        "tracker_not_authoritative"
+        "evidence_stale"
       ],
       "matches_expected": true,
       "classification": "stdd_guard_confirmed"
@@ -53,13 +55,13 @@
       "acceptance_row": "A3",
       "actual_allowed": false,
       "actual_diagnostics": [
+        "tracker_not_authoritative",
         "provenance_incomplete",
         "provenance_incomplete:request_token",
         "provenance_incomplete:phase",
         "provenance_incomplete:run_id",
         "provenance_incomplete:command",
         "provenance_incomplete:tool_version",
-        "provenance_incomplete:schema_version",
         "integrated_depth_requires_pairing",
         "activation_pairing_incomplete"
       ],
@@ -71,6 +73,7 @@
       "acceptance_row": "A4",
       "actual_allowed": false,
       "actual_diagnostics": [
+        "tracker_not_authoritative",
         "integrated_depth_requires_pairing",
         "activation_pairing_incomplete"
       ],
@@ -82,10 +85,11 @@
       "acceptance_row": "A5",
       "actual_allowed": false,
       "actual_diagnostics": [
-        "finding_unresolved",
-        "warn_not_success",
+        "tracker_not_authoritative",
         "integrated_depth_requires_pairing",
-        "activation_pairing_incomplete"
+        "activation_pairing_incomplete",
+        "finding_unresolved",
+        "warn_not_success"
       ],
       "matches_expected": true,
       "classification": "stdd_guard_confirmed"
@@ -95,11 +99,13 @@
       "acceptance_row": "A6",
       "actual_allowed": false,
       "actual_diagnostics": [
+        "tracker_not_authoritative",
         "tracker_sparse",
         "pending_required_step:risk-assessment",
         "pending_required_step:verification-gate",
         "missing_required_step:sub-adversarial-inquiry-pass",
         "command_success_unproven",
+        "missing_pseudocode_gate_history",
         "integrated_depth_requires_pairing",
         "activation_pairing_incomplete"
       ],
@@ -111,6 +117,7 @@
       "acceptance_row": "A7",
       "actual_allowed": false,
       "actual_diagnostics": [
+        "tracker_not_authoritative",
         "artifact_hash_mismatch:gate-result.json",
         "evidence_stale"
       ],
@@ -122,6 +129,7 @@
       "acceptance_row": "A8",
       "actual_allowed": false,
       "actual_diagnostics": [
+        "tracker_not_authoritative",
         "waiver_invalid",
         "integrated_depth_requires_pairing",
         "activation_pairing_incomplete"
@@ -163,6 +171,7 @@
       "actual_allowed": false,
       "actual_diagnostics": [
         "receipt_identity_mismatch:phase",
+        "tracker_not_authoritative",
         "evidence_stale"
       ],
       "matches_expected": true,
@@ -174,6 +183,7 @@
       "actual_allowed": false,
       "actual_diagnostics": [
         "receipt_identity_mismatch:phase",
+        "tracker_not_authoritative",
         "evidence_stale"
       ],
       "matches_expected": true,
@@ -194,6 +204,7 @@
       "acceptance_row": "A18",
       "actual_allowed": false,
       "actual_diagnostics": [
+        "tracker_not_authoritative",
         "integrated_depth_requires_pairing",
         "activation_pairing_incomplete"
       ],

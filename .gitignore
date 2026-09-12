@@ -56,6 +56,10 @@ working/**/gates/
 !working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/**
 !working/REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/
 !working/REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/**
+# PSA timestamped gate receipts (regenerate per run-close-out-gates.mjs; keep adversarial gate-result.json via patterns above)
+working/REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/gate-*-result.json
+# Adherence reconcile output (regenerate per tied_adherence_reconcile_run)
+working/**/adherence-ledger.jsonl
 # Close-out operator scratch (regenerate per plan-close-out / tied_verify run)
 working/**/gate-ledger.jsonl
 working/**/citdp-doc-*.json

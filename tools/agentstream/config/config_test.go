@@ -83,6 +83,30 @@ func TestSkipTiedMCPPreflightDefaultAndOptIn(t *testing.T) {
 	}
 }
 
+func TestSkipTiedMCPPreflightEffectiveCLIOverridesEnv(t *testing.T) {
+	dir := t.TempDir()
+	p := filepath.Join(dir, "p.txt")
+	if err := os.WriteFile(p, []byte("x"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	t.Setenv("AGENTSTREAM_TIED_MCP_PREFLIGHT", "1")
+	cfg, err := ParseAndResolve(dir, []string{"--prompt-file", p, "--skip-tied-mcp-preflight"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !cfg.SkipTiedMCPPreflightEffective() {
+		t.Fatal("want skip when --skip-tied-mcp-preflight overrides AGENTSTREAM_TIED_MCP_PREFLIGHT=1")
+	}
+	t.Setenv("AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT", "1")
+	cfg2, err := ParseAndResolve(dir, []string{"--prompt-file", p, "--tied-mcp-preflight"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if cfg2.SkipTiedMCPPreflightEffective() {
+		t.Fatal("want preflight when --tied-mcp-preflight overrides AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1")
+	}
+}
+
 func TestLeadChecklistStepBoundsRequireChecklistPath(t *testing.T) {
 	dir := t.TempDir()
 	p := filepath.Join(dir, "p.txt")

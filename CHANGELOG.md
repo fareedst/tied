@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **Diff-or-stage close-out (envelope hooks, checklist tests, agentstream preflight)** —
+  `tryPatchArtifactFile` / `tryPatchRequestEvidenceEnvelope` respect `TIED_ENVELOPE_HOOKS=1` and
+  emit `DIAGNOSTIC` warnings on patch failure ([REQ-REQUEST_EVIDENCE_ENVELOPE]).
+  `SkipTiedMCPPreflightEffective` applies CLI-over-env precedence for tied-yaml MCP preflight
+  ([REQ-GOAGENT-CLI-CONFIG]). MCP gate/activation tests and fixture envelope JSON aligned with
+  authoritative tracker source evidence ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]). Async methodology
+  glossary title/index hygiene ([REQ-TIED_ASYNC_METHODOLOGY] vocab).
+
 ### Added
 
 - **§E — Pre-cohort grammar v2 automation ([REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT], [REQ-TIED_SETUP])** —

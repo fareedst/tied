@@ -32,6 +32,9 @@ Run **`agentstream --help`** for the full option list. Highlights:
 | `--lead-checklist-before-feature` | With both `-b` and `-c`, emit all checklist steps before all feature-spec records. |
 | `--checklist-var KEY=VALUE` | Repeatable (synonym: `--lead-checklist-var`). Substitutes `{{KEY}}` in rendered checklist text. |
 | `--checklist-var-strict`, `AGENTSTREAM_CHECKLIST_VAR_STRICT=1` | Fail rendering if any `{{NAME}}` remains after substitution. |
+| `--enforce-envelope` | Hard block at `traceable-commit` when the request evidence envelope path is missing (W7-D4). |
+| `--allow-missing-envelope` | Opt out of integrated-depth default enforce; warn-only at `traceable-commit` (W8-D7). |
+| `--integrated-depth` | Enforce envelope at `traceable-commit` unless `--allow-missing-envelope` (W8-D7). |
 | `--skip-workspace-preload`, `AGENTSTREAM_SKIP_WORKSPACE_PRELOAD=1` | Skip prepending workspace `tied/agent-preload-contract.yaml`. |
 | `-p`, `--prompt-file` | Repeatable session preload (merged with workspace preload; not a separate turn). |
 | `--prompts-file`, `--tdd-yaml`, `-b` / `--feature-spec-batch-yaml` | Repeatable prompt sources. |
@@ -39,7 +42,7 @@ Run **`agentstream --help`** for the full option list. Highlights:
 | `--verify-session` | Append sentinel verification turn when supported. |
 | `--agent-path PATH` | Explicit `cursor agent` binary (default: `agent` on PATH). |
 | `--tied-mcp-preflight`, `AGENTSTREAM_TIED_MCP_PREFLIGHT=1` | Opt in: validate `.cursor/mcp.json` for `tied-yaml` before spawning `cursor agent` (off by default). |
-| `--skip-tied-mcp-preflight`, `AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1` | Force skip when preflight is enabled (default is already skip). |
+| `--skip-tied-mcp-preflight`, `AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1` | Force skip when preflight is enabled (default is already skip). Explicit `--skip-tied-mcp-preflight` / `--tied-mcp-preflight` overrides these env vars. |
 | `-y`, `--yes` | Non-interactive: auto-continue after preflight warnings/blocks when preflight is enabled. |
 | `--mcp-json PATH` | Explicit `.cursor/mcp.json` when the workspace has multiple nested projects. |
 | `--non-compact-html` | Opt-in: emit non–single-line HTML in turn body strings after load. |

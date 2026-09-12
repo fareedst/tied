@@ -30,6 +30,11 @@ function runBootstrap(
   const entrypoint = options.entrypoint ?? "node";
   const extraArgs = options.args ?? [];
   const env = { ...process.env, ...options.env };
+  if (options.env) {
+    for (const key of ["TIED_MCP_COLLECT_METRICS", "TIED_MCP_METRICS_CLIENT"] as const) {
+      if (!(key in options.env)) delete env[key];
+    }
+  }
   if (entrypoint === "node") {
     const nodeCli = path.join(repoRoot, "tools", "bootstrap", "copy-files.mjs");
     return execFileSync(process.execPath, [nodeCli, ...extraArgs, options.target], {

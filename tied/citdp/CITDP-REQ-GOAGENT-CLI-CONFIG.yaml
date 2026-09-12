@@ -1,0 +1,56 @@
+CITDP-REQ-GOAGENT-CLI-CONFIG:
+  change_definition:
+    current_behavior: "main.go duplicated env vs CLI resolution for SkipTiedMCPPreflight."
+    desired_behavior: "config.SkipTiedMCPPreflightEffective() with explicit CLI flags winning over AGENTSTREAM_* env."
+    non_goals:
+      - "Executor or pipeline behavior beyond preflight skip resolution"
+    success_criteria:
+      - "README documents CLI-over-env precedence"
+      - "TestSkipTiedMCPPreflightEffectiveCLIOverridesEnv passes"
+  completion_criteria:
+    checklist_gate:
+      dispositions:
+        - "completed"
+        - "not_applicable"
+        - "pending"
+        - "waived"
+      fail_closed: true
+      phases:
+        - "close_out"
+    verification_gate_notes: "go test ./... under tools/agentstream; close_out gate allowed 2026-09-11."
+  evidence:
+    commands:
+      - "cd tools/agentstream && go build -trimpath -o agentstream ./cmd/agentstream"
+      - "cd tools/agentstream && go test ./..."
+    manifest_reference: "working/REQ-GOAGENT-CLI-CONFIG/evidence/verification-evidence-manifest.v1.json"
+    proof_boundaries:
+      - "CLI config resolution only; no executor behavior change"
+  impact_analysis:
+    impl_inventory:
+      - "IMPL-GOAGENT-CLI-CMD"
+    modules_or_boundaries: "tools/agentstream/config and cmd/agentstream main preflight path"
+    tied_tokens_affected:
+      - "REQ-GOAGENT-CLI-CONFIG"
+  leap_feedback:
+    divergences_from_analysis: "none"
+    record_status: "final"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "REQ-GOAGENT-CLI-CONFIG"
+    gate_policy: "advisory"
+    recorded_at: "2026-09-11"
+    title: "Agentstream CLI-over-env for tied MCP preflight skip"
+  risk_analysis:
+    adversarial_inquiry:
+      close_out_inquiry_waiver: "CLI precedence fix only; no behavior-changing surface for adversarial inquiry."
+      counterexamples:
+        - "Env AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=0 could override explicit --skip-tied-mcp-preflight without Effective helper."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "TestSkipTiedMCPPreflightEffectiveCLIOverridesEnv passes with CLI winning over env."
+      evidence_references:
+        - "tools/agentstream/config/config_test.go"
+        - "tools/agentstream/README.md"
+      falsification_questions:
+        - "Does main still duplicate env resolution instead of config.SkipTiedMCPPreflightEffective?"
+      gate_policy: "advisory"

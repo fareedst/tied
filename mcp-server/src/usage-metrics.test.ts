@@ -134,6 +134,7 @@ describe("recordToolCall and wrapToolHandler", () => {
     process.env.TIED_MCP_COLLECT_METRICS = "1";
     process.env.TIED_MCP_METRICS_PATH = metricsFile;
     process.env.TIED_BASE_PATH = tempDir;
+    delete process.env.TIED_MCP_METRICS_CLIENT;
     clearBasePathCache();
 
     const handler = wrapToolHandler("yaml_detail_read", async () => ({
