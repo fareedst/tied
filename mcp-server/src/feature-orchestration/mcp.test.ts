@@ -15,7 +15,11 @@ describe("ORCHESTRATION_MCP REQ-FEAT_ORCHESTRATION_SURFACE", () => {
       { store },
     );
     assert.equal(response.ok, true);
-    if (response.ok) assert.equal((response.manifest as { feature_id: string }).feature_id, "FEAT-001");
+    if (response.ok) {
+      assert.equal((response.manifest as { feature_id: string }).feature_id, "FEAT-001");
+      const recommendation = response.checklist_spawn_recommendation as { depth_tier: string };
+      assert.equal(recommendation.depth_tier, "integrated");
+    }
   });
 
   it("routes feature-local lifecycle requests to the shared command adapter", async () => {

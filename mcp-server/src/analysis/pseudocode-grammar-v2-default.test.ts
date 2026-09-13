@@ -14,11 +14,13 @@ import { detectGrammarVersion } from "./pseudocode-grammar-v2.js";
 import { GRAMMAR_VERSION, GRAMMAR_VERSION_V2 } from "./pseudocode-ir.js";
 import {
   GRAMMAR_V2_HEADER_LINE,
+  auditConstraintEnforcedBootstrap,
   auditNewClientGrammar,
   classifySidecarVersion,
   evaluateGrammarV2HeaderDimension,
   extractCopyableSidecarTemplate,
   firstNonCommentPreambleLine,
+  isGateStageG4OrLater,
   selectNewProjectGrammarDefault,
 } from "./pseudocode-grammar-v2-default.js";
 
@@ -169,6 +171,18 @@ procedure SAMPLE:
     assert.equal(result.dimensions.legacy_v1_compatibility, "pass");
   });
 
+  it("rejects constraintFlow true on Track A audit [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT]", () => {
+    // [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] [ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE] [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION] How: Track A keeps constraint_flow false; G4 uses auditConstraintEnforcedBootstrap instead.
+    const result = auditNewClientGrammar({
+      generatedSidecarBody: generatedWithHeader,
+      layerB: { ok: true },
+      layerC: { ok: true, gate_mode_applied: true },
+      constraintFlow: true,
+      legacyV1: { compatible: true, classification: "legacy_v1" },
+    });
+    assert.deepEqual(result, { ok: false, error: "LayerCFailed" });
+  });
+
   it("fails header dimension independently from Layer B/C [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT]", () => {
     // [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] [ARCH-PSEUDOCODE_GRAMMAR_V2_DEFAULT] [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT] How: Prevent header checks from masquerading as structural or runtime proof.
     const result = auditNewClientGrammar({
@@ -180,6 +194,65 @@ procedure SAMPLE:
     });
     assert.deepEqual(result, { ok: false, error: "GeneratedHeaderMissing" });
     assert.equal(evaluateGrammarV2HeaderDimension(LEGACY_TEMPLATE_BODY), "fail");
+  });
+});
+
+describe("auditConstraintEnforcedBootstrap [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION]", () => {
+  const generatedWithHeader = `# [IMPL-X] [ARCH-Y] [REQ-Z]
+Grammar-Version: v2
+procedure SAMPLE:
+  Contract:
+    INPUT: x
+    OUTPUT: y
+    PRE: true
+    POST: success => unchanged
+    EFFECTS: pure
+  RETURN y
+`;
+
+  it("isGateStageG4OrLater accepts G4 and higher [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT]", () => {
+    assert.equal(isGateStageG4OrLater("G3"), false);
+    assert.equal(isGateStageG4OrLater("G4"), true);
+    assert.equal(isGateStageG4OrLater("G5"), true);
+  });
+
+  it("passes bootstrap_enforcement when constraint_flow expectation is met [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT]", () => {
+    const result = auditConstraintEnforcedBootstrap({
+      generatedSidecarBody: generatedWithHeader,
+      layerB: { ok: true },
+      layerC: { ok: true, gate_mode_applied: true },
+      constraintFlowExpectation: true,
+      legacyV1: { compatible: true, classification: "legacy_v1" },
+      gateStage: "G4",
+    });
+    assert.equal(result.ok, true);
+    if (!result.ok) return;
+    assert.equal(result.dimensions.bootstrap_enforcement, "pass");
+    assert.equal(result.dimensions.constraint_flow_expectation, true);
+  });
+
+  it("fails HeaderOnlyBootstrapFalsification when constraint expectation is false [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT]", () => {
+    const result = auditConstraintEnforcedBootstrap({
+      generatedSidecarBody: generatedWithHeader,
+      layerB: { ok: true },
+      layerC: { ok: true, gate_mode_applied: true },
+      constraintFlowExpectation: false,
+      legacyV1: { compatible: true, classification: "legacy_v1" },
+      gateStage: "G4",
+    });
+    assert.deepEqual(result, { ok: false, error: "HeaderOnlyBootstrapFalsification" });
+  });
+
+  it("returns GateStageNotG4 before G4 [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT]", () => {
+    const result = auditConstraintEnforcedBootstrap({
+      generatedSidecarBody: generatedWithHeader,
+      layerB: { ok: true },
+      layerC: { ok: true, gate_mode_applied: true },
+      constraintFlowExpectation: true,
+      legacyV1: { compatible: true, classification: "legacy_v1" },
+      gateStage: "G3",
+    });
+    assert.deepEqual(result, { ok: false, error: "GateStageNotG4" });
   });
 });
 

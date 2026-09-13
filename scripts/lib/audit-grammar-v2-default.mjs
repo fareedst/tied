@@ -9,10 +9,12 @@ import { fileURLToPath } from "node:url";
 import { analyzeEssencePseudocode } from "../../mcp-server/dist/analysis/pseudocode-analyzer.js";
 import { validateEssencePseudocode } from "../../mcp-server/dist/analysis/pseudocode-validator.js";
 import {
+  auditConstraintEnforcedBootstrap,
   auditNewClientGrammar,
   classifySidecarVersion,
   evaluateGrammarV2HeaderDimension,
   extractCopyableSidecarTemplate,
+  isGateStageG4OrLater,
 } from "../../mcp-server/dist/analysis/pseudocode-grammar-v2-default.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -90,18 +92,51 @@ export function runLegacyCompatibilityReport(legacySidecarPath = LEGACY_SIDECAR_
 
 /**
  * @param {string} clientRoot
- * @param {{ smokeSidecarPath?: string, legacySidecarPath?: string, constraintFlow?: boolean }} [options]
+ * @param {{ smokeSidecarPath?: string, legacySidecarPath?: string, constraintFlow?: boolean, gateStage?: string }} [options]
  */
 export function runGrammarV2DefaultAudit(clientRoot, options = {}) {
   const smokeSidecarPath = options.smokeSidecarPath ?? SMOKE_SIDECAR_PATH;
   const legacySidecarPath = options.legacySidecarPath ?? LEGACY_SIDECAR_PATH;
-  const constraintFlow = options.constraintFlow ?? false;
+  const gateStage = options.gateStage;
+  const g4BootstrapEnforcement = isGateStageG4OrLater(gateStage);
+  const constraintFlow = g4BootstrapEnforcement ? true : (options.constraintFlow ?? false);
 
   const { templatePath, copyableBody } = readClientSidecarTemplate(clientRoot);
   const smokeBody = fs.readFileSync(smokeSidecarPath, "utf8");
   const layerB = runLayerBReport(smokeBody, SMOKE_IMPL_TOKEN);
   const layerC = runLayerCReport(smokeBody, SMOKE_IMPL_TOKEN, { constraintFlow });
   const legacyV1 = runLegacyCompatibilityReport(legacySidecarPath);
+
+  const grammarV2Header = evaluateGrammarV2HeaderDimension(copyableBody);
+
+  if (g4BootstrapEnforcement) {
+    const audit = auditConstraintEnforcedBootstrap({
+      generatedSidecarBody: copyableBody,
+      layerB: { ok: layerB.ok },
+      layerC: { ok: layerC.ok, gate_mode_applied: layerC.gate_mode_applied },
+      constraintFlowExpectation: constraintFlow === true,
+      legacyV1: { compatible: legacyV1.compatible, classification: legacyV1.classification },
+      gateStage: gateStage ?? "G4",
+    });
+
+    return {
+      schema_version: "grammar-v2-default-audit.v1",
+      client_root: clientRoot,
+      template_path: templatePath,
+      smoke_sidecar_path: smokeSidecarPath,
+      gate_stage: gateStage,
+      dimensions: {
+        grammar_v2_header: grammarV2Header,
+        bootstrap_enforcement: audit.ok ? "pass" : "fail",
+        layer_b: layerB,
+        layer_c: layerC,
+        constraint_flow: true,
+        legacy_v1_compatibility: legacyV1,
+      },
+      audit,
+      ok: audit.ok,
+    };
+  }
 
   const audit = auditNewClientGrammar({
     generatedSidecarBody: copyableBody,
@@ -117,7 +152,7 @@ export function runGrammarV2DefaultAudit(clientRoot, options = {}) {
     template_path: templatePath,
     smoke_sidecar_path: smokeSidecarPath,
     dimensions: {
-      grammar_v2_header: evaluateGrammarV2HeaderDimension(copyableBody),
+      grammar_v2_header: grammarV2Header,
       layer_b: layerB,
       layer_c: layerC,
       constraint_flow: constraintFlow,

@@ -1,0 +1,16 @@
+copy_hygiene: "Fixture: invalid depth_tier for P5-G policy validator negative test."
+execution_evidence:
+  envelope_path: working/REQ-FEAT-BAD/evidence/request-evidence-envelope.v1.json
+  operator_evidence:
+    depth_tier: minimal
+    gate_policy: advisory
+gate_contract:
+  phases:
+    - close_out
+    - pre_implementation
+    - verification
+  required_artifacts:
+    - evidence-provenance.json
+    - finding-ledger.jsonl
+    - gate-result.json
+    - obligation-report.json

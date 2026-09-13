@@ -1,0 +1,18 @@
+{
+  "mode": "project",
+  "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "tied_base_path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied",
+  "impl_token": "IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT",
+  "test_path": "scripts/build_adversarial_inquiry_from_tied_test.rb",
+  "production_path": "mcp-server/src/analysis/pseudocode-grammar-v2-default.ts",
+  "request_token": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+  "run_id": "fleet-migration-phase5-p5c-20260913",
+  "phase": "pre_implementation",
+  "policy": "advisory",
+  "repository_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "criterion_scope": [
+    "SC-FLEET-P5-001",
+    "SC-FLEET-P5-002",
+    "SC-GRAMMAR-V2-PHASE5-CONSTRAINT-ENFORCED-BOOTSTRAP"
+  ]
+}

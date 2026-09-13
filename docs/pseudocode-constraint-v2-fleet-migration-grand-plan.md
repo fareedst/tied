@@ -1,9 +1,9 @@
 # Full constraint-language v2 — fleet migration grand plan
 
-**Status:** Refine gate complete (2026-09-12) — grand plan only; phase-level build plans deferred  
+**Status:** Phase 4 program **complete** (M4, 2026-09-13); Phase 5 program **complete** (P5-H, 2026-09-13) — G4 continuous governance; [`phase-5-exit-review.v1.json`](../working/fleet-constraint-v2/phase-5-exit-review.v1.json)  
 **Governing foundation:** [`pseudocode-grammar-v2-and-hygiene-plan.md`](pseudocode-grammar-v2-and-hygiene-plan.md) (Tracks A/C/B **completed** at `48d1fbb+`)  
 **Linked Cursor plan:** `constraint_v2_product_roadmap_83eab9db.plan.md` (5-phase sketch; this document is authoritative prose)  
-**Technical foundation (shipped):** [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE](../tied/requirements/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE.yaml) (Complete; opt-in analyzer) · [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT](../tied/requirements/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml) (header-only new-project policy today)
+**Technical foundation (shipped):** [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE](../tied/requirements/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE.yaml) (Complete; opt-in analyzer) · [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT](../tied/requirements/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml) (G4 **constraint-enforced-v2** new-client bootstrap after P5-F; header-only no longer silent at G4)
 
 ---
 
@@ -13,7 +13,7 @@
 
 **Fleet mandate (sponsor 2026-09-12):** Every TIED **client** repository must migrate through controlled, evidence-backed waves until it reaches the defined **fleet-migrated** state or a **time-bounded waiver**. This supersedes prior program **non-goals** that ruled out mass constraint migration and `constraint_flow` as a cohort gate **for the new fleet program only**; it does **not** retroactively change what Tracks A/C/B already shipped or what the pre-cohort client test grades today.
 
-**This document:** Five phases (policy → analyzer readiness → pilot → fleet → enforcement), exit criteria, governance, proof boundaries, dependency map, CITDP-level change definition, and REQ token **candidates**. It does **not** contain wave file lists, CLI specs, per-client task breakdowns, or implementation checklists.
+**This document:** Five phases (policy → analyzer readiness → pilot → fleet → enforcement), exit criteria, governance, proof boundaries, dependency map, CITDP-level change definition, and REQ token **candidates**. Phases **1–4** detailed plans and execution are **complete** (Phase 4 enrolled **OD-P4-3** five-repo set at **fleet-migrated-client**; orchestrator REQ closed seq 8; M4 seq 9). Phase **5** detailed plan and build are **Complete (P5-H)**; **~18** manifest rows remain **`not_enrolled_phase_4`** until optional Phase 5b (OD-P5-2). It does **not** contain wave file lists, CLI specs, per-client task breakdowns, or implementation checklists.
 
 ---
 
@@ -82,7 +82,7 @@ Historical non-goals in the hygiene plan and pre-cohort docs remain accurate **f
 | **Authoring burden gate (F11)** | Stop criteria on annotation load and semantic preservation before **blocking** constraint gates |
 | **Client-owned migration REQ** | Each client may carry `REQ-*` for its migration; fleet program REQ lives in stdd/methodology as orchestrator |
 
-Vocabulary **RECORD** (this refine pass): terms above are recorded in [`tied/vocab/pseudocode-and-citdp.md`](../tied/vocab/pseudocode-and-citdp.md) under **fleet constraint v2 migration**. **VALIDATE** at Phase 1 close-out / first commit touching fleet policy.
+Vocabulary **RECORD** / **VALIDATE:** terms above and Phase 5 additions (G4, **non-enrolled tranche**, **bootstrap enforcement**) are in [`tied/vocab/pseudocode-and-citdp.md`](../tied/vocab/pseudocode-and-citdp.md) § **fleet constraint v2 migration**. **VALIDATE** at Phase 5 refine close-out (2026-09-13) and again at Phase 5 build exit.
 
 ---
 
@@ -102,7 +102,7 @@ Every **active** TIED client (and stdd as reference implementation):
 
 ## CITDP-style change definition (grand-plan level)
 
-**Persisted CITDP (deferred):** Phase 1 should create `tied/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml` (or sponsor-chosen token) and `working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/agent-req-implementation-checklist.yaml`. This refine pass does **not** persist YAML.
+**Persisted CITDP:** [`tied/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml`](../tied/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml) — **`phase_4_closeout_module`** (run_id `fleet-migration-phase4-closeout-20260913`) and **`phase_5_module`** (run_id `fleet-migration-phase5-p5c-20260913`). Traceable commit evidence: [`seq-10-p5-traceable-commit-report.v1.json`](../working/fleet-constraint-v2/seq-10-p5-traceable-commit-report.v1.json).
 
 | Field | Content |
 |-------|---------|
@@ -221,22 +221,35 @@ Client repos may introduce **client-owned** `REQ-{CLIENT}-PSEUDOCODE_MIGRATION` 
 
 ### Phase 5 — Default enforcement and continuous governance
 
-**Objective:** Full constraint-language v2 is the **normal** operating model; prevent regression.
+**Objective:** Full constraint-language v2 is the **normal** operating model; prevent regression after Phase 4 enrolled exit.
+
+**Refine gate (2026-09-13):** Phase 5 operates on **three parallel tracks** — do not conflate them in gates or evidence:
+
+| Track | Population | Phase 4 disposition | Phase 5 intent |
+|-------|------------|---------------------|----------------|
+| **A — Legacy enrolled (OD-P4-3)** | **5** repos (`stdd` + 4 externals) | **`fleet-migrated-client`** (M4 complete) | **G4 continuous governance** — stale waiver CI, regression audit, dashboard refresh; **no** re-migration unless waiver/regression |
+| **B — Non-enrolled manifest tranche** | **18** `client_id` rows (`not_enrolled_phase_4` in [`client-inventory-manifest.v1.yaml`](../working/fleet-constraint-v2/client-inventory-manifest.v1.yaml)) | Mostly **header-only-v2** aggregates; **not** fleet-migrated | Optional **Phase 5b** G3 wave program (reuse Phase 4 harness) — **out of G4 CI bootstrap scope** until enrolled or waived |
+| **C — New-client bootstrap** | Fresh `copy_files.sh` clients after G4 promotion | Track A header-only (Implemented) | **constraint-enforced-v2** default per [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT](../tied/requirements/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml) LEAP amend at **P5-C**; checklist + template gates |
+
+**G4 promotion** ([`gate-promotion-stages.v1.yaml`](../working/fleet-constraint-v2/gate-promotion-stages.v1.yaml) stage **G4**): `layer_c.constraint_flow: true`, `typed_flow: true`; `constraint_gate_errors.pre_red` → **blocking on qualifying paths**; verification/close-out **blocking**; **`ci_expectations`:** `header_and_contract_defaults_for_new_clients`, `stale_waiver_checks`. CI wiring is **Phase 5 build** — Phase 4 deliberately left **`program_gate_policy: advisory`** on orchestrator with G3 on client migration REQs only (Annex A in phase-4 plan).
 
 | In scope | Out of scope |
 |----------|--------------|
-| New-client bootstrap → constraint-enforced-v2 expectations | Re-open Track B sweep scope |
-| Default `constraint_flow: true` on qualifying paths; documented opt-out | Ad hoc sidecar edits outside LEAP |
-| CI/cohort checks: headers, contracts, Tier-3, stale waivers, truncation | Re-design constraint solver |
-| Periodic fleet audit → owning client REQ | |
+| G4 CI/cohort wiring per `ci_expectations`; promote `program_gate_policy` where scoped | Re-open Phase 4 closeout or OD-P4-3 sidecar mass apply |
+| LEAP amend **REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT** — bootstrap → **constraint-enforced-v2** expectations (not silent) | Track B mass migration **without** sponsor tranche decision (OD-P5-2) |
+| Integrated **request evidence envelope** on **FEAT-spawned** REQs (orchestrator checklist policy) | Re-design constraint solver |
+| Periodic fleet audit harness → owning client REQ / inventory refresh | Re-open Track B hygiene sweep scope |
+| v1 parser **retirement policy** documented (OD-P5-1; default **defer** implementation) | Mandatory v1 parser removal in Phase 5 unless OD-P5-1 accepted |
 
-**Primary artifacts (placeholders):** Bootstrap/checklist gate updates; cohort audit dimensions; waiver renewal process.
+**Primary artifacts:** Phase 5 plan **Complete**; G4 CI ([`p5-e-g4-ci-build-report.v1.json`](../working/fleet-constraint-v2/p5-e-g4-ci-build-report.v1.json)); bootstrap ([`p5-f-bootstrap-enforcement-report.v1.json`](../working/fleet-constraint-v2/p5-f-bootstrap-enforcement-report.v1.json)); FEAT envelope ([`p5-g-feat-spawned-req-envelope-policy.v1.md`](../working/fleet-constraint-v2/p5-g-feat-spawned-req-envelope-policy.v1.md)); exit [`phase-5-exit-review.v1.json`](../working/fleet-constraint-v2/phase-5-exit-review.v1.json).
 
-**Exit criteria:** New clients cannot silently enter header-only mode; active clients migrated or on valid waiver; continuous checks operational; v1/header-only exceptions retired or quarantined per policy.
+**Exit criteria:** New clients cannot silently enter **header-only-v2** after G4 bootstrap promotion; G4 `ci_expectations` operational in stdd CI/cohort path; enrolled legacy track under continuous checks; integrated envelope policy on FEAT-spawned REQs documented + gated; v1/header-only exceptions **quarantined or retired per OD-P5-1** (policy at minimum).
 
-**Risks:** CI noise from prose-only legacy; enforcement before annotations complete; methodology/client YAML confusion.
+**Risks:** CI noise from prose-only legacy; enforcement before annotations complete; conflating Track B tranche with Track C bootstrap; methodology/client YAML confusion.
 
----
+**Evidence anchors (Phase 4 → 5):** [`phase-4-closeout-handoff.v1.json`](../working/fleet-constraint-v2/phase-4-closeout-handoff.v1.json) · [`seq-9-m4-p4-h-closeout-report.v1.json`](../working/fleet-constraint-v2/seq-9-m4-p4-h-closeout-report.v1.json) (WS-6 preconditions **Met**) · closeout plan **Complete** · CITDP `phase_4_closeout_module`.
+
+**Detailed execution:** see Phase 5 plan — **`/build-plan`** slice **P5-E** (G4 CI) or **`/plan-new-feature`** **P5-C** when TIED SC-FLEET-P5 persist is first.
 
 ## Cross-phase controls
 
@@ -287,34 +300,56 @@ flowchart TD
 
 **Phase 3 exit record:** [`working/fleet-constraint-v2/phase-3-exit-review.v1.json`](../working/fleet-constraint-v2/phase-3-exit-review.v1.json).
 
-**Phase 4 detailed plan:** [`pseudocode-constraint-v2-fleet-migration-phase-4-plan.md`](pseudocode-constraint-v2-fleet-migration-phase-4-plan.md) (**machinery complete**, fleet-migrated exit **deferred** 2026-09-12: P4-A–P4-H; G3 harness, partition, inventory, W-stdd-2 + four external waves, stop/go, dashboard — **not** fleet-migrated-client for enrolled five-repo set).
+**Phase 4 detailed plan:** [`pseudocode-constraint-v2-fleet-migration-phase-4-plan.md`](pseudocode-constraint-v2-fleet-migration-phase-4-plan.md) — **Complete** (2026-09-13): P4-A–P4-H machinery + closeout M2–M4; five-repo OD-P4-3 set at **fleet-migrated-client**; orchestrator REQ verification/close_out **allowed**.
 
-**Phase 4 exit record:** [`working/fleet-constraint-v2/phase-4-exit-review.v1.json`](../working/fleet-constraint-v2/phase-4-exit-review.v1.json).
+**Phase 4 exit record:** [`working/fleet-constraint-v2/phase-4-exit-review.v1.json`](../working/fleet-constraint-v2/phase-4-exit-review.v1.json) (`phase_4_fully_closed: true`).
 
-**Next command:** Continue [`pseudocode-constraint-v2-fleet-migration-phase-4-closeout-plan.md`](pseudocode-constraint-v2-fleet-migration-phase-4-closeout-plan.md) from [`working/fleet-constraint-v2/phase-4-closeout-handoff.v1.json`](working/fleet-constraint-v2/phase-4-closeout-handoff.v1.json) — **stdd `fleet-migrated-client` done**; **`/build-plan 4B`** for four externals + SC-FLEET-P4-005, then M2–M4. Phase 5 **`/refine-plan`** only after M4.
+**Phase 4 closeout plan:** [`pseudocode-constraint-v2-fleet-migration-phase-4-closeout-plan.md`](pseudocode-constraint-v2-fleet-migration-phase-4-closeout-plan.md) — **Complete** (M4 seq 9, 2026-09-13).
 
-**Explicitly not in Phase 3 package:** fleet-wide migration, G3 program defaults, Phase 5 CI enforcement.
+**Phase 4 evidence ledger:** [`working/fleet-constraint-v2/phase-4-closeout-handoff.v1.json`](../working/fleet-constraint-v2/phase-4-closeout-handoff.v1.json) · seq-9 [`seq-9-m4-p4-h-closeout-report.v1.json`](../working/fleet-constraint-v2/seq-9-m4-p4-h-closeout-report.v1.json) · CITDP closeout run_id **`fleet-migration-phase4-closeout-20260913`**.
 
----
+**Phase 5 detailed plan:** [`pseudocode-constraint-v2-fleet-migration-phase-5-plan.md`](pseudocode-constraint-v2-fleet-migration-phase-5-plan.md) — **Complete** (2026-09-13): G4 CI, bootstrap enforcement, FEAT envelope, v1 quarantine policy, CITDP `phase_5_module`.
+
+**Phase 5 exit record:** [`working/fleet-constraint-v2/phase-5-exit-review.v1.json`](../working/fleet-constraint-v2/phase-5-exit-review.v1.json) (`phase_5_program_exit: true`).
+
+**Next command:** **Program maintenance** (keep G4 CI green in cohort path); optional **Phase 5b** non-enrolled tranche only if sponsor amends **OD-P5-2**. No Phase 6 unless sponsor adds scope. Do **not** re-open orchestrator REQ close_out or Phase 4 closeout.
 
 ## Open decisions for sponsor
 
+### Grand plan OD-1..OD-8 — closed (Phase 1 execution)
+
+Resolved values are **committed** in [`pseudocode-constraint-v2-fleet-migration-phase-1-plan.md`](pseudocode-constraint-v2-fleet-migration-phase-1-plan.md) § Open decisions (accepted 2026-09-12). The table below is **historical default reference** only.
+
+| ID | Decision | Disposition |
+|----|----------|-------------|
+| OD-1 | Program REQ vs amend-only GRAMMAR_V2 | **Closed** — split orchestrator REQ + GRAMMAR_V2 LEAP amend |
+| OD-2 | `constraint_gate_errors` blocking locus | **Closed** — verification first; G4 extends pre-RED (Phase 5) |
+| OD-3 | stdd vs external pilot order | **Closed** — stdd first (Phase 3) |
+| OD-4 | Annotation profile floor | **Closed** — risk-tiered + contract-only floor |
+| OD-5 | Waiver duration / renewal | **Closed** — 90-day; client renew + stdd audit |
+| OD-6 | Pre-cohort vs Phase 1 | **Closed** — parallel; grammar arm header-only |
+| OD-7 | Adversarial inquiry depth | **Closed** — integrated at persist; advisory until program blocking |
+| OD-8 | Fleet registry source | **Closed** — qualification manifest + inventory extension |
+
+### Phase 5 open decisions (OD-P5-*)
+
+Authoritative defaults and acceptance live in the Phase 5 plan § Open decisions. Summary:
+
 | ID | Decision | Default if deferred |
 |----|----------|---------------------|
-| OD-1 | Canonical program REQ token name (`REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION` vs amend-only GRAMMAR_V2_DEFAULT) | Split orchestrator REQ + amend GRAMMAR_V2 |
-| OD-2 | When `constraint_gate_errors` becomes blocking (pre-RED vs verification vs close-out) | Verification first; pre-RED advisory until Phase 3 pilots |
-| OD-3 | Whether stdd migrates before any external client or in parallel with Phase 3 pilots | stdd as first pilot repo |
-| OD-4 | Minimum annotation profile for **all** active procedures vs risk-tiered profiles | Risk-tiered with mandatory contract-only floor |
-| OD-5 | Waiver max duration and renewal authority (sponsor vs client owner) | 90-day default; client owner renew with stdd audit |
-| OD-6 | Pre-cohort test completion vs Phase 1 start sequencing | Parallel allowed; grammar arm stays header-only |
-| OD-7 | Integrated adversarial inquiry depth for fleet orchestrator REQ | Integrated at Phase 1 persist; advisory until Phase 3 |
-| OD-8 | Single stdd repo vs multi-repo inventory source of truth for “all TIED clients” | Qualification manifest + explicit registry extension |
+| **OD-P5-1** | v1 parser retirement vs time-bounded quarantine | **Defer removal** — document quarantine + audit dimension only in Phase 5; retirement REQ optional post-G4 |
+| **OD-P5-2** | Non-enrolled tranche (**18** manifest rows) — Phase 5b G3 program vs defer | **Defer tranche** — G4 bootstrap + enrolled-track governance first |
+| **OD-P5-3** | `program_gate_policy` on orchestrator at G4 | Promote to **blocking on qualifying paths** aligned with G4 yaml; stdd daily work scoped in P5-E |
+| **OD-P5-4** | FEAT-spawned REQ integrated envelope — mandatory vs template | **Mandatory integrated** profile for new FEAT REQs in stdd; client repos follow checklist copy |
+| **OD-P5-5** | GRAMMAR_V2 bootstrap: constraint-enforced-v2 vs constraint-ready-v2 default | **constraint-enforced-v2** for new projects after G4 promotion (LEAP amend) |
+| **OD-P5-6** | CITDP module home for G4 CI | **Append** `phase_5_module` to fleet migration CITDP; GRAMMAR_V2-owned satisfaction criteria for bootstrap-only rows |
 
 ---
 
-## Refine pass disposition
+## Phase 5 build exit disposition (2026-09-13)
 
-- **Implement gate:** Not authorized (documentation-only grand plan).
-- **Tracker:** None (Phase 1 creates per-request copy).
-- **CITDP persistence:** Deferred to Phase 1 execution package.
-- **Tests / lint / `tied_validate_consistency`:** N/A (no TIED token or code changes required for this pass).
+- **Program exit:** P5-C..P5-H **complete** — G4 CI, bootstrap enforcement, FEAT-spawned envelope policy, v1 quarantine policy; [`phase-5-exit-review.v1.json`](../working/fleet-constraint-v2/phase-5-exit-review.v1.json) (`phase_5_program_exit: true`).
+- **Tracker:** [`working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/agent-req-implementation-checklist.yaml`](../working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/agent-req-implementation-checklist.yaml) blocks **`phase_5`** and **`phase_5_continuous_governance`** **complete**; orchestrator REQ **closed** (seq 8) — **not** re-opened at P5-H.
+- **CITDP:** **`phase_5_module`** persisted at P5-C; Phase 4 closeout module unchanged.
+- **Gates:** P5-C integrated **pre_implementation** allowed; P5-H validation replay + `tied_validate_consistency` at exit; traceable git commit via seq-10 report (does not supersede seq-8 machine close-out).
+- **Vocab:** Phase 5 RECORD/VALIDATE in [`tied/vocab/pseudocode-and-citdp.md`](../tied/vocab/pseudocode-and-citdp.md) § fleet constraint v2 migration.

@@ -125,3 +125,54 @@ procedure REPLAY_CORPUS_GRAMMAR_V2_ROW(row, std_root, options):
   IF report.ok is not true OR report.dimensions.grammar_v2_header is not pass:
     RETURN error AuditFailed
   RETURN replay ok
+
+## CONSTRAINT_ENFORCED_BOOTSTRAP
+
+- [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] [ARCH-PSEUDOCODE_GRAMMAR_V2_DEFAULT] [ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE] [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT] [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION] How: After G4 promotion (Phase 5), new-client bootstrap SHALL target constraint-enforced-v2 policy in template and copy_files.sh without retroactive sidecar migration.
+- Contract:
+  - INPUT: gate_promotion_stage, template body, bootstrap mode, G4 ci_expectations policy
+  - PRE: gate_promotion_stage is G4 or later; template body readable; bootstrap mode is new_client
+  - OUTPUT: bootstrap policy record declaring constraint-enforced-v2 default for generated sidecars
+  - POST:
+    - success => generated sidecars include Grammar-Version v2, contract precision floor, and constraint_flow expectation per annotation profile floor (OD-4)
+    - header-only-v2 alone => bootstrap policy MUST NOT classify as satisfied
+    - legacy clients and absent-header sidecars remain v1-compatible unchanged
+  - DATA: templates/impl-essence-pseudocode-template.md, copy_files.sh bootstrap path
+  - DATA_TRANSITION: new client sidecar absent→constraint-enforced-v2 policy body (implementation P5-F); existing repos unchanged
+  - EFFECTS: IO
+  - TERMINATION: total
+  - FAILURE_MODES: GateStageNotG4, TemplatePolicyMismatch, HeaderOnlyBootstrapFalsification
+procedure APPLY_CONSTRAINT_ENFORCED_BOOTSTRAP_POLICY(gate_stage, template_body, bootstrap_mode):
+  # [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] [ARCH-PSEUDOCODE_GRAMMAR_V2_DEFAULT] [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT] How: Fail closed when G4 is not active or bootstrap would silently remain header-only-v2.
+  Contract:
+    INPUT: gate_stage; template_body; bootstrap_mode
+    OUTPUT: constraint_enforced_bootstrap_policy | error: GateStageNotG4 | TemplatePolicyMismatch | HeaderOnlyBootstrapFalsification
+    PRE: template_body length > 0
+    POST: policy declares constraint_flow true expectation for new generated sidecars at G4+; does not rewrite legacy sidecars
+    FAILURE_MODES: GateStageNotG4, TemplatePolicyMismatch, HeaderOnlyBootstrapFalsification
+    DATA: canonical template and bootstrap outputs
+    DATA_TRANSITION: policy absent→declared constraint-enforced-v2 default
+    EFFECTS: IO
+    TERMINATION: total
+  IF gate_stage is before G4: RETURN error GateStageNotG4
+  IF bootstrap_mode is not new_client: RETURN template_body unchanged
+  header_body = CALL SELECT_NEW_PROJECT_GRAMMAR_DEFAULT(template_body, bootstrap_mode)
+  IF header_body lacks contract precision floor per template constraint-ready-v2 section: RETURN error TemplatePolicyMismatch
+  IF header_body would satisfy audit with constraint_flow false only: RETURN error HeaderOnlyBootstrapFalsification
+  RETURN { policy: constraint_enforced_v2_default, template_body: header_body, constraint_flow_expectation: true }
+
+procedure AUDIT_CONSTRAINT_ENFORCED_BOOTSTRAP(client_root, gate_stage, reports):
+  # [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] [ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE] [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT] How: Extend grammar v2 audit with bootstrap enforcement dimension separate from enrolled fleet-migrated-client proof.
+  Contract:
+    INPUT: disposable client root, gate stage, Layer B/C reports, bootstrap policy record
+    OUTPUT: bootstrap_enforcement audit result | error: GateStageNotG4 | HeaderOnlyBootstrapFalsification
+    PRE: gate_stage is G4+ when enforcement dimension applies
+    POST: dimensions report grammar_v2_header, contract_defaults, constraint_flow_expectation independently; header pass alone cannot satisfy enforcement dimension
+    FAILURE_MODES: GateStageNotG4, HeaderOnlyBootstrapFalsification
+    EFFECTS: IO
+    TERMINATION: total
+  IF gate_stage is before G4: RETURN error GateStageNotG4
+  base = CALL AUDIT_NEW_CLIENT_GRAMMAR(client_root, reports)
+  IF base.grammar_v2_header is not pass: RETURN base
+  IF reports.constraint_flow_expectation is not true: RETURN error HeaderOnlyBootstrapFalsification
+  RETURN { grammar_v2_header: pass, bootstrap_enforcement: pass, layer_b: reports.layer_b, layer_c: reports.layer_c }

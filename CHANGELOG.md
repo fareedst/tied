@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Fleet constraint v2 migration — Phase 5 G4 governance + traceable commit ([REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION])** —
+  Phase 5 program exit (P5-H): G4 CI via `scripts/run-fleet-g4-ci-checks.mjs`, constraint-enforced-v2
+  bootstrap audit (P5-F), FEAT-spawned integrated envelope policy (P5-G), v1 parser quarantine policy;
+  CITDP `phase_5_module`; GRAMMAR_V2 / ARCH governance LEAP. Evidence:
+  `working/fleet-constraint-v2/phase-5-exit-review.v1.json`,
+  `working/fleet-constraint-v2/p5-h-phase-5-exit-report.v1.json`,
+  `working/fleet-constraint-v2/seq-10-p5-traceable-commit-report.v1.json`. Orchestrator REQ stays
+  closed (seq 8). **Does not** migrate the 18 `not_enrolled_phase_4` manifest rows (OD-P5-2 deferred).
+
 - **Fleet constraint v2 migration — Phase 4 closeout seq 8 orchestrator machine close-out ([REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION])** —
   After M2 (seq 7), verification and close_out checklist gates **allowed: true** with integrated advisory inquiry;
   `tied_verify` set REQ **Implemented** and **IMPL-PSEUDOCODE_MIGRATION_TOOLING** **Active**; unified

@@ -2,9 +2,9 @@
 
 **Filename (stable link):** `pseudocode-constraint-v2-fleet-migration-phase-4-closeout-plan.md` — **closeout** = terminal gates (M2–M4, REQ verify/close_out, P4-H); **exit** = bulk LEAP enforcement on enrolled sidecars (no waiver shortcut on WS-0 gaps).
 
-**Status:** **Active** — WS-0 **resolved** 2026-09-12 (full enforce on stdd 13 + 1789069630 ×5; orchestrator close_out after M2)  
+**Status:** **Complete** — M4 reached 2026-09-13 (seq 9 build-plan); Phase 5 refine unblocked per grand plan  
 **Created:** 2026-09-12  
-**Refined:** 2026-09-12 (`/refine-plan` — closeout module clarity, CITDP/Implement gates)  
+**Refined:** 2026-09-13 (`/refine-plan seq 9` — M4 build slice, EX refresh matrix, CITDP P4-CLO-C placement, tracker fields)  
 **WS-0 locked:** 2026-09-12 (sponsor — see § **Sponsor execution order**)  
 **Methodology pin:** `48d1fbb+`  
 **Parent:** [`pseudocode-constraint-v2-fleet-migration-grand-plan.md`](pseudocode-constraint-v2-fleet-migration-grand-plan.md)  
@@ -15,7 +15,7 @@
 **Tracker (orchestrator REQ — extend, do not replace P4 history):** [`working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/agent-req-implementation-checklist.yaml`](../working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/agent-req-implementation-checklist.yaml) — add block **`phase_4_closeout`** in **P4-CLO-C**  
 **Harness root:** `working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/run-harness.sh` (from repo root)  
 **Exit review (current):** [`working/fleet-constraint-v2/phase-4-exit-review.v1.json`](../working/fleet-constraint-v2/phase-4-exit-review.v1.json)  
-**Conversation handoff (evidence ledger):** [`working/fleet-constraint-v2/phase-4-closeout-handoff.v1.json`](../working/fleet-constraint-v2/phase-4-closeout-handoff.v1.json) — **start new chat here** (updated 2026-09-13: slices **1–7** done; **seq 8** `/plan-close-out` next)  
+**Conversation handoff (evidence ledger):** [`working/fleet-constraint-v2/phase-4-closeout-handoff.v1.json`](../working/fleet-constraint-v2/phase-4-closeout-handoff.v1.json) — **start new chat here** (updated 2026-09-13: slices **1–8** done; **seq 9** `/build-plan` next)  
 **Orchestrator evidence stub:** [`working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/evidence/phase-4-closeout-handoff.v1.json`](../working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/evidence/phase-4-closeout-handoff.v1.json)  
 **Phase 5 (blocked until this plan completes):** grand plan § Phase 5 — G4 CI defaults, new-client **constraint-enforced-v2** bootstrap, integrated envelope on FEAT-spawned REQs; **no Phase 5 `/refine-plan` until M4 (§ Milestones) or sponsor amends OD-P4-3 scope.**
 
@@ -32,7 +32,7 @@
 | **P4-CLO-03** | Five-repo **`fleet-migrated-client`** (WS-1, WS-2) + **M2 formal assert** (seq 7) | **Done** (2026-09-13 — stdd 4A + externals **4B**; seq **7** EX-01..09) |
 | **P4-CLO-04** | Client-owned migration REQ close-out ×4 (SC-FLEET-P4-005) | **Done** (2026-09-13 — client gates **allowed: true**) |
 | **P4-CLO-05** | Orchestrator REQ machine close-out (WS-3, M3) | **Done** (2026-09-13 — seq **8** `/plan-close-out`) |
-| **P4-CLO-06** | P4-H exit review + plan link maintenance (M4) | **Pending** |
+| **P4-CLO-06** | P4-H exit review + plan link maintenance (M4) | **Done** (2026-09-13 seq 9) |
 
 **Documentation-first rule:** Sidecar promotion (enforce vs waiver) is **LEAP + pseudo-code** before apply; orchestrator REQ status changes only via **verification-gate** + checklist gates — not inventory prose.
 
@@ -90,6 +90,7 @@
 
 - Vocabulary: **PRELOAD** [`tied/vocab/pseudocode-and-citdp.md`](../tied/vocab/pseudocode-and-citdp.md); **RECORD** enforcement batch terms at M4 (WS-5); waivers only if introduced under E2.3, not for OD-P4-CLO-1/2 loci.
 - Execution follows **§ Sponsor execution order** (locked sequence); do not revert to plan silent defaults (Hybrid / 1789069630 waiver).
+- **Seq 9 refine (2026-09-13):** Ambiguity cleared — P4-CLO-C inside **`/build-plan seq 9`**; EX-01..09 primarily **cite seq 7** with M4 **confirmation** harness; EX-10 after CITDP only; EX-11 vocab VALIDATE without REQ/ARCH/IMPL index edits; exit review **stale until build S9.2**; `profile_depth: integrated`, gate policy unchanged → **defer** pre_implementation re-run.
 
 ---
 
@@ -138,6 +139,24 @@
 
 **Pre-implementation gate:** Re-run `tied_checklist_gate_validate` `phase: pre_implementation` **only if** CITDP closeout amend changes scope/depth; otherwise cite existing P4-C receipt and proceed to WS execution.
 
+### Seq 9 slice — CITDP persist placement (resolved 2026-09-13)
+
+| Question | Resolution |
+|----------|------------|
+| **When** is P4-CLO-C persisted? | **`/build-plan seq 9`** substep **S9.3** — not a separate sponsor gate before build. |
+| **Separate MCP session?** | Optional; same seq 9 session is fine if `TIED_BASE_PATH` → `.../stdd/tied`. |
+| **pre_implementation re-run?** | **Defer** — append-only closeout module with unchanged `depth_tier: integrated` and `gate_policy`; cite `working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/gates/` P4-C pre_implementation receipt. Re-run pre_implementation **only** if build changes depth, gate policy, or enrolled scope. |
+| **EX-10 trigger?** | **Yes** — after **S9.3** mutates `tied/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml`, run **`tied_validate_consistency`** + `lint_yaml` on that file. Seq 9 does **not** mutate REQ/ARCH/IMPL indexes unless LEAP discovers drift (out of scope). |
+| **EX-11 trigger?** | **Yes** — **S9.5** vocab **VALIDATE** (Touchpoint 3); optional **RECORD** for closeout-only terms. Does not require project TIED YAML edits. |
+
+**Seq 9 CITDP change definition (append module only):**
+
+| Field | Content |
+|-------|---------|
+| **Current behavior** | CITDP ends at Phase 4 **Fleet waves** module; closeout execution evidence lives in handoff + seq 5–8 reports; Tracker `phase_4_closeout` partial. |
+| **Desired behavior** | CITDP documents **Phase 4 closeout** module with `run_id: fleet-migration-phase4-closeout-20260912` (or `…20260913` if build aligns run_id to seq 6/8), success criteria M2–M4, falsification questions §9, evidence pointers to seq 7–9 reports. |
+| **Unchanged** | Historical Fleet waves entries; methodology pin; integrated/advisory policy on orchestrator pre-RED. |
+
 ---
 
 ## Implement gate — work packages and command reference
@@ -184,7 +203,7 @@ HARNESS=working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/run-harness.sh
 
 ## 1. Purpose
 
-Phase 4 **machinery** (P4-A..P4-H) is **complete**: 14/14 partition waves, G3 harness, inventory, waiver registry, stop/go, dashboard, and orchestrator SC-FLEET-P4 persist. **Full Phase 4 close** is **not** complete: no enrolled repo is **`fleet-migrated-client`**, and **SC-FLEET-P4-005** client-owned migration REQ close-out is incomplete for most externals.
+Phase 4 **machinery** (P4-A..P4-H) is **complete**: 14/14 partition waves, G3 harness, inventory, waiver registry, stop/go, dashboard, and orchestrator SC-FLEET-P4 persist. **M2** (five-repo **`fleet-migrated-client`**) and **M3** (orchestrator REQ verification + close_out **allowed**) are **done** (seq **7–8**, 2026-09-13). **M4** remains: stale [`phase-4-exit-review.v1.json`](../working/fleet-constraint-v2/phase-4-exit-review.v1.json), **P4-CLO-C** CITDP append, Tracker **`phase_4_closeout`** completion, and vocab **VALIDATE** — **seq 9** only.
 
 This document is the **single ordered checklist** to reach:
 
@@ -199,21 +218,21 @@ This document is the **single ordered checklist** to reach:
 
 ---
 
-## 2. Snapshot — enrolled five-repo set (2026-09-12)
+## 2. Snapshot — enrolled five-repo set (2026-09-13, post–seq 7 M2)
 
-Source: [`client-inventory-manifest.v1.yaml`](../working/fleet-constraint-v2/client-inventory-manifest.v1.yaml) after latest inventory scan.
+**Authoritative inventory:** [`phase-4-closeout-handoff.v1.json`](../working/fleet-constraint-v2/phase-4-closeout-handoff.v1.json) `enrolled_od_p4_3_inventory` (`as_of`: 2026-09-13). Manifest: [`client-inventory-manifest.v1.yaml`](../working/fleet-constraint-v2/client-inventory-manifest.v1.yaml).
 
-| `client_id` | `aggregate_migration_state` | Sidecar mix (approx.) | G3 receipts | Apply / assist |
-|-------------|----------------------------|------------------------|---------------|----------------|
-| **stdd** | `constraint-ready-v2` | 82 constraint-ready, 11 header-only, 0 legacy; 93 total | 83/83 `layer_c.ok`, `layer_b.ok` | Header + constraint-ready assist **done**; 2 manual-flag sidecars |
-| **1789177584** | `constraint-ready-v2` | 5 constraint-ready | Wave complete | Pilot path; no legacy |
-| **1789136889** | `constraint-ready-v2` | 4 constraint-ready | Wave complete | External apply (headers) **done** |
-| **1789147101** | `constraint-ready-v2` | 4 constraint-ready | Wave complete | External apply + 2 procedure stubs **done** |
-| **1789069630** | `header-only-v2` | 5 header-only (`##` blocks) | Wave complete | Headers **done**; constraint-ready assist **N/A** until `procedure` migration or waiver |
+| `client_id` | `aggregate_migration_state` | Sidecar mix | G3 receipts | Closeout slice |
+|-------------|----------------------------|-------------|---------------|----------------|
+| **stdd** | **`fleet-migrated-client`** | 93 × `constraint-enforced-v2` | `waves/stdd/receipts/summary.json` (93/93) | WS-1 seq **4A** |
+| **1789069630** | **`fleet-migrated-client`** | 5 × enforced | `waves/1789069630/receipts/summary.json` | seq **1** + **4B**; client REQ gates in handoff |
+| **1789177584** | **`fleet-migrated-client`** | 5 × enforced | `waves/1789177584/receipts/summary.json` | seq **4B** |
+| **1789136889** | **`fleet-migrated-client`** | 4 × enforced | `waves/1789136889/receipts/summary.json` | seq **4B** |
+| **1789147101** | **`fleet-migrated-client`** | 4 × enforced | `waves/1789147101/receipts/summary.json` | seq **4B** |
 
-**Orchestrator (stdd):** PSA path for [IMPL-PSEUDOCODE_MIGRATION_TOOLING](../tied/implementation-decisions/IMPL-PSEUDOCODE_MIGRATION_TOOLING-pseudocode.md) at `working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/evidence/psa-IMPL-PSEUDOCODE_MIGRATION_TOOLING-g3.v1.json`; verification manifest and request envelope under `working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/evidence/`; re-validate envelope before M3 — target **`fail_on_error_gaps: true` → 0 blocking gaps** (advisory inquiry warns only).
+**Orchestrator (stdd):** M3 complete — envelope **0** blocking gaps; seq **8** gate receipts `verification-2026-09-13T16-06-27-240Z.json`, `close_out-2026-09-13T16-06-27-786Z.json`; see [`seq-8-orchestrator-closeout-report.v1.json`](../working/fleet-constraint-v2/seq-8-orchestrator-closeout-report.v1.json).
 
-**Still false:** `phase_4_technical_exit`, `fleet_migrated_client_reached`, `phase_4_fully_closed` in exit review JSON.
+**Milestones:** M2 ✓ · M3 ✓ · M4 ✓ — [`phase-4-exit-review.v1.json`](../working/fleet-constraint-v2/phase-4-exit-review.v1.json) refreshed seq **9** (`phase_4_fully_closed: true`).
 
 ---
 
@@ -360,13 +379,17 @@ Run after any material WS-1..WS-3 change:
 
 ### WS-6 — Phase 5 entry gate (do not start until M4)
 
-Phase 5 work (**`/refine-plan`** on new-client bootstrap) starts only when:
+Phase 5 work (**`/refine-plan`** on new-client bootstrap) starts only when **all** preconditions below are **verified** (seq **9** build records proof in [`seq-9-m4-p4-h-closeout-report.v1.json`](../working/fleet-constraint-v2/seq-9-m4-p4-h-closeout-report.v1.json)):
 
-- [ ] M2 technical exit checklist **EX-01..EX-09** green for OD-P4-3 set  
-- [ ] M3 orchestrator REQ close_out gate **allowed: true** (or sponsor-approved REQ scope split per OD-P4-CLO-3)  
-- [ ] M4 exit review JSON and phase 4 plan status updated  
-- [ ] CITDP / grand plan explicitly note **legacy fleet** vs **new-client-only** dual track  
-- [ ] [`phase-4-exit-review.v1.json`](../working/fleet-constraint-v2/phase-4-exit-review.v1.json) `phase_4_fully_closed: true`
+| Precondition | Status (2026-09-13 pre–seq 9 build) | Evidence / seq 9 action |
+|--------------|-------------------------------------|-------------------------|
+| M2 **EX-01..EX-09** green for OD-P4-3 | **Met** (formal assert) | Cite [`seq-7-m2-ex-assertion-report.v1.json`](../working/fleet-constraint-v2/seq-7-m2-ex-assertion-report.v1.json); **S9.1** M4 confirmation re-probe (no sidecar edits since seq 7) |
+| M3 orchestrator **close_out** **allowed: true** | **Met** | [`seq-8-orchestrator-closeout-report.v1.json`](../working/fleet-constraint-v2/seq-8-orchestrator-closeout-report.v1.json); handoff `M3_orchestrator_req_closed: true` |
+| M4 exit review + closeout plan status | **Pending** | **S9.2** refresh `phase-4-exit-review.v1.json`; **S9.6** this doc → **Complete** |
+| CITDP closeout module **final** | **Pending** | **S9.3** P4-CLO-C persist |
+| **`phase_4_fully_closed: true`** in exit review | **Pending** | **S9.2** only after EX matrix green |
+| Grand plan **Next command** → Phase 5 | **Pending** | **S9.2** H5.4 (grand plan link only — **no** Phase 5 plan authoring in seq 9) |
+| Dual track **legacy fleet** vs **new-client-only** documented | **Partial** (closeout plan § Refine) | **S9.3** CITDP module + exit review `doc_falsification_audit` refresh |
 
 **Phase 5 out of scope for this plan:** G4 `ci_expectations`, `constraint_gate_errors.pre_red` blocking at orchestrator, GRAMMAR_V2_DEFAULT bootstrap LEAP — see grand plan Phase 5 module.
 
@@ -432,7 +455,7 @@ flowchart TD
 
 **Parallelism:** Seq **6** (orchestrator verification prep) may run alongside seq **1–4**. Seq **8** **`close_out`** must not run before seq **7** (M2).
 
-**Next command (2026-09-13 handoff):** **`/build-plan seq 9`** — WS-5 P4-H + M4. Seq **8** done — [`seq-8-orchestrator-closeout-report.v1.json`](../working/fleet-constraint-v2/seq-8-orchestrator-closeout-report.v1.json).
+**Next command (post–seq 9, 2026-09-13):** **`/refine-plan`** on [`pseudocode-constraint-v2-fleet-migration-grand-plan.md`](pseudocode-constraint-v2-fleet-migration-grand-plan.md) for **Phase 5** (plan document TBD).
 
 ### Execution progress ledger (build-plan slices)
 
@@ -447,7 +470,107 @@ flowchart TD
 | **6** orchestrator verify prep | **Done** (2026-09-13) | [`seq-6-orchestrator-verification-prep-report.v1.json`](../working/fleet-constraint-v2/seq-6-orchestrator-verification-prep-report.v1.json) — envelope **0** blocking gaps |
 | **7** M2 EX-01..09 assert | **Done** (2026-09-13) | [`seq-7-m2-ex-assertion-report.v1.json`](../working/fleet-constraint-v2/seq-7-m2-ex-assertion-report.v1.json) — **M2** technical exit |
 | **8** `/plan-close-out` orchestrator | **Done** (2026-09-13) | [`seq-8-orchestrator-closeout-report.v1.json`](../working/fleet-constraint-v2/seq-8-orchestrator-closeout-report.v1.json) — **M3** |
-| **9** P4-H + M4 | **Pending** | Exit review flags; CITDP P4-CLO-C; vocab VALIDATE |
+| **9** P4-H + M4 | **Done** (2026-09-13) | [`seq-9-m4-p4-h-closeout-report.v1.json`](../working/fleet-constraint-v2/seq-9-m4-p4-h-closeout-report.v1.json) — **M4** |
+
+### Seq 9 — build-plan slice (refined 2026-09-13)
+
+**Command:** `/build-plan seq 9`  
+**Work packages:** **P4-CLO-C**, **P4-CLO-G**, **P4-CLO-H** (WS-5 + WS-6 precondition audit only)  
+**Out of scope:** Flip exit-review flags or mutate CITDP during **this** refine pass; Phase 5 plan authoring; git commit unless sponsor requests.
+
+**M4 acceptance (all required):** `handoff.milestones.M4_phase_4_fully_closed: true`; exit review `phase_4_technical_exit`, `fleet_migrated_client_reached`, `phase_4_fully_closed` true; checklist `full_inventory_validates_enrolled_fleet_migrated: pass`; **P4-CLO-06** **Done**; WS-6 precondition table all **Met**.
+
+#### S9.0 — Bootstrap
+
+1. `tied_config_get_base_path` → must resolve to `/Users/fareed/Documents/dev/chatgpt/stdd/tied`.
+2. Read [`phase-4-closeout-handoff.v1.json`](../working/fleet-constraint-v2/phase-4-closeout-handoff.v1.json) and seq **7–8** reports (canonical M2/M3).
+3. Treat [`phase-4-exit-review.v1.json`](../working/fleet-constraint-v2/phase-4-exit-review.v1.json) as **stale** until **S9.2** completes.
+
+#### S9.1 — EX matrix at M4 (before H5 flag flips)
+
+Run **confirmation** steps **before** updating exit review JSON. Sidecar/TIED production edits are **not** expected in seq 9; if confirmation fails, loop to WS-4 (seq **5** pattern) and **do not** flip M4 flags.
+
+| ID | Seq 9 disposition | Action | Pass probe |
+|----|-------------------|--------|------------|
+| **EX-01** | **Cite + confirm** | Primary: [`seq-7-m2-ex-assertion-report.v1.json`](../working/fleet-constraint-v2/seq-7-m2-ex-assertion-report.v1.json). Confirm: `"$HARNESS" fleet-inventory` (read-only; `--apply` only if manifest `generated_at` drift vs handoff `as_of`). | All 5 enrolled rows `aggregate_migration_state: fleet-migrated-client`; `yq` probe §3 |
+| **EX-02** | **Cite** | seq 7 report + manifest `$schema` | `enrolled_phase_4` count = 5 |
+| **EX-03** | **Cite + confirm** | seq 7 + `"$HARNESS" fleet-stop-go-closeout` **or** cite seq **5** if stop/go unchanged | All dispositions **go**; 15 wave summaries |
+| **EX-04** | **Cite** | seq 7 per-client G3 `summary.json` paths | All `gate_stage: G3`, `layer_c.ok` |
+| **EX-05** | **Re-run** | `node …/run-fleet-waiver-registry-check.ts` | exit 0 |
+| **EX-06** | **Cite + spot-check** | handoff `client_gate_receipts`; `test -f` each path | All four externals verification + close_out receipts exist |
+| **EX-07** | **Re-run** | `"$HARNESS" fleet-dashboard` | Reconciles with manifest + seq **5** pattern |
+| **EX-08** | **Cite** (optional re-run) | seq 7 note + [`f11-fleet-20260912.yaml`](../working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/metrics/f11-fleet-20260912.yaml); optional `"$HARNESS" fleet-g1` if sponsor wants post-closeout regression | Within [`f11-fp-thresholds.v1.yaml`](../working/fleet-constraint-v2/f11-fp-thresholds.v1.yaml) |
+| **EX-09** | **Re-assert at refresh** | Update exit review `doc_falsification_audit` + P4-H checklist in **S9.2** | No header-only → fleet-migrated inference in prose |
+| **EX-10** | **Run after S9.3** | MCP **`tied_validate_consistency`**; `scripts/lint_yaml.sh tied/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml` | ok after CITDP append only |
+| **EX-11** | **Run in S9.5** | Vocab audit [`tied/vocab/pseudocode-and-citdp.md`](../tied/vocab/pseudocode-and-citdp.md) vs closeout artifacts ([PROC-VOCABULARY_INDEX] Touchpoint 3) | VALIDATE recorded in seq 9 report |
+
+Record results in **`working/fleet-constraint-v2/seq-9-m4-p4-h-closeout-report.v1.json`** (`schema_version: seq-9-m4-p4-h-closeout-report.v1`, mirror seq 5–8 report shape: `criteria[]`, `steps`, `milestone: M4_phase_4_fully_closed`).
+
+#### S9.2 — WS-5 P4-H (H5.1–H5.6)
+
+| Step | Action | Paths / commands |
+|------|--------|------------------|
+| **H5.1** | Refresh exit review flags **only if** S9.1 EX-01..EX-09 green | Edit [`phase-4-exit-review.v1.json`](../working/fleet-constraint-v2/phase-4-exit-review.v1.json): `phase_4_technical_exit: true`, `fleet_migrated_client_reached: true`, `phase_4_fully_closed: true`; update `reviewed_at`; set `checklist.full_inventory_validates_enrolled_fleet_migrated.status: pass` (5/5); replace `stdd_aggregate_after_inventory_apply` with handoff-aligned counts (93 enforced) |
+| **H5.2** | `remaining_work` → `[]` or Phase 5 pointer stubs only | Same JSON |
+| **H5.3** | Phase 4 machinery plan P4-H boxes + status | [`pseudocode-constraint-v2-fleet-migration-phase-4-plan.md`](pseudocode-constraint-v2-fleet-migration-phase-4-plan.md) |
+| **H5.4** | Grand plan Phase 4 line + **Next command** → Phase 5 refine (link TBD plan path) | [`pseudocode-constraint-v2-fleet-migration-grand-plan.md`](pseudocode-constraint-v2-fleet-migration-grand-plan.md) — **no new Phase 5 doc** |
+| **H5.5** | Vocab RECORD (if new waiver/enrollment terms) + **VALIDATE** | [`tied/vocab/pseudocode-and-citdp.md`](../tied/vocab/pseudocode-and-citdp.md) |
+| **H5.6** | Tracker **`fleet_program_phase_modules`** + **`phase_4_closeout`** | See **S9.4** |
+
+#### S9.3 — P4-CLO-C CITDP + lint
+
+1. MCP **`citdp_record_write`** or **`yaml_detail_update`** / `tied-cli` — **append** Phase 4 closeout module per § **CITDP Plan gate** (preserve Fleet waves history).
+2. Align `run_id` with Tracker `phase_4_closeout.citdp_run_id` (`fleet-migration-phase4-closeout-20260912` or `…20260913` — pick one and use consistently in seq 9 report).
+3. **`scripts/lint_yaml.sh`** on changed CITDP file → **EX-10** **`tied_validate_consistency`**.
+
+#### S9.4 — Tracker fields (`working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/agent-req-implementation-checklist.yaml`)
+
+At M4 completion, set:
+
+```yaml
+fleet_program_phase_modules:
+  phase_4_fleet_waves:
+    status: complete          # was machinery_complete_exit_deferred
+    completed_at: "<ISO-8601>"  # M4 close time
+  phase_4_closeout:
+    status: complete          # was orchestrator_machine_closeout_complete
+    completed_at: "<ISO-8601>"
+    m4_closed_at: "<ISO-8601>"
+    citdp_run_id: "<same as CITDP module>"
+    steps:
+      - slug: seq-9-m4-p4-h
+        disposition: completed
+        evidence_refs:
+          - kind: file_path
+            path: working/fleet-constraint-v2/seq-9-m4-p4-h-closeout-report.v1.json
+          - kind: file_path
+            path: working/fleet-constraint-v2/phase-4-exit-review.v1.json
+          - kind: file_path
+            path: tied/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml
+          - kind: file_path
+            path: working/fleet-constraint-v2/phase-4-closeout-handoff.v1.json
+        notes: "WS-5 M4 — EX-01..11, P4-CLO-C, exit review refresh"
+```
+
+Add typed **`evidence_refs`** on existing seq 7–8 steps if missing kinds; do not delete completed history.
+
+#### S9.5 — Handoff JSON + closeout plan status
+
+1. Update [`phase-4-closeout-handoff.v1.json`](../working/fleet-constraint-v2/phase-4-closeout-handoff.v1.json): `milestones.M4_phase_4_fully_closed: true`, `m4_closed_at`, append seq 9 report to `evidence_index.closeout_slice_reports`, clear `build_plan_slices_pending`, set `next_command_recommended` → Phase 5 refine (grand plan).
+2. Mirror stub under `working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/evidence/phase-4-closeout-handoff.v1.json` if project policy requires sync.
+3. This closeout plan **Status: Complete**; **P4-CLO-06** **Done** in executive summary.
+
+#### S9.6 — WS-6 read-only gate (Phase 5 entry)
+
+After S9.5, assert WS-6 precondition table (§ WS-6) all **Met** in seq 9 report `ws6_phase_5_entry_preconditions`. **Stop** if any row false — falsification §9.
+
+#### Seq 9 test strategy and falsification
+
+- **Harness re-runs:** EX-05, EX-07 mandatory; EX-03 confirm or re-run; EX-01 inventory read mandatory.
+- **Falsification §9:** Do not set `phase_4_fully_closed` if EX-01 confirmation shows non–`fleet-migrated-client` enrolled row; do not skip EX-10 after CITDP mutate; do not start Phase 5 refine if exit review still false.
+- **Gate validate:** No **`tied_checklist_gate_validate` pre_implementation** for seq 9 build unless CITDP amend changes depth/scope (defer per § CITDP Plan gate).
+
+**Next command after refine:** **`/build-plan seq 9`** (execute S9.0–S9.6).
 
 ---
 
@@ -467,6 +590,7 @@ flowchart TD
 | Orchestrator PSA tooling | `working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/evidence/psa-IMPL-PSEUDOCODE_MIGRATION_TOOLING-g3.v1.json` |
 | Qualification F11 snapshot | `working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/metrics/f11-fleet-20260912.yaml` |
 | Exit review (update on M4) | `working/fleet-constraint-v2/phase-4-exit-review.v1.json` |
+| Seq 9 M4 report (create on build) | `working/fleet-constraint-v2/seq-9-m4-p4-h-closeout-report.v1.json` |
 | Tracker | `working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/agent-req-implementation-checklist.yaml` |
 | CITDP | `tied/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml` |
 | Prior gates (partial P4-H) | `working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/gates/verification-2026-09-12T22-12-27-248Z.json`, `close_out-2026-09-12T22-12-33-155Z.json` |

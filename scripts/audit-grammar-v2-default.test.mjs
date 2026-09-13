@@ -61,4 +61,22 @@ describe("bootstrap-to-audit composition [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT]", (
       fs.rmSync(tempDir, { recursive: true, force: true });
     }
   });
+
+  it("passes bootstrap_enforcement when gateStage is G4 [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT]", () => {
+    // [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] [ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE] [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION] How: G4 disposable client audit requires constraint_flow true, not header-only Track A.
+    const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-grammar-v2-g4-bootstrap-"));
+    const copyScript = path.join(REPO_ROOT, "copy_files.sh");
+    try {
+      execFileSync("bash", [copyScript, tempDir], { cwd: REPO_ROOT, stdio: "pipe" });
+      const report = runGrammarV2DefaultAudit(tempDir, { gateStage: "G4" });
+      assert.equal(report.ok, true, JSON.stringify(report.audit));
+      assert.equal(report.dimensions.bootstrap_enforcement, "pass");
+      assert.equal(report.dimensions.constraint_flow, true);
+      assert.equal(report.dimensions.layer_c.constraint_flow, true);
+      assert.equal(report.audit.ok, true);
+      assert.equal(report.audit.dimensions.bootstrap_enforcement, "pass");
+    } finally {
+      fs.rmSync(tempDir, { recursive: true, force: true });
+    }
+  });
 });

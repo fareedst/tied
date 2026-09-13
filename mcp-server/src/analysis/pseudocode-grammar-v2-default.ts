@@ -65,6 +65,56 @@ export type GrammarV2AuditResult =
     }
   | { ok: false; error: GrammarV2AuditError };
 
+export type GrammarV2BootstrapEnforcementDimension = "pass" | "fail";
+
+export type GrammarV2BootstrapEnforcementInput = {
+  generatedSidecarBody: string;
+  layerB: GrammarV2AuditLayerBReport;
+  layerC: GrammarV2AuditLayerCReport;
+  constraintFlowExpectation: boolean;
+  legacyV1: GrammarV2AuditLegacyReport;
+  gateStage: string;
+};
+
+export type GrammarV2BootstrapEnforcementError =
+  | GrammarV2AuditError
+  | "GateStageNotG4"
+  | "HeaderOnlyBootstrapFalsification";
+
+export type GrammarV2BootstrapEnforcementResult =
+  | {
+      ok: true;
+      dimensions: {
+        grammar_v2_header: GrammarV2HeaderDimension;
+        bootstrap_enforcement: GrammarV2BootstrapEnforcementDimension;
+        layer_b: GrammarV2AuditLayerBReport;
+        layer_c: GrammarV2AuditLayerCReport;
+        constraint_flow_expectation: true;
+        legacy_v1_compatibility: "pass" | "fail";
+      };
+    }
+  | { ok: false; error: GrammarV2BootstrapEnforcementError };
+
+const G4_GATE_STAGE = "G4";
+
+/**
+ * [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] [ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE] [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION]
+ * How: True when gate promotion stage is G4 (Phase 5 bootstrap enforcement applies).
+ */
+export function isGateStageG4OrLater(gateStage: string | null | undefined): boolean {
+  if (gateStage == null || gateStage.trim() === "") {
+    return false;
+  }
+  if (gateStage === G4_GATE_STAGE) {
+    return true;
+  }
+  const match = /^G(\d+)$/.exec(gateStage.trim());
+  if (!match) {
+    return false;
+  }
+  return Number.parseInt(match[1], 10) >= 4;
+}
+
 const GRAMMAR_V2_HEADER_RE = /^\s*Grammar-Version:\s*v2\s*$/i;
 const GRAMMAR_VERSION_HEADER_ANY_RE = /^\s*Grammar-Version:\s*(.+)\s*$/i;
 
@@ -213,6 +263,47 @@ export function auditNewClientGrammar(input: GrammarV2AuditInput): GrammarV2Audi
       layer_b: input.layerB,
       layer_c: input.layerC,
       constraint_flow: false,
+      legacy_v1_compatibility: input.legacyV1.compatible ? "pass" : "fail",
+    },
+  };
+}
+
+/**
+ * [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] [ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE] [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT] [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION]
+ * How: G4+ bootstrap audit — header pass alone cannot satisfy bootstrap_enforcement; Layer C must run with constraint_flow expectation.
+ */
+export function auditConstraintEnforcedBootstrap(
+  input: GrammarV2BootstrapEnforcementInput,
+): GrammarV2BootstrapEnforcementResult {
+  if (!isGateStageG4OrLater(input.gateStage)) {
+    return { ok: false, error: "GateStageNotG4" };
+  }
+
+  const grammarHeader = evaluateGrammarV2HeaderDimension(input.generatedSidecarBody);
+  if (grammarHeader !== "pass") {
+    return { ok: false, error: "GeneratedHeaderMissing" };
+  }
+  if (!input.layerB.ok) {
+    return { ok: false, error: "LayerBFailed" };
+  }
+  if (!input.constraintFlowExpectation) {
+    return { ok: false, error: "HeaderOnlyBootstrapFalsification" };
+  }
+  if (!input.layerC.ok || !input.layerC.gate_mode_applied) {
+    return { ok: false, error: "LayerCFailed" };
+  }
+  if (!input.legacyV1.compatible) {
+    return { ok: false, error: "LegacyCompatibilityFailed" };
+  }
+
+  return {
+    ok: true,
+    dimensions: {
+      grammar_v2_header: grammarHeader,
+      bootstrap_enforcement: "pass",
+      layer_b: input.layerB,
+      layer_c: input.layerC,
+      constraint_flow_expectation: true,
       legacy_v1_compatibility: input.legacyV1.compatible ? "pass" : "fail",
     },
   };

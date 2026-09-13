@@ -25,11 +25,12 @@ IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT:
   essence_pseudocode_path: "implementation-decisions/IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT-pseudocode.md"
   implementation_approach:
     details:
-      - "Audit output distinguishes header presence, Layer B validation, Layer C gate_mode, and constraint_flow=false compatibility."
+      - "Audit output distinguishes header presence, Layer B validation, Layer C gate_mode, bootstrap enforcement dimension, and constraint_flow=false compatibility for legacy header-only track."
       - "Legacy sidecars without the header remain v1; no mass migration is in scope."
       - "Module validation is split between generation, audit, and parser-compatibility modules before composition."
+      - "Phase 5 P5-C adds CONSTRAINT_ENFORCED_BOOTSTRAP pseudo-code blocks specifying G4-gated bootstrap policy; production template/copy_files changes deferred to P5-F."
       - "Template and bootstrap are the authoritative generation path."
-    summary: "Put the header in the canonical sidecar template, preserve it through bootstrap, expose a deterministic audit dimension, and validate Layer B plus Layer C without enabling constraint_flow."
+    summary: "Header-only Implemented bootstrap plus Phase 5 specified constraint-enforced-v2 default after G4; validate generation, audit dimensions, and parser compatibility independently."
   name: "Bootstrap and validate the new-project grammar v2 default"
   rationale:
     benefits:

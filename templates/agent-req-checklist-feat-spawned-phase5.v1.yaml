@@ -1,0 +1,46 @@
+copy_hygiene: "Phase 5 FEAT-spawned REQ overlay (OD-P5-4). Copy to working/{REQ-TOKEN}/agent-req-implementation-checklist.yaml; set execution_evidence.request to the spawned REQ token; clear completed, close_out_evidence, and gates. Policy: working/fleet-constraint-v2/p5-g-feat-spawned-req-envelope-policy.v1.md"
+description: "Minimal checklist overlay for FEAT-spawned REQs after 2026-09-13 (P5-G). Full step catalog remains in tied/docs/agent-req-implementation-checklist.yaml — merge or replace per sponsor workflow; this file pre-fills integrated envelope + gate contract defaults only."
+policy_ref: "working/fleet-constraint-v2/p5-g-feat-spawned-req-envelope-policy.v1.md"
+execution_evidence:
+  request: "{REQ-TOKEN}"
+  envelope_path: "working/{REQ-TOKEN}/evidence/request-evidence-envelope.v1.json"
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: ""
+  completed: []
+  operator_evidence:
+    depth_tier: integrated
+    gate_policy: advisory
+    profile_depth: integrated
+    status: not_run
+    integrated_pilot_template: |
+      depth_tier: integrated
+      gate_policy: advisory
+      prior_depth_tier: null
+      phase_artifact_dir: working/{REQ-TOKEN}/adversarial-inquiry/phase-{phase}/
+      collect: tied_checklist_activation_collect request_token, phase, run_id, project_root
+      gate: tied_checklist_gate_validate with activation payload (receipt + four artifacts)
+      envelope_build: request_evidence_envelope_build
+      envelope_validate: request_evidence_envelope_validate fail_on_error_gaps true at verification and close_out
+      policy: working/fleet-constraint-v2/p5-g-feat-spawned-req-envelope-policy.v1.md
+    limitation: "Replace {REQ-TOKEN} and {phase}; run pre_implementation → verification → close_out gates with activation collect when phase dirs exist."
+gate_contract:
+  depth_selection_before_inquiry: true
+  fail_closed: true
+  loop_back_invalidates_downstream_evidence: true
+  phases:
+    - close_out
+    - pre_implementation
+    - verification
+  required_artifacts:
+    - evidence-provenance.json
+    - finding-ledger.jsonl
+    - gate-result.json
+    - obligation-report.json
+  dispositions:
+    - completed
+    - not_applicable
+    - pending
+    - waived

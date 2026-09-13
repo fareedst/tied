@@ -1,6 +1,6 @@
 # Fleet constraint-language v2 — Phase 4 implementation plan
 
-**Status:** **Machinery complete, fleet-migrated exit deferred** (2026-09-12) — P4-A..P4-H done; **P4-09 exit review** [`phase-4-exit-review.v1.json`](../working/fleet-constraint-v2/phase-4-exit-review.v1.json); enrolled **fleet-migrated-client** + orchestrator REQ full close-out remain open — **ordered steps:** [`pseudocode-constraint-v2-fleet-migration-phase-4-closeout-plan.md`](pseudocode-constraint-v2-fleet-migration-phase-4-closeout-plan.md)  
+**Status:** **Complete** (2026-09-13) — P4-A..P4-H machinery + **M4 program closeout** (seq 9); five-repo **fleet-migrated-client** + orchestrator REQ closed — evidence [`phase-4-exit-review.v1.json`](../working/fleet-constraint-v2/phase-4-exit-review.v1.json), [`seq-9-m4-p4-h-closeout-report.v1.json`](../working/fleet-constraint-v2/seq-9-m4-p4-h-closeout-report.v1.json); closeout ledger [`pseudocode-constraint-v2-fleet-migration-phase-4-closeout-plan.md`](pseudocode-constraint-v2-fleet-migration-phase-4-closeout-plan.md) **Complete**  
 **Methodology pin:** `48d1fbb+` (hygiene Tracks A/C/B + §E cohort automation)  
 **Parent program:** [`pseudocode-constraint-v2-fleet-migration-grand-plan.md`](pseudocode-constraint-v2-fleet-migration-grand-plan.md) (authoritative five-phase roadmap)  
 **Prior phase:** [`pseudocode-constraint-v2-fleet-migration-phase-3-plan.md`](pseudocode-constraint-v2-fleet-migration-phase-3-plan.md) (Phase 3 exit complete 2026-09-12)  
@@ -23,7 +23,7 @@
 | **P4-06** | stdd sub-waves 2..N → **fleet-migrated-client** or waivers | **In progress** — W-stdd-2 G3 receipts on file (10 sidecars); W-stdd-3..10 pending |
 | **P4-07** | External client wave(s) with client-owned REQ evidence | **Done** (P4-F 2026-09-12) — `run-fleet-external-client-scan.ts`, four `W-ext-*` waves complete, orchestrator README/checklist stubs under `working/REQ-PSEUDOCODE_MIGRATION_*` |
 | **P4-08** | G3 stop/go, waiver ops, fleet dashboard aggregate | **Done** (P4-G, 2026-09-12) |
-| **P4-09** | Phase 4 exit review + vocab VALIDATE | **Done** (P4-H 2026-09-12) — partial technical exit; see exit review JSON |
+| **P4-09** | Phase 4 exit review + vocab VALIDATE | **Done** (M4 2026-09-13 seq 9) — `phase_4_fully_closed: true`; see exit review JSON |
 
 **Phase 4 exit criteria** (grand plan): every **in-scope** client **fleet-migrated-client** or **current waiver**; completed waves have zero blocking evidence gaps; F11/FP/unknown-growth within [`f11-fp-thresholds.v1.yaml`](../working/fleet-constraint-v2/f11-fp-thresholds.v1.yaml); **no** client labeled migrated on header alone.
 
@@ -252,8 +252,8 @@ Under **G3** ([`gate-promotion-stages.v1.yaml`](../working/fleet-constraint-v2/g
 
 - [x] OD-P4-1..8 accepted and recorded
 - [x] SC-FLEET-P4-001..006 persisted and traced in REQ/ARCH/IMPL
-- [ ] Full inventory validates; in-scope clients fleet-migrated-client or current waiver — **deferred** (honest aggregates on all five enrolled repos)
-- [x] Completed waves have G3 receipts + stop/go pass — **partial** (6/14 waves; W-stdd-3..10 pending)
+- [x] Full inventory validates; in-scope clients fleet-migrated-client or current waiver — **5/5 enrolled** (seq 7 + seq 9 M4)
+- [x] Completed waves have G3 receipts + stop/go pass — **15/15** partition waves complete with go
 - [x] Waiver registry: no expired waivers for closed waves
 - [x] Fleet dashboard reconciles inventory + receipts + waivers
 - [x] `tied_validate_consistency` ok

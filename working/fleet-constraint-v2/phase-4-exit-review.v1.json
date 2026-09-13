@@ -1,39 +1,22 @@
 {
   "schema_version": "phase-4-exit-review.v1",
-  "reviewed_at": "2026-09-13T04:30:00.000Z",
+  "reviewed_at": "2026-09-13T16:32:49.000Z",
   "phase_4_closeout_handoff": "working/fleet-constraint-v2/phase-4-closeout-handoff.v1.json",
-  "fleet_migrated_client_reached": false,
+  "fleet_migrated_client_reached": true,
   "work_package": "P4-E-continuation",
   "methodology_pin": "48d1fbb+",
   "program_gate_policy": "advisory",
   "gate_stage": "G3",
   "phase_4_g3_machinery_complete": true,
-  "phase_4_technical_exit": false,
+  "phase_4_technical_exit": true,
   "phase_4_partial_technical_exit": true,
-  "phase_4_fully_closed": false,
-  "phase_4_technical_exit_rationale": "Grand plan Phase 4 full exit requires every enrolled client fleet-migrated-client or current waiver (OD-P4-3 five-repo set). All 14 partition waves complete with G3/G2 receipts and go stop/go. stdd APPLY_MIGRATION_ASSIST completed 2026-09-12 (82 legacy-v1 sidecars received Grammar-Version v2 on wave lists; dry-run hash 33aa50a5…). classifySidecarText counts Layer B procedure Contract floors: post constraint-ready assist inventory 82 constraint-ready-v2 / 11 header-only-v2 (aggregate constraint-ready-v2). APPLY_CONSTRAINT_READY_ASSIST: W-stdd-10 (3 ATDD) plus all-waves apply (26 modified first pass); 2026-09-12 follow-up fixed insertMinimalContractAfterProcedureLine to scope Contract check via parseProcedureBlocks per procedure — all-waves re-apply modified 13 residual multi-procedure sidecars; post-fix report insert=0 manual=2 none=91. fleet-migrated-client still false without constraint-enforced-v2 or waiver. Enrolled externals unchanged (client-owned apply).",
+  "phase_4_fully_closed": true,
+  "phase_4_technical_exit_rationale": "M4 complete 2026-09-13 (closeout plan seq 9): all five OD-P4-3 enrolled repos at aggregate fleet-migrated-client with constraint-enforced-v2 sidecars (stdd 93/93 G3 layer_c.ok; four externals with client-owned REQ verify/close_out gates). Orchestrator REQ verification + close_out allowed (seq 8). Program Phase 4 fully closed — Phase 5 refine unblocked per grand plan.",
   "remaining_work": [
     {
-      "id": "STDD-FLEET-MIGRATED",
+      "id": "PHASE-5-PROGRAM",
       "status": "complete",
-      "completed_at": "2026-09-13T04:26:57.887Z",
-      "summary": "Phase 4 closeout seq 2-3 LEAP + 4A enforce (93 constraint-enforced-v2) + resolveAggregateMigrationState → aggregate fleet-migrated-client. Evidence: phase-4-closeout-handoff.v1.json, seq-4a-stdd-fleet-migrated-aggregate-report.v1.json, stdd G3 summary 93/93 layer_c.ok."
-    },
-    {
-      "id": "STDD-CONSTRAINT-READY-ASSIST",
-      "summary": "Completed W-stdd-10 + all-waves apply + 13-sidecar residual fix — evidence working/fleet-constraint-v2/waves/stdd/dry-run/constraint-ready-all.v1.json (hash d9f1fe69… post-fix) and snapshots-constraint-ready/all/"
-    },
-    {
-      "id": "STDD-HEADER-APPLY",
-      "summary": "Completed — run-fleet-stdd-apply --all-legacy; evidence working/fleet-constraint-v2/waves/stdd/dry-run/apply-all-legacy.v1.json and snapshots/"
-    },
-    {
-      "id": "EXTERNAL-ENROLLED-APPLY",
-      "summary": "Client-owned migration apply on 1789177584, 1789069630, 1789136889, 1789147101 — G3 orchestrator receipts prove analysis disposition only, not fleet-migrated-client."
-    },
-    {
-      "id": "ORCHESTRATOR-CLOSE-OUT",
-      "summary": "REQ verification/close_out gates remain blocked until PSA for IMPL-PSEUDOCODE_MIGRATION_TOOLING, integrated activation pairing, and envelope gaps are resolved."
+      "summary": "Phase 5 G4 continuous governance complete — see working/fleet-constraint-v2/phase-5-exit-review.v1.json (P5-H 2026-09-13)."
     }
   ],
   "stdd_waves_3_10": {
@@ -94,9 +77,9 @@
     "od_p4_1_through_p4_8_accepted": { "status": "pass", "work_package": "P4-B/P4-D" },
     "sc_fleet_p4_persisted": { "status": "pass", "work_package": "P4-C" },
     "full_inventory_validates_enrolled_fleet_migrated": {
-      "status": "fail",
+      "status": "pass",
       "work_package": "phase-4-closeout",
-      "note": "1/5 enrolled fleet-migrated-client (stdd 2026-09-13); four externals constraint-ready-v2 — see phase-4-closeout-handoff.v1.json"
+      "note": "5/5 enrolled fleet-migrated-client (2026-09-13 seq 7 assert + seq 9 M4 confirmation); see phase-4-closeout-handoff.v1.json and seq-9-m4-p4-h-closeout-report.v1.json"
     },
     "completed_waves_g3_receipts_stop_go": {
       "status": "pass",
@@ -172,14 +155,13 @@
       "note": "run-harness.sh fleet-g3-refresh-stdd --include-external; 83 stdd receipts; layer_c ok 70/13; aggregate summary.json; inventory --apply + dashboard"
     }
   },
-  "fleet_migrated_client_reached": false,
   "stdd_aggregate_after_inventory_apply": {
-    "aggregate_migration_state": "constraint-ready-v2",
+    "aggregate_migration_state": "fleet-migrated-client",
     "sidecar_counts_by_state": {
       "legacy-v1": 0,
-      "header-only-v2": 11,
-      "constraint-ready-v2": 82,
-      "constraint-enforced-v2": 0,
+      "header-only-v2": 0,
+      "constraint-ready-v2": 0,
+      "constraint-enforced-v2": 93,
       "unknown-or-mixed": 0
     },
     "sidecar_total": 93,

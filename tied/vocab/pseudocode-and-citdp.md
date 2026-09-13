@@ -287,7 +287,7 @@ Prefer in `essence_pseudocode` (not domain terms):
 | **wave stop/go** | Append-only `wave-stop-go.v1.json` per OD-P4-6 |
 | **G3 fleet receipt** | `gate_stage: G3`, `constraint_flow: true` under `working/fleet-constraint-v2/waves/` |
 | **SC-FLEET-P4-001..006** | REQ satisfaction criteria; ARCH `governance_artifacts` Phase 4 paths |
-| **dual track (Phase 4/5)** | Legacy clients G3 until fleet-migrated-client; new-client constraint-enforced bootstrap deferred to Phase 5 |
+| **dual track (Phase 4/5)** | Legacy clients G3 until fleet-migrated-client (Track A **done** for OD-P4-3); **non-enrolled tranche** + **new-client bootstrap enforcement** (Track B/C) — Phase 5 plan |
 
 **Exit record (machinery):** `working/fleet-constraint-v2/phase-4-exit-review.v1.json` (P4-H 2026-09-12).
 
@@ -295,7 +295,7 @@ Prefer in `essence_pseudocode` (not domain terms):
 
 ## Phase 4 fleet constraint v2 — VALIDATE (2026-09-12 P4-H)
 
-**Touchpoint:** sub-vocabulary-sync VALIDATE at Phase 4 machinery exit (P4-H); grand-plan **fleet-migrated-client** exit deferred.
+**Touchpoint:** sub-vocabulary-sync VALIDATE at Phase 4 machinery exit (P4-H) and M4 closeout (seq 9, 2026-09-13); five-repo **fleet-migrated-client** program exit complete — Phase 5 refine next.
 
 | Term / artifact | Reconciliation |
 |-----------------|----------------|
@@ -307,7 +307,33 @@ Prefer in `essence_pseudocode` (not domain terms):
 | **fleet dashboard** | `fleet-dashboard.v1.yaml` rollups align with inventory + partition pending wave count |
 | **SC-FLEET-P4-001..006** | Present in REQ/ARCH; SC satisfaction for **machinery** not equated to fleet-migrated-client |
 
-**Drift notes:** None material — RECORD terms match code (`run-fleet-g3-wave.ts`, `run-fleet-p4-g-closeout.ts`) and working artifacts. **Proof boundary:** G3 receipt + stop/go ≠ `fleet-migrated-client` until sidecar states and waivers say so.
+**Drift notes:** None material — RECORD terms match code (`run-fleet-g3-wave.ts`, `run-fleet-p4-g-closeout.ts`) and working artifacts. **M4 closeout (2026-09-13):** enrolled OD-P4-3 set at `fleet-migrated-client`; CITDP `phase_4_closeout_module` run_id `fleet-migration-phase4-closeout-20260913`. **Proof boundary:** G3 receipt + stop/go ≠ `fleet-migrated-client` until sidecar states and waivers say so (still true for non-enrolled manifest rows).
+
+---
+
+## Phase 5 fleet constraint v2 — RECORD (2026-09-13 P5-A refine)
+
+**Touchpoint:** sub-vocabulary-sync RECORD at Phase 5 grand-plan refine.
+
+| Term / artifact | Preferred definition |
+|-----------------|----------------------|
+| **G4 (gate stage)** | [`gate-promotion-stages.v1.yaml`](../../working/fleet-constraint-v2/gate-promotion-stages.v1.yaml) stage `G4` — default enforcement: `ci_expectations` (`header_and_contract_defaults_for_new_clients`, `stale_waiver_checks`); `constraint_gate_errors.pre_red` blocking on qualifying paths; CI wiring Phase 5 build |
+| **bootstrap enforcement** | New TIED clients via `copy_files.sh` + template default to **constraint-enforced-v2** after G4 LEAP amend [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT](../requirements/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml); distinct from Track A header-only Implemented behavior until promotion |
+| **non-enrolled tranche** | **18** manifest `client_id` rows with `phase_4_enrollment: not_enrolled_phase_4` in [`client-inventory-manifest.v1.yaml`](../../working/fleet-constraint-v2/client-inventory-manifest.v1.yaml); optional Phase 5b G3 program (OD-P5-2); not G4 bootstrap scope |
+| **dual track (Phase 5)** | **A** enrolled legacy (5 repos, fleet-migrated-client) → G4 governance; **B** non-enrolled tranche; **C** new-client bootstrap |
+| **phase_5_module** | CITDP append on [`CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml`](../citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml) run_id `fleet-migration-phase5-p5c-20260913` — G4 CI scope, continuous audit, FEAT envelope policy, dual-track falsification |
+| **SC-FLEET-P5-001..002** | Forward-looking program SC on closed orchestrator REQ (doc falsification + CITDP persist); bootstrap SC on **REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT** as **SC-GRAMMAR-V2-PHASE5-CONSTRAINT-ENFORCED-BOOTSTRAP** |
+| **FEAT-spawned REQ envelope** | Integrated request evidence envelope on feature REQs spawned after Phase 5 policy (OD-P5-4); canonical policy [`p5-g-feat-spawned-req-envelope-policy.v1.md`](../../working/fleet-constraint-v2/p5-g-feat-spawned-req-envelope-policy.v1.md); checklist template `templates/agent-req-checklist-feat-spawned-phase5.v1.yaml`; **not** fleet migration receipt |
+
+**VALIDATE (Touchpoint 3, refine pass 2026-09-13):** Terms align with grand plan Phase 5 section, [`pseudocode-constraint-v2-fleet-migration-phase-5-plan.md`](../../docs/pseudocode-constraint-v2-fleet-migration-phase-5-plan.md), and seq-9 WS-6 dual-track precondition. Re-VALIDATE at P5-H build exit.
+
+## Phase 5 fleet constraint v2 — VALIDATE (2026-09-13 P5-H)
+
+**Touchpoint:** sub-vocabulary-sync VALIDATE at Phase 5 program exit (P5-H).
+
+**Scope audited:** G4 gate stage, bootstrap enforcement, non-enrolled tranche (18 rows), dual track A/B/C, phase_5_module, SC-FLEET-P5-001..002, SC-GRAMMAR-V2-PHASE5-CONSTRAINT-ENFORCED-BOOTSTRAP, FEAT-spawned REQ envelope — against [`phase-5-exit-review.v1.json`](../../working/fleet-constraint-v2/phase-5-exit-review.v1.json), G4 CI reports, and [`v1-parser-quarantine-policy.v1.md`](../../working/fleet-constraint-v2/v1-parser-quarantine-policy.v1.md).
+
+**Result:** No material drift; Phase 5 program exit terms match working artifacts and TIED SC rows. Track B remains **not** fleet-migrated (EX-P5-07).
 
 ---
 

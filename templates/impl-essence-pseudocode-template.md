@@ -18,7 +18,7 @@
 
   **Active contract precision:** New/changed Active procedure blocks require PRE, POST, EFFECTS (plus FAILURE_MODES / DATA_TRANSITION / TERMINATION when applicable). Template stubs may use INPUT/OUTPUT only. See implementation-decisions.md § Preferred vocabulary.
 
-  **Authoring target vs runtime default (fleet Phase 2+):** This template demonstrates the **constraint-ready-v2** authoring target—Layer B contract precision plus optional Tier-3 annotations where the **annotation profile** requires them. New projects still bootstrap with **header-only** Implemented policy ([REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT](../tied/requirements/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml)) until Phase 5 enforcement; do not conflate copying this template with mandatory `constraint_flow: true` in CI. Reference exemplars: `working/fleet-constraint-v2/exemplars/`.
+  **Authoring target vs bootstrap policy (fleet Phase 5 G4+):** This template demonstrates the **constraint-ready-v2** authoring target—Layer B contract precision plus optional Tier-3 annotations where the **annotation profile** requires them. At **G4** promotion, new-client bootstrap targets **constraint-enforced-v2** policy (contract floor plus `constraint_flow` expectation on bootstrap smoke audit—not header-only-v2). Legacy repos and headerless sidecars stay v1-compatible unchanged. Reference exemplars: `working/fleet-constraint-v2/exemplars/`.
 -->
 
 ---

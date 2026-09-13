@@ -1,4 +1,5 @@
 import { executeLifecycleCommand, type CommandRequest } from "./commands.js";
+import { FEAT_SPAWNED_CHECKLIST_RECOMMENDATION_PHASE5 } from "./checklist-spawn-policy.js";
 import { FeatureStore } from "./store.js";
 import {
   buildViewSourceProjection,
@@ -28,9 +29,14 @@ export async function handleOrchestrationTool(
     if (typeof request.request_key !== "string" || typeof request.title !== "string") {
       return { ok: false, error: "INVALID_INPUT" };
     }
-    return dependencies.store.createIdempotently(request.request_key, request.title, {
+    const created = dependencies.store.createIdempotently(request.request_key, request.title, {
       mode: request.mode === "brownfield" ? "brownfield" : "greenfield",
     });
+    if (!created.ok) return created;
+    return {
+      ...created,
+      checklist_spawn_recommendation: FEAT_SPAWNED_CHECKLIST_RECOMMENDATION_PHASE5,
+    };
   }
   if (toolName === "feature_update_canonical") {
     if (!dependencies.delegateCanonical) return { ok: false, error: "DELEGATED_YAML_ERROR" };

@@ -1,0 +1,75 @@
+{
+  "schema_version": "seq-10-p5-traceable-commit-report.v1",
+  "generated_at": "2026-09-13T17:06:00.000Z",
+  "request_token": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+  "run_id": "fleet-migration-phase5-p5c-20260913",
+  "milestone": "P5_traceable_commit",
+  "status": "complete",
+  "closeout_plan_seq": "10",
+  "git_context": "diff-or-stage (plan-close-out; commit by sponsor request)",
+  "orchestrator_req_reopened": false,
+  "machine_close_out_authority": "working/fleet-constraint-v2/seq-8-orchestrator-closeout-report.v1.json",
+  "program_exit_authority": "working/fleet-constraint-v2/p5-h-phase-5-exit-report.v1.json",
+  "steps": {
+    "grand_plan_leap_sync": {
+      "ok": true,
+      "artifact": "docs/pseudocode-constraint-v2-fleet-migration-grand-plan.md",
+      "note": "G4 bootstrap prose, CITDP phase_5_module, build exit disposition"
+    },
+    "g4_ci_replay": {
+      "ok": true,
+      "command": "node scripts/run-fleet-g4-ci-checks.mjs",
+      "artifact": "working/fleet-constraint-v2/p5-h-g4-ci-run.v1.json"
+    },
+    "script_tests_replay": {
+      "ok": true,
+      "command": "node --test scripts/fleet-g4-ci-checks.test.mjs scripts/validate-feat-spawned-envelope-policy.test.mjs",
+      "tests_pass": 7
+    },
+    "mcp_server_scoped_tests": {
+      "ok": true,
+      "command": "npm run build && node --test dist/analysis/pseudocode-grammar-v2-default.test.js dist/feature-orchestration/mcp.test.js",
+      "cwd": "mcp-server",
+      "tests_pass": 21,
+      "note": "Full mcp-server npm test has 2 pre-existing request-evidence-envelope-batch failures unrelated to P5 slice"
+    },
+    "tied_validate_consistency": {
+      "ok": true,
+      "artifact": "working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/p5-h-tied-validate-consistency.json"
+    },
+    "orchestrator_close_out_reopen": {
+      "ok": true,
+      "skipped": true,
+      "reason": "Phase 5 plan forbids re-open; seq-8 remains authoritative"
+    },
+    "envelope_rebuild": {
+      "ok": true,
+      "skipped": true,
+      "reason": "Optional for traceable commit; seq-8 envelope path gitignored locally"
+    }
+  },
+  "completion_signals": {
+    "machine_close_out": {
+      "pass": true,
+      "mode": "dual_authority",
+      "orchestrator_seq_8_close_out_allowed": true,
+      "phase_5_program_exit": true,
+      "new_orchestrator_close_out_claimed": false
+    },
+    "process_contract": {
+      "pass": true,
+      "tracker_phase_5": "complete",
+      "ex_p5": "EX-P5-01..09 pass per phase-5-exit-review.v1.json"
+    },
+    "adherence_ledger": {
+      "pass": true,
+      "note": "not re-run; P5-H exit report cites prior reconcile"
+    }
+  },
+  "remaining_risks": [
+    "18 manifest rows not_enrolled_phase_4 — Phase 5b blocked on OD-P5-2",
+    "G4 CI maintenance required in cohort qualification path",
+    "Do not conflate Phase 5 exit with full-fleet fleet-migrated-client"
+  ],
+  "next_recommended": "Program maintenance (G4 CI green); optional Phase 5b if sponsor amends OD-P5-2"
+}

@@ -12,7 +12,7 @@ REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT:
       - "Bootstrap, authoring guidance, and cohort grading can disagree about the intended grammar version"
       - "Fresh clients silently start with the legacy v1 default"
       - "Header presence can be misread as fleet-migrated or constraint-enforced proof"
-    why: "The grammar v2 parser and migration guide define an opt-in version boundary; new projects need a deterministic default. The fleet migration program extends GRAMMAR_V2 from header-only new-project policy to a phased enforcement roadmap without changing Implemented bootstrap behavior until Phase 5; Phase 2 documents constraint-ready-v2 as the authoring target via template and exemplars."
+    why: "The grammar v2 parser and migration guide define an opt-in version boundary; new projects need a deterministic default. The fleet migration program extends GRAMMAR_V2 from header-only new-project policy (Implemented) through Phase 5 LEAP to constraint-enforced-v2 bootstrap after G4 promotion (OD-P5-5 accepted 2026-09-13); template and copy_files.sh behavior change is specified at P5-C and implemented at P5-F."
   related_requirements:
     depends_on:
       - "REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE"
@@ -23,9 +23,12 @@ REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT:
       - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
     supersedes: []
   satisfaction_criteria:
+    - criterion: "After G4 promotion, new-client bootstrap policy targets constraint-enforced-v2 (contract floor + constraint_flow expectation) and cannot silently remain header-only-v2"
+      id: "SC-GRAMMAR-V2-PHASE5-CONSTRAINT-ENFORCED-BOOTSTRAP"
+      metric: "IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT CONSTRAINT_ENFORCED_BOOTSTRAP pseudo-code; P5-F copy_files.sh + template smoke; gate-promotion-stages.v1.yaml G4 ci_expectations"
     - criterion: "Canonical template and fleet docs distinguish constraint-ready-v2 authoring target (PRE/POST/EFFECTS + optional Tier-3) from Implemented header-only bootstrap until Phase 5 default enforcement"
       id: "SC-GRAMMAR-V2-FLEET-AUTHORING-TARGET"
-      metric: "templates/impl-essence-pseudocode-template.md constraint-ready-v2 section; REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION SC-FLEET-P2-002; Phase 2 plan P2-E; copy_files.sh bootstrap unchanged until Phase 5"
+      metric: "templates/impl-essence-pseudocode-template.md constraint-ready-v2 section; Phase 5 plan P5-C LEAP + P5-F implementation"
     - criterion: "Disposable client audit reports the header, Layer B, and Layer C pre-RED outcomes separately"
       metric: "audit script emits a stable grammar_v2_header dimension"
     - criterion: "Documentation and related REQ links state that grammar_v2_header pass is necessary but not sufficient for fleet-migrated-client"

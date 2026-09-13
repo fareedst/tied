@@ -2,8 +2,9 @@
   "schema_version": "phase-4-closeout-handoff-stub.v1",
   "canonical_copy": "working/fleet-constraint-v2/phase-4-closeout-handoff.v1.json",
   "req_token": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
-  "generated_at": "2026-09-13T16:08:00.000Z",
-  "summary": "Seq 8 plan-close-out complete: verification + close_out gates allowed true; tied_verify updated REQ/IMPL status; unified run-close-out-gates envelope 0 blocking gaps. M3 asserted; seq 9 M4 pending.",
-  "next_command": "/build-plan seq 9",
+  "generated_at": "2026-09-13T16:32:49.000Z",
+  "summary": "M4 complete (seq 9): exit review phase_4_fully_closed; CITDP phase_4_closeout_module; tracker phase_4_closeout complete. M3 orchestrator close-out was seq 8.",
+  "next_command": "/refine-plan on docs/pseudocode-constraint-v2-fleet-migration-grand-plan.md (Phase 5)",
+  "m4_report": "working/fleet-constraint-v2/seq-9-m4-p4-h-closeout-report.v1.json",
   "m3_report": "working/fleet-constraint-v2/seq-8-orchestrator-closeout-report.v1.json"
 }

@@ -1,7 +1,7 @@
 {
   "schema_version": "phase-4-closeout-handoff.v1",
-  "generated_at": "2026-09-13T16:08:00.000Z",
-  "evidence_recorded_at": "2026-09-13T16:08:00.000Z",
+  "generated_at": "2026-09-13T16:32:49.000Z",
+  "evidence_recorded_at": "2026-09-13T16:32:49.000Z",
   "methodology_pin": "48d1fbb+",
   "authoritative_plan": "docs/pseudocode-constraint-v2-fleet-migration-phase-4-closeout-plan.md",
   "ws0_locked": {
@@ -18,9 +18,10 @@
     "M2_asserted_at": "2026-09-13T05:30:00.000Z",
     "M3_orchestrator_req_closed": true,
     "M3_closed_at": "2026-09-13T16:08:00.000Z",
-    "M4_phase_4_fully_closed": false
+    "M4_phase_4_fully_closed": true,
+    "m4_closed_at": "2026-09-13T16:32:49.000Z"
   },
-  "m2_note": "M2 formal assertion complete (seq 7). M3 orchestrator machine close-out complete (seq 8 plan-close-out). Exit review JSON M4 flags and CITDP P4-CLO-C remain seq 9.",
+  "m2_note": "M2 seq 7, M3 seq 8, M4 seq 9 complete — Phase 4 fully closed; Phase 5 refine unblocked per grand plan.",
   "enrolled_od_p4_3_inventory": {
     "source": "working/fleet-constraint-v2/client-inventory-manifest.v1.yaml",
     "as_of": "2026-09-13T05:08:52.289Z",
@@ -88,7 +89,8 @@
       "working/fleet-constraint-v2/seq-5-ws4-governance-report.v1.json",
       "working/fleet-constraint-v2/seq-6-orchestrator-verification-prep-report.v1.json",
       "working/fleet-constraint-v2/seq-7-m2-ex-assertion-report.v1.json",
-      "working/fleet-constraint-v2/seq-8-orchestrator-closeout-report.v1.json"
+      "working/fleet-constraint-v2/seq-8-orchestrator-closeout-report.v1.json",
+      "working/fleet-constraint-v2/seq-9-m4-p4-h-closeout-report.v1.json"
     ],
     "governance": [
       "working/fleet-constraint-v2/client-inventory-manifest.v1.yaml",
@@ -166,30 +168,26 @@
       "label": "/plan-close-out orchestrator REQ",
       "report": "working/fleet-constraint-v2/seq-8-orchestrator-closeout-report.v1.json",
       "milestone": "M3_orchestrator_req_closed"
-    }
-  ],
-  "build_plan_slices_pending": [
+    },
     {
       "seq": "9",
       "label": "WS-5 P4-H + M4",
-      "deliverables": "phase-4-exit-review.v1.json flags; CITDP P4-CLO-C; tracker phase_4_closeout complete; vocab VALIDATE"
+      "report": "working/fleet-constraint-v2/seq-9-m4-p4-h-closeout-report.v1.json",
+      "milestone": "M4_phase_4_fully_closed"
     }
   ],
-  "next_command_recommended": "/build-plan seq 9",
+  "build_plan_slices_pending": [],
+  "next_command_recommended": "/refine-plan on docs/pseudocode-constraint-v2-fleet-migration-grand-plan.md (Phase 5 — plan doc TBD)",
   "new_conversation_bootstrap": [
     "Observing AI principles — session bootstrap per AGENTS.md",
     "tied_config_get_base_path → must be .../stdd/tied",
     "Read docs/pseudocode-constraint-v2-fleet-migration-phase-4-closeout-plan.md",
     "Read working/fleet-constraint-v2/phase-4-closeout-handoff.v1.json (canonical evidence ledger)",
     "PRELOAD tied/vocab/pseudocode-and-citdp.md",
-    "Continue: /build-plan seq 9 (M4). Seq 8 M3 orchestrator close-out complete.",
-    "Do NOT start Phase 5 until M4 (exit review phase_4_fully_closed)"
+    "M4 complete — /refine-plan grand plan Phase 5 when ready"
   ],
   "deferred": {
     "git_commit": "none requested by sponsor",
-    "citdp_closeout_module": "P4-CLO-C persist (append Phase 4 closeout module to CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml)",
-    "tracker_phase_4_closeout_block": "partial in checklist fleet_program_phase_modules.phase_4_closeout — finalize at seq 9",
-    "orchestrator_close_out": "complete seq 8",
-    "orchestrator_machine_close_out": "complete seq 8 (run-close-out-gates.mjs)"
+    "phase_5_plan_authoring": "refine-plan on grand plan; no Phase 5 plan doc until sponsor starts Phase 5"
   }
 }

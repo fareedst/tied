@@ -121,6 +121,10 @@ case "${1:-all}" in
   fleet-dashboard)
     run_ts run-fleet-dashboard-refresh.ts
     ;;
+  fleet-g4-ci)
+    echo "TRACE: G4 continuous CI (P5-E) — grammar audit + waiver registry + enrolled track"
+    (cd "$ROOT" && node scripts/run-fleet-g4-ci-checks.mjs)
+    ;;
   fleet-stop-go-closeout|fleet-p4-g)
     run_ts run-fleet-p4-g-closeout.ts
     ;;
@@ -162,7 +166,7 @@ case "${1:-all}" in
     run_ts run-baseline.ts
     ;;
   *)
-    echo "Usage: $0 {scan|baseline|pilot|compare|annotation|fp-measurement|rollback-g1|p2g|pilot-inventory|pilot-g2|pilot-g2-rollback|pilot-external-scan|fleet-external-scan|fleet-external-apply-dry-run|fleet-external-apply|pilot-p3|fleet-inventory|fleet-g3-wave|fleet-g3-refresh-stdd|fleet-p4|fleet-stdd-waves-3-10|fleet-stdd-apply-dry-run|fleet-stdd-apply|fleet-stdd-constraint-ready-report|fleet-stdd-constraint-ready-dry-run|fleet-dashboard|fleet-stop-go-closeout|fleet-p4-g|qualify|fleet-g1|all}"
+    echo "Usage: $0 {scan|baseline|pilot|compare|annotation|fp-measurement|rollback-g1|p2g|pilot-inventory|pilot-g2|pilot-g2-rollback|pilot-external-scan|fleet-external-scan|fleet-external-apply-dry-run|fleet-external-apply|pilot-p3|fleet-inventory|fleet-g3-wave|fleet-g3-refresh-stdd|fleet-p4|fleet-stdd-waves-3-10|fleet-stdd-apply-dry-run|fleet-stdd-apply|fleet-stdd-constraint-ready-report|fleet-stdd-constraint-ready-dry-run|fleet-dashboard|fleet-g4-ci|fleet-stop-go-closeout|fleet-p4-g|qualify|fleet-g1|all}"
     exit 1
     ;;
 esac
