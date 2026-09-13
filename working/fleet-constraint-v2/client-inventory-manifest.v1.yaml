@@ -31,6 +31,36 @@ clients:
       unknown-or-mixed: 0
     updated_at: "2026-09-13T17:51:32.999Z"
   - aggregate_migration_state: "fleet-migrated-client"
+    client_id: "1786637885"
+    client_migration_req: "REQ-PSEUDOCODE_MIGRATION"
+    last_receipt_path: "working/fleet-constraint-v2/waves/1786637885/receipts/summary.json"
+    methodology_pin: "48d1fbb+"
+    notes: "NB-2 tranche one complete; all active sidecars constraint-enforced-v2; G3 receipts on file."
+    phase_4_enrollment: "not_enrolled_phase_4"
+    repository_root: "/Users/fareed/Documents/dev/test/1786637885"
+    sidecar_counts_by_state:
+      constraint-enforced-v2: 2
+      constraint-ready-v2: 0
+      header-only-v2: 0
+      legacy-v1: 0
+      unknown-or-mixed: 0
+    updated_at: "2026-09-13T18:26:11.264Z"
+  - aggregate_migration_state: "fleet-migrated-client"
+    client_id: "1786643714"
+    client_migration_req: "REQ-PSEUDOCODE_MIGRATION"
+    last_receipt_path: "working/fleet-constraint-v2/waves/1786643714/receipts/summary.json"
+    methodology_pin: "48d1fbb+"
+    notes: "NB-2 tranche one complete; all active sidecars constraint-enforced-v2; G3 receipts on file."
+    phase_4_enrollment: "not_enrolled_phase_4"
+    repository_root: "/Users/fareed/Documents/dev/test/1786643714"
+    sidecar_counts_by_state:
+      constraint-enforced-v2: 2
+      constraint-ready-v2: 0
+      header-only-v2: 0
+      legacy-v1: 0
+      unknown-or-mixed: 0
+    updated_at: "2026-09-13T18:26:11.264Z"
+  - aggregate_migration_state: "fleet-migrated-client"
     client_id: "1786666674"
     client_migration_req: "REQ-PSEUDOCODE_MIGRATION"
     last_receipt_path: "working/fleet-constraint-v2/waves/1786666674/receipts/summary.json"
@@ -46,6 +76,36 @@ clients:
       unknown-or-mixed: 0
     updated_at: "2026-09-13T17:51:32.999Z"
   - aggregate_migration_state: "fleet-migrated-client"
+    client_id: "1787421852"
+    client_migration_req: "REQ-PSEUDOCODE_MIGRATION"
+    last_receipt_path: "working/fleet-constraint-v2/waves/1787421852/receipts/summary.json"
+    methodology_pin: "48d1fbb+"
+    notes: "NB-2 tranche one complete; all active sidecars constraint-enforced-v2; G3 receipts on file."
+    phase_4_enrollment: "not_enrolled_phase_4"
+    repository_root: "/Users/fareed/Documents/dev/test/1787421852"
+    sidecar_counts_by_state:
+      constraint-enforced-v2: 3
+      constraint-ready-v2: 0
+      header-only-v2: 0
+      legacy-v1: 0
+      unknown-or-mixed: 0
+    updated_at: "2026-09-13T18:26:11.264Z"
+  - aggregate_migration_state: "fleet-migrated-client"
+    client_id: "1787461685"
+    client_migration_req: "REQ-PSEUDOCODE_MIGRATION"
+    last_receipt_path: "working/fleet-constraint-v2/waves/1787461685/receipts/summary.json"
+    methodology_pin: "48d1fbb+"
+    notes: "NB-2 tranche one complete; all active sidecars constraint-enforced-v2; G3 receipts on file."
+    phase_4_enrollment: "not_enrolled_phase_4"
+    repository_root: "/Users/fareed/Documents/dev/test/1787461685"
+    sidecar_counts_by_state:
+      constraint-enforced-v2: 3
+      constraint-ready-v2: 0
+      header-only-v2: 0
+      legacy-v1: 0
+      unknown-or-mixed: 0
+    updated_at: "2026-09-13T18:26:11.264Z"
+  - aggregate_migration_state: "fleet-migrated-client"
     client_id: "1787503424"
     client_migration_req: "REQ-PSEUDOCODE_MIGRATION"
     last_receipt_path: "working/fleet-constraint-v2/waves/1787503424/receipts/summary.json"
@@ -60,6 +120,21 @@ clients:
       legacy-v1: 0
       unknown-or-mixed: 0
     updated_at: "2026-09-13T17:51:32.999Z"
+  - aggregate_migration_state: "fleet-migrated-client"
+    client_id: "1788547701"
+    client_migration_req: "REQ-PSEUDOCODE_MIGRATION"
+    last_receipt_path: "working/fleet-constraint-v2/waves/1788547701/receipts/summary.json"
+    methodology_pin: "48d1fbb+"
+    notes: "NB-2 tranche one complete; all active sidecars constraint-enforced-v2; G3 receipts on file."
+    phase_4_enrollment: "not_enrolled_phase_4"
+    repository_root: "/Users/fareed/Documents/dev/test/1788547701"
+    sidecar_counts_by_state:
+      constraint-enforced-v2: 2
+      constraint-ready-v2: 0
+      header-only-v2: 0
+      legacy-v1: 0
+      unknown-or-mixed: 0
+    updated_at: "2026-09-13T18:26:11.264Z"
   - aggregate_migration_state: "fleet-migrated-client"
     client_id: "1789069630"
     last_receipt_path: "working/fleet-constraint-v2/waves/1789069630/receipts/summary.json"
@@ -144,32 +219,6 @@ clients:
       unknown-or-mixed: 0
     updated_at: "2026-09-13T17:40:34.769Z"
   - aggregate_migration_state: "header-only-v2"
-    client_id: "1786637885"
-    methodology_pin: "48d1fbb+"
-    notes: "Qualification manifest row; not in Phase 4 exit enrollment (OD-P4-3)."
-    phase_4_enrollment: "not_enrolled_phase_4"
-    repository_root: "/Users/fareed/Documents/dev/test/1786637885"
-    sidecar_counts_by_state:
-      constraint-enforced-v2: 0
-      constraint-ready-v2: 0
-      header-only-v2: 2
-      legacy-v1: 0
-      unknown-or-mixed: 0
-    updated_at: "2026-09-12T18:30:00Z"
-  - aggregate_migration_state: "header-only-v2"
-    client_id: "1786643714"
-    methodology_pin: "48d1fbb+"
-    notes: "Qualification manifest row; not in Phase 4 exit enrollment (OD-P4-3)."
-    phase_4_enrollment: "not_enrolled_phase_4"
-    repository_root: "/Users/fareed/Documents/dev/test/1786643714"
-    sidecar_counts_by_state:
-      constraint-enforced-v2: 0
-      constraint-ready-v2: 0
-      header-only-v2: 2
-      legacy-v1: 0
-      unknown-or-mixed: 0
-    updated_at: "2026-09-12T18:30:00Z"
-  - aggregate_migration_state: "header-only-v2"
     client_id: "1787416567"
     methodology_pin: "48d1fbb+"
     notes: "Qualification manifest row; not in Phase 4 exit enrollment (OD-P4-3)."
@@ -179,32 +228,6 @@ clients:
       constraint-enforced-v2: 0
       constraint-ready-v2: 0
       header-only-v2: 4
-      legacy-v1: 0
-      unknown-or-mixed: 0
-    updated_at: "2026-09-12T18:30:00Z"
-  - aggregate_migration_state: "header-only-v2"
-    client_id: "1787421852"
-    methodology_pin: "48d1fbb+"
-    notes: "Qualification manifest row; not in Phase 4 exit enrollment (OD-P4-3)."
-    phase_4_enrollment: "not_enrolled_phase_4"
-    repository_root: "/Users/fareed/Documents/dev/test/1787421852"
-    sidecar_counts_by_state:
-      constraint-enforced-v2: 0
-      constraint-ready-v2: 0
-      header-only-v2: 3
-      legacy-v1: 0
-      unknown-or-mixed: 0
-    updated_at: "2026-09-12T18:30:00Z"
-  - aggregate_migration_state: "header-only-v2"
-    client_id: "1787461685"
-    methodology_pin: "48d1fbb+"
-    notes: "Qualification manifest row; not in Phase 4 exit enrollment (OD-P4-3)."
-    phase_4_enrollment: "not_enrolled_phase_4"
-    repository_root: "/Users/fareed/Documents/dev/test/1787461685"
-    sidecar_counts_by_state:
-      constraint-enforced-v2: 0
-      constraint-ready-v2: 0
-      header-only-v2: 3
       legacy-v1: 0
       unknown-or-mixed: 0
     updated_at: "2026-09-12T18:30:00Z"
@@ -287,19 +310,6 @@ clients:
       unknown-or-mixed: 0
     updated_at: "2026-09-12T18:30:00Z"
   - aggregate_migration_state: "header-only-v2"
-    client_id: "1788547701"
-    methodology_pin: "48d1fbb+"
-    notes: "Qualification manifest row; not in Phase 4 exit enrollment (OD-P4-3)."
-    phase_4_enrollment: "not_enrolled_phase_4"
-    repository_root: "/Users/fareed/Documents/dev/test/1788547701"
-    sidecar_counts_by_state:
-      constraint-enforced-v2: 0
-      constraint-ready-v2: 0
-      header-only-v2: 2
-      legacy-v1: 0
-      unknown-or-mixed: 0
-    updated_at: "2026-09-12T18:30:00Z"
-  - aggregate_migration_state: "header-only-v2"
     client_id: "tied-win-diff"
     methodology_pin: "48d1fbb+"
     notes: "Qualification manifest row; not in Phase 4 exit enrollment (OD-P4-3)."
@@ -315,4 +325,4 @@ clients:
 manifest_id: "stdd-fleet-inventory-v1"
 notes: "Full fleet registry (OD-P4-2). Pilot instance pilots.v1 remains historical. Phase 4 exit covers enrolled_phase_4 clients only."
 schema_version: 1
-updated_at: "2026-09-13T17:51:32.999Z"
+updated_at: "2026-09-13T18:26:11.264Z"

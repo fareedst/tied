@@ -1,0 +1,26 @@
+{
+  "schema_version": "od-nb2-acceptance.v1",
+  "acceptance_id": "od-nb2-test-fixture",
+  "status": "accepted",
+  "decided_at": "2026-09-13T00:00:00-07:00",
+  "sponsor_signoff": {
+    "name": "Test Sponsor",
+    "rationale": "Fixture for unit tests only."
+  },
+  "prior_batch_complete": {
+    "batch_id": "NB-1",
+    "batch_req_token": "REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO",
+    "close_out_receipt_path": "working/fleet-constraint-v2/NB-1/gates/machine-close-out-2026-09-13.json"
+  },
+  "tranche_scope": {
+    "batch_id": "NB-2",
+    "max_clients": 5,
+    "gate_stage": "G3",
+    "enrollment_filter": "not_enrolled_phase_4"
+  },
+  "wave_2_client_ids": ["1786637885", "1786643714"],
+  "orchestrator_reverify": false,
+  "citdp_module_pointer": "tied/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml#nb2_tranche_one_module",
+  "plan_doc_pointer": "docs/pseudocode-constraint-v2-fleet-nb2-plan.md",
+  "methodology_pin": "48d1fbb+"
+}

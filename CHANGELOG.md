@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Fleet constraint v2 — NB-2 Track B tranche one ([REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE])** —
+  Sponsor gate `od-nb2-acceptance.v1.json` (accepted), wave-2 selection for five lowest-burden
+  `not_enrolled_phase_4` clients, NB-2 orchestration exports in `scripts/lib/fleet-nb1-orchestration.mjs`,
+  `run-nb2-*` wave helpers, and `scripts/fleet-nb2-orchestration.test.mjs` (7/7). G3 dry-run receipts and
+  manifest rollup under `working/fleet-constraint-v2/`; program batch REQ **Implemented** with orchestrator
+  **REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION** unchanged (closed). Plan:
+  [`docs/pseudocode-constraint-v2-fleet-nb2-plan.md`](docs/pseudocode-constraint-v2-fleet-nb2-plan.md).
+  Close-out: `run-close-out-gates.mjs` `close_out` allowed, envelope blocking gaps **0**; G4 CI ok;
+  `tied_validate_consistency` ok. Evidence:
+  `working/fleet-constraint-v2/NB-2/evidence/nb2-client-closeout-summary.json`,
+  `working/REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE/evidence/command-artifacts/nb2-orchestration-tests/`.
+  **Deferred:** NB-3 next tranche; OD-NB2-2/3 open decisions on CITDP slice.
+
 ### Changed
 
 - **Fleet program doc consolidation ([REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION])** — Single canonical

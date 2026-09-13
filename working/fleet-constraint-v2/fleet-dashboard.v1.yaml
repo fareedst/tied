@@ -1,7 +1,7 @@
 schema_version: 1
 $schema: working/fleet-constraint-v2/fleet-dashboard.v1.schema.json
 dashboard_id: stdd-fleet-dashboard-v1
-generated_at: '2026-09-13T17:51:35.119Z'
+generated_at: '2026-09-13T18:25:45.398Z'
 methodology_pin: 48d1fbb+
 program_gate_policy: advisory
 sources:
@@ -20,21 +20,22 @@ enrollment_summary:
     - '1789177584'
     - stdd
 wave_summary:
-  total_waves: 20
+  total_waves: 25
   complete: 20
   in_progress: 0
-  pending: 0
+  pending: 5
   halted: 0
   last_stop_go_record_id: c4ca942f-cc84-40e0-ac80-1127e3819c8b
 inventory_rollups:
   clients_by_aggregate_state:
-    fleet-migrated-client: 10
-    header-only-v2: 13
+    fleet-migrated-client: 11
+    constraint-ready-v2: 3
+    header-only-v2: 9
   sidecars_by_state:
     legacy-v1: 0
-    header-only-v2: 42
-    constraint-ready-v2: 0
-    constraint-enforced-v2: 116
+    header-only-v2: 33
+    constraint-ready-v2: 7
+    constraint-enforced-v2: 118
     unknown-or-mixed: 0
   active_waiver_count: 0
 notes: >-

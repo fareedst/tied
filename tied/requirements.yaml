@@ -1531,6 +1531,24 @@ REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO:
       - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
     implementation:
       - "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION"
+REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE:
+  category: "Functional"
+  description: "NB-2 tranche one program batch: sponsor od-nb2-acceptance, up to five remaining not_enrolled clients, G3 receipts, manifest rollup. Parent orchestrator REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION remains closed."
+  detail_file: "requirements/REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE.yaml"
+  name: "Fleet NB-2 Track B tranche one (program batch)"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
+      - "REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO"
+    related_to: []
+    supersedes: []
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+    implementation:
+      - "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION"
 REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT:
   category: "Functional"
   description: "New TIED client projects SHALL generate new IMPL pseudo-code sidecars with Grammar-Version: v2 while preserving v1 parsing compatibility for existing sidecars and legacy clients."

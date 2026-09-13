@@ -1,0 +1,43 @@
+{
+  "schema_version": "od-nb2-acceptance.v1",
+  "acceptance_id": "od-nb2-tranche-one-20260913",
+  "status": "accepted",
+  "decided_at": "2026-09-13T00:00:00-07:00",
+  "sponsor_signoff": {
+    "name": "Fareed Stevenson",
+    "rationale": "Authorize NB-2 Track B tranche one per docs/pseudocode-constraint-v2-fleet-nb2-plan.md after NB-1 machine close-out (REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO). Scope: full default tranche of five not_enrolled_phase_4 header-only-v2 clients at lowest remaining burden (2–3 active sidecars); G3 waves via fleet-g3-wave; client-owned REQ-PSEUDOCODE_MIGRATION_* per repo; manifest rollup only after wave receipts. orchestrator_reverify remains false (REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION stays closed). Batch evidence REQ: REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE."
+  },
+  "prior_batch_complete": {
+    "batch_id": "NB-1",
+    "batch_req_token": "REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO",
+    "close_out_receipt_path": "working/fleet-constraint-v2/NB-1/gates/machine-close-out-2026-09-13.json"
+  },
+  "tranche_scope": {
+    "batch_id": "NB-2",
+    "max_clients": 5,
+    "gate_stage": "G3",
+    "enrollment_filter": "not_enrolled_phase_4"
+  },
+  "wave_2_client_ids": [
+    "1786637885",
+    "1786643714",
+    "1788547701",
+    "1787421852",
+    "1787461685"
+  ],
+  "orchestrator_reverify": false,
+  "citdp_module_pointer": "tied/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml#nb2_tranche_one_module",
+  "plan_doc_pointer": "docs/pseudocode-constraint-v2-fleet-nb2-plan.md",
+  "methodology_pin": "48d1fbb+",
+  "evidence_pointers": [
+    "working/fleet-constraint-v2/client-inventory-manifest.v1.yaml",
+    "working/fleet-constraint-v2/program-status.v1.yaml",
+    "working/fleet-constraint-v2/NB-1/gates/machine-close-out-2026-09-13.json",
+    "working/fleet-constraint-v2/od-p5-2-acceptance.v1.json",
+    "docs/pseudocode-constraint-v2-fleet-program.md",
+    "docs/pseudocode-constraint-v2-fleet-nb2-plan.md",
+    "working/fleet-constraint-v2/NB-2-tranche-one-agent-req-implementation-checklist.yaml",
+    "tied/requirements/REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE.yaml"
+  ],
+  "notes": "Sponsor OD resolutions (2026-09-13): OD-NB2-1 accepted — proceed with NB-2 execution (/build-plan). OD-NB2-2 exclude tied-win-diff (1-sidecar tooling row). OD-NB2-3 full default burden tier (2–3 header-only sidecars), max_clients=5 (not 4+ primaries or tranche>5). OD-NB2-4 use plan §3 roster (no override). Authorized wave-2 roster (priority order): 1786637885 (2 sidecars, /Users/fareed/Documents/dev/test/1786637885); 1786643714 (2, /Users/fareed/Documents/dev/test/1786643714); 1788547701 (2, /Users/fareed/Documents/dev/test/1788547701); 1787421852 (3, /Users/fareed/Documents/dev/test/1787421852); 1787461685 (3, /Users/fareed/Documents/dev/test/1787461685). Documented alternates not in scope unless amended: 3-sidecar 1787495576, 1787603099; 4-sidecar 1787416567, 1787507684, 1787638699; higher burden 1787691672 (5), 1787626480 (6). Post-NB-2-G expectation: ~8 header-only-v2 not_enrolled rows remain for NB-3+. Execution steps authorized: NB-2-C spawn client REQs/checklists; NB-2-D client migration; NB-2-E close_out + receipt export to waves/{client_id}/; NB-2-F G3 harness; NB-2-G manifest/dashboard/program-status refresh with receipts."
+}

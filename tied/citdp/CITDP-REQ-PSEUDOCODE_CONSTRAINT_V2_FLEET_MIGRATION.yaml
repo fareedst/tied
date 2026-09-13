@@ -50,6 +50,7 @@ CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION:
     impl_inventory_notes: "Phase 5 bootstrap executable changes deferred to P5-F; P5-C persists CONSTRAINT_ENFORCED_BOOTSTRAP pseudo-code only."
     modules_or_boundaries:
       - nb1_tranche_zero_module: "Track B batch NB-1 — sponsor OD-P5-2 acceptance + wave-1 selection (program batch, orchestrator REQ closed)"
+      - nb2_tranche_one_module: "Track B batch NB-2 — sponsor od-nb2-acceptance + wave-2 selection after NB-1 complete (program batch, orchestrator REQ closed)"
       - orchestrator_module: "stdd REQ/ARCH/CITDP; program gate_policy advisory through Phase 4 exit"
       - phase_3_module: "Pilot migration workflow — complete; historical G2 evidence"
       - phase_4_module: "Fleet waves — client integration — G3 inventory, partition, receipts, waiver registry, stop/go, dashboard (grand plan module 4)"
@@ -61,10 +62,12 @@ CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION:
       - "IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
       - "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
       - "REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
-    tied_tokens_new: []
+    tied_tokens_new:
+      - "REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE"
   linked_plans:
     - "docs/pseudocode-constraint-v2-fleet-migration-grand-plan.md"
     - "docs/pseudocode-constraint-v2-fleet-nb1-plan.md"
+    - "docs/pseudocode-constraint-v2-fleet-nb2-plan.md"
     - "docs/pseudocode-constraint-v2-fleet-program.md"
   nb1_tranche_zero_module:
     adversarial_inquiry:
@@ -124,6 +127,74 @@ CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION:
     run_id: "fleet-migration-nb1-refine-20260913"
     status: "draft"
     test_strategy_pointer: "docs/pseudocode-constraint-v2-fleet-nb1-plan.md#24-test-strategy-for-build-plan"
+  nb2_tranche_one_module:
+    adversarial_inquiry:
+      counterexamples:
+        - "Reuse od-p5-2-acceptance.v1.json as NB-2 gate without NB-2-specific wave_2_client_ids"
+        - "Start NB-2 G3 waves before od-nb2-acceptance status accepted"
+        - "Treat NB-1 complete as proof all Track B clients migrated"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "13 header-only-v2 not_enrolled_phase_4 rows remain after NB-1 (2026-09-13 manifest)"
+        - "program-status nb1_tranche_zero_complete true with next_batch NB-2"
+      evidence_references:
+        - "docs/pseudocode-constraint-v2-fleet-nb2-plan.md"
+        - "working/fleet-constraint-v2/NB-1/gates/machine-close-out-2026-09-13.json"
+      falsification_questions:
+        - "Can NB-2 execute without accepted od-nb2-acceptance.v1.json?"
+        - "Can wave-2 select already fleet-migrated NB-1 clients?"
+        - "Does G4 CI prove NB-2 tranche complete?"
+      gate_policy: "advisory"
+    change_definition:
+      current_behavior: "NB-2 tranche one build-plan complete: od-nb2-acceptance accepted; five wave-2 clients fleet-migrated-client with G3 layer_c.ok; manifest rollup honest; REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE Implemented; orchestrator REQ remains closed."
+      desired_behavior: "NB-2 tranche one build-plan complete: od-nb2-acceptance accepted; five wave-2 clients fleet-migrated-client with G3 layer_c.ok; manifest rollup honest; REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE Implemented; orchestrator REQ remains closed."
+      falsification_questions:
+        - "Can manifest show fleet-migrated-client without G3 receipts for wave-2?"
+        - "Can NB-2 proceed without NB-1 machine close-out receipt on file?"
+        - "Can orchestrator close_out reopen for Track B?"
+      non_goals:
+        - "G3 wave execution in refine pass"
+        - "Generalize fleet-nb1-orchestration.mjs in refine pass (defer to build-plan)"
+        - "Re-run NB-1 build-plan or NB-1 machine close-out"
+        - "Reopen REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION close_out"
+      success_criteria:
+        - "NB-2 plan + od-nb2 acceptance schema/template on disk"
+        - "pre_implementation gate pass after refine (advisory minimal)"
+        - "REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE Draft in TIED"
+        - "Tracker NB-2-tranche-one with pre_implementation profile"
+        - "Wave-2 client IDs documented with manifest rationale"
+      unchanged_behavior: "NB-1 five clients fleet-migrated; enrolled Track A; G4 CI; closed orchestrator REQ."
+    depth_tier: "minimal"
+    evidence_pointers:
+      - "docs/pseudocode-constraint-v2-fleet-nb2-plan.md"
+      - "scripts/fleet-nb2-orchestration.test.mjs"
+      - "working/fleet-constraint-v2/client-inventory-manifest.v1.yaml"
+      - "working/fleet-constraint-v2/NB-2-tranche-one-agent-req-implementation-checklist.yaml"
+      - "working/fleet-constraint-v2/NB-2/evidence/nb2-client-closeout-summary.json"
+      - "working/fleet-constraint-v2/NB-2/gates/machine-close-out-2026-09-13.json"
+      - "working/fleet-constraint-v2/od-nb2-acceptance.v1.json"
+      - "working/fleet-constraint-v2/od-nb2-acceptance.v1.schema.json"
+      - "working/REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE/agent-req-implementation-checklist.yaml"
+    gate_policy: "advisory"
+    module_boundary: "NB-2 specification and sponsor gate — not client migration execution"
+    open_decisions_pending:
+      OD-NB2-2:
+        pending_amendment: "Include tied-win-diff in wave_2_client_ids?"
+        prior_default: "Exclude unless override in acceptance JSON notes"
+      OD-NB2-3:
+        pending_amendment: "Tranche size > 5 clients or burden tier jump (4+ sidecars primary)?"
+        prior_default: "Max five; prefer 2–3 sidecar rows per NB-1 learnings"
+    persisted_at: "2026-09-13T18:31:15Z"
+    profile_depth: "minimal"
+    recommended_wave_2_client_ids:
+      - "1786637885"
+      - "1786643714"
+      - "1787421852"
+      - "1787461685"
+      - "1788547701"
+    run_id: "fleet-migration-nb2-build-plan-20260913"
+    status: "complete"
+    test_strategy_pointer: "docs/pseudocode-constraint-v2-fleet-nb2-plan.md#24-test-strategy-for-build-plan"
   phase_4_closeout_module:
     change_definition:
       current_behavior: "G3 machinery complete; CITDP ended at Phase 4 Fleet waves module; closeout evidence in handoff + seq 5-8 reports; Tracker phase_4_closeout partial."
@@ -222,7 +293,7 @@ CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION:
     citdp_id: "CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
     created_at: "2026-09-12"
     status: "final"
-    title: "Fleet constraint-language v2 migration — Phase 4 closeout + Phase 5 + NB-1 tranche zero"
+    title: "Fleet constraint-language v2 migration — Phase 4 closeout + Phase 5 + NB-1 + NB-2"
     updated_at: "2026-09-13"
   risk_analysis:
     adversarial_inquiry:

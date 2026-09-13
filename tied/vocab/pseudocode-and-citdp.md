@@ -348,6 +348,21 @@ Prefer in `essence_pseudocode` (not domain terms):
 
 **VALIDATE (2026-09-13 refine v2):** Terms match NB-1 plan §1.3–§4, acceptance schema/template, and tracker `nb1_executable_steps`.
 
+## NB-2 Track B tranche one — RECORD (2026-09-13 refine)
+
+**Touchpoint:** sub-vocabulary-sync RECORD at NB-2 refine pass (after NB-1 tranche zero complete).
+
+| Term / artifact | Preferred definition |
+|-----------------|----------------------|
+| **Track B tranche one** | Synonym **NB-2** — second sponsor-gated batch; max five remaining `not_enrolled_phase_4` **header-only-v2** clients |
+| **od-nb2-acceptance JSON** | Sponsor gate at `working/fleet-constraint-v2/od-nb2-acceptance.v1.json`; schema `od-nb2-acceptance.v1.schema.json`; includes `prior_batch_complete` (NB-1) and `wave_2_client_ids` |
+| **wave-2 client selection** | Manifest-driven among remaining header-only rows; NB-1 migrated IDs ineligible; default exclude `tied-win-diff` (OD-NB2-2) |
+| **nb2_tranche_one_module** | CITDP module on closed orchestrator CITDP; batch REQ `REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE` |
+| **OD-NB2-1..4** | Sponsor open decisions in NB-2 plan §1.5 (acceptance, tooling row, burden tier, client ID overrides) |
+| **NB-2-C..E** | Same client-repo lifecycle as NB-1; orchestration scripts may generalize from `fleet-nb1-orchestration.mjs` at build-plan |
+
+**VALIDATE (2026-09-13 NB-2 refine):** Terms match NB-2 plan, od-nb2 schema/template, CITDP `nb2_tranche_one_module`, and tracker `nb2_executable_steps`.
+
 ---
 
 ## Alphabetical index

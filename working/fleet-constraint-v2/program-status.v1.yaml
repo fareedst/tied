@@ -3,23 +3,41 @@ doc_consolidation_commit: "fad6ef4"
 doc_consolidation_evidence: "working/fleet-constraint-v2/doc-consolidation-commit-report.v1.json"
 enrolled_fleet_migrated_count: 5
 gate_stage: "G4"
-last_g4_ci_at: "2026-09-13T17:21:04.940Z"
+last_g4_ci_at: "2026-09-13T18:25:45.575Z"
 last_g4_ci_ok: true
 maintenance_command: "node scripts/run-fleet-g4-ci-checks.mjs"
 nb1_acceptance_path: "working/fleet-constraint-v2/od-p5-2-acceptance.v1.json"
-nb1_wave_1_clients_executed: 5
-nb1_wave_1_fleet_migrated_client_count: 5
-nb1_wave_1_g3_receipts_ok: 5
 nb1_machine_close_out_receipt: "working/fleet-constraint-v2/NB-1/gates/machine-close-out-2026-09-13.json"
 nb1_tranche_zero_complete: true
 nb1_tranche_zero_req: "REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO"
-next_batch: "NB-2"
-next_batch_acceptance_template: "working/fleet-constraint-v2/od-p5-2-acceptance.v1.template.json"
-next_batch_blocked_on: "sponsor NB-2 batch authorization"
-next_batch_plan_doc: "docs/pseudocode-constraint-v2-fleet-nb1-plan.md"
-next_batch_tracker: "working/fleet-constraint-v2/NB-1-tranche-zero-agent-req-implementation-checklist.yaml"
+nb1_wave_1_clients_executed: 5
+nb1_wave_1_fleet_migrated_client_count: 5
+nb1_wave_1_g3_receipts_ok: 5
+nb2_acceptance_decided_at: "2026-09-13T00:00:00-07:00"
+nb2_acceptance_path: "working/fleet-constraint-v2/od-nb2-acceptance.v1.json"
+nb2_acceptance_status: "accepted"
+nb2_acceptance_template: "working/fleet-constraint-v2/od-nb2-acceptance.v1.template.json"
+nb2_header_only_remaining_count: 8
+nb2_sponsor_signoff_name: "Fareed Stevenson"
+nb2_tranche_one_clients_executed: 5
+nb2_tranche_one_complete: true
+nb2_tranche_one_req: "REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE"
+nb2_wave_2_client_ids_accepted:
+  - "1786637885"
+  - "1786643714"
+  - "1787421852"
+  - "1787461685"
+  - "1788547701"
+nb2_wave_2_fleet_migrated_client_count: 5
+nb2_wave_2_g3_receipts_ok: 5
+next_batch: "NB-3"
+next_batch_acceptance_template: null
+next_batch_blocked_on: "Sponsor NB-3 plan and od-nb3 acceptance (not started)"
+next_batch_plan_doc: null
+next_batch_tracker: null
+not_enrolled_fleet_migrated_count: 10
 not_enrolled_phase_4_count: 18
-notes: "NB-1 tranche zero complete: five wave-1 clients fleet-migrated-client (constraint-enforced-v2, G3 layer_c.ok). Machine close-out REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO envelope validated with fail_on_error_gaps."
+notes: "NB-2 tranche one complete (2026-09-13 build-plan): five wave-2 clients fleet-migrated-client with G3 receipts; 8 header-only not_enrolled remain for NB-3+. Orchestrator REQ stays closed."
 orchestrator_req_closed: true
 schema_version: "fleet-program-status.v1"
-updated_at: "2026-09-13T18:05:00.000Z"
+updated_at: "2026-09-13T18:30:00.000Z"

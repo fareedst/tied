@@ -1,0 +1,22 @@
+{
+  "schema_version": "nb2-machine-closeout.v1",
+  "generated_at": "2026-09-13T18:28:30Z",
+  "request_token": "REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE",
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "envelope_path": "working/REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE/evidence/request-evidence-envelope.v1.json",
+  "runner": "tools/bootstrap/templates/run-close-out-gates.mjs",
+  "run_id": "nb2-machine-closeout-20260913",
+  "wave_2_client_ids": [
+    "1786637885",
+    "1786643714",
+    "1788547701",
+    "1787421852",
+    "1787461685"
+  ],
+  "client_closeout_summary": "working/fleet-constraint-v2/NB-2/evidence/nb2-client-closeout-summary.json"
+}

@@ -1,0 +1,71 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "nb2-verification-20260913",
+  "commit": "HEAD",
+  "environment": {
+    "repo": "stdd"
+  },
+  "command_results": [
+    {
+      "id": "fleet-g4-ci",
+      "command": [
+        "node",
+        "scripts/run-fleet-g4-ci-checks.mjs"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 116,
+      "artifacts": [
+        "working/REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE/evidence/command-artifacts/fleet-g4-ci/fleet-g4-ci.stderr.txt",
+        "working/REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE/evidence/command-artifacts/fleet-g4-ci/fleet-g4-ci.stdout.txt"
+      ]
+    },
+    {
+      "id": "nb2-orchestration-tests",
+      "command": [
+        "node",
+        "--test",
+        "scripts/fleet-nb2-orchestration.test.mjs"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 162,
+      "artifacts": [
+        "working/REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE/evidence/command-artifacts/nb2-orchestration-tests/nb2-orchestration-tests.stderr.txt",
+        "working/REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE/evidence/command-artifacts/nb2-orchestration-tests/nb2-orchestration-tests.stdout.txt"
+      ]
+    }
+  ],
+  "quality_rows": [
+    {
+      "id": "Q-NB2-G4",
+      "attribute": "g4_regression",
+      "applicability": "applicable",
+      "rationale": "Continuous G4 maintenance prerequisite",
+      "evidence_method": "command",
+      "command_or_test": "fleet-g4-ci",
+      "result": "passed"
+    },
+    {
+      "id": "Q-NB2-ORCH",
+      "attribute": "orchestration_unit_tests",
+      "applicability": "applicable",
+      "rationale": "Plan §2.4 stdd proof for RECORD_NB2_ACCEPTANCE and SELECT_NB2_WAVE_TWO_CLIENTS",
+      "evidence_method": "command",
+      "command_or_test": "nb2-orchestration-tests",
+      "result": "passed"
+    }
+  ],
+  "covered_tokens": [
+    "REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE"
+  ],
+  "proof_boundaries": [
+    "stdd_orchestration_only"
+  ],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": []
+  }
+}

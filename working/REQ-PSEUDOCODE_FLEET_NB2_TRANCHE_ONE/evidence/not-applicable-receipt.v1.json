@@ -1,0 +1,14 @@
+{
+  "schema_version": "not-applicable-receipt.v1",
+  "request_token": "REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE",
+  "artifact_kind": "adversarial_inquiry",
+  "depth_tier": "minimal",
+  "phases": [
+    "close_out",
+    "pre_implementation",
+    "verification"
+  ],
+  "reason": "Adversarial inquiry not applicable at minimal depth_tier",
+  "generated_at": "2026-09-13T18:27:45.698Z",
+  "source": "request_evidence_envelope_backfill"
+}

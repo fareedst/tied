@@ -13,15 +13,17 @@
 | Metric | Value | Source |
 |--------|-------|--------|
 | Enrolled + **fleet-migrated-client** | **5** (incl. stdd) | [`client-inventory-manifest.v1.yaml`](../working/fleet-constraint-v2/client-inventory-manifest.v1.yaml) |
-| Not enrolled (Track B) | **18** | same |
+| Not enrolled (Track B) | **18** (5 fleet-migrated after NB-1; **13** header-only remain) | same |
 | Gate stage (continuous) | **G4** | [`gate-promotion-stages.v1.yaml`](../working/fleet-constraint-v2/gate-promotion-stages.v1.yaml) |
 | stdd orchestrator REQ | **Closed** — do not re-run close_out | TIED REQ status |
 
 **Phases 1–5 (stdd methodology slice):** Policy, readiness, pilots, enrolled fleet waves, G4 CI/bootstrap, and FEAT envelope policy are **done** (`phase_5_program_exit: true`, gate **G4**). Narrative phase plans were **removed from the tree**; use git history if needed.
 
-**Phase 5 complete ≠ fleet complete:** **18** manifest rows remain `not_enrolled_phase_4` / **header-only-v2**. G4 CI does **not** prove Track B migrated.
+**Phase 5 complete ≠ fleet complete:** **13** manifest rows remain `not_enrolled_phase_4` / **header-only-v2** after NB-1 (five additional not_enrolled rows are **fleet-migrated-client**). G4 CI does **not** prove Track B complete.
 
-**Not done:** Track B tranche **NB-1** — blocked on sponsor [`od-p5-2-acceptance.v1.json`](../working/fleet-constraint-v2/od-p5-2-acceptance.v1.json) (template + schema in `working/fleet-constraint-v2/`). Executable detail: [`pseudocode-constraint-v2-fleet-nb1-plan.md`](pseudocode-constraint-v2-fleet-nb1-plan.md).
+**NB-1 (tranche zero):** **Complete** (2026-09-13) — five wave-1 clients; machine close-out [`REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO`](../tied/requirements/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO.yaml). Plan: [`pseudocode-constraint-v2-fleet-nb1-plan.md`](pseudocode-constraint-v2-fleet-nb1-plan.md).
+
+**Not done:** Track B tranche **NB-2** — blocked on sponsor [`od-nb2-acceptance.v1.json`](../working/fleet-constraint-v2/od-nb2-acceptance.v1.json) (template + schema in `working/fleet-constraint-v2/`). Executable detail: [`pseudocode-constraint-v2-fleet-nb2-plan.md`](pseudocode-constraint-v2-fleet-nb2-plan.md).
 
 ---
 
@@ -61,21 +63,21 @@ Checks: bootstrap enforcement, stale waivers, **enrolled_track_regression** (5 r
 
 ---
 
-## Next batch — NB-1 (Track B tranche zero)
+## Completed batch — NB-2 (Track B tranche one)
 
-**Plan:** [`pseudocode-constraint-v2-fleet-nb1-plan.md`](pseudocode-constraint-v2-fleet-nb1-plan.md) · **Tracker:** `working/fleet-constraint-v2/NB-1-tranche-zero-agent-req-implementation-checklist.yaml`
+**Plan:** [`pseudocode-constraint-v2-fleet-nb2-plan.md`](pseudocode-constraint-v2-fleet-nb2-plan.md) · **Status:** complete (five wave-2 clients **fleet-migrated-client**; batch close-out `REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE`).
 
-**Blocked until** sponsor **`od-p5-2-acceptance.v1.json`** (`status: accepted`) — schema `od-p5-2-acceptance.v1.schema.json`, draft from `od-p5-2-acceptance.v1.template.json`.
+**Wave-2 executed (2026-09-13):** `1786637885`, `1786643714`, `1788547701`, `1787421852`, `1787461685` — G3 receipts under `working/fleet-constraint-v2/waves/{client_id}/receipts/`.
 
-| Step | Blocked | Action |
-|------|---------|--------|
-| NB-1-A | Yes | Sponsor signs OD-P5-2 acceptance (wave-1 client IDs, `orchestrator_reverify: false`) |
-| NB-1-B | Yes | Optional Phase 5b doc only if tranche > 5 clients |
-| NB-1-C..E | Yes | Client-owned `REQ-PSEUDOCODE_MIGRATION_*` + checklist per wave-1 client |
-| NB-1-F | Yes | `/build-plan` → G3 via `run-harness.sh fleet-g3-wave` |
-| NB-1-G | Yes | Manifest + dashboard + `program-status.v1.yaml` after receipts |
+**Remaining Track B:** ~8 `header-only-v2` / `not_enrolled_phase_4` rows (NB-3+).
 
-**Wave-1 recommendation (5 × 1 sidecar, not_enrolled):** `1786636023`, `1786637086`, `1786666674`, `1787503424`, `1789087315` — see NB-1 plan for alternates.
+## Next batch — NB-3+
+
+Blocked on sponsor plan and acceptance for the third Track B tranche. Maintenance: G4 CI (`node scripts/run-fleet-g4-ci-checks.mjs`).
+
+## Completed batch — NB-1 (Track B tranche zero)
+
+**Plan:** [`pseudocode-constraint-v2-fleet-nb1-plan.md`](pseudocode-constraint-v2-fleet-nb1-plan.md) · **Status:** complete (five wave-1 clients fleet-migrated-client).
 
 **Wave mechanics:** Partition under `working/fleet-constraint-v2/waves/` (**local/ephemeral**, gitignored). Client migration evidence stays in **client repos**.
 
@@ -94,5 +96,5 @@ Checks: bootstrap enforcement, stale waivers, **enrolled_track_regression** (5 r
 ## Falsification (program)
 
 - Dashboard shows **fleet-migrated-client** for `not_enrolled_phase_4` rows without wave evidence → **invalid**.
-- “Phase 5 complete” read as “all clients migrated” → **invalid** (18 remain).
+- “Phase 5 complete” read as “all clients migrated” → **invalid** (13 header-only Track B remain after NB-1).
 - stdd `working/` accumulates client migration archives → **avoid**; store in client clones.

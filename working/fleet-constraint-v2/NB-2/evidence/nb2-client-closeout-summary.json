@@ -1,0 +1,25 @@
+{
+  "run_id": "nb2-tranche-one-closeout-20260913",
+  "clients": {
+    "1786637885": {
+      "verification": true,
+      "close_out": true
+    },
+    "1786643714": {
+      "verification": true,
+      "close_out": true
+    },
+    "1787421852": {
+      "verification": true,
+      "close_out": true
+    },
+    "1787461685": {
+      "verification": true,
+      "close_out": true
+    },
+    "1788547701": {
+      "verification": true,
+      "close_out": true
+    }
+  }
+}

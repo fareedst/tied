@@ -1,0 +1,38 @@
+CITDP-NB-2-TRANCHE-ONE:
+  completion_criteria:
+    activation:
+      phase: "pre_implementation"
+      request_token: "REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE"
+      run_id: "fleet-migration-nb2-refine-20260913"
+  linked_plans:
+    - "docs/pseudocode-constraint-v2-fleet-nb2-plan.md"
+  parent_citdp_pointer: "tied/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml"
+  parent_module: "nb2_tranche_one_module"
+  record_identity:
+    change_request_id: "REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE"
+    citdp_id: "CITDP-NB-2-TRANCHE-ONE"
+    status: "draft"
+    title: "NB-2 Track B tranche one — pre-implementation gate slice"
+    updated_at: "2026-09-13"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: "NB-2 tranche one minimal depth; integrated inquiry not required for pre-implementation refine."
+      counterexamples:
+        - "G4 CI green cited as proof all 13 remaining Track B rows migrated"
+        - "NB-2 G3 wave started while od-nb2-acceptance status is still draft"
+        - "Wave-2 selects NB-1 client IDs already fleet-migrated-client in manifest"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "manifest shows 13 header-only-v2 not_enrolled rows after five NB-1 fleet-migrated"
+        - "program-status nb1_tranche_zero_complete true; next_batch NB-2"
+      evidence_references:
+        - "docs/pseudocode-constraint-v2-fleet-nb2-plan.md"
+        - "working/fleet-constraint-v2/client-inventory-manifest.v1.yaml"
+        - "working/fleet-constraint-v2/NB-1/gates/machine-close-out-2026-09-13.json"
+      falsification_questions:
+        - "Can manifest aggregate flip without wave-2 G3 receipts?"
+        - "Can NB-2 execute without accepted od-nb2-acceptance.v1.json?"
+        - "Can orchestrator close_out reopen substitute for NB-2 batch REQ evidence?"
+      gate_policy: "advisory"
+      profile_depth: "minimal"

@@ -5,7 +5,7 @@ notes: "Ordered waves for Phase 4 G3 fleet migration. W-stdd-1 complete under Ph
 partition_id: "stdd-fleet-wave-partition-v1"
 program_gate_policy: "advisory"
 schema_version: 1
-updated_at: "2026-09-12T22:19:12.796Z"
+updated_at: "2026-09-13T18:26:45.769Z"
 waves:
   - client_ids:
       - "stdd"
@@ -35,6 +35,24 @@ waves:
     wave_id: "W-ext-1786637086-1"
     wave_status: "complete"
   - client_ids:
+      - "1786637885"
+    gate_stage: "G3"
+    max_sidecars: 10
+    notes: "NB-2 tranche one (od-nb2-acceptance accepted); header-only-v2 wave."
+    receipts_dir: "working/fleet-constraint-v2/waves/1786637885/receipts"
+    sidecar_list_path: "working/fleet-constraint-v2/waves/1786637885/wave-1-sidecars.yaml"
+    wave_id: "W-ext-1786637885-1"
+    wave_status: "complete"
+  - client_ids:
+      - "1786643714"
+    gate_stage: "G3"
+    max_sidecars: 10
+    notes: "NB-2 tranche one (od-nb2-acceptance accepted); header-only-v2 wave."
+    receipts_dir: "working/fleet-constraint-v2/waves/1786643714/receipts"
+    sidecar_list_path: "working/fleet-constraint-v2/waves/1786643714/wave-1-sidecars.yaml"
+    wave_id: "W-ext-1786643714-1"
+    wave_status: "complete"
+  - client_ids:
       - "1786666674"
     gate_stage: "G3"
     max_sidecars: 10
@@ -44,6 +62,24 @@ waves:
     wave_id: "W-ext-1786666674-1"
     wave_status: "complete"
   - client_ids:
+      - "1787421852"
+    gate_stage: "G3"
+    max_sidecars: 10
+    notes: "NB-2 tranche one (od-nb2-acceptance accepted); header-only-v2 wave."
+    receipts_dir: "working/fleet-constraint-v2/waves/1787421852/receipts"
+    sidecar_list_path: "working/fleet-constraint-v2/waves/1787421852/wave-1-sidecars.yaml"
+    wave_id: "W-ext-1787421852-1"
+    wave_status: "complete"
+  - client_ids:
+      - "1787461685"
+    gate_stage: "G3"
+    max_sidecars: 10
+    notes: "NB-2 tranche one (od-nb2-acceptance accepted); header-only-v2 wave."
+    receipts_dir: "working/fleet-constraint-v2/waves/1787461685/receipts"
+    sidecar_list_path: "working/fleet-constraint-v2/waves/1787461685/wave-1-sidecars.yaml"
+    wave_id: "W-ext-1787461685-1"
+    wave_status: "complete"
+  - client_ids:
       - "1787503424"
     gate_stage: "G3"
     max_sidecars: 10
@@ -51,6 +87,15 @@ waves:
     receipts_dir: "working/fleet-constraint-v2/waves/1787503424/receipts"
     sidecar_list_path: "working/fleet-constraint-v2/waves/1787503424/wave-1-sidecars.yaml"
     wave_id: "W-ext-1787503424-1"
+    wave_status: "complete"
+  - client_ids:
+      - "1788547701"
+    gate_stage: "G3"
+    max_sidecars: 10
+    notes: "NB-2 tranche one (od-nb2-acceptance accepted); header-only-v2 wave."
+    receipts_dir: "working/fleet-constraint-v2/waves/1788547701/receipts"
+    sidecar_list_path: "working/fleet-constraint-v2/waves/1788547701/wave-1-sidecars.yaml"
+    wave_id: "W-ext-1788547701-1"
     wave_status: "complete"
   - client_ids:
       - "1789069630"

@@ -1,0 +1,19 @@
+▶ RECORD_NB2_ACCEPTANCE [REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE]
+  ✔ accepts valid accepted fixture with policy POST conditions (1.317084ms)
+  ✔ rejects draft status (NB-2-A gate) (0.099791ms)
+  ✔ rejects prior_batch_complete batch_id other than NB-1 (0.064541ms)
+  ✔ evaluateNb2AcceptanceGate passes for sponsor acceptance on disk (0.117542ms)
+✔ RECORD_NB2_ACCEPTANCE [REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE] (2.098334ms)
+▶ SELECT_NB2_WAVE_TWO_CLIENTS [REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE]
+  ✔ auto-selects five lowest-burden header-only clients from post-NB-1 fixture (12.773666ms)
+  ✔ rejects NB-1 fleet-migrated client IDs in override (already_migrated) (7.303667ms)
+  ✔ honors wave_2 override when rows remain header-only-v2 (6.772625ms)
+✔ SELECT_NB2_WAVE_TWO_CLIENTS [REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE] (26.990208ms)
+ℹ tests 7
+ℹ suites 2
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 101.124417

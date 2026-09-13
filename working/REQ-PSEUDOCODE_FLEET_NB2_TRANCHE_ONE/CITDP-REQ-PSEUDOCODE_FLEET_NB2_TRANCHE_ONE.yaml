@@ -1,0 +1,35 @@
+CITDP-NB-2-TRANCHE-ONE:
+  completion_criteria:
+    activation:
+      phase: "pre_implementation"
+      request_token: "REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE"
+      run_id: "fleet-migration-nb2-build-plan-20260913"
+  linked_plans:
+    - "docs/pseudocode-constraint-v2-fleet-nb2-plan.md"
+  parent_citdp_pointer: "tied/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml"
+  parent_module: "nb2_tranche_one_module"
+  record_identity:
+    change_request_id: "REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE"
+    citdp_id: "CITDP-NB-2-TRANCHE-ONE"
+    status: "complete"
+    title: "NB-2 Track B tranche one — build-plan close-out slice"
+    updated_at: "2026-09-13"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: "NB-2 tranche one minimal depth; integrated inquiry not required for program close-out."
+      counterexamples:
+        - "Manifest fleet-migrated-client without G3 receipts under waves/{client_id}/"
+        - "Wave-2 selects NB-1 fleet-migrated client IDs"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "All five wave-2 clients have summary.json receipts with layer_c.ok true after remediation"
+      evidence_references:
+        - "docs/pseudocode-constraint-v2-fleet-nb2-plan.md"
+        - "working/fleet-constraint-v2/NB-2/evidence/nb2-client-closeout-summary.json"
+        - "scripts/fleet-nb2-orchestration.test.mjs"
+      falsification_questions:
+        - "Can manifest aggregate flip without wave-2 G3 receipts?"
+        - "Can NB-2 execute without accepted od-nb2-acceptance.v1.json?"
+      gate_policy: "advisory"
+      profile_depth: "minimal"
