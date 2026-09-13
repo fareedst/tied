@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   [`docs/pseudocode-constraint-v2-fleet-program.md`](docs/pseudocode-constraint-v2-fleet-program.md); removed per-phase
   fleet plans and client migration history from git (`working/fleet-constraint-v2/waves/`, client migration REQ stubs).
   Inventory/governance YAML and `program-status.v1.yaml` remain tracked; wave receipts regenerate locally.
+  Evidence: `working/fleet-constraint-v2/doc-consolidation-commit-report.v1.json` (G4 CI + TIED consistency replay).
 
 ### Added
 

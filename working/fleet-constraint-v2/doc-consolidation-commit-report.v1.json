@@ -1,0 +1,32 @@
+{
+  "schema_version": "doc-consolidation-commit-report.v1",
+  "generated_at": "2026-09-13T17:21:04.940Z",
+  "request_token": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+  "milestone": "doc_consolidation_evidence",
+  "status": "complete",
+  "consolidation_git_sha": "fad6ef4c033caac6f75351de575e3d82a7e4cd72",
+  "consolidation_subject": "chore(tied): consolidate fleet program docs; stop tracking client migration history",
+  "canonical_doc": "docs/pseudocode-constraint-v2-fleet-program.md",
+  "grand_plan_stub": "docs/pseudocode-constraint-v2-fleet-migration-grand-plan.md",
+  "steps": {
+    "g4_ci_replay": {
+      "ok": true,
+      "command": "node scripts/run-fleet-g4-ci-checks.mjs",
+      "generated_at": "2026-09-13T17:21:04.940Z"
+    },
+    "tied_validate_consistency": {
+      "ok": true,
+      "base_path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied"
+    },
+    "program_status_alignment": {
+      "ok": true,
+      "artifact": "working/fleet-constraint-v2/program-status.v1.yaml",
+      "doc_consolidation_commit": "fad6ef4"
+    }
+  },
+  "policy": "Methodology repo retains program policy and inventory/governance YAML; client wave history is gitignored and lives in client repos or local regeneration.",
+  "remaining_risks": [
+    "18 not_enrolled_phase_4 clients — NB-1 blocked on OD-P5-2",
+    "G4 maintenance via node scripts/run-fleet-g4-ci-checks.mjs"
+  ]
+}

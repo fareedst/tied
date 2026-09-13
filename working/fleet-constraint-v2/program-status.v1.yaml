@@ -1,8 +1,9 @@
 schema_version: fleet-program-status.v1
-updated_at: "2026-09-13T17:20:09.000Z"
+updated_at: "2026-09-13T17:21:04.940Z"
 last_g4_ci_ok: true
-last_g4_ci_at: "2026-09-13T17:20:09.656Z"
-doc_consolidation_commit: "7d19c60"
+last_g4_ci_at: "2026-09-13T17:21:04.940Z"
+doc_consolidation_commit: "fad6ef4"
+doc_consolidation_evidence: working/fleet-constraint-v2/doc-consolidation-commit-report.v1.json
 canonical_doc: docs/pseudocode-constraint-v2-fleet-program.md
 gate_stage: G4
 enrolled_fleet_migrated_count: 5
