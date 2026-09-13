@@ -1514,6 +1514,23 @@ REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION:
   name: "Fleet constraint-language v2 migration program"
   priority: "P1"
   status: "Implemented"
+REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO:
+  category: "Functional"
+  description: "Methodology-side close-out for NB-1 wave-1 (five not_enrolled clients). Parent orchestrator REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION remains closed."
+  detail_file: "requirements/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO.yaml"
+  name: "Fleet NB-1 Track B tranche zero (program close-out)"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
+    related_to: []
+    supersedes: []
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+    implementation:
+      - "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION"
 REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT:
   category: "Functional"
   description: "New TIED client projects SHALL generate new IMPL pseudo-code sidecars with Grammar-Version: v2 while preserving v1 parsing compatibility for existing sidecars and legacy clients."

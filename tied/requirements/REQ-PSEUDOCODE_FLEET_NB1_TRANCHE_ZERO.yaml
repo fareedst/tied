@@ -1,0 +1,15 @@
+REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO:
+  category: "Functional"
+  description: "NB-1 tranche zero program evidence: OD-P5-2 acceptance, five client migrations, G3 receipts, manifest fleet-migrated-client rollup."
+  name: "Fleet NB-1 Track B tranche zero"
+  priority: "P1"
+  satisfaction_criteria:
+    - criterion: "Five wave-1 clients fleet-migrated-client with G3 layer_c.ok"
+      id: "SC-NB1-001"
+      metric: "working/fleet-constraint-v2/client-inventory-manifest.v1.yaml"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+    implementation:
+      - "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION"

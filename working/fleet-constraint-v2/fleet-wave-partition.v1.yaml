@@ -17,6 +17,42 @@ waves:
     wave_id: "W-stdd-1"
     wave_status: "complete"
   - client_ids:
+      - "1786636023"
+    gate_stage: "G3"
+    max_sidecars: 10
+    notes: "NB-1 tranche zero (OD-P5-2 accepted); 1 header-only sidecar."
+    receipts_dir: "working/fleet-constraint-v2/waves/1786636023/receipts"
+    sidecar_list_path: "working/fleet-constraint-v2/waves/1786636023/wave-1-sidecars.yaml"
+    wave_id: "W-ext-1786636023-1"
+    wave_status: "complete"
+  - client_ids:
+      - "1786637086"
+    gate_stage: "G3"
+    max_sidecars: 10
+    notes: "NB-1 tranche zero (OD-P5-2 accepted); 1 header-only sidecar."
+    receipts_dir: "working/fleet-constraint-v2/waves/1786637086/receipts"
+    sidecar_list_path: "working/fleet-constraint-v2/waves/1786637086/wave-1-sidecars.yaml"
+    wave_id: "W-ext-1786637086-1"
+    wave_status: "complete"
+  - client_ids:
+      - "1786666674"
+    gate_stage: "G3"
+    max_sidecars: 10
+    notes: "NB-1 tranche zero (OD-P5-2 accepted); 1 header-only sidecar."
+    receipts_dir: "working/fleet-constraint-v2/waves/1786666674/receipts"
+    sidecar_list_path: "working/fleet-constraint-v2/waves/1786666674/wave-1-sidecars.yaml"
+    wave_id: "W-ext-1786666674-1"
+    wave_status: "complete"
+  - client_ids:
+      - "1787503424"
+    gate_stage: "G3"
+    max_sidecars: 10
+    notes: "NB-1 tranche zero (OD-P5-2 accepted); 1 header-only sidecar."
+    receipts_dir: "working/fleet-constraint-v2/waves/1787503424/receipts"
+    sidecar_list_path: "working/fleet-constraint-v2/waves/1787503424/wave-1-sidecars.yaml"
+    wave_id: "W-ext-1787503424-1"
+    wave_status: "complete"
+  - client_ids:
       - "1789069630"
     depends_on_wave_ids:
       - "W-ext-1789147101-1"
@@ -25,6 +61,15 @@ waves:
     receipts_dir: "working/fleet-constraint-v2/waves/1789069630/receipts"
     sidecar_list_path: "working/fleet-constraint-v2/waves/1789069630/wave-1-sidecars.yaml"
     wave_id: "W-ext-1789069630-1"
+    wave_status: "complete"
+  - client_ids:
+      - "1789087315"
+    gate_stage: "G3"
+    max_sidecars: 10
+    notes: "NB-1 tranche zero (OD-P5-2 accepted); 1 header-only sidecar."
+    receipts_dir: "working/fleet-constraint-v2/waves/1789087315/receipts"
+    sidecar_list_path: "working/fleet-constraint-v2/waves/1789087315/wave-1-sidecars.yaml"
+    wave_id: "W-ext-1789087315-1"
     wave_status: "complete"
   - client_ids:
       - "1789136889"

@@ -1,0 +1,37 @@
+{
+  "schema_version": "od-p5-2-acceptance.v1",
+  "acceptance_id": "od-p5-2-nb1-draft",
+  "status": "draft",
+  "decided_at": null,
+  "sponsor_signoff": {
+    "name": "",
+    "rationale": ""
+  },
+  "amends_od_p5_2": {
+    "prior_decision": "Defer Phase 5b non-enrolled tranche (2026-09-13)",
+    "new_decision": "Authorize NB-1 Track B tranche zero: up to five not_enrolled_phase_4 clients via client-owned migration REQs and G3 waves; stdd orchestrator REQ remains closed."
+  },
+  "tranche_scope": {
+    "batch_id": "NB-1",
+    "max_clients": 5,
+    "gate_stage": "G3",
+    "enrollment_filter": "not_enrolled_phase_4"
+  },
+  "wave_1_client_ids": [
+    "1786636023",
+    "1786637086",
+    "1786666674",
+    "1787503424",
+    "1789087315"
+  ],
+  "orchestrator_reverify": false,
+  "citdp_module_pointer": "tied/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml#nb1_tranche_zero_module",
+  "plan_doc_pointer": "docs/pseudocode-constraint-v2-fleet-nb1-plan.md",
+  "methodology_pin": "48d1fbb+",
+  "evidence_pointers": [
+    "working/fleet-constraint-v2/client-inventory-manifest.v1.yaml",
+    "working/fleet-constraint-v2/phase-5-exit-review.v1.json",
+    "docs/pseudocode-constraint-v2-fleet-program.md"
+  ],
+  "notes": "Copy to od-p5-2-acceptance.v1.json when sponsor sets status accepted and decided_at."
+}

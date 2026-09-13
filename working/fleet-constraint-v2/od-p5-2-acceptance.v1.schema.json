@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "od-p5-2-acceptance.v1",
+  "title": "OD-P5-2 sponsor acceptance — Track B tranche authorization",
+  "description": "Authorizes NB-1 (Track B tranche zero) without reopening closed orchestrator REQ close_out.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "acceptance_id",
+    "status",
+    "amends_od_p5_2",
+    "tranche_scope",
+    "wave_1_client_ids",
+    "orchestrator_reverify",
+    "citdp_module_pointer",
+    "plan_doc_pointer",
+    "methodology_pin"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "od-p5-2-acceptance.v1"
+    },
+    "acceptance_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Stable id e.g. od-p5-2-nb1-20260913"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "accepted", "withdrawn"]
+    },
+    "decided_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "Required when status is accepted"
+    },
+    "sponsor_signoff": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "rationale": { "type": "string" }
+      },
+      "required": ["name", "rationale"]
+    },
+    "amends_od_p5_2": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["prior_decision", "new_decision"],
+      "properties": {
+        "prior_decision": {
+          "type": "string",
+          "const": "Defer Phase 5b non-enrolled tranche (2026-09-13)"
+        },
+        "new_decision": {
+          "type": "string",
+          "minLength": 1,
+          "description": "e.g. Authorize NB-1 tranche zero (3-5 clients) under fleet program doc"
+        }
+      }
+    },
+    "tranche_scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["batch_id", "max_clients", "gate_stage", "enrollment_filter"],
+      "properties": {
+        "batch_id": { "type": "string", "const": "NB-1" },
+        "max_clients": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "gate_stage": { "type": "string", "const": "G3" },
+        "enrollment_filter": { "type": "string", "const": "not_enrolled_phase_4" }
+      }
+    },
+    "wave_1_client_ids": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 5,
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "orchestrator_reverify": {
+      "type": "boolean",
+      "const": false,
+      "description": "Must be false — REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION stays closed"
+    },
+    "citdp_module_pointer": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Path to CITDP file; module key nb1_tranche_zero_module"
+    },
+    "plan_doc_pointer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "methodology_pin": {
+      "type": "string",
+      "minLength": 1,
+      "description": "e.g. 48d1fbb+"
+    },
+    "evidence_pointers": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "notes": { "type": "string" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "status": { "const": "accepted" } } },
+      "then": {
+        "required": ["decided_at", "sponsor_signoff"],
+        "properties": { "decided_at": { "type": "string" } }
+      }
+    }
+  ]
+}

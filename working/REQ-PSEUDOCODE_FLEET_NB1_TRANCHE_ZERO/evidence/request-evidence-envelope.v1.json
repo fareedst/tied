@@ -1,0 +1,135 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-09-13T18:03:26.336Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO",
+    "project_id": "af8451e933f573ec",
+    "depth_tier": "minimal",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [],
+  "artifacts": [
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": null,
+      "path": "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/gates/pre_implementation-refine-20260913.json",
+      "content_hash": "sha256:49b6446527a2861ba8da73d7acec12ca9678719a7b3518d349fd27d8aeb852fb",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/gates/verification-2026-09-13T17-35-55-611Z.json",
+      "content_hash": "sha256:74d4f941f1ba41b3b50f4e338fbe868a61b49e780967fed1b6af640649478e22",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "nb1-gate-note.v1",
+      "path": "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/gates/nb1-a-sponsor-block-2026-09-13.json",
+      "content_hash": "sha256:53e88dd8fcd8658a3fce7bdd0585da13c897f0debb55224ad0c497c9e5b1f0a9",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "nb1-phase2-handoff.v1",
+      "path": "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/gates/nb1-phase2-build-plan-2026-09-13.json",
+      "content_hash": "sha256:3130554bc9e8cb76a13e5858bc6ae64e6784bea0e7c5be9ee11d759ee6f429b0",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "nb1-phase2-remediation.v1",
+      "path": "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/gates/nb1-phase2-remediation-2026-09-13.json",
+      "content_hash": "sha256:c7042143dc14a017d7d84768058e52860501634312b099d6b4020aa706e35ec0",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_tracker",
+      "schema_version": null,
+      "path": "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/agent-req-implementation-checklist.yaml",
+      "content_hash": "sha256:14d4214ad5d6f88362a54cb2001402af7e1a626f951525f76b4f464df37b88d9",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "tracker_disposition_only"
+      ]
+    },
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/CITDP-REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO.yaml",
+      "content_hash": "sha256:b6393ab2099f29c5d613d56af3f2f73a4401262909298a47ec14531abd2c79fd",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    },
+    {
+      "kind": "not_applicable_receipt",
+      "schema_version": "not-applicable-receipt.v1",
+      "path": "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/evidence/not-applicable-receipt.v1.json",
+      "content_hash": "sha256:83253410c4b5526826a2efe34b12dc767e4b692376ebb38fc3402b3d3246bf4e",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:c8d06588ecece21da908a61b591e97faead1fae79e9431bf58af7f804db8ca04",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/evidence/nb1-client-closeout-summary.json",
+      "content_hash": "sha256:9c3a8fcd256fd99eeb8d09a41bf1ae7dec7b94c9057acf0e1dc45d6e00eb98f5",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/agent-req-implementation-checklist.yaml",
+    "tracker_hash": "sha256:14d4214ad5d6f88362a54cb2001402af7e1a626f951525f76b4f464df37b88d9",
+    "citdp_path": "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/CITDP-REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO.yaml",
+    "evidence_chain_profile_path": null
+  },
+  "gaps": []
+}

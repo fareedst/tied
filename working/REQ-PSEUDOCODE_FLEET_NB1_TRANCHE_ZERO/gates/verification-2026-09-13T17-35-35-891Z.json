@@ -1,0 +1,30 @@
+{
+  "schema_version": "checklist-gate-receipt.v1",
+  "phase": "verification",
+  "timestamp": "2026-09-13T17:35:35.891Z",
+  "allowed": false,
+  "diagnostics": [
+    "invalid_slug:unit-red-tests",
+    "invalid_slug:composition-tests",
+    "invalid_slug:build-plan-phase-1-orchestration-red-green-2026-09-13",
+    "invalid_slug"
+  ],
+  "depth": "minimal",
+  "input_hashes": {
+    "tracker_hash": "sha256:ecc86d641d657c8dba6aa3f84d4c3d6394c762722ee12fc3175d2f931332605d",
+    "citdp_hash": "sha256:fe58bd9c983181055585fb544241c1205ddf132b3bc086c75e21d3509a346301"
+  },
+  "gate_result": {
+    "allowed": false,
+    "ok": false,
+    "blocking": true,
+    "depth": "minimal",
+    "phase": "verification",
+    "diagnostics": [
+      "invalid_slug:unit-red-tests",
+      "invalid_slug:composition-tests",
+      "invalid_slug:build-plan-phase-1-orchestration-red-green-2026-09-13",
+      "invalid_slug"
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": "od-p5-2-acceptance.v1",
+  "acceptance_id": "od-p5-2-nb1-test-fixture",
+  "status": "accepted",
+  "decided_at": "2026-09-13T18:00:00.000Z",
+  "sponsor_signoff": {
+    "name": "Test Sponsor",
+    "rationale": "Fixture for unit tests only."
+  },
+  "amends_od_p5_2": {
+    "prior_decision": "Defer Phase 5b non-enrolled tranche (2026-09-13)",
+    "new_decision": "Authorize NB-1 tranche zero (test fixture)."
+  },
+  "tranche_scope": {
+    "batch_id": "NB-1",
+    "max_clients": 5,
+    "gate_stage": "G3",
+    "enrollment_filter": "not_enrolled_phase_4"
+  },
+  "wave_1_client_ids": ["1786636023", "1786637086"],
+  "orchestrator_reverify": false,
+  "citdp_module_pointer": "tied/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml#nb1_tranche_zero_module",
+  "plan_doc_pointer": "docs/pseudocode-constraint-v2-fleet-nb1-plan.md",
+  "methodology_pin": "48d1fbb+"
+}

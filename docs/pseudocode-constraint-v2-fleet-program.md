@@ -17,9 +17,11 @@
 | Gate stage (continuous) | **G4** | [`gate-promotion-stages.v1.yaml`](../working/fleet-constraint-v2/gate-promotion-stages.v1.yaml) |
 | stdd orchestrator REQ | **Closed** — do not re-run close_out | TIED REQ status |
 
-**Phases 1–5 (stdd):** Policy, readiness, pilots, enrolled fleet waves, and G4 CI/bootstrap are **done**. Narrative phase plans were **removed from the tree**; use git history if needed.
+**Phases 1–5 (stdd methodology slice):** Policy, readiness, pilots, enrolled fleet waves, G4 CI/bootstrap, and FEAT envelope policy are **done** (`phase_5_program_exit: true`, gate **G4**). Narrative phase plans were **removed from the tree**; use git history if needed.
 
-**Not done:** Track B (**18** clients). Requires sponsor **OD-P5-2** then batch **NB-1** below.
+**Phase 5 complete ≠ fleet complete:** **18** manifest rows remain `not_enrolled_phase_4` / **header-only-v2**. G4 CI does **not** prove Track B migrated.
+
+**Not done:** Track B tranche **NB-1** — blocked on sponsor [`od-p5-2-acceptance.v1.json`](../working/fleet-constraint-v2/od-p5-2-acceptance.v1.json) (template + schema in `working/fleet-constraint-v2/`). Executable detail: [`pseudocode-constraint-v2-fleet-nb1-plan.md`](pseudocode-constraint-v2-fleet-nb1-plan.md).
 
 ---
 
@@ -61,19 +63,23 @@ Checks: bootstrap enforcement, stale waivers, **enrolled_track_regression** (5 r
 
 ## Next batch — NB-1 (Track B tranche zero)
 
-**Blocked until** `working/fleet-constraint-v2/od-p5-2-acceptance.v1.json` (sponsor: tranche scope, wave-1 clients, CITDP home, no orchestrator re-verify).
+**Plan:** [`pseudocode-constraint-v2-fleet-nb1-plan.md`](pseudocode-constraint-v2-fleet-nb1-plan.md) · **Tracker:** `working/fleet-constraint-v2/NB-1-tranche-zero-agent-req-implementation-checklist.yaml`
 
-| Step | Action |
-|------|--------|
-| NB-1-A | OD-P5-2 acceptance JSON |
-| NB-1-B | Optional short 5b plan **only if** tranche is large; else execute from this section |
-| NB-1-C..E | Pick 3–5 low sidecar-count clients from manifest; client-owned REQ + checklist in **client repo** |
-| NB-1-F | G3 wave via `run-harness.sh fleet-g3-wave` (harness + qualification scripts; phase-4 plan was in git history pre-2026-09-13 doc prune) |
-| NB-1-G | Update manifest + dashboard; refresh `program-status.v1.yaml` |
+**Blocked until** sponsor **`od-p5-2-acceptance.v1.json`** (`status: accepted`) — schema `od-p5-2-acceptance.v1.schema.json`, draft from `od-p5-2-acceptance.v1.template.json`.
 
-**Wave mechanics:** Reuse G3 tools from qualification harness; partition lists under `working/fleet-constraint-v2/waves/` (**local/ephemeral**, gitignored).
+| Step | Blocked | Action |
+|------|---------|--------|
+| NB-1-A | Yes | Sponsor signs OD-P5-2 acceptance (wave-1 client IDs, `orchestrator_reverify: false`) |
+| NB-1-B | Yes | Optional Phase 5b doc only if tranche > 5 clients |
+| NB-1-C..E | Yes | Client-owned `REQ-PSEUDOCODE_MIGRATION_*` + checklist per wave-1 client |
+| NB-1-F | Yes | `/build-plan` → G3 via `run-harness.sh fleet-g3-wave` |
+| NB-1-G | Yes | Manifest + dashboard + `program-status.v1.yaml` after receipts |
 
-**v1 parser:** Removal deferred (OD-P5-1); quarantine policy text lives in TIED ARCH/REQ notes—not a standalone doc tree.
+**Wave-1 recommendation (5 × 1 sidecar, not_enrolled):** `1786636023`, `1786637086`, `1786666674`, `1787503424`, `1789087315` — see NB-1 plan for alternates.
+
+**Wave mechanics:** Partition under `working/fleet-constraint-v2/waves/` (**local/ephemeral**, gitignored). Client migration evidence stays in **client repos**.
+
+**v1 parser:** Removal deferred (OD-P5-1); quarantine policy in TIED ARCH/REQ notes.
 
 ---
 

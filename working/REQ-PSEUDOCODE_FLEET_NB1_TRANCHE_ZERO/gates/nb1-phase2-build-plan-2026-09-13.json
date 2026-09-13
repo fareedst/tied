@@ -1,0 +1,20 @@
+{
+  "schema_version": "nb1-phase2-handoff.v1",
+  "generated_at": "2026-09-13T17:44:00Z",
+  "acceptance_path": "working/fleet-constraint-v2/od-p5-2-acceptance.v1.json",
+  "pre_implementation_gate": "working/fleet-constraint-v2/NB-1/gates/pre_implementation-2026-09-13T17-43-55-041Z.json",
+  "wave_client_ids": [
+    "1786636023",
+    "1786637086",
+    "1786666674",
+    "1787503424",
+    "1789087315"
+  ],
+  "manifest_rollup_applied": true,
+  "manifest_fleet_migrated_flip": false,
+  "blockers": [
+    "1789087315 sidecar remains header-only-v2 after apply (legacy INPUT/PRE layout)",
+    "No wave-1 client reached constraint-enforced-v2 (missing INPUT/OUTPUT where refinements)",
+    "Client verification/close_out gates: activation collect failed (minimal inquiry artifacts absent)"
+  ]
+}

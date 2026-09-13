@@ -1,17 +1,25 @@
-schema_version: fleet-program-status.v1
-updated_at: "2026-09-13T17:21:04.940Z"
-last_g4_ci_ok: true
-last_g4_ci_at: "2026-09-13T17:21:04.940Z"
+canonical_doc: "docs/pseudocode-constraint-v2-fleet-program.md"
 doc_consolidation_commit: "fad6ef4"
-doc_consolidation_evidence: working/fleet-constraint-v2/doc-consolidation-commit-report.v1.json
-canonical_doc: docs/pseudocode-constraint-v2-fleet-program.md
-gate_stage: G4
+doc_consolidation_evidence: "working/fleet-constraint-v2/doc-consolidation-commit-report.v1.json"
 enrolled_fleet_migrated_count: 5
+gate_stage: "G4"
+last_g4_ci_at: "2026-09-13T17:21:04.940Z"
+last_g4_ci_ok: true
+maintenance_command: "node scripts/run-fleet-g4-ci-checks.mjs"
+nb1_acceptance_path: "working/fleet-constraint-v2/od-p5-2-acceptance.v1.json"
+nb1_wave_1_clients_executed: 5
+nb1_wave_1_fleet_migrated_client_count: 5
+nb1_wave_1_g3_receipts_ok: 5
+nb1_machine_close_out_receipt: "working/fleet-constraint-v2/NB-1/gates/machine-close-out-2026-09-13.json"
+nb1_tranche_zero_complete: true
+nb1_tranche_zero_req: "REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO"
+next_batch: "NB-2"
+next_batch_acceptance_template: "working/fleet-constraint-v2/od-p5-2-acceptance.v1.template.json"
+next_batch_blocked_on: "sponsor NB-2 batch authorization"
+next_batch_plan_doc: "docs/pseudocode-constraint-v2-fleet-nb1-plan.md"
+next_batch_tracker: "working/fleet-constraint-v2/NB-1-tranche-zero-agent-req-implementation-checklist.yaml"
 not_enrolled_phase_4_count: 18
+notes: "NB-1 tranche zero complete: five wave-1 clients fleet-migrated-client (constraint-enforced-v2, G3 layer_c.ok). Machine close-out REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO envelope validated with fail_on_error_gaps."
 orchestrator_req_closed: true
-next_batch: NB-1
-next_batch_blocked_on: od-p5-2-acceptance.v1.json
-maintenance_command: node scripts/run-fleet-g4-ci-checks.mjs
-notes: >-
-  Rolling program snapshot only. Client migration evidence belongs in client repos.
-  Wave history and close-out seq reports are gitignored in this tree.
+schema_version: "fleet-program-status.v1"
+updated_at: "2026-09-13T18:05:00.000Z"

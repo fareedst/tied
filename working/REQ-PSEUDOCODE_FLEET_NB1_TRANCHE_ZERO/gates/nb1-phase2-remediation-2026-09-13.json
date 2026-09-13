@@ -1,0 +1,24 @@
+{
+  "schema_version": "nb1-phase2-remediation.v1",
+  "generated_at": "2026-09-13T17:52:00Z",
+  "remediation": [
+    "apply-enforced-v2-where-refinement on all five wave-1 sidecars",
+    "IMPL-DUPCOMPARE file-level Contract block for constraint-ready floor",
+    "fleet-external-scan + fleet-g3-wave refresh per client",
+    "scripts/run-nb1-client-closeout.mjs verification and close_out gates",
+    "manifest rollup to fleet-migrated-client when all sidecars constraint-enforced-v2"
+  ],
+  "wave_client_ids": [
+    "1786636023",
+    "1786637086",
+    "1786666674",
+    "1787503424",
+    "1789087315"
+  ],
+  "manifest_fleet_migrated_flip": true,
+  "client_closeout_summary": "working/fleet-constraint-v2/NB-1/evidence/nb1-client-closeout-summary.json",
+  "remaining_notes": [
+    "IMPL-SORT_THREE_INTEGERS and IMPL-DESKTOP_WINDOW_REPORT pseudocode_validate reported ok:false but checklist gates allowed (minimal depth).",
+    "stdd NB-1 tracker verification gate may still need manual close-out envelope sync if sponsor requires machine close-out."
+  ]
+}

@@ -326,8 +326,27 @@ Prefer in `essence_pseudocode` (not domain terms):
 | **FEAT-spawned REQ envelope** | Integrated request evidence envelope on feature REQs (OD-P5-4); checklist template `templates/agent-req-checklist-feat-spawned-phase5.v1.yaml`; validator under `scripts/validate-feat-spawned-envelope-policy*`; **not** fleet migration receipt |
 | **fleet program doc** | Canonical methodology doc [`pseudocode-constraint-v2-fleet-program.md`](../../docs/pseudocode-constraint-v2-fleet-program.md) — policy, status, maintenance, NB-1; per-phase narrative plans removed from tree (2026-09-13) |
 | **program-status.v1.yaml** | Rolling counts and next batch gate under `working/fleet-constraint-v2/` — not client migration history |
+| **NB-1 (Track B tranche zero)** | First sponsor-gated batch on `not_enrolled_phase_4` clients; plan [`pseudocode-constraint-v2-fleet-nb1-plan.md`](../../docs/pseudocode-constraint-v2-fleet-nb1-plan.md) |
+| **OD-P5-2 acceptance JSON** | `working/fleet-constraint-v2/od-p5-2-acceptance.v1.json` — amends deferred tranche decision; schema `od-p5-2-acceptance.v1.schema.json` |
+| **phase 5 program exit** | stdd methodology slice complete (G4, bootstrap, enrolled regression) — **not** full fleet migration |
 
 **VALIDATE (2026-09-13 doc prune):** Fleet terms align with [`pseudocode-constraint-v2-fleet-program.md`](../../docs/pseudocode-constraint-v2-fleet-program.md) and TIED SC rows. Track B (**18** rows) not fleet-migrated. Client migration evidence belongs in **client repos**, not stdd `working/`.
+
+## NB-1 Track B tranche zero — RECORD (2026-09-13 refine)
+
+**Touchpoint:** sub-vocabulary-sync RECORD at NB-1 refine pass.
+
+| Term / artifact | Preferred definition |
+|-----------------|----------------------|
+| **Track B tranche zero** | Synonym **NB-1** — max five `not_enrolled_phase_4` clients per OD-P5-2 acceptance |
+| **OD-P5-2 acceptance JSON** | Sponsor gate; `orchestrator_reverify` must be **false** |
+| **wave-1 client selection** | Manifest-driven; prefer single **header-only-v2** sidecar rows |
+| **nb1_tranche_zero_module** | CITDP module on closed orchestrator CITDP — not a new REQ token |
+| **phase 5 complete vs fleet complete** | Exit report `phase_5_program_exit` vs 18 remaining Track B rows |
+| **NB-1-C..E** | Client-repo migration lifecycle: REQ spawn → execute → close_out/receipt export (stdd does not hold durable client archives) |
+| **OD-NB1-1..3** | Sponsor open decisions in NB-1 plan §1.4 (wave IDs, tooling row, tranche size) |
+
+**VALIDATE (2026-09-13 refine v2):** Terms match NB-1 plan §1.3–§4, acceptance schema/template, and tracker `nb1_executable_steps`.
 
 ---
 

@@ -1,0 +1,18 @@
+{
+  "schema_version": "nb1-machine-closeout.v1",
+  "generated_at": "2026-09-13T18:03:30Z",
+  "request_token": "REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO",
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "envelope_path": "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/evidence/request-evidence-envelope.v1.json",
+  "runner": "tools/bootstrap/templates/run-close-out-gates.mjs",
+  "run_id": "nb1-machine-closeout-20260913",
+  "sidecar_tightening": [
+    "IMPL-SORT_THREE_INTEGERS block token comments",
+    "IMPL-DESKTOP_WINDOW_REPORT EMIT_JSON_REPORT token comments; removed duplicate TBD Contract"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": "nb1-gate-note.v1",
+  "gate_id": "NB-1-A",
+  "timestamp": "2026-09-13T17:36:00.000Z",
+  "allowed": false,
+  "reason": "working/fleet-constraint-v2/od-p5-2-acceptance.v1.json absent; template remains status draft (plan §2.7)",
+  "sponsor_unblock_steps": [
+    "Copy working/fleet-constraint-v2/od-p5-2-acceptance.v1.template.json to working/fleet-constraint-v2/od-p5-2-acceptance.v1.json",
+    "Set status to accepted, decided_at (ISO-8601), and sponsor_signoff.name / sponsor_signoff.rationale",
+    "Ensure wave_1_client_ids are not_enrolled_phase_4 in client-inventory-manifest.v1.yaml",
+    "Re-run /build-plan phase 2 for NB-1-C..G"
+  ],
+  "orchestration_tests": "node --test scripts/fleet-nb1-orchestration.test.mjs (9/9 pass)"
+}

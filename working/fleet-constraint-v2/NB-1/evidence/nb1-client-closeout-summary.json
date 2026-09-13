@@ -1,0 +1,25 @@
+{
+  "run_id": "nb1-tranche-zero-closeout-20260913",
+  "clients": {
+    "1786636023": {
+      "verification": true,
+      "close_out": true
+    },
+    "1786637086": {
+      "verification": true,
+      "close_out": true
+    },
+    "1786666674": {
+      "verification": true,
+      "close_out": true
+    },
+    "1787503424": {
+      "verification": true,
+      "close_out": true
+    },
+    "1789087315": {
+      "verification": true,
+      "close_out": true
+    }
+  }
+}

@@ -1,0 +1,164 @@
+citdp_module: "nb1_tranche_zero_module"
+citdp_pointer: "working/fleet-constraint-v2/NB-1-citdp-pre-implementation.v1.yaml"
+copy_hygiene: "Per-request copy for NB-1 Track B tranche zero. Orchestrator REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION remains closed."
+description: "Tracker for NB-1 (Track B tranche zero) — sponsor gate, client-repo migrations, G3 waves. Pre-implementation refine 2026-09-13 (plan §2.6–§2.7)."
+execution_evidence:
+  close_out_evidence:
+    date: "2026-09-13"
+    deferred: []
+    gates:
+      close_out: "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/gates/close_out-close-out.json"
+      verification: "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/gates/verification-close-out.json"
+  completed:
+    - "change-definition"
+    - "composition-integration"
+    - "gate-pseudocode-validation"
+    - "risk-assessment"
+    - "sub-close-out-evidence-sync"
+    - "test-strategy"
+    - "traceable-commit"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
+  envelope_path: "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/evidence/request-evidence-envelope.v1.json"
+  nb1_phase2_handoff: "working/fleet-constraint-v2/NB-1/gates/nb1-phase2-remediation-2026-09-13.json"
+  nb1_step_completion:
+    - "NB-1-A"
+    - "NB-1-C"
+    - "NB-1-D"
+    - "NB-1-E"
+    - "NB-1-F"
+    - "NB-1-G"
+  request: "REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO"
+execution_profile:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+  proof_boundary: "stdd orchestration and sponsor acceptance only; fleet-migrated-client proof in client repos."
+linked_plans:
+  - "docs/pseudocode-constraint-v2-fleet-nb1-plan.md"
+  - "docs/pseudocode-constraint-v2-fleet-program.md"
+nb1_executable_steps:
+  blocked:
+    - "NB-2"
+  completed:
+    - "NB-1-A"
+    - "NB-1-C"
+    - "NB-1-D"
+    - "NB-1-E"
+    - "NB-1-F"
+    - "NB-1-G"
+  unblocked:
+    - "M-G4"
+    - "NB-1-R"
+nb1_tranche_zero:
+  batch_id: "NB-1"
+  blocked_on: null
+  build_plan_phase: "2-complete-wave1-tranche-zero"
+  gate_nb1_a:
+    acceptance_path: "working/fleet-constraint-v2/od-p5-2-acceptance.v1.json"
+    allowed: true
+    receipt: "working/fleet-constraint-v2/NB-1/gates/pre_implementation-2026-09-13T17-43-55-041Z.json"
+  machine_close_out:
+    allowed: true
+    envelope_path: "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/evidence/request-evidence-envelope.v1.json"
+    receipt: "working/fleet-constraint-v2/NB-1/gates/machine-close-out-2026-09-13.json"
+  phase2_handoff: "working/fleet-constraint-v2/NB-1/gates/nb1-phase2-remediation-2026-09-13.json"
+  recommended_wave_1_client_ids:
+    - "1786636023"
+    - "1786637086"
+    - "1786666674"
+    - "1787503424"
+    - "1789087315"
+  status: "tranche_zero_complete"
+parent_orchestrator: "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/evidence/change-definition-evidence.md"
+    slug: "change-definition"
+    tracking:
+      evidence_refs:
+        - "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/evidence/change-definition-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/evidence/test-strategy-evidence.md"
+    slug: "test-strategy"
+    tracking:
+      evidence_refs:
+        - "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/evidence/test-strategy-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/evidence/gate-pseudocode-validation-evidence.md"
+    slug: "gate-pseudocode-validation"
+    tracking:
+      evidence_refs:
+        - "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/evidence/gate-pseudocode-validation-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/evidence/risk-assessment-evidence.md"
+    slug: "risk-assessment"
+    tracking:
+      evidence_refs:
+        - "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/evidence/risk-assessment-evidence.md"
+      status: "completed"
+  - disposition: "not_applicable"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Minimal depth NB-1 refine uses counterexamples in NB-1-citdp-pre-implementation.v1.yaml; no integrated inquiry run."
+    slug: "sub-adversarial-inquiry-pass"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/evidence/unit-test-red-evidence.md"
+    notes: "RED tests for RECORD_OD_P5_2_ACCEPTANCE and SELECT_NB1_WAVE_ONE_CLIENTS (plan §2.4)."
+    slug: "unit-test-red"
+    tracking:
+      evidence_refs:
+        - "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/evidence/unit-test-red-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/evidence/unit-test-green-evidence.md"
+    notes: "Phase-2 manifest fixture preserves pre-wave selection tests."
+    slug: "unit-test-green"
+    tracking:
+      evidence_refs:
+        - "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/evidence/unit-test-green-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/evidence/composition-integration-evidence.md"
+    notes: "run-harness.sh fleet-g3-wave dry-run; no Track B G3 execute."
+    slug: "composition-integration"
+    tracking:
+      evidence_refs:
+        - "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/evidence/composition-integration-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/evidence/verification-evidence-manifest.v1.json"
+    notes: "NB-1-C..G remediation — enforced floor, client gates, honest manifest fleet-migrated-client."
+    slug: "verification-gate"
+    tracking:
+      evidence_refs:
+        - "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/evidence/verification-evidence-manifest.v1.json"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/evidence/request-evidence-envelope.v1.json"
+    slug: "sub-close-out-evidence-sync"
+    tracking:
+      evidence_refs:
+        - "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/evidence/request-evidence-envelope.v1.json"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/evidence/traceable-commit-evidence.md"
+    slug: "traceable-commit"
+    tracking:
+      evidence_refs:
+        - "working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/evidence/traceable-commit-evidence.md"
+      status: "completed"
+test_strategy_summary: "Plan §2.4 unit/composition in scripts/fleet-nb1-orchestration.test.mjs; NB-1 wave-1 clients closed out with G3 layer_c.ok and manifest rollup."
