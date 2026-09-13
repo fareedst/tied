@@ -3,7 +3,7 @@
 **Status:** Refined plan 2026-09-11 — Tracks A/C/B implementation complete; Step 7 combined hygiene close-out refined (execution deferred to `/plan-close-out`)  
 **Priority order:** Track A (P0) → Track C (P1) → Track B (P2)  
 **Parent context:** Layer B close-out [`layerb-sidecar-fix-close-out.md`](layerb-sidecar-fix-close-out.md); cohort grading (FILEHASH v1 grammar); Wave 8 adherence realignment  
-**Next product program (fleet):** [`pseudocode-constraint-v2-fleet-migration-grand-plan.md`](pseudocode-constraint-v2-fleet-migration-grand-plan.md) — full constraint-language v2 migration for all TIED clients (grand plan 2026-09-12; supersedes mass-migration non-goals **for that program only**)
+**Next product program (fleet):** [`pseudocode-constraint-v2-fleet-program.md`](pseudocode-constraint-v2-fleet-program.md) — full constraint-language v2 migration for all TIED clients (supersedes mass-migration non-goals **for that program only**)
 
 ---
 

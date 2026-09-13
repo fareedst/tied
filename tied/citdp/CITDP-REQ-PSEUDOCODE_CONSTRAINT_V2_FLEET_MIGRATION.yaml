@@ -62,13 +62,8 @@ CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION:
       - "REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
     tied_tokens_new: []
   linked_plans:
+    - "docs/pseudocode-constraint-v2-fleet-program.md"
     - "docs/pseudocode-constraint-v2-fleet-migration-grand-plan.md"
-    - "docs/pseudocode-constraint-v2-fleet-migration-phase-1-plan.md"
-    - "docs/pseudocode-constraint-v2-fleet-migration-phase-2-plan.md"
-    - "docs/pseudocode-constraint-v2-fleet-migration-phase-3-plan.md"
-    - "docs/pseudocode-constraint-v2-fleet-migration-phase-4-closeout-plan.md"
-    - "docs/pseudocode-constraint-v2-fleet-migration-phase-4-plan.md"
-    - "docs/pseudocode-constraint-v2-fleet-migration-phase-5-plan.md"
   phase_4_closeout_module:
     change_definition:
       current_behavior: "G3 machinery complete; CITDP ended at Phase 4 Fleet waves module; closeout evidence in handoff + seq 5-8 reports; Tracker phase_4_closeout partial."
@@ -86,11 +81,9 @@ CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION:
       unchanged_behavior: "Historical Fleet waves entries; v1 parser compatibility; program orchestrator advisory pre-RED (OD-P4-8); non-enrolled inventory rows unchanged; Phase 5 bootstrap deferred."
     depth_tier: "integrated"
     evidence_pointers:
-      - "working/fleet-constraint-v2/phase-4-closeout-handoff.v1.json"
-      - "working/fleet-constraint-v2/phase-4-exit-review.v1.json"
-      - "working/fleet-constraint-v2/seq-7-m2-ex-assertion-report.v1.json"
-      - "working/fleet-constraint-v2/seq-8-orchestrator-closeout-report.v1.json"
-      - "working/fleet-constraint-v2/seq-9-m4-p4-h-closeout-report.v1.json"
+      - "docs/pseudocode-constraint-v2-fleet-program.md"
+      - "working/fleet-constraint-v2/program-status.v1.yaml"
+      - "working/fleet-constraint-v2/client-inventory-manifest.v1.yaml"
     falsification_questions:
       - "Closeout claimed for ~22 manifest repos when only five OD-P4-3 enrolled?"
       - "Expired waiver allows wave or program close?"
@@ -132,10 +125,10 @@ CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION:
       unchanged_behavior: "Phase 4 evidence and closed orchestrator REQ; v1 parser compatibility until OD-P5-1 retirement; Track B inventory rows unchanged; enrolled fleet-migrated-client state preserved."
     depth_tier: "integrated"
     evidence_pointers:
-      - "docs/pseudocode-constraint-v2-fleet-migration-phase-5-plan.md"
+      - "docs/pseudocode-constraint-v2-fleet-program.md"
+      - "working/fleet-constraint-v2/program-status.v1.yaml"
       - "working/fleet-constraint-v2/gate-promotion-stages.v1.yaml"
-      - "working/fleet-constraint-v2/phase-4-closeout-handoff.v1.json"
-      - "working/fleet-constraint-v2/seq-9-m4-p4-h-closeout-report.v1.json"
+      - "scripts/run-fleet-g4-ci-checks.mjs"
     feat_envelope_policy: "Integrated profile mandatory for new FEAT-spawned REQs in stdd (OD-P5-4); checklist template for clients; no separate FEAT REQ at P5-C"
     g4_scope_pointer: "working/fleet-constraint-v2/gate-promotion-stages.v1.yaml stage G4; detailed CI mapping deferred to P5-D design note"
     gate_policy: "G4-aligned blocking on qualifying paths for stdd pre-RED where scoped in P5-E (OD-P5-3); CITDP pre_implementation integrated advisory at P5-C"
@@ -179,9 +172,9 @@ CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION:
         - "CITDP append phase_5_module"
         - "G4 bootstrap LEAP cross-track falsification"
       evidence_references:
-        - "docs/pseudocode-constraint-v2-fleet-migration-phase-5-plan.md"
+        - "docs/pseudocode-constraint-v2-fleet-program.md"
         - "working/fleet-constraint-v2/gate-promotion-stages.v1.yaml"
-        - "working/fleet-constraint-v2/phase-4-closeout-handoff.v1.json"
+        - "working/fleet-constraint-v2/program-status.v1.yaml"
       falsification_questions:
         - "Can dashboard show fleet-migrated-client for non-enrolled rows after Phase 5 refine?"
         - "Can G4 close with only header audit on new clients?"

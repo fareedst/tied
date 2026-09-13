@@ -323,17 +323,11 @@ Prefer in `essence_pseudocode` (not domain terms):
 | **dual track (Phase 5)** | **A** enrolled legacy (5 repos, fleet-migrated-client) → G4 governance; **B** non-enrolled tranche; **C** new-client bootstrap |
 | **phase_5_module** | CITDP append on [`CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml`](../citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml) run_id `fleet-migration-phase5-p5c-20260913` — G4 CI scope, continuous audit, FEAT envelope policy, dual-track falsification |
 | **SC-FLEET-P5-001..002** | Forward-looking program SC on closed orchestrator REQ (doc falsification + CITDP persist); bootstrap SC on **REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT** as **SC-GRAMMAR-V2-PHASE5-CONSTRAINT-ENFORCED-BOOTSTRAP** |
-| **FEAT-spawned REQ envelope** | Integrated request evidence envelope on feature REQs spawned after Phase 5 policy (OD-P5-4); canonical policy [`p5-g-feat-spawned-req-envelope-policy.v1.md`](../../working/fleet-constraint-v2/p5-g-feat-spawned-req-envelope-policy.v1.md); checklist template `templates/agent-req-checklist-feat-spawned-phase5.v1.yaml`; **not** fleet migration receipt |
+| **FEAT-spawned REQ envelope** | Integrated request evidence envelope on feature REQs (OD-P5-4); checklist template `templates/agent-req-checklist-feat-spawned-phase5.v1.yaml`; validator under `scripts/validate-feat-spawned-envelope-policy*`; **not** fleet migration receipt |
+| **fleet program doc** | Canonical methodology doc [`pseudocode-constraint-v2-fleet-program.md`](../../docs/pseudocode-constraint-v2-fleet-program.md) — policy, status, maintenance, NB-1; per-phase narrative plans removed from tree (2026-09-13) |
+| **program-status.v1.yaml** | Rolling counts and next batch gate under `working/fleet-constraint-v2/` — not client migration history |
 
-**VALIDATE (Touchpoint 3, refine pass 2026-09-13):** Terms align with grand plan Phase 5 section, [`pseudocode-constraint-v2-fleet-migration-phase-5-plan.md`](../../docs/pseudocode-constraint-v2-fleet-migration-phase-5-plan.md), and seq-9 WS-6 dual-track precondition. Re-VALIDATE at P5-H build exit.
-
-## Phase 5 fleet constraint v2 — VALIDATE (2026-09-13 P5-H)
-
-**Touchpoint:** sub-vocabulary-sync VALIDATE at Phase 5 program exit (P5-H).
-
-**Scope audited:** G4 gate stage, bootstrap enforcement, non-enrolled tranche (18 rows), dual track A/B/C, phase_5_module, SC-FLEET-P5-001..002, SC-GRAMMAR-V2-PHASE5-CONSTRAINT-ENFORCED-BOOTSTRAP, FEAT-spawned REQ envelope — against [`phase-5-exit-review.v1.json`](../../working/fleet-constraint-v2/phase-5-exit-review.v1.json), G4 CI reports, and [`v1-parser-quarantine-policy.v1.md`](../../working/fleet-constraint-v2/v1-parser-quarantine-policy.v1.md).
-
-**Result:** No material drift; Phase 5 program exit terms match working artifacts and TIED SC rows. Track B remains **not** fleet-migrated (EX-P5-07).
+**VALIDATE (2026-09-13 doc prune):** Fleet terms align with [`pseudocode-constraint-v2-fleet-program.md`](../../docs/pseudocode-constraint-v2-fleet-program.md) and TIED SC rows. Track B (**18** rows) not fleet-migrated. Client migration evidence belongs in **client repos**, not stdd `working/`.
 
 ---
 

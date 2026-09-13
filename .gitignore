@@ -167,9 +167,31 @@ working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/fleet-g1/receipts/
 working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/fleet-g1/reports/
 !working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/fleet-g1/summary.json
 # Fleet constraint v2 wave dry-run byte snapshots (regenerate per apply dry-run)
+working/fleet-constraint-v2/**/dry-run/
 working/fleet-constraint-v2/**/dry-run/snapshots/
 working/fleet-constraint-v2/**/dry-run/snapshots-constraint-ready/
 working/fleet-constraint-v2/scripts/*-payload.json
+# Fleet program — inventory/governance yaml only in git; not client wave history (regenerate locally)
+working/fleet-constraint-v2/**
+!working/fleet-constraint-v2/program-status.v1.yaml
+!working/fleet-constraint-v2/client-inventory-manifest.v1.yaml
+!working/fleet-constraint-v2/client-inventory-manifest.v1.template.yaml
+!working/fleet-constraint-v2/client-inventory-manifest.v1.schema.json
+!working/fleet-constraint-v2/client-inventory-manifest.pilots.v1.yaml
+!working/fleet-constraint-v2/fleet-dashboard.v1.yaml
+!working/fleet-constraint-v2/fleet-dashboard.v1.schema.json
+!working/fleet-constraint-v2/fleet-wave-partition.v1.yaml
+!working/fleet-constraint-v2/fleet-wave-partition.v1.schema.json
+!working/fleet-constraint-v2/gate-promotion-stages.v1.yaml
+!working/fleet-constraint-v2/migration-waiver-registry.v1.yaml
+!working/fleet-constraint-v2/migration-waiver-registry.v1.schema.json
+!working/fleet-constraint-v2/f11-fp-thresholds.v1.yaml
+!working/fleet-constraint-v2/constraint-migration-receipt.v1.schema.json
+!working/fleet-constraint-v2/constraint-migration-receipt.v1.example.json
+# Client migration stubs and orchestrator working folder (evidence belongs in client repos)
+working/REQ-PSEUDOCODE_MIGRATION_CLIENT_*/
+working/REQ-PSEUDOCODE_MIGRATION_PILOT_*/
+working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/
 # Fleet close-out MCP phase args/results (regenerate per build-plan slice)
 working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/p4-c-*.json
 working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/seq*-activation*.json

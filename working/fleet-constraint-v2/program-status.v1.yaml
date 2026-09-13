@@ -1,0 +1,16 @@
+schema_version: fleet-program-status.v1
+updated_at: "2026-09-13T17:20:09.000Z"
+last_g4_ci_ok: true
+last_g4_ci_at: "2026-09-13T17:20:09.656Z"
+doc_consolidation_commit: "7d19c60"
+canonical_doc: docs/pseudocode-constraint-v2-fleet-program.md
+gate_stage: G4
+enrolled_fleet_migrated_count: 5
+not_enrolled_phase_4_count: 18
+orchestrator_req_closed: true
+next_batch: NB-1
+next_batch_blocked_on: od-p5-2-acceptance.v1.json
+maintenance_command: node scripts/run-fleet-g4-ci-checks.mjs
+notes: >-
+  Rolling program snapshot only. Client migration evidence belongs in client repos.
+  Wave history and close-out seq reports are gitignored in this tree.
