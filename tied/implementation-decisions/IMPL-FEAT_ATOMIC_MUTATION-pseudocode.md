@@ -1,9 +1,12 @@
 # [IMPL-FEAT_ATOMIC_MUTATION] [ARCH-FEAT_REVISION_SAFE_MUTATION] [REQ-FEAT_REVISION_SAFE_MUTATION]
 
+
+Grammar-Version: v2
+
 ## Summary contract
 # [IMPL-FEAT_ATOMIC_MUTATION] [ARCH-FEAT_REVISION_SAFE_MUTATION] [REQ-FEAT_REVISION_SAFE_MUTATION] — How: apply compare-and-swap revision checks and atomic manifest publication.
 Contract:
-  INPUT: feature_identifier; expected_revision; candidate_manifest
+  INPUT: feature_identifier: string where length(feature_identifier) > 0; expected_revision: int where expected_revision >= 0; candidate_manifest
   PRE: candidate_manifest is validated and expected_revision is supplied for mutation
   OUTPUT: updated_manifest | mutation_error
   POST: success increments revision once and publishes a complete manifest; failure preserves the previous manifest
@@ -15,6 +18,15 @@ Contract:
 
 ## APPLY_ATOMIC_MUTATION
 procedure APPLY_ATOMIC_MUTATION(feature_identifier, expected_revision, candidate_manifest):
+  Contract:
+    INPUT: feature_identifier: string where length(feature_identifier) > 0; expected_revision: int where expected_revision >= 0; candidate_manifest
+    PRE: candidate_manifest is validated and expected_revision is supplied for mutation
+    OUTPUT: updated_manifest | mutation_error
+    POST: success increments revision once and publishes a complete manifest; failure preserves the previous manifest
+    FAILURE_MODES: FEATURE_NOT_FOUND; STALE_REVISION; VALIDATION_FAILED; SERIALIZATION_FAILED; PUBLISH_FAILED
+    EFFECTS: IO, State
+    TERMINATION: total
+
   # [IMPL-FEAT_ATOMIC_MUTATION] [ARCH-FEAT_REVISION_SAFE_MUTATION] [REQ-FEAT_REVISION_SAFE_MUTATION] — How: serialize mutation, compare revision, and publish with a same-directory atomic replacement.
   Acquire the feature mutation lock.
   Read the current manifest.

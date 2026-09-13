@@ -16,10 +16,13 @@ Contract:
 
 # [IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK] [ARCH-QUALITY_ASSURANCE_PROFILES] [REQ-QUALITY_ASSURANCE_EVIDENCE]
 # How: Authenticate timestamped raw input before JSON parsing and idempotent persistence.
+
+Grammar-Version: v2
+
 procedure ACCEPT_WEBHOOK(request):
   # [IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK] [ARCH-QUALITY_ASSURANCE_PROFILES] [REQ-QUALITY_ASSURANCE_EVIDENCE]
   Contract:
-    INPUT: bounded HTTP POST request with timestamp, signature, and idempotency headers
+    INPUT: idempotency_key: string where length(idempotency_key) > 0; bounded HTTP POST request with timestamp, signature, and idempotency headers
     OUTPUT: HTTP response
     PRE: request body collection and maximum size are configured
     POST: only authenticated, non-replayed JSON objects are persisted

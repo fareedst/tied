@@ -1,10 +1,13 @@
 # [IMPL-FEAT_AGENTSTREAM_ADAPTER] [ARCH-FEAT_AGENTSTREAM_ADAPTER] [REQ-FEAT_AGENTSTREAM_ADAPTER]
 # How: adapt a canonical schedule to agentstream while preserving ordered feature-spec batch compatibility.
 
+
+Grammar-Version: v2
+
 ## BUILD_TASK_TURNS
 # How: map ready task groups to governed turns without changing existing feature-spec turns.
 Contract:
-  INPUT: readiness projection; task entries; execution options
+  INPUT: task_entries: list where length(task_entries) >= 0; readiness_projection; execution_options
   PRE: readiness projection is deterministic and groups are safe
   OUTPUT: turns | adapter_error
   POST: each turn maps to one scheduled task group and carries stable task identity/evidence context
@@ -20,7 +23,7 @@ Contract:
 ## EXECUTE_SCHEDULE
 # How: make dry-run and live execution consume the same turns and record outcomes through the execution-state boundary.
 Contract:
-  INPUT: turns; execution mode; executor; execution-state store
+  INPUT: turns: list where length(turns) > 0; execution_mode; executor; execution_state_store
   PRE: turns are produced by BUILD_TASK_TURNS
   OUTPUT: dry_run_schedule | execution_report
   POST: dry-run emits the exact schedule live mode would submit; legacy feature-spec mode remains ordered

@@ -10,6 +10,9 @@
 # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
 # How: DATA — project indexes; inherited methodology tree; refreshable tied/methodology/vocab/*.md; durable client tied/vocab/*.md and handoffs; feature-orchestration onboarding and constitution artifacts; IMPL-*-pseudocode.md sidecars; managed .cursor/skills/ artifacts; source-date midnight metadata applied only to client copies; modification diagnostics; and the client .cursor/mcp.json when initialized, including opt-in metrics fields.
 
+
+Grammar-Version: v2
+
 procedure CALCULATE_SOURCE_DATE_MIDNIGHTS(sourcePath):
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
   # How: Read source mtimes and calculate local calendar-date midnights without modifying source files.
@@ -530,7 +533,7 @@ procedure BOOTSTRAP_TIED(projectRoot):
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
   # How: Ensure tied/ exists; copy template indexes, detail YAML, and implementation pseudo-code sidecars; copy guide/schema docs from tied/docs/ in the TIED source per copy_files.sh; create detail subdirs; copy AGENTS.md, .cursorrules to project root.
   Contract:
-    INPUT: projectRoot; template source; TIED source root; optional merge-vocab flag
+    INPUT: projectRoot: string where length(projectRoot) > 0; template source; TIED source root; optional merge-vocab flag
     OUTPUT: bootstrapped or refreshed client layout; process exit status
     DATA: project YAML; inherited methodology files; client vocabulary files; client MCP configuration
     CONTROL: preserve client project YAML, existing vocabulary, and existing .cursor/mcp.json byte-for-byte; overwrite inherited methodology and managed skill content; use cp -p or cp -pR and normalize only destination timestamps

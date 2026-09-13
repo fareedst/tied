@@ -3,10 +3,10 @@ CITDP-REQ-PSEUDOCODE_STATIC_ANALYSIS:
     current_behavior: "Layer B pseudocode_validate proves structural shape only; no CFG, call graph, bounded abstract analysis, or obligation characterization."
     desired_behavior: "Additive pseudocode_analyze MCP tool returns deterministic pseudocode-analysis-report.v1 with parser/IR, symbols, CFG, call graph, abstract facts, obligations, and block-level traceability projections under explicit budgets and proof boundaries; mandatory Layer C gate with gate_mode at gate-pseudocode-validation for changed IMPLs."
     follow_up_completed:
-      - change_id: "DOC-PSA-PSEUDOCODE-FULL-UPDATE"
-        note: "DOC-PSA-PSEUDOCODE-FULL-UPDATE: gate_mode semantics, Layer C checklist, grammar v1 docs, sub-pseudocode-static-analysis-pass wiring."
       - change_id: "DOC-PSA-LAYER-C-CLOSEOUT"
         note: "IMPL-TIED_FILES Layer C remediation; identity-bound inquiry doc-psa-lc-*; PSA backfill ok; envelope zero blocking gaps."
+      - change_id: "DOC-PSA-PSEUDOCODE-FULL-UPDATE"
+        note: "DOC-PSA-PSEUDOCODE-FULL-UPDATE: gate_mode semantics, Layer C checklist, grammar v1 docs, sub-pseudocode-static-analysis-pass wiring."
       - note: "Shared-parser migration deferred at PSA close-out; shipped under separate REQ."
         token: "REQ-PSEUDOCODE_PARSER_UNIFICATION"
     non_goals:

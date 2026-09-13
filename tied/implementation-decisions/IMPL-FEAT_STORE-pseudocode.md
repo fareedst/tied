@@ -1,9 +1,12 @@
 # [IMPL-FEAT_STORE] [ARCH-FEAT_STORE_PERSISTENCE] [REQ-FEAT_STORE_PERSISTENCE]
 
+
+Grammar-Version: v2
+
 ## Summary contract
 # [IMPL-FEAT_STORE] [ARCH-FEAT_STORE_PERSISTENCE] [REQ-FEAT_STORE_PERSISTENCE] — How: persist and load one feature manifest beneath the feature store root without copying canonical TIED records.
 Contract:
-  INPUT: feature_directory; manifest?
+  INPUT: feature_directory: string where length(feature_directory) > 0; manifest?
   PRE: feature_directory is relative to the configured tied/features root
   OUTPUT: manifest | storage_error
   POST: successful write publishes one complete feature.yaml; failed write leaves the prior complete file unchanged
@@ -17,7 +20,7 @@ Contract:
 procedure RESOLVE_FEATURE_PATH(feature_directory):
   # [IMPL-FEAT_STORE] [ARCH-FEAT_STORE_PERSISTENCE] [REQ-FEAT_STORE_PERSISTENCE] — How: constrain feature paths to the configured feature store root.
   Contract:
-    INPUT: feature_directory
+    INPUT: feature_directory: string where length(feature_directory) > 0
     PRE: feature_directory is non-empty and does not escape the store root
     OUTPUT: absolute_feature_path | INVALID_PATH
     POST: returned path is inside tied/features
@@ -30,6 +33,15 @@ procedure RESOLVE_FEATURE_PATH(feature_directory):
 
 ## READ_FEATURE_MANIFEST
 procedure READ_FEATURE_MANIFEST(feature_directory):
+  Contract:
+    INPUT: feature_directory: string where length(feature_directory) > 0
+    PRE: feature_directory is relative to the configured store root
+    OUTPUT: manifest | storage_error
+    POST: success returns parsed manifest from feature.yaml
+    FAILURE_MODES: INVALID_PATH; READ_FAILED
+    EFFECTS: IO — read only
+    TERMINATION: total
+
   # [IMPL-FEAT_STORE] [ARCH-FEAT_STORE_PERSISTENCE] [REQ-FEAT_STORE_PERSISTENCE] — How: read and parse the feature-local manifest as the orchestration source.
   Resolve feature path.
   IF path invalid: RETURN INVALID_PATH.
@@ -40,6 +52,16 @@ procedure READ_FEATURE_MANIFEST(feature_directory):
 
 ## PUBLISH_FEATURE_MANIFEST
 procedure PUBLISH_FEATURE_MANIFEST(feature_directory, manifest):
+  Contract:
+    INPUT: feature_directory: string where length(feature_directory) > 0; manifest
+    PRE: manifest is complete and serializable
+    OUTPUT: manifest | storage_error
+    POST: successful write publishes one complete feature.yaml; failed write leaves the prior complete file unchanged
+    FAILURE_MODES: INVALID_PATH; SERIALIZATION_FAILED; PUBLISH_FAILED
+    DATA_TRANSITION: complete_old→complete_new on replacement
+    EFFECTS: IO, State
+    TERMINATION: total
+
   # [IMPL-FEAT_STORE] [ARCH-FEAT_STORE_PERSISTENCE] [REQ-FEAT_STORE_PERSISTENCE] — How: publish a complete serialized manifest through the atomic mutation implementation.
   Resolve feature path.
   Serialize manifest deterministically.

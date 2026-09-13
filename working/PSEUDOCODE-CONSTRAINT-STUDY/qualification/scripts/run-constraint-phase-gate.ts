@@ -5,8 +5,8 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { analyzeSidecarEntry } from "./lib/analyzer-runner.ts";
-import { MCP_SERVER_ROOT } from "./lib/constants.ts";
 import { CONSTRAINT_PATHS } from "./lib/constraint-paths.ts";
+import { sidecarHasConstraintAnnotation } from "./lib/constraint-annotation-detect.ts";
 import { readManifest, type ManifestEntry } from "./lib/manifest.ts";
 import { extractReportSnapshot } from "./lib/snapshot.ts";
 
@@ -36,22 +36,6 @@ async function readPilotOk(entryId: string): Promise<boolean | null> {
   } catch {
     return null;
   }
-}
-
-async function sidecarHasConstraintAnnotation(entry: ManifestEntry): Promise<boolean> {
-  const parserPath = join(MCP_SERVER_ROOT, "dist/analysis/pseudocode-parser.js");
-  const constraintPath = join(MCP_SERVER_ROOT, "dist/analysis/pseudocode-constraint-language.js");
-  const [{ parsePseudocodeToIr }, { isConstraintAnnotatedProcedure }] = await Promise.all([
-    import(parserPath),
-    import(constraintPath),
-  ]);
-  const pseudocode = await readFile(entry.sidecar_path, "utf8");
-  const parsed = parsePseudocodeToIr(pseudocode);
-  if (!parsed.ok) return false;
-  const grammarVersion = parsed.program.grammar_version ?? "pseudocode-grammar.v1";
-  return parsed.program.procedures.some((proc: { name: string }) =>
-    isConstraintAnnotatedProcedure(proc, grammarVersion),
-  );
 }
 
 async function main(): Promise<void> {
@@ -109,7 +93,7 @@ async function main(): Promise<void> {
 
       if (pilotOk === true && phaseGate.report.ok === false) {
         summary.new_gate_failures_vs_pilot.push(entry.id);
-        const annotated = await sidecarHasConstraintAnnotation(entry);
+        const annotated = await sidecarHasConstraintAnnotation(entry.sidecar_path);
         if (annotated) {
           summary.new_gate_failures_annotated.push(entry.id);
         } else {

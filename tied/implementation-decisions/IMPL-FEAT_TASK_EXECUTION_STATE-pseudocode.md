@@ -1,10 +1,25 @@
 # [IMPL-FEAT_TASK_EXECUTION_STATE] [ARCH-FEAT_TASK_EXECUTION_STATE] [REQ-FEAT_TASK_EXECUTION_RECOVERY]
-# How: preserve stable task identity and append-only evidence across execution outcomes and resume.
+
+
+Grammar-Version: v2
+
+## Summary contract
+# [IMPL-FEAT_TASK_EXECUTION_STATE] [ARCH-FEAT_TASK_EXECUTION_STATE] [REQ-FEAT_TASK_EXECUTION_RECOVERY] — How: preserve stable task identity and append-only evidence across execution outcomes and resume.
+Contract:
+  INPUT: task_id: string where length(task_id) > 0; source_revision: int where source_revision >= 0; current_state; outcome; evidence
+  PRE: task_id exists and outcome is a known execution result
+  OUTPUT: next_execution_state | execution_error
+  POST: task identity is unchanged; evidence history appends once; failed tasks do not satisfy dependencies
+  FAILURE_MODES: UNKNOWN_TASK; INVALID_OUTCOME; STALE_INPUT; ILLEGAL_TRANSITION
+  DATA: execution status and evidence history
+  DATA_TRANSITION: attempt n→n+1; evidence history append
+  EFFECTS: State
+  TERMINATION: total
 
 ## APPLY_EXECUTION_OUTCOME
-# How: record explicit attempt outcomes without unlocking dependents after failure.
+# [IMPL-FEAT_TASK_EXECUTION_STATE] [ARCH-FEAT_TASK_EXECUTION_STATE] [REQ-FEAT_TASK_EXECUTION_RECOVERY] — How: record explicit attempt outcomes without unlocking dependents after failure.
 Contract:
-  INPUT: task_id; source_revision; current_state; outcome; evidence
+  INPUT: task_id: string where length(task_id) > 0; source_revision: int where source_revision >= 0; current_state; outcome; evidence
   PRE: task_id exists and outcome is a known execution result
   OUTPUT: next_execution_state | execution_error
   POST: task identity is unchanged; evidence history appends once; failed tasks do not satisfy dependencies
@@ -20,9 +35,9 @@ Contract:
 5. RETURN next state
 
 ## RESUME_EXECUTION
-# How: resume only a compatible task state and preserve all previous evidence.
+# [IMPL-FEAT_TASK_EXECUTION_STATE] [ARCH-FEAT_TASK_EXECUTION_STATE] [REQ-FEAT_TASK_EXECUTION_RECOVERY] — How: resume only a compatible task state and preserve all previous evidence.
 Contract:
-  INPUT: task_id; requested_source_revision; execution_state
+  INPUT: task_id: string where length(task_id) > 0; requested_source_revision: int where requested_source_revision >= 0; execution_state
   PRE: execution state exists
   OUTPUT: resumable state | resume_error
   POST: compatible resume preserves task_id and evidence history; stale input is explicit

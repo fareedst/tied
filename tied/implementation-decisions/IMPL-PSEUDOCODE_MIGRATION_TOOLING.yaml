@@ -1,0 +1,24 @@
+IMPL-PSEUDOCODE_MIGRATION_TOOLING:
+  description: "Implements Phase 3 pilot and Phase 4 fleet G3 migration harness scripts, dry-run/receipt/revert semantics, waiver registry refresh, and wave stop/go recording per IMPL sidecar."
+  essence_pseudocode_path: "implementation-decisions/IMPL-PSEUDOCODE_MIGRATION_TOOLING-pseudocode.md"
+  implementation_approach:
+    details:
+      - "run-fleet-g3-receipts.ts (P4-E)"
+      - "run-fleet-g3-wave.ts (P4-E)"
+      - "run-fleet-inventory-scan.ts (P4-E)"
+      - "run-pilot-external-scan.ts"
+      - "run-pilot-g2-receipts.ts"
+      - "run-pilot-g2-rollback-exercise.ts"
+      - "run-pilot-inventory-scan.ts"
+    summary: "TypeScript harness under working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/; pilot artifacts under working/fleet-constraint-v2/pilots/; fleet wave artifacts under working/fleet-constraint-v2/waves/ and governance instances at fleet-constraint-v2 root."
+  name: "Pseudocode migration tooling"
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+    code_annotations:
+      - "IMPL-PSEUDOCODE_MIGRATION_TOOLING"
+    requirements:
+      - "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
+      - "REQ-PSEUDOCODE_MIGRATION_TOOLING"
+    tests: []

@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fleet-dashboard.v1",
+  "title": "TIED fleet constraint v2 dashboard aggregate",
+  "description": "Read-only aggregate reconciling inventory, waves, receipts, waivers, and stop/go (SC-FLEET-P4-006 sketch).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "dashboard_id",
+    "generated_at",
+    "methodology_pin",
+    "sources",
+    "enrollment_summary",
+    "wave_summary",
+    "inventory_rollups"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "$schema": { "type": "string" },
+    "dashboard_id": { "type": "string", "minLength": 1 },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "methodology_pin": { "type": "string", "minLength": 1 },
+    "program_gate_policy": {
+      "type": "string",
+      "enum": ["advisory", "blocking"]
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "inventory_manifest_path",
+        "wave_partition_path",
+        "waiver_registry_path",
+        "wave_stop_go_path"
+      ],
+      "properties": {
+        "inventory_manifest_path": { "type": "string" },
+        "wave_partition_path": { "type": "string" },
+        "waiver_registry_path": { "type": "string" },
+        "wave_stop_go_path": { "type": "string" },
+        "f11_fp_thresholds_path": { "type": "string" }
+      }
+    },
+    "enrollment_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["enrolled_phase_4_count", "not_enrolled_phase_4_count"],
+      "properties": {
+        "enrolled_phase_4_count": { "type": "integer", "minimum": 0 },
+        "not_enrolled_phase_4_count": { "type": "integer", "minimum": 0 },
+        "enrolled_client_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "wave_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["total_waves", "complete", "pending", "halted"],
+      "properties": {
+        "total_waves": { "type": "integer", "minimum": 0 },
+        "complete": { "type": "integer", "minimum": 0 },
+        "in_progress": { "type": "integer", "minimum": 0 },
+        "pending": { "type": "integer", "minimum": 0 },
+        "halted": { "type": "integer", "minimum": 0 },
+        "last_stop_go_record_id": { "type": "string" }
+      }
+    },
+    "inventory_rollups": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "clients_by_aggregate_state": {
+          "type": "object",
+          "additionalProperties": { "type": "integer", "minimum": 0 }
+        },
+        "sidecars_by_state": {
+          "type": "object",
+          "additionalProperties": { "type": "integer", "minimum": 0 }
+        },
+        "active_waiver_count": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "notes": { "type": "string" }
+  }
+}

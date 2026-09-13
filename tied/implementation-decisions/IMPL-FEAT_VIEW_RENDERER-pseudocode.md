@@ -1,7 +1,12 @@
 # [IMPL-FEAT_VIEW_RENDERER] [ARCH-FEAT_VIEW_RENDERING] [REQ-FEAT_VIEW_GENERATION] [REQ-FEAT_VIEW_DETERMINISM]
-# Render deterministic human-readable Markdown views from a normalized source projection and compare their meaning.
+
+
+Grammar-Version: v2
+
+## Summary contract
+# [IMPL-FEAT_VIEW_RENDERER] [ARCH-FEAT_VIEW_RENDERING] [REQ-FEAT_VIEW_GENERATION] [REQ-FEAT_VIEW_DETERMINISM] — How: render deterministic human-readable Markdown views from a normalized source projection and compare their meaning.
 Contract:
-  INPUT: source_projection, view_kind, source_revision
+  INPUT: source_projection; view_kind: string where length(view_kind) > 0; source_revision
   PRE: view_kind is one of spec.md, plan.md, tasks.md, quickstart.md, data-model.md, or applicable contracts view
   OUTPUT: markdown_view | semantic_comparison
   POST: rendered view has a generated banner, source metadata, preserved links, proof-boundary labels, and stable section ordering
@@ -24,13 +29,14 @@ RENDER_GENERATED_VIEW(source_projection, view_kind, source_revision):
 
 # How this block guarantees unchanged-input no-diff behavior and meaningful comparison.
 SEMANTIC_COMPARE_VIEW(left_view, right_view):
-  INPUT: left_view, right_view
-  PRE: both views have parseable generated metadata
-  OUTPUT: { equal, differences }
-  POST: equal is true only when normalized meaning, source metadata, links, and proof-boundary labels match
-  FAILURE_MODES: InvalidGeneratedView
-  EFFECTS: pure
-  TERMINATION: total
+  Contract:
+    INPUT: left_view: string where length(left_view) >= 0; right_view: string where length(right_view) >= 0
+    PRE: both views have parseable generated metadata
+    OUTPUT: { equal, differences }
+    POST: equal is true only when normalized meaning, source metadata, links, and proof-boundary labels match
+    FAILURE_MODES: InvalidGeneratedView
+    EFFECTS: pure
+    TERMINATION: total
   1. Parse generated banners and source metadata.
   2. Normalize permitted formatting-only differences.
   3. Compare view kind, semantic sections, source revisions, token links, evidence links, and proof-boundary labels.

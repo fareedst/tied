@@ -33,8 +33,8 @@ CITDP-REQ-REQUEST_EVIDENCE_ENVELOPE:
       - "go test ./tools/agentstream/... (pass)"
       - "node --test dist/request-evidence-envelope/*.test.js (35/35 pass)"
       - "node working/REQ-REQUEST_EVIDENCE_ENVELOPE/run-close-out-gates.mjs"
-      - "npm run request-evidence-envelope-batch-collect -- --corpus ../working/evaluation/evaluation-corpus.v1.yaml --yaml-out ../working/evaluation/envelope-gap-report.v1.yaml"
       - "npm run request-evidence-envelope-backfill -- --project-root PATH --request-token REQ-TOKEN"
+      - "npm run request-evidence-envelope-batch-collect -- --corpus ../working/evaluation/evaluation-corpus.v1.yaml --yaml-out ../working/evaluation/envelope-gap-report.v1.yaml"
       - "npm test --prefix mcp-server"
     proof_boundaries:
       - "Backfill writes envelope and optional not-applicable receipt only; inner artifacts unchanged"
@@ -49,16 +49,16 @@ CITDP-REQ-REQUEST_EVIDENCE_ENVELOPE:
         - "request_evidence_envelope_batch_collect (MCP + CLI)"
     slice5:
       backfill_tool: "request_evidence_envelope_backfill (MCP + CLI)"
+      operator_doc: "tied/docs/request-evidence-envelope.md"
       pilot_clients:
-        - client_alias: "1788547701"
-          request_token: "REQ-BT_BATTERY_DISPLAY"
         - client_alias: "1787603099"
           request_token: "REQ-LISTENING_PORT_REPORT"
-      operator_doc: "tied/docs/request-evidence-envelope.md"
+        - client_alias: "1788547701"
+          request_token: "REQ-BT_BATTERY_DISPLAY"
   impact_analysis:
     impl_inventory:
-      - IMPL-REQUEST_EVIDENCE_ENVELOPE
-      - IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH
+      - "IMPL-REQUEST_EVIDENCE_ENVELOPE"
+      - "IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH"
     modules_or_boundaries: "mcp-server request-evidence-envelope package; tied-stack; quality-assurance vocabulary"
     tied_tokens_affected:
       - "REQ-EVIDENCE_CHAIN_REPORT"
@@ -121,7 +121,7 @@ CITDP-REQ-REQUEST_EVIDENCE_ENVELOPE:
     depth_tier: "integrated"
     gate_policy: "advisory"
     quality_profiles:
-      - baseline-functional
+      - "baseline-functional"
     risks:
       - id: "RISK-001"
         mitigation: "Additive hooks only; Slice 1 read-only"

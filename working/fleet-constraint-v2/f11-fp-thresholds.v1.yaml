@@ -1,0 +1,40 @@
+baseline_anchor_commit: "48d1fbbbd1c26dfdb3ac6d74b4cb36c60372dcd7"
+evidence:
+  f11_baseline_study: "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/metrics/annotation-overhead.yaml"
+  f11_metrics: "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/metrics/f11-fleet-20260912.yaml"
+  fleet_g1_summary: "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/fleet-g1/summary.json"
+  fp_metrics: "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/metrics/fp-fleet-20260912.json"
+  rollback_exercise: "working/fleet-constraint-v2/rollback-exercise-G1.v1.json"
+f11_od_p2_3:
+  all_preservation_reviews_pass: true
+  measured:
+    measured_at: "2026-09-12T15:07:53.593Z"
+    median_annotation_lines: 2.5
+    median_authoring_decisions: 2.5
+    median_unknown_delta: 0
+    preservation_reviews_pass: true
+  median_annotation_lines_max: 8
+  median_authoring_decisions_max: 15
+  median_unknown_delta_max: 0
+  pass: true
+fp_od_p2_4:
+  labeled_fixture_fp_rate_max: 0.05
+  measured:
+    fixture_fp_pass: true
+    fixture_fp_rate: 0
+    measured_at: "2026-09-12T15:07:53.688Z"
+    tier_a_new_gate_failures: 0
+  pass: true
+  tier_a_new_gate_mode_failures_max: 0
+measured_at: "2026-09-12T15:07:57.033Z"
+methodology_pin: "48d1fbb+"
+od_refs:
+  - "OD-P2-3"
+  - "OD-P2-4"
+  - "OD-P2-6"
+phase_2_exit_thresholds_met: true
+rollback_od_p2_6:
+  exercise_required: true
+  measured_at: "2026-09-12T15:07:56.965Z"
+  pass: true
+schema_version: "f11-fp-thresholds.v1"

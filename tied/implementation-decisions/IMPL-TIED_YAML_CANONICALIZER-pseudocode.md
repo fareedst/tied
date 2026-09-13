@@ -1,11 +1,14 @@
 # [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
 # Summary: Canonicalize typed YAML through one deterministic profile, preserve opaque text, and expose format metadata across writers.
 
+
+Grammar-Version: v2
+
 ## Summary contract
 # [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
 # How: Define one typed serialization profile shared by MCP writers and compatibility frontends.
 Contract:
-  INPUT: parsed YAML value or one YAML file path; optional compatibility flags
+  INPUT: parsed YAML value or one YAML file path: string where length(path) > 0; optional compatibility flags
   OUTPUT: canonical typed YAML text or atomic write result with yaml_format metadata
   DATA: maps, scalar values, lists, ordered-list key path, opaque block-scalar bodies, pseudo-code sidecar text
   CONTROL: profile id tied-yaml-canonical-v1; case-insensitive-primary locale-independent lexical ordering with original-value tie-break; one file write at a time
@@ -20,6 +23,13 @@ Contract:
 # [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
 # How: Recursively sort maps and eligible string lists with case-insensitive-primary ordering and original-value lexical tie-breaking while preserving scalar types, ordered-list order, object-list order, mixed-list order, and opaque text structure.
 procedure CANONICALIZE_YAML_VALUE(value, path):
+  Contract:
+    INPUT: TBD
+    PRE: TBD
+    POST:
+      - success => TBD
+    EFFECTS: pure
+
   PRE: value is a supported typed YAML value
   POST: map keys and eligible string lists use case-insensitive-primary locale-independent lexical order with original-value tie-breaking; excluded structures retain order and values
   EFFECTS: pure
@@ -46,6 +56,13 @@ procedure CANONICALIZE_YAML_VALUE(value, path):
 # [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
 # How: Classify each list item as tier 0 (strings, arrays, keyless maps) or tier 1 (maps with resolved registry or heuristic sort field).
 procedure RESOLVE_LIST_ITEM_TIER(item, parent_key):
+  Contract:
+    INPUT: TBD
+    PRE: TBD
+    POST:
+      - success => TBD
+    EFFECTS: pure
+
   PRE: item is a canonicalized list element
   POST: returns tier 0 or 1 and a canonical lexical sort key
   EFFECTS: pure
@@ -66,6 +83,13 @@ procedure RESOLVE_LIST_ITEM_TIER(item, parent_key):
 # [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
 # How: Sort tier 0 items before tier 1 items; within each tier sort by canonical lexical sort key with fingerprint tie-break.
 procedure SORT_HETEROGENEOUS_LIST(list_items, parent_key):
+  Contract:
+    INPUT: TBD
+    PRE: TBD
+    POST:
+      - success => TBD
+    EFFECTS: pure
+
   PRE: list_items is array; parent_key is not an ordered-list key
   POST: tier 0 items precede tier 1 items; each tier sorted by COMPARE_CANONICAL_TEXT on sort key
   EFFECTS: pure
@@ -80,6 +104,13 @@ procedure SORT_HETEROGENEOUS_LIST(list_items, parent_key):
 # [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
 # How: Return registry entry with sort_field when parent key matches record-list registry and every item is a mapping with the configured stable field.
 procedure RECOGNIZE_RECORD_LIST(parent_key, list_items):
+  Contract:
+    INPUT: TBD
+    PRE: TBD
+    POST:
+      - success => TBD
+    EFFECTS: pure
+
   PRE: parent_key is string; list_items is array
   POST: returns registry entry with sort_field or nil when unrecognized or fail-safe
   EFFECTS: pure
@@ -103,6 +134,13 @@ procedure RECOGNIZE_RECORD_LIST(parent_key, list_items):
 # [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
 # How: Sort complete mapping records by COMPARE_CANONICAL_TEXT on sort field; tie-break with original-value then canonical record fingerprint.
 procedure SORT_RECORD_LIST(list_items, recognition):
+  Contract:
+    INPUT: TBD
+    PRE: TBD
+    POST:
+      - success => TBD
+    EFFECTS: pure
+
   PRE: recognition from RECOGNIZE_RECORD_LIST; all items mappings with sort field
   POST: records sorted by COMPARE_CANONICAL_TEXT on sort field; ties broken original-value then canonical record fingerprint
   EFFECTS: pure
@@ -118,6 +156,13 @@ procedure SORT_RECORD_LIST(list_items, recognition):
 # [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
 # How: Compare Unicode-lowercased values first, then original values as a deterministic case-sensitive tie-breaker.
 procedure COMPARE_CANONICAL_TEXT(left, right):
+  Contract:
+    INPUT: TBD
+    PRE: TBD
+    POST:
+      - success => TBD
+    EFFECTS: pure
+
   PRE: left and right are strings
   POST: returns a locale-independent ordering result
   EFFECTS: pure
@@ -139,6 +184,13 @@ procedure COMPARE_CANONICAL_TEXT(left, right):
 # [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
 # How: Protect workflow order lists for exact key, prefix, suffix, and combined ordered-key naming patterns.
 procedure IS_ORDERED_LIST_KEY(key):
+  Contract:
+    INPUT: TBD
+    PRE: TBD
+    POST:
+      - success => TBD
+    EFFECTS: pure
+
   PRE: key is a string
   POST: returns true for order, order_*, *_order, and *_order_*; otherwise false
   EFFECTS: pure
@@ -150,6 +202,13 @@ procedure IS_ORDERED_LIST_KEY(key):
 # [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
 # How: Exclude block-scalar bodies and IMPL pseudo-code sidecars from recursive semantic normalization; preserve their internal text structure.
 procedure PRESERVE_OPAQUE_TEXT(text, artifact_kind):
+  Contract:
+    INPUT: TBD
+    PRE: TBD
+    POST:
+      - success => TBD
+    EFFECTS: pure
+
   PRE: artifact_kind identifies a block-scalar body or IMPL pseudo-code sidecar
   POST: text is returned unchanged by recursive canonicalization and internal line ordering is preserved
   EFFECTS: pure
@@ -163,6 +222,13 @@ procedure PRESERVE_OPAQUE_TEXT(text, artifact_kind):
 # [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
 # How: Parse, canonicalize, serialize, and atomically replace one YAML file only after every operation succeeds.
 procedure WRITE_CANONICAL_YAML_ATOMIC(path, input):
+  Contract:
+    INPUT: TBD
+    PRE: TBD
+    POST:
+      - success => TBD
+    EFFECTS: pure
+
   PRE: path is a writable project YAML target; input is valid or serializable typed YAML
   POST: path contains canonical output and original bytes remain intact after any failure
   EFFECTS: IO, Exn
@@ -186,6 +252,13 @@ procedure WRITE_CANONICAL_YAML_ATOMIC(path, input):
 # [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
 # How: Return stable metadata describing the canonical profile and its preservation boundaries.
 procedure REPORT_YAML_FORMAT():
+  Contract:
+    INPUT: TBD
+    PRE: TBD
+    POST:
+      - success => TBD
+    EFFECTS: pure
+
   PRE: profile constants are available
   POST: result has stable keys and values for clients and tests
   EFFECTS: pure
@@ -205,6 +278,13 @@ procedure REPORT_YAML_FORMAT():
 # [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
 # How: Route one YAML file through the shared atomic writer and return profile metadata; pseudo-code sidecars remain opaque text files.
 procedure CANONICALIZE_YAML_FILE(path):
+  Contract:
+    INPUT: TBD
+    PRE: TBD
+    POST:
+      - success => TBD
+    EFFECTS: pure
+
   PRE: path is a project YAML file and not an IMPL pseudo-code sidecar
   POST: successful write is canonical and reports yaml_format; failure preserves original bytes
   EFFECTS: IO, Exn
@@ -218,6 +298,13 @@ procedure CANONICALIZE_YAML_FILE(path):
 # [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
 # How: Process each compatibility path independently, preserving flags while delegating canonical semantics to the shared profile.
 procedure LINT_YAML_PATHS(paths, compatibility_flags):
+  Contract:
+    INPUT: TBD
+    PRE: TBD
+    POST:
+      - success => TBD
+    EFFECTS: pure
+
   PRE: paths is finite; each path is independently addressable
   POST: every path has an independent result; zero status means all canonical writes succeeded
   EFFECTS: IO, Exn
@@ -232,6 +319,13 @@ procedure LINT_YAML_PATHS(paths, compatibility_flags):
 # [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION] [REQ-MODULE_VALIDATION]
 # How: Make index/detail/token/batch/CITDP/feedback/verification/rename writers return the same format metadata after shared canonical writes.
 procedure MCP_WRITER_FORMAT_METADATA(write_operation):
+  Contract:
+    INPUT: TBD
+    PRE: TBD
+    POST:
+      - success => TBD
+    EFFECTS: pure
+
   # [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION] [REQ-MODULE_VALIDATION]
   # How: Return one shared format contract from every successful MCP writer.
   PRE: write_operation delegates its YAML mutation to WRITE_CANONICAL_YAML_ATOMIC

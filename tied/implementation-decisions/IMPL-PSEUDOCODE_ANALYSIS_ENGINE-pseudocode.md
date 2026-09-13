@@ -3,8 +3,10 @@
 
 # [IMPL-PSEUDOCODE_ANALYSIS_ENGINE] [ARCH-PSEUDOCODE_ANALYSIS_PIPELINE] [REQ-PSEUDOCODE_STATIC_ANALYSIS]
 # How: Define analysis controls, budgets, and proof boundary separately from Layer B structural validation.
+# [IMPL-PSEUDOCODE_ANALYSIS_ENGINE] [ARCH-PSEUDOCODE_ANALYSIS_PIPELINE] [REQ-PSEUDOCODE_STATIC_ANALYSIS]
+# How: File-level contract INPUT where for constraint-enforced-v2 inventory floor.
 Contract:
-  INPUT: pseudo-code text or path-safe sidecar reference, target IMPL token, optional known tokens, analysis pass selection, budget overrides
+  INPUT: target_impl_token: string where length(target_impl_token) > 0; optional inline pseudo-code or path-safe sidecar reference; optional known tokens; analysis pass selection; budget overrides
   PRE: exactly one of inline pseudo-code or essence_pseudocode_path is provided; path resolves under TIED_BASE_PATH when used
   OUTPUT: pseudocode-analysis-report.v1 with parse, symbol, CFG, call graph, abstract, obligation, and traceability sections
   POST: report includes schema_version, grammar_version, analyzer_version, proof_boundary, input_identity, budgets_applied, diagnostics in stable order
@@ -16,6 +18,9 @@ Contract:
 
 # [IMPL-PSEUDOCODE_ANALYSIS_ENGINE] [ARCH-PSEUDOCODE_ANALYSIS_PIPELINE] [REQ-PSEUDOCODE_STATIC_ANALYSIS]
 # How: Resolve and validate input without reading or writing project YAML beyond the requested sidecar body.
+
+Grammar-Version: v2
+
 procedure RESOLVE_ANALYSIS_INPUT(input):
   # [IMPL-PSEUDOCODE_ANALYSIS_ENGINE] [ARCH-PSEUDOCODE_ANALYSIS_PIPELINE] [REQ-PSEUDOCODE_STATIC_ANALYSIS]
   Contract:

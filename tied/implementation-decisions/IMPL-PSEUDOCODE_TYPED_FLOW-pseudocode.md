@@ -1,5 +1,8 @@
 # [IMPL-PSEUDOCODE_TYPED_FLOW] [ARCH-PSEUDOCODE_TYPED_FLOW_PASS] [REQ-PSEUDOCODE_TYPED_FLOW] — Bounded optional typed-flow pass composing after abstract analysis; Tier-2 types are evidence on behavioral pseudocode.
 
+
+Grammar-Version: v2
+
 ## Typed-flow controls and report boundary
 
 - [IMPL-PSEUDOCODE_TYPED_FLOW] [ARCH-PSEUDOCODE_TYPED_FLOW_PASS] [REQ-PSEUDOCODE_TYPED_FLOW] How: Define opt-in typed_flow flag, proof boundary extension, and namespaced report section without bumping pseudocode-analysis-report.v1 schema_version.
@@ -17,7 +20,7 @@
 procedure TYPED_FLOW_CONTROLS:
   # [IMPL-PSEUDOCODE_TYPED_FLOW] [ARCH-PSEUDOCODE_TYPED_FLOW_PASS] [REQ-PSEUDOCODE_TYPED_FLOW] How: Skip typed pass entirely unless caller sets typed_flow true.
   Contract:
-    INPUT: typed_flow flag, program IR, cfg section, abstract section
+    INPUT: program_ir with procedures: list where length(program_ir.procedures) >= 0; typed_flow flag; cfg section; abstract section
     OUTPUT: run_typed boolean
     PRE: parse succeeded
     POST: run_typed false when typed_flow false or absent

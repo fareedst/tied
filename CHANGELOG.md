@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Fleet constraint v2 migration — Phase 4 closeout seq 8 orchestrator machine close-out ([REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION])** —
+  After M2 (seq 7), verification and close_out checklist gates **allowed: true** with integrated advisory inquiry;
+  `tied_verify` set REQ **Implemented** and **IMPL-PSEUDOCODE_MIGRATION_TOOLING** **Active**; unified
+  `run-close-out-gates.mjs` with envelope blocking gaps **0**. Evidence:
+  `working/fleet-constraint-v2/seq-8-orchestrator-closeout-report.v1.json`. M4 / Phase 5 entry remains seq 9.
+
 - **Fleet constraint v2 migration — Phase 1 close-out ([REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION])** —
   Grand and Phase 1 program plans; frozen `working/fleet-constraint-v2/` inventory and waiver schemas;
   **REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION**, **ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE**,

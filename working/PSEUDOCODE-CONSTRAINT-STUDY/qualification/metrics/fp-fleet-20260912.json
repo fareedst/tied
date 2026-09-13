@@ -1,0 +1,138 @@
+{
+  "run_at": "2026-09-12T15:07:53.688Z",
+  "mode": "fleet-g1-fp-measurement",
+  "methodology_pin": "48d1fbb+",
+  "baseline_anchor_commit": "48d1fbbbd1c26dfdb3ac6d74b4cb36c60372dcd7",
+  "fixture_fp": {
+    "denominator": 23,
+    "false_positives": [],
+    "fp_rate": 0,
+    "threshold_max": 0.05,
+    "pass": true,
+    "calculation": "fp_rate = count(positive_control fixtures with gating constraint diagnostic) / count(positive_control fixtures); per deliverable 04 and pseudocode-constraint-corpus.test.ts FP cap",
+    "fixture_dir": "mcp-server/src/analysis/fixtures/constraint-language",
+    "results": [
+      {
+        "id": "cl-01",
+        "file": "corpus-cl-01-v2-header-refinement.pseudocode.md",
+        "false_positive_gating": false
+      },
+      {
+        "id": "cl-02",
+        "file": "corpus-cl-02-v2-summary-decl.pseudocode.md",
+        "false_positive_gating": false
+      },
+      {
+        "id": "cl-03",
+        "file": "corpus-cl-03-v2-alias-policy.pseudocode.md",
+        "false_positive_gating": false
+      },
+      {
+        "id": "cl-04",
+        "file": "corpus-cl-04-v2-immutable-data.pseudocode.md",
+        "false_positive_gating": false
+      },
+      {
+        "id": "cl-05",
+        "file": "corpus-cl-05-v1-compat-no-header.pseudocode.md",
+        "false_positive_gating": false
+      },
+      {
+        "id": "cl-06",
+        "file": "corpus-cl-06-v2-mixed-v1-constructs.pseudocode.md",
+        "false_positive_gating": false
+      },
+      {
+        "id": "cl-07",
+        "file": "corpus-cl-07-refinement-quantifier-pos.pseudocode.md",
+        "false_positive_gating": false
+      },
+      {
+        "id": "cl-09",
+        "file": "corpus-cl-09-refinement-bounds.pseudocode.md",
+        "false_positive_gating": false
+      },
+      {
+        "id": "cl-10",
+        "file": "corpus-cl-10-field-refinement.pseudocode.md",
+        "false_positive_gating": false
+      },
+      {
+        "id": "cl-11",
+        "file": "corpus-cl-11-pre-post-entailment.pseudocode.md",
+        "false_positive_gating": false
+      },
+      {
+        "id": "cl-13",
+        "file": "corpus-cl-13-interproc-summary-pos.pseudocode.md",
+        "false_positive_gating": false
+      },
+      {
+        "id": "cl-18",
+        "file": "corpus-cl-18-mutation-pass.pseudocode.md",
+        "false_positive_gating": false
+      },
+      {
+        "id": "cl-24",
+        "file": "corpus-cl-24-positive-refinement-chain-pass.pseudocode.md",
+        "false_positive_gating": false
+      },
+      {
+        "id": "cl-25",
+        "file": "corpus-cl-25-positive-bounds-window-pass.pseudocode.md",
+        "false_positive_gating": false
+      },
+      {
+        "id": "cl-26",
+        "file": "corpus-cl-26-positive-interproc-chain-pass.pseudocode.md",
+        "false_positive_gating": false
+      },
+      {
+        "id": "cl-27",
+        "file": "corpus-cl-27-positive-immutable-read-pass.pseudocode.md",
+        "false_positive_gating": false
+      },
+      {
+        "id": "cl-28",
+        "file": "corpus-cl-28-positive-alias-compliant-pass.pseudocode.md",
+        "false_positive_gating": false
+      },
+      {
+        "id": "cl-35",
+        "file": "corpus-cl-35-positive-list-length-pass.pseudocode.md",
+        "false_positive_gating": false
+      },
+      {
+        "id": "cl-36",
+        "file": "corpus-cl-36-positive-record-field-pass.pseudocode.md",
+        "false_positive_gating": false
+      },
+      {
+        "id": "cl-37",
+        "file": "corpus-cl-37-positive-pre-entailment-pass.pseudocode.md",
+        "false_positive_gating": false
+      },
+      {
+        "id": "cl-38",
+        "file": "corpus-cl-38-positive-guarded-null-pass.pseudocode.md",
+        "false_positive_gating": false
+      },
+      {
+        "id": "cl-39",
+        "file": "corpus-cl-39-positive-summary-call-pass.pseudocode.md",
+        "false_positive_gating": false
+      },
+      {
+        "id": "cl-40",
+        "file": "corpus-cl-40-positive-v1-no-constraint-diagnostics.pseudocode.md",
+        "false_positive_gating": false
+      }
+    ]
+  },
+  "tier_a_gate_mode": {
+    "evidence_path": "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/fleet-g1/summary.json",
+    "new_gate_failures_vs_baseline": [],
+    "pass": true
+  },
+  "overall_pass": true
+}

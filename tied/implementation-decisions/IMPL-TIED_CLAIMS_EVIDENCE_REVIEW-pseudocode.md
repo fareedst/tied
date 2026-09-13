@@ -1,5 +1,8 @@
 # [IMPL-TIED_CLAIMS_EVIDENCE_REVIEW] [ARCH-TIED_CLAIMS_EVIDENCE_REVIEW] [REQ-TIED_CLAIMS_EVIDENCE_REVIEW] — Read-only frozen claim surface evaluation, static evidence collection, disposition classification, append-only artifacts, and human-gated promotion.
 
+
+Grammar-Version: v2
+
 ## GENERATE_CLAIM_SURFACE_FROM_TIED
 
 - [IMPL-TIED_CLAIMS_EVIDENCE_REVIEW] [ARCH-TIED_CLAIMS_EVIDENCE_REVIEW] [REQ-TIED_CLAIMS_EVIDENCE_REVIEW] Emit claim-surface.v1 and companion stubs from TIED indexes and detail files without mutating audited project YAML.
@@ -25,6 +28,21 @@
   - 7. CALL EMIT_EVIDENCE_STUBS
   - 8. Write claim-surface.v1.json, evidence-stubs.json, generator-provenance.json, and expected-dispositions.yaml when output_dir is set
 - How (sub-block, same token set as above): Generator never writes audited tied/requirements, tied/architecture-decisions, or tied/implementation-decisions paths.
+
+procedure EMIT_EVIDENCE_STUBS:
+  # [IMPL-TIED_CLAIMS_EVIDENCE_REVIEW] [ARCH-TIED_CLAIMS_EVIDENCE_REVIEW] [REQ-TIED_CLAIMS_EVIDENCE_REVIEW] [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION] — Attach bounded static evidence references and proof boundaries to each claim on the frozen surface.
+  Contract:
+    INPUT: claims: list of Claim where length(claims) > 0, project_root context
+    PRE: claim_surface schemaVersion is claim-surface.v1
+    OUTPUT: evidence stub rows keyed by claimId
+    POST: success => every stub names proofBoundary static_analysis or out_of_scope_static_slice
+    FAILURE_MODES: none fatal; missing detail paths yield unsettled-oriented stubs
+    DATA_TRANSITION: none on audited project YAML
+    EFFECTS: pure
+    TERMINATION: total
+  FOR each claim IN claims: default proofBoundary to static_analysis
+  IF claim.requiresRuntimeProof THEN set proofBoundary out_of_scope_static_slice
+  RETURN stub array aligned to claim ids
 
 ## EMIT_EVIDENCE_STUBS
 

@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "slice": "Seq-4A-WS-1-S1.4-S1.5-batch-1",
+  "req_token": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+  "wave_id": "W-stdd-2",
+  "generated_at": "2026-09-13T03:28:00.000Z",
+  "methodology_pin": "48d1fbb+",
+  "inventory_stdd_after": {
+    "constraint-ready-v2": 83,
+    "constraint-enforced-v2": 10,
+    "aggregate_migration_state": "constraint-enforced-v2"
+  },
+  "classifier": {
+    "changed": true,
+    "files": [
+      "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/lib/constraint-ready-classify.ts",
+      "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/lib/fleet-inventory-merge.ts",
+      "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/lib/fleet-inventory-merge.test.ts"
+    ],
+    "note": "classifySidecarText returns constraint-enforced-v2 when Contract INPUT/OUTPUT/DATA includes a where refinement clause"
+  },
+  "remaining_seq_4a_sidecars": 83,
+  "next_batch": {
+    "wave_ids": ["W-stdd-3", "W-stdd-4", "W-stdd-5", "W-stdd-6", "W-stdd-7", "W-stdd-8", "W-stdd-9", "W-stdd-10"],
+    "suggested_command": "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/run-harness.sh fleet-g3-refresh-stdd (after sidecar LEAP on next wave list, e.g. working/fleet-constraint-v2/waves/stdd/wave-3-sidecars.yaml batch)"
+  },
+  "impl_dispositions": [
+    {
+      "impl_token": "IMPL-PSEUDOCODE_MIGRATION_TOOLING",
+      "sidecar_path": "tied/implementation-decisions/IMPL-PSEUDOCODE_MIGRATION_TOOLING-pseudocode.md",
+      "annotation_locus": "BUILD_PILOT_INVENTORY INPUT wave_sidecar_list list refinement",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": { "layer_c_ok": true, "constraint_flow": true, "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-PSEUDOCODE_MIGRATION_TOOLING.receipt.json" }
+    },
+    {
+      "impl_token": "IMPL-MCP_LEAP_PROPOSAL_QUEUE",
+      "sidecar_path": "tied/implementation-decisions/IMPL-MCP_LEAP_PROPOSAL_QUEUE-pseudocode.md",
+      "annotation_locus": "LOAD_QUEUE INPUT projectRoot string where length",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": { "layer_c_ok": true, "constraint_flow": true, "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-MCP_LEAP_PROPOSAL_QUEUE.receipt.json" }
+    },
+    {
+      "impl_token": "IMPL-MCP_FEEDBACK_TOOLS",
+      "sidecar_path": "tied/implementation-decisions/IMPL-MCP_FEEDBACK_TOOLS-pseudocode.md",
+      "annotation_locus": "EXPORT_MARKDOWN INPUT entries list refinement",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": { "layer_c_ok": true, "constraint_flow": true, "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-MCP_FEEDBACK_TOOLS.receipt.json" }
+    },
+    {
+      "impl_token": "IMPL-MCP_USAGE_METRICS",
+      "sidecar_path": "tied/implementation-decisions/IMPL-MCP_USAGE_METRICS-pseudocode.md",
+      "annotation_locus": "procedure ANALYZE_TIED_MCP_METRICS metric_paths list refinement",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": { "layer_c_ok": true, "constraint_flow": true, "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-MCP_USAGE_METRICS.receipt.json" }
+    },
+    {
+      "impl_token": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+      "sidecar_path": "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md",
+      "annotation_locus": "VALIDATE_TRACKER INPUT phase string where length",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": { "layer_c_ok": true, "constraint_flow": true, "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.receipt.json" }
+    },
+    {
+      "impl_token": "IMPL-TIED_PROJECT_IDENTITY",
+      "sidecar_path": "tied/implementation-decisions/IMPL-TIED_PROJECT_IDENTITY-pseudocode.md",
+      "annotation_locus": "IS_VALID_CONFIGURED_ID INPUT candidate string where length",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": { "layer_c_ok": true, "constraint_flow": true, "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-TIED_PROJECT_IDENTITY.receipt.json" }
+    },
+    {
+      "impl_token": "IMPL-TIED_ADVERSARIAL_INQUIRY",
+      "sidecar_path": "tied/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY-pseudocode.md",
+      "annotation_locus": "BUILD_OBLIGATION_GRAPH Contract INPUT adversarial_cases list refinement",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": { "layer_c_ok": true, "constraint_flow": true, "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-TIED_ADVERSARIAL_INQUIRY.receipt.json" }
+    },
+    {
+      "impl_token": "IMPL-TIED_CLAIMS_EVIDENCE_REVIEW",
+      "sidecar_path": "tied/implementation-decisions/IMPL-TIED_CLAIMS_EVIDENCE_REVIEW-pseudocode.md",
+      "annotation_locus": "procedure EMIT_EVIDENCE_STUBS claims list refinement",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": { "layer_c_ok": true, "constraint_flow": true, "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-TIED_CLAIMS_EVIDENCE_REVIEW.receipt.json" },
+      "notes": "Initial GENERATE stub caused UNRESOLVED_CALL; replaced with EMIT_EVIDENCE_STUBS procedure anchor"
+    },
+    {
+      "impl_token": "IMPL-ASYNC_PSEUDOCODE_GRAMMAR",
+      "sidecar_path": "tied/implementation-decisions/IMPL-ASYNC_PSEUDOCODE_GRAMMAR-pseudocode.md",
+      "annotation_locus": "DOCUMENT_ASYNC_ROWS INPUT doc_root string where length",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": { "layer_c_ok": true, "constraint_flow": true, "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-ASYNC_PSEUDOCODE_GRAMMAR.receipt.json" }
+    },
+    {
+      "impl_token": "IMPL-TIED_FEEDBACK_PROMOTION",
+      "sidecar_path": "tied/implementation-decisions/IMPL-TIED_FEEDBACK_PROMOTION-pseudocode.md",
+      "annotation_locus": "procedure NORMALIZE_OPERATIONAL_SOURCE source_events list refinement",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": { "layer_c_ok": true, "constraint_flow": true, "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-TIED_FEEDBACK_PROMOTION.receipt.json" }
+    }
+  ]
+}

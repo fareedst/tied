@@ -1,7 +1,7 @@
 # [IMPL-PROMPT_TYPE_GLOBAL_SKILLS] [ARCH-PROMPT_TYPE_GLOBAL_SKILLS] [REQ-PROMPT_TYPE_GLOBAL_SKILLS]
 # Summary: Maintain a complete tracked prompt-type skill bundle and install it deterministically into TIED clients.
 Contract:
-  INPUT: TIED source root, client project root
+  INPUT: source_root: string where length(source_root) > 0, client_root: string where length(client_root) > 0
   PRE: tools/bundled-prompt-type-skills contains the declared leaf skills, router, and shared references
   OUTPUT: client .cursor/skills contains the managed prompt-type bundle
   POST: every declared source file exists at the matching client path; unrelated client skills and existing MCP configuration are unchanged
@@ -11,9 +11,19 @@ Contract:
   EFFECTS: IO, State
   TERMINATION: total
 
+
+Grammar-Version: v2
+
 procedure INVENTORY_PROMPT_TYPE_SKILLS(source_root):
+  Contract:
+    INPUT: TBD
+    PRE: TBD
+    POST:
+      - success => TBD
+    EFFECTS: pure
+
   # [IMPL-PROMPT_TYPE_GLOBAL_SKILLS] [ARCH-PROMPT_TYPE_GLOBAL_SKILLS] [REQ-PROMPT_TYPE_GLOBAL_SKILLS] — How: declare the exact 13 leaf skills, router, and 15 direct shared references (includes gitignore-close-out-hygiene.md for [PROC-GITIGNORE_CLOSE_OUT]) so omissions fail deterministically.
-  INPUT: source_root
+  INPUT: source_root: string where length(source_root) > 0
   PRE: source_root is a readable directory
   OUTPUT: inventory of relative source paths
   POST: inventory contains only the managed prompt-type files and every path is relative to source_root
@@ -22,8 +32,15 @@ procedure INVENTORY_PROMPT_TYPE_SKILLS(source_root):
   RETURN managed leaf SKILL.md paths, router SKILL.md path, and prompt-shared Markdown paths
 
 procedure INSTALL_PROMPT_TYPE_SKILLS(source_root, client_root):
+  Contract:
+    INPUT: TBD
+    PRE: TBD
+    POST:
+      - success => TBD
+    EFFECTS: pure
+
   # [IMPL-PROMPT_TYPE_GLOBAL_SKILLS] [ARCH-PROMPT_TYPE_GLOBAL_SKILLS] [REQ-PROMPT_TYPE_GLOBAL_SKILLS] — How: refresh only the managed prompt-type directories under the client skill directory.
-  INPUT: source_root, client_root
+  INPUT: source_root: string where length(source_root) > 0, client_root: string where length(client_root) > 0
   PRE: source_root passes INVENTORY_PROMPT_TYPE_SKILLS; client_root is a writable client project
   OUTPUT: installation result
   POST: each inventory path is copied to client_root/.cursor/skills; unrelated skills and .cursor/mcp.json are unchanged
@@ -38,8 +55,15 @@ procedure INSTALL_PROMPT_TYPE_SKILLS(source_root, client_root):
   RETURN success
 
 procedure VALIDATE_PROMPT_TYPE_SKILL_CONTRACT(root):
+  Contract:
+    INPUT: TBD
+    PRE: TBD
+    POST:
+      - success => TBD
+    EFFECTS: pure
+
   # [IMPL-PROMPT_TYPE_GLOBAL_SKILLS] [ARCH-PROMPT_TYPE_GLOBAL_SKILLS] [REQ-PROMPT_TYPE_GLOBAL_SKILLS] — How: verify exact names, explicit-only frontmatter, payload naming, direct shared-link resolution, and bounded file size before distribution.
-  INPUT: bundle root or installed client skill root
+  INPUT: root: string where length(root) > 0
   PRE: root is readable
   OUTPUT: pass or contract_violation diagnostics
   POST: pass means all managed files satisfy the acceptance contract

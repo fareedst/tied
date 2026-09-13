@@ -1,10 +1,13 @@
 # [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
 # Summary: Validate Tracker, CITDP, and identity-bound adversarial evidence before workflow progression.
 
+
+Grammar-Version: v2
+
 procedure VALIDATE_TRACKER(tracker, phase):
 # [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: validate disposition contracts and reject generic skips.
   Contract:
-  INPUT: tracker, phase
+  INPUT: tracker, phase: string where length(phase) > 0
   PRE: tracker is a map and phase is pre_implementation, verification, or close_out
   OUTPUT: validation result with diagnostics
   POST: pending required steps fail; completed steps have evidence; not_applicable has policy and rationale; waived has owner, expiry, approval, and residual risk
@@ -416,6 +419,7 @@ procedure PARSE_TRACKER_COMPLETION_RECEIPT(transcript, expected_slug):
   OUTPUT: parsed receipt or absent; validation diagnostics on malformed input
   POST: when present, receipt slug equals expected_slug; disposition is completed, not_applicable, or waived with matching evidence contract; schema_version is 1; unknown fields rejected; generic skipped is invalid
   FAILURE_MODES: missing_receipt, malformed_receipt, wrong_slug, unsupported_schema, unknown_field, invalid_disposition, missing_disposition_evidence, skipped_disposition_rejected
+  DATA_TRANSITION: transcript scan yields in-memory normalized receipt only; tracker files unchanged
   EFFECTS: pure
   TERMINATION: total
   scan fenced JSON blocks latest-first for agentstream_tracker envelope
@@ -646,6 +650,13 @@ procedure EXPOSE_RECONCILE_OPERATOR_SURFACE(ledger_path, tracker_path, gates_dir
   WHEN include_process_grade is true: attach process_grade { score, band, dimensions[], gap_codes[] } from weighted rubric (Wave 5 W5-D11)
 
 procedure REJECT_TRACKER_DUAL_WRITE(tracker):
+  Contract:
+    INPUT: TBD
+    PRE: TBD
+    POST:
+      - success => TBD
+    EFFECTS: pure
+
 # [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: reject dual-write tracker updates at close-out producers.
   Contract:
   INPUT: tracker with execution_evidence.completed and steps[]

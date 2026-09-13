@@ -1,0 +1,20 @@
+{
+  "run_at": "2026-09-13T04:26:45.732Z",
+  "mode": "fleet-g3-receipts",
+  "wave_id": "W-stdd-8",
+  "partition_wave_id": "W-stdd-8",
+  "gate_stage": "G3",
+  "receipt_count": 10,
+  "receipt_paths": [
+    "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-FEAT_IDENTIFIER_ALLOCATOR.receipt.json",
+    "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-FEAT_LIFECYCLE_ENGINE.receipt.json",
+    "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-FEAT_LOCAL_DEFAULTS.receipt.json",
+    "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-FEAT_MANIFEST_VALIDATOR.receipt.json",
+    "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-FEAT_MIGRATION_APPLY.receipt.json",
+    "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-FEAT_MIGRATION_PREVIEW.receipt.json",
+    "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-FEAT_OFFLINE_FALLBACK.receipt.json",
+    "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-FEAT_ONBOARDING_COMMANDS.receipt.json",
+    "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-FEAT_ORCHESTRATION_CLI.receipt.json",
+    "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-FEAT_ORCHESTRATION_COMMANDS.receipt.json"
+  ]
+}

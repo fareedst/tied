@@ -1,6 +1,9 @@
 # [IMPL-ASYNC_BINDING_VALIDATOR] [ARCH-ASYNC_COMPOSITION_BINDING] [REQ-ASYNC_COMPOSITION_INVENTORY]
 # Summary: Extend binding inventory validation for async seam columns and fault-pattern inventory (W5).
 
+
+Grammar-Version: v2
+
 procedure ASYNC_BINDING_VALIDATOR_MAIN():
   # [IMPL-ASYNC_BINDING_VALIDATOR] [ARCH-ASYNC_COMPOSITION_BINDING] [REQ-ASYNC_COMPOSITION_INVENTORY]
   # How: Delegate to extended validateBindingInventory; proof boundary says binding exercised not race-free.
@@ -18,7 +21,7 @@ procedure VALIDATE_BINDING_INVENTORY(rows):
   # [IMPL-ASYNC_BINDING_VALIDATOR] [IMPL-QUALITY_BINDING_INVENTORY] [ARCH-ASYNC_COMPOSITION_BINDING] [REQ-ASYNC_COMPOSITION_INVENTORY]
   # How: Base IMPL-QUALITY_BINDING_INVENTORY checks plus W5 async seam rules.
   Contract:
-    INPUT: binding inventory rows
+    INPUT: rows: list where length(rows) >= 0
     OUTPUT: binding validation report
     PRE: each row is an object candidate
     POST: diagnostics for duplicates, missing base fields, async rules, E2E justification

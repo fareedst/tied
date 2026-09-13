@@ -1,0 +1,29 @@
+# [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION] W-stdd-2 dependency-first G3 batch (≤10).
+schema_version: 1
+client_id: "stdd"
+methodology_pin: "48d1fbb+"
+wave_id: "W-stdd-2"
+notes: |
+  P4-E populated dependency-first platform batch (excludes W-stdd-1 / stdd-wave-1 tokens).
+  Remaining stdd sidecars partition into W-stdd-3..10 by same rule: MCP/TIED/pseudocode stack first, then features.
+sidecars:
+  - impl_token: IMPL-PSEUDOCODE_MIGRATION_TOOLING
+    sidecar_path: tied/implementation-decisions/IMPL-PSEUDOCODE_MIGRATION_TOOLING-pseudocode.md
+  - impl_token: IMPL-MCP_LEAP_PROPOSAL_QUEUE
+    sidecar_path: tied/implementation-decisions/IMPL-MCP_LEAP_PROPOSAL_QUEUE-pseudocode.md
+  - impl_token: IMPL-MCP_FEEDBACK_TOOLS
+    sidecar_path: tied/implementation-decisions/IMPL-MCP_FEEDBACK_TOOLS-pseudocode.md
+  - impl_token: IMPL-MCP_USAGE_METRICS
+    sidecar_path: tied/implementation-decisions/IMPL-MCP_USAGE_METRICS-pseudocode.md
+  - impl_token: IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT
+    sidecar_path: tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md
+  - impl_token: IMPL-TIED_PROJECT_IDENTITY
+    sidecar_path: tied/implementation-decisions/IMPL-TIED_PROJECT_IDENTITY-pseudocode.md
+  - impl_token: IMPL-TIED_ADVERSARIAL_INQUIRY
+    sidecar_path: tied/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY-pseudocode.md
+  - impl_token: IMPL-TIED_CLAIMS_EVIDENCE_REVIEW
+    sidecar_path: tied/implementation-decisions/IMPL-TIED_CLAIMS_EVIDENCE_REVIEW-pseudocode.md
+  - impl_token: IMPL-ASYNC_PSEUDOCODE_GRAMMAR
+    sidecar_path: tied/implementation-decisions/IMPL-ASYNC_PSEUDOCODE_GRAMMAR-pseudocode.md
+  - impl_token: IMPL-TIED_FEEDBACK_PROMOTION
+    sidecar_path: tied/implementation-decisions/IMPL-TIED_FEEDBACK_PROMOTION-pseudocode.md

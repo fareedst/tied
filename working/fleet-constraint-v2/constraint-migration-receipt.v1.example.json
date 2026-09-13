@@ -1,0 +1,112 @@
+{
+  "$schema": "constraint-migration-receipt.v1.schema.json",
+  "receipt_meta": {
+    "schema_version": 1,
+    "receipt_id": "receipt-stdd-fleet-orchestration-fixture-20260912",
+    "generated_at": "2026-09-12T14:30:00Z",
+    "gate_stage": "G1",
+    "program_gate_policy": "advisory"
+  },
+  "pin": {
+    "methodology_pin": "48d1fbb+",
+    "analyzer_build_identity": "pseudocode-analyzer/1.0.0+stdd@48d1fbb",
+    "manifest_entry_id": "stdd-tier-a-fleet-orchestration"
+  },
+  "subject": {
+    "sidecar_path": "tied/implementation-decisions/IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION-pseudocode.md",
+    "impl_token": "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION",
+    "input_identity": {
+      "algorithm": "sha256",
+      "hash": "8e8d5b251fec0922ef78e0ec3d801b0558437456e91235982abc60195727c7ec",
+      "byte_length": 2396
+    },
+    "grammar_version": "pseudocode-grammar.v2",
+    "annotation_profile": "constraint-ready-v2"
+  },
+  "layer_a": {
+    "applicable": true,
+    "ok": true,
+    "tied_consistency_ok": true,
+    "token_refs_checked": 12,
+    "notes": "Fixture receipt from P2-D schema validation; Layer A not re-run in this stub."
+  },
+  "layer_b": {
+    "ok": true,
+    "validator_schema_version": "layer-b-pseudocode-validator.v1",
+    "blocks_count": 8,
+    "contract_precision": {
+      "active_blocks_with_contract": 6,
+      "active_blocks_missing_pre_or_post": 0,
+      "active_blocks_missing_failure_modes": 1,
+      "active_blocks_missing_data_transition": 0,
+      "active_blocks_missing_termination": 0
+    },
+    "shape_rows": [
+      { "shape_id": "SHAPE-003", "ok": true },
+      { "shape_id": "SHAPE-004", "ok": true },
+      { "shape_id": "SHAPE-005", "ok": true },
+      { "shape_id": "SHAPE-006", "ok": true }
+    ],
+    "error_count": 0,
+    "warning_count": 1
+  },
+  "layer_c": {
+    "gate_mode": true,
+    "typed_flow": true,
+    "constraint_flow": true,
+    "constraint_gate_errors_policy": "advisory",
+    "ok": true,
+    "analysis_truncated": false,
+    "diagnostics_truncated": false,
+    "error_count": 0,
+    "warning_count": 2,
+    "info_count": 0,
+    "procedure_count": 8,
+    "source_report_schema": "pseudocode-analysis-report.v1"
+  },
+  "constraint": {
+    "ran": true,
+    "procedures_analyzed": 4,
+    "refinements_checked": 6,
+    "refinements_proven": 5,
+    "alias_mut_checked": 4,
+    "alias_mut_violations": 0,
+    "interproc_enabled": false,
+    "budgets_applied": {
+      "max_solver_steps": 256,
+      "max_summary_depth": 8,
+      "max_predicate_nodes": 512
+    },
+    "solver_truncated": false,
+    "solver_truncation_cause": "none",
+    "alias_analysis_truncated": false,
+    "budget_exceeded": false,
+    "constraint_diagnostics_truncated": false,
+    "solver_steps_used": 42,
+    "summary_depth_used": 2
+  },
+  "unknown_summary": {
+    "unknown": 1,
+    "truncated": 0,
+    "unsupported": 0,
+    "prose_only": 0,
+    "budget_exceeded": 0
+  },
+  "constraint_gate_errors": [
+    {
+      "code": "REFINEMENT_VIOLATION",
+      "severity": "warning",
+      "message": "Advisory G1: proven refinement gap on WAVE_PLAN block (fixture illustrative).",
+      "line": 88,
+      "procedure": "WAVE_PLAN",
+      "proven": true
+    }
+  ],
+  "promotion_readiness": {
+    "qualification_green": false,
+    "f11_pass": false,
+    "fp_within_threshold": false,
+    "as_of_phase": "P2-D-fixture"
+  },
+  "collector_notes": "Illustrative receipt for JSON Schema validation only; Layer C numbers are not live analyzer output."
+}

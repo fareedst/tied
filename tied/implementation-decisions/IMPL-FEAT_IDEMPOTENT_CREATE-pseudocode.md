@@ -1,9 +1,12 @@
 # [IMPL-FEAT_IDEMPOTENT_CREATE] [ARCH-FEAT_IDEMPOTENT_CREATION] [REQ-FEAT_IDEMPOTENT_CREATION]
 
+
+Grammar-Version: v2
+
 ## Summary contract
 # [IMPL-FEAT_IDEMPOTENT_CREATE] [ARCH-FEAT_IDEMPOTENT_CREATION] [REQ-FEAT_IDEMPOTENT_CREATION] — How: serialize explicit request-key creation and return stable retry or collision outcomes.
 Contract:
-  INPUT: request_key; title; initial_references
+  INPUT: request_key: string where length(request_key) > 0; title: string where length(title) > 0; initial_references: list where length(initial_references) >= 0
   PRE: request_key is non-empty
   OUTPUT: created_feature | existing_feature | creation_error
   POST: matching retries return the original feature; mismatches never create a second feature
@@ -15,6 +18,15 @@ Contract:
 
 ## CREATE_FEATURE_IDEMPOTENTLY
 procedure CREATE_FEATURE_IDEMPOTENTLY(request_key, title, initial_references):
+  Contract:
+    INPUT: request_key: string where length(request_key) > 0; title: string where length(title) > 0; initial_references: list where length(initial_references) >= 0
+    PRE: request_key is non-empty
+    OUTPUT: created_feature | existing_feature | creation_error
+    POST: matching retries return the original feature; mismatches never create a second feature
+    FAILURE_MODES: REQUEST_KEY_REQUIRED; REQUEST_KEY_COLLISION; ALLOCATION_FAILED; PUBLISH_FAILED
+    EFFECTS: IO, State
+    TERMINATION: total
+
   # [IMPL-FEAT_IDEMPOTENT_CREATE] [ARCH-FEAT_IDEMPOTENT_CREATION] [REQ-FEAT_IDEMPOTENT_CREATION] — How: lock the request key before lookup, allocation, and complete publication.
   IF request_key is empty: RETURN REQUEST_KEY_REQUIRED.
   Normalize title and references.

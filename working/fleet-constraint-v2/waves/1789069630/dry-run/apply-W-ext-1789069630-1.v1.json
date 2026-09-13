@@ -1,0 +1,42 @@
+{
+  "schema_version": "apply-diff.v1",
+  "generated_at": "2026-09-13T01:19:31.720Z",
+  "client_id": "1789069630",
+  "wave_scope": "W-ext-1789069630-1",
+  "methodology_pin": "48d1fbb+",
+  "apply_mode": true,
+  "planned_actions": [
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1789069630/tied/implementation-decisions/IMPL-APP_DISPLAY_RESOLVER-pseudocode.md",
+      "impl_token": "IMPL-APP_DISPLAY_RESOLVER",
+      "action": "none",
+      "classification_before": "header-only-v2"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1789069630/tied/implementation-decisions/IMPL-PERM_CATALOG-pseudocode.md",
+      "impl_token": "IMPL-PERM_CATALOG",
+      "action": "none",
+      "classification_before": "header-only-v2"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1789069630/tied/implementation-decisions/IMPL-PERM_REPORT_CLI-pseudocode.md",
+      "impl_token": "IMPL-PERM_REPORT_CLI",
+      "action": "none",
+      "classification_before": "header-only-v2"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1789069630/tied/implementation-decisions/IMPL-PERM_REPORT_FORMATTER-pseudocode.md",
+      "impl_token": "IMPL-PERM_REPORT_FORMATTER",
+      "action": "none",
+      "classification_before": "header-only-v2"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1789069630/tied/implementation-decisions/IMPL-TCC_DB_READER-pseudocode.md",
+      "impl_token": "IMPL-TCC_DB_READER",
+      "action": "none",
+      "classification_before": "header-only-v2"
+    }
+  ],
+  "dry_run_content_hash": "dd0eb485ef31917810500042349cf6b0fa00c6c61cc5fb26addd6aba8b1d225e",
+  "snapshot_dir": "working/fleet-constraint-v2/waves/1789069630/dry-run/snapshots/W-ext-1789069630-1"
+}

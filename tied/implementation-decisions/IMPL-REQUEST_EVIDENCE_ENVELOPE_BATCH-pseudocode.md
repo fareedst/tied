@@ -1,5 +1,18 @@
 # [IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH] [ARCH-REQUEST_EVIDENCE_ENVELOPE] [REQ-REQUEST_EVIDENCE_ENVELOPE] — batch envelope gap report collector.
 
+
+Grammar-Version: v2
+
+# [IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH] [ARCH-REQUEST_EVIDENCE_ENVELOPE] [REQ-REQUEST_EVIDENCE_ENVELOPE]
+# How: File-level contract INPUT where for constraint-enforced-v2; section bullet INPUT lines are assist-only.
+Contract:
+  INPUT: batch_manifest_path: string where length(batch_manifest_path) > 0
+  OUTPUT: envelope-gap-report.v1.yaml | collection error
+  PRE: manifest or corpus path resolves when provided
+  POST: success emits gap report without score or ranking fields
+  EFFECTS: IO
+  TERMINATION: total
+
 ## COLLECT_ENVELOPE_GAP_REPORT
 
 - [IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH] [ARCH-REQUEST_EVIDENCE_ENVELOPE] [REQ-REQUEST_EVIDENCE_ENVELOPE] Aggregate pre-generated or legacy-inferred envelopes across batch rows; emit envelope-gap-report.v1.yaml with per-kind denominators and no score field.

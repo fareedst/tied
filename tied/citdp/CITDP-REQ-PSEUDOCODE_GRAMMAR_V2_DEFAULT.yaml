@@ -24,9 +24,9 @@ CITDP-REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT:
       - "This refine pass does not implement bootstrap scripts, validator code, cohort audit tooling, or sidecar migration."
   completion_criteria:
     activation:
-      phase: close_out
-      request_token: REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT
-      run_id: grammar-v2-closeout-20260911
+      phase: "close_out"
+      request_token: "REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+      run_id: "grammar-v2-closeout-20260911"
     checklist_gate:
       dispositions:
         - "completed"
@@ -43,11 +43,11 @@ CITDP-REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT:
     verification_gate_notes: "§E incremental close-out 2026-09-11: analysis 305/305; §E script tests (corpus replay, adherence replay, audit, baseline commit message); bootstrap E2E 7/7; advisory inquiry warn; envelope blocking gaps zero."
   evidence:
     commands:
-      - "npm run build --prefix mcp-server && node --test mcp-server/dist/analysis/*.test.js"
-      - "node --test scripts/corpus-grammar-v2-replay.test.mjs scripts/replay-adherence-fixtures.test.mjs scripts/audit-grammar-v2-default.test.mjs tools/bootstrap/lib/tied-baseline-commit-message.test.mjs"
       - "node --test mcp-server/dist/e2e/new-tied-client.test.js"
       - "node --test scripts/audit-grammar-v2-default.test.mjs"
+      - "node --test scripts/corpus-grammar-v2-replay.test.mjs scripts/replay-adherence-fixtures.test.mjs scripts/audit-grammar-v2-default.test.mjs tools/bootstrap/lib/tied-baseline-commit-message.test.mjs"
       - "node scripts/audit-grammar-v2-default.mjs"
+      - "npm run build --prefix mcp-server && node --test mcp-server/dist/analysis/*.test.js"
     proof_boundaries:
       - "Commands prove only their named structural/configuration or gate behavior; they do not prove runtime implementation."
   impact_analysis:

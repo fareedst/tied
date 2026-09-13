@@ -2,7 +2,10 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 /** [REQ-PSEUDOCODE_TYPED_FLOW] qualification harness — read-only corpus constants. */
-export const BASELINE_ANCHOR_COMMIT = "7f3d5b0";
+/** OD-P2-1 fleet pin (full SHA); README uses shorthand `48d1fbb+`. */
+export const BASELINE_ANCHOR_COMMIT =
+  "48d1fbbbd1c26dfdb3ac6d74b4cb36c60372dcd7" as const;
+export const METHODOLOGY_PIN_LABEL = "48d1fbb+";
 export const MANIFEST_SCHEMA_VERSION = "qualification-manifest.v1";
 export const EXTERNAL_CORPUS_ROOT = "/Users/fareed/Documents/dev/test";
 

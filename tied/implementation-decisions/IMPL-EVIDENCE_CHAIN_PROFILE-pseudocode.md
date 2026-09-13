@@ -1,5 +1,18 @@
 # [IMPL-EVIDENCE_CHAIN_PROFILE] [ARCH-EVIDENCE_CHAIN_PROFILE] [REQ-EVIDENCE_CHAIN_PROFILE] — Read-only evidence-chain-profile.v1 generator, normalizer, and manual contract.
 
+
+Grammar-Version: v2
+
+# [IMPL-EVIDENCE_CHAIN_PROFILE] [ARCH-EVIDENCE_CHAIN_PROFILE] [REQ-EVIDENCE_CHAIN_PROFILE]
+# How: File-level contract for depth-gated read-only profile generation entry.
+Contract:
+  INPUT: profile_depth: string where length(profile_depth) > 0
+  OUTPUT: evidence-chain-profile.v1 | generation error
+  PRE: profile_depth is integrated or human_research
+  POST: success emits normalized profile without project YAML mutation
+  EFFECTS: IO
+  TERMINATION: total
+
 ## GENERATE_EVIDENCE_CHAIN_PROFILE
 
 - [IMPL-EVIDENCE_CHAIN_PROFILE] [ARCH-EVIDENCE_CHAIN_PROFILE] [REQ-EVIDENCE_CHAIN_PROFILE] Compose depth-gated adapters into one read-only profile without first-slice side effects.
@@ -32,7 +45,7 @@
 
 - [IMPL-EVIDENCE_CHAIN_PROFILE] [ARCH-EVIDENCE_CHAIN_PROFILE] [REQ-EVIDENCE_CHAIN_PROFILE] Bound roots, ignore, token scope, and profile_depth with explicit excluded, unknown, and not_measured sets.
 - Contract:
-  - INPUT: roots, ignore_file, config_path, requirement_tokens, architecture_tokens, implementation_tokens, profile_depth
+  - INPUT: roots, ignore_file, config_path, requirement_tokens: list where length(requirement_tokens) >= 0, architecture_tokens, implementation_tokens, profile_depth
   - PRE: profile_depth is one of the two v1 evidence-chain profile depths
   - OUTPUT: resolved scope with excluded, unknown, not_measured
   - POST:

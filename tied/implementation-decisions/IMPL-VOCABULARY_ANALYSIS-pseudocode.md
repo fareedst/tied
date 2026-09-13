@@ -1,5 +1,18 @@
 # [IMPL-VOCABULARY_ANALYSIS] [ARCH-VOCABULARY_EXPLORER] [ARCH-VOCABULARY_DATA_CONTRACT] [REQ-VOCABULARY_ANALYSIS] — Deterministic term extraction and TIED record normalization.
 
+
+Grammar-Version: v2
+
+# [IMPL-VOCABULARY_ANALYSIS] [ARCH-VOCABULARY_EXPLORER] [REQ-VOCABULARY_ANALYSIS]
+# How: File-level contract INPUT where for constraint-enforced-v2; section bullet INPUT lines are assist-only.
+Contract:
+  INPUT: projectRootAbs: string where length(projectRootAbs) > 0
+  OUTPUT: SourceTermAnalysisResult | explorer error
+  PRE: project root is absolute and readable
+  POST: success returns deterministic term analysis without TIED YAML mutation
+  EFFECTS: IO
+  TERMINATION: total
+
 ## Scoped source file collection
 
 - [IMPL-VOCABULARY_ANALYSIS] [ARCH-VOCABULARY_EXPLORER] [REQ-VOCABULARY_ANALYSIS] Reuse collectScopedSourceFiles from scoped-analysis.ts; do not duplicate traversal.

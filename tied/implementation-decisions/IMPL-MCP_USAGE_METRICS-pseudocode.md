@@ -1,6 +1,9 @@
 # [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS]
 # Summary: Opt-in JSONL metrics for every MCP tool call; sanitize args; wrap at registration; bounded offline Ruby aggregation with explicit signature coverage.
 
+
+Grammar-Version: v2
+
 ## Summary contract
 
 - [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS] How: INPUT/OUTPUT/DATA for usage-metrics module. Composition: independent of feedback.yaml; metrics file is append-only JSONL outside project TIED YAML unless path overridden.
@@ -69,6 +72,20 @@
     - ELSE IF args JSON project_root matches /dev/test/{id}: export TIED_MCP_METRICS_CLIENT={id}.
     - ELSE export TIED_MCP_METRICS_CLIENT=tied-cli.
   - spawn node tied-mcp-stdio-client.cjs.
+
+procedure ANALYZE_TIED_MCP_METRICS:
+  # [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS] [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION] — How: Bound deterministic per-file and aggregate signature analysis (G3 constraint anchor).
+  Contract:
+    INPUT: metric_paths: list of string where length(metric_paths) > 0
+    PRE: every path in metric_paths names a readable file
+    OUTPUT: per_file_yaml_reports, optional aggregate_yaml_summary
+    POST: success => signature_coverage disclosed per file and aggregate when enabled
+    FAILURE_MODES: InvalidOption, MetricsFileNotFound
+    EFFECTS: IO
+    TERMINATION: total
+  FOR each path IN metric_paths: stream JSONL lines and emit YAML summary
+  IF aggregate flag set: merge visible signatures and emit aggregate summary
+  RETURN per_file_yaml_reports
 
 ## ANALYZE_TIED_MCP_METRICS
 

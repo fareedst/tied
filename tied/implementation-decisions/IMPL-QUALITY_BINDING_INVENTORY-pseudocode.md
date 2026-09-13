@@ -15,10 +15,13 @@ Contract:
 
 # [IMPL-QUALITY_BINDING_INVENTORY] [ARCH-QUALITY_ASSURANCE_PROFILES] [ARCH-MODULE_VALIDATION] [REQ-QUALITY_ASSURANCE_EVIDENCE] [REQ-MODULE_VALIDATION]
 # How: Check row shape and required composition proof fields before accepting a binding.
+
+Grammar-Version: v2
+
 procedure VALIDATE_BINDING_INVENTORY(rows):
   # [IMPL-QUALITY_BINDING_INVENTORY] [ARCH-QUALITY_ASSURANCE_PROFILES] [ARCH-MODULE_VALIDATION] [REQ-QUALITY_ASSURANCE_EVIDENCE] [REQ-MODULE_VALIDATION]
   Contract:
-    INPUT: binding inventory rows
+    INPUT: rows: list where length(rows) >= 0
     OUTPUT: binding validation report
     PRE: rows is an array of row candidates
     POST: duplicate, incomplete, and unjustified E2E rows have diagnostics

@@ -1,70 +1,77 @@
 # [IMPL-TIED_PROJECT_IDENTITY] [ARCH-TIED_PROJECT_IDENTITY] [REQ-MCP_USAGE_METRICS] [REQ-EVIDENCE_CHAIN_PROFILE] — Shared relocation-aware pseudonymous project identity resolver.
 
-## RESOLVE_PROJECT_IDENTITY
 
-- [IMPL-TIED_PROJECT_IDENTITY] [ARCH-TIED_PROJECT_IDENTITY] [REQ-MCP_USAGE_METRICS] [REQ-EVIDENCE_CHAIN_PROFILE] Resolve opaque project_id and identity_source from tied base path and optional env.
-- PRE: tiedBasePath is a string (may be empty); env defaults to process.env when omitted.
-- POST: Returns { project_id: 16-char hex string, identity_source: "configured" | "path_fallback" }; project_id never equals raw configured value or raw path.
-- EFFECTS: Pure — no I/O.
+Grammar-Version: v2
 
-```
-READ configuredRaw FROM env.TIED_MCP_PROJECT_ID WHEN env provided ELSE process.env.TIED_MCP_PROJECT_ID
-IF configuredRaw IS NOT null AND configuredRaw IS NOT undefined THEN
-  # [IMPL-TIED_PROJECT_IDENTITY] [ARCH-TIED_PROJECT_IDENTITY] [REQ-MCP_USAGE_METRICS] [REQ-EVIDENCE_CHAIN_PROFILE]
-  # Trim whitespace; valid configured IDs hash with SHA-256→16-hex for relocation-stable opaque output.
-  trimmed := TRIM(configuredRaw)
-  IF trimmed != "" AND IS_VALID_CONFIGURED_ID(trimmed) THEN
-    RETURN { project_id: HASH_TO_PROJECT_ID(trimmed), identity_source: "configured" }
-  ENDIF
-ENDIF
-# [IMPL-TIED_PROJECT_IDENTITY] [ARCH-TIED_PROJECT_IDENTITY] [REQ-MCP_USAGE_METRICS] [REQ-EVIDENCE_CHAIN_PROFILE]
-# Path fallback preserves legacy path.resolve hash when env unset/empty/invalid; not relocation-stable.
-RETURN { project_id: PATH_FALLBACK_PROJECT_ID(tiedBasePath), identity_source: "path_fallback" }
-```
+## Summary contract
+# [IMPL-TIED_PROJECT_IDENTITY] [ARCH-TIED_PROJECT_IDENTITY] [REQ-MCP_USAGE_METRICS] [REQ-EVIDENCE_CHAIN_PROFILE] — Resolve opaque project_id and identity_source from tied base path and optional env.
+Contract:
+  INPUT: tiedBasePath, optional env
+  OUTPUT: project_id and identity_source
+  PRE: tiedBasePath is a string (may be empty); env defaults to process.env when omitted
+  POST: project_id is 16-char hex; identity_source is configured or path_fallback; project_id never equals raw configured value or raw path
+  EFFECTS: pure
+  TERMINATION: total
 
-## IS_VALID_CONFIGURED_ID
+procedure RESOLVE_PROJECT_IDENTITY(tiedBasePath, env):
+  # [IMPL-TIED_PROJECT_IDENTITY] [ARCH-TIED_PROJECT_IDENTITY] [REQ-MCP_USAGE_METRICS] [REQ-EVIDENCE_CHAIN_PROFILE] — How: Resolve opaque project_id and identity_source from tied base path and optional env.
+  Contract:
+    INPUT: tiedBasePath, env
+    PRE: tiedBasePath is string; env defaults to process.env when omitted
+    OUTPUT: { project_id, identity_source }
+    POST: project_id is 16-char hex; never equals raw configured value or raw path
+    EFFECTS: pure
+    TERMINATION: total
+  READ configuredRaw FROM env.TIED_MCP_PROJECT_ID WHEN env provided ELSE process.env.TIED_MCP_PROJECT_ID
+  IF configuredRaw IS NOT null AND configuredRaw IS NOT undefined THEN
+    TRIM configuredRaw to trimmed
+    IF trimmed is non-empty AND IS_VALID_CONFIGURED_ID(trimmed) THEN
+      RETURN { project_id: HASH_TO_PROJECT_ID(trimmed), identity_source: "configured" }
+  RETURN { project_id: PATH_FALLBACK_PROJECT_ID(tiedBasePath), identity_source: "path_fallback" }
 
-- [IMPL-TIED_PROJECT_IDENTITY] [ARCH-TIED_PROJECT_IDENTITY] [REQ-MCP_USAGE_METRICS] Reject oversize, path-separator, and newline configured IDs so fallback applies without silent re-key.
-- PRE: candidate is trimmed non-empty string under evaluation.
-- POST: true only when length ≤ 128 and no `/`, `\`, CR, or LF characters.
-- EFFECTS: Pure.
+procedure IS_VALID_CONFIGURED_ID(candidate):
+  # [IMPL-TIED_PROJECT_IDENTITY] [ARCH-TIED_PROJECT_IDENTITY] [REQ-MCP_USAGE_METRICS] — How: Reject oversize, path-separator, and newline configured IDs so fallback applies without silent re-key.
+  Contract:
+    INPUT: candidate: string where length(candidate) > 0
+    PRE: candidate is trimmed non-empty string under evaluation
+    OUTPUT: boolean
+    POST: true only when length ≤ 128 and no slash, backslash, CR, or LF
+    EFFECTS: pure
+    TERMINATION: total
+  IF LENGTH(candidate) > 128 THEN RETURN false
+  IF candidate CONTAINS "/" OR "\" OR CR OR LF THEN RETURN false
+  RETURN true
 
-```
-IF LENGTH(candidate) > 128 THEN RETURN false ENDIF
-IF candidate CONTAINS "/" OR "\" OR CR OR LF THEN RETURN false ENDIF
-RETURN true
-```
+procedure HASH_TO_PROJECT_ID(input):
+  # [IMPL-TIED_PROJECT_IDENTITY] [ARCH-TIED_PROJECT_IDENTITY] [REQ-MCP_USAGE_METRICS] [REQ-EVIDENCE_CHAIN_PROFILE] — How: Fixed-width opaque ID: SHA-256 digest first 16 hex chars (same algorithm as legacy path hash).
+  Contract:
+    INPUT: input
+    PRE: input is non-empty string when used for configured path
+    OUTPUT: 16 lowercase hex characters
+    POST: digest is first 16 hex chars of SHA-256(input)
+    EFFECTS: pure
+    TERMINATION: total
+  RETURN SHA256(input).hex.slice(0, 16)
 
-## HASH_TO_PROJECT_ID
+procedure PATH_FALLBACK_PROJECT_ID(tiedBasePath):
+  # [IMPL-TIED_PROJECT_IDENTITY] [ARCH-TIED_PROJECT_IDENTITY] [REQ-MCP_USAGE_METRICS] — How: Legacy compatibility: hash path.resolve(tiedBasePath || "unknown").
+  Contract:
+    INPUT: tiedBasePath
+    PRE: tiedBasePath is string
+    OUTPUT: 16-char hex project_id
+    POST: deterministic ID matching pre-slice-1 behavior for unchanged paths
+    EFFECTS: pure
+    TERMINATION: total
+  resolved := path.resolve(tiedBasePath OR "unknown")
+  RETURN HASH_TO_PROJECT_ID(resolved)
 
-- [IMPL-TIED_PROJECT_IDENTITY] [ARCH-TIED_PROJECT_IDENTITY] [REQ-MCP_USAGE_METRICS] [REQ-EVIDENCE_CHAIN_PROFILE] Fixed-width opaque ID: SHA-256 digest first 16 hex chars (same algorithm as legacy path hash).
-- PRE: input is non-empty string when used for configured path; any string for hash input.
-- POST: Returns exactly 16 lowercase hex characters.
-- EFFECTS: Pure.
-
-```
-RETURN SHA256(input).hex.slice(0, 16)
-```
-
-## PATH_FALLBACK_PROJECT_ID
-
-- [IMPL-TIED_PROJECT_IDENTITY] [ARCH-TIED_PROJECT_IDENTITY] [REQ-MCP_USAGE_METRICS] Legacy compatibility: hash path.resolve(tiedBasePath || "unknown").
-- PRE: tiedBasePath is string.
-- POST: Deterministic 16-hex ID matching pre-slice-1 behavior for unchanged paths.
-- EFFECTS: Pure.
-
-```
-resolved := path.resolve(tiedBasePath OR "unknown")
-RETURN HASH_TO_PROJECT_ID(resolved)
-```
-
-## ANONYMIZED_PROJECT_ID (deprecated alias)
-
-- [IMPL-TIED_PROJECT_IDENTITY] [ARCH-TIED_PROJECT_IDENTITY] [REQ-MCP_USAGE_METRICS] Backward-compatible export returning project_id only for legacy call sites.
-- PRE: tiedBasePath string.
-- POST: Same project_id as RESOLVE_PROJECT_IDENTITY(tiedBasePath).project_id.
-- EFFECTS: Pure.
-
-```
-RETURN RESOLVE_PROJECT_IDENTITY(tiedBasePath).project_id
-```
+procedure ANONYMIZED_PROJECT_ID(tiedBasePath):
+  # [IMPL-TIED_PROJECT_IDENTITY] [ARCH-TIED_PROJECT_IDENTITY] [REQ-MCP_USAGE_METRICS] — How: Backward-compatible export returning project_id only for legacy call sites.
+  Contract:
+    INPUT: tiedBasePath
+    PRE: tiedBasePath is string
+    OUTPUT: project_id string
+    POST: same project_id as RESOLVE_PROJECT_IDENTITY(tiedBasePath).project_id
+    EFFECTS: pure
+    TERMINATION: total
+  RETURN RESOLVE_PROJECT_IDENTITY(tiedBasePath).project_id

@@ -1,9 +1,12 @@
 # [IMPL-FEAT_FIXTURE_VALIDATORS] [ARCH-FEAT_FIXTURE_CORPUS] [REQ-FEAT_FIXTURE_VALIDATION]
 
+
+Grammar-Version: v2
+
 ## Summary contract
 # [IMPL-FEAT_FIXTURE_VALIDATORS] [ARCH-FEAT_FIXTURE_CORPUS] [REQ-FEAT_FIXTURE_VALIDATION] — How: validate representative Batch 0 fixtures against deterministic outcomes.
 Contract:
-  INPUT: fixture_cases; validator_modules
+  INPUT: fixture_cases: list where length(fixture_cases) >= 0; validator_modules: list where length(validator_modules) > 0
   PRE: each fixture names scenario, input, expected outcome, and owner
   OUTPUT: fixture_results; coverage_report
   POST: every required scenario matches its expected outcome
@@ -17,7 +20,7 @@ procedure VALIDATE_FIXTURE_CORPUS(fixture_cases, validator_modules):
 # [IMPL-FEAT_FIXTURE_VALIDATORS] [ARCH-FEAT_FIXTURE_CORPUS] [REQ-FEAT_FIXTURE_VALIDATION] — How: cover greenfield, brownfield, ambiguous, multi-module, multi-approach, stale-view, partial-write, migration, and invalid cases.
   # [IMPL-FEAT_FIXTURE_VALIDATORS] [ARCH-FEAT_FIXTURE_CORPUS] [REQ-FEAT_FIXTURE_VALIDATION] — How: execute each fixture against its isolated validator and compare deterministic evidence.
   Contract:
-    INPUT: fixture_cases; validator_modules
+    INPUT: fixture_cases: list where length(fixture_cases) >= 0; validator_modules: list where length(validator_modules) > 0
     PRE: required scenario catalog is present
     OUTPUT: fixture_results; coverage_report | fixture_error
     POST: all cases match accepted output or named rejection; none is skipped

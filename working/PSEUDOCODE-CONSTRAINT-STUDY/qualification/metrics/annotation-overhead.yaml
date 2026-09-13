@@ -1,66 +1,64 @@
-# [REQ-PSEUDOCODE_TYPED_FLOW] F11 annotation burden study
-{
-  "run_at": "2026-09-10T14:48:45.940Z",
-  "study": "F11-annotation-burden",
-  "procedures": [
-    {
-      "study_id": "volumestats-cli-run",
-      "procedure": "RUN_VOLUMESTATS",
-      "token": "IMPL-VOLUMESTATS-CLI",
-      "annotation_lines": 2,
-      "authoring_decisions": 2,
-      "unknowns_copy": 10,
-      "unknowns_annotated": 10,
-      "unknown_delta": 0,
-      "typed_diagnostics_annotated": 0,
-      "preservation_pass": true
-    },
-    {
-      "study_id": "netif-cli-run",
-      "procedure": "RUN",
-      "token": "IMPL-NETIF_CLI",
-      "annotation_lines": 3,
-      "authoring_decisions": 3,
-      "unknowns_copy": 0,
-      "unknowns_annotated": 0,
-      "unknown_delta": 0,
-      "typed_diagnostics_annotated": 0,
-      "preservation_pass": true
-    },
-    {
-      "study_id": "rootjobs-parse-flags",
-      "procedure": "PARSE_FLAGS",
-      "token": "IMPL-ROOTJOBS_CLI",
-      "annotation_lines": 4,
-      "authoring_decisions": 4,
-      "unknowns_copy": 6,
-      "unknowns_annotated": 6,
-      "unknown_delta": 0,
-      "typed_diagnostics_annotated": 0,
-      "preservation_pass": true
-    },
-    {
-      "study_id": "volumestats-discover",
-      "procedure": "LIST_DARWIN_VOLUMES",
-      "token": "IMPL-VOLUMESTATS-DISCOVER",
-      "annotation_lines": 2,
-      "authoring_decisions": 2,
-      "unknowns_copy": 15,
-      "unknowns_annotated": 15,
-      "unknown_delta": 0,
-      "typed_diagnostics_annotated": 0,
-      "preservation_pass": true
-    }
-  ],
-  "f11": {
-    "annotation_lines_median": 2.5,
-    "authoring_decisions_median": 2.5,
-    "stop_criteria": {
-      "annotation_lines_gt_8": false,
-      "decisions_gt_15": false,
-      "any_sp_failure": false
-    },
-    "gate_pass": true,
-    "recommendation": "proceed"
-  }
-}
+baseline_anchor_commit: "48d1fbbbd1c26dfdb3ac6d74b4cb36c60372dcd7"
+f11:
+  annotation_lines_median: 2.5
+  authoring_decisions_median: 2.5
+  gate_pass: true
+  recommendation: "proceed"
+  stop_criteria:
+    annotation_lines_gt_8: false
+    any_sp_failure: false
+    decisions_gt_15: false
+    unknown_delta_median_gt_0: false
+  unknown_delta_median: 0
+methodology_pin: "48d1fbb+"
+procedures:
+  - annotation_lines: 2
+    authoring_decisions: 2
+    preservation_pass: true
+    procedure: "LIST_DARWIN_VOLUMES"
+    source_copy_fallback: false
+    source_resolved: "/Users/fareed/Documents/dev/test/1787416567/tied/implementation-decisions/IMPL-VOLUMESTATS-DISCOVER-pseudocode.md"
+    study_id: "volumestats-discover"
+    token: "IMPL-VOLUMESTATS-DISCOVER"
+    typed_diagnostics_annotated: 0
+    unknown_delta: 0
+    unknowns_annotated: 15
+    unknowns_copy: 15
+  - annotation_lines: 4
+    authoring_decisions: 4
+    preservation_pass: true
+    procedure: "PARSE_FLAGS"
+    source_copy_fallback: false
+    source_resolved: "/Users/fareed/Documents/dev/test/1787507684/tied/implementation-decisions/IMPL-ROOTJOBS_CLI-pseudocode.md"
+    study_id: "rootjobs-parse-flags"
+    token: "IMPL-ROOTJOBS_CLI"
+    typed_diagnostics_annotated: 0
+    unknown_delta: 0
+    unknowns_annotated: 6
+    unknowns_copy: 6
+  - annotation_lines: 3
+    authoring_decisions: 3
+    preservation_pass: true
+    procedure: "RUN"
+    source_copy_fallback: false
+    source_resolved: "/Users/fareed/Documents/dev/test/1787495576/tied/implementation-decisions/IMPL-NETIF_CLI-pseudocode.md"
+    study_id: "netif-cli-run"
+    token: "IMPL-NETIF_CLI"
+    typed_diagnostics_annotated: 0
+    unknown_delta: 0
+    unknowns_annotated: 0
+    unknowns_copy: 0
+  - annotation_lines: 2
+    authoring_decisions: 2
+    preservation_pass: true
+    procedure: "RUN_VOLUMESTATS"
+    source_copy_fallback: false
+    source_resolved: "/Users/fareed/Documents/dev/test/1787416567/tied/implementation-decisions/IMPL-VOLUMESTATS-CLI-pseudocode.md"
+    study_id: "volumestats-cli-run"
+    token: "IMPL-VOLUMESTATS-CLI"
+    typed_diagnostics_annotated: 0
+    unknown_delta: 0
+    unknowns_annotated: 10
+    unknowns_copy: 10
+run_at: "2026-09-12T15:07:53.593Z"
+study: "F11-annotation-burden"

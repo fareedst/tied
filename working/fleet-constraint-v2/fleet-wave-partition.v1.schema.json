@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fleet-wave-partition.v1",
+  "title": "TIED fleet constraint v2 wave partition",
+  "description": "Ordered risk-based migration waves for Phase 4 G3 fleet execution (OD-P4-4).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "partition_id",
+    "methodology_pin",
+    "program_gate_policy",
+    "gate_promotion_stages_ref",
+    "updated_at",
+    "waves"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "$schema": { "type": "string" },
+    "partition_id": { "type": "string", "minLength": 1 },
+    "methodology_pin": { "type": "string", "minLength": 1 },
+    "program_gate_policy": {
+      "type": "string",
+      "enum": ["advisory", "blocking"],
+      "description": "Orchestrator program policy during Phase 4 (OD-P4-8)."
+    },
+    "gate_promotion_stages_ref": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Path to gate-promotion-stages.v1.yaml for stage definitions."
+    },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "notes": { "type": "string" },
+    "waves": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/waveEntry" }
+    }
+  },
+  "$defs": {
+    "gateStage": {
+      "type": "string",
+      "enum": ["G2", "G3"]
+    },
+    "waveStatus": {
+      "type": "string",
+      "enum": ["complete", "in_progress", "pending", "halted"]
+    },
+    "waveEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["wave_id", "client_ids", "gate_stage", "wave_status"],
+      "properties": {
+        "wave_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Stable wave identifier (e.g. W-stdd-2, W-ext-1789177584-1)."
+        },
+        "client_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "gate_stage": { "$ref": "#/$defs/gateStage" },
+        "wave_status": { "$ref": "#/$defs/waveStatus" },
+        "methodology_pin": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Optional per-wave pin override; defaults to partition methodology_pin."
+        },
+        "sidecar_list_path": {
+          "type": "string",
+          "description": "Repo-relative path to wave sidecar list YAML when enumerated."
+        },
+        "depends_on_wave_ids": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "max_sidecars": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10,
+          "description": "stdd sub-wave cap (OD-P3-3 carry-forward)."
+        },
+        "receipts_dir": {
+          "type": "string",
+          "description": "Directory for G3 receipt JSON files emitted for this wave."
+        },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}

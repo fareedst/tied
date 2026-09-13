@@ -1,5 +1,18 @@
 # [IMPL-VOCABULARY_PROJECTION] [ARCH-VOCABULARY_DATA_CONTRACT] [REQ-VOCABULARY_EXPLORER] — vocabulary-explorer.v1 deterministic projection.
 
+
+Grammar-Version: v2
+
+# [IMPL-VOCABULARY_PROJECTION] [ARCH-VOCABULARY_DATA_CONTRACT] [REQ-VOCABULARY_EXPLORER]
+# How: File-level contract INPUT where for constraint-enforced-v2; section bullet INPUT lines are assist-only.
+Contract:
+  INPUT: projectRootLabel: string where length(projectRootLabel) > 0
+  OUTPUT: VocabularyExplorerV1Envelope
+  PRE: analysis and catalog share normalized keys
+  POST: success emits vocabulary-explorer.v1 with sorted terms
+  EFFECTS: pure
+  TERMINATION: total
+
 ## Envelope projection
 
 - [IMPL-VOCABULARY_PROJECTION] [ARCH-VOCABULARY_DATA_CONTRACT] [REQ-VOCABULARY_EXPLORER] Merge analysis outputs into byte-stable vocabulary-explorer.v1 envelope.

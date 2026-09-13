@@ -1,5 +1,18 @@
 # [IMPL-VOCABULARY_VIEWER_STATE] [ARCH-VOCABULARY_OFFLINE_VIEW] [REQ-VOCABULARY_VIEWER_STATE] — Pure fragment-encoded viewer state.
 
+
+Grammar-Version: v2
+
+# [IMPL-VOCABULARY_VIEWER_STATE] [ARCH-VOCABULARY_OFFLINE_VIEW] [REQ-VOCABULARY_VIEWER_STATE]
+# How: File-level contract INPUT where for constraint-enforced-v2; section bullet INPUT lines are assist-only.
+Contract:
+  INPUT: fragment: string where length(fragment) >= 0
+  OUTPUT: ViewerState | encoded fragment
+  PRE: fragment omits leading hash when decoding
+  POST: encode(decode(s)) preserves semantic fields
+  EFFECTS: pure
+  TERMINATION: total
+
 ## Fragment encode and decode
 
 - [IMPL-VOCABULARY_VIEWER_STATE] [ARCH-VOCABULARY_OFFLINE_VIEW] [REQ-VOCABULARY_VIEWER_STATE] Round-trip filters, search, selection in URL hash without DOM.

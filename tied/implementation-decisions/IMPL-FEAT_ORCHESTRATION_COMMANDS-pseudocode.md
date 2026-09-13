@@ -1,9 +1,12 @@
 # [IMPL-FEAT_ORCHESTRATION_COMMANDS] [ARCH-FEAT_ORCHESTRATION_COMMANDS] [REQ-FEAT_ORCHESTRATION_COMMANDS]
 
+
+Grammar-Version: v2
+
 ## Summary contract
 # [IMPL-FEAT_ORCHESTRATION_COMMANDS] [ARCH-FEAT_ORCHESTRATION_COMMANDS] [REQ-FEAT_ORCHESTRATION_COMMANDS] — How: adapt lifecycle command requests to the Batch 0 evaluator and return resumable state.
 Contract:
-  INPUT: command; feature_identifier; expected_revision?; command_input
+  INPUT: command: string where length(command) > 0; feature_identifier: string where length(feature_identifier) > 0; expected_revision: int where expected_revision >= 0; command_input
   PRE: command is one of specify, refine, plan, tasks, verify, close_out
   OUTPUT: orchestration_result
   POST: read-only reports do not mutate; accepted mutations return updated state and next permitted phase
@@ -15,6 +18,16 @@ Contract:
 
 ## EXECUTE_LIFECYCLE_COMMAND
 procedure EXECUTE_LIFECYCLE_COMMAND(command, feature_identifier, expected_revision, command_input):
+  Contract:
+    INPUT: command: string where length(command) > 0; feature_identifier: string where length(feature_identifier) > 0; expected_revision: int where expected_revision >= 0; command_input
+    PRE: command is one of specify, refine, plan, tasks, verify, close_out
+    OUTPUT: orchestration_result
+    POST: read-only reports do not mutate; accepted mutations return updated state and next permitted phase
+    FAILURE_MODES: UNKNOWN_COMMAND; FEATURE_NOT_FOUND; STALE_REVISION; ILLEGAL_TRANSITION; PRECONDITION_UNMET
+    DATA_TRANSITION: accepted transition updates the feature manifest revision and lifecycle state; blocked transition leaves state unchanged
+    EFFECTS: IO, State
+    TERMINATION: total
+
   # [IMPL-FEAT_ORCHESTRATION_COMMANDS] [ARCH-FEAT_ORCHESTRATION_COMMANDS] [REQ-FEAT_ORCHESTRATION_COMMANDS] — How: map the command to a Batch 0 transition and delegate persistence.
   Resolve the command to a requested lifecycle phase.
   IF command is unknown: RETURN UNKNOWN_COMMAND.
@@ -27,6 +40,15 @@ procedure EXECUTE_LIFECYCLE_COMMAND(command, feature_identifier, expected_revisi
 
 ## REPORT_NEXT_PERMITTED_PHASE
 procedure REPORT_NEXT_PERMITTED_PHASE(manifest, evidence):
+  Contract:
+    INPUT: manifest with revision: int where revision >= 0; evidence
+    PRE: manifest is readable
+    OUTPUT: next_phase_report
+    POST: report names the first permitted successor or terminal_or_blocked with diagnostics
+    FAILURE_MODES: INVALID_MANIFEST
+    EFFECTS: pure
+    TERMINATION: total
+
   # [IMPL-FEAT_ORCHESTRATION_COMMANDS] [ARCH-FEAT_ORCHESTRATION_COMMANDS] [REQ-FEAT_ORCHESTRATION_COMMANDS] — How: expose the next actionable lifecycle phase without inventing later-batch gates.
   Evaluate each legal successor in matrix order.
   Select the first permitted successor.

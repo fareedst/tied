@@ -1,6 +1,9 @@
 # [IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP] [ARCH-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP] [REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP]
 # Summary: Normalize procedure block-lead comments inside sidecar bodies across phased waves without changing validator behavior or grammar version policy.
 
+
+Grammar-Version: v2
+
 ## BLOCK_LEAD_INVENTORY
 
 - [IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP] [ARCH-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP] [REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP] How: Emit a machine-readable inventory of external-only and inter-procedure block-leads before any write pass.
@@ -19,7 +22,7 @@
 procedure SCAN_BLOCK_LEAD_PLACEMENT(sidecar_root, wave_filter, check_mode):
   # [IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP] [ARCH-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP] [REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP] How: Reuse block-lead detection aligned with pseudocode-shared isBlockLeadCommentLine and tokenScan bounds without mutating files in check mode.
   Contract:
-    INPUT: sidecar root, optional wave filter, check mode flag
+    INPUT: sidecar_root: string where length(sidecar_root) > 0; optional wave_filter; check_mode flag
     OUTPUT: block_lead_inventory JSON | error: SidecarRootUnavailable | InventoryWriteFailed
     PRE: sidecar root exists and is readable
     POST: inventory counts match detected external-only and inter-procedure leads; check mode leaves bytes unchanged

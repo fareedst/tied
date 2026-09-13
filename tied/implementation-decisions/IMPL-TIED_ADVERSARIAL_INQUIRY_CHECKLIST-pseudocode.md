@@ -1,4 +1,7 @@
 # [IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY]
+# Summary: Integrate adversarial inquiry into checklist slugs with bounded working artifacts and scoped strict gating.
+
+# [IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY]
 # How: integrate inquiry into existing checklist slugs with bounded working artifacts and human-approved scoped strict status.
 
 Contract:
@@ -12,10 +15,13 @@ Contract:
   EFFECTS: IO, State
   TERMINATION: total
 
+
+Grammar-Version: v2
+
 ## SELECT_ADVERSARIAL_INQUIRY_DEPTH
 # [IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY] How: distinguish research profile, assurance profile, and gate policy before selecting checklist work.
 Contract:
-  INPUT: research profile, assurance profiles, changed scope, requested gate policy
+  INPUT: changed_scope: list where length(changed_scope) > 0; research profile, assurance profiles, requested gate policy
   PRE: profiles use canonical names and scope is non-empty
   OUTPUT: depth selection and whether executable assurance is applicable
   POST: baseline-functional is retained; specialized profiles are selected only by trigger; strict policy is never implied by profile selection
@@ -111,6 +117,13 @@ Contract:
   EFFECTS: IO (read TIED/build-config; optional write outputs)
   TERMINATION: total
 procedure BUILD_MODE_A_FROM_TIED(): # [IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST] [IMPL-TIED_FILES] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY]
+  Contract:
+    INPUT: TBD
+    PRE: TBD
+    POST:
+      - success => TBD
+    EFFECTS: pure
+
 1. Resolve tied_base_path defaulting to project_root/tied.
 2. Compute projectId as SHA256(resolved tied_base_path)[0:16].
 3. When build_config is present, load declarative graph/fidelity mapping (interim v1) and merge CLI overrides.

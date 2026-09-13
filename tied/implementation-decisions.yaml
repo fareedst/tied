@@ -1658,6 +1658,15 @@ IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT:
     tests:
       - "mcp-server/src/analysis/pseudocode-grammar-v2-default.test.ts"
       - "scripts/audit-grammar-v2-default.mjs"
+IMPL-PSEUDOCODE_MIGRATION_TOOLING:
+  cross_references:
+    - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+    - "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
+    - "REQ-PSEUDOCODE_MIGRATION_TOOLING"
+  description: "Executable pilot migration workflow: BUILD_PILOT_INVENTORY, RUN_MIGRATION_DRY_RUN, EMIT_MIGRATION_RECEIPT, REVERT_MIGRATION_APPLY."
+  detail_file: "implementation-decisions/IMPL-PSEUDOCODE_MIGRATION_TOOLING.yaml"
+  name: "Pseudocode migration tooling"
+  status: "Active"
 IMPL-PSEUDOCODE_SHARED_PRIMITIVES:
   cross_references:
     - "ARCH-PSEUDOCODE_PARSER_UNIFICATION"

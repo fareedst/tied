@@ -1,12 +1,15 @@
 # [IMPL-TIED_YAML_STYLE_RESOLVER] [ARCH-TIED_YAML_STYLE_RESOLUTION] [REQ-TIED_YAML_STYLE_CONFIGURATION]
 # Summary: Resolve one repository YAML scalar style and apply it consistently to canonical serialization, lint, CLI, and MCP writes.
 
+
+Grammar-Version: v2
+
 ## RESOLVE_YAML_STYLE
 # [IMPL-TIED_YAML_STYLE_RESOLVER] [ARCH-TIED_YAML_STYLE_RESOLUTION] [REQ-TIED_YAML_STYLE_CONFIGURATION]
 # How: Select repository configuration before global fallbacks and reject explicit invalid repository values.
 procedure RESOLVE_YAML_STYLE(tied_base_path, environment, filesystem):
   Contract:
-  INPUT: tied_base_path, environment variables, optional repository and XDG config files
+  INPUT: tied_base_path: string where length(tied_base_path) > 0, environment variables, optional repository and XDG config files
   OUTPUT: resolved scalar_style and configuration source
   DATA: scalar_style in {unwrapped, wrapped}; source in {repository, environment, xdg, default}
   CONTROL: repository > TIED_YAML_STYLE > XDG_CONFIG_HOME/tied/yaml-format.yaml > default

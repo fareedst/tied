@@ -9,6 +9,7 @@ export type AnalyzerSweepOptions = {
   typed_gate_errors?: boolean;
   constraint_flow?: boolean;
   constraint_gate_errors?: boolean;
+  include_structural_compat?: boolean;
 };
 
 export type SweepResult = {
@@ -58,6 +59,9 @@ export async function analyzeSidecarEntry(
   }
   if (options.constraint_gate_errors === true) {
     input.constraint_gate_errors = true;
+  }
+  if (options.include_structural_compat === true) {
+    input.include_structural_compat = true;
   }
 
   const report = analyzeEssencePseudocode(

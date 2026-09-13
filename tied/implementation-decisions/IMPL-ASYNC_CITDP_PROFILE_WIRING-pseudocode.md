@@ -1,6 +1,9 @@
 # [IMPL-ASYNC_CITDP_PROFILE_WIRING] [ARCH-ASYNC_CITDP_EVIDENCE] [REQ-ASYNC_CITDP_TRIGGERS]
 # Summary: CITDP candidate trigger derivation, evidence matrix, and inquiry activation contract (W3).
 
+
+Grammar-Version: v2
+
 procedure ASYNC_CITDP_PROFILE_WIRING_MAIN():
   # [IMPL-ASYNC_CITDP_PROFILE_WIRING] [ARCH-ASYNC_CITDP_EVIDENCE] [REQ-ASYNC_CITDP_TRIGGERS]
   # How: Consume W2 async_in_scope; emit candidate triggers and evidence rows; gate inquiry activation.
@@ -20,12 +23,13 @@ procedure ASYNC_CITDP_PROFILE_WIRING_MAIN():
   6. RETURN candidate_triggers, evidence_dispositions
 
 procedure DERIVE_ASYNC_CITDP_TRIGGERS(scope, pseudocode, req_context, bindings):
-  # How: Plan § W3 trigger table — candidate only; no tied_adversarial_inquiry_run.
+  # [IMPL-ASYNC_CITDP_PROFILE_WIRING] — How: Plan § W3 trigger table — candidate only; no tied_adversarial_inquiry_run.
   Contract:
-    INPUT: async_in_scope, matched_semantic_classes, pseudocode, req_context, composition_bindings
+    INPUT: async_in_scope, matched_semantic_classes, pseudocode, req_context, composition_bindings: list where length(composition_bindings) >= 0
     OUTPUT: candidate_triggers
     PRE: async_in_scope true
     POST: each trigger has candidate_only true
+    DATA_TRANSITION: matched criteria append trigger descriptors to in-memory candidate_triggers only
     EFFECTS: ReadOnly
   1. IF Async EFFECTS or async boundary row THEN EMIT async-boundary-catalog profile recommendation
   2. IF SEND/IPC/event-handler binding THEN EMIT composition-async-seam test-strategy row
@@ -35,7 +39,7 @@ procedure DERIVE_ASYNC_CITDP_TRIGGERS(scope, pseudocode, req_context, bindings):
   6. RETURN candidate_triggers
 
 procedure VALIDATE_ASYNC_CITDP_ACTIVATION(inquiry_requested, disposition):
-  # How: Explicit activation contract before tied_adversarial_inquiry_run (D6).
+  # [IMPL-ASYNC_CITDP_PROFILE_WIRING] — How: Explicit activation contract before tied_adversarial_inquiry_run (D6).
   Contract:
     INPUT: async_in_scope, inquiry_requested, disposition
     OUTPUT: allowed, diagnostics
@@ -51,7 +55,7 @@ procedure VALIDATE_ASYNC_CITDP_ACTIVATION(inquiry_requested, disposition):
   6. RETURN allowed, diagnostics
 
 procedure ASYNC_EVIDENCE_MATRIX_LOOKUP(attribute):
-  # [ARCH-ASYNC_CITDP_EVIDENCE] — How: return artifact, proof_boundary, minimum_acceptance for async attribute row.
+  # [IMPL-ASYNC_CITDP_PROFILE_WIRING] [ARCH-ASYNC_CITDP_EVIDENCE] — How: return artifact, proof_boundary, minimum_acceptance for async attribute row.
   Contract:
     INPUT: attribute id
     OUTPUT: evidence_matrix_row | undefined

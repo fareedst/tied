@@ -1,11 +1,14 @@
 # [IMPL-ASYNC_CHECKLIST_DISPOSITIONS] [ARCH-ASYNC_CHECKLIST_INTEGRATION] [REQ-ASYNC_CHECKLIST_CATALOG]
 # Summary: Checklist async catalog table validation, contradiction routing, and async_in_scope Tracker disposition (W2).
 
+
+Grammar-Version: v2
+
 procedure ASYNC_CHECKLIST_DISPOSITIONS_MAIN():
   # [IMPL-ASYNC_CHECKLIST_DISPOSITIONS] [ARCH-ASYNC_CHECKLIST_INTEGRATION] [REQ-ASYNC_CHECKLIST_CATALOG]
   # How: Orchestrate impact-discovery async_in_scope, Phase B catalog-async-boundaries, and flag-async-contradictions routing.
   Contract:
-    INPUT: tracker, impl_pseudocode_set, req_context
+    INPUT: tracker, impl_pseudocode_set: list where length(impl_pseudocode_set) >= 0, req_context
     OUTPUT: disposition_report
     PRE: W2 authorized; checklist MD/YAML include catalog-async-boundaries and flag-async-contradictions
     POST: every async-marked changed IMPL has closed catalog rows or blocking findings route to resolve-pseudocode
@@ -20,7 +23,7 @@ procedure ASYNC_CHECKLIST_DISPOSITIONS_MAIN():
   6. RETURN disposition_report
 
 procedure DETECT_ASYNC_IN_SCOPE(input_text, impl_set):
-  # How: Candidate trigger marker only — never activate inquiry from async_in_scope alone.
+  # [IMPL-ASYNC_CHECKLIST_DISPOSITIONS] — How: Candidate trigger marker only — never activate inquiry from async_in_scope alone.
   Contract:
     INPUT: input_text, impl_set
     OUTPUT: async_in_scope, matched_semantic_classes
@@ -33,7 +36,7 @@ procedure DETECT_ASYNC_IN_SCOPE(input_text, impl_set):
   4. RETURN async_in_scope, matched_semantic_classes
 
 procedure VALIDATE_ASYNC_CATALOG_TABLE(pseudocode, catalog_rows):
-  # How: One closed row per async block with eight columns from W2 table schema.
+  # [IMPL-ASYNC_CHECKLIST_DISPOSITIONS] — How: One closed row per async block with eight columns from W2 table schema.
   Contract:
     INPUT: pseudocode, catalog_rows
     OUTPUT: catalog_validation_result
@@ -46,7 +49,7 @@ procedure VALIDATE_ASYNC_CATALOG_TABLE(pseudocode, catalog_rows):
   3. RETURN catalog_validation_result
 
 procedure DETECT_ASYNC_CONTRADICTIONS(impl_set, req_context, phase):
-  # How: Deterministic flag-async-contradictions outcomes; typed AWAIT/Promise checks when evidence available.
+  # [IMPL-ASYNC_CHECKLIST_DISPOSITIONS] — How: Deterministic flag-async-contradictions outcomes; typed AWAIT/Promise checks when evidence available.
   Contract:
     INPUT: impl_set, req_context, phase
     OUTPUT: contradiction_findings

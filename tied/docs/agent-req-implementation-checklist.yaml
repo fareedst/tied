@@ -20,23 +20,8 @@ execution_evidence:
     gates: {}
     master_checklist: ""
   completed: []
-  envelope_path: working/{REQ-TOKEN}/evidence/request-evidence-envelope.v1.json
-  evidence_refs_format: |
-    Typed evidence_refs for completed dispositions (RESOLVE_EVIDENCE_REFS at write time):
-      - kind: manifest_ref
-        path: working/{REQ-TOKEN}/evidence/verification-evidence-manifest.v1.json
-      - kind: gate_receipt
-        path: working/{REQ-TOKEN}/gates/verification-2026-08-24T16-46-08-642Z.json
-      - kind: envelope_ref
-        path: working/{REQ-TOKEN}/evidence/request-evidence-envelope.v1.json
-      - kind: file_path
-        path: working/{REQ-TOKEN}/evidence/step-artifact.md
-      - kind: command_evidence
-        claimed_success: true
-        manifest_ref: working/{REQ-TOKEN}/evidence/verification-evidence-manifest.v1.json
-        stdout_ref: working/{REQ-TOKEN}/evidence/stdout.txt
-        exit_code: 0
-    Legacy string paths remain accepted; generic prose (e.g. "tests passed") is rejected as unresolved_evidence_ref.
+  envelope_path: "working/{REQ-TOKEN}/evidence/request-evidence-envelope.v1.json"
+  evidence_refs_format: "Typed evidence_refs for completed dispositions (RESOLVE_EVIDENCE_REFS at write time):\n  - kind: manifest_ref\n    path: working/{REQ-TOKEN}/evidence/verification-evidence-manifest.v1.json\n  - kind: gate_receipt\n    path: working/{REQ-TOKEN}/gates/verification-2026-08-24T16-46-08-642Z.json\n  - kind: envelope_ref\n    path: working/{REQ-TOKEN}/evidence/request-evidence-envelope.v1.json\n  - kind: file_path\n    path: working/{REQ-TOKEN}/evidence/step-artifact.md\n  - kind: command_evidence\n    claimed_success: true\n    manifest_ref: working/{REQ-TOKEN}/evidence/verification-evidence-manifest.v1.json\n    stdout_ref: working/{REQ-TOKEN}/evidence/stdout.txt\n    exit_code: 0\nLegacy string paths remain accepted; generic prose (e.g. \"tests passed\") is rejected as unresolved_evidence_ref.\n"
   operator_evidence:
     integrated_pilot_template: "depth_tier: integrated\ngate_policy: advisory\nprior_depth_tier: null\nphase_artifact_dir: working/{REQ-TOKEN}/adversarial-inquiry/phase-{phase}/  # authoritative\ncollect: tied_checklist_activation_collect request_token, phase, run_id, project_root\ngate: tied_checklist_gate_validate with activation payload (receipt + four artifacts)\nchecklist: docs/integrated-activation-checklist-enforcement-plan.md §8\n"
     limitation: "Replace {REQ-TOKEN} and {phase}; prefer collect when phase dirs exist; see §8 for pre_implementation, verification, and close_out sequence."
@@ -480,8 +465,8 @@ steps:
       calls:
         - "sub-adversarial-inquiry-pass"
         - "sub-evidence-chain-profile"
-        - "sub-pseudocode-validation-pass"
         - "sub-pseudocode-static-analysis-pass"
+        - "sub-pseudocode-validation-pass"
         - "sub-vocabulary-sync"
         - "sub-yaml-edit-loop"
       next: "sync-tied-stack"
@@ -497,8 +482,8 @@ steps:
     slug: "verification-gate"
     tasks:
       - "Build the full fidelity matrix with an executable evidence partition; CALL sub-adversarial-inquiry-pass with phase verification and profile-dependent blocking (strict-eligible only)."
-      - "CALL sub-pseudocode-validation-pass: re-run full pseudo-code validation (Layer B including minimum_gating_rules) now that executable tests exist; document findings by category and severity. IF unresolved gaps THEN GOTO resolve-pseudocode or unit-test-red per findings."
       - "CALL sub-pseudocode-static-analysis-pass when input_identity.hash differs from the pre-RED Layer C report for any changed in-scope IMPL; otherwise cite the existing report path in evidence_refs."
+      - "CALL sub-pseudocode-validation-pass: re-run full pseudo-code validation (Layer B including minimum_gating_rules) now that executable tests exist; document findings by category and severity. IF unresolved gaps THEN GOTO resolve-pseudocode or unit-test-red per findings."
       - "Final three-way alignment audit: for every IMPL touched, verify pseudo-code/test/code same token set; document e2e_only blocks and e2e_only_reason."
       - "IF validateStrictEligibility fails THEN take the warn-only branch — never block on a new semantic rule; state which eligibility condition is unmet."
       - "Module validation per [REQ-MODULE_VALIDATION]: confirm each module validated independently; document results."
@@ -637,8 +622,8 @@ steps:
     slug: "catalog-pseudocode-contracts"
     tasks:
       - "Build a closed catalog of failure modes, state transitions, ordering assumptions, and termination conditions per block; flag any block missing an entry."
-      - "For each in-scope project/feature IMPL, read essence_pseudocode sequentially. For each, note: INPUT/OUTPUT/DATA (and CONTROL when present); PRE/POST/EFFECTS; FAILURE_MODES when errors are possible; DATA_TRANSITION when DATA is mutated or EFFECTS includes State; TERMINATION when recursion/WHILE/open wait (prefer total otherwise); procedure names (UPPER_SNAKE or camelCase); key branches (IF/ELSE), loops (FOR ... IN), error paths (ON error, RETURN error) and whether names appear in FAILURE_MODES; async boundaries (AWAIT, Promise) and whether EFFECTS includes Async."
       - "CALL catalog-async-boundaries when async_in_scope: true or any changed in-scope IMPL declares an async boundary: for each async-marked block produce one closed catalog row with columns Block | Boundary kind | Await/message/event | Timeout | Cancellation | Retry/idempotency | Shared DATA | Termination/order (explicit N/A when a class does not apply). Missing row for an async-marked changed block is blocking insufficient-spec; route to resolve-pseudocode before RED. Legacy non-async IMPLs require no async catalog table."
+      - "For each in-scope project/feature IMPL, read essence_pseudocode sequentially. For each, note: INPUT/OUTPUT/DATA (and CONTROL when present); PRE/POST/EFFECTS; FAILURE_MODES when errors are possible; DATA_TRANSITION when DATA is mutated or EFFECTS includes State; TERMINATION when recursion/WHILE/open wait (prefer total otherwise); procedure names (UPPER_SNAKE or camelCase); key branches (IF/ELSE), loops (FOR ... IN), error paths (ON error, RETURN error) and whether names appear in FAILURE_MODES; async boundaries (AWAIT, Promise) and whether EFFECTS includes Async."
       - "Methodology-only IMPLs (inherited merged view): at most one short note that essence_pseudocode may be null and contracts are not extracted here—do not produce large empty tables."
       - "Name logical units from canonical vocabulary: when noting procedure names and UPPER_SNAKE block names, CALL sub-vocabulary-sync (RESOLVE) so each maps to the preferred domain term in ./tied/vocab/*.md (the preferred term IS the block name); CALL sub-vocabulary-sync (RECORD) for any new block-name/procedure term so it is captured immediately ([PROC-VOCABULARY_INDEX])."
       - "Responsibility: pseudo-code owner step. Define contract-level logic intent only; do not author production code or automated test logic here."
@@ -701,8 +686,8 @@ steps:
     references: []
     slug: "flag-contradictory-specs"
     tasks:
-      - "Compare across in-scope project/feature IMPLs (and overlapping verified-present code paths): shared DATA conflict (including DATA_TRANSITION / PRE/POST mismatch); EFFECTS conflict on the same path; ordering conflict; incompatible OUTPUT types or FAILURE_MODES; duplicate logic with different parameters or behavior. Skip pairwise comparison of unrelated inherited methodology IMPL records."
       - "CALL flag-async-contradictions when async_in_scope: true: AWAIT without Promise OUTPUT or Async in EFFECTS when typed evidence available (checklist disposition; full typed enforcement deferred W4); Async in EFFECTS without AWAIT/SEND/Promise OUTPUT or boundary rationale; SEQUENCING/CONTROL ordering mismatch between caller/callee IMPLs; message/event delivery vs handler/ack or duplicate handling disagreement; RETRY without idempotency/deduplication for repeated DATA transitions; open wait without close/unsubscribe or TERMINATION: may_diverge (warn Phase B, error at verification); REQ timeout not in IMPL TIMEOUT row (warn Phase B, error at verification when REQ declares timeout). Route findings to resolve-pseudocode before RED."
+      - "Compare across in-scope project/feature IMPLs (and overlapping verified-present code paths): shared DATA conflict (including DATA_TRANSITION / PRE/POST mismatch); EFFECTS conflict on the same path; ordering conflict; incompatible OUTPUT types or FAILURE_MODES; duplicate logic with different parameters or behavior. Skip pairwise comparison of unrelated inherited methodology IMPL records."
       - "Derive contradiction flags from explicit counterexamples; append warn-level findings to the per-request finding ledger when a counterexample reveals a contradiction."
       - "Responsibility: pseudo-code owner step. Resolve logic contradictions before test/code execution continues."
     title: "Cross-IMPL conflicts"
@@ -788,8 +773,8 @@ steps:
           condition: "VALIDATE reports unresolved vocabulary mismatches"
           target: "sync-tied-stack"
       calls:
-        - "sub-close-out-evidence-sync"
         - "sub-adversarial-inquiry-pass"
+        - "sub-close-out-evidence-sync"
         - "sub-vocabulary-sync"
       next: "EXIT"
     goals: "Create a traceable commit with proper format and token references."
@@ -801,14 +786,14 @@ steps:
       - "tied/docs/vocabulary-index-analysis-and-standards.md"
     slug: "traceable-commit"
     tasks:
+      - "CALL sub-close-out-evidence-sync before close-out gates: never write execution_evidence.completed without matching step dispositions in the same pass (tracker_dual_write is a process gap)."
       - "Do NOT push unless explicitly asked."
       - "IF the driver emits additional turns for sub-yaml-edit-loop, sub-pseudocode-validation-pass, or sub-leap-micro-cycle after this step, those subs were already invoked via CALL during earlier steps—unless you have new mutations, reply with one-line RETURN; do not repeat full procedures."
       - "Include evidence provenance, open (unresolved) finding count, active waivers, and the proof-boundary partition in the commit body or an explicit CITDP cross-reference; this is part of the Touchpoint 3 VALIDATE gate, not optional prose."
-      - "Unified close-out: traceable-commit requires checklist gate allowed true AND request-evidence-envelope validate with fail_on_error_gaps (zero blocking error gaps) unless each gap code has a documented waiver registry entry; at integrated depth fail_on_error_gaps also blocks process-adherence warn gaps (Wave 6). Advisory inquiry findings remain visible as warn-severity envelope gaps under gate_policy advisory."
       - "Parent handoff and commit body must report three completion signals separately (machine close-out, process contract, adherence ledger) per tools/bundled-prompt-type-skills/prompt-shared/completion-signals-handoff.md — never collapse gate success into done."
-      - "CALL sub-close-out-evidence-sync before close-out gates: never write execution_evidence.completed without matching step dispositions in the same pass (tracker_dual_write is a process gap)."
       - "Stage relevant files. Commit."
       - "Touchpoint 3 (pre-commit): CALL sub-vocabulary-sync (VALIDATE) — audit all files changed this pass: TIED record name fields and token suffixes in semantic-tokens.yaml, UPPER_SNAKE block names in essence_pseudocode, test/code identifiers, README/CHANGELOG/UI terms; each must resolve to exactly one preferred term in ./tied/vocab/*.md with naming bridges and alphabetical index current; do not stage or commit until VALIDATE passes or immature-client deferral is explicitly noted in the per-request checklist copy."
+      - "Unified close-out: traceable-commit requires checklist gate allowed true AND request-evidence-envelope validate with fail_on_error_gaps (zero blocking error gaps) unless each gap code has a documented waiver registry entry; at integrated depth fail_on_error_gaps also blocks process-adherence warn gaps (Wave 6). Advisory inquiry findings remain visible as warn-severity envelope gaps under gate_policy advisory."
       - "When a profile is in scope: validate provenance, open findings, waivers, and missing-data disclosures (not_measured / unknown) against the profile artifact."
       - "When client YAML styling is configured (non-default scalar_style or client_formatter in .tied-yaml.yaml), include resolved style policy and formatter version/configuration source in validation evidence or an explicit CITDP cross-reference; styling_status not_configured requires no extra prose."
       - "Write commit message per [PROC-COMMIT_MESSAGES]: header <type>(<scope>): <subject> (≤50 chars); type feat|fix|docs|refactor|test|build|ci|chore|perf|style; scope area affected; subject imperative present tense; body motivation/behavior; footer Closes/Fixes #issue and REQ/ARCH/IMPL tokens touched."
@@ -896,8 +881,8 @@ steps:
       branches: []
       calls:
         - "sub-adversarial-inquiry-pass"
-        - "sub-pseudocode-validation-pass"
         - "sub-pseudocode-static-analysis-pass"
+        - "sub-pseudocode-validation-pass"
       next: "persist-implementation-records"
     goals: "Ensure IMPL pseudo-code satisfies validation checklist before persisting or writing tests/code."
     outcomes: "Pseudo-code validation run; pre-RED structural gating satisfied; coverage/traceability rows documented N/A until verification-gate re-run after tests exist."
@@ -910,14 +895,14 @@ steps:
       - "tied/docs/pseudocode-writing-and-validation.md"
     slug: "gate-pseudocode-validation"
     tasks:
-      - "CALL sub-adversarial-inquiry-pass with phase pre_implementation and blocking false; this pass makes no runtime claim — it only checks structural and contract completeness after depth selection."
       - "Async adversarial inquiry binding (W2 checklist text only): when depth_tier is integrated and async_in_scope: true, document request for four bounded cases at pre_implementation — timeout without FAILURE_MODE, double AWAIT on non-idempotent DATA, missing ordering between SEND and AWAIT, retry without duplicate protection. Do not silently run inquiry; W3 owns MCP activation. async_in_scope alone never authorizes inquiry."
-      - "CALL sub-pseudocode-validation-pass. Run validation per [PROC-PSEUDOCODE_VALIDATION] using ./tied/docs/pseudocode-validation-checklist.yaml or ./docs/pseudocode-validation-checklist.yaml."
+      - "CALL sub-adversarial-inquiry-pass with phase pre_implementation and blocking false; this pass makes no runtime claim — it only checks structural and contract completeness after depth selection."
       - "CALL sub-pseudocode-static-analysis-pass for each changed in-scope Active project IMPL listed in the per-request Tracker IMPL inventory. Submit the complete sidecar file per IMPL (file-scoped Layer C); pre-psa-grammar N/A cannot suppress errors inside that submitted file."
+      - "CALL sub-pseudocode-validation-pass. Run validation per [PROC-PSEUDOCODE_VALIDATION] using ./tied/docs/pseudocode-validation-checklist.yaml or ./docs/pseudocode-validation-checklist.yaml."
       - "Do not proceed to persist-implementation-records until pre-RED structural gating is satisfied (see pseudocode-writing-and-validation.md § Validation layers)."
       - "If no parser/tool: perform manual pass over checklist categories and document results."
-      - "Pre-RED structural gate (before unit-test-red): satisfy parsing/schema (including SHAPE-003..006)/symbol/contract/graph/reporting checks applicable to IMPL-only pseudo-code; mark behavioral_coverage and traceability rows that require executable tests as N/A with rationale (no tests yet)—not ad-hoc waiver IDs."
       - "New TIED client project IMPLs: newly authored sidecars copied from the canonical template MUST declare `Grammar-Version: v2` as the first non-comment preamble line after the H1 ([REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT]); header presence does not require `constraint_flow: true`. Optional Layer B SHAPE-007 applies only when the v2 header is declared ([pseudocode-grammar.v2.md](pseudocode-grammar.v2.md))."
+      - "Pre-RED structural gate (before unit-test-red): satisfy parsing/schema (including SHAPE-003..006)/symbol/contract/graph/reporting checks applicable to IMPL-only pseudo-code; mark behavioral_coverage and traceability rows that require executable tests as N/A with rationale (no tests yet)—not ad-hoc waiver IDs."
       - "Precision-contract rows (SHAPE-003..006 and related): N/A only for Template stubs, applicability skips, or unchanged legacy Active blocks with rationale pre-contract-grammar; new/changed Active blocks must satisfy PRE/POST/EFFECTS and applicable FAILURE_MODES/DATA_TRANSITION/TERMINATION."
       - "Responsibility: pseudo-code owner step. This is the final logic-intent gate before tests/code steps may proceed."
       - "Run validation passes in recommended order; record findings with severity and source location."
@@ -951,8 +936,8 @@ steps:
       - "Flag missing TERMINATION when recursion / WHILE / open-ended wait is present."
       - "Flag procedures referenced but not defined."
       - "Flag stub or template pseudo-code on IMPL with status Active (for in-scope project IMPLs)."
-      - "When async_in_scope: true, flag missing closed async catalog row or incomplete async catalog column from catalog-async-boundaries; route to catalog-async-boundaries then resolve-pseudocode before RED."
       - "Responsibility: pseudo-code owner step. This step blocks tests/code when logic intent is incomplete."
+      - "When async_in_scope: true, flag missing closed async catalog row or incomplete async catalog column from catalog-async-boundaries; route to catalog-async-boundaries then resolve-pseudocode before RED."
     title: "Blockers before tests or code"
     tracking:
       consideration_before_proceeding: "Insufficient specs identified; all flagged for resolution in resolve-pseudocode."
@@ -980,6 +965,7 @@ steps:
       - "tied/docs/vocabulary-index-analysis-and-standards.md"
     slug: "impact-discovery"
     tasks:
+      - "Async in scope disposition (W2): IF any in-scope file, sponsor text, or IMPL pseudo-code suggests async (AWAIT, Promise OUTPUT, Async in EFFECTS, SEND, open wait, or optional async contract rows) THEN set async_in_scope: true on the per-request Tracker and record async_matched_semantic_classes (await_sequencing, message_event_delivery, cancellation, timeout, retry_idempotency, shared_data, termination); ELSE set async_in_scope: false. This is a candidate trigger marker only — not inquiry activation; do not call tied_adversarial_inquiry_run; do not set async_inquiry_activated from async_in_scope alone (W3 owns MCP trigger wiring). PRELOAD tied/vocab/async-methodology.md when async_in_scope: true."
       - "Before authoring REQ/ARCH/IMPL, select baseline-functional and any triggered assurance profiles from tied/vocab/quality-assurance.md."
       - "Build tied_context: tied_tokens_affected, tied_tokens_new."
       - "Create the initial quality_evidence_matrix: per quality attribute record applicability, rationale, risk, evidence method, exact command_or_test, threshold, result placeholder, owner, limitation, and waiver/expiry when applicable."
@@ -998,7 +984,6 @@ steps:
       - "Record first-divergence hypotheses; seed an obligation inventory for the declared scope; link each quality_evidence_matrix row to a proof-boundary class (traceability_structure, pseudo_code_structure, semantic_fidelity, executable_behavior, human_decision)."
       - "Select the adversarial depth tier (minimal | integrated | strict_candidate) and gate policy before any depth-dependent pre-implementation inquiry. Record depth_tier independently from research_profile, assurance_profile, and gate_policy."
       - "Stop expanding when no new IMPLs share code paths, REQ/ARCH tokens, or composed_with links with the current set."
-      - "Async in scope disposition (W2): IF any in-scope file, sponsor text, or IMPL pseudo-code suggests async (AWAIT, Promise OUTPUT, Async in EFFECTS, SEND, open wait, or optional async contract rows) THEN set async_in_scope: true on the per-request Tracker and record async_matched_semantic_classes (await_sequencing, message_event_delivery, cancellation, timeout, retry_idempotency, shared_data, termination); ELSE set async_in_scope: false. This is a candidate trigger marker only — not inquiry activation; do not call tied_adversarial_inquiry_run; do not set async_inquiry_activated from async_in_scope alone (W3 owns MCP trigger wiring). PRELOAD tied/vocab/async-methodology.md when async_in_scope: true."
       - "Touchpoint 2 (pre-read): CALL sub-vocabulary-sync (PRELOAD) scoped to modules and concepts from change-definition — load glossaries under ./tied/vocab/ (VOCAB_INDEX) for affected subsystems so subsequent IMPL/code reads interpret symbols and paths with canonical names; produce or extend the term map before any discovery reads."
       - "Traceability vs workspace: TIED code_locations document where an IMPL is anchored; they do not require every listed path to exist in this checkout. Paths absent here (other layouts, methodology-only tooling, unrelated inherited IMPLs): note as N/A or out of scope for this pass; do not treat as missing implementation or block the checklist."
       - "When an evidence chain profile is in scope, declare profile scope, roots, denominators, selected evidence dimensions, and the default evidence-chain profile depth (integrated or human_research). Keep profile_depth distinct from inquiry research_profile and from assurance profiles ([PROC-EVIDENCE_CHAIN])."
@@ -1128,17 +1113,17 @@ steps:
     outcomes: "Handoff lists .gitignore patterns proposed or applied (unstaged) or explicit N/A with rationale."
     preconditions: []
     references:
-      - "tools/bundled-prompt-type-skills/prompt-shared/gitignore-close-out-hygiene.md"
       - ".gitignore"
       - "tied/docs/processes.md § [PROC-GITIGNORE_CLOSE_OUT]"
+      - "tools/bundled-prompt-type-skills/prompt-shared/gitignore-close-out-hygiene.md"
     slug: "gitignore-close-out-hygiene"
     tasks:
       - "Apply [PROC-GITIGNORE_CLOSE_OUT] per gitignore-close-out-hygiene.md."
-      - "MAY run read-only git status or git diff --name-only; do NOT git add or git commit."
-      - "Review untracked and ephemeral paths; classify ignore / track / delete."
       - "Apply unstaged .gitignore pattern additions using repository comment-block conventions, or record propose-only items in handoff when ambiguous."
-      - "When patterns already cover observed paths, record N/A citing existing rules."
+      - "MAY run read-only git status or git diff --name-only; do NOT git add or git commit."
       - "Prefer convention patterns over one-off paths; use ! negation when aggregates must remain trackable."
+      - "Review untracked and ephemeral paths; classify ignore / track / delete."
+      - "When patterns already cover observed paths, record N/A citing existing rules."
     title: "Gitignore close-out hygiene (advisory)"
     tracking:
       consideration_before_proceeding: "Gitignore hygiene handoff bullet present: patterns proposed/applied (unstaged) or explicit N/A."
@@ -1280,31 +1265,6 @@ sub_procedures:
       status: "pending"
   - flow:
       return_to: "caller"
-    goals: "Synchronize baseline-functional checklist evidence before close-out gates: disposition sync, verification manifest collection, and adherence reconciliation."
-    invoked_by:
-      - "traceable-commit"
-    outcomes: "Every slug in execution_evidence.completed has matching non-pending step disposition with typed evidence_refs; verification-evidence-manifest.v1.json present when tests ran; reconcile report recorded before gate validate."
-    preconditions:
-      - "Authoritative Tracker at working/{REQ-TOKEN}/agent-req-implementation-checklist.yaml."
-      - "Close-out producers distinguish machine close-out, process contract, and adherence ledger correlation."
-    references:
-      - "docs/process-adherence-evidence-grade-plan.md"
-      - "tools/bootstrap/templates/sync-tracker-dispositions.mjs"
-      - "tools/bootstrap/templates/run-close-out-gates.mjs"
-    slug: "sub-close-out-evidence-sync"
-    tasks:
-      - "Sync dispositions: run tools/bootstrap/templates/sync-tracker-dispositions.mjs --tracker working/{REQ-TOKEN}/agent-req-implementation-checklist.yaml so every execution_evidence.completed slug has matching steps[].tracking.status completed (or documented N/A) plus typed evidence_refs."
-      - "Collect manifest: when verification-gate or test slugs are completed, run quality_evidence_collect to working/{REQ-TOKEN}/evidence/verification-evidence-manifest.v1.json or record not-applicable receipt."
-      - "Reconcile before gates: run tied_adherence_reconcile_run with include_process_grade true; re-run gates if tracker hash changed after sync."
-      - "Rebuild request-evidence-envelope.v1.json; validate with fail_on_error_gaps for machine close-out; optionally fail_on_process_gaps for process-strict sponsors."
-    title: "Close-out evidence sync (Wave 5 process contract)"
-    tracking:
-      consideration_before_proceeding: "Dual-write cleared; manifest or N/A receipt present when required; reconcile process_grade recorded; envelope process gaps visible."
-      retry_count: "0"
-      state_history: []
-      status: "pending"
-  - flow:
-      return_to: "caller"
     goals: "Ensure every TIED YAML file is syntactically valid, skill-routed where applicable, and consistent before use. Use lint_yaml per [PROC-YAML_EDIT_LOOP] (processes.md); it accepts one or more paths and must process each file independently. Never use raw multi-argument `yq` pretty-print on multiple paths in one process."
     invoked_by:
       - "author-architecture"
@@ -1368,37 +1328,6 @@ sub_procedures:
     title: "Checklist-ordered passes until gating satisfied"
     tracking:
       consideration_before_proceeding: "Gating rules pass or waiver documented; RETURN to gate-pseudocode-validation."
-      retry_count: "0"
-      state_history: []
-      status: "pending"
-  - flow:
-      return_to: "caller"
-    goals: "Run mandatory Layer C static analysis with gate_mode for changed in-scope Active IMPL sidecars before RED tests (and re-run at verification when input_identity.hash differs)."
-    invoked_by:
-      - "gate-pseudocode-validation"
-      - "verification-gate"
-    outcomes: "pseudocode-analysis-report.v1 artifacts under working/{REQ-TOKEN}/pseudocode-analysis/ with ok true, gate_mode_applied true, and stable input_identity.hash until sidecar edits."
-    preconditions:
-      - "Phase 4 gate_mode engine shipped (pseudocode_analyze accepts gate_mode and sets gate_mode_applied)."
-      - "Changed IMPL set from per-request Tracker execution_evidence.impl_inventory (not git diff alone)."
-      - "Layer B sub-pseudocode-validation-pass completed or running in same gate-pseudocode-validation sequence before Layer C."
-    references:
-      - "tied/docs/pseudocode-static-analysis-checklist.yaml"
-      - "tied/docs/pseudocode-grammar.v1.md"
-      - "tied/docs/pseudocode-writing-and-validation.md#layer-c-static-analysis-gate"
-      - "tied/docs/processes.md § [PROC-PSEUDOCODE_VALIDATION]"
-    slug: "sub-pseudocode-static-analysis-pass"
-    tasks:
-      - "Load Layer C checklist from tied/docs/pseudocode-static-analysis-checklist.yaml."
-      - "For each changed in-scope Active project IMPL in Tracker impl_inventory, run pseudocode_analyze via tied-cli.sh with essence_pseudocode_path, gate_mode true, and known_tokens from scope."
-      - "Persist reports to working/{REQ-TOKEN}/pseudocode-analysis/{IMPL-TOKEN}.v1.json; record paths in gate step evidence_refs."
-      - "IF report ok is false OR gate_mode_applied is not true THEN fix sidecar grammar (procedure headings, CALL targets) or document explicit truncation waiver on gate-pseudocode-validation; repeat until gate passes for each changed IMPL."
-      - "Untouched Active IMPLs outside impl_inventory may use block-level N/A pre-psa-grammar until next edit; do not submit their sidecars in this pass."
-      - "When invoked from verification-gate, re-run only when input_identity.hash differs from the stored pre-RED report; otherwise cite existing artifact."
-      - "RETURN to caller when PSA-GATE-001..004 satisfied or waived per checklist."
-    title: "Layer C static analysis gate (gate_mode)"
-    tracking:
-      consideration_before_proceeding: "Layer C reports persisted with ok true and gate_mode_applied for each changed in-scope IMPL; RETURN to gate-pseudocode-validation or verification-gate."
       retry_count: "0"
       state_history: []
       status: "pending"
@@ -1508,6 +1437,62 @@ sub_procedures:
     title: "Generate a read-only evidence chain profile"
     tracking:
       consideration_before_proceeding: "Profile written only under working/evidence-chain or stdout; project intent unchanged."
+      retry_count: "0"
+      state_history: []
+      status: "pending"
+  - flow:
+      return_to: "caller"
+    goals: "Run mandatory Layer C static analysis with gate_mode for changed in-scope Active IMPL sidecars before RED tests (and re-run at verification when input_identity.hash differs)."
+    invoked_by:
+      - "gate-pseudocode-validation"
+      - "verification-gate"
+    outcomes: "pseudocode-analysis-report.v1 artifacts under working/{REQ-TOKEN}/pseudocode-analysis/ with ok true, gate_mode_applied true, and stable input_identity.hash until sidecar edits."
+    preconditions:
+      - "Changed IMPL set from per-request Tracker execution_evidence.impl_inventory (not git diff alone)."
+      - "Layer B sub-pseudocode-validation-pass completed or running in same gate-pseudocode-validation sequence before Layer C."
+      - "Phase 4 gate_mode engine shipped (pseudocode_analyze accepts gate_mode and sets gate_mode_applied)."
+    references:
+      - "tied/docs/processes.md § [PROC-PSEUDOCODE_VALIDATION]"
+      - "tied/docs/pseudocode-grammar.v1.md"
+      - "tied/docs/pseudocode-static-analysis-checklist.yaml"
+      - "tied/docs/pseudocode-writing-and-validation.md#layer-c-static-analysis-gate"
+    slug: "sub-pseudocode-static-analysis-pass"
+    tasks:
+      - "For each changed in-scope Active project IMPL in Tracker impl_inventory, run pseudocode_analyze via tied-cli.sh with essence_pseudocode_path, gate_mode true, and known_tokens from scope."
+      - "IF report ok is false OR gate_mode_applied is not true THEN fix sidecar grammar (procedure headings, CALL targets) or document explicit truncation waiver on gate-pseudocode-validation; repeat until gate passes for each changed IMPL."
+      - "Load Layer C checklist from tied/docs/pseudocode-static-analysis-checklist.yaml."
+      - "Persist reports to working/{REQ-TOKEN}/pseudocode-analysis/{IMPL-TOKEN}.v1.json; record paths in gate step evidence_refs."
+      - "RETURN to caller when PSA-GATE-001..004 satisfied or waived per checklist."
+      - "Untouched Active IMPLs outside impl_inventory may use block-level N/A pre-psa-grammar until next edit; do not submit their sidecars in this pass."
+      - "When invoked from verification-gate, re-run only when input_identity.hash differs from the stored pre-RED report; otherwise cite existing artifact."
+    title: "Layer C static analysis gate (gate_mode)"
+    tracking:
+      consideration_before_proceeding: "Layer C reports persisted with ok true and gate_mode_applied for each changed in-scope IMPL; RETURN to gate-pseudocode-validation or verification-gate."
+      retry_count: "0"
+      state_history: []
+      status: "pending"
+  - flow:
+      return_to: "caller"
+    goals: "Synchronize baseline-functional checklist evidence before close-out gates: disposition sync, verification manifest collection, and adherence reconciliation."
+    invoked_by:
+      - "traceable-commit"
+    outcomes: "Every slug in execution_evidence.completed has matching non-pending step disposition with typed evidence_refs; verification-evidence-manifest.v1.json present when tests ran; reconcile report recorded before gate validate."
+    preconditions:
+      - "Authoritative Tracker at working/{REQ-TOKEN}/agent-req-implementation-checklist.yaml."
+      - "Close-out producers distinguish machine close-out, process contract, and adherence ledger correlation."
+    references:
+      - "docs/process-adherence-evidence-grade-plan.md"
+      - "tools/bootstrap/templates/run-close-out-gates.mjs"
+      - "tools/bootstrap/templates/sync-tracker-dispositions.mjs"
+    slug: "sub-close-out-evidence-sync"
+    tasks:
+      - "Collect manifest: when verification-gate or test slugs are completed, run quality_evidence_collect to working/{REQ-TOKEN}/evidence/verification-evidence-manifest.v1.json or record not-applicable receipt."
+      - "Rebuild request-evidence-envelope.v1.json; validate with fail_on_error_gaps for machine close-out; optionally fail_on_process_gaps for process-strict sponsors."
+      - "Reconcile before gates: run tied_adherence_reconcile_run with include_process_grade true; re-run gates if tracker hash changed after sync."
+      - "Sync dispositions: run tools/bootstrap/templates/sync-tracker-dispositions.mjs --tracker working/{REQ-TOKEN}/agent-req-implementation-checklist.yaml so every execution_evidence.completed slug has matching steps[].tracking.status completed (or documented N/A) plus typed evidence_refs."
+    title: "Close-out evidence sync (Wave 5 process contract)"
+    tracking:
+      consideration_before_proceeding: "Dual-write cleared; manifest or N/A receipt present when required; reconcile process_grade recorded; envelope process gaps visible."
       retry_count: "0"
       state_history: []
       status: "pending"

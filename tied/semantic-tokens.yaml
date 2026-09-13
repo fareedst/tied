@@ -1454,6 +1454,15 @@ IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT:
   name: "Bootstrap and validate grammar v2 default"
   source_index: "implementation-decisions.yaml"
   status: "Draft"
+IMPL-PSEUDOCODE_MIGRATION_TOOLING:
+  cross_references:
+    - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+    - "REQ-PSEUDOCODE_MIGRATION_TOOLING"
+  description: "Pilot migration harness: inventory scan, dry-run, G2 receipts, revert."
+  detail_file: "implementation-decisions/IMPL-PSEUDOCODE_MIGRATION_TOOLING.yaml"
+  name: "Pseudocode migration tooling"
+  source_index: "implementation-decisions.yaml"
+  status: "Draft"
 IMPL-PSEUDOCODE_SHARED_PRIMITIVES:
   cross_references:
     - "ARCH-PSEUDOCODE_PARSER_UNIFICATION"
@@ -2661,6 +2670,7 @@ REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE:
 REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION:
   cross_references:
     - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+    - "REQ-PSEUDOCODE_MIGRATION_TOOLING"
   description: "Phased fleet migration from header-only v2 to constraint-enforced-v2 with governance schemas and gate promotion."
   detail_file: "requirements/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml"
   name: "Fleet constraint-language v2 migration program"
@@ -2673,6 +2683,16 @@ REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT:
   description: "New TIED clients generate Grammar-Version: v2 sidecars while legacy sidecars remain v1-compatible."
   detail_file: "requirements/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml"
   name: "New-project grammar v2 default headers"
+  source_index: "requirements.yaml"
+  status: "Draft"
+REQ-PSEUDOCODE_MIGRATION_TOOLING:
+  cross_references:
+    - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+    - "IMPL-PSEUDOCODE_MIGRATION_TOOLING"
+    - "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
+  description: "Pilot migration inventory, dry-run, G2 receipt emit, and revert workflow."
+  detail_file: "requirements/REQ-PSEUDOCODE_MIGRATION_TOOLING.yaml"
+  name: "Pseudocode migration tooling"
   source_index: "requirements.yaml"
   status: "Draft"
 REQ-PSEUDOCODE_PARSER_UNIFICATION:

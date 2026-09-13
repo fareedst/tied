@@ -1,6 +1,9 @@
 # [IMPL-ASYNC_BOUNDARY_ANALYZER] [ARCH-ASYNC_ANALYSIS_PASS] [REQ-ASYNC_BOUNDARY_ANALYSIS]
 # Summary: Layer C async_boundary static analysis pass with D7 gate promotion (W4).
 
+
+Grammar-Version: v2
+
 procedure ASYNC_BOUNDARY_ANALYZER_MAIN():
   # [IMPL-ASYNC_BOUNDARY_ANALYZER] [ARCH-ASYNC_ANALYSIS_PASS] [REQ-ASYNC_BOUNDARY_ANALYSIS]
   # How: Opt-in Layer C pass validates declared async contract structure; no concurrency proof claims.
@@ -19,7 +22,7 @@ procedure RUN_ASYNC_BOUNDARY_ANALYSIS(program, cfg, options):
   # [IMPL-ASYNC_BOUNDARY_ANALYZER] [ARCH-ASYNC_ANALYSIS_PASS] [REQ-ASYNC_BOUNDARY_ANALYSIS]
   # How: Scan each procedure body for seven W4 diagnostic codes.
   Contract:
-    INPUT: program, cfg, options including source text
+    INPUT: program, cfg, options including source text where length(source) >= 0
     OUTPUT: section
     PRE: program parsed
     POST: section.diagnostics capped by max_report_diagnostics

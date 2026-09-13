@@ -1,0 +1,14 @@
+client_id: "1789147101"
+methodology_pin: "48d1fbb+"
+notes: "P4-F read-only scan; 4 project IMPL sidecars (header-only classify).\n"
+schema_version: 1
+sidecars:
+  - impl_token: "IMPL-FILEHASH_DIGEST"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1789147101/tied/implementation-decisions/IMPL-FILEHASH_DIGEST-pseudocode.md"
+  - impl_token: "IMPL-FILEHASH_DISCOVER"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1789147101/tied/implementation-decisions/IMPL-FILEHASH_DISCOVER-pseudocode.md"
+  - impl_token: "IMPL-FILEHASH_FORMAT"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1789147101/tied/implementation-decisions/IMPL-FILEHASH_FORMAT-pseudocode.md"
+  - impl_token: "IMPL-FILEHASH_RUNNER"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1789147101/tied/implementation-decisions/IMPL-FILEHASH_RUNNER-pseudocode.md"
+wave_id: "W-ext-1789147101-1"

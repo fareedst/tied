@@ -1,0 +1,71 @@
+{
+  "schema_version": "inventory-diff.v1",
+  "generated_at": "2026-09-12T16:35:28.313Z",
+  "client_id": "stdd",
+  "wave_id": "stdd-wave-1",
+  "methodology_pin": "48d1fbb+",
+  "apply_mode": true,
+  "planned_actions": [
+    {
+      "sidecar_path": "tied/implementation-decisions/IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION-pseudocode.md",
+      "impl_token": "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION",
+      "action": "none",
+      "classification_before": "header-only-v2"
+    },
+    {
+      "sidecar_path": "tied/implementation-decisions/IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT-pseudocode.md",
+      "impl_token": "IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT",
+      "action": "none",
+      "classification_before": "header-only-v2"
+    },
+    {
+      "sidecar_path": "tied/implementation-decisions/IMPL-MODULE_VALIDATION-pseudocode.md",
+      "impl_token": "IMPL-MODULE_VALIDATION",
+      "action": "none",
+      "classification_before": "header-only-v2"
+    },
+    {
+      "sidecar_path": "tied/implementation-decisions/IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE-pseudocode.md",
+      "impl_token": "IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE",
+      "action": "none",
+      "classification_before": "constraint-ready-v2"
+    },
+    {
+      "sidecar_path": "tied/implementation-decisions/IMPL-PSEUDOCODE_TYPED_FLOW-pseudocode.md",
+      "impl_token": "IMPL-PSEUDOCODE_TYPED_FLOW",
+      "action": "none",
+      "classification_before": "header-only-v2"
+    },
+    {
+      "sidecar_path": "tied/implementation-decisions/IMPL-PSEUDOCODE_SHARED_PRIMITIVES-pseudocode.md",
+      "impl_token": "IMPL-PSEUDOCODE_SHARED_PRIMITIVES",
+      "action": "none",
+      "classification_before": "header-only-v2"
+    },
+    {
+      "sidecar_path": "tied/implementation-decisions/IMPL-PSEUDOCODE_ANALYSIS_ENGINE-pseudocode.md",
+      "impl_token": "IMPL-PSEUDOCODE_ANALYSIS_ENGINE",
+      "action": "none",
+      "classification_before": "header-only-v2"
+    },
+    {
+      "sidecar_path": "tied/implementation-decisions/IMPL-QUALITY_PSEUDOCODE_VALIDATOR-pseudocode.md",
+      "impl_token": "IMPL-QUALITY_PSEUDOCODE_VALIDATOR",
+      "action": "none",
+      "classification_before": "header-only-v2"
+    },
+    {
+      "sidecar_path": "tied/implementation-decisions/IMPL-TIED_FILES-pseudocode.md",
+      "impl_token": "IMPL-TIED_FILES",
+      "action": "none",
+      "classification_before": "header-only-v2"
+    },
+    {
+      "sidecar_path": "tied/implementation-decisions/IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP-pseudocode.md",
+      "impl_token": "IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP",
+      "action": "none",
+      "classification_before": "header-only-v2"
+    }
+  ],
+  "dry_run_content_hash": "d3669547680602649710beb757f26890221c7793eb049aaaf9f7f080ce69e1f1"
+}

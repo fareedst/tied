@@ -1,0 +1,40 @@
+REQ-PSEUDOCODE_MIGRATION_TOOLING:
+  category: "Functional"
+  description: "Provides deterministic pilot and Phase 4 fleet migration tooling under working/fleet-constraint-v2/ and qualification harness scripts; supports SC-FLEET-P3-003, SC-FLEET-P4-002..004, and client-owned migration evidence without substituting orchestrator REQ."
+  name: "Pseudocode migration tooling"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Deterministic dry-run hashes"
+      - "G2 receipt batch emit"
+      - "Revert without analyzer rollback"
+    problems_solved:
+      - "No inventory-to-receipt automation for pilots"
+      - "Orchestrator IMPL conflated with executable migration CLI"
+    why: "Phase 3 pilot workflow exceeds governance-only orchestrator scope (OD-P3-2 split)."
+  related_requirements:
+    depends_on:
+      - "REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE"
+      - "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
+    related_to:
+      - "REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Fleet G3 wave harness emits gate_stage G3 receipts and updates wave stop/go per fleet-wave-partition.v1 (design P4-D; implementation P4-E)"
+      id: "SC-MIGTOOL-003"
+      metric: "working/fleet-constraint-v2/p4-d-g3-harness-design.v1.md; SC-FLEET-P4-002 and SC-FLEET-P4-003 cross-ref"
+    - criterion: "G2 receipt emit validates against constraint-migration-receipt.v1 schema"
+      id: "SC-MIGTOOL-002"
+      metric: "run-pilot-g2-receipts.ts + validate-receipts-sample.ts"
+    - criterion: "Inventory scan emits inventory-diff.v1.json with stable dry_run_content_hash when sidecars unchanged"
+      id: "SC-MIGTOOL-001"
+      metric: "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/run-pilot-inventory-scan.ts"
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+    code_annotations:
+      - "REQ-PSEUDOCODE_MIGRATION_TOOLING"
+    implementation:
+      - "IMPL-PSEUDOCODE_MIGRATION_TOOLING"
+    tests: []

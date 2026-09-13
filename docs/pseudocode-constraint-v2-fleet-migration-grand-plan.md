@@ -279,15 +279,21 @@ flowchart TD
 
 **Phase 1 detailed plan:** [`pseudocode-constraint-v2-fleet-migration-phase-1-plan.md`](pseudocode-constraint-v2-fleet-migration-phase-1-plan.md) (Phase 1 exit complete 2026-09-12: P1-A–P1-G, TIED stack, schemas under `working/fleet-constraint-v2/`, integrated advisory close-out).
 
-**Next command:** **`/refine-plan` or `/plan-new-feature` for Phase 2** (analyzer readiness), per Phase 1 plan § Exit review:
+**Phase 2 detailed plan:** [`pseudocode-constraint-v2-fleet-migration-phase-2-plan.md`](pseudocode-constraint-v2-fleet-migration-phase-2-plan.md) (**Phase 2 complete** 2026-09-12: P2-A–P2-H + P2-C TIED persist; G1 advisory; evidence under `working/fleet-constraint-v2/` and `qualification/fleet-g1/` — **readiness to pilot**, not fleet-migrated-client).
 
-- Persist CITDP + Tracker under `working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/` (token per OD-1: **REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION**)
-- LEAP amendments to [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT](../tied/requirements/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml) rationale (not fleet edits)
-- Client inventory schema + waiver schema
-- Gate promotion decision record (`constraint_flow`, `constraint_gate_errors`, unknown handling)
-- Pilot selection criteria (final list still Phase 3)
+**Phase 2 exit record:** [`working/fleet-constraint-v2/phase-2-exit-review.v1.json`](../working/fleet-constraint-v2/phase-2-exit-review.v1.json).
 
-**Explicitly not in Phase 1 package:** fleet sidecar migration, blocking CI `constraint_flow`, migration CLI implementation.
+**Phase 3 detailed plan:** [`pseudocode-constraint-v2-fleet-migration-phase-3-plan.md`](pseudocode-constraint-v2-fleet-migration-phase-3-plan.md) (**Phase 3 complete** 2026-09-12: P3-A–P3-H + P3-C TIED persist; G2 pilot receipts; pilot inventory `stdd-fleet-inventory-pilots-v1` — **pilot workflow validated**, not fleet-migrated-client for all repos).
+
+**Phase 3 exit record:** [`working/fleet-constraint-v2/phase-3-exit-review.v1.json`](../working/fleet-constraint-v2/phase-3-exit-review.v1.json).
+
+**Phase 4 detailed plan:** [`pseudocode-constraint-v2-fleet-migration-phase-4-plan.md`](pseudocode-constraint-v2-fleet-migration-phase-4-plan.md) (**machinery complete**, fleet-migrated exit **deferred** 2026-09-12: P4-A–P4-H; G3 harness, partition, inventory, W-stdd-2 + four external waves, stop/go, dashboard — **not** fleet-migrated-client for enrolled five-repo set).
+
+**Phase 4 exit record:** [`working/fleet-constraint-v2/phase-4-exit-review.v1.json`](../working/fleet-constraint-v2/phase-4-exit-review.v1.json).
+
+**Next command:** Continue [`pseudocode-constraint-v2-fleet-migration-phase-4-closeout-plan.md`](pseudocode-constraint-v2-fleet-migration-phase-4-closeout-plan.md) from [`working/fleet-constraint-v2/phase-4-closeout-handoff.v1.json`](working/fleet-constraint-v2/phase-4-closeout-handoff.v1.json) — **stdd `fleet-migrated-client` done**; **`/build-plan 4B`** for four externals + SC-FLEET-P4-005, then M2–M4. Phase 5 **`/refine-plan`** only after M4.
+
+**Explicitly not in Phase 3 package:** fleet-wide migration, G3 program defaults, Phase 5 CI enforcement.
 
 ---
 

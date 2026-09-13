@@ -1,0 +1,73 @@
+CITDP-URLFETCH-CLIENT-ANALYSIS:
+  record_identity:
+    change_request_id: PROCESS-URLFETCH-CLIENT-ANALYSIS
+    recorded_at: "2026-09-12"
+    title: Post-cohort analysis — agentic behavior in disposable client 1789177584 (REQ-URLFETCH_CLI)
+  change_definition:
+    current_behavior: First graded pre-cohort disposable client shipped urlfetch (FEAT-001 / REQ-URLFETCH_CLI) with integrated evidence envelope and inquiry artifacts; sponsor lacks a consolidated read of agentic flow vs process gaps.
+    desired_behavior: Refined analysis plan and sponsor-facing memo document FEAT→REQ→code→evidence paths, proof boundaries, cohort arm pass/fail, and optional remediation scope—without mutating client product code unless approved.
+    falsification_questions:
+      - Can envelope blocking_gaps zero be claimed without fail_on_error_gaps validation on the client tree?
+      - Does ledger outcome_verified imply per-step evidence files exist on disk?
+      - Does grammar v2 pass on IMPL sidecars substitute for integrated evidence arm completion?
+    non_goals:
+      - New product REQ/ARCH/IMPL tokens in stdd or client
+      - Rewriting urlfetch Go code or client TIED stack in this analysis pass
+      - Treating analysis memo as runtime proof
+    success_criteria:
+      - Refined plan with Refine/CITDP Plan/Implement gates and validated envelope blocking count
+      - Corpus row 1789177584 updated with REQ-URLFETCH_CLI and envelope path
+      - Optional sponsor memo at docs/urlfetch-client-1789177584-agentic-analysis.md
+    unchanged_behavior:
+      - Client commits 40abb8b (bootstrap) and ad67fc1 (feature) remain historical fact
+      - REQ-URLFETCH_CLI integrated depth and advisory inquiry policy unchanged
+  impact_analysis:
+    modules_or_boundaries:
+      stdd_docs: Analysis plan and memo; evaluation corpus operator file
+      client_read_only: /Users/fareed/Documents/dev/test/1789177584 — read for audit; writes only if sponsor approves remediation phase
+    linked_plans:
+      - docs/pre-client-test-prior-work-plan.md
+      - .cursor/plans/urlfetch_client_analysis_40350fb4.plan.md
+    tied_tokens_referenced:
+      - REQ-URLFETCH_CLI
+      - REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT
+      - REQ-REQUEST_EVIDENCE_ENVELOPE
+      - REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+  risk_analysis:
+    adversarial_inquiry:
+      depth_tier: minimal
+      gate_policy: advisory
+      proof_boundary: Analysis only; does not re-run client integrated inquiry.
+      falsification_questions:
+        - Can envelope blocking_gaps zero be claimed without fail_on_error_gaps validation on the client tree?
+        - Does ledger outcome_verified imply per-step evidence files exist on disk?
+        - Does grammar v2 pass on IMPL sidecars substitute for integrated evidence arm completion?
+      counterexamples:
+        - Treat advisory inquiry warn gaps as blocking envelope errors.
+        - Infer process-grade A from ledger rows without file presence checks.
+      disconfirming_observations:
+        - Client envelope validate 2026-09-12 returned blocking_gap_count 0 with six warn gaps only.
+        - Only four files under client working/REQ-URLFETCH_CLI/evidence/ despite 24 ledger artifact refs.
+      evidence_references:
+        - working/URLFETCH-CLIENT-ANALYSIS/evidence/client-envelope-validate-implement-20260912.md
+        - docs/urlfetch-client-1789177584-agentic-analysis.md
+  evidence:
+    proof_boundaries:
+      - Analysis does not prove urlfetch runtime on live networks.
+    commands:
+      - request_evidence_envelope_validate fail_on_error_gaps on client envelope (2026-09-12)
+  completion_criteria:
+    checklist_gate:
+      phases:
+        - pre_implementation
+        - verification
+      fail_closed: false
+    implement_gate:
+      status: complete
+      completed_at: "2026-09-12"
+      authorized_scope: stdd_only
+      deferred:
+        - client_remediation_OQ-A1
+  leap_feedback:
+    record_status: draft
+    tied_stack_updates_required: []

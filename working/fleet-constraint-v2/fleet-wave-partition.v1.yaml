@@ -1,0 +1,169 @@
+$schema: "working/fleet-constraint-v2/fleet-wave-partition.v1.schema.json"
+gate_promotion_stages_ref: "working/fleet-constraint-v2/gate-promotion-stages.v1.yaml"
+methodology_pin: "48d1fbb+"
+notes: "Ordered waves for Phase 4 G3 fleet migration. W-stdd-1 complete under Phase 3 (G2).\nW-stdd-2..10 use dependency-first batching (≤10 sidecars); lists finalized at P4-E.\nExternal waves run after stdd W-stdd-2+ recommended before apply commits (OD-P3-1 spirit).\n"
+partition_id: "stdd-fleet-wave-partition-v1"
+program_gate_policy: "advisory"
+schema_version: 1
+updated_at: "2026-09-12T22:19:12.796Z"
+waves:
+  - client_ids:
+      - "stdd"
+    gate_stage: "G2"
+    max_sidecars: 10
+    notes: "Phase 3 pilot sub-wave; G2 receipts on file."
+    receipts_dir: "working/fleet-constraint-v2/pilots/stdd/receipts"
+    sidecar_list_path: "working/fleet-constraint-v2/pilots/stdd/wave-1-sidecars.yaml"
+    wave_id: "W-stdd-1"
+    wave_status: "complete"
+  - client_ids:
+      - "1789069630"
+    depends_on_wave_ids:
+      - "W-ext-1789147101-1"
+    gate_stage: "G3"
+    max_sidecars: 10
+    receipts_dir: "working/fleet-constraint-v2/waves/1789069630/receipts"
+    sidecar_list_path: "working/fleet-constraint-v2/waves/1789069630/wave-1-sidecars.yaml"
+    wave_id: "W-ext-1789069630-1"
+    wave_status: "complete"
+  - client_ids:
+      - "1789136889"
+    depends_on_wave_ids:
+      - "W-ext-1789177584-1"
+    gate_stage: "G3"
+    max_sidecars: 10
+    receipts_dir: "working/fleet-constraint-v2/waves/1789136889/receipts"
+    sidecar_list_path: "working/fleet-constraint-v2/waves/1789136889/wave-1-sidecars.yaml"
+    wave_id: "W-ext-1789136889-1"
+    wave_status: "complete"
+  - client_ids:
+      - "1789147101"
+    depends_on_wave_ids:
+      - "W-ext-1789136889-1"
+    gate_stage: "G3"
+    max_sidecars: 10
+    receipts_dir: "working/fleet-constraint-v2/waves/1789147101/receipts"
+    sidecar_list_path: "working/fleet-constraint-v2/waves/1789147101/wave-1-sidecars.yaml"
+    wave_id: "W-ext-1789147101-1"
+    wave_status: "complete"
+  - client_ids:
+      - "1789177584"
+    depends_on_wave_ids:
+      - "W-stdd-2"
+    gate_stage: "G3"
+    max_sidecars: 10
+    notes: "Sidecar list from client scan at P4-F; 5 sidecars per pilot inventory."
+    receipts_dir: "working/fleet-constraint-v2/waves/1789177584/receipts"
+    sidecar_list_path: "working/fleet-constraint-v2/waves/1789177584/wave-1-sidecars.yaml"
+    wave_id: "W-ext-1789177584-1"
+    wave_status: "complete"
+  - client_ids:
+      - "stdd"
+    depends_on_wave_ids:
+      - "W-stdd-1"
+    gate_stage: "G3"
+    max_sidecars: 10
+    notes: "Dependency-first batch 1; sidecar list skeleton in P4-D, populated at P4-E.\nP4-G close-out: receipts + go stop/go on file."
+    receipts_dir: "working/fleet-constraint-v2/waves/stdd/receipts"
+    sidecar_list_path: "working/fleet-constraint-v2/waves/stdd/wave-2-sidecars.yaml"
+    wave_id: "W-stdd-2"
+    wave_status: "complete"
+  - client_ids:
+      - "stdd"
+    depends_on_wave_ids:
+      - "W-stdd-10"
+    gate_stage: "G3"
+    max_sidecars: 10
+    notes: "Seq 4A straggler batch (10 constraint-ready → enforced); reproducible G3 aggregate.\n"
+    receipts_dir: "working/fleet-constraint-v2/waves/stdd/receipts"
+    sidecar_list_path: "working/fleet-constraint-v2/waves/stdd/wave-stragglers-sidecars.yaml"
+    wave_id: "W-stdd-stragglers-WS0"
+    wave_status: "complete"
+  - client_ids:
+      - "stdd"
+    depends_on_wave_ids:
+      - "W-stdd-2"
+    gate_stage: "G3"
+    max_sidecars: 10
+    notes: "P4-G close-out: receipts + go stop/go on file."
+    receipts_dir: "working/fleet-constraint-v2/waves/stdd/receipts"
+    sidecar_list_path: "working/fleet-constraint-v2/waves/stdd/wave-3-sidecars.yaml"
+    wave_id: "W-stdd-3"
+    wave_status: "complete"
+  - client_ids:
+      - "stdd"
+    depends_on_wave_ids:
+      - "W-stdd-3"
+    gate_stage: "G3"
+    max_sidecars: 10
+    notes: "P4-G close-out: receipts + go stop/go on file."
+    receipts_dir: "working/fleet-constraint-v2/waves/stdd/receipts"
+    sidecar_list_path: "working/fleet-constraint-v2/waves/stdd/wave-4-sidecars.yaml"
+    wave_id: "W-stdd-4"
+    wave_status: "complete"
+  - client_ids:
+      - "stdd"
+    depends_on_wave_ids:
+      - "W-stdd-4"
+    gate_stage: "G3"
+    max_sidecars: 10
+    notes: "P4-G close-out: receipts + go stop/go on file."
+    receipts_dir: "working/fleet-constraint-v2/waves/stdd/receipts"
+    sidecar_list_path: "working/fleet-constraint-v2/waves/stdd/wave-5-sidecars.yaml"
+    wave_id: "W-stdd-5"
+    wave_status: "complete"
+  - client_ids:
+      - "stdd"
+    depends_on_wave_ids:
+      - "W-stdd-5"
+    gate_stage: "G3"
+    max_sidecars: 10
+    notes: "P4-G close-out: receipts + go stop/go on file."
+    receipts_dir: "working/fleet-constraint-v2/waves/stdd/receipts"
+    sidecar_list_path: "working/fleet-constraint-v2/waves/stdd/wave-6-sidecars.yaml"
+    wave_id: "W-stdd-6"
+    wave_status: "complete"
+  - client_ids:
+      - "stdd"
+    depends_on_wave_ids:
+      - "W-stdd-6"
+    gate_stage: "G3"
+    max_sidecars: 10
+    notes: "P4-G close-out: receipts + go stop/go on file."
+    receipts_dir: "working/fleet-constraint-v2/waves/stdd/receipts"
+    sidecar_list_path: "working/fleet-constraint-v2/waves/stdd/wave-7-sidecars.yaml"
+    wave_id: "W-stdd-7"
+    wave_status: "complete"
+  - client_ids:
+      - "stdd"
+    depends_on_wave_ids:
+      - "W-stdd-7"
+    gate_stage: "G3"
+    max_sidecars: 10
+    notes: "P4-G close-out: receipts + go stop/go on file."
+    receipts_dir: "working/fleet-constraint-v2/waves/stdd/receipts"
+    sidecar_list_path: "working/fleet-constraint-v2/waves/stdd/wave-8-sidecars.yaml"
+    wave_id: "W-stdd-8"
+    wave_status: "complete"
+  - client_ids:
+      - "stdd"
+    depends_on_wave_ids:
+      - "W-stdd-8"
+    gate_stage: "G3"
+    max_sidecars: 10
+    notes: "P4-G close-out: receipts + go stop/go on file."
+    receipts_dir: "working/fleet-constraint-v2/waves/stdd/receipts"
+    sidecar_list_path: "working/fleet-constraint-v2/waves/stdd/wave-9-sidecars.yaml"
+    wave_id: "W-stdd-9"
+    wave_status: "complete"
+  - client_ids:
+      - "stdd"
+    depends_on_wave_ids:
+      - "W-stdd-9"
+    gate_stage: "G3"
+    max_sidecars: 10
+    notes: "Final stdd sub-wave; remaining header-only-v2 sidecars (82 total across W-stdd-2..10).\nP4-G close-out: receipts + go stop/go on file."
+    receipts_dir: "working/fleet-constraint-v2/waves/stdd/receipts"
+    sidecar_list_path: "working/fleet-constraint-v2/waves/stdd/wave-10-sidecars.yaml"
+    wave_id: "W-stdd-10"
+    wave_status: "complete"

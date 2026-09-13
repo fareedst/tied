@@ -1,0 +1,16 @@
+client_id: "1789177584"
+methodology_pin: "48d1fbb+"
+notes: "P4-F read-only scan; 5 project IMPL sidecars (header-only classify).\n"
+schema_version: 1
+sidecars:
+  - impl_token: "IMPL-URLFETCH_CLI"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1789177584/tied/implementation-decisions/IMPL-URLFETCH_CLI-pseudocode.md"
+  - impl_token: "IMPL-URLFETCH_FETCH"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1789177584/tied/implementation-decisions/IMPL-URLFETCH_FETCH-pseudocode.md"
+  - impl_token: "IMPL-URLFETCH_REPORT"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1789177584/tied/implementation-decisions/IMPL-URLFETCH_REPORT-pseudocode.md"
+  - impl_token: "IMPL-URLFETCH_RUNNER"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1789177584/tied/implementation-decisions/IMPL-URLFETCH_RUNNER-pseudocode.md"
+  - impl_token: "IMPL-URLFETCH_SAVE"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1789177584/tied/implementation-decisions/IMPL-URLFETCH_SAVE-pseudocode.md"
+wave_id: "W-ext-1789177584-1"

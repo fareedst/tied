@@ -1,7 +1,20 @@
 # [REQ-MODULE_VALIDATION] [ARCH-MODULE_VALIDATION] [IMPL-MODULE_VALIDATION] — E2E harness justified by external CLI only
 # [IMPL-ATDD-E2E-AGENT_STREAM] [ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON] [REQ-ATDD-E2E-AGENT_STREAM]
 # Summary: Execute agent subprocess with stream-json; surface text; capture session_id — E2E-only harness.
+
+Grammar-Version: v2
+
 procedure run_agent_stream_subprocess(cmd):
+  Contract:
+    INPUT: cmd: list where length(cmd) > 0
+    PRE: cmd spawns external agent CLI
+    OUTPUT: captured session_id; stdout text fragments; process exit status
+    POST:
+      - success => exit status zero; session_id printed on stderr when captured
+      - failure => non-zero exit with agent status
+    FAILURE_MODES: SPAWN_FAILED, NON_ZERO_EXIT, JSON_PARSE_ERROR
+    EFFECTS: IO
+
   # [IMPL-ATDD-E2E-AGENT_STREAM] [ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON] [REQ-ATDD-E2E-AGENT_STREAM]
   # How: Spawn subprocess with Open3 — satisfies ARCH external CLI boundary.
   spawn agent subprocess with cmd via Open3.popen3

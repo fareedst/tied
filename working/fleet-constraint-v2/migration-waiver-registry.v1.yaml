@@ -1,0 +1,6 @@
+$schema: "working/fleet-constraint-v2/migration-waiver-registry.v1.schema.json"
+notes: "Placeholder registry. Populate at P4-G when waivers are issued for unknown/truncation/unsupported\non constraint-annotated loci (G3 waiver_policy). Expired waivers block wave close-out.\n"
+registry_id: "stdd-migration-waiver-registry-v1"
+schema_version: 1
+updated_at: "2026-09-12T18:30:00Z"
+waivers: []

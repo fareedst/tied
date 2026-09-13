@@ -15,88 +15,88 @@ CITDP-REQ-PSEUDOCODE_TYPED_FLOW:
     unchanged_behavior: "typed_flow false preserves existing parse and gate outcomes."
   completion_criteria:
     activation:
-      phase: verification
-      request_token: REQ-PSEUDOCODE_TYPED_FLOW
-      run_id: tf-verify-20260910
-    verification_gate_notes: "626 mcp-server tests pass; qualification 124/124 parse, 0 new gate failures; F11 annotation median 2.5 lines; pilot recommendation proceed."
+      phase: "verification"
+      request_token: "REQ-PSEUDOCODE_TYPED_FLOW"
+      run_id: "tf-verify-20260910"
     checklist_gate:
       dispositions:
-        - completed
-        - not_applicable
-        - pending
-        - waived
+        - "completed"
+        - "not_applicable"
+        - "pending"
+        - "waived"
       fail_closed: true
       phases:
-        - close_out
-        - pre_implementation
-        - verification
+        - "close_out"
+        - "pre_implementation"
+        - "verification"
+    verification_gate_notes: "626 mcp-server tests pass; qualification 124/124 parse, 0 new gate failures; F11 annotation median 2.5 lines; pilot recommendation proceed."
   evidence:
     commands:
       - "cd mcp-server && npm test (626/626 pass)"
-      - "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/run-harness.sh qualify"
       - "tied_validate_consistency ok"
+      - "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/run-harness.sh qualify"
     proof_boundaries:
-      - "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present"
       - "Not runtime execution or complete behavioral verification"
+      - "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present"
   impact_analysis:
     modules_or_boundaries: "mcp-server/src/analysis/pseudocode-{expression-parser,typed-ir,typed-flow}.ts; pseudocode-parser.ts; pseudocode-analyzer.ts; working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/"
     tied_tokens_affected:
-      - REQ-PSEUDOCODE_STATIC_ANALYSIS
+      - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
     tied_tokens_new:
-      - REQ-PSEUDOCODE_TYPED_FLOW
-      - ARCH-PSEUDOCODE_TYPED_FLOW_PASS
-      - IMPL-PSEUDOCODE_TYPED_FLOW
+      - "ARCH-PSEUDOCODE_TYPED_FLOW_PASS"
+      - "IMPL-PSEUDOCODE_TYPED_FLOW"
+      - "REQ-PSEUDOCODE_TYPED_FLOW"
   leap_feedback:
     divergences_from_analysis: "none — implementation matches IMPL sidecar; D14 max_cfg_join_iterations added for typed pass"
-    record_status: complete
+    record_status: "complete"
     tied_stack_updates_required: []
   record_identity:
-    change_request_id: REQ-PSEUDOCODE_TYPED_FLOW
+    change_request_id: "REQ-PSEUDOCODE_TYPED_FLOW"
     recorded_at: "2026-09-10"
-    title: Bounded typed-flow pilot and client qualification
+    title: "Bounded typed-flow pilot and client qualification"
   risk_analysis:
     adversarial_inquiry:
-      assurance_profile: baseline-functional
+      assurance_profile: "baseline-functional"
       close_out_inquiry_waiver:
-        approval: pilot-close-out-20260910
+        approval: "pilot-close-out-20260910"
         expiry: "2026-12-31"
-        owner: REQ-PSEUDOCODE_TYPED_FLOW
-        rationale: Findings unchanged from verification; close_out inquiry waived at pilot close-out.
-        referenced_verification_run_id: tf-verify-20260910
+        owner: "REQ-PSEUDOCODE_TYPED_FLOW"
+        rationale: "Findings unchanged from verification; close_out inquiry waived at pilot close-out."
+        referenced_verification_run_id: "tf-verify-20260910"
       counterexamples:
         - "False confidence from typed diagnostics treated as runtime proof"
         - "typed_flow false changes legacy gate outcomes"
       depth_change_waiver: null
       depth_selected_at: "2026-09-10T14:00:00Z"
-      depth_tier: integrated
+      depth_tier: "integrated"
       disconfirming_observations:
+        - "626 mcp-server tests pass"
         - "F8 regression passes on fixtures and qualification Tier A/B"
         - "Qualification compare shows zero new gate failures"
-        - "626 mcp-server tests pass"
       eligibility_triggers_matched: []
       evidence_references:
-        - working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/baseline/summary.json
-        - working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/metrics/summary.json
-        - working/REQ-PSEUDOCODE_TYPED_FLOW/pilot-measurement-report.md
-        - working/REQ-PSEUDOCODE_TYPED_FLOW/adversarial-inquiry/phase-pre_implementation/
-        - working/REQ-PSEUDOCODE_TYPED_FLOW/adversarial-inquiry/phase-verification/
+        - "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/baseline/summary.json"
+        - "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/metrics/summary.json"
+        - "working/REQ-PSEUDOCODE_TYPED_FLOW/adversarial-inquiry/phase-pre_implementation/"
+        - "working/REQ-PSEUDOCODE_TYPED_FLOW/adversarial-inquiry/phase-verification/"
+        - "working/REQ-PSEUDOCODE_TYPED_FLOW/pilot-measurement-report.md"
       falsification_questions:
-        - "Does typed_flow true introduce new gate failures on Tier A/B qualification inputs?"
         - "Do mixed typed+prose contract rows drop fields (F1b regression)?"
-      gate_policy: advisory
+        - "Does typed_flow true introduce new gate failures on Tier A/B qualification inputs?"
+      gate_policy: "advisory"
       integrated_waiver: null
       prior_depth_tier: null
-      rationale: Methodology-tooling Layer C extension consumed by all downstream clients; measured pilot before Phase 3 gate.
-      research_profile: integrated-agent
+      rationale: "Methodology-tooling Layer C extension consumed by all downstream clients; measured pilot before Phase 3 gate."
+      research_profile: "integrated-agent"
       strict_eligibility_prerequisites: []
     risks:
-      - description: Legacy gate pass rate changes when typed_flow false
-        id: RISK-TF-001
-        likelihood: Medium
-        mitigation: F8 regression and qualification Tier A/B compare
-        severity: High
-        status: mitigated
+      - description: "Legacy gate pass rate changes when typed_flow false"
+        id: "RISK-TF-001"
+        likelihood: "Medium"
+        mitigation: "F8 regression and qualification Tier A/B compare"
+        severity: "High"
+        status: "mitigated"
   test_strategy:
-    composition: pseudocode_analyze typed_flow flag wired; composition tests in pseudocode-analyze-mcp.test.ts
-    e2e: None for client qualification — in-process harness primary
-    unit: Expression parser, typed IR lattice, CFG transfer/join, corpus 1-17
+    composition: "pseudocode_analyze typed_flow flag wired; composition tests in pseudocode-analyze-mcp.test.ts"
+    e2e: "None for client qualification — in-process harness primary"
+    unit: "Expression parser, typed IR lattice, CFG transfer/join, corpus 1-17"

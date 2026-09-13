@@ -4,8 +4,9 @@
 # [IMPL-QUALITY_PSEUDOCODE_VALIDATOR] [ARCH-QUALITY_ASSURANCE_PROFILES] [REQ-QUALITY_ASSURANCE_EVIDENCE]
 # How: Define structural validation controls separately from runtime and behavioral proof.
 # [IMPL-QUALITY_PSEUDOCODE_VALIDATOR] [ARCH-QUALITY_ASSURANCE_PROFILES] [REQ-QUALITY_ASSURANCE_EVIDENCE]
+# How: File-level contract INPUT where for constraint-enforced-v2 inventory floor.
 Contract:
-  INPUT: pseudo-code text, target IMPL token, known semantic tokens, optional coverage references
+  INPUT: target_impl_token: string where length(target_impl_token) > 0; pseudo-code text; known semantic tokens; optional coverage references
   PRE: pseudo-code text and target token are provided
   OUTPUT: structural validation report with blocks, dependencies, coverage, and diagnostics
   POST: every diagnostic has severity and source location; unresolved symbols and missing required structure are reported
@@ -16,6 +17,9 @@ Contract:
 
 # [IMPL-QUALITY_PSEUDOCODE_VALIDATOR] [ARCH-QUALITY_ASSURANCE_PROFILES] [REQ-QUALITY_ASSURANCE_EVIDENCE]
 # How: Parse blocks, validate token linkage and contract shape, resolve dependencies, and report structural findings.
+
+Grammar-Version: v2
+
 procedure VALIDATE_ESSENCE_PSEUDOCODE(input):
   # [IMPL-QUALITY_PSEUDOCODE_VALIDATOR] [ARCH-QUALITY_ASSURANCE_PROFILES] [REQ-QUALITY_ASSURANCE_EVIDENCE]
   Contract:

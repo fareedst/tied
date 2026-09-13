@@ -17,6 +17,8 @@
   **Block lead (per H2 / logical block):** The first token line(s) in each block (the [PROC-IMPL_PSEUDOCODE_TOKENS] **block lead**) must be **copied literally** (verbatim) into the matching test and production sites—host-language **comment** delimiters only. See the linkage doc.
 
   **Active contract precision:** New/changed Active procedure blocks require PRE, POST, EFFECTS (plus FAILURE_MODES / DATA_TRANSITION / TERMINATION when applicable). Template stubs may use INPUT/OUTPUT only. See implementation-decisions.md § Preferred vocabulary.
+
+  **Authoring target vs runtime default (fleet Phase 2+):** This template demonstrates the **constraint-ready-v2** authoring target—Layer B contract precision plus optional Tier-3 annotations where the **annotation profile** requires them. New projects still bootstrap with **header-only** Implemented policy ([REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT](../tied/requirements/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml)) until Phase 5 enforcement; do not conflate copying this template with mandatory `constraint_flow: true` in CI. Reference exemplars: `working/fleet-constraint-v2/exemplars/`.
 -->
 
 ---
@@ -71,6 +73,54 @@ procedure UPPER_SNAKE_NAME:
 > Optional narrative in blockquote for human readers (algorithms, rationale). Keep IMPL/ARCH/REQ bracket tokens on list lines for tooling.
 
 > LEAP drift rule: if tests or production code expose logic missing here, translate that logic into pseudocode first, then assess whether ARCH/REQ must also be updated via LEAP ([PROC-LEAP]).
+
+## Optional — Tier-3 constraint annotations (constraint-ready-v2)
+
+Use only when the procedure’s **annotation profile** requires refinements, summaries, alias policy, or immutability tags. Omit Tier-3 rows for **contract-only** profiles. Grammar: [pseudocode-grammar.v2.md](../tied/docs/pseudocode-grammar.v2.md). Fleet exemplars: [working/fleet-constraint-v2/exemplars/](../../working/fleet-constraint-v2/exemplars/).
+
+- [IMPL-{TOKEN}] [ARCH-{…}] [REQ-{…}] {How: refinement profile — typed INPUT/OUTPUT refinements.}
+procedure REFINEMENT_EXAMPLE:
+  # [IMPL-{TOKEN}] [ARCH-{…}] [REQ-{…}] How: Prove POST from INPUT refinements under advisory constraint_flow.
+  Contract:
+    INPUT: value: int where value >= 0
+    OUTPUT: result: int where result >= value
+    PRE: true
+    POST: result >= value
+    EFFECTS: pure
+    TERMINATION: total
+  result := value + 1
+  RETURN result
+
+- [IMPL-{TOKEN}] [ARCH-{…}] [REQ-{…}] {How: alias/mutation profile — ALIAS POLICY + immutable DATA tags.}
+procedure ALIAS_EXAMPLE:
+  # [IMPL-{TOKEN}] [ARCH-{…}] [REQ-{…}] How: Declare alias policy when outputs may alias inputs.
+  Contract:
+    INPUT: source: Buffer
+    OUTPUT: view: Buffer
+    DATA: source (immutable): Buffer
+    ALIAS POLICY:
+      - view may alias source
+    PRE: true
+    POST: true
+    EFFECTS: pure
+  view := source
+  RETURN view
+
+- [IMPL-{TOKEN}] [ARCH-{…}] [REQ-{…}] {How: interprocedural profile — SUMMARY CALL/RETURN for callee effects.}
+procedure SUMMARY_EXAMPLE:
+  # [IMPL-{TOKEN}] [ARCH-{…}] [REQ-{…}] How: Compact callee summary at CALL sites; missing summary → unknown, not pass.
+  Contract:
+    INPUT: items: list of Item
+    OUTPUT: count: int
+    SUMMARY CALL:
+      - mutates: items
+    SUMMARY RETURN:
+      - ensures: count >= 0
+    PRE: length(items) > 0
+    POST: count >= 0
+    EFFECTS: State
+  CALL PROCESS_ITEMS(items)
+  RETURN count
 
 ## {Another block — e.g. composition with another IMPL}
 

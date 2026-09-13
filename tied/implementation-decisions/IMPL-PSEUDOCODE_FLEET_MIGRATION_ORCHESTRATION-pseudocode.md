@@ -9,7 +9,7 @@ Grammar-Version: v2
 procedure VALIDATE_GOVERNANCE_SCHEMA_REFERENCES:
   # [IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION] [ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE] [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION] How: Ensure ARCH governance artifacts resolve to on-disk schema files.
   Contract:
-    INPUT: repository_root, governance_artifact_map from ARCH
+    INPUT: repository_root: string where length(repository_root) > 0; governance_artifact_map from ARCH
     PRE: governance_artifact_map lists client-inventory-manifest.v1 and migration-waiver.v1 paths
     OUTPUT: validation_report with schema_id, path, ok
     POST:

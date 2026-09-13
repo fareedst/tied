@@ -1,0 +1,205 @@
+{
+  "schema_version": "seq-7-m2-ex-assertion-report.v1",
+  "status": "complete",
+  "milestone": "M2_phase_4_technical_exit",
+  "purpose": "Formal M2 technical exit — closeout plan §4 EX-01..EX-09 for OD-P4-3 enrolled set only",
+  "closeout_plan_ref": "docs/pseudocode-constraint-v2-fleet-migration-phase-4-closeout-plan.md",
+  "build_plan_seq": "7",
+  "methodology_pin": "48d1fbb+",
+  "verified_at": "2026-09-13T05:30:00.000Z",
+  "m2_assertion": {
+    "all_ex_pass": true,
+    "enrolled_client_ids": ["stdd", "1789069630", "1789136889", "1789147101", "1789177584"],
+    "od_p4_3_scope_only": true,
+    "blocks_seq_8_orchestrator_close_out": false,
+    "note": "Inventory precondition met before seq 7 (seq 4B/5); this slice records falsifiable EX-01..09 proof for M2. Exit review JSON flags remain for seq 9 (WS-5)."
+  },
+  "criteria": [
+    {
+      "id": "EX-01",
+      "description": "Five OD-P4-3 repos fleet-migrated-client or waiver-documented",
+      "pass": true,
+      "verified_at": "2026-09-13T05:30:00.000Z",
+      "evidence_paths": [
+        "working/fleet-constraint-v2/client-inventory-manifest.v1.yaml",
+        "working/fleet-constraint-v2/seq-5-ws4-governance-report.v1.json",
+        "working/fleet-constraint-v2/waves/stdd/seq-4a-stdd-fleet-migrated-aggregate-report.v1.json"
+      ],
+      "details": {
+        "fleet_migrated_client_count": 5,
+        "uncleared_header_or_ready_on_enrolled": false,
+        "active_waiver_count": 0,
+        "per_client_aggregate": {
+          "stdd": "fleet-migrated-client",
+          "1789069630": "fleet-migrated-client",
+          "1789136889": "fleet-migrated-client",
+          "1789147101": "fleet-migrated-client",
+          "1789177584": "fleet-migrated-client"
+        }
+      }
+    },
+    {
+      "id": "EX-02",
+      "description": "SC-FLEET-P4-001 inventory falsifiable for enrolled set",
+      "pass": true,
+      "verified_at": "2026-09-13T05:30:00.000Z",
+      "evidence_paths": [
+        "working/fleet-constraint-v2/client-inventory-manifest.v1.yaml",
+        "working/fleet-constraint-v2/client-inventory-manifest.v1.schema.json"
+      ],
+      "details": {
+        "manifest_schema_ref": "working/fleet-constraint-v2/client-inventory-manifest.v1.schema.json",
+        "enrolled_phase_4_count": 5,
+        "not_enrolled_remain_header_only_v2": 18,
+        "validation": "Harness fleet-inventory --apply (seq 5) + enrollment row audit; manifest carries $schema identity"
+      }
+    },
+    {
+      "id": "EX-03",
+      "description": "SC-FLEET-P4-002 completed waves stop/go go, no blocking receipt gaps",
+      "pass": true,
+      "verified_at": "2026-09-13T05:30:00.000Z",
+      "evidence_paths": [
+        "working/fleet-constraint-v2/wave-stop-go.v1.json",
+        "working/fleet-constraint-v2/seq-5-ws4-governance-report.v1.json"
+      ],
+      "details": {
+        "stop_go_record_count": 15,
+        "all_dispositions_go": true,
+        "wave_summary_complete": 15
+      }
+    },
+    {
+      "id": "EX-04",
+      "description": "SC-FLEET-P4-003 G3 receipts schema-valid, gate_stage G3",
+      "pass": true,
+      "verified_at": "2026-09-13T05:30:00.000Z",
+      "evidence_paths": [
+        "working/fleet-constraint-v2/waves/stdd/receipts/summary.json",
+        "working/fleet-constraint-v2/waves/1789069630/receipts/summary.json",
+        "working/fleet-constraint-v2/waves/1789136889/receipts/summary.json",
+        "working/fleet-constraint-v2/waves/1789147101/receipts/summary.json",
+        "working/fleet-constraint-v2/waves/1789177584/receipts/summary.json"
+      ],
+      "details": {
+        "receipt_counts_by_client": {
+          "stdd": 93,
+          "1789069630": 5,
+          "1789136889": 4,
+          "1789147101": 4,
+          "1789177584": 5
+        },
+        "stdd_layer_c_ok": "93/93 per seq-4a-stdd-fleet-migrated-aggregate-report.v1.json harness.g3_aggregate",
+        "validate_receipts_sample": {
+          "command": "validate-receipts-sample.ts (stdd + external sample paths)",
+          "ok": true,
+          "validated_count": 5
+        }
+      }
+    },
+    {
+      "id": "EX-05",
+      "description": "SC-FLEET-P4-004 waiver registry — no expired blocking waivers",
+      "pass": true,
+      "verified_at": "2026-09-13T05:30:00.000Z",
+      "evidence_paths": [
+        "working/fleet-constraint-v2/migration-waiver-registry.v1.yaml",
+        "working/fleet-constraint-v2/seq-5-ws4-governance-report.v1.json"
+      ],
+      "details": {
+        "run_fleet_waiver_registry_check_seq7": {
+          "ok": true,
+          "waiver_count": 0,
+          "exit_code": 0
+        }
+      }
+    },
+    {
+      "id": "EX-06",
+      "description": "SC-FLEET-P4-005 client-owned migration REQ verify/close_out in each external repo",
+      "pass": true,
+      "verified_at": "2026-09-13T05:30:00.000Z",
+      "evidence_paths": [
+        "working/fleet-constraint-v2/phase-4-closeout-handoff.v1.json"
+      ],
+      "details": {
+        "client_gate_receipts_allowed_true": {
+          "1789069630": {
+            "req": "REQ-PSEUDOCODE_MIGRATION",
+            "verification": "/Users/fareed/Documents/dev/test/1789069630/working/REQ-PSEUDOCODE_MIGRATION/gates/verification-result.json",
+            "close_out": "/Users/fareed/Documents/dev/test/1789069630/working/REQ-PSEUDOCODE_MIGRATION/gates/close_out-result.json"
+          },
+          "1789136889": {
+            "req": "REQ-PSEUDOCODE_MIGRATION",
+            "verification": "/Users/fareed/Documents/dev/test/1789136889/working/REQ-PSEUDOCODE_MIGRATION/gates/verification-result.json",
+            "close_out": "/Users/fareed/Documents/dev/test/1789136889/working/REQ-PSEUDOCODE_MIGRATION/gates/close_out-result.json"
+          },
+          "1789147101": {
+            "req": "REQ-PSEUDOCODE_MIGRATION",
+            "verification": "/Users/fareed/Documents/dev/test/1789147101/working/REQ-PSEUDOCODE_MIGRATION/gates/verification-result.json",
+            "close_out": "/Users/fareed/Documents/dev/test/1789147101/working/REQ-PSEUDOCODE_MIGRATION/gates/close_out-result.json"
+          },
+          "1789177584": {
+            "req": "REQ-PSEUDOCODE_MIGRATION_PILOT_1789177584",
+            "verification": "/Users/fareed/Documents/dev/test/1789177584/working/REQ-PSEUDOCODE_MIGRATION_PILOT_1789177584/gates/verification-result.json",
+            "close_out": "/Users/fareed/Documents/dev/test/1789177584/working/REQ-PSEUDOCODE_MIGRATION_PILOT_1789177584/gates/close_out-result.json"
+          }
+        },
+        "stdd_orchestrator_req": "SC-FLEET-P4-005 applies to externals; orchestrator close-out is seq 8 (M3)"
+      }
+    },
+    {
+      "id": "EX-07",
+      "description": "SC-FLEET-P4-006 dashboard reconciles inventory, receipts, waivers",
+      "pass": true,
+      "verified_at": "2026-09-13T05:30:00.000Z",
+      "evidence_paths": [
+        "working/fleet-constraint-v2/fleet-dashboard.v1.yaml",
+        "working/fleet-constraint-v2/seq-5-ws4-governance-report.v1.json"
+      ],
+      "details": {
+        "enrolled_phase_4_count": 5,
+        "clients_by_aggregate_state_fleet_migrated_client": 5,
+        "wave_summary": { "total_waves": 15, "complete": 15, "halted": 0 },
+        "generated_at": "2026-09-13T05:08:52.289Z"
+      }
+    },
+    {
+      "id": "EX-08",
+      "description": "F11/FP within f11-fp-thresholds when stop/go references regression",
+      "pass": true,
+      "verified_at": "2026-09-13T05:30:00.000Z",
+      "evidence_paths": [
+        "working/fleet-constraint-v2/f11-fp-thresholds.v1.yaml",
+        "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/metrics/f11-fleet-20260912.yaml",
+        "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/metrics/fp-fleet-20260912.json"
+      ],
+      "details": {
+        "f11_gate_pass": true,
+        "f11_fp_thresholds_pass": true,
+        "fleet_g1_rerun_seq7": false,
+        "note": "Recorded metrics from Phase 2 G1 baseline; no analyzer churn since seq 4A/4B requiring fleet-g1 re-run"
+      }
+    },
+    {
+      "id": "EX-09",
+      "description": "Doc falsification audit — no header-only → fleet-migrated inference",
+      "pass": true,
+      "verified_at": "2026-09-13T05:30:00.000Z",
+      "evidence_paths": [
+        "working/fleet-constraint-v2/phase-4-exit-review.v1.json"
+      ],
+      "details": {
+        "enrolled_rows_zero_header_only_without_waiver": true,
+        "doc_falsification_audit_present": true,
+        "phase_4_does_not_prove_includes_fleet_migrated_without_sidecar_state": true,
+        "exit_review_technical_flags_deferred_to_seq_9": true
+      }
+    }
+  ],
+  "upstream_slice_reports": [
+    "working/fleet-constraint-v2/seq-5-ws4-governance-report.v1.json",
+    "working/fleet-constraint-v2/seq-6-orchestrator-verification-prep-report.v1.json"
+  ],
+  "next_recommended": "/plan-close-out — seq 8 orchestrator REQ (O3.5 verification + close_out gates after M2; OD-P4-CLO-3)"
+}

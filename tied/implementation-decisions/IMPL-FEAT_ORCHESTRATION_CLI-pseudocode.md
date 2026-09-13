@@ -1,9 +1,12 @@
 # [IMPL-FEAT_ORCHESTRATION_CLI] [ARCH-FEAT_ORCHESTRATION_BOUNDARY] [REQ-FEAT_ORCHESTRATION_SURFACE]
 
+
+Grammar-Version: v2
+
 ## Summary contract
 # [IMPL-FEAT_ORCHESTRATION_CLI] [ARCH-FEAT_ORCHESTRATION_BOUNDARY] [REQ-FEAT_ORCHESTRATION_SURFACE] — How: expose the standalone feature-orchestrator binary as a thin adapter over shared orchestration services.
 Contract:
-  INPUT: argv
+  INPUT: argv: list where length(argv) >= 0
   PRE: argv uses the feature-orchestrator command grammar
   OUTPUT: structured stdout result and process status
   POST: equivalent requests produce the shared orchestration result schema
@@ -15,6 +18,16 @@ Contract:
 
 ## RUN_FEATURE_ORCHESTRATOR
 procedure RUN_FEATURE_ORCHESTRATOR(argv):
+  Contract:
+    INPUT: argv: list where length(argv) >= 0
+    PRE: argv uses the feature-orchestrator command grammar
+    OUTPUT: structured stdout result and process status
+    POST: equivalent requests produce the shared orchestration result schema
+    FAILURE_MODES: INVALID_ARGUMENTS; SERVICE_ERROR
+    DATA_TRANSITION: no direct mutation; delegated service owns state changes
+    EFFECTS: IO
+    TERMINATION: total
+
   # [IMPL-FEAT_ORCHESTRATION_CLI] [ARCH-FEAT_ORCHESTRATION_BOUNDARY] [REQ-FEAT_ORCHESTRATION_SURFACE] — How: parse lifecycle arguments and delegate without mutating tied-cli.sh.
   Parse argv into an orchestration service request.
   IF arguments are invalid: RETURN INVALID_ARGUMENTS.

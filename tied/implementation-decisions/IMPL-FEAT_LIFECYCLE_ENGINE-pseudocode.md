@@ -1,9 +1,12 @@
 # [IMPL-FEAT_LIFECYCLE_ENGINE] [ARCH-FEAT_LIFECYCLE_STATE_MACHINE] [REQ-FEAT_LIFECYCLE]
 
+
+Grammar-Version: v2
+
 ## Summary contract
 # [IMPL-FEAT_LIFECYCLE_ENGINE] [ARCH-FEAT_LIFECYCLE_STATE_MACHINE] [REQ-FEAT_LIFECYCLE] — How: evaluate legal lifecycle transitions without mutating persisted state.
 Contract:
-  INPUT: current_phase; requested_phase; validation_evidence; approval_context
+  INPUT: current_phase: string where length(current_phase) > 0; requested_phase: string where length(requested_phase) > 0; validation_evidence; approval_context
   PRE: phases are known lifecycle values
   OUTPUT: allow | blocked | approval_required | transition_error
   POST: illegal transitions preserve state; allow requires all preconditions
@@ -13,15 +16,16 @@ Contract:
 
 ## LIFECYCLE_TRANSITION_MATRIX
 procedure EVALUATE_TRANSITION(current_phase, requested_phase, validation_evidence, approval_context):
-# [IMPL-FEAT_LIFECYCLE_ENGINE] [ARCH-FEAT_LIFECYCLE_STATE_MACHINE] [REQ-FEAT_LIFECYCLE] — How: encode draft → refining → specified → planned → tasked → verifying → closed and terminal abandoned.
   Contract:
-    INPUT: current_phase; requested_phase; validation_evidence; approval_context
+    INPUT: current_phase: string where length(current_phase) > 0; requested_phase: string where length(requested_phase) > 0; validation_evidence; approval_context
     PRE: phases are known
     OUTPUT: transition_result
     POST: legal transitions return permitted, blocked, or approval outcome
     FAILURE_MODES: UNKNOWN_PHASE; ILLEGAL_TRANSITION; PRECONDITION_UNMET; APPROVAL_REQUIRED
     EFFECTS: pure
     TERMINATION: total
+
+  # [IMPL-FEAT_LIFECYCLE_ENGINE] [ARCH-FEAT_LIFECYCLE_STATE_MACHINE] [REQ-FEAT_LIFECYCLE] — How: encode draft → refining → specified → planned → tasked → verifying → closed and terminal abandoned.
   LOOK UP requested transition in LIFECYCLE_TRANSITION_MATRIX
   IF transition is absent: RETURN ILLEGAL_TRANSITION
   IF preconditions are unmet: RETURN blocked
@@ -32,7 +36,7 @@ procedure EVALUATE_TRANSITION(current_phase, requested_phase, validation_evidenc
 procedure APPLY_ACCEPTED_TRANSITION(manifest, transition_result):
   # [IMPL-FEAT_LIFECYCLE_ENGINE] [ARCH-FEAT_LIFECYCLE_STATE_MACHINE] [REQ-FEAT_LIFECYCLE] — How: apply an allowed transition as one immutable revision.
   Contract:
-    INPUT: manifest; transition_result
+    INPUT: manifest with revision: int where revision >= 0; transition_result
     PRE: transition_result is allow and revision is valid
     OUTPUT: next_manifest | transition_error
     POST: next_manifest has allowed phase and revision incremented once; input is unchanged

@@ -3,7 +3,20 @@
 
 # How: Composition — sequential cross-IMPL calls only; shared DATA is accumulated []Turn in memory (Turn from IMPL-GOAGENT-LIB-TYPES). Caller: IMPL-GOAGENT-CLI-CMD supplies pipeline.Input. Ordering matches IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV / AgentStreamArgv Ruby parity.
 
+
+Grammar-Version: v2
+
 procedure pipeline_Build(in):
+  Contract:
+    INPUT: in: pipeline.Input where length(in.ArgvWords) >= 0
+    PRE: in paths addressable when non-empty
+    OUTPUT: []Turn ordered per fixed loader sequence
+    POST:
+      - success => at least one turn; ChainFromPrevious set per loader rules
+      - failure => error when no prompts or delegate loader fails
+    FAILURE_MODES: DELEGATE_LOAD_ERROR, NO_PROMPTS
+    EFFECTS: IO
+
   # [IMPL-GOAGENT-PIPELINE] [ARCH-GOAGENT-PIPELINE] [REQ-GOAGENT-PIPELINE-CHAIN]
   # How: Fixed order = argv, prompts-file, tdd-yaml, feature-spec-batch-yaml, lead-checklist-yaml, verify-session. Prompt-file paths are not appended here; ApplyPromptFilePreload prepends one argv part per file on each turn where SessionForTurn would omit --resume. Only feature-spec LoadTurns sets ChainFromPrevious=false per record; argv, prompts, tdd, checklist loaders set ChainFromPrevious=true (REQ-GOAGENT-PIPELINE-CHAIN: feature-spec breaks session chain; other consecutive turns resume).
   # How: Cross-IMPL — IMPL-GOAGENT-TEXT-SOURCES ([ARCH-GOAGENT-TEXT-SOURCES] [REQ-GOAGENT-TEXT-SOURCES]): ArgvTurn, TurnsFromPromptsFiles, VerifySessionTurn.

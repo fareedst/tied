@@ -1,0 +1,36 @@
+# [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION] Phase 3 pilot inventory (OD-P3-8).
+schema_version: 1
+$schema: working/fleet-constraint-v2/client-inventory-manifest.v1.schema.json
+manifest_id: stdd-fleet-inventory-pilots-v1
+updated_at: "2026-09-12T17:00:00Z"
+notes: |
+  Pilot subset only. aggregate_migration_state MUST NOT be inferred from grammar_v2_header alone.
+  stdd wave 1 complete for tooling validation; remaining stdd sidecars deferred to later sub-waves.
+
+clients:
+  - client_id: stdd
+    repository_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    methodology_pin: "48d1fbb+"
+    aggregate_migration_state: constraint-ready-v2
+    sidecar_counts_by_state:
+      legacy-v1: 0
+      header-only-v2: 82
+      constraint-ready-v2: 10
+      constraint-enforced-v2: 0
+      unknown-or-mixed: 0
+    last_receipt_path: working/fleet-constraint-v2/pilots/stdd/receipts/summary.json
+    client_migration_req: REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION
+    updated_at: "2026-09-12T17:00:00Z"
+  - client_id: "1789177584"
+    repository_root: /Users/fareed/Documents/dev/test/1789177584
+    methodology_pin: "48d1fbb+"
+    aggregate_migration_state: header-only-v2
+    sidecar_counts_by_state:
+      legacy-v1: 0
+      header-only-v2: 5
+      constraint-ready-v2: 0
+      constraint-enforced-v2: 0
+      unknown-or-mixed: 0
+    last_receipt_path: working/fleet-constraint-v2/pilots/1789177584/dry-run/inventory-diff.v1.json
+    client_migration_req: REQ-PSEUDOCODE_MIGRATION_PILOT_1789177584
+    updated_at: "2026-09-12T17:00:00Z"

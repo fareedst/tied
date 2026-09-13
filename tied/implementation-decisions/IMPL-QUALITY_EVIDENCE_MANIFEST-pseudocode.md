@@ -15,10 +15,13 @@ Contract:
 
 # [IMPL-QUALITY_EVIDENCE_MANIFEST] [ARCH-QUALITY_ASSURANCE_PROFILES] [REQ-QUALITY_ASSURANCE_EVIDENCE]
 # How: Reject invalid results, normalize nested records, and sort evidence deterministically.
+
+Grammar-Version: v2
+
 procedure BUILD_VERIFICATION_EVIDENCE_MANIFEST(input):
   # [IMPL-QUALITY_EVIDENCE_MANIFEST] [ARCH-QUALITY_ASSURANCE_PROFILES] [REQ-QUALITY_ASSURANCE_EVIDENCE]
   Contract:
-    INPUT: run metadata, command results, quality rows, covered tokens, proof boundaries
+    INPUT: command_results: list where length(command_results) >= 0; run metadata, quality rows, covered tokens, proof boundaries
     OUTPUT: verification evidence manifest
     PRE: command and quality arrays are provided
     POST: normalized command and quality rows are sorted by stable identifiers

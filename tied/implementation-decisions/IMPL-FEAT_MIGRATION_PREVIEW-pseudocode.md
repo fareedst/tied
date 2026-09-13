@@ -1,9 +1,12 @@
 # [IMPL-FEAT_MIGRATION_PREVIEW] [ARCH-FEAT_MIGRATION_PREVIEW] [REQ-FEAT_LEGACY_MIGRATION]
 
+
+Grammar-Version: v2
+
 ## Summary contract
 # [IMPL-FEAT_MIGRATION_PREVIEW] [ARCH-FEAT_MIGRATION_PREVIEW] [REQ-FEAT_LEGACY_MIGRATION] — normalize legacy inputs into a deterministic no-write migration preview.
 Contract:
-  INPUT: legacy_inputs, feature_spec_batches, agentstream_order
+  INPUT: legacy_inputs: list where length(legacy_inputs) >= 0; feature_spec_batches: list where length(feature_spec_batches) >= 0; agentstream_order: list where length(agentstream_order) >= 0
   PRE: inputs are readable and source order is observable
   OUTPUT: migration_preview
   POST: no source, project YAML, or manifest is written; equivalent inputs produce equivalent reports
@@ -14,6 +17,15 @@ Contract:
 
 ## BUILD_MIGRATION_PREVIEW
 procedure BUILD_MIGRATION_PREVIEW(legacy_inputs, feature_spec_batches, agentstream_order):
+  Contract:
+    INPUT: legacy_inputs: list where length(legacy_inputs) >= 0; feature_spec_batches: list where length(feature_spec_batches) >= 0; agentstream_order: list where length(agentstream_order) >= 0
+    PRE: inputs are readable and source order is observable
+    OUTPUT: migration_preview
+    POST: no source, project YAML, or manifest is written; equivalent inputs produce equivalent reports
+    FAILURE_MODES: INVALID_SOURCE; CONFLICTS_PRESENT; UNSUPPORTED_RECORD
+    EFFECTS: IO
+    TERMINATION: total
+
 # [IMPL-FEAT_MIGRATION_PREVIEW] [ARCH-FEAT_MIGRATION_PREVIEW] [REQ-FEAT_LEGACY_MIGRATION] — parse additive legacy sources and preserve their ordered behavior.
   # [IMPL-FEAT_MIGRATION_PREVIEW] [ARCH-FEAT_MIGRATION_PREVIEW] [REQ-FEAT_LEGACY_MIGRATION] — normalize sources while guaranteeing a no-write preview.
   Read legacy feature-spec records without modifying them.
@@ -26,6 +38,15 @@ procedure BUILD_MIGRATION_PREVIEW(legacy_inputs, feature_spec_batches, agentstre
 
 ## REPORT_MIGRATION_CONFLICTS
 procedure REPORT_MIGRATION_CONFLICTS(preview):
+  Contract:
+    INPUT: preview with conflicts: list where length(conflicts) >= 0
+    PRE: preview is a completed migration preview
+    OUTPUT: conflict_report
+    POST: each conflict exposes deterministic code, source path, identity, field, reason, and corrective action
+    FAILURE_MODES: INVALID_PREVIEW
+    EFFECTS: pure
+    TERMINATION: total
+
 # [IMPL-FEAT_MIGRATION_PREVIEW] [ARCH-FEAT_MIGRATION_PREVIEW] [REQ-FEAT_LEGACY_MIGRATION] — expose stable correction information for review before confirmation.
   # [IMPL-FEAT_MIGRATION_PREVIEW] [ARCH-FEAT_MIGRATION_PREVIEW] [REQ-FEAT_LEGACY_MIGRATION] — expose deterministic conflict corrections.
   Return deterministic conflict code, source path, record identity, field, reason, and corrective action.

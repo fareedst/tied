@@ -1,87 +1,86 @@
-# Machine-readable gate promotion stages (Phase 1 policy annex).
-# Authoritative prose: docs/pseudocode-constraint-v2-fleet-migration-phase-1-plan.md § Annex A
-# OD-2: constraint_gate_errors blocks at verification first; pre-RED advisory until Phase 3 pilots.
-
-schema_version: gate-promotion-stages.v1
-program_gate_policy: advisory
-updated_at: "2026-09-12T00:00:00Z"
-notes: |
-  Stages describe promotion intent. CI wiring for G4 is Phase 5 unless explicitly scoped earlier.
-  grammar_v2_header pass does not imply any stage beyond header-only-v2.
-
+notes: "Stages describe promotion intent. CI wiring for G4 is Phase 5 unless explicitly scoped earlier.\ngrammar_v2_header pass does not imply any stage beyond header-only-v2.\n"
+program_gate_policy: "advisory"
+schema_version: "gate-promotion-stages.v1"
 stages:
-  - id: G0
-    label: Today — cohort and new projects
-    phase: baseline
-    scope: Cohort grading and new-project bootstrap (Track A Implemented)
+  - constraint_gate_errors:
+      close_out: "not_applicable"
+      pre_red: "not_applicable"
+      verification: "not_applicable"
+    id: "G0"
+    label: "Today — cohort and new projects"
     layer_c:
-      gate_mode: true
       constraint_flow: false
-      typed_flow: optional
-    constraint_gate_errors:
-      pre_red: not_applicable
-      verification: not_applicable
-      close_out: not_applicable
-
-  - id: G1
-    label: Phase 1–2 — policy and qualification
+      gate_mode: true
+      typed_flow: "optional"
+    phase: "baseline"
+    scope: "Cohort grading and new-project bootstrap (Track A Implemented)"
+  - constraint_gate_errors:
+      close_out: "advisory"
+      pre_red: "advisory"
+      verification: "advisory"
+    id: "G1"
+    label: "Phase 1–2 — policy and qualification"
+    layer_c:
+      constraint_flow: "advisory"
+      gate_mode: true
+      typed_flow: "advisory"
     phase: "1-2"
-    scope: Policy artifacts and analyzer qualification fixtures
-    layer_c:
-      gate_mode: true
-      constraint_flow: advisory
-      typed_flow: advisory
-    constraint_gate_errors:
-      pre_red: advisory
-      verification: advisory
-      close_out: advisory
     prerequisites:
-      - F11 and false-positive thresholds met before G2 promotion (Phase 2 exit)
-
-  - id: G2
-    label: Phase 3 — pilots
+      - "evidence: working/fleet-constraint-v2/f11-fp-thresholds.v1.yaml"
+      - "evidence: working/fleet-constraint-v2/rollback-exercise-G1.v1.json"
+      - "F11 and false-positive thresholds met before G2 promotion (Phase 2 exit)"
+    scope: "Policy artifacts and analyzer qualification fixtures"
+  - constraint_gate_errors:
+      close_out: "blocking"
+      pre_red: "advisory"
+      verification: "blocking"
+    id: "G2"
+    label: "Phase 3 — pilots"
+    layer_c:
+      constraint_flow: "advisory_default"
+      gate_mode: true
+      typed_flow: "advisory"
     phase: "3"
-    scope: stdd first pilot repo then representative external clients
-    layer_c:
-      gate_mode: true
-      constraint_flow: advisory_default
-      typed_flow: advisory
-    constraint_gate_errors:
-      pre_red: advisory
-      verification: blocking
-      close_out: blocking
     prerequisites:
-      - Rollback exercise from advisory constraint run accepted
-      - Pilot selection rubric applied (final list in Phase 3)
-
-  - id: G3
-    label: Phase 4 — fleet waves
+      - "Pilot selection rubric applied (final list in Phase 3)"
+      - "Rollback exercise from advisory constraint run accepted"
+      - "evidence: working/fleet-constraint-v2/rollback-exercise-G2-pilots.v1.json"
+      - "evidence: working/fleet-constraint-v2/pilots/stdd/receipts/summary.json"
+      - "evidence: working/fleet-constraint-v2/client-inventory-manifest.pilots.v1.yaml"
+    scope: "stdd first pilot repo then representative external clients"
+  - constraint_gate_errors:
+      close_out: "blocking"
+      pre_red: "advisory"
+      verification: "blocking"
+    id: "G3"
+    label: "Phase 4 — fleet waves"
+    layer_c:
+      constraint_flow: true
+      gate_mode: true
+      typed_flow: true
     phase: "4"
-    scope: All TIED clients in risk-based waves
-    layer_c:
-      gate_mode: true
-      constraint_flow: true
-      typed_flow: true
-    constraint_gate_errors:
-      pre_red: advisory
-      verification: blocking
-      close_out: blocking
+    prerequisites:
+      - "evidence: working/fleet-constraint-v2/phase-3-exit-review.v1.json"
+      - "evidence: working/fleet-constraint-v2/fleet-wave-partition.v1.yaml"
+      - "evidence: working/fleet-constraint-v2/client-inventory-manifest.v1.yaml"
+      - "Phase 3 G2 pilot receipts accepted (rollback-exercise-G2-pilots.v1.json)"
+    scope: "OD-P4-3 enrolled clients in risk-based waves (five-repo Phase 4 technical exit set)"
     waiver_policy:
-      unknown_truncation_unsupported: require_active_waiver_or_receipt
       max_duration_days_default: 90
-
-  - id: G4
-    label: Phase 5 — default enforcement
-    phase: "5"
-    scope: New-client bootstrap and continuous governance
-    layer_c:
-      gate_mode: true
-      constraint_flow: true
-      typed_flow: true
+      unknown_truncation_unsupported: "require_active_waiver_or_receipt"
+  - ci_expectations:
+      - "header_and_contract_defaults_for_new_clients"
+      - "stale_waiver_checks"
     constraint_gate_errors:
-      pre_red: blocking_on_qualifying_paths
-      verification: blocking
-      close_out: blocking
-    ci_expectations:
-      - stale_waiver_checks
-      - header_and_contract_defaults_for_new_clients
+      close_out: "blocking"
+      pre_red: "blocking_on_qualifying_paths"
+      verification: "blocking"
+    id: "G4"
+    label: "Phase 5 — default enforcement"
+    layer_c:
+      constraint_flow: true
+      gate_mode: true
+      typed_flow: true
+    phase: "5"
+    scope: "New-client bootstrap and continuous governance"
+updated_at: "2026-09-12T00:00:00Z"

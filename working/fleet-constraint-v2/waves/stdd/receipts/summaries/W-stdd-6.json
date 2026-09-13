@@ -1,0 +1,20 @@
+{
+  "run_at": "2026-09-13T04:26:40.644Z",
+  "mode": "fleet-g3-receipts",
+  "wave_id": "W-stdd-6",
+  "partition_wave_id": "W-stdd-6",
+  "gate_stage": "G3",
+  "receipt_count": 10,
+  "receipt_paths": [
+    "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-FEAT_AGENTSTREAM_ADAPTER.receipt.json",
+    "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-GOAGENT-CHECKLIST-CONTROL.receipt.json",
+    "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-GOAGENT-CLI-CMD.receipt.json",
+    "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-GOAGENT-EXECUTOR.receipt.json",
+    "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-GOAGENT-FEATURESPEC.receipt.json",
+    "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-GOAGENT-LIB-TYPES.receipt.json",
+    "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT.receipt.json",
+    "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-GOAGENT-PIPELINE.receipt.json",
+    "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-GOAGENT-TDDLOOP.receipt.json",
+    "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-GOAGENT-TEXT-SOURCES.receipt.json"
+  ]
+}

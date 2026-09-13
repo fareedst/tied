@@ -3,8 +3,10 @@
 
 # [IMPL-PSEUDOCODE_SHARED_PRIMITIVES] [ARCH-PSEUDOCODE_PARSER_UNIFICATION] [REQ-PSEUDOCODE_PARSER_UNIFICATION]
 # How: Export token, procedure-range, and contract-field helpers with no imports from validator or parser modules.
+# [IMPL-PSEUDOCODE_SHARED_PRIMITIVES] [ARCH-PSEUDOCODE_PARSER_UNIFICATION] [REQ-PSEUDOCODE_PARSER_UNIFICATION]
+# How: File-level contract INPUT where for constraint-enforced-v2 inventory floor.
 Contract:
-  INPUT: source text or line arrays
+  INPUT: source_text: string where length(source_text) >= 0; optional line arrays
   OUTPUT: semantic tokens, procedure ranges, contract field labels
   PRE: callers supply normalized UTF-8 text split on CRLF or LF
   POST: helpers are pure, deterministic, and use fresh regex instances per call
@@ -15,6 +17,9 @@ Contract:
 
 # [IMPL-PSEUDOCODE_SHARED_PRIMITIVES] [ARCH-PSEUDOCODE_PARSER_UNIFICATION] [REQ-PSEUDOCODE_PARSER_UNIFICATION]
 # How: Extract bracketed REQ/ARCH/IMPL tokens in source order or unique sorted order.
+
+Grammar-Version: v2
+
 procedure EXTRACT_SEMANTIC_TOKENS(text, options):
   # [IMPL-PSEUDOCODE_SHARED_PRIMITIVES] [ARCH-PSEUDOCODE_PARSER_UNIFICATION] [REQ-PSEUDOCODE_PARSER_UNIFICATION]
   Contract:

@@ -1,6 +1,9 @@
 # [IMPL-TIED_FIDELITY_RESEARCH] [ARCH-TIED_FIDELITY_RESEARCH] [REQ-TIED_FIDELITY_RESEARCH]
 # Implements one-project, one-IMPL/module-boundary read-only fidelity analysis and evidence capture.
 
+
+Grammar-Version: v2
+
 ## Summary contract
 INPUT: project manifest, change identity, IMPL/module scope, declared analysis adapters
 PRE: project root exists; TIED base path is absolute and equals the analyzed project tied/ directory; methodology and generated paths are excluded
@@ -16,7 +19,7 @@ procedure PROJECT_MANIFEST(project_root, configuration):
 # [IMPL-TIED_FIDELITY_RESEARCH] [ARCH-TIED_FIDELITY_RESEARCH] [REQ-TIED_FIDELITY_RESEARCH]
 # Resolves one project boundary and prevents cross-project TIED access.
 Contract:
-INPUT: project root, manifest configuration
+INPUT: project_root: string where length(project_root) > 0; manifest configuration
 PRE: project root is readable and manifest configuration is bounded
 OUTPUT: normalized project manifest | error InvalidManifest | error WrongTiedBasePath
 POST: normalized manifest contains an absolute project root, absolute TIED base path, version, language/test classifiers, and ignore rules

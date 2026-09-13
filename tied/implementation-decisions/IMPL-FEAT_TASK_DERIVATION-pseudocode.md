@@ -1,8 +1,21 @@
 # [IMPL-FEAT_TASK_DERIVATION] [ARCH-FEAT_TASK_DERIVATION_BOUNDARY] [REQ-FEAT_TASK_DERIVATION]
-# How: derive a deterministic task graph source projection from canonical records without copying their bodies.
+
+
+Grammar-Version: v2
+
+## Summary contract
+# [IMPL-FEAT_TASK_DERIVATION] [ARCH-FEAT_TASK_DERIVATION_BOUNDARY] [REQ-FEAT_TASK_DERIVATION] — How: derive a deterministic task graph source projection from canonical records without copying their bodies.
+Contract:
+  INPUT: canonical projections with source_tokens: list where length(source_tokens) >= 0; readiness results
+  PRE: all source references resolve; blocking clarification and constitution gates pass; projections are normalized
+  OUTPUT: task_graph_projection | derivation_error
+  POST: every task has task_id, source_tokens, depends_on, deliverables, test_level, parallel_group, status, evidence, source_revision
+  FAILURE_MODES: INVALID_SOURCE_REFERENCE; BLOCKED_READINESS; INVALID_CONTRACT; IDENTITY_COLLISION
+  EFFECTS: pure
+  TERMINATION: total
 
 ## DERIVE_TASK_GRAPH
-# How: validate canonical projections and emit stable task entries for Batch 4 and the scheduler.
+# [IMPL-FEAT_TASK_DERIVATION] [ARCH-FEAT_TASK_DERIVATION_BOUNDARY] [REQ-FEAT_TASK_DERIVATION] — How: validate canonical projections and emit stable task entries for Batch 4 and the scheduler.
 Contract:
   INPUT: REQ acceptance criteria; ARCH boundaries; IMPL blocks and contracts; clarification readiness; constitution compliance; quality profiles
   PRE: all source references resolve; blocking clarification and constitution gates pass; projections are normalized
@@ -21,9 +34,9 @@ Contract:
 8. RETURN projection and source revision metadata
 
 ## VALIDATE_SOURCE_PROJECTIONS
-# How: reject unresolved references, blocked readiness, malformed contracts, and duplicate stable identities before graph publication.
+# [IMPL-FEAT_TASK_DERIVATION] [ARCH-FEAT_TASK_DERIVATION_BOUNDARY] [REQ-FEAT_TASK_DERIVATION] — How: reject unresolved references, blocked readiness, malformed contracts, and duplicate stable identities before graph publication.
 Contract:
-  INPUT: canonical projections; readiness results
+  INPUT: canonical projections with source_tokens: list where length(source_tokens) >= 0; readiness results
   PRE: inputs are parseable mappings
   OUTPUT: validated projections | derivation_error
   POST: accepted projections contain no unresolved blocking gate or duplicate identity

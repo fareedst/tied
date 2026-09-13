@@ -1,9 +1,12 @@
 # [IMPL-FEAT_REFERENCE_LINKER] [ARCH-FEAT_CANONICAL_LINK_BOUNDARY] [REQ-FEAT_CANONICAL_LINKS]
 
+
+Grammar-Version: v2
+
 ## Summary contract
 # [IMPL-FEAT_REFERENCE_LINKER] [ARCH-FEAT_CANONICAL_LINK_BOUNDARY] [REQ-FEAT_CANONICAL_LINKS] — How: resolve typed feature references against canonical TIED records without mutating them.
 Contract:
-  INPUT: manifest_references; canonical_tied_indexes
+  INPUT: manifest_references: list where length(manifest_references) >= 0; canonical_tied_indexes
   PRE: indexes are readable and references declare an expected layer
   OUTPUT: resolved_links | link_errors
   POST: links exist in declared layers and indexes are unchanged
@@ -16,7 +19,7 @@ procedure RESOLVE_CANONICAL_REFERENCES(manifest_references, canonical_tied_index
 # [IMPL-FEAT_REFERENCE_LINKER] [ARCH-FEAT_CANONICAL_LINK_BOUNDARY] [REQ-FEAT_CANONICAL_LINKS] — How: resolve references, enforce token type, and validate the REQ→ARCH→IMPL graph.
   # [IMPL-FEAT_REFERENCE_LINKER] [ARCH-FEAT_CANONICAL_LINK_BOUNDARY] [REQ-FEAT_CANONICAL_LINKS] — How: resolve each typed reference and preserve canonical ownership.
   Contract:
-    INPUT: manifest_references; canonical_tied_indexes
+    INPUT: manifest_references: list where length(manifest_references) >= 0; canonical_tied_indexes
     PRE: canonical indexes are readable
     OUTPUT: resolved_links | link_errors
     POST: successful links are typed and existing; no canonical record changes

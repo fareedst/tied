@@ -1,0 +1,513 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "constraint-migration-receipt.v1",
+  "title": "TIED fleet constraint v2 migration receipt",
+  "description": "Machine-readable Layer A/B/C + constraint_flow snapshot for one sidecar or qualification fixture run (OD-P2-2). Unknown, truncation, and unsupported outcomes are first-class; collectors MUST NOT treat them as pass.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "receipt_meta",
+    "pin",
+    "subject",
+    "layer_a",
+    "layer_b",
+    "layer_c",
+    "constraint",
+    "unknown_summary",
+    "constraint_gate_errors",
+    "promotion_readiness"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Optional path or URI to this JSON Schema file."
+    },
+    "receipt_meta": { "$ref": "#/$defs/receiptMeta" },
+    "pin": { "$ref": "#/$defs/pin" },
+    "subject": { "$ref": "#/$defs/subject" },
+    "layer_a": { "$ref": "#/$defs/layerA" },
+    "layer_b": { "$ref": "#/$defs/layerB" },
+    "layer_c": { "$ref": "#/$defs/layerC" },
+    "constraint": { "$ref": "#/$defs/constraint" },
+    "unknown_summary": { "$ref": "#/$defs/unknownSummary" },
+    "constraint_gate_errors": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/constraintGateError" },
+      "description": "Proven constraint violations surfaced for receipt (non-empty allowed under G1 advisory)."
+    },
+    "promotion_readiness": { "$ref": "#/$defs/promotionReadiness" },
+    "collector_notes": {
+      "type": "string",
+      "description": "Optional operator or harness comment; not used for pass/fail."
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "layer_c": {
+            "type": "object",
+            "properties": { "analysis_truncated": { "const": true } },
+            "required": ["analysis_truncated"]
+          }
+        },
+        "required": ["layer_c"]
+      },
+      "then": {
+        "properties": {
+          "layer_c": {
+            "type": "object",
+            "properties": { "ok": { "const": false } },
+            "required": ["ok"]
+          }
+        },
+        "required": ["layer_c"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "layer_c": {
+            "type": "object",
+            "properties": { "diagnostics_truncated": { "const": true } },
+            "required": ["diagnostics_truncated"]
+          }
+        },
+        "required": ["layer_c"]
+      },
+      "then": {
+        "properties": {
+          "layer_c": {
+            "type": "object",
+            "properties": { "ok": { "const": false } },
+            "required": ["ok"]
+          }
+        },
+        "required": ["layer_c"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "constraint": {
+            "type": "object",
+            "properties": { "solver_truncated": { "const": true } },
+            "required": ["solver_truncated"]
+          }
+        },
+        "required": ["constraint"]
+      },
+      "then": {
+        "properties": {
+          "unknown_summary": {
+            "type": "object",
+            "properties": { "truncated": { "type": "integer", "minimum": 1 } },
+            "required": ["truncated"]
+          }
+        },
+        "required": ["unknown_summary"]
+      }
+    }
+  ],
+  "$defs": {
+    "receiptMeta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "receipt_id",
+        "generated_at",
+        "gate_stage",
+        "program_gate_policy"
+      ],
+      "properties": {
+        "schema_version": {
+          "type": "integer",
+          "const": 1,
+          "description": "Must match constraint-migration-receipt.v1 schema identity."
+        },
+        "receipt_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Stable identifier for this receipt instance (UUID or harness run id)."
+        },
+        "generated_at": { "type": "string", "format": "date-time" },
+        "gate_stage": {
+          "type": "string",
+          "enum": ["G0", "G1", "G2", "G3", "G4"],
+          "description": "Gate promotion stage at emit time; Phase 2 receipts use G1."
+        },
+        "program_gate_policy": {
+          "type": "string",
+          "enum": ["advisory", "blocking"],
+          "description": "Program-wide gate policy; Phase 2 exit remains advisory (G1)."
+        }
+      }
+    },
+    "pin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["methodology_pin", "analyzer_build_identity"],
+      "properties": {
+        "methodology_pin": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Minimum stdd/copy_files.sh lineage (e.g. 48d1fbb+)."
+        },
+        "analyzer_build_identity": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Analyzer version or build fingerprint (e.g. pseudocode analyzer 1.0.0 + git sha)."
+        },
+        "manifest_entry_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Optional qualification manifest or inventory row key when emitted from harness."
+        }
+      }
+    },
+    "inputIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "hash", "byte_length"],
+      "properties": {
+        "algorithm": { "type": "string", "const": "sha256" },
+        "hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "byte_length": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sidecar_path",
+        "input_identity",
+        "grammar_version",
+        "annotation_profile"
+      ],
+      "properties": {
+        "sidecar_path": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Repo-relative path to IMPL essence_pseudocode sidecar analyzed."
+        },
+        "impl_token": {
+          "type": "string",
+          "pattern": "^IMPL-[A-Z0-9_]+$",
+          "description": "IMPL token when sidecar maps to a single decision record."
+        },
+        "input_identity": { "$ref": "#/$defs/inputIdentity" },
+        "grammar_version": {
+          "type": "string",
+          "enum": ["pseudocode-grammar.v1", "pseudocode-grammar.v2"]
+        },
+        "annotation_profile": {
+          "type": "string",
+          "enum": [
+            "legacy-v1",
+            "header-only-v2",
+            "constraint-ready-v2",
+            "constraint-enforced-v2",
+            "fixture-lab",
+            "unknown-or-mixed"
+          ],
+          "description": "Authoring/migration annotation tier for the subject sidecar."
+        }
+      }
+    },
+    "layerA": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["applicable", "ok"],
+      "properties": {
+        "applicable": {
+          "type": "boolean",
+          "description": "False when Layer A (TIED index/token consistency) was not run for this receipt."
+        },
+        "ok": {
+          "type": "boolean",
+          "description": "Layer A pass when applicable; false when skipped only if policy marks skip as non-green."
+        },
+        "tied_consistency_ok": {
+          "type": "boolean",
+          "description": "Snapshot of tied_validate_consistency ok when run."
+        },
+        "token_refs_checked": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "notes": { "type": "string" }
+      }
+    },
+    "layerB": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ok",
+        "validator_schema_version",
+        "blocks_count",
+        "contract_precision",
+        "error_count",
+        "warning_count"
+      ],
+      "properties": {
+        "ok": { "type": "boolean" },
+        "validator_schema_version": {
+          "type": "string",
+          "const": "layer-b-pseudocode-validator.v1"
+        },
+        "blocks_count": { "type": "integer", "minimum": 0 },
+        "contract_precision": { "$ref": "#/$defs/contractPrecision" },
+        "shape_rows": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/shapeRow" },
+          "description": "Optional SHAPE-003..006 row outcomes when structural_compat pass ran."
+        },
+        "error_count": { "type": "integer", "minimum": 0 },
+        "warning_count": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "contractPrecision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "active_blocks_with_contract",
+        "active_blocks_missing_pre_or_post",
+        "active_blocks_missing_failure_modes",
+        "active_blocks_missing_data_transition",
+        "active_blocks_missing_termination"
+      ],
+      "properties": {
+        "active_blocks_with_contract": { "type": "integer", "minimum": 0 },
+        "active_blocks_missing_pre_or_post": { "type": "integer", "minimum": 0 },
+        "active_blocks_missing_failure_modes": { "type": "integer", "minimum": 0 },
+        "active_blocks_missing_data_transition": { "type": "integer", "minimum": 0 },
+        "active_blocks_missing_termination": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "shapeRow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["shape_id", "ok"],
+      "properties": {
+        "shape_id": {
+          "type": "string",
+          "pattern": "^SHAPE-00[3-6]$"
+        },
+        "ok": { "type": "boolean" },
+        "message": { "type": "string" }
+      }
+    },
+    "layerC": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "gate_mode",
+        "typed_flow",
+        "constraint_flow",
+        "constraint_gate_errors_policy",
+        "ok",
+        "analysis_truncated",
+        "diagnostics_truncated",
+        "error_count",
+        "warning_count",
+        "info_count"
+      ],
+      "properties": {
+        "gate_mode": { "type": "boolean" },
+        "typed_flow": { "type": "boolean" },
+        "constraint_flow": { "type": "boolean" },
+        "constraint_gate_errors_policy": {
+          "type": "string",
+          "enum": ["advisory", "blocking"],
+          "description": "Effective constraint_gate_errors disposition for this run (G1: advisory)."
+        },
+        "ok": {
+          "type": "boolean",
+          "description": "Layer C gate outcome; MUST be false when analysis_truncated or diagnostics_truncated."
+        },
+        "analysis_truncated": {
+          "type": "boolean",
+          "description": "True when parser/IR or pass budgets truncated analysis."
+        },
+        "diagnostics_truncated": {
+          "type": "boolean",
+          "description": "True when diagnostic list was capped; not a silent pass."
+        },
+        "error_count": { "type": "integer", "minimum": 0 },
+        "warning_count": { "type": "integer", "minimum": 0 },
+        "info_count": { "type": "integer", "minimum": 0 },
+        "procedure_count": { "type": "integer", "minimum": 0 },
+        "source_report_schema": {
+          "type": "string",
+          "const": "pseudocode-analysis-report.v1",
+          "description": "Analyzer report schema when Layer C derived from pseudocode_analyze."
+        }
+      }
+    },
+    "constraintBudgets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_solver_steps",
+        "max_summary_depth",
+        "max_predicate_nodes"
+      ],
+      "properties": {
+        "max_solver_steps": { "type": "integer", "minimum": 1 },
+        "max_summary_depth": { "type": "integer", "minimum": 1 },
+        "max_predicate_nodes": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "constraint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ran",
+        "procedures_analyzed",
+        "refinements_checked",
+        "refinements_proven",
+        "alias_mut_checked",
+        "alias_mut_violations",
+        "solver_truncated",
+        "alias_analysis_truncated",
+        "budget_exceeded",
+        "constraint_diagnostics_truncated"
+      ],
+      "properties": {
+        "ran": {
+          "type": "boolean",
+          "description": "True when constraint_flow pass executed."
+        },
+        "procedures_analyzed": { "type": "integer", "minimum": 0 },
+        "refinements_checked": { "type": "integer", "minimum": 0 },
+        "refinements_proven": { "type": "integer", "minimum": 0 },
+        "alias_mut_checked": { "type": "integer", "minimum": 0 },
+        "alias_mut_violations": { "type": "integer", "minimum": 0 },
+        "interproc_enabled": { "type": "boolean" },
+        "budgets_applied": { "$ref": "#/$defs/constraintBudgets" },
+        "solver_truncated": {
+          "type": "boolean",
+          "description": "Mirror of analyzer solver_metadata.solver_truncation."
+        },
+        "solver_truncation_cause": {
+          "type": "string",
+          "enum": [
+            "max_solver_steps",
+            "max_summary_depth",
+            "max_predicate_nodes",
+            "solver_truncation",
+            "none"
+          ]
+        },
+        "alias_analysis_truncated": {
+          "type": "boolean",
+          "description": "True when alias/mutation pass hit budget or truncation."
+        },
+        "budget_exceeded": {
+          "type": "boolean",
+          "description": "True when any constraint-related budget was exceeded."
+        },
+        "constraint_diagnostics_truncated": {
+          "type": "boolean",
+          "description": "True when constraint diagnostics list was capped."
+        },
+        "solver_steps_used": { "type": "integer", "minimum": 0 },
+        "summary_depth_used": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "unknownSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "unknown",
+        "truncated",
+        "unsupported",
+        "prose_only",
+        "budget_exceeded"
+      ],
+      "properties": {
+        "unknown": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Count of AnalysisUnknown entries not classified below."
+        },
+        "truncated": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Truncation-class unknowns (parser, solver, diagnostics cap)."
+        },
+        "unsupported": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Unsupported syntax or predicate constructs."
+        },
+        "prose_only": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Claims present only in prose without machine-checkable annotations."
+        },
+        "budget_exceeded": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Budget-exceeded unknowns (abstract, path, constraint budgets)."
+        }
+      }
+    },
+    "constraintGateError": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "severity", "message", "line", "proven"],
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [
+            "REFINEMENT_VIOLATION",
+            "CONSTRAINT_UNSUPPORTED_SYNTAX",
+            "SUMMARY_CONFLICT",
+            "MUTATION_VIOLATION",
+            "ALIAS_VIOLATION"
+          ]
+        },
+        "severity": { "type": "string", "enum": ["warning", "error"] },
+        "message": { "type": "string", "minLength": 1 },
+        "line": { "type": "integer", "minimum": 1 },
+        "procedure": { "type": "string", "minLength": 1 },
+        "proven": {
+          "type": "boolean",
+          "description": "True when violation is proven (not inconclusive unknown)."
+        }
+      }
+    },
+    "promotionReadiness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "qualification_green",
+        "f11_pass",
+        "fp_within_threshold"
+      ],
+      "properties": {
+        "qualification_green": {
+          "type": "boolean",
+          "description": "Fleet Phase 2 qualification green for subject or cohort slice (P2-F)."
+        },
+        "f11_pass": {
+          "type": "boolean",
+          "description": "F11 annotation burden threshold met (P2-G)."
+        },
+        "fp_within_threshold": {
+          "type": "boolean",
+          "description": "False-positive rate within OD-P2-3 fleet cap (P2-G)."
+        },
+        "as_of_phase": {
+          "type": "string",
+          "description": "Phase label when readiness flags last evaluated (e.g. P2-D-fixture)."
+        }
+      }
+    }
+  }
+}

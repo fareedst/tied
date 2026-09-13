@@ -11,8 +11,21 @@ CONTRACT:
 # How: Composition and ordering for related_decisions `depends_on` and `composed_with` — no new runtime call into IMPL-B from this package except the documented hook from main.
 #   PRE: `pipeline.Build` returned `[]Turn`; `ApplyPromptFilePreload` applied. POST: `Parts` optionally HTML, chain slice unchanged, session logic unchanged. ORDER: Build → (FirstTurn slice, if any) → ReadPromptFilePreload → ApplyPromptFilePreload → **APPLY_TO_TURNS (this IMPL)** → runTiedPreflight (optional) → runDryRun or per-turn `executor.Run`. SHARED: `[]Turn` in process memory. IMPL-GOAGENT-PIPELINE supplies `Build`; IMPL-GOAGENT-CLI-CMD owns slice/preload/preflight/executor; this IMPL only string-transforms Parts.
 
+
+Grammar-Version: v2
+
 procedure APPLY_TO_TURNS(turns, options):
-  # How: no-op if disabled; else in-place part replacement; propagate any FORMAT error
+  Contract:
+    INPUT: turns: list where length(turns) >= 0; options (enabled, stable_indent)
+    PRE: turns non-nil when enabled; options reflects resolved CLI config
+    OUTPUT: turns, error
+    POST: when disabled, turns unchanged; when enabled, each Part string replaced with formatted HTML or error before further indices
+    FAILURE_MODES: FORMAT_NON_COMPACT_HTML_ERROR
+    DATA_TRANSITION: enabled path mutates Turn.Parts strings in the same in-memory []Turn
+    EFFECTS: ReadWrite in-process only
+    TERMINATION: total when all parts processed or first format error returned
+
+  # [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] — How: no-op if disabled; else in-place part replacement; propagate any FORMAT error
   IF not options.enabled:
     RETURN (turns, nil)
   FOR each turn IN turns:
@@ -23,7 +36,16 @@ procedure APPLY_TO_TURNS(turns, options):
   RETURN (turns, nil)
 
 procedure FORMAT_NON_COMPACT_HTML(part, options):
-  # How: map one part string to a stable, non–single-line HTML form; empty string returns empty, no error; if off, pass-through (matches Apply when disabled, or direct public API)
+  Contract:
+    INPUT: part: string where length(part) >= 0; options (enabled, stable_indent)
+    PRE: part is UTF-8 text from Turn.Parts
+    OUTPUT: formatted string, error
+    POST: empty part returns empty without error; disabled returns input unchanged; enabled returns deterministic non-compact HTML for same inputs
+    FAILURE_MODES: FORMAT_NON_COMPACT_HTML_ERROR
+    EFFECTS: ReadOnly
+    TERMINATION: total
+
+  # [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] — How: map one part string to a stable, non–single-line HTML form; empty string returns empty, no error; if off, pass-through (matches Apply when disabled, or direct public API)
   IF part == "":
     RETURN ("", nil)
   IF not options.enabled:
@@ -32,13 +54,30 @@ procedure FORMAT_NON_COMPACT_HTML(part, options):
   RETURN (out, nil)
 
 procedure DETERMINISTIC_NON_COMPACT_HTML_FOR_PART(text, options):
+  Contract:
+    INPUT: TBD
+    PRE: TBD
+    POST:
+      - success => TBD
+    EFFECTS: pure
+
   # How: [IMPL/ARCH/REQ] UTF-8 deterministic: replace "><" with ">" newline "<" for adjacent tags; if no newline yet, insert newline after first ">" (e.g. <p>text</p>); if no ">", append newline to plain text; if options.stable_indent>0, prefix every continuation line with that many spaces. (Go: htmlformat.deterministicNonCompactHTMLForPart; unit tests in htmlformat_test.go.)
 
 # [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT] and caller [IMPL-GOAGENT-CLI-CMD] [ARCH-GOAGENT-CLI] [REQ-GOAGENT-CLI-CONFIG] — integration and orchestration; does not duplicate the HTML format contract; documents where IMPL-CLI calls into this IMPL.
 # How: After ApplyPromptFilePreload, when the resolved `cfg` enables non-compact-HTML, run APPLY_TO_TURNS before runTiedPreflight, then dry-run or per-turn `executor.Run`. Dry-run and live use the same transform. IMPL-GOAGENT-PIPELINE and checklist/tddloop/FEATURE packages are not edited here; IMPL-GOAGENT-EXECUTOR remains downstream; this block is the single composition edge from `main` into APPLY_TO_TURNS (cross-IMPL call from IMPL-GOAGENT-CLI-CMD into this module).
 
 procedure INTEGRATE_WITH_MAIN(cfg, turns, options):
-  # How: nil guards; skip when the CLI flag/field is off; propagate format errors to main as non-zero exit or printed error
+  Contract:
+    INPUT: cfg (resolved CLI config), turns ([]Turn), options (enabled, stable_indent)
+    PRE: called after ApplyPromptFilePreload in IMPL-GOAGENT-CLI-CMD main
+    OUTPUT: error | nil
+    POST: nil cfg or turns or disabled option leaves turns unchanged; enabled path runs APPLY_TO_TURNS and returns first format error to main
+    FAILURE_MODES: FORMAT_NON_COMPACT_HTML_ERROR, INTEGRATE_NIL_INPUT
+    DATA_TRANSITION: enabled path mutates Turn.Parts via APPLY_TO_TURNS on shared in-memory turns
+    EFFECTS: ReadWrite in-process only
+    TERMINATION: total on nil guard, disabled skip, success, or propagated format error
+
+  # [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] — How: nil guards; skip when the CLI flag/field is off; propagate format errors to main as non-zero exit or printed error
   IF cfg is nil OR turns is nil:
     RETURN
   IF not (cfg has non-compact-HTML option true):
@@ -48,6 +87,15 @@ procedure INTEGRATE_WITH_MAIN(cfg, turns, options):
   ON err != nil: return error to main
 
 procedure MAP_CONFIG_TO_HTMLFORMAT_OPTIONS(resolved_config, turns):
+  Contract:
+    INPUT: resolved_config (ParseAndResolve output), turns ([]Turn)
+    PRE: resolved_config from IMPL-GOAGENT-CLI-CMD after preload
+    OUTPUT: error | nil
+    POST: derives htmlformat options and invokes INTEGRATE_WITH_MAIN; turns unchanged when option disabled
+    FAILURE_MODES: FORMAT_NON_COMPACT_HTML_ERROR, INTEGRATE_NIL_INPUT
+    EFFECTS: ReadWrite in-process via INTEGRATE_WITH_MAIN
+    TERMINATION: total when INTEGRATE_WITH_MAIN completes or returns error
+
   # [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT] [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT] [ARCH-GOAGENT-CLI] [REQ-GOAGENT-CLI-CONFIG] — How: from ParseAndResolve output, derive CfgForIntegrate{non_compact: resolved_config} and options { enabled: same, stable_indent: from --non-compact-html-indent } with no I/O. Go: applyPostPreloadNonCompactHTML in cmd/agentstream; then INTEGRATE_WITH_MAIN (composition-tested against htmlformat).
   # How: in-place on `turns` via INTEGRATE_WITH_MAIN; return value is error in Go, not t2
 

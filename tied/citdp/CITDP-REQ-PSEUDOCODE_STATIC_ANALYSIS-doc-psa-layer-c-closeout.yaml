@@ -1,105 +1,105 @@
 CITDP-doc-psa-layer-c-closeout:
   change_definition:
-    change_id: DOC-PSA-LAYER-C-CLOSEOUT
+    change_id: "DOC-PSA-LAYER-C-CLOSEOUT"
     current_behavior: "IMPL-TIED_FILES sidecar fails Layer C with 12 forward-reference UNRESOLVED_CALL errors and legacy non-parseable CALL grammar; Wave 2 pre_implementation gate pairing incomplete."
     desired_behavior: "Identity-bound integrated inquiry at three phases; IMPL-TIED_FILES remediated (procedure reorder + grammar fixes); all impl_inventory PSA reports ok with gate_mode_applied; envelope blocking zero at close_out."
     non_goals:
-      - "Full 78-sidecar corpus remediation"
-      - "Engine two-pass symbol resolution"
       - "Demo client 1789069630 repair"
+      - "Engine two-pass symbol resolution"
+      - "Full 78-sidecar corpus remediation"
       - "Re-implementing W2-D1..D6"
     success_criteria:
+      - "Backfill script exits 0; tied_validate_consistency ok"
+      - "Every impl_inventory IMPL has PSA JSON ok true with gate_mode_applied true"
       - "Three distinct run_ids with four artifacts each under adversarial-inquiry/phase-{phase}/"
       - "tied_checklist_gate_validate allowed true at pre_implementation, verification, close_out"
-      - "Every impl_inventory IMPL has PSA JSON ok true with gate_mode_applied true"
-      - "Backfill script exits 0; tied_validate_consistency ok"
     unchanged_behavior: "Wave 2 enforcement code and passing PSA reports for IMPL-QUALITY_PSEUDOCODE_VALIDATOR and IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT unless hash drift."
   completion_criteria:
     activation:
-      request_token: REQ-PSEUDOCODE_STATIC_ANALYSIS
-      phase: close_out
-      run_id: doc-psa-lc-closeout-20260911
-      verification_run_id: doc-psa-lc-verify-20260911
-      close_out_run_id: doc-psa-lc-closeout-20260911
+      close_out_run_id: "doc-psa-lc-closeout-20260911"
+      phase: "close_out"
+      request_token: "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+      run_id: "doc-psa-lc-closeout-20260911"
+      verification_run_id: "doc-psa-lc-verify-20260911"
     checklist_gate:
       dispositions:
-        - completed
-        - not_applicable
-        - pending
-        - waived
+        - "completed"
+        - "not_applicable"
+        - "pending"
+        - "waived"
       fail_closed: true
       phases:
-        - close_out
-        - pre_implementation
-        - verification
+        - "close_out"
+        - "pre_implementation"
+        - "verification"
     verification_gate_notes: "Layer C PSA ok for IMPL-TIED_FILES; backfill exit 0; gates doc-psa-lc-* allowed true; envelope zero blocking gaps."
   evidence:
     commands:
-      - npm run build --prefix mcp-server
-      - node --test mcp-server/dist/checklist-pseudocode-gate.test.js
-      - node --test mcp-server/dist/checklist-validator.test.js
-      - node --test mcp-server/dist/request-evidence-envelope/request-evidence-envelope.test.js
-      - node scripts/backfill-pseudocode-analysis.mjs --req REQ-PSEUDOCODE_STATIC_ANALYSIS --gate-mode --impl IMPL-TIED_FILES --impl IMPL-QUALITY_PSEUDOCODE_VALIDATOR --impl IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT
-      - cd mcp-server && npm test
-      - ruby scripts/validate_vocab_index.rb
-    manifest_reference: working/REQ-PSEUDOCODE_STATIC_ANALYSIS/evidence/request-evidence-envelope.v1.json
+      - "cd mcp-server && npm test"
+      - "node --test mcp-server/dist/checklist-pseudocode-gate.test.js"
+      - "node --test mcp-server/dist/checklist-validator.test.js"
+      - "node --test mcp-server/dist/request-evidence-envelope/request-evidence-envelope.test.js"
+      - "node scripts/backfill-pseudocode-analysis.mjs --req REQ-PSEUDOCODE_STATIC_ANALYSIS --gate-mode --impl IMPL-TIED_FILES --impl IMPL-QUALITY_PSEUDOCODE_VALIDATOR --impl IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "npm run build --prefix mcp-server"
+      - "ruby scripts/validate_vocab_index.rb"
+    manifest_reference: "working/REQ-PSEUDOCODE_STATIC_ANALYSIS/evidence/request-evidence-envelope.v1.json"
     proof_boundaries:
-      - pseudocode_gate_only
-      - traceability_structure
+      - "pseudocode_gate_only"
+      - "traceability_structure"
   impact_analysis:
     impl_inventory:
-      - impl_token: IMPL-TIED_FILES
-        action: remediate
-        sidecar: tied/implementation-decisions/IMPL-TIED_FILES-pseudocode.md
-      - impl_token: IMPL-QUALITY_PSEUDOCODE_VALIDATOR
-        action: revalidate
-        sidecar: tied/implementation-decisions/IMPL-QUALITY_PSEUDOCODE_VALIDATOR-pseudocode.md
-      - impl_token: IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT
-        action: revalidate
-        sidecar: tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md
+      - action: "remediate"
+        impl_token: "IMPL-TIED_FILES"
+        sidecar: "tied/implementation-decisions/IMPL-TIED_FILES-pseudocode.md"
+      - action: "revalidate"
+        impl_token: "IMPL-QUALITY_PSEUDOCODE_VALIDATOR"
+        sidecar: "tied/implementation-decisions/IMPL-QUALITY_PSEUDOCODE_VALIDATOR-pseudocode.md"
+      - action: "revalidate"
+        impl_token: "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+        sidecar: "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
     modules_or_boundaries: "IMPL-TIED_FILES sidecar; pseudocode analysis gate; request evidence envelope"
     tied_tokens_affected:
-      - REQ-PSEUDOCODE_STATIC_ANALYSIS
-      - IMPL-TIED_FILES
-      - IMPL-QUALITY_PSEUDOCODE_VALIDATOR
-      - IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT
+      - "IMPL-QUALITY_PSEUDOCODE_VALIDATOR"
+      - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "IMPL-TIED_FILES"
+      - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
     tied_tokens_new: []
   leap_feedback:
-    divergences_from_analysis: none
-    record_status: complete
+    divergences_from_analysis: "none"
+    record_status: "complete"
     tied_stack_updates_required: []
   record_identity:
-    change_request_id: DOC-PSA-LAYER-C-CLOSEOUT
+    change_request_id: "DOC-PSA-LAYER-C-CLOSEOUT"
     recorded_at: "2026-09-11"
     title: "PSA Layer C close-out — IMPL-TIED_FILES remediation and gate pairing"
   risk_analysis:
     abuse_cases:
-      - "Verification passes without remediated IMPL-TIED_FILES PSA report"
       - "Cross-wave mci-* evidence reused for this close-out pairing"
+      - "Verification passes without remediated IMPL-TIED_FILES PSA report"
     adversarial_inquiry:
-      assurance_profile: baseline-functional
+      assurance_profile: "baseline-functional"
       close_out_inquiry_waiver: null
+      counterexamples:
+        - "Forward-reference UNRESOLVED_CALL remains after reorder"
+        - "Gate passes with ok false PSA for IMPL-TIED_FILES"
       depth_change_waiver: null
-      depth_tier: integrated
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "Baseline Layer C captures 12 UNRESOLVED_CALL errors before remediation"
       eligibility_triggers_matched:
-        - strict-close-out
-        - methodology-tooling-change
-        - persistence
-      gate_policy: advisory
+        - "methodology-tooling-change"
+        - "persistence"
+        - "strict-close-out"
+      evidence_references:
+        - "docs/methodology-closeout-integrity-plan.md"
+        - "docs/pseudocode-static-analysis-docs-and-gate-plan.md"
+      falsification_questions:
+        - "Does envelope blocking pass with missing IMPL-TIED_FILES PSA?"
+        - "Does pre_implementation gate allow without identity-bound inquiry artifacts?"
+      gate_policy: "advisory"
       integrated_waiver: null
       prior_depth_tier: null
       rationale: "Layer C close-out with scoped sidecar remediation and identity-bound inquiry pairing."
-      research_profile: integrated-agent
-      counterexamples:
-        - "Gate passes with ok false PSA for IMPL-TIED_FILES"
-        - "Forward-reference UNRESOLVED_CALL remains after reorder"
-      falsification_questions:
-        - "Does pre_implementation gate allow without identity-bound inquiry artifacts?"
-        - "Does envelope blocking pass with missing IMPL-TIED_FILES PSA?"
-      disconfirming_observations:
-        - "Baseline Layer C captures 12 UNRESOLVED_CALL errors before remediation"
-      evidence_references:
-        - docs/pseudocode-static-analysis-docs-and-gate-plan.md
-        - docs/methodology-closeout-integrity-plan.md
+      research_profile: "integrated-agent"
     quality_profiles:
-      - baseline-functional
+      - "baseline-functional"

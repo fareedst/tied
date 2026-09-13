@@ -1,148 +1,166 @@
-name: "application_pseudocode_static_analysis_checklist"
-description: "Layer C static analysis gate checklist for pseudocode_analyze with gate_mode true"
-recommended_validation_order:
-  - input_resolution
-  - parse
-  - symbols
-  - cfg
-  - call_graph
-  - obligations
-  - traceability
-  - reporting
-minimum_gating_rules:
-  - id: PSA-GATE-001
-    rule: "report.ok is true with gate_mode_applied true"
-    severity_on_failure: error
-  - id: PSA-GATE-002
-    rule: "no error-severity diagnostics in report.diagnostics"
-    severity_on_failure: error
-  - id: PSA-GATE-003
-    rule: "truncated is false OR documented waiver on gate-pseudocode-validation"
-    severity_on_failure: error
-  - id: PSA-GATE-004
-    rule: "unsupported_syntax disclosed when present; authors remediate or document rationale"
-    severity_on_failure: warning
 checklist:
-  - category: input_resolution
-    id: PSA-INPUT-001
+  - category: "call_graph"
+    id: "PSA-CG-001"
     required: true
-    severity_on_failure: error
-    title: "Exactly one of inline pseudocode or essence_pseudocode_path"
-    verify:
-      - "pseudocode_analyze rejects AMBIGUOUS_INPUT when both are supplied"
-      - "path resolves under TIED_BASE_PATH"
-  - category: parse
-    id: PSA-PARSE-001
-    required: true
-    severity_on_failure: error
-    title: "Sidecar parses under grammar v1"
-    verify:
-      - "procedure headings use procedure NAME form not list-item PROCEDURE"
-      - "parse section present in report"
-  - category: symbols
-    id: PSA-SYM-001
-    required: true
-    severity_on_failure: error
-    title: "No unresolved internal CALL targets under gate_mode"
-    verify:
-      - "UNRESOLVED_CALL diagnostics absent or resolved"
-  - category: cfg
-    id: PSA-CFG-001
-    required: true
-    severity_on_failure: warning
-    title: "CFG section emitted when cfg pass selected"
-    verify:
-      - "cfg.procedures present for parsed procedures"
-  - category: call_graph
-    id: PSA-CG-001
-    required: true
-    severity_on_failure: warning
+    severity_on_failure: "warning"
     title: "Call graph section emitted when call_graph pass selected"
     verify:
       - "internal CALL edges recorded"
-  - category: obligations
-    id: PSA-OBL-001
+  - category: "cfg"
+    id: "PSA-CFG-001"
     required: true
-    severity_on_failure: warning
-    title: "Obligations characterize paths without claiming runtime proof"
+    severity_on_failure: "warning"
+    title: "CFG section emitted when cfg pass selected"
     verify:
-      - "obligations section present when pass selected"
-  - category: traceability
-    id: PSA-TRACE-001
-    required: true
-    severity_on_failure: warning
-    title: "Block-level token edges projected"
-    verify:
-      - "traceability section lists REQ ARCH IMPL refs from comments"
-  - category: reporting
-    id: PSA-REPORT-001
-    required: true
-    severity_on_failure: error
-    title: "Gate report artifact persisted"
-    verify:
-      - "working/{REQ-TOKEN}/pseudocode-analysis/{IMPL-TOKEN}.v1.json exists"
-      - "input_identity.hash stable until sidecar content changes"
-  - category: typed_flow
-    id: PSA-TYPED-001
+      - "cfg.procedures present for parsed procedures"
+  - category: "constraint_language"
+    id: "PSA-CONSTRAINT-001"
     required: false
-    severity_on_failure: error
-    title: "Typed gate errors promote proven violations on annotated procedures"
-    verify:
-      - "when typed_gate_errors true with gate_mode and typed_flow, TYPE_MISMATCH/NULL_FLOW/SHAPE_MISMATCH/CALL_TYPE_MISMATCH/JOIN_INCOMPATIBLE are error-severity on annotated procedures"
-  - category: typed_flow
-    id: PSA-TYPED-002
-    required: false
-    severity_on_failure: error
-    title: "Prose-only procedures emit no typed gate errors"
-    verify:
-      - "prose-only procedures keep typed diagnostics at warning severity under gate_mode"
-  - category: typed_flow
-    id: PSA-TYPED-003
-    required: false
-    severity_on_failure: warning
-    title: "sections.typed_flow lists severity per diagnostic code"
-    verify:
-      - "sections.typed_flow.diagnostics include severity field for each typed diagnostic"
-  - category: typed_flow
-    id: PSA-TYPED-004
-    required: false
-    severity_on_failure: error
-    title: "Opaque and unsupported typed constructs remain non-gating"
-    verify:
-      - "TYPED_OPAQUE_EXPR and TYPED_UNSUPPORTED_SYNTAX never promote to error-severity gate diagnostics"
-  - category: constraint_language
-    id: PSA-CONSTRAINT-001
-    required: false
-    severity_on_failure: error
+    severity_on_failure: "error"
     title: "Constraint gate errors promote proven violations on constraint-annotated procedures"
     verify:
       - "when constraint_gate_errors true with gate_mode typed_flow and constraint_flow, REFINEMENT_VIOLATION/MUTATION_VIOLATION/ALIAS_VIOLATION/SUMMARY_CONFLICT are error-severity on constraint-annotated procedures"
-  - category: constraint_language
-    id: PSA-CONSTRAINT-002
+  - category: "constraint_language"
+    id: "PSA-CONSTRAINT-002"
     required: false
-    severity_on_failure: error
+    severity_on_failure: "error"
     title: "Prose-only and v1-only procedures emit no constraint gate errors"
     verify:
       - "prose-only and v1-only procedures keep constraint diagnostics at warning severity under gate_mode"
-  - category: constraint_language
-    id: PSA-CONSTRAINT-003
+  - category: "constraint_language"
+    id: "PSA-CONSTRAINT-003"
     required: false
-    severity_on_failure: warning
+    severity_on_failure: "warning"
     title: "sections.constraint_language lists severity and solver metadata"
     verify:
       - "sections.constraint_language.diagnostics include severity field for each constraint diagnostic"
       - "solver truncation disclosed in sections.constraint_language.solver_metadata when budget exceeded"
-  - category: constraint_language
-    id: PSA-CONSTRAINT-004
+  - category: "constraint_language"
+    id: "PSA-CONSTRAINT-004"
     required: false
-    severity_on_failure: error
+    severity_on_failure: "error"
     title: "Opaque and unsupported constraint constructs remain non-gating"
     verify:
       - "CONSTRAINT_UNSUPPORTED_SYNTAX and solver truncation unknowns never promote to error-severity gate diagnostics"
+  - category: "constraint_language"
+    id: "PSA-FLEET-G1-001"
+    required: false
+    severity_on_failure: "warning"
+    title: "Fleet G1 advisory constraint_flow run (Phase 2 qualification)"
+    verify:
+      - "program gate_policy remains advisory; proven violations may appear as warnings under G1"
+      - "pseudocode_analyze with gate_mode true, typed_flow true, constraint_flow true, constraint_gate_errors false on constraint-ready-v2 sidecars"
+      - "sections.constraint_language and unknown/truncation disclosed when present; never treated as silent pass"
+  - category: "input_resolution"
+    id: "PSA-INPUT-001"
+    required: true
+    severity_on_failure: "error"
+    title: "Exactly one of inline pseudocode or essence_pseudocode_path"
+    verify:
+      - "path resolves under TIED_BASE_PATH"
+      - "pseudocode_analyze rejects AMBIGUOUS_INPUT when both are supplied"
+  - category: "obligations"
+    id: "PSA-OBL-001"
+    required: true
+    severity_on_failure: "warning"
+    title: "Obligations characterize paths without claiming runtime proof"
+    verify:
+      - "obligations section present when pass selected"
+  - category: "parse"
+    id: "PSA-PARSE-001"
+    required: true
+    severity_on_failure: "error"
+    title: "Sidecar parses under grammar v1"
+    verify:
+      - "parse section present in report"
+      - "procedure headings use procedure NAME form not list-item PROCEDURE"
+  - category: "reporting"
+    id: "PSA-FLEET-G1-002"
+    required: false
+    severity_on_failure: "warning"
+    title: "Constraint migration receipt emitted for fleet qualification"
+    verify:
+      - "receipt pin.manifest_entry_id matches exemplar tier (contract-only, refinement, alias-mutation)"
+      - "receipt_meta.gate_stage G1 and program_gate_policy advisory until Phase 2 exit"
+      - "working/fleet-constraint-v2/exemplars/receipts/*.json validates against constraint-migration-receipt.v1.schema.json"
+  - category: "reporting"
+    id: "PSA-REPORT-001"
+    required: true
+    severity_on_failure: "error"
+    title: "Gate report artifact persisted"
+    verify:
+      - "input_identity.hash stable until sidecar content changes"
+      - "working/{REQ-TOKEN}/pseudocode-analysis/{IMPL-TOKEN}.v1.json exists"
+  - category: "symbols"
+    id: "PSA-SYM-001"
+    required: true
+    severity_on_failure: "error"
+    title: "No unresolved internal CALL targets under gate_mode"
+    verify:
+      - "UNRESOLVED_CALL diagnostics absent or resolved"
+  - category: "traceability"
+    id: "PSA-TRACE-001"
+    required: true
+    severity_on_failure: "warning"
+    title: "Block-level token edges projected"
+    verify:
+      - "traceability section lists REQ ARCH IMPL refs from comments"
+  - category: "typed_flow"
+    id: "PSA-TYPED-001"
+    required: false
+    severity_on_failure: "error"
+    title: "Typed gate errors promote proven violations on annotated procedures"
+    verify:
+      - "when typed_gate_errors true with gate_mode and typed_flow, TYPE_MISMATCH/NULL_FLOW/SHAPE_MISMATCH/CALL_TYPE_MISMATCH/JOIN_INCOMPATIBLE are error-severity on annotated procedures"
+  - category: "typed_flow"
+    id: "PSA-TYPED-002"
+    required: false
+    severity_on_failure: "error"
+    title: "Prose-only procedures emit no typed gate errors"
+    verify:
+      - "prose-only procedures keep typed diagnostics at warning severity under gate_mode"
+  - category: "typed_flow"
+    id: "PSA-TYPED-003"
+    required: false
+    severity_on_failure: "warning"
+    title: "sections.typed_flow lists severity per diagnostic code"
+    verify:
+      - "sections.typed_flow.diagnostics include severity field for each typed diagnostic"
+  - category: "typed_flow"
+    id: "PSA-TYPED-004"
+    required: false
+    severity_on_failure: "error"
+    title: "Opaque and unsupported typed constructs remain non-gating"
+    verify:
+      - "TYPED_OPAQUE_EXPR and TYPED_UNSUPPORTED_SYNTAX never promote to error-severity gate diagnostics"
+description: "Layer C static analysis gate checklist for pseudocode_analyze with gate_mode true"
+minimum_gating_rules:
+  - id: "PSA-GATE-001"
+    rule: "report.ok is true with gate_mode_applied true"
+    severity_on_failure: "error"
+  - id: "PSA-GATE-002"
+    rule: "no error-severity diagnostics in report.diagnostics"
+    severity_on_failure: "error"
+  - id: "PSA-GATE-003"
+    rule: "truncated is false OR documented waiver on gate-pseudocode-validation"
+    severity_on_failure: "error"
+  - id: "PSA-GATE-004"
+    rule: "unsupported_syntax disclosed when present; authors remediate or document rationale"
+    severity_on_failure: "warning"
+name: "application_pseudocode_static_analysis_checklist"
 notes:
   - "abstract pass is recommended in default MCP pass list; warnings from abstract do not fail gate_mode ok unless promoted to error severity"
-  - "strict_paths is not required at pre-RED; CONTRADICTORY_PATH fails ok only when strict_paths true"
-  - "file-scoped gate submits complete sidecar for each changed IMPL; pre-psa-grammar N/A does not apply inside that submitted file"
-  - "evidence-chain invoke_pseudocode_analyze live validator remains parse-only; do not conflate with this mandatory gate path"
-  - "typed_gate_errors defaults false; Phase 3 production blocking requires explicit opt-in until sponsor approves sub-phase 3d default flip"
   - "constraint_gate_errors defaults false (sub-phase 3a); production default flip deferred to Slice 8 sponsor gate"
+  - "evidence-chain invoke_pseudocode_analyze live validator remains parse-only; do not conflate with this mandatory gate path"
+  - "file-scoped gate submits complete sidecar for each changed IMPL; pre-psa-grammar N/A does not apply inside that submitted file"
+  - "strict_paths is not required at pre-RED; CONTRADICTORY_PATH fails ok only when strict_paths true"
+  - "typed_gate_errors defaults false; Phase 3 production blocking requires explicit opt-in until sponsor approves sub-phase 3d default flip"
+recommended_validation_order:
+  - "input_resolution"
+  - "parse"
+  - "symbols"
+  - "cfg"
+  - "call_graph"
+  - "obligations"
+  - "traceability"
+  - "reporting"

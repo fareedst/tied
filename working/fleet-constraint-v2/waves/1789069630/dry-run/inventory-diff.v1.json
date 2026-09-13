@@ -1,0 +1,38 @@
+{
+  "schema_version": "inventory-diff.v1",
+  "generated_at": "2026-09-12T17:55:09.913Z",
+  "client_id": "1789069630",
+  "read_only": true,
+  "repository_root": "/Users/fareed/Documents/dev/test/1789069630",
+  "sidecar_count": 5,
+  "counts_by_state": {
+    "legacy-v1": 5,
+    "header-only-v2": 0,
+    "constraint-ready-v2": 0,
+    "constraint-enforced-v2": 0,
+    "unknown-or-mixed": 0
+  },
+  "dry_run_content_hash": "f36bcc1a24305780a53e96225e385a1d2f29575c053a1a0281df76eea2809a34",
+  "rows": [
+    {
+      "file": "IMPL-APP_DISPLAY_RESOLVER-pseudocode.md",
+      "classification": "legacy-v1"
+    },
+    {
+      "file": "IMPL-PERM_CATALOG-pseudocode.md",
+      "classification": "legacy-v1"
+    },
+    {
+      "file": "IMPL-PERM_REPORT_CLI-pseudocode.md",
+      "classification": "legacy-v1"
+    },
+    {
+      "file": "IMPL-PERM_REPORT_FORMATTER-pseudocode.md",
+      "classification": "legacy-v1"
+    },
+    {
+      "file": "IMPL-TCC_DB_READER-pseudocode.md",
+      "classification": "legacy-v1"
+    }
+  ]
+}

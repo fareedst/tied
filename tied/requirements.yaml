@@ -1509,10 +1509,11 @@ REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE:
   status: "Complete"
 REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION:
   category: "Functional"
+  description: "Every TIED client repository SHALL migrate through controlled, evidence-backed phases until fleet-migrated-client or a time-bounded migration waiver. Phase 1 establishes product contract, governance schemas, and gate promotion policy. Phase 2 establishes analyzer and template readiness at G1 advisory without fleet sidecar migration or blocking constraint_flow CI."
   detail_file: "requirements/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml"
   name: "Fleet constraint-language v2 migration program"
   priority: "P1"
-  status: "Planned"
+  status: "Implemented"
 REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT:
   category: "Functional"
   description: "New TIED client projects SHALL generate new IMPL pseudo-code sidecars with Grammar-Version: v2 while preserving v1 parsing compatibility for existing sidecars and legacy clients."
@@ -1530,6 +1531,13 @@ REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT:
     tests:
       - "mcp-server/src/analysis/pseudocode-grammar-v2-default.test.ts"
       - "scripts/audit-grammar-v2-default.mjs"
+REQ-PSEUDOCODE_MIGRATION_TOOLING:
+  category: "Functional"
+  description: "Pilot and fleet migration workflow tooling: inventory scan, dry-run, G2 receipt emit, and revert for constraint-language v2 sidecar migration."
+  detail_file: "requirements/REQ-PSEUDOCODE_MIGRATION_TOOLING.yaml"
+  name: "Pseudocode migration tooling"
+  priority: "P1"
+  status: "Planned"
 REQ-PSEUDOCODE_PARSER_UNIFICATION:
   category: "Functional"
   description: "Extract shared token, procedure-range, and contract-field parsing primitives so Layer B validator and analysis parser cannot drift."

@@ -1,5 +1,18 @@
 # [IMPL-VOCABULARY_HTML_RENDERER] [ARCH-VOCABULARY_OFFLINE_VIEW] [REQ-VOCABULARY_EXPLORER] — Self-contained offline HTML artifact.
 
+
+Grammar-Version: v2
+
+# [IMPL-VOCABULARY_HTML_RENDERER] [ARCH-VOCABULARY_OFFLINE_VIEW] [REQ-VOCABULARY_EXPLORER]
+# How: File-level contract INPUT where for constraint-enforced-v2; section bullet INPUT lines are assist-only.
+Contract:
+  INPUT: envelope: VocabularyExplorerV1Envelope where length(envelope.schema_version) > 0
+  OUTPUT: html string
+  PRE: envelope schema vocabulary-explorer.v1
+  POST: success emits injection-safe offline HTML
+  EFFECTS: pure
+  TERMINATION: total
+
 ## Single-file HTML render
 
 - [IMPL-VOCABULARY_HTML_RENDERER] [ARCH-VOCABULARY_OFFLINE_VIEW] [REQ-VOCABULARY_EXPLORER] Emit injection-safe offline HTML with embedded envelope and interactive viewer.

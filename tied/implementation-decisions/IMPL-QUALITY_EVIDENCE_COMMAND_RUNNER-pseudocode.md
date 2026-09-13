@@ -16,10 +16,13 @@ Contract:
 
 # [IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER] [ARCH-QUALITY_ASSURANCE_PROFILES] [REQ-QUALITY_ASSURANCE_EVIDENCE]
 # How: Validate every declaration before executing the declared command set.
+
+Grammar-Version: v2
+
 procedure RUN_DECLARED_QUALITY_COMMANDS(input):
   # [IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER] [ARCH-QUALITY_ASSURANCE_PROFILES] [REQ-QUALITY_ASSURANCE_EVIDENCE]
   Contract:
-    INPUT: command declarations and default limits
+    INPUT: command_declarations: list where length(command_declarations) > 0; default limits
     OUTPUT: one verification command result per declaration
     PRE: command declarations are available
     POST: no process starts before the complete declaration set and limits pass validation

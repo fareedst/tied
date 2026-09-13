@@ -1,5 +1,18 @@
 # [IMPL-REQUEST_EVIDENCE_ENVELOPE] [ARCH-REQUEST_EVIDENCE_ENVELOPE] [REQ-REQUEST_EVIDENCE_ENVELOPE] — request-evidence-envelope.v1 builder, validator, and patch contract.
 
+
+Grammar-Version: v2
+
+# [IMPL-REQUEST_EVIDENCE_ENVELOPE] [ARCH-REQUEST_EVIDENCE_ENVELOPE] [REQ-REQUEST_EVIDENCE_ENVELOPE]
+# How: File-level contract INPUT where for constraint-enforced-v2; section bullet INPUT lines are assist-only.
+Contract:
+  INPUT: request_token: string where length(request_token) > 0
+  OUTPUT: request-evidence-envelope.v1 | build error
+  PRE: request_token matches REQ-[A-Z0-9_-]+
+  POST: success emits classified artifacts and gaps without inner artifact mutation
+  EFFECTS: IO
+  TERMINATION: total
+
 ## BUILD_REQUEST_EVIDENCE_ENVELOPE
 
 - [IMPL-REQUEST_EVIDENCE_ENVELOPE] [ARCH-REQUEST_EVIDENCE_ENVELOPE] [REQ-REQUEST_EVIDENCE_ENVELOPE] Read-only scan of working/{REQ-TOKEN}/ to emit request-evidence-envelope.v1 with classified artifacts and explicit gaps[].

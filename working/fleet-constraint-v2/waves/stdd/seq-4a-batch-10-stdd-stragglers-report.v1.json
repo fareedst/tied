@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "slice": "Seq-4A-WS-1-S1.4-S1.5-S1.6-batch-10-stragglers",
+  "req_token": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+  "wave_id": "W-stdd-stragglers-WS0",
+  "generated_at": "2026-09-13T04:21:00.000Z",
+  "methodology_pin": "48d1fbb+",
+  "inventory_stdd_before": {
+    "constraint-ready-v2": 10,
+    "constraint-enforced-v2": 83,
+    "header-only-v2": 0,
+    "aggregate_migration_state": "constraint-enforced-v2"
+  },
+  "inventory_stdd_after": {
+    "constraint-ready-v2": 0,
+    "constraint-enforced-v2": 93,
+    "header-only-v2": 0,
+    "aggregate_migration_state": "constraint-enforced-v2"
+  },
+  "inventory_delta": {
+    "constraint-ready-v2": -10,
+    "constraint-enforced-v2": 10
+  },
+  "classifier": {
+    "changed": false,
+    "note": "aggregateMigrationState still returns constraint-enforced-v2 when all sidecars enforced; fleet-migrated-client not emitted by run-fleet-inventory-scan.ts (follow-up WS-4 governance or classifier extension for S1.6 EX-01)"
+  },
+  "harness": {
+    "commands": [
+      "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/run-harness.sh fleet-g3-refresh-stdd",
+      "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/run-harness.sh fleet-inventory --apply"
+    ],
+    "g3_aggregate": {
+      "receipt_count": 93,
+      "layer_c_ok_true": 93,
+      "layer_c_ok_false": 0,
+      "wave_w_stdd_stragglers_receipt_count": 10,
+      "summary_path": "working/fleet-constraint-v2/waves/stdd/receipts/summary.json"
+    }
+  },
+  "validation": {
+    "pseudocode_analyze_g3": "gate_mode+typed_flow+constraint_flow; 10/10 straggler receipts layer_c.ok=true and layer_c.constraint_flow=true",
+    "pseudocode_validate": "fleet G3 receipt layer_b.ok=true for all 10 stragglers",
+    "tied_validate_consistency": { "ok": true }
+  },
+  "leap_notes": {
+    "IMPL-MODULE_VALIDATION": "Reordered COMPOSITION_BINDING_VALIDATION before MODULE_VALIDATION_LIFECYCLE to fix UNRESOLVED_CALL; added procedure INPUT where on binding_inventory"
+  },
+  "remaining_seq_4a_sidecars": 0,
+  "next_seq": {
+    "id": "4B",
+    "options": ["WS-2 external client enforce batches (1789069630 E2.2 first)", "WS-4 governance classifier / fleet-migrated-client aggregate"]
+  },
+  "impl_dispositions": [
+    {
+      "impl_token": "IMPL-MODULE_VALIDATION",
+      "sidecar_path": "tied/implementation-decisions/IMPL-MODULE_VALIDATION-pseudocode.md",
+      "annotation_locus": "file-level binding_inventory_rows list where; procedure COMPOSITION_BINDING_VALIDATION INPUT binding_inventory list where",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-MODULE_VALIDATION.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-PSEUDOCODE_ANALYSIS_ENGINE",
+      "sidecar_path": "tied/implementation-decisions/IMPL-PSEUDOCODE_ANALYSIS_ENGINE-pseudocode.md",
+      "annotation_locus": "file-level Contract INPUT target_impl_token string where length",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-PSEUDOCODE_ANALYSIS_ENGINE.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE",
+      "sidecar_path": "tied/implementation-decisions/IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE-pseudocode.md",
+      "annotation_locus": "procedure DETECT_GRAMMAR_VERSION INPUT sidecar_text string where length",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION",
+      "sidecar_path": "tied/implementation-decisions/IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION-pseudocode.md",
+      "annotation_locus": "procedure VALIDATE_GOVERNANCE_SCHEMA_REFERENCES INPUT repository_root string where length",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT",
+      "sidecar_path": "tied/implementation-decisions/IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT-pseudocode.md",
+      "annotation_locus": "procedure SELECT_NEW_PROJECT_GRAMMAR_DEFAULT INPUT template_body string where length",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-PSEUDOCODE_SHARED_PRIMITIVES",
+      "sidecar_path": "tied/implementation-decisions/IMPL-PSEUDOCODE_SHARED_PRIMITIVES-pseudocode.md",
+      "annotation_locus": "file-level Contract INPUT source_text string where length",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-PSEUDOCODE_SHARED_PRIMITIVES.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP",
+      "sidecar_path": "tied/implementation-decisions/IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP-pseudocode.md",
+      "annotation_locus": "procedure SCAN_BLOCK_LEAD_PLACEMENT INPUT sidecar_root string where length",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-PSEUDOCODE_TYPED_FLOW",
+      "sidecar_path": "tied/implementation-decisions/IMPL-PSEUDOCODE_TYPED_FLOW-pseudocode.md",
+      "annotation_locus": "procedure TYPED_FLOW_CONTROLS INPUT program_ir.procedures list where length",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-PSEUDOCODE_TYPED_FLOW.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-QUALITY_PSEUDOCODE_VALIDATOR",
+      "sidecar_path": "tied/implementation-decisions/IMPL-QUALITY_PSEUDOCODE_VALIDATOR-pseudocode.md",
+      "annotation_locus": "file-level Contract INPUT target_impl_token string where length",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-QUALITY_PSEUDOCODE_VALIDATOR.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-TIED_FILES",
+      "sidecar_path": "tied/implementation-decisions/IMPL-TIED_FILES-pseudocode.md",
+      "annotation_locus": "procedure BOOTSTRAP_TIED Contract INPUT projectRoot string where length",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-TIED_FILES.receipt.json"
+      }
+    }
+  ]
+}

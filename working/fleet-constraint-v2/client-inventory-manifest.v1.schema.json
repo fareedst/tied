@@ -103,7 +103,12 @@
           "description": "Client-owned migration REQ when present (Phase 3+)."
         },
         "updated_at": { "type": "string", "format": "date-time" },
-        "notes": { "type": "string" }
+        "notes": { "type": "string" },
+        "phase_4_enrollment": {
+          "type": "string",
+          "enum": ["enrolled_phase_4", "not_enrolled_phase_4"],
+          "description": "Phase 4 exit enrollment (OD-P4-3). Non-enrolled rows MUST NOT be labeled fleet-migrated-client at Phase 4 exit."
+        }
       }
     }
   }

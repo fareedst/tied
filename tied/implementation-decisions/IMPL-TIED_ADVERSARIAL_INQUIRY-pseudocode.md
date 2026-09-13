@@ -1,5 +1,8 @@
 # [IMPL-TIED_ADVERSARIAL_INQUIRY] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY]
 
+
+Grammar-Version: v2
+
 ## Summary contract
 - [IMPL-TIED_ADVERSARIAL_INQUIRY] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY] How: implement a deterministic read-only obligation graph, bidirectional fidelity verdicts, language adapters, review-gated findings, and bounded assurance eligibility.
 
@@ -50,6 +53,13 @@ Contract:
   TERMINATION: total
 
 procedure BUILD_OBLIGATION_GRAPH(): # [IMPL-TIED_ADVERSARIAL_INQUIRY] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY]
+  Contract:
+    INPUT: adversarial_cases: list of string where length(adversarial_cases) > 0
+    PRE: canonical references are read-only
+    OUTPUT: obligation graph or deterministic diagnostics
+    POST: complete edges are mapped; unresolved references are explicit
+    EFFECTS: pure
+    TERMINATION: total
 1. Resolve every criterion identity.
 2. Resolve every architecture constraint identity.
 3. Resolve every implementation block identity.
@@ -270,6 +280,13 @@ Contract:
   TERMINATION: total over finite source lines
 
 procedure PARSE_GO_TEST_EVIDENCE(): # [IMPL-TIED_ADVERSARIAL_INQUIRY] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY]
+  Contract:
+    INPUT: TBD
+    PRE: TBD
+    POST:
+      - success => TBD
+    EFFECTS: pure
+
 1. Require sourceRevision and scan each source line read-only.
 2. Normalize supported `t.Error`, `t.Errorf`, `t.Fatal`, `t.Fatalf`, and testify `assert.Equal`, `assert.NoError`, `require.Equal`, `require.NoError` calls with source locations.
 3. Emit `unsupported_adapter` for cmp, InDelta, DeepEqual-without-t.Errorf, and other non-approved constructs.

@@ -2,7 +2,7 @@
 # Summary: Validate the explicit-only Task wrappers for all 13 leaf prompt types, plus the plan-refine-build sequence orchestrator, and their clean-context workflow contracts.
 
 Contract:
-  INPUT: agent_markdown_by_leaf; sequence_agent_markdown; canonical_skill_markdown_by_leaf; test_contract
+  INPUT: agent_markdown_by_leaf: map where length(agent_markdown_by_leaf) > 0; sequence_agent_markdown; canonical_skill_markdown_by_leaf; test_contract
   PRE: each of the 13 leaf agent files and plan-refine-build.md are readable; matching canonical skills exist; test_contract names required clauses
   OUTPUT: pass or contract_violation diagnostics
   POST: pass means each leaf wrapper and the sequence orchestrator have frontmatter, delegation, type-specific gates, safety boundary, and parent handoff contract
@@ -11,10 +11,13 @@ Contract:
   EFFECTS: IO
   TERMINATION: total
 
+
+Grammar-Version: v2
+
 procedure VALIDATE_PROMPT_TYPE_SUBAGENT_CONTRACT(agent_markdown, canonical_skill_markdown, test_contract):
   # [IMPL-PROMPT_TYPE_SUBAGENT] [ARCH-PROMPT_TYPE_SUBAGENT] [REQ-PROMPT_TYPE_SUBAGENT] — How: verify each agent file is an explicit-only Task wrapper around its canonical leaf skill.
   Contract:
-    INPUT: agent_markdown; canonical_skill_markdown; test_contract
+    INPUT: agent_markdown: string where length(agent_markdown) > 0; canonical_skill_markdown; test_contract
     PRE: all inputs are readable text for one leaf prompt type
     OUTPUT: pass or contract_violation diagnostics
     POST: pass means each required frontmatter and body clause is present for that leaf
@@ -40,7 +43,7 @@ procedure VALIDATE_PROMPT_TYPE_SUBAGENT_CONTRACT(agent_markdown, canonical_skill
 procedure DISPATCH_PROMPT_TYPE_SEQUENCE(request_envelope):
   # [IMPL-PROMPT_TYPE_SUBAGENT] [ARCH-PROMPT_TYPE_SUBAGENT] [REQ-PROMPT_TYPE_SUBAGENT] — How: verify the sequencer Task-launches the three leaf wrappers in order and stops on a failed gate.
   Contract:
-    INPUT: request_envelope; plan-new-feature child; refine-plan child; build-plan child
+    INPUT: request_envelope: object where length(request_envelope) > 0; plan-new-feature child; refine-plan child; build-plan child
     PRE: request_envelope includes the invocation remainder; the three leaf Task wrappers exist
     OUTPUT: aggregated parent_handoff or incomplete evidence
     POST: children ran in order plan-new-feature then refine-plan then build-plan; later Implement gates did not start after a failed earlier Plan gate
@@ -62,7 +65,7 @@ procedure DISPATCH_PROMPT_TYPE_SEQUENCE(request_envelope):
 procedure REPORT_PROMPT_TYPE_SUBAGENT_RESULT(execution_evidence):
   # [IMPL-PROMPT_TYPE_SUBAGENT] [ARCH-PROMPT_TYPE_SUBAGENT] [REQ-PROMPT_TYPE_SUBAGENT] — How: return auditable workflow evidence to the parent without overstating completion.
   Contract:
-    INPUT: execution_evidence
+    INPUT: execution_evidence: object where length(execution_evidence) > 0
     PRE: execution_evidence records completed gates and validation outcomes for the selected leaf or sequence
     OUTPUT: parent_handoff
     POST: parent_handoff names type-specific completion evidence and remaining risks without overstating success

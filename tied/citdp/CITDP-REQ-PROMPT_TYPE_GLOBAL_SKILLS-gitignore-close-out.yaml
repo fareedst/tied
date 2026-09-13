@@ -5,18 +5,18 @@ CITDP-REQ-PROMPT_TYPE_GLOBAL_SKILLS-gitignore-close-out:
     non_goals:
       - "Automated gitignore lint MCP tool"
       - "Blocking tied_checklist_gate_validate integration for hygiene"
-      - "Client installation of .cursor/agents/plan-close-out.md"
       - "Bulk retroactive .gitignore rewrite unrelated to current conventions"
+      - "Client installation of .cursor/agents/plan-close-out.md"
     references:
-      - "tools/bundled-prompt-type-skills/prompt-shared/gitignore-close-out-hygiene.md"
-      - "tools/bundled-prompt-type-skills/prompt-shared/tied-close-out-process.md"
       - "tied/docs/agent-req-implementation-checklist.yaml"
       - "tied/docs/processes.md"
+      - "tools/bundled-prompt-type-skills/prompt-shared/gitignore-close-out-hygiene.md"
+      - "tools/bundled-prompt-type-skills/prompt-shared/tied-close-out-process.md"
     success_criteria:
-      - "tied-close-out-process.md step 5 is gitignore hygiene; close_out gate renumbered to step 6"
       - "Checklist slug gitignore-close-out-hygiene between persist-citdp-record and traceable-commit"
-      - "SHARED_REFERENCES includes gitignore-close-out-hygiene.md (15 entries)"
       - "prompt-type-skills and subagent contract tests pass"
+      - "SHARED_REFERENCES includes gitignore-close-out-hygiene.md (15 entries)"
+      - "tied-close-out-process.md step 5 is gitignore hygiene; close_out gate renumbered to step 6"
       - "tied_validate_consistency ok:true"
   completion_criteria:
     activation:
@@ -55,24 +55,24 @@ CITDP-REQ-PROMPT_TYPE_GLOBAL_SKILLS-gitignore-close-out:
         - "plan-close-out runs git status despite forbidden automatic git inspection"
       depth_tier: "minimal"
       disconfirming_observations:
-        - "Static bundle tests pass without gitignore hygiene shared reference"
         - "Gate allows minimal depth without integrated activation pairing"
+        - "Static bundle tests pass without gitignore hygiene shared reference"
       evidence_references:
         - "mcp-server/src/e2e/prompt-type-skills.test.ts"
         - "mcp-server/src/e2e/prompt-type-subagent.test.ts"
         - "tools/bundled-prompt-type-skills/prompt-shared/gitignore-close-out-hygiene.md"
       falsification_questions:
-        - "Does close_out fail when gitignore-close-out-hygiene.md is missing from SHARED_REFERENCES?"
         - "Can plan-close-out claim completion without a hygiene handoff bullet?"
+        - "Does close_out fail when gitignore-close-out-hygiene.md is missing from SHARED_REFERENCES?"
       gate_policy: "advisory"
       inquiry_policy: "advisory"
     depth_tier: "minimal"
     gate_policy: "advisory"
     risks:
-      - mitigation: "Require track classification and ! negation template for aggregates"
-        risk: "Over-broad gitignore patterns hide trackable summary files"
       - mitigation: "Mandatory handoff bullet; N/A requires explicit rationale"
         risk: "Agents skip hygiene step silently"
+      - mitigation: "Require track classification and ! negation template for aggregates"
+        risk: "Over-broad gitignore patterns hide trackable summary files"
   test_strategy:
     methods:
       - "mcp-server/src/e2e/prompt-type-skills.test.ts static bundle contract"

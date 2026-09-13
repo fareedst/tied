@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "migration-waiver-registry.v1",
+  "title": "TIED fleet constraint v2 migration waiver registry",
+  "description": "Aggregate of active and historical waivers for fleet G3 close-out (OD-P4-5).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "registry_id", "updated_at", "waivers"],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "$schema": { "type": "string" },
+    "registry_id": { "type": "string", "minLength": 1 },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "notes": { "type": "string" },
+    "waivers": {
+      "type": "array",
+      "items": {
+        "$ref": "migration-waiver.v1.schema.json"
+      },
+      "description": "Each element validates against migration-waiver.v1."
+    }
+  }
+}

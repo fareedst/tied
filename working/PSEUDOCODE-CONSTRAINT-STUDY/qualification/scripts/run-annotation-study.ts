@@ -3,10 +3,15 @@
  * [REQ-PSEUDOCODE_TYPED_FLOW] F11 annotation burden study on copied Tier A sidecars only.
  */
 import { createHash } from "node:crypto";
-import { copyFile, mkdir, readFile, writeFile } from "node:fs/promises";
+import { access, mkdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { analyzeSidecarEntry } from "./lib/analyzer-runner.ts";
-import { PATHS, QUALIFICATION_ROOT } from "./lib/constants.ts";
+import {
+  BASELINE_ANCHOR_COMMIT,
+  METHODOLOGY_PIN_LABEL,
+  PATHS,
+  QUALIFICATION_ROOT,
+} from "./lib/constants.ts";
 
 const ANNOTATION_ROOT = join(QUALIFICATION_ROOT, "annotation-study");
 const COPIES = join(ANNOTATION_ROOT, "copies");
@@ -159,6 +164,17 @@ const CASES: StudyCase[] = [
   },
 ];
 
+async function resolveStudySource(study: StudyCase): Promise<{ path: string; fromCopyFallback: boolean }> {
+  try {
+    await access(study.source_path);
+    return { path: study.source_path, fromCopyFallback: false };
+  } catch {
+    const copyPath = join(COPIES, `${study.id}.pseudocode.md`);
+    await access(copyPath);
+    return { path: copyPath, fromCopyFallback: true };
+  }
+}
+
 async function main(): Promise<void> {
   await mkdir(COPIES, { recursive: true });
   await mkdir(ANNOTATED, { recursive: true });
@@ -168,7 +184,8 @@ async function main(): Promise<void> {
   const procedures: Array<Record<string, unknown>> = [];
 
   for (const study of CASES) {
-    const source = await readFile(study.source_path, "utf8");
+    const { path: sourcePath, fromCopyFallback } = await resolveStudySource(study);
+    const source = await readFile(sourcePath, "utf8");
     const copyPath = join(COPIES, `${study.id}.pseudocode.md`);
     const annotatedPath = join(ANNOTATED, `${study.id}.pseudocode.md`);
     await writeFile(copyPath, source, "utf8");
@@ -235,6 +252,8 @@ async function main(): Promise<void> {
       study_id: study.id,
       procedure: study.procedure,
       token: study.token,
+      source_resolved: sourcePath,
+      source_copy_fallback: fromCopyFallback,
       annotation_lines,
       authoring_decisions: decisions,
       unknowns_copy: copyUnknowns,
@@ -257,17 +276,21 @@ async function main(): Promise<void> {
       : sorted[mid]!;
   };
 
+  const unknownDeltas = procedures.map((p) => p.unknown_delta as number);
   const f11 = {
     annotation_lines_median: median(annotationLines),
     authoring_decisions_median: median(decisions),
+    unknown_delta_median: median(unknownDeltas),
     stop_criteria: {
       annotation_lines_gt_8: median(annotationLines) > 8,
       decisions_gt_15: median(decisions) > 15,
       any_sp_failure: procedures.some((p) => p.preservation_pass === false),
+      unknown_delta_median_gt_0: median(unknownDeltas) > 0,
     },
     gate_pass:
       median(annotationLines) <= 8
       && median(decisions) <= 15
+      && median(unknownDeltas) <= 0
       && !procedures.some((p) => p.preservation_pass === false),
     recommendation: "proceed",
   };
@@ -276,13 +299,29 @@ async function main(): Promise<void> {
   const payload = {
     run_at: new Date().toISOString(),
     study: "F11-annotation-burden",
+    methodology_pin: METHODOLOGY_PIN_LABEL,
+    baseline_anchor_commit: BASELINE_ANCHOR_COMMIT,
     procedures,
     f11,
+  };
+
+  const fleetPayload = {
+    ...payload,
+    study: "F11-annotation-burden-fleet-pin",
+    baseline_reference:
+      "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/metrics/annotation-overhead.yaml",
+    baseline_annotation_lines_median: 2.5,
   };
 
   await writeFile(
     join(PATHS.metrics, "annotation-overhead.yaml"),
     `# [REQ-PSEUDOCODE_TYPED_FLOW] F11 annotation burden study\n${JSON.stringify(payload, null, 2)}\n`,
+    "utf8",
+  );
+
+  await writeFile(
+    join(PATHS.metrics, "f11-fleet-20260912.yaml"),
+    `# [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION] F11 at fleet pin (P2-G)\n${JSON.stringify(fleetPayload, null, 2)}\n`,
     "utf8",
   );
 

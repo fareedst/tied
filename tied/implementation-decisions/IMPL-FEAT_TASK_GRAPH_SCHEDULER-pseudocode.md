@@ -1,10 +1,23 @@
 # [IMPL-FEAT_TASK_GRAPH_SCHEDULER] [ARCH-FEAT_TASK_GRAPH_SCHEDULER] [REQ-FEAT_TASK_GRAPH_SCHEDULING]
-# How: validate the task graph and compute deterministic readiness and safe parallel groups.
+
+
+Grammar-Version: v2
+
+## Summary contract
+# [IMPL-FEAT_TASK_GRAPH_SCHEDULER] [ARCH-FEAT_TASK_GRAPH_SCHEDULER] [REQ-FEAT_TASK_GRAPH_SCHEDULING] — How: validate the task graph and compute deterministic readiness and safe parallel groups.
+Contract:
+  INPUT: task entries: list where length(task_entries) >= 0; execution state; clarification readiness; constitution compliance; module evidence
+  PRE: task entries have stable task_id and explicit dependency fields
+  OUTPUT: readiness_projection | graph_error
+  POST: only tasks with all dependency and evidence predicates satisfied are ready
+  FAILURE_MODES: UNKNOWN_DEPENDENCY; CYCLE_DETECTED; DUPLICATE_TASK_ID
+  EFFECTS: pure
+  TERMINATION: total
 
 ## VALIDATE_TASK_GRAPH
-# How: reject invalid references and cycles before scheduling.
+# [IMPL-FEAT_TASK_GRAPH_SCHEDULER] [ARCH-FEAT_TASK_GRAPH_SCHEDULER] [REQ-FEAT_TASK_GRAPH_SCHEDULING] — How: reject invalid references and cycles before scheduling.
 Contract:
-  INPUT: task entries
+  INPUT: task entries: list where length(task_entries) >= 0
   PRE: task entries have stable task_id and explicit dependency fields
   OUTPUT: validated_graph | graph_error
   POST: graph is acyclic and every dependency resolves
@@ -17,7 +30,7 @@ Contract:
 4. RETURN topologically valid graph or stable error
 
 ## PROJECT_READINESS
-# How: expose structured reasons for ready, blocked, and parallelizable task entries.
+# [IMPL-FEAT_TASK_GRAPH_SCHEDULER] [ARCH-FEAT_TASK_GRAPH_SCHEDULER] [REQ-FEAT_TASK_GRAPH_SCHEDULING] — How: expose structured reasons for ready, blocked, and parallelizable task entries.
 Contract:
   INPUT: validated graph; execution state; clarification readiness; constitution compliance; module evidence
   PRE: graph is acyclic and projections are current

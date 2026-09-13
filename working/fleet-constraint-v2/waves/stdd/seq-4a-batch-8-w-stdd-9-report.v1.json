@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "slice": "Seq-4A-WS-1-S1.4-S1.5-batch-8",
+  "req_token": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+  "wave_id": "W-stdd-9",
+  "generated_at": "2026-09-13T04:12:00.000Z",
+  "methodology_pin": "48d1fbb+",
+  "inventory_stdd_before": {
+    "constraint-ready-v2": 23,
+    "constraint-enforced-v2": 70,
+    "aggregate_migration_state": "constraint-enforced-v2"
+  },
+  "inventory_stdd_after": {
+    "constraint-ready-v2": 13,
+    "constraint-enforced-v2": 80,
+    "aggregate_migration_state": "constraint-enforced-v2"
+  },
+  "inventory_delta": {
+    "constraint-ready-v2": -10,
+    "constraint-enforced-v2": 10
+  },
+  "classifier": {
+    "changed": false,
+    "note": "unchanged; section-style Summary contract and procedure Contract INPUT where refinements for enforced-v2 floor"
+  },
+  "harness": {
+    "commands": [
+      "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/run-harness.sh fleet-g3-refresh-stdd",
+      "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/run-harness.sh fleet-inventory --apply"
+    ],
+    "g3_aggregate": {
+      "receipt_count": 83,
+      "layer_c_ok_true": 83,
+      "layer_c_ok_false": 0,
+      "wave_w_stdd_9_receipt_count": 10
+    }
+  },
+  "validation": {
+    "pseudocode_analyze_g3": "via fleet-g3-refresh-stdd receipts (gate_mode, typed_flow, constraint_flow true for all wave-9 tokens)",
+    "pseudocode_validate": "layer_a/layer_b ok on wave-9 receipts; sidecar-only LEAP (no project YAML index changes)",
+    "tied_validate_consistency": { "ok": true }
+  },
+  "remaining_seq_4a_sidecars": 13,
+  "next_batch": {
+    "wave_id": "W-stdd-10",
+    "wave_list_path": "working/fleet-constraint-v2/waves/stdd/wave-10-sidecars.yaml",
+    "suggested_command": "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/run-harness.sh fleet-g3-refresh-stdd (after sidecar LEAP on wave-10 list)"
+  },
+  "stragglers_constraint_ready_v2": [
+    "IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV",
+    "IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS",
+    "IMPL-ATDD-E2E-AGENT_STREAM",
+    "IMPL-MODULE_VALIDATION",
+    "IMPL-PSEUDOCODE_ANALYSIS_ENGINE",
+    "IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE",
+    "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION",
+    "IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT",
+    "IMPL-PSEUDOCODE_SHARED_PRIMITIVES",
+    "IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP",
+    "IMPL-PSEUDOCODE_TYPED_FLOW",
+    "IMPL-QUALITY_PSEUDOCODE_VALIDATOR",
+    "IMPL-TIED_FILES"
+  ],
+  "impl_dispositions": [
+    {
+      "impl_token": "IMPL-FEAT_ORCHESTRATION_MCP",
+      "sidecar_path": "tied/implementation-decisions/IMPL-FEAT_ORCHESTRATION_MCP-pseudocode.md",
+      "annotation_locus": "Summary and HANDLE_ORCHESTRATION_TOOL Contract INPUT tool_name where",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-FEAT_ORCHESTRATION_MCP.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-FEAT_READINESS_DIAGNOSTICS",
+      "sidecar_path": "tied/implementation-decisions/IMPL-FEAT_READINESS_DIAGNOSTICS-pseudocode.md",
+      "annotation_locus": "Summary and BUILD_READINESS_REPORT diagnostics list where; FORMAT_READINESS_DIAGNOSTIC code where",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-FEAT_READINESS_DIAGNOSTICS.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-FEAT_REFERENCE_LINKER",
+      "sidecar_path": "tied/implementation-decisions/IMPL-FEAT_REFERENCE_LINKER-pseudocode.md",
+      "annotation_locus": "Summary and RESOLVE_CANONICAL_REFERENCES manifest_references list where",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-FEAT_REFERENCE_LINKER.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-FEAT_STORE",
+      "sidecar_path": "tied/implementation-decisions/IMPL-FEAT_STORE-pseudocode.md",
+      "annotation_locus": "Summary and RESOLVE/READ/PUBLISH feature_directory where; removed TBD procedure contracts",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-FEAT_STORE.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-FEAT_TASK_DERIVATION",
+      "sidecar_path": "tied/implementation-decisions/IMPL-FEAT_TASK_DERIVATION-pseudocode.md",
+      "annotation_locus": "file-level Summary contract source_tokens list where; VALIDATE_SOURCE_PROJECTIONS INPUT where",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-FEAT_TASK_DERIVATION.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-FEAT_TASK_EXECUTION_STATE",
+      "sidecar_path": "tied/implementation-decisions/IMPL-FEAT_TASK_EXECUTION_STATE-pseudocode.md",
+      "annotation_locus": "Summary and APPLY_EXECUTION_OUTCOME / RESUME_EXECUTION task_id and source_revision where",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-FEAT_TASK_EXECUTION_STATE.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-FEAT_TASK_GRAPH_SCHEDULER",
+      "sidecar_path": "tied/implementation-decisions/IMPL-FEAT_TASK_GRAPH_SCHEDULER-pseudocode.md",
+      "annotation_locus": "Summary and VALIDATE_TASK_GRAPH task_entries list where",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-FEAT_TASK_GRAPH_SCHEDULER.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-FEAT_VIEW_PROJECTION",
+      "sidecar_path": "tied/implementation-decisions/IMPL-FEAT_VIEW_PROJECTION-pseudocode.md",
+      "annotation_locus": "Summary contract feature_identifier and canonical_record_refs where; ASSEMBLE_SOURCE_METADATA contributions where; Grammar-Version header normalized",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-FEAT_VIEW_PROJECTION.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-FEAT_VIEW_RENDERER",
+      "sidecar_path": "tied/implementation-decisions/IMPL-FEAT_VIEW_RENDERER-pseudocode.md",
+      "annotation_locus": "Summary view_kind where; SEMANTIC_COMPARE_VIEW left_view and right_view where",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-FEAT_VIEW_RENDERER.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-FEAT_VIEW_STALE_DETECTION",
+      "sidecar_path": "tied/implementation-decisions/IMPL-FEAT_VIEW_STALE_DETECTION-pseudocode.md",
+      "annotation_locus": "Summary generated_view and stale_view_policy where; READ_VIEW_SOURCE_METADATA generated_view where",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-FEAT_VIEW_STALE_DETECTION.receipt.json"
+      }
+    }
+  ]
+}

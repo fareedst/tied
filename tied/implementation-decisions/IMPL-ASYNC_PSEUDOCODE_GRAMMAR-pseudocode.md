@@ -1,10 +1,13 @@
 # [IMPL-ASYNC_PSEUDOCODE_GRAMMAR] [ARCH-ASYNC_CONTRACT_GRAMMAR] [REQ-ASYNC_PSEUDOCODE_CONTRACTS]
 # Summary: Document optional v1 async contract rows, template section, pre-async-contract grace, and structural fixture corpus.
 
+
+Grammar-Version: v2
+
 procedure DOCUMENT_ASYNC_ROWS(doc_root):
   # [IMPL-ASYNC_PSEUDOCODE_GRAMMAR] [ARCH-ASYNC_CONTRACT_GRAMMAR] [REQ-ASYNC_PSEUDOCODE_CONTRACTS] — How: add pseudocode-format-and-practices §4a and implementation-decisions preferred vocabulary rows.
   Contract:
-    INPUT: doc_root
+    INPUT: doc_root: string where length(doc_root) > 0
     PRE: W0 glossary and REQ/ARCH guidance exist
     OUTPUT: grammar_docs_updated
     POST: all seven optional rows documented with valid and insufficient examples; CONTROL ordering noted as v1 vehicle

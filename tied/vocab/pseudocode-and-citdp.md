@@ -105,6 +105,13 @@ Checklist **`sub-vocabulary-sync`** uses **domain** vocab. Do not conflate with 
 | **fleet-migrated-client** | migration complete (client) | All active sidecars at constraint-enforced-v2 or time-bounded waiver; auditable evidence—not header audit alone |
 | **migration waiver** | constraint exception | Owner, reason, expiry, and next migration action for procedures/clients not yet enforceable |
 | **annotation profile** | constraint tier target | Per-procedure target: contract-only, refinement, summary, alias/mutation, immutability |
+| **constraint migration receipt** | migration receipt (alone) | Machine-readable Layer A/B/C + constraint_flow snapshot for one sidecar/fixture run; schema `constraint-migration-receipt.v1` ([Phase 2 plan](../../docs/pseudocode-constraint-v2-fleet-migration-phase-2-plan.md)) |
+| **qualification green** | analyzer green (alone) | Tier A/B qualification harness pass at pinned methodology commit; does not imply fleet-migrated-client or header-only-v2 sufficiency |
+| **F11 authoring burden gate** | F11 (alone) | Stop criteria on annotation load and semantic preservation before fleet-blocking constraint gates; measured via qualification annotation study |
+| **pilot inventory instance** | pilots manifest (alone) | Populated `client-inventory-manifest.v1` rows for Phase 3 pilots only (e.g. `stdd-fleet-inventory-pilots-v1`); not full fleet registry |
+| **migration dry-run** | dry-run migration (alone) | Planned assist-only sidecar edits with deterministic `dry_run_content_hash` before apply ([Phase 3 plan](../../docs/pseudocode-constraint-v2-fleet-migration-phase-3-plan.md)) |
+| **G2 pilot receipt** | pilot receipt (alone) | `constraint-migration-receipt.v1` with `receipt_meta.gate_stage: G2` for pilot wave sidecars |
+| **pilot migration wave** | sub-wave (alone) | Bounded ≤10 sidecars within one repo per OD-P3-3 before next sub-wave |
 
 ---
 
@@ -132,6 +139,30 @@ Checklist **`sub-vocabulary-sync`** uses **domain** vocab. Do not conflate with 
 | Fleet migration waiver schema | `working/fleet-constraint-v2/migration-waiver.v1.schema.json` | Same |
 | Fleet migration waiver example | `working/fleet-constraint-v2/migration-waiver.v1.example.yaml` | P1-D fixture; not a populated registry |
 | Fleet gate promotion stages | `working/fleet-constraint-v2/gate-promotion-stages.v1.yaml` | Same; OD-2 verification-first blocking |
+| Constraint migration receipt schema | `working/fleet-constraint-v2/constraint-migration-receipt.v1.schema.json` | Phase 2 P2-D (2026-09-12); example + design note alongside schema |
+| Constraint migration receipt example | `working/fleet-constraint-v2/constraint-migration-receipt.v1.example.json` | P2-D fixture; validates against receipt schema |
+| Constraint migration receipt design note | `working/fleet-constraint-v2/constraint-migration-receipt.v1.md` | Collector semantics; inventory `last_receipt_path` in Phase 4 |
+| Fleet constraint exemplars | `working/fleet-constraint-v2/exemplars/` | Phase 2 P2-E (2026-09-12); schema-valid receipts under `exemplars/receipts/` |
+| F11/FP threshold record | `working/fleet-constraint-v2/f11-fp-thresholds.v1.yaml` | Phase 2 P2-G (2026-09-12); gates G2 prerequisites |
+| Fleet G1 qualification summary | `working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/fleet-g1/summary.json` | P2-F/P2-G harness; `qualification_green` at pin — not fleet-migrated-client |
+| Rollback exercise G1 record | `working/fleet-constraint-v2/rollback-exercise-G1.v1.json` | P2-G simulated G2 → G1 advisory restoration |
+| Phase 2 technical exit review | `working/fleet-constraint-v2/phase-2-exit-review.v1.json` | P2-H checklist + pointers; P2-C LEAP deferred |
+| Phase 3 plan | `docs/pseudocode-constraint-v2-fleet-migration-phase-3-plan.md` | Pilot migration + tooling validation (2026-09-12) |
+| Pilot inventory manifest instance | `working/fleet-constraint-v2/client-inventory-manifest.pilots.v1.yaml` | OD-P3-8; pilot repos only |
+| Pilot migration workflow | `working/fleet-constraint-v2/pilots/pilot-migration-workflow.v1.md` | P3-D harness commands |
+| stdd wave 1 sidecar list | `working/fleet-constraint-v2/pilots/stdd/wave-1-sidecars.yaml` | OD-P3-3 sub-wave |
+| G2 pilot receipts | `working/fleet-constraint-v2/pilots/stdd/receipts/` | P3-E emit |
+| G2 pilot rollback record | `working/fleet-constraint-v2/rollback-exercise-G2-pilots.v1.json` | P3-G |
+| Phase 3 technical exit review | `working/fleet-constraint-v2/phase-3-exit-review.v1.json` | P3-H |
+| Phase 4 plan | `docs/pseudocode-constraint-v2-fleet-migration-phase-4-plan.md` | G3 fleet waves (2026-09-12 refine) |
+| Full fleet inventory manifest instance | `working/fleet-constraint-v2/client-inventory-manifest.v1.yaml` | OD-P4-2; distinct from pilots instance |
+| Fleet wave partition | `working/fleet-constraint-v2/fleet-wave-partition.v1.yaml` | OD-P4-4; ordered waves + pins |
+| Wave stop/go record | `working/fleet-constraint-v2/wave-stop-go.v1.json` | OD-P4-6; halt or complete per wave |
+| Waiver registry instance | `working/fleet-constraint-v2/migration-waiver-registry.v1.yaml` | OD-P4-5; active waivers with expiry |
+| G3 fleet receipt | `working/fleet-constraint-v2/waves/*/receipts/*.receipt.json` | `gate_stage: G3`; not G2 pilot receipts |
+| Fleet dashboard aggregate | `working/fleet-constraint-v2/fleet-dashboard.v1.yaml` | Read-only inventory + receipt + waiver rollup |
+| Migration tooling REQ | `tied/requirements/REQ-PSEUDOCODE_MIGRATION_TOOLING.yaml` | OD-P3-2 split |
+| Migration tooling IMPL | `tied/implementation-decisions/IMPL-PSEUDOCODE_MIGRATION_TOOLING-pseudocode.md` | Harness scripts P3-D |
 | Fleet migration orchestration IMPL | `tied/implementation-decisions/IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION-pseudocode.md` | [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION](../requirements/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml) Phase 1 governance |
 | Fleet migration CITDP | `tied/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml` | Integrated advisory pre_implementation 2026-09-12 |
 | Composition coverage guide | `tied/docs/composition-coverage.md` | [REQ-MODULE_VALIDATION](../requirements/REQ-MODULE_VALIDATION.yaml) / [PROC-TEST_STRATEGY](../docs/processes.md) |
@@ -197,6 +228,89 @@ Prefer in `essence_pseudocode` (not domain terms):
 
 ---
 
+## Phase 2 fleet constraint v2 — VALIDATE (2026-09-12)
+
+**Touchpoint:** sub-vocabulary-sync VALIDATE at Phase 2 technical exit (P2-H).
+
+| Term / artifact | Reconciled to |
+|-----------------|---------------|
+| **constraint migration receipt** | `working/fleet-constraint-v2/constraint-migration-receipt.v1.schema.json` (+ example, `.md` design note) |
+| **qualification green** | `fleet-g1/summary.json` → `qualification_green: pass`; independent of **header-only-v2** and **fleet-migrated-client** |
+| **F11 authoring burden gate** | `f11-fp-thresholds.v1.yaml` + metrics under `qualification/metrics/f11-fleet-20260912.yaml` |
+| False-positive threshold (OD-P2-4) | `f11-fp-thresholds.v1.yaml` + `qualification/metrics/fp-fleet-20260912.json` |
+| Rollback exercise (OD-P2-6) | `rollback-exercise-G1.v1.json`; per-entry receipts under `qualification/fleet-g1/rollback-exercise/` |
+| Tier-3 exemplars (OD-P2-5) | `working/fleet-constraint-v2/exemplars/*.pseudocode.md` (copies, not production sidecars) |
+| **fleet constraint v2 migration** (program) | Phase 2 exit = readiness to pilot only; see phase-2 plan state vs proof table |
+
+**Exit record:** `working/fleet-constraint-v2/phase-2-exit-review.v1.json`.
+
+## Phase 2 fleet constraint v2 — VALIDATE P2-C (2026-09-12)
+
+**Touchpoint:** sub-vocabulary-sync VALIDATE after P2-C TIED persist.
+
+| Token / criterion | Reconciled to |
+|-------------------|---------------|
+| **SC-FLEET-P2-001** | ARCH `governance_artifacts.constraint_migration_receipt_*`; receipt Layer A/B/C, `typed_flow`, `constraint_flow`, `unknown_summary` in schema |
+| **SC-FLEET-P2-002** | `templates/impl-essence-pseudocode-template.md`; `working/fleet-constraint-v2/exemplars/` (≥3 profiles) |
+| **SC-FLEET-P2-003** | `qualification/fleet-g1/summary.json`; manifest pin `48d1fbb+` |
+| **SC-FLEET-P2-004** | `f11-fp-thresholds.v1.yaml`; `gate-promotion-stages.v1.yaml` G1 `prerequisites` |
+| **SC-FLEET-P2-005** | `rollback-exercise-G1.v1.json`; config/receipt-only G1 restoration |
+| **SC-GRAMMAR-V2-FLEET-AUTHORING-TARGET** | REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT satisfaction criterion; bootstrap Implemented unchanged until Phase 5 |
+
+## Phase 3 fleet constraint v2 — VALIDATE (2026-09-12)
+
+**Touchpoint:** sub-vocabulary-sync VALIDATE at Phase 3 technical exit (P3-H).
+
+| Term / artifact | Reconciled to |
+|-----------------|---------------|
+| **pilot inventory instance** | `client-inventory-manifest.pilots.v1.yaml` (`stdd-fleet-inventory-pilots-v1`) |
+| **migration dry-run** | `pilots/stdd/dry-run/inventory-diff.v1.json` + `dry_run_content_hash` |
+| **G2 pilot receipt** | `pilots/stdd/receipts/*.receipt.json` with `gate_stage: G2` |
+| **pilot migration wave** | `pilots/stdd/wave-1-sidecars.yaml` (≤10 sidecars) |
+| **SC-FLEET-P3-001..006** | REQ satisfaction criteria; ARCH `governance_artifacts` Phase 3 paths |
+| **REQ-PSEUDOCODE_MIGRATION_TOOLING** | `tied/requirements/REQ-PSEUDOCODE_MIGRATION_TOOLING.yaml` + harness scripts |
+| **fleet constraint v2 migration** (program) | Phase 3 exit = pilot workflow validated; not fleet-migrated-client for all repos |
+
+**Exit record:** `working/fleet-constraint-v2/phase-3-exit-review.v1.json`.
+
+---
+
+## Phase 4 fleet constraint v2 — RECORD (2026-09-12 P4-C)
+
+**Touchpoint:** sub-vocabulary-sync RECORD at P4-C TIED persist.
+
+| Term / artifact | Preferred definition |
+|-----------------|----------------------|
+| **fleet wave partition** | `working/fleet-constraint-v2/fleet-wave-partition.v1.yaml` — ordered waves with gate_stage G3 |
+| **full fleet inventory instance** | `client-inventory-manifest.v1.yaml` (`stdd-fleet-inventory-v1`) distinct from pilots instance |
+| **phase_4_enrollment** | `enrolled_phase_4` \| `not_enrolled_phase_4` on inventory rows; OD-P4-3 five-repo exit set |
+| **wave stop/go** | Append-only `wave-stop-go.v1.json` per OD-P4-6 |
+| **G3 fleet receipt** | `gate_stage: G3`, `constraint_flow: true` under `working/fleet-constraint-v2/waves/` |
+| **SC-FLEET-P4-001..006** | REQ satisfaction criteria; ARCH `governance_artifacts` Phase 4 paths |
+| **dual track (Phase 4/5)** | Legacy clients G3 until fleet-migrated-client; new-client constraint-enforced bootstrap deferred to Phase 5 |
+
+**Exit record (machinery):** `working/fleet-constraint-v2/phase-4-exit-review.v1.json` (P4-H 2026-09-12).
+
+---
+
+## Phase 4 fleet constraint v2 — VALIDATE (2026-09-12 P4-H)
+
+**Touchpoint:** sub-vocabulary-sync VALIDATE at Phase 4 machinery exit (P4-H); grand-plan **fleet-migrated-client** exit deferred.
+
+| Term / artifact | Reconciliation |
+|-----------------|----------------|
+| **fleet wave partition** | Matches `fleet-wave-partition.v1.yaml` (14 waves; 6 complete per dashboard) |
+| **full fleet inventory instance** | `stdd-fleet-inventory-v1`; `phase_4_enrollment` on five clients; aggregates honest (no fleet-migrated-client on enrolled rows) |
+| **phase_4_enrollment** | stdd + 1789177584 + 1789069630 + 1789136889 + 1789147101 enrolled; manifest remainder `not_enrolled_phase_4` |
+| **wave stop/go** | Six `go` records in `wave-stop-go.v1.json` (W-stdd-1 G2 + W-stdd-2 + four W-ext-*) |
+| **G3 fleet receipt** | Under `waves/stdd/` and `waves/{client_id}/`; distinct from `pilots/` G2 paths — no drift |
+| **fleet dashboard** | `fleet-dashboard.v1.yaml` rollups align with inventory + partition pending wave count |
+| **SC-FLEET-P4-001..006** | Present in REQ/ARCH; SC satisfaction for **machinery** not equated to fleet-migrated-client |
+
+**Drift notes:** None material — RECORD terms match code (`run-fleet-g3-wave.ts`, `run-fleet-p4-g-closeout.ts`) and working artifacts. **Proof boundary:** G3 receipt + stop/go ≠ `fleet-migrated-client` until sidecar states and waivers say so.
+
+---
+
 ## Alphabetical index
 
 | Term | Section |
@@ -204,8 +318,15 @@ Prefer in `essence_pseudocode` (not domain terms):
 | annotation profile | Preferred terms |
 | binding inventory | Preferred terms |
 | constraint-enforced-v2 client sidecar | Preferred terms |
+| constraint migration receipt | Preferred terms |
 | constraint-ready-v2 client sidecar | Preferred terms |
+| F11 authoring burden gate | Preferred terms |
+| G2 pilot receipt | Preferred terms |
+| migration dry-run | Preferred terms |
+| pilot inventory instance | Preferred terms |
+| pilot migration wave | Preferred terms |
 | fleet constraint v2 migration | Preferred terms |
+| qualification green | Preferred terms |
 | fleet-migrated-client | Preferred terms |
 | header-only-v2 client sidecar | Preferred terms |
 | legacy-v1 client sidecar | Preferred terms |

@@ -1,7 +1,12 @@
 # [IMPL-FEAT_VIEW_PROJECTION] [ARCH-FEAT_VIEW_PROJECTION] [REQ-FEAT_VIEW_GENERATION]
-# Normalize canonical feature references and Batch 2/3 projections into one reference-only renderer input.
+
+
+Grammar-Version: v2
+
+## Summary contract
+# [IMPL-FEAT_VIEW_PROJECTION] [ARCH-FEAT_VIEW_PROJECTION] [REQ-FEAT_VIEW_GENERATION] — How: normalize canonical feature references and Batch 2/3 projections into one reference-only renderer input.
 Contract:
-  INPUT: feature_manifest, clarification_projection, constitution_projection, task_graph_projection, canonical_record_refs, proof_boundary_labels
+  INPUT: feature_manifest with feature_identifier: string where length(feature_identifier) > 0; clarification_projection; constitution_projection; task_graph_projection; canonical_record_refs: list where length(canonical_record_refs) >= 0; proof_boundary_labels: list where length(proof_boundary_labels) >= 0
   PRE: feature_manifest is valid and every referenced canonical token resolves
   OUTPUT: source_projection | { error: InvalidReference | ConflictingRevision }
   POST: success => source_projection contains only references, summaries, projections, links, labels, and source_revision metadata
@@ -27,12 +32,13 @@ BUILD_VIEW_SOURCE_PROJECTION(inputs):
 
 # How this block preserves traceability and source revisions for every view consumer.
 ASSEMBLE_SOURCE_METADATA(source_projection):
-  INPUT: source_projection
-  PRE: every source contribution has identity and revision or hash
-  OUTPUT: source_revision (map)
-  POST: source_revision lists every contributing identity in stable order
-  EFFECTS: pure
-  TERMINATION: total
+  Contract:
+    INPUT: source_projection with contributions: list where length(contributions) >= 0
+    PRE: every source contribution has identity and revision or hash
+    OUTPUT: source_revision (map)
+    POST: source_revision lists every contributing identity in stable order
+    EFFECTS: pure
+    TERMINATION: total
   FOR each contribution IN source_projection:
     record identity, revision_or_hash, and source_kind
   RETURN source_revision

@@ -16,10 +16,13 @@ Contract:
 
 # [IMPL-QUALITY_EVIDENCE_COLLECTION] [ARCH-QUALITY_ASSURANCE_PROFILES] [REQ-QUALITY_ASSURANCE_EVIDENCE]
 # How: Validate collection context, run declarations upstream, and pass observed results to manifest generation.
+
+Grammar-Version: v2
+
 procedure COLLECT_VERIFICATION_EVIDENCE(input):
   # [IMPL-QUALITY_EVIDENCE_COLLECTION] [ARCH-QUALITY_ASSURANCE_PROFILES] [REQ-QUALITY_ASSURANCE_EVIDENCE]
   Contract:
-    INPUT: command declarations, run metadata, quality rows, proof boundaries
+    INPUT: command_declarations: list where length(command_declarations) > 0; run metadata, quality rows, proof boundaries
     OUTPUT: verification evidence manifest
     PRE: collection input is complete and runner/manifest modules are available
     POST: manifest contains one normalized result per declaration

@@ -7,6 +7,8 @@ export const CONSTRAINT_QUALIFICATION_ROOT = join(
   "working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/qualification",
 );
 
+export const FLEET_G1_ROOT = join(QUALIFICATION_ROOT, "fleet-g1");
+
 export const CONSTRAINT_PATHS = {
   manifest: PATHS.manifest,
   phase3: join(QUALIFICATION_ROOT, "phase3"),
@@ -16,4 +18,7 @@ export const CONSTRAINT_PATHS = {
   phaseGate: join(CONSTRAINT_QUALIFICATION_ROOT, "phase-gate"),
   snapshots: join(CONSTRAINT_QUALIFICATION_ROOT, "snapshots"),
   metrics: join(CONSTRAINT_QUALIFICATION_ROOT, "metrics"),
+  fleetG1: FLEET_G1_ROOT,
+  fleetG1Receipts: join(FLEET_G1_ROOT, "receipts"),
+  fleetG1Reports: join(FLEET_G1_ROOT, "reports"),
 } as const;

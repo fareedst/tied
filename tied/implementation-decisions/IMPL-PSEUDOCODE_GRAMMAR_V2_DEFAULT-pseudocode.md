@@ -19,7 +19,7 @@
 procedure SELECT_NEW_PROJECT_GRAMMAR_DEFAULT(template_body, bootstrap_mode):
   # [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] [ARCH-PSEUDOCODE_GRAMMAR_V2_DEFAULT] [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT] How: Require the explicit v2 header only on newly generated sidecars.
   Contract:
-    INPUT: template body, bootstrap mode, optional legacy sidecar
+    INPUT: template_body: string where length(template_body) > 0; bootstrap_mode; optional legacy sidecar
     OUTPUT: generated sidecar body with v2 header | error: TemplateUnavailable | BootstrapWriteFailed
     PRE: template body is readable; bootstrap mode identifies a new client generation
     POST: new client output has the header; existing legacy sidecars remain unchanged

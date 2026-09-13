@@ -1,10 +1,13 @@
 # [IMPL-ASYNC_VOCABULARY] [ARCH-ASYNC_REQ_ARCH_CONTRACT] [REQ-ASYNC_REQ_ARCH_TEMPLATES]
 # Summary: Maintain async-methodology glossary with seven semantic classes, routing, and proof-boundary disclaimers.
 
+
+Grammar-Version: v2
+
 procedure PUBLISH_ASYNC_GLOSSARY(source_root):
   # [IMPL-ASYNC_VOCABULARY] [ARCH-ASYNC_REQ_ARCH_CONTRACT] [REQ-ASYNC_REQ_ARCH_TEMPLATES] — How: write tied/vocab/async-methodology.md with preferred terms, synonyms, naming bridges, and non-claims per class.
   Contract:
-    INPUT: source_root
+    INPUT: source_root: string where length(source_root) > 0
     PRE: source_root is readable TIED methodology repository
     OUTPUT: glossary_path
     POST: glossary_path exists; seven semantic classes each have definition, example, and non-claim

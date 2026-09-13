@@ -1,6 +1,9 @@
 # [IMPL-TIED_FEEDBACK_PROMOTION] [ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY] [REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION]
 # Normalizes operational feedback, groups duplicates, and gates non-canonical LEAP proposal creation on human review.
 
+
+Grammar-Version: v2
+
 ## Summary contract
 INPUT: incident, metric, test failure, or user report; existing feedback store; existing LEAP proposal queue; review decision
 PRE: source provenance and affected feature are bounded; feedback and proposal stores remain distinct
@@ -11,6 +14,23 @@ DATA: feedback.yaml entries, duplicate groups, evidence links, proposed REQ, pro
 DATA_TRANSITION: append feedback or duplicate links; append reviewed non-canonical proposal; never mutate canonical TIED data
 EFFECTS: IO, State
 TERMINATION: total
+
+procedure NORMALIZE_OPERATIONAL_SOURCE:
+  # [IMPL-TIED_FEEDBACK_PROMOTION] [ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY] [REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION] [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION] — Maps supported operational sources to the existing feedback entry contract.
+  Contract:
+    INPUT: source_events: list of SourceEvent where length(source_events) > 0
+    PRE: source_type is incident, metric, test_failure, or user_report
+    OUTPUT: normalized feedback entry | error InvalidSource | error MissingEvidence
+    POST: source provenance, feature, severity, evidence, proposed REQ field, and promotion status are explicit
+    FAILURE_MODES: InvalidSource, MissingEvidence
+    EFFECTS: pure
+    TERMINATION: total
+  validate source type and required source identity from first source_events entry
+  validate affected feature and severity
+  validate evidence links and source timestamp
+  map source payload into additive feedback context
+  set promotion status to promotion_pending
+  RETURN normalized feedback entry
 
 ## NORMALIZE_OPERATIONAL_SOURCE
 # [IMPL-TIED_FEEDBACK_PROMOTION] [ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY] [REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION] — Maps supported operational sources to the existing feedback entry contract.

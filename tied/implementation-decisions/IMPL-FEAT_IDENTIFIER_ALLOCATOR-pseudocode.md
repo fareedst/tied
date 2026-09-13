@@ -1,9 +1,12 @@
 # [IMPL-FEAT_IDENTIFIER_ALLOCATOR] [ARCH-FEAT_IDENTIFIER_ALLOCATION] [REQ-FEAT_IDENTIFIER_ALLOCATION]
 
+
+Grammar-Version: v2
+
 ## Summary contract
 # [IMPL-FEAT_IDENTIFIER_ALLOCATOR] [ARCH-FEAT_IDENTIFIER_ALLOCATION] [REQ-FEAT_IDENTIFIER_ALLOCATION] — How: normalize a title and allocate a deterministic unused feature identifier and directory name.
 Contract:
-  INPUT: title; existing_feature_directories
+  INPUT: title: string where length(title) >= 0; existing_feature_directories: list where length(existing_feature_directories) >= 0
   PRE: title is a string
   OUTPUT: { feature_identifier, slug, directory_name } | allocation_error
   POST: success returns a zero-padded identifier not present in existing directories
@@ -13,6 +16,15 @@ Contract:
 
 ## GENERATE_FEATURE_SLUG
 procedure GENERATE_FEATURE_SLUG(title):
+  Contract:
+    INPUT: title: string where length(title) >= 0
+    PRE: title is a string
+    OUTPUT: slug | slug_error
+    POST: success returns a directory-safe slug; empty normalization yields EMPTY_SLUG
+    FAILURE_MODES: EMPTY_SLUG
+    EFFECTS: pure
+    TERMINATION: total
+
   # [IMPL-FEAT_IDENTIFIER_ALLOCATOR] [ARCH-FEAT_IDENTIFIER_ALLOCATION] [REQ-FEAT_IDENTIFIER_ALLOCATION] — How: apply one stable normalization pipeline to equivalent titles.
   Trim surrounding whitespace.
   Normalize Unicode to the selected canonical form.
@@ -24,6 +36,15 @@ procedure GENERATE_FEATURE_SLUG(title):
 
 ## ALLOCATE_FEATURE_IDENTIFIER
 procedure ALLOCATE_FEATURE_IDENTIFIER(title, existing_feature_directories):
+  Contract:
+    INPUT: title: string where length(title) >= 0; existing_feature_directories: list where length(existing_feature_directories) >= 0
+    PRE: title is a string
+    OUTPUT: { feature_identifier, slug, directory_name } | allocation_error
+    POST: success returns a zero-padded identifier not present in existing directories
+    FAILURE_MODES: EMPTY_TITLE; EMPTY_SLUG; INVALID_DIRECTORY
+    EFFECTS: pure
+    TERMINATION: total
+
   # [IMPL-FEAT_IDENTIFIER_ALLOCATOR] [ARCH-FEAT_IDENTIFIER_ALLOCATION] [REQ-FEAT_IDENTIFIER_ALLOCATION] — How: scan existing directories and choose the lowest unused FEAT number.
   Generate slug.
   IF title is empty: RETURN EMPTY_TITLE.

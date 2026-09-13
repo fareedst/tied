@@ -1,6 +1,9 @@
 # [IMPL-TIED_RESEARCH_RECORDS] [ARCH-TIED_RESEARCH_RECORD_BOUNDARY] [REQ-TIED_RESEARCH_RECORDS]
 # Defines structured external research records, freshness evaluation, and read-only dataset emission.
 
+
+Grammar-Version: v2
+
 ## Summary contract
 INPUT: research record, source evidence, affected ARCH/IMPL alternatives, freshness policy, audited project boundary
 PRE: record source/date/method/conclusion/uncertainty and provenance are present; audited project boundary is explicit
@@ -15,7 +18,7 @@ TERMINATION: total
 ## NORMALIZE_RESEARCH_RECORD
 # [IMPL-TIED_RESEARCH_RECORDS] [ARCH-TIED_RESEARCH_RECORD_BOUNDARY] [REQ-TIED_RESEARCH_RECORDS] — Normalizes one typed research record without copying canonical decision bodies.
 Contract:
-  INPUT: raw record with type, source, source_date, method, conclusion, uncertainty, affected decisions, provenance, and classification
+  INPUT: source: string where length(source) > 0; raw record with type, source_date, method, conclusion, uncertainty, affected decisions, provenance, and classification
   PRE: record type is one of library_comparison, benchmark, security_finding, organizational_constraint, or experiment
   OUTPUT: normalized research record | error InvalidRecord | error MissingProvenance
   POST: required fields are present; ARCH/IMPL links are reference-only; candidate_finding, confirmed_case_report, and accepted_uncertainty remain distinct

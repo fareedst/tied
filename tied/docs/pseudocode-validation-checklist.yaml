@@ -407,7 +407,9 @@ tailoring:
     - "add generation backend constraints if pseudo-code drives test generation directly"
     - "add project architecture constraints under dependency_graph"
     - "add project-specific block kinds under the schema category"
+    - "fleet constraint-ready-v2 authoring target: new/changed Active procedures use full PRE/POST/EFFECTS (+ FAILURE_MODES/DATA_TRANSITION/TERMINATION when applicable); Tier-3 rows optional per annotation profile — see templates/impl-essence-pseudocode-template.md and working/fleet-constraint-v2/exemplars/"
     - "for Comrak-style Markdown sidecars, optional LINT-MD-001 and LINT-MD-002 align manual Layer B with extract_test_pseudocode_to_impl_sidecars.py; mark N/A when the IMPL is purely procedural and not test-catalog-driven"
+    - "Layer B contract precision is independent of Layer C constraint_flow; header-only-v2 is not sufficient for constraint-ready-v2 claims"
     - "SHAPE-003..006 contract precision: do not weaken requiredness for new/changed Active blocks; pre-contract-grammar N/A is only for unchanged legacy Active blocks until next edit"
 usage:
   how_to_apply:

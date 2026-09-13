@@ -1,0 +1,48 @@
+{
+  "schema_version": "seq-5-ws4-governance-report.v1",
+  "generated_at": "2026-09-13T05:09:00.000Z",
+  "closeout_plan_ref": "docs/pseudocode-constraint-v2-fleet-migration-phase-4-closeout-plan.md",
+  "work_stream": "WS-4",
+  "build_plan_seq": "5",
+  "steps": {
+    "G4_1_fleet_inventory_apply": {
+      "command": "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/run-harness.sh fleet-inventory --apply",
+      "ok": true,
+      "artifact": "working/fleet-constraint-v2/client-inventory-manifest.v1.yaml",
+      "enrolled_fleet_migrated_client_count": 5
+    },
+    "G4_2_fleet_dashboard": {
+      "command": "run-harness.sh fleet-dashboard",
+      "ok": true,
+      "artifact": "working/fleet-constraint-v2/fleet-dashboard.v1.yaml",
+      "wave_summary": { "total_waves": 15, "complete": 15, "halted": 0 }
+    },
+    "G4_3_fleet_stop_go_closeout": {
+      "command": "run-harness.sh fleet-stop-go-closeout",
+      "ok": true,
+      "artifact": "working/fleet-constraint-v2/wave-stop-go.v1.json",
+      "stop_go_record_count": 15,
+      "all_dispositions_go": true
+    },
+    "G4_4_waiver_registry_check": {
+      "command": "node --experimental-strip-types working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/run-fleet-waiver-registry-check.ts",
+      "ok": true,
+      "waiver_count": 0,
+      "message": "No blocking expired waivers (empty registry passes)."
+    },
+    "G4_5_lint_yaml": {
+      "paths": [
+        "working/fleet-constraint-v2/client-inventory-manifest.v1.yaml",
+        "working/fleet-constraint-v2/fleet-dashboard.v1.yaml",
+        "working/fleet-constraint-v2/migration-waiver-registry.v1.yaml"
+      ],
+      "ok": true
+    }
+  },
+  "exit_criteria_refs": {
+    "EX_07_dashboard_reconciled": true,
+    "EX_04_waiver_policy": true,
+    "EX_05_no_expired_waivers": true
+  },
+  "next_recommended": "/build-plan seq 6 — WS-3 orchestrator verification prep; then seq 7 formal M2 EX assert before seq 8 close_out"
+}

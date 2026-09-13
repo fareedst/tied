@@ -1,7 +1,12 @@
 # [IMPL-FEAT_VIEW_STALE_DETECTION] [ARCH-FEAT_VIEW_STALENESS] [REQ-FEAT_VIEW_STALENESS]
-# Detect generated views whose recorded canonical inputs no longer match and apply explicit freshness policy.
+
+
+Grammar-Version: v2
+
+## Summary contract
+# [IMPL-FEAT_VIEW_STALE_DETECTION] [ARCH-FEAT_VIEW_STALENESS] [REQ-FEAT_VIEW_STALENESS] — How: detect generated views whose recorded canonical inputs no longer match and apply explicit freshness policy.
 Contract:
-  INPUT: generated_view, current_source_revision, stale_view_policy
+  INPUT: generated_view: string where length(generated_view) > 0; current_source_revision; stale_view_policy: string where length(stale_view_policy) > 0
   PRE: stale_view_policy is fail or warn and generated_view has parseable source metadata
   OUTPUT: freshness_result
   POST: freshness_result identifies every stale source and applies the requested policy; stale output is marked non-current-intent and non-runtime-proof
@@ -12,13 +17,14 @@ Contract:
 
 # How this block validates the generated banner before making a freshness claim.
 READ_VIEW_SOURCE_METADATA(generated_view):
-  INPUT: generated_view
-  PRE: generated_view is readable
-  OUTPUT: recorded_source_revision | { error: InvalidGeneratedMetadata }
-  POST: success => every recorded source identity has a revision or hash
-  FAILURE_MODES: InvalidGeneratedMetadata
-  EFFECTS: pure
-  TERMINATION: total
+  Contract:
+    INPUT: generated_view: string where length(generated_view) > 0
+    PRE: generated_view is readable
+    OUTPUT: recorded_source_revision | { error: InvalidGeneratedMetadata }
+    POST: success => every recorded source identity has a revision or hash
+    FAILURE_MODES: InvalidGeneratedMetadata
+    EFFECTS: pure
+    TERMINATION: total
   1. Parse the generated-file banner.
   2. Reject a missing or malformed source_revision entry with InvalidGeneratedMetadata.
   3. Return recorded_source_revision in stable identity order.

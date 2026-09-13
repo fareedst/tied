@@ -27,11 +27,11 @@ REQ-PROMPT_TYPE_GLOBAL_SKILLS:
     supersedes: []
   satisfaction_criteria:
     - criterion: "A TIED client bootstrap installs the same managed bundle under .cursor/skills/ without modifying unrelated skills or existing MCP configuration."
+    - criterion: "Close-out workflows include advisory gitignore hygiene per [PROC-GITIGNORE_CLOSE_OUT]: plan-close-out shared process step and checklist slug gitignore-close-out-hygiene review ephemeral artifacts against .gitignore, apply or propose unstaged patterns using repository comment-block conventions, and record handoff evidence of patterns proposed/applied or explicit N/A when clean."
     - criterion: "Every installed skill is explicit-only, preserves its workflow gates, names invocation remainder and linked plan where applicable, and resolves its shared references."
     - criterion: "Leaf skills and the router do not use a triple-colon payload delimiter. plan-new-feature treats the invocation remainder as the requirement. refine-plan and build-plan require a linked or in-message plan."
     - criterion: "The bundle and bootstrap behavior are covered by deterministic static and integration tests."
     - criterion: "The canonical TIED repository contains all 13 prompt-type leaf skills, one prompt-type router, and all direct shared references."
-    - criterion: "Close-out workflows include advisory gitignore hygiene per [PROC-GITIGNORE_CLOSE_OUT]: plan-close-out shared process step and checklist slug gitignore-close-out-hygiene review ephemeral artifacts against .gitignore, apply or propose unstaged patterns using repository comment-block conventions, and record handoff evidence of patterns proposed/applied or explicit N/A when clean."
   status: "Implemented"
   traceability:
     architecture:

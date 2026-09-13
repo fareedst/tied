@@ -1,5 +1,18 @@
 # [IMPL-EVIDENCE_CHAIN_REPORT] [ARCH-EVIDENCE_CHAIN_REPORT] [REQ-EVIDENCE_CHAIN_REPORT] — Read-only multi-client evidence-chain statistics report from profile artifacts.
 
+
+Grammar-Version: v2
+
+# [IMPL-EVIDENCE_CHAIN_REPORT] [ARCH-EVIDENCE_CHAIN_REPORT] [REQ-EVIDENCE_CHAIN_REPORT]
+# How: File-level contract INPUT where for constraint-enforced-v2; section bullet INPUT lines are assist-only.
+Contract:
+  INPUT: report_input_manifest_path: string where length(report_input_manifest_path) > 0
+  OUTPUT: evidence-chain-statistics-report.v1 | generation error
+  PRE: manifest path names a readable file when strict mode requires inputs
+  POST: success writes yaml_out and markdown_out without client repo mutation
+  EFFECTS: IO
+  TERMINATION: total
+
 ## GENERATE_EVIDENCE_CHAIN_REPORT
 
 - [IMPL-EVIDENCE_CHAIN_REPORT] [ARCH-EVIDENCE_CHAIN_REPORT] [REQ-EVIDENCE_CHAIN_REPORT] Compose manifest load, artifact validation, cohort partition, count-only aggregation, and deterministic YAML/Markdown emit without generating profiles or traversing client roots.

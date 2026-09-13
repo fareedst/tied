@@ -1,0 +1,40 @@
+$schema: "working/fleet-constraint-v2/fleet-dashboard.v1.schema.json"
+dashboard_id: "stdd-fleet-dashboard-v1"
+enrollment_summary:
+  enrolled_client_ids:
+    - "1789069630"
+    - "1789136889"
+    - "1789147101"
+    - "1789177584"
+    - "stdd"
+  enrolled_phase_4_count: 5
+  not_enrolled_phase_4_count: 18
+generated_at: "2026-09-13T05:08:52.289Z"
+inventory_rollups:
+  active_waiver_count: 0
+  clients_by_aggregate_state:
+    fleet-migrated-client: 5
+    header-only-v2: 18
+  sidecars_by_state:
+    constraint-enforced-v2: 111
+    constraint-ready-v2: 0
+    header-only-v2: 47
+    legacy-v1: 0
+    unknown-or-mixed: 0
+methodology_pin: "48d1fbb+"
+notes: "Refreshed by run-fleet-dashboard-refresh.ts / run-fleet-p4-g-closeout.ts (P4-G). Sidecar rollups from client-inventory-manifest.v1.yaml."
+program_gate_policy: "advisory"
+schema_version: 1
+sources:
+  f11_fp_thresholds_path: "working/fleet-constraint-v2/f11-fp-thresholds.v1.yaml"
+  inventory_manifest_path: "working/fleet-constraint-v2/client-inventory-manifest.v1.yaml"
+  waiver_registry_path: "working/fleet-constraint-v2/migration-waiver-registry.v1.yaml"
+  wave_partition_path: "working/fleet-constraint-v2/fleet-wave-partition.v1.yaml"
+  wave_stop_go_path: "working/fleet-constraint-v2/wave-stop-go.v1.json"
+wave_summary:
+  complete: 15
+  halted: 0
+  in_progress: 0
+  last_stop_go_record_id: "c4ca942f-cc84-40e0-ac80-1127e3819c8b"
+  pending: 0
+  total_waves: 15

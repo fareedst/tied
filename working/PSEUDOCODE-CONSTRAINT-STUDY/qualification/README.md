@@ -1,8 +1,8 @@
 # Typed-Flow Client Qualification Harness
 
-Read-only qualification harness for `[REQ-PSEUDOCODE_TYPED_FLOW]`. Captures pre-pilot analyzer behavior on real clients and stdd project sidecars without mutating external corpus trees.
+Read-only qualification harness for `[REQ-PSEUDOCODE_TYPED_FLOW]` and Phase 2 fleet constraint G1 runs (`[REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION]`).
 
-**Baseline anchor:** commit `7f3d5b0`  
+**Baseline anchor (OD-P2-1):** `48d1fbbbd1c26dfdb3ac6d74b4cb36c60372dcd7` (shorthand **`48d1fbb+`** in receipts and docs)  
 **External corpus (read-only):** `/Users/fareed/Documents/dev/test`  
 **Never mutate:** client trees under the external corpus.
 
@@ -15,6 +15,60 @@ Read-only qualification harness for `[REQ-PSEUDOCODE_TYPED_FLOW]`. Captures pre-
 | C | 5–8 smoke clients (distinct lineage from A) | Report-only run |
 | D | `tied-win-diff` stress (optional) | Budget probe |
 
+## Phase 2 fleet G1 (P2-F) — receipts + qualification
+
+G1 advisory analyzer flags (matches gate promotion G1):
+
+- `gate_mode: true`
+- `typed_flow: true`
+- `constraint_flow: true`
+- `constraint_gate_errors: false` (advisory)
+
+**Primary command** (builds `mcp-server`, optional corpus scan, G1 sweep + receipt emit):
+
+```bash
+chmod +x working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/run-harness.sh
+working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/run-harness.sh fleet-g1
+```
+
+**Outputs:**
+
+| Path | Role |
+|------|------|
+| `qualification/fleet-g1/summary.json` | Tier A/B metrics, `qualification_green`, `CORPUS_UNAVAILABLE` when external corpus absent |
+| `qualification/fleet-g1/receipts/*.receipt.json` | **constraint-migration-receipt.v1** per manifest entry (+ exemplar smoke) |
+| `qualification/fleet-g1/reports/*.g1.report.json` | Raw `pseudocode_analyze` reports (ephemeral, gitignored) |
+
+Collector implementation: `qualification/scripts/lib/constraint-migration-receipt.ts`  
+Schema: `working/fleet-constraint-v2/constraint-migration-receipt.v1.schema.json`
+
+If `/Users/fareed/Documents/dev/test` is missing, the harness still runs **Tier B stdd** manifest entries and **fleet exemplars** under `working/fleet-constraint-v2/exemplars/`; `summary.json` records `corpus_status: CORPUS_UNAVAILABLE`.
+
+**Sample receipt JSON Schema validation (AJV):**
+
+```bash
+cd /path/to/stdd
+npx --yes ajv-cli validate \
+  -s working/fleet-constraint-v2/constraint-migration-receipt.v1.schema.json \
+  -d working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/fleet-g1/receipts/<entry-id>.receipt.json \
+  --spec=draft2020 --strict=false
+```
+
+Or validate up to five receipts from the last fleet-g1 run:
+
+```bash
+cd working/PSEUDOCODE-CONSTRAINT-STUDY/qualification
+node --experimental-strip-types scripts/validate-receipts-sample.ts fleet-g1/receipts/*.receipt.json
+```
+
+(Fleet-g1 also runs sample validation automatically and records results in `fleet-g1/summary.json`.)
+
+**Qualification green (Phase 2):**
+
+- **Tier A:** 100% parse ok; zero new `gate_mode` failures vs `baseline/` reports
+- **Tier B (stdd):** Zero regression vs baseline `ok` for each sidecar
+- **Receipts:** Unknown/truncation mapped in `unknown_summary`; sample AJV validation passes
+
 ## Dedupe / exclusion rules
 
 Recorded in `manifest.yaml` per entry:
@@ -25,12 +79,11 @@ Recorded in `manifest.yaml` per entry:
 - Exclude orchestration ephemera (`working/**`, `.cursor/**`)
 - Include only project-layer `IMPL-*-pseudocode.md` paths
 
-## Invocation
+## Invocation (typed-flow study)
 
 Primary path (in-process analyzer, pins commit via local build):
 
 ```bash
-chmod +x working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/run-harness.sh
 working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/run-harness.sh baseline
 ```
 
@@ -41,6 +94,7 @@ Individual steps:
 ./scripts/run-harness.sh baseline  # Step 1 — typed_flow: false, gate_mode: true
 ./scripts/run-harness.sh pilot     # Step 6 — typed_flow: true + regression false
 ./scripts/run-harness.sh compare   # threshold diff baseline vs pilot
+./scripts/run-harness.sh fleet-g1  # Phase 2 G1 + constraint-migration-receipt.v1
 ./scripts/run-phase3.ts            # Phase 3 — typed_gate_errors: true + R1/R2 checks
 ```
 
@@ -75,9 +129,12 @@ qualification/
   baseline/           # Step 1 reports (typed_flow: false); *.report.json gitignored
   pilot/              # Step 6 warning-only sweep (gitignored)
   phase3/             # Phase 3 typed_gate_errors sweep (gitignored except summary.json)
+  fleet-g1/           # Phase 2 G1 sweep (summary.json tracked; receipts/reports gitignored)
   snapshots/          # byte-stable JSON subsets (gitignored)
   metrics/            # aggregated compare output (summary.json, tier results tracked)
   annotation-study/   # copied sidecars only (Step 6)
   scripts/
+    run-fleet-g1-qualification.ts
+    lib/constraint-migration-receipt.ts
     run-phase3.ts     # Phase 3 qualification + R1/R2
 ```

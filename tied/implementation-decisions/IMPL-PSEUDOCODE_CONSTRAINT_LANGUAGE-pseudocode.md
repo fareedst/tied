@@ -34,7 +34,7 @@ procedure CONSTRAINT_FLOW_CONTROLS:
 procedure DETECT_GRAMMAR_VERSION(sidecar_text):
   # [IMPL-PSEUDOCODE_GRAMMAR_V2] [IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE] [ARCH-PSEUDOCODE_GRAMMAR_V2] [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE] How: Read Grammar-Version header from sidecar preamble; default v1 when absent; harness may accept grammar_version_override for qualification only.
   Contract:
-    INPUT: sidecar markdown text, optional grammar_version_override (harness only)
+    INPUT: sidecar_text: string where length(sidecar_text) > 0; optional grammar_version_override (harness only)
     OUTPUT: grammar_version enum v1 | v2
     PRE: sidecar text non-empty
     POST: absent header implies v1; header Grammar-Version: v2 selects v2 parser path; production ignores override when absent from harness; file extension alone never selects v2

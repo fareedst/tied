@@ -16,10 +16,13 @@ Contract:
 
 # [IMPL-QUALITY_TEST_ADEQUACY] [ARCH-QUALITY_ASSURANCE_PROFILES] [REQ-QUALITY_ASSURANCE_EVIDENCE]
 # How: Derive profile obligations and report missing test or waiver evidence without executing tests.
+
+Grammar-Version: v2
+
 procedure VALIDATE_TEST_ADEQUACY_PLAN(input):
   # [IMPL-QUALITY_TEST_ADEQUACY] [ARCH-QUALITY_ASSURANCE_PROFILES] [REQ-QUALITY_ASSURANCE_EVIDENCE]
   Contract:
-    INPUT: selected profiles and adequacy checks
+    INPUT: selected_profiles: list where length(selected_profiles) >= 0; adequacy checks
     OUTPUT: adequacy report
     PRE: selected_profiles and checks are arrays
     POST: every applicable check is reported and incomplete controls are diagnosed

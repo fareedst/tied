@@ -16,10 +16,13 @@ Contract:
 
 # [IMPL-QUALITY_SECURITY_PROFILE_VALIDATION] [ARCH-QUALITY_ASSURANCE_PROFILES] [REQ-QUALITY_ASSURANCE_EVIDENCE]
 # How: Require the complete abuse-case set only when external-input-security is selected.
+
+Grammar-Version: v2
+
 procedure VALIDATE_SECURITY_PROFILE(input):
   # [IMPL-QUALITY_SECURITY_PROFILE_VALIDATION] [ARCH-QUALITY_ASSURANCE_PROFILES] [REQ-QUALITY_ASSURANCE_EVIDENCE]
   Contract:
-    INPUT: selected profiles and security evidence rows
+    INPUT: selected_profiles: list where length(selected_profiles) >= 0; security evidence rows
     OUTPUT: security profile validation report
     PRE: input arrays are provided and abuse-case identifiers are canonical
     POST: each required case has passed evidence or a complete waiver when applicable

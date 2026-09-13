@@ -1,0 +1,56 @@
+{
+  "run_at": "2026-09-12T15:02:48.363Z",
+  "mode": "fleet-g1-qualification",
+  "methodology_pin": "48d1fbb+",
+  "baseline_anchor_commit": "48d1fbbbd1c26dfdb3ac6d74b4cb36c60372dcd7",
+  "g1_flags": {
+    "gate_mode": true,
+    "typed_flow": true,
+    "constraint_flow": true,
+    "constraint_gate_errors": false,
+    "include_structural_compat": true
+  },
+  "corpus_status": "available",
+  "corpus_root": "/Users/fareed/Documents/dev/test",
+  "receipts_dir": "/Users/fareed/Documents/dev/chatgpt/stdd/working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/fleet-g1/receipts",
+  "tier_a": {
+    "runnable": 37,
+    "skipped_missing_sidecar": 0,
+    "parse_ok": 37,
+    "parse_ok_pct": 100,
+    "gate_pass": 25,
+    "new_gate_failures_vs_baseline": [],
+    "zero_regression_vs_baseline": true
+  },
+  "tier_b_stdd": {
+    "runnable": 92,
+    "skipped_missing_sidecar": 0,
+    "parse_ok": 92,
+    "parse_ok_pct": 100,
+    "gate_pass": 78,
+    "new_gate_failures_vs_baseline": [],
+    "zero_regression_vs_baseline": true
+  },
+  "exemplar_smoke": {
+    "ran": 3,
+    "parse_ok": 3,
+    "receipt_paths": [
+      "/Users/fareed/Documents/dev/chatgpt/stdd/working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/fleet-g1/receipts/exemplar-contract-only.receipt.json",
+      "/Users/fareed/Documents/dev/chatgpt/stdd/working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/fleet-g1/receipts/exemplar-refinement.receipt.json",
+      "/Users/fareed/Documents/dev/chatgpt/stdd/working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/fleet-g1/receipts/exemplar-alias-mutation.receipt.json"
+    ]
+  },
+  "schema_validation": {
+    "ok": true,
+    "validated": [
+      "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/fleet-g1/receipts/exemplar-contract-only.receipt.json",
+      "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/fleet-g1/receipts/exemplar-refinement.receipt.json",
+      "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/fleet-g1/receipts/exemplar-alias-mutation.receipt.json",
+      "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/fleet-g1/receipts/tier-a-1787416567-IMPL-VOLUMESTATS-CLI.receipt.json",
+      "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/fleet-g1/receipts/tier-a-1787416567-IMPL-VOLUMESTATS-DISCOVER.receipt.json"
+    ],
+    "failures": []
+  },
+  "qualification_green": "pass",
+  "notes": []
+}

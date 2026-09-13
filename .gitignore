@@ -64,6 +64,15 @@ working/**/adherence-ledger.jsonl
 working/**/gate-ledger.jsonl
 working/**/citdp-doc-*.json
 working/**/citdp-write-payload.json
+working/**/citdp-record-body.json
+working/**/citdp-p*-*.json
+working/**/tied-create-*.json
+working/**/p*-yaml-updates.json
+working/**/adversarial-inquiry-p*-run.json
+working/**/evidence/quality/**/*.stdout.txt
+working/**/evidence/quality/**/*.stderr.txt
+working/**/evidence/psa-*.json
+working/**/evidence/pseudocode-validate-*.json
 working/**/doc-*-checklist.yaml
 # Timestamped gate receipts (regenerate via run-*-gates.mjs)
 working/**/pre_implementation-*.json
@@ -153,6 +162,17 @@ working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/qualification/**/*.regression-off.rep
 working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/qualification/**/*.constraint-true.report.json
 working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/qualification/**/*.constraint-gate-errors.report.json
 working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/qualification/metrics/compare-constraint-summary.json
+# Fleet Phase 2 G1 qualification (P2-F) — per-entry receipts/reports ephemeral
+working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/fleet-g1/receipts/
+working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/fleet-g1/reports/
+!working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/fleet-g1/summary.json
+# Fleet constraint v2 wave dry-run byte snapshots (regenerate per apply dry-run)
+working/fleet-constraint-v2/**/dry-run/snapshots/
+working/fleet-constraint-v2/**/dry-run/snapshots-constraint-ready/
+working/fleet-constraint-v2/scripts/*-payload.json
+# Fleet close-out MCP phase args/results (regenerate per build-plan slice)
+working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/p4-c-*.json
+working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/seq*-activation*.json
 # MCP token-creation payloads (regenerate via tied_token_create_with_detail)
 working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/token-payloads/
 # Stale root-level adversarial inquiry copies (phase dirs are canonical)
