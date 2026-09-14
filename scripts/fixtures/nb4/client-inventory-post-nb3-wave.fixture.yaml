@@ -1,0 +1,27 @@
+schema_version: 1
+clients:
+- aggregate_migration_state: fleet-migrated-client
+  client_id: '1787495576'
+  methodology_pin: 48d1fbb+
+  phase_4_enrollment: not_enrolled_phase_4
+  sidecar_counts_by_state:
+    constraint-enforced-v2: 3
+    header-only-v2: 0
+- aggregate_migration_state: header-only-v2
+  client_id: tied-win-diff
+  methodology_pin: 48d1fbb+
+  phase_4_enrollment: not_enrolled_phase_4
+  sidecar_counts_by_state:
+    header-only-v2: 1
+- aggregate_migration_state: header-only-v2
+  client_id: '1787691672'
+  methodology_pin: 48d1fbb+
+  phase_4_enrollment: not_enrolled_phase_4
+  sidecar_counts_by_state:
+    header-only-v2: 5
+- aggregate_migration_state: header-only-v2
+  client_id: '1787626480'
+  methodology_pin: 48d1fbb+
+  phase_4_enrollment: not_enrolled_phase_4
+  sidecar_counts_by_state:
+    header-only-v2: 6

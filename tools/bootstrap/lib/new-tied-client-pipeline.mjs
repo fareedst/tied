@@ -9,6 +9,7 @@ import { spawnSync } from "node:child_process";
 import { TIED_REPO_ROOT } from "./constants.mjs";
 import { sayErr, sayOk, sayWarn } from "./console.mjs";
 import { lintClientTiedYaml } from "./lint-client-yaml.mjs";
+import { runNewClientOnboardingAudit } from "./new-client-onboarding-audit.mjs";
 import { tiedBaselineCommitMessage } from "./tied-baseline-commit-message.mjs";
 
 export function resolveSourceRoot(env = process.env, fallback = TIED_REPO_ROOT) {
@@ -93,6 +94,7 @@ export function runNewTiedClientPipeline(options) {
     clientDir,
     sourceRoot,
     skipLint = false,
+    skipOnboardingAudit = false,
     skipMcpEnable = false,
     skipGit = false,
     forceMcpEnable = false,
@@ -132,6 +134,20 @@ export function runNewTiedClientPipeline(options) {
     if (!step.ok) {
       return step;
     }
+  }
+
+  step = runStep("onboarding_audit", () =>
+    runNewClientOnboardingAudit({
+      clientDir,
+      sourceRoot,
+      nodeExec,
+      spawn,
+      skipOnboardingAudit,
+      env: options.env,
+    }),
+  );
+  if (!step.ok) {
+    return step;
   }
 
   if (!skipMcpEnable) {

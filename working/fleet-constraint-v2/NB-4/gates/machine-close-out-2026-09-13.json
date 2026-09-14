@@ -1,0 +1,20 @@
+{
+  "schema_version": "nb4-machine-closeout.v1",
+  "generated_at": "2026-09-13T21:47:30Z",
+  "request_token": "REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL",
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "envelope_path": "working/REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL/evidence/request-evidence-envelope.v1.json",
+  "runner": "scripts/run-nb4-client-closeout.mjs",
+  "run_id": "nb4-machine-closeout-20260913",
+  "wave_4_client_ids": [
+    "1787691672",
+    "1787626480"
+  ],
+  "client_closeout_summary": "working/fleet-constraint-v2/NB-4/evidence/nb4-client-closeout-summary.json",
+  "track_b_notes": "OD-NB4-2 excluded tied-win-diff; one header-only-v2 not_enrolled row remains by sponsor default."
+}

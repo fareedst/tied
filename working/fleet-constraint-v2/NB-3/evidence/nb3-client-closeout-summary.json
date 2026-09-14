@@ -1,0 +1,22 @@
+{
+  "run_id": "nb3-tranche-two-closeout-20260913",
+  "wave_3_client_ids": [
+    "1787495576",
+    "1787603099",
+    "1787416567",
+    "1787507684",
+    "1787638699"
+  ],
+  "clients": {
+    "1787495576": { "verification": true, "close_out": true, "g3_all_layer_c_ok": true },
+    "1787603099": { "verification": true, "close_out": true, "g3_all_layer_c_ok": true },
+    "1787416567": { "verification": true, "close_out": true, "g3_all_layer_c_ok": true },
+    "1787507684": { "verification": true, "close_out": true, "g3_all_layer_c_ok": true },
+    "1787638699": {
+      "verification": true,
+      "close_out": true,
+      "g3_all_layer_c_ok": false,
+      "partial_receipt_note": "IMPL-WININFO_CLI layer_c.ok false; manifest aggregate constraint-ready-v2"
+    }
+  }
+}

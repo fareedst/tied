@@ -1,0 +1,30 @@
+REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE:
+  category: "Functional"
+  description: "Post–Track B continuous G4 governance: local maintenance wrapper composing runFleetG4CiChecks, optional unit tests, program-status last_g4_ci refresh, and g4-maintenance receipt JSON. Does not reopen closed orchestrator REQ or prove full-manifest Track B regression."
+  name: "Fleet G4 continuous maintenance"
+  priority: "P2"
+  rationale:
+    benefits:
+      - "Machine-readable last-run evidence"
+      - "Operator-single command for G4 cadence"
+    problems_solved:
+      - "Manual program-status last_g4_ci edits"
+      - "Untracked maintenance REQ after Track B exit"
+    why: "G4 CI shipped at P5-E; Track B complete 2026-09-13; ongoing ops need TIED traceability without NB-5."
+  satisfaction_criteria:
+    - criterion: "Failed G4 check or test exits non-zero; sets last_g4_ci_ok false; does not claim success in receipt ok field"
+      id: "SC-G4M-002"
+      metric: "scripts/fleet-g4-maintenance.test.mjs"
+    - criterion: "Last run persists fleet-g4-maintenance-run.v1 JSON under working/fleet-constraint-v2/g4-maintenance/"
+      id: "SC-G4M-003"
+      metric: "working/fleet-constraint-v2/g4-maintenance/last-run.v1.json"
+    - criterion: "Maintenance command exit 0 runs G4 checks and default unit tests; updates program-status last_g4_ci_at, last_g4_ci_ok true, updated_at"
+      id: "SC-G4M-001"
+      metric: "scripts/run-fleet-g4-maintenance.mjs; working/fleet-constraint-v2/program-status.v1.yaml"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-PSEUDOCODE_FLEET_G4_MAINTENANCE"
+      - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+    implementation:
+      - "IMPL-FLEET_G4_MAINTENANCE"

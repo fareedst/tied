@@ -1,0 +1,91 @@
+copy_hygiene: "Meta-tracker for monolithic plan-close-out (NB-3/NB-4/G4/NC). Not a feature REQ; orchestrates per-REQ close_out gates only."
+description: "Batch plan-close-out tracker — executed 2026-09-13."
+execution_evidence:
+  completed:
+    - "session-bootstrap"
+    - "sync-trackers-leap"
+    - "run-tests"
+    - "close-out-gates"
+    - "validate-tied"
+    - "gitignore-close-out-hygiene"
+    - "changelog-and-proposed-commit"
+    - "completion-signals-handoff"
+  envelope_path: null
+  request: "FLEET-BATCH-PLAN-CLOSEOUT-20260913"
+execution_profile:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+  proof_boundary: "stdd repo only; per-REQ envelopes under working/REQ-* remain authoritative."
+linked_plans:
+  - "/Users/fareed/.cursor/plans/fleet_batch_plan-close-out_c7aec3a7.plan.md"
+  - "docs/pseudocode-constraint-v2-fleet-completion-plan.md"
+feature_reqs:
+  - "REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO"
+  - "REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL"
+  - "REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE"
+  - "REQ-TIED_NEW_CLIENT_ADHERENCE"
+git_context: "diff-or-stage"
+commit_shape: "monolithic"
+close_out_replay:
+  REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO:
+    allowed: true
+    envelope_blocking_gaps: 0
+  REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL:
+    allowed: true
+    envelope_blocking_gaps: 0
+  REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE:
+    allowed: true
+    envelope_blocking_gaps: 0
+  REQ-TIED_NEW_CLIENT_ADHERENCE:
+    allowed: true
+    envelope_blocking_gaps: 0
+request: "FLEET-BATCH-PLAN-CLOSEOUT-20260913"
+steps:
+  - disposition: "completed"
+    slug: "session-bootstrap"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "sync-trackers-leap"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "run-tests"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "close-out-gates"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "validate-tied"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "gitignore-close-out-hygiene"
+    tracking:
+      status: "completed"
+      rationale: "N/A — .gitignore delta reviewed in batch; no new ephemeral patterns required beyond existing working/ blocks."
+  - disposition: "completed"
+    slug: "changelog-and-proposed-commit"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "completion-signals-handoff"
+    tracking:
+      status: "completed"
+test_strategy_summary: |
+  NB-3 7/7, NB-4 7/7, G4 6/6, NC 5/5 — replay 2026-09-13 plan-close-out session.
+tracker_sync_matrix:
+  REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO:
+    action: "no_step_sync"
+    authoritative: "working/REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO/agent-req-implementation-checklist.yaml"
+  REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL:
+    action: "copy_from_fleet_working"
+    target: "working/REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL/agent-req-implementation-checklist.yaml"
+  REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE:
+    action: "merge_steps_and_evidence"
+    target: "working/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE/agent-req-implementation-checklist.yaml"
+  REQ-TIED_NEW_CLIENT_ADHERENCE:
+    action: "leap_proof_boundary_and_typed_evidence_refs"

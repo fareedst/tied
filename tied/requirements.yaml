@@ -1514,6 +1514,21 @@ REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION:
   name: "Fleet constraint-language v2 migration program"
   priority: "P1"
   status: "Implemented"
+REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE:
+  category: "Functional"
+  cross_references:
+    architecture:
+      - "ARCH-PSEUDOCODE_FLEET_G4_MAINTENANCE"
+      - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+    implementation:
+      - "IMPL-FLEET_G4_MAINTENANCE"
+    requirements:
+      - "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
+      - "REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+  detail_file: "requirements/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE.yaml"
+  name: "Fleet G4 continuous maintenance"
+  priority: "P2"
+  status: "Implemented"
 REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO:
   category: "Functional"
   description: "Methodology-side close-out for NB-1 wave-1 (five not_enrolled clients). Parent orchestrator REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION remains closed."
@@ -1541,6 +1556,42 @@ REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE:
     depends_on:
       - "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
       - "REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO"
+    related_to: []
+    supersedes: []
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+    implementation:
+      - "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION"
+REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO:
+  category: "Functional"
+  description: "NB-3 tranche two program batch: sponsor od-nb3-acceptance, up to five remaining not_enrolled header-only-v2 clients, G3 receipts, manifest rollup. Parent orchestrator REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION remains closed."
+  detail_file: "requirements/REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO.yaml"
+  name: "Fleet NB-3 Track B tranche two (program batch)"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
+      - "REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE"
+    related_to: []
+    supersedes: []
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+    implementation:
+      - "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION"
+REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL:
+  category: "Functional"
+  description: "NB-4 final tranche program batch: od-nb4-acceptance, remaining header-only-v2 not_enrolled clients, G3 receipts, honest manifest rollup and Track B exit after NB-3 tranche two complete."
+  detail_file: "requirements/REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL.yaml"
+  name: "Fleet NB-4 Track B final tranche (program batch)"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
+      - "REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO"
     related_to: []
     supersedes: []
   status: "Implemented"
@@ -1934,6 +1985,24 @@ REQ-TIED_FIDELITY_RESEARCH:
       method: "Read-only safety checks"
     - coverage: "Manifest, finding lifecycle, specification-state classification, fidelity matrices, promotion, and deterministic rerun."
       method: "Unit tests"
+REQ-TIED_NEW_CLIENT_ADHERENCE:
+  category: "Functional"
+  cross_references:
+    architecture:
+      - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+      - "ARCH-TIED_NEW_CLIENT_ADHERENCE"
+    implementation:
+      - "IMPL-TIED_NEW_CLIENT_ONBOARDING"
+    requirements:
+      - "REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE"
+      - "REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+      - "REQ-PSEUDOCODE_MIGRATION_TOOLING"
+      - "REQ-REQUEST_EVIDENCE_ENVELOPE"
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+  detail_file: "requirements/REQ-TIED_NEW_CLIENT_ADHERENCE.yaml"
+  name: "New TIED client adherence"
+  priority: "P2"
+  status: "Implemented"
 REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION:
   category: "Functional"
   cross_references:

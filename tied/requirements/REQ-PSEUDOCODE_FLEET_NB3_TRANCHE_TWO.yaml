@@ -1,0 +1,15 @@
+REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO:
+  category: "Functional"
+  description: "NB-3 tranche two program batch: od-nb3-acceptance, wave-3 client migrations, G3 receipts, honest manifest rollup after NB-2 tranche one complete."
+  name: "Fleet NB-3 Track B tranche two"
+  priority: "P1"
+  satisfaction_criteria:
+    - criterion: "Up to five wave-3 clients fleet-migrated-client with G3 layer_c.ok per sponsor acceptance"
+      id: "SC-NB3-001"
+      metric: "working/fleet-constraint-v2/client-inventory-manifest.v1.yaml"
+  status: "Draft"
+  traceability:
+    architecture:
+      - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+    implementation:
+      - "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION"

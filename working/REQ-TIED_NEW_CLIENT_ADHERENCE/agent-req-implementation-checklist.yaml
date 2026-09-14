@@ -1,0 +1,94 @@
+citdp_module: "new_client_adherence_module"
+citdp_pointer: "working/REQ-TIED_NEW_CLIENT_ADHERENCE/NC-citdp-pre-implementation.v1.yaml"
+copy_hygiene: "Per-request tracker for new TIED client adherence (post–Track B). Orchestrator REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION remains closed."
+description: "Tracker for REQ-TIED_NEW_CLIENT_ADHERENCE — refine pass 2026-09-13."
+execution_evidence:
+  completed:
+    - "change-definition"
+    - "gate-pseudocode-validation"
+    - "risk-assessment"
+    - "test-strategy"
+    - "unit-test-red"
+    - "unit-test-green"
+    - "composition-integration"
+    - "verification-gate"
+    - "sub-close-out-evidence-sync"
+    - "traceable-commit"
+  envelope_path: "working/REQ-TIED_NEW_CLIENT_ADHERENCE/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-TIED_NEW_CLIENT_ADHERENCE"
+execution_profile:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+  proof_boundary: "stdd onboarding audit CLI and bootstrap hooks; WS-NC-3..6 full copy_files gate deferred to follow-on build."
+linked_plans:
+  - "docs/pseudocode-new-client-tied-adherence-plan.md"
+  - "docs/pseudocode-new-client-tied-adherence-runbook.md"
+  - "docs/pseudocode-constraint-v2-fleet-program.md"
+  - "docs/methodology-detail-files-bootstrap-fix-plan.md"
+parent_orchestrator: "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
+prerequisite:
+  g4_maintenance_complete: true
+  program_status: "working/fleet-constraint-v2/program-status.v1.yaml"
+  track_b_exit: "not_enrolled_fleet_migrated_count 18"
+new_client_adherence:
+  build_plan_complete_at: "2026-09-13"
+  refine_complete_at: "2026-09-13"
+  status: "implemented"
+request: "REQ-TIED_NEW_CLIENT_ADHERENCE"
+steps:
+  - disposition: "completed"
+    slug: "change-definition"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "test-strategy"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "risk-assessment"
+    tracking:
+      status: "completed"
+  - disposition: "not_applicable"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "CITDP NC pre-implementation slice depth_tier minimal; close_out_inquiry_waiver documented."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      evidence_refs:
+        - kind: "file_path"
+          path: "working/REQ-TIED_NEW_CLIENT_ADHERENCE/evidence/not-applicable-receipt.v1.json"
+      status: "not_applicable"
+  - disposition: "completed"
+    slug: "gate-pseudocode-validation"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "unit-test-red"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "unit-test-green"
+    evidence_refs:
+      - kind: "file_path"
+        path: "scripts/tied-new-client-audit.test.mjs"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "composition-integration"
+    evidence_refs:
+      - kind: "file_path"
+        path: "scripts/run-tied-new-client-audit.mjs"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "verification-gate"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "sub-close-out-evidence-sync"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "traceable-commit"
+    tracking:
+      status: "completed"

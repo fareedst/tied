@@ -1,0 +1,39 @@
+{
+  "schema_version": "od-nb3-acceptance.v1",
+  "acceptance_id": "od-nb3-tranche-two-draft",
+  "status": "draft",
+  "decided_at": null,
+  "sponsor_signoff": {
+    "name": "",
+    "rationale": ""
+  },
+  "prior_batch_complete": {
+    "batch_id": "NB-2",
+    "batch_req_token": "REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE",
+    "close_out_receipt_path": "working/fleet-constraint-v2/NB-2/gates/machine-close-out-2026-09-13.json"
+  },
+  "tranche_scope": {
+    "batch_id": "NB-3",
+    "max_clients": 5,
+    "gate_stage": "G3",
+    "enrollment_filter": "not_enrolled_phase_4"
+  },
+  "wave_3_client_ids": [
+    "1787495576",
+    "1787603099",
+    "1787416567",
+    "1787507684",
+    "1787638699"
+  ],
+  "orchestrator_reverify": false,
+  "citdp_module_pointer": "tied/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml#nb3_tranche_two_module",
+  "plan_doc_pointer": "docs/pseudocode-constraint-v2-fleet-nb3-plan.md",
+  "methodology_pin": "48d1fbb+",
+  "evidence_pointers": [
+    "working/fleet-constraint-v2/client-inventory-manifest.v1.yaml",
+    "working/fleet-constraint-v2/program-status.v1.yaml",
+    "working/fleet-constraint-v2/NB-2/gates/machine-close-out-2026-09-13.json",
+    "docs/pseudocode-constraint-v2-fleet-program.md"
+  ],
+  "notes": "Copy to od-nb3-acceptance.v1.json when sponsor sets status accepted and decided_at (ISO 8601 date-time). OD-NB3-2: exclude tied-win-diff unless listed here with rationale."
+}

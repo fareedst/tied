@@ -15,6 +15,7 @@ ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE:
     phase_5_feat_envelope_checklist_template: "templates/agent-req-checklist-feat-spawned-phase5.v1.yaml"
     phase_5_feat_envelope_policy: "working/fleet-constraint-v2/p5-g-feat-spawned-req-envelope-policy.v1.md"
     phase_5_feat_envelope_sample: "working/fleet-constraint-v2/examples/feat-spawned-req-envelope.sample.v1.json"
+    sponsor_default_proceed_policy: "docs/pseudocode-constraint-v2-fleet-program.md (Sponsor default-proceed policy section)"
   name: "Fleet pseudocode migration governance"
   phase_2_qualification_green:
     definition: "Tier A: 100% parse ok; zero new gate_mode failures vs typed_flow-off baseline at pin. Tier B (stdd): zero regression vs baseline for manifest sidecars. Receipts sampled validate against constraint-migration-receipt.v1; unknown/truncation disclosed when present."

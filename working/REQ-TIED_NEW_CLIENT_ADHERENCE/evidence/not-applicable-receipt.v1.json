@@ -1,0 +1,10 @@
+{
+  "schema_version": "not-applicable-receipt.v1",
+  "request_token": "REQ-TIED_NEW_CLIENT_ADHERENCE",
+  "artifact_kind": "adversarial_inquiry",
+  "depth_tier": "minimal",
+  "phases": ["close_out", "pre_implementation", "verification"],
+  "reason": "Adversarial inquiry not applicable at minimal depth_tier",
+  "generated_at": "2026-09-13T22:40:00.000Z",
+  "source": "nc-plan-close-out"
+}

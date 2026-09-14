@@ -1,0 +1,118 @@
+citdp_module: "nb4_tranche_final_module"
+citdp_pointer: "working/REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL/CITDP-REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL.yaml"
+copy_hygiene: "Per-request copy for NB-4 Track B final tranche. Orchestrator REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION remains closed."
+description: "Tracker for NB-4 (Track B final tranche) — build-plan complete 2026-09-13."
+execution_evidence:
+  close_out_evidence:
+    date: "2026-09-13"
+    deferred:
+      - client_id: tied-win-diff
+        reason: "OD-NB4-2 default exclude tooling row"
+    gates:
+      close_out: "working/fleet-constraint-v2/NB-4/gates/machine-close-out-2026-09-13.json"
+  completed:
+    - "change-definition"
+    - "composition-integration"
+    - "gate-pseudocode-validation"
+    - "risk-assessment"
+    - "sub-close-out-evidence-sync"
+    - "test-strategy"
+    - "traceable-commit"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
+  envelope_path: "working/REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL"
+execution_profile:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+  proof_boundary: "stdd orchestration and sponsor acceptance; fleet-migrated-client proof in client repos."
+linked_plans:
+  - "docs/pseudocode-constraint-v2-fleet-nb4-plan.md"
+  - "docs/pseudocode-constraint-v2-fleet-completion-plan.md"
+  - "docs/pseudocode-constraint-v2-fleet-program.md"
+nb4_executable_steps:
+  blocked: []
+  completed:
+    - "NB-4-A"
+    - "NB-4-B"
+    - "NB-4-C"
+    - "NB-4-D"
+    - "NB-4-E"
+    - "NB-4-F"
+    - "NB-4-G"
+    - "NB-4-H"
+    - "NB-4-R"
+  unblocked:
+    - "M-G4"
+nb4_tranche_final:
+  batch_id: "NB-4"
+  blocked_on: null
+  build_plan_phase: "complete-tranche-final"
+  gate_nb4_a:
+    acceptance_path: "working/fleet-constraint-v2/od-nb4-acceptance.v1.json"
+    allowed: true
+  machine_close_out:
+    envelope_path: "working/REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL/evidence/request-evidence-envelope.v1.json"
+    receipt: "working/fleet-constraint-v2/NB-4/gates/machine-close-out-2026-09-13.json"
+  pre_implementation_gate: "working/fleet-constraint-v2/NB-4/gates/pre_implementation-2026-09-13T21-43-07-918Z.json"
+  prerequisite_nb3_close_out: "working/fleet-constraint-v2/NB-3/gates/machine-close-out-2026-09-13.json"
+  recommended_wave_4_client_ids:
+    - "1787691672"
+    - "1787626480"
+  status: "tranche_final_complete"
+parent_batch_req: "REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO"
+parent_orchestrator: "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
+request: "REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL"
+steps:
+  - disposition: "completed"
+    slug: "change-definition"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "test-strategy"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "risk-assessment"
+    tracking:
+      status: "completed"
+  - disposition: "not_applicable"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "CITDP NB-4 minimal depth; close_out_inquiry_waiver documented."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      evidence_refs:
+        - kind: "file_path"
+          path: "working/REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL/evidence/not-applicable-receipt.v1.json"
+      status: "not_applicable"
+  - disposition: "completed"
+    slug: "gate-pseudocode-validation"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "unit-test-red"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "unit-test-green"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "composition-integration"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "verification-gate"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "sub-close-out-evidence-sync"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "traceable-commit"
+    tracking:
+      status: "completed"
+test_strategy_summary: "scripts/fleet-nb4-orchestration.test.mjs (7/7); nb1+nb2+nb3+nb4 orchestration 30/30; run-nb4-* wave pipeline; 1787626480 sidecar v2 PROC remediation."

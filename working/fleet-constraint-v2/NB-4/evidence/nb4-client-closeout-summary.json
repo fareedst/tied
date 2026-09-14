@@ -1,0 +1,18 @@
+{
+  "run_id": "nb4-tranche-final-closeout-20260913",
+  "clients": {
+    "1787691672": {
+      "verification": true,
+      "close_out": true
+    },
+    "1787626480": {
+      "verification": true,
+      "close_out": true
+    },
+    "tied-win-diff": {
+      "verification": true,
+      "close_out": true,
+      "note": "Post-NB-4 sponsor request; W-ext-tied-win-diff-1; consistency skipped (tooling client scope)"
+    }
+  }
+}

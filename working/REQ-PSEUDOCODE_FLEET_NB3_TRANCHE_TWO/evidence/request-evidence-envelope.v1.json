@@ -1,0 +1,69 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-09-14T00:05:56.297Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO",
+    "project_id": "af8451e933f573ec",
+    "depth_tier": "minimal",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [],
+  "artifacts": [
+    {
+      "kind": "checklist_tracker",
+      "schema_version": null,
+      "path": "working/REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO/agent-req-implementation-checklist.yaml",
+      "content_hash": "sha256:6c4b3d747932976150c7f9c58bfc92a1762429735f8950794dc4800adb6f5afb",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "tracker_disposition_only"
+      ]
+    },
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "working/REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO/CITDP-REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO.yaml",
+      "content_hash": "sha256:e758a5318c6cf0ff00ac05f38ca4daecfef9be1b51cce8e0e5beee3a545d36c7",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    },
+    {
+      "kind": "not_applicable_receipt",
+      "schema_version": "not-applicable-receipt.v1",
+      "path": "working/REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO/evidence/not-applicable-receipt.v1.json",
+      "content_hash": "sha256:fa1949a07aa079d065ad63af276f34cb85a6209ce4a20647daaaf7a91f9ed0c0",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "working/REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:86d02dd6e92dab31e669149282d2b9fe05cf4a263664598aa8d89f78f0cb32e7",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": "working/REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO/agent-req-implementation-checklist.yaml",
+    "tracker_hash": "sha256:6c4b3d747932976150c7f9c58bfc92a1762429735f8950794dc4800adb6f5afb",
+    "citdp_path": "working/REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO/CITDP-REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO.yaml",
+    "evidence_chain_profile_path": null
+  },
+  "gaps": []
+}

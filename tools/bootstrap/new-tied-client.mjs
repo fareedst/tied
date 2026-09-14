@@ -21,6 +21,7 @@ Options:
   --source-root PATH        TIED repo root (default: bootstrap engine repo root)
   --test-root PATH          Disposable parent (default: %USERPROFILE%\\Documents\\dev\\test)
   --skip-lint               Skip lint step
+  --skip-onboarding-audit   Skip G4 new-client onboarding audit (see TIED_SKIP_NEW_CLIENT_AUDIT)
   --skip-mcp-enable         Skip Cursor agent mcp enable
   --skip-git                Skip git init/commit
   --force-mcp-enable        Run mcp enable even when stdin is not a TTY
@@ -35,6 +36,7 @@ export function parseNewTiedClientArgs(argv) {
     sourceRoot: undefined,
     testRoot: undefined,
     skipLint: false,
+    skipOnboardingAudit: false,
     skipMcpEnable: false,
     skipGit: false,
     forceMcpEnable: false,
@@ -55,6 +57,9 @@ export function parseNewTiedClientArgs(argv) {
         break;
       case "--skip-lint":
         options.skipLint = true;
+        break;
+      case "--skip-onboarding-audit":
+        options.skipOnboardingAudit = true;
         break;
       case "--skip-mcp-enable":
         options.skipMcpEnable = true;
@@ -98,6 +103,7 @@ function main() {
   const common = {
     sourceRoot,
     skipLint: parsed.skipLint,
+    skipOnboardingAudit: parsed.skipOnboardingAudit,
     skipMcpEnable: parsed.skipMcpEnable,
     skipGit: parsed.skipGit,
     forceMcpEnable: parsed.forceMcpEnable,

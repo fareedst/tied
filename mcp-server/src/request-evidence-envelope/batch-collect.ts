@@ -23,6 +23,7 @@ export type PrivacyTier = "shareable_hashed" | "operator_local";
 
 const FORBIDDEN_SCORE_KEYS = new Set(["maturity", "score", "maturity_score", "universal_score", "ranking", "client_rank"]);
 const DEFAULT_REQUIRE_MODE: EnvelopeRequireMode = "legacy_infer";
+const STDD_DOGFOOD_REQUEST_TOKEN = "REQ-REQUEST_EVIDENCE_ENVELOPE";
 
 export type BatchInputRow = {
   project_root: string;
@@ -232,11 +233,15 @@ export function loadRowsFromEvaluationCorpus(corpusPath: string, projectRoot: st
   } catch (error) {
     throw new Error(`InvalidCorpus: ${error instanceof Error ? error.message : String(error)}`);
   }
-  if (!isRecord(parsed) || !Array.isArray(parsed.projects)) {
-    throw new Error("InvalidCorpus: projects must be an array");
+  if (!isRecord(parsed)) {
+    throw new Error("InvalidCorpus: document must be a mapping");
+  }
+  const corpusEntries = parsed.projects ?? parsed.rows;
+  if (!Array.isArray(corpusEntries)) {
+    throw new Error("InvalidCorpus: projects or rows must be an array");
   }
   const rows: BatchInputRow[] = [];
-  for (const [index, project] of parsed.projects.entries()) {
+  for (const [index, project] of corpusEntries.entries()) {
     if (!isRecord(project)) continue;
     const requestToken = typeof project.request_token === "string" ? project.request_token : undefined;
     if (!requestToken?.startsWith("REQ-")) continue;
@@ -265,6 +270,22 @@ export function loadRowsFromEvaluationCorpus(corpusPath: string, projectRoot: st
         typeof project.tied_base_path === "string"
           ? project.tied_base_path
           : path.join(path.resolve(rowProjectRoot), "tied"),
+    });
+  }
+  const resolvedProjectRoot = path.resolve(projectRoot);
+  const dogfoodArtifact = defaultEnvelopeArtifact(STDD_DOGFOOD_REQUEST_TOKEN);
+  const dogfoodEnvelopeAbs = path.join(resolvedProjectRoot, dogfoodArtifact);
+  if (
+    !rows.some((row) => row.request_token === STDD_DOGFOOD_REQUEST_TOKEN) &&
+    existsSync(dogfoodEnvelopeAbs)
+  ) {
+    rows.push({
+      project_root: resolvedProjectRoot,
+      request_token: STDD_DOGFOOD_REQUEST_TOKEN,
+      client_alias: "stdd",
+      envelope_require_mode: "require_envelope",
+      envelope_artifact: dogfoodArtifact,
+      tied_base_path: path.join(resolvedProjectRoot, "tied"),
     });
   }
   return rows;

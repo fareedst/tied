@@ -692,6 +692,16 @@ IMPL-FEAT_VIEW_STALE_DETECTION:
     requirements:
       - "REQ-FEAT_VIEW_STALENESS"
     tests: []
+IMPL-FLEET_G4_MAINTENANCE:
+  cross_references:
+    architecture:
+      - "ARCH-PSEUDOCODE_FLEET_G4_MAINTENANCE"
+      - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+    requirements:
+      - "REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE"
+  detail_file: "implementation-decisions/IMPL-FLEET_G4_MAINTENANCE.yaml"
+  name: "Fleet G4 maintenance wrapper"
+  status: "Draft"
 IMPL-GOAGENT-CHECKLIST:
   code_locations:
     files:
@@ -2182,6 +2192,16 @@ IMPL-TIED_FILES:
       - "scripts/analyze_tied_mcp_metrics_test.rb"
       - "scripts/compare_yaml_dirs_test.rb"
       - "scripts/yaml_list_sorter_test.rb"
+IMPL-TIED_NEW_CLIENT_ONBOARDING:
+  cross_references:
+    architecture:
+      - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+      - "ARCH-TIED_NEW_CLIENT_ADHERENCE"
+    requirements:
+      - "REQ-TIED_NEW_CLIENT_ADHERENCE"
+  detail_file: "implementation-decisions/IMPL-TIED_NEW_CLIENT_ONBOARDING.yaml"
+  name: "New TIED client onboarding audit"
+  status: "Active"
 IMPL-TIED_PROJECT_IDENTITY:
   cross_references:
     - "ARCH-TIED_PROJECT_IDENTITY"

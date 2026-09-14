@@ -1,0 +1,15 @@
+REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL:
+  category: "Functional"
+  description: "NB-4 final tranche program batch: od-nb4-acceptance, wave-4 client migrations, G3 receipts, manifest rollup to zero header-only not_enrolled rows after NB-3 tranche two complete."
+  name: "Fleet NB-4 Track B final tranche"
+  priority: "P1"
+  satisfaction_criteria:
+    - criterion: "All accepted wave-4 clients fleet-migrated-client with G3 layer_c.ok per sponsor acceptance; zero header-only-v2 not_enrolled_phase_4 rows unless documented waiver"
+      id: "SC-NB4-001"
+      metric: "working/fleet-constraint-v2/client-inventory-manifest.v1.yaml"
+  status: "Draft"
+  traceability:
+    architecture:
+      - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+    implementation:
+      - "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION"

@@ -712,6 +712,19 @@ ARCH-TIED_FIDELITY_RESEARCH:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_NEW_CLIENT_ADHERENCE:
+  cross_references:
+    - "IMPL-TIED_NEW_CLIENT_ONBOARDING"
+    - "REQ-TIED_NEW_CLIENT_ADHERENCE"
+  description: "Proof boundaries for client-root audit vs fleet G4 and per-REQ gates"
+  detail_file: "architecture-decisions/ARCH-TIED_NEW_CLIENT_ADHERENCE.yaml"
+  metadata:
+    last_updated: "2026-09-13"
+    registered: "2026-09-13"
+  name: "New TIED client adherence architecture"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_PROJECT_IDENTITY:
   cross_references:
     - "IMPL-TIED_PROJECT_IDENTITY"
@@ -1691,6 +1704,19 @@ IMPL-TIED_FILES:
     last_updated: "2026-02-08T00:00:00.000Z"
     registered: "2025-12-18T00:00:00.000Z"
   name: "TIED File Creation"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-TIED_NEW_CLIENT_ONBOARDING:
+  cross_references:
+    - "ARCH-TIED_NEW_CLIENT_ADHERENCE"
+    - "REQ-TIED_NEW_CLIENT_ADHERENCE"
+  description: "CLI composing G4 grammar audit and tied-new-client-audit.v1 report"
+  detail_file: "implementation-decisions/IMPL-TIED_NEW_CLIENT_ONBOARDING.yaml"
+  metadata:
+    last_updated: "2026-09-13"
+    registered: "2026-09-13"
+  name: "New TIED client onboarding audit"
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
@@ -2830,6 +2856,19 @@ REQ-TIED_FIDELITY_RESEARCH:
     last_updated: "2026-08-09"
     registered: "2026-08-09"
   name: "TIED Fidelity Research"
+  source_index: "requirements.yaml"
+  status: "Active"
+  type: "REQ"
+REQ-TIED_NEW_CLIENT_ADHERENCE:
+  cross_references:
+    - "ARCH-TIED_NEW_CLIENT_ADHERENCE"
+    - "IMPL-TIED_NEW_CLIENT_ONBOARDING"
+  description: "Post–Track B bootstrap and audit program for new TIED clients"
+  detail_file: "requirements/REQ-TIED_NEW_CLIENT_ADHERENCE.yaml"
+  metadata:
+    last_updated: "2026-09-13"
+    registered: "2026-09-13"
+  name: "New TIED client adherence"
   source_index: "requirements.yaml"
   status: "Active"
   type: "REQ"

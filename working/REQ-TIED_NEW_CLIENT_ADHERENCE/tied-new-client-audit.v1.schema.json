@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tied-new-client-audit.v1",
+  "title": "TIED new client onboarding audit report",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "generated_at",
+    "client_root",
+    "ok",
+    "gate_stage",
+    "with_consistency",
+    "proof_boundary",
+    "grammar_audit"
+  ],
+  "properties": {
+    "schema_version": { "const": "tied-new-client-audit.v1" },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "client_root": { "type": "string" },
+    "ok": { "type": "boolean" },
+    "gate_stage": { "type": "string" },
+    "with_consistency": { "type": "boolean" },
+    "proof_boundary": { "type": "string" },
+    "consistency": {
+      "type": "object",
+      "properties": {
+        "ok": { "type": "boolean" },
+        "skipped": { "type": "boolean" }
+      },
+      "additionalProperties": true
+    },
+    "grammar_audit": { "type": "object" },
+    "audit_command": { "type": "string" }
+  },
+  "additionalProperties": false
+}

@@ -48,7 +48,7 @@ Contract:
   - TERMINATION: total
 - PROCEDURE: LOAD_BATCH_ROWS
   - 1. Validate schema_version
-  - 2. Map corpus projects[] with request_token to batch rows; skip profile-only rows
+  - 2. Map corpus rows[] or projects[] with request_token to batch rows; skip profile-only rows; when project_root hosts REQ-REQUEST_EVIDENCE_ENVELOPE envelope file and corpus omits that row, append stdd dogfood batch row
   - 3. Default envelope_artifact to working/{REQ-TOKEN}/evidence/request-evidence-envelope.v1.json
 
 ## COMPUTE_ARTIFACT_COVERAGE

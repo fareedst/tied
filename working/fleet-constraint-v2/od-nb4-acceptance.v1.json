@@ -1,0 +1,39 @@
+{
+  "schema_version": "od-nb4-acceptance.v1",
+  "acceptance_id": "od-nb4-tranche-final-20260913",
+  "status": "accepted",
+  "decided_at": "2026-09-13T00:00:00-07:00",
+  "sponsor_signoff": {
+    "name": "Fareed Stevenson",
+    "rationale": "Authorize NB-4 Track B final tranche per docs/pseudocode-constraint-v2-fleet-nb4-plan.md and sponsor default-proceed policy after NB-3 machine close-out (REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO). Scope: default two-client roster 1787691672 (5 sidecars) and 1787626480 (6 sidecars); exclude tied-win-diff (OD-NB4-2); G3 waves; client-owned REQ-PSEUDOCODE_MIGRATION_*; manifest rollup only after receipts; Track B exit when zero header-only not_enrolled rows. orchestrator_reverify false. Batch REQ: REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL."
+  },
+  "prior_batch_complete": {
+    "batch_id": "NB-3",
+    "batch_req_token": "REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO",
+    "close_out_receipt_path": "working/fleet-constraint-v2/NB-3/gates/machine-close-out-2026-09-13.json"
+  },
+  "tranche_scope": {
+    "batch_id": "NB-4",
+    "max_clients": 5,
+    "gate_stage": "G3",
+    "enrollment_filter": "not_enrolled_phase_4"
+  },
+  "wave_4_client_ids": [
+    "1787691672",
+    "1787626480"
+  ],
+  "orchestrator_reverify": false,
+  "citdp_module_pointer": "tied/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml#nb4_tranche_final_module",
+  "plan_doc_pointer": "docs/pseudocode-constraint-v2-fleet-nb4-plan.md",
+  "methodology_pin": "48d1fbb+",
+  "evidence_pointers": [
+    "working/fleet-constraint-v2/client-inventory-manifest.v1.yaml",
+    "working/fleet-constraint-v2/program-status.v1.yaml",
+    "working/fleet-constraint-v2/NB-3/gates/machine-close-out-2026-09-13.json",
+    "docs/pseudocode-constraint-v2-fleet-completion-plan.md",
+    "docs/pseudocode-constraint-v2-fleet-program.md",
+    "working/fleet-constraint-v2/NB-4-tranche-final-agent-req-implementation-checklist.yaml",
+    "tied/requirements/REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL.yaml"
+  ],
+  "notes": "Default-proceed per program policy (2026-09-13). OD-NB4-1 authorize NB-4; OD-NB4-2 exclude tied-win-diff; OD-NB4-3 include 1787626480 with 1787691672; OD-NB4-4 no override. Authorized NB-4-B..H via /build-plan."
+}

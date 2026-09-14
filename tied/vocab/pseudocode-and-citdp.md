@@ -103,6 +103,9 @@ Checklist **`sub-vocabulary-sync`** uses **domain** vocab. Do not conflate with 
 | **constraint-ready-v2 client sidecar** | advisory constraint | v2 + contract precision + typed_flow; `constraint_flow` advisory with disclosed unknowns |
 | **constraint-enforced-v2 client sidecar** | blocking constraint | `constraint_flow: true` with `constraint_gate_errors` per fleet policy on annotated procedures |
 | **fleet-migrated-client** | migration complete (client) | All active sidecars at constraint-enforced-v2 or time-bounded waiver; auditable evidence—not header audit alone |
+| **onboarding-adherent** | bootstrap compliant (client) | Layer A proof: `copy_files.sh` + client-root G4 audit (`tied-new-client-audit.v1` ok); **does not** imply **fleet-migrated-client** or full IMPL constraint migration |
+| **client-root G4 audit** | new client audit (alone) | `runGrammarV2DefaultAudit(clientRoot, { gateStage: 'G4' })` composed by onboarding CLI ([REQ-TIED_NEW_CLIENT_ADHERENCE](../requirements/REQ-TIED_NEW_CLIENT_ADHERENCE.yaml)) |
+| **new-client adherence program** | post-fleet onboarding (alone) | [`docs/pseudocode-new-client-tied-adherence-plan.md`](../../docs/pseudocode-new-client-tied-adherence-plan.md) + WS-NC-1..6; distinct from NB tranches and G4 maintenance |
 | **migration waiver** | constraint exception | Owner, reason, expiry, and next migration action for procedures/clients not yet enforceable |
 | **annotation profile** | constraint tier target | Per-procedure target: contract-only, refinement, summary, alias/mutation, immutability |
 | **constraint migration receipt** | migration receipt (alone) | Machine-readable Layer A/B/C + constraint_flow snapshot for one sidecar/fixture run; schema `constraint-migration-receipt.v1` ([Phase 2 plan](../../docs/pseudocode-constraint-v2-fleet-migration-phase-2-plan.md)) |
@@ -363,6 +366,85 @@ Prefer in `essence_pseudocode` (not domain terms):
 
 **VALIDATE (2026-09-13 NB-2 refine):** Terms match NB-2 plan, od-nb2 schema/template, CITDP `nb2_tranche_one_module`, and tracker `nb2_executable_steps`.
 
+## Sponsor default-proceed policy — RECORD (2026-09-13)
+
+**Touchpoint:** sub-vocabulary-sync RECORD; applies to majority of planned development, fleet Track B operational detail in program doc.
+
+| Term / artifact | Preferred definition |
+|-----------------|----------------------|
+| **sponsor default-proceed policy** | Proceed on plan/program **defaults** without sponsor clarification when reversible or cheap to unwind; work artifacts (plans, od-* acceptance, CITDP, trackers, receipts, tests) suffice to **reconsider and reimplement**; ask sponsor only for irreversible or costly choices with linked references |
+| **reversible sponsor choice (fleet)** | Acceptance JSON edits, roster overrides before client migration, dry-run G3, tranche ≤5 within schema |
+| **costly sponsor choice (fleet)** | Client migration close_out, manifest fleet-migrated without receipts, orchestrator re-verify, tranche >5, durable waivers |
+
+**Canonical:** [`docs/pseudocode-constraint-v2-fleet-program.md`](../../docs/pseudocode-constraint-v2-fleet-program.md) § Sponsor default-proceed policy · [`tied/docs/ai-principles.md`](../docs/ai-principles.md) § Sponsor default-proceed (planned development).
+
+## NB-3 Track B tranche two — RECORD (2026-09-13 refine)
+
+**Touchpoint:** sub-vocabulary-sync RECORD at NB-3 refine pass (after NB-2 tranche one complete).
+
+| Term / artifact | Preferred definition |
+|-----------------|----------------------|
+| **Track B tranche two** | Synonym **NB-3** — third sponsor-gated batch; max five remaining `not_enrolled_phase_4` **header-only-v2** clients |
+| **od-nb3-acceptance JSON** | Sponsor gate at `working/fleet-constraint-v2/od-nb3-acceptance.v1.json`; schema `od-nb3-acceptance.v1.schema.json`; includes `prior_batch_complete` (NB-2) and `wave_3_client_ids` |
+| **wave-3 client selection** | Manifest-driven among eight remaining header-only rows; NB-1/NB-2 fleet-migrated IDs ineligible; default exclude `tied-win-diff` (OD-NB3-2) |
+| **nb3_tranche_two_module** | CITDP module on closed orchestrator CITDP; batch REQ `REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO` |
+| **OD-NB3-1..4** | Plan §1.5 open decisions; **default-proceed** applies per sponsor default-proceed policy unless costly/irreversible |
+| **NB-3-C..E** | Same client-repo lifecycle as NB-2; build-plan extends `fleet-nb1-orchestration.mjs` and `run-nb2-*` parity (`run-nb3-*`, `fleet-nb3-orchestration.test.mjs`) |
+| **tied-win-diff** | Non-enrolled qualification clone; **not critical for TIED development** — see **fleet tied-win-diff bypass** |
+
+**VALIDATE (2026-09-13 NB-3 refine):** Terms match NB-3 plan, od-nb3 schema/template, CITDP `nb3_tranche_two_module`, and tracker `nb3_executable_steps`.
+
+## NB-4 Track B final tranche — RECORD (2026-09-13 refine)
+
+**Touchpoint:** sub-vocabulary-sync RECORD at NB-4 refine pass (after NB-3 tranche two complete).
+
+| Term / artifact | Preferred definition |
+|-----------------|----------------------|
+| **Track B tranche final** | Synonym **NB-4** — fourth sponsor-gated batch; all remaining `not_enrolled_phase_4` **header-only-v2** clients (max three today) |
+| **od-nb4-acceptance JSON** | Sponsor gate at `working/fleet-constraint-v2/od-nb4-acceptance.v1.json`; schema `od-nb4-acceptance.v1.schema.json`; includes `prior_batch_complete` (NB-3) and `wave_4_client_ids` |
+| **wave-4 client selection** | Manifest-driven among three remaining header-only rows; NB-1..NB-3 fleet-migrated IDs ineligible; default exclude `tied-win-diff` (OD-NB4-2) |
+| **nb4_tranche_final_module** | CITDP module on closed orchestrator CITDP; batch REQ `REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL` |
+| **Track B program exit** | Zero `header-only-v2` `not_enrolled_phase_4` manifest rows after NB-4-G with receipts; **18/18** not_enrolled **fleet-migrated-client** (or waiver) |
+| **OD-NB4-1..4** | NB-4 plan §1.5; default-proceed per program sponsor default-proceed policy unless costly/irreversible |
+| **NB-4-C..H** | Client-repo lifecycle + build-plan `run-nb4-*` / `fleet-nb4-orchestration.test.mjs` parity |
+
+**VALIDATE (2026-09-13 NB-4 refine):** Terms match NB-4 plan, od-nb4 schema/template, CITDP `nb4_tranche_final_module`, and tracker `nb4_executable_steps`.
+
+## tied-win-diff qualification client — RECORD (2026-09-13 post-NB-4)
+
+**Touchpoint:** RECORD at sponsor direction — **`tied-win-diff` is not on the critical path for stdd TIED product development** (methodology, MCP, analyzer, copy_files.sh). It is a **local qualification / diff harness clone** listed in fleet inventory for coverage only.
+
+| Term | Preferred definition |
+|------|----------------------|
+| **tied-win-diff** | Non-enrolled manifest row; repo under dev test clones; **not** a release or dogfood client for TIED core work |
+| **fleet tied-win-diff bypass** | Documented relaxations for inventory completeness without treating this clone as IMPL source-of-truth |
+
+**Fleet tied-win-diff bypass (do not infer product requirements from this row):**
+
+| Bypass | Rationale |
+|--------|-----------|
+| Default **exclude** from NB-2..NB-4 accepted rosters (OD-NB2-2, OD-NB3-2, OD-NB4-2) | Low value vs cost; not critical for TIED development |
+| Post-NB-4 **one-off** wave `W-ext-tied-win-diff-1` without reopening orchestrator REQ | Sponsor inventory-only migration; acceptance JSON still records OD-NB4-2 exclude historically |
+| **G3 sidecar stub** (`IMPL-TIED_FILES` compact v2 `PROC`) | Passes fleet constraint receipt; pre-fleet body archived under client `working/…/evidence/*.pre-fleet-g3.v1.md` — **no** obligation to restore full essence or LEAP to stdd canonical `IMPL-TIED_FILES` |
+| Client close-out **`skip_tied_validate_consistency`** in `run-nb4-client-closeout.mjs` | Tooling clone has many IMPL rows without in-YAML pseudo-code; project-wide consistency `ok: false` is unrelated to fleet-scoped wave proof |
+| **Outside G4 `enrolled_track_regression`** | Continuous G4 checks five **enrolled** repos; tied-win-diff proof is manifest + wave receipt + client gates, not enrolled regression |
+
+**VALIDATE:** Aligns with `docs/pseudocode-constraint-v2-fleet-program.md` § Post-NB-4 — tied-win-diff; manifest notes; `program-status.v1.yaml` `tied_win_diff_*` fields.
+
+## G4 maintenance — RECORD (2026-09-13 refine)
+
+**Touchpoint:** RECORD at `/refine-plan` for [REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE](../requirements/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE.yaml) (post–Track B ops).
+
+| Term / artifact | Preferred definition |
+|-----------------|----------------------|
+| **fleet G4 maintenance** | Local runbook ops feature; wrapper `run-fleet-g4-maintenance.mjs` (build-plan) composes G4 checks + tests + program-status refresh |
+| **G4 maintenance run** | Single operator pass producing `g4-maintenance/last-run.v1.json` and updated `last_g4_ci_*` |
+| **g4_maintenance_module** | CITDP module on closed orchestrator CITDP + standalone `CITDP-REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE.yaml` |
+| **OD-G4M-1** | On failure set `last_g4_ci_ok: false`; never set true when `g4_report.ok` is false |
+| **OD-G4M-2** | Enforcement surface **local runbook only** — no GitHub Actions in scope |
+
+**Prerequisite:** Track B exit — `not_enrolled_fleet_migrated_count: 18` in program-status.
+
 ---
 
 ## Alphabetical index
@@ -381,10 +463,11 @@ Prefer in `essence_pseudocode` (not domain terms):
 | pilot migration wave | Preferred terms |
 | fleet constraint v2 migration | Preferred terms |
 | qualification green | Preferred terms |
-| fleet-migrated-client | Preferred terms |
+| fleet tied-win-diff bypass | tied-win-diff qualification client — RECORD |
 | header-only-v2 client sidecar | Preferred terms |
 | legacy-v1 client sidecar | Preferred terms |
 | migration waiver | Preferred terms |
+| sponsor default-proceed policy | Sponsor default-proceed policy — RECORD |
 | agent-control layer | Preferred terms |
 | block lead comment | Preferred terms |
 | block-lead bracket format | Preferred terms |

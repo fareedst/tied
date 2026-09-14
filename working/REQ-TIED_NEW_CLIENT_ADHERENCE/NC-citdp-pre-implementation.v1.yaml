@@ -1,0 +1,43 @@
+CITDP-NC-ADHERENCE:
+  completion_criteria:
+    activation:
+      phase: "pre_implementation"
+      request_token: "REQ-TIED_NEW_CLIENT_ADHERENCE"
+      run_id: "tied-new-client-adherence-refine-20260913"
+  linked_plans:
+    - "docs/pseudocode-new-client-tied-adherence-plan.md"
+    - "docs/pseudocode-constraint-v2-fleet-program.md"
+    - "docs/pseudocode-constraint-v2-fleet-completion-plan.md"
+    - "docs/methodology-detail-files-bootstrap-fix-plan.md"
+  parent_citdp_pointer: "tied/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml"
+  parent_module: "new_client_adherence_module"
+  record_identity:
+    change_request_id: "REQ-TIED_NEW_CLIENT_ADHERENCE"
+    citdp_id: "CITDP-NC-ADHERENCE"
+    status: "draft"
+    title: "New TIED client adherence — pre-implementation gate slice"
+    updated_at: "2026-09-13"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: "Minimal depth; integrated inquiry not required for refine."
+      counterexamples:
+        - "Client-root G4 audit cited as fleet-migrated-client"
+        - "G4 maintenance green cited as proof specific external client compliant"
+        - "FEAT envelope validate alone cited as bootstrap Layer A pass"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Manifest row added without client-root audit receipt"
+        - "copy_files.sh exit 0 but methodology detail paths unresolved"
+      evidence_references:
+        - "docs/pseudocode-new-client-tied-adherence-plan.md"
+        - "working/fleet-constraint-v2/program-status.v1.yaml"
+        - "working/REQ-TIED_NEW_CLIENT_ADHERENCE/tied-new-client-audit.v1.schema.json"
+        - "scripts/lib/audit-grammar-v2-default.mjs"
+      falsification_questions:
+        - "Does onboarding-adherent imply fleet-migrated-client?"
+        - "Does G4 stdd maintenance prove arbitrary client Layer B/C on all IMPLs?"
+        - "Can tied_verify promote REQ without checklist gate receipts?"
+      gate_policy: "advisory"
+      profile_depth: "minimal"
+      rationale: "Post–Track B program; proof boundaries mirror plan assert matrix."

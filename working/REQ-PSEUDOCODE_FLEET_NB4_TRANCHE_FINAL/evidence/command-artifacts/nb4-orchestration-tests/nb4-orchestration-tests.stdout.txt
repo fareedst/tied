@@ -1,0 +1,56 @@
+▶ RECORD_OD_P5_2_ACCEPTANCE [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION]
+  ✔ accepts valid accepted fixture with policy POST conditions (0.980833ms)
+  ✔ rejects draft status (NB-1-A gate) (0.101667ms)
+  ✔ rejects orchestrator_reverify true (0.080375ms)
+  ✔ rejects wave list over tranche cap (0.06225ms)
+  ✔ evaluateNb1AcceptanceGate fails when signed acceptance file absent (0.058917ms)
+✔ RECORD_OD_P5_2_ACCEPTANCE [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION] (1.805834ms)
+▶ SELECT_NB1_WAVE_ONE_CLIENTS [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION]
+  ✔ auto-selects five low-burden not_enrolled header-only clients from live manifest (14.493375ms)
+  ✔ honors override_client_ids with enrollment filter (9.093667ms)
+  ✔ rejects override client not in manifest (8.816ms)
+✔ SELECT_NB1_WAVE_ONE_CLIENTS [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION] (32.532625ms)
+▶ fleet-g3-wave harness contract (composition, dry-run)
+  ✔ run-harness.sh fleet-g3-wave forwards --wave-id and --dry-run (2152.771791ms)
+✔ fleet-g3-wave harness contract (composition, dry-run) (2152.856459ms)
+▶ RECORD_NB2_ACCEPTANCE [REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE]
+  ✔ accepts valid accepted fixture with policy POST conditions (0.990792ms)
+  ✔ rejects draft status (NB-2-A gate) (0.087333ms)
+  ✔ rejects prior_batch_complete batch_id other than NB-1 (0.063542ms)
+  ✔ evaluateNb2AcceptanceGate passes for sponsor acceptance on disk (0.125709ms)
+✔ RECORD_NB2_ACCEPTANCE [REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE] (1.757041ms)
+▶ SELECT_NB2_WAVE_TWO_CLIENTS [REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE]
+  ✔ auto-selects five lowest-burden header-only clients from post-NB-1 fixture (14.641875ms)
+  ✔ rejects NB-1 fleet-migrated client IDs in override (already_migrated) (8.967084ms)
+  ✔ honors wave_2 override when rows remain header-only-v2 (8.77125ms)
+✔ SELECT_NB2_WAVE_TWO_CLIENTS [REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE] (32.544375ms)
+▶ RECORD_NB3_ACCEPTANCE [REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO]
+  ✔ accepts valid accepted fixture with policy POST conditions (1.051917ms)
+  ✔ rejects draft status (NB-3-A gate) (0.0915ms)
+  ✔ rejects prior_batch_complete batch_id other than NB-2 (0.068375ms)
+  ✔ evaluateNb3AcceptanceGate passes for sponsor acceptance on disk (0.11775ms)
+✔ RECORD_NB3_ACCEPTANCE [REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO] (1.914417ms)
+▶ SELECT_NB3_WAVE_THREE_CLIENTS [REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO]
+  ✔ auto-selects five lowest-burden header-only clients from post-NB-2 fixture (15.138792ms)
+  ✔ rejects NB-2 fleet-migrated client IDs in override (already_migrated) (8.916167ms)
+  ✔ honors wave_3 override when rows remain header-only-v2 (8.766042ms)
+✔ SELECT_NB3_WAVE_THREE_CLIENTS [REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO] (32.94675ms)
+▶ RECORD_NB4_ACCEPTANCE [REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL]
+  ✔ accepts valid accepted fixture with policy POST conditions (0.983708ms)
+  ✔ rejects draft status (NB-4-A gate) (0.088458ms)
+  ✔ rejects prior_batch_complete batch_id other than NB-3 (0.06375ms)
+  ✔ evaluateNb4AcceptanceGate passes for sponsor acceptance on disk (0.102584ms)
+✔ RECORD_NB4_ACCEPTANCE [REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL] (1.723959ms)
+▶ SELECT_NB4_WAVE_FOUR_CLIENTS [REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL]
+  ✔ auto-selects default two clients excluding tied-win-diff from post-NB-3 fixture (10.031292ms)
+  ✔ rejects NB-3 fleet-migrated client IDs in override (already_migrated) (7.813916ms)
+  ✔ honors wave_4 override when rows remain header-only-v2 (6.866167ms)
+✔ SELECT_NB4_WAVE_FOUR_CLIENTS [REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL] (24.833ms)
+ℹ tests 30
+ℹ suites 9
+ℹ pass 30
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2262.813458

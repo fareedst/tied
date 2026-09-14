@@ -1,0 +1,10 @@
+{
+  "schema_version": "not-applicable-receipt.v1",
+  "request_token": "REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO",
+  "artifact_kind": "adversarial_inquiry",
+  "depth_tier": "minimal",
+  "phases": ["close_out", "pre_implementation", "verification"],
+  "reason": "Adversarial inquiry not applicable at minimal depth_tier",
+  "generated_at": "2026-09-13T21:25:00.000Z",
+  "source": "nb3-build-plan-close-out"
+}

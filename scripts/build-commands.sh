@@ -133,6 +133,24 @@ alias verify-agentstream-parity=verify_agentstream_parity
 
 # --- Feature-orchestration smoke clients ---
 
+# [REQ-TIED_NEW_CLIENT_ADHERENCE] [REQ-TIED_SETUP] Layer A G4 audit after bootstrap (fail closed).
+_run_new_client_onboarding_audit() {
+  local source_root="$1"
+  local client_dir="$2"
+  local report_path="${client_dir}/working/tied-new-client-audit.v1.json"
+
+  if [[ "${TIED_SKIP_NEW_CLIENT_AUDIT:-}" == "1" || "${TIED_SKIP_NEW_CLIENT_AUDIT:-}" == "true" ]]; then
+    echo "DEBUG: skipping new-client onboarding audit (TIED_SKIP_NEW_CLIENT_AUDIT)"
+    return 0
+  fi
+
+  mkdir -p "${client_dir}/working"
+  echo_exec node "${source_root}/scripts/run-tied-new-client-audit.mjs" \
+    --client-root "${client_dir}" \
+    --json-out "${report_path}"
+  printf 'Onboarding audit (onboarding-adherent): %s\n' "$report_path"
+}
+
 _new_tied_test_client() {
   local client_dir="$1"
   local source_root="$2"
@@ -142,6 +160,7 @@ _new_tied_test_client() {
   cd -- "$client_dir"
   "${source_root}/copy_files.sh"
   "${source_root}/scripts/lint_yaml.sh" -F tied
+  _run_new_client_onboarding_audit "$source_root" "$client_dir"
   agent mcp enable tied-yaml
   git init
   git add .
@@ -369,6 +388,9 @@ _how_smoke() {
 Feature-orchestration smoke (disposable clients)
   new-tied-client DIR [SOURCE]   copy_files.sh + lint + agent mcp enable + git init
   test-new-tied-client           same under $TIED_TEST_ROOT/<timestamp>
+                                 copy_files + lint + G4 onboarding audit
+                                 (tied-new-client-audit.v1.json) + mcp + git
+                                 skip audit: TIED_SKIP_NEW_CLIENT_AUDIT=1
                                  default test root: ~/Documents/dev/test
   test-tied-feature-onboarding CLIENT_DIR
   test-tied-feature-lifecycle CLIENT_DIR
@@ -414,6 +436,7 @@ Environment (this script sets TIED_MCP_COLLECT_METRICS=1 on source)
   TIED_MCP_BIN               path to mcp-server/dist/index.js
   TIED_SOURCE_ROOT           TIED repo root for new-tied-client / test-new-tied-client
   TIED_TEST_ROOT             parent dir for test-new-tied-client (default ~/Documents/dev/test)
+  TIED_SKIP_NEW_CLIENT_AUDIT set to 1 to skip G4 onboarding audit in bootstrap smoke
   AGENTSTREAM                prebuilt agentstream binary for batch drivers
   AGENTSTREAM_TIED_MCP_PREFLIGHT=1   opt-in MCP preflight before live agent turns
 

@@ -100,7 +100,13 @@ This acknowledgment confirms that the AI agent has:
     - This is **distinct** from the IMPL grammar "preferred vocabulary" (INPUT/OUTPUT/DATA/PRE/POST/EFFECTS keywords in `implementation-decisions.md`).
     - Standards: `tied/docs/vocabulary-index-analysis-and-standards.md`; client routing handoff: `tied/vocab/routing.md`; methodology routing: `tied/methodology/vocab/routing.md`; full indexes (on-demand): the matching `domain-references.md` in each layer; full process: `tied/docs/processes.md` § `[PROC-VOCABULARY_INDEX]`.
 
-14. **Adversarial Inquiry Activation** `[REQ-TIED_ADVERSARIAL_INQUIRY]`
+14. **Sponsor default-proceed (planned development)**
+    - For the **majority of planned work** (refine, plan-new-feature, build-plan slices bounded by an approved plan/CITDP), **proceed on documented defaults** without sponsor Q&A when the decision is **reversible or inexpensive to unwind** and consistent with existing REQ/ARCH/IMPL and prior sponsor artifacts.
+    - **Reconsideration:** Plans, acceptance records, trackers, gate receipts, tests, and implementation commits are the audit trail; they are **sufficient to reverse direction and reimplement** (amend acceptance, withdraw a batch, LEAP, re-run gates) without re-deriving intent from memory.
+    - **Ask the sponsor only** when the default would be **permanent or costly to explore after the fact**—with plain-language description, recommended default, and links to plan sections, TIED tokens, and evidence paths.
+    - **Fleet Track B batches:** concrete proceed/stop boundaries live in [`docs/pseudocode-constraint-v2-fleet-program.md`](../../docs/pseudocode-constraint-v2-fleet-program.md) § Sponsor default-proceed policy; vocabulary term **sponsor default-proceed policy** in `tied/vocab/pseudocode-and-citdp.md`.
+
+15. **Adversarial Inquiry Activation** `[REQ-TIED_ADVERSARIAL_INQUIRY]`
     - When this requirement applies, or a behavior-changing CITDP uses `depth_tier: minimal` or higher, PRELOAD `tied/vocab/fidelity-research.md` and `tied/vocab/quality-assurance.md`.
     - At `risk-assessment`, record `depth_tier` independently from research profile, assurance profile, and gate policy.
     - At `integrated` depth, CALL `sub-adversarial-inquiry-pass` at structural, pre-RED, and verification phases; invoke `tied_adversarial_inquiry_run` with explicit request scope and advisory policy when MCP is available.

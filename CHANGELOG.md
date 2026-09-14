@@ -9,6 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Fleet constraint v2 — Track B exit NB-3/NB-4 + G4 maintenance + new-client adherence** —
+  NB-3 tranche two ([REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO]): sponsor `od-nb3-acceptance.v1.json`, wave-3
+  orchestration (`run-nb3-*`, `scripts/fleet-nb3-orchestration.test.mjs` 7/7), machine close-out under
+  `working/fleet-constraint-v2/NB-3/`. NB-4 tranche final ([REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL]): two-client
+  wave, `od-nb4-acceptance.v1.json`, Track B program exit (18/18 `not_enrolled` **fleet-migrated-client**);
+  `tied-win-diff` fleet bypass documented in [`program-status.v1.yaml`](working/fleet-constraint-v2/program-status.v1.yaml).
+  Continuous G4 ([REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE]): [`scripts/run-fleet-g4-maintenance.mjs`](scripts/run-fleet-g4-maintenance.mjs),
+  runbook, receipt schema (`working/fleet-constraint-v2/g4-maintenance/last-run.v1.json`), tests 6/6.
+  New TIED client audit slice ([REQ-TIED_NEW_CLIENT_ADHERENCE]): `scripts/run-tied-new-client-audit.mjs`,
+  bootstrap pipeline hooks, plan/runbook under `docs/pseudocode-new-client-tied-adherence-*.md` (WS-NC-3..6 deferred).
+  Plans: [`docs/pseudocode-constraint-v2-fleet-completion-plan.md`](docs/pseudocode-constraint-v2-fleet-completion-plan.md),
+  [`docs/pseudocode-constraint-v2-fleet-nb3-plan.md`](docs/pseudocode-constraint-v2-fleet-nb3-plan.md),
+  [`docs/pseudocode-constraint-v2-fleet-nb4-plan.md`](docs/pseudocode-constraint-v2-fleet-nb4-plan.md).
+  Close-out: `run-close-out-gates.mjs` `close_out` **allowed** and envelope blocking gaps **0** on all four REQs;
+  `tied_validate_consistency` **ok**. Orchestrator [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION] remains **closed**.
+
 - **Fleet constraint v2 — NB-2 Track B tranche one ([REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE])** —
   Sponsor gate `od-nb2-acceptance.v1.json` (accepted), wave-2 selection for five lowest-burden
   `not_enrolled_phase_4` clients, NB-2 orchestration exports in `scripts/lib/fleet-nb1-orchestration.mjs`,
@@ -20,7 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `tied_validate_consistency` ok. Evidence:
   `working/fleet-constraint-v2/NB-2/evidence/nb2-client-closeout-summary.json`,
   `working/REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE/evidence/command-artifacts/nb2-orchestration-tests/`.
-  **Deferred:** NB-3 next tranche; OD-NB2-2/3 open decisions on CITDP slice.
+  **Follow-on:** NB-3/NB-4 completed 2026-09-13 (see entry above); OD-NB2-2/3 open decisions on CITDP slice remain historical.
 
 ### Changed
 

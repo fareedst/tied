@@ -1,0 +1,111 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-09-14T00:08:07.511Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE",
+    "project_id": "af8451e933f573ec",
+    "depth_tier": "minimal",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [],
+  "artifacts": [
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "working/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE/gates/close_out-2026-09-14T00-08-01-200Z.json",
+      "content_hash": "sha256:1a3a6d4bc81b81b59f7612c97babcbf641501764730e9988c47cd6b817386f68",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "working/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE/gates/pre_implementation-2026-09-14T00-08-01-200Z.json",
+      "content_hash": "sha256:a7a250d763ae2677cc1fd7ec1b6cda4cdafd8a313900032fafa5238b8c81c34d",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "working/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE/gates/verification-2026-09-14T00-08-01-200Z.json",
+      "content_hash": "sha256:1e36250f438cbfca44e0c638fd7f28933725c6fe4407f6812979287dd50ea60e",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_tracker",
+      "schema_version": null,
+      "path": "working/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE/agent-req-implementation-checklist.yaml",
+      "content_hash": "sha256:cbaf9877adc8d093a006a7db23c209df2b8ae61597c5e7999d6acb1e08ca1df3",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "tracker_disposition_only"
+      ]
+    },
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "tied/citdp/CITDP-REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE.yaml",
+      "content_hash": "sha256:2ce732a148a73cc8e56dbc39ac294c6cd84b160b801c49cd9cda8e2d711bd622",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    },
+    {
+      "kind": "not_applicable_receipt",
+      "schema_version": "not-applicable-receipt.v1",
+      "path": "working/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE/evidence/not-applicable-receipt.v1.json",
+      "content_hash": "sha256:823583b90f1c246269964ca3c5582c520b9285d8231033edef00fd3ac67f74aa",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": null,
+      "path": "working/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:02bfce7c1756c248d40d4700d90a413c577aae15e7ce43301926add81be2643f",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": "working/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE/agent-req-implementation-checklist.yaml",
+    "tracker_hash": "sha256:cbaf9877adc8d093a006a7db23c209df2b8ae61597c5e7999d6acb1e08ca1df3",
+    "citdp_path": null,
+    "evidence_chain_profile_path": null
+  },
+  "gaps": [
+    {
+      "code": "evidence_stale",
+      "artifact_kind": "checklist_gate_receipt",
+      "phase": null,
+      "detail": "Envelope tracker_hash sha256:cbaf9877adc8d093a006a7db23c209df2b8ae61597c5e7999d6acb1e08ca1df3 differs from latest gate receipt sha256:b195fe2c6abb3e8aac85e4e8f06be7847d51a8f1aa4d819fadb8f8f4d2498f9c (close_out-2026-09-14T00-08-01-200Z.json)",
+      "severity": "warn",
+      "source": "gate-hash-drift"
+    }
+  ]
+}

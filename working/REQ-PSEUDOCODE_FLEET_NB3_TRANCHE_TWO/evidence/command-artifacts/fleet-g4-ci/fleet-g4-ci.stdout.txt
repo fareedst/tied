@@ -1,0 +1,40 @@
+{
+  "schema_version": "fleet-g4-ci-checks.v1",
+  "gate_stage": "G4",
+  "ci_expectations": [
+    "header_and_contract_defaults_for_new_clients",
+    "stale_waiver_checks"
+  ],
+  "checks": [
+    {
+      "id": "header_and_contract_defaults_for_new_clients",
+      "ok": true,
+      "schema_version": "grammar-v2-default-audit.v1",
+      "dimensions": {
+        "grammar_v2_header": "pass",
+        "bootstrap_enforcement": "pass",
+        "layer_b_ok": true,
+        "layer_c_ok": true,
+        "constraint_flow": true
+      },
+      "note": "P5-F constraint-enforced-v2 bootstrap policy (G4 gateStage audit)."
+    },
+    {
+      "id": "stale_waiver_checks",
+      "ok": true,
+      "detail": {
+        "ok": true,
+        "waiver_count": 0,
+        "message": "No blocking expired waivers (empty registry passes)."
+      }
+    },
+    {
+      "id": "enrolled_track_regression",
+      "ok": true,
+      "enrolled_count": 5,
+      "failures": []
+    }
+  ],
+  "ok": true,
+  "generated_at": "2026-09-13T21:22:32.447Z"
+}

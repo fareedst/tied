@@ -1,0 +1,39 @@
+ARCH-PSEUDOCODE_FLEET_G4_MAINTENANCE:
+  ARCH-PSEUDOCODE_FLEET_G4_MAINTENANCE:
+    alternatives_considered:
+      - cons:
+          - "Couples ops feature to closed orchestrator CITDP edits"
+        name: "Append-only orchestrator CITDP without batch REQ"
+        pros:
+          - "Smaller token surface"
+        rejected_reason: "Track B batch REQs (NB-*) established pattern for post-closeout work."
+    cross_references:
+      - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+      - "REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE"
+    decision: "Local runbook maintenance only (no GitHub Actions). Compose existing G4 ci_expectations plus enrolled_track_regression; refresh program-status on success; optional --skip-tests for check-only. G4 green does not prove 18/18 not_enrolled regression; tied-win-diff fleet bypass unchanged."
+    description: "Architecture for post–Track B G4 continuous operations: wrapper entrypoint, evidence schema, program-status fields, proof boundaries vs migration batches."
+    governance_artifacts:
+      g4_ci_entrypoint: "scripts/run-fleet-g4-ci-checks.mjs"
+      g4_maintenance_entrypoint: "scripts/run-fleet-g4-maintenance.mjs"
+      g4_maintenance_receipt_schema: "working/fleet-constraint-v2/fleet-g4-maintenance-run.v1.schema.json"
+      gate_stages: "working/fleet-constraint-v2/gate-promotion-stages.v1.yaml"
+      program_status: "working/fleet-constraint-v2/program-status.v1.yaml"
+      runbook: "docs/pseudocode-constraint-v2-fleet-g4-maintenance-runbook.md"
+    name: "Fleet G4 maintenance architecture"
+    rationale:
+      benefits:
+        - "Explicit ops proof boundary after Track B"
+      problems_solved:
+        - "G4 CI mistaken for full fleet migration complete"
+      why: "Phase 5 wired G4 checks; maintenance wrapper closes operator loop."
+    status: "Draft"
+    traceability:
+      code_annotations:
+        - "ARCH-PSEUDOCODE_FLEET_G4_MAINTENANCE"
+      implementation:
+        - "IMPL-FLEET_G4_MAINTENANCE"
+      requirements:
+        - "REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE"
+      tests:
+        - "scripts/fleet-g4-ci-checks.test.mjs"
+        - "scripts/fleet-g4-maintenance.test.mjs"

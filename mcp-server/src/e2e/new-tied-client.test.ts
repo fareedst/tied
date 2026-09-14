@@ -93,6 +93,7 @@ describe("new-tied-client pipeline", () => {
         clientDir,
         sourceRoot,
         skipLint: true,
+        skipOnboardingAudit: true,
         skipGit: true,
         cursorAgentCli: "cursor",
         stdinIsTTY: true,
@@ -129,6 +130,7 @@ describe("new-tied-client pipeline", () => {
         skipMcpEnable: true,
         skipGit: true,
         skipLint: true,
+        skipOnboardingAudit: true,
         spawn: mockSpawn,
       });
       if (!result.ok) throw new Error("pipeline failed");
@@ -184,6 +186,12 @@ describe("new-tied-client integration", () => {
       }
       const yamlFiles = collectYamlFiles(clientDir);
       if (yamlFiles.length === 0) throw new Error("expected tied yaml files");
+      const auditReport = path.join(clientDir, "working", "tied-new-client-audit.v1.json");
+      if (!fs.existsSync(auditReport)) throw new Error("missing onboarding audit report");
+      const audit = JSON.parse(fs.readFileSync(auditReport, "utf8"));
+      if (audit.ok !== true || audit.schema_version !== "tied-new-client-audit.v1") {
+        throw new Error("onboarding audit not ok: " + JSON.stringify(audit));
+      }
       console.log("ok");
     `);
     assert.match(output, /ok/);
@@ -209,6 +217,9 @@ describe("new-tied-client integration", () => {
     const entries = fs.readdirSync(testRoot);
     assert.strictEqual(entries.length, 1);
     assert.match(entries[0], /^\d{10}$/, `expected unix-seconds dir, got ${entries[0]}`);
-    assert.ok(fs.existsSync(path.join(testRoot, entries[0], "tied", "requirements.yaml")));
+    const clientPath = path.join(testRoot, entries[0]);
+    assert.ok(fs.existsSync(path.join(clientPath, "tied", "requirements.yaml")));
+    const auditReport = path.join(clientPath, "working", "tied-new-client-audit.v1.json");
+    assert.ok(fs.existsSync(auditReport), "expected tied-new-client-audit.v1.json after disposable bootstrap");
   });
 });

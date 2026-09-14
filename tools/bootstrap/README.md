@@ -29,7 +29,7 @@ From the TIED repo:
 scripts\test-new-tied-client
 ```
 
-Creates `%USERPROFILE%\Documents\dev\test\<unix-seconds>` with bootstrap, lint, optional `cursor mcp enable tied-yaml` (Windows; `agent` on Unix when on PATH), and `git commit -m "TIED {methodology version from AGENTS.md}"` (e.g. `TIED 3.0.0`).
+Creates `%USERPROFILE%\Documents\dev\test\<unix-seconds>` with bootstrap, lint, **G4 new-client onboarding audit** (`working/tied-new-client-audit.v1.json`, [REQ-TIED_NEW_CLIENT_ADHERENCE](../../tied/requirements/REQ-TIED_NEW_CLIENT_ADHERENCE.yaml)), optional `cursor mcp enable tied-yaml` (Windows; `agent` on Unix when on PATH), and `git commit -m "TIED {methodology version from AGENTS.md}"` (e.g. `TIED 3.0.0`). Bash equivalent: `source scripts/build-commands.sh` then `test-new-tied-client`. Skip audit: `TIED_SKIP_NEW_CLIENT_AUDIT=1` or `--skip-onboarding-audit`.
 
 Explicit directory:
 

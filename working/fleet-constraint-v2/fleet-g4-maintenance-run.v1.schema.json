@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fleet-g4-maintenance-run.v1",
+  "title": "Fleet G4 maintenance last run",
+  "type": "object",
+  "required": ["schema_version", "generated_at", "ok", "maintenance_command", "g4_report"],
+  "properties": {
+    "schema_version": { "const": "fleet-g4-maintenance-run.v1" },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "ok": { "type": "boolean" },
+    "maintenance_command": { "type": "string" },
+    "skip_tests": { "type": "boolean" },
+    "program_status_path": { "type": "string" },
+    "g4_report": { "type": "object" }
+  },
+  "additionalProperties": false
+}

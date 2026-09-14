@@ -1,0 +1,48 @@
+CITDP-REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE:
+  change_definition:
+    current_behavior: "G4 CI operational (P5-E) but operators run run-fleet-g4-ci-checks.mjs manually and hand-edit program-status last_g4_ci_*; no TIED REQ for post–Track B maintenance."
+    desired_behavior: "Single local maintenance command with TIED traceability; automated program-status refresh and last-run receipt; documented runbook; no GitHub Actions."
+    non_goals:
+      - "Full-manifest Track B regression in G4 checks"
+      - "GitHub Actions workflow"
+      - "RED tests or production wrapper in refine pass"
+      - "Reopen orchestrator REQ close_out"
+    success_criteria:
+      - "pre_implementation gate allowed on tracker"
+      - "REQ/ARCH/IMPL Draft in TIED with validated IMPL pseudo-code"
+      - "Runbook and receipt schema on disk"
+    unchanged_behavior: "runFleetG4CiChecks composition; enrolled_track_regression; Track B 18/18 manifest; tied-win-diff bypass."
+  completion_criteria:
+    verification_gate_notes: "Build-plan implements run-fleet-g4-maintenance.mjs and tests."
+  linked_plans:
+    - "docs/pseudocode-constraint-v2-fleet-completion-plan.md"
+    - "docs/pseudocode-constraint-v2-fleet-g4-maintenance-runbook.md"
+    - "docs/pseudocode-constraint-v2-fleet-program.md"
+  parent_citdp_pointer: "tied/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml"
+  parent_module: "g4_maintenance_module"
+  record_identity:
+    change_request_id: "REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE"
+    citdp_id: "CITDP-REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE"
+    status: "draft"
+    title: "Fleet G4 maintenance — pre-implementation"
+    updated_at: "2026-09-13"
+  risk_analysis:
+    adversarial_inquiry:
+      close_out_inquiry_waiver: "G4 maintenance minimal depth; no integrated inquiry for refine."
+      counterexamples:
+        - "G4 maintenance green cited as proof all not_enrolled rows still fleet-migrated"
+        - "Maintenance wrapper skips enrolled_track_regression"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "program-status last_g4_ci_ok true while manual edits skip run-fleet-g4-ci-checks"
+        - "Track B complete but no maintenance REQ in requirements.yaml"
+      evidence_references:
+        - "docs/pseudocode-constraint-v2-fleet-g4-maintenance-runbook.md"
+        - "scripts/run-fleet-g4-ci-checks.mjs"
+        - "working/fleet-constraint-v2/program-status.v1.yaml"
+      falsification_questions:
+        - "Can last_g4_ci_ok true while G4 report ok false?"
+        - "Does G4 CI prove Track B complete?"
+      gate_policy: "advisory"
+      profile_depth: "minimal"
+      rationale: "Ops feature; falsification mirrors orchestrator G4 boundaries."

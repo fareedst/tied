@@ -1,0 +1,121 @@
+citdp_module: "nb3_tranche_two_module"
+citdp_pointer: "working/REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO/CITDP-REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO.yaml"
+copy_hygiene: "Per-request copy for NB-3 Track B tranche two. Orchestrator REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION remains closed."
+description: "Tracker for NB-3 (Track B tranche two) — build-plan execution 2026-09-13."
+execution_evidence:
+  close_out_evidence:
+    date: "2026-09-13"
+    deferred: []
+    gates: {}
+  completed:
+    - "change-definition"
+    - "composition-integration"
+    - "gate-pseudocode-validation"
+    - "risk-assessment"
+    - "sub-close-out-evidence-sync"
+    - "test-strategy"
+    - "traceable-commit"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
+  envelope_path: "working/REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO/evidence/request-evidence-envelope.v1.json"
+  nb3_step_completion:
+    - "NB-3-A"
+    - "NB-3-C"
+    - "NB-3-D"
+    - "NB-3-E"
+    - "NB-3-F"
+    - "NB-3-G"
+  request: "REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO"
+execution_profile:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+  proof_boundary: "stdd orchestration and sponsor acceptance only; fleet-migrated-client proof in client repos."
+linked_plans:
+  - "docs/pseudocode-constraint-v2-fleet-nb3-plan.md"
+  - "docs/pseudocode-constraint-v2-fleet-program.md"
+nb3_executable_steps:
+  blocked:
+    - "NB-4"
+  completed:
+    - "NB-3-A"
+    - "NB-3-C"
+    - "NB-3-D"
+    - "NB-3-E"
+    - "NB-3-F"
+    - "NB-3-G"
+    - "NB-3-R"
+  unblocked:
+    - "M-G4"
+nb3_tranche_two:
+  batch_id: "NB-3"
+  blocked_on: null
+  build_plan_phase: "complete-tranche-two"
+  gate_nb3_a:
+    acceptance_path: "working/fleet-constraint-v2/od-nb3-acceptance.v1.json"
+    allowed: true
+  machine_close_out:
+    envelope_path: "working/REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO/evidence/request-evidence-envelope.v1.json"
+    receipt: "working/fleet-constraint-v2/NB-3/gates/machine-close-out-2026-09-13.json"
+  prerequisite_nb2_close_out: "working/fleet-constraint-v2/NB-2/gates/machine-close-out-2026-09-13.json"
+  recommended_wave_3_client_ids:
+    - "1787416567"
+    - "1787495576"
+    - "1787507684"
+    - "1787603099"
+    - "1787638699"
+  status: "tranche_two_complete"
+parent_batch_req: "REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE"
+parent_orchestrator: "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
+steps:
+  - disposition: "completed"
+    slug: "change-definition"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "test-strategy"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "risk-assessment"
+    tracking:
+      status: "completed"
+  - disposition: "not_applicable"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Minimal depth NB-3 tranche two; close_out_inquiry_waiver on CITDP slice."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      evidence_refs:
+        - kind: "file_path"
+          path: "working/REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO/evidence/not-applicable-receipt.v1.json"
+      status: "not_applicable"
+  - disposition: "completed"
+    slug: "gate-pseudocode-validation"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "unit-test-red"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "unit-test-green"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "composition-integration"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "verification-gate"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "sub-close-out-evidence-sync"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "traceable-commit"
+    tracking:
+      status: "completed"
+test_strategy_summary: "Plan §2.4 in scripts/fleet-nb3-orchestration.test.mjs; wave-3 G3 receipts and manifest rollup (four fleet-migrated-client, one partial)."

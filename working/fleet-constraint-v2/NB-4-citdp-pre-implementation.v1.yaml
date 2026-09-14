@@ -1,0 +1,40 @@
+CITDP-NB-4-TRANCHE-FINAL:
+  completion_criteria:
+    activation:
+      phase: "pre_implementation"
+      request_token: "REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL"
+      run_id: "fleet-migration-nb4-refine-20260913"
+  linked_plans:
+    - "docs/pseudocode-constraint-v2-fleet-nb4-plan.md"
+    - "docs/pseudocode-constraint-v2-fleet-completion-plan.md"
+  parent_citdp_pointer: "tied/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml"
+  parent_module: "nb4_tranche_final_module"
+  record_identity:
+    change_request_id: "REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL"
+    citdp_id: "CITDP-NB-4-TRANCHE-FINAL"
+    status: "draft"
+    title: "NB-4 Track B final tranche — pre-implementation gate slice"
+    updated_at: "2026-09-13"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: "NB-4 final tranche minimal depth; integrated inquiry not required for pre-implementation refine."
+      counterexamples:
+        - "G4 CI green cited as proof all three remaining header-only rows migrated"
+        - "NB-4 G3 wave started while od-nb4-acceptance status is still draft"
+        - "Wave-4 selects NB-1..NB-3 fleet-migrated client IDs"
+        - "Track B declared complete with tied-win-diff still header-only when OD-NB4-2 default exclude applied"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "manifest shows 3 header-only-v2 not_enrolled rows after fifteen not_enrolled fleet-migrated"
+        - "program-status nb3_tranche_two_complete true; next_batch NB-4"
+      evidence_references:
+        - "docs/pseudocode-constraint-v2-fleet-nb4-plan.md"
+        - "working/fleet-constraint-v2/client-inventory-manifest.v1.yaml"
+        - "working/fleet-constraint-v2/NB-3/gates/machine-close-out-2026-09-13.json"
+      falsification_questions:
+        - "Can manifest aggregate flip without wave-4 G3 receipts?"
+        - "Can NB-4 execute without accepted od-nb4-acceptance.v1.json?"
+        - "Can orchestrator close_out reopen substitute for NB-4 batch REQ evidence?"
+      gate_policy: "advisory"
+      profile_depth: "minimal"

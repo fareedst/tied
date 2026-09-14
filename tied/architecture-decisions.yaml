@@ -1501,6 +1501,17 @@ ARCH-PSEUDOCODE_CONSTRAINT_SOLVER:
   description: "Fixed-point interprocedural constraint solver, procedure summaries, ConstraintAnalysisBudgets, and truncation disclosure policy."
   detail_file: "architecture-decisions/ARCH-PSEUDOCODE_CONSTRAINT_SOLVER.yaml"
   status: "Draft"
+ARCH-PSEUDOCODE_FLEET_G4_MAINTENANCE:
+  cross_references:
+    architecture:
+      - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+    implementation:
+      - "IMPL-FLEET_G4_MAINTENANCE"
+    requirements:
+      - "REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE"
+  detail_file: "architecture-decisions/ARCH-PSEUDOCODE_FLEET_G4_MAINTENANCE.yaml"
+  name: "Fleet G4 maintenance architecture"
+  status: "Accepted"
 ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE:
   detail_file: "architecture-decisions/ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE.yaml"
   name: "Fleet pseudocode migration governance"
@@ -1775,6 +1786,17 @@ ARCH-TIED_FIDELITY_RESEARCH:
       - "mcp-server/src/fidelity-research/snapshot.test.ts"
       - "mcp-server/src/fidelity-research/specification-state.test.ts"
       - "mcp-server/src/fidelity-research/structural-analysis.test.ts"
+ARCH-TIED_NEW_CLIENT_ADHERENCE:
+  cross_references:
+    architecture:
+      - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+    implementation:
+      - "IMPL-TIED_NEW_CLIENT_ONBOARDING"
+    requirements:
+      - "REQ-TIED_NEW_CLIENT_ADHERENCE"
+  detail_file: "architecture-decisions/ARCH-TIED_NEW_CLIENT_ADHERENCE.yaml"
+  name: "New TIED client adherence architecture"
+  status: "Implemented"
 ARCH-TIED_PROJECT_IDENTITY:
   cross_references:
     - "IMPL-TIED_PROJECT_IDENTITY"

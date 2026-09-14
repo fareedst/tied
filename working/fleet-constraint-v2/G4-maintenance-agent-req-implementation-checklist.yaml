@@ -1,0 +1,65 @@
+citdp_module: "g4_maintenance_module"
+citdp_pointer: "working/fleet-constraint-v2/G4-citdp-pre-implementation.v1.yaml"
+copy_hygiene: "Per-request copy for G4 maintenance (post–Track B). Orchestrator REQ remains closed."
+description: "Tracker for REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE — build complete 2026-09-13."
+execution_evidence:
+  completed:
+    - "change-definition"
+    - "gate-pseudocode-validation"
+    - "risk-assessment"
+    - "test-strategy"
+  envelope_path: "working/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE"
+execution_profile:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+  proof_boundary: "stdd wrapper, receipt schema, program-status refresh; G4 green does not re-prove 18/18 client-repo regression."
+g4_maintenance:
+  blocked_on: null
+  build_plan_complete_at: "2026-09-13"
+  prerequisite_track_b: "working/fleet-constraint-v2/program-status.v1.yaml not_enrolled_fleet_migrated_count 18"
+  pre_implementation_gate: "working/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE/gates/pre_implementation-2026-09-13T22-07-42-687Z.json"
+  status: "implemented"
+linked_plans:
+  - "docs/pseudocode-constraint-v2-fleet-g4-maintenance-runbook.md"
+  - "/Users/fareed/.cursor/plans/g4_maintenance_feature_9924ea6f.plan.md"
+parent_orchestrator: "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
+request: "REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE"
+steps:
+  - disposition: "completed"
+    slug: "change-definition"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "test-strategy"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "risk-assessment"
+    tracking:
+      status: "completed"
+  - disposition: "not_applicable"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "CITDP close_out_inquiry_waiver; no integrated inquiry run at refine."
+    slug: "sub-adversarial-inquiry-pass"
+  - disposition: "completed"
+    slug: "gate-pseudocode-validation"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "unit-test-red"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "unit-test-green"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "verification-gate"
+    tracking:
+      status: "completed"
+  - disposition: "pending"
+    slug: "traceable-commit"
+    tracking:
+      status: "pending"

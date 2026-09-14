@@ -44,13 +44,51 @@ CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION:
       - "Phase 3 persist proves pilot workflow, not fleet-migrated-client for all repos."
       - "Phase 4 P4-C persist proves G3 fleet wave specification and governance linkage, not completed G3 wave execution (P4-E+)."
       - "Phase 5 P5-C persist proves G4/bootstrap/FEAT policy specification and TIED LEAP, not G4 CI wiring (P5-E) or template smoke (P5-F)."
+  g4_maintenance_module:
+    adversarial_inquiry:
+      counterexamples:
+        - "G4 maintenance receipt ok true while enrolled_track_regression failed"
+        - "Operator claims full fleet migrated because last_g4_ci_ok true"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "program-status last_g4_ci_at stale with no g4-maintenance receipt"
+        - "Track B 18/18 but maintenance_command still manual checks-only"
+      evidence_references:
+        - "docs/pseudocode-constraint-v2-fleet-g4-maintenance-runbook.md"
+        - "tied/citdp/CITDP-REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE.yaml"
+        - "working/fleet-constraint-v2/program-status.v1.yaml"
+      falsification_questions:
+        - "Does G4 CI prove Track B complete?"
+        - "Does G4 maintenance prove all not_enrolled rows remain fleet-migrated?"
+      gate_policy: "advisory"
+    change_definition:
+      current_behavior: "G4 checks run ad hoc; program-status last_g4_ci_* hand-maintained; no batch REQ after Track B exit."
+      desired_behavior: "REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE tracks local maintenance wrapper, runbook, receipt schema; build-plan implements scripts."
+      non_goals:
+        - "GitHub Actions"
+        - "NB-5 migration tranche"
+        - "Reopen orchestrator close_out"
+      success_criteria:
+        - "CITDP-REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE on disk"
+        - "Refine pre_implementation gate pass"
+      unchanged_behavior: "runFleetG4CiChecks; enrolled five-repo regression; tied-win-diff bypass."
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    module_boundary: "G4 maintenance specification — not wrapper implementation in orchestrator CITDP edit"
+    persisted_at: "2026-09-13T22:10:00.000Z"
+    profile_depth: "minimal"
+    run_id: "fleet-g4-maintenance-refine-20260913"
+    status: "build_complete"
   impact_analysis:
     impl_inventory:
       - "IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
     impl_inventory_notes: "Phase 5 bootstrap executable changes deferred to P5-F; P5-C persists CONSTRAINT_ENFORCED_BOOTSTRAP pseudo-code only."
     modules_or_boundaries:
+      - g4_maintenance_module: "Post–Track B G4 maintenance — REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE local runbook; orchestrator REQ closed"
       - nb1_tranche_zero_module: "Track B batch NB-1 — sponsor OD-P5-2 acceptance + wave-1 selection (program batch, orchestrator REQ closed)"
       - nb2_tranche_one_module: "Track B batch NB-2 — sponsor od-nb2-acceptance + wave-2 selection after NB-1 complete (program batch, orchestrator REQ closed)"
+      - nb3_tranche_two_module: "Track B batch NB-3 — sponsor od-nb3-acceptance + wave-3 selection after NB-2 complete (program batch, orchestrator REQ closed)"
+      - nb4_tranche_final_module: "Track B batch NB-4 — sponsor od-nb4-acceptance + wave-4 selection after NB-3 complete; final header-only rows (program batch, orchestrator REQ closed)"
       - orchestrator_module: "stdd REQ/ARCH/CITDP; program gate_policy advisory through Phase 4 exit"
       - phase_3_module: "Pilot migration workflow — complete; historical G2 evidence"
       - phase_4_module: "Fleet waves — client integration — G3 inventory, partition, receipts, waiver registry, stop/go, dashboard (grand plan module 4)"
@@ -63,11 +101,14 @@ CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION:
       - "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
       - "REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
     tied_tokens_new:
+      - "REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE"
       - "REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE"
+      - "REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO"
   linked_plans:
     - "docs/pseudocode-constraint-v2-fleet-migration-grand-plan.md"
     - "docs/pseudocode-constraint-v2-fleet-nb1-plan.md"
     - "docs/pseudocode-constraint-v2-fleet-nb2-plan.md"
+    - "docs/pseudocode-constraint-v2-fleet-nb3-plan.md"
     - "docs/pseudocode-constraint-v2-fleet-program.md"
   nb1_tranche_zero_module:
     adversarial_inquiry:
@@ -195,6 +236,142 @@ CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION:
     run_id: "fleet-migration-nb2-build-plan-20260913"
     status: "complete"
     test_strategy_pointer: "docs/pseudocode-constraint-v2-fleet-nb2-plan.md#24-test-strategy-for-build-plan"
+  nb3_tranche_two_module:
+    adversarial_inquiry:
+      counterexamples:
+        - "Reuse od-nb2-acceptance.v1.json as NB-3 gate without wave_3_client_ids"
+        - "Select NB-1 or NB-2 fleet-migrated client IDs in wave_3_client_ids"
+        - "Start NB-3 G3 waves before od-nb3-acceptance status accepted"
+        - "Treat NB-2 complete as proof all Track B clients migrated"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "8 header-only-v2 not_enrolled_phase_4 rows remain after NB-2 (2026-09-13 manifest)"
+        - "program-status nb2_tranche_one_complete true with next_batch NB-3"
+      evidence_references:
+        - "docs/pseudocode-constraint-v2-fleet-nb3-plan.md"
+        - "working/fleet-constraint-v2/NB-2/gates/machine-close-out-2026-09-13.json"
+      falsification_questions:
+        - "Can NB-3 execute without accepted od-nb3-acceptance.v1.json?"
+        - "Can wave-3 select already fleet-migrated NB-1 or NB-2 clients?"
+        - "Does G4 CI prove NB-3 tranche complete?"
+      gate_policy: "advisory"
+    change_definition:
+      current_behavior: "NB-2 tranche one complete; od-nb2-acceptance accepted; five wave-2 clients fleet-migrated-client; 8 header-only-v2 not_enrolled remain; no NB-3 acceptance or wave-3 execution."
+      desired_behavior: "Sponsor accepts NB-3; up to five next low-burden header-only-v2 clients receive client-owned migration REQs + G3 waves; manifest updated only after wave receipts; REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO tracks batch close-out."
+      falsification_questions:
+        - "Can manifest show fleet-migrated-client without G3 receipts for wave-3?"
+        - "Can NB-3 proceed without NB-2 machine close-out receipt on file?"
+        - "Can orchestrator close_out reopen for Track B?"
+      non_goals:
+        - "G3 wave execution in refine pass"
+        - "Re-run NB-2 build-plan or NB-2 machine close-out"
+        - "Reopen REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION close_out"
+        - "run-nb3-* scripts and fleet-nb3-orchestration.test.mjs in refine pass (defer to build-plan)"
+      success_criteria:
+        - "NB-3 plan + od-nb3 acceptance schema/template on disk"
+        - "pre_implementation gate pass after refine (advisory minimal)"
+        - "REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO Draft in TIED"
+        - "Tracker NB-3-tranche-two with pre_implementation profile"
+        - "Wave-3 client IDs documented with manifest rationale"
+      unchanged_behavior: "NB-1 and NB-2 fleet-migrated clients; enrolled Track A; G4 CI; closed orchestrator REQ."
+    depth_tier: "minimal"
+    evidence_pointers:
+      - "docs/pseudocode-constraint-v2-fleet-nb3-plan.md"
+      - "scripts/fleet-nb2-orchestration.test.mjs"
+      - "working/fleet-constraint-v2/client-inventory-manifest.v1.yaml"
+      - "working/fleet-constraint-v2/NB-3-citdp-pre-implementation.v1.yaml"
+      - "working/fleet-constraint-v2/NB-3-tranche-two-agent-req-implementation-checklist.yaml"
+      - "working/fleet-constraint-v2/od-nb3-acceptance.v1.schema.json"
+    gate_policy: "advisory"
+    module_boundary: "NB-3 specification and sponsor gate — not client migration execution"
+    open_decisions_pending:
+      OD-NB3-2:
+        pending_amendment: "Include tied-win-diff in wave_3_client_ids?"
+        prior_default: "Exclude unless override in acceptance JSON notes (OD-NB1-2 / OD-NB2-2 pattern)"
+      OD-NB3-3:
+        pending_amendment: "Primary wave includes 5–6 sidecar repos or tranche > 5?"
+        prior_default: "Max five; prefer 3–4 sidecar rows; defer 1787691672 (5) and 1787626480 (6) unless sponsor amends"
+      OD-NB3-4:
+        pending_amendment: "Replace recommended wave_3_client_ids?"
+        prior_default: "Use NB-3 plan §3 table"
+    persisted_at: "2026-09-13T20:00:00.000Z"
+    profile_depth: "minimal"
+    recommended_wave_3_client_ids:
+      - "1787416567"
+      - "1787495576"
+      - "1787507684"
+      - "1787603099"
+      - "1787638699"
+    run_id: "fleet-migration-nb3-refine-20260913"
+    status: "draft"
+    test_strategy_pointer: "docs/pseudocode-constraint-v2-fleet-nb3-plan.md#24-test-strategy-for-build-plan"
+  nb4_tranche_final_module:
+    adversarial_inquiry:
+      counterexamples:
+        - "Declare Track B complete while header-only rows remain without waiver"
+        - "Reuse od-nb3-acceptance.v1.json as NB-4 gate without wave_4_client_ids"
+        - "Select NB-1..NB-3 fleet-migrated client IDs in wave_4_client_ids"
+        - "Start NB-4 G3 waves before od-nb4-acceptance status accepted"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "3 header-only-v2 not_enrolled_phase_4 rows remain after NB-3 (2026-09-13 manifest)"
+        - "program-status nb3_tranche_two_complete true with next_batch NB-4"
+      evidence_references:
+        - "docs/pseudocode-constraint-v2-fleet-completion-plan.md"
+        - "docs/pseudocode-constraint-v2-fleet-nb4-plan.md"
+        - "working/fleet-constraint-v2/NB-3/gates/machine-close-out-2026-09-13.json"
+      falsification_questions:
+        - "Can NB-4 execute without accepted od-nb4-acceptance.v1.json?"
+        - "Can wave-4 select already fleet-migrated NB-1..NB-3 clients?"
+        - "Does G4 CI prove Track B complete?"
+      gate_policy: "advisory"
+    change_definition:
+      current_behavior: "NB-3 tranche two complete; 3 header-only-v2 not_enrolled remain; no NB-4 acceptance or wave-4 execution."
+      desired_behavior: "Sponsor accepts NB-4; remaining header-only-v2 clients receive client-owned migration REQs + G3 waves; manifest updated only after wave receipts; zero header-only not_enrolled rows; REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL tracks batch close-out."
+      falsification_questions:
+        - "Can manifest show fleet-migrated-client without G3 receipts for wave-4?"
+        - "Can NB-4 proceed without NB-3 machine close-out receipt on file?"
+        - "Can orchestrator close_out reopen for Track B?"
+      non_goals:
+        - "G3 wave execution in refine pass"
+        - "Re-run NB-3 build-plan or NB-3 machine close-out"
+        - "Reopen REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION close_out"
+        - "run-nb4-* scripts and fleet-nb4-orchestration.test.mjs in refine pass (defer to build-plan)"
+      success_criteria:
+        - "NB-4 plan + od-nb4 acceptance schema/template on disk"
+        - "pre_implementation gate pass after refine (advisory minimal)"
+        - "REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL Draft in TIED"
+        - "Tracker NB-4-tranche-final with pre_implementation profile"
+        - "Wave-4 client IDs documented with manifest rationale"
+      unchanged_behavior: "NB-1..NB-3 fleet-migrated clients; enrolled Track A; G4 CI; closed orchestrator REQ."
+    depth_tier: "minimal"
+    evidence_pointers:
+      - "docs/pseudocode-constraint-v2-fleet-completion-plan.md"
+      - "docs/pseudocode-constraint-v2-fleet-nb4-plan.md"
+      - "working/fleet-constraint-v2/client-inventory-manifest.v1.yaml"
+      - "working/fleet-constraint-v2/NB-4-citdp-pre-implementation.v1.yaml"
+      - "working/fleet-constraint-v2/NB-4-tranche-final-agent-req-implementation-checklist.yaml"
+      - "working/fleet-constraint-v2/od-nb4-acceptance.v1.schema.json"
+    gate_policy: "advisory"
+    module_boundary: "NB-4 specification and sponsor gate — not client migration execution"
+    open_decisions_pending:
+      OD-NB4-2:
+        pending_amendment: "Include tied-win-diff in wave_4_client_ids?"
+        prior_default: "Exclude unless override in acceptance JSON notes (OD-NB3-2 pattern)"
+      OD-NB4-3:
+        pending_amendment: "Execute 1787626480 (6 sidecars) without explicit sponsor ack?"
+        prior_default: "Include with 1787691672 per program default-proceed"
+      OD-NB4-4:
+        pending_amendment: "Replace recommended wave_4_client_ids?"
+        prior_default: "Use NB-4 plan §3 table"
+    persisted_at: "2026-09-13T22:00:00.000Z"
+    profile_depth: "minimal"
+    recommended_wave_4_client_ids:
+      - "1787626480"
+      - "1787691672"
+    run_id: "fleet-migration-nb4-build-plan-20260913"
+    status: "complete"
+    test_strategy_pointer: "docs/pseudocode-constraint-v2-fleet-nb4-plan.md#24-test-strategy-for-build-plan"
   phase_4_closeout_module:
     change_definition:
       current_behavior: "G3 machinery complete; CITDP ended at Phase 4 Fleet waves module; closeout evidence in handoff + seq 5-8 reports; Tracker phase_4_closeout partial."
@@ -293,7 +470,7 @@ CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION:
     citdp_id: "CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
     created_at: "2026-09-12"
     status: "final"
-    title: "Fleet constraint-language v2 migration — Phase 4 closeout + Phase 5 + NB-1 + NB-2"
+    title: "Fleet constraint-language v2 migration — Phase 4 closeout + Phase 5 + NB-1 + NB-2 + NB-3"
     updated_at: "2026-09-13"
   risk_analysis:
     adversarial_inquiry:

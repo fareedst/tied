@@ -1,0 +1,21 @@
+IMPL-TIED_NEW_CLIENT_ONBOARDING:
+  IMPL-TIED_NEW_CLIENT_ONBOARDING:
+    description: "CLI and lib: runGrammarV2DefaultAudit at G4, optional consistency flag, write tied-new-client-audit.v1 JSON with proof_boundary."
+    essence_pseudocode_path: "implementation-decisions/IMPL-TIED_NEW_CLIENT_ONBOARDING-pseudocode.md"
+    implementation_approach:
+      details:
+        - "scripts/lib/tied-new-client-audit.mjs"
+        - "scripts/run-tied-new-client-audit.mjs"
+      summary: "Pure report writer; CLI resolves client root and delegates to audit-grammar-v2-default.mjs."
+    name: "New TIED client onboarding audit"
+    status: "Draft"
+    traceability:
+      architecture:
+        - "ARCH-TIED_NEW_CLIENT_ADHERENCE"
+      code_annotations:
+        - "IMPL-TIED_NEW_CLIENT_ONBOARDING"
+      requirements:
+        - "REQ-TIED_NEW_CLIENT_ADHERENCE"
+      tests:
+        - "scripts/tied-new-client-audit.test.mjs"
+  status: "Active"

@@ -1,0 +1,111 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-09-14T00:08:07.310Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-TIED_NEW_CLIENT_ADHERENCE",
+    "project_id": "af8451e933f573ec",
+    "depth_tier": "minimal",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [],
+  "artifacts": [
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "working/REQ-TIED_NEW_CLIENT_ADHERENCE/gates/close_out-2026-09-14T00-08-01-199Z.json",
+      "content_hash": "sha256:f4e7198eaf8b85cbe3444207a0f395b34df33d184a51043014013ea7562e2e5e",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "working/REQ-TIED_NEW_CLIENT_ADHERENCE/gates/pre_implementation-2026-09-14T00-08-01-198Z.json",
+      "content_hash": "sha256:e04d987f9d82d5ac3e340da63eba4ffa2371f46b70ba38f91ab7d20503c268c5",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "working/REQ-TIED_NEW_CLIENT_ADHERENCE/gates/verification-2026-09-14T00-08-01-199Z.json",
+      "content_hash": "sha256:3bf9d012f90198e05b842f44ceafdb1389c2d936f6a2d0c1a9a1953e8d1c82be",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_tracker",
+      "schema_version": null,
+      "path": "working/REQ-TIED_NEW_CLIENT_ADHERENCE/agent-req-implementation-checklist.yaml",
+      "content_hash": "sha256:65fd05048c21621deb3eca242c2e7f2ae5d8973e412b9e92052afcf8662ae127",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "tracker_disposition_only"
+      ]
+    },
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "tied/citdp/CITDP-REQ-TIED_NEW_CLIENT_ADHERENCE.yaml",
+      "content_hash": "sha256:86af707fd7c13350da8dad255a9e549c93ce476d2d0538ee30daa208c08d7384",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    },
+    {
+      "kind": "not_applicable_receipt",
+      "schema_version": "not-applicable-receipt.v1",
+      "path": "working/REQ-TIED_NEW_CLIENT_ADHERENCE/evidence/not-applicable-receipt.v1.json",
+      "content_hash": "sha256:c669c96b52eb4f978188cff7d4344e9f688967108a22f4fe3b2eb3e11457ba9c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": null,
+      "path": "working/REQ-TIED_NEW_CLIENT_ADHERENCE/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:6724f4c3460eea3f542e1e6fc3e9d2ef393c8546a61e7ecbf77971f9cc76017e",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": "working/REQ-TIED_NEW_CLIENT_ADHERENCE/agent-req-implementation-checklist.yaml",
+    "tracker_hash": "sha256:65fd05048c21621deb3eca242c2e7f2ae5d8973e412b9e92052afcf8662ae127",
+    "citdp_path": null,
+    "evidence_chain_profile_path": null
+  },
+  "gaps": [
+    {
+      "code": "evidence_stale",
+      "artifact_kind": "checklist_gate_receipt",
+      "phase": null,
+      "detail": "Envelope tracker_hash sha256:65fd05048c21621deb3eca242c2e7f2ae5d8973e412b9e92052afcf8662ae127 differs from latest gate receipt sha256:c32d3468976264c63162fb36bb13549f11cc0e63c9aff1dd9c372df049747d76 (verification-2026-09-14T00-08-01-199Z.json)",
+      "severity": "warn",
+      "source": "gate-hash-drift"
+    }
+  ]
+}
