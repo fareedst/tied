@@ -203,7 +203,7 @@ Align to [IMPL-TIED_UNIFIED_TOOLCHAIN-pseudocode.md](../../tied/implementation-d
 
 **Tokens:** [REQ-TIED_UNIFIED_TOOLCHAIN](../../tied/requirements/REQ-TIED_UNIFIED_TOOLCHAIN.yaml) · [ARCH-TIED_UNIFIED_TOOLCHAIN](../../tied/architecture-decisions/ARCH-TIED_UNIFIED_TOOLCHAIN.yaml) · [IMPL-TIED_UNIFIED_TOOLCHAIN](../../tied/implementation-decisions/IMPL-TIED_UNIFIED_TOOLCHAIN.yaml) · satisfaction **SC-UNIFIED-MIGRATION-PHASES** · **RISK-UNIFIED-001**..**006**
 
-**Status:** **4d complete (local)**; **`tied_verify`** promoted REQ **Implemented** 2026-09-23; arc **`close_out`** pending **`traceable-commit`** (sponsor git commit).
+**Status:** **4 arc closed** — shipped **`72b7d9d`**; **`tied_verify`** → REQ **Implemented**; arc **`close_out`** **`allowed: true`** (2026-09-23).
 
 ### Purpose
 
