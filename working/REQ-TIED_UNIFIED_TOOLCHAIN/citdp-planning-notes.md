@@ -24,15 +24,16 @@
 - `gate_policy`: **advisory**
 - Rationale: Remaining strangler work (executor, pipeline, checklist render, adherence) targets checklist/adherence parity and subprocess orchestration—integrated adversarial inquiry per AGENTS §3.3.1 for slice 2+.
 
-## Git / release policy (2026-09-22)
+## Git / release policy (2026-09-22 → 2026-09-23)
 
-- **Push deferred** until **Phase 3b complete** (slices **2a–2d**): sponsor wants a **full operator tool set** (TS agentstream strangler without Go forward for ported flows) before first push to origin.
-- Local commits on `main` continue; `a23d939` remains unpushed until that milestone.
+- **Push deferred** until **Phase 3b complete** (slices **2a–2d**) — **satisfied** 2026-09-23.
+- **origin/main:** `a23d939` (slice 1) + **`fbe65e197d456b4dce8a9d062b112f4155d9ce36`** (2a–2d + close_out evidence).
 
 ## Unified Phase 3b close_out (2026-09-23)
 
 - **Milestone:** slices **2a–2d** qualified TS surface; unified `close_out` with inquiry `slice3b-close-out-2026-09-23`.
 - **Committable gate receipt:** [phase3b-full-close-out-gate.json](./phase3b-full-close-out-gate.json).
+- **Post-push:** Re-ran close-out runner with `--run-id slice3b-close-out-2026-09-23`; `allowed: true`, envelope blocking gaps **0** (advisory diagnostics remain).
 - **REQ status:** remains **In Progress** — Phase 4 (Go/Ruby removal, live executor TS-default) not in scope.
 - **Vocabulary Touchpoint 3:** `strangler slice`, `TS-native argv surface`, `adherence-reconcile` — validated against [tied/vocab/tied-methodology.md](../../tied/vocab/tied-methodology.md) and [tied/vocab/agentstream.md](../../tied/vocab/agentstream.md).
 

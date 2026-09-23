@@ -1,5 +1,5 @@
-copy_hygiene: "Per-request Tracker for REQ-TIED_UNIFIED_TOOLCHAIN unified Phase 3b close_out (slices 2a–2d)."
-description: "Phase 3b unified close_out arc; profile_depth integrated; slice 2d tracker authoritative 2026-09-23."
+copy_hygiene: Archived Tracker after unified Phase 3b close_out + origin push fbe65e1 (2026-09-23).
+description: Phase 3b unified close_out arc closed; profile_depth integrated; post-push gate re-validation recorded.
 execution_evidence:
   close_out_evidence:
     date: "2026-09-23"

@@ -112,8 +112,8 @@ CITDP-REQ-TIED_UNIFIED_TOOLCHAIN:
       - lang: "Rust"
         reason: "Excellent single-binary story but high rewrite cost; weak MCP SDK parity vs TS; team already invested in mcp-server TS analysis stack"
   leap_feedback:
-    divergences_from_analysis: "Phase 3b slices 2a–2d TS strangler landed with Go oracle parity; live executor default and Phase 4 removal remain deferred per PLAN."
-    record_status: "applied_phase_3b"
+    divergences_from_analysis: "Phase 3b slices 2a–2d TS strangler shipped on origin (fbe65e1) with Go oracle parity; live executor default and Phase 4 removal remain deferred per PLAN."
+    record_status: "applied_phase_3b_pushed"
     tied_stack_updates_required: []
   migration_phases:
     - deliverables:
