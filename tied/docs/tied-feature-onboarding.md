@@ -33,7 +33,7 @@ TIED_BASE_PATH=/absolute/project/tied \
 
 For a manual workflow, follow
 [`using-tied-without-mcp.md`](using-tied-without-mcp.md).
-The TIED YAML MCP, `tied-cli.sh`, and `tools/agentstream` remain supported.
+The TIED YAML MCP, `tied-cli.sh`, and **`tied agentstream`** remain supported.
 
 ## Brownfield migration
 

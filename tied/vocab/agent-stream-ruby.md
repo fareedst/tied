@@ -1,6 +1,6 @@
-# agent-stream Ruby (canonical)
+# agent-stream Ruby (historical) (canonical)
 
-**Scope:** Legacy Ruby ATDD runner under `tools/agent-stream/`: argv composition, TDD loop prompt expansion, export-to-markdown, and E2E subprocess stream-json harness. **Vocabulary only** — behavior in Ruby sources and `IMPL-ATDD-*` pseudo-code. For new work, prefer Go **`agentstream`** ([`agentstream.md`](agentstream.md)).
+**Scope:** **Removed operator path** (Phase **4b**). Vocabulary for **`IMPL-ATDD-*`** traceability, Ruby-era block names, and cross-links to the current **`tied agentstream`** surface ([`agentstream.md`](agentstream.md)). Sources lived under `tools/agent-stream/`; do not bootstrap or run Ruby for new work.
 
 **Traceability:** [REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML](../requirements/REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML.yaml) · [REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS](../requirements/REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS.yaml) · [REQ-ATDD-E2E-AGENT_STREAM](../requirements/REQ-ATDD-E2E-AGENT_STREAM.yaml) · [ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS](../architecture-decisions/ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS.yaml) · [ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON](../architecture-decisions/ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON.yaml)
 
@@ -10,10 +10,10 @@
 
 ## Preferred terms vs synonyms
 
-| Preferred (Ruby) | Avoid | Go preferred term |
-|------------------|-------|-------------------|
-| **agent-stream** | agentstream (for Ruby dir) | **agentstream** |
-| **run_agent_stream.rb** | ruby runner | `cmd/agentstream` |
+| Preferred (Ruby, historical) | Avoid | Current operator term |
+|------------------------------|-------|------------------------|
+| **agent-stream** | agentstream (when meaning Ruby dir) | **`tied agentstream`** |
+| **run_agent_stream.rb** | ruby runner | **`tied agentstream`** / `@tied/agentstream` |
 | **TddLoopPrompts** | tdd loop class (generic) | `tddloop` package |
 | **export_tdd_prompts** | export script (alone) | no direct Go equivalent |
 | **Open3.popen3** | subprocess spawn (vague) | `executor.Run` / `os/exec` |
@@ -22,16 +22,16 @@
 
 ---
 
-## Naming bridge: Ruby ↔ Go
+## Naming bridge: Ruby (historical) ↔ TypeScript (current)
 
-| Concept | Ruby artifact | Go artifact | Shared flag |
-|---------|---------------|-------------|-------------|
-| Main runner | `tools/agent-stream/run_agent_stream.rb` | `tools/agentstream/cmd/agentstream` | `--tdd-yaml`, `-b`, `-c` |
-| Argv TDD wiring | `lib/agent_stream_argv.rb` | `pipeline.Build` + `tddloop` | `--tdd-yaml` |
-| TDD YAML parser | `lib/tdd_loop_prompts.rb` | `tddloop.LoadTurns` | `--tdd-yaml PATH` |
+| Concept | Ruby artifact (removed) | TypeScript artifact (current) | Shared flag |
+|---------|-------------------------|--------------------------------|-------------|
+| Main runner | `tools/agent-stream/run_agent_stream.rb` | `tied agentstream` → `mcp-server/packages/agentstream/` | `--tdd-yaml`, `-b`, `-c` |
+| Argv TDD wiring | `lib/agent_stream_argv.rb` | `pipeline-build.ts` + `tddloop-load.ts` | `--tdd-yaml` |
+| TDD YAML parser | `lib/tdd_loop_prompts.rb` | `tddloop-load.ts` | `--tdd-yaml PATH` |
 | Export steps to files | `export_tdd_prompts.rb` | — | CLI export mode |
-| E2E harness | `run_agent_stream_subprocess` | `executor.Run` | stream-json stdout |
-| Batch driver | `scripts/run-feature-batch.sh` | `scripts/run-feature-batch-agentstream.sh` | feature-spec + checklist |
+| E2E harness | `run_agent_stream_subprocess` | `live-executor.ts` / `executor-run.ts` | stream-json stdout |
+| Batch driver | `scripts/run-feature-batch.sh` (delegates) | `scripts/run-feature-batch-agentstream.sh` | feature-spec + checklist |
 
 ---
 
@@ -43,7 +43,7 @@
 | `tools/agent-stream/lib/agent_stream_argv.rb` | Argv → ordered turns |
 | `tools/agent-stream/lib/tdd_loop_prompts.rb` | Single TDD YAML parser (ARCH: delegate here only) |
 | `tools/agent-stream/export_tdd_prompts.rb` | Materialize step markdown files |
-| `scripts/run-feature-batch.sh` | Ruby batch driver |
+| `scripts/run-feature-batch.sh` | Delegates to agentstream batch driver (Phase **4b**) |
 
 ---
 
@@ -57,7 +57,7 @@
 
 ---
 
-## Stream-json protocol terms (shared with Go)
+## Stream-json protocol terms (shared with agentstream)
 
 | Term | Meaning |
 |------|---------|

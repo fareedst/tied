@@ -111,13 +111,13 @@ High-value composition bindings already exercised (extend when adding features):
 
 | Binding ID | Location | Notes |
 |---|---|---|
-| `CLI→pipeline.Build` | `tools/agentstream/cmd/agentstream` + `pipeline/` | Argv/config → turn assembly |
-| `pipeline→checklist.LoadTurns` | `pipeline` + `checklist` | Lead checklist YAML → turns; bounds/vars propagate |
-| `pipeline→executor.Run` | `cmd` + `executor` | Live loop with fake agent |
-| `control goto → ReplaceRemainingFromStep` | `cmd` + `control` + `pipeline` | Checklist control trailer; missing target fails closed |
-| `ApplyPromptFilePreload → non-compact HTML` | `cmd` compose_noncompact | Composition after preload |
-| `canonical checklist composition gate` | `checklist/composition_coverage_test.go`, `pipeline/composition_coverage_test.go` | Ordering unit→composition→E2E; rendered binding + E2E justification |
-| `ATDD argv → TddLoopPrompts` | Ruby/ATDD COMPOS IMPLs | Documented in `docs/run-agent-stream-impl-composition.md` |
+| `CLI→pipeline build` | `@tied/agentstream` `index.ts` + `pipeline-build.ts` | Argv/config → turn assembly |
+| `pipeline→checklist load turns` | `pipeline-build.ts` + `checklist-load-turns.ts` | Lead checklist YAML → turns; bounds/vars propagate |
+| `pipeline→executor run` | `live-executor.ts` + `executor-run.ts` | Live loop with fake agent |
+| `control goto → replace remaining` | `control.ts` + pipeline | Checklist control trailer; missing target fails closed |
+| `preload → non-compact HTML` | `run-pipeline-prep.ts` + `htmlformat.ts` | Composition after preload |
+| `canonical checklist composition gate` | `packages/agentstream/dist/*.test.js`, MCP workspace `npm test` | Ordering unit→composition→E2E; rendered binding + E2E justification |
+| `ATDD argv → TddLoopPrompts` | Historical Ruby/ATDD COMPOS IMPLs | [`agent-stream-ruby.md`](../vocab/agent-stream-ruby.md); not an operator path |
 
 When changing these seams, re-run composition tests and update this inventory if bindings are added or removed.
 

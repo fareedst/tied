@@ -30,7 +30,7 @@
 | 2b | [`feedback-to-tied.md`](feedback-to-tied.md) | Upstream feedback artifact (`feedback.yaml`) and MCP export |
 | 3 | [`leap-proposal-queue.md`](leap-proposal-queue.md) | Non-canonical LEAP proposals, audit, diff/session import |
 | 4 | [`agentstream.md`](agentstream.md) | **`@tied/agentstream`** (TypeScript default, Phase **4d**): pipeline, checklist, executor, MCP preflight; legacy Go tree removed |
-| 4b | [`agent-stream-ruby.md`](agent-stream-ruby.md) | Ruby ATDD runner parity with Go |
+| 4b | [`agent-stream-ruby.md`](agent-stream-ruby.md) | Historical Ruby ATDD (removed Phase **4b**); `IMPL-ATDD-*` and naming-bridge terms only |
 | 5 | [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) | Domain vocab vs IMPL grammar; three-way alignment; CITDP record naming |
 | 5b | [`quality-assurance.md`](quality-assurance.md) | Quality attributes, assurance profiles, evidence matrices, evidence provenance, proof boundaries, residual-risk decisions, the evidence chain profile, and the evidence chain statistics report |
 | 5c | [`fidelity-research.md`](fidelity-research.md) | Fidelity findings, specification state, origin layer, divergent edge, read-only research profile, finding lifecycle, evidence provenance |
@@ -57,7 +57,7 @@
 ## Cross-topic notes
 
 - **STDD / TIED repository layout:** canonical domain glossaries live at `tied/vocab/<topic>.md` (no `-vocabulary` filename suffix). Meta-standard: [`../docs/vocabulary-index-analysis-and-standards.md`](../docs/vocabulary-index-analysis-and-standards.md) § STDD convention. Other TIED client repos may use `docs/*-vocabulary.md` per the replication prompt; this repo uses `tied/vocab/`.
-- **agentstream** (Go product/CLI name) vs **agent-stream** (Ruby directory/package) vs **run-feature-batch** driver scripts — define once in [`agentstream.md`](agentstream.md) and [`agent-stream-ruby.md`](agent-stream-ruby.md); link from both.
+- **`tied agentstream`** / **`@tied/agentstream`** (TypeScript operator CLI) vs historical **agent-stream** (Ruby, removed) vs **run-feature-batch** shell drivers — define once in [`agentstream.md`](agentstream.md) and [`agent-stream-ruby.md`](agent-stream-ruby.md); link from both.
 - **Domain vocabulary** (this tree) vs **IMPL grammar vocabulary** (INPUT/OUTPUT/DATA/PRE/POST/EFFECTS keywords) — define once in [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md).
 - **Pseudo-code Layer C gate** vs **Layer B validation** — `pseudocode_analyze` with `gate_mode: true` is a file-scoped, bounded static-analysis gate after Layer B and before RED tests; `pre-psa-grammar` may classify untouched legacy blocks but does not suppress errors in a changed sidecar submitted to Layer C. Define terms in [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md).
 - **Vocabulary layer** / **agent-control layer** — the peer control layer that resolves, preloads, records, and validates domain terms; canonical terms live in [`tied-methodology.md`](tied-methodology.md), while touchpoints are defined by `[PROC-VOCABULARY_INDEX]`.

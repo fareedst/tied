@@ -8,8 +8,8 @@ This repository does not define one universal coverage or test runner command. A
 |---|---|---|
 | MCP server TypeScript build | `npm --prefix mcp-server run build` | TypeScript compilation only |
 | MCP server TypeScript tests | `npm --prefix mcp-server test` | Registered MCP unit/composition tests and listed repository tests |
-| Go agentstream | `cd tools/agentstream && go test ./...` | Go package tests for the agentstream module |
-| Go agentstream build | `cd tools/agentstream && go build ./cmd/agentstream` | Go compilation/linking only |
+| `@tied/agentstream` tests | `npm --prefix mcp-server test` (includes `packages/agentstream/dist/*.test.js`) | Agentstream unit/parity tests bundled with MCP workspace test script |
+| `@tied/agentstream` build | `npm --prefix mcp-server run build` | TypeScript compile for MCP, CLI, and agentstream packages |
 | Ruby tooling | Run the project-declared Ruby test command; use `ruby -c path/to/file.rb` for syntax-only checks | The exact command and selected files must be recorded; no repository-wide Ruby runner is assumed |
 | TIED YAML | `scripts/lint_yaml.sh path/to/changed.yaml` once per changed YAML file | YAML syntax/canonicalization policy only |
 | TIED consistency | MCP `tied_validate_consistency` with detail and pseudo-code checks enabled | TIED index/detail/token/traceability integrity only |

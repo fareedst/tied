@@ -156,7 +156,7 @@ Example:
   out_of_scope: "Resolving shell aliases or environment-variable syntax in the path"
 ```
 
-Run one selected spec with the Ruby driver:
+Run one selected spec with the agentstream batch driver (`scripts/run-feature-batch.sh` → `tied agentstream`):
 
 ```bash
 ./scripts/run-feature-batch.sh \
@@ -171,7 +171,7 @@ Run one selected spec with the Ruby driver:
 
 ## TIED source repository setup
 
-These steps prepare **this TIED checkout** (MCP server, bootstrap engine, optional Go runner). They are separate from bootstrapping a **client project** with `copy_files`.
+These steps prepare **this TIED checkout** (MCP server, npm workspace CLIs, bootstrap engine). They are separate from bootstrapping a **client project** with `copy_files`.
 
 **Prerequisites**
 
@@ -187,7 +187,7 @@ cd mcp-server && npm install && npm run build
 cd ../tools/bootstrap && npm install
 ```
 
-The **`mcp-server/`** directory is an npm **workspace** (`@tied/mcp` + `@tied/cli` + `@tied/agentstream`). One install/build at that root compiles the MCP server (`dist/index.js`), the umbrella **`tied`** CLI (`tied mcp` delegates to the same stdio entry), and **`tied agentstream`** (TypeScript-only after Phase **4d**). Ruby `tools/agent-stream` was removed in Phase **4b**. Legacy Go emergency reinstall: [phase4c-deprecation-notice.md](working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4c-deprecation-notice.md) and [phase4d-go-oracle-freeze.json](working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4d-go-oracle-freeze.json).
+The **`mcp-server/`** directory is an npm **workspace** (`@tied/mcp`, `@tied/cli`, `@tied/agentstream`, `@tied/bootstrap`, `@tied/yaml-cli`). One install/build at that root compiles the MCP server (`dist/index.js`), the umbrella **`tied`** CLI (`tied mcp` delegates to the same stdio entry), and **`tied agentstream`** (TypeScript-only after Phase **4d**). Ruby `tools/agent-stream` was removed in Phase **4b**. Legacy Go emergency reinstall: [phase4c-deprecation-notice.md](working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4c-deprecation-notice.md) and [phase4d-go-oracle-freeze.json](working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4d-go-oracle-freeze.json).
 
 **Windows (`cmd.exe`)** (from the TIED repository root):
 
@@ -235,7 +235,7 @@ Or from repo root: `test-new-tied-client.cmd`
 ..\dev\tied\copy_files
 ```
 
-The script copies the inherited methodology from `templates/` into the client’s `tied/methodology/`, creates missing project indexes under `tied/`, and copies the canonical guides into `tied/docs/`. It does not overwrite an existing `AGENTS.md` or `.cursorrules`.
+The script copies the inherited methodology from `templates/` into the client’s `tied/methodology/`, creates missing project indexes under `tied/`, copies the canonical guides into `tied/docs/`, and installs the bundled [tied-yaml skill](tools/bundled-tied-yaml-skill/SKILL.md) to `.cursor/skills/tied-yaml/` when appropriate. It does not overwrite an existing `AGENTS.md` or `.cursorrules`.
 
 Methodology-owned YAML under `tied/methodology/` is read-only in the client and can be refreshed by running `copy_files.sh` again. Project-owned REQ/ARCH/IMPL indexes and detail files live at the root of the client’s `tied/` directory and are not overwritten.
 
@@ -265,9 +265,11 @@ Read [using TIED without MCP](tied/docs/using-tied-without-mcp.md) before managi
 
 - `copy_files.sh` — bootstrap a project with the inherited TIED layout.
 - `bootstrap_without_mcp.sh` — bootstrap and print next steps for non-MCP use.
-- `scripts/run-feature-batch.sh` — delegates to the agentstream batch driver (same flags as legacy Ruby path).
+- `scripts/run-feature-batch.sh` — delegates to the agentstream batch driver (stable CLI surface; Ruby runner removed Phase **4b**).
 - `scripts/run-feature-batch-agentstream.sh` — `tied agentstream` feature-spec and checklist driver.
-- `@tied/agentstream` — TypeScript pipeline (see `mcp-server/packages/agentstream/`); Go tree removed Phase **4d** ([tools/agentstream/README.md](tools/agentstream/README.md) redirect stub).
+- `@tied/agentstream` — TypeScript pipeline in `mcp-server/packages/agentstream/`; legacy Go path removed Phase **4d** ([tools/agentstream/README.md](tools/agentstream/README.md) redirect stub only).
+- `feature-orchestrator` / `tied` feature commands — feature lifecycle CLI from the same workspace (see [feature-orchestration vocabulary](tied/vocab/feature-orchestration.md)).
+- `tools/bundled-tied-yaml-skill/` — canonical tied-yaml skill source; clients receive `.cursor/skills/tied-yaml/` via `copy_files`.
 - `scripts/yaml_tool.sh` and `scripts/lint_yaml.sh` — canonicalize or lint TIED YAML according to the documented edit loop.
 - `scripts/prepare_readme_demo.sh` — bootstrap `tied/` when needed and run the README’s structured YAML query examples.
 - `mcp-server/` — TypeScript MCP server for TIED indexes, details, traceability, and validation.
@@ -284,7 +286,7 @@ The [client development index](tied/docs/client-development-index.md) names the 
 6. [Pseudo-code guide](tied/docs/pseudocode-writing-and-validation.md) — author and validate IMPL behavior contracts.
 7. [CITDP policy and record template](tied/docs/citdp-policy.md) — determine when to persist change analysis.
 
-For orientation, read [methodology diagrams](tied/docs/methodology-diagrams.md) and the [LEAP guide](tied/docs/LEAP.md). For YAML operations, use the [TIED YAML agent index](tied/docs/tied-yaml-agent-index.md) and the [tied-yaml skill](.cursor/skills/tied-yaml/SKILL.md). Agents should read [AGENTS.md](AGENTS.md) before working in a client project.
+For orientation, read [methodology diagrams](tied/docs/methodology-diagrams.md) and the [LEAP guide](tied/docs/LEAP.md). For YAML operations, use the [TIED YAML agent index](tied/docs/tied-yaml-agent-index.md) and the [tied-yaml skill](tools/bundled-tied-yaml-skill/SKILL.md) (installed under `.cursor/skills/tied-yaml/` in client projects). Agents should read [AGENTS.md](AGENTS.md) before working in a client project.
 
 ## Repository layout
 
@@ -295,9 +297,12 @@ stdd/
 │   ├── docs/                  # Methodology guides and executable checklists
 │   ├── vocab/                 # Source-repository domain vocabulary
 │   └── ...                    # Project indexes and detail data
-├── mcp-server/                # TIED YAML MCP server
+├── mcp-server/                # MCP server + npm workspace (cli, agentstream, bootstrap, yaml-cli)
+│   └── packages/agentstream/  # @tied/agentstream — `tied agentstream` implementation
 ├── tools/
-│   └── agentstream/            # Go runner and CLI (TS via tied agentstream)
+│   ├── bootstrap/             # copy_files engine and client verification gates
+│   ├── bundled-tied-yaml-skill/   # Canonical tied-yaml skill (copied into clients)
+│   └── agentstream/           # Redirect stub only (Go runner removed Phase 4d)
 ├── scripts/                   # Bootstrap, batch, YAML, and analysis utilities
 ├── copy_files.sh              # Client bootstrap
 ├── bootstrap_without_mcp.sh   # Non-MCP bootstrap

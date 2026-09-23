@@ -1,4 +1,4 @@
-# Go agentstream (removed)
+# Legacy `tools/agentstream/` path (removed)
 
 The Go `tools/agentstream/` tree was **removed in Phase 4d** ([REQ-TIED_UNIFIED_TOOLCHAIN](../../working/REQ-TIED_UNIFIED_TOOLCHAIN/PLAN.md)).
 

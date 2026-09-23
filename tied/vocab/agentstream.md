@@ -12,7 +12,7 @@
 
 | Preferred | Avoid | Notes |
 |-----------|-------|-------|
-| **agentstream** | go agent, go runner | Product/CLI name; module `stdd/agentstream` |
+| **`tied agentstream`** / **@tied/agentstream** | go agent, go runner, `tools/agentstream` (alone) | Operator CLI; implementation in `mcp-server/packages/agentstream/` |
 | **Turn** | prompt, message (alone) | Struct: `Parts []string`, `ChainFromPrevious bool` |
 | **ChainFromPrevious** | resume flag on turn | `true` → effective `--resume`; `false` → new session |
 | **lead checklist** | agent checklist, REQ checklist | YAML from `--lead-checklist-yaml`; default `tied/docs/agent-req-implementation-checklist.yaml` |
@@ -35,7 +35,7 @@
 | **outcome_verified event** | verified outcome, evidence verified | Adherence ledger `event_class` appended after successful evidence ref resolution; records `artifact_ref` + `artifact_hash` |
 | **adherence event class** | lifecycle stage, event type | One of six non-interchangeable classes: `instruction_rendered`, `agent_acknowledged`, `action_attempted`, `outcome_verified`, `gate_decided`, `status_mutated` |
 | **adherence reconciliation** | reconcile report, adherence audit | Read-only report emitting finding codes (`rendered_without_acknowledgment`, etc.); never mutates Tracker or TIED YAML |
-| **reconcile operator surface** | reconcile CLI, reconcile MCP | Read-only `ReconcileReport` via TS **`@tied/agentstream`** by default (Phase **4c**); Go **`adherence-reconcile`** CLI remains oracle/shim when `TIED_AGENTSTREAM_IMPL=go`; MCP **`tied_adherence_reconcile_run`** prefers built TS dist when available, else Go subprocess |
+| **reconcile operator surface** | reconcile CLI, reconcile MCP | Read-only `ReconcileReport` via **`tied agentstream`** / **`@tied/agentstream`**; MCP **`tied_adherence_reconcile_run`** uses the same TypeScript implementation |
 | **active-turn marker** | turn marker, subprocess marker | Short-lived `active-turn-marker.v1` JSON at `working/{REQ-TOKEN}/adherence/active-turn.json`; written after `instruction_rendered`, cleared after turn handler; hooks read for ledger correlation |
 | **append-only bridge** | hook bridge, adherence hook bridge | TypeScript `mcp-server/dist/cli/adherence-append-action-attempted.js` invoked from `.cursor/hooks/log.rb`; appends `action_attempted` rows fail-silent when marker absent |
 | **hook_log_ref** | hook yaml pointer | Ledger `{ path, line }` pointer into hook YAML logs; never inlines prompt, tool payloads, or shell output |
@@ -44,37 +44,36 @@
 
 ---
 
-## Naming bridge: Go vs Ruby vs scripts
+## Naming bridge: operator surface vs historical stacks
 
-| Concept | Preferred (Go) | Ruby / legacy | Driver script |
-|---------|----------------|---------------|---------------|
-| Unified CLI | **agentstream** | `run_agent_stream.rb` | `run-feature-batch-agentstream.sh` |
-| Module path | `tools/agentstream/` | `tools/agent-stream/` | — |
-| TDD YAML expansion | `tddloop.LoadTurns` | `TddLoopPrompts` | both via `--tdd-yaml` |
-| Feature batch | `featurespec.LoadTurns` | FeatureSpecBatchPrompts | `-b` / positional batch |
-| Lead checklist | `checklist.LoadTurns` | (Go-first for full checklist) | `-c` |
-| Stream JSON executor | `executor.Run` | `run_agent_stream_subprocess` | spawns `cursor agent` |
+| Concept | Preferred (TypeScript) | Historical | Driver script |
+|---------|------------------------|------------|---------------|
+| Unified CLI | **`tied agentstream`** | Ruby `run_agent_stream.rb` (removed) | `run-feature-batch-agentstream.sh` |
+| Implementation tree | `mcp-server/packages/agentstream/` | Go `tools/agentstream/` (removed Phase **4d**) | — |
+| TDD YAML expansion | `tddloop-load.ts` | `TddLoopPrompts` (Ruby) | `--tdd-yaml` |
+| Feature batch | `featurespec-load-turns.ts` | FeatureSpecBatchPrompts (Ruby) | `-b` / positional batch |
+| Lead checklist | `checklist-load-turns.ts` | partial Ruby parity | `-c` |
+| Stream JSON executor | `live-executor.ts` / `executor-run.ts` | `run_agent_stream_subprocess` | spawns `cursor agent` |
 
-Full Ruby parity table: [`agent-stream-ruby.md`](agent-stream-ruby.md).
+Ruby-era terms: [`agent-stream-ruby.md`](agent-stream-ruby.md). **`REQ-GOAGENT-*`** / **`IMPL-GOAGENT-*`** tokens name the checklist-runner contract; pseudo-code block names may retain Go-era identifiers.
 
 ---
 
-## Go packages (catalog)
+## TypeScript modules (catalog)
 
-| Package | Role | IMPL |
-|---------|------|------|
-| `cmd/agentstream` | CLI `main` | [IMPL-GOAGENT-CLI-CMD](../implementation-decisions/IMPL-GOAGENT-CLI-CMD.yaml) |
-| `config` | `ParseAndResolve`, defaults | [IMPL-GOAGENT-CLI-CMD](../implementation-decisions/IMPL-GOAGENT-CLI-CMD.yaml) |
-| `pipeline` | `Build`, preload, chain slice | [IMPL-GOAGENT-PIPELINE](../implementation-decisions/IMPL-GOAGENT-PIPELINE.yaml) |
-| `text` | Argv and prompt files | [IMPL-GOAGENT-TEXT-SOURCES](../implementation-decisions/IMPL-GOAGENT-TEXT-SOURCES.yaml) |
-| `featurespec` | Batch YAML → turns | [IMPL-GOAGENT-FEATURESPEC](../implementation-decisions/IMPL-GOAGENT-FEATURESPEC.yaml) |
-| `tddloop` | TDD loop YAML → turns | [IMPL-GOAGENT-TDDLOOP](../implementation-decisions/IMPL-GOAGENT-TDDLOOP.yaml) |
-| `checklist` | Lead checklist → turns | [IMPL-GOAGENT-CHECKLIST](../implementation-decisions/IMPL-GOAGENT-CHECKLIST.yaml) |
-| `executor` | Subprocess + stream-json | [IMPL-GOAGENT-EXECUTOR](../implementation-decisions/IMPL-GOAGENT-EXECUTOR.yaml) |
-| `htmlformat` | Non-compact HTML | [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT](../implementation-decisions/IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT.yaml) |
-| `control` | Checklist control trailer | [IMPL-GOAGENT-CHECKLIST-CONTROL](../implementation-decisions/IMPL-GOAGENT-CHECKLIST-CONTROL.yaml) |
-| `tiedpreflight` | Static MCP layout check | [REQ-GOAGENT-CLI-CONFIG](../requirements/REQ-GOAGENT-CLI-CONFIG.yaml) |
-| (root) `agentstream` | `Turn`, `SessionID` types | [IMPL-GOAGENT-LIB-TYPES](../implementation-decisions/IMPL-GOAGENT-LIB-TYPES.yaml) |
+| Module (under `packages/agentstream/src/`) | Role | IMPL |
+|--------------------------------------------|------|------|
+| `index.ts`, `ts-native-args.ts` | CLI entry, argv resolution | [IMPL-GOAGENT-CLI-CMD](../implementation-decisions/IMPL-GOAGENT-CLI-CMD.yaml) |
+| `pipeline-build.ts`, `run-pipeline-prep.ts`, `pipeline-session.ts` | Turn assembly, preload, chain slice | [IMPL-GOAGENT-PIPELINE](../implementation-decisions/IMPL-GOAGENT-PIPELINE.yaml) |
+| (argv + prompt paths) | Text sources | [IMPL-GOAGENT-TEXT-SOURCES](../implementation-decisions/IMPL-GOAGENT-TEXT-SOURCES.yaml) |
+| `featurespec-load-turns.ts`, `featurespec-preview.ts` | Batch YAML → turns | [IMPL-GOAGENT-FEATURESPEC](../implementation-decisions/IMPL-GOAGENT-FEATURESPEC.yaml) |
+| `tddloop-load.ts` | TDD loop YAML → turns | [IMPL-GOAGENT-TDDLOOP](../implementation-decisions/IMPL-GOAGENT-TDDLOOP.yaml) |
+| `checklist-load-turns.ts`, `checklist-preview.ts` | Lead checklist → turns | [IMPL-GOAGENT-CHECKLIST](../implementation-decisions/IMPL-GOAGENT-CHECKLIST.yaml) |
+| `live-executor.ts`, `executor-run.ts`, `executor-dry-run.ts` | Subprocess + stream-json | [IMPL-GOAGENT-EXECUTOR](../implementation-decisions/IMPL-GOAGENT-EXECUTOR.yaml) |
+| `htmlformat.ts` | Non-compact HTML | [IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT](../implementation-decisions/IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT.yaml) |
+| `control.ts` | Checklist control trailer | [IMPL-GOAGENT-CHECKLIST-CONTROL](../implementation-decisions/IMPL-GOAGENT-CHECKLIST-CONTROL.yaml) |
+| `tiedpreflight.ts` | Static MCP layout check | [REQ-GOAGENT-CLI-CONFIG](../requirements/REQ-GOAGENT-CLI-CONFIG.yaml) |
+| Turn/session types (TS + pseudo-code) | `Turn`, session id | [IMPL-GOAGENT-LIB-TYPES](../implementation-decisions/IMPL-GOAGENT-LIB-TYPES.yaml) |
 
 ---
 
@@ -132,13 +131,12 @@ Workspace preload: when `tied/agent-preload-contract.yaml` exists, CLI prepends 
 
 ## Core types
 
-```go
-type Turn struct {
-    Parts []string
-    ChainFromPrevious bool
-}
-type SessionID string
-const VerifySessionPrompt = "what was the most recent prompt?"
+Logical turn shape (names appear in **`IMPL-GOAGENT-*`** pseudo-code; TypeScript implements the same fields):
+
+```text
+Turn { parts: string[], chainFromPrevious: bool }
+SessionID — opaque string; resume via --session-id / --resume
+VerifySessionPrompt = "what was the most recent prompt?"
 ```
 
 ---

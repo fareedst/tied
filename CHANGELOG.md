@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Operator docs — unified TypeScript toolchain ([REQ-TIED_UNIFIED_TOOLCHAIN])** —
+  Align README, `AGENTS.md`, `tied/docs/*` agent guides, preload contracts, and domain
+  vocabulary with post–Phase **4b** (Ruby removal) and **4d** (Go removal) reality: prefer
+  **`tied agentstream`** / **`@tied/agentstream`**, document `mcp-server` workspace packages,
+  bundled `tools/bundled-tied-yaml-skill/`, feature orchestration, and historical Ruby/Go paths
+  in `tied/vocab/agentstream.md`, `agent-stream-ruby.md`, routing, and `tools/agentstream/README.md`.
+
 - **Phase 4 arc process close-out ([REQ-TIED_UNIFIED_TOOLCHAIN])** — Authoritative
   [checklist-tracker-phase4-arc-closed.yaml](working/REQ-TIED_UNIFIED_TOOLCHAIN/checklist-tracker-phase4-arc-closed.yaml),
   idle post-arc tracker stub, CITDP activation/evidence sync for post-4d delivery, PLAN and

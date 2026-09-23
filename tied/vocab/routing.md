@@ -18,8 +18,8 @@
 | 2 | [tied-yaml-mcp.md](tied-yaml-mcp.md) | TIED YAML MCP, `tied-cli`, bundled skill, `TIED_BASE_PATH`, `TIED_MCP_PROJECT_ID`, validation, verify, cycles, backlog, scoped analysis, token rename, usage metrics, `args_signature`, `signature coverage`, configured project identity, path-fallback identity, `TIED_MCP_COLLECT_METRICS`, MCP config preservation, preserve existing `mcp.json`, `tied_yaml_format`, YAML canonicalization, scalar-style resolution, `TIED_YAML_STYLE`, `.tied-yaml.yaml`, `yaml_format` |
 | 2b | [feedback-to-tied.md](feedback-to-tied.md) | `feedback.yaml`, `tied_feedback_add`, `tied_feedback_export`, feature_request, bug_report, methodology_improvement |
 | 3 | [leap-proposal-queue.md](leap-proposal-queue.md) | LEAP proposals, non-canonical proposal, pending/approved/rejected/applied, `tied_leap_proposal_*`, leap-proposals audit |
-| 4 | [agentstream.md](agentstream.md) | Go `agentstream`, pipeline, turns, checklist render, executor, HTML format, MCP preflight, feature-spec batch |
-| 4b | [agent-stream-ruby.md](agent-stream-ruby.md) | Ruby ATDD runner, `agent-stream`, TddLoopPrompts, export_tdd_prompts, stream-json, Open3 |
+| 4 | [agentstream.md](agentstream.md) | **`tied agentstream`**, `@tied/agentstream`, run-feature-batch, pipeline, turns, checklist render, executor, HTML format, MCP preflight, feature-spec batch |
+| 4b | [agent-stream-ruby.md](agent-stream-ruby.md) | **Historical** Ruby ATDD (removed Phase **4b**); `IMPL-ATDD-*` traceability, TddLoopPrompts, export_tdd_prompts, stream-json — not an operator path |
 | 5 | [pseudocode-and-citdp.md](pseudocode-and-citdp.md) | Domain vocab vs IMPL grammar, contract precision, binding inventory, composition evidence, three-way alignment, UPPER_SNAKE blocks, CITDP record naming, essence_pseudocode, sub-vocabulary-sync, pseudo-code static analysis, Layer C, gate_mode, pre-psa-grammar |
 | 5f | [async-methodology.md](async-methodology.md) | async, await, promise, concurrency, IPC, event listener, timeout, cancellation, retry, idempotency, shared DATA, open wait, async boundary, async seam, async contract, message delivery, await sequencing, pre-async-contract, ASYNC_BOUNDARY, MESSAGE_CONTRACT, SEQUENCING |
 | 5b | [quality-assurance.md](quality-assurance.md) | Quality assurance, quality attributes, risk tiers, assurance profiles, evidence matrix, evidence provenance, residual risk, waivers, pilots, stop criteria, test adequacy, proof boundaries, evidence chain profile, evidence-chain-profile, profile depth, evidence chain statistics report, client cohort, report input manifest, evaluation charter, evaluation corpus, comparable arms, execution policy, privacy tiers, denominator subcohorts, fixture-grounded cohort reporting |
@@ -37,7 +37,7 @@ The full [`domain-references.md`](domain-references.md) contains **Cross-topic n
 **Do not read the full file at bootstrap.** When your task touches a cross-cutting concern, open the full index and search for the note, or PRELOAD the two glossaries named in the routing table.
 
 Examples of cross-topic notes:
-- agentstream (Go) vs agent-stream (Ruby) vs run-feature-batch drivers
+- **`tied agentstream`** (TypeScript default) vs historical **agent-stream** (Ruby, removed) vs **run-feature-batch** shell drivers
 - Domain vocabulary vs IMPL grammar vocabulary (INPUT/OUTPUT/DATA/PRE/POST/EFFECTS)
 - TIED base path / project YAML vs methodology YAML
 - Non-canonical LEAP proposals never mutate project TIED YAML

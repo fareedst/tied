@@ -28,8 +28,8 @@ Group work by cohesive subsystems that already have REQ/ARCH/IMPL clusters:
 2. **TIED YAML MCP / tied-cli** — base path, validation, verify, cycles ([`../vocab/tied-yaml-mcp.md`](../vocab/tied-yaml-mcp.md))
 3. **Feedback to TIED** — `feedback.yaml`, export ([`../vocab/feedback-to-tied.md`](../vocab/feedback-to-tied.md))
 4. **LEAP proposal queue** — non-canonical proposals, audit ([`../vocab/leap-proposal-queue.md`](../vocab/leap-proposal-queue.md))
-5. **agentstream (Go)** — pipeline, turns, checklist render ([`../vocab/agentstream.md`](../vocab/agentstream.md))
-6. **agent-stream (Ruby)** — ATDD runner parity ([`../vocab/agent-stream-ruby.md`](../vocab/agent-stream-ruby.md))
+5. **agentstream** — **`tied agentstream`**, pipeline, turns, checklist render ([`../vocab/agentstream.md`](../vocab/agentstream.md))
+6. **agent-stream (historical Ruby)** — removed operator path; `IMPL-ATDD-*` terms ([`../vocab/agent-stream-ruby.md`](../vocab/agent-stream-ruby.md))
 7. **Pseudo-code & CITDP** — domain vocab vs IMPL grammar; three-way alignment ([`../vocab/pseudocode-and-citdp.md`](../vocab/pseudocode-and-citdp.md))
 
 For a product client, replace these seeds with *product* subsystems (UI surfaces, config keys, CLI flags, domain models) that already have REQ/ARCH/IMPL clusters.
