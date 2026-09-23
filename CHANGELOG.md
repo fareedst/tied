@@ -7,7 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **Bun workspace build recursion ([REQ-TIED_UNIFIED_TOOLCHAIN])** — Root `mcp-server` `build`
+  used nested `npm run build --workspaces --if-present`, which Bun re-entered with appended flags
+  and looped under `build-all`. Use `bun run --workspaces --if-present build` so workspace
+  packages compile once after root `tsc`.
+
 ### Added
+
+- **Operator `test-all` gate (`scripts/build-commands.sh`)** — Fail-closed validation:
+  full workspace build, aggregate `test-mcp`, umbrella CLI smoke, `validate-tied`,
+  `validate-vocab`, and `lint-tied`. Aligns `build-all` with a single workspace build and Bun
+  filter helpers for incremental agentstream/CLI rebuilds.
 
 - **Unified Node developer toolchain — Phase 4 slices 4a–4d ([REQ-TIED_UNIFIED_TOOLCHAIN])** —
   TS `@tied/agentstream` live executor and tracker-mode paths; Ruby `tools/agent-stream` and shell

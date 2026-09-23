@@ -108,11 +108,11 @@ Checklist **`sub-vocabulary-sync`** uses **domain** vocab. Do not conflate with 
 | **new-client adherence program** | post-fleet onboarding (alone) | [`docs/pseudocode-new-client-tied-adherence-plan.md`](../../docs/pseudocode-new-client-tied-adherence-plan.md) + WS-NC-1..6; distinct from NB tranches and G4 maintenance |
 | **migration waiver** | constraint exception | Owner, reason, expiry, and next migration action for procedures/clients not yet enforceable |
 | **annotation profile** | constraint tier target | Per-procedure target: contract-only, refinement, summary, alias/mutation, immutability |
-| **constraint migration receipt** | migration receipt (alone) | Machine-readable Layer A/B/C + constraint_flow snapshot for one sidecar/fixture run; schema `constraint-migration-receipt.v1` ([Phase 2 plan](../../docs/pseudocode-constraint-v2-fleet-migration-phase-2-plan.md)) |
+| **constraint migration receipt** | migration receipt (alone) | Machine-readable Layer A/B/C + constraint_flow snapshot for one sidecar/fixture run; schema `constraint-migration-receipt.v1` ([fleet grand plan](../../docs/pseudocode-constraint-v2-fleet-migration-grand-plan.md)) |
 | **qualification green** | analyzer green (alone) | Tier A/B qualification harness pass at pinned methodology commit; does not imply fleet-migrated-client or header-only-v2 sufficiency |
 | **F11 authoring burden gate** | F11 (alone) | Stop criteria on annotation load and semantic preservation before fleet-blocking constraint gates; measured via qualification annotation study |
 | **pilot inventory instance** | pilots manifest (alone) | Populated `client-inventory-manifest.v1` rows for Phase 3 pilots only (e.g. `stdd-fleet-inventory-pilots-v1`); not full fleet registry |
-| **migration dry-run** | dry-run migration (alone) | Planned assist-only sidecar edits with deterministic `dry_run_content_hash` before apply ([Phase 3 plan](../../docs/pseudocode-constraint-v2-fleet-migration-phase-3-plan.md)) |
+| **migration dry-run** | dry-run migration (alone) | Planned assist-only sidecar edits with deterministic `dry_run_content_hash` before apply ([fleet program](../../docs/pseudocode-constraint-v2-fleet-program.md)) |
 | **G2 pilot receipt** | pilot receipt (alone) | `constraint-migration-receipt.v1` with `receipt_meta.gate_stage: G2` for pilot wave sidecars |
 | **pilot migration wave** | sub-wave (alone) | Bounded ≤10 sidecars within one repo per OD-P3-3 before next sub-wave |
 
@@ -137,7 +137,7 @@ Checklist **`sub-vocabulary-sync`** uses **domain** vocab. Do not conflate with 
 | Normalize sidecar block-leads script | `scripts/normalize-sidecar-block-leads.mjs` | [IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP](../implementation-decisions/IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP.yaml) |
 | Combined hygiene close-out orchestration | `working/pseudocode-hygiene-closeout/agent-req-implementation-checklist.yaml` | Process-only; [PROC-AGENT_REQ_CHECKLIST](../docs/processes.md) |
 | Combined close-out CITDP addendum (draft) | `working/pseudocode-hygiene-closeout/CITDP-combined-hygiene-close-out.yaml` | Non-product process record; not `tied/citdp/CITDP-REQ-*` |
-| Fleet client inventory manifest schema | `working/fleet-constraint-v2/client-inventory-manifest.v1.schema.json` | Phase 1 P1-D; [fleet migration phase 1 plan](../../docs/pseudocode-constraint-v2-fleet-migration-phase-1-plan.md) |
+| Fleet client inventory manifest schema | `working/fleet-constraint-v2/client-inventory-manifest.v1.schema.json` | Phase 1 P1-D; [fleet grand plan](../../docs/pseudocode-constraint-v2-fleet-migration-grand-plan.md) |
 | Fleet client inventory template | `working/fleet-constraint-v2/client-inventory-manifest.v1.template.yaml` | Same; not evaluation-corpus.v1 (OD-8) |
 | Fleet migration waiver schema | `working/fleet-constraint-v2/migration-waiver.v1.schema.json` | Same |
 | Fleet migration waiver example | `working/fleet-constraint-v2/migration-waiver.v1.example.yaml` | P1-D fixture; not a populated registry |

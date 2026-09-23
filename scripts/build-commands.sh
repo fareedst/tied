@@ -96,8 +96,8 @@ alias validate-vocab=validate_vocab
 # --- Build ---
 
 build_agentstream() {
-  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" npm run build --workspace=@tied/agentstream
-  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" npm run build --workspace=@tied/cli
+  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" bun run --filter '@tied/agentstream' build
+  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" bun run --filter '@tied/cli' build
 }
 alias build-agentstream=build_agentstream
 
@@ -109,7 +109,6 @@ alias build-mcp=build_mcp
 
 build_all() {
   build_mcp
-  build_agentstream
 }
 alias build-all=build_all
 
@@ -120,17 +119,52 @@ test_mcp() {
 }
 alias test-mcp=test_mcp
 
+test_tied_cli_smoke() {
+  local root="${_BUILD_COMMANDS_REPO_ROOT}"
+  local cli="${root}/mcp-server/packages/cli/dist/index.js"
+  echo "DEBUG: test-all CLI smoke: tied --help"
+  echo_exec node "$cli" --help
+  echo "DEBUG: test-all CLI smoke: tied yaml --help"
+  echo_exec node "$cli" yaml --help
+  echo "DEBUG: test-all CLI smoke: tied agentstream --help"
+  echo_exec node "$cli" agentstream --help
+  # `tied mcp` is stdio-only (no --help); bootstrap copy-files has no --help flag.
+  echo "DEBUG: test-all CLI smoke: verify mcp + bootstrap dispatch targets exist"
+  test -f "${root}/mcp-server/dist/index.js"
+  test -f "${root}/tools/bootstrap/copy-files.mjs"
+  test -f "${root}/mcp-server/packages/yaml-cli/dist/index.js"
+  test -f "${root}/mcp-server/packages/agentstream/dist/index.js"
+}
+
 test_agentstream() {
-  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" npm run build --workspace=@tied/agentstream
-  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server/packages/agentstream" npm test
+  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" bun run --filter '@tied/agentstream' build
+  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" bun run --filter '@tied/agentstream' test
 }
 alias test-agentstream=test_agentstream
 
 verify_agentstream_parity() {
-  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" npm run build
-  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server/packages/agentstream" npm test
+  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" bun run build
+  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" bun run --filter '@tied/agentstream' test
 }
 alias verify-agentstream-parity=verify_agentstream_parity
+
+test_all() {
+  set -euo pipefail
+  echo "DEBUG: test-all step 1/6: build_mcp"
+  build_mcp
+  echo "DEBUG: test-all step 2/6: test_mcp"
+  test_mcp
+  echo "DEBUG: test-all step 3/6: test_tied_cli_smoke"
+  test_tied_cli_smoke
+  echo "DEBUG: test-all step 4/6: validate_tied"
+  validate_tied
+  echo "DEBUG: test-all step 5/6: validate_vocab"
+  validate_vocab
+  echo "DEBUG: test-all step 6/6: lint_tied"
+  lint_tied
+  echo "DEBUG: test-all completed successfully"
+}
+alias test-all=test_all
 
 # --- Feature-orchestration smoke clients ---
 
@@ -317,7 +351,7 @@ build-commands.sh — TIED repo shell helpers
   how                                  full command map
   how TOPIC                            one section (backup|build|test|tied|vocab|agentstream|smoke|drivers|env)
 
-Prerequisites for smoke tests: build-mcp, node, jq, yq, git, agent CLI.
+Prerequisites for smoke tests: build-mcp (or test-all), node, bun, jq, yq, git, agent CLI.
 Runbook: docs/tied-feature-extended-demo.md
 EOF
 }
@@ -333,18 +367,22 @@ EOF
 _how_build() {
   cat <<'EOF'
 Build
-  build-mcp                  bun install + tsc in mcp-server/
-  build-agentstream          npm build @tied/agentstream + @tied/cli (tied agentstream)
-  build-all                  build-mcp then build-agentstream
+  build-mcp                  bun install + full workspace build in mcp-server/
+  build-agentstream          bun filter build @tied/agentstream + @tied/cli (incremental)
+  build-all                  same as build-mcp (root + all packages/*)
 EOF
 }
 
 _how_test() {
   cat <<'EOF'
 Test / verify
-  test-mcp                   mcp-server unit/composition tests (bun run test)
+  test-all                   fail-closed: build-mcp, test-mcp, CLI smoke, validate-tied,
+                             validate-vocab, lint-tied (recommended pre-push)
+  test-mcp                   mcp-server unit/composition tests (includes Tier 1 workspace dist tests)
   test-agentstream           @tied/agentstream package tests (frozen oracle fixtures)
-  verify-agentstream-parity  npm test in packages/agentstream (TS parity vs frozen oracle)
+  verify-agentstream-parity  bun build + @tied/agentstream test (TS parity vs frozen oracle)
+
+  Not in test-all: test-new-tied-client, test-tied-feature-* (disposable client / agent CLI)
 EOF
 }
 
@@ -370,7 +408,7 @@ EOF
 
 _how_agentstream() {
   cat <<'EOF'
-Agentstream (after build-agentstream / build-mcp)
+Agentstream (Phase 4d: TS-only; after build-mcp or build-agentstream)
   node mcp-server/packages/cli/dist/index.js agentstream --help
   tied agentstream --help      when @tied/cli is on PATH (npm link / npx)
   AGENTSTREAM=path             optional override for batch drivers

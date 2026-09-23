@@ -4,7 +4,7 @@
 
 **Traceability:** [REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML](../requirements/REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML.yaml) · [REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS](../requirements/REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS.yaml) · [REQ-ATDD-E2E-AGENT_STREAM](../requirements/REQ-ATDD-E2E-AGENT_STREAM.yaml) · [ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS](../architecture-decisions/ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS.yaml) · [ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON](../architecture-decisions/ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON.yaml)
 
-**See also:** [`domain-references.md`](domain-references.md) · [`agentstream.md`](agentstream.md) · [`../../tools/agent-stream/`](../../tools/agent-stream/) · [`../../scripts/run-feature-batch.sh`](../../scripts/run-feature-batch.sh)
+**See also:** [`domain-references.md`](domain-references.md) · [`agentstream.md`](agentstream.md) · Phase 4b Ruby retirement ([`working/REQ-TIED_UNIFIED_TOOLCHAIN/PLAN.md`](../../working/REQ-TIED_UNIFIED_TOOLCHAIN/PLAN.md)) · [`../../scripts/run-feature-batch-agentstream.sh`](../../scripts/run-feature-batch-agentstream.sh)
 
 ---
 
