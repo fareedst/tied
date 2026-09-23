@@ -1,0 +1,130 @@
+copy_hygiene: "Authoritative closed Tracker for REQ-TIED_UNIFIED_TOOLCHAIN Phase 4 arc (4a–4d)."
+description: "Phase 4 arc close_out; profile_depth integrated; gate_policy advisory; REQ Implemented via tied_verify 2026-09-23."
+execution_evidence:
+  close_out_evidence:
+    date: "2026-09-23"
+    deferred: []
+    gates:
+      close_out: "working/REQ-TIED_UNIFIED_TOOLCHAIN/gates/phase4-full-close-out-gate.json"
+      verification: "working/REQ-TIED_UNIFIED_TOOLCHAIN/gates/phase4d-verification-gate.json"
+  completed:
+    - "change-definition"
+    - "gate-pseudocode-validation"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "sub-adversarial-inquiry-pass"
+    - "sub-close-out-evidence-sync"
+    - "test-strategy"
+    - "traceable-commit"
+    - "translate-sponsor-intent"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
+  impl_inventory:
+    - "IMPL-TIED_UNIFIED_TOOLCHAIN"
+  prior_arc_tracker: "working/REQ-TIED_UNIFIED_TOOLCHAIN/checklist-tracker-phase3b-unified-closed.yaml"
+  prior_slice_tracker: "working/REQ-TIED_UNIFIED_TOOLCHAIN/checklist-tracker-phase4b-archive.yaml"
+  request: "REQ-TIED_UNIFIED_TOOLCHAIN"
+record_identity:
+  citdp_path: "tied/citdp/CITDP-REQ-TIED_UNIFIED_TOOLCHAIN.yaml"
+  gate_policy: "advisory"
+  profile_depth: "integrated"
+  req_token: "REQ-TIED_UNIFIED_TOOLCHAIN"
+  slice: "phase-4-arc-closed"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_UNIFIED_TOOLCHAIN/evidence/session-bootstrap-evidence.md"
+    slug: "session-bootstrap"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_UNIFIED_TOOLCHAIN/evidence/translate-sponsor-intent-evidence.md"
+    slug: "translate-sponsor-intent"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4c-deprecation-notice.md"
+      - "working/REQ-TIED_UNIFIED_TOOLCHAIN/PLAN.md"
+    slug: "change-definition"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/packages/agentstream/testdata/oracle/"
+      - "tools/agentstream/README.md"
+      - "working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4d-go-oracle-freeze.json"
+    slug: "impact-discovery"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4c-risk-unified-004-benchmark-note.md"
+      - "working/REQ-TIED_UNIFIED_TOOLCHAIN/PLAN.md"
+    slug: "risk-assessment"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/packages/agentstream/src/dispatcher.test.ts"
+      - "working/REQ-TIED_UNIFIED_TOOLCHAIN/evidence/test-strategy-evidence.md"
+    slug: "test-strategy"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-TIED_UNIFIED_TOOLCHAIN-pseudocode.md"
+    slug: "gate-pseudocode-validation"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_UNIFIED_TOOLCHAIN/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json"
+      - "working/REQ-TIED_UNIFIED_TOOLCHAIN/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl"
+      - "working/REQ-TIED_UNIFIED_TOOLCHAIN/adversarial-inquiry/phase-pre_implementation/gate-result.json"
+      - "working/REQ-TIED_UNIFIED_TOOLCHAIN/adversarial-inquiry/phase-pre_implementation/obligation-report.json"
+    policy: "integrated-depth-inquiry"
+    rationale: "Phase 4d pre_implementation inquiry run_id phase4d-pre-impl-2026-09-23 (GO_TREE_REMOVAL, oracle fixture freeze)."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/packages/agentstream/src/dispatcher.test.ts"
+    slug: "unit-test-red"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4c-deprecation-notice.md"
+    slug: "unit-test-green"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_UNIFIED_TOOLCHAIN/gates/phase4d-verification-gate.json"
+      - "working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4d-go-oracle-freeze.json"
+    slug: "verification-gate"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_UNIFIED_TOOLCHAIN/evidence/request-evidence-envelope.v1.json"
+      - "working/REQ-TIED_UNIFIED_TOOLCHAIN/evidence/verification-evidence-manifest.v1.json"
+      - "working/REQ-TIED_UNIFIED_TOOLCHAIN/gates/phase4-full-close-out-gate.json"
+    slug: "sub-close-out-evidence-sync"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_UNIFIED_TOOLCHAIN/evidence/traceable-commit-evidence.md"
+    rationale: "Phase 4 arc delivered in commit 72b7d9d (2026-09-23); arc close_out re-validated post-commit; origin/main includes follow-on doc sync 8bb296e."
+    slug: "traceable-commit"
+    tracking:
+      consideration_before_proceeding: "Delivered 72b7d9d197d456b4dce8a9d062b112f4155d9ce36 (2026-09-23)."
+      evidence_refs:
+        - "working/REQ-TIED_UNIFIED_TOOLCHAIN/evidence/traceable-commit-evidence.md"
+      status: "completed"

@@ -11,11 +11,11 @@ CITDP-REQ-TIED_UNIFIED_TOOLCHAIN:
       - "CITDP records tool inventory, language decision matrix, migration phases, and risks"
       - "REQ-TIED_UNIFIED_TOOLCHAIN, ARCH-TIED_UNIFIED_TOOLCHAIN, and IMPL-TIED_UNIFIED_TOOLCHAIN exist with traceability"
       - "Sponsor open decisions are enumerated with recommended defaults"
-    unchanged_behavior: "All existing tools continue to build and run until phased migration gates pass parity tests."
+    unchanged_behavior: "Cursor MCP stdio story and TIED_BASE_PATH semantics unchanged; operator agentstream path is TS-only post-4d."
   completion_criteria:
     activation:
       phase: "close_out"
-      run_id: "slice3b-close-out-2026-09-23"
+      run_id: "phase4-full-close-out-2026-09-23"
     checklist_gate:
       dispositions:
         - "completed"
@@ -31,15 +31,14 @@ CITDP-REQ-TIED_UNIFIED_TOOLCHAIN:
   evidence:
     commands:
       - "cd mcp-server && npm install && npm run build && npm test"
-      - "cd tools/agentstream && go test ./..."
-      - "mcp-server npm test (includes dist/hooks/adherence-append-action-attempted.test.js)"
+      - "mcp-server npm test (@tied/agentstream oracle fixtures; dist/hooks/adherence-append-action-attempted.test.js; no in-repo Go tree post-4d)"
       - "scripts/lint_yaml.sh tied/citdp/CITDP-REQ-TIED_UNIFIED_TOOLCHAIN.yaml"
       - "tied_validate_consistency"
     manifest_reference: "working/REQ-TIED_UNIFIED_TOOLCHAIN/evidence/verification-evidence-manifest.v1.json"
     proof_boundaries:
-      - "Go tools/agentstream remains default until slice 4c; Phase 4d Go removal not proven"
-      - "Phase 4b: Ruby tools/agent-stream and adherence Ruby launcher removed; Tier 3 yaml_tool/lint_yaml Ruby sorter deferred (OQ-4-3)"
-      - "Phases 0–3b slices 1–2d shipped: npm workspace, @tied/cli/bootstrap/yaml-cli, TS adherence hook, @tied/agentstream dispatcher/tiedpreflight/tracker-preview, EXECUTOR_DRY_RUN_TS, PIPELINE_BATCH_TS, CHECKLIST_RENDER_TS, ADHERENCE_STRANGLER_TS with Go oracle parity tests"
+      - "Phase 4 complete (72b7d9d): TS-default @tied/agentstream; Go tree removed; oracle via frozen fixtures (phase4d-go-oracle-freeze.json)"
+      - "Phase 4b: Ruby tools/agent-stream and adherence Ruby launcher removed; Tier 3 yaml_tool/lint_yaml Ruby sorter deferred (OQ-4-3 / 4e backlog)"
+      - "Phases 0–4 shipped: npm workspace, @tied/cli/bootstrap/yaml-cli/agentstream, TS adherence hook, strangler through 4d; REQ Implemented via tied_verify 2026-09-23"
   impact_analysis:
     architecture:
       - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
@@ -113,8 +112,8 @@ CITDP-REQ-TIED_UNIFIED_TOOLCHAIN:
       - lang: "Rust"
         reason: "Excellent single-binary story but high rewrite cost; weak MCP SDK parity vs TS; team already invested in mcp-server TS analysis stack"
   leap_feedback:
-    divergences_from_analysis: "Phase 3b slices 2a–2d TS strangler shipped on origin (fbe65e1) with Go oracle parity; live executor default and Phase 4 removal remain deferred per PLAN."
-    record_status: "applied_phase_3b_pushed"
+    divergences_from_analysis: "Phase 4 arc (4a–4d) shipped on origin (72b7d9d); Go/Ruby legacy removed; optional 4embed/4e backlog non-blocking per PLAN post-arc refine 2026-09-23."
+    record_status: "applied_phase_4_complete"
     tied_stack_updates_required: []
   migration_phases:
     - deliverables:
@@ -201,12 +200,12 @@ CITDP-REQ-TIED_UNIFIED_TOOLCHAIN:
       - "@tied/yaml — lint/canonicalize/compare (TS + retire Ruby sorter front-end)"
   tool_suite_inventory:
     tier_1_unified:
-      - current_lang: "Go"
-        path: "tools/agentstream/"
-        role: "Pipeline CLI, checklist rendering, executor, adherence, tiedpreflight"
       - current_lang: "Node (.mjs)"
         path: "tools/bootstrap/"
         role: "copy_files engine, new-tied-client, MCP config preservation"
+      - current_lang: "TypeScript (Node)"
+        path: "mcp-server/packages/agentstream/"
+        role: "Pipeline CLI, checklist rendering, executor, adherence, tiedpreflight (Go tree removed 4d)"
       - current_lang: "TypeScript/Node"
         path: "mcp-server/"
         role: "TIED YAML MCP stdio server, verify, gates, adversarial inquiry, feature-orchestration entrypoints"

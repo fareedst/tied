@@ -6,7 +6,7 @@
 | **ARCH** | [ARCH-TIED_UNIFIED_TOOLCHAIN](../../tied/architecture-decisions/ARCH-TIED_UNIFIED_TOOLCHAIN.yaml) |
 | **IMPL** | [IMPL-TIED_UNIFIED_TOOLCHAIN](../../tied/implementation-decisions/IMPL-TIED_UNIFIED_TOOLCHAIN.yaml) · [pseudo-code](../../tied/implementation-decisions/IMPL-TIED_UNIFIED_TOOLCHAIN-pseudocode.md) |
 | **CITDP** | [CITDP-REQ-TIED_UNIFIED_TOOLCHAIN](../../tied/citdp/CITDP-REQ-TIED_UNIFIED_TOOLCHAIN.yaml) |
-| **Tracker** | [checklist-tracker.yaml](./checklist-tracker.yaml) (Phase **4d** slice; 4b archive at [checklist-tracker-phase4b-archive.yaml](./checklist-tracker-phase4b-archive.yaml)) |
+| **Tracker** | **Arc closed:** [checklist-tracker-phase4-arc-closed.yaml](./checklist-tracker-phase4-arc-closed.yaml); **idle stub:** [checklist-tracker.yaml](./checklist-tracker.yaml) (copy checklist template before **4embed** / **4e**) · 4b archive: [checklist-tracker-phase4b-archive.yaml](./checklist-tracker-phase4b-archive.yaml) |
 | **Last delivery** | **2026-09-23** — Phase **4a–4d** shipped **`72b7d9d`**; arc **`close_out`** re-validated (advisory diagnostics only) |
 | **profile_depth** | **`integrated`** (sponsor 2026-09-22; effective **Phase 3b slice 2+**; slice 1 arc closed at `minimal`) |
 | **gate_policy** | `advisory` |
@@ -29,13 +29,13 @@ Deliver a **single-language** (TypeScript on **user-installed Node ≥18**) deve
 ## Success criteria
 
 1. CITDP and this plan record **locked sponsor decisions** (2026-09-22) and migration phases with exit gates.
-2. **Phases 0–2 + 3a–3b slice 1 (shipped):** npm workspace at **`mcp-server/`**; `@tied/mcp`, `@tied/cli`, `@tied/bootstrap`, `@tied/yaml-cli`, `@tied/agentstream` (dispatcher, tiedpreflight, `--checklist-tracker-preview` TS-native); MCP adherence TS hook; README / wrappers updated—**Go/Ruby remain functionally authoritative** for most agentstream argv.
-3. **Phase 3b (shipped 2a–2d):** qualified preview/dry-run/reconcile TS-native on **`fbe65e1`**. **Phase 4:** live executor + checklist run + default **`ts`** + Go/Ruby removal—RED parity per [Phase 4](#phase-4--legacy-removal--optional-embed-evaluation) slices before deletion.
+2. **Phases 0–3b (shipped):** npm workspace at **`mcp-server/`**; `@tied/mcp`, `@tied/cli`, `@tied/bootstrap`, `@tied/yaml-cli`, `@tied/agentstream` strangler through qualified preview/dry-run/reconcile on **`fbe65e1`**; MCP adherence TS hook; README / wrappers updated.
+3. **Phase 4 (shipped `72b7d9d`):** **`LIVE_EXECUTOR_TS`**, **`CHECKLIST_RUN_TS`**, Ruby/shell retirement (**4b**), default **`TIED_AGENTSTREAM_IMPL=ts`** (**4c**), Go tree removal + frozen oracle fixtures (**4d**); REQ **Implemented** via **`tied_verify`**. Non-blocking backlog: **4embed** spike, **4e** Tier 3 Ruby compare / `validate_tokens` TS port.
 4. **`tied_validate_consistency`** passes after TIED stack updates; gates documented below (including **`close_out`** for completed slices).
 
 ---
 
-## Delivery snapshot (post slice 1)
+## Delivery snapshot (post Phase 4 arc)
 
 | Phase | Status | Shipped (high level) |
 | --- | --- | --- |
@@ -45,9 +45,9 @@ Deliver a **single-language** (TypeScript on **user-installed Node ≥18**) deve
 | **3a** | Complete | `@tied/agentstream` package; `tied agentstream`; `TIED_AGENTSTREAM_IMPL=go\|ts`; Go default; tiedpreflight TS + parity tests |
 | **3b slice 1** | Complete | TS-native **`--checklist-tracker-preview`** (`PreviewTrackerMigration` vs Go oracle); parity + dispatcher tests |
 | **3b slice 2a–2d** | **Complete (shipped)** | Dry-run, pipeline/batch, checklist render, adherence reconcile TS-native (`fbe65e1`) |
-| **4a** | **Complete (local)** | Live executor + extended dry-run TS-native; tracker-mode live TS-native |
-| **4b** | **Complete (local)** | Ruby `tools/agent-stream` + adherence Ruby launcher removed; RISK-UNIFIED-005 inventory |
-| **4c** | **Complete (local)** | Default `TIED_AGENTSTREAM_IMPL=ts`; Go deprecation window documented |
+| **4a** | **Complete (shipped)** | Live executor + extended dry-run TS-native; tracker-mode live TS-native |
+| **4b** | **Complete (shipped)** | Ruby `tools/agent-stream` + adherence Ruby launcher removed; RISK-UNIFIED-005 inventory |
+| **4c** | **Complete (shipped)** | Default `TIED_AGENTSTREAM_IMPL=ts`; deprecation notice per OQ-4-4 |
 | **4** (arc) | **Complete (shipped)** | **`72b7d9d`** — Phase **4a–4d**; arc **`close_out`** **`allowed: true`** |
 | **4d** | **Complete (shipped)** | Go tree removed; oracle fixtures under `mcp-server/packages/agentstream/testdata/`; TS-only `tied agentstream` |
 
@@ -75,7 +75,7 @@ Deliver a **single-language** (TypeScript on **user-installed Node ≥18**) deve
 | Role | Choice |
 | --- | --- |
 | **Primary** | TypeScript on **Node.js ≥18**, workspace centered on **`mcp-server/`** |
-| **Fallback** | Retain **Go** `tools/agentstream` if TS port fails parity gates; still unify bootstrap/yaml on Node |
+| **Fallback (historical)** | Go `tools/agentstream` retained through **4c** only; removed **4d** — emergency use prior git tag (OQ-4-1) |
 | **Deprecate** | Ruby `tools/agent-stream/`; Ruby YAML front-ends and hook bridges after TS replacements |
 | **Rejected / deferred** | Rust (cost); Deno (ecosystem); Bun as **primary** (second runtime)—optional CI-only experiment per sponsor #4 |
 
@@ -90,7 +90,7 @@ Rationale: reuse mcp-server MCP/analysis investment; bootstrap already Node; sha
 | Path | Today | Target package | Role | Slice 1 status |
 | --- | --- | --- | --- | --- |
 | `mcp-server/` | TS/Node | `@tied/mcp` | TIED YAML MCP, verify, gates, adversarial inquiry, feature-orchestration | **In workspace** |
-| `tools/agentstream/` | Go (authoritative for most argv) | `@tied/agentstream` | Pipeline, checklist, executor, adherence, tiedpreflight | **Strangler:** preview + preflight TS; rest → Go |
+| `mcp-server/packages/agentstream/` | TypeScript (operator path) | `@tied/agentstream` | Pipeline, checklist, executor, adherence, tiedpreflight | **Shipped** — TS-only; oracle via frozen fixtures |
 | `tools/bootstrap/` | Node (.mjs) engines | `@tied/bootstrap` | copy_files, new-tied-client, MCP config preservation | **Wrapped** in workspace |
 
 ### Tier 2 — wrappers (thin; converge on `@tied/cli`)
@@ -114,13 +114,13 @@ Rationale: reuse mcp-server MCP/analysis investment; bootstrap already Node; sha
 
 | Path | Notes |
 | --- | --- |
-| `tools/agent-stream/` (Ruby) | Deprecation notice → removal Phase 4 |
+| `tools/agent-stream/` (Ruby) | **Removed** Phase **4b** |
 
 ### Tier 5 — port with suite (sponsor #5)
 
 | Path | Today | Target | Slice 1 status |
 | --- | --- | --- | --- |
-| `scripts/adherence_append_action_attempted.rb` | Ruby hook bridge | TS in MCP `dist/cli` + hook tests | **TS primary**; Ruby launcher retained for contract |
+| `scripts/adherence_append_action_attempted.rb` | Ruby hook bridge (historical) | TS in MCP `dist/cli` + hook tests | **TS only**; Ruby launcher removed Phase **4b** |
 
 ### Out of scope
 
@@ -137,7 +137,7 @@ Rationale: reuse mcp-server MCP/analysis investment; bootstrap already Node; sha
   - `@tied/mcp` — current `mcp-server` implementation (root package)
   - `@tied/bootstrap` — wraps `tools/bootstrap` engines
   - `@tied/yaml-cli` — lint/canonicalize (TS)
-  - `@tied/agentstream` — strangler port from Go (**partial**)
+  - `@tied/agentstream` — TS operator CLI (**complete** post-**4d**)
   - `@tied/cli` — umbrella **`tied`** binary
 - **Build:** `cd mcp-server && npm run build && npm test` at workspace root.
 - **Release/docs:** operators assume **Node ≥18** on PATH.
@@ -148,7 +148,7 @@ Rationale: reuse mcp-server MCP/analysis investment; bootstrap already Node; sha
 tied mcp          → stdio MCP (mcp-server/dist/index.js)
 tied bootstrap    → copy_files / client bootstrap
 tied yaml         → canonicalize / lint (TS)
-tied agentstream  → TS entry (default); set TIED_AGENTSTREAM_IMPL=go for legacy Go binary
+tied agentstream  → TS entry (default `TIED_AGENTSTREAM_IMPL=ts`; no in-repo Go binary post-4d)
 ```
 
 ### Cursor MCP config story
@@ -158,13 +158,13 @@ tied agentstream  → TS entry (default); set TIED_AGENTSTREAM_IMPL=go for legac
 | **1–2 (now)** | `node <repo>/mcp-server/dist/index.js` or `tied mcp` |
 | **Invariant** | `TIED_BASE_PATH` semantics unchanged; `tied_config_get_base_path` mandatory |
 
-### Agentstream dispatch (Phase 3b complete — slices 2a–2d)
+### Agentstream dispatch (post **4d** — shipped **`72b7d9d`**)
 
-| `TIED_AGENTSTREAM_IMPL` | Qualified argv (TS-native, no Go forward) | Unqualified argv |
-| --- | --- | --- |
-| **`ts`** (default, **4c**) | Preview/dry-run/reconcile **plus** live checklist run (`-c`, with or without `--checklist-tracker-yaml`) and extended dry-run `-d` shapes documented in README — documented operator flows (**4a**) | **Forward to Go** with stderr `DIAGNOSTIC` only for argv outside documented operator flows |
-| **`go`** (legacy opt-in, **4c** window) | N/A — Go binary for all argv | Go binary |
-| **Phase 4d target** | Same as **`ts`** default row | Go tree removed; no Go subprocess |
+| `TIED_AGENTSTREAM_IMPL` | Behavior |
+| --- | --- |
+| **`ts`** (default) | All documented TIED operator flows in [@tied/agentstream README](../../mcp-server/packages/agentstream/README.md) run TS-native; **no** Go subprocess forward |
+| **`go`** | **Not supported** in-repo after **4d** (OQ-4-1: reinstall a **prior tag** that still ships `tools/agentstream/` for emergency only) |
+| Parity proof | Frozen oracle fixtures under `mcp-server/packages/agentstream/testdata/oracle/` (see [phase4d-go-oracle-freeze.json](./phase4d-go-oracle-freeze.json)) |
 
 ---
 
@@ -195,7 +195,7 @@ Align to [IMPL-TIED_UNIFIED_TOOLCHAIN-pseudocode.md](../../tied/implementation-d
 | **2c** | Checklist render / expansion | `@tied/agentstream` | `tools/agentstream/checklist/testdata` |
 | **2d** | Adherence strangler | `@tied/agentstream` + hook integration | Go adherence + MCP gate tests |
 
-**Exit for Phase 3b (full):** With `TIED_AGENTSTREAM_IMPL=ts`, **qualified preview/dry-run/reconcile argv** runs without Go forward. **Live executor, checklist run, and other non-qualified argv** still forward to Go (see [@tied/agentstream README](../../mcp-server/packages/agentstream/README.md)). Go tests remain the strangler oracle until Phase 4 removal gate.
+**Exit for Phase 3b (full):** With `TIED_AGENTSTREAM_IMPL=ts`, **qualified preview/dry-run/reconcile argv** ran without Go forward until **4a** extended TS coverage. **Historical:** live executor and non-qualified argv forwarded to Go until Phase **4a–4d** closed the strangler.
 
 ---
 
@@ -220,18 +220,9 @@ Close the strangler: port the **remaining Go-authoritative agentstream surfaces*
 
 **Not a Phase 4 prerequisite (may run in parallel or defer):** Tier 3 Ruby YAML compare (`compare_yaml_dirs.rb`), `validate_tokens.sh` TS port, Bun CI experiment — track as **4e backlog** unless sponsor promotes them into removal gate.
 
-### Remaining Go-forward surface (baseline at 3b close-out)
+### Historical — Go-forward surface (baseline at 3b close-out; closed by **4a–4d**)
 
-With `TIED_AGENTSTREAM_IMPL=ts`, `@tied/agentstream` still **forwards to Go** when argv is **not** in the Phase 3b qualified set ([`index.ts`](../../mcp-server/packages/agentstream/src/index.ts)):
-
-| Category | Examples | IMPL pseudo-code target (build-plan) |
-| --- | --- | --- |
-| **Live executor** | Non-`-d` runs that invoke Cursor/agent subprocess orchestration | **`LIVE_EXECUTOR_TS`** |
-| **Checklist run** | Full checklist execution (not `--preview-lead-checklist` / tracker preview) | **`CHECKLIST_RUN_TS`** |
-| **Extended dry-run** | Disqualifiers in `qualifiesForTsNativeDryRun` (e.g. `--prompts-file`, `--tdd-yaml`, `--verify-session`, `--non-compact-html`, argv after `--`) | **`EXECUTOR_DRY_RUN_TS`** extension or **`PIPELINE_BATCH_TS`** |
-| **Other subcommands** | Any path hitting “subcommand not implemented in TS” DIAGNOSTIC | Per-oracle port or explicit **shim retention** decision |
-
-Default **`TIED_AGENTSTREAM_IMPL=ts`** applies from slice **4c**; set **`go`** for legacy Go binary during the deprecation window until **4d** (see [phase4c-deprecation-notice.md](./phase4c-deprecation-notice.md)).
+Before slice **4a**, with `TIED_AGENTSTREAM_IMPL=ts`, `@tied/agentstream` **forwarded to Go** for argv outside the Phase 3b qualified set. Those categories were ported in **4a**; default flip **4c**; Go tree removal **4d**. See IMPL blocks **`LIVE_EXECUTOR_TS`**, **`CHECKLIST_RUN_TS`**, and extended dry-run coverage in [pseudo-code](../../tied/implementation-decisions/IMPL-TIED_UNIFIED_TOOLCHAIN-pseudocode.md). Deprecation window: [phase4c-deprecation-notice.md](./phase4c-deprecation-notice.md).
 
 ### Slice order (recommended; reorder only if dependency data contradicts)
 
@@ -273,7 +264,7 @@ Align new blocks to [IMPL-TIED_UNIFIED_TOOLCHAIN-pseudocode.md](../../tied/imple
 | **RISK-UNIFIED-004** | TS subprocess performance vs Go | Benchmark before **4c** default flip; defer shim if data proves need |
 | **RISK-UNIFIED-002** | Wrong `TIED_BASE_PATH` after Go removal | Integration tests on `tied mcp` + `tied agentstream` with multi-root docs |
 | **RISK-UNIFIED-005** | Shell/Ruby YAML paths still used after Go removal | Explicit **4b** inventory; `@tied/yaml-cli` + MCP canonicalizer as replacement |
-| **RISK-UNIFIED-006** | Operators assume `impl=ts` is full TS **before 4a** | **4c:** README states default **`ts`**; **`go`** documented as legacy opt-in; PLAN dispatch table lists any remaining forward paths |
+| **RISK-UNIFIED-006** | Operators assume `impl=ts` is full TS while Go forward still existed | **Post-4d:** README + PLAN dispatch table state TS-only path; emergency Go via **prior tag** only (OQ-4-1) |
 | **RISK-UNIFIED-007** (proposed) | Removing Go oracle breaks future strangler fixes | Freeze oracle fixtures in **4d**; document “last known good” Go commit in CITDP evidence |
 
 ### Verification additions (Phase 4)
@@ -285,15 +276,18 @@ Align new blocks to [IMPL-TIED_UNIFIED_TOOLCHAIN-pseudocode.md](../../tied/imple
 | Before **4d** deletion | Grep/docs audit: no `tools/agentstream` in operator quick-start; adherence Ruby contract test retired or replaced |
 | Phase 4 **`close_out`** | Unified close-out runner + envelope; **`tied_validate_consistency`**; REQ status update via **`tied_verify`** if applicable |
 
-### Before `build-plan` (Phase 4)
+### Post–Phase 4 arc (2026-09-23)
 
-1. Copy [checklist-tracker.yaml](./checklist-tracker.yaml) from [agent-req-implementation-checklist.yaml](../../tied/docs/agent-req-implementation-checklist.yaml) (new arc; archive 3b tracker at [checklist-tracker-phase3b-unified-closed.yaml](./checklist-tracker-phase3b-unified-closed.yaml) if not already).
-2. Set Tracker `record_identity.profile_depth: integrated`, `gate_policy: advisory`, `slice: phase-4-legacy-removal` (or per-slice `phase-4a-live-executor`, …).
-3. Extend IMPL pseudo-code with **`LIVE_EXECUTOR_TS`**, **`CHECKLIST_RUN_TS`**, and removal blocks; run **`pseudocode_validate`** before RED tests.
-4. Run **`tied_checklist_gate_validate`** with `phase: pre_implementation`, updated Tracker + [CITDP](../../tied/citdp/CITDP-REQ-TIED_UNIFIED_TOOLCHAIN.yaml), identity-bound activation evidence at integrated depth.
-5. PRELOAD [fidelity-research.md](../../tied/vocab/fidelity-research.md) + [quality-assurance.md](../../tied/vocab/quality-assurance.md); plan **`sub-adversarial-inquiry-pass`** artifacts under `working/REQ-TIED_UNIFIED_TOOLCHAIN/adversarial-inquiry/`.
+**Arc status:** Closed at **`72b7d9d`**; REQ **Implemented**; authoritative Tracker archived at [checklist-tracker-phase4-arc-closed.yaml](./checklist-tracker-phase4-arc-closed.yaml). [checklist-tracker.yaml](./checklist-tracker.yaml) is an **idle stub** until optional follow-up.
 
-**Recommended next prompt type:** **`build-plan`** on this PLAN scoped to Phase **4a** (or sponsor-approved slice).
+| Follow-up | When | Prompt type / checklist |
+| --- | --- | --- |
+| **Push / CHANGELOG hygiene** | Sponsor policy 2026-09-23 | **`plan-close-out`** if additional doc-only commits needed; **`origin/main`** already includes **`72b7d9d`** + post-close-out sync (**`8bb296e`** as of refine-plan) |
+| **4embed** spike | Sponsor promotes optional embed evaluation | Copy fresh Tracker; **`build-plan`** scoped to **4embed** only; decision record — not a product deliverable |
+| **4e backlog** | Tier 3 Ruby YAML compare, `validate_tokens.sh` TS port, Bun CI experiment | New REQ or CITDP slice; fresh Tracker; **`build-plan`** or **`plan-new-feature`** per scope |
+| **No further Phase 4 implementation** | Default | **None** — do not re-open **4a–4d** without sponsor LEAP |
+
+Do **not** commit gitignored gate JSON or ephemeral `token-create-*.json` receipts.
 
 ### Open questions (resolved — sponsor accepted defaults 2026-09-22)
 
@@ -315,7 +309,7 @@ Align new blocks to [IMPL-TIED_UNIFIED_TOOLCHAIN-pseudocode.md](../../tied/imple
 | **RISK-UNIFIED-003** | Windows path and stdio MCP fragility | Medium | Bootstrap path helpers; win32 CI where available |
 | **RISK-UNIFIED-004** | TS subprocess orchestration performance vs Go | Low | Benchmark executor; Go shim only if data proves need |
 | **RISK-UNIFIED-005** | YAML canonicalization Ruby-backed today | Medium | `@tied/yaml-cli` + MCP canonicalizer; retire shell front-end when compare ported |
-| **RISK-UNIFIED-006** | Operators assume `TIED_AGENTSTREAM_IMPL=ts` is full TS | Medium | README + DIAGNOSTIC forwarding; PLAN dispatch table; default **`go`** until Phase **4c** |
+| **RISK-UNIFIED-006** | Operators assume `TIED_AGENTSTREAM_IMPL=ts` is full TS | Medium | **Post-4d:** README + PLAN dispatch (TS-only); OQ-4-1 prior-tag emergency; no in-repo **`go`** opt-in |
 | **RISK-UNIFIED-007** | Go oracle loss on removal breaks audit trail | Low | Freeze fixtures at **4d**; CITDP records last Go oracle commit (Phase **4** section) |
 
 ---
@@ -327,14 +321,14 @@ Align new blocks to [IMPL-TIED_UNIFIED_TOOLCHAIN-pseudocode.md](../../tied/imple
 | Trigger | Actions |
 | --- | --- |
 | After any `@tied/*` or MCP hook change | `cd mcp-server && npm run build && npm test` |
-| After Go agentstream touch | `cd tools/agentstream && go test ./...` |
+| After agentstream parity / oracle fixture change | `cd mcp-server && npm test` (packages/agentstream fixture tests); optional nightly Go job if configured — **no** in-repo Go tree post-**4d** |
 | After adherence bridge change | `ruby scripts/test/adherence_append_action_attempted_test.rb` + MCP hook test |
 | Before slice **close_out** | Unified close-out runner + envelope blocking (see close-out plan); `tied_validate_consistency` |
-| Before claiming REQ **Implemented** | Full Phase 3b parity + Phase 4 gate; project **`tied_verify`** if verification-gated |
+| Before claiming REQ **Implemented** | Phase **4d** + arc **`close_out`** + project **`tied_verify`** ( **satisfied** 2026-09-23 ) |
 
 **Do not rely on** stale `working/REQ-TIED_UNIFIED_TOOLCHAIN/validate-consistency.json` alone—re-run `tied_validate_consistency` at gate time.
 
-**Partial REQ policy:** Keep REQ **In Progress** until Phase 3b full parity + Phase 4 removal criteria met; slice close-outs use **`close_out`** gate, not full REQ completion.
+**REQ status:** **Implemented** (verification-gated). Future optional slices (**4embed**, **4e**) do not revert REQ unless sponsor opens a new requirement.
 
 ---
 
@@ -343,33 +337,33 @@ Align new blocks to [IMPL-TIED_UNIFIED_TOOLCHAIN-pseudocode.md](../../tied/imple
 | Scope | Command / suite | Proves |
 | --- | --- | --- |
 | Workspace | `cd mcp-server && npm install && npm run build && npm test` | `@tied/cli`, bootstrap, yaml-cli, agentstream package tests, MCP e2e, adherence hook |
-| Go baseline | `cd tools/agentstream && go test ./...` | Oracle for strangler parity |
-| Adherence Ruby contract | `ruby scripts/test/adherence_append_action_attempted_test.rb` | Append-only hook semantics |
+| Oracle fixtures | `mcp-server/packages/agentstream/testdata/oracle/**` + package tests | Post-**4d** parity vs frozen Go oracle (RISK-UNIFIED-007) |
+| Adherence hook (TS) | `mcp-server` dist hook tests (`adherence-append-action-attempted.test.js`) | Append-only hook semantics post-**4b** (Ruby launcher removed) |
 | Agentstream TS | `packages/agentstream` parity, dispatcher, tiedpreflight, tracker-migration-preview tests | Slice 1 + future slice RED/GREEN |
-| Checklist goldens | `tools/agentstream/checklist/testdata/**` (via Go today; TS must match) | RISK-UNIFIED-001 |
+| Checklist goldens | `mcp-server/packages/agentstream/testdata/**` (+ migrated oracle copies) | RISK-UNIFIED-001 |
 | TIED YAML | `lint_yaml` on changed project YAML; **`tied_validate_consistency`** | Stack traceability |
 | Gates | `tied_checklist_gate_validate` per phase; close-out runner for **`close_out`** | Checklist enforcement (advisory) |
-| Phase **4a–4d** | `npm test` + Go oracle while present; post-**4d** TS-only + fixture oracle | Live executor parity; removal gate |
+| Phase **4a–4d** | `npm test` + frozen oracle fixtures (post-**4d** TS-only) | Live executor parity; Go tree removal gate |
 | Phase **4embed** | Spike notes only | Sponsor embed decision (non-blocking) |
 
-Phase 0: TIED-only. Phase 1–3b: parity-first before expanding TS surface. Phase 4: parity-first before default flip and deletion.
+Phase 0: TIED-only. Phases 1–4: parity-first strangler (complete). Ongoing: `npm test` at workspace root for `@tied/*` changes.
 
 ---
 
 ## Open items / next execution entry point
 
-**Recommended:** Optional **`build-plan`** for **4embed** spike only; otherwise Phase **4** arc is closed locally at **`72b7d9d`**.
+**Recommended prompt type:** **`plan-close-out`** until **process close-out hygiene** is committed and pushed (authoritative [checklist-tracker-phase4-arc-closed.yaml](./checklist-tracker-phase4-arc-closed.yaml), CITDP activation sync, idle stub, gitignore patterns). After hygiene lands on **`origin/main`**, default **None** for the arc; optional **`build-plan`** for **4embed** only.
 
-**Post–4d process (2026-09-23):** **`traceable-commit`** completed with commit **`72b7d9d`**; arc **`close_out`** re-run → **`allowed: true`** ([phase4-full-close-out-gate.json](./gates/phase4-full-close-out-gate.json); advisory `finding_unresolved`, `warn_not_success`).
+**Post–4d process (2026-09-23):** Feature delivery **`72b7d9d`**; arc **`close_out`** → **`allowed: true`** post delivery commit ([phase4-full-close-out-gate.json](./gates/phase4-full-close-out-gate.json)); **`tied_verify`** → REQ **Implemented**. Re-run **`close_out`** runner after hygiene commit so envelope and gate receipts reference the new HEAD.
 
-**Not recommended:** Committing gitignored gate JSON or ephemeral `token-create-*.json` receipts.
+**Git (informational):** **`main`** tracks **`origin/main`** at **`422bc87`** (includes Bun build fix and partial tracker sync). **Pending local (uncommitted):** CITDP, PLAN, idle stub, **untracked** arc-closed tracker, `.gitignore` — sponsor **`plan-close-out`** + commit + push closes the gap.
 
-**Deferred / non-blocking**
+**Deferred / non-blocking (4e backlog)**
 
-- Bun CI experiment ticket (after workspace stable).
-- Commit `working/**/token-create-*.json` (omit—re-run token tools if needed).
-- **Push to origin:** Phase **4** close-out push requested 2026-09-23 (after commits **`72b7d9d`** + follow-on doc/fixture commit).
-- Tier 3 Ruby YAML compare / `validate_tokens.sh` TS port (see Phase 4 **4b** / **4e** backlog).
+- **4embed** — embedded Node evaluation spike (decision record only).
+- Bun CI experiment (Node remains canonical).
+- Tier 3 Ruby YAML compare / `validate_tokens.sh` TS port.
+- Ephemeral `working/**/token-create-*.json` — omit from commits.
 
 ---
 
@@ -387,40 +381,63 @@ Phase 0: TIED-only. Phase 1–3b: parity-first before expanding TS surface. Phas
 | `token-create-*.json` | **Omit from commits** (ephemeral audit) |
 | Phase 4 embedded runtime | Still optional / uncommitted |
 | Slice 2 order | **2a → 2b → 2c → 2d** (executor dry-run first) — **confirmed** |
-| Git push | **Satisfied** at **`fbe65e1`** (2026-09-23); Phase **4** TBD |
+| Git push | **Satisfied** — **`origin/main`** includes **`72b7d9d`** + **`8bb296e`** (2026-09-23) |
 | `profile_depth` for slice 2+ | **`integrated`** (upgrade from `minimal` used for slice 1 close-out) |
 | Phase 4 refine (2026-09-22) | Slices **4a→4b→4c→4d** + optional **4embed**; live executor in **4a**; default **`ts`** in **4c**; Go delete in **4d**; OQ-4-1..4-4 documented in Phase 4 section |
 
-**Vocabulary:** `linked plan`, `umbrella CLI`, `strangler slice`, `partial REQ delivery`, `profile_depth` **integrated**, `gate_policy` advisory, **Go-forward surface**, **deprecation window**, **oracle fixture freeze** — [citdp-planning-notes.md](./citdp-planning-notes.md); Touchpoint 3 **VALIDATE** at next commit.
+**Post–Phase-4-arc refine-plan (2026-09-23):**
+
+| Topic | Resolution |
+| --- | --- |
+| REQ status | **Implemented** via **`tied_verify`**; arc **`close_out`** **`allowed: true`** |
+| Phase **4** implementation | **Closed** — no further **4a–4d** unless sponsor LEAP |
+| Tracker | Archived [checklist-tracker-phase4-arc-closed.yaml](./checklist-tracker-phase4-arc-closed.yaml); [checklist-tracker.yaml](./checklist-tracker.yaml) idle until **4embed** / **4e** |
+| Agentstream dispatch | TS-only post-**4d**; no **`TIED_AGENTSTREAM_IMPL=go`** in-repo (OQ-4-1 prior tag) |
+| Next prompt type | **`plan-close-out`** until hygiene commit; then **None** (arc complete); optional **`build-plan`** (**4embed**) |
+| Push policy | Re-push after hygiene commit (feature delivery already on **`origin/main`**) |
+| **4e backlog** | Tier 3 Ruby compare, `validate_tokens` TS port, Bun CI — non-blocking |
+| **Process close-out hygiene** | **Pending** — commit arc-closed tracker + CITDP + gitignore; no new IMPL blocks |
+| **`pre_implementation` gate (refine-plan)** | **N/A** — no new implementation slice; use authoritative closed tracker + **`close_out`** only |
+
+**Vocabulary:** `linked plan`, `umbrella CLI`, `strangler slice`, `profile_depth` **integrated**, `gate_policy` advisory, **oracle fixture freeze**, **4e backlog**, **post-arc idle tracker**, **process close-out hygiene** — [citdp-planning-notes.md](./citdp-planning-notes.md); Touchpoint 3 **VALIDATE** at hygiene commit.
 
 ---
 
 ## Plan (CITDP)
 
-- **Change definition:** Multi-language operator tooling → phased TS/Node suite; **Phases 0–3b (2a–2d) shipped** on **`fbe65e1`**; **Phase 4** = live executor + default **`ts`** + Go/Ruby removal (+ optional embed spike).
-- **Impact:** `ARCH-TIED_UNIFIED_TOOLCHAIN`; Go still authoritative for **live executor** and non-qualified argv; **`LIVE_EXECUTOR_TS`** / **`CHECKLIST_RUN_TS`** (planned IMPL blocks) before deletion.
-- **Risk / depth:** `depth_tier: integrated`, `gate_policy: advisory`; RISK-UNIFIED-001..007; inquiry **required** for Phase 4 gates; CITDP `leap_feedback.record_status`: `applied_phase_3b_pushed`; Phase 4 planning in [citdp-planning-notes.md](./citdp-planning-notes.md).
-- **Test strategy:** Matrix above; Phase 4 slices add RED parity for Go-forward categories before **4c** default flip and **4d** removal.
+- **Change definition:** Multi-language operator tooling → **shipped** TS/Node suite; Phases **0–4 (4a–4d)** on **`72b7d9d`**; optional **4embed** / **4e** backlog only.
+- **Impact:** `ARCH-TIED_UNIFIED_TOOLCHAIN`; `@tied/agentstream` TS-only operator path; Go/Ruby legacy removed per **`DEPRECATE_RUBY_AGENT_STREAM`** and Go tree removal evidence.
+- **Risk / depth:** `depth_tier: integrated`, `gate_policy: advisory`; RISK-UNIFIED-001..007 mitigations applied through **4d**; CITDP `leap_feedback.record_status`: **`applied_phase_4_complete`** (post-refine); notes in [citdp-planning-notes.md](./citdp-planning-notes.md).
+- **Test strategy:** Workspace `npm test` + frozen oracle fixtures; no in-repo Go oracle CLI post-**4d**.
 
 ---
 
 ## Implement (outline — no code in refine-plan)
 
-**Shipped (3b):** **EXECUTOR_DRY_RUN_TS**, **PIPELINE_BATCH_TS**, **CHECKLIST_RENDER_TS**, **ADHERENCE_STRANGLER_TS** on **`fbe65e1`**.
+**Shipped (production — arc complete at `72b7d9d`):**
 
-**Phase 4 `build-plan`** (extend pseudo-code first):
+| Slice | IMPL blocks / outcome |
+| --- | --- |
+| **3b** | **EXECUTOR_DRY_RUN_TS**, **PIPELINE_BATCH_TS**, **CHECKLIST_RENDER_TS**, **ADHERENCE_STRANGLER_TS** (`fbe65e1`) |
+| **4a** | **LIVE_EXECUTOR_TS**, **CHECKLIST_RUN_TS**, extended dry-run disqualifiers |
+| **4b** | **DEPRECATE_RUBY_AGENT_STREAM**; Ruby launcher removal; Tier 3 inventory (deferred compare) |
+| **4c** | Default **`TIED_AGENTSTREAM_IMPL=ts`**; [phase4c-deprecation-notice.md](./phase4c-deprecation-notice.md) |
+| **4d** | Go tree removal; oracle fixture freeze; **`tied_verify`** → REQ **Implemented** |
 
-1. **LIVE_EXECUTOR_TS** (slice **4a**) — subprocess orchestration parity vs Go live path.
-2. **CHECKLIST_RUN_TS** (slice **4a**) — non-preview checklist execution vs `checklist/testdata`.
-3. **EXECUTOR_DRY_RUN_TS** / **PIPELINE_BATCH_TS** extensions (slice **4a**) — remaining dry-run disqualifiers.
-4. **DEPRECATE_RUBY_AGENT_STREAM** + hook launcher removal (slice **4b**).
-5. Default **`TIED_AGENTSTREAM_IMPL=ts`** + release notice (slice **4c**).
-6. Go tree removal + oracle fixture freeze (slice **4d**).
-7. Optional **4embed** spike — decision record only.
+**No further Phase 4 product implementation** in refine-plan scope. Optional follow-ups only via sponsor-scoped **`build-plan`**:
 
-TDD order: pseudo-code validation → RED parity → GREEN port → composition → verification gate → Phase 4 arc **`close_out`** when sponsored.
+- **4embed** — spike + sponsor decision record (no product commit unless new REQ).
+- **4e** — Tier 3 Ruby YAML compare, `validate_tokens.sh` TS port, Bun CI experiment.
 
-Phase 0–3b production code **landed** through **`fbe65e1`** (see [Delivery snapshot](#delivery-snapshot-post-slice-1)).
+**Process close-out hygiene (doc/TIED only — in flight):**
+
+| Step | Outcome |
+| --- | --- |
+| **`sub-close-out-evidence-sync`** | `run-close-out-gates.mjs` on [checklist-tracker-phase4-arc-closed.yaml](./checklist-tracker-phase4-arc-closed.yaml); envelope blocking gaps **0** |
+| **Commit** | Stage arc-closed tracker, idle stub, CITDP, PLAN, `.gitignore`, CHANGELOG, planning notes |
+| **Post-commit replay** | Same runner on new HEAD; **`git push origin main`** |
+
+Phase 0–**4d** production code **landed** through **`72b7d9d`** (see [Delivery snapshot](#delivery-snapshot-post-phase-4-arc)).
 
 ---
 
@@ -456,11 +473,15 @@ Phase 0–3b production code **landed** through **`fbe65e1`** (see [Delivery sna
 | Phase **4a follow-up** | `verification` | **`allowed: true`**, advisory (`finding_unresolved`, `warn_not_success`) | [phase4a-followup-verification-gate.json](./gates/phase4a-followup-verification-gate.json); inquiry `phase4a-followup-verification-2026-09-23` |
 | Phase **4b** | `pre_implementation` | **`allowed: true`**, advisory | [phase4b-pre_implementation-gate.json](./gates/phase4b-pre_implementation-gate.json); inquiry `phase4b-pre-impl-2026-09-23` |
 | Phase **4b** | `verification` | **`allowed: true`**, advisory (`finding_unresolved`, `warn_not_success`) | [phase4b-verification-gate.json](./gates/phase4b-verification-gate.json); inquiry `phase4b-verification-2026-09-23` |
-| Phase **4b** | **`close_out`** | *Deferred* | Slice delivery; arc **`close_out`** after **4d** |
-| Phase **4a** | **`close_out`** | *Deferred* | Slice delivery; arc **`close_out`** after **4d** |
+| Phase **4b** | **`close_out`** | *N/A — superseded by Phase 4 arc close_out* | Slice gates only |
+| Phase **4a** | **`close_out`** | *N/A — superseded by Phase 4 arc close_out* | Slice gates only |
+| Phase **4c** | `pre_implementation` | **`allowed: true`**, advisory | [phase4c-pre_implementation-gate.json](./gates/phase4c-pre_implementation-gate.json); inquiry `phase4c-pre-impl-2026-09-23` |
+| Phase **4c** | `verification` | **`allowed: true`**, advisory (`finding_unresolved`, `warn_not_success`) | [phase4c-verification-gate.json](./gates/phase4c-verification-gate.json); inquiry `phase4c-verification-2026-09-23` |
+| Phase **4c** | **`close_out`** | *N/A — superseded by Phase 4 arc close_out* | Default flip slice |
 | Phase **4d** | `pre_implementation` | **`allowed: true`**, advisory | [phase4d-pre_implementation-gate.json](./gates/phase4d-pre_implementation-gate.json); inquiry `phase4d-pre-impl-2026-09-23` |
 | Phase **4d** | `verification` | **`allowed: true`**, advisory (`finding_unresolved`, `warn_not_success`) | [phase4d-verification-gate.json](./gates/phase4d-verification-gate.json); inquiry `phase4d-verification-2026-09-23` |
-| Phase **4** (arc) | **`close_out`** | **`allowed: true`**, advisory (`finding_unresolved`, `warn_not_success`) | [phase4-full-close-out-gate.json](./gates/phase4-full-close-out-gate.json); run_id `phase4-full-close-out-2026-09-23`; envelope blocking gaps **0**; commit **`72b7d9d`** |
+| Phase **4** (arc) | **`close_out`** | **`allowed: true`**, advisory (`finding_unresolved`, `warn_not_success`) | [phase4-full-close-out-gate.json](./gates/phase4-full-close-out-gate.json); run_id `phase4-full-close-out-2026-09-23`; envelope blocking gaps **0**; delivery commit **`72b7d9d`** — **re-run post hygiene commit** |
 | Phase **4** (arc) | **`tied_verify`** | **`ok: true`** (2026-09-23) | REQ **Implemented** / IMPL **Active** via [run-phase4d-tied-verify.mjs](./run-phase4d-tied-verify.mjs) + authoritative tracker |
+| Process hygiene | **`close_out`** | **Pending replay** on new HEAD | After commit of arc-closed tracker + CITDP; not a new **`pre_implementation`** slice |
 
-**Integrated adversarial inquiry:** **not_applicable** for **slice 1** close-out (historical `minimal` depth). **Required** for **Phase 3b slice 2+** and **Phase 4** at `integrated` depth — activation collect + inquiry passes per [AGENTS.md](../../AGENTS.md) §3.3.1.
+**Integrated adversarial inquiry:** **not_applicable** for **slice 1** close-out (historical `minimal` depth). **Required** for **Phase 3b slice 2+** and **Phase 4 (4a–4d)** at `integrated` depth — artifacts under `working/REQ-TIED_UNIFIED_TOOLCHAIN/adversarial-inquiry/` per [AGENTS.md](../../AGENTS.md) §3.3.1. **Post-arc optional work** reuses integrated depth only if sponsor opens **4embed** / **4e** with a fresh Tracker.

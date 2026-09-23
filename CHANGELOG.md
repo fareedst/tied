@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **Phase 4 arc process close-out ([REQ-TIED_UNIFIED_TOOLCHAIN])** — Authoritative
+  [checklist-tracker-phase4-arc-closed.yaml](working/REQ-TIED_UNIFIED_TOOLCHAIN/checklist-tracker-phase4-arc-closed.yaml),
+  idle post-arc tracker stub, CITDP activation/evidence sync for post-4d delivery, PLAN and
+  planning-notes snapshot, and `.gitignore` close-out hygiene patterns.
+
 ### Fixed
 
 - **Bun workspace build recursion ([REQ-TIED_UNIFIED_TOOLCHAIN])** — Root `mcp-server` `build`

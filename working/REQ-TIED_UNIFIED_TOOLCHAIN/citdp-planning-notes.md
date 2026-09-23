@@ -51,16 +51,16 @@
 - **Vocabulary RECORD:** `Go-forward surface`, `deprecation window`, `oracle fixture freeze`, `qualified argv` vs `documented operator flow`.
 ## Phase 4 arc post-4d process (2026-09-23)
 
-- **Delivery:** Slices **4a–4d** complete locally — TS-only `@tied/agentstream`, Go tree removed, oracle fixtures frozen under `mcp-server/packages/agentstream/testdata/`.
+- **Delivery:** Slices **4a–4d** on **`origin/main`** — commit **`72b7d9d`**; TS-only `@tied/agentstream`; Go tree removed; oracle fixtures under `mcp-server/packages/agentstream/testdata/`.
 - **Tests:** `cd mcp-server && npm test` — **991/991** (no Go).
-- **`tied_verify`:** REQ **Implemented**, IMPL **Active** after MCP **`tied_verify`** gained **`tracker_path`** + hydration parity with gate validate; runner [run-phase4d-tied-verify.mjs](./run-phase4d-tied-verify.mjs).
-- **Arc `close_out`:** [phase4-full-close-out-gate.json](./gates/phase4-full-close-out-gate.json) — **`allowed: false`** until **`traceable-commit`** (sponsor git commit); envelope blocking gaps **0**.
-- **Tracker:** **`sub-close-out-evidence-sync`** completed; **`traceable-commit`** pending — [evidence/traceable-commit-evidence.md](./evidence/traceable-commit-evidence.md).
-- **Vocabulary Touchpoint 3:** RECORD/VALIDATE `Go tree removal`, `oracle fixture freeze`, TS-default **`@tied/agentstream`** in [tied/vocab/agentstream.md](../../tied/vocab/agentstream.md) and [tied/vocab/domain-references.md](../../tied/vocab/domain-references.md).
-- **Next prompt type:** Sponsor commit → **`plan-close-out`**; optional **4embed** spike via **`build-plan`**.
+- **`tied_verify`:** REQ **Implemented**, IMPL **Active** (2026-09-23); runner [run-phase4d-tied-verify.mjs](./run-phase4d-tied-verify.mjs).
+- **Arc `close_out`:** [phase4-full-close-out-gate.json](./gates/phase4-full-close-out-gate.json) — **`allowed: true`** after delivery **`traceable-commit`**; envelope blocking gaps **0**; **re-run** after process hygiene commit.
+- **Tracker:** Authoritative closed [checklist-tracker-phase4-arc-closed.yaml](./checklist-tracker-phase4-arc-closed.yaml) (commit pending); idle [checklist-tracker.yaml](./checklist-tracker.yaml).
+- **Vocabulary Touchpoint 3:** RECORD/VALIDATE `Go tree removal`, `oracle fixture freeze`, TS-default **`@tied/agentstream`**, **process close-out hygiene** — [tied/vocab/agentstream.md](../../tied/vocab/agentstream.md), [tied/vocab/domain-references.md](../../tied/vocab/domain-references.md).
+- **Next prompt type:** **`plan-close-out`** (hygiene commit + push); then optional **4embed** via **`build-plan`**.
 
 ## Linked plan
 
 Canonical plan for `/build-plan`: [PLAN.md](./PLAN.md)
 
-Close-out execution plan (Phase 4 arc, two-commit): `.cursor/plans/phase_4_plan_close-out_8dd5a91f.plan.md` (Cursor plans store).
+Close-out execution plan (Cursor): `.cursor/plans/phase_4_plan_close-out_77945a58.plan.md` (refined 2026-09-23).

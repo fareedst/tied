@@ -1,5 +1,6 @@
 .cursor/mcp.json
 .cursor/debug-*.log
+.cursor/test-all-build-plan.log
 .cursor/skills/tied-yaml/
 .cursor/work
 .DS_Store
@@ -61,6 +62,7 @@ working/**/gates/
 working/REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/gate-*-result.json
 # Adherence reconcile output (regenerate per tied_adherence_reconcile_run)
 working/**/adherence-ledger.jsonl
+working/**/adherence/events.jsonl
 # Close-out operator scratch (regenerate per plan-close-out / tied_verify run)
 working/**/gate-ledger.jsonl
 working/**/citdp-doc-*.json
@@ -68,6 +70,8 @@ working/**/citdp-write-payload.json
 working/**/citdp-record-body.json
 working/**/citdp-p*-*.json
 working/**/tied-create-*.json
+working/**/token-create-*.json
+working/**/validate-consistency.json
 working/**/p*-yaml-updates.json
 working/**/adversarial-inquiry-p*-run.json
 working/**/evidence/quality/**/*.stdout.txt
@@ -254,3 +258,5 @@ working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/CITDP-REQ-PSEUDOCODE_CONSTRAINT_LANGU
 
 # Per-REQ integrated gate runner scripts (regenerate per build-plan / close-out; includes run-phase3-gates.mjs)
 working/**/run-*-gates.mjs
+working/**/run-*-gate.mjs
+working/**/run-phase*-tied-verify.mjs
