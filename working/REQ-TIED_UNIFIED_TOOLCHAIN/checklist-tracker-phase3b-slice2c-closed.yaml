@@ -1,0 +1,108 @@
+copy_hygiene: Per-request Tracker for REQ-TIED_UNIFIED_TOOLCHAIN Phase 3b slice 2c (checklist render TS-native).
+description: Phase 3b slice 2c arc; profile_depth integrated; slice 2b tracker archived 2026-09-23.
+execution_evidence:
+  request: REQ-TIED_UNIFIED_TOOLCHAIN
+  completed:
+    - session-bootstrap
+    - translate-sponsor-intent
+    - change-definition
+    - impact-discovery
+    - risk-assessment
+    - test-strategy
+    - gate-pseudocode-validation
+    - sub-adversarial-inquiry-pass
+    - unit-test-red
+    - unit-test-green
+    - verification-gate
+  close_out_evidence:
+    date: null
+    deferred:
+      - close_out
+    gates:
+      verification: working/REQ-TIED_UNIFIED_TOOLCHAIN/gates/phase3b-slice2c-verification-gate.json
+  prior_arc_tracker: working/REQ-TIED_UNIFIED_TOOLCHAIN/checklist-tracker-phase3b-slice2b-closed.yaml
+record_identity:
+  req_token: REQ-TIED_UNIFIED_TOOLCHAIN
+  profile_depth: integrated
+  gate_policy: advisory
+  citdp_path: tied/citdp/CITDP-REQ-TIED_UNIFIED_TOOLCHAIN.yaml
+  slice: phase-3b-slice-2c
+steps:
+  - slug: session-bootstrap
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_UNIFIED_TOOLCHAIN/evidence/session-bootstrap-evidence.md
+    tracking:
+      status: completed
+  - slug: translate-sponsor-intent
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_UNIFIED_TOOLCHAIN/evidence/translate-sponsor-intent-evidence.md
+    tracking:
+      status: completed
+  - slug: change-definition
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_UNIFIED_TOOLCHAIN/evidence/change-definition-evidence.md
+    tracking:
+      status: completed
+  - slug: impact-discovery
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_UNIFIED_TOOLCHAIN/evidence/impact-discovery-evidence.md
+    tracking:
+      status: completed
+  - slug: risk-assessment
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_UNIFIED_TOOLCHAIN/evidence/risk-assessment-evidence.md
+    tracking:
+      status: completed
+  - slug: test-strategy
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_UNIFIED_TOOLCHAIN/evidence/test-strategy-evidence.md
+    tracking:
+      status: completed
+  - slug: gate-pseudocode-validation
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_UNIFIED_TOOLCHAIN/evidence/gate-pseudocode-validation-evidence.md
+    tracking:
+      status: completed
+  - slug: sub-adversarial-inquiry-pass
+    disposition: completed
+    policy: integrated-depth-inquiry
+    rationale: Phase 3b slice 2c pre_implementation (slice2c-pre-impl-2026-09-23) and verification (slice2c-verification-2026-09-23).
+    evidence_refs:
+      - working/REQ-TIED_UNIFIED_TOOLCHAIN/adversarial-inquiry/phase-pre_implementation/gate-result.json
+      - working/REQ-TIED_UNIFIED_TOOLCHAIN/adversarial-inquiry/phase-pre_implementation/obligation-report.json
+      - working/REQ-TIED_UNIFIED_TOOLCHAIN/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl
+      - working/REQ-TIED_UNIFIED_TOOLCHAIN/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json
+      - working/REQ-TIED_UNIFIED_TOOLCHAIN/adversarial-inquiry/phase-verification/gate-result.json
+      - working/REQ-TIED_UNIFIED_TOOLCHAIN/adversarial-inquiry/phase-verification/obligation-report.json
+      - working/REQ-TIED_UNIFIED_TOOLCHAIN/adversarial-inquiry/phase-verification/finding-ledger.jsonl
+      - working/REQ-TIED_UNIFIED_TOOLCHAIN/adversarial-inquiry/phase-verification/evidence-provenance.json
+    tracking:
+      status: completed
+  - slug: unit-test-red
+    disposition: completed
+    evidence_refs:
+      - mcp-server/packages/agentstream/src/parity.test.ts
+    tracking:
+      status: completed
+  - slug: unit-test-green
+    disposition: completed
+    evidence_refs:
+      - mcp-server/packages/agentstream/src/checklist-preview.ts
+      - mcp-server/packages/agentstream/src/index.ts
+      - tools/agentstream/checklist/preview.go
+    tracking:
+      status: completed
+  - slug: verification-gate
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_UNIFIED_TOOLCHAIN/gates/phase3b-slice2c-verification-gate.json
+      - mcp-server/packages/agentstream/src/parity.test.ts
+    tracking:
+      status: completed

@@ -4,6 +4,12 @@
  */
 import fs from "node:fs";
 
+import {
+  parseDryRunConfig,
+  qualifiesForTsNativeChecklistPreview,
+  qualifiesForTsNativeDryRun,
+} from "./dry-run-config.js";
+
 export type ChecklistTrackerPreviewArgs = {
   leadChecklistYaml: string;
   trackerPreviewPath: string;
@@ -83,3 +89,95 @@ function fileReadable(p: string): boolean {
     return false;
   }
 }
+
+export function hasDryRunFlag(args: string[]): boolean {
+  for (const arg of args) {
+    if (arg === "-d" || arg === "--dry-run") {
+      return true;
+    }
+    if (arg.startsWith("--dry-run=")) {
+      return true;
+    }
+  }
+  return false;
+}
+
+export function hasChecklistPreviewFlag(args: string[]): boolean {
+  return args.some((arg) => arg === "--preview-lead-checklist");
+}
+
+/** Whether argv qualifies for TS-native checklist render preview (slice 2c). */
+export function tryQualifiesForTsNativeChecklistPreview(
+  cwd: string,
+  args: string[],
+): boolean {
+  if (!hasChecklistPreviewFlag(args)) {
+    return false;
+  }
+  const cfg = parseDryRunConfig(cwd, args);
+  return qualifiesForTsNativeChecklistPreview(cfg);
+}
+
+/** Whether argv qualifies for TS-native dry-run (slice 2a); parse errors propagate. */
+export function tryQualifiesForTsNativeDryRun(
+  cwd: string,
+  args: string[],
+): boolean {
+  if (!hasDryRunFlag(args)) {
+    return false;
+  }
+  const cfg = parseDryRunConfig(cwd, args);
+  return qualifiesForTsNativeDryRun(cfg);
+}
+
+export function hasAdherenceReconcileSubcommand(args: string[]): boolean {
+  return args[0] === "adherence-reconcile";
+}
+
+/** Whether argv is the read-only adherence-reconcile operator surface (slice 2d). */
+export function qualifiesForTsNativeAdherenceReconcile(args: string[]): boolean {
+  if (hasAdherenceReconcileSubcommand(args)) {
+    return true;
+  }
+  let hasTracker = false;
+  for (const arg of args) {
+    if (arg === "--tracker" || arg.startsWith("--tracker=")) {
+      hasTracker = true;
+      break;
+    }
+  }
+  if (!hasTracker) {
+    return false;
+  }
+  if (hasDryRunFlag(args)) {
+    return false;
+  }
+  if (hasChecklistPreviewFlag(args)) {
+    return false;
+  }
+  if (
+    args.some(
+      (a) =>
+        a === "--checklist-tracker-preview" ||
+        a.startsWith("--checklist-tracker-preview="),
+    )
+  ) {
+    return false;
+  }
+  if (
+    args.some(
+      (a) =>
+        a === "--preview-feature-spec-batch-yaml" ||
+        a.startsWith("--preview-feature-spec-batch-yaml="),
+    )
+  ) {
+    return false;
+  }
+  return true;
+}
+
+export {
+  parseDryRunConfig,
+  qualifiesForTsNativeChecklistPreview,
+  qualifiesForTsNativeDryRun,
+} from "./dry-run-config.js";

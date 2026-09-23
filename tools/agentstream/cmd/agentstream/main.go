@@ -61,6 +61,21 @@ func main() {
 		os.Exit(0)
 	}
 
+	if cfg.PreviewLeadChecklist {
+		opts := checklist.Options{
+			IncludeSubProcedures: !cfg.LeadChecklistSkipSub,
+			StepFromID:           cfg.LeadChecklistStepFromID,
+			StepToID:             cfg.LeadChecklistStepToID,
+			Vars:                 cfg.ChecklistVars,
+			ChecklistVarStrict:   cfg.ChecklistVarStrict,
+		}
+		if err := checklist.Preview(cfg.LeadChecklistYAML, opts, os.Stdout); err != nil {
+			fmt.Fprintf(os.Stderr, "agentstream: %v\n", err)
+			os.Exit(1)
+		}
+		os.Exit(0)
+	}
+
 	if cfg.PreviewChecklistTrackerYAML != "" {
 		report, err := checklist.PreviewTrackerMigration(cfg.LeadChecklistYAML, cfg.PreviewChecklistTrackerYAML)
 		if err != nil {

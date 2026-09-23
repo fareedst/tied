@@ -32,6 +32,7 @@ type Config struct {
 	TddYAMLs                    []string
 	FeatureSpecBatchYAMLs       []string
 	PreviewFeatureSpecBatchYAML string
+	PreviewLeadChecklist        bool
 	VerifySession               bool
 	ArgvWords                   []string
 	AgentPath                   string
@@ -286,6 +287,8 @@ func parseFlags(args []string, c *Config) error {
 					return err
 				}
 				c.PreviewFeatureSpecBatchYAML = val
+			case k == "--preview-lead-checklist":
+				c.PreviewLeadChecklist = true
 			case k == "--agent-path":
 				val, err := needVal(k, v, ok, args, &i)
 				if err != nil {
@@ -477,6 +480,15 @@ func validate(c *Config) error {
 		}
 		return nil
 	}
+	if c.PreviewLeadChecklist {
+		if strings.TrimSpace(c.LeadChecklistYAML) == "" {
+			return fmt.Errorf("--preview-lead-checklist requires --lead-checklist-yaml")
+		}
+		if !fileReadable(c.LeadChecklistYAML) {
+			return fmt.Errorf("lead checklist yaml is not a readable file: %s", c.LeadChecklistYAML)
+		}
+		return nil
+	}
 	if c.PreviewChecklistTrackerYAML != "" {
 		if strings.TrimSpace(c.LeadChecklistYAML) == "" {
 			return fmt.Errorf("--checklist-tracker-preview requires --lead-checklist-yaml")
@@ -569,6 +581,7 @@ Options:
   -w, --workspace PATH     (default: current directory)
   -m, --model MODEL        (default: Auto)
   -c, --lead-checklist-yaml PATH
+      --preview-lead-checklist     (print expanded checklist step prompts from -c and exit; no agent)
       --checklist-tracker-yaml PATH  (writable per-request Authoritative Tracker; must differ from -c)
       --checklist-tracker-preview PATH  (read-only slug diff vs -c definition; prints JSON and exits)
       --adherence-ledger PATH        (append-only agent-adherence-event.v1 JSONL; default working/{REQ-TOKEN}/adherence/events.jsonl when tracker mode is on)

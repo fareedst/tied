@@ -19,9 +19,26 @@
 
 ## profile_depth
 
-- `depth_tier`: **minimal** (architecture/planning; no behavior change shipped)
+- `depth_tier`: **`integrated`** (sponsor confirmed 2026-09-22; effective Phase 3b **slice 2+**)
+- `prior_depth_tier`: **`minimal`** (slice 1 planning + close-out arc)
 - `gate_policy`: **advisory**
-- Rationale: no runtime auth/network/persistence change in this work item; subprocess/MCP design only.
+- Rationale: Remaining strangler work (executor, pipeline, checklist render, adherence) targets checklist/adherence parity and subprocess orchestration—integrated adversarial inquiry per AGENTS §3.3.1 for slice 2+.
+
+## Git / release policy (2026-09-22)
+
+- **Push deferred** until **Phase 3b complete** (slices **2a–2d**): sponsor wants a **full operator tool set** (TS agentstream strangler without Go forward for ported flows) before first push to origin.
+- Local commits on `main` continue; `a23d939` remains unpushed until that milestone.
+
+## Unified Phase 3b close_out (2026-09-23)
+
+- **Milestone:** slices **2a–2d** qualified TS surface; unified `close_out` with inquiry `slice3b-close-out-2026-09-23`.
+- **Committable gate receipt:** [phase3b-full-close-out-gate.json](./phase3b-full-close-out-gate.json).
+- **REQ status:** remains **In Progress** — Phase 4 (Go/Ruby removal, live executor TS-default) not in scope.
+- **Vocabulary Touchpoint 3:** `strangler slice`, `TS-native argv surface`, `adherence-reconcile` — validated against [tied/vocab/tied-methodology.md](../../tied/vocab/tied-methodology.md) and [tied/vocab/agentstream.md](../../tied/vocab/agentstream.md).
+
+## Slice order (2026-09-22)
+
+- **Confirmed:** **2a** executor dry-run → **2b** pipeline/batch → **2c** checklist render → **2d** adherence strangler.
 
 ## Linked plan
 

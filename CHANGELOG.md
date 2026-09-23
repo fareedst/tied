@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Unified Node developer toolchain — Phase 3b slices 2a–2d ([REQ-TIED_UNIFIED_TOOLCHAIN])** —
+  TS `@tied/agentstream` strangler: native dry-run (`EXECUTOR_DRY_RUN_TS`), pipeline/batch preview
+  (`PIPELINE_BATCH_TS`), lead-checklist preview (`CHECKLIST_RENDER_TS`), adherence reconcile
+  (`ADHERENCE_STRANGLER_TS`); Go oracle parity tests in `mcp-server/packages/agentstream`; MCP
+  `tied_adherence_reconcile_run` prefers TS dist when built. Go `tools/agentstream` remains default for
+  **live executor** and unqualified argv until Phase 4. REQ status **In Progress** (partial delivery).
+  Close-out: unified Phase 3b `close_out` gate allowed (integrated/advisory); envelope blocking gaps **0**.
+  Tests: `mcp-server` npm test; `go test ./...` under `tools/agentstream`; adherence Ruby contract test.
+
 - **Unified Node developer toolchain — Phase 3b slice 1 ([REQ-TIED_UNIFIED_TOOLCHAIN])** —
   npm/pnpm workspace rooted at `mcp-server/` with `@tied/cli`, `@tied/bootstrap`, `@tied/yaml-cli`, and
   `@tied/agentstream` (dispatcher, tiedpreflight, TS `--checklist-tracker-preview`); MCP adherence hook in TypeScript;

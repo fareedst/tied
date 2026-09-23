@@ -28,7 +28,14 @@ REQ-TIED_UNIFIED_TOOLCHAIN:
     supersedes: []
   satisfaction_criteria:
     - criterion: "Minimum suite membership includes mcp-server, agentstream, bootstrap/copy_files, tied-cli facade, yaml lint/canonicalize"
+      id: "SC-UNIFIED-SUITE-MEMBERSHIP"
       metric: "CITDP tool_suite_inventory tier_1 and tier_2"
     - criterion: "Published migration phases with parity gates before Go/Ruby removal"
+      id: "SC-UNIFIED-MIGRATION-PHASES"
       metric: "CITDP migration_phases and test_strategy"
   status: "In Progress"
+  traceability:
+    architecture:
+      - "ARCH-TIED_UNIFIED_TOOLCHAIN"
+    implementation:
+      - "IMPL-TIED_UNIFIED_TOOLCHAIN"

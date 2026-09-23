@@ -1,0 +1,101 @@
+copy_hygiene: Per-request Tracker for REQ-TIED_UNIFIED_TOOLCHAIN Phase 3 agentstream strangler.
+description: Phase 3b slice 1 complete (tracker preview TS); pipeline/executor backlog.
+execution_evidence:
+  request: REQ-TIED_UNIFIED_TOOLCHAIN
+  completed:
+    - session-bootstrap
+    - translate-sponsor-intent
+    - change-definition
+    - impact-discovery
+    - risk-assessment
+    - test-strategy
+    - gate-pseudocode-validation
+    - unit-test-red
+    - unit-test-green
+    - verification-gate
+  close_out_evidence:
+    date: "2026-09-22"
+    deferred: []
+    gates:
+      pre_implementation: working/REQ-TIED_UNIFIED_TOOLCHAIN/phase3b-pre-implementation-gate.json
+      verification: working/REQ-TIED_UNIFIED_TOOLCHAIN/phase3b-verification-gate.json
+record_identity:
+  req_token: REQ-TIED_UNIFIED_TOOLCHAIN
+  profile_depth: minimal
+  gate_policy: advisory
+  citdp_path: tied/citdp/CITDP-REQ-TIED_UNIFIED_TOOLCHAIN.yaml
+steps:
+  - slug: unit-test-red
+    disposition: completed
+    evidence_refs: &ref_0
+      - working/REQ-TIED_UNIFIED_TOOLCHAIN/evidence/unit-test-red-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_0
+  - slug: unit-test-green
+    disposition: completed
+    evidence_refs: &ref_1
+      - working/REQ-TIED_UNIFIED_TOOLCHAIN/evidence/unit-test-green-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_1
+  - slug: sub-adversarial-inquiry-pass
+    disposition: not_applicable
+    policy: minimal-depth-no-inquiry
+    rationale: Phase 3b strangler slice; depth_tier minimal with advisory gate.
+  - slug: verification-gate
+    disposition: completed
+    evidence_refs: &ref_2
+      - working/REQ-TIED_UNIFIED_TOOLCHAIN/evidence/verification-evidence-manifest.v1.json
+    tracking:
+      status: completed
+      evidence_refs: *ref_2
+  - slug: session-bootstrap
+    tracking:
+      status: completed
+      evidence_refs: &ref_3
+        - working/REQ-TIED_UNIFIED_TOOLCHAIN/evidence/session-bootstrap-evidence.md
+    disposition: completed
+    evidence_refs: *ref_3
+  - slug: translate-sponsor-intent
+    tracking:
+      status: completed
+      evidence_refs: &ref_4
+        - working/REQ-TIED_UNIFIED_TOOLCHAIN/evidence/translate-sponsor-intent-evidence.md
+    disposition: completed
+    evidence_refs: *ref_4
+  - slug: change-definition
+    tracking:
+      status: completed
+      evidence_refs: &ref_5
+        - working/REQ-TIED_UNIFIED_TOOLCHAIN/evidence/change-definition-evidence.md
+    disposition: completed
+    evidence_refs: *ref_5
+  - slug: impact-discovery
+    tracking:
+      status: completed
+      evidence_refs: &ref_6
+        - working/REQ-TIED_UNIFIED_TOOLCHAIN/evidence/impact-discovery-evidence.md
+    disposition: completed
+    evidence_refs: *ref_6
+  - slug: risk-assessment
+    tracking:
+      status: completed
+      evidence_refs: &ref_7
+        - working/REQ-TIED_UNIFIED_TOOLCHAIN/evidence/risk-assessment-evidence.md
+    disposition: completed
+    evidence_refs: *ref_7
+  - slug: test-strategy
+    tracking:
+      status: completed
+      evidence_refs: &ref_8
+        - working/REQ-TIED_UNIFIED_TOOLCHAIN/evidence/test-strategy-evidence.md
+    disposition: completed
+    evidence_refs: *ref_8
+  - slug: gate-pseudocode-validation
+    tracking:
+      status: completed
+      evidence_refs: &ref_9
+        - working/REQ-TIED_UNIFIED_TOOLCHAIN/evidence/gate-pseudocode-validation-evidence.md
+    disposition: completed
+    evidence_refs: *ref_9

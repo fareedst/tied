@@ -5,16 +5,38 @@
  */
 import { spawnGoAgentstream } from "./dispatch-go.js";
 import {
+  checklistLoadOptionsFromConfig,
+  previewLeadChecklist,
+} from "./checklist-preview.js";
+import {
+  parseDryRunConfig,
+  qualifiesForTsNativeChecklistPreview,
+  qualifiesForTsNativeFeatureSpecPreview,
+} from "./dry-run-config.js";
+import { executeExecutorDryRun } from "./executor-dry-run.js";
+import { previewFeatureSpecBatch } from "./featurespec-preview.js";
+import { parseFeatureSpecOrderFilter } from "./featurespec-load-turns.js";
+import {
   encodePreviewReport,
   previewTrackerMigration,
 } from "./tracker-migration-preview.js";
-import { extractChecklistTrackerPreview } from "./ts-native-args.js";
+import { runAdherenceReconcileCli } from "./adherence-reconcile-cli.js";
+import {
+  extractChecklistTrackerPreview,
+  qualifiesForTsNativeAdherenceReconcile,
+  qualifiesForTsNativeDryRun,
+} from "./ts-native-args.js";
 
 function printHelp(): void {
   console.error(`Usage: tied agentstream [agentstream options...]
 
-Phase 3b TS-native: --checklist-tracker-preview (with -c / --lead-checklist-yaml).
-Other flags may forward to Go when TIED_AGENTSTREAM_IMPL=ts (see stderr DIAGNOSTIC).
+Phase 3b TS-native (TIED_AGENTSTREAM_IMPL=ts, no Go forward when argv qualifies):
+  --checklist-tracker-preview (with -c / --lead-checklist-yaml)
+  --preview-lead-checklist (with -c; optional bounds, --checklist-var, --lead-checklist-skip-sub)
+  --preview-feature-spec-batch-yaml PATH [-o ORDER]
+  pipeline dry-run: -d with lead checklist (-c), feature batch (-b), -p preload, -o filter
+  adherence-reconcile (subcommand) or standalone --tracker … reconcile flags
+Other flags forward to Go with stderr DIAGNOSTIC.
 
 Set TIED_AGENTSTREAM_IMPL=go (default) to invoke Go from \`tied agentstream\`; set ts for this entry.
 
@@ -35,6 +57,117 @@ function runChecklistTrackerPreview(args: string[]): void {
     );
     process.stdout.write(encodePreviewReport(report));
     process.exit(0);
+  } catch (err) {
+    console.error(`agentstream: ${String(err)}`);
+    process.exit(1);
+  }
+}
+
+function runChecklistRenderPreview(args: string[]): void {
+  const cwd = process.cwd();
+  let cfg;
+  try {
+    cfg = parseDryRunConfig(cwd, args);
+  } catch (err) {
+    if (String(err).includes("help")) {
+      printHelp();
+      process.exit(0);
+    }
+    console.error(`agentstream: ${String(err)}`);
+    process.exit(2);
+  }
+  if (!qualifiesForTsNativeChecklistPreview(cfg)) {
+    console.error(
+      "DIAGNOSTIC: TIED_AGENTSTREAM_IMPL=ts; checklist preview argv not TS-native yet — forwarding to Go agentstream",
+    );
+    spawnGoAgentstream(args, import.meta.url);
+    return;
+  }
+  try {
+    const opts = checklistLoadOptionsFromConfig(cfg);
+    process.stdout.write(previewLeadChecklist(cfg.leadChecklistYaml, opts));
+    process.exit(0);
+  } catch (err) {
+    console.error(`agentstream: ${String(err)}`);
+    process.exit(1);
+  }
+}
+
+function runFeatureSpecBatchPreview(args: string[]): void {
+  const cwd = process.cwd();
+  let cfg;
+  try {
+    cfg = parseDryRunConfig(cwd, args);
+  } catch (err) {
+    if (String(err).includes("help")) {
+      printHelp();
+      process.exit(0);
+    }
+    console.error(`agentstream: ${String(err)}`);
+    process.exit(2);
+  }
+  if (!qualifiesForTsNativeFeatureSpecPreview(cfg)) {
+    console.error(
+      "DIAGNOSTIC: TIED_AGENTSTREAM_IMPL=ts; preview argv not TS-native yet — forwarding to Go agentstream",
+    );
+    spawnGoAgentstream(args, import.meta.url);
+    return;
+  }
+  try {
+    const opts = cfg.orderFilterRaw.trim()
+      ? { orderFilter: parseFeatureSpecOrderFilter(cfg.orderFilterRaw) }
+      : undefined;
+    process.stdout.write(
+      previewFeatureSpecBatch(cfg.previewFeatureSpecBatchYaml, opts),
+    );
+    process.exit(0);
+  } catch (err) {
+    console.error(`agentstream: ${String(err)}`);
+    process.exit(1);
+  }
+}
+
+function runAdherenceReconcile(args: string[]): void {
+  const cliArgs = args[0] === "adherence-reconcile" ? args.slice(1) : args;
+  const result = runAdherenceReconcileCli(cliArgs);
+  if (result.stderr) {
+    process.stderr.write(result.stderr);
+  }
+  if (result.stdout) {
+    process.stdout.write(result.stdout);
+  }
+  process.exit(result.exitCode);
+}
+
+function runExecutorDryRun(args: string[]): void {
+  const cwd = process.cwd();
+  let cfg;
+  try {
+    cfg = parseDryRunConfig(cwd, args);
+  } catch (err) {
+    if (String(err).includes("help")) {
+      printHelp();
+      process.exit(0);
+    }
+    console.error(`agentstream: ${String(err)}`);
+    process.exit(2);
+  }
+  if (!qualifiesForTsNativeDryRun(cfg)) {
+    console.error(
+      "DIAGNOSTIC: TIED_AGENTSTREAM_IMPL=ts; dry-run argv not TS-native yet — forwarding to Go agentstream",
+    );
+    spawnGoAgentstream(args, import.meta.url);
+    return;
+  }
+  try {
+    const result = executeExecutorDryRun(cfg);
+    if (result.stderr) {
+      process.stderr.write(result.stderr);
+    }
+    if (result.stdout) {
+      process.stdout.write(result.stdout);
+    }
+    process.exit(result.exitCode);
   } catch (err) {
     console.error(`agentstream: ${String(err)}`);
     process.exit(1);
@@ -62,6 +195,34 @@ function main(): void {
   } catch (err) {
     console.error(`agentstream: ${String(err)}`);
     process.exit(2);
+  }
+
+  if (args.some((a) => a === "--preview-lead-checklist")) {
+    runChecklistRenderPreview(args);
+    return;
+  }
+
+  if (
+    args.some(
+      (a) =>
+        a === "--preview-feature-spec-batch-yaml" ||
+        a.startsWith("--preview-feature-spec-batch-yaml="),
+    )
+  ) {
+    runFeatureSpecBatchPreview(args);
+    return;
+  }
+
+  if (
+    args.some((a) => a === "-d" || a === "--dry-run" || a.startsWith("--dry-run="))
+  ) {
+    runExecutorDryRun(args);
+    return;
+  }
+
+  if (qualifiesForTsNativeAdherenceReconcile(args)) {
+    runAdherenceReconcile(args);
+    return;
   }
 
   console.error(

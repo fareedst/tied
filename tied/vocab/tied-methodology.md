@@ -69,6 +69,8 @@
 | **client-modification warning** | refresh warning (alone) | Diagnostic emitted when an existing managed destination mtime is not truncated to local calendar-date midnight |
 | **Windows bootstrap entry point** | copy_files.bat, Windows shell script (alone) | `copy_files.cmd` at TIED repo root; PATHEXT resolves `copy_files` for neighboring client repos |
 | **unified TIED toolchain** | single-language tools (alone) | Developer/operator suite (MCP, agentstream, bootstrap, YAML CLIs) targeting one primary language; traceability [REQ-TIED_UNIFIED_TOOLCHAIN] |
+| **deferred push (toolchain)** | unpushed commits (alone) | Sponsor policy to keep local commits until Phase 3b strangler complete (slices 2a–2d) before first `git push`; [REQ-TIED_UNIFIED_TOOLCHAIN] PLAN 2026-09-22 |
+| **strangler slice order** | migration phase order (alone) | Phase 3b port sequence 2a executor dry-run → 2b pipeline → 2c checklist render → 2d adherence; sponsor-confirmed [REQ-TIED_UNIFIED_TOOLCHAIN] |
 | **shared bootstrap engine** | Node copy script (alone) | `tools/bootstrap/` Node implementation of BOOTSTRAP_TIED; sole bootstrap logic owner |
 | **bootstrap manifest** | inline bash arrays (alone) | `tools/bootstrap/manifest.json` single source for DOCS_TO_COPY, skill dirs, verify lists |
 | **disposable TIED client** | throwaway demo project (alone) | Timestamped bootstrapped client under `TIED_TEST_ROOT/<unix-seconds>` for smoke and feature demos |

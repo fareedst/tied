@@ -24,6 +24,7 @@ Run **`agentstream --help`** for the full option list. Highlights:
 | `-w`, `--workspace` | Workspace root (default: current directory). |
 | `-m`, `--model MODEL` | Cursor agent model (default: `Auto`). |
 | `-c`, `--lead-checklist-yaml` | Read-only lead checklist definition YAML; default resolves to repo `tied/docs/agent-req-implementation-checklist.yaml` when present. |
+| `--preview-lead-checklist` | Print expanded checklist step prompts from `-c` and exit (no agent). Honors bounds, `--checklist-var`, `--lead-checklist-skip-sub`, and `--checklist-var-strict`. |
 | `--checklist-tracker-yaml PATH` | Writable per-request **Authoritative Tracker** (`checklist-tracker.v1`). Requires `-c`. Must not equal the definition path. When missing on disk, agentstream materializes clean pending state including `sub-adversarial-inquiry-pass` as a top-level step row. |
 | `--checklist-tracker-preview PATH` | Read-only **Tracker migration preview** (`tracker-migration-preview.v1`): slug diff vs `-c` definition; prints JSON and exits (no Tracker mutation). Requires `-c`. |
 | `--adherence-ledger PATH` | Append-only **adherence ledger** (`agent-adherence-event.v1` JSONL). Default: `working/{REQ-TOKEN}/adherence/events.jsonl` when `--checklist-tracker-yaml` is set and `REQUEST` resolves a token. Stores hash/reference edges only (no prompt or response bodies). |

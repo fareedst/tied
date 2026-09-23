@@ -85,6 +85,10 @@ export function resolveAdherenceReconcileArgv(repoRoot?: string): { argv: string
   if (fs.existsSync(built)) {
     return { argv: [built], cwd: root };
   }
+  const tsEntry = path.join(root, "mcp-server/packages/agentstream/dist/index.js");
+  if (fs.existsSync(tsEntry)) {
+    return { argv: [process.execPath, tsEntry, "adherence-reconcile"], cwd: root };
+  }
   return {
     argv: ["go", "run", "./cmd/adherence-reconcile"],
     cwd: path.join(root, "tools/agentstream"),

@@ -13,6 +13,9 @@ CITDP-REQ-TIED_UNIFIED_TOOLCHAIN:
       - "Sponsor open decisions are enumerated with recommended defaults"
     unchanged_behavior: "All existing tools continue to build and run until phased migration gates pass parity tests."
   completion_criteria:
+    activation:
+      phase: "close_out"
+      run_id: "slice3b-close-out-2026-09-23"
     checklist_gate:
       dispositions:
         - "completed"
@@ -34,12 +37,15 @@ CITDP-REQ-TIED_UNIFIED_TOOLCHAIN:
       - "tied_validate_consistency"
     manifest_reference: "working/REQ-TIED_UNIFIED_TOOLCHAIN/evidence/verification-evidence-manifest.v1.json"
     proof_boundaries:
-      - "Phases 0–3b slice 1 shipped (npm workspace, @tied/cli/bootstrap/yaml-cli, TS adherence hook, @tied/agentstream dispatcher/tiedpreflight/tracker-preview); full Go→TS agentstream migration and Phase 3b backlog not proven"
+      - "Go tools/agentstream remains default for live executor and unqualified argv; Phase 4 legacy removal not proven"
+      - "Phases 0–3b slices 1–2d shipped: npm workspace, @tied/cli/bootstrap/yaml-cli, TS adherence hook, @tied/agentstream dispatcher/tiedpreflight/tracker-preview, EXECUTOR_DRY_RUN_TS, PIPELINE_BATCH_TS, CHECKLIST_RENDER_TS, ADHERENCE_STRANGLER_TS with Go oracle parity tests"
   impact_analysis:
     architecture:
       - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
       - "ARCH-TIED_STRUCTURE"
       - "ARCH-TIED_UNIFIED_TOOLCHAIN"
+    impl_inventory:
+      - "IMPL-TIED_UNIFIED_TOOLCHAIN"
     implementation_decisions:
       - "IMPL-MCP_LEAP_PROPOSAL_QUEUE"
       - "IMPL-TIED_FILES"
@@ -106,8 +112,8 @@ CITDP-REQ-TIED_UNIFIED_TOOLCHAIN:
       - lang: "Rust"
         reason: "Excellent single-binary story but high rewrite cost; weak MCP SDK parity vs TS; team already invested in mcp-server TS analysis stack"
   leap_feedback:
-    divergences_from_analysis: "Shipped Phase 3b slice 1 only; IMPL pseudo-code documents backlog blocks (pipeline, executor, adherence) as not yet TS-native."
-    record_status: "applied_slice_1"
+    divergences_from_analysis: "Phase 3b slices 2a–2d TS strangler landed with Go oracle parity; live executor default and Phase 4 removal remain deferred per PLAN."
+    record_status: "applied_phase_3b"
     tied_stack_updates_required: []
   migration_phases:
     - deliverables:
@@ -142,11 +148,10 @@ CITDP-REQ-TIED_UNIFIED_TOOLCHAIN:
   risk_analysis:
     adversarial_inquiry:
       assurance_profile: "baseline-functional"
-      close_out_inquiry_waiver: "minimal depth_tier with advisory gate_policy; integrated adversarial inquiry not_applicable for Phase 3b slice 1 close-out."
       counterexamples:
         - "Assuming tools/tied-suite/ as equal workspace root would fork build docs and duplicate mcp-server investment."
         - "Keeping Ruby adherence hooks indefinitely contradicts single-language suite goal."
-      depth_tier: "minimal"
+      depth_tier: "integrated"
       disconfirming_observations:
         - "Existing multi-language split documented with measurable LOC and build steps."
       eligibility_triggers_matched: []
@@ -157,8 +162,8 @@ CITDP-REQ-TIED_UNIFIED_TOOLCHAIN:
         - "Does a Node port of agentstream lose checklist gate parity or Windows path semantics?"
         - "Does consolidating MCP + CLI increase TIED_BASE_PATH misconfiguration risk?"
       gate_policy: "advisory"
-      prior_depth_tier: null
-      rationale: "Documentation and stack design; subprocess orchestration design review only."
+      prior_depth_tier: "minimal"
+      rationale: "Sponsor upgrade 2026-09-22 for Phase 3b slices 2a–2d; checklist/adherence parity and agentstream strangler warrant integrated adversarial inquiry (slice 1 shipped at minimal)."
       research_profile: "integrated-agent"
     risks:
       - description: "Agentstream Go→TS port size (~14k LOC) and checklist/adherence regression"
