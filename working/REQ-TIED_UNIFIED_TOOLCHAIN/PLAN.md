@@ -2,15 +2,15 @@
 
 | Field | Value |
 | --- | --- |
-| **REQ** | [REQ-TIED_UNIFIED_TOOLCHAIN](../../tied/requirements/REQ-TIED_UNIFIED_TOOLCHAIN.yaml) (**Implemented** via `tied_verify` 2026-09-23; arc **`close_out`** pending sponsor **`traceable-commit`**) |
+| **REQ** | [REQ-TIED_UNIFIED_TOOLCHAIN](../../tied/requirements/REQ-TIED_UNIFIED_TOOLCHAIN.yaml) (**Implemented** via `tied_verify` 2026-09-23; arc **`close_out`** **`allowed: true`** post-**`72b7d9d`**) |
 | **ARCH** | [ARCH-TIED_UNIFIED_TOOLCHAIN](../../tied/architecture-decisions/ARCH-TIED_UNIFIED_TOOLCHAIN.yaml) |
 | **IMPL** | [IMPL-TIED_UNIFIED_TOOLCHAIN](../../tied/implementation-decisions/IMPL-TIED_UNIFIED_TOOLCHAIN.yaml) · [pseudo-code](../../tied/implementation-decisions/IMPL-TIED_UNIFIED_TOOLCHAIN-pseudocode.md) |
 | **CITDP** | [CITDP-REQ-TIED_UNIFIED_TOOLCHAIN](../../tied/citdp/CITDP-REQ-TIED_UNIFIED_TOOLCHAIN.yaml) |
 | **Tracker** | [checklist-tracker.yaml](./checklist-tracker.yaml) (Phase **4d** slice; 4b archive at [checklist-tracker-phase4b-archive.yaml](./checklist-tracker-phase4b-archive.yaml)) |
-| **Last delivery** | **2026-09-23 (local)** — Phase **4a–4d** TS-only agentstream; **`tied_verify`** → REQ **Implemented** (pending sponsor commit for arc **`close_out`**) |
+| **Last delivery** | **2026-09-23** — Phase **4a–4d** shipped **`72b7d9d`**; arc **`close_out`** re-validated (advisory diagnostics only) |
 | **profile_depth** | **`integrated`** (sponsor 2026-09-22; effective **Phase 3b slice 2+**; slice 1 arc closed at `minimal`) |
 | **gate_policy** | `advisory` |
-| **Git push policy** | **Satisfied** 2026-09-23 — deferred push milestone met at **`fbe65e1`**; Phase **4** is a separate arc |
+| **Git push policy** | Sponsor requested push after Phase **4** close-out commits (2026-09-23) |
 
 ---
 
@@ -48,9 +48,10 @@ Deliver a **single-language** (TypeScript on **user-installed Node ≥18**) deve
 | **4a** | **Complete (local)** | Live executor + extended dry-run TS-native; tracker-mode live TS-native |
 | **4b** | **Complete (local)** | Ruby `tools/agent-stream` + adherence Ruby launcher removed; RISK-UNIFIED-005 inventory |
 | **4c** | **Complete (local)** | Default `TIED_AGENTSTREAM_IMPL=ts`; Go deprecation window documented |
-| **4d** | **Complete (local)** | Go tree removed; oracle fixtures under `mcp-server/packages/agentstream/testdata/`; TS-only `tied agentstream` |
+| **4** (arc) | **Complete (shipped)** | **`72b7d9d`** — Phase **4a–4d**; arc **`close_out`** **`allowed: true`** |
+| **4d** | **Complete (shipped)** | Go tree removed; oracle fixtures under `mcp-server/packages/agentstream/testdata/`; TS-only `tied agentstream` |
 
-**REQ satisfaction:** **Implemented** (verification-gated 2026-09-23) for Tier 1 suite + Phase **3b** qualified argv + Phase **4** legacy removal (**4a–4d** local). Machine arc **`close_out`** remains pending **`traceable-commit`** and sponsor push policy.
+**REQ satisfaction:** **Implemented** (verification-gated 2026-09-23) for Tier 1 suite + Phase **3b** qualified argv + Phase **4** legacy removal (**4a–4d** shipped **`72b7d9d`**). Machine arc **`close_out`** **`allowed: true`** (2026-09-23; `run-phase4-arc-close-out-gate.mjs`, run_id `phase4-full-close-out-2026-09-23`).
 
 ---
 
@@ -177,7 +178,7 @@ tied agentstream  → TS entry (default); set TIED_AGENTSTREAM_IMPL=go for legac
 | **3a** | Agentstream shell | Package, dispatch, tiedpreflight TS, Go oracle tests | Go tests green; TS preflight parity | **Done** |
 | **3b slice 1** | Tracker preview | `--checklist-tracker-preview` TS-native | Golden vs Go oracle; gates + **close_out** | **Done** (`a23d939`) |
 | **3b slice 2a–2d** | Strangler core | Dry-run, pipeline/batch preview, checklist render, adherence reconcile | RED parity per submodule; no Go forward for qualified argv | **Done (shipped `fbe65e1`)** |
-| **4** | Legacy removal + optional embed | Slices **4a–4d** (+ optional **4embed**); see Phase 4 section | Full parity; TS default; deprecation window; Go/Ruby removed | **4d complete (local); arc close_out pending traceable-commit** |
+| **4** | Legacy removal + optional embed | Slices **4a–4d** (+ optional **4embed**); see Phase 4 section | Full parity; TS default; deprecation window; Go/Ruby removed | **Done (`72b7d9d`; arc close_out allowed)** |
 
 ---
 
@@ -357,17 +358,17 @@ Phase 0: TIED-only. Phase 1–3b: parity-first before expanding TS surface. Phas
 
 ## Open items / next execution entry point
 
-**Recommended:** Sponsor **`traceable-commit`** (git commit + CHANGELOG), then **`plan-close-out`** or re-run [run-phase4-arc-close-out-gate.mjs](./run-phase4-arc-close-out-gate.mjs) for Phase **4** arc **`close_out`** (`allowed: true` when tree clean). Optional: **`build-plan`** for **4embed** spike only.
+**Recommended:** Optional **`build-plan`** for **4embed** spike only; otherwise Phase **4** arc is closed locally at **`72b7d9d`**.
 
-**Post–4d process (2026-09-23):** `tied_verify` unblocked via authoritative `tracker_path` + PSA hydration on **`tied_verify`** MCP; **`sub-close-out-evidence-sync`** completed on Tracker; **`traceable-commit`** remains **pending** until sponsor commit (pre-commit evidence in [evidence/traceable-commit-evidence.md](./evidence/traceable-commit-evidence.md)).
+**Post–4d process (2026-09-23):** **`traceable-commit`** completed with commit **`72b7d9d`**; arc **`close_out`** re-run → **`allowed: true`** ([phase4-full-close-out-gate.json](./gates/phase4-full-close-out-gate.json); advisory `finding_unresolved`, `warn_not_success`).
 
-**Not recommended:** Claiming machine **`close_out`** before **`traceable-commit`** or push without sponsor approval.
+**Not recommended:** Committing gitignored gate JSON or ephemeral `token-create-*.json` receipts.
 
 **Deferred / non-blocking**
 
 - Bun CI experiment ticket (after workspace stable).
 - Commit `working/**/token-create-*.json` (omit—re-run token tools if needed).
-- **Push to origin:** **done** at **`fbe65e1`** (2026-09-23); Phase **4** push policy TBD when that arc sponsors delivery.
+- **Push to origin:** Phase **4** close-out push requested 2026-09-23 (after commits **`72b7d9d`** + follow-on doc/fixture commit).
 - Tier 3 Ruby YAML compare / `validate_tokens.sh` TS port (see Phase 4 **4b** / **4e** backlog).
 
 ---
@@ -459,7 +460,7 @@ Phase 0–3b production code **landed** through **`fbe65e1`** (see [Delivery sna
 | Phase **4a** | **`close_out`** | *Deferred* | Slice delivery; arc **`close_out`** after **4d** |
 | Phase **4d** | `pre_implementation` | **`allowed: true`**, advisory | [phase4d-pre_implementation-gate.json](./gates/phase4d-pre_implementation-gate.json); inquiry `phase4d-pre-impl-2026-09-23` |
 | Phase **4d** | `verification` | **`allowed: true`**, advisory (`finding_unresolved`, `warn_not_success`) | [phase4d-verification-gate.json](./gates/phase4d-verification-gate.json); inquiry `phase4d-verification-2026-09-23` |
-| Phase **4** (arc) | **`close_out`** | **`allowed: false`** (pending **`traceable-commit`**) | [phase4-full-close-out-gate.json](./gates/phase4-full-close-out-gate.json); envelope blocking gaps **0**; re-run after sponsor commit |
+| Phase **4** (arc) | **`close_out`** | **`allowed: true`**, advisory (`finding_unresolved`, `warn_not_success`) | [phase4-full-close-out-gate.json](./gates/phase4-full-close-out-gate.json); run_id `phase4-full-close-out-2026-09-23`; envelope blocking gaps **0**; commit **`72b7d9d`** |
 | Phase **4** (arc) | **`tied_verify`** | **`ok: true`** (2026-09-23) | REQ **Implemented** / IMPL **Active** via [run-phase4d-tied-verify.mjs](./run-phase4d-tied-verify.mjs) + authoritative tracker |
 
 **Integrated adversarial inquiry:** **not_applicable** for **slice 1** close-out (historical `minimal` depth). **Required** for **Phase 3b slice 2+** and **Phase 4** at `integrated` depth — activation collect + inquiry passes per [AGENTS.md](../../AGENTS.md) §3.3.1.

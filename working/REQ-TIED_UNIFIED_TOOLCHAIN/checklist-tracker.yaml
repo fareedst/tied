@@ -16,6 +16,7 @@ execution_evidence:
     - sub-adversarial-inquiry-pass
     - sub-close-out-evidence-sync
     - test-strategy
+    - traceable-commit
     - translate-sponsor-intent
     - unit-test-green
     - unit-test-red
@@ -117,10 +118,13 @@ steps:
     slug: sub-close-out-evidence-sync
     tracking:
       status: completed
-  - disposition: pending
+  - disposition: completed
     evidence_refs:
       - working/REQ-TIED_UNIFIED_TOOLCHAIN/evidence/traceable-commit-evidence.md
     slug: traceable-commit
-    rationale: Pre-commit evidence prepared; step completes after sponsor git commit per traceable-commit policy.
+    rationale: Phase 4 arc delivered in commit 72b7d9d (2026-09-23); arc close_out re-validated post-commit.
     tracking:
-      status: pending
+      consideration_before_proceeding: "Delivered 72b7d9d197d456b4dce8a9d062b112f4155d9ce36 (2026-09-23); Phase 4 unified toolchain commit 1."
+      evidence_refs:
+        - working/REQ-TIED_UNIFIED_TOOLCHAIN/evidence/traceable-commit-evidence.md
+      status: completed
