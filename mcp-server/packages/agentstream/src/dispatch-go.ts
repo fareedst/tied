@@ -1,65 +1,33 @@
 /**
  * [IMPL-TIED_UNIFIED_TOOLCHAIN] [ARCH-TIED_UNIFIED_TOOLCHAIN] [REQ-TIED_UNIFIED_TOOLCHAIN]
- * Spawn the Go agentstream binary (AGENTSTREAM env or go run fallback).
+ * Agentstream implementation selector (TS-only after Phase 4d).
  */
-import { spawn } from "node:child_process";
-import fs from "node:fs";
 
-import { goAgentstreamModuleDirFromModule } from "./paths.js";
+export const LEGACY_GO_REINSTALL_HINT =
+  "TIED_AGENTSTREAM_IMPL=go was removed in Phase 4d. For emergency legacy Go agentstream, checkout a git tag from before Go removal (see working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4c-deprecation-notice.md and phase4d-go-oracle-freeze.json).";
 
 export function resolveAgentstreamImpl(): "go" | "ts" {
-  const raw = (process.env.TIED_AGENTSTREAM_IMPL ?? "go").trim().toLowerCase();
-  if (raw === "ts") {
-    return "ts";
+  const raw = (process.env.TIED_AGENTSTREAM_IMPL ?? "ts").trim().toLowerCase();
+  if (raw === "go") {
+    return "go";
   }
-  if (raw !== "go" && raw !== "") {
+  if (raw !== "ts" && raw !== "") {
     console.error(
-      `DIAGNOSTIC: unknown TIED_AGENTSTREAM_IMPL=${JSON.stringify(raw)}; using go`,
+      `DIAGNOSTIC: unknown TIED_AGENTSTREAM_IMPL=${JSON.stringify(raw)}; using ts`,
     );
   }
-  return "go";
+  return "ts";
 }
 
-export function spawnGoAgentstream(
-  args: string[],
-  moduleUrl: string,
-): void {
-  const moduleDir = goAgentstreamModuleDirFromModule(moduleUrl);
-  if (!fs.existsSync(moduleDir)) {
-    console.error(`agentstream: Go module not found: ${moduleDir}`);
-    process.exit(2);
-  }
+export function rejectLegacyGoImpl(): never {
+  console.error(`agentstream: ${LEGACY_GO_REINSTALL_HINT}`);
+  process.exit(2);
+}
 
-  const envBin = process.env.AGENTSTREAM?.trim();
-  let command: string;
-  let spawnArgs: string[];
-
-  if (envBin) {
-    try {
-      fs.accessSync(envBin, fs.constants.X_OK);
-    } catch {
-      console.error(
-        `agentstream: AGENTSTREAM is not an executable file: ${envBin}`,
-      );
-      process.exit(2);
-    }
-    command = envBin;
-    spawnArgs = args;
-  } else {
-    command = "go";
-    spawnArgs = ["run", "-C", moduleDir, "./cmd/agentstream", ...args];
-  }
-
-  const child = spawn(command, spawnArgs, {
-    stdio: "inherit",
-    env: process.env,
-  });
-
-  child.on("exit", (code, signal) => {
-    if (signal) {
-      process.kill(process.pid, signal);
-      return;
-    }
-    process.exit(code ?? 1);
-  });
+export function rejectUnqualifiedTsArgv(hint: string): never {
+  console.error(`agentstream: ${hint}`);
+  console.error(
+    "DIAGNOSTIC: argv is not implemented in @tied/agentstream TS entry; see mcp-server/packages/agentstream/README.md",
+  );
+  process.exit(2);
 }

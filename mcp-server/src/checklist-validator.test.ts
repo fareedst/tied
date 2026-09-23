@@ -779,7 +779,7 @@ describe("Go writer fixture gate composition [REQ-TIED_CHECKLIST_GATE_ENFORCEMEN
   const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
   const writerFixturePath = path.join(
     repoRoot,
-    "tools/agentstream/checklist/testdata/gate-writer-minimal-tracker.yaml",
+    "mcp-server/packages/agentstream/testdata/checklist/gate-writer-minimal-tracker.yaml",
   );
 
   function loadWriterFixture(): Record<string, unknown> {

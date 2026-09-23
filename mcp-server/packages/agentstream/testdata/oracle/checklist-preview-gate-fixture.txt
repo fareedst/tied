@@ -1,0 +1,95 @@
+=== prompt 1/6 ===
+Execute this LEAD+TIED agent requirement implementation checklist step in the current workspace.
+Process token: [PROC-TEST]
+Checklist: gate_fixture_checklist (v0)
+
+## Step session-bootstrap: Bootstrap
+
+### Goals
+
+### Tasks
+- boot
+
+### Expected outcomes
+
+Complete this step now. Follow GOTO/CALL/RETURN semantics from the checklist when they apply.
+---
+=== prompt 2/6 ===
+Execute this LEAD+TIED agent requirement implementation checklist step in the current workspace.
+Process token: [PROC-TEST]
+Checklist: gate_fixture_checklist (v0)
+
+## Step translate-sponsor-intent: Translate
+
+### Goals
+
+### Tasks
+- translate
+
+### Expected outcomes
+
+Complete this step now. Follow GOTO/CALL/RETURN semantics from the checklist when they apply.
+---
+=== prompt 3/6 ===
+Execute this LEAD+TIED agent requirement implementation checklist step in the current workspace.
+Process token: [PROC-TEST]
+Checklist: gate_fixture_checklist (v0)
+
+## Step change-definition: Change
+
+### Goals
+
+### Tasks
+- change
+
+### Expected outcomes
+
+Complete this step now. Follow GOTO/CALL/RETURN semantics from the checklist when they apply.
+---
+=== prompt 4/6 ===
+Execute this LEAD+TIED agent requirement implementation checklist step in the current workspace.
+Process token: [PROC-TEST]
+Checklist: gate_fixture_checklist (v0)
+
+## Step impact-discovery: Impact
+
+### Goals
+
+### Tasks
+- impact
+
+### Expected outcomes
+
+Complete this step now. Follow GOTO/CALL/RETURN semantics from the checklist when they apply.
+---
+=== prompt 5/6 ===
+Execute this LEAD+TIED agent requirement implementation checklist step in the current workspace.
+Process token: [PROC-TEST]
+Checklist: gate_fixture_checklist (v0)
+
+## Step risk-assessment: Risk
+
+### Goals
+
+### Tasks
+- risk
+
+### Expected outcomes
+
+Complete this step now. Follow GOTO/CALL/RETURN semantics from the checklist when they apply.
+---
+=== prompt 6/6 ===
+Execute this LEAD+TIED agent requirement implementation checklist step in the current workspace.
+Process token: [PROC-TEST]
+Checklist: gate_fixture_checklist (v0)
+
+## Step test-strategy: Test strategy
+
+### Goals
+
+### Tasks
+- strategy
+
+### Expected outcomes
+
+Complete this step now. Follow GOTO/CALL/RETURN semantics from the checklist when they apply.

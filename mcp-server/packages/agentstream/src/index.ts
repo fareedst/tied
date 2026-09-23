@@ -1,9 +1,13 @@
 #!/usr/bin/env node
 /**
  * [IMPL-TIED_UNIFIED_TOOLCHAIN] [ARCH-TIED_UNIFIED_TOOLCHAIN] [REQ-TIED_UNIFIED_TOOLCHAIN]
- * TS agentstream entry (strangler). Phase 3b: TS-native --checklist-tracker-preview; other argv may forward to Go.
+ * TS agentstream entry — Phase 4d: TS-only; no Go forward.
  */
-import { spawnGoAgentstream } from "./dispatch-go.js";
+import {
+  rejectLegacyGoImpl,
+  rejectUnqualifiedTsArgv,
+  resolveAgentstreamImpl,
+} from "./dispatch-go.js";
 import {
   checklistLoadOptionsFromConfig,
   previewLeadChecklist,
@@ -11,6 +15,7 @@ import {
 import {
   parseDryRunConfig,
   qualifiesForTsNativeChecklistPreview,
+  qualifiesForTsNativeDryRun,
   qualifiesForTsNativeFeatureSpecPreview,
 } from "./dry-run-config.js";
 import { executeExecutorDryRun } from "./executor-dry-run.js";
@@ -22,25 +27,28 @@ import {
 } from "./tracker-migration-preview.js";
 import { runAdherenceReconcileCli } from "./adherence-reconcile-cli.js";
 import {
+  executeLiveRun,
+  qualifiesForTsNativeLiveRun,
+} from "./live-executor.js";
+import {
   extractChecklistTrackerPreview,
   qualifiesForTsNativeAdherenceReconcile,
-  qualifiesForTsNativeDryRun,
 } from "./ts-native-args.js";
 
 function printHelp(): void {
   console.error(`Usage: tied agentstream [agentstream options...]
 
-Phase 3b TS-native (TIED_AGENTSTREAM_IMPL=ts, no Go forward when argv qualifies):
+Phase 4 TS-native (default TIED_AGENTSTREAM_IMPL=ts):
   --checklist-tracker-preview (with -c / --lead-checklist-yaml)
   --preview-lead-checklist (with -c; optional bounds, --checklist-var, --lead-checklist-skip-sub)
   --preview-feature-spec-batch-yaml PATH [-o ORDER]
   pipeline dry-run: -d with lead checklist (-c), feature batch (-b), -p preload, -o filter
   adherence-reconcile (subcommand) or standalone --tracker … reconcile flags
-Other flags forward to Go with stderr DIAGNOSTIC.
+  live checklist run: -c (no preview/dry-run), including --checklist-tracker-yaml tracker mode; extended dry-run shapes (prompts-file, tdd-yaml, verify-session, --non-compact-html, argv after --)
 
-Set TIED_AGENTSTREAM_IMPL=go (default) to invoke Go from \`tied agentstream\`; set ts for this entry.
+TIED_AGENTSTREAM_IMPL=go was removed in Phase 4d (see phase4c-deprecation-notice.md).
 
-See tools/agentstream/README.md for flags.
+See mcp-server/packages/agentstream/README.md for flags.
 `);
 }
 
@@ -77,11 +85,7 @@ function runChecklistRenderPreview(args: string[]): void {
     process.exit(2);
   }
   if (!qualifiesForTsNativeChecklistPreview(cfg)) {
-    console.error(
-      "DIAGNOSTIC: TIED_AGENTSTREAM_IMPL=ts; checklist preview argv not TS-native yet — forwarding to Go agentstream",
-    );
-    spawnGoAgentstream(args, import.meta.url);
-    return;
+    rejectUnqualifiedTsArgv("checklist preview argv not TS-native");
   }
   try {
     const opts = checklistLoadOptionsFromConfig(cfg);
@@ -107,11 +111,7 @@ function runFeatureSpecBatchPreview(args: string[]): void {
     process.exit(2);
   }
   if (!qualifiesForTsNativeFeatureSpecPreview(cfg)) {
-    console.error(
-      "DIAGNOSTIC: TIED_AGENTSTREAM_IMPL=ts; preview argv not TS-native yet — forwarding to Go agentstream",
-    );
-    spawnGoAgentstream(args, import.meta.url);
-    return;
+    rejectUnqualifiedTsArgv("feature-spec batch preview argv not TS-native");
   }
   try {
     const opts = cfg.orderFilterRaw.trim()
@@ -153,11 +153,7 @@ function runExecutorDryRun(args: string[]): void {
     process.exit(2);
   }
   if (!qualifiesForTsNativeDryRun(cfg)) {
-    console.error(
-      "DIAGNOSTIC: TIED_AGENTSTREAM_IMPL=ts; dry-run argv not TS-native yet — forwarding to Go agentstream",
-    );
-    spawnGoAgentstream(args, import.meta.url);
-    return;
+    rejectUnqualifiedTsArgv("dry-run argv not TS-native");
   }
   try {
     const result = executeExecutorDryRun(cfg);
@@ -175,6 +171,10 @@ function runExecutorDryRun(args: string[]): void {
 }
 
 function main(): void {
+  if (resolveAgentstreamImpl() === "go") {
+    rejectLegacyGoImpl();
+  }
+
   const args = process.argv.slice(2);
   if (
     args.length === 0 ||
@@ -225,10 +225,38 @@ function main(): void {
     return;
   }
 
-  console.error(
-    "DIAGNOSTIC: TIED_AGENTSTREAM_IMPL=ts; subcommand not implemented in TS — forwarding to Go agentstream",
-  );
-  spawnGoAgentstream(args, import.meta.url);
+  void runLiveOrReject(args);
+}
+
+async function runLiveOrReject(args: string[]): Promise<void> {
+  const cwd = process.cwd();
+  let cfg;
+  try {
+    cfg = parseDryRunConfig(cwd, args);
+  } catch (err) {
+    if (String(err).includes("help")) {
+      printHelp();
+      process.exit(0);
+    }
+    console.error(`agentstream: ${String(err)}`);
+    process.exit(2);
+  }
+  if (!qualifiesForTsNativeLiveRun(cfg)) {
+    rejectUnqualifiedTsArgv("subcommand not implemented in TS");
+  }
+  try {
+    const result = await executeLiveRun(cfg);
+    if (result.stderr) {
+      process.stderr.write(result.stderr);
+    }
+    if (result.stdout) {
+      process.stdout.write(result.stdout);
+    }
+    process.exit(result.exitCode);
+  } catch (err) {
+    console.error(`agentstream: ${String(err)}`);
+    process.exit(1);
+  }
 }
 
 main();

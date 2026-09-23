@@ -13,6 +13,7 @@ import {
   type FeatureSpecOptions,
 } from "./featurespec-load-turns.js";
 import { chainBetween, sessionForTurn } from "./pipeline-session.js";
+import { loadTddTurns } from "./tddloop-load.js";
 
 export const VERIFY_SESSION_PROMPT = "what was the most recent prompt?";
 
@@ -73,7 +74,7 @@ export function buildPipeline(in_: PipelineInput): Turn[] {
   }
 
   for (const p of in_.tddYamls) {
-    throw new Error(`tdd yaml not implemented in TS pipeline yet: ${p}`);
+    turns = turns.concat(loadTddTurns(p));
   }
 
   const fsTurns: Turn[] = [];

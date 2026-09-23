@@ -7,7 +7,6 @@ import {
   agentstreamTsEntryFromCliModule,
   bootstrapCopyFilesEntryFromCliModule,
   bootstrapNewClientEntryFromCliModule,
-  goAgentstreamModuleDirFromCliModule,
   mcpStdioEntryFromCliModule,
   onboardingEntryFromCliModule,
   workspaceRootFromCliModule,
@@ -42,9 +41,7 @@ describe("@tied/cli workspace paths [REQ-TIED_UNIFIED_TOOLCHAIN]", () => {
     assert.ok(fs.existsSync(yamlCli), `expected ${yamlCli} (build yaml-cli workspace)`);
   });
 
-  it("resolves Phase 3 agentstream dispatch targets", () => {
-    const goMod = goAgentstreamModuleDirFromCliModule(import.meta.url);
-    assert.ok(fs.existsSync(path.join(goMod, "go.mod")));
+  it("resolves Phase 4 TS agentstream dispatch target", () => {
     const tsEntry = agentstreamTsEntryFromCliModule(import.meta.url);
     assert.ok(
       fs.existsSync(tsEntry),

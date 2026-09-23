@@ -12,14 +12,20 @@ export function repoRootFromModule(moduleUrl: string): string {
   return path.resolve(mcpWorkspaceRootFromModule(moduleUrl), "..");
 }
 
-export function goAgentstreamModuleDirFromModule(moduleUrl: string): string {
-  return path.join(repoRootFromModule(moduleUrl), "tools", "agentstream");
+/** Package-local checklist golden fixtures (Phase 4d oracle freeze). */
+export function checklistTestdataDirFromModule(moduleUrl: string): string {
+  const here = fileURLToPath(moduleUrl);
+  return path.join(path.dirname(here), "..", "testdata", "checklist");
 }
 
-export function checklistTestdataDirFromModule(moduleUrl: string): string {
-  return path.join(
-    goAgentstreamModuleDirFromModule(moduleUrl),
-    "checklist",
-    "testdata",
-  );
+/** Live-run composition fixtures (fake agents, control checklists). */
+export function liveTestdataDirFromModule(moduleUrl: string): string {
+  const here = fileURLToPath(moduleUrl);
+  return path.join(path.dirname(here), "..", "testdata", "live");
+}
+
+/** Frozen Go oracle outputs captured at removal (RISK-UNIFIED-007). */
+export function oracleFixturesDirFromModule(moduleUrl: string): string {
+  const here = fileURLToPath(moduleUrl);
+  return path.join(path.dirname(here), "..", "testdata", "oracle");
 }

@@ -62,7 +62,7 @@
 #       tests exist per the checklist order.
 #
 #   This driver does not pass --feature-spec-batch-yaml so turn 1 is the first checklist step
-#   (session-bootstrap), not a separate feature batch. To add -b again, see tools/agentstream README
+#   (session-bootstrap), not a separate feature batch. To add -b again, see mcp-server/packages/agentstream/README.md
 #   (default order puts feature-spec before checklist; --lead-checklist-before-feature puts it after).
 #
 # Pass-through [agentstream flags…] (after <name> and optional target)
@@ -70,28 +70,26 @@
 #   --checklist-var-strict (fail render if any {{NAME}} left), extra --checklist-var KEY=VALUE.
 #   These override or extend behavior without editing this file.
 #
-# agentstream binary resolution: $AGENTSTREAM if set and executable, else ~/.local/bin/agentstream,
-# else PATH.
+# agentstream resolution: $AGENTSTREAM if set; else node mcp-server/packages/cli/dist/index.js agentstream.
 
 if ! command -v echo_exec >/dev/null 2>&1; then
   echo_exec() { printf '+ '; printf '%q ' "$@"; printf '\n'; "$@"; }
 fi
 
-tasd_agentstream_bin() {
+tasd_agentstream_cmd() {
+  # Populates global _as_cmd (array) for echo_exec.
+  _as_cmd=()
   if [[ -n ${AGENTSTREAM:-} && -x $AGENTSTREAM ]]; then
-    printf '%s' "$AGENTSTREAM"
+    _as_cmd=("$AGENTSTREAM")
     return
   fi
-  local home_local="${HOME%/}/.local/bin/agentstream"
-  if [[ -x "$home_local" ]]; then
-    printf '%s' "$home_local"
+  local tied_cli="${tied_path}/mcp-server/packages/cli/dist/index.js"
+  if [[ -f "$tied_cli" ]]; then
+    _as_cmd=(node "$tied_cli" agentstream)
     return
   fi
-  if command -v agentstream >/dev/null 2>&1; then
-    command -v agentstream
-    return
-  fi
-  printf '%s' 'agentstream'
+  echo "tasd: tied CLI not found: $tied_cli (cd mcp-server && npm run build)" >&2
+  _as_cmd=()
 }
 
 # 1: test dir name
@@ -133,10 +131,9 @@ tasd () {
   : "${test_path:=/Users/fareed/Documents/dev/test/${name}}"
   : "${tied_path:=/Users/fareed/Documents/dev/chatgpt/stdd}"
 
-  local _as
-  _as="$(tasd_agentstream_bin)"
-  if [[ $_as == agentstream ]] && ! command -v agentstream >/dev/null 2>&1; then
-    echo "tasd: agentstream not found (set AGENTSTREAM, install ~/.local/bin/agentstream, or PATH)" >&2
+  local -a _as_cmd=()
+  tasd_agentstream_cmd
+  if ((${#_as_cmd[@]} == 0)); then
     return 127
   fi
 
@@ -188,7 +185,7 @@ tasd () {
   fi
 
   echo_exec \
-   "$_as" \
+   "${_as_cmd[@]}" \
    -w "$test_path" \
    --lead-checklist-yaml "$tied_path/tied/docs/agent-req-implementation-checklist.yaml" \
    --lead-checklist-skip-sub \
@@ -216,7 +213,7 @@ YOU WILL BE TOLD TO WRITE CODE ACCORDING TO PSEUDO-CODE.
 YOU CAN WRITE CODE ONLY WHEN DETAILED AND VALIDATED PSEUDO-CODE AND RED TESTS EXIST.
 IN A FUTURE REQUEST, YOU WILL BE DIRECTED TO WRITE THE PSEUDO-CODE.
 
-Agentstream is located at ~/.local/bin/agentstream.
+Use \`tied agentstream\` from the TIED source repo (build mcp-server workspace first).
 
 TIED_MCP_BIN=${tied_path}/mcp-server/dist/index.js
 EOF

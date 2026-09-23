@@ -1,10 +1,10 @@
 # agentstream (canonical)
 
-**Scope:** Go **`agentstream`** CLI and library (`stdd/agentstream`): configuration, pipeline turn assembly, text sources, feature-spec batch, TDD/checklist YAML rendering, session chaining, executor, non-compact HTML, checklist control trailer, and optional TIED MCP preflight. **Vocabulary only** — behavior in [`../../tools/agentstream/`](../../tools/agentstream/) and `IMPL-GOAGENT-*` pseudo-code sidecars.
+**Scope:** **`tied agentstream`** / **`@tied/agentstream`** (TypeScript, Phase **4d** default): configuration, pipeline turn assembly, text sources, feature-spec batch, TDD/checklist YAML rendering, session chaining, executor, non-compact HTML, checklist control trailer, and optional TIED MCP preflight. Legacy Go tree removed — see [`../../mcp-server/packages/agentstream/README.md`](../../mcp-server/packages/agentstream/README.md). **Vocabulary only** — historical Go terms may appear in `IMPL-GOAGENT-*` sidecars.
 
 **Traceability:** [REQ-GOAGENT-LIB-MODULE](../requirements/REQ-GOAGENT-LIB-MODULE.yaml) · [REQ-GOAGENT-CLI-CONFIG](../requirements/REQ-GOAGENT-CLI-CONFIG.yaml) · [REQ-GOAGENT-TEXT-SOURCES](../requirements/REQ-GOAGENT-TEXT-SOURCES.yaml) · [REQ-GOAGENT-FEATURESPEC-BATCH](../requirements/REQ-GOAGENT-FEATURESPEC-BATCH.yaml) · [REQ-GOAGENT-YAML-STEP-RENDER](../requirements/REQ-GOAGENT-YAML-STEP-RENDER.yaml) · [REQ-GOAGENT-PIPELINE-CHAIN](../requirements/REQ-GOAGENT-PIPELINE-CHAIN.yaml) · [REQ-GOAGENT-AGENT-EXECUTOR](../requirements/REQ-GOAGENT-AGENT-EXECUTOR.yaml) · [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT](../requirements/REQ-GOAGENT-NON-COMPACT-HTML-FORMAT.yaml) · [REQ-GOAGENT-CHECKLIST-CONTROL](../requirements/REQ-GOAGENT-CHECKLIST-CONTROL.yaml)
 
-**See also:** [`domain-references.md`](domain-references.md) · [`agent-stream-ruby.md`](agent-stream-ruby.md) · [`tied-methodology.md`](tied-methodology.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) · [`../../tools/agentstream/README.md`](../../tools/agentstream/README.md)
+**See also:** [`domain-references.md`](domain-references.md) · [`agent-stream-ruby.md`](agent-stream-ruby.md) · [`tied-methodology.md`](tied-methodology.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) · [`../../mcp-server/packages/agentstream/README.md`](../../mcp-server/packages/agentstream/README.md)
 
 ---
 
@@ -35,9 +35,9 @@
 | **outcome_verified event** | verified outcome, evidence verified | Adherence ledger `event_class` appended after successful evidence ref resolution; records `artifact_ref` + `artifact_hash` |
 | **adherence event class** | lifecycle stage, event type | One of six non-interchangeable classes: `instruction_rendered`, `agent_acknowledged`, `action_attempted`, `outcome_verified`, `gate_decided`, `status_mutated` |
 | **adherence reconciliation** | reconcile report, adherence audit | Read-only report emitting finding codes (`rendered_without_acknowledgment`, etc.); never mutates Tracker or TIED YAML |
-| **reconcile operator surface** | reconcile CLI, reconcile MCP | Read-only `ReconcileReport` via Go **`adherence-reconcile`** CLI (oracle), TS **`@tied/agentstream`** when `TIED_AGENTSTREAM_IMPL=ts` and argv qualifies ([REQ-TIED_UNIFIED_TOOLCHAIN]); MCP **`tied_adherence_reconcile_run`** prefers built TS dist when available, else Go subprocess |
+| **reconcile operator surface** | reconcile CLI, reconcile MCP | Read-only `ReconcileReport` via TS **`@tied/agentstream`** by default (Phase **4c**); Go **`adherence-reconcile`** CLI remains oracle/shim when `TIED_AGENTSTREAM_IMPL=go`; MCP **`tied_adherence_reconcile_run`** prefers built TS dist when available, else Go subprocess |
 | **active-turn marker** | turn marker, subprocess marker | Short-lived `active-turn-marker.v1` JSON at `working/{REQ-TOKEN}/adherence/active-turn.json`; written after `instruction_rendered`, cleared after turn handler; hooks read for ledger correlation |
-| **append-only bridge** | hook bridge, adherence hook bridge | Ruby helper `scripts/adherence_append_action_attempted.rb` plus `.cursor/hooks/log.rb` wiring; appends `action_attempted` rows fail-silent when marker absent |
+| **append-only bridge** | hook bridge, adherence hook bridge | TypeScript `mcp-server/dist/cli/adherence-append-action-attempted.js` invoked from `.cursor/hooks/log.rb`; appends `action_attempted` rows fail-silent when marker absent |
 | **hook_log_ref** | hook yaml pointer | Ledger `{ path, line }` pointer into hook YAML logs; never inlines prompt, tool payloads, or shell output |
 | **PreviewTrackerMigration** | tracker migration preview, slug diff preview | Read-only `tracker-migration-preview.v1` report comparing checklist definition slug inventory to an existing Tracker; flags stale dispositions; CLI `--checklist-tracker-preview`; never mutates Tracker bytes |
 | **run-feature-batch-agentstream** | tasd (alone) | Shell driver: `scripts/run-feature-batch-agentstream.sh` |

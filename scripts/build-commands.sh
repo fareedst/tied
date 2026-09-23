@@ -96,9 +96,8 @@ alias validate-vocab=validate_vocab
 # --- Build ---
 
 build_agentstream() {
-  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/tools/agentstream" \
-    go build -trimpath -buildvcs=false -ldflags="-buildid=" \
-    -o agentstream ./cmd/agentstream
+  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" npm run build --workspace=@tied/agentstream
+  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" npm run build --workspace=@tied/cli
 }
 alias build-agentstream=build_agentstream
 
@@ -122,12 +121,14 @@ test_mcp() {
 alias test-mcp=test_mcp
 
 test_agentstream() {
-  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/tools/agentstream" go test ./...
+  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" npm run build --workspace=@tied/agentstream
+  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server/packages/agentstream" npm test
 }
 alias test-agentstream=test_agentstream
 
 verify_agentstream_parity() {
-  "${_BUILD_COMMANDS_DIR}/verify-agentstream-dry-run-parity.sh"
+  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" npm run build
+  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server/packages/agentstream" npm test
 }
 alias verify-agentstream-parity=verify_agentstream_parity
 
@@ -333,8 +334,7 @@ _how_build() {
   cat <<'EOF'
 Build
   build-mcp                  bun install + tsc in mcp-server/
-  build-agentstream          reproducible Go binary (tools/agentstream/agentstream)
-                             flags: -trimpath -buildvcs=false -buildid=
+  build-agentstream          npm build @tied/agentstream + @tied/cli (tied agentstream)
   build-all                  build-mcp then build-agentstream
 EOF
 }
@@ -343,8 +343,8 @@ _how_test() {
   cat <<'EOF'
 Test / verify
   test-mcp                   mcp-server unit/composition tests (bun run test)
-  test-agentstream           go test ./... in tools/agentstream
-  verify-agentstream-parity  Ruby vs Go dry-run prompt parity smoke
+  test-agentstream           @tied/agentstream package tests (frozen oracle fixtures)
+  verify-agentstream-parity  npm test in packages/agentstream (TS parity vs frozen oracle)
 EOF
 }
 
@@ -370,16 +370,17 @@ EOF
 
 _how_agentstream() {
   cat <<'EOF'
-Agentstream (after build-agentstream)
-  tools/agentstream/agentstream --help
-  AGENTSTREAM=path           used by batch drivers when set
+Agentstream (after build-agentstream / build-mcp)
+  node mcp-server/packages/cli/dist/index.js agentstream --help
+  tied agentstream --help      when @tied/cli is on PATH (npm link / npx)
+  AGENTSTREAM=path             optional override for batch drivers
 
-  scripts/run-feature-batch-agentstream.sh   Go batch runner (Ruby-flag parity)
+  scripts/run-feature-batch-agentstream.sh   TS batch runner (tied agentstream)
   scripts/feature-relay.sh TITLE GOAL BEHAVIOR [agentstream flags...]
   scripts/tasd.sh NAME [target] [flags...]     disposable client + lead checklist
 
   MCP preflight is off by default; opt in with --tied-mcp-preflight or
-  AGENTSTREAM_TIED_MCP_PREFLIGHT=1 (see tools/agentstream/README.md).
+  AGENTSTREAM_TIED_MCP_PREFLIGHT=1 (see mcp-server/packages/agentstream/README.md).
 EOF
 }
 
@@ -420,7 +421,7 @@ Related repo scripts (not wrapped here)
   scripts/yaml_semantic_compare.rb
   scripts/analyze_tied_mcp_metrics.rb   offline MCP metrics JSONL analysis
   scripts/tied-post-session.sh CLIENT   post-session metrics + envelope + profile + reconcile
-  scripts/run-feature-batch.sh          Ruby agent-stream batch runner
+  scripts/run-feature-batch.sh          Agentstream batch runner (delegates to run-feature-batch-agentstream.sh)
 
   Client onboarding CLI (inside a bootstrapped project):
     .cursor/skills/tied-yaml/scripts/tied.sh init

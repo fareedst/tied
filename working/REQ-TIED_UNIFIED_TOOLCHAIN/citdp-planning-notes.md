@@ -41,6 +41,26 @@
 
 - **Confirmed:** **2a** executor dry-run → **2b** pipeline/batch → **2c** checklist render → **2d** adherence strangler.
 
+## Phase 4 refine (2026-09-22)
+
+- **Scope:** PLAN.md Phase 4 section only; 3b arc unchanged.
+- **Slice order:** **4a** (live executor + checklist run + dry-run extensions) → **4b** (Ruby/shell operator path) → **4c** (default `TIED_AGENTSTREAM_IMPL=ts` + deprecation window) → **4d** (Go tree removal) → optional **4embed** (pkg/nexe evaluation, non-deliverable).
+- **REQ status:** stays **In Progress** until **4d** + verification/`tied_validate_consistency`.
+- **Open questions:** **Resolved 2026-09-22** — sponsor accepted PLAN defaults (OQ-4-1: no post-4d Go shim; OQ-4-2: frozen fixtures; OQ-4-3: defer Tier 3 compare; OQ-4-4: one tagged release deprecation window).
+- **Tracker:** Reset at Phase 4 **`build-plan`** — do not reuse closed 3b tracker without copy hygiene.
+- **Vocabulary RECORD:** `Go-forward surface`, `deprecation window`, `oracle fixture freeze`, `qualified argv` vs `documented operator flow`.
+## Phase 4 arc post-4d process (2026-09-23)
+
+- **Delivery:** Slices **4a–4d** complete locally — TS-only `@tied/agentstream`, Go tree removed, oracle fixtures frozen under `mcp-server/packages/agentstream/testdata/`.
+- **Tests:** `cd mcp-server && npm test` — **991/991** (no Go).
+- **`tied_verify`:** REQ **Implemented**, IMPL **Active** after MCP **`tied_verify`** gained **`tracker_path`** + hydration parity with gate validate; runner [run-phase4d-tied-verify.mjs](./run-phase4d-tied-verify.mjs).
+- **Arc `close_out`:** [phase4-full-close-out-gate.json](./gates/phase4-full-close-out-gate.json) — **`allowed: false`** until **`traceable-commit`** (sponsor git commit); envelope blocking gaps **0**.
+- **Tracker:** **`sub-close-out-evidence-sync`** completed; **`traceable-commit`** pending — [evidence/traceable-commit-evidence.md](./evidence/traceable-commit-evidence.md).
+- **Vocabulary Touchpoint 3:** RECORD/VALIDATE `Go tree removal`, `oracle fixture freeze`, TS-default **`@tied/agentstream`** in [tied/vocab/agentstream.md](../../tied/vocab/agentstream.md) and [tied/vocab/domain-references.md](../../tied/vocab/domain-references.md).
+- **Next prompt type:** Sponsor commit → **`plan-close-out`**; optional **4embed** spike via **`build-plan`**.
+
 ## Linked plan
 
 Canonical plan for `/build-plan`: [PLAN.md](./PLAN.md)
+
+Close-out execution plan (Phase 4 arc, two-commit): `.cursor/plans/phase_4_plan_close-out_8dd5a91f.plan.md` (Cursor plans store).

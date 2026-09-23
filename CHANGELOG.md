@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Unified Node developer toolchain — Phase 4 slices 4a–4d ([REQ-TIED_UNIFIED_TOOLCHAIN])** —
+  TS `@tied/agentstream` live executor and tracker-mode paths; Ruby `tools/agent-stream` and shell
+  adherence bridge retired; default **`TIED_AGENTSTREAM_IMPL=ts`**; Go **`tools/agentstream`** tree
+  removed with oracle fixtures frozen under `mcp-server/packages/agentstream/testdata/` and
+  `working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4d-go-oracle-freeze.json`. REQ **Implemented** via
+  **`tied_verify`** (2026-09-23); operator path is Node/`tied` only (Tier 3 YAML shell/Ruby deferred
+  per OQ-4-3). Tests: `mcp-server` npm test (**991/991**); Go no longer required for agentstream.
+
 - **Unified Node developer toolchain — Phase 3b slices 2a–2d ([REQ-TIED_UNIFIED_TOOLCHAIN])** —
   TS `@tied/agentstream` strangler: native dry-run (`EXECUTOR_DRY_RUN_TS`), pipeline/batch preview
   (`PIPELINE_BATCH_TS`), lead-checklist preview (`CHECKLIST_RENDER_TS`), adherence reconcile

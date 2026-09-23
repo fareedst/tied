@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { execFileSync, spawnSync } from "node:child_process";
+import { spawnSync } from "node:child_process";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -7,30 +7,11 @@ import { fileURLToPath } from "node:url";
 import { describe, it } from "node:test";
 
 import { runAdherenceReconcileCli } from "./adherence-reconcile-cli.js";
-import { goAgentstreamModuleDirFromModule } from "./paths.js";
+import { repoRootFromModule } from "./paths.js";
 
 // [IMPL-TIED_UNIFIED_TOOLCHAIN] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
-describe("adherence reconcile TS vs Go oracle", () => {
-  const moduleDir = goAgentstreamModuleDirFromModule(import.meta.url);
-  const repoRoot = path.resolve(moduleDir, "../..");
-
-  function runGo(args: string[], cwd: string): { exitCode: number; stdout: string; stderr: string } {
-    try {
-      const stdout = execFileSync(
-        "go",
-        ["run", "-C", moduleDir, "./cmd/adherence-reconcile", ...args],
-        { encoding: "utf8", cwd, stdio: ["ignore", "pipe", "pipe"] },
-      );
-      return { exitCode: 0, stdout, stderr: "" };
-    } catch (err) {
-      const e = err as { status?: number; stdout?: string; stderr?: string };
-      return {
-        exitCode: e.status ?? 1,
-        stdout: e.stdout ?? "",
-        stderr: e.stderr ?? "",
-      };
-    }
-  }
+describe("adherence reconcile TS [REQ-TIED_UNIFIED_TOOLCHAIN]", () => {
+  const repoRoot = repoRootFromModule(import.meta.url);
 
   function writeTracker(dir: string, body: Record<string, unknown>): string {
     const p = path.join(dir, "tracker.yaml");
@@ -50,17 +31,17 @@ describe("adherence reconcile TS vs Go oracle", () => {
     return p;
   }
 
-  it("legacy_no_adherence_chain matches Go", () => {
+  it("legacy_no_adherence_chain returns stable finding code", () => {
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), "recon-ts-"));
     const trackerPath = writeTracker(dir, { request_token: "REQ-TEST" });
     const args = ["--ledger", path.join(dir, "missing.jsonl"), "--tracker", trackerPath, "--workspace", dir];
-    const go = runGo(args, dir);
     const ts = runAdherenceReconcileCli(args);
-    assert.equal(ts.exitCode, go.exitCode);
-    assert.deepEqual(JSON.parse(ts.stdout), JSON.parse(go.stdout));
+    assert.equal(ts.exitCode, 0);
+    const tsReport = JSON.parse(ts.stdout) as { findings: Array<{ code: string }> };
+    assert.ok(tsReport.findings.some((f) => f.code === "legacy_no_adherence_chain"));
   });
 
-  it("rendered_without_acknowledgment matches Go", () => {
+  it("rendered_without_acknowledgment finding matches TS reconcile", () => {
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), "recon-ts-"));
     const ledgerPath = writeLedger(dir, [
       {
@@ -77,17 +58,11 @@ describe("adherence reconcile TS vs Go oracle", () => {
     ]);
     const trackerPath = writeTracker(dir, { request_token: "REQ-CLI" });
     const args = ["--ledger", ledgerPath, "--tracker", trackerPath, "--workspace", dir];
-    const go = runGo(args, dir);
     const ts = runAdherenceReconcileCli(args);
-    assert.equal(ts.exitCode, go.exitCode);
-    const goReport = JSON.parse(go.stdout) as { findings: Array<{ code: string }> };
+    assert.equal(ts.exitCode, 0);
     const tsReport = JSON.parse(ts.stdout) as { findings: Array<{ code: string }> };
     assert.ok(
       tsReport.findings.some((f) => f.code === "rendered_without_acknowledgment"),
-    );
-    assert.deepEqual(
-      tsReport.findings.map((f) => f.code).sort(),
-      goReport.findings.map((f) => f.code).sort(),
     );
   });
 

@@ -32,12 +32,13 @@ CITDP-REQ-TIED_UNIFIED_TOOLCHAIN:
     commands:
       - "cd mcp-server && npm install && npm run build && npm test"
       - "cd tools/agentstream && go test ./..."
-      - "ruby scripts/test/adherence_append_action_attempted_test.rb"
+      - "mcp-server npm test (includes dist/hooks/adherence-append-action-attempted.test.js)"
       - "scripts/lint_yaml.sh tied/citdp/CITDP-REQ-TIED_UNIFIED_TOOLCHAIN.yaml"
       - "tied_validate_consistency"
     manifest_reference: "working/REQ-TIED_UNIFIED_TOOLCHAIN/evidence/verification-evidence-manifest.v1.json"
     proof_boundaries:
-      - "Go tools/agentstream remains default for live executor and unqualified argv; Phase 4 legacy removal not proven"
+      - "Go tools/agentstream remains default until slice 4c; Phase 4d Go removal not proven"
+      - "Phase 4b: Ruby tools/agent-stream and adherence Ruby launcher removed; Tier 3 yaml_tool/lint_yaml Ruby sorter deferred (OQ-4-3)"
       - "Phases 0–3b slices 1–2d shipped: npm workspace, @tied/cli/bootstrap/yaml-cli, TS adherence hook, @tied/agentstream dispatcher/tiedpreflight/tracker-preview, EXECUTOR_DRY_RUN_TS, PIPELINE_BATCH_TS, CHECKLIST_RENDER_TS, ADHERENCE_STRANGLER_TS with Go oracle parity tests"
   impact_analysis:
     architecture:
@@ -236,12 +237,12 @@ CITDP-REQ-TIED_UNIFIED_TOOLCHAIN:
         path: "scripts/yaml_tool.sh / lint_yaml.sh"
         role: "YAML canonicalization gate"
     tier_4_deprecate:
-      - current_lang: "Ruby"
+      - current_lang: "removed Phase 4b"
         path: "tools/agent-stream/"
-        role: "Legacy Ruby ATDD runner"
+        role: "Legacy Ruby ATDD runner (deleted)"
     tier_5_port_with_suite:
-      - note: "Port to TypeScript with @tied/cli or bootstrap package; Ruby retired after parity (sponsor 2026-09-22)"
-        path: "scripts/adherence_append_action_attempted.rb"
+      - note: "TS bridge shipped; Ruby launcher removed Phase 4b"
+        path: "mcp-server/dist/cli/adherence-append-action-attempted.js"
         role: "Cursor hook bridge (append-only)"
       - path: "working/** research qualification scripts"
         role: "Research pilots; out of unified suite scope"

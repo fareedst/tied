@@ -18,7 +18,7 @@ function advancedPaths(): string[] {
   return [
     ".cursor/skills/tied-yaml/scripts/tied-cli.sh",
     "TIED YAML MCP",
-    "tools/agentstream",
+    "tied agentstream (@tied/agentstream)",
     "tied/docs/using-tied-without-mcp.md",
   ];
 }

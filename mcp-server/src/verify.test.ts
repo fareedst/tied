@@ -201,7 +201,7 @@ REQ-TWO:
     const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
     const writerFixturePath = path.join(
       repoRoot,
-      "tools/agentstream/checklist/testdata/gate-writer-minimal-tracker.yaml",
+      "mcp-server/packages/agentstream/testdata/checklist/gate-writer-minimal-tracker.yaml",
     );
     const tracker = yaml.load(fs.readFileSync(writerFixturePath, "utf8")) as Record<string, unknown>;
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-verify-writer-valid-"));

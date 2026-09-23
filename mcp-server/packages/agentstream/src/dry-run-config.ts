@@ -5,6 +5,8 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import { findRepoRootFromPath } from "./repo-root.js";
+
 export type DryRunConfig = {
   dryRun: boolean;
   sessionId: string;
@@ -32,7 +34,13 @@ export type DryRunConfig = {
   previewChecklistTrackerYaml: string;
   verifySession: boolean;
   nonCompactHtml: boolean;
+  nonCompactHtmlStableIndent: number;
   checklistTrackerYaml: string;
+  adherenceLedger: string;
+  runID: string;
+  enforceEnvelope: boolean;
+  allowMissingEnvelope: boolean;
+  integratedDepth: boolean;
   featureSpecBatchExplicit: boolean;
   orderFilterRaw: string;
 };
@@ -109,7 +117,13 @@ export function parseDryRunConfig(cwd: string, args: string[]): DryRunConfig {
     previewChecklistTrackerYaml: "",
     verifySession: false,
     nonCompactHtml: false,
+    nonCompactHtmlStableIndent: 0,
     checklistTrackerYaml: "",
+    adherenceLedger: "",
+    runID: "",
+    enforceEnvelope: false,
+    allowMissingEnvelope: false,
+    integratedDepth: false,
     featureSpecBatchExplicit: false,
     orderFilterRaw: "",
   };
@@ -278,6 +292,18 @@ export function parseDryRunConfig(cwd: string, args: string[]): DryRunConfig {
       case "--non-compact-html":
         c.nonCompactHtml = true;
         break;
+      case "--non-compact-html-indent": {
+        const val = needVal(k, v, ok, flagPart, i);
+        if (!ok) {
+          i += 1;
+        }
+        const n = Number.parseInt(val, 10);
+        if (Number.isNaN(n) || n < 0) {
+          throw new Error("--non-compact-html-indent requires a non-negative integer");
+        }
+        c.nonCompactHtmlStableIndent = n;
+        break;
+      }
       case "--checklist-var": {
         const val = needVal(k, v, ok, flagPart, i);
         if (!ok) {
@@ -290,6 +316,21 @@ export function parseDryRunConfig(cwd: string, args: string[]): DryRunConfig {
         c.checklistVars[val.slice(0, eq)] = val.slice(eq + 1);
         break;
       }
+      case "--adherence-ledger":
+        c.adherenceLedger = needVal(k, v, ok, flagPart, i);
+        if (!ok) {
+          i += 1;
+        }
+        break;
+      case "--enforce-envelope":
+        c.enforceEnvelope = true;
+        break;
+      case "--allow-missing-envelope":
+        c.allowMissingEnvelope = true;
+        break;
+      case "--integrated-depth":
+        c.integratedDepth = true;
+        break;
       default:
         break;
     }
@@ -304,6 +345,7 @@ export function parseDryRunConfig(cwd: string, args: string[]): DryRunConfig {
   }
 
   applyWorkspacePreloadDefault(c);
+  applyTrackerDefaults(c);
   if (!c.featureSpecBatchExplicit) {
     const p = path.join(c.workspace, "prompts", "all.yaml");
     if (fileReadable(p)) {
@@ -313,6 +355,54 @@ export function parseDryRunConfig(cwd: string, args: string[]): DryRunConfig {
 
   validateDryRunConfig(c);
   return c;
+}
+
+export function trackerRequestTokenFromVars(
+  vars: Record<string, string>,
+): string {
+  for (const key of ["REQUEST", "REQ_TOKEN", "REQUEST_TOKEN"]) {
+    const v = String(vars[key] ?? "").trim();
+    if (v !== "") {
+      return v;
+    }
+  }
+  return "";
+}
+
+function applyTrackerDefaults(c: DryRunConfig): void {
+  if (c.runID.trim() === "") {
+    for (const key of ["RUN_ID", "AGENTSTREAM_RUN_ID"]) {
+      const v = String(c.checklistVars[key] ?? "").trim();
+      if (v !== "") {
+        c.runID = v;
+        break;
+      }
+    }
+    if (c.runID.trim() === "") {
+      const envRun = String(process.env.AGENTSTREAM_RUN_ID ?? "").trim();
+      if (envRun !== "") {
+        c.runID = envRun;
+      }
+    }
+  }
+  if (
+    c.checklistTrackerYaml.trim() !== "" &&
+    c.adherenceLedger.trim() === ""
+  ) {
+    const token = trackerRequestTokenFromVars(c.checklistVars);
+    if (token !== "") {
+      const root = findRepoRootFromPath(c.workspace);
+      if (root !== "") {
+        c.adherenceLedger = path.join(
+          root,
+          "working",
+          token,
+          "adherence",
+          "events.jsonl",
+        );
+      }
+    }
+  }
 }
 
 function applyWorkspacePreloadDefault(c: DryRunConfig): void {
@@ -399,13 +489,25 @@ function validateDryRunConfig(c: DryRunConfig): void {
       `lead checklist yaml is not a readable file: ${c.leadChecklistYaml}`,
     );
   }
+  if (c.checklistTrackerYaml.trim() !== "") {
+    if (c.leadChecklistYaml.trim() === "") {
+      throw new Error("--checklist-tracker-yaml requires --lead-checklist-yaml");
+    }
+    const def = path.resolve(path.normalize(c.leadChecklistYaml));
+    const track = path.resolve(path.normalize(c.checklistTrackerYaml));
+    if (def === track) {
+      throw new Error(
+        "--checklist-tracker-yaml must not equal --lead-checklist-yaml",
+      );
+    }
+  }
 }
 
 export function skipTiedMcpPreflightEffective(c: DryRunConfig): boolean {
   return c.skipTiedMcpPreflight;
 }
 
-/** True when TS-native dry-run can handle argv without Go forward (slices 2a–2b). */
+/** True when TS-native dry-run can handle argv without Go forward (2a–2b + Phase 4a extensions). */
 export function qualifiesForTsNativeDryRun(c: DryRunConfig): boolean {
   if (!c.dryRun) {
     return false;
@@ -417,24 +519,12 @@ export function qualifiesForTsNativeDryRun(c: DryRunConfig): boolean {
   ) {
     return false;
   }
-  if (c.nonCompactHtml) {
-    return false;
-  }
-  if (c.argvWords.length > 0) {
-    return false;
-  }
-  if (c.promptsFiles.length > 0 || c.tddYamls.length > 0) {
-    return false;
-  }
-  if (c.verifySession) {
-    return false;
-  }
-  if (c.checklistTrackerYaml) {
-    return false;
-  }
   const hasChecklist = c.leadChecklistYaml.trim() !== "";
   const hasBatch = c.featureSpecBatchYamls.length > 0;
-  if (!hasChecklist && !hasBatch) {
+  const hasArgv = c.argvWords.length > 0;
+  const hasPrompts = c.promptsFiles.length > 0;
+  const hasTdd = c.tddYamls.length > 0;
+  if (!hasChecklist && !hasBatch && !hasArgv && !hasPrompts && !hasTdd) {
     return false;
   }
   if (c.orderFilterRaw.trim() !== "" && !hasBatch) {

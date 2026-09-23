@@ -1,0 +1,5 @@
+- order: 1
+  feature_name: feat
+  goal: batch goal line
+  behavior: |
+    PIPELINE_BATCH_TS_MARKER

@@ -1,0 +1,28 @@
+{
+  "schema_version": "tracker-migration-preview.v1",
+  "definition_path": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/packages/agentstream/testdata/checklist/gate-fixture-checklist.yaml",
+  "tracker_path": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/packages/agentstream/testdata/checklist/gate-writer-minimal-tracker.yaml",
+  "read_only": true,
+  "definition_slugs": [
+    "session-bootstrap",
+    "translate-sponsor-intent",
+    "change-definition",
+    "impact-discovery",
+    "risk-assessment",
+    "test-strategy",
+    "sub-adversarial-inquiry-pass"
+  ],
+  "tracker_slugs": [
+    "session-bootstrap",
+    "translate-sponsor-intent",
+    "change-definition",
+    "impact-discovery",
+    "risk-assessment",
+    "test-strategy",
+    "sub-adversarial-inquiry-pass"
+  ],
+  "missing_in_tracker": [],
+  "extra_in_tracker": [],
+  "stale_dispositions": null,
+  "would_materialize_fresh": false
+}

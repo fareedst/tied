@@ -41,7 +41,7 @@ Schema: `active-turn-marker.v1`. Written **after** `instruction_rendered`, clear
 **Components:**
 
 - `.cursor/hooks/log.rb` — maps allowlisted hook events to bounded `evidence_refs`
-- `scripts/adherence_append_action_attempted.rb` — appends one `action_attempted` JSONL row
+- `mcp-server/dist/cli/adherence-append-action-attempted.js` — appends one `action_attempted` JSONL row (via `.cursor/hooks/log.rb`)
 
 **Behavior:** Fail-silent when the active-turn marker is absent (non-checklist sessions unaffected). Never rewrites prior ledger rows. Ledger stores `hook_log_ref` `{ path, line }` only — no prompt bodies, tool payloads, or shell output.
 

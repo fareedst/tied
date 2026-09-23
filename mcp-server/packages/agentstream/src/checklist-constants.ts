@@ -7,3 +7,5 @@ export const GATE_SUB_PROCEDURE_SLUG = "sub-adversarial-inquiry-pass";
 export const TRACKER_MIGRATION_PREVIEW_SCHEMA = "tracker-migration-preview.v1";
 
 export const STALE_REASON_STEP_REMOVED = "step_removed_from_definition";
+
+export const TRACKER_SCHEMA_VERSION = "checklist-tracker.v1";

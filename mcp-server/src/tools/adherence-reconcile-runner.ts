@@ -56,7 +56,10 @@ type ProcessCapture = {
 function findRepoRoot(start: string): string {
   let dir = path.resolve(start);
   for (;;) {
-    if (fs.existsSync(path.join(dir, "AGENTS.md")) && fs.existsSync(path.join(dir, "tools", "agentstream"))) {
+    if (
+      fs.existsSync(path.join(dir, "AGENTS.md")) &&
+      fs.existsSync(path.join(dir, "mcp-server", "package.json"))
+    ) {
       return dir;
     }
     const parent = path.dirname(dir);
@@ -81,18 +84,13 @@ export function resolveAdherenceReconcileArgv(repoRoot?: string): { argv: string
       return { argv: [sibling], cwd: root };
     }
   }
-  const built = path.join(root, "tools/agentstream/adherence-reconcile");
-  if (fs.existsSync(built)) {
-    return { argv: [built], cwd: root };
-  }
   const tsEntry = path.join(root, "mcp-server/packages/agentstream/dist/index.js");
   if (fs.existsSync(tsEntry)) {
     return { argv: [process.execPath, tsEntry, "adherence-reconcile"], cwd: root };
   }
-  return {
-    argv: ["go", "run", "./cmd/adherence-reconcile"],
-    cwd: path.join(root, "tools/agentstream"),
-  };
+  throw new Error(
+    "adherence-reconcile: build @tied/agentstream (mcp-server/packages/agentstream/dist/index.js) not found",
+  );
 }
 
 function captureProcess(argv: string[], cwd: string, args: string[]): Promise<ProcessCapture> {

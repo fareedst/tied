@@ -1,4 +1,4 @@
-# @tied/agentstream (Phase 3 strangler)
+# @tied/agentstream (Phase 4 — TS-only)
 
 [IMPL-TIED_UNIFIED_TOOLCHAIN] [ARCH-TIED_UNIFIED_TOOLCHAIN] [REQ-TIED_UNIFIED_TOOLCHAIN]
 
@@ -6,34 +6,31 @@
 
 | Surface | Status |
 | --- | --- |
-| **Dispatcher** (`TIED_AGENTSTREAM_IMPL=go\|ts`) | Shipped via `@tied/cli` `tied agentstream` |
-| **Go pipeline** (checklist run, live executor) | **Default** — exec `AGENTSTREAM` or `go run -C tools/agentstream ./cmd/agentstream` |
-| **TS dry-run** (pipeline subset, qualified argv) | **`TIED_AGENTSTREAM_IMPL=ts`** — no Go forward for qualified `-d` (slices 2a–2b) |
-| **TS `--preview-feature-spec-batch-yaml`** | **TypeScript** — `src/featurespec-preview.ts` (slice 2b); parity vs Go |
-| **TS `--preview-lead-checklist`** | **TypeScript** — `src/checklist-preview.ts` (slice 2c); parity vs Go on checklist testdata |
-| **tiedpreflight** (static `.cursor/mcp.json` / `TIED_BASE_PATH`) | **TypeScript** — `src/tiedpreflight.ts` |
-| **`--checklist-tracker-preview`** | **TypeScript** — `src/tracker-migration-preview.ts` (Phase 3b slice 1); parity vs Go on golden testdata |
-| **adherence-reconcile** (read-only operator surface) | **TypeScript** — `adherence-reconcile-cli.ts` + `adherence-reconcile.ts` (slice 2d); parity vs Go CLI |
-| **Live executor** | **Go only** (Phase 4 scope, RISK-UNIFIED-001) |
+| **Dispatcher** | Shipped via `@tied/cli` **`tied agentstream`** (TypeScript entry only after Phase **4d**) |
+| **TS pipeline** | Checklist run, live executor, dry-run, reconcile, previews — default (`TIED_AGENTSTREAM_IMPL=ts` or unset) |
+| **Go legacy** | **Removed** — `TIED_AGENTSTREAM_IMPL=go` exits with reinstall hint; see [phase4d-go-oracle-freeze.json](../../../working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4d-go-oracle-freeze.json) |
+| **tiedpreflight** | `src/tiedpreflight.ts` |
+| **Golden fixtures** | `testdata/checklist/`, `testdata/live/`, frozen oracle outputs in `testdata/oracle/` |
 
 ## Environment
 
-- **`TIED_AGENTSTREAM_IMPL`** — `go` (default) or `ts`. `go` spawns the Go binary directly. `ts` runs this package entry with **TS-native** paths below; unqualified argv **forwards to Go** with stderr `DIAGNOSTIC`.
+- **`TIED_AGENTSTREAM_IMPL`** — `ts` (default). Value **`go`** is rejected (Phase **4d**); emergency legacy Go: checkout commit in [phase4d-go-oracle-freeze.json](../../../working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4d-go-oracle-freeze.json).
+- **`AGENTSTREAM`** — optional path override for shell drivers (`scripts/run-feature-batch-agentstream.sh`, etc.).
 
-### Qualified argv (`TIED_AGENTSTREAM_IMPL=ts`, no Go forward)
+### Qualified argv (`TIED_AGENTSTREAM_IMPL=ts`)
 
 | Mode | Required / allowed flags |
 | --- | --- |
 | Tracker preview | `-c` / `--lead-checklist-yaml`, `--checklist-tracker-preview PATH` |
-| Checklist render preview | `-c` / `--lead-checklist-yaml`, `--preview-lead-checklist`; optional `--lead-checklist-from-step`, `--lead-checklist-to-step`, `--lead-checklist-skip-sub`, repeatable `--checklist-var KEY=VALUE`, `--checklist-var-strict` |
-| Feature batch preview | `--preview-feature-spec-batch-yaml PATH`, optional `-o` / `--select-order` |
-| Pipeline dry-run | `-d`, `-w`, optional `-c`, `-b`, `-p`, `-o`, checklist bounds/vars, `--lead-checklist-before-feature`, `--skip-tied-mcp-preflight` |
-| Lead-only dry-run (2a) | `-d -c …` without `-b`, no `--prompts-file`, `--tdd-yaml`, `--verify-session`, argv after `--`, or `--non-compact-html` |
-| Adherence reconcile | `adherence-reconcile` subcommand or standalone `--tracker` (required) with optional `--ledger`, `--gates-dir`, `--workspace`, `--citdp`, TIED indexes, `--include-process-grade` |
+| Checklist render preview | `-c`, `--preview-lead-checklist`; optional bounds, `--checklist-var`, `--lead-checklist-skip-sub` |
+| Feature batch preview | `--preview-feature-spec-batch-yaml PATH`, optional `-o` |
+| Pipeline dry-run | `-d`, `-w`, optional `-c`, `-b`, `-p`, `-o`, checklist bounds/vars, `--skip-tied-mcp-preflight` |
+| Extended dry-run | `--prompts-file`, `--tdd-yaml`, `--verify-session`, `--non-compact-html`, argv after `--` |
+| Adherence reconcile | `adherence-reconcile` subcommand or standalone `--tracker` with reconcile flags |
+| Live checklist + tracker | `-c`, `--checklist-tracker-yaml`, tracker vars, optional `--adherence-ledger`, `--enforce-envelope` |
 
-`scripts/run-feature-batch-agentstream.sh` builds `-d -w -c -p -b` (and optional `-o`); with `TIED_AGENTSTREAM_IMPL=ts` and a built `@tied/cli`, that dry-run shape is TS-native when other disqualifiers are absent.
-- **`AGENTSTREAM`** — when set, path to a prebuilt Go `agentstream` executable (same as legacy shell scripts).
+Unqualified argv **exit with an error** (no Go forward).
 
 ## Tests
 
-Parity tests under `src/*.test.ts`: checklist tracker preview (Go oracle), tiedpreflight fixtures, executor dry-run (TS native vs Go oracle; `TIED_AGENTSTREAM_IMPL=ts` must not forward for qualified argv).
+`npm test` in this package compares TS output to **frozen oracle fixtures** under `testdata/oracle/` (RISK-UNIFIED-007). Go is not required.

@@ -1,0 +1,10 @@
+{
+  "schema_version": "unified-toolchain-go-oracle-freeze.v1",
+  "req_token": "REQ-TIED_UNIFIED_TOOLCHAIN",
+  "risk_id": "RISK-UNIFIED-007",
+  "phase_slice": "4d",
+  "last_go_oracle_commit": "a5a03c3047aa189d2de379df43ce9d1a31c3805d",
+  "frozen_fixture_root": "mcp-server/packages/agentstream/testdata",
+  "oracle_outputs_dir": "mcp-server/packages/agentstream/testdata/oracle",
+  "notes": "Go tools/agentstream/ removed after capturing oracle outputs; emergency reinstall via git checkout of last_go_oracle_commit (OQ-4-1). Optional nightly Go job may replay against this commit — not required for npm test."
+}

@@ -9,7 +9,6 @@ import {
   agentstreamTsEntryFromCliModule,
   bootstrapCopyFilesEntryFromCliModule,
   bootstrapNewClientEntryFromCliModule,
-  goAgentstreamModuleDirFromCliModule,
   mcpStdioEntryFromCliModule,
   onboardingEntryFromCliModule,
   yamlCliEntryFromCliModule,
@@ -22,7 +21,7 @@ Subcommands:
   mcp         Start the TIED YAML MCP server on stdio (same as mcp-server/dist/index.js)
   bootstrap   Copy TIED templates into a client (default: copy-files; use "new-client" for pipeline)
   yaml        Lint or canonicalize YAML (lint | canonicalize)
-  agentstream Run Go agentstream pipeline (TIED_AGENTSTREAM_IMPL=go|ts)
+  agentstream Run agentstream pipeline (TS-only; default ts)
   help        Show this message
 
 Unknown first arguments are forwarded to feature onboarding (legacy tied bin behavior).
@@ -30,51 +29,27 @@ Unknown first arguments are forwarded to feature onboarding (legacy tied bin beh
 }
 
 function resolveAgentstreamImpl(): "go" | "ts" {
-  const raw = (process.env.TIED_AGENTSTREAM_IMPL ?? "go").trim().toLowerCase();
-  if (raw === "ts") {
-    return "ts";
+  const raw = (process.env.TIED_AGENTSTREAM_IMPL ?? "ts").trim().toLowerCase();
+  if (raw === "go") {
+    return "go";
   }
-  if (raw !== "go" && raw !== "") {
+  if (raw !== "ts" && raw !== "") {
     console.error(
-      `DIAGNOSTIC: unknown TIED_AGENTSTREAM_IMPL=${JSON.stringify(raw)}; using go`,
+      `DIAGNOSTIC: unknown TIED_AGENTSTREAM_IMPL=${JSON.stringify(raw)}; using ts`,
     );
   }
-  return "go";
+  return "ts";
 }
 
-function spawnGoAgentstream(args: string[]): void {
-  const moduleDir = goAgentstreamModuleDirFromCliModule(import.meta.url);
-  const envBin = process.env.AGENTSTREAM?.trim();
-  let command: string;
-  let spawnArgs: string[];
-
-  if (envBin) {
-    command = envBin;
-    spawnArgs = args;
-  } else {
-    command = "go";
-    spawnArgs = ["run", "-C", moduleDir, "./cmd/agentstream", ...args];
-  }
-
-  const child = spawn(command, spawnArgs, {
-    stdio: "inherit",
-    env: process.env,
-  });
-  child.on("exit", (code, signal) => {
-    if (signal) {
-      process.kill(process.pid, signal);
-      return;
-    }
-    process.exit(code ?? 1);
-  });
-}
+const LEGACY_GO_REINSTALL_HINT =
+  "TIED_AGENTSTREAM_IMPL=go was removed in Phase 4d. For emergency legacy Go agentstream, checkout a git tag from before Go removal (see working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4c-deprecation-notice.md and phase4d-go-oracle-freeze.json).";
 
 function runAgentstream(args: string[]): void {
-  if (resolveAgentstreamImpl() === "ts") {
-    runNodeEntry(agentstreamTsEntryFromCliModule(import.meta.url), args);
-    return;
+  if (resolveAgentstreamImpl() === "go") {
+    console.error(`tied agentstream: ${LEGACY_GO_REINSTALL_HINT}`);
+    process.exit(2);
   }
-  spawnGoAgentstream(args);
+  runNodeEntry(agentstreamTsEntryFromCliModule(import.meta.url), args);
 }
 
 function runNodeEntry(entry: string, args: string[]): void {

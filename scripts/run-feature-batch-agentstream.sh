@@ -3,12 +3,11 @@
 ##
 # run-feature-batch-agentstream
 #
-# Same CLI surface as run-feature-batch.sh, but invokes the Go tools/agentstream
-# binary (or go run) instead of Ruby run_agent_stream.rb.
+# Same CLI surface as run-feature-batch.sh; invokes `tied agentstream` (TS @tied/agentstream).
 #
 # Environment:
 #   AGENTSTREAM  If set, path to a prebuilt agentstream executable (skips go run / tied).
-#   TIED_AGENTSTREAM_IMPL  go (default) or ts — passed through when using tied agentstream.
+#   TIED_AGENTSTREAM_IMPL  ts (default); go was removed in Phase 4d.
 #   AGENTSTREAM_TIED_MCP_PREFLIGHT=1  Opt in to static tied-yaml mcp.json validation before cursor agent (off by default).
 #   AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1  Skip preflight when it is enabled (or use agentstream -y).
 # Prompt files: <workspace>/tied/agent-preload-contract.yaml (when present) is passed first, then any -p paths (see run-feature-batch.sh).
@@ -32,7 +31,7 @@ Usage:
 Same options as run-feature-batch.sh, except:
   -r / --runner       Ignored (warning only).
 
-Go-only (forwarded to agentstream):
+Agentstream-only (forwarded to tied agentstream):
   --lead-checklist-from-step ID   Optional inclusive lower main-step id
   --lead-checklist-to-step ID     Optional inclusive upper main-step id
   --checklist-var KEY=VALUE       Repeatable; expands {{KEY}} in lead checklist YAML (synonym: --lead-checklist-var)
@@ -43,9 +42,9 @@ also pass -s / --session-id with the session to resume.
 
 Environment:
   AGENTSTREAM        Path to agentstream binary; if unset, prefers built `tied agentstream` when available
-  TIED_AGENTSTREAM_IMPL  go (default) or ts when using tied agentstream
+  TIED_AGENTSTREAM_IMPL  ts (default); go removed Phase 4d
   AGENTSTREAM_TIED_MCP_PREFLIGHT=1       Opt in to tied-yaml mcp.json preflight (default is skip)
-  AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1  Skip preflight when enabled (see tools/agentstream/README.md)
+  AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1  Skip preflight when enabled (see mcp-server/packages/agentstream/README.md)
 
 See run-feature-batch.sh --help for flag meanings.
 EOF
@@ -87,7 +86,7 @@ main() {
   _script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
   local _repo_root
   _repo_root="$(cd "${_script_dir}/.." && pwd)"
-  local _go_module="${_repo_root}/tools/agentstream"
+  local _tied_cli="${_repo_root}/mcp-server/packages/cli/dist/index.js"
 
   local dry_run=0
   local session_id=""
@@ -235,7 +234,7 @@ main() {
   fi
 
   if (( runner_ignored )); then
-    printf 'run-feature-batch-agentstream: warning: ignoring -r/--runner (Go agentstream has no Ruby runner)\n' >&2
+    printf 'run-feature-batch-agentstream: warning: ignoring -r/--runner (agentstream has no Ruby runner)\n' >&2
   fi
 
   local contract_path="${workspace}/tied/agent-preload-contract.yaml"
@@ -264,7 +263,7 @@ main() {
   fi
 
   require_directory "workspace" "$workspace"
-  [[ -d "${_go_module}" ]] || fail "Go module not found: ${_go_module}"
+  [[ -f "${_tied_cli}" ]] || fail "built tied CLI not found: ${_tied_cli} (cd mcp-server && npm run build)"
   require_readable_file "lead checklist yaml" "$lead_checklist_yaml"
   for p in "${prompt_args[@]}"; do
     require_readable_file "prompt file" "$p"
@@ -272,14 +271,11 @@ main() {
   [[ -n $feature_spec_batch_yaml ]] && require_readable_file "feature spec batch yaml" "$feature_spec_batch_yaml"
 
   local -a cmd
-  local _tied_cli="${_repo_root}/mcp-server/packages/cli/dist/index.js"
   if [[ -n "${AGENTSTREAM:-}" ]]; then
     [[ -f "$AGENTSTREAM" && -x "$AGENTSTREAM" ]] || fail "AGENTSTREAM is not an executable file: $AGENTSTREAM"
     cmd=("$AGENTSTREAM")
-  elif [[ -f "$_tied_cli" ]]; then
-    cmd=(node "$_tied_cli" agentstream)
   else
-    cmd=(go run -C "${_go_module}" ./cmd/agentstream)
+    cmd=(node "$_tied_cli" agentstream)
   fi
 
   (( dry_run )) && cmd+=(-d)

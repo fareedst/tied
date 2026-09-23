@@ -167,7 +167,7 @@ Run one selected spec with the Ruby driver:
   --select-order 1
 ```
 
-The Go alternative is `scripts/run-feature-batch-agentstream.sh`, backed by `tools/agentstream`. Its optional TIED MCP preflight is enabled with `--tied-mcp-preflight` or `AGENTSTREAM_TIED_MCP_PREFLIGHT=1`; it is off by default. See [tools/agentstream/README.md](tools/agentstream/README.md) for the Go runner and [tools/agent-stream/README.md](tools/agent-stream/README.md) for the Ruby runner.
+`scripts/run-feature-batch.sh` delegates to `scripts/run-feature-batch-agentstream.sh` (`tied agentstream` / `@tied/agentstream` after `cd mcp-server && npm run build`). Optional TIED MCP preflight is enabled with `--tied-mcp-preflight` or `AGENTSTREAM_TIED_MCP_PREFLIGHT=1`; it is off by default. See [mcp-server/packages/agentstream/README.md](mcp-server/packages/agentstream/README.md).
 
 ## TIED source repository setup
 
@@ -178,23 +178,21 @@ These steps prepare **this TIED checkout** (MCP server, bootstrap engine, option
 | Tool | Version | Required for |
 | --- | --- | --- |
 | Node.js | 18+ | `copy_files`, MCP server, bootstrap verification gates |
-| Go | 1.22+ | `agentstream` binary only (batch/checklist driver) |
+| Go | — | **Not required** (Go `tools/agentstream/` removed Phase **4d**; see [phase4d-go-oracle-freeze.json](working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4d-go-oracle-freeze.json)) |
 
 **Unix / Git Bash** (from the TIED repository root):
 
 ```bash
 cd mcp-server && npm install && npm run build
 cd ../tools/bootstrap && npm install
-cd ../tools/agentstream && go build -o agentstream ./cmd/agentstream
 ```
 
-The **`mcp-server/`** directory is an npm **workspace** (`@tied/mcp` + `@tied/cli`). One install/build at that root compiles the MCP server (`dist/index.js`), the umbrella **`tied`** CLI (`tied mcp` delegates to the same stdio entry), and existing bins (`tied-yaml-mcp`, `feature-orchestrator`). Go agentstream and Ruby legacy paths are unchanged in Phase 1.
+The **`mcp-server/`** directory is an npm **workspace** (`@tied/mcp` + `@tied/cli` + `@tied/agentstream`). One install/build at that root compiles the MCP server (`dist/index.js`), the umbrella **`tied`** CLI (`tied mcp` delegates to the same stdio entry), and **`tied agentstream`** (TypeScript-only after Phase **4d**). Ruby `tools/agent-stream` was removed in Phase **4b**. Legacy Go emergency reinstall: [phase4c-deprecation-notice.md](working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4c-deprecation-notice.md) and [phase4d-go-oracle-freeze.json](working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4d-go-oracle-freeze.json).
 
 **Windows (`cmd.exe`)** (from the TIED repository root):
 
 ```cmd
 cd mcp-server && npm install && npm run build && cd ..\tools\bootstrap && npm install && cd ..\..
-cd tools\agentstream && go build -o agentstream .\cmd\agentstream && cd ..\..
 ```
 
 What each step enables:
@@ -203,12 +201,12 @@ What each step enables:
 | --- | --- | --- |
 | `mcp-server` workspace build | `mcp-server/dist/index.js`, `mcp-server/node_modules/.bin/tied` | TIED YAML MCP, `tied mcp` / `tied-cli`, `copy_files` (hard prerequisite), YAML lint |
 | `tools/bootstrap` install | `js-yaml` for verification gates | `copy_files.sh` / `copy-files.mjs` completion checks |
-| `tools/agentstream` build | `tools/agentstream/agentstream` | `scripts/run-feature-batch-agentstream.sh` (or set `AGENTSTREAM` to that path) |
+| `@tied/agentstream` + `@tied/cli` build | `mcp-server/packages/cli/dist/index.js` | `tied agentstream`, `scripts/run-feature-batch-agentstream.sh` |
 
 Notes:
 
 - `npm install` in `mcp-server` also runs `prepare` → `npm run build`, so an explicit `npm run build` is optional but documents intent.
-- `scripts/run-feature-batch-agentstream.sh` can fall back to `go run` when no binary is built, but a local `go build` is preferred for repeatable runs.
+- `scripts/run-feature-batch-agentstream.sh` requires a built `@tied/cli` (`cd mcp-server && npm run build`) unless `AGENTSTREAM` points at another compatible binary.
 - See [tools/bootstrap/README.md](tools/bootstrap/README.md) for Windows entry points (`copy_files.cmd`, `scripts\test-new-tied-client`).
 
 ## Getting started with a new client project
@@ -267,10 +265,9 @@ Read [using TIED without MCP](tied/docs/using-tied-without-mcp.md) before managi
 
 - `copy_files.sh` — bootstrap a project with the inherited TIED layout.
 - `bootstrap_without_mcp.sh` — bootstrap and print next steps for non-MCP use.
-- `scripts/run-feature-batch.sh` — Ruby feature-spec batch driver with checklist and resume support.
-- `scripts/run-feature-batch-agentstream.sh` — Go `agentstream` feature-spec and checklist driver.
-- `tools/agent-stream/` — Ruby `agent` stream-json runner for multi-turn TIED sessions.
-- `tools/agentstream/` — Go runner with feature batches, checklist expansion, TDD YAML, and optional MCP preflight.
+- `scripts/run-feature-batch.sh` — delegates to the agentstream batch driver (same flags as legacy Ruby path).
+- `scripts/run-feature-batch-agentstream.sh` — `tied agentstream` feature-spec and checklist driver.
+- `@tied/agentstream` — TypeScript pipeline (see `mcp-server/packages/agentstream/`); Go tree removed Phase **4d** ([tools/agentstream/README.md](tools/agentstream/README.md) redirect stub).
 - `scripts/yaml_tool.sh` and `scripts/lint_yaml.sh` — canonicalize or lint TIED YAML according to the documented edit loop.
 - `scripts/prepare_readme_demo.sh` — bootstrap `tied/` when needed and run the README’s structured YAML query examples.
 - `mcp-server/` — TypeScript MCP server for TIED indexes, details, traceability, and validation.
@@ -300,8 +297,7 @@ stdd/
 │   └── ...                    # Project indexes and detail data
 ├── mcp-server/                # TIED YAML MCP server
 ├── tools/
-│   ├── agent-stream/           # Ruby stream-json runner
-│   └── agentstream/            # Go runner and CLI
+│   └── agentstream/            # Go runner and CLI (TS via tied agentstream)
 ├── scripts/                   # Bootstrap, batch, YAML, and analysis utilities
 ├── copy_files.sh              # Client bootstrap
 ├── bootstrap_without_mcp.sh   # Non-MCP bootstrap

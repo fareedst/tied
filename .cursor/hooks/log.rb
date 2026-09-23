@@ -11,7 +11,7 @@ require 'yaml'
 
 require_relative '../../scripts/transcript_long_text_dedupe'
 require_relative '../../scripts/transcript_yaml_prune'
-require_relative '../../scripts/adherence_append_action_attempted'
+require 'open3'
 
 ##
 # Transcript embedding policy for hook YAML logs.
@@ -579,6 +579,26 @@ class ConversationStartRegistry
   end
 end
 
+# [IMPL-TIED_UNIFIED_TOOLCHAIN] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — TS bridge (fail-silent when dist missing).
+def adherence_append_action_attempted_ts(record, hook_log_path:, hook_log_line:)
+  script = File.expand_path('../../mcp-server/dist/cli/adherence-append-action-attempted.js', __dir__)
+  return unless File.file?(script)
+
+  payload = JSON.generate(record)
+  Open3.popen3(
+    'node', script,
+    '--hook-log-path', hook_log_path.to_s,
+    '--hook-log-line', hook_log_line.to_s
+  ) do |stdin, _stdout, _stderr, wait_thr|
+    stdin.write(payload)
+    stdin.close
+    wait_thr.value
+  end
+rescue StandardError => e
+  warn "DIAGNOSTIC: adherence_append_action_attempted fail-silent: #{e.class}: #{e.message}"
+  nil
+end
+
 ##
 # Appends normalized records to per-conversation YAML logs.
 #
@@ -613,7 +633,7 @@ class CursorHookLogger
       file.write([record].to_yaml.sub(/\A---\s*\n?/, ''))
     end
     line_number = count_yaml_records(path)
-    AdherenceAppendActionAttempted.call(
+    adherence_append_action_attempted_ts(
       record,
       hook_log_path: path.to_s,
       hook_log_line: line_number

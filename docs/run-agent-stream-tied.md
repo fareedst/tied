@@ -1,9 +1,8 @@
 # Run agent stream: CITDP, LEAP, and TIED in one session
 
-This repository vendors the **ATDD** Ruby harness (`run_agent_stream.rb`) so agents can drive the Cursor `agent` CLI in a **single session** with `--resume` chaining, without depending on an external checkout path.
+> **Retired (Phase 4b, REQ-TIED_UNIFIED_TOOLCHAIN):** The vendored Ruby tree `tools/agent-stream/` was removed. Use **`tied agentstream`** or **`scripts/run-feature-batch-agentstream.sh`** (same flags as `scripts/run-feature-batch.sh`). Historical ATDD tokens (`REQ-ATDD-*`, `IMPL-ATDD-*`) and docs below describe the upstream design.
 
-**Upstream:** [run-agent-stream-upstream.md](run-agent-stream-upstream.md)  
-**Vendored code:** [tools/agent-stream/README.md](../tools/agent-stream/README.md)
+This repository previously vendored the **ATDD** Ruby harness (`run_agent_stream.rb`) for multi-turn `--resume` chaining. **Upstream:** [run-agent-stream-upstream.md](run-agent-stream-upstream.md)
 
 ## Role in the methodology
 
@@ -17,19 +16,20 @@ This repository vendors the **ATDD** Ruby harness (`run_agent_stream.rb`) so age
 - [run-agent-stream-impl-e2e.md](run-agent-stream-impl-e2e.md) — subprocess stream-json harness (`IMPL-ATDD-E2E-AGENT_STREAM`)
 - [run-agent-stream-impl-composition.md](run-agent-stream-impl-composition.md) — argv/YAML delegation and export (`IMPL-ATDD-COMPOS-*`)
 
-## Go `agentstream` (optional)
+## Go / TS `agentstream` (operator path)
 
-The repo also ships **[`tools/agentstream`](../tools/agentstream/README.md)** (Go), which covers the same feature-spec / lead-checklist / TDD YAML roles as the Ruby runner, plus **dynamic checklist control** (fenced JSON `agentstream_control` / `goto` on live runs) and a sponsor-only driver, **[`scripts/feature-relay.sh`](../scripts/feature-relay.sh)**. Prefer **`run-feature-batch-agentstream.sh`** when you need parity with the Ruby batch flags. See the Go README for dry-run, MCP preflight, and the control JSON schema.
+**`tied agentstream`** (TypeScript default via `@tied/agentstream`; Go legacy via `TIED_AGENTSTREAM_IMPL=go`) covers feature-spec / lead-checklist / TDD YAML roles, **dynamic checklist control**, and optional MCP preflight. Prefer **`run-feature-batch-agentstream.sh`** or **`run-feature-batch.sh`** (delegates to agentstream). See [mcp-server/packages/agentstream/README.md](../mcp-server/packages/agentstream/README.md) and [tools/agentstream/README.md](../tools/agentstream/README.md) for flags and the control JSON schema.
 
 ## Quick start (from repo root)
 
 ```bash
-ruby tools/agent-stream/run_agent_stream.rb --workspace /path/to/project \
+scripts/run-feature-batch.sh \
+  --workspace /path/to/project \
   --lead-checklist-yaml tied/docs/agent-req-implementation-checklist.yaml
 ```
 
 ```bash
-ruby tools/agent-stream/run_agent_stream.rb --workspace /path/to/project \
+TIED_AGENTSTREAM_IMPL=ts tied agentstream -w /path/to/project \
   --tdd-yaml docs/tdd_development_loop.yaml
 ```
 
@@ -37,4 +37,5 @@ Copy `session_id=…` from stderr to continue later with `--session-id`.
 
 ## Related scripts
 
-- [scripts/run-feature-batch.sh](../scripts/run-feature-batch.sh) — default runner points at `tools/agent-stream/run_agent_stream.rb`
+- [scripts/run-feature-batch.sh](../scripts/run-feature-batch.sh) — delegates to `run-feature-batch-agentstream.sh`
+- [scripts/run-feature-batch-agentstream.sh](../scripts/run-feature-batch-agentstream.sh) — Go / `tied agentstream` batch driver

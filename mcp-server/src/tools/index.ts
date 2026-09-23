@@ -50,7 +50,7 @@ import {
   getBacklogView,
   getRequirementStatusAndPriority,
 } from "../dependency-graph.js";
-import { updateStatusFromPassedTokens } from "../verify.js";
+import { updateStatusFromPassedTokens, type VerifyUpdateOptions } from "../verify.js";
 import { applyYamlUpdates, parseYamlUpdateSteps } from "../yaml-updates-apply.js";
 import { formatYamlMetadata } from "../yaml-canonicalizer.js";
 import {
@@ -1199,7 +1199,10 @@ export const allTools = [
           .describe("If true, no writes; returns would_update with index/token/previous_status/next_status for each row that would change"),
         checklist_gate: z.object({
           phase: z.enum(["pre_implementation", "verification", "close_out"]),
-          tracker: z.record(z.unknown()),
+          tracker: z.record(z.unknown()).optional(),
+          tracker_path: z.string().optional().describe(
+            "Authoritative Tracker YAML path; when set, loads tracker and hydrates gate evidence like tied_checklist_gate_validate.",
+          ),
           citdp: z.record(z.unknown()),
           required_step_slugs: z.array(z.string()).optional(),
           activation: z.record(z.unknown()).optional(),
@@ -1236,7 +1239,8 @@ export const allTools = [
       dry_run?: boolean;
       checklist_gate?: {
         phase: "pre_implementation" | "verification" | "close_out";
-        tracker: unknown;
+        tracker?: unknown;
+        tracker_path?: string;
         citdp: unknown;
         required_step_slugs?: string[];
         activation?: unknown;
@@ -1256,22 +1260,59 @@ export const allTools = [
         persist_gate?: boolean;
       };
     }) => {
+      let resolvedChecklistGate: VerifyUpdateOptions["checklist_gate"];
+      if (args.checklist_gate) {
+        const projectRoot = args.project_root
+          ? path.resolve(args.project_root)
+          : path.resolve(getBasePath(), "..");
+        let evidence = (args.checklist_gate.evidence ?? {}) as Record<string, unknown>;
+        let tracker: Record<string, unknown>;
+        if (args.checklist_gate.tracker_path) {
+          const trackerAbsolute = path.isAbsolute(args.checklist_gate.tracker_path)
+            ? args.checklist_gate.tracker_path
+            : path.join(projectRoot, args.checklist_gate.tracker_path);
+          tracker = yaml.load(fs.readFileSync(trackerAbsolute, "utf8")) as Record<string, unknown>;
+          evidence = { ...evidence, trackerSource: "authoritative_file" };
+        } else if (args.checklist_gate.tracker && typeof args.checklist_gate.tracker === "object") {
+          tracker = args.checklist_gate.tracker as Record<string, unknown>;
+        } else {
+          return textContent(JSON.stringify({
+            ok: false,
+            error: "CHECKLIST_GATE_BLOCKED: missing tracker or tracker_path",
+            diagnostics: ["missing_checklist_gate"],
+          }, null, 2));
+        }
+        if (!evidence.requestToken) {
+          const ee = tracker.execution_evidence;
+          if (ee && typeof ee === "object" && !Array.isArray(ee)) {
+            const token = (ee as Record<string, unknown>).request;
+            if (typeof token === "string" && token.trim()) {
+              evidence.requestToken = token.trim();
+            }
+          }
+        }
+        const hydration = await hydrateGateEvidenceFromActivation({
+          phase: args.checklist_gate.phase,
+          activation: args.checklist_gate.activation as never,
+          evidence: evidence as never,
+          projectRoot,
+        });
+        resolvedChecklistGate = {
+          phase: args.checklist_gate.phase,
+          tracker,
+          citdp: args.checklist_gate.citdp,
+          requiredStepSlugs: args.checklist_gate.required_step_slugs,
+          activation: args.checklist_gate.activation as never,
+          evidence: hydration.evidence,
+        };
+      }
       const result = await updateStatusFromPassedTokens({
         passed_requirement_tokens: args.passed_requirement_tokens ?? [],
         passed_impl_tokens: args.passed_impl_tokens ?? [],
         set_unpassed_reqs_to_planned: args.set_unpassed_reqs_to_planned ?? false,
         set_unpassed_impl_to_planned: args.set_unpassed_impl_to_planned ?? false,
         dry_run: args.dry_run ?? false,
-        checklist_gate: args.checklist_gate
-          ? {
-            phase: args.checklist_gate.phase,
-            tracker: args.checklist_gate.tracker,
-            citdp: args.checklist_gate.citdp,
-            requiredStepSlugs: args.checklist_gate.required_step_slugs,
-            activation: args.checklist_gate.activation as never,
-            evidence: args.checklist_gate.evidence as never,
-          }
-          : undefined,
+        checklist_gate: resolvedChecklistGate,
         require_checklist_gate: args.require_checklist_gate ?? true,
         envelope_path: args.envelope_path,
         consult_envelope_blocking: args.consult_envelope_blocking ?? false,

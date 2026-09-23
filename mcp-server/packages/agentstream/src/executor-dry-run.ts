@@ -4,13 +4,8 @@
  */
 import type { DryRunConfig } from "./dry-run-config.js";
 import type { Turn } from "./checklist-load-turns.js";
-import { parseFeatureSpecOrderFilter } from "./featurespec-load-turns.js";
-import { buildPipelineFromDryRunConfig } from "./pipeline-build.js";
-import {
-  chainBetween,
-  sessionForTurn,
-  sliceFromFirstTurn,
-} from "./pipeline-session.js";
+import { chainBetween, sessionForTurn } from "./pipeline-session.js";
+import { buildTurnsFromConfig } from "./run-pipeline-prep.js";
 import {
   ERR_NOT_FOUND,
   ErrAmbiguous,
@@ -114,16 +109,6 @@ export function renderDryRun(
   return { stdout: out.join(""), stderr: err.join("") };
 }
 
-function buildDryRunTurns(cfg: DryRunConfig): Turn[] {
-  let featureSpecOpts;
-  if (cfg.orderFilterRaw.trim() !== "") {
-    featureSpecOpts = {
-      orderFilter: parseFeatureSpecOrderFilter(cfg.orderFilterRaw),
-    };
-  }
-  return buildPipelineFromDryRunConfig(cfg, featureSpecOpts);
-}
-
 function printTiedPreflightReport(res: ReturnType<typeof analyze>): string[] {
   const lines: string[] = [];
   lines.push(
@@ -139,7 +124,7 @@ function printTiedPreflightReport(res: ReturnType<typeof analyze>): string[] {
   return lines;
 }
 
-function runTiedPreflight(cfg: DryRunConfig): { exitCode: number; stderr: string } {
+export function runTiedPreflight(cfg: DryRunConfig): { exitCode: number; stderr: string } {
   if (skipTiedMcpPreflight(cfg)) {
     return { exitCode: 0, stderr: "" };
   }
@@ -249,10 +234,7 @@ export function executeExecutorDryRun(cfg: DryRunConfig): DryRunStreams {
     throw new Error("agentstream: --first-turn > 1 requires --session-id");
   }
 
-  let turns = buildDryRunTurns(cfg);
-  const originalTotal = turns.length;
-  turns = sliceFromFirstTurn(turns, cfg.firstTurn);
-
+  const { turns, originalTotal } = buildTurnsFromConfig(cfg);
   const chain = chainBetween(turns);
   const pre = runTiedPreflight(cfg);
   if (pre.exitCode !== 0) {

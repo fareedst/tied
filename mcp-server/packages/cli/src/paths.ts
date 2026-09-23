@@ -62,6 +62,3 @@ export function agentstreamTsEntryFromCliModule(moduleUrl: string): string {
   );
 }
 
-export function goAgentstreamModuleDirFromCliModule(moduleUrl: string): string {
-  return path.join(repoRootFromCliModule(moduleUrl), "tools", "agentstream");
-}

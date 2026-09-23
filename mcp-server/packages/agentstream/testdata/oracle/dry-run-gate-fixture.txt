@@ -1,0 +1,96 @@
+--- argv part 1/1 ---
+Execute this LEAD+TIED agent requirement implementation checklist step in the current workspace.
+Process token: [PROC-TEST]
+Checklist: gate_fixture_checklist (v0)
+
+## Step session-bootstrap: Bootstrap
+
+### Goals
+
+### Tasks
+- boot
+
+### Expected outcomes
+
+Complete this step now. Follow GOTO/CALL/RETURN semantics from the checklist when they apply.
+command: "agent" "--print" "--output-format" "stream-json" "--model" "Auto" "--trust" "--force" "--workspace" "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/packages/agentstream/testdata/oracle/dry-run-workspace" "Execute this LEAD+TIED agent requirement implementation checklist step in the current workspace.\nProcess token: [PROC-TEST]\nChecklist: gate_fixture_checklist (v0)\n\n## Step session-bootstrap: Bootstrap\n\n### Goals\n\n### Tasks\n- boot\n\n### Expected outcomes\n\nComplete this step now. Follow GOTO/CALL/RETURN semantics from the checklist when they apply."
+--- argv part 1/1 ---
+Execute this LEAD+TIED agent requirement implementation checklist step in the current workspace.
+Process token: [PROC-TEST]
+Checklist: gate_fixture_checklist (v0)
+
+## Step translate-sponsor-intent: Translate
+
+### Goals
+
+### Tasks
+- translate
+
+### Expected outcomes
+
+Complete this step now. Follow GOTO/CALL/RETURN semantics from the checklist when they apply.
+command: "agent" "--print" "--output-format" "stream-json" "--model" "Auto" "--trust" "--force" "--workspace" "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/packages/agentstream/testdata/oracle/dry-run-workspace" "--resume" "<session_id_from_previous_turn>" "Execute this LEAD+TIED agent requirement implementation checklist step in the current workspace.\nProcess token: [PROC-TEST]\nChecklist: gate_fixture_checklist (v0)\n\n## Step translate-sponsor-intent: Translate\n\n### Goals\n\n### Tasks\n- translate\n\n### Expected outcomes\n\nComplete this step now. Follow GOTO/CALL/RETURN semantics from the checklist when they apply."
+--- argv part 1/1 ---
+Execute this LEAD+TIED agent requirement implementation checklist step in the current workspace.
+Process token: [PROC-TEST]
+Checklist: gate_fixture_checklist (v0)
+
+## Step change-definition: Change
+
+### Goals
+
+### Tasks
+- change
+
+### Expected outcomes
+
+Complete this step now. Follow GOTO/CALL/RETURN semantics from the checklist when they apply.
+command: "agent" "--print" "--output-format" "stream-json" "--model" "Auto" "--trust" "--force" "--workspace" "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/packages/agentstream/testdata/oracle/dry-run-workspace" "--resume" "<session_id_from_previous_turn>" "Execute this LEAD+TIED agent requirement implementation checklist step in the current workspace.\nProcess token: [PROC-TEST]\nChecklist: gate_fixture_checklist (v0)\n\n## Step change-definition: Change\n\n### Goals\n\n### Tasks\n- change\n\n### Expected outcomes\n\nComplete this step now. Follow GOTO/CALL/RETURN semantics from the checklist when they apply."
+--- argv part 1/1 ---
+Execute this LEAD+TIED agent requirement implementation checklist step in the current workspace.
+Process token: [PROC-TEST]
+Checklist: gate_fixture_checklist (v0)
+
+## Step impact-discovery: Impact
+
+### Goals
+
+### Tasks
+- impact
+
+### Expected outcomes
+
+Complete this step now. Follow GOTO/CALL/RETURN semantics from the checklist when they apply.
+command: "agent" "--print" "--output-format" "stream-json" "--model" "Auto" "--trust" "--force" "--workspace" "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/packages/agentstream/testdata/oracle/dry-run-workspace" "--resume" "<session_id_from_previous_turn>" "Execute this LEAD+TIED agent requirement implementation checklist step in the current workspace.\nProcess token: [PROC-TEST]\nChecklist: gate_fixture_checklist (v0)\n\n## Step impact-discovery: Impact\n\n### Goals\n\n### Tasks\n- impact\n\n### Expected outcomes\n\nComplete this step now. Follow GOTO/CALL/RETURN semantics from the checklist when they apply."
+--- argv part 1/1 ---
+Execute this LEAD+TIED agent requirement implementation checklist step in the current workspace.
+Process token: [PROC-TEST]
+Checklist: gate_fixture_checklist (v0)
+
+## Step risk-assessment: Risk
+
+### Goals
+
+### Tasks
+- risk
+
+### Expected outcomes
+
+Complete this step now. Follow GOTO/CALL/RETURN semantics from the checklist when they apply.
+command: "agent" "--print" "--output-format" "stream-json" "--model" "Auto" "--trust" "--force" "--workspace" "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/packages/agentstream/testdata/oracle/dry-run-workspace" "--resume" "<session_id_from_previous_turn>" "Execute this LEAD+TIED agent requirement implementation checklist step in the current workspace.\nProcess token: [PROC-TEST]\nChecklist: gate_fixture_checklist (v0)\n\n## Step risk-assessment: Risk\n\n### Goals\n\n### Tasks\n- risk\n\n### Expected outcomes\n\nComplete this step now. Follow GOTO/CALL/RETURN semantics from the checklist when they apply."
+--- argv part 1/1 ---
+Execute this LEAD+TIED agent requirement implementation checklist step in the current workspace.
+Process token: [PROC-TEST]
+Checklist: gate_fixture_checklist (v0)
+
+## Step test-strategy: Test strategy
+
+### Goals
+
+### Tasks
+- strategy
+
+### Expected outcomes
+
+Complete this step now. Follow GOTO/CALL/RETURN semantics from the checklist when they apply.
+command: "agent" "--print" "--output-format" "stream-json" "--model" "Auto" "--trust" "--force" "--workspace" "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/packages/agentstream/testdata/oracle/dry-run-workspace" "--resume" "<session_id_from_previous_turn>" "Execute this LEAD+TIED agent requirement implementation checklist step in the current workspace.\nProcess token: [PROC-TEST]\nChecklist: gate_fixture_checklist (v0)\n\n## Step test-strategy: Test strategy\n\n### Goals\n\n### Tasks\n- strategy\n\n### Expected outcomes\n\nComplete this step now. Follow GOTO/CALL/RETURN semantics from the checklist when they apply."

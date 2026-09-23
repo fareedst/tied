@@ -1,2253 +1,2253 @@
 REQ-ASYNC_BOUNDARY_ANALYSIS:
-  category: "Non-Functional"
-  detail_file: "requirements/REQ-ASYNC_BOUNDARY_ANALYSIS.yaml"
-  name: "Async Boundary Static Analysis"
-  priority: "P1"
+  category: Non-Functional
+  detail_file: requirements/REQ-ASYNC_BOUNDARY_ANALYSIS.yaml
+  name: Async Boundary Static Analysis
+  priority: P1
   rationale:
     benefits:
-      - "D7 gate promotion for ASYNC_EFFECTS_WITHOUT_BOUNDARY only"
-      - "Opt-in async_boundary pass with labeled corpus"
+      - D7 gate promotion for ASYNC_EFFECTS_WITHOUT_BOUNDARY only
+      - Opt-in async_boundary pass with labeled corpus
     problems_solved:
-      - "Missing static async contract checks in pseudocode_analyze"
-      - "Undetected Async EFFECTS without boundary"
-    why: "W4 Layer C must catch structural async contract mismatches before RED tests without claiming concurrency proofs."
+      - Missing static async contract checks in pseudocode_analyze
+      - Undetected Async EFFECTS without boundary
+    why: W4 Layer C must catch structural async contract mismatches before RED tests without claiming concurrency proofs.
   related_requirements:
     depends_on:
-      - "REQ-PSEUDOCODE_TYPED_FLOW"
-      - "REQ-TIED_ASYNC_METHODOLOGY"
+      - REQ-PSEUDOCODE_TYPED_FLOW
+      - REQ-TIED_ASYNC_METHODOLOGY
     related_to:
-      - "REQ-ASYNC_PSEUDOCODE_CONTRACTS"
-      - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+      - REQ-ASYNC_PSEUDOCODE_CONTRACTS
+      - REQ-PSEUDOCODE_STATIC_ANALYSIS
     supersedes: []
-  status: "Implemented"
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-ASYNC_ANALYSIS_PASS"
+      - ARCH-ASYNC_ANALYSIS_PASS
     code_annotations:
-      - "REQ-ASYNC_BOUNDARY_ANALYSIS"
+      - REQ-ASYNC_BOUNDARY_ANALYSIS
     implementation:
-      - "IMPL-ASYNC_BOUNDARY_ANALYZER"
+      - IMPL-ASYNC_BOUNDARY_ANALYZER
     tests:
-      - "mcp-server/src/analysis/pseudocode-async-boundary-corpus.test.ts"
-      - "mcp-server/src/analysis/pseudocode-async-boundary.test.ts"
-      - "mcp-server/src/tools/pseudocode-analyze-mcp.test.ts"
+      - mcp-server/src/analysis/pseudocode-async-boundary-corpus.test.ts
+      - mcp-server/src/analysis/pseudocode-async-boundary.test.ts
+      - mcp-server/src/tools/pseudocode-analyze-mcp.test.ts
 REQ-ASYNC_CHECKLIST_CATALOG:
-  category: "Non-Functional"
-  detail_file: "requirements/REQ-ASYNC_CHECKLIST_CATALOG.yaml"
-  name: "Async Checklist Catalog"
-  priority: "P1"
+  category: Non-Functional
+  detail_file: requirements/REQ-ASYNC_CHECKLIST_CATALOG.yaml
+  name: Async Checklist Catalog
+  priority: P1
   rationale:
     benefits:
-      - "Deterministic contradiction routing"
-      - "Gating catalog table per async block"
+      - Deterministic contradiction routing
+      - Gating catalog table per async block
     problems_solved:
-      - "Implicit async boundaries at checklist Phase B"
-    why: "Phase B async catalog and contradiction steps are scattered; agents can pass gates without closed async rows."
+      - Implicit async boundaries at checklist Phase B
+    why: Phase B async catalog and contradiction steps are scattered; agents can pass gates without closed async rows.
   related_requirements:
     depends_on:
-      - "REQ-ASYNC_PSEUDOCODE_CONTRACTS"
-      - "REQ-TIED_ASYNC_METHODOLOGY"
+      - REQ-ASYNC_PSEUDOCODE_CONTRACTS
+      - REQ-TIED_ASYNC_METHODOLOGY
     related_to: []
     supersedes: []
-  status: "Implemented"
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-ASYNC_CHECKLIST_INTEGRATION"
+      - ARCH-ASYNC_CHECKLIST_INTEGRATION
     code_annotations:
-      - "REQ-ASYNC_CHECKLIST_CATALOG"
+      - REQ-ASYNC_CHECKLIST_CATALOG
     implementation:
-      - "IMPL-ASYNC_CHECKLIST_DISPOSITIONS"
+      - IMPL-ASYNC_CHECKLIST_DISPOSITIONS
     tests:
-      - "mcp-server/src/checklist-async-dispositions.test.ts"
+      - mcp-server/src/checklist-async-dispositions.test.ts
 REQ-ASYNC_CITDP_TRIGGERS:
-  category: "Non-Functional"
-  detail_file: "requirements/REQ-ASYNC_CITDP_TRIGGERS.yaml"
-  name: "Async CITDP Triggers"
-  priority: "P1"
+  category: Non-Functional
+  detail_file: requirements/REQ-ASYNC_CITDP_TRIGGERS.yaml
+  name: Async CITDP Triggers
+  priority: P1
   rationale:
     benefits:
-      - "Deterministic candidate triggers from impact-discovery"
-      - "Explicit activation contract before tied_adversarial_inquiry_run"
+      - Deterministic candidate triggers from impact-discovery
+      - Explicit activation contract before tied_adversarial_inquiry_run
     problems_solved:
-      - "Author memory for async CITDP evidence"
-      - "Marker-only inquiry activation"
-    why: "W2 async_in_scope is candidate-only; W3 must emit proportionate CITDP trigger dispositions and evidence rows without silent inquiry."
+      - Author memory for async CITDP evidence
+      - Marker-only inquiry activation
+    why: W2 async_in_scope is candidate-only; W3 must emit proportionate CITDP trigger dispositions and evidence rows without silent inquiry.
   related_requirements:
     depends_on:
-      - "REQ-ASYNC_CHECKLIST_CATALOG"
-      - "REQ-TIED_ASYNC_METHODOLOGY"
+      - REQ-ASYNC_CHECKLIST_CATALOG
+      - REQ-TIED_ASYNC_METHODOLOGY
     related_to:
-      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
-      - "REQ-TIED_ADVERSARIAL_INQUIRY"
+      - REQ-QUALITY_ASSURANCE_EVIDENCE
+      - REQ-TIED_ADVERSARIAL_INQUIRY
     supersedes: []
-  status: "Implemented"
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-ASYNC_CITDP_EVIDENCE"
+      - ARCH-ASYNC_CITDP_EVIDENCE
     code_annotations:
-      - "REQ-ASYNC_CITDP_TRIGGERS"
+      - REQ-ASYNC_CITDP_TRIGGERS
     implementation:
-      - "IMPL-ASYNC_CITDP_PROFILE_WIRING"
+      - IMPL-ASYNC_CITDP_PROFILE_WIRING
     tests:
-      - "mcp-server/src/citdp-async-triggers.test.ts"
+      - mcp-server/src/citdp-async-triggers.test.ts
 REQ-ASYNC_COMPOSITION_INVENTORY:
-  category: "Non-Functional"
-  detail_file: "requirements/REQ-ASYNC_COMPOSITION_INVENTORY.yaml"
-  name: "Async Composition Binding Inventory"
-  priority: "P1"
+  category: Non-Functional
+  detail_file: requirements/REQ-ASYNC_COMPOSITION_INVENTORY.yaml
+  name: Async Composition Binding Inventory
+  priority: P1
   rationale:
     benefits:
-      - "Backward-compatible optional async columns"
-      - "UI-free CONTROLLED_COMPOSITION_FAULT patterns"
+      - Backward-compatible optional async columns
+      - UI-free CONTROLLED_COMPOSITION_FAULT patterns
     problems_solved:
-      - "No async_semantics or cancellation columns in binding inventory"
-      - "No validator rules for event/message triggers or retry/idempotency evidence"
-    why: "W5 makes async seams first-class in Phase G binding inventory with validated semantic columns and fault-injection patterns."
+      - No async_semantics or cancellation columns in binding inventory
+      - No validator rules for event/message triggers or retry/idempotency evidence
+    why: W5 makes async seams first-class in Phase G binding inventory with validated semantic columns and fault-injection patterns.
   related_requirements:
     depends_on:
-      - "REQ-MODULE_VALIDATION"
-      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
-      - "REQ-TIED_ASYNC_METHODOLOGY"
+      - REQ-MODULE_VALIDATION
+      - REQ-QUALITY_ASSURANCE_EVIDENCE
+      - REQ-TIED_ASYNC_METHODOLOGY
     related_to:
-      - "REQ-ASYNC_CHECKLIST_CATALOG"
+      - REQ-ASYNC_CHECKLIST_CATALOG
     supersedes: []
-  status: "Implemented"
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-ASYNC_COMPOSITION_BINDING"
+      - ARCH-ASYNC_COMPOSITION_BINDING
     code_annotations:
-      - "REQ-ASYNC_COMPOSITION_INVENTORY"
+      - REQ-ASYNC_COMPOSITION_INVENTORY
     implementation:
-      - "IMPL-ASYNC_BINDING_VALIDATOR"
+      - IMPL-ASYNC_BINDING_VALIDATOR
     tests:
-      - "mcp-server/src/analysis/binding-inventory-composition.test.ts"
-      - "mcp-server/src/analysis/binding-inventory.test.ts"
+      - mcp-server/src/analysis/binding-inventory-composition.test.ts
+      - mcp-server/src/analysis/binding-inventory.test.ts
 REQ-ASYNC_PSEUDOCODE_CONTRACTS:
-  category: "Non-Functional"
-  detail_file: "requirements/REQ-ASYNC_PSEUDOCODE_CONTRACTS.yaml"
-  name: "Async Pseudocode Contracts"
-  priority: "P1"
+  category: Non-Functional
+  detail_file: requirements/REQ-ASYNC_PSEUDOCODE_CONTRACTS.yaml
+  name: Async Pseudocode Contracts
+  priority: P1
   rationale:
     benefits:
-      - "Legacy compatibility preserved"
-      - "Optional comparable v1 rows"
+      - Legacy compatibility preserved
+      - Optional comparable v1 rows
     problems_solved:
-      - "No dedicated async contract rows"
-    why: "Cancellation and timeout live in prose; tooling cannot compare async assumptions."
+      - No dedicated async contract rows
+    why: Cancellation and timeout live in prose; tooling cannot compare async assumptions.
   related_requirements:
     depends_on:
-      - "REQ-TIED_ASYNC_METHODOLOGY"
+      - REQ-TIED_ASYNC_METHODOLOGY
     related_to:
-      - "REQ-ASYNC_REQ_ARCH_TEMPLATES"
+      - REQ-ASYNC_REQ_ARCH_TEMPLATES
     supersedes: []
-  status: "Implemented"
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-ASYNC_CONTRACT_GRAMMAR"
+      - ARCH-ASYNC_CONTRACT_GRAMMAR
     code_annotations:
-      - "REQ-ASYNC_PSEUDOCODE_CONTRACTS"
+      - REQ-ASYNC_PSEUDOCODE_CONTRACTS
     implementation:
-      - "IMPL-ASYNC_PSEUDOCODE_GRAMMAR"
+      - IMPL-ASYNC_PSEUDOCODE_GRAMMAR
     tests:
-      - "mcp-server/src/tools/tied-async-contract-fixtures.test.ts"
+      - mcp-server/src/tools/tied-async-contract-fixtures.test.ts
 REQ-ASYNC_REQ_ARCH_TEMPLATES:
-  category: "Non-Functional"
-  detail_file: "requirements/REQ-ASYNC_REQ_ARCH_TEMPLATES.yaml"
-  name: "Async REQ/ARCH Templates"
-  priority: "P1"
+  category: Non-Functional
+  detail_file: requirements/REQ-ASYNC_REQ_ARCH_TEMPLATES.yaml
+  name: Async REQ/ARCH Templates
+  priority: P1
   rationale:
     benefits:
-      - "Structured acceptance criteria per semantic class"
+      - Structured acceptance criteria per semantic class
     problems_solved:
-      - "REQ/ARCH rarely async-first"
-    why: "Sponsors cannot specify timeout, retry, or ordering requirements traceably without async-first REQ/ARCH guidance."
+      - REQ/ARCH rarely async-first
+    why: Sponsors cannot specify timeout, retry, or ordering requirements traceably without async-first REQ/ARCH guidance.
   related_requirements:
     depends_on:
-      - "REQ-TIED_ASYNC_METHODOLOGY"
+      - REQ-TIED_ASYNC_METHODOLOGY
     related_to: []
     supersedes: []
-  status: "Implemented"
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-ASYNC_REQ_ARCH_CONTRACT"
+      - ARCH-ASYNC_REQ_ARCH_CONTRACT
     code_annotations:
-      - "REQ-ASYNC_REQ_ARCH_TEMPLATES"
+      - REQ-ASYNC_REQ_ARCH_TEMPLATES
     implementation:
-      - "IMPL-ASYNC_REQ_ARCH_GUIDANCE"
-      - "IMPL-ASYNC_VOCABULARY"
+      - IMPL-ASYNC_REQ_ARCH_GUIDANCE
+      - IMPL-ASYNC_VOCABULARY
     tests:
-      - "mcp-server/src/tools/tied-async-contract-fixtures.test.ts"
+      - mcp-server/src/tools/tied-async-contract-fixtures.test.ts
 REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML:
-  category: "Functional"
-  detail_file: "requirements/REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML.yaml"
+  category: Functional
+  detail_file: requirements/REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML.yaml
   metadata:
     created:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-03-24T00:00:00.000Z"
     last_updated:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-03-24T00:00:00.000Z"
-      reason: "Import ATDD agent stream TIED records"
+      reason: Import ATDD agent stream TIED records
     last_validated:
       date: "2026-03-24T00:00:00.000Z"
-      result: "pass"
-      validator: "AI Agent"
-  name: "Agent stream argv expands TDD YAML into ordered turns"
-  priority: "P1"
+      result: pass
+      validator: AI Agent
+  name: Agent stream argv expands TDD YAML into ordered turns
+  priority: P1
   rationale:
     benefits:
-      - "Aligns with docs/tdd_development_loop.yaml in this repo"
-      - "Single source YAML drives RED/GREEN/REFACTOR/SYNC turns"
+      - Aligns with docs/tdd_development_loop.yaml in this repo
+      - Single source YAML drives RED/GREEN/REFACTOR/SYNC turns
     problems_solved:
-      - "Divergence between documented TDD loop steps and actual agent turns"
-      - "Manual copy-paste of prompts across turns"
-    upstream_note: "Imported from atdd commit eb88236290009b78eb11ea561816f0854176bf12; see docs/run-agent-stream-upstream.md"
-    why: "Multi-turn agent sessions must run the same message sequence as TddLoopPrompts.messages_from_yaml for each --tdd-yaml path so PROC-TIED_DEV_CYCLE YAML matches runtime behavior"
+      - Divergence between documented TDD loop steps and actual agent turns
+      - Manual copy-paste of prompts across turns
+    upstream_note: Imported from atdd commit eb88236290009b78eb11ea561816f0854176bf12; see docs/run-agent-stream-upstream.md
+    why: Multi-turn agent sessions must run the same message sequence as TddLoopPrompts.messages_from_yaml for each --tdd-yaml path so PROC-TIED_DEV_CYCLE YAML matches runtime behavior
   related_requirements:
     depends_on: []
     related_to:
-      - "REQ-TIED_SETUP"
+      - REQ-TIED_SETUP
     supersedes: []
   satisfaction_criteria:
-    - criterion: "AgentStreamArgv.parse_argv appends one turn per message from TddLoopPrompts.messages_from_yaml for each --tdd-yaml path in argv order"
-    - criterion: "Turn order matches delegation to TddLoopPrompts (no duplicate parsing rules in the entry point)"
-  status: "Implemented"
+    - criterion: AgentStreamArgv.parse_argv appends one turn per message from TddLoopPrompts.messages_from_yaml for each --tdd-yaml path in argv order
+    - criterion: Turn order matches delegation to TddLoopPrompts (no duplicate parsing rules in the entry point)
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS"
+      - ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS
     code_annotations:
-      - "IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV"
-      - "REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML"
+      - IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
+      - REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
     implementation:
-      - "IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV"
+      - IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV
     tests:
-      - "agent_stream_tdd_yaml_binding_test.rb"
+      - agent_stream_tdd_yaml_binding_test.rb
   validation_criteria:
-    - coverage: "test/composition/agent_stream_tdd_yaml_binding_test.rb"
-      method: "Composition tests (upstream atdd)"
-    - coverage: "tools/agent-stream/lib/agent_stream_argv.rb, lib/tdd_loop_prompts.rb"
-      method: "Vendored code review"
+    - coverage: test/composition/agent_stream_tdd_yaml_binding_test.rb
+      method: Composition tests (upstream atdd)
+    - coverage: tools/agent-stream/lib/agent_stream_argv.rb, lib/tdd_loop_prompts.rb
+      method: Vendored code review
 REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS:
-  category: "Functional"
-  detail_file: "requirements/REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS.yaml"
+  category: Functional
+  detail_file: requirements/REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS.yaml
   metadata:
     created:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-03-24T00:00:00.000Z"
     last_updated:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-03-24T00:00:00.000Z"
-      reason: "Import ATDD agent stream TIED records"
+      reason: Import ATDD agent stream TIED records
     last_validated:
       date: "2026-03-24T00:00:00.000Z"
-      result: "pass"
-      validator: "AI Agent"
-  name: "Export TDD YAML steps to per-step markdown files"
-  priority: "P2"
+      result: pass
+      validator: AI Agent
+  name: Export TDD YAML steps to per-step markdown files
+  priority: P2
   rationale:
     benefits:
-      - "Repeatable prompt files under prompts/tdd/generated (when using export script)"
+      - Repeatable prompt files under prompts/tdd/generated (when using export script)
     problems_solved:
-      - "Need for reviewable .md artifacts per loop step"
-    upstream_note: "Imported from atdd commit eb88236290009b78eb11ea561816f0854176bf12; export script tools/agent-stream/export_tdd_prompts.rb"
-    why: "Some workflows prefer file-per-step prompts instead of --tdd-yaml expansion; export must mirror TddLoopPrompts.step_entries_from_yaml"
+      - Need for reviewable .md artifacts per loop step
+    upstream_note: Imported from atdd commit eb88236290009b78eb11ea561816f0854176bf12; export script tools/agent-stream/export_tdd_prompts.rb
+    why: Some workflows prefer file-per-step prompts instead of --tdd-yaml expansion; export must mirror TddLoopPrompts.step_entries_from_yaml
   related_requirements:
     depends_on: []
     related_to:
-      - "REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML"
+      - REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
     supersedes: []
   satisfaction_criteria:
-    - criterion: "Each YAML step entry becomes one markdown file named from sanitized step id with message body from format_step"
-    - criterion: "File count equals entry count from step_entries_from_yaml"
-  status: "Implemented"
+    - criterion: Each YAML step entry becomes one markdown file named from sanitized step id with message body from format_step
+    - criterion: File count equals entry count from step_entries_from_yaml
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS"
+      - ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS
     code_annotations:
-      - "REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS"
+      - REQ-ATDD-COMPOS-EXPORT_TDD_PROMPTS_STEPS
     implementation:
-      - "IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS"
+      - IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS
     tests:
-      - "export_tdd_prompts_binding_test.rb"
+      - export_tdd_prompts_binding_test.rb
   validation_criteria:
-    - coverage: "test/composition/export_tdd_prompts_binding_test.rb"
-      method: "Composition tests (upstream atdd)"
+    - coverage: test/composition/export_tdd_prompts_binding_test.rb
+      method: Composition tests (upstream atdd)
 REQ-ATDD-E2E-AGENT_STREAM:
-  category: "Functional"
-  detail_file: "requirements/REQ-ATDD-E2E-AGENT_STREAM.yaml"
+  category: Functional
+  detail_file: requirements/REQ-ATDD-E2E-AGENT_STREAM.yaml
   metadata:
     created:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-03-24T00:00:00.000Z"
     last_updated:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-03-24T00:00:00.000Z"
-      reason: "Import ATDD agent stream TIED records"
+      reason: Import ATDD agent stream TIED records
     last_validated:
       date: "2026-03-24T00:00:00.000Z"
-      result: "pass"
-      validator: "AI Agent"
-  name: "E2E agent subprocess stream-json harness with session resume"
-  priority: "P1"
+      result: pass
+      validator: AI Agent
+  name: E2E agent subprocess stream-json harness with session resume
+  priority: P1
   rationale:
     benefits:
-      - "Automates PROC-AGENT_REQ_CHECKLIST and TDD loop YAML as sequential agent turns"
+      - Automates PROC-AGENT_REQ_CHECKLIST and TDD loop YAML as sequential agent turns
     problems_solved:
-      - "No in-process API for stream-json"
-      - "Session continuity across multiple turns in one invocation"
-    upstream_note: "Imported from atdd commit eb88236290009b78eb11ea561816f0854176bf12"
-    why: "The Cursor agent CLI must run as an external process; streamed NDJSON must surface assistant and thinking text and capture session_id for chained turns"
+      - No in-process API for stream-json
+      - Session continuity across multiple turns in one invocation
+    upstream_note: Imported from atdd commit eb88236290009b78eb11ea561816f0854176bf12
+    why: The Cursor agent CLI must run as an external process; streamed NDJSON must surface assistant and thinking text and capture session_id for chained turns
   related_requirements:
     depends_on: []
     related_to:
-      - "REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML"
-      - "REQ-GOAGENT-AGENT-EXECUTOR"
+      - REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
+      - REQ-GOAGENT-AGENT-EXECUTOR
     supersedes: []
   satisfaction_criteria:
-    - criterion: "Each turn invokes agent with stream-json; stdout lines parse as JSON; text fragments print to stdout"
-    - criterion: "session_id captured from stream and printed on stderr for resume; non-zero exit on agent failure"
-  status: "Implemented"
+    - criterion: Each turn invokes agent with stream-json; stdout lines parse as JSON; text fragments print to stdout
+    - criterion: session_id captured from stream and printed on stderr for resume; non-zero exit on agent failure
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON"
+      - ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON
     code_annotations:
-      - "IMPL-ATDD-E2E-AGENT_STREAM"
-      - "REQ-ATDD-E2E-AGENT_STREAM"
+      - IMPL-ATDD-E2E-AGENT_STREAM
+      - REQ-ATDD-E2E-AGENT_STREAM
     implementation:
-      - "IMPL-ATDD-E2E-AGENT_STREAM"
+      - IMPL-ATDD-E2E-AGENT_STREAM
     tests:
-      - "agent_stream_e2e_test.rb"
+      - agent_stream_e2e_test.rb
   validation_criteria:
-    - coverage: "test/e2e/agent_stream_e2e_test.rb"
-      method: "E2E tests with stub agent on PATH (upstream atdd)"
+    - coverage: test/e2e/agent_stream_e2e_test.rb
+      method: E2E tests with stub agent on PATH (upstream atdd)
 REQ-CONFIG_DISCOVERY_LOCAL_LAYER:
-  category: "Functional"
-  detail_file: "requirements/REQ-CONFIG_DISCOVERY_LOCAL_LAYER.yaml"
+  category: Functional
+  detail_file: requirements/REQ-CONFIG_DISCOVERY_LOCAL_LAYER.yaml
   metadata:
     created:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-03-29T00:00:00.000Z"
     last_updated:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-03-28T00:00:00.000Z"
-      reason: "resolve-pseudocode validation_criteria scope vs agentstream CLI"
+      reason: resolve-pseudocode validation_criteria scope vs agentstream CLI
     last_validated:
       date: "2026-03-29T00:00:00.000Z"
-      result: "pending"
-      validator: "AI Agent"
-  name: "Project-local configuration replaces built-in defaults for layered discovery"
-  priority: "P1"
+      result: pending
+      validator: AI Agent
+  name: Project-local configuration replaces built-in defaults for layered discovery
+  priority: P1
   rationale:
     benefits:
-      - "Correct tree-wide directory exclusion semantics"
-      - "Predictable configuration from explicit YAML"
+      - Correct tree-wide directory exclusion semantics
+      - Predictable configuration from explicit YAML
     problems_solved:
-      - "Phantom defaults from DefaultConfig-shaped unmarshaling on partial YAML"
-      - "Root-only matching for patterns such as node_modules/"
-      - "Unintended merge of built-in exclude patterns with project-local lists"
-    why: "Project-local files must define effective policy without silent union with built-in defaults; omission in a later file must not re-inject defaults; single-segment directory excludes must match at any depth."
+      - Phantom defaults from DefaultConfig-shaped unmarshaling on partial YAML
+      - Root-only matching for patterns such as node_modules/
+      - Unintended merge of built-in exclude patterns with project-local lists
+    why: Project-local files must define effective policy without silent union with built-in defaults; omission in a later file must not re-inject defaults; single-segment directory excludes must match at any depth.
   related_requirements:
     depends_on:
-      - "REQ-TIED_SETUP"
+      - REQ-TIED_SETUP
     related_to:
-      - "REQ-GOAGENT-CLI-CONFIG"
+      - REQ-GOAGENT-CLI-CONFIG
     supersedes: []
   satisfaction_criteria:
-    - criterion: "Explicit merge prefixes retain documented behavior where applicable"
-    - criterion: "First project-local unprefixed exclude list replaces built-in default list"
-    - criterion: "Later file omitting exclude_patterns does not append built-in patterns"
-    - criterion: "Single-segment trailing-slash directory pattern matches at any depth"
-  status: "Planned"
+    - criterion: Explicit merge prefixes retain documented behavior where applicable
+    - criterion: First project-local unprefixed exclude list replaces built-in default list
+    - criterion: Later file omitting exclude_patterns does not append built-in patterns
+    - criterion: Single-segment trailing-slash directory pattern matches at any depth
+  status: Planned
   traceability:
     architecture:
-      - "ARCH-CONFIG_DISCOVERY_LAYERING"
+      - ARCH-CONFIG_DISCOVERY_LAYERING
     code_annotations:
-      - "REQ-CONFIG_DISCOVERY_LOCAL_LAYER"
+      - REQ-CONFIG_DISCOVERY_LOCAL_LAYER
     implementation: []
     tests: []
   validation_criteria:
-    - coverage: "Adopting project config and exclusion tests"
-      method: "Automated tests"
-    - coverage: "Conformance targets the adopting product that implements multi-file YAML config merge (e.g. backup config). tools/agentstream config.ParseAndResolve (IMPL-GOAGENT-CLI-CMD) is CLI flags plus default file discovery only unless explicitly extended; it is not the sole conformance surface for this REQ."
-      method: "Product scope note"
-    - coverage: "tied_validate_consistency after ARCH/IMPL linkage in consuming project"
-      method: "TIED consistency"
+    - coverage: Adopting project config and exclusion tests
+      method: Automated tests
+    - coverage: Conformance targets the adopting product that implements multi-file YAML config merge (e.g. backup config). tools/agentstream config.ParseAndResolve (IMPL-GOAGENT-CLI-CMD) is CLI flags plus default file discovery only unless explicitly extended; it is not the sole conformance surface for this REQ.
+      method: Product scope note
+    - coverage: tied_validate_consistency after ARCH/IMPL linkage in consuming project
+      method: TIED consistency
 REQ-EVIDENCE_CHAIN_PROFILE:
-  category: "Functional"
-  detail_file: "requirements/REQ-EVIDENCE_CHAIN_PROFILE.yaml"
-  name: "Evidence chain profile"
-  priority: "P1"
+  category: Functional
+  detail_file: requirements/REQ-EVIDENCE_CHAIN_PROFILE.yaml
+  name: Evidence chain profile
+  priority: P1
   rationale:
     benefits:
-      - "Comparable profiles when schema and denominators match"
-      - "No false runtime or maturity claims"
+      - Comparable profiles when schema and denominators match
+      - No false runtime or maturity claims
     problems_solved:
-      - "Structural evidence can be mistaken for runtime correctness"
-      - "Validators exist separately without a chain-level artifact"
-    why: "One TIED client needs a versioned read-only completeness report with provenance, denominators, and proof boundaries across the evidence chain."
+      - Structural evidence can be mistaken for runtime correctness
+      - Validators exist separately without a chain-level artifact
+    why: One TIED client needs a versioned read-only completeness report with provenance, denominators, and proof boundaries across the evidence chain.
   related_requirements:
     depends_on:
-      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
-      - "REQ-TIED_FIDELITY_RESEARCH"
+      - REQ-QUALITY_ASSURANCE_EVIDENCE
+      - REQ-TIED_FIDELITY_RESEARCH
     related_to:
-      - "REQ-EVIDENCE_CHAIN_REPORT"
-      - "REQ-MCP_USAGE_METRICS"
+      - REQ-EVIDENCE_CHAIN_REPORT
+      - REQ-MCP_USAGE_METRICS
     supersedes: []
   satisfaction_criteria:
-    - criterion: "Deterministic MCP or CLI profile at both evidence-chain profile depths"
-      metric: "Same inputs produce equivalent evidence-chain-profile.v1 JSON"
-    - criterion: "Every ratio has denominator and scope; missing evidence is not_measured or unknown"
-      metric: "Normalizer rejects silent zeros and maturity fields"
-    - criterion: "Wrong TIED base path fails closed"
-      metric: "WrongTiedBasePath with no project YAML writes"
-  status: "Implemented"
+    - criterion: Deterministic MCP or CLI profile at both evidence-chain profile depths
+      metric: Same inputs produce equivalent evidence-chain-profile.v1 JSON
+    - criterion: Every ratio has denominator and scope; missing evidence is not_measured or unknown
+      metric: Normalizer rejects silent zeros and maturity fields
+    - criterion: Wrong TIED base path fails closed
+      metric: WrongTiedBasePath with no project YAML writes
+  status: Implemented
 REQ-EVIDENCE_CHAIN_REPORT:
-  category: "Functional"
-  detail_file: "requirements/REQ-EVIDENCE_CHAIN_REPORT.yaml"
-  name: "Evidence chain statistics report"
-  priority: "P1"
+  category: Functional
+  detail_file: requirements/REQ-EVIDENCE_CHAIN_REPORT.yaml
+  name: Evidence chain statistics report
+  priority: P1
   rationale:
     benefits:
-      - "Explicit cohorts, statuses, and path privacy"
-      - "Read-only TIED-side batch report"
+      - Explicit cohorts, statuses, and path privacy
+      - Read-only TIED-side batch report
     problems_solved:
-      - "Incompatible depths and denominators must not be mixed into one rollup"
-      - "Profile generation is one-client and explicitly excludes cross-project aggregation"
-    why: "Operators need deterministic multi-client statistics from already-generated evidence-chain-profile.v1 artifacts without collapsing proof boundaries or inventing a maturity score."
+      - Incompatible depths and denominators must not be mixed into one rollup
+      - Profile generation is one-client and explicitly excludes cross-project aggregation
+    why: Operators need deterministic multi-client statistics from already-generated evidence-chain-profile.v1 artifacts without collapsing proof boundaries or inventing a maturity score.
   related_requirements:
     depends_on:
-      - "REQ-EVIDENCE_CHAIN_PROFILE"
+      - REQ-EVIDENCE_CHAIN_PROFILE
     related_to:
-      - "REQ-MCP_USAGE_METRICS"
-      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+      - REQ-MCP_USAGE_METRICS
+      - REQ-QUALITY_ASSURANCE_EVIDENCE
     supersedes: []
   satisfaction_criteria:
-    - criterion: "Aggregator never reads or mutates client repositories or project YAML"
-      metric: "Only explicit profile artifacts and the caller-selected report directory"
-    - criterion: "Forbidden maturity and score fields are rejected"
-      metric: "MalformedProfile on those keys"
-    - criterion: "Incompatible schema_version or profile_depth partitions into separate client cohorts"
-      metric: "No cross-cohort numeric rollup"
-    - criterion: "Missing evidence stays observed, not_measured, unknown, or not_applicable"
-      metric: "Never converted to zero"
-    - criterion: "Offline CLI consumes a report input manifest and emits byte-stable YAML plus Markdown"
-      metric: "Same inputs and clock yield identical report.yaml and report.md"
-  status: "Implemented"
+    - criterion: Aggregator never reads or mutates client repositories or project YAML
+      metric: Only explicit profile artifacts and the caller-selected report directory
+    - criterion: Forbidden maturity and score fields are rejected
+      metric: MalformedProfile on those keys
+    - criterion: Incompatible schema_version or profile_depth partitions into separate client cohorts
+      metric: No cross-cohort numeric rollup
+    - criterion: Missing evidence stays observed, not_measured, unknown, or not_applicable
+      metric: Never converted to zero
+    - criterion: Offline CLI consumes a report input manifest and emits byte-stable YAML plus Markdown
+      metric: Same inputs and clock yield identical report.yaml and report.md
+  status: Implemented
 REQ-FEAT_ADOPTION_GUIDANCE:
-  category: "Functional"
+  category: Functional
   cross_references:
-    - "ARCH-FEAT_ONBOARDING_BOUNDARY"
-    - "IMPL-FEAT_ONBOARDING_COMMANDS"
-  detail_file: "requirements/REQ-FEAT_ADOPTION_GUIDANCE.yaml"
-  name: "Incremental adoption guidance"
-  priority: "P1"
-  status: "Implemented"
+    - ARCH-FEAT_ONBOARDING_BOUNDARY
+    - IMPL-FEAT_ONBOARDING_COMMANDS
+  detail_file: requirements/REQ-FEAT_ADOPTION_GUIDANCE.yaml
+  name: Incremental adoption guidance
+  priority: P1
+  status: Implemented
 REQ-FEAT_AGENTSTREAM_ADAPTER:
-  category: "Tooling"
+  category: Tooling
   cross_references:
-    - "ARCH-FEAT_AGENTSTREAM_ADAPTER"
-    - "REQ-GOAGENT-FEATURESPEC-BATCH"
-  detail_file: "requirements/REQ-FEAT_AGENTSTREAM_ADAPTER.yaml"
-  name: "Additive agentstream task execution adapter"
-  priority: "P0"
-  status: "Implemented"
+    - ARCH-FEAT_AGENTSTREAM_ADAPTER
+    - REQ-GOAGENT-FEATURESPEC-BATCH
+  detail_file: requirements/REQ-FEAT_AGENTSTREAM_ADAPTER.yaml
+  name: Additive agentstream task execution adapter
+  priority: P0
+  status: Implemented
 REQ-FEAT_CANONICAL_LINKS:
-  category: "Functional"
+  category: Functional
   cross_references:
-    - "ARCH-FEAT_CANONICAL_LINK_BOUNDARY"
-    - "IMPL-FEAT_REFERENCE_LINKER"
-  description: "Define links from feature manifests to canonical REQ, ARCH, and IMPL records without replacing the existing TIED graph."
-  detail_file: "requirements/REQ-FEAT_CANONICAL_LINKS.yaml"
-  name: "Canonical REQ ARCH IMPL reference linking"
-  priority: "P0"
-  status: "Implemented"
+    - ARCH-FEAT_CANONICAL_LINK_BOUNDARY
+    - IMPL-FEAT_REFERENCE_LINKER
+  description: Define links from feature manifests to canonical REQ, ARCH, and IMPL records without replacing the existing TIED graph.
+  detail_file: requirements/REQ-FEAT_CANONICAL_LINKS.yaml
+  name: Canonical REQ ARCH IMPL reference linking
+  priority: P0
+  status: Implemented
 REQ-FEAT_CLARIFICATION_GATES:
-  category: "Functional"
-  detail_file: "requirements/REQ-FEAT_CLARIFICATION_GATES.yaml"
-  name: "Phase-specific clarification gates"
-  priority: "P0"
-  status: "Implemented"
+  category: Functional
+  detail_file: requirements/REQ-FEAT_CLARIFICATION_GATES.yaml
+  name: Phase-specific clarification gates
+  priority: P0
+  status: Implemented
 REQ-FEAT_CLARIFICATION_RECORDS:
-  category: "Functional"
-  detail_file: "requirements/REQ-FEAT_CLARIFICATION_RECORDS.yaml"
-  name: "Structured clarification records"
-  priority: "P0"
-  status: "Implemented"
+  category: Functional
+  detail_file: requirements/REQ-FEAT_CLARIFICATION_RECORDS.yaml
+  name: Structured clarification records
+  priority: P0
+  status: Implemented
 REQ-FEAT_CONSTITUTION_COMPLIANCE:
-  category: "Functional"
-  detail_file: "requirements/REQ-FEAT_CONSTITUTION_COMPLIANCE.yaml"
-  name: "Constitution compliance analysis"
-  priority: "P0"
-  status: "Implemented"
+  category: Functional
+  detail_file: requirements/REQ-FEAT_CONSTITUTION_COMPLIANCE.yaml
+  name: Constitution compliance analysis
+  priority: P0
+  status: Implemented
 REQ-FEAT_CONSTITUTION_SCHEMA:
-  category: "Functional"
-  detail_file: "requirements/REQ-FEAT_CONSTITUTION_SCHEMA.yaml"
-  name: "Versioned project constitution"
-  priority: "P0"
-  status: "Implemented"
+  category: Functional
+  detail_file: requirements/REQ-FEAT_CONSTITUTION_SCHEMA.yaml
+  name: Versioned project constitution
+  priority: P0
+  status: Implemented
 REQ-FEAT_FIXTURE_VALIDATION:
-  category: "Tooling"
+  category: Tooling
   cross_references:
-    - "ARCH-FEAT_FIXTURE_CORPUS"
-    - "IMPL-FEAT_FIXTURE_VALIDATORS"
-  description: "Provide representative valid and invalid fixtures and strict validators for schema, lifecycle, references, migration, and partial-write boundaries."
-  detail_file: "requirements/REQ-FEAT_FIXTURE_VALIDATION.yaml"
-  name: "Feature orchestration fixture corpus and validators"
-  priority: "P0"
-  status: "Implemented"
+    - ARCH-FEAT_FIXTURE_CORPUS
+    - IMPL-FEAT_FIXTURE_VALIDATORS
+  description: Provide representative valid and invalid fixtures and strict validators for schema, lifecycle, references, migration, and partial-write boundaries.
+  detail_file: requirements/REQ-FEAT_FIXTURE_VALIDATION.yaml
+  name: Feature orchestration fixture corpus and validators
+  priority: P0
+  status: Implemented
 REQ-FEAT_IDEMPOTENT_CREATION:
-  category: "Functional"
-  detail_file: "requirements/REQ-FEAT_IDEMPOTENT_CREATION.yaml"
-  name: "Idempotent feature creation"
-  priority: "P0"
-  status: "Implemented"
+  category: Functional
+  detail_file: requirements/REQ-FEAT_IDEMPOTENT_CREATION.yaml
+  name: Idempotent feature creation
+  priority: P0
+  status: Implemented
 REQ-FEAT_IDENTIFIER_ALLOCATION:
-  category: "Functional"
-  detail_file: "requirements/REQ-FEAT_IDENTIFIER_ALLOCATION.yaml"
-  name: "Deterministic feature identifiers"
-  priority: "P0"
-  status: "Implemented"
+  category: Functional
+  detail_file: requirements/REQ-FEAT_IDENTIFIER_ALLOCATION.yaml
+  name: Deterministic feature identifiers
+  priority: P0
+  status: Implemented
 REQ-FEAT_LEGACY_MIGRATION:
-  category: "Functional"
+  category: Functional
   cross_references:
-    - "ARCH-FEAT_MIGRATION_PREVIEW"
-    - "IMPL-FEAT_MIGRATION_APPLY"
-    - "IMPL-FEAT_MIGRATION_PREVIEW"
-  detail_file: "requirements/REQ-FEAT_LEGACY_MIGRATION.yaml"
-  name: "Dry-run legacy feature migration"
-  priority: "P1"
-  status: "Implemented"
+    - ARCH-FEAT_MIGRATION_PREVIEW
+    - IMPL-FEAT_MIGRATION_APPLY
+    - IMPL-FEAT_MIGRATION_PREVIEW
+  detail_file: requirements/REQ-FEAT_LEGACY_MIGRATION.yaml
+  name: Dry-run legacy feature migration
+  priority: P1
+  status: Implemented
 REQ-FEAT_LIFECYCLE:
-  category: "Functional"
+  category: Functional
   cross_references:
-    - "ARCH-FEAT_LIFECYCLE_STATE_MACHINE"
-    - "IMPL-FEAT_LIFECYCLE_ENGINE"
-  description: "Define persisted feature lifecycle phases, legal transitions, preconditions, blocked-state derivation, and approval points."
-  detail_file: "requirements/REQ-FEAT_LIFECYCLE.yaml"
-  name: "Feature lifecycle state machine"
-  priority: "P0"
-  status: "Implemented"
+    - ARCH-FEAT_LIFECYCLE_STATE_MACHINE
+    - IMPL-FEAT_LIFECYCLE_ENGINE
+  description: Define persisted feature lifecycle phases, legal transitions, preconditions, blocked-state derivation, and approval points.
+  detail_file: requirements/REQ-FEAT_LIFECYCLE.yaml
+  name: Feature lifecycle state machine
+  priority: P0
+  status: Implemented
 REQ-FEAT_LOCAL_DEFAULTS:
-  category: "Functional"
+  category: Functional
   cross_references:
-    - "ARCH-FEAT_LOCAL_DEFAULT_RESOLUTION"
-    - "IMPL-FEAT_LOCAL_DEFAULTS"
-  detail_file: "requirements/REQ-FEAT_LOCAL_DEFAULTS.yaml"
-  name: "Sensible local defaults"
-  priority: "P1"
-  status: "Implemented"
+    - ARCH-FEAT_LOCAL_DEFAULT_RESOLUTION
+    - IMPL-FEAT_LOCAL_DEFAULTS
+  detail_file: requirements/REQ-FEAT_LOCAL_DEFAULTS.yaml
+  name: Sensible local defaults
+  priority: P1
+  status: Implemented
 REQ-FEAT_MANIFEST_SCHEMA:
-  category: "Functional"
+  category: Functional
   cross_references:
-    - "ARCH-FEAT_MANIFEST_CONTRACT"
-    - "IMPL-FEAT_MANIFEST_VALIDATOR"
-  description: "Define feature-manifest.v1 required fields, reference-only ownership, version gate, immutable and mutable fields, and deterministic normalization."
-  detail_file: "requirements/REQ-FEAT_MANIFEST_SCHEMA.yaml"
-  name: "Feature manifest schema contract"
-  priority: "P0"
-  status: "Implemented"
+    - ARCH-FEAT_MANIFEST_CONTRACT
+    - IMPL-FEAT_MANIFEST_VALIDATOR
+  description: Define feature-manifest.v1 required fields, reference-only ownership, version gate, immutable and mutable fields, and deterministic normalization.
+  detail_file: requirements/REQ-FEAT_MANIFEST_SCHEMA.yaml
+  name: Feature manifest schema contract
+  priority: P0
+  status: Implemented
 REQ-FEAT_OFFLINE_WORKFLOW_PRESERVATION:
-  category: "Functional"
+  category: Functional
   cross_references:
-    - "ARCH-FEAT_OFFLINE_COMPATIBILITY"
-    - "IMPL-FEAT_OFFLINE_FALLBACK"
-  detail_file: "requirements/REQ-FEAT_OFFLINE_WORKFLOW_PRESERVATION.yaml"
-  name: "Explicit offline workflow preservation"
-  priority: "P1"
-  status: "Implemented"
+    - ARCH-FEAT_OFFLINE_COMPATIBILITY
+    - IMPL-FEAT_OFFLINE_FALLBACK
+  detail_file: requirements/REQ-FEAT_OFFLINE_WORKFLOW_PRESERVATION.yaml
+  name: Explicit offline workflow preservation
+  priority: P1
+  status: Implemented
 REQ-FEAT_ONBOARDING_COMMANDS:
-  category: "Functional"
+  category: Functional
   cross_references:
-    - "ARCH-FEAT_ONBOARDING_BOUNDARY"
-    - "IMPL-FEAT_ONBOARDING_COMMANDS"
-  detail_file: "requirements/REQ-FEAT_ONBOARDING_COMMANDS.yaml"
-  name: "Safe onboarding commands"
-  priority: "P1"
-  status: "Implemented"
+    - ARCH-FEAT_ONBOARDING_BOUNDARY
+    - IMPL-FEAT_ONBOARDING_COMMANDS
+  detail_file: requirements/REQ-FEAT_ONBOARDING_COMMANDS.yaml
+  name: Safe onboarding commands
+  priority: P1
+  status: Implemented
 REQ-FEAT_ORCHESTRATION_COMMANDS:
-  category: "Functional"
-  detail_file: "requirements/REQ-FEAT_ORCHESTRATION_COMMANDS.yaml"
-  name: "Feature lifecycle commands"
-  priority: "P0"
-  status: "Implemented"
+  category: Functional
+  detail_file: requirements/REQ-FEAT_ORCHESTRATION_COMMANDS.yaml
+  name: Feature lifecycle commands
+  priority: P0
+  status: Implemented
 REQ-FEAT_ORCHESTRATION_SURFACE:
-  category: "Functional"
-  detail_file: "requirements/REQ-FEAT_ORCHESTRATION_SURFACE.yaml"
-  name: "Separate orchestration surfaces"
-  priority: "P0"
-  status: "Implemented"
+  category: Functional
+  detail_file: requirements/REQ-FEAT_ORCHESTRATION_SURFACE.yaml
+  name: Separate orchestration surfaces
+  priority: P0
+  status: Implemented
 REQ-FEAT_READINESS_DIAGNOSTICS:
-  category: "Functional"
+  category: Functional
   cross_references:
-    - "ARCH-FEAT_READINESS_DIAGNOSTICS"
-    - "IMPL-FEAT_READINESS_DIAGNOSTICS"
-  detail_file: "requirements/REQ-FEAT_READINESS_DIAGNOSTICS.yaml"
-  name: "Exact readiness diagnostics"
-  priority: "P1"
-  status: "Implemented"
+    - ARCH-FEAT_READINESS_DIAGNOSTICS
+    - IMPL-FEAT_READINESS_DIAGNOSTICS
+  detail_file: requirements/REQ-FEAT_READINESS_DIAGNOSTICS.yaml
+  name: Exact readiness diagnostics
+  priority: P1
+  status: Implemented
 REQ-FEAT_REVISION_SAFE_MUTATION:
-  category: "Non-Functional"
-  detail_file: "requirements/REQ-FEAT_REVISION_SAFE_MUTATION.yaml"
-  name: "Revision-safe atomic mutation"
-  priority: "P0"
-  status: "Implemented"
+  category: Non-Functional
+  detail_file: requirements/REQ-FEAT_REVISION_SAFE_MUTATION.yaml
+  name: Revision-safe atomic mutation
+  priority: P0
+  status: Implemented
 REQ-FEAT_STORE_PERSISTENCE:
-  category: "Functional"
-  detail_file: "requirements/REQ-FEAT_STORE_PERSISTENCE.yaml"
-  name: "Feature store persistence"
-  priority: "P0"
-  status: "Implemented"
+  category: Functional
+  detail_file: requirements/REQ-FEAT_STORE_PERSISTENCE.yaml
+  name: Feature store persistence
+  priority: P0
+  status: Implemented
 REQ-FEAT_TASK_DERIVATION:
-  category: "Functional"
+  category: Functional
   cross_references:
-    - "ARCH-FEAT_TASK_DERIVATION_BOUNDARY"
-  detail_file: "requirements/REQ-FEAT_TASK_DERIVATION.yaml"
-  name: "Canonical task derivation and source projection"
-  priority: "P0"
-  status: "Implemented"
+    - ARCH-FEAT_TASK_DERIVATION_BOUNDARY
+  detail_file: requirements/REQ-FEAT_TASK_DERIVATION.yaml
+  name: Canonical task derivation and source projection
+  priority: P0
+  status: Implemented
 REQ-FEAT_TASK_EXECUTION_RECOVERY:
-  category: "Functional"
+  category: Functional
   cross_references:
-    - "ARCH-FEAT_TASK_EXECUTION_STATE"
-  detail_file: "requirements/REQ-FEAT_TASK_EXECUTION_RECOVERY.yaml"
-  name: "Task execution recovery and evidence history"
-  priority: "P0"
-  status: "Implemented"
+    - ARCH-FEAT_TASK_EXECUTION_STATE
+  detail_file: requirements/REQ-FEAT_TASK_EXECUTION_RECOVERY.yaml
+  name: Task execution recovery and evidence history
+  priority: P0
+  status: Implemented
 REQ-FEAT_TASK_GRAPH_SCHEDULING:
-  category: "Functional"
+  category: Functional
   cross_references:
-    - "ARCH-FEAT_TASK_GRAPH_SCHEDULER"
-  detail_file: "requirements/REQ-FEAT_TASK_GRAPH_SCHEDULING.yaml"
-  name: "Deterministic task graph scheduling"
-  priority: "P0"
-  status: "Implemented"
+    - ARCH-FEAT_TASK_GRAPH_SCHEDULER
+  detail_file: requirements/REQ-FEAT_TASK_GRAPH_SCHEDULING.yaml
+  name: Deterministic task graph scheduling
+  priority: P0
+  status: Implemented
 REQ-FEAT_VIEW_DETERMINISM:
-  category: "Non-Functional"
+  category: Non-Functional
   cross_references:
-    - "ARCH-FEAT_VIEW_RENDERING"
-    - "IMPL-FEAT_VIEW_RENDERER"
-  description: "Equivalent canonical feature inputs produce byte-stable generated views, unchanged-input regeneration produces no diff, and semantic comparison distinguishes meaning from permitted formatting differences without dropping source metadata or links."
-  detail_file: "requirements/REQ-FEAT_VIEW_DETERMINISM.yaml"
+    - ARCH-FEAT_VIEW_RENDERING
+    - IMPL-FEAT_VIEW_RENDERER
+  description: Equivalent canonical feature inputs produce byte-stable generated views, unchanged-input regeneration produces no diff, and semantic comparison distinguishes meaning from permitted formatting differences without dropping source metadata or links.
+  detail_file: requirements/REQ-FEAT_VIEW_DETERMINISM.yaml
   metadata:
     created:
-      author: "AI Agent"
+      author: AI Agent
       date: {}
     last_updated:
-      author: "AI Agent"
+      author: AI Agent
       date: {}
-      reason: "Batch 4 planning"
-  name: "Deterministic generated-view rendering and comparison"
-  priority: "P1"
+      reason: Batch 4 planning
+  name: Deterministic generated-view rendering and comparison
+  priority: P1
   rationale:
     benefits:
-      - "Precise change review"
-      - "Reproducible output"
+      - Precise change review
+      - Reproducible output
     problems_solved:
-      - "Formatting churn"
-      - "Unclear view equivalence"
-    why: "Committed views are useful only when regeneration is reviewable and noise-free."
+      - Formatting churn
+      - Unclear view equivalence
+    why: Committed views are useful only when regeneration is reviewable and noise-free.
   related_requirements:
     depends_on:
-      - "REQ-FEAT_VIEW_GENERATION"
+      - REQ-FEAT_VIEW_GENERATION
   satisfaction_criteria:
-    - criterion: "Canonically equivalent inputs render identical bytes."
-    - criterion: "Regenerating unchanged inputs produces no diff."
-    - criterion: "Semantic comparison reports meaningful changes while preserving source metadata."
-  status: "Implemented"
+    - criterion: Canonically equivalent inputs render identical bytes.
+    - criterion: Regenerating unchanged inputs produces no diff.
+    - criterion: Semantic comparison reports meaningful changes while preserving source metadata.
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-FEAT_VIEW_RENDERING"
+      - ARCH-FEAT_VIEW_RENDERING
     code_annotations: []
     implementation:
-      - "IMPL-FEAT_VIEW_RENDERER"
+      - IMPL-FEAT_VIEW_RENDERER
     tests: []
   validation_criteria:
-    - coverage: "All supported view kinds"
-      method: "Deterministic rendering tests"
-    - coverage: "Formatting-only and meaningful changes"
-      method: "Semantic comparison tests"
+    - coverage: All supported view kinds
+      method: Deterministic rendering tests
+    - coverage: Formatting-only and meaningful changes
+      method: Semantic comparison tests
 REQ-FEAT_VIEW_GENERATION:
-  category: "Functional"
+  category: Functional
   cross_references:
-    - "ARCH-FEAT_VIEW_PROJECTION"
-    - "IMPL-FEAT_VIEW_PROJECTION"
-  description: "Generate deterministic committed Markdown views inside each feature directory from canonical feature projections, preserving references and proof-boundary labels without copying canonical REQ/ARCH/IMPL bodies."
-  detail_file: "requirements/REQ-FEAT_VIEW_GENERATION.yaml"
+    - ARCH-FEAT_VIEW_PROJECTION
+    - IMPL-FEAT_VIEW_PROJECTION
+  description: Generate deterministic committed Markdown views inside each feature directory from canonical feature projections, preserving references and proof-boundary labels without copying canonical REQ/ARCH/IMPL bodies.
+  detail_file: requirements/REQ-FEAT_VIEW_GENERATION.yaml
   metadata:
     created:
-      author: "AI Agent"
+      author: AI Agent
       date: {}
     last_updated:
-      author: "AI Agent"
+      author: AI Agent
       date: {}
-      reason: "Batch 4 planning"
-  name: "Human-readable generated feature views"
-  priority: "P1"
+      reason: Batch 4 planning
+  name: Human-readable generated feature views
+  priority: P1
   rationale:
     benefits:
-      - "Reviewable feature directory"
-      - "Stable source ownership"
+      - Reviewable feature directory
+      - Stable source ownership
     problems_solved:
-      - "Prose views becoming canonical accidentally"
-      - "Scattered feature intent"
-    why: "Reviewers and agents need a compact feature-local understanding without creating a second source of truth."
+      - Prose views becoming canonical accidentally
+      - Scattered feature intent
+    why: Reviewers and agents need a compact feature-local understanding without creating a second source of truth.
   related_requirements:
     depends_on:
-      - "REQ-FEAT_MANIFEST_SCHEMA"
+      - REQ-FEAT_MANIFEST_SCHEMA
     related_to:
-      - "REQ-FEAT_CLARIFICATION_RECORDS"
-      - "REQ-FEAT_CONSTITUTION_COMPLIANCE"
-      - "REQ-FEAT_TASK_DERIVATION"
+      - REQ-FEAT_CLARIFICATION_RECORDS
+      - REQ-FEAT_CONSTITUTION_COMPLIANCE
+      - REQ-FEAT_TASK_DERIVATION
   satisfaction_criteria:
-    - criterion: "Every view preserves token links, evidence links, and proof-boundary labels."
-    - criterion: "Generated Markdown is explicitly marked as a view and never treated as canonical intent."
-    - criterion: "Supported view paths are generated from the canonical feature manifest and stable projections."
-  status: "Implemented"
+    - criterion: Every view preserves token links, evidence links, and proof-boundary labels.
+    - criterion: Generated Markdown is explicitly marked as a view and never treated as canonical intent.
+    - criterion: Supported view paths are generated from the canonical feature manifest and stable projections.
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-FEAT_VIEW_PROJECTION"
+      - ARCH-FEAT_VIEW_PROJECTION
     code_annotations: []
     implementation:
-      - "IMPL-FEAT_VIEW_PROJECTION"
+      - IMPL-FEAT_VIEW_PROJECTION
     tests: []
   validation_criteria:
-    - coverage: "View types and applicable contracts"
-      method: "Deterministic renderer contract tests"
-    - coverage: "Banner, source metadata, links, and proof boundaries"
-      method: "Structural validation"
+    - coverage: View types and applicable contracts
+      method: Deterministic renderer contract tests
+    - coverage: Banner, source metadata, links, and proof boundaries
+      method: Structural validation
 REQ-FEAT_VIEW_STALENESS:
-  category: "Functional"
+  category: Functional
   cross_references:
-    - "ARCH-FEAT_VIEW_STALENESS"
-    - "IMPL-FEAT_VIEW_STALE_DETECTION"
-  description: "Record source revision or content-hash metadata in every generated view and deterministically detect stale output after canonical inputs change, with explicit fail and warn policies; stale views never count as current intent or runtime proof."
-  detail_file: "requirements/REQ-FEAT_VIEW_STALENESS.yaml"
+    - ARCH-FEAT_VIEW_STALENESS
+    - IMPL-FEAT_VIEW_STALE_DETECTION
+  description: Record source revision or content-hash metadata in every generated view and deterministically detect stale output after canonical inputs change, with explicit fail and warn policies; stale views never count as current intent or runtime proof.
+  detail_file: requirements/REQ-FEAT_VIEW_STALENESS.yaml
   metadata:
     created:
-      author: "AI Agent"
+      author: AI Agent
       date: {}
     last_updated:
-      author: "AI Agent"
+      author: AI Agent
       date: {}
-      reason: "Batch 4 planning"
-  name: "Deterministic stale-view detection and policy"
-  priority: "P1"
+      reason: Batch 4 planning
+  name: Deterministic stale-view detection and policy
+  priority: P1
   rationale:
     benefits:
-      - "Actionable freshness diagnostics"
-      - "Safe CI enforcement"
+      - Actionable freshness diagnostics
+      - Safe CI enforcement
     problems_solved:
-      - "Proof-boundary confusion"
-      - "Silent view staleness"
-    why: "Committed projections must not be mistaken for current canonical intent after source changes."
+      - Proof-boundary confusion
+      - Silent view staleness
+    why: Committed projections must not be mistaken for current canonical intent after source changes.
   related_requirements:
     depends_on:
-      - "REQ-FEAT_VIEW_DETERMINISM"
-      - "REQ-FEAT_VIEW_GENERATION"
+      - REQ-FEAT_VIEW_DETERMINISM
+      - REQ-FEAT_VIEW_GENERATION
   satisfaction_criteria:
-    - criterion: "CI and verification fail deterministically while local inspection can warn explicitly."
-    - criterion: "Current-input mismatch identifies exactly which views are stale."
-    - criterion: "Source revisions or hashes identify the canonical inputs used for each view."
-    - criterion: "Stale output is excluded from current-intent and runtime-correctness evidence."
-  status: "Implemented"
+    - criterion: CI and verification fail deterministically while local inspection can warn explicitly.
+    - criterion: Current-input mismatch identifies exactly which views are stale.
+    - criterion: Source revisions or hashes identify the canonical inputs used for each view.
+    - criterion: Stale output is excluded from current-intent and runtime-correctness evidence.
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-FEAT_VIEW_STALENESS"
+      - ARCH-FEAT_VIEW_STALENESS
     code_annotations: []
     implementation:
-      - "IMPL-FEAT_VIEW_STALE_DETECTION"
+      - IMPL-FEAT_VIEW_STALE_DETECTION
     tests: []
   validation_criteria:
-    - coverage: "Fail and warn modes"
-      method: "Policy tests"
-    - coverage: "Revision and hash mismatch paths"
-      method: "Stale detection tests"
+    - coverage: Fail and warn modes
+      method: Policy tests
+    - coverage: Revision and hash mismatch paths
+      method: Stale detection tests
 REQ-FEEDBACK_TO_TIED:
-  category: "Functional"
-  detail_file: "requirements/REQ-FEEDBACK_TO_TIED.yaml"
+  category: Functional
+  detail_file: requirements/REQ-FEEDBACK_TO_TIED.yaml
   metadata:
     created:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-03-03T00:00:00.000Z"
     last_updated:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-03-03T00:00:00.000Z"
-      reason: "Initial creation"
+      reason: Initial creation
     last_validated:
       date: "2026-03-03T00:00:00.000Z"
-      result: "pass"
-      validator: "AI Agent"
-  name: "Feedback to TIED (Feature Requests, Bug Reports, Methodology)"
-  priority: "P1"
+      result: pass
+      validator: AI Agent
+  name: Feedback to TIED (Feature Requests, Bug Reports, Methodology)
+  priority: P1
   rationale:
     benefits:
-      - "Export format suitable for reporting to the TIED project (e.g. GitHub issues)"
-      - "Structured feedback stored under the project TIED tree"
-      - "Traceability of feedback types (feature_request, bug_report, methodology_improvement)"
+      - Export format suitable for reporting to the TIED project (e.g. GitHub issues)
+      - Structured feedback stored under the project TIED tree
+      - Traceability of feedback types (feature_request, bug_report, methodology_improvement)
     problems_solved:
-      - "Methodology improvements from the field are not easily reported upstream"
-      - "No structured way to collect feedback from TIED adopters"
-    why: "Projects and users need a standard way to submit feature requests, bug reports, and methodology improvement suggestions and to report them to the TIED project"
+      - Methodology improvements from the field are not easily reported upstream
+      - No structured way to collect feedback from TIED adopters
+    why: Projects and users need a standard way to submit feature requests, bug reports, and methodology improvement suggestions and to report them to the TIED project
   related_requirements:
     depends_on: []
     related_to:
-      - "REQ-TIED_SETUP"
+      - REQ-TIED_SETUP
     supersedes: []
   satisfaction_criteria:
-    - criterion: "Feedback can be exported for reporting to TIED"
-      metric: "tied_feedback_export returns markdown or JSON of all entries"
-    - criterion: "Feedback entry types and MCP tool names are canonical in tied/vocab/feedback-to-tied.md; appendEntry block in IMPL-MCP_FEEDBACK_TOOLS-pseudocode.md"
-    - criterion: "MCP tools allow adding feedback entries (type, title, description, optional context)"
-      metric: "tied_feedback_add creates/updates tied/feedback.yaml"
-  status: "Implemented"
+    - criterion: Feedback can be exported for reporting to TIED
+      metric: tied_feedback_export returns markdown or JSON of all entries
+    - criterion: Feedback entry types and MCP tool names are canonical in tied/vocab/feedback-to-tied.md; appendEntry block in IMPL-MCP_FEEDBACK_TOOLS-pseudocode.md
+    - criterion: MCP tools allow adding feedback entries (type, title, description, optional context)
+      metric: tied_feedback_add creates/updates tied/feedback.yaml
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-FEEDBACK_STORAGE"
+      - ARCH-FEEDBACK_STORAGE
     code_annotations:
-      - "ARCH-FEEDBACK_STORAGE"
-      - "IMPL-MCP_FEEDBACK_TOOLS"
-      - "REQ-FEEDBACK_TO_TIED"
+      - ARCH-FEEDBACK_STORAGE
+      - IMPL-MCP_FEEDBACK_TOOLS
+      - REQ-FEEDBACK_TO_TIED
     implementation:
-      - "IMPL-MCP_FEEDBACK_TOOLS"
+      - IMPL-MCP_FEEDBACK_TOOLS
     tests:
-      - "feedback.test.ts"
+      - feedback.test.ts
   validation_criteria:
-    - coverage: "MCP client can call tools and get valid output"
-      method: "Manual or E2E"
-    - coverage: "Feedback module load/append/export and tool handlers"
-      method: "Unit tests"
+    - coverage: MCP client can call tools and get valid output
+      method: Manual or E2E
+    - coverage: Feedback module load/append/export and tool handlers
+      method: Unit tests
 REQ-GOAGENT-AGENT-EXECUTOR:
-  category: "Tooling"
-  detail_file: "requirements/REQ-GOAGENT-AGENT-EXECUTOR.yaml"
+  category: Tooling
+  detail_file: requirements/REQ-GOAGENT-AGENT-EXECUTOR.yaml
   metadata:
     created:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-03-27T00:00:00.000Z"
     last_updated:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-03-27T00:00:00.000Z"
-      reason: "Go agentstream consolidated spec implementation"
+      reason: Go agentstream consolidated spec implementation
     last_validated:
       date: "2026-03-27T00:00:00.000Z"
-      result: "pass"
-      validator: "AI Agent"
-  name: "Agent subprocess stream-json executor"
-  priority: "P1"
+      result: pass
+      validator: AI Agent
+  name: Agent subprocess stream-json executor
+  priority: P1
   rationale:
     benefits:
-      - "Same flags as Ruby agent_command (--print stream-json model trust force workspace resume)"
+      - Same flags as Ruby agent_command (--print stream-json model trust force workspace resume)
     problems_solved:
-      - "Real-time text; stderr forward; exit codes"
-    why: "Cursor agent CLI is external; NDJSON must be parsed; session_id required for Ruby parity"
+      - Real-time text; stderr forward; exit codes
+    why: Cursor agent CLI is external; NDJSON must be parsed; session_id required for Ruby parity
   related_requirements:
     depends_on:
-      - "REQ-GOAGENT-LIB-MODULE"
+      - REQ-GOAGENT-LIB-MODULE
     related_to:
-      - "REQ-ATDD-E2E-AGENT_STREAM"
+      - REQ-ATDD-E2E-AGENT_STREAM
     supersedes: []
   satisfaction_criteria:
-    - criterion: "AgentArgv builds correct argv; Run streams thinking/assistant fragments; stderr forwarded; session_id printed after turn"
-    - criterion: "Non-zero agent exit propagates; JSON parse errors logged and skipped"
-  status: "Implemented"
+    - criterion: AgentArgv builds correct argv; Run streams thinking/assistant fragments; stderr forwarded; session_id printed after turn
+    - criterion: Non-zero agent exit propagates; JSON parse errors logged and skipped
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-GOAGENT-EXECUTOR"
+      - ARCH-GOAGENT-EXECUTOR
     code_annotations:
-      - "REQ-GOAGENT-AGENT-EXECUTOR"
+      - REQ-GOAGENT-AGENT-EXECUTOR
     implementation:
-      - "IMPL-GOAGENT-EXECUTOR"
+      - IMPL-GOAGENT-EXECUTOR
     tests: []
   validation_criteria:
-    - coverage: "manual with real agent"
-      method: "E2E with stub agent on PATH (future) / manual"
+    - coverage: manual with real agent
+      method: E2E with stub agent on PATH (future) / manual
 REQ-GOAGENT-CHECKLIST-CONTROL:
-  category: "Tooling"
-  detail_file: "requirements/REQ-GOAGENT-CHECKLIST-CONTROL.yaml"
+  category: Tooling
+  detail_file: requirements/REQ-GOAGENT-CHECKLIST-CONTROL.yaml
   metadata:
     created:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-04-24T00:00:00.000Z"
     last_updated:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-04-24T00:00:00.000Z"
-      reason: "Implemented dynamic checklist control routing in tools/agentstream"
+      reason: Implemented dynamic checklist control routing in tools/agentstream
     last_validated:
       date: "2026-04-24T00:00:00.000Z"
-      result: "pass"
-      validator: "go test ./tools/agentstream/... and tied_validate_consistency"
-  name: "Dynamic checklist control routing"
-  priority: "P1"
+      result: pass
+      validator: go test ./tools/agentstream/... and tied_validate_consistency
+  name: Dynamic checklist control routing
+  priority: P1
   rationale:
     benefits:
-      - "Deterministic loop-back from unit-test-green to flag-contradictory-specs"
-      - "Human-readable transcript remains separate from machine control"
+      - Deterministic loop-back from unit-test-green to flag-contradictory-specs
+      - Human-readable transcript remains separate from machine control
     problems_solved:
-      - "Natural-language transcript parsing is ambiguous"
-      - "Static agentstream turn queues ignore checklist GOTO decisions discovered at runtime"
-    why: "Checklist runs sometimes need to change the remaining turn sequence when a completed turn reveals a required loop-back."
+      - Natural-language transcript parsing is ambiguous
+      - Static agentstream turn queues ignore checklist GOTO decisions discovered at runtime
+    why: Checklist runs sometimes need to change the remaining turn sequence when a completed turn reveals a required loop-back.
   related_requirements:
     depends_on:
-      - "REQ-GOAGENT-AGENT-EXECUTOR"
-      - "REQ-GOAGENT-PIPELINE-CHAIN"
-      - "REQ-GOAGENT-YAML-STEP-RENDER"
+      - REQ-GOAGENT-AGENT-EXECUTOR
+      - REQ-GOAGENT-PIPELINE-CHAIN
+      - REQ-GOAGENT-YAML-STEP-RENDER
     related_to:
-      - "PROC-AGENT_REQ_CHECKLIST"
+      - PROC-AGENT_REQ_CHECKLIST
     supersedes: []
   satisfaction_criteria:
-    - criterion: "agentstream validates goto targets against known checklist slugs before changing the remaining turn queue."
-    - criterion: "Checklist turn output can include a strict machine-readable agentstream_control block."
-    - criterion: "unit-test-green can route to flag-contradictory-specs when the focused RED test passes but existing tests fail."
-  status: "Implemented"
+    - criterion: agentstream validates goto targets against known checklist slugs before changing the remaining turn queue.
+    - criterion: Checklist turn output can include a strict machine-readable agentstream_control block.
+    - criterion: unit-test-green can route to flag-contradictory-specs when the focused RED test passes but existing tests fail.
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-GOAGENT-CHECKLIST-CONTROL"
+      - ARCH-GOAGENT-CHECKLIST-CONTROL
     code_annotations:
-      - "REQ-GOAGENT-CHECKLIST-CONTROL"
+      - REQ-GOAGENT-CHECKLIST-CONTROL
     implementation:
-      - "IMPL-GOAGENT-CHECKLIST-CONTROL"
+      - IMPL-GOAGENT-CHECKLIST-CONTROL
     tests:
-      - "tools/agentstream/checklist/checklist_test.go"
-      - "tools/agentstream/control/control_test.go"
-      - "tools/agentstream/executor/executor_test.go"
-      - "tools/agentstream/pipeline/pipeline_test.go"
+      - tools/agentstream/checklist/checklist_test.go
+      - tools/agentstream/control/control_test.go
+      - tools/agentstream/executor/executor_test.go
+      - tools/agentstream/pipeline/pipeline_test.go
   validation_criteria:
-    - coverage: "tools/agentstream/control/control_test.go; tools/agentstream/pipeline/pipeline_test.go; tools/agentstream/checklist/checklist_test.go; tools/agentstream/executor/executor_test.go"
-      method: "Unit tests"
+    - coverage: tools/agentstream/control/control_test.go; tools/agentstream/pipeline/pipeline_test.go; tools/agentstream/checklist/checklist_test.go; tools/agentstream/executor/executor_test.go
+      method: Unit tests
 REQ-GOAGENT-CLI-CONFIG:
-  category: "Tooling"
-  detail_file: "requirements/REQ-GOAGENT-CLI-CONFIG.yaml"
+  category: Tooling
+  detail_file: requirements/REQ-GOAGENT-CLI-CONFIG.yaml
   metadata:
     created:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-03-27T00:00:00.000Z"
     last_updated:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-04-18T00:00:00.000Z"
-      reason: "Optional tied-yaml MCP preflight default off; CLI/env flags documented"
+      reason: Optional tied-yaml MCP preflight default off; CLI/env flags documented
     last_validated:
       date: "2026-03-27T00:00:00.000Z"
-      result: "pass"
-      validator: "AI Agent"
-  name: "Unified CLI parsing and configuration resolution for agentstream"
-  priority: "P1"
+      result: pass
+      validator: AI Agent
+  name: Unified CLI parsing and configuration resolution for agentstream
+  priority: P1
   rationale:
     benefits:
-      - "One entry point; preview mode; order filter synonyms"
+      - One entry point; preview mode; order filter synonyms
     problems_solved:
-      - "Duplicate wrappers and divergent defaults"
-    why: "run-feature-batch.sh and run_agent_stream.rb options merge into one binary with defaults and validation"
+      - Duplicate wrappers and divergent defaults
+    why: run-feature-batch.sh and run_agent_stream.rb options merge into one binary with defaults and validation
   related_requirements:
     depends_on:
-      - "REQ-GOAGENT-LIB-MODULE"
+      - REQ-GOAGENT-LIB-MODULE
     related_to:
-      - "REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML"
+      - REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
     supersedes: []
   satisfaction_criteria:
-    - criterion: "Defaults for workspace, checklist path discovery, optional preload and prompts/all.yaml when present; tied-yaml mcp.json preflight off by default unless --tied-mcp-preflight or AGENTSTREAM_TIED_MCP_PREFLIGHT=1"
-    - criterion: "Flags per consolidated spec (dry-run, session-id, workspace, model, checklist, optional --lead-checklist-from-step / --lead-checklist-to-step with checklist path, prompt sources, feature batch, preview, verify-session, optional tied-yaml MCP preflight: --tied-mcp-preflight, --skip-tied-mcp-preflight, -y/--yes, help)"
-    - criterion: "Validates paths, positional vs -b conflict, order filter requires feature batch paths (except preview-only); checklist step bounds require --lead-checklist-yaml when repo default would be empty"
-  status: "Implemented"
+    - criterion: Defaults for workspace, checklist path discovery, optional preload and prompts/all.yaml when present; tied-yaml mcp.json preflight off by default unless --tied-mcp-preflight or AGENTSTREAM_TIED_MCP_PREFLIGHT=1
+    - criterion: 'Flags per consolidated spec (dry-run, session-id, workspace, model, checklist, optional --lead-checklist-from-step / --lead-checklist-to-step with checklist path, prompt sources, feature batch, preview, verify-session, optional tied-yaml MCP preflight: --tied-mcp-preflight, --skip-tied-mcp-preflight, -y/--yes, help)'
+    - criterion: Validates paths, positional vs -b conflict, order filter requires feature batch paths (except preview-only); checklist step bounds require --lead-checklist-yaml when repo default would be empty
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-GOAGENT-CLI"
+      - ARCH-GOAGENT-CLI
     code_annotations:
-      - "REQ-GOAGENT-CLI-CONFIG"
+      - REQ-GOAGENT-CLI-CONFIG
     implementation:
-      - "IMPL-GOAGENT-CLI-CMD"
+      - IMPL-GOAGENT-CLI-CMD
     tests:
-      - "tools/agentstream (config parse exercised via integration)"
-      - "tools/agentstream/config/config_test.go"
+      - tools/agentstream (config parse exercised via integration)
+      - tools/agentstream/config/config_test.go
   validation_criteria:
-    - coverage: "agentstream --help"
-      method: "Manual CLI smoke"
+    - coverage: agentstream --help
+      method: Manual CLI smoke
 REQ-GOAGENT-FEATURESPEC-BATCH:
-  category: "Tooling"
-  detail_file: "requirements/REQ-GOAGENT-FEATURESPEC-BATCH.yaml"
+  category: Tooling
+  detail_file: requirements/REQ-GOAGENT-FEATURESPEC-BATCH.yaml
   metadata:
     created:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-03-27T00:00:00.000Z"
     last_updated:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-03-27T00:00:00.000Z"
-      reason: "Go agentstream consolidated spec implementation"
+      reason: Go agentstream consolidated spec implementation
     last_validated:
       date: "2026-03-27T00:00:00.000Z"
-      result: "pass"
-      validator: "AI Agent"
-  name: "Feature spec batch YAML load sort filter render preview"
-  priority: "P1"
+      result: pass
+      validator: AI Agent
+  name: Feature spec batch YAML load sort filter render preview
+  priority: P1
   rationale:
     benefits:
-      - "Library API featurespec.MessagesFromYAML / Preview"
+      - Library API featurespec.MessagesFromYAML / Preview
     problems_solved:
-      - "Order filter N and N-M; root array or features key"
-    why: "Feature batches drive one session per record; markdown must match Ruby FeatureSpecBatchPrompts"
+      - Order filter N and N-M; root array or features key
+    why: Feature batches drive one session per record; markdown must match Ruby FeatureSpecBatchPrompts
   related_requirements:
     depends_on:
-      - "REQ-GOAGENT-LIB-MODULE"
+      - REQ-GOAGENT-LIB-MODULE
     related_to: []
     supersedes: []
   satisfaction_criteria:
-    - criterion: "Preview mode prints === prompt headers"
-    - criterion: "Records sorted by order; filter matches floats; each record is Turn with ChainFromPrevious false"
-  status: "Implemented"
+    - criterion: Preview mode prints === prompt headers
+    - criterion: Records sorted by order; filter matches floats; each record is Turn with ChainFromPrevious false
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-GOAGENT-YAML-FEATURESPEC"
+      - ARCH-GOAGENT-YAML-FEATURESPEC
     code_annotations:
-      - "REQ-GOAGENT-FEATURESPEC-BATCH"
+      - REQ-GOAGENT-FEATURESPEC-BATCH
     implementation:
-      - "IMPL-GOAGENT-FEATURESPEC"
+      - IMPL-GOAGENT-FEATURESPEC
     tests:
-      - "featurespec_test.go"
+      - featurespec_test.go
   validation_criteria:
-    - coverage: "tools/agentstream/featurespec/*_test.go"
-      method: "Unit tests"
+    - coverage: tools/agentstream/featurespec/*_test.go
+      method: Unit tests
 REQ-GOAGENT-LIB-MODULE:
-  category: "Tooling"
-  detail_file: "requirements/REQ-GOAGENT-LIB-MODULE.yaml"
+  category: Tooling
+  detail_file: requirements/REQ-GOAGENT-LIB-MODULE.yaml
   metadata:
     created:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-03-27T00:00:00.000Z"
     last_updated:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-03-27T00:00:00.000Z"
-      reason: "Go agentstream consolidated spec implementation"
+      reason: Go agentstream consolidated spec implementation
     last_validated:
       date: "2026-03-27T00:00:00.000Z"
-      result: "pass"
-      validator: "AI Agent"
-  name: "Go agentstream library module layout and core types"
-  priority: "P1"
+      result: pass
+      validator: AI Agent
+  name: Go agentstream library module layout and core types
+  priority: P1
   rationale:
     benefits:
-      - "Testable packages; other Go apps can import featurespec, pipeline, executor without the CLI"
+      - Testable packages; other Go apps can import featurespec, pipeline, executor without the CLI
     problems_solved:
-      - "Shell/Ruby split is hard to embed in other tools"
-    why: "A single Go module must expose importable packages for prompt sources, pipeline, and executor with shared Turn/SessionID types"
+      - Shell/Ruby split is hard to embed in other tools
+    why: A single Go module must expose importable packages for prompt sources, pipeline, and executor with shared Turn/SessionID types
   related_requirements:
     depends_on: []
     related_to:
-      - "REQ-ATDD-E2E-AGENT_STREAM"
+      - REQ-ATDD-E2E-AGENT_STREAM
     supersedes: []
   satisfaction_criteria:
-    - criterion: "Library uses io.Writer for output; no os.Exit in library packages"
-    - criterion: "Root module with cmd/agentstream and library packages; no library package imports cmd; exported types Turn and SessionID"
-  status: "Implemented"
+    - criterion: Library uses io.Writer for output; no os.Exit in library packages
+    - criterion: Root module with cmd/agentstream and library packages; no library package imports cmd; exported types Turn and SessionID
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-GOAGENT-LIB-LAYERING"
+      - ARCH-GOAGENT-LIB-LAYERING
     code_annotations:
-      - "REQ-GOAGENT-LIB-MODULE"
+      - REQ-GOAGENT-LIB-MODULE
     implementation:
-      - "IMPL-GOAGENT-LIB-TYPES"
+      - IMPL-GOAGENT-LIB-TYPES
     tests:
-      - "tools/agentstream/..._test.go"
+      - tools/agentstream/..._test.go
   validation_criteria:
-    - coverage: "unit tests for featurespec, text, pipeline"
-      method: "go test ./... under tools/agentstream"
+    - coverage: unit tests for featurespec, text, pipeline
+      method: go test ./... under tools/agentstream
 REQ-GOAGENT-NON-COMPACT-HTML-FORMAT:
-  category: "Tooling"
-  description: "When a documented output mode (non-compact HTML) is selected, turn bodies for checklist and TDD-loop (and any other in-scope renderers) MUST be produced as human- and diff-friendly HTML with line breaks and stable element boundaries, not a single minified line. The exact whitespace contract (indentation, optional blank lines, element ordering) MUST be defined in implementation records and testable. When the mode is not selected, existing markdown/plain and pipeline behavior for those sources MUST remain unchanged."
-  detail_file: "requirements/REQ-GOAGENT-NON-COMPACT-HTML-FORMAT.yaml"
+  category: Tooling
+  description: When a documented output mode (non-compact HTML) is selected, turn bodies for checklist and TDD-loop (and any other in-scope renderers) MUST be produced as human- and diff-friendly HTML with line breaks and stable element boundaries, not a single minified line. The exact whitespace contract (indentation, optional blank lines, element ordering) MUST be defined in implementation records and testable. When the mode is not selected, existing markdown/plain and pipeline behavior for those sources MUST remain unchanged.
+  detail_file: requirements/REQ-GOAGENT-NON-COMPACT-HTML-FORMAT.yaml
   metadata:
     created:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-04-24T00:00:00.000Z"
     last_updated:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-04-24T19:00:00.000Z"
-      reason: "sync-tied-stack: REQ index row matches detail."
+      reason: 'sync-tied-stack: REQ index row matches detail.'
     last_validated:
       date: "2026-04-24T19:00:00.000Z"
-      result: "pass"
-      validator: "AI Agent"
-  name: "Non-compact HTML format for agentstream rendered prompts"
-  priority: "P1"
+      result: pass
+      validator: AI Agent
+  name: Non-compact HTML format for agentstream rendered prompts
+  priority: P1
   rationale:
     benefits:
-      - "Testable, traceable format selection aligned with [PROC-AGENT_REQ_CHECKLIST] and TIED tokens"
+      - Testable, traceable format selection aligned with [PROC-AGENT_REQ_CHECKLIST] and TIED tokens
     problems_solved:
-      - "Lack of a single named contract for non-minified HTML-shaped output in Go agentstream"
-      - "Risk of ad-hoc formatting that breaks diff stability or parity with checklist-driven runs"
-    why: "Sponsor and operator workflows need readable, reviewable prompt bodies; compact single-line HTML is hard to read in logs, diffs, and agent transcripts."
+      - Lack of a single named contract for non-minified HTML-shaped output in Go agentstream
+      - Risk of ad-hoc formatting that breaks diff stability or parity with checklist-driven runs
+    why: Sponsor and operator workflows need readable, reviewable prompt bodies; compact single-line HTML is hard to read in logs, diffs, and agent transcripts.
   related_requirements:
     depends_on:
-      - "REQ-GOAGENT-LIB-MODULE"
-      - "REQ-GOAGENT-YAML-STEP-RENDER"
+      - REQ-GOAGENT-LIB-MODULE
+      - REQ-GOAGENT-YAML-STEP-RENDER
     related_to:
-      - "PROC-AGENT_REQ_CHECKLIST"
+      - PROC-AGENT_REQ_CHECKLIST
     supersedes: []
   satisfaction_criteria:
-    - criterion: "A documented `non_compact_html` (or equivalent) output mode exists with explicit rules for line breaks and non-minified structure"
-      metric: "Recorded in REQ satisfaction criteria and later ARCH/IMPL; verified by unit tests"
-    - criterion: "Default and existing code paths for non-HTML and non-selected modes are unchanged"
-      metric: "Regression tests or explicit assertions on prior behavior"
-    - criterion: "Same logical step or record content in non-compact HTML mode serializes to a stable deterministic output per the documented contract"
-      metric: "Snapshot or structural tests on golden fixtures"
-  status: "Implemented"
+    - criterion: A documented `non_compact_html` (or equivalent) output mode exists with explicit rules for line breaks and non-minified structure
+      metric: Recorded in REQ satisfaction criteria and later ARCH/IMPL; verified by unit tests
+    - criterion: Default and existing code paths for non-HTML and non-selected modes are unchanged
+      metric: Regression tests or explicit assertions on prior behavior
+    - criterion: Same logical step or record content in non-compact HTML mode serializes to a stable deterministic output per the documented contract
+      metric: Snapshot or structural tests on golden fixtures
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT"
+      - ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT
     code_annotations:
-      - "REQ-GOAGENT-NON-COMPACT-HTML-FORMAT"
+      - REQ-GOAGENT-NON-COMPACT-HTML-FORMAT
     implementation:
-      - "IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT"
+      - IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT
     tests:
-      - "tools/agentstream/cmd/agentstream/compose_noncompact_test.go"
-      - "tools/agentstream/htmlformat/htmlformat_test.go"
+      - tools/agentstream/cmd/agentstream/compose_noncompact_test.go
+      - tools/agentstream/htmlformat/htmlformat_test.go
   validation_criteria:
-    - coverage: "packages implementing the format after IMPL linkage"
-      method: "go test in tools/agentstream"
-    - coverage: "After ARCH/IMPL records exist and link to this REQ"
-      method: "tied_validate_consistency"
+    - coverage: packages implementing the format after IMPL linkage
+      method: go test in tools/agentstream
+    - coverage: After ARCH/IMPL records exist and link to this REQ
+      method: tied_validate_consistency
 REQ-GOAGENT-PIPELINE-CHAIN:
-  category: "Tooling"
-  detail_file: "requirements/REQ-GOAGENT-PIPELINE-CHAIN.yaml"
+  category: Tooling
+  detail_file: requirements/REQ-GOAGENT-PIPELINE-CHAIN.yaml
   metadata:
     created:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-03-27T00:00:00.000Z"
     last_updated:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-03-30T00:00:00.000Z"
-      reason: "Document checklist step bounds in pipeline Input"
+      reason: Document checklist step bounds in pipeline Input
     last_validated:
       date: "2026-03-27T00:00:00.000Z"
-      result: "pass"
-      validator: "AI Agent"
-  name: "Multi-turn pipeline assembly session chaining and dry-run"
-  priority: "P1"
+      result: pass
+      validator: AI Agent
+  name: Multi-turn pipeline assembly session chaining and dry-run
+  priority: P1
   rationale:
     benefits:
-      - "Deterministic session_for_turn selection"
+      - Deterministic session_for_turn selection
     problems_solved:
-      - "Feature-spec breaks session chain; other sources resume"
-    why: "Turn order and chain_between must match AgentStreamArgv for resume vs new session"
+      - Feature-spec breaks session chain; other sources resume
+    why: Turn order and chain_between must match AgentStreamArgv for resume vs new session
   related_requirements:
     depends_on:
-      - "REQ-GOAGENT-FEATURESPEC-BATCH"
-      - "REQ-GOAGENT-TEXT-SOURCES"
-      - "REQ-GOAGENT-YAML-STEP-RENDER"
+      - REQ-GOAGENT-FEATURESPEC-BATCH
+      - REQ-GOAGENT-TEXT-SOURCES
+      - REQ-GOAGENT-YAML-STEP-RENDER
     related_to:
-      - "REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML"
+      - REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
     supersedes: []
   satisfaction_criteria:
-    - criterion: "Assembly order argv prompt-file prompts-file tdd feature-spec lead-checklist verify"
-    - criterion: "Dry-run prints argv parts and quoted command with chaining stderr note"
-    - criterion: "pipeline.Input passes optional lead checklist step id bounds into checklist loader"
-  status: "Implemented"
+    - criterion: Assembly order argv prompt-file prompts-file tdd feature-spec lead-checklist verify
+    - criterion: Dry-run prints argv parts and quoted command with chaining stderr note
+    - criterion: pipeline.Input passes optional lead checklist step id bounds into checklist loader
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-GOAGENT-PIPELINE"
+      - ARCH-GOAGENT-PIPELINE
     code_annotations:
-      - "REQ-GOAGENT-PIPELINE-CHAIN"
+      - REQ-GOAGENT-PIPELINE-CHAIN
     implementation:
-      - "IMPL-GOAGENT-CLI-CMD"
-      - "IMPL-GOAGENT-PIPELINE"
+      - IMPL-GOAGENT-CLI-CMD
+      - IMPL-GOAGENT-PIPELINE
     tests:
-      - "pipeline_test.go"
-      - "TestBuild_leadChecklistStepBounds"
+      - pipeline_test.go
+      - TestBuild_leadChecklistStepBounds
   validation_criteria:
-    - coverage: "tools/agentstream/pipeline/pipeline_test.go"
-      method: "Unit tests"
+    - coverage: tools/agentstream/pipeline/pipeline_test.go
+      method: Unit tests
 REQ-GOAGENT-TEXT-SOURCES:
-  category: "Tooling"
-  detail_file: "requirements/REQ-GOAGENT-TEXT-SOURCES.yaml"
+  category: Tooling
+  detail_file: requirements/REQ-GOAGENT-TEXT-SOURCES.yaml
   metadata:
     created:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-03-27T00:00:00.000Z"
     last_updated:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-03-27T00:00:00.000Z"
-      reason: "Go agentstream consolidated spec implementation"
+      reason: Go agentstream consolidated spec implementation
     last_validated:
       date: "2026-03-27T00:00:00.000Z"
-      result: "pass"
-      validator: "AI Agent"
-  name: "Text prompt sources argv prompt-file prompts-file verify-session"
-  priority: "P1"
+      result: pass
+      validator: AI Agent
+  name: Text prompt sources argv prompt-file prompts-file verify-session
+  priority: P1
   rationale:
     benefits:
-      - "Composable preload prompts"
+      - Composable preload prompts
     problems_solved:
-      - "Multi-block files and argv-after-- parity with Ruby"
-    why: "Simple text inputs must become Turns with chain_from_previous true per Ruby semantics"
+      - Multi-block files and argv-after-- parity with Ruby
+    why: Simple text inputs must become Turns with chain_from_previous true per Ruby semantics
   related_requirements:
     depends_on:
-      - "REQ-GOAGENT-LIB-MODULE"
+      - REQ-GOAGENT-LIB-MODULE
     related_to: []
     supersedes: []
   satisfaction_criteria:
-    - criterion: "UTF-8 file reads; prompts-file split on newline---newline; verify-session sentinel appended when flag set"
-  status: "Implemented"
+    - criterion: UTF-8 file reads; prompts-file split on newline---newline; verify-session sentinel appended when flag set
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-GOAGENT-TEXT-SOURCES"
+      - ARCH-GOAGENT-TEXT-SOURCES
     code_annotations:
-      - "REQ-GOAGENT-TEXT-SOURCES"
+      - REQ-GOAGENT-TEXT-SOURCES
     implementation:
-      - "IMPL-GOAGENT-TEXT-SOURCES"
+      - IMPL-GOAGENT-TEXT-SOURCES
     tests:
-      - "text_test.go"
+      - text_test.go
   validation_criteria:
-    - coverage: "tools/agentstream/text/text_test.go"
-      method: "Unit tests"
+    - coverage: tools/agentstream/text/text_test.go
+      method: Unit tests
 REQ-GOAGENT-YAML-STEP-RENDER:
-  category: "Tooling"
-  detail_file: "requirements/REQ-GOAGENT-YAML-STEP-RENDER.yaml"
+  category: Tooling
+  detail_file: requirements/REQ-GOAGENT-YAML-STEP-RENDER.yaml
   metadata:
     created:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-03-27T00:00:00.000Z"
     last_updated:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-03-30T00:00:00.000Z"
-      reason: "Optional inclusive checklist main-step bounds by id"
+      reason: Optional inclusive checklist main-step bounds by id
     last_validated:
       date: "2026-03-27T00:00:00.000Z"
-      result: "pass"
-      validator: "AI Agent"
-  name: "TDD loop and lead checklist YAML step renderers"
-  priority: "P1"
+      result: pass
+      validator: AI Agent
+  name: TDD loop and lead checklist YAML step renderers
+  priority: P1
   rationale:
     benefits:
-      - "PROC-AGENT_REQ_CHECKLIST automation from Go"
+      - PROC-AGENT_REQ_CHECKLIST automation from Go
     problems_solved:
-      - "Checklist sub_procedures and skip flag"
-    why: "TddLoopPrompts and LeadChecklistPrompts behavior is required in Go for parity"
+      - Checklist sub_procedures and skip flag
+    why: TddLoopPrompts and LeadChecklistPrompts behavior is required in Go for parity
   related_requirements:
     depends_on:
-      - "REQ-GOAGENT-LIB-MODULE"
+      - REQ-GOAGENT-LIB-MODULE
     related_to:
-      - "PROC-AGENT_REQ_CHECKLIST"
-      - "REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML"
+      - PROC-AGENT_REQ_CHECKLIST
+      - REQ-ATDD-COMPOS-AGENT_STREAM_TDD_YAML
     supersedes: []
   satisfaction_criteria:
-    - criterion: "All such Turns use ChainFromPrevious true"
-    - criterion: "Checklist YAML requires steps; optional sub_procedures; --lead-checklist-skip-sub omits subs"
-    - criterion: "Optional inclusive main-step bounds by checklist step id (YAML order); missing lower or upper means unbounded on that side; subs unchanged by bounds"
-    - criterion: "TDD YAML requires steps array; each step formatted per Ruby template"
-  status: "Implemented"
+    - criterion: All such Turns use ChainFromPrevious true
+    - criterion: Checklist YAML requires steps; optional sub_procedures; --lead-checklist-skip-sub omits subs
+    - criterion: Optional inclusive main-step bounds by checklist step id (YAML order); missing lower or upper means unbounded on that side; subs unchanged by bounds
+    - criterion: TDD YAML requires steps array; each step formatted per Ruby template
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-GOAGENT-YAML-STEPS"
+      - ARCH-GOAGENT-YAML-STEPS
     code_annotations:
-      - "REQ-GOAGENT-YAML-STEP-RENDER"
+      - REQ-GOAGENT-YAML-STEP-RENDER
     implementation:
-      - "IMPL-GOAGENT-CHECKLIST"
-      - "IMPL-GOAGENT-TDDLOOP"
+      - IMPL-GOAGENT-CHECKLIST
+      - IMPL-GOAGENT-TDDLOOP
     tests:
-      - "checklist_test.go"
+      - checklist_test.go
   validation_criteria:
-    - coverage: "sample YAML under docs/"
-      method: "Manual fixture comparison"
-    - coverage: "tools/agentstream/checklist/checklist_test.go"
-      method: "Unit tests"
+    - coverage: sample YAML under docs/
+      method: Manual fixture comparison
+    - coverage: tools/agentstream/checklist/checklist_test.go
+      method: Unit tests
 REQ-LEAP_PROPOSAL_QUEUE:
-  category: "Functional"
-  detail_file: "requirements/REQ-LEAP_PROPOSAL_QUEUE.yaml"
+  category: Functional
+  detail_file: requirements/REQ-LEAP_PROPOSAL_QUEUE.yaml
   metadata:
     created:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-03-26T00:00:00.000Z"
     last_updated:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-03-28T00:00:00.000Z"
-      reason: "sync-tied-stack [PROC-AGENT_REQ_CHECKLIST] TIED sync — traceability.tests include leap-proposal-mcp.test.ts"
+      reason: sync-tied-stack [PROC-AGENT_REQ_CHECKLIST] TIED sync — traceability.tests include leap-proposal-mcp.test.ts
     last_validated:
       date: "2026-03-26T00:00:00.000Z"
-      result: "pass"
-      validator: "AI Agent"
-  name: "Optional LEAP proposal queue with human review"
-  priority: "P1"
+      result: pass
+      validator: AI Agent
+  name: Optional LEAP proposal queue with human review
+  priority: P1
   rationale:
     benefits:
-      - "Clear separation between proposals and canonical TIED records"
-      - "Deterministic extraction path (no API keys required for built-in diff/session import)"
-      - "Stable proposal ids and audit trail under leap-proposals/ without polluting tied/ until LEAP is applied via MCP"
+      - Clear separation between proposals and canonical TIED records
+      - Deterministic extraction path (no API keys required for built-in diff/session import)
+      - Stable proposal ids and audit trail under leap-proposals/ without polluting tied/ until LEAP is applied via MCP
     problems_solved:
-      - "No structured place for non-authoritative LEAP suggestions outside canonical REQ/ARCH/IMPL"
-      - "Risk of silent or automatic TIED updates without human or explicit agent approval"
-    why: "Teams need an optional, non-canonical queue for inferred documentation hints (diff/session) with explicit approve/reject before any project TIED YAML changes, mirroring Plumb-style review without requiring LLM or automatic promotion."
+      - No structured place for non-authoritative LEAP suggestions outside canonical REQ/ARCH/IMPL
+      - Risk of silent or automatic TIED updates without human or explicit agent approval
+    why: Teams need an optional, non-canonical queue for inferred documentation hints (diff/session) with explicit approve/reject before any project TIED YAML changes, mirroring Plumb-style review without requiring LLM or automatic promotion.
   related_requirements:
     depends_on:
-      - "REQ-TIED_SETUP"
+      - REQ-TIED_SETUP
     related_to:
-      - "REQ-FEEDBACK_TO_TIED"
+      - REQ-FEEDBACK_TO_TIED
     supersedes: []
   satisfaction_criteria:
-    - criterion: "Diff and session import require explicit_opt_in"
-      metric: "explicit_opt_in false returns error and creates no proposals"
-    - criterion: "MCP tools list, add, reject, approve, mark applied, update pending, and snapshot the proposal queue without writing project TIED YAML"
-      metric: "tied_leap_proposal_* handlers persist only under leap-proposals/"
-    - criterion: "Reject records status in queue and audit only"
-      metric: "reject does not modify tied/*.yaml"
-    - criterion: "Unit tests cover queue persistence and lifecycle"
-      metric: "leap-proposal-queue.test.ts passes in mcp-server"
-  status: "Implemented"
+    - criterion: Diff and session import require explicit_opt_in
+      metric: explicit_opt_in false returns error and creates no proposals
+    - criterion: MCP tools list, add, reject, approve, mark applied, update pending, and snapshot the proposal queue without writing project TIED YAML
+      metric: tied_leap_proposal_* handlers persist only under leap-proposals/
+    - criterion: Reject records status in queue and audit only
+      metric: reject does not modify tied/*.yaml
+    - criterion: Unit tests cover queue persistence and lifecycle
+      metric: leap-proposal-queue.test.ts passes in mcp-server
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-LEAP_PROPOSAL_QUEUE"
+      - ARCH-LEAP_PROPOSAL_QUEUE
     code_annotations:
-      - "IMPL-MCP_LEAP_PROPOSAL_QUEUE"
-      - "REQ-LEAP_PROPOSAL_QUEUE"
+      - IMPL-MCP_LEAP_PROPOSAL_QUEUE
+      - REQ-LEAP_PROPOSAL_QUEUE
     implementation:
-      - "IMPL-MCP_LEAP_PROPOSAL_QUEUE"
+      - IMPL-MCP_LEAP_PROPOSAL_QUEUE
     tests:
-      - "leap-proposal-mcp.test.ts"
-      - "leap-proposal-queue.test.ts"
+      - leap-proposal-mcp.test.ts
+      - leap-proposal-queue.test.ts
   validation_criteria:
-    - coverage: "Tools callable from tied-yaml MCP server"
-      method: "Manual or MCP client"
-    - coverage: "leap-proposal-queue module and schema strings"
-      method: "Unit tests"
+    - coverage: Tools callable from tied-yaml MCP server
+      method: Manual or MCP client
+    - coverage: leap-proposal-queue module and schema strings
+      method: Unit tests
 REQ-MCP_USAGE_METRICS:
-  category: "Functional"
-  detail_file: "requirements/REQ-MCP_USAGE_METRICS.yaml"
+  category: Functional
+  detail_file: requirements/REQ-MCP_USAGE_METRICS.yaml
   metadata:
     created:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-06-25T00:00:00.000Z"
     last_updated:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-08-23"
-      reason: "Add bounded signature coverage and aggregate schema-error acceptance criteria for deferred-stats Phase 2"
+      reason: Add bounded signature coverage and aggregate schema-error acceptance criteria for deferred-stats Phase 2
     last_validated:
       date: "2026-06-25T00:00:00.000Z"
-      result: "pass"
-      validator: "AI Agent"
-  name: "Opt-in local MCP tool usage metrics"
-  priority: "P2"
+      result: pass
+      validator: AI Agent
+  name: Opt-in local MCP tool usage metrics
+  priority: P2
   rationale:
     benefits:
-      - "Frequency and latency stats per tool and client surface (IDE MCP vs tied-cli)"
-      - "Offline analysis informs MCP/API improvements and tied_feedback_add reports"
-      - "Sanitized arg summaries reveal common call patterns without logging full payloads"
+      - Frequency and latency stats per tool and client surface (IDE MCP vs tied-cli)
+      - Offline analysis informs MCP/API improvements and tied_feedback_add reports
+      - Sanitized arg summaries reveal common call patterns without logging full payloads
     problems_solved:
-      - "No visibility into how agents use TIED YAML MCP tools in practice"
-      - "tied-cli and headless runs are invisible to Cursor hook logs"
-    why: "Teams need optional, local-first instrumentation to learn which MCP tools are used, how often, and with what intent—without enabling collection by default or exporting data off-machine."
+      - No visibility into how agents use TIED YAML MCP tools in practice
+      - tied-cli and headless runs are invisible to Cursor hook logs
+    why: Teams need optional, local-first instrumentation to learn which MCP tools are used, how often, and with what intent—without enabling collection by default or exporting data off-machine.
   related_requirements:
     depends_on:
-      - "REQ-TIED_SETUP"
+      - REQ-TIED_SETUP
     related_to:
-      - "REQ-FEEDBACK_TO_TIED"
+      - REQ-FEEDBACK_TO_TIED
     supersedes: []
   satisfaction_criteria:
-    - criterion: "Aggregate output must not report schema_errors=0 when any accepted input report contains a schema error"
-      metric: "analyze_tied_mcp_metrics_test.rb negative multi-file schema-error fixture"
-    - criterion: "Aggregate schema_errors equals the sum of schema_errors from every input report while parse_errors remain separately accounted"
-      metric: "analyze_tied_mcp_metrics_test.rb asserts two files with one schema error each produce aggregate schema_errors=2"
-    - criterion: "Bootstrap seeds metrics environment fields only for an absent .cursor/mcp.json when TIED_MCP_COLLECT_METRICS is exactly 1"
-      metric: "bootstrap-and-load.test.ts verifies basename and explicit client labels, non-1 opt-in behavior, and existing configuration preservation"
-    - criterion: "Env vars and JSONL path documented in tied/vocab/tied-yaml-mcp.md"
-    - criterion: "Every MCP tools/call records tool name, client, duration, ok, sanitized args"
-      metric: "usage-metrics.test.ts passes; large essence_pseudocode omitted from args_summary"
-    - criterion: "Metrics collection is off unless TIED_MCP_COLLECT_METRICS is set locally"
-      metric: "No JSONL append when env unset; append when set to 1 or true"
-    - criterion: "Offline aggregator reports tool counts, failures, and top arg signatures"
-      metric: "analyze_tied_mcp_metrics_test.rb passes"
-    - criterion: "Offline reports expose deterministic SIGNATURE_BOUND=50 signature_coverage as exact_within_bound when a file has 0 or 50 distinct signatures and an aggregate visible candidate union is at most 50 with every input exact"
-      metric: "analyze_tied_mcp_metrics_test.rb asserts positive 0/50 per-file boundaries and exact aggregate coverage"
-    - criterion: "Offline reports expose signature_coverage as approximate when a file has 51 distinct signatures, visible aggregate candidates exceed 50, or any per-file input was already approximate; aggregate rows must not claim hidden candidates are globally ranked"
-      metric: "analyze_tied_mcp_metrics_test.rb asserts negative 51-signature, visible-overflow, per-file-truncation, and reversed-input-order cases including deterministic sample selection"
-    - criterion: "tied-cli tags client as tied-cli when metrics enabled"
-      metric: "tied-cli.sh exports TIED_MCP_METRICS_CLIENT=tied-cli"
-  status: "Implemented"
+    - criterion: Aggregate output must not report schema_errors=0 when any accepted input report contains a schema error
+      metric: analyze_tied_mcp_metrics_test.rb negative multi-file schema-error fixture
+    - criterion: Aggregate schema_errors equals the sum of schema_errors from every input report while parse_errors remain separately accounted
+      metric: analyze_tied_mcp_metrics_test.rb asserts two files with one schema error each produce aggregate schema_errors=2
+    - criterion: Bootstrap seeds metrics environment fields only for an absent .cursor/mcp.json when TIED_MCP_COLLECT_METRICS is exactly 1
+      metric: bootstrap-and-load.test.ts verifies basename and explicit client labels, non-1 opt-in behavior, and existing configuration preservation
+    - criterion: Env vars and JSONL path documented in tied/vocab/tied-yaml-mcp.md
+    - criterion: Every MCP tools/call records tool name, client, duration, ok, sanitized args
+      metric: usage-metrics.test.ts passes; large essence_pseudocode omitted from args_summary
+    - criterion: Metrics collection is off unless TIED_MCP_COLLECT_METRICS is set locally
+      metric: No JSONL append when env unset; append when set to 1 or true
+    - criterion: Offline aggregator reports tool counts, failures, and top arg signatures
+      metric: analyze_tied_mcp_metrics_test.rb passes
+    - criterion: Offline reports expose deterministic SIGNATURE_BOUND=50 signature_coverage as exact_within_bound when a file has 0 or 50 distinct signatures and an aggregate visible candidate union is at most 50 with every input exact
+      metric: analyze_tied_mcp_metrics_test.rb asserts positive 0/50 per-file boundaries and exact aggregate coverage
+    - criterion: Offline reports expose signature_coverage as approximate when a file has 51 distinct signatures, visible aggregate candidates exceed 50, or any per-file input was already approximate; aggregate rows must not claim hidden candidates are globally ranked
+      metric: analyze_tied_mcp_metrics_test.rb asserts negative 51-signature, visible-overflow, per-file-truncation, and reversed-input-order cases including deterministic sample selection
+    - criterion: tied-cli tags client as tied-cli when metrics enabled
+      metric: tied-cli.sh exports TIED_MCP_METRICS_CLIENT=tied-cli
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-MCP_USAGE_METRICS"
+      - ARCH-MCP_USAGE_METRICS
     code_annotations:
-      - "ARCH-MCP_USAGE_METRICS"
-      - "IMPL-MCP_USAGE_METRICS"
-      - "REQ-MCP_USAGE_METRICS"
+      - ARCH-MCP_USAGE_METRICS
+      - IMPL-MCP_USAGE_METRICS
+      - REQ-MCP_USAGE_METRICS
     implementation:
-      - "IMPL-MCP_USAGE_METRICS"
+      - IMPL-MCP_USAGE_METRICS
     tests:
-      - "analyze_tied_mcp_metrics_test.rb"
-      - "usage-metrics.test.ts"
+      - analyze_tied_mcp_metrics_test.rb
+      - usage-metrics.test.ts
   validation_criteria:
-    - coverage: "analyze_tied_mcp_metrics.rb fixture aggregation"
-      method: "Ruby smoke test"
-    - coverage: "usage-metrics module and wrapToolHandler"
-      method: "Unit tests"
+    - coverage: analyze_tied_mcp_metrics.rb fixture aggregation
+      method: Ruby smoke test
+    - coverage: usage-metrics module and wrapToolHandler
+      method: Unit tests
 REQ-MODULE_VALIDATION:
-  category: "Functional"
-  detail_file: "requirements/REQ-MODULE_VALIDATION.yaml"
+  category: Functional
+  detail_file: requirements/REQ-MODULE_VALIDATION.yaml
   metadata:
     created:
-      author: "AI Agent"
+      author: AI Agent
       date: "2025-01-27T00:00:00.000Z"
     last_updated:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-02-06T00:00:00.000Z"
-      reason: "Restructured to v1.5.0 schema with machine-parseable fields"
+      reason: Restructured to v1.5.0 schema with machine-parseable fields
     last_validated:
       date: "2026-02-06T00:00:00.000Z"
-      result: "pass"
-      validator: "AI Agent"
-  name: "Independent Module Validation Before Integration"
-  priority: "P0"
+      result: pass
+      validator: AI Agent
+  name: Independent Module Validation Before Integration
+  priority: P0
   rationale:
     benefits:
-      - "Bugs caught early before integration"
-      - "Clear module boundaries and contracts"
-      - "Easier debugging by isolating issues to specific modules"
-      - "Reduced integration complexity"
+      - Bugs caught early before integration
+      - Clear module boundaries and contracts
+      - Easier debugging by isolating issues to specific modules
+      - Reduced integration complexity
     problems_solved:
-      - "Bugs discovered too late in the development cycle"
-      - "Integration complexity causing difficult-to-debug issues"
-      - "Module contracts not properly validated before integration"
-    why: "To eliminate bugs related to code complexity by ensuring each module works correctly in isolation before combining with other modules"
+      - Bugs discovered too late in the development cycle
+      - Integration complexity causing difficult-to-debug issues
+      - Module contracts not properly validated before integration
+    why: To eliminate bugs related to code complexity by ensuring each module works correctly in isolation before combining with other modules
   related_requirements:
     depends_on:
-      - "REQ-TIED_SETUP"
+      - REQ-TIED_SETUP
     related_to: []
     supersedes: []
   satisfaction_criteria:
-    - criterion: "All logical modules identified and documented with clear boundaries before development"
-    - criterion: "Each module developed independently"
-    - criterion: "Each module passes independent validation before integration"
-      metric: "Unit tests with mocks, integration tests with test doubles, contract validation, edge case testing, error handling validation all passing"
-    - criterion: "Integration only occurs after module validation passes"
-    - criterion: "Integration tasks separate from module development tasks"
-    - criterion: "Minimize code measurable only from outside testing (E2E/manual); every IMPL has test strategy (unit/integration or E2E/glue-only with documented reason)"
-    - criterion: "Module interfaces and contracts defined and documented"
-    - criterion: "Module validation criteria specified for each module"
-      metric: "What 'validated' means is explicitly defined"
-    - criterion: "Module validation results documented"
-    - criterion: "No non-trivial logic in entry points unless documented as glue with reason"
-  status: "Implemented"
+    - criterion: All logical modules identified and documented with clear boundaries before development
+    - criterion: Each module developed independently
+    - criterion: Each module passes independent validation before integration
+      metric: Unit tests with mocks, integration tests with test doubles, contract validation, edge case testing, error handling validation all passing
+    - criterion: Integration only occurs after module validation passes
+    - criterion: Integration tasks separate from module development tasks
+    - criterion: Minimize code measurable only from outside testing (E2E/manual); every IMPL has test strategy (unit/integration or E2E/glue-only with documented reason)
+    - criterion: Module interfaces and contracts defined and documented
+    - criterion: Module validation criteria specified for each module
+      metric: What 'validated' means is explicitly defined
+    - criterion: Module validation results documented
+    - criterion: No non-trivial logic in entry points unless documented as glue with reason
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-MODULE_VALIDATION"
+      - ARCH-MODULE_VALIDATION
     code_annotations:
-      - "IMPL-MODULE_VALIDATION"
-      - "REQ-MODULE_VALIDATION"
+      - IMPL-MODULE_VALIDATION
+      - REQ-MODULE_VALIDATION
     implementation:
-      - "IMPL-MODULE_VALIDATION"
+      - IMPL-MODULE_VALIDATION
     tests:
-      - "testModuleName_IndependentValidation_REQ_MODULE_VALIDATION"
+      - testModuleName_IndependentValidation_REQ_MODULE_VALIDATION
   validation_criteria:
-    - coverage: "Module validation tests exist and pass before integration"
-      method: "Automated testing"
-    - coverage: "Integration code references validated modules"
-      method: "Code review"
-    - coverage: "IMPL traceability.tests or test_coverage_note (E2E-only with reason) for every Active IMPL"
-      method: "Coverage gates and gap report"
-    - coverage: "Module validation results are documented"
-      method: "Documentation review"
-    - coverage: "Integration tests validate combined behavior of validated modules"
-      method: "Integration testing"
-    - coverage: "Modules identified and documented before development starts"
-      method: "Manual verification"
+    - coverage: Module validation tests exist and pass before integration
+      method: Automated testing
+    - coverage: Integration code references validated modules
+      method: Code review
+    - coverage: IMPL traceability.tests or test_coverage_note (E2E-only with reason) for every Active IMPL
+      method: Coverage gates and gap report
+    - coverage: Module validation results are documented
+      method: Documentation review
+    - coverage: Integration tests validate combined behavior of validated modules
+      method: Integration testing
+    - coverage: Modules identified and documented before development starts
+      method: Manual verification
 REQ-PROMPT_TYPE_GLOBAL_SKILLS:
-  category: "Tooling"
+  category: Tooling
   cross_references:
-    - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
-    - "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
-    - "REQ-TIED_SETUP"
-  description: "The TIED methodology repository shall provide a versioned prompt-type skill bundle that can be installed into TIED client projects for consistent ongoing development workflows."
-  detail_file: "requirements/REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml"
+    - ARCH-PROMPT_TYPE_GLOBAL_SKILLS
+    - IMPL-PROMPT_TYPE_GLOBAL_SKILLS
+    - REQ-TIED_SETUP
+  description: The TIED methodology repository shall provide a versioned prompt-type skill bundle that can be installed into TIED client projects for consistent ongoing development workflows.
+  detail_file: requirements/REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml
   metadata:
     created:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-08-12"
     last_updated:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-08-13"
-      reason: "Replace triple-colon payload delimiter with invocation remainder and linked plan"
-  name: "Global Prompt-Type Skills"
-  priority: "P1"
-  status: "Implemented"
+      reason: Replace triple-colon payload delimiter with invocation remainder and linked plan
+  name: Global Prompt-Type Skills
+  priority: P1
+  status: Implemented
 REQ-PROMPT_TYPE_SUBAGENT:
-  category: "Tooling"
-  description: "TIED-source Cursor custom subagents provide an explicit-only foreground Task wrapper for each of the 13 leaf prompt types, plus a plan-refine-build sequence orchestrator. Client projects receive skills via copy_files.sh, not Task wrappers."
-  detail_file: "requirements/REQ-PROMPT_TYPE_SUBAGENT.yaml"
+  category: Tooling
+  description: TIED-source Cursor custom subagents provide an explicit-only foreground Task wrapper for each of the 13 leaf prompt types, plus a plan-refine-build sequence orchestrator. Client projects receive skills via copy_files.sh, not Task wrappers.
+  detail_file: requirements/REQ-PROMPT_TYPE_SUBAGENT.yaml
   metadata:
     created:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-08-12"
     last_updated:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-08-13"
-      reason: "Replace triple-colon payload delimiter with invocation remainder and linked plan"
-  name: "Prompt-Type Subagents"
-  priority: "P1"
+      reason: Replace triple-colon payload delimiter with invocation remainder and linked plan
+  name: Prompt-Type Subagents
+  priority: P1
   related_requirements:
     depends_on:
-      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
-      - "REQ-TIED_SETUP"
+      - REQ-PROMPT_TYPE_GLOBAL_SKILLS
+      - REQ-TIED_SETUP
     related_to: []
     supersedes: []
-  status: "Implemented"
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-PROMPT_TYPE_SUBAGENT"
+      - ARCH-PROMPT_TYPE_SUBAGENT
     code_annotations:
-      - "ARCH-PROMPT_TYPE_SUBAGENT"
-      - "IMPL-PROMPT_TYPE_SUBAGENT"
-      - "REQ-PROMPT_TYPE_SUBAGENT"
+      - ARCH-PROMPT_TYPE_SUBAGENT
+      - IMPL-PROMPT_TYPE_SUBAGENT
+      - REQ-PROMPT_TYPE_SUBAGENT
     implementation:
-      - "IMPL-PROMPT_TYPE_SUBAGENT"
+      - IMPL-PROMPT_TYPE_SUBAGENT
     tests:
-      - "mcp-server/src/e2e/prompt-type-subagent.test.ts"
+      - mcp-server/src/e2e/prompt-type-subagent.test.ts
   validation_criteria:
-    - coverage: "Frontmatter and activation policy"
-      method: "Static contract test"
-    - coverage: "Workflow gates and parent return contract"
-      method: "Static contract test"
-    - coverage: "TIED traceability"
-      method: "tied_validate_consistency"
+    - coverage: Frontmatter and activation policy
+      method: Static contract test
+    - coverage: Workflow gates and parent return contract
+      method: Static contract test
+    - coverage: TIED traceability
+      method: tied_validate_consistency
 REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE:
-  description: "Opt-in full constraint-language and grammar v2 for pseudo-code static analysis. Composes after typed-flow. Includes refinements, interprocedural summaries, alias/mutation policy, fixed-point solver with budget disclosure, grammar v2 with v1 migration boundary, sections.constraint_language on report v1, 40+ corpus fixtures, and qualification with F11 authoring burden gate before production constraint gate errors."
-  detail_file: "requirements/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE.yaml"
-  status: "Complete"
+  description: Opt-in full constraint-language and grammar v2 for pseudo-code static analysis. Composes after typed-flow. Includes refinements, interprocedural summaries, alias/mutation policy, fixed-point solver with budget disclosure, grammar v2 with v1 migration boundary, sections.constraint_language on report v1, 40+ corpus fixtures, and qualification with F11 authoring burden gate before production constraint gate errors.
+  detail_file: requirements/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE.yaml
+  status: Complete
 REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION:
-  category: "Functional"
-  description: "Every TIED client repository SHALL migrate through controlled, evidence-backed phases until fleet-migrated-client or a time-bounded migration waiver. Phase 1 establishes product contract, governance schemas, and gate promotion policy. Phase 2 establishes analyzer and template readiness at G1 advisory without fleet sidecar migration or blocking constraint_flow CI."
-  detail_file: "requirements/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml"
-  name: "Fleet constraint-language v2 migration program"
-  priority: "P1"
-  status: "Implemented"
+  category: Functional
+  description: Every TIED client repository SHALL migrate through controlled, evidence-backed phases until fleet-migrated-client or a time-bounded migration waiver. Phase 1 establishes product contract, governance schemas, and gate promotion policy. Phase 2 establishes analyzer and template readiness at G1 advisory without fleet sidecar migration or blocking constraint_flow CI.
+  detail_file: requirements/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml
+  name: Fleet constraint-language v2 migration program
+  priority: P1
+  status: Implemented
 REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE:
-  category: "Functional"
+  category: Functional
   cross_references:
     architecture:
-      - "ARCH-PSEUDOCODE_FLEET_G4_MAINTENANCE"
-      - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+      - ARCH-PSEUDOCODE_FLEET_G4_MAINTENANCE
+      - ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE
     implementation:
-      - "IMPL-FLEET_G4_MAINTENANCE"
+      - IMPL-FLEET_G4_MAINTENANCE
     requirements:
-      - "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
-      - "REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
-  detail_file: "requirements/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE.yaml"
-  name: "Fleet G4 continuous maintenance"
-  priority: "P2"
-  status: "Implemented"
+      - REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION
+      - REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT
+  detail_file: requirements/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE.yaml
+  name: Fleet G4 continuous maintenance
+  priority: P2
+  status: Implemented
 REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO:
-  category: "Functional"
-  description: "Methodology-side close-out for NB-1 wave-1 (five not_enrolled clients). Parent orchestrator REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION remains closed."
-  detail_file: "requirements/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO.yaml"
-  name: "Fleet NB-1 Track B tranche zero (program close-out)"
-  priority: "P1"
+  category: Functional
+  description: Methodology-side close-out for NB-1 wave-1 (five not_enrolled clients). Parent orchestrator REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION remains closed.
+  detail_file: requirements/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO.yaml
+  name: Fleet NB-1 Track B tranche zero (program close-out)
+  priority: P1
   related_requirements:
     depends_on:
-      - "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
+      - REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION
     related_to: []
     supersedes: []
-  status: "Implemented"
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+      - ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE
     implementation:
-      - "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION"
+      - IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION
 REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE:
-  category: "Functional"
-  description: "NB-2 tranche one program batch: sponsor od-nb2-acceptance, up to five remaining not_enrolled clients, G3 receipts, manifest rollup. Parent orchestrator REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION remains closed."
-  detail_file: "requirements/REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE.yaml"
-  name: "Fleet NB-2 Track B tranche one (program batch)"
-  priority: "P1"
+  category: Functional
+  description: 'NB-2 tranche one program batch: sponsor od-nb2-acceptance, up to five remaining not_enrolled clients, G3 receipts, manifest rollup. Parent orchestrator REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION remains closed.'
+  detail_file: requirements/REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE.yaml
+  name: Fleet NB-2 Track B tranche one (program batch)
+  priority: P1
   related_requirements:
     depends_on:
-      - "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
-      - "REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO"
+      - REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION
+      - REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO
     related_to: []
     supersedes: []
-  status: "Implemented"
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+      - ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE
     implementation:
-      - "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION"
+      - IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION
 REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO:
-  category: "Functional"
-  description: "NB-3 tranche two program batch: sponsor od-nb3-acceptance, up to five remaining not_enrolled header-only-v2 clients, G3 receipts, manifest rollup. Parent orchestrator REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION remains closed."
-  detail_file: "requirements/REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO.yaml"
-  name: "Fleet NB-3 Track B tranche two (program batch)"
-  priority: "P1"
+  category: Functional
+  description: 'NB-3 tranche two program batch: sponsor od-nb3-acceptance, up to five remaining not_enrolled header-only-v2 clients, G3 receipts, manifest rollup. Parent orchestrator REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION remains closed.'
+  detail_file: requirements/REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO.yaml
+  name: Fleet NB-3 Track B tranche two (program batch)
+  priority: P1
   related_requirements:
     depends_on:
-      - "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
-      - "REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE"
+      - REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION
+      - REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE
     related_to: []
     supersedes: []
-  status: "Implemented"
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+      - ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE
     implementation:
-      - "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION"
+      - IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION
 REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL:
-  category: "Functional"
-  description: "NB-4 final tranche program batch: od-nb4-acceptance, remaining header-only-v2 not_enrolled clients, G3 receipts, honest manifest rollup and Track B exit after NB-3 tranche two complete."
-  detail_file: "requirements/REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL.yaml"
-  name: "Fleet NB-4 Track B final tranche (program batch)"
-  priority: "P1"
+  category: Functional
+  description: 'NB-4 final tranche program batch: od-nb4-acceptance, remaining header-only-v2 not_enrolled clients, G3 receipts, honest manifest rollup and Track B exit after NB-3 tranche two complete.'
+  detail_file: requirements/REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL.yaml
+  name: Fleet NB-4 Track B final tranche (program batch)
+  priority: P1
   related_requirements:
     depends_on:
-      - "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
-      - "REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO"
+      - REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION
+      - REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO
     related_to: []
     supersedes: []
-  status: "Implemented"
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
+      - ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE
     implementation:
-      - "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION"
+      - IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION
 REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT:
-  category: "Functional"
-  description: "New TIED client projects SHALL generate new IMPL pseudo-code sidecars with Grammar-Version: v2 while preserving v1 parsing compatibility for existing sidecars and legacy clients."
-  detail_file: "requirements/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml"
-  name: "Default grammar v2 headers for new TIED sidecars"
-  priority: "P1"
-  status: "Implemented"
+  category: Functional
+  description: 'New TIED client projects SHALL generate new IMPL pseudo-code sidecars with Grammar-Version: v2 while preserving v1 parsing compatibility for existing sidecars and legacy clients.'
+  detail_file: requirements/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml
+  name: Default grammar v2 headers for new TIED sidecars
+  priority: P1
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+      - ARCH-PSEUDOCODE_GRAMMAR_V2_DEFAULT
     code_annotations:
-      - "REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+      - REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT
     implementation:
-      - "IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
+      - IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT
     tests:
-      - "mcp-server/src/analysis/pseudocode-grammar-v2-default.test.ts"
-      - "scripts/audit-grammar-v2-default.mjs"
+      - mcp-server/src/analysis/pseudocode-grammar-v2-default.test.ts
+      - scripts/audit-grammar-v2-default.mjs
 REQ-PSEUDOCODE_MIGRATION_TOOLING:
-  category: "Functional"
-  description: "Pilot and fleet migration workflow tooling: inventory scan, dry-run, G2 receipt emit, and revert for constraint-language v2 sidecar migration."
-  detail_file: "requirements/REQ-PSEUDOCODE_MIGRATION_TOOLING.yaml"
-  name: "Pseudocode migration tooling"
-  priority: "P1"
-  status: "Planned"
+  category: Functional
+  description: 'Pilot and fleet migration workflow tooling: inventory scan, dry-run, G2 receipt emit, and revert for constraint-language v2 sidecar migration.'
+  detail_file: requirements/REQ-PSEUDOCODE_MIGRATION_TOOLING.yaml
+  name: Pseudocode migration tooling
+  priority: P1
+  status: Planned
 REQ-PSEUDOCODE_PARSER_UNIFICATION:
-  category: "Functional"
-  description: "Extract shared token, procedure-range, and contract-field parsing primitives so Layer B validator and analysis parser cannot drift."
-  detail_file: "requirements/REQ-PSEUDOCODE_PARSER_UNIFICATION.yaml"
-  name: "Unify pseudo-code parser primitives across validator and analyzer"
-  priority: "P1"
+  category: Functional
+  description: Extract shared token, procedure-range, and contract-field parsing primitives so Layer B validator and analysis parser cannot drift.
+  detail_file: requirements/REQ-PSEUDOCODE_PARSER_UNIFICATION.yaml
+  name: Unify pseudo-code parser primitives across validator and analyzer
+  priority: P1
   related_requirements:
     depends_on:
-      - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
-      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+      - REQ-PSEUDOCODE_STATIC_ANALYSIS
+      - REQ-QUALITY_ASSURANCE_EVIDENCE
     related_to:
-      - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+      - REQ-PSEUDOCODE_STATIC_ANALYSIS
   satisfaction_criteria:
-    - criterion: "layer-b-pseudocode-validator.v1 golden output unchanged"
-      metric: "pseudocode-validator.test.ts and quality-validation-mcp.test.ts pass without snapshot changes"
-    - criterion: "No circular dependency between parser, validator, and shared module"
-      metric: "shared imports neither parser nor validator"
-    - criterion: "Shared module owns duplicated regex and scan logic"
-      metric: "pseudocode-shared.ts is the only owner of token/procedure/contract primitives"
-  status: "Implemented"
+    - criterion: layer-b-pseudocode-validator.v1 golden output unchanged
+      metric: pseudocode-validator.test.ts and quality-validation-mcp.test.ts pass without snapshot changes
+    - criterion: No circular dependency between parser, validator, and shared module
+      metric: shared imports neither parser nor validator
+    - criterion: Shared module owns duplicated regex and scan logic
+      metric: pseudocode-shared.ts is the only owner of token/procedure/contract primitives
+  status: Implemented
 REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP:
-  category: "Functional"
-  description: "All procedure block-lead comments in IMPL pseudo-code sidecars SHALL appear inside procedure bodies for author clarity and literal-copy alignment."
-  detail_file: "requirements/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP.yaml"
-  name: "Internal block-lead placement for IMPL sidecars"
-  priority: "P2"
+  category: Functional
+  description: All procedure block-lead comments in IMPL pseudo-code sidecars SHALL appear inside procedure bodies for author clarity and literal-copy alignment.
+  detail_file: requirements/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP.yaml
+  name: Internal block-lead placement for IMPL sidecars
+  priority: P2
   rationale:
     benefits:
-      - "Author-visible token linkage on every procedure"
-      - "Consistent three-way alignment between sidecar, tests, and code"
-      - "Zero leak-risk inventory after phased sweep"
+      - Author-visible token linkage on every procedure
+      - Consistent three-way alignment between sidecar, tests, and code
+      - Zero leak-risk inventory after phased sweep
     problems_solved:
-      - "External pre-procedure block-leads are invisible to naive block scanners"
-      - "Inter-procedure block-leads attach to the wrong procedure body"
-      - "Layer B close-out convention requires internal placement for literal-copy"
-    why: "External and inter-procedure block-leads hide token linkage from authors and break three-way alignment even when Track C validator hardening accepts them."
+      - External pre-procedure block-leads are invisible to naive block scanners
+      - Inter-procedure block-leads attach to the wrong procedure body
+      - Layer B close-out convention requires internal placement for literal-copy
+    why: External and inter-procedure block-leads hide token linkage from authors and break three-way alignment even when Track C validator hardening accepts them.
   related_requirements:
     depends_on:
-      - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
-      - "REQ-TIED_SETUP"
+      - REQ-PSEUDOCODE_STATIC_ANALYSIS
+      - REQ-TIED_SETUP
     related_to:
-      - "REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
-      - "REQ-PSEUDOCODE_PARSER_UNIFICATION"
+      - REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT
+      - REQ-PSEUDOCODE_PARSER_UNIFICATION
     supersedes: []
   satisfaction_criteria:
-    - criterion: "Authoring guidance mandates internal placement for new/changed procedures"
-      metric: "pseudocode-format-and-practices.md and template examples agree"
-    - criterion: "Every swept sidecar passes pseudocode_validate after its wave"
-      metric: "per-file Layer B green receipts per wave"
-    - criterion: "Repo audit reports zero external-only block-leads and zero inter-procedure leaks in scoped sidecars"
-      metric: "normalize-sidecar-block-leads --check inventory counts are zero after waves B1-B3"
-  status: "Implemented"
+    - criterion: Authoring guidance mandates internal placement for new/changed procedures
+      metric: pseudocode-format-and-practices.md and template examples agree
+    - criterion: Every swept sidecar passes pseudocode_validate after its wave
+      metric: per-file Layer B green receipts per wave
+    - criterion: Repo audit reports zero external-only block-leads and zero inter-procedure leaks in scoped sidecars
+      metric: normalize-sidecar-block-leads --check inventory counts are zero after waves B1-B3
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP"
+      - ARCH-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP
     code_annotations:
-      - "REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP"
+      - REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP
     implementation:
-      - "IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP"
+      - IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP
     tests:
-      - "scripts/normalize-sidecar-block-leads.test.mjs"
+      - scripts/normalize-sidecar-block-leads.test.mjs
 REQ-PSEUDOCODE_STATIC_ANALYSIS:
-  category: "Functional"
+  category: Functional
   cross_references:
-    - "ARCH-PSEUDOCODE_ANALYSIS_PIPELINE"
-    - "REQ-QUALITY_ASSURANCE_EVIDENCE"
-  detail_file: "requirements/REQ-PSEUDOCODE_STATIC_ANALYSIS.yaml"
-  name: "Contract-aware static analysis for IMPL essence_pseudocode"
-  priority: "P1"
-  status: "Implemented"
+    - ARCH-PSEUDOCODE_ANALYSIS_PIPELINE
+    - REQ-QUALITY_ASSURANCE_EVIDENCE
+  detail_file: requirements/REQ-PSEUDOCODE_STATIC_ANALYSIS.yaml
+  name: Contract-aware static analysis for IMPL essence_pseudocode
+  priority: P1
+  status: Implemented
 REQ-PSEUDOCODE_TYPED_FLOW:
-  category: "Functional"
-  detail_file: "requirements/REQ-PSEUDOCODE_TYPED_FLOW.yaml"
-  name: "Bounded optional typed-flow analysis for IMPL essence_pseudocode"
-  priority: "P1"
+  category: Functional
+  detail_file: requirements/REQ-PSEUDOCODE_TYPED_FLOW.yaml
+  name: Bounded optional typed-flow analysis for IMPL essence_pseudocode
+  priority: P1
   rationale:
     benefits:
-      - "Deterministic typed-flow section on existing report schema"
-      - "Optional Tier-2 annotations on behavioral pseudocode"
-      - "Read-only client qualification harness before production gate"
+      - Deterministic typed-flow section on existing report schema
+      - Optional Tier-2 annotations on behavioral pseudocode
+      - Read-only client qualification harness before production gate
     problems_solved:
-      - "CALL args and contract values discarded at parse time"
-      - "No measured pilot for authoring burden vs diagnostic precision"
-      - "No typed data-flow validation on annotated sidecars"
-    why: "Layer C abstract analysis treats contract values and CALL arguments as opaque; sponsors need optional Tier-2 type evidence with CFG join without breaking grammar v1 or legacy gate behavior."
+      - CALL args and contract values discarded at parse time
+      - No measured pilot for authoring burden vs diagnostic precision
+      - No typed data-flow validation on annotated sidecars
+    why: Layer C abstract analysis treats contract values and CALL arguments as opaque; sponsors need optional Tier-2 type evidence with CFG join without breaking grammar v1 or legacy gate behavior.
   related_requirements:
     depends_on:
-      - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+      - REQ-PSEUDOCODE_STATIC_ANALYSIS
     related_to:
-      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+      - REQ-QUALITY_ASSURANCE_EVIDENCE
     supersedes: []
   satisfaction_criteria:
-    - criterion: "Authoring burden and semantic preservation measured before Phase 3 gate_mode typed errors"
-      metric: "annotation study SP-1..SP-7 and F11 stop criteria"
-    - criterion: "Client qualification baseline vs pilot archived with zero new gate failures"
-      metric: "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/"
-    - criterion: "Pilot corpus cases 1-17 meet F1-F12 thresholds"
-      metric: "mcp-server/src/analysis/fixtures/typed-flow/"
-    - criterion: "typed_flow false preserves legacy parse and gate outcomes"
-      metric: "F8 regression on fixtures and qualification Tier A/B"
-    - criterion: "typed_flow true emits sections.typed_flow without schema version bump"
-      metric: "pseudocode-analysis-report.v1 snapshot tests"
-  status: "Implemented"
+    - criterion: Authoring burden and semantic preservation measured before Phase 3 gate_mode typed errors
+      metric: annotation study SP-1..SP-7 and F11 stop criteria
+    - criterion: Client qualification baseline vs pilot archived with zero new gate failures
+      metric: working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/
+    - criterion: Pilot corpus cases 1-17 meet F1-F12 thresholds
+      metric: mcp-server/src/analysis/fixtures/typed-flow/
+    - criterion: typed_flow false preserves legacy parse and gate outcomes
+      metric: F8 regression on fixtures and qualification Tier A/B
+    - criterion: typed_flow true emits sections.typed_flow without schema version bump
+      metric: pseudocode-analysis-report.v1 snapshot tests
+  status: Implemented
 REQ-QUALITY_ASSURANCE_EVIDENCE:
-  category: "Non-Functional"
+  category: Non-Functional
   cross_references:
-    - "ARCH-QUALITY_ASSURANCE_PROFILES"
-    - "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK"
-    - "IMPL-QUALITY_BINDING_INVENTORY"
-    - "IMPL-QUALITY_EVIDENCE_COLLECTION"
-    - "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER"
-    - "IMPL-QUALITY_EVIDENCE_MANIFEST"
-    - "IMPL-QUALITY_PSEUDOCODE_VALIDATOR"
-    - "IMPL-QUALITY_SECURITY_PROFILE_VALIDATION"
-    - "IMPL-QUALITY_TEST_ADEQUACY"
-  description: "Every behavior-changing change selects applicable quality attributes from a bounded risk profile and records reproducible evidence, limitations, and accepted residual risk without imposing irrelevant checks."
-  detail_file: "requirements/REQ-QUALITY_ASSURANCE_EVIDENCE.yaml"
+    - ARCH-QUALITY_ASSURANCE_PROFILES
+    - IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK
+    - IMPL-QUALITY_BINDING_INVENTORY
+    - IMPL-QUALITY_EVIDENCE_COLLECTION
+    - IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER
+    - IMPL-QUALITY_EVIDENCE_MANIFEST
+    - IMPL-QUALITY_PSEUDOCODE_VALIDATOR
+    - IMPL-QUALITY_SECURITY_PROFILE_VALIDATION
+    - IMPL-QUALITY_TEST_ADEQUACY
+  description: Every behavior-changing change selects applicable quality attributes from a bounded risk profile and records reproducible evidence, limitations, and accepted residual risk without imposing irrelevant checks.
+  detail_file: requirements/REQ-QUALITY_ASSURANCE_EVIDENCE.yaml
   metadata:
     created:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-08-02"
     last_updated:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-08-02"
-      reason: "Add risk-triggered quality evidence requirement"
-  name: "Risk-triggered quality assurance evidence"
-  priority: "P0"
+      reason: Add risk-triggered quality evidence requirement
+  name: Risk-triggered quality assurance evidence
+  priority: P0
   rationale:
     benefits:
-      - "Evidence provenance and residual-risk decisions remain auditable."
-      - "Risk-triggered quality work with explicit N/A rationale."
+      - Evidence provenance and residual-risk decisions remain auditable.
+      - Risk-triggered quality work with explicit N/A rationale.
     problems_solved:
-      - "Quality checks are currently described without a common applicability and evidence contract."
-      - "TIED consistency and marker scans can be mistaken for proof of runtime quality."
-    why: "TIED needs quality claims to be scoped, reproducible, and reviewable beyond functional traceability."
+      - Quality checks are currently described without a common applicability and evidence contract.
+      - TIED consistency and marker scans can be mistaken for proof of runtime quality.
+    why: TIED needs quality claims to be scoped, reproducible, and reviewable beyond functional traceability.
   related_requirements:
     depends_on:
-      - "REQ-MODULE_VALIDATION"
-      - "REQ-TIED_SETUP"
+      - REQ-MODULE_VALIDATION
+      - REQ-TIED_SETUP
     related_to: []
     supersedes: []
   satisfaction_criteria:
-    - criterion: "Each behavior-changing change records applicable or N/A quality attributes with rationale, evidence method, threshold, owner, and limitation."
-      metric: "Every selected quality row has a reproducible evidence reference or an owned, expiring waiver."
-    - criterion: "Evidence distinguishes TIED artifact integrity from runtime quality claims."
-      metric: "Verification output labels proof boundaries and does not claim universal correctness."
-    - criterion: "The existing IMPL-before-RED-before-code and module/composition test order remains mandatory."
-      metric: "Checklist and pilot tests preserve the existing sequence."
-  status: "Implemented"
+    - criterion: Each behavior-changing change records applicable or N/A quality attributes with rationale, evidence method, threshold, owner, and limitation.
+      metric: Every selected quality row has a reproducible evidence reference or an owned, expiring waiver.
+    - criterion: Evidence distinguishes TIED artifact integrity from runtime quality claims.
+      metric: Verification output labels proof boundaries and does not claim universal correctness.
+    - criterion: The existing IMPL-before-RED-before-code and module/composition test order remains mandatory.
+      metric: Checklist and pilot tests preserve the existing sequence.
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-QUALITY_ASSURANCE_PROFILES"
+      - ARCH-QUALITY_ASSURANCE_PROFILES
     code_annotations:
-      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+      - REQ-QUALITY_ASSURANCE_EVIDENCE
     implementation:
-      - "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK"
-      - "IMPL-QUALITY_BINDING_INVENTORY"
-      - "IMPL-QUALITY_EVIDENCE_COLLECTION"
-      - "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER"
-      - "IMPL-QUALITY_EVIDENCE_MANIFEST"
-      - "IMPL-QUALITY_PSEUDOCODE_VALIDATOR"
-      - "IMPL-QUALITY_SECURITY_PROFILE_VALIDATION"
-      - "IMPL-QUALITY_TEST_ADEQUACY"
+      - IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK
+      - IMPL-QUALITY_BINDING_INVENTORY
+      - IMPL-QUALITY_EVIDENCE_COLLECTION
+      - IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER
+      - IMPL-QUALITY_EVIDENCE_MANIFEST
+      - IMPL-QUALITY_PSEUDOCODE_VALIDATOR
+      - IMPL-QUALITY_SECURITY_PROFILE_VALIDATION
+      - IMPL-QUALITY_TEST_ADEQUACY
     tests:
-      - "mcp-server/src/analysis/binding-inventory.test.ts"
-      - "mcp-server/src/analysis/pseudocode-validator.test.ts"
-      - "mcp-server/src/analysis/traceability-gap.test.ts"
-      - "mcp-server/src/quality-adequacy.test.ts"
-      - "mcp-server/src/quality-command-runner.test.ts"
-      - "mcp-server/src/quality-evidence-collection.test.ts"
-      - "mcp-server/src/quality-evidence.test.ts"
-      - "mcp-server/src/quality-security.test.ts"
-      - "mcp-server/src/tools/quality-validation-mcp.test.ts"
-      - "pilot/webhook-inbox/test/webhook-inbox.test.mjs"
+      - mcp-server/src/analysis/binding-inventory.test.ts
+      - mcp-server/src/analysis/pseudocode-validator.test.ts
+      - mcp-server/src/analysis/traceability-gap.test.ts
+      - mcp-server/src/quality-adequacy.test.ts
+      - mcp-server/src/quality-command-runner.test.ts
+      - mcp-server/src/quality-evidence-collection.test.ts
+      - mcp-server/src/quality-evidence.test.ts
+      - mcp-server/src/quality-security.test.ts
+      - mcp-server/src/tools/quality-validation-mcp.test.ts
+      - pilot/webhook-inbox/test/webhook-inbox.test.mjs
   validation_criteria:
-    - coverage: "Applicability, risk, scenarios, abuse cases, evidence, waivers, and residual risk."
-      method: "CITDP quality evidence matrix review"
-    - coverage: "REQ to ARCH to IMPL traceability and token-commented pseudo-code."
-      method: "tied_validate_consistency"
-    - coverage: "Evidence and validator modules plus their bindings."
-      method: "Unit and composition tests"
+    - coverage: Applicability, risk, scenarios, abuse cases, evidence, waivers, and residual risk.
+      method: CITDP quality evidence matrix review
+    - coverage: REQ to ARCH to IMPL traceability and token-commented pseudo-code.
+      method: tied_validate_consistency
+    - coverage: Evidence and validator modules plus their bindings.
+      method: Unit and composition tests
 REQ-REQUEST_EVIDENCE_ENVELOPE:
-  category: "Functional"
-  description: "Every closed REQ has a valid request-evidence-envelope.v1 index wrapping producer artifacts with stable identity, typed cross-references, and explicit gaps or not-applicable receipts for batch analysis."
-  detail_file: "requirements/REQ-REQUEST_EVIDENCE_ENVELOPE.yaml"
-  name: "Request evidence envelope"
-  priority: "P1"
-  status: "Planned"
+  category: Functional
+  description: Every closed REQ has a valid request-evidence-envelope.v1 index wrapping producer artifacts with stable identity, typed cross-references, and explicit gaps or not-applicable receipts for batch analysis.
+  detail_file: requirements/REQ-REQUEST_EVIDENCE_ENVELOPE.yaml
+  name: Request evidence envelope
+  priority: P1
+  status: Planned
 REQ-TIED_ADVERSARIAL_INQUIRY:
-  category: "Functional"
-  description: "Provide bounded, read-only obligation mapping and bidirectional fidelity evidence without treating structural presence as semantic or runtime proof."
-  detail_file: "requirements/REQ-TIED_ADVERSARIAL_INQUIRY.yaml"
-  name: "Adversarial inquiry for obligation and fidelity evidence"
-  priority: "P0"
-  status: "Implemented"
+  category: Functional
+  description: Provide bounded, read-only obligation mapping and bidirectional fidelity evidence without treating structural presence as semantic or runtime proof.
+  detail_file: requirements/REQ-TIED_ADVERSARIAL_INQUIRY.yaml
+  name: Adversarial inquiry for obligation and fidelity evidence
+  priority: P0
+  status: Implemented
 REQ-TIED_ASYNC_METHODOLOGY:
-  category: "Non-Functional"
-  detail_file: "requirements/REQ-TIED_ASYNC_METHODOLOGY.yaml"
-  name: "TIED Async Methodology"
-  priority: "P1"
+  category: Non-Functional
+  detail_file: requirements/REQ-TIED_ASYNC_METHODOLOGY.yaml
+  name: TIED Async Methodology
+  priority: P1
   rationale:
     benefits:
-      - "Explicit async comprehension across stack layers"
-      - "Foundation for W2+ checklist and analyzer waves"
-      - "Traceable seven semantic classes"
+      - Explicit async comprehension across stack layers
+      - Foundation for W2+ checklist and analyzer waves
+      - Traceable seven semantic classes
     problems_solved:
-      - "No comparable async contract rows in grammar v1"
-      - "No REQ/ARCH async-first templates"
-      - "Scattered implicit async hooks"
-    why: "Async logic is first-class in real systems but second-class in TIED documentation flow."
+      - No comparable async contract rows in grammar v1
+      - No REQ/ARCH async-first templates
+      - Scattered implicit async hooks
+    why: Async logic is first-class in real systems but second-class in TIED documentation flow.
   related_requirements:
     depends_on:
-      - "REQ-TIED_SETUP"
+      - REQ-TIED_SETUP
     related_to:
-      - "REQ-ASYNC_CHECKLIST_CATALOG"
-      - "REQ-ASYNC_PSEUDOCODE_CONTRACTS"
-      - "REQ-ASYNC_REQ_ARCH_TEMPLATES"
+      - REQ-ASYNC_CHECKLIST_CATALOG
+      - REQ-ASYNC_PSEUDOCODE_CONTRACTS
+      - REQ-ASYNC_REQ_ARCH_TEMPLATES
     supersedes: []
-  status: "Implemented"
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-ASYNC_CHECKLIST_INTEGRATION"
-      - "ARCH-ASYNC_CONTRACT_GRAMMAR"
-      - "ARCH-ASYNC_REQ_ARCH_CONTRACT"
+      - ARCH-ASYNC_CHECKLIST_INTEGRATION
+      - ARCH-ASYNC_CONTRACT_GRAMMAR
+      - ARCH-ASYNC_REQ_ARCH_CONTRACT
     code_annotations:
-      - "REQ-TIED_ASYNC_METHODOLOGY"
+      - REQ-TIED_ASYNC_METHODOLOGY
     implementation:
-      - "IMPL-ASYNC_CHECKLIST_DISPOSITIONS"
-      - "IMPL-ASYNC_PSEUDOCODE_GRAMMAR"
-      - "IMPL-ASYNC_REQ_ARCH_GUIDANCE"
-      - "IMPL-ASYNC_VOCABULARY"
+      - IMPL-ASYNC_CHECKLIST_DISPOSITIONS
+      - IMPL-ASYNC_PSEUDOCODE_GRAMMAR
+      - IMPL-ASYNC_REQ_ARCH_GUIDANCE
+      - IMPL-ASYNC_VOCABULARY
     tests:
-      - "mcp-server/src/checklist-async-dispositions.test.ts"
-      - "mcp-server/src/tools/tied-async-contract-fixtures.test.ts"
+      - mcp-server/src/checklist-async-dispositions.test.ts
+      - mcp-server/src/tools/tied-async-contract-fixtures.test.ts
 REQ-TIED_BOOTSTRAP_DETAIL_INTEGRITY:
-  category: "Functional"
-  detail_file: "requirements/REQ-TIED_BOOTSTRAP_DETAIL_INTEGRITY.yaml"
-  name: "Bootstrap inherited detail-file integrity"
-  priority: "P0"
+  category: Functional
+  detail_file: requirements/REQ-TIED_BOOTSTRAP_DETAIL_INTEGRITY.yaml
+  name: Bootstrap inherited detail-file integrity
+  priority: P0
   related_requirements:
     depends_on:
-      - "REQ-TIED_SETUP"
+      - REQ-TIED_SETUP
     related_to: []
     supersedes: []
-  status: "Implemented"
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-TIED_STRUCTURE"
+      - ARCH-TIED_STRUCTURE
     implementation:
-      - "IMPL-TIED_FILES"
+      - IMPL-TIED_FILES
 REQ-TIED_CHECKLIST_GATE_ENFORCEMENT:
-  category: "Tooling"
+  category: Tooling
   cross_references:
-    - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
-    - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
-    - "PROC-AGENT_REQ_CHECKLIST"
-    - "REQ-TIED_ADVERSARIAL_INQUIRY"
-  description: "Checklist progression, verification, and close-out require machine-validated adversarial and execution evidence."
-  detail_file: "requirements/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
-  name: "Machine-enforced checklist evidence gates"
-  status: "Implemented"
+    - ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT
+    - IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT
+    - PROC-AGENT_REQ_CHECKLIST
+    - REQ-TIED_ADVERSARIAL_INQUIRY
+  description: Checklist progression, verification, and close-out require machine-validated adversarial and execution evidence.
+  detail_file: requirements/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml
+  name: Machine-enforced checklist evidence gates
+  status: Implemented
 REQ-TIED_CLAIMS_EVIDENCE_REVIEW:
-  category: "Functional"
-  description: "Read-only evaluation of a frozen claim surface with dispositions, proof boundaries, and human-gated promotion."
-  detail_file: "requirements/REQ-TIED_CLAIMS_EVIDENCE_REVIEW.yaml"
-  name: "TIED Claims and Evidence Review"
-  priority: "P1"
+  category: Functional
+  description: Read-only evaluation of a frozen claim surface with dispositions, proof boundaries, and human-gated promotion.
+  detail_file: requirements/REQ-TIED_CLAIMS_EVIDENCE_REVIEW.yaml
+  name: TIED Claims and Evidence Review
+  priority: P1
   rationale:
     benefits:
-      - "Bounded static evidence collection"
-      - "Explicit claim dispositions"
-      - "Human-gated promotion only"
+      - Bounded static evidence collection
+      - Explicit claim dispositions
+      - Human-gated promotion only
     problems_solved:
-      - "Missing evidence is mistaken for defects."
-      - "Static review is mistaken for runtime proof."
-    why: "External assertions must be reviewable without conflating claims with REQs or automatic LEAP."
+      - Missing evidence is mistaken for defects.
+      - Static review is mistaken for runtime proof.
+    why: External assertions must be reviewable without conflating claims with REQs or automatic LEAP.
   related_requirements:
     depends_on:
-      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
-      - "REQ-TIED_FIDELITY_RESEARCH"
-      - "REQ-TIED_SETUP"
+      - REQ-QUALITY_ASSURANCE_EVIDENCE
+      - REQ-TIED_FIDELITY_RESEARCH
+      - REQ-TIED_SETUP
     related_to:
-      - "REQ-EVIDENCE_CHAIN_PROFILE"
+      - REQ-EVIDENCE_CHAIN_PROFILE
     supersedes: []
   satisfaction_criteria:
-    - criterion: "Classify each claim as shown, unsettled, or not_examined with proof boundaries and gap dimensions."
-    - criterion: "Evaluate a frozen claim surface in read-only mode without mutating audited project YAML."
-    - criterion: "Persist append-only review artifacts under working scope distinct from adversarial-inquiry ledgers."
-    - criterion: "Promote only human-confirmed cases via existing fidelity case-report path."
-  status: "Active"
+    - criterion: Classify each claim as shown, unsettled, or not_examined with proof boundaries and gap dimensions.
+    - criterion: Evaluate a frozen claim surface in read-only mode without mutating audited project YAML.
+    - criterion: Persist append-only review artifacts under working scope distinct from adversarial-inquiry ledgers.
+    - criterion: Promote only human-confirmed cases via existing fidelity case-report path.
+  status: Active
   traceability:
     architecture:
-      - "ARCH-TIED_CLAIMS_EVIDENCE_REVIEW"
+      - ARCH-TIED_CLAIMS_EVIDENCE_REVIEW
     code_annotations:
-      - "REQ-TIED_CLAIMS_EVIDENCE_REVIEW"
+      - REQ-TIED_CLAIMS_EVIDENCE_REVIEW
     implementation:
-      - "IMPL-TIED_CLAIMS_EVIDENCE_REVIEW"
+      - IMPL-TIED_CLAIMS_EVIDENCE_REVIEW
     tests:
-      - "mcp-server/src/claims-evidence-review/*.test.ts"
+      - mcp-server/src/claims-evidence-review/*.test.ts
   validation_criteria:
-    - coverage: "MCP tool and pilot orchestration on tied-generated fixture."
-      method: "Composition tests"
-    - coverage: "Schema, freeze boundary, classification, ledger append-only semantics."
-      method: "Unit tests"
+    - coverage: MCP tool and pilot orchestration on tied-generated fixture.
+      method: Composition tests
+    - coverage: Schema, freeze boundary, classification, ledger append-only semantics.
+      method: Unit tests
 REQ-TIED_FIDELITY_RESEARCH:
-  category: "Functional"
-  detail_file: "requirements/REQ-TIED_FIDELITY_RESEARCH.yaml"
+  category: Functional
+  detail_file: requirements/REQ-TIED_FIDELITY_RESEARCH.yaml
   metadata:
     last_updated: "2026-08-09"
-  name: "TIED Fidelity Research"
-  priority: "P1"
+  name: TIED Fidelity Research
+  priority: P1
   rationale:
     benefits:
-      - "Read-only defect-origin analysis"
-      - "Reproducible evidence and provenance"
-      - "Separate research findings from remediation"
+      - Read-only defect-origin analysis
+      - Reproducible evidence and provenance
+      - Separate research findings from remediation
     problems_solved:
-      - "Agent observations can be mistaken for confirmed product defects."
-      - "Specification changes can be misclassified as regressions."
-      - "Structural consistency does not establish runtime correctness."
-    why: "Distinguish behavioral correctness from translation fidelity and preserve evidence about where meaning diverges across the TIED chain."
+      - Agent observations can be mistaken for confirmed product defects.
+      - Specification changes can be misclassified as regressions.
+      - Structural consistency does not establish runtime correctness.
+    why: Distinguish behavioral correctness from translation fidelity and preserve evidence about where meaning diverges across the TIED chain.
   related_requirements:
     depends_on:
-      - "REQ-MODULE_VALIDATION"
-      - "REQ-TIED_SETUP"
+      - REQ-MODULE_VALIDATION
+      - REQ-TIED_SETUP
     related_to:
-      - "REQ-LEAP_PROPOSAL_QUEUE"
-      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+      - REQ-LEAP_PROPOSAL_QUEUE
+      - REQ-QUALITY_ASSURANCE_EVIDENCE
     supersedes: []
   satisfaction_criteria:
-    - criterion: "A first vertical slice analyzes one project and one IMPL/module boundary without mutating the audited project."
-    - criterion: "Candidate findings retain lifecycle, evidence, provenance, and proof-boundary information."
-    - criterion: "Deterministic reruns link duplicates without inflating defect counts."
-    - criterion: "Specification change, implementation lag, missing specification, and implementation defect remain distinct outcomes."
-  status: "Active"
+    - criterion: A first vertical slice analyzes one project and one IMPL/module boundary without mutating the audited project.
+    - criterion: Candidate findings retain lifecycle, evidence, provenance, and proof-boundary information.
+    - criterion: Deterministic reruns link duplicates without inflating defect counts.
+    - criterion: Specification change, implementation lag, missing specification, and implementation defect remain distinct outcomes.
+  status: Active
   traceability:
     architecture:
-      - "ARCH-TIED_FIDELITY_RESEARCH"
+      - ARCH-TIED_FIDELITY_RESEARCH
     code_annotations:
-      - "REQ-TIED_FIDELITY_RESEARCH"
+      - REQ-TIED_FIDELITY_RESEARCH
     implementation:
-      - "IMPL-TIED_FIDELITY_RESEARCH"
+      - IMPL-TIED_FIDELITY_RESEARCH
     tests:
-      - "mcp-server/src/fidelity-research/binding-analysis.test.ts"
-      - "mcp-server/src/fidelity-research/case-promotion.test.ts"
-      - "mcp-server/src/fidelity-research/deterministic-rerun.test.ts"
-      - "mcp-server/src/fidelity-research/fidelity-audit.test.ts"
-      - "mcp-server/src/fidelity-research/finding-ledger.test.ts"
-      - "mcp-server/src/fidelity-research/first-slice.test.ts"
-      - "mcp-server/src/fidelity-research/manifest.test.ts"
-      - "mcp-server/src/fidelity-research/pilot.test.ts"
-      - "mcp-server/src/fidelity-research/snapshot.test.ts"
-      - "mcp-server/src/fidelity-research/specification-state.test.ts"
-      - "mcp-server/src/fidelity-research/structural-analysis.test.ts"
+      - mcp-server/src/fidelity-research/binding-analysis.test.ts
+      - mcp-server/src/fidelity-research/case-promotion.test.ts
+      - mcp-server/src/fidelity-research/deterministic-rerun.test.ts
+      - mcp-server/src/fidelity-research/fidelity-audit.test.ts
+      - mcp-server/src/fidelity-research/finding-ledger.test.ts
+      - mcp-server/src/fidelity-research/first-slice.test.ts
+      - mcp-server/src/fidelity-research/manifest.test.ts
+      - mcp-server/src/fidelity-research/pilot.test.ts
+      - mcp-server/src/fidelity-research/snapshot.test.ts
+      - mcp-server/src/fidelity-research/specification-state.test.ts
+      - mcp-server/src/fidelity-research/structural-analysis.test.ts
   validation_criteria:
-    - coverage: "Structural, fidelity, and binding adapters prove trigger, arguments, result, and proof boundary without UI."
-      method: "Composition tests"
-    - coverage: "Audited project source, tests, and project YAML remain unchanged."
-      method: "Read-only safety checks"
-    - coverage: "Manifest, finding lifecycle, specification-state classification, fidelity matrices, promotion, and deterministic rerun."
-      method: "Unit tests"
+    - coverage: Structural, fidelity, and binding adapters prove trigger, arguments, result, and proof boundary without UI.
+      method: Composition tests
+    - coverage: Audited project source, tests, and project YAML remain unchanged.
+      method: Read-only safety checks
+    - coverage: Manifest, finding lifecycle, specification-state classification, fidelity matrices, promotion, and deterministic rerun.
+      method: Unit tests
 REQ-TIED_NEW_CLIENT_ADHERENCE:
-  category: "Functional"
+  category: Functional
   cross_references:
     architecture:
-      - "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"
-      - "ARCH-TIED_NEW_CLIENT_ADHERENCE"
+      - ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE
+      - ARCH-TIED_NEW_CLIENT_ADHERENCE
     implementation:
-      - "IMPL-TIED_NEW_CLIENT_ONBOARDING"
+      - IMPL-TIED_NEW_CLIENT_ONBOARDING
     requirements:
-      - "REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE"
-      - "REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT"
-      - "REQ-PSEUDOCODE_MIGRATION_TOOLING"
-      - "REQ-REQUEST_EVIDENCE_ENVELOPE"
-      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
-  detail_file: "requirements/REQ-TIED_NEW_CLIENT_ADHERENCE.yaml"
-  name: "New TIED client adherence"
-  priority: "P2"
-  status: "Implemented"
+      - REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE
+      - REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT
+      - REQ-PSEUDOCODE_MIGRATION_TOOLING
+      - REQ-REQUEST_EVIDENCE_ENVELOPE
+      - REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+  detail_file: requirements/REQ-TIED_NEW_CLIENT_ADHERENCE.yaml
+  name: New TIED client adherence
+  priority: P2
+  status: Implemented
 REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION:
-  category: "Functional"
+  category: Functional
   cross_references:
-    - "ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY"
-    - "IMPL-TIED_FEEDBACK_PROMOTION"
-    - "REQ-FEEDBACK_TO_TIED"
-    - "REQ-LEAP_PROPOSAL_QUEUE"
-  description: "Extend feedback and LEAP proposal workflows with normalized operational evidence, duplicate grouping, proposed requirements, and explicit human-reviewed promotion without automatic canonical writes."
-  detail_file: "requirements/REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION.yaml"
-  name: "Reviewed operational feedback promotion"
-  priority: "P1"
-  status: "Implemented"
+    - ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY
+    - IMPL-TIED_FEEDBACK_PROMOTION
+    - REQ-FEEDBACK_TO_TIED
+    - REQ-LEAP_PROPOSAL_QUEUE
+  description: Extend feedback and LEAP proposal workflows with normalized operational evidence, duplicate grouping, proposed requirements, and explicit human-reviewed promotion without automatic canonical writes.
+  detail_file: requirements/REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION.yaml
+  name: Reviewed operational feedback promotion
+  priority: P1
+  status: Implemented
 REQ-TIED_RESEARCH_RECORDS:
-  category: "Functional"
+  category: Functional
   cross_references:
-    - "ARCH-TIED_RESEARCH_RECORD_BOUNDARY"
-    - "IMPL-TIED_RESEARCH_RECORDS"
-    - "REQ-QUALITY_ASSURANCE_EVIDENCE"
-    - "REQ-TIED_FIDELITY_RESEARCH"
-  description: "Provide structured, provenance-rich research records for library comparisons, benchmarks, security findings, organizational constraints, and experiments without mutating audited project intent."
-  detail_file: "requirements/REQ-TIED_RESEARCH_RECORDS.yaml"
-  name: "Structured research records and freshness"
-  priority: "P1"
-  status: "Implemented"
+    - ARCH-TIED_RESEARCH_RECORD_BOUNDARY
+    - IMPL-TIED_RESEARCH_RECORDS
+    - REQ-QUALITY_ASSURANCE_EVIDENCE
+    - REQ-TIED_FIDELITY_RESEARCH
+  description: Provide structured, provenance-rich research records for library comparisons, benchmarks, security findings, organizational constraints, and experiments without mutating audited project intent.
+  detail_file: requirements/REQ-TIED_RESEARCH_RECORDS.yaml
+  name: Structured research records and freshness
+  priority: P1
+  status: Implemented
 REQ-TIED_SETUP:
-  category: "Functional"
+  category: Functional
   cross_references:
-    - "ARCH-TIED_STRUCTURE"
-    - "ARCH-TIED_VOCABULARY_LAYERS"
-    - "IMPL-TIED_FILES"
-    - "IMPL-TIED_VOCABULARY_REFRESH"
-  description: "Deterministic TIED bootstrap with methodology vocabulary refresh and durable client vocabulary ownership."
-  detail_file: "requirements/REQ-TIED_SETUP.yaml"
+    - ARCH-TIED_STRUCTURE
+    - ARCH-TIED_VOCABULARY_LAYERS
+    - IMPL-TIED_FILES
+    - IMPL-TIED_VOCABULARY_REFRESH
+  description: Deterministic TIED bootstrap with methodology vocabulary refresh and durable client vocabulary ownership.
+  detail_file: requirements/REQ-TIED_SETUP.yaml
   metadata:
     created:
-      author: "AI Agent"
+      author: AI Agent
       date: "2025-11-08T00:00:00.000Z"
     last_updated:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-08-19"
-      reason: "Reconcile setup with layered vocabulary ownership and refresh behavior"
+      reason: Reconcile setup with layered vocabulary ownership and refresh behavior
     last_validated:
       date: "2026-02-06T00:00:00.000Z"
-      result: "pass"
-      validator: "AI Agent"
-  name: "TIED Methodology Setup"
-  priority: "P0"
+      result: pass
+      validator: AI Agent
+  name: TIED Methodology Setup
+  priority: P0
   rationale:
     benefits:
-      - "AI-friendly documentation structure"
-      - "Complete traceability from requirements to code"
-      - "Consistent development methodology"
+      - AI-friendly documentation structure
+      - Complete traceability from requirements to code
+      - Consistent development methodology
     problems_solved:
-      - "Difficulty tracking requirements through architecture to implementation"
-      - "Inconsistent documentation practices across projects"
-      - "Loss of intent during development lifecycle"
-    why: "To ensure traceability of intent from requirements to code and to maintain a consistent development process"
+      - Difficulty tracking requirements through architecture to implementation
+      - Inconsistent documentation practices across projects
+      - Loss of intent during development lifecycle
+    why: To ensure traceability of intent from requirements to code and to maintain a consistent development process
   related_requirements:
     depends_on: []
     related_to: []
     supersedes: []
   satisfaction_criteria:
-    - criterion: "./tied/ directory exists with proper structure"
-    - criterion: "All required documentation files exist and are populated from templates"
-      metric: "requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml, semantic-tokens.md, processes.md all present"
-    - criterion: "Base files properly configured"
-      metric: ".cursorrules contains TIED rules, AGENTS.md contains canonical AI agent instructions"
-    - criterion: "copy_files.sh --merge-vocab adds absent glossary basenames without overwriting existing client vocabulary"
-      metric: "Existing client glossary contents remain unchanged while missing canonical glossaries are added"
-    - criterion: "copy_files.sh installs the canonical prompt-type skill bundle into client .cursor/skills/ and does not create client .cursor/agents/ wrappers"
-      metric: "Bootstrap tests verify managed skill installation and absence of client .cursor/agents/"
-    - criterion: "copy_files.sh seeds tied/vocab/ when client tied/vocab/ is missing or empty (minimum domain-references.md and tied-methodology.md)"
-      metric: "After bootstrap, tied/vocab/*.md present; existing client vocab files never overwritten"
-    - criterion: "Detail directories exist"
-      metric: "requirements/, architecture-decisions/, implementation-decisions/ directories present"
-    - criterion: "Domain vocabulary for TIED layout (project YAML, semantic token, TIED base path) is defined in tied/vocab/tied-methodology.md; naming uses sub-vocabulary-sync RESOLVE/RECORD per [PROC-VOCABULARY_INDEX]"
-    - criterion: "Existing clients can follow tied/docs/methodology-migration.md when adopting a newer methodology snapshot"
-      metric: "Migration guide is installed when missing and preserves client-owned project YAML and customized documentation"
-    - criterion: "Managed bootstrap artifacts preserve supported attributes, retain source content, normalize only client-copy mtimes to each source item's local calendar-date midnight, and warn before replacement when an existing destination mtime is not midnight"
-      metric: "Prompt skill/bootstrap tests verify cp flags, source immutability, destination midnight mtime, and warning output"
-    - criterion: "Refreshing inherited methodology preserves project YAML and installs promoted quality detail files and pseudo-code sidecars"
-      metric: "tied/methodology/ matches the current template snapshot and stale inherited files are pruned"
-    - criterion: "The vocabulary layer is an agent-control layer that applies RESOLVE, PRELOAD, RECORD, and VALIDATE across TIED work"
-      metric: "Canonical vocabulary rows and checklist/process references use the same terms"
-    - criterion: "When .cursor/mcp.json already exists, copy_files.sh preserves its exact bytes and does not initialize or merge tied-yaml into it"
-      metric: "Bootstrap E2E refresh fixture compares the pre-existing MCP config byte-for-byte after refresh"
-    - criterion: "YAML validation uses the tied-yaml-canonical-v1 profile through scripts/yaml_tool.sh or lint_yaml per [PROC-YAML_EDIT_LOOP]"
-      metric: "Recursive lexical map ordering, ordered-list key exceptions, string-only list sorting, scalar-type preservation, and opaque block policy are documented and tested"
-  status: "Implemented"
+    - criterion: ./tied/ directory exists with proper structure
+    - criterion: All required documentation files exist and are populated from templates
+      metric: requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml, semantic-tokens.md, processes.md all present
+    - criterion: Base files properly configured
+      metric: .cursorrules contains TIED rules, AGENTS.md contains canonical AI agent instructions
+    - criterion: copy_files.sh --merge-vocab adds absent glossary basenames without overwriting existing client vocabulary
+      metric: Existing client glossary contents remain unchanged while missing canonical glossaries are added
+    - criterion: copy_files.sh installs the canonical prompt-type skill bundle into client .cursor/skills/ and does not create client .cursor/agents/ wrappers
+      metric: Bootstrap tests verify managed skill installation and absence of client .cursor/agents/
+    - criterion: copy_files.sh seeds tied/vocab/ when client tied/vocab/ is missing or empty (minimum domain-references.md and tied-methodology.md)
+      metric: After bootstrap, tied/vocab/*.md present; existing client vocab files never overwritten
+    - criterion: Detail directories exist
+      metric: requirements/, architecture-decisions/, implementation-decisions/ directories present
+    - criterion: Domain vocabulary for TIED layout (project YAML, semantic token, TIED base path) is defined in tied/vocab/tied-methodology.md; naming uses sub-vocabulary-sync RESOLVE/RECORD per [PROC-VOCABULARY_INDEX]
+    - criterion: Existing clients can follow tied/docs/methodology-migration.md when adopting a newer methodology snapshot
+      metric: Migration guide is installed when missing and preserves client-owned project YAML and customized documentation
+    - criterion: Managed bootstrap artifacts preserve supported attributes, retain source content, normalize only client-copy mtimes to each source item's local calendar-date midnight, and warn before replacement when an existing destination mtime is not midnight
+      metric: Prompt skill/bootstrap tests verify cp flags, source immutability, destination midnight mtime, and warning output
+    - criterion: Refreshing inherited methodology preserves project YAML and installs promoted quality detail files and pseudo-code sidecars
+      metric: tied/methodology/ matches the current template snapshot and stale inherited files are pruned
+    - criterion: The vocabulary layer is an agent-control layer that applies RESOLVE, PRELOAD, RECORD, and VALIDATE across TIED work
+      metric: Canonical vocabulary rows and checklist/process references use the same terms
+    - criterion: When .cursor/mcp.json already exists, copy_files.sh preserves its exact bytes and does not initialize or merge tied-yaml into it
+      metric: Bootstrap E2E refresh fixture compares the pre-existing MCP config byte-for-byte after refresh
+    - criterion: YAML validation uses the tied-yaml-canonical-v1 profile through scripts/yaml_tool.sh or lint_yaml per [PROC-YAML_EDIT_LOOP]
+      metric: Recursive lexical map ordering, ordered-list key exceptions, string-only list sorting, scalar-type preservation, and opaque block policy are documented and tested
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-TIED_STRUCTURE"
+      - ARCH-TIED_STRUCTURE
     code_annotations:
-      - "ARCH-TIED_STRUCTURE"
-      - "IMPL-TIED_FILES"
-      - "REQ-TIED_SETUP"
+      - ARCH-TIED_STRUCTURE
+      - IMPL-TIED_FILES
+      - REQ-TIED_SETUP
     implementation:
-      - "IMPL-TIED_FILES"
+      - IMPL-TIED_FILES
     tests:
-      - "mcp-server/src/e2e/bootstrap-and-load.test.ts"
+      - mcp-server/src/e2e/bootstrap-and-load.test.ts
   validation_criteria:
-    - coverage: "Agent responds with 'Observing AI principles!' confirming rules are loaded"
-      method: "AI agent acknowledgment"
-    - coverage: "File existence checks for all required files and directories"
-      method: "Manual verification"
-    - coverage: "All index files have corresponding detail directories with proper naming"
-      method: "Structure validation"
+    - coverage: Agent responds with 'Observing AI principles!' confirming rules are loaded
+      method: AI agent acknowledgment
+    - coverage: File existence checks for all required files and directories
+      method: Manual verification
+    - coverage: All index files have corresponding detail directories with proper naming
+      method: Structure validation
 REQ-TIED_UNIFIED_TOOLCHAIN:
-  category: "Tooling"
-  description: "Deliver a single-language (primary: TypeScript/Node) developer and operator tool suite for macOS and Windows that consolidates MCP server, agentstream, bootstrap, YAML tooling, and shell wrappers behind one workspace build and umbrella CLI, with phased migration off Go and Ruby implementations."
-  detail_file: "requirements/REQ-TIED_UNIFIED_TOOLCHAIN.yaml"
-  name: "Unified cross-platform TIED developer toolchain"
-  priority: "P1"
+  category: Tooling
+  description: 'Deliver a single-language (primary: TypeScript/Node) developer and operator tool suite for macOS and Windows that consolidates MCP server, agentstream, bootstrap, YAML tooling, and shell wrappers behind one workspace build and umbrella CLI, with phased migration off Go and Ruby implementations.'
+  detail_file: requirements/REQ-TIED_UNIFIED_TOOLCHAIN.yaml
+  name: Unified cross-platform TIED developer toolchain
+  priority: P1
   satisfaction_criteria:
-    - criterion: "CITDP-REQ-TIED_UNIFIED_TOOLCHAIN documents tool inventory, language recommendation, target architecture, and migration phases"
-    - criterion: "Cursor MCP configuration can reference one built MCP artifact with documented TIED_BASE_PATH semantics unchanged"
-    - criterion: "README documents a single primary build/install path for the unified suite on macOS and Windows"
-  status: "In Progress"
+    - criterion: CITDP-REQ-TIED_UNIFIED_TOOLCHAIN documents tool inventory, language recommendation, target architecture, and migration phases
+    - criterion: Cursor MCP configuration can reference one built MCP artifact with documented TIED_BASE_PATH semantics unchanged
+    - criterion: README documents a single primary build/install path for the unified suite on macOS and Windows
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-TIED_UNIFIED_TOOLCHAIN"
+      - ARCH-TIED_UNIFIED_TOOLCHAIN
     implementation:
-      - "IMPL-TIED_UNIFIED_TOOLCHAIN"
+      - IMPL-TIED_UNIFIED_TOOLCHAIN
 REQ-TIED_VOCABULARY_OWNERSHIP:
-  category: "Infrastructure"
+  category: Infrastructure
   cross_references:
-    - "ARCH-TIED_VOCABULARY_LAYERS"
-    - "IMPL-TIED_VOCABULARY_REFRESH"
-  detail_file: "requirements/REQ-TIED_VOCABULARY_OWNERSHIP.yaml"
-  name: "Separate Vocabulary Ownership"
-  priority: "P1"
-  status: "Implemented"
+    - ARCH-TIED_VOCABULARY_LAYERS
+    - IMPL-TIED_VOCABULARY_REFRESH
+  detail_file: requirements/REQ-TIED_VOCABULARY_OWNERSHIP.yaml
+  name: Separate Vocabulary Ownership
+  priority: P1
+  status: Implemented
 REQ-TIED_YAML_CANONICALIZATION:
-  category: "Functional"
+  category: Functional
   cross_references:
-    - "ARCH-TIED_YAML_CANONICAL_PROFILE"
-    - "ARCH-TIED_YAML_STYLE_RESOLUTION"
-    - "IMPL-TIED_YAML_CANONICALIZER"
-    - "IMPL-TIED_YAML_STYLE_RESOLVER"
-    - "REQ-MODULE_VALIDATION"
-    - "REQ-TIED_SETUP"
-  description: "All supported TIED YAML writers and compatibility frontends produce deterministic typed output under the tied-yaml-canonical-v1 profile while preserving opaque pseudo-code and block-scalar bodies. Recursive map keys and eligible all-string lists use case-insensitive-primary, locale-independent lexical ordering with original-value tie-breaking."
-  detail_file: "requirements/REQ-TIED_YAML_CANONICALIZATION.yaml"
+    - ARCH-TIED_YAML_CANONICAL_PROFILE
+    - ARCH-TIED_YAML_STYLE_RESOLUTION
+    - IMPL-TIED_YAML_CANONICALIZER
+    - IMPL-TIED_YAML_STYLE_RESOLVER
+    - REQ-MODULE_VALIDATION
+    - REQ-TIED_SETUP
+  description: All supported TIED YAML writers and compatibility frontends produce deterministic typed output under the tied-yaml-canonical-v1 profile while preserving opaque pseudo-code and block-scalar bodies. Recursive map keys and eligible all-string lists use case-insensitive-primary, locale-independent lexical ordering with original-value tie-breaking.
+  detail_file: requirements/REQ-TIED_YAML_CANONICALIZATION.yaml
   metadata:
     created:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-08-06"
     last_updated:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-08-24"
-      reason: "LEAP: record-aware sorting for recognized mapping-record lists; align index/detail drift and propagate unchanged-path reporting contract"
-  name: "Deterministic typed TIED YAML canonicalization"
-  priority: "P0"
+      reason: 'LEAP: record-aware sorting for recognized mapping-record lists; align index/detail drift and propagate unchanged-path reporting contract'
+  name: Deterministic typed TIED YAML canonicalization
+  priority: P0
   rationale:
     benefits:
-      - "Cross-surface compatibility"
-      - "Stable byte output"
-      - "Typed scalar preservation"
+      - Cross-surface compatibility
+      - Stable byte output
+      - Typed scalar preservation
     problems_solved:
-      - "Accidental mutation of pseudo-code and block-scalar bodies"
-      - "Missing format contract for downstream clients"
-      - "Non-deterministic or divergent YAML output"
-    why: "Split serialization policies can silently change scalar types, list order, and opaque text across MCP and CLI surfaces."
+      - Accidental mutation of pseudo-code and block-scalar bodies
+      - Missing format contract for downstream clients
+      - Non-deterministic or divergent YAML output
+    why: Split serialization policies can silently change scalar types, list order, and opaque text across MCP and CLI surfaces.
   related_requirements:
     depends_on:
-      - "REQ-MODULE_VALIDATION"
-      - "REQ-TIED_SETUP"
+      - REQ-MODULE_VALIDATION
+      - REQ-TIED_SETUP
     related_to: []
     supersedes: []
   satisfaction_criteria:
-    - criterion: "Block-scalar bodies and IMPL pseudo-code sidecars remain opaque"
-    - criterion: "Boolean, number, null, and string scalar types survive round trips"
-    - criterion: "Canonical output uses profile tied-yaml-canonical-v1 with recursive case-insensitive-primary map and eligible list ordering plus original-value tie-breaking"
-    - criterion: "Compatibility sorting omits unchanged paths from normal stdout, retains summaries for modified paths, and keeps failure diagnostics on stderr"
-    - criterion: "Every successful YAML write reports yaml_format metadata"
-    - criterion: "MCP, yaml_tool, yaml_list_sorter, and yaml_semantic_compare share conformance fixtures"
-    - criterion: "Recognized record lists (satisfaction_criteria, validation_criteria, alternatives_considered, files, functions, risks) sort complete mapping records by configured stable fields using tier-0/tier-1 heterogeneous ordering; string shorthand items in files and functions lists sort in tier 0"
-    - criterion: "String-only lists sort except under ordered-list keys"
-    - criterion: "Unregistered homogeneous map lists sort by inferred first string-valued key; ordered-list keys preserve document order"
-  status: "Implemented"
+    - criterion: Block-scalar bodies and IMPL pseudo-code sidecars remain opaque
+    - criterion: Boolean, number, null, and string scalar types survive round trips
+    - criterion: Canonical output uses profile tied-yaml-canonical-v1 with recursive case-insensitive-primary map and eligible list ordering plus original-value tie-breaking
+    - criterion: Compatibility sorting omits unchanged paths from normal stdout, retains summaries for modified paths, and keeps failure diagnostics on stderr
+    - criterion: Every successful YAML write reports yaml_format metadata
+    - criterion: MCP, yaml_tool, yaml_list_sorter, and yaml_semantic_compare share conformance fixtures
+    - criterion: Recognized record lists (satisfaction_criteria, validation_criteria, alternatives_considered, files, functions, risks) sort complete mapping records by configured stable fields using tier-0/tier-1 heterogeneous ordering; string shorthand items in files and functions lists sort in tier 0
+    - criterion: String-only lists sort except under ordered-list keys
+    - criterion: Unregistered homogeneous map lists sort by inferred first string-valued key; ordered-list keys preserve document order
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-TIED_YAML_CANONICAL_PROFILE"
-      - "ARCH-TIED_YAML_STYLE_RESOLUTION"
+      - ARCH-TIED_YAML_CANONICAL_PROFILE
+      - ARCH-TIED_YAML_STYLE_RESOLUTION
     code_annotations:
-      - "REQ-TIED_YAML_CANONICALIZATION"
+      - REQ-TIED_YAML_CANONICALIZATION
     implementation:
-      - "IMPL-TIED_YAML_CANONICALIZER"
-      - "IMPL-TIED_YAML_STYLE_RESOLVER"
+      - IMPL-TIED_YAML_CANONICALIZER
+      - IMPL-TIED_YAML_STYLE_RESOLVER
     tests:
-      - "mcp-server/src/tools/yaml-canonicalization-mcp.test.ts"
-      - "mcp-server/src/yaml-canonicalizer.test.ts"
-      - "scripts/yaml_list_sorter_test.rb"
+      - mcp-server/src/tools/yaml-canonicalization-mcp.test.ts
+      - mcp-server/src/yaml-canonicalizer.test.ts
+      - scripts/yaml_list_sorter_test.rb
   validation_criteria:
-    - coverage: "Ordering, list exceptions, scalar types, opaque text, invalid input, atomic failure"
-      method: "Canonicalizer unit tests"
-    - coverage: "yaml_tool, sorter, semantic compare, flags, invalid-input preservation"
-      method: "CLI compatibility tests"
-    - coverage: "All YAML writer families, rename, batch, CITDP, feedback, verification, metadata"
-      method: "MCP composition tests"
+    - coverage: Ordering, list exceptions, scalar types, opaque text, invalid input, atomic failure
+      method: Canonicalizer unit tests
+    - coverage: yaml_tool, sorter, semantic compare, flags, invalid-input preservation
+      method: CLI compatibility tests
+    - coverage: All YAML writer families, rename, batch, CITDP, feedback, verification, metadata
+      method: MCP composition tests
 REQ-TIED_YAML_STYLE_CONFIGURATION:
-  category: "Functional"
+  category: Functional
   cross_references:
-    - "ARCH-TIED_YAML_STYLE_RESOLUTION"
-    - "REQ-MODULE_VALIDATION"
-    - "REQ-TIED_YAML_CANONICALIZATION"
-  description: "All TIED YAML lint and MCP writes use one repository-resolved scalar style, with wrapped and unwrapped modes aligned across surfaces."
-  detail_file: "requirements/REQ-TIED_YAML_STYLE_CONFIGURATION.yaml"
+    - ARCH-TIED_YAML_STYLE_RESOLUTION
+    - REQ-MODULE_VALIDATION
+    - REQ-TIED_YAML_CANONICALIZATION
+  description: All TIED YAML lint and MCP writes use one repository-resolved scalar style, with wrapped and unwrapped modes aligned across surfaces.
+  detail_file: requirements/REQ-TIED_YAML_STYLE_CONFIGURATION.yaml
   metadata:
     created:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-08-06"
     last_updated:
-      author: "AI Agent"
+      author: AI Agent
       date: "2026-08-06"
-      reason: "Define enforceable repository-wide YAML scalar style alignment"
-  name: "Repository-wide YAML scalar style configuration"
-  priority: "P0"
-  status: "Implemented"
+      reason: Define enforceable repository-wide YAML scalar style alignment
+  name: Repository-wide YAML scalar style configuration
+  priority: P0
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-TIED_YAML_STYLE_RESOLUTION"
+      - ARCH-TIED_YAML_STYLE_RESOLUTION
     code_annotations:
-      - "REQ-TIED_YAML_STYLE_CONFIGURATION"
+      - REQ-TIED_YAML_STYLE_CONFIGURATION
     implementation:
-      - "IMPL-TIED_YAML_STYLE_RESOLVER"
+      - IMPL-TIED_YAML_STYLE_RESOLVER
     tests:
-      - "mcp-server/src/tools/yaml-canonicalization-mcp.test.ts"
-      - "mcp-server/src/yaml-style-config.test.ts"
-      - "scripts/yaml_list_sorter_test.rb"
+      - mcp-server/src/tools/yaml-canonicalization-mcp.test.ts
+      - mcp-server/src/yaml-style-config.test.ts
+      - scripts/yaml_list_sorter_test.rb
 REQ-VOCABULARY_ANALYSIS:
-  category: "Functional"
-  detail_file: "requirements/REQ-VOCABULARY_ANALYSIS.yaml"
-  name: "Deterministic vocabulary term analysis"
-  priority: "P1"
-  status: "Implemented"
+  category: Functional
+  detail_file: requirements/REQ-VOCABULARY_ANALYSIS.yaml
+  name: Deterministic vocabulary term analysis
+  priority: P1
+  status: Implemented
 REQ-VOCABULARY_EXPLORER:
-  category: "Functional"
-  detail_file: "requirements/REQ-VOCABULARY_EXPLORER.yaml"
-  name: "Offline vocabulary explorer"
-  priority: "P1"
-  status: "Implemented"
+  category: Functional
+  detail_file: requirements/REQ-VOCABULARY_EXPLORER.yaml
+  name: Offline vocabulary explorer
+  priority: P1
+  status: Implemented
 REQ-VOCABULARY_VIEWER_STATE:
-  category: "Functional"
-  detail_file: "requirements/REQ-VOCABULARY_VIEWER_STATE.yaml"
-  name: "Fragment-encoded viewer state"
-  priority: "P1"
-  status: "Implemented"
+  category: Functional
+  detail_file: requirements/REQ-VOCABULARY_VIEWER_STATE.yaml
+  name: Fragment-encoded viewer state
+  priority: P1
+  status: Implemented

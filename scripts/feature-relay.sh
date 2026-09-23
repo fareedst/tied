@@ -13,7 +13,7 @@
 # Environment:
 #   test_path  Workspace for agentstream -w (default: .)
 #   tied_path  Repository root that contains tied/ and mcp-server/ (default: stdd root next to this script)
-#   AGENTSTREAM  If set, path to a prebuilt agentstream executable; else: go run tools/agentstream
+#   AGENTSTREAM  If set, path to a prebuilt agentstream executable; else: node mcp-server/packages/cli/dist/index.js agentstream
 #
 # IMPL: IMPL-GOAGENT-CLI-CMD
 # REQ: REQ-GOAGENT-CLI-CONFIG
@@ -28,7 +28,6 @@ _repo_root="$(cd "${_script_dir}/.." && pwd)"
 
 : "${test_path:=.}"
 : "${tied_path:=$_repo_root}"
-: "${AGENTSTREAM:=agentstream}"
 
 LEAD_CHECKLIST_YAML="${tied_path}/tied/docs/agent-req-implementation-checklist.yaml"
 
@@ -46,7 +45,7 @@ Usage:
 Environment (optional):
   test_path   Workspace for -w (default: .)
   tied_path   Stdd-style repo root with tied/ and mcp-server/ (default: parent of scripts/)
-  AGENTSTREAM  Path to agentstream binary; if unset, uses: go run -C <repo>/tools/agentstream ./cmd/agentstream
+  AGENTSTREAM  Path to agentstream binary; if unset, uses: node <repo>/mcp-server/packages/cli/dist/index.js agentstream
 EOF
 }
 
@@ -74,7 +73,14 @@ fi
   fail "lead checklist not found or not readable: $LEAD_CHECKLIST_YAML"
 [[ -d "$test_path" ]] || fail "test_path is not a directory: $test_path"
 
-_as_cmd=("$AGENTSTREAM")
+_as_cmd=()
+if [[ -n "${AGENTSTREAM:-}" ]]; then
+  _as_cmd=("$AGENTSTREAM")
+elif [[ -f "${tied_path}/mcp-server/packages/cli/dist/index.js" ]]; then
+  _as_cmd=(node "${tied_path}/mcp-server/packages/cli/dist/index.js" agentstream)
+else
+  fail "built tied CLI not found under ${tied_path}/mcp-server (run: cd mcp-server && npm run build)"
+fi
 
 # DEBUG: show resolved paths
 printf 'DEBUG: feature-relay tied_path=%s test_path=%s lead=%s\n' \
@@ -107,7 +113,7 @@ YOU WILL BE TOLD TO WRITE CODE ACCORDING TO PSEUDO-CODE.
 YOU CAN WRITE CODE ONLY WHEN DETAILED AND VALIDATED PSEUDO-CODE AND RED TESTS EXIST.
 IN A FUTURE REQUEST, YOU WILL BE DIRECTED TO WRITE THE PSEUDO-CODE.
 
-Agentstream is located at ~/.local/bin/agentstream.
+Use \`tied agentstream\` (or node mcp-server/packages/cli/dist/index.js agentstream) from the TIED source repo.
 
 TIED_MCP_BIN=${tied_path}/mcp-server/dist/index.js
 EOF
