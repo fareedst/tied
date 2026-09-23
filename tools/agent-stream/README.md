@@ -1,5 +1,7 @@
 # Agent stream runner (vendored from ATDD)
 
+> **Deprecation (Phase 3, REQ-TIED_UNIFIED_TOOLCHAIN):** Prefer **`tied agentstream`** (Go pipeline via `@tied/cli`) or `scripts/run-feature-batch-agentstream.sh`. This Ruby harness remains for parity reference until **Phase 4** removal after checklist parity and a release-cycle warning.
+
 Ruby harness for the Cursor `agent` CLI with `--print --output-format stream-json`, multi-turn `--resume` chaining, `--tdd-yaml`, and `--lead-checklist-yaml` (see [docs/run-agent-stream-tied.md](../../docs/run-agent-stream-tied.md)).
 
 **Upstream:** [docs/run-agent-stream-upstream.md](../../docs/run-agent-stream-upstream.md)

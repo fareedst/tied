@@ -2110,6 +2110,22 @@ REQ-TIED_SETUP:
       method: "Manual verification"
     - coverage: "All index files have corresponding detail directories with proper naming"
       method: "Structure validation"
+REQ-TIED_UNIFIED_TOOLCHAIN:
+  category: "Tooling"
+  description: "Deliver a single-language (primary: TypeScript/Node) developer and operator tool suite for macOS and Windows that consolidates MCP server, agentstream, bootstrap, YAML tooling, and shell wrappers behind one workspace build and umbrella CLI, with phased migration off Go and Ruby implementations."
+  detail_file: "requirements/REQ-TIED_UNIFIED_TOOLCHAIN.yaml"
+  name: "Unified cross-platform TIED developer toolchain"
+  priority: "P1"
+  satisfaction_criteria:
+    - criterion: "CITDP-REQ-TIED_UNIFIED_TOOLCHAIN documents tool inventory, language recommendation, target architecture, and migration phases"
+    - criterion: "Cursor MCP configuration can reference one built MCP artifact with documented TIED_BASE_PATH semantics unchanged"
+    - criterion: "README documents a single primary build/install path for the unified suite on macOS and Windows"
+  status: "In Progress"
+  traceability:
+    architecture:
+      - "ARCH-TIED_UNIFIED_TOOLCHAIN"
+    implementation:
+      - "IMPL-TIED_UNIFIED_TOOLCHAIN"
 REQ-TIED_VOCABULARY_OWNERSHIP:
   category: "Infrastructure"
   cross_references:

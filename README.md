@@ -188,6 +188,8 @@ cd ../tools/bootstrap && npm install
 cd ../tools/agentstream && go build -o agentstream ./cmd/agentstream
 ```
 
+The **`mcp-server/`** directory is an npm **workspace** (`@tied/mcp` + `@tied/cli`). One install/build at that root compiles the MCP server (`dist/index.js`), the umbrella **`tied`** CLI (`tied mcp` delegates to the same stdio entry), and existing bins (`tied-yaml-mcp`, `feature-orchestrator`). Go agentstream and Ruby legacy paths are unchanged in Phase 1.
+
 **Windows (`cmd.exe`)** (from the TIED repository root):
 
 ```cmd
@@ -199,7 +201,7 @@ What each step enables:
 
 | Step | Produces | Used by |
 | --- | --- | --- |
-| `mcp-server` build | `mcp-server/dist/index.js` | TIED YAML MCP, `tied-cli`, `copy_files` (hard prerequisite), YAML lint |
+| `mcp-server` workspace build | `mcp-server/dist/index.js`, `mcp-server/node_modules/.bin/tied` | TIED YAML MCP, `tied mcp` / `tied-cli`, `copy_files` (hard prerequisite), YAML lint |
 | `tools/bootstrap` install | `js-yaml` for verification gates | `copy_files.sh` / `copy-files.mjs` completion checks |
 | `tools/agentstream` build | `tools/agentstream/agentstream` | `scripts/run-feature-batch-agentstream.sh` (or set `AGENTSTREAM` to that path) |
 

@@ -1896,6 +1896,16 @@ ARCH-TIED_STRUCTURE:
       - "REQ-TIED_SETUP"
     tests:
       - "TestTIEDSetup_REQ_TIED_SETUP"
+ARCH-TIED_UNIFIED_TOOLCHAIN:
+  description: "npm/pnpm workspace packaging MCP, agentstream, bootstrap, and YAML CLIs under one build; umbrella CLI subcommands; stdio MCP unchanged; strangler migration from Go/Ruby."
+  detail_file: "architecture-decisions/ARCH-TIED_UNIFIED_TOOLCHAIN.yaml"
+  name: "Unified TIED toolchain architecture"
+  related_architecture:
+    - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
+    - "ARCH-TIED_STRUCTURE"
+  related_requirements:
+    - "REQ-TIED_UNIFIED_TOOLCHAIN"
+  status: "Proposed"
 ARCH-TIED_VOCABULARY_LAYERS:
   category: "Structural"
   cross_references:

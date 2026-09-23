@@ -1,0 +1,18 @@
+{
+  "name": "@tied/bootstrap",
+  "version": "1.0.0",
+  "description": "TIED client bootstrap (wraps tools/bootstrap copy-files engine)",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "test": "npm run build && node --test dist/*.test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.4.0"
+  }
+}

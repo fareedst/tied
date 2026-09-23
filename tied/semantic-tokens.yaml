@@ -761,6 +761,19 @@ ARCH-TIED_STRUCTURE:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_UNIFIED_TOOLCHAIN:
+  cross_references:
+    - "IMPL-TIED_UNIFIED_TOOLCHAIN"
+    - "REQ-TIED_UNIFIED_TOOLCHAIN"
+  description: "TypeScript-on-Node workspace architecture with @tied/* packages and phased strangler migration from Go/Ruby."
+  detail_file: "architecture-decisions/ARCH-TIED_UNIFIED_TOOLCHAIN.yaml"
+  metadata:
+    last_updated: "2026-09-22"
+    registered: "2026-09-22"
+  name: "Unified TIED toolchain architecture"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_VOCABULARY_LAYERS:
   cross_references:
     - "IMPL-TIED_VOCABULARY_REFRESH"
@@ -1740,6 +1753,19 @@ IMPL-TIED_RESEARCH_RECORDS:
     - "REQ-TIED_RESEARCH_RECORDS"
   description: "Normalizes research records, evaluates freshness, and emits read-only external evidence."
   name: "Research record schema and freshness evaluator"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-TIED_UNIFIED_TOOLCHAIN:
+  cross_references:
+    - "ARCH-TIED_UNIFIED_TOOLCHAIN"
+    - "REQ-TIED_UNIFIED_TOOLCHAIN"
+  description: "Workspace scaffold, umbrella CLI, bootstrap/yaml-cli packages, TS adherence hook, and @tied/agentstream strangler slice."
+  detail_file: "implementation-decisions/IMPL-TIED_UNIFIED_TOOLCHAIN.yaml"
+  metadata:
+    last_updated: "2026-09-22"
+    registered: "2026-09-22"
+  name: "Unified TIED toolchain implementation plan"
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
@@ -2903,6 +2929,20 @@ REQ-TIED_SETUP:
   name: "TIED Methodology Setup"
   source_index: "requirements.yaml"
   status: "Implemented"
+  type: "REQ"
+REQ-TIED_UNIFIED_TOOLCHAIN:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-TIED_UNIFIED_TOOLCHAIN"
+    - "IMPL-TIED_UNIFIED_TOOLCHAIN"
+  description: "Deliver a single-language TypeScript/Node developer suite consolidating MCP, agentstream, bootstrap, and YAML tooling behind one workspace build and umbrella tied CLI."
+  detail_file: "requirements/REQ-TIED_UNIFIED_TOOLCHAIN.yaml"
+  metadata:
+    last_updated: "2026-09-22"
+    registered: "2026-09-22"
+  name: "Unified cross-platform TIED developer toolchain"
+  source_index: "requirements.yaml"
+  status: "In Progress"
   type: "REQ"
 REQ-TIED_VOCABULARY_OWNERSHIP:
   cross_references:

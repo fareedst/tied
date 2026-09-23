@@ -1,0 +1,14 @@
+{
+  "allowed": true,
+  "ok": true,
+  "blocking": false,
+  "depth": "minimal",
+  "phase": "verification",
+  "diagnostics": [],
+  "hydration_diagnostics": [
+    "hydration_envelope_gaps_missing"
+  ],
+  "recorded_at": "2026-09-22",
+  "tracker": "working/REQ-TIED_UNIFIED_TOOLCHAIN/checklist-tracker.yaml",
+  "tests": "mcp-server npm test 959/959 pass; scripts/test/adherence_append_action_attempted_test.rb 2/2 pass"
+}

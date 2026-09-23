@@ -12,6 +12,8 @@ const fs = require("node:fs");
 const { spawn } = require("node:child_process");
 
 const mcpBin = process.env.TIED_CLI_MCP_BIN || "";
+const umbrellaEntry = process.env.TIED_CLI_UMBRELLA_ENTRY || "";
+const useUmbrellaMcp = process.env.TIED_CLI_UMBRELLA_MCP === "1" && umbrellaEntry;
 const requestId = Number(process.env.TIED_CLI_REQUEST_ID || "1");
 const toolName = process.env.TIED_CLI_TOOL_NAME || "";
 const argsFile = process.env.TIED_CLI_ARGS_FILE || "";
@@ -178,7 +180,8 @@ const callLine = JSON.stringify({
   },
 });
 
-const child = spawn(process.execPath, [mcpBin], {
+const spawnArgs = useUmbrellaMcp ? [umbrellaEntry, "mcp"] : [mcpBin];
+const child = spawn(process.execPath, spawnArgs, {
   stdio: ["pipe", "pipe", "pipe"],
 });
 

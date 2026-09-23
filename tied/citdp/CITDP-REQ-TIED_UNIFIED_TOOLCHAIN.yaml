@@ -1,0 +1,242 @@
+CITDP-REQ-TIED_UNIFIED_TOOLCHAIN:
+  change_definition:
+    current_behavior: "Developer tooling is split across Go (agentstream ~14k LOC, adherence-reconcile), TypeScript/Node (mcp-server MCP + feature-orchestration CLIs), Node bootstrap (tools/bootstrap), Ruby legacy (tools/agent-stream), and shell/Ruby YAML utilities (yaml_tool.sh, lint_yaml, compare_yaml_dirs.rb). README documents separate build steps; Windows requires Node for bootstrap and MCP plus Go for agentstream."
+    desired_behavior: "A documented target architecture and phased migration to a single-language developer suite (TypeScript on user-installed Node ≥18) with npm/pnpm workspace rooted at mcp-server/, umbrella CLI brand tied (tied mcp, tied agentstream, tied bootstrap, tied yaml), unified Cursor MCP config story, Ruby hook bridges ported to TypeScript, and explicit deprecation path for Ruby and Go implementations."
+    non_goals:
+      - "Big-bang rewrite of agentstream checklist engine in this work item"
+      - "Embedding Node in a single native binary in Phases 1–3 (Phase 4 evaluation only; not committed)"
+      - "Replacing Cursor IDE itself or agent subprocess protocol"
+      - "Unifying client application codebases with TIED repo tooling"
+    success_criteria:
+      - "CITDP records tool inventory, language decision matrix, migration phases, and risks"
+      - "REQ-TIED_UNIFIED_TOOLCHAIN, ARCH-TIED_UNIFIED_TOOLCHAIN, and IMPL-TIED_UNIFIED_TOOLCHAIN exist with traceability"
+      - "Sponsor open decisions are enumerated with recommended defaults"
+    unchanged_behavior: "All existing tools continue to build and run until phased migration gates pass parity tests."
+  completion_criteria:
+    checklist_gate:
+      dispositions:
+        - "completed"
+        - "not_applicable"
+        - "pending"
+        - "waived"
+      fail_closed: true
+      phases:
+        - "close_out"
+        - "pre_implementation"
+        - "verification"
+    verification_gate_notes: "Planning phase complete when TIED stack drafts validate; implementation phases gated per migration slice."
+  evidence:
+    commands:
+      - "cd mcp-server && npm install && npm run build && npm test"
+      - "cd tools/agentstream && go test ./..."
+      - "ruby scripts/test/adherence_append_action_attempted_test.rb"
+      - "scripts/lint_yaml.sh tied/citdp/CITDP-REQ-TIED_UNIFIED_TOOLCHAIN.yaml"
+      - "tied_validate_consistency"
+    manifest_reference: "working/REQ-TIED_UNIFIED_TOOLCHAIN/evidence/verification-evidence-manifest.v1.json"
+    proof_boundaries:
+      - "Phases 0–3b slice 1 shipped (npm workspace, @tied/cli/bootstrap/yaml-cli, TS adherence hook, @tied/agentstream dispatcher/tiedpreflight/tracker-preview); full Go→TS agentstream migration and Phase 3b backlog not proven"
+  impact_analysis:
+    architecture:
+      - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
+      - "ARCH-TIED_STRUCTURE"
+      - "ARCH-TIED_UNIFIED_TOOLCHAIN"
+    implementation_decisions:
+      - "IMPL-MCP_LEAP_PROPOSAL_QUEUE"
+      - "IMPL-TIED_FILES"
+      - "IMPL-TIED_UNIFIED_TOOLCHAIN"
+    modules_or_boundaries: "tools/agentstream, mcp-server, tools/bootstrap, tools/bundled-tied-yaml-skill, scripts/yaml_tool.sh, scripts/run-feature-batch-agentstream.sh, copy_files entrypoints"
+    requirements:
+      - "REQ-GOAGENT-LIB-MODULE"
+      - "REQ-TIED_SETUP"
+      - "REQ-TIED_UNIFIED_TOOLCHAIN"
+    tied_tokens_affected:
+      - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
+      - "IMPL-GOAGENT-*"
+      - "REQ-GOAGENT-*"
+    tied_tokens_new:
+      - "ARCH-TIED_UNIFIED_TOOLCHAIN"
+      - "IMPL-TIED_UNIFIED_TOOLCHAIN"
+      - "REQ-TIED_UNIFIED_TOOLCHAIN"
+  language_recommendation:
+    bun_ci_optional: "Bun allowed only if CI proves MCP + full test compatibility; Node remains canonical for docs and release (sponsor 2026-09-22)."
+    decision_matrix:
+      criteria:
+        - bun: "bun build"
+          go: "single binary per cmd"
+          name: "Single build story"
+          node_ts: "npm workspace + optional pkg later"
+          rust: "cargo install"
+        - bun: "inherits node tests mostly"
+          go: "go test mature in agentstream"
+          name: "Test story"
+          node_ts: "node:test + extensive mcp-server suite"
+          rust: "new harness"
+        - bun: "moderate"
+          go: "strong"
+          name: "Cross-platform UX (macOS + Windows)"
+          node_ts: "strong (bootstrap already Node)"
+          rust: "strong"
+        - bun: "node-compatible"
+          go: "weak"
+          name: "MCP SDK ecosystem"
+          node_ts: "strong"
+          rust: "emerging"
+        - bun: "reuse TS"
+          go: "partial (preflight only)"
+          name: "Existing investment (mcp-server analysis, gates, verify)"
+          node_ts: "strong"
+          rust: "none"
+        - bun: "similar to node"
+          go: "proven"
+          name: "Agentstream orchestration performance"
+          node_ts: "adequate; validate with benchmarks"
+          rust: "overkill"
+        - bun: "TS + runtime fork"
+          go: "requires rewriting mcp-server"
+          name: "Team maintainability (one language)"
+          node_ts: "strong if port completes"
+          rust: "highest cost"
+    fallback: "Go — retain agentstream if TS port fails parity gates; still unify bootstrap via existing Node"
+    primary: "TypeScript on Node.js ≥18 (extend mcp-server monorepo / npm workspace)"
+    rejected_or_deferred:
+      - lang: "Bun as primary runtime"
+        reason: "Second runtime; Cursor/MCP docs assume Node; optional CI matrix only after compatibility proof"
+      - lang: "Deno"
+        reason: "Similar to Bun; fewer existing dependencies and test harnesses in repo"
+      - lang: "Rust"
+        reason: "Excellent single-binary story but high rewrite cost; weak MCP SDK parity vs TS; team already invested in mcp-server TS analysis stack"
+  leap_feedback:
+    divergences_from_analysis: "Shipped Phase 3b slice 1 only; IMPL pseudo-code documents backlog blocks (pipeline, executor, adherence) as not yet TS-native."
+    record_status: "applied_slice_1"
+    tied_stack_updates_required: []
+  migration_phases:
+    - deliverables:
+        - "Package-by-package port with golden tests; Go deprecated behind feature flag"
+        - "Ruby agent-stream deprecation notice"
+      name: "Agentstream strangler port"
+      phase: 3
+    - deliverables:
+        - "REQ/ARCH/IMPL drafts, CITDP, sponsor decision log"
+      name: "Architecture + TIED stack (this work item)"
+      phase: 0
+    - deliverables:
+        - "bootstrap package in workspace; yaml_tool delegates to TS canonicalizer"
+        - "tied-cli.sh calls `@tied/cli`"
+      name: "Bootstrap + yaml-cli unification"
+      phase: 2
+    - deliverables:
+        - "Evaluate pkg/nexe for operator-only installs"
+        - "Remove Go agentstream and Ruby agent-stream after parity gate"
+      name: "Remove legacy + optional embedded runtime"
+      phase: 4
+    - deliverables:
+        - "No removal of Go/Ruby yet"
+        - "npm workspace, unified `npm run build`, README single command"
+      name: "Workspace scaffold"
+      phase: 1
+  record_identity:
+    change_request_id: "REQ-TIED_UNIFIED_TOOLCHAIN"
+    gate_policy: "advisory"
+    recorded_at: "2026-09-22"
+    title: "Unified cross-platform TIED developer toolchain (single language)"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: "minimal depth_tier with advisory gate_policy; integrated adversarial inquiry not_applicable for Phase 3b slice 1 close-out."
+      counterexamples:
+        - "Assuming tools/tied-suite/ as equal workspace root would fork build docs and duplicate mcp-server investment."
+        - "Keeping Ruby adherence hooks indefinitely contradicts single-language suite goal."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Existing multi-language split documented with measurable LOC and build steps."
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "working/REQ-TIED_UNIFIED_TOOLCHAIN/citdp-planning-notes.md"
+        - "working/REQ-TIED_UNIFIED_TOOLCHAIN/PLAN.md"
+      falsification_questions:
+        - "Does a Node port of agentstream lose checklist gate parity or Windows path semantics?"
+        - "Does consolidating MCP + CLI increase TIED_BASE_PATH misconfiguration risk?"
+      gate_policy: "advisory"
+      prior_depth_tier: null
+      rationale: "Documentation and stack design; subprocess orchestration design review only."
+      research_profile: "integrated-agent"
+    risks:
+      - description: "Agentstream Go→TS port size (~14k LOC) and checklist/adherence regression"
+        id: "RISK-UNIFIED-001"
+        likelihood: "High"
+        mitigation: "Strangler fig; contract tests from Go golden fixtures; phase gate on go test vs node test parity"
+      - description: "Performance of TS subprocess orchestration vs Go"
+        id: "RISK-UNIFIED-004"
+        likelihood: "Low"
+        mitigation: "Benchmark executor hot path; keep Go shim only if data proves need"
+      - description: "TIED_BASE_PATH and multi-root workspace footguns when one binary serves MCP"
+        id: "RISK-UNIFIED-002"
+        likelihood: "Medium"
+        mitigation: "Preserve tied_config_get_base_path; document one-window-per-repo; integration tests"
+      - description: "Windows path and stdio MCP fragility"
+        id: "RISK-UNIFIED-003"
+        likelihood: "Medium"
+        mitigation: "Reuse bootstrap path helpers; E2E on win32 in CI where available"
+      - description: "YAML canonicalization currently Ruby-backed"
+        id: "RISK-UNIFIED-005"
+        likelihood: "Medium"
+        mitigation: "MCP already has TS canonicalizer; migrate yaml_tool front-end to call TS CLI"
+    test_strategy:
+      matrix_notes: "Phase 0: no code migration tests. Phase 1+: parity suites from tools/agentstream/checklist/testdata and mcp-server e2e."
+      summary: "Planning validates TIED consistency; migration phases each require RED parity tests before deprecating Go/Ruby/shell paths."
+  target_architecture:
+    cursor_mcp_config: "Single artifact path: `node <repo>/mcp-server/dist/index.js` unchanged in Phase 1; Phase 2+ optional `tied mcp` shim with identical stdio behavior"
+    layout: "Expand `mcp-server/` as npm/pnpm workspace root (@tied/suite) with packages: `@tied/mcp`, `@tied/agentstream`, `@tied/bootstrap`, `@tied/yaml-cli`, `@tied/cli` (umbrella `tied` CLI). Not `tools/tied-suite/` as primary (sponsor 2026-09-22)."
+    package_boundaries:
+      - "@tied/agentstream — ported pipeline/checklist/executor"
+      - "@tied/bootstrap — move tools/bootstrap into workspace package"
+      - "@tied/cli — dispatches subcommands; tied-cli.sh becomes thin wrapper"
+      - "@tied/mcp — current mcp-server (stdio MCP, verify, gates)"
+      - "@tied/yaml — lint/canonicalize/compare (TS + retire Ruby sorter front-end)"
+  tool_suite_inventory:
+    tier_1_unified:
+      - current_lang: "Go"
+        path: "tools/agentstream/"
+        role: "Pipeline CLI, checklist rendering, executor, adherence, tiedpreflight"
+      - current_lang: "Node (.mjs)"
+        path: "tools/bootstrap/"
+        role: "copy_files engine, new-tied-client, MCP config preservation"
+      - current_lang: "TypeScript/Node"
+        path: "mcp-server/"
+        role: "TIED YAML MCP stdio server, verify, gates, adversarial inquiry, feature-orchestration entrypoints"
+    tier_2_wrappers:
+      - current_lang: "shell"
+        path: "tools/bundled-tied-yaml-skill/scripts/tied.sh"
+        role: "Feature orchestration shell facade"
+      - current_lang: "shell + Node dist"
+        path: ".cursor/skills/tied-yaml/scripts/tied-cli.sh"
+        role: "MCP JSON-RPC client for agents"
+      - current_lang: "shell/cmd → Node"
+        path: "copy_files.sh / copy_files.cmd"
+        role: "Bootstrap entrypoints"
+    tier_3_consolidate_candidates:
+      - current_lang: "Ruby"
+        path: "scripts/compare_yaml_dirs.rb"
+        role: "Directory YAML semantic diff"
+      - current_lang: "Ruby"
+        path: "scripts/yaml_semantic_compare.rb"
+        role: "Semantic equality for canonicalization"
+      - current_lang: "shell"
+        path: "scripts/run-feature-batch-agentstream.sh"
+        role: "Feature batch driver"
+      - current_lang: "shell"
+        path: "scripts/validate_tokens.sh"
+        role: "Token registry audit"
+      - current_lang: "shell → Ruby yaml_list_sorter"
+        path: "scripts/yaml_tool.sh / lint_yaml.sh"
+        role: "YAML canonicalization gate"
+    tier_4_deprecate:
+      - current_lang: "Ruby"
+        path: "tools/agent-stream/"
+        role: "Legacy Ruby ATDD runner"
+    tier_5_port_with_suite:
+      - note: "Port to TypeScript with @tied/cli or bootstrap package; Ruby retired after parity (sponsor 2026-09-22)"
+        path: "scripts/adherence_append_action_attempted.rb"
+        role: "Cursor hook bridge (append-only)"
+      - path: "working/** research qualification scripts"
+        role: "Research pilots; out of unified suite scope"

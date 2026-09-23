@@ -68,6 +68,7 @@
 | **copy timestamp normalization** | artificial timestamp, fixed copy time | Apply the source item's local calendar-date midnight only to the managed client copy after `cp -p`/`cp -pR`; source mtimes remain unchanged |
 | **client-modification warning** | refresh warning (alone) | Diagnostic emitted when an existing managed destination mtime is not truncated to local calendar-date midnight |
 | **Windows bootstrap entry point** | copy_files.bat, Windows shell script (alone) | `copy_files.cmd` at TIED repo root; PATHEXT resolves `copy_files` for neighboring client repos |
+| **unified TIED toolchain** | single-language tools (alone) | Developer/operator suite (MCP, agentstream, bootstrap, YAML CLIs) targeting one primary language; traceability [REQ-TIED_UNIFIED_TOOLCHAIN] |
 | **shared bootstrap engine** | Node copy script (alone) | `tools/bootstrap/` Node implementation of BOOTSTRAP_TIED; sole bootstrap logic owner |
 | **bootstrap manifest** | inline bash arrays (alone) | `tools/bootstrap/manifest.json` single source for DOCS_TO_COPY, skill dirs, verify lists |
 | **disposable TIED client** | throwaway demo project (alone) | Timestamped bootstrapped client under `TIED_TEST_ROOT/<unix-seconds>` for smoke and feature demos |

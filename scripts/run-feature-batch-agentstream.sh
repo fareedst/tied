@@ -7,7 +7,8 @@
 # binary (or go run) instead of Ruby run_agent_stream.rb.
 #
 # Environment:
-#   AGENTSTREAM  If set, path to a prebuilt agentstream executable (skips go run).
+#   AGENTSTREAM  If set, path to a prebuilt agentstream executable (skips go run / tied).
+#   TIED_AGENTSTREAM_IMPL  go (default) or ts — passed through when using tied agentstream.
 #   AGENTSTREAM_TIED_MCP_PREFLIGHT=1  Opt in to static tied-yaml mcp.json validation before cursor agent (off by default).
 #   AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1  Skip preflight when it is enabled (or use agentstream -y).
 # Prompt files: <workspace>/tied/agent-preload-contract.yaml (when present) is passed first, then any -p paths (see run-feature-batch.sh).
@@ -41,7 +42,8 @@ Mid-batch resume: -f / --first-turn N (1-based) is passed through to Go agentstr
 also pass -s / --session-id with the session to resume.
 
 Environment:
-  AGENTSTREAM        Path to agentstream binary; if unset, uses: go run -C <repo>/tools/agentstream ./cmd/agentstream
+  AGENTSTREAM        Path to agentstream binary; if unset, prefers built `tied agentstream` when available
+  TIED_AGENTSTREAM_IMPL  go (default) or ts when using tied agentstream
   AGENTSTREAM_TIED_MCP_PREFLIGHT=1       Opt in to tied-yaml mcp.json preflight (default is skip)
   AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1  Skip preflight when enabled (see tools/agentstream/README.md)
 
@@ -270,9 +272,12 @@ main() {
   [[ -n $feature_spec_batch_yaml ]] && require_readable_file "feature spec batch yaml" "$feature_spec_batch_yaml"
 
   local -a cmd
+  local _tied_cli="${_repo_root}/mcp-server/packages/cli/dist/index.js"
   if [[ -n "${AGENTSTREAM:-}" ]]; then
     [[ -f "$AGENTSTREAM" && -x "$AGENTSTREAM" ]] || fail "AGENTSTREAM is not an executable file: $AGENTSTREAM"
     cmd=("$AGENTSTREAM")
+  elif [[ -f "$_tied_cli" ]]; then
+    cmd=(node "$_tied_cli" agentstream)
   else
     cmd=(go run -C "${_go_module}" ./cmd/agentstream)
   fi

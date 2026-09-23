@@ -1,0 +1,23 @@
+ARCH-TIED_UNIFIED_TOOLCHAIN:
+  alternatives_considered:
+    - description: "Port mcp-server to Go"
+      name: "Go-only suite"
+      rejected_because: "Loss of TS analysis/pseudocode stack; larger rewrite than Go→TS port of agentstream only"
+    - description: "cargo install tied-suite"
+      name: "Rust workspace"
+      rejected_because: "No existing Rust tooling; highest migration cost"
+    - description: "Document separate builds only"
+      name: "Status quo"
+      rejected_because: "Fails sponsor single-language requirement"
+  consequences:
+    negative:
+      - "Large agentstream port"
+      - "Temporary dual implementation during strangler phase"
+    positive:
+      - "Bootstrap already Node-aligned"
+      - "Reuse mcp-server investment"
+      - "Single npm test/build CI matrix"
+  context: "TIED source repository ships operator tools across Go, TypeScript, Node bootstrap, Ruby legacy, and shell wrappers."
+  decision: "Adopt TypeScript-on-Node workspace as primary suite language; structure as packages @tied/mcp, @tied/agentstream, @tied/bootstrap, @tied/yaml, @tied/cli with phased port and parity gates."
+  name: "Unified TIED toolchain architecture"
+  status: "Proposed"

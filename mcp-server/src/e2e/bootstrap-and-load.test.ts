@@ -16,7 +16,7 @@ import {
   resolveIndexPath,
 } from "../yaml-loader.js";
 
-type BootstrapEntrypoint = "node" | "bash";
+type BootstrapEntrypoint = "node" | "bash" | "tied";
 
 function runBootstrap(
   repoRoot: string,
@@ -42,6 +42,14 @@ function runBootstrap(
       cwd: repoRoot,
       env,
     }).toString();
+  }
+  if (entrypoint === "tied") {
+    const tiedCli = path.join(repoRoot, "mcp-server", "packages", "cli", "dist", "index.js");
+    return execFileSync(
+      process.execPath,
+      [tiedCli, "bootstrap", ...extraArgs, options.target],
+      { stdio: "pipe", cwd: repoRoot, env },
+    ).toString();
   }
   const copyScript = path.join(repoRoot, "copy_files.sh");
   return execFileSync("bash", [copyScript, ...extraArgs, options.target], {
@@ -107,11 +115,23 @@ describe("e2e: bootstrap and load", () => {
     }
   });
 
+  it("tied bootstrap subcommand populates tied/ [REQ-TIED_UNIFIED_TOOLCHAIN]", () => {
+    const target = fs.mkdtempSync(path.join(os.tmpdir(), "tied-bootstrap-cli-"));
+    try {
+      runBootstrap(repoRoot, { target, entrypoint: "tied" });
+      assert.ok(fs.existsSync(path.join(target, "tied", "requirements.yaml")));
+    } finally {
+      fs.rmSync(target, { recursive: true, force: true });
+    }
+  });
+
   it("copy_files populates tied/ and loader reads requirements index from it [IMPL-TIED_FILES] [REQ-TIED_SETUP]", () => {
     const copyScript = path.join(repoRoot, "copy_files.sh");
     const nodeCli = path.join(repoRoot, "tools", "bootstrap", "copy-files.mjs");
+    const tiedUmbrellaCli = path.join(repoRoot, "mcp-server", "packages", "cli", "dist", "index.js");
     assert.ok(fs.existsSync(copyScript), `copy_files.sh not found at ${copyScript}`);
     assert.ok(fs.existsSync(nodeCli), `copy-files.mjs not found at ${nodeCli}`);
+    assert.ok(fs.existsSync(tiedUmbrellaCli), `tied CLI not built at ${tiedUmbrellaCli}`);
     const bootstrapOutput = runBootstrap(repoRoot, { target: tempDir, entrypoint: "node" });
     assert.match(
       bootstrapOutput,

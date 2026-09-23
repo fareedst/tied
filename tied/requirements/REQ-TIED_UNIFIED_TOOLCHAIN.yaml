@@ -1,0 +1,34 @@
+REQ-TIED_UNIFIED_TOOLCHAIN:
+  category: "Tooling"
+  metadata:
+    created:
+      author: "plan-new-feature subagent"
+      date: "2026-09-22"
+    last_updated:
+      author: "plan-close-out"
+      date: "2026-09-22"
+      reason: "Phase 3b slice 1 close-out; partial strangler delivery"
+  name: "Unified cross-platform TIED developer toolchain"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Aligned bootstrap and MCP release"
+      - "One primary language and test harness"
+      - "Shared types between MCP and agentstream"
+    problems_solved:
+      - "Duplicated path and MCP configuration knowledge"
+      - "Ruby legacy drift vs Go agentstream"
+      - "Separate Go and Node build steps"
+    why: "Reduce multi-language friction for TIED contributors and client operators on macOS and Windows."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-GOAGENT-LIB-MODULE"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Minimum suite membership includes mcp-server, agentstream, bootstrap/copy_files, tied-cli facade, yaml lint/canonicalize"
+      metric: "CITDP tool_suite_inventory tier_1 and tier_2"
+    - criterion: "Published migration phases with parity gates before Go/Ruby removal"
+      metric: "CITDP migration_phases and test_strategy"
+  status: "In Progress"

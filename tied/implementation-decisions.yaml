@@ -2241,6 +2241,16 @@ IMPL-TIED_RESEARCH_RECORDS:
     tests:
       - "mcp-server/src/research-records.test.ts"
       - "mcp-server/src/tools/batch-5-mcp.test.ts"
+IMPL-TIED_UNIFIED_TOOLCHAIN:
+  description: "Workspace layout, CLI dispatch, MCP stdio entry, migration hooks, and deprecation switches for Go/Ruby tools."
+  detail_file: "implementation-decisions/IMPL-TIED_UNIFIED_TOOLCHAIN.yaml"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_UNIFIED_TOOLCHAIN-pseudocode.md"
+  name: "Unified TIED toolchain implementation plan"
+  related_architecture:
+    - "ARCH-TIED_UNIFIED_TOOLCHAIN"
+  related_requirements:
+    - "REQ-TIED_UNIFIED_TOOLCHAIN"
+  status: "Proposed"
 IMPL-TIED_VOCABULARY_REFRESH:
   cross_references:
     - "ARCH-TIED_VOCABULARY_LAYERS"

@@ -5,8 +5,9 @@ require 'json'
 require 'minitest/autorun'
 require 'fileutils'
 require 'tmpdir'
+require 'open3'
 
-require_relative '../adherence_append_action_attempted'
+LAUNCHER = File.expand_path('../adherence_append_action_attempted.rb', __dir__)
 
 class AdherenceAppendActionAttemptedTest < Minitest::Test
   def setup
@@ -38,6 +39,19 @@ class AdherenceAppendActionAttemptedTest < Minitest::Test
     FileUtils.rm_rf(@tmpdir)
   end
 
+  def invoke_bridge(record)
+    payload_path = File.join(@tmpdir, 'payload.json')
+    File.write(payload_path, JSON.generate(record))
+    stdout, stderr, status = Open3.capture3(
+      'ruby', LAUNCHER,
+      '--marker', @marker_path,
+      '--hook-log-path', '/tmp/hook.yaml',
+      '--hook-log-line', '7',
+      '--payload', payload_path
+    )
+    assert status.success?, "bridge launcher failed (#{status.exitstatus}): #{stderr}#{stdout}"
+  end
+
   def test_appends_when_marker_present
     record = {
       'hook_event_name' => 'postToolUse',
@@ -49,7 +63,7 @@ class AdherenceAppendActionAttemptedTest < Minitest::Test
         }
       }
     }
-    AdherenceAppendActionAttempted.call(record, hook_log_path: '/tmp/hook.yaml', hook_log_line: 7)
+    invoke_bridge(record)
 
     lines = File.read(@ledger).lines
     assert_equal 1, lines.size
@@ -69,7 +83,7 @@ class AdherenceAppendActionAttemptedTest < Minitest::Test
       }
     }
     FileUtils.rm_f(@marker_path)
-    AdherenceAppendActionAttempted.call(record, hook_log_path: '/tmp/hook.yaml', hook_log_line: 1)
+    invoke_bridge(record)
 
     refute File.exist?(@ledger), 'ledger must not be created without marker'
   end

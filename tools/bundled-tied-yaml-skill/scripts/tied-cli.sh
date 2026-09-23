@@ -84,6 +84,12 @@ if [[ "${TIED_REPO_ROOT}" == "/ABSOLUTE/PATH/TO/TIED/SOURCE/DIR" ]] \
   TIED_REPO_ROOT="${REPO_ROOT}"
 fi
 
+TIED_UMBRELLA_CLI="${TIED_REPO_ROOT}/mcp-server/packages/cli/dist/index.js"
+if [[ -f "${TIED_UMBRELLA_CLI}" ]]; then
+  export TIED_CLI_UMBRELLA_MCP=1
+  export TIED_CLI_UMBRELLA_ENTRY="${TIED_UMBRELLA_CLI}"
+fi
+
 : "${TIED_MCP_BIN:=$TIED_REPO_ROOT/mcp-server/dist/index.js}"
 
 if [[ ! -f "$TIED_MCP_BIN" ]]; then

@@ -23,4 +23,9 @@ if ! command -v node >/dev/null 2>&1; then
   exit 1
 fi
 
+TIED_BOOTSTRAP_CLI="${SCRIPT_DIR}/mcp-server/packages/cli/dist/index.js"
+if [[ -f "${TIED_BOOTSTRAP_CLI}" ]]; then
+  exec node "${TIED_BOOTSTRAP_CLI}" bootstrap "$@"
+fi
+
 exec node "${SCRIPT_DIR}/tools/bootstrap/copy-files.mjs" "$@"

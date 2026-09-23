@@ -1,0 +1,8 @@
+IMPL-TIED_UNIFIED_TOOLCHAIN:
+  implementation_approach:
+    details:
+      - "Preserve mcp-server/dist/index.js as MCP stdio entry until @tied/cli mcp subcommand proven equivalent"
+      - "tied-cli.sh resolves TIED_MCP_BIN to workspace build output"
+    summary: "Scaffold workspace, unify bootstrap/yaml CLI first, strangler-port agentstream with golden tests, retire legacy after parity."
+  name: "Unified TIED toolchain implementation plan"
+  status: "Proposed"

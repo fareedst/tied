@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Unified Node developer toolchain — Phase 3b slice 1 ([REQ-TIED_UNIFIED_TOOLCHAIN])** —
+  npm/pnpm workspace rooted at `mcp-server/` with `@tied/cli`, `@tied/bootstrap`, `@tied/yaml-cli`, and
+  `@tied/agentstream` (dispatcher, tiedpreflight, TS `--checklist-tracker-preview`); MCP adherence hook in TypeScript;
+  umbrella `tied` CLI brand documented. Go `tools/agentstream` remains default for most argv until Phase 3b backlog
+  (checklist render, pipeline, executor dry-run, adherence strangler) completes. REQ status **In Progress** (partial
+  strangler delivery). Close-out: `close_out` gate allowed (minimal/advisory); envelope blocking gaps **0**.
+  Tests: `mcp-server` npm test; `go test ./...` under `tools/agentstream`; adherence Ruby contract test.
+
 - **Fleet constraint v2 — Track B exit NB-3/NB-4 + G4 maintenance + new-client adherence** —
   NB-3 tranche two ([REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO]): sponsor `od-nb3-acceptance.v1.json`, wave-3
   orchestration (`run-nb3-*`, `scripts/fleet-nb3-orchestration.test.mjs` 7/7), machine close-out under

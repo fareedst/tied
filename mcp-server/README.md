@@ -19,6 +19,8 @@ npm install
 npm run build
 ```
 
+This directory is an npm **workspace**: **`@tied/mcp`** (this package — MCP sources and `dist/index.js`) and **`@tied/cli`** (`tied mcp` dispatches to the same stdio entry). Cursor MCP config should keep using **`mcp-server/dist/index.js`** (or `node …/dist/index.js`).
+
 The MCP server remains in the TIED repo; your project only references it via MCP configuration.
 
 ## Tests
