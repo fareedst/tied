@@ -42,6 +42,12 @@ jobs:
           npm ci
           npm run build
 
+      - name: Install bootstrap engine deps
+        shell: cmd
+        run: |
+          cd tools\bootstrap
+          npm ci
+
       - name: Run windows-bootstrap-smoke.cmd
         shell: cmd
         run: scripts\windows-bootstrap-smoke.cmd
