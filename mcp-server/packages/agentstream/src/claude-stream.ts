@@ -8,7 +8,13 @@ export type ClaudeStreamEvent =
   | { kind: "assistant"; text: string }
   | { kind: "session"; sessionId: string }
   | { kind: "error"; code: string; message: string }
-  | { kind: "result"; subtype: string; isError: boolean; exitCode?: number };
+  | {
+      kind: "result";
+      subtype: string;
+      isError: boolean;
+      exitCode?: number;
+      errors?: string[];
+    };
 
 export type ClaudeExitMetadata = {
   isError: boolean;
@@ -28,8 +34,17 @@ export type ParseClaudeStreamError =
 
 function mapClaudeStreamLine(
   obj: Record<string, unknown>,
-): ClaudeStreamEvent | "unknown_shape" {
+): ClaudeStreamEvent | "unknown_shape" | "ignore_line" {
   const typ = String(obj.type ?? "");
+  if (typ === "system" && obj.subtype === "init") {
+    if (typeof obj.session_id === "string" && obj.session_id !== "") {
+      return { kind: "session", sessionId: obj.session_id };
+    }
+    return "ignore_line";
+  }
+  if (typ === "rate_limit_event") {
+    return "ignore_line";
+  }
   if (typ === "thinking") {
     return {
       kind: "thinking",
@@ -68,11 +83,21 @@ function mapClaudeStreamLine(
     const exitRaw = obj.exit_code;
     const exitCode =
       typeof exitRaw === "number" && Number.isFinite(exitRaw) ? exitRaw : undefined;
+    const errorsRaw = obj.errors;
+    const errors = Array.isArray(errorsRaw)
+      ? errorsRaw.filter((e): e is string => typeof e === "string")
+      : undefined;
+    const subtype = String(obj.subtype ?? "");
+    const isError =
+      obj.is_error === true ||
+      subtype.startsWith("error") ||
+      subtype === "error_during_execution";
     return {
       kind: "result",
-      subtype: String(obj.subtype ?? ""),
-      isError: obj.is_error === true || obj.subtype === "error",
+      subtype,
+      isError,
       exitCode,
+      errors: errors && errors.length > 0 ? errors : undefined,
     };
   }
   return "unknown_shape";
@@ -91,6 +116,13 @@ export function deriveExitMetadata(events: ClaudeStreamEvent[]): ClaudeExitMetad
     }
     if (ev.kind === "result") {
       isError = ev.isError;
+      if (ev.isError && ev.subtype !== "") {
+        errorCode = ev.subtype;
+      }
+      if (ev.errors && ev.errors.length > 0) {
+        errorMessage = ev.errors[0];
+        isError = true;
+      }
       if (ev.exitCode !== undefined) {
         exitCode = ev.exitCode;
       } else if (ev.isError) {
@@ -122,7 +154,10 @@ export function parseClaudeStream(
     }
     const mapped = mapClaudeStreamLine(obj);
     if (mapped === "unknown_shape") {
-      return { error: "STREAM_SCHEMA_DRIFT", line: lineNo };
+      continue;
+    }
+    if (mapped === "ignore_line") {
+      continue;
     }
     events.push(mapped);
   }

@@ -35,6 +35,24 @@ export function agentArgv(
   const bin =
     agentPath.trim() !== "" ? agentPath : defaultAgentBinForHarness(harness);
   const m = model.trim() !== "" ? model : "Auto";
+  if (harness === "claude") {
+    // Claude Code CLI (2.x): stream-json requires --verbose; no --trust/--force/--workspace.
+    const cmd: string[] = [
+      bin,
+      "--print",
+      "--verbose",
+      "--output-format",
+      "stream-json",
+    ];
+    if (m !== "" && m !== "Auto") {
+      cmd.push("--model", m);
+    }
+    if (resumeId !== "") {
+      cmd.push("--resume", resumeId);
+    }
+    cmd.push(...parts);
+    return cmd;
+  }
   const cmd: string[] = [
     bin,
     "--print",

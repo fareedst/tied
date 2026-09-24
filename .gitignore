@@ -103,6 +103,11 @@ working/**/close_out-*.json
 !working/REQ-TIED_CLAUDE_SKILLS_REROOT/gates/close_out-*.json
 !working/REQ-TIED_CLAUDE_SKILLS_REROOT/gates/pre_implementation-*.json
 !working/REQ-TIED_CLAUDE_SKILLS_REROOT/gates/verification-*.json
+!working/REQ-TIED_CLAUDE_DOC_REMAINDER/gates/
+!working/REQ-TIED_CLAUDE_DOC_REMAINDER/gates/**
+!working/REQ-TIED_CLAUDE_DOC_REMAINDER/gates/close_out-*.json
+!working/REQ-TIED_CLAUDE_DOC_REMAINDER/gates/pre_implementation-*.json
+!working/REQ-TIED_CLAUDE_DOC_REMAINDER/gates/verification-*.json
 # Build-plan change-ID scratch (tracker, CITDP, gate receipts, remediation — regenerate per build-plan)
 working/DOC-*/
 # refine-plan session scratch (linked plan lives in ~/.cursor/plans/; not canonical TIED intent)
@@ -142,6 +147,10 @@ working/**/evidence/request-evidence-envelope.v1.json
 !working/REQ-TIED_CLAUDE_SKILLS_REROOT/evidence/request-evidence-envelope.v1.json
 !working/REQ-TIED_CLAUDE_SKILLS_REROOT/evidence/verification-evidence-manifest.v1.json
 !working/REQ-TIED_CLAUDE_SKILLS_REROOT/evidence/not-applicable-receipt.v1.json
+!working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/request-evidence-envelope.v1.json
+!working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/verification-evidence-manifest.v1.json
+!working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/not-applicable-receipt.v1.json
+working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/r7-raw/
 # CITDP pre-persist scratch (canonical record under tied/citdp/)
 working/**/CITDP-REQ-*-diff-or-stage.yaml
 # Quality profile gate receipts (regenerate per quality_security_profile_validate)

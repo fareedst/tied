@@ -6,24 +6,24 @@
 
 **Related:** [`tied-vs-disciplined-agentic-engineering.md`](tied-vs-disciplined-agentic-engineering.md), [`dae-mechanisms-for-tied-improvement.md`](dae-mechanisms-for-tied-improvement.md), [`../../working/REQ-TIED_UNIFIED_TOOLCHAIN/PLAN.md`](../../working/REQ-TIED_UNIFIED_TOOLCHAIN/PLAN.md).
 
-**Status:** Sponsor-approved **full program** (Phases 0→3, decision log below). **`REQ-TIED_CLAUDE_HARNESS`** is **Implemented** and closed (Phases 0–3 shipped). Follow-on work is tracked as **`REQ-TIED_CLAUDE_LIVE_DRIVER`** (live AgentDriver + fixtures) and **`REQ-TIED_CLAUDE_BOOTSTRAP_OPS`** (Windows CI, symlink gate, optional ergonomics, this doc’s **Current** refresh). Sections labeled **Current** are evidence-backed against this repository; **Proposed** items are future slices not yet green. This comparison doc does not hold project TIED YAML.
+**Status:** Sponsor-approved **full program** (Phases 0→3, decision log below). **`REQ-TIED_CLAUDE_HARNESS`**, **`REQ-TIED_CLAUDE_LIVE_DRIVER`**, **`REQ-TIED_CLAUDE_BOOTSTRAP_OPS`**, and optional **`REQ-TIED_CLAUDE_SKILLS_REROOT`** are **Implemented** and closed. Remainder slices **R1–R8** (doc + hygiene) closed **2026-09-24** — see **What remains**. Sections labeled **Current** are evidence-backed against this repository; **Proposed** applies only to genuinely future sponsor scope (new REQ tokens), not shipped bootstrap, agentstream, or closed remainder work. This comparison doc does not hold project TIED YAML.
 
 **Last updated:** 2026-09-24
 
-### What remains (2026-09-24)
+### What remains (2026-09-24) — program closed
 
-Program Phases **0→3** and follow-on **`REQ-TIED_CLAUDE_BOOTSTRAP_OPS`** / **`REQ-TIED_CLAUDE_LIVE_DRIVER`** are **Implemented** and closed. Outstanding work is **not** another full harness program—it is slices below. Authoritative remainder table: [`working/REQ-TIED_CLAUDE_DOC_REMAINDER/PLAN.md`](../../working/REQ-TIED_CLAUDE_DOC_REMAINDER/PLAN.md).
+Phases **0→3**, follow-on **`REQ-TIED_CLAUDE_BOOTSTRAP_OPS`** / **`REQ-TIED_CLAUDE_LIVE_DRIVER`**, **`REQ-TIED_CLAUDE_SKILLS_REROOT`**, and remainder slices **R1–R8** are **complete**. There is **no open Claude multi-harness implementation backlog** in this repository—only doc maintenance, operator-only checks, and **new sponsor REQs** for future scope. Authoritative closure record: [`working/REQ-TIED_CLAUDE_DOC_REMAINDER/PLAN.md`](../../working/REQ-TIED_CLAUDE_DOC_REMAINDER/PLAN.md).
 
-| Slice | Owner | Suggested entry |
+| Slice | Owner | Status |
 | --- | --- | --- |
-| **R1 — Doc reconcile** (this doc **Current** labels, historical phases) | Doc maintenance — `working/REQ-TIED_CLAUDE_DOC_REMAINDER/` | **`refine-plan`** |
+| ~~**R1 — Doc reconcile**~~ ✅ **complete 2026-09-24** | Doc maintenance — [`r1-doc-reconcile-receipt.md`](../../working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/r1-doc-reconcile-receipt.md) | **Current** labels vs bootstrap + agentstream README |
 | ~~**R2 — Stale B3 deferral note**~~ ✅ **complete 2026-09-24** | LEAP hygiene — [`skills-reroot-deferred.md`](../../working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/skills-reroot-deferred.md) | — |
 | ~~**R3 — Optional repo-root `skills/` re-root (B3)**~~ ✅ **complete 2026-09-24** | [`REQ-TIED_CLAUDE_SKILLS_REROOT`](../../tied/requirements/REQ-TIED_CLAUDE_SKILLS_REROOT.yaml) · `TIED_SKILLS_REROOT=1` | — |
 | ~~**R4 — Dual child REQ close-out LEAP**~~ ✅ **complete 2026-09-24** | [`working/REFINE-DUAL_REQ_CLOSE_OUT/`](../../working/REFINE-DUAL_REQ_CLOSE_OUT/) | — |
-| **R5 — Operator live Claude checklist** | Human operator (not CI) | [`agentstream` README](../../mcp-server/packages/agentstream/README.md): `AGENTSTREAM_CLAUDE_LIVE_OK=1` after local tests green |
-| **R6 — Interactive Claude IDE pilot** | Optional operator evidence | Manual skill/MCP session; update gap list only if new unknowns |
-| **R7 — Real CLI stream oracles** (replace `synthetic-v1`) | Maintenance on **`REQ-TIED_CLAUDE_LIVE_DRIVER`** or follow-on | **`build-plan`** |
-| **R8 — Claude adherence hooks** | Closed **N/A** (bootstrap ops B4) | — |
+| ~~**R5 — Operator live Claude checklist**~~ ✅ **complete 2026-09-24** | Human operator (not CI) | [`operator-live-claude-smoke-r5.md`](../../working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/operator-live-claude-smoke-r5.md) · README § Operator live smoke |
+| ~~**R6 — Interactive Claude IDE pilot**~~ ✅ **complete 2026-09-24** | Runbook + automatable preflight; human IDE session optional follow-up | [`operator-interactive-claude-ide-r6.md`](../../working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/operator-interactive-claude-ide-r6.md) · gap list § R6 cross-reference |
+| ~~**R7 — Real CLI stream oracles**~~ ✅ **complete 2026-09-24** | Maintenance on **`REQ-TIED_CLAUDE_LIVE_DRIVER`** | [`r7-cli-oracle-capture-receipt.md`](../../working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/r7-cli-oracle-capture-receipt.md) · CLI **2.1.273** |
+| ~~**R8 — Claude adherence hooks**~~ ✅ **N/A 2026-09-24** | Closed **N/A** (bootstrap ops B4) | [`r8-adherence-hook-bridge-na.md`](../../working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/r8-adherence-hook-bridge-na.md) · **RISK-BOOT-005** |
 
 ### Sponsor decision log (2026-09-23)
 
@@ -37,7 +37,7 @@ Program Phases **0→3** and follow-on **`REQ-TIED_CLAUDE_BOOTSTRAP_OPS`** / **`
 | 6 | **Feature orchestration** | **Client-development-index matrix:** REQ work → Prompt Composer; FEAT lifecycle → `feature-orchestrator`; shared TIED YAML MCP / `tied-cli`. |
 | 7 | **Metrics** | **Harness dimension** on MCP usage (e.g. client id suffix or `TIED_MCP_HARNESS=cursor\|claude` in bootstrap templates). |
 
-**Discovery-only (remainder):** Interactive Claude IDE onboarding (skill front matter, MCP auth UX) and replacing **`synthetic-v1`** fixtures with captured real CLI oracles—see **Open discovery**. Subprocess contract, bootstrap `.mcp.json` merge, Windows copy path, and optional **`skills/` re-root** (`TIED_SKILLS_REROOT`, [REQ-TIED_CLAUDE_SKILLS_REROOT](../../tied/requirements/REQ-TIED_CLAUDE_SKILLS_REROOT.yaml)) are **evidenced in repo** when explicitly enabled; default remains harness-native `.cursor/skills` and `.claude/skills`.
+**Discovery-only (remainder):** Interactive Claude IDE onboarding (skill front matter, MCP auth UX)—see **Open discovery**. Subprocess contract, bootstrap `.mcp.json` merge, Windows copy path, **real CLI stream oracles** (`fixtures/claude/`, CLI **2.1.273**), and optional **`skills/` re-root** (`TIED_SKILLS_REROOT`, [REQ-TIED_CLAUDE_SKILLS_REROOT](../../tied/requirements/REQ-TIED_CLAUDE_SKILLS_REROOT.yaml)) are **evidenced in repo** when explicitly enabled; default remains harness-native `.cursor/skills` and `.claude/skills`.
 
 ---
 
@@ -120,7 +120,7 @@ Parent **`REQ-TIED_CLAUDE_HARNESS`** delivered Phase 0 pilot, Phase 1 dual boots
 | 0 — Pilot / contracts | Phase 0 checklists under `working/REQ-TIED_CLAUDE_HARNESS/phase0/` | — | **Closed** with parent |
 | 1 — Dual bootstrap | `.claude/skills/` copy, repo-root `.mcp.json` safe merge, harness metrics | **`REQ-TIED_CLAUDE_BOOTSTRAP_OPS`** B1 Windows asserts + smoke proof | **Closed** — Windows CI green ([run 36031010940](https://github.com/fareedst/tied/actions/runs/36031010940)); `WINDOWS_COPY_PROVEN_IN_CI` **true** in [`constants.mjs`](../../tools/bootstrap/lib/constants.mjs) (symlink still opt-in) |
 | 2 — Agentstream harness | `--harness claude` **dry-run** placeholder; Cursor live path unchanged | **`REQ-TIED_CLAUDE_LIVE_DRIVER`** — live AgentDriver, frozen stream oracles, composition | **Implemented** (fixture CI; no live Claude in CI) |
-| 3 — Ergonomics / index | Multi-harness section in [`client-development-index.md`](../../tied/docs/client-development-index.md) | **`REQ-TIED_CLAUDE_BOOTSTRAP_OPS`** B2 symlink gate (test-proven opt-in), B3 `skills/` re-root (defer OK), B4 adherence spike, **B5 this doc** | B2 + B5 green (2026-09-23 build-plan); B3 deferred; B4 not_applicable (see `working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/`) |
+| 3 — Ergonomics / index | Multi-harness section in [`client-development-index.md`](../../tied/docs/client-development-index.md) | **`REQ-TIED_CLAUDE_BOOTSTRAP_OPS`** B2 symlink gate (test-proven opt-in), B4 adherence spike, **B5 this doc**; optional B3 via **`REQ-TIED_CLAUDE_SKILLS_REROOT`** (`TIED_SKILLS_REROOT=1`, default off) | B2 + B5 + **R3/B3** green (2026-09-24); B4 not_applicable (see `working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/`) |
 
 ---
 
@@ -140,8 +140,8 @@ Dual-harness view—matches **`tools/bootstrap/`** output after Phase 1 + bootst
          tools/bundled-tied-yaml-skill/     ← canonical sources
                         │
          ┌──────────────┼──────────────┐
-  .cursor/skills/  .claude/skills/   skills/ (optional B3 — deferred)
-  (bootstrap)      (copy default)     (not installed by default)
+  .cursor/skills/  .claude/skills/   skills/ (optional — TIED_SKILLS_REROOT=1)
+  (bootstrap)      (copy default)     (default off; both harnesses when enabled)
          │              │
          └──── prompt-shared + leaf SKILL.md
                         │
@@ -198,14 +198,14 @@ Planning and execution paths both instruct MCP/`tied-cli` for YAML and validatio
 
 ---
 
-## Skill portability (Current + optional remainder)
+## Skill portability (Current)
 
-Interactive **global prompt skills** are not the automated executor. Bootstrap **copy-default** install preserves the same bundles as Cursor; explicit-only activation, section order, linked-plan semantics, and **TIED applicability boundary** remain skill-author obligations. **R6:** verify Claude’s discovery/front-matter behavior in a live IDE session if onboarding gaps appear.
+Interactive **global prompt skills** are not the automated executor. Bootstrap **copy-default** install preserves the same bundles as Cursor; explicit-only activation, section order, linked-plan semantics, and **TIED applicability boundary** remain skill-author obligations. **R6:** runbook + preflight complete; verify Claude’s discovery/front-matter in a live IDE session only if onboarding gaps appear (not a program blocker).
 
 | Step | Action | Default |
 | --- | --- | --- |
 | A | Dual install from [`tools/bundled-prompt-type-skills/`](../../tools/bundled-prompt-type-skills/) + [`tools/bundled-tied-yaml-skill/`](../../tools/bundled-tied-yaml-skill/) | **Copy** to `.claude/skills/`; symlinks opt-in after CI |
-| B | Optional repo-root `skills/` re-root | **Deferred (B3 / R3)** — not default; sponsor-scoped new REQ when pursued |
+| B | Optional repo-root `skills/` re-root (**R3 / B3**) | **Current** — **`TIED_SKILLS_REROOT=1`** when `WINDOWS_COPY_PROVEN_IN_CI` and ARCH gates pass; default **off** ([`REQ-TIED_CLAUDE_SKILLS_REROOT`](../../tied/requirements/REQ-TIED_CLAUDE_SKILLS_REROOT.yaml), [`skills-reroot.mjs`](../../tools/bootstrap/lib/skills-reroot.mjs)) |
 | C | Harness appendix files | Optional if front matter diverges; not required for current copy path |
 
 Adjust only harness-specific lines in front matter or a one-line install-path note—do not silently rewrite canonical `tools/bundled-prompt-type-skills/`.
@@ -255,7 +255,7 @@ Do not assume Claude `.claude/agents/` mirrors TIED-source **prompt-type subagen
 
 ## Phased delivery (historical archive)
 
-**Status:** Phases **0→3** **closed** under **`REQ-TIED_CLAUDE_HARNESS`**; follow-on **`REQ-TIED_CLAUDE_BOOTSTRAP_OPS`** and **`REQ-TIED_CLAUDE_LIVE_DRIVER`** **Implemented**. Use **What remains (2026-09-24)** for forward work—not the tables below as a backlog.
+**Status:** Phases **0→3** **closed** under **`REQ-TIED_CLAUDE_HARNESS`**; follow-on **`REQ-TIED_CLAUDE_BOOTSTRAP_OPS`**, **`REQ-TIED_CLAUDE_LIVE_DRIVER`**, and remainder **R1–R8** **complete**. Use **What remains (2026-09-24)** for maintenance pointers—not the tables below as a backlog.
 
 **Program (archive):** Phases **0→3** in one **`REQ-TIED_CLAUDE_HARNESS`** arc (sponsor-locked). Each phase ended with **go/no-go**; acceptance was Tracker slugs + tests.
 
@@ -286,11 +286,11 @@ Do **not** claim **`tied agentstream`** Claude automation from the pilot.
 | **Acceptance** | `npm test` green in `mcp-server/packages/agentstream`; dry-run unchanged; live checklist + session chain + Tracker receipt tests on **Claude fixtures** (not `--agent-path` alone) |
 | **Decision point** | Enable operator live Claude checklist runs only when subprocess/stream/session/MCP/Tracker contracts pass fixtures; otherwise stay dry-run / Cursor live |
 
-### Phase 3 — Ergonomics and index (closed — B3 deferred)
+### Phase 3 — Ergonomics and index (closed)
 
 | | |
 | --- | --- |
-| **Deliverables** | **Client-development-index REQ vs FEAT matrix** (REQ work → Prompt Composer; FEAT lifecycle → **`feature-orchestrator`**; shared **TIED YAML MCP** / **`tied-cli`**); optional repo-root `skills/` re-root; DAE-style Step-0 for interactive sessions if it adds value ([`dae-mechanisms-for-tied-improvement.md`](dae-mechanisms-for-tied-improvement.md)); Claude adherence hook bridge only with stable upstream hook points |
+| **Deliverables** | **Client-development-index REQ vs FEAT matrix** (REQ work → Prompt Composer; FEAT lifecycle → **`feature-orchestrator`**; shared **TIED YAML MCP** / **`tied-cli`**); optional repo-root `skills/` re-root; DAE-style Step-0 for interactive sessions if it adds value ([`dae-mechanisms-for-tied-improvement.md`](dae-mechanisms-for-tied-improvement.md)); Claude adherence hook bridge **N/A** until stable upstream hook points ([R8 receipt](../../working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/r8-adherence-hook-bridge-na.md)) |
 | **Acceptance** | Matrix published in [`tied/docs/client-development-index.md`](../../tied/docs/client-development-index.md); Phase 3 slices marked complete or explicitly deferred in Authoritative Tracker with sponsor note |
 | **Decision point** | Program close-out when Phases 0–2 acceptance met and Phase 3 matrix (+ any deferred slices) recorded |
 
@@ -303,17 +303,17 @@ Do **not** claim **`tied agentstream`** Claude automation from the pilot.
 
 ---
 
-## Implementation entry (complete → use remainder plan)
+## Implementation entry (complete — maintenance only)
 
-The parent program opened with **`plan-new-feature`** as **`REQ-TIED_CLAUDE_HARNESS`** (Phases **0→3**). That arc is **Implemented** and closed. Follow-ons **`REQ-TIED_CLAUDE_BOOTSTRAP_OPS`** and **`REQ-TIED_CLAUDE_LIVE_DRIVER`** are also **Implemented**.
+The parent program opened with **`plan-new-feature`** as **`REQ-TIED_CLAUDE_HARNESS`** (Phases **0→3**). That arc is **Implemented** and closed. Follow-ons **`REQ-TIED_CLAUDE_BOOTSTRAP_OPS`**, **`REQ-TIED_CLAUDE_LIVE_DRIVER`**, **`REQ-TIED_CLAUDE_SKILLS_REROOT`**, and remainder **R1–R8** are also **complete**.
 
-**Forward entry points:**
+**Maintenance entry points (no open program backlog):**
 
-| Goal | Entry | Working folder / REQ |
+| Goal | Entry | Notes |
 | --- | --- | --- |
-| Doc truth + remainder slices | **`refine-plan`** citing this doc | [`working/REQ-TIED_CLAUDE_DOC_REMAINDER/PLAN.md`](../../working/REQ-TIED_CLAUDE_DOC_REMAINDER/PLAN.md) |
-| Optional **`skills/` re-root** | **`plan-new-feature`** (new REQ) | Sponsor-scoped token (R3)—do not reopen closed REQs silently |
-| LEAP / commit hygiene on closed child REQs | **`plan-close-out`** | [`working/REFINE-DUAL_REQ_CLOSE_OUT/`](../../working/REFINE-DUAL_REQ_CLOSE_OUT/) |
+| Doc truth vs bootstrap / agentstream | Edit this doc; cross-check [`tools/bootstrap/README.md`](../../tools/bootstrap/README.md) and [`agentstream` README](../../mcp-server/packages/agentstream/README.md) | Closure record [`working/REQ-TIED_CLAUDE_DOC_REMAINDER/PLAN.md`](../../working/REQ-TIED_CLAUDE_DOC_REMAINDER/PLAN.md) |
+| New Claude harness scope | **`plan-new-feature`** | **New REQ token** — do not reopen closed REQs without sponsor LEAP |
+| LEAP / commit hygiene on closed REQs | **`plan-close-out`** | Sponsor-directed only (e.g. [`working/REFINE-DUAL_REQ_CLOSE_OUT/`](../../working/REFINE-DUAL_REQ_CLOSE_OUT/)) |
 
 **Archive — original phase ordering (REQ-TIED_CLAUDE_HARNESS):** Refine + CITDP + Tracker → Phase 0 pilot notes → Phase 1 bootstrap → Phase 2 dry-run harness → Phase 3 index matrix; live driver and bootstrap ops then split to follow-on REQs as recorded in **Post–Phases 0–3**.
 
@@ -327,12 +327,12 @@ This document is **comparison-only**—no project REQ/ARCH/IMPL detail files her
 
 | Concern | Current owner | Remainder (if any) |
 | --- | --- | --- |
-| Interactive taxonomy | `tools/bundled-prompt-type-skills/` → `.cursor/skills/` + `.claude/skills/` | Optional `skills/` re-root (R3 / B3 deferred) |
-| TIED data access | **TIED YAML MCP** + **`tied-cli`** | Interactive Claude MCP UX (R6) |
+| Interactive taxonomy | `tools/bundled-prompt-type-skills/` → `.cursor/skills/` + `.claude/skills/` | Optional repo-root **`skills/`** when **`TIED_SKILLS_REROOT=1`** ([**R3**](../../tied/requirements/REQ-TIED_CLAUDE_SKILLS_REROOT.yaml)) |
+| TIED data access | **TIED YAML MCP** + **`tied-cli`** | ~~Interactive Claude MCP UX (R6)~~ ✅ runbook; IDE auth UX still human-only |
 | Feature orchestration | **`feature-orchestrator`** / `tied/features/` | Matrix shipped in [`client-development-index.md`](../../tied/docs/client-development-index.md) |
-| Checklist driver | `@tied/agentstream` — **`--harness claude`** + fixtures | Operator live smoke (R5); real CLI oracles (R7) |
+| Checklist driver | `@tied/agentstream` — **`--harness claude`** + fixtures | ~~Operator live smoke (R5)~~ ✅; ~~real CLI oracles (R7)~~ ✅ **2.1.273**; ~~Claude adherence hook bridge (R8)~~ ✅ **N/A** (Cursor `.cursor/hooks` only) |
 | Agent subprocess | Cursor `agent` (default live) + Claude **AgentDriver** | — |
-| Bootstrap | Dual harness in `tools/bootstrap/` | B3 re-root deferred (R3); post-CI LEAP complete (R4) |
+| Bootstrap | Dual harness in `tools/bootstrap/` | **R3/B3** optional re-root shipped (default off); post-CI LEAP complete (**R4**) |
 | Canonical intent | Project TIED YAML + IMPL pseudo-code | Never PLAN.md / CLAUDE.md alone |
 
 ---
@@ -356,8 +356,9 @@ Sponsor program decisions are in the log above. **Resolved in repo (no longer op
 | Item | Blocks | Notes |
 | --- | --- | --- |
 | Interactive Claude skill/MCP onboarding | R6 optional pilot | Copied leaf `SKILL.md` + **`prompt-shared`** refs—verify in real Claude Code session if gaps appear |
-| Real CLI capture vs **`synthetic-v1`** oracles | R7 maintenance | README pin; replace fixtures when operator captures NDJSON from a pinned CLI |
-| **`skills/` re-root** | R3 sponsor scope | B3 **deferred** at bootstrap ops close-out despite Windows proof—needs explicit new REQ |
-| Child REQ LEAP / Tracker dual-write | **R4 complete (2026-09-24)** | Dual close-out + traceable commit; B3 still **R3** |
+| ~~Real CLI capture vs synthetic oracles~~ | **R7 complete (2026-09-24)** | Frozen NDJSON under **`fixtures/claude/`**; pin **2.1.273** |
+| ~~**`skills/` re-root**~~ | **R3 complete (2026-09-24)** | Optional **`TIED_SKILLS_REROOT=1`**; default harness-native paths — [`skills-reroot.mjs`](../../tools/bootstrap/lib/skills-reroot.mjs) |
+| ~~Child REQ LEAP / Tracker dual-write~~ | **R4 complete (2026-09-24)** | Dual close-out + traceable commit |
+| ~~Claude adherence hook bridge~~ | **R8 N/A (2026-09-24)** | No **`.claude/hooks`** contract in bootstrap; **RISK-BOOT-005** — new REQ when upstream stabilizes |
 
-Interactive Claude onboarding and contract-gated checklist automation remain distinct paths: **`build-plan`** vs **`tied agentstream`**.
+Interactive Claude onboarding and contract-gated checklist automation remain distinct paths: **`build-plan`** vs **`tied agentstream`**. Automated **adherence ledger** on Claude remains **out of scope** until a future hook-bridge REQ (R8 closed **N/A**).

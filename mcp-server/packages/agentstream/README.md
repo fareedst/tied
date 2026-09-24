@@ -35,7 +35,7 @@
 
 | Field | Value |
 | --- | --- |
-| Pinned CLI | `synthetic-v1` (see `fixtures/claude/README.md`; replace when oracles are captured from a real CLI) |
+| Pinned CLI | `2.1.273` (see `fixtures/claude/README.md`; captured 2026-09-24, sanitized NDJSON) |
 | Oracle root | `fixtures/claude/` (`stream-assistant-basic.ndjson`, `stream-session-id.ndjson`, `stream-error-exit.ndjson`) |
 | Proof boundary | No live Claude subprocess in CI |
 
@@ -46,6 +46,29 @@
 | **Dry-run** (`-d` / `--dry-run`) | Renders shell argv with placeholder bin `claude`; no subprocess. |
 | **Live (CI)** | Not run — tests use mocked `launch_fn` and frozen NDJSON only. |
 | **Live (operator)** | Fixture-gated: unit + composition suites green locally, then `AGENTSTREAM_CLAUDE_LIVE_OK=1` for real Claude CLI subprocess. |
+
+### Operator live smoke (not CI)
+
+1. **Preflight:** `npm test` in this package (must be all green).
+2. **Dry-run argv** from repo root (no subprocess):
+
+```bash
+cd /path/to/your-repo
+TIED_AGENTSTREAM_IMPL=ts node mcp-server/packages/agentstream/dist/index.js \
+  -d -w "$(pwd)" --harness claude --skip-tied-mcp-preflight \
+  -- "Reply with exactly: smoke-ok"
+```
+
+3. **One-turn live** (human operator only; requires `claude` on PATH; Claude Code 2.x uses `--verbose` for stream-json — wired automatically when `--harness claude`):
+
+```bash
+export AGENTSTREAM_CLAUDE_LIVE_OK=1
+TIED_AGENTSTREAM_IMPL=ts node mcp-server/packages/agentstream/dist/index.js \
+  -w "$(pwd)" --harness claude --skip-tied-mcp-preflight \
+  -- "Reply with exactly: smoke-ok"
+```
+
+Receipt example: [`working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/operator-live-claude-smoke-r5.md`](../../../working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/operator-live-claude-smoke-r5.md).
 
 Unqualified argv **exit with an error** (no Go forward).
 

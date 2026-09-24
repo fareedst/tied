@@ -1,4 +1,2 @@
-{"type":"thinking","subtype":"delta","text":"Planning a minimal reply."}
-{"type":"thinking","subtype":"completed"}
-{"type":"assistant","message":{"content":[{"type":"text","text":"Hello from Claude fixture oracle."}]}}
-{"type":"result","subtype":"success","is_error":false}
+{"type":"assistant","message":{"content":[{"type":"text","text":"oracle-basic"}]},"session_id":"redacted-oracle-session"}
+{"type":"result","subtype":"success","is_error":false,"result":"oracle-basic"}

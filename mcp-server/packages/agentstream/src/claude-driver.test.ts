@@ -30,7 +30,7 @@ describe("CLAUDE_AGENT_DRIVER [REQ-TIED_CLAUDE_LIVE_DRIVER]", () => {
     assert.ok(!("error" in out));
     assert.equal(out.receipt.harness, "claude");
     assert.equal(out.sessionId, "claude-fixture-session-abc123");
-    assert.equal(out.receipt.cliVersion, "synthetic-v1");
+    assert.equal(out.receipt.cliVersion, "2.1.273");
     assert.match(out.runResult.finalText, /Session-bound/);
   });
 

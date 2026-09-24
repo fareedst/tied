@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Claude doc remainder program (R1–R8)** — Comparison doc program-closed; working
+  evidence under `working/REQ-TIED_CLAUDE_DOC_REMAINDER/` (operator runbooks R5/R6;
+  R8 adherence **N/A**, **RISK-BOOT-005**); machine close_out gate + envelope on
+  `main` after this close-out.
+
+- **R7 oracle maintenance ([REQ-TIED_CLAUDE_LIVE_DRIVER])** — Real CLI **2.1.273**
+  frozen NDJSON under `fixtures/claude/`; parser `error_during_execution` / `errors[]`;
+  IMPL pseudo-code LEAP; **53/53** agentstream tests.
+
 - **Optional repo-root skills re-root ([REQ-TIED_CLAUDE_SKILLS_REROOT])** — `TIED_SKILLS_REROOT=1`
   installs Cursor and Claude managed skill bundles under repo-root `skills/` (default off); gated by
   `WINDOWS_COPY_PROVEN_IN_CI` and `ARCH-TIED_CLAUDE_SKILLS_REROOT`. **`17/17`**
@@ -31,7 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Claude live AgentDriver ([REQ-TIED_CLAUDE_LIVE_DRIVER])** — Fixture-gated
   Claude stream/session oracles under `mcp-server/packages/agentstream/fixtures/claude/`,
   `claude-driver` / `claude-stream` / live-driver select+bind modules, live-executor composition
-  for `--harness claude`, README CLI pin and dry-vs-live operator table; 52/52 `@tied/agentstream`
+  for `--harness claude`,   README CLI pin and dry-vs-live operator table; 53/53 `@tied/agentstream`
   npm tests; close-out envelope and gate receipts under `working/REQ-TIED_CLAUDE_LIVE_DRIVER/`.
   Parent [REQ-TIED_CLAUDE_HARNESS] Tracker unchanged; SC-CLAUDE-P2 live ownership recorded via
   CITDP LEAP note only.

@@ -1,3 +1,1 @@
-{"type":"assistant","message":{"content":[{"type":"text","text":"Partial output before failure."}]}}
-{"type":"error","code":"permission_denied","message":"User denied tool use"}
-{"type":"result","subtype":"error","is_error":true,"exit_code":1}
+{"type":"result","subtype":"error_during_execution","is_error":true,"session_id":"00000000-0000-0000-0000-000000000000","errors":["No conversation found with session ID: 00000000-0000-0000-0000-000000000000"]}

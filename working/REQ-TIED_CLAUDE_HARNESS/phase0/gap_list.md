@@ -36,3 +36,11 @@ Blocks align with IMPL `PHASE_0_PILOT_ACCEPTANCE` and comparison plan **Open dis
 | --- | --- | --- |
 | Live checklist on Claude | **Not shipped** | No `--harness claude` in this build slice |
 | `--agent-path` as Claude adapter | Rejected | Non-goal; Cursor override only |
+
+## R6 cross-reference (2026-09-24)
+
+Interactive Claude Code **IDE** pilot for remainder slice R6 did **not** run in the Cursor build-agent environment. Automatable evidence: bootstrap **17/17** (`working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/claude-harness-test-r6-stdout.txt`), agentstream **53/53**, static **`prompt-shared/`** layout in bundled skills. Operator runbook: [`operator-interactive-claude-ide-r6.md`](../../REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/operator-interactive-claude-ide-r6.md).
+
+**No Phase 0 row status flips** without IDE session proof. Rows still **Unverified** until a human completes that runbook: `prompt-shared/` parity in Claude front matter, `disable-model-invocation` packaging, repo-root `.mcp.json` **IDE load**, MCP auth/OAuth UX. Automation vs interactive boundary unchanged ([`operator-interactive-claude-ide-r6.md`](../../REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/operator-interactive-claude-ide-r6.md) § E; R5 receipt).
+
+**Note (repo drift):** `agentstream_claude` table above predates **`REQ-TIED_CLAUDE_LIVE_DRIVER`**; fixture-gated **`--harness claude`** is shipped — see R5 receipt and agentstream README. IDE onboarding gaps remain distinct from driver automation.

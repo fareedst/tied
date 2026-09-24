@@ -27,6 +27,7 @@ export type ClaudeTurnSpec = {
 export type ClaudeLaunchResult = {
   stdout: string;
   exitCode: number;
+  stderrTail?: string;
 };
 
 export type ClaudeLaunchFn = () => Promise<ClaudeLaunchResult> | ClaudeLaunchResult;
@@ -130,7 +131,7 @@ export async function claudeAgentDriverLaunchAndParse(input: {
 }
 
 export const DEFAULT_CLAUDE_PINNED_CONTRACT: ClaudePinnedContract = {
-  cliVersion: "synthetic-v1",
+  cliVersion: "2.1.273",
   proofBoundary: "no_live_claude_in_ci",
 };
 
@@ -152,6 +153,7 @@ export async function collectClaudeStreamFromSpawn(
       stdio: ["ignore", "pipe", "pipe"],
     });
     const lines: string[] = [];
+    let stderrBuf = "";
     const rl = readline.createInterface({ input: cmd.stdout! });
     rl.on("line", (line) => {
       const trimmed = line.trim();
@@ -159,15 +161,26 @@ export async function collectClaudeStreamFromSpawn(
         lines.push(trimmed);
       }
     });
-    cmd.stderr!.on("data", () => {
-      /* operator live: stderr not parsed in v1 */
+    cmd.stderr!.on("data", (chunk: Buffer | string) => {
+      stderrBuf += String(chunk);
+      if (stderrBuf.length > 2000) {
+        stderrBuf = stderrBuf.slice(-2000);
+      }
     });
     cmd.on("close", (code) => {
       rl.close();
-      resolve({ stdout: `${lines.join("\n")}\n`, exitCode: code ?? 1 });
+      resolve({
+        stdout: `${lines.join("\n")}\n`,
+        exitCode: code ?? 1,
+        stderrTail: stderrBuf.trim(),
+      });
     });
-    cmd.on("error", () => {
-      resolve({ stdout: "", exitCode: 1 });
+    cmd.on("error", (err) => {
+      resolve({
+        stdout: "",
+        exitCode: 1,
+        stderrTail: String(err),
+      });
     });
   });
 }

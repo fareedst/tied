@@ -1,0 +1,95 @@
+copy_hygiene: Doc-remainder tracker; not a feature REQ. execution_evidence.request = REQ-TIED_CLAUDE_DOC_REMAINDER.
+description: Lightweight tracker for doc remainder slices (R1–R8).
+record_identity:
+  change_request_id: REQ-TIED_CLAUDE_DOC_REMAINDER
+  title: Claude comparison doc remainder (R1)
+  recorded_at: '2026-09-24'
+  gate_policy: advisory
+  profile_depth: minimal
+  citdp_path: working/REQ-TIED_CLAUDE_DOC_REMAINDER/citdp-inline.yaml
+  req_token: REQ-TIED_CLAUDE_DOC_REMAINDER
+risk_snapshot:
+  depth_tier: minimal
+  gate_policy: advisory
+  profile_depth: minimal
+steps:
+  - slug: sub-adversarial-inquiry-pass
+    disposition: completed
+    policy: minimal-depth-no-inquiry
+    rationale: Minimal depth R6 doc slice; sub-stub not executed.
+    tracking:
+      status: completed
+      evidence_refs: &ref_0
+        - working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/sub-adversarial-inquiry-pass-evidence.md
+    evidence_refs: *ref_0
+  - slug: gitignore-close-out-hygiene
+    disposition: completed
+    evidence_refs:
+      - .gitignore
+  - slug: sync-tied-stack
+    disposition: completed
+    rationale: IMPL-TIED_CLAUDE_LIVE_DRIVER sidecar LEAP R7; tied_validate_consistency ok
+    evidence_refs:
+      - tied/implementation-decisions/IMPL-TIED_CLAUDE_LIVE_DRIVER-pseudocode.md
+  - slug: verification-gate
+    disposition: completed
+    evidence_refs: &ref_1
+      - working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/verification-evidence-manifest.v1.json
+    tracking:
+      status: completed
+      evidence_refs: *ref_1
+  - slug: session-bootstrap
+    tracking:
+      status: completed
+      evidence_refs: &ref_2
+        - working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/session-bootstrap-evidence.md
+    disposition: completed
+    evidence_refs: *ref_2
+  - slug: translate-sponsor-intent
+    tracking:
+      status: completed
+      evidence_refs: &ref_3
+        - working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/translate-sponsor-intent-evidence.md
+    disposition: completed
+    evidence_refs: *ref_3
+  - slug: change-definition
+    tracking:
+      status: completed
+      evidence_refs: &ref_4
+        - working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/change-definition-evidence.md
+    disposition: completed
+    evidence_refs: *ref_4
+  - slug: impact-discovery
+    tracking:
+      status: completed
+      evidence_refs: &ref_5
+        - working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/impact-discovery-evidence.md
+    disposition: completed
+    evidence_refs: *ref_5
+  - slug: test-strategy
+    tracking:
+      status: completed
+      evidence_refs: &ref_6
+        - working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/test-strategy-evidence.md
+    disposition: completed
+    evidence_refs: *ref_6
+execution_evidence:
+  request: REQ-TIED_CLAUDE_DOC_REMAINDER
+  completed:
+    - session-bootstrap
+    - translate-sponsor-intent
+    - change-definition
+    - impact-discovery
+    - test-strategy
+    - sub-adversarial-inquiry-pass
+    - verification-gate
+  close_out_evidence:
+    date: "2026-09-24"
+    deferred: []
+    gates:
+      close_out: working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/request-evidence-envelope.v1.json
+    master_checklist: working/REQ-TIED_CLAUDE_DOC_REMAINDER/checklist-tracker.yaml
+  completed_slugs_close_out:
+    - gitignore-close-out-hygiene
+    - sync-tied-stack
+    - verification-gate

@@ -16,6 +16,8 @@ import { selectLiveDriver } from "./live-driver-select.js";
 export type LiveAgentTurnOutcome = {
   result: RunResult;
   exitCode: number;
+  driverError?: string;
+  stderrTail?: string;
 };
 
 export type LiveDriverBinding = {
@@ -61,9 +63,15 @@ export function bindLiveExecutorDriver(
         const launchFn: ClaudeLaunchFn =
           input.claudeLaunchFn ??
           (() => collectClaudeStreamFromSpawn(argv, extraEnv));
+        let lastStderrTail = "";
+        const wrappedLaunch: ClaudeLaunchFn = async () => {
+          const launched = await launchFn();
+          lastStderrTail = launched.stderrTail ?? "";
+          return launched;
+        };
         const out = await claudeAgentDriverLaunchAndParse({
           turnSpec: { requiresSession: true },
-          launchFn,
+          launchFn: wrappedLaunch,
           pinnedContract: DEFAULT_CLAUDE_PINNED_CONTRACT,
           launchFnIsTestDouble: input.claudeLaunchFnIsTestDouble === true,
         });
@@ -76,6 +84,8 @@ export function bindLiveExecutorDriver(
               transcript: "",
             },
             exitCode: 1,
+            driverError: out.error,
+            stderrTail: lastStderrTail,
           };
         }
         const exitCode = out.exitMetadata.isError ? out.exitMetadata.exitCode : 0;

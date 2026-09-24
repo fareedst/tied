@@ -367,8 +367,15 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
       t.parts,
       cfg.agentHarness,
     );
-    const { result, exitCode } = await liveBinding.runTurn(argv, extraEnv);
+    const turnOutcome = await liveBinding.runTurn(argv, extraEnv);
+    const { result, exitCode } = turnOutcome;
     if (exitCode !== 0) {
+      if (turnOutcome.driverError) {
+        stderrAcc += `agentstream: claude driver error: ${turnOutcome.driverError}\n`;
+      }
+      if (turnOutcome.stderrTail) {
+        stderrAcc += `DIAGNOSTIC: claude stderr: ${turnOutcome.stderrTail.slice(0, 500)}\n`;
+      }
       clearMarker();
       return { stdout: "", stderr: stderrAcc, exitCode };
     }

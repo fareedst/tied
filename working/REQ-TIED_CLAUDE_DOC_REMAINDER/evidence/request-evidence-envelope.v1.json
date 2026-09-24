@@ -1,0 +1,212 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-09-24T19:16:26.733Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-TIED_CLAUDE_DOC_REMAINDER",
+    "project_id": "af8451e933f573ec",
+    "depth_tier": "minimal",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [],
+  "artifacts": [
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_DOC_REMAINDER/gates/pre_implementation-refine-pre-impl-2026-09-24T19-11-41-232Z.json",
+      "content_hash": "sha256:9cce4c6cb1f96dd7c0e69cfdbb4648a8ce4554811e82d94d77f5668ad8cd2d1e",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "not_applicable_receipt",
+      "schema_version": "not-applicable-receipt.v1",
+      "path": "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/not-applicable-receipt.v1.json",
+      "content_hash": "sha256:516b3e2ebbe18becd375257713257c4ba652102d217b944f76ad1bf68f3c9671",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:1c1fc6dc3898cbfb6fc771c4d18f93ca70a29a66f78bfffa2ddcd6202dbd4670",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/agentstream-npm-test-r5-stdout.txt",
+      "content_hash": "sha256:5d0b3d75748e1a024da37bc125efc6a2f0296fea740e70d75dffb23d4c4992fc",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/agentstream-npm-test-r7-stdout.txt",
+      "content_hash": "sha256:a8233101f135c27f1894d424cba95d23432eda302f9353fe207e52afed67ed8c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/claude-harness-test-r6-stdout.txt",
+      "content_hash": "sha256:6ac293486fa44f85b47eea2c44b428571b86346a0dffc8f7f0b61dc972753f18",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/close-out-receipt-2026-09-24.md",
+      "content_hash": "sha256:c737d61264bd78703d0e66cb3a04b3d8e02d784924ce2977d496d687c27ad79b",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": "agent-adherence-event.v1",
+      "path": "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/gate-ledger.jsonl",
+      "content_hash": "sha256:0b7673879ce1704dcbf31bab4b4b14cc6fc15cb517585e8c5d815d9bba27fafc",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/operator-interactive-claude-ide-r6.md",
+      "content_hash": "sha256:a11c13f8844c5994ec3dbef05fb9c09b26cd2b18beb1e7b4922669b983c7ccb2",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/operator-live-claude-smoke-r5.md",
+      "content_hash": "sha256:be5518e2371d84531ec2610c03b3de643c6645481875afda306297d2fa3593b0",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/r1-doc-reconcile-receipt.md",
+      "content_hash": "sha256:460a3eb8ae00229d34125bae94f901e8a4d76e19fdcdee6bddf62dd7541d4800",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/r7-cli-oracle-capture-receipt.md",
+      "content_hash": "sha256:102be0cf41edc13bfe518eb16617061ede4b2cd16eba0bce378903fd530202d2",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/r8-adherence-hook-bridge-na.md",
+      "content_hash": "sha256:0de239a1a62cd629313d06cc521b999d81a7804795b0e6dacd3fe18f031189f6",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/r8-gate-pre_implementation.json",
+      "content_hash": "sha256:49b6446527a2861ba8da73d7acec12ca9678719a7b3518d349fd27d8aeb852fb",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/r8-gate-verification.json",
+      "content_hash": "sha256:31925fc79b1da6c521c4f81884b7a589ab290324a60b96472c57224f6f9287d0",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/sub-adversarial-inquiry-pass-na.md",
+      "content_hash": "sha256:4958a834148ef19fb014a38d2f6d271343d03dec851addce603e0102166e555f",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "verification_evidence_manifest",
+      "schema_version": "verification-evidence-manifest.v1",
+      "path": "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/verification-evidence-manifest.v1.json",
+      "content_hash": "sha256:36beaeac0ac8dcb2903d492a65602884bcbad8fa53c12bae45cc3741e9d3a95e",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": null,
+    "tracker_hash": null,
+    "citdp_path": null,
+    "evidence_chain_profile_path": null
+  },
+  "gaps": []
+}

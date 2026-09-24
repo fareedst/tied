@@ -9,6 +9,8 @@ Grammar-Version: v2
 # PRE: Parent Phase 0 gap list claude_cli_contract rows promoted into working/REQ-TIED_CLAUDE_LIVE_DRIVER/phase0/.
 # POST: Contract artifact names pinned CLI + capture recipe; CI never requires live Claude subprocess.
 # EFFECTS: Documentation State — README + fixtures/claude/README.md
+# NOTE (R7 maintenance 2026-09-24): Shipped pin cli_version 2.1.273 (Claude Code); oracles captured via
+# claude --print --verbose --output-format stream-json (see fixtures/claude/README.md); not synthetic-v1.
 
 procedure PIN_CLAUDE_CLI_CONTRACT(contract_draft, fixtures_readme_path):
   # [IMPL-TIED_CLAUDE_LIVE_DRIVER] [ARCH-TIED_CLAUDE_LIVE_DRIVER] [REQ-TIED_CLAUDE_LIVE_DRIVER] How: Persist pinned CLI version, permissions model, and capture command for Claude stream oracles.
@@ -16,7 +18,7 @@ procedure PIN_CLAUDE_CLI_CONTRACT(contract_draft, fixtures_readme_path):
     INPUT: contract_draft.cli_version, contract_draft.permissions_model, contract_draft.mcp_load_notes, fixtures_readme_path
     OUTPUT: pinned_contract | { error: CONTRACT_INCOMPLETE }
     PRE: fixtures directory path is mcp-server/packages/agentstream/fixtures/claude/ (locked)
-    POST: success => pinned_contract.cli_version non-empty; capture recipe documented; proof_boundary includes no_live_claude_in_ci
+    POST: success => pinned_contract.cli_version non-empty (e.g. 2.1.273); capture recipe documented; proof_boundary includes no_live_claude_in_ci
     FAILURE_MODES: CONTRACT_INCOMPLETE
     DATA: pinned_contract
     DATA_TRANSITION: draft rows → version-pinned operator contract
@@ -31,9 +33,23 @@ procedure PIN_CLAUDE_CLI_CONTRACT(contract_draft, fixtures_readme_path):
 ## PARSE_CLAUDE_STREAM
 # [IMPL-TIED_CLAUDE_LIVE_DRIVER] [ARCH-TIED_CLAUDE_LIVE_DRIVER] [REQ-TIED_CLAUDE_LIVE_DRIVER]
 # How: Oracle-driven parser for Claude NDJSON streams; separate from Cursor stream-json oracles.
-# PRE: Frozen files under fixtures/claude/ (e.g. stream-assistant-basic.ndjson, stream-error-exit.ndjson).
+# PRE: Frozen files under fixtures/claude/ (e.g. stream-assistant-basic.ndjson, stream-error-exit.ndjson) from PIN pin 2.1.273.
 # POST: Parsed events expose assistant/thinking content and failure/exit metadata without invoking live subprocess.
 # EFFECTS: pure
+
+procedure derive_exit_metadata(events):
+  # [IMPL-TIED_CLAUDE_LIVE_DRIVER] How: Fold parsed events into exit_metadata for receipt consumers.
+  Contract:
+    INPUT: events from map_claude_stream_line
+    OUTPUT: exit_metadata { isError, exitCode, errorCode?, errorMessage? }
+    PRE: events may include kind result with subtype error_during_execution and errors[] from real CLI oracles
+    POST: success => error oracles populate errorCode from result.subtype and errorMessage from errors[0]
+    EFFECTS: pure
+    TERMINATION: total
+  FOR EACH event IN events DO
+    IF event.kind == result AND event.subtype == error_during_execution AND event.errors non-empty THEN
+      SET exit_metadata.isError true; errorMessage from errors[0]; errorCode from subtype
+  RETURN exit_metadata
 
 procedure PARSE_CLAUDE_STREAM(oracle_bytes):
   # [IMPL-TIED_CLAUDE_LIVE_DRIVER] [ARCH-TIED_CLAUDE_LIVE_DRIVER] [REQ-TIED_CLAUDE_LIVE_DRIVER] How: Parse Claude stream oracle NDJSON into typed events and exit metadata.
@@ -41,7 +57,7 @@ procedure PARSE_CLAUDE_STREAM(oracle_bytes):
     INPUT: oracle_bytes (frozen NDJSON)
     OUTPUT: { events[], exit_metadata } | { error: STREAM_SCHEMA_DRIFT | STREAM_PARSE_ERROR }
     PRE: oracle_bytes captured from pinned CLI version in PIN_CLAUDE_CLI_CONTRACT
-    POST: success => events cover assistant and/or thinking content when present in oracle; exit_metadata populated for error oracles
+    POST: success => events cover assistant and/or thinking content when present in oracle; exit_metadata populated for error oracles including stream-error-exit.ndjson (error_during_execution + errors[])
     FAILURE_MODES: STREAM_SCHEMA_DRIFT, STREAM_PARSE_ERROR
     EFFECTS: pure
     TERMINATION: total
