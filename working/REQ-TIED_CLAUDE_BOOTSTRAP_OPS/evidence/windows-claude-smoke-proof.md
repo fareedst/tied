@@ -2,7 +2,7 @@
 
 **REQ:** REQ-TIED_CLAUDE_BOOTSTRAP_OPS  
 **Block:** ASSERT_WINDOWS_BOOTSTRAP_CLAUDE  
-**Date:** 2026-09-23 (build-plan B1, darwin dev host)
+**Date:** 2026-09-23 (build-plan B1, darwin dev host); CI workflow commit 2026-09-24
 
 ## Assert list (authoritative)
 
@@ -21,6 +21,12 @@ Implementation: `tools/bootstrap/lib/assert-windows-bootstrap-claude.mjs` (share
 
 - **Observation:** `scripts/windows-bootstrap-smoke.cmd` stopped after Cursor layout + lint + Node entrypoint; no Claude asserts (Phase 0 gap doc 2026-09-23).
 - **Unit RED:** `node --test tools/bootstrap/lib/claude-harness.test.mjs` — `ASSERT_WINDOWS_BOOTSTRAP_CLAUDE` fails on empty temp client (`FAIL: .claude\skills missing`).
+
+## Local unit evidence (darwin, pre-Windows-CI)
+
+- **Command:** `node --test tools/bootstrap/lib/claude-harness.test.mjs`
+- **Result:** 11/11 pass (see `claude-harness-test-stdout.txt` in this directory)
+- **Note:** Does **not** authorize `WINDOWS_COPY_PROVEN_IN_CI` flip.
 
 ## GREEN (post-B1, darwin simulation)
 
@@ -48,8 +54,24 @@ Expected after B1: steps **1b** and **3b** invoke the same Node assert CLI on `S
 
 ## CI
 
-No GitHub Actions Windows bootstrap job found in this repo (2026-09-23). Residual: wire job when added; reuse `assert-windows-bootstrap-claude.mjs`.
+**Workflow wired (2026-09-24):** `.github/workflows/windows-bootstrap-smoke.yml` — `windows-latest`, `npm ci` + `npm run build` in `mcp-server/`, then `scripts\windows-bootstrap-smoke.cmd`.
+
+**First green run (pending):** After push, dispatch or wait for PR CI, then record:
+
+| Field | Value |
+| --- | --- |
+| Run URL | _(fill from GitHub Actions)_ |
+| Date | _(UTC)_ |
+| Commit | _(SHA)_ |
+| Assert path | Steps 1b + 3b → `assert-windows-bootstrap-claude.mjs` |
+
+Trigger locally on maintainer machine:
+
+```bash
+gh workflow run "Windows bootstrap smoke"
+gh run watch
+```
 
 ## `windows_copy_proven_in_ci`
 
-**Deferred — not flipped.** Policy requires green **Windows** smoke/CI proof on a Windows runner. Darwin unit tests + simulated `copy-files.mjs` assert are supporting evidence only, not flag authorization (CITDP proof boundary, RISK-BOOT-001).
+**Deferred — not flipped.** `WINDOWS_COPY_PROVEN_IN_CI` in `tools/bootstrap/lib/constants.mjs` remains **false** until the workflow above is **green on a Windows runner**. Darwin unit tests + simulated `copy-files.mjs` assert are supporting evidence only, not flag authorization (CITDP proof boundary, RISK-BOOT-001).

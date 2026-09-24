@@ -1,0 +1,44 @@
+# [REQ-TIED_CLAUDE_BOOTSTRAP_OPS] [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM]
+# Windows runner proof for Claude dual-bootstrap asserts (ASSERT_WINDOWS_BOOTSTRAP_CLAUDE).
+# Authorizes flipping WINDOWS_COPY_PROVEN_IN_CI in tools/bootstrap/lib/constants.mjs after first green run.
+name: Windows bootstrap smoke
+
+on:
+  push:
+    paths:
+      - "tools/bootstrap/**"
+      - "scripts/windows-bootstrap-smoke.cmd"
+      - "copy_files.cmd"
+      - "mcp-server/**"
+      - ".github/workflows/windows-bootstrap-smoke.yml"
+  pull_request:
+    paths:
+      - "tools/bootstrap/**"
+      - "scripts/windows-bootstrap-smoke.cmd"
+      - "copy_files.cmd"
+      - "mcp-server/**"
+      - ".github/workflows/windows-bootstrap-smoke.yml"
+  workflow_dispatch:
+
+jobs:
+  windows-bootstrap-smoke:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: mcp-server/package-lock.json
+
+      - name: Build MCP server
+        shell: cmd
+        run: |
+          cd mcp-server
+          npm ci
+          npm run build
+
+      - name: Run windows-bootstrap-smoke.cmd
+        shell: cmd
+        run: scripts\windows-bootstrap-smoke.cmd

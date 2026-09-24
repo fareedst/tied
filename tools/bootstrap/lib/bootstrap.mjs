@@ -4,7 +4,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
-import { manifestPaths, TIED_REPO_ROOT } from "./constants.mjs";
+import { manifestPaths, TIED_REPO_ROOT, WINDOWS_COPY_PROVEN_IN_CI } from "./constants.mjs";
 import { sayOk, sayWarn, sayErr, sayXOfYClient } from "./console.mjs";
 import {
   copyFileWithAttributes,
@@ -101,7 +101,9 @@ export function bootstrapTied(projectRoot, options = {}) {
   installTiedYamlSkill(projectRoot, paths);
   installPromptTypeSkills(projectRoot, paths);
   // [IMPL-TIED_CLAUDE_HARNESS] [ARCH-TIED_CLAUDE_HARNESS] [REQ-TIED_CLAUDE_HARNESS] — dual harness install after Cursor paths.
-  installClaudeSkills(projectRoot, paths, {});
+  installClaudeSkills(projectRoot, paths, {
+    windows_copy_proven_in_ci: WINDOWS_COPY_PROVEN_IN_CI,
+  });
   initializeClaudeMcpConfig(projectRoot, TIED_REPO_ROOT, { env, harnessLabel: "claude" });
   installClaudeMdTemplate(projectRoot, TIED_REPO_ROOT);
 

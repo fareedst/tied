@@ -10,6 +10,13 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const BOOTSTRAP_ROOT = path.resolve(__dirname, "..");
 export const TIED_REPO_ROOT = path.resolve(BOOTSTRAP_ROOT, "../..");
 
+/**
+ * [REQ-TIED_CLAUDE_BOOTSTRAP_OPS] [IMPL-TIED_CLAUDE_BOOTSTRAP_OPS]
+ * Unix symlink opt-in for `.claude/skills/` requires this true (GATE_SYMLINK_ON_WINDOWS_PROOF).
+ * Set true only after green `.github/workflows/windows-bootstrap-smoke.yml` on windows-latest.
+ */
+export const WINDOWS_COPY_PROVEN_IN_CI = false;
+
 let _manifest = null;
 
 export function loadManifest() {

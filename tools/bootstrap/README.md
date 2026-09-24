@@ -49,6 +49,8 @@ scripts\windows-bootstrap-smoke.cmd (includes Claude asserts via `tools/bootstra
 
 Runs `copy_files.cmd` into a temp client dir, `lint_yaml.cmd -F tied`, and a direct `copy-files.mjs` invoke. Exit code 0 = pass.
 
+**CI:** GitHub Actions workflow `Windows bootstrap smoke` (`.github/workflows/windows-bootstrap-smoke.yml`) runs the same script on `windows-latest` after building `mcp-server`. A green run is the only evidence that may set `WINDOWS_COPY_PROVEN_IN_CI` to `true` in `tools/bootstrap/lib/constants.mjs` (symlink opt-in remains env-driven; copy-default unchanged).
+
 Environment: `TIED_SOURCE_ROOT`, `TIED_TEST_ROOT`, `TIED_CURSOR_AGENT_CMD` (override Cursor agent CLI name).
 
 ## Usage
