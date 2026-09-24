@@ -1,7 +1,7 @@
 {
   "schema_version": "request-evidence-envelope.v1",
   "envelope_meta": {
-    "generated_at": "2026-09-24T03:43:08.454Z",
+    "generated_at": "2026-09-24T17:25:51.860Z",
     "generator": "request_evidence_envelope_build",
     "revision": 1
   },
@@ -17,8 +17,19 @@
     {
       "kind": "checklist_gate_receipt",
       "schema_version": "checklist-gate-receipt.v1",
-      "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/pre_implementation-2026-09-24T03-31-35-474Z.json",
-      "content_hash": "sha256:7b7a6776169ff350a97979a28c298a9e24f4bda029f1bf7982bcc595cb9718f2",
+      "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/close_out-2026-09-24T17-24-58-014Z.json",
+      "content_hash": "sha256:cec96d6cde0b2a276a301da5b5ac9e0cf0bf8482814b22c2850210b38288ea01",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/pre_implementation-2026-09-24T04-48-48-713Z.json",
+      "content_hash": "sha256:0002e091d7701a263e5726f584e2b007dd0389e89cd5f4a36f1907f9b73fd0a0",
       "phase": "pre_implementation",
       "status": "present",
       "proof_boundaries": [
@@ -40,7 +51,7 @@
       "kind": "citdp_record",
       "schema_version": null,
       "path": "tied/citdp/CITDP-REQ-TIED_CLAUDE_BOOTSTRAP_OPS.yaml",
-      "content_hash": "sha256:b7780d48d9f67f4454e61e1b089809f174c84faccd7a0a3039671e0e0fceffa1",
+      "content_hash": "sha256:3c4a83f8833f30208796f8ec2ac998cd572cb948992fa1185afdd0b50845dc7d",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -62,7 +73,7 @@
       "kind": "request_evidence_envelope",
       "schema_version": "request-evidence-envelope.v1",
       "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/request-evidence-envelope.v1.json",
-      "content_hash": "sha256:e0678fb8a0ed59e5295485177ecf0e280918ac0f1dd62a0cb367790914b0682a",
+      "content_hash": "sha256:d225ec8610bf1a5ed096c0ae79189838bea59df87bcc9a9ebbdeeda8f3110cfd",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -117,7 +128,7 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/claude-harness-test-stdout.txt",
-      "content_hash": "sha256:3aefe86c60d80bf7ee6ede409a8b9a979b089aea20fea40e315f77f8718bd8c3",
+      "content_hash": "sha256:8ba5bb3dc0a1b08221fd78b65b0fdeb4b293804ed7fecdb62a12d0886f14e4cf",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -151,6 +162,17 @@
       "schema_version": null,
       "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/gate-verification-b2-b5-slice.md",
       "content_hash": "sha256:7254a15eb78364dcd1e0277caeb6461fd6623a38133aea1f7fa2ebc514ae14ad",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/gitignore-close-out-hygiene.md",
+      "content_hash": "sha256:9867d35bcba257a337d4dd3583ef43d7be908d87fe75bc19756434472987cb78",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -205,7 +227,7 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/windows-claude-smoke-proof.md",
-      "content_hash": "sha256:fa685954c3d6303b3d961d61caa1c43c281b3f0e7ed1bdbf430d162d92b082ac",
+      "content_hash": "sha256:a55570dc567e4b8539663040ddd95662de8f6e7c0bf831499718fd330ef0d3a5",
       "phase": null,
       "status": "present",
       "proof_boundaries": [

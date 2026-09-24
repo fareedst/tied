@@ -1,7 +1,7 @@
 {
   "schema_version": "request-evidence-envelope.v1",
   "envelope_meta": {
-    "generated_at": "2026-09-24T03:22:35.740Z",
+    "generated_at": "2026-09-24T17:26:08.062Z",
     "generator": "request_evidence_envelope_build",
     "revision": 1
   },
@@ -17,8 +17,8 @@
     {
       "kind": "checklist_gate_receipt",
       "schema_version": "checklist-gate-receipt.v1",
-      "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/close_out-2026-09-24T02-52-41-879Z.json",
-      "content_hash": "sha256:c0d1cdd63bb7f725720009ef019a954ef30bb7ab6f8ef9be5593be55f79954bc",
+      "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/close_out-2026-09-24T17-25-43-137Z.json",
+      "content_hash": "sha256:5d30da419ba2d604cd539866a9aac0182c989ad90dec93e611cbf82085f1e187",
       "phase": "close_out",
       "status": "present",
       "proof_boundaries": [
@@ -28,8 +28,8 @@
     {
       "kind": "checklist_gate_receipt",
       "schema_version": "checklist-gate-receipt.v1",
-      "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/pre_implementation-2026-09-24T02-40-23-882Z.json",
-      "content_hash": "sha256:a4eeb41de567d61caa7a0027668f36629dfd518674cb5aa3f5eabb5b2daac379",
+      "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/pre_implementation-2026-09-24T04-48-49-025Z.json",
+      "content_hash": "sha256:10e9ecb1fafbf5b59c29a8e341f62b85b155de56c3fab0fe08e58e92853151ac",
       "phase": "pre_implementation",
       "status": "present",
       "proof_boundaries": [
@@ -51,7 +51,7 @@
       "kind": "citdp_record",
       "schema_version": null,
       "path": "tied/citdp/CITDP-REQ-TIED_CLAUDE_LIVE_DRIVER.yaml",
-      "content_hash": "sha256:062c6a39def40ad1f2d4161c2a683296ded7e8dca5630d069eb24e5c87ced067",
+      "content_hash": "sha256:537f8a679f0ea8fc57ede7e604ef11912eef3156519991fd63d7fcaa44100597",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -84,7 +84,7 @@
       "kind": "request_evidence_envelope",
       "schema_version": "request-evidence-envelope.v1",
       "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/request-evidence-envelope.v1.json",
-      "content_hash": "sha256:7e4bd68305ec5a4d81f43898c5a90cfa77d430a6a8c6c58a38a5189c57dac712",
+      "content_hash": "sha256:799c116476752c58a1501463778203d3d1815f58643a51a6a9f82391e21eb231",
       "phase": null,
       "status": "present",
       "proof_boundaries": [

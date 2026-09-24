@@ -7,8 +7,8 @@ REQ-TIED_CLAUDE_BOOTSTRAP_OPS:
       date: "2026-09-23"
     last_updated:
       author: "plan-close-out"
-      date: "2026-09-23"
-      reason: "B1/B2/B5 implemented; B3 deferred; B4 N/A; windows_copy_proven_in_ci remains false"
+      date: "2026-09-24"
+      reason: "Windows CI green (run 36031010940); windows_copy_proven_in_ci true in code and REQ; B3 CONFIG_SKILLS_REROOT still deferred; B4 adherence N/A"
   name: "Claude bootstrap ops (Windows CI, symlink, skills re-root)"
   priority: "P1"
   rationale:

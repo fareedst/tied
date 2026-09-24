@@ -62,6 +62,8 @@ working/**/gates/
 !working/REQ-TIED_CLAUDE_HARNESS/gates/**
 !working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/
 !working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/**
+!working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/
+!working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/**
 # PSA timestamped gate receipts (regenerate per run-close-out-gates.mjs; keep adversarial gate-result.json via patterns above)
 working/REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/gate-*-result.json
 # Adherence reconcile output (regenerate per tied_adherence_reconcile_run)
@@ -93,8 +95,15 @@ working/**/close_out-*.json
 !working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/close_out-*.json
 !working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/pre_implementation-*.json
 !working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/verification-*.json
+!working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/close_out-*.json
+!working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/pre_implementation-*.json
+!working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/verification-*.json
 # Build-plan change-ID scratch (tracker, CITDP, gate receipts, remediation — regenerate per build-plan)
 working/DOC-*/
+# refine-plan session scratch (linked plan lives in ~/.cursor/plans/; not canonical TIED intent)
+working/REFINE-*/
+# MCP gate-args payloads for one-off gate validate runs (regenerate per gate invocation)
+working/**/gate-args*.json
 # Layer C pseudo-code static analysis gate reports (regenerate per gate run)
 working/**/pseudocode-analysis/
 # Integrated activation collect receipts (regenerate per phase gate; distinct from gate-*.json)

@@ -1,6 +1,6 @@
 CITDP-REQ-TIED_CLAUDE_LIVE_DRIVER:
   change_definition:
-    current_behavior: "Parent REQ-TIED_CLAUDE_HARNESS closed Phases 0-3: --harness claude selects dry-run placeholder bin only; live path still Cursor live-executor/executor-run; no Claude stream/session oracles under fixtures/claude/; README lacks CLI pin and dry-vs-live table for Claude live."
+    current_behavior: "Shipped: Claude AgentDriver, frozen oracles under fixtures/claude/, live-executor binds harness=claude with mocked subprocess in CI; dry-run --harness claude regression; README CLI pin and dry-vs-live table. Parent dry-run harness select unchanged."
     desired_behavior: "Contract-gated Claude AgentDriver (launch, parse, session, permissions/env, shared receipt); frozen oracles under mcp-server/packages/agentstream/fixtures/claude/; live-executor composition binds harness=claude to Claude driver with mocked subprocess in CI; README pins CLI version and documents dry-run vs fixture-gated live; CI stays fixture-only."
     non_goals:
       - "--agent-path as harness selector"
@@ -117,9 +117,8 @@ CITDP-REQ-TIED_CLAUDE_LIVE_DRIVER:
         rationale: "tied_adversarial_inquiry_run Mode B accepts Ruby/Go paths only; TS agentstream live-driver work remains out of Mode B scope. Counterexamples stay in CITDP; do not silent-minimal without waiver."
       depth_tier: "minimal"
       disconfirming_observations:
-        - "fixtures/claude/ directory not yet populated at plan-new-feature"
         - "Mode B TS inquiry gap unchanged from parent"
-        - "Parent closed with dry-run only and residual live AgentDriver"
+        - "No live Claude subprocess in CI (proof boundary)"
       eligibility_triggers_matched:
         - "external_cli_subprocess"
         - "network_adjacent_operator_tooling"

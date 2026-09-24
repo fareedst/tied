@@ -68,13 +68,13 @@ risk_snapshot:
     depth_change_waiver in CITDP (effective inquiry depth minimal) while retaining counterexamples BOOT-001..005.
 execution_evidence:
   close_out_evidence:
-    date: '2026-09-23'
+    date: '2026-09-24'
     deferred:
       - CONFIG_SKILLS_REROOT (B3)
-      - traceable-commit (commit deferred to sponsor)
     gates:
-      close_out: working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/request-evidence-envelope.v1.json
+      close_out: working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/close_out-2026-09-24T17-25-52-156Z.json
     master_checklist: working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/checklist-tracker.yaml
+    envelope: working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/request-evidence-envelope.v1.json
   completed:
     - session-bootstrap
     - translate-sponsor-intent
@@ -1948,11 +1948,14 @@ steps:
     title: Gitignore close-out hygiene (advisory)
     tracking:
       consideration_before_proceeding: >-
-        Added ! negation exceptions for REQ-TIED_CLAUDE_BOOTSTRAP_OPS envelope, manifest, and not-applicable-receipt
-        (unstaged .gitignore edit).
+        2026-09-24 pass: unstaged working/REFINE-*/ and working/**/gate-args*.json under Ephemeral working/; evidence
+        working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/gitignore-close-out-hygiene.md. Prior ! negations for B envelope
+        manifest remain (.gitignore:125-127). Do not stage fixture envelope noise or docs/comparisons/ (line 11).
       evidence_refs:
         - kind: file_path
           path: .gitignore
+        - kind: file_path
+          path: working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/gitignore-close-out-hygiene.md
       retry_count: '0'
       returned_from: []
       state_history: []

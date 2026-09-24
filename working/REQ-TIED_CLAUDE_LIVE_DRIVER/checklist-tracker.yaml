@@ -56,7 +56,7 @@ record_identity:
   profile_depth: integrated
   citdp_path: tied/citdp/CITDP-REQ-TIED_CLAUDE_LIVE_DRIVER.yaml
   req_token: REQ-TIED_CLAUDE_LIVE_DRIVER
-  program_phase: implement_live_driver
+  program_phase: closed
 risk_snapshot:
   depth_tier: minimal
   prior_depth_tier: integrated
@@ -71,7 +71,7 @@ execution_evidence:
     date: '2026-09-24'
     deferred: []
     gates:
-      close_out: working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/close_out-2026-09-24T02-52-41-879Z.json
+      close_out: working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/close_out-2026-09-24T17-25-43-137Z.json
       verification: working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/verification-2026-09-24T02-42-48-910Z.json
     master_checklist: working/REQ-TIED_CLAUDE_LIVE_DRIVER/checklist-tracker.yaml
     envelope: working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/request-evidence-envelope.v1.json
@@ -96,6 +96,10 @@ execution_evidence:
     - composition-integration
     - apply-token-comments
     - user-facing-release-notes
+    - verification-gate
+    - sync-tied-stack
+    - gitignore-close-out-hygiene
+    - sub-close-out-evidence-sync
   envelope_path: working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/request-evidence-envelope.v1.json
   evidence_refs_format: |
     Typed evidence_refs for completed dispositions (RESOLVE_EVIDENCE_REFS at write time):
@@ -846,7 +850,11 @@ steps:
       retry_count: '0'
       returned_from: []
       state_history: []
-      status: pending
+      status: completed
+      evidence_refs: &ref_2
+        - working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/verification-evidence-manifest.v1.json
+    disposition: completed
+    evidence_refs: *ref_2
   - agentstream_new_session: 'true'
     flow:
       branches:
@@ -912,7 +920,11 @@ steps:
       retry_count: '0'
       returned_from: []
       state_history: []
-      status: pending
+      status: completed
+      evidence_refs: &ref_3
+        - working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/sync-tied-stack-evidence.md
+    disposition: completed
+    evidence_refs: *ref_3
   - flow:
       branches: []
       calls:
@@ -1011,10 +1023,10 @@ steps:
       returned_from: []
       state_history: []
       status: completed
-      evidence_refs: &ref_2
+      evidence_refs: &ref_4
         - working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/change-definition-evidence.md
     disposition: completed
-    evidence_refs: *ref_2
+    evidence_refs: *ref_4
   - flow:
       branches: []
       calls:
@@ -1081,10 +1093,10 @@ steps:
         - sync-tied-stack
       state_history: []
       status: completed
-      evidence_refs: &ref_3
+      evidence_refs: &ref_5
         - working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/catalog-pseudocode-contracts-evidence.md
     disposition: completed
-    evidence_refs: *ref_3
+    evidence_refs: *ref_5
   - flow:
       branches: []
       calls: []
@@ -1138,10 +1150,10 @@ steps:
       returned_from: []
       state_history: []
       status: completed
-      evidence_refs: &ref_4
+      evidence_refs: &ref_6
         - working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/test-strategy-evidence.md
     disposition: completed
-    evidence_refs: *ref_4
+    evidence_refs: *ref_6
   - flow:
       branches:
         - action: Refactor (split or restructure) one IMPL before proceeding; do not paper over contradictions
@@ -1258,10 +1270,10 @@ steps:
       returned_from: []
       state_history: []
       status: completed
-      evidence_refs: &ref_5
+      evidence_refs: &ref_7
         - working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/session-bootstrap-evidence.md
     disposition: completed
-    evidence_refs: *ref_5
+    evidence_refs: *ref_7
   - flow:
       branches:
         - action: >-
@@ -1449,10 +1461,10 @@ steps:
         - sync-tied-stack
       state_history: []
       status: completed
-      evidence_refs: &ref_6
+      evidence_refs: &ref_8
         - working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/author-architecture-evidence.md
     disposition: completed
-    evidence_refs: *ref_6
+    evidence_refs: *ref_8
   - flow:
       branches: []
       calls:
@@ -1510,10 +1522,10 @@ steps:
         - sync-tied-stack
       state_history: []
       status: completed
-      evidence_refs: &ref_7
+      evidence_refs: &ref_9
         - working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/author-requirement-evidence.md
     disposition: completed
-    evidence_refs: *ref_7
+    evidence_refs: *ref_9
   - flow:
       branches: []
       calls:
@@ -1580,10 +1592,10 @@ steps:
       returned_from: []
       state_history: []
       status: completed
-      evidence_refs: &ref_8
+      evidence_refs: &ref_10
         - working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/gate-pseudocode-validation-evidence.md
     disposition: completed
-    evidence_refs: *ref_8
+    evidence_refs: *ref_10
   - flow:
       branches: []
       calls:
@@ -1743,10 +1755,10 @@ steps:
       returned_from: []
       state_history: []
       status: completed
-      evidence_refs: &ref_9
+      evidence_refs: &ref_11
         - working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/impact-discovery-evidence.md
     disposition: completed
-    evidence_refs: *ref_9
+    evidence_refs: *ref_11
   - flow:
       branches: []
       calls: []
@@ -1922,10 +1934,10 @@ steps:
       returned_from: []
       state_history: []
       status: completed
-      evidence_refs: &ref_10
+      evidence_refs: &ref_12
         - working/REQ-TIED_CLAUDE_LIVE_DRIVER/CITDP-REQ-TIED_CLAUDE_LIVE_DRIVER.yaml
     disposition: completed
-    evidence_refs: *ref_10
+    evidence_refs: *ref_12
   - flow:
       branches: []
       calls: []
@@ -1953,7 +1965,11 @@ steps:
       retry_count: '0'
       returned_from: []
       state_history: []
-      status: pending
+      status: completed
+      evidence_refs: &ref_13
+        - working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/gitignore-close-out-hygiene-evidence.md
+    disposition: completed
+    evidence_refs: *ref_13
   - flow:
       branches: []
       calls:
@@ -2080,10 +2096,17 @@ steps:
       returned_from: []
       state_history: []
       status: completed
-      evidence_refs: &ref_11
+      evidence_refs: &ref_14
         - working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/persist-implementation-records-evidence.md
     disposition: completed
-    evidence_refs: *ref_11
+    evidence_refs: *ref_14
+  - slug: sub-close-out-evidence-sync
+    tracking:
+      status: completed
+      evidence_refs: &ref_15
+        - working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/sub-close-out-evidence-sync-evidence.md
+    disposition: completed
+    evidence_refs: *ref_15
 sub_procedures:
   - flow:
       return_to: caller

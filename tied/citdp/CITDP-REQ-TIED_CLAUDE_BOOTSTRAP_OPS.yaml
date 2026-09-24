@@ -1,6 +1,6 @@
 CITDP-REQ-TIED_CLAUDE_BOOTSTRAP_OPS:
   change_definition:
-    current_behavior: "Parent REQ-TIED_CLAUDE_HARNESS closed Phases 0-3: Unix/unit tests prove Claude .claude/skills/ copy and repo-root .mcp.json safe-merge; scripts/windows-bootstrap-smoke.cmd does not assert those Claude artifacts; installClaudeSkills throws SYMLINK_WITHOUT_CI_WINDOWS_PROOF when symlink_unix_opt_in without windows_copy_proven_in_ci; optional skills/ re-root and adherence hooks not shipped; comparison plan Current still claims no Claude .mcp.json (~L95) and Status names single Proposed vehicle."
+    current_behavior: "B1 Windows CI green (GitHub Actions run 36031010940; .github/workflows/windows-bootstrap-smoke.yml); ASSERT_WINDOWS_BOOTSTRAP_CLAUDE shipped; windows_copy_proven_in_ci / WINDOWS_COPY_PROVEN_IN_CI true in code and REQ metadata; B2 GATE_SYMLINK_ON_WINDOWS_PROOF test-proven; B4 adherence N/A; B5 comparison doc Current/Post-Phases refreshed; B3 CONFIG_SKILLS_REROOT deferred."
     desired_behavior: "Windows CI/smoke proves Claude skills + .mcp.json; symlink opt-in only after windows_copy_proven_in_ci flip; optional skills/ re-root behind ARCH + default-off flag + dual-harness/Windows tests; adherence spike with bridge or not_applicable receipt; comparison doc Current/Post-Phases/Status match closed parent + REQ A/B."
     non_goals:
       - "AgentDriver / live stream fixtures (REQ-TIED_CLAUDE_LIVE_DRIVER)"
@@ -70,9 +70,9 @@ CITDP-REQ-TIED_CLAUDE_BOOTSTRAP_OPS:
       - "IMPL-TIED_CLAUDE_BOOTSTRAP_OPS"
       - "REQ-TIED_CLAUDE_BOOTSTRAP_OPS"
   leap_feedback:
-    divergences_from_analysis: "B3 CONFIG_SKILLS_REROOT deferred; B4 adherence N/A; windows_copy_proven_in_ci remains false (Unix unit + smoke asserts; global flip awaits Windows CI green)."
+    divergences_from_analysis: "B3 CONFIG_SKILLS_REROOT deferred; B4 adherence N/A; windows_copy_proven_in_ci flipped true only after Windows runner CI green (run 36031010940), never from darwin-only unit tests; proof note working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/windows-claude-smoke-proof.md."
     parent_phase13_deferrals: "Phase 1 Windows Claude asserts and Phase 3 optional ergonomics (symlink unlock, skills/ re-root, adherence, comparison Current) owned by this REQ; do not silently rewrite closed parent Tracker. Live AgentDriver remains REQ-TIED_CLAUDE_LIVE_DRIVER."
-    record_status: "close_out_ready"
+    record_status: "post_ci_leap_2026-09-24"
     tied_stack_updates_required: []
   migration_phases:
     - acceptance: "Assert expectations documented before RED on windows-bootstrap-smoke.cmd"
@@ -128,16 +128,18 @@ CITDP-REQ-TIED_CLAUDE_BOOTSTRAP_OPS:
         rationale: "tied_adversarial_inquiry_run Mode B accepts Ruby/Go paths only; bootstrap/Windows/Node smoke work remains out of Mode B TS scope. Counterexamples stay in CITDP; do not silent-minimal without waiver."
       depth_tier: "minimal"
       disconfirming_observations:
-        - "Comparison plan ~L95 still stale at plan-new-feature"
+        - "windows_copy_proven_in_ci true after Windows CI run 36031010940; flag not flipped from darwin-only evidence"
         - "Mode B TS inquiry gap unchanged from parent/REQ A"
-        - "windows-bootstrap-smoke.cmd currently omits Claude asserts"
+        - "B3 skills re-root deferred at close-out"
       eligibility_triggers_matched:
         - "ci_artifact_claims"
         - "persistence"
       evidence_references:
+        - ".github/workflows/windows-bootstrap-smoke.yml"
         - "docs/comparisons/claude-code-tied-multi-harness-plan.md"
         - "tied/implementation-decisions/IMPL-TIED_CLAUDE_BOOTSTRAP_OPS-pseudocode.md"
         - "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/sub-adversarial-inquiry-pass-na.md"
+        - "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/windows-claude-smoke-proof.md"
         - "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/PLAN.md"
       falsification_questions:
         - "Can symlink opt-in succeed when windows_copy_proven_in_ci is false?"
@@ -157,7 +159,7 @@ CITDP-REQ-TIED_CLAUDE_BOOTSTRAP_OPS:
         limitation: "Full Windows CI may be remote; capture proof note under evidence/"
         owner: "AI Agent"
         rationale: "Matches hard gate and parent residual"
-        result: "pending"
+        result: "pass"
         risk: "Windows Claude path unproven or premature symlink"
         threshold: "B1 green before B2/B3; symlink throw when flag false"
         waiver:
