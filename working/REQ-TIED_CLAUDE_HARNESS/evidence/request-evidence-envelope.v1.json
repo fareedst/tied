@@ -1,0 +1,311 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-09-24T00:56:12.381Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-TIED_CLAUDE_HARNESS",
+    "project_id": "af8451e933f573ec",
+    "depth_tier": "minimal",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [],
+  "artifacts": [
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "working/REQ-TIED_CLAUDE_HARNESS/gates/close_out-2026-09-24T00-45-13-037Z.json",
+      "content_hash": "sha256:26c4d36c8f868b7eb0c2a0b3b767b915833659b38e735811b96616b51f2f5b10",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "working/REQ-TIED_CLAUDE_HARNESS/gates/pre_implementation-2026-09-24T00-07-19-541Z.json",
+      "content_hash": "sha256:77c5b328bb52b112fcf7002f77dc2fe8722d5512b53605d9c7d671ae31580317",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "working/REQ-TIED_CLAUDE_HARNESS/gates/verification-2026-09-24T00-24-55-509Z.json",
+      "content_hash": "sha256:d9907ab9442c388deb5b2625cfcaeaf6a3476cdddf1ffd8430cf578c645d4e51",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "tied/citdp/CITDP-REQ-TIED_CLAUDE_HARNESS.yaml",
+      "content_hash": "sha256:0a2de5a09079462219e3b2cab08220b8ec777c798a9abc9744d1ebd66517b9ca",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    },
+    {
+      "kind": "not_applicable_receipt",
+      "schema_version": "not-applicable-receipt.v1",
+      "path": "working/REQ-TIED_CLAUDE_HARNESS/evidence/not-applicable-receipt.v1.json",
+      "content_hash": "sha256:52910f6f5638cb6b6a627314c936ce83673bd03c21c84fd84c809b899a845042",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "working/REQ-TIED_CLAUDE_HARNESS/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:f30e65c7891bd14ddb53674917520c10fee182dad8f744510a4832b51e3cfc2e",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_HARNESS/evidence/bootstrap-claude-harness-test-stdout.txt",
+      "content_hash": "sha256:a42665fa756362902592312f1014dc7766381216f58d607cc987098ba3f1f623",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_HARNESS/evidence/bootstrap-claude-harness.stderr.txt",
+      "content_hash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_HARNESS/evidence/bootstrap-claude-harness.stdout.txt",
+      "content_hash": "sha256:b7e453f07639fbee5ede8869879355d3f1e9b7a1a283d9b1d3f3d9a2e5453792",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_HARNESS/evidence/completion-signals-handoff.md",
+      "content_hash": "sha256:d2c5f8b8c52023e292f2c67cbb940d0f3242a599acca8ad325be034833b38be0",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_HARNESS/evidence/gate-close-out-payload.json",
+      "content_hash": "sha256:accce6e12a026af68dd2df5d61baf8a57d2c68e336100bd2513dc2ee83bd0965",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": "layer-b-pseudocode-validator.v1",
+      "path": "working/REQ-TIED_CLAUDE_HARNESS/evidence/gate-pseudocode-validation.md",
+      "content_hash": "sha256:749fe3a8d1678f642ed5cf2f3d5b4d684d777e03e2dd643a1d918816074936f9",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_HARNESS/evidence/gate-verify-payload.json",
+      "content_hash": "sha256:4da74dc48a27a9aaf60ca9cda8042976f90291310b4d20cf94a5d7e118447117",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_HARNESS/evidence/phase0-acceptance.md",
+      "content_hash": "sha256:cb45f23bc033d7cd4d073b34580b123294f7f9ee5315770a2c65cb528a258ff7",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_HARNESS/evidence/phase2-agentstream-test-stdout.txt",
+      "content_hash": "sha256:c82c7dcc2b22f99f456f583989a251e0befbd11f5f2fbc6e783abcea8965eb67",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_HARNESS/evidence/phase2-harness-red-stdout.txt",
+      "content_hash": "sha256:d1d34aaa71b64357d5b435f88f2721fb86972aa1677b8c06e06d7aefa0ac4521",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_HARNESS/evidence/phase2-unit-test-red.md",
+      "content_hash": "sha256:1e91a49615e54985bf4bb0c108cc562611338d164aa995829efa6fea5a29e07e",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_HARNESS/evidence/phase2-verification-gate.md",
+      "content_hash": "sha256:8ef2347f3193d3bc51d825c309c72e5fe93e385e34d8195695be28fac2d5da34",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_HARNESS/evidence/phase3-client-dev-index-matrix.md",
+      "content_hash": "sha256:8db1766e68a5302b439a63691d31636fc4f28f2b2df4a46481becaff8ae0ce24",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_HARNESS/evidence/proposed-commit-message.txt",
+      "content_hash": "sha256:609e616d79f77f5f7e25bedd07fcc8ec67cfad087b89e9852fb9560f3e496ec8",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_HARNESS/evidence/run-close-out-gates-final-stdout.txt",
+      "content_hash": "sha256:76829d96eda2cfe0b7dd705bb4751f2d319e4aee4101088f233550061da25690",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_HARNESS/evidence/run-close-out-gates-pre-commit-stdout.txt",
+      "content_hash": "sha256:4de7773aacb97fb62acb9b351aee7de0375013969614d9b6269428d85323ae2d",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_HARNESS/evidence/run-close-out-gates-stdout.txt",
+      "content_hash": "sha256:4e8a3555a2ca120cee752fa3093703579b2237f339cdc2d678b685977d8ca507",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_HARNESS/evidence/sub-adversarial-inquiry-pass-na.md",
+      "content_hash": "sha256:7cb5b7dccb369d2dce1a7e6370ee6e812666b7f6ae1bfb4dbf0f8fe2b395f39a",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_HARNESS/evidence/three-way-alignment-phase1.md",
+      "content_hash": "sha256:e5333fefc023db70ffd5c4d393b4f2df0448c4ab2648cf7ea9e447c8986f2415",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "verification_evidence_manifest",
+      "schema_version": "verification-evidence-manifest.v1",
+      "path": "working/REQ-TIED_CLAUDE_HARNESS/evidence/verification-evidence-manifest.v1.json",
+      "content_hash": "sha256:55ae7e186d3f5f8f5f353e490065bd5c6f8b364b6e6737ccf34497c2a3ee052e",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": null,
+    "tracker_hash": null,
+    "citdp_path": null,
+    "evidence_chain_profile_path": null
+  },
+  "gaps": []
+}

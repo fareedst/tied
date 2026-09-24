@@ -1,0 +1,207 @@
+CITDP-REQ-TIED_CLAUDE_HARNESS:
+  change_definition:
+    current_behavior: "TIED bootstrap installs Prompt Composer and tied-yaml skills under .cursor/skills/ only; initializeTiedMcpConfig creates .cursor/mcp.json when absent (create-only preservation). tied agentstream spawns Cursor agent with stream-json; --agent-path overrides Cursor executable only. No .claude/skills/, repo-root .mcp.json, harness metrics dimension, or Claude AgentDriver."
+    desired_behavior: "Sponsor-approved full program Phases 0→3 under REQ-TIED_CLAUDE_HARNESS: Phase 0 contract-gated pilot; Phase 1 dual bootstrap (.claude/skills/ copy default, repo-root .mcp.json safe merge for tied-yaml, TIED_MCP_HARNESS metrics, optional thin CLAUDE.md); Phase 2 --harness claude AgentDriver with fixture gates; Phase 3 client-development-index REQ vs FEAT matrix. AGENTS.md canonical; one Prompt Composer taxonomy; Cursor MCP policy unchanged."
+    non_goals:
+      - "--agent-path as Claude adapter"
+      - "Live Claude checklist automation before contract fixtures"
+      - "Mandating Claude for TIED methodology development"
+      - "Parallel requirements/architecture/review skill taxonomy"
+      - "PLAN.md-only workflows replacing project TIED YAML"
+    success_criteria:
+      - "CITDP and Authoritative Tracker under working/REQ-TIED_CLAUDE_HARNESS/"
+      - "Operating modes explicit: interactive Prompt Composer vs tied agentstream"
+      - "Phase gates documented with RED test strategy before Phase 1+ code"
+      - "REQ/ARCH/IMPL stack with token-commented essence_pseudocode sidecar"
+  completion_criteria:
+    activation:
+      phase: "close_out"
+      request_token: "REQ-TIED_CLAUDE_HARNESS"
+      run_id: "phase3-index-close-out-prep-2026-09-23"
+    checklist_gate:
+      dispositions:
+        - "completed"
+        - "not_applicable"
+        - "pending"
+        - "waived"
+      fail_closed: true
+      phases:
+        - "close_out"
+        - "pre_implementation"
+        - "verification"
+    verification_gate_notes: "Phases 0-3 closed (2026-09-23): bootstrap dual harness, agentstream --harness claude dry-run GREEN (41/41), client-development-index matrix published; plan-close-out complete with envelope blocking_gap_count 0. Live Claude AgentDriver and integrated MCP inquiry remain deferred per depth_change_waiver."
+  evidence:
+    commands:
+      - "cd mcp-server/packages/agentstream && npm test"
+      - "cd tools/bootstrap && node --test lib/claude-harness.test.mjs"
+      - "pseudocode_validate for IMPL-TIED_CLAUDE_HARNESS"
+      - "tied_checklist_gate_validate phase=verification"
+      - "tied_validate_consistency"
+    manifest_reference: "working/REQ-TIED_CLAUDE_HARNESS/evidence/verification-evidence-manifest.v1.json"
+    proof_boundaries:
+      - "Live tied agentstream Claude subprocess not claimed; dry-run placeholder bin only"
+      - "Phase 0 pilot evidence lives under working/REQ-TIED_CLAUDE_HARNESS/phase0/"
+      - "Phase 1 bootstrap slice complete (2026-09-23); Phase 2 SELECT_AGENT_HARNESS GREEN (2026-09-23); Phase 3 PUBLISH_REQ_FEAT_MATRIX in client-development-index.md (2026-09-23)"
+  impact_analysis:
+    architecture:
+      - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
+      - "ARCH-TIED_CLAUDE_HARNESS"
+    impl_inventory:
+      - "IMPL-TIED_CLAUDE_HARNESS"
+    implementation_decisions:
+      - "IMPL-MCP_USAGE_METRICS"
+      - "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "IMPL-TIED_CLAUDE_HARNESS"
+      - "IMPL-TIED_FILES"
+    modules_or_boundaries: "tools/bootstrap (skills.mjs, mcp-config.mjs); mcp-server/packages/agentstream executor; tied/docs/client-development-index.md; working/REQ-TIED_CLAUDE_HARNESS/"
+    requirements:
+      - "REQ-GOAGENT-AGENT-EXECUTOR"
+      - "REQ-MCP_USAGE_METRICS"
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-TIED_CLAUDE_HARNESS"
+      - "REQ-TIED_SETUP"
+    tied_tokens_affected:
+      - "REQ-GOAGENT-AGENT-EXECUTOR"
+      - "REQ-MCP_USAGE_METRICS"
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-TIED_SETUP"
+    tied_tokens_new:
+      - "ARCH-TIED_CLAUDE_HARNESS"
+      - "IMPL-TIED_CLAUDE_HARNESS"
+      - "REQ-TIED_CLAUDE_HARNESS"
+  leap_feedback:
+    divergences_from_analysis: null
+    record_status: "phases_0_3_closed"
+    tied_stack_updates_required: []
+  migration_phases:
+    - acceptance: "Cursor create-only .cursor/mcp.json unchanged; Windows copy path in CI"
+      deliverables:
+        - ".claude/skills/ copy install"
+        - "Harness metrics env in generated MCP blocks"
+        - "RED bootstrap contract tests; optional CLAUDE.md template"
+        - "Repo-root .mcp.json create-if-absent and safe merge"
+      name: "Bootstrap dual harness"
+      phase: 1
+    - acceptance: "Matrix published; deferred slices recorded in Tracker"
+      deliverables:
+        - "Optional skills/ re-root deferred until Windows copy proven"
+        - "REQ vs FEAT matrix in client-development-index.md"
+      name: "Client-development-index matrix and ergonomics"
+      phase: 3
+    - acceptance: "No canonical bootstrap or agentstream code changes required for Phase 0 exit"
+      deliverables:
+        - "Fixture contracts for Phase 1 bootstrap RED and Phase 2 driver oracles"
+        - "Pilot notes and gap list under working/REQ-TIED_CLAUDE_HARNESS/phase0/"
+      name: "Interactive pilot (discovery)"
+      phase: 0
+    - acceptance: "npm test green in @tied/agentstream; live Claude gated on fixtures"
+      deliverables:
+        - "AgentDriver boundary and --harness claude"
+        - "Driver unit and composition fixtures; README contract"
+      name: "Agentstream Claude profile"
+      phase: 2
+  record_identity:
+    change_request_id: "REQ-TIED_CLAUDE_HARNESS"
+    gate_policy: "advisory"
+    profile_depth: "integrated"
+    recorded_at: "2026-09-23"
+    title: "Claude Code multi-harness parity program"
+  risk_analysis:
+    abuse_cases:
+      - "Harness flag conflated with --agent-path executable override."
+      - "Operators run live Claude checklist before stream oracles exist and misread partial automation as parity."
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Copying .cursor/mcp.json to repo root verbatim could clobber unrelated Claude MCP servers."
+        - "Treating --agent-path as Claude harness would break Cursor override semantics and skip AgentDriver fixtures."
+      depth_change_waiver:
+        approval: "sponsor-advisory-2026-09-23"
+        expiry: "2026-12-31"
+        owner: "REQ-TIED_CLAUDE_HARNESS program sponsor"
+        rationale: "Phase 2 verification slice ships TypeScript SELECT_AGENT_HARNESS; tied_adversarial_inquiry_run Mode B accepts Ruby/Go paths only—defer integrated MCP inquiry activation until TS scope or manual obligation graph input lands. Counterexamples remain in CITDP at minimal depth."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Current bootstrap create-only Cursor policy is evidenced in mcp-config.mjs; Claude paths are absent today."
+        - "Phase 1 hostile .mcp.json merge fixtures pass in tools/bootstrap/lib/claude-harness.test.mjs (2026-09-23)."
+        - "Phase 2 harness-select and composition tests pass in @tied/agentstream npm test (2026-09-23)."
+      eligibility_triggers_matched:
+        - "external_claude_mcp_schema_deferred_to_phase0_gap_list"
+        - "phase_1_mcp_safe_merge_bootstrap"
+      evidence_references:
+        - "docs/comparisons/claude-code-tied-multi-harness-plan.md"
+        - "tied/implementation-decisions/IMPL-TIED_CLAUDE_HARNESS-pseudocode.md"
+        - "working/REQ-TIED_CLAUDE_HARNESS/evidence/sub-adversarial-inquiry-pass-na.md"
+        - "working/REQ-TIED_CLAUDE_HARNESS/PLAN.md"
+      falsification_questions:
+        - "Does Claude stream-json parity hold without pinned CLI version and separate oracles?"
+        - "Does safe merge ever mutate non-tied-yaml server entries under hostile .mcp.json fixtures?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: "integrated"
+      rationale: "Integrated depth planned for MCP safe merge; Phase 2 verification defers MCP inquiry run (TS Mode B gap) via depth_change_waiver while retaining counterexamples."
+      research_profile: "planning-only"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "mcp-server/packages/agentstream npm test"
+        evidence_method: "Unit and composition tests for SELECT_AGENT_HARNESS"
+        limitation: "No live Claude subprocess in CI"
+        owner: "AI Agent"
+        rationale: "Harness selection is pure argv/config logic testable without LLM invocation."
+        result: "pass"
+        risk: "--agent-path misused as harness adapter"
+        threshold: "npm test 41/41 pass including harness-select and composition tests"
+        waiver:
+          expiry: "~"
+          owner: "~"
+          reason: "~"
+          required: "false"
+    quality_profiles:
+      - "baseline-functional"
+    residual_risk:
+      expiry: "2026-12-31"
+      owner: "REQ-TIED_CLAUDE_HARNESS program sponsor"
+      summary: "Live Claude AgentDriver and stream oracles remain fixture-gated; integrated MCP inquiry activation deferred for TS paths."
+    risks:
+      - description: "Claude CLI subprocess and stream schema drift vs Cursor stream-json"
+        id: "RISK-CLAUDE-001"
+        likelihood: "High"
+        mitigation: "Phase 0 contract notes; pinned CLI version; frozen fixtures; separate oracles"
+      - description: "Operators conflate interactive build-plan success with agentstream automation"
+        id: "RISK-CLAUDE-004"
+        likelihood: "Medium"
+        mitigation: "Operating modes in ARCH/IMPL/PLAN; non-goals in CITDP"
+      - description: "Repo-root .mcp.json safe merge clobbers unrelated MCP servers"
+        id: "RISK-CLAUDE-002"
+        likelihood: "Medium"
+        mitigation: "Reuse refreshTiedMcpJson merge pattern; RED tests; never overwrite foreign servers"
+      - description: "TIED_BASE_PATH misconfiguration across dual harness sessions"
+        id: "RISK-CLAUDE-003"
+        likelihood: "Medium"
+        mitigation: "tied_config_get_base_path ritual; one window per repo; integration tests"
+      - description: "Windows copy path failures for .claude/skills/"
+        id: "RISK-CLAUDE-005"
+        likelihood: "Medium"
+        mitigation: "Copy default; symlinks opt-in only after CI proves Windows copy"
+    scenarios:
+      - expected: "Bootstrap dual harness tests remain green after agentstream harness wiring."
+        name: "Phase 1 regression"
+      - expected: "Dry-run renders claude placeholder bin when --harness claude without --agent-path."
+        name: "Phase 2 harness dry-run"
+  tdd_sequence:
+    phases:
+      - name: "Phase 0 pilot"
+        sequence: "Discovery-only: phase0/ gap list, fixture contracts, pilot notes — no canonical bootstrap/agentstream code for acceptance."
+      - name: "Phase 1 bootstrap"
+        sequence: "RED claude-harness.test.mjs contracts; GREEN skills.mjs + mcp-config.mjs + claude-md.mjs; composition BOOTSTRAP_TIED dual harness binding test."
+      - name: "Phase 2 agentstream"
+        sequence: "RED harness-select-phase2; GREEN selectAgentHarness + dry-run --harness claude; composition harness-dry-run-composition.test.ts; live Claude fixture-gated."
+      - name: "Phase 3 client-development-index"
+        sequence: "Documentation slice: PUBLISH_REQ_FEAT_MATRIX section + scenario row; bootstrap README cross-link; no new RED (docs-only IMPL block)."
+    summary: "Phases 0-2 TDD GREEN (bootstrap + agentstream harness select); Phase 3 docs matrix per IMPL PUBLISH_REQ_FEAT_MATRIX; live Claude AgentDriver and integrated MCP inquiry remain deferred slices."
+  test_strategy:
+    matrix_notes: "Separate Cursor and Claude stream oracles; dry-run command rendering uses harness profile."
+    summary: "Phase 0 pilot documentation; Phase 1 bootstrap RED; Phase 2 agentstream harness unit+composition tests before live Claude fixtures."

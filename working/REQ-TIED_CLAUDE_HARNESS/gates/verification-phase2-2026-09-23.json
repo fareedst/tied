@@ -1,0 +1,10 @@
+{
+  "allowed": true,
+  "ok": true,
+  "blocking": false,
+  "depth": "minimal",
+  "phase": "verification",
+  "diagnostics": [
+    "minimal_depth_missing_waiver"
+  ]
+}

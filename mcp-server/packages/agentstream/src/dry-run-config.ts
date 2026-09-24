@@ -6,6 +6,10 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { findRepoRootFromPath } from "./repo-root.js";
+import {
+  selectAgentHarness,
+  type AgentHarnessProfile,
+} from "./harness-select.js";
 
 export type DryRunConfig = {
   dryRun: boolean;
@@ -13,6 +17,7 @@ export type DryRunConfig = {
   workspace: string;
   model: string;
   agentPath: string;
+  agentHarness: AgentHarnessProfile;
   leadChecklistYaml: string;
   leadChecklistSkipSub: boolean;
   leadChecklistStepFromId: string;
@@ -96,6 +101,7 @@ export function parseDryRunConfig(cwd: string, args: string[]): DryRunConfig {
     workspace: cwd,
     model: "Auto",
     agentPath: "",
+    agentHarness: "cursor",
     leadChecklistYaml: "",
     leadChecklistSkipSub: false,
     leadChecklistStepFromId: "",
@@ -271,6 +277,12 @@ export function parseDryRunConfig(cwd: string, args: string[]): DryRunConfig {
           i += 1;
         }
         break;
+      case "--harness":
+        needVal(k, v, ok, flagPart, i);
+        if (!ok) {
+          i += 1;
+        }
+        break;
       case "--mcp-json":
         c.mcpJsonPath = needVal(k, v, ok, flagPart, i);
         if (!ok) {
@@ -352,6 +364,8 @@ export function parseDryRunConfig(cwd: string, args: string[]): DryRunConfig {
       c.featureSpecBatchYamls = [p, ...c.featureSpecBatchYamls];
     }
   }
+
+  c.agentHarness = selectAgentHarness(flagPart, { dryRun: c.dryRun });
 
   validateDryRunConfig(c);
   return c;

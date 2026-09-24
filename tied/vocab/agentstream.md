@@ -41,6 +41,8 @@
 | **hook_log_ref** | hook yaml pointer | Ledger `{ path, line }` pointer into hook YAML logs; never inlines prompt, tool payloads, or shell output |
 | **PreviewTrackerMigration** | tracker migration preview, slug diff preview | Read-only `tracker-migration-preview.v1` report comparing checklist definition slug inventory to an existing Tracker; flags stale dispositions; CLI `--checklist-tracker-preview`; never mutates Tracker bytes |
 | **run-feature-batch-agentstream** | tasd (alone) | Shell driver: `scripts/run-feature-batch-agentstream.sh` |
+| **harness profile** | agent path harness, claude path flag | Explicit executor selection: `cursor` (default), `claude` (fixture-gated **AgentDriver**), `dry-run`; distinct from **`--agent-path`** (Cursor executable override only). [REQ-TIED_CLAUDE_HARNESS](../requirements/REQ-TIED_CLAUDE_HARNESS.yaml) |
+| **`--harness claude`** | `--agent-path claude` | Selects Claude Code **AgentDriver** after subprocess/stream fixtures pass; **not** a synonym for `--agent-path`. |
 
 ---
 

@@ -64,6 +64,31 @@ Quality assurance references: [quality-assurance-commands.md](quality-assurance-
 | New staged feature | **tied-feature-onboarding.md** → `tied init` | `.cursor/skills/tied-yaml/scripts/tied.sh feature new`; use the feature-orchestration MCP tools for lifecycle work |
 | Tests/code diverged from IMPL | **Pseudo-code** § LEAP micro-cycle | **Processes** § `[PROC-LEAP]`; checklist `sub-leap-micro-cycle` |
 | Repair without full new REQ | **Checklist** + **Pseudo-code** Track B or C | Same LEAP order |
+| Claude Code client bootstrap | **Multi-harness entry matrix** (below) → **Rules** + **Checklist** `session-bootstrap` | [Claude Code × TIED multi-harness plan](../../docs/comparisons/claude-code-tied-multi-harness-plan.md); run `./copy_files.sh` (installs `.claude/skills/`, repo-root `.mcp.json` safe-merge for `tied-yaml`) |
+
+---
+
+## Multi-harness entry matrix (Cursor vs Claude Code)
+
+**Traceability:** [REQ-TIED_CLAUDE_HARNESS](../requirements/REQ-TIED_CLAUDE_HARNESS.yaml) · sponsor decision #6 in [claude-code-tied-multi-harness-plan.md](../../docs/comparisons/claude-code-tied-multi-harness-plan.md).
+
+Use this matrix to pick the **entry surface** and **state layer** without conflating REQ-scoped checklist work with FEAT lifecycle orchestration. **`AGENTS.md`** remains canonical on every harness; optional **`CLAUDE.md`** is a thin Claude-only delta after bootstrap.
+
+| Work kind | Primary entry | Skill / tool surface | Canonical state |
+| --- | --- | --- | --- |
+| **REQ-scoped change** (new requirement, behavior change, bug tied to `[REQ-*]`) | **Prompt Composer** global skills | **Cursor:** `.cursor/skills/` (installed by `copy_files.sh`) · **Claude Code:** `.claude/skills/` (same bundles, copy-default) — e.g. `/plan-new-feature`, `/refine-plan`, `/build-plan`, `/plan-close-out` | Project **`tied/`** YAML + per-request **`working/{REQ-TOKEN}/`** (linked plan, CITDP, Authoritative Tracker) |
+| **FEAT lifecycle** (staged product feature, canonical FEAT views) | **Feature orchestrator** | `tied init` / `tied.sh feature …` and feature-orchestration MCP tools; skills under `.cursor/skills/` or `.claude/skills/` as needed for YAML edits | **`tied/features/`** + feature MCP workflow (not a substitute for REQ checklist when semantics live in `[REQ-*]`) |
+| **Mutate project TIED YAML** (either harness) | **TIED YAML MCP** or **`tied-cli.sh`** | Same server and CLI on both harnesses; confirm **`tied_config_get_base_path`** points at this repo’s **`tied/`** before writes | Index + detail YAML under **`tied/`** (methodology under **`tied/methodology/`** is read-only) |
+
+### Operating modes (do not conflate)
+
+| Mode | Who drives turns | Evidence accepted for automation |
+| --- | --- | --- |
+| **Interactive Prompt Composer** | Human in IDE (`/build-plan`, …) | MCP / **`tied-cli`** writes; manual Tracker updates — **not** agentstream receipts |
+| **Semi-automated** | Same skills + operator updates Tracker slugs | Typed **`evidence_refs`** on the Authoritative Tracker |
+| **`tied agentstream`** | Shell / CI checklist driver | Tracker receipts + harness-specific **AgentDriver** contracts (`--harness cursor` reference; `--harness claude` fixture-gated) |
+
+Vocabulary: [agentstream.md](../vocab/agentstream.md), [prompt-composer.md](../vocab/prompt-composer.md).
 
 ---
 
@@ -119,4 +144,4 @@ On a fresh bootstrap with no project-specific REQ/ARCH/IMPL tokens, `tied_valida
 
 ---
 
-**TIED Methodology Version**: 3.0.0 · **Last updated**: 2026-08-22
+**TIED Methodology Version**: 3.0.0 · **Last updated**: 2026-09-23

@@ -1707,6 +1707,10 @@ ARCH-TIED_CLAIMS_EVIDENCE_REVIEW:
       - "No shared finding-ledger with adversarial-inquiry"
     decision: "Dedicated claim-review artifact family under working scope; read-only consumer of evidence manifests."
   status: "Active"
+ARCH-TIED_CLAUDE_HARNESS:
+  detail_file: "architecture-decisions/ARCH-TIED_CLAUDE_HARNESS.yaml"
+  name: "Dual harness architecture (Cursor + Claude Code)"
+  status: "Draft"
 ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY:
   cross_references:
     - "ARCH-FEEDBACK_STORAGE"

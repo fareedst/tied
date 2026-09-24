@@ -690,6 +690,15 @@ ARCH-TIED_CLAIMS_EVIDENCE_REVIEW:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_CLAUDE_HARNESS:
+  category: "Architecture"
+  cross_references:
+    - "IMPL-TIED_CLAUDE_HARNESS"
+    - "REQ-TIED_CLAUDE_HARNESS"
+  description: "Dual harness layout: Cursor reference plus Claude Code bootstrap and agentstream adapter boundaries."
+  detail_file: "architecture-decisions/ARCH-TIED_CLAUDE_HARNESS.yaml"
+  metadata:
+    last_updated: "2026-09-23"
 ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY:
   cross_references:
     - "IMPL-TIED_FEEDBACK_PROMOTION"
@@ -1685,6 +1694,15 @@ IMPL-TIED_CLAIMS_EVIDENCE_REVIEW:
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
+IMPL-TIED_CLAUDE_HARNESS:
+  category: "Implementation"
+  cross_references:
+    - "ARCH-TIED_CLAUDE_HARNESS"
+    - "REQ-TIED_CLAUDE_HARNESS"
+  description: "Phased bootstrap, MCP safe merge, AgentDriver harness profile, and index matrix pseudo-code."
+  detail_file: "implementation-decisions/IMPL-TIED_CLAUDE_HARNESS.yaml"
+  metadata:
+    last_updated: "2026-09-23"
 IMPL-TIED_FEEDBACK_PROMOTION:
   cross_references:
     - "ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY"
@@ -2871,6 +2889,15 @@ REQ-TIED_CLAIMS_EVIDENCE_REVIEW:
   source_index: "requirements.yaml"
   status: "Active"
   type: "REQ"
+REQ-TIED_CLAUDE_HARNESS:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-TIED_CLAUDE_HARNESS"
+    - "IMPL-TIED_CLAUDE_HARNESS"
+  description: "Claude Code multi-harness parity: dual bootstrap, harness metrics, agentstream Claude profile, client-development-index matrix."
+  detail_file: "requirements/REQ-TIED_CLAUDE_HARNESS.yaml"
+  metadata:
+    last_updated: "2026-09-23"
 REQ-TIED_FIDELITY_RESEARCH:
   category: "Functional"
   cross_references:

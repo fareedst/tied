@@ -67,6 +67,24 @@ cd C:\dev\my-client-app
 
 `manifest.json` is the single source for `DOCS_TO_COPY`, prompt-type skill dirs, verify artifact lists, and `TIED_CLI_REPO_ROOT_MARKER`. Node reads it at runtime; bash no longer duplicates inline arrays.
 
+## Claude Code harness (dual bootstrap)
+
+After the Cursor path (`.cursor/skills/`, create-only `.cursor/mcp.json`), bootstrap also:
+
+| Artifact | Policy |
+| --- | --- |
+| `.claude/skills/` | Copy-default Prompt Composer + `tied-yaml` bundles (same inventory as Cursor) |
+| Repo-root `.mcp.json` | Create-if-absent or safe-merge **`tied-yaml` only**; sets `TIED_MCP_HARNESS=claude` |
+| `CLAUDE.md` | Optional create-if-absent thin delta pointing at **AGENTS.md** (never replaces Tracker or `tied/` YAML) |
+
+Cursor **create-only** `.cursor/mcp.json` policy is unchanged — existing client MCP files are never mutated.
+
+Contract tests: `node --test tools/bootstrap/lib/claude-harness.test.mjs` (requires built `mcp-server` for MCP prerequisite).
+
+Operator routing (REQ vs FEAT, operating modes): [client-development-index.md](../tied/docs/client-development-index.md) § **Multi-harness entry matrix (Cursor vs Claude Code)**.
+
+Traceability: [REQ-TIED_CLAUDE_HARNESS](../tied/requirements/REQ-TIED_CLAUDE_HARNESS.yaml) · [ARCH-TIED_CLAUDE_HARNESS](../tied/architecture-decisions/ARCH-TIED_CLAUDE_HARNESS.yaml) · [IMPL-TIED_CLAUDE_HARNESS](../tied/implementation-decisions/IMPL-TIED_CLAUDE_HARNESS.yaml)
+
 ## Layout
 
 - `copy-files.mjs` — bootstrap CLI
@@ -74,6 +92,7 @@ cd C:\dev\my-client-app
 - `lint-yaml.mjs` — Windows `-F tied` lint backend
 - `lib/bootstrap.mjs` — orchestration
 - `lib/copy-managed.mjs` — attribute-preserving copy + midnight mtime
-- `lib/mcp-config.mjs`, `lib/skills.mjs`, `lib/vocab.mjs`, `lib/docs.mjs`, `lib/verify.mjs`
+- `lib/mcp-config.mjs`, `lib/skills.mjs`, `lib/claude-md.mjs`, `lib/vocab.mjs`, `lib/docs.mjs`, `lib/verify.mjs`
+- `templates/CLAUDE.md.template` — optional client `CLAUDE.md` source
 
 Traceability: [REQ-TIED_SETUP](../tied/requirements/REQ-TIED_SETUP.yaml) · [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM](../tied/architecture-decisions/ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM.yaml) · [IMPL-TIED_FILES](../tied/implementation-decisions/IMPL-TIED_FILES.yaml)

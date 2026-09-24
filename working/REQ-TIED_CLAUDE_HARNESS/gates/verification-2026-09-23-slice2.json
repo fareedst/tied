@@ -1,0 +1,13 @@
+{
+  "allowed": false,
+  "ok": false,
+  "blocking": true,
+  "phase": "verification",
+  "diagnostics": [
+    "malformed_citdp:adversarial_inquiry"
+  ],
+  "evidence_hydrated": [
+    "request-evidence-envelope.v1.json:gaps"
+  ]
+}
+

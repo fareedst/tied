@@ -1,0 +1,60 @@
+REQ-TIED_CLAUDE_HARNESS:
+  metadata:
+    last_updated:
+      author: "plan-close-out"
+      date: "2026-09-23"
+      reason: "Phases 0-3 verification-gated close-out"
+  REQ-TIED_CLAUDE_HARNESS:
+    category: "Tooling"
+    description: "Deliver Claude Code parity for TIED client bootstrap and checklist automation while preserving Cursor as the reference harness: copy-default Prompt Composer and tied-yaml skills to .claude/skills/, repo-root .mcp.json create-if-absent and safe-merge for tied-yaml only, harness dimension on MCP usage metrics, contract-gated Phase 0 pilot discovery, Phase 2 tied agentstream Claude harness profile via --harness claude (not --agent-path), and Phase 3 client-development-index REQ versus FEAT routing matrix."
+    metadata:
+      created:
+        author: "plan-new-feature"
+        date: "2026-09-23"
+      last_updated:
+        author: "plan-new-feature"
+        date: "2026-09-23"
+        reason: "Initial program stack Phases 0-3 per sponsor decision log"
+    name: "Claude Code multi-harness parity"
+    priority: "P1"
+    rationale:
+      benefits:
+        - "Contract-gated automation path for tied agentstream on Claude"
+        - "Deterministic dual bootstrap without forking Prompt Composer taxonomy"
+        - "One workflow vocabulary across Cursor and Claude Code"
+      problems_solved:
+        - "No harness dimension on MCP usage metrics for cohort analysis"
+        - "Operators conflate interactive skills with agentstream automation"
+        - "TIED clients lack .claude/skills/ and repo-root .mcp.json bootstrap"
+      why: "Sponsor-approved full program (Phases 0-3) extends TIED dual-harness support without replacing AGENTS.md canonical obligations or Cursor MCP preservation policy."
+    related_requirements:
+      depends_on:
+        - "REQ-GOAGENT-AGENT-EXECUTOR"
+        - "REQ-MCP_USAGE_METRICS"
+        - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+        - "REQ-TIED_SETUP"
+      related_to:
+        - "REQ-TIED_UNIFIED_TOOLCHAIN"
+      supersedes: []
+    satisfaction_criteria:
+      - criterion: "AGENTS.md stays canonical; CLAUDE.md remains thin optional Phase 1 delta only."
+        id: "SC-CLAUDE-AGENTS-CANONICAL"
+      - criterion: "Operating modes table remains explicit in ARCH/IMPL: interactive Prompt Composer versus tied agentstream automated checklist."
+        id: "SC-CLAUDE-MODES"
+      - criterion: "Phase 0 pilot documents skill discovery, MCP/tied-cli setup, and Claude CLI contract gaps without canonical bootstrap or agentstream code changes for acceptance."
+        id: "SC-CLAUDE-P0-PILOT"
+      - criterion: "Phase 1 bootstrap adds .claude/skills/ copy install, repo-root .mcp.json safe merge for tied-yaml only, harness metrics env, and preserves Cursor create-only .cursor/mcp.json behavior."
+        id: "SC-CLAUDE-P1-BOOTSTRAP"
+      - criterion: "Phase 2 introduces AgentDriver boundary and --harness claude with fixture-gated live checklist; --agent-path does not select Claude harness."
+        id: "SC-CLAUDE-P2-AGENTSTREAM"
+      - criterion: "Phase 3 publishes client-development-index REQ versus FEAT matrix (Prompt Composer vs feature-orchestrator) with shared TIED YAML MCP and tied-cli."
+        id: "SC-CLAUDE-P3-INDEX"
+    status: "Draft"
+    traceability:
+      architecture:
+        - "ARCH-TIED_CLAUDE_HARNESS"
+      implementation:
+        - "IMPL-TIED_CLAUDE_HARNESS"
+      tests: []
+  traceability:
+    status: "Implemented"

@@ -1,0 +1,212 @@
+DIAGNOSTIC: envelope patch failed for working/REQ-TIED_CLAUDE_HARNESS/evidence/verification-evidence-manifest.v1.json: envelope_revision_conflict
+{
+  "phase": "close_out",
+  "depth_tier": "minimal",
+  "activation_collect": {
+    "skipped": true,
+    "reason": "minimal_depth",
+    "run_id": "close-out-REQ-TIED_CLAUDE_HARNESS-20260924T004436Z"
+  },
+  "reconcile": {
+    "ok": true,
+    "report": {
+      "request_token": "",
+      "findings": [
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "translate-sponsor-intent",
+            "error": "missing_artifact: \"working/REQ-TIED_CLAUDE_HARNESS/evidence/translate-sponsor-intent-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "change-definition",
+            "error": "missing_artifact: \"working/REQ-TIED_CLAUDE_HARNESS/evidence/change-definition-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "catalog-pseudocode-contracts",
+            "error": "missing_artifact: \"working/REQ-TIED_CLAUDE_HARNESS/evidence/catalog-pseudocode-contracts-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "test-strategy",
+            "error": "missing_artifact: \"working/REQ-TIED_CLAUDE_HARNESS/evidence/test-strategy-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "session-bootstrap",
+            "error": "missing_artifact: \"working/REQ-TIED_CLAUDE_HARNESS/evidence/session-bootstrap-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "author-architecture",
+            "error": "missing_artifact: \"working/REQ-TIED_CLAUDE_HARNESS/evidence/author-architecture-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "author-requirement",
+            "error": "missing_artifact: \"working/REQ-TIED_CLAUDE_HARNESS/evidence/author-requirement-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "gate-pseudocode-validation",
+            "error": "missing_artifact: \"working/REQ-TIED_CLAUDE_HARNESS/evidence/gate-pseudocode-validation-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "impact-discovery",
+            "error": "missing_artifact: \"working/REQ-TIED_CLAUDE_HARNESS/evidence/impact-discovery-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "persist-implementation-records",
+            "error": "missing_artifact: \"working/REQ-TIED_CLAUDE_HARNESS/evidence/persist-implementation-records-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "sub-close-out-evidence-sync",
+            "error": "missing_artifact: \"working/REQ-TIED_CLAUDE_HARNESS/evidence/sub-close-out-evidence-sync-evidence.md\""
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_CLAUDE_HARNESS/gates/close_out-2026-09-24T00-24-49-744Z.json",
+            "stored_tracker_hash": "sha256:e96521e3b67e96f823692c2c5f0910607b260a84933be6720476e02e5d580217",
+            "current_tracker_hash": "sha256:c383c6f33d22febe1164cd96635d58df3bd23628bee52be36061b91ec3748ffb",
+            "stored_citdp_hash": "sha256:6ca359250cffff98a52038b57462f7fec58b56b078d8d61e79bcb014df63112b",
+            "current_citdp_hash": "sha256:4e30408dbcf796f3722b914c7db05e9f92af0e1fb973dd052f612f42e362dab7"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_CLAUDE_HARNESS/gates/pre_implementation-2026-09-24T00-07-19-541Z.json",
+            "stored_tracker_hash": "sha256:e0b2aef25ba41924e2fc50dc2af2388dfedf644ca690886397260ddbac8232a9",
+            "current_tracker_hash": "sha256:c383c6f33d22febe1164cd96635d58df3bd23628bee52be36061b91ec3748ffb",
+            "stored_citdp_hash": "sha256:d144a3f9a79157799ee97da81da6b284eb686c32341476294565aa55ea802e81",
+            "current_citdp_hash": "sha256:4e30408dbcf796f3722b914c7db05e9f92af0e1fb973dd052f612f42e362dab7"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_CLAUDE_HARNESS/gates/verification-2026-09-24T00-07-12-786Z.json",
+            "stored_tracker_hash": "sha256:e0b2aef25ba41924e2fc50dc2af2388dfedf644ca690886397260ddbac8232a9",
+            "current_tracker_hash": "sha256:c383c6f33d22febe1164cd96635d58df3bd23628bee52be36061b91ec3748ffb",
+            "stored_citdp_hash": "sha256:d144a3f9a79157799ee97da81da6b284eb686c32341476294565aa55ea802e81",
+            "current_citdp_hash": "sha256:4e30408dbcf796f3722b914c7db05e9f92af0e1fb973dd052f612f42e362dab7"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_CLAUDE_HARNESS/gates/verification-2026-09-24T00-24-55-509Z.json",
+            "stored_tracker_hash": "sha256:e96521e3b67e96f823692c2c5f0910607b260a84933be6720476e02e5d580217",
+            "current_tracker_hash": "sha256:c383c6f33d22febe1164cd96635d58df3bd23628bee52be36061b91ec3748ffb",
+            "stored_citdp_hash": "sha256:6ca359250cffff98a52038b57462f7fec58b56b078d8d61e79bcb014df63112b",
+            "current_citdp_hash": "sha256:4e30408dbcf796f3722b914c7db05e9f92af0e1fb973dd052f612f42e362dab7"
+          }
+        }
+      ],
+      "ledger_rows": 23,
+      "read_only": true,
+      "process_grade": {
+        "score": 57,
+        "band": "D",
+        "dimensions": [
+          {
+            "name": "tracker_integrity",
+            "score": 100,
+            "weight": 0.3,
+            "gap_codes": []
+          },
+          {
+            "name": "verification_manifest",
+            "score": 0,
+            "weight": 0.25,
+            "gap_codes": [
+              "expected_artifact_missing"
+            ]
+          },
+          {
+            "name": "hash_alignment",
+            "score": 40,
+            "weight": 0.2,
+            "gap_codes": [
+              "evidence_stale"
+            ]
+          },
+          {
+            "name": "ledger_correlation",
+            "score": 100,
+            "weight": 0.15,
+            "gap_codes": []
+          },
+          {
+            "name": "typed_evidence_refs",
+            "score": 40,
+            "weight": 0.1
+          }
+        ],
+        "gap_codes": [
+          "expected_artifact_missing",
+          "evidence_stale"
+        ]
+      }
+    }
+  },
+  "quality_manifest": {
+    "ok": true,
+    "manifest_path": "working/REQ-TIED_CLAUDE_HARNESS/evidence/verification-evidence-manifest.v1.json",
+    "schema_version": "verification-evidence-manifest.v1"
+  },
+  "evidence_chain_profile": {
+    "ok": false,
+    "skipped": true,
+    "reason": "no_psa_reports"
+  },
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "gate": {
+    "allowed": true,
+    "blocking": false,
+    "diagnostics": [
+      "minimal_depth_missing_waiver"
+    ],
+    "evidence_hydrated": true,
+    "hydration_diagnostics": []
+  },
+  "envelope": {
+    "ok": true,
+    "path": "working/REQ-TIED_CLAUDE_HARNESS/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 0,
+    "advisory_gap_count": 0,
+    "diagnostics": []
+  }
+}

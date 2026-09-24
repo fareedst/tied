@@ -87,6 +87,11 @@ validate_tied() {
 }
 alias validate-tied=validate_tied
 
+pseudocode_validate() {
+  tied_cli pseudocode_validate "$@"
+}
+alias pseudocode-validate=pseudocode_validate
+
 validate_vocab() {
   ruby "${_BUILD_COMMANDS_DIR}/validate_vocab_index.rb" \
     "${_BUILD_COMMANDS_REPO_ROOT}"
@@ -148,6 +153,17 @@ verify_agentstream_parity() {
 }
 alias verify-agentstream-parity=verify_agentstream_parity
 
+# [REQ-TIED_CLAUDE_HARNESS] [IMPL-TIED_CLAUDE_HARNESS] Dual-harness bootstrap contract (copy-files Claude paths).
+test_bootstrap_claude_harness() {
+  local root="${_BUILD_COMMANDS_REPO_ROOT}"
+  if [[ ! -f "${root}/mcp-server/dist/index.js" ]]; then
+    echo "DEBUG: test-bootstrap-claude-harness: building mcp-server (dist prerequisite)"
+    build_mcp
+  fi
+  echo_exec node --test "${root}/tools/bootstrap/lib/claude-harness.test.mjs"
+}
+alias test-bootstrap-claude-harness=test_bootstrap_claude_harness
+
 test_all() {
   set -euo pipefail
   echo "DEBUG: test-all step 1/6: build_mcp"
@@ -165,6 +181,48 @@ test_all() {
   echo "DEBUG: test-all completed successfully"
 }
 alias test-all=test_all
+
+# --- Close-out gates (REQ checklist + evidence envelope) ---
+
+run_close_out_gates() {
+  echo_exec node "${_BUILD_COMMANDS_REPO_ROOT}/tools/bootstrap/templates/run-close-out-gates.mjs" \
+    --project-root "${_BUILD_COMMANDS_REPO_ROOT}" "$@"
+}
+alias run-close-out-gates=run_close_out_gates
+
+close_out_req() {
+  local token="${1:?usage: close-out-req REQ-TOKEN [extra run-close-out-gates flags...]}"
+  shift
+  local root="${_BUILD_COMMANDS_REPO_ROOT}"
+  local tracker="working/${token}/checklist-tracker.yaml"
+  local citdp=""
+
+  if [[ ! -f "${root}/${tracker}" ]]; then
+    echo "close-out-req: missing tracker: ${root}/${tracker}" >&2
+    return 2
+  fi
+  if [[ -f "${root}/tied/citdp/CITDP-${token}.yaml" ]]; then
+    citdp="tied/citdp/CITDP-${token}.yaml"
+  elif [[ -f "${root}/working/${token}/CITDP-${token}.yaml" ]]; then
+    citdp="working/${token}/CITDP-${token}.yaml"
+  else
+    echo "close-out-req: no CITDP at tied/citdp/CITDP-${token}.yaml or working/${token}/CITDP-${token}.yaml" >&2
+    return 2
+  fi
+
+  local run_id="close-out-${token}-$(date -u +%Y%m%dT%H%M%SZ)"
+  run_close_out_gates \
+    --request-token "$token" \
+    --tracker-path "$tracker" \
+    --citdp-path "$citdp" \
+    --phase close_out \
+    --run-id "$run_id" \
+    --sync-dispositions \
+    --reconcile \
+    --envelope-blocking \
+    "$@"
+}
+alias close-out-req=close_out_req
 
 # --- Feature-orchestration smoke clients ---
 
@@ -349,7 +407,7 @@ build-commands.sh — TIED repo shell helpers
 
   source scripts/build-commands.sh     load functions (from repo root)
   how                                  full command map
-  how TOPIC                            one section (backup|build|test|tied|vocab|agentstream|smoke|drivers|env)
+  how TOPIC                            one section (backup|build|test|tied|vocab|agentstream|close-out|smoke|drivers|env)
 
 Prerequisites for smoke tests: build-mcp (or test-all), node, bun, jq, yq, git, agent CLI.
 Runbook: docs/tied-feature-extended-demo.md
@@ -381,8 +439,11 @@ Test / verify
   test-mcp                   mcp-server unit/composition tests (includes Tier 1 workspace dist tests)
   test-agentstream           @tied/agentstream package tests (frozen oracle fixtures)
   verify-agentstream-parity  bun build + @tied/agentstream test (TS parity vs frozen oracle)
+  test-bootstrap-claude-harness
+                             node --test tools/bootstrap/lib/claude-harness.test.mjs (8 tests;
+                             builds mcp-server if dist missing; [REQ-TIED_CLAUDE_HARNESS])
 
-  Not in test-all: test-new-tied-client, test-tied-feature-* (disposable client / agent CLI)
+  Not in test-all: test-new-tied-client, test-tied-feature-*, test-bootstrap-claude-harness
 EOF
 }
 
@@ -395,6 +456,7 @@ TIED YAML
   lint-reorder [args]        scripts/lint.sh (list reorder policy; quiet on success)
   validate-tied              tied_validate_consistency (pseudo-code + detail checks)
                              honors TIED_BASE_PATH, TIED_MCP_BIN (defaults: ./tied, mcp-server/dist)
+  pseudocode-validate JSON   tied-cli pseudocode_validate (e.g. @working/REQ-…/pseudocode-validate-args.json)
 EOF
 }
 
@@ -419,6 +481,27 @@ Agentstream (Phase 4d: TS-only; after build-mcp or build-agentstream)
 
   MCP preflight is off by default; opt in with --tied-mcp-preflight or
   AGENTSTREAM_TIED_MCP_PREFLIGHT=1 (see mcp-server/packages/agentstream/README.md).
+EOF
+}
+
+_how_close_out() {
+  cat <<'EOF'
+Close-out (REQ checklist gate + evidence envelope)
+  run-close-out-gates [flags]   node tools/bootstrap/templates/run-close-out-gates.mjs
+                                (default --project-root = this repo)
+  close-out-req REQ-TOKEN [flags]
+                                Preset: working/REQ/checklist-tracker.yaml + tied/citdp/CITDP-REQ.yaml
+                                (or working/REQ/CITDP-REQ.yaml), phase close_out, --sync-dispositions
+                                --reconcile --envelope-blocking, UTC run-id
+
+  Canonical machine close-out (manual equivalent):
+    close-out-req REQ-TIED_EXAMPLE
+
+  Extra flags pass through to run-close-out-gates (see --help):
+    node tools/bootstrap/templates/run-close-out-gates.mjs --help
+
+  Related: tied-cli request_evidence_envelope_validate, tied_checklist_gate_validate, tied_verify
+  Doc: tied/docs/request-evidence-envelope.md
 EOF
 }
 
@@ -459,7 +542,11 @@ Related repo scripts (not wrapped here)
   scripts/yaml_semantic_compare.rb
   scripts/analyze_tied_mcp_metrics.rb   offline MCP metrics JSONL analysis
   scripts/tied-post-session.sh CLIENT   post-session metrics + envelope + profile + reconcile
+  tools/bootstrap/templates/run-close-out-gates.mjs
+  tools/bootstrap/templates/sync-tracker-dispositions.mjs
   scripts/run-feature-batch.sh          Agentstream batch runner (delegates to run-feature-batch-agentstream.sh)
+
+  Wrapped in build-commands: run-close-out-gates, close-out-req (how close-out)
 
   Client onboarding CLI (inside a bootstrapped project):
     .cursor/skills/tied-yaml/scripts/tied.sh init
@@ -498,6 +585,8 @@ _how_all() {
   echo
   _how_agentstream
   echo
+  _how_close_out
+  echo
   _how_smoke
   echo
   _how_drivers
@@ -516,12 +605,13 @@ how() {
     tied|yaml) _how_tied ;;
     vocab|vocabulary) _how_vocab ;;
     agentstream|go) _how_agentstream ;;
+    close-out|closeout|gates) _how_close_out ;;
     smoke|feature|orchestration) _how_smoke ;;
     drivers|scripts) _how_drivers ;;
     env|environment) _how_env ;;
     *)
       echo "how: unknown topic: $topic" >&2
-      echo "Topics: all, backup, build, test, tied, vocab, agentstream, smoke, drivers, env" >&2
+      echo "Topics: all, backup, build, test, tied, vocab, agentstream, close-out, smoke, drivers, env" >&2
       return 2
       ;;
   esac

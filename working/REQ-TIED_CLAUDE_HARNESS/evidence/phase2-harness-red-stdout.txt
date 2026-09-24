@@ -1,0 +1,78 @@
+
+> @tied/agentstream@1.0.0 test:harness-red
+> npm run build && node --test dist/red/harness-select-phase2.test.js
+
+
+> @tied/agentstream@1.0.0 build
+> tsc
+
+▶ SELECT_AGENT_HARNESS [REQ-TIED_CLAUDE_HARNESS]
+  ✖ maps --harness claude to claude profile (1.0645ms)
+  ✔ defaults to cursor when no harness flag (0.056458ms)
+  ✔ does not treat --agent-path as harness selection (0.053833ms)
+  ✖ maps dry-run mode to dry_run profile when --dry-run present (0.101167ms)
+✖ SELECT_AGENT_HARNESS [REQ-TIED_CLAUDE_HARNESS] (1.74625ms)
+ℹ tests 4
+ℹ suites 1
+ℹ pass 2
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 60.333334
+
+✖ failing tests:
+
+test at dist/red/harness-select-phase2.test.js:9:5
+✖ maps --harness claude to claude profile (1.0645ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  'cursor' !== 'claude'
+  
+      at TestContext.<anonymous> (file:///Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/packages/agentstream/dist/red/harness-select-phase2.test.js:10:16)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.start (node:internal/test_runner/test:1096:17)
+      at node:internal/test_runner/test:1617:71
+      at node:internal/per_context/primordials:466:82
+      at new Promise (<anonymous>)
+      at new SafePromise (node:internal/per_context/primordials:435:3)
+      at node:internal/per_context/primordials:466:9
+      at Array.map (<anonymous>) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'cursor',
+    expected: 'claude',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/red/harness-select-phase2.test.js:18:5
+✖ maps dry-run mode to dry_run profile when --dry-run present (0.101167ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'cursor'
+  - 'dry_run'
+  
+      at TestContext.<anonymous> (file:///Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/packages/agentstream/dist/red/harness-select-phase2.test.js:19:16)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:831:18)
+      at Test.postRun (node:internal/test_runner/test:1330:19)
+      at Test.run (node:internal/test_runner/test:1258:12)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:831:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'cursor',
+    expected: 'dry_run',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+npm error Lifecycle script `test:harness-red` failed with error:
+npm error code 1
+npm error path /Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/packages/agentstream
+npm error workspace @tied/agentstream@1.0.0
+npm error location /Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/packages/agentstream
+npm error command failed
+npm error command sh -c npm run build && node --test dist/red/harness-select-phase2.test.js

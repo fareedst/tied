@@ -1,0 +1,43 @@
+IMPL-TIED_CLAUDE_HARNESS:
+  IMPL-TIED_CLAUDE_HARNESS:
+    code_locations:
+      files:
+        - description: "Canonical Prompt Composer bundle"
+          path: "tools/bundled-prompt-type-skills/"
+        - description: "Canonical tied-yaml skill bundle"
+          path: "tools/bundled-tied-yaml-skill/"
+        - description: "Checklist driver and executor (Cursor default today)"
+          path: "mcp-server/packages/agentstream/"
+        - description: "Cursor MCP init and refreshTiedMcpJson merge helpers"
+          path: "tools/bootstrap/lib/mcp-config.mjs"
+        - description: "Dual harness orchestration binding"
+          path: "tools/bootstrap/lib/bootstrap.mjs"
+        - description: "Managed skill install to .cursor/skills/ and .claude/skills/"
+          path: "tools/bootstrap/lib/skills.mjs"
+        - description: "Optional CLAUDE.md create-if-absent template install"
+          path: "tools/bootstrap/lib/claude-md.mjs"
+        - description: "Phase 3 REQ versus FEAT matrix target"
+          path: "tied/docs/client-development-index.md"
+        - description: "SELECT_AGENT_HARNESS stub (Phase 2 RED)"
+          path: "mcp-server/packages/agentstream/src/harness-select.ts"
+      functions: []
+    metadata:
+      last_updated:
+        author: "build-plan"
+        date: "2026-09-23"
+        reason: "Phase 1 complete; Phase 2 RED harness tests; code_locations and traceability.tests"
+    traceability:
+      architecture:
+        - "ARCH-TIED_CLAUDE_HARNESS"
+      implementation:
+        - "IMPL-TIED_CLAUDE_HARNESS"
+      requirements:
+        - "REQ-TIED_CLAUDE_HARNESS"
+      tests:
+        - "mcp-server/packages/agentstream/src/red/harness-select-phase2.test.ts"
+        - "tools/bootstrap/lib/claude-harness.test.mjs"
+  metadata:
+    last_updated:
+      author: "plan-new-feature"
+      date: "2026-09-23"
+      reason: "Link sidecar after initial token create"

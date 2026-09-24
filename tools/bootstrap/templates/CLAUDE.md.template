@@ -1,0 +1,9 @@
+# Claude Code client notes (optional)
+
+Canonical obligations live in [AGENTS.md](./AGENTS.md). This file records **Claude-only** deltas:
+
+- Prompt Composer skills: `.claude/skills/` (copy default from TIED bootstrap)
+- MCP config: repo-root `.mcp.json` with the `tied-yaml` stdio server (`TIED_MCP_HARNESS=claude`)
+- Cursor harness paths (`.cursor/mcp.json`, `.cursor/skills/`) remain on the Cursor reference path
+
+Do not treat this file as the Authoritative Tracker or project `tied/` YAML source of truth.

@@ -28,6 +28,7 @@
 | Extended dry-run | `--prompts-file`, `--tdd-yaml`, `--verify-session`, `--non-compact-html`, argv after `--` |
 | Adherence reconcile | `adherence-reconcile` subcommand or standalone `--tracker` with reconcile flags |
 | Live checklist + tracker | `-c`, `--checklist-tracker-yaml`, tracker vars, optional `--adherence-ledger`, `--enforce-envelope` |
+| Harness profile (Phase 2) | `--harness cursor\|claude` selects **AgentDriver** profile; **`--agent-path`** remains Cursor executable override only (not a Claude adapter). Dry-run command rendering uses placeholder bin **`claude`** when `--harness claude` and `--agent-path` is unset. Live Claude checklist automation stays **fixture-gated** (no CI subprocess). |
 
 Unqualified argv **exit with an error** (no Go forward).
 

@@ -11,8 +11,8 @@ import {
   copyTreeWithAttributes,
   warnModifiedCopyTarget,
 } from "./copy-managed.mjs";
-import { assertMcpPrerequisite, initializeTiedMcpConfig } from "./mcp-config.mjs";
-import { copyHooks, installTiedYamlSkill, installPromptTypeSkills } from "./skills.mjs";
+import { assertMcpPrerequisite, initializeTiedMcpConfig, initializeClaudeMcpConfig } from "./mcp-config.mjs";
+import { copyHooks, installTiedYamlSkill, installPromptTypeSkills, installClaudeSkills } from "./skills.mjs";
 import {
   writeClientVocabHandoffs,
   refreshMethodologyVocab,
@@ -29,6 +29,7 @@ import {
   tiedBasePathValueFor,
 } from "./verify.mjs";
 import { copySidecarTemplate } from "./sidecar-template.mjs";
+import { installClaudeMdTemplate } from "./claude-md.mjs";
 
 function resolveTemplateFile(templatesDir, scriptDir, filename) {
   const fromTemplates = path.join(templatesDir, filename);
@@ -99,6 +100,10 @@ export function bootstrapTied(projectRoot, options = {}) {
 
   installTiedYamlSkill(projectRoot, paths);
   installPromptTypeSkills(projectRoot, paths);
+  // [IMPL-TIED_CLAUDE_HARNESS] [ARCH-TIED_CLAUDE_HARNESS] [REQ-TIED_CLAUDE_HARNESS] — dual harness install after Cursor paths.
+  installClaudeSkills(projectRoot, paths, {});
+  initializeClaudeMcpConfig(projectRoot, TIED_REPO_ROOT, { env, harnessLabel: "claude" });
+  installClaudeMdTemplate(projectRoot, TIED_REPO_ROOT);
 
   writeClientVocabHandoffs(path.join(tiedDir, "vocab"));
 

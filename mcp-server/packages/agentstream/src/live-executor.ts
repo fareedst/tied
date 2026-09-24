@@ -353,7 +353,14 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
           ]
         : [];
 
-    const argv = agentArgv(cfg.agentPath, cfg.workspace, cfg.model, sess, t.parts);
+    const argv = agentArgv(
+      cfg.agentPath,
+      cfg.workspace,
+      cfg.model,
+      sess,
+      t.parts,
+      cfg.agentHarness,
+    );
     const { result, exitCode } = await runAgent(argv, extraEnv);
     if (exitCode !== 0) {
       clearMarker();

@@ -13,6 +13,10 @@ import {
   analyze,
   RuntimeMCPNotice,
 } from "./tiedpreflight.js";
+import {
+  defaultAgentBinForHarness,
+  type AgentHarnessProfile,
+} from "./harness-select.js";
 
 export type DryRunStreams = {
   stdout: string;
@@ -26,8 +30,10 @@ export function agentArgv(
   model: string,
   resumeId: string,
   parts: string[],
+  harness: AgentHarnessProfile = "cursor",
 ): string[] {
-  const bin = agentPath.trim() !== "" ? agentPath : "agent";
+  const bin =
+    agentPath.trim() !== "" ? agentPath : defaultAgentBinForHarness(harness);
   const m = model.trim() !== "" ? model : "Auto";
   const cmd: string[] = [
     bin,
@@ -96,6 +102,7 @@ export function renderDryRun(
       cfg.model,
       sess,
       t.parts,
+      cfg.agentHarness,
     );
     out.push(`command: ${formatShellArgv(argv)}\n`);
     if (i === 0 && turns.length > 1) {

@@ -1,0 +1,64 @@
+ARCH-TIED_CLAUDE_HARNESS:
+  ARCH-TIED_CLAUDE_HARNESS:
+    alternatives_considered:
+      - cons:
+          - "Claude stdio shape unverified; may clobber unrelated servers"
+        name: "Copy .cursor/mcp.json verbatim to repo root for Claude"
+        pros:
+          - "Single file story"
+        rejected_reason: "Safe merge tied-yaml only into .mcp.json after schema verification."
+      - cons:
+          - "Drops CITDP, Tracker, and Prompt Composer traceability"
+        name: "Fork parallel Claude-only skill taxonomy"
+        pros:
+          - "Matches generic five-stage Claude port guides"
+        rejected_reason: "Sponsor locked reuse of bundled Prompt Composer; one taxonomy."
+      - cons:
+          - "Conflicts with Cursor executable override semantics"
+        name: "Use --agent-path as Claude adapter"
+        pros:
+          - "Minimal CLI surface change"
+        rejected_reason: "Sponsor non-goal; dedicated --harness claude profile required."
+    decision: "Maintain AGENTS.md as vendor-neutral canonical obligations; install the same Prompt Composer and tied-yaml bundles to .cursor/skills/ (Current) and .claude/skills/ (copy default); configure Claude via repo-root .mcp.json with create-if-absent or safe-merge for tied-yaml only while preserving Cursor initializeTiedMcpConfig create-only policy; extend tied agentstream with explicit harness profiles (cursor default, claude after fixtures, dry-run) via AgentDriver boundary—not --agent-path."
+    implementation_approach:
+      details:
+        - "Automated: tied agentstream with harness-specific AgentDriver and Tracker receipts."
+        - "Interactive entry: global prompt skills in .cursor/skills/ or .claude/skills/ with explicit-only activation."
+        - "Phase 3 publishes REQ versus FEAT matrix in client-development-index without merging FEAT orchestration into Prompt Composer skills."
+        - "Semi-automated: same skills plus manual Authoritative Tracker updates—not agentstream."
+      summary: "Dual-harness layout: canonical bundles under tools/bundled-* copied to per-harness skill roots; shared TIED YAML MCP and tied-cli; layered state in project tied/ plus working/{REQ}/ Tracker; automation via @tied/agentstream subprocess adapters."
+    metadata:
+      created:
+        author: "plan-new-feature"
+        date: "2026-09-23"
+      last_updated:
+        author: "plan-new-feature"
+        date: "2026-09-23"
+        reason: "Initial ARCH for sponsor program"
+    name: "Dual harness architecture (Cursor + Claude Code)"
+    rationale:
+      benefits:
+        - "Clear separation of interactive and automated operating modes"
+        - "Cursor reference path unchanged until Claude contracts proven"
+        - "One TIED YAML MCP surface across harnesses"
+      problems_solved:
+        - "Risk of MCP config clobbering on dual IDE setups"
+        - "Under-specified generic Claude port plans omit TIED graph and gates"
+      why: "TIED already ships Prompt Composer, bootstrap, and agentstream; Claude parity extends installation and subprocess contracts rather than replacing methodology."
+    related_decisions:
+      depends_on:
+        - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+        - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
+        - "ARCH-TIED_STRUCTURE"
+      see_also:
+        - "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
+        - "IMPL-TIED_FILES"
+      supersedes: []
+    status: "Draft"
+    traceability:
+      architecture:
+        - "ARCH-TIED_CLAUDE_HARNESS"
+      implementation:
+        - "IMPL-TIED_CLAUDE_HARNESS"
+      requirements:
+        - "REQ-TIED_CLAUDE_HARNESS"

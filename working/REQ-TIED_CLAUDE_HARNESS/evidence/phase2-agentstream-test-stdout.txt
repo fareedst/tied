@@ -1,0 +1,166 @@
+[1m[36mcd -- /Users/fareed/Documents/dev/chatgpt/stdd/mcp-server \&\& bun run --filter @tied/agentstream build [0m
+@tied/agentstream build: Exited with code 0
+[1m[36m[1m‹ 0.63s ›[0m [1m‹ 00:55:46 ›[0m[0m[1m[34mcd -- /Users/fareed/Documents/dev/chatgpt/stdd/mcp-server \&\& bun run --filter @tied/agentstream build [0m
+[1m[36mcd -- /Users/fareed/Documents/dev/chatgpt/stdd/mcp-server \&\& bun run --filter @tied/agentstream test [0m
+@tied/agentstream test: $ tsc
+@tied/agentstream test: ▶ adherence reconcile TS [REQ-TIED_UNIFIED_TOOLCHAIN]
+@tied/agentstream test:   ✔ legacy_no_adherence_chain returns stable finding code (3.111291ms)
+@tied/agentstream test:   ✔ rendered_without_acknowledgment finding matches TS reconcile (0.969ms)
+@tied/agentstream test:   ✔ tied agentstream impl=ts adherence-reconcile does not forward to Go (109.83725ms)
+@tied/agentstream test: ✔ adherence reconcile TS [REQ-TIED_UNIFIED_TOOLCHAIN] (114.604583ms)
+@tied/agentstream test: ▶ @tied/agentstream dispatcher [REQ-TIED_UNIFIED_TOOLCHAIN]
+@tied/agentstream test:   ✔ defaults TIED_AGENTSTREAM_IMPL to ts (0.40575ms)
+@tied/agentstream test:   ✔ accepts ts impl token (0.04975ms)
+@tied/agentstream test:   ✔ documents legacy go reinstall hint for Phase 4d (0.0675ms)
+@tied/agentstream test:   ✔ tied agentstream --help exits 0 (113.133375ms)
+@tied/agentstream test:   ✔ tied agentstream rejects TIED_AGENTSTREAM_IMPL=go (46.965042ms)
+@tied/agentstream test: ✔ @tied/agentstream dispatcher [REQ-TIED_UNIFIED_TOOLCHAIN] (161.21475ms)
+@tied/agentstream test: ▶ harness CLI composition [REQ-TIED_CLAUDE_HARNESS]
+@tied/agentstream test:   ✔ binds --harness claude to claude placeholder bin in agentArgv (1.339417ms)
+@tied/agentstream test:   ✔ keeps --agent-path override independent of --harness claude (0.311875ms)
+@tied/agentstream test: ✔ harness CLI composition [REQ-TIED_CLAUDE_HARNESS] (2.490834ms)
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 1/3 (new session) [trigger-special] ---
+@tied/agentstream test: session_id=fake-session-trigger-special
+@tied/agentstream test: DIAGNOSTIC: agentstream_control goto rerouted-next: SPECIAL: focused RED test passes, but old tests fail after recent changes.
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 2/3 (resume fake-session-trigger-special) [rerouted-next] ---
+@tied/agentstream test: session_id=fake-session-rerouted-next
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 1/7 (new session) [session-bootstrap] ---
+@tied/agentstream test: dry-run: chained turns use --resume with the session_id from the previous turn; each --feature-spec-batch-yaml record after a prior turn omits --resume (new session). --prompt-file content is prepended on every new session (not a separate turn). An initial --session-id only applies to turn 1.
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 2/7 (resume <session_id_from_previous_turn>) [translate-sponsor-intent] ---
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 3/7 (resume <session_id_from_previous_turn>) [change-definition] ---
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 4/7 (resume <session_id_from_previous_turn>) [impact-discovery] ---
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 5/7 (resume <session_id_from_previous_turn>) [risk-assessment] ---
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 6/7 (resume <session_id_from_previous_turn>) [test-strategy] ---
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 7/7 (resume <session_id_from_previous_turn>) ---
+@tied/agentstream test: fatal: not a git repository (or any of the parent directories): .git
+@tied/agentstream test: DIAGNOSTIC: fake_tracker_agent hook simulation: wrong exec option symbol: stdin_data
+@tied/agentstream test: fatal: not a git repository (or any of the parent directories): .git
+@tied/agentstream test: DIAGNOSTIC: fake_tracker_agent hook simulation: wrong exec option symbol: stdin_data
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 1/2 (new session) [step-one] ---
+@tied/agentstream test: session_id=fake-tracker-session-step-one
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 2/2 (resume fake-tracker-session-step-one) [step-two] ---
+@tied/agentstream test: session_id=fake-tracker-session-step-two
+@tied/agentstream test: fatal: not a git repository (or any of the parent directories): .git
+@tied/agentstream test: DIAGNOSTIC: fake_tracker_agent hook simulation: wrong exec option symbol: stdin_data
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 1/2 (new session) [step-one] ---
+@tied/agentstream test: session_id=fake-tracker-session-step-one
+@tied/agentstream test: agentstream: tracker composition failed: missing_receipt for step "step-one"
+@tied/agentstream test: ▶ live executor TS [REQ-TIED_UNIFIED_TOOLCHAIN]
+@tied/agentstream test:   ✔ routes control goto via TS live run (2866.339083ms)
+@tied/agentstream test:   ✔ dry-run with --verify-session matches frozen oracle (65.49625ms)
+@tied/agentstream test:   ✔ tracker mode requires receipt before turn N+1 (TS) (2441.289417ms)
+@tied/agentstream test:   ✔ tracker mode exits when receipt omitted (TS) (1623.415666ms)
+@tied/agentstream test: ✔ live executor TS [REQ-TIED_UNIFIED_TOOLCHAIN] (6997.255708ms)
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 1/6 (new session) [session-bootstrap] ---
+@tied/agentstream test: dry-run: chained turns use --resume with the session_id from the previous turn; each --feature-spec-batch-yaml record after a prior turn omits --resume (new session). --prompt-file content is prepended on every new session (not a separate turn). An initial --session-id only applies to turn 1.
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 2/6 (resume <session_id_from_previous_turn>) [translate-sponsor-intent] ---
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 3/6 (resume <session_id_from_previous_turn>) [change-definition] ---
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 4/6 (resume <session_id_from_previous_turn>) [impact-discovery] ---
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 5/6 (resume <session_id_from_previous_turn>) [risk-assessment] ---
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 6/6 (resume <session_id_from_previous_turn>) [test-strategy] ---
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 1/6 (new session) [session-bootstrap] ---
+@tied/agentstream test: dry-run: chained turns use --resume with the session_id from the previous turn; each --feature-spec-batch-yaml record after a prior turn omits --resume (new session). --prompt-file content is prepended on every new session (not a separate turn). An initial --session-id only applies to turn 1.
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 2/6 (resume <session_id_from_previous_turn>) [translate-sponsor-intent] ---
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 3/6 (resume <session_id_from_previous_turn>) [change-definition] ---
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 4/6 (resume <session_id_from_previous_turn>) [impact-discovery] ---
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 5/6 (resume <session_id_from_previous_turn>) [risk-assessment] ---
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 6/6 (resume <session_id_from_previous_turn>) [test-strategy] ---
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 1/7 (new session) [session-bootstrap] ---
+@tied/agentstream test: dry-run: chained turns use --resume with the session_id from the previous turn; each --feature-spec-batch-yaml record after a prior turn omits --resume (new session). --prompt-file content is prepended on every new session (not a separate turn). An initial --session-id only applies to turn 1.
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 2/7 (resume <session_id_from_previous_turn>) [translate-sponsor-intent] ---
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 3/7 (resume <session_id_from_previous_turn>) [change-definition] ---
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 4/7 (resume <session_id_from_previous_turn>) [impact-discovery] ---
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 5/7 (resume <session_id_from_previous_turn>) [risk-assessment] ---
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 6/7 (resume <session_id_from_previous_turn>) [test-strategy] ---
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 7/7 (resume <session_id_from_previous_turn>) ---
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 1/7 (new session) ---
+@tied/agentstream test: dry-run: chained turns use --resume with the session_id from the previous turn; each --feature-spec-batch-yaml record after a prior turn omits --resume (new session). --prompt-file content is prepended on every new session (not a separate turn). An initial --session-id only applies to turn 1.
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 2/7 (resume <session_id_from_previous_turn>) [session-bootstrap] ---
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 3/7 (resume <session_id_from_previous_turn>) [translate-sponsor-intent] ---
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 4/7 (resume <session_id_from_previous_turn>) [change-definition] ---
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 5/7 (resume <session_id_from_previous_turn>) [impact-discovery] ---
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 6/7 (resume <session_id_from_previous_turn>) [risk-assessment] ---
+@tied/agentstream test: 
+@tied/agentstream test: --- turn 7/7 (resume <session_id_from_previous_turn>) [test-strategy] ---
+@tied/agentstream test: ▶ @tied/agentstream frozen oracle parity [REQ-TIED_UNIFIED_TOOLCHAIN]
+@tied/agentstream test:   ✔ oracle freeze records last Go commit (RISK-UNIFIED-007) (0.934708ms)
+@tied/agentstream test:   ✔ checklist testdata gate-writer-minimal-tracker references gate fixture (0.304709ms)
+@tied/agentstream test:   ✔ TS preview-checklist-tracker JSON matches frozen oracle (67.323375ms)
+@tied/agentstream test:   ✔ executor dry-run: TS entry matches frozen oracle for gate fixture (76.342833ms)
+@tied/agentstream test:   ✔ executor dry-run: tied agentstream TIED_AGENTSTREAM_IMPL=ts matches frozen oracle (109.937833ms)
+@tied/agentstream test:   ✔ executor dry-run: --verify-session matches frozen oracle (68.069041ms)
+@tied/agentstream test:   ✔ pipeline batch dry-run: TS matches frozen oracle (66.746542ms)
+@tied/agentstream test:   ✔ checklist render preview: TS matches frozen oracle (gate fixture) (63.932334ms)
+@tied/agentstream test:   ✔ preview feature-spec batch: TS matches frozen oracle (59.574ms)
+@tied/agentstream test:   ✔ tiedpreflight TS analyze returns OK for valid mcp.json layout (1.023458ms)
+@tied/agentstream test: ✔ @tied/agentstream frozen oracle parity [REQ-TIED_UNIFIED_TOOLCHAIN] (515.0175ms)
+@tied/agentstream test: ▶ SELECT_AGENT_HARNESS [REQ-TIED_CLAUDE_HARNESS]
+@tied/agentstream test:   ✔ maps --harness claude to claude profile (0.381333ms)
+@tied/agentstream test:   ✔ defaults to cursor when no harness flag (0.053417ms)
+@tied/agentstream test:   ✔ does not treat --agent-path as harness selection (0.052167ms)
+@tied/agentstream test:   ✔ maps dry-run mode to dry_run profile when --dry-run present (0.039834ms)
+@tied/agentstream test: ✔ SELECT_AGENT_HARNESS [REQ-TIED_CLAUDE_HARNESS] (1.055375ms)
+@tied/agentstream test: ▶ @tied/agentstream tiedpreflight [REQ-TIED_UNIFIED_TOOLCHAIN]
+@tied/agentstream test:   ✔ locates root mcp.json (2.010166ms)
+@tied/agentstream test:   ✔ locates single subproject mcp.json (1.138083ms)
+@tied/agentstream test:   ✔ rejects ambiguous subprojects (1.493917ms)
+@tied/agentstream test:   ✔ honors --mcp-json override (0.854709ms)
+@tied/agentstream test:   ✔ analyze ok when requirements.yaml exists (0.728417ms)
+@tied/agentstream test:   ✔ blocks when TIED_BASE_PATH outside workspace (0.708458ms)
+@tied/agentstream test:   ✔ blocks missing tied-yaml entry (0.60275ms)
+@tied/agentstream test:   ✔ blocks relative TIED_BASE_PATH (0.375875ms)
+@tied/agentstream test:   ✔ warns on greenfield tied without requirements.yaml (0.466208ms)
+@tied/agentstream test:   ✔ run locates and analyzes (0.563417ms)
+@tied/agentstream test: ✔ @tied/agentstream tiedpreflight [REQ-TIED_UNIFIED_TOOLCHAIN] (10.091292ms)
+@tied/agentstream test: ▶ tracker migration preview TS [REQ-TIED_UNIFIED_TOOLCHAIN]
+@tied/agentstream test:   ✔ matches frozen oracle for gate-writer-minimal golden tracker (3.199292ms)
+@tied/agentstream test:   ✔ tied agentstream ts entry emits same JSON as frozen oracle for preview flags (64.127875ms)
+@tied/agentstream test:   ✔ encodePreviewReport uses trailing newline like Go json.Encoder (0.462083ms)
+@tied/agentstream test: ✔ tracker migration preview TS [REQ-TIED_UNIFIED_TOOLCHAIN] (68.386ms)
+@tied/agentstream test: ℹ tests 41
+@tied/agentstream test: ℹ suites 8
+@tied/agentstream test: ℹ pass 41
+@tied/agentstream test: ℹ fail 0
+@tied/agentstream test: ℹ cancelled 0
+@tied/agentstream test: ℹ skipped 0
+@tied/agentstream test: ℹ todo 0
+@tied/agentstream test: ℹ duration_ms 7067.432375
+@tied/agentstream test: Exited with code 0
+[1m[36m[1m‹ 7.65s ›[0m [1m‹ 00:55:53 ›[0m[0m[1m[34mcd -- /Users/fareed/Documents/dev/chatgpt/stdd/mcp-server \&\& bun run --filter @tied/agentstream test [0m

@@ -1,0 +1,52 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "REQ-TIED_CLAUDE_HARNESS-slice2-2026-09-23",
+  "commit": "76b629874cac40573cf65fd5f3b3c50ca1a4a0c6",
+  "environment": {
+    "node": "bootstrap+agentstream-tests"
+  },
+  "command_results": [
+    {
+      "id": "bootstrap-claude-harness",
+      "command": [
+        "node",
+        "--test",
+        "tools/bootstrap/lib/claude-harness.test.mjs",
+        "tools/bootstrap/lib/verify.test.mjs"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 155,
+      "artifacts": [
+        "working/REQ-TIED_CLAUDE_HARNESS/evidence/bootstrap-claude-harness-test-stdout.txt"
+      ]
+    }
+  ],
+  "quality_rows": [
+    {
+      "id": "phase1-bootstrap",
+      "attribute": "dual_harness_bootstrap",
+      "applicability": "applicable",
+      "rationale": "Phase 1 acceptance slice",
+      "evidence_method": "automated_test",
+      "command_or_test": "node --test tools/bootstrap/lib/claude-harness.test.mjs",
+      "result": "passed",
+      "owner": "build-plan"
+    }
+  ],
+  "covered_tokens": [
+    "ARCH-TIED_CLAUDE_HARNESS",
+    "IMPL-TIED_CLAUDE_HARNESS",
+    "REQ-TIED_CLAUDE_HARNESS"
+  ],
+  "proof_boundaries": [
+    "Integrated adversarial activation not run",
+    "No live Claude subprocess",
+    "Phase 2 harness-select RED intentionally failing (npm run test:harness-red)"
+  ],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": []
+  }
+}

@@ -27,6 +27,8 @@
 | **merged view** | full yaml read | Methodology + project for read/validate; writes target project only |
 | **consistency validation** | lint only | `tied_validate_consistency` — graph + schema, not just YAML syntax |
 | **MCP config preservation** | MCP config refresh, MCP config merge | `copy_files.sh` creates `.cursor/mcp.json` only when absent; an existing file remains byte-for-byte unchanged |
+| **Claude MCP safe merge** | repo mcp overwrite | Repo-root `.mcp.json` create-if-absent or add `mcpServers.tied-yaml` only when missing; Cursor create-only policy unchanged · [REQ-TIED_CLAUDE_HARNESS](../requirements/REQ-TIED_CLAUDE_HARNESS.yaml) |
+| **`TIED_MCP_HARNESS`** | harness env, client id suffix | Bootstrap-generated MCP env dimension `cursor` \| `claude` for usage metrics cohorts · [REQ-TIED_CLAUDE_HARNESS](../requirements/REQ-TIED_CLAUDE_HARNESS.yaml) |
 | **essence_pseudocode sidecar** | inline yaml pseudocode | Prefer `IMPL-*-pseudocode.md` or `impl_detail_set_essence_pseudocode` |
 | **TIED methodology repository** | TIED repo, source repo | Git checkout that ships `mcp-server/`, `copy_files.sh`, `tools/bundled-tied-yaml-skill/`; distinct from **client project root** |
 | **bundled skill** | .cursor skill source | Git-tracked canonical: `tools/bundled-tied-yaml-skill/`; installed to client `.cursor/skills/tied-yaml/` |

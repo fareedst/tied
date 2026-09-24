@@ -1,0 +1,30 @@
+{
+  "schema_version": "checklist-gate-receipt.v1",
+  "phase": "pre_implementation",
+  "timestamp": "2026-09-24T00:07:19.541Z",
+  "allowed": false,
+  "diagnostics": [
+    "pending_required_step:risk-assessment",
+    "pending_required_step:gate-pseudocode-validation",
+    "integrated_depth_requires_pairing",
+    "activation_pairing_incomplete"
+  ],
+  "depth": "integrated",
+  "input_hashes": {
+    "tracker_hash": "sha256:e0b2aef25ba41924e2fc50dc2af2388dfedf644ca690886397260ddbac8232a9",
+    "citdp_hash": "sha256:d144a3f9a79157799ee97da81da6b284eb686c32341476294565aa55ea802e81"
+  },
+  "gate_result": {
+    "allowed": false,
+    "ok": false,
+    "blocking": true,
+    "depth": "integrated",
+    "phase": "pre_implementation",
+    "diagnostics": [
+      "pending_required_step:risk-assessment",
+      "pending_required_step:gate-pseudocode-validation",
+      "integrated_depth_requires_pairing",
+      "activation_pairing_incomplete"
+    ]
+  }
+}

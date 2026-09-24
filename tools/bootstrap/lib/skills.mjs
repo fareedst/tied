@@ -1,6 +1,7 @@
 /**
  * [IMPL-TIED_FILES] [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM] [REQ-TIED_SETUP]
- * How: INSTALL_TIED_YAML_SKILL, prompt-type skills, TIED_REPO_ROOT patch.
+ * [IMPL-TIED_CLAUDE_HARNESS] [ARCH-TIED_CLAUDE_HARNESS] [REQ-TIED_CLAUDE_HARNESS]
+ * How: INSTALL_TIED_YAML_SKILL, prompt-type skills, TIED_REPO_ROOT patch; INSTALL_CLAUDE_SKILLS to .claude/skills/.
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -103,6 +104,74 @@ export function installPromptTypeSkills(projectRoot, paths) {
     chmodExecutableRecursive(path.join(dest, skillDir));
   }
   sayWarn(`Copied prompt-type Cursor skills into ${dest} (from ${src}).`);
+}
+
+function installClaudeTiedYamlSkillFrom(projectRoot, src, tiedRepoRoot, marker) {
+  const dest = path.join(projectRoot, ".claude", "skills", "tied-yaml");
+  fs.mkdirSync(path.join(projectRoot, ".claude", "skills"), { recursive: true });
+  copyTreeWithAttributes(src, dest);
+  chmodExecutableRecursive(dest);
+  for (const scriptName of ["tied-cli.sh", "tied.sh", "feature-orchestrator.sh"]) {
+    const cli = path.join(dest, "scripts", scriptName);
+    const sourceCli = path.join(src, "scripts", scriptName);
+    if (fs.existsSync(cli) && fs.existsSync(sourceCli)) {
+      if (process.platform !== "win32") {
+        fs.chmodSync(cli, fs.statSync(cli).mode | 0o111);
+      }
+      patchTiedRepoRoot(cli, tiedRepoRoot, marker);
+      normalizeCopiedPathTimestamps(sourceCli, cli);
+    }
+  }
+}
+
+function installClaudePromptTypeSkillsFrom(projectRoot, src, paths) {
+  const dest = path.join(projectRoot, ".claude", "skills");
+  const { PROMPT_TYPE_SHARED_DIR, PROMPT_TYPE_SKILL_DIRS } = paths;
+  fs.mkdirSync(dest, { recursive: true });
+  copyTreeWithAttributes(path.join(src, PROMPT_TYPE_SHARED_DIR), path.join(dest, PROMPT_TYPE_SHARED_DIR));
+  for (const skillDir of PROMPT_TYPE_SKILL_DIRS) {
+    copyTreeWithAttributes(path.join(src, skillDir), path.join(dest, skillDir));
+  }
+  chmodExecutableRecursive(path.join(dest, PROMPT_TYPE_SHARED_DIR));
+  for (const skillDir of PROMPT_TYPE_SKILL_DIRS) {
+    chmodExecutableRecursive(path.join(dest, skillDir));
+  }
+}
+
+/**
+ * [IMPL-TIED_CLAUDE_HARNESS] [ARCH-TIED_CLAUDE_HARNESS] [REQ-TIED_CLAUDE_HARNESS] [REQ-PROMPT_TYPE_GLOBAL_SKILLS]
+ * How: INSTALL_CLAUDE_SKILLS — copy-default bundled skills to .claude/skills/ (symlink opt-in gated).
+ */
+export function installClaudeSkills(projectRoot, paths, options = {}) {
+  if (options.symlink_unix_opt_in && !options.windows_copy_proven_in_ci) {
+    throw new Error("SYMLINK_WITHOUT_CI_WINDOWS_PROOF");
+  }
+  const tiedRepoRoot = paths.tiedRepoRoot ?? paths.TIED_REPO_ROOT;
+  const { tiedYamlSkillCanonical, tiedYamlSkillDevFallback, marker, promptTypeSkillsCanonical } = paths;
+  const { PROMPT_TYPE_SHARED_DIR, PROMPT_TYPE_SKILL_DIRS } = paths;
+  const installedPaths = [];
+
+  if (!promptTypeSkillsIsComplete(promptTypeSkillsCanonical, PROMPT_TYPE_SHARED_DIR, PROMPT_TYPE_SKILL_DIRS)) {
+    sayErr(`ERROR: prompt-type skill bundle not found or incomplete at ${promptTypeSkillsCanonical}.`);
+    throw new Error("SKILL_INSTALL_FAILED");
+  }
+  installClaudePromptTypeSkillsFrom(projectRoot, promptTypeSkillsCanonical, paths);
+  installedPaths.push(path.join(projectRoot, ".claude", "skills"));
+
+  if (skillIsComplete(tiedYamlSkillCanonical)) {
+    installClaudeTiedYamlSkillFrom(projectRoot, tiedYamlSkillCanonical, tiedRepoRoot, marker);
+  } else if (skillIsComplete(tiedYamlSkillDevFallback)) {
+    sayWarn(
+      `Bundled tied-yaml missing or incomplete at ${tiedYamlSkillCanonical}; using non-canonical ${tiedYamlSkillDevFallback}.`
+    );
+    installClaudeTiedYamlSkillFrom(projectRoot, tiedYamlSkillDevFallback, tiedRepoRoot, marker);
+  } else {
+    sayErr("ERROR: tied-yaml skill not found or incomplete for Claude install.");
+    throw new Error("SKILL_INSTALL_FAILED");
+  }
+  installedPaths.push(path.join(projectRoot, ".claude", "skills", "tied-yaml"));
+  sayWarn(`Copied Claude skills into ${path.join(projectRoot, ".claude", "skills")} (copy default).`);
+  return { installedPaths };
 }
 
 export function copyHooks(projectRoot, hooksSource, tiedRepoRoot) {
