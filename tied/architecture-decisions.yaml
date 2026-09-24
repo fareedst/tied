@@ -1707,9 +1707,31 @@ ARCH-TIED_CLAIMS_EVIDENCE_REVIEW:
       - "No shared finding-ledger with adversarial-inquiry"
     decision: "Dedicated claim-review artifact family under working scope; read-only consumer of evidence manifests."
   status: "Active"
+ARCH-TIED_CLAUDE_BOOTSTRAP_OPS:
+  category: "Architecture"
+  cross_references:
+    - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+    - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
+    - "ARCH-TIED_CLAUDE_HARNESS"
+    - "IMPL-TIED_CLAUDE_BOOTSTRAP_OPS"
+    - "REQ-TIED_CLAUDE_BOOTSTRAP_OPS"
+  detail_file: "architecture-decisions/ARCH-TIED_CLAUDE_BOOTSTRAP_OPS.yaml"
+  name: "Claude bootstrap ops architecture"
+  status: "Draft"
 ARCH-TIED_CLAUDE_HARNESS:
   detail_file: "architecture-decisions/ARCH-TIED_CLAUDE_HARNESS.yaml"
   name: "Dual harness architecture (Cursor + Claude Code)"
+  status: "Draft"
+ARCH-TIED_CLAUDE_LIVE_DRIVER:
+  category: "Architecture"
+  cross_references:
+    - "ARCH-GOAGENT-EXECUTOR"
+    - "ARCH-TIED_CLAUDE_HARNESS"
+    - "IMPL-TIED_CLAUDE_LIVE_DRIVER"
+    - "REQ-TIED_CLAUDE_LIVE_DRIVER"
+  description: "Architecture for Claude AgentDriver boundary, frozen fixtures/claude oracles, live-executor factory routing, and README dry-vs-live contract; Cursor path unchanged."
+  detail_file: "architecture-decisions/ARCH-TIED_CLAUDE_LIVE_DRIVER.yaml"
+  name: "Claude AgentDriver and oracle architecture"
   status: "Draft"
 ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY:
   cross_references:

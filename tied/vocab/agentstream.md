@@ -43,6 +43,10 @@
 | **run-feature-batch-agentstream** | tasd (alone) | Shell driver: `scripts/run-feature-batch-agentstream.sh` |
 | **harness profile** | agent path harness, claude path flag | Explicit executor selection: `cursor` (default), `claude` (fixture-gated **AgentDriver**), `dry-run`; distinct from **`--agent-path`** (Cursor executable override only). [REQ-TIED_CLAUDE_HARNESS](../requirements/REQ-TIED_CLAUDE_HARNESS.yaml) |
 | **`--harness claude`** | `--agent-path claude` | Selects Claude Code **AgentDriver** after subprocess/stream fixtures pass; **not** a synonym for `--agent-path`. |
+| **AgentDriver** | harness adapter, Claude executor wrapper | Interface boundary for one harness: launch subprocess, parse stream, expose session id / permissions / env, emit shared receipt shape. Cursor wraps existing `live-executor`/`executor-run`; Claude is a new module. Live Claude path owned by [REQ-TIED_CLAUDE_LIVE_DRIVER](../requirements/REQ-TIED_CLAUDE_LIVE_DRIVER.yaml) (`related_to` closed [REQ-TIED_CLAUDE_HARNESS](../requirements/REQ-TIED_CLAUDE_HARNESS.yaml)). Windows CI / symlink / skills re-root / comparison-doc refresh owned by [REQ-TIED_CLAUDE_BOOTSTRAP_OPS](../requirements/REQ-TIED_CLAUDE_BOOTSTRAP_OPS.yaml) (not AgentDriver). |
+| **Claude stream oracle** | Claude fixture, frozen NDJSON | Version-pinned frozen stream/session files under `mcp-server/packages/agentstream/fixtures/claude/`; separate from Cursor oracles; gates live checklist enablement. [REQ-TIED_CLAUDE_LIVE_DRIVER](../requirements/REQ-TIED_CLAUDE_LIVE_DRIVER.yaml) |
+| **fixture-gated live checklist** | live Claude CI, unpinned live run | Operator live `tied agentstream --harness claude` allowed only after parser/session/harness composition fixtures pass; no live Claude subprocess required in CI initially. [REQ-TIED_CLAUDE_LIVE_DRIVER](../requirements/REQ-TIED_CLAUDE_LIVE_DRIVER.yaml) |
+| **dry vs live table** | live parity table | README operator table distinguishing `--harness claude` dry-run placeholder from fixture-gated live AgentDriver; CI remains fixture-only. |
 
 ---
 

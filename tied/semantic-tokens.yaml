@@ -690,6 +690,20 @@ ARCH-TIED_CLAIMS_EVIDENCE_REVIEW:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_CLAUDE_BOOTSTRAP_OPS:
+  category: "Architecture"
+  cross_references:
+    - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
+    - "ARCH-TIED_CLAUDE_HARNESS"
+    - "IMPL-TIED_CLAUDE_BOOTSTRAP_OPS"
+    - "REQ-TIED_CLAUDE_BOOTSTRAP_OPS"
+  description: "Evidence-gated Windows proof before symlink/skills re-root; adherence spike N/A path; comparison-doc Current ownership."
+  detail_file: "architecture-decisions/ARCH-TIED_CLAUDE_BOOTSTRAP_OPS.yaml"
+  metadata:
+    last_updated: "2026-09-23"
+    registered: "2026-09-23"
+  name: "Claude bootstrap ops architecture"
+  source_index: "architecture-decisions.yaml"
 ARCH-TIED_CLAUDE_HARNESS:
   category: "Architecture"
   cross_references:
@@ -699,6 +713,20 @@ ARCH-TIED_CLAUDE_HARNESS:
   detail_file: "architecture-decisions/ARCH-TIED_CLAUDE_HARNESS.yaml"
   metadata:
     last_updated: "2026-09-23"
+ARCH-TIED_CLAUDE_LIVE_DRIVER:
+  category: "Architecture"
+  cross_references:
+    - "ARCH-GOAGENT-EXECUTOR"
+    - "ARCH-TIED_CLAUDE_HARNESS"
+    - "IMPL-TIED_CLAUDE_LIVE_DRIVER"
+    - "REQ-TIED_CLAUDE_LIVE_DRIVER"
+  description: "Architecture for Claude AgentDriver boundary, frozen fixtures/claude oracles, live-executor factory routing, README dry-vs-live contract."
+  detail_file: "architecture-decisions/ARCH-TIED_CLAUDE_LIVE_DRIVER.yaml"
+  metadata:
+    last_updated: "2026-09-23"
+    registered: "2026-09-23"
+  name: "Claude AgentDriver and oracle architecture"
+  source_index: "architecture-decisions.yaml"
 ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY:
   cross_references:
     - "IMPL-TIED_FEEDBACK_PROMOTION"
@@ -1694,6 +1722,19 @@ IMPL-TIED_CLAIMS_EVIDENCE_REVIEW:
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
+IMPL-TIED_CLAUDE_BOOTSTRAP_OPS:
+  category: "Implementation"
+  cross_references:
+    - "ARCH-TIED_CLAUDE_BOOTSTRAP_OPS"
+    - "IMPL-TIED_CLAUDE_HARNESS"
+    - "REQ-TIED_CLAUDE_BOOTSTRAP_OPS"
+  description: "ASSERT_WINDOWS_BOOTSTRAP_CLAUDE, GATE_SYMLINK_ON_WINDOWS_PROOF, CONFIG_SKILLS_REROOT, SPIKE_CLAUDE_ADHERENCE_HOOKS, REFRESH_COMPARISON_PLAN_DOC."
+  detail_file: "implementation-decisions/IMPL-TIED_CLAUDE_BOOTSTRAP_OPS.yaml"
+  metadata:
+    last_updated: "2026-09-23"
+    registered: "2026-09-23"
+  name: "Claude bootstrap ops implementation"
+  source_index: "implementation-decisions.yaml"
 IMPL-TIED_CLAUDE_HARNESS:
   category: "Implementation"
   cross_references:
@@ -1703,6 +1744,20 @@ IMPL-TIED_CLAUDE_HARNESS:
   detail_file: "implementation-decisions/IMPL-TIED_CLAUDE_HARNESS.yaml"
   metadata:
     last_updated: "2026-09-23"
+IMPL-TIED_CLAUDE_LIVE_DRIVER:
+  category: "Implementation"
+  cross_references:
+    - "ARCH-TIED_CLAUDE_LIVE_DRIVER"
+    - "IMPL-GOAGENT-EXECUTOR"
+    - "IMPL-TIED_CLAUDE_HARNESS"
+    - "REQ-TIED_CLAUDE_LIVE_DRIVER"
+  description: "IMPL for Claude CLI pin, stream/session parsers, AgentDriver, live driver factory, and live-executor Claude composition."
+  detail_file: "implementation-decisions/IMPL-TIED_CLAUDE_LIVE_DRIVER.yaml"
+  metadata:
+    last_updated: "2026-09-23"
+    registered: "2026-09-23"
+  name: "Claude live AgentDriver implementation"
+  source_index: "implementation-decisions.yaml"
 IMPL-TIED_FEEDBACK_PROMOTION:
   cross_references:
     - "ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY"
@@ -2889,6 +2944,21 @@ REQ-TIED_CLAIMS_EVIDENCE_REVIEW:
   source_index: "requirements.yaml"
   status: "Active"
   type: "REQ"
+REQ-TIED_CLAUDE_BOOTSTRAP_OPS:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-TIED_CLAUDE_BOOTSTRAP_OPS"
+    - "IMPL-TIED_CLAUDE_BOOTSTRAP_OPS"
+    - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+    - "REQ-TIED_CLAUDE_HARNESS"
+    - "REQ-TIED_SETUP"
+  description: "Windows CI Claude asserts, windows_copy_proven_in_ci symlink gate, optional skills/ re-root, adherence spike, comparison-doc refresh."
+  detail_file: "requirements/REQ-TIED_CLAUDE_BOOTSTRAP_OPS.yaml"
+  metadata:
+    last_updated: "2026-09-23"
+    registered: "2026-09-23"
+  name: "Claude bootstrap ops (Windows CI, symlink, skills re-root)"
+  source_index: "requirements.yaml"
 REQ-TIED_CLAUDE_HARNESS:
   category: "Tooling"
   cross_references:
@@ -2898,6 +2968,20 @@ REQ-TIED_CLAUDE_HARNESS:
   detail_file: "requirements/REQ-TIED_CLAUDE_HARNESS.yaml"
   metadata:
     last_updated: "2026-09-23"
+REQ-TIED_CLAUDE_LIVE_DRIVER:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-TIED_CLAUDE_LIVE_DRIVER"
+    - "IMPL-TIED_CLAUDE_LIVE_DRIVER"
+    - "REQ-GOAGENT-AGENT-EXECUTOR"
+    - "REQ-TIED_CLAUDE_HARNESS"
+  description: "Fixture-gated Claude AgentDriver, fixtures/claude oracles, live-executor composition, README CLI pin; owns SC-CLAUDE-P2 live clause via related_to parent."
+  detail_file: "requirements/REQ-TIED_CLAUDE_LIVE_DRIVER.yaml"
+  metadata:
+    last_updated: "2026-09-23"
+    registered: "2026-09-23"
+  name: "Claude live AgentDriver and stream oracles"
+  source_index: "requirements.yaml"
 REQ-TIED_FIDELITY_RESEARCH:
   category: "Functional"
   cross_references:

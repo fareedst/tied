@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Claude live AgentDriver ([REQ-TIED_CLAUDE_LIVE_DRIVER])** — Fixture-gated
+  Claude stream/session oracles under `mcp-server/packages/agentstream/fixtures/claude/`,
+  `claude-driver` / `claude-stream` / live-driver select+bind modules, live-executor composition
+  for `--harness claude`, README CLI pin and dry-vs-live operator table; 52/52 `@tied/agentstream`
+  npm tests; close-out envelope and gate receipts under `working/REQ-TIED_CLAUDE_LIVE_DRIVER/`.
+  Parent [REQ-TIED_CLAUDE_HARNESS] Tracker unchanged; SC-CLAUDE-P2 live ownership recorded via
+  CITDP LEAP note only.
+
 - **Claude Code multi-harness Phases 0–3 ([REQ-TIED_CLAUDE_HARNESS])** — Dual bootstrap
   (`.claude/skills/`, repo-root `.mcp.json` safe merge, harness metrics), `@tied/agentstream`
   `--harness claude` / `SELECT_AGENT_HARNESS` dry-run wiring with 41/41 package tests and 8 bootstrap

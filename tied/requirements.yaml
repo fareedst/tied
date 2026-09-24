@@ -1928,10 +1928,36 @@ REQ-TIED_CLAIMS_EVIDENCE_REVIEW:
       method: "Composition tests"
     - coverage: "Schema, freeze boundary, classification, ledger append-only semantics."
       method: "Unit tests"
+REQ-TIED_CLAUDE_BOOTSTRAP_OPS:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
+    - "ARCH-TIED_CLAUDE_BOOTSTRAP_OPS"
+    - "IMPL-TIED_CLAUDE_BOOTSTRAP_OPS"
+    - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+    - "REQ-TIED_CLAUDE_HARNESS"
+    - "REQ-TIED_CLAUDE_LIVE_DRIVER"
+    - "REQ-TIED_SETUP"
+  detail_file: "requirements/REQ-TIED_CLAUDE_BOOTSTRAP_OPS.yaml"
+  name: "Claude bootstrap ops (Windows CI, symlink, skills re-root)"
+  priority: "P1"
+  status: "Draft"
 REQ-TIED_CLAUDE_HARNESS:
   category: "Tooling"
   detail_file: "requirements/REQ-TIED_CLAUDE_HARNESS.yaml"
   name: "Claude Code multi-harness parity"
+  priority: "P1"
+  status: "Implemented"
+REQ-TIED_CLAUDE_LIVE_DRIVER:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-TIED_CLAUDE_LIVE_DRIVER"
+    - "IMPL-TIED_CLAUDE_LIVE_DRIVER"
+    - "REQ-GOAGENT-AGENT-EXECUTOR"
+    - "REQ-TIED_CLAUDE_HARNESS"
+  description: "Deliver fixture-gated Claude AgentDriver for tied agentstream: frozen stream/session oracles under fixtures/claude/, live-executor composition for harness=claude, README CLI pin and dry-vs-live table. Owns SC-CLAUDE-P2 live clause via related_to REQ-TIED_CLAUDE_HARNESS; no live Claude subprocess in CI."
+  detail_file: "requirements/REQ-TIED_CLAUDE_LIVE_DRIVER.yaml"
+  name: "Claude live AgentDriver and stream oracles"
   priority: "P1"
   status: "Implemented"
 REQ-TIED_FIDELITY_RESEARCH:

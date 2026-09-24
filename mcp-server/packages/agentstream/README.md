@@ -28,7 +28,24 @@
 | Extended dry-run | `--prompts-file`, `--tdd-yaml`, `--verify-session`, `--non-compact-html`, argv after `--` |
 | Adherence reconcile | `adherence-reconcile` subcommand or standalone `--tracker` with reconcile flags |
 | Live checklist + tracker | `-c`, `--checklist-tracker-yaml`, tracker vars, optional `--adherence-ledger`, `--enforce-envelope` |
-| Harness profile (Phase 2) | `--harness cursor\|claude` selects **AgentDriver** profile; **`--agent-path`** remains Cursor executable override only (not a Claude adapter). Dry-run command rendering uses placeholder bin **`claude`** when `--harness claude` and `--agent-path` is unset. Live Claude checklist automation stays **fixture-gated** (no CI subprocess). |
+| Harness profile (Phase 2) | `--harness cursor\|claude` selects **AgentDriver** profile; **`--agent-path`** remains Cursor executable override only (not a Claude adapter). Dry-run command rendering uses placeholder bin **`claude`** when `--harness claude` and `--agent-path` is unset. |
+| Claude live driver ([REQ-TIED_CLAUDE_LIVE_DRIVER](../../../tied/requirements/REQ-TIED_CLAUDE_LIVE_DRIVER.yaml)) | Live `--harness claude` routes through **SELECT_LIVE_DRIVER** → **CLAUDE_AGENT_DRIVER** with frozen oracles under `fixtures/claude/`. **CI:** fixture-only unit/composition tests (no live Claude subprocess). **Operator live:** set `AGENTSTREAM_CLAUDE_LIVE_OK=1` after local `npm test` is green; optional manual smoke only. |
+
+### Claude CLI pin (fixture contract)
+
+| Field | Value |
+| --- | --- |
+| Pinned CLI | `synthetic-v1` (see `fixtures/claude/README.md`; replace when oracles are captured from a real CLI) |
+| Oracle root | `fixtures/claude/` (`stream-assistant-basic.ndjson`, `stream-session-id.ndjson`, `stream-error-exit.ndjson`) |
+| Proof boundary | No live Claude subprocess in CI |
+
+### Dry-run vs live (`--harness claude`)
+
+| Mode | Behavior |
+| --- | --- |
+| **Dry-run** (`-d` / `--dry-run`) | Renders shell argv with placeholder bin `claude`; no subprocess. |
+| **Live (CI)** | Not run — tests use mocked `launch_fn` and frozen NDJSON only. |
+| **Live (operator)** | Fixture-gated: unit + composition suites green locally, then `AGENTSTREAM_CLAUDE_LIVE_OK=1` for real Claude CLI subprocess. |
 
 Unqualified argv **exit with an error** (no Go forward).
 

@@ -1942,11 +1942,32 @@ IMPL-TIED_CLAIMS_EVIDENCE_REVIEW:
       - "Static-only pilot via build_claims_evidence_from_tied"
     decision: "Pure modules with append-only ledger; MCP tool as primary operator surface."
   status: "Active"
+IMPL-TIED_CLAUDE_BOOTSTRAP_OPS:
+  category: "Implementation"
+  cross_references:
+    - "ARCH-TIED_CLAUDE_BOOTSTRAP_OPS"
+    - "IMPL-TIED_CLAUDE_HARNESS"
+    - "IMPL-TIED_FILES"
+    - "REQ-TIED_CLAUDE_BOOTSTRAP_OPS"
+  detail_file: "implementation-decisions/IMPL-TIED_CLAUDE_BOOTSTRAP_OPS.yaml"
+  name: "Claude bootstrap ops implementation"
+  status: "Draft"
 IMPL-TIED_CLAUDE_HARNESS:
   detail_file: "implementation-decisions/IMPL-TIED_CLAUDE_HARNESS.yaml"
   name: "Claude multi-harness bootstrap and agentstream adapter"
   status: "Active"
   testability: "integration"
+IMPL-TIED_CLAUDE_LIVE_DRIVER:
+  category: "Implementation"
+  cross_references:
+    - "ARCH-TIED_CLAUDE_LIVE_DRIVER"
+    - "IMPL-GOAGENT-EXECUTOR"
+    - "IMPL-TIED_CLAUDE_HARNESS"
+    - "REQ-TIED_CLAUDE_LIVE_DRIVER"
+  description: "IMPL for Claude CLI pin, stream/session parsers, AgentDriver, live driver factory, and live-executor Claude composition with fixture oracles."
+  detail_file: "implementation-decisions/IMPL-TIED_CLAUDE_LIVE_DRIVER.yaml"
+  name: "Claude live AgentDriver implementation"
+  status: "Active"
 IMPL-TIED_FEEDBACK_PROMOTION:
   code_locations:
     files:

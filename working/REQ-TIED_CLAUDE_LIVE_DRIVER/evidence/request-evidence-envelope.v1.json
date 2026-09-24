@@ -1,0 +1,311 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-09-24T03:22:35.740Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-TIED_CLAUDE_LIVE_DRIVER",
+    "project_id": "af8451e933f573ec",
+    "depth_tier": "minimal",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [],
+  "artifacts": [
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/close_out-2026-09-24T02-52-41-879Z.json",
+      "content_hash": "sha256:c0d1cdd63bb7f725720009ef019a954ef30bb7ab6f8ef9be5593be55f79954bc",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/pre_implementation-2026-09-24T02-40-23-882Z.json",
+      "content_hash": "sha256:a4eeb41de567d61caa7a0027668f36629dfd518674cb5aa3f5eabb5b2daac379",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/verification-2026-09-24T02-42-48-910Z.json",
+      "content_hash": "sha256:53acc3742c8873eee74cc11172989addb7067cb592ee2a1611637ea7633effb5",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "tied/citdp/CITDP-REQ-TIED_CLAUDE_LIVE_DRIVER.yaml",
+      "content_hash": "sha256:062c6a39def40ad1f2d4161c2a683296ded7e8dca5630d069eb24e5c87ced067",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    },
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/CITDP-REQ-TIED_CLAUDE_LIVE_DRIVER.yaml",
+      "content_hash": "sha256:062c6a39def40ad1f2d4161c2a683296ded7e8dca5630d069eb24e5c87ced067",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    },
+    {
+      "kind": "not_applicable_receipt",
+      "schema_version": "not-applicable-receipt.v1",
+      "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/not-applicable-receipt.v1.json",
+      "content_hash": "sha256:e04ac5d0ad9402dc20ee7131c7b10f148af10b7bf6d8b884c971de0ba3bf094c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:7e4bd68305ec5a4d81f43898c5a90cfa77d430a6a8c6c58a38a5189c57dac712",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/agentstream-npm-test-stdout.txt",
+      "content_hash": "sha256:d7cd69f0554955f970a2c513bd1fe76f5cce6ffcc372af336db595a357ca905f",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/author-architecture-evidence.md",
+      "content_hash": "sha256:a311fa2cbab98ecc6c798c94346e1bcb80e0d5301e44d3f5a1a6ca39ff99ac77",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/author-requirement-evidence.md",
+      "content_hash": "sha256:a311fa2cbab98ecc6c798c94346e1bcb80e0d5301e44d3f5a1a6ca39ff99ac77",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/catalog-pseudocode-contracts-evidence.md",
+      "content_hash": "sha256:a311fa2cbab98ecc6c798c94346e1bcb80e0d5301e44d3f5a1a6ca39ff99ac77",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/change-definition-evidence.md",
+      "content_hash": "sha256:a311fa2cbab98ecc6c798c94346e1bcb80e0d5301e44d3f5a1a6ca39ff99ac77",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/gate-pre-implementation.md",
+      "content_hash": "sha256:d573fa803ae79afe577013485c225843342eec67c1e5831ce32cb5e93d10d93f",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/gate-pseudocode-validation-evidence.md",
+      "content_hash": "sha256:a311fa2cbab98ecc6c798c94346e1bcb80e0d5301e44d3f5a1a6ca39ff99ac77",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/gate-verification-build-plan-a.md",
+      "content_hash": "sha256:dfaa4c1044088c9f44f8343a4ecb8742ad75305ec45f24dd580540e4bdc00708",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/impact-discovery-evidence.md",
+      "content_hash": "sha256:a311fa2cbab98ecc6c798c94346e1bcb80e0d5301e44d3f5a1a6ca39ff99ac77",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/persist-implementation-records-evidence.md",
+      "content_hash": "sha256:a311fa2cbab98ecc6c798c94346e1bcb80e0d5301e44d3f5a1a6ca39ff99ac77",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/pre-close-out-evidence-index.md",
+      "content_hash": "sha256:670711740730472299796692a4e647dbb516556acae0fd73bc5743bee28bb166",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": "layer-b-pseudocode-validator.v1",
+      "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/pseudocode-validate.json",
+      "content_hash": "sha256:620bde55275949c0a9f8169fb65c6177863df7428a30afdb396f23e66725b3b6",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/risk-assessment-evidence.md",
+      "content_hash": "sha256:a311fa2cbab98ecc6c798c94346e1bcb80e0d5301e44d3f5a1a6ca39ff99ac77",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/run-close-out-gates-close-out-stdout.txt",
+      "content_hash": "sha256:740ea60171ead102de972b72e1b53ff241728524af4bc951ef3c0e11e879dc5d",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/session-bootstrap-evidence.md",
+      "content_hash": "sha256:a311fa2cbab98ecc6c798c94346e1bcb80e0d5301e44d3f5a1a6ca39ff99ac77",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/sub-adversarial-inquiry-pass-na.md",
+      "content_hash": "sha256:822aad69ceb4334ac3bf36ffec19482182a55e624fcde984ceaa71d9465f2bce",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/test-strategy-evidence.md",
+      "content_hash": "sha256:a311fa2cbab98ecc6c798c94346e1bcb80e0d5301e44d3f5a1a6ca39ff99ac77",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/translate-sponsor-intent-evidence.md",
+      "content_hash": "sha256:a311fa2cbab98ecc6c798c94346e1bcb80e0d5301e44d3f5a1a6ca39ff99ac77",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "verification_evidence_manifest",
+      "schema_version": "verification-evidence-manifest.v1",
+      "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/verification-evidence-manifest.v1.json",
+      "content_hash": "sha256:45877866318a27c4b0461bd3ea6a70446c6f4ff598d0fb9859a1084a55074e25",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": null,
+    "tracker_hash": null,
+    "citdp_path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/CITDP-REQ-TIED_CLAUDE_LIVE_DRIVER.yaml",
+    "evidence_chain_profile_path": null
+  },
+  "gaps": []
+}

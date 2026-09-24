@@ -1,0 +1,52 @@
+REQ-TIED_CLAUDE_LIVE_DRIVER:
+  category: "Tooling"
+  description: "Deliver fixture-gated Claude AgentDriver for tied agentstream: frozen stream/session oracles under mcp-server/packages/agentstream/fixtures/claude/, live-executor composition when harness=claude, README CLI version pin and dry-vs-live operator table. Transfers ownership of SC-CLAUDE-P2-AGENTSTREAM live clause from closed parent REQ-TIED_CLAUDE_HARNESS without silently rewriting parent Tracker or satisfaction text."
+  metadata:
+    created:
+      author: "plan-new-feature"
+      date: "2026-09-23"
+    last_updated:
+      author: "plan-close-out"
+      date: "2026-09-24"
+      reason: "Verification-gated close-out; agentstream npm test green"
+  name: "Claude live AgentDriver and stream oracles"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "CI stays fixture-only while operators get documented manual smoke"
+      - "Contract-gated live checklist path for --harness claude"
+      - "Parent closed Tracker remains intact via related_to + CITDP LEAP note"
+    problems_solved:
+      - "live-executor still routes Claude live path through Cursor executor"
+      - "No Claude stream/session oracles separate from Cursor fixtures"
+      - "README lacks CLI pin and dry-vs-live table for harness=claude"
+    why: "Parent REQ closed Phases 0-3 with dry-run harness select only; live Claude subprocess automation and stream oracles remained residual and need a dedicated follow-on REQ with clear LEAP ownership."
+  related_requirements:
+    depends_on:
+      - "REQ-GOAGENT-AGENT-EXECUTOR"
+      - "REQ-TIED_CLAUDE_HARNESS"
+    related_to:
+      - "REQ-TIED_CLAUDE_HARNESS"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "--agent-path remains Cursor executable override only and never selects Claude harness."
+      id: "SC-LIVE-AGENT-PATH"
+    - criterion: "agentstream README pins Claude CLI contract version and publishes dry-run vs live fixture-gated table; no live Claude subprocess required in CI."
+      id: "SC-LIVE-DOCS-PIN"
+    - criterion: "CITDP LEAP note records that SC-CLAUDE-P2-AGENTSTREAM live clause ownership transfers to this REQ via related_to; closed parent Tracker/satisfaction text is not silently rewritten."
+      id: "SC-LIVE-LEAP-P2"
+    - criterion: "Claude AgentDriver implements launch/parse/session/permissions/env and shared receipt shape; factory selects it for harness=claude live path."
+      id: "SC-LIVE-AGENT-DRIVER"
+    - criterion: "Composition tests prove live-executor binds harness=claude to Claude driver with mocked subprocess; Cursor driver unchanged for harness=cursor; dry-run --harness claude regression stays green."
+      id: "SC-LIVE-COMPOSITION"
+    - criterion: "Frozen Claude stream/session oracles exist under mcp-server/packages/agentstream/fixtures/claude/ with README capture notes and pinned CLI version; separate from Cursor oracles."
+      id: "SC-LIVE-ORACLES"
+    - criterion: "Unit tests parse assistant content, session id, and error/exit metadata against frozen Claude oracles."
+      id: "SC-LIVE-PARSER-SESSION"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_CLAUDE_LIVE_DRIVER"
+    implementation:
+      - "IMPL-TIED_CLAUDE_LIVE_DRIVER"
+    tests: []

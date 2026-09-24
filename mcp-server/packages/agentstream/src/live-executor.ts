@@ -8,7 +8,8 @@ import path from "node:path";
 import type { DryRunConfig } from "./dry-run-config.js";
 import { trackerRequestTokenFromVars } from "./dry-run-config.js";
 import { ACTION_GOTO, parseControl, validateControl } from "./control.js";
-import { runAgent, agentArgv } from "./executor-run.js";
+import { agentArgv } from "./executor-run.js";
+import { bindLiveExecutorDriver } from "./live-driver-bind.js";
 import { runTiedPreflight, type DryRunStreams } from "./executor-dry-run.js";
 import { knownStepStubs, replaceRemainingFromStep } from "./pipeline-route.js";
 import { chainBetween, sessionForTurn } from "./pipeline-session.js";
@@ -229,6 +230,11 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
     runID = newRunId();
   }
 
+  const liveBinding = bindLiveExecutorDriver({
+    harnessProfile: cfg.agentHarness,
+    agentPath: cfg.agentPath,
+  });
+
   let running = "";
 
   for (let i = 0; i < turns.length; i++) {
@@ -361,7 +367,7 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
       t.parts,
       cfg.agentHarness,
     );
-    const { result, exitCode } = await runAgent(argv, extraEnv);
+    const { result, exitCode } = await liveBinding.runTurn(argv, extraEnv);
     if (exitCode !== 0) {
       clearMarker();
       return { stdout: "", stderr: stderrAcc, exitCode };

@@ -1,0 +1,199 @@
+CITDP-REQ-TIED_CLAUDE_LIVE_DRIVER:
+  change_definition:
+    current_behavior: "Parent REQ-TIED_CLAUDE_HARNESS closed Phases 0-3: --harness claude selects dry-run placeholder bin only; live path still Cursor live-executor/executor-run; no Claude stream/session oracles under fixtures/claude/; README lacks CLI pin and dry-vs-live table for Claude live."
+    desired_behavior: "Contract-gated Claude AgentDriver (launch, parse, session, permissions/env, shared receipt); frozen oracles under mcp-server/packages/agentstream/fixtures/claude/; live-executor composition binds harness=claude to Claude driver with mocked subprocess in CI; README pins CLI version and documents dry-run vs fixture-gated live; CI stays fixture-only."
+    non_goals:
+      - "--agent-path as harness selector"
+      - "Bootstrap Windows/symlink/skills re-root (REQ-TIED_CLAUDE_BOOTSTRAP_OPS)"
+      - "Live Claude subprocess in CI"
+      - "Mode B adversarial inquiry TypeScript path fix"
+      - "Silent rewrite of closed parent Tracker or SC-CLAUDE-P2 satisfaction text"
+    success_criteria:
+      - "--agent-path never selects Claude harness"
+      - "CITDP LEAP note records SC-CLAUDE-P2 live ownership transfer via related_to"
+      - "Dry-run --harness claude regression green"
+      - "Unit + composition suites green in @tied/agentstream npm test"
+  completion_criteria:
+    activation:
+      phase: "pre_implementation"
+      request_token: "REQ-TIED_CLAUDE_LIVE_DRIVER"
+      run_id: "live-driver-plan-stack-2026-09-23"
+    checklist_gate:
+      dispositions:
+        - "completed"
+        - "not_applicable"
+        - "pending"
+        - "waived"
+      fail_closed: true
+      phases:
+        - "close_out"
+        - "pre_implementation"
+        - "verification"
+    verification_gate_notes: "Plan-new-feature opens stack only; RED/code deferred to build-plan after pre_implementation gate."
+  evidence:
+    commands:
+      - "cd mcp-server/packages/agentstream && npm test"
+      - "pseudocode_validate for IMPL-TIED_CLAUDE_LIVE_DRIVER"
+      - "tied_checklist_gate_validate phase=pre_implementation"
+      - "tied_validate_consistency"
+    manifest_reference: "working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/"
+    proof_boundaries:
+      - "fixtures/claude/ is the only Claude oracle root"
+      - "No live Claude subprocess in CI for v1"
+      - "Parent closed Tracker/SC text not silently rewritten"
+  impact_analysis:
+    architecture:
+      - "ARCH-GOAGENT-EXECUTOR"
+      - "ARCH-TIED_CLAUDE_HARNESS"
+      - "ARCH-TIED_CLAUDE_LIVE_DRIVER"
+    impl_inventory:
+      - "IMPL-TIED_CLAUDE_LIVE_DRIVER"
+    implementation_decisions:
+      - "IMPL-GOAGENT-EXECUTOR"
+      - "IMPL-TIED_CLAUDE_HARNESS"
+      - "IMPL-TIED_CLAUDE_LIVE_DRIVER"
+    modules_or_boundaries: "mcp-server/packages/agentstream/src/ (harness-select.ts, new agent-driver/claude-driver modules, live-executor.ts, executor-run.ts); fixtures/claude/; agentstream README"
+    requirements:
+      - "REQ-GOAGENT-AGENT-EXECUTOR"
+      - "REQ-TIED_CLAUDE_HARNESS"
+      - "REQ-TIED_CLAUDE_LIVE_DRIVER"
+    tied_tokens_affected:
+      - "IMPL-TIED_CLAUDE_HARNESS"
+      - "REQ-GOAGENT-AGENT-EXECUTOR"
+      - "REQ-TIED_CLAUDE_HARNESS"
+    tied_tokens_new:
+      - "ARCH-TIED_CLAUDE_LIVE_DRIVER"
+      - "IMPL-TIED_CLAUDE_LIVE_DRIVER"
+      - "REQ-TIED_CLAUDE_LIVE_DRIVER"
+  leap_feedback:
+    divergences_from_analysis: null
+    parent_sc_claude_p2_live_ownership: "SC-CLAUDE-P2-AGENTSTREAM live clause ownership transfers to REQ-TIED_CLAUDE_LIVE_DRIVER via related_to REQ-TIED_CLAUDE_HARNESS. Closed parent Tracker and satisfaction wording must not be silently rewritten; optional later LEAP proposal may clarify parent SC text."
+    record_status: "implemented_close_out_2026-09-24"
+    tied_stack_updates_required: []
+  migration_phases:
+    - acceptance: "Composition mocked green; CI fixture-only proof boundary held"
+      deliverables:
+        - "BIND_LIVE_EXECUTOR_CLAUDE"
+        - "Dry-run and --agent-path regressions"
+        - "README CLI pin + dry vs live table"
+      name: "live-executor composition and docs"
+      phase: 2
+    - acceptance: "Oracle filenames and pin fields documented; no live Claude claimed"
+      deliverables:
+        - "Lock fixtures/claude/ directory"
+        - "working/REQ-TIED_CLAUDE_LIVE_DRIVER/phase0/cli_contract_draft.md"
+        - "working/REQ-TIED_CLAUDE_LIVE_DRIVER/phase0/fixture_inventory.md"
+      name: "Oracle and CLI contract discovery"
+      phase: 0
+    - acceptance: "Unit tests green against fixtures/claude/"
+      deliverables:
+        - "Frozen oracles"
+        - "PARSE_CLAUDE_STREAM / EXTRACT_CLAUDE_SESSION / CLAUDE_AGENT_DRIVER / SELECT_LIVE_DRIVER"
+      name: "Parsers and AgentDriver"
+      phase: 1
+  record_identity:
+    change_request_id: "REQ-TIED_CLAUDE_LIVE_DRIVER"
+    gate_policy: "advisory"
+    profile_depth: "integrated"
+    recorded_at: "2026-09-23"
+    title: "Claude live AgentDriver and stream oracles"
+  risk_analysis:
+    abuse_cases:
+      - "Copying Cursor oracles into fixtures/claude/"
+      - "Enabling live without session oracle"
+      - "Treating dry-run green as live parity"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Copying Cursor oracles as Claude fixtures"
+        - "Enabling live without session oracle"
+        - "Treating dry-run green as live parity"
+        - "Using --agent-path to select Claude harness"
+      depth_change_waiver:
+        approval: "sponsor-advisory-2026-09-23-live-driver"
+        expiry: "2026-12-31"
+        owner: "REQ-TIED_CLAUDE_LIVE_DRIVER program sponsor"
+        rationale: "tied_adversarial_inquiry_run Mode B accepts Ruby/Go paths only; TS agentstream live-driver work remains out of Mode B scope. Counterexamples stay in CITDP; do not silent-minimal without waiver."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "fixtures/claude/ directory not yet populated at plan-new-feature"
+        - "Mode B TS inquiry gap unchanged from parent"
+        - "Parent closed with dry-run only and residual live AgentDriver"
+      eligibility_triggers_matched:
+        - "external_cli_subprocess"
+        - "network_adjacent_operator_tooling"
+      evidence_references:
+        - "docs/comparisons/claude-code-tied-multi-harness-plan.md"
+        - "tied/implementation-decisions/IMPL-TIED_CLAUDE_LIVE_DRIVER-pseudocode.md"
+        - "working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/sub-adversarial-inquiry-pass-na.md"
+        - "working/REQ-TIED_CLAUDE_LIVE_DRIVER/PLAN.md"
+      falsification_questions:
+        - "Do Claude oracles parse without invoking a live Claude binary?"
+        - "Does README claim live CI when proof_boundary forbids it?"
+        - "Does SELECT_LIVE_DRIVER ever flip driver_kind based on agent_path alone?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: "integrated"
+      rationale: "Integrated depth required by eligibility; Mode B TS inquiry gap forces documented depth_change_waiver at plan gate while retaining counterexamples."
+      research_profile: "planning-only"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "cd mcp-server/packages/agentstream && npm test"
+        evidence_method: "Unit + composition tests against frozen Claude oracles with mocked subprocess"
+        limitation: "No live Claude subprocess in CI"
+        owner: "AI Agent"
+        rationale: "Fixture-gated path matches proof boundary"
+        result: "pass"
+        risk: "Stream schema drift or harness conflation"
+        threshold: "New Claude suites + parent dry-run regressions pass"
+        waiver:
+          expiry: "~"
+          owner: "~"
+          reason: "~"
+          required: "false"
+    quality_profiles:
+      - "baseline-functional"
+    residual_risk:
+      expiry: "2026-12-31"
+      owner: "REQ-TIED_CLAUDE_LIVE_DRIVER program sponsor"
+      summary: "Live Claude subprocess behavior remains operator-manual until optional future smoke; Mode B integrated inquiry activation deferred for TS paths."
+    risks:
+      - description: "--agent-path conflated with harness"
+        id: "RISK-LIVE-004"
+        likelihood: "Medium"
+        mitigation: "Regression tests from parent Phase 2; SELECT_LIVE_DRIVER ignores agent_path for driver_kind"
+      - description: "Claude stream schema drift vs Cursor stream-json"
+        id: "RISK-LIVE-001"
+        likelihood: "High"
+        mitigation: "Pinned CLI; separate oracles under fixtures/claude/; schema golden unit tests"
+      - description: "Over-claim parent SC-CLAUDE-P2 live clause"
+        id: "RISK-LIVE-005"
+        likelihood: "Medium"
+        mitigation: "related_to + CITDP LEAP note only; no silent parent Tracker rewrite"
+      - description: "Premature live-enabled documentation"
+        id: "RISK-LIVE-002"
+        likelihood: "Medium"
+        mitigation: "README dry-vs-live table; CITDP proof boundary no live Claude in CI"
+      - description: "Session chain / resume mismatch"
+        id: "RISK-LIVE-003"
+        likelihood: "Medium"
+        mitigation: "Dedicated session oracle + composition test"
+    scenarios:
+      - expected: "Assistant and session oracles parse without live subprocess"
+        name: "Oracle parse"
+      - expected: "harness=claude selects Claude driver; cursor path unchanged"
+        name: "Composition bind"
+      - expected: "Parent dry-run --harness claude remains green"
+        name: "Dry-run regression"
+  tdd_sequence:
+    phases:
+      - name: "Composition"
+        sequence: "RED BIND_LIVE_EXECUTOR_CLAUDE with mocked launch_fn; assert shared receipt; Cursor path unchanged; dry-run and --agent-path regressions."
+      - name: "Docs"
+        sequence: "README CLI pin + dry vs live table; no live CI claim."
+      - name: "Phase 0 discovery"
+        sequence: "Promote contract rows; lock fixtures/claude/ inventory; fill CLI pin candidate — no production agentstream edits required for Phase 0 exit."
+      - name: "Unit RED/GREEN"
+        sequence: "RED PARSE_CLAUDE_STREAM + EXTRACT_CLAUDE_SESSION against oracles; RED SELECT_LIVE_DRIVER + CLAUDE_AGENT_DRIVER; GREEN parsers and driver."

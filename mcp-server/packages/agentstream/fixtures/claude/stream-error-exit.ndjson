@@ -1,0 +1,3 @@
+{"type":"assistant","message":{"content":[{"type":"text","text":"Partial output before failure."}]}}
+{"type":"error","code":"permission_denied","message":"User denied tool use"}
+{"type":"result","subtype":"error","is_error":true,"exit_code":1}

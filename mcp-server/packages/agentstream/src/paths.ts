@@ -29,3 +29,9 @@ export function oracleFixturesDirFromModule(moduleUrl: string): string {
   const here = fileURLToPath(moduleUrl);
   return path.join(path.dirname(here), "..", "testdata", "oracle");
 }
+
+/** Claude stream oracles — [REQ-TIED_CLAUDE_LIVE_DRIVER] fixtures/claude/. */
+export function claudeFixturesDirFromModule(moduleUrl: string): string {
+  const here = fileURLToPath(moduleUrl);
+  return path.join(path.dirname(here), "..", "fixtures", "claude");
+}

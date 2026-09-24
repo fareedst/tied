@@ -1,0 +1,217 @@
+{
+  "schema_version": "layer-b-pseudocode-validator.v1",
+  "ok": true,
+  "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+  "blocks": [
+    {
+      "name": "PIN_CLAUDE_CLI_CONTRACT",
+      "line": 13,
+      "token_refs": [
+        "ARCH-TIED_CLAUDE_LIVE_DRIVER",
+        "IMPL-TIED_CLAUDE_LIVE_DRIVER",
+        "REQ-TIED_CLAUDE_LIVE_DRIVER"
+      ],
+      "contract_fields": [
+        "DATA",
+        "DATA_TRANSITION",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "PARSE_CLAUDE_STREAM",
+      "line": 38,
+      "token_refs": [
+        "ARCH-TIED_CLAUDE_LIVE_DRIVER",
+        "IMPL-TIED_CLAUDE_LIVE_DRIVER",
+        "REQ-TIED_CLAUDE_LIVE_DRIVER"
+      ],
+      "contract_fields": [
+        "DATA",
+        "DATA_TRANSITION",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "EXTRACT_CLAUDE_SESSION",
+      "line": 65,
+      "token_refs": [
+        "ARCH-TIED_CLAUDE_LIVE_DRIVER",
+        "IMPL-TIED_CLAUDE_LIVE_DRIVER",
+        "REQ-GOAGENT-AGENT-EXECUTOR",
+        "REQ-TIED_CLAUDE_LIVE_DRIVER"
+      ],
+      "contract_fields": [
+        "DATA",
+        "DATA_TRANSITION",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "CLAUDE_AGENT_DRIVER_LAUNCH_AND_PARSE",
+      "line": 88,
+      "token_refs": [
+        "ARCH-TIED_CLAUDE_LIVE_DRIVER",
+        "IMPL-TIED_CLAUDE_LIVE_DRIVER",
+        "REQ-GOAGENT-AGENT-EXECUTOR",
+        "REQ-TIED_CLAUDE_HARNESS",
+        "REQ-TIED_CLAUDE_LIVE_DRIVER"
+      ],
+      "contract_fields": [
+        "DATA",
+        "DATA_TRANSITION",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "SELECT_LIVE_DRIVER",
+      "line": 120,
+      "token_refs": [
+        "ARCH-TIED_CLAUDE_LIVE_DRIVER",
+        "IMPL-TIED_CLAUDE_LIVE_DRIVER",
+        "REQ-GOAGENT-AGENT-EXECUTOR",
+        "REQ-TIED_CLAUDE_HARNESS",
+        "REQ-TIED_CLAUDE_LIVE_DRIVER"
+      ],
+      "contract_fields": [
+        "DATA",
+        "DATA_TRANSITION",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "BIND_LIVE_EXECUTOR_CLAUDE",
+      "line": 146,
+      "token_refs": [
+        "ARCH-TIED_CLAUDE_LIVE_DRIVER",
+        "IMPL-TIED_CLAUDE_LIVE_DRIVER",
+        "REQ-GOAGENT-AGENT-EXECUTOR",
+        "REQ-TIED_CLAUDE_LIVE_DRIVER"
+      ],
+      "contract_fields": [
+        "DATA",
+        "DATA_TRANSITION",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    }
+  ],
+  "dependencies": [],
+  "coverage": [
+    {
+      "block": "PIN_CLAUDE_CLI_CONTRACT",
+      "branch_lines": [
+        25
+      ],
+      "failure_modes": [
+        "OUTPUT: pinned_contract | { error: CONTRACT_INCOMPLETE }",
+        "RETURN { error: CONTRACT_INCOMPLETE }",
+        "# PRE: Frozen files under fixtures/claude/ (e.g. stream-assistant-basic.ndjson, stream-error-exit.ndjson).",
+        "# POST: Parsed events expose assistant/thinking content and failure/exit metadata without invoking live subprocess."
+      ],
+      "references": []
+    },
+    {
+      "block": "PARSE_CLAUDE_STREAM",
+      "branch_lines": [
+        50,
+        53
+      ],
+      "failure_modes": [
+        "OUTPUT: { events[], exit_metadata } | { error: STREAM_SCHEMA_DRIFT | STREAM_PARSE_ERROR }",
+        "POST: success => events cover assistant and/or thinking content when present in oracle; exit_metadata populated for error oracles",
+        "RETURN { error: STREAM_PARSE_ERROR }",
+        "RETURN { error: STREAM_SCHEMA_DRIFT }"
+      ],
+      "references": []
+    },
+    {
+      "block": "EXTRACT_CLAUDE_SESSION",
+      "branch_lines": [
+        76
+      ],
+      "failure_modes": [
+        "OUTPUT: session_id | { error: SESSION_ID_MISSING | SESSION_CHAIN_MISMATCH }",
+        "RETURN { error: SESSION_ID_MISSING }"
+      ],
+      "references": []
+    },
+    {
+      "block": "CLAUDE_AGENT_DRIVER_LAUNCH_AND_PARSE",
+      "branch_lines": [
+        101,
+        105,
+        108
+      ],
+      "failure_modes": [
+        "OUTPUT: { events[], session_id, exit_metadata, receipt } | { error: LIVE_WITHOUT_FIXTURE_PARITY | STREAM_SCHEMA_DRIFT | SESSION_CHAIN_BREAK | MCP_LOAD_FAILURE }",
+        "RETURN { error: LIVE_WITHOUT_FIXTURE_PARITY }",
+        "IF parsed is error THEN",
+        "IF session_id is error AND turn_spec.requires_session THEN",
+        "RETURN { error: SESSION_CHAIN_BREAK }"
+      ],
+      "references": []
+    },
+    {
+      "block": "SELECT_LIVE_DRIVER",
+      "branch_lines": [
+        130,
+        133,
+        135
+      ],
+      "failure_modes": [
+        "OUTPUT: { driver_kind: cursor | claude | none, agent_path_override } | { error: AGENT_PATH_MISUSED_AS_HARNESS }"
+      ],
+      "references": []
+    },
+    {
+      "block": "BIND_LIVE_EXECUTOR_CLAUDE",
+      "branch_lines": [
+        159,
+        161,
+        163,
+        165
+      ],
+      "failure_modes": [
+        "OUTPUT: bound_executor | { error: DRIVER_BIND_FAILURE }",
+        "RETURN { error: DRIVER_BIND_FAILURE }"
+      ],
+      "references": []
+    }
+  ],
+  "diagnostics": []
+}

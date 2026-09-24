@@ -1,0 +1,32 @@
+IMPL-TIED_CLAUDE_LIVE_DRIVER:
+  category: "Implementation"
+  code_locations:
+    files:
+      - description: "AgentDriver Claude module, parsers, live-executor/factory binding"
+        path: "mcp-server/packages/agentstream/src/"
+      - description: "CLI version pin and dry-vs-live table"
+        path: "mcp-server/packages/agentstream/README.md"
+      - description: "Frozen Claude stream/session oracles and capture README"
+        path: "mcp-server/packages/agentstream/fixtures/claude/"
+      - description: "Parent SELECT_AGENT_HARNESS dry-run regression surface"
+        path: "mcp-server/packages/agentstream/src/harness-select.ts"
+    functions: []
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_CLAUDE_LIVE_DRIVER-pseudocode.md"
+  metadata:
+    created:
+      author: "plan-new-feature"
+      date: "2026-09-23"
+    last_updated:
+      author: "plan-close-out"
+      date: "2026-09-24"
+      reason: "Verification-gated close-out aligned with index"
+  name: "Claude live AgentDriver implementation"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_CLAUDE_LIVE_DRIVER"
+    implementation:
+      - "IMPL-TIED_CLAUDE_LIVE_DRIVER"
+    requirements:
+      - "REQ-TIED_CLAUDE_LIVE_DRIVER"
+    tests: []

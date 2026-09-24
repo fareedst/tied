@@ -1,0 +1,64 @@
+ARCH-TIED_CLAUDE_LIVE_DRIVER:
+  alternatives_considered:
+    - cons:
+        - "Non-deterministic, credential and network dependent"
+      name: "Live Claude subprocess in CI for v1"
+      pros:
+        - "Stronger end-to-end confidence"
+      rejected_reason: "Proof boundary: fixture-only CI; optional manual smoke documented in README."
+    - cons:
+        - "Schema drift risk (RISK-LIVE-001)"
+      name: "Reuse Cursor stream oracles for Claude"
+      pros:
+        - "Less fixture authoring"
+      rejected_reason: "Sponsor locked separate Claude stream oracles under fixtures/claude/."
+    - cons:
+        - "Breaks Cursor override semantics"
+      name: "Treat --agent-path as Claude harness selector"
+      pros:
+        - "Minimal CLI surface"
+      rejected_reason: "Parent and this REQ non-goal; dedicated --harness claude only."
+  category: "Architecture"
+  decision: "Extend the parent dual-harness AgentDriver boundary with a Claude-specific driver module and frozen oracles under mcp-server/packages/agentstream/fixtures/claude/. Live harness=claude routes through SELECT_LIVE_DRIVER into CLAUDE_AGENT_DRIVER; harness=cursor retains existing live-executor/executor-run. Dry-run SELECT_AGENT_HARNESS from parent remains regression-only. --agent-path stays Cursor executable override. CI never requires a live Claude subprocess; operators enable live only after fixture gates."
+  implementation_approach:
+    details:
+      - "BIND_LIVE_EXECUTOR_CLAUDE composes live path without changing Cursor driver for cursor profile."
+      - "CLAUDE_AGENT_DRIVER implements AgentDriver; SELECT_LIVE_DRIVER maps harness profile to driver."
+      - "Parent dry-run SELECT_AGENT_HARNESS stays green as regression."
+      - "PARSE_CLAUDE_STREAM and EXTRACT_CLAUDE_SESSION are oracle-driven pure parsers."
+      - "PIN_CLAUDE_CLI_CONTRACT documents version, permissions, MCP load expectations."
+    summary: "Oracle-first TDD: parse/session units against frozen NDJSON, then driver factory, then live-executor composition with mocked subprocess, then README pin and dry-vs-live table."
+  metadata:
+    created:
+      author: "plan-new-feature"
+      date: "2026-09-23"
+    last_updated:
+      author: "plan-new-feature"
+      date: "2026-09-23"
+      reason: "Initial ARCH for live driver follow-on"
+  name: "Claude AgentDriver and oracle architecture"
+  rationale:
+    benefits:
+      - "Clear module boundaries for RED/GREEN"
+      - "LEAP-safe ownership transfer for Phase 2 live clause"
+      - "Shared receipt shape across harnesses"
+    problems_solved:
+      - "Risk of documenting live enablement without fixture parity"
+      - "Undefined Claude stream/session contract for agentstream"
+    why: "Live Claude automation was deferred from closed parent; architecture must isolate Claude stream contracts while preserving Cursor reference path and parent dry-run harness select."
+  related_decisions:
+    depends_on:
+      - "ARCH-GOAGENT-EXECUTOR"
+      - "ARCH-TIED_CLAUDE_HARNESS"
+    see_also:
+      - "IMPL-GOAGENT-EXECUTOR"
+      - "IMPL-TIED_CLAUDE_HARNESS"
+    supersedes: []
+  status: "Draft"
+  traceability:
+    architecture:
+      - "ARCH-TIED_CLAUDE_LIVE_DRIVER"
+    implementation:
+      - "IMPL-TIED_CLAUDE_LIVE_DRIVER"
+    requirements:
+      - "REQ-TIED_CLAUDE_LIVE_DRIVER"

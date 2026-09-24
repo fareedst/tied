@@ -60,6 +60,8 @@ working/**/gates/
 !working/REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/**
 !working/REQ-TIED_CLAUDE_HARNESS/gates/
 !working/REQ-TIED_CLAUDE_HARNESS/gates/**
+!working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/
+!working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/**
 # PSA timestamped gate receipts (regenerate per run-close-out-gates.mjs; keep adversarial gate-result.json via patterns above)
 working/REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/gate-*-result.json
 # Adherence reconcile output (regenerate per tied_adherence_reconcile_run)
@@ -88,6 +90,9 @@ working/**/close_out-*.json
 !working/REQ-TIED_CLAUDE_HARNESS/gates/close_out-*.json
 !working/REQ-TIED_CLAUDE_HARNESS/gates/pre_implementation-*.json
 !working/REQ-TIED_CLAUDE_HARNESS/gates/verification-*.json
+!working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/close_out-*.json
+!working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/pre_implementation-*.json
+!working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/verification-*.json
 # Build-plan change-ID scratch (tracker, CITDP, gate receipts, remediation — regenerate per build-plan)
 working/DOC-*/
 # Layer C pseudo-code static analysis gate reports (regenerate per gate run)
@@ -114,6 +119,9 @@ working/**/evidence/request-evidence-envelope.v1.json
 !working/REQ-TIED_CLAUDE_HARNESS/evidence/not-applicable-receipt.v1.json
 !working/REQ-TIED_CLAUDE_HARNESS/evidence/gate-close-out-payload.json
 !working/REQ-TIED_CLAUDE_HARNESS/evidence/gate-verify-payload.json
+!working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/request-evidence-envelope.v1.json
+!working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/verification-evidence-manifest.v1.json
+!working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/not-applicable-receipt.v1.json
 # CITDP pre-persist scratch (canonical record under tied/citdp/)
 working/**/CITDP-REQ-*-diff-or-stage.yaml
 # Quality profile gate receipts (regenerate per quality_security_profile_validate)
