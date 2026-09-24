@@ -99,6 +99,7 @@ execution_evidence:
     - user-facing-release-notes
     - gitignore-close-out-hygiene
     - sub-close-out-evidence-sync
+    - traceable-commit
   envelope_path: working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/request-evidence-envelope.v1.json
   evidence_refs_format: |
     Typed evidence_refs for completed dispositions (RESOLVE_EVIDENCE_REFS at write time):
@@ -1372,12 +1373,18 @@ steps:
     title: Commit per PROC-COMMIT_MESSAGES; no push unless asked
     tracking:
       consideration_before_proceeding: >-
-        sub-vocabulary-sync (VALIDATE) passed or immature-client deferral noted; commit created; format per
-        PROC-COMMIT_MESSAGES; tokens in body/footer.
+        sub-vocabulary-sync (VALIDATE) passed; traceable commit 3b471a7 on main; sponsor-authorized push pending same
+        turn.
+      evidence_refs:
+        - kind: file_path
+          path: CHANGELOG.md
+        - kind: gate_receipt
+          path: working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/close_out-2026-09-24T17-25-52-156Z.json
       retry_count: '0'
       returned_from: []
       state_history: []
-      status: pending
+      status: completed
+    disposition: completed
   - flow:
       branches: []
       calls:
