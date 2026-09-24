@@ -70,9 +70,9 @@ CITDP-REQ-TIED_CLAUDE_BOOTSTRAP_OPS:
       - "IMPL-TIED_CLAUDE_BOOTSTRAP_OPS"
       - "REQ-TIED_CLAUDE_BOOTSTRAP_OPS"
   leap_feedback:
-    divergences_from_analysis: null
+    divergences_from_analysis: "B3 CONFIG_SKILLS_REROOT deferred; B4 adherence N/A; windows_copy_proven_in_ci remains false (Unix unit + smoke asserts; global flip awaits Windows CI green)."
     parent_phase13_deferrals: "Phase 1 Windows Claude asserts and Phase 3 optional ergonomics (symlink unlock, skills/ re-root, adherence, comparison Current) owned by this REQ; do not silently rewrite closed parent Tracker. Live AgentDriver remains REQ-TIED_CLAUDE_LIVE_DRIVER."
-    record_status: "plan_stack_open"
+    record_status: "close_out_ready"
     tied_stack_updates_required: []
   migration_phases:
     - acceptance: "Assert expectations documented before RED on windows-bootstrap-smoke.cmd"

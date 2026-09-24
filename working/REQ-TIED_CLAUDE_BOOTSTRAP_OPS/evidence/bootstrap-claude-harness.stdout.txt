@@ -1,0 +1,111 @@
+Initialized /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-yaSJ36/.mcp.json mcpServers.tied-yaml (TIED_MCP dist + TIED_MCP_HARNESS=claude).
+Merged /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-TzpSWc/.mcp.json mcpServers.tied-yaml (safe merge; foreign servers preserved).
+Initialized /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-iMtDwc/.mcp.json mcpServers.tied-yaml (TIED_MCP dist + TIED_MCP_HARNESS=claude).
+Copied Claude skills into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-cZOedH/.claude/skills (copy default).
+Copied Claude skills into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-G4S5BL/.claude/skills (copy default).
+Copied tied-yaml Cursor skill into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-SXJRr5/.cursor/skills/tied-yaml (from /Users/fareed/Documents/dev/chatgpt/stdd/tools/bundled-tied-yaml-skill).
+Copied prompt-type Cursor skills into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-SXJRr5/.cursor/skills (from /Users/fareed/Documents/dev/chatgpt/stdd/tools/bundled-prompt-type-skills).
+Copied Claude skills into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-SXJRr5/.claude/skills (copy default).
+Initialized /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-SXJRr5/.mcp.json mcpServers.tied-yaml (TIED_MCP dist + TIED_MCP_HARNESS=claude).
+Copied optional CLAUDE.md template into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-SXJRr5.
+Copied 2 of 2 base files into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-SXJRr5.
+Copied 4 of 4 methodology index YAMLs into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-SXJRr5/tied/methodology (overwritten).
+WARNING: Client-modified managed copy detected: /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-SXJRr5/tied/methodology/vocab
+Copied 14 of 14 methodology vocabulary file(s) into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-SXJRr5/tied/methodology/vocab (overwritten).
+Created project index /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-SXJRr5/tied/requirements.yaml (empty).
+Created project index /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-SXJRr5/tied/architecture-decisions.yaml (empty).
+Created project index /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-SXJRr5/tied/implementation-decisions.yaml (empty).
+Created project index /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-SXJRr5/tied/semantic-tokens.yaml (empty).
+Created 4 of 4 project index file(s) (rest already existed).
+Created client constitution example /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-SXJRr5/tied/constitution.example.yaml.
+Copied 41 of 41 methodology doc(s) into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-SXJRr5/tied/docs.
+Copied sidecar template into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-SXJRr5/templates/impl-essence-pseudocode-template.md.
+Copied 15 of 15 methodology implementation decision(s) into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-SXJRr5/tied/methodology/implementation-decisions (overwritten).
+Copied 15 methodology implementation pseudo-code sidecar(s) into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-SXJRr5/tied/methodology/implementation-decisions (overwritten).
+Copied 8 of 8 methodology architecture decision(s) into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-SXJRr5/tied/methodology/architecture-decisions (overwritten).
+Copied 7 of 7 methodology requirement(s) into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-SXJRr5/tied/methodology/requirements (overwritten).
+MUST verify fidelity research methodology artifacts before completion.
+MUST verify fidelity research methodology artifacts: complete.
+CAN run structural validation: TIED_BASE_PATH=/private/var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-SXJRr5/tied /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-SXJRr5/.cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency.
+CAN run the read-only audit: /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-SXJRr5/tied/docs/pseudocode-fidelity-audit-agent-prompt.md (Stages 0-4).
+CAN refresh methodology vocabulary with: copy_files --merge-vocab /path/to/client.
+MUST verify adversarial inquiry methodology artifacts before completion.
+MUST verify adversarial inquiry methodology artifacts: complete.
+CAN run the read-only inquiry: /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-SXJRr5/tied/docs/adversarial-inquiry-adoption.md.
+MUST verify feature orchestration methodology artifacts before completion.
+MUST verify feature orchestration methodology artifacts: complete.
+CAN run onboarding smoke: (cd /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-SXJRr5 && .cursor/skills/tied-yaml/scripts/tied.sh init).
+CAN run structural validation: TIED_BASE_PATH=/private/var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-SXJRr5/tied /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-SXJRr5/.cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency.
+MUST verify inherited methodology detail-file integrity before completion.
+MUST verify inherited methodology detail-file integrity: complete.
+MUST verify inherited methodology pseudo-code token references before completion.
+MUST verify inherited methodology pseudo-code token references: complete.
+Copied tied-yaml Cursor skill into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-bSkwsT/.cursor/skills/tied-yaml (from /Users/fareed/Documents/dev/chatgpt/stdd/tools/bundled-tied-yaml-skill).
+Copied prompt-type Cursor skills into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-bSkwsT/.cursor/skills (from /Users/fareed/Documents/dev/chatgpt/stdd/tools/bundled-prompt-type-skills).
+Copied Claude skills into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-bSkwsT/.claude/skills (copy default).
+Initialized /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-bSkwsT/.mcp.json mcpServers.tied-yaml (TIED_MCP dist + TIED_MCP_HARNESS=claude).
+Copied optional CLAUDE.md template into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-bSkwsT.
+Copied 2 of 2 base files into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-bSkwsT.
+Copied 4 of 4 methodology index YAMLs into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-bSkwsT/tied/methodology (overwritten).
+WARNING: Client-modified managed copy detected: /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-bSkwsT/tied/methodology/vocab
+Copied 14 of 14 methodology vocabulary file(s) into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-bSkwsT/tied/methodology/vocab (overwritten).
+Created project index /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-bSkwsT/tied/requirements.yaml (empty).
+Created project index /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-bSkwsT/tied/architecture-decisions.yaml (empty).
+Created project index /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-bSkwsT/tied/implementation-decisions.yaml (empty).
+Created project index /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-bSkwsT/tied/semantic-tokens.yaml (empty).
+Created 4 of 4 project index file(s) (rest already existed).
+Created client constitution example /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-bSkwsT/tied/constitution.example.yaml.
+Copied 41 of 41 methodology doc(s) into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-bSkwsT/tied/docs.
+Copied sidecar template into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-bSkwsT/templates/impl-essence-pseudocode-template.md.
+Copied 15 of 15 methodology implementation decision(s) into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-bSkwsT/tied/methodology/implementation-decisions (overwritten).
+Copied 15 methodology implementation pseudo-code sidecar(s) into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-bSkwsT/tied/methodology/implementation-decisions (overwritten).
+Copied 8 of 8 methodology architecture decision(s) into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-bSkwsT/tied/methodology/architecture-decisions (overwritten).
+Copied 7 of 7 methodology requirement(s) into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-bSkwsT/tied/methodology/requirements (overwritten).
+MUST verify fidelity research methodology artifacts before completion.
+MUST verify fidelity research methodology artifacts: complete.
+CAN run structural validation: TIED_BASE_PATH=/private/var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-bSkwsT/tied /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-bSkwsT/.cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency.
+CAN run the read-only audit: /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-bSkwsT/tied/docs/pseudocode-fidelity-audit-agent-prompt.md (Stages 0-4).
+CAN refresh methodology vocabulary with: copy_files --merge-vocab /path/to/client.
+MUST verify adversarial inquiry methodology artifacts before completion.
+MUST verify adversarial inquiry methodology artifacts: complete.
+CAN run the read-only inquiry: /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-bSkwsT/tied/docs/adversarial-inquiry-adoption.md.
+MUST verify feature orchestration methodology artifacts before completion.
+MUST verify feature orchestration methodology artifacts: complete.
+CAN run onboarding smoke: (cd /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-bSkwsT && .cursor/skills/tied-yaml/scripts/tied.sh init).
+CAN run structural validation: TIED_BASE_PATH=/private/var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-bSkwsT/tied /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-bSkwsT/.cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency.
+MUST verify inherited methodology detail-file integrity before completion.
+MUST verify inherited methodology detail-file integrity: complete.
+MUST verify inherited methodology pseudo-code token references before completion.
+MUST verify inherited methodology pseudo-code token references: complete.
+Symlinked Claude prompt-type skills into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-Y19WTa/.claude/skills (tied-yaml copied for TIED_REPO_ROOT patch).
+▶ PRESERVE_CURSOR_MCP_INIT [REQ-TIED_CLAUDE_HARNESS]
+  ✔ does not mutate existing .cursor/mcp.json (create-only policy) (0.915708ms)
+✔ PRESERVE_CURSOR_MCP_INIT [REQ-TIED_CLAUDE_HARNESS] (1.509333ms)
+▶ INITIALIZE_CLAUDE_MCP_CONFIG [REQ-TIED_CLAUDE_HARNESS]
+  ✔ creates repo-root .mcp.json with tied-yaml and TIED_MCP_HARNESS=claude when absent (0.858ms)
+  ✔ merges tied-yaml only when foreign servers exist (1.009375ms)
+  ✔ noop when tied-yaml already present (0.472208ms)
+✔ INITIALIZE_CLAUDE_MCP_CONFIG [REQ-TIED_CLAUDE_HARNESS] (2.433583ms)
+▶ INSTALL_CLAUDE_SKILLS [REQ-TIED_CLAUDE_HARNESS]
+  ✔ copy-default installs bundled prompt-type and tied-yaml skills under .claude/skills/ (10.732084ms)
+  ✔ preserves unrelated skills already under .claude/skills/ (8.146084ms)
+✔ INSTALL_CLAUDE_SKILLS [REQ-TIED_CLAUDE_HARNESS] (18.970708ms)
+▶ BOOTSTRAP_TIED dual harness binding [REQ-TIED_CLAUDE_HARNESS]
+  ✔ orchestration installs Claude artifacts and preserves existing .cursor/mcp.json (39.013708ms)
+✔ BOOTSTRAP_TIED dual harness binding [REQ-TIED_CLAUDE_HARNESS] (39.089458ms)
+▶ ASSERT_WINDOWS_BOOTSTRAP_CLAUDE [REQ-TIED_CLAUDE_BOOTSTRAP_OPS]
+  ✔ RED: fails when .claude/skills and repo-root .mcp.json are absent (0.2335ms)
+  ✔ GREEN: passes after bootstrapTied dual-harness install (34.579166ms)
+✔ ASSERT_WINDOWS_BOOTSTRAP_CLAUDE [REQ-TIED_CLAUDE_BOOTSTRAP_OPS] (34.8865ms)
+▶ GATE_SYMLINK_ON_WINDOWS_PROOF [REQ-TIED_CLAUDE_BOOTSTRAP_OPS]
+  ✔ RED: rejects symlink opt-in without CI Windows copy proof (0.360541ms)
+  ✔ GREEN: allows Unix symlink opt-in when windows_copy_proven_in_ci is true (2.127375ms)
+✔ GATE_SYMLINK_ON_WINDOWS_PROOF [REQ-TIED_CLAUDE_BOOTSTRAP_OPS] (2.53225ms)
+ℹ tests 11
+ℹ suites 6
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 143.464584

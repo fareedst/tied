@@ -14,6 +14,10 @@ import { installClaudeSkills } from "./skills.mjs";
 import { bootstrapTied } from "./bootstrap.mjs";
 import { manifestPaths, TIED_REPO_ROOT } from "./constants.mjs";
 import { assertMcpPrerequisite } from "./mcp-config.mjs";
+import {
+  assertWindowsBootstrapClaude,
+  WINDOWS_CLAUDE_SMOKE_FAIL,
+} from "./assert-windows-bootstrap-claude.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -142,8 +146,34 @@ describe("BOOTSTRAP_TIED dual harness binding [REQ-TIED_CLAUDE_HARNESS]", () => 
   });
 });
 
-describe("INSTALL_CLAUDE_SKILLS symlink gate [REQ-TIED_CLAUDE_HARNESS]", () => {
-  it("rejects symlink opt-in without CI Windows copy proof", () => {
+describe("ASSERT_WINDOWS_BOOTSTRAP_CLAUDE [REQ-TIED_CLAUDE_BOOTSTRAP_OPS]", () => {
+  // [IMPL-TIED_CLAUDE_BOOTSTRAP_OPS] [ARCH-TIED_CLAUDE_BOOTSTRAP_OPS] [REQ-TIED_CLAUDE_BOOTSTRAP_OPS]
+  // How: Assert Claude skills inventory and repo-root .mcp.json after Windows bootstrap (shared with smoke .cmd).
+
+  it("RED: fails when .claude/skills and repo-root .mcp.json are absent", () => {
+    const clientRoot = tempClient();
+    const skills = assertWindowsBootstrapClaude(clientRoot);
+    assert.equal(skills.ok, false);
+    assert.equal(skills.message, WINDOWS_CLAUDE_SMOKE_FAIL.SKILLS_DIR);
+  });
+
+  it("GREEN: passes after bootstrapTied dual-harness install", () => {
+    const clientRoot = tempClient();
+    const mcpPath = path.join(clientRoot, ".cursor", "mcp.json");
+    fs.mkdirSync(path.dirname(mcpPath), { recursive: true });
+    fs.writeFileSync(mcpPath, `${JSON.stringify({ mcpServers: {} }, null, 2)}\n`, "utf8");
+
+    assertMcpPrerequisite(TIED_REPO_ROOT);
+    bootstrapTied(clientRoot, { env: process.env });
+
+    const result = assertWindowsBootstrapClaude(clientRoot);
+    assert.equal(result.ok, true);
+    assert.deepEqual(result.asserts, ["claude_skills", "mcp_json_tied_yaml"]);
+  });
+});
+
+describe("GATE_SYMLINK_ON_WINDOWS_PROOF [REQ-TIED_CLAUDE_BOOTSTRAP_OPS]", () => {
+  it("RED: rejects symlink opt-in without CI Windows copy proof", () => {
     const clientRoot = tempClient();
     const paths = manifestPaths();
     paths.tiedRepoRoot = TIED_REPO_ROOT;
@@ -156,5 +186,27 @@ describe("INSTALL_CLAUDE_SKILLS symlink gate [REQ-TIED_CLAUDE_HARNESS]", () => {
         }),
       /SYMLINK_WITHOUT_CI_WINDOWS_PROOF/,
     );
+  });
+
+  it("GREEN: allows Unix symlink opt-in when windows_copy_proven_in_ci is true", () => {
+    if (process.platform === "win32") {
+      return;
+    }
+    const clientRoot = tempClient();
+    const paths = manifestPaths();
+    paths.tiedRepoRoot = TIED_REPO_ROOT;
+
+    const result = installClaudeSkills(clientRoot, paths, {
+      symlink_unix_opt_in: true,
+      windows_copy_proven_in_ci: true,
+    });
+
+    assert.ok(result.installedPaths.length > 0);
+    const buildPlanDest = path.join(clientRoot, ".claude", "skills", "build-plan");
+    assert.ok(fs.existsSync(buildPlanDest));
+    assert.ok(fs.lstatSync(buildPlanDest).isSymbolicLink());
+    const tiedYamlDest = path.join(clientRoot, ".claude", "skills", "tied-yaml");
+    assert.ok(fs.existsSync(tiedYamlDest));
+    assert.equal(fs.lstatSync(tiedYamlDest).isSymbolicLink(), false);
   });
 });

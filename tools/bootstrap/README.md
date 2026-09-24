@@ -44,7 +44,7 @@ Skip flags: `--skip-lint`, `--skip-mcp-enable`, `--skip-git`, `--force-mcp-enabl
 From the TIED repo on Windows (after `mcp-server` build):
 
 ```cmd
-scripts\windows-bootstrap-smoke.cmd
+scripts\windows-bootstrap-smoke.cmd (includes Claude asserts via `tools/bootstrap/assert-windows-bootstrap-claude.mjs` — [REQ-TIED_CLAUDE_BOOTSTRAP_OPS])
 ```
 
 Runs `copy_files.cmd` into a temp client dir, `lint_yaml.cmd -F tied`, and a direct `copy-files.mjs` invoke. Exit code 0 = pass.

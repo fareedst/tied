@@ -73,6 +73,8 @@
 | **strangler slice order** | migration phase order (alone) | Phase 3b port sequence 2a executor dry-run → 2b pipeline → 2c checklist render → 2d adherence; sponsor-confirmed [REQ-TIED_UNIFIED_TOOLCHAIN] |
 | **shared bootstrap engine** | Node copy script (alone) | `tools/bootstrap/` Node implementation of BOOTSTRAP_TIED; sole bootstrap logic owner |
 | **bootstrap manifest** | inline bash arrays (alone) | `tools/bootstrap/manifest.json` single source for DOCS_TO_COPY, skill dirs, verify lists |
+| **windows_copy_proven_in_ci** | Windows symlink unlock, CI copy proof flag | Boolean gate on `installClaudeSkills` (`skills.mjs`): Unix symlink opt-in throws `SYMLINK_WITHOUT_CI_WINDOWS_PROOF` until Windows CI proves `.claude/skills/` copy path. Flip only after smoke asserts Claude artifacts. Owner: [REQ-TIED_CLAUDE_BOOTSTRAP_OPS](../requirements/REQ-TIED_CLAUDE_BOOTSTRAP_OPS.yaml). |
+| **skills/ re-root** | shared skills folder, dual-harness skills root | Optional Phase-3-style relocate of managed skills to repo-root `skills/` for both harnesses; ship only after Windows copy proof and ARCH decision. Owner: [REQ-TIED_CLAUDE_BOOTSTRAP_OPS](../requirements/REQ-TIED_CLAUDE_BOOTSTRAP_OPS.yaml) (slice B3; default off). |
 | **disposable TIED client** | throwaway demo project (alone) | Timestamped bootstrapped client under `TIED_TEST_ROOT/<unix-seconds>` for smoke and feature demos |
 | **new-tied-client** | make client script (alone) | Windows `scripts/new-tied-client.cmd` or Node `tools/bootstrap/new-tied-client.mjs`; explicit client directory pipeline |
 | **test-new-tied-client** | disposable client alias (alone) | Windows `scripts/test-new-tied-client.cmd`; creates disposable client via `CREATE_DISPOSABLE_TIED_CLIENT` |

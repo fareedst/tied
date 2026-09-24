@@ -1,0 +1,234 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-09-24T03:43:08.454Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-TIED_CLAUDE_BOOTSTRAP_OPS",
+    "project_id": "af8451e933f573ec",
+    "depth_tier": "minimal",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [],
+  "artifacts": [
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/pre_implementation-2026-09-24T03-31-35-474Z.json",
+      "content_hash": "sha256:7b7a6776169ff350a97979a28c298a9e24f4bda029f1bf7982bcc595cb9718f2",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/verification-2026-09-24T03-31-35-701Z.json",
+      "content_hash": "sha256:9f898ac36ac0795e77bc2d12cf18c1221e6a3092a340138c2415f168791c0907",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "tied/citdp/CITDP-REQ-TIED_CLAUDE_BOOTSTRAP_OPS.yaml",
+      "content_hash": "sha256:b7780d48d9f67f4454e61e1b089809f174c84faccd7a0a3039671e0e0fceffa1",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    },
+    {
+      "kind": "not_applicable_receipt",
+      "schema_version": "not-applicable-receipt.v1",
+      "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/not-applicable-receipt.v1.json",
+      "content_hash": "sha256:e686c002a38a3dc6e9753d475e4df7622783a0715a665f81f9f1e03637778151",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:e0678fb8a0ed59e5295485177ecf0e280918ac0f1dd62a0cb367790914b0682a",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/adherence-spike-na.md",
+      "content_hash": "sha256:527e40486cd590095f0d40838a3bd917df71cbd26ca345f59a92c34b1670b71f",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/b1-red-green-commands.md",
+      "content_hash": "sha256:28af40d89f5b65a6f26d73d97513a012cfa6208da40f60ea9cfa36b533ee2d7e",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/bootstrap-claude-harness.stderr.txt",
+      "content_hash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/bootstrap-claude-harness.stdout.txt",
+      "content_hash": "sha256:2d942970caf5e3ee4cb06b910a886578c2cbaa3aa8ef81d221330f1e136dfe70",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/claude-harness-test-stdout.txt",
+      "content_hash": "sha256:3aefe86c60d80bf7ee6ede409a8b9a979b089aea20fea40e315f77f8718bd8c3",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/gate-pre-implementation.md",
+      "content_hash": "sha256:5418bec37a8d6eb711c6862ed63ed8c15e03b2591712d8f7563723d6d3e100da",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/gate-verification-b1-slice.md",
+      "content_hash": "sha256:9613c0806948db293d3643d4040b75cc5a904f6d0f2c6ab0d5f36d743b5a9170",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/gate-verification-b2-b5-slice.md",
+      "content_hash": "sha256:7254a15eb78364dcd1e0277caeb6461fd6623a38133aea1f7fa2ebc514ae14ad",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": "layer-b-pseudocode-validator.v1",
+      "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/pseudocode-validate.json",
+      "content_hash": "sha256:29e469b08fcfeeb32ca1d2c84f5f52d8d6dabc0a9a2f10eee3a9b70f1c79d713",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/skills-reroot-deferred.md",
+      "content_hash": "sha256:23d677233d0c14568c2b4ea9a3fbc0220b9e986fd6a344d3d20180d947d3891b",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/sub-adversarial-inquiry-pass-na.md",
+      "content_hash": "sha256:cec4d5cd5fa005b451b4ce8109f59697ea2b9403b44db6c1462296d5770a16b2",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/tied-validate-consistency-summary.json",
+      "content_hash": "sha256:67ce1ac6b8a42c68ef003202e594243d2ee8e4e55f0ddc9688bc921539db3dfd",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/windows-claude-smoke-proof.md",
+      "content_hash": "sha256:fa685954c3d6303b3d961d61caa1c43c281b3f0e7ed1bdbf430d162d92b082ac",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "verification_evidence_manifest",
+      "schema_version": "verification-evidence-manifest.v1",
+      "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/verification-evidence-manifest.v1.json",
+      "content_hash": "sha256:f9b0d4706e54e3a5fc2a531ac527d59aa1bf826ee1d4212f23eb498bbcf39cea",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": null,
+    "tracker_hash": null,
+    "citdp_path": null,
+    "evidence_chain_profile_path": null
+  },
+  "gaps": []
+}

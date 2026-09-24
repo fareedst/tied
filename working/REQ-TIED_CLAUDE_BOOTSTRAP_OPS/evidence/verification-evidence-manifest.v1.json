@@ -1,0 +1,52 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "REQ-TIED_CLAUDE_BOOTSTRAP_OPS-close-out-2026-09-23",
+  "commit": "456a1f20e5451be0b525ead04483f24cd18f61b2",
+  "environment": {
+    "node": "close-out-gates"
+  },
+  "command_results": [
+    {
+      "id": "bootstrap-claude-harness",
+      "command": [
+        "node",
+        "--test",
+        "tools/bootstrap/lib/claude-harness.test.mjs"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 217,
+      "artifacts": [
+        "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/bootstrap-claude-harness.stdout.txt"
+      ]
+    }
+  ],
+  "quality_rows": [
+    {
+      "id": "bootstrap-ops-unit",
+      "attribute": "dual_harness_bootstrap",
+      "applicability": "applicable",
+      "rationale": "B1-B5 bootstrap ops acceptance",
+      "evidence_method": "automated_test",
+      "command_or_test": "node --test tools/bootstrap/lib/claude-harness.test.mjs",
+      "result": "passed",
+      "owner": "plan-close-out"
+    }
+  ],
+  "covered_tokens": [
+    "ARCH-TIED_CLAUDE_BOOTSTRAP_OPS",
+    "IMPL-TIED_CLAUDE_BOOTSTRAP_OPS",
+    "REQ-TIED_CLAUDE_BOOTSTRAP_OPS"
+  ],
+  "proof_boundaries": [
+    "B3 skills re-root deferred",
+    "B4 adherence N/A",
+    "Integrated adversarial inquiry waived at minimal depth",
+    "windows_copy_proven_in_ci remains false until Windows CI green"
+  ],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": []
+  }
+}

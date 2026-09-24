@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Claude bootstrap ops ([REQ-TIED_CLAUDE_BOOTSTRAP_OPS])** — Windows smoke asserts
+  (`ASSERT_WINDOWS_BOOTSTRAP_CLAUDE`), symlink gate tests (`GATE_SYMLINK_ON_WINDOWS_PROOF`),
+  comparison-plan doc refresh (B5), and close-out envelope under
+  `working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/`. **11/11** `claude-harness.test.mjs` pass;
+  `windows_copy_proven_in_ci` remains **false** until Windows CI proves copy path; **B3**
+  skills re-root deferred; **B4** adherence N/A with receipt.
+
 - **Claude live AgentDriver ([REQ-TIED_CLAUDE_LIVE_DRIVER])** — Fixture-gated
   Claude stream/session oracles under `mcp-server/packages/agentstream/fixtures/claude/`,
   `claude-driver` / `claude-stream` / live-driver select+bind modules, live-executor composition

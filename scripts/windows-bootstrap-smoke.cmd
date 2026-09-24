@@ -1,6 +1,6 @@
 @echo off
 setlocal EnableDelayedExpansion
-REM [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM] [REQ-TIED_SETUP] Windows bootstrap smoke — run from TIED repo root.
+REM [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM] [REQ-TIED_SETUP] [REQ-TIED_CLAUDE_BOOTSTRAP_OPS] Windows bootstrap smoke — run from TIED repo root.
 REM Usage: scripts\windows-bootstrap-smoke.cmd [optional-client-dir]
 
 set "REPO_ROOT=%~dp0.."
@@ -60,6 +60,16 @@ if not exist ".cursor\mcp.json" (
 echo OK: bootstrap layout
 
 echo.
+echo --- 1b Claude dual-bootstrap asserts [REQ-TIED_CLAUDE_BOOTSTRAP_OPS] ---
+node "%REPO_ROOT%\tools\bootstrap\assert-windows-bootstrap-claude.mjs" "!SMOKE_DIR!"
+if errorlevel 1 (
+  echo FAIL: Claude Windows bootstrap asserts
+  popd
+  exit /b 1
+)
+echo OK: Claude skills + repo-root .mcp.json
+
+echo.
 echo --- 2/3 lint_yaml.cmd -F tied ---
 call "%REPO_ROOT%\scripts\lint_yaml.cmd" -F tied
 if errorlevel 1 (
@@ -85,6 +95,16 @@ if not exist "!NODE_SMOKE!\tied\requirements.yaml" (
   exit /b 1
 )
 echo OK: Node CLI entrypoint
+
+echo.
+echo --- 3b Claude asserts on Node entrypoint client ---
+node "%REPO_ROOT%\tools\bootstrap\assert-windows-bootstrap-claude.mjs" "!NODE_SMOKE!"
+if errorlevel 1 (
+  echo FAIL: Claude asserts on Node smoke client
+  popd
+  exit /b 1
+)
+echo OK: Claude asserts on Node smoke client
 
 popd
 echo.

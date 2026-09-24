@@ -122,6 +122,9 @@ working/**/evidence/request-evidence-envelope.v1.json
 !working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/request-evidence-envelope.v1.json
 !working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/verification-evidence-manifest.v1.json
 !working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/not-applicable-receipt.v1.json
+!working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/request-evidence-envelope.v1.json
+!working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/verification-evidence-manifest.v1.json
+!working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/not-applicable-receipt.v1.json
 # CITDP pre-persist scratch (canonical record under tied/citdp/)
 working/**/CITDP-REQ-*-diff-or-stage.yaml
 # Quality profile gate receipts (regenerate per quality_security_profile_validate)

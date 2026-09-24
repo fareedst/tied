@@ -54,6 +54,7 @@ procedure GATE_SYMLINK_ON_WINDOWS_PROOF(project_root, paths, options):
     TERMINATION: total
   IF options.symlink_unix_opt_in AND NOT options.windows_copy_proven_in_ci THEN
     THROW SYMLINK_WITHOUT_CI_WINDOWS_PROOF
+  # LEAP: Unix symlink mode symlinks prompt-type bundles only; tied-yaml stays copy for TIED_REPO_ROOT patch (skills.mjs).
   RETURN installClaudeSkills(project_root, paths, options)
 
 ## CONFIG_SKILLS_REROOT

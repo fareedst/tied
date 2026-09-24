@@ -1,0 +1,179 @@
+{
+  "schema_version": "layer-b-pseudocode-validator.v1",
+  "ok": true,
+  "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+  "blocks": [
+    {
+      "name": "ASSERT_WINDOWS_BOOTSTRAP_CLAUDE",
+      "line": 13,
+      "token_refs": [
+        "ARCH-TIED_CLAUDE_BOOTSTRAP_OPS",
+        "IMPL-TIED_CLAUDE_BOOTSTRAP_OPS",
+        "REQ-PROMPT_TYPE_GLOBAL_SKILLS",
+        "REQ-TIED_CLAUDE_BOOTSTRAP_OPS"
+      ],
+      "contract_fields": [
+        "DATA",
+        "DATA_TRANSITION",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "GATE_SYMLINK_ON_WINDOWS_PROOF",
+      "line": 42,
+      "token_refs": [
+        "ARCH-PROMPT_TYPE_GLOBAL_SKILLS",
+        "ARCH-TIED_CLAUDE_BOOTSTRAP_OPS",
+        "IMPL-TIED_CLAUDE_BOOTSTRAP_OPS",
+        "REQ-PROMPT_TYPE_GLOBAL_SKILLS",
+        "REQ-TIED_CLAUDE_BOOTSTRAP_OPS"
+      ],
+      "contract_fields": [
+        "DATA",
+        "DATA_TRANSITION",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "CONFIG_SKILLS_REROOT",
+      "line": 66,
+      "token_refs": [
+        "ARCH-TIED_CLAUDE_BOOTSTRAP_OPS",
+        "IMPL-TIED_CLAUDE_BOOTSTRAP_OPS",
+        "REQ-TIED_CLAUDE_BOOTSTRAP_OPS",
+        "REQ-TIED_NEW_CLIENT_ADHERENCE"
+      ],
+      "contract_fields": [
+        "DATA",
+        "DATA_TRANSITION",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "SPIKE_CLAUDE_ADHERENCE_HOOKS",
+      "line": 93,
+      "token_refs": [
+        "ARCH-TIED_CLAUDE_BOOTSTRAP_OPS",
+        "IMPL-TIED_CLAUDE_BOOTSTRAP_OPS",
+        "REQ-TIED_CLAUDE_BOOTSTRAP_OPS",
+        "REQ-TIED_CLAUDE_HARNESS",
+        "REQ-TIED_CLAUDE_LIVE_DRIVER"
+      ],
+      "contract_fields": [
+        "DATA",
+        "DATA_TRANSITION",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "REFRESH_COMPARISON_PLAN_DOC",
+      "line": 118,
+      "token_refs": [
+        "ARCH-TIED_CLAUDE_BOOTSTRAP_OPS",
+        "IMPL-TIED_CLAUDE_BOOTSTRAP_OPS",
+        "REQ-TIED_CLAUDE_BOOTSTRAP_OPS"
+      ],
+      "contract_fields": [
+        "DATA",
+        "DATA_TRANSITION",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    }
+  ],
+  "dependencies": [],
+  "coverage": [
+    {
+      "block": "ASSERT_WINDOWS_BOOTSTRAP_CLAUDE",
+      "branch_lines": [
+        25,
+        28,
+        30,
+        32
+      ],
+      "failure_modes": [
+        "OUTPUT: { ok: true, asserts[] } | { error: CLAUDE_SKILLS_MISSING | MCP_JSON_MISSING | TIED_YAML_SERVER_MISSING }",
+        "RETURN { error: CLAUDE_SKILLS_MISSING }",
+        "RETURN { error: MCP_JSON_MISSING }",
+        "RETURN { error: TIED_YAML_SERVER_MISSING }"
+      ],
+      "references": []
+    },
+    {
+      "block": "GATE_SYMLINK_ON_WINDOWS_PROOF",
+      "branch_lines": [
+        55
+      ],
+      "failure_modes": [
+        "OUTPUT: install_result | { error: SYMLINK_WITHOUT_CI_WINDOWS_PROOF | SKILL_INSTALL_FAILED }",
+        "POST: symlink_unix_opt_in AND NOT windows_copy_proven_in_ci => error SYMLINK_WITHOUT_CI_WINDOWS_PROOF"
+      ],
+      "references": []
+    },
+    {
+      "block": "CONFIG_SKILLS_REROOT",
+      "branch_lines": [
+        71,
+        78,
+        80,
+        82,
+        88
+      ],
+      "failure_modes": [
+        "OUTPUT: resolved_skills_dir | { error: REROOT_WITHOUT_WINDOWS_PROOF | REROOT_WITHOUT_ARCH }",
+        "RETURN { error: REROOT_WITHOUT_WINDOWS_PROOF }",
+        "RETURN { error: REROOT_WITHOUT_ARCH }"
+      ],
+      "references": []
+    },
+    {
+      "block": "SPIKE_CLAUDE_ADHERENCE_HOOKS",
+      "branch_lines": [
+        105
+      ],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "REFRESH_COMPARISON_PLAN_DOC",
+      "branch_lines": [
+        132
+      ],
+      "failure_modes": [
+        "OUTPUT: { ok: true, edits[] } | { error: STALE_CLAIM_REMAINS }",
+        "RETURN { error: STALE_CLAIM_REMAINS }"
+      ],
+      "references": []
+    }
+  ],
+  "diagnostics": []
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": "not-applicable-receipt.v1",
+  "request_token": "REQ-TIED_CLAUDE_BOOTSTRAP_OPS",
+  "artifact_kind": "adversarial_inquiry",
+  "depth_tier": "minimal",
+  "phases": [
+    "close_out",
+    "pre_implementation",
+    "verification"
+  ],
+  "reason": "Adversarial inquiry not applicable at minimal depth_tier",
+  "generated_at": "2026-09-24T03:40:46.982Z",
+  "source": "request_evidence_envelope_backfill"
+}

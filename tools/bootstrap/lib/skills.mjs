@@ -138,9 +138,27 @@ function installClaudePromptTypeSkillsFrom(projectRoot, src, paths) {
   }
 }
 
+function symlinkClaudePromptTypeSkillsFrom(projectRoot, src, paths) {
+  const dest = path.join(projectRoot, ".claude", "skills");
+  const { PROMPT_TYPE_SHARED_DIR, PROMPT_TYPE_SKILL_DIRS } = paths;
+  fs.mkdirSync(dest, { recursive: true });
+  const linkEntry = (name) => {
+    const target = path.join(dest, name);
+    if (fs.existsSync(target)) {
+      fs.rmSync(target, { recursive: true, force: true });
+    }
+    fs.symlinkSync(path.join(src, name), target, "dir");
+  };
+  linkEntry(PROMPT_TYPE_SHARED_DIR);
+  for (const skillDir of PROMPT_TYPE_SKILL_DIRS) {
+    linkEntry(skillDir);
+  }
+}
+
 /**
  * [IMPL-TIED_CLAUDE_HARNESS] [ARCH-TIED_CLAUDE_HARNESS] [REQ-TIED_CLAUDE_HARNESS] [REQ-PROMPT_TYPE_GLOBAL_SKILLS]
- * How: INSTALL_CLAUDE_SKILLS — copy-default bundled skills to .claude/skills/ (symlink opt-in gated).
+ * [IMPL-TIED_CLAUDE_BOOTSTRAP_OPS] [ARCH-TIED_CLAUDE_BOOTSTRAP_OPS] [REQ-TIED_CLAUDE_BOOTSTRAP_OPS]
+ * How: INSTALL_CLAUDE_SKILLS — copy-default bundled skills to .claude/skills/ (Unix symlink opt-in gated by GATE_SYMLINK_ON_WINDOWS_PROOF).
  */
 export function installClaudeSkills(projectRoot, paths, options = {}) {
   if (options.symlink_unix_opt_in && !options.windows_copy_proven_in_ci) {
@@ -150,12 +168,20 @@ export function installClaudeSkills(projectRoot, paths, options = {}) {
   const { tiedYamlSkillCanonical, tiedYamlSkillDevFallback, marker, promptTypeSkillsCanonical } = paths;
   const { PROMPT_TYPE_SHARED_DIR, PROMPT_TYPE_SKILL_DIRS } = paths;
   const installedPaths = [];
+  const useUnixSymlink =
+    options.symlink_unix_opt_in &&
+    options.windows_copy_proven_in_ci &&
+    process.platform !== "win32";
 
   if (!promptTypeSkillsIsComplete(promptTypeSkillsCanonical, PROMPT_TYPE_SHARED_DIR, PROMPT_TYPE_SKILL_DIRS)) {
     sayErr(`ERROR: prompt-type skill bundle not found or incomplete at ${promptTypeSkillsCanonical}.`);
     throw new Error("SKILL_INSTALL_FAILED");
   }
-  installClaudePromptTypeSkillsFrom(projectRoot, promptTypeSkillsCanonical, paths);
+  if (useUnixSymlink) {
+    symlinkClaudePromptTypeSkillsFrom(projectRoot, promptTypeSkillsCanonical, paths);
+  } else {
+    installClaudePromptTypeSkillsFrom(projectRoot, promptTypeSkillsCanonical, paths);
+  }
   installedPaths.push(path.join(projectRoot, ".claude", "skills"));
 
   if (skillIsComplete(tiedYamlSkillCanonical)) {
@@ -170,7 +196,13 @@ export function installClaudeSkills(projectRoot, paths, options = {}) {
     throw new Error("SKILL_INSTALL_FAILED");
   }
   installedPaths.push(path.join(projectRoot, ".claude", "skills", "tied-yaml"));
-  sayWarn(`Copied Claude skills into ${path.join(projectRoot, ".claude", "skills")} (copy default).`);
+  if (useUnixSymlink) {
+    sayWarn(
+      `Symlinked Claude prompt-type skills into ${path.join(projectRoot, ".claude", "skills")} (tied-yaml copied for TIED_REPO_ROOT patch).`
+    );
+  } else {
+    sayWarn(`Copied Claude skills into ${path.join(projectRoot, ".claude", "skills")} (copy default).`);
+  }
   return { installedPaths };
 }
 
