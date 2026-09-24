@@ -1960,6 +1960,19 @@ REQ-TIED_CLAUDE_LIVE_DRIVER:
   name: "Claude live AgentDriver and stream oracles"
   priority: "P1"
   status: "Implemented"
+REQ-TIED_CLAUDE_SKILLS_REROOT:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-TIED_CLAUDE_SKILLS_REROOT"
+    - "IMPL-TIED_CLAUDE_SKILLS_REROOT"
+    - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+    - "REQ-TIED_CLAUDE_BOOTSTRAP_OPS"
+    - "REQ-TIED_CLAUDE_HARNESS"
+    - "REQ-TIED_SETUP"
+  detail_file: "requirements/REQ-TIED_CLAUDE_SKILLS_REROOT.yaml"
+  name: "Optional repo-root skills re-root"
+  priority: "P1"
+  status: "Implemented"
 REQ-TIED_FIDELITY_RESEARCH:
   category: "Functional"
   detail_file: "requirements/REQ-TIED_FIDELITY_RESEARCH.yaml"

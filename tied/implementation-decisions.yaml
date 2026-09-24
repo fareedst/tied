@@ -1968,6 +1968,14 @@ IMPL-TIED_CLAUDE_LIVE_DRIVER:
   detail_file: "implementation-decisions/IMPL-TIED_CLAUDE_LIVE_DRIVER.yaml"
   name: "Claude live AgentDriver implementation"
   status: "Active"
+IMPL-TIED_CLAUDE_SKILLS_REROOT:
+  category: "Implementation"
+  cross_references:
+    - "ARCH-TIED_CLAUDE_SKILLS_REROOT"
+    - "REQ-TIED_CLAUDE_SKILLS_REROOT"
+  detail_file: "implementation-decisions/IMPL-TIED_CLAUDE_SKILLS_REROOT.yaml"
+  name: "Skills re-root implementation"
+  status: "Active"
 IMPL-TIED_FEEDBACK_PROMOTION:
   code_locations:
     files:

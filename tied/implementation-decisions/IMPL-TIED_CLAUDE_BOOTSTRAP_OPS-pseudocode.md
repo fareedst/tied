@@ -59,6 +59,7 @@ procedure GATE_SYMLINK_ON_WINDOWS_PROOF(project_root, paths, options):
 
 ## CONFIG_SKILLS_REROOT
 # [IMPL-TIED_CLAUDE_BOOTSTRAP_OPS] [ARCH-TIED_CLAUDE_BOOTSTRAP_OPS] [REQ-TIED_CLAUDE_BOOTSTRAP_OPS] [REQ-PROMPT_TYPE_GLOBAL_SKILLS] [ARCH-PROMPT_TYPE_GLOBAL_SKILLS]
+# LEAP (2026-09-24): Runtime implementation and tests live under [IMPL-TIED_CLAUDE_SKILLS_REROOT] [REQ-TIED_CLAUDE_SKILLS_REROOT] (tools/bootstrap/lib/skills-reroot.mjs). This block retains bootstrap-ops design contract; bootstrap ops REQ close-out deferred B3.
 # How: Optional relocate of managed skills to repo-root skills/ for Cursor and Claude installs; default off; deferred OK in Tracker.
 # PRE: windows_copy_proven_in_ci true; ARCH decision recorded; bootstrap flag present.
 # POST: Both harness install paths honor skills_root; Windows smoke asserts when flag on; default keeps .cursor/skills and .claude/skills.

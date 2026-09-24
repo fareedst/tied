@@ -9,16 +9,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Optional repo-root skills re-root ([REQ-TIED_CLAUDE_SKILLS_REROOT])** — `TIED_SKILLS_REROOT=1`
+  installs Cursor and Claude managed skill bundles under repo-root `skills/` (default off); gated by
+  `WINDOWS_COPY_PROVEN_IN_CI` and `ARCH-TIED_CLAUDE_SKILLS_REROOT`. **`17/17`**
+  `claude-harness.test.mjs`; Windows assert CLI honors re-root when env set. Supersedes bootstrap
+  ops **B3** deferral disposition for sponsor-scoped R3.
+
 - **Claude bootstrap ops ([REQ-TIED_CLAUDE_BOOTSTRAP_OPS])** — Windows CI workflow
   (`.github/workflows/windows-bootstrap-smoke.yml`) green on GitHub Actions run
   [36031010940](https://github.com/fareedst/tied/actions/runs/36031010940); Bun/bootstrap
   deps in CI; **`windows_copy_proven_in_ci` / `WINDOWS_COPY_PROVEN_IN_CI` = true** after
   Windows runner proof (not darwin-only). Windows smoke asserts (`ASSERT_WINDOWS_BOOTSTRAP_CLAUDE`),
   symlink gate tests (`GATE_SYMLINK_ON_WINDOWS_PROOF`), comparison-plan doc refresh (B5), and
-  close-out envelope under `working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/`. **11/11**
-  `claude-harness.test.mjs` pass; **B3** skills re-root deferred; **B4** adherence N/A with
-  receipt. Gitignore hygiene: `working/REFINE-*/`, `working/**/gate-args*.json` when staging
-  `.gitignore`.
+  close-out envelope under `working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/`. **B3** skills re-root
+  ownership moved to [REQ-TIED_CLAUDE_SKILLS_REROOT] (R3); **B4** adherence N/A with receipt.
+  Gitignore hygiene: `working/REFINE-*/`, `working/**/gate-args*.json` when staging `.gitignore`.
+
+- **Comparison planning docs (`docs/comparisons/`)** — Track Claude Code / DAE / disciplined
+  agentic engineering comparison notes in-repo (removed blanket `.gitignore` on `docs/comparisons/`).
 
 - **Claude live AgentDriver ([REQ-TIED_CLAUDE_LIVE_DRIVER])** — Fixture-gated
   Claude stream/session oracles under `mcp-server/packages/agentstream/fixtures/claude/`,
@@ -37,6 +45,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   Live Claude AgentDriver and integrated MCP adversarial inquiry remain explicitly deferred.
 
 ### Changed
+
+- **Bootstrap ops LEAP ([REQ-TIED_CLAUDE_BOOTSTRAP_OPS])** — B3 skills re-root deferral superseded
+  by implemented [REQ-TIED_CLAUDE_SKILLS_REROOT]; CITDP and deferred evidence updated accordingly.
+
+- **Gitignore close-out ([PROC-GITIGNORE_CLOSE_OUT])** — `!working/REQ-TIED_CLAUDE_SKILLS_REROOT/`
+  gate and envelope negations mirror other Claude REQ close-outs.
 
 - **Operator docs — unified TypeScript toolchain ([REQ-TIED_UNIFIED_TOOLCHAIN])** —
   Align README, `AGENTS.md`, `tied/docs/*` agent guides, preload contracts, and domain

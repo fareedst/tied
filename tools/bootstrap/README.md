@@ -76,6 +76,7 @@ After the Cursor path (`.cursor/skills/`, create-only `.cursor/mcp.json`), boots
 | Artifact | Policy |
 | --- | --- |
 | `.claude/skills/` | Copy-default Prompt Composer + `tied-yaml` bundles (same inventory as Cursor) |
+| Repo-root `skills/` (optional) | When **`TIED_SKILLS_REROOT=1`**, both Cursor and Claude managed bundles install under **`skills/`** instead of harness-native paths. Default **off**. Requires `windows_copy_proven_in_ci` and [ARCH-TIED_CLAUDE_SKILLS_REROOT](../tied/architecture-decisions/ARCH-TIED_CLAUDE_SKILLS_REROOT.yaml). See [REQ-TIED_CLAUDE_SKILLS_REROOT](../tied/requirements/REQ-TIED_CLAUDE_SKILLS_REROOT.yaml). |
 | Repo-root `.mcp.json` | Create-if-absent or safe-merge **`tied-yaml` only**; sets `TIED_MCP_HARNESS=claude` |
 | `CLAUDE.md` | Optional create-if-absent thin delta pointing at **AGENTS.md** (never replaces Tracker or `tied/` YAML) |
 
@@ -94,7 +95,7 @@ Traceability: [REQ-TIED_CLAUDE_HARNESS](../tied/requirements/REQ-TIED_CLAUDE_HAR
 - `lint-yaml.mjs` — Windows `-F tied` lint backend
 - `lib/bootstrap.mjs` — orchestration
 - `lib/copy-managed.mjs` — attribute-preserving copy + midnight mtime
-- `lib/mcp-config.mjs`, `lib/skills.mjs`, `lib/claude-md.mjs`, `lib/vocab.mjs`, `lib/docs.mjs`, `lib/verify.mjs`
+- `lib/mcp-config.mjs`, `lib/skills.mjs`, `lib/skills-reroot.mjs`, `lib/claude-md.mjs`, `lib/vocab.mjs`, `lib/docs.mjs`, `lib/verify.mjs`
 - `templates/CLAUDE.md.template` — optional client `CLAUDE.md` source
 
 Traceability: [REQ-TIED_SETUP](../tied/requirements/REQ-TIED_SETUP.yaml) · [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM](../tied/architecture-decisions/ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM.yaml) · [IMPL-TIED_FILES](../tied/implementation-decisions/IMPL-TIED_FILES.yaml)

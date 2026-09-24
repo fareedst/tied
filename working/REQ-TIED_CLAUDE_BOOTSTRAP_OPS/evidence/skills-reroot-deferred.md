@@ -1,5 +1,7 @@
 # CONFIG_SKILLS_REROOT deferral (B3)
 
+> **Superseded for implementation (2026-09-24):** Sponsor-scoped **R3** shipped as [`REQ-TIED_CLAUDE_SKILLS_REROOT`](../../../tied/requirements/REQ-TIED_CLAUDE_SKILLS_REROOT.yaml) (`TIED_SKILLS_REROOT=1`, default off). This note remains historical context for bootstrap ops close-out.
+
 **REQ:** REQ-TIED_CLAUDE_BOOTSTRAP_OPS  
 **Block:** CONFIG_SKILLS_REROOT  
 **Date (original deferral):** 2026-09-23 (build-plan B2–B5)  
@@ -18,6 +20,6 @@
 
 ## Follow-up
 
-Implement optional repo-root `skills/` re-root via remainder program **R3** in [`working/REQ-TIED_CLAUDE_DOC_REMAINDER/PLAN.md`](../../REQ-TIED_CLAUDE_DOC_REMAINDER/PLAN.md): **`plan-new-feature`** (e.g. dedicated REQ token) → **`build-plan`** with RED dual-harness + Windows asserts; not default-on.
+**Ownership (2026-09-24):** Implemented under **`REQ-TIED_CLAUDE_SKILLS_REROOT`** (`TIED_SKILLS_REROOT=1`, default off). This deferral receipt remains historical for bootstrap ops close-out; see [`tied/requirements/REQ-TIED_CLAUDE_SKILLS_REROOT.yaml`](../../../tied/requirements/REQ-TIED_CLAUDE_SKILLS_REROOT.yaml).
 
 Broader closed-REQ metadata LEAP (REQ/CITDP/CHANGELOG vs proof flag) is **R4** ([`working/REFINE-DUAL_REQ_CLOSE_OUT/`](../../REFINE-DUAL_REQ_CLOSE_OUT/)).

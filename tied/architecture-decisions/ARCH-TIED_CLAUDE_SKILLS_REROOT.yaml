@@ -1,0 +1,34 @@
+ARCH-TIED_CLAUDE_SKILLS_REROOT:
+  category: "Architecture"
+  decision: "Optional repo-root skills/ becomes the shared install root for Cursor and Claude managed bundles when TIED_SKILLS_REROOT=1; default remains harness-native paths (.cursor/skills, .claude/skills). Re-root requires windows_copy_proven_in_ci true and this ARCH record present in the TIED source tree. Windows smoke asserts inventory under repo-root skills/ when re-root env is set."
+  implementation_approach:
+    details:
+      - "CONFIG_SKILLS_REROOT resolves skills dir per harness profile."
+      - "Dual layout: default harness dirs vs unified repo-root skills/."
+    summary: "Resolve install dir in bootstrap; dual-harness copy/symlink targets honor resolved root; assert-windows-bootstrap-claude accepts reroot layout."
+  metadata:
+    created:
+      author: "build-plan R3"
+      date: "2026-09-24"
+  name: "Skills re-root architecture"
+  rationale:
+    benefits:
+      - "Dual-harness parity"
+      - "Explicit opt-in"
+    problems_solved:
+      - "Breaking Cursor clients with default-on re-root"
+    why: "ARCH-TIED_CLAUDE_BOOTSTRAP_OPS deferred B3 pending sponsor slice; dedicated ARCH enables runtime REROOT_WITHOUT_ARCH gate."
+  related_decisions:
+    depends_on:
+      - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "ARCH-TIED_CLAUDE_BOOTSTRAP_OPS"
+      - "ARCH-TIED_CLAUDE_HARNESS"
+    see_also:
+      - "IMPL-TIED_CLAUDE_BOOTSTRAP_OPS"
+    supersedes: []
+  status: "Active"
+  traceability:
+    implementation:
+      - "IMPL-TIED_CLAUDE_SKILLS_REROOT"
+    requirements:
+      - "REQ-TIED_CLAUDE_SKILLS_REROOT"

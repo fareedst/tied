@@ -1,0 +1,39 @@
+CITDP-REQ-TIED_CLAUDE_SKILLS_REROOT:
+  record_identity:
+    change_request_id: REQ-TIED_CLAUDE_SKILLS_REROOT
+    title: Optional repo-root skills re-root (R3)
+    recorded_at: "2026-09-24"
+    gate_policy: advisory
+    profile_depth: minimal
+  change_definition:
+    current_behavior: Bootstrap installs managed skills under .cursor/skills and .claude/skills only; B3 deferred at bootstrap ops close-out.
+    desired_behavior: Optional TIED_SKILLS_REROOT=1 installs both harnesses to repo-root skills/ when windows proof and ARCH present; default unchanged.
+    non_goals:
+      - Default-on re-root
+      - Live agentstream changes
+      - Rewriting closed bootstrap ops satisfaction criteria
+  risk_analysis:
+    depth_tier: minimal
+    gate_policy: advisory
+    profile_depth: minimal
+    adversarial_inquiry:
+      depth_tier: minimal
+      assurance_profile: baseline-functional
+      gate_policy: advisory
+      sub_adversarial_inquiry_pass: not_applicable
+      counterexamples:
+        - Enabling re-root without ARCH-TIED_CLAUDE_SKILLS_REROOT present
+        - Default-on breaking Cursor-only clients
+      disconfirming_observations:
+        - Windows smoke without TIED_SKILLS_REROOT still expects .claude/skills
+      falsification_questions:
+        - Does default bootstrap still install under harness-native paths?
+        - Does flag-on without windows proof throw REROOT_WITHOUT_WINDOWS_PROOF?
+      evidence_references:
+        - tools/bootstrap/lib/claude-harness.test.mjs
+        - tied/citdp/CITDP-REQ-TIED_CLAUDE_SKILLS_REROOT.yaml
+        - working/REQ-TIED_CLAUDE_SKILLS_REROOT/evidence/sub-adversarial-inquiry-pass-na.md
+    residual_risks:
+      - Operators confuse harness-native paths with reroot layout
+  test_strategy:
+    summary: RED/GREEN in claude-harness.test.mjs; bootstrap default path regression; Windows assert when TIED_SKILLS_REROOT set.

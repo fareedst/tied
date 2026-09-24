@@ -1,0 +1,46 @@
+REQ-TIED_CLAUDE_SKILLS_REROOT:
+  category: "Tooling"
+  description: "Implement CONFIG_SKILLS_REROOT (deferred B3): optional repo-root skills/ install destination for Cursor and Claude bootstrap, default off, gated by WINDOWS_COPY_PROVEN_IN_CI and ARCH-TIED_CLAUDE_SKILLS_REROOT."
+  metadata:
+    created:
+      author: "build-plan R3"
+      date: "2026-09-24"
+    last_updated:
+      author: "build-plan R3"
+      date: "2026-09-24"
+      reason: "CONFIG_SKILLS_REROOT shipped; 17/17 harness tests"
+  name: "Optional repo-root skills re-root"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Preserves .cursor/skills and .claude/skills default"
+      - "Single managed skills tree when explicitly enabled"
+    problems_solved:
+      - "Deferred CONFIG_SKILLS_REROOT block in bootstrap ops"
+      - "Dual-harness drift when operators want repo-root skills/"
+    why: "Bootstrap ops close-out deferred B3; Windows copy proof is now in repo; sponsor scoped dedicated REQ for dual-harness re-root without default-on breakage."
+  related_requirements:
+    depends_on:
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-TIED_CLAUDE_BOOTSTRAP_OPS"
+      - "REQ-TIED_CLAUDE_HARNESS"
+    related_to:
+      - "REQ-TIED_CLAUDE_BOOTSTRAP_OPS"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "RED/GREEN in claude-harness.test.mjs; Windows assert honors re-root when enabled."
+      id: "SC-REROOT-TESTS"
+    - criterion: "REROOT_WITHOUT_WINDOWS_PROOF and REROOT_WITHOUT_ARCH failure modes when flag on without prerequisites."
+      id: "SC-REROOT-GATES"
+    - criterion: "With TIED_SKILLS_REROOT=1 and gates pass, both harnesses install managed inventory under repo-root skills/."
+      id: "SC-REROOT-FLAG"
+    - criterion: "Without TIED_SKILLS_REROOT, bootstrap installs skills under .cursor/skills and .claude/skills unchanged."
+      id: "SC-REROOT-DEFAULT-OFF"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_CLAUDE_SKILLS_REROOT"
+    implementation:
+      - "IMPL-TIED_CLAUDE_SKILLS_REROOT"
+    tests:
+      - "tools/bootstrap/lib/claude-harness.test.mjs"

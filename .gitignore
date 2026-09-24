@@ -8,7 +8,7 @@
 .markscope-preview/
 docs/*26-??-??*.md
 docs/agentstream-unitconv-general-transcript-difficulties.md
-docs/comparisons/
+# Comparison / methodology notes (linked from tied/docs, REQ satisfaction criteria — track in git)
 docs/social/
 docs/visuals/visual-specs.md
 get-prompts.md
@@ -64,6 +64,8 @@ working/**/gates/
 !working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/**
 !working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/
 !working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/**
+!working/REQ-TIED_CLAUDE_SKILLS_REROOT/gates/
+!working/REQ-TIED_CLAUDE_SKILLS_REROOT/gates/**
 # PSA timestamped gate receipts (regenerate per run-close-out-gates.mjs; keep adversarial gate-result.json via patterns above)
 working/REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/gate-*-result.json
 # Adherence reconcile output (regenerate per tied_adherence_reconcile_run)
@@ -98,6 +100,9 @@ working/**/close_out-*.json
 !working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/close_out-*.json
 !working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/pre_implementation-*.json
 !working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/verification-*.json
+!working/REQ-TIED_CLAUDE_SKILLS_REROOT/gates/close_out-*.json
+!working/REQ-TIED_CLAUDE_SKILLS_REROOT/gates/pre_implementation-*.json
+!working/REQ-TIED_CLAUDE_SKILLS_REROOT/gates/verification-*.json
 # Build-plan change-ID scratch (tracker, CITDP, gate receipts, remediation — regenerate per build-plan)
 working/DOC-*/
 # refine-plan session scratch (linked plan lives in ~/.cursor/plans/; not canonical TIED intent)
@@ -134,6 +139,9 @@ working/**/evidence/request-evidence-envelope.v1.json
 !working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/request-evidence-envelope.v1.json
 !working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/verification-evidence-manifest.v1.json
 !working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/not-applicable-receipt.v1.json
+!working/REQ-TIED_CLAUDE_SKILLS_REROOT/evidence/request-evidence-envelope.v1.json
+!working/REQ-TIED_CLAUDE_SKILLS_REROOT/evidence/verification-evidence-manifest.v1.json
+!working/REQ-TIED_CLAUDE_SKILLS_REROOT/evidence/not-applicable-receipt.v1.json
 # CITDP pre-persist scratch (canonical record under tied/citdp/)
 working/**/CITDP-REQ-*-diff-or-stage.yaml
 # Quality profile gate receipts (regenerate per quality_security_profile_validate)

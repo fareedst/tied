@@ -73,16 +73,16 @@ export function verifyAdversarialInquiryMethodology(tiedDir) {
 }
 
 export function verifyFeatureOrchestrationMethodology(projectRoot, tiedDir, tiedBasePathValue, tiedCliDest) {
+  const tiedSh = path.join(path.dirname(tiedCliDest), "tied.sh");
   const required = [
-    { rel: "tied/docs/tied-feature-onboarding.md", base: projectRoot },
-    { rel: "tied/constitution.example.yaml", base: projectRoot },
-    { rel: "tied/methodology/vocab/feature-orchestration.md", base: projectRoot },
-    { rel: ".cursor/skills/tied-yaml/scripts/tied.sh", base: projectRoot },
+    { path: path.join(projectRoot, "tied/docs/tied-feature-onboarding.md") },
+    { path: path.join(projectRoot, "tied/constitution.example.yaml") },
+    { path: path.join(projectRoot, "tied/methodology/vocab/feature-orchestration.md") },
+    { path: tiedSh },
   ];
   sayWarn("MUST verify feature orchestration methodology artifacts before completion.");
   let missing = 0;
-  for (const { rel, base } of required) {
-    const p = path.join(base, rel);
+  for (const { path: p } of required) {
     if (!fs.existsSync(p)) {
       sayErr(`MISSING mandatory feature orchestration artifact: ${p}`);
       missing = 1;
@@ -93,7 +93,7 @@ export function verifyFeatureOrchestrationMethodology(projectRoot, tiedDir, tied
     throw new Error("FEATURE_ORCHESTRATION_GATE_FAILED");
   }
   sayOk("MUST verify feature orchestration methodology artifacts: complete.");
-  sayWarn(`CAN run onboarding smoke: (cd ${projectRoot} && .cursor/skills/tied-yaml/scripts/tied.sh init).`);
+  sayWarn(`CAN run onboarding smoke: (cd ${projectRoot} && ${tiedSh} init).`);
   sayWarn(
     `CAN run structural validation: TIED_BASE_PATH=${tiedBasePathValue} ${tiedCliDest} tied_validate_consistency.`
   );
@@ -194,8 +194,10 @@ export function verifyInheritedDetailFiles(tiedDir, manifestRequired) {
   sayOk("MUST verify inherited methodology detail-file integrity: complete.");
 }
 
-export function tiedCliDestFor(projectRoot) {
-  return path.join(projectRoot, ".cursor", "skills", "tied-yaml", "scripts", "tied-cli.sh");
+export function tiedCliDestFor(projectRoot, cursorSkillsInstallDir) {
+  const skillsRoot =
+    cursorSkillsInstallDir ?? path.join(projectRoot, ".cursor", "skills");
+  return path.join(skillsRoot, "tied-yaml", "scripts", "tied-cli.sh");
 }
 
 export function tiedBasePathValueFor(projectRoot) {

@@ -6,9 +6,9 @@ REQ-TIED_CLAUDE_BOOTSTRAP_OPS:
       author: "plan-new-feature"
       date: "2026-09-23"
     last_updated:
-      author: "plan-close-out"
+      author: "LEAP-ad-hoc"
       date: "2026-09-24"
-      reason: "Windows CI green (run 36031010940); windows_copy_proven_in_ci true in code and REQ; B3 CONFIG_SKILLS_REROOT still deferred; B4 adherence N/A"
+      reason: "Close-out scope B1/B2/B4/B5 only; B3 CONFIG_SKILLS_REROOT deferred here — implementation ownership LEAP to REQ-TIED_CLAUDE_SKILLS_REROOT (build-plan R3 2026-09-24)."
   name: "Claude bootstrap ops (Windows CI, symlink, skills re-root)"
   priority: "P1"
   rationale:
@@ -30,18 +30,19 @@ REQ-TIED_CLAUDE_BOOTSTRAP_OPS:
     related_to:
       - "REQ-TIED_CLAUDE_HARNESS"
       - "REQ-TIED_CLAUDE_LIVE_DRIVER"
+      - "REQ-TIED_CLAUDE_SKILLS_REROOT"
     supersedes: []
   satisfaction_criteria:
     - criterion: "Adherence hook spike either documents a stable Claude bridge API or records not_applicable receipt with residual risk; never silent pass."
       id: "SC-BOOT-B4-ADHERENCE"
+    - criterion: "B3 CONFIG_SKILLS_REROOT was deferred at this REQ close-out; optional repo-root skills/ re-root (default off, dual-harness + Windows asserts) is owned and satisfied by REQ-TIED_CLAUDE_SKILLS_REROOT — not in bootstrap-ops delivery scope."
+      id: "SC-BOOT-B3-SKILLS-REROOT"
     - criterion: "docs/comparisons/claude-code-tied-multi-harness-plan.md Current section reflects dual bootstrap + dry-run harness; stale No Claude .mcp.json claim removed; Post-Phases 0-3 table points to REQ-TIED_CLAUDE_LIVE_DRIVER and this REQ; Status reframes closed parent + A/B follow-ons."
       id: "SC-BOOT-B5-COMPARISON-DOC"
     - criterion: "installClaudeSkills symlink_unix_opt_in succeeds only when windows_copy_proven_in_ci is true; throws SYMLINK_WITHOUT_CI_WINDOWS_PROOF when false; covered by claude-harness.test.mjs RED/GREEN."
       id: "SC-BOOT-B2-SYMLINK"
     - criterion: "No merge enables symlink opt-in or skills/ re-root before windows_copy_proven_in_ci is proven by B1 Windows smoke/CI evidence."
       id: "SC-BOOT-HARD-GATE"
-    - criterion: "Optional skills/ re-root ships only behind ARCH decision + bootstrap flag default-off, with Cursor and Claude install paths and Windows asserts; Tracker may defer slice explicitly."
-      id: "SC-BOOT-B3-SKILLS-REROOT"
     - criterion: "scripts/windows-bootstrap-smoke.cmd (and CI job if present) asserts .claude/skills/ managed inventory and repo-root .mcp.json containing tied-yaml after bootstrap; proof note under working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/."
       id: "SC-BOOT-B1-WINDOWS"
   status: "Implemented"

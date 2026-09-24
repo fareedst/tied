@@ -1733,6 +1733,17 @@ ARCH-TIED_CLAUDE_LIVE_DRIVER:
   detail_file: "architecture-decisions/ARCH-TIED_CLAUDE_LIVE_DRIVER.yaml"
   name: "Claude AgentDriver and oracle architecture"
   status: "Draft"
+ARCH-TIED_CLAUDE_SKILLS_REROOT:
+  category: "Architecture"
+  cross_references:
+    - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+    - "ARCH-TIED_CLAUDE_BOOTSTRAP_OPS"
+    - "ARCH-TIED_CLAUDE_HARNESS"
+    - "IMPL-TIED_CLAUDE_SKILLS_REROOT"
+    - "REQ-TIED_CLAUDE_SKILLS_REROOT"
+  detail_file: "architecture-decisions/ARCH-TIED_CLAUDE_SKILLS_REROOT.yaml"
+  name: "Skills re-root architecture"
+  status: "Active"
 ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY:
   cross_references:
     - "ARCH-FEEDBACK_STORAGE"

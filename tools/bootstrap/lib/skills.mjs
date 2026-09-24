@@ -41,9 +41,9 @@ export function patchTiedRepoRoot(cliPath, tiedSourceRoot, marker) {
   return { patched: true };
 }
 
-function installTiedYamlSkillFrom(projectRoot, src, tiedRepoRoot, marker) {
-  const dest = path.join(projectRoot, ".cursor", "skills", "tied-yaml");
-  fs.mkdirSync(path.join(projectRoot, ".cursor", "skills"), { recursive: true });
+function installTiedYamlSkillFrom(projectRoot, src, tiedRepoRoot, marker, skillsInstallDir) {
+  const dest = path.join(skillsInstallDir, "tied-yaml");
+  fs.mkdirSync(skillsInstallDir, { recursive: true });
   copyTreeWithAttributes(src, dest);
   chmodExecutableRecursive(dest);
   for (const scriptName of ["tied-cli.sh", "tied.sh", "feature-orchestrator.sh"]) {
@@ -64,18 +64,20 @@ function installTiedYamlSkillFrom(projectRoot, src, tiedRepoRoot, marker) {
   sayWarn(`Copied tied-yaml Cursor skill into ${dest} (from ${src}).`);
 }
 
-export function installTiedYamlSkill(projectRoot, paths) {
+export function installTiedYamlSkill(projectRoot, paths, options = {}) {
   const { tiedYamlSkillCanonical, tiedYamlSkillDevFallback, marker } = paths;
   const tiedRepoRoot = paths.tiedRepoRoot ?? paths.TIED_REPO_ROOT;
+  const skillsInstallDir =
+    options.skillsInstallDir ?? path.join(projectRoot, ".cursor", "skills");
   if (skillIsComplete(tiedYamlSkillCanonical)) {
-    installTiedYamlSkillFrom(projectRoot, tiedYamlSkillCanonical, tiedRepoRoot, marker);
+    installTiedYamlSkillFrom(projectRoot, tiedYamlSkillCanonical, tiedRepoRoot, marker, skillsInstallDir);
     return;
   }
   if (skillIsComplete(tiedYamlSkillDevFallback)) {
     sayWarn(
       `Bundled tied-yaml missing or incomplete at ${tiedYamlSkillCanonical}; using non-canonical ${tiedYamlSkillDevFallback}.`
     );
-    installTiedYamlSkillFrom(projectRoot, tiedYamlSkillDevFallback, tiedRepoRoot, marker);
+    installTiedYamlSkillFrom(projectRoot, tiedYamlSkillDevFallback, tiedRepoRoot, marker, skillsInstallDir);
     return;
   }
   sayErr("ERROR: tied-yaml skill not found or incomplete. Need scripts/tied-cli.sh in one of:");
@@ -86,9 +88,9 @@ export function installTiedYamlSkill(projectRoot, paths) {
   throw new Error("SKILL_INSTALL_FAILED");
 }
 
-export function installPromptTypeSkills(projectRoot, paths) {
+export function installPromptTypeSkills(projectRoot, paths, options = {}) {
   const src = paths.promptTypeSkillsCanonical;
-  const dest = path.join(projectRoot, ".cursor", "skills");
+  const dest = options.skillsInstallDir ?? path.join(projectRoot, ".cursor", "skills");
   const { PROMPT_TYPE_SHARED_DIR, PROMPT_TYPE_SKILL_DIRS } = paths;
   if (!promptTypeSkillsIsComplete(src, PROMPT_TYPE_SHARED_DIR, PROMPT_TYPE_SKILL_DIRS)) {
     sayErr(`ERROR: prompt-type skill bundle not found or incomplete at ${src}.`);
@@ -106,9 +108,9 @@ export function installPromptTypeSkills(projectRoot, paths) {
   sayWarn(`Copied prompt-type Cursor skills into ${dest} (from ${src}).`);
 }
 
-function installClaudeTiedYamlSkillFrom(projectRoot, src, tiedRepoRoot, marker) {
-  const dest = path.join(projectRoot, ".claude", "skills", "tied-yaml");
-  fs.mkdirSync(path.join(projectRoot, ".claude", "skills"), { recursive: true });
+function installClaudeTiedYamlSkillFrom(projectRoot, src, tiedRepoRoot, marker, skillsInstallDir) {
+  const dest = path.join(skillsInstallDir, "tied-yaml");
+  fs.mkdirSync(skillsInstallDir, { recursive: true });
   copyTreeWithAttributes(src, dest);
   chmodExecutableRecursive(dest);
   for (const scriptName of ["tied-cli.sh", "tied.sh", "feature-orchestrator.sh"]) {
@@ -124,8 +126,8 @@ function installClaudeTiedYamlSkillFrom(projectRoot, src, tiedRepoRoot, marker) 
   }
 }
 
-function installClaudePromptTypeSkillsFrom(projectRoot, src, paths) {
-  const dest = path.join(projectRoot, ".claude", "skills");
+function installClaudePromptTypeSkillsFrom(projectRoot, src, paths, skillsInstallDir) {
+  const dest = skillsInstallDir;
   const { PROMPT_TYPE_SHARED_DIR, PROMPT_TYPE_SKILL_DIRS } = paths;
   fs.mkdirSync(dest, { recursive: true });
   copyTreeWithAttributes(path.join(src, PROMPT_TYPE_SHARED_DIR), path.join(dest, PROMPT_TYPE_SHARED_DIR));
@@ -138,8 +140,8 @@ function installClaudePromptTypeSkillsFrom(projectRoot, src, paths) {
   }
 }
 
-function symlinkClaudePromptTypeSkillsFrom(projectRoot, src, paths) {
-  const dest = path.join(projectRoot, ".claude", "skills");
+function symlinkClaudePromptTypeSkillsFrom(projectRoot, src, paths, skillsInstallDir) {
+  const dest = skillsInstallDir;
   const { PROMPT_TYPE_SHARED_DIR, PROMPT_TYPE_SKILL_DIRS } = paths;
   fs.mkdirSync(dest, { recursive: true });
   const linkEntry = (name) => {
@@ -158,7 +160,8 @@ function symlinkClaudePromptTypeSkillsFrom(projectRoot, src, paths) {
 /**
  * [IMPL-TIED_CLAUDE_HARNESS] [ARCH-TIED_CLAUDE_HARNESS] [REQ-TIED_CLAUDE_HARNESS] [REQ-PROMPT_TYPE_GLOBAL_SKILLS]
  * [IMPL-TIED_CLAUDE_BOOTSTRAP_OPS] [ARCH-TIED_CLAUDE_BOOTSTRAP_OPS] [REQ-TIED_CLAUDE_BOOTSTRAP_OPS]
- * How: INSTALL_CLAUDE_SKILLS — copy-default bundled skills to .claude/skills/ (Unix symlink opt-in gated by GATE_SYMLINK_ON_WINDOWS_PROOF).
+ * [IMPL-TIED_CLAUDE_SKILLS_REROOT] [ARCH-TIED_CLAUDE_SKILLS_REROOT] [REQ-TIED_CLAUDE_SKILLS_REROOT]
+ * How: INSTALL_CLAUDE_SKILLS — copy-default bundled skills (Unix symlink opt-in gated by GATE_SYMLINK_ON_WINDOWS_PROOF); destination from options.skillsInstallDir.
  */
 export function installClaudeSkills(projectRoot, paths, options = {}) {
   if (options.symlink_unix_opt_in && !options.windows_copy_proven_in_ci) {
@@ -167,6 +170,8 @@ export function installClaudeSkills(projectRoot, paths, options = {}) {
   const tiedRepoRoot = paths.tiedRepoRoot ?? paths.TIED_REPO_ROOT;
   const { tiedYamlSkillCanonical, tiedYamlSkillDevFallback, marker, promptTypeSkillsCanonical } = paths;
   const { PROMPT_TYPE_SHARED_DIR, PROMPT_TYPE_SKILL_DIRS } = paths;
+  const skillsInstallDir =
+    options.skillsInstallDir ?? path.join(projectRoot, ".claude", "skills");
   const installedPaths = [];
   const useUnixSymlink =
     options.symlink_unix_opt_in &&
@@ -178,30 +183,30 @@ export function installClaudeSkills(projectRoot, paths, options = {}) {
     throw new Error("SKILL_INSTALL_FAILED");
   }
   if (useUnixSymlink) {
-    symlinkClaudePromptTypeSkillsFrom(projectRoot, promptTypeSkillsCanonical, paths);
+    symlinkClaudePromptTypeSkillsFrom(projectRoot, promptTypeSkillsCanonical, paths, skillsInstallDir);
   } else {
-    installClaudePromptTypeSkillsFrom(projectRoot, promptTypeSkillsCanonical, paths);
+    installClaudePromptTypeSkillsFrom(projectRoot, promptTypeSkillsCanonical, paths, skillsInstallDir);
   }
-  installedPaths.push(path.join(projectRoot, ".claude", "skills"));
+  installedPaths.push(skillsInstallDir);
 
   if (skillIsComplete(tiedYamlSkillCanonical)) {
-    installClaudeTiedYamlSkillFrom(projectRoot, tiedYamlSkillCanonical, tiedRepoRoot, marker);
+    installClaudeTiedYamlSkillFrom(projectRoot, tiedYamlSkillCanonical, tiedRepoRoot, marker, skillsInstallDir);
   } else if (skillIsComplete(tiedYamlSkillDevFallback)) {
     sayWarn(
       `Bundled tied-yaml missing or incomplete at ${tiedYamlSkillCanonical}; using non-canonical ${tiedYamlSkillDevFallback}.`
     );
-    installClaudeTiedYamlSkillFrom(projectRoot, tiedYamlSkillDevFallback, tiedRepoRoot, marker);
+    installClaudeTiedYamlSkillFrom(projectRoot, tiedYamlSkillDevFallback, tiedRepoRoot, marker, skillsInstallDir);
   } else {
     sayErr("ERROR: tied-yaml skill not found or incomplete for Claude install.");
     throw new Error("SKILL_INSTALL_FAILED");
   }
-  installedPaths.push(path.join(projectRoot, ".claude", "skills", "tied-yaml"));
+  installedPaths.push(path.join(skillsInstallDir, "tied-yaml"));
   if (useUnixSymlink) {
     sayWarn(
-      `Symlinked Claude prompt-type skills into ${path.join(projectRoot, ".claude", "skills")} (tied-yaml copied for TIED_REPO_ROOT patch).`
+      `Symlinked Claude prompt-type skills into ${skillsInstallDir} (tied-yaml copied for TIED_REPO_ROOT patch).`
     );
   } else {
-    sayWarn(`Copied Claude skills into ${path.join(projectRoot, ".claude", "skills")} (copy default).`);
+    sayWarn(`Copied Claude skills into ${skillsInstallDir} (copy default).`);
   }
   return { installedPaths };
 }

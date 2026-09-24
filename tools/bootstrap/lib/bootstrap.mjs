@@ -14,6 +14,10 @@ import {
 import { assertMcpPrerequisite, initializeTiedMcpConfig, initializeClaudeMcpConfig } from "./mcp-config.mjs";
 import { copyHooks, installTiedYamlSkill, installPromptTypeSkills, installClaudeSkills } from "./skills.mjs";
 import {
+  buildSkillsBootstrapOptions,
+  resolveSkillsInstallDir,
+} from "./skills-reroot.mjs";
+import {
   writeClientVocabHandoffs,
   refreshMethodologyVocab,
   normalizeMethodologyVocabLinks,
@@ -98,10 +102,16 @@ export function bootstrapTied(projectRoot, options = {}) {
   fs.mkdirSync(cursorDir, { recursive: true });
   initializeTiedMcpConfig(projectRoot, TIED_REPO_ROOT, env);
 
-  installTiedYamlSkill(projectRoot, paths);
-  installPromptTypeSkills(projectRoot, paths);
+  const skillsBootstrap = buildSkillsBootstrapOptions(env, TIED_REPO_ROOT, WINDOWS_COPY_PROVEN_IN_CI);
+  const cursorSkillsDir = resolveSkillsInstallDir(projectRoot, "cursor", skillsBootstrap);
+  const claudeSkillsDir = resolveSkillsInstallDir(projectRoot, "claude", skillsBootstrap);
+  installTiedYamlSkill(projectRoot, paths, { skillsInstallDir: cursorSkillsDir });
+  installPromptTypeSkills(projectRoot, paths, { skillsInstallDir: cursorSkillsDir });
   // [IMPL-TIED_CLAUDE_HARNESS] [ARCH-TIED_CLAUDE_HARNESS] [REQ-TIED_CLAUDE_HARNESS] — dual harness install after Cursor paths.
+  // [IMPL-TIED_CLAUDE_SKILLS_REROOT] [ARCH-TIED_CLAUDE_SKILLS_REROOT] [REQ-TIED_CLAUDE_SKILLS_REROOT]
   installClaudeSkills(projectRoot, paths, {
+    ...skillsBootstrap,
+    skillsInstallDir: claudeSkillsDir,
     windows_copy_proven_in_ci: WINDOWS_COPY_PROVEN_IN_CI,
   });
   initializeClaudeMcpConfig(projectRoot, TIED_REPO_ROOT, { env, harnessLabel: "claude" });
@@ -217,7 +227,7 @@ export function bootstrapTied(projectRoot, options = {}) {
   normalizeMethodologyVocabLinks(path.join(methodologyDir, "vocab"));
 
   const tiedBasePathValue = tiedBasePathValueFor(projectRoot);
-  const tiedCliDest = tiedCliDestFor(projectRoot);
+  const tiedCliDest = tiedCliDestFor(projectRoot, cursorSkillsDir);
 
   verifyFidelityMethodology(tiedDir, tiedBasePathValue, tiedCliDest);
   verifyAdversarialInquiryMethodology(tiedDir);

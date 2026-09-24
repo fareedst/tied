@@ -9,6 +9,7 @@ import path from "node:path";
 /** Fail messages aligned with working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/phase0/windows_smoke_assert_list.md */
 export const WINDOWS_CLAUDE_SMOKE_FAIL = {
   SKILLS_DIR: "FAIL: .claude\\skills missing",
+  SKILLS_REROOT_DIR: "FAIL: skills\\ missing",
   INVENTORY: "FAIL: Claude skills inventory incomplete",
   MCP_JSON: "FAIL: repo-root .mcp.json missing",
   TIED_YAML: "FAIL: mcpServers.tied-yaml missing",
@@ -17,8 +18,9 @@ export const WINDOWS_CLAUDE_SMOKE_FAIL = {
 /**
  * Managed inventory policy matches tools/bootstrap/lib/claude-harness.test.mjs INSTALL_CLAUDE_SKILLS.
  */
-export function claudeManagedInventoryComplete(smokeClientRoot) {
-  const skillsRoot = path.join(smokeClientRoot, ".claude", "skills");
+export function claudeManagedInventoryComplete(smokeClientRoot, skillsRootOverride) {
+  const skillsRoot =
+    skillsRootOverride ?? path.join(smokeClientRoot, ".claude", "skills");
   if (!fs.existsSync(skillsRoot)) {
     return false;
   }
@@ -28,15 +30,25 @@ export function claudeManagedInventoryComplete(smokeClientRoot) {
   return fs.existsSync(tiedCli) && fs.existsSync(buildPlan) && fs.existsSync(shared);
 }
 
+function resolveSmokeSkillsRoot(smokeClientRoot, assertOptions = {}) {
+  if (assertOptions.skills_reroot_enabled) {
+    return path.join(smokeClientRoot, "skills");
+  }
+  return path.join(smokeClientRoot, ".claude", "skills");
+}
+
 /**
  * @returns {{ ok: true, asserts: string[] } | { ok: false, code: string, message: string }}
  */
-export function assertWindowsBootstrapClaude(smokeClientRoot) {
-  const skillsRoot = path.join(smokeClientRoot, ".claude", "skills");
+export function assertWindowsBootstrapClaude(smokeClientRoot, assertOptions = {}) {
+  const skillsRoot = resolveSmokeSkillsRoot(smokeClientRoot, assertOptions);
   if (!fs.existsSync(skillsRoot)) {
-    return { ok: false, code: "CLAUDE_SKILLS_MISSING", message: WINDOWS_CLAUDE_SMOKE_FAIL.SKILLS_DIR };
+    const message = assertOptions.skills_reroot_enabled
+      ? WINDOWS_CLAUDE_SMOKE_FAIL.SKILLS_REROOT_DIR
+      : WINDOWS_CLAUDE_SMOKE_FAIL.SKILLS_DIR;
+    return { ok: false, code: "CLAUDE_SKILLS_MISSING", message };
   }
-  if (!claudeManagedInventoryComplete(smokeClientRoot)) {
+  if (!claudeManagedInventoryComplete(smokeClientRoot, skillsRoot)) {
     return { ok: false, code: "CLAUDE_SKILLS_MISSING", message: WINDOWS_CLAUDE_SMOKE_FAIL.INVENTORY };
   }
 

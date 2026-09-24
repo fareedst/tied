@@ -1,0 +1,36 @@
+CITDP-REQ-TIED_CLAUDE_SKILLS_REROOT:
+  change_definition:
+    current_behavior: "Bootstrap installs managed skills under .cursor/skills and .claude/skills only."
+    desired_behavior: "Optional TIED_SKILLS_REROOT=1 installs both harnesses to repo-root skills/ when gates pass."
+    non_goals:
+      - "Default-on re-root"
+  record_identity:
+    change_request_id: "REQ-TIED_CLAUDE_SKILLS_REROOT"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-09-24"
+    title: "Optional repo-root skills re-root (R3)"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Default-on breaking harness-native clients"
+        - "Enabling re-root without ARCH-TIED_CLAUDE_SKILLS_REROOT"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Windows smoke without TIED_SKILLS_REROOT still expects .claude/skills"
+      evidence_references:
+        - "tied/architecture-decisions/ARCH-TIED_CLAUDE_SKILLS_REROOT.yaml"
+        - "tools/bootstrap/lib/claude-harness.test.mjs"
+        - "working/REQ-TIED_CLAUDE_SKILLS_REROOT/evidence/sub-adversarial-inquiry-pass-na.md"
+        - "working/REQ-TIED_CLAUDE_SKILLS_REROOT/PLAN.md"
+      falsification_questions:
+        - "Does default bootstrap still install under .cursor/skills and .claude/skills?"
+        - "Does flag-on without windows proof throw REROOT_WITHOUT_WINDOWS_PROOF?"
+      gate_policy: "advisory"
+      sub_adversarial_inquiry_pass: "not_applicable"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+  test_strategy:
+    summary: "CONFIG_SKILLS_REROOT suite in claude-harness.test.mjs; 17/17 pass."

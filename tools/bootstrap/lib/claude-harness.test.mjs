@@ -18,6 +18,11 @@ import {
   assertWindowsBootstrapClaude,
   WINDOWS_CLAUDE_SMOKE_FAIL,
 } from "./assert-windows-bootstrap-claude.mjs";
+import {
+  SKILLS_REROOT_ENV,
+  resolveSkillsInstallDir,
+  skillsRerootEnabledFromEnv,
+} from "./skills-reroot.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -169,6 +174,101 @@ describe("ASSERT_WINDOWS_BOOTSTRAP_CLAUDE [REQ-TIED_CLAUDE_BOOTSTRAP_OPS]", () =
     const result = assertWindowsBootstrapClaude(clientRoot);
     assert.equal(result.ok, true);
     assert.deepEqual(result.asserts, ["claude_skills", "mcp_json_tied_yaml"]);
+  });
+});
+
+describe("CONFIG_SKILLS_REROOT [REQ-TIED_CLAUDE_SKILLS_REROOT]", () => {
+  it("default resolves harness-native skills dirs", () => {
+    const clientRoot = tempClient();
+    const opts = {
+      skills_reroot_enabled: false,
+      windows_copy_proven_in_ci: true,
+      tiedRepoRoot: TIED_REPO_ROOT,
+    };
+    assert.equal(
+      resolveSkillsInstallDir(clientRoot, "cursor", opts),
+      path.join(clientRoot, ".cursor", "skills"),
+    );
+    assert.equal(
+      resolveSkillsInstallDir(clientRoot, "claude", opts),
+      path.join(clientRoot, ".claude", "skills"),
+    );
+  });
+
+  it("RED: rejects re-root without Windows copy proof", () => {
+    const clientRoot = tempClient();
+    assert.throws(
+      () =>
+        resolveSkillsInstallDir(clientRoot, "claude", {
+          skills_reroot_enabled: true,
+          windows_copy_proven_in_ci: false,
+          tiedRepoRoot: TIED_REPO_ROOT,
+        }),
+      /REROOT_WITHOUT_WINDOWS_PROOF/,
+    );
+  });
+
+  it("RED: rejects re-root without ARCH decision file", () => {
+    const clientRoot = tempClient();
+    const bareTiedRoot = fs.mkdtempSync(path.join(os.tmpdir(), "tied-no-arch-"));
+    assert.throws(
+      () =>
+        resolveSkillsInstallDir(clientRoot, "claude", {
+          skills_reroot_enabled: true,
+          windows_copy_proven_in_ci: true,
+          tiedRepoRoot: bareTiedRoot,
+        }),
+      /REROOT_WITHOUT_ARCH/,
+    );
+  });
+
+  it("GREEN: installs Claude managed inventory under repo-root skills/ when re-root enabled", () => {
+    const clientRoot = tempClient();
+    const skillsDir = resolveSkillsInstallDir(clientRoot, "claude", {
+      skills_reroot_enabled: true,
+      windows_copy_proven_in_ci: true,
+      tiedRepoRoot: TIED_REPO_ROOT,
+    });
+    assert.equal(skillsDir, path.join(clientRoot, "skills"));
+    const paths = manifestPaths();
+    paths.tiedRepoRoot = TIED_REPO_ROOT;
+    installClaudeSkills(clientRoot, paths, {
+      skills_reroot_enabled: true,
+      windows_copy_proven_in_ci: true,
+      tiedRepoRoot: TIED_REPO_ROOT,
+      skillsInstallDir: skillsDir,
+    });
+    assert.ok(fs.existsSync(path.join(skillsDir, "tied-yaml", "scripts", "tied-cli.sh")));
+    assert.ok(fs.existsSync(path.join(skillsDir, "build-plan", "SKILL.md")));
+  });
+
+  it("bootstrap with TIED_SKILLS_REROOT=1 places Cursor skills under repo-root skills/", () => {
+    const clientRoot = tempClient();
+    const mcpPath = path.join(clientRoot, ".cursor", "mcp.json");
+    fs.mkdirSync(path.dirname(mcpPath), { recursive: true });
+    fs.writeFileSync(mcpPath, `${JSON.stringify({ mcpServers: {} }, null, 2)}\n`, "utf8");
+    assertMcpPrerequisite(TIED_REPO_ROOT);
+    bootstrapTied(clientRoot, {
+      env: { ...process.env, [SKILLS_REROOT_ENV]: "1" },
+    });
+    const rerootDir = path.join(clientRoot, "skills");
+    assert.ok(fs.existsSync(path.join(rerootDir, "tied-yaml", "scripts", "tied-cli.sh")));
+    assert.ok(fs.existsSync(path.join(rerootDir, "build-plan", "SKILL.md")));
+    assert.equal(fs.existsSync(path.join(clientRoot, ".cursor", "skills", "tied-yaml")), false);
+    assert.ok(skillsRerootEnabledFromEnv({ [SKILLS_REROOT_ENV]: "1" }));
+  });
+
+  it("Windows assert honors re-root layout after bootstrapTied", () => {
+    const clientRoot = tempClient();
+    const mcpPath = path.join(clientRoot, ".cursor", "mcp.json");
+    fs.mkdirSync(path.dirname(mcpPath), { recursive: true });
+    fs.writeFileSync(mcpPath, `${JSON.stringify({ mcpServers: {} }, null, 2)}\n`, "utf8");
+    assertMcpPrerequisite(TIED_REPO_ROOT);
+    bootstrapTied(clientRoot, {
+      env: { ...process.env, [SKILLS_REROOT_ENV]: "1" },
+    });
+    const result = assertWindowsBootstrapClaude(clientRoot, { skills_reroot_enabled: true });
+    assert.equal(result.ok, true);
   });
 });
 

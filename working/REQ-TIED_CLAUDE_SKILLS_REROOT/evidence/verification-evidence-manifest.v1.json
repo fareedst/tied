@@ -1,0 +1,52 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "close-out-REQ-TIED_CLAUDE_SKILLS_REROOT-2026-09-24",
+  "commit": "cf9e2b4",
+  "environment": {
+    "node": "close-out-gates",
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "command_results": [
+    {
+      "id": "claude-harness-config-skills-reroot",
+      "command": [
+        "node",
+        "--test",
+        "tools/bootstrap/lib/claude-harness.test.mjs"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 287,
+      "artifacts": [
+        "working/REQ-TIED_CLAUDE_SKILLS_REROOT/evidence/claude-harness-test-stdout.txt"
+      ]
+    }
+  ],
+  "quality_rows": [
+    {
+      "id": "skills-reroot-unit",
+      "attribute": "CONFIG_SKILLS_REROOT",
+      "applicability": "applicable",
+      "rationale": "R3 optional repo-root skills re-root acceptance",
+      "evidence_method": "automated_test",
+      "command_or_test": "node --test tools/bootstrap/lib/claude-harness.test.mjs",
+      "result": "passed",
+      "owner": "plan-close-out"
+    }
+  ],
+  "covered_tokens": [
+    "ARCH-TIED_CLAUDE_SKILLS_REROOT",
+    "IMPL-TIED_CLAUDE_SKILLS_REROOT",
+    "REQ-TIED_CLAUDE_SKILLS_REROOT"
+  ],
+  "proof_boundaries": [
+    "Default bootstrap unchanged without TIED_SKILLS_REROOT",
+    "Integrated adversarial inquiry waived at minimal depth",
+    "R5/R7 comparison-plan slices remain deferred per PLAN.md"
+  ],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": []
+  }
+}

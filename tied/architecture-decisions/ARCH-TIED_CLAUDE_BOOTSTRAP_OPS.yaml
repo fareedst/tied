@@ -23,19 +23,19 @@ ARCH-TIED_CLAUDE_BOOTSTRAP_OPS:
   implementation_approach:
     details:
       - "ASSERT_WINDOWS_BOOTSTRAP_CLAUDE extends windows-bootstrap-smoke.cmd (+ CI if present)."
-      - "CONFIG_SKILLS_REROOT is optional, default-off, dual-harness + Windows."
+      - "CONFIG_SKILLS_REROOT design deferred in bootstrap ops close-out; shipped under REQ-TIED_CLAUDE_SKILLS_REROOT (tools/bootstrap/lib/skills-reroot.mjs, TIED_SKILLS_REROOT=1, default off)."
       - "GATE_SYMLINK_ON_WINDOWS_PROOF keeps throw when windows_copy_proven_in_ci false."
       - "REFRESH_COMPARISON_PLAN_DOC is mandatory for B close-out."
       - "SPIKE_CLAUDE_ADHERENCE_HOOKS yields bridge or not_applicable receipt."
-    summary: "B1-first TDD: RED Windows smoke asserts, GREEN + proof note, then symlink gate tests, then optional re-root behind ARCH flag, adherence spike, comparison-doc refresh at close-out."
+    summary: "B1-first TDD: RED Windows smoke asserts, GREEN + proof note, then symlink gate tests; optional re-root owned by REQ-TIED_CLAUDE_SKILLS_REROOT; adherence spike, comparison-doc refresh at bootstrap ops close-out."
   metadata:
     created:
       author: "plan-new-feature"
       date: "2026-09-23"
     last_updated:
-      author: "plan-new-feature"
-      date: "2026-09-23"
-      reason: "Initial ARCH for bootstrap-ops follow-on"
+      author: "LEAP-ad-hoc"
+      date: "2026-09-24"
+      reason: "B3 CONFIG_SKILLS_REROOT implementation transferred to ARCH/IMPL/REQ-TIED_CLAUDE_SKILLS_REROOT; bootstrap ops retains sequencing gate only."
   name: "Claude bootstrap ops architecture"
   rationale:
     benefits:
@@ -54,8 +54,10 @@ ARCH-TIED_CLAUDE_BOOTSTRAP_OPS:
       - "ARCH-TIED_CLAUDE_HARNESS"
     see_also:
       - "ARCH-TIED_CLAUDE_LIVE_DRIVER"
+      - "ARCH-TIED_CLAUDE_SKILLS_REROOT"
       - "IMPL-TIED_CLAUDE_HARNESS"
       - "REQ-TIED_CLAUDE_LIVE_DRIVER"
+      - "REQ-TIED_CLAUDE_SKILLS_REROOT"
     supersedes: []
   status: "Draft"
   traceability:

@@ -1,0 +1,29 @@
+IMPL-TIED_CLAUDE_SKILLS_REROOT:
+  category: "Implementation"
+  code_locations:
+    files:
+      - description: "CONFIG_SKILLS_REROOT resolution and env parsing"
+        path: "tools/bootstrap/lib/skills-reroot.mjs"
+      - description: "Install targets use resolved skills root"
+        path: "tools/bootstrap/lib/skills.mjs"
+      - description: "Reroot-aware Windows asserts"
+        path: "tools/bootstrap/lib/assert-windows-bootstrap-claude.mjs"
+      - description: "Wire TIED_SKILLS_REROOT from env"
+        path: "tools/bootstrap/lib/bootstrap.mjs"
+    functions: []
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_CLAUDE_SKILLS_REROOT-pseudocode.md"
+  metadata:
+    created:
+      author: "build-plan R3"
+      date: "2026-09-24"
+  name: "Skills re-root implementation"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_CLAUDE_SKILLS_REROOT"
+    implementation:
+      - "IMPL-TIED_CLAUDE_SKILLS_REROOT"
+    requirements:
+      - "REQ-TIED_CLAUDE_SKILLS_REROOT"
+    tests:
+      - "tools/bootstrap/lib/claude-harness.test.mjs"

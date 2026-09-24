@@ -15,7 +15,7 @@ Read-only: `git status`, `git check-ignore -v` on representative paths.
 | `working/**/gate-args*.json` | **ignore** | Added convention pattern for one-off MCP gate validate payloads |
 | `working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/windows-claude-smoke-proof.md` | **track** | Proof artifact; stage at `traceable-commit` when committing B residual |
 | `working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/request-evidence-envelope.v1.json` (+ manifest, N/A receipt) | **track** | Existing `!` negations `.gitignore:125–127` |
-| `docs/comparisons/**` | **ignore** (intentional) | `.gitignore:11` — comparison-doc edits stay local |
+| `docs/comparisons/**` | **track** | Removed repo-wide ignore (2026-09-24); linked from REQ/CITDP and `tied/docs/client-development-index.md` |
 | `mcp-server/test/fixtures/**/request-evidence-envelope.v1.json` (modified) | **revert / do not stage** | Regenerated envelope patch noise |
 | `tied/citdp/CITDP-REQ-TIED_CLAUDE_*.yaml`, LIVE_DRIVER tracker edits | **track** | LEAP/refine hygiene; stage only when scoped |
 | `working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/pre_implementation-*.json` | **track** (optional) | `!` negation `.gitignore:94` |
@@ -33,4 +33,4 @@ Under `# Ephemeral working/` block in `.gitignore`:
 
 **Applied unstaged `.gitignore` additions:** `working/REFINE-*/`, `working/**/gate-args*.json`; stage at `traceable-commit`.
 
-**N/A (already covered):** debug logs, `docs/comparisons/`, Claude harness gate `!` negations, `working/**/gates/` default with REQ-specific exceptions.
+**N/A (already covered):** debug logs, Claude harness gate `!` negations, `working/**/gates/` default with REQ-specific exceptions.

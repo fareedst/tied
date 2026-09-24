@@ -24,8 +24,9 @@ After Phases 0→3 and follow-on REQs closed, the comparison doc still read like
 | --- | --- | --- | --- | --- |
 | **R1** | Comparison doc **Current vs Proposed** reconciliation + **What remains** section | This folder (doc-only) | **`refine-plan`** (this session) | Doc labels match repo; Last updated current; no false **Proposed** on shipped paths |
 | **R2** ✅ | ~~Stale deferral note for B3~~ — **complete 2026-09-24** | LEAP hygiene — doc patch (R4 still owns full dual-REQ YAML LEAP) | **`build-plan`** (metadata-only) | Deferral doc matches `constants.mjs` + CITDP; B3 still **deferred** until sponsor scopes **R3** |
-| **R3** | Optional **repo-root `skills/` re-root** (B3 / CONFIG_SKILLS_REROOT) | **New REQ** (e.g. `REQ-TIED_CLAUDE_SKILLS_REROOT`) *or* explicit sponsor reopen of bootstrap ops slice | **`plan-new-feature`** → **`build-plan`** | RED dual-harness + Windows asserts; not default-on |
+| **R3** ✅ | ~~Optional **repo-root `skills/` re-root** (B3 / CONFIG_SKILLS_REROOT)~~ — **complete 2026-09-24** | [`REQ-TIED_CLAUDE_SKILLS_REROOT`](../../tied/requirements/REQ-TIED_CLAUDE_SKILLS_REROOT.yaml) | **`build-plan`** R3 | `TIED_SKILLS_REROOT=1`; 17/17 harness tests; default off |
 | **R4** ✅ | ~~Post-close-out **TIED YAML / Tracker / CHANGELOG LEAP** (dual child REQ hygiene)~~ — **complete 2026-09-24** | [`working/REFINE-DUAL_REQ_CLOSE_OUT/`](../../working/REFINE-DUAL_REQ_CLOSE_OUT/) | **`build-plan`** R4 slice | `tied_validate_consistency` ok; close_out gates allowed; envelope blocking gaps 0; traceable commit |
+
 | **R5** | **Operator live** Claude checklist smoke (not CI) | Human operator | README: `AGENTSTREAM_CLAUDE_LIVE_OK=1` after local `npm test` | Optional receipt in `working/`; not a merge gate |
 | **R6** | **Interactive Claude IDE** pilot (skill discovery, MCP auth in real session) | Optional operator / future spike REQ | Manual pilot per Phase 0 notes | Gap list update only if new unknowns found |
 | **R7** | Replace **synthetic-v1** stream oracles with captured real CLI | Maintenance on `REQ-TIED_CLAUDE_LIVE_DRIVER` or small follow-on | **`build-plan`** | Frozen fixtures updated; README pin aligned |
@@ -36,6 +37,7 @@ After Phases 0→3 and follow-on REQs closed, the comparison doc still read like
 | ID | Completed | Evidence |
 | --- | --- | --- |
 | **R2** | 2026-09-24 | [`skills-reroot-deferred.md`](../REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/skills-reroot-deferred.md); [`gate-verification-b2-b5-slice.md`](../REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/gate-verification-b2-b5-slice.md) close-out LEAP note |
+| **R3** | 2026-09-24 | [`REQ-TIED_CLAUDE_SKILLS_REROOT`](../../tied/requirements/REQ-TIED_CLAUDE_SKILLS_REROOT.yaml); `tools/bootstrap/lib/skills-reroot.mjs`; `working/REQ-TIED_CLAUDE_SKILLS_REROOT/` |
 | **R4** | 2026-09-24 | Dual REQ close-out: post-CI BOOTSTRAP LEAP + LIVE_DRIVER tracker/evidence hygiene; [`~/.cursor/plans/dual_req_close-out_commit_796ef67c.plan.md`](~/.cursor/plans/dual_req_close-out_commit_796ef67c.plan.md); refine notes [`working/REFINE-DUAL_REQ_CLOSE_OUT/refine-notes.md`](../REFINE-DUAL_REQ_CLOSE_OUT/refine-notes.md) |
 
 ## Non-goals

@@ -4,6 +4,7 @@
  * How: CLI entry for scripts/windows-bootstrap-smoke.cmd — exit 1 with FAIL message on assert violation.
  */
 import { assertWindowsBootstrapClaude } from "./lib/assert-windows-bootstrap-claude.mjs";
+import { skillsRerootEnabledFromEnv } from "./lib/skills-reroot.mjs";
 
 const smokeRoot = process.argv[2];
 if (!smokeRoot) {
@@ -11,7 +12,9 @@ if (!smokeRoot) {
   process.exit(2);
 }
 
-const result = assertWindowsBootstrapClaude(smokeRoot);
+const result = assertWindowsBootstrapClaude(smokeRoot, {
+  skills_reroot_enabled: skillsRerootEnabledFromEnv(process.env),
+});
 if (!result.ok) {
   console.error(result.message);
   process.exit(1);

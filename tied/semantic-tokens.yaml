@@ -727,6 +727,18 @@ ARCH-TIED_CLAUDE_LIVE_DRIVER:
     registered: "2026-09-23"
   name: "Claude AgentDriver and oracle architecture"
   source_index: "architecture-decisions.yaml"
+ARCH-TIED_CLAUDE_SKILLS_REROOT:
+  category: "Architecture"
+  cross_references:
+    - "IMPL-TIED_CLAUDE_SKILLS_REROOT"
+    - "REQ-TIED_CLAUDE_SKILLS_REROOT"
+  description: "Default-off repo-root skills/ dual-harness install policy."
+  detail_file: "architecture-decisions/ARCH-TIED_CLAUDE_SKILLS_REROOT.yaml"
+  metadata:
+    last_updated: "2026-09-24"
+    registered: "2026-09-24"
+  name: "Skills re-root architecture"
+  source_index: "architecture-decisions.yaml"
 ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY:
   cross_references:
     - "IMPL-TIED_FEEDBACK_PROMOTION"
@@ -1757,6 +1769,18 @@ IMPL-TIED_CLAUDE_LIVE_DRIVER:
     last_updated: "2026-09-23"
     registered: "2026-09-23"
   name: "Claude live AgentDriver implementation"
+  source_index: "implementation-decisions.yaml"
+IMPL-TIED_CLAUDE_SKILLS_REROOT:
+  category: "Implementation"
+  cross_references:
+    - "ARCH-TIED_CLAUDE_SKILLS_REROOT"
+    - "REQ-TIED_CLAUDE_SKILLS_REROOT"
+  description: "skills-reroot.mjs CONFIG_SKILLS_REROOT resolution and bootstrap wiring."
+  detail_file: "implementation-decisions/IMPL-TIED_CLAUDE_SKILLS_REROOT.yaml"
+  metadata:
+    last_updated: "2026-09-24"
+    registered: "2026-09-24"
+  name: "Skills re-root implementation"
   source_index: "implementation-decisions.yaml"
 IMPL-TIED_FEEDBACK_PROMOTION:
   cross_references:
@@ -2981,6 +3005,19 @@ REQ-TIED_CLAUDE_LIVE_DRIVER:
     last_updated: "2026-09-23"
     registered: "2026-09-23"
   name: "Claude live AgentDriver and stream oracles"
+  source_index: "requirements.yaml"
+REQ-TIED_CLAUDE_SKILLS_REROOT:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-TIED_CLAUDE_SKILLS_REROOT"
+    - "IMPL-TIED_CLAUDE_SKILLS_REROOT"
+    - "REQ-TIED_CLAUDE_BOOTSTRAP_OPS"
+  description: "TIED_SKILLS_REROOT optional unified skills/ install for Cursor and Claude bootstrap."
+  detail_file: "requirements/REQ-TIED_CLAUDE_SKILLS_REROOT.yaml"
+  metadata:
+    last_updated: "2026-09-24"
+    registered: "2026-09-24"
+  name: "Optional repo-root skills re-root"
   source_index: "requirements.yaml"
 REQ-TIED_FIDELITY_RESEARCH:
   category: "Functional"

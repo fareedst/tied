@@ -1,6 +1,6 @@
 CITDP-REQ-TIED_CLAUDE_BOOTSTRAP_OPS:
   change_definition:
-    current_behavior: "B1 Windows CI green (GitHub Actions run 36031010940; .github/workflows/windows-bootstrap-smoke.yml); ASSERT_WINDOWS_BOOTSTRAP_CLAUDE shipped; windows_copy_proven_in_ci / WINDOWS_COPY_PROVEN_IN_CI true in code and REQ metadata; B2 GATE_SYMLINK_ON_WINDOWS_PROOF test-proven; B4 adherence N/A; B5 comparison doc Current/Post-Phases refreshed; B3 CONFIG_SKILLS_REROOT deferred."
+    current_behavior: "B1 Windows CI green (GitHub Actions run 36031010940; .github/workflows/windows-bootstrap-smoke.yml); ASSERT_WINDOWS_BOOTSTRAP_CLAUDE shipped; windows_copy_proven_in_ci / WINDOWS_COPY_PROVEN_IN_CI true in code and REQ metadata; B2 GATE_SYMLINK_ON_WINDOWS_PROOF test-proven; B4 adherence N/A; B5 comparison doc Current/Post-Phases refreshed; B3 CONFIG_SKILLS_REROOT deferred at bootstrap ops close-out — implementation owned by REQ-TIED_CLAUDE_SKILLS_REROOT (2026-09-24)."
     desired_behavior: "Windows CI/smoke proves Claude skills + .mcp.json; symlink opt-in only after windows_copy_proven_in_ci flip; optional skills/ re-root behind ARCH + default-off flag + dual-harness/Windows tests; adherence spike with bridge or not_applicable receipt; comparison doc Current/Post-Phases/Status match closed parent + REQ A/B."
     non_goals:
       - "AgentDriver / live stream fixtures (REQ-TIED_CLAUDE_LIVE_DRIVER)"
@@ -54,12 +54,13 @@ CITDP-REQ-TIED_CLAUDE_BOOTSTRAP_OPS:
       - "IMPL-TIED_CLAUDE_BOOTSTRAP_OPS"
       - "IMPL-TIED_CLAUDE_HARNESS"
       - "IMPL-TIED_FILES"
-    modules_or_boundaries: "scripts/windows-bootstrap-smoke.cmd; tools/bootstrap/lib/skills.mjs (installClaudeSkills); tools/bootstrap/lib/claude-harness.test.mjs; optional bootstrap flag for skills/ re-root; docs/comparisons/claude-code-tied-multi-harness-plan.md; CI Windows job if present"
+    modules_or_boundaries: "scripts/windows-bootstrap-smoke.cmd; tools/bootstrap/lib/skills.mjs (installClaudeSkills); tools/bootstrap/lib/claude-harness.test.mjs; skills/ re-root in tools/bootstrap/lib/skills-reroot.mjs (REQ-TIED_CLAUDE_SKILLS_REROOT); docs/comparisons/claude-code-tied-multi-harness-plan.md; CI Windows job if present"
     requirements:
       - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
       - "REQ-TIED_CLAUDE_BOOTSTRAP_OPS"
       - "REQ-TIED_CLAUDE_HARNESS"
       - "REQ-TIED_CLAUDE_LIVE_DRIVER"
+      - "REQ-TIED_CLAUDE_SKILLS_REROOT"
       - "REQ-TIED_SETUP"
     tied_tokens_affected:
       - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
@@ -70,10 +71,12 @@ CITDP-REQ-TIED_CLAUDE_BOOTSTRAP_OPS:
       - "IMPL-TIED_CLAUDE_BOOTSTRAP_OPS"
       - "REQ-TIED_CLAUDE_BOOTSTRAP_OPS"
   leap_feedback:
-    divergences_from_analysis: "B3 CONFIG_SKILLS_REROOT deferred; B4 adherence N/A; windows_copy_proven_in_ci flipped true only after Windows runner CI green (run 36031010940), never from darwin-only unit tests; proof note working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/windows-claude-smoke-proof.md."
-    parent_phase13_deferrals: "Phase 1 Windows Claude asserts and Phase 3 optional ergonomics (symlink unlock, skills/ re-root, adherence, comparison Current) owned by this REQ; do not silently rewrite closed parent Tracker. Live AgentDriver remains REQ-TIED_CLAUDE_LIVE_DRIVER."
-    record_status: "post_ci_leap_2026-09-24"
-    tied_stack_updates_required: []
+    divergences_from_analysis: "B3 deferred at bootstrap ops close-out then LEAP to REQ-TIED_CLAUDE_SKILLS_REROOT; B4 adherence N/A; windows_copy_proven_in_ci flipped true only after Windows runner CI green (run 36031010940), never from darwin-only unit tests; proof note working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/windows-claude-smoke-proof.md."
+    parent_phase13_deferrals: "Phase 1 Windows Claude asserts and Phase 3 optional ergonomics (symlink unlock, adherence, comparison Current) owned by this REQ; skills/ re-root (B3) owned by REQ-TIED_CLAUDE_SKILLS_REROOT after deferral. Live AgentDriver remains REQ-TIED_CLAUDE_LIVE_DRIVER. Do not silently rewrite closed parent Tracker."
+    record_status: "b3_ownership_leap_2026-09-24"
+    tied_stack_updates_required:
+      - "CITDP cross-link REQ-TIED_CLAUDE_SKILLS_REROOT (done)"
+      - "REQ-TIED_CLAUDE_BOOTSTRAP_OPS SC-BOOT-B3 ownership note (done)"
   migration_phases:
     - acceptance: "Assert expectations documented before RED on windows-bootstrap-smoke.cmd"
       deliverables:
@@ -128,9 +131,9 @@ CITDP-REQ-TIED_CLAUDE_BOOTSTRAP_OPS:
         rationale: "tied_adversarial_inquiry_run Mode B accepts Ruby/Go paths only; bootstrap/Windows/Node smoke work remains out of Mode B TS scope. Counterexamples stay in CITDP; do not silent-minimal without waiver."
       depth_tier: "minimal"
       disconfirming_observations:
-        - "windows_copy_proven_in_ci true after Windows CI run 36031010940; flag not flipped from darwin-only evidence"
+        - "B3 skills re-root deferred at bootstrap ops close-out; shipped under REQ-TIED_CLAUDE_SKILLS_REROOT"
         - "Mode B TS inquiry gap unchanged from parent/REQ A"
-        - "B3 skills re-root deferred at close-out"
+        - "windows_copy_proven_in_ci true after Windows CI run 36031010940; flag not flipped from darwin-only evidence"
       eligibility_triggers_matched:
         - "ci_artifact_claims"
         - "persistence"
@@ -172,7 +175,7 @@ CITDP-REQ-TIED_CLAUDE_BOOTSTRAP_OPS:
     residual_risk:
       expiry: "2026-12-31"
       owner: "REQ-TIED_CLAUDE_BOOTSTRAP_OPS program sponsor"
-      summary: "Mode B integrated inquiry activation deferred for TS/Node bootstrap paths; optional B3/B4 may remain deferred at close-out with Tracker notes."
+      summary: "Mode B integrated inquiry activation deferred for TS/Node bootstrap paths; B4 N/A at close-out; B3 ownership LEAP to REQ-TIED_CLAUDE_SKILLS_REROOT."
     risks:
       - description: "Adherence claim without API"
         id: "RISK-BOOT-005"
@@ -208,6 +211,6 @@ CITDP-REQ-TIED_CLAUDE_BOOTSTRAP_OPS:
       - name: "B2 RED/GREEN"
         sequence: "After B1 proof: RED/GREEN GATE_SYMLINK_ON_WINDOWS_PROOF in claude-harness.test.mjs (false→throw, true→symlink on Unix)."
       - name: "B3–B5"
-        sequence: "Optional CONFIG_SKILLS_REROOT; SPIKE_CLAUDE_ADHERENCE_HOOKS; mandatory REFRESH_COMPARISON_PLAN_DOC for close-out."
+        sequence: "B3 CONFIG_SKILLS_REROOT deferred here (REQ-TIED_CLAUDE_SKILLS_REROOT); SPIKE_CLAUDE_ADHERENCE_HOOKS; mandatory REFRESH_COMPARISON_PLAN_DOC for close-out."
       - name: "Phase 0 discovery"
         sequence: "Document pilot MCP/skill load checklist and Windows smoke assert list — no production bootstrap edits required for Phase 0 exit."
