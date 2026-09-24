@@ -25,4 +25,6 @@
 
 ## Close-out
 
-**Deferred** — machine close-out requires `sub-close-out-evidence-sync` (envelope validate + disposition sync). `windows_copy_proven_in_ci` remains **false** globally.
+**Deferred** — machine close-out requires `sub-close-out-evidence-sync` (envelope validate + disposition sync).
+
+**LEAP note (2026-09-24, R2):** `windows_copy_proven_in_ci` is **true** globally ([`constants.mjs`](../../../tools/bootstrap/lib/constants.mjs); [`windows-claude-smoke-proof.md`](windows-claude-smoke-proof.md)). CONFIG_SKILLS_REROOT (B3) remains **deferred** by close-out disposition — see [`skills-reroot-deferred.md`](skills-reroot-deferred.md).

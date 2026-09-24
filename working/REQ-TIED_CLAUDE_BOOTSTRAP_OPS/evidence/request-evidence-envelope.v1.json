@@ -1,7 +1,7 @@
 {
   "schema_version": "request-evidence-envelope.v1",
   "envelope_meta": {
-    "generated_at": "2026-09-24T17:25:51.860Z",
+    "generated_at": "2026-09-24T17:48:32.724Z",
     "generator": "request_evidence_envelope_build",
     "revision": 1
   },
@@ -17,8 +17,8 @@
     {
       "kind": "checklist_gate_receipt",
       "schema_version": "checklist-gate-receipt.v1",
-      "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/close_out-2026-09-24T17-24-58-014Z.json",
-      "content_hash": "sha256:cec96d6cde0b2a276a301da5b5ac9e0cf0bf8482814b22c2850210b38288ea01",
+      "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/close_out-2026-09-24T17-25-52-156Z.json",
+      "content_hash": "sha256:f67f7b29c467d2e9252e0b795cebb4ddb91b7f68cfab5a1fe22d9b20ac49f33a",
       "phase": "close_out",
       "status": "present",
       "proof_boundaries": [
@@ -31,17 +31,6 @@
       "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/pre_implementation-2026-09-24T04-48-48-713Z.json",
       "content_hash": "sha256:0002e091d7701a263e5726f584e2b007dd0389e89cd5f4a36f1907f9b73fd0a0",
       "phase": "pre_implementation",
-      "status": "present",
-      "proof_boundaries": [
-        "gate_decision_only"
-      ]
-    },
-    {
-      "kind": "checklist_gate_receipt",
-      "schema_version": "checklist-gate-receipt.v1",
-      "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/verification-2026-09-24T03-31-35-701Z.json",
-      "content_hash": "sha256:9f898ac36ac0795e77bc2d12cf18c1221e6a3092a340138c2415f168791c0907",
-      "phase": "verification",
       "status": "present",
       "proof_boundaries": [
         "gate_decision_only"
@@ -73,7 +62,7 @@
       "kind": "request_evidence_envelope",
       "schema_version": "request-evidence-envelope.v1",
       "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/request-evidence-envelope.v1.json",
-      "content_hash": "sha256:d225ec8610bf1a5ed096c0ae79189838bea59df87bcc9a9ebbdeeda8f3110cfd",
+      "content_hash": "sha256:3b1d6e8d08d5c127a9e261e8d351bd53a64c233909a06fef9aa742611c026919",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -161,7 +150,7 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/gate-verification-b2-b5-slice.md",
-      "content_hash": "sha256:7254a15eb78364dcd1e0277caeb6461fd6623a38133aea1f7fa2ebc514ae14ad",
+      "content_hash": "sha256:948bd2de416047b8d022ae6d62b58c969418914356e3d1392958672b842d551f",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -172,7 +161,7 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/gitignore-close-out-hygiene.md",
-      "content_hash": "sha256:9867d35bcba257a337d4dd3583ef43d7be908d87fe75bc19756434472987cb78",
+      "content_hash": "sha256:3673c7557db3d64d8d216a9086cb19df4cdabe5c61567f1ba0c69b365e0ca1e4",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -194,7 +183,7 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/skills-reroot-deferred.md",
-      "content_hash": "sha256:23d677233d0c14568c2b4ea9a3fbc0220b9e986fd6a344d3d20180d947d3891b",
+      "content_hash": "sha256:2379c79a05888528e87829909b4e0144b8ec89d095511505648cbcc942511042",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -217,6 +206,17 @@
       "schema_version": null,
       "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/tied-validate-consistency-summary.json",
       "content_hash": "sha256:67ce1ac6b8a42c68ef003202e594243d2ee8e4e55f0ddc9688bc921539db3dfd",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/traceable-commit-evidence.md",
+      "content_hash": "sha256:f0557c5cd0ca1d60f9e677fc4f64ae2fcfe080e25af682244e6a88c9ef92c3a7",
       "phase": null,
       "status": "present",
       "proof_boundaries": [

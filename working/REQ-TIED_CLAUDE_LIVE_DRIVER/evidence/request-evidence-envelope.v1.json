@@ -1,7 +1,7 @@
 {
   "schema_version": "request-evidence-envelope.v1",
   "envelope_meta": {
-    "generated_at": "2026-09-24T17:26:08.062Z",
+    "generated_at": "2026-09-24T17:48:43.098Z",
     "generator": "request_evidence_envelope_build",
     "revision": 1
   },
@@ -84,7 +84,7 @@
       "kind": "request_evidence_envelope",
       "schema_version": "request-evidence-envelope.v1",
       "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/request-evidence-envelope.v1.json",
-      "content_hash": "sha256:799c116476752c58a1501463778203d3d1815f58643a51a6a9f82391e21eb231",
+      "content_hash": "sha256:8ab60643fac193b8dee62178d99418020f7be70d6c69b700d1783cd371cb8af5",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -182,6 +182,17 @@
     {
       "kind": "unknown",
       "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/gitignore-close-out-hygiene-evidence.md",
+      "content_hash": "sha256:3a8c8fdc63b5ecacd842f5ba9d13313039f90a53367dd1addf4f03dbbb642a05",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
       "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/impact-discovery-evidence.md",
       "content_hash": "sha256:a311fa2cbab98ecc6c798c94346e1bcb80e0d5301e44d3f5a1a6ca39ff99ac77",
       "phase": null,
@@ -261,6 +272,28 @@
       "schema_version": null,
       "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/sub-adversarial-inquiry-pass-na.md",
       "content_hash": "sha256:822aad69ceb4334ac3bf36ffec19482182a55e624fcde984ceaa71d9465f2bce",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/sub-close-out-evidence-sync-evidence.md",
+      "content_hash": "sha256:6c581b4c7c965645cca1bafa33ef5ec2d1e39eac4b2c5cffa9ddfe6297bd1890",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/sync-tied-stack-evidence.md",
+      "content_hash": "sha256:45549ae43a1bd90a70e6c92debfed13d6d94a9f673e2d935bd602b09b8544fb0",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
