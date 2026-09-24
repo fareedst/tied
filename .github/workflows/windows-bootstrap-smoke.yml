@@ -28,9 +28,12 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
           cache: npm
           cache-dependency-path: mcp-server/package-lock.json
+
+      # npm ci runs prepare → npm run build, which invokes bun (see mcp-server/package.json).
+      - uses: oven-sh/setup-bun@v2
 
       - name: Build MCP server
         shell: cmd
