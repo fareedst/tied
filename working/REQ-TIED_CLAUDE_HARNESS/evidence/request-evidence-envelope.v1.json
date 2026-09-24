@@ -1,7 +1,7 @@
 {
   "schema_version": "request-evidence-envelope.v1",
   "envelope_meta": {
-    "generated_at": "2026-09-24T00:56:12.381Z",
+    "generated_at": "2026-09-24T00:57:40.857Z",
     "generator": "request_evidence_envelope_build",
     "revision": 1
   },
@@ -73,7 +73,7 @@
       "kind": "request_evidence_envelope",
       "schema_version": "request-evidence-envelope.v1",
       "path": "working/REQ-TIED_CLAUDE_HARNESS/evidence/request-evidence-envelope.v1.json",
-      "content_hash": "sha256:f30e65c7891bd14ddb53674917520c10fee182dad8f744510a4832b51e3cfc2e",
+      "content_hash": "sha256:c535d2b04acf7d72e89d25e645b03b28b5b86c2211a67a4ec09cc2c8c894985c",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -117,7 +117,7 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "working/REQ-TIED_CLAUDE_HARNESS/evidence/completion-signals-handoff.md",
-      "content_hash": "sha256:d2c5f8b8c52023e292f2c67cbb940d0f3242a599acca8ad325be034833b38be0",
+      "content_hash": "sha256:9bb6cf72528395c6fd5422cf25de662f35665f649907b7009e5d8be52ccdadcb",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -227,7 +227,7 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "working/REQ-TIED_CLAUDE_HARNESS/evidence/proposed-commit-message.txt",
-      "content_hash": "sha256:609e616d79f77f5f7e25bedd07fcc8ec67cfad087b89e9852fb9560f3e496ec8",
+      "content_hash": "sha256:bd2ea21e86c623a74d5698a32002d7693195c95e1d6a1caeb81fa015f3c7ae9f",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -248,8 +248,19 @@
     {
       "kind": "unknown",
       "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_HARNESS/evidence/run-close-out-gates-post-commit-stdout.txt",
+      "content_hash": "sha256:d4071a15f3c893b617d0f95f8d04aecef37aebe14f5f761ecee49e9e2cc3f092",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
       "path": "working/REQ-TIED_CLAUDE_HARNESS/evidence/run-close-out-gates-pre-commit-stdout.txt",
-      "content_hash": "sha256:4de7773aacb97fb62acb9b351aee7de0375013969614d9b6269428d85323ae2d",
+      "content_hash": "sha256:b2782321f4f00a93e4abc424116755b8705088cb312ad03522968e8814250881",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
