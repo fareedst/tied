@@ -134,3 +134,50 @@ procedure REFRESH_COMPARISON_PLAN_DOC(doc_path, live_driver_status, bootstrap_op
   IF still_contains_stale_no_claude_mcp_claim(doc_path) THEN
     RETURN { error: STALE_CLAIM_REMAINS }
   RETURN { ok: true, edits: ["current", "l95_fix", "post_phases_table", "status"] }
+
+## RUN_CLAUDE_FIRST_CLIENT_PIPELINE
+# [IMPL-TIED_CLAUDE_BOOTSTRAP_OPS] [ARCH-TIED_CLAUDE_BOOTSTRAP_OPS] [REQ-TIED_CLAUDE_BOOTSTRAP_OPS] [REQ-TIED_CLAUDE_HARNESS] [REQ-TIED_SETUP]
+# How: RUN_CLAUDE_FIRST_CLIENT_PIPELINE extends RUN_NEW_TIED_CLIENT_PIPELINE for harness claude without Cursor MCP enable.
+
+procedure RUN_CLAUDE_FIRST_CLIENT_PIPELINE(clientDir, sourceRoot, options):
+  # [IMPL-TIED_CLAUDE_BOOTSTRAP_OPS] [ARCH-TIED_CLAUDE_BOOTSTRAP_OPS] [REQ-TIED_CLAUDE_BOOTSTRAP_OPS] How: copy → lint → G4 audit → Claude validation → git; skip Cursor mcp enable.
+  Contract:
+    INPUT: clientDir, sourceRoot, options.harnessProfile = claude
+    OUTPUT: { ok: true, clientDir } | { ok: false, step }
+    PRE: clientDir writable; sourceRoot has copy_files entry; mcp-server dist when validation or agentstream check enabled
+    POST: clientDir contains tied/, working/tied-new-client-audit.v1.json; working/tied-claude-client-validation.v1.json when validation not skipped
+    DATA: harnessProfile = claude; skipMcpEnable forced true
+    DATA_TRANSITION: empty dir → bootstrapped Claude-first client with machine receipts
+    EFFECTS: copy_files → lint → G4 audit → RUN_CLAUDE_CLIENT_VALIDATION → git baseline
+    FAILURE_MODES: any step non-zero → pipeline abort with step label; validation failure writes report with ok false
+    TERMINATION: return ok or first failing step
+  FORCE skipMcpEnable := true
+  RUN standard pipeline through onboarding audit
+  IF NOT options.skipClaudeValidation THEN
+    RUN_CLAUDE_CLIENT_VALIDATION(clientDir, sourceRoot, options.claudeValidation)
+    IF validation.ok is false THEN RETURN { ok: false, step: claude_validation }
+  RUN git baseline when not skipped
+  RETURN { ok: true }
+
+## RUN_CLAUDE_CLIENT_VALIDATION
+# [IMPL-TIED_CLAUDE_BOOTSTRAP_OPS] [ARCH-TIED_CLAUDE_BOOTSTRAP_OPS] [REQ-TIED_CLAUDE_BOOTSTRAP_OPS] [REQ-TIED_CLAUDE_HARNESS]
+# How: RUN_CLAUDE_CLIENT_VALIDATION composes bootstrap asserts, MCP contract, tied-cli smoke, optional Claude Code MCP smoke, optional consistency and agentstream dry-run.
+
+procedure RUN_CLAUDE_CLIENT_VALIDATION(clientDir, sourceRoot, options):
+  # [IMPL-TIED_CLAUDE_BOOTSTRAP_OPS] [ARCH-TIED_CLAUDE_BOOTSTRAP_OPS] [REQ-TIED_CLAUDE_BOOTSTRAP_OPS] How: ordered checks fail-fast; persist JSON report.
+  Contract:
+    INPUT: clientDir, sourceRoot, options.withConsistency, options.withAgentstreamDryRun, options.withLiveClaude, options.withClaudeCodeInteractiveSmoke
+    OUTPUT: { ok, checks, reportPath }
+    PRE: clientDir bootstrapped; assertMcpPrerequisite(sourceRoot) when MCP checks enabled
+    POST: report.schema_version === tied-claude-client-validation.v1
+    DATA: checks[] ordered; report path clientDir/working/tied-claude-client-validation.v1.json
+    DATA_TRANSITION: unvalidated client → receipt-backed validation result
+    EFFECTS: run checks fail-fast; persist JSON report; return aggregate ok
+    FAILURE_MODES: spawn ENOENT → check fail with detail; JSON parse errors → mcp_json_harness_contract fail
+    TERMINATION: return after first fail or all passes
+  RUN mcp_dist_prerequisite, claude_bootstrap_asserts, mcp_json_harness_contract, tied_cli_base_path_smoke
+  IF options.withClaudeCodeInteractiveSmoke OR env TIED_CLAUDE_CODE_INTERACTIVE_SMOKE=1 THEN RUN claude_code_interactive_smoke ELSE SKIP claude_code_interactive_smoke
+  IF options.withConsistency THEN RUN tied_validate_consistency
+  IF options.withAgentstreamDryRun THEN RUN agentstream_dry_run
+  IF options.withLiveClaude AND env AGENTSTREAM_CLAUDE_LIVE_OK THEN RUN agentstream_live_claude ELSE SKIP live
+  WRITE report; RETURN aggregate ok

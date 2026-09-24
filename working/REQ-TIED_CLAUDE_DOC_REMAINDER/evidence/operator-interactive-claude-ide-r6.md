@@ -65,6 +65,30 @@ TIED_BASE_PATH="$CLIENT/tied" \
 
 Successful **B–D** is **not** evidence that **`tied agentstream --harness claude`** automated checklist works. For argv/live smoke see [R5 receipt](./operator-live-claude-smoke-r5.md).
 
+### F — Claude Code CLI verification (2026-09-24)
+
+When the IDE is unavailable, the **same Claude Code build** (`claude --version`) can close skill + MCP onboarding on a bootstrapped client:
+
+```bash
+cd "$CLIENT"
+claude mcp list
+claude -p --permission-mode bypassPermissions --strict-mcp-config --mcp-config ./.mcp.json -- \
+  "Use tied-yaml MCP tied_config_get_base_path; reply with only base_path."
+claude -p --permission-mode bypassPermissions --strict-mcp-config --mcp-config ./.mcp.json -- \
+  "/question What file documents the TIED MCP base path ritual?"
+```
+
+Or run validation:
+
+```bash
+node /path/to/stdd/scripts/run-tied-claude-client-validation.mjs \
+  --client-root "$CLIENT" --with-claude-code-interactive-smoke --no-agentstream-dry-run
+```
+
+Full receipt: [`interactive-claude-onboarding-2026-09-24.md`](./interactive-claude-onboarding-2026-09-24.md).
+
+**Pending approval:** `claude mcp list` may show project MCP as unapproved until you run interactive `claude` once and approve **`tied-yaml`**; strict `--mcp-config` bypasses that for scripted checks only.
+
 ## Automatable preflight (this session)
 
 | Check | Result | Evidence |
@@ -81,9 +105,9 @@ Successful **B–D** is **not** evidence that **`tied agentstream --harness clau
 | Bootstrap contract tests (MCP merge + Claude skills copy) | Yes | **Pass** | Does not prove IDE MCP auth |
 | Agentstream suite (mode separation / harness) | Yes | **Pass** | Distinct from interactive skills |
 | Static **`prompt-shared`** path layout | Yes | **Pass** | Relative `../prompt-shared/` in leaf SKILLS |
-| Interactive skill discovery in Claude Code IDE | No | **Deferred** | Wrong host (Cursor agent) |
-| MCP OAuth / stdio load in Claude Code IDE | No | **Deferred** | No `.mcp.json` at stdd root; no IDE |
-| Human gap-list deltas from IDE session | No | **N/A** | No new unknowns beyond Phase 0 — see gap list **R6 cross-reference** |
+| Interactive skill discovery in Claude Code IDE | Partial | **CLI verified** | Slash skills on bootstrapped client; full IDE UI optional |
+| MCP OAuth / stdio load in Claude Code IDE | Yes | **Connected** | Operator approved project MCP; `tied-yaml` ✔ on `/Users/fareed/Documents/dev/test/1790278645` — [`interactive-claude-mcp-approved-stdout.txt`](./interactive-claude-mcp-approved-stdout.txt) |
+| Human gap-list deltas from IDE session | Yes | **Closed** | Phase 0 **mcp_stdio** + **skill_discovery** rows updated 2026-09-24 |
 
 ## R6 completion rationale
 

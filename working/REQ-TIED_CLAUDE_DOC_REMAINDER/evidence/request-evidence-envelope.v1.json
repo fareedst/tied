@@ -1,7 +1,7 @@
 {
   "schema_version": "request-evidence-envelope.v1",
   "envelope_meta": {
-    "generated_at": "2026-09-24T19:16:26.733Z",
+    "generated_at": "2026-09-24T22:13:25.478Z",
     "generator": "request_evidence_envelope_build",
     "revision": 1
   },
@@ -40,7 +40,7 @@
       "kind": "request_evidence_envelope",
       "schema_version": "request-evidence-envelope.v1",
       "path": "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/request-evidence-envelope.v1.json",
-      "content_hash": "sha256:1c1fc6dc3898cbfb6fc771c4d18f93ca70a29a66f78bfffa2ddcd6202dbd4670",
+      "content_hash": "sha256:bc9ca0eaf403c364479850bebf2643d20ddab03b8c21fbd1bf76cc7dbaba1983",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -84,7 +84,7 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/close-out-receipt-2026-09-24.md",
-      "content_hash": "sha256:c737d61264bd78703d0e66cb3a04b3d8e02d784924ce2977d496d687c27ad79b",
+      "content_hash": "sha256:e617956dcab4d77a8219491652c1cd54a5d7de9e2d902eac519591c46c0eb995",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -105,8 +105,74 @@
     {
       "kind": "unknown",
       "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/interactive-claude-mcp-approved-stdout.txt",
+      "content_hash": "sha256:62ecd60a41cbdd2d96f527a1156bc9580801fd581aeb861c1deaf5d03591fbe2",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/interactive-claude-onboarding-2026-09-24.md",
+      "content_hash": "sha256:ec32e3df1003bd6b9d6bd3c79403dd02ac95fbc61ff31dc0bba57535b562282e",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/interactive-claude-validation-stdout.txt",
+      "content_hash": "sha256:dd0de2fe9fb78042ef999270b498f7e3bd5fe88f82f127721026ac7454cc2dd0",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/operator-claude-factory-validation-attestation-2026-09-24.md",
+      "content_hash": "sha256:15f76d6f5dfbbd67d85da8316055db71b267cea0972cc1ddbee901ab26ac8974",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
       "path": "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/operator-interactive-claude-ide-r6.md",
-      "content_hash": "sha256:a11c13f8844c5994ec3dbef05fb9c09b26cd2b18beb1e7b4922669b983c7ccb2",
+      "content_hash": "sha256:20444e1e7cbd514d39702596b7e99bd1ab0b4add898fffad76fff0e875abb23d",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/operator-live-claude-agentstream-2026-09-24-stdout.txt",
+      "content_hash": "sha256:9be7a484a3a71bb3c777374b0166e1685888a110789876bc9d605d4b5da36662",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/operator-live-claude-agentstream-2026-09-24.md",
+      "content_hash": "sha256:6583390cdde699755d6530e7404b3d3ff683e382df6bcd1647aaeb44e99ded4f",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -117,7 +183,7 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/operator-live-claude-smoke-r5.md",
-      "content_hash": "sha256:be5518e2371d84531ec2610c03b3de643c6645481875afda306297d2fa3593b0",
+      "content_hash": "sha256:6e7b28f076cf71496a1b38adb982fba806b72c9c4ab064e4db5a4a90779d759d",
       "phase": null,
       "status": "present",
       "proof_boundaries": [

@@ -1,0 +1,2073 @@
+
+> @tied/mcp@1.0.0 test
+> npm run build && node --test dist/workspace-scaffold.test.js packages/cli/dist/cli.test.js packages/bootstrap/dist/bootstrap.test.js packages/yaml-cli/dist/parity.test.js packages/agentstream/dist/tiedpreflight.test.js packages/agentstream/dist/dispatcher.test.js packages/agentstream/dist/parity.test.js packages/agentstream/dist/tracker-migration-preview.test.js packages/agentstream/dist/adherence-reconcile.test.js dist/hooks/adherence-append-action-attempted.test.js dist/analysis/scoped-analysis.test.js dist/analysis/traceability-gap.test.js dist/analysis/pseudocode-validator.test.js dist/analysis/pseudocode-parser.test.js dist/analysis/pseudocode-grammar-v2.test.js dist/analysis/pseudocode-grammar-v2-default.test.js dist/analysis/pseudocode-constraint-language.test.js dist/analysis/pseudocode-constraint-solver.test.js dist/analysis/pseudocode-constraint-alias-mutation.test.js dist/analysis/pseudocode-constraint-corpus.test.js dist/analysis/pseudocode-expression-parser.test.js dist/analysis/pseudocode-typed-ir.test.js dist/analysis/pseudocode-typed-flow.test.js dist/analysis/pseudocode-typed-flow-corpus.test.js dist/analysis/pseudocode-async-boundary.test.js dist/analysis/pseudocode-async-boundary-corpus.test.js dist/analysis/pseudocode-symbols.test.js dist/analysis/pseudocode-cfg.test.js dist/analysis/pseudocode-call-graph.test.js dist/analysis/pseudocode-abstract-analysis.test.js dist/analysis/pseudocode-obligations.test.js dist/analysis/pseudocode-analyze-report.test.js dist/analysis/pseudocode-analyzer.test.js dist/analysis/pseudocode-shared.test.js dist/analysis/binding-inventory.test.js dist/analysis/plumb-diff-impact-preview.test.js dist/analysis/plumb-audit-gate.test.js dist/analysis/leap-proposal-queue.test.js dist/quality-evidence.test.js dist/quality-command-runner.test.js dist/quality-security.test.js dist/quality-evidence-collection.test.js dist/quality-adequacy.test.js dist/tools/quality-validation-mcp.test.js dist/tools/pseudocode-analyze-mcp.test.js dist/tools/tied-async-contract-fixtures.test.js dist/checklist-async-dispositions.test.js dist/citdp-async-triggers.test.js dist/tools/checklist-gate-mcp.test.js dist/tools/yaml-client-styling-mcp.test.js dist/tools/vocabulary-explorer-mcp.test.js dist/checklist-activation-collect.test.js dist/checklist-remediation-acceptance.test.js dist/fixture-corpus-regression.test.js dist/go-mode-b-composition.test.js dist/feedback.test.js dist/feedback-promotion.test.js dist/research-records.test.js dist/tools/batch-5-mcp.test.js dist/usage-metrics.test.js dist/project-identity.test.js dist/project-identity.composition.test.js dist/token-rename.test.js dist/tools/requirement-list-state-guide.test.js dist/tools/leap-proposal-mcp.test.js dist/tools/impl-pseudocode-mcp.test.js dist/impl-pseudocode-input.test.js dist/yaml-loader.test.js dist/record-merge.test.js dist/yaml-updates-apply.test.js dist/detail-loader-append.test.js dist/citdp-writer.test.js dist/adherence-ledger.test.js dist/gate-receipt.test.js dist/verify.test.js dist/yaml-style-config.test.js dist/yaml-client-formatter.test.js dist/yaml-canonicalizer.test.js dist/tools/yaml-canonicalization-mcp.test.js dist/checklist-yaml-styling-contract.test.js test/tied-cli-large-args.test.cjs test/tied-cli-metrics-client.test.cjs dist/e2e/bootstrap-and-load.test.js dist/e2e/new-tied-client.test.js dist/e2e/prompt-type-skills.test.js dist/e2e/prompt-type-subagent.test.js dist/fidelity-research/*.test.js dist/request-evidence-envelope/*.test.js dist/adversarial-inquiry/*.test.js dist/claims-evidence-review/*.test.js dist/feature-orchestration/*.test.js dist/vocabulary-explorer/*.test.js src/e2e/new-tied-client.test.ts
+
+
+> @tied/mcp@1.0.0 build
+> tsc && bun run --workspaces --if-present build
+
+@tied/bootstrap build: Exited with code 0
+@tied/yaml-cli build: Exited with code 0
+@tied/cli build: Exited with code 0
+@tied/agentstream build: Exited with code 0
+▶ appendGateDecided [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+  ✔ appends gate_decided row with artifact_ref and artifact_hash (5.73925ms)
+✔ appendGateDecided [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (6.515167ms)
+▶ appendStatusMutated [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+  ✔ appends status_mutated row with gate_receipt_ref and token diffs (0.70175ms)
+✔ appendStatusMutated [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (0.829792ms)
+▶ RUN_BOUNDED_COMMAND REQ-TIED_ADVERSARIAL_INQUIRY
+  ✔ runs argv-only commands with bounded and redacted evidence (124.092542ms)
+  ✔ fails closed for shell commands and output overflow (65.850792ms)
+✔ RUN_BOUNDED_COMMAND REQ-TIED_ADVERSARIAL_INQUIRY (190.900042ms)
+▶ CONTROLLED_COMPOSITION_FAULT REQ-TIED_ADVERSARIAL_INQUIRY
+  ✔ detects a known-bad fault and requires a limitation for N/A (0.1125ms)
+✔ CONTROLLED_COMPOSITION_FAULT REQ-TIED_ADVERSARIAL_INQUIRY (0.200208ms)
+▶ CHECKLIST_INQUIRY_INTEGRATION [REQ-TIED_ADVERSARIAL_INQUIRY]
+  ✔ keeps the artifact directory confined to working/{REQ}/adversarial-inquiry (1.490333ms)
+  ✔ advisory and strict-candidate policies never block regardless of verdict (0.222792ms)
+  ✔ requires explicit human approval before strict blocking (0.1675ms)
+  ✔ persists deterministic snapshots, redacts evidence, and preserves canonical input (155.961709ms)
+  ✔ writes complete provenance identity for phase-scoped artifacts [REQ-REQUEST_EVIDENCE_ENVELOPE] (32.726666ms)
+  ✔ isolates phase-scoped artifact directories for the same request token [Slice P] (78.490084ms)
+✔ CHECKLIST_INQUIRY_INTEGRATION [REQ-TIED_ADVERSARIAL_INQUIRY] (269.957167ms)
+▶ CHECKLIST_YAML_MD_PARITY [REQ-TIED_ADVERSARIAL_INQUIRY]
+  ✔ Part B0/B slug translate-sponsor-intent keeps adversarial marker parity between YAML tasks and Markdown mirror (0.866125ms)
+  ✔ Part B0/B slug impact-discovery keeps adversarial marker parity between YAML tasks and Markdown mirror (0.176833ms)
+  ✔ Part B0/B slug risk-assessment keeps adversarial marker parity between YAML tasks and Markdown mirror (0.095042ms)
+  ✔ Part B0/B slug test-strategy keeps adversarial marker parity between YAML tasks and Markdown mirror (0.106959ms)
+  ✔ Part B0/B slug composition-integration keeps adversarial marker parity between YAML tasks and Markdown mirror (0.107167ms)
+  ✔ Part B0/B slug verification-gate keeps adversarial marker parity between YAML tasks and Markdown mirror (0.740833ms)
+  ✔ Part B0/B slug session-bootstrap keeps adversarial marker parity between YAML tasks and Markdown mirror (0.137375ms)
+  ✔ Part B0/B slug change-definition keeps adversarial marker parity between YAML tasks and Markdown mirror (0.132083ms)
+  ✔ Part B0/B slug author-requirement keeps adversarial marker parity between YAML tasks and Markdown mirror (0.099834ms)
+  ✔ Part B0/B slug author-architecture keeps adversarial marker parity between YAML tasks and Markdown mirror (0.13025ms)
+  ✔ Part B0/B slug catalog-pseudocode-contracts keeps adversarial marker parity between YAML tasks and Markdown mirror (0.140583ms)
+  ✔ Part B0/B slug flag-insufficient-specs keeps adversarial marker parity between YAML tasks and Markdown mirror (0.120583ms)
+  ✔ Part B0/B slug flag-contradictory-specs keeps adversarial marker parity between YAML tasks and Markdown mirror (0.109625ms)
+  ✔ Part B0/B slug gate-pseudocode-validation keeps adversarial marker parity between YAML tasks and Markdown mirror (0.698875ms)
+  ✔ Part B0/B slug unit-test-red keeps adversarial marker parity between YAML tasks and Markdown mirror (0.252084ms)
+  ✔ Part B0/B slug unit-test-green keeps adversarial marker parity between YAML tasks and Markdown mirror (0.18125ms)
+  ✔ Part B0/B slug three-way-alignment-unit keeps adversarial marker parity between YAML tasks and Markdown mirror (0.258875ms)
+  ✔ Part B0/B slug traceable-commit keeps adversarial marker parity between YAML tasks and Markdown mirror (0.145917ms)
+  ✔ Part B0/B slug persist-citdp-record keeps adversarial marker parity between YAML tasks and Markdown mirror (0.115875ms)
+✔ CHECKLIST_YAML_MD_PARITY [REQ-TIED_ADVERSARIAL_INQUIRY] (5.445625ms)
+▶ ADVERSARIAL INQUIRY identity resolution REQ-TIED_ADVERSARIAL_INQUIRY
+  ✔ keeps criterion identity stable across display text changes (0.914542ms)
+  ✔ normalizes block formatting while changing revision for semantic edits (0.151583ms)
+✔ ADVERSARIAL INQUIRY identity resolution REQ-TIED_ADVERSARIAL_INQUIRY (1.819125ms)
+▶ BUILD_OBLIGATION_GRAPH REQ-TIED_ADVERSARIAL_INQUIRY
+  ✔ builds stable criterion-to-evidence edges (6.731583ms)
+  ✔ reports stale, duplicate, and unresolved references without throwing (0.237917ms)
+  ✔ does not retain mutable source object references in the projection (0.123667ms)
+✔ BUILD_OBLIGATION_GRAPH REQ-TIED_ADVERSARIAL_INQUIRY (7.208833ms)
+▶ CLASSIFY_FIDELITY REQ-TIED_ADVERSARIAL_INQUIRY
+  ✔ returns PASS only when both evidence directions are reliable and complete (0.389917ms)
+  ✔ does not turn loci into PASS when behavior is missing (0.160709ms)
+  ✔ reports false, reordered, and unrepresented behavior as unreliable (0.154792ms)
+  ✔ returns UNRESOLVED when adapter evidence is unsupported (0.09425ms)
+✔ CLASSIFY_FIDELITY REQ-TIED_ADVERSARIAL_INQUIRY (0.936917ms)
+▶ PROJECT_READ_ONLY_REPORT REQ-TIED_ADVERSARIAL_INQUIRY
+  ✔ projects stable references and explicit proof boundaries without canonical mutation (0.172041ms)
+✔ PROJECT_READ_ONLY_REPORT REQ-TIED_ADVERSARIAL_INQUIRY (0.219167ms)
+▶ RUN_ADVERSARIAL_INQUIRY REQ-TIED_ADVERSARIAL_INQUIRY
+  ✔ composes graph and fidelity stages into a read-only result (0.292291ms)
+✔ RUN_ADVERSARIAL_INQUIRY REQ-TIED_ADVERSARIAL_INQUIRY (0.327834ms)
+▶ ADVERSARIAL_INQUIRY_FIXTURES REQ-TIED_ADVERSARIAL_INQUIRY
+  ✔ contains deterministic positive, negative, boundary, and unsupported controls (1.02425ms)
+✔ ADVERSARIAL_INQUIRY_FIXTURES REQ-TIED_ADVERSARIAL_INQUIRY (1.5745ms)
+▶ PARSE_GO_TEST_EVIDENCE REQ-TIED_ADVERSARIAL_INQUIRY
+  ✔ normalizes t.Errorf, t.Fatalf, and testify assertions with locations (1.509375ms)
+  ✔ fails closed for unsupported Go test constructs (0.174708ms)
+  ✔ detects Go test paths by _test.go suffix (0.071708ms)
+✔ PARSE_GO_TEST_EVIDENCE REQ-TIED_ADVERSARIAL_INQUIRY (2.377083ms)
+▶ BUILD_PROJECT_INQUIRY_INPUT Go project orchestrator REQ-TIED_ADVERSARIAL_INQUIRY
+  ✔ builds a normalized checklist input from the good Go project case (31.795667ms)
+DIAGNOSTIC: envelope patch failed for working/REQ-FIXTURE-ADVERSARIAL/adversarial-inquiry/obligation-report.json: envelope_revision_conflict
+DIAGNOSTIC: envelope patch failed for working/REQ-FIXTURE-ADVERSARIAL/adversarial-inquiry/evidence-provenance.json: envelope_revision_conflict
+DIAGNOSTIC: envelope patch failed for working/REQ-FIXTURE-ADVERSARIAL/adversarial-inquiry/finding-ledger.jsonl: envelope_revision_conflict
+  ✔ preserves incomplete Go evidence instead of upgrading it to PASS (108.279833ms)
+DIAGNOSTIC: envelope patch failed for working/REQ-FIXTURE-ADVERSARIAL/adversarial-inquiry/obligation-report.json: envelope_revision_conflict
+DIAGNOSTIC: envelope patch failed for working/REQ-FIXTURE-ADVERSARIAL/adversarial-inquiry/gate-result.json: envelope_revision_conflict
+DIAGNOSTIC: envelope patch failed for working/REQ-FIXTURE-ADVERSARIAL/adversarial-inquiry/evidence-provenance.json: envelope_revision_conflict
+DIAGNOSTIC: envelope patch failed for working/REQ-FIXTURE-ADVERSARIAL/adversarial-inquiry/finding-ledger.jsonl: envelope_revision_conflict
+  ✔ returns UNRESOLVED with unsupported_adapter for unsupported Go constructs (8.712959ms)
+  ✔ rejects mixed Mode A and Mode B required fields with a stable error (0.201167ms)
+✔ BUILD_PROJECT_INQUIRY_INPUT Go project orchestrator REQ-TIED_ADVERSARIAL_INQUIRY (149.71875ms)
+▶ BUILD_PROJECT_INQUIRY_INPUT Go project scope loader REQ-TIED_ADVERSARIAL_INQUIRY
+  ✔ loads an explicit Go project scope with go-test manifest profile (112.745459ms)
+  ✔ rejects unsupported test_path extensions before reading (0.197334ms)
+  ✔ rejects traversal before reading a declared Go source path (10.439208ms)
+  ✔ rejects absolute Go source paths (0.448ms)
+  ✔ rejects symlinked Go paths that resolve outside the project (2.121375ms)
+  ✔ returns a stable missing-file diagnostic for Go tests (0.622458ms)
+  ✔ selects go-test classifier for _test.go paths (0.126125ms)
+✔ BUILD_PROJECT_INQUIRY_INPUT Go project scope loader REQ-TIED_ADVERSARIAL_INQUIRY (127.516625ms)
+▶ PARSE_MINITEST_ASSERTIONS REQ-TIED_ADVERSARIAL_INQUIRY
+  ✔ normalizes the supported Ruby Minitest assertion subset with locations (1.715167ms)
+  ✔ fails closed for unsupported assertion constructs (0.188042ms)
+✔ PARSE_MINITEST_ASSERTIONS REQ-TIED_ADVERSARIAL_INQUIRY (2.590167ms)
+▶ CALIBRATE_PILOT REQ-TIED_ADVERSARIAL_INQUIRY
+  ✔ requires representative evidence before strict promotion (0.613375ms)
+  ✔ stops expansion after two budget breaches and accepts an eligible pilot (0.763875ms)
+✔ CALIBRATE_PILOT REQ-TIED_ADVERSARIAL_INQUIRY (3.404709ms)
+▶ BUILD_PROJECT_INQUIRY_INPUT project orchestrator REQ-TIED_ADVERSARIAL_INQUIRY
+  ✔ builds a normalized checklist input from the good project case (122.185708ms)
+  ✔ preserves incomplete evidence instead of upgrading it to PASS (56.365833ms)
+DIAGNOSTIC: envelope patch failed for working/REQ-FIXTURE-ADVERSARIAL/adversarial-inquiry/obligation-report.json: envelope_revision_conflict
+DIAGNOSTIC: envelope patch failed for working/REQ-FIXTURE-ADVERSARIAL/adversarial-inquiry/gate-result.json: envelope_revision_conflict
+DIAGNOSTIC: envelope patch failed for working/REQ-FIXTURE-ADVERSARIAL/adversarial-inquiry/evidence-provenance.json: envelope_revision_conflict
+  ✔ returns an unresolved result with an unsupported adapter diagnostic (34.426125ms)
+  ✔ rejects mixed Mode A and Mode B required fields with a stable error (0.182ms)
+DIAGNOSTIC: envelope patch failed for working/REQ-FIXTURE-ADVERSARIAL/adversarial-inquiry/obligation-report.json: envelope_revision_conflict
+DIAGNOSTIC: envelope patch failed for working/REQ-FIXTURE-ADVERSARIAL/adversarial-inquiry/evidence-provenance.json: envelope_revision_conflict
+  ✔ produces criterion-scoped report scope for Mode B REQ-TIED_ADVERSARIAL_INQUIRY (18.631542ms)
+  ✔ rejects stale block_name when sidecar procedure names changed REQ-TIED_ADVERSARIAL_INQUIRY (8.198292ms)
+✔ BUILD_PROJECT_INQUIRY_INPUT project orchestrator REQ-TIED_ADVERSARIAL_INQUIRY (240.994334ms)
+▶ BUILD_PROJECT_INQUIRY_INPUT project scope loader REQ-TIED_ADVERSARIAL_INQUIRY
+  ✔ loads an explicit project scope without using the process TIED_BASE_PATH (32.195375ms)
+  ✔ rejects traversal before reading a declared source path (0.949916ms)
+  ✔ rejects absolute source paths (1.101958ms)
+  ✔ rejects symlinked source paths that resolve outside the project (1.500208ms)
+  ✔ rejects a TIED base path that is not projectRoot/tied (0.101125ms)
+  ✔ returns a stable missing-file diagnostic (0.446541ms)
+✔ BUILD_PROJECT_INQUIRY_INPUT project scope loader REQ-TIED_ADVERSARIAL_INQUIRY (37.881041ms)
+▶ adversarial-inquiry-psa fixture [REQ-PSEUDOCODE_STATIC_ANALYSIS]
+  ✔ classifies Mode A fidelity as PASS for aligned statements (8.1175ms)
+✔ adversarial-inquiry-psa fixture [REQ-PSEUDOCODE_STATIC_ANALYSIS] (8.78ms)
+▶ scope-validation [REQ-TIED_ADVERSARIAL_INQUIRY]
+  ✔ discovers procedures via scanProcedureBlocks instead of first ## heading (1.416208ms)
+  ✔ parses #closeout tag suffix on scope entries (0.167334ms)
+  ✔ rejects stale block_name with available procedure diagnostic (0.204792ms)
+  ✔ resolves multi-block close_out scope with #closeout tags (0.40075ms)
+  ✔ validates Mode A block-scoped entries including #closeout aliases (0.612166ms)
+  ✔ matches #closeout aliases against resolved block identities (0.096125ms)
+✔ scope-validation [REQ-TIED_ADVERSARIAL_INQUIRY] (9.327416ms)
+▶ APPEND_FINDING REQ-TIED_ADVERSARIAL_INQUIRY
+  ✔ keeps observations append-only and links deterministic duplicates (1.378417ms)
+✔ APPEND_FINDING REQ-TIED_ADVERSARIAL_INQUIRY (1.945875ms)
+▶ VALIDATE_STRICT_ELIGIBILITY REQ-TIED_ADVERSARIAL_INQUIRY
+  ✔ rejects strict mode when any eligibility control is absent (0.16075ms)
+  ✔ accepts a complete eligible subset and keeps status scoped (1.087291ms)
+✔ VALIDATE_STRICT_ELIGIBILITY REQ-TIED_ADVERSARIAL_INQUIRY (1.342625ms)
+▶ binding inventory validation [IMPL-ASYNC_BINDING_VALIDATOR] [IMPL-QUALITY_BINDING_INVENTORY] [REQ-ASYNC_COMPOSITION_INVENTORY] [REQ-MODULE_VALIDATION]
+  ✔ accepts a composition-testable binding with the complete contract (5.831625ms)
+  ✔ rejects missing composition evidence and vague E2E claims (0.3295ms)
+  ✔ rejects duplicate binding identifiers (0.102167ms)
+  ✔ reports missing binding fields and accepts a named platform constraint (0.129084ms)
+  ✔ requires async_semantics for event or message triggers (0.064292ms)
+  ✔ requires idempotency evidence when retry or at-least-once is declared (0.13ms)
+  ✔ keeps legacy non-async inventories valid without optional columns (0.061375ms)
+✔ binding inventory validation [IMPL-ASYNC_BINDING_VALIDATOR] [IMPL-QUALITY_BINDING_INVENTORY] [REQ-ASYNC_COMPOSITION_INVENTORY] [REQ-MODULE_VALIDATION] (7.436833ms)
+✔ queue: reject unknown id returns ok false (No proposal branch) (1.862334ms)
+✔ queue: reject does not mutate yaml outside queue (2.733458ms)
+✔ queue: approve then mark_applied (1.374625ms)
+✔ queue: edit pending only (1.206833ms)
+✔ PROPOSALS_FROM_SESSION_SEGMENTS REQ-LEAP_PROPOSAL_QUEUE — trims segment text in summary output (0.124291ms)
+✔ session export: split by --- and JSON array (0.137584ms)
+✔ LOAD_QUEUE REQ-LEAP_PROPOSAL_QUEUE — UTF-8 BOM prefixed valid queue.json loads proposals (0.661833ms)
+✔ queue file schema (1.06225ms)
+▶ plumb audit gate
+  ✔ strict mode blocks when REQ token introduced but missing from tests (1212.562125ms)
+  ✔ warn-only mode does not block even when gaps exist (909.296791ms)
+  ✔ warn-only allows commits on internal tool errors; strict blocks (70.987542ms)
+✔ plumb audit gate (2193.515583ms)
+▶ plumb diff impact preview (deterministic)
+  ✔ flags unregistered token + suggests missing detail file (395.646167ms)
+  ✔ detects registered token and marks existing detail file (351.665417ms)
+✔ plumb diff impact preview (deterministic) (748.091125ms)
+▶ pseudocode-abstract-analysis [REQ-PSEUDOCODE_STATIC_ANALYSIS]
+  ✔ emits null-check and deref obligations (8.051917ms)
+  ✔ detects contradictory paths and respects strict_paths (8.735584ms)
+  ✔ records unknowns when iteration budget exceeded (0.469416ms)
+✔ pseudocode-abstract-analysis [REQ-PSEUDOCODE_STATIC_ANALYSIS] (20.022458ms)
+▶ pseudocode-analyze-report helpers [REQ-PSEUDOCODE_STATIC_ANALYSIS]
+  ✔ computes stable input identity across line endings (0.878833ms)
+  ✔ sorts diagnostics by line then code (0.101ms)
+  ✔ mergeBudgets preserves defaults for unspecified keys (0.077375ms)
+  ✔ extendProofBoundaryForTypedFlow appends typed-flow claim limits (0.066291ms)
+  ✔ extendProofBoundaryForConstraintFlow appends constraint-language claim limits (0.061875ms)
+  ✔ F9: typed_flow report serialization is deterministic (10.352167ms)
+  ✔ F9: constraint_language report section serialization is deterministic (15.347584ms)
+✔ pseudocode-analyze-report helpers [REQ-PSEUDOCODE_STATIC_ANALYSIS] (27.61375ms)
+▶ pseudocode-analyze-report [REQ-PSEUDOCODE_STATIC_ANALYSIS]
+  ✔ computes stable input identity (0.754542ms)
+  ✔ sorts diagnostics deterministically (0.118208ms)
+  ✔ mergeBudgets applies overrides (0.067459ms)
+✔ pseudocode-analyze-report [REQ-PSEUDOCODE_STATIC_ANALYSIS] (1.644208ms)
+▶ pseudocode-analyzer orchestrator [REQ-PSEUDOCODE_STATIC_ANALYSIS]
+  ✔ returns pseudocode-analysis-report.v1 for valid input (8.124166ms)
+  ✔ gate_mode: UNRESOLVED_CALL fails ok (0.321875ms)
+  ✔ gate_mode: truncated report fails ok (0.225208ms)
+  ✔ gate_mode: warning-only diagnostics pass ok (0.229708ms)
+  ✔ non-gate_mode: UNRESOLVED_CALL does not fail ok by default (0.153375ms)
+  ✔ mutation: inverted branch changes obligations (0.238042ms)
+  ✔ F8: typed_flow false is byte-identical to legacy default report (0.234959ms)
+  ✔ typed_flow true emits sections.typed_flow and extends proof_boundary (0.867583ms)
+  ✔ gate_mode: typed_gate_errors false keeps warnings-only on annotated procedures (0.275917ms)
+  ✔ gate_mode: default typed_gate_errors promotes annotated TYPE_MISMATCH to gate failure (Phase 3d) (0.189041ms)
+  ✔ gate_mode: typed_flow false ignores typed_gate_errors (F8 regression) (0.093417ms)
+✔ pseudocode-analyzer orchestrator [REQ-PSEUDOCODE_STATIC_ANALYSIS] (11.194833ms)
+▶ pseudocode-analyzer constraint_flow [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE]
+  ✔ F8: constraint_flow false is byte-identical to typed-flow Phase 3 baseline (0.655458ms)
+  ✔ constraint_flow true coerces typed_flow and emits sections.constraint_language (2.75575ms)
+  ✔ CL-6: v1 sidecar with constraint_flow true emits zero constraint diagnostics (0.193958ms)
+  ✔ gate_mode: constraint_gate_errors false keeps warnings-only on constraint violations (0.480959ms)
+  ✔ gate_mode: default constraint_gate_errors promotes REFINEMENT_VIOLATION to gate failure (sub-phase 3d) (0.673792ms)
+  ✔ gate_mode: constraint_gate_errors true promotes REFINEMENT_VIOLATION to gate failure (0.337ms)
+  ✔ F9: constraint_flow report serialization is deterministic (0.337417ms)
+✔ pseudocode-analyzer constraint_flow [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE] (5.652583ms)
+▶ pseudocode-async-boundary corpus [REQ-ASYNC_BOUNDARY_ANALYSIS]
+  ✔ loads manifest and >=20 labeled fixtures (1.213166ms)
+  ✔ manifest proof boundary is structural-only (0.128709ms)
+  ✔ case 01 meets labeled expectation (7.600375ms)
+  ✔ case 02 meets labeled expectation (0.858417ms)
+  ✔ case 03 meets labeled expectation (0.45625ms)
+  ✔ case 04 meets labeled expectation (0.258416ms)
+  ✔ case 05 meets labeled expectation (0.261333ms)
+  ✔ case 06 meets labeled expectation (0.303333ms)
+  ✔ case 07 meets labeled expectation (1.127667ms)
+  ✔ case 08 meets labeled expectation (0.427459ms)
+  ✔ case 09 meets labeled expectation (0.626667ms)
+  ✔ case 10 meets labeled expectation (0.324125ms)
+  ✔ case 11 meets labeled expectation (0.2635ms)
+  ✔ case 12 meets labeled expectation (0.304375ms)
+  ✔ case 13 meets labeled expectation (0.233208ms)
+  ✔ case 14 meets labeled expectation (0.164667ms)
+  ✔ case 15 meets labeled expectation (0.246375ms)
+  ✔ case 16 meets labeled expectation (0.205667ms)
+  ✔ case 17 meets labeled expectation (0.213625ms)
+  ✔ case 18 meets labeled expectation (0.144667ms)
+  ✔ case 19 meets labeled expectation (0.193333ms)
+  ✔ case 20 meets labeled expectation (0.187833ms)
+  ✔ case 21 meets labeled expectation (0.186042ms)
+  ✔ case 22 meets labeled expectation (0.281459ms)
+  ✔ case 23 meets labeled expectation (0.444208ms)
+  ✔ case 24 meets labeled expectation (0.1975ms)
+  ✔ every diagnostic code has positive and negative corpus coverage (0.079208ms)
+  ✔ unknown/truncated coverage exists for inter-procedural checks (0.031875ms)
+  ✔ gate_mode case 19 async_gate_errors behavior (1.003458ms)
+  ✔ gate_mode case 20 async_gate_errors behavior (0.198916ms)
+  ✔ gate_mode case 23 async_gate_errors behavior (0.165416ms)
+  ✔ async_boundary sections serialize deterministically (2.222375ms)
+✔ pseudocode-async-boundary corpus [REQ-ASYNC_BOUNDARY_ANALYSIS] (21.738792ms)
+▶ pseudocode-async-boundary [REQ-ASYNC_BOUNDARY_ANALYSIS]
+  ✔ async_boundary false leaves report unchanged (analyzer-off) (44.376291ms)
+  ✔ async_boundary true emits sections.async_boundary and extends proof_boundary (4.318833ms)
+  ✔ defers AWAIT_NON_PROMISE_OUTPUT to typed-flow when typed_flow is enabled (1.4285ms)
+  ✔ async_gate_errors false keeps warnings-only (1.001625ms)
+  ✔ async_gate_errors true promotes ASYNC_EFFECTS_WITHOUT_BOUNDARY to gate failure (0.543416ms)
+  ✔ isAsyncGateErrorsEffective requires explicit async_gate_errors true (0.093917ms)
+  ✔ applyAsyncGateSeverityPromotion only promotes gating async codes (0.153375ms)
+  ✔ clean async fixture passes gate with async_gate_errors (0.261792ms)
+  ✔ proof boundary supplement is structural-only (0.114625ms)
+  ✔ async_boundary runs after typed-flow when both enabled (0.358875ms)
+✔ pseudocode-async-boundary [REQ-ASYNC_BOUNDARY_ANALYSIS] (53.667667ms)
+▶ pseudocode-call-graph [REQ-PSEUDOCODE_STATIC_ANALYSIS]
+  ✔ records CALL and RUN edges (13.224709ms)
+✔ pseudocode-call-graph [REQ-PSEUDOCODE_STATIC_ANALYSIS] (14.147625ms)
+▶ pseudocode-cfg [REQ-PSEUDOCODE_STATIC_ANALYSIS]
+  ✔ builds entry, branch, and exit nodes with reachability (8.353583ms)
+✔ pseudocode-cfg [REQ-PSEUDOCODE_STATIC_ANALYSIS] (8.938167ms)
+▶ pseudocode-constraint-alias-mutation [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE]
+  ✔ loads cl-17..cl-21 alias/mutation corpus fixtures (0.680458ms)
+  ✔ cl-17: CL-2 emits MUTATION_VIOLATION on proven immutable mutation (10.513292ms)
+  ✔ cl-18: immutable respected — no MUTATION_VIOLATION (0.638292ms)
+  ✔ cl-19: declared alias policy violation emits ALIAS_VIOLATION (1.064834ms)
+  ✔ cl-20: CL-3 aliasing without ALIAS POLICY yields alias_policy_absent unknown (1.151833ms)
+  ✔ cl-21: v1 prose immutable — no MUTATION_VIOLATION (1.235458ms)
+  ✔ F8 regression: df-08/df-11 typed-flow unchanged; constraint pass no MUTATION_VIOLATION on v1 (0.995583ms)
+✔ pseudocode-constraint-alias-mutation [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE] (17.014042ms)
+▶ pseudocode-constraint corpus [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE]
+  ✔ F1: loads >=40 constraint fixtures and typed-flow reuse entries (12.515042ms)
+  ✔ cl-01 meets labeled expectation via analyzer composition path (8.517958ms)
+  ✔ cl-02 meets labeled expectation via analyzer composition path (1.587167ms)
+  ✔ cl-03 meets labeled expectation via analyzer composition path (0.562125ms)
+  ✔ cl-04 meets labeled expectation via analyzer composition path (0.352583ms)
+  ✔ cl-05 meets labeled expectation via analyzer composition path (0.244458ms)
+  ✔ cl-06 meets labeled expectation via analyzer composition path (0.280791ms)
+  ✔ cl-07 meets labeled expectation via analyzer composition path (0.967458ms)
+  ✔ cl-08 meets labeled expectation via analyzer composition path (0.439ms)
+  ✔ cl-09 meets labeled expectation via analyzer composition path (0.35975ms)
+  ✔ cl-10 meets labeled expectation via analyzer composition path (0.369ms)
+  ✔ cl-11 meets labeled expectation via analyzer composition path (0.306167ms)
+  ✔ cl-12 meets labeled expectation via analyzer composition path (0.285958ms)
+  ✔ cl-13 meets labeled expectation via analyzer composition path (0.778834ms)
+  ✔ cl-14 meets labeled expectation via analyzer composition path (0.264583ms)
+  ✔ cl-15 meets labeled expectation via analyzer composition path (0.343167ms)
+  ✔ cl-16 meets labeled expectation via analyzer composition path (0.198375ms)
+  ✔ cl-17 meets labeled expectation via analyzer composition path (0.237125ms)
+  ✔ cl-18 meets labeled expectation via analyzer composition path (0.185625ms)
+  ✔ cl-19 meets labeled expectation via analyzer composition path (0.342708ms)
+  ✔ cl-20 meets labeled expectation via analyzer composition path (0.79325ms)
+  ✔ cl-21 meets labeled expectation via analyzer composition path (0.302166ms)
+  ✔ cl-22 meets labeled expectation via analyzer composition path (0.284833ms)
+  ✔ cl-23 meets labeled expectation via analyzer composition path (0.559083ms)
+  ✔ cl-24 meets labeled expectation via analyzer composition path (0.180584ms)
+  ✔ cl-25 meets labeled expectation via analyzer composition path (0.22325ms)
+  ✔ cl-26 meets labeled expectation via analyzer composition path (0.294209ms)
+  ✔ cl-27 meets labeled expectation via analyzer composition path (0.157041ms)
+  ✔ cl-28 meets labeled expectation via analyzer composition path (0.199417ms)
+  ✔ cl-29 meets labeled expectation via analyzer composition path (0.16975ms)
+  ✔ cl-30 meets labeled expectation via analyzer composition path (0.121791ms)
+  ✔ cl-31 meets labeled expectation via analyzer composition path (0.300375ms)
+  ✔ cl-32 meets labeled expectation via analyzer composition path (0.216375ms)
+  ✔ cl-33 meets labeled expectation via analyzer composition path (0.273083ms)
+  ✔ cl-34 meets labeled expectation via analyzer composition path (0.159792ms)
+  ✔ cl-35 meets labeled expectation via analyzer composition path (0.196125ms)
+  ✔ cl-36 meets labeled expectation via analyzer composition path (0.132584ms)
+  ✔ cl-37 meets labeled expectation via analyzer composition path (0.138084ms)
+  ✔ cl-38 meets labeled expectation via analyzer composition path (0.20325ms)
+  ✔ cl-39 meets labeled expectation via analyzer composition path (0.217917ms)
+  ✔ cl-40 meets labeled expectation via analyzer composition path (0.099375ms)
+  ✔ tf-01 meets labeled expectation via analyzer composition path (0.09075ms)
+  ✔ tf-02 meets labeled expectation via analyzer composition path (2.191792ms)
+  ✔ tf-03 meets labeled expectation via analyzer composition path (0.1865ms)
+  ✔ tf-05 meets labeled expectation via analyzer composition path (0.144084ms)
+  ✔ tf-09 meets labeled expectation via analyzer composition path (0.098583ms)
+  ✔ tf-10 meets labeled expectation via analyzer composition path (0.207167ms)
+  ✔ F8: constraint_flow false matches typed-flow Phase 3 path for constraint corpus v1 entries (3.060792ms)
+  ✔ F9: constraint_flow report serialization is deterministic across corpus sample (2.26475ms)
+  ✔ F10: zero solver_truncation on non-budget-probe fixtures at default budgets (5.477917ms)
+  ✔ F12: 100% recall on definite-error labeled constraint cases (1.30075ms)
+  ✔ FP cap: <=5% false gating errors on positive-control fixtures (2.854792ms)
+  ✔ CL-1: case 12 refinement provable in v2 positive controls (0.246791ms)
+  ✔ CL-5: cl-15 discloses solver truncation when budgets capped (0.190083ms)
+  ✔ CL-2/CL-3/CL-4/CL-6 spot checks via labeled fixtures (0.610875ms)
+✔ pseudocode-constraint corpus [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE] (54.694792ms)
+▶ pseudocode-constraint-predicate [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE]
+  ✔ parses comparisons, null checks, length bounds, AND/OR/NOT (0.916ms)
+  ✔ returns predicate_unsupported for custom calls (not silent) (0.142167ms)
+✔ pseudocode-constraint-predicate [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE] (1.668166ms)
+▶ pseudocode-constraint-entailment [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE]
+  ✔ proves length(items) > 0 when length bound assumed (0.300375ms)
+  ✔ detects proven false as refinement violation candidate (0.091125ms)
+✔ pseudocode-constraint-entailment [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE] (0.463375ms)
+▶ pseudocode-constraint-language corpus [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE]
+  ✔ loads cl-07..cl-12 constraint corpus fixtures (0.247042ms)
+  ✔ CL-1 cl-07: length refinement provable — no violation, refinements proven (11.436459ms)
+  ✔ cl-08: emits REFINEMENT_VIOLATION on proven POST violation (0.88425ms)
+  ✔ cl-09: collection bounds refinements proven without violation (0.753041ms)
+  ✔ cl-10: record field refinement proven at PRE (0.276417ms)
+  ✔ cl-11: PRE/POST partial positive — y >= x proven at return (0.29475ms)
+  ✔ cl-12: unsupported predicate yields unknown (not silent) (1.1055ms)
+  ✔ CL-1 case 12 v2: length(items) > 0 provable; typed-flow v1 path stays unknown (1.073083ms)
+  ✔ CONSTRAINT_ANNOTATED_PROCEDURE_DETECTION: v2 header alone does not annotate prose-only (0.261708ms)
+  ✔ CONSTRAINT_ANNOTATED_PROCEDURE_DETECTION: refinement annotates procedure (0.312542ms)
+  ✔ F8: typed-flow corpus unchanged when constraint analysis not invoked via analyzer (4.828666ms)
+✔ pseudocode-constraint-language corpus [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE] (22.050708ms)
+▶ pseudocode-constraint-solver [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE]
+  ✔ detectSummaryConflicts flags incompatible SUMMARY RETURN ensures (9.667875ms)
+  ✔ cl-13: interproc summary propagates; no summary_missing on declared callee (2.48625ms)
+  ✔ cl-14: missing callee summary yields summary_missing unknown (CL-4) (0.6535ms)
+  ✔ cl-15: low max_solver_steps sets solver_metadata.solver_truncation (CL-5) (0.457792ms)
+  ✔ cl-16: SUMMARY_CONFLICT diagnostic present in full constraint analysis (0.268208ms)
+  ✔ runConstraintSolver returns metadata with budgets_applied (0.528333ms)
+✔ pseudocode-constraint-solver [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE] (14.7955ms)
+▶ pseudocode-expression-parser [REQ-PSEUDOCODE_TYPED_FLOW]
+  ✔ parses literals, refs, and binary operators (F4) (0.913125ms)
+  ✔ parses field and index access (F5) (0.21825ms)
+  ✔ parses is-not-null guards (F3) (0.095291ms)
+  ✔ returns unsupported for opaque prose (F7) (0.097958ms)
+  ✔ splits and parses CALL args (F6) (0.7675ms)
+✔ pseudocode-expression-parser [REQ-PSEUDOCODE_TYPED_FLOW] (2.788458ms)
+▶ selectNewProjectGrammarDefault [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT]
+  ✔ returns TemplateUnavailable when template body is missing [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] (1.833208ms)
+  ✔ inserts Grammar-Version: v2 after H1 for new_client bootstrap [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] (0.917709ms)
+  ✔ does not duplicate an existing v2 header [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] (0.264708ms)
+  ✔ returns legacy template unchanged outside new_client bootstrap [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] (0.098417ms)
+✔ selectNewProjectGrammarDefault [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT] (4.026375ms)
+▶ canonical sidecar template [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT]
+  ✔ declares Grammar-Version: v2 as the first non-comment preamble line after H1 [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] (0.319541ms)
+✔ canonical sidecar template [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT] (0.38525ms)
+▶ classifySidecarVersion [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT]
+  ✔ returns explicit_v2 when the preamble declares Grammar-Version: v2 [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] (0.1335ms)
+  ✔ returns legacy_v1 when the header is absent [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] (0.088458ms)
+  ✔ returns InvalidVersionHeader for unsupported grammar headers [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] (0.159ms)
+✔ classifySidecarVersion [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT] (0.637125ms)
+▶ auditNewClientGrammar [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT]
+  ✔ reports independent dimensions when all inputs pass [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] (0.223625ms)
+  ✔ rejects constraintFlow true on Track A audit [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] (0.117541ms)
+  ✔ fails header dimension independently from Layer B/C [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] (0.066125ms)
+✔ auditNewClientGrammar [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT] (0.49675ms)
+▶ auditConstraintEnforcedBootstrap [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION]
+  ✔ isGateStageG4OrLater accepts G4 and higher [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] (0.153375ms)
+  ✔ passes bootstrap_enforcement when constraint_flow expectation is met [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] (0.081583ms)
+  ✔ fails HeaderOnlyBootstrapFalsification when constraint expectation is false [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] (0.050709ms)
+  ✔ returns GateStageNotG4 before G4 [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] (0.037833ms)
+✔ auditConstraintEnforcedBootstrap [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION] (0.380208ms)
+▶ extractCopyableSidecarTemplate [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT]
+  ✔ returns the post-front-matter body used by bootstrap and audit [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] (0.204875ms)
+✔ extractCopyableSidecarTemplate [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT] (0.242792ms)
+▶ copy_files bootstrap sidecar template [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT]
+  ✔ copies the canonical template with the v2 header into new client projects [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] (570.330542ms)
+✔ copy_files bootstrap sidecar template [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT] (570.388ms)
+▶ pseudocode-grammar-v2 [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE]
+  ✔ loads constraint-language parse fixtures cl-01..06 (F1) (1.210417ms)
+  ✔ detects v2 from preamble header and defaults to v1 when absent (0.507666ms)
+  ✔ ignores grammar_version_override outside qualification_mode (0.117708ms)
+  ✔ accepts grammar_version_override in qualification_mode (0.078833ms)
+  ✔ does not select v2 from file extension alone (1.1145ms)
+  ✔ corpus-cl-01 parses with expected grammar version and IR fields (1.038667ms)
+  ✔ corpus-cl-02 parses with expected grammar version and IR fields (0.384625ms)
+  ✔ corpus-cl-03 parses with expected grammar version and IR fields (0.237791ms)
+  ✔ corpus-cl-04 parses with expected grammar version and IR fields (0.236958ms)
+  ✔ corpus-cl-05 parses with expected grammar version and IR fields (0.425708ms)
+  ✔ corpus-cl-06 parses with expected grammar version and IR fields (0.195625ms)
+  ✔ F8: typed-flow fixtures parse unchanged without v2 header (10.897583ms)
+  ✔ serializes v2 IR deterministically (0.257709ms)
+✔ pseudocode-grammar-v2 [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE] (17.77675ms)
+▶ pseudocode-obligations [REQ-PSEUDOCODE_STATIC_ANALYSIS]
+  ✔ extracts decision tables and traceability edges (7.630959ms)
+✔ pseudocode-obligations [REQ-PSEUDOCODE_STATIC_ANALYSIS] (8.180917ms)
+▶ pseudocode-parser [REQ-PSEUDOCODE_STATIC_ANALYSIS]
+  ✔ parses procedures, branches, calls, and contracts from fixture (8.489333ms)
+  ✔ reports unsupported_syntax for unknown constructs (0.162791ms)
+  ✔ serializes IR deterministically (0.958625ms)
+  ✔ retains mixed typed and prose contract rows (F1b) (0.12525ms)
+  ✔ captures CALL args and optional arg expressions (F6) (0.814666ms)
+  ✔ rejects oversized input (0.063333ms)
+✔ pseudocode-parser [REQ-PSEUDOCODE_STATIC_ANALYSIS] (11.303167ms)
+▶ pseudocode-shared [REQ-PSEUDOCODE_PARSER_UNIFICATION] [REQ-PSEUDOCODE_STATIC_ANALYSIS]
+  ✔ extractSemanticTokens finds REQ/ARCH/IMPL tokens in source order (7.729583ms)
+  ✔ scanProcedureBlocks returns stable ranges for procedure/function/block (0.321625ms)
+  ✔ scanProcedureBlocks attaches external pre-procedure block-leads to the following procedure (0.065833ms)
+  ✔ scanProcedureBlocks excludes trailing inter-procedure block-leads from the previous procedure token scan (0.053792ms)
+  ✔ isBlockLeadCommentLine recognizes semantic block-lead comments only (0.036459ms)
+  ✔ parseContractFields preserves first-seen field order without duplicates (2.344667ms)
+  ✔ handles empty input without throwing (0.108291ms)
+✔ pseudocode-shared [REQ-PSEUDOCODE_PARSER_UNIFICATION] [REQ-PSEUDOCODE_STATIC_ANALYSIS] (11.279291ms)
+▶ pseudocode-symbols [REQ-PSEUDOCODE_STATIC_ANALYSIS]
+  ✔ resolves CALL targets and reports unresolved symbols (1.926083ms)
+  ✔ flags missing contract fields (5.73325ms)
+✔ pseudocode-symbols [REQ-PSEUDOCODE_STATIC_ANALYSIS] (8.286292ms)
+▶ pseudocode-typed-flow corpus [REQ-PSEUDOCODE_TYPED_FLOW]
+  ✔ loads all 28 labeled fixtures (F1) (15.621959ms)
+  ✔ case 01 meets labeled expectation (0.211959ms)
+  ✔ case 02 meets labeled expectation (0.732291ms)
+  ✔ case 03 meets labeled expectation (0.325875ms)
+  ✔ case 04 meets labeled expectation (0.146166ms)
+  ✔ case 05 meets labeled expectation (0.257375ms)
+  ✔ case 06 meets labeled expectation (0.639208ms)
+  ✔ case 07 meets labeled expectation (0.377708ms)
+  ✔ case 08 meets labeled expectation (0.274833ms)
+  ✔ case 09 meets labeled expectation (0.183042ms)
+  ✔ case 10 meets labeled expectation (0.681583ms)
+  ✔ case 11 meets labeled expectation (0.251208ms)
+  ✔ case 12 meets labeled expectation (0.1545ms)
+  ✔ case 13 meets labeled expectation (0.174666ms)
+  ✔ case 14 meets labeled expectation (0.4525ms)
+  ✔ case 15 meets labeled expectation (0.16475ms)
+  ✔ case 16 meets labeled expectation (0.154541ms)
+  ✔ case 17 meets labeled expectation (0.556792ms)
+  ✔ case 18 meets labeled expectation (0.26175ms)
+  ✔ case 19 meets labeled expectation (0.19575ms)
+  ✔ case 20 meets labeled expectation (0.126417ms)
+  ✔ case 21 meets labeled expectation (0.131333ms)
+  ✔ case 22 meets labeled expectation (0.111208ms)
+  ✔ case 23 meets labeled expectation (0.664ms)
+  ✔ case 24 meets labeled expectation (0.246167ms)
+  ✔ case 25 meets labeled expectation (0.317125ms)
+  ✔ case 26 meets labeled expectation (0.181083ms)
+  ✔ case 27 meets labeled expectation (0.15175ms)
+  ✔ case 28 meets labeled expectation (0.114292ms)
+  ✔ F7: cases 09-11 emit unknowns with populated cause (0.294166ms)
+  ✔ F9: typed-flow sections serialize deterministically (4.95375ms)
+  ✔ F10: zero budget_exceeded on fixtures 01-28 at default budgets (3.799292ms)
+  ✔ F12: 100% recall on definite-error cases 01-05, 07, and 18-21 (1.214709ms)
+  ✔ F3/F6 positive controls: case 16 guarded nullable and case 15 compatible CALL (0.166834ms)
+  ✔ case 17 analyzes >=8 procedures without budget_exceeded (0.218333ms)
+  ✔ Phase 3 gate_mode case 18 typed_gate_errors snapshot (1.041625ms)
+  ✔ Phase 3 gate_mode case 19 typed_gate_errors snapshot (2.332625ms)
+  ✔ Phase 3 gate_mode case 20 typed_gate_errors snapshot (0.2215ms)
+  ✔ Phase 3 gate_mode case 21 typed_gate_errors snapshot (0.293041ms)
+  ✔ Phase 3 gate_mode case 22 typed_gate_errors snapshot (0.448416ms)
+  ✔ Phase 3 gate_mode case 23 typed_gate_errors snapshot (0.386792ms)
+  ✔ Phase 3 gate_mode case 24 typed_gate_errors snapshot (0.216167ms)
+  ✔ Phase 3 gate_mode case 25 typed_gate_errors snapshot (0.237959ms)
+  ✔ Phase 3 gate_mode case 26 typed_gate_errors snapshot (0.258333ms)
+  ✔ Phase 3 gate_mode case 27 typed_gate_errors snapshot (0.785083ms)
+  ✔ Phase 3 gate_mode case 28 typed_gate_errors snapshot (0.278167ms)
+✔ pseudocode-typed-flow corpus [REQ-PSEUDOCODE_TYPED_FLOW] (42.472916ms)
+▶ pseudocode-typed-flow [REQ-PSEUDOCODE_TYPED_FLOW]
+  ✔ detects TYPE_MISMATCH on scalar assignment (F4) (8.682834ms)
+  ✔ detects CALL_TYPE_MISMATCH for incompatible args (F6) (1.511583ms)
+  ✔ emits unknowns for opaque RUN targets (F7) (0.235541ms)
+  ✔ detects JOIN_INCOMPATIBLE after branch merge (F2/F5) (0.596959ms)
+✔ pseudocode-typed-flow [REQ-PSEUDOCODE_TYPED_FLOW] (11.732333ms)
+▶ pseudocode-typed-ir [REQ-PSEUDOCODE_TYPED_FLOW]
+  ✔ round-trips scalar and nullable tags (F5) (0.770583ms)
+  ✔ extracts nested contract bindings (F1b/D13) (0.22525ms)
+  ✔ joins compatible facts and flags incompatible joins (F2) (0.12725ms)
+  ✔ checks nullable compatibility (F3) (0.059458ms)
+✔ pseudocode-typed-ir [REQ-PSEUDOCODE_TYPED_FLOW] (1.81725ms)
+▶ Layer B pseudo-code validator [IMPL-QUALITY_PSEUDOCODE_VALIDATOR] [PROC-PSEUDOCODE_VALIDATION]
+  ✔ reports blocks, contracts, dependencies, and source locations (8.762ms)
+  ✔ preserves mixed-case registered token links (0.208833ms)
+  ✔ accepts external-only block-leads for token linkage on the following procedure (0.149166ms)
+  ✔ does not flag MISSING_DATA_TRANSITION for negated mutation prose (0.19425ms)
+  ✔ still flags MISSING_DATA_TRANSITION for affirmative mutation without DATA_TRANSITION (0.11925ms)
+  ✔ diagnoses missing token linkage, contracts, and unresolved calls (0.106542ms)
+✔ Layer B pseudo-code validator [IMPL-QUALITY_PSEUDOCODE_VALIDATOR] [PROC-PSEUDOCODE_VALIDATION] (10.305459ms)
+▶ scoped analysis: roots + ignore patterns
+  ✔ default roots walk project root and ignore file excludes generated/ (5.580416ms)
+  ✔ explicit roots override defaults and prevent scanning generated/ (1.79075ms)
+  ✔ token_scan preserves mixed-case IMPL token occurrences (2.7025ms)
+  ✔ empty roots array falls back to default roots used by config/default_roots (2.013333ms)
+  ✔ traceability_gap_report: REQ in prod but not in test yields req_without_test gap (4.835458ms)
+  ✔ traceability_gap_report: REQ only in test yields req_without_implementation gap (3.801583ms)
+  ✔ gap_report reports missing tokens discovered in scanned sources (7.121083ms)
+  ✔ symlink policy: if follow_symlinks=false, a symlinked root is skipped (1.488625ms)
+✔ scoped analysis: roots + ignore patterns (30.188584ms)
+▶ traceability gap: test file classification [REQ-QUALITY_ASSURANCE_EVIDENCE]
+  ✔ detects __tests__ paths (0.483875ms)
+  ✔ detects .test.ts basename (0.106209ms)
+  ✔ detects Go and Ruby test naming conventions (0.066083ms)
+  ✔ classifies the pilot .mjs test and reports no scoped quality gaps (0.270667ms)
+  ✔ treats normal source as non-test (0.051042ms)
+✔ traceability gap: test file classification [REQ-QUALITY_ASSURANCE_EVIDENCE] (1.620875ms)
+▶ traceability gap: methodology paths
+  ✔ detects tied/methodology content (0.06775ms)
+  ✔ allows custom markers (0.051084ms)
+✔ traceability gap: methodology paths (0.201875ms)
+▶ collectChecklistActivation [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+  ✔ fails closed when the phase directory is missing (3.04125ms)
+  ✔ fails closed when run_id does not match on-disk provenance (160.709041ms)
+  ✔ collects activation from persisted phase artifacts (67.414125ms)
+✔ collectChecklistActivation [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (231.827834ms)
+▶ tied_checklist_activation_collect composition [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+  ✔ inquiry → collect → gate returns allowed: true (20.879208ms)
+  ✔ wrong run_id fails before gate pairing succeeds (12.008375ms)
+  ✔ supports optional metrics lookup without blocking success (35.467875ms)
+✔ tied_checklist_activation_collect composition [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (70.03625ms)
+▶ ASYNC_CATALOG_COLUMNS [REQ-ASYNC_CHECKLIST_CATALOG]
+  ✔ defines the W2 closed catalog table columns (0.997083ms)
+✔ ASYNC_CATALOG_COLUMNS [REQ-ASYNC_CHECKLIST_CATALOG] (1.5385ms)
+▶ detectAsyncInScope [REQ-ASYNC_CHECKLIST_CATALOG]
+  ✔ returns false for legacy sync-only pseudocode (0.225708ms)
+  ✔ returns true with matched semantic classes for async pilot (0.497208ms)
+✔ detectAsyncInScope [REQ-ASYNC_CHECKLIST_CATALOG] (0.903667ms)
+▶ validateAsyncCatalogTable [REQ-ASYNC_CHECKLIST_CATALOG]
+  ✔ passes when every async block has a closed catalog row (1.58475ms)
+  ✔ fails when an async block is missing a catalog row (0.132375ms)
+  ✔ does not require catalog rows when async is not in scope (0.139708ms)
+✔ validateAsyncCatalogTable [REQ-ASYNC_CHECKLIST_CATALOG] (1.990208ms)
+▶ detectAsyncContradictions [REQ-ASYNC_CHECKLIST_CATALOG]
+  ✔ flags AWAIT without Async EFFECTS when typed evidence is available (0.414459ms)
+  ✔ flags Async EFFECTS without boundary rationale (0.166958ms)
+  ✔ flags retry without idempotency (0.081917ms)
+  ✔ warns on REQ timeout missing from IMPL at Phase B and errors at verification (0.323417ms)
+  ✔ routes SEQUENCING mismatch to resolve-pseudocode (0.153542ms)
+✔ detectAsyncContradictions [REQ-ASYNC_CHECKLIST_CATALOG] (1.275333ms)
+▶ validateAsyncInScopeTracker [ARCH-ASYNC_CHECKLIST_INTEGRATION]
+  ✔ requires async_in_scope boolean on Tracker (0.09375ms)
+  ✔ requires matched semantic classes when async_in_scope is true and forbids inquiry activation (0.053416ms)
+✔ validateAsyncInScopeTracker [ARCH-ASYNC_CHECKLIST_INTEGRATION] (0.18975ms)
+▶ CHECKLIST_ASYNC_YAML_MD_PARITY [REQ-ASYNC_CHECKLIST_CATALOG]
+  ✔ keeps async marker parity for impact-discovery (0.233041ms)
+  ✔ keeps async marker parity for catalog-pseudocode-contracts (0.1565ms)
+  ✔ keeps async marker parity for flag-insufficient-specs (0.106791ms)
+  ✔ keeps async marker parity for flag-contradictory-specs (0.130292ms)
+  ✔ keeps async marker parity for gate-pseudocode-validation (0.131708ms)
+✔ CHECKLIST_ASYNC_YAML_MD_PARITY [REQ-ASYNC_CHECKLIST_CATALOG] (0.80975ms)
+▶ legacy regression [REQ-ASYNC_CHECKLIST_CATALOG]
+  ✔ buildEmptyAsyncCatalogRows returns no rows for sync-only pseudocode (0.072083ms)
+  ✔ documents integrated inquiry cases without MCP wiring (0.021ms)
+✔ legacy regression [REQ-ASYNC_CHECKLIST_CATALOG] (0.119542ms)
+▶ remediation acceptance matrix A1–A18 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+  ✔ A1 sparse Tracker → tracker_sparse (0.720542ms)
+  ✔ A2 synthetic projection → tracker_not_authoritative (0.094333ms)
+  ✔ A3 missing provenance fields → provenance_incomplete (0.165917ms)
+  ✔ A3 root wrapper schemaVersion with inner provenance identity passes [REQ-TIED_SETUP] (0.663834ms)
+  ✔ A4 missing activation pairing → activation_pairing_incomplete (13.547333ms)
+  ✔ A5 unresolved finding → finding_unresolved under strict policy (0.11775ms)
+  ✔ W1-D2 advisory policy surfaces finding diagnostics without blocking (0.709792ms)
+  ✔ W1-D2 integrated gate allows advisory findings with waiver visibility (0.593834ms)
+  ✔ W1-D5 in-memory tracker rejected at close_out integrated depth (0.064833ms)
+  ✔ A6 self-reported command success → command_success_unproven (0.089917ms)
+  ✔ A7 stale hash mismatch → evidence_stale (0.070125ms)
+  ✔ A8 placeholder waiver → waiver_invalid (0.254375ms)
+  ✔ A9 pending sub-stub at integrated depth → sub_stub_pending (0.245875ms)
+  ✔ A10 parent completed with pending sub-stub → parent_child_inconsistent (0.143291ms)
+  ✔ A11 valid integrated verification evidence → allowed (0.157167ms)
+  ✔ A12 valid waiver excludes waived obligation only (1.657417ms)
+  ✔ A13 wrong phase receipt → receipt_identity_mismatch:phase (1.7375ms)
+  ✔ A14 verification receipt at close_out → receipt_identity_mismatch:phase (0.367167ms)
+  ✔ A15 dirty post-gate tree → tree_dirty_post_gate (0.175666ms)
+  ✔ A16 depth downgrade without waiver → depth_downgrade_requires_waiver (0.1095ms)
+  ✔ A17 caller cannot subtract auto-required slugs (0.096875ms)
+  ✔ A18 advisory policy still fail-closed without activation at integrated depth (0.061ms)
+✔ remediation acceptance matrix A1–A18 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (22.910209ms)
+▶ CHECKLIST_CLIENT_YAML_STYLING [PROC-AGENT_REQ_CHECKLIST]
+  ✔ defines sub-client-yaml-styling invoked only from sub-yaml-edit-loop (11.839875ms)
+  ✔ extends sub-yaml-edit-loop to call client styling after baseline canonical formatting (4.669291ms)
+  ✔ requires YAML mutation callers to invoke sub-yaml-edit-loop (6.6665ms)
+  ✔ requires post-style evidence at verification-gate, sync-tied-stack, and traceable-commit (1.908875ms)
+  ✔ keeps markdown mirror aligned with YAML sub-procedure slugs (1.963916ms)
+  ✔ wires Layer C sub-pseudocode-static-analysis-pass at gate-pseudocode-validation [REQ-PSEUDOCODE_STATIC_ANALYSIS] (2.219583ms)
+✔ CHECKLIST_CLIENT_YAML_STYLING [PROC-AGENT_REQ_CHECKLIST] (30.120208ms)
+▶ ASYNC_CITDP_EVIDENCE_MATRIX [ARCH-ASYNC_CITDP_EVIDENCE]
+  ✔ defines nine async attribute rows with artifact, proof_boundary, and minimum_acceptance (0.509ms)
+  ✔ looks up matrix rows by attribute id (0.148042ms)
+✔ ASYNC_CITDP_EVIDENCE_MATRIX [ARCH-ASYNC_CITDP_EVIDENCE] (1.27975ms)
+▶ deriveAsyncCitdpTriggers [REQ-ASYNC_CITDP_TRIGGERS]
+  ✔ returns no triggers when async is not in scope (1.292542ms)
+  ✔ recommends async-boundary-catalog for async EFFECTS boundaries (0.389ms)
+  ✔ adds composition-async-seam when SEND or IPC bindings are present (0.095833ms)
+  ✔ recommends idempotency evidence when retry or at-least-once criteria match (0.213167ms)
+  ✔ recommends timeout/cancellation evidence when those classes match (0.08025ms)
+  ✔ recommends stateful-reliability only when shared DATA mutates persistence (0.08575ms)
+✔ deriveAsyncCitdpTriggers [REQ-ASYNC_CITDP_TRIGGERS] (2.342959ms)
+▶ validateAsyncCitdpActivation [IMPL-ASYNC_CITDP_PROFILE_WIRING]
+  ✔ blocks inquiry when only async_in_scope marker is present (0.236208ms)
+  ✔ allows inquiry when identity-bound disposition is complete (0.124375ms)
+  ✔ blocks inquiry when disposition is missing required activation fields (0.057958ms)
+  ✔ rejects unknown inquiry case ids (0.074916ms)
+  ✔ does not authorize inquiry from async_in_scope when inquiry is not requested (0.032375ms)
+✔ validateAsyncCitdpActivation [IMPL-ASYNC_CITDP_PROFILE_WIRING] (0.634834ms)
+▶ ASYNC_INQUIRY_CASES [REQ-ASYNC_CITDP_TRIGGERS]
+  ✔ documents ASYNC-001 through ASYNC-006 (0.10675ms)
+✔ ASYNC_INQUIRY_CASES [REQ-ASYNC_CITDP_TRIGGERS] (0.131917ms)
+▶ citdp-triggers fixtures [REQ-ASYNC_CITDP_TRIGGERS]
+  ✔ marker-only fixture expects candidate triggers without inquiry activation (0.429875ms)
+  ✔ full-activation fixture allows inquiry with complete disposition (0.366583ms)
+  ✔ missing-disposition fixture blocks inquiry (0.331834ms)
+✔ citdp-triggers fixtures [REQ-ASYNC_CITDP_TRIGGERS] (1.204041ms)
+▶ writeCitdpRecord
+  ✔ rejects path segments in filename (0.6565ms)
+  ✔ rejects flat adversarial depth and requires the nested contract (3.63425ms)
+  ✔ validates activation nested under completion criteria (2.728333ms)
+  ✔ writes tied/citdp/CITDP-*.yaml with safe top-level key (2.27475ms)
+  ✔ allows minimal-to-integrated upgrade before inquiry when prior_depth_tier is minimal (1.416375ms)
+  ✔ rejects minimal-to-integrated upgrade without prior_depth_tier minimal (1.552459ms)
+  ✔ preserves prior_depth_tier on overwrite when incoming omits it (2.110292ms)
+  ✔ rejects malformed supplied activation at integrated depth (0.581083ms)
+  ✔ keeps verification gate blocked for integrated depth without activation pairing (4.762708ms)
+✔ writeCitdpRecord (20.568792ms)
+DIAGNOSTIC: envelope patch failed for tied-citdp-contract-1FOdeY/citdp/CITDP-REQ-NESTED.yaml: WorkingFolderMissing
+DIAGNOSTIC: envelope patch failed for tied-citdp-upgrade-BTl9vF/citdp/CITDP-REQ-UPGRADE.yaml: WorkingFolderMissing
+DIAGNOSTIC: envelope patch failed for tied-citdp-activation-H6EW3o/citdp/CITDP-REQ-ACTIVATION.yaml: WorkingFolderMissing
+DIAGNOSTIC: envelope patch failed for tied-citdp-FcEbTm/citdp/CITDP-REQ-UNIT_TEST.yaml: WorkingFolderMissing
+DIAGNOSTIC: envelope patch failed for tied-citdp-upgrade-BTl9vF/citdp/CITDP-REQ-UPGRADE.yaml: WorkingFolderMissing
+DIAGNOSTIC: envelope patch failed for tied-citdp-upgrade-missing-f3kS0j/citdp/CITDP-REQ-UPGRADE-MISSING.yaml: WorkingFolderMissing
+DIAGNOSTIC: envelope patch failed for tied-citdp-preserve-V9tG4d/citdp/CITDP-REQ-PRESERVE.yaml: WorkingFolderMissing
+DIAGNOSTIC: envelope patch failed for tied-citdp-preserve-V9tG4d/citdp/CITDP-REQ-PRESERVE.yaml: WorkingFolderMissing
+▶ claims-evidence-review composition [REQ-TIED_CLAIMS_EVIDENCE_REVIEW]
+  ✔ runs pilot on tied-generated fixture and emits ledger + provenance (10.862708ms)
+  ✔ does not promote from shown alone (0.123ms)
+✔ claims-evidence-review composition [REQ-TIED_CLAIMS_EVIDENCE_REVIEW] (11.617917ms)
+▶ tied_claims_evidence_review_run MCP [REQ-TIED_CLAIMS_EVIDENCE_REVIEW]
+  ✔ returns ledger and provenance for tied-generated fixture (10.683416ms)
+✔ tied_claims_evidence_review_run MCP [REQ-TIED_CLAIMS_EVIDENCE_REVIEW] (11.371625ms)
+▶ claim-surface [REQ-TIED_CLAIMS_EVIDENCE_REVIEW]
+  ✔ rejects path outside input boundary (1.248333ms)
+  ✔ rejects duplicate claim ids (6.467792ms)
+✔ claim-surface [REQ-TIED_CLAIMS_EVIDENCE_REVIEW] (8.370834ms)
+▶ classify-claim-status [REQ-TIED_CLAIMS_EVIDENCE_REVIEW]
+  ✔ marks runtime claims not_examined under static_only (0.150833ms)
+  ✔ does not treat missing evidence as shown (0.075542ms)
+✔ classify-claim-status [REQ-TIED_CLAIMS_EVIDENCE_REVIEW] (0.333125ms)
+▶ collect-claim-evidence [REQ-TIED_CLAIMS_EVIDENCE_REVIEW]
+  ✔ rejects path traversal (0.67ms)
+✔ collect-claim-evidence [REQ-TIED_CLAIMS_EVIDENCE_REVIEW] (0.736584ms)
+▶ claim-review-ledger [REQ-TIED_CLAIMS_EVIDENCE_REVIEW]
+  ✔ appends without overwriting duplicate claim ids (0.130417ms)
+✔ claim-review-ledger [REQ-TIED_CLAIMS_EVIDENCE_REVIEW] (0.224708ms)
+▶ appendImplementationApproachDetails
+  ✔ appends lines without dropping existing implementation_approach.details (8.423041ms)
+✔ appendImplementationApproachDetails (9.103084ms)
+▶ IMPL essence sidecar (via writeDetail + loadDetail)
+  ✔ writes essence_pseudocode to IMPL-TOKEN-pseudocode.md, not in YAML (1.862334ms)
+✔ IMPL essence sidecar (via writeDetail + loadDetail) (1.941292ms)
+▶ listDetailTokens
+  ✔ does not list IMPL-TOKEN-pseudocode as a token (1.566583ms)
+✔ listDetailTokens (1.650084ms)
+▶ e2e: bootstrap and load
+  ✔ tied bootstrap subcommand populates tied/ [REQ-TIED_UNIFIED_TOOLCHAIN] (284.537ms)
+  ✔ copy_files populates tied/ and loader reads requirements index from it [IMPL-TIED_FILES] [REQ-TIED_SETUP] (2160.101208ms)
+  ✔ initializes opt-in MCP metrics fields with an override or project basename [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS] (364.29725ms)
+  ✔ refreshes layered vocabulary without overwriting client content [IMPL-TIED_FILES] [IMPL-TIED_VOCABULARY_REFRESH] [REQ-TIED_VOCABULARY_OWNERSHIP] (235.470042ms)
+  ✔ loader reads semantic-tokens index from bootstrapped tied/ [IMPL] (121.0105ms)
+✔ e2e: bootstrap and load (3166.129167ms)
+▶ new-tied-client pipeline
+  ✔ uses unix seconds not milliseconds for disposable timestamp [REQ-TIED_SETUP] [IMPL-TIED_FILES] (89.639667ms)
+  ✔ parseNewTiedClientArgs handles disposable and skip flags [IMPL-TIED_FILES] (84.135959ms)
+  ✔ parseNewTiedClientArgs maps claude harness flags [REQ-TIED_CLAUDE_BOOTSTRAP_OPS] [IMPL-TIED_CLAUDE_BOOTSTRAP_OPS] (93.463625ms)
+  ✔ resolveCursorAgentCli prefers cursor when on PATH and honors TIED_CURSOR_AGENT_CMD [IMPL-TIED_FILES] (83.231292ms)
+  ✔ mcp enable step uses resolved Cursor agent CLI [IMPL-TIED_FILES] (79.308083ms)
+  ✔ claude harness skips mcp enable and invokes validation after audit [REQ-TIED_CLAUDE_BOOTSTRAP_OPS] [IMPL-TIED_CLAUDE_BOOTSTRAP_OPS] (80.091875ms)
+  ✔ records pipeline step order via injectable spawn [IMPL-TIED_FILES] (87.545958ms)
+✔ new-tied-client pipeline (598.682167ms)
+▶ new-tied-client integration
+  ✔ bootstraps client with lint when MCP and git skipped [REQ-TIED_SETUP] [IMPL-TIED_FILES] (3060.889584ms)
+  ✔ runs disposable CLI with skip flags [IMPL-TIED_FILES] (2568.200625ms)
+✔ new-tied-client integration (5629.239667ms)
+▶ prompt-type skill bundle
+  ✔ validates the tracked canonical bundle [REQ-PROMPT_TYPE_GLOBAL_SKILLS] [IMPL-PROMPT_TYPE_GLOBAL_SKILLS] (2.412ms)
+  ✔ installs the canonical bundle while preserving unrelated client tooling [REQ-PROMPT_TYPE_GLOBAL_SKILLS] [IMPL-PROMPT_TYPE_GLOBAL_SKILLS] (532.255708ms)
+  ✔ uses attribute-preserving copy invocations for managed bootstrap artifacts [REQ-TIED_SETUP] [IMPL-TIED_FILES] (0.2915ms)
+  ✔ preserves prompt-type workflow-specific contracts [REQ-PROMPT_TYPE_GLOBAL_SKILLS] (0.391292ms)
+✔ prompt-type skill bundle (536.02775ms)
+▶ prompt-type Task subagents [REQ-PROMPT_TYPE_SUBAGENT]
+  ✔ enforces the plan-new-feature Cursor agent contract [IMPL-PROMPT_TYPE_SUBAGENT] (2.6965ms)
+  ✔ enforces the refine-plan Cursor agent contract [IMPL-PROMPT_TYPE_SUBAGENT] (0.899125ms)
+  ✔ enforces the build-plan Cursor agent contract [IMPL-PROMPT_TYPE_SUBAGENT] (1.042792ms)
+  ✔ enforces the plan-close-out Cursor agent contract [IMPL-PROMPT_TYPE_SUBAGENT] (0.467667ms)
+  ✔ enforces the debug Cursor agent contract [IMPL-PROMPT_TYPE_SUBAGENT] (0.333875ms)
+  ✔ enforces the question Cursor agent contract [IMPL-PROMPT_TYPE_SUBAGENT] (0.264542ms)
+  ✔ enforces the use-skill Cursor agent contract [IMPL-PROMPT_TYPE_SUBAGENT] (0.259791ms)
+  ✔ enforces the ammend-commit Cursor agent contract [IMPL-PROMPT_TYPE_SUBAGENT] (0.348792ms)
+  ✔ enforces the non-tied-plan Cursor agent contract [IMPL-PROMPT_TYPE_SUBAGENT] (0.554958ms)
+  ✔ enforces the non-tied-debug Cursor agent contract [IMPL-PROMPT_TYPE_SUBAGENT] (0.423792ms)
+  ✔ enforces the leap-ad-hoc Cursor agent contract [IMPL-PROMPT_TYPE_SUBAGENT] (0.266042ms)
+  ✔ enforces the leap-diff-promote Cursor agent contract [IMPL-PROMPT_TYPE_SUBAGENT] (0.263583ms)
+  ✔ enforces the other Cursor agent contract [IMPL-PROMPT_TYPE_SUBAGENT] (0.258542ms)
+  ✔ preserves workflow order and blocking gates [REQ-PROMPT_TYPE_SUBAGENT] (1.486291ms)
+  ✔ preserves safety and parent handoff contracts [REQ-PROMPT_TYPE_SUBAGENT] (2.8695ms)
+  ✔ sequences plan-new-feature, refine-plan, then build-plan as Task children [REQ-PROMPT_TYPE_SUBAGENT] (0.642625ms)
+✔ prompt-type Task subagents [REQ-PROMPT_TYPE_SUBAGENT] (14.008292ms)
+▶ agentstream adapter REQ-FEAT_AGENTSTREAM_ADAPTER
+  ✔ uses the same turns for dry-run and live execution (1.842542ms)
+  ✔ delegates legacy feature-spec mode without changing ordering (0.243667ms)
+✔ agentstream adapter REQ-FEAT_AGENTSTREAM_ADAPTER (2.83875ms)
+▶ NORMALIZE_CLARIFICATION_SIDECAR REQ-FEAT_CLARIFICATION_RECORDS
+  ✔ normalizes canonical records and rejects view markers (0.596208ms)
+  ✔ requires ownership and durable resolution evidence (5.602292ms)
+✔ NORMALIZE_CLARIFICATION_SIDECAR REQ-FEAT_CLARIFICATION_RECORDS (6.839375ms)
+▶ PUBLISH_CLARIFICATION_SIDECAR REQ-FEAT_CLARIFICATION_RECORDS
+  ✔ publishes atomically and rejects stale writers (4.68575ms)
+✔ PUBLISH_CLARIFICATION_SIDECAR REQ-FEAT_CLARIFICATION_RECORDS (4.801917ms)
+▶ EVALUATE_CLARIFICATION_GATE REQ-FEAT_CLARIFICATION_GATES
+  ✔ blocks only intersecting open or stale classified uncertainty (0.23775ms)
+  ✔ marks an affected resolved decision stale after revision (0.063958ms)
+✔ EVALUATE_CLARIFICATION_GATE REQ-FEAT_CLARIFICATION_GATES (0.369458ms)
+▶ FEATURE_ORCHESTRATOR REQ-FEAT_ORCHESTRATION_SURFACE
+  ✔ parses a standalone lifecycle request and returns structured output (15.077917ms)
+  ✔ rejects invalid arguments without touching repository state (0.879375ms)
+✔ FEATURE_ORCHESTRATOR REQ-FEAT_ORCHESTRATION_SURFACE (16.571541ms)
+DEBUG: checklist gate blocked plan for FEAT-001
+DEBUG: checklist gate blocked close_out for FEAT-001
+▶ ORCHESTRATION_COMMANDS REQ-FEAT_ORCHESTRATION_COMMANDS
+  ✔ maps specify and refine to the shared lifecycle engine (15.077542ms)
+  ✔ fails closed when a planning checklist gate is missing (3.1065ms)
+  ✔ rejects close-out before mutating a verifying feature (1.450833ms)
+✔ ORCHESTRATION_COMMANDS REQ-FEAT_ORCHESTRATION_COMMANDS (20.289833ms)
+▶ VALIDATE_CONSTITUTION_DOCUMENT REQ-FEAT_CONSTITUTION_SCHEMA
+  ✔ validates ownership, scope, approval, and duplicate constraints (12.948916ms)
+✔ VALIDATE_CONSTITUTION_DOCUMENT REQ-FEAT_CONSTITUTION_SCHEMA (13.559834ms)
+▶ PROJECT_CONSTITUTION_STORE REQ-FEAT_CONSTITUTION_SCHEMA
+  ✔ owns and atomically publishes tied/constitution.yaml with CAS versions (4.35975ms)
+✔ PROJECT_CONSTITUTION_STORE REQ-FEAT_CONSTITUTION_SCHEMA (4.445792ms)
+▶ ANALYZE_CONSTITUTION_COMPLIANCE REQ-FEAT_CONSTITUTION_COMPLIANCE
+  ✔ analyzes all governed artifact kinds without mutation (0.268833ms)
+✔ ANALYZE_CONSTITUTION_COMPLIANCE REQ-FEAT_CONSTITUTION_COMPLIANCE (0.335333ms)
+▶ ORDER_CONSTITUTION_DIAGNOSTICS REQ-FEAT_CONSTITUTION_COMPLIANCE
+  ✔ orders diagnostics independently of traversal order (5.455584ms)
+✔ ORDER_CONSTITUTION_DIAGNOSTICS REQ-FEAT_CONSTITUTION_COMPLIANCE (5.519583ms)
+▶ LOCAL_DEFAULTS REQ-FEAT_LOCAL_DEFAULTS
+  ✔ uses explicit values before environment and local discovery (1.308916ms)
+  ✔ reports source and corrective command for missing prerequisites (0.49075ms)
+✔ LOCAL_DEFAULTS REQ-FEAT_LOCAL_DEFAULTS (2.371833ms)
+▶ execution recovery REQ-FEAT_TASK_EXECUTION_RECOVERY
+  ✔ keeps task identity and appends retry evidence (4.683708ms)
+  ✔ rejects stale input and unsafe cancellation resume (0.122792ms)
+✔ execution recovery REQ-FEAT_TASK_EXECUTION_RECOVERY (6.187042ms)
+▶ FIXTURE_CORPUS REQ-FEAT_FIXTURE_VALIDATION
+  ✔ validates the required representative scenarios deterministically (6.483833ms)
+  ✔ rejects missing scenarios and unexpected outcomes (0.691375ms)
+✔ FIXTURE_CORPUS REQ-FEAT_FIXTURE_VALIDATION (7.769667ms)
+▶ LIFECYCLE_TRANSITION_MATRIX REQ-FEAT_LIFECYCLE
+  ✔ allows a legal transition and increments revision immutably (1.162417ms)
+  ✔ blocks missing evidence and rejects illegal or unknown transitions (0.079542ms)
+  ✔ requires approval for abandonment and rejects applying non-allowed decisions (0.064958ms)
+✔ LIFECYCLE_TRANSITION_MATRIX REQ-FEAT_LIFECYCLE (1.952917ms)
+▶ MANIFEST_SCHEMA_CONTRACT REQ-FEAT_MANIFEST_SCHEMA
+  ✔ accepts and deterministically normalizes a reference-only manifest (1.341084ms)
+  ✔ rejects unsupported versions, embedded canonical bodies, and invalid references (0.179667ms)
+✔ MANIFEST_SCHEMA_CONTRACT REQ-FEAT_MANIFEST_SCHEMA (4.284334ms)
+▶ ORCHESTRATION_MCP REQ-FEAT_ORCHESTRATION_SURFACE
+  ✔ creates a feature package through the shared store (10.266333ms)
+  ✔ routes feature-local lifecycle requests to the shared command adapter (3.291917ms)
+  ✔ delegates canonical TIED operations instead of reimplementing CRUD (0.346667ms)
+  ✔ routes feature view requests to the Batch 4 projection boundary REQ-FEAT_VIEW_GENERATION (0.387542ms)
+✔ ORCHESTRATION_MCP REQ-FEAT_ORCHESTRATION_SURFACE (14.853167ms)
+▶ MIGRATION_PREVIEW REQ-FEAT_LEGACY_MIGRATION
+  ✔ produces a no-write deterministic preview retaining source order and conflicts (8.233292ms)
+✔ MIGRATION_PREVIEW REQ-FEAT_LEGACY_MIGRATION (8.849959ms)
+▶ MIGRATION_APPLY REQ-FEAT_LEGACY_MIGRATION
+  ✔ requires confirmation and creates a recoverable backup on apply (3.593917ms)
+✔ MIGRATION_APPLY REQ-FEAT_LEGACY_MIGRATION (3.677334ms)
+▶ OFFLINE_FALLBACK REQ-FEAT_OFFLINE_WORKFLOW_PRESERVATION
+  ✔ hands off to the documented manual path when Node or MCP is unavailable (0.421709ms)
+  ✔ preserves tied-cli as an explicit advanced path (0.063208ms)
+✔ OFFLINE_FALLBACK REQ-FEAT_OFFLINE_WORKFLOW_PRESERVATION (1.004709ms)
+▶ ONBOARDING_COMMANDS REQ-FEAT_ONBOARDING_COMMANDS
+  ✔ delegates feature new to the shared feature store (13.008375ms)
+  ✔ reports an actionable prerequisite instead of mutating config (2.274417ms)
+  ✔ reports offline guidance when TIED_MCP_BIN is missing (0.765416ms)
+✔ ONBOARDING_COMMANDS REQ-FEAT_ONBOARDING_COMMANDS (16.733375ms)
+▶ READINESS_DIAGNOSTIC REQ-FEAT_READINESS_DIAGNOSTICS
+  ✔ names each unmet prerequisite and exact corrective command deterministically (1.148708ms)
+✔ READINESS_DIAGNOSTIC REQ-FEAT_READINESS_DIAGNOSTICS (1.767125ms)
+DEBUG: clarification gate blocked specify for FEAT-001
+▶ PROJECT_READINESS_TO_LIFECYCLE_COMMAND REQ-FEAT_CLARIFICATION_GATES
+  ✔ returns blockers without invoking lifecycle mutation (15.368375ms)
+✔ PROJECT_READINESS_TO_LIFECYCLE_COMMAND REQ-FEAT_CLARIFICATION_GATES (15.961ms)
+▶ CANONICAL_REFERENCE_LINKER REQ-FEAT_CANONICAL_LINKS
+  ✔ resolves typed references without mutating canonical indexes (2.765333ms)
+  ✔ reports dangling, duplicate, wrong-type, and inconsistent-graph references (0.122417ms)
+✔ CANONICAL_REFERENCE_LINKER REQ-FEAT_CANONICAL_LINKS (6.095125ms)
+▶ FEATURE_STORE REQ-FEAT_STORE_PERSISTENCE
+  ✔ allocates deterministic identifiers and persists a complete manifest (6.559ms)
+  ✔ rejects traversal and preserves the old file when publication fails (1.957792ms)
+✔ FEATURE_STORE REQ-FEAT_STORE_PERSISTENCE (9.176375ms)
+▶ IDEMPOTENT_CREATE REQ-FEAT_IDEMPOTENT_CREATION
+  ✔ returns the original feature for a matching request key and rejects collisions (8.948583ms)
+✔ IDEMPOTENT_CREATE REQ-FEAT_IDEMPOTENT_CREATION (9.022833ms)
+▶ ATOMIC_MUTATION REQ-FEAT_REVISION_SAFE_MUTATION
+  ✔ uses compare-and-swap revisions and rejects stale writers (2.585458ms)
+✔ ATOMIC_MUTATION REQ-FEAT_REVISION_SAFE_MUTATION (2.67025ms)
+▶ task derivation REQ-FEAT_TASK_DERIVATION
+  ✔ is stable for equivalent canonical inputs (8.091375ms)
+  ✔ rejects a blocked source before publishing a graph (0.095042ms)
+✔ task derivation REQ-FEAT_TASK_DERIVATION (8.781458ms)
+▶ task graph scheduling REQ-FEAT_TASK_GRAPH_SCHEDULING
+  ✔ detects cycles deterministically (0.190959ms)
+  ✔ reports dependency blockers instead of inferring readiness (0.168792ms)
+✔ task graph scheduling REQ-FEAT_TASK_GRAPH_SCHEDULING (0.433708ms)
+✔ builds a reference-only projection and preserves links and proof boundaries REQ-FEAT_VIEW_GENERATION (8.087542ms)
+✔ rejects unresolved references and conflicting revisions REQ-FEAT_VIEW_GENERATION (0.308334ms)
+✔ renders every supported view deterministically with generated metadata REQ-FEAT_VIEW_GENERATION (0.457541ms)
+✔ semantic comparison is stable and ignores formatting-only changes REQ-FEAT_VIEW_DETERMINISM (0.544166ms)
+✔ detects stale sources and applies fail or explicit warn policy REQ-FEAT_VIEW_STALENESS (0.2295ms)
+▶ feedback promotion [REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION]
+  ✔ normalizes all source metadata and rejects missing evidence (0.827833ms)
+  ✔ groups duplicates without deleting original entries (0.140916ms)
+  ✔ requires review and creates only non-canonical proposals (6.896ms)
+✔ feedback promotion [REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION] (8.509416ms)
+▶ getFeedbackPath
+  ✔ returns path ending with feedback.yaml under base [ARCH-FEEDBACK_STORAGE] (0.474042ms)
+✔ getFeedbackPath (1.066208ms)
+▶ loadFeedback
+  ✔ returns { entries: [] } when file does not exist [IMPL-MCP_FEEDBACK_TOOLS] (1.341583ms)
+  ✔ loads existing entries from YAML file (3.07125ms)
+  ✔ returns { entries: [] } for invalid or empty file (0.873209ms)
+✔ loadFeedback (5.413209ms)
+▶ appendEntry
+  ✔ creates file and appends entry with id and created_at [REQ-FEEDBACK_TO_TIED] (3.151083ms)
+  ✔ rejects invalid type (0.420542ms)
+  ✔ rejects empty title (0.520292ms)
+  ✔ rejects empty description (3.87425ms)
+  ✔ includes optional context in entry (1.130167ms)
+✔ appendEntry (9.301709ms)
+▶ exportMarkdown
+  ✔ formats entries with title, description, type [REQ-FEEDBACK_TO_TIED] (0.134292ms)
+  ✔ returns placeholder when entries empty (0.043958ms)
+✔ exportMarkdown (0.221041ms)
+▶ exportJson
+  ✔ returns valid JSON array of entries (0.053375ms)
+✔ exportJson (0.07475ms)
+▶ buildReportSnippet
+  ✔ includes type, title, description and optional context (0.056333ms)
+✔ buildReportSnippet (0.094958ms)
+▶ ANALYZE_BINDING_EVIDENCE REQ-TIED_FIDELITY_RESEARCH
+  ✔ accepts UI-free evidence when every binding field is observed (1.059959ms)
+  ✔ reports a binding finding when UI-free evidence is absent (1.618083ms)
+✔ ANALYZE_BINDING_EVIDENCE REQ-TIED_FIDELITY_RESEARCH (13.564791ms)
+▶ PROMOTE_CONFIRMED_CASE REQ-TIED_FIDELITY_RESEARCH
+  ✔ requires independent review and keeps product writes disabled (0.487875ms)
+  ✔ does not promote a finding with one reviewer (0.688125ms)
+✔ PROMOTE_CONFIRMED_CASE REQ-TIED_FIDELITY_RESEARCH (1.861ms)
+▶ VERIFY_DETERMINISTIC_RERUN REQ-TIED_FIDELITY_RESEARCH
+  ✔ links an equivalent rerun without increasing finding counts (1.073416ms)
+  ✔ reports a non-deterministic rerun when findings differ (0.083042ms)
+✔ VERIFY_DETERMINISTIC_RERUN REQ-TIED_FIDELITY_RESEARCH (1.751084ms)
+DEBUG: evidence_chain_profile depth=integrated fidelity=false binding=false spec=false
+DEBUG: evidence_chain_profile depth=human_research fidelity=true binding=true spec=false
+DEBUG: evidence_chain_profile depth=integrated fidelity=false binding=false spec=false
+DEBUG: evidence_chain_profile depth=integrated fidelity=false binding=false spec=false
+DEBUG: evidence_chain_profile depth=integrated fidelity=false binding=false spec=false
+DEBUG: evidence_chain_profile depth=integrated fidelity=false binding=false spec=false
+▶ evidence_chain_profile_generate MCP binding [REQ-EVIDENCE_CHAIN_PROFILE]
+  ✔ wires generate through a UI-free handler at both depths (8.301667ms)
+  ✔ fails closed when tied_base_path does not match getBasePath (0.132875ms)
+  ✔ marks structural rows observed when invoke_structural_validators is true (886.134084ms)
+  ✔ omits pseudocode_analyze rows unless invoke_pseudocode_analyze is true (469.946084ms)
+  ✔ keeps structural rows not_measured without invoke_structural_validators (0.375875ms)
+DEBUG: evidence_chain_profile depth=integrated fidelity=false binding=false spec=false
+  ✔ marks quality.command_results observed when manifest_reference is supplied (3.818167ms)
+✔ evidence_chain_profile_generate MCP binding [REQ-EVIDENCE_CHAIN_PROFILE] (1369.491917ms)
+DIAGNOSTIC: evidence chain profile must not append findings
+DIAGNOSTIC: evidence chain profile must not promote cases
+DEBUG: evidence_chain_profile depth=integrated fidelity=false binding=false spec=false
+DIAGNOSTIC: evidence chain profile must not append findings
+DIAGNOSTIC: evidence chain profile must not promote cases
+DEBUG: evidence_chain_profile depth=human_research fidelity=true binding=true spec=false
+DIAGNOSTIC: evidence chain profile must not append findings
+DIAGNOSTIC: evidence chain profile must not promote cases
+DEBUG: evidence_chain_profile depth=integrated fidelity=false binding=false spec=false
+DIAGNOSTIC: evidence chain profile must not append findings
+DIAGNOSTIC: evidence chain profile must not promote cases
+DEBUG: evidence_chain_profile depth=integrated fidelity=false binding=false spec=false
+DIAGNOSTIC: evidence chain profile must not append findings
+DIAGNOSTIC: evidence chain profile must not promote cases
+DEBUG: evidence_chain_profile depth=integrated fidelity=false binding=false spec=false
+DIAGNOSTIC: evidence chain profile must not append findings
+DIAGNOSTIC: evidence chain profile must not promote cases
+DEBUG: evidence_chain_profile depth=integrated fidelity=false binding=false spec=false
+DIAGNOSTIC: evidence chain profile must not append findings
+DIAGNOSTIC: evidence chain profile must not promote cases
+DEBUG: evidence_chain_profile depth=integrated fidelity=false binding=false spec=false
+DIAGNOSTIC: evidence chain profile must not append findings
+DIAGNOSTIC: evidence chain profile must not promote cases
+DEBUG: evidence_chain_profile depth=integrated fidelity=false binding=false spec=false
+DIAGNOSTIC: evidence chain profile must not append findings
+DIAGNOSTIC: evidence chain profile must not promote cases
+DEBUG: evidence_chain_profile depth=integrated fidelity=false binding=false spec=false
+▶ NORMALIZE_EVIDENCE_CHAIN_PROFILE [REQ-EVIDENCE_CHAIN_PROFILE]
+  ✔ stable-sorts and preserves proof boundaries and N/A statuses (11.22925ms)
+  ✔ rejects maturity and score keys [REQ-EVIDENCE_CHAIN_PROFILE] (0.310708ms)
+  ✔ rejects derived fields without denominators [REQ-EVIDENCE_CHAIN_PROFILE] (0.102292ms)
+  ✔ rejects malformed objects [REQ-EVIDENCE_CHAIN_PROFILE] (0.064166ms)
+✔ NORMALIZE_EVIDENCE_CHAIN_PROFILE [REQ-EVIDENCE_CHAIN_PROFILE] (12.346458ms)
+▶ EMIT_MANUAL_PROFILE_CONTRACT [REQ-EVIDENCE_CHAIN_PROFILE]
+  ✔ accepts a schema-valid generator manual fixture (0.194375ms)
+  ✔ rejects manual profiles missing Path B fields (0.079ms)
+  ✔ rejects a manual profile that confirms the TIED path without declaring unsupported MCP checks (0.094541ms)
+✔ EMIT_MANUAL_PROFILE_CONTRACT [REQ-EVIDENCE_CHAIN_PROFILE] (0.461ms)
+▶ GENERATE_EVIDENCE_CHAIN_PROFILE [REQ-EVIDENCE_CHAIN_PROFILE]
+  ✔ integrated depth never calls fidelity, binding, or spec adapters (1.64925ms)
+  ✔ human_research without change_context succeeds and does not fail closed (0.382666ms)
+  ✔ marks omitted structural validators as not measured (0.30425ms)
+  ✔ normalizes adapter failures into a structured result (0.110375ms)
+  ✔ fails closed on wrong TIED base path before collection (0.068042ms)
+  ✔ rejects writes into project intent YAML (0.132875ms)
+  ✔ is deterministic across reruns [REQ-EVIDENCE_CHAIN_PROFILE] (0.436084ms)
+  ✔ emits identity_source path_fallback by default [IMPL-TIED_PROJECT_IDENTITY] (0.244208ms)
+  ✔ emits configured identity_source when TIED_MCP_PROJECT_ID is valid [REQ-EVIDENCE_CHAIN_PROFILE] (0.195875ms)
+  ✔ sets operational.metrics_opt_in from isMetricsEnabled() [REQ-EVIDENCE_CHAIN_PROFILE] (0.286375ms)
+✔ GENERATE_EVIDENCE_CHAIN_PROFILE [REQ-EVIDENCE_CHAIN_PROFILE] (3.985125ms)
+▶ manual fixture shape [REQ-EVIDENCE_CHAIN_PROFILE]
+  ✔ validates the checked-in Path B example fixture (0.244333ms)
+  ✔ matches EvidenceChainProfile after normalize (0.057709ms)
+✔ manual fixture shape [REQ-EVIDENCE_CHAIN_PROFILE] (0.341167ms)
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] loaded report input manifest {
+  mode: 'strict',
+  include_absolute_paths: false,
+  input_count: 1,
+  cli_mode_override: false
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] aggregated client cohort counts {
+  compatibility_key: 'evidence-chain-profile.v1|integrated',
+  profile_count: 1,
+  unique_project_id_count: 1
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] wrote statistics report {
+  yaml_out: 'report.yaml',
+  markdown_out: 'report.md',
+  cohort_count: 1,
+  report_version: 'evidence-chain-statistics-report.v1'
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] CLI wrote report files
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] loaded report input manifest {
+  mode: 'strict',
+  include_absolute_paths: false,
+  input_count: 1,
+  cli_mode_override: true
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] generation failed {
+  stage: 'VALIDATE_PROFILE_ARTIFACT',
+  error: 'MissingArtifact',
+  exit_code: 2
+}
+MissingArtifact
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] loaded report input manifest {
+  mode: 'partial',
+  include_absolute_paths: false,
+  input_count: 2,
+  cli_mode_override: true
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] aggregated client cohort counts {
+  compatibility_key: 'evidence-chain-profile.v1|integrated',
+  profile_count: 1,
+  unique_project_id_count: 1
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] wrote statistics report {
+  yaml_out: 'report.yaml',
+  markdown_out: 'report.md',
+  cohort_count: 1,
+  report_version: 'evidence-chain-statistics-report.v1'
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] CLI wrote report files
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] loaded report input manifest {
+  mode: 'partial',
+  include_absolute_paths: false,
+  input_count: 1,
+  cli_mode_override: true
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] generation failed {
+  stage: 'GENERATE_EVIDENCE_CHAIN_REPORT',
+  error: 'EmptyPartialCohort',
+  exit_code: 1
+}
+EmptyPartialCohort
+Usage: evidence-chain-report --inputs <manifest.yaml> --yaml-out <report.yaml> --markdown-out <report.md> [--mode strict|partial] [--report-version v1|v2]
+
+Read-only aggregator for evidence-chain-profile.v1 artifacts.
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] loaded report input manifest {
+  mode: 'strict',
+  include_absolute_paths: false,
+  input_count: 2,
+  cli_mode_override: false
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] aggregated client cohort counts {
+  compatibility_key: 'evidence-chain-profile.v1|integrated',
+  profile_count: 1,
+  unique_project_id_count: 1
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] aggregated client cohort counts {
+  compatibility_key: 'evidence-chain-profile.v1|integrated',
+  profile_count: 1,
+  unique_project_id_count: 1
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] wrote statistics report {
+  yaml_out: 'report.yaml',
+  markdown_out: 'report.md',
+  cohort_count: 1,
+  report_version: 'evidence-chain-statistics-report.v2'
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] CLI wrote report files
+Invalid --report-version; expected v1 or v2
+▶ RUN_EVIDENCE_CHAIN_REPORT_CLI [REQ-EVIDENCE_CHAIN_REPORT]
+  ✔ writes agreeing YAML and Markdown and exits 0 [REQ-EVIDENCE_CHAIN_REPORT] (17.692833ms)
+  ✔ exits 2 in --mode strict and writes no outputs [REQ-EVIDENCE_CHAIN_REPORT] (0.973417ms)
+  ✔ exits 0 in --mode partial when one profile is accepted [REQ-EVIDENCE_CHAIN_REPORT] (3.048042ms)
+  ✔ exits 1 when partial accepts zero profiles [REQ-EVIDENCE_CHAIN_REPORT] (0.91775ms)
+  ✔ exits 1 on usage errors and does not mutate project YAML [REQ-EVIDENCE_CHAIN_REPORT] (1.203208ms)
+  ✔ accepts --report-version v2 and emits v2 schema [REQ-EVIDENCE_CHAIN_REPORT] (5.439792ms)
+  ✔ exits 1 on invalid --report-version [REQ-EVIDENCE_CHAIN_REPORT] (0.694166ms)
+✔ RUN_EVIDENCE_CHAIN_REPORT_CLI [REQ-EVIDENCE_CHAIN_REPORT] (30.852875ms)
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] loaded report input manifest {
+  mode: 'strict',
+  include_absolute_paths: false,
+  input_count: 1,
+  cli_mode_override: false
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] aggregated client cohort counts {
+  compatibility_key: 'evidence-chain-profile.v1|integrated',
+  profile_count: 1,
+  unique_project_id_count: 1
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] wrote statistics report {
+  yaml_out: 'report.yaml',
+  markdown_out: 'report.md',
+  cohort_count: 1,
+  report_version: 'evidence-chain-statistics-report.v1'
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] loaded report input manifest {
+  mode: 'strict',
+  include_absolute_paths: false,
+  input_count: 2,
+  cli_mode_override: false
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] aggregated client cohort counts {
+  compatibility_key: 'evidence-chain-profile.v1|integrated',
+  profile_count: 2,
+  unique_project_id_count: 2
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] wrote statistics report {
+  yaml_out: 'a.yaml',
+  markdown_out: 'a.md',
+  cohort_count: 1,
+  report_version: 'evidence-chain-statistics-report.v1'
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] loaded report input manifest {
+  mode: 'strict',
+  include_absolute_paths: false,
+  input_count: 2,
+  cli_mode_override: false
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] aggregated client cohort counts {
+  compatibility_key: 'evidence-chain-profile.v1|integrated',
+  profile_count: 2,
+  unique_project_id_count: 2
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] wrote statistics report {
+  yaml_out: 'b.yaml',
+  markdown_out: 'b.md',
+  cohort_count: 1,
+  report_version: 'evidence-chain-statistics-report.v1'
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] loaded report input manifest {
+  mode: 'strict',
+  include_absolute_paths: false,
+  input_count: 2,
+  cli_mode_override: false
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] aggregated client cohort counts {
+  compatibility_key: 'evidence-chain-profile.v1|human_research',
+  profile_count: 1,
+  unique_project_id_count: 1
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] aggregated client cohort counts {
+  compatibility_key: 'evidence-chain-profile.v1|integrated',
+  profile_count: 1,
+  unique_project_id_count: 1
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] wrote statistics report {
+  yaml_out: 'report.yaml',
+  markdown_out: 'report.md',
+  cohort_count: 2,
+  report_version: 'evidence-chain-statistics-report.v1'
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] loaded report input manifest {
+  mode: 'strict',
+  include_absolute_paths: false,
+  input_count: 1,
+  cli_mode_override: false
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] aggregated client cohort counts {
+  compatibility_key: 'evidence-chain-profile.v1|integrated',
+  profile_count: 1,
+  unique_project_id_count: 1
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] wrote statistics report {
+  yaml_out: 'report.yaml',
+  markdown_out: 'report.md',
+  cohort_count: 1,
+  report_version: 'evidence-chain-statistics-report.v1'
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] loaded report input manifest {
+  mode: 'strict',
+  include_absolute_paths: false,
+  input_count: 2,
+  cli_mode_override: false
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] aggregated client cohort counts {
+  compatibility_key: 'evidence-chain-profile.v1|integrated',
+  profile_count: 2,
+  unique_project_id_count: 2
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] wrote statistics report {
+  yaml_out: 'report.yaml',
+  markdown_out: 'report.md',
+  cohort_count: 1,
+  report_version: 'evidence-chain-statistics-report.v1'
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] loaded report input manifest {
+  mode: 'strict',
+  include_absolute_paths: false,
+  input_count: 1,
+  cli_mode_override: false
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] generation failed {
+  stage: 'VALIDATE_PROFILE_ARTIFACT',
+  error: 'MalformedProfile',
+  exit_code: 2
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] loaded report input manifest {
+  mode: 'strict',
+  include_absolute_paths: false,
+  input_count: 1,
+  cli_mode_override: false
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] generation failed {
+  stage: 'VALIDATE_PROFILE_ARTIFACT',
+  error: 'ForbiddenField',
+  exit_code: 2
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] loaded report input manifest {
+  mode: 'strict',
+  include_absolute_paths: false,
+  input_count: 2,
+  cli_mode_override: false
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] generation failed {
+  stage: 'RESOLVE_INPUT_IDENTITY',
+  error: 'DuplicateInput',
+  exit_code: 2
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] loaded report input manifest {
+  mode: 'strict',
+  include_absolute_paths: false,
+  input_count: 1,
+  cli_mode_override: false
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] aggregated client cohort counts {
+  compatibility_key: 'evidence-chain-profile.v1|integrated',
+  profile_count: 1,
+  unique_project_id_count: 1
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] wrote statistics report {
+  yaml_out: 'report.yaml',
+  markdown_out: 'report.md',
+  cohort_count: 1,
+  report_version: 'evidence-chain-statistics-report.v1'
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] loaded report input manifest {
+  mode: 'strict',
+  include_absolute_paths: true,
+  input_count: 1,
+  cli_mode_override: false
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] aggregated client cohort counts {
+  compatibility_key: 'evidence-chain-profile.v1|integrated',
+  profile_count: 1,
+  unique_project_id_count: 1
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] wrote statistics report {
+  yaml_out: 'abs-report.yaml',
+  markdown_out: 'abs-report.md',
+  cohort_count: 1,
+  report_version: 'evidence-chain-statistics-report.v1'
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] loaded report input manifest {
+  mode: 'strict',
+  include_absolute_paths: false,
+  input_count: 1,
+  cli_mode_override: false
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] aggregated client cohort counts {
+  compatibility_key: 'evidence-chain-profile.v1|integrated',
+  profile_count: 1,
+  unique_project_id_count: 1
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] wrote statistics report {
+  yaml_out: 'report.yaml',
+  markdown_out: 'report.md',
+  cohort_count: 1,
+  report_version: 'evidence-chain-statistics-report.v1'
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] loaded report input manifest {
+  mode: 'strict',
+  include_absolute_paths: false,
+  input_count: 2,
+  cli_mode_override: false
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] generation failed {
+  stage: 'VALIDATE_PROFILE_ARTIFACT',
+  error: 'MissingArtifact',
+  exit_code: 2
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] loaded report input manifest {
+  mode: 'partial',
+  include_absolute_paths: false,
+  input_count: 2,
+  cli_mode_override: false
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] aggregated client cohort counts {
+  compatibility_key: 'evidence-chain-profile.v1|integrated',
+  profile_count: 1,
+  unique_project_id_count: 1
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] wrote statistics report {
+  yaml_out: 'report.yaml',
+  markdown_out: 'report.md',
+  cohort_count: 1,
+  report_version: 'evidence-chain-statistics-report.v1'
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] loaded report input manifest {
+  mode: 'strict',
+  include_absolute_paths: false,
+  input_count: 1,
+  cli_mode_override: true
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] generation failed {
+  stage: 'VALIDATE_PROFILE_ARTIFACT',
+  error: 'MissingArtifact',
+  exit_code: 2
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] loaded report input manifest {
+  mode: 'strict',
+  include_absolute_paths: false,
+  input_count: 1,
+  cli_mode_override: false
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] generation failed {
+  stage: 'VALIDATE_PROFILE_ARTIFACT',
+  error: 'MissingArtifact',
+  exit_code: 2
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] generation failed {
+  stage: 'RENDER_STATISTICS_REPORT_YAML',
+  error: 'ForbiddenOutputPath',
+  exit_code: 1
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] generation failed {
+  stage: 'LOAD_REPORT_INPUT_MANIFEST',
+  error: 'InvalidManifest',
+  exit_code: 1
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] loaded report input manifest {
+  mode: 'strict',
+  include_absolute_paths: false,
+  input_count: 1,
+  cli_mode_override: false
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] aggregated client cohort counts {
+  compatibility_key: 'evidence-chain-profile.v1|integrated',
+  profile_count: 1,
+  unique_project_id_count: 1
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] wrote statistics report {
+  yaml_out: 'report.yaml',
+  markdown_out: 'report.md',
+  cohort_count: 1,
+  report_version: 'evidence-chain-statistics-report.v1'
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] loaded report input manifest {
+  mode: 'strict',
+  include_absolute_paths: false,
+  input_count: 1,
+  cli_mode_override: false
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] aggregated client cohort counts {
+  compatibility_key: 'evidence-chain-profile.v1|integrated',
+  profile_count: 1,
+  unique_project_id_count: 1
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] wrote statistics report {
+  yaml_out: 'report.yaml',
+  markdown_out: 'report.md',
+  cohort_count: 1,
+  report_version: 'evidence-chain-statistics-report.v1'
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] loaded report input manifest {
+  mode: 'strict',
+  include_absolute_paths: false,
+  input_count: 2,
+  cli_mode_override: false
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] aggregated client cohort counts {
+  compatibility_key: 'evidence-chain-profile.v1|integrated',
+  profile_count: 1,
+  unique_project_id_count: 1
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] aggregated client cohort counts {
+  compatibility_key: 'evidence-chain-profile.v1|integrated',
+  profile_count: 1,
+  unique_project_id_count: 1
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] wrote statistics report {
+  yaml_out: 'report.yaml',
+  markdown_out: 'report.md',
+  cohort_count: 1,
+  report_version: 'evidence-chain-statistics-report.v2'
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] loaded report input manifest {
+  mode: 'strict',
+  include_absolute_paths: false,
+  input_count: 1,
+  cli_mode_override: false
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] aggregated client cohort counts {
+  compatibility_key: 'evidence-chain-profile.v1|integrated',
+  profile_count: 1,
+  unique_project_id_count: 1
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] wrote statistics report {
+  yaml_out: 'baseline.yaml',
+  markdown_out: 'baseline.md',
+  cohort_count: 1,
+  report_version: 'evidence-chain-statistics-report.v1'
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] loaded report input manifest {
+  mode: 'strict',
+  include_absolute_paths: false,
+  input_count: 1,
+  cli_mode_override: false
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] aggregated client cohort counts {
+  compatibility_key: 'evidence-chain-profile.v1|integrated',
+  profile_count: 1,
+  unique_project_id_count: 1
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] wrote statistics report {
+  yaml_out: 'explicit.yaml',
+  markdown_out: 'explicit.md',
+  cohort_count: 1,
+  report_version: 'evidence-chain-statistics-report.v1'
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] loaded report input manifest {
+  mode: 'strict',
+  include_absolute_paths: false,
+  input_count: 1,
+  cli_mode_override: false
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] generation failed {
+  stage: 'VALIDATE_PROFILE_ARTIFACT',
+  error: 'ForbiddenField',
+  exit_code: 2
+}
+▶ GENERATE_EVIDENCE_CHAIN_REPORT [REQ-EVIDENCE_CHAIN_REPORT]
+  ✔ aggregates one client profile into one client cohort [REQ-EVIDENCE_CHAIN_REPORT] (15.856791ms)
+  ✔ groups many compatible clients and stays independent of input order [REQ-EVIDENCE_CHAIN_REPORT] (6.460292ms)
+  ✔ partitions incompatible profile_depth values into separate client cohorts [REQ-EVIDENCE_CHAIN_REPORT] (6.34975ms)
+  ✔ does not convert not_measured evidence to zero [REQ-EVIDENCE_CHAIN_REPORT] (2.352667ms)
+  ✔ retains an explicit residual risk for incompatible denominators [REQ-EVIDENCE_CHAIN_REPORT] (2.558916ms)
+  ✔ rejects malformed profiles and forbidden score fields [REQ-EVIDENCE_CHAIN_REPORT] (1.916458ms)
+  ✔ rejects duplicate project_id commit profile_depth scope_hash [REQ-EVIDENCE_CHAIN_REPORT] (2.167375ms)
+  ✔ keeps artifact_ref as basename unless include_absolute_paths is true [REQ-EVIDENCE_CHAIN_REPORT] (3.210542ms)
+  ✔ preserves proof-boundary partition counts [REQ-EVIDENCE_CHAIN_REPORT] (2.143875ms)
+  ✔ writes nothing in strict mode on the first rejection [REQ-EVIDENCE_CHAIN_REPORT] (1.020334ms)
+  ✔ excludes rejected inputs in partial mode and counts them [REQ-EVIDENCE_CHAIN_REPORT] (2.641541ms)
+  ✔ lets CLI --mode win over the report input manifest [REQ-EVIDENCE_CHAIN_REPORT] (1.005084ms)
+  ✔ removes stale generated outputs when a rerun fails [REQ-EVIDENCE_CHAIN_REPORT] (1.581917ms)
+  ✔ rejects intent-directory output paths [REQ-EVIDENCE_CHAIN_REPORT] (0.963791ms)
+  ✔ rejects an invalid report input manifest [REQ-EVIDENCE_CHAIN_REPORT] (0.570042ms)
+  ✔ does not mutate source profile artifacts [REQ-EVIDENCE_CHAIN_REPORT] (1.93925ms)
+  ✔ projects YAML values only into Markdown [REQ-EVIDENCE_CHAIN_REPORT] (2.651042ms)
+  ✔ v2 splits client 1787461685 bare and reprofile into two denominator sub-cohorts [REQ-EVIDENCE_CHAIN_REPORT] (2.63825ms)
+  ✔ v1 default and explicit --report-version v1 stay byte-stable [REQ-EVIDENCE_CHAIN_REPORT] (5.78775ms)
+  ✔ v2 rejects forbidden score keys in input profiles [REQ-EVIDENCE_CHAIN_REPORT] (1.296958ms)
+✔ GENERATE_EVIDENCE_CHAIN_REPORT [REQ-EVIDENCE_CHAIN_REPORT] (66.393292ms)
+▶ AUDIT_IMPL_FIDELITY REQ-TIED_FIDELITY_RESEARCH
+  ✔ maps a pseudo-code block in both evidence directions (1.626292ms)
+  ✔ reports a missing production locus as an incomplete block (0.1445ms)
+✔ AUDIT_IMPL_FIDELITY REQ-TIED_FIDELITY_RESEARCH (3.952458ms)
+▶ APPEND_CANDIDATE_FINDING REQ-TIED_FIDELITY_RESEARCH
+  ✔ appends a candidate finding in the observed lifecycle state (0.818ms)
+  ✔ links a duplicate without overwriting the original observation (0.116833ms)
+✔ APPEND_CANDIDATE_FINDING REQ-TIED_FIDELITY_RESEARCH (1.564291ms)
+▶ RUN_FIRST_SLICE REQ-TIED_FIDELITY_RESEARCH
+  ✔ connects the validated modules in the declared order (1.253625ms)
+✔ RUN_FIRST_SLICE REQ-TIED_FIDELITY_RESEARCH (2.042917ms)
+▶ PROJECT_MANIFEST REQ-TIED_FIDELITY_RESEARCH
+  ✔ accepts an absolute project root and matching tied base path (1.110042ms)
+  ✔ rejects a TIED base path outside the project root (0.097125ms)
+✔ PROJECT_MANIFEST REQ-TIED_FIDELITY_RESEARCH (1.799875ms)
+▶ RUN_FIDELITY_RESEARCH_PILOT REQ-TIED_FIDELITY_RESEARCH
+  ✔ runs concrete modules and keeps the audited project read-only (1.288708ms)
+  ✔ fails closed when the manifest points at another TIED base path (1.239083ms)
+✔ RUN_FIDELITY_RESEARCH_PILOT REQ-TIED_FIDELITY_RESEARCH (3.196833ms)
+▶ SNAPSHOT_CHANGE REQ-TIED_FIDELITY_RESEARCH
+  ✔ captures revision, hashes, and bounded artifacts (0.968375ms)
+  ✔ rejects an empty artifact set (0.738417ms)
+✔ SNAPSHOT_CHANGE REQ-TIED_FIDELITY_RESEARCH (2.384167ms)
+▶ ANALYZE_SPECIFICATION_STATE REQ-TIED_FIDELITY_RESEARCH
+  ✔ classifies an approved behavior change separately from a regression (1.097333ms)
+  ✔ classifies implementation lag when current intent is approved (0.08925ms)
+✔ ANALYZE_SPECIFICATION_STATE REQ-TIED_FIDELITY_RESEARCH (1.80975ms)
+▶ RUN_STRUCTURAL_ANALYSIS REQ-TIED_FIDELITY_RESEARCH
+  ✔ records validator calls with a structural-only proof boundary (1.183458ms)
+✔ RUN_STRUCTURAL_ANALYSIS REQ-TIED_FIDELITY_RESEARCH (1.758458ms)
+▶ fixture corpus regression [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+  ✔ runs all 15 corpus cases with expected gate decisions (54.236833ms)
+  ✔ A4 missing pairing rejects with activation_pairing_incomplete (0.598917ms)
+✔ fixture corpus regression [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (55.516625ms)
+▶ persistGateDecisionReceipt [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+  ✔ writes gate receipt with tracker_hash and citdp_hash (A17) (8.360417ms)
+✔ persistGateDecisionReceipt [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (8.90575ms)
+▶ persistStatusMutationReceipt [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+  ✔ rejects mutation when gate_receipt_ref missing (0.111625ms)
+  ✔ returns verify_no_op for empty mutations (0.0555ms)
+✔ persistStatusMutationReceipt [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (0.249167ms)
+▶ computeInputHashes [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+  ✔ produces stable sha256-prefixed hashes (0.830959ms)
+✔ computeInputHashes [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (0.883041ms)
+DIAGNOSTIC: envelope patch failed for T/gate-receipt-51T3Yq/gates/verification-2026-09-24T19-49-38-898Z.json: WorkingFolderMissing
+DIAGNOSTIC: envelope patch failed for working/REQ-FIXTURE-ADVERSARIAL/adversarial-inquiry/phase-verification/evidence-provenance.json: envelope_revision_conflict
+▶ Go Mode B inquiry → collect → gate composition [REQ-TIED_ADVERSARIAL_INQUIRY]
+  ✔ fixture dispatch persists phase artifacts that collect and gate accept (76.24575ms)
+✔ Go Mode B inquiry → collect → gate composition [REQ-TIED_ADVERSARIAL_INQUIRY] (77.0895ms)
+▶ adherence append action attempted TS bridge [REQ-TIED_UNIFIED_TOOLCHAIN]
+  ✔ appends when marker present (5.852ms)
+  ✔ silent when marker absent (1.653625ms)
+✔ adherence append action attempted TS bridge [REQ-TIED_UNIFIED_TOOLCHAIN] (8.115666ms)
+▶ impl-pseudocode-input: resolvePseudocodePathUnderTiedBase
+  ✔ accepts a file path relative to the TIED base [IMPL] (2.079333ms)
+  ✔ accepts an absolute file path that still lies under the base [IMPL] (0.650875ms)
+  ✔ rejects paths that escape the TIED base [IMPL] (0.881792ms)
+✔ impl-pseudocode-input: resolvePseudocodePathUnderTiedBase (4.261875ms)
+DEBUG: evidence_chain_profile depth=integrated fidelity=false binding=false spec=false
+▶ project identity composition [IMPL-TIED_PROJECT_IDENTITY]
+  ✔ metrics JSONL and profile share project_id for configured env (15.025625ms)
+✔ project identity composition [IMPL-TIED_PROJECT_IDENTITY] (15.68325ms)
+▶ resolveProjectIdentity [IMPL-TIED_PROJECT_IDENTITY]
+  ✔ same configured ID across different paths yields identical project_id [REQ-MCP_USAGE_METRICS] (2.898542ms)
+  ✔ distinct configured IDs yield distinct project_ids (0.225167ms)
+  ✔ unset env uses path fallback matching legacy hash [REQ-EVIDENCE_CHAIN_PROFILE] (0.123041ms)
+  ✔ empty and whitespace-only env uses path fallback (0.109667ms)
+  ✔ trims configured ID before hashing (0.068666ms)
+  ✔ rejects oversize configured ID with path fallback (0.061166ms)
+  ✔ rejects path separators and newlines in configured ID (0.11125ms)
+  ✔ accepts configured ID at max length 128 (0.079ms)
+  ✔ never exposes raw configured string or path in project_id (0.083208ms)
+✔ resolveProjectIdentity [IMPL-TIED_PROJECT_IDENTITY] (4.654791ms)
+▶ anonymizedProjectId alias [IMPL-TIED_PROJECT_IDENTITY]
+  ✔ returns project_id from resolver (0.101125ms)
+✔ anonymizedProjectId alias [IMPL-TIED_PROJECT_IDENTITY] (0.1735ms)
+▶ pathFallbackProjectId [IMPL-TIED_PROJECT_IDENTITY]
+  ✔ matches legacy path hash for unknown empty path (0.056875ms)
+✔ pathFallbackProjectId [IMPL-TIED_PROJECT_IDENTITY] (0.100833ms)
+▶ risk-triggered test adequacy [IMPL-QUALITY_TEST_ADEQUACY] [PROC-TEST_ADEQUACY]
+  ✔ accepts scoped flaky and external-call controls (6.609791ms)
+  ✔ rejects universal ceremony and incomplete conditional controls (0.13925ms)
+✔ risk-triggered test adequacy [IMPL-QUALITY_TEST_ADEQUACY] [PROC-TEST_ADEQUACY] (7.336125ms)
+▶ RUN_DECLARED_QUALITY_COMMANDS [REQ-QUALITY_ASSURANCE_EVIDENCE]
+  ✔ captures passed and failed argv commands with bounded artifacts (160.546ms)
+  ✔ rejects shell-shaped declarations before spawning (0.468125ms)
+  ✔ turns timeout and output-limit breaches into failed evidence (125.288083ms)
+  ✔ records a failed spawn with a diagnostic instead of throwing (5.077041ms)
+✔ RUN_DECLARED_QUALITY_COMMANDS [REQ-QUALITY_ASSURANCE_EVIDENCE] (292.264333ms)
+▶ COLLECT_VERIFICATION_EVIDENCE [IMPL-QUALITY_EVIDENCE_COLLECTION] [REQ-QUALITY_ASSURANCE_EVIDENCE]
+  ✔ builds a manifest from observed command results (70.975833ms)
+  ✔ rejects an incomplete collection context before running commands (0.289917ms)
+✔ COLLECT_VERIFICATION_EVIDENCE [IMPL-QUALITY_EVIDENCE_COLLECTION] [REQ-QUALITY_ASSURANCE_EVIDENCE] (71.880709ms)
+▶ BUILD_VERIFICATION_EVIDENCE_MANIFEST [REQ-QUALITY_ASSURANCE_EVIDENCE]
+  ✔ normalizes and sorts executable evidence without embedding human risk decisions (7.428041ms)
+  ✔ rejects command results without executable identity (0.333958ms)
+  ✔ rejects an exit code that disagrees with the reported result (0.089958ms)
+  ✔ requires an owned, expiring waiver for accepted risk (0.164958ms)
+  ✔ rejects a quality row without an evidence method (0.096958ms)
+✔ BUILD_VERIFICATION_EVIDENCE_MANIFEST [REQ-QUALITY_ASSURANCE_EVIDENCE] (9.065833ms)
+▶ VALIDATE_SECURITY_PROFILE [REQ-QUALITY_ASSURANCE_EVIDENCE]
+  ✔ requires executable evidence for every external-input abuse case (1.228584ms)
+  ✔ requires owner, expiry, and rationale for accepted risk (0.108875ms)
+  ✔ rejects an incomplete accepted-risk waiver (0.082792ms)
+  ✔ reports missing cases and evidence for an applicable profile (0.082959ms)
+  ✔ does not impose security evidence when the profile is not selected (0.070958ms)
+✔ VALIDATE_SECURITY_PROFILE [REQ-QUALITY_ASSURANCE_EVIDENCE] (2.296083ms)
+▶ mergeRecordUpdate
+  ✔ deep-merges metadata preserving created when only last_updated sent (1.052584ms)
+  ✔ deep-merges traceability preserving other branches (0.115125ms)
+  ✔ replaces non-whitelisted top-level keys shallowly (0.078709ms)
+  ✔ sets metadata from scratch when existing had no metadata (0.051125ms)
+  ✔ deep-merges related_requirements object (0.058458ms)
+  ✔ merges metadata.last_updated object fields without dropping date or author (0.37925ms)
+  ✔ merges metadata.last_validated object fields when both are objects (0.109209ms)
+  ✔ deep-merges rationale preserving sibling keys (0.077459ms)
+  ✔ deep-merges implementation_approach preserving summary when details updated (0.265833ms)
+✔ mergeRecordUpdate (5.274166ms)
+▶ request evidence envelope backfill [IMPL-REQUEST_EVIDENCE_ENVELOPE]
+  ✔ builds not-applicable receipt document for minimal depth (2.252584ms)
+  ✔ resolves minimal depth_tier from CITDP draft (10.970666ms)
+DEBUG: [IMPL-REQUEST_EVIDENCE_ENVELOPE] wrote not-applicable-receipt {
+  request_token: 'REQ-BT_BATTERY_DISPLAY',
+  phases: [ 'pre_implementation', 'verification', 'close_out' ],
+  path: 'working/REQ-BT_BATTERY_DISPLAY/evidence/not-applicable-receipt.v1.json'
+}
+  ✔ writes not-applicable receipt and envelope for minimal synthetic fixture (35.603125ms)
+  ✔ backfills integrated fixture snapshots with gap inventory (116.632458ms)
+  ✔ fails closed on WrongTiedBasePath (1.977417ms)
+  ✔ optional integration: backfill external minimal client 1788547701 (10.284834ms)
+  ✔ optional integration: backfill external integrated client 1787603099 (45.9045ms)
+✔ request evidence envelope backfill [IMPL-REQUEST_EVIDENCE_ENVELOPE] (224.747583ms)
+DIAGNOSTIC: envelope patch failed for ../outside/verification.json: PatchOutsideProject
+▶ request evidence envelope producer hooks [REQ-REQUEST_EVIDENCE_ENVELOPE]
+  ✔ patches envelope with correct kind/phase/hash when hooks enabled (24.78825ms)
+  ✔ does not throw when envelope patch fails after inner artifact write (fail-safe) (0.971209ms)
+✔ request evidence envelope producer hooks [REQ-REQUEST_EVIDENCE_ENVELOPE] (26.377875ms)
+▶ PATCH_REQUEST_EVIDENCE_ENVELOPE [REQ-REQUEST_EVIDENCE_ENVELOPE]
+  ✔ bootstraps revision 1 when no envelope exists (17.149625ms)
+  ✔ increments revision monotonically across patches (14.761291ms)
+  ✔ merges artifacts by (kind, phase, path) (9.184792ms)
+  ✔ returns envelope_revision_conflict on content_hash mismatch (3.932583ms)
+✔ PATCH_REQUEST_EVIDENCE_ENVELOPE [REQ-REQUEST_EVIDENCE_ENVELOPE] (46.21525ms)
+▶ PATCH_REQUEST_EVIDENCE_ENVELOPE cleanup
+  ✔ noop cleanup marker (0.092375ms)
+✔ PATCH_REQUEST_EVIDENCE_ENVELOPE cleanup (0.151542ms)
+▶ process-adherence gaps [REQ-REQUEST_EVIDENCE_ENVELOPE] Wave 5
+  ✔ W5-D1 dual-write detection emits tracker_dual_write with severity warn (0.700458ms)
+  ✔ W5-D1 dual-write cleared after disposition sync (0.082792ms)
+  ✔ W5-D2 manifest expectation when verification-gate completed without manifest (0.08525ms)
+  ✔ Wave 6 PSA expectation when gate-pseudocode-validation completed without reports (0.177417ms)
+  ✔ Wave 6 PSA expectation clean when reports present for inventory (0.112ms)
+  ✔ Wave 6 PSA expectation skipped at minimal depth without PSA slug completed (0.050459ms)
+  ✔ W5-D2 manifest expectation clean when manifest artifact present (0.059792ms)
+  ✔ W5-D3 hash drift emits evidence_stale (18.663459ms)
+  ✔ W5-D4 fail_on_process_gaps blocks validate while default passes (0.317375ms)
+  ✔ dedupes duplicate checklist gate receipts per phase (prefers wave5 alias) (6.149542ms)
+  ✔ integration: dual-write fixture tracker builds envelope gaps (3.289208ms)
+✔ process-adherence gaps [REQ-REQUEST_EVIDENCE_ENVELOPE] Wave 5 (30.541667ms)
+DEBUG: [IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH] wrote envelope gap report {
+  row_count: 0,
+  excluded_count: 1,
+  yaml_path: '/var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/ree-batch-require-AMUH8x/report.yaml',
+  report_hash: 'c7c4fb91e899ae00'
+}
+▶ request evidence envelope batch collect [IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH]
+  ✔ loads batch input manifest rows (4.405833ms)
+  ✔ computes artifact coverage denominators without score fields (0.194667ms)
+  ✔ excludes require_envelope rows when envelope is missing (3.547208ms)
+DEBUG: [IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH] wrote envelope gap report {
+  row_count: 1,
+  excluded_count: 0,
+  yaml_path: '/var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/ree-batch-legacy-br89kA/report.yaml',
+  report_hash: '152ba79d62ec8d8b'
+}
+  ✔ legacy_infer performs read-only scan and tags legacy_inferred (38.237042ms)
+DEBUG: [IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH] wrote envelope gap report {
+  row_count: 1,
+  excluded_count: 0,
+  yaml_path: '/var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/ree-batch-present-SvUNyH/report.yaml',
+  report_hash: '8fbd23024d05c63b'
+}
+  ✔ uses existing envelope file when present (3.664167ms)
+DEBUG: [IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH] wrote envelope gap report {
+  row_count: 1,
+  excluded_count: 0,
+  yaml_path: '/var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/ree-batch-stable-3pQ0xb/first.yaml',
+  report_hash: '1d94ab841f64e68f'
+}
+DEBUG: [IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH] wrote envelope gap report {
+  row_count: 1,
+  excluded_count: 0,
+  yaml_path: '/var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/ree-batch-stable-3pQ0xb/second.yaml',
+  report_hash: '1d94ab841f64e68f'
+}
+  ✔ produces deterministic report bytes for same inputs (73.30425ms)
+  ✔ loads evaluation corpus extension rows without breaking legacy-only projects (0.700417ms)
+  ✔ preserves per-row project_root from evaluation corpus (0.435167ms)
+DEBUG: [IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH] wrote envelope gap report {
+  row_count: 1,
+  excluded_count: 0,
+  yaml_path: '/var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/ree-batch-privacy-HJcnf4/report.yaml',
+  report_hash: '3febb995b95d90d7'
+}
+  ✔ strips absolute paths in shareable_hashed mode (2.373042ms)
+DEBUG: [IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH] wrote envelope gap report {
+  row_count: 7,
+  excluded_count: 0,
+  yaml_path: '/Users/fareed/Documents/dev/chatgpt/stdd/working/evaluation/envelope-gap-report.v1.yaml',
+  report_hash: 'a92b6e0da3e6de00'
+}
+  ✔ optional integration: stdd dogfood envelope via evaluation corpus (23.855083ms)
+DEBUG: [IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH] wrote envelope gap report {
+  row_count: 1,
+  excluded_count: 0,
+  yaml_path: '/var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/ree-batch-external-5LYqdu/external-report.yaml',
+  report_hash: '1b1b5818e5b6c603'
+}
+  ✔ optional integration: external 1787603099 batch row after backfill (2.693ms)
+✔ request evidence envelope batch collect [IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH] (154.419875ms)
+▶ request_evidence_envelope MCP tools [REQ-REQUEST_EVIDENCE_ENVELOPE]
+  ✔ registers build and validate handlers (0.519583ms)
+  ✔ build returns envelope JSON read-only (20.810542ms)
+  ✔ validate rejects malformed envelope path (0.502458ms)
+✔ request_evidence_envelope MCP tools [REQ-REQUEST_EVIDENCE_ENVELOPE] (22.537833ms)
+▶ request evidence envelope [REQ-REQUEST_EVIDENCE_ENVELOPE]
+  ✔ rejects invalid envelope schema (0.802625ms)
+  ✔ W1-D3 fail_on_error_gaps blocks when severity:error gaps present (7.699416ms)
+  ✔ Wave 8 integrated envelope-blocking promotes thin_ledger not evidence_stale (0.163834ms)
+  ✔ rejects forbidden maturity score fields (0.081083ms)
+  ✔ maps corpus-manifest inventory strings to envelope gap codes (A1-A18 subset) (0.250875ms)
+  ✔ classifies fixture snapshots and flags root projection stale (51.655167ms)
+  ✔ produces byte-stable envelope for same inputs (68.796375ms)
+  ✔ fails closed on WrongTiedBasePath (17.686417ms)
+  ✔ W4-D1 omits provenance_incomplete:schema_version for root wrapper fixtures (3.873875ms)
+  ✔ W4-D4 reports expected_artifact_missing for integrated depth without profile (4.314125ms)
+  ✔ W2-D4 discovers pseudocode_analysis_report with pseudocode_gate_only boundary (5.866417ms)
+  ✔ optional integration: readonly scan of external 1787603099 fixture (24.77525ms)
+✔ request evidence envelope [REQ-REQUEST_EVIDENCE_ENVELOPE] (187.053709ms)
+DIAGNOSTIC: research dataset write rejected inside audited project TIED boundary.
+▶ research records [REQ-TIED_RESEARCH_RECORDS]
+  ✔ normalizes supported records and preserves distinct classifications (0.88375ms)
+  ✔ rejects missing provenance and invalid decision links (0.126583ms)
+  ✔ classifies current, stale, and unknown freshness deterministically (0.848958ms)
+  ✔ emits external append-only records and rejects audited tied paths (1.413166ms)
+✔ research records [REQ-TIED_RESEARCH_RECORDS] (4.420375ms)
+▶ collectExtraSubstitutionPaths
+  ✔ resolves globs and extensions from client project root (5.895166ms)
+✔ collectExtraSubstitutionPaths (6.561625ms)
+▶ getClientProjectRoot
+  ✔ returns parent of TIED base path (1.169041ms)
+✔ getClientProjectRoot (1.248375ms)
+▶ renameSemanticToken
+  ✔ returns error when old_token not in semantic-tokens (5.390917ms)
+  ✔ returns error when new_token already exists (1.498208ms)
+  ✔ returns error when prefix does not match (1.010792ms)
+  ✔ dry_run reports files_modified and file_renamed (2.583333ms)
+  ✔ actually renames token and detail file (3.253291ms)
+  ✔ dry_run reports extra_globs and extra_extensions targets (6.25575ms)
+  ✔ substitutes in extra targets when not dry_run (3.271125ms)
+  ✔ include_markdown still updates processes.md additively (5.5455ms)
+✔ renameSemanticToken (29.189709ms)
+▶ Batch 5 MCP composition [REQ-TIED_RESEARCH_RECORDS]
+  ✔ binds research records to the external dataset boundary (1.71375ms)
+✔ Batch 5 MCP composition [REQ-TIED_RESEARCH_RECORDS] (2.261375ms)
+▶ Batch 5 feedback MCP composition [REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION]
+  ✔ binds source capture and requires review before proposal creation (4.125917ms)
+✔ Batch 5 feedback MCP composition [REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION] (4.200291ms)
+▶ tied_checklist_gate_validate composition [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+  ✔ registers the shared gate and returns an allowed result (10.041917ms)
+  ✔ accepts activation with receipt only when expected is omitted (1.547458ms)
+✔ tied_checklist_gate_validate composition [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (12.26175ms)
+▶ impl_detail_set_essence_pseudocode (MCP)
+  ✔ returns error when neither essence_pseudocode nor essence_pseudocode_path is set [IMPL] (0.767208ms)
+  ✔ returns error when both essence_pseudocode and essence_pseudocode_path are set [IMPL] (0.155833ms)
+  ✔ writes the same sidecar content from essence_pseudocode_path as from inline [IMPL] (4.902833ms)
+  ✔ rejects essence_pseudocode_path outside TIED_BASE_PATH [IMPL] (1.311791ms)
+✔ impl_detail_set_essence_pseudocode (MCP) (7.856667ms)
+DIAGNOSTIC: extractDiffProposalCandidates failed: Command failed: git diff --cached --name-only --diff-filter=ACMRTUB --no-renames
+▶ composition: LEAP proposal MCP bindings (no UI)
+  ✔ MCP_HANDLER tied_leap_proposal_extract_diff — explicit_opt_in false returns error before git extract (0.598042ms)
+  ✔ MCP_HANDLER tied_leap_proposal_extract_diff — explicit_opt_in true delegates extractDiffProposalCandidates (non-git error path) (33.710292ms)
+  ✔ MCP_HANDLER tied_leap_proposal_import_session — explicit_opt_in false returns error before parse/add (0.209875ms)
+  ✔ MCP_HANDLER tied_leap_proposal_import_session — explicit_opt_in true wires parseSessionExportSegments → proposalsFromSessionSegments → addProposal (2.792792ms)
+  ✔ MCP_HANDLER tied_leap_proposal_add → tied_leap_proposal_list delegates to addProposal / listProposals (1.18375ms)
+  ✔ MCP_HANDLER tied_leap_proposal_list — status filter delegates to listProposals (0.789416ms)
+  ✔ MCP_HANDLER tied_leap_proposal_reject — unknown id returns ok false via rejectProposal (0.5325ms)
+  ✔ MCP_HANDLER tied_leap_proposal_approve → tied_leap_proposal_mark_applied wires module lifecycle (1.429417ms)
+  ✔ MCP_HANDLER tied_leap_proposal_update — pending title edit via updatePendingProposal (1.593417ms)
+  ✔ MCP_HANDLER tied_leap_proposal_queue_snapshot — BOM-prefixed queue.json loads via LOAD_QUEUE (1.088125ms)
+✔ composition: LEAP proposal MCP bindings (no UI) (44.957959ms)
+▶ pseudocode_analyze MCP [REQ-PSEUDOCODE_STATIC_ANALYSIS]
+  ✔ returns analysis report for inline pseudocode (11.191708ms)
+  ✔ does not mutate project TIED YAML when invoked (1.027209ms)
+  ✔ rejects ambiguous inline and path input (0.103ms)
+  ✔ rejects path escape outside TIED base (0.810292ms)
+  ✔ propagates gate_mode and sets gate_mode_applied on success (0.566917ms)
+  ✔ coexists with pseudocode_validate unchanged schema (0.947792ms)
+  ✔ propagates typed_flow flag and emits sections.typed_flow when true (1.237709ms)
+  ✔ propagates typed_gate_errors and fails gate on annotated typed violations (0.31825ms)
+  ✔ propagates constraint_flow flag and emits sections.constraint_language when true (2.535916ms)
+  ✔ propagates constraint_gate_errors and fails gate on proven constraint violations (1.523791ms)
+  ✔ defaults constraint_gate_errors effective true under gate_mode when flags omitted (sub-phase 3d) (0.572417ms)
+  ✔ propagates async_boundary flag and emits sections.async_boundary when true (0.698ms)
+  ✔ propagates async_gate_errors and fails gate on ASYNC_EFFECTS_WITHOUT_BOUNDARY (0.3415ms)
+  ✔ async_boundary composes with typed_flow without duplicating AWAIT_NON_PROMISE_OUTPUT (0.29125ms)
+  ✔ typed_flow true does not mutate project TIED YAML (1.26225ms)
+✔ pseudocode_analyze MCP [REQ-PSEUDOCODE_STATIC_ANALYSIS] (24.351666ms)
+▶ quality validation MCP bindings [PROC-QUALITY_ASSURANCE]
+  ✔ wires manifest construction through a UI-free handler (0.723583ms)
+  ✔ wires the Layer B pseudo-code validator (7.980833ms)
+  ✔ wires risk-triggered test adequacy validation (0.290958ms)
+  ✔ wires binding inventory validation (0.330208ms)
+  ✔ wires shell-free quality command collection (79.394709ms)
+  ✔ wires command collection directly into manifest generation (61.65025ms)
+  ✔ wires conditional security profile validation (0.691459ms)
+✔ quality validation MCP bindings [PROC-QUALITY_ASSURANCE] (152.087583ms)
+▶ requirement_list_state_guide schema
+  ✔ accepts requirements and current_state (1.082ms)
+✔ requirement_list_state_guide schema (1.708167ms)
+▶ encodeContinuation / decodeContinuation
+  ✔ round-trips (1.786792ms)
+✔ encodeContinuation / decodeContinuation (1.861584ms)
+▶ resolveRequirementListStateGuide
+  ✔ errors on empty initial requirements (0.384042ms)
+  ✔ errors on invalid requirement shape (0.447584ms)
+  ✔ single item: first then end (0.182625ms)
+  ✔ multi-item walk then idempotent end (1.802708ms)
+  ✔ errors on bad token (0.184958ms)
+  ✔ ignores requirements when current_state is set (0.154959ms)
+✔ resolveRequirementListStateGuide (3.44925ms)
+▶ requirement_list_state_guide handler
+  ✔ returns JSON with first requirement (0.149208ms)
+✔ requirement_list_state_guide handler (0.204125ms)
+▶ T0 async contract fixtures [REQ-ASYNC_PSEUDOCODE_CONTRACTS]
+  ✔ manifest covers seven classes with pos and neg fixtures (0.76425ms)
+  ✔ positive await_sequencing (corpus-ac-01-sequencing-pos.pseudocode.md) (7.295583ms)
+  ✔ negative await_sequencing (corpus-ac-02-sequencing-neg.pseudocode.md) (0.459083ms)
+  ✔ positive message_event_delivery (corpus-ac-03-delivery-pos.pseudocode.md) (1.687625ms)
+  ✔ negative message_event_delivery (corpus-ac-04-delivery-neg.pseudocode.md) (0.30875ms)
+  ✔ positive cancellation (corpus-ac-05-cancellation-pos.pseudocode.md) (0.9ms)
+  ✔ negative cancellation (corpus-ac-06-cancellation-neg.pseudocode.md) (0.214375ms)
+  ✔ positive timeout (corpus-ac-07-timeout-pos.pseudocode.md) (0.222958ms)
+  ✔ negative timeout (corpus-ac-08-timeout-neg.pseudocode.md) (0.426959ms)
+  ✔ positive retry_idempotency (corpus-ac-09-retry-pos.pseudocode.md) (0.382042ms)
+  ✔ negative retry_idempotency (corpus-ac-10-retry-neg.pseudocode.md) (0.217917ms)
+  ✔ positive shared_data (corpus-ac-11-shared-data-pos.pseudocode.md) (0.755709ms)
+  ✔ negative shared_data (corpus-ac-12-shared-data-neg.pseudocode.md) (0.144834ms)
+  ✔ positive termination_open_wait (corpus-ac-13-termination-pos.pseudocode.md) (0.621208ms)
+  ✔ negative termination_open_wait (corpus-ac-14-termination-neg.pseudocode.md) (0.772292ms)
+  ✔ legacy no-async fixture passes Layer B (pre-async-contract compatible) (0.412042ms)
+  ✔ existing constraint-language legacy corpus remains green (0.213834ms)
+✔ T0 async contract fixtures [REQ-ASYNC_PSEUDOCODE_CONTRACTS] (16.798ms)
+▶ tied_vocabulary_explorer_run MCP [REQ-VOCABULARY_EXPLORER]
+  ✔ returns vocabulary-explorer.v1 envelope without mutating TIED YAML (23.268875ms)
+  ✔ writes HTML when out_html_path is set (5.993125ms)
+✔ tied_vocabulary_explorer_run MCP [REQ-VOCABULARY_EXPLORER] (29.89225ms)
+✔ MCP canonical YAML bindings expose the shared format contract (7.476584ms)
+▶ tied_client_yaml_styling_apply composition [REQ-TIED_YAML_STYLE_CONFIGURATION]
+  ✔ registers the explicit client styling apply tool (0.4915ms)
+  ✔ returns not_configured when repository hook is absent (0.554958ms)
+✔ tied_client_yaml_styling_apply composition [REQ-TIED_YAML_STYLE_CONFIGURATION] (1.683125ms)
+▶ isMetricsEnabled
+  ✔ returns false when env unset [REQ-MCP_USAGE_METRICS] (0.532666ms)
+  ✔ returns true for 1 or true [REQ-MCP_USAGE_METRICS] (0.152916ms)
+✔ isMetricsEnabled (1.468709ms)
+▶ sanitizeArgs
+  ✔ preserves token and redacts large essence_pseudocode [IMPL-MCP_USAGE_METRICS] (1.292625ms)
+  ✔ stable signature for same args [IMPL-MCP_USAGE_METRICS] (1.021291ms)
+  ✔ does not collide for distinct nested summaries [REQ-MCP_USAGE_METRICS] (0.721958ms)
+✔ sanitizeArgs (3.332292ms)
+▶ recordToolCall and wrapToolHandler
+  ✔ does not write when metrics disabled [REQ-MCP_USAGE_METRICS] (2.347792ms)
+  ✔ appends JSONL when enabled [REQ-MCP_USAGE_METRICS] (1.357417ms)
+  ✔ uses configured TIED_MCP_PROJECT_ID hash without leaking raw values [REQ-MCP_USAGE_METRICS] (2.727833ms)
+  ✔ falls back to path hash when configured ID invalid [IMPL-TIED_PROJECT_IDENTITY] (0.577167ms)
+  ✔ preserves opt-in profile_depth and run_id without raw client identity [REQ-EVIDENCE_CHAIN_PROFILE] (0.498125ms)
+  ✔ records ok false on throw [IMPL-MCP_USAGE_METRICS] (0.685541ms)
+  ✔ redacts absolute paths from error snippets [REQ-MCP_USAGE_METRICS] (0.372042ms)
+  ✔ records ok false when isError [IMPL-MCP_USAGE_METRICS] (0.529459ms)
+✔ recordToolCall and wrapToolHandler (9.350708ms)
+▶ resolveMetricsPath
+  ✔ uses TIED_MCP_METRICS_PATH when set [ARCH-MCP_USAGE_METRICS] (0.112167ms)
+✔ resolveMetricsPath (0.137875ms)
+▶ instrumentToolHandlers
+  ✔ wraps every registered tool only when metrics are enabled [REQ-MCP_USAGE_METRICS] (0.169ms)
+✔ instrumentToolHandlers (0.229292ms)
+▶ updateStatusFromPassedTokens dry_run
+  ✔ blocks status updates when the shared checklist gate is missing (2.077083ms)
+  ✔ returns would_update without writing when dry_run true (7.556375ms)
+  ✔ dry_run with empty passed lists returns empty would_update and unchanged disk (1.210125ms)
+  ✔ A9 dry_run rejects invalid Go writer tracker input with no would_update (0.960375ms)
+  ✔ A9 dry_run accepts valid Go writer gate input and reports would_update only (1.606042ms)
+  ✔ A17 persists gate receipt on dry_run with tracker_hash and citdp_hash (13.74775ms)
+  ✔ A18 status mutation records gate receipt ref on dry_run (2.359708ms)
+✔ updateStatusFromPassedTokens dry_run (30.385208ms)
+DIAGNOSTIC: envelope patch failed for T/tied-verify-status-receipt-OjTPvP/gates/verification-2026-09-24T19-49-39-450Z.json: WorkingFolderMissing
+DIAGNOSTIC: envelope patch failed for T/tied-verify-gate-receipt-X4uAN5/gates/verification-2026-09-24T19-49-39-444Z.json: WorkingFolderMissing
+▶ html-renderer REQ-VOCABULARY_EXPLORER
+  ✔ escapes hostile HTML in text nodes (1.209708ms)
+  ✔ embeds JSON without raw script-breaking sequences (0.156167ms)
+  ✔ produces byte-stable HTML for fixed envelope (0.230375ms)
+  ✔ rejects invalid envelope schema (0.191084ms)
+✔ html-renderer REQ-VOCABULARY_EXPLORER (2.494334ms)
+▶ identifier-ast REQ-VOCABULARY_ANALYSIS
+  ✔ detects AST-capable extensions (0.45525ms)
+  ✔ extracts function and variable declaration names (3.523167ms)
+  ✔ extracts property access member names (0.612917ms)
+  ✔ returns empty for non-AST extensions (0.897375ms)
+✔ identifier-ast REQ-VOCABULARY_ANALYSIS (6.162458ms)
+▶ state REQ-VOCABULARY_VIEWER_STATE
+  ✔ round-trips fragment encode and decode (0.736708ms)
+  ✔ simulates history back and forward (0.093042ms)
+  ✔ filters terms by search and kind (0.123708ms)
+✔ state REQ-VOCABULARY_VIEWER_STATE (1.547458ms)
+▶ term-analysis REQ-VOCABULARY_ANALYSIS
+  ✔ extracts TIED tokens regardless of min_frequency (6.198583ms)
+  ✔ applies min_frequency to source identifiers (7.263041ms)
+  ✔ rejects stop words and reserved words (1.597ms)
+  ✔ redacts secret patterns in excerpts (0.148125ms)
+  ✔ caps excerpt length at 240 characters (0.059209ms)
+  ✔ truncates terms deterministically when max_terms exceeded (1.517291ms)
+  ✔ classifies test files via path heuristics (0.06625ms)
+  ✔ AST mode ignores comment-only identifiers (0.915291ms)
+✔ term-analysis REQ-VOCABULARY_ANALYSIS (18.815958ms)
+▶ tied-records REQ-VOCABULARY_ANALYSIS
+  ✔ loads merged catalog with REQ-TIED_SETUP from project tied (2038.463416ms)
+  ✔ labels methodology-only tokens when present (1705.574417ms)
+  ✔ includes traceability relationships for requirements (1673.66075ms)
+✔ tied-records REQ-VOCABULARY_ANALYSIS (5418.35525ms)
+▶ view-model REQ-VOCABULARY_EXPLORER
+  ✔ produces deterministic stable term ids (0.743666ms)
+  ✔ sorts terms by id ascending (8.31825ms)
+✔ view-model REQ-VOCABULARY_EXPLORER (9.723709ms)
+▶ vocabulary-explorer composition REQ-VOCABULARY_EXPLORER
+  ✔ collectScopedSourceFiles matches walk_summary file set (13.217084ms)
+  ✔ pipeline produces deterministic envelope and HTML for fixture (13.023209ms)
+✔ vocabulary-explorer composition REQ-VOCABULARY_EXPLORER (28.401459ms)
+▶ vocabulary-explorer offline HTML smoke [REQ-VOCABULARY_EXPLORER]
+  ✔ produces self-contained HTML suitable for file:// opening (29.624792ms)
+  ✔ fragment encode/decode round-trips selection and filters for viewer script contract (3.212333ms)
+✔ vocabulary-explorer offline HTML smoke [REQ-VOCABULARY_EXPLORER] (34.032ms)
+▶ workspace scaffold [REQ-TIED_UNIFIED_TOOLCHAIN]
+  ✔ leaves MCP stdio artifact at mcp-server/dist/index.js (0.506209ms)
+  ✔ builds @tied/cli tied bin next to MCP dist (0.106708ms)
+✔ workspace scaffold [REQ-TIED_UNIFIED_TOOLCHAIN] (1.22975ms)
+✔ canonicalizes nested maps and eligible string lists without changing scalar types REQ-TIED_YAML_CANONICALIZATION (2.415625ms)
+✔ canonicalizes mixed-case phrase lists and map keys deterministically REQ-TIED_YAML_CANONICALIZATION (0.123625ms)
+✔ preserves every ordered-list key variant REQ-TIED_YAML_CANONICALIZATION (0.080125ms)
+✔ preserves opaque block-scalar bodies REQ-TIED_YAML_CANONICALIZATION (1.122291ms)
+✔ reports tied-yaml-canonical-v1 metadata REQ-TIED_YAML_CANONICALIZATION (0.373292ms)
+✔ writes atomically and preserves invalid input REQ-TIED_YAML_CANONICALIZATION (1.214834ms)
+✔ sorts satisfaction_criteria with metric blocks REC-SAT-CRITERIA-MULTI REQ-TIED_YAML_CANONICALIZATION (0.43025ms)
+✔ sorts single-line satisfaction_criteria REC-SAT-CRITERIA-SINGLE REQ-TIED_YAML_CANONICALIZATION (0.399292ms)
+✔ sorts validation_criteria by method REC-VAL-CRITERIA REQ-TIED_YAML_CANONICALIZATION (0.298958ms)
+✔ sorts alternatives_considered with nested lists REC-ALT-CONSIDERED REQ-TIED_YAML_CANONICALIZATION (0.54575ms)
+✔ record-list tie-break uses case-insensitive-primary ordering REC-TIE-BREAK REQ-TIED_YAML_CANONICALIZATION (0.292708ms)
+✔ sorts unrecognized homogeneous map lists by canonical fingerprint REC-UNRECOGNIZED-PRESERVE REQ-TIED_YAML_CANONICALIZATION (0.289084ms)
+✔ preserves record lists under ordered-list keys REC-ORDERED-KEY-PRESERVE REQ-TIED_YAML_CANONICALIZATION (0.241667ms)
+✔ missing registry sort field stays tier 0 before keyed records REC-MISSING-FIELD-SKIP REQ-TIED_YAML_CANONICALIZATION (0.270417ms)
+✔ record-list registry matches ARCH contract REQ-TIED_YAML_CANONICALIZATION (0.045333ms)
+✔ sorts files by description with CITDP before Shared REC-FILES-DESCRIPTION REQ-TIED_YAML_CANONICALIZATION (0.438625ms)
+✔ sorts files string-only shorthand by path REC-FILES-STRING REQ-TIED_YAML_CANONICALIZATION (0.29475ms)
+✔ sorts mixed files with string paths before keyed maps REC-FILES-MIXED REQ-TIED_YAML_CANONICALIZATION (0.198583ms)
+✔ sorts functions by description REC-FUNCTIONS-DESCRIPTION REQ-TIED_YAML_CANONICALIZATION (0.2815ms)
+✔ sorts functions string-only shorthand by name REC-FUNCTIONS-STRING REQ-TIED_YAML_CANONICALIZATION (0.164875ms)
+✔ sorts heterogeneous checklist with strings before keyed maps REC-HETEROGENEOUS-CHECKLIST REQ-TIED_YAML_CANONICALIZATION (0.144375ms)
+✔ preserves implementation_order files list under *_order key REC-ORDERED-KEY-FILES REQ-TIED_YAML_CANONICALIZATION (0.336833ms)
+✔ wrapped style quotes strings and preserves typed scalar output REQ-TIED_YAML_STYLE_CONFIGURATION (1.763416ms)
+✔ invalid style configuration preserves original bytes REQ-TIED_YAML_STYLE_CONFIGURATION (0.955084ms)
+✔ FMT-NOT-CONFIGURED returns not_configured without spawn (3.829125ms)
+✔ FMT-STABLE-OUTPUT produces deterministic post-hook bytes (6254.990458ms)
+✔ FMT-IDEMPOTENT accepts byte-identical second pass (2610.842583ms)
+✔ FMT-SCALAR-TYPES preserves boolean number and null semantics (2506.073625ms)
+✔ FMT-ORDERED-LISTS preserves sequence order (2510.216458ms)
+✔ FMT-BLOCK-SCALARS preserves block-scalar bodies (2523.431792ms)
+✔ FMT-INVALID-YAML rejects post-hook parse failure (826.304708ms)
+✔ FMT-SEMANTIC-DRIFT rejects yaml_semantic_compare failure (1658.307708ms)
+✔ FMT-PATH-ESCAPE rejects paths outside tiedBasePath (0.712917ms)
+✔ FMT-METHODOLOGY-BLOCK rejects tied/methodology paths (1.241792ms)
+✔ FMT-INVALID-CONFIG fails malformed client_formatter at resolve (0.759459ms)
+✔ FMT-DISABLED-DEFAULT preserves not_configured when hook absent (0.9345ms)
+✔ guardProjectTiedPath accepts project-owned tied descendants (0.04ms)
+✔ non-idempotent formatter is rejected (2484.234541ms)
+✔ guardProjectTiedPath throws typed errors for direct callers (0.142458ms)
+▶ getBasePath
+  ✔ returns path under cwd when TIED_BASE_PATH is default [IMPL] (1.093208ms)
+  ✔ uses TIED_BASE_PATH when set (1.061417ms)
+  ✔ getClientProjectRoot returns parent of TIED base path (0.654167ms)
+✔ getBasePath (3.746583ms)
+▶ resolveIndexPath
+  ✔ returns basePath/file when file exists under base [IMPL] (2.843958ms)
+  ✔ returns cwd/file when file exists in cwd and not under base (template at root) (1.189625ms)
+✔ resolveIndexPath (4.208167ms)
+✔ repository YAML style overrides the global environment (3.920041ms)
+✔ environment style is used when repository configuration is absent (1.472542ms)
+✔ XDG style is used after environment and repository fallbacks (1.131ms)
+✔ unconfigured projects default to unwrapped (0.546542ms)
+✔ invalid explicit repository style fails without fallback (1.360084ms)
+✔ formatter-only repository config defaults scalar_style to unwrapped (1.566375ms)
+✔ resolveClientFormatter returns not_configured when command absent (0.660917ms)
+✔ validateFormatterDeclaration normalizes command and args (0.07775ms)
+▶ parseYamlUpdateSteps
+  ✔ accepts detail and index steps (0.621417ms)
+  ✔ rejects invalid kind (0.116209ms)
+✔ parseYamlUpdateSteps (1.410459ms)
+▶ applyYamlUpdates
+  ✔ dry_run returns merged previews without writing (3.107875ms)
+  ✔ writes sequential steps on disk (2.6505ms)
+✔ applyYamlUpdates (5.872708ms)
+▶ adherence reconcile TS [REQ-TIED_UNIFIED_TOOLCHAIN]
+  ✔ legacy_no_adherence_chain returns stable finding code (2.886708ms)
+  ✔ rendered_without_acknowledgment finding matches TS reconcile (1.117041ms)
+  ✔ tied agentstream impl=ts adherence-reconcile does not forward to Go (153.411084ms)
+✔ adherence reconcile TS [REQ-TIED_UNIFIED_TOOLCHAIN] (158.1125ms)
+▶ @tied/agentstream dispatcher [REQ-TIED_UNIFIED_TOOLCHAIN]
+  ✔ defaults TIED_AGENTSTREAM_IMPL to ts (0.619209ms)
+  ✔ accepts ts impl token (0.110917ms)
+  ✔ documents legacy go reinstall hint for Phase 4d (0.220166ms)
+  ✔ tied agentstream --help exits 0 (151.450667ms)
+  ✔ tied agentstream rejects TIED_AGENTSTREAM_IMPL=go (63.47825ms)
+✔ @tied/agentstream dispatcher [REQ-TIED_UNIFIED_TOOLCHAIN] (217.980417ms)
+
+--- turn 1/6 (new session) [session-bootstrap] ---
+dry-run: chained turns use --resume with the session_id from the previous turn; each --feature-spec-batch-yaml record after a prior turn omits --resume (new session). --prompt-file content is prepended on every new session (not a separate turn). An initial --session-id only applies to turn 1.
+
+--- turn 2/6 (resume <session_id_from_previous_turn>) [translate-sponsor-intent] ---
+
+--- turn 3/6 (resume <session_id_from_previous_turn>) [change-definition] ---
+
+--- turn 4/6 (resume <session_id_from_previous_turn>) [impact-discovery] ---
+
+--- turn 5/6 (resume <session_id_from_previous_turn>) [risk-assessment] ---
+
+--- turn 6/6 (resume <session_id_from_previous_turn>) [test-strategy] ---
+
+--- turn 1/6 (new session) [session-bootstrap] ---
+dry-run: chained turns use --resume with the session_id from the previous turn; each --feature-spec-batch-yaml record after a prior turn omits --resume (new session). --prompt-file content is prepended on every new session (not a separate turn). An initial --session-id only applies to turn 1.
+
+--- turn 2/6 (resume <session_id_from_previous_turn>) [translate-sponsor-intent] ---
+
+--- turn 3/6 (resume <session_id_from_previous_turn>) [change-definition] ---
+
+--- turn 4/6 (resume <session_id_from_previous_turn>) [impact-discovery] ---
+
+--- turn 5/6 (resume <session_id_from_previous_turn>) [risk-assessment] ---
+
+--- turn 6/6 (resume <session_id_from_previous_turn>) [test-strategy] ---
+
+--- turn 1/7 (new session) [session-bootstrap] ---
+dry-run: chained turns use --resume with the session_id from the previous turn; each --feature-spec-batch-yaml record after a prior turn omits --resume (new session). --prompt-file content is prepended on every new session (not a separate turn). An initial --session-id only applies to turn 1.
+
+--- turn 2/7 (resume <session_id_from_previous_turn>) [translate-sponsor-intent] ---
+
+--- turn 3/7 (resume <session_id_from_previous_turn>) [change-definition] ---
+
+--- turn 4/7 (resume <session_id_from_previous_turn>) [impact-discovery] ---
+
+--- turn 5/7 (resume <session_id_from_previous_turn>) [risk-assessment] ---
+
+--- turn 6/7 (resume <session_id_from_previous_turn>) [test-strategy] ---
+
+--- turn 7/7 (resume <session_id_from_previous_turn>) ---
+
+--- turn 1/7 (new session) ---
+dry-run: chained turns use --resume with the session_id from the previous turn; each --feature-spec-batch-yaml record after a prior turn omits --resume (new session). --prompt-file content is prepended on every new session (not a separate turn). An initial --session-id only applies to turn 1.
+
+--- turn 2/7 (resume <session_id_from_previous_turn>) [session-bootstrap] ---
+
+--- turn 3/7 (resume <session_id_from_previous_turn>) [translate-sponsor-intent] ---
+
+--- turn 4/7 (resume <session_id_from_previous_turn>) [change-definition] ---
+
+--- turn 5/7 (resume <session_id_from_previous_turn>) [impact-discovery] ---
+
+--- turn 6/7 (resume <session_id_from_previous_turn>) [risk-assessment] ---
+
+--- turn 7/7 (resume <session_id_from_previous_turn>) [test-strategy] ---
+▶ @tied/agentstream frozen oracle parity [REQ-TIED_UNIFIED_TOOLCHAIN]
+  ✔ oracle freeze records last Go commit (RISK-UNIFIED-007) (0.953333ms)
+  ✔ checklist testdata gate-writer-minimal-tracker references gate fixture (0.137083ms)
+  ✔ TS preview-checklist-tracker JSON matches frozen oracle (96.691666ms)
+  ✔ executor dry-run: TS entry matches frozen oracle for gate fixture (98.033458ms)
+  ✔ executor dry-run: tied agentstream TIED_AGENTSTREAM_IMPL=ts matches frozen oracle (151.291958ms)
+  ✔ executor dry-run: --verify-session matches frozen oracle (87.997583ms)
+  ✔ pipeline batch dry-run: TS matches frozen oracle (90.93425ms)
+  ✔ checklist render preview: TS matches frozen oracle (gate fixture) (85.757167ms)
+  ✔ preview feature-spec batch: TS matches frozen oracle (80.143708ms)
+  ✔ tiedpreflight TS analyze returns OK for valid mcp.json layout (1.02675ms)
+✔ @tied/agentstream frozen oracle parity [REQ-TIED_UNIFIED_TOOLCHAIN] (693.846958ms)
+▶ @tied/agentstream tiedpreflight [REQ-TIED_UNIFIED_TOOLCHAIN]
+  ✔ locates root mcp.json (1.341708ms)
+  ✔ locates single subproject mcp.json (0.640125ms)
+  ✔ rejects ambiguous subprojects (1.399041ms)
+  ✔ honors --mcp-json override (0.569291ms)
+  ✔ analyze ok when requirements.yaml exists (1.114083ms)
+  ✔ blocks when TIED_BASE_PATH outside workspace (0.864666ms)
+  ✔ blocks missing tied-yaml entry (1.502708ms)
+  ✔ blocks relative TIED_BASE_PATH (0.66025ms)
+  ✔ warns on greenfield tied without requirements.yaml (0.687709ms)
+  ✔ run locates and analyzes (0.775208ms)
+✔ @tied/agentstream tiedpreflight [REQ-TIED_UNIFIED_TOOLCHAIN] (10.495542ms)
+▶ tracker migration preview TS [REQ-TIED_UNIFIED_TOOLCHAIN]
+  ✔ matches frozen oracle for gate-writer-minimal golden tracker (4.442958ms)
+  ✔ tied agentstream ts entry emits same JSON as frozen oracle for preview flags (91.802709ms)
+  ✔ encodePreviewReport uses trailing newline like Go json.Encoder (0.820625ms)
+✔ tracker migration preview TS [REQ-TIED_UNIFIED_TOOLCHAIN] (97.808625ms)
+▶ @tied/bootstrap paths [REQ-TIED_UNIFIED_TOOLCHAIN]
+  ✔ resolves legacy copy-files and new-tied-client engines under tools/bootstrap (0.668875ms)
+✔ @tied/bootstrap paths [REQ-TIED_UNIFIED_TOOLCHAIN] (1.270709ms)
+▶ @tied/cli workspace paths [REQ-TIED_UNIFIED_TOOLCHAIN]
+  ✔ resolves mcp-server/dist/index.js from the built CLI module (0.699666ms)
+  ✔ preserves feature-orchestration onboarding entry beside MCP dist (0.088459ms)
+  ✔ resolves bootstrap and yaml Phase 2 dispatch targets (0.118708ms)
+  ✔ resolves Phase 4 TS agentstream dispatch target (0.054458ms)
+✔ @tied/cli workspace paths [REQ-TIED_UNIFIED_TOOLCHAIN] (1.620292ms)
+▶ @tied/yaml-cli parity [REQ-TIED_UNIFIED_TOOLCHAIN]
+  ✔ lint --check matches direct yaml-canonicalizer after canonicalize (392.812542ms)
+  ✔ canonicalize rewrites a temp file like yaml-canonicalizer (187.168291ms)
+✔ @tied/yaml-cli parity [REQ-TIED_UNIFIED_TOOLCHAIN] (581.077042ms)
+▶ new-tied-client pipeline
+  ✔ uses unix seconds not milliseconds for disposable timestamp [REQ-TIED_SETUP] [IMPL-TIED_FILES] (82.811125ms)
+  ✔ parseNewTiedClientArgs handles disposable and skip flags [IMPL-TIED_FILES] (81.0785ms)
+  ✔ parseNewTiedClientArgs maps claude harness flags [REQ-TIED_CLAUDE_BOOTSTRAP_OPS] [IMPL-TIED_CLAUDE_BOOTSTRAP_OPS] (80.902208ms)
+  ✔ resolveCursorAgentCli prefers cursor when on PATH and honors TIED_CURSOR_AGENT_CMD [IMPL-TIED_FILES] (73.851625ms)
+  ✔ mcp enable step uses resolved Cursor agent CLI [IMPL-TIED_FILES] (78.001334ms)
+  ✔ claude harness skips mcp enable and invokes validation after audit [REQ-TIED_CLAUDE_BOOTSTRAP_OPS] [IMPL-TIED_CLAUDE_BOOTSTRAP_OPS] (79.715625ms)
+  ✔ records pipeline step order via injectable spawn [IMPL-TIED_FILES] (72.963792ms)
+✔ new-tied-client pipeline (550.216ms)
+▶ new-tied-client integration
+  ✔ bootstraps client with lint when MCP and git skipped [REQ-TIED_SETUP] [IMPL-TIED_FILES] (2644.041125ms)
+  ✔ runs disposable CLI with skip flags [IMPL-TIED_FILES] (2542.921792ms)
+✔ new-tied-client integration (5187.144708ms)
+▶ tied-cli large arguments
+  ✔ accepts an args file larger than 256KiB without env truncation (435.733416ms)
+✔ tied-cli large arguments (436.369041ms)
+▶ tied-cli metrics client attribution
+  ✔ preserves TIED_MCP_METRICS_CLIENT from the environment (85.134958ms)
+  ✔ accepts --client before the tool name (84.621583ms)
+  ✔ derives client id from project_root under dev/test (143.670167ms)
+  ✔ falls back to tied-cli when no client hint is available (130.423833ms)
+✔ tied-cli metrics client attribution (444.738667ms)
+ℹ tests 1002
+ℹ suites 219
+ℹ pass 1002
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 23126.507041

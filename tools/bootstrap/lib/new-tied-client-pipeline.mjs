@@ -10,7 +10,9 @@ import { TIED_REPO_ROOT } from "./constants.mjs";
 import { sayErr, sayOk, sayWarn } from "./console.mjs";
 import { lintClientTiedYaml } from "./lint-client-yaml.mjs";
 import { runNewClientOnboardingAudit } from "./new-client-onboarding-audit.mjs";
+import { runClaudeClientValidation } from "./claude-client-validation.mjs";
 import { tiedBaselineCommitMessage } from "./tied-baseline-commit-message.mjs";
+import { skillsRerootEnabledFromEnv } from "./skills-reroot.mjs";
 
 export function resolveSourceRoot(env = process.env, fallback = TIED_REPO_ROOT) {
   const raw = env.TIED_SOURCE_ROOT;
@@ -90,18 +92,23 @@ export function resolveCursorAgentCli(env = process.env, spawn = spawnSync) {
 }
 
 export function runNewTiedClientPipeline(options) {
+  const harnessProfile = options.harnessProfile ?? "cursor";
+  const env = options.env ?? process.env;
   const {
     clientDir,
     sourceRoot,
     skipLint = false,
     skipOnboardingAudit = false,
-    skipMcpEnable = false,
     skipGit = false,
     forceMcpEnable = false,
+    skipClaudeValidation = false,
     spawn = spawnSync,
     nodeExec = process.execPath,
     stdinIsTTY = process.stdin.isTTY,
   } = options;
+  const claudeValidation = options.claudeValidation ?? {};
+  const skipMcpEnable =
+    harnessProfile === "claude" ? true : options.skipMcpEnable === true;
 
   prepareClientDirectory(clientDir, { disposable: options.disposable === true });
 
@@ -143,11 +150,40 @@ export function runNewTiedClientPipeline(options) {
       nodeExec,
       spawn,
       skipOnboardingAudit,
-      env: options.env,
+      env,
     }),
   );
   if (!step.ok) {
     return step;
+  }
+
+  if (harnessProfile === "claude" && !skipClaudeValidation) {
+    const validationCommand =
+      claudeValidation.validationCommand ??
+      `node tools/bootstrap/new-tied-client.mjs --harness claude --client-root ${clientDir}`;
+    const runValidation =
+      options.runClaudeClientValidationFn ?? runClaudeClientValidation;
+    step = runStep("claude_validation", () => {
+      const result = runValidation(clientDir, sourceRoot, {
+        withConsistency: claudeValidation.withConsistency === true,
+        withAgentstreamDryRun: claudeValidation.withAgentstreamDryRun !== false,
+        withLiveClaude: claudeValidation.withLiveClaude === true,
+        skillsRerootEnabled:
+          claudeValidation.skillsRerootEnabled ?? skillsRerootEnabledFromEnv(env),
+        validationCommand,
+        env,
+        spawn,
+      });
+      return {
+        ok: result.ok,
+        code: result.ok ? 0 : 1,
+        stderr: result.ok ? undefined : `Claude validation failed; see ${result.reportPath}`,
+        step: "claude_validation",
+      };
+    });
+    if (!step.ok) {
+      return step;
+    }
   }
 
   if (!skipMcpEnable) {

@@ -1,6 +1,7 @@
 # PLAN — REQ-TIED_CLAUDE_DOC_REMAINDER
 
 **Status:** Remainder program **closed** — 2026-09-24 (R1–R8 complete)  
+**Last doc refine:** 2026-09-24 (`refine-plan` — vocabulary + historical archive tone; no new REQ)  
 **Linked comparison doc:** [`docs/comparisons/claude-code-tied-multi-harness-plan.md`](../../docs/comparisons/claude-code-tied-multi-harness-plan.md)  
 **Does not reopen:** [`REQ-TIED_CLAUDE_HARNESS`](../../tied/requirements/REQ-TIED_CLAUDE_HARNESS.yaml), [`REQ-TIED_CLAUDE_BOOTSTRAP_OPS`](../../tied/requirements/REQ-TIED_CLAUDE_BOOTSTRAP_OPS.yaml), [`REQ-TIED_CLAUDE_LIVE_DRIVER`](../../tied/requirements/REQ-TIED_CLAUDE_LIVE_DRIVER.yaml) (all **Implemented** / closed unless sponsor opens a new REQ)
 
@@ -27,7 +28,7 @@ After Phases 0→3 and follow-on REQs closed, the comparison doc still read like
 | **R3** ✅ | ~~Optional **repo-root `skills/` re-root** (B3 / CONFIG_SKILLS_REROOT)~~ — **complete 2026-09-24** | [`REQ-TIED_CLAUDE_SKILLS_REROOT`](../../tied/requirements/REQ-TIED_CLAUDE_SKILLS_REROOT.yaml) | **`build-plan`** R3 | `TIED_SKILLS_REROOT=1`; 17/17 harness tests; default off |
 | **R4** ✅ | ~~Post-close-out **TIED YAML / Tracker / CHANGELOG LEAP** (dual child REQ hygiene)~~ — **complete 2026-09-24** | [`working/REFINE-DUAL_REQ_CLOSE_OUT/`](../../working/REFINE-DUAL_REQ_CLOSE_OUT/) | **`build-plan`** R4 slice | `tied_validate_consistency` ok; close_out gates allowed; envelope blocking gaps 0; traceable commit |
 
-| ~~**R5**~~ ✅ | ~~**Operator live** Claude checklist smoke (not CI)~~ — **complete 2026-09-24** | Human operator | README + [`evidence/operator-live-claude-smoke-r5.md`](evidence/operator-live-claude-smoke-r5.md) | Preflight 52/52; live subprocess deferred (no `claude` CLI in build agent env) |
+| ~~**R5**~~ ✅ | ~~**Operator live** Claude checklist smoke (not CI)~~ — **complete 2026-09-24** | Human operator | README + [`evidence/operator-live-claude-smoke-r5.md`](evidence/operator-live-claude-smoke-r5.md) | Preflight 53/53; live one-turn **pass** — [`evidence/operator-live-claude-agentstream-2026-09-24.md`](evidence/operator-live-claude-agentstream-2026-09-24.md) |
 | ~~**R6**~~ ✅ | ~~**Interactive Claude IDE** pilot~~ — **complete 2026-09-24** (runbook + preflight; IDE session deferred) | Optional operator / future spike REQ | Manual pilot per Phase 0 notes | [`evidence/operator-interactive-claude-ide-r6.md`](evidence/operator-interactive-claude-ide-r6.md) |
 | ~~**R7**~~ ✅ | ~~Replace **synthetic-v1** stream oracles with captured real CLI~~ — **complete 2026-09-24** | Maintenance on `REQ-TIED_CLAUDE_LIVE_DRIVER` | **`build-plan`** | CLI **2.1.273** pinned; fixtures + parser error `result` shape |
 | ~~**R8**~~ ✅ | ~~Claude **adherence hook** bridge~~ — **N/A close-out 2026-09-24** | Closed **N/A** (B4) | — | Re-probe confirms no stable upstream contract; [`evidence/r8-adherence-hook-bridge-na.md`](evidence/r8-adherence-hook-bridge-na.md) |
@@ -69,12 +70,26 @@ After Phases 0→3 and follow-on REQs closed, the comparison doc still read like
 
 | Sponsor term | Resolution |
 | --- | --- |
-| “Most of this completed; plan what remains” | R1–R8 table above; comparison doc **What remains** mirrors R1–R8 for readers |
+| “Most of this completed; plan what remains” | R1–R8 table above; comparison doc **What remains** mirrors R1–R8; **Unresolved (discovery)** lists only human-only follow-ups |
 | Doc maintenance vs new REQ | **No new REQ token** for R1; use this working folder name for traceability |
 | B3 after Windows proof | Proof **in repo**; **R3** shipped optional re-root — default remains harness-native paths |
+
+## Sponsor unresolved policy (2026-09-24)
+
+| Topic | Decision |
+| --- | --- |
+| Claude adherence hooks | **Watch-only** — no new REQ until upstream hook contract; **RISK-BOOT-005** |
+| Unix skill symlinks | **No action** — copy-default sufficient; keep Deferred in Phase 0 gap list |
+| Comparison doc § Unresolved | Onboarding moved to **Current** only; Unresolved table = adherence watch-only |
+| Operator factory | [`evidence/operator-claude-factory-validation-attestation-2026-09-24.md`](evidence/operator-claude-factory-validation-attestation-2026-09-24.md) |
+| Live agentstream one-turn | [`evidence/operator-live-claude-agentstream-2026-09-24.md`](evidence/operator-live-claude-agentstream-2026-09-24.md) — **`AGENTSTREAM_CLAUDE_LIVE_OK=1`**, exit 0 |
+
+## Interactive skill / MCP onboarding (2026-09-24)
+
+Closed on bootstrapped client with Claude Code **2.1.273** — [`evidence/interactive-claude-onboarding-2026-09-24.md`](evidence/interactive-claude-onboarding-2026-09-24.md). Operator MCP approval recorded: [`evidence/interactive-claude-mcp-approved-stdout.txt`](evidence/interactive-claude-mcp-approved-stdout.txt) (`tied-yaml` ✔ Connected on client `1790278645`). Re-run smoke: `node scripts/run-tied-claude-client-validation.mjs --client-root CLIENT --with-claude-code-interactive-smoke`.
 
 ## Vocabulary
 
 PRELOAD: `agentstream.md`, `prompt-composer.md`, `tied-yaml-mcp.md`.  
-RECORD: **program remainder**, **doc reconcile slice R1**.  
+RECORD: **program remainder**, **doc reconcile slice R1**, **interactive Claude onboarding closure**.  
 VALIDATE: at parent handoff (doc cites vs `tools/bootstrap/`, agentstream README).

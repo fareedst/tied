@@ -1,0 +1,70 @@
+DEBUG: runClaudeClientValidation clientRoot=/Users/fareed/Documents/dev/test/1790284586 withAgentstreamDryRun=false
+{
+  "schema_version": "tied-claude-client-validation.v1",
+  "generated_at": "2026-09-24T21:19:02.410Z",
+  "client_root": "/Users/fareed/Documents/dev/test/1790284586",
+  "ok": true,
+  "harness_profile": "claude",
+  "proof_boundary": "automated Claude bootstrap + stdio MCP smoke; not interactive Claude IDE OAuth or adherence hooks",
+  "with_consistency": false,
+  "with_agentstream_dry_run": false,
+  "with_live_claude": false,
+  "with_claude_code_interactive_smoke": true,
+  "skills_reroot_enabled": false,
+  "validation_command": "node scripts/run-tied-claude-client-validation.mjs --client-root /Users/fareed/Documents/dev/test/1790284586",
+  "checks": [
+    {
+      "id": "mcp_dist_prerequisite",
+      "status": "pass",
+      "detail": null,
+      "duration_ms": 0
+    },
+    {
+      "id": "claude_bootstrap_asserts",
+      "status": "pass",
+      "detail": null,
+      "duration_ms": 0
+    },
+    {
+      "id": "mcp_json_harness_contract",
+      "status": "pass",
+      "detail": null,
+      "duration_ms": 0
+    },
+    {
+      "id": "tied_cli_base_path_smoke",
+      "status": "pass",
+      "detail": null,
+      "duration_ms": 448
+    },
+    {
+      "id": "claude_code_interactive_smoke",
+      "status": "pass",
+      "detail": null,
+      "duration_ms": 7717
+    },
+    {
+      "id": "tied_validate_consistency",
+      "status": "skipped",
+      "detail": null,
+      "duration_ms": 0
+    },
+    {
+      "id": "agentstream_dry_run",
+      "status": "skipped",
+      "detail": null,
+      "duration_ms": 0
+    },
+    {
+      "id": "agentstream_live_claude",
+      "status": "skipped",
+      "detail": null,
+      "duration_ms": 0
+    }
+  ],
+  "traceability": [
+    "REQ-TIED_CLAUDE_BOOTSTRAP_OPS",
+    "REQ-TIED_CLAUDE_HARNESS",
+    "REQ-TIED_SETUP"
+  ]
+}

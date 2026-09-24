@@ -1,0 +1,71 @@
+# Inline CITDP — Claude-first client factory (no persist-citdp-record to tied/citdp/)
+CITDP-REQ-TIED_CLAUDE_CLIENT_FACTORY:
+  record_identity:
+    change_request_id: REQ-TIED_CLAUDE_CLIENT_FACTORY
+    title: Claude-first disposable TIED client factory and validation receipt
+    recorded_at: "2026-09-24"
+    gate_policy: advisory
+    profile_depth: minimal
+  change_definition:
+    current_behavior: >
+      Cursor-first new-tied-client runs copy_files, lint, G4 audit, cursor/agent mcp enable, git.
+      Claude bootstrap artifacts exist but no one-command Claude-first factory with automated validation receipt.
+    desired_behavior: >
+      test-new-claude-tied-client and --harness claude skip Cursor MCP enable; runClaudeClientValidation
+      writes working/tied-claude-client-validation.v1.json; bash/cmd thin delegates to Node pipeline.
+    out_of_scope:
+      - New REQ-TIED_* YAML token in semantic-tokens.yaml
+      - Live Claude IDE OAuth or adherence hooks (RISK-BOOT-005)
+      - Default live agentstream subprocess in CI
+      - Persisting this record to tied/citdp/
+  impact_discovery:
+    modules_or_boundaries: >
+      tools/bootstrap/lib/claude-client-validation.mjs, new-tied-client-pipeline.mjs, new-tied-client.mjs,
+      scripts/run-tied-claude-client-validation.mjs, scripts/build-commands.sh, mcp-server e2e new-tied-client
+  impact_analysis:
+    tied_tokens_affected:
+      - REQ-TIED_CLAUDE_BOOTSTRAP_OPS
+      - REQ-TIED_CLAUDE_HARNESS
+      - REQ-TIED_SETUP
+      - REQ-TIED_NEW_CLIENT_ADHERENCE
+    impl_inventory:
+      - IMPL-TIED_CLAUDE_BOOTSTRAP_OPS
+      - IMPL-TIED_FILES
+  evidence:
+    commands:
+      - "node --test tools/bootstrap/lib/claude-client-validation.test.mjs"
+      - "cd mcp-server && npm test -- src/e2e/new-tied-client.test.ts"
+      - ".cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency"
+    proof_boundaries:
+      - no_live_claude_ide_in_ci
+      - cursor_mcp_enable_skipped_for_harness_claude
+      - no_new_semantic_token_REQ-TIED_CLAUDE_CLIENT_FACTORY
+  risk_analysis:
+    depth_tier: minimal
+    gate_policy: advisory
+    profile_depth: minimal
+    adversarial_inquiry:
+      depth_tier: minimal
+      assurance_profile: baseline-functional
+      gate_policy: advisory
+      sub_adversarial_inquiry_pass: not_applicable
+      counterexamples:
+        - Claiming interactive Claude Code IDE success from factory CLI alone
+        - Staging REQ-TIED_CLAUDE_SKILLS_REROOT create-*.json as factory evidence
+        - Using close-out-req without --citdp-path to citdp-inline.yaml
+      falsification_questions:
+        - Did tied-cli smoke run against a bootstrapped client .mcp.json?
+        - Did agentstream dry-run execute when dist is missing?
+      disconfirming_observations:
+        - Factory runs in Cursor dev repo without .claude/skills at stdd root
+        - Live Claude subprocess not invoked in default disposable path
+      evidence_references:
+        - working/REQ-TIED_CLAUDE_CLIENT_FACTORY/evidence/sub-adversarial-inquiry-pass-na.md
+        - working/REQ-TIED_CLAUDE_CLIENT_FACTORY/evidence/verification-evidence-manifest.v1.json
+    residual_risks:
+      - RISK-BOOT-005 Claude adherence automation not shipped
+      - Optional TIED_RUN_CLAUDE_CLIENT_FACTORY_E2E=1 not run in this close-out
+  test_strategy:
+    summary: >
+      Unit claude-client-validation.test.mjs; composition new-tied-client e2e for harness claude skip mcp enable;
+      tied_validate_consistency on project tied/.

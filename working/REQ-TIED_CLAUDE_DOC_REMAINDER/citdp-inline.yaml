@@ -2,34 +2,46 @@
 CITDP-REQ-TIED_CLAUDE_DOC_REMAINDER:
   record_identity:
     change_request_id: REQ-TIED_CLAUDE_DOC_REMAINDER
-    title: Claude multi-harness comparison doc remainder plan
+    title: Unified Claude harness close-out (factory + doc remainder)
     recorded_at: "2026-09-24"
     gate_policy: advisory
     profile_depth: minimal
   change_definition:
     current_behavior: >
-      R1 complete: comparison doc labels Current vs Proposed match shipped bootstrap,
-      agentstream harness, REQ-TIED_CLAUDE_SKILLS_REROOT, and closed remainder R1-R8;
-      What remains shows program closed.
+      Factory code, interactive MCP smoke check, onboarding/live operator evidence, and
+      comparison doc updates exist unstaged; prior close_out gates predate session deltas;
+      IMPL RUN_CLAUDE_CLIENT_VALIDATION pseudo-code omits claude_code_interactive_smoke.
     desired_behavior: >
-      Doc reflects Current evidence, archives Phases 0-3 as historical, remainder program
-      closed; authoritative record in working/REQ-TIED_CLAUDE_DOC_REMAINDER/PLAN.md.
+      One sponsor commit after replayed close_out gates (blocking envelope 0), LEAP sidecar
+      sync, unified receipt with three completion signals, CHANGELOG without methodology
+      boundary hunk; adherence hooks watch-only (RISK-BOOT-005).
     out_of_scope:
       - Reopening REQ-TIED_CLAUDE_HARNESS implementation
       - MCP writes to closed REQ satisfaction criteria
       - Persisting this record to tied/citdp/ (inline only for DOC_REMAINDER)
   impact_discovery:
-    modules_or_boundaries: docs/comparisons/claude-code-tied-multi-harness-plan.md (R1 complete)
+    modules_or_boundaries: >
+      tools/bootstrap/lib/claude-client-validation.mjs, scripts/run-tied-claude-client-validation.mjs,
+      new-tied-client pipeline, docs/comparisons/claude-code-tied-multi-harness-plan.md,
+      working/REQ-TIED_CLAUDE_CLIENT_FACTORY, working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence
   impact_analysis:
     tied_tokens_affected:
+      - REQ-TIED_CLAUDE_BOOTSTRAP_OPS
+      - REQ-TIED_CLAUDE_HARNESS
       - REQ-TIED_CLAUDE_LIVE_DRIVER
+      - REQ-TIED_SETUP
     impl_inventory:
+      - IMPL-TIED_CLAUDE_BOOTSTRAP_OPS
       - IMPL-TIED_CLAUDE_LIVE_DRIVER
   evidence:
     commands:
+      - "node --test tools/bootstrap/lib/claude-client-validation.test.mjs"
+      - "node --test tools/bootstrap/lib/claude-harness.test.mjs"
       - "cd mcp-server/packages/agentstream && npm test"
+      - "node tools/bootstrap/templates/run-close-out-gates.mjs --phase close_out (CLIENT_FACTORY + DOC_REMAINDER)"
     proof_boundaries:
       - no_live_claude_in_ci
+      - claude_code_interactive_smoke operator opt-in only
   risk_analysis:
     depth_tier: minimal
     gate_policy: advisory
@@ -47,13 +59,15 @@ CITDP-REQ-TIED_CLAUDE_DOC_REMAINDER:
         - Did a human run skill discovery in Claude Code IDE?
         - Did tied-yaml MCP authenticate in that session?
       disconfirming_observations:
-        - Build agent runs in Cursor not Claude Code IDE
         - stdd repo root lacks .claude/skills without client bootstrap
+      confirming_observations:
+        - Claude Code CLI 2.1.273 on bootstrapped client verified skills + stdio MCP (2026-09-24)
       evidence_references:
         - working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/sub-adversarial-inquiry-pass-na.md
         - working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/r1-doc-reconcile-receipt.md
     residual_risks:
       - RISK-BOOT-005 Claude adherence automation not shipped (R8 N/A re-probe 2026-09-24)
-      - Interactive Claude IDE onboarding still human-only (R6 runbook not IDE session proof)
   test_strategy:
-    summary: Manual doc vs bootstrap README and agentstream README; R1 receipt documents section audit.
+    summary: >
+      Unit tests for validation module + harness; agentstream 53/53; optional operator
+      validation smoke; close_out envelope blocking_gap_count 0 for both working ids.

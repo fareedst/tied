@@ -20,6 +20,8 @@
 - **R7** LIVE_DRIVER maintenance: CLI **2.1.273** fixtures + IMPL pseudo-code LEAP.
 - **Excluded from git:** `evidence/r7-raw/` (PII); `REQ-TIED_CLAUDE_SKILLS_REROOT/create-*.json`.
 
-## Residual
+## Residual (updated unified close-out 2026-09-24)
 
-- R6 IDE session not proven; R5 live operator-only; R8 adherence N/A (**RISK-BOOT-005**).
+- R6/R5 operator evidence: onboarding + MCP approval + live agentstream one-turn — see `interactive-claude-onboarding-2026-09-24.md`, `operator-live-claude-agentstream-2026-09-24.md`.
+- R8 adherence N/A (**RISK-BOOT-005**, watch-only).
+- Full multi-turn lead checklist live on Claude remains optional.

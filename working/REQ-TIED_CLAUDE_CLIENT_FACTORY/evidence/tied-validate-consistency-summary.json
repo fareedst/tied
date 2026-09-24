@@ -1,0 +1,7 @@
+{
+  "tool": "tied_validate_consistency",
+  "ok": true,
+  "captured_at": "2026-09-24",
+  "stdout_ref": "working/REQ-TIED_CLAUDE_CLIENT_FACTORY/evidence/tied-validate-consistency-stdout.txt",
+  "exit_code": 0
+}

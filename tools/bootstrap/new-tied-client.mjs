@@ -25,8 +25,16 @@ Options:
   --skip-mcp-enable         Skip Cursor agent mcp enable
   --skip-git                Skip git init/commit
   --force-mcp-enable        Run mcp enable even when stdin is not a TTY
+  --harness cursor|claude   Harness profile (default: cursor)
+  --claude-first            Alias for --harness claude
+  --skip-claude-validation  Skip post-audit Claude validation (claude harness only)
+  --with-consistency        Run tied_validate_consistency during Claude validation
+  --with-agentstream-dry-run  Run agentstream dry-run during Claude validation (default on for claude)
+  --no-agentstream-dry-run    Skip agentstream dry-run during Claude validation
+  --with-live-claude        Reserved; live Claude not run in v1 factory
 
-Environment: TIED_SOURCE_ROOT, TIED_TEST_ROOT, TIED_CURSOR_AGENT_CMD (default: cursor on Windows when on PATH, else agent)`);
+Environment: TIED_SOURCE_ROOT, TIED_TEST_ROOT, TIED_CURSOR_AGENT_CMD,
+  TIED_CLAUDE_CLIENT_WITH_CONSISTENCY=1 (same as --with-consistency for Claude validation)`);
 }
 
 export function parseNewTiedClientArgs(argv) {
@@ -40,6 +48,11 @@ export function parseNewTiedClientArgs(argv) {
     skipMcpEnable: false,
     skipGit: false,
     forceMcpEnable: false,
+    harnessProfile: "cursor",
+    skipClaudeValidation: false,
+    withConsistency: false,
+    withAgentstreamDryRun: undefined,
+    withLiveClaude: false,
     clientDir: undefined,
   };
 
@@ -69,6 +82,34 @@ export function parseNewTiedClientArgs(argv) {
         break;
       case "--force-mcp-enable":
         options.forceMcpEnable = true;
+        break;
+      case "--harness": {
+        const value = (args.shift() ?? "").toLowerCase();
+        if (value !== "cursor" && value !== "claude") {
+          sayErr(`Invalid --harness value: ${value}`);
+          options.error = true;
+          return options;
+        }
+        options.harnessProfile = value;
+        break;
+      }
+      case "--claude-first":
+        options.harnessProfile = "claude";
+        break;
+      case "--skip-claude-validation":
+        options.skipClaudeValidation = true;
+        break;
+      case "--with-consistency":
+        options.withConsistency = true;
+        break;
+      case "--with-agentstream-dry-run":
+        options.withAgentstreamDryRun = true;
+        break;
+      case "--no-agentstream-dry-run":
+        options.withAgentstreamDryRun = false;
+        break;
+      case "--with-live-claude":
+        options.withLiveClaude = true;
         break;
       case "-h":
       case "--help":
@@ -100,13 +141,26 @@ function main() {
 
   const env = process.env;
   const sourceRoot = parsed.sourceRoot ?? resolveSourceRoot(env);
+  const harnessProfile = parsed.harnessProfile ?? "cursor";
+  const withConsistency =
+    parsed.withConsistency || env.TIED_CLAUDE_CLIENT_WITH_CONSISTENCY === "1";
+  const withAgentstreamDryRun =
+    parsed.withAgentstreamDryRun ??
+    (harnessProfile === "claude" ? true : false);
   const common = {
     sourceRoot,
     skipLint: parsed.skipLint,
     skipOnboardingAudit: parsed.skipOnboardingAudit,
-    skipMcpEnable: parsed.skipMcpEnable,
+    skipMcpEnable: harnessProfile === "claude" ? true : parsed.skipMcpEnable,
     skipGit: parsed.skipGit,
     forceMcpEnable: parsed.forceMcpEnable,
+    harnessProfile,
+    skipClaudeValidation: parsed.skipClaudeValidation,
+    claudeValidation: {
+      withConsistency,
+      withAgentstreamDryRun,
+      withLiveClaude: parsed.withLiveClaude,
+    },
     env,
   };
 

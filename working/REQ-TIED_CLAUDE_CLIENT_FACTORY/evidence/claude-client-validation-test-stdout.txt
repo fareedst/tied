@@ -1,0 +1,26 @@
+Copied Claude skills into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-Z88y1I/.claude/skills (copy default).
+Initialized /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-Z88y1I/.mcp.json mcpServers.tied-yaml (TIED_MCP dist + TIED_MCP_HARNESS=claude).
+Copied Claude skills into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-BF3Wut/.claude/skills (copy default).
+Initialized /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-BF3Wut/.mcp.json mcpServers.tied-yaml (TIED_MCP dist + TIED_MCP_HARNESS=claude).
+Copied Claude skills into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-PX6Gnk/.claude/skills (copy default).
+Initialized /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-PX6Gnk/.mcp.json mcpServers.tied-yaml (TIED_MCP dist + TIED_MCP_HARNESS=claude).
+▶ buildClaudeClientValidationReport [REQ-TIED_CLAUDE_BOOTSTRAP_OPS]
+  ✔ uses tied-claude-client-validation.v1 schema_version (0.96225ms)
+✔ buildClaudeClientValidationReport [REQ-TIED_CLAUDE_BOOTSTRAP_OPS] (1.549667ms)
+▶ assertMcpJsonHarnessContract [REQ-TIED_CLAUDE_BOOTSTRAP_OPS]
+  ✔ passes when harness and TIED_BASE_PATH match client tied/ (17.492041ms)
+  ✔ fails when TIED_MCP_HARNESS is not claude (9.16325ms)
+✔ assertMcpJsonHarnessContract [REQ-TIED_CLAUDE_BOOTSTRAP_OPS] (26.737334ms)
+▶ runClaudeClientValidation fail-fast [REQ-TIED_CLAUDE_BOOTSTRAP_OPS]
+  ✔ stops after mcp_json failure without tied-cli smoke (9.588416ms)
+  ✔ honors reroot tied-cli path when skills reroot enabled (0.516208ms)
+  ✔ records check order constants aligned with implementation (0.064ms)
+✔ runClaudeClientValidation fail-fast [REQ-TIED_CLAUDE_BOOTSTRAP_OPS] (10.267917ms)
+ℹ tests 6
+ℹ suites 3
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 119.776667

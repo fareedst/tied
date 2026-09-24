@@ -1,0 +1,25 @@
+# claude mcp list — /Users/fareed/Documents/dev/test/1790278645 (2026-09-24, post operator approval)
+
+Checking MCP server health…
+
+claude.ai Claude Docs: https://api.anthropic.com/v1/pages/mcp - ✔ Connected
+tied-yaml: node /Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/dist/index.js - ✔ Connected
+
+# claude mcp get tied-yaml
+
+tied-yaml:
+  Scope: Project config (shared via .mcp.json)
+  Status: ✔ Connected
+  Type: stdio
+  Command: node
+  Args: /Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/dist/index.js
+  Environment:
+    TIED_BASE_PATH=/Users/fareed/Documents/dev/test/1790278645/tied
+    TIED_MCP_HARNESS=claude
+    TIED_MCP_COLLECT_METRICS=1
+    TIED_MCP_METRICS_CLIENT=stdd-dev
+
+# Default session MCP (no --strict-mcp-config) after approval
+
+claude -p --permission-mode bypassPermissions -- "…tied_config_get_base_path…"
+→ /Users/fareed/Documents/dev/test/1790278645/tied

@@ -18,6 +18,8 @@ Cross-platform **BOOTSTRAP_TIED** implementation shared by all platform entry po
 | `tools/bootstrap/new-tied-client.mjs` | All | Disposable/explicit client factory pipeline |
 | `scripts/new-tied-client.cmd` | Windows | Explicit client dir: bootstrap + lint + MCP + git |
 | `scripts/test-new-tied-client.cmd` | Windows | `--disposable` under `%USERPROFILE%\Documents\dev\test\<unix-seconds>` |
+| `scripts/test-new-claude-tied-client.cmd` | Windows | Claude-first disposable (`--harness claude` + validation receipt) |
+| `scripts/run-tied-claude-client-validation.mjs` | All | Re-run Claude validation on an existing client |
 | `scripts/lint_yaml.cmd` | Windows | `-F tied` lint parity with `lint_yaml.sh` |
 | `test-new-tied-client.cmd` | Windows | Repo-root discoverability shim |
 
@@ -38,6 +40,38 @@ scripts\new-tied-client C:\path\to\client-dir
 ```
 
 Skip flags: `--skip-lint`, `--skip-mcp-enable`, `--skip-git`, `--force-mcp-enable`.
+
+## Claude-first disposable client ([REQ-TIED_CLAUDE_BOOTSTRAP_OPS])
+
+Node-only factory (bash/cmd are thin delegates). Does **not** run `cursor` / `agent mcp enable`; runs post–G4 **`runClaudeClientValidation`** and writes `working/tied-claude-client-validation.v1.json`.
+
+```bash
+source scripts/build-commands.sh
+test-new-claude-tied-client
+```
+
+Direct CLI:
+
+```bash
+node tools/bootstrap/new-tied-client.mjs --disposable --harness claude --with-agentstream-dry-run
+```
+
+Validation-only on an existing tree:
+
+```bash
+node scripts/run-tied-claude-client-validation.mjs --client-root /path/to/client --with-agentstream-dry-run
+```
+
+Optional **Claude Code interactive smoke** (stdio MCP via `claude -p --strict-mcp-config`, not IDE OAuth):
+
+```bash
+node scripts/run-tied-claude-client-validation.mjs --client-root /path/to/client --with-claude-code-interactive-smoke
+# or: TIED_CLAUDE_CODE_INTERACTIVE_SMOKE=1
+```
+
+After bootstrap, `claude mcp list` may show project **`.mcp.json`** servers as **Pending approval** until you approve once in an interactive `claude` session; the smoke flag above bypasses that for scripted checks. Operators still approve in the IDE for day-to-day `/build-plan` sessions without `--strict-mcp-config`.
+
+Defaults: validation on (unless `--skip-claude-validation`); agentstream dry-run on; `tied_validate_consistency` off (`--with-consistency` or `TIED_CLAUDE_CLIENT_WITH_CONSISTENCY=1` to enable). Live Claude is operator-only and not part of the default factory.
 
 ## Windows bootstrap smoke (automated)
 

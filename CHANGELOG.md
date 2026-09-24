@@ -9,10 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Claude-first disposable client factory** — `test-new-claude-tied-client` /
+  `new-claude-tied-client` / `validate-claude-tied-client` (Node-first; skips Cursor
+  `mcp enable` when `--harness claude`); `runClaudeClientValidation` and
+  `working/tied-claude-client-validation.v1.json` receipt; Windows
+  `test-new-claude-tied-client.cmd`. Trace: REQ-TIED_CLAUDE_BOOTSTRAP_OPS,
+  REQ-TIED_CLAUDE_HARNESS, REQ-TIED_SETUP. Close-out:
+  `working/REQ-TIED_CLAUDE_CLIENT_FACTORY/`. Opt-in **`claude_code_interactive_smoke`**
+  (`--with-claude-code-interactive-smoke` / `TIED_CLAUDE_CODE_INTERACTIVE_SMOKE=1`).
+
 - **Claude doc remainder program (R1–R8)** — Comparison doc program-closed; working
-  evidence under `working/REQ-TIED_CLAUDE_DOC_REMAINDER/` (operator runbooks R5/R6;
-  R8 adherence **N/A**, **RISK-BOOT-005**); machine close_out gate + envelope on
-  `main` after this close-out.
+  evidence under `working/REQ-TIED_CLAUDE_DOC_REMAINDER/` (interactive onboarding
+  **Current**, operator MCP approval, live agentstream one-turn with
+  `AGENTSTREAM_CLAUDE_LIVE_OK=1`; R8 adherence **N/A**, **RISK-BOOT-005** watch-only);
+  machine close_out gate + envelope replay on this close-out.
 
 - **R7 oracle maintenance ([REQ-TIED_CLAUDE_LIVE_DRIVER])** — Real CLI **2.1.273**
   frozen NDJSON under `fixtures/claude/`; parser `error_during_execution` / `errors[]`;

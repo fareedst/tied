@@ -57,6 +57,22 @@ describe("new-tied-client pipeline", () => {
     assert.match(output, /ok/);
   });
 
+  it("parseNewTiedClientArgs maps claude harness flags [REQ-TIED_CLAUDE_BOOTSTRAP_OPS] [IMPL-TIED_CLAUDE_BOOTSTRAP_OPS]", () => {
+    const output = runBootstrapModuleEval(`
+      import { parseNewTiedClientArgs } from "./tools/bootstrap/new-tied-client.mjs";
+      const parsed = parseNewTiedClientArgs([
+        "--claude-first",
+        "--skip-claude-validation",
+        "--no-agentstream-dry-run",
+      ]);
+      if (parsed.harnessProfile !== "claude") throw new Error("harness");
+      if (!parsed.skipClaudeValidation) throw new Error("skip validation");
+      if (parsed.withAgentstreamDryRun !== false) throw new Error("dry run");
+      console.log("ok");
+    `);
+    assert.match(output, /ok/);
+  });
+
   it("resolveCursorAgentCli prefers cursor when on PATH and honors TIED_CURSOR_AGENT_CMD [IMPL-TIED_FILES]", () => {
     const output = runBootstrapModuleEval(`
       import { resolveCursorAgentCli } from "./tools/bootstrap/lib/new-tied-client-pipeline.mjs";
@@ -107,6 +123,45 @@ describe("new-tied-client pipeline", () => {
       });
       if (!mcpCall) throw new Error("missing mcp enable call: " + JSON.stringify(calls));
       if (mcpCall.cwd !== clientDir) throw new Error("cwd mismatch");
+      console.log("ok");
+    `);
+    assert.match(output, /ok/);
+  });
+
+  it("claude harness skips mcp enable and invokes validation after audit [REQ-TIED_CLAUDE_BOOTSTRAP_OPS] [IMPL-TIED_CLAUDE_BOOTSTRAP_OPS]", () => {
+    const output = runBootstrapModuleEval(`
+      import { runNewTiedClientPipeline } from "./tools/bootstrap/lib/new-tied-client-pipeline.mjs";
+      import path from "node:path";
+      import os from "node:os";
+      const calls = [];
+      let validationInvoked = false;
+      const mockSpawn = (cmd, args, options) => {
+        calls.push({ cmd, args: [...args], cwd: options.cwd });
+        return { status: 0 };
+      };
+      const clientDir = path.join(os.tmpdir(), "tied-claude-pipeline-order");
+      const sourceRoot = ${JSON.stringify(repoRoot)};
+      const result = runNewTiedClientPipeline({
+        clientDir,
+        sourceRoot,
+        harnessProfile: "claude",
+        skipGit: true,
+        skipLint: true,
+        skipOnboardingAudit: true,
+        claudeValidation: { withAgentstreamDryRun: false },
+        runClaudeClientValidationFn: () => {
+          validationInvoked = true;
+          return { ok: true, checks: [], reportPath: path.join(clientDir, "working", "tied-claude-client-validation.v1.json") };
+        },
+        spawn: mockSpawn,
+      });
+      if (!result.ok) throw new Error("pipeline failed: " + JSON.stringify(result));
+      if (!validationInvoked) throw new Error("expected claude validation hook");
+      const mcpCall = calls.find((c) => {
+        const joined = [c.cmd, ...c.args].join(" ");
+        return joined.includes("mcp") && joined.includes("enable");
+      });
+      if (mcpCall) throw new Error("mcp enable must be skipped for claude harness");
       console.log("ok");
     `);
     assert.match(output, /ok/);

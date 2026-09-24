@@ -1,4 +1,6 @@
-# Claude Code × TIED — multi-harness plan
+# Claude Code × TIED — multi-harness comparison
+
+**Document role:** Comparison and **closure record** for the Claude multi-harness program—not an executable backlog. For maintenance traceability, use [`working/REQ-TIED_CLAUDE_DOC_REMAINDER/PLAN.md`](../../working/REQ-TIED_CLAUDE_DOC_REMAINDER/PLAN.md).
 
 **Audience:** TIED maintainers, client leads, and anyone porting TIED workflows from Cursor to Claude Code (or running both).
 
@@ -9,6 +11,8 @@
 **Status:** Sponsor-approved **full program** (Phases 0→3, decision log below). **`REQ-TIED_CLAUDE_HARNESS`**, **`REQ-TIED_CLAUDE_LIVE_DRIVER`**, **`REQ-TIED_CLAUDE_BOOTSTRAP_OPS`**, and optional **`REQ-TIED_CLAUDE_SKILLS_REROOT`** are **Implemented** and closed. Remainder slices **R1–R8** (doc + hygiene) closed **2026-09-24** — see **What remains**. Sections labeled **Current** are evidence-backed against this repository; **Proposed** applies only to genuinely future sponsor scope (new REQ tokens), not shipped bootstrap, agentstream, or closed remainder work. This comparison doc does not hold project TIED YAML.
 
 **Last updated:** 2026-09-24
+
+**Operator entry:** Claude-first disposable client factory — `test-new-claude-tied-client` (bash via `scripts/build-commands.sh`) or `scripts\test-new-claude-tied-client.cmd` (Windows); direct CLI: `node tools/bootstrap/new-tied-client.mjs --disposable --harness claude`; re-validate an existing tree: `node scripts/run-tied-claude-client-validation.mjs` ([`tools/bootstrap/README.md`](../../tools/bootstrap/README.md) § Claude-first disposable client).
 
 ### What remains (2026-09-24) — program closed
 
@@ -37,7 +41,7 @@ Phases **0→3**, follow-on **`REQ-TIED_CLAUDE_BOOTSTRAP_OPS`** / **`REQ-TIED_CL
 | 6 | **Feature orchestration** | **Client-development-index matrix:** REQ work → Prompt Composer; FEAT lifecycle → `feature-orchestrator`; shared TIED YAML MCP / `tied-cli`. |
 | 7 | **Metrics** | **Harness dimension** on MCP usage (e.g. client id suffix or `TIED_MCP_HARNESS=cursor\|claude` in bootstrap templates). |
 
-**Discovery-only (remainder):** Interactive Claude IDE onboarding (skill front matter, MCP auth UX)—see **Open discovery**. Subprocess contract, bootstrap `.mcp.json` merge, Windows copy path, **real CLI stream oracles** (`fixtures/claude/`, CLI **2.1.273**), and optional **`skills/` re-root** (`TIED_SKILLS_REROOT`, [REQ-TIED_CLAUDE_SKILLS_REROOT](../../tied/requirements/REQ-TIED_CLAUDE_SKILLS_REROOT.yaml)) are **evidenced in repo** when explicitly enabled; default remains harness-native `.cursor/skills` and `.claude/skills`.
+**Maintenance-only:** Interactive skill/MCP onboarding is **Current** (2026-09-24, including operator MCP approval)—see **Unresolved (discovery)** for adherence hooks only. Subprocess contract, bootstrap `.mcp.json` merge, Windows copy path, **real CLI stream oracles** (`fixtures/claude/`, CLI **2.1.273**), and optional **`skills/` re-root** (`TIED_SKILLS_REROOT`, [REQ-TIED_CLAUDE_SKILLS_REROOT](../../tied/requirements/REQ-TIED_CLAUDE_SKILLS_REROOT.yaml)) are **Current** in repo when explicitly enabled; default remains harness-native `.cursor/skills` and `.claude/skills`.
 
 ---
 
@@ -59,7 +63,7 @@ Phases **0→3**, follow-on **`REQ-TIED_CLAUDE_BOOTSTRAP_OPS`** / **`REQ-TIED_CL
 | --- | --- |
 | **Current** | Shipped and verified in this repo (see citations). |
 | **Proposed** | Future implementation slice with full TIED tracking. |
-| **Unresolved** | Discovery or naming not yet evidenced—do not treat as shipped (see **Open discovery**). |
+| **Unresolved** | Discovery or naming not yet evidenced—do not treat as shipped (see **Unresolved (discovery)**). |
 
 ---
 
@@ -115,7 +119,7 @@ Replacing this with a generic five-stage PLAN.md pipeline would drop checklist g
 
 Parent **`REQ-TIED_CLAUDE_HARNESS`** delivered Phase 0 pilot, Phase 1 dual bootstrap, Phase 2 **dry-run** `--harness claude`, and Phase 3 client-development-index matrix. Residual work is split explicitly:
 
-| Phase (parent program) | Shipped in parent | Follow-on REQ | Status (2026-09-23) |
+| Phase (parent program) | Shipped in parent | Follow-on REQ | Status (2026-09-24) |
 | --- | --- | --- | --- |
 | 0 — Pilot / contracts | Phase 0 checklists under `working/REQ-TIED_CLAUDE_HARNESS/phase0/` | — | **Closed** with parent |
 | 1 — Dual bootstrap | `.claude/skills/` copy, repo-root `.mcp.json` safe merge, harness metrics | **`REQ-TIED_CLAUDE_BOOTSTRAP_OPS`** B1 Windows asserts + smoke proof | **Closed** — Windows CI green ([run 36031010940](https://github.com/fareedst/tied/actions/runs/36031010940)); `WINDOWS_COPY_PROVEN_IN_CI` **true** in [`constants.mjs`](../../tools/bootstrap/lib/constants.mjs) (symlink still opt-in) |
@@ -257,7 +261,7 @@ Do not assume Claude `.claude/agents/` mirrors TIED-source **prompt-type subagen
 
 **Status:** Phases **0→3** **closed** under **`REQ-TIED_CLAUDE_HARNESS`**; follow-on **`REQ-TIED_CLAUDE_BOOTSTRAP_OPS`**, **`REQ-TIED_CLAUDE_LIVE_DRIVER`**, and remainder **R1–R8** **complete**. Use **What remains (2026-09-24)** for maintenance pointers—not the tables below as a backlog.
 
-**Program (archive):** Phases **0→3** in one **`REQ-TIED_CLAUDE_HARNESS`** arc (sponsor-locked). Each phase ended with **go/no-go**; acceptance was Tracker slugs + tests.
+**Program (archive):** Phases **0→3** in one **`REQ-TIED_CLAUDE_HARNESS`** arc (sponsor-locked). Each phase ended with **go/no-go** (historical only—program is closed); acceptance was Tracker slugs + tests.
 
 ### Phase 0 — Interactive pilot (closed)
 
@@ -265,7 +269,7 @@ Do not assume Claude `.claude/agents/` mirrors TIED-source **prompt-type subagen
 | --- | --- |
 | **Deliverables** | Pilot notes under `working/REQ-TIED_CLAUDE_HARNESS/`; gap list (skill discovery, MCP auth, tool semantics, session behavior); **TIED base path** checklist ([`tied/vocab/tied-yaml-mcp.md`](../../tied/vocab/tied-yaml-mcp.md)) |
 | **Acceptance** | One checklist-driven REQ slice exercised in Claude via **temporary** skill copy + documented MCP/`tied-cli` setup; contracts for Phase 1 bootstrap and Phase 2 fixtures written down; **no** canonical `tools/bootstrap/` or agentstream code changes |
-| **Decision point** | Go to Phase 1 only when skill + MCP + CLI discovery gaps are documented (remaining unknowns are fixture work, not program scope) |
+| **Decision point** | *(Historical.)* Go to Phase 1 only when skill + MCP + CLI discovery gaps are documented |
 
 Do **not** claim **`tied agentstream`** Claude automation from the pilot.
 
@@ -275,7 +279,7 @@ Do **not** claim **`tied agentstream`** Claude automation from the pilot.
 | --- | --- |
 | **Deliverables** | Copy install to `.claude/skills/`; repo-root `.mcp.json` create-if-absent + **safe merge** for `tied-yaml`; harness metrics env; RED bootstrap contract tests; optional minimal `CLAUDE.md` template (this doc) if ARCH approves ownership |
 | **Acceptance** | Fresh temp client: **Current** `.cursor/skills/` + create-only `.cursor/mcp.json` behavior unchanged; Claude paths added without clobbering existing MCP servers; Windows copy path covered in CI; **`TIED_MCP_HARNESS`** (or equivalent) present in generated config |
-| **Decision point** | Go to Phase 2 when bootstrap tests green and Phase 0 contract notes are reflected in IMPL pseudo-code |
+| **Decision point** | *(Historical.)* Go to Phase 2 when bootstrap tests green and Phase 0 contract notes are reflected in IMPL pseudo-code |
 | **Explicit non-goal** | No **`tied agentstream`** subprocess/harness changes |
 
 ### Phase 2 — Agentstream Claude profile (closed — live in LIVE_DRIVER)
@@ -284,7 +288,7 @@ Do **not** claim **`tied agentstream`** Claude automation from the pilot.
 | --- | --- |
 | **Deliverables** | `AgentDriver` boundary (or equivalent), **`--harness claude`**, README contract (CLI version pin, permissions, MCP load, stream limits), driver unit + composition fixtures |
 | **Acceptance** | `npm test` green in `mcp-server/packages/agentstream`; dry-run unchanged; live checklist + session chain + Tracker receipt tests on **Claude fixtures** (not `--agent-path` alone) |
-| **Decision point** | Enable operator live Claude checklist runs only when subprocess/stream/session/MCP/Tracker contracts pass fixtures; otherwise stay dry-run / Cursor live |
+| **Decision point** | *(Historical.)* Enable operator live Claude checklist runs only when fixture contracts pass; operator path documented in agentstream README |
 
 ### Phase 3 — Ergonomics and index (closed)
 
@@ -292,14 +296,16 @@ Do **not** claim **`tied agentstream`** Claude automation from the pilot.
 | --- | --- |
 | **Deliverables** | **Client-development-index REQ vs FEAT matrix** (REQ work → Prompt Composer; FEAT lifecycle → **`feature-orchestrator`**; shared **TIED YAML MCP** / **`tied-cli`**); optional repo-root `skills/` re-root; DAE-style Step-0 for interactive sessions if it adds value ([`dae-mechanisms-for-tied-improvement.md`](dae-mechanisms-for-tied-improvement.md)); Claude adherence hook bridge **N/A** until stable upstream hook points ([R8 receipt](../../working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/r8-adherence-hook-bridge-na.md)) |
 | **Acceptance** | Matrix published in [`tied/docs/client-development-index.md`](../../tied/docs/client-development-index.md); Phase 3 slices marked complete or explicitly deferred in Authoritative Tracker with sponsor note |
-| **Decision point** | Program close-out when Phases 0–2 acceptance met and Phase 3 matrix (+ any deferred slices) recorded |
+| **Decision point** | *(Historical.)* Program close-out when Phases 0–2 acceptance met and Phase 3 matrix recorded — **met 2026-09-24** |
 
-### Cross-phase exit gates (when project YAML or code touched)
+### Cross-phase exit gates (historical — not an active checklist)
 
-- `tied_validate_consistency` passes on touched **`REQ-TIED_CLAUDE_HARNESS`** project YAML.
+These gates applied while the program was open. For **new** sponsor scope, use **`plan-new-feature`** and the Authoritative Tracker—not this list.
+
+- `tied_validate_consistency` on touched Claude REQ project YAML.
 - Bootstrap integration tests: Cursor create-if-absent preserved; Claude copy + `.mcp.json` safe merge + harness metrics covered.
-- Agentstream test suite green; Claude **live** mode additionally requires Phase 2 driver fixtures.
-- Phase 3: client-development-index matrix updated when that slice closes (may trail Phase 2 code).
+- Agentstream test suite green; Claude **live** mode additionally requires LIVE_DRIVER fixtures.
+- Client-development-index matrix updated when Phase 3 closed (done).
 
 ---
 
@@ -319,16 +325,27 @@ The parent program opened with **`plan-new-feature`** as **`REQ-TIED_CLAUDE_HARN
 
 Do **not** create new REQ/ARCH/IMPL YAML from this comparison doc without **`plan-new-feature`** and **`tied_config_get_base_path`** confirmation.
 
+### Interactive onboarding (Current — 2026-09-24)
+
+| Evidence | What it proves |
+| --- | --- |
+| [`interactive-claude-onboarding-2026-09-24.md`](../../working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/interactive-claude-onboarding-2026-09-24.md) | Prompt Composer slash skills + stdio MCP on bootstrapped client (Claude Code **2.1.273**) |
+| [`interactive-claude-mcp-approved-stdout.txt`](../../working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/interactive-claude-mcp-approved-stdout.txt) | Operator approval → **`tied-yaml` ✔ Connected**; default-session MCP tool use |
+| [`operator-claude-factory-validation-attestation-2026-09-24.md`](../../working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/operator-claude-factory-validation-attestation-2026-09-24.md) | Sponsor: **`test-new-claude-tied-client`** + **`--with-claude-code-interactive-smoke`** validation green |
+| [`operator-live-claude-agentstream-2026-09-24.md`](../../working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/operator-live-claude-agentstream-2026-09-24.md) | Live **`--harness claude`** one-turn with **`AGENTSTREAM_CLAUDE_LIVE_OK=1`** (operator gate finalized) |
+
+Runbook: [`operator-interactive-claude-ide-r6.md`](../../working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/operator-interactive-claude-ide-r6.md). Re-smoke: bootstrap README § validation flags.
+
 ---
 
 ## TIED stack boundary (for implementers)
 
 This document is **comparison-only**—no project REQ/ARCH/IMPL detail files here. Implementation of **`REQ-TIED_CLAUDE_HARNESS`** follows [`tied/docs/agent-req-implementation-checklist.yaml`](../../tied/docs/agent-req-implementation-checklist.yaml): Authoritative Tracker copy, CITDP persistence, `tied_checklist_gate_validate` at `pre_implementation`, IMPL pseudo-code + validation before RED tests, composition tests for MCP/subprocess bindings, verification gate + close-out.
 
-| Concern | Current owner | Remainder (if any) |
+| Concern | Current owner | Maintenance notes |
 | --- | --- | --- |
 | Interactive taxonomy | `tools/bundled-prompt-type-skills/` → `.cursor/skills/` + `.claude/skills/` | Optional repo-root **`skills/`** when **`TIED_SKILLS_REROOT=1`** ([**R3**](../../tied/requirements/REQ-TIED_CLAUDE_SKILLS_REROOT.yaml)) |
-| TIED data access | **TIED YAML MCP** + **`tied-cli`** | ~~Interactive Claude MCP UX (R6)~~ ✅ runbook; IDE auth UX still human-only |
+| TIED data access | **TIED YAML MCP** + **`tied-cli`** | Interactive Claude onboarding **Current** — [`interactive-claude-onboarding-2026-09-24.md`](../../working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/interactive-claude-onboarding-2026-09-24.md) |
 | Feature orchestration | **`feature-orchestrator`** / `tied/features/` | Matrix shipped in [`client-development-index.md`](../../tied/docs/client-development-index.md) |
 | Checklist driver | `@tied/agentstream` — **`--harness claude`** + fixtures | ~~Operator live smoke (R5)~~ ✅; ~~real CLI oracles (R7)~~ ✅ **2.1.273**; ~~Claude adherence hook bridge (R8)~~ ✅ **N/A** (Cursor `.cursor/hooks` only) |
 | Agent subprocess | Cursor `agent` (default live) + Claude **AgentDriver** | — |
@@ -349,16 +366,16 @@ This document is **comparison-only**—no project REQ/ARCH/IMPL detail files her
 
 ---
 
-## Open discovery (remainder only)
+## Unresolved (discovery)
 
-Sponsor program decisions are in the log above. **Resolved in repo (no longer open):** Claude subprocess/stream contract for automation (frozen **`fixtures/claude/`** + LIVE_DRIVER), bootstrap **`.mcp.json` safe merge** (RED tests), Windows copy path (`WINDOWS_COPY_PROVEN_IN_CI`), REQ family tokens (**`REQ-TIED_CLAUDE_HARNESS`**, **`REQ-TIED_CLAUDE_BOOTSTRAP_OPS`**, **`REQ-TIED_CLAUDE_LIVE_DRIVER`**).
+Per **Proposal status vocabulary**, items here are **Unresolved**—not **Current** and not **Proposed** implementation backlog.
 
-| Item | Blocks | Notes |
+**Sponsor policy (2026-09-24):** **Watch-only** for the row below—**no new REQ** until upstream Claude Code exposes a stable project hook contract; re-probe periodically and document in bootstrap ops evidence (**RISK-BOOT-005**). Skill install stays **copy-default** (Unix symlinks remain optional, Deferred—no program work).
+
+| Item | Status | Notes |
 | --- | --- | --- |
-| Interactive Claude skill/MCP onboarding | R6 optional pilot | Copied leaf `SKILL.md` + **`prompt-shared`** refs—verify in real Claude Code session if gaps appear |
-| ~~Real CLI capture vs synthetic oracles~~ | **R7 complete (2026-09-24)** | Frozen NDJSON under **`fixtures/claude/`**; pin **2.1.273** |
-| ~~**`skills/` re-root**~~ | **R3 complete (2026-09-24)** | Optional **`TIED_SKILLS_REROOT=1`**; default harness-native paths — [`skills-reroot.mjs`](../../tools/bootstrap/lib/skills-reroot.mjs) |
-| ~~Child REQ LEAP / Tracker dual-write~~ | **R4 complete (2026-09-24)** | Dual close-out + traceable commit |
-| ~~Claude adherence hook bridge~~ | **R8 N/A (2026-09-24)** | No **`.claude/hooks`** contract in bootstrap; **RISK-BOOT-005** — new REQ when upstream stabilizes |
+| Future Claude adherence hook bridge | **Unresolved (watch-only)** | R8 closed **N/A**; Cursor **`.cursor/hooks`** only today. On Claude: manual **`tied agentstream adherence-reconcile`** + Tracker discipline. Open **`plan-new-feature`** only after hook contract is evidenced—not by default. |
 
-Interactive Claude onboarding and contract-gated checklist automation remain distinct paths: **`build-plan`** vs **`tied agentstream`**. Automated **adherence ledger** on Claude remains **out of scope** until a future hook-bridge REQ (R8 closed **N/A**).
+**Moved to Current (not listed here):** Interactive skill/MCP onboarding (§ **Interactive onboarding** above); Claude subprocess/stream oracles (**`fixtures/claude/`**, LIVE_DRIVER); bootstrap **`.mcp.json` safe merge**; Windows copy proof; REQ family tokens; remainder slices R1–R8.
+
+**build-plan** vs **`tied agentstream`** remain distinct operating modes ([§ Operating modes](#operating-modes-do-not-conflate)).

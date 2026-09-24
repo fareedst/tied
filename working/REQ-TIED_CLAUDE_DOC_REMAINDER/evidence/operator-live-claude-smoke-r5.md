@@ -88,8 +88,8 @@ TIED_AGENTSTREAM_IMPL=ts node mcp-server/packages/agentstream/dist/index.js \
 | `npm test` in `mcp-server/packages/agentstream` | Yes | **Pass** (52/52) | Log: [`agentstream-npm-test-r5-stdout.txt`](./agentstream-npm-test-r5-stdout.txt) |
 | Dry-run `--harness claude -d` one-turn | Yes | **Pass** (exit 0) | Rendered `claude --print --output-format stream-json ...` |
 | Live without `AGENTSTREAM_CLAUDE_LIVE_OK=1` | Yes | **Blocked** (exit 1) | Expected operator gate — no subprocess |
-| Live with `AGENTSTREAM_CLAUDE_LIVE_OK=1` one-turn | Attempted | **Blocked** (exit 1) | **Claude Code CLI not on PATH** in agent sandbox; human operator must re-run step 3 locally |
-| Full checklist live run | No | **Deferred** | Out of R5 minimal scope; R6 covers interactive IDE |
+| Live with `AGENTSTREAM_CLAUDE_LIVE_OK=1` one-turn | Yes (2026-09-24 operator) | **Pass** (exit 0) | [`operator-live-claude-agentstream-2026-09-24.md`](./operator-live-claude-agentstream-2026-09-24.md) — direct dist + `tied agentstream` CLI |
+| Full checklist live run | No | **Deferred** | Out of R5 minimal scope; one-turn live suffices to finalize LIVE_DRIVER operator gate |
 
 ## R5 completion rationale
 

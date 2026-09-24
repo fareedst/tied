@@ -1,0 +1,135 @@
+copy_hygiene: Working process id only — not a TIED REQ token. execution_evidence.request = REQ-TIED_CLAUDE_CLIENT_FACTORY.
+description: Minimal tracker for Claude-first client factory close-out.
+record_identity:
+  change_request_id: REQ-TIED_CLAUDE_CLIENT_FACTORY
+  title: Claude-first disposable client factory
+  recorded_at: '2026-09-24'
+  gate_policy: advisory
+  profile_depth: minimal
+  citdp_path: working/REQ-TIED_CLAUDE_CLIENT_FACTORY/citdp-inline.yaml
+  req_token: REQ-TIED_CLAUDE_CLIENT_FACTORY
+risk_snapshot:
+  depth_tier: minimal
+  gate_policy: advisory
+  profile_depth: minimal
+steps:
+  - slug: sub-adversarial-inquiry-pass
+    disposition: not_applicable
+    policy: minimal-depth-no-inquiry
+    rationale: Minimal depth factory slice; no integrated inquiry run.
+    evidence_refs:
+      - working/REQ-TIED_CLAUDE_CLIENT_FACTORY/evidence/sub-adversarial-inquiry-pass-na.md
+    tracking:
+      status: not_applicable
+      evidence_refs:
+        - working/REQ-TIED_CLAUDE_CLIENT_FACTORY/evidence/sub-adversarial-inquiry-pass-na.md
+  - slug: session-bootstrap
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_CLAUDE_CLIENT_FACTORY/evidence/session-bootstrap-evidence.md
+    tracking:
+      status: completed
+      evidence_refs:
+        - working/REQ-TIED_CLAUDE_CLIENT_FACTORY/evidence/session-bootstrap-evidence.md
+  - slug: translate-sponsor-intent
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_CLAUDE_CLIENT_FACTORY/evidence/translate-sponsor-intent-evidence.md
+    tracking:
+      status: completed
+      evidence_refs:
+        - working/REQ-TIED_CLAUDE_CLIENT_FACTORY/evidence/translate-sponsor-intent-evidence.md
+  - slug: change-definition
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_CLAUDE_CLIENT_FACTORY/citdp-inline.yaml
+    tracking:
+      status: completed
+      evidence_refs:
+        - working/REQ-TIED_CLAUDE_CLIENT_FACTORY/citdp-inline.yaml
+  - slug: impact-discovery
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_CLAUDE_CLIENT_FACTORY/evidence/impact-discovery-evidence.md
+    tracking:
+      status: completed
+      evidence_refs:
+        - working/REQ-TIED_CLAUDE_CLIENT_FACTORY/evidence/impact-discovery-evidence.md
+  - slug: test-strategy
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_CLAUDE_CLIENT_FACTORY/evidence/test-strategy-evidence.md
+    tracking:
+      status: completed
+      evidence_refs:
+        - working/REQ-TIED_CLAUDE_CLIENT_FACTORY/evidence/test-strategy-evidence.md
+  - slug: unit-test-green
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_CLAUDE_CLIENT_FACTORY/evidence/claude-client-validation-test-stdout.txt
+    tracking:
+      status: completed
+      evidence_refs:
+        - working/REQ-TIED_CLAUDE_CLIENT_FACTORY/evidence/claude-client-validation-test-stdout.txt
+  - slug: composition-integration
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_CLAUDE_CLIENT_FACTORY/evidence/new-tied-client-e2e-stdout.txt
+    tracking:
+      status: completed
+      evidence_refs:
+        - working/REQ-TIED_CLAUDE_CLIENT_FACTORY/evidence/new-tied-client-e2e-stdout.txt
+  - slug: verification-gate
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_CLAUDE_CLIENT_FACTORY/evidence/verification-evidence-manifest.v1.json
+    tracking:
+      status: completed
+      evidence_refs:
+        - working/REQ-TIED_CLAUDE_CLIENT_FACTORY/evidence/verification-evidence-manifest.v1.json
+  - slug: sync-tied-stack
+    disposition: completed
+    rationale: IMPL-TIED_CLAUDE_BOOTSTRAP_OPS LEAP blocks; tied_validate_consistency ok
+    evidence_refs:
+      - tied/implementation-decisions/IMPL-TIED_CLAUDE_BOOTSTRAP_OPS-pseudocode.md
+      - working/REQ-TIED_CLAUDE_CLIENT_FACTORY/evidence/tied-validate-consistency-summary.json
+    tracking:
+      status: completed
+      evidence_refs:
+        - working/REQ-TIED_CLAUDE_CLIENT_FACTORY/evidence/tied-validate-consistency-summary.json
+  - slug: gitignore-close-out-hygiene
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_CLAUDE_CLIENT_FACTORY/evidence/close-out-receipt-2026-09-24.md
+    tracking:
+      status: completed
+      evidence_refs:
+        - working/REQ-TIED_CLAUDE_CLIENT_FACTORY/evidence/close-out-receipt-2026-09-24.md
+  - slug: user-facing-release-notes
+    disposition: completed
+    evidence_refs:
+      - CHANGELOG.md
+    tracking:
+      status: completed
+      evidence_refs:
+        - CHANGELOG.md
+execution_evidence:
+  request: REQ-TIED_CLAUDE_CLIENT_FACTORY
+  envelope_path: working/REQ-TIED_CLAUDE_CLIENT_FACTORY/evidence/request-evidence-envelope.v1.json
+  completed:
+    - session-bootstrap
+    - translate-sponsor-intent
+    - change-definition
+    - impact-discovery
+    - test-strategy
+    - unit-test-green
+    - composition-integration
+    - verification-gate
+    - sync-tied-stack
+    - gitignore-close-out-hygiene
+    - user-facing-release-notes
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: working/REQ-TIED_CLAUDE_CLIENT_FACTORY/checklist-tracker.yaml
