@@ -54,16 +54,16 @@ Expected after B1: steps **1b** and **3b** invoke the same Node assert CLI on `S
 
 ## CI
 
-**Workflow wired (2026-09-24):** `.github/workflows/windows-bootstrap-smoke.yml` — `windows-latest`, `npm ci` + `npm run build` in `mcp-server/`, then `scripts\windows-bootstrap-smoke.cmd`.
+**Workflow:** `.github/workflows/windows-bootstrap-smoke.yml` — `windows-latest`, Bun + `mcp-server` build, `tools/bootstrap` `npm ci`, then `scripts\windows-bootstrap-smoke.cmd`.
 
-**First green run (pending):** After push, dispatch or wait for PR CI, then record:
+**First green run (2026-09-24):**
 
 | Field | Value |
 | --- | --- |
-| Run URL | _(fill from GitHub Actions)_ |
-| Date | _(UTC)_ |
-| Commit | _(SHA)_ |
-| Assert path | Steps 1b + 3b → `assert-windows-bootstrap-claude.mjs` |
+| Run URL | https://github.com/fareedst/tied/actions/runs/36031010940 |
+| Date | 2026-09-24T16:58:04Z (workflow_dispatch) |
+| Commit | `1b57f68` (includes bootstrap `npm ci` + Bun setup fixes) |
+| Assert path | Smoke steps 1b + 3b → `assert-windows-bootstrap-claude.mjs` |
 
 Trigger locally on maintainer machine:
 
@@ -74,4 +74,4 @@ gh run watch
 
 ## `windows_copy_proven_in_ci`
 
-**Deferred — not flipped.** `WINDOWS_COPY_PROVEN_IN_CI` in `tools/bootstrap/lib/constants.mjs` remains **false** until the workflow above is **green on a Windows runner**. Darwin unit tests + simulated `copy-files.mjs` assert are supporting evidence only, not flag authorization (CITDP proof boundary, RISK-BOOT-001).
+**Flipped (2026-09-24)** after green run **36031010940**. `WINDOWS_COPY_PROVEN_IN_CI` in `tools/bootstrap/lib/constants.mjs` is **true**; Unix symlink opt-in still requires explicit `symlink_unix_opt_in` (copy-default unchanged).

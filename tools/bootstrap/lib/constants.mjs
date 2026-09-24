@@ -15,7 +15,7 @@ export const TIED_REPO_ROOT = path.resolve(BOOTSTRAP_ROOT, "../..");
  * Unix symlink opt-in for `.claude/skills/` requires this true (GATE_SYMLINK_ON_WINDOWS_PROOF).
  * Set true only after green `.github/workflows/windows-bootstrap-smoke.yml` on windows-latest.
  */
-export const WINDOWS_COPY_PROVEN_IN_CI = false;
+export const WINDOWS_COPY_PROVEN_IN_CI = true;
 
 let _manifest = null;
 
