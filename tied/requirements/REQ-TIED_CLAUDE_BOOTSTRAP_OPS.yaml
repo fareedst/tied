@@ -1,0 +1,53 @@
+REQ-TIED_CLAUDE_BOOTSTRAP_OPS:
+  category: "Tooling"
+  description: "Close parent REQ-TIED_CLAUDE_HARNESS Phase 1 Windows acceptance and Phase 3 optional ergonomics: Windows CI/smoke asserts for .claude/skills/ managed inventory and repo-root .mcp.json with tied-yaml; unlock installClaudeSkills symlink opt-in only after windows_copy_proven_in_ci; optional skills/ re-root behind ARCH + flag + dual-harness/Windows tests; adherence hook spike or not_applicable receipt; refresh docs/comparisons/claude-code-tied-multi-harness-plan.md Current section and Post-Phases 0-3 table pointing to REQ A and B."
+  metadata:
+    created:
+      author: "plan-new-feature"
+      date: "2026-09-23"
+    last_updated:
+      author: "plan-new-feature"
+      date: "2026-09-23"
+      reason: "Initial bootstrap-ops stack from refined follow-on plan"
+  name: "Claude bootstrap ops (Windows CI, symlink, skills re-root)"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Comparison doc matches closed parent + follow-on A/B ownership"
+      - "Evidence-backed bootstrap policies for both harnesses"
+      - "Hard gate: no symlink or skills re-root merge before Windows copy proof"
+    problems_solved:
+      - "Comparison plan Current/Status misleads operators about shipped Phases 0-3"
+      - "Symlink opt-in and optional skills/ re-root lack evidence-backed gates"
+      - "windows-bootstrap-smoke.cmd omits .claude/skills/ and repo-root .mcp.json asserts"
+      - "windows_copy_proven_in_ci cannot flip without CI proof"
+    why: "Parent closed with Unix/unit proof for Claude copy+merge but Windows smoke does not assert Claude artifacts; symlink remains hard-blocked; comparison doc Current section is stale (claims no Claude .mcp.json)."
+  related_requirements:
+    depends_on:
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-TIED_CLAUDE_HARNESS"
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-TIED_CLAUDE_HARNESS"
+      - "REQ-TIED_CLAUDE_LIVE_DRIVER"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Adherence hook spike either documents a stable Claude bridge API or records not_applicable receipt with residual risk; never silent pass."
+      id: "SC-BOOT-B4-ADHERENCE"
+    - criterion: "docs/comparisons/claude-code-tied-multi-harness-plan.md Current section reflects dual bootstrap + dry-run harness; stale No Claude .mcp.json claim removed; Post-Phases 0-3 table points to REQ-TIED_CLAUDE_LIVE_DRIVER and this REQ; Status reframes closed parent + A/B follow-ons."
+      id: "SC-BOOT-B5-COMPARISON-DOC"
+    - criterion: "installClaudeSkills symlink_unix_opt_in succeeds only when windows_copy_proven_in_ci is true; throws SYMLINK_WITHOUT_CI_WINDOWS_PROOF when false; covered by claude-harness.test.mjs RED/GREEN."
+      id: "SC-BOOT-B2-SYMLINK"
+    - criterion: "No merge enables symlink opt-in or skills/ re-root before windows_copy_proven_in_ci is proven by B1 Windows smoke/CI evidence."
+      id: "SC-BOOT-HARD-GATE"
+    - criterion: "Optional skills/ re-root ships only behind ARCH decision + bootstrap flag default-off, with Cursor and Claude install paths and Windows asserts; Tracker may defer slice explicitly."
+      id: "SC-BOOT-B3-SKILLS-REROOT"
+    - criterion: "scripts/windows-bootstrap-smoke.cmd (and CI job if present) asserts .claude/skills/ managed inventory and repo-root .mcp.json containing tied-yaml after bootstrap; proof note under working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/."
+      id: "SC-BOOT-B1-WINDOWS"
+  status: "Draft"
+  traceability:
+    architecture:
+      - "ARCH-TIED_CLAUDE_BOOTSTRAP_OPS"
+    implementation:
+      - "IMPL-TIED_CLAUDE_BOOTSTRAP_OPS"
+    tests: []

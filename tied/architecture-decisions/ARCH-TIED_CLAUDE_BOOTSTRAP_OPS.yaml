@@ -1,0 +1,67 @@
+ARCH-TIED_CLAUDE_BOOTSTRAP_OPS:
+  alternatives_considered:
+    - cons:
+        - "False activation claim"
+      name: "Claim adherence hooks without spike"
+      pros:
+        - "Faster close-out"
+      rejected_reason: "Spike or not_applicable with residual risk (RISK-BOOT-005)."
+    - cons:
+        - "Breaks existing Cursor clients"
+      name: "Default-on skills/ re-root"
+      pros:
+        - "Single skills tree"
+      rejected_reason: "Default off; both harnesses + Windows tests required (RISK-BOOT-004)."
+    - cons:
+        - "Violates sponsor hard gate; Windows path unproven"
+      name: "Flip windows_copy_proven_in_ci from Unix unit tests"
+      pros:
+        - "Faster symlink unlock"
+      rejected_reason: "RISK-BOOT-001 — keep SYMLINK_WITHOUT_CI_WINDOWS_PROOF until B1 green."
+  category: "Architecture"
+  decision: "Extend closed dual-harness bootstrap with evidence-gated Windows CI asserts, a hard windows_copy_proven_in_ci gate before symlink opt-in or optional skills/ re-root, an adherence-hook spike with explicit N/A path, and comparison-doc Current refresh owned by this REQ. Cursor .cursor/mcp.json create-only policy remains unchanged; Claude repo-root .mcp.json continues safe-merge. B1 Windows proof is the sequencing gate for B2/B3."
+  implementation_approach:
+    details:
+      - "ASSERT_WINDOWS_BOOTSTRAP_CLAUDE extends windows-bootstrap-smoke.cmd (+ CI if present)."
+      - "CONFIG_SKILLS_REROOT is optional, default-off, dual-harness + Windows."
+      - "GATE_SYMLINK_ON_WINDOWS_PROOF keeps throw when windows_copy_proven_in_ci false."
+      - "REFRESH_COMPARISON_PLAN_DOC is mandatory for B close-out."
+      - "SPIKE_CLAUDE_ADHERENCE_HOOKS yields bridge or not_applicable receipt."
+    summary: "B1-first TDD: RED Windows smoke asserts, GREEN + proof note, then symlink gate tests, then optional re-root behind ARCH flag, adherence spike, comparison-doc refresh at close-out."
+  metadata:
+    created:
+      author: "plan-new-feature"
+      date: "2026-09-23"
+    last_updated:
+      author: "plan-new-feature"
+      date: "2026-09-23"
+      reason: "Initial ARCH for bootstrap-ops follow-on"
+  name: "Claude bootstrap ops architecture"
+  rationale:
+    benefits:
+      - "Clear A/B ownership in comparison Post-Phases table"
+      - "Default-off optional ergonomics"
+      - "Hard sequencing: B1 before B2/B3"
+    problems_solved:
+      - "Risk of flipping windows_copy_proven_in_ci from Unix unit evidence alone"
+      - "skills/ re-root could break Cursor clients without dual-harness tests"
+      - "Stale comparison doc misleads operators about shipped vs deferred work"
+    why: "Parent left Windows Claude asserts, symlink unlock, optional skills re-root, adherence spike, and comparison-doc Current refresh as residual Phase 1/3 work that must not bypass Windows proof."
+  related_decisions:
+    depends_on:
+      - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
+      - "ARCH-TIED_CLAUDE_HARNESS"
+    see_also:
+      - "ARCH-TIED_CLAUDE_LIVE_DRIVER"
+      - "IMPL-TIED_CLAUDE_HARNESS"
+      - "REQ-TIED_CLAUDE_LIVE_DRIVER"
+    supersedes: []
+  status: "Draft"
+  traceability:
+    architecture:
+      - "ARCH-TIED_CLAUDE_BOOTSTRAP_OPS"
+    implementation:
+      - "IMPL-TIED_CLAUDE_BOOTSTRAP_OPS"
+    requirements:
+      - "REQ-TIED_CLAUDE_BOOTSTRAP_OPS"

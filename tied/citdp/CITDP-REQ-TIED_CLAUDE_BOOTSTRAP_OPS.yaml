@@ -1,0 +1,211 @@
+CITDP-REQ-TIED_CLAUDE_BOOTSTRAP_OPS:
+  change_definition:
+    current_behavior: "Parent REQ-TIED_CLAUDE_HARNESS closed Phases 0-3: Unix/unit tests prove Claude .claude/skills/ copy and repo-root .mcp.json safe-merge; scripts/windows-bootstrap-smoke.cmd does not assert those Claude artifacts; installClaudeSkills throws SYMLINK_WITHOUT_CI_WINDOWS_PROOF when symlink_unix_opt_in without windows_copy_proven_in_ci; optional skills/ re-root and adherence hooks not shipped; comparison plan Current still claims no Claude .mcp.json (~L95) and Status names single Proposed vehicle."
+    desired_behavior: "Windows CI/smoke proves Claude skills + .mcp.json; symlink opt-in only after windows_copy_proven_in_ci flip; optional skills/ re-root behind ARCH + default-off flag + dual-harness/Windows tests; adherence spike with bridge or not_applicable receipt; comparison doc Current/Post-Phases/Status match closed parent + REQ A/B."
+    non_goals:
+      - "AgentDriver / live stream fixtures (REQ-TIED_CLAUDE_LIVE_DRIVER)"
+      - "Changing Cursor .cursor/mcp.json create-only policy"
+      - "Merging symlink or skills/ re-root before windows_copy_proven_in_ci proven"
+      - "Mode B adversarial inquiry TypeScript path fix"
+    success_criteria:
+      - "B1 Windows smoke/CI green with Claude asserts before B2/B3"
+      - "Comparison doc Current accurate; stale L95 claim gone; Post-Phases points to A and B"
+      - "Hard gate held: no symlink/skills re-root merge without Windows proof"
+      - "Symlink false→throw / true→allowed covered by tests"
+  completion_criteria:
+    activation:
+      phase: "pre_implementation"
+      request_token: "REQ-TIED_CLAUDE_BOOTSTRAP_OPS"
+      run_id: "bootstrap-ops-plan-stack-2026-09-23"
+    checklist_gate:
+      dispositions:
+        - "completed"
+        - "not_applicable"
+        - "pending"
+        - "waived"
+      fail_closed: true
+      phases:
+        - "close_out"
+        - "pre_implementation"
+        - "verification"
+    verification_gate_notes: "Plan-new-feature opens stack only; RED/code deferred to build-plan. Implement B1 Windows asserts first."
+  evidence:
+    commands:
+      - "node --test tools/bootstrap/lib/claude-harness.test.mjs"
+      - "pseudocode_validate for IMPL-TIED_CLAUDE_BOOTSTRAP_OPS"
+      - "scripts/windows-bootstrap-smoke.cmd (after B1 asserts)"
+      - "tied_checklist_gate_validate phase=pre_implementation"
+      - "tied_validate_consistency"
+    manifest_reference: "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/"
+    proof_boundaries:
+      - "Adherence spike may be not_applicable with residual risk"
+      - "Live AgentDriver owned by REQ-TIED_CLAUDE_LIVE_DRIVER"
+      - "No symlink or skills/ re-root merge before that flip"
+      - "windows_copy_proven_in_ci flips only from B1 Windows smoke/CI evidence, never Unix unit-only"
+  impact_analysis:
+    architecture:
+      - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
+      - "ARCH-TIED_CLAUDE_BOOTSTRAP_OPS"
+      - "ARCH-TIED_CLAUDE_HARNESS"
+    impl_inventory:
+      - "IMPL-TIED_CLAUDE_BOOTSTRAP_OPS"
+    implementation_decisions:
+      - "IMPL-TIED_CLAUDE_BOOTSTRAP_OPS"
+      - "IMPL-TIED_CLAUDE_HARNESS"
+      - "IMPL-TIED_FILES"
+    modules_or_boundaries: "scripts/windows-bootstrap-smoke.cmd; tools/bootstrap/lib/skills.mjs (installClaudeSkills); tools/bootstrap/lib/claude-harness.test.mjs; optional bootstrap flag for skills/ re-root; docs/comparisons/claude-code-tied-multi-harness-plan.md; CI Windows job if present"
+    requirements:
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-TIED_CLAUDE_BOOTSTRAP_OPS"
+      - "REQ-TIED_CLAUDE_HARNESS"
+      - "REQ-TIED_CLAUDE_LIVE_DRIVER"
+      - "REQ-TIED_SETUP"
+    tied_tokens_affected:
+      - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
+      - "IMPL-TIED_CLAUDE_HARNESS"
+      - "REQ-TIED_CLAUDE_HARNESS"
+    tied_tokens_new:
+      - "ARCH-TIED_CLAUDE_BOOTSTRAP_OPS"
+      - "IMPL-TIED_CLAUDE_BOOTSTRAP_OPS"
+      - "REQ-TIED_CLAUDE_BOOTSTRAP_OPS"
+  leap_feedback:
+    divergences_from_analysis: null
+    parent_phase13_deferrals: "Phase 1 Windows Claude asserts and Phase 3 optional ergonomics (symlink unlock, skills/ re-root, adherence, comparison Current) owned by this REQ; do not silently rewrite closed parent Tracker. Live AgentDriver remains REQ-TIED_CLAUDE_LIVE_DRIVER."
+    record_status: "plan_stack_open"
+    tied_stack_updates_required: []
+  migration_phases:
+    - acceptance: "Assert expectations documented before RED on windows-bootstrap-smoke.cmd"
+      deliverables:
+        - "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/phase0/pilot_mcp_skill_load.md"
+        - "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/phase0/windows_smoke_assert_list.md"
+      name: "Pilot checklist and smoke assert list"
+      phase: 0
+    - acceptance: "Doc Current accurate; optional slices deferred or green"
+      deliverables:
+        - "CONFIG_SKILLS_REROOT (deferrable)"
+        - "REFRESH_COMPARISON_PLAN_DOC (mandatory for close-out)"
+        - "SPIKE_CLAUDE_ADHERENCE_HOOKS (deferrable)"
+      name: "B3–B5 optional and docs"
+      phase: 3
+    - acceptance: "Windows smoke green with .claude/skills/ + .mcp.json asserts — hard gate for B2/B3"
+      deliverables:
+        - "ASSERT_WINDOWS_BOOTSTRAP_CLAUDE"
+        - "CI job wiring if present"
+        - "evidence proof note"
+      name: "B1 Windows CI/smoke Claude asserts"
+      phase: 1
+    - acceptance: "windows_copy_proven_in_ci only after B1; throw retained when false"
+      deliverables:
+        - "claude-harness.test.mjs false→throw / true→symlink"
+        - "GATE_SYMLINK_ON_WINDOWS_PROOF"
+      name: "B2 Symlink opt-in unlock"
+      phase: 2
+  record_identity:
+    change_request_id: "REQ-TIED_CLAUDE_BOOTSTRAP_OPS"
+    gate_policy: "advisory"
+    profile_depth: "integrated"
+    recorded_at: "2026-09-23"
+    title: "Claude bootstrap ops (Windows CI, symlink, skills re-root)"
+  risk_analysis:
+    abuse_cases:
+      - "Documenting adherence as shipped without spike receipt"
+      - "Flipping windows_copy_proven_in_ci from local macOS unit green"
+      - "Shipping skills/ re-root as default"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Claiming adherence hooks without API or N/A receipt"
+        - "Documenting symlink as default install path"
+        - "Flipping windows_copy_proven_in_ci from unit-test-only evidence"
+        - "Leaving comparison doc Current claiming no Claude .mcp.json"
+        - "Merging skills/ re-root before Windows proof"
+      depth_change_waiver:
+        approval: "sponsor-advisory-2026-09-23-bootstrap-ops"
+        expiry: "2026-12-31"
+        owner: "REQ-TIED_CLAUDE_BOOTSTRAP_OPS program sponsor"
+        rationale: "tied_adversarial_inquiry_run Mode B accepts Ruby/Go paths only; bootstrap/Windows/Node smoke work remains out of Mode B TS scope. Counterexamples stay in CITDP; do not silent-minimal without waiver."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Comparison plan ~L95 still stale at plan-new-feature"
+        - "Mode B TS inquiry gap unchanged from parent/REQ A"
+        - "windows-bootstrap-smoke.cmd currently omits Claude asserts"
+      eligibility_triggers_matched:
+        - "ci_artifact_claims"
+        - "persistence"
+      evidence_references:
+        - "docs/comparisons/claude-code-tied-multi-harness-plan.md"
+        - "tied/implementation-decisions/IMPL-TIED_CLAUDE_BOOTSTRAP_OPS-pseudocode.md"
+        - "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/sub-adversarial-inquiry-pass-na.md"
+        - "working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/PLAN.md"
+      falsification_questions:
+        - "Can symlink opt-in succeed when windows_copy_proven_in_ci is false?"
+        - "Does comparison doc still claim No Claude .mcp.json after B5?"
+        - "Does Windows smoke fail today without Claude asserts (RED expected)?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: "integrated"
+      rationale: "Integrated depth required by eligibility; Mode B TS inquiry gap forces documented depth_change_waiver at plan gate while retaining counterexamples."
+      research_profile: "planning-only"
+    eligibility_note: "Triggers: persistence (client filesystem), ci_artifact_claims"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "scripts/windows-bootstrap-smoke.cmd; node --test tools/bootstrap/lib/claude-harness.test.mjs"
+        evidence_method: "Windows smoke asserts + claude-harness unit tests + doc checklist"
+        limitation: "Full Windows CI may be remote; capture proof note under evidence/"
+        owner: "AI Agent"
+        rationale: "Matches hard gate and parent residual"
+        result: "pending"
+        risk: "Windows Claude path unproven or premature symlink"
+        threshold: "B1 green before B2/B3; symlink throw when flag false"
+        waiver:
+          expiry: "~"
+          owner: "~"
+          reason: "~"
+          required: "false"
+    quality_profiles:
+      - "baseline-functional"
+    residual_risk:
+      expiry: "2026-12-31"
+      owner: "REQ-TIED_CLAUDE_BOOTSTRAP_OPS program sponsor"
+      summary: "Mode B integrated inquiry activation deferred for TS/Node bootstrap paths; optional B3/B4 may remain deferred at close-out with Tracker notes."
+    risks:
+      - description: "Adherence claim without API"
+        id: "RISK-BOOT-005"
+        likelihood: "Medium"
+        mitigation: "Spike → bridge or not_applicable with residual risk"
+      - description: "Foreign .mcp.json clobber"
+        id: "RISK-BOOT-002"
+        likelihood: "Medium"
+        mitigation: "Existing Claude MCP safe-merge tests remain green; Cursor create-only unchanged"
+      - description: "skills/ re-root breaks Cursor clients"
+        id: "RISK-BOOT-004"
+        likelihood: "Medium"
+        mitigation: "Both harnesses + Windows tests; default off; explicit Tracker defer OK"
+      - description: "Stale comparison doc misleads operators"
+        id: "RISK-BOOT-003"
+        likelihood: "High"
+        mitigation: "B5 mandatory for B close-out; fix L95-class claim"
+      - description: "Symlink without Windows proof"
+        id: "RISK-BOOT-001"
+        likelihood: "High"
+        mitigation: "Keep hard throw; B1 before B2; never flip flag from Unix unit-only"
+    scenarios:
+      - expected: "Asserts fail on current script; pass after B1"
+        name: "Windows smoke RED then GREEN"
+      - expected: "Current + Post-Phases match A/B ownership"
+        name: "Doc refresh"
+      - expected: "false throws; true allows Unix symlink opt-in"
+        name: "Symlink gate"
+  tdd_sequence:
+    phases:
+      - name: "B1 RED/GREEN"
+        sequence: "RED windows-bootstrap-smoke.cmd Claude asserts; GREEN asserts + evidence proof note; wire CI if present."
+      - name: "B2 RED/GREEN"
+        sequence: "After B1 proof: RED/GREEN GATE_SYMLINK_ON_WINDOWS_PROOF in claude-harness.test.mjs (false→throw, true→symlink on Unix)."
+      - name: "B3–B5"
+        sequence: "Optional CONFIG_SKILLS_REROOT; SPIKE_CLAUDE_ADHERENCE_HOOKS; mandatory REFRESH_COMPARISON_PLAN_DOC for close-out."
+      - name: "Phase 0 discovery"
+        sequence: "Document pilot MCP/skill load checklist and Windows smoke assert list — no production bootstrap edits required for Phase 0 exit."

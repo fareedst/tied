@@ -1,0 +1,38 @@
+IMPL-TIED_CLAUDE_BOOTSTRAP_OPS:
+  category: "Implementation"
+  code_locations:
+    files:
+      - description: "Current section refresh and Post-Phases 0-3 A/B table"
+        path: "docs/comparisons/claude-code-tied-multi-harness-plan.md"
+      - description: "installClaudeSkills symlink gate and optional skills/ re-root"
+        path: "tools/bootstrap/lib/skills.mjs"
+      - description: "Symlink gate and Claude harness bootstrap unit tests"
+        path: "tools/bootstrap/lib/claude-harness.test.mjs"
+      - description: "Windows smoke asserts for .claude/skills/ and repo-root .mcp.json"
+        path: "scripts/windows-bootstrap-smoke.cmd"
+    functions:
+      - "ASSERT_WINDOWS_BOOTSTRAP_CLAUDE"
+      - "CONFIG_SKILLS_REROOT"
+      - "GATE_SYMLINK_ON_WINDOWS_PROOF"
+      - "installClaudeSkills"
+      - "REFRESH_COMPARISON_PLAN_DOC"
+      - "SPIKE_CLAUDE_ADHERENCE_HOOKS"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_CLAUDE_BOOTSTRAP_OPS-pseudocode.md"
+  metadata:
+    created:
+      author: "plan-new-feature"
+      date: "2026-09-23"
+    last_updated:
+      author: "plan-new-feature"
+      date: "2026-09-23"
+      reason: "Confirm sidecar linkage after plan-new-feature"
+  name: "Claude bootstrap ops implementation"
+  status: "Draft"
+  traceability:
+    architecture:
+      - "ARCH-TIED_CLAUDE_BOOTSTRAP_OPS"
+    implementation:
+      - "IMPL-TIED_CLAUDE_BOOTSTRAP_OPS"
+    requirements:
+      - "REQ-TIED_CLAUDE_BOOTSTRAP_OPS"
+    tests: []
