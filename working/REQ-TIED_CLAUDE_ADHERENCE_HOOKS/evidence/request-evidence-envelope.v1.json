@@ -1,0 +1,135 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-09-24T22:27:01.496Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-TIED_CLAUDE_ADHERENCE_HOOKS",
+    "project_id": "af8451e933f573ec",
+    "depth_tier": "minimal",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [],
+  "artifacts": [
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "tied/citdp/CITDP-REQ-TIED_CLAUDE_ADHERENCE_HOOKS.yaml",
+      "content_hash": "sha256:69512ebc83a45d52f5bdb67c66b0ab80ba1296fa2670ccc301ffe76d74f02c88",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    },
+    {
+      "kind": "not_applicable_receipt",
+      "schema_version": "not-applicable-receipt.v1",
+      "path": "working/REQ-TIED_CLAUDE_ADHERENCE_HOOKS/evidence/not-applicable-receipt.v1.json",
+      "content_hash": "sha256:5b4e8715b738b55d6fc0c1037436e013079f93fec5f49f779da3e69efc5cbe9a",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "working/REQ-TIED_CLAUDE_ADHERENCE_HOOKS/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:6dd30be844792207c98b517d9fae0f0a9b037042ebe420cf2eacba584c80fe23",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_ADHERENCE_HOOKS/evidence/bootstrap-tests-stdout.txt",
+      "content_hash": "sha256:54f17f89d56da7b63da1aabddafe22167dfd1af12136b6d2c4e8cdbcd1f74ad5",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_ADHERENCE_HOOKS/evidence/close-out-gates-final.json",
+      "content_hash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_ADHERENCE_HOOKS/evidence/close-out-gates-stdout.json",
+      "content_hash": "sha256:a82338ec4c872d4da4761f0c30b66db8519685b272dbfa442c81f2ed4021da70",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_ADHERENCE_HOOKS/evidence/close-out-receipt-2026-09-24.md",
+      "content_hash": "sha256:ba48e5034d8870f0eb6a88b0e5133ad48293c04f1c108b56aec8ee97077da481",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_ADHERENCE_HOOKS/evidence/contract-probe-2026-09-24.md",
+      "content_hash": "sha256:249084c5f96d988df2741bbd939af11cb5288cd5255007161ca9791e994f253f",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_ADHERENCE_HOOKS/evidence/hook-tests-stdout.txt",
+      "content_hash": "sha256:e8e108ac2f6d63670cbe77131604148a9f500878893542ccb321958057d4fbb3",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLAUDE_ADHERENCE_HOOKS/evidence/sub-adversarial-inquiry-pass-na.md",
+      "content_hash": "sha256:15a53b09afd400fd279d843263f283468ae9e690dfc441492b80632c5d97dc27",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": null,
+    "tracker_hash": null,
+    "citdp_path": null,
+    "evidence_chain_profile_path": null
+  },
+  "gaps": []
+}

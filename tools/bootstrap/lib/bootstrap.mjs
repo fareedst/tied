@@ -34,6 +34,7 @@ import {
 } from "./verify.mjs";
 import { copySidecarTemplate } from "./sidecar-template.mjs";
 import { installClaudeMdTemplate } from "./claude-md.mjs";
+import { mergeClaudeAdherenceHooks } from "./claude-adherence-hooks.mjs";
 
 function resolveTemplateFile(templatesDir, scriptDir, filename) {
   const fromTemplates = path.join(templatesDir, filename);
@@ -115,6 +116,8 @@ export function bootstrapTied(projectRoot, options = {}) {
     windows_copy_proven_in_ci: WINDOWS_COPY_PROVEN_IN_CI,
   });
   initializeClaudeMcpConfig(projectRoot, TIED_REPO_ROOT, { env, harnessLabel: "claude" });
+  // [IMPL-TIED_CLAUDE_ADHERENCE_HOOKS] [ARCH-TIED_CLAUDE_ADHERENCE_HOOKS] [REQ-TIED_CLAUDE_ADHERENCE_HOOKS]
+  mergeClaudeAdherenceHooks(projectRoot, TIED_REPO_ROOT);
   installClaudeMdTemplate(projectRoot, TIED_REPO_ROOT);
 
   writeClientVocabHandoffs(path.join(tiedDir, "vocab"));

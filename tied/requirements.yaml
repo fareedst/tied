@@ -1928,6 +1928,21 @@ REQ-TIED_CLAIMS_EVIDENCE_REVIEW:
       method: "Composition tests"
     - coverage: "Schema, freeze boundary, classification, ledger append-only semantics."
       method: "Unit tests"
+REQ-TIED_CLAUDE_ADHERENCE_HOOKS:
+  category: "Tooling"
+  description: "Claude PostToolUse hook bridge to action_attempted ledger when active-turn marker present."
+  detail_file: "requirements/REQ-TIED_CLAUDE_ADHERENCE_HOOKS.yaml"
+  name: "Claude Code adherence hook bridge"
+  priority: "P1"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_CLAUDE_ADHERENCE_HOOKS"
+    implementation:
+      - "IMPL-TIED_CLAUDE_ADHERENCE_HOOKS"
+    tests:
+      - "mcp-server/src/hooks/claude-adherence-normalize.test.ts"
+      - "tools/bootstrap/lib/claude-adherence-hooks.test.mjs"
 REQ-TIED_CLAUDE_BOOTSTRAP_OPS:
   category: "Tooling"
   cross_references:

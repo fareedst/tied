@@ -150,6 +150,8 @@ working/**/evidence/request-evidence-envelope.v1.json
 !working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/request-evidence-envelope.v1.json
 !working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/verification-evidence-manifest.v1.json
 !working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/not-applicable-receipt.v1.json
+!working/REQ-TIED_CLAUDE_ADHERENCE_HOOKS/evidence/request-evidence-envelope.v1.json
+!working/REQ-TIED_CLAUDE_ADHERENCE_HOOKS/evidence/not-applicable-receipt.v1.json
 working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/r7-raw/
 # CITDP pre-persist scratch (canonical record under tied/citdp/)
 working/**/CITDP-REQ-*-diff-or-stage.yaml

@@ -1,0 +1,9 @@
+{
+  "session_id": "fixture-session-read",
+  "cwd": "/tmp/tied-claude-hook-fixture",
+  "hook_event_name": "PostToolUse",
+  "tool_name": "Read",
+  "tool_input": {
+    "file_path": "/tmp/example.txt"
+  }
+}

@@ -1942,6 +1942,21 @@ IMPL-TIED_CLAIMS_EVIDENCE_REVIEW:
       - "Static-only pilot via build_claims_evidence_from_tied"
     decision: "Pure modules with append-only ledger; MCP tool as primary operator surface."
   status: "Active"
+IMPL-TIED_CLAUDE_ADHERENCE_HOOKS:
+  category: "Implementation"
+  detail_file: "implementation-decisions/IMPL-TIED_CLAUDE_ADHERENCE_HOOKS.yaml"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_CLAUDE_ADHERENCE_HOOKS-pseudocode.md"
+  name: "Claude adherence hook bridge implementation"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_CLAUDE_ADHERENCE_HOOKS"
+    requirements:
+      - "REQ-TIED_CLAUDE_ADHERENCE_HOOKS"
+    tests:
+      - "mcp-server/src/hooks/claude-adherence-bridge.test.ts"
+      - "mcp-server/src/hooks/claude-adherence-normalize.test.ts"
+      - "tools/bootstrap/lib/claude-adherence-hooks.test.mjs"
 IMPL-TIED_CLAUDE_BOOTSTRAP_OPS:
   category: "Implementation"
   cross_references:

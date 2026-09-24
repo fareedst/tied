@@ -1,0 +1,21 @@
+▶ adherence append action attempted TS bridge [REQ-TIED_UNIFIED_TOOLCHAIN]
+  ✔ appends when marker present (3.451459ms)
+  ✔ uses claude_hook source kind when adherence_source is claude_hook (1.226583ms)
+  ✔ silent when marker absent (0.975667ms)
+✔ adherence append action attempted TS bridge [REQ-TIED_UNIFIED_TOOLCHAIN] (6.194458ms)
+▶ claude adherence bridge composition [REQ-TIED_CLAUDE_ADHERENCE_HOOKS]
+  ✔ appends action_attempted from PostToolUse stdin when marker present (3.664917ms)
+✔ claude adherence bridge composition [REQ-TIED_CLAUDE_ADHERENCE_HOOKS] (4.130958ms)
+▶ normalizeClaudeHookStdin [REQ-TIED_CLAUDE_ADHERENCE_HOOKS]
+  ✔ maps Bash PostToolUse to afterShellExecution (1.274125ms)
+  ✔ maps generic tool to postToolUse (0.258958ms)
+  ✔ maps mcp__ tool to afterMCPExecution (0.218333ms)
+✔ normalizeClaudeHookStdin [REQ-TIED_CLAUDE_ADHERENCE_HOOKS] (2.247291ms)
+ℹ tests 7
+ℹ suites 3
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 70.712959

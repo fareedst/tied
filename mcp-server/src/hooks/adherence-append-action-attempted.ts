@@ -128,7 +128,10 @@ function buildRow(
     correlation,
     evidence_refs: refs,
     hook_log_ref: { path: hookLogPath, line: hookLogLine },
-    source: { kind: "cursor_hook", hook_event: hook },
+    source: {
+      kind: record["adherence_source"] === "claude_hook" ? "claude_hook" : "cursor_hook",
+      hook_event: hook,
+    },
   };
 }
 

@@ -41,6 +41,16 @@ scripts\new-tied-client C:\path\to\client-dir
 
 Skip flags: `--skip-lint`, `--skip-mcp-enable`, `--skip-git`, `--force-mcp-enable`.
 
+## Claude adherence hook bridge ([REQ-TIED_CLAUDE_ADHERENCE_HOOKS])
+
+On **`bootstrapTied`**, when the MCP server is built:
+
+- Writes `.claude/hooks/tied-adherence-bridge.sh` (calls `mcp-server/dist/cli/claude-adherence-bridge.js`).
+- **Safe-merges** a `PostToolUse` handler into `.claude/settings.json` (foreign hooks preserved; idempotent re-run).
+- Appends **`action_attempted`** ledger rows only when an **active-turn marker** exists (same contract as Cursor `log.rb` bridge).
+
+Hook log pointer: `.claude/adherence-bridge.log`. CLI pin for fixtures: Claude Code **2.1.273** (see `mcp-server/fixtures/claude/hooks/`).
+
 ## Claude-first disposable client ([REQ-TIED_CLAUDE_BOOTSTRAP_OPS])
 
 Node-only factory (bash/cmd are thin delegates). Does **not** run `cursor` / `agent mcp enable`; runs post–G4 **`runClaudeClientValidation`** and writes `working/tied-claude-client-validation.v1.json`.

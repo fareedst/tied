@@ -1,0 +1,14 @@
+IMPL-TIED_CLAUDE_ADHERENCE_HOOKS:
+  code_locations:
+    files:
+      - description: "Bootstrap wire"
+        path: "tools/bootstrap/lib/bootstrap.mjs"
+      - description: "Hook CLI entry"
+        path: "mcp-server/src/cli/claude-adherence-bridge.ts"
+      - description: "INSTALL_CLAUDE_ADHERENCE_BRIDGE"
+        path: "mcp-server/src/hooks/claude-adherence-bridge.ts"
+      - description: "MERGE_CLAUDE_ADHERENCE_HOOKS"
+        path: "tools/bootstrap/lib/claude-adherence-hooks.mjs"
+      - description: "NORMALIZE_CLAUDE_HOOK_RECORD"
+        path: "mcp-server/src/hooks/claude-adherence-normalize.ts"
+    functions: []

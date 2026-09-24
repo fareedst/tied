@@ -690,6 +690,15 @@ ARCH-TIED_CLAIMS_EVIDENCE_REVIEW:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_CLAUDE_ADHERENCE_HOOKS:
+  category: "Architecture"
+  cross_references:
+    - "IMPL-TIED_CLAUDE_ADHERENCE_HOOKS"
+    - "REQ-TIED_CLAUDE_ADHERENCE_HOOKS"
+  description: "Safe-merge Claude settings.json PostToolUse bridge architecture."
+  detail_file: "architecture-decisions/ARCH-TIED_CLAUDE_ADHERENCE_HOOKS.yaml"
+  name: "Claude adherence hook bridge architecture"
+  source_index: "architecture-decisions.yaml"
 ARCH-TIED_CLAUDE_BOOTSTRAP_OPS:
   category: "Architecture"
   cross_references:
@@ -1734,6 +1743,15 @@ IMPL-TIED_CLAIMS_EVIDENCE_REVIEW:
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
+IMPL-TIED_CLAUDE_ADHERENCE_HOOKS:
+  category: "Implementation"
+  cross_references:
+    - "ARCH-TIED_CLAUDE_ADHERENCE_HOOKS"
+    - "REQ-TIED_CLAUDE_ADHERENCE_HOOKS"
+  description: "claude-adherence-normalize, bridge CLI, bootstrap mergeClaudeAdherenceHooks."
+  detail_file: "implementation-decisions/IMPL-TIED_CLAUDE_ADHERENCE_HOOKS.yaml"
+  name: "Claude adherence hook bridge implementation"
+  source_index: "implementation-decisions.yaml"
 IMPL-TIED_CLAUDE_BOOTSTRAP_OPS:
   category: "Implementation"
   cross_references:
@@ -2968,6 +2986,16 @@ REQ-TIED_CLAIMS_EVIDENCE_REVIEW:
   source_index: "requirements.yaml"
   status: "Active"
   type: "REQ"
+REQ-TIED_CLAUDE_ADHERENCE_HOOKS:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-TIED_CLAUDE_ADHERENCE_HOOKS"
+    - "IMPL-TIED_CLAUDE_ADHERENCE_HOOKS"
+    - "REQ-TIED_CLAUDE_BOOTSTRAP_OPS"
+  description: "Claude PostToolUse adherence append-only bridge; mitigates RISK-BOOT-005."
+  detail_file: "requirements/REQ-TIED_CLAUDE_ADHERENCE_HOOKS.yaml"
+  name: "Claude adherence hook bridge"
+  source_index: "requirements.yaml"
 REQ-TIED_CLAUDE_BOOTSTRAP_OPS:
   category: "Tooling"
   cross_references:

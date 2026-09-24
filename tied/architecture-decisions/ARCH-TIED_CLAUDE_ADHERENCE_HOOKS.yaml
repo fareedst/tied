@@ -1,0 +1,15 @@
+ARCH-TIED_CLAUDE_ADHERENCE_HOOKS:
+  decision: "Claude Code hooks install via safe-merge into .claude/settings.json PostToolUse; bridge normalizes stdin to existing adherence-append module; marker-gated ledger only."
+  rationale:
+    benefits:
+      - "Dual-harness adherence bridge"
+      - "Foreign settings preserved"
+    problems_solved:
+      - "Claude sessions outside ledger when agentstream marker active"
+    why: "Mitigate RISK-BOOT-005 without Cursor transcript parity."
+  related_decisions:
+    depends_on:
+      - "ARCH-TIED_CLAUDE_BOOTSTRAP_OPS"
+      - "ARCH-TIED_UNIFIED_TOOLCHAIN"
+    see_also:
+      - "IMPL-TIED_CLAUDE_BOOTSTRAP_OPS"

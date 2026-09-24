@@ -1,0 +1,9 @@
+{
+  "session_id": "fixture-session-mcp",
+  "cwd": "/tmp/tied-claude-hook-fixture",
+  "hook_event_name": "PostToolUse",
+  "tool_name": "mcp__tied-yaml__yaml_index_read",
+  "tool_input": {
+    "index": "requirements"
+  }
+}

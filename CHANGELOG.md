@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Claude adherence hook bridge ([REQ-TIED_CLAUDE_ADHERENCE_HOOKS])** — Bootstrap safe-merge of
+  `.claude/settings.json` `PostToolUse` → `claude-adherence-bridge.js`; normalizer + fixtures;
+  **`action_attempted`** ledger when **active-turn marker** present; mitigates **RISK-BOOT-005**
+  (marker-gated; not full interactive IDE adherence). **`7`** hook unit/composition tests + **`3`**
+  bootstrap merge tests; **`20/20`** `claude-harness.test.mjs`.
+
 - **Claude-first disposable client factory** — `test-new-claude-tied-client` /
   `new-claude-tied-client` / `validate-claude-tied-client` (Node-first; skips Cursor
   `mcp enable` when `--harness claude`); `runClaudeClientValidation` and

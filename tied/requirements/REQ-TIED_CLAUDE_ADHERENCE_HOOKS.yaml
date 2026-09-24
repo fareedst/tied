@@ -1,0 +1,20 @@
+REQ-TIED_CLAUDE_ADHERENCE_HOOKS:
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-TIED_CLAUDE_BOOTSTRAP_OPS"
+      - "REQ-TIED_NEW_CLIENT_ADHERENCE"
+    related_to:
+      - "REQ-TIED_CLAUDE_HARNESS"
+      - "REQ-TIED_UNIFIED_TOOLCHAIN"
+  satisfaction_criteria:
+    - criterion: "Bridge tests green; source.kind claude_hook."
+      id: "SC-ADH-ADAPTER"
+    - criterion: "Contract probe with fixtures and evidence."
+      id: "SC-ADH-PROBE"
+    - criterion: "Doc LEAP for comparison R8 and bootstrap README."
+      id: "SC-ADH-DOC"
+    - criterion: "Settings merge idempotent; foreign hooks preserved."
+      id: "SC-ADH-BOOTSTRAP"
+    - criterion: "tied_validate_consistency clean."
+      id: "SC-ADH-VALIDATE"

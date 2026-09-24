@@ -1,0 +1,9 @@
+{
+  "session_id": "fixture-session-bash",
+  "cwd": "/tmp/tied-claude-hook-fixture",
+  "hook_event_name": "PostToolUse",
+  "tool_name": "Bash",
+  "tool_input": {
+    "command": "npm test --silent"
+  }
+}

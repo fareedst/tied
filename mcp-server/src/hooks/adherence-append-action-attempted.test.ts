@@ -66,6 +66,25 @@ describe("adherence append action attempted TS bridge [REQ-TIED_UNIFIED_TOOLCHAI
     assert.ok(!JSON.stringify(row).includes("tool_input"));
   });
 
+  it("uses claude_hook source kind when adherence_source is claude_hook", () => {
+    callAdherenceAppendActionAttempted(
+      {
+        hook_event_name: "postToolUse",
+        workspace_roots: [workspace],
+        adherence_source: "claude_hook",
+        normalized: {
+          details: {
+            tool_name: "Read",
+          },
+        },
+      },
+      { hookLogPath: "/proj/.claude/adherence-bridge.log", hookLogLine: 2 },
+    );
+    const row = JSON.parse(fs.readFileSync(ledger, "utf8").trim()) as Record<string, unknown>;
+    const source = row["source"] as Record<string, unknown>;
+    assert.equal(source["kind"], "claude_hook");
+  });
+
   it("silent when marker absent", () => {
     fs.rmSync(markerPath);
     callAdherenceAppendActionAttempted(

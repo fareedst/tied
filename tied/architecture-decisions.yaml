@@ -1707,6 +1707,16 @@ ARCH-TIED_CLAIMS_EVIDENCE_REVIEW:
       - "No shared finding-ledger with adversarial-inquiry"
     decision: "Dedicated claim-review artifact family under working scope; read-only consumer of evidence manifests."
   status: "Active"
+ARCH-TIED_CLAUDE_ADHERENCE_HOOKS:
+  category: "Architecture"
+  detail_file: "architecture-decisions/ARCH-TIED_CLAUDE_ADHERENCE_HOOKS.yaml"
+  name: "Claude adherence hook bridge architecture"
+  status: "Active"
+  traceability:
+    implementation:
+      - "IMPL-TIED_CLAUDE_ADHERENCE_HOOKS"
+    requirements:
+      - "REQ-TIED_CLAUDE_ADHERENCE_HOOKS"
 ARCH-TIED_CLAUDE_BOOTSTRAP_OPS:
   category: "Architecture"
   cross_references:

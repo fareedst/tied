@@ -148,6 +148,10 @@ describe("BOOTSTRAP_TIED dual harness binding [REQ-TIED_CLAUDE_HARNESS]", () => 
     const rootMcp = JSON.parse(fs.readFileSync(path.join(clientRoot, ".mcp.json"), "utf8"));
     assert.equal(rootMcp.mcpServers["tied-yaml"].env.TIED_MCP_HARNESS, "claude");
     assert.ok(fs.existsSync(path.join(clientRoot, "CLAUDE.md")));
+    const settingsPath = path.join(clientRoot, ".claude", "settings.json");
+    assert.ok(fs.existsSync(settingsPath));
+    const settings = JSON.parse(fs.readFileSync(settingsPath, "utf8"));
+    assert.ok(Array.isArray(settings.hooks?.PostToolUse));
   });
 });
 

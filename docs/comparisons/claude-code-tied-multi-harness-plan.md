@@ -27,7 +27,7 @@ Phases **0→3**, follow-on **`REQ-TIED_CLAUDE_BOOTSTRAP_OPS`** / **`REQ-TIED_CL
 | ~~**R5 — Operator live Claude checklist**~~ ✅ **complete 2026-09-24** | Human operator (not CI) | [`operator-live-claude-smoke-r5.md`](../../working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/operator-live-claude-smoke-r5.md) · README § Operator live smoke |
 | ~~**R6 — Interactive Claude IDE pilot**~~ ✅ **complete 2026-09-24** | Runbook + automatable preflight; human IDE session optional follow-up | [`operator-interactive-claude-ide-r6.md`](../../working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/operator-interactive-claude-ide-r6.md) · gap list § R6 cross-reference |
 | ~~**R7 — Real CLI stream oracles**~~ ✅ **complete 2026-09-24** | Maintenance on **`REQ-TIED_CLAUDE_LIVE_DRIVER`** | [`r7-cli-oracle-capture-receipt.md`](../../working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/r7-cli-oracle-capture-receipt.md) · CLI **2.1.273** |
-| ~~**R8 — Claude adherence hooks**~~ ✅ **N/A 2026-09-24** | Closed **N/A** (bootstrap ops B4) | [`r8-adherence-hook-bridge-na.md`](../../working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/r8-adherence-hook-bridge-na.md) · **RISK-BOOT-005** |
+| ~~**R8 — Claude adherence hooks**~~ ✅ **bridged 2026-09-24** | [`REQ-TIED_CLAUDE_ADHERENCE_HOOKS`](../../tied/requirements/REQ-TIED_CLAUDE_ADHERENCE_HOOKS.yaml) | PostToolUse → `claude-adherence-bridge.js`; bootstrap `.claude/settings.json` merge; **RISK-BOOT-005** mitigated (marker-gated) · prior N/A: [`r8-adherence-hook-bridge-na.md`](../../working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/r8-adherence-hook-bridge-na.md) |
 
 ### Sponsor decision log (2026-09-23)
 
@@ -41,7 +41,7 @@ Phases **0→3**, follow-on **`REQ-TIED_CLAUDE_BOOTSTRAP_OPS`** / **`REQ-TIED_CL
 | 6 | **Feature orchestration** | **Client-development-index matrix:** REQ work → Prompt Composer; FEAT lifecycle → `feature-orchestrator`; shared TIED YAML MCP / `tied-cli`. |
 | 7 | **Metrics** | **Harness dimension** on MCP usage (e.g. client id suffix or `TIED_MCP_HARNESS=cursor\|claude` in bootstrap templates). |
 
-**Maintenance-only:** Interactive skill/MCP onboarding is **Current** (2026-09-24, including operator MCP approval)—see **Unresolved (discovery)** for adherence hooks only. Subprocess contract, bootstrap `.mcp.json` merge, Windows copy path, **real CLI stream oracles** (`fixtures/claude/`, CLI **2.1.273**), and optional **`skills/` re-root** (`TIED_SKILLS_REROOT`, [REQ-TIED_CLAUDE_SKILLS_REROOT](../../tied/requirements/REQ-TIED_CLAUDE_SKILLS_REROOT.yaml)) are **Current** in repo when explicitly enabled; default remains harness-native `.cursor/skills` and `.claude/skills`.
+**Maintenance-only:** Interactive skill/MCP onboarding and **Claude adherence append-only bridge** are **Current** (2026-09-24)—marker-gated `action_attempted` via [REQ-TIED_CLAUDE_ADHERENCE_HOOKS](../../tied/requirements/REQ-TIED_CLAUDE_ADHERENCE_HOOKS.yaml); not full IDE adherence without **active-turn marker**. Subprocess contract, bootstrap `.mcp.json` merge, Windows copy path, **real CLI stream oracles** (`fixtures/claude/`, CLI **2.1.273**), and optional **`skills/` re-root** (`TIED_SKILLS_REROOT`, [REQ-TIED_CLAUDE_SKILLS_REROOT](../../tied/requirements/REQ-TIED_CLAUDE_SKILLS_REROOT.yaml)) are **Current** in repo when explicitly enabled; default remains harness-native `.cursor/skills` and `.claude/skills`.
 
 ---
 

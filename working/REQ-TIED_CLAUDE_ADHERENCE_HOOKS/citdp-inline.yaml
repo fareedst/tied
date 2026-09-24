@@ -1,0 +1,71 @@
+CITDP-REQ-TIED_CLAUDE_ADHERENCE_HOOKS:
+  record_identity:
+    change_request_id: REQ-TIED_CLAUDE_ADHERENCE_HOOKS
+    title: Claude Code adherence append-only bridge (RISK-BOOT-005)
+    recorded_at: "2026-09-24"
+    gate_policy: advisory
+    profile_depth: integrated
+  change_definition:
+    current_behavior: >-
+      Claude bootstrap installs .claude/skills and repo-root .mcp.json only; adherence ledger action_attempted
+      bridge is Cursor-only (.cursor/hooks.json + log.rb). R8/B4 closed not_applicable with RISK-BOOT-005 watch-only.
+    desired_behavior: >-
+      Claude PostToolUse hook invokes claude-adherence-bridge CLI; bootstrap safe-merges .claude/settings.json
+      hook handler; append-only ledger rows when active-turn marker present; docs LEAP marks bridge Current.
+    non_goals:
+      - Cursor transcript YAML parity on Claude
+      - Ledger rows without active-turn marker
+      - Reopening REQ-TIED_CLAUDE_BOOTSTRAP_OPS SC-BOOT-B4 satisfaction text
+  risk_analysis:
+    depth_tier: integrated
+    gate_policy: advisory
+    profile_depth: integrated
+    adversarial_inquiry:
+      depth_tier: integrated
+      assurance_profile: baseline-functional
+      gate_policy: advisory
+      sub_adversarial_inquiry_pass: required_at_pre_red_and_verification
+      counterexamples:
+        - Bootstrap merge overwrites operator PostToolUse hooks
+        - Doc claims full IDE adherence without marker
+        - Normalizer maps Bash to wrong evidence ref shape
+      disconfirming_observations:
+        - A0 cannot capture PostToolUse stdin under pinned CLI
+        - Marker present but zero ledger rows in A4 composition
+      falsification_questions:
+        - Does second bootstrap run leave foreign hooks byte-identical?
+        - Does bridge exit 0 when marker absent (fail-silent)?
+      evidence_references:
+        - working/REQ-TIED_CLAUDE_ADHERENCE_HOOKS/evidence/contract-probe-2026-09-24.md
+        - mcp-server/fixtures/claude/hooks/
+        - tools/bootstrap/lib/claude-adherence-hooks.test.mjs
+    risks:
+      - id: RISK-BOOT-005
+        description: Adherence claim without working Claude bridge
+        likelihood: Medium
+        mitigation: A0-A4 tests plus SC-ADH-DOC evidence
+      - id: RISK-ADH-CL-001
+        description: Foreign .claude/settings.json clobber
+        likelihood: Medium
+        mitigation: Merge-only TIED hook entries; idempotent bootstrap tests
+      - id: RISK-ADH-CL-002
+        description: Hook stdin schema drift vs pinned CLI
+        likelihood: Medium
+        mitigation: Fixtures + CLI pin in A0 evidence
+      - id: RISK-ADH-CL-003
+        description: False full-interactive adherence marketing
+        likelihood: High
+        mitigation: REQ satisfaction + comparison doc operating modes
+    residual_risks:
+      - Semi-automated Claude Prompt Composer without agentstream remains outside ledger by design
+  test_strategy:
+    summary: >-
+      TDD A0 fixtures → A1 normalizer RED/GREEN → A2 append extension → A3 bootstrap merge → A4 composition;
+      lint_yaml on TIED YAML; tied_validate_consistency at close-out.
+    phases:
+      - name: A0-A1 RED/GREEN
+        sequence: contract-probe evidence; claude-adherence-normalize.test.ts
+      - name: A2-A3 RED/GREEN
+        sequence: adherence-append tests; claude-adherence-hooks.test.mjs; claude-harness assert
+      - name: A4-A5
+        sequence: hooks.composition.test.ts; TIED tokens; LEAP docs; CITDP persist
