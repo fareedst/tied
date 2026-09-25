@@ -79,6 +79,13 @@ working/**/citdp-record-body.json
 working/**/citdp-p*-*.json
 working/**/tied-create-*.json
 working/**/token-create-*.json
+# MCP tied_token_create_with_detail scratch (exclude per program close-out; DAE program tracks create-*.json intentionally)
+working/**/create-arch.json
+working/**/create-impl.json
+working/**/create-req.json
+!working/REQ-TIED_DAE_INCORPORATION/create-arch.json
+!working/REQ-TIED_DAE_INCORPORATION/create-impl.json
+!working/REQ-TIED_DAE_INCORPORATION/create-req.json
 working/**/validate-consistency.json
 working/**/p*-yaml-updates.json
 working/**/adversarial-inquiry-p*-run.json
