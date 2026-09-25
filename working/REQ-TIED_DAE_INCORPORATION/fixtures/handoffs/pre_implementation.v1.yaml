@@ -1,0 +1,10 @@
+# [REQ-TIED_DAE_INCORPORATION] W1c schema v1 sample (additive handoff; envelope unchanged)
+schema_version: 1
+request_token: REQ-TIED_DAE_INCORPORATION
+phase: pre_implementation
+criteria:
+  - id: gate-pre-implementation
+    description: pre_implementation gate allowed with Tracker and CITDP on disk
+    verified_by: mcp_tool
+    evidence:
+      receipt_path: working/REQ-TIED_DAE_INCORPORATION/gates/pre_implementation-example.json

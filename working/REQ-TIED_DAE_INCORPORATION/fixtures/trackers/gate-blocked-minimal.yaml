@@ -1,0 +1,7 @@
+# [REQ-TIED_DAE_INCORPORATION] Fixture: gate composition expects allowed:false → CLI exit 1 (W1a)
+execution_evidence:
+  request: REQ-TIED_DAE_INCORPORATION
+steps:
+  - slug: test-strategy
+    disposition: pending
+    evidence_refs: []

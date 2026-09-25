@@ -1,0 +1,34 @@
+ARCH-TIED_DAE_INCORPORATION:
+  alternatives_considered:
+    - description: "Ship swingerman/engineer as default client path"
+      name: "Fork DAE plugin inside TIED clients"
+      rejected_because: "Conflicts with dual harness + IMPL-as-logic; duplicates gate surface"
+    - description: "Require dae_handoff.py in every client"
+      name: "Python gate scripts in methodology repo"
+      rejected_because: "Unified toolchain is Node; clients stay language-agnostic for product code"
+    - description: "DAE checkpoint YAML only"
+      name: "Replace CITDP with handoffs only"
+      rejected_because: "Breaks LEAP, MCP traceability, and methodology audit"
+  consequences:
+    negative:
+      - "Multi-wave program spans MCP, CLI, docs, and optional heavy verification"
+      - "Some DAE tools (mutation pipeline) remain optional and high effort"
+    positive:
+      - "Clear wave delivery reduces comparison doc drift"
+      - "DAE Step 0 semantics via tied_checklist_gate_validate + CLI ergonomics"
+      - "Single gate surface on Cursor and Claude"
+  context: "TIED centers on MCP-addressable REQ/ARCH/IMPL YAML, IMPL essence_pseudocode sidecars, CITDP, and checklist gates. DAE centers on per-feature stdlib Python scripts with non-zero exits. Incorporation must add DAE-shaped enforcement without replacing the token graph or making Gherkin the sole behavior IR."
+  cross_references:
+    architecture:
+      - "ARCH-TIED_UNIFIED_TOOLCHAIN"
+    implementation:
+      - "IMPL-TIED_DAE_INCORPORATION"
+    requirements:
+      - "REQ-TIED_DAE_INCORPORATION"
+  decision: "Layer DAE patterns onto the existing Authoritative Tracker + TIED YAML MCP stack: (1) centralized Node MCP/CLI gate exits instead of per-repo dae_*.py duplication — Wave 1 locks CLI `tied gate check` composing tied_checklist_gate_validate and `tied next`; (2) additive handoff-shaped phase YAML under working/{REQ}/handoffs/ without replacing request-evidence envelope; (3) optional charter-scoped verification tools (mutation, diff-scoped change-risk report, gauntlet) default-off; (4) CITDP fields for size, gate_profile, autonomy_level, express_lane; (5) docs split—coordinator guide under docs/comparisons/, executable Wave contracts in working/{REQ}/PLAN.md."
+  metadata:
+    last_updated:
+      author: "plan-close-out"
+      date: "2026-09-24"
+  name: "DAE incorporation architecture"
+  status: "Active"

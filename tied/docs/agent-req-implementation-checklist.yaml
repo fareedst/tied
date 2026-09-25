@@ -487,6 +487,7 @@ steps:
       - "Final three-way alignment audit: for every IMPL touched, verify pseudo-code/test/code same token set; document e2e_only blocks and e2e_only_reason."
       - "IF validateStrictEligibility fails THEN take the warn-only branch — never block on a new semantic rule; state which eligibility condition is unmet."
       - "Module validation per [REQ-MODULE_VALIDATION]: confirm each module validated independently; document results."
+      - "Optional diff-scoped change-risk report (charter-off default; upstream DAE CP7 CRAP metric): when CITDP diff_scoped_crap is true and quality_evidence_collect_manifest succeeded, run the report (compose git diff paths + coverage map metadata; threshold from CITDP crap_threshold or .tied-yaml.yaml dae.crap_threshold). Persist under working/{REQ}/evidence/diff-scoped-crap-{timestamp}.json; block when crap_block is true and threshold exceeded."
       - "Rebuild/reload the MCP server and smoke-test live discovery and invocation of tied_adversarial_inquiry_run; source registration alone is not adoption evidence."
       - "Record client YAML styling evidence for final on-disk TIED YAML: styling_status (configured|not_configured), resolved scalar_style and style_source from .tied-yaml.yaml or defaults, and post-style lint_yaml plus tied_validate_consistency results—not pre-style agent output alone."
       - "Responsibility: test/code owner step. Verify implementation fidelity to pseudocode; if new logic is discovered, route back to resolve-pseudocode before accepting."
@@ -598,6 +599,7 @@ steps:
       - "State success criteria (measurable outcomes that determine when the work is done)."
       - "State unchanged behavior (explicit boundaries of what is not affected)."
       - "Touchpoint 1 (prompt intake): express the change definition using canonical domain terms — CALL sub-vocabulary-sync (RESOLVE) to reword fuzzy/synonym wording in current/desired/success-criteria to the preferred terms in ./tied/vocab/*.md; CALL sub-vocabulary-sync (RECORD) for any new concept named here ([PROC-VOCABULARY_INDEX])."
+      - "When authoring CITDP at change-definition, set optional DAE sizing fields: size (XS|S|M|L|XL), gate_profile (front/verify), express_lane (XS only when express_lane_charter allows in CITDP or .tied-yaml.yaml dae.express_lane_charter). Security/billing/auth paths must not default express lane."
     title: "Bound problem, non-goals, and measurable success"
     tracking:
       consideration_before_proceeding: "Change definition documented using canonical vocabulary (fuzzy terms reworded; new concepts recorded); current, desired, unchanged, non-goals, and success criteria stated; no implementation or test artifacts introduced in this step."
@@ -786,6 +788,7 @@ steps:
       - "tied/docs/vocabulary-index-analysis-and-standards.md"
     slug: "traceable-commit"
     tasks:
+      - "Advisory diff-scoped change-risk report at traceable-commit when CITDP diff_scoped_crap is true and crap_block is false: warn in commit body if threshold exceeded (same report path convention as verification-gate); do not block commit on change-risk score alone when crap_block is false."
       - "CALL sub-close-out-evidence-sync before close-out gates: never write execution_evidence.completed without matching step dispositions in the same pass (tracker_dual_write is a process gap)."
       - "Do NOT push unless explicitly asked."
       - "IF the driver emits additional turns for sub-yaml-edit-loop, sub-pseudocode-validation-pass, or sub-leap-micro-cycle after this step, those subs were already invoked via CALL during earlier steps—unless you have new mutations, reply with one-line RETURN; do not repeat full procedures."

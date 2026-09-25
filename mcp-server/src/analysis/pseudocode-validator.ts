@@ -12,6 +12,7 @@ import {
   parseContractFields,
   scanProcedureBlocks,
 } from "./pseudocode-shared.js";
+import { lintPseudocodeLeakage, type LeakageDiagnostic } from "./pseudocode-leakage-lint.js";
 
 export type PseudocodeDiagnostic = {
   severity: "error" | "warning";
@@ -24,7 +25,8 @@ export type PseudocodeDiagnostic = {
     | "MISSING_DATA_TRANSITION"
     | "MISSING_TERMINATION"
     | "UNRESOLVED_SYMBOL"
-    | "MISSING_COVERAGE_REFERENCE";
+    | "MISSING_COVERAGE_REFERENCE"
+    | "HOST_SYNTAX_LEAK";
   message: string;
   line: number;
   block?: string;
@@ -57,6 +59,8 @@ export type PseudocodeValidationInput = {
   require_contracts?: boolean;
   require_behavioral_coverage?: boolean;
   coverage_references?: Record<string, string[]>;
+  leakage_lint?: boolean;
+  gate_mode?: boolean;
 };
 
 export type PseudocodeValidationReport = {
@@ -67,6 +71,7 @@ export type PseudocodeValidationReport = {
   dependencies: PseudocodeDependency[];
   coverage: PseudocodeCoverage[];
   diagnostics: PseudocodeDiagnostic[];
+  leakage?: LeakageDiagnostic[];
 };
 
 const REQUIRED_CONTRACT_FIELDS = ["INPUT", "OUTPUT", "PRE", "POST", "EFFECTS"];
@@ -263,6 +268,21 @@ export function validateEssencePseudocode(
     };
   });
 
+  const leakageEnabled = input.leakage_lint !== false;
+  let leakage: LeakageDiagnostic[] | undefined;
+  if (leakageEnabled) {
+    const leak = lintPseudocodeLeakage(input.pseudocode, { gate_mode: input.gate_mode });
+    leakage = leak.diagnostics;
+    for (const item of leak.diagnostics) {
+      diagnostics.push({
+        severity: item.severity,
+        code: "HOST_SYNTAX_LEAK",
+        message: item.message,
+        line: item.line,
+      });
+    }
+  }
+
   return {
     schema_version: "layer-b-pseudocode-validator.v1",
     ok: diagnostics.every((diagnostic) => diagnostic.severity !== "error"),
@@ -271,5 +291,6 @@ export function validateEssencePseudocode(
     dependencies,
     coverage,
     diagnostics,
+    leakage,
   };
 }

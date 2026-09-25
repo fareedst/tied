@@ -1,0 +1,13 @@
+CITDP-REQ-TIED_DAE_INCORPORATION:
+  record_identity:
+    change_request_id: REQ-TIED_DAE_INCORPORATION
+    gate_policy: advisory
+    phase: planning_refining
+    profile_depth: minimal
+    title: W1 gate-check composition fixture
+  risk_analysis:
+    depth_tier: minimal
+    gate_policy: advisory
+    adversarial_inquiry:
+      depth_tier: minimal
+      sub_adversarial_inquiry_pass: not_applicable

@@ -1988,6 +1988,30 @@ REQ-TIED_CLAUDE_SKILLS_REROOT:
   name: "Optional repo-root skills re-root"
   priority: "P1"
   status: "Implemented"
+REQ-TIED_DAE_INCORPORATION:
+  category: "Methodology"
+  cross_references:
+    - "ARCH-TIED_DAE_INCORPORATION"
+    - "IMPL-TIED_DAE_INCORPORATION"
+    - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "REQ-TIED_CLAUDE_HARNESS"
+    - "REQ-TIED_SETUP"
+    - "REQ-TIED_UNIFIED_TOOLCHAIN"
+  detail_file: "requirements/REQ-TIED_DAE_INCORPORATION.yaml"
+  name: "DAE mechanism incorporation program"
+  priority: "P2"
+  status: "Implemented"
+REQ-TIED_DAE_VERIFICATION_CHARTER:
+  category: "Methodology"
+  cross_references:
+    - "ARCH-TIED_DAE_VERIFICATION_CHARTER"
+    - "IMPL-TIED_DAE_VERIFICATION_CHARTER"
+    - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "REQ-TIED_DAE_INCORPORATION"
+  detail_file: "requirements/REQ-TIED_DAE_VERIFICATION_CHARTER.yaml"
+  name: "DAE verification charter (opt-in)"
+  priority: "P2"
+  status: "Implemented"
 REQ-TIED_FIDELITY_RESEARCH:
   category: "Functional"
   detail_file: "requirements/REQ-TIED_FIDELITY_RESEARCH.yaml"

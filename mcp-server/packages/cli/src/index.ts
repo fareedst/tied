@@ -9,8 +9,12 @@ import {
   agentstreamTsEntryFromCliModule,
   bootstrapCopyFilesEntryFromCliModule,
   bootstrapNewClientEntryFromCliModule,
+  branchCheckCliEntryFromCliModule,
+  gateCheckCliEntryFromCliModule,
+  handoffValidateCliEntryFromCliModule,
   mcpStdioEntryFromCliModule,
   onboardingEntryFromCliModule,
+  tiedNextCliEntryFromCliModule,
   yamlCliEntryFromCliModule,
 } from "./paths.js";
 
@@ -21,6 +25,10 @@ Subcommands:
   mcp         Start the TIED YAML MCP server on stdio (same as mcp-server/dist/index.js)
   bootstrap   Copy TIED templates into a client (default: copy-files; use "new-client" for pipeline)
   yaml        Lint or canonicalize YAML (lint | canonicalize)
+  gate        Checklist gate composition (check — calls tied_checklist_gate_validate)
+  branch      Git branch hygiene vs CITDP/Tracker (check)
+  next        Recommend next checklist slug from Tracker discovery
+  handoff     Validate handoff-shaped phase YAML (validate)
   agentstream Run agentstream pipeline (TS-only; default ts)
   help        Show this message
 
@@ -100,6 +108,41 @@ function main(): void {
   if (subcommand === "agentstream") {
     runAgentstream(rest);
     return;
+  }
+
+  if (subcommand === "gate") {
+    const action = rest[0];
+    if (action === "check") {
+      runNodeEntry(gateCheckCliEntryFromCliModule(import.meta.url), rest.slice(1));
+      return;
+    }
+    printHelp();
+    process.exit(action === undefined ? 1 : 2);
+  }
+
+  if (subcommand === "next") {
+    runNodeEntry(tiedNextCliEntryFromCliModule(import.meta.url), rest);
+    return;
+  }
+
+  if (subcommand === "handoff") {
+    const action = rest[0];
+    if (action === "validate") {
+      runNodeEntry(handoffValidateCliEntryFromCliModule(import.meta.url), rest.slice(1));
+      return;
+    }
+    printHelp();
+    process.exit(action === undefined ? 1 : 2);
+  }
+
+  if (subcommand === "branch") {
+    const action = rest[0];
+    if (action === "check") {
+      runNodeEntry(branchCheckCliEntryFromCliModule(import.meta.url), rest.slice(1));
+      return;
+    }
+    printHelp();
+    process.exit(action === undefined ? 1 : 2);
   }
 
   if (subcommand === undefined) {

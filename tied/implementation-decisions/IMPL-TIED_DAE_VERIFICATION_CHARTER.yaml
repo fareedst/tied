@@ -1,0 +1,23 @@
+IMPL-TIED_DAE_VERIFICATION_CHARTER:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_DAE_VERIFICATION_CHARTER"
+    implementation: []
+    requirements:
+      - "REQ-TIED_DAE_VERIFICATION_CHARTER"
+  description: "Node MCP modules for charter-opt-in mutation cache, disjoint verifier gate extension, and gauntlet runner."
+  implementation_approach:
+    details:
+      - approach: "HARDEN_DISJOINT_VERIFIER_IN_GATE_VALIDATE in checklist-validator.ts"
+        phase: "W4b"
+      - approach: "OPTIONAL_CHARTER_MUTATION_CACHE in mutation-cache.ts"
+        phase: "W4a"
+      - approach: "OPTIONAL_GAUNTLET_BLOCK in gauntlet-runner.ts"
+        phase: "W4c"
+    summary: "TDD per PLAN W4a–c; compose validateChecklistGate; default off."
+  metadata:
+    last_updated:
+      author: "plan-close-out"
+      date: "2026-09-24"
+  name: "DAE verification charter implementation"
+  status: "Active"

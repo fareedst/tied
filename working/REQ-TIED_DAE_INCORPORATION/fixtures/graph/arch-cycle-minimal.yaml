@@ -1,0 +1,17 @@
+# [REQ-TIED_DAE_INCORPORATION] W5a — minimal ARCH depends_on cycle for ontology_rules tests.
+# Tests materialize this into a temp tied/ architecture-decisions.yaml (see ontology-rules.test.ts).
+architecture:
+  ARCH-CYCLE-A:
+    name: "Cycle node A"
+    status: "Draft"
+    detail_file: "null"
+    related_decisions:
+      depends_on:
+        - "ARCH-CYCLE-B"
+  ARCH-CYCLE-B:
+    name: "Cycle node B"
+    status: "Draft"
+    detail_file: "null"
+    related_decisions:
+      depends_on:
+        - "ARCH-CYCLE-A"

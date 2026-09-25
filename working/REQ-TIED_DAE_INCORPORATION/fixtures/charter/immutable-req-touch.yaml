@@ -1,0 +1,16 @@
+# [REQ-TIED_DAE_INCORPORATION] W5b — touch immutable Methodology REQ without new ARCH or approval.
+immutable_categories:
+  - "Methodology"
+immutable_req_tokens:
+  - "REQ-IMMUTABLE-FIXTURE"
+touch_set:
+  requirements:
+    - "REQ-IMMUTABLE-FIXTURE"
+  architecture: []
+  implementation: []
+arch_tokens:
+  - "ARCH-EXISTING-FIXTURE"
+new_arch_tokens: []
+human_approval_evidence: null
+req_categories:
+  REQ-IMMUTABLE-FIXTURE: "Methodology"

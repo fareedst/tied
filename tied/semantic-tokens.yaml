@@ -748,6 +748,16 @@ ARCH-TIED_CLAUDE_SKILLS_REROOT:
     registered: "2026-09-24"
   name: "Skills re-root architecture"
   source_index: "architecture-decisions.yaml"
+ARCH-TIED_DAE_VERIFICATION_CHARTER:
+  cross_references:
+    - "IMPL-TIED_DAE_VERIFICATION_CHARTER"
+    - "REQ-TIED_DAE_VERIFICATION_CHARTER"
+  description: "Charter-opt-in verification plugin layout"
+  detail_file: "architecture-decisions/ARCH-TIED_DAE_VERIFICATION_CHARTER.yaml"
+  name: "DAE verification charter architecture"
+  source_index: "architecture-decisions.yaml"
+  status: "Proposed"
+  type: "ARCH"
 ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY:
   cross_references:
     - "IMPL-TIED_FEEDBACK_PROMOTION"
@@ -1800,6 +1810,16 @@ IMPL-TIED_CLAUDE_SKILLS_REROOT:
     registered: "2026-09-24"
   name: "Skills re-root implementation"
   source_index: "implementation-decisions.yaml"
+IMPL-TIED_DAE_VERIFICATION_CHARTER:
+  cross_references:
+    - "ARCH-TIED_DAE_VERIFICATION_CHARTER"
+    - "REQ-TIED_DAE_VERIFICATION_CHARTER"
+  description: "mutation-cache, gauntlet-runner, disjoint verifier"
+  detail_file: "implementation-decisions/IMPL-TIED_DAE_VERIFICATION_CHARTER.yaml"
+  name: "DAE verification charter implementation"
+  source_index: "implementation-decisions.yaml"
+  status: "Planned"
+  type: "IMPL"
 IMPL-TIED_FEEDBACK_PROMOTION:
   cross_references:
     - "ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY"
@@ -3047,6 +3067,17 @@ REQ-TIED_CLAUDE_SKILLS_REROOT:
     registered: "2026-09-24"
   name: "Optional repo-root skills re-root"
   source_index: "requirements.yaml"
+REQ-TIED_DAE_VERIFICATION_CHARTER:
+  cross_references:
+    - "ARCH-TIED_DAE_VERIFICATION_CHARTER"
+    - "IMPL-TIED_DAE_VERIFICATION_CHARTER"
+    - "REQ-TIED_DAE_INCORPORATION"
+  description: "Opt-in mutation cache, disjoint verifier, gauntlet"
+  detail_file: "requirements/REQ-TIED_DAE_VERIFICATION_CHARTER.yaml"
+  name: "DAE verification charter"
+  source_index: "requirements.yaml"
+  status: "Planned"
+  type: "REQ"
 REQ-TIED_FIDELITY_RESEARCH:
   category: "Functional"
   cross_references:

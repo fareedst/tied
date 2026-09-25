@@ -1991,6 +1991,20 @@ IMPL-TIED_CLAUDE_SKILLS_REROOT:
   detail_file: "implementation-decisions/IMPL-TIED_CLAUDE_SKILLS_REROOT.yaml"
   name: "Skills re-root implementation"
   status: "Active"
+IMPL-TIED_DAE_INCORPORATION:
+  cross_references:
+    - "ARCH-TIED_DAE_INCORPORATION"
+    - "REQ-TIED_DAE_INCORPORATION"
+  detail_file: "implementation-decisions/IMPL-TIED_DAE_INCORPORATION.yaml"
+  name: "DAE incorporation implementation"
+  status: "Active"
+IMPL-TIED_DAE_VERIFICATION_CHARTER:
+  cross_references:
+    - "ARCH-TIED_DAE_VERIFICATION_CHARTER"
+    - "REQ-TIED_DAE_VERIFICATION_CHARTER"
+  detail_file: "implementation-decisions/IMPL-TIED_DAE_VERIFICATION_CHARTER.yaml"
+  name: "DAE verification charter implementation"
+  status: "Active"
 IMPL-TIED_FEEDBACK_PROMOTION:
   code_locations:
     files:

@@ -1,6 +1,12 @@
 import { createHash } from "node:crypto";
 
 import { REPORT_SCHEMA_VERSION } from "./analysis/pseudocode-ir.js";
+import { validateDisjointVerifier } from "./disjoint-verifier.js";
+import {
+  charterComplianceBlocksPseudocodeGate,
+  type CharterComplianceInput,
+} from "./charter-compliance-table.js";
+import { buildMutationCacheReport, mutationCacheBlocksVerification } from "./mutation-cache.js";
 import {
   loadCanonicalChecklistSlugs,
   PSEUDOCODE_GATE_SLUG,
@@ -868,6 +874,15 @@ export function normalizeRemediationDiagnostics(diagnostics: readonly string[]):
   if (diagnostics.some((item) => item.startsWith("psa_") || item === "impl_inventory_empty")) {
     out.add("pseudocode_analysis_incomplete");
   }
+  if (diagnostics.some((item) => item.startsWith("disjoint_verifier_"))) {
+    out.add("disjoint_verifier");
+  }
+  if (diagnostics.some((item) => item.startsWith("mutation_cache_"))) {
+    out.add("mutation_cache");
+  }
+  if (diagnostics.some((item) => item.startsWith("charter_compliance_"))) {
+    out.add("charter_compliance");
+  }
   if (diagnostics.includes("depth_downgrade_requires_waiver")
     && diagnostics.some((item) => item.includes("~"))) {
     out.add("waiver_invalid");
@@ -901,6 +916,18 @@ export type ChecklistGateEvidenceInput = {
   envelopeGaps?: readonly EnvelopeGapEvidence[];
   /** When true at verification/close_out, error-severity envelope gaps block gate allowed (W8-D4). */
   envelopeBlocking?: boolean;
+  /** Parsed adherence ledger rows or fixture object for disjoint verifier (W4b). */
+  adherenceLedger?: unknown;
+  /** Verification-gate runner session id (W4b). */
+  verifierSessionId?: string;
+  /** Diff-scoped mutation cache inputs at verification-gate (W4a). */
+  mutationCache?: {
+    project_root: string;
+    diff_paths: string[];
+    cache_dir: string;
+  };
+  /** W5b charter compliance table inputs (author-architecture / risk-assessment). */
+  charterCompliance?: CharterComplianceInput;
 };
 
 const IMPL_TOKEN_RE = /^IMPL-[A-Z0-9][A-Z0-9_-]*$/u;
@@ -1340,6 +1367,42 @@ export function validateChecklistGate(input: {
     activation: normalizedActivation,
   });
   diagnostics.push(...adversarialResult.diagnostics);
+
+  diagnostics.push(...validateDisjointVerifier({
+    citdp: input.citdp,
+    phase: input.phase,
+    adherenceLedger: input.evidence?.adherenceLedger,
+    verifierSessionId: input.evidence?.verifierSessionId,
+  }).diagnostics);
+
+  if (
+    input.phase === "pre_implementation"
+    && input.evidence?.charterCompliance
+  ) {
+    const compliance = charterComplianceBlocksPseudocodeGate(input.evidence.charterCompliance);
+    if (compliance.blocked) {
+      diagnostics.push(...compliance.diagnostics);
+    }
+  }
+
+  if (
+    (input.phase === "verification" || input.phase === "close_out")
+    && input.evidence?.mutationCache
+  ) {
+    const requestToken =
+      input.evidence.requestToken ?? trackerRequestToken(input.tracker) ?? "REQ-UNKNOWN";
+    const mutationReport = buildMutationCacheReport({
+      request_token: requestToken,
+      project_root: input.evidence.mutationCache.project_root,
+      citdp: input.citdp,
+      diff_paths: input.evidence.mutationCache.diff_paths,
+      cache_dir: input.evidence.mutationCache.cache_dir,
+      hook_slug: "verification-gate",
+    });
+    if (mutationCacheBlocksVerification(mutationReport)) {
+      diagnostics.push(`mutation_cache_below_threshold:${mutationReport.score}`);
+    }
+  }
 
   const minimalWaiverResult = validateMinimalWaiver({ citdp: input.citdp });
   const blockingDiagnostics = normalizeRemediationDiagnostics([...new Set(diagnostics)]);

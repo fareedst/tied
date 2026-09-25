@@ -64,6 +64,7 @@ import { runPlumbDiffImpactPreview } from "../analysis/plumb-diff-impact-preview
 import { validateBindingInventory } from "../analysis/binding-inventory.js";
 import { validateEssencePseudocode } from "../analysis/pseudocode-validator.js";
 import { analyzeEssencePseudocode } from "../analysis/pseudocode-analyzer.js";
+import { buildClosureJoinReportAsync } from "../analysis/closure-join-report.js";
 import { ALL_ANALYSIS_PASSES } from "../analysis/pseudocode-ir.js";
 import { validateTestAdequacyPlan } from "../quality-adequacy.js";
 import { readTextFromPseudocodePath, resolvePseudocodePathUnderTiedBase } from "../impl-pseudocode-input.js";
@@ -287,21 +288,43 @@ export const allTools = [
           .optional()
           .default(true)
           .describe("Treat referenced tokens as invalid when they lack an index record (and optionally a detail file)"),
+        ontology_rules: z
+          .boolean()
+          .optional()
+          .default(false)
+          .describe("[REQ-TIED_DAE_INCORPORATION] W5a: Tarjan cycle detection, one-detail-per-token, inverse depends_on advisories, disjoint ledger when provided"),
+        adherence_ledger: z
+          .unknown()
+          .optional()
+          .describe("Optional adherence ledger for ontology disjoint session check"),
+        verifier_session_id: z
+          .string()
+          .optional()
+          .describe("Optional verifier session id paired with adherence_ledger"),
       }),
     },
     handler: async ({
       include_detail_files,
       include_pseudocode,
       require_detail_record,
+      ontology_rules,
+      adherence_ledger,
+      verifier_session_id,
     }: {
       include_detail_files?: boolean;
       include_pseudocode?: boolean;
       require_detail_record?: boolean;
+      ontology_rules?: boolean;
+      adherence_ledger?: unknown;
+      verifier_session_id?: string;
     }) => {
       const report = validateConsistency({
         include_detail_files,
         include_pseudocode,
         require_detail_record,
+        ontology_rules,
+        adherence_ledger,
+        verifier_session_id,
       });
       return textContent(JSON.stringify(report, null, 2));
     },
@@ -2233,6 +2256,8 @@ export const allTools = [
         require_contracts: z.boolean().optional(),
         require_behavioral_coverage: z.boolean().optional(),
         coverage_references: z.record(z.array(z.string())).optional(),
+        leakage_lint: z.boolean().optional(),
+        gate_mode: z.boolean().optional(),
       }),
     },
     handler: async (args: Parameters<typeof validateEssencePseudocode>[0]) => {
@@ -2319,6 +2344,30 @@ export const allTools = [
           .describe(
             "When gate_mode and async_boundary are true, promote ASYNC_EFFECTS_WITHOUT_BOUNDARY to error-severity gate diagnostics. Defaults to false; set true to fail gate on missing async boundary rationale.",
           ),
+        closure_join_report: z
+          .boolean()
+          .optional()
+          .describe(
+            "When true, run four-way closure join (REQ criterion ↔ IMPL block ↔ test ↔ code) via shared closure-join-report lib. Requires req_token and impl_tokens.",
+          ),
+        req_token: z
+          .string()
+          .optional()
+          .describe("REQ token for closure join satisfaction_criteria ids (required when closure_join_report is true)."),
+        impl_tokens: z
+          .array(z.string())
+          .optional()
+          .describe("IMPL tokens whose sidecars participate in closure join (required when closure_join_report is true)."),
+        project_root: z
+          .string()
+          .optional()
+          .describe("Workspace root for test/code globs and working/{REQ}/evidence persistence; defaults to parent of TIED_BASE_PATH."),
+        test_globs: z.array(z.string()).optional(),
+        code_globs: z.array(z.string()).optional(),
+        persist_closure_report: z
+          .boolean()
+          .optional()
+          .describe("When true with closure_join_report, write closure-join-{timestamp}.json under working/{REQ}/evidence/."),
       }),
     },
     handler: async (args: {
@@ -2337,6 +2386,13 @@ export const allTools = [
       constraint_gate_errors?: boolean;
       async_boundary?: boolean;
       async_gate_errors?: boolean;
+      closure_join_report?: boolean;
+      req_token?: string;
+      impl_tokens?: string[];
+      project_root?: string;
+      test_globs?: string[];
+      code_globs?: string[];
+      persist_closure_report?: boolean;
     }) => {
       const hasInline = typeof args.pseudocode === "string" && args.pseudocode.length > 0;
       const hasPath = typeof args.essence_pseudocode_path === "string" && args.essence_pseudocode_path.length > 0;
@@ -2389,7 +2445,38 @@ export const allTools = [
         constraint_gate_errors: args.constraint_gate_errors,
         async_boundary: args.async_boundary,
         async_gate_errors: args.async_gate_errors,
-      });
+      }) as Record<string, unknown>;
+
+      if (args.closure_join_report) {
+        const reqToken = args.req_token;
+        const implTokens = args.impl_tokens;
+        if (!reqToken || !implTokens || implTokens.length === 0) {
+          return textContent(
+            JSON.stringify(
+              { ok: false, stage: "input", error: "CLOSURE_JOIN_MISSING_REQ_OR_IMPL" },
+              null,
+              2,
+            ),
+          );
+        }
+        const projectRoot = args.project_root ?? path.dirname(getBasePath());
+        const closure = await buildClosureJoinReportAsync({
+          req_token: reqToken,
+          impl_tokens: implTokens,
+          project_root: projectRoot,
+          test_globs: args.test_globs,
+          code_globs: args.code_globs,
+          gate_mode: args.gate_mode,
+          persist: args.persist_closure_report ?? true,
+        });
+        const sections = (report.sections as Record<string, unknown> | undefined) ?? {};
+        sections.closure_join = closure;
+        report.sections = sections;
+        if (args.gate_mode && !closure.ok) {
+          report.ok = false;
+        }
+      }
+
       return textContent(JSON.stringify(report, null, 2));
     },
   },

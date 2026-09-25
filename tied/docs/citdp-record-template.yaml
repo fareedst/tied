@@ -43,6 +43,18 @@ record_identity:
   change_request_id: "REQ-REPLACE_ME"
   recorded_at: "YYYY-MM-DD"
   title: "~"
+  # Optional DAE sizing (Wave 2c): XS|S|M|L|XL; express_lane only when size XS and charter allows
+  # size: "M"
+  # gate_profile:
+  #   front: auto
+  #   verify: standard
+  # express_lane: false
+  # express_lane_charter: false
+  # branch: "~"
+  # branch_check: skip
+  # diff_scoped_crap: false
+  # crap_block: true
+  # crap_threshold: 30
 risk_analysis:
   abuse_cases: []
   adversarial_inquiry:
@@ -85,3 +97,12 @@ tdd_sequence:
 test_strategy:
   matrix_notes: "~"
   summary: "~"
+# Optional DAE Wave 2 fields (top-level on persisted CITDP body — see tied/docs/citdp-record-template.yaml comments):
+# size: "M"
+# gate_profile: { front: auto, verify: standard }
+# express_lane: false
+# branch: "feature/my-branch"
+# branch_check: skip
+# diff_scoped_crap: false
+# crap_block: true
+# crap_threshold: 30

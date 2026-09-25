@@ -16,6 +16,7 @@ import {
 } from "./yaml-loader.js";
 import { loadDetail, getDetailPath, listDetailTokens, DETAIL_FORMAT } from "./detail-loader.js";
 import { isUsableDetailFilePath, resolveDetailFileUnderBase } from "./detail-file-path.js";
+import { runOntologyRules, type OntologyIssue } from "./ontology-rules.js";
 
 const INDEX_NAMES: IndexName[] = [
   "requirements",
@@ -157,6 +158,7 @@ export interface ConsistencyReport {
   traceability: TraceabilityIssue[];
   detail_files: Record<string, DetailFileResult>;
   pseudocode: Record<string, PseudocodeResult>;
+  ontology_issues?: OntologyIssue[];
   ok: boolean;
 }
 
@@ -168,12 +170,17 @@ export interface ValidateConsistencyOptions {
   include_detail_files?: boolean;
   include_pseudocode?: boolean;
   require_detail_record?: boolean;
+  /** [REQ-TIED_DAE_INCORPORATION] W5a — run ontology-style graph rules (cycles, duplicate detail paths, etc.). */
+  ontology_rules?: boolean;
+  adherence_ledger?: unknown;
+  verifier_session_id?: string;
 }
 
-const DEFAULT_OPTIONS: Required<ValidateConsistencyOptions> = {
+const DEFAULT_OPTIONS: Required<Omit<ValidateConsistencyOptions, "adherence_ledger" | "verifier_session_id">> = {
   include_detail_files: true,
   include_pseudocode: true,
   require_detail_record: true,
+  ontology_rules: false,
 };
 
 export function validateConsistency(options: ValidateConsistencyOptions = {}): ConsistencyReport {
@@ -477,6 +484,15 @@ export function validateConsistency(options: ValidateConsistencyOptions = {}): C
       }
       report.pseudocode[token] = pseudocodeResult;
     }
+  }
+
+  if (opts.ontology_rules) {
+    const ontology = runOntologyRules({
+      adherence_ledger: options.adherence_ledger,
+      verifier_session_id: options.verifier_session_id,
+    });
+    report.ontology_issues = ontology.issues;
+    if (!ontology.ok) report.ok = false;
   }
 
   return report;

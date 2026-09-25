@@ -1,14 +1,16 @@
 # TIED vs Disciplined Agentic Engineering (DAE)
 
+**Role:** **Evaluator reference** — side-by-side methodology comparison. For **DAE→TIED incorporation execution** (waves, Tracker, CITDP), use the linked plan [`working/REQ-TIED_DAE_INCORPORATION/PLAN.md`](../../working/REQ-TIED_DAE_INCORPORATION/PLAN.md) (**[REQ-TIED_DAE_INCORPORATION]**) and the coordinator guide [`dae-mechanisms-for-tied-improvement.md`](dae-mechanisms-for-tied-improvement.md).
+
 **Audience:** Engineers evaluating or combining agentic development methodologies.
 
-**Sources (TIED):** This repository — enter via [`tied/vocab/routing.md`](../../tied/vocab/routing.md) (client handoff) and methodology snapshot under `tied/methodology/vocab/` after `copy_files.sh`. Spine docs: [`tied/docs/client-development-index.md`](../../tied/docs/client-development-index.md), [`tied/docs/vocabulary-layer-tied-leap-citdp.md`](../../tied/docs/vocabulary-layer-tied-leap-citdp.md), [`tied/docs/agent-req-implementation-checklist.md`](../../tied/docs/agent-req-implementation-checklist.md), [`tied/docs/LEAP.md`](../../tied/docs/LEAP.md).
+**Sources (TIED):** This repository — enter via [`tied/vocab/routing.md`](../../tied/vocab/routing.md) (client handoff) and methodology snapshot under `tied/methodology/vocab/` after `copy_files.sh`. Spine docs: [`tied/docs/client-development-index.md`](../../tied/docs/client-development-index.md) (includes **multi-harness entry matrix**), [`tied/docs/vocabulary-layer-tied-leap-citdp.md`](../../tied/docs/vocabulary-layer-tied-leap-citdp.md), [`tied/docs/agent-req-implementation-checklist.md`](../../tied/docs/agent-req-implementation-checklist.md), [`tied/docs/LEAP.md`](../../tied/docs/LEAP.md). Recent operator stack: [`working/REQ-TIED_UNIFIED_TOOLCHAIN/PLAN.md`](../../working/REQ-TIED_UNIFIED_TOOLCHAIN/PLAN.md) (all-Node suite), [`claude-code-tied-multi-harness-plan.md`](claude-code-tied-multi-harness-plan.md) (Claude harness).
 
 **Sources (DAE):** [swingerman/engineer](https://github.com/swingerman/engineer) (Disciplined Agentic Engineering). This analysis was written against a local clone layout: `engineer/` plugin root, `engineer/references/`, `engineer/scripts/dae_*.py`, README.
 
 Neither repository references the other by name. Both target **engineer-led AI development** with **spec/test discipline** and **deterministic gates** instead of prompt-only control.
 
-**Last updated:** 2026-09-22
+**Last updated:** 2026-09-24
 
 ---
 
@@ -18,12 +20,27 @@ Neither repository references the other by name. Both target **engineer-led AI d
 | --- | --- | --- |
 | **North star** | Token-linked REQ / ARCH / IMPL + pseudo-code as logical source of truth | Layered feature docs + Gherkin IR + generated acceptance pipeline |
 | **Unit of work** | Project-wide `tied/` YAML graph; optional `tied/features/` orchestration | `features/NNN-slug/` under `.engineer/` manifest |
-| **Discipline carrier** | Checklist slugs, MCP/`tied-cli`, validation scripts | 21 stdlib Python guardrails + checkpoint handoffs |
+| **Discipline carrier** | Checklist slugs, **TIED YAML MCP** + **`tied`** CLI (`mcp`, `yaml`, `bootstrap`, `agentstream`), gate tools (`tied_checklist_gate_validate`, `tied_adherence_reconcile_run`, request-evidence envelope tools) | 21 stdlib Python guardrails + checkpoint handoffs |
 | **Behavior contract** | IMPL `essence_pseudocode` (+ Gherkin not required) | Domain ACs → `spec.md` → `.build/spec.json` |
 | **Change record** | `tied/citdp/CITDP-*.yaml` | Handoffs, tracker, panels (no CITDP twin) |
 | **Resync when code learns** | LEAP (IMPL → ARCH → REQ) | Refine, edit specs/plan, re-verify, mutation |
-| **Test signature** | Unit TDD, composition-before-wiring, justified E2E | Dual green streams (acceptance + unit), mutation, CRAP |
-| **Reference host UX** | Editor + TIED MCP (e.g. Cursor) | Claude Code plugins/skills |
+| **Test signature** | Unit TDD, composition-before-wiring, justified E2E | Dual green streams (acceptance + unit), mutation, change-risk on diff (DAE CP7 / CRAP metric) |
+| **Reference host UX** | **Dual harness:** Cursor (reference automation) + **Claude Code** (`.claude/skills/`, repo-root `.mcp.json` safe-merge); same **`AGENTS.md`** + TIED MCP | Claude Code plugins/skills |
+
+---
+
+## TIED shifts since 2026-09-22 (context for this comparison)
+
+These changes narrow the “TIED = Cursor-only + scattered runtimes” picture and add **DAE-adjacent** mechanical gates without replacing the token graph.
+
+| Shift | What shipped | DAE-relevant effect |
+| --- | --- | --- |
+| **All-Node operator suite** | [`REQ-TIED_UNIFIED_TOOLCHAIN`](../../tied/requirements/REQ-TIED_UNIFIED_TOOLCHAIN.yaml): umbrella **`tied`** on **Node ≥18**; **`@tied/agentstream`** TypeScript-only (Go/Ruby checklist drivers retired); MCP + bootstrap + yaml-cli in one workspace | Closer to DAE’s **single runtime, scriptable exits** — but exits come from MCP/CLI tied to the semantic DB, not per-feature `dae_*.py` |
+| **Claude harness option** | [`REQ-TIED_CLAUDE_HARNESS`](../../tied/requirements/REQ-TIED_CLAUDE_HARNESS.yaml) family: dual bootstrap, Prompt Composer in **`.claude/skills/`**, **`tied agentstream --harness claude`** (fixtures + operator live gate), optional adherence bridge | TIED is no longer “DAE owns Claude, TIED owns Cursor only”; both can run the **same** checklist vocabulary with different **AgentDriver** subprocesses |
+| **Expanded MCP gate surface** | Checklist activation/collect, gate validate, adherence reconcile, pseudocode validate/analyze, feature-orchestration tools, LEAP proposal queue, request-evidence envelope build/validate/patch | Partial answer to DAE **Step 0** and handoff evidence — machine receipts on **`working/{REQ}/`** instead of only prose Tracker refs |
+| **Routing index** | Methodology [`tied/vocab/routing.md`](../../tied/vocab/routing.md) documents **historical Ruby agent-stream** as non-operator; **agentstream**, **feature-orchestration**, **prompt-composer** glossaries for harness choice | Agents PRELOAD harness-specific vocab before conflating interactive skills with **`tied agentstream`** automation |
+
+Detail and closure record: [`claude-code-tied-multi-harness-plan.md`](claude-code-tied-multi-harness-plan.md). Client entry matrix: [`client-development-index.md`](../../tied/docs/client-development-index.md) § Multi-harness.
 
 ---
 
@@ -38,7 +55,7 @@ Both methodologies assume capable LLMs **and** engineer judgment. Both reject su
 | Agents type; discipline is external | Checklist, MCP, `tied_validate_consistency` | `dae_*.py`; non-zero exit blocks progress |
 | Layered specs | REQ → ARCH → IMPL (+ sidecar) | `feature.md` → `acs.md` → `spec.md` → `plan.md` (Speckit-style) |
 | Two test concerns | Unit + composition (+ justified E2E) | Acceptance + unit streams both green |
-| Beyond “tests pass” | Test adequacy, composition evidence, optional adversarial / evidence chains | Mutation (CP8), differential re-mutate, CRAP on diff |
+| Beyond “tests pass” | Test adequacy, composition evidence, optional adversarial / evidence chains | Mutation (CP8), differential re-mutate, change-risk on diff (CP7) |
 | Naming / graph integrity | `tied/vocab/*.md` + routing **PRELOAD** | `dae_ontology.py`; intent ↔ AI-native SDLC map |
 
 Influence overlap: DAE cites Speckit, Uncle Bob’s acceptance-pipeline and ATDD lineage; TIED’s [`LEAP.md`](../../tied/docs/LEAP.md) describes the same abstraction ladder (specification as the rung above raw code).
@@ -86,7 +103,7 @@ flowchart LR
 | `acs.md` | 2 | Acceptance criteria in **domain language** |
 | `spec.md`, `.build/spec.json` | 3 | Standard Gherkin; JSON IR for generators/mutators |
 | `plan.md` | 4 | Architecture (human-owned), Charter Check, test strategy, optional `gauntlet:` |
-| Code + tests | 5–8 | Implement, refine, verify (`arch-check`, CRAP), harden (mutation) |
+| Code + tests | 5–8 | Implement, refine, verify (`arch-check`, change-risk on diff), harden (mutation) |
 
 Intent may start in `.engineer/inbox.md`, `/engineer.discuss`, or async `intent.md` (see DAE `engineer/references/intent.md`).
 
@@ -158,14 +175,16 @@ Spine: [`agent-req-implementation-checklist.md`](../../tied/docs/agent-req-imple
 
 **Subs:** `sub-yaml-edit-loop`, `sub-pseudocode-validation-pass`, `sub-leap-micro-cycle` (IMPL first on divergence).
 
+**Machine gates (2026-09+):** Beyond consistency lint, operators can run **`tied_checklist_gate_validate`** (phase gates with Tracker + CITDP), **`tied_adherence_reconcile_run`** (ledger vs Tracker), **`tied_checklist_activation_collect`** (integrated adversarial pairing), and **`request_evidence_envelope_*`** (structured close-out evidence). These parallel DAE’s “tool evidence in handoff” pattern while keeping canonical semantics in project YAML.
+
 ### Side-by-side
 
 | Concern | DAE | TIED |
 | --- | --- | --- |
-| May I start this step? | Handoff + branch scripts | Prior slugs + implementation freeze |
-| Structured integrity | `dae_ontology.py` | `tied_validate_consistency`, pseudo-code layers |
+| May I start this step? | Handoff + branch scripts | Prior slugs + implementation freeze; optional gate CLI/MCP before slug advance |
+| Structured integrity | `dae_ontology.py` | `tied_validate_consistency`, `pseudocode_validate` / analyze, pseudo-code layers |
 | Human judgment | Review panel CP2/4; `consistency-check` warnings | REQ/ARCH authoring; adversarial advisory default |
-| Session continuity | `/engineer.next` | Checklist copy; optional `agentstream` |
+| Session continuity | `/engineer.next` | Authoritative Tracker; **`tied agentstream`** (Cursor or Claude **AgentDriver**) or interactive Prompt Composer |
 
 ---
 
@@ -226,12 +245,15 @@ See DAE `engineer/references/ontology.md`.
 
 | Capability | TIED | DAE |
 | --- | --- | --- |
-| Read/write structured intent | TIED MCP + `tied-cli` / bundled skill | Skills + `dae_resolve.py` |
-| Validate without LLM | `lint_yaml`, `tied_validate_consistency`, `validate_tokens.sh`, pseudo-code static analysis | All `dae_*.py` with `test_*.py` siblings (483+ tests in upstream README) |
-| Host binding | IDE-agnostic; `TIED_BASE_PATH` risk documented in AGENTS | `host-capabilities.md` required vs optional capabilities |
-| Orchestrated multi-turn | Go `agentstream` + checklist YAML (optional in consumer repos) | `atdd-team`, parallelism, worktrees |
+| Read/write structured intent | TIED YAML MCP + **`tied mcp`** / **`tied-cli.sh`** / bundled **tied-yaml** skill; feature-orchestration MCP for **`tied/features/`** | Skills + `dae_resolve.py` |
+| Validate without LLM | **`tied yaml`** (canonicalize/lint), `tied_validate_consistency`, `pseudocode_validate`, checklist gate validate, test adequacy / quality-evidence collectors (profile-dependent), `validate_tokens.sh` | All `dae_*.py` with `test_*.py` siblings (483+ tests in upstream README) |
+| Host binding | **Dual harness:** Cursor (`.cursor/mcp.json`) + Claude Code (repo-root `.mcp.json`, `TIED_MCP_HARNESS`); **`TIED_BASE_PATH`** wrong-repo risk documented in **AGENTS** | `host-capabilities.md` required vs optional capabilities |
+| Orchestrated multi-turn | **`tied agentstream`** (**TypeScript**, Node ≥18) + Authoritative Tracker YAML; **`--harness cursor`** (reference) or **`--harness claude`** (fixture + live operator gate) | `atdd-team`, parallelism, worktrees |
+| Operator install | **`tied bootstrap`** / `copy_files.sh` installs skills + MCP config preservation | Plugin marketplace install |
 
 What **cannot** be enforced without an LLM in DAE: domain-language quality, “does this AC cover the outcome?”, architecture soundness — same class as TIED steps that remain judgment in `consistency-check` / authoring slugs.
+
+**Runtime contrast (updated):** DAE stays **stdlib Python** per feature repo. TIED’s **source-repo operator stack** is now **all-Node** (no Go/Ruby checklist driver on the default path), which improves portability for CI and cross-platform bootstrap while keeping **project** validation language-agnostic (tests + YAML + pseudo-code tools).
 
 ---
 
@@ -254,7 +276,7 @@ Mutation is **not** central in core seven; quality/evidence tooling is documente
 | Acceptance tests | **WHAT** — external behavior |
 | Unit tests | **HOW** — internal structure |
 | Mutation (CP8) | **REAL?** — tests catch bugs |
-| CRAP (CP7) | Change risk on diff |
+| Change-risk on diff (CP7; upstream CRAP metric) | Complexity × coverage gap on changed files |
 | `arch-check` | Charter layering, cycles, size |
 | Gauntlet | Subjective bar when `gauntlet:` declared in `plan.md` |
 
@@ -274,20 +296,23 @@ DAE distinguishes **IR mutator** (acceptance wiring) vs **source mutator** (unit
 
 | Need | DAE | TIED |
 | --- | --- | --- |
-| What should I pick up? | `/engineer.next` | Next checklist **slug** on per-request YAML |
-| Where am I in the pipeline? | `dae_progress.py` | Optional checklist render via `tools/agentstream` |
-| New feature | `feature-init`, `discuss` | `tied init` / feature orchestration (see vocab routing for `feature-orchestration`) |
-| Bootstrap | Plugin marketplace install | `copy_files.sh` + MCP config |
+| What should I pick up? | `/engineer.next` | Next checklist **slug** on Authoritative Tracker (`working/{REQ}/checklist-tracker.yaml`) |
+| Where am I in the pipeline? | `dae_progress.py` | **`tied agentstream`** checklist render / tracker preview; Tracker dispositions + gate JSON receipts |
+| New feature | `feature-init`, `discuss` | **REQ path:** Prompt Composer (`/plan-new-feature`, …) · **FEAT path:** `tied init` + feature-orchestration MCP (see [`feature-orchestration.md`](../../tied/vocab/feature-orchestration.md)) |
+| Bootstrap | Plugin marketplace install | **`tied bootstrap`** / `copy_files.sh` — Cursor + Claude skills, `.cursor/mcp.json` create-if-absent, Claude **`.mcp.json`** safe-merge |
+| Claude-only client | Same plugin model | `node tools/bootstrap/new-tied-client.mjs --disposable --harness claude` or `test-new-claude-tied-client` (see multi-harness plan) |
+
+**Do not conflate:** Interactive **`/build-plan`** in Claude or Cursor is **not** the same as automated **`tied agentstream`** checklist turns; the client-development-index **operating modes** table defines acceptable evidence for each.
 
 ---
 
 ## 9. When to lean which way
 
-**Lean TIED** when you need durable **token traceability** across modules and repos, **IMPL pseudo-code** as the agent’s primary logic surface, and **persisted CITDP** change records.
+**Lean TIED** when you need durable **token traceability** across modules and repos, **IMPL pseudo-code** as the agent’s primary logic surface, **persisted CITDP** change records, and (optionally) **one checklist driver** on Cursor or Claude with MCP-backed gates.
 
-**Lean DAE** when you want **productized ATDD + mutation + charter arch-check** on Claude Code (or a host that maps `host-capabilities.md`), with **minimal dependencies** (stdlib Python gates).
+**Lean DAE** when you want **productized ATDD + mutation + charter arch-check** on Claude Code (or a host that maps `host-capabilities.md`), with **minimal dependencies** (stdlib Python gates per `.engineer/` feature).
 
-**Use both consciously** only with an explicit integration design (REQ token ↔ feature folder, LEAP on divergence); neither upstream ships that merge.
+**Use both consciously** only with an explicit integration design (REQ token ↔ feature folder, LEAP on divergence); neither upstream ships that merge. TIED’s Claude path does **not** substitute DAE’s mutation/change-risk (CP7) pipeline—it adds a **second host** for the same TIED vocabulary and YAML MCP.
 
 ---
 
@@ -295,11 +320,14 @@ DAE distinguishes **IR mutator** (acceptance wiring) vs **source mutator** (unit
 
 | Topic | TIED path | DAE path (in engineer repo) |
 | --- | --- | --- |
-| Routing / bootstrap | `tied/vocab/routing.md`, `tied/docs/client-development-index.md` | README, `engineer/skills/onboard/SKILL.md` |
-| Handoffs / gates | `tied/docs/agent-req-implementation-checklist.md` | `engineer/references/handoff-summary.md`, `dae_handoff.py` |
+| Routing / bootstrap | `tied/vocab/routing.md`, `tied/docs/client-development-index.md` (multi-harness matrix) | README, `engineer/skills/onboard/SKILL.md` |
+| Handoffs / gates | `tied/docs/agent-req-implementation-checklist.md`, `tied/docs/request-evidence-envelope.md` | `engineer/references/handoff-summary.md`, `dae_handoff.py` |
 | Behavior spec | `tied/docs/pseudocode-writing-and-validation.md` | `engineer/references/spec-ir.md`, `atdd` plugin |
 | Change analysis | `tied/docs/citdp-policy.md` | `discuss`, `feature-init`, `consistency-check` |
 | LEAP / resync | `tied/docs/LEAP.md`, `processes.md` § PROC-LEAP | `refine`, `feature-edit`, re-run verify |
+| Operator CLI / harness | `mcp-server/packages/agentstream/README.md`, `docs/comparisons/claude-code-tied-multi-harness-plan.md`, `working/REQ-TIED_UNIFIED_TOOLCHAIN/PLAN.md` | — |
+| DAE patterns → TIED gaps (coordinator) | [`dae-mechanisms-for-tied-improvement.md`](dae-mechanisms-for-tied-improvement.md) | — |
+| DAE incorporation program (execution) | [`working/REQ-TIED_DAE_INCORPORATION/PLAN.md`](../../working/REQ-TIED_DAE_INCORPORATION/PLAN.md) | — |
 
 ---
 

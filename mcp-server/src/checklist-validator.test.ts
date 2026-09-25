@@ -938,6 +938,82 @@ describe("validateEnvelopeBlockingCrossRead [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
   });
 });
 
+// [IMPL-TIED_DAE_VERIFICATION_CHARTER] [REQ-TIED_DAE_VERIFICATION_CHARTER] — W4b disjoint verifier in gate validate.
+describe("disjoint verifier charter [REQ-TIED_DAE_VERIFICATION_CHARTER]", () => {
+  it("blocks verification when implementer and verifier session ids match", () => {
+    const citdp = {
+      record_identity: { disjoint_verifier: "required", verification_charter: true },
+      risk_analysis: {
+        adversarial_inquiry: {
+          depth_tier: "minimal",
+          gate_policy: "advisory",
+          counterexamples: ["same session verifies own work"],
+          falsification_questions: ["Can verifier equal implementer?"],
+          disconfirming_observations: ["gate blocks same session"],
+          evidence_references: ["checklist-validator.test.ts"],
+        },
+      },
+    };
+    const result = validateChecklistGate({
+      phase: "verification",
+      tracker: {
+        steps: [{
+          slug: "sub-adversarial-inquiry-pass",
+          disposition: "not_applicable",
+          policy: "minimal",
+          rationale: "W4b unit test.",
+        }],
+      },
+      citdp,
+      evidence: {
+        adherenceLedger: {
+          implementer_session_id: "sess-a",
+          verifier_session_id: "sess-a",
+        },
+        verifierSessionId: "sess-a",
+      },
+    });
+    assert.equal(result.allowed, false);
+    assert.ok(result.diagnostics.includes("disjoint_verifier_same_session"));
+  });
+
+  it("allows when sessions differ", () => {
+    const citdp = {
+      record_identity: { disjoint_verifier: "required" },
+      risk_analysis: {
+        adversarial_inquiry: {
+          depth_tier: "minimal",
+          gate_policy: "advisory",
+          counterexamples: ["x"],
+          falsification_questions: ["y"],
+          disconfirming_observations: ["z"],
+          evidence_references: ["checklist-validator.test.ts"],
+        },
+      },
+    };
+    const result = validateChecklistGate({
+      phase: "verification",
+      tracker: {
+        steps: [{
+          slug: "sub-adversarial-inquiry-pass",
+          disposition: "not_applicable",
+          policy: "minimal",
+          rationale: "W4b unit test.",
+        }],
+      },
+      citdp,
+      evidence: {
+        adherenceLedger: {
+          implementer_session_id: "sess-impl",
+          verifier_session_id: "sess-verify",
+        },
+        verifierSessionId: "sess-verify",
+      },
+    });
+    assert.equal(result.allowed, true);
+  });
+});
+
 // [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: Stage P normative trigger — gate must accept unresolved refs from non-agentstream Tracker writers.
 describe("Stage P trigger: non-agentstream unresolved evidence_refs", () => {
   it("A32 trigger fires when gate accepts manual Tracker with nonexistent evidence_refs", () => {

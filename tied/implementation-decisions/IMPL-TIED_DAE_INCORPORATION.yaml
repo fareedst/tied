@@ -1,0 +1,28 @@
+IMPL-TIED_DAE_INCORPORATION:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_DAE_INCORPORATION"
+    implementation: []
+    requirements:
+      - "REQ-TIED_DAE_INCORPORATION"
+  description: "Implementation approach for wave-delivered DAE patterns: MCP/CLI gate composition, CITDP template extensions, pseudocode validation siblings, and optional verification-gate plugins."
+  implementation_approach:
+    details:
+      - approach: "Charter-optional mutation/disjoint/gauntlet; ontology consistency + charter compliance table."
+        phase: "Waves 4–5"
+      - approach: "IMPLEMENT_BRANCH_HYGIENE_CHECK, IMPLEMENT_PSEUDOCODE_LEAKAGE_LINT, EXTEND_CITDP_TEMPLATE, OPTIONAL_DIFF_SCOPED_CRAP_HOOK."
+        phase: "Wave 2"
+      - approach: "IMPLEMENT_FOUR_WAY_CLOSURE_JOIN_REPORT; UPDATE_PSEUDOCODE_GUIDE_MECHANICAL_VS_JUDGMENT."
+        phase: "Wave 3"
+      - approach: "IMPLEMENT_GATE_CHECK_CLI (tied gate check), IMPLEMENT_TIED_NEXT_RECOMMENDATION (tied next), ALIGN_HANDOFF_YAML_TO_ENVELOPE_V1 (additive handoffs/)."
+        phase: "Wave 1"
+      - approach: "Maintain shipped gate surface; refresh coordinator Status matrix (DOCUMENT_SHIPPED_GATE_SURFACE, UPDATE_COORDINATOR_GUIDE_STATUS_MATRIX)."
+        phase: "Wave 0"
+    summary: "Strangler by wave per PLAN.md Wave contracts; each Active procedure in essence_pseudocode maps to a named slice (W0a–W5b) with PRE/POST/FAILURE_MODES; RED tests before production at build-plan entry."
+  metadata:
+    last_updated:
+      author: "plan-close-out"
+      date: "2026-09-24"
+      note: "Wave slice Active procedures aligned to PLAN contracts"
+  name: "DAE incorporation implementation"
+  status: "Active"

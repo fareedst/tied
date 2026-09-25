@@ -1,0 +1,23 @@
+record_identity:
+  change_request_id: REQ-TIED_DAE_VERIFICATION_CHARTER
+  verification_charter: true
+  mutation_cache: true
+  mutation_cache_threshold: 0.75
+  disjoint_verifier: required
+risk_analysis:
+  adversarial_inquiry:
+    depth_tier: minimal
+    gate_policy: advisory
+    counterexamples:
+      - charter forced on by default
+    falsification_questions:
+      - Can gate pass without charter fields?
+    disconfirming_observations:
+      - charter-off clients skip plugins
+    evidence_references:
+      - fixtures/charter/verification-charter-minimal.yaml
+gauntlet:
+  probes:
+    - id: readability
+      description: Code reads clearly without unexplained magic constants
+      verified_by: manual

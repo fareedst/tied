@@ -1,0 +1,56 @@
+REQ-TIED_DAE_VERIFICATION_CHARTER:
+  category: "Methodology"
+  description: "Optional verification charter tools: diff-scoped mutation cache, hard disjoint verifier policy in tied_checklist_gate_validate, and gauntlet probes. Default off until CITDP verification_charter: true and project manifest opt-in."
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-09-24"
+    last_updated:
+      author: "plan-close-out"
+      date: "2026-09-24"
+      reason: "Wave 4 charter close-out"
+  name: "DAE verification charter (opt-in)"
+  priority: "P2"
+  rationale:
+    benefits:
+      - "Charter-off clients unchanged"
+      - "Disjoint verifier enforces implementer≠verifier at verification-gate"
+      - "Mutation cache and gauntlet available when opted in"
+    problems_solved:
+      - "Missing hard disjoint verifier when charter requires it"
+      - "Parent program scope too broad for charter-only adopters"
+    why: "Wave 4 charter tooling is independently versioned from the parent DAE incorporation program while composing existing gate enforcement."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-TIED_DAE_INCORPORATION"
+    related_to:
+      - "REQ-TIED_UNIFIED_TOOLCHAIN"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Charter tools run only when verification_charter and project opt-in are true; default clients unchanged."
+      id: "SC-CHARTER-OPTIN"
+      metric: "Unit tests with charter-off CITDP skip plugins"
+    - criterion: "Mutation cache scores diff-scoped runs and fails verification-gate when below CITDP threshold."
+      id: "SC-MUTATION-CACHE"
+      metric: "mutation-cache.test.ts"
+    - criterion: "Optional gauntlet block parses and runs probe contract after composition green."
+      id: "SC-GAUNTLET"
+      metric: "gauntlet-runner.test.ts"
+    - criterion: "When disjoint_verifier required, equal implementer and verifier session ids block verification gate without waiver."
+      id: "SC-DISJOINT-VERIFIER"
+      metric: "checklist-validator / MCP gate tests"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_DAE_VERIFICATION_CHARTER"
+    code_annotations: []
+    implementation:
+      - "IMPL-TIED_DAE_VERIFICATION_CHARTER"
+    tests:
+      - "checklist-validator.test.ts"
+      - "gauntlet-runner.test.ts"
+      - "mutation-cache.test.ts"
+  validation_criteria:
+    - "npm test baseline maintained or improved"
+    - "tied_validate_consistency after TIED mutations"

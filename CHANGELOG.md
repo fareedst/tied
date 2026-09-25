@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **DAE incorporation program ([REQ-TIED_DAE_INCORPORATION])** — Waves 0–5: `@tied/cli`
+  `gate check`, `next`, and `handoff validate`; branch hygiene, pseudocode leakage lint,
+  CITDP express lane, **diff-scoped change-risk report** (W2d; stable ids `diff_scoped_crap` /
+  upstream DAE CP7 metric), four-way closure join via `pseudocode_analyze`, ontology rules and
+  charter compliance table on `tied_validate_consistency` / checklist gate. Coordinator guide +
+  linked plan under `working/REQ-TIED_DAE_INCORPORATION/`. **1036** `mcp-server` tests.
+
+- **DAE verification charter ([REQ-TIED_DAE_VERIFICATION_CHARTER])** — Opt-in mutation cache,
+  hard disjoint verifier in `tied_checklist_gate_validate`, and gauntlet runner (charter-off
+  default). Child REQ of incorporation program; close-out envelope under
+  `working/REQ-TIED_DAE_VERIFICATION_CHARTER/evidence/`.
+
 - **Claude adherence hook bridge ([REQ-TIED_CLAUDE_ADHERENCE_HOOKS])** — Bootstrap safe-merge of
   `.claude/settings.json` `PostToolUse` → `claude-adherence-bridge.js`; normalizer + fixtures;
   **`action_attempted`** ledger when **active-turn marker** present; mitigates **RISK-BOOT-005**

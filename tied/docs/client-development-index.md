@@ -116,6 +116,53 @@ Guides for YAML shapes: [requirements.md](requirements.md), [architecture-decisi
 | **tied-cli** | `.cursor/skills/tied-yaml/scripts/tied-cli.sh` | Primary write path for project YAML. |
 | **Without MCP** | [using-tied-without-mcp.md](using-tied-without-mcp.md) | Documented manual workflow. |
 
+### Adherence ergonomics and DAE quick wins (`tied` CLI — Waves 1–2)
+
+From the repo root (or any client with `@tied/cli` on `PATH`), these subcommands **compose** existing MCP gate tools — they do not fork gate semantics.
+
+| Command | Purpose | Exit codes |
+| --- | --- | --- |
+| `tied gate check --request-token REQ-… --phase pre_implementation\|verification\|close_out` | Calls `tied_checklist_gate_validate` with Tracker + CITDP paths (defaults under `working/{REQ}/` and `tied/citdp/`). Optional `--slug`, `--tracker`, `--citdp`, `--project-root`, `--check-branch` (hard-fail on branch mismatch vs CITDP `branch:` or Tracker `execution_evidence.branch`; opt-out via `.tied-yaml.yaml` `dae.branch_check: false` or CITDP `branch_check: skip`). | `0` allowed; `1` blocked; `2` misconfig / MCP down |
+| `tied branch check --request-token REQ-…` | Standalone W2a branch hygiene (same algorithm as `--check-branch`). | `0` match/skip; `1` mismatch; `2` not a git repo |
+| `tied next [--request-token REQ-…]` | Discovers Authoritative Tracker(s), prints the first pending checklist **slug** in YAML order plus open REQ tokens and CITDP draft phases. | `0` recommendation; `1` no pending work; `2` ambiguous trackers |
+| `tied handoff validate --path …` | Validates additive `working/{REQ}/handoffs/{phase}.yaml` (schema v1); does **not** replace `request-evidence-envelope.v1.json`. | `0` valid; `1` schema errors |
+
+MCP `pseudocode_validate` accepts optional `leakage_lint` (default on) and `gate_mode` for W2b host-syntax leakage rules. CITDP template documents `size`, `gate_profile`, and `express_lane` (Wave 2c). Optional **diff-scoped change-risk report** hooks (upstream DAE CP7 / CRAP metric) are documented on checklist slugs `verification-gate` and `traceable-commit` when CITDP `diff_scoped_crap: true` (Wave 2d; default off). The report module is tested under `mcp-server/src/diff-scoped-crap.test.ts`; operators run it as a documented verification-gate sub-step — there is no automatic post–quality-manifest runner yet (see PLAN RISK-DAE-009).
+
+### Validation depth (Wave 3)
+
+MCP **`pseudocode_analyze`** accepts **`closure_join_report: true`** with **`request_token`**, **`impl_tokens[]`**, optional path globs, and **`persist_closure_report`** (default true) to write `working/{REQ}/evidence/closure-join-{timestamp}.json`. Implementation: `mcp-server/src/analysis/closure-join-report.ts`. Mechanical vs LLM judgment boundaries: [`pseudocode-writing-and-validation.md`](pseudocode-writing-and-validation.md) § Mechanical checks vs LLM judgment.
+
+Set `TIED_BASE_PATH` to this project’s `tied/` (or pass `--project-root`) before gate checks. Receipts may persist under `working/{REQ}/gates/` when gate persistence is configured in CITDP/Tracker.
+
+### Verification charter (Wave 4 — opt-in)
+
+Traceability: [REQ-TIED_DAE_VERIFICATION_CHARTER](../requirements/REQ-TIED_DAE_VERIFICATION_CHARTER.yaml) (child of [REQ-TIED_DAE_INCORPORATION](../requirements/REQ-TIED_DAE_INCORPORATION.yaml) program Wave 4).
+
+Charter tools are **off by default**. Enable only when **both** hold:
+
+1. CITDP `record_identity.verification_charter: true` (and optional `mutation_cache`, `disjoint_verifier: required`, `gauntlet:` block).
+2. Project manifest / policy documents charter opt-in (same charter-off default as program PLAN).
+
+| Tool | When | MCP / module |
+| --- | --- | --- |
+| **Disjoint verifier** | `disjoint_verifier: required` at `verification` / `close_out` | `tied_checklist_gate_validate` — pass `evidence.adherenceLedger` + `evidence.verifierSessionId`; waiver via `disjoint_verifier_waiver` (owner + expiry) |
+| **Mutation cache** | `mutation_cache: true` after composition-green diff list | `buildMutationCacheReport` in `mcp-server/src/mutation-cache.ts`; pass `evidence.mutationCache` into gate validate at verification |
+| **Gauntlet** | Optional `gauntlet.probes[]` after composition green, before E2E | `parseGauntletBlock` in `mcp-server/src/gauntlet-runner.ts` |
+
+Fixtures: `working/REQ-TIED_DAE_INCORPORATION/fixtures/charter/verification-charter-minimal.yaml`, `fixtures/ledger/disjoint-verifier-mismatch.json`.
+
+### Graph integrity (Wave 5)
+
+Traceability: [REQ-TIED_DAE_INCORPORATION](../requirements/REQ-TIED_DAE_INCORPORATION.yaml) program Wave 5 (parent REQ; charter Wave 4 remains on [REQ-TIED_DAE_VERIFICATION_CHARTER](../requirements/REQ-TIED_DAE_VERIFICATION_CHARTER.yaml)).
+
+| Mechanism | Operator entry | Notes |
+| --- | --- | --- |
+| **Ontology rules (W5a)** | MCP `tied_validate_consistency` with `ontology_rules: true` | Optional `adherence_ledger` + `verifier_session_id` for disjoint session check. Fails `ok` on ARCH/IMPL dependency cycles and duplicate detail paths; reports inverse REQ advisories in `ontology_issues[]`. |
+| **Charter compliance table (W5b)** | `tied_checklist_gate_validate` at `pre_implementation` | Pass structured `evidence.charterCompliance` (immutable categories/tokens, touch set, new ARCH tokens, approval evidence). Blocks when immutable scope touched without remediation. Default clients unchanged when evidence omitted. |
+
+Fixtures: `working/REQ-TIED_DAE_INCORPORATION/fixtures/graph/arch-cycle-minimal.yaml`, `fixtures/charter/immutable-req-touch.yaml`.
+
 After writes: `lint_yaml` on changed YAML + `tied_validate_consistency` (checklist `sub-yaml-edit-loop`).
 
 On a fresh bootstrap with no project-specific REQ/ARCH/IMPL tokens, `tied_validate_consistency` should report `ok: true` once inherited methodology detail files resolve under `tied/methodology/`.
@@ -144,4 +191,4 @@ On a fresh bootstrap with no project-specific REQ/ARCH/IMPL tokens, `tied_valida
 
 ---
 
-**TIED Methodology Version**: 3.0.0 · **Last updated**: 2026-09-23
+**TIED Methodology Version**: 3.0.0 · **Last updated**: 2026-09-24

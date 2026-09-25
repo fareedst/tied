@@ -1,0 +1,50 @@
+CITDP-REQ-TIED_DAE_VERIFICATION_CHARTER:
+  change_definition:
+    current_behavior: "Charter tools shipped (mutation cache, disjoint verifier policy, gauntlet); client defaults remain charter-off."
+    desired_behavior: "Close-out with envelope; CITDP record reflects opt-in defaults for gate validation at minimal depth."
+    non_goals:
+      - "Fork gate algorithm outside validateChecklistGate composition"
+      - "Mandatory charter for all TIED clients"
+    success_criteria:
+      - "client-development-index charter section documents opt-in"
+      - "W4a–c automated tests green"
+    unchanged_behavior: "Clients without verification_charter: true behave as before Wave 4"
+  impact_analysis:
+    blast_radius: "mcp-server checklist-validator, mutation-cache, gauntlet-runner"
+    modules_or_boundaries: "mcp-server/src/checklist-validator.ts, mutation-cache.ts, gauntlet-runner.ts"
+    phased_rollout:
+      - "W4a mutation cache — charter + mutation_cache: true"
+      - "W4b disjoint verifier — disjoint_verifier: required"
+      - "W4c gauntlet — gauntlet block present"
+    tied_tokens_affected:
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    tied_tokens_new:
+      - "ARCH-TIED_DAE_VERIFICATION_CHARTER"
+      - "IMPL-TIED_DAE_VERIFICATION_CHARTER"
+      - "REQ-TIED_DAE_VERIFICATION_CHARTER"
+  record_identity:
+    change_request_id: "REQ-TIED_DAE_VERIFICATION_CHARTER"
+    disjoint_verifier: "skip"
+    gate_policy: "advisory"
+    mutation_cache: false
+    phase: "closed"
+    profile_depth: "minimal"
+    recorded_at: "2026-09-24"
+    title: "DAE verification charter (closed)"
+    verification_charter: false
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "Charter defaults on for all clients"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "disjoint_verifier_same_session blocks gate when required"
+      evidence_references:
+        - "mcp-server/src/checklist-validator.test.ts"
+      falsification_questions:
+        - "Can verification pass with same implementer and verifier session?"
+      gate_policy: "advisory"
+      sub_adversarial_inquiry_pass: "not_applicable"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"

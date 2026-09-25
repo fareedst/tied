@@ -62,3 +62,25 @@ export function agentstreamTsEntryFromCliModule(moduleUrl: string): string {
   );
 }
 
+/** [IMPL-TIED_DAE_INCORPORATION] [ARCH-TIED_DAE_INCORPORATION] [REQ-TIED_DAE_INCORPORATION] — DAE Wave 1 CLI dispatch targets under mcp-server/dist/cli/. */
+export function gateCheckCliEntryFromCliModule(moduleUrl: string): string {
+  return path.join(workspaceRootFromCliModule(moduleUrl), "dist", "cli", "gate-check.js");
+}
+
+export function tiedNextCliEntryFromCliModule(moduleUrl: string): string {
+  return path.join(workspaceRootFromCliModule(moduleUrl), "dist", "cli", "tied-next.js");
+}
+
+export function handoffValidateCliEntryFromCliModule(moduleUrl: string): string {
+  return path.join(
+    workspaceRootFromCliModule(moduleUrl),
+    "dist",
+    "cli",
+    "handoff-validate.js",
+  );
+}
+
+export function branchCheckCliEntryFromCliModule(moduleUrl: string): string {
+  return path.join(workspaceRootFromCliModule(moduleUrl), "dist", "cli", "branch-check.js");
+}
+

@@ -68,6 +68,17 @@
 | **copy timestamp normalization** | artificial timestamp, fixed copy time | Apply the source item's local calendar-date midnight only to the managed client copy after `cp -p`/`cp -pR`; source mtimes remain unchanged |
 | **client-modification warning** | refresh warning (alone) | Diagnostic emitted when an existing managed destination mtime is not truncated to local calendar-date midnight |
 | **Windows bootstrap entry point** | copy_files.bat, Windows shell script (alone) | `copy_files.cmd` at TIED repo root; PATHEXT resolves `copy_files` for neighboring client repos |
+| **coordinator guide** | DAE mechanisms doc (alone), comparison backlog | Full-project status/anti-pattern guide under `docs/comparisons/dae-mechanisms-for-tied-improvement.md`; executable waves live in the **linked plan** — [REQ-TIED_DAE_INCORPORATION](../requirements/REQ-TIED_DAE_INCORPORATION.yaml) |
+| **DAE incorporation wave** | DAE phase, engineer checkpoint (alone) | One of Waves 0–5 in the DAE→TIED linked plan; entered via `build-plan` with slice contracts |
+| **gate check** | Step 0 script, dae_handoff (alone) | `tied gate check` CLI composing `tied_checklist_gate_validate` into a single exit code — Wave 1a |
+| **tied next** | /engineer.next (alone) | `tied next` CLI recommending one checklist slug + open REQ tokens — Wave 1b |
+| **handoff-shaped phase YAML** | DAE handoff frontmatter (alone) | Additive `working/{REQ}/handoffs/{phase}.yaml` criterion evidence; does not replace request-evidence envelope |
+| **four-way closure join** | AC↔Gherkin join (alone) | Mechanical report: REQ criteria ↔ IMPL blocks ↔ tests ↔ code block-leads — Wave 3a |
+| **pseudocode leakage lint** | spec-guardian (alone) | Lint pass flagging host syntax/SQL/paths in `essence_pseudocode` unless DATA / leakage-ok — Wave 2b |
+| **express lane** | XS one-pass (alone) | CITDP `size: XS` + `express_lane` with charter safety override — Wave 2c |
+| **build-plan readiness** | execution backlog (alone) | PLAN section listing per-wave prerequisites, first RED test paths, fixtures, and single-REQ multi-wave policy before `build-plan` |
+| **diff-scoped change-risk report** | diff-scoped CRAP, CRAP score, complexity gate (alone); bare **CRAP** in sponsor/UI prose | Optional report on changed paths combining complexity and coverage metadata; block at `verification-gate` or warn at `traceable-commit` when CITDP `diff_scoped_crap: true` (default off) — Wave 2d. Upstream alias: DAE CP7 / `crap-analyzer` (Change Risk Anti-Pattern metric). Stable machine ids: `diff_scoped_crap`, `crap_threshold`, schema `diff-scoped-crap.v1`. |
+| **agentstream gate preflight** | DAE Step 0 hook (alone) | Optional post-`tiedpreflight` call to `tied gate check` before first agentstream turn when env/manifest opt-in — W1 tail |
 | **unified TIED toolchain** | single-language tools (alone) | Developer/operator suite (MCP, agentstream, bootstrap, YAML CLIs) targeting one primary language; traceability [REQ-TIED_UNIFIED_TOOLCHAIN] |
 | **deferred push (toolchain)** | unpushed commits (alone) | Sponsor policy to keep local commits until Phase 3b strangler complete (slices 2a–2d) before first `git push`; [REQ-TIED_UNIFIED_TOOLCHAIN] PLAN 2026-09-22 |
 | **strangler slice order** | migration phase order (alone) | Phase 3b port sequence 2a executor dry-run → 2b pipeline → 2c checklist render → 2d adherence; sponsor-confirmed [REQ-TIED_UNIFIED_TOOLCHAIN] |
@@ -195,7 +206,16 @@ Exact spellings for checklist and docs cross-reference:
 | case-insensitive-primary ordering | Preferred terms |
 | client refresh | Preferred terms |
 | client-modification warning | Preferred terms |
+| coordinator guide | Preferred terms |
 | copy timestamp normalization | Preferred terms |
+| DAE incorporation wave | Preferred terms |
+| diff-scoped change-risk report | Preferred terms |
+| express lane | Preferred terms |
+| four-way closure join | Preferred terms |
+| gate check | Preferred terms |
+| handoff-shaped phase YAML | Preferred terms |
+| pseudocode leakage lint | Preferred terms |
+| tied next | Preferred terms |
 | CALCULATE_SOURCE_DATE_MIDNIGHTS | Pseudo-code block names |
 | COPY_WITH_ATTRIBUTES | Pseudo-code block names |
 | managed bootstrap artifact | Preferred terms |

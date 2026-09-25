@@ -1,0 +1,16 @@
+# [REQ-TIED_DAE_INCORPORATION] Fixture: first pending slug should be unit-test-red (W1b golden)
+execution_evidence:
+  request: REQ-TIED_DAE_INCORPORATION
+steps:
+  - slug: session-bootstrap
+    disposition: completed
+    tracking:
+      status: completed
+  - slug: test-strategy
+    disposition: completed
+    tracking:
+      status: completed
+  - slug: unit-test-red
+    disposition: pending
+    tracking:
+      status: pending

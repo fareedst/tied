@@ -1,0 +1,26 @@
+ARCH-TIED_DAE_VERIFICATION_CHARTER:
+  alternatives_considered:
+    - description: "Single IMPL-TIED_DAE_INCORPORATION owns W4"
+      name: "Keep charter under parent IMPL only"
+      rejected_because: "Sponsor split child REQ for independently versioned charter product"
+  consequences:
+    negative:
+      - "Additional CITDP/Tracker surface for charter adopters"
+    positive:
+      - "Clear opt-in boundary"
+      - "Reuse gate enforcement REQ"
+  context: "Parent DAE program Wave 4 delivers charter-optional verification plugins that compose tied_checklist_gate_validate and verification-gate hooks without forking gate semantics."
+  decision: "Centralize charter tools in mcp-server modules (mutation-cache, gauntlet-runner, disjoint verifier extension in checklist-validator) gated by CITDP record_identity fields verification_charter, mutation_cache, disjoint_verifier, and gauntlet. Defaults remain off."
+  metadata:
+    last_updated:
+      author: "plan-close-out"
+      date: "2026-09-24"
+  name: "DAE verification charter architecture"
+  related_decisions:
+    architecture:
+      - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "ARCH-TIED_DAE_INCORPORATION"
+    requirements:
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-TIED_DAE_VERIFICATION_CHARTER"
+  status: "Active"

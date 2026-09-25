@@ -11,6 +11,7 @@ import {
   validateCitdpOpenRecord,
   type AdversarialDepth,
 } from "./checklist-validator.js";
+import { validateCitdpDaeSizingFields } from "./citdp-express-lane.js";
 import {
   projectRootFromTiedBase,
   requestTokenFromCitdpFilename,
@@ -137,6 +138,13 @@ export function writeCitdpRecord(params: {
     if (!openRecord.ok) {
       return { ok: false, error: `invalid adversarial CITDP: ${openRecord.diagnostics.join(", ")}` };
     }
+  }
+
+  const daeFields = validateCitdpDaeSizingFields(mergedRecord, {
+    project_root: projectRootFromTiedBase(base),
+  });
+  if (!daeFields.ok) {
+    return { ok: false, error: `invalid CITDP DAE fields: ${daeFields.diagnostics.join(", ")}` };
   }
 
   try {

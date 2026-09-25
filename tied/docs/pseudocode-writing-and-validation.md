@@ -520,6 +520,20 @@ During GREEN (Phase E), if pseudo-code is incomplete or wrong: **stop** coding; 
 
 Validation is **three complementary layers**: **Layer A (TIED)** = repository/traceability on merged essence; **Layer B (application checklist)** = shape, contracts, coverage, traceability to tests; **Layer C (static analysis gate)** = mandatory `pseudocode_analyze` with `gate_mode: true` for changed in-scope Active IMPLs before RED tests.
 
+### Mechanical checks vs LLM judgment ([REQ-TIED_DAE_INCORPORATION])
+
+Use **deterministic tools and graph walks** for closure and consistency; reserve **human or LLM review** for domain wording and completeness judgment that no checklist row can fully encode.
+
+| **Never LLM (machine-only)** | **Always LLM (judgment)** |
+| --- | --- |
+| Enumeration — block inventory, token sets, checklist slug order, CITDP field presence | Domain wording quality — whether PRE/POST prose matches sponsor intent |
+| Inverse / graph integrity — `tied_validate_consistency`, dependency and index cross-refs | Completeness judgment — whether behavior is fully specified for the product |
+| **Four-way closure join** — `pseudocode_analyze` with `closure_join_report: true` (criterion id → IMPL block → test anchor → code block-lead; orphan blocks fail under `gate_mode`) | Contradiction resolution between competing requirements (feeds `resolve-pseudocode`, not the linter) |
+| **Leakage lint** — host-syntax patterns in `pseudocode_validate` (`leakage_lint`) | Whether an `e2e_only` justification is acceptable to the sponsor |
+| Consistency graph — REQ/ARCH/IMPL indexes, detail paths, semantic token registry | Architecture trade-offs when multiple valid designs exist |
+
+Wave close-out for doc-only slices: confirm this table appears in review notes under `working/{REQ}/evidence/` when adopting the mechanical/judgment split.
+
 **Order:** Run **Layer A** when essence changes, then **Layer B** (full checklist or structural subset per invocation context), then **Layer C** at `gate-pseudocode-validation` for changed IMPLs listed in the Tracker IMPL inventory.
 
 **Layer A — `tied_validate_consistency`** — After editing the sidecar or merged essence, with default **`include_pseudocode`**. Validates token comments and cross-references. See [mcp-server README](../mcp-server/README.md).
