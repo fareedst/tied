@@ -34,3 +34,18 @@
 ## Child REQ
 
 Charter close-out: envelope **ok**; `close_out` gate **blocked** on template tracker (adversarial slug + disjoint session ids) — see `working/REQ-TIED_DAE_VERIFICATION_CHARTER/evidence/close-out-receipt-2026-09-24.md`.
+
+---
+
+## Post-close-out addendum (2026-09-25) — residual arc
+
+| Slice | Status | Evidence |
+| --- | --- | --- |
+| **R1** | **Done** | Charter machine `close_out` **allowed: true** — [charter close-out receipt](../../REQ-TIED_DAE_VERIFICATION_CHARTER/evidence/close-out-receipt-2026-09-24.md) |
+| **R2** | **Done** | Post–`quality_evidence_collect_manifest` hook; **RISK-DAE-009** closed |
+| **R3** | **Done** | `tied_gate_check` + agentstream DAE preflight; **RISK-DAE-010** closed |
+| **R4** | **Done** | [REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY](../../tied/requirements/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY.yaml) **Implemented** — [MCB close-out receipt](../../REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/evidence/close-out-receipt-2026-09-25.md) |
+
+**Residual program:** no open slices. Machine refresh: [residual-program-close-out-2026-09-25.md](./residual-program-close-out-2026-09-25.md) and `close-out-gates-2026-09-25-residual.json`.
+
+**Risks (supersedes Process § above):** **RISK-DAE-009** and **RISK-DAE-010** **closed** (R2/R3). **RISK-DAE-008** remains (opt-in agentstream gate).

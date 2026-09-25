@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - **`docs/comparisons/`** — Treat as **private local** planning notes again (`.gitignore`); remove from git index; keep files on disk. Tracked program history remains **`working/REQ-TIED_DAE_INCORPORATION/PLAN.md`** and **RESIDUAL-PLAN.md**.
+- **DAE residual program** — R1–R4 documentation LEAP close-out; parent gate refresh `close-out-gates-2026-09-25-residual.json` (`allowed: true`).
 
 ### Added
 

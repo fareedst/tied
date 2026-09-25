@@ -134,7 +134,7 @@ CITDP-REQ-TIED_DAE_INCORPORATION:
         severity: "medium"
         summary: "Handoff YAML replaces envelope"
   test_strategy:
-    first_red_paths: "W0–3 green — see PLAN as-built tables; W4–5 planned paths in PLAN First RED table"
+    first_red_paths: "W0–5 green — see PLAN as-built tables; residual R2–R3 hooks shipped 2026-09-25"
     fixture_root: "working/REQ-TIED_DAE_INCORPORATION/fixtures/ (+ planned fixtures/charter/* at W4 entry)"
     layers:
       - approach: "manual cross-link audit"

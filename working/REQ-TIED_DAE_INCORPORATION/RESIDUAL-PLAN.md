@@ -379,7 +379,8 @@ See [methodology PLAN — Migration gates](../REQ-TIED_METHODOLOGY_CLIENT_BOUNDA
 | W2d runner (R2) | Done | — | — |
 | MCP + agentstream (R3) | Done | — | — |
 | Methodology promotion | Done | was **plan-new-feature** | `@working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/PLAN.md` |
-| Migration gates G1–G4 | **Met (2026-09-25)** | **plan-close-out** | `@working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/PLAN.md` — envelope + REQ verification |
+| Migration gates G1–G4 | **Met (2026-09-25)** | **plan-close-out** | Done — [MCB close-out receipt](../REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/evidence/close-out-receipt-2026-09-25.md) |
 | Residual doc reconcile | Done (pass 2) | **refine-plan** | `@working/REQ-TIED_DAE_INCORPORATION/RESIDUAL-PLAN.md` |
+| Residual program LEAP close-out | Done (2026-09-25) | **plan-close-out** | [residual-program-close-out-2026-09-25.md](./evidence/residual-program-close-out-2026-09-25.md) |
 
-**Recommended next invocation:** **`/plan-close-out`** (or **`build-plan`** close-out slice) on **`@working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/PLAN.md`** — migration G1–G4 met; run envelope validate + `sub-close-out-evidence-sync`. Do **not** fold methodology tokens into DAE/charter stacks.
+**Recommended next invocation:** **None** for DAE residual — regression fixes or optional operator bundle pilot only ([methodology offline runbook](../../tied/docs/methodology-client-boundary-offline-runbook.md)). Do **not** fold methodology tokens into DAE/charter stacks.

@@ -1,0 +1,119 @@
+{
+  "phase": "close_out",
+  "depth_tier": "minimal",
+  "activation_collect": {
+    "skipped": true,
+    "reason": "minimal_depth",
+    "run_id": "dae-residual-leap-close-out"
+  },
+  "reconcile": {
+    "ok": true,
+    "report": {
+      "request_token": "",
+      "findings": [
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_DAE_INCORPORATION/gates/pre_implementation-2026-09-25T00-13-28-206Z.json",
+            "stored_tracker_hash": "sha256:ed45491d04b0b637922cada2760d8cb8f56e47df8c899ec90e6391c50c517fd6",
+            "current_tracker_hash": "sha256:98249c427fb0d7c62ae3765b7d193b93ffd54028ea0b51508d2598846bd29613",
+            "stored_citdp_hash": "sha256:b64b770795e691653fc50890ce1c5543e433301f6dd1d12d19124adbdf24402c",
+            "current_citdp_hash": "sha256:24064d942290cf1672ad3a37c3fde531560cc6f360081f6fe37034bf9cb7a560"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_DAE_INCORPORATION/gates/pre_implementation-2026-09-25T00-49-48-881Z.json",
+            "stored_tracker_hash": "sha256:98249c427fb0d7c62ae3765b7d193b93ffd54028ea0b51508d2598846bd29613",
+            "current_tracker_hash": "sha256:98249c427fb0d7c62ae3765b7d193b93ffd54028ea0b51508d2598846bd29613",
+            "stored_citdp_hash": "sha256:403ed4b0d2403a2f4b0d96b671bbdcfbe23ad3504792dbbcfd219a8eb6c6dc46",
+            "current_citdp_hash": "sha256:24064d942290cf1672ad3a37c3fde531560cc6f360081f6fe37034bf9cb7a560"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_DAE_INCORPORATION/gates/pre_implementation-refine-plan-2026-09-24-pass2.json",
+            "stored_tracker_hash": "sha256:ed45491d04b0b637922cada2760d8cb8f56e47df8c899ec90e6391c50c517fd6",
+            "current_tracker_hash": "sha256:98249c427fb0d7c62ae3765b7d193b93ffd54028ea0b51508d2598846bd29613",
+            "stored_citdp_hash": "sha256:b64b770795e691653fc50890ce1c5543e433301f6dd1d12d19124adbdf24402c",
+            "current_citdp_hash": "sha256:24064d942290cf1672ad3a37c3fde531560cc6f360081f6fe37034bf9cb7a560"
+          }
+        }
+      ],
+      "ledger_rows": 18,
+      "read_only": true,
+      "process_grade": {
+        "score": 88,
+        "band": "B",
+        "dimensions": [
+          {
+            "name": "tracker_integrity",
+            "score": 100,
+            "weight": 0.3,
+            "gap_codes": []
+          },
+          {
+            "name": "verification_manifest",
+            "score": 100,
+            "weight": 0.25,
+            "gap_codes": []
+          },
+          {
+            "name": "hash_alignment",
+            "score": 40,
+            "weight": 0.2,
+            "gap_codes": [
+              "evidence_stale"
+            ]
+          },
+          {
+            "name": "ledger_correlation",
+            "score": 100,
+            "weight": 0.15,
+            "gap_codes": []
+          },
+          {
+            "name": "typed_evidence_refs",
+            "score": 100,
+            "weight": 0.1
+          }
+        ],
+        "gap_codes": [
+          "evidence_stale"
+        ]
+      }
+    }
+  },
+  "quality_manifest": {
+    "ok": false,
+    "skipped": true,
+    "reason": "no_citdp_commands"
+  },
+  "evidence_chain_profile": {
+    "ok": false,
+    "skipped": true,
+    "reason": "no_psa_reports"
+  },
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "gate": {
+    "allowed": true,
+    "blocking": false,
+    "diagnostics": [],
+    "evidence_hydrated": true,
+    "hydration_diagnostics": []
+  },
+  "envelope": {
+    "ok": true,
+    "path": "working/REQ-TIED_DAE_INCORPORATION/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 0,
+    "advisory_gap_count": 0,
+    "diagnostics": []
+  }
+}
