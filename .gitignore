@@ -8,7 +8,8 @@
 .markscope-preview/
 docs/*26-??-??*.md
 docs/agentstream-unitconv-general-transcript-difficulties.md
-# Comparison / methodology notes (linked from tied/docs, REQ satisfaction criteria — track in git)
+# Private local comparison / planning docs (maintain on disk; not published in git)
+docs/comparisons/
 docs/social/
 docs/visuals/visual-specs.md
 get-prompts.md

@@ -35,7 +35,7 @@ REQ-TIED_DAE_INCORPORATION:
   satisfaction_criteria:
     - criterion: "Linked PLAN.md records six waves, non-goals, success criteria, and dependency REQs; coordinator guide links to PLAN without duplicating full backlog."
       id: "SC-DAE-WAVE-PLAN"
-      metric: "working/REQ-TIED_DAE_INCORPORATION/PLAN.md + docs/comparisons/dae-mechanisms-for-tied-improvement.md cross-links"
+      metric: "working/REQ-TIED_DAE_INCORPORATION/PLAN.md (tracked); optional local coordinator under docs/comparisons/ (gitignored)"
     - criterion: "Wave 0 (maintain) documents shipped gate surface and regression ownership; no regression in tied_checklist_gate_validate or dual harness paths."
       id: "SC-DAE-WAVE0-MAINTAIN"
       metric: "Wave 0 checklist + existing gate tests"
