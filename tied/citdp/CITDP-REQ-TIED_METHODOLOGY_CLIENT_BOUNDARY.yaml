@@ -1,0 +1,88 @@
+CITDP-REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY:
+  change_definition:
+    current_behavior: "MCP detail-loader and yaml-loader reject writes to tied/methodology/; copy_files.sh refreshes inherited methodology; advisory memo at working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/PLAN.md compared five patterns without tracked REQ/CITDP."
+    desired_behavior: "Tracked REQ/ARCH/IMPL program delivers Phase A mechanical enforcement (optional bootstrap read-only, hook template, CI doc) composed with MCP guards; Phase B documents and spikes MCP bundled methodology read with migration gates; independent from DAE incorporation tokens."
+    non_goals:
+      - "Change project YAML promotion rules or LEAP auto-write into tied/methodology/"
+      - "Merge into REQ-TIED_DAE_INCORPORATION or REQ-TIED_DAE_VERIFICATION_CHARTER"
+      - "Remove copy_files.sh methodology tree in Phase A"
+      - "Replace MCP project-only write guards with hooks-only policy"
+    success_criteria:
+      - "Existing detail-loader reject-writes tests remain green"
+      - "Phase A RED tests for bootstrap flag and hook template before production code"
+      - "Phase B spike acceptance criteria recorded in PLAN.md"
+    unchanged_behavior: "Methodology-first read order; client refresh overwrites tied/methodology/ only; project vocab under tied/vocab/ writable"
+  impact_analysis:
+    blast_radius: "Bootstrap tooling, optional client hook templates, operator docs; Phase B touches mcp-server read path only in spike slice."
+    modules_or_boundaries: "tools/bootstrap/, copy_files.sh manifest, mcp-server/src/detail-loader.ts, mcp-server/src/yaml-loader.ts, client hook templates, tied/docs/client-development-index.md, working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/*"
+    phased_rollout:
+      - "Phase A — near-term pattern #4 (build-plan slice A)"
+      - "Phase B — strategic pattern #2 spike (build-plan slice B)"
+    tied_tokens_affected:
+      - "REQ-TIED_SETUP"
+      - "REQ-TIED_UNIFIED_TOOLCHAIN"
+    tied_tokens_new:
+      - "ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY"
+      - "IMPL-TIED_METHODOLOGY_CLIENT_BOUNDARY"
+      - "REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY"
+  leap_feedback:
+    divergences_from_analysis: "Advisory memo promoted wholesale; Phase B remains spike-only at plan-new-feature boundary"
+    record_status: "draft"
+    tied_stack_updates_required:
+      - "working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/checklist-tracker.yaml"
+      - "working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/PLAN.md"
+  record_identity:
+    change_request_id: "REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY"
+    gate_policy: "advisory"
+    phase: "planning"
+    profile_depth: "minimal"
+    recorded_at: "2026-09-24"
+    title: "Methodology client boundary program (R4)"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Bootstrap chmod breaks copy_files.sh refresh on Unix clients"
+        - "Git hook blocks all commits including legitimate project YAML fixes"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Hook template scopes reject to tied/methodology/ prefix only"
+        - "Read-only flag documented opt-in and skipped on Windows with ACL guidance"
+      evidence_references:
+        - "mcp-server/src/detail-loader-sentinel.test.ts"
+        - "tied/citdp/CITDP-REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY.yaml"
+        - "working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/PLAN.md"
+      falsification_questions:
+        - "Do hooks bypass or weaken MCP methodology write rejection?"
+        - "Does Phase A default-on chmod without sponsor opt-in?"
+      gate_policy: "advisory"
+      sub_adversarial_inquiry_pass: "not_applicable"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    risks:
+      - id: "RISK-MCB-002"
+        likelihood: "low"
+        mitigation: "COMPOSE_WITH_EXISTING_MCP_WRITE_GUARDS pseudo-code; extend loader tests"
+        severity: "high"
+        summary: "Hooks-only policy accidentally replaces MCP write rejection"
+      - id: "RISK-MCB-001"
+        likelihood: "medium"
+        mitigation: "Document Windows ACL; hook remains cross-platform; chmod Unix-only and opt-in"
+        severity: "medium"
+        summary: "Cross-platform read-only parity gap"
+      - id: "RISK-MCB-003"
+        likelihood: "medium"
+        mitigation: "Phase B migration gates; copy_files.sh until parity tests pass"
+        severity: "medium"
+        summary: "Premature removal of local methodology tree"
+  test_strategy:
+    composition_tests:
+      - "Bootstrap flag applies read-only only when explicitly enabled"
+      - "Hook template rejects staged tied/methodology/** without invoking MCP"
+    red_first_slices:
+      - "Phase A: bootstrap readonly flag test in tools/bootstrap harness"
+      - "Phase A: hook template staged-path rejection test"
+      - "Phase B: bundled read parity fixture test (spike)"
+    unit_tests:
+      - "detail-loader continues to reject methodology-owned write paths"

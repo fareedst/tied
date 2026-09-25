@@ -1,0 +1,21 @@
+IMPL-TIED_METHODOLOGY_CLIENT_BOUNDARY:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY"
+    implementation: []
+    requirements:
+      - "REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY"
+  description: "Phase-delivered bootstrap hooks, client hook template, and strategic MCP methodology bundle spike per essence_pseudocode sidecar."
+  implementation_approach:
+    details:
+      - approach: "INSTALL_METHODOLOGY_READONLY_BOOTSTRAP_FLAG, INSTALL_CLIENT_HOOK_TEMPLATE, DOCUMENT_CI_METHODOLOGY_PATH_GUARD."
+        phase: "Phase A"
+      - approach: "SPIKE_BUNDLED_METHODOLOGY_READ, DOCUMENT_MIGRATION_FROM_COPIED_TREE."
+        phase: "Phase B"
+    summary: "RED tests before production per slice; reuse detail-loader and yaml-loader write guards; no fork of tied_checklist_gate_validate."
+  metadata:
+    last_updated:
+      author: "plan-new-feature"
+      date: "2026-09-24"
+  name: "Methodology client boundary implementation"
+  status: "Proposed"

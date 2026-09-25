@@ -107,7 +107,11 @@ cd C:\dev\my-client-app
 ```bash
 ./copy_files.sh /path/to/client
 ./copy_files.sh --merge-vocab
+./copy_files.sh --install-methodology-hook /path/to/client
+./copy_files.sh --methodology-readonly --install-methodology-hook /path/to/client  # Unix opt-in chmod
 ```
+
+Methodology boundary (Phase A, [REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY]): `--methodology-readonly` and `--install-methodology-hook` are **opt-in** (not default-on). After hook install, enable with `git config core.hooksPath .githooks`. CI guard recipe: `tied/docs/client-development-index.md` § **methodology-boundary-ci-guard**.
 
 ## Manifest
 

@@ -148,9 +148,14 @@ describe("quality validation MCP bindings [PROC-QUALITY_ASSURANCE]", () => {
       covered_tokens: [],
       proof_boundaries: ["command result only"],
     });
-    const value = body(result) as { schema_version?: string; command_results?: Array<{ result: string }> };
+    const value = body(result) as {
+      schema_version?: string;
+      command_results?: Array<{ result: string }>;
+      diff_scoped_crap_hook?: { skipped?: boolean };
+    };
     assert.equal(value.schema_version, "verification-evidence-manifest.v1");
     assert.equal(value.command_results?.[0]?.result, "passed");
+    assert.equal(value.diff_scoped_crap_hook, undefined);
   });
 
   it("wires conditional security profile validation", async () => {

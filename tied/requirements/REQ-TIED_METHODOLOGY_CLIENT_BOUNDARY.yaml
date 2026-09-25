@@ -1,0 +1,49 @@
+REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY:
+  category: "Methodology"
+  description: "Independent program (R4) to strengthen [PROC-TIED_METHODOLOGY_READONLY] at the client: near-term mechanical enforcement (pattern #4 — optional bootstrap read-only flags, git hook template, CI recipe) composed with existing MCP project-only writes; strategic north star (pattern #2 — MCP bundled methodology read + tied-cli parity) documented and spiked without merging into REQ-TIED_DAE_INCORPORATION or charter tokens."
+  metadata:
+    created:
+      author: "plan-new-feature"
+      date: "2026-09-24"
+    last_updated:
+      author: "plan-new-feature"
+      date: "2026-09-24"
+      reason: "Promote advisory working PLAN to tracked TIED stack"
+  name: "Methodology client boundary program"
+  priority: "P2"
+  rationale:
+    benefits:
+      - "Clear phased path from copy_files.sh layout toward MCP virtualization"
+      - "Defense-in-depth beyond MCP write guards for inherited methodology YAML"
+      - "Isolated REQ traceability from DAE incorporation program"
+    problems_solved:
+      - "Advisory comparison of delivery patterns lacked executable PLAN and CITDP"
+      - "Agents can still stage edits under tied/methodology/ when OS permissions allow"
+      - "Strategic MCP read model migration undefined relative to bootstrap refresh semantics"
+    why: "Clients inherit read-only methodology via copy_files.sh and MCP loaders, but sponsors requested proven pattern comparison and a scoped implementation program starting with low-ceremony hooks while preserving methodology-first reads and project-only writes."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_SETUP"
+      - "REQ-TIED_UNIFIED_TOOLCHAIN"
+    related_to:
+      - "REQ-TIED_VOCABULARY_OWNERSHIP"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "MCP detail-loader and yaml-loader remain authoritative for project-only writes; Phase A adds friction only and does not remove existing reject-writes-to-methodology tests."
+      id: "SC-MCB-MCP-COMPOSE"
+      metric: "mcp-server detail-loader-sentinel tests unchanged or extended"
+    - criterion: "No traceability dependency on REQ-TIED_DAE_INCORPORATION or REQ-TIED_DAE_VERIFICATION_CHARTER tokens."
+      id: "SC-MCB-INDEPENDENCE"
+      metric: "CITDP tied_tokens_affected excludes DAE program tokens"
+    - criterion: "Phase A (near term): optional bootstrap installs Unix read-only tied/methodology (when flag set), ships client hook template rejecting staged paths under tied/methodology/, and documents CI path guard; RED/composition tests lock hook and bootstrap behavior without forking MCP write rules."
+      id: "SC-MCB-PHASE-A-MECHANICAL"
+      metric: "tools/bootstrap + client hook template tests + client-development-index doc"
+    - criterion: "Phase B (strategic): PLAN and CITDP record migration spikes for bundled methodology read in MCP/tied-cli with explicit non-removal of copy_files.sh until parity gates pass."
+      id: "SC-MCB-PHASE-B-SPIKE"
+      metric: "working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/PLAN.md Phase B contract + spike acceptance criteria"
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY"
+    implementation:
+      - "IMPL-TIED_METHODOLOGY_CLIENT_BOUNDARY"

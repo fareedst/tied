@@ -35,6 +35,7 @@ import {
 import { copySidecarTemplate } from "./sidecar-template.mjs";
 import { installClaudeMdTemplate } from "./claude-md.mjs";
 import { mergeClaudeAdherenceHooks } from "./claude-adherence-hooks.mjs";
+import { applyMethodologyClientBoundary } from "./methodology-client-boundary.mjs";
 
 function resolveTemplateFile(templatesDir, scriptDir, filename) {
   const fromTemplates = path.join(templatesDir, filename);
@@ -238,7 +239,14 @@ export function bootstrapTied(projectRoot, options = {}) {
   verifyInheritedDetailFiles(tiedDir, paths.INHERITED_DETAIL_REQUIRED);
   verifyMethodologyPseudocodeTokenRefs(tiedDir);
 
-  return { projectRoot, tiedDir, tiedBasePathValue };
+  // [IMPL-TIED_METHODOLOGY_CLIENT_BOUNDARY] [ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY] [REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY]
+  const methodologyBoundary = applyMethodologyClientBoundary(projectRoot, {
+    methodologyReadonly: options.methodologyReadonly === true,
+    installMethodologyHook: options.installMethodologyHook === true,
+    platform: process.platform,
+  });
+
+  return { projectRoot, tiedDir, tiedBasePathValue, methodologyBoundary };
 }
 
 /**

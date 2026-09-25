@@ -2069,6 +2069,17 @@ REQ-TIED_FIDELITY_RESEARCH:
       method: "Read-only safety checks"
     - coverage: "Manifest, finding lifecycle, specification-state classification, fidelity matrices, promotion, and deterministic rerun."
       method: "Unit tests"
+REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY:
+  category: "Methodology"
+  cross_references:
+    - "ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY"
+    - "IMPL-TIED_METHODOLOGY_CLIENT_BOUNDARY"
+    - "REQ-TIED_SETUP"
+    - "REQ-TIED_UNIFIED_TOOLCHAIN"
+  detail_file: "requirements/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY.yaml"
+  name: "Methodology client boundary program"
+  priority: "P2"
+  status: "Planned"
 REQ-TIED_NEW_CLIENT_ADHERENCE:
   category: "Functional"
   cross_references:

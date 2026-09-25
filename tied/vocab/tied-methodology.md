@@ -23,6 +23,7 @@
 | **methodology-first** | methodology then project | Read order: inherited methodology detail, then project fallback when the inherited path is absent or a **sentinel** |
 | **project fallback** | client override read | Second-choice read of a project-owned detail file when methodology-first does not yield a **usable detail path** |
 | **project-only writes** | write to methodology | MCP and agents mutate only project YAML; inherited methodology files remain read-only |
+| **methodology consumption pattern** | delivery pattern (alone) | How a client obtains and protects inherited R+A+I at rest and at read time; compared in [REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY](../requirements/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY.yaml) (near-term mechanical #4, strategic MCP virtualization #2) |
 | **pseudo-code sidecar** | essence in index body | Plain Markdown `IMPL-*-pseudocode.md`; not YAML |
 | **module validation** | unit testing (alone) | Independent validation before integration per [REQ-MODULE_VALIDATION](../requirements/REQ-MODULE_VALIDATION.yaml) |
 | **binding inventory** | glue list, wiring notes (alone) | Table of trigger→callee→arguments→effect seams; see [`../docs/composition-coverage.md`](../docs/composition-coverage.md) |

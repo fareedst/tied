@@ -1850,6 +1850,14 @@ ARCH-TIED_FIDELITY_RESEARCH:
       - "mcp-server/src/fidelity-research/snapshot.test.ts"
       - "mcp-server/src/fidelity-research/specification-state.test.ts"
       - "mcp-server/src/fidelity-research/structural-analysis.test.ts"
+ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY:
+  cross_references:
+    - "IMPL-TIED_METHODOLOGY_CLIENT_BOUNDARY"
+    - "REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY"
+    - "REQ-TIED_SETUP"
+  detail_file: "architecture-decisions/ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY.yaml"
+  name: "Methodology client boundary architecture"
+  status: "Proposed"
 ARCH-TIED_NEW_CLIENT_ADHERENCE:
   cross_references:
     architecture:

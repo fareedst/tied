@@ -10,6 +10,7 @@
 #   ./copy_files.sh /path/to/project
 #   ./copy_files.sh            # copies into the current working directory
 #   ./copy_files.sh --merge-vocab /path/to/project
+#   ./copy_files.sh --methodology-readonly --install-methodology-hook /path/to/project
 #
 # After bootstrap, in Cursor you may run: agent mcp enable tied-yaml — approve; type quit to exit the Agent CLI.
 

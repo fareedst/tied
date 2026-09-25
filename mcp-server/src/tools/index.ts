@@ -123,6 +123,11 @@ import { generateEvidenceChainProfile } from "../fidelity-research/evidence-chai
 import { createLiveStructuralValidators } from "../fidelity-research/live-structural-validators.js";
 import { hydrateGateEvidenceFromActivation } from "../checklist-gate-evidence-hydration.js";
 import { validateChecklistGate } from "../checklist-validator.js";
+import {
+  defaultPathsForRequest,
+  runGateCheckComposition,
+} from "../dae/gate-check-composition.js";
+import { createMcpGateValidateFn } from "../dae/gate-check-mcp.js";
 import { persistGateDecisionReceipt } from "../gate-receipt.js";
 import { runClaimsEvidenceReviewMcp } from "../claims-evidence-review/mcp-handler.js";
 import { collectChecklistActivation } from "../checklist-activation-collect.js";
@@ -1837,6 +1842,96 @@ export const allTools = [
     },
   },
   {
+    name: "tied_gate_check",
+    config: {
+      description:
+        "[REQ-TIED_DAE_INCORPORATION] Compose tied_checklist_gate_validate with Tracker/CITDP paths (same algorithm as `tied gate check` CLI). Returns allowed, exit_code, receipt_path, and reasons.",
+      inputSchema: z.object({
+        request_token: z.string().describe("REQ token for default working/ and tied/citdp/ paths."),
+        phase: z.enum(["pre_implementation", "verification", "close_out"]),
+        slug: z.string().optional().describe("When set, prior tracker steps must be terminal."),
+        tracker_path: z.string().optional(),
+        citdp_path: z.string().optional(),
+        project_root: z.string().optional().describe("Client repo root; defaults to parent of TIED_BASE_PATH."),
+        check_branch: z.boolean().optional().describe("Hard-fail when git branch mismatches CITDP/Tracker (W2a)."),
+      }),
+    },
+    handler: async (args: {
+      request_token: string;
+      phase: "pre_implementation" | "verification" | "close_out";
+      slug?: string;
+      tracker_path?: string;
+      citdp_path?: string;
+      project_root?: string;
+      check_branch?: boolean;
+    }) => {
+      try {
+        const projectRoot = args.project_root
+          ? path.resolve(args.project_root)
+          : path.resolve(getBasePath(), "..");
+        const requestToken = args.request_token.trim();
+        if (!requestToken) {
+          return textContent(
+            JSON.stringify({
+              allowed: false,
+              exit_code: 2,
+              receipt_path: null,
+              reasons: ["missing_request_token"],
+            }, null, 2),
+          );
+        }
+        const defaults = defaultPathsForRequest(
+          projectRoot,
+          requestToken,
+          args.tracker_path,
+          args.citdp_path,
+        );
+        let callGateValidate;
+        try {
+          callGateValidate = createMcpGateValidateFn();
+        } catch (e) {
+          const msg = e instanceof Error ? e.message : String(e);
+          return textContent(
+            JSON.stringify({
+              allowed: false,
+              exit_code: 2,
+              receipt_path: null,
+              reasons: [msg],
+            }, null, 2),
+          );
+        }
+        const summary = await runGateCheckComposition({
+          requestToken,
+          phase: args.phase,
+          slug: args.slug,
+          trackerPath: defaults.trackerPath,
+          citdpPath: defaults.citdpPath,
+          projectRoot,
+          checkBranch: args.check_branch === true,
+          callGateValidate,
+        });
+        return textContent(
+          JSON.stringify({
+            allowed: summary.allowed,
+            exit_code: summary.exit_code,
+            receipt_path: summary.receipt_path ?? null,
+            reasons: summary.reasons,
+          }, null, 2),
+        );
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : String(e);
+        return textContent(
+          JSON.stringify({
+            allowed: false,
+            exit_code: 2,
+            receipt_path: null,
+            reasons: [msg],
+          }, null, 2),
+        );
+      }
+    },
+  },
+  {
     name: "tied_adherence_reconcile_run",
     config: {
       description:
@@ -2105,12 +2200,32 @@ export const allTools = [
         covered_tokens: z.array(z.string()),
         proof_boundaries: z.array(z.string()),
         decision_references: z.array(z.string()).optional(),
+        envelope_patch: z
+          .object({
+            request_token: z.string(),
+            project_root: z.string(),
+            manifest_relative_path: z.string(),
+          })
+          .optional(),
+        diff_scoped_crap_hook: z
+          .object({
+            request_token: z.string(),
+            project_root: z.string(),
+            citdp_path: z.string().optional(),
+            diff_paths: z.array(z.string()).optional(),
+            coverage_by_path: z.record(z.number()).optional(),
+            diff_selection: z.enum(["staged", "unstaged", "both"]).optional(),
+          })
+          .optional(),
       }),
     },
     handler: async (args: QualityEvidenceCollectionInput) => {
       try {
-        const manifest = await collectVerificationEvidence(args);
-        return textContent(JSON.stringify(manifest, null, 2));
+        const { manifest, diff_scoped_crap_hook } = await collectVerificationEvidence(args);
+        const payload = diff_scoped_crap_hook
+          ? { ...manifest, diff_scoped_crap_hook }
+          : manifest;
+        return textContent(JSON.stringify(payload, null, 2));
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
         return textContent(JSON.stringify({ ok: false, error: msg }, null, 2));

@@ -10,12 +10,14 @@
 | **TS pipeline** | Checklist run, live executor, dry-run, reconcile, previews — default (`TIED_AGENTSTREAM_IMPL=ts` or unset) |
 | **Go legacy** | **Removed** — `TIED_AGENTSTREAM_IMPL=go` exits with reinstall hint; see [phase4d-go-oracle-freeze.json](../../../working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4d-go-oracle-freeze.json) |
 | **tiedpreflight** | `src/tiedpreflight.ts` |
+| **DAE gate preflight (opt-in)** | `src/dae-gate-preflight.ts` — after static `tiedpreflight`, before first turn when `AGENTSTREAM_DAE_GATE_CHECK=1` or repo `.tied-yaml.yaml` `dae.agentstream_gate_check: true`; spawns `tied gate check --phase pre_implementation` for batch `request_token` (`--checklist-var REQUEST=` or tracker `request_token`) |
 | **Golden fixtures** | `testdata/checklist/`, `testdata/live/`, frozen oracle outputs in `testdata/oracle/` |
 
 ## Environment
 
 - **`TIED_AGENTSTREAM_IMPL`** — `ts` (default). Value **`go`** is rejected (Phase **4d**); emergency legacy Go: checkout commit in [phase4d-go-oracle-freeze.json](../../../working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4d-go-oracle-freeze.json).
 - **`AGENTSTREAM`** — optional path override for shell drivers (`scripts/run-feature-batch-agentstream.sh`, etc.).
+- **`AGENTSTREAM_DAE_GATE_CHECK=1`** — opt-in DAE gate pre-turn (requires tied-yaml MCP preflight **not** skipped). Disable via unset env and `dae.agentstream_gate_check: false` (default). **`AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1`**, **`--skip-tied-mcp-preflight`**, or **`-y` / `--yes`** follow the same semantics as static `tiedpreflight` (including exit **2** misconfig bypass with `-y`).
 
 ### Qualified argv (`TIED_AGENTSTREAM_IMPL=ts`)
 

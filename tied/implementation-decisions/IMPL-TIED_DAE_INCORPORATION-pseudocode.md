@@ -159,13 +159,15 @@ ACTIVE PROCEDURE OPTIONAL_DIFF_SCOPED_CRAP_HOOK
   INPUT enabled BOOLEAN DEFAULT false
   INPUT hook_slug  // verification-gate | traceable-commit
   PRE enabled == false OR coverage map available
+  PRE CITDP.diff_scoped_crap == true to run after quality_evidence_collect_manifest
   POST report path working/{REQ}/evidence/diff-scoped-crap-{timestamp}.json when enabled
-  EFFECTS evidence artifact only; compose test_adequacy_validate metadata + diff from git or tied_plumb_diff_impact_preview
+  EFFECTS evidence artifact only; compose coverage map metadata + diff paths from git (listGitDiffPathsInRepo) or explicit hook override; default off when CITDP diff_scoped_crap false
+  CALL runOptionalDiffScopedCrapAfterManifest() from collectVerificationEvidence after successful manifest (mcp-server/src/diff-scoped-crap-hook.ts)
   FAILURE_MODES above_threshold -> fail when hook_slug=verification-gate AND CITDP.crap_block; warn when traceable-commit
 END ACTIVE PROCEDURE
 
 ACTIVE PROCEDURE WIRE_AGENTSTREAM_DAE_GATE_PREFLIGHT
-  // [IMPL-TIED_DAE_INCORPORATION] [ARCH-TIED_DAE_INCORPORATION] [REQ-TIED_DAE_INCORPORATION] — How: Optional post-tiedpreflight pre-turn gate check — W1 tail.
+  // [IMPL-TIED_DAE_INCORPORATION] [ARCH-TIED_DAE_INCORPORATION] [REQ-TIED_DAE_INCORPORATION] — How: Optional post-tiedpreflight pre-turn gate check — R3b shipped (dae-gate-preflight.ts + executor-dry-run/live-executor).
   INPUT batch_request_token
   INPUT agentstream_config
   PRE tiedpreflight.status == ok

@@ -123,11 +123,12 @@ From the repo root (or any client with `@tied/cli` on `PATH`), these subcommands
 | Command | Purpose | Exit codes |
 | --- | --- | --- |
 | `tied gate check --request-token REQ-… --phase pre_implementation\|verification\|close_out` | Calls `tied_checklist_gate_validate` with Tracker + CITDP paths (defaults under `working/{REQ}/` and `tied/citdp/`). Optional `--slug`, `--tracker`, `--citdp`, `--project-root`, `--check-branch` (hard-fail on branch mismatch vs CITDP `branch:` or Tracker `execution_evidence.branch`; opt-out via `.tied-yaml.yaml` `dae.branch_check: false` or CITDP `branch_check: skip`). | `0` allowed; `1` blocked; `2` misconfig / MCP down |
+| MCP **`tied_gate_check`** | Same composition as **`tied gate check`** (returns `allowed`, `exit_code`, `receipt_path`, `reasons[]`). | Same exit semantics in `exit_code` |
 | `tied branch check --request-token REQ-…` | Standalone W2a branch hygiene (same algorithm as `--check-branch`). | `0` match/skip; `1` mismatch; `2` not a git repo |
 | `tied next [--request-token REQ-…]` | Discovers Authoritative Tracker(s), prints the first pending checklist **slug** in YAML order plus open REQ tokens and CITDP draft phases. | `0` recommendation; `1` no pending work; `2` ambiguous trackers |
 | `tied handoff validate --path …` | Validates additive `working/{REQ}/handoffs/{phase}.yaml` (schema v1); does **not** replace `request-evidence-envelope.v1.json`. | `0` valid; `1` schema errors |
 
-MCP `pseudocode_validate` accepts optional `leakage_lint` (default on) and `gate_mode` for W2b host-syntax leakage rules. CITDP template documents `size`, `gate_profile`, and `express_lane` (Wave 2c). Optional **diff-scoped change-risk report** hooks (upstream DAE CP7 / CRAP metric) are documented on checklist slugs `verification-gate` and `traceable-commit` when CITDP `diff_scoped_crap: true` (Wave 2d; default off). The report module is tested under `mcp-server/src/diff-scoped-crap.test.ts`; operators run it as a documented verification-gate sub-step — there is no automatic post–quality-manifest runner yet (see PLAN RISK-DAE-009).
+MCP `pseudocode_validate` accepts optional `leakage_lint` (default on) and `gate_mode` for W2b host-syntax leakage rules. CITDP template documents `size`, `gate_profile`, and `express_lane` (Wave 2c). Optional **diff-scoped change-risk report** hooks (upstream DAE CP7 / CRAP metric) are documented on checklist slugs `verification-gate` and `traceable-commit` when CITDP `diff_scoped_crap: true` (Wave 2d; default off). After successful `quality_evidence_collect_manifest`, `collectVerificationEvidence` invokes `runOptionalDiffScopedCrapAfterManifest` when CITDP enables the hook (R2 / RISK-DAE-009); report JSON under `working/{REQ}/evidence/diff-scoped-crap-{timestamp}.json`. Tests: `mcp-server/src/diff-scoped-crap.test.ts`, `mcp-server/src/quality-evidence-collection.test.ts`.
 
 ### Validation depth (Wave 3)
 
@@ -162,6 +163,55 @@ Traceability: [REQ-TIED_DAE_INCORPORATION](../requirements/REQ-TIED_DAE_INCORPOR
 | **Charter compliance table (W5b)** | `tied_checklist_gate_validate` at `pre_implementation` | Pass structured `evidence.charterCompliance` (immutable categories/tokens, touch set, new ARCH tokens, approval evidence). Blocks when immutable scope touched without remediation. Default clients unchanged when evidence omitted. |
 
 Fixtures: `working/REQ-TIED_DAE_INCORPORATION/fixtures/graph/arch-cycle-minimal.yaml`, `fixtures/charter/immutable-req-touch.yaml`.
+
+### Methodology client boundary (R4 — separate program)
+
+Traceability: [REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY](../requirements/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY.yaml) (**Planned**; independent of DAE incorporation). Executable plan: `working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/PLAN.md`. CITDP: `tied/citdp/CITDP-REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY.yaml`.
+
+| Phase | Intent | Operator note |
+| --- | --- | --- |
+| **A** | Pattern **#4** — optional bootstrap Unix read-only `tied/methodology/`, client pre-commit hook template for `tied/methodology/**`, CI path guard doc | Composes with MCP `detail-loader` / `yaml-loader` project-only writes; enter via **`build-plan`** remainder `Phase A` |
+| **B** | Pattern **#2** — MCP bundled methodology read spike + migration gates | Does not remove `copy_files.sh` tree until parity tests pass; remainder `Phase B` |
+
+Policy anchor: `[PROC-TIED_METHODOLOGY_READONLY]` in [processes.md](processes.md).
+
+#### methodology-boundary-ci-guard (Phase A — advisory CI)
+
+Compose with MCP `detail-loader` / `yaml-loader` rejection — hooks and CI add friction; they do **not** replace project-only MCP write guards.
+
+**Bootstrap (opt-in, not default-on):**
+
+```bash
+./copy_files.sh --install-methodology-hook /path/to/client
+# Unix only, explicit:
+./copy_files.sh --methodology-readonly --install-methodology-hook /path/to/client
+git -C /path/to/client config core.hooksPath .githooks
+```
+
+On Windows, use the hook template (via `--install-methodology-hook`) and CI guard first; Unix `chmod` read-only is skipped with operator guidance in bootstrap output.
+
+**CI job pattern (copy-paste):** fail or warn when any changed path is under `tied/methodology/`:
+
+```bash
+# Advisory (exit 0 with message) — flip to required by setting MCB_CI_BLOCK=1
+MCB_CI_BLOCK="${MCB_CI_BLOCK:-0}"
+base="${GITHUB_BASE_REF:-origin/main}"
+if git rev-parse --verify "$base" >/dev/null 2>&1; then
+  range="$base...HEAD"
+else
+  range="HEAD~1..HEAD"
+fi
+hits="$(git diff --name-only "$range" -- 'tied/methodology' 'tied/methodology/**' || true)"
+if [[ -n "$hits" ]]; then
+  echo "Methodology boundary: diff touches read-only tied/methodology/ (refresh via copy_files.sh from TIED source):" >&2
+  echo "$hits" >&2
+  if [[ "$MCB_CI_BLOCK" == "1" ]]; then
+    exit 1
+  fi
+fi
+```
+
+Local pre-commit equivalent: `.githooks/pre-commit` installed by `--install-methodology-hook` (see `tools/bootstrap/templates/pre-commit-methodology-guard.sh`).
 
 After writes: `lint_yaml` on changed YAML + `tied_validate_consistency` (checklist `sub-yaml-edit-loop`).
 

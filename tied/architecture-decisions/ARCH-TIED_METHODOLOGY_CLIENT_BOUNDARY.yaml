@@ -1,0 +1,34 @@
+ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY:
+  alternatives_considered:
+    - description: "npm @tied/methodology package only"
+      name: "Pattern 1 package dependency"
+      rejected_because: "Does not alone prevent local methodology edits; deferred as optional parallel track"
+    - description: "Remove tied/methodology tree immediately"
+      name: "Pattern 2 big-bang virtualization"
+      rejected_because: "Breaks offline copy_files.sh clients before MCP bundle parity proven"
+    - description: "Submodule pin without MCP/hook policy"
+      name: "Pattern 3 submodule alone"
+      rejected_because: "Does not stop writes; UX friction without compose-don't-fork guards"
+  consequences:
+    negative:
+      - "Cross-platform read-only and hook behavior varies (Windows ACL vs Unix chmod)"
+      - "Phase B migration complexity while dual read paths may temporarily coexist"
+    positive:
+      - "Clear strategic path to MCP bundled read without DAE program coupling"
+      - "Layered defense: MCP project-only writes plus optional client mechanical friction"
+      - "Preserves methodology-first read order in loaders during Phase A"
+  context: "TIED clients store inherited methodology under tied/methodology/ refreshed by copy_files.sh; MCP detail-loader and yaml-loader enforce project-only writes and methodology-first reads. Sponsors compared five delivery patterns; near-term #4 and strategic #2 selected per advisory PLAN."
+  cross_references:
+    architecture: []
+    implementation:
+      - "IMPL-TIED_METHODOLOGY_CLIENT_BOUNDARY"
+    requirements:
+      - "REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY"
+      - "REQ-TIED_SETUP"
+  decision: "Adopt layered boundary architecture: (Phase A) compose existing MCP write rejection with optional bootstrap read-only tied/methodology on Unix, installable client git hook template blocking staged tied/methodology/** paths, and documented CI guard; (Phase B) spike MCP bundled methodology corpus for merged reads with tied-cli parity while copy_files.sh remains until explicit migration gates pass."
+  metadata:
+    last_updated:
+      author: "plan-new-feature"
+      date: "2026-09-24"
+  name: "Methodology client boundary architecture"
+  status: "Proposed"

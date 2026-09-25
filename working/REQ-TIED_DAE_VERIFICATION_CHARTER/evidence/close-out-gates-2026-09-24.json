@@ -1,0 +1,88 @@
+{
+  "phase": "close_out",
+  "depth_tier": "minimal",
+  "activation_collect": {
+    "skipped": true,
+    "reason": "minimal_depth",
+    "run_id": "charter-close-out-r1"
+  },
+  "reconcile": {
+    "ok": true,
+    "report": {
+      "request_token": "",
+      "findings": [],
+      "ledger_rows": 15,
+      "read_only": true,
+      "process_grade": {
+        "score": 75,
+        "band": "B",
+        "dimensions": [
+          {
+            "name": "tracker_integrity",
+            "score": 100,
+            "weight": 0.3,
+            "gap_codes": []
+          },
+          {
+            "name": "verification_manifest",
+            "score": 0,
+            "weight": 0.25,
+            "gap_codes": [
+              "expected_artifact_missing"
+            ]
+          },
+          {
+            "name": "hash_alignment",
+            "score": 100,
+            "weight": 0.2,
+            "gap_codes": []
+          },
+          {
+            "name": "ledger_correlation",
+            "score": 100,
+            "weight": 0.15,
+            "gap_codes": []
+          },
+          {
+            "name": "typed_evidence_refs",
+            "score": 100,
+            "weight": 0.1
+          }
+        ],
+        "gap_codes": [
+          "expected_artifact_missing"
+        ]
+      }
+    }
+  },
+  "quality_manifest": {
+    "ok": false,
+    "skipped": true,
+    "reason": "no_citdp_commands"
+  },
+  "evidence_chain_profile": {
+    "ok": false,
+    "skipped": true,
+    "reason": "no_psa_reports"
+  },
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "gate": {
+    "allowed": true,
+    "blocking": false,
+    "diagnostics": [],
+    "evidence_hydrated": true,
+    "hydration_diagnostics": []
+  },
+  "envelope": {
+    "ok": true,
+    "path": "working/REQ-TIED_DAE_VERIFICATION_CHARTER/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 0,
+    "advisory_gap_count": 0,
+    "diagnostics": []
+  }
+}

@@ -1,0 +1,105 @@
+copy_hygiene: "Wave-scoped R3 tracker for MCP tied_gate_check + agentstream DAE gate preflight (RISK-DAE-010)."
+description: "R3 build-plan slice — optional MCP mirror and opt-in agentstream pre-turn gate check."
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: "working/REQ-TIED_DAE_INCORPORATION/waves/r3-ergonomics/checklist-tracker.yaml"
+  completed:
+    - "apply-token-comments"
+    - "change-definition"
+    - "composition-integration"
+    - "gate-pseudocode-validation"
+    - "impact-discovery"
+    - "resolve-pseudocode"
+    - "sub-adversarial-inquiry-pass"
+    - "test-strategy"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
+  envelope_path: "working/REQ-TIED_DAE_INCORPORATION/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-TIED_DAE_INCORPORATION"
+record_identity:
+  citdp_path: "tied/citdp/CITDP-REQ-TIED_DAE_INCORPORATION.yaml"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+  req_token: "REQ-TIED_DAE_INCORPORATION"
+  slice: "r3-ergonomics"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_DAE_INCORPORATION/RESIDUAL-PLAN.md"
+    slug: "change-definition"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/packages/agentstream/src/dae-gate-preflight.ts"
+      - "mcp-server/packages/agentstream/src/executor-dry-run.ts"
+      - "mcp-server/src/tools/index.ts"
+    slug: "impact-discovery"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-TIED_DAE_INCORPORATION-pseudocode.md"
+    slug: "resolve-pseudocode"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-TIED_DAE_INCORPORATION-pseudocode.md"
+    slug: "apply-token-comments"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-TIED_DAE_INCORPORATION-pseudocode.md"
+    slug: "gate-pseudocode-validation"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/packages/agentstream/src/dae-gate-preflight.test.ts"
+      - "mcp-server/src/tools/tied-gate-check-mcp.test.ts"
+    slug: "test-strategy"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/tools/tied-gate-check-mcp.test.ts"
+    slug: "unit-test-red"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/packages/cli/src/gate-check.test.ts"
+      - "mcp-server/src/e2e/tied-gate-check-cli.test.ts"
+    slug: "unit-test-green"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/packages/agentstream/src/dae-gate-preflight.test.ts"
+    slug: "composition-integration"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/packages/agentstream/README.md"
+    slug: "verification-gate"
+    tracking:
+      status: "completed"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied/citdp/CITDP-REQ-TIED_DAE_INCORPORATION.yaml"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "R3 slice profile_depth minimal; optional MCP/agentstream surfaces only."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      evidence_refs:
+        - "tied/citdp/CITDP-REQ-TIED_DAE_INCORPORATION.yaml"
+      policy: "minimal-depth-no-inquiry"
+      rationale: "R3 slice profile_depth minimal; optional MCP/agentstream surfaces only."
+      status: "not_applicable"

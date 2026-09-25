@@ -16,6 +16,11 @@ import {
   hashStringContents,
   tryPatchRequestEvidenceEnvelope,
 } from "./request-evidence-envelope/hooks.js";
+import {
+  runOptionalDiffScopedCrapAfterManifest,
+  type DiffScopedCrapHookContext,
+  type DiffScopedCrapHookOutcome,
+} from "./diff-scoped-crap-hook.js";
 
 export type EnvelopePatchContext = {
   request_token: string;
@@ -28,6 +33,13 @@ export type QualityEvidenceCollectionInput = Omit<VerificationEvidenceInput, "co
   default_timeout_ms?: number;
   default_max_output_bytes?: number;
   envelope_patch?: EnvelopePatchContext;
+  /** Explicit W2d hook context; when omitted but envelope_patch is set, hook runs from envelope request_token + project_root. */
+  diff_scoped_crap_hook?: DiffScopedCrapHookContext;
+};
+
+export type QualityEvidenceCollectionResult = {
+  manifest: VerificationEvidenceManifest;
+  diff_scoped_crap_hook?: DiffScopedCrapHookOutcome;
 };
 
 // [IMPL-QUALITY_EVIDENCE_COLLECTION] [ARCH-QUALITY_ASSURANCE_PROFILES] [REQ-QUALITY_ASSURANCE_EVIDENCE]
@@ -60,7 +72,7 @@ function validateCollectionInput(input: QualityEvidenceCollectionInput): void {
  */
 export async function collectVerificationEvidence(
   input: QualityEvidenceCollectionInput,
-): Promise<VerificationEvidenceManifest> {
+): Promise<QualityEvidenceCollectionResult> {
   validateCollectionInput(input);
   // [IMPL-QUALITY_EVIDENCE_COLLECTION] [IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER] [ARCH-QUALITY_ASSURANCE_PROFILES] [REQ-QUALITY_ASSURANCE_EVIDENCE]
   // How: Delegate validated command declarations and execution limits to the bounded command runner.
@@ -104,5 +116,21 @@ export async function collectVerificationEvidence(
       },
     });
   }
-  return manifest;
+
+  // [IMPL-TIED_DAE_INCORPORATION] [ARCH-TIED_DAE_INCORPORATION] [REQ-TIED_DAE_INCORPORATION]
+  // How: OPTIONAL_DIFF_SCOPED_CRAP_HOOK after successful manifest when CITDP diff_scoped_crap is true.
+  let diff_scoped_crap_hook: DiffScopedCrapHookOutcome | undefined;
+  const hookCtx =
+    input.diff_scoped_crap_hook ??
+    (input.envelope_patch
+      ? {
+          request_token: input.envelope_patch.request_token,
+          project_root: input.envelope_patch.project_root,
+        }
+      : undefined);
+  if (hookCtx) {
+    diff_scoped_crap_hook = runOptionalDiffScopedCrapAfterManifest(hookCtx);
+  }
+
+  return { manifest, diff_scoped_crap_hook };
 }

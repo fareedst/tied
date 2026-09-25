@@ -123,6 +123,33 @@ describe("detail-loader sentinel and resolution", () => {
       fs.rmSync(dir, { recursive: true });
     }
   });
+
+  // [IMPL-TIED_METHODOLOGY_CLIENT_BOUNDARY] [REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY] — hooks/CI are additive; MCP loader policy stays authoritative.
+  it("keeps methodology write rejection authoritative for COMPOSE_WITH_EXISTING_MCP_WRITE_GUARDS", () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-compose-guard-"));
+    try {
+      process.env.TIED_BASE_PATH = dir;
+      clearBasePathCache();
+      const methodologyDir = path.join(dir, "methodology", "requirements");
+      fs.mkdirSync(methodologyDir, { recursive: true });
+      fs.writeFileSync(
+        path.join(dir, "methodology", "requirements.yaml"),
+        'REQ-MCB:\n  name: "Methodology"\n  detail_file: "requirements/REQ-MCB.yaml"\n',
+        "utf8",
+      );
+      fs.writeFileSync(
+        path.join(methodologyDir, "REQ-MCB.yaml"),
+        "REQ-MCB:\n  name: Methodology\n",
+        "utf8",
+      );
+      const writeAttempt = updateDetail("REQ-MCB", { name: "HookBypass" });
+      assert.strictEqual(writeAttempt.ok, false);
+    } finally {
+      delete process.env.TIED_BASE_PATH;
+      clearBasePathCache();
+      fs.rmSync(dir, { recursive: true });
+    }
+  });
 });
 
 describe("validateConsistency sentinel index reporting", () => {
