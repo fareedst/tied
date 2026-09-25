@@ -6,9 +6,9 @@ REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY:
       author: "plan-new-feature"
       date: "2026-09-24"
     last_updated:
-      author: "plan-new-feature"
-      date: "2026-09-24"
-      reason: "Promote advisory working PLAN to tracked TIED stack"
+      author: "plan-close-out"
+      date: "2026-09-25"
+      reason: "Phases A/B and migration gates G1-G4 met; close_out allowed true"
   name: "Methodology client boundary program"
   priority: "P2"
   rationale:
@@ -41,7 +41,7 @@ REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY:
     - criterion: "Phase B (strategic): PLAN and CITDP record migration spikes for bundled methodology read in MCP/tied-cli with explicit non-removal of copy_files.sh until parity gates pass."
       id: "SC-MCB-PHASE-B-SPIKE"
       metric: "working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/PLAN.md Phase B contract + spike acceptance criteria"
-  status: "Planned"
+  status: "Implemented"
   traceability:
     architecture:
       - "ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY"

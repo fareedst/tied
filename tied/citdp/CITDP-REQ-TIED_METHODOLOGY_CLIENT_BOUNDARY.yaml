@@ -16,6 +16,9 @@ CITDP-REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY:
     blast_radius: "Bootstrap tooling, optional client hook templates, operator docs; Phase B touches mcp-server read path only in spike slice."
     modules_or_boundaries: "tools/bootstrap/, copy_files.sh manifest, mcp-server/src/detail-loader.ts, mcp-server/src/yaml-loader.ts, client hook templates, tied/docs/client-development-index.md, working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/*"
     phased_rollout:
+      - "G2 — tied-cli bundled pilot (build-plan slice G2, 2026-09-25)"
+      - "G3 — methodology bundle pack for release (build-plan slice G3, 2026-09-25)"
+      - "G4 — offline/air-gap sponsor sign-off + operator runbook (build-plan slice G4, 2026-09-25); copy_files.sh refresh retained"
       - "Phase A — near-term pattern #4 (build-plan slice A)"
       - "Phase B — strategic pattern #2 spike (build-plan slice B)"
     tied_tokens_affected:
@@ -26,15 +29,15 @@ CITDP-REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY:
       - "IMPL-TIED_METHODOLOGY_CLIENT_BOUNDARY"
       - "REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY"
   leap_feedback:
-    divergences_from_analysis: "Advisory memo promoted wholesale; Phase B remains spike-only at plan-new-feature boundary"
-    record_status: "draft"
+    divergences_from_analysis: "Advisory memo promoted wholesale; Phase A shipped 2026-09-25; Phase B bundled-read spike shipped 2026-09-25; G2 tied-cli pilot met 2026-09-25; G3 release pack met 2026-09-25; G4 offline copy_files policy sign-off met 2026-09-25; migration gates G1-G4 met; plan-close-out 2026-09-25 close_out allowed true"
+    record_status: "final"
     tied_stack_updates_required:
       - "working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/checklist-tracker.yaml"
       - "working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/PLAN.md"
   record_identity:
     change_request_id: "REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY"
     gate_policy: "advisory"
-    phase: "planning"
+    phase: "closed"
     profile_depth: "minimal"
     recorded_at: "2026-09-24"
     title: "Methodology client boundary program (R4)"
@@ -49,8 +52,15 @@ CITDP-REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY:
         - "Hook template scopes reject to tied/methodology/ prefix only"
         - "Read-only flag documented opt-in and skipped on Windows with ACL guidance"
       evidence_references:
+        - "mcp-server/src/bundled-methodology-read.test.ts"
         - "mcp-server/src/detail-loader-sentinel.test.ts"
+        - "mcp-server/src/methodology-bundle-pack.test.ts"
+        - "mcp-server/src/methodology-offline-policy-signoff.test.ts"
+        - "mcp-server/test/tied-cli-bundled-methodology-pilot.test.cjs"
         - "tied/citdp/CITDP-REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY.yaml"
+        - "tied/docs/methodology-client-boundary-offline-runbook.md"
+        - "working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/evidence/close-out-gates-2026-09-25.json"
+        - "working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/evidence/methodology-offline-policy-signoff.v1.json"
         - "working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/PLAN.md"
       falsification_questions:
         - "Do hooks bypass or weaken MCP methodology write rejection?"
@@ -73,7 +83,7 @@ CITDP-REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY:
         summary: "Cross-platform read-only parity gap"
       - id: "RISK-MCB-003"
         likelihood: "medium"
-        mitigation: "Phase B migration gates; copy_files.sh until parity tests pass"
+        mitigation: "Migration gates G1-G4 met; copy_files.sh retained for offline/air-gap per G4 runbook; bundle read optional"
         severity: "medium"
         summary: "Premature removal of local methodology tree"
   test_strategy:
@@ -81,6 +91,9 @@ CITDP-REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY:
       - "Bootstrap flag applies read-only only when explicitly enabled"
       - "Hook template rejects staged tied/methodology/** without invoking MCP"
     red_first_slices:
+      - "G2: tied-cli vs in-process bundled pilot (omitLocalMethodology fixture)"
+      - "G3: pack repo tied/methodology to temp corpus + manifest validation"
+      - "G4: validate methodology-offline-policy-signoff.v1 example receipt"
       - "Phase A: bootstrap readonly flag test in tools/bootstrap harness"
       - "Phase A: hook template staged-path rejection test"
       - "Phase B: bundled read parity fixture test (spike)"

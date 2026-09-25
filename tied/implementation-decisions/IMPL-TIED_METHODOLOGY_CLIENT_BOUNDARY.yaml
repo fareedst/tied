@@ -15,7 +15,8 @@ IMPL-TIED_METHODOLOGY_CLIENT_BOUNDARY:
     summary: "RED tests before production per slice; reuse detail-loader and yaml-loader write guards; no fork of tied_checklist_gate_validate."
   metadata:
     last_updated:
-      author: "plan-new-feature"
-      date: "2026-09-24"
+      author: "plan-close-out"
+      date: "2026-09-25"
+      reason: "Bootstrap hooks, bundled read spike, bundle pack, offline runbook shipped"
   name: "Methodology client boundary implementation"
-  status: "Proposed"
+  status: "Active"

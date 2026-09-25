@@ -2,14 +2,15 @@
 
 | Field | Value |
 | --- | --- |
-| **REQ** | [REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY](../../tied/requirements/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY.yaml) (**Planned**) |
+| **REQ** | [REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY](../../tied/requirements/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY.yaml) (**Implemented**) |
 | **ARCH** | [ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY](../../tied/architecture-decisions/ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY.yaml) |
 | **IMPL** | [IMPL-TIED_METHODOLOGY_CLIENT_BOUNDARY](../../tied/implementation-decisions/IMPL-TIED_METHODOLOGY_CLIENT_BOUNDARY.yaml) · [pseudo-code sidecar](../../tied/implementation-decisions/IMPL-TIED_METHODOLOGY_CLIENT_BOUNDARY-pseudocode.md) |
-| **CITDP** | [CITDP-REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY.yaml](../../tied/citdp/CITDP-REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY.yaml) (`phase: planning`) |
+| **CITDP** | [CITDP-REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY.yaml](../../tied/citdp/CITDP-REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY.yaml) (`phase: closed`) |
 | **Tracker** | [checklist-tracker.yaml](./checklist-tracker.yaml) |
 | **Parent context** | DAE residual **R4** — separate stack; **no** merge into [REQ-TIED_DAE_INCORPORATION](../../tied/requirements/REQ-TIED_DAE_INCORPORATION.yaml) |
 | **Promoted** | **2026-09-24** via `plan-new-feature` (advisory memo → tracked TIED stack) |
 | **Phase A** | **Shipped 2026-09-25** (`build-plan`) — opt-in `--methodology-readonly`, `--install-methodology-hook`, CI doc § methodology-boundary-ci-guard |
+| **Phase B** | **Shipped 2026-09-25** (`build-plan`) — `TIED_METHODOLOGY_BUNDLE_PATH` read spike, parity tests, migration gates below |
 
 ## Refine gate (resolved)
 
@@ -71,6 +72,31 @@ Active procedures (IMPL sidecar): `INSTALL_METHODOLOGY_READONLY_BOOTSTRAP_FLAG`,
 
 Active procedures: `SPIKE_BUNDLED_METHODOLOGY_READ`, `DOCUMENT_MIGRATION_FROM_COPIED_TREE`.
 
+### Phase B — parity report (2026-09-25 spike)
+
+| Probe | Disk (`tied/methodology/`) | Bundled (`TIED_METHODOLOGY_BUNDLE_PATH`) | Match |
+| --- | --- | --- | --- |
+| Methodology-first detail (`REQ-METH-ONLY`) | Reads under `methodology/requirements/` | Same relative path under bundle root | Yes |
+| Sentinel `detail_file: null` (`REQ-SENTINEL-ONLY`) | Excluded from `listDetailTokens` | Same | Yes |
+| Methodology index + missing methodology file → project fallback (`REQ-FALLBACK`) | Methodology copy, then project after unlink | Same after bundle detail removed | Yes |
+| Merged index (methodology + project override) | Project index wins on key collision | Same merge when bundle supplies methodology index | Yes |
+| Project-only token (`REQ-PROJECT-ONLY`) | Project detail path | Unchanged (project base) | Yes |
+| MCP write rejection for methodology-owned tokens | Unchanged | Unchanged (writes never target bundle) | Yes |
+
+**Implementation anchors:** `mcp-server/src/yaml-loader.ts` (`resolveBundledMethodologyPath`, bundled precedence in `getMethodologyBasePath`), `mcp-server/src/bundled-methodology-read.ts`, `mcp-server/src/bundled-methodology-read.test.ts`, release layout note `mcp-server/methodology-bundle/README.md`.
+
+**Operator env (spike):** `TIED_METHODOLOGY_BUNDLE_PATH=/abs/path/to/methodology-corpus` (directory layout = `tied/methodology/` contents, not the parent `tied/` folder).
+
+### Migration gates (do not remove `copy_files.sh` tree until all pass)
+
+| Gate | Status | Evidence |
+| --- | --- | --- |
+| G1 — Bundled vs copied-tree parity fixture tests green in CI | **Met (spike)** | `bundled-methodology-read.test.ts` |
+| G2 — `tied-cli` / MCP read parity on a pilot client with bundle env only (no local `tied/methodology/`) | **Met (2026-09-25)** | `mcp-server/test/tied-cli-bundled-methodology-pilot.test.cjs` + shared fixture in `bundled-methodology-read.ts` (`omitLocalMethodology`); in-process loaders vs `tied-cli` for `yaml_detail_read`, `yaml_index_list_tokens`, `yaml_index_read` |
+| G3 — Release pipeline publishes pinned corpus + version manifest beside `@tied/mcp` | **Met (2026-09-25)** | `npm run methodology-bundle:pack` → `mcp-server/src/methodology-bundle-pack.ts`, `mcp-server/src/cli/methodology-bundle-pack.ts`, `mcp-server/src/methodology-bundle-pack.test.js` in CI; `mcp-server/methodology-bundle/README.md` |
+| G4 — Sponsor sign-off on offline/air-gapped clients still served by `copy_files.sh` refresh | **Met (2026-09-25)** | [Offline runbook](../../tied/docs/methodology-client-boundary-offline-runbook.md); [sign-off receipt](./evidence/methodology-offline-policy-signoff.v1.json); [g4-sponsor-signoff-2026-09-25.md](./evidence/g4-sponsor-signoff-2026-09-25.md) |
+| G5 — Rollback documented: unset bundle env + `copy_files.sh` refresh restores local tree | **Met (spike)** | Bundle is read-only overlay; refresh overwrites `tied/methodology/` |
+
 ## Profile depth and gates
 
 | Field | Value |
@@ -81,7 +107,7 @@ Active procedures: `SPIKE_BUNDLED_METHODOLOGY_READ`, `DOCUMENT_MIGRATION_FROM_CO
 
 **pre_implementation:** Run `tied_checklist_gate_validate` on [checklist-tracker.yaml](./checklist-tracker.yaml) + CITDP before Phase A/B RED tests at **build-plan**.
 
-**Recommended next:** **`/build-plan Phase B`** when sponsor wants MCP bundled-read spike (#2). Enable Phase A locally: `git config core.hooksPath .githooks` after bootstrap with `--install-methodology-hook`.
+**Recommended next:** Migration gates **G1–G4** met (G5 rollback documented). **REQ close-out** via **`/plan-close-out`** or **`build-plan`** close-out slice — envelope validate + `sub-close-out-evidence-sync` before marking REQ verified. Enable Phase A locally: `git config core.hooksPath .githooks` after bootstrap with `--install-methodology-hook`.
 
 ## References
 

@@ -2079,7 +2079,7 @@ REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY:
   detail_file: "requirements/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY.yaml"
   name: "Methodology client boundary program"
   priority: "P2"
-  status: "Planned"
+  status: "Implemented"
 REQ-TIED_NEW_CLIENT_ADHERENCE:
   category: "Functional"
   cross_references:

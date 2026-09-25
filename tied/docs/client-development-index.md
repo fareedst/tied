@@ -171,9 +171,11 @@ Traceability: [REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY](../requirements/REQ-TIED_ME
 | Phase | Intent | Operator note |
 | --- | --- | --- |
 | **A** | Pattern **#4** — optional bootstrap Unix read-only `tied/methodology/`, client pre-commit hook template for `tied/methodology/**`, CI path guard doc | Composes with MCP `detail-loader` / `yaml-loader` project-only writes; enter via **`build-plan`** remainder `Phase A` |
-| **B** | Pattern **#2** — MCP bundled methodology read spike + migration gates | Does not remove `copy_files.sh` tree until parity tests pass; remainder `Phase B` |
+| **B** | Pattern **#2** — MCP bundled methodology read spike + migration gates | Bundled read optional (G2/G3); offline/air-gap cohorts stay on `copy_files.sh` — [offline runbook](methodology-client-boundary-offline-runbook.md) |
 
 Policy anchor: `[PROC-TIED_METHODOLOGY_READONLY]` in [processes.md](processes.md).
+
+**Offline / air-gapped refresh:** [methodology-client-boundary-offline-runbook.md](methodology-client-boundary-offline-runbook.md) (G4 — retain `./copy_files.sh` for `tied/methodology/`; `TIED_METHODOLOGY_BUNDLE_PATH` opt-in).
 
 #### methodology-boundary-ci-guard (Phase A — advisory CI)
 

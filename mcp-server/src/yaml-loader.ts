@@ -53,10 +53,27 @@ export function getClientProjectRoot(): string {
 }
 
 /**
+ * Pinned methodology corpus directory (MCP release artifact spike).
+ * [IMPL-TIED_METHODOLOGY_CLIENT_BOUNDARY] [REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY]
+ * When TIED_METHODOLOGY_BUNDLE_PATH is set to a directory, methodology reads use it
+ * instead of tied/methodology/ under TIED_BASE_PATH. Project-only writes unchanged.
+ */
+export function resolveBundledMethodologyPath(): string | null {
+  const env = process.env.TIED_METHODOLOGY_BUNDLE_PATH;
+  if (env === undefined || env.trim() === "") return null;
+  const resolved = path.isAbsolute(env) ? env : path.resolve(process.cwd(), env);
+  if (!fs.existsSync(resolved) || !fs.statSync(resolved).isDirectory()) return null;
+  return resolved;
+}
+
+/**
  * Path to methodology directory (tied/methodology/). Null if it does not exist.
  * Methodology is read-only; project data lives at getBasePath() root.
+ * Bundled corpus (when env set) takes precedence over the on-disk client tree for reads.
  */
 export function getMethodologyBasePath(): string | null {
+  const bundled = resolveBundledMethodologyPath();
+  if (bundled) return bundled;
   const base = getBasePath();
   const methodologyDir = path.join(base, "methodology");
   if (fs.existsSync(methodologyDir) && fs.statSync(methodologyDir).isDirectory()) {

@@ -28,7 +28,8 @@ ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY:
   decision: "Adopt layered boundary architecture: (Phase A) compose existing MCP write rejection with optional bootstrap read-only tied/methodology on Unix, installable client git hook template blocking staged tied/methodology/** paths, and documented CI guard; (Phase B) spike MCP bundled methodology corpus for merged reads with tied-cli parity while copy_files.sh remains until explicit migration gates pass."
   metadata:
     last_updated:
-      author: "plan-new-feature"
-      date: "2026-09-24"
+      author: "plan-close-out"
+      date: "2026-09-25"
+      reason: "Layered boundary architecture shipped Phase A/B"
   name: "Methodology client boundary architecture"
-  status: "Proposed"
+  status: "Active"

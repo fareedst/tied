@@ -1,6 +1,6 @@
 # TIED methodology (canonical)
 
-**Scope:** Core TIED layout, semantic tokens, module validation, bootstrap (`copy_files.sh`), methodology vs project YAML, agent operating guides, and `[PROC-*]` process token names used across this repository. **Vocabulary only** — file-copy mechanics and validation algorithms live in IMPL pseudo-code and [`../docs/processes.md`](../docs/processes.md).
+**Scope:** Core TIED layout, semantic tokens, registry atoms and distributed facets, module validation, bootstrap (`copy_files.sh`), methodology vs project YAML, agent operating guides, and `[PROC-*]` process token names used across this repository. **Vocabulary only** — file-copy mechanics and validation algorithms live in IMPL pseudo-code and [`../docs/processes.md`](../docs/processes.md).
 
 **Traceability:** [REQ-TIED_SETUP](../requirements/REQ-TIED_SETUP.yaml) · [REQ-MODULE_VALIDATION](../requirements/REQ-MODULE_VALIDATION.yaml) · [ARCH-TIED_STRUCTURE](../architecture-decisions/ARCH-TIED_STRUCTURE.yaml) · [ARCH-MODULE_VALIDATION](../architecture-decisions/ARCH-MODULE_VALIDATION.yaml) · [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) · [IMPL-MODULE_VALIDATION](../implementation-decisions/IMPL-MODULE_VALIDATION.yaml)
 
@@ -90,6 +90,55 @@
 | **disposable TIED client** | throwaway demo project (alone) | Timestamped bootstrapped client under `TIED_TEST_ROOT/<unix-seconds>` for smoke and feature demos |
 | **new-tied-client** | make client script (alone) | Windows `scripts/new-tied-client.cmd` or Node `tools/bootstrap/new-tied-client.mjs`; explicit client directory pipeline |
 | **test-new-tied-client** | disposable client alias (alone) | Windows `scripts/test-new-tied-client.cmd`; creates disposable client via `CREATE_DISPOSABLE_TIED_CLIENT` |
+| **registry atom** | source of truth file (alone), canonical record (alone) | Authoritative obligation or term: token detail YAML, `semantic-tokens.yaml` row + detail, `(canonical)` glossary definition, merged `essence_pseudocode` for an IMPL, `[PROC-*]` in `processes.md` |
+| **distributed facet** | duplicate spec (alone), miniature copy (alone) | Non-authoritative expression that must align with registry atoms: traceability lists, code/test token comments, literal block leads, index rows, working-folder evidence — not a second full spec of the product |
+| **atomized traceability graph** | holographic model (alone), whole-in-every-file (alone) | Countable nodes (tokens, blocks) and explicit edges; rationality and completeness are **graph closure** via `[PROC-TOKEN_VALIDATION]` and `[PROC-LEAP]`, not reconstruction from one file |
+| **registry atoms with distributed facets** | holographic TIED (alone) | Authoring view: mint or edit atoms; echoes (facets) spread across YAML, tests, code, and working artifacts |
+| **declared facet** | paper traceability (alone) | Planned alignment in YAML (`traceability`, `code_locations`, `code_annotations`, `token_coverage`) |
+| **materialized facet** | grep target (alone) | On-disk alignment in managed code, tests, and literal pseudo-code block leads |
+| **three-way alignment** | two-way sync (alone) | IMPL pseudo-code block ↔ test ↔ production code share the same block lead and token set per `[PROC-IMPL_CODE_TEST_SYNC]` |
+
+---
+
+## Registry atoms and distributed facets
+
+TIED keeps product integrity **without** making every file a **miniature copy of the whole system**. Obligations are **registry atoms**; partial views that point at or repeat atoms are **distributed facets**. Coherence is **graph closure** (validation + LEAP), not holographic redundancy.
+
+### Registry atoms (edit here)
+
+| Atom kind | Storage |
+|-----------|---------|
+| Semantic token registry + detail | `semantic-tokens.yaml`; `requirements/`, `architecture-decisions/`, `implementation-decisions/*.yaml` |
+| IMPL logic record | `IMPL-*-pseudocode.md` (merged as `essence_pseudocode`) |
+| Preferred domain term | `(canonical)` glossary body under `tied/vocab/` (methodology) or client `tied/vocab/` |
+| Process law | `[PROC-*]` definitions in [`../docs/processes.md`](../docs/processes.md) |
+
+### Facet types (align with atoms)
+
+Facets are **vocabulary labels** for artifact roles TIED creates or maintains; they are not a separate schema enum.
+
+| Facet role | Examples |
+|------------|----------|
+| **Graph facets** | `traceability.*`, `cross_references`, `related_requirements`, `related_decisions`, `code_locations`, `token_coverage` on REQ/ARCH/IMPL detail ([`../docs/detail-files-schema.md`](../docs/detail-files-schema.md)) |
+| **Index facets** | Summary rows in `requirements.yaml`, `architecture-decisions.yaml`, `implementation-decisions.yaml` (`detail_file` pointer) |
+| **Literal-copy facets** | Pseudo-code block token comments (`[PROC-IMPL_PSEUDOCODE_TOKENS]`); block leads copied into tests and managed code ([`../docs/pseudocode-writing-and-validation.md`](../docs/pseudocode-writing-and-validation.md)) |
+| **Executable facets** | Managed-code `[IMPL-*] [ARCH-*] [REQ-*]` comments; test names/sections carrying REQ tokens (`[PROC-TOKEN_AUDIT]`) |
+| **Vocabulary facets** | Glossary traceability blocks, naming bridges, cross-links, `routing.md` keyword rows (dispatch only) |
+| **Workflow facets** | CITDP records, `working/{REQ-*}/` checklist and evidence, `agent-preload-contract.yaml`; non-canonical LEAP proposals until promoted ([`leap-proposal-queue.md`](leap-proposal-queue.md)) |
+| **Proof facets** | `validation_evidence`, gate receipts, consistency/lint outputs, request-evidence envelopes |
+
+**Declared vs materialized:** YAML traceability and `code_annotations` declare intent; code, tests, and block leads materialize it. Close-out checklist steps reconcile both ([`../docs/agent-req-implementation-checklist.yaml`](../docs/agent-req-implementation-checklist.yaml) — `three-way-alignment-unit`, `verification-gate`).
+
+### Two lenses on the same discipline
+
+| Lens | Use when |
+|------|----------|
+| **Registry atoms with distributed facets** | Authoring: add one REQ at a time; edit detail files and sidecars; spread aligned echoes |
+| **Atomized traceability graph** | Judging rationality and completeness: impact, cross-REQ links, `tied_validate_consistency`, satisfaction gates |
+
+Incremental human workflow: specify **atoms** in sequence; stay satisfied when the **graph** closes, not when every file grows into a full product spec.
+
+**Process tokens:** `[PROC-TOKEN_VALIDATION]`, `[PROC-LEAP]`, `[PROC-IMPL_CODE_TEST_SYNC]`, `[PROC-VOCABULARY_INDEX]`. Outreach: [`../docs/vocabulary-layer-tied-leap-citdp.md`](../docs/vocabulary-layer-tied-leap-citdp.md).
 
 ---
 
@@ -200,6 +249,12 @@ Exact spellings for checklist and docs cross-reference:
 |------|---------|
 | AGENTS.md | Naming bridge |
 | agent-control layer | Preferred terms |
+| atomized traceability graph | Preferred terms; Registry atoms and distributed facets |
+| declared facet | Preferred terms; Registry atoms and distributed facets |
+| distributed facet | Preferred terms; Registry atoms and distributed facets |
+| materialized facet | Preferred terms; Registry atoms and distributed facets |
+| registry atom | Preferred terms; Registry atoms and distributed facets |
+| three-way alignment | Preferred terms; Registry atoms and distributed facets |
 | atomic YAML write | Pseudo-code block names |
 | binding inventory | Preferred terms |
 | canonical text comparison | Pseudo-code block names |

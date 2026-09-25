@@ -1,2 +1,4 @@
 node_modules/
 dist/
+methodology-bundle/corpus/
+methodology-bundle/methodology-bundle-manifest.v1.json

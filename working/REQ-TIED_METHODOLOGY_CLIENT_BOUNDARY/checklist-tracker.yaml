@@ -15,9 +15,46 @@ entry_points:
     start_at: "session-bootstrap"
 execution_evidence:
   close_out_evidence:
-    date: null
+    date: "2026-09-25"
     deferred: []
-    gates: {}
+    gates:
+      close_out:
+        allowed: true
+        date: "2026-09-25"
+        receipt: working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/evidence/close-out-gates-2026-09-25.json
+        run_id: methodology-boundary-close-out
+        tool: run-close-out-gates.mjs
+  gates:
+    g2_pilot_pre_implementation:
+      allowed: true
+      date: "2026-09-25"
+      phase: pre_implementation
+      tool: tied_gate_check
+    g2_pilot_verification:
+      allowed: true
+      date: "2026-09-25"
+      phase: verification
+      tool: tied_gate_check
+    g3_release_pre_implementation:
+      allowed: true
+      date: "2026-09-25"
+      phase: pre_implementation
+      tool: tied_gate_check
+    g3_release_verification:
+      allowed: true
+      date: "2026-09-25"
+      phase: verification
+      tool: tied_gate_check
+    g4_offline_pre_implementation:
+      allowed: true
+      date: "2026-09-25"
+      phase: pre_implementation
+      tool: tied_gate_check
+    g4_offline_verification:
+      allowed: true
+      date: "2026-09-25"
+      phase: verification
+      tool: tied_gate_check
     master_checklist: ""
   completed:
     - risk-assessment

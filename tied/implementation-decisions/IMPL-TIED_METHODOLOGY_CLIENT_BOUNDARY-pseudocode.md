@@ -85,6 +85,21 @@ procedure SPIKE_BUNDLED_METHODOLOGY_READ:
   IF parity tests against copied_tree_fixture fail THEN RETURN error ParityGap
   RETURN merged_read_view
 
+procedure PACK_METHODOLOGY_BUNDLE_FOR_RELEASE:
+  # [IMPL-TIED_METHODOLOGY_CLIENT_BOUNDARY] [ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY] [REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY] How: copy repo tied/methodology into release corpus beside @tied/mcp with version manifest for pinned offline reads.
+  Contract:
+    INPUT: source_methodology_dir, corpus_out_dir, manifest_out_path, tied_mcp_version
+    OUTPUT: methodology_bundle_manifest OR error SourceMissing OR error ManifestInvalid
+    PRE: source_methodology_dir exists and matches tied/methodology layout; tied_mcp_version from package.json
+    POST: corpus_out_dir is flat methodology layout; manifest schema methodology-bundle-manifest.v1 with corpus_sha256 and per-file digests
+    FAILURE_MODES: SourceMissing, ManifestInvalid
+    EFFECTS: IO
+  COPY source_methodology_dir TO corpus_out_dir
+  COMPUTE per_file_sha256 AND corpus_sha256
+  WRITE methodology_bundle_manifest TO manifest_out_path
+  IF manifest validation against corpus fails THEN RETURN error ManifestInvalid
+  RETURN methodology_bundle_manifest
+
 procedure DOCUMENT_MIGRATION_FROM_COPIED_TREE:
   # [IMPL-TIED_METHODOLOGY_CLIENT_BOUNDARY] [ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY] [REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY] How: record migration gates in PLAN Phase B without removing local methodology tree by default.
   Contract:
@@ -95,3 +110,16 @@ procedure DOCUMENT_MIGRATION_FROM_COPIED_TREE:
     EFFECTS: IO
   RECORD migration_gates_list IN PLAN_phase_B_section
   RETURN migration_gates_list
+
+procedure DOCUMENT_OFFLINE_COPY_FILES_POLICY:
+  # [IMPL-TIED_METHODOLOGY_CLIENT_BOUNDARY] [ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY] [REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY] How: G4 operator runbook + sponsor sign-off retain copy_files.sh for offline/air-gap; bundled read stays optional.
+  Contract:
+    INPUT: offline_runbook_doc, sponsor_signoff_receipt_path
+    OUTPUT: g4_gate_evidence_refs
+    PRE: policy.copy_files_refresh_retained true AND policy.bundle_optional true in signoff schema methodology-offline-policy-signoff.v1
+    POST: on success operators have refresh steps, bundle coexistence, CI guard pointers, decision matrix; PLAN marks G4 Met
+    EFFECTS: IO
+  WRITE offline_runbook_doc WITH sections when_to_copy_files, refresh_procedure, bundle_coexistence, ci_guard, decision_matrix, g3_pack_link
+  VALIDATE sponsor_signoff_receipt_path against methodology-offline-policy-signoff.v1
+  RECORD g4_gate_evidence_refs IN PLAN migration_gates_list
+  RETURN g4_gate_evidence_refs

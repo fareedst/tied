@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Methodology client boundary ([REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY])** — DAE residual **R4** program closed: Phase A opt-in bootstrap read-only + client hook template + CI guard doc; Phase B bundled methodology read (`TIED_METHODOLOGY_BUNDLE_PATH`), release `methodology-bundle:pack`, tied-cli pilot parity, offline/air-gap runbook + sponsor sign-off; migration gates **G1–G5** met. **`1058`** `mcp-server` tests. Close-out: [close-out-gates-2026-09-25.json](working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/evidence/close-out-gates-2026-09-25.json) `allowed: true`; envelope blocking gaps **0** (envelope gitignored per program policy).
+
 - **DAE incorporation program ([REQ-TIED_DAE_INCORPORATION])** — Waves 0–5: `@tied/cli`
   `gate check`, `next`, and `handoff validate`; branch hygiene, pseudocode leakage lint,
   CITDP express lane, **diff-scoped change-risk report** (W2d; stable ids `diff_scoped_crap` /

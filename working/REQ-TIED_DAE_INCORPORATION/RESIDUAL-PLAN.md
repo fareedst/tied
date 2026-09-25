@@ -9,11 +9,20 @@
 | **Residual CITDP** | [tied/citdp/CITDP-REQ-TIED_DAE_INCORPORATION.yaml](../../tied/citdp/CITDP-REQ-TIED_DAE_INCORPORATION.yaml) (`phase: closed`; **RISK-DAE-009** closed R2; **RISK-DAE-010** closed R3) |
 | **Charter CITDP** | [tied/citdp/CITDP-REQ-TIED_DAE_VERIFICATION_CHARTER.yaml](../../tied/citdp/CITDP-REQ-TIED_DAE_VERIFICATION_CHARTER.yaml) (`phase: closed`; gate-facing **minimal/advisory**, `verification_charter: false`, `sub_adversarial_inquiry_pass: not_applicable`) |
 | **Recorded** | **2026-09-24** (sponsor residual decisions) |
-| **Last updated** | **2026-09-24 — refine-plan pass 1** (reconcile as-built; build-plan readiness R1–R4) |
+| **Last updated** | **2026-09-25 — plan-close-out R4** (methodology REQ implemented; CITDP closed) |
 
 This document captures **post-close-out** work after the DAE program shipped. It is not a replacement for [PLAN.md](./PLAN.md) wave contracts.
 
-**Entry points:** Executable slices use **`build-plan`** with this file linked and a slice id in the invocation remainder (`R1`, `R2`, …). **R4** alone uses **`plan-new-feature`** (new REQ stack — not DAE `build-plan`).
+### Program status (pass 2)
+
+| Slice | Status | Evidence anchor |
+| --- | --- | --- |
+| **R1** | **Done** (2026-09-25) | [w4-close tracker](../REQ-TIED_DAE_VERIFICATION_CHARTER/waves/w4-close/checklist-tracker.yaml); charter [close-out receipt](../REQ-TIED_DAE_VERIFICATION_CHARTER/evidence/close-out-receipt-2026-09-24.md) `allowed: true` |
+| **R2** | **Done** | `runOptionalDiffScopedCrapAfterManifest` — [diff-scoped-crap-hook.ts](../../mcp-server/src/diff-scoped-crap-hook.ts); **RISK-DAE-009** closed in CITDP |
+| **R3** | **Done** | **`tied_gate_check`** — [tools/index.ts](../../mcp-server/src/tools/index.ts); **R3b** — `dae-gate-preflight.ts`; **RISK-DAE-010** closed |
+| **R4** | **Done (2026-09-25)** | [REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY](../../tied/requirements/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY.yaml) **Implemented**; CITDP `phase: closed`; [close-out-gates-2026-09-25.json](../REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/evidence/close-out-gates-2026-09-25.json) `allowed: true` |
+
+**Entry points:** **R1–R3** are closed — use this file for traceability only (no further DAE `build-plan` unless regression). **R4** follow-up is on the **methodology PLAN** (migration gates / pilots), not DAE [PLAN.md](./PLAN.md). **`plan-new-feature`** promoted the R4 stack **2026-09-24**; further work is **`build-plan`** slices on [methodology PLAN](../REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/PLAN.md) or operator pilot per that PLAN.
 
 ---
 
@@ -24,30 +33,29 @@ This document captures **post-close-out** work after the DAE program shipped. It
 | Child `close_out` gate | **Wave-scoped / slim tracker** → re-run `close_out` until gate allows (full machine close-out on charter REQ) |
 | **RISK-DAE-009** (W2d auto runner) | **Implement** wiring after `quality_evidence_collect_manifest` (verification-gate / charter path) |
 | **RISK-DAE-010** (optional surfaces) | **Closed R3** — `tied_gate_check` MCP + **agentstream** DAE gate preflight shipped |
-| **Methodology client boundary** | **Promote later** via **plan-new-feature** (not docs-only commit of advisory folder now) |
+| **Methodology client boundary** | **Promoted 2026-09-24** via **plan-new-feature**; Phases A/B **shipped 2026-09-25** — migration gates G2–G4 remain on methodology PLAN |
 | Envelopes in git | **Keep gitignored**; committed `close-out-gates-*.json` + receipts are sufficient |
 
 ---
 
-## Refine gate — as-built dependency snapshot (2026-09-24)
+## Refine gate — as-built dependency snapshot (2026-09-25 pass 2)
 
-Reconciled against parent [PLAN.md](./PLAN.md), CITDP records, charter evidence, and repo tree. Use this table before **`build-plan`**; do not re-open W0–W5 product code except regression fixes.
+Reconciled against parent [PLAN.md](./PLAN.md), CITDP records, charter evidence, and repo tree. **R1–R3 closed;** do not re-open W0–W5 or residual product code except regression fixes. **R4** follow-up is migration/pilot on the methodology PLAN.
 
 | Area | As-built today | Residual gap |
 | --- | --- | --- |
 | **Parent machine close-out** | `close_out` **allowed** — [evidence/close-out-gates-2026-09-24.json](./evidence/close-out-gates-2026-09-24.json); [evidence/not-applicable-receipt.v1.json](./evidence/not-applicable-receipt.v1.json) | — |
 | **Charter machine close-out** | **Done (R1)** — `merged_decision.allowed: true`; [close-out-gates-2026-09-24.json](../REQ-TIED_DAE_VERIFICATION_CHARTER/evidence/close-out-gates-2026-09-24.json); [w4-close tracker](../REQ-TIED_DAE_VERIFICATION_CHARTER/waves/w4-close/checklist-tracker.yaml) | — |
-| **W1a `tied gate check`** | `mcp-server/src/dae/gate-check-composition.ts`, `mcp-server/src/cli/gate-check.ts`, `mcp-server/src/dae/gate-check-mcp.ts` (MCP **caller** for CLI only) | **R3a** MCP tool surface |
-| **W1a tests** | `mcp-server/packages/cli/src/gate-check.test.ts`, `mcp-server/src/e2e/tied-gate-check-cli.test.ts` | Extend for **R3a** |
-| **W1a MCP mirror** | **`tied_gate_check`** in `mcp-server/src/tools/index.ts` (R3a) | **Done** |
-| **Agentstream DAE preflight** | **`dae-gate-preflight.ts`** wired from `executor-dry-run.ts` / `live-executor.ts` (R3b) | **Done** |
-| **W2d library** | `mcp-server/src/diff-scoped-crap.ts`, `mcp-server/src/diff-scoped-crap-hook.ts`, tests | **Done (R2)** — runner after manifest |
-| **W2d checklist prose** | Checklist + [client-development-index.md](../../tied/docs/client-development-index.md) updated for auto hook | **Done (R2)** |
+| **W1a CLI `tied gate check`** | `gate-check-composition.ts`, `cli/gate-check.ts`, `gate-check-mcp.ts` (MCP caller for CLI) | — |
+| **W1a MCP mirror (R3a)** | **`tied_gate_check`** in `mcp-server/src/tools/index.ts`; [tied-gate-check-mcp.test.ts](../../mcp-server/src/tools/tied-gate-check-mcp.test.ts) | — |
+| **W1a tests** | CLI + e2e + MCP registration tests green | — |
+| **Agentstream DAE preflight (R3b)** | **`dae-gate-preflight.ts`** from `executor-dry-run.ts` / `live-executor.ts` | — |
+| **W2d library + hook (R2)** | `diff-scoped-crap.ts`, `diff-scoped-crap-hook.ts`, `quality-evidence-collection.ts` post-manifest hook | — |
+| **W2d checklist prose** | Checklist + [client-development-index.md](../../tied/docs/client-development-index.md) | — |
 | **W2d hook default** | `diff_scoped_crap: false` in [citdp-record-template.yaml](../../tied/docs/citdp-record-template.yaml) | Unchanged product default |
-| **Charter W4 code** | `mutation-cache.ts`, `disjoint-verifier.ts`, `gauntlet-runner.ts`, `charter-policy.ts`, `checklist-validator.ts` extensions | Shipped — [wave-4-close](../REQ-TIED_DAE_VERIFICATION_CHARTER/evidence/wave-4-close-2026-09-24.md) |
-| **Charter tests** | `mutation-cache.test.ts`, `gauntlet-runner.test.ts`, `checklist-validator.test.ts` (+ charter gate tests) | Baseline **1031/1031** at W4 close |
-| **Charter tracker (program copy)** | `working/REQ-TIED_DAE_VERIFICATION_CHARTER/checklist-tracker.yaml` — full template, `execution_evidence.completed: []` | **Do not** use for `close_out`; use [w4-close tracker](../REQ-TIED_DAE_VERIFICATION_CHARTER/waves/w4-close/checklist-tracker.yaml) |
-| **Methodology boundary** | **Done (R4 plan-new-feature)** — [REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY](../../tied/requirements/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY.yaml) + [executable PLAN](../REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/PLAN.md) | Phase A/B via **build-plan** on that PLAN |
+| **Charter W4 code** | mutation-cache, disjoint-verifier, gauntlet-runner, charter-policy, checklist-validator | Shipped — [wave-4-close](../REQ-TIED_DAE_VERIFICATION_CHARTER/evidence/wave-4-close-2026-09-24.md) |
+| **Charter tracker (program copy)** | `working/REQ-TIED_DAE_VERIFICATION_CHARTER/checklist-tracker.yaml` — full template | **Do not** use for `close_out`; use [w4-close tracker](../REQ-TIED_DAE_VERIFICATION_CHARTER/waves/w4-close/checklist-tracker.yaml) |
+| **Methodology boundary (R4)** | **Closed** — REQ **Implemented**, CITDP `phase: closed` (2026-09-25) | — |
 
 ### Compose-don't-fork (all slices)
 
@@ -69,55 +77,55 @@ Reconciled against parent [PLAN.md](./PLAN.md), CITDP records, charter evidence,
 | **R3** | **minimal** | **advisory** | not_applicable; opt-in surfaces only |
 | **R4** | Select at **plan-new-feature** | per new CITDP | per eligibility table |
 
-**CITDP persistence:** R1 may update charter **working** evidence only; avoid mutating charter **product** defaults (`verification_charter` stays opt-in on client CITDP). R2/R3 close-out should update **RISK-DAE-009/010** mitigation text in [CITDP-REQ-TIED_DAE_INCORPORATION.yaml](../../tied/citdp/CITDP-REQ-TIED_DAE_INCORPORATION.yaml) when slices complete.
+**CITDP persistence:** R1–R3 updates **done** in charter working evidence + parent CITDP (**RISK-DAE-009/010** closed). R4 migration waivers or gate completion update [CITDP-REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY.yaml](../../tied/citdp/CITDP-REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY.yaml) only — not DAE parent CITDP.
 
 ---
 
-## Execution order (recommended)
+## Execution order (historical + remaining)
 
 ```mermaid
 flowchart LR
-  R1[R1_charter_close_out]
-  R2[R2_W2d_auto_runner]
-  R3[R3_MCP_and_agentstream]
-  R4[R4_methodology_boundary_REQ]
-  R1 --> R2
-  R2 --> R3
+  R1[R1_done]
+  R2[R2_done]
+  R3[R3_done]
+  R4[R4_migration_G1_G4_met]
+  R1 --> R2 --> R3
   R4
 ```
 
-| Order | Id | Theme | Prompt type | Tracker (per-slice copy) |
+| Order | Id | Theme | Status | Tracker / plan |
 | --- | --- | --- | --- | --- |
-| **1** | **R1** | Charter machine close-out | **build-plan** | `working/REQ-TIED_DAE_VERIFICATION_CHARTER/waves/w4-close/checklist-tracker.yaml` (**create** in R1) |
-| **2** | **R2** | W2d automation (**RISK-DAE-009**) | **build-plan** | `working/REQ-TIED_DAE_INCORPORATION/waves/r2-w2d-runner/checklist-tracker.yaml` (**create** in R2) |
-| **3** | **R3** | Ergonomics tail (**RISK-DAE-010**) | **build-plan** | `working/REQ-TIED_DAE_INCORPORATION/waves/r3-ergonomics/checklist-tracker.yaml` (**create** in R3) |
-| **4** | **R4** | Methodology consumption boundary | **plan-new-feature** | From new REQ folder after promotion |
-
-R4 is independent of R1–R3 and may run in parallel when sponsor capacity allows.
+| **1** | **R1** | Charter machine close-out | **Done** | [w4-close/checklist-tracker.yaml](../REQ-TIED_DAE_VERIFICATION_CHARTER/waves/w4-close/checklist-tracker.yaml) |
+| **2** | **R2** | W2d automation (**RISK-DAE-009**) | **Done** | [waves/r2-w2d-runner/checklist-tracker.yaml](./waves/r2-w2d-runner/checklist-tracker.yaml) |
+| **3** | **R3** | Ergonomics (**RISK-DAE-010**) | **Done** | [waves/r3-ergonomics/checklist-tracker.yaml](./waves/r3-ergonomics/checklist-tracker.yaml) |
+| **4** | **R4** | Methodology client boundary | **Phases A/B shipped**; **G1–G4 Met** | [REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY PLAN](../REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/PLAN.md) + [offline runbook](../../tied/docs/methodology-client-boundary-offline-runbook.md) |
 
 ---
 
 ## Slice acceptance (wave/slice table)
 
-| Id | Acceptance (done when) | Primary verification |
-| --- | --- | --- |
-| **R1** | `merged_decision.allowed: true` for `close_out` on charter REQ; updated [charter close-out receipt](../REQ-TIED_DAE_VERIFICATION_CHARTER/evidence/close-out-receipt-2026-09-24.md); committed `close-out-gates-*.json` under charter working folder | `run-close-out-gates.mjs` (below) |
-| **R2** | When `diff_scoped_crap: true`, successful `quality_evidence_collect_manifest` triggers report path under `working/{REQ}/evidence/`; default off unchanged; **RISK-DAE-009** closed or waived in CITDP/PLAN | `npm test` + new composition test |
-| **R3** | `tied_gate_check` MCP tool registered; agentstream opt-in pre-turn gate; docs for skip flags; **RISK-DAE-010** updated | CLI e2e parity + agentstream test |
-| **R4** | New tracked REQ/ARCH/IMPL (+ CITDP if behavior-changing); advisory folder promoted or superseded | `tied_validate_consistency` after YAML promotion |
+| Id | Acceptance | Status | Primary verification |
+| --- | --- | --- | --- |
+| **R1** | `close_out` **allowed: true** on charter REQ; receipt + gate JSON | **Met** | [close-out receipt](../REQ-TIED_DAE_VERIFICATION_CHARTER/evidence/close-out-receipt-2026-09-24.md) |
+| **R2** | Post-manifest CRAP hook when `diff_scoped_crap: true`; **RISK-DAE-009** closed | **Met** | `diff-scoped-crap-hook.ts` + tests |
+| **R3** | `tied_gate_check` + agentstream preflight; **RISK-DAE-010** closed | **Met** | MCP + agentstream tests |
+| **R4** | REQ **Implemented**; CITDP closed; close_out **allowed: true** | **Met** (2026-09-25) | [close-out-gates-2026-09-25.json](../REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/evidence/close-out-gates-2026-09-25.json) |
 
 ---
 
 ## R1 — Child REQ full machine close-out
 
-### Problem (as-built)
+**Status: Done (2026-09-25).** Retained contract for audit; do not re-run unless gate runner regression.
 
-[Charter close-out receipt](../REQ-TIED_DAE_VERIFICATION_CHARTER/evidence/close-out-receipt-2026-09-24.md):
+### As-built (complete)
+
+[Charter close-out receipt](../REQ-TIED_DAE_VERIFICATION_CHARTER/evidence/close-out-receipt-2026-09-24.md) (R1 re-run 2026-09-25):
 
 - Envelope **ok** (`blocking_gap_count: 0`).
-- `run-close-out-gates.mjs` **`close_out`**: **`merged_decision.allowed: false`** — `missing_required_step:sub-adversarial-inquiry-pass`, plus **disjoint verifier session** diagnostics when the **full** template tracker (`execution_evidence.completed: []`) is used with gate validation.
+- `run-close-out-gates.mjs` **`close_out`**: **`merged_decision.allowed: true`** with [w4-close tracker](../REQ-TIED_DAE_VERIFICATION_CHARTER/waves/w4-close/checklist-tracker.yaml) (run-id `charter-close-out-r1`).
+- Product charter defaults remain **off** on canonical CITDP (`verification_charter: false`, `disjoint_verifier: skip`).
 
-Product charter defaults remain **off** on the canonical CITDP record (`verification_charter: false`, `disjoint_verifier: skip`).
+**Pre-R1 block (resolved):** Using the full template tracker with empty `execution_evidence.completed` reproduced `allowed: false` and disjoint-verifier diagnostics — fixed by wave-scoped tracker + N/A adversarial disposition.
 
 ### Contract
 
@@ -173,15 +181,17 @@ node tools/bootstrap/templates/run-close-out-gates.mjs \
 
 ### build-plan invocation remainder
 
-`/build-plan R1` + link this file + paths above. **No production code** unless gate runner exposes a defect — tracker/evidence-only slice.
+**Closed** — was `/build-plan R1` + this file (tracker/evidence-only).
 
 ---
 
 ## R2 — W2d post–quality-manifest runner (RISK-DAE-009)
 
-### Problem (as-built)
+**Status: Done.** [RISK-DAE-009](../../tied/citdp/CITDP-REQ-TIED_DAE_INCORPORATION.yaml) **closed**.
 
-[PLAN.md](./PLAN.md) W2d **as-built (pre-R2):** library + checklist documentation only. **R2 shipped:** `runOptionalDiffScopedCrapAfterManifest` in `quality-evidence-collection.ts` / MCP manifest response when `diff_scoped_crap: true`. [RISK-DAE-009](../../tied/citdp/CITDP-REQ-TIED_DAE_INCORPORATION.yaml) **closed**.
+### As-built (complete)
+
+`runOptionalDiffScopedCrapAfterManifest` in [quality-evidence-collection.ts](../../mcp-server/src/quality-evidence-collection.ts) / [diff-scoped-crap-hook.ts](../../mcp-server/src/diff-scoped-crap-hook.ts) when CITDP `diff_scoped_crap: true` (default **off** unchanged).
 
 ### Contract
 
@@ -215,20 +225,22 @@ cd mcp-server && npm test -- dist/diff-scoped-crap.test.js
 
 ### build-plan invocation remainder
 
-`/build-plan R2` or `/build-plan RISK-DAE-009` + this file + parent PLAN W2d contract.
+**Closed** — was `/build-plan R2` / `RISK-DAE-009`.
 
 ---
 
 ## R3 — Optional MCP mirror + agentstream preflight (RISK-DAE-010)
 
-### Problem (as-built)
+**Status: Done (2026-09-24).** [RISK-DAE-010](../../tied/citdp/CITDP-REQ-TIED_DAE_INCORPORATION.yaml) **closed**.
 
-| Parent PLAN deferral | Repo state today |
+### As-built (complete)
+
+| Deliverable | Repo state |
 | --- | --- |
-| W1a MCP mirror | **`tied_gate_check`** registered (same composition as CLI) |
-| Agentstream DAE pre-turn | **`WIRE_AGENTSTREAM_DAE_GATE_PREFLIGHT`** shipped (`dae-gate-preflight.ts`) |
+| **R3a** MCP mirror | **`tied_gate_check`** in `mcp-server/src/tools/index.ts` (same composition as CLI); tests in `tied-gate-check-mcp.test.ts` |
+| **R3b** Agentstream pre-turn | **`dae-gate-preflight.ts`**; opt-in via `AGENTSTREAM_DAE_GATE_CHECK` / `dae.agentstream_gate_check` |
 
-Sponsor residual: implement **both** (not `tied_closure_join_report` mirror unless scope expands).
+Non-goal retained: no `tied_closure_join_report` MCP mirror in this slice unless scope expands.
 
 ### Contract
 
@@ -260,30 +272,38 @@ cd mcp-server/packages/agentstream && npm test
 
 ### build-plan invocation remainder
 
-`/build-plan R3` or `/build-plan RISK-DAE-010` + this file. May reference [REQ-TIED_UNIFIED_TOOLCHAIN](../REQ-TIED_UNIFIED_TOOLCHAIN/PLAN.md) for agentstream docs cross-links only.
+**Closed** — was `/build-plan R3` / `RISK-DAE-010`.
 
 ---
 
 ## R4 — Methodology client boundary (separate program)
 
-### Problem
+**Status:** Tracked stack **promoted 2026-09-24**; **Phase A + Phase B shipped 2026-09-25.** **Not** part of the DAE REQ graph. Remaining work is **migration gates G2–G4** on the methodology PLAN (pilot / release / sponsor policy), not DAE residual slices.
 
-Advisory memo lives untracked at [working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/](../REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/) ([PLAN.md](../REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/PLAN.md) + optional close-out receipt). **Not** part of DAE token graph.
+### As-built (complete phases)
 
-### Contract
+| Phase | Shipped | Anchors |
+| --- | --- | --- |
+| **A (#4)** | Bootstrap `--methodology-readonly`, `--install-methodology-hook`, CI doc § methodology-boundary-ci-guard | `tools/bootstrap/`, [client-development-index.md](../../tied/docs/client-development-index.md) |
+| **B (#2 spike)** | `TIED_METHODOLOGY_BUNDLE_PATH`, [bundled-methodology-read.ts](../../mcp-server/src/bundled-methodology-read.ts), parity tests | [methodology PLAN](../REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/PLAN.md) parity table; [methodology-bundle README](../../mcp-server/methodology-bundle/README.md) |
+
+### What remains (migration gates)
+
+See [methodology PLAN — Migration gates](../REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/PLAN.md#migration-gates-do-not-remove-copy_filessh-tree-until-all-pass): **G1–G4 Met** (2026-09-25); **G5** rollback documented. Offline cohort policy: [offline runbook](../../tied/docs/methodology-client-boundary-offline-runbook.md).
+
+### Contract (retained)
 
 | Field | Target |
 | --- | --- |
-| **Entry** | **`plan-new-feature`** — **not** `build-plan` on DAE [PLAN.md](./PLAN.md) |
-| **INPUT** | [working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/PLAN.md](../REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/PLAN.md) (near-term **#4** hooks + strategic **#2** spike per memo) |
-| **OUTPUT** | New tracked **REQ/ARCH/IMPL** (e.g. **REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY**) + CITDP when behavior-changing; **no** merge into [REQ-TIED_DAE_INCORPORATION](../../tied/requirements/REQ-TIED_DAE_INCORPORATION.yaml) / charter tokens |
-| **Anchors** | [PROC-TIED_METHODOLOGY_READONLY], `mcp-server/src/detail-loader.ts`, `mcp-server/src/yaml-loader.ts`, `copy_files.sh` methodology overwrite semantics |
-| **Git** | Leave advisory folder untracked until promotion; no ad-hoc commit of scratch-only memo |
-| **Non-goals** | DAE wave reopen; conflating methodology boundary with **RISK-DAE-*** residual |
+| **REQ stack** | [REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY](../../tied/requirements/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY.yaml) (**Planned**); [CITDP](../../tied/citdp/CITDP-REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY.yaml) `phase: planning` |
+| **Entry (remaining)** | **`build-plan`** on [methodology PLAN](../REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/PLAN.md) for gate slices / pilots — **not** DAE [PLAN.md](./PLAN.md) |
+| **Compose** | [PROC-TIED_METHODOLOGY_READONLY]; `detail-loader.ts` / `yaml-loader.ts` write rejection unchanged |
+| **Non-goals** | DAE wave reopen; merge into DAE/charter tokens; remove `copy_files.sh` tree before gates pass |
 
-### build-plan invocation remainder
+### Invocation remainder
 
-**N/A** — use **`plan-new-feature`** with `@working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/PLAN.md`.
+- **Promotion (done):** was **`plan-new-feature`** `@working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/PLAN.md`
+- **Next:** pilot **G2–G4** per methodology PLAN; optional **`/build-plan`** with remainder naming the gate (e.g. migration pilot) + linked methodology PLAN
 
 ---
 
@@ -291,25 +311,26 @@ Advisory memo lives untracked at [working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/]
 
 - **Do not** add `!` gitignore exceptions for DAE `request-evidence-envelope.v1.json`.
 - Regenerate envelopes locally via `run-close-out-gates.mjs` / MCP backfill when re-running gates.
-- Tracked: `evidence/close-out-gates-*.json`, receipts, wave evidence, **RESIDUAL-PLAN.md**, charter `waves/**/checklist-tracker.yaml` once R1 creates it.
+- Tracked: `evidence/close-out-gates-*.json`, receipts, wave evidence, **RESIDUAL-PLAN.md**, charter [w4-close/checklist-tracker.yaml](../REQ-TIED_DAE_VERIFICATION_CHARTER/waves/w4-close/checklist-tracker.yaml).
 
 ---
 
-## Build-plan readiness checklist (per slice)
+## Build-plan readiness checklist
 
-Use before `/build-plan`; copy Tracker from [agent-req-implementation-checklist.yaml](../../tied/docs/agent-req-implementation-checklist.yaml) into the slice path listed above.
+**R1–R3:** Slices **closed** — checklist retained for audit only.
 
-| Check | R1 | R2 | R3 |
-| --- | --- | --- | --- |
-| Linked plan + slice id in remainder | ✓ | ✓ | ✓ |
-| CITDP path identified | charter CITDP | parent CITDP (+ LEAP note) | parent CITDP |
-| IMPL pseudo-code blocks identified | N/A (evidence-only) | `OPTIONAL_DIFF_SCOPED_CRAP_HOOK` | `WIRE_AGENTSTREAM_DAE_GATE_PREFLIGHT` + W1a composition |
-| RED test paths named | N/A | composition test planned | MCP + agentstream tests named |
-| `profile_depth` / inquiry N/A recorded | ✓ | ✓ | ✓ |
-| Compose-don't-fork reviewed | ✓ | ✓ | ✓ |
-| `tied_config_get_base_path` → `.../stdd/tied` | ✓ | ✓ | ✓ |
+**R4 (methodology PLAN — migration / pilots):** Before any new **`build-plan`** on [methodology PLAN](../REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/PLAN.md):
 
-**Gate before RED (R2/R3):** `tied_checklist_gate_validate` phase `pre_implementation` on slice Tracker when build-plan mutates code.
+| Check | R4 (remaining) |
+| --- | --- |
+| Linked [methodology PLAN](../REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/PLAN.md) + gate id in remainder | ✓ |
+| CITDP [CITDP-REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY.yaml](../../tied/citdp/CITDP-REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY.yaml) | ✓ |
+| Tracker [checklist-tracker.yaml](../REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/checklist-tracker.yaml) | ✓ |
+| `profile_depth: minimal`, adversarial N/A on CITDP | ✓ |
+| Compose with MCP write guards (no methodology YAML writes) | ✓ |
+| `tied_config_get_base_path` → `.../stdd/tied` | ✓ |
+
+**Gate before RED:** `tied_checklist_gate_validate` phase `pre_implementation` on methodology Tracker when build-plan mutates code.
 
 ---
 
@@ -321,7 +342,8 @@ Use before `/build-plan`; copy Tracker from [agent-req-implementation-checklist.
 | ~~**RISK-DAE-009**~~ | — | Closed R2 — see `diff-scoped-crap-hook.ts` + binding evidence | — |
 | **RISK-DAE-010** | Low (closed) | R3 shipped MCP + agentstream opt-in preflight | **Closed** |
 | **RISK-DAE-008** | Medium | Agentstream gate could block batch CI | Opt-in env/manifest; exit 2 skip docs (**R3b**) |
-| ~~**R4-DEFER**~~ | — | Promoted 2026-09-24 — tracked REQ stack + CITDP planning | **build-plan Phase A** on methodology PLAN |
+| **R4-MIGRATION** | Low | **G1–G4 Met** on methodology PLAN (2026-09-25) | REQ **plan-close-out** / envelope sync per methodology PLAN |
+| ~~**R4-DEFER**~~ | — | Promoted + Phases A/B shipped | — |
 
 ---
 
@@ -331,29 +353,33 @@ Use before `/build-plan`; copy Tracker from [agent-req-implementation-checklist.
 | --- | --- |
 | **PRELOAD** | `tied/vocab/prompt-composer.md`, `tied/vocab/tied-methodology.md`, `tied/vocab/pseudocode-and-citdp.md` (DAE residual terms) |
 | **RESOLVE** | **diff-scoped change-risk report** (prose) vs ids `diff_scoped_crap`, `diff-scoped-crap.v1`; **agentstream gate preflight**; **wave-scoped tracker**; **compose-don't-fork** |
-| **RECORD** | No new glossary files required pass 1 — terms anchored in parent PLAN vocabulary table |
-| **VALIDATE** | At R2/R3 build-plan pre-commit: checklist prose matches stable ids |
+| **RECORD** | Pass 2: **methodology bundled read**, **migration gate** — anchored in [methodology PLAN](../REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/PLAN.md) + parent PLAN vocabulary |
+| **VALIDATE** | Residual program complete for R1–R3; validate methodology glossary at R4 migration close-out |
 
 ---
 
 ## Completion criteria (residual program)
 
-| Id | Done when |
+| Id | Status |
 | --- | --- |
-| **R1** | Charter `close_out` **allowed: true** + receipt updated + committed gate JSON |
-| **R2** | Automated or MCP-invoked runner documented + tests green; **RISK-DAE-009** closed or waived in CITDP/PLAN |
-| **R3** | **Done** — R3a + R3b shipped; **RISK-DAE-010** updated |
-| **R4** | **Done (plan-new-feature)** — tracked REQ/ARCH/IMPL + CITDP; implementation via Phase A/B on methodology PLAN |
+| **R1** | **Met** — charter `close_out` **allowed: true**; receipt + gate JSON committed |
+| **R2** | **Met** — post-manifest hook + **RISK-DAE-009** closed |
+| **R3** | **Met** — R3a + R3b shipped; **RISK-DAE-010** closed |
+| **R4** | **Met** — methodology REQ close-out 2026-09-25; envelope blocking gaps **0** |
+
+**DAE residual program (R1–R4):** complete. Optional follow-up: client pilots with bundle-only env (operator track on methodology PLAN).
 
 ---
 
 ## Invocation cheat sheet
 
-| Goal | Prompt type | Remainder |
-| --- | --- | --- |
-| Charter close-out | **build-plan** | `R1` + `@working/REQ-TIED_DAE_INCORPORATION/RESIDUAL-PLAN.md` |
-| W2d runner | **build-plan** | `R2` / `RISK-DAE-009` + RESIDUAL-PLAN |
-| MCP + agentstream | **build-plan** | `R3` / `RISK-DAE-010` + RESIDUAL-PLAN |
-| Methodology boundary | **plan-new-feature** | `@working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/PLAN.md` |
+| Goal | Status | Prompt type | Remainder |
+| --- | --- | --- | --- |
+| Charter close-out (R1) | Done | — | — |
+| W2d runner (R2) | Done | — | — |
+| MCP + agentstream (R3) | Done | — | — |
+| Methodology promotion | Done | was **plan-new-feature** | `@working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/PLAN.md` |
+| Migration gates G1–G4 | **Met (2026-09-25)** | **plan-close-out** | `@working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/PLAN.md` — envelope + REQ verification |
+| Residual doc reconcile | Done (pass 2) | **refine-plan** | `@working/REQ-TIED_DAE_INCORPORATION/RESIDUAL-PLAN.md` |
 
-**Recommended next invocation:** **`/build-plan Phase A`** `@working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/PLAN.md` (methodology hooks #4). DAE residual R1–R3: commit when ready. R4 stack promoted — do not fold into DAE tokens.
+**Recommended next invocation:** **`/plan-close-out`** (or **`build-plan`** close-out slice) on **`@working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/PLAN.md`** — migration G1–G4 met; run envelope validate + `sub-close-out-evidence-sync`. Do **not** fold methodology tokens into DAE/charter stacks.

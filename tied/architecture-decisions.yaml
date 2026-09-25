@@ -1857,7 +1857,7 @@ ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY:
     - "REQ-TIED_SETUP"
   detail_file: "architecture-decisions/ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY.yaml"
   name: "Methodology client boundary architecture"
-  status: "Proposed"
+  status: "Active"
 ARCH-TIED_NEW_CLIENT_ADHERENCE:
   cross_references:
     architecture:

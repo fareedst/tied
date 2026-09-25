@@ -1,0 +1,11 @@
+{
+  "schema": "methodology-offline-policy-signoff.v1",
+  "request_token": "REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY",
+  "signed_at": "2026-09-25",
+  "signer_role": "TIED program owner (methodology client boundary)",
+  "policy": {
+    "copy_files_refresh_retained": true,
+    "bundle_optional": true,
+    "cohort_notes": "Offline and air-gapped clients continue ./copy_files.sh refresh of tied/methodology/; TIED_METHODOLOGY_BUNDLE_PATH remains opt-in until cohort pilots request bundle-only reads."
+  }
+}

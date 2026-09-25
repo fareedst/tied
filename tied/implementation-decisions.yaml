@@ -2261,7 +2261,7 @@ IMPL-TIED_METHODOLOGY_CLIENT_BOUNDARY:
     - "REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY"
   detail_file: "implementation-decisions/IMPL-TIED_METHODOLOGY_CLIENT_BOUNDARY.yaml"
   name: "Methodology client boundary implementation"
-  status: "Proposed"
+  status: "Active"
 IMPL-TIED_NEW_CLIENT_ONBOARDING:
   cross_references:
     architecture:
