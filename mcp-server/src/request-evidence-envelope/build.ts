@@ -9,6 +9,7 @@ import path from "node:path";
 import yaml from "js-yaml";
 
 import {
+  stableHash,
   validateFindingDisposition,
   validateProvenanceComplete,
   type GatePhase,
@@ -546,12 +547,14 @@ async function detectGaps(input: {
     }
   }
   const trackerArtifact = input.artifacts.find((a) => a.kind === "checklist_tracker");
+  const trackerSemanticHash =
+    trackerDoc !== null ? `sha256:${stableHash(trackerDoc)}` : null;
   const processGaps = await detectProcessAdherenceGaps({
     projectRoot: input.projectRoot,
     requestToken: input.requestToken,
     tracker: trackerDoc,
     artifacts: input.artifacts,
-    currentTrackerHash: trackerArtifact?.content_hash ?? null,
+    currentTrackerHash: trackerSemanticHash ?? trackerArtifact?.content_hash ?? null,
     depthTier: input.depthTier,
   });
   gaps.push(...processGaps);
@@ -615,6 +618,23 @@ export async function buildRequestEvidenceEnvelope(
   const citdp = artifacts.find((a) => a.kind === "citdp_record" && a.path.includes("working/"));
   const profile = artifacts.find((a) => a.kind === "evidence_chain_profile");
 
+  const trackerPathForLinks = tracker?.path ?? null;
+  let trackerHashForLinks: string | null = tracker?.content_hash ?? null;
+  if (trackerPathForLinks) {
+    const trackerAbs = path.join(projectRoot, trackerPathForLinks);
+    const trackerRaw = await readOptional(trackerAbs);
+    if (trackerRaw) {
+      try {
+        const parsed = yaml.load(trackerRaw);
+        if (isRecord(parsed)) {
+          trackerHashForLinks = `sha256:${stableHash(parsed)}`;
+        }
+      } catch {
+        /* keep byte content_hash fallback */
+      }
+    }
+  }
+
   const identity = resolveProjectIdentity(resolvedTied);
   const envelope: RequestEvidenceEnvelope = normalizeEnvelope({
     schema_version: ENVELOPE_SCHEMA_VERSION,
@@ -633,8 +653,8 @@ export async function buildRequestEvidenceEnvelope(
     runs: extractRuns(artifacts),
     artifacts,
     cross_links: {
-      tracker_path: tracker?.path ?? null,
-      tracker_hash: tracker?.content_hash ?? null,
+      tracker_path: trackerPathForLinks,
+      tracker_hash: trackerHashForLinks,
       citdp_path: citdp?.path ?? null,
       evidence_chain_profile_path: profile?.path ?? null,
     },

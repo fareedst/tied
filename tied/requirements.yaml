@@ -2069,6 +2069,27 @@ REQ-TIED_FIDELITY_RESEARCH:
       method: "Read-only safety checks"
     - coverage: "Manifest, finding lifecycle, specification-state classification, fidelity matrices, promotion, and deterministic rerun."
       method: "Unit tests"
+REQ-TIED_JEV_DECISION_COPROCESSOR:
+  category: "Methodology"
+  cross_references:
+    architecture:
+      - "ARCH-TIED_JEV_DECISION_COPROCESSOR"
+    implementation:
+      - "IMPL-TIED_JEV_DECISION_COPROCESSOR"
+  description: "Optional TypeSafe Jev (System One) HTTP client and phased harness integration composed with existing MCP gates."
+  detail_file: "requirements/REQ-TIED_JEV_DECISION_COPROCESSOR.yaml"
+  name: "Jev decision coprocessor program"
+  priority: "P2"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-TIED_UNIFIED_TOOLCHAIN"
+    related_to:
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-TIED_ADVERSARIAL_INQUIRY"
+      - "REQ-TIED_DAE_INCORPORATION"
+    supersedes: []
+  status: "In Progress"
 REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY:
   category: "Methodology"
   cross_references:

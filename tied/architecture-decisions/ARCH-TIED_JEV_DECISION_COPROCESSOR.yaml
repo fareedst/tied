@@ -1,0 +1,25 @@
+ARCH-TIED_JEV_DECISION_COPROCESSOR:
+  alternatives_considered:
+    - description: "Use chat models for all routing"
+      name: "Frontier LLM structured output only"
+      rejected_because: "Cost and latency on every turn"
+  consequences:
+    negative:
+      - "External API dependency; threshold maintenance per model pin"
+    positive:
+      - "Shared typed client and redaction policy"
+  context: "TIED operators need fast optional judgments without forking deterministic gates."
+  cross_references:
+    architecture: []
+    implementation:
+      - "IMPL-TIED_JEV_DECISION_COPROCESSOR"
+    requirements:
+      - "REQ-TIED_JEV_DECISION_COPROCESSOR"
+  decision: "Add mcp-server Jev module (W1) and phased advisory/blocking hooks (W2-W5); authority remains Tracker receipts, pseudocode_analyze, and TIED YAML MCP."
+  metadata:
+    last_updated:
+      author: "plan-close-out"
+      date: "2026-09-26"
+      reason: "W0-W5 core close-out"
+  name: "Jev decision coprocessor architecture"
+  status: "Implemented"

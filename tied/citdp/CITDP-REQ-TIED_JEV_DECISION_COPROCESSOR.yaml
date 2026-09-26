@@ -1,0 +1,81 @@
+CITDP-REQ-TIED_JEV_DECISION_COPROCESSOR:
+  change_definition:
+    current_behavior: "No server-side Jev client in mcp-server; routing and gates are fully deterministic."
+    desired_behavior: "Optional Jev System One coprocessor (W0–W5 core): /v1/decide client, shadow vocab PRELOAD, prompt-type advisory, adversarial triage pilot, opt-in agentstream harness preflight + tool guard."
+    non_goals:
+      - "Auto-mutating TIED YAML from Jev outputs"
+      - "Live Jev API in CI close-out"
+      - "Per-turn Shell/bash interception in live agent loop (accepted residual)"
+      - "Replacing tied_checklist_gate_validate"
+    success_criteria:
+      - "close_out gate allowed with minimal depth"
+      - "mcp-server/src/jev unit tests pass (mocked fetch)"
+      - "W2–W5 SCs in REQ satisfied"
+    unchanged_behavior: "Checklist gate receipts and YAML MCP write path"
+  close_out:
+    date: "2026-09-26"
+    receipt: "working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/close-out-gates-2026-09-26.json"
+    run_id: "jev-decision-coprocessor-close-out-2026-09-26"
+  completion_criteria:
+    focused_tests: "bun test mcp-server/src/jev/; bun test mcp-server/packages/agentstream/src/jev-harness-preflight.test.ts"
+    lint: "cd mcp-server && npm run build"
+    verification: "tied_validate_consistency; run-close-out-gates close_out"
+  evidence:
+    commands:
+      - command:
+          - "bun"
+          - "src/jev/"
+          - "test"
+        cwd: "mcp-server"
+        id: "jev-unit"
+      - command:
+          - "npm"
+          - "test"
+        cwd: "mcp-server"
+        id: "mcp-server-regression"
+      - command:
+          - "bun"
+          - "src/jev-harness-preflight.test.ts"
+          - "test"
+        cwd: "mcp-server/packages/agentstream"
+        id: "agentstream-jev-preflight"
+  impact_analysis:
+    blast_radius: "mcp-server/src/jev, agentstream preflight, tied vocab, REQ stack"
+    modules_or_boundaries: "mcp-server/src/jev, packages/agentstream/jev-harness-preflight"
+    tied_tokens_new:
+      - "ARCH-TIED_JEV_DECISION_COPROCESSOR"
+      - "IMPL-TIED_JEV_DECISION_COPROCESSOR"
+      - "REQ-TIED_JEV_DECISION_COPROCESSOR"
+  record_identity:
+    change_request_id: "REQ-TIED_JEV_DECISION_COPROCESSOR"
+    gate_policy: "mixed"
+    phase: "closed"
+    profile_depth: "minimal"
+    record_status: "final"
+    recorded_at: "2026-09-26"
+    title: "Jev decision coprocessor W0–W5 core (closed)"
+  residual_scope:
+    w5_runtime_middleware: "Wire evaluateHarnessToolCall on each agentstream tool invocation; optional integrated depth for production-default blocking"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Jev block bypasses Cursor approvals"
+        - "Per-turn middleware gap allows risky Shell before guard runs"
+        - "State leak sends jv_live key to vendor"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Harness disabled by default (AGENTSTREAM_JEV_HARNESS)"
+        - "redact-state masks jv_live"
+        - "W1 skips without key"
+      evidence_references:
+        - "mcp-server/src/jev/jev.test.ts"
+        - "working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/adversarial-triage-pilot-report.v1.json"
+      falsification_questions:
+        - "Does harness block when enabled and key missing for blocking tools?"
+        - "Does jevDecide call vendor when JEV_API_KEY is unset?"
+      gate_policy: "mixed"
+      sub_adversarial_inquiry_pass: "not_applicable"
+    depth_tier: "minimal"
+  test_strategy:
+    summary: "Unit tests with injectable fetch; agentstream preflight smoke; no live Jev in CI"

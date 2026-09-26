@@ -12,6 +12,7 @@ import { agentArgv } from "./executor-run.js";
 import { bindLiveExecutorDriver } from "./live-driver-bind.js";
 import { runTiedPreflight, type DryRunStreams } from "./executor-dry-run.js";
 import { runDaeGatePreflight } from "./dae-gate-preflight.js";
+import { runJevHarnessPreflightLive } from "./jev-harness-preflight.js";
 import { knownStepStubs, replaceRemainingFromStep } from "./pipeline-route.js";
 import { chainBetween, sessionForTurn } from "./pipeline-session.js";
 import { buildTurnsFromConfig } from "./run-pipeline-prep.js";
@@ -216,7 +217,16 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
     return { stdout: "", stderr: pre.stderr + dae.stderr, exitCode: dae.exitCode };
   }
 
-  let stderrAcc = pre.stderr + dae.stderr;
+  const jev = await runJevHarnessPreflightLive(cfg);
+  if (jev.exitCode !== 0) {
+    return {
+      stdout: "",
+      stderr: pre.stderr + dae.stderr + jev.stderr,
+      exitCode: jev.exitCode,
+    };
+  }
+
+  let stderrAcc = pre.stderr + dae.stderr + jev.stderr;
   const usingTracker = cfg.checklistTrackerYaml.trim() !== "";
   if (usingTracker) {
     const requestToken = trackerRequestTokenFromVars(cfg.checklistVars);

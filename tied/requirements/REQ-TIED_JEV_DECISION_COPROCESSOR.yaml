@@ -1,0 +1,38 @@
+REQ-TIED_JEV_DECISION_COPROCESSOR:
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-09-26"
+    last_updated:
+      author: "plan-close-out"
+      date: "2026-09-26"
+      reason: "close_out gates allowed; W0-W5 core delivered"
+  name: "Jev decision coprocessor program"
+  priority: "P2"
+  rationale:
+    benefits:
+      - "Compose-don't-fork coprocessor for vocab shadow, prompt-type advisory, and W5 tool blocking"
+    problems_solved:
+      - "High latency/cost for classification-shaped agent steps"
+      - "No shared server-side wrapper for Jev /v1/decide in mcp-server"
+    why: "TIED spends frontier LLM calls on narrow routing and safety judgments; Jev offers typed parallel decisions with calibrated uncertainty."
+  satisfaction_criteria:
+    - criterion: "Adversarial triage pilot runs fixture-only without live Jev."
+      id: "SC-JEV-W4-PILOT"
+      metric: "bun test mcp-server/src/jev/adversarial-triage-pilot.test.ts"
+    - criterion: "Jev never substitutes tied_checklist_gate_validate receipts or MCP YAML writes."
+      id: "SC-JEV-LAYERING"
+      metric: "PLAN.md layering rules + code review"
+    - criterion: "mcp-server/src/jev exposes jevDecide with skip-without-key, redaction, and unit tests with mocked fetch."
+      id: "SC-JEV-W1-CLIENT"
+      metric: "mcp-server/src/jev/jev.test.ts passes"
+    - criterion: "Opt-in harness preflight and tool guard with fail-closed when enabled."
+      id: "SC-JEV-W5-HARNESS"
+      metric: "bun test mcp-server/src/jev/harness-tool-guard.test.ts and jev-harness-preflight.test.ts"
+    - criterion: "Prompt-type advisory respects TIED applicability boundary."
+      id: "SC-JEV-W3-PROMPT-TYPE"
+      metric: "bun test mcp-server/src/jev/prompt-type-advisory.test.ts"
+    - criterion: "Vocab PRELOAD shadow compares Jev vs keyword routing without behavior change."
+      id: "SC-JEV-W2-SHADOW"
+      metric: "bun test mcp-server/src/jev/shadow-vocab-preload.test.ts"
+  status: "Implemented"

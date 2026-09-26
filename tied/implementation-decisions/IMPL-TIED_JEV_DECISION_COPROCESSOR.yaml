@@ -1,0 +1,20 @@
+IMPL-TIED_JEV_DECISION_COPROCESSOR:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_JEV_DECISION_COPROCESSOR"
+    implementation: []
+    requirements:
+      - "REQ-TIED_JEV_DECISION_COPROCESSOR"
+  description: "Server-side Jev /v1/decide client per essence_pseudocode sidecar."
+  implementation_approach:
+    details:
+      - approach: "prompt-type-taxonomy, heuristic explicit scan, advisePromptTypes, replay script"
+        phase: "W3"
+    summary: "TDD on jevDecide; injectable fetch; W2 shadow vocab PRELOAD replay."
+  metadata:
+    last_updated:
+      author: "plan-close-out"
+      date: "2026-09-26"
+      reason: "W0-W5 core implemented"
+  name: "Jev decision coprocessor implementation"
+  status: "Active"

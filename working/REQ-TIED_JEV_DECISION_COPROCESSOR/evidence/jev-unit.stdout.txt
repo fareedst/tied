@@ -1,0 +1,51 @@
+bun test v1.3.9 (cf6cdbbb)
+
+src/jev/harness-tool-guard.test.ts:
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W5 harness > allows when harness disabled [0.51ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W5 harness > blocks destructive pattern when harness enabled [0.08ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W5 harness > fail-closed blocks bash when Jev key missing [0.09ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W5 harness > allows non-blocking tools without key [0.02ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W5 harness > jev high risk blocks [1.38ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W5 harness > matchesDestructivePattern detects rm -rf
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W5 harness > resolveHarnessFromEnv reads AGENTSTREAM_JEV_HARNESS
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W5 harness > adviseContextFilter keeps when harness disabled
+
+src/jev/prompt-type-advisory.test.ts:
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W3 prompt-type advisory > heuristicInferPromptTypes detects slash build-plan [0.52ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W3 prompt-type advisory > heuristicInferPromptTypes preserves explicit sequence order
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W3 prompt-type advisory > heuristicInferPromptTypes maps non-tied-plan [0.37ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W3 prompt-type advisory > heuristicInferPromptTypes avoids bare debug when non-tied-debug named [0.01ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W3 prompt-type advisory > every leaf type is matchable by an explicit token fixture [0.36ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W3 prompt-type advisory > advisePromptTypes uses heuristic when Jev skipped [0.22ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W3 prompt-type advisory > advisePromptTypes records disagreement when Jev primary diverges [0.12ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W3 prompt-type advisory > advisePromptTypes never returns unknown prompt types [0.03ms]
+
+src/jev/adversarial-triage-pilot.test.ts:
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W4 adversarial triage pilot > loads labeled fixture from go-rootjobs-derived cases [0.04ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W4 adversarial triage pilot > classifyTriage maps aligned nouls
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W4 adversarial triage pilot > classifyTriage maps spec_gap
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W4 adversarial triage pilot > observeAdversarialTriageCase skips without credentials [0.11ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W4 adversarial triage pilot > observeAdversarialTriageCase matches labels when mock Jev aligns [0.21ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W4 adversarial triage pilot > compareObservationToLabels detects boolean mismatch
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W4 adversarial triage pilot > runAdversarialTriagePilot report schema when Jev skipped [0.09ms]
+
+src/jev/jev.test.ts:
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR jev client > jevDecide skips when no credentials [0.05ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR jev client > redactString masks jv_live keys
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR jev client > jevDecide posts to /v1/decide with bearer auth [0.30ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR jev client > jevDecide retries once on 502 [51.31ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR jev client > resolveJevConfig reads env defaults
+
+src/jev/shadow-vocab-preload.test.ts:
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W2 shadow routing > parseRoutingTableMarkdown loads client routing table [0.03ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W2 shadow routing > matchKeywordGlossaries matches tied agentstream prompt
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W2 shadow routing > matchKeywordGlossaries matches adversarial inquiry terms [0.13ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W2 shadow routing > jevAnswersToGlossaryIds merges choice and nouls
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W2 shadow routing > shadowVocabPreloadFromRows skips Jev without credentials [0.20ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W2 shadow routing > shadowVocabPreloadFromRows records disagreement when Jev diverges [0.20ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W2 shadow routing > vocabShadowAgrees treats Jev subset of keyword matches as agreement
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W2 shadow routing > summarizeShadowAgreement computes rate on invoked logs
+
+ 36 pass
+ 0 fail
+Ran 36 tests across 5 files. [145.00ms]

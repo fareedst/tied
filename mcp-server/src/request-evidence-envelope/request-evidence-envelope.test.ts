@@ -14,6 +14,7 @@ function resolveRepoRoot(): string {
   }
   return path.resolve(process.cwd(), "..");
 }
+import { stableHash } from "../checklist-validator.js";
 import { buildRequestEvidenceEnvelope } from "./build.js";
 import { CORPUS_INVENTORY_TO_GAP_CODE, mapCorpusInventoryString } from "./gap-codes.js";
 import { serializeEnvelope } from "./normalize.js";
@@ -264,6 +265,54 @@ describe("request evidence envelope [REQ-REQUEST_EVIDENCE_ENVELOPE]", () => {
     assert.equal(first.ok, true);
     assert.equal(second.ok, true);
     if (!first.ok || !second.ok) return;
+    assert.equal(serializeEnvelope(first.envelope), serializeEnvelope(second.envelope));
+  });
+
+  it("aligns cross_links.tracker_hash with gate receipt stableHash (inc-stable rebuild)", async () => {
+    const tempRoot = mkdtempSync(path.join(os.tmpdir(), "ree-tracker-hash-"));
+    const requestToken = "REQ-ENVELOPE-TRACKER-HASH";
+    const working = path.join(tempRoot, "working", requestToken);
+    mkdirSync(path.join(working, "gates"), { recursive: true });
+    const trackerDoc = {
+      request: requestToken,
+      execution_evidence: { completed: ["verification-gate"] },
+    };
+    const trackerYaml = [
+      "request: REQ-ENVELOPE-TRACKER-HASH",
+      "execution_evidence:",
+      "  completed:",
+      "    - verification-gate",
+    ].join("\n");
+    writeFileSync(path.join(working, "agent-req-implementation-checklist.yaml"), `${trackerYaml}\n`, "utf8");
+    const semanticTrackerHash = `sha256:${stableHash(trackerDoc)}`;
+    writeFileSync(
+      path.join(working, "gates", "verification-2026-01-01.json"),
+      JSON.stringify({
+        schema_version: "checklist-gate-receipt.v1",
+        timestamp: "2026-01-01T00:00:00.000Z",
+        input_hashes: { tracker_hash: semanticTrackerHash, citdp_hash: "sha256:citdp" },
+      }),
+      "utf8",
+    );
+    mkdirSync(path.join(tempRoot, "tied"), { recursive: true });
+    const tiedBase = path.join(tempRoot, "tied");
+    const buildArgs = {
+      request_token: requestToken,
+      project_root: tempRoot,
+      tied_base_path: tiedBase,
+      confirmed_tied_base_path: tiedBase,
+      depth_tier: "minimal" as const,
+      generated_at: "2026-09-10T16:00:00.000Z",
+    };
+    const first = await buildRequestEvidenceEnvelope(buildArgs);
+    const second = await buildRequestEvidenceEnvelope(buildArgs);
+    assert.equal(first.ok, true);
+    assert.equal(second.ok, true);
+    if (!first.ok || !second.ok) return;
+    assert.equal(first.envelope.cross_links.tracker_hash, semanticTrackerHash);
+    assert.ok(
+      !first.envelope.gaps.some((gap) => gap.code === "evidence_stale" && gap.detail.includes("tracker_hash")),
+    );
     assert.equal(serializeEnvelope(first.envelope), serializeEnvelope(second.envelope));
   });
 

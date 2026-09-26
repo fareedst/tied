@@ -1,0 +1,80 @@
+{
+  "schema": "adversarial-triage-labeled.v1",
+  "source_fixtures": [
+    "mcp-server/test/fixtures/adversarial-inquiry-go-rootjobs/fidelity.json"
+  ],
+  "cases": [
+    {
+      "id": "rootjobs-orphan-aligned",
+      "criterion_text": "Process whose PPID is absent from snapshot is promoted to root",
+      "pseudocode_excerpt": "IF parent pid not in index THEN append process to roots list",
+      "test_excerpt": "TestBuildForest_OrphanBecomesRoot expects orphan PID 10 as sole root",
+      "labels": {
+        "criterion_met": true,
+        "spec_gap": false,
+        "test_supports_claim": true,
+        "implementation_drift": false
+      }
+    },
+    {
+      "id": "rootjobs-sort-aligned",
+      "criterion_text": "Roots and sibling children are sorted by PID ascending at every level",
+      "pseudocode_excerpt": "SORT roots and each child slice by PID ascending before return",
+      "test_excerpt": "TestBuildForest_StablePIDSort expects sibling order [50,100]",
+      "labels": {
+        "criterion_met": true,
+        "spec_gap": false,
+        "test_supports_claim": true,
+        "implementation_drift": false
+      }
+    },
+    {
+      "id": "rootjobs-empty-aligned",
+      "criterion_text": "Empty snapshot yields zero roots and process_count zero",
+      "pseudocode_excerpt": "IF input empty THEN return Forest with zero roots and ProcessCount 0",
+      "test_excerpt": "TestBuildForest_EmptyInput expects len(roots)==0 and process_count==0",
+      "labels": {
+        "criterion_met": true,
+        "spec_gap": false,
+        "test_supports_claim": true,
+        "implementation_drift": false
+      }
+    },
+    {
+      "id": "rootjobs-dedupe-aligned",
+      "criterion_text": "Duplicate PIDs keep first occurrence and skip subsequent entries",
+      "pseudocode_excerpt": "IF pid seen THEN skip duplicate ELSE record first occurrence",
+      "test_excerpt": "TestBuildForest_DuplicatePIDSkipped keeps first name",
+      "labels": {
+        "criterion_met": true,
+        "spec_gap": false,
+        "test_supports_claim": true,
+        "implementation_drift": false
+      }
+    },
+    {
+      "id": "synthetic-spec-gap",
+      "criterion_text": "Must reject cycles in parent pointers before building forest",
+      "pseudocode_excerpt": "BUILD index map then attach children to parents (no cycle check)",
+      "test_excerpt": "TestBuildForest_LinearChain builds a three-node chain",
+      "labels": {
+        "criterion_met": false,
+        "spec_gap": true,
+        "test_supports_claim": false,
+        "implementation_drift": false
+      }
+    },
+    {
+      "id": "synthetic-test-gap",
+      "criterion_text": "Duplicate PIDs keep first occurrence and skip subsequent entries",
+      "pseudocode_excerpt": "IF pid seen THEN skip duplicate ELSE record first occurrence",
+      "test_excerpt": "TestBuildForest_EmptyInput expects len(roots)==0",
+      "labels": {
+        "criterion_met": true,
+        "spec_gap": false,
+        "test_supports_claim": false,
+        "implementation_drift": false
+      }
+    }
+  ]
+}

@@ -18,6 +18,7 @@ import {
   type AgentHarnessProfile,
 } from "./harness-select.js";
 import { runDaeGatePreflight } from "./dae-gate-preflight.js";
+import { runJevHarnessPreflight } from "./jev-harness-preflight.js";
 
 export type DryRunStreams = {
   stdout: string;
@@ -272,10 +273,12 @@ export function executeExecutorDryRun(cfg: DryRunConfig): DryRunStreams {
     return { stdout: "", stderr: pre.stderr + dae.stderr, exitCode: dae.exitCode };
   }
 
+  const jev = runJevHarnessPreflight(cfg);
+
   const rendered = renderDryRun(cfg, turns, chain, cfg.firstTurn, originalTotal);
   return {
     stdout: rendered.stdout,
-    stderr: pre.stderr + dae.stderr + rendered.stderr,
+    stderr: pre.stderr + dae.stderr + jev.stderr + rendered.stderr,
     exitCode: 0,
   };
 }

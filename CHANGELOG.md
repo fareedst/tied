@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Jev decision coprocessor ([REQ-TIED_JEV_DECISION_COPROCESSOR])** — W0–W5 core: server-side Jev `/v1/decide` client, shadow vocab PRELOAD, prompt-type advisory, adversarial triage pilot, opt-in `@tied/agentstream` harness preflight and tool guard. Close-out: [close-out-gates-2026-09-26.json](working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/close-out-gates-2026-09-26.json) `allowed: true`; per-turn Shell middleware documented as residual.
+
 ### Changed
 
 - **`docs/comparisons/`** — Treat as **private local** planning notes again (`.gitignore`); remove from git index; keep files on disk. Tracked program history remains **`working/REQ-TIED_DAE_INCORPORATION/PLAN.md`** and **RESIDUAL-PLAN.md**.

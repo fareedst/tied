@@ -780,6 +780,19 @@ ARCH-TIED_FIDELITY_RESEARCH:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_JEV_DECISION_COPROCESSOR:
+  cross_references:
+    - "IMPL-TIED_JEV_DECISION_COPROCESSOR"
+    - "REQ-TIED_JEV_DECISION_COPROCESSOR"
+  description: "Layered Jev coprocessor composed with MCP gates"
+  detail_file: "architecture-decisions/ARCH-TIED_JEV_DECISION_COPROCESSOR.yaml"
+  metadata:
+    last_updated: "2026-09-26"
+    registered: "2026-09-26"
+  name: "Jev decision coprocessor architecture"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_NEW_CLIENT_ADHERENCE:
   cross_references:
     - "IMPL-TIED_NEW_CLIENT_ONBOARDING"
@@ -1854,6 +1867,19 @@ IMPL-TIED_FILES:
   name: "TIED File Creation"
   source_index: "implementation-decisions.yaml"
   status: "Active"
+  type: "IMPL"
+IMPL-TIED_JEV_DECISION_COPROCESSOR:
+  cross_references:
+    - "ARCH-TIED_JEV_DECISION_COPROCESSOR"
+    - "REQ-TIED_JEV_DECISION_COPROCESSOR"
+  description: "mcp-server/src/jev client module"
+  detail_file: "implementation-decisions/IMPL-TIED_JEV_DECISION_COPROCESSOR.yaml"
+  metadata:
+    last_updated: "2026-09-26"
+    registered: "2026-09-26"
+  name: "Jev decision coprocessor implementation"
+  source_index: "implementation-decisions.yaml"
+  status: "In Progress"
   type: "IMPL"
 IMPL-TIED_NEW_CLIENT_ONBOARDING:
   cross_references:
@@ -3091,6 +3117,19 @@ REQ-TIED_FIDELITY_RESEARCH:
   name: "TIED Fidelity Research"
   source_index: "requirements.yaml"
   status: "Active"
+  type: "REQ"
+REQ-TIED_JEV_DECISION_COPROCESSOR:
+  cross_references:
+    - "ARCH-TIED_JEV_DECISION_COPROCESSOR"
+    - "IMPL-TIED_JEV_DECISION_COPROCESSOR"
+  description: "Optional System One Jev HTTP client and phased TIED integration"
+  detail_file: "requirements/REQ-TIED_JEV_DECISION_COPROCESSOR.yaml"
+  metadata:
+    last_updated: "2026-09-26"
+    registered: "2026-09-26"
+  name: "Jev decision coprocessor program"
+  source_index: "requirements.yaml"
+  status: "In Progress"
   type: "REQ"
 REQ-TIED_NEW_CLIENT_ADHERENCE:
   cross_references:

@@ -11,6 +11,7 @@
 | **Go legacy** | **Removed** — `TIED_AGENTSTREAM_IMPL=go` exits with reinstall hint; see [phase4d-go-oracle-freeze.json](../../../working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4d-go-oracle-freeze.json) |
 | **tiedpreflight** | `src/tiedpreflight.ts` |
 | **DAE gate preflight (opt-in)** | `src/dae-gate-preflight.ts` — after static `tiedpreflight`, before first turn when `AGENTSTREAM_DAE_GATE_CHECK=1` or repo `.tied-yaml.yaml` `dae.agentstream_gate_check: true`; spawns `tied gate check --phase pre_implementation` for batch `request_token` (`--checklist-var REQUEST=` or tracker `request_token`) |
+| **Jev harness preflight (opt-in, W5)** | `src/jev-harness-preflight.ts` — after DAE gate preflight when `AGENTSTREAM_JEV_HARNESS=1` or `.tied-yaml.yaml` `jev.agentstream_harness: true`; bootstrap diagnostics and optional live smoke via `mcp-server/dist/jev/*`. Blocking tool evaluation for `bash`/`Shell` lives in `mcp-server/src/jev/harness-tool-guard.ts` (fail-closed without `JEV_API_KEY`). Does **not** replace checklist gates or MCP YAML writes. |
 | **Golden fixtures** | `testdata/checklist/`, `testdata/live/`, frozen oracle outputs in `testdata/oracle/` |
 
 ## Environment
@@ -18,6 +19,7 @@
 - **`TIED_AGENTSTREAM_IMPL`** — `ts` (default). Value **`go`** is rejected (Phase **4d**); emergency legacy Go: checkout commit in [phase4d-go-oracle-freeze.json](../../../working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4d-go-oracle-freeze.json).
 - **`AGENTSTREAM`** — optional path override for shell drivers (`scripts/run-feature-batch-agentstream.sh`, etc.).
 - **`AGENTSTREAM_DAE_GATE_CHECK=1`** — opt-in DAE gate pre-turn (requires tied-yaml MCP preflight **not** skipped). Disable via unset env and `dae.agentstream_gate_check: false` (default). **`AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1`**, **`--skip-tied-mcp-preflight`**, or **`-y` / `--yes`** follow the same semantics as static `tiedpreflight` (including exit **2** misconfig bypass with `-y`).
+- **`AGENTSTREAM_JEV_HARNESS=1`** — opt-in Jev harness bootstrap ([REQ-TIED_JEV_DECISION_COPROCESSOR](../../../tied/requirements/REQ-TIED_JEV_DECISION_COPROCESSOR.yaml)); also `jev.agentstream_harness: true` in `.tied-yaml.yaml`. Set **`JEV_API_KEY`** for live `/v1/decide` smoke; without a key, **`bash`/`Shell`** tool guard paths fail-closed when the harness is enabled elsewhere.
 
 ### Qualified argv (`TIED_AGENTSTREAM_IMPL=ts`)
 

@@ -1,0 +1,14 @@
+{
+  "schema_version": "not-applicable-receipt.v1",
+  "request_token": "REQ-TIED_JEV_DECISION_COPROCESSOR",
+  "artifact_kind": "adversarial_inquiry",
+  "depth_tier": "minimal",
+  "phases": [
+    "close_out",
+    "pre_implementation",
+    "verification"
+  ],
+  "reason": "W4 pilot observation-only; integrated adversarial inquiry not activated at minimal depth_tier",
+  "generated_at": "2026-09-26T21:55:00.000Z",
+  "source": "plan-close-out"
+}

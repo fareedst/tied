@@ -1,0 +1,62 @@
+{
+  "schema": "adversarial-triage-pilot.v1",
+  "jev_invoked": false,
+  "cases": [
+    {
+      "case_id": "rootjobs-orphan-aligned",
+      "nouls": {},
+      "triage_class": "unknown",
+      "jev_skipped": true,
+      "jev_skip_reason": "no_credentials",
+      "matches_labels": null,
+      "label_mismatches": []
+    },
+    {
+      "case_id": "rootjobs-sort-aligned",
+      "nouls": {},
+      "triage_class": "unknown",
+      "jev_skipped": true,
+      "jev_skip_reason": "no_credentials",
+      "matches_labels": null,
+      "label_mismatches": []
+    },
+    {
+      "case_id": "rootjobs-empty-aligned",
+      "nouls": {},
+      "triage_class": "unknown",
+      "jev_skipped": true,
+      "jev_skip_reason": "no_credentials",
+      "matches_labels": null,
+      "label_mismatches": []
+    },
+    {
+      "case_id": "rootjobs-dedupe-aligned",
+      "nouls": {},
+      "triage_class": "unknown",
+      "jev_skipped": true,
+      "jev_skip_reason": "no_credentials",
+      "matches_labels": null,
+      "label_mismatches": []
+    },
+    {
+      "case_id": "synthetic-spec-gap",
+      "nouls": {},
+      "triage_class": "unknown",
+      "jev_skipped": true,
+      "jev_skip_reason": "no_credentials",
+      "matches_labels": null,
+      "label_mismatches": []
+    },
+    {
+      "case_id": "synthetic-test-gap",
+      "nouls": {},
+      "triage_class": "unknown",
+      "jev_skipped": true,
+      "jev_skip_reason": "no_credentials",
+      "matches_labels": null,
+      "label_mismatches": []
+    }
+  ],
+  "agreement_rate": null,
+  "note": "Jev skipped; observations empty — run with JEV_API_KEY and --live for labeled agreement."
+}

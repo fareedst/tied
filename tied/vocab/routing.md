@@ -26,6 +26,7 @@
 | 5c | [fidelity-research.md](fidelity-research.md) | Adversarial inquiry, obligation graph, gate policy, fidelity findings, specification state, origin layer, divergent edge, read-only research profile, finding lifecycle, evidence provenance, case reports, fidelity audit |
 | 5d | [prompt-composer.md](prompt-composer.md) | TIED-source-only Prompt Composer, prompt type, global prompt skill, prompt-type router, prompt envelope, invocation remainder, linked plan, prompt-shared bundle, client installation, canonical bundle; not installed into clients by `copy_files.sh` |
 | 5e | [feature-orchestration.md](feature-orchestration.md) | Feature manifest, feature lifecycle, feature orchestration CLI, clarification record, project constitution, task graph, generated view, FEAT identifier, initial-specs migration, onboarding wrapper, bootstrap verification gate, client orchestration publication, migration preview, readiness diagnostic, `tied/features/` |
+| 5g | [decision-copilot.md](decision-copilot.md) | Jev, System One, decision coprocessor, decision API, typesafe, noul gate, speculative fan-out, shadow routing, agent risk, context filter, fail-closed tool block, `JEV_API_KEY` |
 | — | [config-discovery.md](config-discovery.md) | Layered YAML config, project-local layer, exclude_patterns, `(proposed)` terms |
 
 ---

@@ -1,0 +1,11 @@
+bun test v1.3.9 (cf6cdbbb)
+
+src/jev-harness-preflight.test.ts:
+(pass) jev harness preflight [REQ-TIED_JEV_DECISION_COPROCESSOR] > is disabled by default [2.15ms]
+(pass) jev harness preflight [REQ-TIED_JEV_DECISION_COPROCESSOR] > reads enablement from .tied-yaml.yaml jev.agentstream_harness [1.18ms]
+(pass) jev harness preflight [REQ-TIED_JEV_DECISION_COPROCESSOR] > warns fail-closed when enabled without JEV_API_KEY
+(pass) jev harness preflight [REQ-TIED_JEV_DECISION_COPROCESSOR] > live preflight runs mock Jev integration smoke via injected deps [0.38ms]
+
+ 4 pass
+ 0 fail
+Ran 4 tests across 1 file. [17.00ms]

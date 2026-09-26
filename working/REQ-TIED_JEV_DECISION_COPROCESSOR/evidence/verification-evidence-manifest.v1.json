@@ -1,0 +1,92 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "jev-decision-coprocessor-close-out-2026-09-26",
+  "commit": "15173345b7401dea5487227bdcd6d1b25fd39b96",
+  "environment": {
+    "node": "v25.9.0",
+    "bun": "1.3.9"
+  },
+  "command_results": [
+    {
+      "id": "jev-unit",
+      "command": [
+        "bun",
+        "test",
+        "src/jev/"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": [
+        "working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/jev-unit.stdout.txt"
+      ]
+    },
+    {
+      "id": "agentstream-jev-preflight",
+      "command": [
+        "bun",
+        "test",
+        "src/jev-harness-preflight.test.ts"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/packages/agentstream",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": [
+        "working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/agentstream-jev-preflight.stdout.txt"
+      ]
+    },
+    {
+      "id": "ts-check",
+      "command": [
+        "bunx",
+        "tsc",
+        "-b"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": [
+        "working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/tsc-b.stdout.txt"
+      ]
+    },
+    {
+      "id": "mcp-server-regression",
+      "command": [
+        "npm",
+        "test"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
+      "exit_code": 1,
+      "result": "failed",
+      "artifacts": [
+        "working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/npm-test.stdout.txt"
+      ]
+    }
+  ],
+  "quality_rows": [
+    {
+      "id": "jev-w1-w5",
+      "attribute": "decision_coprocessor_program",
+      "applicability": "applicable",
+      "rationale": "W1-W5 unit and harness tests",
+      "evidence_method": "automated_test",
+      "command_or_test": "bun test mcp-server/src/jev/",
+      "result": "passed",
+      "owner": "plan-close-out"
+    }
+  ],
+  "covered_tokens": [
+    "REQ-TIED_JEV_DECISION_COPROCESSOR",
+    "ARCH-TIED_JEV_DECISION_COPROCESSOR",
+    "IMPL-TIED_JEV_DECISION_COPROCESSOR"
+  ],
+  "proof_boundaries": [
+    "No live Jev API (JEV_API_KEY unset in CI)",
+    "Per-turn evaluateHarnessToolCall in live loop is documented residual",
+    "Integrated adversarial inquiry not_applicable at minimal depth"
+  ],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": []
+  }
+}
