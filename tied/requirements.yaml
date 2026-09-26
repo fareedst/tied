@@ -2089,7 +2089,7 @@ REQ-TIED_JEV_DECISION_COPROCESSOR:
       - "REQ-TIED_ADVERSARIAL_INQUIRY"
       - "REQ-TIED_DAE_INCORPORATION"
     supersedes: []
-  status: "In Progress"
+  status: "Implemented"
 REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY:
   category: "Methodology"
   cross_references:

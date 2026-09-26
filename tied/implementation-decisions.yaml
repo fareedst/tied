@@ -2264,7 +2264,7 @@ IMPL-TIED_JEV_DECISION_COPROCESSOR:
       - "REQ-TIED_JEV_DECISION_COPROCESSOR"
   detail_file: "implementation-decisions/IMPL-TIED_JEV_DECISION_COPROCESSOR.yaml"
   name: "Jev decision coprocessor implementation"
-  status: "In Progress"
+  status: "Active"
 IMPL-TIED_METHODOLOGY_CLIENT_BOUNDARY:
   cross_references:
     - "ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY"

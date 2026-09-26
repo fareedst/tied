@@ -6,7 +6,7 @@ REQ-TIED_JEV_DECISION_COPROCESSOR:
     last_updated:
       author: "plan-close-out"
       date: "2026-09-26"
-      reason: "close_out gates allowed; W0-W5 core delivered"
+      reason: "W0-W5 core close-out after gates"
   name: "Jev decision coprocessor program"
   priority: "P2"
   rationale:

@@ -1,7 +1,7 @@
 CITDP-REQ-TIED_JEV_DECISION_COPROCESSOR:
   change_definition:
     current_behavior: "No server-side Jev client in mcp-server; routing and gates are fully deterministic."
-    desired_behavior: "Optional Jev System One coprocessor (W0–W5 core): /v1/decide client, shadow vocab PRELOAD, prompt-type advisory, adversarial triage pilot, opt-in agentstream harness preflight + tool guard."
+    desired_behavior: "Optional Jev System One coprocessor (W0–W5 core): /v1/decide client, shadow vocab PRELOAD, prompt-type advisory, adversarial triage pilot, opt-in agentstream harness preflight + tool guard; compose with checklist gates."
     non_goals:
       - "Auto-mutating TIED YAML from Jev outputs"
       - "Live Jev API in CI close-out"
@@ -12,16 +12,18 @@ CITDP-REQ-TIED_JEV_DECISION_COPROCESSOR:
       - "mcp-server/src/jev unit tests pass (mocked fetch)"
       - "W2–W5 SCs in REQ satisfied"
     unchanged_behavior: "Checklist gate receipts and YAML MCP write path"
-  close_out:
-    date: "2026-09-26"
-    receipt: "working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/close-out-gates-2026-09-26.json"
-    run_id: "jev-decision-coprocessor-close-out-2026-09-26"
   completion_criteria:
     focused_tests: "bun test mcp-server/src/jev/; bun test mcp-server/packages/agentstream/src/jev-harness-preflight.test.ts"
-    lint: "cd mcp-server && npm run build"
+    lint: "cd mcp-server && bunx tsc -b (project standard)"
     verification: "tied_validate_consistency; run-close-out-gates close_out"
   evidence:
     commands:
+      - command:
+          - "-b"
+          - "bunx"
+          - "tsc"
+        cwd: "mcp-server"
+        id: "ts-check"
       - command:
           - "bun"
           - "src/jev/"
@@ -53,7 +55,7 @@ CITDP-REQ-TIED_JEV_DECISION_COPROCESSOR:
     profile_depth: "minimal"
     record_status: "final"
     recorded_at: "2026-09-26"
-    title: "Jev decision coprocessor W0–W5 core (closed)"
+    title: "Jev decision coprocessor W0–W5 core (close-out)"
   residual_scope:
     w5_runtime_middleware: "Wire evaluateHarnessToolCall on each agentstream tool invocation; optional integrated depth for production-default blocking"
   risk_analysis:

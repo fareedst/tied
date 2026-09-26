@@ -28,11 +28,11 @@ isProject: false
 
 | Field                        | Value                                                                                                                                                                                         |
 | ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **REQ**                      | [REQ-TIED_JEV_DECISION_COPROCESSOR](../../tied/requirements/REQ-TIED_JEV_DECISION_COPROCESSOR.yaml) (**In Progress**) |
-| **ARCH**                     | [ARCH-TIED_JEV_DECISION_COPROCESSOR](../../tied/architecture-decisions/ARCH-TIED_JEV_DECISION_COPROCESSOR.yaml) (**Active**) |
-| **IMPL**                     | [IMPL-TIED_JEV_DECISION_COPROCESSOR](../../tied/implementation-decisions/IMPL-TIED_JEV_DECISION_COPROCESSOR.yaml) (**In Progress**) · [pseudo-code](../../tied/implementation-decisions/IMPL-TIED_JEV_DECISION_COPROCESSOR-pseudocode.md) |
-| **CITDP**                    | [CITDP-REQ-TIED_JEV_DECISION_COPROCESSOR](../../tied/citdp/CITDP-REQ-TIED_JEV_DECISION_COPROCESSOR.yaml) — **open**, snapshot title **W0+W1**; LEAP refresh required for W2–W5 close-out |
-| **Tracker**                  | [checklist-tracker.yaml](./checklist-tracker.yaml) (template copy; **no step dispositions / no gate receipts yet**) |
+| **REQ**                      | [REQ-TIED_JEV_DECISION_COPROCESSOR](../../tied/requirements/REQ-TIED_JEV_DECISION_COPROCESSOR.yaml) (**Implemented**, close-out 2026-09-26) |
+| **ARCH**                     | [ARCH-TIED_JEV_DECISION_COPROCESSOR](../../tied/architecture-decisions/ARCH-TIED_JEV_DECISION_COPROCESSOR.yaml) (**Implemented**) |
+| **IMPL**                     | [IMPL-TIED_JEV_DECISION_COPROCESSOR](../../tied/implementation-decisions/IMPL-TIED_JEV_DECISION_COPROCESSOR.yaml) (**Implemented**) · [pseudo-code](../../tied/implementation-decisions/IMPL-TIED_JEV_DECISION_COPROCESSOR-pseudocode.md) |
+| **CITDP**                    | [CITDP-REQ-TIED_JEV_DECISION_COPROCESSOR](../../tied/citdp/CITDP-REQ-TIED_JEV_DECISION_COPROCESSOR.yaml) — **closed/final**, W0–W5 core |
+| **Tracker**                  | [checklist-tracker.yaml](./checklist-tracker.yaml) — gate receipts under `gates/`; close-out run-id `jev-decision-coprocessor-close-out-2026-09-26` |
 | **Working folder**           | `working/REQ-TIED_JEV_DECISION_COPROCESSOR/` (PLAN mirrored from this Cursor plan)                                                                                                            |
 | **`depth_tier`**             | **`minimal`** for delivered W0–W4 (shadow/advisory). **Before production fail-closed W5:** reassess **`integrated`** when blocking tool classes run on the request path (external API + safety). |
 | **`gate_policy`**            | **`mixed`**: checklist/MCP gates unchanged (**advisory** per CITDP today); **W5 harness** may **fail-closed block** high-risk tool classes when enabled (see **blocking policy**).           |

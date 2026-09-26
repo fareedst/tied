@@ -1,4 +1,3 @@
-DIAGNOSTIC: envelope patch failed for working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/verification-evidence-manifest.v1.json: envelope_revision_conflict
 {
   "phase": "close_out",
   "depth_tier": "minimal",
@@ -13,18 +12,71 @@ DIAGNOSTIC: envelope patch failed for working/REQ-TIED_JEV_DECISION_COPROCESSOR/
       "request_token": "",
       "findings": [
         {
-          "code": "completed_with_unresolved_evidence",
+          "code": "gate_without_current_evidence",
           "detail": {
-            "step_slug": "traceable-commit",
-            "error": "missing_artifact: \"working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/close-out-receipt-2026-09-26.md\""
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-09-26T22-02-45-270Z.json",
+            "stored_tracker_hash": "sha256:c062c2cc4ce6d7a20289cb7e989111d700b29fe654cb62143fbdfa0fb15bae25",
+            "current_tracker_hash": "sha256:c062c2cc4ce6d7a20289cb7e989111d700b29fe654cb62143fbdfa0fb15bae25",
+            "stored_citdp_hash": "sha256:2917e93fde2bf1a2bc49718f62af3bea87deedb483ef39366d283b1430acb2f7",
+            "current_citdp_hash": "sha256:6746e3ceb3d42c705506c318ded0f3caa5989128468f66c2e96e9461fd89bbc9"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-09-26T22-03-32-477Z.json",
+            "stored_tracker_hash": "sha256:c062c2cc4ce6d7a20289cb7e989111d700b29fe654cb62143fbdfa0fb15bae25",
+            "current_tracker_hash": "sha256:c062c2cc4ce6d7a20289cb7e989111d700b29fe654cb62143fbdfa0fb15bae25",
+            "stored_citdp_hash": "sha256:a0f1b9c9d22428e362a63544672a691269412d59c6f9e197ac20c19f543168c4",
+            "current_citdp_hash": "sha256:6746e3ceb3d42c705506c318ded0f3caa5989128468f66c2e96e9461fd89bbc9"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-26T22-02-19-199Z.json",
+            "stored_tracker_hash": "sha256:c062c2cc4ce6d7a20289cb7e989111d700b29fe654cb62143fbdfa0fb15bae25",
+            "current_tracker_hash": "sha256:c062c2cc4ce6d7a20289cb7e989111d700b29fe654cb62143fbdfa0fb15bae25",
+            "stored_citdp_hash": "sha256:2917e93fde2bf1a2bc49718f62af3bea87deedb483ef39366d283b1430acb2f7",
+            "current_citdp_hash": "sha256:6746e3ceb3d42c705506c318ded0f3caa5989128468f66c2e96e9461fd89bbc9"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-26T22-02-45-257Z.json",
+            "stored_tracker_hash": "sha256:c062c2cc4ce6d7a20289cb7e989111d700b29fe654cb62143fbdfa0fb15bae25",
+            "current_tracker_hash": "sha256:c062c2cc4ce6d7a20289cb7e989111d700b29fe654cb62143fbdfa0fb15bae25",
+            "stored_citdp_hash": "sha256:2917e93fde2bf1a2bc49718f62af3bea87deedb483ef39366d283b1430acb2f7",
+            "current_citdp_hash": "sha256:6746e3ceb3d42c705506c318ded0f3caa5989128468f66c2e96e9461fd89bbc9"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/verification-2026-09-26T22-02-19-205Z.json",
+            "stored_tracker_hash": "sha256:c062c2cc4ce6d7a20289cb7e989111d700b29fe654cb62143fbdfa0fb15bae25",
+            "current_tracker_hash": "sha256:c062c2cc4ce6d7a20289cb7e989111d700b29fe654cb62143fbdfa0fb15bae25",
+            "stored_citdp_hash": "sha256:2917e93fde2bf1a2bc49718f62af3bea87deedb483ef39366d283b1430acb2f7",
+            "current_citdp_hash": "sha256:6746e3ceb3d42c705506c318ded0f3caa5989128468f66c2e96e9461fd89bbc9"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/verification-2026-09-26T22-02-45-263Z.json",
+            "stored_tracker_hash": "sha256:c062c2cc4ce6d7a20289cb7e989111d700b29fe654cb62143fbdfa0fb15bae25",
+            "current_tracker_hash": "sha256:c062c2cc4ce6d7a20289cb7e989111d700b29fe654cb62143fbdfa0fb15bae25",
+            "stored_citdp_hash": "sha256:2917e93fde2bf1a2bc49718f62af3bea87deedb483ef39366d283b1430acb2f7",
+            "current_citdp_hash": "sha256:6746e3ceb3d42c705506c318ded0f3caa5989128468f66c2e96e9461fd89bbc9"
           }
         }
       ],
-      "ledger_rows": 3,
+      "ledger_rows": 9,
       "read_only": true,
       "process_grade": {
-        "score": 94,
-        "band": "A",
+        "score": 88,
+        "band": "B",
         "dimensions": [
           {
             "name": "tracker_integrity",
@@ -40,9 +92,11 @@ DIAGNOSTIC: envelope patch failed for working/REQ-TIED_JEV_DECISION_COPROCESSOR/
           },
           {
             "name": "hash_alignment",
-            "score": 100,
+            "score": 40,
             "weight": 0.2,
-            "gap_codes": []
+            "gap_codes": [
+              "evidence_stale"
+            ]
           },
           {
             "name": "ledger_correlation",
@@ -52,11 +106,13 @@ DIAGNOSTIC: envelope patch failed for working/REQ-TIED_JEV_DECISION_COPROCESSOR/
           },
           {
             "name": "typed_evidence_refs",
-            "score": 40,
+            "score": 100,
             "weight": 0.1
           }
         ],
-        "gap_codes": []
+        "gap_codes": [
+          "evidence_stale"
+        ]
       }
     }
   },

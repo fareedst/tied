@@ -56,8 +56,8 @@
         "test"
       ],
       "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
-      "exit_code": 1,
-      "result": "failed",
+      "exit_code": 0,
+      "result": "passed",
       "artifacts": [
         "working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/npm-test.stdout.txt"
       ]
