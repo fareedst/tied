@@ -1,0 +1,45 @@
+{
+  "phase": "verification",
+  "depth_tier": "minimal",
+  "activation_collect": {
+    "skipped": true,
+    "reason": "minimal_depth",
+    "run_id": "parity-close-out-verification-20260927"
+  },
+  "reconcile": {
+    "ok": false,
+    "skipped": true
+  },
+  "quality_manifest": {
+    "ok": false,
+    "skipped": true,
+    "reason": "no_citdp_commands"
+  },
+  "evidence_chain_profile": {
+    "ok": false,
+    "skipped": true,
+    "reason": "no_psa_reports"
+  },
+  "merged_decision": {
+    "allowed": false,
+    "gate_allowed": true,
+    "envelope_ok": false,
+    "blocking": true
+  },
+  "gate": {
+    "allowed": true,
+    "blocking": false,
+    "diagnostics": [],
+    "evidence_hydrated": false,
+    "hydration_diagnostics": []
+  },
+  "envelope": {
+    "ok": false,
+    "path": "working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 1,
+    "advisory_gap_count": 0,
+    "diagnostics": [
+      "envelope_blocking_gap:not_applicable_receipt_missing"
+    ]
+  }
+}

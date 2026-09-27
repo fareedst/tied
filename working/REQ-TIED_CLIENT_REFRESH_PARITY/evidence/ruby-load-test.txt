@@ -1,0 +1,1 @@
+yaml_semantic_compare_load_test.rb: OK

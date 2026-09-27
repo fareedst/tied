@@ -1,0 +1,79 @@
+CITDP-REQ-TIED_YAML_COMPARE_RUBY_LOAD:
+  change_definition:
+    current_behavior_prior: "DifferenceWalker default keyword references YamlSemanticCompare::DEFAULT_RECORD_LIST_KEYS at line ~85 while constant is defined at file bottom ~263; compare_yaml_dirs.rb fails on load with NameError."
+    desired_behavior: "yaml_semantic_compare.rb loads cleanly; compare_yaml_dirs CLI and directory compare smoke tests pass."
+    non_goals:
+      - "Bootstrap or parity gate wiring"
+      - "Change semantic compare algorithm"
+      - "Port compare_yaml_dirs to TypeScript"
+    references:
+      - "scripts/compare_yaml_dirs.rb"
+      - "scripts/yaml_semantic_compare.rb"
+      - "working/REQ-TIED_YAML_COMPARE_RUBY_LOAD/PLAN.md"
+    success_criteria:
+      - "ruby scripts/compare_yaml_dirs.rb --help exits 0"
+      - "Ruby test loads library and runs minimal pair compare"
+  completion_criteria:
+    tests: "yaml_semantic_compare_load_test.rb and compare_yaml_dirs_test.rb green"
+    verification_gate_notes: "Completed 2026-09-27"
+  impact_analysis:
+    express_lane: false
+    modules_or_boundaries: "Ruby YAML edit-loop scripts only"
+    size: "XS"
+    tied_tokens_affected:
+      - "IMPL-TIED_FILES"
+      - "REQ-TIED_SETUP"
+    tied_tokens_new:
+      - "REQ-TIED_YAML_COMPARE_RUBY_LOAD"
+  leap_feedback:
+    record_status: "recorded"
+    tied_stack_updates_required: false
+  record_identity:
+    change_request_id: "REQ-TIED_YAML_COMPARE_RUBY_LOAD"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    checklist_step_completed: "close_out_gate"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-09-27"
+    tied_context:
+      implementation:
+        - "IMPL-TIED_FILES"
+      requirements:
+        - "REQ-TIED_YAML_COMPARE_RUBY_LOAD"
+    title: "Ruby yaml_semantic_compare load-order fix"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Reordering accidentally edits constant array contents"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "compare_yaml_dirs_test.rb and yaml_list_sorter_test.rb remain green"
+      evidence_references:
+        - "scripts/yaml_semantic_compare.rb"
+        - "working/REQ-TIED_YAML_COMPARE_RUBY_LOAD/PLAN.md"
+      falsification_questions:
+        - "Does hoisting change DEFAULT_RECORD_LIST_KEYS membership or order?"
+      gate_policy: "advisory"
+      sub_adversarial_inquiry_pass: "not_applicable"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    proof_boundaries:
+      in_scope:
+        - "Ruby load/compare smoke tests"
+        - "scripts/yaml_semantic_compare.rb load order"
+      out_of_scope:
+        - "Bootstrap"
+        - "Parity gate Node modules"
+    rollback:
+      - "Revert hoist commit; compare_yaml_dirs remains broken until restored"
+    summary: "Low risk constant ordering fix; merge-safe single-file change."
+  tdd_sequence:
+    order:
+      - "RED scripts/yaml_semantic_compare_load_test.rb"
+      - "GREEN hoist constant"
+      - "Regression existing Ruby YAML tests"
+  test_strategy:
+    summary: "RED load test then GREEN hoist; regression existing Ruby YAML tests; no disposable client required."

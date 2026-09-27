@@ -73,6 +73,7 @@ Verify after refresh:
 3. The refreshed `tied/methodology/` matches the source templates.
 4. Project indexes and detail files are unchanged unless the client explicitly adopted a project-record change.
 5. If `.cursor/mcp.json` was absent, the new `tied-yaml` MCP entry points to the intended built server and client TIED base path. If it already existed, it is preserved byte-for-byte and must be reviewed separately when changing TIED source or server paths.
+6. **Client refresh parity** ([REQ-TIED_CLIENT_REFRESH_PARITY]): after bootstrap, read `${CLIENT}/.tied/client-refresh-parity-report.json` or run `node "${TIED_SOURCE}/tools/bootstrap/verify-client-methodology.mjs" "${CLIENT}"`. Methodology drift fails bootstrap by default; doc drift is reported (warn-only unless `--strict-refresh`). Use `--parity-gate-report-only` for CI artifacts without failing refresh; use `--skip-parity-gate` only for emergency brownfield bypass.
 
 ### Bootstrap preservation matrix
 

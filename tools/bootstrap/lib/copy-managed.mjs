@@ -35,6 +35,9 @@ export function warnModifiedCopyTarget(destPath) {
   try {
     for (const item of descendants(destPath)) {
       const stat = fs.lstatSync(item);
+      if (stat.isDirectory()) {
+        continue;
+      }
       if (!isLocalDateMidnight(stat.mtimeMs)) {
         sayWarn(`WARNING: Client-modified managed copy detected: ${item}`);
       }

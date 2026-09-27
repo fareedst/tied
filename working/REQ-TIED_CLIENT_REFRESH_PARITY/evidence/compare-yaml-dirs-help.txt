@@ -1,0 +1,5 @@
+Usage: ruby compare_yaml_dirs.rb [options] LEFT_DIR RIGHT_DIR
+        --[no-]missing               Report files that exist in only one directory. Default: true
+        --unordered-arrays           Treat arrays as unordered multisets. Duplicate values still matter.
+        --extensions LIST            Comma-separated extensions. Default: .yml,.yaml
+    -h, --help                       Show this help

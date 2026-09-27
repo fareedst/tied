@@ -1,0 +1,5 @@
+DEBUG: CLIENT_REFRESH_PARITY summary methodology_drift=0 doc_drift=3 missing=0 preserved=4
+DEBUG: Parity B drift: agent-req-implementation-checklist.yaml
+DEBUG: Parity B drift: methodology-migration.md
+DEBUG: Parity B drift: prompt-type-skills.md
+CLIENT_REFRESH_PARITY: 3 doc drift path(s); see /Users/fareed/Documents/dev/test/1790492487/.tied/client-refresh-parity-report.json

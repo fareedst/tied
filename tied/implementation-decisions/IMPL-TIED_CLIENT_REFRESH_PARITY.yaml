@@ -1,0 +1,31 @@
+IMPL-TIED_CLIENT_REFRESH_PARITY:
+  code_locations:
+    files:
+      - description: "CLI entrypoint"
+        path: "tools/bootstrap/verify-client-methodology.mjs"
+      - description: "Parity A/B engine and report builder"
+        path: "tools/bootstrap/lib/client-refresh-parity.mjs"
+      - description: "Unit tests"
+        path: "tools/bootstrap/lib/client-refresh-parity.test.mjs"
+  cross_references:
+    architecture:
+      - "ARCH-TIED_CLIENT_REFRESH_PARITY"
+    implementation:
+      - "IMPL-TIED_FILES"
+    requirements:
+      - "REQ-TIED_CLIENT_REFRESH_PARITY"
+  description: "verify-client-methodology.mjs CLI and client-refresh-parity.mjs library; bootstrap wiring; JSON report schema client-refresh-parity-report.v1.json."
+  implementation_approach:
+    details:
+      - approach: "FIX_WARN_MODIFIED_DIRECTORY_FALSE_POSITIVE in copy-managed.mjs"
+        phase: "Slice B tail"
+      - approach: "RUN_CLIENT_REFRESH_PARITY_GATE, EMIT_PARITY_REPORT, WIRE_BOOTSTRAP_TAIL"
+        phase: "Slice B core"
+    summary: "TDD on parity logic; extend copy-managed.mjs for directory warning fix per IMPL-TIED_FILES LEAP."
+  metadata:
+    last_updated:
+      author: "plan-new-feature"
+      date: "2026-09-27"
+      reason: "Initial sidecar for parity gate plan"
+  name: "Client refresh parity gate implementation"
+  status: "Planned"

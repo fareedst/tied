@@ -111,6 +111,28 @@ cd C:\dev\my-client-app
 ./copy_files.sh --methodology-readonly --install-methodology-hook /path/to/client  # Unix opt-in chmod
 ```
 
+### Client refresh parity gate ([REQ-TIED_CLIENT_REFRESH_PARITY])
+
+Bootstrap runs parity **after** inherited methodology verify gates and **before** the methodology client boundary hook. Default report: `<client>/.tied/client-refresh-parity-report.json`.
+
+| Flag | Effect |
+| --- | --- |
+| *(default)* | Parity A methodology drift → exit **1**; Parity B doc drift → warn, exit **0** |
+| `--strict-refresh` | Parity B doc drift → exit **1** |
+| `--skip-parity-gate` | Skip parity entirely (no report) |
+| `--parity-gate-report-only` | Write report; parity never changes bootstrap exit code |
+| `--parity-report=<path>` | Override report JSON path |
+| `--semantic-yaml-compare` | Parity A `.yaml` uses `scripts/compare_yaml_dirs.rb` semantic mode |
+
+Standalone (no copy):
+
+```bash
+node tools/bootstrap/verify-client-methodology.mjs /path/to/client
+node tools/bootstrap/verify-client-methodology.mjs --strict-refresh /path/to/client
+```
+
+JSON Schema: `tools/bootstrap/schemas/client-refresh-parity-report.v1.schema.json`. Template-only Parity A skips: `tools/bootstrap/lib/methodology-template-only-allowlist.mjs`.
+
 Methodology boundary (Phase A, [REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY]): `--methodology-readonly` and `--install-methodology-hook` are **opt-in** (not default-on). After hook install, enable with `git config core.hooksPath .githooks`. CI guard recipe: `tied/docs/client-development-index.md` § **methodology-boundary-ci-guard**.
 
 ## Manifest
@@ -151,6 +173,10 @@ Traceability: [REQ-TIED_CLAUDE_HARNESS](../tied/requirements/REQ-TIED_CLAUDE_HAR
 - `new-tied-client.mjs` — disposable/explicit client factory
 - `lint-yaml.mjs` — Windows `-F tied` lint backend
 - `lib/bootstrap.mjs` — orchestration
+- `lib/client-refresh-parity.mjs` — Parity A/B gate + report v1
+- `lib/methodology-template-only-allowlist.mjs` — Parity A template-only path allowlist
+- `verify-client-methodology.mjs` — standalone parity CLI
+- `schemas/client-refresh-parity-report.v1.schema.json` — report envelope
 - `lib/copy-managed.mjs` — attribute-preserving copy + midnight mtime
 - `lib/mcp-config.mjs`, `lib/skills.mjs`, `lib/skills-reroot.mjs`, `lib/claude-md.mjs`, `lib/vocab.mjs`, `lib/docs.mjs`, `lib/verify.mjs`
 - `templates/CLAUDE.md.template` — optional client `CLAUDE.md` source

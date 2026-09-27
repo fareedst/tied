@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tied.local/schemas/client-refresh-parity-report.v1.schema.json",
+  "title": "Client refresh parity report v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "generated_at",
+    "source_root",
+    "client_root",
+    "parity_a",
+    "parity_b",
+    "summary"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "client-refresh-parity-report.v1"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source_root": {
+      "type": "string",
+      "minLength": 1
+    },
+    "client_root": {
+      "type": "string",
+      "minLength": 1
+    },
+    "options": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "strict_refresh": { "type": "boolean" },
+        "semantic_yaml_compare": { "type": "boolean" },
+        "report_only": { "type": "boolean" }
+      }
+    },
+    "parity_a": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "entries"],
+      "properties": {
+        "label": { "const": "templates_vs_methodology" },
+        "entries": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/parityEntry" }
+        }
+      }
+    },
+    "parity_b": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "entries"],
+      "properties": {
+        "label": { "const": "docs_to_copy_hashes" },
+        "entries": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/parityEntry" }
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "methodology_drift_count",
+        "doc_drift_count",
+        "missing_count",
+        "preserved_by_policy_count"
+      ],
+      "properties": {
+        "methodology_drift_count": { "type": "integer", "minimum": 0 },
+        "doc_drift_count": { "type": "integer", "minimum": 0 },
+        "missing_count": { "type": "integer", "minimum": 0 },
+        "preserved_by_policy_count": { "type": "integer", "minimum": 0 }
+      }
+    }
+  },
+  "$defs": {
+    "parityEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["relative_path", "disposition"],
+      "properties": {
+        "relative_path": { "type": "string", "minLength": 1 },
+        "disposition": {
+          "type": "string",
+          "enum": ["matched", "drifted", "missing", "preserved_by_policy"]
+        },
+        "compare_mode": {
+          "type": "string",
+          "enum": ["sha256", "semantic_yaml"]
+        },
+        "source_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "client_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}

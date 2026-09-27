@@ -2004,6 +2004,21 @@ REQ-TIED_CLAUDE_SKILLS_REROOT:
   name: "Optional repo-root skills re-root"
   priority: "P1"
   status: "Implemented"
+REQ-TIED_CLIENT_REFRESH_PARITY:
+  category: "Functional"
+  cross_references:
+    architecture:
+      - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
+      - "ARCH-TIED_CLIENT_REFRESH_PARITY"
+    implementation:
+      - "IMPL-TIED_CLIENT_REFRESH_PARITY"
+      - "IMPL-TIED_FILES"
+    processes:
+      - "PROC-YAML_EDIT_LOOP"
+  detail_file: "requirements/REQ-TIED_CLIENT_REFRESH_PARITY.yaml"
+  name: "Client refresh methodology and doc parity gate"
+  priority: "P1"
+  status: "Implemented"
 REQ-TIED_DAE_INCORPORATION:
   category: "Methodology"
   cross_references:
@@ -2335,6 +2350,19 @@ REQ-TIED_YAML_CANONICALIZATION:
       method: "CLI compatibility tests"
     - coverage: "All YAML writer families, rename, batch, CITDP, feedback, verification, metadata"
       method: "MCP composition tests"
+REQ-TIED_YAML_COMPARE_RUBY_LOAD:
+  category: "Functional"
+  cross_references:
+    architecture:
+      - "ARCH-TIED_STRUCTURE"
+    implementation:
+      - "IMPL-TIED_FILES"
+    processes:
+      - "PROC-YAML_EDIT_LOOP"
+  detail_file: "requirements/REQ-TIED_YAML_COMPARE_RUBY_LOAD.yaml"
+  name: "Ruby YAML compare load integrity"
+  priority: "P0"
+  status: "Implemented"
 REQ-TIED_YAML_STYLE_CONFIGURATION:
   category: "Functional"
   cross_references:

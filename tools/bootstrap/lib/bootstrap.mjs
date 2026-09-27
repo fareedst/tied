@@ -36,6 +36,7 @@ import { copySidecarTemplate } from "./sidecar-template.mjs";
 import { installClaudeMdTemplate } from "./claude-md.mjs";
 import { mergeClaudeAdherenceHooks } from "./claude-adherence-hooks.mjs";
 import { applyMethodologyClientBoundary } from "./methodology-client-boundary.mjs";
+import { runClientRefreshParityGate } from "./client-refresh-parity.mjs";
 
 function resolveTemplateFile(templatesDir, scriptDir, filename) {
   const fromTemplates = path.join(templatesDir, filename);
@@ -239,6 +240,21 @@ export function bootstrapTied(projectRoot, options = {}) {
   verifyFeatureOrchestrationMethodology(projectRoot, tiedDir, tiedBasePathValue, tiedCliDest);
   verifyInheritedDetailFiles(tiedDir, paths.INHERITED_DETAIL_REQUIRED);
   verifyMethodologyPseudocodeTokenRefs(tiedDir);
+
+  // [IMPL-TIED_CLIENT_REFRESH_PARITY] [ARCH-TIED_CLIENT_REFRESH_PARITY] [REQ-TIED_CLIENT_REFRESH_PARITY]
+  const parityResult = runClientRefreshParityGate(TIED_REPO_ROOT, projectRoot, {
+    skipParityGate: options.skipParityGate === true,
+    strictRefresh: options.strictRefresh === true,
+    parityGateReportOnly: options.parityGateReportOnly === true,
+    semanticYamlCompare: options.semanticYamlCompare === true,
+    reportPath: options.parityReport,
+  });
+  if (parityResult.exitCode === 2) {
+    throw new Error("CLIENT_REFRESH_PARITY_INTERNAL");
+  }
+  if (parityResult.exitCode === 1) {
+    throw new Error("CLIENT_REFRESH_PARITY_FAILED");
+  }
 
   // [IMPL-TIED_METHODOLOGY_CLIENT_BOUNDARY] [ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY] [REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY]
   const methodologyBoundary = applyMethodologyClientBoundary(projectRoot, {

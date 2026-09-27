@@ -2007,6 +2007,17 @@ IMPL-TIED_CLAUDE_SKILLS_REROOT:
   detail_file: "implementation-decisions/IMPL-TIED_CLAUDE_SKILLS_REROOT.yaml"
   name: "Skills re-root implementation"
   status: "Active"
+IMPL-TIED_CLIENT_REFRESH_PARITY:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_CLIENT_REFRESH_PARITY"
+    implementation:
+      - "IMPL-TIED_FILES"
+    requirements:
+      - "REQ-TIED_CLIENT_REFRESH_PARITY"
+  detail_file: "implementation-decisions/IMPL-TIED_CLIENT_REFRESH_PARITY.yaml"
+  name: "Client refresh parity gate implementation"
+  status: "Active"
 IMPL-TIED_DAE_INCORPORATION:
   cross_references:
     - "ARCH-TIED_DAE_INCORPORATION"

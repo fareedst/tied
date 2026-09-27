@@ -7,6 +7,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { bootstrapTied } from "./lib/bootstrap.mjs";
 import { sayErr } from "./lib/console.mjs";
+import { parseParityCliFlags } from "./lib/parity-cli-options.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -26,24 +27,41 @@ function parseArgs(argv) {
       installMethodologyHook = true;
       args.shift();
     } else {
-      sayErr(`Unknown option: ${args[0]}`);
-      process.exit(1);
+      break;
     }
   }
-  const target = args[0] ? path.resolve(args[0]) : process.cwd();
-  return { mergeVocab, target, methodologyReadonly, installMethodologyHook };
+  const { positional, parity, unknownFlag } = parseParityCliFlags(args);
+  if (unknownFlag) {
+    sayErr(`Unknown option: ${unknownFlag}`);
+    process.exit(1);
+  }
+  const target = positional[0] ? path.resolve(positional[0]) : process.cwd();
+  return { mergeVocab, target, methodologyReadonly, installMethodologyHook, ...parity };
 }
 
 function main() {
-  const { mergeVocab, target, methodologyReadonly, installMethodologyHook } = parseArgs(
-    process.argv.slice(2),
-  );
+  const {
+    mergeVocab,
+    target,
+    methodologyReadonly,
+    installMethodologyHook,
+    skipParityGate,
+    strictRefresh,
+    parityGateReportOnly,
+    semanticYamlCompare,
+    parityReport,
+  } = parseArgs(process.argv.slice(2));
   try {
     bootstrapTied(target, {
       mergeVocab,
       env: process.env,
       methodologyReadonly,
       installMethodologyHook,
+      skipParityGate,
+      strictRefresh,
+      parityGateReportOnly,
+      semanticYamlCompare,
+      parityReport,
     });
   } catch (e) {
     if (e instanceof Error && e.message) {

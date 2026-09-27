@@ -56,4 +56,9 @@ Dir.mktmpdir('compare-yaml-dirs-') do |tmp|
   assert st.success?, "unordered arrays should match: #{err}\n#{out}"
 end
 
+# [REQ-TIED_YAML_COMPARE_RUBY_LOAD] — CLI load smoke after yaml_semantic_compare require chain.
+out, err, st = run_compare(['--help'])
+assert st.success?, "compare_yaml_dirs.rb --help should exit 0: #{err}\n#{out}"
+assert out.include?('Usage:'), "help stdout: #{out}"
+
 puts 'compare_yaml_dirs_test.rb: OK'

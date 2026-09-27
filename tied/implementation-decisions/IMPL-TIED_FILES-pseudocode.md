@@ -556,3 +556,18 @@ procedure BOOTSTRAP_TIED(projectRoot):
   CALL VERIFY_ADVERSARIAL_INQUIRY_METHODOLOGY(projectRoot)
   RETURN success
 
+
+procedure HOIST_YAML_SEMANTIC_COMPARE_CONSTANTS():
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_YAML_COMPARE_RUBY_LOAD] [REQ-TIED_SETUP] [PROC-YAML_EDIT_LOOP]
+  # How: Define DEFAULT_RECORD_LIST_KEYS on YamlSemanticCompare before DifferenceWalker default keyword references YamlSemanticCompare::DEFAULT_RECORD_LIST_KEYS at class load time.
+  Contract:
+    INPUT: scripts/yaml_semantic_compare.rb source
+    OUTPUT: load-safe module; compare_yaml_dirs.rb require succeeds
+    PRE: DifferenceWalker initialize uses record_list_keys default referencing YamlSemanticCompare::DEFAULT_RECORD_LIST_KEYS
+    POST: ruby scripts/compare_yaml_dirs.rb --help exits 0; regression test loads CLI and runs minimal pair compare
+    EFFECTS: File I/O — reorder or hoist constant assignment only; no semantic compare behavior change
+    FAILURE_MODES: LOAD_NAME_ERROR if constant still referenced before definition
+    TERMINATION: total
+  MOVE or ASSIGN DEFAULT_RECORD_LIST_KEYS immediately after class YamlSemanticCompare opening (before DifferenceWalker) OR hoist to file top under module YamlSemanticCompare
+  RETURN success
+

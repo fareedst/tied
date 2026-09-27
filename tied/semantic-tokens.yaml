@@ -754,6 +754,16 @@ ARCH-TIED_CLAUDE_SKILLS_REROOT:
     registered: "2026-09-24"
   name: "Skills re-root architecture"
   source_index: "architecture-decisions.yaml"
+ARCH-TIED_CLIENT_REFRESH_PARITY:
+  cross_references:
+    - "IMPL-TIED_CLIENT_REFRESH_PARITY"
+    - "REQ-TIED_CLIENT_REFRESH_PARITY"
+  description: "Parity gate distinct from G4 and tied_validate_consistency"
+  detail_file: "architecture-decisions/ARCH-TIED_CLIENT_REFRESH_PARITY.yaml"
+  name: "Client refresh parity proof boundary"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_DAE_VERIFICATION_CHARTER:
   cross_references:
     - "IMPL-TIED_DAE_VERIFICATION_CHARTER"
@@ -1835,6 +1845,17 @@ IMPL-TIED_CLAUDE_SKILLS_REROOT:
     registered: "2026-09-24"
   name: "Skills re-root implementation"
   source_index: "implementation-decisions.yaml"
+IMPL-TIED_CLIENT_REFRESH_PARITY:
+  cross_references:
+    - "ARCH-TIED_CLIENT_REFRESH_PARITY"
+    - "IMPL-TIED_FILES"
+    - "REQ-TIED_CLIENT_REFRESH_PARITY"
+  description: "client-refresh-parity.mjs and verify-client-methodology.mjs"
+  detail_file: "implementation-decisions/IMPL-TIED_CLIENT_REFRESH_PARITY.yaml"
+  name: "Client refresh parity gate implementation"
+  source_index: "implementation-decisions.yaml"
+  status: "Implemented"
+  type: "IMPL"
 IMPL-TIED_DAE_VERIFICATION_CHARTER:
   cross_references:
     - "ARCH-TIED_DAE_VERIFICATION_CHARTER"
@@ -3111,6 +3132,18 @@ REQ-TIED_CLAUDE_SKILLS_REROOT:
     registered: "2026-09-24"
   name: "Optional repo-root skills re-root"
   source_index: "requirements.yaml"
+REQ-TIED_CLIENT_REFRESH_PARITY:
+  category: "Functional"
+  cross_references:
+    - "ARCH-TIED_CLIENT_REFRESH_PARITY"
+    - "IMPL-TIED_CLIENT_REFRESH_PARITY"
+    - "REQ-TIED_YAML_COMPARE_RUBY_LOAD"
+  description: "Post-copy_files parity report; methodology drift fail-closed; doc drift warn unless strict"
+  detail_file: "requirements/REQ-TIED_CLIENT_REFRESH_PARITY.yaml"
+  name: "Client refresh methodology and doc parity gate"
+  source_index: "requirements.yaml"
+  status: "Implemented"
+  type: "REQ"
 REQ-TIED_DAE_VERIFICATION_CHARTER:
   cross_references:
     - "ARCH-TIED_DAE_VERIFICATION_CHARTER"
@@ -3230,6 +3263,18 @@ REQ-TIED_YAML_CANONICALIZATION:
   name: "Deterministic typed TIED YAML canonicalization"
   source_index: "requirements.yaml"
   status: "Planned"
+  type: "REQ"
+REQ-TIED_YAML_COMPARE_RUBY_LOAD:
+  category: "Functional"
+  cross_references:
+    - "ARCH-TIED_STRUCTURE"
+    - "IMPL-TIED_FILES"
+    - "REQ-TIED_CLIENT_REFRESH_PARITY"
+  description: "yaml_semantic_compare loads without NameError; compare_yaml_dirs usable"
+  detail_file: "requirements/REQ-TIED_YAML_COMPARE_RUBY_LOAD.yaml"
+  name: "Ruby YAML compare load integrity"
+  source_index: "requirements.yaml"
+  status: "Implemented"
   type: "REQ"
 REQ-TIED_YAML_STYLE_CONFIGURATION:
   cross_references:

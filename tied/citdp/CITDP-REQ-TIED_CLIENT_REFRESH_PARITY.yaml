@@ -1,0 +1,104 @@
+CITDP-REQ-TIED_CLIENT_REFRESH_PARITY:
+  change_definition:
+    current_behavior_prior: "Bootstrap refreshes methodology but not stale tied/docs; no post-refresh parity report; directory modification warnings false-positive; compare_yaml_dirs broken."
+    desired_behavior: "Parity gate with JSON report schema v1; fail methodology drift by default; warn doc drift unless strict; complement G4 audit; optional semantic YAML compare after Slice A."
+    non_goals:
+      - "Auto-overwrite client docs in v1"
+      - "Methodology version stamp or --refresh-docs modes (Phase 2 REQ)"
+      - "Replace G4 audit"
+    references:
+      - "tools/bootstrap/lib/bootstrap.mjs"
+      - "tools/bootstrap/manifest.json"
+      - "working/REQ-TIED_CLIENT_REFRESH_PARITY/client-refresh-parity-report.v1.schema.json"
+      - "working/REQ-TIED_CLIENT_REFRESH_PARITY/PLAN.md"
+    success_criteria:
+      - "CI disposable client recipe in PLAN passes"
+      - "client-refresh-parity unit tests including allowlist module"
+      - "verify-client-methodology.mjs CLI and bootstrap tail after verifyMethodologyPseudocodeTokenRefs"
+  completion_criteria:
+    close_out: "run-close-out-gates verification and close_out allowed; envelope blocking_gap_count 0"
+    tests: "Ruby load/compare tests; node bootstrap parity tests 6/6; disposable client verify exit 0 with doc drift warned"
+    tied_validate_consistency: "ok:true after related_to fix (2026-09-27 close-out)"
+    verification_gate_notes: "Completed 2026-09-27"
+  impact_analysis:
+    express_lane: false
+    modules_or_boundaries: "tools/bootstrap"
+    size: "M"
+    tied_tokens_affected:
+      - "IMPL-TIED_FILES"
+      - "REQ-TIED_SETUP"
+    tied_tokens_new:
+      - "ARCH-TIED_CLIENT_REFRESH_PARITY"
+      - "IMPL-TIED_CLIENT_REFRESH_PARITY"
+      - "REQ-TIED_CLIENT_REFRESH_PARITY"
+  leap_feedback:
+    divergences_from_analysis: "None; shipped code matches IMPL-TIED_CLIENT_REFRESH_PARITY pseudo-code."
+    record_status: "recorded"
+    tied_stack_updates_required: false
+  record_identity:
+    change_request_id: "REQ-TIED_CLIENT_REFRESH_PARITY"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    checklist_step_completed: "close_out_gate"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-09-27"
+    tied_context:
+      architecture:
+        - "ARCH-TIED_CLIENT_REFRESH_PARITY"
+      implementation:
+        - "IMPL-TIED_CLIENT_REFRESH_PARITY"
+      requirements:
+        - "REQ-TIED_CLIENT_REFRESH_PARITY"
+    title: "Client refresh methodology and doc parity gate"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "CI fails on intentional client doc customization without strict mode docs"
+        - "Windows copy_files.cmd path skips parity while bash path runs it"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Fresh disposable client after copy_files.sh yields parity exit 0"
+        - "Report classifies preserved_by_policy for copy-when-missing docs and template-only allowlist paths"
+      evidence_references:
+        - "/Users/fareed/Documents/dev/test/1790492487 empirical refresh (2/41 doc drift)"
+        - "scripts/run-tied-new-client-audit.mjs"
+        - "tied/docs/methodology-migration.md"
+        - "working/REQ-TIED_CLIENT_REFRESH_PARITY/PLAN.md"
+      falsification_questions:
+        - "Does --skip-parity-gate leave operators without any drift signal?"
+        - "Does parity gate duplicate or replace G4 grammar audit proof?"
+      gate_policy: "advisory"
+      sub_adversarial_inquiry_pass: "not_applicable"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    proof_boundaries:
+      in_scope:
+        - "copy-managed directory warning fix"
+        - "JSON report client-refresh-parity-report.v1"
+        - "Post-verify* parity compare templates vs tied/methodology and DOCS_TO_COPY hashes"
+      out_of_scope:
+        - "Automated doc overwrite"
+        - "G4 grammar audit"
+        - "tied_validate_consistency"
+    rollback:
+      - "Revert bootstrap.mjs tail call if parity logic defective"
+      - "Use --skip-parity-gate for hotfix bootstrap"
+    summary: "Doc drift noise on brownfield clients mitigated by warn-default; --skip-parity-gate documented for emergency; Windows uses same Node bootstrap engine."
+  tdd_sequence:
+    order:
+      - "REQ-TIED_YAML_COMPARE_RUBY_LOAD green"
+      - "RED methodology-template-only-allowlist.test.mjs"
+      - "RED client-refresh-parity.test.mjs"
+      - "GREEN parity modules and CLI"
+      - "GREEN bootstrap tail + copy-managed fix"
+  test_strategy:
+    ci_recipe:
+      - "mktemp client; copy_files.sh; verify-client-methodology.mjs exit 0"
+      - "Mutate methodology file -> exit 1"
+      - "Mutate tied/docs file -> exit 0 default, exit 1 --strict-refresh"
+    summary: "Node unit tests first; disposable client CLI recipe; optional bootstrap e2e; Slice A prerequisite for --semantic-yaml-compare."
+    windows_bootstrap:
+      note: "copy_files.cmd delegates to same bootstrapTied; parity runs when verify* runs; smoke test on Windows job optional follow-up"

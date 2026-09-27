@@ -1,0 +1,32 @@
+REQ-TIED_YAML_COMPARE_RUBY_LOAD:
+  category: "Functional"
+  description: "scripts/yaml_semantic_compare.rb and scripts/compare_yaml_dirs.rb load without NameError; constant references resolve before class bodies evaluate."
+  name: "Ruby YAML compare load integrity"
+  priority: "P0"
+  rationale:
+    benefits:
+      - "Restores [PROC-YAML_EDIT_LOOP] directory compare tooling"
+      - "Unblocks client refresh parity gate that shells to compare_yaml_dirs or semantic compare"
+    problems_solved:
+      - "NameError: uninitialized constant YamlSemanticCompare::DEFAULT_RECORD_LIST_KEYS on DifferenceWalker initialize default keyword"
+    why: "Directory YAML parity and post-sort validation depend on compare_yaml_dirs loading yaml_semantic_compare at require time."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-TIED_CLIENT_REFRESH_PARITY"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "DEFAULT_RECORD_LIST_KEYS is defined before DifferenceWalker references YamlSemanticCompare::DEFAULT_RECORD_LIST_KEYS"
+      metric: "scripts/yaml_semantic_compare_load_test.rb or extended compare_yaml_dirs_test.rb"
+    - criterion: "ruby scripts/compare_yaml_dirs.rb --help exits 0 without NameError"
+      metric: "scripts/compare_yaml_dirs_test.rb load smoke"
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-TIED_STRUCTURE"
+    implementation:
+      - "IMPL-TIED_FILES"
+    tests:
+      - "scripts/compare_yaml_dirs_test.rb"
+      - "scripts/yaml_semantic_compare_load_test.rb"

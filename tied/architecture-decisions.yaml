@@ -1766,6 +1766,14 @@ ARCH-TIED_CLAUDE_SKILLS_REROOT:
   detail_file: "architecture-decisions/ARCH-TIED_CLAUDE_SKILLS_REROOT.yaml"
   name: "Skills re-root architecture"
   status: "Active"
+ARCH-TIED_CLIENT_REFRESH_PARITY:
+  cross_references:
+    - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
+    - "REQ-TIED_CLIENT_REFRESH_PARITY"
+    - "REQ-TIED_SETUP"
+  detail_file: "architecture-decisions/ARCH-TIED_CLIENT_REFRESH_PARITY.yaml"
+  name: "Client refresh parity proof boundary"
+  status: "Active"
 ARCH-TIED_DAE_INCORPORATION:
   cross_references:
     - "ARCH-TIED_UNIFIED_TOOLCHAIN"

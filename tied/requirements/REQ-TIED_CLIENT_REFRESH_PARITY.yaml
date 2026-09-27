@@ -1,0 +1,47 @@
+REQ-TIED_CLIENT_REFRESH_PARITY:
+  category: "Functional"
+  description: "After copy_files refresh, emit a versioned parity report comparing TIED source templates to client tied/methodology and hash-compare DOCS_TO_COPY paths; fail-closed on methodology drift by default; surface doc drift without silently treating green G4 or tied_validate_consistency as doc freshness proof."
+  name: "Client refresh methodology and doc parity gate"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Complements G4 grammar audit without replacing it"
+      - "Explicit policy flags for strict refresh"
+      - "Structured JSON report for CI and migration Phase 1 verify"
+    problems_solved:
+      - "Broken Ruby compare blocks manual parity checks"
+      - "DOCS_TO_COPY copy-when-missing hides doc drift"
+      - "False-positive client-modification warnings on directories after vocab refresh"
+      - "No post-refresh report tying source templates to client methodology tree"
+    why: "Bootstrap overwrites methodology but preserves client tied/docs; operators observed stale checklist YAML and prompt-type docs while audits stayed green and compare_yaml_dirs was broken."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_BOOTSTRAP_DETAIL_INTEGRITY"
+      - "REQ-TIED_SETUP"
+      - "REQ-TIED_YAML_COMPARE_RUBY_LOAD"
+    related_to:
+      - "REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY"
+      - "REQ-TIED_SETUP"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "CLI verify-client-methodology.mjs runs standalone and from bootstrap tail"
+      metric: "bootstrap integration test invokes parity gate"
+    - criterion: "methodology-migration.md Phase 1 verify and tools/bootstrap/README document parity gate vs G4 audit boundary"
+      metric: "doc link review"
+    - criterion: "Parity A compares templates/ to client tied/methodology with template-only allowlist"
+      metric: "tools/bootstrap/lib/client-refresh-parity.test.mjs parity A cases"
+    - criterion: "Parity B hash-compares manifest DOCS_TO_COPY source vs client tied/docs entries"
+      metric: "client-refresh-parity.test.mjs parity B cases"
+    - criterion: "warnModifiedCopyTarget does not warn on directory-only non-midnight mtimes after normalized tree copy"
+      metric: "copy-managed.test.mjs directory warning cases"
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-TIED_CLIENT_REFRESH_PARITY"
+    implementation:
+      - "IMPL-TIED_CLIENT_REFRESH_PARITY"
+      - "IMPL-TIED_FILES"
+    tests:
+      - "mcp-server/src/e2e/bootstrap-and-load.test.ts"
+      - "tools/bootstrap/lib/client-refresh-parity.test.mjs"
+      - "tools/bootstrap/lib/copy-managed.test.mjs"

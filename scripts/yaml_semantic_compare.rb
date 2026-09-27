@@ -80,6 +80,18 @@ class CanonicalValue
   end
 end
 
+# Facade for comparing parsed YAML values (constant hoisted for DifferenceWalker default).
+class YamlSemanticCompare
+  DEFAULT_RECORD_LIST_KEYS = %w[
+    satisfaction_criteria
+    validation_criteria
+    alternatives_considered
+    files
+    functions
+    risks
+  ].freeze
+end
+
 # Recursively compares Ruby values produced from YAML and records path-level differences.
 class DifferenceWalker
   def initialize(unordered_arrays: false, record_list_keys: YamlSemanticCompare::DEFAULT_RECORD_LIST_KEYS)
@@ -258,16 +270,6 @@ class DifferenceWalker
     text.length > 180 ? "#{text[0, 177]}..." : text
   end
 end
-
-# Default parent keys whose mapping-record lists accept tier-aware reorder during semantic validation.
-DEFAULT_RECORD_LIST_KEYS = %w[
-  satisfaction_criteria
-  validation_criteria
-  alternatives_considered
-  files
-  functions
-  risks
-].freeze
 
 # Facade for comparing parsed YAML values.
 class YamlSemanticCompare

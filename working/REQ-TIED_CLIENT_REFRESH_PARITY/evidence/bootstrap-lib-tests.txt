@@ -1,0 +1,25 @@
+DEBUG: CLIENT_REFRESH_PARITY summary methodology_drift=1 doc_drift=0 missing=40 preserved=4
+DEBUG: Parity A drift: requirements/REQ-X.yaml
+CLIENT_REFRESH_PARITY: 1 methodology drift path(s); see /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/parity-run-client-J2KSCZ/.tied/report.json
+DEBUG: CLIENT_REFRESH_PARITY summary methodology_drift=1 doc_drift=0 missing=40 preserved=4
+DEBUG: Parity A drift: requirements/REQ-X.yaml
+▶ client-refresh-parity
+  ✔ Parity A: matched, drifted, and allowlist preserved_by_policy (3.350667ms)
+  ✔ Parity B: matched and drifted DOCS_TO_COPY hashes (1.892917ms)
+  ✔ runClientRefreshParityGate: methodology drift exit 1; report-only exit 0 (7.917375ms)
+✔ client-refresh-parity (13.6815ms)
+▶ copy-managed warnModifiedCopyTarget
+  ✔ does not warn on directory nodes with non-midnight mtime when files are normalized (4.373666ms)
+✔ copy-managed warnModifiedCopyTarget (4.807917ms)
+▶ methodology-template-only-allowlist
+  ✔ documents the four template-only paths from ARCH/PLAN (1.0955ms)
+  ✔ matches allowlisted relative paths (0.083ms)
+✔ methodology-template-only-allowlist (1.931333ms)
+ℹ tests 6
+ℹ suites 3
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 87.469792
