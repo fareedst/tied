@@ -51,6 +51,28 @@ describe("request_evidence_envelope MCP tools [REQ-REQUEST_EVIDENCE_ENVELOPE]", 
     assert.equal(envelope.schema_version, "request-evidence-envelope.v1");
   });
 
+  it("build accepts PLAN-* working analysis tokens", async () => {
+    const build = handler("request_evidence_envelope_build");
+    const tempRoot = mkdtempSync(path.join(os.tmpdir(), "ree-plan-"));
+    const requestToken = "PLAN-RESIDUALITY-PILOT-TEST";
+    const working = path.join(tempRoot, "working", requestToken);
+    mkdirSync(working, { recursive: true });
+    writeFileSync(
+      path.join(working, "agent-req-implementation-checklist.yaml"),
+      "execution_evidence:\n  request: PLAN-RESIDUALITY-PILOT-TEST\n",
+      "utf8",
+    );
+    const tiedBasePath = getBasePath();
+    const result = body(
+      await build({
+        request_token: requestToken,
+        project_root: tempRoot,
+        tied_base_path: tiedBasePath,
+      }),
+    );
+    assert.equal(result.ok, true, JSON.stringify(result));
+  });
+
   it("validate rejects malformed envelope path", async () => {
     const validate = handler("request_evidence_envelope_validate");
     const result = body(

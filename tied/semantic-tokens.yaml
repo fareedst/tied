@@ -645,6 +645,12 @@ ARCH-REQUEST_EVIDENCE_ENVELOPE:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-RESIDUALITY_STRESSOR_RECORD_VALIDATION:
+  description: "Validator architecture for stressor-residue.v1"
+  related_tokens:
+    - "IMPL-RESIDUALITY_STRESSOR_RECORD_VALIDATION"
+    - "REQ-RESIDUALITY_STRESSOR_RECORD_VALIDATION"
+  type: "architecture"
 ARCH-TIED_ADVERSARIAL_INQUIRY:
   cross_references:
     - "IMPL-TIED_ADVERSARIAL_INQUIRY"
@@ -1721,6 +1727,12 @@ IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH:
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
+IMPL-RESIDUALITY_STRESSOR_RECORD_VALIDATION:
+  description: "stressor-residue-validate module and MCP tool"
+  related_tokens:
+    - "ARCH-RESIDUALITY_STRESSOR_RECORD_VALIDATION"
+    - "REQ-RESIDUALITY_STRESSOR_RECORD_VALIDATION"
+  type: "implementation"
 IMPL-TIED_ADVERSARIAL_INQUIRY:
   cross_references:
     - "ARCH-TIED_ADVERSARIAL_INQUIRY"
@@ -2972,6 +2984,12 @@ REQ-REQUEST_EVIDENCE_ENVELOPE:
   source_index: "requirements.yaml"
   status: "Active"
   type: "REQ"
+REQ-RESIDUALITY_STRESSOR_RECORD_VALIDATION:
+  description: "Structural validation for stressor-residue.v1 discovery records"
+  related_tokens:
+    - "ARCH-RESIDUALITY_STRESSOR_RECORD_VALIDATION"
+    - "IMPL-RESIDUALITY_STRESSOR_RECORD_VALIDATION"
+  type: "requirement"
 REQ-TIED_ADVERSARIAL_INQUIRY:
   cross_references:
     - "ARCH-TIED_ADVERSARIAL_INQUIRY"

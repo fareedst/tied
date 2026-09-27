@@ -1,0 +1,37 @@
+REQ-RESIDUALITY_STRESSOR_RECORD_VALIDATION:
+  category: "Functional"
+  description: "Provide a minimal structural validator for stressor-residue.v1 working records produced by residuality discovery passes. Validation confirms field presence, enums, proof_boundary, and TIED token references without promoting residues to REQ authority."
+  name: "Residuality stressor-residue record validation"
+  priority: "P2"
+  rationale:
+    benefits:
+      - "Deterministic diagnostics for discovery artifacts"
+      - "MCP/CLI surface aligned with binding_inventory_validate pattern"
+    problems_solved:
+      - "No automated structural gate before attaching records to CITDP risk_analysis.residuality_analysis"
+      - "Unreviewed YAML records could omit proof_boundary or misuse disposition enums"
+    why: "Pilot PLAN-TIED-RESIDUALITY-ANALYSIS produced machine records and sponsor SD-W5-TOOLING-REQ opened durable tooling for attach-first CITDP workflows."
+  related_requirements:
+    depends_on:
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+    related_to:
+      - "REQ-FEAT_IDEMPOTENT_CREATION"
+      - "REQ-FEAT_TASK_EXECUTION_RECOVERY"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "MCP tool stressor_residue_record_validate registered"
+      metric: "mcp-server/src/tools/index.ts tool name present"
+    - criterion: "Validator accepts pilot S-T01 stressor-residue.v1 record"
+      metric: "stressor-residue-validate.test.ts yaml_text fixture ok:true"
+    - criterion: "Validator rejects wrong schema_version and invalid tied_refs"
+      metric: "Unit tests assert WRONG_SCHEMA_VERSION and INVALID_TIED_REF diagnostics"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-RESIDUALITY_STRESSOR_RECORD_VALIDATION"
+    code_annotations:
+      - "REQ-RESIDUALITY_STRESSOR_RECORD_VALIDATION"
+    implementation:
+      - "IMPL-RESIDUALITY_STRESSOR_RECORD_VALIDATION"
+    tests:
+      - "mcp-server/src/residuality/stressor-residue-validate.test.ts"

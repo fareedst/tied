@@ -1,0 +1,31 @@
+IMPL-RESIDUALITY_STRESSOR_RECORD_VALIDATION:
+  category: "Implementation"
+  description: "Implement VALIDATE_STRESSOR_RESIDUE_RECORD and MCP_STRESSOR_RESIDUE_RECORD_VALIDATE per pseudo-code sidecar."
+  implementation_approach:
+    details:
+      - "No filesystem reads in core validator function"
+      - "Uses js-yaml parse only at MCP boundary"
+    key_components:
+      - "stressor-residue-validate.test.ts"
+      - "stressor-residue-validate.ts"
+      - "tools/index.ts registration"
+    summary: "RED unit tests against pilot S-T01 fixture then GREEN validateStressorResidueRecord implementation."
+  name: "Residuality stressor-residue validation implementation"
+  priority: "P2"
+  related_architecture:
+    - "ARCH-RESIDUALITY_STRESSOR_RECORD_VALIDATION"
+  related_requirements:
+    - "REQ-RESIDUALITY_STRESSOR_RECORD_VALIDATION"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-RESIDUALITY_STRESSOR_RECORD_VALIDATION"
+    code_annotations:
+      - "IMPL-RESIDUALITY_STRESSOR_RECORD_VALIDATION"
+    code_locations:
+      - "mcp-server/src/residuality/stressor-residue-validate.ts"
+      - "mcp-server/src/tools/index.ts"
+    requirements:
+      - "REQ-RESIDUALITY_STRESSOR_RECORD_VALIDATION"
+    tests:
+      - "mcp-server/src/residuality/stressor-residue-validate.test.ts"

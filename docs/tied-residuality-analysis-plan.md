@@ -238,20 +238,18 @@ Normative wave specs. Depth and gate policy per batch are summarized in §10.
 - **TIED loop handoff:** Tests and quality evidence **prove** accepted properties; discovery artifacts remain citations only.
 - **Exit evidence:** Commands, seeds, manifests when applicable, limitations, holdout-stressor results.
 
-### W5 — Tooling and checklist integration (optional / proposed)
+### W5 — Tooling and checklist integration (applied)
 
 - **Goal:** Promote only what the pilot proves useful.
-- **Depth:** Sponsor-selected; tooling behavior changes default `integrated`. **W5 refine-plan (2026-09-27):** `minimal` + `advisory` for promotion planning batch only.
-- **Refine-plan status (2026-09-27):** DoD checklist `working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/pilot-dod-checklist.md`; promotion menu `working/PLAN-TIED-RESIDUALITY-ANALYSIS/w5-promotion/`; CITDP `CITDP-W5-PROMOTION.yaml`; default recommendation **Adopt (revise)** in `evidence/w5-refine-outcomes.md`. **build-plan W5** (`w5-build-plan-promotion`) pending sponsor SD-W5-* decisions.
-- **Entry:** Pilot DoD §7 complete; written recommendation adopt / revise / defer / reject.
-- **Candidates (additive, TIED-source only):**
-  1. Canonical glossary promotion in `tied/vocab/residuality.md`.
-  2. Optional checklist sub-procedure `sub-residuality-analysis-pass` (NON-CANONICAL until merged via TDD + checklist gate).
-  3. Optional CITDP section `risk_analysis.residuality_analysis` after policy update.
-  4. Stable schema + lint/validate for `stressor-residue.v1` if field use justified.
-  5. Dedicated tooling REQ/ARCH/IMPL only if validators/CLI/MCP need durable contracts.
+- **Depth:** Tooling batch `integrated` + `advisory` (build-plan W5, 2026-09-27).
+- **Status (2026-09-27):** **build-plan W5** (`w5-build-plan-promotion`) **complete** — sponsor SD-W5-* in `evidence/sponsor-wrap-up-2026-09-27.md`.
+- **Promoted:**
+  1. Glossary `tied/vocab/residuality.md` (Adopt revise; pilot pointer).
+  2. Checklist `sub-residuality-analysis-pass` in `tied/docs/agent-req-implementation-checklist.md` + `.yaml`.
+  3. CITDP **attach-first** — `risk_analysis.residuality_analysis` pattern in `working/PLAN-TIED-RESIDUALITY-ANALYSIS/w5-promotion/risk_analysis.residuality_analysis.proposed.yaml` + `CITDP-W5-PROMOTION.yaml` (no full merge into `citdp-policy.md`).
+  4. Tooling `[REQ-RESIDUALITY_STRESSOR_RECORD_VALIDATION]` / `[ARCH-RESIDUALITY_STRESSOR_RECORD_VALIDATION]` / `[IMPL-RESIDUALITY_STRESSOR_RECORD_VALIDATION]` + MCP `stressor_residue_record_validate`.
 - **TIED loop handoff:** W5 promotes **process hooks**; it does not retroactively canonize W1 worksheets as REQ substitutes.
-- **Promotion gate:** All pilot DoD items met; recommendation recorded in §10 and working CITDP.
+- **Recommendation (§10):** **Adopt (revise)** — optional risk-triggered discovery; feeds TIED authority.
 
 ---
 
@@ -487,11 +485,19 @@ Invalidate downstream Tracker dispositions and re-run `tied_checklist_gate_valid
 - **pre_implementation:** `working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/pre_implementation-2026-09-27T06-13-03-814Z.json` (`allowed: true`, depth `minimal`); `gate-tracker-pre-implementation-w5.yaml` + `CITDP-W5-PROMOTION.yaml`.
 - **Deliverables:** `pilot/pilot-dod-checklist.md`, `w5-promotion/w5-promotion-decisions.md`, NON-CANONICAL checklist/CITDP scaffolds; feature plan §7/§10 planning updates.
 
+**Batch C W5 build-plan (integrated promotion + tooling — 2026-09-27):**
+
+- **pre_implementation / verification:** see `working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/` receipts and `evidence/w5-build-plan-summary.md`.
+- **Deliverables:** canonical checklist + vocab; `[REQ-RESIDUALITY_STRESSOR_RECORD_VALIDATION]` stack; `mcp-server/src/residuality/stressor-residue-validate.ts` (6 unit tests green).
+
+### Integration recommendation
+
+**Adopt (revise):** Optional `sub-residuality-analysis-pass` after impact-discovery when assurance profiles (`stateful-reliability`, `data-integrity-migration`) or sponsor flag `residuality_pass_requested` apply. Attach CITDP refs via `risk_analysis.residuality_analysis`; validate machine records with `stressor_residue_record_validate`. Proof boundary: discovery aid only — runtime claims require W4-style executable evidence and verified REQ/ARCH/IMPL stack.
+
 ### Recommended next steps
 
-1. **build-plan W5** (`w5-build-plan-promotion`) — sponsor confirms SD-W5-* in `evidence/w5-refine-outcomes.md`; copy approved proposals into canonical `tied/docs/*` and vocab; optional integrated depth if tooling REQ opened.
-2. **Optional:** W3 P1 LEAP batch 2 (separate behavior-changing CITDP) before or after process promotion.
-3. **Optional:** Machine PLAN close-out envelope when sponsor ends waiver pattern.
+1. **Optional:** Machine PLAN close-out envelope when sponsor ends waiver pattern (`request-evidence-envelope-waiver.v1.json`).
+2. **Optional:** Phase 2 merge of residuality attach snippet into `tied/docs/citdp-policy.md` when policy owners approve.
 
 ---
 

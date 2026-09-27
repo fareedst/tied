@@ -31,7 +31,7 @@ import type {
 } from "./types.js";
 import { ENVELOPE_SCHEMA_VERSION } from "./types.js";
 
-const REQUEST_TOKEN_RE = /^REQ-[A-Z0-9][A-Z0-9_-]*$/u;
+import { isValidWorkingRequestToken } from "../working-request-token.js";
 const PHASE_DIR_RE = /^phase-(pre_implementation|verification|close_out)$/u;
 const INQUIRY_ARTIFACTS = [
   "evidence-provenance.json",
@@ -585,7 +585,7 @@ function extractRuns(artifacts: EnvelopeArtifact[]): EnvelopeRun[] {
 export async function buildRequestEvidenceEnvelope(
   input: BuildRequestEvidenceEnvelopeInput,
 ): Promise<BuildRequestEvidenceEnvelopeResult> {
-  if (!REQUEST_TOKEN_RE.test(input.request_token)) {
+  if (!isValidWorkingRequestToken(input.request_token)) {
     return { ok: false, stage: "identity", error: "InvalidRequestToken" };
   }
   const resolvedTied = path.resolve(input.tied_base_path);

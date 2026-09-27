@@ -1,0 +1,15 @@
+{
+  "change_id": "PLAN-TIED-RESIDUALITY-ANALYSIS",
+  "batch": "w5-close-out",
+  "date": "2026-09-27",
+  "merged_decision": {
+    "allowed": true,
+    "notes": "W5 promotion + envelope PLAN-* fix; sponsor post-w5 decisions applied"
+  },
+  "envelope": {
+    "build_ok_post_fix": true,
+    "evidence": "working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/envelope-build-post-fix-result.json",
+    "investigation": "working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/envelope-investigation-2026-09-27.md"
+  },
+  "recommendation": "adopt_revise"
+}

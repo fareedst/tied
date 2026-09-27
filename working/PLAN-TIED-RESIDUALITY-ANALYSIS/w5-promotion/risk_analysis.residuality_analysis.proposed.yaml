@@ -1,4 +1,5 @@
-# Candidate only — not canonical until W5 promotion gate and citdp-policy merge
+# Attach-first pattern (W5 build applied) — embed under risk_analysis in behavior-changing CITDP YAML.
+# Canonical policy merge deferred; see CITDP-W5-PROMOTION.yaml risk_analysis.residuality_analysis.attach_pattern
 risk_analysis:
   residuality_analysis:
     applied: true

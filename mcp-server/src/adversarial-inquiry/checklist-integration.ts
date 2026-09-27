@@ -14,6 +14,7 @@ import { appendFinding } from "./workflow.js";
 import { stableHash } from "../checklist-validator.js";
 import { tryPatchArtifactFile } from "../request-evidence-envelope/hooks.js";
 import type { GatePhase } from "../request-evidence-envelope/types.js";
+import { isValidWorkingRequestToken } from "../working-request-token.js";
 
 export type GatePolicy = "advisory" | "strict-candidate" | "strict-approved";
 
@@ -117,8 +118,6 @@ export type ChecklistInquiryResult = AdversarialInquiryResult & {
   };
 };
 
-const REQUEST_TOKEN_RE = /^REQ-[A-Z0-9][A-Z0-9_-]*$/u;
-
 function sortedUnique(values: readonly string[]): string[] {
   return [...new Set(values.map((value) => value.trim()).filter(Boolean))].sort();
 }
@@ -218,7 +217,7 @@ export function resolveArtifactPaths(input: {
   artifactRoot?: string;
 }): ArtifactPaths {
   const requestToken = input.requestToken.trim();
-  if (!REQUEST_TOKEN_RE.test(requestToken)) {
+  if (!isValidWorkingRequestToken(requestToken)) {
     throw new Error(`INVALID_SCOPE: invalid request token ${input.requestToken}`);
   }
   const repositoryRoot = path.resolve(input.repositoryRoot);

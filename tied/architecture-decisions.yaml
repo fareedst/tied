@@ -1667,6 +1667,18 @@ ARCH-REQUEST_EVIDENCE_ENVELOPE:
   name: "Request evidence envelope architecture"
   priority: "P1"
   status: "Accepted"
+ARCH-RESIDUALITY_STRESSOR_RECORD_VALIDATION:
+  category: "Architecture"
+  description: "Pure validator module plus optional MCP stressor_residue_record_validate; no canonical project YAML mutation."
+  detail_file: "architecture-decisions/ARCH-RESIDUALITY_STRESSOR_RECORD_VALIDATION.yaml"
+  name: "Residuality stressor-residue validation architecture"
+  priority: "P2"
+  status: "Accepted"
+  traceability:
+    implementation:
+      - "IMPL-RESIDUALITY_STRESSOR_RECORD_VALIDATION"
+    requirements:
+      - "REQ-RESIDUALITY_STRESSOR_RECORD_VALIDATION"
 ARCH-TIED_ADVERSARIAL_INQUIRY:
   cross_references:
     - "REQ-TIED_ADVERSARIAL_INQUIRY"

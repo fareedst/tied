@@ -986,6 +986,7 @@ steps:
       - "Phase B/C scope: For catalog-pseudocode-contracts through flag-contradictory-specs, treat project/feature IMPLs tied to this REQ or change-definition as the primary IMPL set. Methodology IMPLs visible in merged index reads are inherited context only unless change-definition explicitly changes methodology—do not build large empty contract tables for them."
       - "Record first-divergence hypotheses; seed an obligation inventory for the declared scope; link each quality_evidence_matrix row to a proof-boundary class (traceability_structure, pseudo_code_structure, semantic_fidelity, executable_behavior, human_decision)."
       - "Select the adversarial depth tier (minimal | integrated | strict_candidate) and gate policy before any depth-dependent pre-implementation inquiry. Record depth_tier independently from research_profile, assurance_profile, and gate_policy."
+      - "Optional residuality: IF assurance profiles include stateful-reliability or data-integrity-migration OR sponsor flag residuality_pass_requested THEN CALL sub-residuality-analysis-pass before author-requirement; skip when depth_tier minimal unless sponsor flag set. Discovery outputs attach to CITDP risk_analysis.residuality_analysis only — never auto-write project YAML from worksheets."
       - "Stop expanding when no new IMPLs share code paths, REQ/ARCH tokens, or composed_with links with the current set."
       - "Touchpoint 2 (pre-read): CALL sub-vocabulary-sync (PRELOAD) scoped to modules and concepts from change-definition — load glossaries under ./tied/vocab/ (VOCAB_INDEX) for affected subsystems so subsequent IMPL/code reads interpret symbols and paths with canonical names; produce or extend the term map before any discovery reads."
       - "Traceability vs workspace: TIED code_locations document where an IMPL is anchored; they do not require every listed path to exist in this checkout. Paths absent here (other layouts, methodology-only tooling, unrelated inherited IMPLs): note as N/A or out of scope for this pass; do not treat as missing implementation or block the checklist."
@@ -1098,6 +1099,7 @@ steps:
       - "For adversarial inquiry checklist integration, persist a distinct follow-up CITDP and keep any earlier completed CITDP evidence unchanged; include reviewer, approved scope, thresholds, waiver owner/expiry, rollback criteria, and approval revision before strict blocking."
       - "Optional: set evidence.profile_reference to the caller-selected evidence-chain-profile.v1 path. Do not copy the profile body into project YAML."
       - "Populate CITDP YAML record: start from ./tied/docs/citdp-record-template.yaml (copy methodology layout); fill record identity; change definition (from change-definition); impact analysis (from impact-discovery); risk analysis (from risk-assessment); test strategy (from test-strategy); TDD sequence (from unit-test-red through end-to-end-ui); completion criteria (from verification-gate); LEAP feedback (divergences_from_analysis, tied_stack_updates_required, record_status)."
+      - "When residuality discovery ran, attach risk_analysis.residuality_analysis refs (worksheet_dir, classification_ledger_ref, proof_boundary) per working-folder attach pattern — do not merge full residuality policy into citdp-policy.md in the same batch unless policy already documents attach sections."
       - "Store as tied/citdp/CITDP-{change_request_id}.yaml. Must be the client project root—same repository as the project tied/ tree for this implementation. Do not persist CITDP only under a separate checkout of the TIED methodology repository when the client is another project; optional mirrors elsewhere are policy-specific and do not replace this path. Project-defined absolute path outside tied/ only when policy explicitly requires."
       - "Validate with lint_yaml on that absolute CITDP path (per [PROC-YAML_EDIT_LOOP] in processes.md; raw multi-argument `yq` merges documents—do not use that). CITDP files are outside the standard TIED index/detail paths unless project policy adds tooling for them."
       - "When gate policy is strict-candidate or strict-approved, record pilot evidence (per CALIBRATE_PILOT in pilot.ts) in the CITDP record's completion criteria, including budget-breach count and representative-evidence rationale."
@@ -1263,6 +1265,34 @@ sub_procedures:
     title: "Checklist-local adversarial inquiry pass"
     tracking:
       consideration_before_proceeding: "Report persisted under working/{REQ-TOKEN}/adversarial-inquiry; caller receives summary; blocking only when caller blocking=true, strict-eligible, and error finding unresolved."
+      retry_count: "0"
+      state_history: []
+      status: "pending"
+  - flow:
+      return_to: "caller"
+    goals: "Optional risk-triggered residuality discovery after impact tokens load and before authoring new REQ/ARCH intent; feeds reviewed candidates into change-definition — never replaces REQ/ARCH/IMPL authority."
+    invoked_by:
+      - "impact-discovery"
+    outcomes: "Classification ledger and gap list persisted under working/{CHANGE-ID}/pilot/ or working/{REQ-TOKEN}/residuality/; CITDP attach refs recorded; canonical project YAML unchanged."
+    preconditions:
+      - "Caller eligibility: assurance profiles stateful-reliability and/or data-integrity-migration OR sponsor flag residuality_pass_requested."
+      - "Skip by default when depth_tier minimal unless sponsor flag set."
+    references:
+      - "tied/vocab/residuality.md"
+      - "tied/vocab/fidelity-research.md"
+      - "tied/vocab/quality-assurance.md"
+      - "working/PLAN-TIED-RESIDUALITY-ANALYSIS/w5-promotion/risk_analysis.residuality_analysis.proposed.yaml"
+    slug: "sub-residuality-analysis-pass"
+    tasks:
+      - "PRELOAD tied/vocab/residuality.md, quality-assurance.md, fidelity-research.md; RESOLVE stressor, residue, and proof_boundary terms ([PROC-VOCABULARY_INDEX])."
+      - "Confirm naïve baseline or current ARCH summary exists in working folder or design note."
+      - "Enumerate coherent stressors (20–30 pilot heuristic; fewer allowed with rationale)."
+      - "For each stressor complete five-field worksheet or optional stressor-residue.v1 record; WHEN machine records used CALL stressor_residue_record_validate before attach."
+      - "Build read-only incidence view; classify residues (desirable, harmful, finding, accepted_residual_risk, not_applicable, unresolved) with proof_boundary per row."
+      - "Attach outputs as evidence refs on CITDP risk_analysis.residuality_analysis; route only reviewed desirable/harmful rows into LEAP — never auto-write project YAML from worksheets."
+    title: "Optional residuality discovery pass (stressor-first)"
+    tracking:
+      consideration_before_proceeding: "Discovery artifacts persisted; proof_boundary recorded; no silent project YAML mutation."
       retry_count: "0"
       state_history: []
       status: "pending"

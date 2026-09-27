@@ -1899,6 +1899,22 @@ IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH:
   name: "Request evidence envelope batch collector"
   priority: "P2"
   status: "Completed"
+IMPL-RESIDUALITY_STRESSOR_RECORD_VALIDATION:
+  category: "Implementation"
+  description: "TDD validator module and MCP hook for stressor-residue.v1 records."
+  detail_file: "implementation-decisions/IMPL-RESIDUALITY_STRESSOR_RECORD_VALIDATION.yaml"
+  name: "Residuality stressor-residue validation implementation"
+  priority: "P2"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-RESIDUALITY_STRESSOR_RECORD_VALIDATION"
+    code_annotations:
+      - "IMPL-RESIDUALITY_STRESSOR_RECORD_VALIDATION"
+    requirements:
+      - "REQ-RESIDUALITY_STRESSOR_RECORD_VALIDATION"
+    tests:
+      - "mcp-server/src/residuality/stressor-residue-validate.test.ts"
 IMPL-TIED_ADVERSARIAL_INQUIRY:
   cross_references:
     - "ARCH-TIED_ADVERSARIAL_INQUIRY"

@@ -1812,6 +1812,22 @@ REQ-REQUEST_EVIDENCE_ENVELOPE:
   name: "Request evidence envelope"
   priority: "P1"
   status: "Planned"
+REQ-RESIDUALITY_STRESSOR_RECORD_VALIDATION:
+  category: "Functional"
+  description: "Minimal structural validator for stressor-residue.v1 discovery YAML with MCP hook; discovery-only proof boundary."
+  detail_file: "requirements/REQ-RESIDUALITY_STRESSOR_RECORD_VALIDATION.yaml"
+  name: "Residuality stressor-residue record validation"
+  priority: "P2"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-RESIDUALITY_STRESSOR_RECORD_VALIDATION"
+    code_annotations:
+      - "REQ-RESIDUALITY_STRESSOR_RECORD_VALIDATION"
+    implementation:
+      - "IMPL-RESIDUALITY_STRESSOR_RECORD_VALIDATION"
+    tests:
+      - "mcp-server/src/residuality/stressor-residue-validate.test.ts"
 REQ-TIED_ADVERSARIAL_INQUIRY:
   category: "Functional"
   description: "Provide bounded, read-only obligation mapping and bidirectional fidelity evidence without treating structural presence as semantic or runtime proof."

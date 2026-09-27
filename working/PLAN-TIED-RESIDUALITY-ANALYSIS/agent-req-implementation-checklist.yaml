@@ -116,16 +116,29 @@ w5_refine_batch:
     w5_refine_outcomes: working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/w5-refine-outcomes.md
     pre_implementation_gate: working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/pre_implementation-2026-09-27T06-13-03-814Z.json
   blocked_until: []
-  build_plan_pending: w5-build-plan-promotion
+  build_plan_pending: null
   sponsor_wrap_up: working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/sponsor-wrap-up-2026-09-27.md
 w5_build_batch:
-  active: true
+  active: false
+  completed: 2026-09-27
   prior_batch: w5-refine-minimal-complete
   scope: w5-build-plan-promotion
-  depth_tier: integrated
+  depth_tier: minimal
+  tooling_impl_depth: integrated
   sponsor_resolved: 2026-09-27
   includes_tooling_req: true
   blocked_until: []
+  deliverables:
+    summary: working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/w5-build-plan-summary.md
+    citdp: working/PLAN-TIED-RESIDUALITY-ANALYSIS/CITDP-W5-PROMOTION.yaml
+  tests_green:
+    stressor_residue_validator: 6
+  verification_gate: working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/verification-2026-09-27T06-48-12-549Z.json
+  pre_implementation_gate: working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/pre_implementation-2026-09-27T06-48-19-389Z.json
+  tokens_created:
+    - REQ-RESIDUALITY_STRESSOR_RECORD_VALIDATION
+    - ARCH-RESIDUALITY_STRESSOR_RECORD_VALIDATION
+    - IMPL-RESIDUALITY_STRESSOR_RECORD_VALIDATION
 p1_composition_follow_up:
   active: false
   completed: 2026-09-27
@@ -153,6 +166,15 @@ p1_composition_follow_up:
 plan_close_out:
   sponsor_choice: close_now_after_p1_composition
   envelope_waiver: working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/request-evidence-envelope-waiver.v1.json
+post_w5_close_out:
+  sponsor_resolved: 2026-09-27
+  evidence: working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/sponsor-post-w5-2026-09-27.md
+  blocked_until:
+    - envelope_investigation
+    - citdp_policy_merge
+  commit_style: single_w5_close_out
+  push: sponsor_later
+  pilot_done_after_commit: true
 residuality_pilot_targets:
   - REQ-FEAT_TASK_EXECUTION_RECOVERY
   - REQ-FEAT_IDEMPOTENT_CREATION

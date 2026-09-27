@@ -1,10 +1,12 @@
-# Residuality (provisional)
+# Residuality
 
-**Scope:** Stressor-driven architecture-discovery vocabulary for the TIED Residuality Analysis pilot (`PLAN-TIED-RESIDUALITY-ANALYSIS`). Terms are **provisional** until Wave 0/W5 promotion criteria are met. They do **not** replace REQ/ARCH/IMPL authority.
+**Scope:** Stressor-driven architecture-discovery vocabulary for TIED clients. Pilot reference: `PLAN-TIED-RESIDUALITY-ANALYSIS` (W1–W4 complete; W5 promotion applied 2026-09-27). Terms **do not** replace REQ/ARCH/IMPL authority.
 
-**Status:** Provisional — RECORD for refine-plan / feature-plan authoring. Canonical promotion deferred to pilot exit (see [`docs/tied-residuality-analysis-plan.md`](../../docs/tied-residuality-analysis-plan.md)).
+**Status:** Promoted glossary (W5 build-plan) — VALIDATE at commit per `[PROC-VOCABULARY_INDEX]`. Machine validation: `[REQ-RESIDUALITY_STRESSOR_RECORD_VALIDATION]` / `stressor_residue_record_validate`.
 
-**See also:** [`routing.md`](routing.md) · [`quality-assurance.md`](quality-assurance.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) · [`fidelity-research.md`](fidelity-research.md) · [`../../docs/comparisons/residuality-theory-and-tied.md`](../../docs/comparisons/residuality-theory-and-tied.md)
+**See also:** [`routing.md`](routing.md) · [`quality-assurance.md`](quality-assurance.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) · [`fidelity-research.md`](fidelity-research.md) · [`../../docs/residuality-theory-and-tied-excerpt.md`](../../docs/residuality-theory-and-tied-excerpt.md) · full synthesis (may be gitignored locally) [`../../docs/comparisons/residuality-theory-and-tied.md`](../../docs/comparisons/residuality-theory-and-tied.md)
+
+**Pilot evidence:** `working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/` (25 stressors, classification ledger, W4 tests).
 
 ---
 
@@ -23,7 +25,7 @@
 | **validation stressor** | unfamiliar stressor, holdout stressor | Independent scenario reserved for retesting after redesign; does not prove universal resilience |
 | **stressor-residue claim** | residue assertion | Bounded “After stressor S, property R remains…” claim to be tested — not evidence by itself |
 | **residuality discovery loop** | residue workshop (alone) | Baseline → stressors → residues/attractors → redesign → validation stressors |
-| **stressor-residue record** | residue ledger row | Candidate working artifact (`stressor-residue.v1`) bridging worksheet fields to TIED evidence/disposition |
+| **stressor-residue record** | residue ledger row | Working artifact (`stressor-residue.v1`) bridging worksheet fields to TIED evidence/disposition |
 
 ## Critical contrasts (do not conflate)
 
@@ -40,15 +42,19 @@
 | Concept | Artifact / symbol | Notes |
 |---------|-------------------|-------|
 | Worksheet (minimum) | Stressor, Impact Path, Residue, Business Priority, Design Response | Discovery input only |
-| Candidate schema | `stressor-residue.v1.yaml` | Provisional; not canonical until W5 decision |
-| CITDP hook (proposed) | `risk_analysis.residuality_analysis` | Optional; W5 only |
-| Checklist hook (proposed) | `sub-residuality-analysis-pass` | Optional near `impact-discovery` / `author-architecture` |
-| Composition fault | `CONTROLLED_COMPOSITION_FAULT` | Existing composition-coverage patterns used in W4 |
-| Pilot REQs | `[REQ-FEAT_TASK_EXECUTION_RECOVERY]`, `[REQ-FEAT_IDEMPOTENT_CREATION]` | W1 discovery targets |
+| Machine schema | `stressor-residue.v1` | Example: `working/PLAN-TIED-RESIDUALITY-ANALYSIS/schemas/stressor-residue.v1.example.yaml`; validate via `stressor_residue_record_validate` |
+| CITDP attach field | `risk_analysis.residuality_analysis` | Attach-first pattern; see `working/PLAN-TIED-RESIDUALITY-ANALYSIS/w5-promotion/risk_analysis.residuality_analysis.proposed.yaml` |
+| Checklist hook | `sub-residuality-analysis-pass` | Optional near `impact-discovery` — `[PROC-AGENT_REQ_CHECKLIST]` |
+| Composition fault | `CONTROLLED_COMPOSITION_FAULT` | Existing composition-coverage patterns (W4 pilot) |
+| Tooling REQ | `[REQ-RESIDUALITY_STRESSOR_RECORD_VALIDATION]` | Structural validator only; no runtime resilience proof |
 
 ## Authority boundary
 
 1. Residuality **discovers** cross-cutting properties under stress.
 2. TIED **owns**, formalizes, implements, and proves accepted properties via vocabulary → REQ → ARCH → IMPL → tests → code → quality evidence → LEAP.
 3. Observed residues and attractors remain research/working artifacts until classified and promoted.
-4. Structural presence of an incidence matrix or stressor worksheet never proves runtime resilience.
+4. Structural presence of an incidence matrix, stressor worksheet, or passing `stressor_residue_record_validate` never proves runtime resilience.
+
+## Integration recommendation (pilot exit)
+
+**Adopt (revise):** Optional risk-triggered `sub-residuality-analysis-pass` after impact-discovery when assurance profiles or sponsor flag warrant it. Default recommendation from pilot DoD item 12 — discovery feeds TIED authority; does not replace REQ/ARCH/IMPL or TDD/composition gates.

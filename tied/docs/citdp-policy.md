@@ -108,6 +108,22 @@ or malformed activation is rejected when supplied. Verification and close-out
 gates still require paired inquiry evidence. See
 `docs/adversarial-inquiry-adoption.md` § Depth upgrade path.
 
+## Residuality analysis attach pattern (optional)
+
+When a behavior-changing or analysis CITDP record used the residuality pilot workflow, attach discovery artifacts under `working/{change_id}/pilot/` — do **not** treat worksheets or an incidence matrix as canonical REQ/ARCH/IMPL.
+
+Populate optional `risk_analysis.residuality_analysis` on the **working** CITDP YAML (or persisted record when the team promotes the pattern):
+
+- `applied`: `true`, `false`, or `not_applicable`
+- `baseline_ref`, `worksheet_dir`, `incidence_matrix_ref`, `classification_ledger_ref`, `validation_stressor_set_ref`, `gap_list_ref`, `limitations_ref` — paths relative to repository root
+- `pilot_req_tokens`: read-only analysis targets (product REQ tokens), when applicable
+- `dispositions_summary`: counts from W2 classification (discovery only until reviewed LEAP)
+- `proof_boundary`: discovery aids runtime claims only when backed by tests and verified stack rows
+
+Working-folder change IDs may use **`PLAN-*`** (methodology/analysis plans) or **`REQ-*`** (product change requests). Request-evidence envelope tools accept both prefixes when the matching folder exists under `working/`.
+
+Normative methodology: `docs/tied-residuality-analysis-plan.md`. Machine validation of optional stressor records: `[REQ-RESIDUALITY_STRESSOR_RECORD_VALIDATION]` / MCP `stressor_residue_record_validate`.
+
 ## Middle ground
 
 For small but real behavior changes, some teams still want a **short** CITDP record (minimal fields) rather than skipping entirely. That is valid if your validators and reviewers agree.

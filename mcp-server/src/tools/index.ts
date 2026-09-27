@@ -62,6 +62,7 @@ import { runScopedAnalysis } from "../analysis/scoped-analysis.js";
 import { runVocabularyExplorer } from "../vocabulary-explorer/pipeline.js";
 import { runPlumbDiffImpactPreview } from "../analysis/plumb-diff-impact-preview.js";
 import { validateBindingInventory } from "../analysis/binding-inventory.js";
+import { validateStressorResidueRecord } from "../residuality/stressor-residue-validate.js";
 import { validateEssencePseudocode } from "../analysis/pseudocode-validator.js";
 import { analyzeEssencePseudocode } from "../analysis/pseudocode-analyzer.js";
 import { buildClosureJoinReportAsync } from "../analysis/closure-join-report.js";
@@ -2608,6 +2609,20 @@ export const allTools = [
       return textContent(
         JSON.stringify(validateBindingInventory(args.rows as Parameters<typeof validateBindingInventory>[0]), null, 2),
       );
+    },
+  },
+  {
+    name: "stressor_residue_record_validate",
+    config: {
+      description:
+        "Validate stressor-residue.v1 YAML discovery records for required fields, enums, and proof_boundary. Structural check only; does not prove runtime resilience or promote residues to REQ authority.",
+      inputSchema: z.object({
+        record: z.record(z.unknown()).optional(),
+        yaml_text: z.string().optional(),
+      }),
+    },
+    handler: async (args: { record?: Record<string, unknown>; yaml_text?: string }) => {
+      return textContent(JSON.stringify(validateStressorResidueRecord(args), null, 2));
     },
   },
   {

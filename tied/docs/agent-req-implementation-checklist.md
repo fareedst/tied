@@ -270,6 +270,7 @@ This section is **optional guidance** only. Checklist order and gating are uncha
    - ELSE set **`async_in_scope: false`**.
    - This is a **candidate trigger marker only** — it is **not** inquiry activation, does **not** call `tied_adversarial_inquiry_run`, and does **not** wire CITDP MCP trigger automation (W3). Never set `async_inquiry_activated: true` from `async_in_scope` alone.
    - PRELOAD `tied/vocab/async-methodology.md` when `async_in_scope: true`.
+8. **Optional residuality discovery:** IF assurance profiles include `stateful-reliability` or `data-integrity-migration` OR sponsor flag `residuality_pass_requested` THEN **CALL sub-residuality-analysis-pass** before `author-requirement`; skip when `depth_tier` is `minimal` unless sponsor flag is set. Attach outputs to CITDP `risk_analysis.residuality_analysis` only — never auto-write project YAML from worksheets.
 
 **Outcomes**: Complete impact map; vocabulary term map loaded (PRELOAD) for affected subsystems; risk/profile selection and an initial quality evidence matrix exist before REQ/ARCH/IMPL design; bounded scenarios and applicable abuse cases are recorded; IMPL inventory table ready; all affected and related tokens identified; **`async_in_scope` and matched semantic classes recorded on Tracker when async is detected**.
 
@@ -997,6 +998,30 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 **RETURN** to calling step.
 
 **Reference**: `tied/vocab/fidelity-research.md`; `tied/vocab/quality-assurance.md`; `mcp-server/src/adversarial-inquiry/checklist-integration.ts`; `tied/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST-pseudocode.md`.
+
+---
+
+### sub-residuality-analysis-pass (sub-residuality-analysis-pass): Optional residuality discovery pass
+
+**Invoked by**: `impact-discovery` (optional, risk-triggered).
+
+**Goals**: Optional stressor-first discovery after impact tokens load and before authoring new REQ/ARCH intent; feeds reviewed candidates into change-definition — never replaces REQ/ARCH/IMPL authority.
+
+**Preconditions**: Assurance profiles `stateful-reliability` and/or `data-integrity-migration` OR sponsor flag `residuality_pass_requested`. Skip by default when `depth_tier` is `minimal` unless sponsor flag is set.
+
+**Tasks**:
+1. PRELOAD `tied/vocab/residuality.md`, `quality-assurance.md`, `fidelity-research.md`; RESOLVE stressor, residue, and proof_boundary terms (`[PROC-VOCABULARY_INDEX]`).
+2. Confirm naïve baseline or current ARCH summary exists (working folder or design note).
+3. Enumerate coherent stressors (20–30 pilot heuristic; fewer allowed with rationale).
+4. For each stressor complete five-field worksheet or optional `stressor-residue.v1` record; when machine records are used, CALL `stressor_residue_record_validate` before attach.
+5. Build read-only incidence view; classify residues with **proof_boundary** per row.
+6. Attach outputs as evidence refs on CITDP `risk_analysis.residuality_analysis`; route only reviewed desirable/harmful rows into LEAP — never auto-write project YAML from worksheets.
+
+**Outcomes**: Classification ledger and gap list under `working/{CHANGE-ID}/pilot/` or `working/{REQ-TOKEN}/residuality/`; canonical project YAML unchanged.
+
+**RETURN** to calling step.
+
+**Reference**: `tied/vocab/residuality.md`; `working/PLAN-TIED-RESIDUALITY-ANALYSIS/w5-promotion/risk_analysis.residuality_analysis.proposed.yaml` (attach pattern).
 
 ---
 

@@ -1,0 +1,15 @@
+{
+  "allowed": true,
+  "ok": true,
+  "blocking": false,
+  "depth": "minimal",
+  "phase": "verification",
+  "diagnostics": [],
+  "hydration_diagnostics": [
+    "hydration_envelope_gaps_missing"
+  ],
+  "gate_receipt": {
+    "path": "working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/verification-2026-09-27T06-48-19-702Z.json",
+    "hash": "sha256:f42eb94e8ff4abe2dd68dcc3b86058983f043b976ccab5c50422c0002585eb76"
+  }
+}

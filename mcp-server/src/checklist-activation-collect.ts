@@ -14,6 +14,7 @@ import {
   type ActivationExpectedIdentity,
 } from "./checklist-validator.js";
 import { getClientProjectRoot } from "./yaml-loader.js";
+import { isValidWorkingRequestToken } from "./working-request-token.js";
 
 const ARTIFACT_NAMES = [
   "obligation-report.json",
@@ -21,8 +22,6 @@ const ARTIFACT_NAMES = [
   "gate-result.json",
   "evidence-provenance.json",
 ] as const;
-
-const REQUEST_TOKEN_RE = /^REQ-[A-Z0-9][A-Z0-9_-]*$/u;
 
 export type CollectChecklistActivationInput = {
   requestToken: string;
@@ -113,7 +112,7 @@ export async function collectChecklistActivation(
   const runId = input.runId.trim();
   const phase = input.phase;
 
-  if (!REQUEST_TOKEN_RE.test(requestToken)) {
+  if (!isValidWorkingRequestToken(requestToken)) {
     return { ok: false, diagnostics: ["invalid_request_token"] };
   }
   if (!runId) {

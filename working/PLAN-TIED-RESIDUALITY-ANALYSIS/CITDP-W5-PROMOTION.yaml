@@ -29,9 +29,9 @@ CITDP-W5-PROMOTION:
     parent_change_id: PLAN-TIED-RESIDUALITY-ANALYSIS
     created_at: "2026-09-27"
     updated_at: "2026-09-27"
-    status: open
-    title: "Refine-plan W5: Promotion planning (PLAN-TIED-RESIDUALITY-ANALYSIS)"
-    batch_note: Planning only — canonical promotion deferred to build-plan W5 after sponsor SD-W5-* decisions.
+    status: closed
+    title: "W5 promotion — PLAN-TIED-RESIDUALITY-ANALYSIS (refine + build)"
+    batch_note: Refine planning complete; build-plan W5 promoted checklist/vocab/tooling per sponsor-wrap-up-2026-09-27.md.
   impact_analysis:
     architecture: []
     documentation:
@@ -51,8 +51,8 @@ CITDP-W5-PROMOTION:
       gate_policy: advisory
       profile_depth: minimal
       assurance_profile: baseline-functional
-      rationale: W5 refine is documentation and working-folder proposals only; no behavior change.
-      inquiry_run_id: not_applicable-w5-refine-minimal
+      rationale: W5 build promotes process hooks and bounded MCP validator; gate at minimal with pilot integrated waiver per Batch C policy.
+      inquiry_run_id: not_applicable-w5-build-minimal
       depth_change_waiver:
         owner: PLAN-TIED-RESIDUALITY-ANALYSIS sponsor
         expiry: "2026-12-31"
@@ -72,8 +72,21 @@ CITDP-W5-PROMOTION:
         - working/PLAN-TIED-RESIDUALITY-ANALYSIS/w5-promotion/w5-promotion-decisions.md
         - docs/tied-residuality-analysis-plan.md
     residuality_analysis:
-      status: w5_promotion_planning
+      status: w5_build_applied
       recommendation: adopt_revise
+      attach_pattern: working/PLAN-TIED-RESIDUALITY-ANALYSIS/w5-promotion/risk_analysis.residuality_analysis.proposed.yaml
+      example_attach_snippet: |
+        # Attach-first — copy under risk_analysis.residuality_analysis in behavior-changing CITDP records.
+        # Do not merge full block into tied/docs/citdp-policy.md until policy phase 2.
+        applied: true
+        pilot_change_id: PLAN-TIED-RESIDUALITY-ANALYSIS
+        classification_ledger_ref: working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.jsonl
+        proof_boundary: Discovery aid only; runtime claims require executable evidence.
+      validator_tool: stressor_residue_record_validate
+      tooling_tokens:
+        - REQ-RESIDUALITY_STRESSOR_RECORD_VALIDATION
+        - ARCH-RESIDUALITY_STRESSOR_RECORD_VALIDATION
+        - IMPL-RESIDUALITY_STRESSOR_RECORD_VALIDATION
       dod_assessment_ref: working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/pilot-dod-checklist.md
       promotion_menu_ref: working/PLAN-TIED-RESIDUALITY-ANALYSIS/w5-promotion/w5-promotion-decisions.md
       proof_boundary: Discovery aid only; canonical hooks must preserve REQ/ARCH/IMPL authority.
@@ -89,7 +102,8 @@ CITDP-W5-PROMOTION:
       - w5-promotion/w5-promotion-decisions.md
   completion_criteria:
     activation:
-      run_id: refine-plan-w5-pre-impl-2026-09-27
+      run_id: w5-build-minimal-2026-09-27
       phase: pre_implementation
       request_token: PLAN-TIED-RESIDUALITY-ANALYSIS
-    build_plan_deferred: w5-build-plan-promotion
+    build_plan_completed: w5-build-plan-promotion
+    build_summary_ref: working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/w5-build-plan-summary.md

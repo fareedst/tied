@@ -1,0 +1,28 @@
+ARCH-RESIDUALITY_STRESSOR_RECORD_VALIDATION:
+  category: "Architecture"
+  cross_references:
+    - "IMPL-RESIDUALITY_STRESSOR_RECORD_VALIDATION"
+    - "REQ-RESIDUALITY_STRESSOR_RECORD_VALIDATION"
+  decision: "Expose stressor_residue_record_validate accepting inline record or yaml_text; emit diagnostics with proof_boundary fixed to discovery-only; never write project YAML from validation."
+  description: "Deliver stressor-residue-validator.v1 reports from a pure TypeScript module under mcp-server/src/residuality with an MCP wrapper mirroring binding_inventory_validate."
+  implementation_approach:
+    details:
+      - "Proof boundary string is constant on all reports"
+      - "tied_refs pattern matches REQ-|ARCH-|IMPL- tokens"
+    key_components:
+      - "stressor-residue-validate.ts"
+      - "stressor_residue_record_validate MCP tool"
+    summary: "Register MCP tool; validate enums and required nested fields per stressor-residue.v1 pilot example."
+  name: "Residuality stressor-residue validation architecture"
+  priority: "P2"
+  rationale:
+    benefits:
+      - "Clear separation from REQ/ARCH promotion"
+      - "Composable validator for CLI and MCP"
+    problems_solved:
+      - "Ad-hoc YAML review for stressor-residue records"
+      - "Ambiguous proof boundaries on discovery artifacts"
+    why: "Attach-first CITDP residuality_analysis fields need a stable structural gate separate from runtime W4 tests."
+  related_requirements:
+    - "REQ-RESIDUALITY_STRESSOR_RECORD_VALIDATION"
+  status: "Accepted"

@@ -19,7 +19,7 @@
 | 9 | Validation stressor set or N/A rationale | **Met** | `pilot/validation-stressors.md`, `mcp-server/src/feature-orchestration/w4-residuality-pilot.composition.test.ts` (V-H01..V-H03) | Holdouts distinct from design set; overlap disclosed |
 | 10 | Executable or qualified evidence + proof boundaries | **Partial** | `evidence/w4-build-plan-summary.md`, `evidence/w4-exit-handoff.md`, `gates/verification-2026-09-27T06-08-27-103Z.json` | **27** W4 tests green; **S-T13** module-local split-claim only; **V-H01** post-create storm (not simultaneous lock contention); **PLAN-*** machine close-out still deferred (`request-evidence-envelope-waiver.v1.json` pattern) |
 | 11 | Unresolved theory / accepted-risk log | **Met** | `pilot/limitations.md`, comparison doc (gitignored — see caveat) | Theory provenance open; W1 agent-draft review note; S-O03 accepted residual risk |
-| 12 | Recommendation adopt / revise / defer / reject | **Met (W5 refine)** | `evidence/w5-refine-outcomes.md`, `working/w5-promotion/w5-promotion-decisions.md` | Default stance: **Adopt (revise)** — see W5 refine outcomes |
+| 12 | Recommendation adopt / revise / defer / reject | **Met (W5 build)** | `docs/tied-residuality-analysis-plan.md` §10, `tied/vocab/residuality.md`, `evidence/w5-build-plan-summary.md` | **Adopt (revise)** — optional risk-triggered `sub-residuality-analysis-pass`; discovery feeds TIED authority; promoted in build-plan W5 (2026-09-27) |
 
 ### External caveats (not DoD failures)
 
