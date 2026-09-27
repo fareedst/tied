@@ -1031,7 +1031,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 
 ### sub-bbce-advisory-verification-pass (sub-bbce-advisory-verification-pass): Optional BBCE advisory bundle at verification (Mechanism D)
 
-**Invoked by**: `verification-gate` when per-request Tracker **`bbce_advisory_enforced: true`** (default skip when absent or false); may nest from `sub-shared-code-change-justification-pass` when B triggers fire mid-cycle (W3 behavior unchanged).
+**Invoked by**: `verification-gate` when per-request Tracker **`bbce_advisory_enforced: true`** (STDD **rule B**: default **true** when the change adds a new `[REQ-*]` or any `[ARCH-*]` detail update; default **false** for existing-REQ bug fixes with no ARCH changes — set **true** manually if the diff is large; skip when false); may nest from `sub-shared-code-change-justification-pass` when B triggers fire mid-cycle (W3 behavior unchanged).
 
 **Goals**: When sponsor opts in, run declared-surface validate, locality compare, Mechanism B pass, and Mechanism C boundary report as **review-gated evidence** — never replaces verification-gate, composition tests, or REQ satisfaction.
 

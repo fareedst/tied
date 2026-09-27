@@ -595,7 +595,7 @@ steps:
     tasks:
       - "Deliverable production code and automated tests are out of scope for this step; output is the written change definition (current, desired, unchanged, non-goals, success criteria) only."
       - "Optional BBCE (Mechanism A, W2+ advisory): when sponsor requests change-locality discipline, record on the per-request Tracker optional field declared_change_surface (inline object or path ref) with behavior, owning_slice_req, expected_path_globs, public_behavioral_boundary, expected_tests, anticipated_shared_deps — schema bbce-declared-change-surface.v1; example tied/analysis/examples/declared-change-surface.v1.example.yaml. Advisory only — not a checklist hard blocker (W4 promotion)."
-      - "Optional BBCE (Mechanism D, W4+ advisory): per-request Tracker optional boolean bbce_advisory_enforced (default false). When true at verification-gate, CALL sub-bbce-advisory-verification-pass; still advisory unless separate REQ + strict gate policy."
+      - "Optional BBCE (Mechanism D, W4+ advisory): per-request Tracker optional boolean bbce_advisory_enforced. STDD repo convention (sponsor 2026-09-27, rule B): default true when the change adds a new [REQ-*] or creates/updates any [ARCH-*] detail; default false for existing-REQ bug fixes with no new REQ and no ARCH detail changes (set true manually when diff footprint is large). When true at verification-gate, CALL sub-bbce-advisory-verification-pass; still advisory unless separate REQ + strict gate policy."
       - "State current behavior (or \"none\" for a new requirement)."
       - "State desired behavior."
       - "State explicit counterexamples and falsification questions for the success criteria; treat non-goals as negative scope for adversarial review."
@@ -1544,7 +1544,7 @@ sub_procedures:
       - "verification-gate"
     outcomes: "bbce-locality-event.v1 optional JSONL; bbce-shared-code-justification.v1 and bbce-boundary-violation.v1 under working/{CHANGE-ID}/; CITDP risk_analysis.bbce_alignment refs updated; human review pending; no auto verification-gate block at advisory policy."
     preconditions:
-      - "Per-request Tracker bbce_advisory_enforced is true (default skip when false or absent)."
+      - "Per-request Tracker bbce_advisory_enforced is true (STDD rule B: default true when new REQ or ARCH detail in scope; otherwise default false unless explicitly true; skip bundle when false)."
       - "slice_map_ref and declared_change_surface (Tracker and/or CITDP declared_change_surface_ref); changed_paths or git diff available."
     references:
       - "docs/plumb-audit-gate.md"

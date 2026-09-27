@@ -276,13 +276,14 @@ risk_analysis:
 
 **Adopt (revise)** — optional BBCE advisory bundle at verification when `bbce_advisory_enforced: true`; proof boundary unchanged (locality/B/C records ≠ REQ satisfaction).
 
-**Program status (2026-09-27):** W0–W4 **executed** (uncommitted). Post-program linked-plan sync: `working/PLAN-TIED-BBCE-ALIGNMENT/evidence/refine-plan-program-sync-2026-09-27.md`.
+**Program status (2026-09-27):** W0–W4 **executed** and **committed** (`21ff5d4`); plan-close-out complete with advisory `close_out` allowed and envelope waiver (`evidence/close-out-gates-2026-09-27.json`). Latest linked-plan reconcile: `working/PLAN-TIED-BBCE-ALIGNMENT/evidence/refine-plan-bbce-reconciliation-2026-09-27.md`.
 
-**Sponsor actions:**
+**Sponsor actions (post-close-out):**
 
-1. **`traceable-commit`** — full W0–W4 program (not Batch A only): docs, vocab, `mcp-server` analysis modules, checklist advisory merge, working CITDP/evidence; exclude gitignored `docs/comparisons/`; run `tied_validate_consistency` + vocab VALIDATE at commit.
-2. **Optional `/plan-close-out`** — machine request-evidence envelope when sponsor ends advisory waiver pattern; `gate-tracker-close-out.yaml` remains deferred until then.
-3. **Future backlog (separate authorization):** strict enforcement REQ, MCP B/C wrapper, Jev/agent context locality, esbuild tests in default npm test, canonical `tied/citdp/` promote, strict CI on locality.
+1. **Push** `main` when ready (ahead of origin); no pending program commit.
+2. **Future backlog (separate authorization):** draft **REQ for optional BBCE strict enforcement** (blocking locality/CI — sponsor backlog 2026-09-27); MCP B/C wrapper; Jev/agent context locality; esbuild tests in default npm test; strict CI on locality.
+3. **Advisory bundle (approved, rule B):** Default **`bbce_advisory_enforced: true`** when the change adds a new REQ or updates any ARCH detail; default **`false`** for existing-REQ bug fixes with no ARCH changes. Canonical attach: `tied/citdp/CITDP-PLAN-TIED-BBCE-ALIGNMENT.yaml`. ARCH help: template + `tied/docs/arch-bbce-slice-ownership-guide.md`.
+4. **Git:** Sponsor held push (2026-09-27) until evidence paths reviewed; then push when ready.
 
 **Do not:** treat advisory hooks as blocking gates; mandate vertical-slice folders; commit gitignored full comparison synthesis without sponsor intent.
 
@@ -298,4 +299,4 @@ risk_analysis:
 - [x] Working CITDP updated; gate receipts for verification (+ close_out at minimal)
 - [x] `tied_validate_consistency` pass (record in build-plan handoff)
 
-**Machine PLAN close-out:** Deferred — verification gate only for doc batch; full envelope validate awaits sponsor close-out workflow if required.
+**Machine PLAN close-out:** Completed 2026-09-27 — `gate-tracker-close-out.yaml`; envelope validate waived per `evidence/request-evidence-envelope-waiver.v1.json` (PLAN-* schema class).
