@@ -121,6 +121,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- **Operator `test-all` (`scripts/build-commands.sh`)** — Run the fail-closed gate in a subshell
+  so `set -e` no longer exits the interactive shell that sourced `build-commands.sh`; same
+  pattern for `new-tied-client` / `test-new-tied-client` bootstrap helper.
+
 - **Bun workspace build recursion ([REQ-TIED_UNIFIED_TOOLCHAIN])** — Root `mcp-server` `build`
   used nested `npm run build --workspaces --if-present`, which Bun re-entered with appended flags
   and looped under `build-all`. Use `bun run --workspaces --if-present build` so workspace

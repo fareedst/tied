@@ -165,20 +165,27 @@ test_bootstrap_claude_harness() {
 alias test-bootstrap-claude-harness=test_bootstrap_claude_harness
 
 test_all() {
-  set -euo pipefail
-  echo "DEBUG: test-all step 1/6: build_mcp"
-  build_mcp
-  echo "DEBUG: test-all step 2/6: test_mcp"
-  test_mcp
-  echo "DEBUG: test-all step 3/6: test_tied_cli_smoke"
-  test_tied_cli_smoke
-  echo "DEBUG: test-all step 4/6: validate_tied"
-  validate_tied
-  echo "DEBUG: test-all step 5/6: validate_vocab"
-  validate_vocab
-  echo "DEBUG: test-all step 6/6: lint_tied"
-  lint_tied
-  echo "DEBUG: test-all completed successfully"
+  local rc=0
+  (
+    set -euo pipefail
+    echo "DEBUG: test-all step 1/6: build_mcp"
+    build_mcp
+    echo "DEBUG: test-all step 2/6: test_mcp"
+    test_mcp
+    echo "DEBUG: test-all step 3/6: test_tied_cli_smoke"
+    test_tied_cli_smoke
+    echo "DEBUG: test-all step 4/6: validate_tied"
+    validate_tied
+    echo "DEBUG: test-all step 5/6: validate_vocab"
+    validate_vocab
+    echo "DEBUG: test-all step 6/6: lint_tied"
+    lint_tied
+    echo "DEBUG: test-all completed successfully"
+  ) || rc=$?
+  if (( rc != 0 )); then
+    echo "DEBUG: test-all failed (exit ${rc})" >&2
+  fi
+  return "$rc"
 }
 alias test-all=test_all
 
@@ -247,22 +254,26 @@ _run_new_client_onboarding_audit() {
 _new_tied_test_client() {
   local client_dir="$1"
   local source_root="$2"
+  local rc=0
 
-  set -euo pipefail
-  mkdir -p -- "$(dirname -- "$client_dir")"
-  cd -- "$client_dir"
-  "${source_root}/copy_files.sh"
-  "${source_root}/scripts/lint_yaml.sh" -F tied
-  _run_new_client_onboarding_audit "$source_root" "$client_dir"
-  agent mcp enable tied-yaml
-  git init
-  git add .
-  local _baseline_msg
-  _baseline_msg="$(
-    cd -- "${source_root}" && node --input-type=module -e \
-      "import { tiedBaselineCommitMessage } from './tools/bootstrap/lib/tied-baseline-commit-message.mjs'; console.log(tiedBaselineCommitMessage());"
-  )"
-  git commit -m "${_baseline_msg:-TIED 3.0.0}"
+  (
+    set -euo pipefail
+    mkdir -p -- "$(dirname -- "$client_dir")"
+    cd -- "$client_dir"
+    "${source_root}/copy_files.sh"
+    "${source_root}/scripts/lint_yaml.sh" -F tied
+    _run_new_client_onboarding_audit "$source_root" "$client_dir"
+    agent mcp enable tied-yaml
+    git init
+    git add .
+    local _baseline_msg
+    _baseline_msg="$(
+      cd -- "${source_root}" && node --input-type=module -e \
+        "import { tiedBaselineCommitMessage } from './tools/bootstrap/lib/tied-baseline-commit-message.mjs'; console.log(tiedBaselineCommitMessage());"
+    )"
+    git commit -m "${_baseline_msg:-TIED 3.0.0}"
+  ) || rc=$?
+  return "$rc"
 }
 
 new_tied_client() {
@@ -461,7 +472,8 @@ _how_test() {
   cat <<'EOF'
 Test / verify
   test-all                   fail-closed: build-mcp, test-mcp, CLI smoke, validate-tied,
-                             validate-vocab, lint-tied (recommended pre-push)
+                             validate-vocab, lint-tied (recommended pre-push); errexit
+                             isolated in a subshell (safe after source build-commands.sh)
   test-mcp                   mcp-server unit/composition tests (includes Tier 1 workspace dist tests)
   test-agentstream           @tied/agentstream package tests (frozen oracle fixtures)
   verify-agentstream-parity  bun build + @tied/agentstream test (TS parity vs frozen oracle)
