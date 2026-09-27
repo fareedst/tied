@@ -1,0 +1,10 @@
+{"prompt":"Update tied agentstream MCP preflight for a feature batch","keyword_glossaries":["agentstream"],"jev_glossaries":["agentstream"],"confidence":0.93,"jev_skipped":false,"agrees":true}
+{"prompt":"Write CITDP record and run gate_mode pseudocode validation","keyword_glossaries":["tied-yaml-mcp","pseudocode-and-citdp"],"jev_glossaries":["pseudocode-and-citdp","quality-assurance"],"confidence":0.99,"jev_skipped":false,"agrees":false}
+{"prompt":"LEAP proposal queue pending approved rejected","keyword_glossaries":[],"jev_glossaries":["leap-proposal-queue"],"confidence":1,"jev_skipped":false,"agrees":false}
+{"prompt":"Adversarial inquiry integrated activation evidence gate","keyword_glossaries":["fidelity-research"],"jev_glossaries":["fidelity-research"],"confidence":1,"jev_skipped":false,"agrees":true}
+{"prompt":"Configure TIED_BASE_PATH and tied-cli yaml_format","keyword_glossaries":["tied-methodology","tied-yaml-mcp"],"jev_glossaries":["tied-yaml-mcp"],"confidence":0.99,"jev_skipped":false,"agrees":true}
+{"prompt":"Jev System One shadow routing decision coprocessor","keyword_glossaries":["decision-copilot"],"jev_glossaries":["decision-copilot"],"confidence":1,"jev_skipped":false,"agrees":true}
+{"prompt":"Feature manifest task graph FEAT orchestration CLI","keyword_glossaries":["feature-orchestration"],"jev_glossaries":["feature-orchestration"],"confidence":1,"jev_skipped":false,"agrees":true}
+{"prompt":"Async await IPC event listener composition test","keyword_glossaries":["async-methodology"],"jev_glossaries":["async-methodology","quality-assurance"],"confidence":1,"jev_skipped":false,"agrees":false}
+{"prompt":"Quality assurance evidence chain profile depth tier","keyword_glossaries":["quality-assurance"],"jev_glossaries":["quality-assurance"],"confidence":1,"jev_skipped":false,"agrees":true}
+{"prompt":"Refine plan build-plan prompt-type router skill","keyword_glossaries":["prompt-composer"],"jev_glossaries":["prompt-composer"],"confidence":1,"jev_skipped":false,"agrees":true}

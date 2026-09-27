@@ -11,6 +11,7 @@ import {
 } from "./claude-driver.js";
 import type { AgentHarnessProfile } from "./harness-select.js";
 import { runAgent, type RunResult } from "./executor-run.js";
+import type { JevLiveToolGate } from "./jev-harness-live-tool-gate.js";
 import { selectLiveDriver } from "./live-driver-select.js";
 
 export type LiveAgentTurnOutcome = {
@@ -18,6 +19,7 @@ export type LiveAgentTurnOutcome = {
   exitCode: number;
   driverError?: string;
   stderrTail?: string;
+  jevGateStderr?: string;
 };
 
 export type LiveDriverBinding = {
@@ -33,6 +35,7 @@ export type BindLiveExecutorInput = {
   agentPath: string;
   claudeLaunchFn?: ClaudeLaunchFn;
   claudeLaunchFnIsTestDouble?: boolean;
+  jevToolGate?: JevLiveToolGate | null;
 };
 
 /** [BIND_LIVE_EXECUTOR_CLAUDE] Bind harness profile to Cursor or Claude live driver. */
@@ -100,8 +103,10 @@ export function bindLiveExecutorDriver(
     runTurn: async (argv, extraEnv) => {
       const effectiveArgv =
         agentPathOverride !== "" ? [agentPathOverride, ...argv.slice(1)] : argv;
-      const { result, exitCode } = await runAgent(effectiveArgv, extraEnv);
-      return { result, exitCode };
+      const { result, exitCode, gateStderr } = await runAgent(effectiveArgv, extraEnv, {
+        jevToolGate: input.jevToolGate ?? null,
+      });
+      return { result, exitCode, jevGateStderr: gateStderr };
     },
   };
 }

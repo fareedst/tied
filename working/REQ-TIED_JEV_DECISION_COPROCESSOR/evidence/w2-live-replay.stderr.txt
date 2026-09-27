@@ -1,0 +1,46 @@
+DIAGNOSTIC: replay summary {
+  "total": 10,
+  "jev_invoked": 10,
+  "agreement_rate": 0.7,
+  "disagreements": [
+    {
+      "prompt": "Write CITDP record and run gate_mode pseudocode validation",
+      "keyword_glossaries": [
+        "tied-yaml-mcp",
+        "pseudocode-and-citdp"
+      ],
+      "jev_glossaries": [
+        "pseudocode-and-citdp",
+        "quality-assurance"
+      ],
+      "confidence": 0.99,
+      "jev_skipped": false,
+      "agrees": false
+    },
+    {
+      "prompt": "LEAP proposal queue pending approved rejected",
+      "keyword_glossaries": [],
+      "jev_glossaries": [
+        "leap-proposal-queue"
+      ],
+      "confidence": 1,
+      "jev_skipped": false,
+      "agrees": false
+    },
+    {
+      "prompt": "Async await IPC event listener composition test",
+      "keyword_glossaries": [
+        "async-methodology"
+      ],
+      "jev_glossaries": [
+        "async-methodology",
+        "quality-assurance"
+      ],
+      "confidence": 1,
+      "jev_skipped": false,
+      "agrees": false
+    }
+  ],
+  "live": true,
+  "fixturesPath": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_DECISION_COPROCESSOR/fixtures/vocab-shadow-prompts.jsonl"
+}

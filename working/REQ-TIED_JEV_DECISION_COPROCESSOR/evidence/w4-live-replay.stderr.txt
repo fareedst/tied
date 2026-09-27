@@ -1,0 +1,6 @@
+DIAGNOSTIC: W4 pilot report written to ../working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/adversarial-triage-pilot-report-live.v1.json
+DIAGNOSTIC: summary {
+  "jev_invoked": true,
+  "agreement_rate": 0.8333333333333334,
+  "live": true
+}

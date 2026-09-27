@@ -104,3 +104,13 @@ Grammar-Version: v2
 - procedure RUN_JEV_HARNESS_PREFLIGHT(cfg):
   - CONTROL: compose after tiedpreflight and DAE gate; does not replace checklist gates
   - OUTPUT: stderr DEBUG/DIAGNOSTIC lines; exitCode 0 (non-blocking preflight)
+
+## RUN_JEV_LIVE_TOOL_GATE
+
+- [IMPL-TIED_JEV_DECISION_COPROCESSOR] [ARCH-TIED_JEV_DECISION_COPROCESSOR] [REQ-TIED_JEV_DECISION_COPROCESSOR] How: W5 residual — parse stream-json tool proposals in live executor; CALL EVALUATE_HARNESS_TOOL_CALL before turn proceeds; SIGTERM agent subprocess on block.
+- procedure RUN_JEV_LIVE_TOOL_GATE(stream_line, cfg, gate):
+  - PRE: jev harness enabled OR no-op
+  - PRE: parseToolProposalFromStreamObject OR continue
+  - EFFECTS: evaluateHarnessToolCall for blocking tools only (guard internal)
+  - POST: block → abort turn exit 1 + DIAGNOSTIC; confirm/allow → stderr advisory only
+  - FAILURE_MODES: dist/jev missing → gate null (preflight diagnostic only); never bypass checklist gates

@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **Jev decision coprocessor ([REQ-TIED_JEV_DECISION_COPROCESSOR])** — W0–W5 core: server-side Jev `/v1/decide` client, shadow vocab PRELOAD, prompt-type advisory, adversarial triage pilot, opt-in `@tied/agentstream` harness preflight and tool guard. Close-out: [close-out-gates-2026-09-26.json](working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/close-out-gates-2026-09-26.json) `allowed: true`; per-turn Shell middleware documented as residual.
+- **Jev decision coprocessor ([REQ-TIED_JEV_DECISION_COPROCESSOR])** — W0–W5 core: server-side Jev `/v1/decide` client, shadow vocab PRELOAD, prompt-type advisory, adversarial triage pilot, opt-in `@tied/agentstream` harness preflight and tool guard. Program close-out: [close-out-gates-2026-09-26.json](working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/close-out-gates-2026-09-26.json) `allowed: true`.
+- **Jev W5 live tool gate (git-hygiene follow-on)** — Per-turn `evaluateStreamToolProposal` in the `@tied/agentstream` live loop; `jev-harness-live-tool-gate` tests; live calibration evidence under `working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/` ([git-hygiene-receipt-2026-09-26.md](working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/git-hygiene-receipt-2026-09-26.md), run-id `jev-w5-middleware-git-hygiene-2026-09-26`). REQ/CITDP status unchanged.
 
 ### Changed
 

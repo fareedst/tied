@@ -4,12 +4,15 @@
  */
 import fs from "node:fs";
 import path from "node:path";
-import { pathToFileURL } from "node:url";
-
-import yaml from "js-yaml";
 
 import type { DryRunConfig } from "./dry-run-config.js";
 import { findRepoRootFromPath } from "./repo-root.js";
+import {
+  loadJevHarnessDistModule,
+  manifestEnablesJevHarness,
+  resolveProjectRootForJev,
+  taskSummaryFromCfg,
+} from "./jev-harness-shared.js";
 
 export type HarnessToolEvaluation = {
   decision: string;
@@ -25,29 +28,6 @@ export type JevHarnessLiveDeps = {
   evaluateSampleTool?: () => Promise<HarnessToolEvaluation>;
   adviseSampleContext?: () => Promise<ContextFilterAdvisory>;
 };
-
-function isRecord(v: unknown): v is Record<string, unknown> {
-  return typeof v === "object" && v !== null && !Array.isArray(v);
-}
-
-function readRepoTiedYaml(projectRoot: string): Record<string, unknown> | undefined {
-  const configPath = path.join(projectRoot, ".tied-yaml.yaml");
-  if (!fs.existsSync(configPath)) {
-    return undefined;
-  }
-  try {
-    const raw = yaml.load(fs.readFileSync(configPath, "utf8"));
-    return isRecord(raw) ? raw : undefined;
-  } catch {
-    return undefined;
-  }
-}
-
-function manifestEnablesJevHarness(projectRoot: string): boolean {
-  const repo = readRepoTiedYaml(projectRoot);
-  const jev = repo && isRecord(repo.jev) ? repo.jev : undefined;
-  return jev?.agentstream_harness === true;
-}
 
 export function jevAgentstreamHarnessEnabled(workspace: string): boolean {
   if (
@@ -65,18 +45,6 @@ export function jevAgentstreamHarnessEnabled(workspace: string): boolean {
     return manifestEnablesJevHarness(root);
   }
   return false;
-}
-
-function resolveProjectRoot(cfg: DryRunConfig): string {
-  const root = findRepoRootFromPath(cfg.workspace);
-  return root !== "" ? root : path.resolve(cfg.workspace);
-}
-
-function taskSummaryFromCfg(cfg: DryRunConfig): string {
-  if (cfg.argvWords.length > 0) {
-    return cfg.argvWords.join(" ").slice(0, 500);
-  }
-  return "agentstream session";
 }
 
 function firstPromptSnippet(cfg: DryRunConfig): string {
@@ -118,43 +86,6 @@ export function runJevHarnessPreflight(cfg: DryRunConfig): {
   return { exitCode: 0, stderr: bootstrapLines(cfg).join("") };
 }
 
-async function loadJevHarnessFromRepo(
-  projectRoot: string,
-): Promise<{
-  evaluateHarnessToolCall: (
-    input: { tool: string; arguments?: string; goal?: string },
-    harness: { enabled: boolean; hasApiKey: boolean; blockWhenUnavailable: boolean },
-    jevConfig?: { apiKey?: string; fetchImpl?: typeof fetch },
-  ) => Promise<{ decision: string; reason: string }>;
-  adviseContextFilter: (
-    task: string,
-    item: string,
-    harness: { enabled: boolean; hasApiKey: boolean; blockWhenUnavailable: boolean },
-    jevConfig?: { apiKey?: string; fetchImpl?: typeof fetch },
-  ) => Promise<{ action: string; reason: string }>;
-  resolveHarnessFromEnv: (
-    env?: NodeJS.ProcessEnv,
-    manifestFlag?: boolean,
-  ) => { enabled: boolean; hasApiKey: boolean; blockWhenUnavailable: boolean };
-} | null> {
-  const modPath = path.join(projectRoot, "mcp-server", "dist", "jev", "harness-tool-guard.js");
-  if (!fs.existsSync(modPath)) {
-    return null;
-  }
-  const ctx = await import(pathToFileURL(modPath).href);
-  const ctxFilter = path.join(projectRoot, "mcp-server", "dist", "jev", "context-filter-advisory.js");
-  let adviseContextFilter = ctx.adviseContextFilter;
-  if (fs.existsSync(ctxFilter)) {
-    const cf = await import(pathToFileURL(ctxFilter).href);
-    adviseContextFilter = cf.adviseContextFilter;
-  }
-  return {
-    evaluateHarnessToolCall: ctx.evaluateHarnessToolCall,
-    adviseContextFilter,
-    resolveHarnessFromEnv: ctx.resolveHarnessFromEnv,
-  };
-}
-
 /** Live run: bootstrap + optional mock Jev smoke when key or deps present. */
 export async function runJevHarnessPreflightLive(
   cfg: DryRunConfig,
@@ -191,8 +122,8 @@ export async function runJevHarnessPreflightLive(
     return { exitCode: 0, stderr: lines.join("") };
   }
 
-  const projectRoot = resolveProjectRoot(cfg);
-  const mod = await loadJevHarnessFromRepo(projectRoot);
+  const projectRoot = resolveProjectRootForJev(cfg);
+  const mod = await loadJevHarnessDistModule(projectRoot);
   if (!mod) {
     append(
       "DIAGNOSTIC: jev harness: mcp-server/dist/jev not built — run npm run build in mcp-server for live Jev smoke",
@@ -213,7 +144,7 @@ export async function runJevHarnessPreflightLive(
     append(
       `DEBUG: jev harness sample tool eval: decision=${toolEval.decision} reason=${toolEval.reason}`,
     );
-    if (snippet !== "") {
+    if (snippet !== "" && mod.adviseContextFilter) {
       const ctxAdv = await mod.adviseContextFilter(task, snippet, harness);
       append(
         `DEBUG: jev harness sample context filter: action=${ctxAdv.action} reason=${ctxAdv.reason}`,

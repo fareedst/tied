@@ -5,6 +5,16 @@
 import { spawn } from "node:child_process";
 import readline from "node:readline";
 
+import type { JevLiveToolGate } from "./jev-harness-live-tool-gate.js";
+import {
+  evaluateStreamToolProposal,
+  parseToolProposalFromStreamObject,
+} from "./jev-harness-live-tool-gate.js";
+
+export type RunAgentOptions = {
+  jevToolGate?: JevLiveToolGate | null;
+};
+
 export type RunResult = {
   sessionId: string;
   finalText: string;
@@ -43,7 +53,8 @@ function extractTextFragments(obj: Record<string, unknown>): string[] {
 export async function runAgent(
   argv: string[],
   extraEnv: string[] = [],
-): Promise<{ result: RunResult; exitCode: number; error?: Error }> {
+  options: RunAgentOptions = {},
+): Promise<{ result: RunResult; exitCode: number; error?: Error; gateStderr?: string }> {
   return new Promise((resolve) => {
     const env = { ...process.env } as Record<string, string | undefined>;
     for (const entry of extraEnv) {
@@ -62,6 +73,11 @@ export async function runAgent(
     let thinkingText = "";
     let transcript = "";
     const errLines: string[] = [];
+    const gateStderrLines: string[] = [];
+    let gateBlocked = false;
+    let gateChain = Promise.resolve();
+
+    const toolGate = options.jevToolGate ?? null;
 
     const rl = readline.createInterface({ input: cmd.stdout! });
     rl.on("line", (line) => {
@@ -75,6 +91,26 @@ export async function runAgent(
       } catch (err) {
         errLines.push(`JSON parse error: ${String(err)}\n`);
         return;
+      }
+      if (toolGate && !gateBlocked) {
+        const proposal = parseToolProposalFromStreamObject(obj);
+        if (proposal) {
+          gateChain = gateChain.then(async () => {
+            if (gateBlocked) {
+              return;
+            }
+            const out = await evaluateStreamToolProposal(toolGate, proposal);
+            gateStderrLines.push(out.diagnostic);
+            process.stderr.write(out.diagnostic);
+            if (out.abort) {
+              gateBlocked = true;
+              errLines.push(
+                `agentstream: jev harness blocked tool ${proposal.tool} (${out.evaluation.reason})\n`,
+              );
+              cmd.kill("SIGTERM");
+            }
+          });
+        }
       }
       if (typeof obj.session_id === "string" && obj.session_id !== "") {
         captured = obj.session_id;
@@ -103,23 +139,30 @@ export async function runAgent(
 
     cmd.on("close", (code) => {
       rl.close();
-      const exitCode = code ?? 1;
-      const result: RunResult = {
-        sessionId: captured,
-        finalText,
-        thinkingText,
-        transcript,
-      };
-      if (exitCode !== 0) {
-        errLines.push(`agent exited with status ${exitCode}\n`);
-        resolve({
-          result,
-          exitCode,
-          error: new Error(`agent exit ${exitCode}`),
-        });
-        return;
-      }
-      resolve({ result, exitCode: 0 });
+      void gateChain.then(() => {
+        let exitCode = code ?? 1;
+        if (gateBlocked) {
+          exitCode = 1;
+        }
+        const result: RunResult = {
+          sessionId: captured,
+          finalText,
+          thinkingText,
+          transcript,
+        };
+        const gateStderr = gateStderrLines.join("");
+        if (exitCode !== 0) {
+          errLines.push(`agent exited with status ${exitCode}\n`);
+          resolve({
+            result,
+            exitCode,
+            error: new Error(`agent exit ${exitCode}`),
+            gateStderr,
+          });
+          return;
+        }
+        resolve({ result, exitCode: 0, gateStderr });
+      });
     });
 
     cmd.on("error", (err) => {

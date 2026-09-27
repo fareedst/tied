@@ -1,0 +1,88 @@
+{
+  "schema": "adversarial-triage-pilot.v1",
+  "jev_invoked": true,
+  "cases": [
+    {
+      "case_id": "rootjobs-orphan-aligned",
+      "nouls": {
+        "criterion_met": 0.92,
+        "spec_gap": 0.18,
+        "test_supports_claim": 0.9,
+        "implementation_drift": 0.15
+      },
+      "triage_class": "aligned",
+      "jev_skipped": false,
+      "matches_labels": true,
+      "label_mismatches": []
+    },
+    {
+      "case_id": "rootjobs-sort-aligned",
+      "nouls": {
+        "criterion_met": 0.83,
+        "spec_gap": 0.37,
+        "test_supports_claim": 0.79,
+        "implementation_drift": 0.16
+      },
+      "triage_class": "aligned",
+      "jev_skipped": false,
+      "matches_labels": true,
+      "label_mismatches": []
+    },
+    {
+      "case_id": "rootjobs-empty-aligned",
+      "nouls": {
+        "criterion_met": 0.96,
+        "spec_gap": 0.11,
+        "test_supports_claim": 0.9,
+        "implementation_drift": 0.07
+      },
+      "triage_class": "aligned",
+      "jev_skipped": false,
+      "matches_labels": true,
+      "label_mismatches": []
+    },
+    {
+      "case_id": "rootjobs-dedupe-aligned",
+      "nouls": {
+        "criterion_met": 0.95,
+        "spec_gap": 0.29,
+        "test_supports_claim": 0.78,
+        "implementation_drift": 0.09
+      },
+      "triage_class": "aligned",
+      "jev_skipped": false,
+      "matches_labels": true,
+      "label_mismatches": []
+    },
+    {
+      "case_id": "synthetic-spec-gap",
+      "nouls": {
+        "criterion_met": 0.04,
+        "spec_gap": 0.94,
+        "test_supports_claim": 0.05,
+        "implementation_drift": 0.9
+      },
+      "triage_class": "spec_gap",
+      "jev_skipped": false,
+      "matches_labels": false,
+      "label_mismatches": [
+        "implementation_drift"
+      ]
+    },
+    {
+      "case_id": "synthetic-test-gap",
+      "nouls": {
+        "criterion_met": 0.93,
+        "spec_gap": 0.2,
+        "test_supports_claim": 0.04,
+        "implementation_drift": 0.1
+      },
+      "triage_class": "test_gap",
+      "jev_skipped": false,
+      "matches_labels": true,
+      "label_mismatches": []
+    }
+  ],
+  "agreement_rate": 0.8333333333333334,
+  "note": "Live Jev nouls compared to labeled fixture; not a substitute for tied_adversarial_inquiry_run."
+}

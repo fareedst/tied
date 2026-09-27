@@ -12,6 +12,7 @@ import { agentArgv } from "./executor-run.js";
 import { bindLiveExecutorDriver } from "./live-driver-bind.js";
 import { runTiedPreflight, type DryRunStreams } from "./executor-dry-run.js";
 import { runDaeGatePreflight } from "./dae-gate-preflight.js";
+import { createJevLiveToolGate } from "./jev-harness-live-tool-gate.js";
 import { runJevHarnessPreflightLive } from "./jev-harness-preflight.js";
 import { knownStepStubs, replaceRemainingFromStep } from "./pipeline-route.js";
 import { chainBetween, sessionForTurn } from "./pipeline-session.js";
@@ -246,9 +247,12 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
     runID = newRunId();
   }
 
+  const jevToolGate = await createJevLiveToolGate(cfg);
+
   const liveBinding = bindLiveExecutorDriver({
     harnessProfile: cfg.agentHarness,
     agentPath: cfg.agentPath,
+    jevToolGate,
   });
 
   let running = "";
@@ -385,6 +389,9 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
     );
     const turnOutcome = await liveBinding.runTurn(argv, extraEnv);
     const { result, exitCode } = turnOutcome;
+    if (turnOutcome.jevGateStderr) {
+      stderrAcc += turnOutcome.jevGateStderr;
+    }
     if (exitCode !== 0) {
       if (turnOutcome.driverError) {
         stderrAcc += `agentstream: claude driver error: ${turnOutcome.driverError}\n`;

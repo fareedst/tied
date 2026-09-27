@@ -1,0 +1,21 @@
+bun test v1.3.9 (cf6cdbbb)
+
+src/jev-harness-live-tool-gate.test.ts:
+(pass) jev harness live tool gate [REQ-TIED_JEV_DECISION_COPROCESSOR] > parses agentstream_tool_proposal stream extension [0.46ms]
+(pass) jev harness live tool gate [REQ-TIED_JEV_DECISION_COPROCESSOR] > parses assistant tool_use blocks [0.05ms]
+(pass) jev harness live tool gate [REQ-TIED_JEV_DECISION_COPROCESSOR] > aborts only on block decision [0.02ms]
+doneDIAGNOSTIC: jev harness live tool gate: tool=Shell decision=block reason=mock_block
+(pass) jev harness live tool gate [REQ-TIED_JEV_DECISION_COPROCESSOR] > runAgent composition > terminates turn when gate blocks Shell proposal in stream [61.52ms]
+okDIAGNOSTIC: jev harness live tool gate: tool=Shell decision=allow reason=mock_allow
+(pass) jev harness live tool gate [REQ-TIED_JEV_DECISION_COPROCESSOR] > runAgent composition > allows turn when gate allows Shell proposal [16.16ms]
+(pass) jev harness live tool gate [REQ-TIED_JEV_DECISION_COPROCESSOR] > evaluateStreamToolProposal returns diagnostic [0.17ms]
+
+src/jev-harness-preflight.test.ts:
+(pass) jev harness preflight [REQ-TIED_JEV_DECISION_COPROCESSOR] > is disabled by default [2.47ms]
+(pass) jev harness preflight [REQ-TIED_JEV_DECISION_COPROCESSOR] > reads enablement from .tied-yaml.yaml jev.agentstream_harness [1.27ms]
+(pass) jev harness preflight [REQ-TIED_JEV_DECISION_COPROCESSOR] > warns fail-closed when enabled without JEV_API_KEY [0.06ms]
+(pass) jev harness preflight [REQ-TIED_JEV_DECISION_COPROCESSOR] > live preflight runs mock Jev integration smoke via injected deps [0.27ms]
+
+ 10 pass
+ 0 fail
+Ran 10 tests across 2 files. [175.00ms]
