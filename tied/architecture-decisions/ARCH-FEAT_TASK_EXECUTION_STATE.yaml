@@ -13,15 +13,15 @@ ARCH-FEAT_TASK_EXECUTION_STATE:
   description: "Task identity and append-only evidence history remain stable across attempts and resumes while execution outcomes remain separate from source task definitions."
   implementation_approach:
     details:
+      - "[W3 residuality S-O02 architecture_constraint] Policy override of dependency unlock or stale recovery requires auditable evidence append or hard reject — no silent graph mutation."
+      - "[W3 residuality S-O06 architecture_constraint] Bulk cancel or mass transition exposes dependent lock blast-radius preview before commit."
       - "[W3 residuality S-T01] Redelivery must be detectable via caller-supplied idempotency or attempt key at the execution boundary."
       - "[W3 residuality S-T05] Dependency graph evaluation is independent of broker message ordering; completion evidence order is authoritative."
+      - "[W3 residuality S-T11 architecture_constraint] Retry storms apply bounded backpressure and lock-wait limits; idempotency holds without unbounded contention."
       - "[W3 residuality S-T12 architecture_constraint] Evidence history must not contain unbounded duplicate rows for the same logical attempt; deduplication or stable attempt key is required for audit integrity."
       - "[W3 residuality S-T14] Max-retry or poison-message policy is explicit and configurable within documented bounds."
       - "[W3 residuality S-T15] IO failure taxonomy mapped to operator-visible reason codes."
-      - "[W3 residuality S-T11 architecture_constraint] Retry storms apply bounded backpressure and lock-wait limits; idempotency holds without unbounded contention."
       - "[W3 residuality S-T16] Documented consistency model with bounded stale reads or monotonic read tokens under split API/store visibility."
-      - "[W3 residuality S-O02 architecture_constraint] Policy override of dependency unlock or stale recovery requires auditable evidence append or hard reject — no silent graph mutation."
-      - "[W3 residuality S-O06 architecture_constraint] Bulk cancel or mass transition exposes dependent lock blast-radius preview before commit."
       - "Evidence records retain attempt, outcome, provenance, and timestamps in deterministic order."
       - "Failed tasks do not satisfy dependencies."
       - "Resume accepts only matching source revision or explicit stale recovery."

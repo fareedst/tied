@@ -29,6 +29,12 @@ tied/features/
 
 # Ephemeral working/ generated evidence — not canonical TIED intent
 # (tied/vocab/fidelity-research.md, quality-assurance.md; keep locally under working/)
+# MCP server cwd gate scratch (mirrors working/**/gates receipts; regenerate per local MCP run)
+mcp-server/working/
+# Disposable client demo folders (e.g. REDDIT-CLIENT-<timestamp>)
+working/*-CLIENT-*/
+# Debug close-out probes (tracker-only; not canonical program evidence)
+working/REQ-ENVELOPE_TRACKER_HASH_STABILITY/
 working/**/adversarial-inquiry/
 !working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-pre_implementation/
 !working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-pre_implementation/**

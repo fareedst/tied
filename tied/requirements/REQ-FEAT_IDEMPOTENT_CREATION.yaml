@@ -26,6 +26,12 @@ REQ-FEAT_IDEMPOTENT_CREATION:
         proof_boundary: "Discovery until W4 unknown-outcome composition fault"
         source_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.md"
         stressor_id: "S-T04"
+    - criterion: "Authorized operators can observe in-flight request-key lock holder identity and lock age; locks past documented TTL cannot block allocation without an explicit stale-lock signal."
+      residuality_facet:
+        ledger_disposition: "candidate_requirement"
+        proof_boundary: "Discovery until W4 lock-observability composition fault"
+        source_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.md"
+        stressor_id: "S-O07"
     - criterion: "Concurrent creators serialize allocation and never publish partial manifests."
     - criterion: "Expired allocation locks release per documented TTL; subsequent creators proceed only when store metadata confirms prior lock is invalid — stale lock holders cannot block past TTL."
       residuality_facet:
@@ -33,6 +39,12 @@ REQ-FEAT_IDEMPOTENT_CREATION:
         proof_boundary: "Discovery until W4 lock-TTL composition fault"
         source_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.md"
         stressor_id: "S-T18"
+    - criterion: "Incompatible request normalization or fingerprint schema version yields deterministic collision or version error — never silent dual interpretation under rollout skew."
+      residuality_facet:
+        ledger_disposition: "candidate_requirement"
+        proof_boundary: "Discovery until W4 schema-skew composition fault"
+        source_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.md"
+        stressor_id: "S-T09"
     - criterion: "Redelivered create requests with the same normalized request key do not allocate a second feature or publish a second manifest."
       residuality_facet:
         ledger_disposition: "candidate_requirement"
@@ -40,18 +52,6 @@ REQ-FEAT_IDEMPOTENT_CREATION:
         source_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.md"
         stressor_id: "S-T01"
     - criterion: "The same request key and normalized request return the existing feature without a second allocation."
-    - criterion: "Incompatible request normalization or fingerprint schema version yields deterministic collision or version error — never silent dual interpretation under rollout skew."
-      residuality_facet:
-        ledger_disposition: "candidate_requirement"
-        proof_boundary: "Discovery until W4 schema-skew composition fault"
-        source_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.md"
-        stressor_id: "S-T09"
-    - criterion: "Authorized operators can observe in-flight request-key lock holder identity and lock age; locks past documented TTL cannot block allocation without an explicit stale-lock signal."
-      residuality_facet:
-        ledger_disposition: "candidate_requirement"
-        proof_boundary: "Discovery until W4 lock-observability composition fault"
-        source_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.md"
-        stressor_id: "S-O07"
   status: "Planned"
   traceability:
     architecture:

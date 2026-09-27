@@ -37,6 +37,18 @@ REQ-FEAT_TASK_EXECUTION_RECOVERY:
         source_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.md"
         stressor_id: "S-T05"
     - criterion: "Each execution outcome has deterministic status and reason semantics."
+    - criterion: "Execution status reads under partition or split visibility document bounded staleness or expose a monotonic read token — clients must not infer success from silently lagging status."
+      residuality_facet:
+        ledger_disposition: "candidate_requirement"
+        proof_boundary: "Discovery until W4 partition-read consistency composition fault"
+        source_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.md"
+        stressor_id: "S-T16"
+    - criterion: "Incompatible evidence or normalization schema version yields deterministic ILLEGAL_TRANSITION or explicit version mismatch — never silent corruption of fingerprints or transition semantics."
+      residuality_facet:
+        ledger_disposition: "candidate_requirement"
+        proof_boundary: "Discovery until W4 schema-skew composition fault"
+        source_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.md"
+        stressor_id: "S-T09"
     - criterion: "Redelivered execution attempts for the same logical work unit are deduplicated or recorded as duplicate attempts without changing task_id or forking terminal outcome semantics."
       residuality_facet:
         ledger_disposition: "candidate_requirement"
@@ -51,16 +63,4 @@ REQ-FEAT_TASK_EXECUTION_RECOVERY:
         proof_boundary: "Discovery until W4 store-write-failure composition fault"
         source_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.md"
         stressor_id: "S-T15"
-    - criterion: "Incompatible evidence or normalization schema version yields deterministic ILLEGAL_TRANSITION or explicit version mismatch — never silent corruption of fingerprints or transition semantics."
-      residuality_facet:
-        ledger_disposition: "candidate_requirement"
-        proof_boundary: "Discovery until W4 schema-skew composition fault"
-        source_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.md"
-        stressor_id: "S-T09"
-    - criterion: "Execution status reads under partition or split visibility document bounded staleness or expose a monotonic read token — clients must not infer success from silently lagging status."
-      residuality_facet:
-        ledger_disposition: "candidate_requirement"
-        proof_boundary: "Discovery until W4 partition-read consistency composition fault"
-        source_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.md"
-        stressor_id: "S-T16"
   status: "Planned"

@@ -20,6 +20,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Gitignore close-out hygiene ([PROC-GITIGNORE_CLOSE_OUT])** — Ignore `mcp-server/working/` MCP gate scratch,
+  `working/*-CLIENT-*/` disposable client demos, and `working/REQ-ENVELOPE_TRACKER_HASH_STABILITY/` debug probes;
+  canonical-sort residuality LEAP list fields in feature REQ/ARCH/IMPL YAML and checklist sub-procedure order.
+
 - **`docs/comparisons/`** — Treat as **private local** planning notes again (`.gitignore`); remove from git index; keep files on disk. Tracked program history remains **`working/REQ-TIED_DAE_INCORPORATION/PLAN.md`** and **RESIDUAL-PLAN.md**.
 - **DAE residual program** — R1–R4 documentation LEAP close-out; parent gate refresh `close-out-gates-2026-09-25-residual.json` (`allowed: true`).
 

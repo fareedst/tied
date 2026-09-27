@@ -11,11 +11,11 @@ ARCH-FEAT_IDEMPOTENT_CREATION:
   decision: "Serialize creation through a request-key lock and durable request-key metadata, returning the existing feature for an exact normalized retry and a deterministic collision for divergent input."
   implementation_approach:
     details:
+      - "[W3 residuality S-O07] Lock metadata exposes holder identity and age for operator handoff observability."
       - "[W3 residuality S-T01] Create path shares deduplication semantics with execution redelivery at documented integration seams."
-      - "[W3 residuality S-T18 architecture_constraint] Lock TTL and authoritative metadata check are specified."
       - "[W3 residuality S-T10 architecture_constraint] Lock coordinator loss fails fast with retryable error; fencing token prevents dual allocation after coordinator recovery."
       - "[W3 residuality S-T11 architecture_constraint] Create-path retry storms apply backpressure, lock timeout, and queue shedding without breaking idempotency."
-      - "[W3 residuality S-O07] Lock metadata exposes holder identity and age for operator handoff observability."
+      - "[W3 residuality S-T18 architecture_constraint] Lock TTL and authoritative metadata check are specified."
       - "Normalize request inputs before fingerprinting."
       - "Release locks after complete publication or cleanup."
       - "Require a non-empty explicit request key."
