@@ -1,0 +1,11 @@
+{
+  "command": "tied_validate_consistency (TIED MCP)",
+  "date": "2026-09-26",
+  "ok": true,
+  "index": {
+    "requirements": { "valid": true },
+    "architecture": { "valid": true },
+    "implementation": { "valid": true },
+    "semantic-tokens": { "valid": true }
+  }
+}

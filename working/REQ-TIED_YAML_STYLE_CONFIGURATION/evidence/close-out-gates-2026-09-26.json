@@ -1,0 +1,35 @@
+{
+  "phase": "close_out",
+  "depth_tier": "minimal",
+  "activation_collect": {
+    "skipped": true,
+    "reason": "minimal_depth",
+    "run_id": "bootstrap-tied-yaml-2026-09-26"
+  },
+  "reconcile": {
+    "ok": true,
+    "report": {
+      "process_grade": {
+        "score": 69,
+        "band": "C",
+        "gap_codes": ["expected_artifact_missing"]
+      }
+    }
+  },
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "gate": {
+    "allowed": true,
+    "blocking": false
+  },
+  "envelope": {
+    "ok": true,
+    "path": "working/REQ-TIED_YAML_STYLE_CONFIGURATION/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 0,
+    "advisory_gap_count": 0
+  }
+}

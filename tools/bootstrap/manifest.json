@@ -1,6 +1,6 @@
 {
   "TIED_CLI_REPO_ROOT_MARKER": "/ABSOLUTE/PATH/TO/TIED/SOURCE/DIR",
-  "BASE_FILES": [".cursorrules", "AGENTS.md"],
+  "BASE_FILES": [".cursorrules", "AGENTS.md", ".tied-yaml.yaml"],
   "INDEX_YAML_FILES": [
     "requirements.yaml",
     "architecture-decisions.yaml",

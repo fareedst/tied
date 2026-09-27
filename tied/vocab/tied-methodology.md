@@ -153,6 +153,7 @@ Incremental human workflow: specify **atoms** in sequence; stay satisfied when t
 | Token registry | semantic tokens | `tied/semantic-tokens.yaml` | index=`semantic-tokens` | [REQ-TIED_SETUP](../requirements/REQ-TIED_SETUP.yaml) |
 | Methodology merge view | merged TIED view | read via MCP resources | `tied://requirements` etc. | [PROC-TIED_METHODOLOGY_READONLY](../docs/processes.md) |
 | Agent operating guide | AGENTS | `AGENTS.md` | — | [REQ-TIED_SETUP](../requirements/REQ-TIED_SETUP.yaml) |
+| Repository YAML style config | repository YAML style file | `.tied-yaml.yaml` at client project root | create-if-absent bootstrap from `templates/.tied-yaml.yaml` | [REQ-TIED_YAML_STYLE_CONFIGURATION](../requirements/REQ-TIED_YAML_STYLE_CONFIGURATION.yaml) |
 | Client development index | core seven | `tied/docs/client-development-index.md` | minimal CITDP+LEAP+TIED doc set, including domain vocabulary | [PROC-AGENT_REQ_CHECKLIST](../docs/processes.md) |
 | Bootstrap script | copy_files | `copy_files.sh` / `copy_files.cmd` | `./copy_files.sh` or `..\tied\copy_files` | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) |
 | Windows bootstrap entry point | copy_files.cmd | `copy_files.cmd` | PATHEXT `copy_files` from sibling checkout | [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM](../architecture-decisions/ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM.yaml) |

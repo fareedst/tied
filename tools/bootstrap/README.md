@@ -115,7 +115,16 @@ Methodology boundary (Phase A, [REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY]): `--metho
 
 ## Manifest
 
-`manifest.json` is the single source for `DOCS_TO_COPY`, prompt-type skill dirs, verify artifact lists, and `TIED_CLI_REPO_ROOT_MARKER`. Node reads it at runtime; bash no longer duplicates inline arrays.
+`manifest.json` is the single source for `BASE_FILES`, `DOCS_TO_COPY`, prompt-type skill dirs, verify artifact lists, and `TIED_CLI_REPO_ROOT_MARKER`. Node reads it at runtime; bash no longer duplicates inline arrays.
+
+### Repo-root base files (`BASE_FILES`)
+
+| Artifact | Policy | Source |
+| --- | --- | --- |
+| `.cursorrules`, `AGENTS.md` | Create-if-absent | Repo root (same paths under `templates/` when present) |
+| `.tied-yaml.yaml` | Create-if-absent | `templates/.tied-yaml.yaml` (client-safe starter; not the methodology repo’s dev root file) |
+
+Existing client copies are never overwritten on refresh. Brownfield clients without the file get it on the next bootstrap while the destination path is still absent; see [methodology-migration.md](../tied/docs/methodology-migration.md).
 
 ## Claude Code harness (dual bootstrap)
 

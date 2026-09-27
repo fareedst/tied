@@ -123,9 +123,10 @@ export function bootstrapTied(projectRoot, options = {}) {
 
   writeClientVocabHandoffs(path.join(tiedDir, "vocab"));
 
+  // [IMPL-TIED_FILES] [REQ-TIED_SETUP] [REQ-TIED_YAML_STYLE_CONFIGURATION] — BASE_FILES: templates-first via resolveTemplateFile.
   let baseCopied = 0;
   for (const template of paths.BASE_FILES) {
-    const src = path.join(TIED_REPO_ROOT, template);
+    const src = resolveTemplateFile(templatesDir, TIED_REPO_ROOT, template);
     const dest = path.join(projectRoot, template);
     if (!fs.existsSync(src)) {
       sayErr(`Missing base file: ${src}`);

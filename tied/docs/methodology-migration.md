@@ -88,6 +88,9 @@ Verify after refresh:
 | `.cursor/skills/tied-yaml/` | Refreshed from the bundled skill |
 | `.cursor/skills/tied-yaml/scripts/tied.sh` and `feature-orchestrator.sh` | Refreshed from the bundled skill and baked to the TIED source root |
 | `.cursor/mcp.json` | Created with the selected TIED source and client base path only when absent; an existing file is preserved byte-for-byte |
+| `.tied-yaml.yaml` (project root) | Created only when absent from `templates/.tied-yaml.yaml` in the TIED source; existing client policy files are preserved byte-for-byte |
+
+**Retrofit when absent:** If an older client never received `.tied-yaml.yaml`, re-run `copy_files.sh` against the client project root while that file is still missing. Bootstrap installs the starter template once; customize `scalar_style` and optional hooks afterward. If you already created a local file, bootstrap will not replace it.
 
 The `verify_feature_orchestration_methodology` gate checks the onboarding
 guide, constitution example, feature-orchestration vocabulary, and `tied.sh`.

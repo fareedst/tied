@@ -57,6 +57,11 @@ if not exist ".cursor\mcp.json" (
   popd
   exit /b 1
 )
+if not exist ".tied-yaml.yaml" (
+  echo FAIL: .tied-yaml.yaml not seeded at client project root
+  popd
+  exit /b 1
+)
 echo OK: bootstrap layout
 
 echo.
@@ -91,6 +96,11 @@ if errorlevel 1 (
 )
 if not exist "!NODE_SMOKE!\tied\requirements.yaml" (
   echo FAIL: Node entrypoint did not create tied\requirements.yaml
+  popd
+  exit /b 1
+)
+if not exist "!NODE_SMOKE!\.tied-yaml.yaml" (
+  echo FAIL: Node entrypoint did not seed .tied-yaml.yaml
   popd
   exit /b 1
 )

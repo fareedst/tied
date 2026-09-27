@@ -531,7 +531,8 @@ procedure BOOTSTRAP_TIED(projectRoot):
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [REQ-TIED_ADVERSARIAL_INQUIRY]
   # How: Bootstrap or refresh the client layout while preserving client-owned project YAML, existing vocabulary, and any existing MCP configuration; managed copies retain attributes, receive source-date midnight timestamps, warn before overwriting a changed client copy, initialize optional metrics fields only for a new MCP configuration when collection is explicitly enabled, and fail closed if the inherited adversarial inquiry contract is incomplete.
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
-  # How: Ensure tied/ exists; copy template indexes, detail YAML, and implementation pseudo-code sidecars; copy guide/schema docs from tied/docs/ in the TIED source per copy_files.sh; create detail subdirs; copy AGENTS.md, .cursorrules to project root.
+  # How: Ensure tied/ exists; copy template indexes, detail YAML, and implementation pseudo-code sidecars; copy guide/schema docs from tied/docs/ in the TIED source per copy_files.sh; create detail subdirs; copy AGENTS.md, .cursorrules, and .tied-yaml.yaml to project root (create-if-absent; templates-first via resolveTemplateFile).
+  # [REQ-TIED_YAML_STYLE_CONFIGURATION] How: Seed repo-root .tied-yaml.yaml only when absent so operators can configure scalar_style without authoring from scratch; bootstrap never overwrites an existing client file.
   Contract:
     INPUT: projectRoot: string where length(projectRoot) > 0; template source; TIED source root; optional merge-vocab flag
     OUTPUT: bootstrapped or refreshed client layout; process exit status

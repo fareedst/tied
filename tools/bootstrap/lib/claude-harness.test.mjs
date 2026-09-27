@@ -181,6 +181,40 @@ describe("ASSERT_WINDOWS_BOOTSTRAP_CLAUDE [REQ-TIED_CLAUDE_BOOTSTRAP_OPS]", () =
   });
 });
 
+describe("BASE_FILES .tied-yaml.yaml [REQ-TIED_SETUP] [REQ-TIED_YAML_STYLE_CONFIGURATION] [IMPL-TIED_FILES]", () => {
+  function bootstrapFreshClient() {
+    const clientRoot = tempClient();
+    const mcpPath = path.join(clientRoot, ".cursor", "mcp.json");
+    fs.mkdirSync(path.dirname(mcpPath), { recursive: true });
+    fs.writeFileSync(mcpPath, `${JSON.stringify({ mcpServers: {} }, null, 2)}\n`, "utf8");
+    assertMcpPrerequisite(TIED_REPO_ROOT);
+    bootstrapTied(clientRoot, { env: process.env });
+    return clientRoot;
+  }
+
+  it("creates repo-root .tied-yaml.yaml from templates starter on fresh bootstrap", () => {
+    const clientRoot = bootstrapFreshClient();
+    const stylePath = path.join(clientRoot, ".tied-yaml.yaml");
+    assert.ok(fs.existsSync(stylePath));
+    const text = fs.readFileSync(stylePath, "utf8");
+    assert.doesNotMatch(text, /jev\.agentstream_harness/);
+    assert.doesNotMatch(text, /scalar_style:\s*wrapped/);
+  });
+
+  it("does not overwrite an existing client .tied-yaml.yaml", () => {
+    const clientRoot = tempClient();
+    const stylePath = path.join(clientRoot, ".tied-yaml.yaml");
+    const sentinel = "custom:\n  preserved: true\n";
+    fs.writeFileSync(stylePath, sentinel, "utf8");
+    const mcpPath = path.join(clientRoot, ".cursor", "mcp.json");
+    fs.mkdirSync(path.dirname(mcpPath), { recursive: true });
+    fs.writeFileSync(mcpPath, `${JSON.stringify({ mcpServers: {} }, null, 2)}\n`, "utf8");
+    assertMcpPrerequisite(TIED_REPO_ROOT);
+    bootstrapTied(clientRoot, { env: process.env });
+    assert.equal(fs.readFileSync(stylePath, "utf8"), sentinel);
+  });
+});
+
 describe("CONFIG_SKILLS_REROOT [REQ-TIED_CLAUDE_SKILLS_REROOT]", () => {
   it("default resolves harness-native skills dirs", () => {
     const clientRoot = tempClient();

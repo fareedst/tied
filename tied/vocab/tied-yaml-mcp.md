@@ -37,7 +37,7 @@
 | **YAML canonicalization** (rename) | independent rename serialization | `tied_token_rename` delegates substituted YAML to the shared `tied-yaml-canonical-v1` profile and preserves original files on parse or serialization failure |
 | **format metadata** | serializer details | Successful rename and other YAML writes return the stable `yaml_format` object for the active profile, including `recursive_key_order`, `string_list_rule`, and `record_list_rule` |
 | **scalar-style resolution** | quote configuration, YAML style | Shared repository-over-global policy used by MCP writers, `tied-cli.sh`, and `yaml_tool.sh` |
-| **repository YAML style** | local style config | `.tied-yaml.yaml` at the parent of `TIED_BASE_PATH`; `scalar_style` is `unwrapped` or `wrapped` |
+| **repository YAML style** | local style config | `.tied-yaml.yaml` at the parent of `TIED_BASE_PATH`; `scalar_style` is `unwrapped` or `wrapped`; `copy_files.sh` seeds the file at project root when absent (starter from `templates/.tied-yaml.yaml`) |
 | **wrapped** | quoted scalars | Double-quote string scalars only; preserve boolean, number, and null types |
 | **unwrapped** | plain scalars | Default plain-when-safe string emission; preserve typed scalar values |
 | **client YAML styling** | post-write formatting, YAML prettify | Presentation-only stage after baseline canonical formatting; optional `client_formatter` hook in `.tied-yaml.yaml` |
