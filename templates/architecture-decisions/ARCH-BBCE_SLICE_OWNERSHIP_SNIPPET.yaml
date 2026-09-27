@@ -1,0 +1,10 @@
+ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET:
+  cross_references: []
+  detail_file: "architecture-decisions/ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET.yaml"
+  implementation_approach:
+    details:
+      - "Optional BBCE-oriented sections below are advisory documentation only until promoted via LEAP."
+  metadata:
+    last_updated: "2026-09-27"
+    status: "snippet_only"
+    title: "Optional BBCE slice ownership sections (paste-in snippet)"

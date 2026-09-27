@@ -1,0 +1,58 @@
+{
+  "schema_version": "bbce-shared-code-justification.v1",
+  "timestamp": "2026-09-27T15:29:44.966Z",
+  "change_id": "PLAN-TIED-BBCE-ALIGNMENT",
+  "scenario_id": "dry-run-paths-ts-touch",
+  "owning_slice_req": "REQ-TIED_CLAUDE_LIVE_DRIVER",
+  "declared_change_surface_ref": "working/PLAN-TIED-BBCE-ALIGNMENT/pilot/declared-change-surface-claude-live.v1.yaml",
+  "triggers": [
+    {
+      "kind": "shared_mechanism_glob",
+      "matched_glob": "mcp-server/packages/agentstream/src/paths.ts",
+      "touched_paths": [
+        "mcp-server/packages/agentstream/src/paths.ts"
+      ]
+    },
+    {
+      "kind": "outside_declared_surface",
+      "touched_paths": [
+        "mcp-server/packages/agentstream/src/paths.ts"
+      ]
+    }
+  ],
+  "consumers": [
+    {
+      "binding_id": "canonical checklist composition gate",
+      "owning_slice_req": "REQ-GOAGENT-AGENT-EXECUTOR"
+    },
+    {
+      "binding_id": "Claude live driver (W1 replay anchor)",
+      "owning_slice_req": "REQ-TIED_CLAUDE_LIVE_DRIVER"
+    },
+    {
+      "binding_id": "CLI→pipeline build",
+      "owning_slice_req": "REQ-GOAGENT-PIPELINE-CHAIN"
+    },
+    {
+      "binding_id": "control goto → replace remaining",
+      "owning_slice_req": "REQ-GOAGENT-CHECKLIST-CONTROL"
+    },
+    {
+      "binding_id": "pipeline→checklist load turns",
+      "owning_slice_req": "REQ-GOAGENT-YAML-STEP-RENDER"
+    },
+    {
+      "binding_id": "pipeline→executor run",
+      "owning_slice_req": "REQ-GOAGENT-AGENT-EXECUTOR"
+    },
+    {
+      "binding_id": "preload → non-compact HTML",
+      "owning_slice_req": "REQ-GOAGENT-YAML-STEP-RENDER"
+    }
+  ],
+  "blast_radius_summary": "Path resolution shared across agentstream bindings; defect may affect multiple slices.",
+  "local_alternative_considered": "Duplicate path helpers per slice — rejected (BBCE duplication over premature coupling).",
+  "waiver_ref": null,
+  "review_status": "pending_human",
+  "proof_boundary": "Justification record is review-gated evidence; does not block LEAP to shared IMPL without explicit waiver."
+}

@@ -1,0 +1,76 @@
+{
+  "ok": true,
+  "receipt": {
+    "success": true,
+    "tool": "tied_adversarial_inquiry_run",
+    "request_token": "PLAN-TIED-BBCE-ALIGNMENT",
+    "project_id": "stdd",
+    "run_id": "w4-build-plan-verification-2026-09-27",
+    "phase": "verification",
+    "scope": [
+      "PLAN-TIED-BBCE-ALIGNMENT#MECH-D#checklist-promotion",
+      "PLAN-TIED-BBCE-ALIGNMENT#W3-MECHANISMS-B-C"
+    ],
+    "scope_hash": "754c0e64516a8e694477ab65b1f3a00c96f825acf4ae75dd6cb5c400e8cb2faf",
+    "artifact_hashes": {
+      "obligation-report.json": "04430d374b92e6288ba19b9055bb231cf9dc5714f613b50b9f9a97120225068b",
+      "finding-ledger.jsonl": "b49f62dc355400925ee185e745d305b7c7226f983de0fa9ffefc44a13f3cab3a",
+      "gate-result.json": "ec4c7359358df3ebc20dc4c68f92fba6c823048f27850592a03cc267e56d5ae6",
+      "evidence-provenance.json": "7b01e475e3c36b1dc6df8ab81c95c1dd276bc48f97e15669f1553b8c49819570"
+    }
+  },
+  "artifacts": {
+    "obligation-report.json": {
+      "valid": true,
+      "request_token": "PLAN-TIED-BBCE-ALIGNMENT",
+      "project_id": "stdd",
+      "run_id": "w4-build-plan-verification-2026-09-27",
+      "phase": "verification",
+      "scope_hash": "754c0e64516a8e694477ab65b1f3a00c96f825acf4ae75dd6cb5c400e8cb2faf",
+      "hash": "04430d374b92e6288ba19b9055bb231cf9dc5714f613b50b9f9a97120225068b",
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/phase-verification/obligation-report.json"
+    },
+    "finding-ledger.jsonl": {
+      "valid": true,
+      "request_token": "PLAN-TIED-BBCE-ALIGNMENT",
+      "project_id": "stdd",
+      "run_id": "w4-build-plan-verification-2026-09-27",
+      "phase": "verification",
+      "scope_hash": "754c0e64516a8e694477ab65b1f3a00c96f825acf4ae75dd6cb5c400e8cb2faf",
+      "hash": "b49f62dc355400925ee185e745d305b7c7226f983de0fa9ffefc44a13f3cab3a",
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/phase-verification/finding-ledger.jsonl"
+    },
+    "gate-result.json": {
+      "valid": true,
+      "request_token": "PLAN-TIED-BBCE-ALIGNMENT",
+      "project_id": "stdd",
+      "run_id": "w4-build-plan-verification-2026-09-27",
+      "phase": "verification",
+      "scope_hash": "754c0e64516a8e694477ab65b1f3a00c96f825acf4ae75dd6cb5c400e8cb2faf",
+      "hash": "ec4c7359358df3ebc20dc4c68f92fba6c823048f27850592a03cc267e56d5ae6",
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/phase-verification/gate-result.json"
+    },
+    "evidence-provenance.json": {
+      "valid": true,
+      "request_token": "PLAN-TIED-BBCE-ALIGNMENT",
+      "project_id": "stdd",
+      "run_id": "w4-build-plan-verification-2026-09-27",
+      "phase": "verification",
+      "scope_hash": "754c0e64516a8e694477ab65b1f3a00c96f825acf4ae75dd6cb5c400e8cb2faf",
+      "hash": "7b01e475e3c36b1dc6df8ab81c95c1dd276bc48f97e15669f1553b8c49819570",
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/phase-verification/evidence-provenance.json"
+    }
+  },
+  "expected": {
+    "request_token": "PLAN-TIED-BBCE-ALIGNMENT",
+    "project_id": "stdd",
+    "run_id": "w4-build-plan-verification-2026-09-27",
+    "phase": "verification",
+    "scope": [
+      "PLAN-TIED-BBCE-ALIGNMENT#MECH-D#checklist-promotion",
+      "PLAN-TIED-BBCE-ALIGNMENT#W3-MECHANISMS-B-C"
+    ],
+    "scope_hash": "754c0e64516a8e694477ab65b1f3a00c96f825acf4ae75dd6cb5c400e8cb2faf"
+  },
+  "diagnostics": []
+}

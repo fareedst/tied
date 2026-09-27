@@ -1,0 +1,67 @@
+{
+  "schema_version": "bbce-locality-run.v1",
+  "generated_at": "2026-09-27T15:14:23.069Z",
+  "change_id": "PLAN-TIED-BBCE-ALIGNMENT",
+  "wave": "W2",
+  "proof_boundary": "Metrics prove diff-scope discipline only — not REQ satisfaction.",
+  "runs": [
+    {
+      "slice_map_ref": "working/PLAN-TIED-BBCE-ALIGNMENT/pilot/slice-map.yaml",
+      "declared_file": "declared-change-surface-claude-live.v1.yaml",
+      "git_range": "d5ea688^..d5ea688",
+      "change_locality": 0.6,
+      "metrics": {
+        "total_changed_files": 15,
+        "in_declared_surface_files": 9,
+        "change_locality": 0.6
+      },
+      "drift_vs_w1": null
+    },
+    {
+      "slice_map_ref": "working/PLAN-TIED-BBCE-ALIGNMENT/pilot/slice-map.yaml",
+      "declared_file": "declared-change-surface-phase3b-wide.v1.yaml",
+      "git_range": "fbe65e1..d5ea688",
+      "change_locality": 0.6,
+      "metrics": {
+        "total_changed_files": 65,
+        "in_declared_surface_files": 39,
+        "change_locality": 0.6
+      },
+      "drift_vs_w1": null
+    },
+    {
+      "slice_map_ref": "tied/analysis/agentstream-slice-map.yaml",
+      "declared_file": "declared-change-surface-claude-live.v1.yaml",
+      "git_range": "d5ea688^..d5ea688",
+      "change_locality": 0.6,
+      "metrics": {
+        "total_changed_files": 15,
+        "in_declared_surface_files": 9,
+        "change_locality": 0.6
+      },
+      "drift_vs_w1": {
+        "w1_slice_map_ref": "working/PLAN-TIED-BBCE-ALIGNMENT/pilot/slice-map.yaml",
+        "w1_change_locality": 0.6,
+        "delta": 0,
+        "note": "identical metrics — repo map matches W1 working encoding"
+      }
+    },
+    {
+      "slice_map_ref": "tied/analysis/agentstream-slice-map.yaml",
+      "declared_file": "declared-change-surface-phase3b-wide.v1.yaml",
+      "git_range": "fbe65e1..d5ea688",
+      "change_locality": 0.6,
+      "metrics": {
+        "total_changed_files": 65,
+        "in_declared_surface_files": 39,
+        "change_locality": 0.6
+      },
+      "drift_vs_w1": {
+        "w1_slice_map_ref": "working/PLAN-TIED-BBCE-ALIGNMENT/pilot/slice-map.yaml",
+        "w1_change_locality": 0.6,
+        "delta": 0,
+        "note": "identical metrics — repo map matches W1 working encoding"
+      }
+    }
+  ]
+}

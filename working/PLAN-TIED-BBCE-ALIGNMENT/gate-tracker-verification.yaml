@@ -1,0 +1,85 @@
+# Sparse gate input for verification at depth_tier minimal (W0 Batch A build-plan 2026-09-27).
+note: Use as tracker_path for tied_checklist_gate_validate verification only.
+execution_evidence:
+  request: PLAN-TIED-BBCE-ALIGNMENT
+  depth_tier: minimal
+  gate_policy: advisory
+  completed:
+    - session-bootstrap
+    - translate-sponsor-intent
+    - change-definition
+    - impact-discovery
+    - risk-assessment
+    - test-strategy
+    - sub-vocabulary-sync
+    - verification-gate
+steps:
+  - slug: session-bootstrap
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied/docs/ai-principles.md
+      - kind: file_path
+        path: docs/methodologies/Behavior-Bounded-Change-Engineering-BBCE.md
+  - slug: translate-sponsor-intent
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: /Users/fareed/.cursor/plans/bbce_to_tied_alignment_df9407d6.plan.md
+  - slug: change-definition
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: working/PLAN-TIED-BBCE-ALIGNMENT/CITDP-PLAN-TIED-BBCE-ALIGNMENT.yaml
+  - slug: impact-discovery
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: working/PLAN-TIED-BBCE-ALIGNMENT/CITDP-PLAN-TIED-BBCE-ALIGNMENT.yaml
+      - kind: file_path
+        path: docs/tied-bbce-alignment-plan.md
+      - kind: file_path
+        path: tied/docs/composition-coverage.md
+  - slug: risk-assessment
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: working/PLAN-TIED-BBCE-ALIGNMENT/CITDP-PLAN-TIED-BBCE-ALIGNMENT.yaml
+      - kind: file_path
+        path: docs/tied-bbce-alignment-plan.md
+  - slug: sub-adversarial-inquiry-pass
+    disposition: not_applicable
+    policy: minimal-depth-no-inquiry
+    rationale: W0 doc batch at depth_tier minimal; W1+ mechanism batches must re-select integrated depth.
+  - slug: gate-pseudocode-validation
+    disposition: not_applicable
+    policy: no-impl-pseudocode-in-w0-doc-batch
+    rationale: Batch A authors comparison and feature plan only; no IMPL essence_pseudocode sidecar.
+  - slug: test-strategy
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: working/PLAN-TIED-BBCE-ALIGNMENT/CITDP-PLAN-TIED-BBCE-ALIGNMENT.yaml
+      - kind: file_path
+        path: docs/tied-bbce-alignment-plan.md
+  - slug: sub-vocabulary-sync
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied/vocab/behavior-bounded-change-engineering.md
+      - kind: file_path
+        path: tied/vocab/routing.md
+      - kind: file_path
+        path: docs/comparisons/tied-vs-behavior-bounded-change-engineering.md
+  - slug: verification-gate
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: docs/tied-bbce-alignment-plan.md
+      - kind: file_path
+        path: docs/bbce-and-tied-excerpt.md
+      - kind: file_path
+        path: docs/comparisons/tied-vs-behavior-bounded-change-engineering.md
+      - kind: file_path
+        path: docs/comparisons/bbce-mechanisms-for-tied-improvement.md
+    notes: Docs-only W0 batch; authority-boundary QA (slice vs module; metrics not correctness); mechanisms A-D not implemented.

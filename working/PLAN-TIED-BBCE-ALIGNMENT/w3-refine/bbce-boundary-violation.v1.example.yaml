@@ -1,0 +1,21 @@
+change_id: PLAN-TIED-BBCE-ALIGNMENT
+crossings:
+  - classified_as: foreign_slice
+    confidence: medium
+    kind: slice_crossing
+    note: Would fire if diff included control.ts without ARCH justification — illustrative for dry-run criteria.
+    owning_slice_req: REQ-GOAGENT-CHECKLIST-CONTROL
+    path: mcp-server/packages/agentstream/src/control.ts
+  - classified_as: shared_mechanism
+    confidence: high
+    kind: shared_mechanism_touch
+    owning_slice_req: null
+    path: mcp-server/packages/agentstream/src/paths.ts
+declared_owning_slice_req: REQ-TIED_CLAUDE_LIVE_DRIVER
+import_heuristics: []
+proof_boundary: Static path/slice heuristics only; distinct from traceability_gap_report.
+scenario_id: dry-run-paths-ts-touch
+schema_version: bbce-boundary-violation.v1
+slice_map_ref: tied/analysis/agentstream-slice-map.yaml
+timestamp: '2026-09-27T15:00:00Z'
+traceability_gaps_excluded: true

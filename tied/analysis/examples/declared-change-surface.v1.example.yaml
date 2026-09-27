@@ -1,0 +1,16 @@
+anticipated_shared_deps:
+  - "mcp-server/packages/agentstream/src/paths.ts"
+behavior: "Extend pipeline build to accept an optional dry-run flag on the CLI entrypoint."
+binding_ids:
+  - "CLI→pipeline build"
+expected_path_globs:
+  - "mcp-server/packages/agentstream/src/index.ts"
+  - "mcp-server/packages/agentstream/src/pipeline-build.ts"
+expected_tests:
+  - "mcp-server/packages/agentstream/src/pipeline-build.test.ts"
+notes: "Copy to working/{CHANGE-ID}/declared-change-surface.v1.yaml and attach ref on CITDP risk_analysis.bbce_alignment."
+owning_slice_req: "REQ-GOAGENT-PIPELINE-CHAIN"
+proof_boundary: "diff-scope discipline only — not behavioral correctness or REQ satisfaction"
+public_behavioral_boundary: "CLI argv and stdout/stderr only; no MCP or IDE integration changes."
+scenario_id: "example-agentstream-binding-change"
+schema_version: "bbce-declared-change-surface.v1"

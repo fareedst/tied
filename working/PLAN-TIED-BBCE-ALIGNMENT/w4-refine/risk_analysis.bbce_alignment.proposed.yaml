@@ -1,0 +1,57 @@
+risk_analysis:
+  bbce_alignment:
+    analysis_modules:
+      - "mcp-server/src/analysis/bbce-boundary-violation-report.ts"
+      - "mcp-server/src/analysis/bbce-plumb-locality.ts"
+      - "mcp-server/src/analysis/bbce-schemas.ts"
+      - "mcp-server/src/analysis/bbce-shared-code-justification.ts"
+      - "mcp-server/src/analysis/change-locality-pilot.ts"
+    applied: "w4_promotion_advisory_bundle_proposed"
+    boundary_violation_report_ref: "working/PLAN-TIED-BBCE-ALIGNMENT/pilot/w3-boundary-violation-report.json"
+    calibration:
+      w1_baseline_change_locality: 0.6
+      w3_paths_ts_scenario:
+        b_triggers: 2
+        c_crossings: 1
+    checklist_fields:
+      citdp_refs:
+        - "risk_analysis.bbce_alignment.boundary_violation_report_ref"
+        - "risk_analysis.bbce_alignment.declared_change_surface_ref"
+        - "risk_analysis.bbce_alignment.locality_evidence_ref"
+        - "risk_analysis.bbce_alignment.longitudinal_jsonl_ref"
+        - "risk_analysis.bbce_alignment.shared_code_justification_ref"
+      tracker_optional:
+        - "bbce_advisory_enforced"
+        - "declared_change_surface"
+    checklist_sub_procedures:
+      - "sub-bbce-advisory-verification-pass"
+      - "sub-shared-code-change-justification-pass"
+    declared_change_surface_ref: "working/PLAN-TIED-BBCE-ALIGNMENT/pilot/declared-change-surface-claude-live.v1.yaml"
+    declared_surface_example_ref: "tied/analysis/examples/declared-change-surface.v1.example.yaml"
+    false_positive_policy_ref: "working/PLAN-TIED-BBCE-ALIGNMENT/w3-refine/false-positive-policy.md"
+    jsonl_operator_paths:
+      default: "off"
+      enable_env: "PLUMB_AUDIT_LOCALITY"
+      optional_repo: "plumb-audit/audit-log.jsonl"
+      pilot: "working/{CHANGE-ID}/change-locality/*.jsonl"
+    locality_event_schema: "bbce-locality-event.v1"
+    locality_evidence_ref: "working/PLAN-TIED-BBCE-ALIGNMENT/pilot/w2-locality-run.json"
+    longitudinal_jsonl_ref: "working/PLAN-TIED-BBCE-ALIGNMENT/change-locality/w2-locality-events.jsonl"
+    mechanisms:
+      - "advisory_slice_vocabulary_promotion"
+      - "boundary_violation_detection"
+      - "declared_change_surface_and_metrics"
+      - "shared_code_justification_pass"
+    pilot_change_id: "PLAN-TIED-BBCE-ALIGNMENT"
+    plumb_audit_extension: "plumb-audit-gate-log.v2"
+    proof_boundary: "Locality, justification, and boundary tooling prove diff-scope discipline and declared-surface alignment, not runtime behavior or REQ satisfaction."
+    recommendation: "adopt_revise_advisory"
+    shared_code_justification_ref: "working/PLAN-TIED-BBCE-ALIGNMENT/pilot/w3-shared-code-justification.json"
+    slice_map_methodology_note: "STDD reference pilot only; client projects opt in with project-owned tied/analysis/*-slice-map.yaml — no vertical-slice folder mandate."
+    slice_map_ref: "tied/analysis/agentstream-slice-map.yaml"
+    w1_locality_evidence_ref: "working/PLAN-TIED-BBCE-ALIGNMENT/pilot/locality-run.json"
+    w3_bc_jsonl_ref: "working/PLAN-TIED-BBCE-ALIGNMENT/change-locality/w3-bc-pilot-events.jsonl"
+    w4_promotion_refs:
+      arch_template_proposal: "templates/architecture-decisions/ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET.yaml"
+      decisions: "working/PLAN-TIED-BBCE-ALIGNMENT/w4-refine/w4-promotion-decisions.md"
+      proposed_sub_procedure: "working/PLAN-TIED-BBCE-ALIGNMENT/w4-refine/proposed-bbce-advisory-pass.yaml"

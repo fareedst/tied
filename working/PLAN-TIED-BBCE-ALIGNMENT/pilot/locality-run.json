@@ -1,0 +1,465 @@
+{
+  "schema_version": "bbce-locality-run.v1",
+  "generated_at": "2026-09-27T15:01:46.825Z",
+  "change_id": "PLAN-TIED-BBCE-ALIGNMENT",
+  "proof_boundary": "Metrics prove diff-scope discipline only — not REQ satisfaction.",
+  "slice_map_ref": "working/PLAN-TIED-BBCE-ALIGNMENT/pilot/slice-map.yaml",
+  "runs": [
+    {
+      "declared_file": "declared-change-surface-claude-live.v1.yaml",
+      "git_range": "d5ea688^..d5ea688",
+      "changed_paths": [
+        "mcp-server/packages/agentstream/README.md",
+        "mcp-server/packages/agentstream/fixtures/claude/README.md",
+        "mcp-server/packages/agentstream/fixtures/claude/stream-assistant-basic.ndjson",
+        "mcp-server/packages/agentstream/fixtures/claude/stream-error-exit.ndjson",
+        "mcp-server/packages/agentstream/fixtures/claude/stream-session-id.ndjson",
+        "mcp-server/packages/agentstream/src/claude-driver.test.ts",
+        "mcp-server/packages/agentstream/src/claude-driver.ts",
+        "mcp-server/packages/agentstream/src/claude-stream.test.ts",
+        "mcp-server/packages/agentstream/src/claude-stream.ts",
+        "mcp-server/packages/agentstream/src/live-driver-bind.test.ts",
+        "mcp-server/packages/agentstream/src/live-driver-bind.ts",
+        "mcp-server/packages/agentstream/src/live-driver-select.test.ts",
+        "mcp-server/packages/agentstream/src/live-driver-select.ts",
+        "mcp-server/packages/agentstream/src/live-executor.ts",
+        "mcp-server/packages/agentstream/src/paths.ts"
+      ],
+      "report": {
+        "schema_version": "bbce-change-locality-report.v1",
+        "scenario_id": "replay-claude-live-driver-commit",
+        "owning_slice_req": "REQ-TIED_CLAUDE_LIVE_DRIVER",
+        "metrics": {
+          "total_changed_files": 15,
+          "in_declared_surface_files": 9,
+          "change_locality": 0.6
+        },
+        "unexpected_paths": [
+          "mcp-server/packages/agentstream/README.md",
+          "mcp-server/packages/agentstream/src/claude-driver.test.ts",
+          "mcp-server/packages/agentstream/src/claude-stream.test.ts",
+          "mcp-server/packages/agentstream/src/live-driver-bind.test.ts",
+          "mcp-server/packages/agentstream/src/live-driver-select.test.ts",
+          "mcp-server/packages/agentstream/src/paths.ts"
+        ],
+        "shared_mechanism_touches": [
+          "mcp-server/packages/agentstream/src/paths.ts"
+        ],
+        "slice_crossings": [
+          {
+            "path": "mcp-server/packages/agentstream/README.md",
+            "matched_binding_ids": [],
+            "matched_owning_slices": []
+          },
+          {
+            "path": "mcp-server/packages/agentstream/src/claude-driver.test.ts",
+            "matched_binding_ids": [],
+            "matched_owning_slices": []
+          },
+          {
+            "path": "mcp-server/packages/agentstream/src/claude-stream.test.ts",
+            "matched_binding_ids": [],
+            "matched_owning_slices": []
+          },
+          {
+            "path": "mcp-server/packages/agentstream/src/live-driver-bind.test.ts",
+            "matched_binding_ids": [],
+            "matched_owning_slices": []
+          },
+          {
+            "path": "mcp-server/packages/agentstream/src/live-driver-select.test.ts",
+            "matched_binding_ids": [],
+            "matched_owning_slices": []
+          },
+          {
+            "path": "mcp-server/packages/agentstream/src/live-executor.ts",
+            "matched_binding_ids": [
+              "pipeline→executor run"
+            ],
+            "matched_owning_slices": [
+              "REQ-GOAGENT-AGENT-EXECUTOR"
+            ]
+          },
+          {
+            "path": "mcp-server/packages/agentstream/src/paths.ts",
+            "matched_binding_ids": [],
+            "matched_owning_slices": []
+          }
+        ],
+        "proof_boundary": "diff-scope discipline only — not behavioral correctness"
+      }
+    },
+    {
+      "declared_file": "declared-change-surface-phase3b-wide.v1.yaml",
+      "git_range": "fbe65e1..d5ea688",
+      "changed_paths": [
+        "mcp-server/packages/agentstream/README.md",
+        "mcp-server/packages/agentstream/fixtures/claude/README.md",
+        "mcp-server/packages/agentstream/fixtures/claude/stream-assistant-basic.ndjson",
+        "mcp-server/packages/agentstream/fixtures/claude/stream-error-exit.ndjson",
+        "mcp-server/packages/agentstream/fixtures/claude/stream-session-id.ndjson",
+        "mcp-server/packages/agentstream/package.json",
+        "mcp-server/packages/agentstream/src/adherence-live.ts",
+        "mcp-server/packages/agentstream/src/adherence-reconcile.test.ts",
+        "mcp-server/packages/agentstream/src/checklist-constants.ts",
+        "mcp-server/packages/agentstream/src/claude-driver.test.ts",
+        "mcp-server/packages/agentstream/src/claude-driver.ts",
+        "mcp-server/packages/agentstream/src/claude-stream.test.ts",
+        "mcp-server/packages/agentstream/src/claude-stream.ts",
+        "mcp-server/packages/agentstream/src/control.ts",
+        "mcp-server/packages/agentstream/src/dispatch-go.ts",
+        "mcp-server/packages/agentstream/src/dispatcher.test.ts",
+        "mcp-server/packages/agentstream/src/dry-run-config.ts",
+        "mcp-server/packages/agentstream/src/executor-dry-run.ts",
+        "mcp-server/packages/agentstream/src/executor-run.ts",
+        "mcp-server/packages/agentstream/src/fixture-oracle.ts",
+        "mcp-server/packages/agentstream/src/harness-dry-run-composition.test.ts",
+        "mcp-server/packages/agentstream/src/harness-select.ts",
+        "mcp-server/packages/agentstream/src/htmlformat.ts",
+        "mcp-server/packages/agentstream/src/index.ts",
+        "mcp-server/packages/agentstream/src/live-driver-bind.test.ts",
+        "mcp-server/packages/agentstream/src/live-driver-bind.ts",
+        "mcp-server/packages/agentstream/src/live-driver-select.test.ts",
+        "mcp-server/packages/agentstream/src/live-driver-select.ts",
+        "mcp-server/packages/agentstream/src/live-executor.test.ts",
+        "mcp-server/packages/agentstream/src/live-executor.ts",
+        "mcp-server/packages/agentstream/src/parity.test.ts",
+        "mcp-server/packages/agentstream/src/paths.ts",
+        "mcp-server/packages/agentstream/src/pipeline-build.ts",
+        "mcp-server/packages/agentstream/src/pipeline-route.ts",
+        "mcp-server/packages/agentstream/src/red/harness-select-phase2.test.ts",
+        "mcp-server/packages/agentstream/src/repo-root.ts",
+        "mcp-server/packages/agentstream/src/run-pipeline-prep.ts",
+        "mcp-server/packages/agentstream/src/tddloop-load.ts",
+        "mcp-server/packages/agentstream/src/tracker-atomic-write.ts",
+        "mcp-server/packages/agentstream/src/tracker-ensure.ts",
+        "mcp-server/packages/agentstream/src/tracker-migration-preview.test.ts",
+        "mcp-server/packages/agentstream/src/tracker-receipt.ts",
+        "mcp-server/packages/agentstream/src/tracker-writer.ts",
+        "mcp-server/packages/agentstream/testdata/checklist/gate-fixture-checklist.yaml",
+        "mcp-server/packages/agentstream/testdata/checklist/gate-writer-minimal-tracker.yaml",
+        "mcp-server/packages/agentstream/testdata/checklist/pilot_controlled_client/events.jsonl",
+        "mcp-server/packages/agentstream/testdata/checklist/six_class_linked_chain/events.jsonl",
+        "mcp-server/packages/agentstream/testdata/checklist/verification-evidence-manifest-pass.json",
+        "mcp-server/packages/agentstream/testdata/live/control-checklist.yaml",
+        "mcp-server/packages/agentstream/testdata/live/fake_agent.rb",
+        "mcp-server/packages/agentstream/testdata/live/fake_tracker_agent.rb",
+        "mcp-server/packages/agentstream/testdata/live/fake_tracker_goto_agent.rb",
+        "mcp-server/packages/agentstream/testdata/live/fake_tracker_inquiry_agent.rb",
+        "mcp-server/packages/agentstream/testdata/live/inquiry-subturn-checklist.yaml",
+        "mcp-server/packages/agentstream/testdata/live/tracker-checklist.yaml",
+        "mcp-server/packages/agentstream/testdata/oracle/checklist-preview-gate-fixture.txt",
+        "mcp-server/packages/agentstream/testdata/oracle/dry-run-gate-fixture.txt",
+        "mcp-server/packages/agentstream/testdata/oracle/dry-run-verify-session.txt",
+        "mcp-server/packages/agentstream/testdata/oracle/feature-batch.yaml",
+        "mcp-server/packages/agentstream/testdata/oracle/feature-spec-batch-preview.txt",
+        "mcp-server/packages/agentstream/testdata/oracle/go-oracle-commit.txt",
+        "mcp-server/packages/agentstream/testdata/oracle/pipeline-batch-dry-run.txt",
+        "mcp-server/packages/agentstream/testdata/oracle/pipeline-batch.yaml",
+        "mcp-server/packages/agentstream/testdata/oracle/preload.txt",
+        "mcp-server/packages/agentstream/testdata/oracle/tracker-preview-gate-writer.json"
+      ],
+      "report": {
+        "schema_version": "bbce-change-locality-report.v1",
+        "scenario_id": "replay-phase3b-strangler-range",
+        "owning_slice_req": "REQ-GOAGENT-PIPELINE-CHAIN",
+        "metrics": {
+          "total_changed_files": 65,
+          "in_declared_surface_files": 39,
+          "change_locality": 0.6
+        },
+        "unexpected_paths": [
+          "mcp-server/packages/agentstream/fixtures/claude/README.md",
+          "mcp-server/packages/agentstream/fixtures/claude/stream-assistant-basic.ndjson",
+          "mcp-server/packages/agentstream/fixtures/claude/stream-error-exit.ndjson",
+          "mcp-server/packages/agentstream/fixtures/claude/stream-session-id.ndjson",
+          "mcp-server/packages/agentstream/testdata/checklist/gate-fixture-checklist.yaml",
+          "mcp-server/packages/agentstream/testdata/checklist/gate-writer-minimal-tracker.yaml",
+          "mcp-server/packages/agentstream/testdata/checklist/pilot_controlled_client/events.jsonl",
+          "mcp-server/packages/agentstream/testdata/checklist/six_class_linked_chain/events.jsonl",
+          "mcp-server/packages/agentstream/testdata/checklist/verification-evidence-manifest-pass.json",
+          "mcp-server/packages/agentstream/testdata/live/control-checklist.yaml",
+          "mcp-server/packages/agentstream/testdata/live/fake_agent.rb",
+          "mcp-server/packages/agentstream/testdata/live/fake_tracker_agent.rb",
+          "mcp-server/packages/agentstream/testdata/live/fake_tracker_goto_agent.rb",
+          "mcp-server/packages/agentstream/testdata/live/fake_tracker_inquiry_agent.rb",
+          "mcp-server/packages/agentstream/testdata/live/inquiry-subturn-checklist.yaml",
+          "mcp-server/packages/agentstream/testdata/live/tracker-checklist.yaml",
+          "mcp-server/packages/agentstream/testdata/oracle/checklist-preview-gate-fixture.txt",
+          "mcp-server/packages/agentstream/testdata/oracle/dry-run-gate-fixture.txt",
+          "mcp-server/packages/agentstream/testdata/oracle/dry-run-verify-session.txt",
+          "mcp-server/packages/agentstream/testdata/oracle/feature-batch.yaml",
+          "mcp-server/packages/agentstream/testdata/oracle/feature-spec-batch-preview.txt",
+          "mcp-server/packages/agentstream/testdata/oracle/go-oracle-commit.txt",
+          "mcp-server/packages/agentstream/testdata/oracle/pipeline-batch-dry-run.txt",
+          "mcp-server/packages/agentstream/testdata/oracle/pipeline-batch.yaml",
+          "mcp-server/packages/agentstream/testdata/oracle/preload.txt",
+          "mcp-server/packages/agentstream/testdata/oracle/tracker-preview-gate-writer.json"
+        ],
+        "shared_mechanism_touches": [
+          "mcp-server/packages/agentstream/package.json",
+          "mcp-server/packages/agentstream/src/checklist-constants.ts",
+          "mcp-server/packages/agentstream/src/paths.ts",
+          "mcp-server/packages/agentstream/src/repo-root.ts"
+        ],
+        "slice_crossings": [
+          {
+            "path": "mcp-server/packages/agentstream/fixtures/claude/README.md",
+            "matched_binding_ids": [
+              "Claude live driver (W1 replay anchor)"
+            ],
+            "matched_owning_slices": [
+              "REQ-TIED_CLAUDE_LIVE_DRIVER"
+            ]
+          },
+          {
+            "path": "mcp-server/packages/agentstream/fixtures/claude/stream-assistant-basic.ndjson",
+            "matched_binding_ids": [
+              "Claude live driver (W1 replay anchor)"
+            ],
+            "matched_owning_slices": [
+              "REQ-TIED_CLAUDE_LIVE_DRIVER"
+            ]
+          },
+          {
+            "path": "mcp-server/packages/agentstream/fixtures/claude/stream-error-exit.ndjson",
+            "matched_binding_ids": [
+              "Claude live driver (W1 replay anchor)"
+            ],
+            "matched_owning_slices": [
+              "REQ-TIED_CLAUDE_LIVE_DRIVER"
+            ]
+          },
+          {
+            "path": "mcp-server/packages/agentstream/fixtures/claude/stream-session-id.ndjson",
+            "matched_binding_ids": [
+              "Claude live driver (W1 replay anchor)"
+            ],
+            "matched_owning_slices": [
+              "REQ-TIED_CLAUDE_LIVE_DRIVER"
+            ]
+          },
+          {
+            "path": "mcp-server/packages/agentstream/src/claude-driver.ts",
+            "matched_binding_ids": [
+              "Claude live driver (W1 replay anchor)"
+            ],
+            "matched_owning_slices": [
+              "REQ-TIED_CLAUDE_LIVE_DRIVER"
+            ]
+          },
+          {
+            "path": "mcp-server/packages/agentstream/src/claude-stream.ts",
+            "matched_binding_ids": [
+              "Claude live driver (W1 replay anchor)"
+            ],
+            "matched_owning_slices": [
+              "REQ-TIED_CLAUDE_LIVE_DRIVER"
+            ]
+          },
+          {
+            "path": "mcp-server/packages/agentstream/src/control.ts",
+            "matched_binding_ids": [
+              "control goto → replace remaining"
+            ],
+            "matched_owning_slices": [
+              "REQ-GOAGENT-CHECKLIST-CONTROL"
+            ]
+          },
+          {
+            "path": "mcp-server/packages/agentstream/src/executor-dry-run.ts",
+            "matched_binding_ids": [
+              "pipeline→executor run"
+            ],
+            "matched_owning_slices": [
+              "REQ-GOAGENT-AGENT-EXECUTOR"
+            ]
+          },
+          {
+            "path": "mcp-server/packages/agentstream/src/executor-run.ts",
+            "matched_binding_ids": [
+              "pipeline→executor run"
+            ],
+            "matched_owning_slices": [
+              "REQ-GOAGENT-AGENT-EXECUTOR"
+            ]
+          },
+          {
+            "path": "mcp-server/packages/agentstream/src/htmlformat.ts",
+            "matched_binding_ids": [
+              "preload → non-compact HTML"
+            ],
+            "matched_owning_slices": [
+              "REQ-GOAGENT-YAML-STEP-RENDER"
+            ]
+          },
+          {
+            "path": "mcp-server/packages/agentstream/src/live-driver-bind.ts",
+            "matched_binding_ids": [
+              "Claude live driver (W1 replay anchor)"
+            ],
+            "matched_owning_slices": [
+              "REQ-TIED_CLAUDE_LIVE_DRIVER"
+            ]
+          },
+          {
+            "path": "mcp-server/packages/agentstream/src/live-driver-select.ts",
+            "matched_binding_ids": [
+              "Claude live driver (W1 replay anchor)"
+            ],
+            "matched_owning_slices": [
+              "REQ-TIED_CLAUDE_LIVE_DRIVER"
+            ]
+          },
+          {
+            "path": "mcp-server/packages/agentstream/src/live-executor.ts",
+            "matched_binding_ids": [
+              "pipeline→executor run"
+            ],
+            "matched_owning_slices": [
+              "REQ-GOAGENT-AGENT-EXECUTOR"
+            ]
+          },
+          {
+            "path": "mcp-server/packages/agentstream/src/red/harness-select-phase2.test.ts",
+            "matched_binding_ids": [
+              "canonical checklist composition gate"
+            ],
+            "matched_owning_slices": [
+              "REQ-GOAGENT-AGENT-EXECUTOR"
+            ]
+          },
+          {
+            "path": "mcp-server/packages/agentstream/src/run-pipeline-prep.ts",
+            "matched_binding_ids": [
+              "preload → non-compact HTML"
+            ],
+            "matched_owning_slices": [
+              "REQ-GOAGENT-YAML-STEP-RENDER"
+            ]
+          },
+          {
+            "path": "mcp-server/packages/agentstream/src/tddloop-load.ts",
+            "matched_binding_ids": [
+              "pipeline→checklist load turns"
+            ],
+            "matched_owning_slices": [
+              "REQ-GOAGENT-YAML-STEP-RENDER"
+            ]
+          },
+          {
+            "path": "mcp-server/packages/agentstream/testdata/checklist/gate-fixture-checklist.yaml",
+            "matched_binding_ids": [],
+            "matched_owning_slices": []
+          },
+          {
+            "path": "mcp-server/packages/agentstream/testdata/checklist/gate-writer-minimal-tracker.yaml",
+            "matched_binding_ids": [],
+            "matched_owning_slices": []
+          },
+          {
+            "path": "mcp-server/packages/agentstream/testdata/checklist/pilot_controlled_client/events.jsonl",
+            "matched_binding_ids": [],
+            "matched_owning_slices": []
+          },
+          {
+            "path": "mcp-server/packages/agentstream/testdata/checklist/six_class_linked_chain/events.jsonl",
+            "matched_binding_ids": [],
+            "matched_owning_slices": []
+          },
+          {
+            "path": "mcp-server/packages/agentstream/testdata/checklist/verification-evidence-manifest-pass.json",
+            "matched_binding_ids": [],
+            "matched_owning_slices": []
+          },
+          {
+            "path": "mcp-server/packages/agentstream/testdata/live/control-checklist.yaml",
+            "matched_binding_ids": [],
+            "matched_owning_slices": []
+          },
+          {
+            "path": "mcp-server/packages/agentstream/testdata/live/fake_agent.rb",
+            "matched_binding_ids": [],
+            "matched_owning_slices": []
+          },
+          {
+            "path": "mcp-server/packages/agentstream/testdata/live/fake_tracker_agent.rb",
+            "matched_binding_ids": [],
+            "matched_owning_slices": []
+          },
+          {
+            "path": "mcp-server/packages/agentstream/testdata/live/fake_tracker_goto_agent.rb",
+            "matched_binding_ids": [],
+            "matched_owning_slices": []
+          },
+          {
+            "path": "mcp-server/packages/agentstream/testdata/live/fake_tracker_inquiry_agent.rb",
+            "matched_binding_ids": [],
+            "matched_owning_slices": []
+          },
+          {
+            "path": "mcp-server/packages/agentstream/testdata/live/inquiry-subturn-checklist.yaml",
+            "matched_binding_ids": [],
+            "matched_owning_slices": []
+          },
+          {
+            "path": "mcp-server/packages/agentstream/testdata/live/tracker-checklist.yaml",
+            "matched_binding_ids": [],
+            "matched_owning_slices": []
+          },
+          {
+            "path": "mcp-server/packages/agentstream/testdata/oracle/checklist-preview-gate-fixture.txt",
+            "matched_binding_ids": [],
+            "matched_owning_slices": []
+          },
+          {
+            "path": "mcp-server/packages/agentstream/testdata/oracle/dry-run-gate-fixture.txt",
+            "matched_binding_ids": [],
+            "matched_owning_slices": []
+          },
+          {
+            "path": "mcp-server/packages/agentstream/testdata/oracle/dry-run-verify-session.txt",
+            "matched_binding_ids": [],
+            "matched_owning_slices": []
+          },
+          {
+            "path": "mcp-server/packages/agentstream/testdata/oracle/feature-batch.yaml",
+            "matched_binding_ids": [],
+            "matched_owning_slices": []
+          },
+          {
+            "path": "mcp-server/packages/agentstream/testdata/oracle/feature-spec-batch-preview.txt",
+            "matched_binding_ids": [],
+            "matched_owning_slices": []
+          },
+          {
+            "path": "mcp-server/packages/agentstream/testdata/oracle/go-oracle-commit.txt",
+            "matched_binding_ids": [],
+            "matched_owning_slices": []
+          },
+          {
+            "path": "mcp-server/packages/agentstream/testdata/oracle/pipeline-batch-dry-run.txt",
+            "matched_binding_ids": [],
+            "matched_owning_slices": []
+          },
+          {
+            "path": "mcp-server/packages/agentstream/testdata/oracle/pipeline-batch.yaml",
+            "matched_binding_ids": [],
+            "matched_owning_slices": []
+          },
+          {
+            "path": "mcp-server/packages/agentstream/testdata/oracle/preload.txt",
+            "matched_binding_ids": [],
+            "matched_owning_slices": []
+          },
+          {
+            "path": "mcp-server/packages/agentstream/testdata/oracle/tracker-preview-gate-writer.json",
+            "matched_binding_ids": [],
+            "matched_owning_slices": []
+          }
+        ],
+        "proof_boundary": "diff-scope discipline only — not behavioral correctness"
+      }
+    }
+  ]
+}

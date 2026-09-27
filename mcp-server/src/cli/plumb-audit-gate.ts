@@ -29,6 +29,11 @@ Options:
   --attempt-id ID                     Optional override for attempt_id
   --traceability-strict true|false    Default: true (used for gap exit_policy fields)
   --override                           Force allow in strict mode (also supports PLUMB_AUDIT_GATE_OVERRIDE=1)
+  --locality-report                    W2 spike: run BBCE declared-surface compare (default off; also PLUMB_AUDIT_LOCALITY=1)
+  --declared-change-surface PATH       Required with --locality-report
+  --slice-map PATH                     Required with --locality-report
+  --locality-event-jsonl PATH          Optional append-only bbce-locality-event.v1 JSONL
+  --repo-root PATH                     Repo root for relative YAML paths (default: cwd)
   --help
 `);
 }
@@ -92,6 +97,12 @@ async function main(): Promise<void> {
     : path.resolve(process.cwd(), "plumb-audit", "audit-log.jsonl");
 
   const overrideApplied = argv.includes("--override");
+  const localityReport = argv.includes("--locality-report") || process.env.PLUMB_AUDIT_LOCALITY === "1";
+  const declaredSurfacePath = getValue("--declared-change-surface");
+  const sliceMapPath = getValue("--slice-map");
+  const localityEventJsonl = getValue("--locality-event-jsonl");
+  const repoRootRaw = getValue("--repo-root");
+  const repoRoot = repoRootRaw ? path.resolve(repoRootRaw) : process.cwd();
 
   let tempIndexFile: string | null = null;
   const oldIndexFile = process.env.GIT_INDEX_FILE;
@@ -124,6 +135,11 @@ async function main(): Promise<void> {
       override_applied: overrideApplied,
       audit_log_path: auditLogPath,
       attempt_id: attemptId,
+      locality_report: localityReport,
+      declared_change_surface_path: declaredSurfacePath,
+      slice_map_path: sliceMapPath,
+      locality_event_jsonl_path: localityEventJsonl,
+      repo_root: repoRoot,
     });
 
     const gapId = res.gap_summary_ref?.id;

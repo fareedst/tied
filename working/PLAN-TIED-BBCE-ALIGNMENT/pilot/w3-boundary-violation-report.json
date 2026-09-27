@@ -1,0 +1,22 @@
+{
+  "schema_version": "bbce-boundary-violation.v1",
+  "timestamp": "2026-09-27T15:29:44.966Z",
+  "change_id": "PLAN-TIED-BBCE-ALIGNMENT",
+  "scenario_id": "dry-run-paths-ts-touch",
+  "declared_owning_slice_req": "REQ-TIED_CLAUDE_LIVE_DRIVER",
+  "slice_map_ref": "tied/analysis/agentstream-slice-map.yaml",
+  "traceability_gaps_excluded": true,
+  "import_heuristics": [],
+  "crossings": [
+    {
+      "path": "mcp-server/packages/agentstream/src/paths.ts",
+      "kind": "shared_mechanism_touch",
+      "classified_as": "shared_mechanism",
+      "confidence": "high",
+      "owning_slice_req": null,
+      "note": "Shared mechanism glob — counted separately from import-based crossing (Mechanism B may also fire)."
+    }
+  ],
+  "suppressed": [],
+  "proof_boundary": "Static path/slice heuristics only; distinct from traceability_gap_report."
+}

@@ -1,0 +1,72 @@
+# W2 build-plan — pre_implementation at depth_tier integrated (2026-09-27).
+note: tracker_path for tied_checklist_gate_validate phase pre_implementation.
+execution_evidence:
+  request: PLAN-TIED-BBCE-ALIGNMENT
+  depth_tier: integrated
+  gate_policy: advisory
+  wave: W2
+  completed:
+    - session-bootstrap
+    - translate-sponsor-intent
+    - change-definition
+    - impact-discovery
+    - risk-assessment
+    - test-strategy
+    - sub-vocabulary-sync
+steps:
+  - slug: session-bootstrap
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied/docs/ai-principles.md
+      - kind: file_path
+        path: tied/vocab/behavior-bounded-change-engineering.md
+  - slug: translate-sponsor-intent
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: docs/tied-bbce-alignment-plan.md
+  - slug: change-definition
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: working/PLAN-TIED-BBCE-ALIGNMENT/CITDP-PLAN-TIED-BBCE-ALIGNMENT.yaml
+  - slug: impact-discovery
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied/analysis/agentstream-slice-map.yaml
+      - kind: file_path
+        path: tied/docs/composition-coverage.md
+      - kind: file_path
+        path: mcp-server/src/analysis/bbce-schemas.ts
+  - slug: risk-assessment
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: working/PLAN-TIED-BBCE-ALIGNMENT/pilot/limitations.md
+      - kind: file_path
+        path: working/PLAN-TIED-BBCE-ALIGNMENT/w2-promotion/risk_analysis.bbce_alignment.proposed.yaml
+  - slug: sub-adversarial-inquiry-pass
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/obligation-report.json
+      - kind: file_path
+        path: working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/gate-result.json
+  - slug: gate-pseudocode-validation
+    disposition: not_applicable
+    policy: w2-analysis-module-no-new-impl-token
+    rationale: W2 ships validators and plumb spike without new project IMPL essence_pseudocode.
+  - slug: test-strategy
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: working/PLAN-TIED-BBCE-ALIGNMENT/evidence/build-plan-w2-outcomes-2026-09-27.md
+  - slug: sub-vocabulary-sync
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied/vocab/behavior-bounded-change-engineering.md
+      - kind: file_path
+        path: tied/analysis/README.md

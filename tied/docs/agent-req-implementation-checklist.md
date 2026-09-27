@@ -96,6 +96,8 @@ and approval revision. Observed findings do not trigger LEAP.
 | sub-pseudocode-validation-pass | sub-pseudocode-validation-pass | Checklist-ordered passes until gating satisfied |
 | sub-leap-micro-cycle | leap-micro-cycle | Fix IMPL first during GREEN; revisit REQ/ARCH if scope shifts |
 | sub-vocabulary-sync | sub-vocabulary-sync | Resolve, preload, record, validate domain vocab |
+| sub-shared-code-change-justification-pass | sub-shared-code-change-justification-pass | Advisory BBCE Mechanism B — shared-code justification record (W3+ pilot) |
+| sub-bbce-advisory-verification-pass | sub-bbce-advisory-verification-pass | Optional BBCE Mechanism D — advisory bundle at verification when `bbce_advisory_enforced: true` (W4+) |
 
 ---
 
@@ -220,6 +222,7 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 6. Deliverable production code and automated tests are **out of scope** for this step; output is the written change definition (current, desired, unchanged, non-goals, success criteria) only.
 7. State explicit counterexamples and falsification questions for the success criteria; treat non-goals as negative scope for adversarial review.
 8. **Touchpoint 1 (prompt intake):** **Express the change definition using canonical domain terms** (`[PROC-VOCABULARY_INDEX]`): **CALL sub-vocabulary-sync** (**RESOLVE**) to reword fuzzy/synonym wording in current/desired/success-criteria to the preferred terms in `tied/vocab/*.md`; **CALL sub-vocabulary-sync** (**RECORD**) for any new concept named here.
+9. **Optional BBCE declared surface (Mechanism A, advisory):** When the sponsor requests change-locality discipline, record on the per-request Tracker optional field **`declared_change_surface`** (inline object or path ref) with `behavior`, `owning_slice_req`, `expected_path_globs`, `public_behavioral_boundary`, `expected_tests`, `anticipated_shared_deps` — schema **`bbce-declared-change-surface.v1`** (see `tied/analysis/examples/declared-change-surface.v1.example.yaml`). On working CITDP, optional **`risk_analysis.bbce_alignment.declared_change_surface_ref`** mirrors the residuality attach pattern. Advisory only — not a checklist hard blocker (W4 promotion).
 
 **Outcomes**: A clear change definition exists, worded with canonical domain terms. For CITDP records, this populates the `change_definition` section.
 
@@ -249,7 +252,8 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 5. Build `tied_context`:
    - `tied_tokens_affected` — existing REQ/ARCH/IMPL tokens touched by the change.
    - `tied_tokens_new` — tokens to be created.
-5. **IMPL Discovery** (`[PROC-IMPL_CODE_TEST_SYNC]` Phase A):
+6. **Optional BBCE locality (Mechanism A, advisory):** When **`declared_change_surface`** or **`risk_analysis.bbce_alignment.declared_change_surface_ref`** is set, **PRELOAD** `tied/vocab/behavior-bounded-change-engineering.md`; validate declared surface (`bbce-declared-change-surface.v1`); record **`slice_map_ref`** when agentstream bindings are in scope (e.g. `tied/analysis/agentstream-slice-map.yaml`). Post-implementation compare via change-locality tooling or optional **`plumb-audit-gate --locality-report`** / `PLUMB_AUDIT_LOCALITY=1` (default off). **`change_locality`** metrics are advisory (W1 0.60 baseline documented in PLAN-TIED-BBCE-ALIGNMENT) — they must not hard-block commits or CI.
+7. **IMPL Discovery** (`[PROC-IMPL_CODE_TEST_SYNC]` Phase A):
    - **A1.** Load each affected IMPL detail file. Record `cross_references`, `related_decisions` (`depends_on`, `composed_with`, `see_also`), and `traceability` fields.
    - **A2.** Discover related IMPLs via four paths:
      - (a) Follow `composed_with` and `depends_on` links in `related_decisions`.
@@ -671,6 +675,8 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 6. **Module validation** per `[REQ-MODULE_VALIDATION]`: confirm each module was validated independently before integration. Document validation results.
 7. **Update vocab after writing tests/code** (`[PROC-VOCABULARY_INDEX]`): **CALL sub-vocabulary-sync** (**RECORD**) to reconcile `tied/vocab/*.md` with all terms, symbols, and storage names in the final tests and code; verify each named concept resolves to exactly one preferred term and the alphabetical index is current. Final **VALIDATE** gate is at `traceable-commit` (Touchpoint 3).
 8. When an evidence chain profile is in scope, **CALL sub-evidence-chain-profile** at the tested revision after validators, tests, lint, and consistency. Write only under `working/evidence-chain/`.
+9. **Optional BBCE shared-code (Mechanism B, advisory):** IF CITDP `risk_analysis.bbce_alignment.shared_code_justification_ref` is set OR sponsor requests shared-path review THEN **CALL sub-shared-code-change-justification-pass** after diff is known; persist `bbce-shared-code-justification.v1` under `working/{CHANGE-ID}/pilot/`; must not hard-block this gate or LEAP in advisory pilot.
+10. **Optional BBCE advisory bundle (Mechanism D, W4+ advisory):** IF per-request Tracker **`bbce_advisory_enforced: true`** THEN **CALL sub-bbce-advisory-verification-pass** (declared-surface validate, locality compare default off, B pass, C report); attach refs on `risk_analysis.bbce_alignment`; must not hard-block this gate, CI, or LEAP unless separate REQ authorizes strict blocking.
 
 **Outcomes**: All tests pass; lint clean; token validation passes; three-way alignment verified; IMPL metadata current; module validation documented; canonical vocabulary reconciled with final tests/code.
 
@@ -998,6 +1004,55 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 **RETURN** to calling step.
 
 **Reference**: `tied/vocab/fidelity-research.md`; `tied/vocab/quality-assurance.md`; `mcp-server/src/adversarial-inquiry/checklist-integration.ts`; `tied/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST-pseudocode.md`.
+
+---
+
+### sub-shared-code-change-justification-pass (sub-shared-code-change-justification-pass): Advisory shared-code justification (BBCE Mechanism B)
+
+**Invoked by**: `verification-gate` (optional, sponsor/Tracker flag); `impact-discovery` when CITDP `risk_analysis.bbce_alignment.shared_code_justification_ref` is planned.
+
+**Goals**: When a diff touches shared mechanism paths or paths outside declared surface / IMPL `code_locations`, produce a review-gated `bbce-shared-code-justification.v1` record — **not** a commit or LEAP block in W3 advisory pilot.
+
+**Preconditions**: `slice_map_ref` (e.g. `tied/analysis/agentstream-slice-map.yaml`) and optional `declared_change_surface_ref`; git diff or explicit `changed_paths`; optional plumb IMPL token list + `code_locations` index.
+
+**Tasks**:
+1. PRELOAD `tied/vocab/behavior-bounded-change-engineering.md`; RESOLVE shared mechanism, waiver, and proof_boundary terms (`[PROC-VOCABULARY_INDEX]`).
+2. Run `detectSharedCodeTriggers` / `buildSharedCodeJustificationRecord` (`mcp-server/src/analysis/bbce-shared-code-justification.ts`) or W3 pilot runner under `working/{CHANGE-ID}/pilot/`.
+3. Validate output with `validateSharedCodeJustification`; persist under working folder; attach path to CITDP `risk_analysis.bbce_alignment.shared_code_justification_ref`.
+4. When boundary crossings are also in scope, **CALL** boundary report tooling separately (Mechanism C) — do not conflate with traceability gap reports.
+
+**Outcomes**: Justification JSON + optional JSONL; `review_status: pending_human`; canonical TIED YAML unchanged unless sponsor LEAPs shared IMPL after review.
+
+**RETURN** to calling step.
+
+**Reference**: `working/PLAN-TIED-BBCE-ALIGNMENT/w3-refine/false-positive-policy.md`; `docs/tied-bbce-alignment-plan.md` Mechanism B.
+
+---
+
+### sub-bbce-advisory-verification-pass (sub-bbce-advisory-verification-pass): Optional BBCE advisory bundle at verification (Mechanism D)
+
+**Invoked by**: `verification-gate` when per-request Tracker **`bbce_advisory_enforced: true`** (default skip when absent or false); may nest from `sub-shared-code-change-justification-pass` when B triggers fire mid-cycle (W3 behavior unchanged).
+
+**Goals**: When sponsor opts in, run declared-surface validate, locality compare, Mechanism B pass, and Mechanism C boundary report as **review-gated evidence** — never replaces verification-gate, composition tests, or REQ satisfaction.
+
+**Preconditions**: `slice_map_ref` (project opt-in under `tied/analysis/*.yaml`; STDD default `tied/analysis/agentstream-slice-map.yaml`); `declared_change_surface` on Tracker and/or CITDP `risk_analysis.bbce_alignment.declared_change_surface_ref`; git diff or explicit `changed_paths`.
+
+**Tasks**:
+1. PRELOAD `tied/vocab/behavior-bounded-change-engineering.md`, `quality-assurance.md`; RESOLVE proof_boundary and waiver terms (`[PROC-VOCABULARY_INDEX]`).
+2. Validate declared surface (`bbce-declared-change-surface.v1`).
+3. CALL locality compare — change-locality tooling or `plumb-audit-gate --locality-report` / `PLUMB_AUDIT_LOCALITY=1` (default off). Record `change_locality`, unexpected paths; attach `locality_evidence_ref` or JSONL (`bbce-locality-event.v1`).
+4. CALL `sub-shared-code-change-justification-pass` when B triggers fire; write `bbce-shared-code-justification.v1`; set CITDP `shared_code_justification_ref`.
+5. CALL boundary report — `bbce-boundary-violation-report` module; write `bbce-boundary-violation.v1`; set CITDP `boundary_violation_report_ref`; apply false-positive policy suppressions.
+6. Attach outputs under `working/{CHANGE-ID}/` or program pilot tree; set **`proof_boundary`** on each artifact.
+7. **Human review** — sponsor or reviewer marks waiver / accepted residual on shared touches; **do not** auto-fail verification-gate or CI from locality score alone.
+
+**Outcomes**: Optional JSONL under documented operator paths; CITDP `risk_analysis.bbce_alignment` refs updated; advisory policy — blocking requires separate REQ + strict gate policy.
+
+**Never**: Hard-block commits or CI when `bbce_advisory_enforced` is true; treat `change_locality → 1.0` as correctness; conflate boundary violations with traceability gaps; auto-block LEAP to shared IMPL without documented waiver.
+
+**RETURN** to calling step.
+
+**Reference**: `docs/tied-bbce-alignment-plan.md` Mechanism D; `templates/architecture-decisions/ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET.yaml` (optional ARCH paste-in); `working/PLAN-TIED-BBCE-ALIGNMENT/w4-refine/proposed-bbce-advisory-pass.yaml`.
 
 ---
 

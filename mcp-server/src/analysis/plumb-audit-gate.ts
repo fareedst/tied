@@ -15,6 +15,13 @@ import {
   type PlumbDiffImpactPreviewReport,
 } from "./plumb-diff-impact-preview.js";
 import { runScopedAnalysis, type TraceabilityGapReportResult } from "./scoped-analysis.js";
+import {
+  compactLocalitySummaryFromReport,
+  maybeAppendLocalityEvent,
+  resolveRepoRelativePath,
+  runLocalityCompareFromPaths,
+} from "./bbce-plumb-locality.js";
+import type { ChangeLocalityReportV1 } from "./change-locality-pilot.js";
 
 export type PlumbAuditGatePolicy = "warn-only" | "strict";
 
@@ -62,6 +69,18 @@ export type PlumbAuditGateArgs = {
    * If undefined, gate generates one for every invocation.
    */
   attempt_id?: string;
+
+  /**
+   * W2 BBCE spike: optional declared-surface locality compare (default off).
+   * Also enabled when env PLUMB_AUDIT_LOCALITY=1.
+   */
+  locality_report?: boolean;
+  declared_change_surface_path?: string;
+  slice_map_path?: string;
+  /** Append bbce-locality-event.v1 lines when locality_report runs. */
+  locality_event_jsonl_path?: string;
+  /** Repo root for resolving relative YAML paths (default: cwd). */
+  repo_root?: string;
 };
 
 export type PlumbAuditGateRunResult = {
@@ -116,9 +135,22 @@ export type PlumbAuditGateRunResult = {
     skipped_paths_count: number;
     followed_symlinks: boolean;
   };
+
+  /** Present when locality_report spike ran successfully. */
+  locality_summary_ref?: {
+    id: string;
+    scenario_id: string;
+    owning_slice_req: string;
+    change_locality: number;
+    total_changed_files: number;
+    unexpected_paths_count: number;
+    shared_mechanism_touches_count: number;
+    slice_crossings_count: number;
+  };
 };
 
-const AUDIT_LOG_SCHEMA_VERSION = "plumb-audit-gate-log.v1";
+const AUDIT_LOG_SCHEMA_VERSION_V1 = "plumb-audit-gate-log.v1";
+const AUDIT_LOG_SCHEMA_VERSION_V2 = "plumb-audit-gate-log.v2";
 
 function sha256Hex(input: string): string {
   return crypto.createHash("sha256").update(input, "utf8").digest("hex");
@@ -226,6 +258,18 @@ function summarizeCommand(): { argv: string[]; cwd: string } {
   return { argv: process.argv.slice(2), cwd: process.cwd() };
 }
 
+function localityEnabled(args: PlumbAuditGateArgs): boolean {
+  if (args.locality_report === true) return true;
+  const env = process.env.PLUMB_AUDIT_LOCALITY?.trim();
+  return env === "1" || env?.toLowerCase() === "true";
+}
+
+function stableLocalitySummaryRef(report: ChangeLocalityReportV1): PlumbAuditGateRunResult["locality_summary_ref"] {
+  const compact = compactLocalitySummaryFromReport(report);
+  const id = sha256Hex(JSON.stringify(compact));
+  return { id, ...compact };
+}
+
 export async function runPlumbAuditGate(args: PlumbAuditGateArgs): Promise<PlumbAuditGateRunResult> {
   const policy: PlumbAuditGatePolicy = args.policy ?? "warn-only";
   const source: PlumbAuditGateSource = args.source ?? "manual";
@@ -240,6 +284,8 @@ export async function runPlumbAuditGate(args: PlumbAuditGateArgs): Promise<Plumb
   let gapReport: TraceabilityGapReportResult | null = null;
   let gapRef: PlumbAuditGateRunResult["gap_summary_ref"] | undefined;
   let effectiveRoots: PlumbAuditGateRunResult["effective_roots"] | undefined;
+  let localityRef: PlumbAuditGateRunResult["locality_summary_ref"] | undefined;
+  let localityCompact: ReturnType<typeof compactLocalitySummaryFromReport> | undefined;
 
   let pass = true;
   let failReason: string | undefined;
@@ -294,6 +340,35 @@ export async function runPlumbAuditGate(args: PlumbAuditGateArgs): Promise<Plumb
       followed_symlinks: gapRun.summary.followed_symlinks,
     };
 
+    if (localityEnabled(args)) {
+      const declaredPath = args.declared_change_surface_path;
+      const slicePath = args.slice_map_path;
+      if (!declaredPath || !slicePath) {
+        throw new Error(
+          "locality_report requires declared_change_surface_path and slice_map_path when PLUMB_AUDIT_LOCALITY is enabled"
+        );
+      }
+      const repoRoot = args.repo_root ?? process.cwd();
+      const declaredAbs = resolveRepoRelativePath(repoRoot, declaredPath);
+      const sliceAbs = resolveRepoRelativePath(repoRoot, slicePath);
+      const changedPaths = previewReport.touched_files.map((t) => t.path);
+      const localityReport = runLocalityCompareFromPaths({
+        changed_paths: changedPaths,
+        declared_change_surface_path: declaredAbs,
+        slice_map_path: sliceAbs,
+      });
+      localityRef = stableLocalitySummaryRef(localityReport);
+      localityCompact = compactLocalitySummaryFromReport(localityReport);
+      maybeAppendLocalityEvent({
+        locality_event_jsonl_path: args.locality_event_jsonl_path,
+        report: localityReport,
+        declared_change_surface_ref: declaredPath,
+        slice_map_ref: slicePath,
+        attempt_id: attemptId,
+      });
+      // W2 advisory: locality metrics never change commit_allowed / blocked.
+    }
+
     // Policy semantics:
     // - warn-only: never block even if gaps exist.
     // - strict: block when gap dimensions report failures (pass=false).
@@ -314,8 +389,11 @@ export async function runPlumbAuditGate(args: PlumbAuditGateArgs): Promise<Plumb
     blocked = policy === "strict";
   } finally {
     // Always write an audit line, even on tool errors.
-    const logLine = {
-      schema_version: AUDIT_LOG_SCHEMA_VERSION,
+    const schemaVersion =
+      localityRef !== undefined ? AUDIT_LOG_SCHEMA_VERSION_V2 : AUDIT_LOG_SCHEMA_VERSION_V1;
+
+    const logLine: Record<string, unknown> = {
+      schema_version: schemaVersion,
       timestamp: new Date().toISOString(),
       attempt: { attempt_id: attemptId, source, policy, override_applied: overrideApplied },
       command,
@@ -339,6 +417,13 @@ export async function runPlumbAuditGate(args: PlumbAuditGateArgs): Promise<Plumb
         : null,
     };
 
+    if (localityRef !== undefined) {
+      logLine.locality_summary_ref = localityRef;
+      if (localityCompact) {
+        logLine.locality = localityCompact;
+      }
+    }
+
     try {
       appendJsonLine(auditLogPath, logLine);
     } catch (e) {
@@ -361,6 +446,7 @@ export async function runPlumbAuditGate(args: PlumbAuditGateArgs): Promise<Plumb
     preview_summary_ref: previewRef,
     gap_summary_ref: gapRef,
     effective_roots: effectiveRoots,
+    locality_summary_ref: localityRef,
   };
 }
 

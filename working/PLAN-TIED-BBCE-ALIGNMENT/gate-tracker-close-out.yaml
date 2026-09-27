@@ -1,0 +1,30 @@
+# Sparse gate input for close_out at depth_tier minimal (W0 Batch A build-plan 2026-09-27).
+note: Use as tracker_path for tied_checklist_gate_validate close_out only. Machine envelope sync deferred for doc-only batch.
+execution_evidence:
+  request: PLAN-TIED-BBCE-ALIGNMENT
+  depth_tier: minimal
+  gate_policy: advisory
+  completed:
+    - session-bootstrap
+    - translate-sponsor-intent
+    - change-definition
+    - impact-discovery
+    - risk-assessment
+    - test-strategy
+    - sub-vocabulary-sync
+    - sub-vocabulary-sync
+    - verification-gate
+steps:
+  - slug: sub-adversarial-inquiry-pass
+    disposition: not_applicable
+    policy: minimal-depth-no-inquiry
+    rationale: W0 doc batch at depth_tier minimal.
+  - slug: verification-gate
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: working/PLAN-TIED-BBCE-ALIGNMENT/gate-tracker-verification.yaml
+  - slug: traceable-commit
+    disposition: deferred
+    policy: sponsor-initiated-commit
+    rationale: Build-plan guardrail — no automatic git commit; sponsor runs validate-commit todo.

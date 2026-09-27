@@ -487,6 +487,8 @@ steps:
       - "Final three-way alignment audit: for every IMPL touched, verify pseudo-code/test/code same token set; document e2e_only blocks and e2e_only_reason."
       - "IF validateStrictEligibility fails THEN take the warn-only branch — never block on a new semantic rule; state which eligibility condition is unmet."
       - "Module validation per [REQ-MODULE_VALIDATION]: confirm each module validated independently; document results."
+      - "Optional BBCE advisory bundle (Mechanism D, W4+ advisory): IF per-request Tracker bbce_advisory_enforced is true THEN CALL sub-bbce-advisory-verification-pass (declared-surface validate, locality compare default off, B pass, C report); attach refs on risk_analysis.bbce_alignment; must not hard-block verification gate, CI, or LEAP unless separate REQ authorizes strict blocking."
+      - "Optional BBCE shared-code (Mechanism B, advisory W3+): IF CITDP risk_analysis.bbce_alignment.shared_code_justification_ref is set OR sponsor requests shared-path review THEN CALL sub-shared-code-change-justification-pass after diff is known; persist bbce-shared-code-justification.v1 under working/{CHANGE-ID}/pilot/; must not hard-block verification gate or LEAP in advisory pilot."
       - "Optional diff-scoped change-risk report (charter-off default; upstream DAE CP7 CRAP metric): when CITDP diff_scoped_crap is true and quality_evidence_collect_manifest succeeded, run the report (compose git diff paths + coverage map metadata; threshold from CITDP crap_threshold or .tied-yaml.yaml dae.crap_threshold). Persist under working/{REQ}/evidence/diff-scoped-crap-{timestamp}.json; block when crap_block is true and threshold exceeded."
       - "Rebuild/reload the MCP server and smoke-test live discovery and invocation of tied_adversarial_inquiry_run; source registration alone is not adoption evidence."
       - "Record client YAML styling evidence for final on-disk TIED YAML: styling_status (configured|not_configured), resolved scalar_style and style_source from .tied-yaml.yaml or defaults, and post-style lint_yaml plus tied_validate_consistency results—not pre-style agent output alone."
@@ -592,6 +594,8 @@ steps:
     slug: "change-definition"
     tasks:
       - "Deliverable production code and automated tests are out of scope for this step; output is the written change definition (current, desired, unchanged, non-goals, success criteria) only."
+      - "Optional BBCE (Mechanism A, W2+ advisory): when sponsor requests change-locality discipline, record on the per-request Tracker optional field declared_change_surface (inline object or path ref) with behavior, owning_slice_req, expected_path_globs, public_behavioral_boundary, expected_tests, anticipated_shared_deps — schema bbce-declared-change-surface.v1; example tied/analysis/examples/declared-change-surface.v1.example.yaml. Advisory only — not a checklist hard blocker (W4 promotion)."
+      - "Optional BBCE (Mechanism D, W4+ advisory): per-request Tracker optional boolean bbce_advisory_enforced (default false). When true at verification-gate, CALL sub-bbce-advisory-verification-pass; still advisory unless separate REQ + strict gate policy."
       - "State current behavior (or \"none\" for a new requirement)."
       - "State desired behavior."
       - "State explicit counterexamples and falsification questions for the success criteria; treat non-goals as negative scope for adversarial review."
@@ -600,6 +604,7 @@ steps:
       - "State unchanged behavior (explicit boundaries of what is not affected)."
       - "Touchpoint 1 (prompt intake): express the change definition using canonical domain terms — CALL sub-vocabulary-sync (RESOLVE) to reword fuzzy/synonym wording in current/desired/success-criteria to the preferred terms in ./tied/vocab/*.md; CALL sub-vocabulary-sync (RECORD) for any new concept named here ([PROC-VOCABULARY_INDEX])."
       - "When authoring CITDP at change-definition, set optional DAE sizing fields: size (XS|S|M|L|XL), gate_profile (front/verify), express_lane (XS only when express_lane_charter allows in CITDP or .tied-yaml.yaml dae.express_lane_charter). Security/billing/auth paths must not default express lane."
+      - "When persisting working CITDP, optional risk_analysis.bbce_alignment.declared_change_surface_ref points at the YAML file; mirror residuality attach pattern — discovery aid only, not REQ authority."
     title: "Bound problem, non-goals, and measurable success"
     tracking:
       consideration_before_proceeding: "Change definition documented using canonical vocabulary (fuzzy terms reworded; new concepts recorded); current, desired, unchanged, non-goals, and success criteria stated; no implementation or test artifacts introduced in this step."
@@ -983,6 +988,8 @@ steps:
       - "IMPL Discovery A3: Build IMPL inventory table (IMPL token, Pseudo-code loaded, Declared code paths, Declared test paths, Verified-present code paths, Verified-present test paths, Testability). Declared columns come from IMPL traceability/code_locations for traceability only; Verified-present columns list only paths that exist on disk and are plausibly in scope for this change (per change-definition)."
       - "IMPL inventory verified-present entries are discovery-only — not permission to create new files. Do not add or modify production source or automated tests here; new or changed implementation artifacts begin at unit-test-red (tests) and unit-test-green (production code) after pseudo-code is validated and persisted."
       - "Keep specialized profiles conditional; record an explicit N/A rationale instead of inventing tests or universal ceremony."
+      - "Optional BBCE boundary (Mechanism C, advisory W3+): when slice_map_ref is recorded and post-implementation diff paths are available, run bbce-boundary-violation-report (standalone module — not traceability_gap_report); attach working-folder bbce-boundary-violation.v1 to CITDP risk_analysis.bbce_alignment.boundary_violation_report_ref; apply false-positive policy — advisory only."
+      - "Optional BBCE locality (Mechanism A, advisory W2+): IF declared_change_surface is set on Tracker or CITDP risk_analysis.bbce_alignment.declared_change_surface_ref THEN PRELOAD tied/vocab/behavior-bounded-change-engineering.md; validate declared surface with bbce-declared-change-surface.v1; record slice_map_ref (e.g. tied/analysis/agentstream-slice-map.yaml) when agentstream bindings in scope; compare after implementation via change-locality tooling or optional plumb-audit --locality-report (default off). change_locality must not hard-block commits/CI (advisory pilot; W1 0.60 baseline documented in PLAN-TIED-BBCE-ALIGNMENT)."
       - "Optional residuality: IF assurance profiles include stateful-reliability or data-integrity-migration OR sponsor flag residuality_pass_requested THEN CALL sub-residuality-analysis-pass before author-requirement; skip when depth_tier minimal unless sponsor flag set. Discovery outputs attach to CITDP risk_analysis.residuality_analysis only — never auto-write project YAML from worksheets."
       - "Phase B/C scope: For catalog-pseudocode-contracts through flag-contradictory-specs, treat project/feature IMPLs tied to this REQ or change-definition as the primary IMPL set. Methodology IMPLs visible in merged index reads are inherited context only unless change-definition explicitly changes methodology—do not build large empty contract tables for them."
       - "Record first-divergence hypotheses; seed an obligation inventory for the declared scope; link each quality_evidence_matrix row to a proof-boundary class (traceability_structure, pseudo_code_structure, semantic_fidelity, executable_behavior, human_decision)."
@@ -1526,6 +1533,62 @@ sub_procedures:
     title: "Close-out evidence sync (Wave 5 process contract)"
     tracking:
       consideration_before_proceeding: "Dual-write cleared; manifest or N/A receipt present when required; reconcile process_grade recorded; envelope process gaps visible."
+      retry_count: "0"
+      state_history: []
+      status: "pending"
+  - flow:
+      return_to: "caller"
+    goals: "When bbce_advisory_enforced is true, run declared-surface validate, locality compare (default off), B pass, and C boundary report as review-gated evidence — advisory unless separate REQ authorizes blocking."
+    invoked_by:
+      - "sub-shared-code-change-justification-pass"
+      - "verification-gate"
+    outcomes: "bbce-locality-event.v1 optional JSONL; bbce-shared-code-justification.v1 and bbce-boundary-violation.v1 under working/{CHANGE-ID}/; CITDP risk_analysis.bbce_alignment refs updated; human review pending; no auto verification-gate block at advisory policy."
+    preconditions:
+      - "Per-request Tracker bbce_advisory_enforced is true (default skip when false or absent)."
+      - "slice_map_ref and declared_change_surface (Tracker and/or CITDP declared_change_surface_ref); changed_paths or git diff available."
+    references:
+      - "docs/plumb-audit-gate.md"
+      - "docs/tied-bbce-alignment-plan.md"
+      - "tied/analysis/README.md"
+      - "tied/vocab/behavior-bounded-change-engineering.md"
+      - "working/PLAN-TIED-BBCE-ALIGNMENT/w3-refine/false-positive-policy.md"
+      - "working/PLAN-TIED-BBCE-ALIGNMENT/w4-refine/proposed-bbce-advisory-pass.yaml"
+    slug: "sub-bbce-advisory-verification-pass"
+    tasks:
+      - "Attach artifacts under working/{CHANGE-ID}/pilot/ or program pilot tree; document proof_boundary on each output; human review for waivers — do not auto-fail verification-gate from locality score alone."
+      - "CALL locality compare via change-locality-pilot or plumb-audit-gate --locality-report / PLUMB_AUDIT_LOCALITY=1 (default off); record change_locality and unexpected paths; optional append bbce-locality-event.v1 JSONL per tied/analysis/README.md."
+      - "CALL sub-shared-code-change-justification-pass when shared_mechanism or outside_declared_surface triggers fire; set CITDP shared_code_justification_ref."
+      - "PRELOAD tied/vocab/behavior-bounded-change-engineering.md and quality-assurance.md; RESOLVE proof_boundary and waiver terms ([PROC-VOCABULARY_INDEX])."
+      - "Run bbce-boundary-violation-report.ts; validate bbce-boundary-violation.v1; apply false-positive policy; set CITDP boundary_violation_report_ref."
+      - "Validate declared surface with bbce-declared-change-surface.v1 (schema in mcp-server/src/analysis/bbce-schemas.ts)."
+    title: "Optional BBCE advisory bundle at verification (Mechanism D)"
+    tracking:
+      consideration_before_proceeding: "Advisory bundle artifacts attached when flag set; verification-gate not hard-blocked at advisory policy."
+      retry_count: "0"
+      state_history: []
+      status: "pending"
+  - flow:
+      return_to: "caller"
+    goals: "When shared mechanism or out-of-surface paths change, produce review-gated bbce-shared-code-justification.v1 — advisory in W3 pilot."
+    invoked_by:
+      - "impact-discovery"
+      - "verification-gate"
+    outcomes: "bbce-shared-code-justification.v1 on disk; review_status pending_human; project YAML unchanged unless sponsor LEAPs after review."
+    preconditions:
+      - "slice_map_ref recorded (e.g. tied/analysis/agentstream-slice-map.yaml) and changed_paths or git diff available."
+    references:
+      - "docs/tied-bbce-alignment-plan.md"
+      - "tied/vocab/behavior-bounded-change-engineering.md"
+      - "working/PLAN-TIED-BBCE-ALIGNMENT/w3-refine/false-positive-policy.md"
+    slug: "sub-shared-code-change-justification-pass"
+    tasks:
+      - "PRELOAD tied/vocab/behavior-bounded-change-engineering.md; RESOLVE shared mechanism, waiver, and proof_boundary terms ([PROC-VOCABULARY_INDEX])."
+      - "Run mcp-server/src/analysis/bbce-shared-code-justification.ts (detectSharedCodeTriggers, buildSharedCodeJustificationRecord) on changed_paths with slice_map and optional declared surface + IMPL code_locations from plumb preview."
+      - "Validate bbce-shared-code-justification.v1; write under working/{CHANGE-ID}/pilot/; set CITDP risk_analysis.bbce_alignment.shared_code_justification_ref — advisory only; no auto-block LEAP or commits in W3 pilot."
+      - "When boundary crossings are in scope, use bbce-boundary-violation-report separately — do not conflate with traceability_gap_report."
+    title: "Advisory shared-code justification (BBCE Mechanism B)"
+    tracking:
+      consideration_before_proceeding: "Justification record validated and attached; no checklist hard block from advisory pilot."
       retry_count: "0"
       state_history: []
       status: "pending"

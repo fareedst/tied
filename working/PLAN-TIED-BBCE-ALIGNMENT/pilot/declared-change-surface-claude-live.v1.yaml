@@ -1,0 +1,17 @@
+schema_version: bbce-declared-change-surface.v1
+scenario_id: replay-claude-live-driver-commit
+owning_slice_req: REQ-TIED_CLAUDE_LIVE_DRIVER
+binding_ids:
+  - Claude live driver (W1 replay anchor)
+  - pipeline→executor run
+expected_path_globs:
+  - mcp-server/packages/agentstream/src/claude-driver.ts
+  - mcp-server/packages/agentstream/src/claude-stream.ts
+  - mcp-server/packages/agentstream/src/live-driver-bind.ts
+  - mcp-server/packages/agentstream/src/live-driver-select.ts
+  - mcp-server/packages/agentstream/src/live-executor.ts
+  - mcp-server/packages/agentstream/fixtures/claude/**
+proof_boundary: diff-scope discipline only — not behavioral correctness
+notes: >
+  Declared surface for read-only replay of git d5ea688^..d5ea688 (Claude live driver).
+  Sponsor pre-declaration simulates Mechanism A step 5; actual diff may include shared wiring.

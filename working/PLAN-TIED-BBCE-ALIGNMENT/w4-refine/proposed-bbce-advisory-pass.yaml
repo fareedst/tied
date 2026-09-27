@@ -1,0 +1,41 @@
+sub_procedure:
+  authority_boundary: "review_gated_evidence_only"
+  blocking: false
+  blocking_requires: "separate_req_and_strict_gate_policy"
+  calls:
+    - default: "off"
+      env_optional: "PLUMB_AUDIT_LOCALITY"
+      slug: "bbce-locality-compare"
+      tooling:
+        - "change-locality-pilot"
+        - "plumb-audit-gate"
+    - module: "mcp-server/src/analysis/bbce-boundary-violation-report.ts"
+      slug: "bbce-boundary-violation-report"
+    - schema: "bbce-declared-change-surface.v1"
+      slug: "bbce-declared-surface-validate"
+    - slug: "sub-shared-code-change-justification-pass"
+      when: "shared_mechanism_or_outside_surface_triggers"
+  mode: "opt_in_tracker_flag"
+  outputs:
+    boundary_schema: "bbce-boundary-violation.v1"
+    citdp_attach_field: "risk_analysis.bbce_alignment"
+    justification_schema: "bbce-shared-code-justification.v1"
+    locality_jsonl_schema: "bbce-locality-event.v1"
+    working_dir_pattern: "working/{change_id}/pilot/"
+  placement:
+    during_step: "verification-gate"
+    nested_from:
+      - "sub-shared-code-change-justification-pass"
+  preconditions:
+    declared_surface_any:
+      - citdp_ref: "risk_analysis.bbce_alignment.declared_change_surface_ref"
+      - tracker_optional: "declared_change_surface"
+    slice_map_ref: "tied/analysis/*.yaml"
+  proof_boundary: "Diff-scope and declared-surface alignment only; not runtime behavior or REQ satisfaction."
+  slug: "sub-bbce-advisory-verification-pass"
+  title: "Optional BBCE advisory bundle at verification (Mechanism D)"
+  tracker_flags:
+    bbce_advisory_enforced:
+      default: false
+      meaning: "When true, CALL locality compare + B pass + C report at verification; still advisory unless separate REQ authorizes blocking."
+      type: "boolean"

@@ -1,0 +1,53 @@
+execution_evidence:
+  completed:
+    - "change-definition"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "sub-bbce-advisory-verification-pass"
+    - "sub-vocabulary-sync"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+    - "verification-gate"
+  depth_tier: "integrated"
+  gate_policy: "advisory"
+  request: "PLAN-TIED-BBCE-ALIGNMENT"
+  run_id: "w4-build-plan-verification-2026-09-27"
+  wave: "W4"
+note: "tracker_path for tied_checklist_gate_validate phase verification."
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied/docs/ai-principles.md"
+    slug: "session-bootstrap"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "working/PLAN-TIED-BBCE-ALIGNMENT/evidence/refine-plan-w4-outcomes-2026-09-27.md"
+    slug: "test-strategy"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "working/PLAN-TIED-BBCE-ALIGNMENT/CITDP-PLAN-TIED-BBCE-ALIGNMENT.yaml"
+    slug: "risk-assessment"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied/docs/agent-req-implementation-checklist.yaml"
+      - kind: "file_path"
+        path: "working/PLAN-TIED-BBCE-ALIGNMENT/w4-refine/proposed-bbce-advisory-pass.yaml"
+    slug: "sub-bbce-advisory-verification-pass"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/phase-verification-w4/gate-result.json"
+    slug: "sub-adversarial-inquiry-pass"
+  - disposition: "not_applicable"
+    policy: "w4-checklist-docs-no-new-impl-token"
+    slug: "gate-pseudocode-validation"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "working/PLAN-TIED-BBCE-ALIGNMENT/gates/verification-2026-09-27-w4-build.json"
+    slug: "verification-gate"

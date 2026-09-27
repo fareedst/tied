@@ -1,0 +1,83 @@
+# W1 build-plan — verification at depth_tier integrated (2026-09-27).
+note: tracker_path for tied_checklist_gate_validate phase verification.
+execution_evidence:
+  request: PLAN-TIED-BBCE-ALIGNMENT
+  depth_tier: integrated
+  gate_policy: advisory
+  wave: W1
+  completed:
+    - session-bootstrap
+    - translate-sponsor-intent
+    - change-definition
+    - impact-discovery
+    - risk-assessment
+    - test-strategy
+    - sub-vocabulary-sync
+    - unit-test-red
+    - gate-pseudocode-validation
+    - verification-gate
+steps:
+  - slug: session-bootstrap
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied/docs/ai-principles.md
+  - slug: translate-sponsor-intent
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: docs/tied-bbce-alignment-plan.md
+  - slug: change-definition
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: working/PLAN-TIED-BBCE-ALIGNMENT/CITDP-PLAN-TIED-BBCE-ALIGNMENT.yaml
+  - slug: impact-discovery
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: working/PLAN-TIED-BBCE-ALIGNMENT/pilot/locality-run.json
+  - slug: risk-assessment
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: working/PLAN-TIED-BBCE-ALIGNMENT/pilot/limitations.md
+  - slug: sub-adversarial-inquiry-pass
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/finding-ledger.jsonl
+      - kind: file_path
+        path: working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/evidence-provenance.json
+  - slug: test-strategy
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: working/PLAN-TIED-BBCE-ALIGNMENT/pilot/w1-test-strategy.md
+  - slug: sub-vocabulary-sync
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied/vocab/behavior-bounded-change-engineering.md
+  - slug: unit-test-red
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: mcp-server/src/analysis/change-locality-pilot.test.ts
+    notes: W1 RED tests authored before change-locality-pilot.ts implementation (build-plan TDD).
+  - slug: gate-pseudocode-validation
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: working/PLAN-TIED-BBCE-ALIGNMENT/pilot/w1-test-strategy.md
+    notes: No new IMPL token; gate satisfied via documented analysis-only proof boundary per CITDP.
+  - slug: verification-gate
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: working/PLAN-TIED-BBCE-ALIGNMENT/pilot/pilot-dod-checklist.md
+      - kind: file_path
+        path: working/PLAN-TIED-BBCE-ALIGNMENT/pilot/locality-run.json
+      - kind: file_path
+        path: docs/comparisons/bbce-mechanisms-for-tied-improvement.md
+    notes: W1 pilot metrics only; close_out envelope sync deferred to sponsor plan-close-out.

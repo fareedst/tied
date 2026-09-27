@@ -140,5 +140,72 @@ describe("plumb audit gate", () => {
     assert.ok(strictRaw.length > 0);
     assert.ok(warnRaw.length > 0);
   });
+
+  it("writes v1 audit line when locality_report is off (default)", async () => {
+    initGitRepoAndCommitBase({
+      aTs: "export const x = 1;\n",
+      aTest: "import { x } from './a.js';\nexport const y = x;\n",
+    });
+
+    const auditPath = makeAuditLogPath("locality-off-v1");
+    const res = await runPlumbAuditGate({
+      policy: "warn-only",
+      source: "manual",
+      selection: "staged",
+      audit_log_path: auditPath,
+    });
+
+    assert.strictEqual(res.locality_summary_ref, undefined);
+    const line = JSON.parse(fs.readFileSync(auditPath, "utf8").trim());
+    assert.strictEqual(line.schema_version, "plumb-audit-gate-log.v1");
+    assert.strictEqual(line.locality_summary_ref, undefined);
+  });
+
+  it("writes v2 audit line with compact locality when locality_report is on", async () => {
+    const repoRoot = path.resolve(origCwd, "..");
+    const declaredPath = path.join(
+      repoRoot,
+      "working/PLAN-TIED-BBCE-ALIGNMENT/pilot/declared-change-surface-claude-live.v1.yaml"
+    );
+    const slicePath = path.join(repoRoot, "tied/analysis/agentstream-slice-map.yaml");
+    if (!fs.existsSync(declaredPath) || !fs.existsSync(slicePath)) {
+      return; // skip when W2 artifacts absent in sparse checkout
+    }
+
+    initGitRepoAndCommitBase({
+      aTs: "export const x = 1;\n",
+      aTest: "import { x } from './a.js';\nexport const y = x;\n",
+    });
+
+    fs.mkdirSync("mcp-server/packages/agentstream/src", { recursive: true });
+    fs.writeFileSync(
+      path.join("mcp-server/packages/agentstream/src/claude-driver.ts"),
+      "export const claude = 1;\n",
+      "utf8"
+    );
+    child_process.execFileSync("git", ["add", "."], { stdio: ["ignore", "ignore", "ignore"] });
+
+    const eventPath = makeAuditLogPath("locality-events.jsonl");
+    const auditPath = makeAuditLogPath("locality-on-v2");
+
+    const res = await runPlumbAuditGate({
+      policy: "warn-only",
+      source: "manual",
+      selection: "staged",
+      audit_log_path: auditPath,
+      locality_report: true,
+      declared_change_surface_path: declaredPath,
+      slice_map_path: slicePath,
+      repo_root: repoRoot,
+      locality_event_jsonl_path: eventPath,
+    });
+
+    assert.ok(res.locality_summary_ref?.id);
+    const line = JSON.parse(fs.readFileSync(auditPath, "utf8").trim());
+    assert.strictEqual(line.schema_version, "plumb-audit-gate-log.v2");
+    assert.ok(line.locality_summary_ref?.change_locality !== undefined);
+    assert.ok(line.locality?.scenario_id);
+    assert.strictEqual(res.blocked, false);
+  });
 });
 
