@@ -1,0 +1,82 @@
+# Sparse gate input for W1 refine-plan batch — pre_implementation at depth_tier integrated.
+# Authoritative execution Tracker: agent-req-implementation-checklist.yaml (W1 batch section).
+# Batch A (plan-doc) receipts remain valid for minimal depth; this file supersedes for W1 integrated pre_implementation only.
+note: Use as tracker_path for tied_checklist_gate_validate pre_implementation for W1 bounded discovery pilot planning batch.
+depth_tier: integrated
+gate_policy: advisory
+profile_depth: integrated
+execution_evidence:
+  request: PLAN-TIED-RESIDUALITY-ANALYSIS
+  batch: W1-refine-plan
+  completed:
+    - session-bootstrap
+    - translate-sponsor-intent
+    - change-definition
+    - impact-discovery
+    - risk-assessment
+    - test-strategy
+steps:
+  - slug: session-bootstrap
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied/vocab/residuality.md
+      - kind: file_path
+        path: tied/vocab/fidelity-research.md
+      - kind: file_path
+        path: tied/vocab/quality-assurance.md
+      - kind: file_path
+        path: tied/docs/ai-principles.md
+  - slug: translate-sponsor-intent
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: /Users/fareed/.cursor/plans/plan_residuality_feature_07582e06.plan.md
+      - kind: file_path
+        path: docs/tied-residuality-analysis-plan.md
+  - slug: change-definition
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: working/PLAN-TIED-RESIDUALITY-ANALYSIS/CITDP-PLAN-TIED-RESIDUALITY-ANALYSIS.yaml
+  - slug: impact-discovery
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: working/PLAN-TIED-RESIDUALITY-ANALYSIS/CITDP-PLAN-TIED-RESIDUALITY-ANALYSIS.yaml
+      - kind: file_path
+        path: tied/requirements/REQ-FEAT_TASK_EXECUTION_RECOVERY.yaml
+      - kind: file_path
+        path: tied/requirements/REQ-FEAT_IDEMPOTENT_CREATION.yaml
+      - kind: file_path
+        path: docs/tied-residuality-analysis-plan.md
+  - slug: risk-assessment
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: working/PLAN-TIED-RESIDUALITY-ANALYSIS/CITDP-PLAN-TIED-RESIDUALITY-ANALYSIS.yaml
+      - kind: file_path
+        path: working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/w1-refine-risk-assessment.md
+  - slug: sub-adversarial-inquiry-pass
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: working/REQ-FEAT_TASK_EXECUTION_RECOVERY/adversarial-inquiry/phase-pre_implementation/obligation-report.json
+      - kind: file_path
+        path: working/REQ-FEAT_TASK_EXECUTION_RECOVERY/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl
+      - kind: file_path
+        path: working/REQ-FEAT_TASK_EXECUTION_RECOVERY/adversarial-inquiry/phase-pre_implementation/gate-result.json
+      - kind: file_path
+        path: working/REQ-FEAT_TASK_EXECUTION_RECOVERY/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json
+    note: Inquiry scoped to pilot REQ token (REQ-* required for MCP artifact paths); change_id remains PLAN-TIED-RESIDUALITY-ANALYSIS.
+  - slug: gate-pseudocode-validation
+    disposition: not_applicable
+    policy: w1-discovery-no-impl-mutation
+    rationale: W1 refine-plan batch plans read-only residuality discovery against existing pilot REQs; no IMPL essence_pseudocode sidecar created or changed. Stack elevation deferred to W3 behavior-changing CITDP.
+  - slug: test-strategy
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: working/PLAN-TIED-RESIDUALITY-ANALYSIS/CITDP-PLAN-TIED-RESIDUALITY-ANALYSIS.yaml
+      - kind: file_path
+        path: docs/tied-residuality-analysis-plan.md

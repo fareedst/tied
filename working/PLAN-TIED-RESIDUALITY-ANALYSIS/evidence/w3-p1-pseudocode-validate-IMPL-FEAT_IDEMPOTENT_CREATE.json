@@ -1,0 +1,61 @@
+{
+  "token": "IMPL-FEAT_IDEMPOTENT_CREATE",
+  "gate_mode": true,
+  "ok": true,
+  "summary": {
+    "schema_version": "layer-b-pseudocode-validator.v1",
+    "ok": true,
+    "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+    "blocks": [
+      {
+        "name": "CREATE_FEATURE_IDEMPOTENTLY",
+        "line": 20,
+        "token_refs": [
+          "ARCH-FEAT_IDEMPOTENT_CREATION",
+          "IMPL-FEAT_IDEMPOTENT_CREATE",
+          "REQ-FEAT_IDEMPOTENT_CREATION"
+        ],
+        "contract_fields": [
+          "DATA",
+          "DATA_TRANSITION",
+          "EFFECTS",
+          "FAILURE_MODES",
+          "INPUT",
+          "OUTPUT",
+          "POST",
+          "PRE",
+          "TERMINATION"
+        ]
+      }
+    ],
+    "dependencies": [],
+    "coverage": [
+      {
+        "block": "CREATE_FEATURE_IDEMPOTENTLY",
+        "branch_lines": [
+          31,
+          36,
+          37,
+          41,
+          46,
+          57,
+          63,
+          64,
+          65,
+          78,
+          91,
+          92,
+          104,
+          117
+        ],
+        "failure_modes": [
+          "# [IMPL-FEAT_IDEMPOTENT_CREATE] [ARCH-FEAT_IDEMPOTENT_CREATION] [REQ-FEAT_IDEMPOTENT_CREATION] — How: rollout skew yields deterministic version error — never silent dual fingerprint interpretation (S-T09).",
+          "POST: mismatch returns deterministic error without allocation"
+        ],
+        "references": []
+      }
+    ],
+    "diagnostics": [],
+    "leakage": []
+  }
+}

@@ -13,15 +13,20 @@ IMPL-FEAT_IDEMPOTENT_CREATE:
     details:
       - "Clean up uncommitted reservations on failure."
       - "Compute deterministic fingerprint from normalized title and initial references."
+      - "Consult authoritative store on unknown-outcome retry before re-allocating (S-T04)."
+      - "Honor lock TTL and metadata before blocking new allocation (S-T18)."
       - "Require explicit request_key."
       - "Return existing feature for matching key and fingerprint."
       - "Return REQUEST_KEY_COLLISION for mismatch."
+      - "Enforce lock fencing after coordinator recovery (S-T10)."
+      - "Apply create-path backpressure under retry storm (S-T11)."
+      - "Expose lock holder observability metadata (S-O07)."
     summary: "Normalize the request, acquire a request-key lock, compare durable request metadata, allocate if absent, publish fully, and release the lock."
   metadata:
     last_updated:
       author: "AI Agent"
-      date: "2026-08-13"
-      reason: "Batch 1 implementation evidence"
+      date: "2026-09-27"
+      reason: "W3 residuality LEAP P0+P1 — idempotent create P1 blocks"
   name: "Idempotent feature creation"
   rationale:
     benefits:

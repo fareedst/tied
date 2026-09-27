@@ -1,0 +1,48 @@
+{
+  "receipt": {
+    "success": true,
+    "tool": "tied_adversarial_inquiry_run",
+    "request_token": "REQ-FEAT_TASK_EXECUTION_RECOVERY",
+    "project_id": "stdd",
+    "run_id": "build-plan-w2-classification-verification-2026-09-27",
+    "phase": "verification",
+    "scope": ["PLAN-TIED-RESIDUALITY-ANALYSIS#W2-CLASSIFICATION-LEDGER#20260927"],
+    "scope_hash": "b432ca3b3b7de0c4fa7b92ab7f8946bd70306c8ae38f5dc64b2ad48527e2419b",
+    "artifact_hashes": {
+      "obligation-report.json": "dcc8393421438495cb80b6b96b48a988221792804cfee382998700c11a28a0b0",
+      "finding-ledger.jsonl": "3b7a1d6fdf33eebb102b608c75b3c977b8a8d5585d83a1751363001cb2563acf",
+      "gate-result.json": "e854374064d10bd3fd8af75e5784d208f2a176cb9c08460931711936773edba6",
+      "evidence-provenance.json": "4cfad7f4455dbec85bb234f756ba7c4e584527e0d0b39539c121dadb70700853"
+    }
+  },
+  "artifacts": {
+    "obligation-report.json": {
+      "valid": true,
+      "path": "working/REQ-FEAT_TASK_EXECUTION_RECOVERY/adversarial-inquiry/phase-verification/obligation-report.json",
+      "hash": "dcc8393421438495cb80b6b96b48a988221792804cfee382998700c11a28a0b0"
+    },
+    "finding-ledger.jsonl": {
+      "valid": true,
+      "path": "working/REQ-FEAT_TASK_EXECUTION_RECOVERY/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
+      "hash": "3b7a1d6fdf33eebb102b608c75b3c977b8a8d5585d83a1751363001cb2563acf"
+    },
+    "gate-result.json": {
+      "valid": true,
+      "path": "working/REQ-FEAT_TASK_EXECUTION_RECOVERY/adversarial-inquiry/phase-verification/gate-result.json",
+      "hash": "e854374064d10bd3fd8af75e5784d208f2a176cb9c08460931711936773edba6"
+    },
+    "evidence-provenance.json": {
+      "valid": true,
+      "path": "working/REQ-FEAT_TASK_EXECUTION_RECOVERY/adversarial-inquiry/phase-verification/evidence-provenance.json",
+      "hash": "4cfad7f4455dbec85bb234f756ba7c4e584527e0d0b39539c121dadb70700853"
+    }
+  },
+  "expected": {
+    "request_token": "REQ-FEAT_TASK_EXECUTION_RECOVERY",
+    "project_id": "stdd",
+    "run_id": "build-plan-w2-classification-verification-2026-09-27",
+    "phase": "verification",
+    "scope": ["PLAN-TIED-RESIDUALITY-ANALYSIS#W2-CLASSIFICATION-LEDGER#20260927"],
+    "scope_hash": "b432ca3b3b7de0c4fa7b92ab7f8946bd70306c8ae38f5dc64b2ad48527e2419b"
+  }
+}

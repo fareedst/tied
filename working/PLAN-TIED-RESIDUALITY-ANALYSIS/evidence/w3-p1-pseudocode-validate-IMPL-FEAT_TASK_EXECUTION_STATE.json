@@ -1,0 +1,15 @@
+{
+  "token": "IMPL-FEAT_TASK_EXECUTION_STATE",
+  "gate_mode": true,
+  "ok": true,
+  "summary": {
+    "schema_version": "layer-b-pseudocode-validator.v1",
+    "ok": true,
+    "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+    "blocks": [],
+    "dependencies": [],
+    "coverage": [],
+    "diagnostics": [],
+    "leakage": []
+  }
+}

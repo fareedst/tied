@@ -1,0 +1,12 @@
+{
+  "allowed": true,
+  "ok": true,
+  "blocking": false,
+  "depth": "minimal",
+  "phase": "pre_implementation",
+  "diagnostics": [],
+  "gate_receipt": {
+    "path": "/Users/fareed/Documents/dev/chatgpt/stdd/working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/pre_implementation-2026-09-27T06-13-03-814Z.json",
+    "hash": "sha256:6036aa32e2f99f5f3041f9fa5627c233587f5931f19c6cfcc2a9db90e1680ed3"
+  }
+}

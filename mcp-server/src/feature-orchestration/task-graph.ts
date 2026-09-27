@@ -24,6 +24,9 @@ export interface EvidenceRecord {
   provenance: string;
   ordering_key: string;
   recorded_at: string;
+  attempt_key?: string;
+  idempotency_key?: string;
+  duplicate_delivery?: boolean;
 }
 
 export interface TaskEntry {

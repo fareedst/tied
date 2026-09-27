@@ -1,0 +1,35 @@
+# Candidate only — not canonical until W5 promotion gate
+schema_version: stressor-residue.v1
+baseline:
+  objective: "No partial manifest publish"
+  naive_architecture_summary: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/baseline.md"
+  assumptions:
+    - "Publish is atomic from reader perspective"
+stressor:
+  id: "S-T08"
+  category: technical
+  description: "Publish fails after feature id allocated but before manifest fully visible"
+impact_path:
+  people: ["API client"]
+  functions: ["CREATE_FEATURE_IDEMPOTENTLY", "cleanup reservation"]
+  data: ["draft manifest", "request-key reservation"]
+  dependencies: ["ARCH-FEAT_STORE_PERSISTENCE"]
+  bindings: ["store publication"]
+residue:
+  description: "No readable partial feature; reservation cleaned; retry succeeds"
+  class: desirable
+business_priority: "P0 data-integrity"
+attractor: "A3"
+design_response: "PUBLISH_FAILED removes uncommitted reservation per IMPL pseudo-code"
+validation_stressor: null
+evidence:
+  method: "W1 worksheet S-T08"
+  references:
+    - "tied/requirements/REQ-FEAT_IDEMPOTENT_CREATION.yaml"
+  limitation: "W4 fault injection required for proof"
+  proof_boundary: "Discovery aid only"
+disposition:
+  status: unresolved
+  tied_refs:
+    - "REQ-FEAT_IDEMPOTENT_CREATION"
+    - "IMPL-FEAT_IDEMPOTENT_CREATE"

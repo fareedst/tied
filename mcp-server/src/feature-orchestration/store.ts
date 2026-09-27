@@ -20,6 +20,96 @@ export type MutationResult =
 
 type RequestRecord = { fingerprint: string; directory_name: string };
 
+export type LockRecord = { expires_at_ms: number; holder_id?: string; acquired_at_ms?: number; lock_epoch?: number; fencing_token?: string };
+
+export type LockTtlResult =
+  | { ok: true; action: "existing_feature"; directory_name: string }
+  | { ok: true; action: "eligible_for_allocation" }
+  | { ok: false; error: "LOCK_HELD_VALID" };
+
+const DEFAULT_REQUEST_LOCK_TTL_MS = 60_000;
+
+// [IMPL-FEAT_IDEMPOTENT_CREATE] [ARCH-FEAT_IDEMPOTENT_CREATION] [REQ-FEAT_IDEMPOTENT_CREATION] — How: expired locks release; metadata read before blocking; new allocation proceeds when prior lock invalid (S-T18).
+export function handleLockTtl(
+  records: Record<string, RequestRecord> | undefined,
+  requestKey: string,
+  lockRecord: LockRecord | null,
+  nowMs: number,
+): LockTtlResult {
+  const prior = records?.[requestKey];
+  if (prior) return { ok: true, action: "existing_feature", directory_name: prior.directory_name };
+  if (!lockRecord) return { ok: true, action: "eligible_for_allocation" };
+  if (lockRecord.expires_at_ms <= nowMs) return { ok: true, action: "eligible_for_allocation" };
+  return { ok: false, error: "LOCK_HELD_VALID" };
+}
+
+// [IMPL-FEAT_IDEMPOTENT_CREATE] [ARCH-FEAT_IDEMPOTENT_CREATION] [REQ-FEAT_IDEMPOTENT_CREATION] — How: reject rollout skew with deterministic version error (S-T09).
+export function validateRequestSchemaVersion(
+  requestVersion: number,
+  expectedVersion: number,
+): { ok: true } | { ok: false; error: "SCHEMA_VERSION_MISMATCH" } {
+  if (requestVersion !== expectedVersion) return { ok: false, error: "SCHEMA_VERSION_MISMATCH" };
+  return { ok: true };
+}
+
+// [IMPL-FEAT_IDEMPOTENT_CREATE] [ARCH-FEAT_IDEMPOTENT_CREATION] [REQ-FEAT_IDEMPOTENT_CREATION] — How: fencing after coordinator recovery (S-T10).
+export function enforceLockFencing(
+  coordinatorEpoch: number,
+  lockEpoch: number,
+  fencingToken: string | undefined,
+  coordinatorAvailable: boolean,
+): { ok: true } | { ok: false; error: "LOCK_COORDINATOR_UNAVAILABLE" | "FENCING_TOKEN_STALE" } {
+  if (!coordinatorAvailable) return { ok: false, error: "LOCK_COORDINATOR_UNAVAILABLE" };
+  if (coordinatorEpoch > lockEpoch && !fencingToken?.trim()) return { ok: false, error: "FENCING_TOKEN_STALE" };
+  if (coordinatorEpoch > lockEpoch && fencingToken === "stale") return { ok: false, error: "FENCING_TOKEN_STALE" };
+  return { ok: true };
+}
+
+// [IMPL-FEAT_IDEMPOTENT_CREATE] [ARCH-FEAT_IDEMPOTENT_CREATION] [REQ-FEAT_IDEMPOTENT_CREATION] — How: create-path backpressure under retry storm (S-T11).
+export function applyCreatePathBackpressure(
+  queueDepth: number,
+  maxQueueDepth: number,
+  inflightLocks: number,
+  maxInflightLocks: number,
+): "proceed" | "throttle_retryable" {
+  if (queueDepth >= maxQueueDepth || inflightLocks >= maxInflightLocks) return "throttle_retryable";
+  return "proceed";
+}
+
+export type LockObservabilityView = {
+  holder_id: string;
+  age_ms: number;
+  expires_at_ms: number;
+  stale_lock: boolean;
+};
+
+// [IMPL-FEAT_IDEMPOTENT_CREATE] [ARCH-FEAT_IDEMPOTENT_CREATION] [REQ-FEAT_IDEMPOTENT_CREATION] — How: operator lock holder visibility (S-O07).
+export function exposeLockHolderObservability(lockRecord: LockRecord, nowMs: number): LockObservabilityView {
+  const acquired = lockRecord.acquired_at_ms ?? nowMs;
+  const holder = lockRecord.holder_id ?? "unknown";
+  const expires = lockRecord.expires_at_ms;
+  return {
+    holder_id: holder,
+    age_ms: Math.max(0, nowMs - acquired),
+    expires_at_ms: expires,
+    stale_lock: expires <= nowMs,
+  };
+}
+
+function readLockRecord(lockPath: string): LockRecord | null {
+  const metaPath = path.join(lockPath, "lock-meta.json");
+  if (!fs.existsSync(metaPath)) return null;
+  try {
+    const parsed = JSON.parse(fs.readFileSync(metaPath, "utf8")) as LockRecord;
+    if (typeof parsed.expires_at_ms === "number") return parsed;
+  } catch { /* ignore */ }
+  return null;
+}
+
+function writeLockRecord(lockPath: string, expiresAtMs: number): void {
+  fs.writeFileSync(path.join(lockPath, "lock-meta.json"), JSON.stringify({ expires_at_ms: expiresAtMs }), "utf8");
+}
+
 function stableJson(value: unknown): string {
   return JSON.stringify(value, (_key, item) => {
     if (!item || typeof item !== "object" || Array.isArray(item)) return item;
@@ -137,18 +227,52 @@ export class FeatureStore {
   }
 
   // [IMPL-FEAT_IDEMPOTENT_CREATE] [ARCH-FEAT_IDEMPOTENT_CREATION] [REQ-FEAT_IDEMPOTENT_CREATION] — How: lock the request key before lookup, allocation, and complete publication.
-  createIdempotently(requestKey: string, title: string, options: { mode?: "greenfield" | "brownfield"; canonical_tokens?: FeatureManifest["canonical_tokens"] } = {}): CreateResult {
+  createIdempotently(
+    requestKey: string,
+    title: string,
+    options: {
+      mode?: "greenfield" | "brownfield";
+      canonical_tokens?: FeatureManifest["canonical_tokens"];
+      lock_ttl_ms?: number;
+      now_ms?: number;
+    } = {},
+  ): CreateResult {
     if (!requestKey.trim()) return { ok: false, error: "REQUEST_KEY_REQUIRED" };
     const metadataPath = path.join(this.root, "request-keys.yaml");
     const lockPath = path.join(this.root, `.request-${crypto.createHash("sha256").update(requestKey).digest("hex")}.lock`);
+    const nowMs = options.now_ms ?? Date.now();
+    const lockTtlMs = options.lock_ttl_ms ?? DEFAULT_REQUEST_LOCK_TTL_MS;
     let publishedDirectory: string | undefined;
+    const records = fs.existsSync(metadataPath) ? (yaml.load(fs.readFileSync(metadataPath, "utf8")) as Record<string, RequestRecord>) ?? {} : {};
     try {
       fs.mkdirSync(lockPath);
+      writeLockRecord(lockPath, nowMs + lockTtlMs);
     } catch {
-      return { ok: false, error: "REQUEST_KEY_COLLISION" };
+      const ttl = handleLockTtl(records, requestKey, readLockRecord(lockPath), nowMs);
+      if (ttl.ok && ttl.action === "existing_feature") {
+        return { ok: true, outcome: "existing", manifest: this.read(ttl.directory_name) };
+      }
+      if (ttl.ok && ttl.action === "eligible_for_allocation") {
+        fs.rmSync(lockPath, { recursive: true, force: true });
+        try {
+          fs.mkdirSync(lockPath);
+          writeLockRecord(lockPath, nowMs + lockTtlMs);
+        } catch {
+          return { ok: false, error: "REQUEST_KEY_COLLISION" };
+        }
+      } else {
+        const refreshed = fs.existsSync(metadataPath)
+          ? (yaml.load(fs.readFileSync(metadataPath, "utf8")) as Record<string, RequestRecord>) ?? {}
+          : {};
+        const fingerprint = crypto.createHash("sha256").update(stableJson({ title: title.trim(), options })).digest("hex");
+        const inFlight = refreshed[requestKey];
+        if (inFlight && inFlight.fingerprint === fingerprint) {
+          return { ok: true, outcome: "existing", manifest: this.read(inFlight.directory_name) };
+        }
+        return { ok: false, error: "REQUEST_KEY_COLLISION" };
+      }
     }
     try {
-      const records = fs.existsSync(metadataPath) ? (yaml.load(fs.readFileSync(metadataPath, "utf8")) as Record<string, RequestRecord>) ?? {} : {};
       const fingerprint = crypto.createHash("sha256").update(stableJson({ title: title.trim(), options })).digest("hex");
       const prior = records[requestKey];
       if (prior && prior.fingerprint !== fingerprint) return { ok: false, error: "REQUEST_KEY_COLLISION" };

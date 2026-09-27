@@ -1,0 +1,12 @@
+{
+  "allowed": true,
+  "ok": true,
+  "blocking": false,
+  "depth": "integrated",
+  "phase": "pre_implementation",
+  "diagnostics": [],
+  "gate_receipt": {
+    "path": "working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/pre_implementation-2026-09-27T05-58-20-413Z.json",
+    "hash": "sha256:0e976ce1522f26f917fcf7172dae0f175d0f86f017e81ce4056e666d6b3381e9"
+  }
+}

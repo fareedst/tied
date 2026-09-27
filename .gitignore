@@ -168,6 +168,14 @@ working/**/evidence/request-evidence-envelope.v1.json
 !working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-*.json
 !working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-*.json
 !working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/verification-*.json
+!working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/verification-evidence-manifest.v1.json
+!working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/sub-close-out-evidence-sync-evidence.md
+!working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/request-evidence-envelope-waiver.v1.json
+!working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/
+!working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/**
+!working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/close_out-*.json
+!working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/pre_implementation-*.json
+!working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/verification-*.json
 working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/r7-raw/
 # CITDP pre-persist scratch (canonical record under tied/citdp/)
 working/**/CITDP-REQ-*-diff-or-stage.yaml

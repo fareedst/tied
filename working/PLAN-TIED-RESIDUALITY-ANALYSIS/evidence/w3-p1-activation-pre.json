@@ -1,0 +1,30 @@
+{
+  "receipt": {
+    "success": true,
+    "tool": "tied_adversarial_inquiry_run",
+    "request_token": "REQ-FEAT_TASK_EXECUTION_RECOVERY",
+    "project_id": "stdd-residuality-w3",
+    "run_id": "refine-plan-w4-pre-impl-2026-09-27",
+    "phase": "pre_implementation",
+    "scope": ["PROC-LEAP#W3-RESIDUALITY-ELEVATION#block"],
+    "scope_hash": "3b5b02b5960689014032217cf8d00f8fff6c1d1c019cb5a9b8fc98df2e7aa6c4",
+    "artifact_hashes": {
+      "obligation-report.json": "8c9290312ff7b8b85b012fc0c5561e4c3d088ef2bdf0a35faaed8680d6571390",
+      "finding-ledger.jsonl": "4b19b034e167fd79ef845850ddcd51a7b278a09dcbe42bf7f45c6eea8ee437d4",
+      "gate-result.json": "75532d30116023d849a23af598982fabf8e14af34bd23d3a0eadb1b636c7c526",
+      "evidence-provenance.json": "7fbd55ebe82466acebd82d1a6c5024c87d8bf1d5667665fcf1f24251acbd3acd"
+    }
+  },
+  "artifacts": {
+    "obligation-report.json": { "path": "working/REQ-FEAT_TASK_EXECUTION_RECOVERY/adversarial-inquiry/phase-pre_implementation/obligation-report.json" },
+    "finding-ledger.jsonl": { "path": "working/REQ-FEAT_TASK_EXECUTION_RECOVERY/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl" },
+    "gate-result.json": { "path": "working/REQ-FEAT_TASK_EXECUTION_RECOVERY/adversarial-inquiry/phase-pre_implementation/gate-result.json" },
+    "evidence-provenance.json": { "path": "working/REQ-FEAT_TASK_EXECUTION_RECOVERY/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json" }
+  },
+  "expected": {
+    "request_token": "REQ-FEAT_TASK_EXECUTION_RECOVERY",
+    "project_id": "stdd-residuality-w3",
+    "run_id": "refine-plan-w4-pre-impl-2026-09-27",
+    "phase": "pre_implementation"
+  }
+}

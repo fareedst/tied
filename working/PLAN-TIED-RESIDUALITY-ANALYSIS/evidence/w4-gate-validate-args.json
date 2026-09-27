@@ -1,0 +1,267 @@
+{
+  "phase": "pre_implementation",
+  "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "tracker_path": "working/PLAN-TIED-RESIDUALITY-ANALYSIS/gate-tracker-pre-implementation-w4.yaml",
+  "citdp": {
+    "change_definition": {
+      "current_behavior": "W3 P0 LEAP persisted seven stressor facets into pilot REQ/ARCH/IMPL with validated\npseudo-code. Existing unit tests in mcp-server/src/feature-orchestration/ cover baseline\nexecution recovery and idempotent create paths but do not map residuality stressor facets,\nW3 APPEND_EVIDENCE/EVALUATE_DEPENDENCIES/HANDLE_LOCK_TTL blocks, or CONTROLLED_COMPOSITION_FAULT\nbindings. Ten W2 `finding` rows and deferred S-T03 store-unavailable mapping remain\nconfirmation-only until executable tests exist.\n",
+      "desired_behavior": "After W4 refine-plan, a documented test strategy maps P0 stressor facets and applicable\n`finding` rows to unit RED targets and UI-free composition faults on queue/worker/store/idempotency\nseams. Holdout validation stressors are scaffolded separately from design stressors.\nbuild-plan W4 adds RED tests (and GREEN production code only in build-plan, not refine-plan)\nfollowing [PROC-TIED_DEV_CYCLE]: unit RED → unit GREEN → composition RED → composition GREEN.\nS-T03 is clarified with split create-path (PUBLISH_FAILED) and execution-path (STORE_WRITE_FAILED\n/ STORE_UNAVAILABLE) composition faults before any optional stack elevation.\n",
+      "non_goals": [
+        "Production code GREEN in refine-plan W4",
+        "Mutating tied/methodology/",
+        "Claiming pilot DoD complete or holdout results",
+        "E2E UI tests for pilot seams (composition-first)",
+        "Promoting P1 deferred rows (S-T09, S-T10, S-T11, S-T16, S-O02, S-O06, S-O07) in W4 batch 1"
+      ],
+      "sponsor_decisions": {
+        "SD-W4-S-T03-EXEC": "Execution-path store unavailable — confirm REQ criterion vs IMPL+composition-only proof (refine default: composition fault + IMPL FAILURE_MODES; LEAP if RED exposes gap)",
+        "SD-W4-BATCH-SPLIT": "Single build-plan batch vs split unit vs composition PRs (refine recommends phased sub-batches within one CITDP)"
+      },
+      "success_criteria": [
+        "pilot/w4-test-strategy.md matrix with stressor_id | test_layer | fault_pattern | tied_refs | proof_boundary",
+        "pilot/validation-stressors.md holdout scaffold (W4-only per W1 sponsor)",
+        "Test file scaffolds under mcp-server/src/feature-orchestration/*w4*scaffold*",
+        "integrated pre_implementation gate for W4 refine batch",
+        "Parent CITDP W3 LEAP documents W4 entry met"
+      ],
+      "unchanged_behavior": [
+        "W3 persisted stack content unless LEAP triggered by failing RED in build-plan W4",
+        "W1–W2 discovery artifacts and classification ledger dispositions",
+        "Feature plan governance — residuality discovers; TIED proves via tests"
+      ]
+    },
+    "completion_criteria": {
+      "activation": {
+        "run_id": "refine-plan-w4-pre-impl-2026-09-27",
+        "phase": "pre_implementation",
+        "request_token": "REQ-FEAT_TASK_EXECUTION_RECOVERY"
+      },
+      "close_out_gate": "deferred until W4 build-plan verification + pilot DoD items 9–10",
+      "pre_implementation_gate": "gate-tracker-pre-implementation-w4.yaml + this CITDP adversarial section",
+      "pseudocode_validation": "already passed at W3 build; re-run if LEAP changes IMPL during W4 build",
+      "tied_validate_consistency": "required after any W4 build-plan stack mutation",
+      "w4_refine_exit": [
+        "pilot/w4-test-strategy.md",
+        "pilot/validation-stressors.md",
+        "evidence/w4-refine-outcomes.md",
+        "gate-tracker-pre-implementation-w4.yaml",
+        "linked plan w4-refine-* todos complete; w4-build-plan-tests pending"
+      ]
+    },
+    "impact_analysis": {
+      "behavior_change": true,
+      "pilot_scope_tokens": [
+        "REQ-FEAT_TASK_EXECUTION_RECOVERY",
+        "REQ-FEAT_IDEMPOTENT_CREATION"
+      ],
+      "architecture": [
+        "ARCH-FEAT_TASK_EXECUTION_STATE",
+        "ARCH-FEAT_IDEMPOTENT_CREATION"
+      ],
+      "implementation_decisions": [
+        "IMPL-FEAT_TASK_EXECUTION_STATE",
+        "IMPL-FEAT_IDEMPOTENT_CREATE"
+      ],
+      "documentation": [
+        "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/w4-test-strategy.md",
+        "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/validation-stressors.md",
+        "docs/tied-residuality-analysis-plan.md §4 W4 (reference)"
+      ],
+      "tests": [
+        "mcp-server/src/feature-orchestration/w4-residuality-pilot.unit.test.scaffold.ts",
+        "mcp-server/src/feature-orchestration/w4-residuality-pilot.composition.test.scaffold.ts"
+      ],
+      "processes": [
+        "PROC-TIED_DEV_CYCLE",
+        "PROC-LEAP",
+        "REQ-MODULE_VALIDATION"
+      ],
+      "residuality_facet_refs": [
+        "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.md",
+        "working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/w3-exit-w4-handoff.md"
+      ]
+    },
+    "leap_feedback": {
+      "record_status": "w4_refine_test_strategy_scaffold",
+      "tied_stack_updates_required": "none in refine-plan; conditional in build-plan if RED exposes gaps (especially S-T03 execution mapping)"
+    },
+    "record_identity": {
+      "author": "AI Agent (refine-plan W4)",
+      "change_request_id": "PLAN-TIED-RESIDUALITY-ANALYSIS",
+      "citdp_id": "CITDP-RESIDUALITY-PILOT-W4-TESTS",
+      "parent_plan_citdp": "CITDP-PLAN-TIED-RESIDUALITY-ANALYSIS",
+      "parent_leap_citdp": "CITDP-RESIDUALITY-PILOT-W3-LEAP",
+      "date": "2026-09-27",
+      "plan_reference": "docs/tied-residuality-analysis-plan.md §4 W4",
+      "record_status": "open",
+      "title": "Residuality pilot W4 — executable test strategy and composition faults",
+      "wave_scope": "W4"
+    },
+    "risk_analysis": {
+      "adversarial_inquiry": {
+        "assurance_profile": "stateful-reliability",
+        "counterexamples": [
+          "Worksheet or incidence matrix cited as runtime proof without RED/composition evidence",
+          "Composition fault tests that invoke UI or claim race-freedom beyond binding exercise",
+          "Skipping unit module validation before composition for APPEND_EVIDENCE / HANDLE_LOCK_TTL",
+          "Holdout validation stressors reused as design stressors without overlap disclosure"
+        ],
+        "depth_tier": "integrated",
+        "disconfirming_observations": [
+          "Refine-plan writes test scaffolds with explicit W4-SCAFFOLD markers and no GREEN production changes",
+          "w4-test-strategy.md maps each row to proof_boundary and test_layer",
+          "S-T03 split documented before stack elevation"
+        ],
+        "eligibility_triggers_matched": [
+          "persistence / stateful-reliability",
+          "data-integrity-migration",
+          "behavior-changing tests on pilot REQs"
+        ],
+        "evidence_references": [
+          "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/w4-test-strategy.md",
+          "working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/w3-exit-w4-handoff.md",
+          "tied/docs/composition-coverage.md",
+          "tied/vocab/residuality.md",
+          "tied/vocab/fidelity-research.md"
+        ],
+        "falsification_questions": [
+          "Can a discovery finding row become PASS without a named test or composition fault?",
+          "Does refine-plan W4 implement production GREEN to satisfy scaffolds?"
+        ],
+        "gate_policy": "advisory",
+        "prior_depth_tier": "integrated",
+        "profile_depth": "integrated",
+        "inquiry_run_id": "refine-plan-w4-pre-impl-2026-09-27",
+        "prior_inquiry_run_id": "refine-plan-w3-pre-impl-2026-09-27",
+        "inquiry_request_token": "REQ-FEAT_TASK_EXECUTION_RECOVERY",
+        "rationale": "W4 introduces executable proof obligations on elevated pilot stack — integrated depth mandatory; advisory policy until strict eligibility demonstrated.",
+        "research_profile": "integrated-agent"
+      },
+      "residuality_analysis": {
+        "status": "w4_refine_test_strategy",
+        "w3_handoff": "evidence/w3-exit-w4-handoff.md",
+        "validation_stressor_ref": "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/validation-stressors.md",
+        "test_strategy_ref": "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/w4-test-strategy.md"
+      },
+      "risks": [
+        {
+          "description": "S-T03 execution store mapping ambiguous — wrong layer tested",
+          "id": "RISK-RES-W4-001",
+          "likelihood": "Medium",
+          "mitigation": "SD-W4-S-T03-EXEC; split composition faults; LEAP only on confirmed RED gap"
+        },
+        {
+          "description": "Unit/composition scope creep includes P1 deferred stressors",
+          "id": "RISK-RES-W4-002",
+          "likelihood": "Medium",
+          "mitigation": "Matrix tags P0 facet vs finding-only vs holdout; P1 explicit out-of-batch"
+        },
+        {
+          "description": "Existing tests pass while new W3 blocks untested — false confidence",
+          "id": "RISK-RES-W4-003",
+          "likelihood": "High",
+          "mitigation": "Dedicated w4 unit scaffold file; build-plan must RED before GREEN on new blocks"
+        }
+      ]
+    },
+    "test_strategy": {
+      "summary": "Refine-plan W4 documents matrix and scaffolds only. build-plan W4 executes PROC-TIED_DEV_CYCLE\non mcp-server/src/feature-orchestration/ with module validation between unit and composition layers.\n",
+      "dev_cycle_order": [
+        "unit RED — P0 IMPL blocks and finding confirmation paths",
+        "unit GREEN — production changes only in build-plan",
+        "composition RED — CONTROLLED_COMPOSITION_FAULT on store/queue/worker/idempotency seams",
+        "composition GREEN — wiring and fault injectors",
+        "holdout — validation-stressors.md scenarios after primary matrix GREEN (pilot DoD item 9)"
+      ],
+      "w4_refine_verification": [
+        "pre_implementation gate with gate-tracker-pre-implementation-w4.yaml",
+        "pilot/w4-test-strategy.md",
+        "pilot/validation-stressors.md",
+        "evidence/w4-refine-outcomes.md"
+      ],
+      "w4_build_deferred": [
+        "Merge scaffolds into executable RED tests",
+        "quality_evidence_collect when batch closes",
+        "verification adversarial inquiry run_id for W4 build"
+      ]
+    }
+  },
+  "activation": {
+    "receipt": {
+      "success": true,
+      "tool": "tied_adversarial_inquiry_run",
+      "request_token": "REQ-FEAT_TASK_EXECUTION_RECOVERY",
+      "project_id": "stdd-residuality-w3",
+      "run_id": "refine-plan-w4-pre-impl-2026-09-27",
+      "phase": "pre_implementation",
+      "scope": [
+        "PROC-LEAP#W3-RESIDUALITY-ELEVATION#block"
+      ],
+      "scope_hash": "3b5b02b5960689014032217cf8d00f8fff6c1d1c019cb5a9b8fc98df2e7aa6c4",
+      "artifact_hashes": {
+        "obligation-report.json": "8c9290312ff7b8b85b012fc0c5561e4c3d088ef2bdf0a35faaed8680d6571390",
+        "finding-ledger.jsonl": "4b19b034e167fd79ef845850ddcd51a7b278a09dcbe42bf7f45c6eea8ee437d4",
+        "gate-result.json": "75532d30116023d849a23af598982fabf8e14af34bd23d3a0eadb1b636c7c526",
+        "evidence-provenance.json": "7fbd55ebe82466acebd82d1a6c5024c87d8bf1d5667665fcf1f24251acbd3acd"
+      }
+    },
+    "artifacts": {
+      "obligation-report.json": {
+        "valid": true,
+        "request_token": "REQ-FEAT_TASK_EXECUTION_RECOVERY",
+        "project_id": "stdd-residuality-w3",
+        "run_id": "refine-plan-w4-pre-impl-2026-09-27",
+        "phase": "pre_implementation",
+        "scope_hash": "3b5b02b5960689014032217cf8d00f8fff6c1d1c019cb5a9b8fc98df2e7aa6c4",
+        "hash": "8c9290312ff7b8b85b012fc0c5561e4c3d088ef2bdf0a35faaed8680d6571390",
+        "path": "working/REQ-FEAT_TASK_EXECUTION_RECOVERY/adversarial-inquiry/phase-pre_implementation/obligation-report.json"
+      },
+      "finding-ledger.jsonl": {
+        "valid": true,
+        "request_token": "REQ-FEAT_TASK_EXECUTION_RECOVERY",
+        "project_id": "stdd-residuality-w3",
+        "run_id": "refine-plan-w4-pre-impl-2026-09-27",
+        "phase": "pre_implementation",
+        "scope_hash": "3b5b02b5960689014032217cf8d00f8fff6c1d1c019cb5a9b8fc98df2e7aa6c4",
+        "hash": "4b19b034e167fd79ef845850ddcd51a7b278a09dcbe42bf7f45c6eea8ee437d4",
+        "path": "working/REQ-FEAT_TASK_EXECUTION_RECOVERY/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl"
+      },
+      "gate-result.json": {
+        "valid": true,
+        "request_token": "REQ-FEAT_TASK_EXECUTION_RECOVERY",
+        "project_id": "stdd-residuality-w3",
+        "run_id": "refine-plan-w4-pre-impl-2026-09-27",
+        "phase": "pre_implementation",
+        "scope_hash": "3b5b02b5960689014032217cf8d00f8fff6c1d1c019cb5a9b8fc98df2e7aa6c4",
+        "hash": "75532d30116023d849a23af598982fabf8e14af34bd23d3a0eadb1b636c7c526",
+        "path": "working/REQ-FEAT_TASK_EXECUTION_RECOVERY/adversarial-inquiry/phase-pre_implementation/gate-result.json"
+      },
+      "evidence-provenance.json": {
+        "valid": true,
+        "request_token": "REQ-FEAT_TASK_EXECUTION_RECOVERY",
+        "project_id": "stdd-residuality-w3",
+        "run_id": "refine-plan-w4-pre-impl-2026-09-27",
+        "phase": "pre_implementation",
+        "scope_hash": "3b5b02b5960689014032217cf8d00f8fff6c1d1c019cb5a9b8fc98df2e7aa6c4",
+        "hash": "7fbd55ebe82466acebd82d1a6c5024c87d8bf1d5667665fcf1f24251acbd3acd",
+        "path": "working/REQ-FEAT_TASK_EXECUTION_RECOVERY/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json"
+      }
+    },
+    "expected": {
+      "request_token": "REQ-FEAT_TASK_EXECUTION_RECOVERY",
+      "project_id": "stdd-residuality-w3",
+      "run_id": "refine-plan-w4-pre-impl-2026-09-27",
+      "phase": "pre_implementation",
+      "scope": [
+        "PROC-LEAP#W3-RESIDUALITY-ELEVATION#block"
+      ],
+      "scope_hash": "3b5b02b5960689014032217cf8d00f8fff6c1d1c019cb5a9b8fc98df2e7aa6c4"
+    }
+  },
+  "receipt_persistence": {
+    "request_token": "PLAN-TIED-RESIDUALITY-ANALYSIS",
+    "gates_dir": "working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates",
+    "ledger_path": "working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/adherence-ledger.jsonl",
+    "run_id": "refine-plan-w4-pre-impl-2026-09-27"
+  }
+}

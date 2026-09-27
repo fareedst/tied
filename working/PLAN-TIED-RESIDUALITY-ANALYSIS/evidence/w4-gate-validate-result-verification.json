@@ -1,0 +1,23 @@
+{
+  "allowed": true,
+  "ok": true,
+  "blocking": false,
+  "depth": "integrated",
+  "phase": "verification",
+  "diagnostics": [
+    "finding_unresolved",
+    "warn_not_success"
+  ],
+  "evidence_hydrated": [
+    "evidence-provenance.json",
+    "gate-result.json",
+    "finding-ledger.jsonl"
+  ],
+  "hydration_diagnostics": [
+    "hydration_envelope_gaps_missing"
+  ],
+  "gate_receipt": {
+    "path": "working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/verification-2026-09-27T06-08-27-103Z.json",
+    "hash": "sha256:0ff99e55d671fad2200df9ddaa16092f9d08314c8671838ce8a98fd676ff2bd8"
+  }
+}

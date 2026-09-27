@@ -1,0 +1,25 @@
+{
+  "phase": "close_out",
+  "run_id": "plan-close-out-pilot-tranche-2026-09-27",
+  "depth_tier": "integrated",
+  "envelope_waiver": "working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/request-evidence-envelope-waiver.v1.json",
+  "gate": {
+    "allowed": true,
+    "receipt_path": "working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/close_out-2026-09-27T06-39-00-000Z.json",
+    "diagnostics": []
+  },
+  "envelope": {
+    "ok": false,
+    "error": "InvalidRequestToken",
+    "waived": true
+  },
+  "tests": {
+    "w4_residuality_pilot": {
+      "command": "bun test src/feature-orchestration/w4-residuality-pilot.*.test.ts",
+      "pass": 43,
+      "fail": 0
+    }
+  },
+  "tied_validate_consistency": "ok",
+  "deferred": ["w5-build-plan-promotion", "w5-tooling-req"]
+}

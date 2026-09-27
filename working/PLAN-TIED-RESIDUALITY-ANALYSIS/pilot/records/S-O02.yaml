@@ -1,0 +1,34 @@
+# Candidate only — not canonical until W5 promotion gate
+schema_version: stressor-residue.v1
+baseline:
+  objective: "Task graph integrity under human incident response"
+  naive_architecture_summary: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/baseline.md"
+  assumptions:
+    - "Operators may have override tooling during incidents"
+stressor:
+  id: "S-O02"
+  category: human
+  description: "On-call engineer forces dependency unlock or stale recovery against documented policy"
+impact_path:
+  people: ["on-call engineer"]
+  functions: ["manual override APIs (if any)", "dependency unlock"]
+  data: ["execution graph", "evidence audit trail"]
+  dependencies: ["operational policy"]
+  bindings: ["operator/API"]
+residue:
+  description: "Override rejected or fully audited — no silent graph corruption"
+  class: harmful
+business_priority: "P1 — gap vs pilot REQ stack"
+attractor: "A5"
+design_response: "Candidate ARCH constraint for audited override; classify in W2"
+validation_stressor: null
+evidence:
+  method: "W1 gap-list (coverage gap)"
+  references:
+    - "tied/requirements/REQ-FEAT_TASK_EXECUTION_RECOVERY.yaml"
+  limitation: "Operational tooling out of scope for W1 implementation"
+  proof_boundary: "Discovery only — not residual_risk acceptance"
+disposition:
+  status: unresolved
+  tied_refs:
+    - "REQ-FEAT_TASK_EXECUTION_RECOVERY"

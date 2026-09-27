@@ -9,8 +9,16 @@ IMPL-FEAT_TASK_EXECUTION_STATE:
   implementation_approach:
     details:
       - "Append evidence rather than replacing history."
+      - "Deduplicate evidence by attempt_key; reject unbounded duplicate rows (S-T12)."
+      - "Evaluate dependencies from store completion order, not broker delivery order (S-T05)."
       - "Model failure, retry, cancellation, timeout, stale-input, and resume as explicit outcomes."
       - "Require matching source revision for resume or an explicit stale-input recovery transition."
+      - "Surface store write failures as non-success with deterministic reason (S-T15)."
+      - "Reject incompatible record schema versions with ILLEGAL_TRANSITION (S-T09)."
+      - "Apply retry-storm backpressure with bounded lock wait (S-T11)."
+      - "Read execution status with bounded staleness under partition (S-T16)."
+      - "Validate operator override with audit append or reject (S-O02)."
+      - "Preview bulk cancel dependent blast radius before commit (S-O06)."
     summary: "Versioned execution state keyed by task_id and source revision with explicit failure and recovery transitions."
   metadata:
     created:
@@ -18,8 +26,8 @@ IMPL-FEAT_TASK_EXECUTION_STATE:
       date: "2026-08-13"
     last_updated:
       author: "AI Agent"
-      date: "2026-08-13"
-      reason: "Batch 3 plan gate"
+      date: "2026-09-27"
+      reason: "W3 residuality LEAP P0+P1 — execution recovery P1 blocks"
   name: "Task execution state and evidence history"
   rationale:
     benefits:

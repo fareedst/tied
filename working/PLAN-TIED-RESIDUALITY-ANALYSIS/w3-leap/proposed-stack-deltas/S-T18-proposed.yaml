@@ -1,0 +1,20 @@
+# PROPOSED ONLY — build-plan W3
+stressor_id: S-T18
+ledger_disposition: architecture_constraint
+residuality_facet:
+  residue_summary: After TTL, another creator proceeds; metadata remains authoritative
+  source_ref: working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.md
+proposed_req_deltas:
+  REQ-FEAT_IDEMPOTENT_CREATION:
+    add_satisfaction_criteria:
+      - criterion: Expired allocation locks release per documented TTL; subsequent creators proceed only when store metadata confirms prior lock is invalid — stale lock holders cannot block past TTL.
+proposed_arch_deltas:
+  ARCH-FEAT_IDEMPOTENT_CREATION:
+    add_constraints:
+      - Lock TTL and authoritative metadata check are specified; fencing on coordinator recovery aligns with ARCH approach details (see S-T10 P1 defer).
+proposed_impl_deltas:
+  IMPL-FEAT_IDEMPOTENT_CREATE:
+    contract_hints:
+      PRE: Lock record includes expiry; metadata read before blocking.
+      POST: After TTL, new allocation may proceed if metadata shows no committed feature.
+      DATA_TRANSITION: lock_expired → eligible_for_allocation

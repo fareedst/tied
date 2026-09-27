@@ -1,0 +1,85 @@
+# Verification gate input — P1 composition follow-up (integrated).
+# Sponsor: SD-P1-COMPOSITION in evidence/sponsor-wrap-up-2026-09-27.md
+# CITDP context: CITDP-RESIDUALITY-PILOT-W3-LEAP-P1.yaml (facets) + W4 composition extension
+depth_tier: integrated
+gate_policy: advisory
+profile_depth: integrated
+execution_evidence:
+  request: PLAN-TIED-RESIDUALITY-ANALYSIS
+  batch: p1-composition-follow-up
+  completed:
+    - session-bootstrap
+    - translate-sponsor-intent
+    - change-definition
+    - impact-discovery
+    - risk-assessment
+    - test-strategy
+    - sub-vocabulary-sync
+    - gate-pseudocode-validation
+    - verification-gate
+steps:
+  - slug: session-bootstrap
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied/vocab/residuality.md
+      - kind: file_path
+        path: tied/docs/composition-coverage.md
+  - slug: translate-sponsor-intent
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/sponsor-wrap-up-2026-09-27.md
+      - kind: file_path
+        path: working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/w3-p1-build-plan-summary.md
+  - slug: change-definition
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: working/PLAN-TIED-RESIDUALITY-ANALYSIS/CITDP-RESIDUALITY-PILOT-W3-LEAP-P1.yaml
+  - slug: impact-discovery
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: mcp-server/src/feature-orchestration/w4-residuality-pilot.composition.test.ts
+  - slug: risk-assessment
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/limitations.md
+  - slug: sub-adversarial-inquiry-pass
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: working/REQ-FEAT_TASK_EXECUTION_RECOVERY/adversarial-inquiry/phase-verification/obligation-report.json
+      - kind: file_path
+        path: working/REQ-FEAT_TASK_EXECUTION_RECOVERY/adversarial-inquiry/phase-verification/finding-ledger.jsonl
+      - kind: file_path
+        path: working/REQ-FEAT_TASK_EXECUTION_RECOVERY/adversarial-inquiry/phase-verification/gate-result.json
+      - kind: file_path
+        path: working/REQ-FEAT_TASK_EXECUTION_RECOVERY/adversarial-inquiry/phase-verification/evidence-provenance.json
+    note: Reuse W4 verification inquiry pairing; P1 composition is test-only delta.
+  - slug: gate-pseudocode-validation
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/w3-p1-pseudocode-validate-IMPL-FEAT_TASK_EXECUTION_STATE.json
+      - kind: file_path
+        path: working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/w3-p1-pseudocode-validate-IMPL-FEAT_IDEMPOTENT_CREATE.json
+  - slug: test-strategy
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/p1-composition-build-plan-summary.md
+      - kind: file_path
+        path: mcp-server/src/feature-orchestration/w4-residuality-pilot.composition.test.ts
+  - slug: sub-vocabulary-sync
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied/vocab/residuality.md
+  - slug: verification-gate
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/p1-composition-build-plan-summary.md

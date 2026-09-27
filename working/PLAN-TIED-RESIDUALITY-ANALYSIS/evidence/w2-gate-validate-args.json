@@ -1,0 +1,16 @@
+{
+  "phase": "pre_implementation",
+  "tracker_path": "working/PLAN-TIED-RESIDUALITY-ANALYSIS/gate-tracker-pre-implementation-w2.yaml",
+  "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "citdp_path": "working/PLAN-TIED-RESIDUALITY-ANALYSIS/CITDP-PLAN-TIED-RESIDUALITY-ANALYSIS.yaml",
+  "activation_run_id": "refine-plan-w2-pre-impl-2026-09-26",
+  "receipt_persistence": {
+    "request_token": "PLAN-TIED-RESIDUALITY-ANALYSIS",
+    "gates_dir": "working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates",
+    "ledger_path": "working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/adherence-ledger.jsonl",
+    "run_id": "refine-plan-w2-pre-impl-2026-09-26"
+  },
+  "result_receipt_path": "working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/pre_implementation-2026-09-27T05-29-00-952Z.json",
+  "result_allowed": true,
+  "result_depth": "integrated"
+}

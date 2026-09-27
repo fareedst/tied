@@ -1,0 +1,10 @@
+{
+  "allowed": false,
+  "ok": false,
+  "blocking": true,
+  "phase": "pre_implementation",
+  "diagnostics": [
+    "missing_or_unsuccessful_inquiry_receipt",
+    "missing_activation_artifacts"
+  ]
+}

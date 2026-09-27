@@ -1,0 +1,23 @@
+{
+  "schema_version": "checklist-gate-receipt.v1",
+  "phase": "close_out",
+  "timestamp": "2026-09-27T06:39:03.617Z",
+  "allowed": true,
+  "diagnostics": [],
+  "depth": "integrated",
+  "input_hashes": {
+    "tracker_hash": "sha256:bdab0683e8a137856407617fe87db310d4b60f11bfc23c88b580c390fc037639",
+    "citdp_hash": "sha256:893b1b7f76a15e439ab09f22691f71b92b4de61f2cd80c54c9b536c9c6bc5ae7"
+  },
+  "gate_result": {
+    "allowed": true,
+    "ok": true,
+    "blocking": false,
+    "depth": "integrated",
+    "phase": "close_out",
+    "diagnostics": [],
+    "hydration_diagnostics": [
+      "hydration_envelope_gaps_missing"
+    ]
+  }
+}

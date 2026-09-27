@@ -1,0 +1,12 @@
+{
+  "allowed": true,
+  "ok": true,
+  "diagnostics": [
+    "finding_unresolved",
+    "warn_not_success"
+  ],
+  "gate_receipt": {
+    "path": "working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/verification-2026-09-27T05-52-35-881Z.json",
+    "hash": "sha256:42c3ebcd9faa34013e51e9605bc4552f67eae712aebd3df2d07b7f04b632a660"
+  }
+}

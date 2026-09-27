@@ -1,6 +1,6 @@
 # TIED Residuality Analysis Methodology Plan
 
-**Status:** Proposed methodology feature plan — plan-doc batch closed (2026-09-27); W0 vocabulary seeded; W1 pilot ready; W2–W5 deferred; pilot DoD not claimed until W1 execution
+**Status:** Proposed methodology feature plan — Batch A plan-doc closed (2026-09-27, commit f90f871); W1–W4 pilot complete (25 stressors, P0 LEAP, 27 W4 tests green); **W5 refine complete (2026-09-27)** — DoD assessed with documented partials; default recommendation **Adopt (revise)**; canonical promotion deferred to build-plan W5; machine PLAN close-out still deferred
 
 **Change ID:** `PLAN-TIED-RESIDUALITY-ANALYSIS`
 
@@ -14,7 +14,7 @@
 
 **Related work:**
 
-- [Residuality Theory and TIED: A Working Comparison](comparisons/residuality-theory-and-tied.md) — synthesis baseline
+- [Residuality Theory and TIED — tracked excerpt](residuality-theory-and-tied-excerpt.md) — git-tracked summary; full synthesis local at `docs/comparisons/residuality-theory-and-tied.md` (gitignored)
 - [tied/vocab/residuality.md](../tied/vocab/residuality.md) — provisional glossary (RECORD)
 - [tied-adversarial-inquiry-plan.md](tied-adversarial-inquiry-plan.md) — falsification / authority tone (§1)
 - [tied-async-methodology-plan.md](tied-async-methodology-plan.md) — wave and gate structure exemplar
@@ -196,15 +196,18 @@ Normative wave specs. Depth and gate policy per batch are summarized in §10.
 ### W1 — Bounded discovery pilot
 
 - **Goal:** Test whether stressor analysis surfaces architecture constraints the current TIED flow would miss.
-- **Depth:** `integrated` (default); `gate_policy: advisory` until strict eligibility demonstrated. Profiles: `stateful-reliability`, `data-integrity-migration` as applicable.
-- **Entry:** Feature plan authored; W0 worksheet accepted; dedicated pilot Tracker or checklist invocation with `depth_tier: integrated`.
-- **Pilot targets (read-only):**
-  - `[REQ-FEAT_TASK_EXECUTION_RECOVERY]` — stable `task_id`, append-only evidence, stale/cancel lock dependents.
-  - `[REQ-FEAT_IDEMPOTENT_CREATION]` — request-key idempotency, collision, no partial publish.
-- **Actions:** Baseline sketch → 20–30 stressors → worksheets → incidence matrix → gap list vs existing satisfaction criteria / ARCH / IMPL.
-- **Artifacts under** `working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/`: `baseline.md`, `worksheets/`, optional `records/*.yaml`, `incidence-matrix.md`, `gap-list.md`.
-- **TIED loop handoff:** Discovery-only output; findings cite tokens but do **not** mutate project YAML until W2/W3 on a **separate** behavior-changing CITDP.
-- **Exit evidence:** Baseline, worksheets, matrix, gap list, limitations, participant scope.
+- **Depth:** `integrated` (default); `gate_policy: advisory`. **Profiles:** `stateful-reliability`, `data-integrity-migration` (pilot REQs match persistence eligibility; no `integrated_waiver` without sponsor text).
+- **Refine-plan (2026-09-27):** W1 specification and **scaffold templates** complete; full stressor workshop deferred to build-plan W1. Integrated `pre_implementation` receipt: `working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/pre_implementation-2026-09-27T05-03-59-503Z.json`.
+- **Entry evidence:** Batch A feature plan closed; W0 worksheet contract; `gate-tracker-pre-implementation-w1.yaml`; pilot tree scaffold under `working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/`.
+- **Pilot targets (read-only — read detail YAML before gap analysis):**
+  - `[REQ-FEAT_TASK_EXECUTION_RECOVERY]` + `[ARCH-FEAT_TASK_EXECUTION_STATE]` + `[IMPL-FEAT_TASK_EXECUTION_STATE]` — deterministic status/reason; append-only evidence; stale/cancel dependent lock.
+  - `[REQ-FEAT_IDEMPOTENT_CREATION]` + `[ARCH-FEAT_IDEMPOTENT_CREATION]` + `[IMPL-FEAT_IDEMPOTENT_CREATE]` — repeat vs collision; concurrent serialization; no partial publish.
+- **Artifact layout:** `baseline.md`, `participant-scope.md`, `stressor-catalog.md`, `worksheets/` (five-field template), optional `records/*.yaml`, `incidence-matrix.md`, `gap-list.md`, `limitations.md`; example schema `working/PLAN-TIED-RESIDUALITY-ANALYSIS/schemas/stressor-residue.v1.example.yaml`.
+- **Stressor heuristic:** 20–30 coherent stressors; seed list in `pilot/stressor-catalog.md` (duplicate delivery, crash mid-write, store loss, timeout-after-side-effect, reorder, stale resume, concurrent creators, partial publish, version skew, dependency loss, load spike, support recovery, human cancel/override, key rotation, clock skew).
+- **Adversarial inquiry:** Integrated structural pass at W1 refine (`run_id: refine-plan-w1-pre-impl-2026-09-27`); artifacts under `working/REQ-FEAT_TASK_EXECUTION_RECOVERY/adversarial-inquiry/phase-pre_implementation/` (REQ-* path required for MCP). Advisory policy — findings are review-gated, not LEAP triggers.
+- **Workshop actions (build-plan):** Populate baseline, worksheets, matrix, gap list from read-only stack comparison.
+- **TIED loop handoff:** Discovery-only; **no** project YAML mutation until W2 classification and W3 LEAP on a **separate** behavior-changing CITDP.
+- **Exit evidence:** Filled baseline, 20–30 worksheets, matrix, gap list, limitations, participant scope → **W2** `classification-ledger.md`.
 
 ### W2 — Residue classification and risk gating
 
@@ -238,7 +241,8 @@ Normative wave specs. Depth and gate policy per batch are summarized in §10.
 ### W5 — Tooling and checklist integration (optional / proposed)
 
 - **Goal:** Promote only what the pilot proves useful.
-- **Depth:** Sponsor-selected; tooling behavior changes default `integrated`.
+- **Depth:** Sponsor-selected; tooling behavior changes default `integrated`. **W5 refine-plan (2026-09-27):** `minimal` + `advisory` for promotion planning batch only.
+- **Refine-plan status (2026-09-27):** DoD checklist `working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/pilot-dod-checklist.md`; promotion menu `working/PLAN-TIED-RESIDUALITY-ANALYSIS/w5-promotion/`; CITDP `CITDP-W5-PROMOTION.yaml`; default recommendation **Adopt (revise)** in `evidence/w5-refine-outcomes.md`. **build-plan W5** (`w5-build-plan-promotion`) pending sponsor SD-W5-* decisions.
 - **Entry:** Pilot DoD §7 complete; written recommendation adopt / revise / defer / reject.
 - **Candidates (additive, TIED-source only):**
   1. Canonical glossary promotion in `tied/vocab/residuality.md`.
@@ -361,12 +365,18 @@ risk_analysis:
 **Working tree layout (W1+):**
 
 - `working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/baseline.md`
-- `working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/worksheets/`
+- `working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/participant-scope.md`
+- `working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/stressor-catalog.md`
+- `working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/worksheets/` (+ `_template.md`)
 - `working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/records/` (optional candidate YAML)
 - `working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/incidence-matrix.md`
 - `working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/gap-list.md`
+- `working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/limitations.md`
 - `working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.md` (W2)
 - `working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/validation-stressors.md` (W4 or documented N/A)
+- `working/PLAN-TIED-RESIDUALITY-ANALYSIS/schemas/stressor-residue.v1.example.yaml` (optional reference)
+
+**Pilot execution status (2026-09-27):** W1–W4 complete. Scored assessment: `working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/pilot-dod-checklist.md` (**11/12 met or met-with-caveats**; item 12 in W5 refine).
 
 **12-item DoD checklist** (pilot complete only when all are satisfied):
 
@@ -383,7 +393,7 @@ risk_analysis:
 11. Unresolved theory / accepted-risk log
 12. Recommendation: adopt / revise / defer / reject canonical integration
 
-**Status:** Not complete in the plan-doc batch — W1 workshop explicitly out of scope.
+**Status:** **Assessed promotion-ready with partials** (P1 LEAP defer, S-T13, V-H01, comparison gitignore, PLAN close-out defer) — see pilot DoD checklist; not a claim of universal resilience.
 
 ---
 
@@ -428,8 +438,9 @@ Observed residues and attractors remain **research/working artifacts** until cla
 ### Batch B — W1–W4 pilot (separate authorization)
 
 - **depth_tier:** `integrated` (default for persistence/stateful-reliability pilot REQs).
+- **W1 refine-plan (2026-09-27):** CITDP + Tracker updated; integrated `pre_implementation` allowed; pilot scaffold only — **workshop = build-plan W1** (`w1-build-plan-workshop` in linked Cursor plan).
 - **Deliverables:** Pilot artifact tree under `working/.../pilot/`; W2 classification ledger; optional W3 behavior-changing CITDP for stack elevation; W4 tests and composition faults.
-- **Requires:** Dedicated Tracker copy; pre_implementation gate at integrated depth; adversarial inquiry pairing per policy.
+- **Requires:** `gate-tracker-pre-implementation-w1.yaml`; adversarial inquiry pairing at integrated depth (advisory); read-only pilot REQ/ARCH/IMPL detail YAML for gap analysis.
 
 ### Batch C — W5 promotion (optional)
 
@@ -452,21 +463,35 @@ When code or tests diverge from elevated IMPL during W3–W4, apply `[PROC-LEAP]
 
 Invalidate downstream Tracker dispositions and re-run `tied_checklist_gate_validate` if depth or policy changes.
 
-### Gate receipts (Batch A)
+### Gate receipts
 
-- **pre_implementation:** `working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/pre_implementation-2026-09-27T04-46-04-773Z.json` (`allowed: true`, depth `minimal`); sparse input `gate-tracker-pre-implementation.yaml`.
-- **verification:** `working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/verification-2026-09-27T04-51-45-189Z.json` (`allowed: true`, depth `minimal`); sparse input `gate-tracker-verification.yaml`.
+**Batch A (plan-doc — closed):**
+
+- **pre_implementation:** `working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/pre_implementation-2026-09-27T04-46-04-773Z.json` (`allowed: true`, depth `minimal`); `gate-tracker-pre-implementation.yaml`.
+- **verification:** `working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/verification-2026-09-27T04-51-45-189Z.json` (`allowed: true`, depth `minimal`); `gate-tracker-verification.yaml`.
+- **close_out:** `working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/close_out-2026-09-27T04-58-24-396Z.json` (Batch A).
+
+**Batch B W1 refine-plan (integrated planning — 2026-09-27):**
+
+- **pre_implementation:** `working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/pre_implementation-2026-09-27T05-03-59-503Z.json` (`allowed: true`, depth `integrated`); sparse input `gate-tracker-pre-implementation-w1.yaml`.
+- **Adversarial inquiry pairing:** `run_id: refine-plan-w1-pre-impl-2026-09-27`; artifacts under `working/REQ-FEAT_TASK_EXECUTION_RECOVERY/adversarial-inquiry/phase-pre_implementation/`.
 
 ### build-plan → plan-close-out handoff criteria
 
-- **Complete for handoff when:** `docs/tied-residuality-analysis-plan.md` contains §0–§10; comparison doc cross-link present; authority language verified; verification gate `allowed: true` for minimal batch.
-- **Deferred:** Git commit (explicitly deferred per plan); machine **close_out** (requires `sub-close-out-evidence-sync`, envelope validate with `--envelope-blocking`, and `phase: close_out` gate); W1 pilot; pilot DoD; W5 promotion.
+- **Batch A complete:** §0–§10 feature plan; comparison cross-link; minimal verification/close_out gates (commit `f90f871`).
+- **W1 refine complete:** Linked plan `w1-*` todos through scaffold + integrated pre_implementation; **not** pilot DoD §7.
+- **Deferred:** Git commit for W1 refine (sponsor-initiated); W1 workshop content; W2–W5; pilot DoD; W5 promotion.
+
+**Batch B W5 refine-plan (minimal planning — 2026-09-27):**
+
+- **pre_implementation:** `working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/pre_implementation-2026-09-27T06-13-03-814Z.json` (`allowed: true`, depth `minimal`); `gate-tracker-pre-implementation-w5.yaml` + `CITDP-W5-PROMOTION.yaml`.
+- **Deliverables:** `pilot/pilot-dod-checklist.md`, `w5-promotion/w5-promotion-decisions.md`, NON-CANONICAL checklist/CITDP scaffolds; feature plan §7/§10 planning updates.
 
 ### Recommended next steps
 
-1. **plan-close-out** (commit still sponsor-initiated) after verification gate and doc QA.
-2. Sponsor authorization for **W1** integrated pilot with dedicated Tracker and `working/.../pilot/` execution.
-3. After W1–W2, open **behavior-changing CITDP** for W3 LEAP on confirmed residues only.
+1. **build-plan W5** (`w5-build-plan-promotion`) — sponsor confirms SD-W5-* in `evidence/w5-refine-outcomes.md`; copy approved proposals into canonical `tied/docs/*` and vocab; optional integrated depth if tooling REQ opened.
+2. **Optional:** W3 P1 LEAP batch 2 (separate behavior-changing CITDP) before or after process promotion.
+3. **Optional:** Machine PLAN close-out envelope when sponsor ends waiver pattern.
 
 ---
 

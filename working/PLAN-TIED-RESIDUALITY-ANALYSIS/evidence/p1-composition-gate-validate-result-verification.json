@@ -1,0 +1,44 @@
+{
+  "allowed": false,
+  "ok": false,
+  "blocking": true,
+  "depth": "integrated",
+  "phase": "verification",
+  "diagnostics": [
+    "missing_pseudocode_gate_history",
+    "artifact:obligation-report.json_identity_mismatch:request_token",
+    "artifact:obligation-report.json_identity_mismatch:project_id",
+    "artifact:obligation-report.json_identity_mismatch:run_id",
+    "artifact:obligation-report.json_identity_mismatch:phase",
+    "artifact:obligation-report.json_identity_mismatch:scope_hash",
+    "artifact:finding-ledger.jsonl_identity_mismatch:request_token",
+    "artifact:finding-ledger.jsonl_identity_mismatch:project_id",
+    "artifact:finding-ledger.jsonl_identity_mismatch:run_id",
+    "artifact:finding-ledger.jsonl_identity_mismatch:phase",
+    "artifact:finding-ledger.jsonl_identity_mismatch:scope_hash",
+    "artifact:gate-result.json_identity_mismatch:request_token",
+    "artifact:gate-result.json_identity_mismatch:project_id",
+    "artifact:gate-result.json_identity_mismatch:run_id",
+    "artifact:gate-result.json_identity_mismatch:phase",
+    "artifact:gate-result.json_identity_mismatch:scope_hash",
+    "artifact:evidence-provenance.json_identity_mismatch:request_token",
+    "artifact:evidence-provenance.json_identity_mismatch:project_id",
+    "artifact:evidence-provenance.json_identity_mismatch:run_id",
+    "artifact:evidence-provenance.json_identity_mismatch:phase",
+    "artifact:evidence-provenance.json_identity_mismatch:scope_hash",
+    "finding_unresolved",
+    "warn_not_success"
+  ],
+  "evidence_hydrated": [
+    "evidence-provenance.json",
+    "gate-result.json",
+    "finding-ledger.jsonl"
+  ],
+  "hydration_diagnostics": [
+    "hydration_envelope_gaps_missing"
+  ],
+  "gate_receipt": {
+    "path": "working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/verification-2026-09-27T06-31-16-196Z.json",
+    "hash": "sha256:2a8b4b9efed3eca79f30012673539b7163a10219dab89724c6f50775fe9255d8"
+  }
+}

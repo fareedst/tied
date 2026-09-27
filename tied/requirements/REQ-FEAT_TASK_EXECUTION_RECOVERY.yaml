@@ -4,6 +4,11 @@ REQ-FEAT_TASK_EXECUTION_RECOVERY:
     - "ARCH-FEAT_TASK_EXECUTION_STATE"
     - "IMPL-FEAT_TASK_EXECUTION_STATE"
   description: "Define stable task identity and evidence history across failure, retry, cancellation, timeout, stale-input, and resume outcomes; failed tasks never unlock dependents."
+  metadata:
+    last_updated:
+      author: "AI Agent"
+      date: "2026-09-27"
+      reason: "W3 residuality LEAP P0+P1 batches (PLAN-TIED-RESIDUALITY-ANALYSIS)"
   name: "Task execution recovery and evidence history"
   priority: "P0"
   rationale:
@@ -13,7 +18,49 @@ REQ-FEAT_TASK_EXECUTION_RECOVERY:
       - "Unsafe stale resumes"
     why: "Execution must be resumable and auditable without rewriting task identity or losing prior evidence."
   satisfaction_criteria:
+    - criterion: "After bounded retries are exhausted, task reaches a terminal failed state with stable reason code; dependents remain locked; evidence history is inspectable for operator action."
+      residuality_facet:
+        ledger_disposition: "candidate_requirement"
+        proof_boundary: "Discovery until W4 max-retry terminal composition fault"
+        source_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.md"
+        stressor_id: "S-T14"
+    - criterion: "After unknown completion, retry/resume preserves task_id and does not append conflicting terminal evidence."
+      residuality_facet:
+        ledger_disposition: "candidate_requirement"
+        proof_boundary: "Discovery until W4 unknown-outcome composition fault"
+        source_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.md"
+        stressor_id: "S-T04"
+    - criterion: "Dependency satisfaction evaluates completion order and terminal status — message or queue delivery order alone must not unlock dependents when predecessor remains failed or non-terminal."
+      residuality_facet:
+        ledger_disposition: "candidate_requirement"
+        proof_boundary: "Discovery until W4 out-of-order completion composition fault"
+        source_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.md"
+        stressor_id: "S-T05"
     - criterion: "Each execution outcome has deterministic status and reason semantics."
+    - criterion: "Redelivered execution attempts for the same logical work unit are deduplicated or recorded as duplicate attempts without changing task_id or forking terminal outcome semantics."
+      residuality_facet:
+        ledger_disposition: "candidate_requirement"
+        proof_boundary: "Discovery until W4 duplicate-delivery composition fault"
+        source_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.md"
+        stressor_id: "S-T01"
     - criterion: "Retries and resumed runs preserve task_id and append evidence history."
     - criterion: "Stale input and cancellation prevent dependents from becoming ready until an explicit valid recovery occurs."
+    - criterion: "Store persistence failures surface as explicit non-success outcomes with deterministic reason — tasks are not marked successful when evidence or state writes fail."
+      residuality_facet:
+        ledger_disposition: "candidate_requirement"
+        proof_boundary: "Discovery until W4 store-write-failure composition fault"
+        source_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.md"
+        stressor_id: "S-T15"
+    - criterion: "Incompatible evidence or normalization schema version yields deterministic ILLEGAL_TRANSITION or explicit version mismatch — never silent corruption of fingerprints or transition semantics."
+      residuality_facet:
+        ledger_disposition: "candidate_requirement"
+        proof_boundary: "Discovery until W4 schema-skew composition fault"
+        source_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.md"
+        stressor_id: "S-T09"
+    - criterion: "Execution status reads under partition or split visibility document bounded staleness or expose a monotonic read token — clients must not infer success from silently lagging status."
+      residuality_facet:
+        ledger_disposition: "candidate_requirement"
+        proof_boundary: "Discovery until W4 partition-read consistency composition fault"
+        source_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.md"
+        stressor_id: "S-T16"
   status: "Planned"

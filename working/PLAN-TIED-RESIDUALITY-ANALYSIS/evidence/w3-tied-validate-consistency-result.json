@@ -1,0 +1,6 @@
+{
+  "tool": "tied_validate_consistency",
+  "include_pseudocode": true,
+  "ok": true,
+  "note": "Full report captured in agent session 2026-09-27; index requirements/architecture/implementation/semantic-tokens valid."
+}
