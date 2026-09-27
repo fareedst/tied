@@ -21,7 +21,7 @@ REQ-TIED_YAML_COMPARE_RUBY_LOAD:
       metric: "scripts/yaml_semantic_compare_load_test.rb or extended compare_yaml_dirs_test.rb"
     - criterion: "ruby scripts/compare_yaml_dirs.rb --help exits 0 without NameError"
       metric: "scripts/compare_yaml_dirs_test.rb load smoke"
-  status: "Planned"
+  status: "Implemented"
   traceability:
     architecture:
       - "ARCH-TIED_STRUCTURE"

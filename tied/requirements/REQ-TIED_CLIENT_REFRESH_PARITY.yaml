@@ -34,7 +34,7 @@ REQ-TIED_CLIENT_REFRESH_PARITY:
       metric: "client-refresh-parity.test.mjs parity B cases"
     - criterion: "warnModifiedCopyTarget does not warn on directory-only non-midnight mtimes after normalized tree copy"
       metric: "copy-managed.test.mjs directory warning cases"
-  status: "Planned"
+  status: "Implemented"
   traceability:
     architecture:
       - "ARCH-TIED_CLIENT_REFRESH_PARITY"

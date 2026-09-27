@@ -13,12 +13,26 @@ entry_points:
   - notes: "Full checklist applies"
     scenario: "New requirement"
     start_at: "session-bootstrap"
+record_identity:
+  change_request_id: REQ-TIED_YAML_COMPARE_RUBY_LOAD
+  title: Ruby yaml_semantic_compare load-order fix
+  recorded_at: "2026-09-27"
+  gate_policy: advisory
+  profile_depth: minimal
+  citdp_path: tied/citdp/CITDP-REQ-TIED_YAML_COMPARE_RUBY_LOAD.yaml
+  req_token: REQ-TIED_YAML_COMPARE_RUBY_LOAD
+  program_phase: closed
 execution_evidence:
   close_out_evidence:
-    date: null
+    date: "2026-09-27"
     deferred: []
-    gates: {}
-    master_checklist: ""
+    gates:
+      verification: working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/run-close-out-gates-verification-2.txt
+      close_out: working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/run-close-out-gates-close-out.txt
+    master_checklist: working/REQ-TIED_YAML_COMPARE_RUBY_LOAD/checklist-tracker.yaml
+    envelope: working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/request-evidence-envelope.v1.json
+    ship_commit: f1058d2
+    note: "Slice A closed with parent program REQ-TIED_CLIENT_REFRESH_PARITY"
   completed:
     - "apply-token-comments"
     - "author-requirement"
@@ -36,6 +50,13 @@ execution_evidence:
     - "translate-sponsor-intent"
     - "unit-test-red"
     - "unit-test-green"
+    - "three-way-alignment-unit"
+    - "verification-gate"
+    - "persist-citdp-record"
+    - "user-facing-release-notes"
+    - "gitignore-close-out-hygiene"
+    - "sub-close-out-evidence-sync"
+    - "traceable-commit"
   envelope_path: "working/{REQ-TOKEN}/evidence/request-evidence-envelope.v1.json"
   evidence_refs_format: "Typed evidence_refs for completed dispositions (RESOLVE_EVIDENCE_REFS at write time):\n  - kind: manifest_ref\n    path: working/{REQ-TOKEN}/evidence/verification-evidence-manifest.v1.json\n  - kind: gate_receipt\n    path: working/{REQ-TOKEN}/gates/verification-2026-08-24T16-46-08-642Z.json\n  - kind: envelope_ref\n    path: working/{REQ-TOKEN}/evidence/request-evidence-envelope.v1.json\n  - kind: file_path\n    path: working/{REQ-TOKEN}/evidence/step-artifact.md\n  - kind: command_evidence\n    claimed_success: true\n    manifest_ref: working/{REQ-TOKEN}/evidence/verification-evidence-manifest.v1.json\n    stdout_ref: working/{REQ-TOKEN}/evidence/stdout.txt\n    exit_code: 0\nLegacy string paths remain accepted; generic prose (e.g. \"tests passed\") is rejected as unresolved_evidence_ref.\n"
   operator_evidence:
@@ -522,11 +543,17 @@ steps:
       - "When an evidence chain profile is in scope, validators/tests/lint/consistency outputs must be attached to the profile via manifest_reference (and structural wiring when available), not merely executed separately. CALL sub-evidence-chain-profile at the tested revision after those steps complete. Write only under working/evidence-chain/."
     title: "Full suite, lint, token validation, audit, metadata (Phase I)"
     tracking:
-      consideration_before_proceeding: "Full suite and lint pass; post-test sub-pseudocode-validation-pass complete; token validation ok; three-way audit done; IMPL metadata updated; module validation documented; canonical vocabulary reconciled (RECORD) with final tests/code."
+      consideration_before_proceeding: "Ruby load and compare_yaml_dirs tests green; shipped with parent program f1058d2; tied_verify REQ Implemented."
+      evidence_refs:
+        - kind: file_path
+          path: working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/ruby-load-test.txt
+        - kind: file_path
+          path: working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/ruby-compare-dirs-test.txt
       retry_count: "0"
       returned_from: []
       state_history: []
-      status: "pending"
+      status: "completed"
+    disposition: "completed"
   - agentstream_new_session: "true"
     flow:
       branches:
@@ -824,11 +851,15 @@ steps:
       - "Write commit message per [PROC-COMMIT_MESSAGES]: header <type>(<scope>): <subject> (≤50 chars); type feat|fix|docs|refactor|test|build|ci|chore|perf|style; scope area affected; subject imperative present tense; body motivation/behavior; footer Closes/Fixes #issue and REQ/ARCH/IMPL tokens touched."
     title: "Commit per PROC-COMMIT_MESSAGES; no push unless asked"
     tracking:
-      consideration_before_proceeding: "sub-vocabulary-sync (VALIDATE) passed or immature-client deferral noted; commit created; format per PROC-COMMIT_MESSAGES; tokens in body/footer."
+      consideration_before_proceeding: "Closed with parent program commit f1058d2; Slice A only scope."
+      evidence_refs:
+        - kind: gate_receipt
+          path: working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/run-close-out-gates-close-out.txt
       retry_count: "0"
       returned_from: []
       state_history: []
-      status: "pending"
+      status: "completed"
+    disposition: "completed"
   - flow:
       branches: []
       calls:
@@ -1127,11 +1158,15 @@ steps:
       - "When residuality discovery ran, attach risk_analysis.residuality_analysis refs (worksheet_dir, classification_ledger_ref, proof_boundary) per working-folder attach pattern — do not merge full residuality policy into citdp-policy.md in the same batch unless policy already documents attach sections."
     title: "CITDP YAML under client docs/citdp"
     tracking:
-      consideration_before_proceeding: "CITDP record written and sub-yaml-edit-loop passed. Policy for when to create vs skip: ./tied/docs/citdp-policy.md."
+      consideration_before_proceeding: "CITDP-REQ-TIED_YAML_COMPARE_RUBY_LOAD.yaml recorded with verification_gate_notes 2026-09-27."
+      evidence_refs:
+        - kind: file_path
+          path: tied/citdp/CITDP-REQ-TIED_YAML_COMPARE_RUBY_LOAD.yaml
       retry_count: "0"
       returned_from: []
       state_history: []
-      status: "pending"
+      status: "completed"
+    disposition: "completed"
   - flow:
       branches: []
       calls: []

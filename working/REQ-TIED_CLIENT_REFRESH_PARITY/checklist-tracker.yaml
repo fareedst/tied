@@ -48,12 +48,29 @@ entry_points:
   - notes: Full checklist applies
     scenario: New requirement
     start_at: session-bootstrap
+record_identity:
+  change_request_id: REQ-TIED_CLIENT_REFRESH_PARITY
+  title: Client refresh methodology and doc parity gate
+  recorded_at: '2026-09-27'
+  gate_policy: advisory
+  profile_depth: minimal
+  citdp_path: tied/citdp/CITDP-REQ-TIED_CLIENT_REFRESH_PARITY.yaml
+  req_token: REQ-TIED_CLIENT_REFRESH_PARITY
+  program_phase: closed
 execution_evidence:
   close_out_evidence:
-    date: null
-    deferred: []
-    gates: {}
-    master_checklist: ''
+    date: '2026-09-27'
+    deferred:
+      - B5 methodology version stamp and --refresh-docs modes (future REQ)
+      - CI disposable client parity workflow
+      - E2E bootstrap-and-load parity extension
+      - --semantic-yaml-compare integration test
+    gates:
+      verification: working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/run-close-out-gates-verification-2.txt
+      close_out: working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/run-close-out-gates-close-out.txt
+    master_checklist: working/REQ-TIED_CLIENT_REFRESH_PARITY/checklist-tracker.yaml
+    envelope: working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/request-evidence-envelope.v1.json
+    ship_commit: f1058d2
   completed:
     - apply-token-comments
     - author-architecture
@@ -74,6 +91,13 @@ execution_evidence:
     - unit-test-red
     - unit-test-green
     - composition-integration
+    - three-way-alignment-unit
+    - verification-gate
+    - persist-citdp-record
+    - user-facing-release-notes
+    - gitignore-close-out-hygiene
+    - sub-close-out-evidence-sync
+    - traceable-commit
   envelope_path: working/{REQ-TOKEN}/evidence/request-evidence-envelope.v1.json
   evidence_refs_format: |
     Typed evidence_refs for completed dispositions (RESOLVE_EVIDENCE_REFS at write time):
@@ -110,6 +134,14 @@ execution_evidence:
       status: allowed
       run_id: refine-plan-pre-impl-20260927
       receipt: working/REQ-TIED_CLIENT_REFRESH_PARITY/gates/pre_implementation-2026-09-27T13-49-26-758Z.json
+    verification:
+      status: allowed
+      run_id: parity-close-out-verification-20260927
+      receipt: working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/run-close-out-gates-verification-2.txt
+    close_out:
+      status: allowed
+      run_id: parity-close-out-closeout-20260927
+      receipt: working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/run-close-out-gates-close-out.txt
   request: REQ-TIED_CLIENT_REFRESH_PARITY
 feedback_loops:
   composition_and_e2e: Missing implementation coverage returns to the specification path before evidence is accepted.
@@ -793,13 +825,22 @@ steps:
     title: Full suite, lint, token validation, audit, metadata (Phase I)
     tracking:
       consideration_before_proceeding: >-
-        Full suite and lint pass; post-test sub-pseudocode-validation-pass complete; token validation ok; three-way
-        audit done; IMPL metadata updated; module validation documented; canonical vocabulary reconciled (RECORD) with
-        final tests/code.
+        Bootstrap lib tests 6/6; Ruby load/compare green; disposable client verify exit 0; tied_validate_consistency
+        ok; tied_verify updated REQ/IMPL status; close-out verification gate allowed (envelope blocking_gap_count 0).
+      evidence_refs:
+        - kind: file_path
+          path: working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/bootstrap-lib-tests.txt
+        - kind: file_path
+          path: working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/tied-validate-consistency-close-out.txt
+        - kind: file_path
+          path: working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/verify-disposable-client.txt
+        - kind: gate_receipt
+          path: working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/run-close-out-gates-verification-2.txt
       retry_count: '0'
       returned_from: []
       state_history: []
-      status: pending
+      status: completed
+    disposition: completed
   - agentstream_new_session: 'true'
     flow:
       branches:
@@ -1315,12 +1356,16 @@ steps:
     title: Commit per PROC-COMMIT_MESSAGES; no push unless asked
     tracking:
       consideration_before_proceeding: >-
-        sub-vocabulary-sync (VALIDATE) passed or immature-client deferral noted; commit created; format per
-        PROC-COMMIT_MESSAGES; tokens in body/footer.
+        Shipped on main as f1058d2 (plan-close-out); vocabulary VALIDATE at commit; REQ/ARCH/IMPL tokens in commit
+        message; envelope blocking_gap_count 0 at close_out gate.
+      evidence_refs:
+        - kind: gate_receipt
+          path: working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/run-close-out-gates-close-out.txt
       retry_count: '0'
       returned_from: []
       state_history: []
-      status: pending
+      status: completed
+    disposition: completed
   - flow:
       branches: []
       calls:
@@ -1844,12 +1889,16 @@ steps:
     title: CITDP YAML under client docs/citdp
     tracking:
       consideration_before_proceeding: >-
-        CITDP record written and sub-yaml-edit-loop passed. Policy for when to create vs skip:
-        ./tied/docs/citdp-policy.md.
+        CITDP-REQ-TIED_CLIENT_REFRESH_PARITY.yaml on disk with close_out_gate and LEAP recorded; refine-plan post-ship
+        notes in PLAN.md Post-ship follow-ups.
+      evidence_refs:
+        - kind: file_path
+          path: tied/citdp/CITDP-REQ-TIED_CLIENT_REFRESH_PARITY.yaml
       retry_count: '0'
       returned_from: []
       state_history: []
-      status: pending
+      status: completed
+    disposition: completed
   - flow:
       branches: []
       calls: []

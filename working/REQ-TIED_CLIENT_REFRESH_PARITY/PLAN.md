@@ -8,7 +8,7 @@
 | **IMPL** | [IMPL-TIED_CLIENT_REFRESH_PARITY](../../tied/implementation-decisions/IMPL-TIED_CLIENT_REFRESH_PARITY.yaml) · [pseudo-code](../../tied/implementation-decisions/IMPL-TIED_CLIENT_REFRESH_PARITY-pseudocode.md) |
 | **CITDP** | [CITDP-REQ-TIED_CLIENT_REFRESH_PARITY.yaml](../../tied/citdp/CITDP-REQ-TIED_CLIENT_REFRESH_PARITY.yaml) · [CITDP-REQ-TIED_YAML_COMPARE_RUBY_LOAD.yaml](../../tied/citdp/CITDP-REQ-TIED_YAML_COMPARE_RUBY_LOAD.yaml) |
 | **Tracker** | [checklist-tracker.yaml](./checklist-tracker.yaml) |
-| **Report schema (draft)** | [client-refresh-parity-report.v1.schema.json](./client-refresh-parity-report.v1.schema.json) → promote to `tools/bootstrap/schemas/` in B2 |
+| **Report schema (promoted)** | [tools/bootstrap/schemas/client-refresh-parity-report.v1.schema.json](../../tools/bootstrap/schemas/client-refresh-parity-report.v1.schema.json) (working copy retained for reference: [client-refresh-parity-report.v1.schema.json](./client-refresh-parity-report.v1.schema.json)) |
 | **Size** | **M** (two slices; not express lane — bootstrap policy + dual parity surfaces + Ruby load ordering) |
 | **profile_depth** | `minimal` |
 | **gate_policy** | advisory (no integrated adversarial inquiry triggers) |
@@ -78,14 +78,14 @@ flowchart LR
 
 ## Phased implementation order
 
-| Phase | REQ | Deliverable | Depends on |
-| --- | --- | --- | --- |
-| **A** | REQ-TIED_YAML_COMPARE_RUBY_LOAD | Hoist `DEFAULT_RECORD_LIST_KEYS`; extend Ruby smoke test | — |
-| **B1** | REQ-TIED_CLIENT_REFRESH_PARITY | `methodology-template-only-allowlist.mjs` + `client-refresh-parity.mjs` + unit tests (Parity A/B) | A |
-| **B2** | REQ-TIED_CLIENT_REFRESH_PARITY | `verify-client-methodology.mjs` CLI; promote schema to `tools/bootstrap/schemas/` | B1 |
-| **B3** | REQ-TIED_CLIENT_REFRESH_PARITY | Bootstrap tail wiring (anchor above) + `copy-managed.mjs` directory warning fix | B2 |
-| **B4** | REQ-TIED_CLIENT_REFRESH_PARITY | Docs: `methodology-migration.md` Phase 1 verify, `tools/bootstrap/README.md` | B3 |
-| **B5** (optional) | Future REQ | Methodology version stamp; doc refresh modes | B4 |
+| Phase | REQ | Deliverable | Depends on | Status |
+| --- | --- | --- | --- | --- |
+| **A** | REQ-TIED_YAML_COMPARE_RUBY_LOAD | Hoist `DEFAULT_RECORD_LIST_KEYS`; extend Ruby smoke test | — | **Done** (shipped `f1058d2`) |
+| **B1** | REQ-TIED_CLIENT_REFRESH_PARITY | `methodology-template-only-allowlist.mjs` + `client-refresh-parity.mjs` + unit tests (Parity A/B) | A | **Done** |
+| **B2** | REQ-TIED_CLIENT_REFRESH_PARITY | `verify-client-methodology.mjs` CLI; promote schema to `tools/bootstrap/schemas/` | B1 | **Done** |
+| **B3** | REQ-TIED_CLIENT_REFRESH_PARITY | Bootstrap tail wiring (anchor above) + `copy-managed.mjs` directory warning fix | B2 | **Done** |
+| **B4** | REQ-TIED_CLIENT_REFRESH_PARITY | Docs: `methodology-migration.md` Phase 1 verify, `tools/bootstrap/README.md` | B3 | **Done** |
+| **B5** (optional) | Future REQ | Methodology version stamp; doc refresh modes | B4 | **Deferred** (Post-ship follow-ups) |
 
 ## Deferred (Phase 2 / future REQ)
 
@@ -150,10 +150,24 @@ flowchart LR
 | --- | --- | --- |
 | **client refresh parity gate** | tied-methodology.md | **RECORDED** (rows 62–63) |
 | **doc drift report** | tied-methodology.md | **RECORDED** |
-| **METHODOLOGY_TEMPLATE_ONLY allowlist** | IMPL pseudo-code + allowlist module | RECORD at build-plan |
+| **METHODOLOGY_TEMPLATE_ONLY allowlist** | IMPL pseudo-code + allowlist module | **RECORDED** (build-plan) |
 
-VALIDATE at build-plan close-out against `tied/vocab/tied-methodology.md`.
+VALIDATE at close-out against `tied/vocab/tied-methodology.md` — **done** (2026-09-27 post-ship refine).
+
+## Post-ship follow-ups (explicit next work)
+
+Program v1 shipped on `main` (commit `f1058d2`, ahead of origin at close-out). Do not re-run greenfield build-plan for A–B4; track items below as separate invocations.
+
+| # | Item | Owner | Suggested invocation | Acceptance stub |
+| --- | --- | --- | --- | --- |
+| 1 | **CI**: disposable client + `verify-client-methodology.mjs` in GitHub Actions (Windows bootstrap smoke sibling or dedicated workflow) | Engineering / CI | `non-tied-plan` | Job runs `copy_files.sh` on temp dir, parity CLI exit 0; methodology drift case exit 1; doc drift default exit 0 / `--strict-refresh` exit 1 |
+| 2 | **B5 / Phase 2 REQ**: methodology version stamp; `--refresh-docs=checksum\|allowlist` | Product / TIED | `plan-new-feature` | New REQ tokens; stamp file on refresh; parity report field; documented doc overwrite modes |
+| 3 | **E2E**: extend `mcp-server/src/e2e/bootstrap-and-load.test.ts` with disposable client parity | Engineering | `non-tied-plan` or slice under Phase 2 REQ | E2E invokes bootstrap + parity CLI; justifies UI/runtime boundary |
+| 4 | **`--semantic-yaml-compare`**: integration test spawning Ruby compare on fixture dirs | Engineering | `non-tied-plan` | Flag toggles semantic path for `.yaml`; sha256 unchanged for non-YAML |
+| 5 | **Operator policy**: fleet rollout of `--strict-refresh` vs `--parity-gate-report-only` | Ops | Ops runbook (no code) | Documented decision matrix; brownfield vs greenfield defaults |
+
+**Empirical baseline (close-out):** disposable client `/Users/fareed/Documents/dev/test/1790492487` — 0 methodology drift, 3 doc drifts warned after refresh.
 
 ## plan-refine status
 
-**Complete** for pre-implementation gate (2026-09-27): CITDP test strategy and risks updated; trackers aligned through `test-strategy`; `pseudocode_validate` OK for [IMPL-TIED_CLIENT_REFRESH_PARITY]; `tied_checklist_gate_validate` phase `pre_implementation` recorded under `gates/`.
+**Post-implementation refine** (2026-09-27): Phases A–B4 marked done; REQ detail status aligned to index (`Implemented`); trackers updated for close-out dispositions; CITDP completion notes current. Pre-implementation gate remains on disk (`pre_implementation` receipt unchanged).

@@ -30,6 +30,14 @@ build-plan Slice A — REQ-TIED_YAML_COMPARE_RUBY_LOAD: hoist DEFAULT_RECORD_LIS
 
 After Slice A green, run program build-plan per parent PLAN (B1→B4).
 
+## Delivery status
+
+| Slice | Status | Evidence |
+| --- | --- | --- |
+| Constant hoist + load tests | **Done** (shipped with program commit `f1058d2`) | `scripts/yaml_semantic_compare_load_test.rb`, extended `scripts/compare_yaml_dirs_test.rb`; parent program evidence under `working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/` |
+
+Parent program B1–B4 complete; see [REQ-TIED_CLIENT_REFRESH_PARITY PLAN](../REQ-TIED_CLIENT_REFRESH_PARITY/PLAN.md) **Post-ship follow-ups** for CI and `--semantic-yaml-compare` integration tests.
+
 ## plan-refine status
 
-Pre-implementation planning complete (2026-09-27); implementation deferred to build-plan.
+**Post-implementation refine** (2026-09-27): Slice A done; REQ status `Implemented` aligned with index after `tied_verify` close-out.
