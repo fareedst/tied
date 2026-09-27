@@ -1,0 +1,59 @@
+# Sparse gate input for pre_implementation at depth_tier minimal.
+# Authoritative execution Tracker: agent-req-implementation-checklist.yaml (sub_procedures hold sub-adversarial disposition).
+note: Use this file as tracker_path for tied_checklist_gate_validate pre_implementation only.
+execution_evidence:
+  request: PLAN-TIED-RESIDUALITY-ANALYSIS
+  completed:
+    - session-bootstrap
+    - translate-sponsor-intent
+    - change-definition
+    - impact-discovery
+    - risk-assessment
+    - test-strategy
+steps:
+  - slug: session-bootstrap
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied/vocab/residuality.md
+      - kind: file_path
+        path: tied/docs/ai-principles.md
+  - slug: translate-sponsor-intent
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: /Users/fareed/.cursor/plans/plan_residuality_feature_07582e06.plan.md
+  - slug: change-definition
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: working/PLAN-TIED-RESIDUALITY-ANALYSIS/CITDP-PLAN-TIED-RESIDUALITY-ANALYSIS.yaml
+  - slug: impact-discovery
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: working/PLAN-TIED-RESIDUALITY-ANALYSIS/CITDP-PLAN-TIED-RESIDUALITY-ANALYSIS.yaml
+      - kind: file_path
+        path: tied/requirements/REQ-FEAT_TASK_EXECUTION_RECOVERY.yaml
+      - kind: file_path
+        path: tied/requirements/REQ-FEAT_IDEMPOTENT_CREATION.yaml
+  - slug: risk-assessment
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: working/PLAN-TIED-RESIDUALITY-ANALYSIS/CITDP-PLAN-TIED-RESIDUALITY-ANALYSIS.yaml
+      - kind: file_path
+        path: /Users/fareed/.cursor/plans/plan_residuality_feature_07582e06.plan.md
+  - slug: sub-adversarial-inquiry-pass
+    disposition: not_applicable
+    policy: minimal-depth-no-inquiry
+    rationale: Refine-plan documentation and provisional vocabulary batch at depth_tier minimal; integrated inquiry pairing not required. W1+ pilot execution must re-select integrated depth.
+  - slug: gate-pseudocode-validation
+    disposition: not_applicable
+    policy: no-impl-pseudocode-in-refine-plan-docs-batch
+    rationale: This batch authors a methodology feature plan roadmap and provisional vocab; no IMPL essence_pseudocode sidecar was created or changed.
+  - slug: test-strategy
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: working/PLAN-TIED-RESIDUALITY-ANALYSIS/CITDP-PLAN-TIED-RESIDUALITY-ANALYSIS.yaml

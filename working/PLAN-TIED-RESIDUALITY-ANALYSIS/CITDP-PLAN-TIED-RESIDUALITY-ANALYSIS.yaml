@@ -1,0 +1,93 @@
+CITDP-PLAN-TIED-RESIDUALITY-ANALYSIS:
+  change_definition:
+    current_behavior: "Residuality Theory is documented only as an exploratory comparison in docs/comparisons/residuality-theory-and-tied.md. No canonical methodology feature plan, provisional glossary routing, worksheet contract, candidate schema, or CITDP residuality hook exists."
+    desired_behavior: "A rigorous linked Cursor plan and subsequent docs/tied-residuality-analysis-plan.md define Dual-Loop integration (Residuality Discovery Loop feeding TIED Intent and Evidence Loop), Waves W0–W5, proof boundaries, candidate stressor-residue.v1 schema, pilot scope on REQ-FEAT_TASK_EXECUTION_RECOVERY and REQ-FEAT_IDEMPOTENT_CREATION, and promotion gates that never compete with REQ/ARCH/IMPL authority."
+    non_goals:
+      - "Creating product REQ/ARCH/IMPL tokens for Residuality tooling in this refine-plan batch"
+      - "Mutating methodology YAML under tied/methodology/"
+      - "Auto-promoting unreviewed residues into project TIED YAML"
+      - "Claiming antifragility or universal resilience"
+      - "Executing the W1 pilot stressor workshop in this batch"
+    success_criteria:
+      - "Linked plan plan_residuality_feature_07582e06.plan.md specifies W0–W5 with deliverable paths, dual-loop handoffs, gates, profile depth, schemas, pilot DoD, and 1:1 build-plan todo ↔ feature-plan section map"
+      - "Provisional residuality vocabulary is RESOLVED and RECORDed in tied/vocab/residuality.md with routing keywords"
+      - "pre_implementation checklist gate allows progression for this documentation/planning batch"
+      - "Authority boundary is explicit: residuality discovers; TIED owns and proves"
+  impact_analysis:
+    architecture: []
+    documentation:
+      - "docs/tied-residuality-analysis-plan.md (authored by build-plan 2026-09-27)"
+      - "docs/comparisons/residuality-theory-and-tied.md (cross-link)"
+      - "tied/vocab/residuality.md"
+      - "tied/vocab/routing.md"
+    implementation_decisions: []
+    requirements:
+      - "REQ-FEAT_TASK_EXECUTION_RECOVERY (pilot target only; no mutation this batch)"
+      - "REQ-FEAT_IDEMPOTENT_CREATION (pilot target only; no mutation this batch)"
+    processes:
+      - "PROC-CITDP"
+      - "PROC-LEAP"
+      - "PROC-VOCABULARY_INDEX"
+      - "PROC-AGENT_REQ_CHECKLIST"
+      - "PROC-QUALITY_ASSURANCE"
+  record_identity:
+    citdp_id: "CITDP-PLAN-TIED-RESIDUALITY-ANALYSIS"
+    created_at: "2026-09-26"
+    status: "closed"
+    title: "Refine-plan: TIED Residuality Analysis methodology feature plan roadmap"
+    updated_at: "2026-09-27"
+    build_plan_note: "2026-09-27 build-plan authored docs/tied-residuality-analysis-plan.md; verification gate allowed at minimal depth."
+    close_out_note: "2026-09-27 plan-close-out: machine gate at minimal depth; request-evidence-envelope waived (PLAN-* InvalidRequestToken); W1 pilot unblocked."
+    persistence_note: "Working-folder analysis record for refine-plan. Canonical tied/citdp/ persistence deferred until a behavior-changing batch or explicit sponsor persist; citdp-policy skip applies to pure plan-doc authoring except when tooling REQ tokens are created."
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Feature plan treats incidence matrix or stressor worksheet as a second specification authority competing with REQ/ARCH/IMPL."
+        - "Pilot mutates project TIED YAML from unreviewed residues without LEAP classification."
+        - "Validation stressors reused from design set while claiming unfamiliar-stressor proof."
+        - "Antifragility is adopted as a TIED guarantee without evidence boundaries."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Comparison doc already states residuality discovers and TIED formalizes; fidelity research forbids silent mutation."
+        - "Quality-assurance residual_risk is explicitly contrasted with residue in provisional vocab."
+        - "This batch only updates planning/vocab artifacts; pilot REQs are read-only targets."
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "docs/comparisons/residuality-theory-and-tied.md"
+        - "tied/vocab/residuality.md"
+        - "tied/vocab/quality-assurance.md"
+        - "tied/docs/citdp-policy.md"
+        - "/Users/fareed/.cursor/plans/plan_residuality_feature_07582e06.plan.md"
+      falsification_questions:
+        - "Can a stressor worksheet replace a REQ satisfaction criterion without review?"
+        - "Does presence of stressor-residue.v1.yaml prove runtime recovery?"
+        - "Would W1 pilot execution against recovery/idempotency REQs require integrated depth?"
+      gate_policy: "advisory"
+      prior_depth_tier: null
+      profile_depth: "minimal"
+      rationale: "Refine-plan batch authors methodology planning and provisional vocabulary only. No runtime, auth, network, or persistence behavior change. Future W1+ pilot execution against task-recovery and idempotent-creation REQs matches persistence/stateful-reliability triggers and must default to depth_tier integrated unless a complete integrated_waiver is recorded."
+      research_profile: "integrated-agent"
+    residuality_analysis:
+      status: "planned_section"
+      note: "Proposed CITDP field for W5; not required this batch. Pilot worksheets live under working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/."
+    risks:
+      - description: "Ambiguous vocabulary conflates residue with residual_risk"
+        id: "RISK-RES-001"
+        likelihood: "Medium"
+        mitigation: "Provisional glossary + plan Refine Outcomes contrasts; VALIDATE before commit"
+      - description: "Plan over-scopes W5 tooling before pilot evidence"
+        id: "RISK-RES-002"
+        likelihood: "Medium"
+        mitigation: "W5 marked optional/proposed; promotion gate requires pilot DoD"
+      - description: "Build-plan accidentally edits methodology YAML"
+        id: "RISK-RES-003"
+        likelihood: "Low"
+        mitigation: "Guardrail: project docs and tied/vocab only; never tied/methodology/"
+  test_strategy:
+    summary: "This refine-plan batch has no RED production tests. Verification is documentary: markdown structure, relative links, vocab routing PRELOAD match, and checklist pre_implementation gate. Build-plan authoring of docs/tied-residuality-analysis-plan.md adds link/format checks. W1–W4 pilots define executable unit/composition/fault-injection strategies against the named pilot REQs under integrated depth."
+    matrix_notes: "baseline-functional for plan docs; stateful-reliability and data-integrity-migration apply at W1+ pilot execution only."
+    deferred_executable_tests:
+      - "W4 unit contracts under failure for pilot IMPL blocks"
+      - "W4 CONTROLLED_COMPOSITION_FAULT composition tests"
+      - "W4 unfamiliar validation-stressor set"

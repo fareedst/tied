@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **TIED Residuality Analysis plan (PLAN-TIED-RESIDUALITY-ANALYSIS)** — Methodology feature plan `docs/tied-residuality-analysis-plan.md` (Dual-Loop W0–W5, pilot REQs, authority boundary); provisional glossary `tied/vocab/residuality.md` and routing keywords. Working CITDP/tracker closed at minimal depth; close-out gate [close_out-2026-09-27T04-57-56-900Z.json](working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/close_out-2026-09-27T04-57-56-900Z.json) `allowed: true`; request-evidence-envelope waived for PLAN-* ([waiver](working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/request-evidence-envelope-waiver.v1.json)). W1 pilot unblocked.
+
 - **Bootstrap `.tied-yaml.yaml` ([REQ-TIED_YAML_STYLE_CONFIGURATION], [REQ-TIED_SETUP], [IMPL-TIED_FILES])** — `copy_files` seeds repo-root repository YAML style config from `templates/.tied-yaml.yaml` (create-if-absent, templates-first via `resolveTemplateFile`); Windows bootstrap smoke hard-asserts the file; contract tests in `claude-harness.test.mjs` (**19/19**). Close-out: [close-out-gates-2026-09-26.json](working/REQ-TIED_YAML_STYLE_CONFIGURATION/evidence/close-out-gates-2026-09-26.json).
 
 - **Jev decision coprocessor ([REQ-TIED_JEV_DECISION_COPROCESSOR])** — W0–W5 core: server-side Jev `/v1/decide` client, shadow vocab PRELOAD, prompt-type advisory, adversarial triage pilot, opt-in `@tied/agentstream` harness preflight and tool guard. Program close-out: [close-out-gates-2026-09-26.json](working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/close-out-gates-2026-09-26.json) `allowed: true`.

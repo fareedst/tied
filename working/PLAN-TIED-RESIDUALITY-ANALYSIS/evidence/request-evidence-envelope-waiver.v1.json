@@ -1,0 +1,14 @@
+{
+  "schema_version": "request-evidence-envelope-waiver.v1",
+  "request_token": "PLAN-TIED-RESIDUALITY-ANALYSIS",
+  "reason": "request_evidence_envelope_build rejects non-REQ tokens (InvalidRequestToken); PLAN-* change IDs are working-folder analysis records per citdp-policy",
+  "policy_ref": "tied/docs/citdp-policy.md",
+  "depth_tier": "minimal",
+  "machine_close_out_substitute": [
+    "tied_checklist_gate_validate phase close_out allowed true",
+    "working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/close_out-*.json receipt",
+    "working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/close-out-gates-2026-09-27.json"
+  ],
+  "generated_at": "2026-09-27T05:00:00.000Z",
+  "approved_by": "sponsor close-out with envelope waiver note"
+}

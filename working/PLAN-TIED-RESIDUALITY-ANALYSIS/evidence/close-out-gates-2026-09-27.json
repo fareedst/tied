@@ -1,0 +1,159 @@
+{
+  "phase": "close_out",
+  "depth_tier": "minimal",
+  "activation_collect": {
+    "skipped": true,
+    "reason": "minimal_depth",
+    "run_id": "plan-close-out-2026-09-27"
+  },
+  "reconcile": {
+    "ok": true,
+    "report": {
+      "request_token": "",
+      "findings": [
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "sub-close-out-evidence-sync",
+            "error": "missing_artifact: \"working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/sub-close-out-evidence-sync-evidence.md\""
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/close_out-2026-09-27T04-57-29-155Z.json",
+            "stored_tracker_hash": "sha256:38850520b61c3331dda07883ae8a6d2cf5e92f0743755ec158f89756c84cf62e",
+            "current_tracker_hash": "sha256:347ead8a1f2848be1c0af948450149913f5e223e371d4192dcecd46a82c78fbf",
+            "stored_citdp_hash": "sha256:77489921d2b756962e8216a5aca8fbcf54bc8e44029c36d54d59906f11109d40",
+            "current_citdp_hash": "sha256:68e6b193350136ea2d5295e62f68e68554fa35f9016228ff6f8a8f8ed0523d37"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/close_out-2026-09-27T04-57-56-900Z.json",
+            "stored_tracker_hash": "sha256:38850520b61c3331dda07883ae8a6d2cf5e92f0743755ec158f89756c84cf62e",
+            "current_tracker_hash": "sha256:347ead8a1f2848be1c0af948450149913f5e223e371d4192dcecd46a82c78fbf",
+            "stored_citdp_hash": "sha256:0bcda59aa19408e93e0a64982f4d83e4601c6d45932f8847d2f1ff96f7d7c0ef",
+            "current_citdp_hash": "sha256:68e6b193350136ea2d5295e62f68e68554fa35f9016228ff6f8a8f8ed0523d37"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/pre_implementation-2026-09-27T04-39-45-683Z.json",
+            "stored_tracker_hash": "sha256:713edaf2ca75783d01a0f0b693e53e71d88ab1684fd600fd0915cbaf930d208d",
+            "current_tracker_hash": "sha256:347ead8a1f2848be1c0af948450149913f5e223e371d4192dcecd46a82c78fbf",
+            "stored_citdp_hash": "sha256:b3ec255db980950672158f648213d96f633ee5b70ff3ea11bac563beba0ab60d",
+            "current_citdp_hash": "sha256:68e6b193350136ea2d5295e62f68e68554fa35f9016228ff6f8a8f8ed0523d37"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/pre_implementation-2026-09-27T04-44-50-832Z.json",
+            "stored_tracker_hash": "sha256:37786f4617c252fed38dba6aafbd367039822417e58c83d4e2c34432e76ea926",
+            "current_tracker_hash": "sha256:347ead8a1f2848be1c0af948450149913f5e223e371d4192dcecd46a82c78fbf",
+            "stored_citdp_hash": "sha256:e742ad8a202c927b66a54fe19cf140e14f07d14336d06b74c3086ec54b953ede",
+            "current_citdp_hash": "sha256:68e6b193350136ea2d5295e62f68e68554fa35f9016228ff6f8a8f8ed0523d37"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/pre_implementation-2026-09-27T04-46-04-773Z.json",
+            "stored_tracker_hash": "sha256:7704c9d0cbf6561ffb2f7ae84431bf48ea24e56cc94992400f65a32457cf9520",
+            "current_tracker_hash": "sha256:347ead8a1f2848be1c0af948450149913f5e223e371d4192dcecd46a82c78fbf",
+            "stored_citdp_hash": "sha256:e742ad8a202c927b66a54fe19cf140e14f07d14336d06b74c3086ec54b953ede",
+            "current_citdp_hash": "sha256:68e6b193350136ea2d5295e62f68e68554fa35f9016228ff6f8a8f8ed0523d37"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/verification-2026-09-27T04-51-45-189Z.json",
+            "stored_tracker_hash": "sha256:d3151602ffc7fee61ab0c692611eae934ea1ac4a49e70bed02e37a08c4845857",
+            "current_tracker_hash": "sha256:347ead8a1f2848be1c0af948450149913f5e223e371d4192dcecd46a82c78fbf",
+            "stored_citdp_hash": "sha256:e742ad8a202c927b66a54fe19cf140e14f07d14336d06b74c3086ec54b953ede",
+            "current_citdp_hash": "sha256:68e6b193350136ea2d5295e62f68e68554fa35f9016228ff6f8a8f8ed0523d37"
+          }
+        }
+      ],
+      "ledger_rows": 16,
+      "read_only": true,
+      "process_grade": {
+        "score": 57,
+        "band": "D",
+        "dimensions": [
+          {
+            "name": "tracker_integrity",
+            "score": 100,
+            "weight": 0.3,
+            "gap_codes": []
+          },
+          {
+            "name": "verification_manifest",
+            "score": 0,
+            "weight": 0.25,
+            "gap_codes": [
+              "expected_artifact_missing"
+            ]
+          },
+          {
+            "name": "hash_alignment",
+            "score": 40,
+            "weight": 0.2,
+            "gap_codes": [
+              "evidence_stale"
+            ]
+          },
+          {
+            "name": "ledger_correlation",
+            "score": 100,
+            "weight": 0.15,
+            "gap_codes": []
+          },
+          {
+            "name": "typed_evidence_refs",
+            "score": 40,
+            "weight": 0.1
+          }
+        ],
+        "gap_codes": [
+          "expected_artifact_missing",
+          "evidence_stale"
+        ]
+      }
+    }
+  },
+  "quality_manifest": {
+    "ok": false,
+    "skipped": true,
+    "reason": "no_citdp_commands"
+  },
+  "evidence_chain_profile": {
+    "ok": false,
+    "skipped": true,
+    "reason": "no_psa_reports"
+  },
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "gate": {
+    "allowed": true,
+    "blocking": false,
+    "diagnostics": [],
+    "evidence_hydrated": false,
+    "hydration_diagnostics": [
+      "hydration_envelope_gaps_missing"
+    ]
+  },
+  "envelope": {
+    "ok": false,
+    "error": "InvalidRequestToken",
+    "stage": "identity"
+  }
+}
