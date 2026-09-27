@@ -1,0 +1,20 @@
+{
+  "schema_version": "checklist-gate-receipt.v1",
+  "phase": "verification",
+  "timestamp": "2026-09-27T14:50:29.812Z",
+  "allowed": true,
+  "diagnostics": [],
+  "depth": "minimal",
+  "input_hashes": {
+    "tracker_hash": "sha256:cc235b767faa499277ed69a9238c0b061f73f2c5acfa079c1e0616d787758647",
+    "citdp_hash": "sha256:237f13a2a3637fd93382e7aeffdd344aaa5cf37fea5a4b270f4fd5629eb23505"
+  },
+  "gate_result": {
+    "allowed": true,
+    "ok": true,
+    "blocking": false,
+    "depth": "minimal",
+    "phase": "verification",
+    "diagnostics": []
+  }
+}

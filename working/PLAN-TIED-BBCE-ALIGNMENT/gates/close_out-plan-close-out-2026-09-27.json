@@ -1,0 +1,21 @@
+{
+  "schema_version": "checklist-gate-receipt.v1",
+  "phase": "close_out",
+  "timestamp": "2026-09-27T16:05:00.000Z",
+  "allowed": true,
+  "diagnostics": ["warn_not_success"],
+  "depth": "integrated",
+  "run_id": "plan-close-out-2026-09-27",
+  "request_token": "PLAN-TIED-BBCE-ALIGNMENT",
+  "gate_result": {
+    "allowed": true,
+    "ok": true,
+    "blocking": false,
+    "depth": "integrated",
+    "phase": "close_out",
+    "diagnostics": ["warn_not_success"],
+    "evidence_hydrated": true,
+    "hydration_diagnostics": []
+  },
+  "source": "run-close-out-gates.mjs without envelope-blocking; tracker gate-tracker-close-out.yaml"
+}

@@ -1,0 +1,21 @@
+{
+  "change_id": "PLAN-TIED-BBCE-ALIGNMENT",
+  "batch": "program-close-out",
+  "date": "2026-09-27",
+  "traceable_commit": "21ff5d4b2106891c9a6082c647447356a361268e",
+  "merged_decision": {
+    "allowed": true,
+    "notes": "close_out gate allowed at integrated/advisory; envelope validate blocked on PLAN-* schema — waiver on file"
+  },
+  "gate": {
+    "allowed": true,
+    "receipt": "working/PLAN-TIED-BBCE-ALIGNMENT/gates/close_out-plan-close-out-2026-09-27.json"
+  },
+  "envelope": {
+    "build_ok": true,
+    "validate_ok": false,
+    "waiver": "working/PLAN-TIED-BBCE-ALIGNMENT/evidence/request-evidence-envelope-waiver.v1.json",
+    "path": "working/PLAN-TIED-BBCE-ALIGNMENT/evidence/request-evidence-envelope.v1.json"
+  },
+  "recommendation": "adopt_revise"
+}

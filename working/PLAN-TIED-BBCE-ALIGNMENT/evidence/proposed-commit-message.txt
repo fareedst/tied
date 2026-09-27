@@ -1,0 +1,3 @@
+chore(plan): close out PLAN-TIED-BBCE-ALIGNMENT program evidence
+
+Record close_out gate receipt, request-evidence envelope + waiver, gitignore whitelists for BBCE working gates, and CITDP program closure after traceable-commit 21ff5d4.

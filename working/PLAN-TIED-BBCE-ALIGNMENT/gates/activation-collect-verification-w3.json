@@ -1,0 +1,26 @@
+{
+  "receipt": {
+    "success": true,
+    "tool": "tied_adversarial_inquiry_run",
+    "request_token": "PLAN-TIED-BBCE-ALIGNMENT",
+    "project_id": "plan-tied-bbce-alignment-w3",
+    "run_id": "w3-build-plan-verification-2026-09-27",
+    "phase": "verification",
+    "scope": ["PLAN-TIED-BBCE-ALIGNMENT#W3-MECHANISMS-B-C"],
+    "scope_hash": "9bd1110d8c5baa786fe3253a8ee2c4a243acca9bab8d43d407d365cb9f900dd8"
+  },
+  "artifacts": {
+    "obligation-report.json": {
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/phase-verification/obligation-report.json"
+    },
+    "finding-ledger.jsonl": {
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/phase-verification/finding-ledger.jsonl"
+    },
+    "gate-result.json": {
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/phase-verification/gate-result.json"
+    },
+    "evidence-provenance.json": {
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/phase-verification/evidence-provenance.json"
+    }
+  }
+}

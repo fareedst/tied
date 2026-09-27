@@ -1,0 +1,14 @@
+{
+  "schema_version": "request-evidence-envelope-waiver.v1",
+  "request_token": "PLAN-TIED-BBCE-ALIGNMENT",
+  "reason": "request_evidence_envelope_validate rejects PLAN-* identity.request_token in MCP build used by run-close-out-gates (build succeeds; validate schema lag). Integrated program has no evidence-chain-profile (doc/pilot batch). Stale root adversarial-inquiry projections removed; phase-scoped artifacts authoritative.",
+  "policy_ref": "working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/envelope-investigation-2026-09-27.md",
+  "depth_tier": "integrated",
+  "machine_close_out_substitute": [
+    "tied_checklist_gate_validate phase close_out allowed true (gate_allowed)",
+    "working/PLAN-TIED-BBCE-ALIGNMENT/gates/close_out-plan-close-out-2026-09-27.json",
+    "working/PLAN-TIED-BBCE-ALIGNMENT/evidence/close-out-gates-2026-09-27.json"
+  ],
+  "generated_at": "2026-09-27T16:05:00.000Z",
+  "approved_by": "sponsor plan-close-out with envelope waiver note"
+}

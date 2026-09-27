@@ -1,30 +1,86 @@
-# Sparse gate input for close_out at depth_tier minimal (W0 Batch A build-plan 2026-09-27).
-note: Use as tracker_path for tied_checklist_gate_validate close_out only. Machine envelope sync deferred for doc-only batch.
 execution_evidence:
-  request: PLAN-TIED-BBCE-ALIGNMENT
-  depth_tier: minimal
-  gate_policy: advisory
   completed:
-    - session-bootstrap
-    - translate-sponsor-intent
-    - change-definition
-    - impact-discovery
-    - risk-assessment
-    - test-strategy
-    - sub-vocabulary-sync
-    - sub-vocabulary-sync
-    - verification-gate
+    - "change-definition"
+    - "gate-pseudocode-validation"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "sub-close-out-evidence-sync"
+    - "sub-vocabulary-sync"
+    - "test-strategy"
+    - "traceable-commit"
+    - "translate-sponsor-intent"
+    - "verification-gate"
+  depth_tier: "integrated"
+  gate_policy: "advisory"
+  request: "PLAN-TIED-BBCE-ALIGNMENT"
+  run_id: "plan-close-out-2026-09-27"
+  traceable_commit: "21ff5d4b2106891c9a6082c647447356a361268e"
+note: "Use as tracker_path for tied_checklist_gate_validate phase close_out."
 steps:
-  - slug: sub-adversarial-inquiry-pass
-    disposition: not_applicable
-    policy: minimal-depth-no-inquiry
-    rationale: W0 doc batch at depth_tier minimal.
-  - slug: verification-gate
-    disposition: completed
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: working/PLAN-TIED-BBCE-ALIGNMENT/gate-tracker-verification.yaml
-  - slug: traceable-commit
-    disposition: deferred
-    policy: sponsor-initiated-commit
-    rationale: Build-plan guardrail — no automatic git commit; sponsor runs validate-commit todo.
+      - kind: "file_path"
+        path: "tied/docs/ai-principles.md"
+    slug: "session-bootstrap"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "docs/tied-bbce-alignment-plan.md"
+    slug: "translate-sponsor-intent"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "working/PLAN-TIED-BBCE-ALIGNMENT/CITDP-PLAN-TIED-BBCE-ALIGNMENT.yaml"
+    slug: "change-definition"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied/analysis/agentstream-slice-map.yaml"
+    slug: "impact-discovery"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "working/PLAN-TIED-BBCE-ALIGNMENT/w4-refine/w4-promotion-decisions.md"
+    slug: "risk-assessment"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "working/PLAN-TIED-BBCE-ALIGNMENT/evidence/build-plan-w4-outcomes-2026-09-27.md"
+    slug: "test-strategy"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied/vocab/behavior-bounded-change-engineering.md"
+    slug: "sub-vocabulary-sync"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/phase-close_out/gate-result.json"
+    slug: "sub-adversarial-inquiry-pass"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "working/PLAN-TIED-BBCE-ALIGNMENT/evidence/build-plan-w4-outcomes-2026-09-27.md"
+    policy: "plan-program-no-new-impl-tokens"
+    rationale: "No new IMPL sidecars; checklist YAML lint only for W0–W4 promotion batch."
+    slug: "gate-pseudocode-validation"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "working/PLAN-TIED-BBCE-ALIGNMENT/gates/verification-2026-09-27-w4-build.json"
+    slug: "verification-gate"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "working/PLAN-TIED-BBCE-ALIGNMENT/evidence/build-plan-w4-outcomes-2026-09-27.md"
+      - kind: "git_commit"
+        path: "21ff5d4b2106891c9a6082c647447356a361268e"
+    slug: "traceable-commit"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "working/PLAN-TIED-BBCE-ALIGNMENT/evidence/sub-close-out-evidence-sync-evidence.md"
+      - kind: "file_path"
+        path: "working/PLAN-TIED-BBCE-ALIGNMENT/evidence/verification-evidence-manifest.v1.json"
+    slug: "sub-close-out-evidence-sync"

@@ -182,6 +182,21 @@ working/**/evidence/request-evidence-envelope.v1.json
 !working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/close_out-*.json
 !working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/pre_implementation-*.json
 !working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/verification-*.json
+!working/PLAN-TIED-BBCE-ALIGNMENT/evidence/verification-evidence-manifest.v1.json
+!working/PLAN-TIED-BBCE-ALIGNMENT/evidence/sub-close-out-evidence-sync-evidence.md
+!working/PLAN-TIED-BBCE-ALIGNMENT/evidence/close-out-gates-2026-09-27.json
+!working/PLAN-TIED-BBCE-ALIGNMENT/evidence/request-evidence-envelope.v1.json
+!working/PLAN-TIED-BBCE-ALIGNMENT/evidence/request-evidence-envelope-waiver.v1.json
+!working/PLAN-TIED-BBCE-ALIGNMENT/evidence/close-out-activation-collect.json
+!working/PLAN-TIED-BBCE-ALIGNMENT/gates/
+!working/PLAN-TIED-BBCE-ALIGNMENT/gates/**
+!working/PLAN-TIED-BBCE-ALIGNMENT/gates/close_out-*.json
+!working/PLAN-TIED-BBCE-ALIGNMENT/gates/pre_implementation-*.json
+!working/PLAN-TIED-BBCE-ALIGNMENT/gates/verification-*.json
+!working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/phase-close_out/
+!working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/phase-close_out/**
+!working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/phase-verification-w4/
+!working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/phase-verification-w4/**
 working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/r7-raw/
 # CITDP pre-persist scratch (canonical record under tied/citdp/)
 working/**/CITDP-REQ-*-diff-or-stage.yaml

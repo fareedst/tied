@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "adversarial-inquiry-obligation-report.v1",
+  "request_token": "PLAN-TIED-BBCE-ALIGNMENT",
+  "run_id": "w4-build-plan-verification-2026-09-27",
+  "phase": "verification",
+  "policy": "advisory",
+  "projectId": "stdd",
+  "scope": [
+    "PLAN-TIED-BBCE-ALIGNMENT#MECH-D#checklist-promotion"
+  ],
+  "obligations": [
+    {
+      "id": "bbce-advisory-verification-callable",
+      "status": "satisfied",
+      "evidence_refs": [
+        "tied/docs/agent-req-implementation-checklist.yaml",
+        "tied/docs/agent-req-implementation-checklist.md"
+      ]
+    },
+    {
+      "id": "bbce-no-ci-hard-fail-from-flag",
+      "status": "satisfied_by_policy",
+      "evidence_refs": [
+        "working/PLAN-TIED-BBCE-ALIGNMENT/w4-refine/proposed-bbce-advisory-pass.yaml",
+        "docs/tied-bbce-alignment-plan.md"
+      ]
+    },
+    {
+      "id": "bbce-bc-regression-green",
+      "status": "satisfied",
+      "evidence_refs": [
+        "working/PLAN-TIED-BBCE-ALIGNMENT/evidence/build-plan-w4-outcomes-2026-09-27.md"
+      ]
+    }
+  ]
+}

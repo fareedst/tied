@@ -1,0 +1,14 @@
+{
+  "provenance": {
+    "builder": "plan-close-out-2026-09-27",
+    "command": "tied_adversarial_inquiry_run",
+    "note": "Program close_out scope: W0–W4 advisory pilot complete; traceable-commit 21ff5d4; envelope sync and gate validate at integrated advisory.",
+    "phase": "close_out",
+    "request_token": "PLAN-TIED-BBCE-ALIGNMENT",
+    "run_id": "plan-close-out-2026-09-27",
+    "source_revision": "21ff5d4b2106891c9a6082c647447356a361268e",
+    "tied_base_path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied",
+    "tool_version": "1.0.0"
+  },
+  "schemaVersion": "adversarial-inquiry-provenance.v1"
+}

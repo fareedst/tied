@@ -1,0 +1,21 @@
+{
+  "allowed": false,
+  "ok": false,
+  "blocking": true,
+  "depth": "integrated",
+  "phase": "verification",
+  "diagnostics": [
+    "missing_pseudocode_gate_history",
+    "warn_not_success"
+  ],
+  "evidence_hydrated": [
+    "evidence-provenance.json",
+    "gate-result.json",
+    "finding-ledger.jsonl",
+    "request-evidence-envelope.v1.json:gaps"
+  ],
+  "gate_receipt": {
+    "path": "working/PLAN-TIED-BBCE-ALIGNMENT/gates/verification-2026-09-27T15-47-49-824Z.json",
+    "hash": "sha256:9e91e0ef5ac8de3b24a07e47a3d85a99e60a4ad517d412f66298ae75b4818b9e"
+  }
+}

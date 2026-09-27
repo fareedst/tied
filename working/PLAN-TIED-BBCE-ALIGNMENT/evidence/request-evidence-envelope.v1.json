@@ -1,0 +1,470 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-09-27T16:01:04.856Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "PLAN-TIED-BBCE-ALIGNMENT",
+    "project_id": "af8451e933f573ec",
+    "depth_tier": "integrated",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [
+    {
+      "run_id": "run-close_out",
+      "phase": "close_out",
+      "started_at": null,
+      "generator": "request_evidence_envelope_build"
+    },
+    {
+      "run_id": "run-pre_implementation",
+      "phase": "pre_implementation",
+      "started_at": null,
+      "generator": "request_evidence_envelope_build"
+    },
+    {
+      "run_id": "run-verification",
+      "phase": "verification",
+      "started_at": null,
+      "generator": "request_evidence_envelope_build"
+    }
+  ],
+  "artifacts": [
+    {
+      "kind": "adversarial_inquiry_gate",
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/phase-close_out/gate-result.json",
+      "content_hash": "sha256:44e64a09758cc91749250df3ac36e90c46aa6be463816fc33dd554a017cd8b59",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_gate",
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+      "content_hash": "sha256:5fbfab79ec2f845616b33c6309894ec66b6e4f622e267a9accaa36ea66159364",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_gate",
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/phase-verification/gate-result.json",
+      "content_hash": "sha256:ec4c7359358df3ebc20dc4c68f92fba6c823048f27850592a03cc267e56d5ae6",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_ledger",
+      "schema_version": "adversarial-inquiry-finding.v1",
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/phase-close_out/finding-ledger.jsonl",
+      "content_hash": "sha256:f64cfc3b9d05050c6a43baa40f2661940a6eba6515459e28c68b2524e9f600dc",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_ledger",
+      "schema_version": "adversarial-inquiry-finding.v1",
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl",
+      "content_hash": "sha256:060b01aca01aec9e62e082db88c7054ae71bc66d07e0f7bc90cc40fa420b22a3",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_ledger",
+      "schema_version": null,
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
+      "content_hash": "sha256:b49f62dc355400925ee185e745d305b7c7226f983de0fa9ffefc44a13f3cab3a",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_obligation",
+      "schema_version": "adversarial-inquiry-obligation-report.v1",
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/phase-close_out/obligation-report.json",
+      "content_hash": "sha256:a8eac4e5d74f58c935192aa61f29b8dbf27dc91c7a154318c177a86a59845056",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_obligation",
+      "schema_version": "adversarial-inquiry-report.v1",
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+      "content_hash": "sha256:2cbdd648ecde909c187fa93826818899a5624ef215a56e2ce6a7ef6c38d2ccbb",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_obligation",
+      "schema_version": "adversarial-inquiry-obligation-report.v1",
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/phase-verification/obligation-report.json",
+      "content_hash": "sha256:04430d374b92e6288ba19b9055bb231cf9dc5714f613b50b9f9a97120225068b",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_provenance",
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/phase-close_out/evidence-provenance.json",
+      "content_hash": "sha256:a23e7aa8c24a440029604488393daecdd3ce899afb434495628dca206ad72193",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "provenance_identity"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_provenance",
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json",
+      "content_hash": "sha256:fc98a1456ff4a78f009be06d88c57a7eea4c9375be568fe385022a3232bb5f8e",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "provenance_identity"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_provenance",
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/phase-verification/evidence-provenance.json",
+      "content_hash": "sha256:7b01e475e3c36b1dc6df8ab81c95c1dd276bc48f97e15669f1553b8c49819570",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "provenance_identity"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/gates/close_out-2026-09-27T14-50-44-013Z.json",
+      "content_hash": "sha256:7fac09a90ee2d478f88542878355d2ebca5bb3356831bf5bded56db48452f630",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/gates/pre_implementation-2026-09-27T15-40-51-340Z.json",
+      "content_hash": "sha256:e236fc5247fedc1f2622d28f26d8cbbd123ecdf73aed816816a0af7a4185a291",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": null,
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/gates/verification-2026-09-27-w4-build.json",
+      "content_hash": "sha256:ca0fc8eed28b22e9e9ce236ccb57ed7882803fa635a556a2eabab463c99306b3",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/CITDP-PLAN-TIED-BBCE-ALIGNMENT.yaml",
+      "content_hash": "sha256:0b059300ad8b3ff620bdcffc01691606dfb8f3265329fa701761bd19813fa00e",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:2b503dc72790e337ff8cd6d6236d80bb1c2de20acb4f3b8cb1ef761fd1153d74",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/evidence/build-plan-outcomes-2026-09-27.md",
+      "content_hash": "sha256:0f0b7c35fecc456fe57c43752e5ed5e4c0003e442594dec202399b16552684cd",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/evidence/build-plan-w1-outcomes-2026-09-27.md",
+      "content_hash": "sha256:c9de655ad2ebe0082963ce125b0373db7c834f47012fd8692df292c7740ea5ed",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/evidence/build-plan-w2-outcomes-2026-09-27.md",
+      "content_hash": "sha256:246acf4dc173fc5d025c8c5aa33ec8945573096ec2236238ab97da42d82586c1",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/evidence/build-plan-w3-outcomes-2026-09-27.md",
+      "content_hash": "sha256:798961a40981aa7acbb373ef60fe48b4f4073f489961343ca9c71f3851c22592",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/evidence/build-plan-w4-outcomes-2026-09-27.md",
+      "content_hash": "sha256:90d85585cc263b279e0686ecfb2b76a56139b8e07c6e5e19f05dbea9968663ee",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/evidence/gate-validate-close_out-payload.json",
+      "content_hash": "sha256:820ac3f7c90f94a55fa1180d87754a48b4519f4e40b5b2c70bbf69484a5c7848",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/evidence/gate-validate-close-out-args.json",
+      "content_hash": "sha256:0387fbe92a5e4a87df3afd4a05d7f49d01bd2a87aba651f188b71f872183f663",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/evidence/gate-validate-verification-args.json",
+      "content_hash": "sha256:fb5cbb8daa88f505a7d17c23ce8e9a4d2ca099ef657dae67871983020bd23d33",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/evidence/gate-validate-verification-payload.json",
+      "content_hash": "sha256:c07904b428b88f406777ca249f42d4acfbcd747cd0f2c4eb8f6ad5ae3560d8d2",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/evidence/refine-plan-outcomes-2026-09-27.md",
+      "content_hash": "sha256:40065bc729df6cacf90b893c7ee9116197c092eacd96338c1d9599379cd6b116",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/evidence/refine-plan-program-sync-2026-09-27.md",
+      "content_hash": "sha256:34b9cdf2eeea4a2c78237bc94db6edec45bf4f37c4dc7092ea1116a0ab78bc4d",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/evidence/refine-plan-w3-outcomes-2026-09-27.md",
+      "content_hash": "sha256:c9569742953b3d8505fcdfa9378cacdfe552b0421ba76ab84d37734200870483",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/evidence/refine-plan-w4-outcomes-2026-09-27.md",
+      "content_hash": "sha256:d96e201be7498754c5e016bb566b8ed368ea68233efe31205247e15f35fb22a8",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/evidence/w4-activation-collect-full.json",
+      "content_hash": "sha256:011bd3f7f23378b6bbfbe89bda2d0893f6fca2b2afd2c6f7b9778ae734a219a2",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/evidence/w4-activation-collect.json",
+      "content_hash": "sha256:7847665abc13ec77e26a9b849787f9f6272e57bcc326910a44b1b11931d0060c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/evidence/w4-gate-check-no-activation.json",
+      "content_hash": "sha256:6a8c7516ec79b9f71f5436053959c6803109afdfc8fd6490cbfacaed523447d2",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/evidence/w4-gate-validate-payload.json",
+      "content_hash": "sha256:76b2a180850bb4000e9a32b5109863991f631eb398e1422b0718c83bc703d0be",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/evidence/w4-gate-validate-result.json",
+      "content_hash": "sha256:b2b3761d68ab2169096dd5fffa945b4ce2ec715d1cbbaadd272033a28f2bb7bf",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": null,
+    "tracker_hash": null,
+    "citdp_path": "working/PLAN-TIED-BBCE-ALIGNMENT/CITDP-PLAN-TIED-BBCE-ALIGNMENT.yaml",
+    "evidence_chain_profile_path": null
+  },
+  "gaps": [
+    {
+      "code": "expected_artifact_missing",
+      "artifact_kind": "evidence_chain_profile",
+      "phase": null,
+      "detail": "Integrated depth expects evidence-chain-profile artifact",
+      "severity": "error",
+      "source": "profile-cross-link"
+    },
+    {
+      "code": "finding_unresolved",
+      "artifact_kind": "adversarial_inquiry_gate",
+      "phase": "close_out",
+      "detail": "warn_not_success",
+      "severity": "warn",
+      "source": "A5"
+    },
+    {
+      "code": "finding_unresolved",
+      "artifact_kind": "adversarial_inquiry_gate",
+      "phase": "pre_implementation",
+      "detail": "finding_unresolved",
+      "severity": "warn",
+      "source": "A5"
+    },
+    {
+      "code": "finding_unresolved",
+      "artifact_kind": "adversarial_inquiry_gate",
+      "phase": "pre_implementation",
+      "detail": "warn_not_success",
+      "severity": "warn",
+      "source": "A5"
+    },
+    {
+      "code": "finding_unresolved",
+      "artifact_kind": "adversarial_inquiry_gate",
+      "phase": "verification",
+      "detail": "warn_not_success",
+      "severity": "warn",
+      "source": "A5"
+    }
+  ]
+}

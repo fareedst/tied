@@ -1,6 +1,6 @@
 # TIED Behavior-Bounded Change Engineering Alignment Plan
 
-**Status:** **W0–W4 executed (2026-09-27)** — Mechanisms A–D at integrated/advisory pilot; Mechanism D checklist merge + merged CITDP attach shipped in build-plan W4. **Post-program plan sync:** linked Cursor plan + §9 below (`evidence/refine-plan-program-sync-2026-09-27.md`). Strict/blocking enforcement and canonical `tied/citdp/` persistence remain deferred. **Pending:** sponsor traceable-commit (full program).
+**Status:** **Program closed (2026-09-27)** — W0–W4 executed at integrated/advisory pilot; traceable-commit `21ff5d4`; plan-close-out evidence `working/PLAN-TIED-BBCE-ALIGNMENT/evidence/close-out-gates-2026-09-27.json` (close_out gate allowed; envelope waiver). Strict/blocking enforcement and canonical `tied/citdp/` persistence remain deferred.
 
 **Change ID:** `PLAN-TIED-BBCE-ALIGNMENT`
 
