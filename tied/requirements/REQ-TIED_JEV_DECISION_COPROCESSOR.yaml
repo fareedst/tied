@@ -6,7 +6,7 @@ REQ-TIED_JEV_DECISION_COPROCESSOR:
     last_updated:
       author: "build-plan"
       date: "2026-09-27"
-      reason: "W6 plan-skills LEAP satisfaction criteria"
+      reason: "W6d tiebreak + triage MCP LEAP"
   name: "Jev decision coprocessor program"
   priority: "P2"
   rationale:
@@ -38,4 +38,7 @@ REQ-TIED_JEV_DECISION_COPROCESSOR:
     - criterion: "W6 plan-skills adjunct: config/readiness, merged routing, MCP tools, and skill wiring with mocked fetch tests."
       id: "SC-JEV-W6-PLAN-SKILLS"
       metric: "bun test mcp-server/src/jev/plan-skills.test.ts"
+    - criterion: "W6d tiebreak display and adversarial triage MCP preserve PRELOAD authority and gate ordering."
+      id: "SC-JEV-W6d-TIEBREAK-TRIAGE"
+      metric: "bun test mcp-server/src/jev/plan-skills.test.ts (T-TB, T-TR, T-GATE)"
   status: "Implemented"

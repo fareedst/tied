@@ -1,0 +1,54 @@
+CITDP-REQ-TIED_JEV_DECISION_COPROCESSOR-W6d-PLAN-SKILLS:
+  change_definition:
+    current_behavior: "W6 core ships advisory-only tied_jev_vocab_shadow; no tiebreak display fields; tied_jev_adversarial_triage_pilot not registered (T-GATE-01)."
+    desired_behavior: "W6d: optional tiebreak shadow display (advisory_primary when >=2 keyword glossary ids and confidence >=0.90); MCP tied_jev_adversarial_triage_pilot; build-plan optional triage after pre_implementation gate."
+    non_goals:
+      - "agentstream or W5 harness changes"
+      - "Auto skill invocation"
+      - "Behavior-changing PRELOAD selection"
+      - "Gate proof or close-out waiver via Jev"
+      - "Replacing sub-adversarial-inquiry-pass or four inquiry artifacts"
+    success_criteria:
+      - "SC-JEV-W6d-TIEBREAK-TRIAGE satisfaction criterion passes after LEAP"
+      - "T-GATE ordering: triage after pre_implementation only"
+      - "T-TB and T-TR composition tests pass"
+    unchanged_behavior: "Keyword PRELOAD authority; W6 advisory default; checklist gates and envelope"
+  completion_criteria:
+    activation:
+      phase: "close_out"
+      project_id: "stdd-jev-w6d"
+      request_token: "REQ-TIED_JEV_DECISION_COPROCESSOR"
+      run_id: "w6d-plan-skills-close-20260927"
+      scope:
+        - "IMPL-TIED_JEV_DECISION_COPROCESSOR#RUN_PLAN_SKILLS_SHADOW#w6d"
+        - "IMPL-TIED_JEV_DECISION_COPROCESSOR#RUN_PLAN_SKILLS_TRIAGE_MCP#w6d"
+    focused_tests: "bun test mcp-server/src/jev/plan-skills.test.ts; bun test mcp-server/src/jev/adversarial-triage-pilot.test.ts"
+    verification: "tied_validate_consistency; tied_checklist_gate_validate pre_implementation verification close_out"
+  evidence:
+    plan_reference: "working/REQ-TIED_JEV_DECISION_COPROCESSOR/PLAN-W6d-ADVISORY-TIEBREAK-TRIAGE.md"
+    profile_reference: "working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/w6-evidence-chain-profile.v1.json"
+  record_identity:
+    change_request_id: "REQ-TIED_JEV_DECISION_COPROCESSOR"
+    gate_policy: "advisory"
+    phase: "plan"
+    profile_depth: "integrated"
+    record_status: "active"
+    recorded_at: "2026-09-27"
+    slice_id: "W6d"
+    title: "W6d advisory tiebreak display + adversarial triage pilot MCP"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      depth_change_waiver: null
+      depth_tier: "integrated"
+      eligibility_triggers_matched:
+        - "external_network"
+        - "persistence"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: "integrated"
+      rationale: "Extends W6 plan-skills Jev slice; optional vendor calls and supplemental evidence under working/{token}/jev/plan-skills/."
+      research_profile: "integrated-agent"
+      strict_eligibility_prerequisites: []
+      sub_adversarial_inquiry_pass: "completed"

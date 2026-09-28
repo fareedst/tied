@@ -47,7 +47,9 @@
 | **configured** | enabled by default | Explicit `jev.plan_skills` or `TIED_JEV_PLAN_SKILLS` opt-in; absent/invalid is off |
 | **key present** | authenticated, reachable | `JEV_API_KEY.trim().length > 0`; does not imply a vendor call succeeds |
 | **merged routing baseline** | one routing table | Client handoff and methodology routing rows used for the deterministic keyword baseline |
-| **advisory-primary tie-break** | PRELOAD override | Future W6d recommendation only; it cannot change the keyword-loaded glossary set |
+| **advisory-primary tie-break** | PRELOAD override | W6d **tiebreak shadow mode**: display-only `advisory_primary` when ≥2 keyword glossary ids and confidence ≥ 0.90; never changes PRELOAD |
+| **tiebreak shadow mode** | auto tie-break | Opt-in `shadow_mode: tiebreak` on `tied_jev_vocab_shadow`; default `advisory` (W6) |
+| **tied_jev_adversarial_triage_pilot** | inquiry MCP | W6d plan-skills MCP adapter over W4 `runAdversarialTriagePilot`; observation-only; not gate activation |
 | **plan-skill evidence** | gate proof | Redacted, request-scoped supplemental artifact under `working/{REQ\|PLAN-TOKEN}/jev/plan-skills/{run_id}/`; never gate authority |
 | **agrees** | glossary match score | `vocabShadowAgrees`: true when Jev set empty, equal to, or subset of keyword baseline; false when Jev names a non-loaded glossary |
 | **jev-plan-skills-status.v1** | health check JSON | `tied_jev_status` response schema; never probes vendor |
@@ -60,7 +62,9 @@
 | (proposed) Resolve plan-skill configuration | `RESOLVE_PLAN_SKILLS_CONFIG` | [IMPL-TIED_JEV_DECISION_COPROCESSOR](../implementation-decisions/IMPL-TIED_JEV_DECISION_COPROCESSOR.yaml) |
 | (proposed) Assess Jev service readiness | `ASSESS_JEV_SERVICE_READINESS` | [IMPL-TIED_JEV_DECISION_COPROCESSOR](../implementation-decisions/IMPL-TIED_JEV_DECISION_COPROCESSOR.yaml) |
 | (proposed) Load merged routing baseline | `LOAD_MERGED_ROUTING_BASELINE` | [IMPL-TIED_JEV_DECISION_COPROCESSOR](../implementation-decisions/IMPL-TIED_JEV_DECISION_COPROCESSOR.yaml) |
-| (proposed) Run plan-skills shadow | `RUN_PLAN_SKILLS_SHADOW` | [IMPL-TIED_JEV_DECISION_COPROCESSOR](../implementation-decisions/IMPL-TIED_JEV_DECISION_COPROCESSOR.yaml) |
+| Run plan-skills shadow | `RUN_PLAN_SKILLS_SHADOW` | [IMPL-TIED_JEV_DECISION_COPROCESSOR](../implementation-decisions/IMPL-TIED_JEV_DECISION_COPROCESSOR.yaml) |
+| (proposed W6d) Tiebreak advisory display | `APPLY_TIEBREAK_ADVISORY_DISPLAY` | [IMPL-TIED_JEV_DECISION_COPROCESSOR](../implementation-decisions/IMPL-TIED_JEV_DECISION_COPROCESSOR.yaml) |
+| (proposed W6d) Plan-skills triage MCP | `RUN_PLAN_SKILLS_TRIAGE_MCP` | [IMPL-TIED_JEV_DECISION_COPROCESSOR](../implementation-decisions/IMPL-TIED_JEV_DECISION_COPROCESSOR.yaml) |
 
 ---
 
@@ -72,6 +76,10 @@
 | LOAD_MERGED_ROUTING_BASELINE | W6 proposed pseudo-code blocks |
 | agrees | W6 Cursor plan-skill wiring |
 | advisory-primary tie-break | W6 Cursor plan-skill wiring |
+| APPLY_TIEBREAK_ADVISORY_DISPLAY | W6 proposed pseudo-code blocks |
+| RUN_PLAN_SKILLS_TRIAGE_MCP | W6 proposed pseudo-code blocks |
+| tiebreak shadow mode | W6 Cursor plan-skill wiring |
+| tied_jev_adversarial_triage_pilot | W6 Cursor plan-skill wiring |
 | configured | W6 Cursor plan-skill wiring |
 | confidence threshold policy | Preferred terms |
 | decision coprocessor | Preferred terms |

@@ -65,3 +65,27 @@ export function writeVocabShadowEvidence(
   fs.writeFileSync(filePath, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
   return { artifact_relpath: resolved.artifact_relpath };
 }
+
+export function writeTriagePilotEvidence(
+  projectRoot: string,
+  requestToken: string,
+  runId: string,
+  payload: Record<string, unknown>,
+): { artifact_relpath: string } | { error: "invalid_request_token" | "unsafe_evidence_path" } {
+  const resolved = resolvePlanSkillsEvidenceDir(projectRoot, requestToken, runId);
+  if ("error" in resolved) {
+    return resolved;
+  }
+  fs.mkdirSync(resolved.dir, { recursive: true });
+  const filePath = path.join(resolved.dir, "adversarial-triage-pilot.v1.json");
+  const artifact_relpath = path.join(
+    "working",
+    requestToken,
+    "jev",
+    "plan-skills",
+    runId,
+    "adversarial-triage-pilot.v1.json",
+  );
+  fs.writeFileSync(filePath, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
+  return { artifact_relpath };
+}

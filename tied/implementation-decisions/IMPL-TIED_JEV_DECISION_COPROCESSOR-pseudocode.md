@@ -76,6 +76,30 @@ Grammar-Version: v2
   - EFFECTS: jevDecide with criterion_met, spec_gap, test_supports_claim, implementation_drift nouls
   - OUTPUT: adversarial-triage-pilot.v1 report with agreement_rate when labels present
   - FAILURE_MODES: skip without key; never append finding-ledger.jsonl
+  - FAILURE_MODES: never sets checklist `allowed` or substitutes four inquiry activation artifacts (W6d)
+
+## APPLY_TIEBREAK_ADVISORY_DISPLAY
+
+- [IMPL-TIED_JEV_DECISION_COPROCESSOR] [ARCH-TIED_JEV_DECISION_COPROCESSOR] [REQ-TIED_JEV_DECISION_COPROCESSOR] How: W6d display-only tiebreak when `shadow_mode: tiebreak`, ≥2 distinct keyword glossary ids, readiness `ready`, and parsed confidence ≥ TIEBREAK_CONFIDENCE_MIN (0.90); never mutates keyword_glossaries.
+- procedure APPLY_TIEBREAK_ADVISORY_DISPLAY(input):
+  - PRE: input.shadow_mode is `tiebreak` OR return tiebreak_active false with no advisory fields
+  - PRE: input.readiness is `ready` AND distinct keyword_glossary count ≥ 2 AND confidence ≥ 0.90
+  - PRE: jev_glossaries non-empty for advisory_primary selection
+  - OUTPUT: advisory_primary (first Jev-ranked glossary id), optional recommended_glossary_order, tiebreak_active true, shadow_mode tiebreak
+  - POST: keyword_glossaries unchanged vs advisory run on identical inputs
+  - FAILURE_MODES: gate failure → omit tiebreak fields or tiebreak_active false; never error skill path
+
+## RUN_PLAN_SKILLS_TRIAGE_MCP
+
+- [IMPL-TIED_JEV_DECISION_COPROCESSOR] [ARCH-TIED_JEV_DECISION_COPROCESSOR] [REQ-TIED_JEV_DECISION_COPROCESSOR] How: W6d MCP adapter over ADVERSARIAL_TRIAGE_PILOT; inline cases JSON or contained file path under working/; evidence at plan-skills tree only.
+- procedure RUN_PLAN_SKILLS_TRIAGE_MCP(input):
+  - INPUT: cases[] OR cases_path (working-relative containment); request_token; pre_implementation_gate_passed must be true
+  - PRE: NOT pre_implementation_gate_passed → structured refusal `gate_ordering_violation` (no vendor call)
+  - PRE: resolvePlanSkillsConfig enabled + key OR skip observations without throw
+  - PRE: Zod max cases bound; invalid token/path → error field
+  - EFFECTS: CALL ADVERSARIAL_TRIAGE_PILOT with timeout-wrapped fetch
+  - POST: record_evidence + valid token → write adversarial-triage-pilot.v1.json under working/{token}/jev/plan-skills/{run_id}/
+  - FAILURE_MODES: never gate authority; never finding-ledger writes
 
 ## EVALUATE_HARNESS_TOOL_CALL
 
@@ -150,11 +174,13 @@ Grammar-Version: v2
 - [IMPL-TIED_JEV_DECISION_COPROCESSOR] [ARCH-TIED_JEV_DECISION_COPROCESSOR] [REQ-TIED_JEV_DECISION_COPROCESSOR] [REQ-PROMPT_TYPE_GLOBAL_SKILLS] How: W6 advisory shadow after keyword PRELOAD; timeout-wrapped `jevDecide`; optional evidence under `working/{token}/jev/plan-skills/{run_id}/`; never mutates PRELOAD or gates.
 - procedure RUN_PLAN_SKILLS_SHADOW(input):
   - INPUT: `skill` enum (four plan skills); `prompt` slice 4000; optional `plan_excerpt` slice 8000
+  - INPUT: optional `shadow_mode` enum `advisory` (default) | `tiebreak` (W6d display-only)
   - INPUT: optional `request_token` must pass isValidWorkingRequestToken for evidence
   - PRE: CALL RESOLVE_PLAN_SKILLS_CONFIG
   - PRE: CALL LOAD_MERGED_ROUTING_BASELINE → keyword_glossaries = MATCH_KEYWORD_GLOSSARIES
   - PRE: readiness NOT `ready` → return jev-plan-skills-vocab-shadow.v1 without vendor call when disabled/no key
   - EFFECTS: when `ready`, CALL SHADOW_VOCAB_PRELOAD logic on merged rows with timeout wrapper (no extra 502 retries)
+  - EFFECTS: when shadow_mode tiebreak, CALL APPLY_TIEBREAK_ADVISORY_DISPLAY on parsed jev_glossaries + confidence (display fields only)
   - POST: `agrees` = vocabShadowAgrees; `service_reachable` only when readiness `ready`
   - POST: `record_evidence` + valid token → write `vocab-shadow.v1.json` under contained path only
   - FAILURE_MODES: catch all errors; redact excerpt ≤500; never throw to skill prose

@@ -1,0 +1,371 @@
+{
+  "phase": "close_out",
+  "depth_tier": "integrated",
+  "activation_collect": {
+    "skipped": false,
+    "reason": "collect",
+    "run_id": "w6d-plan-skills-close-20260927"
+  },
+  "reconcile": {
+    "ok": true,
+    "report": {
+      "request_token": "",
+      "findings": [
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "translate-sponsor-intent",
+            "error": "missing_artifact: \"working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/translate-sponsor-intent-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "composition-integration",
+            "error": "missing_artifact: \"working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/composition-integration-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "change-definition",
+            "error": "missing_artifact: \"working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/change-definition-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "test-strategy",
+            "error": "missing_artifact: \"working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/test-strategy-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "session-bootstrap",
+            "error": "missing_artifact: \"working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/session-bootstrap-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "sub-adversarial-inquiry-pass",
+            "error": "missing_artifact: \"working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/sub-adversarial-inquiry-pass-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "impact-discovery",
+            "error": "missing_artifact: \"working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/impact-discovery-evidence.md\""
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-09-26T22-02-45-270Z.json",
+            "stored_tracker_hash": "sha256:c062c2cc4ce6d7a20289cb7e989111d700b29fe654cb62143fbdfa0fb15bae25",
+            "current_tracker_hash": "sha256:4e68684e5daf524ebf1dd342348bd31fbfc1ea24762cd6e9cee2ccd5044c3a41",
+            "stored_citdp_hash": "sha256:2917e93fde2bf1a2bc49718f62af3bea87deedb483ef39366d283b1430acb2f7",
+            "current_citdp_hash": "sha256:449a7c970949a3a3bd432c929aad66abec3da2e46340aef348b28667e07220e4"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-09-26T22-03-32-477Z.json",
+            "stored_tracker_hash": "sha256:c062c2cc4ce6d7a20289cb7e989111d700b29fe654cb62143fbdfa0fb15bae25",
+            "current_tracker_hash": "sha256:4e68684e5daf524ebf1dd342348bd31fbfc1ea24762cd6e9cee2ccd5044c3a41",
+            "stored_citdp_hash": "sha256:a0f1b9c9d22428e362a63544672a691269412d59c6f9e197ac20c19f543168c4",
+            "current_citdp_hash": "sha256:449a7c970949a3a3bd432c929aad66abec3da2e46340aef348b28667e07220e4"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-09-28T02-15-25-641Z.json",
+            "stored_tracker_hash": "sha256:76c90031fdbb7d93af210842f1817cba4cb42e93aaf183a45fbec0e8d02c2ff4",
+            "current_tracker_hash": "sha256:4e68684e5daf524ebf1dd342348bd31fbfc1ea24762cd6e9cee2ccd5044c3a41",
+            "stored_citdp_hash": "sha256:160c18c69c173e56761cba5f42917c83985c05e956174a3c97b3947ae717dd22",
+            "current_citdp_hash": "sha256:449a7c970949a3a3bd432c929aad66abec3da2e46340aef348b28667e07220e4"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-09-28T02-16-44-774Z.json",
+            "stored_tracker_hash": "sha256:76c90031fdbb7d93af210842f1817cba4cb42e93aaf183a45fbec0e8d02c2ff4",
+            "current_tracker_hash": "sha256:4e68684e5daf524ebf1dd342348bd31fbfc1ea24762cd6e9cee2ccd5044c3a41",
+            "stored_citdp_hash": "sha256:160c18c69c173e56761cba5f42917c83985c05e956174a3c97b3947ae717dd22",
+            "current_citdp_hash": "sha256:449a7c970949a3a3bd432c929aad66abec3da2e46340aef348b28667e07220e4"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-09-28T02-17-30-000Z.json",
+            "stored_tracker_hash": "sha256:76c90031fdbb7d93af210842f1817cba4cb42e93aaf183a45fbec0e8d02c2ff4",
+            "current_tracker_hash": "sha256:4e68684e5daf524ebf1dd342348bd31fbfc1ea24762cd6e9cee2ccd5044c3a41",
+            "stored_citdp_hash": "sha256:6ad131b2231973bebced9ca34840ad94c1e8d345d98e721b117aeb3c8af00eb8",
+            "current_citdp_hash": "sha256:449a7c970949a3a3bd432c929aad66abec3da2e46340aef348b28667e07220e4"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-26T22-02-19-199Z.json",
+            "stored_tracker_hash": "sha256:c062c2cc4ce6d7a20289cb7e989111d700b29fe654cb62143fbdfa0fb15bae25",
+            "current_tracker_hash": "sha256:4e68684e5daf524ebf1dd342348bd31fbfc1ea24762cd6e9cee2ccd5044c3a41",
+            "stored_citdp_hash": "sha256:2917e93fde2bf1a2bc49718f62af3bea87deedb483ef39366d283b1430acb2f7",
+            "current_citdp_hash": "sha256:449a7c970949a3a3bd432c929aad66abec3da2e46340aef348b28667e07220e4"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-26T22-02-45-257Z.json",
+            "stored_tracker_hash": "sha256:c062c2cc4ce6d7a20289cb7e989111d700b29fe654cb62143fbdfa0fb15bae25",
+            "current_tracker_hash": "sha256:4e68684e5daf524ebf1dd342348bd31fbfc1ea24762cd6e9cee2ccd5044c3a41",
+            "stored_citdp_hash": "sha256:2917e93fde2bf1a2bc49718f62af3bea87deedb483ef39366d283b1430acb2f7",
+            "current_citdp_hash": "sha256:449a7c970949a3a3bd432c929aad66abec3da2e46340aef348b28667e07220e4"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-28T02-07-53-746Z.json",
+            "stored_tracker_hash": "sha256:71e4d8693b02f68244ea340e6a17a6f12103dbdcfc27bbea877a032263160a9d",
+            "current_tracker_hash": "sha256:4e68684e5daf524ebf1dd342348bd31fbfc1ea24762cd6e9cee2ccd5044c3a41",
+            "stored_citdp_hash": "sha256:a91fd8f07f9a9897b224408471011515d6cd60c06946bc9dada09c0a56296981",
+            "current_citdp_hash": "sha256:449a7c970949a3a3bd432c929aad66abec3da2e46340aef348b28667e07220e4"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-28T02-08-20-287Z.json",
+            "stored_tracker_hash": "sha256:71e4d8693b02f68244ea340e6a17a6f12103dbdcfc27bbea877a032263160a9d",
+            "current_tracker_hash": "sha256:4e68684e5daf524ebf1dd342348bd31fbfc1ea24762cd6e9cee2ccd5044c3a41",
+            "stored_citdp_hash": "sha256:dc0e7fdc4b445f214959010a4b2f64b6853cf4bf2a54851ddd74bbbf40d6a2a1",
+            "current_citdp_hash": "sha256:449a7c970949a3a3bd432c929aad66abec3da2e46340aef348b28667e07220e4"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-28T03-05-05-619Z.json",
+            "stored_tracker_hash": "sha256:7a1726ee26c9771bd5d7874d834bc006354ea44d792b4a7de9cff06b65fb7ee5",
+            "current_tracker_hash": "sha256:4e68684e5daf524ebf1dd342348bd31fbfc1ea24762cd6e9cee2ccd5044c3a41",
+            "stored_citdp_hash": "sha256:ace3afd6d4e9a034e9d50e92f8864b2615d2dc4168a370a4eeeaf8d72d6e5d22",
+            "current_citdp_hash": "sha256:449a7c970949a3a3bd432c929aad66abec3da2e46340aef348b28667e07220e4"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-28T03-05-13-046Z.json",
+            "stored_tracker_hash": "sha256:7a1726ee26c9771bd5d7874d834bc006354ea44d792b4a7de9cff06b65fb7ee5",
+            "current_tracker_hash": "sha256:4e68684e5daf524ebf1dd342348bd31fbfc1ea24762cd6e9cee2ccd5044c3a41",
+            "stored_citdp_hash": "sha256:ace3afd6d4e9a034e9d50e92f8864b2615d2dc4168a370a4eeeaf8d72d6e5d22",
+            "current_citdp_hash": "sha256:449a7c970949a3a3bd432c929aad66abec3da2e46340aef348b28667e07220e4"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-28T03-05-34-023Z.json",
+            "stored_tracker_hash": "sha256:cb77742119544f074a1dc9187a23dee6c2d37a565498f6f5099533ed79eff41c",
+            "current_tracker_hash": "sha256:4e68684e5daf524ebf1dd342348bd31fbfc1ea24762cd6e9cee2ccd5044c3a41",
+            "stored_citdp_hash": "sha256:ace3afd6d4e9a034e9d50e92f8864b2615d2dc4168a370a4eeeaf8d72d6e5d22",
+            "current_citdp_hash": "sha256:449a7c970949a3a3bd432c929aad66abec3da2e46340aef348b28667e07220e4"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-28T03-07-18-501Z.json",
+            "stored_tracker_hash": "sha256:57ceb86fa7294d703f3c32879b9563593f0f261e7eb9833e38de4516d9978eaa",
+            "current_tracker_hash": "sha256:4e68684e5daf524ebf1dd342348bd31fbfc1ea24762cd6e9cee2ccd5044c3a41",
+            "stored_citdp_hash": "sha256:ace3afd6d4e9a034e9d50e92f8864b2615d2dc4168a370a4eeeaf8d72d6e5d22",
+            "current_citdp_hash": "sha256:449a7c970949a3a3bd432c929aad66abec3da2e46340aef348b28667e07220e4"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-28T03-07-42-572Z.json",
+            "stored_tracker_hash": "sha256:249dd9f85bee68d6bff81575a485584ec96d6c8c5624f2eae854a2ed3bc71cf4",
+            "current_tracker_hash": "sha256:4e68684e5daf524ebf1dd342348bd31fbfc1ea24762cd6e9cee2ccd5044c3a41",
+            "stored_citdp_hash": "sha256:ace3afd6d4e9a034e9d50e92f8864b2615d2dc4168a370a4eeeaf8d72d6e5d22",
+            "current_citdp_hash": "sha256:449a7c970949a3a3bd432c929aad66abec3da2e46340aef348b28667e07220e4"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-28T03-07-48-756Z.json",
+            "stored_tracker_hash": "sha256:249dd9f85bee68d6bff81575a485584ec96d6c8c5624f2eae854a2ed3bc71cf4",
+            "current_tracker_hash": "sha256:4e68684e5daf524ebf1dd342348bd31fbfc1ea24762cd6e9cee2ccd5044c3a41",
+            "stored_citdp_hash": "sha256:ace3afd6d4e9a034e9d50e92f8864b2615d2dc4168a370a4eeeaf8d72d6e5d22",
+            "current_citdp_hash": "sha256:449a7c970949a3a3bd432c929aad66abec3da2e46340aef348b28667e07220e4"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/verification-2026-09-26T22-02-19-205Z.json",
+            "stored_tracker_hash": "sha256:c062c2cc4ce6d7a20289cb7e989111d700b29fe654cb62143fbdfa0fb15bae25",
+            "current_tracker_hash": "sha256:4e68684e5daf524ebf1dd342348bd31fbfc1ea24762cd6e9cee2ccd5044c3a41",
+            "stored_citdp_hash": "sha256:2917e93fde2bf1a2bc49718f62af3bea87deedb483ef39366d283b1430acb2f7",
+            "current_citdp_hash": "sha256:449a7c970949a3a3bd432c929aad66abec3da2e46340aef348b28667e07220e4"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/verification-2026-09-26T22-02-45-263Z.json",
+            "stored_tracker_hash": "sha256:c062c2cc4ce6d7a20289cb7e989111d700b29fe654cb62143fbdfa0fb15bae25",
+            "current_tracker_hash": "sha256:4e68684e5daf524ebf1dd342348bd31fbfc1ea24762cd6e9cee2ccd5044c3a41",
+            "stored_citdp_hash": "sha256:2917e93fde2bf1a2bc49718f62af3bea87deedb483ef39366d283b1430acb2f7",
+            "current_citdp_hash": "sha256:449a7c970949a3a3bd432c929aad66abec3da2e46340aef348b28667e07220e4"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/verification-2026-09-28T01-22-24-291Z.json",
+            "stored_tracker_hash": "sha256:51c6c0d8655df663ea6575ad5bdbde4e101a646f28a193f31a723fdee34d66b6",
+            "current_tracker_hash": "sha256:4e68684e5daf524ebf1dd342348bd31fbfc1ea24762cd6e9cee2ccd5044c3a41",
+            "stored_citdp_hash": "sha256:9d4c3acf7ff66e34e30981cdb954204c86bf3a5efa399565450137bb8ebe16da",
+            "current_citdp_hash": "sha256:449a7c970949a3a3bd432c929aad66abec3da2e46340aef348b28667e07220e4"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/verification-2026-09-28T01-24-05-118Z.json",
+            "stored_tracker_hash": "sha256:51c6c0d8655df663ea6575ad5bdbde4e101a646f28a193f31a723fdee34d66b6",
+            "current_tracker_hash": "sha256:4e68684e5daf524ebf1dd342348bd31fbfc1ea24762cd6e9cee2ccd5044c3a41",
+            "stored_citdp_hash": "sha256:8c61797948e16aca7d38aae46523257d9411b2f62e5f4818d100f9fe6656dd34",
+            "current_citdp_hash": "sha256:449a7c970949a3a3bd432c929aad66abec3da2e46340aef348b28667e07220e4"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/verification-2026-09-28T03-08-50-561Z.json",
+            "stored_tracker_hash": "sha256:cd9efe83139103fa508815cebdaef8f34eec58be2cb2af76fed027cf6100e3cc",
+            "current_tracker_hash": "sha256:4e68684e5daf524ebf1dd342348bd31fbfc1ea24762cd6e9cee2ccd5044c3a41",
+            "stored_citdp_hash": "sha256:ace3afd6d4e9a034e9d50e92f8864b2615d2dc4168a370a4eeeaf8d72d6e5d22",
+            "current_citdp_hash": "sha256:449a7c970949a3a3bd432c929aad66abec3da2e46340aef348b28667e07220e4"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/verification-2026-09-28T03-09-06-467Z.json",
+            "stored_tracker_hash": "sha256:8e67b96bd1a1c49fcec822ae0f88e696aa4f98fa7b24b62eec46f7be1f0c2af8",
+            "current_tracker_hash": "sha256:4e68684e5daf524ebf1dd342348bd31fbfc1ea24762cd6e9cee2ccd5044c3a41",
+            "stored_citdp_hash": "sha256:ace3afd6d4e9a034e9d50e92f8864b2615d2dc4168a370a4eeeaf8d72d6e5d22",
+            "current_citdp_hash": "sha256:449a7c970949a3a3bd432c929aad66abec3da2e46340aef348b28667e07220e4"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/verification-2026-09-28T03-09-44-655Z.json",
+            "stored_tracker_hash": "sha256:1c21722600ae1ad70a985efec875b49bff75df0ba15835a9cc1cf109a1313d84",
+            "current_tracker_hash": "sha256:4e68684e5daf524ebf1dd342348bd31fbfc1ea24762cd6e9cee2ccd5044c3a41",
+            "stored_citdp_hash": "sha256:ace3afd6d4e9a034e9d50e92f8864b2615d2dc4168a370a4eeeaf8d72d6e5d22",
+            "current_citdp_hash": "sha256:449a7c970949a3a3bd432c929aad66abec3da2e46340aef348b28667e07220e4"
+          }
+        }
+      ],
+      "ledger_rows": 22,
+      "read_only": true,
+      "process_grade": {
+        "score": 57,
+        "band": "D",
+        "dimensions": [
+          {
+            "name": "tracker_integrity",
+            "score": 100,
+            "weight": 0.3,
+            "gap_codes": []
+          },
+          {
+            "name": "verification_manifest",
+            "score": 0,
+            "weight": 0.25,
+            "gap_codes": [
+              "expected_artifact_missing"
+            ]
+          },
+          {
+            "name": "hash_alignment",
+            "score": 40,
+            "weight": 0.2,
+            "gap_codes": [
+              "evidence_stale"
+            ]
+          },
+          {
+            "name": "ledger_correlation",
+            "score": 100,
+            "weight": 0.15,
+            "gap_codes": []
+          },
+          {
+            "name": "typed_evidence_refs",
+            "score": 40,
+            "weight": 0.1
+          }
+        ],
+        "gap_codes": [
+          "expected_artifact_missing",
+          "evidence_stale"
+        ]
+      }
+    }
+  },
+  "quality_manifest": {
+    "ok": false,
+    "skipped": true,
+    "reason": "no_citdp_commands"
+  },
+  "evidence_chain_profile": {
+    "ok": false,
+    "skipped": true,
+    "reason": "no_psa_reports"
+  },
+  "merged_decision": {
+    "allowed": false,
+    "gate_allowed": false,
+    "envelope_ok": false,
+    "blocking": true
+  },
+  "gate": {
+    "allowed": false,
+    "blocking": true,
+    "diagnostics": [
+      "pending_required_step:traceable-commit",
+      "envelope_blocking_gap:artifact_path_root_projection_rejected",
+      "finding_unresolved",
+      "warn_not_success"
+    ],
+    "evidence_hydrated": true,
+    "hydration_diagnostics": []
+  },
+  "envelope": {
+    "ok": false,
+    "path": "working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 4,
+    "advisory_gap_count": 6,
+    "diagnostics": [
+      "envelope_blocking_gap:artifact_path_root_projection_rejected",
+      "envelope_blocking_gap:artifact_path_root_projection_rejected",
+      "envelope_blocking_gap:artifact_path_root_projection_rejected",
+      "envelope_blocking_gap:artifact_path_root_projection_rejected"
+    ]
+  }
+}

@@ -207,7 +207,7 @@ flowchart LR
 - Commit **live** calibration artifacts (see **Recommended next (a)**) or leave untracked.
 - **`build-plan`** **`w5-runtime-middleware-slice`** only if per-turn interception is required before production harness default.
 - **`integrated` `depth_tier`** + adversarial artifacts before treating fail-closed W5 as production-default (vs opt-in lab).
-- **W6 plan-skill wiring** — proposed waves W6a–W6d in [PLAN-W6-PLAN-SKILLS-WIRING.md](./PLAN-W6-PLAN-SKILLS-WIRING.md) (optional; program remains closed until sponsor opens an implement gate).
+- **W6 plan-skill wiring** — W6 core closed at commit `b151a84`; **W6d follow-on** (sponsor A): [PLAN-W6d-ADVISORY-TIEBREAK-TRIAGE.md](./PLAN-W6d-ADVISORY-TIEBREAK-TRIAGE.md).
 
 ---
 

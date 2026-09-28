@@ -1,0 +1,76 @@
+{
+  "ok": true,
+  "receipt": {
+    "success": true,
+    "tool": "tied_adversarial_inquiry_run",
+    "request_token": "REQ-TIED_JEV_DECISION_COPROCESSOR",
+    "project_id": "stdd-jev-w6d",
+    "run_id": "w6d-plan-skills-close-20260927",
+    "phase": "close_out",
+    "scope": [
+      "IMPL-TIED_JEV_DECISION_COPROCESSOR#RUN_PLAN_SKILLS_SHADOW#w6d",
+      "IMPL-TIED_JEV_DECISION_COPROCESSOR#RUN_PLAN_SKILLS_TRIAGE_MCP#w6d"
+    ],
+    "scope_hash": "45e77bbc34747a44908ba80a8fe88eb45e9967cd41e682a82e6bf1c922c51a88",
+    "artifact_hashes": {
+      "obligation-report.json": "eb6a164a42f8de668fa3c40f734431ef3fc6be5e913205140a7098eb9bec83f7",
+      "finding-ledger.jsonl": "30ef57307a800bbe947185aea1cfa75dd52b8473863165b8be47e3e4d12226b5",
+      "gate-result.json": "29f9de4465a17d1ffafe18ec15c2a3efbe8f9fdcb17576dc60623d0bfba21b77",
+      "evidence-provenance.json": "8ddd60fbf374453e1ae492fd2a0fadc9496b6065607c39345be0dee48439698c"
+    }
+  },
+  "artifacts": {
+    "obligation-report.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_JEV_DECISION_COPROCESSOR",
+      "project_id": "stdd-jev-w6d",
+      "run_id": "w6d-plan-skills-close-20260927",
+      "phase": "close_out",
+      "scope_hash": "45e77bbc34747a44908ba80a8fe88eb45e9967cd41e682a82e6bf1c922c51a88",
+      "hash": "eb6a164a42f8de668fa3c40f734431ef3fc6be5e913205140a7098eb9bec83f7",
+      "path": "working/REQ-TIED_JEV_DECISION_COPROCESSOR/adversarial-inquiry/phase-close_out/obligation-report.json"
+    },
+    "finding-ledger.jsonl": {
+      "valid": true,
+      "request_token": "REQ-TIED_JEV_DECISION_COPROCESSOR",
+      "project_id": "stdd-jev-w6d",
+      "run_id": "w6d-plan-skills-close-20260927",
+      "phase": "close_out",
+      "scope_hash": "45e77bbc34747a44908ba80a8fe88eb45e9967cd41e682a82e6bf1c922c51a88",
+      "hash": "30ef57307a800bbe947185aea1cfa75dd52b8473863165b8be47e3e4d12226b5",
+      "path": "working/REQ-TIED_JEV_DECISION_COPROCESSOR/adversarial-inquiry/phase-close_out/finding-ledger.jsonl"
+    },
+    "gate-result.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_JEV_DECISION_COPROCESSOR",
+      "project_id": "stdd-jev-w6d",
+      "run_id": "w6d-plan-skills-close-20260927",
+      "phase": "close_out",
+      "scope_hash": "45e77bbc34747a44908ba80a8fe88eb45e9967cd41e682a82e6bf1c922c51a88",
+      "hash": "29f9de4465a17d1ffafe18ec15c2a3efbe8f9fdcb17576dc60623d0bfba21b77",
+      "path": "working/REQ-TIED_JEV_DECISION_COPROCESSOR/adversarial-inquiry/phase-close_out/gate-result.json"
+    },
+    "evidence-provenance.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_JEV_DECISION_COPROCESSOR",
+      "project_id": "stdd-jev-w6d",
+      "run_id": "w6d-plan-skills-close-20260927",
+      "phase": "close_out",
+      "scope_hash": "45e77bbc34747a44908ba80a8fe88eb45e9967cd41e682a82e6bf1c922c51a88",
+      "hash": "8ddd60fbf374453e1ae492fd2a0fadc9496b6065607c39345be0dee48439698c",
+      "path": "working/REQ-TIED_JEV_DECISION_COPROCESSOR/adversarial-inquiry/phase-close_out/evidence-provenance.json"
+    }
+  },
+  "expected": {
+    "request_token": "REQ-TIED_JEV_DECISION_COPROCESSOR",
+    "project_id": "stdd-jev-w6d",
+    "run_id": "w6d-plan-skills-close-20260927",
+    "phase": "close_out",
+    "scope": [
+      "IMPL-TIED_JEV_DECISION_COPROCESSOR#RUN_PLAN_SKILLS_SHADOW#w6d",
+      "IMPL-TIED_JEV_DECISION_COPROCESSOR#RUN_PLAN_SKILLS_TRIAGE_MCP#w6d"
+    ],
+    "scope_hash": "45e77bbc34747a44908ba80a8fe88eb45e9967cd41e682a82e6bf1c922c51a88"
+  },
+  "diagnostics": []
+}

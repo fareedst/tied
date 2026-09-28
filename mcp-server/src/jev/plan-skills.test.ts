@@ -18,8 +18,14 @@ import {
 } from "./plan-skills-config.js";
 import { buildPlanSkillsStatus } from "./plan-skills-status.js";
 import { runPlanSkillsShadow } from "./plan-skills-shadow.js";
-import { resolvePlanSkillsEvidenceDir } from "./plan-skills-evidence.js";
+import { resolvePlanSkillsEvidenceDir, writeTriagePilotEvidence } from "./plan-skills-evidence.js";
 import { vocabShadowAgrees } from "./shadow-vocab-preload.js";
+import {
+  assertTriageGateOrdering,
+  runPlanSkillsTriageMcp,
+  MAX_TRIAGE_CASES,
+} from "./plan-skills-triage-mcp.js";
+import { TIEBREAK_CONFIDENCE_MIN } from "./plan-skills-tiebreak.js";
 import { allTools } from "../tools/index.js";
 
 function mkProject(jevYaml?: string): string {
@@ -287,10 +293,171 @@ describe("W6 MCP composition T-MCP", () => {
   });
 });
 
+function seedMergedRouting(root: string): void {
+  fs.writeFileSync(path.join(root, "tied", "vocab", "routing.md"), CLIENT_ROUTING, "utf8");
+  fs.writeFileSync(
+    path.join(root, "tied", "methodology", "vocab", "routing.md"),
+    METHOD_ROUTING,
+    "utf8",
+  );
+}
+
+function mockGlossaryDecide(primary: string, confidence: number, alsoHigh: string[] = []) {
+  const answers: Record<string, { type: string; choice?: string; noul?: number; confidence?: number }> = {
+    primary_glossary: { type: "choice", choice: primary, confidence },
+  };
+  for (const id of alsoHigh) {
+    answers[`also_${id}`] = { type: "noul", noul: 0.9 };
+  }
+  return async () =>
+    new Response(JSON.stringify({ model: "jev-1.13.0", answers }), { status: 200 });
+}
+
+describe("W6d tiebreak T-TB", () => {
+  it("T-TB-01 advisory mode has no advisory_primary", async () => {
+    const root = mkProject("jev:\n  plan_skills: true\n");
+    seedMergedRouting(root);
+    const shadow = await runPlanSkillsShadow({
+      projectRoot: root,
+      tiedBasePath: path.join(root, "tied"),
+      prompt: "client keyword and method keyword",
+      skill: "build-plan",
+      shadow_mode: "advisory",
+      env: { JEV_API_KEY: "k" },
+      fetchImpl: mockGlossaryDecide("client-only", 0.95, ["method-only"]),
+    });
+    assert.equal(shadow.advisory_primary, undefined);
+    assert.equal(shadow.tiebreak_active, undefined);
+  });
+
+  it("T-TB-02 tiebreak with one keyword id → tiebreak_active false", async () => {
+    const root = mkProject("jev:\n  plan_skills: true\n");
+    seedMergedRouting(root);
+    const shadow = await runPlanSkillsShadow({
+      projectRoot: root,
+      tiedBasePath: path.join(root, "tied"),
+      prompt: "client keyword only",
+      skill: "build-plan",
+      shadow_mode: "tiebreak",
+      env: { JEV_API_KEY: "k" },
+      fetchImpl: mockGlossaryDecide("client-only", 0.95),
+    });
+    assert.equal(shadow.tiebreak_active, false);
+    assert.equal(shadow.advisory_primary, undefined);
+  });
+
+  it("T-TB-03 tiebreak ambiguous but low confidence → no primary", async () => {
+    const root = mkProject("jev:\n  plan_skills: true\n");
+    seedMergedRouting(root);
+    const shadow = await runPlanSkillsShadow({
+      projectRoot: root,
+      tiedBasePath: path.join(root, "tied"),
+      prompt: "client keyword and method keyword",
+      skill: "refine-plan",
+      shadow_mode: "tiebreak",
+      env: { JEV_API_KEY: "k" },
+      fetchImpl: mockGlossaryDecide("client-only", 0.5, ["method-only"]),
+    });
+    assert.equal(shadow.tiebreak_active, false);
+    assert.equal(shadow.advisory_primary, undefined);
+  });
+
+  it("T-TB-04 tiebreak active preserves keyword_glossaries vs advisory", async () => {
+    const root = mkProject("jev:\n  plan_skills: true\n");
+    seedMergedRouting(root);
+    const base = {
+      projectRoot: root,
+      tiedBasePath: path.join(root, "tied"),
+      prompt: "client keyword and method keyword",
+      skill: "build-plan" as const,
+      env: { JEV_API_KEY: "k" },
+      fetchImpl: mockGlossaryDecide("method-only", TIEBREAK_CONFIDENCE_MIN, ["client-only"]),
+    };
+    const advisory = await runPlanSkillsShadow({ ...base, shadow_mode: "advisory" });
+    const tiebreak = await runPlanSkillsShadow({ ...base, shadow_mode: "tiebreak" });
+    assert.deepEqual(tiebreak.keyword_glossaries, advisory.keyword_glossaries);
+    assert.equal(tiebreak.tiebreak_active, true);
+    assert.ok(typeof tiebreak.advisory_primary === "string");
+  });
+});
+
+describe("W6d triage MCP T-TR", () => {
+  const miniCase = {
+    id: "tb-1",
+    criterion_text: "criterion",
+    pseudocode_excerpt: "proc",
+  };
+
+  it("T-TR-01 returns schema v1", async () => {
+    const root = mkProject();
+    const out = await runPlanSkillsTriageMcp({
+      projectRoot: root,
+      pre_implementation_gate_passed: true,
+      cases: [miniCase],
+      env: {},
+    });
+    assert.equal(out.schema, "adversarial-triage-pilot.v1");
+  });
+
+  it("T-TR-02 skips without key", async () => {
+    const root = mkProject();
+    const out = await runPlanSkillsTriageMcp({
+      projectRoot: root,
+      pre_implementation_gate_passed: true,
+      cases: [miniCase],
+      env: {},
+    });
+    assert.equal(out.jev_invoked, false);
+  });
+
+  it("T-TR-03 rejects over max cases", async () => {
+    const root = mkProject();
+    const cases = Array.from({ length: MAX_TRIAGE_CASES + 1 }, (_, i) => ({
+      ...miniCase,
+      id: `c-${i}`,
+    }));
+    const out = await runPlanSkillsTriageMcp({
+      projectRoot: root,
+      pre_implementation_gate_passed: true,
+      cases,
+    });
+    assert.equal(out.error, "cases_schema_invalid");
+  });
+});
+
+describe("W6d evidence T-EV", () => {
+  it("T-EV-01 triage JSON under contained plan-skills path", () => {
+    const root = mkProject();
+    const token = "REQ-FIXTURE-PLAN-SKILLS";
+    const written = writeTriagePilotEvidence(root, token, "run-triage", {
+      schema: "adversarial-triage-pilot.v1",
+      jev_invoked: false,
+      cases: [],
+      agreement_rate: null,
+      note: "test",
+    });
+    assert.ok(!("error" in written));
+    const abs = path.join(root, written.artifact_relpath);
+    assert.ok(fs.existsSync(abs));
+    assert.ok(written.artifact_relpath.includes("adversarial-triage-pilot.v1.json"));
+  });
+});
+
 describe("W6 gate ordering T-GATE", () => {
-  it("T-GATE-01 no tied_jev_adversarial_triage_pilot in W6 core tools", () => {
+  it("T-GATE-01 tied_jev_adversarial_triage_pilot registered (W6d)", () => {
     const names = allTools.map((t) => t.name);
-    assert.equal(names.includes("tied_jev_adversarial_triage_pilot"), false);
+    assert.ok(names.includes("tied_jev_adversarial_triage_pilot"));
+  });
+
+  it("T-GATE-03 triage refuses before pre_implementation gate", async () => {
+    assert.deepEqual(assertTriageGateOrdering(false), { ok: false, error: "gate_ordering_violation" });
+    const root = mkProject();
+    const out = await runPlanSkillsTriageMcp({
+      projectRoot: root,
+      pre_implementation_gate_passed: false,
+      cases: [{ id: "x", criterion_text: "c", pseudocode_excerpt: "p" }],
+    });
+    assert.equal(out.error, "gate_ordering_violation");
   });
 
   it("T-GATE-02 shadow proof_boundary denies gate authority", async () => {

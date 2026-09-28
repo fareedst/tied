@@ -23,6 +23,10 @@ import {
   writeVocabShadowEvidence,
 } from "./plan-skills-evidence.js";
 import {
+  applyTiebreakAdvisoryDisplay,
+  type PlanSkillsShadowMode,
+} from "./plan-skills-tiebreak.js";
+import {
   isPlanSkillName,
   PLAN_SKILLS_PROOF_BOUNDARY,
   PLAN_SKILLS_VOCAB_SHADOW_SCHEMA,
@@ -45,6 +49,7 @@ export type RunPlanSkillsShadowInput = {
   request_token?: string;
   run_id?: string;
   record_evidence?: boolean;
+  shadow_mode?: PlanSkillsShadowMode;
   env?: NodeJS.ProcessEnv;
   fetchImpl?: JevFetch;
 };
@@ -189,6 +194,15 @@ export async function runPlanSkillsShadow(
     answersUsable,
   });
 
+  const shadowMode: PlanSkillsShadowMode = input.shadow_mode ?? "advisory";
+  const tiebreakFields = applyTiebreakAdvisoryDisplay({
+    shadow_mode: shadowMode,
+    readiness: assessment.readiness,
+    keyword_glossaries,
+    jev_glossaries,
+    confidence,
+  });
+
   const result: PlanSkillsVocabShadowV1 = {
     ...basePayload,
     readiness: assessment.readiness,
@@ -202,6 +216,7 @@ export async function runPlanSkillsShadow(
     ...(assessment.failure_excerpt_redacted
       ? { failure_excerpt_redacted: assessment.failure_excerpt_redacted }
       : {}),
+    ...(shadowMode === "tiebreak" ? tiebreakFields : {}),
   };
 
   if (input.record_evidence && input.request_token) {

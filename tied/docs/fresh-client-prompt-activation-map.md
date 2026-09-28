@@ -159,7 +159,7 @@ Evidence is **working-folder and CITDP attach-first** unless a separate REQ mand
 
 | Trigger | Effect | Proof boundary |
 |---------|--------|----------------|
-| Explicit invoke of `plan-new-feature`, `refine-plan`, `build-plan`, or `plan-close-out` **and** (`jev.plan_skills: true` in `.tied-yaml.yaml` or `TIED_JEV_PLAN_SKILLS=1`/`true` in MCP/CLI env) **and** trimmed `JEV_API_KEY` | After keyword PRELOAD, skills may call `tied_jev_status` / `tied_jev_vocab_shadow` (CLI parity via `tied-cli.sh`); optional evidence at `working/{REQ\|PLAN-TOKEN}/jev/plan-skills/{run_id}/` when `record_evidence: true` and a valid working token | **Default off** at bootstrap; Jev shadow/triage artifacts **never** satisfy §2.5 integrated adversarial inquiry activation or replace checklist gate receipts |
+| Explicit invoke of `plan-new-feature`, `refine-plan`, `build-plan`, or `plan-close-out` **and** (`jev.plan_skills: true` in `.tied-yaml.yaml` or `TIED_JEV_PLAN_SKILLS=1`/`true` in MCP/CLI env) **and** trimmed `JEV_API_KEY` | After keyword PRELOAD, skills may call `tied_jev_status` / `tied_jev_vocab_shadow` (optional per-call `shadow_mode: tiebreak` for display-only tiebreak) and, on **build-plan** only after pre_implementation gate, `tied_jev_adversarial_triage_pilot`; CLI parity via `tied-cli.sh`; optional evidence at `working/{REQ\|PLAN-TOKEN}/jev/plan-skills/{run_id}/` when `record_evidence: true` and a valid working token | **Default off** at bootstrap; tiebreak never overrides PRELOAD; Jev shadow/triage artifacts **never** satisfy §2.5 integrated adversarial inquiry activation or replace checklist gate receipts |
 
 ---
 

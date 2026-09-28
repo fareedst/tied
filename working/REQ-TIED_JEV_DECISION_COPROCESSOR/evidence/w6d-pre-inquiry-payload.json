@@ -1,0 +1,90 @@
+{
+  "graph": {
+    "projectId": "stdd-jev-w6d",
+    "criteria": [
+      {
+        "identity": {
+          "id": "REQ-TIED_JEV_DECISION_COPROCESSOR#SC-JEV-W6d-TIEBREAK-TRIAGE",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "w6d-rev",
+          "sourceRevision": "w6d-src"
+        },
+        "architectureConstraintIds": ["arch-w6d-plan-skills"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "arch-w6d-plan-skills",
+        "implementationBlockIds": [
+          "IMPL-TIED_JEV_DECISION_COPROCESSOR#RUN_PLAN_SKILLS_SHADOW#w6d",
+          "IMPL-TIED_JEV_DECISION_COPROCESSOR#APPLY_TIEBREAK_ADVISORY_DISPLAY#w6d",
+          "IMPL-TIED_JEV_DECISION_COPROCESSOR#RUN_PLAN_SKILLS_TRIAGE_MCP#w6d"
+        ]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "IMPL-TIED_JEV_DECISION_COPROCESSOR#RUN_PLAN_SKILLS_SHADOW#w6d",
+          "kind": "block",
+          "name": "RUN_PLAN_SKILLS_SHADOW",
+          "derivation": "content",
+          "revision": "w6d-block",
+          "sourceRevision": "w6d-src"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-TIED_JEV_DECISION_COPROCESSOR#APPLY_TIEBREAK_ADVISORY_DISPLAY#w6d",
+          "kind": "block",
+          "name": "APPLY_TIEBREAK_ADVISORY_DISPLAY",
+          "derivation": "content",
+          "revision": "w6d-block",
+          "sourceRevision": "w6d-src"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-TIED_JEV_DECISION_COPROCESSOR#RUN_PLAN_SKILLS_TRIAGE_MCP#w6d",
+          "kind": "block",
+          "name": "RUN_PLAN_SKILLS_TRIAGE_MCP",
+          "derivation": "content",
+          "revision": "w6d-block",
+          "sourceRevision": "w6d-src"
+        }
+      }
+    ],
+    "evidenceLoci": []
+  },
+  "fidelity": {
+    "blockRevision": "w6d-block",
+    "specification": [
+      {
+        "id": "w6d-spec-1",
+        "kind": "behavior",
+        "value": "Tiebreak display never mutates keyword PRELOAD; triage MCP refuses before pre_implementation gate.",
+        "order": 1
+      }
+    ],
+    "testEvidence": [
+      {
+        "id": "tev-w6d",
+        "kind": "test",
+        "value": "bun test mcp-server/src/jev/plan-skills.test.ts",
+        "order": 1
+      }
+    ],
+    "productionEvidence": []
+  },
+  "scope": [
+    "IMPL-TIED_JEV_DECISION_COPROCESSOR#RUN_PLAN_SKILLS_SHADOW#w6d",
+    "IMPL-TIED_JEV_DECISION_COPROCESSOR#APPLY_TIEBREAK_ADVISORY_DISPLAY#w6d",
+    "IMPL-TIED_JEV_DECISION_COPROCESSOR#RUN_PLAN_SKILLS_TRIAGE_MCP#w6d"
+  ],
+  "policy": "advisory",
+  "repository_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "request_token": "REQ-TIED_JEV_DECISION_COPROCESSOR",
+  "phase": "pre_implementation",
+  "run_id": "w6d-plan-skills-pre-20260927"
+}
