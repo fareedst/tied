@@ -31,6 +31,7 @@ Git-context + TIED — [tied-boundary.md](../prompt-shared/tied-boundary.md).
 2. **Process** — [tied-close-out-process.md](../prompt-shared/tied-close-out-process.md) (standard prologue)
 3. Apply optional invocation remainder
 4. **Optional Jev plan-skills adjunct** (after `sub-close-out-evidence-sync`, before close-out gate) — [jev-plan-skills-adjunct.md](../prompt-shared/jev-plan-skills-adjunct.md)
+5. **Optional plan process tools adjunct** (DAE + BBCE) — [plan-process-tools-adjunct.md](../prompt-shared/plan-process-tools-adjunct.md)
 
 Before writing CHANGELOG or making completion claims, select/confirm the
 recorded `profile_depth` and gate policy, then call

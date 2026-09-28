@@ -13,6 +13,7 @@ import { runNewClientOnboardingAudit } from "./new-client-onboarding-audit.mjs";
 import { runClaudeClientValidation } from "./claude-client-validation.mjs";
 import { tiedBaselineCommitMessage } from "./tied-baseline-commit-message.mjs";
 import { skillsRerootEnabledFromEnv } from "./skills-reroot.mjs";
+import { bootstrapToolFlagsToArgv } from "./client-tool-use-bootstrap.mjs";
 
 export function resolveSourceRoot(env = process.env, fallback = TIED_REPO_ROOT) {
   const raw = env.TIED_SOURCE_ROOT;
@@ -68,12 +69,16 @@ function runStep(label, fn) {
   return result;
 }
 
+/** [REQ-TIED_SETUP] [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM] [IMPL-TIED_FILES] — RESOLVE_CURSOR_CLI_NAME */
+export const DEFAULT_CURSOR_CLI_NAME = "agent";
+
 /** @param {NodeJS.ProcessEnv} [env] */
 export function resolveCursorAgentCli(env = process.env, spawn = spawnSync) {
   const override = env.TIED_CURSOR_AGENT_CMD?.trim();
   if (override) {
     return override;
   }
+  const preferred = env.CURSOR_CLI_NAME?.trim() || DEFAULT_CURSOR_CLI_NAME;
   const probe = (cmd) => {
     if (process.platform === "win32") {
       const result = spawn("where.exe", [cmd], { encoding: "utf8", stdio: "pipe" });
@@ -82,13 +87,13 @@ export function resolveCursorAgentCli(env = process.env, spawn = spawnSync) {
     const result = spawn("which", [cmd], { encoding: "utf8", stdio: "pipe" });
     return result.status === 0;
   };
-  if (probe("cursor")) {
-    return "cursor";
+  const candidates = [...new Set([preferred, "agent", "cursor"])];
+  for (const cmd of candidates) {
+    if (probe(cmd)) {
+      return cmd;
+    }
   }
-  if (probe("agent")) {
-    return "agent";
-  }
-  return process.platform === "win32" ? "cursor" : "agent";
+  return preferred;
 }
 
 export function runNewTiedClientPipeline(options) {
@@ -118,8 +123,10 @@ export function runNewTiedClientPipeline(options) {
     return { ok: false, code: 1, step: "copy_files" };
   }
 
+  const bootstrapArgv = bootstrapToolFlagsToArgv(options.toolUseProfile ?? {});
+
   let step = runStep("copy_files", () => {
-    const result = spawn(copyScript, [], {
+    const result = spawn(copyScript, bootstrapArgv, {
       cwd: clientDir,
       shell: process.platform === "win32",
       encoding: "utf8",
@@ -200,7 +207,9 @@ export function runNewTiedClientPipeline(options) {
           stdio: "pipe",
         });
         if (result.error && result.error.code === "ENOENT") {
-          sayErr(`${cursorAgentCli} CLI not found on PATH (override with TIED_CURSOR_AGENT_CMD)`);
+          sayErr(
+            `${cursorAgentCli} CLI not found on PATH (override with TIED_CURSOR_AGENT_CMD or CURSOR_CLI_NAME)`,
+          );
           return {
             ok: false,
             code: 127,

@@ -12,6 +12,7 @@ import {
   runDisposableClient,
   runNewTiedClientPipeline,
 } from "./lib/new-tied-client-pipeline.mjs";
+import { parseBootstrapToolFlags } from "./lib/client-tool-use-bootstrap.mjs";
 
 function usage() {
   sayErr(`usage: new-tied-client.mjs [OPTIONS] [CLIENT_DIR]
@@ -32,14 +33,25 @@ Options:
   --with-agentstream-dry-run  Run agentstream dry-run during Claude validation (default on for claude)
   --no-agentstream-dry-run    Skip agentstream dry-run during Claude validation
   --with-live-claude        Reserved; live Claude not run in v1 factory
+  --full-tools              Enable Jev + DAE starter config + BBCE analysis files
+  --with-jev                Seed jev.plan_skills: true in .tied-yaml.yaml (create or --force-tool-config)
+  --with-dae                Seed dae.crap_threshold: 30 only (create or --force-tool-config)
+  --with-bbce               Copy tied/analysis/ starter files into the client
+  --tools jev,dae,bbce      Comma-separated tool flags (same as granular flags)
+  --force-tool-config       Merge tool keys into an existing .tied-yaml.yaml
 
-Environment: TIED_SOURCE_ROOT, TIED_TEST_ROOT, TIED_CURSOR_AGENT_CMD,
+Environment: TIED_SOURCE_ROOT, TIED_TEST_ROOT, CURSOR_CLI_NAME (default agent),
+  TIED_CURSOR_AGENT_CMD (full override; wins over CURSOR_CLI_NAME),
+  TIED_BOOTSTRAP_FULL_TOOLS, TIED_BOOTSTRAP_WITH_JEV, TIED_BOOTSTRAP_WITH_DAE,
+  TIED_BOOTSTRAP_WITH_BBCE, TIED_BOOTSTRAP_FORCE_TOOL_CONFIG (CLI overrides env),
   TIED_CLAUDE_CLIENT_WITH_CONSISTENCY=1 (same as --with-consistency for Claude validation)`);
 }
 
-export function parseNewTiedClientArgs(argv) {
-  const args = [...argv];
+export function parseNewTiedClientArgs(argv, env = process.env) {
+  const { profile: toolUseProfile, argv: afterToolFlags } = parseBootstrapToolFlags(argv, env);
+  const args = [...afterToolFlags];
   const options = {
+    toolUseProfile,
     disposable: false,
     sourceRoot: undefined,
     testRoot: undefined,
@@ -162,6 +174,7 @@ function main() {
       withLiveClaude: parsed.withLiveClaude,
     },
     env,
+    toolUseProfile: parsed.toolUseProfile,
   };
 
   if (parsed.disposable) {

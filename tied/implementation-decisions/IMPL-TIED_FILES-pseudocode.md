@@ -440,6 +440,24 @@ procedure LINT_CLIENT_TIED_YAML(clientDir, sourceRoot):
   RETURN success
 
 
+procedure RESOLVE_CURSOR_CLI_NAME(env, spawn):
+  # [REQ-TIED_SETUP] [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM] [IMPL-TIED_FILES]
+  # How: Basename for `<cli> mcp enable tied-yaml`; TIED_CURSOR_AGENT_CMD override; CURSOR_CLI_NAME default agent; probe fallbacks.
+  Contract:
+    INPUT: env; spawn (which/where.exe)
+    OUTPUT: CLI basename string
+    PRE: env may contain TIED_CURSOR_AGENT_CMD, CURSOR_CLI_NAME
+    POST: override wins; else preferred from CURSOR_CLI_NAME or "agent"; first successful probe among deduped [preferred, agent, cursor]; else preferred
+    EFFECTS: Process — probe only
+    FAILURE_MODES: none (returns preferred when not on PATH)
+    TERMINATION: total
+  IF env.TIED_CURSOR_AGENT_CMD trimmed non-empty: RETURN trimmed
+  LET preferred = env.CURSOR_CLI_NAME trimmed OR "agent"
+  FOR cmd IN unique([preferred, "agent", "cursor"]):
+    IF probe(cmd): RETURN cmd
+  RETURN preferred
+
+
 procedure RUN_NEW_TIED_CLIENT_PIPELINE(clientDir, sourceRoot):
   # [IMPL-TIED_FILES] [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM] [REQ-TIED_SETUP]
   # How: Mirror scripts/build-commands.sh _new_tied_test_client — mkdir parent, bootstrap cwd, lint tied YAML, optional agent MCP enable, git init/commit.
@@ -458,7 +476,7 @@ procedure RUN_NEW_TIED_CLIENT_PIPELINE(clientDir, sourceRoot):
   RUN copy_files entry with cwd=clientDir and no args
   CALL LINT_CLIENT_TIED_YAML(clientDir, sourceRoot) unless skipLint
   IF not skipMcpEnable AND (stdin is TTY OR forceMcpEnable):
-    RUN agent mcp enable tied-yaml with cwd=clientDir
+    RUN resolveCursorAgentCli(env) mcp enable tied-yaml with cwd=clientDir
   ELSE IF not skipMcpEnable:
     WARN auto-skip agent mcp enable on non-TTY
   UNLESS skipGit:
@@ -569,5 +587,39 @@ procedure HOIST_YAML_SEMANTIC_COMPARE_CONSTANTS():
     FAILURE_MODES: LOAD_NAME_ERROR if constant still referenced before definition
     TERMINATION: total
   MOVE or ASSIGN DEFAULT_RECORD_LIST_KEYS immediately after class YamlSemanticCompare opening (before DifferenceWalker) OR hoist to file top under module YamlSemanticCompare
+  RETURN success
+
+
+procedure PARSE_BOOTSTRAP_TOOL_FLAGS(argv, env):
+  # [REQ-TIED_SETUP] [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM] [IMPL-TIED_FILES]
+  # How: Normalize CLI and env mirrors into toolUseProfile for copy-files.mjs, new-tied-client.mjs, and tied bootstrap CLI.
+  Contract:
+    INPUT: argv from bootstrap entrypoints; optional process env
+    OUTPUT: toolUseProfile { jev, dae, bbce, fullTools, forceToolConfig }; remaining argv
+    PRE: argv is a string array
+    POST: --full-tools expands to jev+dae+bbce; explicit CLI flags override env mirrors
+    EFFECTS: none — pure parse
+    FAILURE_MODES: unknown flags pass through to downstream parsers
+    TERMINATION: total
+  READ env TIED_BOOTSTRAP_* mirrors when CLI flag absent
+  PARSE --full-tools, --with-jev, --with-dae, --with-bbce, --tools list, --force-tool-config
+  RETURN toolUseProfile and remaining argv
+
+
+procedure APPLY_CLIENT_TOOL_USE_PROFILE(projectRoot, toolUseProfile):
+  # [REQ-TIED_SETUP] [IMPL-TIED_FILES]
+  # How: After BASE_FILES create-if-absent, merge jev/dae keys into .tied-yaml.yaml and copy BBCE analysis starters from templates/tied/analysis/.
+  Contract:
+    INPUT: projectRoot; toolUseProfile; tiedYamlPreExisting flag from bootstrap
+    OUTPUT: optional YAML merge; additive tied/analysis/ files when bbce
+    PRE: bootstrapTied completed BASE_FILES loop
+    POST: fresh create or --force-tool-config merges jev.plan_skills and dae.crap_threshold only; never default dae.branch_check or dae.agentstream_gate_check
+    EFFECTS: File I/O — merge tool keys only; copy ANALYSIS_STARTER_FILES create-if-absent
+    FAILURE_MODES: existing .tied-yaml.yaml without forceToolConfig skips YAML mutation; missing template starter throws MISSING_ANALYSIS_STARTER
+    DATA_TRANSITION: templates/.tied-yaml.yaml → client root with profile patches; templates/tied/analysis/* → client tied/analysis/
+    TERMINATION: total
+  IF NOT toolUseProfile selects jev, dae, or bbce: RETURN noop
+  IF jev OR dae AND (NOT tiedYamlPreExisting OR forceToolConfig): deep-merge tool keys; preserve scalar_style and unrelated keys
+  IF bbce: copy manifest ANALYSIS_STARTER_FILES without deleting client files
   RETURN success
 

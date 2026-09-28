@@ -69,6 +69,7 @@
 | **agent-control layer** | agent guidance (alone), vocabulary policy (alone) | Peer control layer alongside semantic tokens and IMPL pseudo-code; owned by `[PROC-VOCABULARY_INDEX]` |
 | **managed bootstrap artifact** | copied file, installed file (alone) | Canonical client artifact refreshed by `copy_files.sh` and checked for client edits before replacement |
 | **copy timestamp normalization** | artificial timestamp, fixed copy time | Apply the source item's local calendar-date midnight only to the managed client copy after `cp -p`/`cp -pR`; source mtimes remain unchanged |
+| **CURSOR_CLI_NAME** | Cursor agent CLI basename (alone) | Env var for `resolveCursorAgentCli` during **new-tied-client** MCP enable; default **`agent`**; probe order preferred → `agent` → `cursor`; superseded by **TIED_CURSOR_AGENT_CMD** when set |
 | **client-modification warning** | refresh warning (alone) | Diagnostic emitted when an existing managed destination mtime is not truncated to local calendar-date midnight |
 | **Windows bootstrap entry point** | copy_files.bat, Windows shell script (alone) | `copy_files.cmd` at TIED repo root; PATHEXT resolves `copy_files` for neighboring client repos |
 | **coordinator guide** | DAE mechanisms doc (alone), comparison backlog | Full-project status/anti-pattern guide under `docs/comparisons/dae-mechanisms-for-tied-improvement.md`; executable waves live in the **linked plan** — [REQ-TIED_DAE_INCORPORATION](../requirements/REQ-TIED_DAE_INCORPORATION.yaml) |
@@ -92,6 +93,8 @@
 | **disposable TIED client** | throwaway demo project (alone) | Timestamped bootstrapped client under `TIED_TEST_ROOT/<unix-seconds>` for smoke and feature demos |
 | **new-tied-client** | make client script (alone) | Windows `scripts/new-tied-client.cmd` or Node `tools/bootstrap/new-tied-client.mjs`; explicit client directory pipeline |
 | **test-new-tied-client** | disposable client alias (alone) | Windows `scripts/test-new-tied-client.cmd`; creates disposable client via `CREATE_DISPOSABLE_TIED_CLIENT` |
+| **full-tools bootstrap** | `--full-tools` (alone) | Optional bootstrap flag alias for Jev plan-skills repo config, DAE CRAP starter threshold, and BBCE `tied/analysis/` starter files; does not install secrets or change G4 audit |
+| **tool use profile** | bootstrap tool flags (alone) | Parsed `{ jev, dae, bbce, forceToolConfig }` from CLI/env; applied create-only on `.tied-yaml.yaml` unless `--force-tool-config` merges tool keys only |
 | **registry atom** | source of truth file (alone), canonical record (alone) | Authoritative obligation or term: token detail YAML, `semantic-tokens.yaml` row + detail, `(canonical)` glossary definition, merged `essence_pseudocode` for an IMPL, `[PROC-*]` in `processes.md` |
 | **distributed facet** | duplicate spec (alone), miniature copy (alone) | Non-authoritative expression that must align with registry atoms: traceability lists, code/test token comments, literal block leads, index rows, working-folder evidence — not a second full spec of the product |
 | **atomized traceability graph** | holographic model (alone), whole-in-every-file (alone) | Countable nodes (tokens, blocks) and explicit edges; rationality and completeness are **graph closure** via `[PROC-TOKEN_VALIDATION]` and `[PROC-LEAP]`, not reconstruction from one file |

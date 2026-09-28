@@ -37,6 +37,10 @@ import { installClaudeMdTemplate } from "./claude-md.mjs";
 import { mergeClaudeAdherenceHooks } from "./claude-adherence-hooks.mjs";
 import { applyMethodologyClientBoundary } from "./methodology-client-boundary.mjs";
 import { runClientRefreshParityGate } from "./client-refresh-parity.mjs";
+import {
+  applyClientToolUseBootstrapOptions,
+  profileHasToolUse,
+} from "./client-tool-use-bootstrap.mjs";
 
 function resolveTemplateFile(templatesDir, scriptDir, filename) {
   const fromTemplates = path.join(templatesDir, filename);
@@ -125,6 +129,8 @@ export function bootstrapTied(projectRoot, options = {}) {
   writeClientVocabHandoffs(path.join(tiedDir, "vocab"));
 
   // [IMPL-TIED_FILES] [REQ-TIED_SETUP] [REQ-TIED_YAML_STYLE_CONFIGURATION] — BASE_FILES: templates-first via resolveTemplateFile.
+  const tiedYamlDest = path.join(projectRoot, ".tied-yaml.yaml");
+  const tiedYamlPreExisting = fs.existsSync(tiedYamlDest);
   let baseCopied = 0;
   for (const template of paths.BASE_FILES) {
     const src = resolveTemplateFile(templatesDir, TIED_REPO_ROOT, template);
@@ -143,6 +149,14 @@ export function bootstrapTied(projectRoot, options = {}) {
     paths.BASE_FILES.length,
     `Copied ${baseCopied} of ${paths.BASE_FILES.length} base files into ${projectRoot}.`
   );
+
+  const toolUseProfile = options.toolUseProfile;
+  if (toolUseProfile && profileHasToolUse(toolUseProfile)) {
+    applyClientToolUseBootstrapOptions(projectRoot, toolUseProfile, {
+      tiedRepoRoot: TIED_REPO_ROOT,
+      tiedYamlPreExisting,
+    });
+  }
 
   warnModifiedCopyTarget(methodologyDir);
   if (fs.existsSync(methodologyDir)) {

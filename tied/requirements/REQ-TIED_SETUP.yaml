@@ -1,102 +1,112 @@
 REQ-TIED_SETUP:
-  category: "Functional"
-  description: "TIED setup provides a deterministic client bootstrap: it creates the TIED structure, refreshes the read-only methodology vocabulary snapshot, preserves durable client-owned vocabulary and handoffs, installs managed prompt-type skills, preserves attributes with cp -p/cp -pR, normalizes only client-copy mtimes to each source item's local calendar-date midnight, and warns before replacing destinations whose mtimes are not midnight."
-  detail_file: "requirements/REQ-TIED_SETUP.yaml"
+  category: Functional
+  description: 'TIED setup provides a deterministic client bootstrap: it creates the TIED structure, refreshes the read-only methodology vocabulary snapshot, preserves durable client-owned vocabulary and handoffs, installs managed prompt-type skills, preserves attributes with cp -p/cp -pR, normalizes only client-copy mtimes to each source item''s local calendar-date midnight, and warns before replacing destinations whose mtimes are not midnight.'
+  detail_file: requirements/REQ-TIED_SETUP.yaml
   implementation_approach:
     details:
-      - "Bootstrap managed artifacts preserve copy attributes where supported, leave source files unchanged, normalize only client-copy mtimes to each source item's local calendar-date midnight, and warn when an existing managed destination has a non-midnight mtime before refresh."
-      - "copy_files.sh installs managed prompt-type skills into client .cursor/skills/ and does not copy .cursor/agents/ Task wrappers into client projects."
-    summary: "Provide deterministic TIED client bootstrap with source-preserving copies, destination-only local-midnight metadata, and non-midnight modification detection."
+      - Bootstrap managed artifacts preserve copy attributes where supported, leave source files unchanged, normalize only client-copy mtimes to each source item's local calendar-date midnight, and warn when an existing managed destination has a non-midnight mtime before refresh.
+      - copy_files.sh installs managed prompt-type skills into client .cursor/skills/ and does not copy .cursor/agents/ Task wrappers into client projects.
+      - Optional --full-tools and granular bootstrap flags apply a tool use profile (Jev plan_skills, DAE crap_threshold starter, BBCE tied/analysis/ files) via APPLY_CLIENT_TOOL_USE_PROFILE after BASE_FILES create-if-absent.
+    summary: Provide deterministic TIED client bootstrap with source-preserving copies, destination-only local-midnight metadata, and non-midnight modification detection.
   metadata:
     created:
-      author: "AI Agent"
-      date: "2025-11-08T00:00:00.000Z"
+      author: AI Agent
+      date: '2025-11-08T00:00:00.000Z'
     last_updated:
-      author: "AI Agent"
-      date: "2026-09-26"
-      reason: "Bootstrap seeds .tied-yaml.yaml when absent at client project root"
+      author: AI Agent
+      date: '2026-09-28'
+      reason: Optional full-tools bootstrap flags for Jev/DAE/BBCE starter config
     last_validated:
-      date: "2026-02-06T00:00:00.000Z"
-      result: "pass"
-      validator: "AI Agent"
-  name: "TIED Methodology Setup"
-  priority: "P0"
+      date: '2026-02-06T00:00:00.000Z'
+      result: pass
+      validator: AI Agent
+  name: TIED Methodology Setup
+  priority: P0
   rationale:
     benefits:
-      - "AI-friendly documentation structure"
-      - "Complete traceability from requirements to code"
-      - "Consistent development methodology"
+      - AI-friendly documentation structure
+      - Complete traceability from requirements to code
+      - Consistent development methodology
     problems_solved:
-      - "Difficulty tracking requirements through architecture to implementation"
-      - "Inconsistent documentation practices across projects"
-      - "Loss of intent during development lifecycle"
-    why: "To ensure traceability of intent from requirements to code and to maintain a consistent development process"
+      - Difficulty tracking requirements through architecture to implementation
+      - Inconsistent documentation practices across projects
+      - Loss of intent during development lifecycle
+    why: To ensure traceability of intent from requirements to code and to maintain a consistent development process
   related_requirements:
     depends_on: []
     related_to: []
     supersedes: []
   satisfaction_criteria:
-    - criterion: "./tied/ directory exists with proper structure"
-    - criterion: "All required documentation files exist and are populated from templates"
-      metric: "requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml, semantic-tokens.md, processes.md all present"
-    - criterion: "Base files properly configured"
-      metric: ".cursorrules contains TIED rules, AGENTS.md contains canonical AI agent instructions"
-    - criterion: "Bootstrap file lists are manifest-driven to prevent platform drift"
-      metric: "tools/bootstrap/manifest.json supplies DOCS_TO_COPY, skill dirs, and verify artifact paths"
-    - criterion: "copy_files --merge-vocab adds absent client glossary basenames without overwriting existing client vocabulary"
-      metric: "Existing client glossary contents remain unchanged while missing canonical client-facing glossaries are added"
-    - criterion: "copy_files installs the canonical prompt-type skill bundle into client .cursor/skills/ and does not create client .cursor/agents/ wrappers"
-      metric: "Bootstrap tests verify managed skill installation and absence of client .cursor/agents/"
-    - criterion: "copy_files refreshes non-source-only TIED glossaries under tied/methodology/vocab/ and creates missing client routing/catalog handoffs under tied/vocab/"
-      metric: "Methodology vocabulary is replaced deterministically; existing client vocabulary and handoff bytes remain unchanged"
-    - criterion: "copy_files.sh seeds repo-root .tied-yaml.yaml when absent at the client project root"
-      metric: "Fresh bootstrap creates .tied-yaml.yaml from templates/.tied-yaml.yaml; existing client file preserved byte-for-byte; Windows bootstrap smoke and bootstrap contract tests assert presence"
-    - criterion: "Detail directories exist"
-      metric: "requirements/, architecture-decisions/, implementation-decisions/ directories present"
-    - criterion: "Domain vocabulary for TIED layout (project YAML, semantic token, TIED base path) is defined in tied/vocab/tied-methodology.md; naming uses sub-vocabulary-sync RESOLVE/RECORD per [PROC-VOCABULARY_INDEX]"
-    - criterion: "Existing clients can follow tied/docs/methodology-migration.md when adopting a newer methodology snapshot"
-      metric: "Migration guide is installed when missing and preserves client-owned project YAML and customized documentation"
-    - criterion: "Managed bootstrap artifacts preserve supported attributes, retain source content, normalize only client-copy mtimes to each source item's local calendar-date midnight, and warn before replacement when an existing destination mtime is not midnight"
-      metric: "Prompt skill/bootstrap tests verify copy-managed.mjs contracts, destination midnight mtime, and warning output"
-    - criterion: "Refreshing inherited methodology preserves project YAML and installs promoted quality detail files and pseudo-code sidecars"
-      metric: "tied/methodology/ matches the current template snapshot and stale inherited files are pruned"
-    - criterion: "The vocabulary layer is an agent-control layer that applies RESOLVE, PRELOAD, RECORD, and VALIDATE across TIED work"
-      metric: "Canonical vocabulary rows and checklist/process references use the same terms"
-    - criterion: "When .cursor/mcp.json already exists, copy_files preserves its exact bytes and does not initialize or merge tied-yaml into it"
-      metric: "Bootstrap E2E refresh fixture compares the pre-existing MCP config byte-for-byte after refresh"
-    - criterion: "Windows copy_files.cmd entry point bootstraps cwd via shared Node engine with parity to copy_files.sh"
-      metric: "tools/bootstrap/copy-files.mjs implements BOOTSTRAP_TIED; E2E tests use entrypoint node"
-    - criterion: "Windows test-new-tied-client creates disposable client under TIED_TEST_ROOT with unix-seconds timestamp and runs bootstrap, lint, optional MCP enable, and git init"
-      metric: "tools/bootstrap/new-tied-client.mjs implements CREATE_DISPOSABLE_TIED_CLIENT and RUN_NEW_TIED_CLIENT_PIPELINE; scripts/test-new-tied-client.cmd and mcp-server/src/e2e/new-tied-client.test.ts verify pipeline order and timestamp"
-    - criterion: "YAML validation uses the tied-yaml-canonical-v1 profile through scripts/yaml_tool.sh or lint_yaml per [PROC-YAML_EDIT_LOOP]"
-      metric: "Recursive lexical map ordering, ordered-list key exceptions, string-only list sorting, scalar-type preservation, and opaque block policy are documented and tested"
-  status: "Implemented"
+    - criterion: ./tied/ directory exists with proper structure
+    - criterion: All required documentation files exist and are populated from templates
+      metric: requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml, semantic-tokens.yaml, semantic-tokens.md, processes.md all present
+    - criterion: Base files properly configured
+      metric: .cursorrules contains TIED rules, AGENTS.md contains canonical AI agent instructions
+    - criterion: Bootstrap file lists are manifest-driven to prevent platform drift
+      metric: tools/bootstrap/manifest.json supplies DOCS_TO_COPY, skill dirs, and verify artifact paths
+    - criterion: Bootstrap MCP enable resolves Cursor agent CLI via CURSOR_CLI_NAME default agent with TIED_CURSOR_AGENT_CMD override
+      metric: resolveCursorAgentCli behavior covered in mcp-server/src/e2e/new-tied-client.test.ts
+    - criterion: copy_files --merge-vocab adds absent client glossary basenames without overwriting existing client vocabulary
+      metric: Existing client glossary contents remain unchanged while missing canonical client-facing glossaries are added
+    - criterion: copy_files installs the canonical prompt-type skill bundle into client .cursor/skills/ and does not create client .cursor/agents/ wrappers
+      metric: Bootstrap tests verify managed skill installation and absence of client .cursor/agents/
+    - criterion: copy_files refreshes non-source-only TIED glossaries under tied/methodology/vocab/ and creates missing client routing/catalog handoffs under tied/vocab/
+      metric: Methodology vocabulary is replaced deterministically; existing client vocabulary and handoff bytes remain unchanged
+    - criterion: copy_files.sh seeds repo-root .tied-yaml.yaml when absent at the client project root
+      metric: Fresh bootstrap creates .tied-yaml.yaml from templates/.tied-yaml.yaml; existing client file preserved byte-for-byte; Windows bootstrap smoke and bootstrap contract tests assert presence
+    - criterion: Detail directories exist
+      metric: requirements/, architecture-decisions/, implementation-decisions/ directories present
+    - criterion: Domain vocabulary for TIED layout (project YAML, semantic token, TIED base path) is defined in tied/vocab/tied-methodology.md; naming uses sub-vocabulary-sync RESOLVE/RECORD per [PROC-VOCABULARY_INDEX]
+    - criterion: Existing clients can follow tied/docs/methodology-migration.md when adopting a newer methodology snapshot
+      metric: Migration guide is installed when missing and preserves client-owned project YAML and customized documentation
+    - criterion: Managed bootstrap artifacts preserve supported attributes, retain source content, normalize only client-copy mtimes to each source item's local calendar-date midnight, and warn before replacement when an existing destination mtime is not midnight
+      metric: Prompt skill/bootstrap tests verify copy-managed.mjs contracts, destination midnight mtime, and warning output
+    - criterion: Optional bootstrap tool flags seed Jev, DAE, and BBCE starter assets on a fresh client when --full-tools or granular --with-* flags are used
+      metric: Fresh disposable client has jev.plan_skills true, optional dae.crap_threshold 30 without default dae.branch_check or dae.agentstream_gate_check; tied/analysis starters present when --with-bbce; mcp-server/src/e2e/new-tied-client.test.ts and tools/bootstrap/lib/client-tool-use-bootstrap.test.mjs green
+    - criterion: Re-bootstrap preserves existing .tied-yaml.yaml tool keys unless --force-tool-config
+      metric: client-tool-use-bootstrap tests lock create-only and force-merge semantics; existing unrelated YAML keys preserved on force merge
+    - criterion: Refreshing inherited methodology preserves project YAML and installs promoted quality detail files and pseudo-code sidecars
+      metric: tied/methodology/ matches the current template snapshot and stale inherited files are pruned
+    - criterion: The vocabulary layer is an agent-control layer that applies RESOLVE, PRELOAD, RECORD, and VALIDATE across TIED work
+      metric: Canonical vocabulary rows and checklist/process references use the same terms
+    - criterion: Unix and Windows disposable factories expose the same tool flag surface
+      metric: test-new-tied-client forwards flags through new-tied-client.mjs; copy_files.sh and copy-files.mjs parse the same profile
+    - criterion: When .cursor/mcp.json already exists, copy_files preserves its exact bytes and does not initialize or merge tied-yaml into it
+      metric: Bootstrap E2E refresh fixture compares the pre-existing MCP config byte-for-byte after refresh
+    - criterion: Windows copy_files.cmd entry point bootstraps cwd via shared Node engine with parity to copy_files.sh
+      metric: tools/bootstrap/copy-files.mjs implements BOOTSTRAP_TIED; E2E tests use entrypoint node
+    - criterion: Windows test-new-tied-client creates disposable client under TIED_TEST_ROOT with unix-seconds timestamp and runs bootstrap, lint, optional MCP enable, and git init
+      metric: tools/bootstrap/new-tied-client.mjs implements CREATE_DISPOSABLE_TIED_CLIENT and RUN_NEW_TIED_CLIENT_PIPELINE; scripts/test-new-tied-client.cmd and mcp-server/src/e2e/new-tied-client.test.ts verify pipeline order and timestamp
+    - criterion: YAML validation uses the tied-yaml-canonical-v1 profile through scripts/yaml_tool.sh or lint_yaml per [PROC-YAML_EDIT_LOOP]
+      metric: Recursive lexical map ordering, ordered-list key exceptions, string-only list sorting, scalar-type preservation, and opaque block policy are documented and tested
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
-      - "ARCH-TIED_STRUCTURE"
-      - "ARCH-TIED_VOCABULARY_LAYERS"
+      - ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM
+      - ARCH-TIED_STRUCTURE
+      - ARCH-TIED_VOCABULARY_LAYERS
     code_annotations:
-      - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
-      - "ARCH-TIED_STRUCTURE"
-      - "ARCH-TIED_VOCABULARY_LAYERS"
-      - "IMPL-TIED_FILES"
-      - "IMPL-TIED_VOCABULARY_REFRESH"
-      - "REQ-TIED_SETUP"
-      - "REQ-TIED_VOCABULARY_OWNERSHIP"
+      - ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM
+      - ARCH-TIED_STRUCTURE
+      - ARCH-TIED_VOCABULARY_LAYERS
+      - IMPL-TIED_FILES
+      - IMPL-TIED_VOCABULARY_REFRESH
+      - REQ-TIED_SETUP
+      - REQ-TIED_VOCABULARY_OWNERSHIP
     implementation:
-      - "IMPL-TIED_FILES"
-      - "IMPL-TIED_VOCABULARY_REFRESH"
+      - IMPL-TIED_FILES
+      - IMPL-TIED_VOCABULARY_REFRESH
     tests:
-      - "Manual verification checklists"
-      - "mcp-server/src/e2e/bootstrap-and-load.test.ts"
-      - "mcp-server/src/e2e/new-tied-client.test.ts"
-      - "scripts/migrate_vocab_ownership_test.rb"
-      - "scripts/validate_vocab_index_test.rb"
+      - Manual verification checklists
+      - mcp-server/src/e2e/bootstrap-and-load.test.ts
+      - mcp-server/src/e2e/new-tied-client.test.ts
+      - scripts/migrate_vocab_ownership_test.rb
+      - scripts/validate_vocab_index_test.rb
+      - tools/bootstrap/lib/client-tool-use-bootstrap.test.mjs
   validation_criteria:
-    - coverage: "Agent responds with 'Observing AI principles!' confirming rules are loaded"
-      method: "AI agent acknowledgment"
-    - coverage: "File existence checks for all required files and directories"
-      method: "Manual verification"
-    - coverage: "All index files have corresponding detail directories with proper naming"
-      method: "Structure validation"
+    - coverage: Agent responds with 'Observing AI principles!' confirming rules are loaded
+      method: AI agent acknowledgment
+    - coverage: File existence checks for all required files and directories
+      method: Manual verification
+    - coverage: All index files have corresponding detail directories with proper naming
+      method: Structure validation

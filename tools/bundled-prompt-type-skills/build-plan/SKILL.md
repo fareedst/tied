@@ -31,8 +31,9 @@ Execute the linked plan in this order:
 
 1. **Guiding vocab** — [guiding-vocab.md](../prompt-shared/guiding-vocab.md)
 2. **Optional Jev plan-skills adjunct** (after PRELOAD, before Plan) — [jev-plan-skills-adjunct.md](../prompt-shared/jev-plan-skills-adjunct.md)
-3. **Plan** — [tied-plan-citdp-build.md](../prompt-shared/tied-plan-citdp-build.md)
-4. **Implement** — [tied-implement.md](../prompt-shared/tied-implement.md)
+3. **Optional plan process tools adjunct** (DAE + BBCE, after PRELOAD) — [plan-process-tools-adjunct.md](../prompt-shared/plan-process-tools-adjunct.md)
+4. **Plan** — [tied-plan-citdp-build.md](../prompt-shared/tied-plan-citdp-build.md)
+5. **Implement** — [tied-implement.md](../prompt-shared/tied-implement.md)
 
 ### W6d build-plan triage hook (optional)
 

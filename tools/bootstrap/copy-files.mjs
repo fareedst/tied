@@ -8,11 +8,13 @@ import { fileURLToPath } from "node:url";
 import { bootstrapTied } from "./lib/bootstrap.mjs";
 import { sayErr } from "./lib/console.mjs";
 import { parseParityCliFlags } from "./lib/parity-cli-options.mjs";
+import { parseBootstrapToolFlags } from "./lib/client-tool-use-bootstrap.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 function parseArgs(argv) {
-  const args = [...argv];
+  const { profile: toolUseProfile, argv: afterToolFlags } = parseBootstrapToolFlags(argv, process.env);
+  const args = [...afterToolFlags];
   let mergeVocab = false;
   let methodologyReadonly = false;
   let installMethodologyHook = false;
@@ -36,7 +38,7 @@ function parseArgs(argv) {
     process.exit(1);
   }
   const target = positional[0] ? path.resolve(positional[0]) : process.cwd();
-  return { mergeVocab, target, methodologyReadonly, installMethodologyHook, ...parity };
+  return { mergeVocab, target, methodologyReadonly, installMethodologyHook, toolUseProfile, ...parity };
 }
 
 function main() {
@@ -50,10 +52,12 @@ function main() {
     parityGateReportOnly,
     semanticYamlCompare,
     parityReport,
+    toolUseProfile,
   } = parseArgs(process.argv.slice(2));
   try {
     bootstrapTied(target, {
       mergeVocab,
+      toolUseProfile,
       env: process.env,
       methodologyReadonly,
       installMethodologyHook,

@@ -31,7 +31,12 @@ From the TIED repo:
 scripts\test-new-tied-client
 ```
 
-Creates `%USERPROFILE%\Documents\dev\test\<unix-seconds>` with bootstrap, lint, **G4 new-client onboarding audit** (`working/tied-new-client-audit.v1.json`, [REQ-TIED_NEW_CLIENT_ADHERENCE](../../tied/requirements/REQ-TIED_NEW_CLIENT_ADHERENCE.yaml)), optional `cursor mcp enable tied-yaml` (Windows; `agent` on Unix when on PATH), and `git commit -m "TIED {methodology version from AGENTS.md}"` (e.g. `TIED 3.0.0`). Bash equivalent: `source scripts/build-commands.sh` then `test-new-tied-client`. Skip audit: `TIED_SKIP_NEW_CLIENT_AUDIT=1` or `--skip-onboarding-audit`.
+Creates `%USERPROFILE%\Documents\dev\test\<unix-seconds>` with bootstrap, lint, **G4 new-client onboarding audit** (`working/tied-new-client-audit.v1.json`, [REQ-TIED_NEW_CLIENT_ADHERENCE](../../tied/requirements/REQ-TIED_NEW_CLIENT_ADHERENCE.yaml)), optional ``${CURSOR_CLI_NAME:-agent} mcp enable tied-yaml`` (resolved via `resolveCursorAgentCli`; see env table below), and `git commit -m "TIED {methodology version from AGENTS.md}"` (e.g. `TIED 3.0.0`). Bash equivalent: `source scripts/build-commands.sh` then `test-new-tied-client`. Skip audit: `TIED_SKIP_NEW_CLIENT_AUDIT=1` or `--skip-onboarding-audit`.
+
+| Variable | Role |
+|----------|------|
+| `CURSOR_CLI_NAME` | Preferred Cursor Agent CLI basename for MCP enable; default **`agent`**. Probed first, then `agent`, then `cursor` (deduped). |
+| `TIED_CURSOR_AGENT_CMD` | Full override basename; wins over `CURSOR_CLI_NAME` when set. |
 
 Explicit directory:
 
@@ -147,6 +152,21 @@ Methodology boundary (Phase A, [REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY]): `--metho
 | `.tied-yaml.yaml` | Create-if-absent | `templates/.tied-yaml.yaml` (client-safe starter; not the methodology repo’s dev root file) |
 
 Existing client copies are never overwritten on refresh. Brownfield clients without the file get it on the next bootstrap while the destination path is still absent; see [methodology-migration.md](../tied/docs/methodology-migration.md).
+
+### Optional tool-use flags (`--full-tools`)
+
+| Flag | Effect |
+| --- | --- |
+| `--full-tools` | `--with-jev` + `--with-dae` + `--with-bbce` |
+| `--with-jev` | On create (or with `--force-tool-config`): `jev.plan_skills: true` in `.tied-yaml.yaml` |
+| `--with-dae` | On create (or force): `dae.crap_threshold: 30` only — never default `dae.branch_check` or `dae.agentstream_gate_check` |
+| `--with-bbce` | Copy `templates/tied/analysis/` starters into client `tied/analysis/` (additive) |
+| `--tools jev,dae,bbce` | Comma-separated granular flags |
+| `--force-tool-config` | Merge tool-related keys into an existing `.tied-yaml.yaml` without replacing unrelated keys |
+
+Environment mirrors: `TIED_BOOTSTRAP_FULL_TOOLS`, `TIED_BOOTSTRAP_WITH_JEV`, `TIED_BOOTSTRAP_WITH_DAE`, `TIED_BOOTSTRAP_WITH_BBCE`, `TIED_BOOTSTRAP_FORCE_TOOL_CONFIG` (CLI overrides env). **`JEV_API_KEY` is never written by bootstrap** — set in Cursor MCP env after bootstrap.
+
+Unix: `source scripts/build-commands.sh && test-new-tied-client --full-tools`. Windows: `scripts\test-new-tied-client.cmd --full-tools`.
 
 ## Claude Code harness (dual bootstrap)
 

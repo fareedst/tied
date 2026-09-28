@@ -1,0 +1,84 @@
+CITDP-REQ-TIED_SETUP-COMBINED-CLOSE-OUT:
+  change_definition:
+    current_behavior: "CURSOR_CLI_NAME slice is verification_complete with persisted CITDP; full-tools bootstrap is implemented in-tree but FULL-TOOLS CITDP is working-only, tracker blank, envelope missing; close-out not run."
+    desired_behavior: "One plan-close-out pass persists FULL-TOOLS CITDP, hydrates authoritative tracker, rebuilds request-evidence envelope with both slices, runs close_out gates (minimal/advisory), and produces one CHANGELOG bullet plus one proposed commit message; commit_deferred."
+    non_goals:
+      - "git add, commit, or push in plan-close-out"
+      - "Integrated adversarial inquiry (minimal depth)"
+      - "New product REQ/ARCH/IMPL tokens beyond existing REQ-TIED_SETUP stack"
+      - "Second close-out commit per slice"
+    success_criteria:
+      - "Both product CITDPs under tied/citdp/ with record_identity.status implemented"
+      - "Preflight tests green (client-tool-use-bootstrap.test.mjs + new-tied-client src e2e)"
+      - "run-close-out-gates.mjs close_out allowed with envelope blocking gaps 0"
+      - "Single proposed commit message spanning bootstrap product diff"
+    unchanged_behavior:
+      - "Methodology YAML under tied/methodology/"
+      - "Unrelated repo changes outside bootstrap + documented process touchpoints"
+  completion_criteria:
+    checklist_gate:
+      fail_closed: true
+      phases:
+        - "close_out"
+        - "pre_implementation"
+        - "verification"
+    sponsor_policy:
+      commit_deferred: true
+      single_combined_commit: true
+  evidence:
+    commands:
+      - "node --experimental-strip-types --test mcp-server/src/e2e/new-tied-client.test.ts"
+      - "node --test tools/bootstrap/lib/client-tool-use-bootstrap.test.mjs"
+    proof_boundaries:
+      - "Process addendum; product behavior proven by linked product CITDPs and preflight commands"
+  impact_analysis:
+    impl_inventory:
+      - "IMPL-TIED_FILES"
+    linked_product_citdp:
+      - "tied/citdp/CITDP-REQ-TIED_SETUP-CURSOR-CLI-NAME.yaml"
+      - "tied/citdp/CITDP-REQ-TIED_SETUP-FULL-TOOLS.yaml"
+    linked_trackers:
+      authoritative_close_out_tracker: "working/REQ-TIED_SETUP/cursor-cli-name-tracker.yaml"
+      deprecated_gate_authority: "working/REQ-TIED_SETUP/full-tools-bootstrap-tracker.yaml"
+      orchestration_tracker: "working/REQ-TIED_SETUP/combined-bootstrap-close-out-tracker.yaml"
+    modules_or_boundaries: "Process orchestration over two behavioral slices on one REQ; product proof remains per-slice CITDPs."
+    tied_tokens_affected:
+      - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
+      - "IMPL-TIED_FILES"
+      - "REQ-TIED_SETUP"
+  record_identity:
+    change_request_id: "REQ-TIED_SETUP"
+    recorded_at: "2026-09-28"
+    status: "implemented"
+    title: "Combined bootstrap close-out (CURSOR_CLI_NAME + full-tools)"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: "inquiry_not_required_process_orchestration_only"
+      counterexamples:
+        - "Blank full-tools-bootstrap-tracker used as gate authority"
+        - "Close-out runs with only CURSOR_CLI_NAME CITDP and omits full-tools proof"
+        - "Envelope built from single-slice commands while combined commit staged"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "2026-09-28 preflight — client-tool-use-bootstrap 7/7 and new-tied-client 12/12 pass"
+      evidence_references:
+        - "/Users/fareed/.cursor/plans/bootstrap_combined_close-out_a0b4d717.plan.md"
+        - "working/REQ-TIED_SETUP/CITDP-REQ-TIED_SETUP-CURSOR-CLI-NAME.yaml"
+        - "working/REQ-TIED_SETUP/CITDP-REQ-TIED_SETUP-FULL-TOOLS.yaml"
+        - "working/REQ-TIED_SETUP/cursor-cli-name-tracker.yaml"
+      falsification_questions:
+        - "Does envelope validate without FULL-TOOLS CITDP persisted?"
+        - "Does run-close-out-gates accept multiple --citdp-path values?"
+      gate_policy: "advisory"
+      prior_depth_tier: null
+      profile_depth: "minimal"
+      research_profile: "read-only research profile"
+    quality_profiles:
+      - "baseline-functional"
+  test_strategy:
+    commands:
+      - "node --experimental-strip-types --test mcp-server/src/e2e/new-tied-client.test.ts"
+      - "node --test tools/bootstrap/lib/client-tool-use-bootstrap.test.mjs"
+    matrix_notes: "run-close-out-gates.mjs accepts one --citdp-path; use this combined CITDP (merged commands) OR CURSOR-CLI-NAME CITDP with full-tools evidence_refs on tracker before --sync-dispositions.\nEnvelope path: working/REQ-TIED_SETUP/evidence/request-evidence-envelope.v1.json (build/validate at close_out).\n"
+    summary: "Delegated preflight — re-run unit + src e2e before close_out; persist FULL-TOOLS CITDP; hydrate tracker; unified envelope via run-close-out-gates or MCP build."

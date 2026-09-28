@@ -1,0 +1,11 @@
+anticipated_shared_deps: []
+behavior: "Describe the public behavioral change in one sentence."
+binding_ids: []
+expected_path_globs: []
+expected_tests: []
+notes: "Copy to working/{CHANGE-ID}/declared-change-surface.v1.yaml and attach ref on CITDP risk_analysis.bbce_alignment."
+owning_slice_req: "REQ-EXAMPLE"
+proof_boundary: "diff-scope discipline only — not behavioral correctness or REQ satisfaction"
+public_behavioral_boundary: "Document the outward-facing boundary you intend to preserve."
+scenario_id: "example-client-starter"
+schema_version: "bbce-declared-change-surface.v1"

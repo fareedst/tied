@@ -254,25 +254,13 @@ _run_new_client_onboarding_audit() {
 _new_tied_test_client() {
   local client_dir="$1"
   local source_root="$2"
+  shift 2 || true
   local rc=0
 
-  (
-    set -euo pipefail
-    mkdir -p -- "$(dirname -- "$client_dir")"
-    cd -- "$client_dir"
-    "${source_root}/copy_files.sh"
-    "${source_root}/scripts/lint_yaml.sh" -F tied
-    _run_new_client_onboarding_audit "$source_root" "$client_dir"
-    agent mcp enable tied-yaml
-    git init
-    git add .
-    local _baseline_msg
-    _baseline_msg="$(
-      cd -- "${source_root}" && node --input-type=module -e \
-        "import { tiedBaselineCommitMessage } from './tools/bootstrap/lib/tied-baseline-commit-message.mjs'; console.log(tiedBaselineCommitMessage());"
-    )"
-    git commit -m "${_baseline_msg:-TIED 3.0.0}"
-  ) || rc=$?
+  node "${source_root}/tools/bootstrap/new-tied-client.mjs" \
+    --source-root "${source_root}" \
+    "$@" \
+    "${client_dir}" || rc=$?
   return "$rc"
 }
 
@@ -289,7 +277,7 @@ make_new_tied_client() {
   local dn
   dn=$(date +%s)
   mkdir -p "$test_root/$dn"
-  _new_tied_test_client "$test_root/$dn" "$source_root"
+  _new_tied_test_client "$test_root/$dn" "$source_root" "$@"
   printf 'Disposable TIED client: %s/%s\n' "$test_root" "$dn"
 }
 alias test-new-tied-client=make_new_tied_client
@@ -546,7 +534,7 @@ EOF
 _how_smoke() {
   cat <<'EOF'
 Feature-orchestration smoke (disposable clients)
-  new-tied-client DIR [SOURCE]   copy_files.sh + lint + agent mcp enable + git init
+  new-tied-client DIR [SOURCE]   copy_files.sh + lint + ${CURSOR_CLI_NAME:-agent} mcp enable + git init
   test-new-tied-client           same under $TIED_TEST_ROOT/<timestamp>
                                  copy_files + lint + G4 onboarding audit
                                  (tied-new-client-audit.v1.json) + mcp + git

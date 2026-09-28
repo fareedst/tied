@@ -39,6 +39,49 @@ describe("new-tied-client pipeline", () => {
     assert.match(output, /ok/);
   });
 
+  it("parseBootstrapToolFlags and parseNewTiedClientArgs handle full-tools [REQ-TIED_SETUP] [IMPL-TIED_FILES]", () => {
+    const output = runBootstrapModuleEval(`
+      import { parseBootstrapToolFlags } from "./tools/bootstrap/lib/client-tool-use-bootstrap.mjs";
+      import { parseNewTiedClientArgs } from "./tools/bootstrap/new-tied-client.mjs";
+      const { profile } = parseBootstrapToolFlags(["--full-tools"], { TIED_BOOTSTRAP_WITH_JEV: "1" });
+      if (!profile.jev || !profile.dae || !profile.bbce) throw new Error("full-tools profile");
+      const parsed = parseNewTiedClientArgs(["--with-jev", "--disposable", "--skip-git"], {});
+      if (!parsed.toolUseProfile.jev) throw new Error("jev flag");
+      if (!parsed.disposable) throw new Error("disposable");
+      console.log("ok");
+    `);
+    assert.match(output, /ok/);
+  });
+
+  it("forwards full-tools to copy_files spawn args [IMPL-TIED_FILES]", () => {
+    const output = runBootstrapModuleEval(`
+      import { runNewTiedClientPipeline } from "./tools/bootstrap/lib/new-tied-client-pipeline.mjs";
+      import path from "node:path";
+      import os from "node:os";
+      const calls = [];
+      const mockSpawn = (cmd, args, options) => {
+        calls.push({ cmd, args: [...args], cwd: options.cwd });
+        return { status: 0 };
+      };
+      const clientDir = path.join(os.tmpdir(), "tied-full-tools-forward");
+      const sourceRoot = ${JSON.stringify(repoRoot)};
+      const result = runNewTiedClientPipeline({
+        clientDir,
+        sourceRoot,
+        skipMcpEnable: true,
+        skipGit: true,
+        skipLint: true,
+        skipOnboardingAudit: true,
+        toolUseProfile: { fullTools: true, jev: true, dae: true, bbce: true, forceToolConfig: false },
+        spawn: mockSpawn,
+      });
+      if (!result.ok) throw new Error("pipeline failed");
+      if (!calls[0].args.includes("--full-tools")) throw new Error("missing --full-tools: " + JSON.stringify(calls[0].args));
+      console.log("ok");
+    `);
+    assert.match(output, /ok/);
+  });
+
   it("parseNewTiedClientArgs handles disposable and skip flags [IMPL-TIED_FILES]", () => {
     const output = runBootstrapModuleEval(`
       import { parseNewTiedClientArgs } from "./tools/bootstrap/new-tied-client.mjs";
@@ -73,10 +116,22 @@ describe("new-tied-client pipeline", () => {
     assert.match(output, /ok/);
   });
 
-  it("resolveCursorAgentCli prefers cursor when on PATH and honors TIED_CURSOR_AGENT_CMD [IMPL-TIED_FILES]", () => {
+  it("resolveCursorAgentCli prefers agent when on PATH and honors TIED_CURSOR_AGENT_CMD and CURSOR_CLI_NAME [IMPL-TIED_FILES] [REQ-TIED_SETUP]", () => {
     const output = runBootstrapModuleEval(`
       import { resolveCursorAgentCli } from "./tools/bootstrap/lib/new-tied-client-pipeline.mjs";
-      const mockSpawn = (cmd, args) => {
+      const bothOnPath = (cmd, args) => {
+        if (cmd === "where" || cmd === "where.exe" || cmd === "which") {
+          const target = args[0];
+          if (target === "agent" || target === "cursor") return { status: 0 };
+          return { status: 1 };
+        }
+        return { status: 0 };
+      };
+      const resolvedDefault = resolveCursorAgentCli({}, bothOnPath);
+      if (resolvedDefault !== "agent") throw new Error("expected agent default, got " + resolvedDefault);
+      const resolvedCursorPref = resolveCursorAgentCli({ CURSOR_CLI_NAME: "cursor" }, bothOnPath);
+      if (resolvedCursorPref !== "cursor") throw new Error("expected cursor pref, got " + resolvedCursorPref);
+      const onlyCursor = (cmd, args) => {
         if (cmd === "where" || cmd === "where.exe" || cmd === "which") {
           const target = args[0];
           if (target === "cursor") return { status: 0 };
@@ -84,9 +139,15 @@ describe("new-tied-client pipeline", () => {
         }
         return { status: 0 };
       };
-      const resolved = resolveCursorAgentCli({}, mockSpawn);
-      if (resolved !== "cursor") throw new Error("expected cursor, got " + resolved);
-      const overridden = resolveCursorAgentCli({ TIED_CURSOR_AGENT_CMD: "my-agent" }, mockSpawn);
+      const resolvedOnlyCursor = resolveCursorAgentCli({}, onlyCursor);
+      if (resolvedOnlyCursor !== "cursor") throw new Error("expected cursor only, got " + resolvedOnlyCursor);
+      const noneOnPath = (cmd, args) => {
+        if (cmd === "where" || cmd === "where.exe" || cmd === "which") return { status: 1 };
+        return { status: 0 };
+      };
+      const resolvedFallback = resolveCursorAgentCli({}, noneOnPath);
+      if (resolvedFallback !== "agent") throw new Error("expected agent fallback, got " + resolvedFallback);
+      const overridden = resolveCursorAgentCli({ TIED_CURSOR_AGENT_CMD: "my-agent" }, bothOnPath);
       if (overridden !== "my-agent") throw new Error("expected override");
       console.log("ok");
     `);
@@ -276,5 +337,39 @@ describe("new-tied-client integration", () => {
     assert.ok(fs.existsSync(path.join(clientPath, "tied", "requirements.yaml")));
     const auditReport = path.join(clientPath, "working", "tied-new-client-audit.v1.json");
     assert.ok(fs.existsSync(auditReport), "expected tied-new-client-audit.v1.json after disposable bootstrap");
+  });
+
+  it("disposable --full-tools seeds jev, dae, and BBCE starters [REQ-TIED_SETUP] [IMPL-TIED_FILES]", () => {
+    const testRoot = path.join(tempDir, "full-tools-root");
+    fs.mkdirSync(testRoot, { recursive: true });
+
+    const cli = path.join(repoRoot, "tools", "bootstrap", "new-tied-client.mjs");
+    const output = spawnSync(
+      process.execPath,
+      [
+        cli,
+        "--disposable",
+        "--full-tools",
+        "--test-root",
+        testRoot,
+        "--skip-mcp-enable",
+        "--skip-git",
+        "--skip-onboarding-audit",
+      ],
+      {
+        cwd: repoRoot,
+        encoding: "utf8",
+        env: { ...process.env, TIED_SOURCE_ROOT: repoRoot },
+      }
+    );
+
+    assert.strictEqual(output.status, 0, output.stderr || output.stdout);
+    const entries = fs.readdirSync(testRoot);
+    const clientPath = path.join(testRoot, entries[0]);
+    const yamlText = fs.readFileSync(path.join(clientPath, ".tied-yaml.yaml"), "utf8");
+    assert.match(yamlText, /plan_skills:\s*true/);
+    assert.match(yamlText, /crap_threshold:\s*30/);
+    assert.doesNotMatch(yamlText, /agentstream_gate_check/);
+    assert.ok(fs.existsSync(path.join(clientPath, "tied", "analysis", "slice-map.yaml")));
   });
 });

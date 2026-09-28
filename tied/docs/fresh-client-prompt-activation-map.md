@@ -10,14 +10,16 @@
 
 ### 1.1 What `test-new-tied-client` runs
 
-From [`scripts/build-commands.sh`](../../scripts/build-commands.sh) (`make_new_tied_client` → `_new_tied_test_client`):
+From [`scripts/build-commands.sh`](../../scripts/build-commands.sh) (`make_new_tied_client` → `_new_tied_test_client`, unified on `tools/bootstrap/new-tied-client.mjs`):
 
 | Step | Output / effect |
 |------|-----------------|
-| `copy_files.sh` (client root = target dir) | Full TIED client bundle: `AGENTS.md`, `.cursorrules`, `.tied-yaml.yaml` (template; see §3), `./tied/` indexes + methodology refresh, `./tied/docs/agent-req-implementation-checklist.yaml`, prompt-type skills under `.cursor/skills/`, bundled **tied-yaml** skill, `templates/impl-essence-pseudocode-template.md`, client vocab handoffs under `./tied/vocab/` |
+| `copy_files.sh` / bootstrap CLI (client root = target dir) | Full TIED client bundle: `AGENTS.md`, `.cursorrules`, `.tied-yaml.yaml` (template; see §3), `./tied/` indexes + methodology refresh, `./tied/docs/agent-req-implementation-checklist.yaml`, prompt-type skills under `.cursor/skills/`, bundled **tied-yaml** skill, `templates/impl-essence-pseudocode-template.md`, client vocab handoffs under `./tied/vocab/` |
+
+**Optional full-tools bootstrap:** `test-new-tied-client --full-tools` (or `copy_files.sh --full-tools`) seeds `jev.plan_skills: true`, optional `dae.crap_threshold: 30`, and starter files under `tied/analysis/` without changing the G4 audit boundary. Operators still add `JEV_API_KEY` in MCP env only. Re-bootstrap does not mutate an existing `.tied-yaml.yaml` unless `--force-tool-config`. See `tools/bootstrap/README.md`.
 | `scripts/lint_yaml.sh -F tied` | Canonical YAML lint on `./tied/` |
 | G4 onboarding audit | `working/tied-new-client-audit.v1.json` via `scripts/run-tied-new-client-audit.mjs` |
-| `agent mcp enable tied-yaml` | IDE MCP registration (when `agent` CLI present) |
+| ``${CURSOR_CLI_NAME:-agent} mcp enable tied-yaml`` | IDE MCP registration (`resolveCursorAgentCli`; default **`agent`**; override with `CURSOR_CLI_NAME` or `TIED_CURSOR_AGENT_CMD`) |
 | `git init` + baseline commit | Single commit; message from `tools/bootstrap/lib/tied-baseline-commit-message.mjs` |
 
 **Skip audit:** `TIED_SKIP_NEW_CLIENT_AUDIT=1` or `--skip-onboarding-audit` on `new-tied-client.mjs` harness path.
