@@ -1,0 +1,13 @@
+{
+  "allowed": true,
+  "ok": true,
+  "blocking": false,
+  "depth": "integrated",
+  "phase": "verification",
+  "diagnostics": ["finding_unresolved", "warn_not_success"],
+  "gate_receipt": {
+    "path": "working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/verification-2026-09-28T01-24-05-118Z.json",
+    "hash": "sha256:21c47c5c4372be266dcba6fece0e8107f58476b791e38f9c0a645f6b9106d2db"
+  },
+  "run_id": "w6-plan-skills-ver-20260927"
+}

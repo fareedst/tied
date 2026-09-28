@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "dry_run": false,
+  "passed_requirement_tokens": ["REQ-TIED_JEV_DECISION_COPROCESSOR"],
+  "passed_impl_tokens": ["IMPL-TIED_JEV_DECISION_COPROCESSOR"],
+  "requirements_set_implemented": ["REQ-TIED_JEV_DECISION_COPROCESSOR"],
+  "implementation_set_active": ["IMPL-TIED_JEV_DECISION_COPROCESSOR"],
+  "checklist_gate_phase": "verification",
+  "gate_receipt": "working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/verification-2026-09-28T01-24-05-118Z.json",
+  "run_id": "w6-plan-skills-ver-20260927"
+}

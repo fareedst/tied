@@ -1,6 +1,8 @@
-# Residuality
+# Residuality (canonical)
 
 **Scope:** Stressor-driven architecture-discovery vocabulary for TIED clients. Pilot reference: `PLAN-TIED-RESIDUALITY-ANALYSIS` (W1–W4 complete; W5 promotion applied 2026-09-27). Terms **do not** replace REQ/ARCH/IMPL authority.
+
+**Traceability:** [REQ-RESIDUALITY_STRESSOR_RECORD_VALIDATION](../requirements/REQ-RESIDUALITY_STRESSOR_RECORD_VALIDATION.yaml) · `PLAN-TIED-RESIDUALITY-ANALYSIS` · `stressor_residue_record_validate`
 
 **Status:** Promoted glossary (W5 build-plan) — VALIDATE at commit per `[PROC-VOCABULARY_INDEX]`. Machine validation: `[REQ-RESIDUALITY_STRESSOR_RECORD_VALIDATION]` / `stressor_residue_record_validate`.
 
@@ -58,3 +60,19 @@
 ## Integration recommendation (pilot exit)
 
 **Adopt (revise):** Optional risk-triggered `sub-residuality-analysis-pass` after impact-discovery when assurance profiles or sponsor flag warrant it. Default recommendation from pilot DoD item 12 — discovery feeds TIED authority; does not replace REQ/ARCH/IMPL or TDD/composition gates.
+
+## Alphabetical index
+
+| Term | Section |
+|------|---------|
+| attractor | Preferred terms vs synonyms |
+| candidate system | Preferred terms vs synonyms |
+| desirable residue | Preferred terms vs synonyms |
+| harmful residue | Preferred terms vs synonyms |
+| incidence matrix | Preferred terms vs synonyms |
+| naïve architecture | Preferred terms vs synonyms |
+| residue | Preferred terms vs synonyms |
+| stressor | Preferred terms vs synonyms |
+| stressor-residue claim | Preferred terms vs synonyms |
+| stressor-residue record | Preferred terms vs synonyms |
+| validation stressor | Preferred terms vs synonyms |

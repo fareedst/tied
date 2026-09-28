@@ -44,6 +44,7 @@ const SHARED_REFERENCES = [
   "tied-boundary.md",
   "non-tied-boundary.md",
   "guiding-vocab.md",
+  "jev-plan-skills-adjunct.md",
 ] as const;
 
 const repoRoot = path.resolve(process.cwd(), "..");
@@ -167,5 +168,19 @@ describe("prompt-type skill bundle", () => {
     assert.match(debug, /Capture Failure/);
     assert.match(nonTiedPlan, /non-tied-boundary\.md/);
     assert.match(nonTiedDebug, /non-tied-boundary\.md/);
+  });
+
+  it("links Jev plan-skills adjunct on four main plan skills only [REQ-TIED_JEV_DECISION_COPROCESSOR]", () => {
+    const bundleRoot = path.join(repoRoot, "tools", "bundled-prompt-type-skills");
+    const wired = ["plan-new-feature", "refine-plan", "build-plan", "plan-close-out"] as const;
+    for (const skill of wired) {
+      const content = fs.readFileSync(path.join(bundleRoot, skill, "SKILL.md"), "utf8");
+      assert.match(content, /jev-plan-skills-adjunct\.md/);
+    }
+    const debug = fs.readFileSync(path.join(bundleRoot, "debug", "SKILL.md"), "utf8");
+    assert.doesNotMatch(debug, /jev-plan-skills-adjunct\.md/);
+    const planCloseOut = fs.readFileSync(path.join(bundleRoot, "plan-close-out", "SKILL.md"), "utf8");
+    assert.match(planCloseOut, /close_out/);
+    assert.match(planCloseOut, /jev-plan-skills-adjunct\.md/);
   });
 });

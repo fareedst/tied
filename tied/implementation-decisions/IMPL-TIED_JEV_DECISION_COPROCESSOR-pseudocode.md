@@ -114,3 +114,47 @@ Grammar-Version: v2
   - EFFECTS: evaluateHarnessToolCall for blocking tools only (guard internal)
   - POST: block → abort turn exit 1 + DIAGNOSTIC; confirm/allow → stderr advisory only
   - FAILURE_MODES: dist/jev missing → gate null (preflight diagnostic only); never bypass checklist gates
+
+## RESOLVE_PLAN_SKILLS_CONFIG
+
+- [IMPL-TIED_JEV_DECISION_COPROCESSOR] [ARCH-TIED_JEV_DECISION_COPROCESSOR] [REQ-TIED_JEV_DECISION_COPROCESSOR] [REQ-PROMPT_TYPE_GLOBAL_SKILLS] How: W6 opt-in `jev.plan_skills` for explicit plan skills only; env override precedes `.tied-yaml.yaml`; never stores API key.
+- procedure RESOLVE_PLAN_SKILLS_CONFIG(project_root, env?):
+  - INPUT: `TIED_JEV_PLAN_SKILLS` when set → `1`/`true` on, `0`/`false` off, else off + `invalid_env_override`
+  - INPUT: else strict boolean `jev.plan_skills: true` in `.tied-yaml.yaml` → on; malformed → off + `invalid_plan_skills_flag`
+  - INPUT: `JEV_PLAN_SKILLS_TIMEOUT_MS` positive ≤60000 else default 3000 + diagnostic
+  - OUTPUT: `{ enabled, enabled_source, timeout_ms, diagnostics[] }`
+  - POST: independent from `jev.agentstream_harness`
+
+## ASSESS_JEV_SERVICE_READINESS
+
+- [IMPL-TIED_JEV_DECISION_COPROCESSOR] [ARCH-TIED_JEV_DECISION_COPROCESSOR] [REQ-TIED_JEV_DECISION_COPROCESSOR] How: W6 per-call readiness from config + key + bounded `jevDecide` result; key alone is not `ready`.
+- procedure ASSESS_JEV_SERVICE_READINESS(config, key_present, decide_result?, timed_out?):
+  - PRE: NOT config.enabled → `disabled` (no vendor call)
+  - PRE: config.enabled AND NOT key_present → `configured_no_credentials` (no vendor call)
+  - PRE: skipped `state_too_large` → `locally_skipped`
+  - PRE: timed_out OR `{ok:false,skipped:false}` OR malformed answers → `configured_unreachable`
+  - POST: `{ok:true}` with parseable answers → `ready`
+  - OUTPUT: readiness enum + optional `failure_class`, `skip_reason`
+
+## LOAD_MERGED_ROUTING_BASELINE
+
+- [IMPL-TIED_JEV_DECISION_COPROCESSOR] [ARCH-TIED_JEV_DECISION_COPROCESSOR] [REQ-TIED_JEV_DECISION_COPROCESSOR] How: W6 client then methodology routing rows; de-dupe by glossary basename; first-seen wins; shared by keyword PRELOAD parity and shadow.
+- procedure LOAD_MERGED_ROUTING_BASELINE(project_root, tied_base_path):
+  - EFFECTS: read client `tied/vocab/routing.md` if present else empty
+  - EFFECTS: read methodology `tied/methodology/vocab/routing.md`; missing → diagnostic `methodology_routing_missing`
+  - EFFECTS: PARSE_ROUTING_TABLE each; merge client then methodology; de-dupe by glossaryIdFromFile
+  - OUTPUT: `{ rows: RoutingRow[], diagnostics[] }`
+
+## RUN_PLAN_SKILLS_SHADOW
+
+- [IMPL-TIED_JEV_DECISION_COPROCESSOR] [ARCH-TIED_JEV_DECISION_COPROCESSOR] [REQ-TIED_JEV_DECISION_COPROCESSOR] [REQ-PROMPT_TYPE_GLOBAL_SKILLS] How: W6 advisory shadow after keyword PRELOAD; timeout-wrapped `jevDecide`; optional evidence under `working/{token}/jev/plan-skills/{run_id}/`; never mutates PRELOAD or gates.
+- procedure RUN_PLAN_SKILLS_SHADOW(input):
+  - INPUT: `skill` enum (four plan skills); `prompt` slice 4000; optional `plan_excerpt` slice 8000
+  - INPUT: optional `request_token` must pass isValidWorkingRequestToken for evidence
+  - PRE: CALL RESOLVE_PLAN_SKILLS_CONFIG
+  - PRE: CALL LOAD_MERGED_ROUTING_BASELINE → keyword_glossaries = MATCH_KEYWORD_GLOSSARIES
+  - PRE: readiness NOT `ready` → return jev-plan-skills-vocab-shadow.v1 without vendor call when disabled/no key
+  - EFFECTS: when `ready`, CALL SHADOW_VOCAB_PRELOAD logic on merged rows with timeout wrapper (no extra 502 retries)
+  - POST: `agrees` = vocabShadowAgrees; `service_reachable` only when readiness `ready`
+  - POST: `record_evidence` + valid token → write `vocab-shadow.v1.json` under contained path only
+  - FAILURE_MODES: catch all errors; redact excerpt ≤500; never throw to skill prose

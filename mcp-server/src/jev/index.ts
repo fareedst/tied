@@ -45,6 +45,16 @@ export {
   type LeafPromptType,
   type TiedApplicability,
 } from "./prompt-type-taxonomy.js";
+export { resolvePlanSkillsConfig, DEFAULT_PLAN_SKILLS_TIMEOUT_MS } from "./plan-skills-config.js";
+export { loadMergedRoutingBaseline, mergeRoutingRows } from "./merged-routing-baseline.js";
+export { buildPlanSkillsStatus } from "./plan-skills-status.js";
+export { runPlanSkillsShadow } from "./plan-skills-shadow.js";
+export {
+  PLAN_SKILL_VALUES,
+  PLAN_SKILLS_STATUS_SCHEMA,
+  PLAN_SKILLS_VOCAB_SHADOW_SCHEMA,
+  isPlanSkillName,
+} from "./plan-skills-types.js";
 export type {
   JevAnswer,
   JevDecideRequest,

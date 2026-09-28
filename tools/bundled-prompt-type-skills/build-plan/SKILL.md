@@ -30,8 +30,9 @@ Full TIED execute — [tied-boundary.md](../prompt-shared/tied-boundary.md). **O
 Execute the linked plan in this order:
 
 1. **Guiding vocab** — [guiding-vocab.md](../prompt-shared/guiding-vocab.md)
-2. **Plan** — [tied-plan-citdp-build.md](../prompt-shared/tied-plan-citdp-build.md)
-3. **Implement** — [tied-implement.md](../prompt-shared/tied-implement.md)
+2. **Optional Jev plan-skills adjunct** (after PRELOAD, before Plan) — [jev-plan-skills-adjunct.md](../prompt-shared/jev-plan-skills-adjunct.md)
+3. **Plan** — [tied-plan-citdp-build.md](../prompt-shared/tied-plan-citdp-build.md)
+4. **Implement** — [tied-implement.md](../prompt-shared/tied-implement.md)
 
 Select `profile_depth` (`minimal`, `integrated`, or `strict_candidate`) and
 gate policy before depth-dependent inquiry. The linked Tracker and CITDP are

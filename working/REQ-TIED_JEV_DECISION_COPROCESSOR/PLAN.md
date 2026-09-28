@@ -97,6 +97,7 @@ Post-close-out **`--live`** replays (**2026-09-26**): **W2** **70%** keyword vs 
 | **(a) Evidence hygiene** | Scoped commit of live calibration under `evidence/` (todo: `live-evidence-commit`) |
 | **(b) Runtime residual** | **`build-plan`** slice `w5-runtime-middleware` — per-turn harness in agentstream live loop |
 | **(c) Calibration doc** | Threshold / tie-break notes in working evidence or CITDP addendum only (todo: `threshold-tuning-doc`) |
+| **(d) Plan skills (W6)** | Cursor **`plan-new-feature` / `refine-plan` / `build-plan` / `plan-close-out`** Jev adjunct — [PLAN-W6-PLAN-SKILLS-WIRING.md](./PLAN-W6-PLAN-SKILLS-WIRING.md) (MCP + `prompt-shared`; advisory shadow/triage) |
 
 **Default:** **(a)** if preserving the live run in git; otherwise no action required.
 
@@ -206,6 +207,7 @@ flowchart LR
 - Commit **live** calibration artifacts (see **Recommended next (a)**) or leave untracked.
 - **`build-plan`** **`w5-runtime-middleware-slice`** only if per-turn interception is required before production harness default.
 - **`integrated` `depth_tier`** + adversarial artifacts before treating fail-closed W5 as production-default (vs opt-in lab).
+- **W6 plan-skill wiring** — proposed waves W6a–W6d in [PLAN-W6-PLAN-SKILLS-WIRING.md](./PLAN-W6-PLAN-SKILLS-WIRING.md) (optional; program remains closed until sponsor opens an implement gate).
 
 ---
 

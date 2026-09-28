@@ -4,9 +4,9 @@ REQ-TIED_JEV_DECISION_COPROCESSOR:
       author: "build-plan"
       date: "2026-09-26"
     last_updated:
-      author: "plan-close-out"
-      date: "2026-09-26"
-      reason: "W0-W5 core close-out after gates"
+      author: "build-plan"
+      date: "2026-09-27"
+      reason: "W6 plan-skills LEAP satisfaction criteria"
   name: "Jev decision coprocessor program"
   priority: "P2"
   rationale:
@@ -35,4 +35,7 @@ REQ-TIED_JEV_DECISION_COPROCESSOR:
     - criterion: "Vocab PRELOAD shadow compares Jev vs keyword routing without behavior change."
       id: "SC-JEV-W2-SHADOW"
       metric: "bun test mcp-server/src/jev/shadow-vocab-preload.test.ts"
+    - criterion: "W6 plan-skills adjunct: config/readiness, merged routing, MCP tools, and skill wiring with mocked fetch tests."
+      id: "SC-JEV-W6-PLAN-SKILLS"
+      metric: "bun test mcp-server/src/jev/plan-skills.test.ts"
   status: "Implemented"

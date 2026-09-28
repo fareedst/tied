@@ -1,0 +1,68 @@
+{
+  "receipt": {
+    "success": true,
+    "tool": "tied_adversarial_inquiry_run",
+    "request_token": "REQ-TIED_JEV_DECISION_COPROCESSOR",
+    "project_id": "stdd-jev-w6",
+    "run_id": "w6-plan-skills-pre-20260927",
+    "phase": "pre_implementation",
+    "scope": ["IMPL-TIED_JEV_DECISION_COPROCESSOR#RUN_PLAN_SKILLS_SHADOW#w6"],
+    "scope_hash": "eb223e296928890869e0a400455b562d42451d32988386f30d4e4a515ebbe211",
+    "artifact_hashes": {
+      "obligation-report.json": "414f076f1d1fdc588cc0d6b1b9e5abb8412e46673a8d73002e8ff8f40f1e0819",
+      "finding-ledger.jsonl": "13b7536a45cf9a21f90dc4b50a969446170f82210e12d7e7fcab6f1b28e20d39",
+      "gate-result.json": "6081d04da09c1577eea61e816e1d13a2c65e419cc255e13d4c5340433865e20e",
+      "evidence-provenance.json": "cf3eba676b13d31d68e5da87e5dda9f9a84cefd07f2347b2e6d45748c79deace"
+    }
+  },
+  "artifacts": {
+    "obligation-report.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_JEV_DECISION_COPROCESSOR",
+      "project_id": "stdd-jev-w6",
+      "run_id": "w6-plan-skills-pre-20260927",
+      "phase": "pre_implementation",
+      "scope_hash": "eb223e296928890869e0a400455b562d42451d32988386f30d4e4a515ebbe211",
+      "hash": "414f076f1d1fdc588cc0d6b1b9e5abb8412e46673a8d73002e8ff8f40f1e0819",
+      "path": "working/REQ-TIED_JEV_DECISION_COPROCESSOR/adversarial-inquiry/phase-pre_implementation/obligation-report.json"
+    },
+    "finding-ledger.jsonl": {
+      "valid": true,
+      "request_token": "REQ-TIED_JEV_DECISION_COPROCESSOR",
+      "project_id": "stdd-jev-w6",
+      "run_id": "w6-plan-skills-pre-20260927",
+      "phase": "pre_implementation",
+      "scope_hash": "eb223e296928890869e0a400455b562d42451d32988386f30d4e4a515ebbe211",
+      "hash": "13b7536a45cf9a21f90dc4b50a969446170f82210e12d7e7fcab6f1b28e20d39",
+      "path": "working/REQ-TIED_JEV_DECISION_COPROCESSOR/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl"
+    },
+    "gate-result.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_JEV_DECISION_COPROCESSOR",
+      "project_id": "stdd-jev-w6",
+      "run_id": "w6-plan-skills-pre-20260927",
+      "phase": "pre_implementation",
+      "scope_hash": "eb223e296928890869e0a400455b562d42451d32988386f30d4e4a515ebbe211",
+      "hash": "6081d04da09c1577eea61e816e1d13a2c65e419cc255e13d4c5340433865e20e",
+      "path": "working/REQ-TIED_JEV_DECISION_COPROCESSOR/adversarial-inquiry/phase-pre_implementation/gate-result.json"
+    },
+    "evidence-provenance.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_JEV_DECISION_COPROCESSOR",
+      "project_id": "stdd-jev-w6",
+      "run_id": "w6-plan-skills-pre-20260927",
+      "phase": "pre_implementation",
+      "scope_hash": "eb223e296928890869e0a400455b562d42451d32988386f30d4e4a515ebbe211",
+      "hash": "cf3eba676b13d31d68e5da87e5dda9f9a84cefd07f2347b2e6d45748c79deace",
+      "path": "working/REQ-TIED_JEV_DECISION_COPROCESSOR/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json"
+    }
+  },
+  "expected": {
+    "request_token": "REQ-TIED_JEV_DECISION_COPROCESSOR",
+    "project_id": "stdd-jev-w6",
+    "run_id": "w6-plan-skills-pre-20260927",
+    "phase": "pre_implementation",
+    "scope": ["IMPL-TIED_JEV_DECISION_COPROCESSOR#RUN_PLAN_SKILLS_SHADOW#w6"],
+    "scope_hash": "eb223e296928890869e0a400455b562d42451d32988386f30d4e4a515ebbe211"
+  }
+}

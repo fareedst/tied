@@ -1,0 +1,34 @@
+{
+  "schema_version": "checklist-gate-receipt.v1",
+  "phase": "close_out",
+  "timestamp": "2026-09-28T02:16:44.774Z",
+  "allowed": false,
+  "diagnostics": [
+    "receipt_identity_mismatch:scope_hash",
+    "expected_scope_hash_mismatch",
+    "receipt_scope_hash_mismatch",
+    "artifact:obligation-report.json_identity_mismatch:scope_hash",
+    "evidence_stale",
+    "warn_not_success"
+  ],
+  "depth": "integrated",
+  "input_hashes": {
+    "tracker_hash": "sha256:76c90031fdbb7d93af210842f1817cba4cb42e93aaf183a45fbec0e8d02c2ff4",
+    "citdp_hash": "sha256:160c18c69c173e56761cba5f42917c83985c05e956174a3c97b3947ae717dd22"
+  },
+  "gate_result": {
+    "allowed": false,
+    "ok": false,
+    "blocking": true,
+    "depth": "integrated",
+    "phase": "close_out",
+    "diagnostics": [
+      "receipt_identity_mismatch:scope_hash",
+      "expected_scope_hash_mismatch",
+      "receipt_scope_hash_mismatch",
+      "artifact:obligation-report.json_identity_mismatch:scope_hash",
+      "evidence_stale",
+      "warn_not_success"
+    ]
+  }
+}

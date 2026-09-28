@@ -1,0 +1,47 @@
+CITDP-REQ-TIED_JEV_DECISION_COPROCESSOR-W6-PLAN-SKILLS:
+  change_definition:
+    current_behavior: "Plan skills do not invoke Jev; no plan_skills flag or MCP tools."
+    desired_behavior: "Opt-in W6 plan-skills adjunct: tied_jev_status/shadow, merged routing baseline, four skill links."
+    non_goals:
+      - "Cursor IDE fail-closed middleware"
+      - "W6d tiebreak/triage"
+    success_criteria:
+      - "SC-JEV-W6-PLAN-SKILLS metric passes"
+    unchanged_behavior: "Keyword PRELOAD, checklist gates, W5 agentstream harness"
+  completion_criteria:
+    activation:
+      phase: "close_out"
+      project_id: "stdd-jev-w6"
+      request_token: "REQ-TIED_JEV_DECISION_COPROCESSOR"
+      run_id: "w6-plan-skills-close-20260927"
+      scope:
+        - "IMPL-TIED_JEV_DECISION_COPROCESSOR#RUN_PLAN_SKILLS_SHADOW#w6"
+      scope_hash: "eb223e296928890869e0a400455b562d42451d32988386f30d4e4a515ebbe211"
+    focused_tests: "bun test mcp-server/src/jev/plan-skills.test.ts; npm test in mcp-server"
+    verification: "tied_validate_consistency; tied_checklist_gate_validate close_out"
+  evidence:
+    profile_reference: "working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/w6-evidence-chain-profile.v1.json"
+  record_identity:
+    change_request_id: "REQ-TIED_JEV_DECISION_COPROCESSOR"
+    gate_policy: "advisory"
+    phase: "implement"
+    profile_depth: "integrated"
+    record_status: "ready_for_close_out"
+    recorded_at: "2026-09-27"
+    title: "W6 plan-skills wiring"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      depth_change_waiver: null
+      depth_tier: "integrated"
+      eligibility_triggers_matched:
+        - "external_network"
+        - "persistence"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "External network optional via Jev; persistence of supplemental plan-skills evidence."
+      research_profile: "integrated-agent"
+      strict_eligibility_prerequisites: []
+      sub_adversarial_inquiry_pass: "completed"

@@ -1,6 +1,8 @@
-# Behavior-Bounded Change Engineering (BBCE)
+# Behavior-Bounded Change Engineering (BBCE) (canonical)
 
 **Scope:** Change-locality and behavioral-slice vocabulary for TIED clients. Program reference: `PLAN-TIED-BBCE-ALIGNMENT` (W0–W4 advisory pilot). Terms **do not** replace REQ/ARCH/IMPL authority.
+
+**Traceability:** `PLAN-TIED-BBCE-ALIGNMENT` · [REQ-TIED_FIDELITY_RESEARCH](../requirements/REQ-TIED_FIDELITY_RESEARCH.yaml) (boundary / research profile contrast) · W3 analysis modules `bbce-shared-code-justification.ts` / `bbce-boundary-violation-report.ts`
 
 **W2 encodings:** Repo slice map [`../analysis/agentstream-slice-map.yaml`](../analysis/agentstream-slice-map.yaml) · declared surface example [`../analysis/examples/declared-change-surface.v1.example.yaml`](../analysis/examples/declared-change-surface.v1.example.yaml) · checklist optional field `declared_change_surface` · CITDP `risk_analysis.bbce_alignment.declared_change_surface_ref`.
 
@@ -66,3 +68,17 @@
 ## Integration recommendation (W0 default)
 
 **Adopt (revise):** Optional locality pass and metrics feeding existing checklist and plumb audit gates after W1 pilot calibration. Do not treat change locality as a CI hard fail or substitute for module validation and composition evidence.
+
+## Alphabetical index
+
+| Term | Section |
+|------|---------|
+| behavioral slice | Preferred terms vs synonyms |
+| blast radius | Preferred terms vs synonyms |
+| boundary crossing | Preferred terms vs synonyms |
+| boundary violation | Preferred terms vs synonyms |
+| change locality | Preferred terms vs synonyms |
+| declared change surface | Preferred terms vs synonyms |
+| owning slice | Preferred terms vs synonyms |
+| public behavioral boundary | Preferred terms vs synonyms |
+| shared mechanism | Preferred terms vs synonyms |

@@ -1,0 +1,78 @@
+{
+  "graph": {
+    "projectId": "stdd-jev-w6",
+    "criteria": [
+      {
+        "identity": {
+          "id": "REQ-TIED_JEV_DECISION_COPROCESSOR#SC-JEV-W6-PLAN-SKILLS",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "w6-rev",
+          "sourceRevision": "w6-src"
+        },
+        "architectureConstraintIds": ["arch-w6-plan-skills"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "arch-w6-plan-skills",
+        "implementationBlockIds": [
+          "IMPL-TIED_JEV_DECISION_COPROCESSOR#RESOLVE_PLAN_SKILLS_CONFIG#w6",
+          "IMPL-TIED_JEV_DECISION_COPROCESSOR#RUN_PLAN_SKILLS_SHADOW#w6"
+        ]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "IMPL-TIED_JEV_DECISION_COPROCESSOR#RESOLVE_PLAN_SKILLS_CONFIG#w6",
+          "kind": "block",
+          "name": "RESOLVE_PLAN_SKILLS_CONFIG",
+          "derivation": "content",
+          "revision": "w6-block",
+          "sourceRevision": "w6-src"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-TIED_JEV_DECISION_COPROCESSOR#RUN_PLAN_SKILLS_SHADOW#w6",
+          "kind": "block",
+          "name": "RUN_PLAN_SKILLS_SHADOW",
+          "derivation": "content",
+          "revision": "w6-block",
+          "sourceRevision": "w6-src"
+        }
+      }
+    ],
+    "evidenceLoci": []
+  },
+  "fidelity": {
+    "blockRevision": "w6-block",
+    "specification": [
+      {
+        "id": "w6-spec-1",
+        "kind": "behavior",
+        "value": "Plan-skills shadow is advisory and never mutates PRELOAD or checklist gates.",
+        "order": 1
+      }
+    ],
+    "testEvidence": [
+      {
+        "id": "tev-1",
+        "kind": "test",
+        "value": "bun test mcp-server/src/jev/plan-skills.test.ts",
+        "order": 1
+      }
+    ],
+    "productionEvidence": []
+  },
+  "scope": [
+    "IMPL-TIED_JEV_DECISION_COPROCESSOR#RESOLVE_PLAN_SKILLS_CONFIG#w6",
+    "IMPL-TIED_JEV_DECISION_COPROCESSOR#RUN_PLAN_SKILLS_SHADOW#w6"
+  ],
+  "policy": "advisory",
+  "repository_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "request_token": "REQ-TIED_JEV_DECISION_COPROCESSOR",
+  "phase": "pre_implementation",
+  "run_id": "w6-plan-skills-pre-20260927"
+}

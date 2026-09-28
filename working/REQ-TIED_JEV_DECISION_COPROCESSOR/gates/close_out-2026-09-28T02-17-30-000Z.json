@@ -1,0 +1,26 @@
+{
+  "schema_version": "checklist-gate-receipt.v1",
+  "phase": "close_out",
+  "timestamp": "2026-09-28T02:17:30.000Z",
+  "allowed": true,
+  "diagnostics": [
+    "warn_not_success"
+  ],
+  "depth": "integrated",
+  "run_id": "w6-plan-skills-close-20260927",
+  "input_hashes": {
+    "tracker_hash": "sha256:76c90031fdbb7d93af210842f1817cba4cb42e93aaf183a45fbec0e8d02c2ff4",
+    "citdp_hash": "sha256:6ad131b2231973bebced9ca34840ad94c1e8d345d98e721b117aeb3c8af00eb8"
+  },
+  "gate_result": {
+    "allowed": true,
+    "ok": true,
+    "blocking": false,
+    "depth": "integrated",
+    "phase": "close_out",
+    "diagnostics": [
+      "warn_not_success"
+    ]
+  },
+  "evidence_ref": "working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/close-out-gates-2026-09-27.json"
+}

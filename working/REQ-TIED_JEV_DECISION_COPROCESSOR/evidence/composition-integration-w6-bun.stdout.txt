@@ -1,0 +1,37 @@
+bun test v1.3.9 (cf6cdbbb)
+
+src/jev/plan-skills.test.ts:
+(pass) W6 plan-skills config T-CFG > T-CFG-01 absent flag → disabled + no fetch path [4.08ms]
+(pass) W6 plan-skills config T-CFG > T-CFG-02 env true/false precedence over yaml [1.24ms]
+(pass) W6 plan-skills config T-CFG > T-CFG-03 invalid env override → off + diagnostic [0.47ms]
+(pass) W6 plan-skills config T-CFG > T-CFG-04 yaml strict boolean true enables [1.55ms]
+(pass) W6 plan-skills config T-CFG > T-CFG-05 malformed yaml flag → off + diagnostic [0.52ms]
+(pass) W6 plan-skills config T-CFG > T-CFG-06 whitespace-only key → configured_no_credentials [0.56ms]
+(pass) W6 plan-skills config T-CFG > T-CFG-07 timeout default and invalid override [0.03ms]
+(pass) W6 plan-skills config T-CFG > T-CFG-08 timeout → configured_unreachable [52.58ms]
+(pass) W6 merged routing T-RT > T-RT-01..04 merge client+methodology first-wins [0.23ms]
+(pass) W6 merged routing T-RT > T-RT-02 missing client OK [4.68ms]
+(pass) W6 merged routing T-RT > T-RT-03 missing methodology diagnostic [0.67ms]
+(pass) W6 merged routing T-RT > T-RT-05 keyword parity with merged rows [0.07ms]
+(pass) W6 shadow/evidence T-SH > T-SH-01 agrees uses vocabShadowAgrees [0.06ms]
+(pass) W6 shadow/evidence T-SH > T-SH-02 invalid token rejects evidence [0.95ms]
+(pass) W6 shadow/evidence T-SH > T-SH-03 invalid request token rejected for evidence
+(pass) W6 shadow/evidence T-SH > T-SH-04 truncate flags [0.77ms]
+(pass) W6 shadow/evidence T-SH > T-SH-05 record_evidence false writes zero files [1.20ms]
+(pass) W6 shadow/evidence T-SH > T-SH-06 502 retry then 200 ready [51.31ms]
+(pass) W6 MCP composition T-MCP > T-MCP-01 tools registered in allTools [0.38ms]
+(pass) W6 MCP composition T-MCP > T-MCP-02 status no probe no secret [1.21ms]
+(pass) W6 MCP composition T-MCP > T-MCP-03 invalid skill rejected without fetch [0.44ms]
+(pass) W6 gate ordering T-GATE > T-GATE-01 no tied_jev_adversarial_triage_pilot in W6 core tools [0.05ms]
+(pass) W6 gate ordering T-GATE > T-GATE-02 shadow proof_boundary denies gate authority [0.66ms]
+
+src/e2e/prompt-type-skills.test.ts:
+(pass) prompt-type skill bundle > validates the tracked canonical bundle [REQ-PROMPT_TYPE_GLOBAL_SKILLS] [IMPL-PROMPT_TYPE_GLOBAL_SKILLS] [2.34ms]
+(pass) prompt-type skill bundle > installs the canonical bundle while preserving unrelated client tooling [REQ-PROMPT_TYPE_GLOBAL_SKILLS] [IMPL-PROMPT_TYPE_GLOBAL_SKILLS] [396.90ms]
+(pass) prompt-type skill bundle > uses attribute-preserving copy invocations for managed bootstrap artifacts [REQ-TIED_SETUP] [IMPL-TIED_FILES] [0.24ms]
+(pass) prompt-type skill bundle > preserves prompt-type workflow-specific contracts [REQ-PROMPT_TYPE_GLOBAL_SKILLS] [0.22ms]
+(pass) prompt-type skill bundle > links Jev plan-skills adjunct on four main plan skills only [REQ-TIED_JEV_DECISION_COPROCESSOR] [0.20ms]
+
+ 28 pass
+ 0 fail
+Ran 28 tests across 2 files. [670.00ms]

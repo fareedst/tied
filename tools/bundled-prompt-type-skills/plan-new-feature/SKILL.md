@@ -31,8 +31,9 @@ Full TIED tracking — see [tied-boundary.md](../prompt-shared/tied-boundary.md)
 Process the invocation remainder in this order:
 
 1. **Refine** — [tied-refine.md](../prompt-shared/tied-refine.md) (default variant)
-2. **Plan** — [tied-plan-citdp.md](../prompt-shared/tied-plan-citdp.md)
-3. **Implement** — [tied-implement.md](../prompt-shared/tied-implement.md)
+2. **Optional Jev plan-skills adjunct** (after PRELOAD) — [jev-plan-skills-adjunct.md](../prompt-shared/jev-plan-skills-adjunct.md)
+3. **Plan** — [tied-plan-citdp.md](../prompt-shared/tied-plan-citdp.md)
+4. **Implement** — [tied-implement.md](../prompt-shared/tied-implement.md)
 
 For behavior-changing work, select `profile_depth` (`minimal`, `integrated`, or
 `strict_candidate`) and the gate policy during impact discovery, before any

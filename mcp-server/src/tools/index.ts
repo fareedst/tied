@@ -134,6 +134,7 @@ import { runClaimsEvidenceReviewMcp } from "../claims-evidence-review/mcp-handle
 import { collectChecklistActivation } from "../checklist-activation-collect.js";
 import { collectEnvelopeGapReport } from "../request-evidence-envelope/batch-collect.js";
 import { backfillRequestEvidenceEnvelope } from "../request-evidence-envelope/backfill.js";
+import { jevPlanSkillsTools } from "./jev-plan-skills-tools.js";
 import { buildRequestEvidenceEnvelope } from "../request-evidence-envelope/build.js";
 import { patchRequestEvidenceEnvelope } from "../request-evidence-envelope/patch.js";
 import { validateRequestEvidenceEnvelope } from "../request-evidence-envelope/validate.js";
@@ -3284,4 +3285,5 @@ export const allTools = [
       }
     },
   },
+  ...jevPlanSkillsTools,
 ];

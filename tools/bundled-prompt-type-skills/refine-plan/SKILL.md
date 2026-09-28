@@ -30,8 +30,9 @@ Full TIED tracking — [tied-boundary.md](../prompt-shared/tied-boundary.md).
 Improve the linked plan in this order:
 
 1. **Refine** — [tied-refine.md](../prompt-shared/tied-refine.md)
-2. **Plan** — [tied-plan-citdp.md](../prompt-shared/tied-plan-citdp.md)
-3. **Implement** — [tied-implement.md](../prompt-shared/tied-implement.md)
+2. **Optional Jev plan-skills adjunct** (after PRELOAD) — [jev-plan-skills-adjunct.md](../prompt-shared/jev-plan-skills-adjunct.md)
+3. **Plan** — [tied-plan-citdp.md](../prompt-shared/tied-plan-citdp.md)
+4. **Implement** — [tied-implement.md](../prompt-shared/tied-implement.md)
 
 When scope, depth, or gate policy changes, invalidate dependent downstream
 Tracker dispositions and evidence, then re-run the applicable gate. Select

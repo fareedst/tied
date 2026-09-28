@@ -1,0 +1,83 @@
+{
+  "graph": {
+    "projectId": "stdd-jev-w6",
+    "criteria": [
+      {
+        "identity": {
+          "id": "REQ-TIED_JEV_DECISION_COPROCESSOR#SC-JEV-W6-PLAN-SKILLS",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "w6-ver-rev",
+          "sourceRevision": "w6-src"
+        },
+        "architectureConstraintIds": ["arch-w6-plan-skills"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "arch-w6-plan-skills",
+        "implementationBlockIds": [
+          "IMPL-TIED_JEV_DECISION_COPROCESSOR#RESOLVE_PLAN_SKILLS_CONFIG#w6",
+          "IMPL-TIED_JEV_DECISION_COPROCESSOR#RUN_PLAN_SKILLS_SHADOW#w6"
+        ]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "IMPL-TIED_JEV_DECISION_COPROCESSOR#RESOLVE_PLAN_SKILLS_CONFIG#w6",
+          "kind": "block",
+          "name": "RESOLVE_PLAN_SKILLS_CONFIG",
+          "derivation": "content",
+          "revision": "w6-block",
+          "sourceRevision": "w6-src"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-TIED_JEV_DECISION_COPROCESSOR#RUN_PLAN_SKILLS_SHADOW#w6",
+          "kind": "block",
+          "name": "RUN_PLAN_SKILLS_SHADOW",
+          "derivation": "content",
+          "revision": "w6-block",
+          "sourceRevision": "w6-src"
+        }
+      }
+    ],
+    "evidenceLoci": []
+  },
+  "fidelity": {
+    "blockRevision": "w6-block",
+    "specification": [
+      {
+        "id": "w6-ver-spec-1",
+        "kind": "behavior",
+        "value": "Full mcp-server npm test passes; plan-skills adjunct is advisory-only.",
+        "order": 1
+      }
+    ],
+    "testEvidence": [
+      {
+        "id": "tev-ver-1",
+        "kind": "test",
+        "value": "npm test mcp-server 1083 pass 2026-09-27",
+        "order": 1
+      },
+      {
+        "id": "tev-ver-2",
+        "kind": "test",
+        "value": "mcp-server/src/jev/plan-skills.test.ts",
+        "order": 2
+      }
+    ],
+    "productionEvidence": []
+  },
+  "scope": [
+    "IMPL-TIED_JEV_DECISION_COPROCESSOR#RUN_PLAN_SKILLS_SHADOW#w6"
+  ],
+  "policy": "advisory",
+  "repository_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "request_token": "REQ-TIED_JEV_DECISION_COPROCESSOR",
+  "phase": "verification",
+  "run_id": "w6-plan-skills-ver-20260927"
+}

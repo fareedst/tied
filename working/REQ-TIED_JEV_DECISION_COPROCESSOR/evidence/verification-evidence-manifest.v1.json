@@ -1,115 +1,61 @@
 {
   "schema_version": "verification-evidence-manifest.v1",
-  "run_id": "jev-w5-middleware-git-hygiene-2026-09-26",
-  "commit": "811f48f68504fa0570327f093802fbd69f65b8f1",
+  "run_id": "w6-plan-skills-ver-20260927",
+  "commit": "9e7931ebd507ddb25fe2cbb091d05ee03bd23015",
   "environment": {
     "node": "v25.9.0",
     "bun": "1.3.9"
   },
   "command_results": [
     {
-      "id": "jev-unit",
-      "command": [
-        "bun",
-        "test",
-        "src/jev/"
-      ],
-      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
-      "exit_code": 0,
-      "result": "passed",
-      "artifacts": [
-        "working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/jev-unit.stdout.txt"
-      ]
-    },
-    {
-      "id": "agentstream-jev-preflight",
-      "command": [
-        "bun",
-        "test",
-        "src/jev-harness-preflight.test.ts"
-      ],
-      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/packages/agentstream",
-      "exit_code": 0,
-      "result": "passed",
-      "artifacts": [
-        "working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/agentstream-jev-preflight.stdout.txt"
-      ]
-    },
-    {
-      "id": "agentstream-jev-live-tool-gate",
-      "command": [
-        "bun",
-        "test",
-        "src/jev-harness-preflight.test.ts",
-        "src/jev-harness-live-tool-gate.test.ts"
-      ],
-      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/packages/agentstream",
-      "exit_code": 0,
-      "result": "passed",
-      "artifacts": [
-        "working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/jev-harness-live-tool-gate.stdout.txt"
-      ]
-    },
-    {
-      "id": "mcp-server-build",
-      "command": [
-        "npm",
-        "run",
-        "build"
-      ],
+      "id": "plan-skills-unit",
+      "command": ["bun", "test", "src/jev/plan-skills.test.ts"],
       "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
       "exit_code": 0,
       "result": "passed",
       "artifacts": []
     },
     {
-      "id": "ts-check",
-      "command": [
-        "bunx",
-        "tsc",
-        "-b"
-      ],
+      "id": "mcp-server-regression",
+      "command": ["npm", "test"],
       "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
       "exit_code": 0,
       "result": "passed",
       "artifacts": [
-        "working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/tsc-b.stdout.txt"
+        "working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/npm-test-full-2026-09-27.stdout.txt"
       ]
     },
     {
-      "id": "mcp-server-regression",
-      "command": [
-        "npm",
-        "test"
-      ],
-      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
+      "id": "tied-validate-consistency",
+      "command": ["tied-cli", "tied_validate_consistency"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
       "exit_code": 0,
       "result": "passed",
       "artifacts": [
-        "working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/npm-test.stdout.txt"
+        "working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/w6-tied-validate-consistency-2026-09-27.json"
       ]
     }
   ],
   "quality_rows": [
     {
-      "id": "jev-w1-w5",
-      "attribute": "decision_coprocessor_program",
+      "id": "jev-w6-plan-skills",
+      "attribute": "plan_skills_wiring",
       "applicability": "applicable",
-      "rationale": "W1-W5 unit, harness preflight, and live tool gate tests",
+      "rationale": "W6 plan-skills MCP tools, shadow routing, bundled adjunct",
       "evidence_method": "automated_test",
-      "command_or_test": "bun test agentstream jev-harness-*",
+      "command_or_test": "plan-skills.test.ts + full npm test",
       "result": "passed",
-      "owner": "plan-close-out"
+      "owner": "verification-gate"
     },
     {
-      "id": "jev-w5-live-middleware",
-      "attribute": "agentstream_live_tool_gate",
+      "id": "jev-w6-adversarial-verification",
+      "attribute": "integrated_adversarial_inquiry",
       "applicability": "applicable",
-      "rationale": "Per-turn evaluateStreamToolProposal wired in live loop (git-hygiene follow-on)",
-      "evidence_method": "automated_test",
-      "command_or_test": "jev-harness-live-tool-gate.test.ts",
+      "rationale": "verification phase run_id w6-plan-skills-ver-20260927",
+      "evidence_method": "tied_adversarial_inquiry_run",
+      "command_or_test": "phase-verification four artifacts",
       "result": "passed",
-      "owner": "plan-close-out"
+      "owner": "verification-gate"
     }
   ],
   "covered_tokens": [
@@ -118,10 +64,9 @@
     "IMPL-TIED_JEV_DECISION_COPROCESSOR"
   ],
   "proof_boundaries": [
-    "No live Jev API in CI (JEV_API_KEY unset)",
-    "W5 per-turn Shell middleware implemented in @tied/agentstream live loop; live calibration logs committed separately",
-    "Integrated adversarial inquiry not_applicable at minimal depth",
-    "Program REQ/CITDP status unchanged (closed Implemented)"
+    "W6d tiebreak/triage deferred",
+    "Jev live API not required for unit/regression proof",
+    "Program parent REQ may already be Implemented; W6 scoped via SC-JEV-W6-PLAN-SKILLS"
   ],
   "human_decisions": {
     "stored_separately": true,
