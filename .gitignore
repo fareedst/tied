@@ -141,6 +141,7 @@ working/client-*/
 working/**/tied-mcp-metrics*.jsonl
 working/**/evidence-manifest.json
 # Per-REQ close-out evidence (regenerate via run-close-out-gates.mjs / quality_evidence_collect; local only)
+working/**/evidence/close-out-gates-*.json
 working/**/evidence/quality-manifest/
 working/**/evidence/*-evidence.md
 working/**/evidence/not-applicable-receipt.v1.json
@@ -188,6 +189,9 @@ working/**/evidence/request-evidence-envelope.v1.json
 !working/PLAN-TIED-BBCE-ALIGNMENT/evidence/request-evidence-envelope.v1.json
 !working/PLAN-TIED-BBCE-ALIGNMENT/evidence/request-evidence-envelope-waiver.v1.json
 !working/PLAN-TIED-BBCE-ALIGNMENT/evidence/close-out-activation-collect.json
+!working/REQ-TIED_SETUP/evidence/request-evidence-envelope.v1.json
+!working/REQ-TIED_SETUP/evidence/not-applicable-receipt.v1.json
+!working/REQ-TIED_SETUP/evidence/close-out-gates-2026-09-28.json
 !working/PLAN-TIED-BBCE-ALIGNMENT/gates/
 !working/PLAN-TIED-BBCE-ALIGNMENT/gates/**
 !working/PLAN-TIED-BBCE-ALIGNMENT/gates/close_out-*.json

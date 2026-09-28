@@ -27,6 +27,7 @@ CITDP-REQ-TIED_SETUP-COMBINED-CLOSE-OUT:
       single_combined_commit: true
   evidence:
     commands:
+      - "node --test tools/bootstrap/lib/mcp-config.test.mjs"
       - "node --experimental-strip-types --test mcp-server/src/e2e/new-tied-client.test.ts"
       - "node --test tools/bootstrap/lib/client-tool-use-bootstrap.test.mjs"
     proof_boundaries:
@@ -78,6 +79,7 @@ CITDP-REQ-TIED_SETUP-COMBINED-CLOSE-OUT:
       - "baseline-functional"
   test_strategy:
     commands:
+      - "node --test tools/bootstrap/lib/mcp-config.test.mjs"
       - "node --experimental-strip-types --test mcp-server/src/e2e/new-tied-client.test.ts"
       - "node --test tools/bootstrap/lib/client-tool-use-bootstrap.test.mjs"
     matrix_notes: "run-close-out-gates.mjs accepts one --citdp-path; use this combined CITDP (merged commands) OR CURSOR-CLI-NAME CITDP with full-tools evidence_refs on tracker before --sync-dispositions.\nEnvelope path: working/REQ-TIED_SETUP/evidence/request-evidence-envelope.v1.json (build/validate at close_out).\n"

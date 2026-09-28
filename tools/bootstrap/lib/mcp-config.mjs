@@ -7,6 +7,27 @@ import path from "node:path";
 import { jsonSafeAbsolute } from "./paths.mjs";
 import { sayOk } from "./console.mjs";
 
+/**
+ * [IMPL-TIED_FILES] [IMPL-MCP_USAGE_METRICS] [REQ-TIED_SETUP] [REQ-MCP_USAGE_METRICS]
+ * Disposable clients under dev/test/{id} or unix-seconds dir names ignore inherited TIED_MCP_METRICS_CLIENT.
+ * @param {string} projectRoot
+ * @param {NodeJS.ProcessEnv} [env]
+ */
+export function resolveBootstrapMetricsClient(projectRoot, env = process.env) {
+  const basename = path.basename(projectRoot);
+  const normalized = path.normalize(projectRoot).split(path.sep).join("/");
+  const underDevTest = normalized.includes(`/dev/test/${basename}`);
+  const unixSecondsDir = /^\d{10}$/.test(basename);
+  if (underDevTest || unixSecondsDir) {
+    return basename;
+  }
+  const override = env.TIED_MCP_METRICS_CLIENT?.trim();
+  if (override) {
+    return override;
+  }
+  return basename;
+}
+
 export function refreshTiedMcpJson({
   mcpJsonPath,
   tiedMcpIndexJs,
@@ -61,13 +82,14 @@ export function initializeTiedMcpConfig(projectRoot, tiedRepoRoot, env = process
     );
   }
   const collectMetrics = env.TIED_MCP_COLLECT_METRICS === "1";
+  const projectBasename = path.basename(projectRoot);
   refreshTiedMcpJson({
     mcpJsonPath: mcpJson,
     tiedMcpIndexJs: mcpServerDist,
     tiedBasePath: path.join(projectRoot, "tied"),
     collectMetrics,
-    metricsClient: env.TIED_MCP_METRICS_CLIENT,
-    projectBasename: path.basename(projectRoot),
+    metricsClient: resolveBootstrapMetricsClient(projectRoot, env),
+    projectBasename,
   });
   sayOk(`Initialized ${mcpJson} mcpServers.tied-yaml (TIED_MCP dist + project TIED_BASE_PATH).`);
   return { initialized: true };
@@ -83,13 +105,14 @@ export function initializeClaudeMcpConfig(projectRoot, tiedRepoRoot, options = {
   const mcpJson = path.join(projectRoot, ".mcp.json");
   assertMcpPrerequisite(tiedRepoRoot);
   const mcpServerDist = path.join(tiedRepoRoot, "mcp-server", "dist", "index.js");
+  const projectBasename = path.basename(projectRoot);
   const refreshArgs = {
     mcpJsonPath: mcpJson,
     tiedMcpIndexJs: mcpServerDist,
     tiedBasePath: path.join(projectRoot, "tied"),
     collectMetrics: env.TIED_MCP_COLLECT_METRICS === "1",
-    metricsClient: env.TIED_MCP_METRICS_CLIENT,
-    projectBasename: path.basename(projectRoot),
+    metricsClient: resolveBootstrapMetricsClient(projectRoot, env),
+    projectBasename,
     harnessLabel,
   };
 

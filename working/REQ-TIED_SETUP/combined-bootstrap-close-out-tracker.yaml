@@ -16,6 +16,7 @@ profile_depth: "minimal"
 request: "REQ-TIED_SETUP"
 source_plan: "/Users/fareed/.cursor/plans/bootstrap_combined_close-out_a0b4d717.plan.md"
 status: "close_out_complete"
+combined_close_out_run_id: "close-out-combined-bootstrap-metrics-20260928"
 steps:
   - disposition: "completed"
     evidence_refs:
@@ -35,6 +36,8 @@ steps:
   - disposition: "completed"
     evidence_refs:
       - "tools/bootstrap/lib/client-tool-use-bootstrap.mjs"
+      - "tools/bootstrap/lib/mcp-config.mjs"
+      - "tools/bootstrap/lib/mcp-config.test.mjs"
       - "tools/bootstrap/lib/new-tied-client-pipeline.mjs"
       - "working/REQ-TIED_SETUP/CITDP-REQ-TIED_SETUP-CURSOR-CLI-NAME.yaml"
       - "working/REQ-TIED_SETUP/CITDP-REQ-TIED_SETUP-FULL-TOOLS.yaml"

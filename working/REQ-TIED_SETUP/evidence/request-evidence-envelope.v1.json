@@ -1,0 +1,69 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-09-28T14:14:30.827Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-TIED_SETUP",
+    "project_id": "af8451e933f573ec",
+    "depth_tier": "minimal",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [],
+  "artifacts": [
+    {
+      "kind": "not_applicable_receipt",
+      "schema_version": "not-applicable-receipt.v1",
+      "path": "working/REQ-TIED_SETUP/evidence/not-applicable-receipt.v1.json",
+      "content_hash": "sha256:20db02043f8f8c27c337fed43428a6e9ae42921d79819ac0a3c8905e586add56",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "working/REQ-TIED_SETUP/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:0796ee096cd7841d6bdcf66b1d44abd656120474f31a04dcf539746e073a459c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_SETUP/evidence/close-out-gates-2026-09-28.json",
+      "content_hash": "sha256:ebb3ea878916d59b7186d3dc3ae8ad45bcf297a9424e6ef6ae9864d76df0f523",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_SETUP/evidence/cursor-cli-name-sub-adversarial-na.md",
+      "content_hash": "sha256:66bbe3a2b659efb8e3707103bafadf4b9e13a1987be2d5c72e1de3535a5a34e4",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": null,
+    "tracker_hash": null,
+    "citdp_path": null,
+    "evidence_chain_profile_path": null
+  },
+  "gaps": []
+}

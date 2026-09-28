@@ -372,4 +372,48 @@ describe("new-tied-client integration", () => {
     assert.doesNotMatch(yamlText, /agentstream_gate_check/);
     assert.ok(fs.existsSync(path.join(clientPath, "tied", "analysis", "slice-map.yaml")));
   });
+
+  it("disposable bootstrap sets MCP metrics client to timestamp dir not inherited shell label [REQ-TIED_SETUP] [REQ-MCP_USAGE_METRICS] [IMPL-TIED_FILES]", () => {
+    const testRoot = path.join(tempDir, "metrics-client-root");
+    fs.mkdirSync(testRoot, { recursive: true });
+
+    const cli = path.join(repoRoot, "tools", "bootstrap", "new-tied-client.mjs");
+    const output = spawnSync(
+      process.execPath,
+      [
+        cli,
+        "--disposable",
+        "--test-root",
+        testRoot,
+        "--skip-mcp-enable",
+        "--skip-git",
+        "--skip-onboarding-audit",
+        "--skip-lint",
+      ],
+      {
+        cwd: repoRoot,
+        encoding: "utf8",
+        env: {
+          ...process.env,
+          TIED_SOURCE_ROOT: repoRoot,
+          TIED_MCP_COLLECT_METRICS: "1",
+          TIED_MCP_METRICS_CLIENT: "stdd-dev",
+        },
+      },
+    );
+
+    assert.strictEqual(output.status, 0, output.stderr || output.stdout);
+    const entries = fs.readdirSync(testRoot);
+    assert.match(entries[0], /^\d{10}$/);
+    const clientId = entries[0];
+    const clientPath = path.join(testRoot, clientId);
+    const cursorMcp = JSON.parse(
+      fs.readFileSync(path.join(clientPath, ".cursor", "mcp.json"), "utf8"),
+    ) as { mcpServers: { "tied-yaml": { env: Record<string, string> } } };
+    const claudeMcp = JSON.parse(fs.readFileSync(path.join(clientPath, ".mcp.json"), "utf8")) as {
+      mcpServers: { "tied-yaml": { env: Record<string, string> } };
+    };
+    assert.strictEqual(cursorMcp.mcpServers["tied-yaml"].env.TIED_MCP_METRICS_CLIENT, clientId);
+    assert.strictEqual(claudeMcp.mcpServers["tied-yaml"].env.TIED_MCP_METRICS_CLIENT, clientId);
+  });
 });

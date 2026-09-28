@@ -337,6 +337,26 @@ procedure REPORT_MODIFIED_PATHS(result):
   EMIT modification summary
 
 
+procedure RESOLVE_BOOTSTRAP_METRICS_CLIENT(projectRoot, env):
+  # [IMPL-TIED_FILES] [IMPL-MCP_USAGE_METRICS] [REQ-TIED_SETUP] [REQ-MCP_USAGE_METRICS]
+  # How: Derive TIED_MCP_METRICS_CLIENT for newly generated MCP config so disposable bootstrap dirs are not labeled with the operator shell override.
+  Contract:
+    INPUT: projectRoot; process environment
+    OUTPUT: non-empty metrics client label string
+    DATA: projectRoot basename; normalized path; optional TIED_MCP_METRICS_CLIENT env
+    CONTROL: when path is under dev/test/{basename} or basename is ten-digit unix seconds, return basename and ignore inherited env; else honor non-empty env override or basename
+    PRE: projectRoot is a resolvable directory path
+    POST: returned label is non-empty and stable for the disposable vs named-project rules above
+    EFFECTS: none — pure derivation
+    TERMINATION: total
+  basename := basename(projectRoot)
+  IF normalized(projectRoot) contains "/dev/test/" + basename OR basename matches ten-digit unix seconds:
+    RETURN basename
+  IF env.TIED_MCP_METRICS_CLIENT is non-empty:
+    RETURN trim(env.TIED_MCP_METRICS_CLIENT)
+  RETURN basename
+
+
 procedure INITIALIZE_TIED_MCP_CONFIG(projectRoot):
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS] [IMPL-MCP_USAGE_METRICS]
   # How: Create the default TIED MCP configuration only when the client has no .cursor/mcp.json; when TIED_MCP_COLLECT_METRICS is exactly 1, add metrics fields and derive the client label from an explicit override or the project basename; preserve an existing configuration byte-for-byte.
@@ -344,7 +364,7 @@ procedure INITIALIZE_TIED_MCP_CONFIG(projectRoot):
     INPUT: projectRoot; built TIED MCP server path; absolute project TIED base path; optional TIED_MCP_COLLECT_METRICS and TIED_MCP_METRICS_CLIENT environment values
     OUTPUT: newly initialized projectRoot/.cursor/mcp.json or unchanged existing configuration
     DATA: MCP server command, TIED_MCP_BIN args, TIED_BASE_PATH environment, optional TIED_MCP_COLLECT_METRICS and TIED_MCP_METRICS_CLIENT environment values, existing client MCP configuration
-    CONTROL: initialize only when .cursor/mcp.json is absent; when collection equals 1, set TIED_MCP_COLLECT_METRICS to 1 and use a non-empty TIED_MCP_METRICS_CLIENT override or basename(projectRoot); never merge, rewrite, or normalize an existing file
+    CONTROL: initialize only when .cursor/mcp.json is absent; when collection equals 1, set TIED_MCP_COLLECT_METRICS to 1 and derive TIED_MCP_METRICS_CLIENT via disposable-aware resolution (dev/test/{id} or ten-digit unix-seconds directory names use that basename and ignore inherited shell env; otherwise non-empty TIED_MCP_METRICS_CLIENT override or basename(projectRoot)); never merge, rewrite, or normalize an existing file
     PRE: projectRoot/.cursor/ is writable when initialization is needed; built MCP server and TIED base path are resolvable
     POST: absent configuration becomes a valid TIED MCP config; when collection equals 1 its env contains both metrics fields; otherwise metrics fields are absent; existing configuration retains its original bytes
     EFFECTS: File I/O — conditionally creates one JSON file; Process — resolves paths and emits diagnostics
@@ -354,7 +374,7 @@ procedure INITIALIZE_TIED_MCP_CONFIG(projectRoot):
   IF projectRoot/.cursor/mcp.json exists:
     RETURN preserved
   IF TIED_MCP_COLLECT_METRICS equals "1":
-    metricsClient := TIED_MCP_METRICS_CLIENT WHEN non-empty ELSE basename(projectRoot)
+    metricsClient := RESOLVE_BOOTSTRAP_METRICS_CLIENT(projectRoot, env)
     include TIED_MCP_COLLECT_METRICS := "1" and TIED_MCP_METRICS_CLIENT := metricsClient in the generated env
   CALL _refresh_tied_mcp_json(projectRoot)
   RETURN initialized
