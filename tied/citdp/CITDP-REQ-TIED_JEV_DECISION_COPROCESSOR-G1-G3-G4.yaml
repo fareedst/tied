@@ -1,0 +1,64 @@
+CITDP-REQ-TIED_JEV_DECISION_COPROCESSOR-G1-G3-G4:
+  change_definition:
+    current_behavior: "Shadow metrics treated vendor errors as agrees true; confirm not enforced in CI; Claude live driver skipped jevToolGate."
+    desired_behavior: "G1 jev_error and strict replay; G3 CI strict confirm; G4 Claude gate parity with Cursor."
+    non_goals:
+      - "G2 fail-closed on missing dist per sponsor 2B"
+      - "Reopen REQ Implemented status"
+    success_criteria:
+      - "agentstream gate bind tests pass"
+      - "mcp-server jev tests pass"
+    unchanged_behavior: "Keyword PRELOAD authority; checklist gates authoritative."
+  evidence:
+    commands:
+      - "bun test mcp-server/packages/agentstream/src/jev-harness-live-tool-gate.test.ts"
+      - "bun test mcp-server/src/jev/"
+    evidence_references:
+      - "working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/g1-g3-g4-close-out-2026-09-28.md"
+  impact_analysis:
+    files:
+      - "mcp-server/packages/agentstream/src/claude-driver.ts"
+      - "mcp-server/packages/agentstream/src/jev-harness-live-tool-gate.ts"
+      - "mcp-server/packages/agentstream/src/live-driver-bind.ts"
+      - "mcp-server/src/jev/plan-skills-shadow.ts"
+      - "mcp-server/src/jev/shadow-vocab-preload.ts"
+    tied_tokens_affected:
+      - "IMPL-TIED_JEV_DECISION_COPROCESSOR"
+      - "REQ-TIED_JEV_DECISION_COPROCESSOR"
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: "none"
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "REQ-TIED_JEV_DECISION_COPROCESSOR"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    record_status: "complete"
+    recorded_at: "2026-09-28"
+    title: "Sponsor policy follow-on G1 G3 G4 shadow and harness"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Claude custom launchFn bypasses gate"
+      depth_change_waiver: null
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "live-driver-bind G4 composition test passes"
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/g1-g3-g4-agentstream-gate-2026-09-28.stdout.txt"
+      falsification_questions:
+        - "Does default Claude bind pass jevToolGate?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Bounded harness and shadow metrics fix."
+      research_profile: "integrated-agent"
+      strict_eligibility_prerequisites: []
+      sub_adversarial_inquiry_pass: "not_applicable"
+  test_strategy:
+    summary: "Unit and composition tests; 71 jev + 11 agentstream gate tests pass."

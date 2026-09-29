@@ -117,6 +117,21 @@ describe("W6 plan-skills config T-CFG", () => {
     assert.ok(bad.diagnostics.includes("invalid_plan_skills_timeout"));
   });
 
+  it("T-CFG-08b vendor HTTP error → agrees false and jev_error (G1)", async () => {
+    const root = mkProject("jev:\n  plan_skills: true\n");
+    const shadow = await runPlanSkillsShadow({
+      projectRoot: root,
+      tiedBasePath: path.join(root, "tied"),
+      prompt: "x",
+      skill: "build-plan",
+      env: { JEV_API_KEY: "k" },
+      fetchImpl: async () => new Response("bad", { status: 502 }),
+    });
+    assert.equal(shadow.readiness, "configured_unreachable");
+    assert.equal(shadow.jev_error, true);
+    assert.equal(shadow.agrees, false);
+  });
+
   it("T-CFG-08 timeout → configured_unreachable", async () => {
     const root = mkProject("jev:\n  plan_skills: true\n");
     const shadow = await runPlanSkillsShadow({

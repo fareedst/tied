@@ -143,6 +143,7 @@ working/**/tied-mcp-metrics*.jsonl
 working/**/evidence-manifest.json
 # Per-REQ close-out evidence (regenerate via run-close-out-gates.mjs / quality_evidence_collect; local only)
 working/**/evidence/close-out-gates-*.json
+!working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/close-out-gates-g1-g3-g4-2026-09-28.json
 working/**/evidence/quality-manifest/
 working/**/evidence/*-evidence.md
 working/**/evidence/not-applicable-receipt.v1.json

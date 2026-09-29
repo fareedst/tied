@@ -1,0 +1,25 @@
+bun test v1.3.9 (cf6cdbbb)
+
+src/jev-harness-live-tool-gate.test.ts:
+(pass) jev harness live tool gate [REQ-TIED_JEV_DECISION_COPROCESSOR] > parses agentstream_tool_proposal stream extension [0.13ms]
+(pass) jev harness live tool gate [REQ-TIED_JEV_DECISION_COPROCESSOR] > parses assistant tool_use blocks [0.02ms]
+(pass) jev harness live tool gate [REQ-TIED_JEV_DECISION_COPROCESSOR] > G3: aborts on block; confirm only when CI/strict env [0.03ms]
+doneDIAGNOSTIC: jev harness live tool gate: tool=Shell decision=block reason=mock_block
+(pass) jev harness live tool gate [REQ-TIED_JEV_DECISION_COPROCESSOR] > runAgent composition > terminates turn when gate blocks Shell proposal in stream [20.24ms]
+okDIAGNOSTIC: jev harness live tool gate: tool=Shell decision=confirm reason=mock_confirm
+(pass) jev harness live tool gate [REQ-TIED_JEV_DECISION_COPROCESSOR] > runAgent composition > G3: CI strict aborts turn on confirm decision [17.90ms]
+okDIAGNOSTIC: jev harness live tool gate: tool=Shell decision=allow reason=mock_allow
+(pass) jev harness live tool gate [REQ-TIED_JEV_DECISION_COPROCESSOR] > runAgent composition > allows turn when gate allows Shell proposal [17.32ms]
+DIAGNOSTIC: jev harness live tool gate: tool=Shell decision=block reason=mock_block
+(pass) jev harness live tool gate [REQ-TIED_JEV_DECISION_COPROCESSOR] > G4: collectClaudeStreamFromSpawn applies jevToolGate on NDJSON [18.96ms]
+(pass) jev harness live tool gate [REQ-TIED_JEV_DECISION_COPROCESSOR] > evaluateStreamToolProposal returns diagnostic [0.06ms]
+
+src/live-driver-bind.test.ts:
+(pass) BIND_LIVE_EXECUTOR_CLAUDE [REQ-TIED_CLAUDE_LIVE_DRIVER] > routes harness=claude to Claude driver with mocked launch_fn [0.78ms]
+DIAGNOSTIC: jev harness live tool gate: tool=Shell decision=block reason=bind_mock
+(pass) BIND_LIVE_EXECUTOR_CLAUDE [REQ-TIED_CLAUDE_LIVE_DRIVER] > G4: Claude binding forwards jevToolGate to default collect launch [18.19ms]
+(pass) BIND_LIVE_EXECUTOR_CLAUDE [REQ-TIED_CLAUDE_LIVE_DRIVER] > keeps cursor binding when harness=cursor even if agent_path is claude [0.05ms]
+
+ 11 pass
+ 0 fail
+Ran 11 tests across 2 files. [116.00ms]

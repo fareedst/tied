@@ -6,9 +6,11 @@ import { afterEach, describe, it } from "node:test";
 
 import {
   evaluateStreamToolProposal,
+  jevHarnessConfirmStrictEnabled,
   parseToolProposalFromStreamObject,
   shouldAbortLiveTurnOnToolGate,
 } from "./jev-harness-live-tool-gate.js";
+import { collectClaudeStreamFromSpawn } from "./claude-driver.js";
 import { runAgent } from "./executor-run.js";
 
 // [IMPL-TIED_JEV_DECISION_COPROCESSOR] [REQ-TIED_JEV_DECISION_COPROCESSOR]
@@ -39,10 +41,17 @@ describe("jev harness live tool gate [REQ-TIED_JEV_DECISION_COPROCESSOR]", () =>
     assert.equal(p!.arguments, "echo hi");
   });
 
-  it("aborts only on block decision", () => {
-    assert.equal(shouldAbortLiveTurnOnToolGate({ decision: "block", reason: "x" }), true);
-    assert.equal(shouldAbortLiveTurnOnToolGate({ decision: "confirm", reason: "x" }), false);
-    assert.equal(shouldAbortLiveTurnOnToolGate({ decision: "allow", reason: "x" }), false);
+  it("G3: aborts on block; confirm only when CI/strict env", () => {
+    const localEnv = { CI: "", AGENTSTREAM_JEV_HARNESS_CONFIRM_STRICT: "" } as NodeJS.ProcessEnv;
+    const ciEnv = { CI: "true" } as NodeJS.ProcessEnv;
+    const evalConfirm = { decision: "confirm" as const, reason: "x" };
+    assert.equal(
+      shouldAbortLiveTurnOnToolGate({ decision: "block", reason: "x" }, localEnv),
+      true,
+    );
+    assert.equal(shouldAbortLiveTurnOnToolGate(evalConfirm, localEnv), false);
+    assert.equal(shouldAbortLiveTurnOnToolGate(evalConfirm, ciEnv), true);
+    assert.equal(jevHarnessConfirmStrictEnabled(ciEnv), true);
   });
 
   describe("runAgent composition", () => {
@@ -85,6 +94,30 @@ for (const l of lines) console.log(l);
       assert.match(out.gateStderr ?? "", /decision=block/);
     });
 
+    it("G3: CI strict aborts turn on confirm decision", async () => {
+      const prevCi = process.env.CI;
+      process.env.CI = "true";
+      scriptPath = path.join(os.tmpdir(), `fake-shell-confirm-${Date.now()}.js`);
+      fs.writeFileSync(
+        scriptPath,
+        `#!/usr/bin/env node
+console.log(JSON.stringify({ type: "agentstream_tool_proposal", tool: "Shell", command: "echo confirm" }));
+console.log(JSON.stringify({ session_id: "s-c", type: "assistant", message: { content: [{ type: "text", text: "ok" }] } }));
+`,
+        { mode: 0o755 },
+      );
+
+      const out = await runAgent([process.execPath, scriptPath], [], {
+        jevToolGate: {
+          goal: "test",
+          evaluate: async () => ({ decision: "confirm", reason: "mock_confirm" }),
+        },
+      });
+      process.env.CI = prevCi;
+      assert.equal(out.exitCode, 1);
+      assert.match(out.gateStderr ?? "", /decision=confirm/);
+    });
+
     it("allows turn when gate allows Shell proposal", async () => {
       scriptPath = path.join(os.tmpdir(), `fake-shell-allow-${Date.now()}.js`);
       fs.writeFileSync(
@@ -105,6 +138,28 @@ console.log(JSON.stringify({ session_id: "s-allow", type: "assistant", message: 
       assert.equal(out.exitCode, 0);
       assert.equal(out.result.sessionId, "s-allow");
     });
+  });
+
+  it("G4: collectClaudeStreamFromSpawn applies jevToolGate on NDJSON", async () => {
+    const scriptPath = path.join(os.tmpdir(), `fake-claude-gate-${Date.now()}.js`);
+    fs.writeFileSync(
+      scriptPath,
+      `#!/usr/bin/env node
+console.log(JSON.stringify({ type: "system", subtype: "init", session_id: "claude-gate-s" }));
+console.log(JSON.stringify({ type: "agentstream_tool_proposal", tool: "Shell", command: "echo gated" }));
+`,
+      { mode: 0o755 },
+    );
+    const launched = await collectClaudeStreamFromSpawn([process.execPath, scriptPath], [], {
+      jevToolGate: {
+        goal: "test",
+        evaluate: async () => ({ decision: "block", reason: "mock_block" }),
+      },
+    });
+    fs.unlinkSync(scriptPath);
+    assert.equal(launched.gateBlocked, true);
+    assert.equal(launched.exitCode, 1);
+    assert.match(launched.gateStderr ?? "", /decision=block/);
   });
 
   it("evaluateStreamToolProposal returns diagnostic", async () => {

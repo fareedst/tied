@@ -185,7 +185,7 @@ export async function runPlanSkillsShadow(
       answersUsable = false;
     }
   } else if (decideResult && !decideResult.ok && !decideResult.skipped) {
-    agrees = true;
+    agrees = false;
   }
 
   const assessment = assessJevServiceReadinessFromDecide(cfg.enabled, keyPresent, decideResult, {
@@ -203,12 +203,25 @@ export async function runPlanSkillsShadow(
     confidence,
   });
 
+  const jev_error =
+    cfg.enabled &&
+    keyPresent &&
+    assessment.readiness !== "ready" &&
+    assessment.readiness !== "disabled" &&
+    assessment.readiness !== "configured_no_credentials" &&
+    assessment.readiness !== "locally_skipped";
+
+  if (jev_error) {
+    agrees = false;
+  }
+
   const result: PlanSkillsVocabShadowV1 = {
     ...basePayload,
     readiness: assessment.readiness,
     service_reachable: assessment.service_reachable,
     jev_glossaries,
     agrees,
+    ...(jev_error ? { jev_error: true } : {}),
     confidence,
     api_base_redacted: redactApiBase(jevCfg.apiBase ?? DEFAULT_JEV_API_BASE),
     ...(assessment.failure_class ? { failure_class: assessment.failure_class } : {}),

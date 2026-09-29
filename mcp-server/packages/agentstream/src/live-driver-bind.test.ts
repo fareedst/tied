@@ -4,6 +4,7 @@
  */
 import assert from "node:assert/strict";
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import { describe, it } from "node:test";
 
@@ -28,6 +29,38 @@ describe("BIND_LIVE_EXECUTOR_CLAUDE [REQ-TIED_CLAUDE_LIVE_DRIVER]", () => {
     const { result, exitCode } = await binding.runTurn(["claude", "--print"], []);
     assert.equal(exitCode, 0);
     assert.equal(result.sessionId, "claude-fixture-session-abc123");
+  });
+
+  it("G4: Claude binding forwards jevToolGate to default collect launch", async () => {
+    const prevOk = process.env.AGENTSTREAM_CLAUDE_LIVE_OK;
+    process.env.AGENTSTREAM_CLAUDE_LIVE_OK = "1";
+    const scriptPath = path.join(os.tmpdir(), `bind-claude-gate-${Date.now()}.js`);
+    fs.writeFileSync(
+      scriptPath,
+      `#!/usr/bin/env node
+console.log(JSON.stringify({ type: "system", subtype: "init", session_id: "bind-claude-gate" }));
+console.log(JSON.stringify({ type: "assistant", message: { content: [{ type: "tool_use", name: "Shell", input: { command: "echo x" } }] } }));
+console.log(JSON.stringify({ type: "result", subtype: "success", is_error: false }));
+`,
+      { mode: 0o755 },
+    );
+    const binding = bindLiveExecutorDriver({
+      harnessProfile: "claude",
+      agentPath: process.execPath,
+      jevToolGate: {
+        goal: "g",
+        evaluate: async () => ({ decision: "block", reason: "bind_mock" }),
+      },
+    });
+    const out = await binding.runTurn([process.execPath, scriptPath], []);
+    fs.unlinkSync(scriptPath);
+    if (prevOk === undefined) {
+      delete process.env.AGENTSTREAM_CLAUDE_LIVE_OK;
+    } else {
+      process.env.AGENTSTREAM_CLAUDE_LIVE_OK = prevOk;
+    }
+    assert.equal(out.exitCode, 1);
+    assert.match(out.jevGateStderr ?? "", /decision=block/);
   });
 
   it("keeps cursor binding when harness=cursor even if agent_path is claude", async () => {

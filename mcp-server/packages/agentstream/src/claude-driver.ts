@@ -8,6 +8,11 @@ import readline from "node:readline";
 
 import type { RunResult } from "./executor-run.js";
 import {
+  createToolGateStreamState,
+  enqueueToolGateLineCheck,
+  type JevLiveToolGate,
+} from "./jev-harness-live-tool-gate.js";
+import {
   claudeEventsToRunText,
   extractClaudeSession,
   parseClaudeStream,
@@ -28,6 +33,12 @@ export type ClaudeLaunchResult = {
   stdout: string;
   exitCode: number;
   stderrTail?: string;
+  gateStderr?: string;
+  gateBlocked?: boolean;
+};
+
+export type CollectClaudeStreamOptions = {
+  jevToolGate?: JevLiveToolGate | null;
 };
 
 export type ClaudeLaunchFn = () => Promise<ClaudeLaunchResult> | ClaudeLaunchResult;
@@ -139,6 +150,7 @@ export const DEFAULT_CLAUDE_PINNED_CONTRACT: ClaudePinnedContract = {
 export async function collectClaudeStreamFromSpawn(
   argv: string[],
   extraEnv: string[] = [],
+  options: CollectClaudeStreamOptions = {},
 ): Promise<ClaudeLaunchResult> {
   return new Promise((resolve) => {
     const env = { ...process.env } as Record<string, string | undefined>;
@@ -154,11 +166,18 @@ export async function collectClaudeStreamFromSpawn(
     });
     const lines: string[] = [];
     let stderrBuf = "";
+    const toolGate = options.jevToolGate ?? null;
+    const gateState = createToolGateStreamState();
     const rl = readline.createInterface({ input: cmd.stdout! });
     rl.on("line", (line) => {
       const trimmed = line.trim();
       if (trimmed !== "") {
         lines.push(trimmed);
+      }
+      if (toolGate) {
+        enqueueToolGateLineCheck(gateState, toolGate, line, () => {
+          cmd.kill("SIGTERM");
+        });
       }
     });
     cmd.stderr!.on("data", (chunk: Buffer | string) => {
@@ -167,12 +186,24 @@ export async function collectClaudeStreamFromSpawn(
         stderrBuf = stderrBuf.slice(-2000);
       }
     });
+    let childExitCode = 1;
     cmd.on("close", (code) => {
+      childExitCode = code ?? 1;
       rl.close();
-      resolve({
-        stdout: `${lines.join("\n")}\n`,
-        exitCode: code ?? 1,
-        stderrTail: stderrBuf.trim(),
+    });
+    rl.on("close", () => {
+      void gateState.gateChain.then(() => {
+        let exitCode = childExitCode;
+        if (gateState.gateBlocked) {
+          exitCode = 1;
+        }
+        resolve({
+          stdout: `${lines.join("\n")}\n`,
+          exitCode,
+          stderrTail: stderrBuf.trim(),
+          gateStderr: gateState.gateStderrLines.join(""),
+          gateBlocked: gateState.gateBlocked,
+        });
       });
     });
     cmd.on("error", (err) => {

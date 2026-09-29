@@ -108,10 +108,77 @@ export function formatJevToolGateDiagnostic(
   );
 }
 
+/** [REQ-TIED_JEV_DECISION_COPROCESSOR] G3: local log-only; CI / explicit env treats confirm as abort. */
+export function jevHarnessConfirmStrictEnabled(
+  env: NodeJS.ProcessEnv = process.env,
+): boolean {
+  const strict = env.AGENTSTREAM_JEV_HARNESS_CONFIRM_STRICT;
+  if (strict === "1" || strict === "true") {
+    return true;
+  }
+  const ci = env.CI;
+  return ci === "true" || ci === "1";
+}
+
 export function shouldAbortLiveTurnOnToolGate(
   evaluation: HarnessToolEvaluation,
+  env: NodeJS.ProcessEnv = process.env,
 ): boolean {
-  return evaluation.decision === "block";
+  if (evaluation.decision === "block") {
+    return true;
+  }
+  if (evaluation.decision === "confirm" && jevHarnessConfirmStrictEnabled(env)) {
+    return true;
+  }
+  return false;
+}
+
+export type ToolGateStreamState = {
+  gateBlocked: boolean;
+  gateStderrLines: string[];
+  gateChain: Promise<void>;
+};
+
+export function createToolGateStreamState(): ToolGateStreamState {
+  return { gateBlocked: false, gateStderrLines: [], gateChain: Promise.resolve() };
+}
+
+/** Apply Jev tool gate to one stream-json NDJSON line (Cursor + Claude live drivers). */
+export function enqueueToolGateLineCheck(
+  state: ToolGateStreamState,
+  toolGate: JevLiveToolGate,
+  line: string,
+  onAbort: () => void,
+): void {
+  if (state.gateBlocked) {
+    return;
+  }
+  const trimmed = line.trim();
+  if (trimmed === "") {
+    return;
+  }
+  let obj: Record<string, unknown>;
+  try {
+    obj = JSON.parse(trimmed) as Record<string, unknown>;
+  } catch {
+    return;
+  }
+  const proposal = parseToolProposalFromStreamObject(obj);
+  if (!proposal) {
+    return;
+  }
+  state.gateChain = state.gateChain.then(async () => {
+    if (state.gateBlocked) {
+      return;
+    }
+    const out = await evaluateStreamToolProposal(toolGate, proposal);
+    state.gateStderrLines.push(out.diagnostic);
+    process.stderr.write(out.diagnostic);
+    if (out.abort) {
+      state.gateBlocked = true;
+      onAbort();
+    }
+  });
 }
 
 /** Build live-loop gate when harness opt-in is active; null when disabled. */
@@ -157,6 +224,6 @@ export async function evaluateStreamToolProposal(
   return {
     evaluation,
     diagnostic,
-    abort: shouldAbortLiveTurnOnToolGate(evaluation),
+    abort: shouldAbortLiveTurnOnToolGate(evaluation, process.env),
   };
 }

@@ -65,6 +65,39 @@ describe("REQ-TIED_JEV_DECISION_COPROCESSOR W2 shadow routing", () => {
     assert.equal(log.agrees, true);
   });
 
+  it("shadowVocabPreloadFromRows marks vendor errors as jev_error without agrees inflation (G1)", async () => {
+    const fetchImpl = async () =>
+      new Response("upstream failure", { status: 502, statusText: "Bad Gateway" });
+
+    const log = await shadowVocabPreloadFromRows("tied agentstream batch", rows, {
+      apiKey: "test",
+      fetchImpl,
+    });
+    assert.equal(log.jev_skipped, false);
+    assert.equal(log.jev_error, true);
+    assert.equal(log.agrees, false);
+    assert.deepEqual(log.jev_glossaries, []);
+  });
+
+  it("summarizeShadowAgreement counts jev_errors for strict replay (G1)", () => {
+    const summary = summarizeShadowAgreement([
+      {
+        agrees: false,
+        jev_skipped: false,
+        jev_error: true,
+        jev_glossaries: [],
+      } as never,
+      {
+        agrees: true,
+        jev_skipped: false,
+        jev_glossaries: ["a"],
+      } as never,
+    ]);
+    assert.equal(summary.jev_errors, 1);
+    assert.equal(summary.jev_invoked, 1);
+    assert.equal(summary.agreement_rate, 1);
+  });
+
   it("shadowVocabPreloadFromRows records disagreement when Jev diverges", async () => {
     const fetchImpl = async () =>
       new Response(

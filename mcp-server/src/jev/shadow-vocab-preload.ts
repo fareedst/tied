@@ -19,6 +19,9 @@ export type VocabShadowPreloadLog = {
   confidence: number | null;
   jev_skipped: boolean;
   jev_skip_reason?: string;
+  /** Vendor/transport failure after a call was attempted (not local skip). */
+  jev_error?: boolean;
+  jev_error_excerpt?: string;
   agrees: boolean;
 };
 
@@ -96,7 +99,9 @@ export async function shadowVocabPreloadFromRows(
         jev_glossaries: [],
         confidence: null,
         jev_skipped: false,
-        agrees: true,
+        jev_error: true,
+        jev_error_excerpt: decideResult.error?.slice(0, 200),
+        agrees: false,
       };
     }
     return {
@@ -140,17 +145,24 @@ export async function shadowVocabPreloadFromRoutingMarkdown(
 export function summarizeShadowAgreement(logs: VocabShadowPreloadLog[]): {
   total: number;
   jev_invoked: number;
+  jev_errors: number;
   agreement_rate: number;
   disagreements: VocabShadowPreloadLog[];
+  errors: VocabShadowPreloadLog[];
 } {
-  const invoked = logs.filter((l) => !l.jev_skipped && l.jev_glossaries.length > 0);
+  const errors = logs.filter((l) => l.jev_error === true);
+  const invoked = logs.filter(
+    (l) => !l.jev_skipped && l.jev_error !== true && l.jev_glossaries.length > 0,
+  );
   const disagreements = invoked.filter((l) => !l.agrees);
   const agreement_rate =
     invoked.length === 0 ? 1 : (invoked.length - disagreements.length) / invoked.length;
   return {
     total: logs.length,
     jev_invoked: invoked.length,
+    jev_errors: errors.length,
     agreement_rate,
     disagreements,
+    errors,
   };
 }

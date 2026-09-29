@@ -60,16 +60,24 @@ export function bindLiveExecutorDriver(
   }
 
   if (selection.driverKind === "claude") {
+    const jevToolGate = input.jevToolGate ?? null;
     return {
       driverKind: "claude",
       runTurn: async (argv, extraEnv) => {
         const launchFn: ClaudeLaunchFn =
           input.claudeLaunchFn ??
-          (() => collectClaudeStreamFromSpawn(argv, extraEnv));
+          (() =>
+            collectClaudeStreamFromSpawn(argv, extraEnv, {
+              jevToolGate,
+            }));
         let lastStderrTail = "";
+        let lastGateStderr = "";
+        let gateBlocked = false;
         const wrappedLaunch: ClaudeLaunchFn = async () => {
           const launched = await launchFn();
           lastStderrTail = launched.stderrTail ?? "";
+          lastGateStderr = launched.gateStderr ?? "";
+          gateBlocked = launched.gateBlocked === true;
           return launched;
         };
         const out = await claudeAgentDriverLaunchAndParse({
@@ -89,10 +97,18 @@ export function bindLiveExecutorDriver(
             exitCode: 1,
             driverError: out.error,
             stderrTail: lastStderrTail,
+            jevGateStderr: lastGateStderr,
           };
         }
-        const exitCode = out.exitMetadata.isError ? out.exitMetadata.exitCode : 0;
-        return { result: out.runResult, exitCode };
+        let exitCode = out.exitMetadata.isError ? out.exitMetadata.exitCode : 0;
+        if (gateBlocked) {
+          exitCode = 1;
+        }
+        return {
+          result: out.runResult,
+          exitCode,
+          jevGateStderr: lastGateStderr,
+        };
       },
     };
   }

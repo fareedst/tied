@@ -1,0 +1,15 @@
+{
+  "run_id": "jev-g1-g3-g4-sponsor-policy-20260928",
+  "request_token": "REQ-TIED_JEV_DECISION_COPROCESSOR",
+  "depth_tier": "minimal",
+  "close_out": {
+    "allowed": true,
+    "receipt": "working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-09-29T01-02-51-936Z.json",
+    "diagnostics": []
+  },
+  "tied_validate_consistency": "ok",
+  "tests": {
+    "mcp_server_jev": "71 pass / 0 fail",
+    "agentstream_gate_bind": "11 pass / 0 fail"
+  }
+}

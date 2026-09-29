@@ -168,10 +168,10 @@ Document these when interpreting metrics or enabling W5 in production. **Follow-
 
 | ID | Gap | Primary anchor | Verify |
 | --- | --- | --- | --- |
-| **G1** | Shadow metrics: vendor/HTTP errors recorded as **`agrees: true`** (inflates agreement) | [`shadow-vocab-preload.ts`](../../mcp-server/src/jev/shadow-vocab-preload.ts) L91–99; [`plan-skills-shadow.ts`](../../mcp-server/src/jev/plan-skills-shadow.ts) L187–188 | `rg -n 'agrees: true' mcp-server/src/jev/shadow-vocab-preload.ts mcp-server/src/jev/plan-skills-shadow.ts` |
+| **G1** | ~~Shadow metrics: vendor errors → `agrees: true`~~ **Fixed 2026-09-28 (S1/1C):** `jev_error` + `agrees: false`; `summarizeShadowAgreement.jev_errors`; live replay exits non-zero on errors | [`shadow-vocab-preload.ts`](../../mcp-server/src/jev/shadow-vocab-preload.ts); [`plan-skills-shadow.ts`](../../mcp-server/src/jev/plan-skills-shadow.ts); [`replay-jev-vocab-shadow.ts`](../../mcp-server/scripts/replay-jev-vocab-shadow.ts) | `rg -n 'jev_error' mcp-server/src/jev/shadow-vocab-preload.ts mcp-server/scripts/replay-jev-vocab-shadow.ts` |
 | **G2** | Live gate: missing built `mcp-server/dist/jev/harness-tool-guard.js` → `createJevLiveToolGate` returns **null** (fail-open while harness flag set) | [`jev-harness-live-tool-gate.ts`](../../mcp-server/packages/agentstream/src/jev-harness-live-tool-gate.ts) L129–132 | `rg -n 'loadJevHarnessDistModule' mcp-server/packages/agentstream/src/jev-harness-live-tool-gate.ts` |
-| **G3** | Harness emits **`confirm`** for medium risk; live loop aborts only on **`block`** | [`harness-tool-guard.ts`](../../mcp-server/src/jev/harness-tool-guard.ts), `shouldAbortLiveTurnOnToolGate` in [`jev-harness-live-tool-gate.ts`](../../mcp-server/packages/agentstream/src/jev-harness-live-tool-gate.ts) | `rg -n 'confirm|shouldAbortLiveTurnOnToolGate' mcp-server/src/jev/harness-tool-guard.ts mcp-server/packages/agentstream/src/jev-harness-live-tool-gate.ts` |
-| **G4** | **Claude** live driver does not pass `jevToolGate` into tool interception (Cursor `runAgent` only) | [`live-driver-bind.ts`](../../mcp-server/packages/agentstream/src/live-driver-bind.ts) L62–97 vs L106–108 | `rg -n 'jevToolGate' mcp-server/packages/agentstream/src/live-driver-bind.ts` |
+| **G3** | ~~Live loop ignored `confirm`~~ **Fixed 2026-09-28 (S3):** local log-only; **`CI=true`** or **`AGENTSTREAM_JEV_HARNESS_CONFIRM_STRICT=1`** aborts on `confirm` | [`jev-harness-live-tool-gate.ts`](../../mcp-server/packages/agentstream/src/jev-harness-live-tool-gate.ts) (`jevHarnessConfirmStrictEnabled`) | `rg -n 'jevHarnessConfirmStrictEnabled' mcp-server/packages/agentstream/src/jev-harness-live-tool-gate.ts` |
+| **G4** | ~~Claude bypassed `jevToolGate`~~ **Fixed 2026-09-28 (S4):** `collectClaudeStreamFromSpawn` + bind default launch share gate with Cursor | [`claude-driver.ts`](../../mcp-server/packages/agentstream/src/claude-driver.ts), [`live-driver-bind.ts`](../../mcp-server/packages/agentstream/src/live-driver-bind.ts) | `rg -n 'jevToolGate' mcp-server/packages/agentstream/src/live-driver-bind.ts mcp-server/packages/agentstream/src/claude-driver.ts` |
 | **G5** | This comparison doc was **stale** (W5/W6 listed as missing) | *This file* — fixed 2026-09-28 | `rg -n 'Gap' docs/comparisons/jev-for-tied-improvement.md` — should not claim W5/W6 implementation gap |
 
 Additional hardening notes (not separate G-rows): response shape validation for unknown `choice` keys is limited; static thresholds are not yet version-bound to `JEV_MODEL` in a single registry doc (optional `threshold-tuning-doc` wave in program PLAN).
@@ -204,7 +204,7 @@ Each row is a **bounded procedural judgment** — Jev suggests; deterministic co
 
 ### Recommended implementation sequence (doc-only ranking)
 
-1. Fix **G1** so shadow/agreement metrics distinguish vendor errors from true agreement.
+1. ~~Fix **G1**~~ **Done (2026-09-28)** — vendor errors use `jev_error`; strict live replay fails on `jev_errors > 0`.
 2. **PRELOAD cascade** shadow (rank 2) — extends proven W2 pattern.
 3. Checklist **semantic adjunct** (rank 1) — highest operator value if kept strictly non-authoritative.
 4. Touchpoint 1 **RESOLVE** assist (rank 3) — pairs with vocab discipline.
@@ -224,8 +224,8 @@ Binding for follow-on implementation CITDPs under [REQ-TIED_JEV_DECISION_COPROCE
 | --- | --- | --- | --- |
 | **S1** | Shadow errors (G1) | **1C** | Replay/CI scripts **fail** when Jev returns a vendor/transport error—not counted as agreement. |
 | **S2** | Missing harness `dist` (G2) | **2B** | Live runs may continue **without** the gate if build output is missing; **document** clearly (no silent “safe” claim). |
-| **S3** | Medium risk `confirm` (G3) | **3C** | **CI / strict runs:** treat `confirm` as blocking; **local default:** log-only (today’s live loop). |
-| **S4** | Live drivers (G4) | **4A** | **Same Jev tool rules** for Cursor and Claude before production W5 sign-off. |
+| **S3** | Medium risk `confirm` (G3) | **3C** | **Implemented:** CI / `AGENTSTREAM_JEV_HARNESS_CONFIRM_STRICT=1` aborts on `confirm`; local default log-only. |
+| **S4** | Live drivers (G4) | **4A** | **Implemented:** Claude default launch wires `jevToolGate` (parity with Cursor `runAgent`). |
 | **S5** | Live agreement rates | **7A** | 70% / ~83% live samples are **tuning baseline**, not gate failure for the closed program. |
 | **S6** | W4 vs inquiry | **8B** | Keep W4 **observation-only**; **integrated adversarial inquiry** is a **separate program** later. |
 | **S7** | Article in repo | **10A** | **Paraphrase only** in-repo; full article stays out of git. |

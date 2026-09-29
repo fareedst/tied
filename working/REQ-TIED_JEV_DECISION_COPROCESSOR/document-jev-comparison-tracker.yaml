@@ -1,11 +1,15 @@
 # Per-request Tracker — docs-only Jev comparison refresh (copy_hygiene: scoped to this pass)
 execution_evidence:
   request: REQ-TIED_JEV_DECISION_COPROCESSOR
-  completed: []
+  completed:
+    - three-way-alignment-unit
+    - composition-integration
+    - verification-gate
   close_out_evidence:
-    date: null
+    date: "2026-09-28"
     deferred: []
-    gates: {}
+    gates:
+      close_out: working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-09-29T01-02-51-936Z.json
 steps:
   - slug: session-bootstrap
     disposition: completed
@@ -34,3 +38,19 @@ steps:
     policy: "depth_tier minimal — sub-adversarial-inquiry-pass N/A per eligibility table §7 (no external/auth/persistence triggers)."
     evidence_refs:
       - working/REQ-TIED_JEV_DECISION_COPROCESSOR/CITDP-DOC-JEV-COMPARISON.yaml
+  - slug: three-way-alignment-unit
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/g1-g3-g4-jev-unit-2026-09-28.stdout.txt
+  - slug: composition-integration
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/g1-g3-g4-agentstream-gate-2026-09-28.stdout.txt
+  - slug: verification-gate
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/g1-g3-g4-close-out-2026-09-28.md
+  - slug: traceable-commit
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/g1-g3-g4-close-out-2026-09-28.md

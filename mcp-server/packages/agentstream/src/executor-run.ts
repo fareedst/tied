@@ -7,8 +7,8 @@ import readline from "node:readline";
 
 import type { JevLiveToolGate } from "./jev-harness-live-tool-gate.js";
 import {
-  evaluateStreamToolProposal,
-  parseToolProposalFromStreamObject,
+  createToolGateStreamState,
+  enqueueToolGateLineCheck,
 } from "./jev-harness-live-tool-gate.js";
 
 export type RunAgentOptions = {
@@ -73,10 +73,7 @@ export async function runAgent(
     let thinkingText = "";
     let transcript = "";
     const errLines: string[] = [];
-    const gateStderrLines: string[] = [];
-    let gateBlocked = false;
-    let gateChain = Promise.resolve();
-
+    const gateState = createToolGateStreamState();
     const toolGate = options.jevToolGate ?? null;
 
     const rl = readline.createInterface({ input: cmd.stdout! });
@@ -92,25 +89,11 @@ export async function runAgent(
         errLines.push(`JSON parse error: ${String(err)}\n`);
         return;
       }
-      if (toolGate && !gateBlocked) {
-        const proposal = parseToolProposalFromStreamObject(obj);
-        if (proposal) {
-          gateChain = gateChain.then(async () => {
-            if (gateBlocked) {
-              return;
-            }
-            const out = await evaluateStreamToolProposal(toolGate, proposal);
-            gateStderrLines.push(out.diagnostic);
-            process.stderr.write(out.diagnostic);
-            if (out.abort) {
-              gateBlocked = true;
-              errLines.push(
-                `agentstream: jev harness blocked tool ${proposal.tool} (${out.evaluation.reason})\n`,
-              );
-              cmd.kill("SIGTERM");
-            }
-          });
-        }
+      if (toolGate) {
+        enqueueToolGateLineCheck(gateState, toolGate, trimmed, () => {
+          errLines.push(`agentstream: jev harness blocked tool proposal\n`);
+          cmd.kill("SIGTERM");
+        });
       }
       if (typeof obj.session_id === "string" && obj.session_id !== "") {
         captured = obj.session_id;
@@ -139,9 +122,9 @@ export async function runAgent(
 
     cmd.on("close", (code) => {
       rl.close();
-      void gateChain.then(() => {
+      void gateState.gateChain.then(() => {
         let exitCode = code ?? 1;
-        if (gateBlocked) {
+        if (gateState.gateBlocked) {
           exitCode = 1;
         }
         const result: RunResult = {
@@ -150,7 +133,7 @@ export async function runAgent(
           thinkingText,
           transcript,
         };
-        const gateStderr = gateStderrLines.join("");
+        const gateStderr = gateState.gateStderrLines.join("");
         if (exitCode !== 0) {
           errLines.push(`agent exited with status ${exitCode}\n`);
           resolve({

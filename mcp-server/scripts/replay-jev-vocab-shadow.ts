@@ -41,6 +41,10 @@ console.error(
   "DIAGNOSTIC: replay summary",
   JSON.stringify({ ...summary, live, fixturesPath }, null, 2),
 );
+if (live && summary.jev_errors > 0) {
+  console.error("DIAGNOSTIC: replay failed — Jev vendor/transport errors (G1 strict)", summary.jev_errors);
+  process.exit(1);
+}
 if (live && summary.agreement_rate < 0.9) {
   process.exit(1);
 }
